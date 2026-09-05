@@ -1,0 +1,750 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{브라우어 군}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+참고문헌으로~Cartan~세미나에서 이루어진~Serre의 강의를 들 수 있다.
+\cite{Serre-Cartan}을 보라. Serre는 다시
+\cite{Deuring}과 \cite{ANT}를 인용한다. 여기서는 몇몇 증명을 바꾸었으며,
+특히~Wedderburn~정리를 증명하기 위해~Rieffel의 흥미로운 논증을 사용했다.
+이 변경이 개선일 가능성은 매우 낮으므로, 독자에게~Serre의 원래 해설을
+읽어 볼 것을 강력히 권한다.
+
+
+\section{비가환 대수}
+\label{section-algebras}
+
+\noindent
+$k$를 체라 하자. 이 장에서 $k$ 위의 {\it 대수} $A$란, 비가환일 수도 있는
+환 $A$와 환 준동형 $k \to A$의 쌍으로서, $k$의 상이 $A$의 중심에 들어가고
+$1$이 $A$의 항등원으로 가는 것을 말한다. {\it $A$-가군}이란 $A$의
+항등원이 항등사상으로 작용하는 오른쪽 $A$-가군을 말한다.
+
+\begin{definition}
+\label{definition-finite}
+$A$를 $k$-대수라 하자. $\dim_k(A) < \infty$이면 $A$를 {\it 유한}이라 한다.
+이 경우 $[A : k] = \dim_k(A)$로 쓴다.
+\end{definition}
+
+\begin{definition}
+\label{definition-skew-field}
+{\it 나눗셈환}이란 항등원 $1$을 가지고 $1 \not = 0$이며, 모든 영이 아닌
+원이 곱셈 역원을 갖는, 비가환일 수도 있는 환을 말한다.
+\end{definition}
+
+\noindent
+나눗셈환은 어떤 $k$에 대해서는 $k$-대수이다(예를 들어 그 안에 들어 있는
+소체를 택하면 된다). 아래에서는 나눗셈환 위의 모든 가군이 자유 가군이라는
+사실을 사용한다. 벡터들의 극대 선형독립 집합은 기저를 이루며, 그러한 집합은
+~Zorn의 보조정리에 의해 존재하기 때문이다.
+
+\begin{definition}
+\label{definition-simple}
+$A$를 $k$-대수라 하자.
+$A$-가군 $M$이 영이 아니고 그 $A$-부분가군이 $0$과 $M$뿐이면
+이 가군을 {\it 단순}이라 한다.
+$A$의 양쪽 아이디얼이 $0$과 $A$뿐이면 $A$를 {\it 단순}이라 한다.
+\end{definition}
+
+\begin{definition}
+\label{definition-central}
+$k$-대수 $A$의 중심이 $k \to A$의 상이면 $A$를 {\it 중심적}이라 한다.
+\end{definition}
+
+\begin{definition}
+\label{definition-opposite}
+$k$-대수 $A$가 주어졌을 때, $A$의 곱셈 순서를 뒤집어 얻는 $k$-대수를
+$A^{op}$로 나타낸다. 이를 {\it 반대 대수}라 한다.
+\end{definition}
+
+
+
+\section{Wedderburn~정리}
+\label{section-wedderburn}
+
+\noindent
+다음의 멋진 논증은~Rieffel의 논문에서 찾을 수 있다. \cite{Rieffel}을 보라.
+이 증명은 이보다 더 간단할 수 없다(Carl Faith의 서평에서 인용).
+
+\begin{lemma}
+\label{lemma-rieffel}
+$A$를 단위원 $1$을 가지며 비자명한 양쪽 아이디얼을 갖지 않는,
+비가환일 수도 있는 환이라 하자. $M$을 $A$의 영이 아닌 오른쪽 아이디얼이라
+하고, $M$을 오른쪽 $A$-가군으로 보자. 그러면 $A$는 $M$의 이중 가환자와
+일치한다.
+\end{lemma}
+
+\begin{proof}
+$A' = \text{End}_A(M)$로 놓으면 $M$은 왼쪽 $A'$-가군이다.
+$A'' = \text{End}_{A'}(M)$로 놓자(이는 $M$의 이중 가환자이다).
+$M$을 오른쪽 $A''$-가군으로 본다\footnote{이는 $a'' \in A''$와
+$m \in M$이 주어지면 곱 $m a'' \in M$이 있다는 뜻이다. 특히
+$A''$의 원들을 왼쪽에서 작용하는 자기준동형으로 쓸 때 얻는 곱과
+$A''$의 곱은 서로 반대 순서이다.}.
+$mR(a) = ma$로 정해지는 자연스러운 준동형 $R : A \to A''$를 취하자.
+$R(1) = \text{id}_M$이고 $A$에는 비자명한 양쪽 아이디얼이 없으므로
+$R$은 단사이다. $R(M)$이 $A''$의 오른쪽 아이디얼임을 보이자. 실제로
+$a'' \in A''$이고 $m$이 $M$에 속하면 $R(m)a'' = R(ma'')$이다.
+왜냐하면 $M$ 위의 {\it 왼쪽} 곱셈 가운데 $M$의 임의의 원 $n$이 주는 것은
+$A'$의 한 원을
+나타내므로, $M$에 속하는 모든 $n$에 대해
+$(nm)a'' = n(ma'')$이기 때문이다.
+마지막으로 곱 아이디얼 $AM$은 양쪽 아이디얼이므로 $A = AM$이다.
+따라서 $R(A) = R(A)R(M)$이고, 이에 따라 $R(A)$는 $A''$의 오른쪽
+아이디얼이다. 그런데 $R(A)$는 $A''$의 항등원을 포함하므로
+$R(A) = A''$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-simple-module}
+$A$를 $k$-대수라 하자. $A$가 유한이면 다음이 성립한다.
+\begin{enumerate}
+\item $A$는 단순 가군을 갖는다.
+\item 영이 아닌 모든 가군은 단순 부분가군을 포함한다.
+\item $A$ 위의 단순 가군은 $k$ 위에서 유한 차원이다.
+\item $M$이 단순 $A$-가군이면 $\text{End}_A(M)$은 나눗셈환이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$A$ 자체가 영이 아닌 $A$-가군이므로 물론 (1)은 (2)에서 따른다.
+(2)에 대해서는, $k$-벡터 공간으로서 최소인 (유한) 차원을 갖는
+부분가군을 택하면 단순하다. 순환 부분가군은 유한 차원이므로 그러한
+유한 차원 부분가군이 존재한다. $M$이 단순이면 $mA \subset M$은
+부분가군이므로 (3)을 얻는다. $\text{End}_A(M)$의 영이 아닌 모든 원은
+동형사상이므로 (4)가 성립한다.
+\end{proof}
+
+\begin{theorem}
+\label{theorem-wedderburn}
+\begin{slogan}
+체 위의 유한 단순 대수는 나눗셈환 위의 행렬 대수이다.
+\end{slogan}
+$A$를 유한 단순 $k$-대수라 하자. 그러면 $A$는 나눗셈환인 유한
+$k$-대수 $K$ 위의 행렬 대수이다.
+\end{theorem}
+
+\begin{proof}
+단순 부분가군 $M \subset A$를 택할 수 있으며, 이때
+$k$-대수 $K = \text{End}_A(M)$은 나눗셈환이다. 보조정리
+\ref{lemma-simple-module}를 보라.
+보조정리 \ref{lemma-rieffel}에 의해
+$A = \text{End}_K(M)$이다. $K$는 나눗셈환이고
+$M$은 유한 생성($\dim_k(M) < \infty$이므로)이므로, $M$은 왼쪽
+$K$-가군으로서 유한 자유 가군이다. 따라서 곧바로
+$A \cong \text{Mat}(n \times n, K^{op})$를 얻는다.
+\end{proof}
+
+
+\section{대수에 관한 보조정리}
+\label{section-lemmas}
+
+\noindent
+$A$를 $k$-대수라 하자. $B \subset A$를 부분대수라 하자.
+{\it $A$ 안에서 $B$의 중심화자}란 다음 부분대수를 말한다.
+$$
+C  = \{y \in A \mid xy = yx \text{ for all }x \in B\}.
+$$
+이는 $k$-대수이다.
+
+\begin{lemma}
+\label{lemma-centralizer}
+$A$, $A'$을 $k$-대수라 하자. $B \subset A$, $B' \subset A'$을
+각각 중심화자가 $C$, $C'$인 부분대수라 하자. 그러면
+$A \otimes_k A'$ 안에서 $B \otimes_k B'$의 중심화자는
+$C \otimes_k C'$이다.
+\end{lemma}
+
+\begin{proof}
+$B \otimes_k B'$의 중심화자를 $C'' \subset A \otimes_k A'$로 나타내자.
+$C \otimes_k C' \subset C''$임은 명백하다. 반대로 $C''$의 모든 원은
+$B \otimes 1$과 가환하므로 $C \otimes_k A'$에 속한다.
+마찬가지로 $C'' \subset A \otimes_k C'$이다. 따라서
+$C'' \subset C \otimes_k A' \cap A \otimes_k C' = C \otimes_k C'$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-center-csa}
+$A$를 유한 단순 $k$-대수라 하자. 그러면 $A$의 중심 $k'$은
+$k$의 유한 체확장이다.
+\end{lemma}
+
+\begin{proof}
+어떤 $k$ 위에서 유한인 나눗셈환 $K$에 대해
+$A = \text{Mat}(n \times n, K)$로 쓰자. 정리
+\ref{theorem-wedderburn}을 보라.
+보조정리 \ref{lemma-centralizer}에 의해 $A$의 중심은
+$k \otimes_k k'$이다. 여기서 $k' \subset K$는 $K$의 중심이다.
+나눗셈환의 중심은 체이므로 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-generate-two-sided-sub}
+$V$를 $k$-벡터 공간이라 하자. $K$를 나눗셈환인 중심 $k$-대수라 하자.
+$W \subset V \otimes_k K$를 양쪽 $K$-부분벡터공간이라 하자. 그러면
+$W$는 $W \cap (V \otimes 1)$에 의해 왼쪽 $K$-벡터 공간으로 생성된다.
+\end{lemma}
+
+\begin{proof}
+$v \otimes 1 \in W$를 만족하는 $v \in V$들이 생성하는 $k$-부분벡터공간을
+$V' \subset V$라 하자. 그러면 $V' \otimes_k K \subset W$이고 다음을 얻는다.
+$$
+W/(V' \otimes_k K)  \subset  (V/V') \otimes_k K.
+$$
+$\overline{v} \in V/V'$가 영이 아닌 벡터이고
+$\overline{v} \otimes 1$이 $W/(V' \otimes_k K)$에 들어 있다고 하자.
+$\overline{v}$를 올리는 $v \in V$에 대해 $v \otimes 1 \in W$임을 알 수 있다.
+이는 $V'$의 구성에 모순이다. 따라서 $V$를 $V/V'$로, $W$를
+$W/(V' \otimes_k K)$로 바꾸어도 되며, $W$가 영이 아닐 때
+$W \cap (V \otimes 1)$이 영이 아님을 보이면 충분하다.
+
+\medskip\noindent
+이를 보이기 위해, $n$이 최소가 되도록
+$w = \sum_{i = 1, \ldots, n} v_i \otimes k_i$로 쓸 수 있는 영이 아닌 원
+$w \in W$를 택하자. 오른쪽에서 $k_1^{-1}$을 곱하여 $k_1 = 1$이라
+가정할 수 있다. $n = 1$이면 $v_1 \otimes 1 \in W$이므로 끝난다.
+$n > 1$이면 임의의 $c \in K$에 대해
+$$
+c w - w c = \sum\nolimits_{i = 2, \ldots, n} v_i \otimes (c k_i - k_i c) \in W
+$$
+이고, 따라서 $n$의 최소성에 의해 $c k_i - k_i c = 0$이다.
+이는 $k_i$가 $K$의 중심에 속한다는 뜻인데, 가정에 의해 그 중심은
+$k$이다. 따라서 $w = (v_1 + \sum k_i v_i) \otimes 1$이 되어
+$n$의 최소성에 모순이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-generate-two-sided-ideal}
+$A$를 $k$-대수라 하자. $K$를 나눗셈환인 중심 $k$-대수라 하자.
+그러면 모든 양쪽 아이디얼 $I \subset A \otimes_k K$는 어떤
+양쪽 아이디얼 $J \subset A$에 대해 $J \otimes_k K$ 꼴이다.
+특히 $A$가 단순이면 $A \otimes_k K$도 단순하다.
+\end{lemma}
+
+\begin{proof}
+$J = \{a \in A \mid a \otimes 1 \in I\}$로 놓자. 이는 $A$의 양쪽
+아이디얼이다. 또한 보조정리 \ref{lemma-generate-two-sided-sub}에 의해
+$I = J \otimes_k K$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-matrix-algebras}
+$R$을 비가환일 수도 있는 환이라 하자. $n \geq 1$을 정수라 하자.
+$R_n = \text{Mat}(n \times n, R)$로 놓자.
+\begin{enumerate}
+\item 함자 $M \mapsto M^{\oplus n}$과 $N \mapsto Ne_{11}$은 서로 준역인
+범주 동치 $\text{Mod}_R \leftrightarrow \text{Mod}_{R_n}$을 정의한다.
+\item $R_n$의 양쪽 아이디얼은 $R$의 어떤 양쪽 아이디얼 $I$에 대해
+$IR_n$ 꼴이다.
+\item $R_n$의 중심은 $R$의 중심과 같다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 자명하다. $J \subset R_n$이 양쪽 아이디얼이면
+$J = \bigoplus e_{ii}Je_{jj}$이고, 모든 직합항 $e_{ii}Je_{jj}$은 서로 같으며
+$R$의 양쪽 아이디얼 $I$이다. 이로써 (2)를 얻는다. (3)은 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-simple-module-unique}
+$A$를 유한 단순 $k$-대수라 하자.
+\begin{enumerate}
+\item 동형을 제외하면 단순 $A$-가군 $M$은 정확히 하나 존재한다.
+\item 모든 유한 $A$-가군은 단순 가군들의 직합이다.
+\item 두 유한 $A$-가군이 동형일 필요충분조건은 $k$ 위의 차원이 같은 것이다.
+\item $K$가 $k$의 유한 나눗셈환 확장이고
+$A = \text{Mat}(n \times n, K)$이면, $M = K^{\oplus n}$은 단순
+$A$-가군이며 $\text{End}_A(M) = K^{op}$이다.
+\item $M$이 단순 $A$-가군이면 $L = \text{End}_A(M)$은 $k$ 위에서
+유한이고 $M$에 왼쪽에서 작용하는 나눗셈환이며,
+$A = \text{End}_L(M)$이고 $A$와 $L$의 중심은 일치한다.
+또한 $[A : k] [L : k] = \dim_k(M)^2$이다.
+\item 유한 $A$-가군 $N$에 대해 대수 $B = \text{End}_A(N)$은 (5)의
+나눗셈환 $L$ 위의 행렬 대수이다. 더욱이 $\text{End}_B(N) = A$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+정리 \ref{theorem-wedderburn}에 의해, $k$의 어떤 유한 나눗셈환 확장
+$K$에 대해 $A = \text{Mat}(n \times n, K)$로 쓸 수 있다.
+보조정리 \ref{lemma-matrix-algebras}에 의해 $A$ 위의 가군 범주는
+$K$ 위의 가군 범주와 동치이다. 따라서 $K$ 위의 모든 가군이 자유이므로
+(1), (2), (3)이 성립한다. 이 동치가 $K$-가군 $K$를
+$M = K^{\oplus n}$으로 보내므로 (4)가 성립한다. (5)에서
+$M = K^{\oplus n}$을 사용하면 $L = K^{op}$임을 알 수 있다.
+$L = K^{op}$의 중심에 관한 명제는 보조정리
+\ref{lemma-matrix-algebras}에서 따른다.
+$\text{End}_L(M)$에 관한 명제는 $M$의 명시적인 꼴에서 따르며,
+차원 공식은 명백하다. $N$은 단순 가군들의 직합과 동형이므로 (6)이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-tensor-simple}
+$A$, $A'$을 두 단순 $k$-대수라 하고, 그중 하나는 $k$ 위에서 유한이고
+중심적이라 하자. 그러면 $A \otimes_k A'$은 단순하다.
+\end{lemma}
+
+\begin{proof}
+$A'$이 $k$ 위에서 유한이고 중심적이라고 하자. 정리
+\ref{theorem-wedderburn}을 써서
+$A' = \text{Mat}(n \times n, K')$로 쓰자. 그러면 $K'$의 중심은 $k$이고,
+보조정리 \ref{lemma-generate-two-sided-ideal}에 의해
+$A \otimes_k K'$은 단순하다. 따라서 보조정리
+\ref{lemma-matrix-algebras}에 의해
+$A \otimes_k A' = \text{Mat}(n \times n, A \otimes_k K')$은 단순하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-tensor-central-simple}
+$k$ 위의 유한 중심 단순 대수들의 텐서곱은 유한이고 중심적이며 단순하다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-centralizer}와 \ref{lemma-tensor-simple}을 결합하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change}
+$A$를 $k$ 위의 유한 중심 단순 대수라 하자. $k'/k$를 체확장이라 하자.
+그러면 $A' = A \otimes_k k'$은 $k'$ 위의 유한 중심 단순 대수이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-centralizer}와 \ref{lemma-tensor-simple}을 결합하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-inverse}
+$A$를 $k$ 위의 유한 중심 단순 대수라 하자. 그러면
+$n = [A : k]$에 대해
+$A \otimes_k A^{op} \cong \text{Mat}(n \times n, k)$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-tensor-central-simple}에 의해 대수
+$A \otimes_k A^{op}$은 단순하다. 따라서 사상
+$$
+A \otimes_k A^{op} \longrightarrow \text{End}_k(A),\quad
+a \otimes a' \longmapsto (x \mapsto axa')
+$$
+은 단사이다. 화살표 양쪽의 차원이 같으므로 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+\section{체의 브라우어 군}
+\label{section-brauer}
+
+\noindent
+$k$를 체라 하자. $k$ 위의 두 유한 중심 단순 대수 $A$와 $B$를 생각하자.
+어떤 $n, m > 0$에 대해
+$\text{Mat}(n \times n, A) \cong \text{Mat}(m \times m, B)$가
+$k$-대수로서 성립하면 $A$와 $B$가 {\it 유사하다}고 한다.
+
+\begin{lemma}
+\label{lemma-similar}
+유사성에 관하여 다음이 성립한다.
+\begin{enumerate}
+\item 유사성은 $k$ 위의 유한 중심 단순 대수들의 동형류 집합 위에
+동치관계를 정의한다.
+\item 각 유사류는 동형을 제외하면 유일한, $k$의 유한 중심 나눗셈환 확장을
+포함한다.
+\item $K$, $K'$가 $k$ 위의 유한 중심 나눗셈환이고
+$A = \text{Mat}(n \times n, K)$ 및 $B = \text{Mat}(m \times m, K')$이면,
+$A$와 $B$가 유사할 필요충분조건은 $K \cong K'$가 $k$-대수로서
+성립하는 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Wedderburn~정리(정리 \ref{theorem-wedderburn})에 의해 유한 중심 단순 대수는
+항상 유한 중심 나눗셈환 위의 행렬 대수로 쓸 수 있음에 유의하자.
+따라서 세 번째 명제만 증명하면 충분하다. 이를 위해서는
+$A = \text{Mat}(n \times n, K) \cong \text{Mat}(m \times m, K') = B$이면
+$K \cong K'$임을 보이면 충분하다. 실제로 $A$의 단순 가군 $M$에 대해
+$\text{End}_A(M) = K^{op}$이다. 보조정리
+\ref{lemma-simple-module-unique}를 보라. 따라서 $A \cong B$이면
+$K^{op} \cong (K')^{op}$이고, 결론을 얻는다.
+\end{proof}
+
+\noindent
+두 유한 중심 단순 $k$-대수 $A$, $B$가 주어지면 텐서곱
+$A \otimes_k B$도 그러한 대수이다. 보조정리
+\ref{lemma-tensor-central-simple}을 보라.
+또한 $A$가 $A'$과 유사하면, 텐서곱과 행렬 대수를 취하는 연산이 가환하므로
+$A \otimes_k B$는 $A' \otimes_k B$와 유사하다. 따라서 텐서곱은 유한
+중심 단순 대수들의 동치류 위에 연산을 정의하며, 이 연산은 명백히 결합적이고
+가환적이다. 마지막으로 보조정리 \ref{lemma-inverse}에 의해
+$A \otimes_k A^{op}$은 행렬 대수와 동형이다. 다시 말해
+$A \otimes_k A^{op}$은 $k$의 유사류에 속한다. 이로써 아벨 군을 얻는다.
+
+\begin{definition}
+\label{definition-brauer-group}
+$k$를 체라 하자. $k$의 {\it 브라우어 군}은 위에서 정의한 유한 중심 단순
+$k$-대수들의 유사류로 이루어진 아벨 군이다. $\text{Br}(k)$로 표기한다.
+\end{definition}
+
+\noindent
+체의 임의의 사상 $k \to k'$에 대해 군 준동형
+$$
+\text{Br}(k) \longrightarrow \text{Br}(k'),\quad
+A \longmapsto A \otimes_k k'
+$$
+을 얻는다. 보조정리 \ref{lemma-base-change}를 보라. 다시 말해
+$\text{Br}(-)$는 체의 범주에서 아벨 군의 범주로 가는 함자이다.
+체의 브라우어 군이 영일 필요충분조건은 모든 유한 중심 나눗셈환 확장
+$k \subset K$가 자명한 것임에 유의하자.
+
+\begin{lemma}
+\label{lemma-brauer-algebraically-closed}
+대수적으로 닫힌 체의 브라우어 군은 영이다.
+\end{lemma}
+
+\begin{proof}
+$k \subset K$를 유한 중심 나눗셈환 확장이라 하자. 임의의 원
+$x \in K$에 대해 부분환 $k[x] \subset K$는 가환이고 유한이며 정수적인
+$k$-부분대수이므로 체이다.~Algebra의 보조정리
+\ref{algebra-lemma-integral-over-field}를 보라. $k$가 대수적으로 닫혀 있으므로
+$k[x] = k$이다. $x$가 임의였으므로 $k = K$를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-dimension-square}
+$A$를 체 $k$ 위의 유한 중심 단순 대수라 하자. 그러면 $[A : k]$는
+제곱수이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-brauer-algebraically-closed}에 의해
+$A \otimes_k \overline{k}$는 $\overline{k}$ 위의 행렬 대수이므로 성립한다.
+\end{proof}
+
+\section{Skolem--Noether~정리}
+\label{section-skolem-noether}
+
+
+
+\begin{theorem}
+\label{theorem-skolem-noether}
+$A$를 유한 중심 단순 $k$-대수라 하고, $B$를 단순 $k$-대수라 하자.
+$f, g : B \to A$를 두 $k$-대수 준동형이라 하자. 그러면 모든
+$b \in B$에 대해 $f(b) = xg(b)x^{-1}$을 만족하는 가역원
+$x \in A$가 존재한다.
+\end{theorem}
+
+\begin{proof}
+단순 $A$-가군 $M$을 택하고 $L = \text{End}_A(M)$으로 놓자.
+그러면 $L$은 중심이 $k$이고 $M$에 왼쪽에서 작용하는 나눗셈환이다.
+보조정리 \ref{lemma-simple-module}와 \ref{lemma-simple-module-unique}를 보라.
+이제 $M$에는
+$m \cdot_1 (b \otimes l) = lmf(b)$와 $m \cdot_2 (b \otimes l) = lmg(b)$로
+정의되는 두 $B \otimes_k L^{op}$-가군 구조가 있다.
+보조정리 \ref{lemma-tensor-simple}에 의해 $k$-대수
+$B \otimes_k L^{op}$은 단순하다. $B$가 단순하므로 $k$-대수 준동형
+$B \to A$가 존재한다는 사실에서 $B$가 유한임이 따른다. 따라서
+$B \otimes_k L^{op}$은 유한 단순이고, 보조정리
+\ref{lemma-simple-module-unique}에 의해 $M$ 위의 두
+$B \otimes_k L^{op}$-가군 구조는 동형이다. 그러므로 이 두 작용을
+얽는 $\varphi : M \to M$을 얻는다. 특히 $\varphi$는 $L$의 가환자에
+속한다. 따라서 $\varphi$는 어떤 $x \in A$에 의한 곱셈이다. 보조정리
+\ref{lemma-simple-module-unique}를 보라. 정의를 풀어 쓰면 $x$가
+우리 문제의 해임을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-automorphism-inner}
+$A$를 유한 중심 단순 $k$-대수라 하자. $A$의 모든 자기동형은 내부적이다.
+특히 $\text{Mat}(n \times n, k)$의 모든 자기동형은 내부적이다.
+\end{lemma}
+
+\begin{proof}
+Skolem--Noether~정리(정리 \ref{theorem-skolem-noether})를 적용하면 된다.
+\end{proof}
+
+
+
+\section{중심화자 정리}
+\label{section-centralizer}
+
+
+\begin{theorem}
+\label{theorem-centralizer}
+$A$를 $k$ 위의 유한 중심 단순 대수라 하고, $B$를 $A$의 단순
+부분대수라 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item $A$ 안에서 $B$의 중심화자 $C$는 단순하다.
+\item $[A : k] = [B : k][C : k]$이다.
+\item $A$ 안에서 $C$의 중심화자는 $B$이다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+이 증명 전체에서 보조정리 \ref{lemma-simple-module-unique}의 결과를
+자유롭게 사용한다. 단순 $A$-가군 $M$을 택하고
+$L = \text{End}_A(M)$으로 놓자. 그러면 $L$은 중심이 $k$이고 $M$에
+왼쪽에서 작용하는 나눗셈환이며, $A = \text{End}_L(M)$이다.
+이제 $M$은 오른쪽 $B \otimes_k L^{op}$-가군이고
+$C = \text{End}_{B \otimes_k L^{op}}(M)$이다.
+보조정리 \ref{lemma-tensor-simple}에 의해 대수 $B \otimes_k L^{op}$은
+단순하므로, 보조정리 \ref{lemma-simple-module-unique}를 다시 써서
+$C$가 단순임을 알 수 있다.
+
+\medskip\noindent
+$k$ 위에서 유한인 어떤 나눗셈환 $K$에 대해
+$B \otimes_k L^{op} = \text{Mat}(m \times m, K)$로 쓰자.
+$M$이 단순 $B \otimes_k L^{op}$-가군 $K^{\oplus m}$의 $n$개 복사본의
+직합과 동형이면(다시 그 보조정리에 의해),
+$C = \text{Mat}(n \times n, K^{op})$이다. 따라서
+$\dim_k(M) = nm [K : k]$, $[B : k] [L : k] = m^2 [K : k]$,
+$[C : k] = n^2 [K : k]$, 그리고
+$[A : k] [L : k] = \dim_k(M)^2$이다(다시 그 보조정리에 의해).
+이로부터 (2)가 성립한다.
+
+\medskip\noindent
+$C \subset A$에 (2)를 적용하면, $C'$이 $A$ 안에서 $C$의 중심화자일 때
+$[B : k] = [C' : k]$를 얻는다. 또한 명백한 사실 ($B \subset C')$에 의해
+(3)이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-when-tensor-is-equal}
+$A$를 $k$ 위의 유한 중심 단순 대수라 하고, $B$를 $A$의 단순 부분대수라
+하자. $B$가 중심 $k$-대수이면 $A = B \otimes_k C$이다. 여기서 $C$는
+$A$ 안에서 $B$의 (중심 단순) 중심화자이다.
+\end{lemma}
+
+\begin{proof}
+정리 \ref{theorem-centralizer}에 의해
+$\dim_k(A) = \dim_k(B \otimes_k C)$이다. 보조정리
+\ref{lemma-tensor-simple}에 의해 텐서곱은 단순하다. 따라서 자연스러운 사상
+$B \otimes_k C \to A$는 단사이고, 이에 따라 동형이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-self-centralizing-subfield}
+$A$를 $k$ 위의 유한 중심 단순 대수라 하자. $K \subset A$가 부분체이면
+다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $[A : k] = [K : k]^2$이다.
+\item $K$는 자기 자신의 중심화자이다.
+\item $K$는 극대 가환 부분환이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+정리 \ref{theorem-centralizer}에 의해 (1)과 (2)는 동치이다.
+(3)과 (2)가 동치임은 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-maximal-subfield}
+\begin{slogan}
+유한 중심 나눗셈환의 차원은 임의의 극대 부분체 차원의 제곱이다.
+\end{slogan}
+$A$를 $k$ 위의 유한 중심 나눗셈환이라 하자. 그러면 모든 극대 부분체
+$K \subset A$는 $[A : k] = [K : k]^2$을 만족한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-self-centralizing-subfield}의 특수한 경우이다.
+\end{proof}
+
+
+
+\section{분해체}
+\label{section-splitting}
+
+
+\begin{definition}
+\label{definition-splitting}
+$A$를 유한 중심 단순 $k$-대수라 하자. $A \otimes_k k'$이 $k'$ 위의
+행렬 대수이면 체확장 $k'/k$가 $A$를 {\it 분해한다}고 하거나,
+$k'$을 $A$의 {\it 분해체}라고 한다.
+\end{definition}
+
+\noindent
+이는 $\text{Br}(k) \to \text{Br}(k')$ 아래에서 $A$의 류가 영으로
+간다고 말하는 것과 같다.
+
+\begin{theorem}
+\label{theorem-splitting}
+$A$를 유한 중심 단순 $k$-대수라 하고, $k'/k$를 유한 체확장이라 하자.
+다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $k'$은 $A$를 분해한다.
+\item $A$와 유사하고 $k' \subset B$ 및 $[B : k] = [k' : k]^2$을
+만족하는 유한 중심 단순 대수 $B$가 존재한다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(2)를 가정하자. $B \otimes_k k'$이 행렬 대수임을 보이면 충분하다.
+$B \otimes_k B^{op} \cong \text{End}_k(B)$임을 알고 있다.
+보조정리 \ref{lemma-self-centralizing-subfield}에 의해 $k'$은
+$B^{op}$ 안에서 $k'$의 중심화자이므로, $B \otimes_k k'$은
+$B \otimes_k B^{op} = \text{End}_k(B)$ 안에서 $k \otimes k'$의
+중심화자이다. 이 중심화자는 물론 $\text{End}_{k'}(B)$이다. 여기서는 매장
+$k' \to B$를 통해 $B$를 $k'$-벡터 공간으로 본다. 이로써 결론을 얻는다.
+
+\medskip\noindent
+(1)을 가정하자. 이는 어떤 $k'$-벡터 공간 $V$에 대해
+$A \otimes_k k' \cong \text{End}_{k'}(V)$인 동형이 있음을 뜻한다.
+$\text{End}_k(V)$ 안에서 $A$의 가환자를 $B$라 하자. $k'$이 $B$에
+들어 있음에 유의하자. 보조정리 \ref{lemma-when-tensor-is-equal}에 의해
+$A$와 $B$의 류를 $\text{Br}(k)$에서 더하면 영이다.
+정리 \ref{theorem-centralizer}의 차원 공식으로부터
+$$
+[B : k] [A : k] =
+\dim_k(V)^2 =
+[k' : k]^2 \dim_{k'}(V)^2 =
+[k' : k]^2 [A : k].
+$$
+따라서 $[B : k] = [k' : k]^2$이다. 이로써 $A$의 브라우어 류의 반대에
+대해 결과를 증명했다. 그러나 $k'$이 $A$의 브라우어 류를 분해할
+필요충분조건은 그 반대 대수의 브라우어 류를 분해하는 것이므로 어쨌든
+결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-maximal-subfield-splits}
+$k$ 위의 유한 중심 나눗셈환 $K$의 극대 부분체는 $K$의 분해체이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-maximal-subfield}와 정리 \ref{theorem-splitting}을
+결합하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-splitting-field-degree}
+$k$ 위의 유한 중심 나눗셈환 $K$를 생각하자. $d^2 = [K : k]$로 놓자.
+$K$의 임의의 유한 분해체 $k'$에 대해 차수 $[k' : k]$는 $d$로 나누어진다.
+\end{lemma}
+
+\begin{proof}
+정리 \ref{theorem-splitting}에 의해, $K$의 브라우어 류에 속하고
+$[B : k] = [k' : k]^2$을 만족하는 유한 중심 단순 대수 $B$가 존재한다.
+보조정리 \ref{lemma-similar}에 의해 어떤 $n$에 대해
+$B = \text{Mat}(n \times n, K)$이다. 그러면
+$[k' : k]^2 = n^2d^2$이므로 결론이 따른다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-separable-splitting-field}
+$k$ 위의 유한 중심 나눗셈환 $K$를 생각하자. $k$ 위에서 분리적인
+극대 부분체 $k \subset k' \subset K$가 존재한다.
+특히 모든 브라우어 류는 유한 분리 분해체를 갖는다.
+% P02-E0001
+\end{proposition}
+
+\begin{proof}
+모든 브라우어 류는 $k$ 위의 유한 중심 나눗셈환으로 표현되므로, 두 번째
+명제는 첫 번째 명제와 보조정리 \ref{lemma-maximal-subfield-splits}에서 따른다.
+
+\medskip\noindent
+첫 번째 명제를 증명하기 위해 분리 부분체 $k' \subset K$가 주어졌다고 하자.
+$K$ 안에서 $k'$의 중심화자 $K'$의 중심은 $k'$이고, 문제는 $k'$ 위에서
+분리적인 $K'$의 극대 부분체를 찾는 것으로 환원된다. 따라서 $k \not = K$일
+때 $k$ 위에서 분리적이고 $x \not \in k$인 원 $x \in K$를 찾을 수 있음을
+보이면 충분하다. 이 명제는 표수가 영이면 명백하다. 따라서 $k$의 표수가
+$p > 0$이라고 가정해도 된다. 바탕체 $k$가 유한이면 결과는 역시 명백하다
+(유한체의 확장은 항상 분리적이기 때문이다). 그러므로 $k$가 양의 표수를
+갖는 무한체라고 가정할 수 있다.
+
+\medskip\noindent
+모순을 얻기 위해 $K$의 어떤 원도 $k$ 위에서 분리적이지 않다고 가정하자.
+% P02-E0002
+Fields의 절 \ref{fields-section-algebraic}에서 논의한 바에 따르면, 이는
+임의의 $x \in K$의 최소다항식이 $T^q - a$ 꼴임을 뜻한다. 여기서 $q$는
+$p$의 거듭제곱이고 $a \in k$이다. $K$의 모든 원이 차수
+$\leq \dim_k(K)$인 최소다항식을 가짐은 명백하므로, 모든 $x \in K$에 대해
+$x^q \in k$를 만족하는 고정된 $p$의 거듭제곱 $q$가 존재한다.
+
+\medskip\noindent
+사상
+$$
+(-)^q : K \longrightarrow K
+$$
+을 생각하고, $a_1 = 1$인 $K$의 $k$-기저
+$\{a_1, \ldots, a_n\}$를 사용해 이 사상을 써 보자. 즉,
+$$
+(\sum x_i a_i)^q = \sum f_i(x_1, \ldots, x_n)a_i.
+$$
+$K$ 위의 곱셈은 $k$-쌍선형이므로 각 $f_i$는
+$x_1, \ldots, x_n$의 다항식이다(세부사항은 생략한다). 위에서 택한
+$q$와 $k$가 무한이라는 사실에 의해 $i \geq 2$이면 $f_i$는 항등적으로
+영이다. 따라서 $k$를 그 대수적 폐포 $\overline{k}$로 확장해도 여전히
+영이다. 그런데 대수 $K \otimes_k \overline{k}$는 행렬 대수이다(예를 들어
+보조정리 \ref{lemma-base-change}와
+\ref{lemma-brauer-algebraically-closed}에 의해). 그러므로 $q$제곱이 중심적이지
+않은 원들이 존재한다(예: $e_{11}$). 이것이 원하는 모순이다.
+\end{proof}
+
+\noindent
+위의 결과들을 이용하면 유한 중심 단순 대수를 다음과 같이 특징지을 수 있다.
+
+\begin{lemma}
+\label{lemma-finite-central-simple-algebra}
+$k$를 체라 하자. $k$-대수 $A$에 대해 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $A$는 유한 중심 단순 $k$-대수이다.
+\item $A$는 유한 차원 $k$-벡터 공간이고, $k$는 $A$의 중심이며,
+$A$에는 비자명한 양쪽 아이디얼이 없다.
+\item 어떤 $d \geq 1$에 대해
+$A \otimes_k \bar k \cong \text{Mat}(d \times d, \bar k)$이다.
+\item 어떤 $d \geq 1$에 대해
+$A \otimes_k k^{sep} \cong \text{Mat}(d \times d, k^{sep})$이다.
+\item 어떤 $d \geq 1$과 유한 갈루아 확장 $k'/k$가 존재하여
+$A \otimes_k k' \cong \text{Mat}(d \times d, k')$이다.
+\item 어떤 $n \geq 1$과 $k$ 위의 유한 중심 나눗셈환 $K$가 존재하여
+$A \cong \text{Mat}(n \times n, K)$이다.
+\end{enumerate}
+정수 $d$를 $A$의 {\it 차수}라 한다.
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)의 동치는 정의에서 따른다. 절 \ref{section-algebras}를 보라.
+(1)을 가정하자. 명제 \ref{proposition-separable-splitting-field}에 의해
+$A$의 분리 분해체 $k \subset k'$이 존재한다. 물론 이때 $k'/k$의
+갈루아 폐포도 분해체이다. 따라서 (1)은 (5)를 함의한다.
+(5) $\Rightarrow$ (4) $\Rightarrow$ (3)은 명백하다. (3)을 가정하자.
+그러면 예를 들어 보조정리 \ref{lemma-matrix-algebras}에 의해
+$A \otimes_k \overline{k}$는 유한 중심 단순 $\overline{k}$-대수이다.
+이는 자명하게 $A$가 유한 중심 단순 $k$-대수임을 함의한다.
+마지막으로 (1)과 (6)의 동치는~Wedderburn~정리이다. 정리
+\ref{theorem-wedderburn}을 보라.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

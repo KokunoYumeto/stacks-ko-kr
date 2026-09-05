@@ -1,0 +1,4460 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{대수공간의 코호몰로지}
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 대수공간의 코호몰로지를 다룬다.
+아벨 층의 코호몰로지에 관한 몇 가지 결과도 증명하지만,
+주로 준연접층의 코호몰로지에 초점을 맞춘다. 즉,
+"스킴의 코호몰로지" 장의 결과에 대응하는 명제들을 증명한다.
+이 장의 결과 중 일부는 \cite{Kn}에서 찾을 수 있다.
+
+\medskip\noindent
+이 장에서 빠져 있는 중요한 도구는 {\it 귀납 원리}이다. 즉,
+준콤팩트하고 준분리인 대수공간에 대한
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-induction-principle}의 대응물이다.
+이는 Derived Categories of Spaces, Section
+\ref{spaces-perfect-section-induction}에서 정확히 정식화되고
+상세히 증명된다. 이 장에서는 귀납 원리 대신
+교대 {\v C}ech 복합체를 사용한다.
+Section \ref{section-alternating-cech}을 보라.
+이 복합체는 Proposition \ref{proposition-vanishing}과 같은
+소멸 명제를 증명하도록 고안되었다. 그러나 경우에 따라 귀납 원리가
+더 강력하고 어쩌면 더 "표준적인" 도구이다.
+독자에게 이 절의 일부 내용을 읽은 뒤 귀납 원리를 살펴볼 것을 권한다.
+
+
+
+\section{규약}
+\label{section-conventions}
+
+\noindent
+항상 모든 스킴은 큰 fppf 사이트 $\Sch_{fppf}$ 안에 포함된다고 가정한다.
+또한 여기서 다루는 모든 환 $A$는 $\Spec(A)$가 이 큰 사이트의
+한 대상과 (동형으로) 같다는 성질을 갖는다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+이 장과 다음 장에서는 $X \times_S X$로
+$X$와 자기 자신과의 곱을 나타낸다
+($S$ 위 대수공간의 범주에서의 곱이다).
+$X \times X$라고 쓰지 않는다.
+
+
+
+
+
+
+
+\section{고차 직접상}
+\label{section-higher-direct-image}
+
+\noindent
+$S$를 스킴이라 하자. $X$를 $S$ 위의 표현 가능한 대수공간이라 하자.
+$\mathcal{F}$를 $X$ 위의 준연접 가군이라 하자
+(Properties of Spaces, Section
+\ref{spaces-properties-section-quasi-coherent}을 보라).
+Descent, Proposition
+\ref{descent-proposition-same-cohomology-quasi-coherent}에 의해,
+코호몰로지 군 $H^i(X, \mathcal{F})$는 $X$를 표현하는 스킴 위의
+대응하는 준연접 가군을 Zariski 위상에서 계산한 통상적인
+코호몰로지 군과 일치한다.
+
+\medskip\noindent
+더 일반적으로, $f : X \to Y$를 표현 가능한 대수공간 $X$와 $Y$
+사이의 준콤팩트하고 준분리인 사상이라 하자.
+$\mathcal{F}$를 $X$ 위의 준연접 가군이라 하자.
+Descent, Lemma \ref{descent-lemma-higher-direct-images-small-etale}에 의해,
+층 $R^if_*\mathcal{F}$는 $X$를 표현하는 스킴의 준연접 가군을
+$Y$를 표현하는 스킴으로 보내는 사상에 대해 Zariski 위상에서 계산한
+통상적인 고차 직접상과 일치한다.
+
+\medskip\noindent
+더욱 일반적으로, $f : X \to Y$가 $S$ 위 대수공간의
+표현 가능하고 준콤팩트하며 준분리인 사상이라고 하자.
+$V$를 스킴이라 하고 $V \to Y$를 에탈 전사 사상이라 하자.
+$U = V \times_Y X$라 하고 $f' : U \to V$를 $f$의 기저변환이라 하자.
+그러면 임의의 준연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해
+\begin{equation}
+\label{equation-representable-higher-direct-image}
+R^if'_*(\mathcal{F}|_U) = (R^if_*\mathcal{F})|_V,
+\end{equation}
+가 성립한다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}를 보라.
+또한 $f' : U \to V$는 스킴의 준콤팩트하고 준분리인 사상이므로,
+앞 단락의 설명에 따라 $R^if'_*(\mathcal{F}|_U)$를 계산할 수 있다.
+이때 $\mathcal{F}|_U$를 스킴 $U$ 위의 준연접층으로,
+$f'$를 스킴의 사상으로 생각한다.
+이 사실은 뒤에서 별도의 언급 없이 자주 사용한다.
+
+\medskip\noindent
+다음으로 대수공간의 임의의 준콤팩트하고 준분리인 사상에 대해
+준연접층의 고차 직접상이 준연접임을 증명한다.
+증명에서는 한 가지 기법을 사용한다. 더 "좋은" 증명은
+Sheaves on Stacks, Sections \ref{stacks-sheaves-section-cech} 및
+\ref{stacks-sheaves-section-sheaf-cech-complex} 이하에서 논의한
+상대 {\v C}ech 복합체를 사용할 것이다.
+
+\begin{lemma}
+\label{lemma-higher-direct-image}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의
+사상이라 하자. $f$가 준콤팩트하고 준분리이면, $R^if_*$
+는 준연접 $\mathcal{O}_X$-가군을 준연접
+$\mathcal{O}_Y$-가군으로 보낸다.
+\end{lemma}
+
+\begin{proof}
+$V \to Y$를 에탈 사상이라 하고 $V$는 아핀 스킴이라 하자.
+$U = V \times_Y X$라 두고,
+% P09-ERR-1386
+유도된 사상을 $f' : U \to V$로 나타낸다.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}에 의해
+$$
+R^if'_*(\mathcal{F}|_U) = (R^if_*\mathcal{F})|_V
+$$
+이다. 준연접 가군이라는 성질은 $Y$의 에탈 위상에 관해 국소적이므로
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-characterize-quasi-coherent}를 보라),
+$Y$를 $V$로 바꿀 수 있다. 즉, $Y$가 아핀 스킴이라고 가정해도 된다.
+
+\medskip\noindent
+$Y$가 아핀이라고 가정하자. $f$가 준콤팩트이므로 $X$도 준콤팩트이다.
+따라서 아핀 스킴 $U$와 전사 에탈 사상 $g : U \to X$를 택할 수 있다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}를 보라.
+그림은 다음과 같다.
+$$
+\xymatrix{
+U \ar[r]_g \ar[rd]_{f \circ g} & X \ar[d]^f \\
+& Y
+}
+$$
+사상 $g : U \to X$는 표현 가능하고 분리이며,
+$X$가 준분리이므로 준콤팩트이다. 따라서 위의 논의에 의해 보조정리는
+$g$에 대해 성립한다. 또한 $f \circ g : U \to Y$에 대해서도 성립한다
+(이는 아핀 스킴의 사상이기 때문이다).
+
+\medskip\noindent
+앞 단락의 상황에서 $n$에 관한 귀납법으로 다음 $IH_n$을 보이겠다.
+임의의 준연접층 $\mathcal{F}$가 $X$ 위에 주어지면 층
+% P09-ERR-1387
+$R^if\mathcal{F}$는 $i \leq n$일 때 준연접이다.
+$n = 0$인 경우는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward}에서 따른다.
+$IH_n$을 가정하자. 증명의 나머지에서 $IH_{n + 1}$이 성립함을 보인다.
+
+\medskip\noindent
+$\mathcal{H}$를 준연접 $\mathcal{O}_U$-가군이라 하자.
+Leray 스펙트럼 열
+$$
+E_2^{p, q} = R^pf_* R^qg_* \mathcal{H}
+\Rightarrow
+R^{p + q}(f \circ g)_*\mathcal{H}
+$$
+을 생각한다. Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-relative-Leray}를 보라.
+$R^qg_*\mathcal{H}$는 $IH_n$에 의해 준연접이므로,
+모든 층 $R^pf_*R^qg_*\mathcal{H}$는 $p \leq n$일 때 준연접이다.
+층 $R^{p + q}(f \circ g)_*\mathcal{H}$는 모두 준연접이다
+(사실 $p + q > 0$이면 영이지만 여기서는 필요하지 않다).
+차수 $\leq n + 1$에서 아직 준연접인지 모르는 유일한 가군은
+$E_2^{n + 1, 0} = R^{n + 1}f_*g_*\mathcal{H}$이다.
+또한 미분
+$$
+d_r^{n + 1, 0} : E_r^{n + 1, 0} \to E_r^{n + 1 + r, 1 - r}
+$$
+은 그 표적이 영이므로 영이다.
+% P09-ERR-1388
+$\QCoh(\mathcal{O}_X)$가 $\textit{Mod}(\mathcal{O}_X)$의 약한
+Serre 부분범주라는 사실을 쓰면
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-properties-quasi-coherent}를 보라),
+$R^{n + 1}f_*g_*\mathcal{H}$가 준연접임이 따른다
+(세부사항은 생략한다).
+
+\medskip\noindent
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{H} = g^*\mathcal{F}$라 두자. 수반 사상
+$\mathcal{F} \to g_*g^*\mathcal{F} = g_*\mathcal{H}$는
+$U \to X$가 전사 에탈이므로 단사이다. 완전열
+$$
+0 \to \mathcal{F} \to g_*\mathcal{H} \to \mathcal{G} \to 0
+$$
+을 생각하자. 여기서 $\mathcal{G}$는 첫 번째 사상의 여핵이고,
+특히 준연접이다. 긴 완전 코호몰로지 열을 적용하면
+$$
+R^nf_*g_*\mathcal{H} \to
+R^nf_*\mathcal{G} \to
+R^{n + 1}f_*\mathcal{F} \to
+R^{n + 1}f_*g_*\mathcal{H} \to
+R^{n + 1}f_*\mathcal{G}
+$$
+를 얻는다. 첫 번째 화살표의 여핵은 준연접이고,
+위에서 $R^{n + 1}f_*g_*\mathcal{H}$가 준연접임을 보았다.
+따라서 $R^{n + 1}f_*\mathcal{F}$에는 $2$-단계 여과가 있으며,
+첫 단계는 준연접이고 둘째 단계는 준연접층의 부분가군이다.
+$\mathcal{F}$가 임의의 준연접 $\mathcal{O}_X$-가군이므로
+이 결과는 $\mathcal{G}$에 대해서도 성립한다.
+따라서 완전열
+$$
+0 \to \mathcal{A} \to R^{n + 1}f_*\mathcal{G} \to \mathcal{B}
+$$
+를 택할 수 있으며, $\mathcal{A}$와 $\mathcal{B}$는 준연접
+$\mathcal{O}_Y$-가군이다. 그러면 핵 $\mathcal{K}$를 생각하자. 이는
+$$
+R^{n + 1}f_*g_*\mathcal{H} \to R^{n + 1}f_*\mathcal{G}
+\to \mathcal{B}
+$$
+의 핵이며 준연접이다. 따라서 사상
+$\mathcal{K} \to \mathcal{A}$를 얻고, 그 핵 $\mathcal{K}'$도
+준연접이다. 그러므로 $R^{n + 1}f_*\mathcal{F}$는 완전열
+$$
+R^nf_*g_*\mathcal{H} \to
+R^nf_*\mathcal{G} \to
+R^{n + 1}f_*\mathcal{F} \to \mathcal{K}' \to 0
+$$
+안에 놓이며, $R^{n + 1}f_*\mathcal{F}$를 제외한 모든 가군은
+준연접이다. 따라서 $R^{n + 1}f_*\mathcal{F}$도 준연접이고,
+원하는 대로 $IH_{n + 1}$이 성립한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{lemma}
+\label{lemma-quasi-coherence-higher-direct-images-application}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의
+준분리이고 준콤팩트인 사상이라 하자. 임의의 준연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$와 임의의 아핀 대상 $V$가
+$Y_\etale$에 주어지면
+$$
+H^q(V \times_Y X, \mathcal{F}) = H^0(V, R^qf_*\mathcal{F})
+$$
+가 모든 $q \in \mathbf{Z}$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+$Rf_*$의 형성은 에탈 국소화와 가환하므로
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}),
+$Y$를 $V$로 바꾸어 $Y = V$가 아핀이라고 가정할 수 있다.
+$E_2^{p, q} = H^p(Y, R^qf_*\mathcal{F})$이고
+$H^{p + q}(X, \mathcal{F})$로 수렴하는 Leray 스펙트럼 열을 생각하자.
+Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-Leray}를 보라.
+Lemma \ref{lemma-higher-direct-image}에 의해 층
+$R^qf_*\mathcal{F}$는 준연접이다. Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}에 의해
+$E_2^{p, q} = 0$이며, 이는 $p > 0$일 때 성립한다.
+따라서 스펙트럼 열은 $E_2$에서 퇴화하므로 결론을 얻는다.
+\end{proof}
+
+
+
+
+\section{유한 사상}
+\label{section-finite-morphisms}
+
+\noindent
+다음은 모든 아벨 층에 대해 성립하는 결과들이다
+(특히 준연접 가군에도 성립한다).
+이 보조정리들이 스킴의 유한 사상과 Zariski 위상에 대해서는
+성립하지 않는다는 점을 독자에게 {\bf 경고}한다.
+
+\begin{lemma}
+\label{lemma-finite-higher-direct-image-zero}
+$S$를 스킴이라 하자. $f : X \to Y$를 대수공간의 정수적 사상
+(예를 들어 유한 사상)이라 하자. 그러면
+$f_* : \textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$는
+완전 함자이고, $R^pf_* = 0$이며 이는 $p > 0$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change}에 의해
+$Y$의 에탈 덮개 위에서 고차 직접상을 계산할 수 있다.
+따라서 $Y$가 스킴이라고 가정할 수 있다. 그러면 $X$도 스킴이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-local}).
+이 경우에는 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-what-integral}을 적용할 수 있다.
+유한 사상의 경우 독자는 기술적으로 덜 복잡한 \'Etale Cohomology,
+Proposition
+\ref{etale-cohomology-proposition-finite-higher-direct-image-zero}를
+참고할 수도 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-stalk-push-finite}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 유한
+사상이라 하자. $\overline{y}$를 $Y$의 기하점이라 하고,
+$\overline{x}_1, \ldots, \overline{x}_n$을 $X$에서 그 위로 놓이는
+점들이라 하자. 그러면
+$$
+(f_*\mathcal{F})_{\overline{y}} =
+\prod\nolimits_{i = 1, \ldots, n}
+\mathcal{F}_{\overline{x}_i}
+$$
+가 임의의 층 $\mathcal{F}$가 $X_\etale$ 위에 주어질 때 성립한다.
+\end{lemma}
+
+\begin{proof}
+에탈 근방 $(V, \overline{v})$를 $\overline{y}$에 대해 택하자.
+그러면 줄기 $(f_*\mathcal{F})_{\overline{y}}$는
+$f_*\mathcal{F}|_V$의 줄기, 즉 $\overline{v}$에서의 줄기이다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change}에 의해
+$Y$를 $V$로, $X$를 $X \times_Y V$로 바꿀 수 있다.
+그러면
+% P09-ERR-1389
+$Z \to X$는 스킴의 유한 사상이고, 결론은 \'Etale Cohomology,
+Proposition
+\ref{etale-cohomology-proposition-finite-higher-direct-image-zero}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-rings}
+$S$를 스킴이라 하자. $\pi : X \to Y$를 $S$ 위 대수공간의 유한
+사상이라 하자. $\mathcal{A}$를 $X_\etale$ 위의 환 층이라 하고,
+$\mathcal{B}$를 $Y_\etale$ 위의 환 층이라 하자.
+$\varphi : \mathcal{B} \to \pi_*\mathcal{A}$를 환 층의 준동형이라 하여
+환 달린 토포스의 사상
+$$
+f = (\pi, \varphi) :
+(\Sh(X_\etale), \mathcal{A})
+\longrightarrow
+(\Sh(Y_\etale), \mathcal{B}).
+$$
+를 얻는다고 하자. $\mathcal{A}$-가군의 층 $\mathcal{F}$와
+$\mathcal{B}$-가군의 층 $\mathcal{G}$에 대해 표준 사상
+$$
+\mathcal{G} \otimes_\mathcal{B} f_*\mathcal{F}
+\longrightarrow
+f_*(f^*\mathcal{G} \otimes_\mathcal{A} \mathcal{F}).
+$$
+은 동형이다.
+\end{lemma}
+
+\begin{proof}
+이 사상은 다음 사상에 수반되는 사상이다.
+$$
+f^*\mathcal{G} \otimes_\mathcal{A}
+f^* f_*\mathcal{F} =
+f^*(\mathcal{G} \otimes_\mathcal{B} f_*\mathcal{F})
+\longrightarrow
+f^*\mathcal{G} \otimes_\mathcal{A} \mathcal{F}
+$$
+여기서 이 사상은 $\text{id} : f^*\mathcal{G} \to f^*\mathcal{G}$와
+수반 사상 $f^* f_*\mathcal{F} \to \mathcal{F}$에서 온다.
+이 사상이 동형임을 보이기 위해 줄기에서 확인해도 된다
+(Properties of Spaces, Theorem
+\ref{spaces-properties-theorem-exactness-stalks}).
+$\overline{y}$를 $Y$의 기하점이라 하고,
+$\overline{x}_1, \ldots, \overline{x}_n$을 $X$의 기하점들이라 하되
+$\overline{y}$ 위에 놓인다고 하자. 사상들이 줄기에 어떻게 작용하는지
+계산하면 다음을 보이면 충분함을 알 수 있다.
+% P09-ERR-1390
+% P09-ERR-1391
+$$
+\mathcal{G}_{\overline{y}}
+\otimes_{\mathcal{B}_{\overline{y}}}
+\left(
+\bigoplus\nolimits_{i = 1, \ldots, n} \mathcal{F}_{\overline{x}_i}
+\right) =
+\bigoplus\nolimits_{i = 1, \ldots, n}
+(\mathcal{G}_{\overline{y}}
+\otimes_{\mathcal{B}_{\overline{x}}}
+\mathcal{A}_{\overline{x}_i}) \otimes_{\mathcal{A}_{\overline{x}_i}}
+\mathcal{F}_{\overline{x}_i}
+$$
+이는 참이다. 여기서는 텐서곱을 취하는 것이 줄기를 취하는 것과
+가환한다는 사실, 당김에서 줄기의 거동을 설명하는 Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-stalk-pullback}, 그리고
+% P09-ERR-1392
+닫힌 몰입에 따른 직접상에서 줄기의 거동을 설명하는
+Lemma \ref{lemma-stalk-push-finite}을 사용하였다.
+\end{proof}
+
+\noindent
+이 절의 끝에서는 유한 사상에 관한 대단히 일반적인 사영 공식을 제시한다.
+
+\begin{lemma}
+\label{lemma-projection-formula-finite}
+Lemma \ref{lemma-finite-rings}에서와 같은 $S$, $X$, $Y$, $\pi$,
+$\mathcal{A}$, $\mathcal{B}$, $\varphi$, $f$에 대해
+$$
+K \otimes_\mathcal{B}^\mathbf{L} Rf_*M =
+Rf_*(Lf^*K \otimes_\mathcal{A}^\mathbf{L} M)
+$$
+가 $D(\mathcal{B})$에서, 임의의 $K \in D(\mathcal{B})$와
+$M \in D(\mathcal{A})$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+$f_*$는 완전하므로(Lemma
+\ref{lemma-finite-higher-direct-image-zero}), $Rf_*$는 임의의 대표
+복합체에 $f_*$를 적용하여 계산된다. 복합체
+$\mathcal{K}^\bullet$를 $\mathcal{B}$-가군의 복합체로 택하되,
+$K$를 나타내고 각 항이 평탄인 K-평탄 복합체가 되게 하자.
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-K-flat-resolution}를 보라.
+그러면 $f^*\mathcal{K}^\bullet$도 각 항이 평탄인 K-평탄 복합체이다.
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-pullback-K-flat}를 보라.
+임의의 복합체 $\mathcal{M}^\bullet$를 $\mathcal{A}$-가군의 복합체로
+택하되 $M$을 나타내게 하자. 그러면 다음을 보이면 된다.
+$$
+\text{Tot}(\mathcal{K}^\bullet \otimes_\mathcal{B} f_*\mathcal{M}^\bullet)
+=
+f_*\text{Tot}(f^*\mathcal{K}^\bullet \otimes_\mathcal{A} \mathcal{M}^\bullet)
+$$
+% P09-ERR-1393
+우리의 선택에 의해 이 복합체들은 보조정리 공식의 우변과 좌변을
+각각 나타내기 때문이다. $f_*$는 직합과 가환하므로
+(예를 들어 Lemma \ref{lemma-stalk-push-finite}의 줄기 기술을 보라),
+이는 다음 등식들로 환원된다.
+$$
+\mathcal{K}^n \otimes_\mathcal{B} f_*\mathcal{M}^m
+=
+f_*(f^*\mathcal{K}^n \otimes_\mathcal{A} \mathcal{M}^m)
+$$
+이 등식들은 Lemma \ref{lemma-finite-rings}에 의해 참이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{여극한과 코호몰로지}
+\label{section-colimits}
+
+\noindent
+다음 보조정리는 특히 준연접층의 도표에 적용된다.
+
+\begin{lemma}
+\label{lemma-colimits}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$X$가 준콤팩트하고 준분리이면
+$$
+\colim_i H^p(X, \mathcal{F}_i)
+\longrightarrow
+H^p(X, \colim_i \mathcal{F}_i)
+$$
+는 $X_\etale$ 위 아벨 층의 모든 여과 도표에 대해 동형이다.
+\end{lemma}
+
+\begin{proof}
+이는 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-colim-works-over-collection}에서 따른다.
+구체적으로, $\mathcal{B} \subset \Ob(X_{spaces, \etale})$를
+$X$ 위에서 에탈인 준콤팩트하고 준분리인 공간들의 집합이라 하자.
+$U \in \mathcal{B}$이면 $U$가 준콤팩트이므로,
+유한 덮개 $\{U_i \to U\}$ 중 $U_i \in \mathcal{B}$인 것들의 모음은
+$U$의 $X_{spaces, \etale}$-덮개 전체 집합에 공종이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-quasi-separated-permanence}에 의해
+집합 $\mathcal{B}$는 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-colim-works-over-collection}의 모든 가정을
+만족한다. $X \in \mathcal{B}$이므로 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-colimit-cohomology}
+\begin{slogan}
+준콤팩트·준분리 사상의 고차 직접상은 층의 여과 여극한과 가환한다.
+\end{slogan}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의
+준콤팩트하고 준분리인 사상이라 하자.
+$\mathcal{F} = \colim \mathcal{F}_i$를 $X_\etale$ 위 아벨 층의
+여과 여극한이라 하자. 그러면 임의의 $p \geq 0$에 대해
+$$
+R^pf_*\mathcal{F} = \colim R^pf_*\mathcal{F}_i.
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+토포스의 사상 $f_{small} : X_{small} \to Y_{small}$은 사이트의 사상
+$f_{spaces, \etale} : X_{spaces, \etale} \to Y_{spaces, \etale}$에서
+오며, 이는 연속 함자 $V \longmapsto X \times_Y V$에 대응한다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-functoriality-etale-site}를 보라.
+이 사이트의 사상에 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-higher-direct-image-colimit}을 적용한다.
+$Y_{spaces, \etale}$의 모든 대상은 아핀 대상들로 덮이므로,
+$V$가 아핀이고 $Y$ 위에서 에탈일 때
+$H^p(X \times_Y V, \mathcal{F}) =
+\colim H^p(X \times_Y V, \mathcal{F}_i)$임을 보이면 충분하다.
+$V$가 아핀이므로 대수공간 $X \times_Y V$는 준콤팩트하고
+준분리이다. 따라서 Lemma \ref{lemma-colimits}을 적용하여 결론을 얻는다.
+\end{proof}
+
+\noindent
+다음 보조정리는 유한 표시 가군이 준콤팩트하고 준분리인
+대수공간에서 예상대로 거동함을 말해 준다.
+
+\begin{lemma}
+\label{lemma-finite-presentation-quasi-compact-colimit}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트하고 준분리인
+대수공간이라 하자. $I$를 유향 집합이라 하고,
+$(\mathcal{F}_i, \varphi_{ii'})$를 $I$ 위의
+$\mathcal{O}_X$-가군 계라 하자. $\mathcal{G}$를 유한 표시인
+$\mathcal{O}_X$-가군이라 하자. 그러면
+$$
+\colim_i \Hom_X(\mathcal{G}, \mathcal{F}_i)
+=
+\Hom_X(\mathcal{G}, \colim_i \mathcal{F}_i).
+$$
+특히 $\Hom_X(\mathcal{G}, -)$는 $\QCoh(\mathcal{O}_X)$에서
+여과 여극한과 가환한다.
+\end{lemma}
+
+\begin{proof}
+표시된 등식은 Modules on Sites, Lemma
+\ref{sites-modules-lemma-finite-presentation-quasi-compact-colimit}의
+특수한 경우이다. 이를 적용하려면 사이트 $X_\etale$에 대해
+Sites, Lemma \ref{sites-lemma-directed-colimits-global-sections}의
+(4)에 있는 가정들을 확인해야 한다. 이를 위해 Sites, Remark
+\ref{sites-remark-stronger-conditions}의 (2)(a), (2)(b), (2)(c)를
+확인하겠다. $\mathcal{B} \subset \Ob(X_\etale)$를 아핀 대상들의
+집합이라 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item $X$가 준콤팩트이므로 $U \in \mathcal{B}$가 존재하여
+$U \to X$가 전사이다
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}).
+따라서 $h_U^\# \to *$는 전사이다.
+\item $U \in \mathcal{B}$에 대해 에탈 덮개
+$\{U_i \to U\}_{i \in I}$가 $U$에 주어지면, 유한 에탈 덮개
+$\{U_j \to U\}_{j = 1, \ldots, m}$로 세분할 수 있고
+$U_j \in \mathcal{B}$이다
+(Topologies, Lemma \ref{topologies-lemma-etale-affine}).
+\item $U, U' \in \Ob(X_\etale)$에 대해
+$h_U^\# \times h_{U'}^\# = h_{U \times_X U'}^\#$이다.
+$U, U' \in \mathcal{B}$이면 $U \times_X U'$는 준콤팩트이다.
+이는 $X$가 준분리이기 때문이며, 예를 들어 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-quasi-separated-permanence}를 보라.
+따라서 $U'' \to U \times_X U'$이 전사 에탈이고
+$U'' \in \mathcal{B}$인 사상을 찾을 수 있다
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}).
+다시 말해, 사상 $U'' \to U$와 $U'' \to U'$가 존재하여
+% P09-ERR-1394
+사상 $h_{U''}^\# \to h_U^\# \times h_{u'}^\#$가 전사이다.
+\end{enumerate}
+마지막 주장에 대해서는 포함 함자
+$\QCoh(\mathcal{O}_X) \to \textit{Mod}(\mathcal{O}_X)$가
+여극한과 가환하고 유한 표시 가군이 준연접임을 관찰하면 된다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-properties-quasi-coherent}를 보라.
+\end{proof}
+
+
+
+
+
+\section{교대 {\v C}ech 복합체}
+\label{section-alternating-cech}
+
+\noindent
+$S$를 스킴이라 하자. $f : U \to X$를 $S$ 위 대수공간의 에탈
+사상이라 하자. 함자
+$$
+j : U_{spaces, \etale} \longrightarrow X_{spaces, \etale},\quad
+V/U \longmapsto V/X
+$$
+는 $U_{spaces, \etale}$와 국소화 $X_{spaces, \etale}/U$ 사이의
+동치함자를 유도한다. Properties of Spaces, Section
+\ref{spaces-properties-section-localize}를 보라. 따라서 함자
+$$
+f_! : \textit{Ab}(U_\etale) \longrightarrow
+\textit{Ab}(X_\etale),\quad
+f_! : \textit{Mod}(\mathcal{O}_U) \longrightarrow \textit{Mod}(\mathcal{O}_X),
+$$
+가 존재하며, 이들은 각각 다음 함자의 왼쪽 수반이다.
+$$
+f^{-1} : \textit{Ab}(X_\etale) \longrightarrow
+\textit{Ab}(U_\etale),\quad
+f^* : \textit{Mod}(\mathcal{O}_X) \longrightarrow \textit{Mod}(\mathcal{O}_U)
+$$
+Modules on Sites, Section \ref{sites-modules-section-localize}를 보라.
+경고: 이 함자는 선험적으로 콤팩트 지지 코호몰로지와 아무 관계가 없다!
+위 참고문헌에서는 이 함자를 "영에 의한 연장"이라 불렀다.
+$f_!$의 두 형태는 $f^* = f^{-1}$이므로 일치하며,
+이는 $\mathcal{O}_X$-가군의 층에 대한 진술이다.
+
+\medskip\noindent
+아래에서 이 구성을 사용할 것이므로 그 성질 몇 가지를 상기하자.
+아벨 층 $\mathcal{G}$가 $U_\etale$ 위에 주어졌을 때,
+% P09-ERR-1395
+층 $f_!$는 다음 전층의 층화이다.
+$$
+V/X \longmapsto
+f_!\mathcal{G}(V) =
+\bigoplus\nolimits_{\varphi \in \Mor_X(V, U)}
+\mathcal{G}(V \xrightarrow{\varphi} U),
+$$
+Modules on Sites, Lemma \ref{sites-modules-lemma-extension-by-zero}를 보라.
+더욱이 $\mathcal{G}$가 $\mathcal{O}_U$-가군이면
+$f_!\mathcal{G}$는 정확히 같은 아벨 군 전층의 층화이고,
+그 전층에는 명백한 방식으로 $\mathcal{O}_X$-가군 구조가 주어진다
+(앞의 인용을 보라). $\overline{x} : \Spec(k) \to X$를 기하점이라
+하자. 그러면 표준적인 식별
+$$
+(f_!\mathcal{G})_{\overline{x}} =
+\bigoplus\nolimits_{\overline{u}} \mathcal{G}_{\overline{u}}
+$$
+이 있다. 여기서 합은 모든 $\overline{u} : \Spec(k) \to U$ 중
+$f \circ \overline{u} = \overline{x}$를 만족하는 것에 걸친다.
+Modules on Sites,
+Lemma \ref{sites-modules-lemma-stalk-j-shriek}와 Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-points-small-etale-site}를 보라.
+이하에서는 층 $f_!\underline{\mathbf{Z}}$를 연구한다.
+여기서 $\underline{\mathbf{Z}}$는 $X_\etale$ 또는 $U_\etale$ 위의
+상수층을 뜻한다.
+
+\begin{lemma}
+\label{lemma-product-is-tensor-product}
+$S$를 스킴이라 하자. $f_i : U_i \to X$를 $S$ 위 대수공간의
+에탈 사상들이라 하자. 그러면 동형
+$$
+f_{1, !}\underline{\mathbf{Z}} \otimes_{\mathbf{Z}}
+f_{2, !}\underline{\mathbf{Z}}
+\longrightarrow
+f_{12, !}\underline{\mathbf{Z}}
+$$
+이 있다. 여기서 $f_{12} : U_1 \times_X U_2 \to X$는 구조 사상이다.
+또한 동형
+$$
+(f_1 \amalg f_2)_! \underline{\mathbf{Z}}
+\longrightarrow
+f_{1, !}\underline{\mathbf{Z}} \oplus
+f_{2, !}\underline{\mathbf{Z}}
+$$
+이 있다.
+\end{lemma}
+
+\begin{proof}
+사상을 정의하면 위의 줄기 기술에 의해 동형임이 따른다.
+사상을 정의하려면 전층 수준에서 작업하는 것으로 충분하다.
+따라서 다음 사상을 정의해야 한다.
+$$
+\left(\bigoplus\nolimits_{\varphi_1 \in \Mor_X(V, U_1)} \mathbf{Z}\right)
+\otimes_{\mathbf{Z}}
+\left(\bigoplus\nolimits_{\varphi_2 \in \Mor_X(V, U_2)} \mathbf{Z}\right)
+\longrightarrow
+\bigoplus\nolimits_{\varphi \in \Mor_X(V, U_1 \times_X U_2)}
+\mathbf{Z}
+$$
+원소 $1_{\varphi_1} \otimes 1_{\varphi_2}$를 명백한 표기 아래 원소
+$1_{\varphi_1 \times \varphi_2}$로 보낸다. 둘째 등식의 증명은 생략한다.
+\end{proof}
+
+\noindent
+또 하나의 중요한 성질은 트레이스 사상
+$$
+\text{Tr}_f : f_!\underline{\mathbf{Z}} \longrightarrow \underline{\mathbf{Z}}.
+$$
+이다. 트레이스 사상은 사상
+$\mathbf{Z} \to f^{-1}\underline{\mathbf{Z}}$에 수반된다
+(이 사상은 동형이다). $\overline{x}$가 위와 같으면,
+$\text{Tr}_f$가 $\overline{x}$에서 줄기에 작용하는 사상은
+$$
+(\text{Tr}_f)_{\overline{x}} :
+(f_!\underline{\mathbf{Z}})_{\overline{x}} =
+\bigoplus\nolimits_{\overline{u}} \mathbf{Z}
+\longrightarrow
+\mathbf{Z} = \underline{\mathbf{Z}}_{\overline{x}}
+$$
+이며 주어진 정수들을 모두 더한다. 이는 사상
+$1 : \mathbf{Z} \to f^{-1}\underline{\mathbf{Z}}$에 수반되기 때문이다.
+특히 $f$가 전사이고 에탈이면 $\text{Tr}_f$는 전사이다.
+
+\medskip\noindent
+$f : U \to X$가 대수공간의 전사 에탈 사상이라고 하자.
+위에서 논의한 트레이스 사상에 붙는 {\it Koszul 복합체}
+$$
+\ldots \to \wedge^3f_!\underline{\mathbf{Z}} \to
+\wedge^2f_!\underline{\mathbf{Z}} \to f_!\underline{\mathbf{Z}} \to
+\underline{\mathbf{Z}} \to 0
+$$
+를 생각하자. 여기서 외승은 환 층 $\underline{\mathbf{Z}}$ 위에서
+취한다. 사상은 다음 규칙으로 정의한다.
+$$
+e_1 \wedge \ldots \wedge e_n \longmapsto
+\sum\nolimits_{i = 1, \ldots, n} (-1)^{i + 1}
+\text{Tr}_f(e_i)
+e_1 \wedge \ldots \wedge \widehat{e_i} \wedge \ldots \wedge e_n
+$$
+여기서 $e_1, \ldots, e_n$은 $f_!\underline{\mathbf{Z}}$의 국소
+단면들이다. $\overline{x}$를 $X$의 기하점이라 하고
+$M_{\overline{x}} = (f_!\underline{\mathbf{Z}})_{\overline{x}} =
+\bigoplus_{\overline{u}} \mathbf{Z}$라 두자. 그러면 위 복합체의
+$\overline{x}$에서의 줄기는 복합체
+$$
+\ldots \to \wedge^3 M_{\overline{x}} \to \wedge^2 M_{\overline{x}}
+\to M_{\overline{x}} \to \mathbf{Z} \to 0
+$$
+이다. 이는 $M_{\overline{x}} \to \mathbf{Z}$가 전사이므로 완전하다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-homotopy-koszul-abstract}를 보라. 따라서
+$K^\bullet = K^\bullet(f)$를 $K^i = \wedge^{i + 1}f_!\underline{\mathbf{Z}}$인
+복합체라 하면 준동형
+\begin{equation}
+\label{equation-quasi-isomorphism}
+K^\bullet \longrightarrow \underline{\mathbf{Z}}[0]
+\end{equation}
+을 얻는다. 이 복합체 $K^\bullet$를 사용하여 $f : U \to X$에 붙는
+교대 {\v C}ech 복합체를 정의한다.
+
+\begin{definition}
+\label{definition-alternating-cech-complex}
+$S$를 스킴이라 하자. $f : U \to X$를 $S$ 위 대수공간의 전사 에탈
+사상이라 하자. $\mathcal{F}$를 $\textit{Ab}(X_\etale)$의 대상이라
+하자. {\it 교대 {\v C}ech 복합체}\footnote{이는 표준적이지 않은 표기일 수 있다}
+$\check{\mathcal{C}}^\bullet_{alt}(f, \mathcal{F})$는 $\mathcal{F}$와
+$f$에 붙는 복합체
+$$
+\Hom(K^0, \mathcal{F}) \to \Hom(K^1, \mathcal{F}) \to
+\Hom(K^2, \mathcal{F}) \to \ldots
+$$
+이다. 여기서 Hom 군들은 $\textit{Ab}(X_\etale)$에서 계산한다.
+\end{definition}
+
+\noindent
+$U = \coprod U_i$이고 $f|_{U_i} : U_i \to X$가 부분공간의 열린
+몰입이면, 독자는 $\check{\mathcal{C}}_{alt}^\bullet(f, \mathcal{F})$가
+Cohomology, Section \ref{cohomology-section-alternating-cech}에서
+Zariski 덮개 $X = \bigcup U_i$와 $\mathcal{F}$를 $X$의 Zariski
+사이트로 제한한 것에 대해 도입한 복합체와 일치함을 확인할 수 있다.
+그러나 더 중요한 것은 교대 {\v C}ech 복합체의 코호몰로지와
+코호몰로지를 관계짓는 일이다.
+
+\begin{lemma}
+\label{lemma-alternating-cech-to-cohomology}
+$S$를 스킴이라 하자. $f : U \to X$를 $S$ 위 대수공간의 전사 에탈
+사상이라 하자. $\mathcal{F}$를 $\textit{Ab}(X_\etale)$의 대상이라
+하자. 그러면 표준 사상
+$$
+\check{\mathcal{C}}^\bullet_{alt}(f, \mathcal{F})
+\longrightarrow
+R\Gamma(X, \mathcal{F})
+$$
+이 $D(\textit{Ab})$에 존재한다. 더욱이 $E_1$-쪽이
+$$
+E_1^{p, q} =
+\Ext_{\textit{Ab}(X_\etale)}^q(K^p, \mathcal{F})
+$$
+인 스펙트럼 열이 존재하며, 이는 $H^{p + q}(X, \mathcal{F})$로
+수렴한다. 여기서 $K^p = \wedge^{p + 1}f_!\underline{\mathbf{Z}}$이다.
+\end{lemma}
+
+\begin{proof}
+준동형 $K^\bullet \to \underline{\mathbf{Z}}[0]$이 있었음을 상기하자.
+(\ref{equation-quasi-isomorphism})을 보라. 단사 분해
+$\mathcal{F} \to \mathcal{I}^\bullet$를 $\textit{Ab}(X_\etale)$에서
+택하자.
+이중 복합체 $\Hom(K^\bullet, \mathcal{I}^\bullet)$를 생각하자.
+그 항들은 $\Hom(K^p, \mathcal{I}^q)$이다. 미분
+$d_1^{p, q} : A^{p, q} \to A^{p + 1, q}$는 미분
+$K^{p + 1} \to K^p$에서 오고, 미분
+$d_2^{p, q} : A^{p, q} \to A^{p, q + 1}$은 미분
+$\mathcal{I}^q \to \mathcal{I}^{q + 1}$에서 온다.
+% P09-ERR-1396
+연관된 전체 복합체를
+$\text{Tot}(\Hom(K^\bullet, \mathcal{I}^\bullet))$로 나타내자.
+Homology, Section \ref{homology-section-double-complexes}를 보라.
+이 이중 복합체에 붙는 두 스펙트럼 열
+$({}'E_r, {}'d_r)$와 $({}''E_r, {}''d_r)$를 사용할 것이다.
+Homology, Section \ref{homology-section-double-complex}를 보라.
+
+\medskip\noindent
+$K^\bullet$은 $\underline{\mathbf{Z}}$의 분해이므로 복합체
+$$
+\Hom(K^\bullet, \mathcal{I}^q) :
+\Hom(K^0, \mathcal{I}^q) \to
+\Hom(K^1, \mathcal{I}^q) \to
+\Hom(K^2, \mathcal{I}^q) \to \ldots
+$$
+는 양의 차수에서 비순환이고, 그 $H^0$는
+$\Gamma(X, \mathcal{I}^q)$와 같다. 따라서 Homology, Lemma
+\ref{homology-lemma-double-complex-gives-resolution}에 의해 자연스러운 사상
+$$
+\mathcal{I}^\bullet(X) \longrightarrow
+\text{Tot}(\Hom(K^\bullet, \mathcal{I}^\bullet))
+$$
+은 아벨 군의 복합체 사이의 준동형이다. 특히
+$H^n(\text{Tot}(\Hom(K^\bullet, \mathcal{I}^\bullet))) =
+H^n(X, \mathcal{F})$라고 결론지을 수 있다.
+
+\medskip\noindent
+보조정리의 사상 $\check{\mathcal{C}}^\bullet_{alt}(f, \mathcal{F}) \to
+R\Gamma(X, \mathcal{F})$는 사상
+$\check{\mathcal{C}}^\bullet_{alt}(f, \mathcal{F}) \to
+\text{Tot}(\Hom(K^\bullet, \mathcal{I}^\bullet))$와 위에 표시한
+준동형의 역을 합성한 것이다.
+
+\medskip\noindent
+마지막으로 스펙트럼 열 $({}'E_r, {}'d_r)$를 생각하자. 다음을 얻는다.
+$$
+E_1^{p, q} = q\text{번째 코호몰로지 of }
+\Hom(K^p, \mathcal{I}^0) \to
+\Hom(K^p, \mathcal{I}^1) \to
+\Hom(K^p, \mathcal{I}^2) \to \ldots
+$$
+이로써 보조정리가 증명된다.
+\end{proof}
+
+\noindent
+이 보조정리에서 Ext 군
+$\Ext_{\textit{Ab}(X_\etale)}(K^p, \mathcal{F})$, 즉 함자
+$\mathcal{F} \mapsto \Hom(K^p, \mathcal{F})$의 오른쪽 유도함자를
+이해하는 일이 중요함을 알 수 있다.
+
+\begin{lemma}
+\label{lemma-compute}
+$S$를 스킴이라 하자. $f : U \to X$를 $S$ 위 대수공간의 전사이고
+에탈이며 분리인 사상이라 하자. $p \geq 0$에 대해
+$$
+W_p = U \times_X \ldots \times_X U \setminus \text{모든 대각선}
+$$
+라 두자. 여기서 섬유곱은 $p + 1$개의 인자를 갖는다.
+$S_{p + 1}$은 $W_p$에 자유롭게 작용하며, 그 작용은 $X$ 위의 작용이다.
+$$
+\Hom(K^p, \mathcal{F}) = S_{p + 1}\text{-반불변 원소들 of }
+\mathcal{F}(W_p)
+$$
+가 $\mathcal{F}$에 대해 함자적으로 성립한다. 여기서
+$K^p = \wedge^{p + 1}f_!\underline{\mathbf{Z}}$이다.
+\end{lemma}
+
+\begin{proof}
+$U \to X$가 분리이므로 대각 사상 $U \to U \times_X U$는
+닫힌 몰입이다. $U \to X$가 에탈이므로 대각 사상
+$U \to U \times_X U$는 열린 몰입이다. Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-etale-unramified}와
+\ref{spaces-morphisms-lemma-diagonal-unramified-morphism}를 보라.
+따라서 $W_p$는 $U^{p + 1} = U \times_X \ldots \times_X U$의
+열리고 닫힌 부분공간이다. $S_{p + 1}$의 $W_p$ 위 작용은 자유롭다.
+이는 작용의 고정점들을 제거했기 때문이다. Lemma
+\ref{lemma-product-is-tensor-product}에 의해
+$$
+(f_!\underline{\mathbf{Z}})^{\otimes p + 1} =
+f^{p + 1}_!\underline{\mathbf{Z}} = (W_p \to X)_!\underline{\mathbf{Z}}
+\oplus Rest
+$$
+임을 알 수 있다. 여기서 $f^{p + 1} : U^{p + 1} \to X$는 구조
+사상이다. 기하점 $\overline{x}$를 $X$에서 택해 그 위의 줄기를 살펴보면
+$$
+\left(
+\bigoplus\nolimits_{\overline{u} \mapsto \overline{x}} \mathbf{Z}
+\right)^{\otimes p + 1}
+\longrightarrow
+(W_p \to X)_!\underline{\mathbf{Z}}_{\overline{x}}
+$$
+가 다음 모든 텐서로 생성되는 핵을 갖는 몫사상임을 알 수 있다.
+$1_{\overline{u}_0} \otimes \ldots \otimes 1_{\overline{u}_p}$,
+여기서 $\overline{u}_i = \overline{u}_j$가 어떤 $i \not = j$에 대해
+성립한다. 따라서 몫사상
+$$
+(f_!\underline{\mathbf{Z}})^{\otimes p + 1}
+\longrightarrow
+\wedge^{p + 1}f_!\underline{\mathbf{Z}}
+$$
+은 $(W_p \to X)_!\underline{\mathbf{Z}}$를 통해 인수분해된다.
+즉 다음 사상들을 얻는다.
+$$
+(f_!\underline{\mathbf{Z}})^{\otimes p + 1}
+\longrightarrow
+(W_p \to X)_!\underline{\mathbf{Z}}
+\longrightarrow
+\wedge^{p + 1}f_!\underline{\mathbf{Z}}
+$$
+이 사실만으로 이미 $\Hom(K^p, \mathcal{F})$가 함자적으로 다음 군의
+부분군임이 증명된다.
+$$
+\Hom((W_p \to X)_!\underline{\mathbf{Z}}, \mathcal{F}) = \mathcal{F}(W_p)
+$$
+이를 $S_{p + 1}$-반불변량과 동일시하려면 전사
+$(W_p \to X)_!\underline{\mathbf{Z}}
+\to \wedge^{p + 1}f_!\underline{\mathbf{Z}}$가 최대
+$S_{p + 1}$-반불변 몫임을 증명해야 한다. 다시 말해,
+$\wedge^{p + 1}f_!\underline{\mathbf{Z}}$가
+$(W_p \to X)_!\underline{\mathbf{Z}}$를 다음 국소 단면들로 생성되는
+부분층으로 나눈 몫임을 보여야 한다.
+$s - \text{sign}(\sigma)\sigma(s)$, 여기서 $s$는
+$(W_p \to X)_!\underline{\mathbf{Z}}$의 국소 단면이다.
+이는 줄기에서 확인할 수 있고, 거기서는 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-twist}
+$S$를 스킴이라 하자. $W$를 $S$ 위의 대수공간이라 하자.
+$G$를 $W$에 자유롭게 작용하는 유한군이라 하자.
+$U = W/G$라 두자. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quotient}을 보라.
+$\chi : G \to \{+1, -1\}$를 지표라 하자. 그러면 계수 1인 국소 자유
+$\mathbf{Z}$-가군 층 $\underline{\mathbf{Z}}(\chi)$가 $U_\etale$ 위에
+존재하여, 모든 아벨 층 $\mathcal{F}$가 $U_\etale$ 위에 주어지면
+$$
+H^0(W, \mathcal{F}|_W)^\chi =
+H^0(U, \mathcal{F} \otimes_{\mathbf{Z}} \underline{\mathbf{Z}}(\chi))
+$$
+가 성립한다.
+\end{lemma}
+
+\begin{proof}
+몫사상 $q : W \to U$는 $G$-토서이다. 즉 전사 에탈 사상
+$U' \to U$가 존재하여 $W \times_U U' = \coprod_{g \in G} U'$이고,
+이는 $G$-작용을 갖는 $U'$ 위 공간의 등식이다.
+(실제로 $U' = W$로 택할 수 있다.) 따라서
+$q_*\underline{\mathbf{Z}}$는 유한 국소 자유 $\mathbf{Z}$-가군이며
+$G$가 작용한다. 임의의 기하점 $\overline{u}$가 $U$에 주어지면
+$G$-등변 동형
+$$
+(q_*\underline{\mathbf{Z}})_{\overline{u}}
+= \bigoplus\nolimits_{\overline{w} \mapsto \overline{u}} \mathbf{Z}
+= \bigoplus\nolimits_{g \in G} \mathbf{Z} = \mathbf{Z}[G]
+$$
+을 얻는다. 둘째 $=$에서는 기하점 $\overline{w}_0$를 사용하되
+$\overline{u}$ 위에 놓이게 하고, $g \in G$에 대응하는 직합 성분을
+$g(\overline{w}_0)$에 대응하는 직합 성분으로 보낸다. 다음 등식이
+성립한다.
+$$
+H^0(W, \mathcal{F}|_W) =
+H^0(U, \mathcal{F} \otimes_\mathbf{Z} q_*\underline{\mathbf{Z}})
+$$
+그 이유는 등식 $q_*\mathcal{F}|_W =
+\mathcal{F} \otimes_\mathbf{Z} q_*\underline{\mathbf{Z}}$ 때문이며,
+이는 $U'$로 제한하여 확인할 수 있다.
+다음과 같이 두자.
+$$
+\underline{\mathbf{Z}}(\chi) =
+(q_*\underline{\mathbf{Z}})^\chi \subset
+q_*\underline{\mathbf{Z}}
+$$
+이는 $\chi$에 따라 변환되는 단면들의 부분층이다. 임의의 기하점
+$\overline{u}$가 $U$에 주어지면
+$$
+\underline{\mathbf{Z}}(\chi)_{\overline{u}} =
+\mathbf{Z} \cdot \sum\nolimits_g \chi(g) g
+\subset
+\mathbf{Z}[G] = (q_*\underline{\mathbf{Z}})_{\overline{u}}
+$$
+이다. 따라서 $\underline{\mathbf{Z}}(\chi)$는 계수 1인 국소
+자유 가군이다(더 정확하게는 $U'$로 제한한 뒤 확인해야 한다).
+임의의 $\mathbf{Z}$-가군 $M$에 대해 $\chi$-준불변인 $M[G]$의 원소는
+$m \cdot \sum\nolimits_g \chi(g) g$ 꼴의 원소임을 주목하자.
+따라서 임의의 아벨 층 $\mathcal{F}$가 $U$ 위에 주어지면
+$$
+\left(\mathcal{F} \otimes_\mathbf{Z} q_*\underline{\mathbf{Z}}\right)^\chi
+=
+\mathcal{F} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi)
+$$
+이다. 이는 모든 줄기에서 등식이 성립하기 때문이다. 대역 단면을 취하면
+보조정리의 결론을 얻는다.
+\end{proof}
+
+\noindent
+이제 모든 것을 종합하여 다음의 만족스러운 결과를 얻는다.
+
+\begin{lemma}
+\label{lemma-alternating-spectral-sequence}
+$S$를 스킴이라 하자. $f : U \to X$를 $S$ 위 대수공간의 전사이고
+에탈이며 분리인 사상이라 하자. $p \geq 0$에 대해
+$$
+W_p = U \times_X \ldots \times_X U \setminus \text{모든 대각선}
+$$
+라 두자. 이는 Lemma \ref{lemma-compute}에서처럼 $p + 1$개의 인자를
+갖는다. $\chi_p : S_{p + 1} \to \{+1, -1\}$를 부호 지표라 하자.
+$U_p = W_p/S_{p + 1}$라 두고 $\underline{\mathbf{Z}}(\chi_p)$를
+Lemma \ref{lemma-twist}에서와 같이 잡자. 그러면 Lemma
+\ref{lemma-alternating-cech-to-cohomology}의 스펙트럼 열은 $E_1$-쪽
+$$
+E_1^{p, q} =
+H^q(U_p, \mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))
+$$
+을 가지며 $H^{p + q}(X, \mathcal{F})$로 수렴한다.
+\end{lemma}
+
+\begin{proof}
+$S_{p + 1}$의 $W_p$ 위 작용은 $X$ 위의 작용이므로 실제로 사상
+$U_p \to X$를 얻는다. $W_p \to X$가 에탈이고
+$W_p \to U_p$가 전사 에탈이므로 $U_p \to X$도 에탈이다.
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-etale-local}을 보라.
+따라서 $\textit{Ab}(X_\etale)$의 단사 대상은
+$\textit{Ab}(U_{p, \etale})$의 단사 대상으로 제한된다.
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cohomology-of-open}을 보라. 더욱이 함자
+% P09-ERR-1397
+$\mathcal{G} \mapsto
+\mathcal{G} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))$
+는 $\textit{Ab}(U_p)$의 자기동치이다. 따라서 단사 대상을 단사
+대상으로 보내고 완전하다
+($\underline{\mathbf{Z}}(\chi_p)$가 가역
+$\underline{\mathbf{Z}}$-가군이기 때문이다). 그러므로 단사 분해
+$\mathcal{F} \to \mathcal{I}^\bullet$가 $\textit{Ab}(X_\etale)$에서
+주어지면 복합체
+$$
+\Gamma(U_p,
+\mathcal{I}^0|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))
+\to
+\Gamma(U_p,
+\mathcal{I}^1|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))
+\to
+\Gamma(U_p,
+\mathcal{I}^2|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))
+\to \ldots
+$$
+는 $H^*(U_p,
+\mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))$를
+계산한다. 한편 Lemma \ref{lemma-twist}에 의해 이는 다음 복합체의
+$S_{p + 1}$-반불변량 복합체와 같다.
+$$
+\Gamma(W_p, \mathcal{I}^0) \to
+\Gamma(W_p, \mathcal{I}^1) \to
+\Gamma(W_p, \mathcal{I}^2) \to \ldots
+$$
+Lemma \ref{lemma-compute}에 의해 이는 복합체
+$$
+\Hom(K^p, \mathcal{I}^0) \to
+\Hom(K^p, \mathcal{I}^1) \to
+\Hom(K^p, \mathcal{I}^2) \to \ldots
+$$
+와 같고, 이 복합체는
+$\Ext^*_{\textit{Ab}(X_\etale)}(K^p, \mathcal{F})$를 계산한다.
+모든 결과를 종합하면 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+\section{준연접층의 고차 소멸}
+\label{section-higher-vanishing}
+
+\noindent
+이 절에서는 준콤팩트하고 준분리인 대수공간 $X$가 주어지면 정수
+$n = n(X)$가 존재하여 $X$ 위의 모든 준연접층의 코호몰로지가
+차수 $n$ 너머에서 소멸함을 보인다.
+
+\begin{lemma}
+\label{lemma-quasi-coherent-twist}
+Lemma \ref{lemma-twist}에서와 같은 $S$, $W$, $G$, $U$, $\chi$를
+생각하자. $\mathcal{F}$가 준연접 $\mathcal{O}_U$-가군이면
+$\mathcal{F} \otimes_{\mathbf{Z}} \underline{\mathbf{Z}}(\chi)$도
+그러하다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{O}_U$-가군 구조는 명백하다.
+$\mathcal{F} \otimes_{\mathbf{Z}} \underline{\mathbf{Z}}(\chi)$가
+준연접임을 확인하려면 에탈 국소적으로 확인하면 충분하다.
+따라서 보조정리는 $\underline{\mathbf{Z}}(\chi)$가
+$\underline{\mathbf{Z}}$-가군으로서 유한 국소 자유라는 사실에서 따른다.
+\end{proof}
+
+\noindent
+다음 명제는 $X$가 스킴인 경우에도 흥미롭다. 이는 Cohomology of Schemes,
+Lemma \ref{coherent-lemma-vanishing-nr-affines}의 자연스러운 일반화이다.
+진술에 앞서, 에탈 사상 $f : U \to X$가 아핀 스킴에서 준분리
+대수공간 $X$로 가도록 주어지면 $f$의 섬유는 보편적으로 유계임을
+관찰하자.
+특히 정수 $d$가 존재하여 $|U| \to |X|$의 모든 섬유의 크기가
+$d$ 이하이다. 이는 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-bounded-fibres}의
+$(\eta) \Rightarrow (\delta)$이다.
+
+\begin{proposition}
+\label{proposition-vanishing}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하고,
+$X$가 준콤팩트하고 분리라고 가정하자. $U$를 아핀 스킴이라 하고
+$f : U \to X$를 전사 에탈 사상이라 하자. $d$를
+$|U| \to |X|$의 섬유 크기의 상계라 하자. 그러면 임의의 준연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$에 대해
+$H^q(X, \mathcal{F}) = 0$이고, 이는 $q \geq d$일 때 성립한다.
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{lemma-alternating-spectral-sequence}의 스펙트럼 열을 사용한다.
+$f$는 분리인데 이는 $U$가 분리이기 때문이고, 따라서 보조정리가 적용된다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-compose-after-separated}를 보라.
+$X$가 분리이므로 스킴 $U \times_X \ldots \times_X U$는
+$$
+U \times_{\Spec(\mathbf{Z})} \ldots \times_{\Spec(\mathbf{Z})} U
+$$
+의 닫힌 부분스킴이고, 따라서 아핀이다. 그러므로 $W_p$는 아핀이다.
+따라서 $U_p = W_p/S_{p + 1}$는 Groupoids, Proposition
+\ref{groupoids-proposition-finite-flat-equivalence}에 의해 아핀 스킴이다.
+Section \ref{section-higher-direct-image}의 논의에 따르면
+% P09-ERR-1398
+$W_p$ 위 준연접층의 코호몰로지를 대수공간으로서 계산한 것은
+그 밑의 아핀 스킴 위 대응하는 준연접층의 코호몰로지와 일치한다.
+따라서 양의 차수에서는 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}에 의해 소멸한다.
+Lemma \ref{lemma-quasi-coherent-twist}에 의해 층
+$\mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p)$는
+준연접이다. 따라서
+% P09-ERR-1398
+$H^q(W_p,
+\mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))$는
+$q > 0$일 때 0이다. 정수 $d$의 정의에 의해
+$W_p = \emptyset$이고, 이는 $p \geq d$일 때 성립한다. 따라서
+% P09-ERR-1398
+$H^0(W_p,
+\mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))$도
+$p \geq d$이면 0이다. 이로써 명제가 증명된다.
+\end{proof}
+
+\noindent
+다음 보조정리에서는 준콤팩트하고 준분리인 대수공간이 준연접
+가군에 대해 유한 코호몰로지 차원을 가짐을 보인다. 이 상계를 뒤에서
+고차 직접상에 관한 비슷한 결과를 증명할 때 사용할 것이므로 명시한다.
+
+\begin{lemma}
+\label{lemma-vanishing-quasi-separated}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하고,
+$X$가 준콤팩트하고 준분리라고 가정하자. 그러면 다음을 택할 수 있다.
+\begin{enumerate}
+\item 아핀 스킴 $U$,
+\item 전사 에탈 사상 $f : U \to X$,
+\item 정수 $d$. 이는 $U \to X$의 섬유 차수를 제한한다.
+\item 각 $p = 0, 1, \ldots, d$에 대해 전사 에탈 사상
+$V_p \to U_p$. 그 정의역 $V_p$는 아핀 스킴이고, $U_p$는 Lemma
+\ref{lemma-alternating-spectral-sequence}에서와 같다.
+\item 정수 $d_p$. 이는 $V_p \to U_p$의 섬유 차수를 제한한다.
+\end{enumerate}
+더욱이 (1)--(5)가 주어지면 임의의 준연접 $\mathcal{O}_X$-가군
+$\mathcal{F}$에 대해 $H^q(X, \mathcal{F}) = 0$이고, 이는
+$q \geq \max(d_p + p)$일 때 성립한다.
+\end{lemma}
+
+\begin{proof}
+$X$가 준콤팩트이므로 전사 에탈 사상 $U \to X$를 찾되 $U$가
+아핀이게 할 수 있다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}를 보라.
+Decent Spaces, Lemma \ref{decent-spaces-lemma-bounded-fibres}에 의해
+$f$의 섬유는 보편적으로 유계이므로 $d$를 찾을 수 있다.
+$U_p = W_p/S_{p + 1}$이고
+$W_p \subset U \times_X \ldots \times_X U$는 열리고 닫혀 있다.
+$X$가 준분리이므로 스킴 $W_p$는 준콤팩트이고, 따라서 $U_p$도
+준콤팩트이다. $U$가 분리이므로 스킴 $W_p$는 분리이고,
+따라서 $U_p$는 Spaces, Lemma
+\ref{spaces-lemma-quotient-finite-separated}의 절대적 형태에 의해 분리이다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}에 의해
+% P09-ERR-1399
+사상 $V_p \to W_p$를 찾을 수 있다. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-bounded-fibres}에 의해 정수 $d_p$를 찾을 수 있다.
+
+\medskip\noindent
+이제 스펙트럼 열
+$$
+E_1^{p, q} =
+H^q(U_p, \mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))
+\Rightarrow
+H^{p + q}(X, \mathcal{F})
+$$
+을 사용한다. Lemma \ref{lemma-alternating-spectral-sequence}를 보라.
+정수 $d$의 정의에 의해
+% P09-ERR-1400
+$U_p = 0$이고, 이는 $p \geq d$일 때 성립한다. Proposition
+\ref{proposition-vanishing}과 Lemma
+\ref{lemma-quasi-coherent-twist}에 의해
+$H^q(U_p,
+\mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))$는
+$q \geq d_p$이면 0이고, 이는 $p = 0, \ldots, d$에 대해 성립한다.
+따라서 보조정리가 성립한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{고차 직접상의 소멸}
+\label{section-vanishing-higher-direct-images}
+
+\noindent
+Section \ref{section-higher-vanishing}의 결과를 적용하여 준콤팩트하고
+준분리인 사상에 대해 준연접층의 고차 직접상이 소멸함을 얻는다.
+이는 특정 상황에서 코호몰로지 차수에 관한 내림귀납법을 사용할 수
+있게 하므로 유용하다.
+
+\begin{lemma}
+\label{lemma-vanishing-higher-direct-images}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의
+사상이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $f$는 준콤팩트하고 준분리이다.
+\item $Y$는 준콤팩트이다.
+\end{enumerate}
+그러면 정수 $n(X \to Y)$가 존재하여, 임의의 대수공간 $Y'$,
+임의의 사상 $Y' \to Y$, 그리고 임의의 준연접층 $\mathcal{F}'$가
+$X' = Y' \times_Y X$ 위에 주어지면 고차 직접상
+$R^if'_*\mathcal{F}'$는 $i \geq n(X \to Y)$일 때 0이다.
+\end{lemma}
+
+\begin{proof}
+전사 에탈 사상 $V \to Y$를 택하되 $V$가 아핀 스킴이게 하자.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}를 보라.
+밑변환 $f_V : V \times_Y X \to V$에 대해 결과를 증명했다고 하자.
+그러면 결과는 $f$에 대해서도 성립하며, 이때
+$n(X \to Y) = n(X_V \to V)$로 둘 수 있다. 실제로
+$Y' \to Y$와 $\mathcal{F}'$가 보조정리에서와 같으면
+$R^if'_*\mathcal{F}'|_{V \times_Y Y'}$는
+$R^if'_{V, *}\mathcal{F}'|_{X'_V}$와 같다. 여기서
+$f'_V : X'_V = V \times_Y Y' \times_Y X \to
+V \times_Y Y' = Y'_V$이다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}를 보라.
+따라서 $Y$가 아핀 스킴이라고 가정할 수 있다.
+
+\medskip\noindent
+더욱이 모든 $Y' \to Y$와 $\mathcal{F}'$에 대해 소멸을 증명하려면
+$Y'$가 아핀 스킴인 경우에만 증명하면 충분하다. 이 경우
+$R^if'_*\mathcal{F}'$는 Lemma \ref{lemma-higher-direct-image}에 의해
+준연접이다. 따라서 $H^i(X', \mathcal{F}') = 0$임을 증명하면 충분하다.
+실제로 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-apply-Leray}와 아핀 대수공간 위 준연접층의
+고차 코호몰로지 소멸(Proposition \ref{proposition-vanishing})에 의해
+$H^i(X', \mathcal{F}') = H^0(Y', R^if'_*\mathcal{F}')$이다.
+
+\medskip\noindent
+Lemma \ref{lemma-vanishing-quasi-separated}에서와 같이
+$U \to X$, $d$, $V_p \to U_p$, $d_p$를 택하자. 임의의 아핀 스킴
+$Y'$와 사상 $Y' \to Y$에 대해
+$X' = Y' \times_Y X$, $U' = Y' \times_Y U$,
+$V'_p = Y' \times_Y V_p$로 나타내자. 그러면
+% P09-ERR-1401
+$U' \to X'$, $d' = d$, $V'_p \to U'_p$, $d'_p = d$는
+대수공간 $X'$에 대해 Lemma \ref{lemma-vanishing-quasi-separated}에서와
+같은 선택들의 모음이다(세부사항은 생략한다). 따라서
+$H^i(X', \mathcal{F}') = 0$이며 이는 $i \geq \max(p + d_p)$일 때
+성립한다. 이로써 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-affine-vanishing-higher-direct-images}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 아핀
+사상이라 하자. 그러면 $R^if_*\mathcal{F} = 0$이며, 이는
+$i > 0$이고 $\mathcal{O}_X$-가군 $\mathcal{F}$가 준연접일 때
+성립한다.
+\end{lemma}
+
+\begin{proof}
+대수공간의 아핀 사상은 표현 가능임을 상기하자. 따라서 이는
+(\ref{equation-representable-higher-direct-image})과 Cohomology of Schemes,
+Lemma \ref{coherent-lemma-relative-affine-vanishing}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-affine-cohomology}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 아핀
+사상이라 하자. $\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+그러면 $H^i(X, \mathcal{F}) = H^i(Y, f_*\mathcal{F})$이며,
+이는 모든 $i \geq 0$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-affine-vanishing-higher-direct-images}와 Leray 스펙트럼
+열에서 따른다. Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-apply-Leray}를 보라.
+\end{proof}
+
+
+
+
+
+
+\section{닫힌 부분공간에 지지된 코호몰로지}
+\label{section-cohomology-support}
+
+\noindent
+이 절은 대수공간 위 아벨 층에 대해 Cohomology, Sections
+\ref{cohomology-section-cohomology-support}와
+\ref{cohomology-section-cohomology-support-bis}, 그리고
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-cohomology-support}에 대응하는 절이다.
+
+\medskip\noindent
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하고
+$Z \subset X$를 닫힌 부분공간이라 하자. $\mathcal{F}$를
+$X_\etale$ 위의 아벨 층이라 하자. 다음과 같이 둔다.
+$$
+\Gamma_Z(X, \mathcal{F}) =
+\{s \in \mathcal{F}(X) \mid \text{Supp}(s) \subset Z\}
+$$
+이는 $Z$에 지지를 갖는 단면들의 군이다
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-support}). 이 함자는 왼쪽 완전이지만
+일반적으로 완전하지 않다. 따라서 유도함자
+$$
+R\Gamma_Z(X, -) : D(X_\etale) \longrightarrow D(\textit{Ab})
+$$
+를 얻으며, $Z$에 지지를 갖는 코호몰로지 군을
+$H^q_Z(X, \mathcal{F}) = R^q\Gamma_Z(X, \mathcal{F})$로 정의한다.
+
+\medskip\noindent
+$\mathcal{I}$를 $X_\etale$ 위의 단사 아벨 층이라 하자.
+$U \subset X$를 $Z$의 여집합인 열린 부분공간이라 하자. 그러면 제한 사상
+$\mathcal{I}(X) \to \mathcal{I}(U)$는 전사이며(Cohomology on Sites,
+Lemma
+\ref{sites-cohomology-lemma-restriction-along-monomorphism-surjective}),
+그 핵은 $\Gamma_Z(X, \mathcal{I})$이다. 따라서 즉시
+$K \in D(X_\etale)$에 대해 구별 삼각형
+$$
+R\Gamma_Z(X, K) \to R\Gamma(X, K) \to R\Gamma(U, K) \to R\Gamma_Z(X, K)[1]
+$$
+이 $D(\textit{Ab})$에 존재함을 알 수 있다. 그 결과 긴 완전 코호몰로지 열
+$$
+\ldots \to H^i_Z(X, K) \to H^i(X, K) \to H^i(U, K) \to
+H^{i + 1}_Z(X, K) \to \ldots
+$$
+을 임의의 $K$에 대해 얻는다. 이는 $D(X_\etale)$의 대상이다.
+
+\medskip\noindent
+$\mathcal{F}$가 $X_\etale$ 위의 아벨 층일 때
+{\it $Z$에 지지를 갖는 단면들의 부분층}을 생각할 수 있다.
+이를 $\mathcal{H}_Z(\mathcal{F})$로 나타내고 다음 규칙으로 정의한다.
+$$
+\mathcal{H}_Z(\mathcal{F})(U) =
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset U \times_X Z\}
+$$
+여기서는 Properties of Spaces, Definition
+\ref{spaces-properties-definition-support}의 단면 지지를 사용한다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-push-pull}의 동치를 사용하면
+$\mathcal{H}_Z(\mathcal{F})$를 $Z_\etale$ 위의 아벨 층으로 볼 수 있다.
+따라서 왼쪽 완전이지만 일반적으로 완전하지 않은 함자
+$$
+\textit{Ab}(X_\etale) \longrightarrow \textit{Ab}(Z_\etale),\quad
+\mathcal{F} \longmapsto \mathcal{H}_Z(\mathcal{F})
+$$
+를 얻는다.
+
+\begin{lemma}
+\label{lemma-sections-with-support-acyclic}
+$S$를 스킴이라 하자. $i : Z \to X$를 $S$ 위 대수공간의 닫힌
+몰입이라 하자. $\mathcal{I}$를 $X_\etale$ 위의 단사 아벨 층이라
+하자. 그러면 $\mathcal{H}_Z(\mathcal{I})$는 $Z_\etale$ 위의 단사
+아벨 층이다.
+\end{lemma}
+
+\begin{proof}
+임의의 아벨 층 $\mathcal{G}$가 $Z_\etale$ 위에 주어지면
+% P09-ERR-1402
+$$
+\Hom_Z(\mathcal{G}, \mathcal{H}_Z(\mathcal{F})) =
+\Hom_X(i_*\mathcal{G}, \mathcal{F})
+$$
+임을 관찰하자. 실제로 $i_*\mathcal{G}$의 모든 단면은 $Z$에 지지를
+갖는다. $i_*$는 완전하고(Lemma
+\ref{lemma-finite-higher-direct-image-zero}), $\mathcal{I}$는
+$X_\etale$ 위에서 단사이므로 $\mathcal{H}_Z(\mathcal{I})$가
+$Z_\etale$ 위에서 단사임을 결론짓는다.
+\end{proof}
+
+\noindent
+% P09-ERR-1403
+유도함자를
+$$
+R\mathcal{H}_Z : D(X_\etale) \longrightarrow D(Z_\etale)
+$$
+로 나타내자. $\mathcal{H}^q_Z(\mathcal{F}) =
+R^q\mathcal{H}_Z(\mathcal{F})$로 두면
+$\mathcal{H}^0_Z(\mathcal{F}) = \mathcal{H}_Z(\mathcal{F})$이다.
+위 보조정리에 의해 Grothendieck 스펙트럼 열
+$$
+E_2^{p, q} = H^p(Z, \mathcal{H}^q_Z(\mathcal{F}))
+\Rightarrow H^{p + q}_Z(X, \mathcal{F})
+$$
+을 얻는다.
+
+\begin{lemma}
+\label{lemma-cohomology-with-support-sheaf-on-support}
+$S$를 스킴이라 하자. $i : Z \to X$를 $S$ 위 대수공간의 닫힌
+몰입이라 하자. $\mathcal{G}$를 $Z_\etale$ 위의 단사 아벨 층이라 하자.
+그러면 $\mathcal{H}^p_Z(i_*\mathcal{G}) = 0$이며 이는 $p > 0$일 때
+성립한다.
+\end{lemma}
+
+\begin{proof}
+함자 $i_*$는 완전하고(Lemma
+\ref{lemma-finite-higher-direct-image-zero}) 단사 아벨 층을 단사 아벨
+층으로 보낸다(Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-pushforward-injective-flat}). 따라서 참이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-etale-localization-sheaf-with-support}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 에탈
+사상이라 하자. $Z \subset Y$를 $f^{-1}(Z) \to Z$가 대수공간의
+동형이 되는 닫힌 부분공간이라 하자.
+% P09-ERR-1404
+$\mathcal{F}$를 $X$ 위의 아벨 층이라 하자. 그러면
+$$
+\mathcal{H}^q_Z(\mathcal{F}) = \mathcal{H}^q_{f^{-1}(Z)}(f^{-1}\mathcal{F})
+$$
+가 $Z = f^{-1}(Z)$ 위의 아벨 층으로서 성립하고,
+$H^q_Z(Y, \mathcal{F}) =
+H^q_{f^{-1}(Z)}(X, f^{-1}\mathcal{F})$이다.
+\end{lemma}
+
+\begin{proof}
+$f$가 에탈이므로 $\mathcal{F}$의 단사 분해를 당기면
+$f^{-1}\mathcal{F}$의 단사 분해가 된다. 따라서
+$\mathcal{H}_Z(-)$에 대한 등식만 확인하면 충분하고, 이는 정의에서
+따른다. 지지를 갖는 코호몰로지에 대한 증명도 같다. 몇 가지 세부사항은
+생략한다.
+\end{proof}
+
+\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$T \subset |X|$를 닫힌 부분집합이라 하자.
+% P09-ERR-1405
+$D_T(X_\etale)$로 $D(X_\etale)$의 엄밀 충만 포화 삼각 부분범주 중
+코호몰로지 층들의 지지가 $T$에 포함되는 대상들로 이루어진 것을
+나타낸다.
+
+\begin{lemma}
+\label{lemma-complexes-with-support-on-closed}
+$S$를 스킴이라 하자. $i : Z \to X$를 $S$ 위 대수공간의 닫힌
+몰입이라 하자. 사상
+$Ri_* = i_* : D(Z_\etale) \to D(X_\etale)$는 동치
+$D(Z_\etale) \to D_{|Z|}(X_\etale)$를 유도하며, 그 준역은
+% P09-ERR-1406
+$$
+i^{-1}|_{D_Z(X_\etale)} = R\mathcal{H}_Z|_{D_{|Z|}(X_\etale)}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-1407
+$i^{-1}$와 $i_*$는 완전 함자들의 수반쌍이고, $i^{-1}i_*$는
+아벨 층 위의 항등함자와 동형임을 상기하자. Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-stalk-pullback}와 Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-closed-immersion-push-pull}을 보라.
+따라서 $i_* : D(Z_\etale) \to D_Z(X_\etale)$는 충만충실이고
+$i^{-1}$는 왼쪽 역을 정한다. 다른 한편 $K$가 $D_Z(X_\etale)$의
+대상이라고 하고 수반 사상 $K \to i_*i^{-1}K$를 생각하자.
+$i_*$와 $i^{-1}$의 완전성을 사용하면, 이는 코호몰로지 층 위의
+수반 사상 $H^n(K) \to i_*i^{-1}H^n(K)$를 유도한다.
+이 코호몰로지 층들은 $Z$에 지지를 가지므로 이 수반 사상들은
+동형이다. 따라서 $D(Z_\etale) \to D_Z(X_\etale)$는 동치이다.
+
+\medskip\noindent
+증명을 끝내려면 $R\mathcal{H}_Z(K) = i^{-1}K$임을 보여야 한다.
+여기서 $K$는 $D_Z(X_\etale)$의 대상이다. 방금 증명한 대로
+$K = i_*i^{-1}K$라는 사실을 사용할 수 있다. 그러면
+K-단사 대표 $\mathcal{I}^\bullet$를 $i^{-1}K$에 대해 택할 수 있다.
+$i_*$는 완전 함자 $i^{-1}$의 오른쪽 수반이므로 복합체
+$i_*\mathcal{I}^\bullet$는 K-단사이다(Derived Categories, Lemma
+\ref{derived-lemma-adjoint-preserve-K-injectives}). 따라서 원하는 대로
+$R\mathcal{H}_Z(K)$는
+$\mathcal{H}_Z(i_*\mathcal{I}^\bullet) = \mathcal{I}^\bullet$로 계산된다.
+\end{proof}
+
+
+
+
+
+
+\section{차원 위에서의 소멸}
+\label{section-vanishing-above-dimension}
+
+\noindent
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트하고 준분리인
+대수공간이라 하자. 이 경우 $|X|$는 스펙트럴 공간이다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-quasi-separated-spectral}을 보라.
+더욱이 Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension}에서 정의한 $X$의 차원은
+$|X|$의 Krull 차원과 같다. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-dimension-decent-space}를 보라.
+$X$ 위의 준연접층에 대해 차원보다 높은 차수에서 코호몰로지가
+소멸함을 보이겠다. 이 결과는 체 위 유한형인 준분리 대수공간에
+대해서도 이미 흥미롭다.
+
+\begin{lemma}
+\label{lemma-vanishing-above-dimension}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트하고 준분리인
+대수공간이라 하자. $\dim(X) \leq d$라고 가정하자. 여기서 $d$는
+정수이다.
+% P09-ERR-1408
+$\mathcal{F}$를 준연접층 $\mathcal{F}$라 하자. 이는 $X$ 위의 층이다.
+\begin{enumerate}
+\item $H^q(X, \mathcal{F}) = 0$이며 이는 $q > d$일 때 성립한다.
+\item $H^d(X, \mathcal{F}) \to H^d(U, \mathcal{F})$는 임의의
+준콤팩트 열린 부분공간 $U \subset X$에 대해 전사이다.
+\item $H^q_Z(X, \mathcal{F}) = 0$이며 이는 $q > d$일 때,
+여집합이 준콤팩트인 임의의 닫힌 부분공간 $Z \subset X$에 대해
+성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-dimension-decent-invariant-under-etale}에 의해
+모든 대수공간 $Y$ 중 $X$ 위에서 에탈인 것의 차원은 $\leq d$이다.
+$Y$가 준분리이면 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-dimension-decent-space}에 의해 $Y$의 차원은
+$|Y|$의 Krull 차원과 같다. 또한 $Y$가 스킴이면
+$\mathcal{F}$의 에탈 코호몰로지는 $Y$ 위에서, 닫힌 부분스킴에
+지지를 갖는 $\mathcal{F}$의 에탈 코호몰로지는 각각
+$\mathcal{F}$의 통상 코호몰로지와 그 닫힌 부분스킴에 지지를 갖는
+통상 코호몰로지와 일치한다. Descent, Proposition
+\ref{descent-proposition-same-cohomology-quasi-coherent}와
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomology-with-support-quasi-coherent}를 보라.
+이 사실들은 이후 별도의 언급 없이 사용한다.
+
+\medskip\noindent
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-filter-quasi-compact-quasi-separated}에 의해
+정수 $n$과 열린 부분공간들
+$$
+\emptyset = U_{n + 1} \subset
+U_n \subset U_{n - 1} \subset \ldots \subset U_1 = X
+$$
+이 존재하며 다음 성질을 만족한다. $T_p = U_p \setminus U_{p + 1}$로
+두고 환원된 유도 부분공간 구조를 주면, 준콤팩트 분리 스킴 $V_p$와
+전사 에탈 사상 $f_p : V_p \to U_p$가 존재하여
+$f_p^{-1}(T_p) \to T_p$가 동형이다.
+
+\medskip\noindent
+$U_n = V_n$은 스킴이므로 처음의 관찰과 Cohomology, Proposition
+\ref{cohomology-proposition-cohomological-dimension-spectral}에 의해
+$\mathcal{F}$의 코호몰로지는 $U_n$ 위에서 차수 $> d$에 소멸한다.
+귀납적으로 $H^q(U_{p + 1}, \mathcal{F}|_{U_{p + 1}}) = 0$이며
+이는 $q > d$일 때 성립함을 보였다고 하자.
+$H_{T_p}^q(U_p, \mathcal{F})$가 $q > d$에 대해 0임을 보이면
+$\mathcal{F}$의 코호몰로지가 $U_p$ 위에서 차수 $> d$에 소멸함을
+결론짓기에 충분하다. 그런데 Lemma
+\ref{lemma-etale-localization-sheaf-with-support}에 의해
+$$
+H^q_{T_p}(U_p, \mathcal{F}) = H^q_{f_p^{-1}(T_p)}(V_p, \mathcal{F})
+$$
+이고, $V_p$는 스킴이므로 Cohomology, Proposition
+\ref{cohomology-proposition-cohomological-dimension-spectral}에서 원하는
+소멸을 얻는다. 이로써 (1)을 얻는다.
+
+\medskip\noindent
+(2)를 증명하기 위해 $U \subset X$를 준콤팩트 열린 부분공간이라 하자.
+열린 부분공간 $U' = U \cup U_n$을 생각하고 $Z = U' \setminus U$로
+두자. 그러면 $g : U_n \to U'$는 에탈 사상이고
+$g^{-1}(Z) \to Z$는 동형이다. 따라서 Lemma
+\ref{lemma-etale-localization-sheaf-with-support}에 의해
+$H^q_Z(U', \mathcal{F}) = H^q_Z(U_n, \mathcal{F})$이다. 이는
+차수 $> d$에서 소멸하는데, $U_n$이 스킴이므로 Cohomology, Proposition
+\ref{cohomology-proposition-cohomological-dimension-spectral}을 적용할 수
+있다. 따라서 $H^d(U', \mathcal{F}) \to H^d(U, \mathcal{F})$가
+전사임을 얻는다. 귀납적으로 문제를 $U$가 $U_{p + 1}$을 포함하는
+경우로 환원했다고 하자. 그러면 $U' = U \cup U_p$와
+$Z = U' \setminus U$로 두고, 사상 $f_p : V_p \to U'$를 사용하여
+논증한다. 이 사상은 에탈이고 $f_p^{-1}(Z) \to Z$가 동형이다.
+다시 말해
+$$
+H^q_Z(U', \mathcal{F}) = H^q_{f_p^{-1}(Z)}(V_p, \mathcal{F})
+$$
+임을 다시 얻고, 이는 차수 $> d$에서 소멸한다. 따라서
+$H^d(U', \mathcal{F}) \to H^d(U, \mathcal{F})$가 전사이다.
+마침내 $U_1 = X \subset U$인 단계에 이르며 증명이 끝난다.
+
+\medskip\noindent
+형식적 논증으로 (2)가 (3)을 함의함을 알 수 있다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{코호몰로지와 밑변환, I}
+\label{section-cohomology-and-base-change}
+
+\noindent
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. $\mathcal{F}$를 $X$ 위의 준연접층이라 하자. 더 나아가
+$g : Y' \to Y$가 $S$ 위 대수공간의 사상이라고 하자.
+% P09-ERR-1409
+$X' = X_{Y'} = Y' \times_Y X$로 $X$의 밑변환을 나타내고,
+% P09-ERR-1409
+$f' : X' \to Y'$로 $f$의 밑변환을 나타내자. 또한
+$g' : X' \to X$로 사영을 나타내고
+$\mathcal{F}' = (g')^*\mathcal{F}$로 두자. 상황을 나타내는 도표는
+다음과 같다.
+\begin{equation}
+\label{equation-base-change-diagram}
+\vcenter{
+\xymatrix{
+\mathcal{F}' = (g')^*\mathcal{F} &
+X' \ar[r]_{g'} \ar[d]_{f'} &
+X \ar[d]^f &
+\mathcal{F} \\
+Rf'_*\mathcal{F}' &
+Y' \ar[r]^g &
+Y &
+Rf_*\mathcal{F}
+}
+}
+\end{equation}
+다음은 염두에 둔 밑변환 성질의 가장 단순한 경우이다.
+
+\begin{lemma}
+\label{lemma-affine-base-change}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 아핀
+사상이라 하자. $\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+이 경우 $f_*\mathcal{F} \cong Rf_*\mathcal{F}$는 준연접층이고,
+모든 도표 (\ref{equation-base-change-diagram})에 대해
+$$
+g^*f_*\mathcal{F} = f'_*(g')^*\mathcal{F}.
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+(\ref{equation-representable-higher-direct-image}) 주변의 논의에 의해
+스킴의 아핀 사상인 경우로 환원된다. 이는 Cohomology of Schemes,
+Lemma \ref{coherent-lemma-affine-base-change}에서 다룬다.
+\end{proof}
+
+\begin{lemma}[평탄 밑변환]
+\label{lemma-flat-base-change-cohomology}
+$S$를 스킴이라 하자. 대수공간의 데카르트 도표
+$$
+\xymatrix{
+X' \ar[d]_{f'} \ar[r]_{g'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+를 생각하자. 이는 $S$ 위의 도표이다. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하고,
+그 당김을 $\mathcal{F}' = (g')^*\mathcal{F}$라 하자.
+$g$가 평탄하고 $f$가 준콤팩트하고 준분리라고 가정하자.
+임의의 $i \geq 0$에 대해 다음이 성립한다.
+\begin{enumerate}
+\item Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-base-change-map-flat-case}의 밑변환 사상
+$$
+g^*R^if_*\mathcal{F} \longrightarrow R^if'_*\mathcal{F}',
+$$
+은 동형이다.
+\item $Y = \Spec(A)$이고 $Y' = \Spec(B)$이면
+$H^i(X, \mathcal{F}) \otimes_A B = H^i(X', \mathcal{F}')$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+사상 $g'$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-flat}에 의해 평탄하다.
+$g$와 $g'$의 평탄성은 작은 에탈 환 달린 사이트의 사상들의
+평탄성과 동치이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-morphism-sites}를 보라. 따라서
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-base-change-map-flat-case}을 적용하여
+밑변환 사상
+$$
+g^*R^pf_*\mathcal{F} \longrightarrow R^pf'_*\mathcal{F}'
+$$
+을 얻는다. 이 사상이 동형임을 증명하려면 $Y'$의 에탈 위상에서
+국소적으로 작업할 수 있다. 따라서 $Y$와 $Y'$가 아핀 스킴이라고
+가정해도 된다. $Y = \Spec(A)$와 $Y' = \Spec(B)$라고 쓰자.
+이 경우 실제로 보이려는 것은 사상
+$$
+H^p(X, \mathcal{F}) \otimes_A B \longrightarrow H^p(X_B, \mathcal{F}_B)
+$$
+이 동형이라는 사실이다. 여기서
+$X_B = \Spec(B) \times_{\Spec(A)} X$이고 $\mathcal{F}_B$는
+$\mathcal{F}$를 $X_B$로 당긴 것이다. 다시 말해 (2)를 증명하면 충분하다.
+
+\medskip\noindent
+% P09-ERR-1410
+$A \to B$를 평탄 환 사상으로 고정하고, $X$를 $A$ 위의
+준콤팩트하고 준분리인 대수공간이라 하자.
+$g' : X_B \to X$는 $\Spec(B) \to \Spec(A)$의 밑변환이므로 아핀이다.
+따라서 Lemma \ref{lemma-affine-vanishing-higher-direct-images}에 의해
+고차 직접상 $R^i(g')_*\mathcal{F}_B$는 0이다. 그러므로
+$H^p(X_B, \mathcal{F}_B) = H^p(X, g'_*\mathcal{F}_B)$이다.
+Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-apply-Leray}를 보라.
+더욱이
+$$
+g'_*\mathcal{F}_B = \mathcal{F} \otimes_{\underline{A}} \underline{B}
+$$
+이다. 여기서 $\underline{A}$, $\underline{B}$는 각각 값이 $A$, $B$인
+% P09-ERR-1411
+상수 환 층을 나타낸다. 실제로 우변에서 좌변으로 가는 사상이 있음은
+명백하다. 임의의 아핀 스킴 $U$가 $X$ 위에서 에탈이면
+\begin{align*}
+g'_*\mathcal{F}_B(U) & = \mathcal{F}_B(\Spec(B) \times_{\Spec(A)} U) \\
+& =
+\Gamma(\Spec(B) \times_{\Spec(A)} U,
+(\Spec(B) \times_{\Spec(A)} U \to U)^*\mathcal{F}|_U) \\
+& =
+B \otimes_A \mathcal{F}(U)
+\end{align*}
+이므로 사상은 동형이다. Lazard 정리를 사용하여 $B = \colim M_i$를
+유한 자유 $A$-가군 $M_i$들의 여과 여극한으로 쓰자. Algebra, Theorem
+\ref{algebra-theorem-lazard}를 보라. 다음을 얻는다.
+\begin{align*}
+H^p(X, g'_*\mathcal{F}_B) &
+= H^p(X, \mathcal{F} \otimes_{\underline{A}} \underline{B}) \\
+& = H^p(X, \colim_i \mathcal{F} \otimes_{\underline{A}} \underline{M_i}) \\
+& = \colim_i H^p(X, \mathcal{F} \otimes_{\underline{A}} \underline{M_i}) \\
+& = \colim_i H^p(X, \mathcal{F}) \otimes_A M_i \\
+& = H^p(X, \mathcal{F}) \otimes_A \colim_i M_i \\
+& = H^p(X, \mathcal{F}) \otimes_A B
+\end{align*}
+% P09-ERR-1412
+첫째 등식은 위에서 본 대로
+$g'_*\mathcal{F}_B = \mathcal{F} \otimes_{\underline{A}} \underline{B}$이기
+때문이다. 둘째는 $\otimes$가 여극한과 가환하기 때문이다. 셋째는
+$X$ 위의 코호몰로지가 여극한과 가환하기 때문이다(Lemma
+\ref{lemma-colimits}를 보라). 넷째는 $M_i$가 유한 자유이기 때문이다
+(즉 코호몰로지가 유한 직합과 가환하기 때문이다). 다섯째는
+$\otimes$가 여극한과 가환하기 때문이다. 여섯째는 이 계의 선택에
+의한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-etale-pull-push-split}
+$f : X \to Y$를 대수공간의 준콤팩트하고 분리이며 에탈인 사상이라
+하자. 그러면 임의의 준연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해
+사상 $f^*f_*\mathcal{F} \to \mathcal{F}$는 분할된다.
+\end{lemma}
+
+\begin{proof}
+데카르트 도표
+$$
+\xymatrix{
+X \times_Y X \ar[r]_-p \ar[d]_q & X \ar[d]^f \\
+X \ar[r]^f & Y
+}
+$$
+를 생각하자. Lemma \ref{lemma-affine-base-change}에 의해
+$f^*f_*\mathcal{F} = q_*p^*\mathcal{F}$이다. 사상
+$\Delta : X \to X \times_Y X$는 열린 사상이고
+($Y$ 위에서 에탈인 대수공간 사이의 사상이므로), $f$가 분리이므로
+닫힌 사상이다. 따라서 $p^*\mathcal{F}$는
+$\Delta_*\mathcal{F}$와 $\Delta(X)$의 열리고 닫힌 여집합에 지지를
+갖는 준연접 가군의 직합이다. 사상들을 추적하면 독자는
+$$
+\mathcal{F} = q_*\Delta_*\mathcal{F} \to
+q_*p^*\mathcal{F} = f^*f_*\mathcal{F} \to
+\mathcal{F}
+$$
+가 항등사상임을 확인할 수 있다. 세부사항은 생략한다.
+\end{proof}
+
+
+
+\section{국소 Noether 대수공간 위의 연접 가군}
+\label{section-coherent}
+
+\noindent
+이 절은 Cohomology of Schemes, Section
+\ref{coherent-section-coherent-sheaves}에 대응한다. Modules on Sites,
+Definition \ref{sites-modules-definition-site-local}에서 임의의 환 달린
+토포스 위의 연접 가군을 정의하였다. 이 개념을 사용하여 국소 Noether
+대수공간 위의 연접 가군을 정의한다. 연접 가군을 더 일반적으로
+다룰 수도 있지만 여기서는 그렇게 하지 않는다.
+
+\begin{definition}
+\label{definition-coherent}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 국소 Noether 대수공간이라 하자.
+준연접 가군 $\mathcal{F}$가 $X$ 위에서 {\it 연접}이라는 것은,
+$\mathcal{F}$가 연접 $\mathcal{O}_X$-가군이고 그 가군이 놓인 사이트가
+$X_\etale$임을 뜻한다. 여기서 연접성은 Modules on Sites, Definition
+\ref{sites-modules-definition-site-local}의 의미로 이해한다.
+\end{definition}
+
+\noindent
+이 정의는 국소 Noether 스킴 위 연접 가군에 관한 기존 개념과
+호환된다. Properties of Spaces, Section
+\ref{spaces-properties-section-properties-modules}의 주장 (5)를 보라
+(또는 더 직접적으로 Descent, Lemma
+\ref{descent-lemma-equivalence-quasi-coherent-properties}를 보라).
+따라서 이제부터 $X$가 $S$ 위의 국소 Noether 스킴이면, $X$를
+스킴으로 보아 얻는 연접 가군과 $X$를 대수공간으로 보아 얻는 연접 가군을
+구별하지 않는다. 이는 Properties of Spaces, Section
+\ref{spaces-properties-section-quasi-coherent}에서 논의한 준연접 가군
+범주들의 대응하는 식별과 호환된다.
+
+\medskip\noindent
+이제 다음 보조정리는 국소 Noether 대수공간 위의 연접 가군을
+이해하기 쉬운 방식으로 특징짓는다.
+
+\begin{lemma}
+\label{lemma-coherent-Noetherian}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 국소 Noether 대수공간이라
+하자. $\mathcal{F}$를 $\mathcal{O}_X$-가군이라 하자. 다음 조건들은
+서로 동치이다.
+\begin{enumerate}
+\item $\mathcal{F}$는 연접이다.
+\item $\mathcal{F}$는 유한형 준연접 $\mathcal{O}_X$-가군이다.
+\item $\mathcal{F}$는 유한 표시 $\mathcal{O}_X$-가군이다.
+\item 임의의 에탈 사상 $\varphi : U \to X$에 대해, $U$가 스킴이면
+당김 $\varphi^*\mathcal{F}$는 $U$ 위의 연접 가군이다.
+\item 전사 에탈 사상 $\varphi : U \to X$가 존재하되, $U$는 스킴이고
+당김 $\varphi^*\mathcal{F}$는 $U$ 위의 연접 가군이다.
+\end{enumerate}
+특히 $\mathcal{O}_X$는 연접이고, 모든 가역 $\mathcal{O}_X$-가군은
+연접이며, 더 일반적으로 모든 유한 국소 자유 $\mathcal{O}_X$-가군은
+연접이다.
+\end{lemma}
+
+\begin{proof}
+$X$가 국소 Noether 대수공간이고 $U \to X$가 에탈 사상이면
+$U$도 국소 Noether이다. Properties of Spaces, Section
+\ref{spaces-properties-section-types-properties}를 보라.
+따라서 보조정리는 Properties of Spaces, Section
+\ref{spaces-properties-section-properties-modules}의 (1)--(5)와 국소
+Noether 스킴 위 연접 가군에 관한 대응 결과에서 따른다.
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-coherent-Noetherian}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-coherent-abelian-Noetherian}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 국소 Noether 대수공간이라 하자.
+연접 $\mathcal{O}_X$-가군의 범주는 아벨 범주이다. 더 구체적으로,
+연접 $\mathcal{O}_X$-가군 사이 사상의 핵과 여핵은 연접이다.
+연접층들의 모든 확대도 연접이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 전사 에탈 사상 $f : U \to X$를 택하자. 당김 $f^*$는
+제한 함자와 같으므로 완전 함자이다. Properties of Spaces, Equation
+(\ref{spaces-properties-equation-restrict-modules})을 보라.
+Lemma \ref{lemma-coherent-Noetherian}에 의해 $\mathcal{O}_X$-가군
+$\mathcal{F}$가 연접인지 여부는 $f^*\mathcal{F}$가 연접인지
+확인하여 판정할 수 있다. 따라서 보조정리는 스킴의 경우인
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-coherent-abelian-Noetherian}에서 따른다.
+\end{proof}
+
+\noindent
+연접 가군들은 준연접 $\mathcal{O}_X$-가군 범주의 Serre 부분범주를
+이룬다. 이는 일반적인 환 달린 토포스 위의 가군에는 성립하지 않는다.
+
+\begin{lemma}
+\label{lemma-coherent-Noetherian-quasi-coherent-sub-quotient}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 국소 Noether 대수공간이라
+하자. $\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{F}$의 모든 준연접 부분가군은 연접이고,
+$\mathcal{F}$의 모든 준연접 몫가군도 연접이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 전사 에탈 사상 $f : U \to X$를 택하자. 당김 $f^*$는
+제한 함자와 같으므로 완전 함자이다. Properties of Spaces, Equation
+(\ref{spaces-properties-equation-restrict-modules})을 보라. Lemma
+\ref{lemma-coherent-Noetherian}에 의해 $\mathcal{O}_X$-가군
+$\mathcal{G}$가 연접인지 여부는
+% P09-ERR-1413
+$f^*\mathcal{H}$가 연접인지 확인하여 판정할 수 있다. 따라서
+보조정리는 스킴의 경우인 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-coherent-Noetherian-quasi-coherent-sub-quotient}에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-tensor-hom-coherent}
+$S$를 스킴이라 하자.
+% P09-ERR-1414
+$X$를 $S$ 위의 국소 Noether 대수공간이라 하자.
+$\mathcal{F}$와 $\mathcal{G}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{O}_X$-가군
+$\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{G}$와
+$\SheafHom_{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})$는 연접이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-coherent-Noetherian}을 통해 스킴에 관한 결과에서
+따른다. Cohomology of Schemes, Lemma
+\ref{coherent-lemma-tensor-hom-coherent}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-local-isomorphism}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 국소 Noether 대수공간이라 하자.
+$\mathcal{F}$와 $\mathcal{G}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+$\varphi : \mathcal{G} \to \mathcal{F}$를 $\mathcal{O}_X$-가군의
+준동형이라 하자. $\overline{x}$를 $X$의 기하점이라 하되
+$x \in |X|$ 위에 놓이게 하자.
+\begin{enumerate}
+\item $\mathcal{F}_{\overline{x}} = 0$이면 열린 근방
+$X' \subset X$가 존재하여 $x$를 포함하고 $\mathcal{F}|_{X'} = 0$이다.
+\item $\varphi_{\overline{x}} : \mathcal{G}_{\overline{x}} \to
+\mathcal{F}_{\overline{x}}$가 단사이면 열린 근방
+$X' \subset X$가 존재하여 $x$를 포함하고 $\varphi|_{X'}$가 단사이다.
+\item $\varphi_{\overline{x}} : \mathcal{G}_{\overline{x}} \to
+\mathcal{F}_{\overline{x}}$가 전사이면 열린 근방
+$X' \subset X$가 존재하여 $x$를 포함하고 $\varphi|_{X'}$가 전사이다.
+\item $\varphi_{\overline{x}} : \mathcal{G}_{\overline{x}} \to
+\mathcal{F}_{\overline{x}}$가 전단사이면 열린 근방
+$X' \subset X$가 존재하여 $x$를 포함하고 $\varphi|_{X'}$가 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-1415
+에탈 사상 $\varphi : U \to X$를 택하되 $U$가 스킴이게 하고,
+점 $u \in U$를 택하되 $x$로 보내지게 하자. Properties of Spaces, Lemmas
+\ref{spaces-properties-lemma-stalk-quasi-coherent}와
+\ref{spaces-properties-lemma-describe-etale-local-ring}, 그리고 More on Algebra,
+Lemma \ref{more-algebra-lemma-dumb-properties-henselization}에 의해
+$\varphi_{\overline{x}}$가 단사, 전사 또는 전단사일 필요충분조건은
+% P09-ERR-1416
+$\varphi_u : \varphi^*\mathcal{F}_u \to \varphi^*\mathcal{G}_u$가
+각각의 성질을 갖는 것이다. 따라서 이 보조정리의 스킴 판본을 적용하면
+($U$를 줄여야 할 수도 있다) 사상
+% P09-ERR-1416
+$\varphi^*\mathcal{F} \to \varphi^*\mathcal{G}$가 단사, 전사 또는
+동형임을 알 수 있다. $X' \subset X$를
+$|\varphi|(|U|) \subset |X|$에 대응하는 열린 부분공간이라 하자.
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-open-subspaces}를
+보라. $\{U \to X'\}$는 에탈 위상의 덮개이므로 원하는 대로
+$\varphi|_{X'}$가 단사, 전사 또는 동형임을 결론짓는다. 마지막으로
+(1)은 사상 $\mathcal{F} \to 0$을 살펴보면 (2)에서 따름을 관찰하자.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-coherent-support-closed}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 국소 Noether 대수공간이라 하자.
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+$i : Z \to X$를 $\mathcal{F}$의 스킴론적 지지라 하고,
+$\mathcal{G}$를 준연접 $\mathcal{O}_Z$-가군이라 하되
+$i_*\mathcal{G} = \mathcal{F}$를 만족하게 하자. Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-support}를 보라.
+그러면 $\mathcal{G}$는 연접 $\mathcal{O}_Z$-가군이다.
+\end{lemma}
+
+\begin{proof}
+연접 가군은 특히 유한형이므로 보조정리의 진술은 의미가 있다.
+더욱이 $Z \to X$는 닫힌 몰입이므로 국소 유한형이고, 따라서 $Z$는
+국소 Noether이다. Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-immersion-locally-finite-type}와
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}을 보라.
+마지막으로 $\mathcal{G}$는 유한형이므로 Lemma
+\ref{lemma-coherent-Noetherian}에 의해 연접 $\mathcal{O}_Z$-가군이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-i-star-equivalence}
+$S$를 스킴이라 하자. $i : Z \to X$를 $S$ 위 국소 Noether
+대수공간의 닫힌 몰입이라 하자. $\mathcal{I} \subset \mathcal{O}_X$를
+$Z$를 정의하는 준연접 아이디얼 층이라 하자. 함자 $i_*$는
+연접 $\mathcal{O}_X$-가군 가운데 $\mathcal{I}$에 의해 소멸되는 것들의 범주와
+연접 $\mathcal{O}_Z$-가군의 범주 사이의 동치를 유도한다.
+\end{lemma}
+
+\begin{proof}
+함자는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-i-star-equivalence}에 의해 충만충실이다.
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하되 $\mathcal{I}$에 의해
+소멸되게 하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-i-star-equivalence}에 의해
+$\mathcal{F} = i_*\mathcal{G}$로 쓸 수 있는데, 여기서 $\mathcal{G}$는
+$Z$ 위의 준연접층이다. $\mathcal{G}$가 연접인지
+확인하려면 에탈 국소적으로 작업할 수 있다(Lemma
+\ref{lemma-coherent-Noetherian}). 스킴에 의한 에탈 덮개를 택하면
+$\mathcal{G}$는 스킴의 경우에 의해 연접이다(Cohomology of Schemes,
+Lemma \ref{coherent-lemma-i-star-equivalence}). 따라서 함자는
+충만충실이고 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-pushforward-coherent}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 유한
+사상이라 하고, $Y$는 국소 Noether라고 하자. $\mathcal{F}$를 연접
+$\mathcal{O}_X$-가군이라 하자.
+% P09-ERR-1417
+$f$가 유한이고 $Y$가 국소 Noether라고 가정하자. 그러면
+$R^pf_*\mathcal{F} = 0$가 모든 $p > 0$에 대해 성립하고
+$f_*\mathcal{F}$는 연접이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $V$와 전사 에탈 사상 $V \to Y$를 택하자. 그러면
+$V \times_Y X \to V$는 국소 Noether 스킴의 유한 사상이다.
+(\ref{equation-representable-higher-direct-image})에 의해 스킴의 경우인
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-finite-pushforward-coherent}로 환원된다.
+\end{proof}
+
+
+
+
+
+
+\section{Noether 공간 위의 연접층}
+\label{section-coherent-quasi-compact}
+
+\noindent
+이 절에서는 Noether 대수공간 위 연접층의 몇 가지 성질을 언급한다.
+
+\begin{lemma}
+\label{lemma-acc-coherent}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{F}$의 준연접 부분가군들에 대해서는 오름사슬 조건이 성립한다.
+달리 말해, 준연접 부분가군들의 임의의 열
+$$
+\mathcal{F}_1 \subset \mathcal{F}_2 \subset \ldots \subset \mathcal{F}
+$$
+이 주어지면, $\mathcal{F}_n = \mathcal{F}_{n + 1} = \ldots $인
+$n \geq 0$이 존재한다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $U$와 전사 에탈 사상 $U \to X$를 택하자
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}를 보라).
+그러면 $U$는 Noether 스킴이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}을 보라).
+$\mathcal{F}_n|_U = \mathcal{F}_{n + 1}|_U = \ldots$이면
+$\mathcal{F}_n = \mathcal{F}_{n + 1} = \ldots$이다.
+따라서 결과는 스킴의 경우에서 따른다. Cohomology of Schemes, Lemma
+\ref{coherent-lemma-acc-coherent}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-power-ideal-kills-sheaf}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+$\mathcal{F}$를 $X$ 위의 연접층이라 하자.
+$\mathcal{I} \subset \mathcal{O}_X$를 닫힌 부분공간 $Z \subset X$에
+대응하는 준연접 아이디얼 층이라 하자. 그러면 어떤 $n \geq 0$에 대해
+$\mathcal{I}^n\mathcal{F} = 0$일 필요충분조건은
+$\text{Supp}(\mathcal{F}) \subset Z$가 집합론적으로 성립하는 것이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $U$와 전사 에탈 사상 $U \to X$를 택하자
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}를 보라).
+그러면 $U$는 Noether 스킴이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}을 보라).
+$\mathcal{I}^n\mathcal{F}|_U = 0$일 필요충분조건은
+$\mathcal{I}^n\mathcal{F} = 0$이고, 지지에 관한 조건도 마찬가지임을
+관찰하자. 따라서 결과는 스킴의 경우에서 따른다. Cohomology of Schemes,
+Lemma \ref{coherent-lemma-power-ideal-kills-sheaf}를 보라.
+\end{proof}
+
+\begin{lemma}[Artin--Rees]
+\label{lemma-Artin-Rees}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+$\mathcal{F}$를 $X$ 위의 연접층이라 하자.
+$\mathcal{G} \subset \mathcal{F}$를 준연접 부분층이라 하고,
+$\mathcal{I} \subset \mathcal{O}_X$를 준연접 아이디얼 층이라 하자.
+그러면 어떤 $c \geq 0$이 존재하여 모든 $n \geq c$에 대해
+$$
+\mathcal{I}^{n - c}(\mathcal{I}^c\mathcal{F} \cap \mathcal{G})
+=
+\mathcal{I}^n\mathcal{F} \cap \mathcal{G}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $U$와 전사 에탈 사상 $U \to X$를 택하자
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}를 보라).
+그러면 $U$는 Noether 스킴이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}을 보라).
+보조정리의 등식이 성립할 필요충분조건은 이를 $U$에 제한한 뒤에도
+성립하는 것이다. 따라서 결과는 스킴의 경우에서 따른다. Cohomology of
+Schemes, Lemma \ref{coherent-lemma-Artin-Rees}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-homs-over-open}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하고,
+$\mathcal{G}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{I} \subset \mathcal{O}_X$를 준연접 아이디얼 층이라 하자.
+% P09-ERR-1418
+대응하는 닫힌 부분공간을 $Z \subset X$로 나타내고
+$U = X \setminus Z$로 놓자. 다음 표준 동형이 존재한다.
+$$
+\colim_n \Hom_{\mathcal{O}_X}(\mathcal{I}^n\mathcal{G}, \mathcal{F})
+\longrightarrow
+\Hom_{\mathcal{O}_U}(\mathcal{G}|_U, \mathcal{F}|_U).
+$$
+특히 다음 동형을 얻는다.
+$$
+\colim_n \Hom_{\mathcal{O}_X}(\mathcal{I}^n, \mathcal{F})
+\longrightarrow
+\Gamma(U, \mathcal{F}).
+$$
+\end{lemma}
+
+\begin{proof}
+$W$를 아핀 스킴이라 하고 $W \to X$를 전사 에탈 사상이라 하자
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}를 보라).
+$R = W \times_X W$로 놓자. 그러면 $W$와 $R$은 Noether 스킴이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}을 보라.
+% P09-ERR-1419
+따라서 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-homs-over-open}에 의해 $\mathcal{F}$, $\mathcal{G}$,
+$\mathcal{I}$, $U$, $Z$를 $W$와 $R$에 제한한 것들에 대해 결과가
+성립한다. 이로부터 $X$ 위에서도 결과가 성립함이 형식적으로 따른다.
+\end{proof}
+
+
+
+
+
+
+\section{연접층의 데비사주}
+\label{section-devissage}
+
+\noindent
+이 절은 Cohomology of Schemes, Section
+\ref{coherent-section-devissage}에 대응한다.
+
+\begin{lemma}
+\label{lemma-prepare-filter-support}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+$\mathcal{F}$를 $X$ 위의 연접층이라 하자.
+$\text{Supp}(\mathcal{F}) = Z \cup Z'$이고 $Z$, $Z'$가 닫혔다고 하자.
+그러면 연접층들의 짧은 완전열
+$$
+0 \to \mathcal{G}' \to \mathcal{F} \to \mathcal{G} \to 0
+$$
+이 존재하여 $\text{Supp}(\mathcal{G}') \subset Z'$이고
+$\text{Supp}(\mathcal{G}) \subset Z$이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I} \subset \mathcal{O}_X$를 $Z$ 위의 유도된 축약 닫힌
+부분공간 구조를 정의하는 아이디얼 층이라 하자. Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-reduced-closed-subspace}를 보라.
+부분층 $\mathcal{G}'_n = \mathcal{I}^n\mathcal{F}$와 몫층
+$\mathcal{G}_n = \mathcal{F}/\mathcal{I}^n\mathcal{F}$를 생각하자.
+각 $n$에 대해 짧은 완전열
+$$
+0 \to \mathcal{G}'_n \to \mathcal{F} \to \mathcal{G}_n \to 0
+$$
+을 얻는다. 모든 기하점 $\overline{x}$에 대해, 그 점이 $Z' \setminus Z$에 놓이면
+$\mathcal{I}_{\overline{x}} = \mathcal{O}_{X, \overline{x}}$이고, 따라서
+$\mathcal{G}_{n, \overline{x}} = 0$이다. 그러므로
+$\text{Supp}(\mathcal{G}_n) \subset Z$임을 알 수 있다.
+$X \setminus Z'$가 Noether 대수공간임을 관찰하자. 따라서 Lemma
+\ref{lemma-power-ideal-kills-sheaf}에 의해 어떤 $n$이 존재하여
+$\mathcal{G}'_n|_{X \setminus Z'} =
+\mathcal{I}^n\mathcal{F}|_{X \setminus Z'} = 0$이다.
+그런 $n$에 대해 $\text{Supp}(\mathcal{G}'_n) \subset Z'$임을 알 수 있다.
+따라서 $\mathcal{G}' = \mathcal{G}'_n$과
+$\mathcal{G} = \mathcal{G}_n$으로 놓으면 된다.
+\end{proof}
+
+\noindent
+이하에서는 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-support}에서 정의한
+유한형 가군의 스킴론적 지지를 자유롭게 사용한다.
+
+\begin{lemma}
+\label{lemma-prepare-filter-irreducible}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+$\mathcal{F}$를 $X$ 위의 연접층이라 하자. $\mathcal{F}$의 스킴론적
+지지가 축약 부분공간 $Z \subset X$이고 $|Z|$가 기약이라고 하자.
+그러면 정수 $r > 0$, 영이 아닌 아이디얼 층
+$\mathcal{I} \subset \mathcal{O}_Z$, 그리고 연접층의 단사 사상
+$$
+i_*\left(\mathcal{I}^{\oplus r}\right) \to \mathcal{F}
+$$
+이 존재하며, 그 여핵은 $Z$의 진닫힌 부분공간에 지지를 갖는다.
+\end{lemma}
+
+\begin{proof}
+가정에 의해 연접 $\mathcal{O}_Z$-가군 $\mathcal{G}$가 존재하며,
+그 지지는 $Z$이고 $\mathcal{F} \cong i_*\mathcal{G}$를 만족한다. Lemma
+\ref{lemma-coherent-support-closed}를 보라. 따라서 $Z = X$이고
+$i = \text{id}$인 경우를 증명하면 충분하다.
+
+\medskip\noindent
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}에
+의해 스킴인 조밀 열린 부분공간 $U \subset X$가 존재한다. $U$는
+Noether 정역 스킴임을 관찰하자. $U$를 줄여
+$\mathcal{F}|_U \cong \mathcal{O}_U^{\oplus r}$이라고 가정할 수 있다
+(예를 들어 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-prepare-filter-irreducible} 또는 직접적인 대수 논증을
+사용한다). $\mathcal{I} \subset \mathcal{O}_X$를 그 결합 닫힌
+부분공간이 $U$의 $X$ 안에서의 여집합인 준연접 아이디얼 층이라 하자
+(예를 들어 Properties of Spaces, Section
+\ref{spaces-properties-section-reduced}를 보라).
+Lemma \ref{lemma-homs-over-open}에 의해 어떤 $n \geq 0$과 사상
+$$
+\mathcal{I}^n(\mathcal{O}_X^{\oplus r}) \to \mathcal{F}
+$$
+가 존재하며, 이 사상은 $U$ 위에서 우리의 동형을 되찾는다.
+$\mathcal{I}^n(\mathcal{O}_X^{\oplus r}) = (\mathcal{I}^n)^{\oplus r}$이므로
+보조정리에 나오는 형태의 사상을 얻는다. 이 사상은 단사이다. 실제로
+% P09-ERR-1420
+영이 아닌 단면 $\sigma$가 $\mathcal{I}^{\oplus r}$의 단면이라 하자.
+이 층은 스킴 $W$ 위에 있고 그 스킴은 $X$ 위에서 에탈이다.
+$X$와 따라서 $W$가 축약이므로 $\sigma$의
+지지는 $W$의 비어 있지 않은 열린 부분집합을 포함한다. 그러나
+$(\mathcal{I}^n)^{\oplus r} \to \mathcal{F}$의 핵은 조밀 열린
+부분집합 위에서 0이므로, $\sigma$는 그 핵의 단면일 수 없다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-coherent-filter}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+$\mathcal{F}$를 $X$ 위의 연접층이라 하자. 연접 부분층들에 의한 여과
+$$
+0 = \mathcal{F}_0 \subset \mathcal{F}_1 \subset
+\ldots \subset \mathcal{F}_m = \mathcal{F}
+$$
+가 존재하며, 각 $j = 1, \ldots, m$에 대해 축약 닫힌 부분공간
+$Z_j \subset X$가 존재하되 $|Z_j|$가 기약이고, 아이디얼 층
+$\mathcal{I}_j \subset \mathcal{O}_{Z_j}$가 존재하여
+$$
+\mathcal{F}_j/\mathcal{F}_{j - 1}
+\cong (Z_j \to X)_* \mathcal{I}_j
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+모음
+$$
+\mathcal{T} =
+\left\{
+\begin{matrix}
+T \subset |X|
+\text{는 닫혀 있고, 보조정리가 성립하지 않으면서}
+\mathcal{F} \\
+\text{를 연접층으로 갖고 }
+\text{Supp}(\mathcal{F}) = T
+\text{인 경우}
+\end{matrix}
+\right\}
+$$
+을 생각하자. 우리는 $\mathcal{T}$가 공집합임을 보이려 한다. 그렇지
+않다면 $|X|$가 Noether이므로(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-topology}를 보라) 최소 원소
+$T \in \mathcal{T}$를 택할 수 있다. 이는 연접층 $\mathcal{F}$가
+$X$ 위에 존재하고 그 지지가 $T$이며 보조정리가 성립하지 않음을 뜻한다.
+분명히 $T \not = \emptyset$이다. 실제로 지지가 공집합인 유일한 층은
+영층이고 그 층에 대해서는 보조정리가 ($m = 0$으로) 성립한다.
+
+\medskip\noindent
+$T$가 기약이 아니면 $T = Z_1 \cup Z_2$로 쓸 수 있으며,
+$Z_1, Z_2$는 닫혀 있고 $T$보다 진정으로 작다.
+그러면 Lemma \ref{lemma-prepare-filter-support}를 적용하여 연접층의
+짧은 완전열
+$$
+0 \to
+\mathcal{G}_1 \to
+\mathcal{F} \to
+\mathcal{G}_2 \to 0
+$$
+을 얻는데, 여기서 $\text{Supp}(\mathcal{G}_i) \subset Z_i$이다.
+$T$의 최소성에 의해 각 $\mathcal{G}_i$는 보조정리의 진술에 나오는
+여과를 갖는다. $\mathcal{F}$ 위의 유도된 여과를 생각하면 모순이다.
+따라서 $T$가 기약이라고 결론짓는다.
+
+\medskip\noindent
+$T$가 기약이라고 하자. $\mathcal{J}$를 $T$ 위의 유도된 축약 닫힌
+부분공간 구조를 정의하는 아이디얼 층이라 하자. Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-reduced-closed-subspace}를 보라.
+Lemma \ref{lemma-power-ideal-kills-sheaf}에 의해 어떤 $n \geq 0$이
+존재하여 $\mathcal{J}^n\mathcal{F} = 0$임을 알 수 있다. 따라서 여과
+$$
+% P09-ERR-1421
+0 = \mathcal{I}^n\mathcal{F} \subset \mathcal{I}^{n - 1}\mathcal{F}
+\subset \ldots \subset \mathcal{I}\mathcal{F} \subset \mathcal{F}
+$$
+를 얻으며, 그 각 연속 부분몫은 $\mathcal{J}$에 의해 소멸된다.
+따라서 이 부분몫들이 각각 보조정리의 진술에 나오는 여과를 가지면
+$\mathcal{F}$도 그런 여과를 갖는다. 달리 말해 $\mathcal{J}$가
+$\mathcal{F}$를 소멸시킨다고 가정할 수 있다.
+
+\medskip\noindent
+$T$가 기약이고 $\mathcal{J}\mathcal{F} = 0$이며 $\mathcal{J}$는
+위와 같다고 하자. 그러면 $\mathcal{F}$의 스킴론적 지지는 $T$이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-i-star-equivalence}를 보라. 따라서 Lemma
+\ref{lemma-prepare-filter-irreducible}를 적용할 수 있다. 이로써 짧은 완전열
+$$
+0 \to
+i_*(\mathcal{I}^{\oplus r}) \to
+\mathcal{F} \to
+\mathcal{Q} \to 0
+$$
+을 얻으며, $\mathcal{Q}$의 지지는 $T$의 진닫힌 부분집합이다.
+따라서 $\mathcal{Q}$가 원하는 형태의 여과를 가짐을 $T$의 최소성에서
+알 수 있다. 그러면 분명히 $\mathcal{F}$도 그런 여과를 가지며,
+이것이 마지막 모순이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-property-initial}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+$\mathcal{P}$를 $X$ 위 연접층들의 한 성질이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item 연접층들의 임의의 짧은 완전열
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F} \to \mathcal{F}_2 \to 0
+$$
+에 대해 $\mathcal{F}_i$, $i = 1, 2$가 성질 $\mathcal{P}$를 가지면
+$\mathcal{F}$도 그 성질을 갖는다.
+\item 모든 축약 닫힌 부분공간 $Z \subset X$에 대해, $|Z|$가 기약이면,
+모든 준연접 아이디얼 층 $\mathcal{I} \subset \mathcal{O}_Z$에 대해
+% P09-ERR-1422
+$\mathcal{P}$가 $i_*\mathcal{I}$에 대해 성립한다.
+\end{enumerate}
+그러면 성질 $\mathcal{P}$는 $X$ 위의 모든 연접층에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+먼저, $\mathcal{F}$가 연접 부분층들에 의한 여과
+$$
+0 = \mathcal{F}_0 \subset \mathcal{F}_1 \subset
+\ldots \subset \mathcal{F}_m = \mathcal{F}
+$$
+를 갖고 각 $\mathcal{F}_i/\mathcal{F}_{i - 1}$가 성질 $\mathcal{P}$를
+가지면 $\mathcal{F}$도 그 성질을 가짐을 관찰하자. 이는
+$\mathcal{P}$에 대한 성질 (1)에서 따른다. 한편 Lemma
+\ref{lemma-coherent-filter}에 의해 임의의 $\mathcal{F}$를 (2)에 나오는
+형태의 연속 부분몫들로 여과할 수 있다. 따라서 보조정리가 따른다.
+\end{proof}
+
+\noindent
+위 보조정리의 더 유용한 변형은 다음과 같다.
+
+\begin{lemma}
+\label{lemma-property-higher-rank-cohomological}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+$\mathcal{P}$를 $X$ 위 연접층들의 한 성질이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item 연접층들의 임의의 짧은 완전열
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F} \to \mathcal{F}_2 \to 0
+$$
+에 대해 $\mathcal{F}_i$, $i = 1, 2$가 성질 $\mathcal{P}$를 가지면
+$\mathcal{F}$도 그 성질을 갖는다.
+\item $\mathcal{P}$가 $\mathcal{F}^{\oplus r}$에 대해 성립하는
+$r \geq 1$이 존재하면 $\mathcal{F}$에 대해서도
+성립한다.
+\item 모든 축약 닫힌 부분공간 $i : Z \to X$에 대해, $|Z|$가 기약이면
+연접층 $\mathcal{G}$가 존재하고 그 층은 $Z$ 위에 놓이며 다음을 만족한다.
+\begin{enumerate}
+\item $\text{Supp}(\mathcal{G}) = Z$이다.
+\item 영이 아닌 모든 준연접 아이디얼 층
+$\mathcal{I} \subset \mathcal{O}_Z$에 대해 준연접 부분층
+$\mathcal{G}' \subset \mathcal{I}\mathcal{G}$가 존재하여,
+$\text{Supp}(\mathcal{G}/\mathcal{G}')$는 $|Z|$ 안에서 진닫혀 있고
+$\mathcal{P}$가 $i_*\mathcal{G}'$에 대해 성립한다.
+\end{enumerate}
+\end{enumerate}
+그러면 성질 $\mathcal{P}$는 $X$ 위의 모든 연접층에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+모음
+$$
+\mathcal{T} =
+\left\{
+\begin{matrix}
+T \subset |X|
+\text{는 비어 있지 않고 닫혀 있으며 어떤 연접층이 존재하여} \\
+\mathcal{F}
+\text{에 대해 }
+\text{Supp}(\mathcal{F}) = T
+\text{이고 보조정리가 성립하지 않는 경우}
+\end{matrix}
+\right\}
+$$
+을 생각하자. 우리는 $\mathcal{T}$가 공집합임을 보이려 한다. 그렇지
+않다면 $|X|$가 Noether이므로(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-topology}를 보라) 최소 원소
+$T \in \mathcal{T}$를 택할 수 있다. 이는 연접층 $\mathcal{F}$가
+$X$ 위에 존재하고, 그 지지가 $T$이며 보조정리가 성립하지 않음을 뜻한다.
+
+\medskip\noindent
+$T$가 기약이 아니면 $T = Z_1 \cup Z_2$로 쓸 수 있으며,
+$Z_1, Z_2$는 닫혀 있고 $T$보다 진정으로 작다. 그러면 Lemma
+\ref{lemma-prepare-filter-support}를 적용하여 연접층들의 짧은 완전열
+$$
+0 \to
+\mathcal{G}_1 \to
+\mathcal{F} \to
+\mathcal{G}_2 \to 0
+$$
+을 얻으며, 여기서 $\text{Supp}(\mathcal{G}_i) \subset Z_i$이다.
+$T$의 최소성에 의해 각 $\mathcal{G}_i$는 $\mathcal{P}$를 갖는다.
+따라서 (1)에 의해 $\mathcal{F}$는 성질 $\mathcal{P}$를 가지며, 이는
+모순이다.
+
+\medskip\noindent
+$T$가 기약이라고 하자. $\mathcal{J}$를 $T$ 위의 유도된 축약 닫힌
+부분공간 구조를 정의하는 아이디얼 층이라 하자. Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-reduced-closed-subspace}를 보라.
+Lemma \ref{lemma-power-ideal-kills-sheaf}에 의해 어떤 $n \geq 0$이
+존재하여 $\mathcal{J}^n\mathcal{F} = 0$임을 알 수 있다. 따라서 여과
+$$
+0 = \mathcal{J}^n\mathcal{F} \subset \mathcal{J}^{n - 1}\mathcal{F}
+\subset \ldots \subset \mathcal{J}\mathcal{F} \subset \mathcal{F}
+$$
+를 얻으며, 그 각 연속 부분몫은 $\mathcal{J}$에 의해 소멸된다.
+따라서 이 부분몫들이 각각 보조정리의 진술에 나오는 여과를 가지면
+$\mathcal{F}$도 (1)에 의해 그런 여과를 갖는다. 달리 말해
+$\mathcal{J}$가 $\mathcal{F}$를 소멸시킨다고 가정할 수 있다.
+
+\medskip\noindent
+$T$가 기약이고 $\mathcal{J}\mathcal{F} = 0$이며 $\mathcal{J}$는
+위와 같다고 하자.
+% P09-ERR-1427
+닫힌 부분공간을 $i : Z \to X$로 나타내되, $\mathcal{J}$에 대응하게 하자.
+그러면 $\mathcal{F} = i_*\mathcal{H}$이고, 여기서 연접
+$\mathcal{O}_Z$-가군을 $\mathcal{H}$로 나타낸다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-i-star-equivalence}와 Lemma
+\ref{lemma-coherent-support-closed}를 보라.
+$\mathcal{G}$를 (3)(a)와 (3)(b)를 만족하는 $Z$ 위의 연접층이라 하자.
+Lemma \ref{lemma-prepare-filter-irreducible}를 적용하여 단사 사상
+$$
+\mathcal{I}_1^{\oplus r_1} \to \mathcal{H}
+\quad\text{및}\quad
+\mathcal{I}_2^{\oplus r_2} \to \mathcal{G}
+$$
+을 얻는데, 여핵들의 지지는 $Z$ 안에서 진닫혀 있다. 따라서
+% P09-ERR-1423
+비어 있지 않은 열린 부분집합 $V \subset Z$를 찾아
+$$
+\mathcal{H}^{\oplus r_2}_V \cong \mathcal{G}^{\oplus r_1}_V
+$$
+가 되게 할 수 있다.
+% P09-ERR-1424
+$\mathcal{I} \subset \mathcal{O}_Z$를 $Z \setminus V$를 도려내는
+준연접 아이디얼 층이라 하자. 그러면 Lemma
+\ref{lemma-homs-over-open}에 의해 사상
+$$
+\mathcal{I}^n\mathcal{G}^{\oplus r_1} \longrightarrow \mathcal{H}^{\oplus r_2}
+$$
+을 얻으며, 이는 $V$ 위에서 동형이다. 그 핵은 $Z \setminus V$에
+지지를 가지므로 $\mathcal{I}$의 어떤 거듭제곱에 의해 소멸된다.
+Lemma \ref{lemma-power-ideal-kills-sheaf}를 보라. 따라서 $n$을 늘린 뒤
+표시한 사상이 단사라고 가정할 수 있다. Lemma
+\ref{lemma-Artin-Rees}를 보라. (3)(b)를 적용하면
+$\mathcal{G}' \subset \mathcal{I}^n\mathcal{G}$를 찾아
+$$
+(i_*\mathcal{G}')^{\oplus r_1} \longrightarrow
+i_*\mathcal{H}^{\oplus r_2} = \mathcal{F}^{\oplus r_2}
+$$
+가 단사이고 그 여핵이 $Z$의 진닫힌 부분집합에 지지를 갖게 할 수 있으며,
+성질 $\mathcal{P}$가 $i_*\mathcal{G}'$에 대해 성립하게 할 수 있다.
+(1)에 의해 성질 $\mathcal{P}$는 $(i_*\mathcal{G}')^{\oplus r_1}$에 대해
+성립한다. (1)과 $T = |Z|$의 최소성에 의해 성질 $\mathcal{P}$는
+$\mathcal{F}^{\oplus r_2}$에 대해 성립한다. 마지막으로 (2)에 의해
+성질 $\mathcal{P}$는 $\mathcal{F}$에 대해 성립하며, 이것이 원하는
+모순이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-property-higher-rank-cohomological-variant}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+$\mathcal{P}$를 $X$ 위 연접층들의 한 성질이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $X$ 위 연접층들의 임의의 짧은 완전열에서 세 층 가운데 두 층이
+성질 $\mathcal{P}$를 가지면 나머지 한 층도 그 성질을 갖는다.
+\item $\mathcal{P}$가 $\mathcal{F}^{\oplus r}$에 대해 성립하는
+$r \geq 1$이 존재하면 $\mathcal{F}$에 대해서도 성립한다.
+\item 모든 축약 닫힌 부분공간 $i : Z \to X$에 대해 $|Z|$가 기약이면,
+연접층 $\mathcal{G}$가 $X$ 위에 존재하고 그 스킴론적 지지가 $Z$이며
+$\mathcal{P}$가 $\mathcal{G}$에 대해 성립한다.
+\end{enumerate}
+그러면 성질 $\mathcal{P}$는 $X$ 위의 모든 연접층에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-property-initial}의 조건 (1)과 (2)가 성립함을 보이겠다.
+조건 (1)에 대해서는 명백하다. (2)가 성립함을 보이기 위해 모음
+$$
+\mathcal{T} =
+\left\{
+\begin{matrix}
+i : Z \to X \text{는 축약 닫힌 부분공간이고 }|Z|\text{는 기약이며}\\
+\text{이면서 }i_*\mathcal{I}\text{가 }\mathcal{P}
+\text{를 갖지 않는 어떤 준연접 }\mathcal{I} \subset \mathcal{O}_Z
+\end{matrix}
+\right\}
+$$
+를 생각하자. $\mathcal{T}$가 공집합이 아니면 $X$가 Noether이므로
+$i : Z \to X$를 찾을 수 있고, 이 원소는 $\mathcal{T}$ 안에서 최소이다. 이것이
+모순을 일으킴을 보이겠다.
+
+\medskip\noindent
+% P09-ERR-1425
+$\mathcal{G}$를 가정 (3)에서 존재한다고 한, 스킴론적 지지가 $Z$인
+층이라 하자. Lemma \ref{lemma-prepare-filter-irreducible}에 나오는 것처럼
+$\varphi : i_*\mathcal{I}^{\oplus r} \to \mathcal{G}$를 택하자.
+Lemma \ref{lemma-coherent-filter}에 나오는 형태의 여과
+$$
+0 = \mathcal{F}_0 \subset \mathcal{F}_1 \subset
+\ldots \subset \mathcal{F}_m = \Coker(\varphi)
+$$
+를 택하자. $Z$의 최소성과 가정 (1)에 의해
+$\Coker(\varphi)$는 성질 $\mathcal{P}$를 갖는다. $\varphi$가
+단사이므로, 가정 (1)을 한 번 더 사용하면
+$i_*\mathcal{I}^{\oplus r}$가 성질 $\mathcal{P}$를 가짐을 결론짓는다.
+가정 (2)를 사용하면 $i_*\mathcal{I}$가 성질 $\mathcal{P}$를 가짐을
+결론짓는다.
+
+\medskip\noindent
+마지막으로 $\mathcal{J} \subset \mathcal{O}_Z$가 두 번째 준연접
+아이디얼 층이면 $\mathcal{K} = \mathcal{I} \cap \mathcal{J}$로 놓고
+짧은 완전열
+$$
+0 \to \mathcal{K} \to \mathcal{I} \to \mathcal{I}/\mathcal{K} \to 0
+\quad
+\text{및}
+\quad
+0 \to \mathcal{K} \to \mathcal{J} \to \mathcal{J}/\mathcal{K} \to 0
+$$
+을 생각하자. 위와 같이 논증하면서 $Z$의 최소성을 사용하면
+% P09-ERR-1426
+$i_*\mathcal{I}/\mathcal{K}$와 $i_*\mathcal{J}/\mathcal{K}$가
+$\mathcal{P}$를 만족함을 알 수 있다. 따라서 가정 (1)에 의해
+$i_*\mathcal{K}$가, 이어서 $i_*\mathcal{J}$가 $\mathcal{P}$를
+만족한다고 결론짓는다. 달리 말해 $Z$는 $\mathcal{T}$의 원소가 아니며,
+이것이 원하는 모순이다.
+\end{proof}
+
+
+
+
+
+
+\section{연접 가군의 극한}
+\label{section-limits}
+
+\noindent
+(국소 Noether 대수공간 위) 연접 가군들의 여극한은 일반적으로 연접이
+아니다. 그러나 대수공간 위 준연접 가군들의 임의의 여극한은 준연접이므로
+그 여극한은 준연접이다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-properties-quasi-coherent}를 보라. 반대로
+대수공간이 Noether이면 모든 준연접 가군은 연접 가군들의 여과 여극한이다.
+
+\begin{lemma}
+\label{lemma-directed-colimit-coherent}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+모든 준연접 $\mathcal{O}_X$-가군은 자신의 연접 부분가군들의 여과
+여극한이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{G}, \mathcal{H} \subset \mathcal{F}$가 연접
+$\mathcal{O}_X$-부분가군이면
+$\mathcal{G} \oplus \mathcal{H} \to \mathcal{F}$의 상도 두 가군을
+모두 포함하는 연접 $\mathcal{O}_X$-부분가군이다(Lemmas
+\ref{lemma-coherent-abelian-Noetherian}와
+\ref{lemma-coherent-Noetherian-quasi-coherent-sub-quotient}를 보라).
+이로써 이 계가 유향임을 알 수 있다. 따라서 이제 $\mathcal{F}$가
+연접 가군들의 여과 여극한으로 쓰임을 보이면 충분하다. 그렇게 쓰고 나면
+그 가군들의 $\mathcal{F}$ 안의 상을 취하여 충분히 많은 부분가군이
+있다고 결론지을 수 있기 때문이다.
+
+\medskip\noindent
+$U$를 아핀 스킴이라 하고 $U \to X$를 전사 에탈 사상이라 하자.
+$R = U \times_X U$로 놓아 통상대로 $X = U/R$이 되게 하자.
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-quasi-coherent}에 의해
+$\QCoh(\mathcal{O}_X) = \QCoh(U, R, s, t, c)$임을 알 수 있다.
+따라서 $\QCoh(U, R, s, t, c)$에 대해 대응하는 명제를 보이는 것으로
+환원된다. 그러므로 결과는 더 일반적인 Groupoids, Lemma
+\ref{groupoids-lemma-colimit-coherent}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-direct-colimit-finite-presentation}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 아핀
+사상이라 하고 $Y$가 Noether라고 하자. 그러면 모든 준연접
+$\mathcal{O}_X$-가군은 유한 표시 $\mathcal{O}_X$-가군들의 여과
+여극한이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$f_*\mathcal{F} = \colim \mathcal{H}_i$로 쓰되, $\mathcal{H}_i$가 연접
+$\mathcal{O}_Y$-가군이게 하자. Lemma
+\ref{lemma-directed-colimit-coherent}를 보라. Lemma
+\ref{lemma-coherent-Noetherian}에 의해 가군 $\mathcal{H}_i$는 유한 표시
+$\mathcal{O}_Y$-가군이다. 따라서 $f^*\mathcal{H}_i$는 유한 표시
+$\mathcal{O}_X$-가군이다. Properties of Spaces, Section
+\ref{spaces-properties-section-properties-modules}를 보라. 사상
+$$
+\colim f^*\mathcal{H}_i = f^*f_*\mathcal{F} \to \mathcal{F}
+$$
+이 전사라고 주장한다. $f$가 아핀이라고 가정했기 때문이다.
+% P09-ERR-1428
+즉, 스킴 $V$와 전사 에탈 사상 $V \to Y$를 택하자.
+$U = X \times_Y V$로 놓자. 그러면 $U$는 스킴이고,
+$f' : U \to V$는 아핀이며, $U \to X$는 전사 에탈이다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}에 의해
+$f'_*(\mathcal{F}|_U) = f_*\mathcal{F}|_V$이고 당김에 대해서도 마찬가지임을
+알 수 있다. 따라서 $f^*f_*\mathcal{F} \to \mathcal{F}$를 $U$에
+제한한 사상은
+$$
+% P09-ERR-1429
+f^*f_*\mathcal{F}|_U = (f')^*(f_*\mathcal{F})|_V) =
+(f')^*f'_*(\mathcal{F}|_U) \to \mathcal{F}|_U
+$$
+이다. 이는 $f'$가 스킴의 아핀 사상이므로 전사이다. 따라서 주장이
+성립한다.
+
+\medskip\noindent
+$X$ 위의 모든 준연접 가군은 유한 표시 가군들의 여과 여극한의
+몫임을 결론짓는다. 특히 $\mathcal{F}$는 사상
+$$
+\colim_{j \in J} \mathcal{G}_j \longrightarrow \colim_{i \in I} \mathcal{H}_i
+$$
+의 여핵으로 쓸 수 있으며, $\mathcal{G}_j$와 $\mathcal{H}_i$는 유한
+표시이다. 모든 $j \in I$에 대해 어떤 $i \in I$와 준동형
+% P09-ERR-1430
+$\alpha : \mathcal{G}_j \to \mathcal{H}_i$가 존재하여 도표
+$$
+\xymatrix{
+\mathcal{G}_j \ar[r]_\alpha \ar[d] & \mathcal{H}_i \ar[d] \\
+\colim_{j \in J} \mathcal{G}_j \ar[r] &
+\colim_{i \in I} \mathcal{H}_i
+}
+$$
+가 가환함을 관찰하자. Lemma
+\ref{lemma-finite-presentation-quasi-compact-colimit}를 보라.
+이 상황에서 $\Coker(\alpha)$는 유한 표시 $\mathcal{O}_X$-가군이고
+사상 $\Coker(\alpha) \to \mathcal{F}$가 함께 주어진다. 집합 $K$를
+생각하자. 이것은 위와 같은 삼중항 $(i, j, \alpha)$들의 집합이다.
+$(i, j, \alpha) \leq (i', j', \alpha')$라는 것은
+$i \leq i'$, $j \leq j'$이고 도표
+$$
+\xymatrix{
+\mathcal{G}_j \ar[r]_\alpha \ar[d] & \mathcal{H}_i \ar[d] \\
+\mathcal{G}_{j'} \ar[r]^{\alpha'} &
+\mathcal{H}_{i'}
+}
+$$
+가 가환한다는 뜻으로 정의한다. 위의 논의로부터 $K$가 유향 반순서
+집합이고,
+$$
+\mathcal{F} = \colim_{(i, j, \alpha) \in K} \Coker(\alpha),
+$$
+임이 따르므로 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+\section{코호몰로지의 소멸}
+\label{section-vanishing}
+
+\noindent
+이 절에서는 준콤팩트하고 준분리인 대수공간에서 모든 준연접층의 고차
+코호몰로지가 소멸하면 그 공간이 아핀임을 보인다. 이를 일련의
+보조정리로 증명하는데, Proposition
+\ref{proposition-vanishing-affine}를 증명하고 나면 이 보조정리들은 모두
+더 이상 필요하지 않게 된다.
+
+\begin{situation}
+\label{situation-vanishing}
+여기서 $S$는 스킴이고 $X$는 다음 성질을 갖는 $S$ 위의 준콤팩트하고
+준분리인 대수공간이다. 모든 준연접 $\mathcal{O}_X$-가군
+$\mathcal{F}$에 대해 $H^1(X, \mathcal{F}) = 0$이다.
+$A = \Gamma(X, \mathcal{O}_X)$로 놓는다.
+\end{situation}
+
+\noindent
+표준 사상
+$$
+p : X \longrightarrow \Spec(A)
+$$
+이 동형임을 보이고자 한다(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-morphism-to-affine-scheme}를 보라).
+$M$이 $A$-가군이면
+% P09-ERR-1431
+$M \otimes_A \mathcal{O}_X$로 준연접 가군 $p^*\tilde M$을 나타낸다.
+
+\begin{lemma}
+\label{lemma-vanishing-compute}
+Situation \ref{situation-vanishing}에서 $A$-가군 $M$에 대해
+$p_*(M \otimes_A \mathcal{O}_X) = \widetilde{M}$이고
+$\Gamma(X, M \otimes_A \mathcal{O}_X) = M$이다.
+\end{lemma}
+
+\begin{proof}
+등식 $p_*(M \otimes_A \mathcal{O}_X) = \widetilde{M}$은 등식
+$\Gamma(X, M \otimes_A \mathcal{O}_X) = M$에서 따른다. 실제로
+$p_*(M \otimes_A \mathcal{O}_X)$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward}에 의해 $\Spec(A)$ 위의 준연접
+가군이다. Lemma \ref{lemma-colimits}에 의해
+$\Gamma(X, \bigoplus_{i \in I} \mathcal{O}_X) =
+\bigoplus_{i \in I} A$임을 관찰하자. 따라서 보조정리는 자유 가군에 대해
+성립한다. 짧은 완전열 $F_1 \to F_0 \to M$을 택하되,
+$F_0, F_1$은 자유 $A$-가군이게 하자. $H^1(X, -)$가 0이므로 대역단면 함자는
+우완전이다. 또한 당김 $p^*$도 우완전이다. 따라서
+$$
+\Gamma(X, F_1 \otimes_A \mathcal{O}_X) \to
+\Gamma(X, F_0 \otimes_A \mathcal{O}_X) \to
+\Gamma(X, M \otimes_A \mathcal{O}_X) \to 0
+$$
+이 완전임을 알 수 있다. 결과가 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리는 Situation \ref{situation-vanishing}이
+$X \to \Spec(A)$를 $\Spec(A') \to \Spec(A)$로 밑변환해도
+보존됨을 보인다.
+
+\begin{lemma}
+\label{lemma-vanishing-base-change}
+Situation \ref{situation-vanishing}에서 다음이 성립한다.
+\begin{enumerate}
+\item 대수공간의 아핀 사상 $X' \to X$가 주어지면,
+$H^1(X', \mathcal{F}') = 0$이고, 이는 모든 준연접
+$\mathcal{O}_{X'}$-가군 $\mathcal{F}'$에 대해 성립한다.
+\item $A$-대수 $A'$이 주어졌을 때
+$X' = X \times_{\Spec(A)} \Spec(A')$로 놓으면, 사상 $X' \to X$는
+아핀이고 $\Gamma(X', \mathcal{O}_{X'}) = A'$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 Lemma \ref{lemma-affine-vanishing-higher-direct-images}와 Leray
+스펙트럼 열(Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-Leray})에서 따른다. (2)에 나오는
+$A \to A'$를 택하자. 아핀 사상은 밑변환 아래 보존되고(Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-base-change-affine}) 아핀 스킴
+사이의 사상은 아핀이므로 $X' \to X$는 아핀이다. 등식
+$\Gamma(X', \mathcal{O}_{X'}) = A'$은 Lemma
+\ref{lemma-affine-base-change}에 의한
+$(X' \to X)_*\mathcal{O}_{X'} = A' \otimes_A \mathcal{O}_X$와
+다음 계산에서 따른다.
+$$
+\Gamma(X', \mathcal{O}_{X'}) =
+\Gamma(X, (X' \to X)_*\mathcal{O}_{X'}) =
+\Gamma(X, A' \otimes_A \mathcal{O}_X) = A'
+$$
+여기서 마지막 등식에는 Lemma \ref{lemma-vanishing-compute}를 사용했다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-vanishing-separate-closed}
+Situation \ref{situation-vanishing}에서 서로소인 닫힌 부분집합
+$Z_0, Z_1 \subset |X|$를 택하자. 그러면 $a \in A$인 어떤 원소가
+존재하여 $Z_0 \subset V(a)$이고 $Z_1 \subset V(a - 1)$이다.
+\end{lemma}
+
+\begin{proof}
+$Z_0$, $Z_1$에 유도된 축약 부분공간 구조를 주어도 되므로 그렇게 하자
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space}를 보라).
+% P09-ERR-1432
+대응하는 닫힌 몰입을 $i_0 : Z_0 \to X$와
+$i_1 : Z_1 \to X$로 나타낸다. $Z_0 \cap Z_1 = \emptyset$이므로 준연접
+$\mathcal{O}_X$-가군의 표준 사상
+$$
+\mathcal{O}_X
+\longrightarrow
+i_{0, *}\mathcal{O}_{Z_0} \oplus i_{1, *}\mathcal{O}_{Z_1}
+$$
+은 전사이다(기하점에서 줄기를 살펴보라). 이 사상의 핵 위에서
+$H^1(X, -)$가 0이므로 유도된 대역단면 사상은 전사이다. 따라서
+$a \in A$를 찾을 수 있고, 이 원소는 우변의 대역단면 $(0, 1)$로 보내진다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-vanishing-injective}
+Situation \ref{situation-vanishing}에서 사상 $p : X \to \Spec(A)$는
+보편적으로 단사이다.
+\end{lemma}
+
+\begin{proof}
+환 준동형 $A \to k$를 택하되 $k$가 체이게 하자.
+$\Spec(k) \times_{\Spec(A)} X$가 많아야 한 점을 가짐을 보이면 충분하다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-injective-local}를 보라).
+Lemma \ref{lemma-vanishing-base-change}를 사용하여 $A$가 체라고 가정할
+수 있고, 이제 $|X|$가 많아야 한 점을 가짐을 보여야 한다.
+
+\medskip\noindent
+$X$를 $\Spec(k)$ 위의 대수공간으로 생각하고, $X(K)$로 $K$-값 점을
+나타내자. 이 점들은 $X$의 점들이며, 여기서 $K/k$는 임의의 확대이다. Morphisms of Spaces,
+Section \ref{spaces-morphisms-section-points-fields}를 보라.
+$K/k$가 초월차수가 큰 대수적으로 닫힌 체 확대이면
+$X(K) \to |X|$가 전사임을 알 수 있다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-large-enough}를 보라. 따라서 $k$를 $K$로
+바꾼 뒤 $X(k)$가 한원소집합임을 증명하면 충분함을 알 수 있다
+(% P09-ERR-1436
+$A = k)$인 경우.
+
+\medskip\noindent
+$x, x' \in X(k)$라 하자. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-algebraic-residue-field-extension-closed-point}에 의해
+$x$와 $x'$는 $|X|$의 닫힌 점이다. 따라서 $x$와 $x'$는
+$\Spec(k)$의 서로 다른 점으로 보내지는데, 이는 $x \not = x'$일 때
+% P09-ERR-1433
+Lemma \ref{lemma-vanishing-separate-closed}에 의한다. 원하는 대로 $x = x'$라고
+결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-vanishing-separated}
+Situation \ref{situation-vanishing}에서 사상 $p : X \to \Spec(A)$는
+분리이다.
+\end{lemma}
+
+\begin{proof}
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-there-is-a-scheme-integral-over}에 의해 스킴 $Y$와
+전사 정수적 사상 $Y \to X$를 찾을 수 있다. 정수적 사상은 아핀이므로
+Lemma \ref{lemma-vanishing-base-change}를 적용하여
+$H^1(Y, \mathcal{G}) = 0$임을 알 수 있고, 이는 모든 준연접
+$\mathcal{O}_Y$-가군 $\mathcal{G}$에 대해 성립한다. $Y \to X$가 준콤팩트이고
+$X$가 준콤팩트이므로 $Y$가 준콤팩트임을 알 수 있다. $Y$는 스킴이므로
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-compact-h1-zero-covering}을 적용하여 $Y$가
+아핀임을 알 수 있다. 따라서 $Y$는 분리이다. 정수적 사상은 아핀이고
+보편적으로 닫혔음을 관찰하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-closed}를 보라.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-image-universally-closed-separated}에 의해
+$X$가 분리 대수공간임을 알 수 있다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-vanishing-affine}
+\begin{slogan}
+대수공간의 상황에서의 Serre 아핀성 판정법.
+\end{slogan}
+준콤팩트하고 준분리인 대수공간이 아핀일 필요충분조건은 준연접층들의
+모든 고차 코호몰로지 군이 소멸하는 것이다. 더 정확히 말해 Situation
+\ref{situation-vanishing}에 나오는 임의의 대수공간은 아핀 스킴이다.
+\end{proposition}
+
+\begin{proof}
+아핀 스킴 $U = \Spec(B)$와 전사 에탈 사상
+$\varphi : U \to X$를 택하자. $R = U \times_X U$로 놓자.
+$p$가 분리이므로(Lemma \ref{lemma-vanishing-separated}) $R$은
+$U \times_{\Spec(A)} U = \Spec(B \otimes_A B)$의 닫힌 부분스킴이다.
+따라서 $R = \Spec(C)$도 아핀이고 환 사상
+$$
+B \otimes_A B \longrightarrow C
+$$
+은 전사이다. 통상대로 두 사상을 $s, t : B \to C$로 나타내자.
+$g_1, \ldots, g_m \in B$를 택하되, $s(g_1), \ldots, s(g_m)$가
+$C$를 $t : B \to C$ 위에서 생성하게 하자($t : B \to C$가 유한 표시이고
+표시한 사상이 전사이므로 가능하다). 그러면 $g_1, \ldots, g_m$은
+$\varphi_*\mathcal{O}_U$의 대역단면을 주고, 사상
+$$
+% P09-ERR-1434
+\mathcal{O}_X[z_1, \ldots, z_n] \longrightarrow \varphi_*\mathcal{O}_U,
+\quad
+z_j \longmapsto g_j
+$$
+은 전사이다. 이는 $U$에 제한하여 확인할 수 있다. 즉 Lemma
+\ref{lemma-flat-base-change-cohomology}에 의해
+$\varphi^*\varphi_*\mathcal{O}_U = t_*\mathcal{O}_R$이고, 따라서 정확히
+$s(g_i)$가 $C$를 $t : B \to C$ 위에서 생성한다는 조건을 얻는다.
+그 핵의 $H^1$이 소멸하므로
+$$
+% P09-ERR-1435
+\Gamma(X, \mathcal{O}_X[x_1, \ldots, x_n]) =
+A[x_1, \ldots, x_n] \longrightarrow
+\Gamma(X, \varphi_*\mathcal{O}_U) = \Gamma(U, \mathcal{O}_U) = B
+$$
+가 전사임을 알 수 있다. 따라서 $B$가 유한형 $A$-대수라고 결론짓는다.
+그러므로 $X \to \Spec(A)$는 유한형이고 분리이다. Lemma
+\ref{lemma-vanishing-injective}와 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite}에 의해 이는 국소
+준유한이기도 하다. 따라서 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite-separated-representable}에
+의해 $X \to \Spec(A)$는 표현 가능하고 $X$는 스킴이다. 마지막으로
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-compact-h1-zero-covering}을 적용하면 $X$는
+아핀이며, 따라서 $\Spec(A)$와 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-Noetherian-h1-zero}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+모든 연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해
+$H^1(X, \mathcal{F}) = 0$이라고 가정하자. 그러면 $X$는 아핀 스킴이다.
+\end{lemma}
+
+\begin{proof}
+가정과 Lemmas \ref{lemma-directed-colimit-coherent} 및
+\ref{lemma-colimits}에 의해 $H^1(X, \mathcal{F}) = 0$이고, 이는 모든
+준연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해 성립한다. 그러면 Proposition
+\ref{proposition-vanishing-affine}에 의해 $X$는 아핀이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-Noetherian-h1-zero-invertible}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Noether 대수공간이라 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자. 모든 연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$에 대해 어떤 $n \geq 1$이 존재하여
+$H^1(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes n}) = 0$
+이라고 가정하자. 그러면 $X$는 스킴이고 $\mathcal{L}$은 $X$ 위에서
+풍부하다.
+\end{lemma}
+
+\begin{proof}
+$s \in H^0(X, \mathcal{L}^{\otimes d})$를 대역단면이라 하자.
+$U \subset X$를 $s$가 $\mathcal{L}^{\otimes d}$의 생성원이 되는 열린
+부분공간이라 하자. 특히 $\mathcal{L}^{\otimes d}|_U \cong \mathcal{O}_U$이다.
+$U$가 아핀이라고 주장한다.
+
+\medskip\noindent
+주장의 증명. $H^1(U, \mathcal{F}) = 0$임을 보이겠고, 이는 모든 준연접
+$\mathcal{O}_U$-가군 $\mathcal{F}$에 대해 성립한다. 그러면 Proposition
+\ref{proposition-vanishing-affine}에 의해 주장이 증명된다.
+% P09-ERR-1437
+포함 사상을 $j : U \to X$로 나타내자. 에탈 국소적으로 사상 $j$는
+아핀이므로(Morphisms, Lemma \ref{morphisms-lemma-affine-s-open})
+$j$가 아핀임을 알 수 있다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-local}). 따라서 Lemma
+\ref{lemma-affine-vanishing-higher-direct-images}와 Cohomology on Sites,
+Lemma \ref{sites-cohomology-lemma-apply-Leray}에 의해
+$$
+H^1(U, \mathcal{F}) = H^1(X, j_*\mathcal{F})
+$$
+이다. $j_*\mathcal{F} = \colim \mathcal{F}_i$를 연접
+$\mathcal{O}_X$-가군들의 여과 여극한으로 쓰자. Lemma
+\ref{lemma-directed-colimit-coherent}를 보라. 그러면 Lemma
+\ref{lemma-colimits}에 의해
+$$
+H^1(X, j_*\mathcal{F}) = \colim H^1(X, \mathcal{F}_i)
+$$
+이다. 따라서 $H^1(X, \mathcal{F}_i)$가
+$H^1(U, j^*\mathcal{F}_i)$에서 0으로 보내짐을 보이면 충분하다.
+가정에 의해 어떤 $n \geq 1$이 존재하여
+$$
+H^1(X,
+\mathcal{F}_i \otimes_{\mathcal{O}_X}
+(\mathcal{O}_X \oplus \mathcal{L} \oplus \ldots
+\oplus \mathcal{L}^{\otimes d - 1})
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes n}) = 0
+$$
+이다. 따라서 어떤 $a \geq 0$이 존재하여
+$H^1(X, \mathcal{F}_i \otimes_{\mathcal{O}_X}
+\mathcal{L}^{\otimes ad}) = 0$이다. 한편 사상
+$$
+s^a : \mathcal{F}_i \longrightarrow
+\mathcal{F}_i \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes ad}
+$$
+은 $U$에 제한하면 동형이다. 가환 도표
+$$
+\xymatrix{
+H^1(X, \mathcal{F}_i) \ar[r] \ar[d]_{s^a} & H^1(U, j^*\mathcal{F}_i)
+\ar[d]^{\cong} \\
+H^1(X, \mathcal{F}_i \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes ad}) \ar[r] &
+H^1(U,
+j^*(\mathcal{F}_i \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes ad}))
+}
+$$
+를 살펴보면 사상 $H^1(X, \mathcal{F}_i) \to
+H^1(U, j^*\mathcal{F}_i)$가 0임을 결론지을 수 있고, 주장이 성립한다.
+
+\medskip\noindent
+$x \in |X|$를 닫힌 점이라 하자. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-space-closed-point}에 의해 $x$를 나타낼 수
+있고, 그 표현은 닫힌 몰입 $i : \Spec(k) \to X$이다(여기에는 준분리
+대수공간이 decent하다는 사실도 사용한다. Decent Spaces, Section
+\ref{decent-spaces-section-reasonable-decent}를 보라). 따라서
+$\mathcal{O}_X \to i_*\mathcal{O}_{\Spec(k)}$는 전사이다.
+$\mathcal{I} \subset \mathcal{O}_X$를 그 핵이라 하고
+$d \geq 1$을 택하여
+$H^1(X, \mathcal{I} \otimes_{\mathcal{O}_X}
+\mathcal{L}^{\otimes d}) = 0$이 되게 하자. 그러면 긴 코호몰로지 완전열에
+의해
+$$
+H^0(X, \mathcal{L}^{\otimes d}) \to
+H^0(X,
+i_*\mathcal{O}_{\Spec(k)} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) =
+H^0(\Spec(k), i^*\mathcal{L}^{\otimes d}) \cong k
+$$
+가 전사이다. 따라서 $s \in H^0(X, \mathcal{L}^{\otimes d})$인 단면이
+존재하여 $x \in U$가 되게 할 수 있다. 여기서 $U$는 위와 같이
+$s$에 대응하는 열린 부분공간이다. 따라서 우리의 주장에 의해 $x$는
+$X$의 스킴 자취에 속한다(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subscheme}를 보라).
+
+\medskip\noindent
+$X$가 스킴이라고 결론짓기 위해서는 $|X|$의 모든 닫힌 점을 포함하는
+임의의 열린 부분집합이 $|X|$와 같음을 보이면 충분하다. 이는 $|X|$가
+Noether 위상공간이라는 사실에서 따른다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-sober}를 보라. 마지막으로 $X$가
+스킴이면 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-compact-h1-zero-invertible}을 적용하여
+$\mathcal{L}$이 풍부하다고 결론지을 수 있다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{유한 사상과 아핀성}
+\label{section-finite-affine}
+
+\noindent
+이 절은 Cohomology of Schemes, Section
+\ref{coherent-section-finite-affine}에 대응한다.
+
+\begin{lemma}
+\label{lemma-finite-morphism-Noetherian}
+$S$를 스킴이라 하자. $f : Y \to X$를 $S$ 위 대수공간의 사상이라 하자.
+$f$가 유한이고 전사이며 $X$가 국소 Noether라고 가정하자.
+$i : Z \to X$를 닫힌 몰입이라 하자.
+% P09-ERR-1438
+$i' : Z' \to Y$로 $Z$의 역상을 나타내고(Morphisms of Spaces,
+Section \ref{spaces-morphisms-section-closed-immersions}를 보라), 유도된
+사상을 $f' : Z' \to Z$로 나타내자. 그러면
+$\mathcal{G} = f'_*\mathcal{O}_{Z'}$는 연접 $\mathcal{O}_Z$-가군이고
+그 지지는 $Z$이다.
+\end{lemma}
+
+\begin{proof}
+$f'$는 $f$의 밑변환이므로 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-surjective}와
+\ref{spaces-morphisms-lemma-base-change-integral}에 의해 유한이고
+전사임을 관찰하자. $Y$, $Z$, $Z'$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}에 의해
+국소 Noether이다(닫힌 몰입과 유한 사상이 유한형이라는 사실도
+사용한다). Lemma \ref{lemma-finite-pushforward-coherent}에 의해
+$\mathcal{G}$가 연접 $\mathcal{O}_Z$-가군임을 알 수 있다.
+$\mathcal{G}$의 지지는 $|Z|$ 안에서 닫혀 있다. Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-support-finite-type}를 보라. 따라서
+$\mathcal{G}$의 지지가 $|Z|$와 같지 않으면 $X$를 열린 부분공간으로
+바꾸어 $\mathcal{G} = 0$이지만 $Z \not = \emptyset$이라고 가정할 수
+있다. 이는 $f'_*\mathcal{O}_{Z'} = 0$이라는 뜻이다. 특히 단면
+$1 \in \Gamma(Z', \mathcal{O}_{Z'}) =
+\Gamma(Z, f'_*\mathcal{O}_{Z'})$은 0이어야 하고, 이로부터
+$Z' = \emptyset$이 공 대수공간임이 따른다. 이는 $Z' \to Z$가
+전사이므로 불가능하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-affine-morphism-projection-ideal}
+$S$를 스킴이라 하자. $f : Y \to X$를 $S$ 위 대수공간의 사상이라 하자.
+$\mathcal{F}$를 $Y$ 위의 준연접층이라 하자. $\mathcal{I}$를 $X$ 위의
+준연접 아이디얼 층이라 하자. $f$가 아핀이면
+$\mathcal{I}f_*\mathcal{F} = f_*(f^{-1}\mathcal{I}\mathcal{F})$이다
+(표기법은 증명에서 설명한다).
+\end{lemma}
+
+\begin{proof}
+표기법은 다음을 뜻한다. $f^{-1}$이 완전 함자이므로
+$f^{-1}\mathcal{I}$가 $f^{-1}\mathcal{O}_X$의 아이디얼 층임을 알 수
+있다. 사상 $f^\sharp : f^{-1}\mathcal{O}_X \to \mathcal{O}_Y$를 통해
+$Y_\etale$ 위에서 이는
+$\mathcal{F}$에 작용한다. 그러면
+$f^{-1}\mathcal{I}\mathcal{F}$는 $as$ 꼴의 국소 단면들의 합으로
+생성되는 부분층이다. 여기서 $a$는 $f^{-1}\mathcal{I}$의 국소 단면이고
+$s$는 $\mathcal{F}$의 국소 단면이다. 이는 준연접
+$\mathcal{O}_Y$-부분가군이고 $\mathcal{F}$ 안에 놓인다. 실제로 자연스러운 사상
+$f^*\mathcal{I} \otimes_{\mathcal{O}_Y} \mathcal{F} \to \mathcal{F}$의
+상이기도 하다.
+
+\medskip\noindent
+이제 증명은 직접적이다. 실제로 문제는 $X$ 위에서 에탈 국소적이므로
+$X$가 아핀 스킴이라고 가정할 수 있다. 이 경우 결과는 스킴에 관한
+대응 결과에서 따른다. Cohomology of Schemes, Lemma
+\ref{coherent-lemma-affine-morphism-projection-ideal}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-image-affine-finite-morphism-affine-Noetherian}
+$S$를 스킴이라 하자. $f : Y \to X$를 $S$ 위 대수공간의 사상이라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $f$는 유한이다.
+\item $f$는 전사이다.
+\item $Y$는 아핀이다.
+\item $X$는 Noether이다.
+\end{enumerate}
+그러면 $X$는 아핀이다.
+\end{lemma}
+
+\begin{proof}
+보조정리의 가정 아래 임의의 연접 $\mathcal{O}_X$-가군
+$\mathcal{F}$에 대해 $H^1(X, \mathcal{F}) = 0$임을 증명하겠다.
+Lemmas \ref{lemma-directed-colimit-coherent}와
+\ref{lemma-colimits}에 의해 이는 $H^1(X, \mathcal{F}) = 0$임을 함의하며,
+이 등식은 모든 준연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해 성립한다. 그러면
+Proposition \ref{proposition-vanishing-affine}에서 $X$가 아핀임이 따른다.
+
+\medskip\noindent
+$\mathcal{P}$를 연접층 $\mathcal{F}$의 다음 성질이라 하자. 이 층은 $X$ 위에 놓인다.
+$$
+\mathcal{P}(\mathcal{F}) \Leftrightarrow H^1(X, \mathcal{F}) = 0.
+$$
+Lemma \ref{lemma-property-higher-rank-cohomological}을 적용할 것이다.
+따라서 그 보조정리의 (1), (2), (3)을 $\mathcal{P}$에 대해 확인해야 한다.
+성질 (1)은 층들의 짧은 완전열에 수반되는 긴 코호몰로지 완전열에서
+따른다. 성질 (2)는 $H^1(X, -)$가 가법 함자이므로 따른다. (3)을
+확인하기 위해 $i : Z \to X$를 $|Z|$가 기약인 축약 닫힌 부분공간이라
+하자. $i' : Z' \to Y$와 $f' : Z' \to Z$를 Lemma
+\ref{lemma-finite-morphism-Noetherian}에서와 같이 택하고
+$\mathcal{G} = f'_*\mathcal{O}_{Z'}$로 놓자. $\mathcal{G}$가 Lemma
+\ref{lemma-property-higher-rank-cohomological}의 성질 (3)(a)와 (3)(b)를
+만족한다고 주장하며, 이것으로 증명이 끝날 것이다. 성질 (3)(a)는
+Lemma \ref{lemma-finite-morphism-Noetherian}에서 보았다. (3)(b)를
+확인하기 위해 $\mathcal{I}$를 $Z$ 위의 영이 아닌 준연접 아이디얼
+층이라 하자.
+% P09-ERR-1439
+준연접 아이디얼
+$\mathcal{I}' \subset \mathcal{O}_{Z'}$을
+$(f')^{-1}\mathcal{I} \mathcal{O}_{Z'}$, 즉
+$(f')^*\mathcal{I} \to \mathcal{O}_{Z'}$의 상으로 나타내자.
+Lemma \ref{lemma-affine-morphism-projection-ideal}에 의해
+% P09-ERR-1440
+$f_*\mathcal{I}' = \mathcal{I} \mathcal{G}$이다. 이 공통값
+$\mathcal{G}' = \mathcal{I} \mathcal{G} = f'_*\mathcal{I}'$이 (3)(b)에
+표현된 조건을 만족한다고 주장한다. 먼저
+$\mathcal{G}/\mathcal{G}'$의 지지는 $\mathcal{O}_Z/\mathcal{I}$의
+지지에 포함됨이 명백하다. 후자는 $|Z|$의 진부분공간이다. 실제로
+$\mathcal{I}$는 축약 기약 대수공간 $Z$ 위의 영이 아닌 아이디얼 층이다.
+사상 $f'$는 아핀이므로 Lemma
+\ref{lemma-affine-vanishing-higher-direct-images}에 의해
+$R^1f'_*\mathcal{I}' = 0$이다. $Z'$는 아핀이므로(아핀 스킴의 닫힌
+부분스킴이므로) $H^1(Z', \mathcal{I}') = 0$이다. 따라서 Leray
+스펙트럼 열(Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-apply-Leray}의 형태)은
+$H^1(Z, f'_*\mathcal{I}') = 0$임을 함의한다.
+$i : Z \to X$가 아핀이므로 $R^1i_*f'_*\mathcal{I}' = 0$이고, 따라서
+Leray를 다시 사용하면 $H^1(X, i_*f'_*\mathcal{I}') = 0$이다.
+달리 말해 원하는 대로 $H^1(X, i_*\mathcal{G}') = 0$이다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{Chow 보조정리의 약한 판본}
+\label{section-weak-chow}
+
+\noindent
+고유 대수공간 위 연접 가군의 코호몰로지에 관한 기본 결과들을 증명하는
+데 사용하기 위해 이 절에서는 다음 보조정리를 빠르게 증명한다.
+
+\begin{lemma}
+\label{lemma-weak-chow}
+$A$를 환이라 하자. $X$를 $\Spec(A)$ 위의 대수공간이라 하되, 구조사상
+$X \to \Spec(A)$가 분리이고 유한형이라고 하자. 그러면 고유 전사 사상
+$X' \to X$가 존재하며, 여기서 $X'$는 $\Spec(A)$ 위에서
+H-준사영인 스킴이다.
+\end{lemma}
+
+\begin{proof}
+$W$를 아핀 스킴이라 하고 $f : W \to X$를 전사 에탈 사상이라 하자.
+정수 $d$가 존재하여 그 사상의 모든 기하적 올은 $\leq d$개의 점을
+갖는다($X$가 분리 대수공간이므로 reasonable하기 때문이다. Decent
+Spaces, Lemma \ref{decent-spaces-lemma-bounded-fibres}를 보라).
+$d$를 최소로 택하면 비어 있지 않은 열린 부분공간 $U \subset X$를
+얻어 $f^{-1}(U) \to U$가 차수 $d$의 유한 에탈 사상이 되게 할 수 있다.
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-quasi-compact-reasonable-stratification}을 보라.
+모든 대각사상의 여집합을
+$$
+V \subset W \times_X W \times_X \ldots \times_X W
+$$
+로 나타내자(올곱에는 $d$개의 인자가 있다). $W \to X$가 분리이므로
+대각사상 $W \to W \times_X W$는 닫힌 몰입이다. $W \to X$가
+에탈이므로 대각사상 $W \to W \times_X W$는 열린 몰입이다.
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-etale-unramified}와
+\ref{spaces-morphisms-lemma-diagonal-unramified-morphism}을 보라. 따라서
+대각사상들은 준콤팩트 스킴 $W \times_X \ldots \times_X W$의 열리고
+닫힌 부분스킴이다. 특히 $V$가 준콤팩트 스킴이라고 결론짓는다.
+$W \subset Y$인 열린 몰입을 택하되 $Y$가 $A$ 위에서 H-사영이게 하자
+($W$가 아핀이고 $A$ 위에서 유한형이므로 가능하다. 예를 들어 Morphisms,
+Lemmas \ref{morphisms-lemma-quasi-affine-finite-type-over-S}와
+\ref{morphisms-lemma-H-quasi-projective-open-H-projective}를 사용할 수 있다).
+다음을 두자.
+$$
+Z \subset Y \times_A Y \times_A \ldots \times_A Y
+$$
+이는 합성
+$V \to W \times_X \ldots \times_X W \to
+Y \times_A \ldots \times_A Y$의 스킴론적 상이다.
+$V$가 준콤팩트이고 $Y \times_A \ldots \times_A Y$가
+분리이므로 이 사상은 준콤팩트임을 관찰하자. $V \to Z$는 열린
+몰입임에 유의하자. 실제로
+$V \to Y \times_A \ldots \times_A Y$가 몰입이다. Morphisms, Lemma
+\ref{morphisms-lemma-quasi-compact-immersion}을 보라. 사영사상들은
+$d$개의 사상 $g_i : Z \to Y$를 준다. 이 사상들 $g_i$는 $Y$가
+$A$ 위에서 사영이므로 사영이다. Morphisms, Section
+\ref{morphisms-section-projective}의 내용을 보라. 다음과 같이 놓는다.
+$$
+X' = \bigcup g_i^{-1}(W) \subset Z
+$$
+사상 $X' \to X$가 존재하며, 이를 $g_i^{-1}(W)$에 제한하면 합성
+$g_i^{-1}(W) \to W \to X$가 된다. 실제로 이 사상들은 $V$ 위에서
+일치하므로 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-equality-of-morphisms}에 의해
+$g_i^{-1}(W) \cap g_j^{-1}(W)$ 위에서도 일치한다. 주장: 사상
+$X' \to X$는 고유이다.
+
+\medskip\noindent
+주장이 성립하면 보조정리는 $d$에 관한 귀납법으로 따른다. 실제로
+구성에 의해 $X'$는 $\Spec(A)$ 위에서 H-준사영이다. $X' \to X$의
+상은 열린 부분공간 $U$를 포함한다. 이는 $V$가 $U$ 위로 전사하기
+때문이다.
+% P09-ERR-1441
+$T$로 $X \setminus U$ 위의 유도된 축약 대수공간 구조를 나타내자.
+그러면 $T \times_X W$는 $W$의 닫힌 부분스킴이므로 아핀이다. 더욱이
+사상 $T \times_X W \to T$는 에탈이고 모든 기하적 올은 $< d$개의
+점을 갖는다. 귀납가정에 의해 고유 전사 사상 $T' \to T$가 존재하고,
+여기서 $T'$는 $\Spec(A)$ 위에서 H-준사영인 스킴이다. $T$가 $X$의
+닫힌 부분공간이므로 $T' \to X$는 고유 사상임을 알 수 있다. 따라서
+고유 전사 사상 $X' \amalg T' \to X$를 취하면 보조정리가 따른다.
+
+\medskip\noindent
+주장의 증명. 구성에 의해 사상 $X' \to X$는 분리이고 유한형이다.
+사상 $V \to X'$와 $X' \to X$에 대해 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-refined-valuative-criterion-universally-closed}의
+조건 (1)--(4)를 확인하겠다. 조건 (1)과 (2)는 위에서 보았다.
+조건 (3)은 $X' \to X$가 분리이므로 성립한다(그 원천이 분리
+대수공간인 사상이기 때문이다). 따라서 $X'$로의 올림가능성을 다음
+도표들에 대해 확인하면 충분하다.
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & V \ar[d] \\
+\Spec(R) \ar[r] & X
+}
+$$
+여기서 $R$은
+분수체 $K$를 갖는 부치환환이다. 위쪽 수평 사상은 서로 다른
+$d$개의 $K$-값 점 $w_1, \ldots, w_d$로 주어지며, 이 점들은 $W$ 위에
+놓인다. 실제로 이들은
+도표에서 오는 점 $x \in X(K)$의 역상들의 완전한 집합이다.
+$W \to X$가 전사이므로, 필요하다면 $R$을 부치환환의 확대로 바꾼 뒤
+사상 $\Spec(R) \to X$를 사상 $w : \Spec(R) \to W$로 올릴 수 있다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-lift-valuation-ring-through-flat-morphism}를 보라.
+$w_1, \ldots, w_d$는 $x$의 역상들의 완전한 모음이므로
+$w|_{\Spec(K)}$가 그중 하나, 이를테면 $w_i$와 같음을 알 수 있다.
+따라서 가환도표
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] &  Z \ar[d]_{g_i}\\
+\Spec(R) \ar[r]^w & Y
+}
+$$
+를 얻는다. 사영사상 $g_i$에 대한 고유성의 부치환 판정법에 의해
+$w$를 $z : \Spec(R) \to Z$로 올릴 수 있다. Morphisms, Lemma
+\ref{morphisms-lemma-locally-projective-proper}와 Schemes, Proposition
+\ref{schemes-proposition-characterize-universally-closed}를 보라.
+$z$의 상은 $g_i^{-1}(W) \subset X'$ 안에 놓이므로 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+\section{Noether 부치환 판정법}
+\label{section-Noetherian-valuative-criterion}
+
+\noindent
+이 절에서는 이산 부치환환을 사용하여 고유성의 부치환 판정법의 한
+형태를 증명한다. 더 정밀한(따라서 더 기술적인) 형태는 Limits of
+Spaces, Section
+\ref{spaces-limits-section-Noetherian-valuative-criterion}에 있다.
+
+\begin{lemma}
+\label{lemma-check-separated-dvr}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. 다음을 가정한다.
+\begin{enumerate}
+\item $Y$는 국소 Noether이다.
+\item $f$는 국소 유한형이고 준분리이다.
+\item 모든 가환도표
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+에서 $A$가 이산 부치환환이고 $K$가 그 분수체일 때, 도표를 가환으로
+만드는 점선 화살표는 많아야 하나이다.
+\end{enumerate}
+그러면 $f$는 분리이다.
+\end{lemma}
+
+\begin{proof}
+대각사상 $\Delta : X \to X \times_Y X$가 닫힌 몰입임을 보이면 된다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-properties-diagonal}에 의해 $\Delta$가 표현
+가능하고 분리이며 단사사상이고 국소 유한형이라는 것은 이미 안다.
+아핀 스킴 $U$와 에탈 사상
+$U \to X \times_Y X$를 택하자.
+$V = X \times_{\Delta, X \times_Y X} U$로 놓자.
+$V \to U$가 닫힌 몰입임을 보이면 충분하다(Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-closed-immersion-local}).
+$X \times_Y X$가 $Y$ 위에서 국소 유한형이므로 $U$는 Noether이다
+(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-type},
+\ref{spaces-morphisms-lemma-base-change-finite-type}, 그리고
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}을
+사용한다). $V$가 스킴임에 유의하자. 이는 $\Delta$가 표현 가능하기
+때문이다.
+또한 $V$는 준콤팩트이다. 이는 $f$가 준분리이기 때문이다. 따라서
+$V \to U$는
+유한형이다. 다음 스킴 사상들의 가환도표를 생각하자.
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & V \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & U
+}
+$$
+여기서 $A$는 분수체 $K$를 갖는 이산 부치환환이다. 합성
+$\Spec(A) \to U \to X \times_Y X$를 두 사상
+$a, b : \Spec(A) \to X$로 해석할 수 있다. 이들은 $Y$로 가는
+사상으로서 일치하고 $\Spec(K)$에 제한하면 같다. 따라서 가정 (3)은
+$a = b$임을 보장하며, 도표의 점선 화살표를 얻는다. Limits, Lemma
+\ref{limits-lemma-Noetherian-dvr-valuative-proper}에 의해
+$V \to U$가 고유라고 결론짓는다. 달리 말해 $\Delta$는 고유이다.
+$\Delta$가 단사사상이므로, 원하는 대로 $\Delta$는 닫힌 몰입이다
+(\'Etale Morphisms, Lemma
+\ref{etale-lemma-characterize-closed-immersion}).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-check-proper-dvr}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. 다음을 가정한다.
+\begin{enumerate}
+\item $Y$는 국소 Noether이다.
+\item $f$는 유한형이고 준분리이다.
+\item 모든 가환도표
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+에서 $A$가 이산 부치환환이고 $K$가 그 분수체일 때, 도표를 가환으로
+만드는 점선 화살표가 유일하게 존재한다.
+\end{enumerate}
+그러면 $f$는 고유이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-check-separated-dvr}에 의해 $f$가 분리이므로
+$f$가 보편적으로 닫혀 있음을 증명하면 충분하다. 이를 위해 $Y$ 위에서
+에탈 국소적으로 작업해도 된다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local}). 따라서
+$Y = \Spec(A)$가 Noether 아핀 스킴이라고 가정할 수 있다. 약한 형태의
+Chow 보조정리(Lemma \ref{lemma-weak-chow})에서와 같이
+$X' \to X$를 택하자. $X' \to \Spec(A)$가 보편적으로 닫혀 있다고
+주장한다. 이 주장은 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-image-proper-is-proper}에 의해 보조정리를
+함의한다. 이를 증명하기 위해 Limits, Lemma
+\ref{limits-lemma-check-universally-closed-Noetherian}에 따르면 모든
+실선 가환도표
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X' \ar[r] & X \ar[d] \\
+\Spec(A) \ar[rr] \ar@{-->}[ru]^a \ar@{-->}[rru]_b & & Y
+}
+$$
+에서 $A$는 분수체 $K$를 갖는 이산 부치환환이다. 점선 화살표 $a$를
+찾으면 충분하다. 가정에 의해 점선 화살표 $b$를 찾을 수 있다.
+그러면 사상
+$X' \times_{X, b} \Spec(A) \to \Spec(A)$는 스킴의 고유 사상이며,
+스킴 사상에 대한 부치환 판정법에 의해 $b$를 원하는 사상 $a$로
+올릴 수 있다.
+\end{proof}
+
+\begin{remark}[완비 이산 부치환환에 대한 변형]
+\label{remark-variant}
+Lemmas \ref{lemma-check-separated-dvr}와
+\ref{lemma-check-proper-dvr}에서는 완비 이산 부치환환만 생각해도
+충분하다. 정확히 말해 Lemma \ref{lemma-check-separated-dvr}에서는
+조건 (3)을 다음 조건으로 바꿀 수 있다. 임의의 가환도표
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+가 주어졌다고 하자. 여기서 $A$는 분수체 $K$를 갖는 완비 이산
+부치환환이다. 그러면 도표를 가환으로 만드는 점선 화살표는 많아야
+하나이다. 실제로 Lemma \ref{lemma-check-separated-dvr} (3)에서와 같은
+임의의 도표가 주어지면 완비화 $A^\wedge$는 이산 부치환환이고
+(More on Algebra, Lemma
+\ref{more-algebra-lemma-completion-dvr}), 화살표
+$\Spec(A^\wedge) \to X$의 유일성은 화살표 $\Spec(A) \to X$의
+유일성을 함의한다. 예를 들어 Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-sheaf-fpqc}를 사용한다.
+마찬가지로 Lemma \ref{lemma-check-proper-dvr}에서는 조건 (3)을 다음
+조건으로 바꿀 수 있다. 임의의 가환도표
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] & Y
+}
+$$
+가 주어졌다고 하자. 여기서 $A$는 분수체 $K$를 갖는 완비 이산
+부치환환이다. 완비 이산 부치환환의 확대 $A \subset A'$가 존재하여
+분수체의 확대 $K \subset K'$를 유도하고, 유일한 화살표
+$\Spec(A') \to X$가 존재하여 도표
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d] & \Spec(K) \ar[r] & X \ar[d] \\
+\Spec(A') \ar[r] \ar[rru] & \Spec(A) \ar[r] & Y
+}
+$$
+를 가환으로 만든다.
+실제로 Lemma \ref{lemma-check-proper-dvr}의 (3)에서와 같은 임의의
+도표가 주어졌을 때, 가환도표
+$$
+\xymatrix{
+\Spec(L) \ar[r] \ar[d] & \Spec(K) \ar[r] & X \ar[d] \\
+\Spec(B) \ar[r] \ar[rru] & \Spec(A) \ar[r] & Y
+}
+$$
+가 이산 부치환환의 {\it 임의의} 확대 $A \subset B$에 대해 하나라도
+존재하면, 그 도표에 맞는 화살표 $\Spec(A) \to X$가 존재한다.
+이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-push-down-solution}에서 증명되었다.
+사실 이 고찰들로부터 다음도 따른다. 모든 이산 부치환환에 대해 그
+환의 확대 중 해당 부류에 속하는 것이 존재하는 이산 부치환환의
+어떤 부류를 택하더라도, 그 부류의 도표들에서 점선 화살표만 찾으면
+충분하다. 예를 들어 대수적으로 닫힌 잉여체를 갖는 완비 이산
+부치환환을 택할 수 있다.
+\end{remark}
+
+
+
+
+
+
+
+\section{연접층의 고차 직접상}
+\label{section-proper-pushforward}
+
+\noindent
+이 절에서는 고유 사상 아래 연접층의 고차 직접상이 연접이라는
+기본 사실을 증명한다. 먼저 보조 보조정리를 증명한다.
+
+\begin{lemma}
+\label{lemma-kill-by-twisting}
+$S$를 스킴이라 하자. 다음 가환도표를 생각하자.
+$$
+\xymatrix{
+X \ar[r]_i \ar[rd]_f & \mathbf{P}^n_Y \ar[d] \\
+& Y
+}
+$$
+$S$ 위 대수공간의 도표이다.
+$i$가 닫힌 몰입이고 $Y$가 Noether라고 가정하자.
+$\mathcal{L} = i^*\mathcal{O}_{\mathbf{P}^n_Y}(1)$로 놓자.
+$\mathcal{F}$를 $X$ 위의 연접 가군이라 하자. 그러면 정수 $d_0$가
+존재하여 모든 $d \geq d_0$에 대해
+$R^pf_*(\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) = 0$
+이고, 이는 모든 $p > 0$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+$R^pf_*(\mathcal{F} \otimes \mathcal{L}^{\otimes d})$가 영인지 여부는
+$Y$ 위에서 에탈 국소적으로 확인할 수 있다. Equation
+(\ref{equation-representable-higher-direct-image})을 보라. 따라서
+$Y$가 Noether 환의 스펙트럼이라고 가정할 수 있다. 이 경우 $X$는
+스킴이고, 결과는 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-kill-by-twisting}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-pushforward-coherent}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 고유
+사상이라 하고 $Y$는 국소 Noether라고 하자. $\mathcal{F}$를 연접
+$\mathcal{O}_X$-가군이라 하자. 그러면 $R^if_*\mathcal{F}$는 연접
+$\mathcal{O}_Y$-가군이고, 이는 모든 $i \geq 0$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+먼저 $X$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}에
+의해 국소 Noether 대수공간임에 유의하자. 따라서 보조정리의 명제는
+의미가 있다. 더욱이 $R^if_*\mathcal{F}$의 계산은 $Y$ 위의 에탈
+국소화와 가환하고(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}),
+$R^if_*\mathcal{F}$가 연접인지 여부는 $Y$ 위에서 에탈 국소적으로
+확인할 수 있다(Lemma \ref{lemma-coherent-Noetherian}). 따라서
+$Y = \Spec(A)$가 Noether 아핀 스킴이라고 가정할 수 있다.
+
+\medskip\noindent
+$Y = \Spec(A)$가 아핀 스킴이라고 가정하자. $f$는 국소 유한
+표시이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-noetherian-finite-type-finite-presentation}).
+따라서 이는 유한 표시이고, 그러므로 $X$는 Noether이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-noetherian}).
+따라서 Lemma \ref{lemma-property-higher-rank-cohomological-variant}를
+$X$의 연접 가군 범주에 적용할 수 있다. 연접층 $\mathcal{F}$가 $X$
+위에 주어졌다고 하자. 성질 $\mathcal{P}$가 성립한다는 것을
+$R^if_*\mathcal{F}$가 $\Spec(A)$ 위의 연접 가군일 필요충분조건으로
+정의하자.
+이제 이 성질이 Lemma
+\ref{lemma-property-higher-rank-cohomological-variant}의 조건 (1),
+(2), (3)을 만족함을 보여 보조정리의 증명을 끝내겠다.
+
+\medskip\noindent
+조건 (1)의 확인. 다음을 짧은 완전열이라 하자.
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0
+$$
+$X$ 위 연접층의 완전열이다.
+고차 직접상의 긴 완전열
+$$
+R^{p - 1}f_*\mathcal{F}_3 \to
+R^pf_*\mathcal{F}_1 \to
+R^pf_*\mathcal{F}_2 \to
+R^pf_*\mathcal{F}_3 \to
+R^{p + 1}f_*\mathcal{F}_1
+$$
+을 생각하자. 층들 $\mathcal{F}_i$ 가운데 둘이 성질 $\mathcal{P}$를
+가지면, 셋째 층의 고차 직접상은 이 완전 복합체에서 두 연접층 사이에
+끼임이 명백하다. 따라서 Lemmas
+\ref{lemma-coherent-abelian-Noetherian}와
+\ref{lemma-coherent-Noetherian-quasi-coherent-sub-quotient}에 의해
+이 고차 직접상들도 연접이다. 그러므로 셋째 층에도 성질
+$\mathcal{P}$가 성립한다.
+
+\medskip\noindent
+조건 (2)의 확인. 이는
+$R^if_*(\mathcal{F}_1 \oplus \mathcal{F}_2) =
+R^if_*\mathcal{F}_1 \oplus R^if_*\mathcal{F}_2$라는 사실과 연접
+가군의 직합인자가 연접이라는 사실에서 즉시 따른다(위에서 인용한
+보조정리들을 보라).
+
+\medskip\noindent
+조건 (3)의 확인. $i : Z \to X$를 닫힌 몰입이라 하고, $Z$는
+축약이며 $|Z|$는 기약이라고 하자.
+$g = f \circ i : Z \to \Spec(A)$로 놓자. $\mathcal{G}$를 $Z$ 위의
+연접 가군이라 하되, 그 스킴론적 지지는 $Z$이고
+$R^pg_*\mathcal{G}$가 연접이며 이는 모든 $p$에 대해 성립한다고 하자.
+그러면
+$\mathcal{F} = i_*\mathcal{G}$는 $X$ 위의 연접 가군이며, 그 스킴론적
+지지는 $Z$이고
+$R^pf_*\mathcal{F} = R^pg_*\mathcal{G}$이다. 이를 보려면 Leray
+스펙트럼 열(Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-relative-Leray})과
+$R^qi_*\mathcal{G} = 0$을 사용한다. 뒤의 소멸은 모든 $q > 0$에 대해
+성립하며 Lemma
+\ref{lemma-affine-vanishing-higher-direct-images}와 닫힌 몰입이
+아핀이라는 사실(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-affine})에서 따른다.
+따라서 연접층 $\mathcal{G}$를 $Z$ 위에서 찾는 문제로 환원된다. 그
+지지는 $Z$와 같고 $R^pg_*\mathcal{G}$는 연접이며, 이는 모든 $p$에
+대해 성립해야 한다.
+
+\medskip\noindent
+Lemma \ref{lemma-weak-chow}를 사상 $Z \to \Spec(A)$에 적용한다. 그러면
+다음 도표를 얻는다.
+$$
+\xymatrix{
+Z \ar[rd]_g & Z' \ar[d]^-{g'} \ar[l]^\pi \ar[r]_i & \mathbf{P}^n_A \ar[dl] \\
+& \Spec(A) &
+}
+$$
+여기서 $\pi : Z' \to Z$는 고유 전사이고 $i$는 몰입이다.
+$Z \to \Spec(A)$가 고유이므로 $g'$도 고유이라고 결론짓는다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-proper}). 따라서 $i$는 닫힌
+몰입이다(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-universally-closed-permanence}와
+\ref{spaces-morphisms-lemma-immersion-when-closed}). 그러므로 사상
+$i' = (i, \pi) : \mathbf{P}^n_A \times_{\Spec(A)} Z' = \mathbf{P}^n_Z$는
+닫힌 몰입이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-semi-diagonal}). 다음과 같이 놓자.
+$$
+\mathcal{L} =
+i^*\mathcal{O}_{\mathbf{P}^n_A}(1) =
+(i')^*\mathcal{O}_{\mathbf{P}^n_Z}(1)
+$$
+Lemma \ref{lemma-kill-by-twisting}를 $\mathcal{L}$과 $\pi$에, 그리고
+$\mathcal{L}$과 $g'$에 적용할 수 있다. 따라서 모든 $d \gg 0$에 대해
+$R^p\pi_*\mathcal{L}^{\otimes d} = 0$이 모든 $p > 0$에 대해 성립하고,
+$R^p(g')_*\mathcal{L}^{\otimes d} = 0$도 모든 $p > 0$에 대해
+성립한다. $\mathcal{G} = \pi_*\mathcal{L}^{\otimes d}$로 놓자.
+Leray 스펙트럼 열(Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-relative-Leray})에 의해
+$$
+E_2^{p, q} = R^pg_* R^q\pi_*\mathcal{L}^{\otimes d}
+\Rightarrow
+R^{p + q}(g')_*\mathcal{L}^{\otimes d}
+$$
+를 얻는다. $d$의 선택에 의해 $E_2^{p, q}$에서 영이 아닌 항은
+$q = 0$인 것들뿐이고,
+$R^{p + q}(g')_*\mathcal{L}^{\otimes d}$에서 영이 아닌 항은
+$p = q = 0$인 것들뿐이다. 이는 $R^pg_*\mathcal{G} = 0$이고, 뒤의
+등식은 $p > 0$에 대해 성립하며,
+$g_*\mathcal{G} = (g')_*\mathcal{L}^{\otimes d}$임을 함의한다.
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-locally-projective-pushforward}를 적용하면
+$g_*\mathcal{G} = (g')_*\mathcal{L}^{\otimes d}$가 연접임을 알 수 있다.
+
+\medskip\noindent
+이제 $\mathcal{G}$의 지지가 $Z$임을 확인해야 한다. 이는
+$\mathcal{L}^{\otimes d}$가 전역 단면을 많이 갖는다는 사실에서
+따른다. 여기서 자세히 설명하겠다. $\mathcal{L}^{\otimes d}$는 전역
+생성되며, 이는 모든 $d \geq 0$에 대해 성립한다. 그 까닭은
+$\mathcal{O}_{\mathbf{P}^n}(d)$에도 같은 사실이 성립하기 때문이다.
+$z \in Z'$를 택하되 그 상을 $\xi$라 하자. 이 점은 $Z$의 일반점이다.
+$\pi$가 전사이므로 이렇게 할 수 있다. (실제로 $Z$가 일반점을 가짐에
+유의하자. $|Z|$가 기약이고 $Z$가 Noether이므로 준분리이며, 따라서
+$|Z|$는 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-separated-sober}에 의해 sober
+위상공간이다.) $s \in \Gamma(Z', \mathcal{L}^{\otimes d})$를 택하되,
+이 단면은 $z$에서 영이 되지 않게 하자.
+$\Gamma(Z, \mathcal{G}) = \Gamma(Z', \mathcal{L}^{\otimes d})$이므로
+$s$를 $\mathcal{G}$의 전역 단면으로 생각할 수 있다. 기하점
+$\overline{z}$를 $Z'$에서 택하되 $z$ 위에 놓이게 하고,
+% P09-ERR-1443
+$\overline{\xi} = g' \circ \overline{z}$로 $Z$의 대응하는 기하점을
+나타내자. 수반사상
+$$
+(g')^*\mathcal{G} =
+(g')^*g'_*\mathcal{L}^{\otimes d} \longrightarrow \mathcal{L}^{\otimes d}
+$$
+은 줄기의 사상
+$\mathcal{G}_{\overline{\xi}} \to \mathcal{L}_{\overline{z}}$를
+유도한다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-stalk-pullback-quasi-coherent}를 보라.
+더욱이 수반사상은 $s$의 당김($\mathcal{G}$의 단면으로 본 것)을
+$s$($\mathcal{L}^{\otimes d}$의 단면으로 본 것)로 보낸다. 따라서
+화살표의 원천인 벡터공간에서 $s$의 상
+$$
+\mathcal{G}_{\overline{\xi}} \otimes \kappa(\overline{\xi})
+\longrightarrow
+\mathcal{L}^{\otimes d}_{\overline{z}} \otimes \kappa(\overline{z})
+$$
+은 영이 아니다. 실제로 $s$의 선택에 의해 화살표의 표적에서 그 상이
+영이 아니다. 그러므로 $\xi$는 $\mathcal{G}$의 지지에 속한다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-support-finite-type}). $|Z|$가 기약이고
+$Z$가 축약이므로 $\mathcal{G}$의 스킴론적 지지는 원하는 대로
+$Z$ 전체라고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-over-affine-cohomology-finite}
+$A$를 Noether 환이라 하자. $f : X \to \Spec(A)$를 대수공간의 고유
+사상이라 하자. $\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+그러면 $H^i(X, \mathcal{F})$는 유한 $A$-가군이고, 이는 모든
+$i \geq 0$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-proper-pushforward-coherent}의 아핀 경우일 뿐이다.
+실제로 Lemma \ref{lemma-higher-direct-image}에 의해
+$R^if_*\mathcal{F}$가 준연접층임을 안다. 따라서 이는 $A$-가군
+$$
+\Gamma(\Spec(A), R^if_*\mathcal{F}) = H^i(X, \mathcal{F})
+$$
+에 연관된 준연접층이다. 등식은 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-apply-Leray}와 아핀 스킴 위 준연접 가군의
+고차 코호몰로지 군의 소멸(Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero})에서
+따른다. Lemma \ref{lemma-coherent-Noetherian}에 의해
+$R^if_*\mathcal{F}$가 연접층일 필요충분조건은
+$H^i(X, \mathcal{F})$가 유한형 $A$-가군인 것임을 알 수 있다.
+따라서 Lemma \ref{lemma-proper-pushforward-coherent}가 결론을 준다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-graded-finiteness}
+$A$를 Noether 환이라 하자. $B$를 유한 생성 등급 $A$-대수라 하자.
+$f : X \to \Spec(A)$를 대수공간의 고유 사상이라 하자.
+$\mathcal{B} = f^*\widetilde B$로 놓자. $\mathcal{F}$를 유한형
+준연접 등급 $\mathcal{B}$-가군이라 하자. 모든 $p \geq 0$에 대해
+등급 $B$-가군 $H^p(X, \mathcal{F})$는 유한 $B$-가군이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 올곱 도표를 생각하자.
+$$
+\xymatrix{
+X' = \Spec(B) \times_{\Spec(A)} X
+\ar[r]_-\pi \ar[d]_{f'} &
+X \ar[d]^f \\
+\Spec(B) \ar[r] &
+\Spec(A)
+}
+$$
+$f'$가 고유 사상임에 유의하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-proper}를 보라. 또한 $B$는
+유한 생성 $A$-대수이고, 따라서 Noether이다(Algebra, Lemma
+\ref{algebra-lemma-Noetherian-permanence}). 이는 $X'$가 Noether
+대수공간임을 함의한다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-noetherian}).
+$X'$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-equivalence-algebras}에 의해 준연접
+$\mathcal{O}_X$-대수 $\mathcal{B}$의 상대 스펙트럼임에 유의하자.
+$\mathcal{F}$가 준연접 $\mathcal{B}$-가군이므로 유일한 준연접
+$\mathcal{O}_{X'}$-가군 $\mathcal{F}'$가 존재하고,
+$\pi_*\mathcal{F}' = \mathcal{F}$이다. Morphisms of
+Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-equivalence-modules}를 보라.
+$\mathcal{F}$가 $\mathcal{B}$-가군으로서 유한형이므로
+$\mathcal{F}'$가 유한형 $\mathcal{O}_{X'}$-가군이라고 결론짓는다
+(세부사항은 생략한다). 달리 말해 $\mathcal{F}'$는 연접
+$\mathcal{O}_{X'}$-가군이다(Lemma
+\ref{lemma-coherent-Noetherian}). 사상 $\pi : X' \to X$가
+아핀이므로
+$$
+H^p(X, \mathcal{F}) = H^p(X', \mathcal{F}')
+$$
+이다. 이는 Lemma \ref{lemma-affine-vanishing-higher-direct-images}와
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-apply-Leray}에서 따른다. 따라서 보조정리는
+Lemma \ref{lemma-proper-over-affine-cohomology-finite}에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{풍부한 가역층과 코호몰로지}
+\label{section-ample-cohomology}
+
+\noindent
+아핀 밑 위의 고유 대수공간에서, 꼬은 뒤의 코호몰로지 소멸로
+표현되는 풍부성의 판정법은 다음과 같다.
+
+\begin{lemma}
+\label{lemma-vanshing-gives-ample}
+$R$을 Noether 환이라 하자. $X$를 $R$ 위의 고유 대수공간이라 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자. 다음 조건들은
+동치이다.
+\begin{enumerate}
+\item $X$는 스킴이고 $\mathcal{L}$은 $X$ 위에서 풍부하다.
+\item 모든 연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해
+$n_0 \geq 0$이 존재하여
+$H^p(X, \mathcal{F} \otimes \mathcal{L}^{\otimes n}) = 0$이고, 이는
+모든 $n \geq n_0$와 $p > 0$에 대해 성립한다.
+\item 모든 연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해
+$n \geq 1$이 존재하여
+$H^1(X, \mathcal{F} \otimes \mathcal{L}^{\otimes n}) = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+함의 (1) $\Rightarrow$ (2)는 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-vanshing-gives-ample}에서 따른다. 함의 (2)
+$\Rightarrow$ (3)은 자명하다. 함의 (3) $\Rightarrow$ (1)은
+Lemma \ref{lemma-Noetherian-h1-zero-invertible}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-surjective-finite-morphism-ample}
+$R$을 Noether 환이라 하자. $f : Y \to X$를 $R$ 위에서 고유인
+대수공간들의 사상이라 하자. $\mathcal{L}$을 가역
+$\mathcal{O}_X$-가군이라 하자. $f$가 유한이고 전사라고 가정하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item $X$는 스킴이고 $\mathcal{L}$은 풍부하다.
+\item $Y$는 스킴이고 $f^*\mathcal{L}$은 풍부하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하자. 유한 사상은 (스킴들로) 표현 가능하므로 $Y$는
+스킴이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-local}를 보라. 따라서 (2)는
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-surjective-finite-morphism-ample}에서 따른다.
+
+\medskip\noindent
+(2)를 가정하자. 다음 성질을 $P$라 하자. 연접 $\mathcal{O}_X$-가군
+$\mathcal{F}$에 대해 어떤 $n_0$가 존재하여
+$H^p(X, \mathcal{F} \otimes \mathcal{L}^{\otimes n}) = 0$이고, 이는
+모든 $n \geq n_0$와 $p > 0$에 대해 성립한다. $P$가 성립함을
+증명하되, 대상은 임의의 연접 $\mathcal{O}_X$-가군 $\mathcal{F}$이다.
+그러면 Lemma \ref{lemma-vanshing-gives-ample}에 의해 $\mathcal{L}$이
+풍부임이 따른다. Lemma
+\ref{lemma-property-higher-rank-cohomological}를 적용하겠다. 따라서
+$P$에 대해 그 보조정리의 (1), (2), (3)을 확인해야 한다. 성질 (1)은
+층의 짧은 완전열에 연관된 긴 코호몰로지 완전열과 가역층으로 텐서하는
+것이 완전함자라는 사실에서 따른다. 성질 (2)는 $H^p(X, -)$가 가법
+함자이므로 따른다.
+
+\medskip\noindent
+(3)을 보기 위해 $i : Z \to X$를 축약 닫힌 부분공간이라 하고
+$|Z|$가 기약이라고 하자. $i' : Z' \to Y$와
+$f' : Z' \to Z$를 Lemma \ref{lemma-finite-morphism-Noetherian}에서와
+같이 택하고 $\mathcal{G} = f'_*\mathcal{O}_{Z'}$로 놓자.
+$\mathcal{G}$가 Lemma
+\ref{lemma-property-higher-rank-cohomological}의 성질 (3)(a)와
+(3)(b)를 만족한다고 주장하며, 이것으로 증명이 끝날 것이다. 성질
+(3)(a)는 Lemma \ref{lemma-finite-morphism-Noetherian}에서 보았다.
+(3)(b)를 보기 위해 $\mathcal{I}$를 $Z$ 위의 영이 아닌 준연접
+아이디얼 층이라 하자.
+% P09-ERR-1444
+$\mathcal{I}' \subset \mathcal{O}_{Z'}$로 준연접 아이디얼
+$(f')^{-1}\mathcal{I} \mathcal{O}_{Z'}$, 즉
+$(f')^*\mathcal{I} \to \mathcal{O}_{Z'}$의 상을 나타내자. Lemma
+\ref{lemma-affine-morphism-projection-ideal}에 의해
+% P09-ERR-1445
+$f_*\mathcal{I}' = \mathcal{I} \mathcal{G}$이다. 공통값
+$\mathcal{G}' = \mathcal{I} \mathcal{G} = f'_*\mathcal{I}'$가
+(3)(b)에 표현된 조건을 만족한다고 주장한다. 먼저
+$\mathcal{G}/\mathcal{G}'$의 지지는
+$\mathcal{O}_Z/\mathcal{I}$의 지지에 포함됨이 명백하다. 뒤의 지지는
+$|Z|$의 진부분공간이다. 실제로 $\mathcal{I}$는 축약이고 기약인
+대수공간 $Z$ 위의 영이 아닌 아이디얼 층이다. $f'_*$, $i_*$,
+$i'_*$가 연접 가군을 연접 가군으로 보냄을 상기하자. Lemmas
+\ref{lemma-finite-pushforward-coherent}와
+\ref{lemma-i-star-equivalence}를 보라. $Y$가 스킴이고
+$\mathcal{L}$이 풍부하므로 Lemma
+\ref{lemma-vanshing-gives-ample}에서 어떤 $n_0$가 존재하여
+$$
+H^p(Y, i'_*\mathcal{I}' \otimes_{\mathcal{O}_Y} f^*\mathcal{L}^{\otimes n}) = 0
+$$
+이고, 이는 $n \geq n_0$와 $p > 0$에 대해 성립함을 알 수 있다.
+이제 다음을 얻는다.
+\begin{align*}
+H^p(X, i_*\mathcal{G}' \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes n})
+& =
+H^p(Z, \mathcal{G'} \otimes_{\mathcal{O}_Z} i^*\mathcal{L}^{\otimes n}) \\
+& =
+H^p(Z,
+f'_*\mathcal{I}' \otimes_{\mathcal{O}_Z} i^*\mathcal{L}^{\otimes n})) \\
+& =
+H^p(Z, f'_*(\mathcal{I}' \otimes_{\mathcal{O}_{Z'}}
+(f')^*i^*\mathcal{L}^{\otimes n})) \\
+& =
+H^p(Z, f'_*(\mathcal{I}' \otimes_{\mathcal{O}_{Z'}}
+(i')^*f^*\mathcal{L}^{\otimes n})) \\
+& =
+H^p(Z',
+\mathcal{I}' \otimes_{\mathcal{O}_{Z'}} (i')^*f^*\mathcal{L}^{\otimes n})) \\
+& =
+H^p(Y, i'_*\mathcal{I}' \otimes_{\mathcal{O}_Y} f^*\mathcal{L}^{\otimes n}) = 0
+\end{align*}
+여기서는 사영 공식과 Leray 스펙트럼 열(Cohomology on Sites,
+Sections \ref{sites-cohomology-section-projection-formula}와
+\ref{sites-cohomology-section-leray}) 및 Lemma
+\ref{lemma-finite-higher-direct-image-zero}를 사용하였다. 이것으로
+Lemma \ref{lemma-property-higher-rank-cohomological}의 성질 (3)(b)가
+원하는 대로 확인된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{형식적 함수 정리}
+\label{section-theorem-formal-functions}
+
+\noindent
+이 절은 Cohomology of Schemes, Section
+\ref{coherent-section-theorem-formal-functions}의 유사물이다. 독자에게
+먼저 그 절을 읽기를 권한다.
+
+\begin{situation}
+\label{situation-formal-functions}
+여기서 $A$는 Noether 환이고 $I \subset A$는 아이디얼이다. 또한
+$f : X \to \Spec(A)$는 대수공간의 고유 사상이고 $\mathcal{F}$는
+$X$ 위의 연접층이다.
+\end{situation}
+
+\noindent
+이 상황에서
+% P09-ERR-1446
+$I^n\mathcal{F}$로 $\mathcal{F}$의 준연접 부분가군을 나타낸다. 이는
+$\mathcal{O}_X$-가군으로서 생성되며, 생성자들은 $\mathcal{F}$의
+국소 단면과 $I^n$의 원소들의 곱이다. 달리 말해, 이는
+% P09-ERR-1447
+사상 $f^*\widetilde{I} \otimes_{\mathcal{O}_X} \mathcal{F} \to
+\mathcal{F}$의 상이다.
+
+\begin{lemma}
+\label{lemma-cohomology-powers-ideal-times-F}
+Situation \ref{situation-formal-functions}에서
+$B = \bigoplus_{n \geq 0} I^n$로 놓자. 그러면 모든 $p \geq 0$에 대해
+등급 $B$-가군
+$\bigoplus_{n \geq 0} H^p(X, I^n\mathcal{F})$는 유한 $B$-가군이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{B} = \bigoplus I^n\mathcal{O}_X = f^*\widetilde{B}$로 놓자.
+그러면 $\bigoplus I^n\mathcal{F}$는 유한형 등급
+$\mathcal{B}$-가군이다. 따라서 결과는 Lemma
+\ref{lemma-graded-finiteness}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cohomology-powers-ideal-application}
+Situation \ref{situation-formal-functions}에서, 모든 $p \geq 0$에 대해
+정수 $c \geq 0$가 존재하여 다음이 성립한다.
+\begin{enumerate}
+\item 곱셈사상
+$I^{n - c} \otimes H^p(X, I^c\mathcal{F}) \to H^p(X, I^n\mathcal{F})$
+은 모든 $n \geq c$에 대해 전사이고,
+\item $H^p(X, I^{n + m}\mathcal{F}) \to H^p(X, I^n\mathcal{F})$의 상은
+부분가군 $I^{m - c} H^p(X, I^n\mathcal{F})$에 포함되며, 이는 모든
+$n \geq 0$, $m \geq c$에 대해 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-cohomology-powers-ideal-times-F}에 의해
+$d_1, \ldots, d_t \geq 0$와
+$x_i \in H^p(X, I^{d_i}\mathcal{F})$를 찾아서
+$\bigoplus_{n \geq 0} H^p(X, I^n\mathcal{F})$가
+$x_1, \ldots, x_t$로 생성되게 할 수 있다. 이는
+$B = \bigoplus_{n \geq 0} I^n$ 위에서의 생성이다.
+$c = \max\{d_i\}$로 택하자. (1)이 성립함은 명백하다.
+(2)를 위해 $b = \max(0, n - c)$로 놓자. 다음 $A$-가군의 가환도표를
+생각하자.
+$$
+\xymatrix{
+I^{n + m - c - b} \otimes I^b \otimes
+H^p(X, I^c\mathcal{F}) \ar[r] \ar[d] &
+I^{n + m - c} \otimes H^p(X, I^c\mathcal{F}) \ar[r] &
+H^p(X, I^{n + m}\mathcal{F}) \ar[d] \\
+I^{n + m - c - b} \otimes H^p(X, I^n\mathcal{F}) \ar[rr] & &
+H^p(X, I^n\mathcal{F})
+}
+$$
+보조정리의 (1)에 의해 $n + m \geq c$이면 수평 화살표들의 합성은
+전사이다. 한편 $n + m - c - b \geq m - c$임은 명백하다. 따라서
+(2)가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-ML-cohomology-powers-ideal}
+Situation \ref{situation-formal-functions}에서 $p \geq 0$을 고정하자.
+\begin{enumerate}
+\item $c_1 \geq 0$가 존재하여 모든 $n \geq c_1$에 대해
+$$
+\Ker(
+H^p(X, \mathcal{F}) \to H^p(X, \mathcal{F}/I^n\mathcal{F})
+)
+\subset
+I^{n - c_1}H^p(X, \mathcal{F}).
+$$
+\item 역계
+$$
+\left(H^p(X, \mathcal{F}/I^n\mathcal{F})\right)_{n \in \mathbf{N}}
+$$
+는 Mittag-Leffler 조건을 만족한다(Homology, Definition
+\ref{homology-definition-Mittag-Leffler}을 보라).
+\item 사실 임의의 $p$와 $n$에 대해 $c_2(n) \geq n$이 존재하여
+$$
+\Im(H^p(X, \mathcal{F}/I^k\mathcal{F})
+\to H^p(X, \mathcal{F}/I^n\mathcal{F}))
+=
+\Im(H^p(X, \mathcal{F})
+\to H^p(X, \mathcal{F}/I^n\mathcal{F}))
+$$
+이고, 이는 모든 $k \geq c_2(n)$에 대해 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$c_1 = \max\{c_p, c_{p + 1}\}$로 놓자. 여기서 $c_p, c_{p +1}$는
+Lemma \ref{lemma-cohomology-powers-ideal-application}에서 $H^p$와
+$H^{p + 1}$에 대해 얻은 정수들이다. (1), (2), (3)의 증명에서 이
+상수를 사용하겠다.
+
+\medskip\noindent
+(1)을 증명하자. 짧은 완전열
+$$
+0 \to I^n\mathcal{F} \to \mathcal{F} \to \mathcal{F}/I^n\mathcal{F} \to 0
+$$
+을 생각하자. 긴 코호몰로지 완전열로부터
+$$
+\Ker(
+H^p(X, \mathcal{F}) \to H^p(X, \mathcal{F}/I^n\mathcal{F})
+)
+=
+\Im(
+H^p(X, I^n\mathcal{F}) \to H^p(X, \mathcal{F})
+)
+$$
+임을 알 수 있다. 따라서 $c_1$의 선택에 의해 이것은
+$I^{n - c_1}H^p(X, \mathcal{F})$에 포함되며, 이는
+$n \geq c_1$에 대해 성립한다.
+
+\medskip\noindent
+(3)이 (2)를 함의함은 Mittag-Leffler 조건의 정의로부터 따른다.
+
+\medskip\noindent
+(3)을 증명하자. 증명의 나머지 전체에서 $n$을 고정한다. 가환도표
+$$
+\xymatrix{
+0 \ar[r] &
+I^n\mathcal{F} \ar[r] &
+\mathcal{F} \ar[r] &
+\mathcal{F}/I^n\mathcal{F} \ar[r] &
+0 \\
+0 \ar[r] &
+I^{n + m}\mathcal{F} \ar[r] \ar[u] &
+\mathcal{F} \ar[r] \ar[u] &
+\mathcal{F}/I^{n + m}\mathcal{F} \ar[r] \ar[u] &
+0
+}
+$$
+를 생각하자. 이로부터 다음 가환도표가 생긴다.
+$$
+\xymatrix{
+H^p(X, I^n\mathcal{F}) \ar[r] &
+H^p(X, \mathcal{F}) \ar[r] &
+H^p(X, \mathcal{F}/I^n\mathcal{F}) \ar[r]_\delta &
+H^{p + 1}(X, I^n\mathcal{F}) \\
+H^p(X, I^{n + m}\mathcal{F}) \ar[r] \ar[u] &
+H^p(X, \mathcal{F}) \ar[r] \ar[u]^1 &
+H^p(X, \mathcal{F}/I^{n + m}\mathcal{F}) \ar[r] \ar[u] &
+H^{p + 1}(X, I^{n + m}\mathcal{F}) \ar[u]^a
+}
+$$
+$m \geq c_1$이면 $a$의 상은
+$I^{m - c_1} H^{p + 1}(X, I^n\mathcal{F})$에 포함된다. Artin-Rees
+보조정리(Algebra, Lemma \ref{algebra-lemma-map-AR}를 보라)에 의해
+정수 $c_3(n)$가 존재하여
+$$
+I^N H^{p + 1}(X, I^n\mathcal{F}) \cap \Im(\delta)
+\subset
+\delta\left(I^{N - c_3(n)}H^p(X, \mathcal{F}/I^n\mathcal{F})\right)
+$$
+이고, 이는 모든 $N \geq c_3(n)$에 대해 성립한다.
+$H^p(X, \mathcal{F}/I^n\mathcal{F})$는 $I^n$에 의해 소멸되므로,
+$m \geq c_3(n) + c_1 + n$이면
+$$
+\Im(H^p(X, \mathcal{F}/I^{n + m}\mathcal{F})
+\to H^p(X, \mathcal{F}/I^n\mathcal{F}))
+=
+\Im(H^p(X, \mathcal{F})
+\to H^p(X, \mathcal{F}/I^n\mathcal{F}))
+$$
+이다. 달리 말해 (3)은 $c_2(n) = c_3(n) + c_1 + n$에 대해 성립한다.
+\end{proof}
+
+\begin{theorem}[형식적 함수 정리]
+\label{theorem-formal-functions}
+Situation \ref{situation-formal-functions}에서 $p \geq 0$을 고정하자.
+사상들의 계
+$$
+H^p(X, \mathcal{F})/I^nH^p(X, \mathcal{F})
+\longrightarrow
+H^p(X, \mathcal{F}/I^n\mathcal{F})
+$$
+는 극한들의 동형사상
+$$
+H^p(X, \mathcal{F})^\wedge
+\longrightarrow
+\lim_n H^p(X, \mathcal{F}/I^n\mathcal{F})
+$$
+을 정의한다. 여기서 왼쪽은 $A$-가군 $H^p(X, \mathcal{F})$를
+아이디얼 $I$에 관해 완비화한 것이다. Algebra, Section
+\ref{algebra-section-completion}을 보라. 더욱이 이는 실제로 극한
+위상들에 대한 위상동형사상이다.
+\end{theorem}
+
+\begin{proof}
+사실 이는 Lemma \ref{lemma-ML-cohomology-powers-ideal}에서 즉시
+따른다. 세부사항을 설명하겠다.
+$M = H^p(X, \mathcal{F})$와
+$M_n = H^p(X, \mathcal{F}/I^n\mathcal{F})$로 놓자.
+$N_n = \Im(M \to M_n)$으로 나타내자. Homology, Section
+\ref{homology-section-inverse-systems}의 극한에 대한 서술에 의해
+$$
+\lim_n M_n
+=
+\{(x_n) \in \prod M_n \mid \varphi_i(x_n) = x_{n - 1}, \ n = 2, 3, \ldots\}
+$$
+이다. 원소 $x = (x_n) \in \lim_n M_n$을 택하자. Lemma
+\ref{lemma-ML-cohomology-powers-ideal}의 (3)에 의해 $x_n \in N_n$이고,
+이는 모든 $n$에 대해 성립한다. 실제로 정의에 의해 $x_n$은 어떤
+$x_{n + m} \in M_{n + m}$의 상이고, 이는 모든 $m$에 대해 성립한다.
+Lemma
+\ref{lemma-ML-cohomology-powers-ideal}의 (1)에 의해 축소사상의
+분해
+$$
+M \to N_n \to M/I^{n - c_1}M
+$$
+가 존재함을 알 수 있다. $y_n \in M/I^{n - c_1}M$로 $x_n$의 상을
+나타내되 $n \geq c_1$이라 하자. $n' \geq n$이면 합성
+$M \to M_{n'} \to M_n$은 주어진 사상 $M \to M_n$이다. 따라서
+$y_{n'}$는 $y_n$으로 가며, 여기서 사용되는 표준사상은
+$M/I^{n' - c_1}M \to M/I^{n - c_1}M$이다.
+그러므로 $y = (y_{n + c_1})$는 $\lim_n M/I^nM$의 원소를 정의한다.
+$y$가 $x$로 간다는 확인은 생략한다. 여기서 사용되는 보조정리의
+사상은
+$$
+M^\wedge = \lim_n M/I^nM \longrightarrow \lim_n M_n
+$$
+이다. 위상에 관한 확인도 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-spell-out-theorem-formal-functions}
+$A$를 환이라 하자. $I \subset A$를 아이디얼이라 하자. $A$가
+Noether이고 $I$에 관해 완비라고 가정하자.
+$f : X \to \Spec(A)$를 대수공간의 고유 사상이라 하자.
+$\mathcal{F}$를 $X$ 위의 연접층이라 하자. 그러면
+$$
+H^p(X, \mathcal{F}) = \lim_n H^p(X, \mathcal{F}/I^n\mathcal{F})
+$$
+이고, 이는 모든 $p \geq 0$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+이는 완비 Noether 밑환의 경우에 형식적 함수 정리(Theorem
+\ref{theorem-formal-functions})를 다시 쓴 것이다. 실제로 이 경우
+$A$-가군 $H^p(X, \mathcal{F})$는 유한이고(Lemma
+\ref{lemma-proper-over-affine-cohomology-finite}), 따라서
+$I$-진 완비이다(Algebra, Lemma
+\ref{algebra-lemma-completion-tensor}). 그러므로 왼쪽에서는 완비화가
+필요 없음을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-formal-functions-stalk}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하고 $\mathcal{F}$를 $X$ 위의 준연접층이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $Y$는 국소 Noether이다.
+\item $f$는 고유이다.
+\item $\mathcal{F}$는 연접이다.
+\end{enumerate}
+$\overline{y}$를 $Y$의 기하점이라 하자. 다음 「무한소 근방」들을
+생각하자.
+$$
+\xymatrix{
+X_n =
+\Spec(\mathcal{O}_{Y, \overline{y}}/\mathfrak m_{\overline{y}}^n) \times_Y X
+\ar[r]_-{i_n} \ar[d]_{f_n} &
+X \ar[d]^f \\
+\Spec(\mathcal{O}_{Y, \overline{y}}/\mathfrak m_{\overline{y}}^n)
+\ar[r]^-{c_n} & Y
+}
+$$
+이들은 올 $X_1 = X_{\overline{y}}$의 근방들이다. 그리고
+$\mathcal{F}_n = i_n^*\mathcal{F}$로 놓자. 그러면
+$$
+\left(R^pf_*\mathcal{F}\right)_{\overline{y}}^\wedge
+\cong
+\lim_n H^p(X_n, \mathcal{F}_n)
+$$
+를 $\mathcal{O}_{Y, \overline{y}}^\wedge$-가군의 동형으로 얻는다.
+\end{lemma}
+
+\begin{proof}
+이는 형식적 함수 정리 Theorem \ref{theorem-formal-functions}의 특수한
+경우를 다시 쓴 것일 뿐이다. 자세히 설명하자.
+$\mathcal{O}_{Y, \overline{y}}$는 Noether 국소환임에 유의하자.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-local-ring-Noetherian}을 보라.
+표준사상
+$c : \Spec(\mathcal{O}_{Y, \overline{y}}) \to Y$를 생각하자. 이 사상은
+국소환들을 동일시하므로 평탄하다.
+% P09-ERR-1448
+$f' : X' \to \Spec(\mathcal{O}_{Y, \overline{y}})$로 $f$를 이
+국소환으로 밑변환한 것을 나타내자. Lemma
+\ref{lemma-flat-base-change-cohomology}에 의해
+$c^*R^pf_*\mathcal{F} = R^pf'_*\mathcal{F}'$임을 알 수 있다. 더욱이
+표준 동일시 $X_n = X'_n$을 얻으며, 이는 모든 $n \geq 1$에 대해
+성립한다.
+
+\medskip\noindent
+따라서 $Y = \Spec(A)$가 강 Hensel Noether 국소환 $A$의
+스펙트럼이고, 그 극대 아이디얼은 $\mathfrak m$이며,
+$\overline{y} \to Y$가 $\Spec(A/\mathfrak m) \to Y$와 같다고
+가정할 수 있다. 그러면
+$$
+\left(R^pf_*\mathcal{F}\right)_{\overline{y}} =
+\Gamma(Y, R^pf_*\mathcal{F}) =
+H^p(X, \mathcal{F})
+$$
+이다. 실제로 $(Y, \overline{y})$는 $\overline{y}$의 에탈 근방
+범주의 시작대상이다. 사상들 $c_n$은 각각 닫힌 몰입이다. 따라서 그
+밑변환들 $i_n$도 닫힌 몰입이다.
+$i_{n, *}\mathcal{F}_n = i_{n, *}i_n^*\mathcal{F}
+= \mathcal{F}/\mathfrak m^n\mathcal{F}$임에 유의하자. $i_n$에 대한
+Leray 스펙트럼 열과 Lemma
+\ref{lemma-finite-pushforward-coherent}에 의해 다음을 알 수 있다.
+% P09-ERR-1449
+$$
+H^p(X_n, \mathcal{F}_n) =
+H^p(X, i_{n, *}\mathcal{F}) =
+H^p(X, \mathcal{F}/\mathfrak m^n\mathcal{F})
+$$
+따라서 보조정리의 명제에 있는 극한을 계산하기 위해 실제로 형식적
+함수 정리를 적용할 수 있고, 이것으로 끝난다.
+\end{proof}
+
+\noindent
+다음 보조정리는 나중에 차원 $ > 0$인 올로 일반화할 것이며, 바로
+그다음 보조정리가 그 일반화이다.
+
+\begin{lemma}
+\label{lemma-higher-direct-images-zero-finite-fibre}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. $\overline{y}$를 $Y$의 기하점이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $Y$는 국소 Noether이다.
+\item $f$는 고유이다.
+\item $X_{\overline{y}}$의 바탕 위상공간은 이산이다.
+\end{enumerate}
+그러면 임의의 연접층 $\mathcal{F}$가 $X$ 위에 주어졌을 때
+$(R^pf_*\mathcal{F})_{\overline{y}} = 0$이고, 이는 모든 $p > 0$에
+대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+$\kappa(\overline{y})$를 $\mathcal{O}_{Y, \overline{y}}$의 잉여체라
+하자. Lemma \ref{lemma-formal-functions-stalk}에서와 같이
+$X_{\overline{y}} = X_1 = \Spec(\kappa(\overline{y})) \times_Y X$로
+놓자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-at-point}에 의해 사상
+$f : X \to Y$는 $X \to Y$의 올의 각 점에서 준유한이다. 여기서 이
+올은 $\overline{y}$ 위에 놓인다. 따라서
+$X_{\overline{y}} \to \overline{y}$는
+분리이고 준유한이다. 그러므로 $X_{\overline{y}}$는 Morphisms of
+Spaces, Proposition
+\ref{spaces-morphisms-proposition-locally-quasi-finite-separated-over-scheme}에
+의해 스킴이다. 이것이 준콤팩트이므로 바탕 위상공간은 유한 이산
+공간이다. 따라서 Schemes, Lemma
+\ref{schemes-lemma-scheme-finite-discrete-affine}에 의해 아핀 스킴이다.
+Lemma \ref{lemma-image-affine-finite-morphism-affine-Noetherian}에 의해
+대수공간들 $X_n$도 아핀 스킴이다. 더욱이
+% P09-ERR-1451
+각 $X_n$의 바탕 위상공간은 $X_1$의 것과 같다. 따라서
+$H^p(X_n, \mathcal{F}_n) = 0$이고, 이는 모든 $p > 0$에 대해
+성립한다. 그러므로 Lemma \ref{lemma-formal-functions-stalk}에 의해
+$(R^pf_*\mathcal{F})_{\overline{y}}^\wedge = 0$임을 알 수 있다.
+Lemma \ref{lemma-proper-pushforward-coherent}에 의해
+$R^pf_*\mathcal{F}$가 연접이고, 따라서
+% P09-ERR-1450
+$R^pf_*\mathcal{F}_{\overline{y}}$는 유한
+$\mathcal{O}_{Y, \overline{y}}$-가군임에 유의하자. Algebra, Lemma
+\ref{algebra-lemma-completion-tensor}에 의해 이는
+$(R^pf_*\mathcal{F})_{\overline{y}} = 0$을 함의한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-higher-direct-images-zero-above-dimension-fibre}
+\begin{slogan}
+고유 사상의 경우, 고차 직접상의 줄기는 올의 차원보다 큰 차수에서
+자명하다.
+\end{slogan}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. $\overline{y}$를 $Y$의 기하점이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $Y$는 국소 Noether이다.
+\item $f$는 고유이다.
+\item $\dim(X_{\overline{y}}) = d$이다.
+\end{enumerate}
+그러면 임의의 연접층 $\mathcal{F}$가 $X$ 위에 주어졌을 때
+$(R^pf_*\mathcal{F})_{\overline{y}} = 0$이고, 이는 모든 $p > d$에
+대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+$\kappa(\overline{y})$를 $\mathcal{O}_{Y, \overline{y}}$의 잉여체라
+하자. Lemma \ref{lemma-formal-functions-stalk}에서와 같이
+$X_{\overline{y}} = X_1 = \Spec(\kappa(\overline{y})) \times_Y X$로
+놓자. 더욱이 각 무한소 근방 $X_n$의 바탕 위상공간은
+$X_{\overline{y}}$의 것과 같다. 따라서 Lemma
+\ref{lemma-vanishing-above-dimension}에 의해
+$H^p(X_n, \mathcal{F}_n) = 0$이고, 이는 모든 $p > d$에 대해
+성립한다. 따라서
+$(R^pf_*\mathcal{F})_{\overline{y}}^\wedge = 0$임을 Lemma
+\ref{lemma-formal-functions-stalk}로부터 알 수 있고, 이는 $p > d$에
+대해 성립한다.
+Lemma \ref{lemma-proper-pushforward-coherent}에 의해
+$R^pf_*\mathcal{F}$가 연접이고, 따라서
+% P09-ERR-1452
+$R^pf_*\mathcal{F}_{\overline{y}}$는 유한
+$\mathcal{O}_{Y, \overline{y}}$-가군임에 유의하자. Algebra, Lemma
+\ref{algebra-lemma-completion-tensor}에 의해 이는
+$(R^pf_*\mathcal{F})_{\overline{y}} = 0$을 함의한다.
+\end{proof}
+
+
+
+
+
+
+\section{형식적 함수 정리의 응용}
+\label{section-applications-formal-functions}
+
+\noindent
+필요에 따라 여기에 더 추가할 것이다.
+
+\begin{lemma}
+\label{lemma-characterize-finite}
+(더 일반적인 형태는 More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-characterize-finite}를 보라.)
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. $Y$가 국소 Noether라고 가정하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $f$는 유한이고,
+\item $f$는 고유이고 $|X_k|$는 이산공간이며, 이는 모든 사상
+$\Spec(k) \to Y$에 대해 성립하고 여기서 $k$는 체이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+유한 사상은 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-proper}에 의해 고유이다. 유한
+사상은 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-quasi-finite}에 의해 준유한이다.
+준유한 사상은 이산 올 $X_k$를 갖는다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite}를 보라. 따라서
+유한 사상은 고유이고 이산 올 $X_k$를 갖는다.
+
+\medskip\noindent
+$f$가 고유이고 이산 올 $X_k$를 갖는다고 가정하자. $f$가 유한임을
+보이고자 한다. 사실 $f$가 아핀임을 증명하면 충분하다. 실제로
+$f$가 아핀이면 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-closed}에 의해
+$f$가 정수적이고, 이어 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-integral}에 의해 $f$가 유한이다.
+
+\medskip\noindent
+$f$가 아핀임을 보이기 위해 $Y$가 아핀이라고 가정해도 되며, 목표는
+$X$도 아핀임을 보이는 것이다. $f$가 고유이므로 $X$는 분리이고
+준콤팩트이다. 임의의 연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해
+$H^1(X, \mathcal{F}) = 0$임을 보이겠다. 이는
+$H^1(X, \mathcal{F}) = 0$임을 함의한다. 뒤의 명제는 모든 준연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$에 대한 것이며, Lemmas
+\ref{lemma-directed-colimit-coherent}와 \ref{lemma-colimits}에 의해
+함의한다. 그러면 Proposition \ref{proposition-vanishing-affine}에서
+$X$가 아핀임이 따른다. Lemma
+\ref{lemma-higher-direct-images-zero-finite-fibre}에 의해
+$R^1f_*\mathcal{F}$의 줄기는 $Y$의 모든 기하점에서 영이라고
+결론짓는다. 달리 말해 $R^1f_*\mathcal{F} = 0$이다. 따라서 $f$에
+대한 Leray 스펙트럼 열로부터
+$H^1(X , \mathcal{F}) = H^1(Y, f_*\mathcal{F})$임을 알 수 있다.
+$Y$가 아핀이고 $f_*\mathcal{F}$가 준연접이므로(Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-pushforward}), Cohomology of
+Schemes, Lemma
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}에서
+$H^1(Y, f_*\mathcal{F}) = 0$이라고 결론짓는다. 따라서 원하는 대로
+$H^1(X, \mathcal{F}) = 0$이다.
+\end{proof}
+
+\noindent
+그 결과 다음의 유용한 명제를 얻는다.
+
+\begin{lemma}
+\label{lemma-proper-finite-fibre-finite-in-neighbourhood}
+(더 일반적인 형태는 More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-proper-finite-fibre-finite-in-neighbourhood}를
+보라.) $S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의
+사상이라 하자. $\overline{y}$를 $Y$의 기하점이라 하자. 다음을
+가정한다.
+\begin{enumerate}
+\item $Y$는 국소 Noether이다.
+\item $f$는 고유이다.
+\item $|X_{\overline{y}}|$는 유한이다.
+\end{enumerate}
+그러면 열린 근방 $V \subset Y$가 존재하여 $\overline{y}$를 포함하고,
+$f|_{f^{-1}(V)} : f^{-1}(V) \to V$가 유한이다.
+\end{lemma}
+
+\begin{proof}
+사상 $f$는 $X$의 모든 기하점에서 준유한이며, 여기서 그 점들은
+$\overline{y}$ 위에 놓인다. 이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-at-point}에서 따른다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-quasi-finite-part}에 의해
+$f$가 준유한인 점들의 집합은 열린 부분공간 $U \subset X$이다.
+$Z = X \setminus U$로 놓자. 그러면
+$\overline{y} \not \in f(Z)$이다. $f$가 고유이므로 집합
+$f(Z) \subset Y$는 닫혀 있다. 임의의 열린 근방 $V \subset Y$를
+택하되 $\overline{y}$를 포함하고,
+% P09-ERR-1453
+$Z \cap V = \emptyset$이게 하자. 그러면
+$f^{-1}(V) \to V$는 국소 준유한이고 고유이다. 따라서
+$f^{-1}(V) \to V$는 이산 올 $X_k$를 갖는다(Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-locally-quasi-finite}). 이 올들은
+준콤팩트이므로 유한이다. 따라서 $f^{-1}(V) \to V$는 Lemma
+\ref{lemma-characterize-finite}에 의해 유한이다.
+\end{proof}
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

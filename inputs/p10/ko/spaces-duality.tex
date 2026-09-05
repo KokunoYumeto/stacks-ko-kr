@@ -1,0 +1,2105 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{공간의 쌍대성}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장은 스킴에 관한 해당 장의 유사물이다. 공간의 쌍대성,
+제\ref{duality-section-introduction}절을 보라.
+여기서의 전개는 다음 논문들의 전개와 유사하다.
+\cite{Neeman-Grothendieck}, \cite{LN},
+\cite{Lipman-notes}, \cite{Neeman-improvement}.
+
+
+
+
+\section{대수 공간 위의 쌍대화 복합체}
+\label{section-dualizing-spaces}
+
+\noindent
+$U$를 국소 뇌터 스킴이라 하자. $\mathcal{O}_\etale$를
+$U$의 작은 에탈레 사이트인 $U$ 위의 구조층이라 하자.
+$K = \epsilon^*(\omega_U^\bullet)$가 되는 대상
+$K \in D_\QCoh(\mathcal{O}_\etale)$를 $U$ 위의 쌍대화 복합체라고
+부르기로 하자. 여기서 $\omega_U^\bullet$는
+공간의 쌍대성, 제\ref{duality-section-dualizing-schemes}절의 의미에서
+어떤 쌍대화 복합체이다.
+여기서 $\epsilon^* : D_\QCoh(\mathcal{O}_U) \to D_\QCoh(\mathcal{O}_\etale)$는
+공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site}의 동치이다.
+공간의 쌍대성, 제\ref{duality-section-dualizing-schemes}절에서 연구한
+$\omega_U^\bullet$의 성질 대부분은
+공간의 유도 범주, 절
+\ref{spaces-perfect-section-derived-quasi-coherent-etale} 및
+\ref{spaces-perfect-section-spell-out}의 논의를 통해 $K$에 계승된다.
+
+\medskip\noindent
+국소 뇌터 대수 공간 위의 쌍대화 복합체를, 대응하는 스킴 위의
+쌍대화 복합체에서 에탈레 국소적으로 오는 복합체로 정의한다.
+
+\begin{lemma}
+\label{lemma-equivalent-definitions}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 국소 뇌터 대수 공간이라 하자.
+$K$를 $D_\QCoh(\mathcal{O}_X)$의 대상이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $U$가 스킴인 모든 에탈레 사상 $U \to X$에 대하여,
+위에서 논의한 의미에서 제한 $K|_U$가 $U$의 쌍대화 복합체이다.
+\item $U$가 스킴이고 $U \to X$가 전사 에탈레 사상인 어떤 경우에,
+$K|_U$가 $U$의 쌍대화 복합체이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U$가 스킴이고 $U \to X$가 전사 에탈레 사상이라고 하자.
+$V$가 스킴인 에탈레 사상 $V \to X$를 잡자.
+그러면
+$$
+U \leftarrow U \times_X V \rightarrow V
+$$
+는 스킴들의 에탈레 사상이고 $V$로 향하는 화살표는 전사이다.
+따라서 공간의 쌍대성, 보조정리
+\ref{duality-lemma-descent-ascent}를 적용하면, $K|_U$가
+$U$의 쌍대화 복합체일 때 $K|_V$가 $V$의 쌍대화 복합체임을 알 수 있다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\begin{definition}
+\label{definition-dualizing-scheme}
+$S$를 스킴이라 하자.
+$X$를 $S$ 위의 국소 뇌터 대수 공간이라 하자.
+$D_\QCoh(\mathcal{O}_X)$의 대상 $K$가
+보조정리 \ref{lemma-equivalent-definitions}의 동치인 조건들을
+$K$가 만족하면 {\it 쌍대화 복합체}라고 부른다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-affine-duality}
+$A$를 뇌터 환이라 하고 $X = \Spec(A)$라 하자. $\mathcal{O}_\etale$를
+$X$의 작은 에탈레 사이트인 $X$ 위의 구조층이라 하자. $K, L$을 $D(A)$의
+대상이라 하자. $K \in D_{\textit{Coh}}(A)$이고 $L$의 단사 차원이
+유한하면,
+$$
+\epsilon^*\widetilde{R\Hom_A(K, L)} =
+R\SheafHom_{\mathcal{O}_\etale}(\epsilon^*\widetilde{K},
+\epsilon^*\widetilde{L})
+$$
+$D(\mathcal{O}_\etale)$에서 성립한다. 여기서
+$\epsilon : (X_\etale, \mathcal{O}_\etale) \to (X, \mathcal{O}_X)$는
+공간의 유도 범주, 절
+\ref{spaces-perfect-section-derived-quasi-coherent-etale}에 나오는 사상이다.
+\end{lemma}
+
+\begin{proof}
+공간의 쌍대성, 보조정리 \ref{duality-lemma-affine-duality}에 의해
+다음과 같은 정준 동형이 있다.
+$$
+\widetilde{R\Hom_A(K, L)} =
+R\SheafHom_{\mathcal{O}_X}(\widetilde{K}, \widetilde{L})
+$$
+$D(\mathcal{O}_X)$에서 성립한다. 다음과 같은 정준 사상이 있다.
+$$
+\epsilon^*R\Hom_{\mathcal{O}_X}(\widetilde{K}, \widetilde{L})
+\longrightarrow
+R\SheafHom_{\mathcal{O}_\etale}(\epsilon^*\widetilde{K},
+\epsilon^*\widetilde{L})
+$$
+$D(\mathcal{O}_\etale)$에서 성립하며, 사이트의 코호몰로지, 주석
+\ref{sites-cohomology-remark-prepare-fancy-base-change}를 보라.
+이 사상의 왼쪽과 오른쪽이 동형인 코호몰로지 층을 갖는다는 것을
+보이겠지만, 그 동형이 이 사상으로 주어진다는 검증은 생략한다.
+
+\medskip\noindent
+$L$이 단사 $A$-가군들의 유한 복합체 $I^\bullet$로 주어진다고 가정할 수 있다.
+$I^\bullet$의 길이에 대한 귀납법과 구별삼각형에 대한 구성의
+호환성으로부터, $I$가 단사 $A$-가군인 $L = I[0]$인 경우로
+환원된다.
+$R\SheafHom_{\mathcal{O}_\etale}(\epsilon^*\widetilde{K},
+\epsilon^*\widetilde{L}))$의 코호몰로지 층은
+$X$ 위에서 에탈레인 $U$를 보내어
+$U_\etale$에 제한한 $\epsilon^*\widetilde{K}$와
+$\epsilon^*\widetilde{L}$ 사이의 $i$번째 Ext 군으로 보내는
+준층의 층화임을 상기하자. 사이트의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-section-RHom-over-U}를 보라.
+$U = \Spec(B)$가 아핀이면, 이 Ext 군은
+$\text{Ext}^i_B(K \otimes_A B, L \otimes_A B)$와 같다. 이는 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site}와
+스킴의 유도 범주, 보조정리
+\ref{perfect-lemma-affine-compare-bounded}의 동치에 의한 것이다.
+(여기서는 공간의 유도 범주, 주석
+\ref{spaces-perfect-remark-match-total-direct-images}에 자세히 적힌
+호환성도 사용한다.)
+$A \to B$가 에탈레이므로, 쌍대화 복합체, 보조정리
+\ref{dualizing-lemma-injective-goes-up}에 의해
+$I \otimes_A B$는 단사 $B$-가군임을 알 수 있다.
+따라서
+\begin{align*}
+\Ext^n_B(K \otimes_A B, I \otimes_A B)
+& =
+\Hom_B(H^{-n}(K \otimes_A B), I \otimes_A B) \\
+& =
+\Hom_{A_f}(H^{-n}(K) \otimes_A B, I \otimes_A B) \\
+& =
+\Hom_A(H^{-n}(K), I) \otimes_A B \\
+& =
+\text{Ext}^n_A(K, I) \otimes_A B
+\end{align*}
+가 성립한다. 두 번째에서 끝에서 앞선 등호는 $H^{-n}(K)$가
+$A$-가군으로 유한하기 때문이며, 대수에 관하여 더 자세히 보기,
+보조정리 \ref{more-algebra-lemma-pseudo-coherence-and-base-change-ext}를
+보라.
+그러므로 보조정리의 등식 양변의 코호몰로지 층은 서로 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-dualizing-spaces}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 국소 뇌터 대수 공간이라 하자.
+$K$를 $X$ 위의 쌍대화 복합체라 하자.
+그러면 $K$는 $D_{\textit{Coh}}(\mathcal{O}_X)$의 대상이고
+$D = R\SheafHom_{\mathcal{O}_X}(-, K)$는 반동치를 유도한다.
+$$
+D :
+D_{\textit{Coh}}(\mathcal{O}_X)
+\longrightarrow
+D_{\textit{Coh}}(\mathcal{O}_X)
+$$
+이는 정준 동형 $\text{id} \to D \circ D$를 갖는다. $X$가 준콤팩트이면
+$D$는 $D^+_{\textit{Coh}}(\mathcal{O}_X)$와
+$D^-_{\textit{Coh}}(\mathcal{O}_X)$를 서로 바꾸며
+동치
+$D^b_{\textit{Coh}}(\mathcal{O}_X) \to D^b_{\textit{Coh}}(\mathcal{O}_X)$를
+유도한다.
+\end{lemma}
+
+\begin{proof}
+$U \to X$가 $U$를 아핀으로 하는 에탈레 사상이라고 하자.
+$U = \Spec(A)$라 쓰고, 보조정리 \ref{lemma-equivalent-definitions} 및
+공간의 쌍대성, 보조정리
+\ref{duality-lemma-equivalent-definitions}에 따라 $K|_U$에 대응하는
+$A$의 쌍대화 복합체를 $\omega_A^\bullet$라 하자.
+보조정리 \ref{lemma-affine-duality}에 의해 다음 도식은 가환한다.
+$$
+\xymatrix{
+D_{\textit{Coh}}(A) \ar[r] \ar[d]_{R\Hom_A(-, \omega_A^\bullet)} &
+D_{\textit{Coh}}(\mathcal{O}_\etale)
+\ar[d]^{R\SheafHom_{\mathcal{O}_\etale}(-, K|_U)} \\
+D_{\textit{Coh}}(A) \ar[r] &
+D(\mathcal{O}_\etale)
+}
+$$
+여기서 $\mathcal{O}_\etale$는 $U$의 작은 에탈레 사이트 위의
+구조층이다. $R\SheafHom$의 구성은 제한과 가환하므로, $D$가
+$D_{\textit{Coh}}(\mathcal{O}_X)$를
+$D_{\textit{Coh}}(\mathcal{O}_X)$ 안으로 보냄을 결론낼 수 있다.
+더욱이 정준 사상
+$$
+L \longrightarrow
+R\SheafHom_{\mathcal{O}_X}(R\SheafHom_{\mathcal{O}_X}(L, K), K)
+$$
+(사이트의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-internal-hom-evaluate})은
+$D_{\textit{Coh}}(\mathcal{O}_X)$의 모든 $L$에 대해 동형이다.
+이는 위와 같은 모든 $U$ 위에서 쌍대화 복합체, 보조정리
+\ref{dualizing-lemma-dualizing}에 의해 성립한다.
+준콤팩트인 경우 함수 $D$의 유계성에 관한 명제 역시
+쌍대화 복합체, 보조정리 \ref{dualizing-lemma-dualizing}의
+대응하는 명제에서 따른다.
+\end{proof}
+
+\noindent
+$(\mathcal{C}, \mathcal{O})$를 환 달린 사이트라 하자. $D(\mathcal{O})$의
+대상 $L$이 {\it 가역}이라는 것은 유도 텐서곱으로 주어진
+$D(\mathcal{O}_X)$의 대칭 모노이달 구조에서 가역 대상이라는 뜻임을
+상기하자. 사이트의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-invertible-derived}에서 이것은 $L$이
+완전(perfect)이고, $(\mathcal{C}, \mathcal{O})$가 국소 환 달린
+사이트이면 $\mathcal{C}$의 모든 대상 $U$에 대해
+$\mathcal{C}$에서 $U$의 덮개 $\{U_i \to U\}$가 존재하여
+어떤 정수 $n_i$에 대해
+$L|_{U_i} \cong \mathcal{O}_{U_i}[-n_i]$가 된다는 뜻임을 보았다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+$D(\mathcal{O}_X)$의 $L$이 가역이면 다음과 같은 서로소 합 분해
+$X = \coprod_{n \in \mathbf{Z}} X_n$가 있다.
+그 분해에서 $L|_{X_n}$은 차수 $n$에 놓인 가역 가군이다.
+특히 $L = \bigoplus H^n(L)[-n]$이므로 $L$을 나타내는 $\mathcal{O}_X$-가군들의 잘 정의된
+복합체(미분은 0)를 얻는다.
+
+\begin{lemma}
+\label{lemma-dualizing-unique-spaces}
+$S$를 스킴이라 하자.
+$X$를 $S$ 위의 국소 뇌터 대수 공간이라 하자.
+$K$와 $K'$가 $X$ 위의 쌍대화 복합체라면,
+$D(\mathcal{O}_X)$의 어떤 가역 대상 $L$에 대하여 $K'$는
+$K \otimes_{\mathcal{O}_X}^\mathbf{L} L$과 동형이다.
+\end{lemma}
+
+\begin{proof}
+다음과 같이 놓자.
+$$
+L = R\SheafHom_{\mathcal{O}_X}(K, K')
+$$
+이는 아핀 국소적으로 성립하므로 $D(\mathcal{O}_X)$의 가역 대상이다.
+보조정리 \ref{lemma-affine-duality}와 쌍대화 복합체, 보조정리
+\ref{dualizing-lemma-dualizing-unique} 및 그 증명을 사용한다.
+평가 사상
+$L \otimes_{\mathcal{O}_X}^\mathbf{L} K \to K'$는 같은 이유로 동형이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-dimension-function-scheme}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 국소 뇌터
+준분리 대수 공간이라 하자.
+$\omega_X^\bullet$를 $X$ 위의 쌍대화 복합체라 하자. 그러면 $X$ 위의
+함수
+$$
+\begin{aligned}
+x &\longmapsto \delta(x)\text{이고 } \\
+&\omega_{X, \overline{x}}^\bullet[-\delta(x)] \\
+&\text{는 다음 환 위의 정규화된 쌍대화 복합체이다:} \\
+&\mathcal{O}_{X, \overline{x}}
+\end{aligned}
+$$
+로 정의되는 $|X| \to \mathbf{Z}$는 $|X|$의 차원 함수이다.
+\end{lemma}
+
+\begin{proof}
+$U$를 스킴이라 하고 $U \to X$를 전사 에탈레 사상이라 하자.
+$\omega_X^\bullet|_U$에 대응하는 $U$ 위의 쌍대화 복합체를
+$\omega_U^\bullet$라 하자.
+$u \in U$가 $x \in |X|$로 사상되면,
+$\mathcal{O}_{X, \overline{x}}$는 $\mathcal{O}_{U, u}$의
+엄밀 헨젤화이다. 쌍대화 복합체, 보조정리
+\ref{dualizing-lemma-flat-unramified}에 의해,
+$\omega^\bullet$가 $\mathcal{O}_{U, u}$의 정규화된 쌍대화 복합체이면
+$\omega^\bullet \otimes_{\mathcal{O}_{U, u}} \mathcal{O}_{X, \overline{x}}$는
+$\mathcal{O}_{X, \overline{x}}$의 정규화된 쌍대화 복합체임을
+알 수 있다.
+따라서 스킴 $U$와 복합체 $\omega_U^\bullet$에 대한
+공간의 쌍대성, 보조정리
+\ref{duality-lemma-dimension-function-scheme}의 차원 함수
+$U \to \mathbf{Z}$는 $U \to |X|$와 $\delta$의 합성과 같다.
+$|X|$에서의 특수화가 $U$에서의 특수화로 들어 올려지고,
+$U$에서의 비자명한 특수화가 $X$에서의 비자명한 특수화로 사상된다는
+사실(품위 있는 공간, 보조정리
+\ref{decent-spaces-lemma-decent-specialization} 및
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point})을
+사용하면, 간단한 위상수학적 논증으로 $\delta$가 $|X|$의 차원 함수임을
+보일 수 있다.
+\end{proof}
+\section{푸시포워드의 오른쪽 수반}
+\label{section-twisted-inverse-image}
+
+\noindent
+이는 공간의 쌍대성, 제\ref{duality-section-twisted-inverse-image}절의
+유사물이다.
+
+\begin{lemma}
+\label{lemma-twisted-inverse-image}
+\begin{reference}
+이는 거의 \cite[Example 4.2]{Neeman-Grothendieck}과 같다.
+\end{reference}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 준분리 및 준콤팩트 대수 공간 사이의 사상이라 하자.
+함자 $Rf_* : D_\QCoh(X) \to D_\QCoh(Y)$는 오른쪽 수반을 갖는다.
+\end{lemma}
+
+\begin{proof}
+오른쪽 수반의 존재를 보이기 위해
+유도 범주, 명제 \ref{derived-proposition-brown}의 가정을 확인한다.
+먼저 $D_\QCoh(\mathcal{O}_X)$는 직합을 갖는다. 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-quasi-coherence-direct-sums}를 보라.
+범주 $D_\QCoh(\mathcal{O}_X)$는 공간의 유도 범주, 정리
+\ref{spaces-perfect-theorem-bondal-van-den-Bergh}에 의해 콤팩트하게 생성된다.
+$X$와 $Y$가 준콤팩트이고 준분리이므로 $f$도 그러하다. 공간의 사상, 보조정리
+\ref{spaces-morphisms-lemma-compose-after-separated} 및
+\ref{spaces-morphisms-lemma-quasi-compact-permanence}를 보라.
+따라서 함자 $Rf_*$는 직합과 가환한다. 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-quasi-coherence-pushforward-direct-sums}를 보라.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-twisted-inverse-image-bounded-below}
+표기와 가정은 보조정리 \ref{lemma-twisted-inverse-image}와 같다고 하자.
+$a : D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_X)$를
+$Rf_*$의 오른쪽 수반이라 하자. 그러면 $a$는
+$D^+_\QCoh(\mathcal{O}_Y)$를 $D^+_\QCoh(\mathcal{O}_X)$ 안으로 보낸다.
+실제로 어떤 정수 $N$이 존재하여,
+$H^i(K) = 0$가 $i \leq c$에서 성립하면
+$H^i(a(K)) = 0$가 $i \leq c - N$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-quasi-coherence-direct-image}에 의해 함자
+$Rf_*$는 유한 코호몰로지 차원을 갖는다. 즉 어떤 정수 $N$이 존재하여,
+$i \geq c$에서 $H^i(L) = 0$이면 $i \geq N + c$에서
+$H^i(Rf_*L) = 0$이다.
+$K \in D^+_\QCoh(\mathcal{O}_Y)$가 $i \leq c$에서
+$H^i(K) = 0$을 만족한다고 하자. 그러면
+$$
+\Hom_{D(\mathcal{O}_X)}(\tau_{\leq c - N}a(K), a(K)) =
+\Hom_{D(\mathcal{O}_Y)}(Rf_*\tau_{\leq c - N}a(K), K) = 0
+$$
+이는 위에서 말한 사실에 따른다. 명백히 이것은
+$H^i(a(K)) = 0$가 $i \leq c - N$에서 성립함을 뜻한다.
+\end{proof}
+
+\noindent
+$S$를 스킴이라 하고,
+$f : X \to Y$를 $S$ 위의 준분리 및 준콤팩트 대수 공간 사이의 사상이라 하자.
+$a$를
+$Rf_* : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$의 오른쪽
+수반이라고 하자. 모든
+$K \in D_\QCoh(\mathcal{O}_Y)$ 및
+$L \in D_\QCoh(\mathcal{O}_X)$에 대해 정준 사상
+\begin{equation}
+\label{equation-sheafy-trace}
+Rf_*R\SheafHom_{\mathcal{O}_X}(L, a(K))
+\longrightarrow
+R\SheafHom_{\mathcal{O}_Y}(Rf_*L, K)
+\end{equation}
+을 얻는다. 이 사상은 다음 합성으로 구성된다.
+$$
+\begin{aligned}
+Rf_*R\SheafHom_{\mathcal{O}_X}(L, a(K))
+&\to R\SheafHom_{\mathcal{O}_Y}(Rf_*L, Rf_*a(K)) \\
+&\to R\SheafHom_{\mathcal{O}_Y}(Rf_*L, K)
+\end{aligned}
+$$
+첫 번째 화살표는 사이트의 코호몰로지, 주석
+\ref{sites-cohomology-remark-projection-formula-for-internal-hom}에서 오고,
+두 번째 화살표는 수반의 여단위원
+$Rf_*a(K) \to K$이다.
+
+\begin{lemma}
+\label{lemma-iso-on-RSheafHom}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 준콤팩트 및 준분리 대수 공간 사이의 사상이라 하자.
+$a$를
+$Rf_* : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$의 오른쪽 수반이라 하자.
+$L \in D_\QCoh(\mathcal{O}_X)$ 및
+$K \in D_\QCoh(\mathcal{O}_Y)$라 하자.
+그러면 사상 (\ref{equation-sheafy-trace})
+$$
+Rf_*R\SheafHom_{\mathcal{O}_X}(L, a(K))
+\longrightarrow
+R\SheafHom_{\mathcal{O}_Y}(Rf_*L, K)
+$$
+에 함자
+$DQ_Y : D(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_Y)$를 적용하면
+동형이 된다. 이 함자는 공간의 유도 범주, 절
+\ref{spaces-perfect-section-better-coherator}에서 논의되었다.
+\end{lemma}
+
+\begin{proof}
+이 명제는 $DQ_Y$가 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-better-coherator}에 의해 존재하므로 의미가 있다.
+$DQ_Y$는 포함 함자
+$D_\QCoh(\mathcal{O}_Y) \to D(\mathcal{O}_Y)$의 오른쪽 수반이므로,
+보조정리를 증명하려면 임의의
+$M \in D_\QCoh(\mathcal{O}_Y)$에 대해
+사상 (\ref{equation-sheafy-trace})가 전단사를 유도함을 보여야 한다.
+% P10-E0252
+$$
+\Hom_Y(M, Rf_*R\SheafHom_{\mathcal{O}_X}(L, a(K)))
+\longrightarrow
+\Hom_Y(M, R\SheafHom_{\mathcal{O}_Y}(Rf_*L, K))
+$$
+이를 위해 다음 등식의 연쇄를 사용한다.
+\begin{align*}
+\Hom_Y(M, Rf_*R\SheafHom_{\mathcal{O}_X}(L, a(K)))
+& =
+\Hom_X(Lf^*M, R\SheafHom_{\mathcal{O}_X}(L, a(K))) \\
+& =
+\Hom_X(Lf^*M \otimes_{\mathcal{O}_X}^\mathbf{L} L, a(K)) \\
+& =
+\Hom_Y(Rf_*(Lf^*M \otimes_{\mathcal{O}_X}^\mathbf{L} L), K) \\
+& =
+\Hom_Y(M \otimes_{\mathcal{O}_Y}^\mathbf{L} Rf_*L, K) \\
+& =
+\Hom_Y(M, R\SheafHom_{\mathcal{O}_Y}(Rf_*L, K))
+\end{align*}
+첫 번째 등식은 사이트의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-adjoint}에 따른다.
+% P10-E0253
+두 번째 등식은 사이트의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-internal-hom}에 따른다.
+세 번째 등식은 $a$의 구성에 따른다.
+네 번째 등식은 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-cohomology-base-change}에 따른다
+(이것이 중요한 단계이다).
+다섯 번째 등식은 사이트의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-internal-hom}에 따른다.
+\end{proof}
+
+\begin{example}
+\label{example-iso-on-RSheafHom}
+함자 “코히어런터” $DQ_Y$를 적용하지 않으면
+보조정리 \ref{lemma-iso-on-RSheafHom}의 명제는 성립하지 않는다.
+공간의 쌍대성, 예 \ref{duality-example-iso-on-RSheafHom}를 보라.
+\end{example}
+
+\begin{remark}
+\label{remark-iso-on-RSheafHom}
+보조정리 \ref{lemma-iso-on-RSheafHom}의 상황에서
+공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-pushforward-better-coherator}에 의해
+$$
+DQ_Y(Rf_*R\SheafHom_{\mathcal{O}_X}(L, a(K))) =
+Rf_* DQ_X(R\SheafHom_{\mathcal{O}_X}(L, a(K)))
+$$
+이다. 따라서
+$R\SheafHom_{\mathcal{O}_X}(L, a(K)) \in D_\QCoh(\mathcal{O}_X)$이면
+화살표 왼쪽의 $DQ_Y$를 “지울” 수 있다.
+한편
+$R\SheafHom_{\mathcal{O}_Y}(Rf_*L, K) \in D_\QCoh(\mathcal{O}_Y)$임을
+알고 있으면 화살표 오른쪽의 $DQ_Y$를 “지울” 수 있다.
+둘 다 성립하면 (\ref{equation-sheafy-trace})가 동형임을 알 수 있다.
+이를 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-quasi-coherence-internal-hom}와 결합하면,
+다음 두 경우 중 하나에서
+$Rf_*R\SheafHom_{\mathcal{O}_X}(L, a(K)) \to
+R\SheafHom_{\mathcal{O}_Y}(Rf_*L, K)$가 동형임을 알 수 있다.
+\begin{enumerate}
+\item $L$과 $Rf_*L$이 모두 완전(perfect)인 경우;
+\item $K$가 아래로 유계이고 $L$과 $Rf_*L$이 유사유한(pseudo-coherent)인 경우.
+\end{enumerate}
+(2)에서는 $K$가 아래로 유계이면 $a(K)$도 아래로 유계라는 사실을 사용한다.
+보조정리 \ref{lemma-twisted-inverse-image-bounded-below}를 보라.
+\end{remark}
+
+\begin{example}
+\label{example-iso-on-RSheafHom-noetherian}
+$S$를 스킴이라 하고,
+$f : X \to Y$를 $S$ 위의 뇌터 대수 공간 사이의 고유 사상이라 하자.
+$L \in D^-_{\textit{Coh}}(X)$ 및
+$K \in D^+_{\QCoh}(\mathcal{O}_Y)$라 하자.
+그러면 사상
+$Rf_*R\SheafHom_{\mathcal{O}_X}(L, a(K)) \to
+R\SheafHom_{\mathcal{O}_Y}(Rf_*L, K)$는 동형이다.
+실제로 $L$과 $Rf_*L$은 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-identify-pseudo-coherent-noetherian} 및
+\ref{spaces-perfect-lemma-direct-image-coherent}와
+주석 \ref{remark-iso-on-RSheafHom}의 논의에 의해 유사유한이다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-iso-global-hom}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 준분리 및 준콤팩트 대수 공간 사이의 사상이라 하자.
+모든 $L \in D_\QCoh(\mathcal{O}_X)$ 및
+$K \in D_\QCoh(\mathcal{O}_Y)$에 대해
+(\ref{equation-sheafy-trace})는 전체 유도 Hom의 동형
+$R\Hom_X(L, a(K))\allowbreak \to R\Hom_Y(Rf_*L, K)$를 유도한다.
+\end{lemma}
+
+\begin{proof}
+구성에 의해 (사이트의 코호몰로지, 절
+\ref{sites-cohomology-section-global-RHom}) 다음 복합체들이
+$$
+\begin{aligned}
+R\Hom_X(L, a(K))
+&= R\Gamma(X, R\SheafHom_{\mathcal{O}_X}(L, a(K))) \\
+&= R\Gamma(Y, Rf_*R\SheafHom_{\mathcal{O}_X}(L, a(K)))
+\end{aligned}
+$$
+및
+% P10-E0254
+$$
+R\Hom_Y(Rf_*L, K) =
+R\Gamma(Y, R\SheafHom_{\mathcal{O}_X}(Rf_*L, a(K)))
+$$
+이다. 따라서 이는 보조정리 \ref{lemma-iso-on-RSheafHom}의 결과이다.
+구체적으로 $D(\mathcal{O}_Y)$의 사상 $E \to E'$가
+$DQ_Y(E) \to DQ_Y(E')$의 동형을 유도하면,
+$R\Gamma(Y, E) \to R\Gamma(Y, E')$의 준동형을 유도한다.
+실제로
+\par\noindent
+$\begin{aligned}
+&H^i(Y, E) = \Ext^i_Y(\mathcal{O}_Y, E) \\
+&= \Hom(\mathcal{O}_Y[-i], E) \\
+&= \Hom(\mathcal{O}_Y[-i], DQ_Y(E))
+\end{aligned}$
+이다. 이는 $\mathcal{O}_Y[-i]$가
+$D_\QCoh(\mathcal{O}_Y)$에 속하고 $DQ_Y$가 포함 함자
+$D_\QCoh(\mathcal{O}_Y) \to D(\mathcal{O}_Y)$의 오른쪽 수반이기 때문이다.
+\end{proof}
+
+\section{푸시포워드의 오른쪽 수반과 기저 변환, I}
+\label{section-base-change-map}
+
+\noindent
+푸시포워드의 오른쪽 수반 사이의 기저 변환 사상을 정의하자.
+$S$를 스킴이라 하자. 다음 카르테시안 도식을 생각하자
+\begin{equation}
+\label{equation-base-change}
+\vcenter{
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+}
+\end{equation}
+여기서 $Y'$와 $X$는 $Y$ 위에서 {\bf Tor 독립}이다. 다음을
+각각 $Rf_*$와 $Rf'_*$의 오른쪽 수반으로 쓰자.
+$$
+a  : D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_X)
+\quad\text{그리고}\quad
+a' : D_\QCoh(\mathcal{O}_{Y'}) \to D_\QCoh(\mathcal{O}_{X'})
+$$
+(보조정리 \ref{lemma-twisted-inverse-image}).
+사이트의 코호몰로지, 주석
+\ref{sites-cohomology-remark-base-change}의 기저 변환 사상은
+준응집 코호몰로지를 갖는 층의 유도 범주 위에서 다음 함자 변환을 준다.
+$$
+Lg^* \circ Rf_* \longrightarrow Rf'_* \circ L(g')^*
+$$
+그러므로 반대 방향의 오른쪽 수반 사이에 다음 변환이 있다.
+$$
+a \circ Rg_* \longleftarrow Rg'_* \circ a'
+$$
+
+\begin{lemma}
+\label{lemma-flat-precompose-pus}
+도식 (\ref{equation-base-change})에서 사상
+$a \circ Rg_* \leftarrow Rg'_* \circ a'$는 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+Tor 독립이라는 가정에 의해, 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-compare-base-change}에 따라
+$D_\QCoh(\mathcal{O}_X)$의 모든 $K$에 대해 기저 변환 사상
+$Lg^* \circ Rf_* K \to Rf'_* \circ L(g')^*K$는 동형사상이다.
+따라서 대응하는 수반 함자 사이의 변환도 동형사상이다.
+\end{proof}
+
+\noindent
+이제 다음 합성으로 주어지는
+$D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_{X'})$의 함자 사상을
+생각할 수 있다.
+\begin{equation}
+\label{equation-base-change-map}
+L(g')^* \circ a \to
+L(g')^* \circ a \circ Rg_* \circ Lg^* \leftarrow
+L(g')^* \circ Rg'_* \circ a' \circ Lg^* \to a' \circ Lg^*
+\end{equation}
+첫 번째 화살표는 수반 사상 $\text{id} \to Rg_* Lg^*$에서 오고,
+마지막 화살표는 수반 사상 $L(g')^*Rg'_* \to \text{id}$에서 온다.
+가운데 화살표를 뒤집으려면 Tor 독립 가정이 필요하다. 보조정리
+\ref{lemma-flat-precompose-pus}를 보라. 또는
+$L(g')^*$와 $R(g')_*$의 수반성을 이용하여
+(\ref{equation-base-change-map})을 다음 자연 변환으로 생각할 수 있다.
+$$
+a \to a \circ Rg_* \circ Lg^* \leftarrow Rg'_* \circ a' \circ Lg^*
+$$
+% P10-E0255
+여기서 두 번째 화살표는 다시 가역이다. $M \in
+D_\QCoh(\mathcal{O}_X)$ 및 $K \in D_\QCoh(\mathcal{O}_Y)$라면,
+이 사상은 Yoneda 함자에서 다음과 같이 주어진다.
+\begin{align*}
+\Hom_X(M, a(K))
+& =
+\Hom_Y(Rf_*M, K) \\
+& \to
+\Hom_Y(Rf_*M, Rg_* Lg^*K) \\
+& =
+\Hom_{Y'}(Lg^*Rf_*M, Lg^*K) \\
+& \leftarrow
+\Hom_{Y'}(Rf'_* L(g')^*M, Lg^*K) \\
+& =
+\Hom_{X'}(L(g')^*M, a'(Lg^*K)) \\
+& =
+\Hom_X(M, Rg'_*a'(Lg^*K))
+\end{align*}
+% P10-E0256
+(왼쪽을 가리키는 화살표는 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-compare-base-change}에서 주어진 기저 변환
+정리에 의해 가역이다.) 이로써 구성이 조금 더 명확해진다.
+
+\medskip\noindent
+이 절에서는 먼저 기저 변환 사상이 도식을 쌓아 올리는 것과 관련하여
+만족하는 자연스러운 양립성 몇 가지를 증명한다. 이는 통상적인 기저 변환
+사상에 관한 사이트의 코호몰로지, 주석
+\ref{sites-cohomology-remark-compose-base-change} 및
+\ref{sites-cohomology-remark-compose-base-change-horizontal}과 유사하다.
+처음 읽을 때에는 독자가 이 절의 나머지 부분을 건너뛰기를 권한다.
+
+\begin{lemma}
+\label{lemma-compose-base-change-maps}
+$S$를 스킴이라 하자. 다음 교환 도식을 생각하자.
+$$
+\xymatrix{
+X' \ar[r]_k \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^l \ar[d]_{g'} & Y \ar[d]^g \\
+Z' \ar[r]^m & Z
+}
+$$
+$S$ 위의 준콤팩트 및 준분리 대수 공간들로 이루어진 도식이며 두
+정사각형이 모두 카르테시안이고, $f$와 $l$ 및 $g$와 $m$이 각각
+Tor 독립이라고 하자. 그러면 두 정사각형에 대한 사상
+(\ref{equation-base-change-map})을 합성하면 바깥쪽 직사각형에 대한
+기저 변환 사상이 된다(정확한 서술은 증명을 보라).
+\end{lemma}
+
+\begin{proof}
+가정으로부터 $g \circ f$와 $m$이 Tor 독립임을 얻는다(세부 사항은
+생략한다). 따라서 서술이 의미를 갖는다. 이 증명에서는 $Lk^*$ 대신
+$k^*$를, $Rf_*$ 대신 $f_*$를 쓴다. $a$, $b$, $c$를 각각 $f$, $g$,
+$g \circ f$에 대해 보조정리 \ref{lemma-twisted-inverse-image}가 주는
+오른쪽 수반이라 하자. 소문자에 프라임을 붙인 경우도 마찬가지로 정한다.
+위쪽 정사각형에 대응하는 화살표는 다음 합성이다.
+$$
+\gamma_{top} :
+k^* \circ a \to k^* \circ a \circ l_* \circ l^*
+\xleftarrow{\xi_{top}} k^* \circ k_* \circ a' \circ l^* \to a' \circ l^*
+$$
+여기서 $\xi_{top} : k_* \circ a' \to a \circ l_*$는 동형사상(따라서
+역을 취할 수 있음)이며, 기저 변환 사상
+$l^* \circ f_* \to f'_* \circ k^*$에 “쌍대”인 화살표이다.
+양 끝의 화살표는 정준 사상 $1 \to l_* \circ l^*$ 및
+$k^* \circ k_* \to 1$에서 온다. 아래쪽 정사각형에 대해서도 마찬가지로
+다음을 얻는다.
+$$
+\gamma_{bot} :
+l^* \circ b \to l^* \circ b \circ m_* \circ m^*
+\xleftarrow{\xi_{bot}} l^* \circ l_* \circ b' \circ m^* \to b' \circ m^*
+$$
+바깥쪽 직사각형에 대해서는
+$$
+\gamma_{rect} :
+k^* \circ c \to k^* \circ c \circ m_* \circ m^*
+\xleftarrow{\xi_{rect}} k^* \circ k_* \circ c' \circ m^* \to c' \circ m^*
+$$
+를 얻는다. $(g \circ f)_* = g_* \circ f_*$이므로 $c = a \circ b$이고,
+마찬가지로 $c' = a' \circ b'$이다. 이 보조정리의 서술은
+$\gamma_{rect}$가 다음 합성과 같다는 것이다.
+$$
+k^* \circ c = k^* \circ a \circ b \xrightarrow{\gamma_{top}}
+a' \circ l^* \circ b \xrightarrow{\gamma_{bot}}
+a' \circ b' \circ m^* = c' \circ m^*
+$$
+이를 보기 위해 다음 도식을 살펴보자.
+$$
+\xymatrix@C=.8em{
+& & k^* \circ a \circ b \ar[d] \ar[lldd] \\
+& & k^* \circ a \circ l_* \circ l^* \circ b \ar[ld] \\
+k^* \circ a \circ b \circ m_* \circ m^* \ar[r] &
+k^* \circ a \circ l_* \circ l^* \circ b \circ m_* \circ m^* &
+k^* \circ k_* \circ a' \circ l^* \circ b \ar[u]_{\xi_{top}} \ar[d] \ar[ld] \\
+& k^*\circ k_* \circ a' \circ l^* \circ b \circ m_* \circ m^*
+\ar[u]_{\xi_{top}} \ar[rd] &
+a' \circ l^* \circ b \ar[d] \\
+k^* \circ k_* \circ a' \circ b' \circ m^*
+\ar[uu]_{\xi_{rect}} \ar[ddrr] &
+k^*\circ k_* \circ a' \circ l^* \circ l_* \circ b' \circ m^*
+\ar[u]_{\xi_{bot}} \ar[l] \ar[dr] &
+a' \circ l^* \circ b \circ m_* \circ m^* \\
+& & a' \circ l^* \circ l_* \circ b' \circ m^* \ar[u]_{\xi_{bot}} \ar[d] \\
+& & a' \circ b' \circ m^*
+}
+$$
+오른쪽을 따라 내려가면 위의 합성을 얻고, 왼쪽을 따라 내려가면
+$\gamma_{rect}$를 얻는다. 이 도식 오른쪽의 모든 사각형은
+범주론, 보조정리 \ref{categories-lemma-properties-2-cat-cats}에 의해,
+또는 더 간단히 범주론, 정의
+\ref{categories-definition-horizontal-composition} 앞의 논의에 의해
+교환한다. 따라서 다음 도식이
+$$
+\xymatrix{
+a \circ l_* \circ l^* \circ b \circ m_* &
+a \circ b \circ m_* \ar[l] \\
+k_* \circ a' \circ l^* \circ b \circ m_* \ar[u]_{\xi_{top}} & \\
+k_* \circ a' \circ l^* \circ l_* \circ b' \ar[u]_{\xi_{bot}} \ar[r] &
+k_* \circ a' \circ b' \ar[uu]_{\xi_{rect}}
+}
+$$
+$\xi_{top}$, $\xi_{bot}$, $\xi_{rect}$의 화살표를 역으로 취하면
+교환한다는 것을 보이면 충분하다(이는 원래 도식 자체가 교환한다고
+요구하는 것과는 다르다). 한편 다음 도식은
+$$
+\xymatrix{
+& a \circ l_* \circ l^* \circ b \circ m_* \\
+a \circ l_* \circ l^* \circ l_* \circ b'
+\ar[ru]^{\xi_{bot}} & &
+k_* \circ a' \circ l^* \circ b \circ m_* \ar[ul]_{\xi_{top}} \\
+& k_* \circ a' \circ l^* \circ l_* \circ b'
+\ar[ul]^{\xi_{top}} \ar[ur]_{\xi_{bot}}
+}
+$$
+범주론, 보조정리 \ref{categories-lemma-properties-2-cat-cats}에 의해
+교환한다.
+
+또한 다음 두 도식
+$$
+% P10-E0257
+\vcenter{
+\xymatrix@C=.8em{
+a \circ l_* \circ l^* \circ b \circ m_* & a \circ b \circ m \ar[l] \\
+a \circ l_* \circ l^* \circ l_* \circ b' \ar[u] &
+a \circ l_* \circ b' \ar[l] \ar[u]
+}
+}
+\quad\text{그리고}\quad
+\vcenter{
+\xymatrix@C=.8em{
+a \circ l_* \circ l^* \circ l_* \circ b' \ar[r] & a \circ l_* \circ b' \\
+k_* \circ a' \circ l^* \circ l_* \circ b' \ar[u] \ar[r] &
+k_* \circ a' \circ b' \ar[u]
+}
+}
+$$
+가 교환하고 (인용한 참고문헌을 보라), 또한
+$l_* \to l_* \circ l^* \circ l_* \to l_*$의 합성이 항등사상이므로,
+다음
+% P10-E0258
+$$
+k \circ a' \circ b' \xrightarrow{\xi_{bot}} a \circ l_* \circ b
+\xrightarrow{\xi_{top}} a \circ b \circ m_*
+$$
+이 $\xi_{rect}$와 같음을 보이면 충분하다($a \circ b = c$ 및
+$a' \circ b' = c'$라는 동일시를 통하여). 이는 사이트의 코호몰로지,
+주석 \ref{sites-cohomology-remark-compose-base-change}의 쌍대 명제이며,
+증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compose-base-change-maps-horizontal}
+$S$를 스킴이라 하자. 다음 교환 도식을 생각하자.
+$$
+\xymatrix{
+X'' \ar[r]_{g'} \ar[d]_{f''} & X' \ar[r]_g \ar[d]_{f'} & X \ar[d]^f \\
+Y'' \ar[r]^{h'} & Y' \ar[r]^h & Y
+}
+$$
+$S$ 위의 준콤팩트 및 준분리 대수 공간들로 이루어진 도식이며 두
+정사각형이 모두 카르테시안이고, $f$와 $h$ 및 $f'$와 $h'$가 각각
+Tor 독립이라고 하자. 그러면 두 정사각형에 대한 사상
+(\ref{equation-base-change-map})을 합성하면 바깥쪽 직사각형에 대한
+기저 변환 사상이 된다(정확한 서술은 증명을 보라).
+\end{lemma}
+
+\begin{proof}
+가정으로부터 $f$와 $h \circ h'$가 Tor 독립임을 얻는다(세부 사항은
+생략한다). 따라서 서술이 의미를 갖는다. 이 증명에서는 $Lg^*$ 대신
+$g^*$를, $Rf_*$ 대신 $f_*$를 쓴다. $a$, $a'$, $a''$를 각각 $f$,
+$f'$, $f''$에 대해 보조정리 \ref{lemma-twisted-inverse-image}가 주는
+오른쪽 수반이라 하자. 오른쪽 정사각형에 대응하는 화살표는 다음
+합성이다.
+$$
+\gamma_{right} :
+g^* \circ a \to g^* \circ a \circ h_* \circ h^*
+\xleftarrow{\xi_{right}} g^* \circ g_* \circ a' \circ h^* \to a' \circ h^*
+$$
+여기서 $\xi_{right} : g_* \circ a' \to a \circ h_*$는 동형사상(따라서
+역을 취할 수 있음)이며, 기저 변환 사상
+$h^* \circ f_* \to f'_* \circ g^*$에 “쌍대”인 화살표이다.
+양 끝의 화살표는 정준 사상 $1 \to h_* \circ h^*$ 및
+$g^* \circ g_* \to 1$에서 온다. 왼쪽 정사각형에 대해서도 마찬가지로
+다음을 얻는다.
+$$
+\gamma_{left} :
+(g')^* \circ a' \to (g')^* \circ a' \circ (h')_* \circ (h')^*
+\xleftarrow{\xi_{left}}
+(g')^* \circ (g')_* \circ a'' \circ (h')^* \to a'' \circ (h')^*
+$$
+바깥쪽 직사각형에 대해서는
+$$
+\gamma_{rect} :
+k^* \circ a \to
+k^* \circ a \circ m_* \circ m^* \xleftarrow{\xi_{rect}}
+k^* \circ k_* \circ a'' \circ m^* \to
+a'' \circ m^*
+$$
+를 얻는다. 여기서 $k = g \circ g'$이고 $m = h \circ h'$이다.
+또한 $k^* = (g')^* \circ g^*$ 및
+$m^* = (h')^* \circ h^*$이다. 이 보조정리의 서술은
+$\gamma_{rect}$가 다음 합성과 같다는 것이다.
+$$
+k^* \circ a =
+(g')^* \circ g^* \circ a \xrightarrow{\gamma_{right}}
+(g')^* \circ a' \circ h^* \xrightarrow{\gamma_{left}}
+a'' \circ (h')^* \circ h^* = a'' \circ m^*
+$$
+이를 보기 위해 다음 도식을 살펴보자.
+$$
+\xymatrix{
+& (g')^* \circ g^* \circ a \ar[d] \ar[ddl] \\
+& (g')^* \circ g^* \circ a \circ h_* \circ h^* \ar[ld] \\
+(g')^* \circ g^* \circ a \circ h_* \circ (h')_* \circ (h')^* \circ h^* &
+(g')^* \circ g^* \circ g_* \circ a' \circ h^*
+\ar[u]_{\xi_{right}} \ar[d] \ar[ld] \\
+(g')^* \circ g^* \circ g_* \circ a' \circ (h')_* \circ (h')^* \circ h^*
+\ar[u]_{\xi_{right}} \ar[dr] &
+(g')^* \circ a' \circ h^* \ar[d] \\
+(g')^* \circ g^* \circ g_* \circ (g')_* \circ a'' \circ (h')^* \circ h^*
+\ar[u]_{\xi_{left}} \ar[ddr] \ar[dr] &
+(g')^* \circ a' \circ (h')_* \circ (h')^* \circ h^* \\
+& (g')^*\circ (g')_* \circ a'' \circ (h')^* \circ h^*
+\ar[u]_{\xi_{left}} \ar[d] \\
+& a'' \circ (h')^* \circ h^*
+}
+$$
+오른쪽을 따라 내려가면 위의 합성을 얻고, 왼쪽을 따라 내려가면
+$\gamma_{rect}$를 얻는다. 이 도식 오른쪽의 모든 사각형은
+범주론, 보조정리 \ref{categories-lemma-properties-2-cat-cats}에 의해,
+또는 더 간단히 범주론, 정의
+\ref{categories-definition-horizontal-composition} 앞의 논의에 의해
+교환한다. 따라서 다음
+$$
+g_* \circ (g')_* \circ a'' \xrightarrow{\xi_{left}}
+g_* \circ a' \circ (h')_* \xrightarrow{\xi_{right}}
+a \circ h_* \circ (h')_*
+$$
+가 $\xi_{rect}$와 같음을 보이면 충분하다. 이는
+코호몰로지, 주석 \ref{cohomology-remark-compose-base-change-horizontal}의
+쌍대 명제이며, 증명이 끝난다.
+\end{proof}
+\begin{remark}
+\label{remark-going-around}
+$S$를 스킴이라 하자. 다음 교환 도식을 생각하자.
+$$
+\xymatrix{
+X'' \ar[r]_{k'} \ar[d]_{f''} & X' \ar[r]_k \ar[d]_{f'} & X \ar[d]^f \\
+Y'' \ar[r]^{l'} \ar[d]_{g''} & Y' \ar[r]^l \ar[d]_{g'} & Y \ar[d]^g \\
+Z'' \ar[r]^{m'} & Z' \ar[r]^m & Z
+}
+$$
+$S$ 위의 준콤팩트 및 준분리 대수 공간들로 이루어진 도식이며 모든
+정사각형이 카르테시안이고,
+$(f,l)$, $(g,m)$, $(f',l')$, $(g',m')$가 Tor 독립인 사상 쌍이라고 하자.
+$a$, $a'$, $a''$, $b$, $b'$, $b''$를 각각
+$f$, $f'$, $f''$, $g$, $g'$, $g''$에 대해 보조정리
+\ref{lemma-twisted-inverse-image}가 주는 오른쪽 수반이라 하자.
+다음과 같이 도식의 정사각형에 $A$, $B$, $C$, $D$라는 이름을 붙이자.
+$$
+\begin{matrix}
+A & B \\
+C & D
+\end{matrix}
+$$
+그러면 각 정사각형에 대한 사상 (\ref{equation-base-change-map})은
+($k^*=Lk^*$ 등을 사용하여) 다음과 같다.
+$$
+\begin{matrix}
+\gamma_A : (k')^* \circ a' \to a'' \circ (l')^* &
+\gamma_B : k^* \circ a \to a' \circ l^* \\
+\gamma_C : (l')^* \circ b' \to b'' \circ (m')^* &
+\gamma_D : l^* \circ b \to b' \circ m^*
+\end{matrix}
+$$
+$2 \times 1$ 및 $1 \times 2$ 직사각형에 대해서는 다음 네 개의
+추가 기저 변환 사상이 있다.
+% P10-E0259
+$$
+\begin{matrix}
+\gamma_{A + B} : (k \circ k')^* \circ a \to a'' \circ (l \circ l')^* \\
+\gamma_{C + D} : (l \circ l')^* \circ b \to b'' \circ (m \circ m')^* \\
+\gamma_{A + C} : (k')^* \circ (a' \circ b') \to (a'' \circ b'') \circ (m')^* \\
+\gamma_{A + C} : k^* \circ (a \circ b) \to (a' \circ b') \circ m^*
+\end{matrix}
+$$
+보조정리 \ref{lemma-compose-base-change-maps-horizontal}에 의해
+$$
+\gamma_{A + B} = \gamma_A \circ \gamma_B, \quad
+\gamma_{C + D} = \gamma_C \circ \gamma_D
+$$
+이고, 보조정리 \ref{lemma-compose-base-change-maps}에 의해
+$$
+\gamma_{A + C} = \gamma_C \circ \gamma_A, \quad
+\gamma_{B + D} = \gamma_D \circ \gamma_B
+$$
+이다. 여기서 더 정확하게는
+$\gamma_{A + B} = (\gamma_A \star \text{id}_{l^*}) \circ
+(\text{id}_{(k')^*} \star \gamma_B)$라고 써야 하며, 표기는 범주론,
+제 \ref{categories-section-formal-cat-cat}절에서 사용한 것과 같다.
+그러나 우리는 보조정리 \ref{lemma-compose-base-change-maps} 및
+\ref{lemma-compose-base-change-maps-horizontal}의 증명에서 사용한
+표기의 남용을 계속하여, 항등 사상과의 $\star$ 곱을 생략한다.
+변환의 원천과 표적을 알면 어떤 항등 변환을 삽입해야 하는지
+알 수 있기 때문이다.
+그렇다고 하여, 선험적으로 다음 두 변환을 얻는다.
+$$
+(k')^* \circ k^* \circ a \circ b
+\longrightarrow
+a'' \circ b'' \circ (m')^* \circ m^*
+$$
+즉 다음 두 변환이다.
+$$
+\gamma_C \circ \gamma_A \circ \gamma_D \circ \gamma_B =
+\gamma_{A + C} \circ \gamma_{B + D}
+$$
+및
+$$
+\gamma_C \circ \gamma_D \circ \gamma_A \circ \gamma_B =
+\gamma_{C + D} \circ \gamma_{A + B}
+$$
+이 주석의 요지는 이 두 변환이 같음을 지적하는 것이다. 구체적으로
+다음 도식이 교환함을 보이면 충분하다.
+$$
+\xymatrix{
+(k')^* \circ a' \circ l^* \circ b \ar[r]_{\gamma_D} \ar[d]_{\gamma_A} &
+(k')^* \circ a' \circ b' \circ m^* \ar[d]^{\gamma_A} \\
+a'' \circ (l')^* \circ l^* \circ b \ar[r]^{\gamma_D} &
+a'' \circ (l')^* \circ b' \circ m^*
+}
+$$
+이는 범주론, 보조정리 \ref{categories-lemma-properties-2-cat-cats}에 의해,
+또는 더 간단히 범주론, 정의
+\ref{categories-definition-horizontal-composition} 앞의 논의에 의해
+성립한다.
+\end{remark}
+\section{푸시포워드의 오른쪽 수반과 기저 변환, II}
+\label{section-base-change-II}
+
+\noindent
+이 절에서는 제 \ref{section-base-change-map}절의 기저 변환 사상이
+몇 가지 경우에 동형사상임을 증명한다.
+
+\begin{lemma}
+\label{lemma-more-base-change}
+도식 (\ref{equation-base-change})에서 추가로
+$g : Y' \to Y$가 아핀 스킴들의 사상이고 $f : X \to Y$가 고유하다고
+가정하자. 그러면 기저 변환 사상 (\ref{equation-base-change-map})은
+다음 경우에 동형사상
+$$
+L(g')^*a(K) \longrightarrow a'(Lg^*K)
+$$
+을 유도한다.
+% P10-E0261
+\begin{enumerate}
+\item $f$가 유한 표시인 평탄 사상이면 모든
+$K \in D_\QCoh(\mathcal{O}_X)$에 대하여,
+\item $f$가 완전 사상이고 $Y$가 뇌터이면 모든
+$K \in D_\QCoh(\mathcal{O}_X)$에 대하여,
+\item $g$가 유한 Tor 차원을 갖고 $Y$가 뇌터이면
+$K \in D_\QCoh^+(\mathcal{O}_X)$에 대하여.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$Y = \Spec(A)$ 및 $Y' = \Spec(A')$라 쓰자. 아핀 사상의 기저 변환이므로
+사상 $g'$도 아핀이다. $M$을 $D_\QCoh(\mathcal{O}_X)$의 완전 생성자라
+하자. 공간의 유도 범주, 정리
+\ref{spaces-perfect-theorem-bondal-van-den-Bergh}를 보라. 그러면
+$L(g')^*M$은 $D_\QCoh(\mathcal{O}_{X'})$의 생성자이다. 공간의 유도 범주,
+주석 \ref{spaces-perfect-remark-pullback-generator}를 보라.
+따라서 (\ref{equation-base-change-map})이 전체 Hom 복합체의 동형사상
+\begin{equation}
+\label{equation-iso}
+R\Hom_{X'}(L(g')^*M, L(g')^*a(K))
+\longrightarrow
+R\Hom_{X'}(L(g')^*M, a'(Lg^*K))
+\end{equation}
+을 유도함을 보이면 충분하다. 사이트의 코호몰로지, 제
+\ref{sites-cohomology-section-global-RHom}절을 보라. 실제로 이는
+$L(g')^*a(K) \to a'(Lg^*K)$의 원뿔이 영임을 함의한다.
+증명의 구조는 다음과 같다. 먼저 이 두 Hom 복합체가 동형임을 보이고,
+증명의 마지막 부분에서 그 동형사상이 (\ref{equation-iso})에 의해
+유도됨을 보인다.
+
+\medskip\noindent
+왼쪽 항. $M$이 완전하므로 정준 사상
+$$
+R\Hom_X(M, a(K)) \otimes^\mathbf{L}_A A'
+\longrightarrow
+R\Hom_{X'}(L(g')^*M, L(g')^*a(K))
+$$
+은 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-affine-morphism-and-hom-out-of-perfect}에 의해
+동형사상이다. 이것을 보조정리 \ref{lemma-iso-global-hom}의 동형사상
+$R\Hom_Y(Rf_*M, K) = R\Hom_X(M, a(K))$과 결합하면, 왼쪽 항은
+$R\Hom_Y(Rf_*M, K) \otimes^\mathbf{L}_A A'$와 같다.
+
+\medskip\noindent
+오른쪽 항. 여기서는 먼저 보조정리 \ref{lemma-iso-global-hom}의
+동형사상
+$$
+R\Hom_{X'}(L(g')^*M, a'(Lg^*K)) =
+R\Hom_{Y'}(Rf'_*L(g')^*M, Lg^*K)
+$$
+을 사용한다. $f$와 $g$가 Tor 독립이므로 기저 변환 사상
+$Lg^*Rf_*M \to Rf'_*L(g')^*M$은 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-compare-base-change}에 의해 동형사상이다.
+따라서 이 식을 $R\Hom_{Y'}(Lg^*Rf_*M, Lg^*K)$로 다시 쓸 수 있다.
+$Y$, $Y'$가 아핀이고 $K$, $Rf_*M$이
+$D_\QCoh(\mathcal{O}_Y)$에 속하므로(공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-quasi-coherence-direct-image}), $D(A')$에서
+다음 정준 사상을 얻는다.
+$$
+\beta :
+R\Hom_Y(Rf_*M, K) \otimes^\mathbf{L}_A A'
+\longrightarrow
+R\Hom_{Y'}(Lg^*Rf_*M, Lg^*K)
+$$
+이는 대수에 관하여 더 자세히 보기, 식
+(\ref{more-algebra-equation-base-change-RHom})의 화살표이다.
+여기서는 스킴의 유도 범주, 보조정리
+\ref{perfect-lemma-affine-compare-bounded} 및
+\ref{perfect-lemma-quasi-coherence-internal-hom}을 사용하여 대수와
+기하 사이를 오갔다.
+\begin{enumerate}
+\item $f$가 평탄하고 유한 표시이면, 복합체 $Rf_*M$은 공간의 유도 범주,
+보조정리
+\ref{spaces-perfect-lemma-flat-proper-perfect-direct-image-general}에 의해
+$Y$ 위에서 완전하고, $\beta$는 대수에 관하여 더 자세히 보기, 보조정리
+\ref{more-algebra-lemma-base-change-RHom} (1)에 의해 동형사상이다.
+\item $f$가 완전 사상이고 $Y$가 뇌터이면, 복합체 $Rf_*M$은 공간의
+사상에 관하여 더 자세히 보기, 보조정리
+\ref{spaces-more-morphisms-lemma-perfect-proper-perfect-direct-image}에
+의해 $Y$ 위에서 완전하고, $\beta$는 앞에서와 같이 동형사상이다.
+\item $g$가 유한 Tor 차원을 갖고 $Y$가 뇌터이면, 복합체 $Rf_*M$은
+$Y$ 위에서 유사유한이다(공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-direct-image-coherent} 및
+\ref{spaces-perfect-lemma-identify-pseudo-coherent-noetherian}).
+또한 $\beta$는 대수에 관하여 더 자세히 보기, 보조정리
+\ref{more-algebra-lemma-base-change-RHom} (4)에 의해 동형사상이다.
+\end{enumerate}
+따라서 앞 문단에서와 같은 결과를 얻는다.
+
+\medskip\noindent
+증명의 나머지 부분에서는 둘째 및 셋째 문단에서 준
+(\ref{equation-iso})의 왼쪽 항과 오른쪽 항의 동일시가 실제로
+(\ref{equation-iso})에 의해 주어짐을 보인다. 공식을 다루기 쉽게 하기
+위하여 $(-, -)_X = R\Hom_X(-, -)$를 사용하고,
+% P10-E0262
+$- \otimes_A^\mathbf{L} A'$ 대신 $- \otimes A'$를 사용하며,
+$g^* = Lg^*$ 및 $f_* = Rf_*$로 줄여 쓴다. 다음 교환 도식을 생각하자.
+$$
+\xymatrix@C=.4em{
+((g')^*M, (g')^*a(K))_{X'} \ar[d] &
+(M, a(K))_X \otimes A' \ar[l]^-\alpha \ar[d] &
+(f_*M, K)_Y \otimes A' \ar@{=}[l] \ar[d] \\
+((g')^*M, (g')^*a(g_*g^*K))_{X'} &
+(M, a(g_*g^*K))_X \otimes A' \ar[l]^-\alpha &
+(f_*M, g_*g^*K)_Y \otimes A' \ar@{=}[l] \ar@/_4pc/[dd]_{\mu'} \\
+((g')^*M, (g')^*g'_*a'(g^*K))_{X'} \ar[u] \ar[d] &
+(M, g'_*a'(g^*K))_X \otimes A' \ar[u] \ar[l]^-\alpha \ar[ld]^\mu &
+% P10-E0263
+(f_*M, K) \otimes A' \ar[d]^\beta \\
+((g')^*M, a'(g^*K))_{X'} &
+(f'_*(g')^*M, g^*K)_{Y'} \ar@{=}[l] \ar[r] &
+(g^*f_*M, g^*K)_{Y'}
+}
+$$
+$\alpha$로 표시한 화살표들은 꼭짓점이 $X', X, Y', Y$인 도식에
+공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-affine-morphism-and-hom-out-of-perfect}를
+적용하여 얻은 사상들이다. 위쪽 부분은 가로 화살표가 각 항에 관해
+함자적이므로 교환한다. 가운데 세로 화살표들은 보조정리
+\ref{lemma-flat-precompose-pus}의 가역 변환
+$g'_* \circ a' \to a \circ g_*$에서 오므로 가운데 정사각형도 교환한다.
+왼쪽을 따라 내려가는 사상이 (\ref{equation-iso})이다.
+위쪽 가로 화살표들은 증명의 둘째 문단에서 사용한 동일시를 준다.
+$\beta$를 포함한 아래쪽 가로 화살표들은 셋째 문단에서 사용한
+동일시를 준다. $E \in D(A)$, $E' \in D(A')$ 및
+$D(A)$의 $c : E \to E'$가 주어지면, 제한과 기저 변환의 수반성 및
+$c$가 유도하는 사상을
+$\mu_c : E \otimes A' \to E'$로 나타낸다. $c$가 명백할 때에는
+$\mu = \mu_c$라 쓰며, 즉 표기에서 $c$를 생략한다. 도식의 $\mu$는
+다음 동일시가 주는 $c$에 대해 이러한 형태이다.
+% P10-E0264
+$(M, g'_*a(g^*K))_X = ((g')^*M, a'(g^*K))_{X'}$
+또한 $\mu$를 포함하는 삼각형은 공간의 유도 범주, 주석
+\ref{spaces-perfect-remark-multiplication-map}에 의해 교환한다.
+
+\medskip\noindent
+다음 도식은
+$$
+\xymatrix{
+(M, a(g_*g^*K))_X &
+(f_*M, g_* g^*K)_Y \ar@{=}[l] &
+(g^*f_*M, g^*K)_{Y'} \ar@{=}[l] \\
+(M, g'_* a'(g^*K))_X \ar[u] &
+((g')^*M, a'(g^*K))_{X'} \ar@{=}[l] &
+(f'_*(g')^*M, g^*K)_{Y'} \ar@{=}[l] \ar[u]
+}
+$$
+바로 변환 $g'_* \circ a' \to a \circ g_*$의 정의에 의해 교환한다.
+위에서와 같이 다음 동일시에 대응하는 사상을 $\mu'$라 하면,
+% P10-E0265
+$(f_*M, g_*g^*K)_X = (g^*f_*M, g^*K)_{Y'}$,
+육각형도 교환한다. 따라서 $\beta$가 다음 두 사상의 합성과 같음을
+보이면 충분하다.
+% P10-E0266
+$(f_*M, K)_Y \otimes A' \to (f_*M, g_*g^*K)_X \otimes A'$
+및 $\mu'$. 이를 위해서는 유도된 두 사상
+$(f_*M, K)_Y \to (g^*f_*M, g^*K)_{Y'}$가 같음을 보이면 충분하다.
+다시 말해, 모든 $E, K \in D(A)$에 대해 다음 도식이 교환함을
+보이면 충분하다.
+$$
+\xymatrix@C=.8em{
+R\Hom_A(E, K) \ar[rr]_{\beta\text{에 의해 유도}} \ar[rd] & &
+R\Hom_{A'}(E \otimes_A^\mathbf{L} A', K \otimes_A^\mathbf{L} A') \\
+& R\Hom_A(E, K \otimes_A^\mathbf{L} A') \ar[ru]
+}
+$$
+이는 대수에 관하여 더 자세히 보기, 제
+\ref{more-algebra-section-base-change-RHom}절에서 $\beta$를 구성한
+방식 그 자체이므로 증명이 끝난다.
+\end{proof}
+\section{푸시포워드의 오른쪽 수반과 트레이스 사상}
+\label{section-trace}
+
+\noindent
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 준콤팩트 및 준분리 대수 공간 사이의 사상이라
+하자. $a : D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_X)$를
+보조정리 \ref{lemma-twisted-inverse-image}에서와 같은 오른쪽 수반이라
+하자. 범주론, 제 \ref{categories-section-adjoint}절에 의해 다음 함자
+변환을 얻는다.
+$$
+\text{Tr}_f : Rf_* \circ a \longrightarrow \text{id}
+$$
+$K \in D_\QCoh(\mathcal{O}_Y)$에 대응하는 사상
+$\text{Tr}_{f, K} : Rf_*a(K) \longrightarrow K$를 때때로
+{\it 트레이스 사상}이라고 부른다. 이 사상은 오른쪽 수반을 특징짓는
+$L \in D_\QCoh(\mathcal{O}_X)$에 대한 전단사
+$$
+\Hom_X(L, a(K)) \longrightarrow \Hom_Y(Rf_*L, K)
+$$
+가 다음으로 주어진다는 성질을 갖는다.
+$$
+\varphi \longmapsto \text{Tr}_{f, K} \circ Rf_*\varphi
+$$
+정준 사상 (\ref{equation-sheafy-trace})
+$$
+Rf_*R\SheafHom_{\mathcal{O}_X}(L, a(K))
+\longrightarrow
+R\SheafHom_{\mathcal{O}_Y}(Rf_*L, K)
+$$
+은 $\text{Tr}_{f, K}$와의 합성으로 얻어진다.
+이 절에서 고려할 모든 트레이스 사상은 이 트레이스 사상의 특수한
+경우이다. 몇 가지 특수한 경우를 논하기 전에, 트레이스 사상의 형성이
+기저 변환과 가환함을 보인다.
+
+\begin{lemma}[트레이스 사상과 기저 변환]
+\label{lemma-trace-map-and-base-change}
+도식 (\ref{equation-base-change})이 주어졌다고 하자. 그러면 사상
+$1 \star \text{Tr}_f : Lg^* \circ Rf_* \circ a \to Lg^*$ 및
+$\text{Tr}_{f'} \star 1 : Rf'_* \circ a' \circ Lg^* \to Lg^*$는
+기저 변환 사상
+$\beta : Lg^* \circ Rf_* \to Rf'_* \circ L(g')^*$
+(사이트의 코호몰로지, 주석
+\ref{sites-cohomology-remark-base-change}) 및
+$\alpha : L(g')^* \circ a \to a' \circ Lg^*$
+((\ref{equation-base-change-map}))를 통해 일치한다.
+더 정확히 말하면, 다음 함자 변환의 도식이 교환한다.
+$$
+\xymatrix{
+Lg^* \circ Rf_* \circ a
+\ar[d]_{\beta \star 1} \ar[r]_-{1 \star \text{Tr}_f} &
+Lg^* \\
+Rf'_* \circ L(g')^* \circ a \ar[r]^{1 \star \alpha} &
+Rf'_* \circ a' \circ Lg^* \ar[u]_{\text{Tr}_{f'} \star 1}
+}
+$$
+\end{lemma}
+
+\begin{proof}
+이 증명에서는 $Rf_*$ 대신 $f_*$를, $Lg^*$ 대신 $g^*$를 쓰고,
+% P10-E0268
+변환의 원천과 표적을 알면 어느 항등 변환을 삽입해야 하는지 알 수
+있으므로 항등 변환과의 $\star$ 곱을 생략한다.
+$\beta : g^* \circ f_* \to f'_* \circ (g')^*$가 동형사상이고,
+$\alpha$가 $\beta$의 수반인 동형사상
+$\beta^\vee : g'_* \circ a' \to a \circ g_*$를 사용하여 정의됨을
+상기하자. 보조정리 \ref{lemma-flat-precompose-pus} 및 그 증명을 보라.
+먼저 보조정리의 도식에서 위쪽 가로 화살표는 다음 합성과 같음을
+관찰한다.
+$$
+g^* \circ f_* \circ a \to
+g^* \circ f_* \circ a \circ g_* \circ g^* \to
+g^* \circ g_* \circ g^* \to g^*
+$$
+여기서 첫 번째 화살표는 $(g^*, g_*)$의 단위원, 두 번째 화살표는
+$\text{Tr}_f$, 세 번째 화살표는 $(g^*, g_*)$의 여단위원이다.
+이는 단위원과 여단위원의 합성
+$g^* \to g^* \circ g_* \circ g^* \to g^*$가 항등사상이라는 사실의
+간단한 귀결이다. 다음 도식을 생각하자.
+$$
+\xymatrix@C=.3em{
+& g^* \circ f_* \circ a \ar[ld]_\beta \ar[d] \ar[r]_{\text{Tr}_f} & g^* \\
+f'_* \circ (g')^* \circ a \ar[dr] &
+g^* \circ f_* \circ a \circ g_* \circ g^* \ar[d]_\beta \ar[ru] &
+g^* \circ f_* \circ g'_* \circ a' \circ g^* \ar[l]_{\beta^\vee} \ar[d]_\beta &
+f'_* \circ a' \circ g^* \ar[lu]_{\text{Tr}_{f'}} \\
+& f'_* \circ (g')^* \circ a \circ g_* \circ g^* &
+f'_* \circ (g')^* \circ g'_* \circ a' \circ g^* \ar[ru] \ar[l]_{\beta^\vee}
+}
+$$
+% P10-E0267
+이 도식의 두 정사각형은 범주론, 보조정리
+\ref{categories-lemma-properties-2-cat-cats}에 의해, 또는 더 간단히
+범주론, 정의 \ref{categories-definition-horizontal-composition} 앞의
+논의에 의해 교환한다. 위의 논의에 의해 삼각형도 교환한다.
+범주론, 보조정리
+\ref{categories-lemma-transformation-between-functors-and-adjoints}에
+의해 다음 정사각형이 교환한다.
+$$
+\xymatrix{
+g^* \circ f_* \circ g'_* \circ a' \ar[d]_{\beta^\vee} \ar[r]_-\beta &
+f'_* \circ (g')^* \circ g'_* \circ a' \ar[d] \\
+g^* \circ f_* \circ a \circ g_* \ar[r] &
+\text{id}
+}
+$$
+이는 큰 도식의 오각형이 교환함을 뜻한다. $\beta$와 $\beta^\vee$가
+동형사상이고, 큰 도식의 바깥쪽을 따라가는 합성이 정의상
+% P10-E0269
+$\text{Tr}_f \circ \alpha \circ \beta$와 같으므로 보조정리가 증명된다.
+\end{proof}
+
+\noindent
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 준콤팩트 및 준분리 대수 공간 사이의 사상이라
+하자. $a : D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_X)$를
+보조정리 \ref{lemma-twisted-inverse-image}에서와 같이 $Rf_*$의
+오른쪽 수반이라 하자. 범주론, 제 \ref{categories-section-adjoint}절에
+의해 다음 함자 변환을 얻는다.
+$$
+\eta_f : \text{id} \to  a \circ Rf_*
+$$
+이를 수반의 단위원이라고 부른다.
+
+\begin{lemma}
+\label{lemma-unit-and-base-change}
+도식 (\ref{equation-base-change})이 주어졌다고 하자. 그러면 사상
+$1 \star \eta_f : L(g')^* \to L(g')^* \circ a \circ Rf_*$ 및
+$\eta_{f'} \star 1 : L(g')^* \to a' \circ Rf'_* \circ L(g')^*$는
+기저 변환 사상
+$\beta : Lg^* \circ Rf_* \to Rf'_* \circ L(g')^*$
+(사이트의 코호몰로지, 주석
+\ref{sites-cohomology-remark-base-change}) 및
+$\alpha : L(g')^* \circ a \to a' \circ Lg^*$
+((\ref{equation-base-change-map}))를 통해 일치한다.
+더 정확히 말하면, 다음 함자 변환의 도식이 교환한다.
+$$
+\xymatrix{
+L(g')^* \ar[r]_-{1 \star \eta_f} \ar[d]_{\eta_{f'} \star 1} &
+L(g')^* \circ a \circ Rf_* \ar[d]^\alpha \\
+a' \circ Rf'_* \circ L(g')^* &
+a' \circ Lg^* \circ Rf_* \ar[l]_-\beta
+}
+$$
+\end{lemma}
+
+\begin{proof}
+이 증명은 보조정리 \ref{lemma-trace-map-and-base-change}의 증명에
+쌍대이다. 이 증명에서는 $Rf_*$ 대신 $f_*$를, $Lg^*$ 대신 $g^*$를
+쓰고,
+% P10-E0268
+변환의 원천과 표적을 알면 어느 항등 변환을 삽입해야 하는지 알 수
+있으므로 항등 변환과의 $\star$ 곱을 생략한다.
+$\beta : g^* \circ f_* \to f'_* \circ (g')^*$가 동형사상이고,
+$\alpha$가 $\beta$의 수반인 동형사상
+$\beta^\vee : g'_* \circ a' \to a \circ g_*$를 사용하여 정의됨을
+상기하자. 보조정리 \ref{lemma-flat-precompose-pus} 및 그 증명을 보라.
+먼저 보조정리의 도식에서 왼쪽 세로 화살표는 다음 합성과 같음을
+관찰한다.
+$$
+(g')^* \to (g')^* \circ g'_* \circ (g')^* \to
+(g')^* \circ g'_* \circ a' \circ f'_* \circ (g')^* \to
+a' \circ f'_* \circ (g')^*
+$$
+여기서 첫 번째 화살표는 $((g')^*, g'_*)$의 단위원, 두 번째 화살표는
+$\eta_{f'}$, 세 번째 화살표는 $((g')^*, g'_*)$의 여단위원이다.
+이는 단위원과 여단위원의 합성
+$(g')^* \to (g')^* \circ (g')_* \circ (g')^* \to (g')^*$가
+항등사상이라는 사실의 간단한 귀결이다. 다음 도식을 생각하자.
+$$
+\xymatrix{
+& (g')^* \circ a \circ f_* \ar[r] &
+(g')^* \circ a \circ g_* \circ g^* \circ f_*
+\ar[ld]_\beta \\
+(g')^* \ar[ru]^{\eta_f} \ar[dd]_{\eta_{f'}} \ar[rd] &
+(g')^* \circ a \circ g_* \circ f'_* \circ (g')^* &
+(g')^* \circ g'_* \circ a' \circ g^* \circ f_*
+\ar[u]_{\beta^\vee} \ar[ld]_\beta \ar[d] \\
+& (g')^* \circ g'_* \circ a' \circ f'_* \circ (g')^*
+\ar[ld] \ar[u]_{\beta^\vee} &
+a' \circ g^* \circ f_* \ar[lld]^\beta \\
+a' \circ f'_* \circ (g')^*
+}
+$$
+% P10-E0267
+이 도식의 두 정사각형은 범주론, 보조정리
+\ref{categories-lemma-properties-2-cat-cats}에 의해, 또는 더 간단히
+범주론, 정의 \ref{categories-definition-horizontal-composition} 앞의
+논의에 의해 교환한다. 위의 논의에 의해 삼각형도 교환한다.
+범주론, 보조정리
+\ref{categories-lemma-transformation-between-functors-and-adjoints}의
+쌍대에 의해 다음 정사각형이 교환한다.
+$$
+\xymatrix{
+\text{id} \ar[r] \ar[d] &
+g'_* \circ a' \circ g^* \circ f_* \ar[d]^\beta \\
+g'_* \circ a' \circ g^* \circ f_* \ar[r]^{\beta^\vee} &
+a \circ g_* \circ f'_* \circ (g')^*
+}
+$$
+이는 큰 도식의 오각형이 교환함을 뜻한다. $\beta$와 $\beta^\vee$가
+동형사상이고, 큰 도식의 바깥쪽을 따라가는 합성이 정의상
+$\beta \circ \alpha \circ \eta_f$와 같으므로 보조정리가 증명된다.
+\end{proof}
+\section{푸시포워드의 오른쪽 수반과 풀백}
+\label{section-compare-with-pullback}
+
+\noindent
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 준콤팩트 및 준분리 대수 공간 사이의 사상이라
+하자. $a$를 보조정리 \ref{lemma-twisted-inverse-image}에서와 같은
+푸시포워드의 오른쪽 수반이라 하자.
+$K, L \in D_\QCoh(\mathcal{O}_Y)$에 대해 다음 정준 사상이 있다.
+$$
+Lf^*K \otimes^\mathbf{L}_{\mathcal{O}_X} a(L)
+\longrightarrow
+a(K \otimes_{\mathcal{O}_Y}^\mathbf{L} L)
+$$
+즉 이 사상은 다음 사상의 수반이다.
+$$
+Rf_*(Lf^*K \otimes^\mathbf{L}_{\mathcal{O}_X} a(L)) =
+K \otimes^\mathbf{L}_{\mathcal{O}_Y} Rf_*(a(L))
+\longrightarrow
+K \otimes^\mathbf{L}_{\mathcal{O}_Y} L
+$$
+(등식은 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-cohomology-base-change}에 따른다.)
+여기서는 트레이스 사상 $Rf_*a(L) \to L$을 사용한다.
+$L = \mathcal{O}_Y$이면 다음 사상을 얻는다.
+\begin{equation}
+\label{equation-compare-with-pullback}
+Lf^*K \otimes^\mathbf{L}_{\mathcal{O}_X} a(\mathcal{O}_Y) \longrightarrow a(K)
+\end{equation}
+이는 $K$에 관해 함자적이고 구별삼각형과 양립한다.
+
+\begin{lemma}
+\label{lemma-compare-with-pullback-perfect}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 준콤팩트 및 준분리 대수 공간 사이의
+사상이라 하자. 위에서 $K, L \in D_\QCoh(\mathcal{O}_Y)$에 대해 정의한
+사상
+$Lf^*K \otimes^\mathbf{L}_{\mathcal{O}_X} a(L) \to
+a(K \otimes_{\mathcal{O}_Y}^\mathbf{L} L)$은 $K$가 완전이면
+동형사상이다. 특히 $K$가 완전이면
+(\ref{equation-compare-with-pullback})은 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+$K^\vee$를 $K$의 “쌍대”라 하자. 사이트의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-dual-perfect-complex}를 보라.
+$M \in D_\QCoh(\mathcal{O}_X)$에 대해 다음이 성립한다.
+\begin{align*}
+\Hom_{D(\mathcal{O}_Y)}(Rf_*M, K \otimes^\mathbf{L}_{\mathcal{O}_Y} L)
+& =
+\Hom_{D(\mathcal{O}_Y)}(
+Rf_*M \otimes^\mathbf{L}_{\mathcal{O}_Y} K^\vee, L) \\
+& =
+\Hom_{D(\mathcal{O}_X)}(
+M \otimes^\mathbf{L}_{\mathcal{O}_X} Lf^*K^\vee, a(L)) \\
+& =
+\Hom_{D(\mathcal{O}_X)}(M,
+Lf^*K \otimes^\mathbf{L}_{\mathcal{O}_X} a(L))
+\end{align*}
+% P10-E0270
+두 번째 등식은 $a$의 정의와 사영 공식(사이트의 코호몰로지,
+보조정리 \ref{sites-cohomology-lemma-projection-formula}), 또는 더 일반적인
+공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-cohomology-base-change}에 따른다.
+따라서 Yoneda 보조정리에 의해 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-restriction-compare-with-pullback}
+도식 (\ref{equation-base-change})이 주어졌다고 하자.
+$K \in D_\QCoh(\mathcal{O}_Y)$라 하자. 다음 도식이 교환한다.
+$$
+\xymatrix{
+L(g')^*(Lf^*K \otimes^\mathbf{L}_{\mathcal{O}_X} a(\mathcal{O}_Y))
+\ar[r] \ar[d] & L(g')^*a(K) \ar[d] \\
+L(f')^*Lg^*K \otimes_{\mathcal{O}_{X'}}^\mathbf{L} a'(\mathcal{O}_{Y'})
+\ar[r] & a'(Lg^*K)
+}
+$$
+여기서 가로 화살표들은 $K$와 $Lg^*K$에 대한
+(\ref{equation-compare-with-pullback})의 사상이고, 세로 화살표들은
+사이트의 코호몰로지, 주석
+\ref{sites-cohomology-remark-base-change} 및
+(\ref{equation-base-change-map})을 사용하여 구성한다.
+\end{lemma}
+
+\begin{proof}
+이 증명에서는 $Rf_*$ 대신 $f_*$를, $Lf^*$ 대신 $f^*$를 쓰는 등으로
+표기하고, $\otimes^\mathbf{L}_{\mathcal{O}_X}$ 대신 $\otimes$를 쓰는
+등으로 표기한다. (\ref{equation-compare-with-pullback})을 다음 합성으로
+쓰자.
+\begin{align*}
+f^*K \otimes a(\mathcal{O}_Y)
+& \to
+a(f_*(f^*K \otimes a(\mathcal{O}_Y))) \\
+& \leftarrow
+% P10-E0271
+a(K \otimes f_*a(\mathcal{O}_K)) \\
+& \to
+a(K \otimes \mathcal{O}_Y) \\
+& \to
+a(K)
+\end{align*}
+여기서 첫 번째 화살표는 단위원 $\eta_f$이고, 두 번째 화살표는
+사이트의 코호몰로지, 식
+(\ref{sites-cohomology-equation-projection-formula-map})에 $a$를
+적용한 것이며, 이는 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-cohomology-base-change}에 의해 동형사상이다.
+세 번째 화살표는 $\text{id}_K \otimes \text{Tr}_f$에 $a$를 적용한
+것이고, 네 번째 화살표는 동형사상
+$K \otimes \mathcal{O}_Y = K$에 $a$를 적용한 것이다.
+보조정리의 증명은 이 사상들 각각이 보조정리의 서술에 나오는 교환
+정사각형을 준다는 것을 보이는 것으로 이루어진다. $\eta_f$와
+$\text{Tr}_f$에 대해서는 보조정리
+\ref{lemma-unit-and-base-change} 및
+\ref{lemma-trace-map-and-base-change}가 이를 준다.
+사이트의 코호몰로지, 식
+(\ref{sites-cohomology-equation-projection-formula-map})을 사용하는
+화살표에 대해서는 사이트의 코호몰로지, 주석
+\ref{sites-cohomology-remark-compatible-with-diagram}이 이를 준다.
+곱셈 사상에 대해서는 명백하다. 이로써 증명이 끝난다.
+\end{proof}
+\section{고유 평탄 사상에 대한 푸시포워드의 오른쪽 수반}
+\label{section-proper-flat}
+
+\noindent
+준콤팩트 및 준분리 대수 공간 사이의 고유하고 평탄하며 유한 표시인
+사상에 대해서는 푸시포워드의 오른쪽 수반이 몇 가지 주목할 만한
+성질을 갖는다.
+
+\begin{lemma}
+\label{lemma-proper-flat}
+$S$를 스킴이라 하자.
+$Y$를 $S$ 위의 준콤팩트 및 준분리 대수 공간이라 하자.
+$f : X \to Y$를 고유하고 평탄하며 유한 표시인 대수 공간의 사상이라
+하자. $a$를 보조정리 \ref{lemma-twisted-inverse-image}의
+$Rf_* : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$에 대한
+오른쪽 수반이라 하자. 그러면 $a$는 직합과 가환한다.
+\end{lemma}
+
+\begin{proof}
+$P$를 $D(\mathcal{O}_X)$의 완전 대상이라 하자.
+공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-flat-proper-perfect-direct-image-general}에
+의해 복합체 $Rf_*P$는 $Y$ 위에서 완전하다.
+$K_i$를 $D_\QCoh(\mathcal{O}_Y)$의 대상들의 족이라 하자. 그러면
+\begin{align*}
+\Hom_{D(\mathcal{O}_X)}(P, a(\bigoplus K_i))
+& =
+\Hom_{D(\mathcal{O}_Y)}(Rf_*P, \bigoplus K_i) \\
+& =
+\bigoplus \Hom_{D(\mathcal{O}_Y)}(Rf_*P, K_i) \\
+& =
+\bigoplus \Hom_{D(\mathcal{O}_X)}(P, a(K_i))
+\end{align*}
+이다. 완전 대상은 콤팩트하기 때문이다(공간의 유도 범주, 명제
+\ref{spaces-perfect-proposition-compact-is-perfect}).
+$D_\QCoh(\mathcal{O}_X)$는 완전 생성자를 가지므로(공간의 유도 범주,
+정리 \ref{spaces-perfect-theorem-bondal-van-den-Bergh}), 사상
+$\bigoplus a(K_i) \to a(\bigoplus K_i)$가 동형사상임을 결론내린다.
+즉 $a$는 직합과 가환한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-with-pullback-flat-proper}
+$S$를 스킴이라 하자.
+$Y$를 $S$ 위의 준콤팩트 및 준분리 대수 공간이라 하자.
+$f : X \to Y$를 고유하고 평탄하며 유한 표시인 대수 공간의 사상이라
+하자. 모든 $D_\QCoh(\mathcal{O}_Y)$의 대상 $K$에 대해 사상
+(\ref{equation-compare-with-pullback})은 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-proper-flat}에 의해 $a$가 직합과 가환함을 안다.
+따라서 (\ref{equation-compare-with-pullback})이 동형사상인
+$D_\QCoh(\mathcal{O}_Y)$의 대상들의 모임은
+$D_\QCoh(\mathcal{O}_Y)$의 엄밀히 충만하고 포화된 삼각 부분범주이며,
+또한 직합을 취하는 것에 대해 보존된다.
+$D_\QCoh(\mathcal{O}_Y)$는 하나의 완전 대상에 의해 생성되는
+가군 범주이므로(공간의 유도 범주, 정리
+\ref{spaces-perfect-theorem-DQCoh-is-Ddga} 및
+\ref{spaces-perfect-theorem-bondal-van-den-Bergh}),
+대수에 관하여 더 자세히 보기, 주석
+\ref{more-algebra-remark-P-resolution}에서와 같이 논증하면
+(\ref{equation-compare-with-pullback})이 하나의 완전 대상에 대해
+동형사상임을 보이는 것으로 충분하다. 그러나 완전 대상에 대해서는
+보조정리 \ref{lemma-compare-with-pullback-perfect}에 의해 결과가
+성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-properties-relative-dualizing}
+$Y$를 아핀 스킴이라 하자. $f : X \to Y$를 고유하고 평탄하며
+유한 표시인 대수 공간의 사상이라 하자. $a$를 보조정리
+\ref{lemma-twisted-inverse-image}의
+$Rf_* : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$에 대한
+오른쪽 수반이라 하자. 그러면
+\begin{enumerate}
+\item $a(\mathcal{O}_Y)$는 $D(\mathcal{O}_X)$의 $Y$-완전 대상이다.
+\item $Rf_*a(\mathcal{O}_Y)$의 양의 차수 코호몰로지 층은 영이다.
+\item
+$\mathcal{O}_X \to
+R\SheafHom_{\mathcal{O}_X}(a(\mathcal{O}_Y), a(\mathcal{O}_Y))$는
+동형사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+% P10-E0272
+$D(\mathcal{O}_X)$의 완전 대상 $E$에 대해 다음이 성립한다.
+\begin{align*}
+Rf_*(E \otimes_{\mathcal{O}_X}^\mathbf{L} \omega_{X/Y}^\bullet)
+& =
+Rf_*R\SheafHom_{\mathcal{O}_X}(E^\vee, \omega_{X/Y}^\bullet) \\
+& =
+R\SheafHom_{\mathcal{O}_Y}(Rf_*E^\vee, \mathcal{O}_Y) \\
+& =
+(Rf_*E^\vee)^\vee
+\end{align*}
+첫 번째 등식은 사이트의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-dual-perfect-complex}에 따른다.
+두 번째 등식은 보조정리 \ref{lemma-iso-on-RSheafHom}, 주석
+\ref{remark-iso-on-RSheafHom}, 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-flat-proper-perfect-direct-image-general}에
+따른다. 세 번째 등식은 쌍대의 정의이다. 특히 이 참고문헌들은 결과가
+$D(\mathcal{O}_Y)$의 완전 대상임도 보인다. 따라서 공간의 사상에 관하여
+더 자세히 보기, 보조정리
+\ref{spaces-more-morphisms-lemma-characterize-relatively-perfect}에 의해
+$\omega_{X/Y}^\bullet$가 $Y$-완전임을 결론내린다. 이로써 (1)이
+증명된다.
+
+\medskip\noindent
+$M$을 $D_\QCoh(\mathcal{O}_Y)$의 대상이라 하자. 그러면
+\begin{align*}
+\Hom_Y(M, Rf_*a(\mathcal{O}_Y)) & =
+\Hom_X(Lf^*M, a(\mathcal{O}_Y)) \\
+& =
+\Hom_Y(Rf_*Lf^*M, \mathcal{O}_Y) \\
+& =
+% P10-E0274
+\Hom_Y(M \otimes_{\mathcal{O}_Y}^\mathbf{L} Rf_*\mathcal{O}_Y, \mathcal{O}_Y)
+\end{align*}
+첫 번째 등식은 사이트의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-adjoint}에 따른다.
+% P10-E0273
+두 번째 등식은 $a$의 구성에 따르고, 세 번째 등식은 공간의 유도 범주,
+보조정리 \ref{spaces-perfect-lemma-cohomology-base-change}에 따른다.
+어떤 $N$에 대해 $Rf_*\mathcal{O}_X$가 $[0, N]$의 Tor 진폭을 갖는 완전
+복합체임을 상기하자. 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-flat-proper-perfect-direct-image-general}를
+보라. 따라서 $Rf_*\mathcal{O}_X$를 차수 $[0, N]$에 놓인 유한
+사영 가군들의 복합체로 나타낼 수 있다(대수에 관하여 더 자세히 보기,
+보조정리 \ref{more-algebra-lemma-perfect} 및 $Y$가 아핀이라는 사실을
+사용한다). 그러므로 어떤 $i > 0$에 대해
+$M = \mathcal{O}_Y[-i]$이면 마지막 군은 영이다. $Y$가 아핀이므로
+$i > 0$에 대해 $H^i(Rf_*a(\mathcal{O}_Y)) = 0$임을 결론내린다.
+이로써 (2)가 증명된다.
+
+\medskip\noindent
+$E$를 $D_\QCoh(\mathcal{O}_X)$의 완전 대상이라 하자. 그러면
+\begin{align*}
+% P10-E0275
+\begin{aligned}
+&\Hom_X(E, \\
+&R\SheafHom_{\mathcal{O}_X}(a(\mathcal{O}_Y), a(\mathcal{O}_Y))
+\end{aligned}
+& =
+\begin{aligned}
+&\Hom_X(E \otimes_{\mathcal{O}_X}^\mathbf{L} a(\mathcal{O}_Y), \\
+&a(\mathcal{O}_Y))
+\end{aligned} \\
+& =
+\begin{aligned}
+&\Hom_Y(Rf_*(E \otimes_{\mathcal{O}_X}^\mathbf{L} a(\mathcal{O}_Y)), \\
+&\mathcal{O}_Y)
+\end{aligned} \\
+& =
+\begin{aligned}
+&\Hom_Y(Rf_*(R\SheafHom_{\mathcal{O}_X}(E^\vee, a(\mathcal{O}_Y))), \\
+&\mathcal{O}_Y)
+\end{aligned} \\
+& =
+\begin{aligned}
+&\Hom_Y(R\SheafHom_{\mathcal{O}_Y}(Rf_*E^\vee, \mathcal{O}_Y), \\
+&\mathcal{O}_Y)
+\end{aligned} \\
+& =
+R\Gamma(Y, Rf_*E^\vee) \\
+& =
+\Hom_X(E, \mathcal{O}_X)
+\end{align*}
+첫 번째 등식은 사이트의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-internal-hom}에 따른다.
+두 번째 등식은 $a$의 정의이고, 세 번째 등식은 쌍대 완전 복합체
+$E^\vee$의 구성에서 온다. 사이트의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-dual-perfect-complex}를 보라.
+네 번째 등식은 증명의 첫 문단에서 보인 등식
+$Rf_*R\SheafHom_{\mathcal{O}_X}(E^\vee, \omega_{X/Y}^\bullet) =
+R\SheafHom_{\mathcal{O}_Y}(Rf_*E^\vee, \mathcal{O}_Y)$에서 따른다.
+다섯 번째 등식은 완전 복합체에 대한 이중 쌍대성(사이트의 코호몰로지,
+보조정리 \ref{sites-cohomology-lemma-dual-perfect-complex}) 및
+% P10-E0276
+공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-flat-proper-perfect-direct-image-general}에
+의해 $Rf_*E$가 완전하다는 사실에 따른다.
+% P10-E0277
+마지막 등식은 $f$에 대한 Leray이다.
+이 등식의 연쇄는 본질적으로 Yoneda 보조정리에 의해 (3)이 성립함을
+보인다. 구체적으로 대상
+$R\SheafHom(a(\mathcal{O}_Y), a(\mathcal{O}_Y))$는 공간의 유도 범주,
+보조정리 \ref{spaces-perfect-lemma-quasi-coherence-internal-hom}에
+의해 $D_\QCoh(\mathcal{O}_X)$에 속한다. 위에서
+$E = \mathcal{O}_X$로 놓으면 다음 사상
+$\alpha : \mathcal{O}_X \to
+R\SheafHom_{\mathcal{O}_X}(a(\mathcal{O}_Y), a(\mathcal{O}_Y))$을 얻으며,
+이는
+$\text{id}_{\mathcal{O}_X} \in
+\Hom_X(\mathcal{O}_X, \mathcal{O}_X)$에 대응한다.
+위의 모든 동형사상은 $E$에 관해 함자적이므로, $\alpha$의 원뿔은
+$D_\QCoh(\mathcal{O}_X)$의 대상 $C$이며 모든 완전 대상 $E$에 대해
+$\Hom(E, C) = 0$을 만족한다. 완전 대상들이 생성하므로(공간의 유도 범주,
+정리 \ref{spaces-perfect-theorem-bondal-van-den-Bergh}),
+$\alpha$가 동형사상임을 결론내린다.
+\end{proof}
+
+\section{고유 평탄 사상에 대한 상대 쌍대화 복합체}
+\label{section-relative-dualizing-proper-flat}
+
+\noindent
+스킴의 쌍대성, 절
+\ref{duality-section-proper-flat} 및
+\ref{duality-section-relative-dualizing-complexes}와
+절 \ref{section-proper-flat}의 내용에 착안하여 다음 정의를 둔다.
+
+\begin{definition}
+\label{definition-relative-dualizing-proper-flat}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수 공간 사이의
+고유하고 평탄하며 유한 표시인 사상이라 하자. $X/Y$에 대한
+{\it 상대 쌍대화 복합체}란 $D(\mathcal{O}_X)$의 $Y$-완전 대상
+$\omega_{X/Y}^\bullet$과 사상
+$$
+\tau : Rf_*\omega_{X/Y}^\bullet \longrightarrow \mathcal{O}_Y
+$$
+으로 이루어진 쌍 $(\omega_{X/Y}^\bullet, \tau)$로서, $Y'$가 아핀
+스킴인 임의의 데카르트 정사각형
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+에 대해 쌍
+$(L(g')^*\omega_{X/Y}^\bullet,\allowbreak Lg^*\tau)$이 절
+\ref{section-twisted-inverse-image},
+\ref{section-base-change-map},
+\ref{section-base-change-II},
+\ref{section-trace},
+\ref{section-compare-with-pullback} 및
+\ref{section-proper-flat}에서 연구한 쌍
+$(a'(\mathcal{O}_{Y'}),\allowbreak \text{Tr}_{f', \mathcal{O}_{Y'}})$과 동형인
+것을 말한다.
+\end{definition}
+
+\noindent
+여기서 몇 가지 주석을 덧붙여야 한다.
+\begin{enumerate}
+\item 정의 \ref{definition-relative-dualizing-proper-flat}에서
+$\omega_{X/Y}^\bullet$이 $Y$-완전이라는 가정은 빼도 된다.
+실제로 $Y'$가 $Y$의 아핀들에 의한 에탈 덮개의 성분들을 달리하게
+하면, 보조정리 \ref{lemma-properties-relative-dualizing}에 의해
+$X$의 한 에탈 덮개의 성분들에 대한 $\omega_{X/Y}^\bullet$의 제한이
+$Y$-완전임을 안다. 따라서 $\omega_{X/Y}^\bullet$은 $Y$-완전이다.
+공간의 사상에 관하여 더 자세히 보기, 절
+\ref{spaces-more-morphisms-section-relatively-perfect}을 보라.
+\item 상대 쌍대화 복합체 $(\omega_{X/Y}^\bullet, \tau)$와 정의
+\ref{definition-relative-dualizing-proper-flat}에서와 같은 데카르트
+정사각형을 생각하자. 동형사상
+$(L(g')^*\omega_{X/Y}^\bullet,\allowbreak Lg^*\tau) \cong
+(a'(\mathcal{O}_{Y'}),\allowbreak \text{Tr}_{f', \mathcal{O}_{Y'}})$의 존재는
+다음과 같이 이해할 것이다. 즉 임의의
+$M' \in D_\QCoh(\mathcal{O}_{X'})$에 대해 사상
+$$
+\Hom_{X'}(M', L(g')^*\omega_{X/Y}^\bullet)
+\longrightarrow
+\Hom_{Y'}(Rf'_*M', \mathcal{O}_{Y'}),\quad
+\varphi' \longmapsto Lg^*\tau \circ Rf'_*\varphi'
+$$
+은 동형사상이다. 이는 $a'$의 정의와 절 \ref{section-trace}의 논의에서
+따른다. 특히 Yoneda 보조정리에 의해 이 동형사상은 유일하다.
+\item $Y$ 자체가 아핀이면 상대 쌍대화 복합체
+$(\omega_{X/Y}^\bullet,\allowbreak \tau)$가 존재하며,
+$(a(\mathcal{O}_Y),\allowbreak \text{Tr}_{f, \mathcal{O}_Y})$과 표준적으로
+동형이다. 여기서 $a$는 보조정리 \ref{lemma-twisted-inverse-image}에서와
+같은 $Rf_*$의 오른쪽 수반이고, $\text{Tr}_f$는 절
+\ref{section-trace}에서와 같다. 실제로 정의에서와 같은 도식이 주어지면
+보조정리 \ref{lemma-more-base-change}에 의해 동형사상
+$L(g')^*a(\mathcal{O}_Y) \to a'(\mathcal{O}_{Y'})$을 얻고, 이는
+보조정리 \ref{lemma-trace-map-and-base-change}에 의해 트레이스 사상과
+양립한다.
+\end{enumerate}
+이는 국소적으로 주어진 상대 쌍대화 복합체들을 전역적인 것으로
+붙이기에 정확히 충분한 정보를 준다. 독자는 다음 보조정리들의 증명을
+건너뛰어도 좋다.
+
+\begin{lemma}
+\label{lemma-relative-dualizing-RHom}
+% P10-E0278
+$S$를 스킴이라 하자. $X \to Y$를 유한 표시인 대수 공간 사이의
+고유하고 평탄한 사상이라 하자. $(\omega_{X/Y}^\bullet, \tau)$가
+상대 쌍대화 복합체이면
+$\mathcal{O}_X \to
+R\SheafHom_{\mathcal{O}_X}(\omega_{X/Y}^\bullet, \omega_{X/Y}^\bullet)$
+은 동형사상이고, $Rf_*\omega_{X/Y}^\bullet$의 양의 차수 코호몰로지
+층은 소멸한다.
+\end{lemma}
+
+\begin{proof}
+$Y$ 위 에탈인 아핀 스킴으로 기저 변환한 뒤 이를 증명하면 충분하며,
+그 경우에는 보조정리 \ref{lemma-properties-relative-dualizing}에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-uniqueness-relative-dualizing}
+$S$를 스킴이라 하자. $X \to Y$를 유한 표시인 대수 공간 사이의
+고유하고 평탄한 사상이라 하자. $(\omega_j^\bullet, \tau_j)$,
+$j = 1, 2$가 $X/Y$ 위의 두 상대 쌍대화 복합체이면 유일한 동형사상
+$(\omega_1^\bullet, \tau_1) \to (\omega_2^\bullet, \tau_2)$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$g : Y' \to Y$가 에탈이고 $Y'$가 아핀 스킴이라 하며, 그 기저 변환을
+$X' = Y' \times_Y X$로 나타내자. 정의
+\ref{definition-relative-dualizing-proper-flat}과 그 뒤의 논의에 의해
+유일한 동형사상
+$\iota : (\omega_1^\bullet|_{X'}, \tau_1|_{Y'}) \to
+(\omega_2^\bullet|_{X'}, \tau_2|_{Y'})$가 존재한다. 아핀들 사이의
+또 다른 에탈 사상 $Y'' \to Y'$가 있고
+$X'' = Y'' \times_Y X$이면, 유일성에 의해 $\iota|_{X''}$는 유일한
+동형사상
+$(\omega_1^\bullet|_{X''}, \tau_1|_{Y''}) \to
+(\omega_2^\bullet|_{X''}, \tau_2|_{Y''})$이다. 또한
+$$
+\text{Ext}^p_{X'}(\omega_1^\bullet|_{X'}, \omega_2^\bullet|_{X'}) = 0,
+\quad p < 0
+$$
+이다. 실제로 보조정리 \ref{lemma-relative-dualizing-RHom}에 의해
+$
+\mathcal{O}_{X'} \cong
+R\SheafHom_{\mathcal{O}_{X'}}(\omega_1^\bullet|_{X'}, \omega_1^\bullet|_{X'})
+\cong
+R\SheafHom_{\mathcal{O}_{X'}}(\omega_1^\bullet|_{X'}, \omega_2^\bullet|_{X'})
+$
+이기 때문이다.
+
+\medskip\noindent
+각 $V_n = \coprod_{i \in I_n} Y_{n, i}$이고 $Y_{n, i}$가 아핀이 되도록
+하는 에탈 하이퍼덮개 $b : V \to Y$를 택하자. 이는 하이퍼덮개,
+보조정리 \ref{hypercovering-lemma-hypercovering-object} 및 주석
+\ref{hypercovering-remark-take-unions-hypercovering-X}에 의해 가능하다.
+뒤의 주석은 보조정리에서 얻은 하이퍼덮개를 각 차수에서 분리합을 갖는
+것으로 바꾸는 데 쓰인다. $X_{n, i} = Y_{n, i} \times_Y X$ 및
+$U_n = V_n \times_Y X$로 나타내자. 그러면
+$U_n = \coprod X_{n, i}$인 에탈 하이퍼덮개 $a : U \to X$를 얻는다
+(하이퍼덮개, 보조정리
+\ref{hypercovering-lemma-hypercovering-morphism-sites}).
+$a : U \to X$와 복합체 $\omega_1^\bullet$, $\omega_2^\bullet$은
+단체 대수 공간, 보조정리
+\ref{spaces-simplicial-lemma-fppf-neg-ext-zero-hom}의 가정들을 만족한다.
+따라서 $X_{0, i}$에 대한 제한이 유일한 동형사상
+$(\omega_1^\bullet|_{X_{0, i}}, \tau_1|_{Y_{0, i}}) \to
+(\omega_2^\bullet|_{X_{0, i}}, \tau_2|_{Y_{0, i}})$인 유일한 사상
+$\iota : \omega_1^\bullet \to \omega_2^\bullet$를 얻는다.
+% P10-E0280
+이제 도식
+% P10-E0279
+$$
+\xymatrix{
+Rf_*\omega_1^\bullet \ar[rd]_{\tau_1} \ar[rr]_{Rf_*\iota} & &
+Rf_*\omega_1^\bullet \ar[ld]^{\tau_2} \\
+& \mathcal{O}_Y
+}
+$$
+이 가환임을 보여야 한다. 그러나
+$Rf_*\omega_1^\bullet$과 $Rf_*\omega_2^\bullet$의 양의 차수
+코호몰로지 층이 소멸함을 알고 있으므로(보조정리
+\ref{lemma-relative-dualizing-RHom}), 이 가환성은 구성에 의해 성립하는
+아핀 $Y_{0, i}$들에 제한한 뒤 증명할 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-covering-enough}
+% P10-E0281
+$S$를 스킴이라 하자. $X \to Y$를 유한 표시인 대수 공간 사이의
+고유하고 평탄한 사상이라 하자. $(\omega^\bullet, \tau)$를
+$D(\mathcal{O}_X)$의 $Y$-완전 대상과 사상
+$\tau : Rf_*\omega^\bullet \to \mathcal{O}_Y$로 이루어진 쌍이라 하자.
+데카르트 도식들
+$$
+\xymatrix{
+X_i \ar[r]_{g_i'} \ar[d]_{f_i} & X \ar[d]^f \\
+Y_i \ar[r]^{g_i} & Y
+}
+$$
+이 주어져 있고, 각 $Y_i$가 아핀이며
+$\{g_i : Y_i \to Y\}$가 에탈 덮개라고 하자. 또한 정의
+\ref{definition-relative-dualizing-proper-flat}에서와 같은 쌍의
+동형사상
+$(\omega^\bullet|_{X_i}, \tau|_{Y_i})
+\to (a_i(\mathcal{O}_{Y_i}), \text{Tr}_{f_i, \mathcal{O}_{Y_i}})$이
+주어졌다고 하자. 그러면 $(\omega^\bullet, \tau)$는 $Y$ 위의 $X$에
+대한 상대 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$g : Y' \to Y$와 $X', f', g', a'$를 정의
+\ref{definition-relative-dualizing-proper-flat}에서와 같이 두자.
+$((\omega')^\bullet, \tau') = (L(g')^*\omega^\bullet, Lg^*\tau)$로
+놓자. $\{Y_i \times_Y Y' \to Y'\}$를 세분하는 아핀들에 의한 유한
+에탈 덮개 $\{Y'_j \to Y'\}$를 찾을 수 있다(위상들, 보조정리
+\ref{topologies-lemma-etale-affine}). 따라서 각 $j$에 대해 어떤
+$i_j$와 $Y$ 위의 사상 $k_j : Y'_j \to Y_{i_j}$가 존재한다. 섬유곱
+$$
+\xymatrix{
+X'_j \ar[r]_{h_j'} \ar[d]_{f'_j} &
+X' \ar[d]^{f'} \\
+Y'_j \ar[r]^{h_j} & Y'
+}
+$$
+을 생각하자. 유도된 사상($k_j$를 $f_{i_j}$로 기저 변환한 것)을
+$k'_j : X'_j \to X_{i_j}$로 나타내자. 주어진 동형사상들을 $k'_j$를
+통해 $Y'_j$에 제한하면 쌍의 동형사상
+% P10-E0282
+$((\omega')^\bullet|_{X'_j}, \tau'|_{Y'_j})
+\to (a_j(\mathcal{O}_{Y'_j}), \text{Tr}_{f'_j, \mathcal{O}_{Y'_j}})$을
+얻는다. $f : X \to Y$를 $f' : X' \to Y'$로 바꾸면 다음 문단에서
+푸는 문제로 환원된다.
+
+\medskip\noindent
+$Y$가 아핀이라고 하자. 문제는 $(\omega^\bullet, \tau)$가
+$(\omega_{X/Y}^\bullet, \text{Tr}) =
+(a(\mathcal{O}_Y), \text{Tr}_{f, \mathcal{O}_Y})$과 동형임을 보이는
+것이다. 덮개 $\{Y_i \to Y\}$는 아핀들 사이의 하나의 전사 에탈 사상
+$\{g : Y' \to Y\}$로 주어졌다고 가정해도 된다. 실제로 먼저
+$\{g_i: Y_i \to Y\}$를 유한 부분덮개로 바꾼 다음
+$g = \coprod g_i :  Y' = \coprod Y_i \to Y$로 놓으면 된다. 몇 가지
+세부사항은 생략한다. $X' = Y' \times_Y X$로 놓고, 사상 $f', g'$는
+정의 \ref{definition-relative-dualizing-proper-flat}에서와 같이 두자.
+그러면 주어진 정보는 동형사상
+$$
+(\omega^\bullet|_{X'}, \tau|_{Y'}) \to
+(a'(\mathcal{O}_{Y'}), \text{Tr}_{f', \mathcal{O}_{Y'}})
+$$
+뿐이다. $(\omega_{X/Y}^\bullet, \text{Tr})$는 상대 쌍대화 복합체이므로
+(정의 \ref{definition-relative-dualizing-proper-flat} 뒤의 논의를
+보라), 유일한 동형사상
+$$
+(\omega_{X/Y}^\bullet|_{X'}, \text{Tr}|_{Y'}) \to
+(a'(\mathcal{O}_{Y'}), \text{Tr}_{f', \mathcal{O}_{Y'}})
+$$
+이 존재한다. 예를 들어 보조정리
+\ref{lemma-uniqueness-relative-dualizing}에 의해 유일하다. 두 표시된
+동형사상을 합성하면 동형사상
+$$
+\alpha :
+(\omega^\bullet|_{X'}, \tau|_{Y'}) \to
+(\omega_{X/Y}^\bullet|_{X'}, \text{Tr}|_{Y'})
+$$
+을 얻는다.
+% P10-E0283
+$Y'' = Y' \times_Y Y'$ 및 $X'' = Y'' \times_Y X$로 놓자. $X''$로의
+$\alpha$의 두 풀백은 다시 유일성에 의해 같아야 한다.
+$X'$ 위의 $\omega_{X'/Y'}^\bullet$에 대해 음의 자기 Ext가 소멸하고
+(보조정리 \ref{lemma-relative-dualizing-RHom}), 이는 임의의 사영
+$Y' \times_Y \ldots \times_Y Y' \to Y'$로 풀백한 뒤에도 성립하므로
+(작은 세부사항은 생략한다. 보조정리
+\ref{lemma-uniqueness-relative-dualizing}의 증명과 비교하라), 단체 대수
+공간, 보조정리 \ref{spaces-simplicial-lemma-fppf-neg-ext-zero-hom}에
+의해 $\alpha$는 $X$ 위의 동형사상
+$\omega^\bullet \to \omega_{X/Y}^\bullet$로 내려감을 안다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-existence-relative-dualizing}
+% P10-E0284
+$S$를 스킴이라 하자. $X \to Y$를 유한 표시인 대수 공간 사이의
+고유하고 평탄한 사상이라 하자. 상대 쌍대화 복합체
+$(\omega_{X/Y}^\bullet, \tau)$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+각 $V_n = \coprod_{i \in I_n} Y_{n, i}$이고 $Y_{n, i}$가 아핀이 되도록
+하는 에탈 하이퍼덮개 $b : V \to Y$를 택하자. 이는 하이퍼덮개,
+보조정리 \ref{hypercovering-lemma-hypercovering-object} 및 주석
+\ref{hypercovering-remark-take-unions-hypercovering-X}에 의해 가능하다.
+뒤의 주석은 보조정리에서 얻은 하이퍼덮개를 각 차수에서 분리합을 갖는
+것으로 바꾸는 데 쓰인다. $X_{n, i} = Y_{n, i} \times_Y X$ 및
+$U_n = V_n \times_Y X$로 나타내자. 그러면
+$U_n = \coprod X_{n, i}$인 에탈 하이퍼덮개 $a : U \to X$를 얻는다
+(하이퍼덮개, 보조정리
+\ref{hypercovering-lemma-hypercovering-morphism-sites}). 각 $n, i$에 대해
+$X_{n, i}/Y_{n, i}$ 위의 상대 쌍대화 복합체
+$(\omega_{n, i}^\bullet, \tau_{n, i})$가 존재한다. 정의
+\ref{definition-relative-dualizing-proper-flat} 뒤의 논의를 보라.
+% P10-E0285
+$\varphi : [m] \to [n]$ 및 $i \in I_n$에 대해 주어진 하이퍼덮개의
+구조에 속하는 사상
+$g_{\varphi, i} : Y_{n, i} \to Y_{m, \alpha(\varphi)}$ 및
+$g'_{\varphi, i} : X_{n, i} \to X_{m, \alpha(\varphi)}$를 생각하자
+(하이퍼덮개, 절 \ref{hypercovering-section-hypercovering-sites}).
+% P10-E0286
+그러면 쌍의 유일한 동형사상
+% P10-E0287
+$$
+\iota_{n, i, \varphi} :
+(L(g'_{n, i})^*\omega_{n, i}^\bullet, Lg_{n, i}^*\tau_{n, i})
+\longrightarrow
+(\omega_{m, \alpha(\varphi)(i)}^\bullet, \tau_{m, \alpha(\varphi)(i)})
+$$
+이 존재한다. 정의 \ref{definition-relative-dualizing-proper-flat} 뒤의
+논의를 보라. 보조정리 \ref{lemma-relative-dualizing-RHom}에 의해
+$\omega_{n, i}^\bullet$은 $X_{n, i}$ 위에서 음의 자기 Ext가 소멸함을
+주의하자. $i \in I_n$에 대한 쌍
+$(\omega_{n, i}^\bullet, \tau_{n, i})$들을 사용하여 $U_n/V_n$ 위에
+구성한 쌍을 $(\omega_n^\bullet, \tau_n)$으로 나타내자.
+$\varphi : [m] \to [n]$ 및 $i \in I_n$에 대해 단체 대수 공간 $V$와
+$U$의 구조에 속하는 사상 $g_\varphi : V_n \to V_m$ 및
+$g'_\varphi : U_n \to U_m$를 생각하자. 그러면 각 성분 위의
+동형사상들로부터 구성된 쌍의 유일한 동형사상
+$$
+\iota_\varphi :
+(L(g'_\varphi)^*\omega_n^\bullet, Lg_\varphi^*\tau_n)
+\longrightarrow
+(\omega_m^\bullet, \tau_m)
+$$
+이 존재한다. 유일성은 이 동형사상들이 단체 대수 공간, 정의
+\ref{spaces-simplicial-definition-cartesian-derived-modules}에 서술된
+추이 조건을 만족함을 보장한다. $a : U \to X$, 복합체
+$\omega_n^\bullet$ 및 동형사상 $\iota_\varphi$는 단체 대수 공간,
+보조정리 \ref{spaces-simplicial-lemma-fppf-glue-neg-ext-zero}의 가정들을
+만족한다\footnote{이 보조정리는 $\omega_0^\bullet$과 두 사상
+% P10-E0288
+$\delta_1^1, \delta_0^1 : [1] \to [0]$만 사용한다. 여기서는 가군의
+유도 범주의 단체계를 이미 실제로 가지고 있으므로, 독자는 인용한
+보조정리 증명의 처음 몇 줄을 건너뛰어도 된다.}.
+따라서 $D_\QCoh(\mathcal{O}_X)$의 대상 $\omega^\bullet$과 동형사상
+$\iota_0 : \omega^\bullet|_{U_0} \to \omega_0^\bullet$을 얻으며, 이는
+두 동형사상 $\iota_{\delta^1_0}$ 및 $\iota_{\delta^1_1}$과 양립한다.
+마지막으로 단체 대수 공간, 보조정리
+\ref{spaces-simplicial-lemma-fppf-neg-ext-zero-hom}을 적용하여, $V_0$에
+대한 제한이 $\tau_0$와 일치하는 유일한 사상
+$$
+\tau : Rf_*\omega^\bullet \longrightarrow \mathcal{O}_Y
+$$
+을 얻는다. 몇 가지 세부사항은 생략한다.
+% P10-E0289
+예를 들어 요구되는 음의 Ext 소멸을 확인하려면 보조정리
+\ref{lemma-uniqueness-relative-dualizing}의 증명 끝부분과 비교하라.
+보조정리 \ref{lemma-covering-enough}에 의해 쌍
+$(\omega^\bullet, \tau)$는 상대 쌍대화 복합체이고, 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-relative-dualizing}
+$S$를 스킴이라 하자. $S$ 위의 대수 공간의 데카르트 정사각형
+$$
+\xymatrix{
+X' \ar[d]_{f'} \ar[r]_{g'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+을 생각하자. $X \to Y$가 고유하고 평탄하며 유한 표시라고 가정하자.
+$(\omega_{X/Y}^\bullet, \tau)$를 $f$에 대한 상대 쌍대화 복합체라 하자.
+그러면 $(L(g')^*\omega_{X/Y}^\bullet, Lg^*\tau)$는 $f'$에 대한 상대
+쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+공간의 사상에 관하여 더 자세히 보기, 보조정리
+\ref{spaces-more-morphisms-lemma-base-change-relatively-perfect}에 의해
+$L(g')^*\allowbreak\omega_{X/Y}^\bullet$은 $Y'$-완전임을 주의하자. 정의
+\ref{definition-relative-dualizing-proper-flat}의 다른 조건은 섬유곱의
+추이성에 의해 성립한다.
+\end{proof}
+
+\section{스킴의 경우와 비교}
+\label{section-comparison}
+
+\noindent
+이 절에는 훨씬 더 많은 내용을 덧붙여야 한다.
+
+\begin{lemma}
+\label{lemma-compare}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 준콤팩트 및 준분리
+대수 공간 사이의 사상이라 하자. $X$와 $Y$가 표현 가능하다고 가정하고,
+$f$를 표현하는 스킴의 사상을 $f_0 : X_0 \to Y_0$라 하자(어색하지만
+임시적인 표기이다).
+$a : D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_X)$를 보조정리
+\ref{lemma-twisted-inverse-image}의 $Rf_*$의 오른쪽 수반이라 하자.
+% P10-E0637
+$a_0 : D_\QCoh(\mathcal{O}_{Y_0}) \to D_\QCoh(\mathcal{O}_{X_0})$를
+스킴의 쌍대성, 보조정리
+\ref{duality-lemma-twisted-inverse-image}의 $Rf_*$의 오른쪽 수반이라 하자.
+그러면
+$$
+\xymatrix{
+D_\QCoh(\mathcal{O}_{X_0})
+\ar@{=}[rrrrrr]_{\text{공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site}}}
+& & & & & &
+D_\QCoh(\mathcal{O}_X) \\
+D_\QCoh(\mathcal{O}_{Y_0}) \ar[u]^{a_0}
+\ar@{=}[rrrrrr]^{\text{공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site}}}
+& & & & & &
+D_\QCoh(\mathcal{O}_Y) \ar[u]_a
+}
+$$
+은 가환한다.
+\end{lemma}
+
+\begin{proof}
+수반의 유일성과 공간의 유도 범주, 주석
+\ref{spaces-perfect-remark-match-total-direct-images}의 양립성에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

@@ -1,0 +1,3149 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{교차 이론}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 대수적으로 닫힌 체 위의 비특이 사영다양체에 대해 유리 동치로
+나눈\  Chow 군 위의 교차곱을 구성한다. 사용하는 도구는\  Serre의\  Tor 공식
+(\cite[Chapter V]{Serre_algebre_locale} 참조), 대각선으로의 환원, 그리고
+이동 보조정리이다.
+
+\medskip\noindent
+먼저 사이클과 사이클의 고유 밂 및 평탄 당김의 구성을 복습한다. 이어서
+사이클의 유리 동치를 도입하여\  Chow 군\  $\CH_*(X)$를 얻는다. 고유 밂과
+평탄 당김은 유리 동치를 거쳐 인수분해되므로\  Chow 군 위의 연산을 준다.
+이 내용은\ 
+\ref{section-cycles},
+\ref{section-cycle-of-closed},
+\ref{section-cycle-of-coherent-sheaf},
+\ref{section-pushforward},
+\ref{section-flat-pullback},
+\ref{section-rational-equivalence},
+\ref{section-alternative},
+\ref{section-pushforward-and-rational-equivalence},
+\ref{section-flat-pullback-and-rational-equivalence}절에서 다룬다.
+증명은 대부분\  Chow 호몰로지 장을 참조한다. 그 장에서는 보편 쇄상 뇌터
+밑스킴 위의 국소 유한형 스킴이라는 설정에서 이 결과들을 증명하였다.
+Chow Homology, Section \ref{chow-section-setup} 이하를 보라.
+
+\medskip\noindent
+비특이 사영다양체\  $X$ 위에서 논의하므로, 두 기약 닫힌 부분다양체의 교집합\ 
+$V \cap W$의 각 기약 성분의 차원은 적어도\ 
+$\dim(V) + \dim(W) - \dim(X)$이다. 모든 기약 성분\  $Z$에 대해 등호가
+성립하면\  $V$와\  $W$가 고유하게 교차한다고 한다. 이 경우 교차 중복도\ 
+$e_Z = e(X, V \cdot W, Z)$를 다음 공식으로 정의한다.
+$$
+e_Z = \sum\nolimits_i
+(-1)^i
+\text{length}_{\mathcal{O}_{X, Z}}
+\text{Tor}_i^{\mathcal{O}_{X, Z}}(\mathcal{O}_{W, Z}, \mathcal{O}_{V, Z})
+$$
+간단한 경우에 이 교차 중복도가 직관과 일치함을 보이려면 약간의 가환대수가
+필요하다. 구체적으로, 때로는
+$$
+e_Z = \text{length}_{\mathcal{O}_{X, Z}} \mathcal{O}_{V \cap W, Z},
+$$
+즉\  $\text{Tor}_0$만 기여한다. 이는\  $V$와\  $W$가\  $Z$의 일반점에서\ 
+Cohen--Macaulay이거나, $W$를 잘라내는\  $\mathcal{O}_{X, Z}$의 정칙열이\ 
+$\mathcal{O}_{V, Z}$ 위에서도 정칙열을 정의할 때 성립한다. 그러나\ 
+Example \ref{example-naive-multiplicity-wrong}에서 보듯이 일반적으로는
+고차\  Tor가 필요하다. 또한\  Samuel 중복도와의 관계도 있다. 이 내용은\ 
+\ref{section-intersect-properly},
+\ref{section-tor-formula},
+\ref{section-multiplicities},
+\ref{section-computing-intersection-multiplicities},
+\ref{section-intersection-product}절에서 논의한다.
+
+\medskip\noindent
+대각선으로의 환원이란\  $V$와\  $W$의 교차를\  $X \times X$ 안에서\ 
+$V \times W$와 대각선을 교차시켜 구할 수 있다는 명제이다. 스킴론적
+교집합의 수준에서는 자명한 이 명제를 통해, 일반적인 두 닫힌 부분스킴의
+교차를 둘 중 하나가 국소적으로 정칙열로 잘라지는 경우로 환원할 수 있다.
+Serre를 따라 이 사실로부터 교차 중복도의 양성을 얻는다. 나아가 대각선으로의
+환원은 교차 중복도의 가법성, 결합법칙, 그리고 사영 공식으로 이어진다.
+이는\ 
+\ref{section-exterior-product},
+\ref{section-reduction-diagonal},
+\ref{section-associative},
+\ref{section-flat-pullback-and-intersection-products},
+\ref{section-projection-formula-flat}절에서 다룬다.
+
+\medskip\noindent
+마지막으로 이동 보조정리와 그 응용을 다룬다. 이동 보조정리는 두 부분으로
+이루어진다. 첫째, $X$가 비특이인 닫힌 부분다양체들
+$$
+Z \subset X \subset \mathbf{P}^N
+$$
+이 주어지면, $X$와 고유하게 교차하는 부분다양체\  $C \subset \mathbf{P}^N$을
+찾아
+$$
+C \cdot X = [Z] + \sum m_j [Z_j]
+$$
+가 되게 하고, 다른 성분\  $Z_j$들이\  $Z$보다 “더 일반적”이게 할 수 있다.
+둘째, $C \subset \mathbf{P}^N$을 유리곡선을 따라 이동하여 주어진 임의의
+부분다양체 목록에 대해 일반 위치에 있는 부분다양체로 만들 수 있다.
+두 결과를 결합하면, 위에서 한 것처럼\  $X$ 위에서 고유하게 교차하는
+사이클들의 교차곱을 정의하는 것으로 충분함을 알 수 있다. 물론 이것이\ 
+$\CH_*(X)$ 위의 교차곱을 주려면 본문에서 보이듯이 이 곱이 유리 동치를
+거쳐 내려감을 증명해야 한다. 이 사실과 몇 가지 응용을\ 
+\ref{section-projection},
+\ref{section-moving-lemma},
+\ref{section-intersections-and-rational-equivalence},
+\ref{section-chow-rings},
+\ref{section-general-pullback},
+\ref{section-pullback-cycles}절에서 논의한다.
+
+
+
+\section{규약}
+\label{section-conventions}
+
+\noindent
+표수가 임의인 대수적으로 닫힌 바탕체\  $\mathbf{C}$를 고정한다.
+모든 스킴과 다양체는\  $\mathbf{C}$ 위에 있고, 모든 사상도\  $\mathbf{C}$
+위의 사상이다. 다양체\  $X$가 정칙 스킴이면\  $X$를 {\it 비특이}라고 한다
+(Properties, Definition \ref{properties-definition-regular} 참조).
+우리의 경우 이는 사상\  $X \to \Spec(\mathbf{C})$가 매끄럽다는 뜻이다
+(Varieties, Lemma \ref{varieties-lemma-geometrically-regular-smooth} 참조).
+
+
+\section{사이클}
+\label{section-cycles}
+
+\noindent
+$X$를 다양체라 하자. $X$의 {\it 닫힌 부분다양체}란 정역적 닫힌 부분스킴\ 
+$Z \subset X$를 말한다. $X$ 위의 {\it $k$-사이클}이란 각\  $Z_i$가 차원\ 
+$k$의 닫힌 부분다양체인 유한 형식합\  $\sum n_i [Z_i]$이다.
+$k$-사이클에 대해\  $\alpha = \sum n_i[Z_i]$라는 표기를 사용할 때에는 항상
+부분다양체\  $Z_i$들이 서로 다르고 모든\  $i$에 대해\  $n_i \not = 0$이라고
+가정한다. 이 경우\  $\alpha$의 {\it 지지집합}은 차원\  $k$의 닫힌 부분집합
+$$
+\text{Supp}(\alpha) = \bigcup Z_i \subset X
+$$
+이다. $k$-사이클의 군을\  $Z_k(X)$로 나타낸다.
+Chow Homology, Section \ref{chow-section-cycles}를 보라.
+
+
+\section{닫힌 부분스킴에 결부된 사이클}
+\label{section-cycle-of-closed}
+
+\noindent
+$X$를 다양체라 하고\  $Z \subset X$를\  $\dim(Z) \leq k$인 닫힌 부분스킴이라
+하자. $Z_i$를\  $Z$의\  $k$차원 기약 성분들이라 하고, {\it $Z$에서\  $Z_i$의
+중복도} $n_i$를
+$$
+n_i = \text{length}_{\mathcal{O}_{X, Z_i}} \mathcal{O}_{Z, Z_i}
+$$
+로 정의한다. 여기서\  $\mathcal{O}_{X, Z_i}$, resp.\ $\mathcal{O}_{Z, Z_i}$는\ 
+$Z_i$의 일반점에서\  $X$, resp.\ $Z$의 국소환이다. $Z$에 결부된\  $k$-사이클을
+다음\  $k$-사이클로
+$$
+[Z]_k = \sum n_i [Z_i].
+$$
+로 정의한다. Chow Homology, Section
+\ref{chow-section-cycle-of-closed-subscheme}을 보라.
+
+
+\section{코히런트 층에 결부된 사이클}
+\label{section-cycle-of-coherent-sheaf}
+
+\noindent
+$X$를 다양체라 하고\  $\mathcal{F}$를\ 
+$\dim(\text{Supp}(\mathcal{F})) \leq k$인 코히런트\ 
+$\mathcal{O}_X$-모듈이라 하자.
+$Z_i$를\  $\text{Supp}(\mathcal{F})$의\  $k$차원 기약 성분들이라 하고,
+{\it $\mathcal{F}$에서\  $Z_i$의 중복도} $n_i$를
+$$
+n_i = \text{length}_{\mathcal{O}_{X, Z_i}} \mathcal{F}_{\xi_i}
+$$
+로 정의한다. 여기서\  $\mathcal{O}_{X, Z_i}$는\  $Z_i$의 일반점\  $\xi_i$에서\ 
+$X$의 국소환이고, $\mathcal{F}_{\xi_i}$는 이 점에서\  $\mathcal{F}$의
+줄기이다. $\mathcal{F}$에 결부된\  $k$-사이클을 다음\  $k$-사이클로
+$$
+[\mathcal{F}]_k = \sum n_i [Z_i].
+$$
+로 정의한다. Chow Homology, Section
+\ref{chow-section-cycle-of-coherent-sheaf}를 보라.
+$Z \subset X$가\  $\dim(Z) \leq k$인 닫힌 부분스킴이면 정의에 의해\ 
+$[Z]_k = [\mathcal{O}_Z]_k$임에 유의하자.
+
+
+\section{고유 밂}
+\label{section-pushforward}
+
+\noindent
+$f : X \to Y$를 다양체들의 고유 사상이라 하자.
+$Z \subset X$를\  $k$차원 닫힌 부분다양체라 하자.
+$\dim(f(Z)) < k$이면\  $f_*[Z]$를\  $0$으로 정의하고,
+$\dim(f(Z)) = k$이면\  $d \cdot [f(Z)]$로 정의한다. 여기서
+$$
+d = [\mathbf{C}(Z) : \mathbf{C}(f(Z))] = \deg(Z/f(Z))
+$$
+는 우세 사상\  $Z \to f(Z)$의 차수이다. Morphisms, Definition
+\ref{morphisms-definition-degree}를 보라.
+$\alpha = \sum n_i [Z_i]$를\  $X$ 위의\  $k$-사이클이라 하자.
+$\alpha$의 {\it 고유 밂}은 합\  $f_* \alpha = \sum n_i f_*[Z_i]$이며,
+각\  $f_*[Z_i]$는 위와 같이 정의한다. 이로써 준동형
+$$
+f_* : Z_k(X) \longrightarrow Z_k(Y)
+$$
+을 얻는다. Chow Homology, Section
+\ref{chow-section-proper-pushforward}를 보라.
+
+\begin{lemma}
+\label{lemma-push-coherent}
+\begin{reference}
+\cite[Chapter V]{Serre_algebre_locale}를 보라.
+\end{reference}
+$f : X \to Y$를 다양체들의 고유 사상이라 하자.
+$\mathcal{F}$를\  $\dim(\text{Supp}(\mathcal{F})) \leq k$인 코히런트
+층이라 하자. 그러면\ 
+$f_*[\mathcal{F}]_k = [f_*\mathcal{F}]_k$이다. 특히\ 
+$Z \subset X$가 차원\  $\leq k$인 닫힌 부분스킴이면\ 
+$f_*[Z]_k = [f_*\mathcal{O}_Z]_k$이다.
+\end{lemma}
+
+\begin{proof}
+Chow Homology, Lemma \ref{chow-lemma-cycle-push-sheaf}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compose-pushforward}
+$f : X \to Y$와\  $g : Y \to Z$가 다양체들의 고유 사상이면,
+$Z_k(X) \to Z_k(Z)$인 사상으로서\ 
+$g_* \circ f_* = (g \circ f)_*$이다.
+\end{lemma}
+
+\begin{proof}
+Chow Homology, Lemma \ref{chow-lemma-compose-pushforward}의 특수한 경우이다.
+\end{proof}
+
+
+
+\section{평탄 당김}
+\label{section-flat-pullback}
+
+\noindent
+$f : X \to Y$를 다양체들의 평탄 사상이라 하자.
+Morphisms, Lemma
+\ref{morphisms-lemma-dimension-fibre-at-a-point-additive}에 의해\ 
+$f$의 모든 섬유는 차원\  $r = \dim(X) - \dim(Y)$이다\footnote{역으로,
+$f : X \to Y$가 다양체들의 우세 사상이고, $X$가\  Cohen--Macaulay,
+$Y$가 비특이이며, 모든 섬유의 차원이 같은\  $r$이면\  $f$는 평탄하다.
+이는\  Algebra, Lemma \ref{algebra-lemma-CM-over-regular-flat}과\ 
+$\dim(X) = \dim(Y) + r$을 보이는\ 
+Varieties, Lemma \ref{varieties-lemma-dimension-fibres-locally-algebraic}에서
+따른다.}.
+$Z \subset Y$를\  $k$차원 닫힌 부분다양체라 하자. $f^*[Z]$를
+스킴론적 역상에 결부된\  $(k + r)$-사이클, 즉\ 
+$f^*[Z] = [f^{-1}(Z)]_{k + r}$로 정의한다.
+$\alpha = \sum n_i [Z_i]$를\  $Y$ 위의\  $k$-사이클이라 하자.
+$\alpha$의 {\it 평탄 당김}은 합\  $f^* \alpha = \sum n_i f^*[Z_i]$이며,
+각\  $f^*[Z_i]$는 위와 같이 정의한다. 이로써 준동형
+$$
+f^* : Z_k(Y) \longrightarrow Z_{k + r}(X)
+$$
+을 얻는다. Chow Homology, Section
+\ref{chow-section-flat-pullback}을 보라.
+
+\begin{lemma}
+\label{lemma-pullback}
+$f : X \to Y$를 다양체들의 평탄 사상이라 하고\ 
+$r = \dim(X) - \dim(Y)$로 놓자. $\mathcal{F}$가\  $Y$ 위의 코히런트
+층이고\  $\mathcal{F}$의 지지집합 차원이\  $k$ 이하이면\ 
+$f^*[\mathcal{F}]_k = [f^*\mathcal{F}]_{k + r}$이다.
+\end{lemma}
+
+\begin{proof}
+Chow Homology, Lemma \ref{chow-lemma-pullback-coherent}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compose-flat-pullback}
+$f : X \to Y$와\  $g : Y \to Z$가 다양체들의 평탄 사상이면\ 
+$g \circ f$도 평탄하고,
+$Z_k(Z) \to Z_{k + \dim(X) - \dim(Z)}(X)$인 사상으로서\ 
+$f^* \circ g^* = (g \circ f)^*$이다.
+\end{lemma}
+
+\begin{proof}
+Chow Homology, Lemma \ref{chow-lemma-compose-flat-pullback}의 특수한 경우이다.
+\end{proof}
+
+
+\section{유리 동치}
+\label{section-rational-equivalence}
+
+\noindent
+이제 얼핏 보기에 익숙한 정의나\  \cite[Chapter I]{F} 또는\ 
+Chow Homology, Section \ref{chow-section-rational-equivalence}의 정의와
+달라 보일 수 있는 방식으로 유리 동치를 정의한다. 그러나\ 
+Section \ref{section-alternative}에서 두 개념이 일치함을 보일 것이다.
+
+\medskip\noindent
+$X$를 다양체라 하자. $W \subset X \times \mathbf{P}^1$를 차원\ 
+$k + 1$인 닫힌 부분다양체라 하고, $a, b$를\  $\mathbf{P}^1$의 서로 다른
+닫힌점들이라 하자. $X \times a$, $X \times b$, $W$가 고유하게 교차한다고
+가정하자.
+$$
+\dim (W \cap X \times a) \leq k,\quad
+\dim (W \cap X \times b) \leq k.
+$$
+$W \to \mathbf{P}^1$가 우세이거나, $W$가\  $a$ 및\  $b$와 다른 닫힌점 위
+사영의 한 섬유에 포함되면 이 조건은 성립한다. 뒤의 경우는 흥미롭지
+않으므로 버린다. 이 상황에서 사상\  $W \to \mathbf{P}^1$의 스킴론적 섬유\ 
+$W_a$는\  $X \times \mathbf{P}^1$ 안의 스킴론적 교집합\ 
+$W \cap X \times a$와 같다. $X \times a$와\  $X \times b$를\  $X$와
+동일시하면 섬유\  $W_a$와\  $W_b$를 차원\  $\leq k$인\  $X$의 닫힌
+부분스킴으로 생각할 수 있다\footnote{$W_a$를 때로는\ 
+$X \times \mathbf{P}^1$의 닫힌 부분스킴으로, 때로는\  $X$의 닫힌
+부분스킴으로 생각할 것이다. 어느 관점을 취하는지는 문맥에서 늘 분명해야
+한다.}. 유리 동치의 기본적인 예는
+$$
+[W_a]_k \sim_{rat} [W_b]_k
+$$
+이다. 사이클\  $[W_a]_k$와\  $[W_b]_k$는 카르티에 약수와 고유하게 교차하여
+얻으므로, $W$가 주어지면 실제로 계산하기 쉽다. 이 사실은\ 
+Section \ref{section-intersection-product}에서 볼 것이다.
+$\mathbf{P}^1$의 자기동형군은\  $2$-추이적이므로 닫힌점의 쌍\  $a, b$를
+원하는 임의의 쌍으로 옮길 수 있다. 전통적으로는\ 
+$a = 0$, $b = \infty$를 택한다.
+
+\medskip\noindent
+더 일반적으로\  $\alpha = \sum n_i [W_i]$를\ 
+$X \times \mathbf{P}^1$ 위의\  $(k + 1)$-사이클이라 하자.
+$a_i, b_i$를\  $\mathbf{P}^1$의 서로 다른 닫힌점들의 쌍이라 하자.
+$X \times a_i$, $X \times b_i$, $W_i$가 고유하게 교차한다고,
+다시 말해 각\  $W_i, a_i, b_i$가 위에서 논의한 조건을 만족한다고
+가정하자. {\it 영과 유리 동치인 사이클}이란 다음 꼴의 임의의 사이클이다.
+$$
+\sum n_i([W_{i, a_i}]_k - [W_{i, b_i}]_k).
+$$
+이는 실제로\  $k$-사이클이다. 영과 유리 동치인\  $k$-사이클들의 모임은\ 
+$k$-사이클 군의 덧셈 부분군이다. 두\  $k$-사이클의 차\ 
+$\alpha - \alpha'$가 영과 유리 동치이면 이들을 {\it 유리 동치}라고 하고
+그 표기를\  $\alpha \sim_{rat} \alpha'$로 쓴다.
+
+\medskip\noindent
+$$
+\CH_k(X) = Z_k(X)/ \sim_{rat}
+$$
+를 {\it $X$ 위의\  $k$-사이클\  Chow 군}으로 정의한다.
+Lemma \ref{lemma-rational-equivalence}에서 이것이\ 
+Chow Homology, Definition \ref{chow-definition-rational-equivalence}의\ 
+Chow 군 정의와 일치함을 보일 것이다.
+
+
+\section{유리 동치와 유리함수}
+\label{section-alternative}
+
+\noindent
+$X$를 다양체라 하고, $W \subset X$를 차원\  $k + 1$인 부분다양체라 하자.
+$f \in \mathbf{C}(W)^*$를\  $W$ 위의 영 아닌 유리함수라 하자.
+차원\  $k$인 각 부분다양체\  $Z \subset W$에 대해\  $Z$에서\  $f$의 소멸 차수\ 
+$\text{ord}_{W, Z}(f)$를 정의할 수 있다.
+$f$가 국소환\  $\mathcal{O}_{W, Z}$의 원소이면
+$$
+\text{ord}_{W, Z}(f) =
+\text{length}_{\mathcal{O}_{X, Z}} \mathcal{O}_{W, Z}/f\mathcal{O}_{W, Z}
+$$
+이다. 여기서\  $\mathcal{O}_{X, Z}$, resp.\ $\mathcal{O}_{W, Z}$는\ 
+$Z$의 일반점에서\  $X$, resp.\ $W$의 국소환이다. 일반적인 경우에는
+곱셈성을 이용하여 정의를 확장한다. {\it $f$에 결부된 주약수}는
+$$
+\text{div}_W(f) = \sum \text{ord}_{W, Z}(f)[Z]
+$$
+인\  $Z_k(W)$의 원소이다. $W \subset X$가 닫힌 부분다양체이므로\ 
+$\text{div}_W(f)$를\  $X$ 위의 사이클로 생각할 수 있다.
+Chow Homology, Section \ref{chow-section-principal-divisors}를 보라.
+
+\begin{lemma}
+\label{lemma-rational-equivalence}
+$X$를 다양체라 하고, $W \subset X$를 차원\  $k + 1$인 부분다양체라 하자.
+$f \in \mathbf{C}(W)^*$를\  $W$ 위의 영 아닌 유리함수라 하자. 그러면\ 
+$\text{div}_W(f)$는\  $X$ 위에서 영과 유리 동치이다. 역으로, 이러한
+주약수들은\  $X$ 위에서 영과 유리 동치인 사이클의 아벨 군을 생성한다.
+\end{lemma}
+
+\begin{proof}
+첫 번째 주장은\  Chow Homology, Lemma
+\ref{chow-lemma-rational-function}에서 따른다.
+더 구체적으로\  $W' \subset X \times \mathbf{P}^1$를\  $f$의 그래프의
+폐포라 하자. 그러면\  Chow Homology, Lemma
+\ref{chow-lemma-rational-function}의 (6)에 의해\ 
+$\text{div}_W(f) = [W'_0]_k - [W'_\infty]$가\ 
+$Z_k(W) \subset Z_k(X)$에서 성립한다.
+
+\medskip\noindent
+두 번째 주장을 위해\  $\mathbf{P}^1$ 위로 우세인 차원\  $k + 1$의 닫힌
+부분다양체\  $W' \subset X \times \mathbf{P}^1$를 잡자.
+$[W'_0]_k - [W'_\infty]_k$가 주약수임을 보이면 증명이 끝난다.
+$W \subset X$를\  $X$로의 사영에 의한\  $W'$의 상이라 하자.
+그러면\  $W \subset X$는 닫힌 부분다양체이고, $W' \to W$는 섬유 차원이\ 
+$0$ 또는\  $1$인 고유 우세 사상이다. $\dim(W) = k$이면\ 
+$W' = W \times \mathbf{P}^1$이므로\ 
+$[W'_0]_k - [W'_\infty]_k = [W] - [W] = 0$이다.
+$\dim(W) = k + 1$이면\  $W' \to W$는 일반적으로 유한이다\footnote{
+$W' \to W$가 쌍유리이면 결과는\  Chow Homology, Lemma
+\ref{chow-lemma-rational-function}에서 따른다. 여기서 할 일은\ 
+$W' \to W$의 차수가\  $> 1$이어도 기본 유리 동치\ 
+$[W'_0]_k \sim_{rat} [W'_\infty]_k$가\  $X$의 한 부분다양체 위 주약수에서
+나옴을 보이는 것이다.}. 사영\  $W' \to \mathbf{P}^1$을\ 
+$\mathbf{C}(W')^*$의 원소로 본 것을\  $f$라 하고,
+$g = \text{Nm}(f) \in \mathbf{C}(W)^*$를 그 노름이라 하자.
+Chow Homology, Lemma
+\ref{chow-lemma-proper-pushforward-alteration}에 의해
+$$
+\text{div}_W(g) = \text{pr}_{X, *}\text{div}_{W'}(f)
+$$
+이다. Chow Homology, Lemma \ref{chow-lemma-rational-function}에 의해\ 
+$\text{div}_{W'}(f) = [W'_0]_k - [W'_\infty]_k$이므로 증명이 끝난다.
+\end{proof}
+
+
+\section{고유 밂과 유리 동치}
+\label{section-pushforward-and-rational-equivalence}
+
+\noindent
+$f : X \to Y$를 다양체들의 고유 사상이라 하자.
+$\alpha \sim_{rat} 0$을\  $X$ 위의\  $k$-사이클이라 하자. 이는\  $0$과
+유리 동치이다.
+그러면\  $\alpha$의 {고유 밂}도 영과 유리 동치이다.
+$f_* \alpha \sim_{rat} 0$.
+\cite{F}의\  Chapter I 또는\  Chow Homology, Lemma
+\ref{chow-lemma-proper-pushforward-rational-equivalence}를 보라.
+
+\medskip\noindent
+따라서\  $k$-사이클 군들의 가환 그림
+$$
+\xymatrix{
+Z_k(X) \ar[r] \ar[d]_{f_*} & \CH_k(X) \ar[d]^{f_*} \\
+Z_k(Y) \ar[r] & \CH_k(Y)
+}
+$$
+을 얻는다.
+
+
+\section{평탄 당김과 유리 동치}
+\label{section-flat-pullback-and-rational-equivalence}
+
+\noindent
+$f : X \to Y$를 다양체들의 평탄 사상이라 하자.
+$r = \dim(X) - \dim(Y)$로 놓자.
+$\alpha \sim_{rat} 0$을\  $Y$ 위의\  $k$-사이클이라 하자. 이는\  $0$과
+유리 동치이다.
+그러면\  $\alpha$의 당김도 영과 유리 동치이다.
+$f^* \alpha \sim_{rat} 0$.
+\cite{F}의\  Chapter I 또는\  Chow Homology, Lemma
+\ref{chow-lemma-flat-pullback-rational-equivalence}를 보라.
+
+\medskip\noindent
+따라서\  $k$-사이클 군들의 가환 그림
+$$
+\xymatrix{
+Z_{k + r}(X) \ar[r] & \CH_{k + r}(X) \\
+Z_k(Y) \ar[r] \ar[u]^{f^*} & \CH_k(Y) \ar[u]_{f^*}
+}
+$$
+을 얻는다.
+
+
+\section{열린 부분에 대한 짧은 완전열}
+\label{section-ses}
+
+\noindent
+$X$를 다양체라 하고\  $U \subset X$를 열린 부분다양체라 하자.
+$X \setminus U = \bigcup Z_i$를 기약 성분으로의 분해라 하자\footnote{
+이 장에서는 다양체의\  Chow 군만을 다루므로\  $Z_k(X \setminus U)$와\ 
+$\CH_k(X \setminus U)$를 취할 수 없다. 따라서 다양체\  $Z_i$들을 사용하는
+방식을 택한다.}. 그러면 각\  $k \geq 0$에 대해 완전한 행들을 갖는 가환 그림
+$$
+\xymatrix{
+\bigoplus Z_k(Z_i) \ar[r] \ar[d] &
+Z_k(X) \ar[r] \ar[d] &
+Z_k(U) \ar[d] \ar[r] &
+0 \\
+\bigoplus \CH_k(Z_i) \ar[r] &
+\CH_k(X) \ar[r] &
+\CH_k(U) \ar[r] &
+0
+}
+$$
+이 존재한다. 여기서 수직 화살표는 표준 몫사상이다. 왼쪽 수평 화살표는
+닫힌 몰입\  $Z_i \to X$를 따른 고유 밂이고, 오른쪽 수평 화살표는 열린 몰입\ 
+$j : U \to X$를 따른 평탄 당김이다. 이 사상들이 유리 동치를 거쳐
+인수분해됨을 이미 보았으므로 두 사각형의 가환성을 얻는다.
+위 행은\  $X$의 모든 부분다양체가 어떤\  $Z_i$에 포함되거나\  $U$와 기약인
+교집합을 갖기 때문에 완전하다. 아래 행은\  $U$ 위의 모든 주약수\ 
+$\text{div}_W(f)$가\  $X$ 위 주약수의 제한이므로 완전하다.
+더 구체적으로\  $W \subset U$가\  $(k + 1)$차원 닫힌 부분다양체이고\ 
+$f \in \mathbf{C}(W)^*$이면, $X$에서\  $W$의 폐포를\  $\overline{W}$라
+쓰자. 그러면\  $W \subset \overline{W}$는 열린 몰입이므로\ 
+$\mathbf{C}(W) = \mathbf{C}(\overline{W})$이고, $f$를\ 
+$\overline{W}$ 위의 비상수 유리함수로 생각할 수 있다. 이때 분명히
+$$
+j^*\text{div}_{\overline{W}}(f) = \text{div}_W(f)
+$$
+가\  $Z_k(X)$에서 성립한다. 이로부터 아래 행의 완전성이 곧 따른다.
+자세한 내용은\  Chow Homology, Lemma
+\ref{chow-lemma-restrict-to-open}을 보라.
+
+
+\section{고유 교차}
+\label{section-intersect-properly}
+
+\noindent
+먼저 차원을 추정하기 위한 몇 가지 보조정리를 증명한다.
+
+\begin{lemma}
+\label{lemma-dimension-product-varieties}
+$X$와\  $Y$가 다양체이면\  $X \times Y$도 다양체이고\ 
+$\dim(X \times Y) = \dim(X) + \dim(Y)$이다.
+\end{lemma}
+
+\begin{proof}
+Varieties, Lemma \ref{varieties-lemma-product-varieties}에 의해 스킴\ 
+$X \times Y = X \times_{\Spec(\mathbf{C})} Y$는 다양체이다.
+차원에 관한 명제는\  Varieties, Lemma
+\ref{varieties-lemma-dimension-product-locally-algebraic}이다.
+\end{proof}
+
+\noindent
+스킴의 정칙 몰입\  $i : X \to Y$란 대응하는 아이디얼층이 국소적으로
+정칙열로 생성되는 닫힌 몰입임을 상기하자. Divisors, Section
+\ref{divisors-section-regular-immersions}를 보라.
+또한 공법선층\  $\mathcal{C}_{X/Y}$는 정칙열의 길이와 같은 계수를 갖는
+유한 국소 자유층이다. $\mathcal{C}_{X/Y}$가 계수\  $c$인 국소 자유층이면\ 
+$i$를 {\it 여차원\  $c$의 정칙 몰입}이라고 하자.
+
+\medskip\noindent
+더 일반적으로, More on Morphisms, Section
+\ref{more-morphisms-section-lci}에서 보았듯이, $X$를 열린집합\  $U$들로
+덮어서\  $f|_U$를
+$$
+\xymatrix{
+U \ar[rr]_i \ar[rd] & & \mathbf{A}^n_Y \ar[ld] \\
+& Y
+}
+$$
+로 인수분해할 수 있고 여기서\  $i$가\  Koszul 정칙 몰입이면\ 
+$f : X \to Y$를 국소 완전 교차 사상이라고 한다. $Y$가 국소 뇌터이면\ 
+$i$가\  Koszul 정칙 몰입이라는 것은 정칙 몰입이라는 것과 같다.
+Divisors, Lemma
+\ref{divisors-lemma-regular-immersion-noetherian}을 보라.
+위와 같은 임의의 인수분해에서 닫힌 몰입\  $i$의 공법선층 계수가\  $n - r$이면\ 
+$f$를 {\it 상대차원\  $r$의 국소 완전 교차 사상}이라고 하자. 다시 말해,
+$i$는 여차원\  $n - r$의\  Koszul-정칙 몰입이며, 뇌터인 경우에는 단순히
+여차원\  $n - r$의 정칙 몰입이다.
+
+\begin{lemma}
+\label{lemma-pullback-by-regular-immersion}
+$f : X \to Y$를 다양체들의 사상이라 하자.
+\begin{enumerate}
+\item $Z \subset Y$가 차원\  $d$인 부분다양체이고\  $f$가 여차원\  $c$의
+정칙 몰입이면, $f^{-1}(Z)$의 모든 기약 성분은 차원\  $\geq d - c$이다.
+\item $Z \subset Y$가 차원\  $d$인 부분다양체이고\  $f$가 상대차원\  $r$의
+국소 완전 교차 사상이면, $f^{-1}(Z)$의 모든 기약 성분은
+차원\  $\geq d + r$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. 국소적으로 논할 수 있으므로\ 
+$Y = \Spec(A)$이고\  $X = V(f_1, \ldots, f_c)$이며\ 
+$f_1, \ldots, f_c$가\  $A$의 정칙열이라고 가정할 수 있다.
+$Z = \Spec(A/\mathfrak p)$이면\ 
+$f^{-1}(Z) = \Spec(A/\mathfrak p + (f_1, \ldots, f_c))$이다.
+$V$가\  $f^{-1}(Z)$의 기약 성분이면, $f^{-1}(Z)$의 다른 어느 기약 성분에도
+포함되지 않는 닫힌점\  $v \in V$를 택할 수 있다. 그러면
+$$
+\dim(Z) = \dim \mathcal{O}_{Z, v}
+\quad\text{and}\quad
+\dim(V) = \dim \mathcal{O}_{V, v} = \dim \mathcal{O}_{Z, v}/(f_1, \ldots, f_c)
+$$
+이다. 첫 번째 등식은 예를 들어\  Algebra, Lemma
+\ref{algebra-lemma-dimension-prime-polynomial-ring}에서 따르고,
+두 번째 등식은 닫힌점의 선택에서 따른다.
+이제 극대 아이디얼의 한 원소로 나누면 차원이 많아야\  $1$만큼 감소한다는
+사실에서 결과가 따른다. Algebra, Lemma
+\ref{algebra-lemma-one-equation}을 보라.
+
+\medskip\noindent
+(2)의 증명. 국소 완전 교차의 정의에 나오는 인수분해를 택하고 (1)을
+적용한다. 몇몇 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-diagonal-regular-immersion}
+$X$가 비특이 다양체이면 대각 사상\ 
+$\Delta : X \to X \times X$는 여차원\  $\dim(X)$의 정칙 몰입이다.
+\end{lemma}
+
+\begin{proof}
+사실 비특이 사영다양체들 사이의 모든 닫힌 몰입은 정칙 몰입이다.
+Divisors, Lemma
+\ref{divisors-lemma-immersion-smooth-into-smooth-regular-immersion}을 보라.
+\end{proof}
+
+\noindent
+다음 보조정리는 대각선으로의 환원이 어떻게 작동하는지 보여 준다.
+
+\begin{lemma}
+\label{lemma-intersect-in-smooth}
+$X$를 비특이 다양체라 하고, $W,V \subset X$를\ 
+$\dim(W) = s$, $\dim(V) = r$인 닫힌 부분다양체들이라 하자.
+그러면\  $V \cap W$의 모든 기약 성분\  $Z$는
+차원\  $\geq r + s - \dim(X)$이다.
+\end{lemma}
+
+\begin{proof}
+스킴론적으로\  $V \cap W = \Delta^{-1}(V \times W)$이므로\ 
+Lemmas \ref{lemma-diagonal-regular-immersion}와\ 
+\ref{lemma-pullback-by-regular-immersion}에서 결론이 따른다.
+\end{proof}
+
+\noindent
+이 보조정리는 다음 정의를 시사한다.
+
+\begin{definition}
+\label{definition-proper-intersection}
+$X$를 비특이 다양체라 하자.
+\begin{enumerate}
+\item $W,V \subset X$를\  $\dim(W) = s$, $\dim(V) = r$인 닫힌
+부분다양체들이라 하자. $\dim(V \cap W) \leq r + s - \dim(X)$이면\ 
+$W$와\  $V$가 {\it 고유하게 교차한다}고 한다.
+\item $\alpha = \sum n_i [W_i]$를\  $s$-사이클,
+$\beta = \sum_j m_j [V_j]$를\  $X$ 위의\  $r$-사이클이라 하자.
+모든\  $i$, $j$에 대해\  $W_i$와\  $V_j$가 고유하게 교차하면\ 
+$\alpha$와\  $\beta$가 {\it 고유하게 교차한다}고 한다.
+\end{enumerate}
+\end{definition}
+
+
+\section{Tor 공식을 이용한 교차 중복도}
+\label{section-tor-formula}
+
+\noindent
+자주 사용할 기본 사실은 다음과 같다. 환 달린 공간\ 
+$(X, \mathcal{O}_X)$ 위의 모듈층\  $\mathcal{F}$, $\mathcal{G}$와
+점\  $x \in X$가 주어지면
+$$
+\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})_x =
+\text{Tor}_p^{\mathcal{O}_{X, x}}(\mathcal{F}_x, \mathcal{G}_x)
+$$
+가\  $\mathcal{O}_{X, x}$-모듈로서 성립한다.
+이는\  Cohomology, Section \ref{cohomology-section-flat}의 유도 텐서곱
+구성에서 여러 방식으로 알 수 있으며, 예를 들어\  Cohomology, Lemma
+\ref{cohomology-lemma-check-K-flat-stalks}에서 따른다.
+또한\  $X$가 스킴이고\  $\mathcal{F}$와\  $\mathcal{G}$가 준코히런트이면
+모듈\ 
+$\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})$도
+준코히런트이다. Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-quasi-coherence-tensor-product}를 보라.
+우리의 목적에 더 중요한 것은 다음 결과이다.
+
+\begin{lemma}
+\label{lemma-tensor-coherent}
+$X$를 국소 뇌터 스킴이라 하자.
+\begin{enumerate}
+\item $\mathcal{F}$와\  $\mathcal{G}$가 코히런트\  $\mathcal{O}_X$-모듈이면\ 
+$\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})$도 그렇다.
+\item $L$과\  $K$가\  $D^-_{\textit{Coh}}(\mathcal{O}_X)$에 속하면\ 
+$L \otimes_{\mathcal{O}_X}^\mathbf{L} K$도 그렇다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 더 초등적인 방식으로, (2)는 앞서 전개한 일반 이론을 이용하여
+증명하는 방법을 설명한다.
+
+\medskip\noindent
+(1)의 증명. $\text{Tor}$의 형성은 국소화와 가환하므로\ 
+$X$가 아핀이라고 가정할 수 있다. 따라서 어떤 뇌터환\  $A$에 대해\ 
+$X = \Spec(A)$이고, $\mathcal{F}$와\  $\mathcal{G}$는 유한\  $A$-모듈\ 
+$M$과\  $N$에 대응한다. Cohomology of Schemes, Lemma
+\ref{coherent-lemma-coherent-Noetherian}을 보라.
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-quasi-coherence-tensor-product}에 의해 먼저\ 
+$A$ 위에서\  $M$과\  $N$의\  $\text{Tor}$들을 계산하고, 이어서 결부된\ 
+$\mathcal{O}_X$-모듈을 취함으로써 이\  $\text{Tor}$들을 계산할 수 있다.
+모듈\  $\text{Tor}_p^A(M, N)$은\  Algebra, Lemma
+\ref{algebra-lemma-tor-noetherian}에 의해 유한이므로 결론을 얻는다.
+
+\medskip\noindent
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-identify-pseudo-coherent-noetherian}에 의해 가정은\ 
+$L$과\  $K$가 국소적으로 유사코히런트라는 것과 동치이다. 그러면\ 
+Cohomology, Lemma \ref{cohomology-lemma-tensor-pseudo-coherent}에 의해\ 
+$L \otimes_{\mathcal{O}_X}^\mathbf{L} K$도 유사코히런트이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compute-tor-nonsingular}
+$X$를 비특이 다양체라 하자.
+$\mathcal{F}$와\  $\mathcal{G}$를 코히런트\  $\mathcal{O}_X$-모듈이라 하자.
+$\mathcal{O}_X$-모듈\ 
+$\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})$는 코히런트이고,
+$x$에서의 줄기는\ 
+$\text{Tor}_p^{\mathcal{O}_{X, x}}(\mathcal{F}_x, \mathcal{G}_x)$이며,
+$\text{Supp}(\mathcal{F}) \cap \text{Supp}(\mathcal{G})$ 위에 지지되고,
+$p \in \{0, \ldots, \dim(X)\}$일 때에만 영이 아닐 수 있다.
+\end{lemma}
+
+\begin{proof}
+줄기에 관한 결과는 위에서 논의하였고, 이로부터 지지집합 조건이 따른다.
+$\text{Tor}$들은\  Lemma \ref{lemma-tensor-coherent}에 의해 코히런트이다.
+음수 차수의\  $\text{Tor}$들이 소멸한다는 것은 구성에서 곧바로 따른다.
+$p > \dim(X)$일 때\  $\text{Tor}_p$가 소멸한다는 것은 다음과 같이 볼 수
+있다. 국소환\  $\mathcal{O}_{X, x}$는\  $X$가 비특이이므로 정칙이고,
+그 차원은\  $\leq \dim(X)$이다. Algebra, Lemma
+\ref{algebra-lemma-dimension-prime-polynomial-ring}을 보라.
+따라서\  $\mathcal{O}_{X, x}$의 유한 대역차원도\  $\leq \dim(X)$이다.
+Algebra, Lemma
+\ref{algebra-lemma-finite-gl-dim-finite-dim-regular}을 보라.
+그러므로 모듈들의\  $\text{Tor}$ 군은 그 차원을 넘어서 소멸한다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-finite-gl-dim-tor-dimension}을 보라.
+\end{proof}
+
+\noindent
+$X$를 비특이 다양체라 하고, $W, V \subset X$를\ 
+$\dim(W) = s$, $\dim(V) = r$인 닫힌 부분다양체들이라 하자.
+$V$와\  $W$가 고유하게 교차한다고 가정하자.
+이 경우\  Lemma \ref{lemma-intersect-in-smooth}에 의해\  $V \cap W$의 모든
+기약 성분의 차원은\  $r + s - \dim(X)$와 같다.
+층\  $\text{Tor}_j^{\mathcal{O}_X}(\mathcal{O}_W, \mathcal{O}_V)$는
+코히런트이고\  $V \cap W$ 위에 지지되며,
+$j < 0$ 또는\  $j > \dim(X)$이면 영이다
+(Lemma \ref{lemma-compute-tor-nonsingular}).
+{\it 교차곱}을
+$$
+W \cdot V = \sum\nolimits_i (-1)^i
+[\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_W, \mathcal{O}_V)]_{r + s - \dim(X)}.
+$$
+로 정의한다. 이 정의는\  $V$와\  $W$가 고유하게 교차한다는 가정 때문에만
+의미가 있음을 강조한다. 따라서 일반적으로 교차곱을 정의하려면 이동
+보조정리가 필요하다.
+
+\medskip\noindent
+이 표기에서 사이클\  $V \cdot W$는 교집합\  $V \cap W$의 기약 성분\  $Z$들의
+형식적 선형결합\  $\sum e_Z Z$이다. 정수\  $e_Z$를 {\it 교차 중복도}라고 하며
+$$
+e_Z = e(X, V \cdot W, Z) =
+\sum\nolimits_i
+(-1)^i
+\text{length}_{\mathcal{O}_{X, Z}}
+\text{Tor}_i^{\mathcal{O}_{X, Z}}(\mathcal{O}_{W, Z}, \mathcal{O}_{V, Z})
+$$
+로 정의한다. 여기서\  $\mathcal{O}_{X, Z}$, resp.\ $\mathcal{O}_{W, Z}$,
+resp.\ $\mathcal{O}_{V, Z}$는\  $Z$의 일반점에서\  $X$, resp.\ $W$,
+resp.\ $V$의 국소환을 뜻한다.
+이러한\  $\text{Tor}$ 길이들의 교대합은 뒤에서 보듯이 많은 좋은 성질을
+만족한다.
+
+\medskip\noindent
+횡단 교차인 경우 교차 중복도는\  $1$이다.
+
+\begin{lemma}
+\label{lemma-transversal}
+$X$를 비특이 다양체라 하고, $V, W \subset X$를 고유하게 교차하는 닫힌
+부분다양체들이라 하자. $Z$를\  $V \cap W$의 기약 성분이라 하고, 닫힌
+부분스킴\  $V \cap W$에서\  $Z$의 중복도
+(Section \ref{section-cycle-of-closed}의 의미에서)가\  $1$이라고 가정하자.
+그러면\  $e(X, V \cdot W, Z) = 1$이고, $V$와\  $W$는\  $Z$의 일반점에서
+매끄럽다.
+\end{lemma}
+
+\begin{proof}
+$\xi \in Z$를 일반점이라 하고\ 
+$(A, \mathfrak m, \kappa) =
+(\mathcal{O}_{X, \xi}, \mathfrak m_\xi, \kappa(\xi))$로 놓자.
+Varieties, Lemma
+\ref{varieties-lemma-dimension-locally-algebraic}에 의해\ 
+$\dim(A) = \dim(X) - \dim(Z)$이다.
+$I, J \subset A$를\  $\Spec(A)$ 안에서\  $V$와\  $W$의 자취를 잘라내는
+아이디얼이라 하자.
+$\overline{I} = I + \mathfrak m^2/\mathfrak m^2$로 놓자.
+그러면\  $\dim_\kappa \overline{I} \leq \dim(X) - \dim(V)$이고,
+등호는\  $A/I$가 정칙일 때, 그리고 그때에만 성립한다.
+이는 위에서 인용한 보조정리와 정칙환의 정의에서 따른다.
+Algebra, Definition \ref{algebra-definition-regular-local} 및 그 앞의
+논의를 보라. $\overline{J}$에 대해서도 마찬가지이다.
+중복도가\  $1$이면\ 
+$\text{length}_A(A/I + J) = 1$이고, 따라서\  $I + J = \mathfrak m$이며,
+따라서\  $\overline{I} + \overline{J} = \mathfrak m/\mathfrak m^2$이다.
+그러면 교차가 고유하므로 모든 곳에서 등호를 얻는다. 따라서\ 
+$f_1, \ldots, f_a \in I$와\  $g_1, \ldots g_b \in J$를 택하여\ 
+$\overline{f}_1, \ldots, \overline{g}_b$가\ 
+$\mathfrak m/\mathfrak m^2$의 기저가 되게 할 수 있다.
+그러면\  $f_1, \ldots, g_b$는 정칙 매개변수계이자 정칙열이다
+(Algebra, Lemma \ref{algebra-lemma-regular-ring-CM}).
+같은 보조정리에 의해\  $A/(f_1, \ldots, f_a)$는 차원\ 
+$\dim(X) - \dim(V)$의 정칙 국소환이다. 따라서\ 
+$A/(f_1, \ldots, f_a) \to A/I$는 동형이다. 실제로 핵이 영이 아니면\ 
+$A/I$의 차원이 엄밀히 더 작아진다. Algebra, Lemmas
+\ref{algebra-lemma-regular-domain}과\ 
+\ref{algebra-lemma-one-equation}을 보라.
+대칭성에 의해\  $I = (f_1, \ldots, f_a)$이고\ 
+$J = (g_1, \ldots, g_b)$임을 얻는다.
+따라서\  $f_1, \ldots, f_a$에 대한\  Koszul 복합체\ 
+$K_\bullet(A, f_1, \ldots, f_a)$는\  $A/I$의 분해이다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-regular-koszul-regular}을 보라. 그러므로
+\begin{align*}
+\text{Tor}_p^A(A/I, A/J)
+& =
+H_p(K_\bullet(A, f_1, \ldots, f_a) \otimes_A A/J) \\
+& =
+H_p(K_\bullet(A/J, f_1 \bmod J, \ldots, f_a \bmod J))
+\end{align*}
+이다. 위에서 보았듯이\ 
+$f_1 \bmod J, \ldots, f_a \bmod J$는 정칙 국소환\  $A/J$의 정칙
+매개변수계이므로, 코호몰로지 군은 하나뿐이며 그것은\ 
+$H_0 = A/(I + J) = \kappa$이다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{example}
+\label{example-naive-multiplicity-wrong}
+이 예에서는 위의 교차 중복도 공식에 고차\  Tor를 사용해야 함을 보인다.
+$X$를 차원\  $4$의 비특이 다양체라 하고, $p \in X$를 닫힌점이라 하자.
+$V, W \subset X$를\  $X$의 닫힌 부분다양체들이라 하자. 동형
+$$
+\mathcal{O}_{X, p}^\wedge \cong \mathbf{C}[[x, y, z, w]]
+$$
+이 있어서\  $V$의 아이디얼이\  $(xz, xw, yz, yw)$이고\  $W$의 아이디얼이\ 
+$(x - z, y - w)$라고 가정하자. 계산하면
+$$
+\text{length}\ \mathbf{C}[[x, y, z, w]]/
+(xz, xw, yz, yw, x - z, y - w) = 3
+$$
+을 얻는다. 한편\  $e(X, V \cdot W, p) = 2$이다.
+형식국소적으로\  $V$는\  $p$에서 두 매끄러운 평면\ 
+$x = y = 0$과\  $z = w = 0$의 합집합이고, 각 평면은\ 
+$x - z = y - w = 0$인 평면과 교차 중복도\  $1$로 만나기 때문이다
+(Lemma \ref{lemma-transversal}).
+실제 예를 만들려면 차수\  $> 1$인\  $5$개의 동차다항식으로 주어지는 일반
+사상\  $f : \mathbf{P}^2 \to \mathbf{P}^4$를 취하자.
+상\  $V \subset \mathbf{P}^4 = X$에는 위에서 설명한 유형의 특이점들이
+생긴다. 실제로\  $f(p_1) = f(p_2)$인\ 
+$p_1, p_2 \in \mathbf{P}^2$가 존재한다. $W$는 그러한 점을 지나는 일반
+평면으로 택하면 된다.
+\end{example}
+
+
+
+
+
+
+\section{대수적 중복도}
+\label{section-multiplicities}
+
+\noindent
+$(A, \mathfrak m, \kappa)$를 뇌터 국소환이라 하자.
+$M$을 유한\  $A$-모듈이라 하고\  $I \subset A$를 정의 아이디얼이라 하자
+(Algebra, Definition \ref{algebra-definition-ideal-definition}).
+함수
+$$
+\chi_{I, M}(n) = \text{length}_A(M/I^nM) =
+\sum\nolimits_{p = 0, \ldots, n - 1} \text{length}_A(I^pM/I^{p + 1}M)
+$$
+는 수치다항식임을 상기하자
+(Algebra, Proposition \ref{algebra-proposition-hilbert-function-polynomial}).
+Algebra, Lemma \ref{algebra-lemma-support-dimension-d}에 의해 이 다항식의
+차수는\  $\dim(\text{Supp}(M))$와 같다.
+
+\begin{definition}
+\label{definition-multiplicity}
+위 상황에서\  $d \geq \dim(\text{Supp}(M))$라고 가정하자.
+$d > \dim(\text{Supp}(M))$이면\  $e_I(M, d) = 0$으로 놓고,
+$d = \dim(\text{Supp}(M))$이면\  $e_I(M, d)$를 수치다항식\ 
+$\chi_{I, M}$의 최고차항 계수의\  $d!$배로 놓는다.
+따라서 두 경우 모두
+$$
+\chi_{I, M}(n) \sim e_I(M, d) \frac{n^d}{d!} + \text{lower order terms}
+$$
+이다. {\it 정의 아이디얼\  $I$에 대한\  $M$의 중복도}는\ 
+$e_I(M) = e_I(M, \dim(\text{Supp}(M)))$이다.
+\end{definition}
+
+\noindent
+이러한 중복도들은 다음 성질들을 갖는다.
+
+\begin{lemma}
+\label{lemma-multiplicity-ses}
+$A$를 뇌터 국소환, $I \subset A$를 정의 아이디얼이라 하자.
+$0 \to M' \to M \to M'' \to 0$을 유한\  $A$-모듈들의 짧은 완전열이라 하고,
+$d \geq \dim(\text{Supp}(M))$라고 하자. 그러면
+$$
+e_I(M, d) = e_I(M', d) + e_I(M'', d)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+정의와\  Algebra, Lemma \ref{algebra-lemma-hilbert-ses-chi}에서 곧바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-multiplicity-as-a-sum}
+$A$를 뇌터 국소환, $I \subset A$를 정의 아이디얼이라 하자.
+$M$을 유한\  $A$-모듈이라 하고\  $d \geq \dim(\text{Supp}(M))$라고 하자.
+그러면
+$$
+e_I(M, d) =
+\sum \text{length}_{A_\mathfrak p}(M_\mathfrak p) e_I(A/\mathfrak p, d)
+$$
+이다. 여기서 합은\  $\dim(A/\mathfrak p) = d$인 소아이디얼\ 
+$\mathfrak p \subset A$에 걸친다.
+\end{lemma}
+
+\begin{proof}
+좌변과 우변은 모두 차원\  $\leq d$인 모듈들의 짧은 완전열에 대해 가법적이다.
+Lemma \ref{lemma-multiplicity-ses}와\ 
+Algebra, Lemma \ref{algebra-lemma-length-additive}를 보라.
+따라서\  Algebra, Lemma
+\ref{algebra-lemma-filter-Noetherian-module}에 의해\ 
+$\dim(A/\mathfrak q) \leq d$인\  $A$의 어떤 소아이디얼\  $\mathfrak q$에 대해\ 
+$M = A/\mathfrak q$인 경우만 증명하면 충분하다.
+이 경우는 자명하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-leading-coefficient}
+$P$를 차수\  $r$, 최고차항 계수\  $a$인 다항식이라 하자. 그러면 임의의\ 
+$t$에 대해
+$$
+r! a = \sum\nolimits_{i = 0, \ldots, r} (-1)^i{r \choose i} P(t - i)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+다항식\  $P$에 다항식\  $\Delta(P) = P(t) - P(t - 1)$을 대응시키는 연산자를\ 
+$\Delta$라 쓰자. 다음을 주장한다.
+$$
+\Delta^r(P) = \sum\nolimits_{i = 0, \ldots, r} (-1)^i {r \choose i} P(t - i)
+$$
+$r = 0, 1$이면 직접 확인된다. $r$에 대해 참이라고 가정하자. 그러면
+\begin{align*}
+\Delta^{r + 1}(P)
+& =
+\sum\nolimits_{i = 0, \ldots, r} (-1)^i {r \choose i} \Delta(P)(t - i) \\
+& =
+\sum\nolimits_{n = -r, \ldots, 0} (-1)^i {r \choose i}
+(P(t - i) - P(t - i - 1))
+\end{align*}
+이다. 따라서 등식
+$$
+{r + 1 \choose i} = {r \choose i} + {r \choose i - 1}
+$$
+에서 주장이 따른다. $P$의 차수가\  $r$이면\  $\Delta(P)$의 차수는\ 
+$r - 1$이고 최고차항 계수는\  $ra$이므로 보조정리가 따른다.
+\end{proof}
+
+\noindent
+중요한 사실은 중복도를\  Koszul 복합체를 이용하여 계산할 수 있다는 것이다.
+$R$이 환이고\  $f_1, \ldots, f_r \in R$이면\ 
+$K_\bullet(f_1, \ldots, f_r)$는\  Koszul 복합체를 나타낸다는 것을 상기하자.
+More on Algebra, Section \ref{more-algebra-section-koszul}을 보라.
+
+\begin{theorem}
+\label{theorem-multiplicity-with-koszul}
+\begin{reference}
+\cite[Theorem 1 in part B of Chapter IV]{Serre_algebre_locale}
+\end{reference}
+$A$를 뇌터 국소환이라 하고, $I = (f_1, \ldots, f_r) \subset A$를 정의
+아이디얼이라 하자. $M$을 유한\  $A$-모듈이라 하자. 그러면
+$$
+e_I(M, r) = \sum
+(-1)^i\text{length}_A H_i(K_\bullet(f_1, \ldots, f_r) \otimes_A M)
+$$
+이다.
+\end{theorem}
+
+\begin{proof}
+$K^n = K_{-n}(f_1, \ldots, f_r)$로 놓아서\  Koszul 복합체\ 
+$K_\bullet(f_1, \ldots, f_r)$를 공사슬 복합체\  $K^\bullet$로 바꾸자.
+그러면\  $K^\bullet$는 차수\  $-r, \ldots, 0$에 놓여 있고,
+$H^i(K^\bullet \otimes_A M) = H_{-i}(K_\bullet(f_1, \ldots, f_r) \otimes_A M)$이다.
+모듈\  $H^i(K^\bullet \otimes M)$은\  $f_1, \ldots, f_r$에 의해 소멸하므로
+(More on Algebra, Lemma
+\ref{more-algebra-lemma-homotopy-koszul}) 유한 길이를 갖는다. 따라서
+정리의 명제는 잘 정의된다.
+복합체\  $K^\bullet$ 위의 여과를
+$$
+F^p(K^n \otimes_A M) =
+I^{\max(0, p + n)}(K^n \otimes_A M),\quad p \in \mathbf{Z}
+$$
+로 정의하자. $f_i I^p \subset I^{p + 1}$이므로 이는 부분복합체들에 의한
+여과이다. 따라서 여과 복합체를 얻고, Homology, Section
+\ref{homology-section-filtered-complex}에 따라 스펙트럼 열을 얻는다.
+$$
+E_0 = \bigoplus\nolimits_{p, q} E_0^{p, q} =
+\bigoplus\nolimits_{p, q} \text{gr}^p(K^{p + q} \otimes_A M) =
+\text{Gr}_I(K^\bullet \otimes_A M)
+$$
+이다. $K^n$은 유한 자유이므로
+$$
+\text{Gr}_I(K^\bullet \otimes_A M) =
+\text{Gr}_I(K^\bullet) \otimes_{\text{Gr}_I(A)} \text{Gr}_I(M)
+$$
+이다. $\text{Gr}_I(K^\bullet)$는 원소\ 
+$\overline{f}_1, \ldots, \overline{f}_r \in I/I^2$에 대한\ 
+$\text{Gr}_I(A)$ 위의\  Koszul 복합체임에 유의하자.
+간단한 계산은 생략하지만, 이 계산은\  $E_0$ 위의 미분\  $d_0$가\  Koszul
+복합체에서 오는 미분과 일치함을 보인다.
+$\text{Gr}_I(M)$은 유한\  $\text{Gr}_I(A)$-모듈이고,
+$\text{Gr}_I(A)$는 뇌터이다. 실제로 후자는\ 
+$x_i \mapsto \overline{f}_i$에 의한\ 
+$A/I[x_1, \ldots, x_r]$의 몫이다. 따라서 코호몰로지 모듈\ 
+$E_1 = \bigoplus E_1^{p, q}$는 유한\  $\text{Gr}_I(A)$-모듈이다.
+그러나 위에서와 같이\  $E_1$은\ 
+$\overline{f}_1, \ldots, \overline{f}_r$에 의해 소멸한다.
+그러므로\  $E_1$의 길이는 유한하다.
+특히\  $p \gg 0$이면\  $\text{Gr}^p_F(K^\bullet \otimes M)$은
+비순환적이다.
+
+\medskip\noindent
+다음으로\  Homology, Lemma
+\ref{homology-lemma-filtered-complex-ss-converges}를 이용하여 위 스펙트럼
+열이 수렴함을 확인한다. 필요한 등식들은\  Algebra, Lemma
+\ref{algebra-lemma-map-AR}에 진술된 형태의\  Artin-Rees 보조정리에서 쉽게
+따른다. 따라서
+\begin{align*}
+\sum (-1)^i\text{length}_A(H^i(K^\bullet \otimes_A M))
+& =
+\sum (-1)^{p + q} \text{length}_A(E_\infty^{p, q}) \\
+& =
+\sum (-1)^{p + q} \text{length}_A(E_1^{p, q})
+\end{align*}
+이다. 위에서 보았듯이\  $E_1$의 길이가 유한하기 때문이다. 물론 여기서는
+길이의 가법성을 사용한다.
+$p \geq t$일 때\  $\text{Gr}^p_F(K^\bullet \otimes M)$이 비순환적이 되도록
+충분히 큰\  $t$를 택하자. 다시 가법성을 이용하면
+$$
+\sum (-1)^{p + q} \text{length}_A(E_1^{p, q}) =
+\sum\nolimits_n \sum\nolimits_{p \leq t}
+(-1)^n \text{length}_A(\text{gr}^p(K^n \otimes_A M))
+$$
+이다. 위의 여과 선택과\  Algebra, Section
+\ref{algebra-section-Noetherian-local}의\  $\chi_{I, M}$ 정의에 의해 이는
+$$
+\sum\nolimits_{n = -r, \ldots, 0} (-1)^n{r \choose |n|} \chi_{I, M}(t + n)
+$$
+와 같다. Lemma \ref{lemma-leading-coefficient}와\  $e_I(M, r)$의 정의에서
+보조정리가 따른다.
+\end{proof}
+
+\begin{remark}[자명한 일반화]
+\label{remark-trivial-generalization}
+$(A, \mathfrak m, \kappa)$를 뇌터 국소환이라 하자.
+$M$을 유한\  $A$-모듈, $I \subset A$를 아이디얼이라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item $I' = I + \text{Ann}(M)$은 정의 아이디얼이다
+(Algebra, Definition \ref{algebra-definition-ideal-definition}),
+\item $\overline{A} = A/\text{Ann}(M)$에서\  $I$의 상\ 
+$\overline{I}$는 정의 아이디얼이다,
+\item $\text{Supp}(M/IM) \subset \{\mathfrak m\}$,
+\item $\dim(\text{Supp}(M/IM)) \leq 0$, 그리고
+\item $\text{length}_A(M/IM) < \infty$.
+\end{enumerate}
+이는\  Algebra, Lemma \ref{algebra-lemma-support-point}에서 따른다
+(세부사항은 생략한다). 이 조건들이 성립하면 모든\  $n$에 대해\ 
+$M/I^nM = M/(I')^nM$이고, $M$을\  $\overline{A}$-모듈로 보면 모든\ 
+$n$에 대해\  $M/I^nM = M/\overline{I}^nM$이다.
+따라서
+$$
+\chi_{I, M}(n) = \text{length}_A(M/I^nM) =
+\sum\nolimits_{p = 0, \ldots, n - 1} \text{length}_A(I^pM/I^{p + 1}M)
+$$
+로 정의할 수 있고, 위 등식들에 의해 모든\  $n$에 대해
+$$
+\chi_{I, M}(n) = \chi_{I', M}(n) = \chi_{\overline{I}, M}(n)
+$$
+을 얻는다.
+Algebra, Section \ref{algebra-section-Noetherian-local}의 모든 결과와
+이 절의 모든 결과에는 이 설정에서의 유사한 결과가 있다.
+특히\  $d \geq \dim(\text{Supp}(M))$에 대해 중복도\  $e_I(M, d)$를 정의할
+수 있고, $I$가 정의 아이디얼인 경우와 마찬가지로
+$$
+\chi_{I, M}(n) \sim e_I(M, d) \frac{n^d}{d!} + \text{lower order terms}
+$$
+을 얻는다.
+\end{remark}
+
+
+
+\section{교차 중복도의 계산}
+\label{section-computing-intersection-multiplicities}
+
+\noindent
+이 절에서는 교차 중복도를 다른 방법으로 계산할 수 있는 몇 가지 경우를
+논한다. 먼저 첫 번째 예를 보자.
+
+\begin{lemma}
+\label{lemma-intersection-multiplicity-CM}
+$X$를 비특이 다양체라 하고, $W, V \subset X$를 고유하게 교차하는 닫힌
+부분다양체라 하자. $Z$를\  $V \cap W$의 기약성분, $\xi$를 그 일반점이라 하자.
+$\mathcal{O}_{W, \xi}$와\  $\mathcal{O}_{V, \xi}$가\  Cohen--Macaulay라고
+가정하자. 그러면
+$$
+e(X, V \cdot W, Z) =
+\text{length}_{\mathcal{O}_{X, \xi}}(\mathcal{O}_{V \cap W, \xi})
+$$
+이다. 여기서\  $V \cap W$는 스킴론적 교집합이다.
+특히\  $V$와\  $W$가 모두\  Cohen--Macaulay이면\ 
+$V \cdot W = [V \cap W]_{\dim(V) + \dim(W) - \dim(X)}$이다.
+\end{lemma}
+
+\begin{proof}
+$A = \mathcal{O}_{X, \xi}$, $B = \mathcal{O}_{V, \xi}$,
+$C = \mathcal{O}_{W, \xi}$로 놓자. Auslander--Buchsbaum 정리
+(Algebra, Proposition \ref{algebra-proposition-Auslander-Buchsbaum})에 의해
+길이가 다음과 같은 유한 자유 분해\  $F_\bullet \to B$를 찾을 수 있다.
+$$
+\text{depth}(A) - \text{depth}(B) =
+\dim(A) - \dim(B) = \dim(C)
+$$
+첫 번째 등식은\  $A$와\  $B$가\  Cohen--Macaulay이기 때문이고, 두 번째 등식은\ 
+$V$와\  $W$가 고유하게 교차하기 때문이다. 이제\  $F_\bullet \otimes_A C$는\ 
+$B \otimes_A^\mathbf{L} C$를 나타내는 유한 자유 모듈들의 복합체이므로
+코호몰로지 모듈들의 지지는\  $\{\mathfrak m_A\}$ 안에 놓인다.
+$C$가\  Cohen--Macaulay이므로 적용할 수 있는 비순환성 보조정리
+(Algebra, Lemma \ref{algebra-lemma-acyclic})에 의해\ 
+$F_\bullet \otimes_A C$의 코호몰로지는 차수\  $0$에서만 영이 아니다.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-one-ideal-ci}
+$A$를 뇌터 국소환이라 하자. $I = (f_1, \ldots, f_r)$를 정칙열로 생성되는
+아이디얼이라 하자. $M$을 유한\  $A$-모듈이라 하고\ 
+$\dim(\text{Supp}(M/IM)) = 0$이라 가정하자. 그러면
+$$
+e_I(M, r) = \sum (-1)^i\text{length}_A(\text{Tor}_i^A(A/I, M))
+$$
+이다. 여기서\  $e_I(M, r)$은\  Remark \ref{remark-trivial-generalization}에서와
+같다.
+\end{lemma}
+
+\begin{proof}
+$f_1, \ldots, f_r$가 정칙열이므로\  Koszul 복합체\ 
+$K_\bullet(f_1, \ldots, f_r)$는\  $A$ 위에서\  $A/I$의 분해이다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-noetherian-finite-all-equivalent}를 보라.
+따라서 우변은
+$$
+\sum (-1)^i\text{length}_A H_i(K_\bullet(f_1, \ldots, f_r) \otimes_A M)
+$$
+과 같다. $I$가 정의 아이디얼이면 이제 결과는\ 
+Theorem \ref{theorem-multiplicity-with-koszul}에서 곧바로 따른다.
+일반적으로\  $A$를\  $\overline{A} = A/\text{Ann}(M)$으로 바꾸고\ 
+$f_1, \ldots, f_r$를\  $\overline{f}_1, \ldots, \overline{f}_r$로 바꾸어도 된다.
+실제로
+$$
+K_\bullet(f_1, \ldots, f_r) \otimes_A M =
+K_\bullet(\overline{f}_1, \ldots, \overline{f}_r) \otimes_{\overline{A}} M
+$$
+이기 때문이다. 또한\ 
+$\overline{I} = (\overline{f}_1, \ldots, \overline{f}_r) \subset \overline{A}$는
+정의 아이디얼이고\  $e_I(M, r) = e_{\overline{I}}(M, r)$이므로, 이 경우에도\ 
+Theorem \ref{theorem-multiplicity-with-koszul}에서 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-multiplicity-with-lci}
+$X$를 비특이 다양체라 하고, $W,V \subset X$를 고유하게 교차하는 닫힌
+부분다양체라 하자. $Z$를\  $V \cap W$의 기약성분, $\xi$를 그 일반점이라 하자.
+$\mathcal{O}_{X, \xi}$에서\  $V$의 아이디얼이 정칙열\ 
+$f_1, \ldots, f_c \in \mathcal{O}_{X, \xi}$로 잘린다고 하자.
+그러면\  $e(X, V\cdot W, Z)$는 다음 힐베르트 다항식의 최고차항 계수의\ 
+$c!$배와 같다.
+$$
+t \mapsto \text{length}_{\mathcal{O}_{X, \xi}}
+\mathcal{O}_{W, \xi}/(f_1, \ldots, f_c)^t,\quad t \gg 0.
+$$
+특히 이 계수는\  $> 0$이다.
+\end{lemma}
+
+\begin{proof}
+더 일반적인\  Lemma \ref{lemma-one-ideal-ci}에서 등식
+$$
+e(X, V\cdot W, Z) = e_{(f_1, \ldots, f_c)}(\mathcal{O}_{W, \xi}, c)
+$$
+이 따른다.
+$e_{(f_1, \ldots, f_c)}(\mathcal{O}_{W, \xi}, c)$가\  $> 0$임을, 또는 동치로\ 
+$e_{(f_1, \ldots, f_c)}(\mathcal{O}_{W, \xi}, c)$가 힐베르트 다항식의
+최고차항 계수임을 보이려면\  $\mathcal{O}_{W, \xi}$의 차원이\  $c$임을 보이면
+충분하다. 힐베르트 다항식의 차수는\ 
+Algebra, Proposition \ref{algebra-proposition-dimension}에 의해 차원과 같기
+때문이다. $\dim(V) = r$, $\dim(W) = s$, $\dim(X) = n$이라 하자.
+교차가 고유하므로\  $\dim(Z) = r + s - n$이다. 따라서\  $\kappa(\xi)$의\ 
+$\mathbf{C}$ 위 초월차수는\  $r + s - n$이다. Algebra, Lemma
+\ref{algebra-lemma-dimension-prime-polynomial-ring}을 보라.
+$V$는\  $\xi$의 한 근방에서 정칙열로 잘리므로\  $r + c = n$이다.
+Divisors, Lemma \ref{divisors-lemma-Noetherian-scheme-regular-ideal}을 보라.
+그러면 예를 들어\  Lemma \ref{lemma-pullback-by-regular-immersion}을 적용할 수
+있다. 따라서
+$$
+\dim(\mathcal{O}_{W, \xi}) = s - (r + s - n) = s - ((n - c) + s - n) = c
+$$
+이다. 첫 번째 등식에는\  Algebra, Lemma
+\ref{algebra-lemma-dimension-at-a-point-finite-type-field}를 썼다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-multiplicity-with-effective-Cartier-divisor}
+Lemma \ref{lemma-multiplicity-with-lci}에서\  $c = 1$, 즉\  $V$가 유효 카르티에
+약수라고 가정하자. 그러면
+$$
+e(X, V \cdot W, Z) =
+\text{length}_{\mathcal{O}_{X, \xi}}
+(\mathcal{O}_{W, \xi}/f_1\mathcal{O}_{W, \xi}).
+$$
+\end{lemma}
+
+\begin{proof}
+이 경우\  $f_1$의\  $\mathcal{O}_{W, \xi}$에서의 상은 교차의 고유성에 의해
+영이 아니므로 영인자가 아닌 인자이다. 또한\  $\mathcal{O}_{W, \xi}$는
+차원\  $1$인 뇌터 국소 정역이다. 따라서 모든\  $t \geq 1$에 대해
+$$
+\text{length}_{\mathcal{O}_{X, \xi}}
+(\mathcal{O}_{W, \xi}/f_1^t\mathcal{O}_{W, \xi}) =
+t \text{length}_{\mathcal{O}_{X, \xi}}
+(\mathcal{O}_{W, \xi}/f_1\mathcal{O}_{W, \xi})
+$$
+이다. Algebra, Lemma \ref{algebra-lemma-ord-additive}를 보라.
+이로써 보조정리가 증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-multiplicity-lci-CM}
+Lemma \ref{lemma-multiplicity-with-lci}에서 국소환\ 
+$\mathcal{O}_{W, \xi}$가\  Cohen--Macaulay라고 가정하자. 그러면
+$$
+e(X, V \cdot W, Z) =
+\text{length}_{\mathcal{O}_{X, \xi}} (\mathcal{O}_{W, \xi}/
+f_1\mathcal{O}_{W, \xi} + \ldots + f_c\mathcal{O}_{W, \xi}).
+$$
+\end{lemma}
+
+\begin{proof}
+이는\  Lemma \ref{lemma-intersection-multiplicity-CM}에서 곧바로 따른다.
+또는\  Lemma \ref{lemma-multiplicity-with-lci}로부터 유도할 수도 있다.
+실제로\  Algebra, Lemma \ref{algebra-lemma-reformulate-CM}에 의해\ 
+$f_1, \ldots, f_c$는\  $\mathcal{O}_{W, \xi}$에서 정칙열이다.
+그러면\  Algebra, Lemma \ref{algebra-lemma-regular-quasi-regular}에 의해\ 
+$f_1, \ldots, f_c$는 준정칙열이다. 이로부터\ 
+$\mathcal{O}_{W, \xi}/(f_1, \ldots, f_c)^t$의 길이가
+$$
+{c + t \choose c}
+\text{length}_{\mathcal{O}_{X, \xi}} (\mathcal{O}_{W, \xi}/
+f_1\mathcal{O}_{W, \xi} + \ldots + f_c\mathcal{O}_{W, \xi}).
+$$
+임을 쉽게 얻는다. 최고차항 계수를 비교하면 결론을 얻는다.
+\end{proof}
+
+
+\section{Tor 공식을 이용한 교차곱}
+\label{section-intersection-product}
+
+\noindent
+$X$를 비특이 다양체라 하자. $X$ 위의\  $r$-사이클\ 
+$\alpha = \sum n_i [W_i]$와\  $s$-사이클\ 
+$\beta = \sum_j m_j [V_j]$가 주어졌다고 하자.
+Definition \ref{definition-proper-intersection}의 의미에서\  $\alpha$와\ 
+$\beta$가 고유하게 교차한다고 가정하자. 이 경우
+$$
+\alpha \cdot \beta = \sum\nolimits_{i,j} n_i m_j W_i \cdot V_j.
+$$
+로 정의한다. 여기서\  $W_i \cdot V_j$는\ 
+Section \ref{section-tor-formula}에서 정의한 것이다.
+$\beta = [V]$이고\  $V$가 차원\  $s$의 닫힌 부분다양체이면 때때로\ 
+$\alpha \cdot \beta = \alpha \cdot V$라고 쓴다.
+
+\begin{lemma}
+\label{lemma-rational-equivalence-and-intersection}
+$X$를 비특이 다양체라 하고, $a, b \in \mathbf{P}^1$를 서로 다른
+닫힌점이라 하자. $k \geq 0$이라 하자.
+\begin{enumerate}
+\item $W \subset X \times \mathbf{P}^1$가 차원\  $k + 1$의 닫힌
+부분다양체이고\  $X \times a$와 고유하게 교차하면,
+\begin{enumerate}
+\item $X \times \mathbf{P}^1$ 위의 사이클로서\ 
+$[W_a]_k = W \cdot X \times a$이고,
+\item $X$ 위의 사이클로서\ 
+$[W_a]_k = \text{pr}_{X, *}(W \cdot X \times a)$이다.
+\end{enumerate}
+\item $\alpha$를\  $X \times \mathbf{P}^1$ 위의\  $(k + 1)$-사이클이라 하고,
+$X \times a$ 및\  $X \times b$와 고유하게 교차한다고 하자. 그러면\ 
+$pr_{X,*}( \alpha \cdot X \times a - \alpha \cdot X \times b)$는
+영과 유리 동치이다.
+\item 역으로, $0$과 유리 동치인 모든\  $k$-사이클은 이 꼴이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+먼저\  $X \times a$는\  $X \times \mathbf{P}^1$의 유효 카르티에 약수이고,
+$W_a$는\  $W$와\  $X \times a$의 스킴론적 교집합임을 관찰하자.
+따라서 (1)(a)의 등식은 정의와\ 
+Lemma \ref{lemma-multiplicity-with-effective-Cartier-divisor}에서 주어진
+카르티에 약수의 경우의 교차 중복도 계산에서 곧바로 따른다.
+(1)(b)는\  $W_a \to X \times \mathbf{P}^1 \to X$가 자기 상 위로 동형으로
+사상되기 때문에 성립한다. 이는\  Section \ref{section-rational-equivalence}에서\ 
+$W_a$를\  $X$의 닫힌 부분스킴으로 본 바로 그 방식이다.
+(2)와 (3)은 (1)과 정의들의 형식적 귀결이다.
+\end{proof}
+
+\noindent
+닫힌 부분스킴들이 횡단으로 교차하면 교차 중복도는\  $1$이다.
+
+\begin{lemma}
+\label{lemma-transversal-subschemes}
+$X$를 비특이 다양체라 하자. $r, s \geq 0$이라 하고\ 
+$Y, Z \subset X$를\  $\dim(Y) \leq r$, $\dim(Z) \leq s$인 닫힌
+부분스킴이라 하자. $[Y]_r = \sum n_i[Y_i]$와\ 
+$[Z]_s = \sum m_j[Z_j]$가 고유하게 교차한다고 가정하자.
+어떤\  $i_0$, $j_0$에 대해\  $T$가\  $Y_{i_0} \cap Z_{j_0}$의 기약성분이고,
+닫힌 부분스킴\  $Y \cap Z$에서\  $T$의 중복도
+(Section \ref{section-cycle-of-closed}의 의미에서)가\  $1$이라고 가정하자.
+그러면
+\begin{enumerate}
+\item $[Y]_r \cdot [Z]_s$에서\  $T$의 계수는\  $1$이고,
+\item $Y$와\  $Z$는\  $T$의 일반점에서 비특이이며,
+\item $n_{i_0} = 1$, $m_{j_0} = 1$이고,
+\item $i \not = i_0$, $j \not = j_0$이면\  $T$는\  $Y_i$ 또는\  $Z_j$에
+포함되지 않는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$n = \dim(X)$, $a = n - r$, $b = n - s$로 놓자. 교차가 고유하다는
+가정에 의해\  $\dim(T) = r + s - n = n - a - b$임을 관찰하자.
+$\xi \in T$를 일반점이라 하고\ 
+$(A, \mathfrak m, \kappa) =
+(\mathcal{O}_{X, \xi}, \mathfrak m_\xi, \kappa(\xi))$로 놓자.
+Varieties, Lemma \ref{varieties-lemma-dimension-locally-algebraic}에 의해\ 
+$\dim(A) = a + b$이다.
+$I_0, I, J_0, J \subset A$를\  $\Spec(A)$ 안에서 각각\ 
+$Y_{i_0}$, $Y$, $Z_{j_0}$, $Z$의 자취를 잘라내는 아이디얼이라 하자.
+같은 참고문헌에 의해\ 
+$\dim(A/I) = \dim(A/I_0) = b$이고\  $\dim(A/J) = \dim(A/J_0) = a$이다.
+$\overline{I} = I + \mathfrak m^2/\mathfrak m^2$로 놓자.
+그러면\  $I \subset I_0 \subset \mathfrak m$,
+$J \subset J_0 \subset \mathfrak m$, 그리고\  $I + J = \mathfrak m$이다.
+Lemma \ref{lemma-transversal}과 그 증명에 의해\ 
+$I_0 = (f_1, \ldots, f_a)$ 및\  $J_0 = (g_1, \ldots, g_b)$로 쓸 수 있다.
+여기서\  $f_1, \ldots, g_b$는 정칙 국소환\  $A$의 정칙 매개변수계이다.
+$I + J = \mathfrak m$이므로 사상
+$$
+I \oplus J \to
+\mathfrak m/\mathfrak m^2 =
+\kappa f_1
+\oplus \ldots \oplus
+\kappa f_a
+\oplus
+\kappa g_1
+\oplus \ldots \oplus
+\kappa g_b
+$$
+은 전사이다. 따라서\  $\mathfrak m/\mathfrak m^2$에서의 잉여류가 각각\ 
+$f_1, \ldots, f_a$와\  $g_1, \ldots, g_b$의 잉여류와 같은\ 
+$f_1', \ldots, f_a' \in I$와\  $g'_1, \ldots, g_b' \in J$를 찾을 수 있다.
+그러면\  $f'_1, \ldots, g'_b$는\  $A$의 정칙 매개변수계이다.
+Algebra, Lemma \ref{algebra-lemma-regular-ring-CM}에 의해\ 
+$A/(f'_1, \ldots, f'_a)$는 차원\  $b$의 정칙 국소환이다.
+따라서\  $A/(f'_1, \ldots, f'_a)$의 자명하지 않은 몫은 모두 차원이 엄밀히
+더 작다(Algebra, Lemmas \ref{algebra-lemma-regular-domain} 및\ 
+\ref{algebra-lemma-one-equation}). 그러므로\ 
+$I = (f'_1, \ldots, f'_a) = I_0$이다. 대칭성에 의해\  $J = J_0$이다.
+이로써 (2), (3), (4)가 증명되었다.
+마지막으로\  $[Y]_r \cdot [Z]_s$에서\  $T$의 계수는\ 
+$Y_{i_0} \cdot Z_{j_0}$에서\  $T$의 계수이며, 이는\ 
+Lemma \ref{lemma-transversal}에 의해\  $1$이다.
+\end{proof}
+
+
+
+\section{외적}
+\label{section-exterior-product}
+
+\noindent
+$X$와\  $Y$를 다양체라 하자.
+$V$, resp.\ $W$를\  $X$, resp.\ $Y$의 닫힌 부분다양체라 하자.
+곱\  $V\times W$는\  $X\times Y$의 닫힌 부분다양체이다
+(Lemma \ref{lemma-dimension-product-varieties}).
+첫째 다양체 위의\  $k$-사이클\  $\alpha = \sum n_i [V_i]$와\  $Y$ 위의\  $l$-사이클\ 
+$\beta = \sum m_j [V_j]$에 대해\  $\alpha$와\  $\beta$의 {\it 외적}을
+사이클\  $\alpha \times \beta = \sum n_i m_j [V_i \times W_j]$로 정의한다.
+외적은\  $\mathbf{Z}$-선형 사상
+$$
+Z_r(X) \otimes_\mathbf{Z} Z_s(Y) \longrightarrow Z_{r + s}(X \times Y)
+$$
+을 정의한다. 외적이 유리 동치를 통해 인수분해됨을 증명하자.
+
+\begin{lemma}
+\label{lemma-exterior-product-rational-equivalence}
+$X$와\  $Y$를 다양체라 하자.
+$\alpha \in Z_r(X)$ 및\  $\beta \in Z_s(Y)$라 하자.
+$\alpha \sim_{rat} 0$ 또는\  $\beta \sim_{rat} 0$이면\ 
+$\alpha \times \beta \sim_{rat} 0$이다.
+\end{lemma}
+
+\begin{proof}
+$X$와\  $Y$에 대한 선형성과 대칭성에 의해 다음 경우만 증명하면 충분하다.
+$V \subset X$는 차원\  $r$의 어떤 부분다양체이고\  $\alpha = [V]$이며,
+$W \subset Y \times \mathbf{P}^1$는 차원\  $s + 1$의 닫힌 부분다양체로서\ 
+$Y \times a$ 및\  $Y \times b$와 고유하게 교차하고\ 
+$\beta = [W_a]_s - [W_b]_s$이다. 이 경우
+$$
+[(V \times W)_a]_{r + s} = [V] \times [W_a]_s
+$$
+임을, 그리고\  $a$를\  $b$로 바꾼 같은 등식을 증명하면 보조정리가 따른다.
+실제로 그러면 원하는 대로\ 
+$\alpha \times \beta = [(V \times W)_a]_{r + s} - [(V \times W)_b]_{r + s}$
+임을 알 수 있다. 표시된 등식을 보이기 위해 스킴의 등식
+$$
+V \times W_a = (V \times W)_a
+$$
+에 유의하자. 사영\  $V \times W_a \to W_a$는 기약성분들의 전단사를
+유도한다(예를 들어\  Varieties, Lemma
+\ref{varieties-lemma-bijection-irreducible-components} 참조).
+$W' \subset W_a$를 일반점이\  $\zeta$인 기약성분이라 하자.
+그러면\  $V \times W'$는\  $V \times W_a$의 대응하는 기약성분이다
+(Lemma \ref{lemma-dimension-product-varieties} 참조).
+$\xi$를\  $V \times W'$의 일반점이라 하자. 다음을 보여야 한다.
+$$
+\text{length}_{\mathcal{O}_{Y, \zeta}}(\mathcal{O}_{W_a, \zeta}) =
+\text{length}_{\mathcal{O}_{X \times Y, \xi}}(
+\mathcal{O}_{V \times W_a, \xi})
+$$
+이 공식에서\  $\mathcal{O}_{Y, \zeta}$를\  $\mathcal{O}_{W_a, \zeta}$로,
+$\mathcal{O}_{X \times Y, \zeta}$를\ 
+$\mathcal{O}_{V \times W_a, \zeta}$로 바꾸어도 된다
+(Algebra, Lemma \ref{algebra-lemma-length-independent} 참조).
+$\mathcal{O}_{W_a, \zeta} \to \mathcal{O}_{V \times W_a, \xi}$가
+평탄하므로\  Algebra, Lemma \ref{algebra-lemma-pullback-module}에 의해
+다음을 보이면 충분하다.
+$$
+\text{length}_{\mathcal{O}_{V \times W_a, \xi}}(
+\mathcal{O}_{V \times W_a, \xi}/
+\mathfrak m_\zeta\mathcal{O}_{V \times W_a, \xi}) = 1
+$$
+이는 우변의 몫이 다양체의 일반점에서의 국소환\ 
+$\mathcal{O}_{V \times W', \xi}$이고 따라서\  $\kappa(\xi)$와 같기 때문에
+성립한다.
+\end{proof}
+
+\noindent
+따라서 임의의 다양체쌍\  $X$, $Y$에 대해 외적은 가환도식
+$$
+\xymatrix{
+Z_r(X) \otimes_\mathbf{Z} Z_s(Y) \ar[r] \ar[d] &
+Z_{r + s}(X \times Y) \ar[d] \\
+\CH_r(X) \otimes_\mathbf{Z} \CH_s(Y) \ar[r] &
+\CH_{r + s}(X \times Y)
+}
+$$
+을 정의한다. 비특이 다양체에 대해서는 외적을 당김들의 교차곱으로 생각할
+수 있다.
+
+\begin{lemma}
+\label{lemma-exterior-product}
+$X$와\  $Y$를 비특이 다양체라 하자.
+$\alpha \in Z_r(X)$ 및\  $\beta \in Z_s(Y)$라 하자. 그러면
+\begin{enumerate}
+\item $\text{pr}_Y^*(\beta) = [X] \times \beta$이고\ 
+$\text{pr}_X^*(\alpha) = \alpha \times [Y]$이며,
+\item $\alpha \times [Y]$와\  $[X]\times \beta$는\  $X\times Y$ 위에서
+고유하게 교차하고,
+\item $Z_{r + s}(X \times Y)$에서\ 
+$\alpha \times \beta =
+(\alpha \times [Y])\cdot ([X]\times\beta) =
+pr_Y^*(\alpha) \cdot pr_X^*(\beta)$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+선형성에 의해\  $\alpha = [V]$, $\beta = [W]$라고 가정해도 된다.
+그러면 (1)은\  $\text{pr}_Y^{-1}(W) = X \times W$ 및\ 
+$\text{pr}_X^{-1}(V) = V \times Y$라는 명제이다. 이는 명백하다.
+(2)는\  $X \times W \cap V \times Y = V \times W$이고\ 
+Lemma \ref{lemma-dimension-product-varieties}에 의해\ 
+$\dim(V \times W) = r + s$이므로 성립한다.
+
+\medskip\noindent
+(3)의 증명.
+$\xi$를\  $V \times W$의 일반점이라 하자.
+사영\  $X \times W \to W$는\  $X \to \Spec(\mathbf{C})$의 밑변환이므로
+매끄럽다. 따라서\  $X \times W$는\  $W$의 일반점 위에 놓이는 모든 점에서,
+특히\  $\xi$에서 비특이이다. $V \times Y$에 대해서도 마찬가지이다.
+따라서\  $\mathcal{O}_{X \times W, \xi}$와\ 
+$\mathcal{O}_{V \times Y, \xi}$는\  Cohen--Macaulay 국소환이고\ 
+Lemma \ref{lemma-intersection-multiplicity-CM}을 적용할 수 있다.
+스킴론적으로\  $V \times Y \cap X \times W = V \times W$이므로 증명이
+끝난다.
+\end{proof}
+
+
+
+\section{대각선으로의 환원}
+\label{section-reduction-diagonal}
+
+\noindent
+$X$를 비특이 다양체라 하자. $\Delta$는 대각 사상\ 
+$\Delta : X \to X \times X$ 또는 그 상\  $\Delta \subset X \times X$를
+나타내는 데 모두 사용한다.
+대각선으로의 환원이란\  $X$ 위의 교차곱을\  $X \times X$ 위에서 외적과
+대각선의 교차곱으로 환원할 수 있다는 명제이다.
+
+\begin{lemma}
+\label{lemma-tor-and-diagonal}
+$X$를 비특이 다양체라 하자.
+\begin{enumerate}
+\item $\mathcal{F}$와\  $\mathcal{G}$가 코히런트\  $\mathcal{O}_X$-모듈이면
+다음 표준 동형들이 존재한다.
+$$
+\text{Tor}_i^{\mathcal{O}_{X \times X}}(\mathcal{O}_\Delta,
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times X}}
+\text{pr}_2^*\mathcal{G})
+=
+\Delta_*\text{Tor}_i^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})
+$$
+\item $K$와\  $M$이\  $D_\QCoh(\mathcal{O}_X)$에 속하면\ 
+$D_\QCoh(\mathcal{O}_X)$ 안의 표준 동형
+$$
+L\Delta^* \left(
+L\text{pr}_1^*K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L} L\text{pr}_2^*M
+\right)
+= K \otimes_{\mathcal{O}_X}^\mathbf{L} M
+$$
+과\  $D_\QCoh(X \times X)$ 안의 표준 동형
+$$
+\mathcal{O}_\Delta \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L}
+L\text{pr}_1^*K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L} L\text{pr}_2^*M
+= \Delta_*(K \otimes_{\mathcal{O}_X}^\mathbf{L} M)
+$$
+이 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 보다 초등적으로, (2)는 보다 일반적인 이론으로 증명하는 방법을
+설명하겠다. (2)가 (1)을 함의하므로 독자는 (1)의 증명을 건너뛰어도 된다.
+
+\medskip\noindent
+(1)의 증명. 아핀 열린부분\  $\Spec(A) \subset X$를 택하자.
+그러면\  $A$는 뇌터\  $\mathbf{C}$-대수이고, $\mathcal{F}$와\  $\mathcal{G}$는
+유한\  $A$-모듈\  $M$과\  $N$에 대응한다(Cohomology of Schemes, Lemma
+\ref{coherent-lemma-coherent-Noetherian}).
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-quasi-coherence-tensor-product}에 의해\ 
+$\mathcal{O}_X$ 위의\  $\text{Tor}_i$는 먼저\  $A$ 위에서\  $M$과\  $N$의\ 
+$\text{Tor}$들을 계산한 뒤 결부된\  $\mathcal{O}_X$-모듈을 취하여 계산할
+수 있다. $\mathcal{O}_{X \times X}$ 위의\  $\text{Tor}_i$는\ 
+$A \otimes_\mathbf{C} A$ 위에서\  $A$와\  $M \otimes_\mathbf{C} N$의\  tor를
+계산한 뒤 결부된\  $\mathcal{O}_{X \times X}$-모듈을 취한다.
+따라서 이 아핀 조각에서는 다음을 증명해야 한다.
+$$
+\text{Tor}_i^{A \otimes_\mathbf{C} A}(A, M \otimes_\mathbf{C} N) =
+\text{Tor}_i^A(M, N)
+$$
+이를 위해 유한 자유\  $A$-모듈들에 의한 분해\ 
+$F_\bullet \to M$과\  $G_\bullet \to M$을 택하자
+(Algebra, Lemma \ref{algebra-lemma-resolution-by-finite-free}).
+$\text{Tot}(F_\bullet \otimes_\mathbf{C} G_\bullet)$은\ 
+$\mathbf{C}$ 위의\  Tor 군을 계산하므로\  $M \otimes_\mathbf{C} N$의
+분해임에 유의하자! 물론\  $F_\bullet \otimes_\mathbf{C} G_\bullet$의
+항들은 유한 자유\  $A \otimes_\mathbf{C} A$-모듈이다.
+따라서 표시된 등식의 좌변은 모듈
+$$
+H_i(A \otimes_{A \otimes_\mathbf{C} A}
+\text{Tot}(F_\bullet \otimes_\mathbf{C} G_\bullet))
+$$
+이고 우변은 모듈
+$$
+H_i(\text{Tot}(F_\bullet \otimes_A G_\bullet))
+$$
+이다. $A \otimes_{A \otimes_\mathbf{C} A} (F_p \otimes_\mathbf{C} G_q)
+= F_p \otimes_A G_q$이므로 이 모듈들은 같다.
+이는 아핀 열린부분\  $\Spec(A) \times \Spec(A)$ 위의 동형을 정의하며,
+교차수의 등식에 적용하기에는 이것으로 충분하다.
+이 동형들이 붙는다는 증명은 생략한다.
+
+\medskip\noindent
+(2)의 증명. 둘째 명제는\  Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-cohomology-base-change}에 진술된 사영 공식에 의해 첫째
+명제에서 따른다. 첫째 명제를 보이기 위해\  $K$와\  $M$을\  K-평탄 복합체\ 
+$\mathcal{K}^\bullet$과\  $\mathcal{M}^\bullet$로 나타내자.
+당김과 텐서곱은\  K-평탄 복합체를 보존하므로(Cohomology, Lemmas
+\ref{cohomology-lemma-tensor-product-K-flat} 및\ 
+\ref{cohomology-lemma-pullback-K-flat}) 다음을 보이면 충분하다.
+$$
+\Delta^*\text{Tot}(
+\text{pr}_1^*\mathcal{K}^\bullet
+\otimes_{\mathcal{O}_{X \times X}} \text{pr}_2^*\mathcal{M}^\bullet)
+=
+\text{Tot}(
+\mathcal{K}^\bullet \otimes_{\mathcal{O}_X} \mathcal{M}^\bullet)
+$$
+따라서\  $\mathcal{K}$와\  $\mathcal{M}$이 반드시 준코히런트이거나 평탄하지
+않은 임의의\  $\mathcal{O}_X$-모듈일 때에도 표준 동형
+$$
+\Delta^*(\text{pr}_1^*\mathcal{K}
+\otimes_{\mathcal{O}_{X \times X}} \text{pr}_2^*\mathcal{M})
+\longrightarrow
+\mathcal{K} \otimes_{\mathcal{O}_X} \mathcal{M}
+$$
+이 존재함을 확인하면 충분하다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-reduction-diagonal}
+$X$를 비특이 다양체라 하자. $\alpha$, resp.\ $\beta$를\  $X$ 위의\ 
+$r$-사이클, resp.\ $s$-사이클이라 하자. $\alpha$와\  $\beta$가 고유하게
+교차한다고 가정하자. 그러면
+\begin{enumerate}
+\item $\alpha \times \beta$와\  $[\Delta]$는 고유하게 교차하고,
+\item $X \times X$ 위의 사이클로서\ 
+$\Delta_*(\alpha \cdot \beta) = [\Delta] \cdot \alpha\times\beta$이며,
+\item $X$가 고유이면\ 
+$\text{pr}_{1, *}([\Delta] \cdot \alpha\times\beta) = \alpha\cdot\beta$이다.
+여기서\  $pr_1 : X\times X \to X$는 사영이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+선형성에 의해\  $\alpha = [V]$, $\beta = [W]$라고 가정하면 충분하다.
+여기서\  $V \subset X$와\  $W \subset Y$는 고유하게 교차하는 닫힌
+부분다양체이다. $V \times W$는 차원\  $r + s$의 닫힌 부분다양체임을
+상기하자. 스킴론적으로\ 
+$V \cap W = \Delta^{-1}(V \times W)$이고\ 
+$\Delta(V \cap W) = \Delta \cap V \times W$임을 관찰하자.
+이로써 (1)이 증명된다.
+
+\medskip\noindent
+(2)의 증명. $Z \subset V \cap W$를 일반점이\  $\xi$인 기약성분이라 하자.
+$\alpha \cdot \beta$에서\  $Z$의 계수와\ 
+$[\Delta] \cdot \alpha \times \beta$에서\  $\Delta(Z)$의 계수가 같음을
+보여야 한다. 전자는 정수
+$$
+\sum (-1)^i
+\text{length}_{\mathcal{O}_{X, \xi}}
+\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_V, \mathcal{O}_W)_\xi
+$$
+이고 후자는 정수
+$$
+\sum (-1)^i
+\text{length}_{\mathcal{O}_{X \times Y, \Delta(\xi)}}
+\text{Tor}_i^{\mathcal{O}_{X \times Y}}(
+\mathcal{O}_\Delta, \mathcal{O}_{V \times W})_{\Delta(\xi)}
+$$
+이다. 그러나\  Lemma \ref{lemma-tor-and-diagonal}에 의해
+$$
+\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_V, \mathcal{O}_W)_\xi \cong
+\text{Tor}_i^{\mathcal{O}_{X \times Y}}(
+\mathcal{O}_\Delta, \mathcal{O}_{V \times W})_{\Delta(\xi)}
+$$
+가\  $\mathcal{O}_{X \times X, \Delta(\xi)}$-모듈의 동형으로 성립한다.
+따라서 길이들이 같다(정확히는\  Algebra, Lemma
+\ref{algebra-lemma-length-independent}에 의한다).
+
+\medskip\noindent
+(2)는 (3)을 함의한다. 실제로\  Lemma \ref{lemma-compose-pushforward}에 의해\ 
+$\text{pr}_{1, *} \circ \Delta_* = \text{id}$이기 때문이다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-positivity}
+\begin{reference}
+이는\  \cite{Serre_algebre_locale}의 주요 결과 가운데 하나이다.
+\end{reference}
+$X$를 비특이 다양체라 하자. $V \subset X$와\ 
+$W \subset Y$를 고유하게 교차하는 닫힌 부분다양체라 하자.
+$Z \subset V \cap W$를 기약성분이라 하자. 그러면\ 
+$e(X, V \cdot W, Z) > 0$이다.
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{lemma-reduction-diagonal}에 의해
+$$
+e(X, V \cdot W, Z) = e(X \times X, \Delta \cdot V \times W, \Delta(Z))
+$$
+이다. $\Delta : X \to X \times X$는 정칙 몰입이므로
+(Lemma \ref{lemma-diagonal-regular-immersion} 참조),
+Lemma \ref{lemma-multiplicity-with-lci}에 의해\ 
+$e(X \times X, \Delta \cdot V \times W, \Delta(Z))$는 양의 정수이다.
+\end{proof}
+
+\noindent
+다음은 이 장에서 전개하는 이론의 핵심 보조정리이다. 본질적으로 이
+보조정리는 교차수가 알맞은 가법성을 가진다는 것을 말한다.
+
+\begin{lemma}
+\label{lemma-tor-sheaf}
+\begin{reference}
+\cite[Chapter V]{Serre_algebre_locale}
+\end{reference}
+$X$를 비특이 다양체라 하자. $\mathcal{F}$와\  $\mathcal{G}$를\  $X$ 위의
+코히런트 층이라 하고\ 
+$\dim(\text{Supp}(\mathcal{F})) \leq r$,
+$\dim(\text{Supp}(\mathcal{G})) \leq s$, 그리고\ 
+$\dim(\text{Supp}(\mathcal{F}) \cap \text{Supp}(\mathcal{G}) )
+\leq r + s - \dim X$라고 하자. 이 경우\  $[\mathcal{F}]_r$와\ 
+$[\mathcal{G}]_s$는 고유하게 교차하고
+$$
+[\mathcal{F}]_r \cdot [\mathcal{G}]_s =
+\sum (-1)^p
+[\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})]_{r + s - \dim(X)}.
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$[\mathcal{F}]_r$와\  $[\mathcal{G}]_s$가 고유하게 교차한다는 명제는
+명백하다. 사이클의 등식을 증명하고 있으므로\  $X$ 위에서 국소적으로
+작업해도 된다. (사이클의 교차곱을 만드는 것, $\text{Tor}$-층을 만드는 것,
+그리고 코히런트 층에 결부된 사이클을 만드는 것은 각각 열린 부분스킴으로의
+제한과 가환함을 관찰하라.) 따라서\  $X$가 아핀이라고 가정할 수 있고 실제로
+그렇게 하겠다.
+
+\medskip\noindent
+다음과 같이 쓰자.
+$$
+RHS(\mathcal{F}, \mathcal{G}) = [\mathcal{F}]_r \cdot [\mathcal{G}]_s
+\quad\text{and}\quad
+LHS(\mathcal{F}, \mathcal{G}) = \sum (-1)^p
+[\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})]_{r + s - \dim(X)}
+$$
+$X$ 위의 코히런트 층들의 짧은 완전열
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0
+$$
+을 생각하자. 여기서\ 
+$\text{Supp}(\mathcal{F}_i) \subset \text{Supp}(\mathcal{F})$라고 하자.
+그러면\  $i = 1, 2, 3$에 대해\  $LHS(\mathcal{F}_i, \mathcal{G})$와\ 
+$RHS(\mathcal{F}_i, \mathcal{G})$가 모두 정의되며
+$$
+RHS(\mathcal{F}_2, \mathcal{G}) =
+RHS(\mathcal{F}_1, \mathcal{G}) + RHS(\mathcal{F}_3, \mathcal{G})
+$$
+이고\  LHS에 대해서도 마찬가지이다. 실제로 지지집합 조건은 모든 항이
+정의됨을 보장하고, 짧은 완전열과 길이의 가법성으로부터
+$$
+[\mathcal{F}_2]_r = [\mathcal{F}_1]_r  + [\mathcal{F}_3]_r
+$$
+을 얻는다(Chow Homology, Lemma \ref{chow-lemma-additivity-sheaf-cycle}).
+이는\  RHS의 가법성을 함의한다. $\text{Tor}$들의 긴 완전열
+$$
+\ldots \to \text{Tor}_1(\mathcal{F}_3, \mathcal{G}) \to
+\text{Tor}_0(\mathcal{F}_1, \mathcal{G}) \to
+\text{Tor}_0(\mathcal{F}_2, \mathcal{G}) \to
+\text{Tor}_0(\mathcal{F}_3, \mathcal{G}) \to 0
+$$
+과 앞에서와 같은 길이의 가법성은\  LHS의 가법성을 함의한다.
+
+\medskip\noindent
+Algebra, Lemma \ref{algebra-lemma-filter-Noetherian-module}와\  $X$가 아핀이라는
+사실에 의해, $\mathcal{F}$에는 각 동차조각이\ 
+$\text{Supp}(\mathcal{F})$의 닫힌 부분다양체의 구조층인 여과가 존재한다.
+앞 단락에서 보인 가법성에 의해\  $\mathcal{F}$를\ 
+$V \subset \text{Supp}(\mathcal{F})$인\  $\mathcal{O}_V$로 바꾸었을 때\ 
+$LHS = RHS$임을 증명하면 충분하다. 대칭성에 의해\  $\mathcal{G}$에 대해서도
+똑같이 할 수 있다. 따라서
+$$
+LHS(\mathcal{O}_V, \mathcal{O}_W) = RHS(\mathcal{O}_V, \mathcal{O}_W)
+$$
+임을 증명하는 것으로 환원된다. 여기서\ 
+$W \subset \text{Supp}(\mathcal{G})$는 닫힌 부분다양체이다.
+$\dim(V) = r$이고\  $\dim(W) = s$이면 이 등식은\  $V \cdot W$의
+{\bf 정의}이다. 한편\  $\dim(V) < r$ 또는\  $\dim(W) < s$, 즉\ 
+$[V]_r = 0$ 또는\  $[W]_s = 0$이면\ 
+$RHS(\mathcal{O}_V, \mathcal{O}_W) = 0$임을 증명해야 한다\ 
+\footnote{독자는\  $r = s = 1$이고\  $X$가 비특이 곡면이며\  $V = W$가\ 
+$X$의 닫힌점\  $x$인 경우를 생각하여 이것이 자명하지 않음을 알 수 있다.
+이 경우\  $x$에서 길이가 각각\  $1, 2, 1$인 영이 아닌\  $\text{Tor}$가\ 
+$3$개 있다.}.
+
+\medskip\noindent
+$Z \subset V \cap W$를 차원이\  $r + s - \dim(X)$인 기약성분이라 하자.
+이는 성분이 가질 수 있는 최대 차원이며, $RHS$에서\  $Z$의 계수가 영임을
+보이면 충분하다. $\xi \in Z$를 일반점이라 하고\ 
+$A = \mathcal{O}_{X, \xi}$,
+$B = \mathcal{O}_{X \times X, \Delta(\xi)}$,
+$C = \mathcal{O}_{V \times W, \Delta(\xi)}$로 쓰자.
+Lemma \ref{lemma-tor-and-diagonal}에 의해
+$$
+\text{coeff of }Z\text{ in }
+RHS(\mathcal{O}_V, \mathcal{O}_W) = 
+\sum (-1)^i
+\text{length}_B \text{Tor}_i^B(A, C)
+$$
+이다. $\dim(V) < r$ 또는\  $\dim(W) < s$이므로\ 
+$\dim(V \times W) < r + s$이고, 따라서\  $\dim(C) < \dim(X)$이다
+(작은 세부사항은 생략한다). 또한\  $B \to A$의 핵\  $I$는 길이\ 
+$\dim(X)$의 정칙열로 생성된다(Lemma
+\ref{lemma-diagonal-regular-immersion}). 따라서\ 
+Lemma \ref{lemma-one-ideal-ci}에서 소멸성이 따른다. 여기서 그 보조정리를
+적용할 수 있는 것은\  $I$에 대한\  $C$의 힐베르트 함수가\  Algebra, Proposition
+\ref{algebra-proposition-dimension}에 의해 차수\  $\dim(C) < n$을 갖기 때문이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-Serre-conjectures}
+$(A, \mathfrak m, \kappa)$를 정칙 국소환이라 하자.
+$M$과\  $N$을\  $M \otimes_A N$의 지지집합이\  $\{\mathfrak m\}$에 포함되는
+영이 아닌 유한\  $A$-모듈이라 하자. 그러면
+$$
+\chi(M, N) = \sum (-1)^i \text{length}_A \text{Tor}_i^A(M, N)
+$$
+은 유한하다. $r = \dim(\text{Supp}(M))$ 및\ 
+$s = \dim(\text{Supp}(N))$로 놓자. \cite{Serre_algebre_locale}에서는\ 
+$r + s \leq \dim(A)$가 증명되며 다음 추측들이 제시된다.
+\begin{enumerate}
+\item $r + s < \dim(A)$이면\  $\chi(M, N) = 0$이고,
+\item $r + s = \dim(A)$이면\  $\chi(M, N) > 0$이다.
+\end{enumerate}
+Lemma \ref{lemma-tor-sheaf}와\  Proposition \ref{proposition-positivity}를
+증명하는 논증은 (Serre의 책에서 하듯이) $A$가 체를 포함할 때 (1)과 (2)가
+참임을 보이는 데 활용할 수 있다. 현재 추측 (1)은 일반적으로 알려져 있고,
+일반적으로\  $\chi(M, N) \geq 0$이라는 것도 알려져 있다(Gabber).
+우리가 아는 한 양성은 여전히 미해결 문제이다.
+\end{remark}
+
+
+
+\section{교차의 결합법칙}
+\label{section-associative}
+
+\noindent
+위에서 정의한 고유 교차가 가환적임은 명백하다.
+핵심\  Lemma \ref{lemma-tor-sheaf}를 이용하면 고유 교차곱이 결합적임을
+증명할 수 있다.
+
+\begin{lemma}
+\label{lemma-associative}
+$X$를 비특이 다양체라 하고, $U, V, W$를 닫힌 부분다양체라 하자.
+$U, V, W$가 쌍마다 고유하게 교차하고\ 
+$\dim(U \cap V \cap W) \leq \dim(U) + \dim(V) + \dim(W) - 2\dim(X)$라고
+가정하자. 그러면\  $X$ 위의 사이클로서
+$$
+U \cdot (V \cdot W) = (U \cdot V) \cdot W
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+이후 별도로 언급하지 않고\  Lemma \ref{lemma-tor-sheaf}를 사용하겠다.
+이에 의해
+\begin{align*}
+V \cdot W
+& =
+\sum (-1)^i [\text{Tor}_i(\mathcal{O}_V, \mathcal{O}_W)]_{b + c - n} \\
+U \cdot (V \cdot W)
+& =
+\sum (-1)^{i + j}
+[
+\text{Tor}_j(\mathcal{O}_U, \text{Tor}_i(\mathcal{O}_V, \mathcal{O}_W))
+]_{a + b + c - 2n} \\
+U \cdot V
+& =
+\sum (-1)^i [\text{Tor}_i(\mathcal{O}_U, \mathcal{O}_V)]_{a + b - n} \\
+(U \cdot V) \cdot W
+& =
+\sum (-1)^{i + j}
+[
+\text{Tor}_j(\text{Tor}_i(\mathcal{O}_U, \mathcal{O}_V), \mathcal{O}_W))
+]_{a + b + c - 2n}
+\end{align*}
+이다. 여기서\  $\dim(U) = a$, $\dim(V) = b$, $\dim(W) = c$,
+$\dim(X) = n$이다. 보조정리의 가정들은 위 공식들의 코히런트 층들이
+식들을 정의하는 데 필요한 지지집합 차원의 상계를 만족함을 보장한다.
+이제 유도범주\  $D_{\textit{Coh}}(\mathcal{O}_X)$의 대상
+$$
+K =
+\mathcal{O}_U \otimes^\mathbf{L}_{\mathcal{O}_X} \mathcal{O}_V
+\otimes^\mathbf{L}_{\mathcal{O}_X} \mathcal{O}_W
+$$
+를 생각하자. 위에서 얻은\  $U \cdot (V \cdot W)$와\ 
+$(U \cdot V) \cdot W$의 표현들이 모두
+$$
+\sum (-1)^k [H^k(K)]_{a + b + c - 2n}
+$$
+과 같다고 주장한다. 이로부터 보조정리가 따른다. 대칭성에 의해 두 등식 중
+하나만 증명하면 충분하다. 이를 위해\  $\mathcal{O}_U$와\ 
+$\mathcal{O}_V \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_W$를\ 
+K-평탄 복합체\  $M^\bullet$과\  $L^\bullet$로 나타내고,
+Homology, Section \ref{homology-section-double-complex}에서
+이중복합체\  $M^\bullet \otimes_{\mathcal{O}_X} L^\bullet$에 결부시킨
+스펙트럼 열을 사용한다. 이는\  $E_2$ 항이
+$$
+E_2^{p, q} =
+\text{Tor}_{-p}(\mathcal{O}_U, \text{Tor}_{-q}(\mathcal{O}_V, \mathcal{O}_W))
+$$
+이고\  $H^{p + q}(K)$로 수렴하는 스펙트럼 열이다(세부사항은 생략한다.
+More on Algebra, Example \ref{more-algebra-example-tor}와 비교하라).
+길이는 짧은 완전열에 대해 가법적이므로 결과가 따른다.
+\end{proof}
+
+
+
+
+\section{평탄 당김과 교차곱}
+\label{section-flat-pullback-and-intersection-products}
+
+\noindent
+교차와 평탄 당김의 상호작용을 간단히 논한다.
+
+\begin{lemma}
+\label{lemma-flat-pull-back-and-intersections-sheaves}
+$f : X \to Y$를 비특이 다양체들의 평탄 사상이라 하고\ 
+$e = \dim(X) - \dim(Y)$로 놓자. $\mathcal{F}$와\  $\mathcal{G}$를\  $Y$ 위의
+코히런트 층이라 하며\  $\dim(\text{Supp}(\mathcal{F})) \leq r$,
+$\dim(\text{Supp}(\mathcal{G})) \leq s$, 그리고\ 
+$\dim(\text{Supp}(\mathcal{F}) \cap \text{Supp}(\mathcal{G}) )
+\leq r + s - \dim(Y)$라고 하자. 이 경우 사이클\ 
+$[f^*\mathcal{F}]_{r + e}$와\  $[f^*\mathcal{G}]_{s + e}$는 고유하게 교차하고
+$$
+f^*([\mathcal{F}]_r \cdot [\mathcal{G}]_s) =
+[f^*\mathcal{F}]_{r + e} \cdot [f^*\mathcal{G}]_{s + e}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$f$의 상대차원이\  $e$라는 가정으로부터\ 
+$[f^*\mathcal{F}]_{r + e}$와\  $[f^*\mathcal{G}]_{s + e}$가 고유하게
+교차한다는 명제는 곧바로 따른다.
+Lemmas \ref{lemma-tor-sheaf} 및\  \ref{lemma-pullback}에 의해 다음을\ 
+$\mathcal{O}_X$-모듈의 등식으로 보이면 충분하다.
+$$
+f^*\text{Tor}_i^{\mathcal{O}_Y}(\mathcal{F}, \mathcal{G}) =
+\text{Tor}_i^{\mathcal{O}_X}(f^*\mathcal{F}, f^*\mathcal{G})
+$$
+이는\  Cohomology, Lemma \ref{cohomology-lemma-pullback-tensor-product}와\ 
+$f^*$가 완전함으로부터 따른다. 실제로\ 
+$Lf^*\mathcal{F} = f^*\mathcal{F}$이고\  $\mathcal{G}$에 대해서도 마찬가지이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-pullback-and-intersections}
+$f : X \to Y$를 비특이 다양체들의 평탄 사상이라 하자.
+$\alpha$를\  $Y$ 위의\  $r$-사이클, $\beta$를\  $Y$ 위의\  $s$-사이클이라 하자.
+$\alpha$와\  $\beta$가 고유하게 교차한다고 가정하자. 그러면\ 
+$f^*\alpha$와\  $f^*\beta$는 고유하게 교차하고\ 
+$f^*( \alpha \cdot \beta ) = f^*\alpha \cdot f^*\beta$이다.
+\end{lemma}
+
+\begin{proof}
+선형성에 의해\  $\alpha = [V]$, $\beta = [W]$라고 가정해도 된다.
+여기서\  $V, W \subset Y$는 차원이\  $r, s$인 닫힌 부분다양체이다.
+$f$의 상대차원을\  $e$라고 하자. 그러면 다음 등식들에 의해 이 보조정리는\ 
+Lemma \ref{lemma-flat-pull-back-and-intersections-sheaves}의 특수한 경우이다.
+$[V] = [\mathcal{O}_V]_r$, $[W] = [\mathcal{O}_W]_r$,
+$f^*[V] = [f^{-1}(V)]_{r + e} = [f^*\mathcal{O}_V]_{r + e}$, 그리고\ 
+$f^*[W] = [f^{-1}(W)]_{s + e} = [f^*\mathcal{O}_W]_{s + e}$.
+\end{proof}
+
+
+\section{평탄 고유 사상의 사영 공식}
+\label{section-projection-formula-flat}
+
+\noindent
+평탄 고유 사상에 대한 사영 공식을 간단히 논한다.
+
+\begin{lemma}
+\label{lemma-projection-formula-flat}
+\begin{reference}
+더 일반적인 공식은\  \cite[Chapter V, C), Section 7, formula (10)]{Serre_algebre_locale}
+을 보라.
+\end{reference}
+$f : X \to Y$를 비특이 다양체들의 평탄 고유 사상이라 하고\ 
+$e = \dim(X) - \dim(Y)$로 놓자. $\alpha$를\  $X$ 위의\  $r$-사이클,
+$\beta$를\  $Y$ 위의\  $s$-사이클이라 하자. $\alpha$와\  $f^*(\beta)$가
+고유하게 교차한다고 가정하자. 그러면\  $f_*(\alpha)$와\  $\beta$는 고유하게
+교차하고
+$$
+f_*(\alpha) \cdot \beta = f_*( \alpha \cdot f^*\beta)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+선형성에 의해\  $\alpha = [V]$, $\beta = [W]$인 경우로 환원된다.
+여기서\  $V \subset X$와\  $W \subset Y$는 차원이 각각\  $r$, $s$인 닫힌
+부분다양체이다. 그러면\  $f^{-1}(W)$는 순수차원\  $s + e$이다.
+사이클\  $[V]$와\  $f^*[W]$가 고유하게 교차한다고 가정한다.
+$V \cap f^{-1}(W) \to f(V) \cap W$가 전사라는 사실을 이후 별도로
+언급하지 않고 사용하겠다.
+
+\medskip\noindent
+$V \to f(V)$의 일반 섬유의 차원을\  $a$라 하자. $a > 0$이면\ 
+$f_*[V] = 0$이다. 특히\  $f_*\alpha$와\  $\beta$는 고유하게 교차한다.
+이 경우를 끝내려면\  $f_*([V] \cdot f^*[W]) = 0$임을 보여야 한다.
+그러나\  $V \to f(V)$의 모든 섬유의 차원은\  $\geq a$이므로
+(Morphisms, Lemma \ref{morphisms-lemma-openness-bounded-dimension-fibres} 참조),
+$V \cap f^{-1}(W)$의 모든 기약성분\  $Z$는\  $f(Z)$ 위에서 차원\ 
+$\geq a$인 섬유를 가진다. 이는 분명 원하는 결론을 함의한다.
+
+\medskip\noindent
+$V \to f(V)$가 일반적으로 유한하다고 가정하자.
+$Z \subset f(V) \cap W$를 기약성분이라 하자.
+$Z_i \subset V \cap f^{-1}(W)$, $i = 1, \ldots, t$를\  $Z$를 우세하게
+사상하는\  $V \cap f^{-1}(W)$의 기약성분들이라 하자. 가정에 의해 각\ 
+$Z_i$의 차원은\  $r + s + e - \dim(X) = r + s - \dim(Y)$이다.
+따라서\  $\dim(Z) \leq r + s - \dim(Y)$이다. 이로부터\  $f(V)$와\  $W$는
+고유하게 교차하고, $\dim(Z) = r + s - \dim(Y)$이며, 각\ 
+$Z_i \to Z$가 일반적으로 유한함을 알 수 있다.
+특히\  $V \to f(V)$는\  $Z$의 일반점\  $\xi$ 위에서 유한 섬유를 갖는다.
+따라서\  $V \to Y$는\  $\xi$의 한 열린 근방에서 유한하다.
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-proper-finite-fibre-finite-in-neighbourhood}를 보라.
+유도 텐서곱에 대한 매우 일반적인 사영 공식을 사용하면
+$$
+Rf_*(\mathcal{O}_V \otimes_{\mathcal{O}_X}^\mathbf{L} Lf^*\mathcal{O}_W) =
+Rf_*\mathcal{O}_V \otimes_{\mathcal{O}_Y}^\mathbf{L} \mathcal{O}_W
+$$
+를 얻는다. Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-cohomology-base-change}를 보라.
+$f$가 평탄하므로\  $Lf^*\mathcal{O}_W = f^*\mathcal{O}_W$이다.
+$f|_V$가\  $\xi$의 한 열린 근방에서 유한하므로, $X$ 위의 코히런트 층 가운데
+지지집합이\  $V$에 포함되는 모든 층에 대해
+$$
+(Rf_*\mathcal{F})_\xi = (f_*\mathcal{F})_\xi
+$$
+이다(Cohomology of Schemes, Lemma
+\ref{coherent-lemma-higher-direct-images-zero-finite-fibre} 참조).
+따라서 모든\  $i$에 대해
+\begin{equation}
+\label{equation-stalks}
+\left(
+f_*\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_V, f^*\mathcal{O}_W)
+\right)_\xi =
+\left(\text{Tor}_i^{\mathcal{O}_Y}(f_*\mathcal{O}_V, \mathcal{O}_W)\right)_\xi
+\end{equation}
+이다. Lemma \ref{lemma-pullback}에 의해\ 
+$f^*[W] = [f^*\mathcal{O}_W]_{s + e}$이므로
+$$
+[V] \cdot f^*[W] =
+\sum (-1)^i
+[\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_V,
+f^*\mathcal{O}_W)]_{r + s - \dim(Y)}
+$$
+이다(Lemma \ref{lemma-tor-sheaf}). Lemma \ref{lemma-push-coherent}을 적용하면
+$$
+f_*([V] \cdot f^*[W]) =
+\sum (-1)^i
+[f_*\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_V,
+f^*\mathcal{O}_W)]_{r + s - \dim(Y)}
+$$
+를 얻는다. Lemma \ref{lemma-push-coherent}에 의해\ 
+$f_*[V] = [f_*\mathcal{O}_V]_r$이므로 다시\  Lemma \ref{lemma-tor-sheaf}에 의해
+$$
+[f_*V] \cdot [W] =
+\sum (-1)^i
+[\text{Tor}_i^{\mathcal{O}_X}(f_*\mathcal{O}_V,
+\mathcal{O}_W)]_{r + s - \dim(Y)}
+$$
+이다. $f_*([V] \cdot f^*[W])$의 공식과\  $f_*[V] \cdot [W]$의 공식을
+비교하고\  $\xi$에서 줄기의 길이를 취하여\  $Z$의 계수를 살펴보면,
+(\ref{equation-stalks})가 증명을 끝낸다는 것을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-transfer}
+$X \to P$를 비특이 다양체들의 닫힌 몰입이라 하자.
+$C' \subset P \times \mathbf{P}^1$를 차원\  $r + 1$의 닫힌 부분다양체라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item 섬유\  $C = C'_0$의 차원은\  $r$이다. 즉,
+$C' \to \mathbf{P}^1$은 우세 사상이다.
+\item $C'$는\  $X \times \mathbf{P}^1$과 고유하게 교차한다.
+\item $[C]_r$는\  $X$와 고유하게 교차한다.
+\end{enumerate}
+$\alpha = [C]_r \cdot X$를\  $X$ 위의 사이클로,
+$\beta = C' \cdot X \times \mathbf{P}^1$를\ 
+$X \times \mathbf{P}^1$ 위의 사이클로 보고 정의하면
+$$
+\alpha = \text{pr}_{X, *}(\beta \cdot X \times 0)
+$$
+는\  $X$ 위의 사이클의 등식이다. 여기서\ 
+$\text{pr}_X : X \times \mathbf{P}^1 \to X$는 사영이다.
+\end{lemma}
+
+\begin{proof}
+$\text{pr} : P \times \mathbf{P}^1 \to P$를 사영이라 하자.
+사이클의 등식을 증명하고 있으므로\  $\alpha$, resp.\ $\beta$를\ 
+$P$, resp.\ $P \times \mathbf{P}^1$ 위의 사이클로 생각하고\ 
+$\text{pr}$에 의한 밂에 대해 결과를 증명하면 충분하다.
+$\text{pr}^*X = X \times \mathbf{P}^1$이고\  $\text{pr}$가\  $C'_0$를\  $C$ 위로
+동형으로 사상하므로, 사영 공식(Lemma \ref{lemma-projection-formula-flat})은
+$$
+\text{pr}_*([C'_0]_r \cdot X \times \mathbf{P}^1) = [C]_r \cdot X = \alpha
+$$
+를 준다. 한편\  Lemma \ref{lemma-rational-equivalence-and-intersection}에 의해\ 
+$P \times \mathbf{P}^1$ 위의 사이클로서\ 
+$[C'_0]_r = C' \cdot P \times 0$이다. 따라서 교차곱의 결합법칙
+(Lemma \ref{lemma-associative})과 가환성에 의해
+$$
+[C'_0]_r \cdot X \times \mathbf{P}^1 =
+(C' \cdot P \times 0) \cdot X \times \mathbf{P}^1 =
+(C' \cdot X \times \mathbf{P}^1) \cdot P \times 0
+$$
+이다. 이제\  $P \times \mathbf{P}^1$ 위에서\ 
+$C' \cdot X \times \mathbf{P}^1$와\  $P \times 0$의 교차곱이\ 
+$X \times \mathbf{P}^1$ 위에서\  $\beta$와\  $X \times 0$의 교차곱과
+사이클로서 같음을 보이면 된다.
+$C' \cdot X \times \mathbf{P}^1 = \sum n_k[E_k]$로 쓰자. 그러면 어떤
+부분다양체\  $E_k \subset X \times \mathbf{P}^1 \subset P \times \mathbf{P}^1$
+에 대해\  $\beta = \sum n_k[E_k]$이다. 두 교차는 모두\ 
+Lemma \ref{lemma-rational-equivalence-and-intersection}을 두 번 적용하여\ 
+$\sum m_k[E_{k, 0}]$과 같음을 알 수 있다. 이로써 증명이 끝난다.
+\end{proof}
+
+
+
+
+\section{사영}
+\label{section-projection}
+
+\noindent
+고정된 대수적으로 닫힌 기초체\  $\mathbf{C}$ 위에서 작업하고 있음을 상기하자.
+$V$가\  $\mathbf{C}$ 위의 유한차원 벡터공간이면
+$$
+\mathbf{P}(V) = \text{Proj}(\text{Sym}(V))
+$$
+로 놓는다. 여기서\  $\text{Sym}(V)$는\  $\mathbf{C}$ 위에서\  $V$에 결부된
+대칭대수이다. Constructions, Example
+\ref{constructions-example-projective-space}를 보라.
+정규화는\  $V = \Gamma(\mathbf{P}(V), \mathcal{O}_{\mathbf{P}(V)}(1))$이
+되도록 택한다. 물론\  $\dim(V) = n + 1$이면\ 
+$\mathbf{P}(V) \cong \mathbf{P}^n_{\mathbf{C}}$이다.
+$\mathbf{P}(V)$는 비특이 사영다양체임을 언급해 둔다.
+
+\medskip\noindent
+$p \in \mathbf{P}(V)$를 닫힌점이라 하자. 점\  $p$는\ 
+$\dim(L_p) = 1$인 벡터공간들의 전사\  $V \to L_p$에 대응한다.
+Constructions, Lemma \ref{constructions-lemma-apply}를 보라.
+$W_p = \Ker(V \to L_p)$라고 쓰자. {\it $p$로부터의 사영}은\ 
+Constructions, Lemma \ref{constructions-lemma-morphism-proj}의 사상
+$$
+r_p : \mathbf{P}(V) \setminus \{p\} \longrightarrow \mathbf{P}(W_p)
+$$
+이다. 준비를 위해 다음 보조정리를 보자.
+
+\begin{lemma}
+\label{lemma-projection-generically-finite}
+$V$를 차원\  $n + 1$의 벡터공간이라 하고,
+$X \subset \mathbf{P}(V)$를 닫힌 부분스킴이라 하자.
+$X \not = \mathbf{P}(V)$이면 영이 아닌 자리스키 열린집합\ 
+$U \subset \mathbf{P}(V)$가 존재하여, 모든 닫힌점\  $p \in U$에 대해
+사영\  $r_p$의 제한은 유한 사상\ 
+$r_p|_X : X \to \mathbf{P}(W_p)$을 정의한다.
+\end{lemma}
+
+\begin{proof}
+$U = \mathbf{P}(V) \setminus X$로 보조정리가 성립한다고 주장한다.
+$U$의 닫힌점\  $p$에 대해 실제로 사상\ 
+$r_p|_X : X \to \mathbf{P}(W_p)$를 얻는다. 이 사상은\  $X$가 고유 스킴이므로
+고유하다(Morphisms, Lemmas \ref{morphisms-lemma-locally-projective-proper} 및\ 
+\ref{morphisms-lemma-image-proper-scheme-closed}). 한편 직접 계산하면\ 
+$r_p$의 섬유들은 아핀 직선임을 알 수 있다. 따라서\  $r_p|X$의 섬유들은
+고유이면서 아핀이므로 유한하다(Morphisms, Lemma
+\ref{morphisms-lemma-finite-proper}). 마지막으로 유한 섬유를 갖는 고유 사상은
+유한하다(Cohomology of Schemes, Lemma
+\ref{coherent-lemma-characterize-finite}).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-projection-generically-immersion}
+$V$를 차원\  $n + 1$의 벡터공간이라 하자.
+$X \subset \mathbf{P}(V)$를 닫힌 부분다양체라 하고,
+$x \in X$를 비특이점이라 하자.
+\begin{enumerate}
+\item $\dim(X) < n - 1$이면 영이 아닌 자리스키 열린집합\ 
+$U \subset \mathbf{P}(V)$가 존재하여, 모든 닫힌점\  $p \in U$에 대해
+사상\  $r_p|_X : X \to r_p(X)$는\  $r_p(x)$의 한 열린 근방 위에서 동형이다.
+\item $\dim(X) = n - 1$이면 영이 아닌 자리스키 열린집합\ 
+$U \subset \mathbf{P}(V)$가 존재하여, 모든 닫힌점\  $p \in U$에 대해
+사상\  $r_p|_X : X \to \mathbf{P}(W_p)$는\  $x$에서 \'etale이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. $x, y \in X$가\  $r_p$에 의해 같은 상을 가지면\  $p$는 직선\ 
+$\overline{xy}$ 위에 놓인다. 유한형 스킴
+$$
+T = \{(y, p) \mid
+y \in X \setminus \{x\},\ p \in \mathbf{P}(V),\ p \in \overline{xy}\}
+$$
+과\  $(y, p) \mapsto y$, $(y, p) \mapsto p$로 주어지는 사상\ 
+$T \to X$, $T \to \mathbf{P}(V)$를 생각하자.
+$T \to X$의 각 섬유가 직선이므로\ 
+$T$의 차원은\  $\dim(X) + 1 < \dim(\mathbf{P}(V))$이다.
+따라서\  $T \to \mathbf{P}(V)$는 전사가 아니다. 한편 유한형 스킴
+$$
+T' = \{p \mid
+p \in \mathbf{P}(V) \setminus \{x\},
+\ \overline{xp}\text{ tangent to }X\text{ at }x\}
+$$
+을 생각하자. 그러면\  $T'$의 차원은\ 
+$\dim(X) < \dim(\mathbf{P}(V))$이다. 따라서 사상\ 
+$T' \to \mathbf{P}(V)$도 전사가 아니다.
+$U \subset \mathbf{P}(V) \setminus X$를 이 두 상과 서로소인 영이 아닌
+열린집합으로 택하자. 이러한\  $U$가 존재하는 것은\  Morphisms, Lemma
+\ref{morphisms-lemma-chevalley}에 의해\  $\mathbf{P}(V)$ 안에서\  $T$와\  $T'$의
+상이 구성가능하기 때문이다. 그러면 닫힌점\  $p \in U$에 대해 사영\ 
+$r_p|_X : X \to \mathbf{P}(W_p)$는\  $x$에서 접공간 위의 단사 사상을
+유도하고\  $r_p^{-1}(\{r_p(x)\}) = \{x\}$이다.
+이는\  $r_p$가\  $x$에서 비분기임을 뜻한다(Varieties, Lemma
+\ref{varieties-lemma-injective-tangent-spaces-unramified}). 또한\ 
+Lemma \ref{lemma-projection-generically-finite}에 의해 유한하므로,
+$r_p^{-1}(\{r_p(x)\}) = \{x\}$와 함께 \'Etale Morphisms, Lemma
+\ref{etale-lemma-finite-unramified-one-point}을 적용할 수 있다. 따라서\ 
+$\mathbf{P}(W_p)$ 안의\  $r_p(x)$의 열린 근방\  $R$이 존재하여\ 
+$(r_p|_X)^{-1}(R) \to R$은 닫힌 몰입이다. 이로써 (1)이 증명된다.
+
+\medskip\noindent
+(2)의 증명. 이 경우에도 사상\  $T' \to \mathbf{P}(V)$가 전사가 아님을
+얻는다. 위와 같이 논하면\  $X$와\  $T'$의 상을 피하는\ 
+$U \subset \mathbf{P}(V)$에 대해 사영\ 
+$r_p|_X : X \to \mathbf{P}(W_p)$는\  $x$에서 \'etale이고 유한하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-projection-generically-immersion-refined}
+$V$를 벡터공간이라 하자.
+$Z \subset X \subset \mathbf{P}(V)$를\ 
+$Z \not = X \not = \mathbf{P}(V)$인 닫힌 부분다양체들이라 하자.
+$x \in Z$가\  $X$의 비특이점이라고 하자. 그러면 영이 아닌 자리스키 열린집합\ 
+$U \subset \mathbf{P}(V)$가 존재하여, 모든 닫힌점\  $p \in U$에 대해
+사상\  $r_p|_Z : Z \to r_p(Z)$는\  $r_p(x)$의 한 열린 근방 위에서 동형이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-projection-generically-immersion}의 증명에서와 같이 논하면,
+$p \in U$에 대해 사상\  $r_p|_X : X \to r_p(X)$가\  $x$에서 \'etale이고\ 
+$r_p^{-1}(r_p(\{x\})) \cap Z = \{x\}$가 되는 영이 아닌 자리스키
+열린집합\  $U$를 찾을 수 있다. 세부사항은 생략한다.
+$Z' = r_p(Z)$를\  $\mathbf{P}(W_p)$의 닫힌 부분다양체로 보자.
+그러면 사상\  $\pi : Z \to Z'$는 유한하고
+(Lemma \ref{lemma-projection-generically-finite}), $x$에서 비분기이며
+(작은 세부사항은 생략한다), $\pi^{-1}(\pi(\{x\})) = \{x\}$이다.
+결과는 \'Etale Morphisms, Lemma
+\ref{etale-lemma-finite-unramified-one-point}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-projection-injective}
+$V$를 차원\  $n + 1$의 벡터공간이라 하고,
+$Y, Z \subset \mathbf{P}(V)$를 닫힌 부분다양체라 하자.
+영이 아닌 자리스키 열린집합\  $U \subset \mathbf{P}(V)$가 존재하여,
+모든 닫힌점\  $p \in U$에 대해
+$$
+Y \cap r_p^{-1}(r_p(Z)) = (Y \cap Z) \cup E
+$$
+이고, 여기서\  $E \subset Y$는 닫혀 있으며\ 
+$\dim(E) \leq \dim(Y) + \dim(Z) + 1 - n$이다.
+\end{lemma}
+
+\begin{proof}
+$Y' = Y \setminus Y \cap Z$로 놓자. $y \in Y'$, $z \in Z$를\ 
+$r_p(y) = r_p(z)$인 닫힌점이라 하자. 그러면\  $p$는\  $y$와\  $z$를 잇는 직선\ 
+$\overline{yz}$ 위에 놓인다. 유한형 스킴
+$$
+T = \{(y, z, p) \mid y \in Y', z \in Z, p \in \overline{yz}\}
+$$
+과\  $(y, z, p) \mapsto p$로 주어지는 사상\ 
+$T \to \mathbf{P}(V)$를 생각하자. $T$는 기약이고\ 
+$\dim(T) = \dim(Y) + \dim(Z) + 1$임을 관찰하자. 따라서\ 
+$T \to \mathbf{P}(V)$의 일반 섬유의 차원은\ 
+$\dim(Y) + \dim(Z) + 1 - n$ 이하이다. 더 정확히 말해,
+$U \subset \mathbf{P}(V) \setminus (Y \cup Z)$인 영이 아닌 열린집합이 존재하여
+그 위의 섬유 차원은\  $\dim(Y) + \dim(Z) + 1 - n$ 이하이다
+(Varieties, Lemma \ref{varieties-lemma-dimension-fibres-locally-algebraic}).
+$p \in U$를 닫힌점이라 하고, $F \subset T$를\  $p$ 위의\ 
+$T \to \mathbf{P}(V)$의 섬유라 하자. 그러면
+$$
+(Y \cap r_p^{-1}(r_p(Z))) \setminus (Y \cap Z)
+$$
+는\  $(y, z, p) \mapsto y$로 주어지는\  $F \to Y$의 상이다.
+다시\  Varieties, Lemma
+\ref{varieties-lemma-dimension-fibres-locally-algebraic}에 의해\  $F \to Y$의
+상의 폐포는 차원이\  $\dim(Y) + \dim(Z) + 1 - n$ 이하이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-find-lines}
+$V$를 벡터공간이라 하고, $B \subset \mathbf{P}(V)$를 여차원이\ 
+$\geq 2$인 닫힌 부분다양체라 하자. $p \in \mathbf{P}(V)$를\ 
+$p \not \in B$인 닫힌점이라 하자. 그러면\  $p \in \ell$이고\ 
+$\ell \cap B = \emptyset$인 직선\  $\ell \subset \mathbf{P}(V)$가 존재한다.
+더욱이 이 직선들은\  $\mathbf{P}(V)$의 한 열린 부분집합을 훑는다.
+\end{lemma}
+
+\begin{proof}
+$r_p : \mathbf{P}(V) \to \mathbf{P}(W_p)$에 의한 사영 아래에서\  $B$의 상을
+생각하자. $\dim(W_p) = \dim(V) - 1$이므로\  $r_p(B)$의\ 
+$\mathbf{P}(W_p)$ 안의 여차원은\  $\geq 1$이다.
+$r_p(q) \not \in r_p(B)$인 모든\  $q \in \mathbf{P}(V)$에 대해\ 
+$p$와\  $q$를 잇는 직선\  $\ell = \overline{pq}$가 원하는 조건을 만족한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-doubly-transitive}
+$V$를 벡터공간이라 하자. $G = \text{PGL}(V)$로 두자.
+그러면\  $G \times \mathbf{P}(V) \to \mathbf{P}(V)$의 작용은\ 
+2중 추이적이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 이는\  $\text{GL}(V)$가 선형독립인 벡터들의 쌍에\ 
+2중 추이적으로 작용한다는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-determinant}
+$k$를 체라 하자. $n \geq 1$을 정수라 하고\ 
+$x_{ij}, 1 \leq i, j \leq n$을 변수들이라 하자. 그러면
+$$
+\det
+\left(
+\begin{matrix}
+x_{11} & x_{12} & \ldots & x_{1n} \\
+x_{21} & \ldots & \ldots & \ldots \\
+\ldots & \ldots & \ldots & \ldots \\
+x_{n1} & \ldots & \ldots & x_{nn}
+\end{matrix}
+\right)
+$$
+은 다항식환\  $k[x_{ij}]$의 기약원이다.
+\end{lemma}
+
+\begin{proof}
+$V$를\  $n$차원 벡터공간이라 하자. 기하학의 말로 옮기면 이 보조정리는
+가역이 아닌 선형사상\  $V \to V$들의 자취\  $C$가 기약이라는 뜻이다
+(행렬식은 각 변수에 대해 차수가\  $1$이므로 제곱인수가 없다는 것에
+유의하자). $W$를 차원\  $n - 1$의 벡터공간이라 하자.
+초등 선형대수에 의해 사상
+$$
+\Hom(W, V) \times \Hom(V, W) \longrightarrow \Hom(V, V),\quad
+(\psi, \varphi) \longmapsto \psi \circ \varphi
+$$
+의 상은\  $C$이다. 정의역이 기약이므로 그 상도 기약이다.
+세부사항은 생략한다.
+\end{proof}
+
+\noindent
+$V$를 차원\  $n + 1$의 벡터공간이라 하자. $E = \text{End}(V)$로 놓자.
+$E^\vee = \Hom(E, \mathbf{C})$를 쌍대벡터공간이라 하자.
+$\mathbf{P} = \mathbf{P}(E^\vee)$로 쓰자.
+표준 선형사상
+$$
+V \longrightarrow V \otimes_\mathbf{C} E^\vee = \Hom(E, V)
+$$
+이 있으며, 이는\  $v \in V$를\  $\Hom(E, V)$ 안의 사상\ 
+$g \mapsto g(v)$로 보낸다. 표준 사상\ 
+$E^\vee \to \Gamma(\mathbf{P}, \mathcal{O}_\mathbf{P}(1))$
+이 있고 이것이 동형임을 상기하자. 따라서\  $\mathbf{P}$ 위의 가군층의
+표준 사상
+$$
+\psi : V \otimes \mathcal{O}_\mathbf{P} \to V \otimes \mathcal{O}_\mathbf{P}(1)
+$$
+을 얻으며, 이는 대역절단 위에서 주어진 사상을 회복한다. 사영다발\ 
+$\mathbf{P}(\mathcal{E})$는\  $\mathcal{E}$ 위 대칭대수의 상대\  Proj로
+정의됨을 상기하자. Constructions, Definition
+\ref{constructions-definition-projective-bundle}를 보라.
+$\psi$에 결부된\  $\mathbf{P}(V \otimes \mathcal{O}_\mathbf{P}(1))$와\ 
+$\mathbf{P}(V \otimes \mathcal{O}_\mathbf{P})$ 사이의 유리사상을
+살펴보고자 한다. Constructions, Lemma
+\ref{constructions-lemma-relative-proj-base-change}에 의해 표준 동형
+$$
+\mathbf{P}(V \otimes \mathcal{O}_\mathbf{P}) = \mathbf{P} \times \mathbf{P}(V)
+$$
+이 있다. Constructions, Lemma
+\ref{constructions-lemma-twisting-and-proj}에 의해
+$$
+\mathbf{P}(V \otimes \mathcal{O}_\mathbf{P}(1)) =
+\mathbf{P}(V \otimes \mathcal{O}_\mathbf{P}) = \mathbf{P} \times \mathbf{P}(V)
+$$
+임을 알 수 있다. 이를\  Constructions, Lemma
+\ref{constructions-lemma-morphism-relative-proj}와 결합하면
+\begin{equation}
+\label{equation-r-psi}
+\mathbf{P} \times \mathbf{P}(V) \supset
+U(\psi) \xrightarrow{r_\psi} \mathbf{P} \times \mathbf{P}(V)
+\end{equation}
+을 얻는다. 이를 더 잘 이해하기 위해\  $\mathbf{P}$ 위의 섬유에서
+무슨 일이 일어나는지 계산해 보자. $g \in E$가 영이 아니라고 하자.
+이는 영이 아닌 사상\  $E^\vee \to \mathbf{C}$를 정하므로 점\ 
+$[g] \in \mathbf{P}$를 정한다. 한편\  $g$는\  $\mathbf{C}$-선형사상\ 
+$g : V \to V$를 정한다. 따라서\  Constructions, Lemma
+\ref{constructions-lemma-morphism-proj}에 의해 사상
+$$
+\mathbf{P}(V) \supset U(g) \xrightarrow{r_g} \mathbf{P}(V)
+$$
+을 얻는다. 아래에서 사용할 사실은\  $U(g)$가 섬유\  $U(\psi)_{[g]}$이고\ 
+$r_g$가 점\  $[g]$ 위에서\  $r_\psi$의 섬유라는 것이다. 또한 사용할
+관찰은\  $\mathbf{P}(V)$에서\  $U(g)$의 여집합이 닫힌 몰입
+$$
+\mathbf{P}(\Coker(g)) \longrightarrow \mathbf{P}(V)
+$$
+의 상이고, $r_g$의 상이 닫힌 몰입
+$$
+\mathbf{P}(\Im(g)) \longrightarrow \mathbf{P}(V)
+$$
+의 상이라는 것이다.
+
+\begin{lemma}
+\label{lemma-make-family}
+위의 기호를 사용하자. $X, Y$를\  $\mathbf{P}(V)$의 닫힌 부분다양체라
+하고, 이들이 고유하게 교차하며\  $X \not = \mathbf{P}(V)$이고\ 
+$X \cap Y \not = \emptyset$이라고 하자. $[\text{id}_V] \in \ell$인
+일반적인 직선\  $\ell \subset \mathbf{P}$에 대해 다음이 성립한다.
+\begin{enumerate}
+\item 모든\  $[g] \in \ell$에 대해\  $X \subset U_g$이다.
+\item 모든\  $[g] \in \ell$에 대해\  $g(X)$는\  $Y$와 고유하게 교차한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$B \subset \mathbf{P}$를 ‘나쁜’ 점들의 집합, 즉 (1) 또는 (2)를
+위배하는 점\  $[g]$들의 집합이라 하자. 가정에 의해\ 
+$[\text{id}_V] \not \in B$임에 유의하자. 또한\  $B$는 닫혀 있다.
+따라서\  $\dim(B) \leq \dim(\mathbf{P}) - 2$임을 보이면 충분하다
+(Lemma \ref{lemma-find-lines}).
+
+\medskip\noindent
+먼저\  $g : V \to V$가 가역인 점\  $[g]$들로 이루어진 열린집합\ 
+$G = \text{PGL}(V) \subset \mathbf{P}$를 생각하자.
+$G$는\  $\mathbf{P}(V)$에\  2중 추이적으로 작용하므로
+(Lemma \ref{lemma-doubly-transitive})
+$$
+T = \{(x, y, [g]) \mid x \in X, y \in Y, [g] \in G, r_g(x) = y\}
+$$
+는\  $X \times Y$ 위에서 섬유가\  $G$ 안의 한 점의 안정자인
+국소 자명 섬유화이다. 따라서\  $T$는 다양체이다.
+$[g]$ 위에서\  $T \to G$의 섬유가\  $r_g(X) \cap Y$임을 관찰하자.
+사상\  $T \to G$는 전사이다. 실제로\  $X$의 임의의 평행이동은\ 
+$Y$와 교차한다(가정에 의해\  $X$와\  $Y$는 고유하게 교차하고\ 
+$X \cap Y \not = \emptyset$이므로\ 
+$\dim(X) + \dim(Y) \geq \dim(\mathbf{P}(V))$이며, 따라서\ 
+Varieties, Lemma
+\ref{varieties-lemma-intersection-in-projective-space}에 의해\ 
+$X$의 모든 평행이동은\  $Y$와 교차한다).
+다양체들의 지배적 사상의 섬유 차원은 여차원\  $1$에서 뛰지 않으므로
+(Varieties, Lemma
+\ref{varieties-lemma-dimension-fibres-locally-algebraic})
+$B \cap G$의 여차원은\  $\geq 2$라고 결론짓는다.
+
+\medskip\noindent
+이제 여집합\  $Z = \mathbf{P} \setminus G$를 살펴보자.
+행렬식은 기약다항식이므로(Lemma \ref{lemma-determinant})
+이는 기약다양체이다. 따라서\  $B$가\  $Z$의 일반점을 포함하지 않음을
+보이면 충분하다. 일반적인 점\  $[g] \in Z$에 대해 여핵\ 
+$V \to \Coker(g)$의 차원은\  $1$이고, 따라서\  $U(g)$는 한 점의
+여집합이다. $X \not = \mathbf{P}(V)$이므로 일반적인\ 
+$[g] \in Z$에 대해\  $X \subset U(g)$임을 알 수 있다.
+더욱이 사상\  $r_g|_X : X \to r_g(X)$는 유한하므로\ 
+$\dim(r_g(X)) = \dim(X)$이다.
+한편 이러한\  $g$에 대해\  $r_g$의 상은 여차원이\  $1$인 닫힌 부분공간\ 
+$H = \mathbf{P}(\Im(g)) \subset \mathbf{P}(V)$이다.
+$Z$의 일반점에 대해\  $H \cap Y$의 차원은\  $Y$의 차원보다\  $1$ 작다
+(Varieties, Lemma
+\ref{varieties-lemma-exact-sequence-induction}와 비교하라).
+따라서\  $r_g(X)$와\  $H \cap Y$가\  $H$ 안에서 고유하게 교차함을
+보여야 한다. $H$를 고정하면\  $g$에 자기동형사상을 뒤에서 합성하여\ 
+$r_g(X)$를\  $H = \mathbf{P}(\Im(g))$의 임의의 자기동형사상으로
+옮길 수 있다. 그러므로 위와 같이 논하여, 주어진\ 
+$H = \mathbf{P}(\Im(g))$에 대해 일반적인\  $g$이면\ 
+$H \cap Y$와\  $r_g(X)$의 교차가 고유하다고 결론지을 수 있다.
+일부 세부사항은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+\section{이동 보조정리}
+\label{section-moving-lemma}
+
+\noindent
+이동 보조정리는\  $r$-사이클\  $\alpha$와\  $s$-사이클\ 
+$\beta$가 주어지면\  $\alpha' \sim_{rat} \alpha$인\  $\alpha'$이 존재하여\ 
+$\alpha'$과\  $\beta$가 고유하게 교차한다고 말한다
+(Lemma \ref{lemma-moving-move}).
+\cite{Samuel}, \cite{ChevalleyI}, \cite{ChevalleyII}를 보라.
+그 핵심은\  Lemma \ref{lemma-moving}이다. 독자는 이 보조정리가\ 
+\cite[Example 11.4.1]{F}에 아래의 형태로 서술되어 있고\ 
+\cite{Roberts}에 증명이 실려 있음을 확인할 수 있다.
+
+\begin{lemma}
+\label{lemma-moving}
+\begin{reference}
+\cite{Roberts}를 보라.
+\end{reference}
+$X \subset \mathbf{P}^N$을 비특이 닫힌 부분다양체라 하자.
+$n = \dim(X)$이고\  $0 \leq d, d' < n$이라 하자. $Z \subset X$를
+차원\  $d$의 닫힌 부분다양체라 하고, $T_i \subset X$, $i \in I$를
+차원\  $d'$의 닫힌 부분다양체들의 유한 모임이라 하자. 그러면
+부분다양체\  $C \subset \mathbf{P}^N$가 존재하고, $C$는\  $X$와
+고유하게 교차하며
+$$
+C \cdot X = Z + \sum\nolimits_{j \in J} m_j Z_j
+$$
+이다. 여기서\  $Z_j \subset X$들은 차원\  $d$의 기약 부분다양체들로\ 
+$Z$와 서로 다르며,
+$$
+\dim(Z_j \cap T_i) \leq \dim(Z \cap T_i)
+$$
+이다. $Z$가\  $X$ 안에서\  $T_i$와 고유하게 교차하지 않으면 이 부등식은
+엄격하다.
+\end{lemma}
+
+\begin{proof}
+$\mathbf{P}^N = \mathbf{P}(V_N)$로 써서\  $\dim(V_N) = N + 1$이라 하자.
+Section \ref{section-projection}에서와 같이 점들로부터의 사영들의 열
+\begin{align*}
+& r_N : 
+\mathbf{P}(V_N) \setminus \{p_N\} \to \mathbf{P}(V_{N - 1}), \\
+& r_{N - 1} :
+\mathbf{P}(V_{N - 1}) \setminus \{p_{N - 1}\} \to \mathbf{P}(V_{N - 2}), \\
+& \ldots,\\
+& r_{n + 1} :
+\mathbf{P}(V_{n + 1}) \setminus \{p_{n + 1}\} \to \mathbf{P}(V_n)
+\end{align*}
+을 택하고자 한다. 각 단계에서 적당한 자리스키 열린집합 안에서\ 
+$p_N, p_{N - 1}, \ldots, p_{n + 1}$을 택할 것이다.
+닫힌점\  $x \in Z \subset X$를 택하자. 각\  $i$에 대해\ 
+$T_i \cap Z$의 각 기약성분에서 적어도 하나씩 닫힌점\ 
+$x_{it} \in T_i \cap Z$를 택하자. 합성을 취하면 다음 성질들을 갖는 사상
+$$
+\pi = (r_{n + 1} \circ \ldots \circ r_N)|_X :
+X \longrightarrow \mathbf{P}(V_n)
+$$
+을 얻는다.
+\begin{enumerate}
+\item $\pi$는 유한이다.
+\item $\pi$는\  $x$와 모든\  $x_{it}$에서 \'etale이다.
+\item $\pi|_Z : Z \to \pi(Z)$는\  $\pi(x_{it})$의 한 열린 근방 위에서
+동형이다.
+\item $T_i \cap \pi^{-1}(\pi(Z)) = (T_i \cap Z) \cup E_i$이고,
+$E_i \subset T_i$는 닫혀 있으며\ 
+$\dim(E_i) \leq d + d' + 1 - (n + 1) = d + d' - n$이다.
+\end{enumerate}
+Lemmas \ref{lemma-projection-generically-finite},
+\ref{lemma-projection-generically-immersion},
+\ref{lemma-projection-generically-immersion-refined}, and
+\ref{lemma-projection-injective}와 귀납법으로부터 이를 할 수 있음이
+곧바로 따른다. 마지막 사영은\  $\mathbf{P}(V_{n + 1})$에서 나오고\ 
+$\dim(V_{n + 1}) = n + 2$이며, 이것이 (4)의 부등식을 설명함에
+유의하자. 조금 더 자세히 쓰면,
+$X_j, Z_j, T_{i, j} \subset \mathbf{P}(V_j)$를\ 
+$j = N, \ldots, n$에 대한\  $X$, $Z$, $T_i$의 상이라 하자. 그러면\ 
+$T_{i, j + 1} \cap r_{j + 1}^{-1}(Z_j) = (T_{i, j + 1} \cap Z_{j + 1})
+\cup E_{i, j + 1}$이고, Lemma \ref{lemma-projection-injective}로부터\ 
+$E_{i, j + 1}$에 대한 차원 상계를 갖는다. 이제\ 
+$T_i \cap \pi^{-1}(\pi(Z))$는\  $T_i \cap Z$와\  $E_{i, j}$들의
+역상들의 합집합임을 유의하자. $X_j$들 사이의 전이사상들은 유한이므로
+원하는 차원 상계를 얻는다.
+
+\medskip\noindent
+$C \subset \mathbf{P}(V_N)$를\ 
+$(r_{n + 1} \circ \ldots \circ r_N)^{-1}(\pi(Z))$의 스킴론적 폐포라
+하자. $\pi$는\  $Z$의 점\  $x$에서 \'etale이므로 닫힌 부분스킴\ 
+$C \cap X = \pi^{-1}(\pi(Z))$는\  $Z$를 중복도\  $1$로 포함한다
+(국소 계산은 생략한다). 따라서\  Lemma
+\ref{lemma-transversal-subschemes}에 의해
+$$
+C \cdot X = [Z] + \sum m_j[Z_j]
+$$
+이고, 여기서\  $Z_j \subset X$들은 차원\  $d$의 어떤 부분다양체들이다.
+집합론적으로
+$$
+C \cap X = \pi^{-1}(\pi(Z))
+$$
+임에 유의하자. 따라서\ 
+$T_i \cap Z_j \subset T_i \cap \pi^{-1}(\pi(Z)) \subset (T_i \cap Z) \cup E_i$이다.
+$E_i$에 포함되는\  $T_i \cap Z_j$의 임의의 기약성분에 대해서는
+원하는 차원 상계를 갖는다. 마지막으로\  $V$를\  $T_i \cap Z_j$의
+기약성분으로서\  $T_i \cap Z$에 포함되는 것이라 하자. 증명을 끝내려면\ 
+$V$가 점\  $x_{it}$들 중 어느 것도 포함하지 않음을 보이면 충분하다.
+그러면\  $\dim(V) < \dim(Z \cap T_i)$이기 때문이다.
+이를 보이려면 모든\  $i, t, j$에 대해\  $x_{it} \not \in Z_j$임을 보이면
+충분하다.
+
+\medskip\noindent
+$Z' = \pi(Z)$로 놓고, $Z'' = \pi^{-1}(Z')$를 스킴론적으로 취하자.
+조건 (3)에 의해\  $\pi(x_{it})$를 포함하는 열린집합\ 
+$U \subset \mathbf{P}(V_n)$를 찾아\ 
+$\pi^{-1}(U) \cap Z \to U \cap Z'$가 동형이 되게 할 수 있다.
+특히\  $Z \to Z'$는\  $x_{it}$에서 국소동형이다. 한편 조건 (2)에 의해\ 
+$Z'' \to Z'$는\  $x_{it}$에서 \'etale이다. 따라서 닫힌 몰입\ 
+$Z \to Z''$는\  $x_{it}$에서 \'etale이다
+(Morphisms, Lemma \ref{morphisms-lemma-etale-permanence}).
+그러므로\  $x_{it}$의 한 자리스키 근방에서\  $Z = Z''$이고, 이로써
+주장이 증명된다.
+\end{proof}
+
+\noindent
+실제 이동은 다음 보조정리를 사용하여 수행한다.
+
+\begin{lemma}
+\label{lemma-move}
+$C \subset \mathbf{P}^N$을 닫힌 부분다양체라 하자.
+$X \subset \mathbf{P}^N$을 부분다양체라 하고, $T_i \subset X$를
+닫힌 부분다양체들의 유한 모임이라 하자.
+$C$와\  $X$가 고유하게 교차한다고 가정하자.
+그러면 닫힌 부분다양체\  $C' \subset \mathbf{P}^N \times \mathbf{P}^1$가
+존재하여 다음이 성립한다.
+\begin{enumerate}
+\item $C' \to \mathbf{P}^1$는 지배적이다.
+\item 스킴론적으로\  $C'_0 = C$이다.
+\item $C'$와\  $X \times \mathbf{P}^1$는 고유하게 교차한다.
+\item $C'_\infty$는 주어진 각\  $T_i$와 고유하게 교차한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$C \cap X = \emptyset$이면 상수족\ 
+$C' = C \times \mathbf{P}^1$을 택한다. 따라서\ 
+$C \cap X \not = \emptyset$이라고 가정해도 좋고, 그렇게 하겠다.
+
+\medskip\noindent
+$\mathbf{P}^N = \mathbf{P}(V)$로 써서\  $\dim(V) = N + 1$이라 하자.
+$E = \text{End}(V)$라 하고, $E^\vee = \Hom(E, \mathbf{C})$라 하자.
+Lemma \ref{lemma-make-family}에서와 같이\ 
+$\mathbf{P} = \mathbf{P}(E^\vee)$로 놓자.
+$\text{id}_V$를 지나는 일반적인 직선\  $\ell \subset \mathbf{P}$를 택하자.
+$C' \subset \ell \times \mathbf{P}(V)$를, $[g] \in \ell$ 위의 섬유가\ 
+$r_g(C)$인 닫힌 부분스킴으로 놓자. 더 정확히 말해, $C'$은
+$$
+\ell \times C \subset \mathbf{P} \times \mathbf{P}(V)
+$$
+의 사상 (\ref{equation-r-psi}) 아래의 상이다. Lemma
+\ref{lemma-make-family}에 의해 이는 의미가 있다. 즉\ 
+$\ell \times C \subset U(\psi)$이다. 사상\ 
+$\ell \times C \to C'$은 유한이고, 모든\  $[g] \in \ell$에 대해
+집합론적으로\  $C'_{[g]} = r_g(C)$이다. (1)과 (2)는\ 
+$0 = [\text{id}_V] \in \ell$로 두면 명백하다. (3)은 모든\ 
+$[g] \in \ell$에 대해\  $r_g(C)$와\  $X$가 고유하게 교차한다는 사실에서
+따른다. (4)는 일반적인 점\  $\infty = [g] \in \ell$이\ 
+$\mathbf{P}$의 일반점이고, 그러한 점에 대해\ 
+$r_g(C) \cap T$가\  $\mathbf{P}(V)$의 임의의 닫힌 부분다양체\  $T$와
+고유하게 교차한다는 사실에서 따른다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-moving-move}
+$X$를 비특이 사영다양체라 하자. $\alpha$를\  $X$ 위의\  $r$-사이클,
+$\beta$를\  $s$-사이클이라 하자. 그러면\ 
+$\alpha' \sim_{rat} \alpha$이고\  $\alpha'$과\  $\beta$가 고유하게
+교차하는\  $r$-사이클\  $\alpha'$이 존재한다.
+\end{lemma}
+
+\begin{proof}
+차원\  $s$의 어떤 부분다양체들\  $T_i \subset X$에 대해\ 
+$\beta = \sum n_i[T_i]$로 쓰자. 선형성에 의해 차원\  $r$의 어떤 기약
+닫힌 부분다양체\  $Z \subset X$에 대해\  $\alpha = [Z]$인 경우만
+가정해도 좋다. 정수들
+$$
+\dim(Z \cap T_i)
+$$
+의 최댓값\  $e$에 대한 귀납법으로 보조정리를 증명하겠다.
+기초 단계는\  $e = r + s - \dim(X)$인 경우이다. 이때\  $Z$는\ 
+$\beta$와 고유하게 교차하므로 보조정리는 자명하다.
+
+\medskip\noindent
+귀납 단계. $e > r + s - \dim(X)$라고 가정하자. 몰입\ 
+$X \subset \mathbf{P}^N$을 택하고\  Lemma \ref{lemma-moving}을
+적용하여, $C \cdot X = [Z] + \sum m_j[Z_j]$이고 각\  $Z_j$에 귀납가설을
+적용할 수 있게 하는 닫힌 부분다양체\  $C \subset \mathbf{P}^N$를 찾자.
+다음으로\  $C$, $X$, $T_i$에\  Lemma \ref{lemma-move}를 적용하여\ 
+$C' \subset \mathbf{P}^N \times \mathbf{P}^1$을 찾자.
+$\gamma = C' \cdot X \times \mathbf{P}^1$를\ 
+$X \times \mathbf{P}^1$ 위의 사이클로 보자. Lemma
+\ref{lemma-transfer}에 의해
+$$
+[Z] + \sum m_j[Z_j] = \text{pr}_{X, *}(\gamma \cdot X \times 0)
+$$
+이다. 한편 사이클\ 
+$\gamma_\infty = \text{pr}_{X, *}(\gamma \cdot X \times \infty)$
+는\  $C'_\infty \cap X$에 지지되므로\  $\beta$와 고유하게 교차한다.
+따라서\  Lemma \ref{lemma-rational-equivalence-and-intersection}에 의해\ 
+$[Z] \sim_{rat} - \sum m_j[Z_j] + \gamma_\infty$이다. 귀납법에 의해
+각\  $[Z_j]$는\  $\beta$와 고유하게 교차하는 사이클과 유리 동치이므로
+증명이 끝난다.
+\end{proof}
+
+
+
+\section{교차곱과 유리 동치}
+\label{section-intersections-and-rational-equivalence}
+
+\noindent
+위의 정의들을 사용하여 교차곱이 유리 동치를 법으로 잘 정의됨을 보이자.
+먼저 특수한 경우를 다룬다.
+
+\begin{lemma}
+\label{lemma-well-defined-special-case}
+$X$를 비특이 다양체라 하자.
+$W \subset X \times \mathbf{P}^1$를\  $\mathbf{P}^1$ 위로 지배적인\ 
+$(s + 1)$차원 부분다양체라 하자. $W \to \mathbf{P}^1$의
+각각\  $a$, resp.\ $b$ 위의 섬유를\  $W_a$, resp.\ $W_b$라 하자.
+$V$를\  $X$의\  $r$차원 부분다양체라 하자. $V$가\  $W_a$와\  $W_b$ 모두와
+고유하게 교차한다고 하자. 그러면\ 
+$[V] \cdot [W_a]_r \sim_{rat} [V] \cdot [W_b]_r$이다.
+\end{lemma}
+
+\begin{proof}
+$[W_a]_r = \text{pr}_{X,*}(W \cdot X \times a)$이고\  $[W_b]_r$도
+마찬가지이다. Lemma
+\ref{lemma-rational-equivalence-and-intersection}를 보라.
+따라서 다음을 보이는 것으로 환원된다.
+$$
+V \cdot \text{pr}_{X,*}( W \cdot X \times a) \sim_{rat} V \cdot
+\text{pr}_{X,*}( W \cdot X\times b).
+$$
+사영공식\  Lemma \ref{lemma-projection-formula-flat}을 적용하면
+$$
+V \cdot \text{pr}_{X,*}( W \cdot X\times a) =
+\text{pr}_{X,*}(V \times \mathbf{P}^1 \cdot (W \cdot X\times a))
+$$
+을 얻고, $b$에 대해서도 마찬가지이다. 따라서 다음을 보이는 것으로
+환원된다.
+$$
+\text{pr}_{X,*}(V \times \mathbf{P}^1 \cdot (W \cdot X\times a))
+\sim_{rat}
+\text{pr}_{X,*}(V \times \mathbf{P}^1 \cdot (W \cdot X\times b))
+$$
+$V \times \mathbf{P}^1$와\  $W$가 고유하게 교차하면 교차중복도의 결합법칙
+(Lemma \ref{lemma-associative})에 의해\ 
+$V \times \mathbf{P}^1 \cdot (W \cdot X\times a) =
+(V \times \mathbf{P}^1 \cdot W) \cdot X \times a$이고\ 
+$b$에 대해서도 마찬가지이다. 따라서 다음을 보이는 것으로 환원된다.
+$$
+\text{pr}_{X,*}((V \times \mathbf{P}^1 \cdot W) \cdot X\times a)
+\sim_{rat}
+\text{pr}_{X,*}((V \times \mathbf{P}^1 \cdot W) \cdot X\times b)
+$$
+이는\  Lemma \ref{lemma-rational-equivalence-and-intersection}에 의해
+참이다.
+
+\medskip\noindent
+위의 논증은 그대로는 성립하지 않는다. 장애물은\ 
+$V \times \mathbf{P}^1$와\  $W$가 고유하게 교차한다는 것을 모른다는
+점이다. 우리가 아는 것은\  $V$와\  $W_a$, 그리고\  $V$와\  $W_b$가
+고유하게 교차한다는 것뿐이다.
+$V \times \mathbf{P}^1 \cap W$의 기약성분들을\ 
+$Z_i$, $i \in I$라 하자. 그러면\ 
+$n = \dim(X)$라 할 때\ 
+$\dim(Z_i) \geq r + 1 + s + 1 - n - 1 = r + s + 1 - n$임을 안다.
+Lemma \ref{lemma-intersect-in-smooth}를 보라.
+$V$와\  $W_a$가 고유하게 교차한다고 가정했으므로\ 
+$\dim(Z_{i, a}) = r + s - n$이거나\  $Z_{i, a} = \emptyset$이다.
+한편\  $Z_{i, a} \not = \emptyset$이면\ 
+$\dim(Z_{i, a}) \geq \dim(Z_i) - 1 = r + s - n$이다.
+따라서\  $Z_i$가\  $X \times a$와 만나면\ 
+$\dim(Z_i) = r + s + 1 - n$이고, 이 경우\ 
+$Z_i \to \mathbf{P}^1$는 전사이다.
+그러므로\  $I = I' \amalg I''$로 쓸 수 있다. 여기서\  $I'$은\ 
+$Z_i \to \mathbf{P}^1$가 전사인\  $i \in I$들의 집합이고,
+$I''$은\  $Z_i$가 닫힌점\  $t_i \in \mathbf{P}^1$ 위에 놓이며\ 
+$t_i \not = a$이고\  $t_i \not = b$인\  $i \in I$들의 집합이다.
+사이클
+$$
+\gamma = \sum\nolimits_{i \in I'} e_i [Z_i]
+$$
+를 생각하자. 여기서
+$$
+e_i = \sum\nolimits_p (-1)^p
+\text{length}_{\mathcal{O}_{X \times \mathbf{P}^1, Z_i}}
+\text{Tor}_p^{\mathcal{O}_{X \times \mathbf{P}^1, Z_i}}(
+\mathcal{O}_{V \times \mathbf{P}^1, Z_i}, \mathcal{O}_{W, Z_i})
+$$
+로 취한다. $\gamma$를\  $V \times \mathbf{P}^1$와\  $W$의 교차곱을
+대신하여 사용할 수 있음을 보이겠다.
+
+\medskip\noindent
+위와 정확히 같은 방식으로 교차곱의 결합법칙을 사용하여 이를 보이자.
+$U = \mathbf{P}^1 \setminus \{t_i, i \in I''\}$로 놓자.
+$X \times a$와\  $X \times b$는\  $X \times U$에 포함됨에 유의하자.
+부분다양체들
+$$
+V \times U,\quad W_U,\quad X \times a\quad\text{of}\quad X \times U
+$$
+는\  $U$의 선택에 의해 둘씩 횡단적으로 교차하고, 더욱이\ 
+$\dim(V \times U \cap W_U \cap X \times a) = \dim(V \cap W_a)$는
+기대차원을 갖는다. 따라서\  Lemma \ref{lemma-associative}에 의해\ 
+$X \times U$ 위의 사이클로서
+$$
+V \times U \cdot (W_U \cdot X \times a) =
+(V \times U \cdot W_U) \cdot X \times a
+$$
+임을 알 수 있다. 구성에 의해\  $\gamma$는\  $X \times U$ 위에서
+사이클\  $V \times U \cdot W_U$로 제한된다. 자명하게\ 
+$V \times \mathbf{P}^1 \cdot (W \times X \times a)$는\ 
+$X \times U$ 위에서\  $V \times U \cdot (W_U \cdot X \times a)$로
+제한된다. 따라서\  $X \times \mathbf{P}^1$ 위의 사이클로서
+$$
+V \times \mathbf{P}^1 \cdot (W \cdot X \times a) =
+\gamma \cdot X \times a
+$$
+이다(양변은 모두\  $X \times U$에 포함되고, 앞서 말한 바에 의해\ 
+$X \times U$로 제한하면 서로 같기 때문이다). $b$에 대해서도
+같은 결과가 성립하므로
+\begin{align*}
+V \cdot [W_a]
+& =
+\text{pr}_{X,*}(V \times \mathbf{P}^1 \cdot (W \cdot X\times a)) \\
+& =
+\text{pr}_{X, *}(\gamma \cdot X \times a) \\
+& \sim_{rat} 
+\text{pr}_{X, *}(\gamma \cdot X \times b) \\
+& =
+\text{pr}_{X,*}(V \times \mathbf{P}^1 \cdot (W \cdot X\times b)) \\
+& =
+V \cdot [W_b]
+\end{align*}
+를 얻는다. 첫째 및 마지막 등식은 증명의 첫 문단에서 얻었고,
+둘째 및 끝에서 둘째 등식은 이 문단에서 보였으며, 가운데 동치는\ 
+Lemma \ref{lemma-rational-equivalence-and-intersection}이다.
+\end{proof}
+
+\begin{theorem}
+\label{theorem-well-defined}
+$X$를 비특이 사영다양체라 하자. $\alpha$, resp.\ $\beta$를\ 
+$X$ 위의\  $r$, resp.\ $s$-사이클이라 하자.
+$\alpha$와\  $\beta$가 고유하게 교차하여\ 
+$\alpha \cdot \beta$가 정의된다고 가정하자. 마지막으로\ 
+$\alpha \sim_{rat} 0$이라고 가정하자. 그러면\ 
+$\alpha \cdot \beta \sim_{rat} 0$이다.
+\end{theorem}
+
+\begin{proof}
+닫힌 몰입\  $X \subset \mathbf{P}^N$을 택하자.
+선형성에 의해, $\alpha$와 고유하게 교차하는 어떤\ 
+$s$차원 닫힌 부분다양체\  $Z \subset X$에 대해\ 
+$\beta = [Z]$인 경우를 증명하면 충분하다.
+조건\  $\alpha \sim_{rat} 0$은 유한 개의\  $(r + 1)$차원 닫힌 부분다양체\ 
+$W_i \subset X \times \mathbf{P}^1$가 존재하여
+어떤\  $\mathbf{P}^1$의 점의 쌍\  $a_i, b_i$에 대해
+$$
+\alpha = \sum [W_{i, a_i}]_r - [W_{i, b_i}]_r
+$$
+가 됨을 뜻한다. $W_{i, a_i}^t$와\  $W_{i, b_i}^t$를\ 
+$W_{i, a_i}$와\  $W_{i, b_i}$의 기약성분이라 하자.
+다음 정수들의 최댓값\  $d$에 대한 귀납법을 사용하겠다.
+$$
+\dim(Z \cap W_{i, a_i}^t),\quad \dim(Z \cap W_{i, b_i}^t)
+$$
+이하 증명에서 주된 문제는\  $Z$가\  $\alpha$와 고유하게 교차함은 알지만\ 
+$Z$가 “중간” 다양체\  $W_{i, a_i}^t$ 및\ 
+$W_{i, b_i}^t$와 고유하게 교차하지 않을 수 있다는 것이다. 즉\ 
+$d >  r + s - \dim(X)$일 수 있다.
+
+\medskip\noindent
+기초 단계: $d = r + s - \dim(X)$.
+이 경우\  $Z$와\  $W_{i, a_i}^t$, $W_{i, b_i}^t$의 모든 교차가
+고유하므로, 각\  $i$에 대해\ 
+$[Z] \cdot [W_{i, a_i}]_r \sim_{rat} [Z] \cdot [W_{i, b_i}]_r$임을
+보이는\  Lemma \ref{lemma-well-defined-special-case}에서 원하는 결과가
+따른다.
+
+\medskip\noindent
+귀납 단계: $d >  r + s - \dim(X)$.
+$Z \subset X$와 부분다양체들의 족\ 
+$\{W_{i, a_i}^t, W_{i, b_i}^t\}$에\  Lemma
+\ref{lemma-moving}을 적용하자. 그러면\  $X$와 고유하게 교차하며
+$$
+C \cdot X = [Z] + \sum m_j [Z_j]
+$$
+이고
+$$
+\dim(Z_j \cap W_{i, a_i}^t) \leq \dim(Z \cap W_{i, a_i}^t),\quad
+\dim(Z_j \cap W_{i, b_i}^t) \leq \dim(Z \cap W_{i, b_i}^t)
+$$
+인 닫힌 부분다양체\  $C \subset \mathbf{P}^N$를 찾는다.
+우변이\  $> r + s - \dim(X)$이면 부등식은 엄격하다.
+이는 두 가지를 함의한다. (a) 각\  $Z_j$에 귀납가설을 적용할 수 있고,
+(b) $C \cdot X$와\  $\alpha$가 고유하게 교차한다
+($\alpha$는\  $Z$와 고유하게 교차하는\ 
+$[W_{i, a_i}^t]$와\  $[W_{i, a_i}^t]$의 선형결합이기 때문이다).
+다음으로\  $C$, $X$, $W_{i, a_i}^t$, $W_{i, b_i}^t$에 관하여\ 
+Lemma \ref{lemma-move}에서와 같은\ 
+$C' \subset \mathbf{P}^N \times \mathbf{P}^1$을 택하자.
+차원\  $s + 1$의 어떤 부분다양체들\ 
+$E_k \subset X \times \mathbf{P}^1$에 대해\ 
+$C' \cdot X \times \mathbf{P}^1 = \sum n_k [E_k]$로 쓰자.
+Proposition \ref{proposition-positivity}에 의해 모든\  $k$에 대해\ 
+$n_k > 0$임에 유의하자. Lemma \ref{lemma-transfer}에 의해
+$$
+[Z] + \sum m_j [Z_j] = \sum n_k[E_{k, 0}]_s
+$$
+이다. $E_{k, 0} \subset C \cap X$이므로\ 
+$[E_{k, 0}]_s$와\  $\alpha$가 고유하게 교차함을 안다.
+한편 사이클
+$$
+\gamma = \sum n_k[E_{k, \infty}]_s
+$$
+는\  $C'_\infty \cap X$에 지지되므로 각\ 
+$W_{i, a_i}^t$, $W_{i, b_i}^t$와 고유하게 교차한다.
+따라서 기초 단계와 선형성에 의해
+$$
+\gamma \cdot \alpha \sim_{rat} 0
+$$
+이다. $E_{k, 0}$와\  $E_{k, \infty}$가\  $\alpha$와 고유하게
+교차함을 보았으므로, $E_k \subset X \times \mathbf{P}^1$와\ 
+$\alpha$에\  Lemma \ref{lemma-well-defined-special-case}를 적용하면
+$$
+[E_{k, 0}] \cdot \alpha \sim_{rat} [E_{k, \infty}] \cdot \alpha
+$$
+를 얻는다. 모두 합치면
+\begin{align*}
+[Z] \cdot \alpha
+& =
+(\sum n_k[E_{k, 0}]_r - \sum m_j[Z_j]) \cdot \alpha \\
+& \sim_{rat}
+\sum n_k [E_{k, 0}] \cdot \alpha \quad (\text{by induction hypothesis})\\
+& \sim_{rat}
+\sum n_k [E_{k, \infty}] \cdot \alpha \quad (\text{by the lemma})\\
+& =
+\gamma \cdot \alpha \\
+& \sim_{rat}
+0 \quad (\text{by base case})
+\end{align*}
+를 얻는다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{remark}
+\label{remark-quasi-projective}
+Lemma \ref{lemma-moving-move}와\  Theorem \ref{theorem-well-defined}는
+같은 증명으로 비특이 준사영다양체에 대해서도 성립한다.
+유일한 변화는 이동\  Lemma \ref{lemma-moving}의 다음 판을 증명해야
+한다는 것이다. $X \subset \mathbf{P}^N$를 닫힌 부분다양체라 하자.
+$n = \dim(X)$ 및\  $0 \leq d, d' < n$이라 하자.
+$X^{reg} \subset X$를 비특이점들의 열린 부분집합이라 하자.
+$Z \subset X^{reg}$를 차원\  $d$의 닫힌 부분다양체라 하고,
+$T_i \subset X^{reg}$, $i \in I$를 차원\  $d'$의 닫힌 부분다양체들의
+유한 모임이라 하자. 그러면\  $C$가\  $X$와 고유하게 교차하고
+$$
+(C \cdot X)|_{X^{reg}} = Z + \sum\nolimits_{j \in J} m_j Z_j
+$$
+를 만족하는 부분다양체\  $C \subset \mathbf{P}^N$가 존재한다.
+여기서\  $Z_j \subset X^{reg}$들은 차원\  $d$의 기약 부분다양체로서\ 
+$Z$와 서로 다르고,
+$$
+\dim(Z_j \cap T_i) \leq \dim(Z \cap T_i)
+$$
+이며, $Z$가\  $X^{reg}$에서\  $T_i$와 고유하게 교차하지 않으면
+부등식은 엄격하다.
+\end{remark}
+
+
+
+\section{Chow 환}
+\label{section-chow-rings}
+
+\noindent
+$X$를 비특이 사영다양체라 하자. 교차곱을 다음과 같이 정의한다.
+$$
+\CH_r(X) \times \CH_s(X) \longrightarrow \CH_{r + s - \dim(X)}(X),\quad
+(\alpha, \beta) \longmapsto \alpha \cdot \beta
+$$
+$\alpha \in Z_r(X)$ 및\  $\beta \in Z_s(X)$라 하자.
+$\alpha$와\  $\beta$가 고유하게 교차하면\  Section
+\ref{section-intersection-product}의 정의를 사용한다.
+그렇지 않으면\  Lemma \ref{lemma-moving-move}에서와 같이\ 
+$\alpha \sim_{rat} \alpha'$을 택하고
+$$
+\alpha \cdot \beta =
+\text{class of }\alpha' \cdot \beta \in \CH_{r + s - \dim(X)}(X)
+$$
+로 놓는다. Theorem \ref{theorem-well-defined}에 의해 이는 잘 정의되고
+유리 동치를 법으로 한 몫으로 내려간다. $\CH_*(X)$ 위의 교차곱은
+가환이고(이는 명백하다), 결합법칙을 만족하며
+(Lemma \ref{lemma-associative}), 단위원\ 
+$[X] \in \CH_{\dim(X)}(X)$를 갖는다.
+
+\medskip\noindent
+여차원\  $c$인 사이클들의\  Chow 군을 나타내기 위해 흔히\ 
+$\CH^c(X) = \CH_{\dim X - c}(X)$를 쓴다. Chow Homology, Section
+\ref{chow-section-cycles-codimension}을 보라. 교차곱은 곱
+$$
+\CH^k(X) \times \CH^l(X) \longrightarrow \CH^{k + l}(X)
+$$
+을 정의하며, 이는 가환이고 결합법칙을 만족하며 단위원\ 
+$1 = [X] \in \CH^0(X)$를 갖는다.
+
+
+\section{일반 사상에 대한 당김}
+\label{section-general-pullback}
+
+\noindent
+$f : X \to Y$를 비특이 사영다양체들의 사상이라 하자.
+다음 사상을 정의한다.
+$$
+f^* : \CH_k(Y) \to \CH_{k+\dim X - \dim Y}(X)
+$$
+정의 규칙은
+$$
+f^*(\alpha) = pr_{X, *}(\Gamma_f \cdot pr_Y^*(\alpha))
+$$
+이다. 여기서\  $\Gamma_f \subset X\times Y$는\  $f$의 그래프이다.
+이 일반성에서는 이 사상이 사이클 위가 아니라 사이클류 위에서만
+정의됨에 유의하자. Section \ref{section-chow-rings}에서 도입한
+기호\  $\CH^*$를 쓰면 당김을 사상
+$$
+f^* : \CH^*(Y) \to \CH^*(X)
+$$
+으로 생각할 수 있다. 즉 이는 등급 아벨 군의 사상이다.
+
+\begin{lemma}
+\label{lemma-pullback-and-intersection-product}
+$f : X \to Y$를 비특이 사영다양체들의 사상이라 하자.
+Chow 군 위의 당김 사상은 다음을 만족한다.
+\begin{enumerate}
+\item $f^* : \CH^*(Y) \to \CH^*(X)$는 환 준동형이다.
+\item 합성 가능한 쌍\  $f, g$에 대해\  $(g \circ f)^* = f^* \circ g^*$이다.
+\item 사영공식\  $f_*(\alpha) \cdot \beta =
+f_*( \alpha \cdot f^*\beta)$가 성립한다.
+\item $f$가 평탄하면 앞의 정의와 일치한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이들은 모두 위의 결과들에서 곧바로 따른다.
+
+\medskip\noindent
+(1)에 대해서는\  $X \times Y$ 위의 사이클\  $\alpha$, $\beta$에 대해\ 
+$\text{pr}_{X,*}( \Gamma_f \cdot \alpha \cdot \beta) =
+\text{pr}_{X,*}(\Gamma_f \cdot \alpha) \cdot
+\text{pr}_{X,*}(\Gamma_f \cdot \beta)$임을 보이면 충분하다.
+$\alpha$가\  $X \times Y$ 위의 사이클이고\  $\Gamma_f$와 고유하게
+교차하면, $\Gamma_f$가 그래프이므로 다음 사이클 등식은 쉽게 알 수 있다.
+$$
+\Gamma_f \cdot \alpha =
+\Gamma_f \cdot \text{pr}_X^*(\text{pr}_{X,*}(\Gamma_f \cdot \alpha))
+$$
+따라서 다음 계산에서 첫째 등식을 얻는다.
+\begin{align*}
+\text{pr}_{X,*}(\Gamma_f \cdot \alpha \cdot \beta)
+& =
+\text{pr}_{X,*}(
+\Gamma_f \cdot
+\text{pr}_X^*(\text{pr}_{X,*}(\Gamma_f \cdot \alpha)) \cdot \beta) \\
+& =
+\text{pr}_{X,*}(\text{pr}_X^*(\text{pr}_{X,*}(\Gamma_f \cdot \alpha))
+\cdot (\Gamma_f \cdot \beta)) \\
+& =
+\text{pr}_{X,*}(\Gamma_f \cdot \alpha) \cdot
+\text{pr}_{X,*}(\Gamma_f \cdot \beta)
+\end{align*}
+마지막 단계에는 평탄한 경우의 사영공식
+(Lemma \ref{lemma-projection-formula-flat})을 사용했다.
+
+\medskip\noindent
+$g : Y \to Z$이면, 성질 (2)는 다음 관찰에서 형식적으로 따른다.
+$$
+\Gamma =
+\text{pr}_{X \times Y}^*\Gamma_f \cdot
+\text{pr}_{Y \times Z}^*\Gamma_g
+$$
+$Z_*(X \times Y \times Z)$에서\  $\Gamma = \{(x, f(x), g(f(x))\}$이고,
+이는\  $X \times Z$의\  $\Gamma_{g \circ f}$로 동형으로 사상된다.
+등식은 스킴론적 등식과\  Lemma \ref{lemma-transversal}에서 따른다.
+
+\medskip\noindent
+(3)에 대해서는 평탄 사상의 사영공식을 두 번 사용한다.
+\begin{align*}
+f_*(\alpha \cdot pr_{X, *}(\Gamma_f \cdot pr_Y^*(\beta)))
+& =
+f_*(pr_{X, *}(pr_X^*\alpha \cdot \Gamma_f \cdot pr_Y^*(\beta))) \\
+& =
+pr_{Y, *}(pr_X^*\alpha \cdot \Gamma_f \cdot pr_Y^*(\beta))) \\
+& =
+pt_{Y, *}(pr_X^*\alpha \cdot \Gamma_f) \cdot \beta \\
+& =
+f_*(\alpha) \cdot \beta
+\end{align*}
+마지막 등식에는 위에서 한 그래프에 관한 언급을 사용한다.
+이로써 (3)이 증명된다.
+
+\medskip\noindent
+성질 (4)는\  $f$가 평탄한 경우의 교차곱\ 
+$\Gamma_f \cdot pr_Y^*\alpha$를 식별하는 데 달려 있다.
+즉 이 경우\  $V \subset Y$가 닫힌 부분다양체이면 스킴\ 
+$f^{-1}(V) \cong \Gamma_f \cap pr_Y^{-1}(V)$의 모든 일반점\ 
+$\xi$는\  $V$의 일반점 위에 놓인다. 따라서\ 
+$pr_Y^{-1}(V) = X \times V$의\  $\xi$에서의 국소환은\  Cohen--Macaulay이다.
+$\Gamma_f \subset X \times Y$는 정칙 몰입이므로
+(매끄러운 사영다양체들의 사상으로서) 다음을 얻는다.
+$$
+\Gamma_f \cdot pr_Y^*[V] = [\Gamma_f \cap pr_Y^{-1}(V)]_d
+$$
+여기서\  $d$는\  $\Gamma_f \cap pr_Y^{-1}(V)$의 차원이다. Lemma
+\ref{lemma-multiplicity-lci-CM}을 보라.
+$\Gamma_f \cap pr_Y^{-1}(V)$는\  $f^{-1}(V)$로 동형으로 사상되므로
+결론을 얻는다.
+\end{proof}
+
+
+\section{사이클의 당김}
+\label{section-pullback-cycles}
+
+\noindent
+$X$와\  $Y$가 비특이 사영다양체이고,
+$f : X \to Y$가 사상이라고 가정하자.
+$Z \subset Y$가 닫힌 부분다양체라고 가정하자. $f^{-1}(Z)$를
+다음 스킴론적 역상이라 하자.
+$$
+\xymatrix{
+f^{-1}(Z) \ar[r] \ar[d] & Z \ar[d] \\
+X \ar[r] & Y
+}
+$$
+즉 이는 스킴들의 섬유곱 도식이다. 특히\ 
+$f^{-1}(Z) \subset X$는\  $X$의 닫힌 부분스킴이다.
+이 경우 항상
+$$
+\dim f^{-1}(Z) \geq \dim Z + \dim X - \dim Y.
+$$
+가 성립한다. 위 공식에서 등식이 성립하고, 스킴\  $Z$가\ 
+$f^{-1}(Z)$의 일반점들의 상에서\  Cohen--Macaulay이면\ 
+$f^*[Z] = [f^{-1}(Z)]_{\dim Z + \dim X - \dim Y}$
+이다. 이는\  $f^{-1}(Z)$를\  $\Gamma_f$와\  $X \times Z$의
+스킴론적 교차로 식별하고\  Lemma
+\ref{lemma-multiplicity-lci-CM}을 사용하면 따른다.
+세부사항은 위의\  Lemma
+\ref{lemma-pullback-and-intersection-product}의 (4)의 증명과 비슷하다.
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

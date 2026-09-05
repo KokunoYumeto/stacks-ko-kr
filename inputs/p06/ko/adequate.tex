@@ -1,0 +1,2765 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{적정 가군}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+임의의 스킴\  $X$에 대해 준연접 가군의 범주\ 
+$\QCoh(\mathcal{O}_X)$는 아벨 범주이며, 모든\ 
+$\mathcal{O}_X$-가군의 아벨 범주의 약한\  Serre 부분범주이다.
+대수공간\  $X$ 위의 준연접 가군의 범주를\  $X$의 작은 \'etale
+사이트 위의 모든\  $\mathcal{O}_X$-가군 범주의 부분범주로 볼 때도
+같은 사실이 성립한다. 또한 준콤팩트이고 준분리인 사상\ 
+$f : X \to Y$에 대해 직접상\  $f_*$와 고차 직접상은 준연접성을
+보존한다.
+
+\medskip\noindent
+다음으로\  $X$를 스킴이라 하고, $\mathcal{O}$를\  $X$의 큰 사이트
+가운데 하나, 예를 들어 큰\  fppf 사이트 위의 구조층이라 하자.
+준연접\  $\mathcal{O}$-가군의 범주는 아벨 범주이다
+(실제로 이는 위에서 말한 스킴\  $X$ 위의 보통의 준연접\ 
+$\mathcal{O}_X$-가군의 범주와 동치이다). 그러나\ 
+$\textit{Mod}(\mathcal{O})$로의 포함은 완전하지 않다.
+예를 들어\  $\mathbf{A}^1_k = \Spec(k[x])$ 위에서\  $x$를 곱하여
+주어지는 준연접 가군의 사상
+$$
+\mathcal{O}_{\mathbf{A}^1_k}
+\longrightarrow
+\mathcal{O}_{\mathbf{A}^1_k}
+$$
+을 생각하자. 준연접층의 아벨 범주에서는 이 사상이 단사이지만,
+$\mathbf{A}^1_k$의 큰 사이트 위의 모든\  $\mathcal{O}$-가군의
+아벨 범주에서는 비자명한 핵을 가진다. 이는\ 
+$\Spec(k[x]/(x)) = \Spec(k)$ 위의 절단에서 평가하면 알 수 있다.
+또한 준콤팩트이고 준분리인 사상\  $f : X \to Y$에 대해 함자\ 
+$f_{big, *}$는 준연접성을 보존하지 않는다.
+
+\medskip\noindent
+이 장에서는 준연접 가군과 밀접히 관련되고 위의 두 문제를
+“해결하는” 이른바 적정 가군의 범주를 도입한다. 대수적 스택
+위의 준연접 가군을 논할 때 사용할 또 다른 해법은 국소적으로
+준연접이고 평탄 기저변환 성질을 만족하는\  $\mathcal{O}$-가군을
+고려하는 것이다. Cohomology of Stacks, Section
+\ref{stacks-cohomology-section-loc-qcoh-flat-base-change},
+Cohomology of Stacks, Remark
+\ref{stacks-cohomology-remark-bousfield-colocalization}, 그리고\ 
+Derived Categories of Stacks, Section
+\ref{stacks-perfect-section-derived}를 보라.
+
+
+
+
+
+
+\section{규약}
+\label{section-conventions}
+
+\noindent
+이 장에서는\ 
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$를 고정하고,
+Topologies, Section \ref{topologies-section-procedure}에서와 같이
+큰\  $\tau$-사이트\  $\Sch_\tau$를 하나 고정한다. 모든 스킴은\ 
+$\Sch_\tau$의 대상이라 하겠다. 특히 스킴\  $S$가 주어지면 사이트\ 
+$(\textit{Aff}/S)_\tau \subset (\Sch/S)_\tau$를 얻는다.
+이 사이트들 위의 구조층\  $\mathcal{O}$는 규칙\ 
+$\mathcal{O}(T) = \Gamma(T, \mathcal{O}_T)$로 정의된다.
+
+\medskip\noindent
+모든 환\  $A$는\  $\Spec(A)$가\  $\Sch_\tau$의 대상과 동형인
+것으로 한다. 환\  $A$가 주어졌을 때\  $\textit{Alg}_A$를 다음\ 
+$A$-대수들의 범주라 하자. 그 대상은\  $U$가\  $\Sch_\tau$의
+아핀 대상일 때\  $B = \Gamma(U, \mathcal{O}_U)$ 꼴인\ 
+$A$-대수\  $B$이다. 따라서 아핀 스킴\  $S = \Spec(A)$가 주어지면
+함자
+$$
+(\textit{Aff}/S)_\tau \longrightarrow \textit{Alg}_A,
+\quad
+U \longmapsto \mathcal{O}(U)
+$$
+는 동치이다.
+
+
+
+
+
+
+
+\section{적정 함자}
+\label{section-quasi-coherent}
+
+\noindent
+이 절에서는 준연접층의 직접상과 밀접히 관련된 주제를 논한다.
+내용의 대부분은 논문\  \cite{Jaffe}에서 가져왔다.
+
+\begin{definition}
+\label{definition-module-valued-functor}
+$A$를 환이라 하자. {\it 가군값 함자}란 다음 조건을 만족하는 함자\ 
+$F : \textit{Alg}_A \to \textit{Ab}$이다.
+\begin{enumerate}
+\item $\textit{Alg}_A$의 모든 대상\  $B$에 대해 군\  $F(B)$에는\ 
+$B$-가군 구조가 주어지고,
+\item $\textit{Alg}_A$의 임의의 사상\  $B \to B'$에 대해 사상\ 
+$F(B) \to F(B')$는\  $B$-선형이다.
+\end{enumerate}
+{\it 가군값 함자의 사상}은 모든\  $B \in \Ob(\textit{Alg}_A)$에
+대해\  $F(B) \to G(B)$가\  $B$-선형인 함자의 변환\ 
+$\varphi : F \to G$이다.
+\end{definition}
+
+\noindent
+$S = \Spec(A)$를 아핀 스킴이라 하자.
+$\textit{Alg}_A$ 위의 가군값 함자의 범주는\ 
+$\mathcal{O}$-가군의 전층 범주\ 
+$\textit{PMod}((\textit{Aff}/S)_\tau, \mathcal{O})$와 동치이다.
+이 동치는 가군값 함자\  $F$에 규칙\ 
+$\mathcal{F}(U) = F(\mathcal{O}(U))$로 정의되는 전층\ 
+$\mathcal{F}$를 대응시킨다. 이는\  Section
+\ref{section-conventions}에서 주어진 동치\ 
+$(\textit{Aff}/S)_\tau \to \textit{Alg}_A$,
+$U \mapsto \mathcal{O}(U)$로부터 분명하다.
+준역함자는\  $F(B) = \mathcal{F}(\Spec(B))$로 둔다.
+
+\medskip\noindent
+가군값 함자의 중요한 특수한 경우는 다음과 같이 얻어진다.
+$M$을\  $A$-가군이라 하자. 그러면 자명한\  $B$-가군 구조를 갖는
+가군값 함자\  $B \mapsto M \otimes_A B$를\  $\underline{M}$으로
+표시하겠다. $M \to N$이\  $A$-가군의 사상이면 이에 대응하는
+가군값 함자의 사상\  $\underline{M} \to \underline{N}$이 있음을
+주의하자. 역으로, 가군값 함자의 임의의 사상\ 
+$\underline{M} \to \underline{N}$은\  $B = A$에서 평가하면 알 수
+있듯이\  $A$-가군 사상\  $M \to N$에서 온다. 달리 말하면\ 
+$\text{Mod}_A$는\  $\textit{Alg}_A$ 위의 가군값 함자 범주의
+충만한 부분범주이다.
+
+\medskip\noindent
+$A$-가군 사상\  $\varphi : M \to N$이 주어지면\ 
+$Q = \Coker(M \to N)$일 때\ 
+$\Coker(\underline{M} \to \underline{N}) =
+\underline{Q}$이다. 이는\  $\otimes$가 오른쪽 완전하기 때문이다.
+그러나 일반적으로 핵에 대해서는 그렇지 않다. 예를 들어\ 
+$A$-가군의 단사사상이 기저변환 뒤에도 단사일 필요는 없다.
+따라서 다음 정의는 자연스럽다.
+
+\begin{definition}
+\label{definition-adequate-functor}
+$A$를 환이라 하자. $\textit{Alg}_A$ 위의 가군값 함자\  $F$를
+다음과 같이 부른다.
+\begin{enumerate}
+\item $F$가 어떤\  $A$-가군 사상\  $M \to N$에 대해\ 
+$\Ker(\underline{M} \to \underline{N})$과 동형이면
+{\it 적정}이라 한다.
+\item $F$가 어떤 사상\ 
+$\underline{A^{\oplus n}} \to \underline{A^{\oplus m}}$의 핵과
+동형이면 {\it 선형 적정}이라 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$F$가 적정일 필요충분조건은 완전열\ 
+$0 \to F \to \underline{M} \to \underline{N}$이 존재하는 것이며,
+$F$가 선형 적정일 필요충분조건은 완전열\ 
+$0 \to F \to \underline{A^{\oplus n}} \to \underline{A^{\oplus m}}$
+이 존재하는 것이다.
+
+\medskip\noindent
+$A$를 환이라 하자. 이 절에서는\  $\textit{Alg}_A$ 위의 적정
+함자들의 범주가 아벨 범주임을 보이고
+(Lemmas \ref{lemma-cokernel-adequate} and
+\ref{lemma-kernel-adequate}), 생성원들의 집합을 가짐을 보일 것이다
+(Lemma \ref{lemma-adequate-surjection-from-linear}).
+또한 이 범주가\  $\textit{Alg}_A$ 위의 모든 가군값 함자 범주의
+약한\  Serre 부분범주임을 보이고
+(Lemma \ref{lemma-extension-adequate}), 임의의 여극한을 가짐도
+보일 것이다(Lemma \ref{lemma-colimit-adequate}).
+
+\begin{lemma}
+\label{lemma-adequate-finite-presentation}
+$A$를 환이라 하고\  $F$를\  $\textit{Alg}_A$ 위의 적정 함자라 하자.
+$B = \colim B_i$가\  $A$-대수들의 여과 여극한이면\ 
+$F(B) = \colim F(B_i)$이다.
+\end{lemma}
+
+\begin{proof}
+임의의\  $A$-가군\  $M$에 대해\ 
+$M \otimes_A B = \colim M \otimes_A B_i$이고
+(Algebra, Lemma
+\ref{algebra-lemma-tensor-products-commute-with-limits}를 보라),
+여과 여극한이 완전열과 가환하기 때문이다. Algebra, Lemma
+\ref{algebra-lemma-directed-colimit-exact}를 보라.
+\end{proof}
+
+\begin{remark}
+\label{remark-settheoretic}
+대상이\ 
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$ 꼴인\  $A$-대수\ 
+$B$이고 사상이\  $A$-대수 사상인 범주\ 
+$\textit{Alg}_{fp, A}$를 생각하자. 모든\  $A$-대수\  $B$는 유한표현\ 
+$A$-대수들의 여과 여극한, 즉\  $\textit{Alg}_{fp, A}$의 대상들의
+여과 여극한이다. Lemma
+\ref{lemma-adequate-finite-presentation}에 의해 모든 적정 함자\ 
+$F$는\  $\textit{Alg}_{fp, A}$로의 제한으로 결정된다. 따라서 어떤
+문제들에 대해서는\  $\textit{Alg}_{fp, A}$ 위의 함자들로 제한할
+수 있다. 예를 들어 적정 함자들의 범주는\  Section
+\ref{section-conventions}에서 택한 큰\  $\tau$-사이트의 선택에
+의존하지 않는다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-adequate-flat}
+$A$를 환이라 하고\  $F$를\  $\textit{Alg}_A$ 위의 적정 함자라 하자.
+$B \to B'$가 평탄하면\ 
+$F(B) \otimes_B B' \to F(B')$는 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+완전열\  $0 \to F \to \underline{M} \to \underline{N}$을 택하자.
+이로부터 도식
+$$
+\xymatrix{
+0 \ar[r] & F(B) \otimes_B B' \ar[r] \ar[d] &
+(M \otimes_A B)\otimes_B B' \ar[r] \ar[d] &
+(N \otimes_A B)\otimes_B B' \ar[d] \\
+0 \ar[r] & F(B') \ar[r] &
+M \otimes_A B' \ar[r] &
+N \otimes_A B'
+}
+$$
+을 얻는다. 두 행은 완전하다(위 행은\  $B \to B'$가 평탄하기
+때문이다). 오른쪽 두 수직 화살표가 동형사상이므로 왼쪽 화살표도
+그러하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-adequate-surjection-from-linear}
+$A$를 환이라 하고\  $F$를\  $\textit{Alg}_A$ 위의 적정 함자라 하자.
+그러면 선형 적정 함자들의 직합인\  $L$과 전사사상\  $L \to F$가
+존재한다.
+\end{lemma}
+
+\begin{proof}
+$\varphi : M \to N$에 의해\ 
+$\underline{M} \to \underline{N}$이 주어지는 완전열\ 
+$0 \to F \to \underline{M} \to \underline{N}$을 택하자.
+Lemma \ref{lemma-adequate-finite-presentation}에 의해 모든
+유한표현\  $A$-대수\  $B$에 대해\  $L(B) \to F(B)$가 전사인\ 
+$L \to F$를 구성하면 충분하다. 따라서 유한표현\  $A$-대수\  $B$와
+원소\  $\xi \in F(B)$가 주어졌을 때, $\xi$가\  $L(B) \to F(B)$의
+상에 속하도록 하는 선형 적정 함자\  $L$과 사상\  $L \to F$를
+구성하면 충분하다.
+(동형을 제외하면 그러한 쌍\  $(B, \xi)$은 하나의 집합을 이루기
+때문이다.)
+
+\medskip\noindent
+$\underline{M}(B) = M \otimes_A B$에서\  $\xi$의 상을\ 
+$\sum_{i = 1, \ldots, n} m_i \otimes b_i$로 쓰자.
+$N \otimes_A B$에서\ 
+$\sum \varphi(m_i) \otimes b_i = 0$임을 안다. $N$은 유한표현\ 
+$A$-가군들의 여과 여극한이므로, 유한표현\  $A$-가군\  $N'$과\ 
+$A$-가군의 가환도식
+$$
+\xymatrix{
+A^{\oplus n} \ar[r] \ar[d]_{m_1, \ldots, m_n} & N' \ar[d] \\
+M \ar[r] & N
+}
+$$
+을 택하여\  $(b_1, \ldots, b_n)$이\  $N' \otimes_A B$에서 영으로
+가게 할 수 있다. 표시\ 
+$A^{\oplus l} \to A^{\oplus k} \to N' \to 0$을 택하고, 도식의
+사상\  $A^{\oplus n} \to N'$의 상승\ 
+$A^{\oplus n} \to A^{\oplus k}$을 택하자. 그러면\ 
+$(c_1, \ldots, c_l) \in B^{\oplus l}$을 택하여\ 
+$(b_1, \ldots, b_n, c_1, \ldots, c_l)$이\ 
+$B^{\oplus k}$에서 사상\ 
+$B^{\oplus n} \oplus B^{\oplus l} \to B^{\oplus k}$ 아래 영으로
+가게 할 수 있다.
+가환도식
+$$
+\xymatrix{
+A^{\oplus n} \oplus A^{\oplus l} \ar[r] \ar[d] & A^{\oplus k} \ar[d] \\
+M \ar[r] & N
+}
+$$
+을 생각하자. 여기서 왼쪽 수직 화살표는 직합 성분\ 
+$A^{\oplus l}$에서 영이다. 이제\ 
+$L$을\ 
+$\underline{A^{\oplus n + l}}
+\to \underline{A^{\oplus k}}$의 핵으로 두면 된다. 실제로 원소\ 
+$(b_1, \ldots, b_n, c_1, \ldots, c_l) \in L(B)$는\  $\xi$로
+간다.
+\end{proof}
+
+\noindent
+차수화된\  $A$-대수\  $B = \bigoplus_{d \geq 0} B_d$를 생각하자. 그러면
+두\  $A$-대수 사상\  $p, a : B \to B[t, t^{-1}]$가 있다. 구체적으로\ 
+$p : b \mapsto b$이고, 동차원소\  $b$에 대해\ 
+$a : b \mapsto t^{\deg(b)} b$이다. $F$가\  $\textit{Alg}_A$ 위의
+가군값 함자이면 다음과 같이 정의한다.
+\begin{equation}
+\label{equation-weight-k}
+F(B)^{(k)} = \{\xi \in F(B) \mid t^k F(p)(\xi) = F(a)(\xi)\}.
+\end{equation}
+평탄 환 확장에 대해 잘 거동하는 함자들에서는 이 정의가 직합 분해를
+준다. 이는\  $\mathbf{G}_m$의 표현이 완전가약이라는 사실에 해당한다.
+
+\begin{lemma}
+\label{lemma-flat-functor-split}
+$A$를 환이라 하자.
+$F$를\  $\textit{Alg}_A$ 위의 가군값 함자라 하자.
+평탄 사상\  $B \to B'$에 대해 사상\ 
+$F(B) \otimes_B B' \to F(B')$가 동형이라고 가정하자.
+$B$를 차수화된\  $A$-대수라 하자. 그러면
+\begin{enumerate}
+\item $F(B) = \bigoplus_{k \in \mathbf{Z}} F(B)^{(k)}$이고,
+\item 사상\  $B \to B_0 \to B$가 유도하는 사상\  $F(B) \to F(B)$의
+상은\  $F(B)^{(0)}$에 포함된다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$x \in F(B)$라 하자. 사상\  $p : B \to B[t, t^{-1}]$는 자유이므로
+다음을 안다.
+$$
+F(B[t, t^{-1}]) =
+\bigoplus\nolimits_{k \in \mathbf{Z}} F(p)(F(B)) \cdot t^k =
+\bigoplus\nolimits_{k \in \mathbf{Z}} F(B) \cdot t^k
+$$
+표시한 대로 이후의 증명에서는\  $F(p)$를 생략한다.
+어떤\  $x_k \in F(B)$에 대해\  $F(a)(x) = \sum t^k x_k$로 쓰자.
+$B$-대수 사상\  $t \mapsto 1$을\ 
+$\epsilon : B[t, t^{-1}] \to B$로 표시하자. 합성\ 
+$\epsilon \circ p, \epsilon \circ a : B \to B[t, t^{-1}] \to B$는
+항등사상이다. 따라서
+$$
+x = F(\epsilon)(F(a)(x)) = F(\epsilon)(\sum t^k x_k) = \sum x_k.
+$$
+한편\  $x_k \in F(B)^{(k)}$라고 주장한다. 실제로 가환도식
+$$
+\xymatrix{
+B \ar[r]_a \ar[d]_{a'} &
+B[t, t^{-1}] \ar[d]^f \\
+B[s, s^{-1}] \ar[r]^-g &
+B[t, s, t^{-1}, s^{-1}]
+}
+$$
+을 생각하자. 여기서\  $a'(b) = s^{\deg(b)}b$, $f(b) = b$, $f(t) = st$이고\ 
+$g(b) = t^{\deg(b)}b$이며\  $g(s) = s$이다. 그러면
+$$
+F(g)(F(a'))(x) = F(g)(\sum s^k x_k) =
+\sum s^k F(a)(x_k)
+$$
+이고, 다른 경로로 가면
+$$
+F(f)(F(a))(x) = F(f)(\sum t^k x_k) = \sum (st)^k x_k.
+$$
+$B \to B[s, t, s^{-1}, t^{-1}]$가 자유이므로\ 
+$F(B[t, s, t^{-1}, s^{-1}]) =
+\bigoplus_{k, l \in \mathbf{Z}} F(B) \cdot t^ks^l$이다. 위 두 식의
+계수를 비교하면 원하는 대로\  $F(a)(x_k) = t^k x_k$를 얻는다.
+
+\medskip\noindent
+마지막으로\  $B_0 \to B \xrightarrow{a} B[t, t^{-1}]$가\ 
+$B_0 \to B \xrightarrow{p} B[t, t^{-1}]$와 같으므로\ 
+$F(B_0) \to F(B)$의 상은\  $F(B)^{(0)}$에 포함된다.
+\end{proof}
+
+\noindent
+Lemma \ref{lemma-flat-functor-split}의 특수한 경우로서
+$$
+\underline{M}(B)^{(k)} = M \otimes_A B_k
+$$
+임을 주의하자. 여기서\  $B_k$는 차수화된\  $A$-대수\  $B$의 차수\  $k$
+부분이다.
+
+\begin{lemma}
+\label{lemma-lift-map}
+$A$를 환이라 하자. $\textit{Alg}_A$ 위의 가군값 함자들의 실선 도식
+$$
+\xymatrix{
+0 \ar[r] &
+L \ar[d]_\varphi \ar[r] &
+\underline{A^{\oplus n}} \ar[r] \ar@{..>}[ld] &
+\underline{A^{\oplus m}} \\
+& \underline{M}
+}
+$$
+이 주어지고 그 행이 완전하다고 하자. 그러면 도식을 가환하게 하는
+점선 화살표가 존재한다.
+\end{lemma}
+
+\begin{proof}
+사상\  $A^{\oplus n} \to A^{\oplus m}$이\  $m \times n$ 행렬\ 
+$(a_{ij})$로 주어진다고 하자. 환\ 
+$B = A[x_1, \ldots, x_n]/(\sum a_{ij}x_j)$를 생각하자. 원소\ 
+$(x_1, \ldots, x_n) \in \underline{A^{\oplus n}}(B)$는\ 
+$\underline{A^{\oplus m}}(B)$에서 영으로 가므로 유일한 원소\ 
+$\xi \in L(B)$의 상이다. $\xi$는 다음 보편성질을 갖는다. 임의의\ 
+$A$-대수\  $C$와 임의의\  $\xi' \in L(C)$에 대해\  $L(B) \to L(C)$ 아래\ 
+$\xi$가\  $\xi'$로 가도록 하는\  $A$-대수 사상\  $B \to C$가 존재한다.
+
+\medskip\noindent
+$B$가 차수화된\  $A$-대수이므로\  Lemmas
+\ref{lemma-flat-functor-split} and \ref{lemma-adequate-flat}을 사용하여
+우리 함자들의\  $B$에서의 값을 차수별 성분으로 분해할 수 있다.
+$(x_1, \ldots, x_n)$이\  $\underline{A^{\oplus n}}(B)$의 차수 일인
+원소이므로\  $\xi \in L(B)^{(1)}$임을 주의하자. 따라서\ 
+$\varphi(\xi) \in \underline{M}(B)^{(1)} = M \otimes_A B_1$이다.
+$B_1$은\  $A$-가군으로서\  $x_1, \ldots, x_n$에 의해 생성되므로\ 
+$\varphi(\xi) = \sum m_i \otimes x_i$로 쓸 수 있다. $i$번째
+기저벡터를\  $m_i$로 보내는 사상\  $A^{\oplus n} \to M$을 생각하자.
+구성에 의해 이에 대응하는 사상\ 
+$\underline{A^{\oplus n}} \to \underline{M}$은 원소\  $\xi$를\ 
+$\varphi(\xi)$로 보낸다. 위에서 말한 보편성질로부터 도식이 가환함을
+얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cokernel-into-module}
+$A$를 환이라 하자.
+$\varphi : F \to \underline{M}$을\  $\textit{Alg}_A$ 위의 가군값 함자들의
+사상이라 하고\  $F$가 적정이라고 하자. 그러면\  $\Coker(\varphi)$는
+적정이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-adequate-surjection-from-linear}에 의해\ 
+$F = \bigoplus L_i$가 선형 적정 함자들의 직합인 경우를 가정해도 된다.
+완전열\ 
+$0 \to L_i \to \underline{A^{\oplus n_i}} \to \underline{A^{\oplus m_i}}$를
+택하자. 각\  $i$에 대해\  Lemma \ref{lemma-lift-map}에서와 같이 사상\ 
+$A^{\oplus n_i} \to M$을 택한다. 도식
+$$
+\xymatrix{
+0 \ar[r] &
+\bigoplus L_i  \ar[r] \ar[d] &
+\bigoplus \underline{A^{\oplus n_i}} \ar[r] \ar[ld] &
+\bigoplus \underline{A^{\oplus m_i}} \\
+& \underline{M}
+}
+$$
+을 생각하자. $A$-가군
+$$
+Q =
+\Coker(\bigoplus A^{\oplus n_i} \to M \oplus \bigoplus A^{\oplus m_i})
+\quad\text{and}\quad
+P = \Coker(\bigoplus A^{\oplus n_i} \to \bigoplus A^{\oplus m_i}).
+$$
+를 생각하면\  $\Coker(\varphi)$가\ 
+$\underline{Q} \to \underline{P}$의 핵과 동형임을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cokernel-adequate}
+\begin{slogan}
+한 환 위의 대수들의 범주에서 적정 함자들 사이 사상의 여핵은 적정이다.
+\end{slogan}
+$A$를 환이라 하자.
+$\varphi : F \to G$를\  $\textit{Alg}_A$ 위의 적정 함자들의 사상이라
+하자. 그러면\  $\Coker(\varphi)$는 적정이다.
+\end{lemma}
+
+\begin{proof}
+단사사상\  $G \to \underline{M}$을 택하자. 그러면 단사사상\ 
+$G/F \to \underline{M}/F$가 있다. Lemma
+\ref{lemma-cokernel-into-module}에 의해\  $\underline{M}/F$는 적정이므로
+단사사상\  $\underline{M}/F \to \underline{N}$을 찾을 수 있다.
+합성하여 단사사상\  $G/F \to \underline{N}$을 얻는다. 다시\  Lemma
+\ref{lemma-cokernel-into-module}에 의해 유도된 사상\ 
+$G \to \underline{N}$의 여핵은 적정이므로 단사사상\ 
+$\underline{N}/G \to \underline{K}$를 찾을 수 있다. 따라서\ 
+$0 \to G/F \to \underline{N} \to \underline{K}$는 완전하고 결론을
+얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-kernel-adequate}
+$A$를 환이라 하자.
+$\varphi : F \to G$를\  $\textit{Alg}_A$ 위의 적정 함자들의 사상이라
+하자. 그러면\  $\Ker(\varphi)$는 적정이다.
+\end{lemma}
+
+\begin{proof}
+단사사상\  $F \to \underline{M}$과 단사사상\ 
+$G \to \underline{N}$을 택하자. 도식
+$$
+\xymatrix{
+F \ar[d] \ar[r] & G \ar[d] \\
+\underline{M \oplus N} \ar[r] & \underline{N}
+}
+$$
+이 가환하도록 대각사상을\  $F \to \underline{M \oplus N}$으로
+표시하자. Lemma \ref{lemma-cokernel-adequate}에 의해\ 
+$F$가\  $\underline{M \oplus N} \to \underline{K}$의 핵이 되도록 하는
+가군 사상\  $M \oplus N \to K$를 찾을 수 있다. 그러면\ 
+$\Ker(\varphi)$는\ 
+$\underline{M \oplus N} \to \underline{K \oplus N}$의 핵이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-colimit-adequate}
+$A$를 환이라 하자. $\textit{Alg}_A$ 위의 적정 함자들의 임의의 직합은
+적정이다. 적정 함자들의 여극한도 적정이다.
+\end{lemma}
+
+\begin{proof}
+직합에 관한 명제는 자명하다. 일반적인 여극한은 직합들 사이 사상의
+핵으로 쓸 수 있다. Categories, Lemma
+\ref{categories-lemma-colimits-coproducts-coequalizers}를 보라. 따라서\ 
+Lemma \ref{lemma-kernel-adequate}로부터 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-linear-functor}
+$A$를 환이라 하자.
+$F, G$를\  $\textit{Alg}_A$ 위의 가군값 함자라 하자.
+$\varphi : F \to G$를 함자의 변환이라 하고 다음을 가정하자.
+\begin{enumerate}
+\item $\varphi$는 가법적이다.
+\item 모든\  $A$-대수\  $B$, $\xi \in F(B)$, 가역원\  $u \in B^*$에 대해\ 
+$G(B)$에서\  $\varphi(u\xi) = u\varphi(\xi)$이다.
+\item 임의의 평탄 환 사상\  $B \to B'$에 대해\ 
+$G(B) \otimes_B B' = G(B')$이다.
+\end{enumerate}
+그러면\  $\varphi$는 가군값 함자의 사상이다.
+\end{lemma}
+
+\begin{proof}
+$B$를\  $A$-대수라 하고\  $\xi \in F(B)$, $b \in B$라 하자.
+$\varphi(b \xi) = b \varphi(\xi)$임을 보여야 한다. 환 사상
+$$
+B \to B' = B[x, y, x^{-1}, y^{-1}]/(x + y - b).
+$$
+을 생각하자. 이 환 사상은 충실하게 평탄하므로\ 
+$G(B) \subset G(B')$이다. 한편\  $x, y$가\  $B'$의 가역원이므로
+$$
+\varphi(b\xi) = \varphi((x + y)\xi) =
+\varphi(x\xi) + \varphi(y\xi) = x\varphi(\xi) + y\varphi(\xi)
+= (x + y)\varphi(\xi) = b\varphi(\xi)
+$$
+이다. 따라서 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-extension-adequate-key}
+$A$를 환이라 하자.
+$0 \to \underline{M} \to G \to L \to 0$을\  $\textit{Alg}_A$ 위의
+가군값 함자들의 짧은 완전열이라 하고\  $L$이 선형 적정이라고 하자.
+그러면\  $G$는 적정이다.
+\end{lemma}
+
+\begin{proof}
+먼저 임의의 평탄\  $A$-대수 사상\  $B \to B'$에 대해 사상\ 
+$G(B) \otimes_B B' \to G(B')$가 동형임을 지적하자. 실제로 이는\ 
+$\underline{M}$과\  $L$에 대해 성립하고, Lemma
+\ref{lemma-adequate-flat}를 보라. 따라서 오보조정리에 의해\  $G$에
+대해서도 성립한다. 특히\  Lemma \ref{lemma-flat-functor-split}에 의해
+임의의 차수화된\  $A$-대수\  $B$에 대해\ 
+$G(B) = \bigoplus_{k \in \mathbf{Z}} G(B)^{(k)}$이다.
+
+\medskip\noindent
+완전열\ 
+$0 \to L \to \underline{A^{\oplus n}} \to \underline{A^{\oplus m}}$을
+택하자. 사상\  $A^{\oplus n} \to A^{\oplus m}$이\  $m \times n$ 행렬\ 
+$(a_{ij})$로 주어진다고 하자. 차수화된\  $A$-대수\ 
+$B = A[x_1, \ldots, x_n]/(\sum a_{ij}x_j)$를 생각하자. 원소\ 
+$(x_1, \ldots, x_n) \in \underline{A^{\oplus n}}(B)$는\ 
+$\underline{A^{\oplus m}}(B)$에서 영으로 가므로 유일한 원소\ 
+$\xi \in L(B)$의 상이다. $\xi \in L(B)^{(1)}$임을 관찰하자. 사상
+$$
+\Hom_A(B, C) \longrightarrow L(C), \quad
+f \longmapsto L(f)(\xi)
+$$
+은 함자의 동형을 정의한다. 실제로\  $f$는 관계식\ 
+$\sum a_{ij}c_j = 0$을 만족해야 하는 상들\ 
+$c_i = f(x_i) \in C$에 의해 결정된다. 한편\  $L(C)$는 관계식\ 
+$\sum a_{ij} c_j = 0$을 만족하는\  $n$-튜플\ 
+$(c_1, \ldots, c_n)$들의 집합이다.
+
+\medskip\noindent
+각 함자\  $\underline{M}$, $G$, $L$의\  $B$에서의 값은 위 보조정리에
+의해 가중치 공간들의 직합이므로, $0 \to \underline{M} \to G \to L \to 0$의
+완전성으로부터 완전열\ 
+$0 \to \underline{M}(B)^{(1)} \to G(B)^{(1)} \to L(B)^{(1)} \to 0$을
+얻는다. 따라서\  $\xi$로 가는 원소\  $\theta \in G(B)^{(1)}$를 택할 수
+있다.
+
+\medskip\noindent
+차수화된\  $A$-대수
+$$
+C = A[x_1, \ldots, x_n, y_1, \ldots, y_n]/
+(\sum a_{ij}x_j, \sum a_{ij}y_j)
+$$
+를 생각하자. 규칙
+$$
+p_1(x_i) = x_i, \quad
+p_1(x_i) = y_i, \quad
+m(x_i) = x_i + y_i.
+$$
+로 정의되는 세 차수보존\  $A$-대수 준동형\ 
+$p_1, p_2, m : B \to C$가 있다. 원소
+$$
+\tau = G(m)(\theta) - G(p_1)(\theta) - G(p_2)(\theta) \in G(C)
+$$
+가 영임을 보이겠다. 먼저 직접 계산하면\  $\tau$는\  $L(C)$에서 영으로
+간다. 따라서\  $\tau$는\  $\underline{M}(C)$의 원소이다. 또한\ 
+$m$, $p_1$, $p_2$가 차수보존 대수 사상이므로\ 
+$\tau \in G(C)^{(1)}$이다. $\underline{M} \subset G$이므로
+$$
+\tau \in \underline{M}(C)^{(1)} = M \otimes_A C_1.
+$$
+$C_1 = p_1(B_1) \oplus p_2(B_1)$이므로 유일하게\ 
+$\tau = \underline{M}(p_1)(\tau_1) + \underline{M}(p_2)(\tau_2)$로
+쓸 수 있으며, 여기서\ 
+$\tau_i \in M \otimes_A B_1 = \underline{M}(B)^{(1)}$이다.
+$x_i \mapsto x_i$, $y_i \mapsto 0$으로 정의되는 환 사상\ 
+$q_1 : C \to B$를 생각하자. 그러면\ 
+$\underline{M}(q_1)(\tau) =
+\underline{M}(q_1)(\underline{M}(p_1)(\tau_1) + \underline{M}(p_2)(\tau_2)) =
+\tau_1$이다. 한편\  $q_1 \circ m = q_1 \circ p_1$이므로\ 
+$G(q_1)(\tau) = - G(q_1 \circ p_2)(\tau)$이다. $q_1 \circ p_2$는\ 
+$B \to A \to B$로 분해되므로\  $G(q_1 \circ p_2)(\tau)$는\ 
+$G(B)^{(0)}$에 속한다. Lemma \ref{lemma-flat-functor-split}를 보라.
+따라서\ 
+$G(B)^{(0)} \cap \underline{M}(B)^{(1)} \subset
+G(B)^{(0)} \cap G(B)^{(1)} = 0$이므로\  $\tau_1 = 0$이다. 마찬가지로\ 
+$\tau_2 = 0$이고, 따라서\  $\tau = 0$이다.
+
+\medskip\noindent
+$\theta \in G(B)$이므로\  $f : B \to C$를\  $G(f)(\theta)$로 보내어
+함자의 변환
+$$
+\psi : L(-) = \Hom_A(B, - ) \longrightarrow G(-)
+$$
+를 얻는다. $\theta$가\  $\xi$의 상승이므로\  $\psi$는\  $G \to L$의
+오른쪽 역이다. 위에서 증명한 명제들을\  $\psi$의 말로 표현하면 다음과
+같다. $\tau = 0$이라는 것은\  $\psi$가 가법적이라는 뜻이고,
+$\theta \in G(B)^{(1)}$이라는 것은 임의의\  $A$-대수\  $D$, 원소\ 
+$l \in L(D)$, 가역원\  $u \in D^*$에 대해\  $G(D)$에서\ 
+$\psi(ul) = u\psi(l)$임을 뜻한다. Lemma
+\ref{lemma-flat-linear-functor}에 의해\  $\psi$는 가군값 함자의
+사상이다. 명백히 이로부터\  $G \cong \underline{M} \oplus L$이고
+결론을 얻는다.
+\end{proof}
+
+\begin{remark}
+\label{remark-linearly-adequate}
+$A$를 환이라 하자. Lemma \ref{lemma-extension-adequate-key}의 증명은\ 
+$L$이 선형 적정일 때\  $\textit{Alg}_A$ 위의 가군값 함자들의 임의의
+확대\  $0 \to \underline{M} \to E \to L \to 0$이 분열함을 보인다.
+그 증명은 가군값 함자\  $F = \underline{M}$의 다음 성질들만 사용한다.
+\begin{enumerate}
+\item 평탄 환 사상\  $B \to B'$에 대해\ 
+$F(B) \otimes_B B' \to F(B')$는 동형이다.
+\item
+$F(C)^{(1)} = F(p_1)(F(B)^{(1)}) \oplus F(p_2)(F(B)^{(1)})$이다. 여기서\ 
+$B = A[x_1, \ldots, x_n]/(\sum a_{ij}x_j)$이고\ 
+$C = A[x_1, \ldots, x_n, y_1, \ldots, y_n]/
+(\sum a_{ij}x_j, \sum a_{ij}y_j)$이다.
+\end{enumerate}
+이 두 성질은 임의의 적정 함자\  $F$에 대해 성립한다. 세부사항은
+생략한다. 따라서\  $L$은 적정 함자들의 아벨 범주의 사영대상이다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-extension-adequate}
+$A$를 환이라 하자.
+$0 \to F \to G \to H \to 0$을\  $\textit{Alg}_A$ 위의 가군값
+함자들의 짧은 완전열이라 하자. $F$와\  $H$가 적정이면\  $G$도 적정이다.
+\end{lemma}
+
+\begin{proof}
+완전열\  $0 \to F \to \underline{M} \to \underline{N}$을 택하자.
+$(\underline{M} \oplus G)/F$가 적정임을 보일 수 있다면\  $G$는 적정
+함자들의 사상\  $(\underline{M} \oplus G)/F \to \underline{N}$의
+핵이므로\  Lemma \ref{lemma-kernel-adequate}에 의해 적정이다. 따라서\ 
+$F = \underline{M}$인 경우를 가정해도 된다.
+
+\medskip\noindent
+$L$이 선형 적정 함자들의 직합이고\  $L \to H$가 전사이도록 택할 수
+있다. Lemma \ref{lemma-adequate-surjection-from-linear}을 보라.
+당김\  $G \times_H L$이 적정임을 보일 수 있다면\  $G$는 사상\ 
+$\Ker(L \to H) \to G \times_H L$의 여핵이므로\  Lemma
+\ref{lemma-cokernel-adequate}에 의해 적정이다. 따라서\ 
+$H = \bigoplus L_i$가 선형 적정 함자들의 직합인 경우를 가정해도
+된다. Lemma \ref{lemma-extension-adequate-key}에 의해 각 당김\ 
+$G \times_H L_i$는 적정이다. Lemma \ref{lemma-colimit-adequate}에
+의해\  $\bigoplus G \times_H L_i$가 적정임을 알 수 있다. 이제\  $G$는
+$$
+\bigoplus\nolimits_{i \not = i'} F \longrightarrow
+\bigoplus G \times_H L_i
+$$
+의 여핵이다. 여기서 직합성분\  $(i, i')$의\  $\xi$는\  $i$번째와\ 
+$i'$번째 직합성분에 영이 아닌 항을 갖는\ 
+$(0, \ldots, 0, \xi, 0, \ldots, 0, -\xi, 0, \ldots, 0)$으로 간다.
+따라서\  Lemma \ref{lemma-cokernel-adequate}에 의해\  $G$는 적정이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-adequate}
+$A \to A'$를 환 준동형이라 하자. $\textit{Alg}_A$ 위의\  $F$가
+적정 함자이면, $\textit{Alg}_{A'}$로 제한한 함자\  $F'$도 적정이다.
+\end{lemma}
+
+\begin{proof}
+완전열\  $0 \to F \to \underline{M} \to \underline{N}$을 택하자.
+그러면\  $F'(B') = F(B') = \Ker(M \otimes_A B' \to N \otimes_A B')$이다.
+$M \otimes_A B' = M \otimes_A A' \otimes_{A'} B'$이고\  $N$에 대해서도
+마찬가지이므로, $F'$는\ 
+$\underline{M \otimes_A A'} \to \underline{N \otimes_A A'}$의 핵이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pushforward-adequate}
+$A \to A'$를 환 준동형이라 하자. $\textit{Alg}_{A'}$ 위의\  $F'$가
+적정 함자이면, $\textit{Alg}_A$ 위의 가군값 함자\ 
+$F : B \mapsto F'(A' \otimes_A B)$도 적정이다.
+\end{lemma}
+
+\begin{proof}
+완전열\  $0 \to F' \to \underline{M'} \to \underline{N'}$을 택하자.
+그러면
+\begin{align*}
+F(B) & = F'(A' \otimes_A B) \\
+& = \Ker(M' \otimes_{A'} (
+A' \otimes_A B) \to N' \otimes_{A'} (A' \otimes_A B)) \\
+& = \Ker(M' \otimes_A B \to N' \otimes_A B)
+\end{align*}
+따라서\  $F$는\  $M = M'$와\  $N = N'$를\  $A$-가군으로 보았을 때의\ 
+$\underline{M} \to \underline{N}$의 핵이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-adequate-product}
+$A = A_1 \times \ldots \times A_n$을 환들의 곱이라 하자.
+$A$ 위의 적정 함자를 주는 것은 각\  $A_i$ 위의 적정 함자\  $F_i$들의 열\ 
+$F_1, \ldots, F_n$을 주는 것과 같다.
+\end{lemma}
+
+\begin{proof}
+이는\  $A$-대수\  $B$가 표준적으로 곱\  $B_1 \times \ldots \times B_n$이고\ 
+$A$-가군에 대해서도 같은 사실이 성립하기 때문이다.
+$F(B) = \coprod F_i(B_i)$로 놓으면 이 대응을 얻는다.
+세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-adequate-descent}
+$A \to A'$를 환 준동형이라 하고, $F$를\  $\textit{Alg}_A$ 위의
+가군값 함자라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $F$를\  $A'$-대수들의 범주로 제한한 함자\  $F'$는 적정이고,
+\item 임의의\  $A$-대수\  $B$에 대해 열
+$$
+0 \to F(B) \to F(B \otimes_A A') \to F(B \otimes_A A' \otimes_A A')
+$$
+은 완전하다.
+\end{enumerate}
+그러면\  $F$는 적정이다.
+\end{lemma}
+
+\begin{proof}
+함자\  $B \to F(B \otimes_A A')$와\ 
+$B \mapsto F(B \otimes_A A' \otimes_A A')$는 적정이다. Lemma
+\ref{lemma-pushforward-adequate}와\ 
+\ref{lemma-base-change-adequate}를 보라.
+따라서\  $F$는 적정 함자들 사이의 사상의 핵이므로 적정이다. Lemma
+\ref{lemma-kernel-adequate}를 보라.
+\end{proof}
+
+
+\section{적정 함자의 고차\  Ext}
+\label{section-higher-ext}
+
+\noindent
+$A$를 환이라 하자. Lemma \ref{lemma-extension-adequate}에서\ 
+$\textit{Alg}_A$ 위의 가군값 함자들의 범주에서 적정 함자들의
+임의의 확대가 적정임을 보았다. 이 절에서는 고차\  Ext 군에 대해서도
+같은 사실이 성립함을 보인다.
+
+\begin{lemma}
+\label{lemma-adjoint}
+$A$를 환이라 하자. $\textit{Alg}_A$ 위의 모든 가군값 함자\  $F$에
+대해, 다음 두 성질을 갖는\  $\textit{Alg}_A$ 위의 가군값 함자들의
+사상\  $Q(F) \to F$가
+존재한다. (1) $Q(F)$는 적정이고, (2) 모든 적정 함자\  $G$에 대해
+사상\  $\Hom(G, Q(F)) \to \Hom(G, F)$는 전단사이다.
+\end{lemma}
+
+\begin{proof}
+모든 선형 적정 함자가\  $L_i$ 중 하나와 동형이 되도록 선형 적정 함자들의
+집합\  $\{L_i\}_{i \in I}$를 택하자. 이러한 선택은 가능하다.
+(1)과, 모든\  $i \in I$에 대해 사상\ 
+$\Hom(L_i, Q(F)) \to \Hom(L_i, F)$가 전단사라는 성질 (2)'를 갖는\ 
+$Q(F) \to F$를 찾을 수 있다고 하자. 그러면 (2)가 성립한다.
+실제로\  Lemma \ref{lemma-adequate-surjection-from-linear}와\ 
+Lemma \ref{lemma-kernel-adequate}를 함께 적용하면, 모든 적정 함자\ 
+$G$는 완전열
+$$
+K \to L \to G \to 0
+$$
+에 놓이며, 여기서\  $K$와\  $L$은 선형 적정 함자들의 직합이다.
+따라서 (2)'에 의해\ 
+$\Hom(L, Q(F)) \to \Hom(L, F)$와\ 
+$\Hom(K, Q(F)) \to \Hom(K, F)$는 전단사이고, 그로부터\  $G$에
+대해서도 같은 결론을 얻는다.
+
+\medskip\noindent
+대상을\  $i \in I$와 사상\  $\varphi : L_i \to F$의 쌍\ 
+$(i, \varphi)$로 하는 범주\  $\mathcal{I}$를 생각하자.
+사상\  $(i, \varphi) \to (i', \varphi')$은\ 
+$\varphi' \circ \psi = \varphi$를 만족하는 사상\ 
+$\psi : L_i \to L_{i'}$이다. 다음과 같이 놓자.
+$$
+Q(F) = \colim_{(i, \varphi) \in \Ob(\mathcal{I})} L_i
+$$
+자연스러운 사상\  $Q(F) \to F$가 있다. Lemma
+\ref{lemma-colimit-adequate}에 의해 이는 적정이고, 구성상 성질
+(2)'를 갖는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-enough-injectives}
+$A$를 환이라 하자. $\mathcal{P}$를\  $\textit{Alg}_A$ 위의 가군값
+함자들의 범주라 하고, $\mathcal{A}$를\  $\textit{Alg}_A$ 위의 적정
+함자들의 범주라 하자. 포함함자를\  $i : \mathcal{A} \to \mathcal{P}$로
+쓰고, Lemma \ref{lemma-adjoint}의 구성을\ 
+$Q : \mathcal{P} \to \mathcal{A}$로 쓰자. 그러면
+\begin{enumerate}
+\item $i$는 충실충만하고 완전하며, 그 상은 약한\  Serre 부분범주이다.
+\item $\mathcal{P}$에는 단사대상이 충분히 많다.
+\item 함자\  $Q$는\  $i$의 오른쪽 수반이므로 왼쪽 완전이다.
+\item $Q$는 단사대상을 단사대상으로 보낸다.
+\item $\mathcal{A}$에는 단사대상이 충분히 많다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 지금까지 이미 본 몇 가지 사실을 모은 것뿐이다.
+(1)은 정의, 약한\  Serre 부분범주의 특성화(Homology, Lemma
+\ref{homology-lemma-characterize-weak-serre-subcategory}를 보라), 그리고\ 
+Lemmas \ref{lemma-cokernel-adequate}, \ref{lemma-kernel-adequate},
+및\  \ref{lemma-extension-adequate}로부터 명백하다.
+$\mathcal{P}$가 범주\ 
+$\textit{PMod}((\textit{Aff}/\Spec(A))_\tau, \mathcal{O})$와 동치임을
+상기하자. 따라서 (2)는\  Injectives, Proposition
+\ref{injectives-proposition-presheaves-modules}로부터 따른다.
+(3)은\  Lemma \ref{lemma-adjoint}와\  Categories, Lemma
+\ref{categories-lemma-adjoint-exact}로부터 따른다.
+(4)와 (5)는\  Homology, Lemmas
+\ref{homology-lemma-adjoint-preserve-injectives} 및\ 
+\ref{homology-lemma-adjoint-enough-injectives}로부터 따른다.
+\end{proof}
+
+\noindent
+$A$를 환이라 하자. Formal Deformation Theory, Section
+\ref{formal-defos-section-tangent-spaces-functors}에서와 같이,
+$A$-대수\  $B$와\  $B$-가군\  $N$이 주어졌을 때\  $B[N]$을 다음과 같이
+정한다. 이는 바탕\  $B$-가군이\  $B \oplus N$이고 곱셈이\ 
+$(b, m)(b', m ') = (bb', bm' + b'm)$으로 주어지는\  $R$-대수이다.
+이 구성은 쌍\  $(B, N)$에 대해 함자적이다. 여기서 사상\ 
+$(B, N) \to (B', N')$은\  $A$-대수 준동형\  $B \to B'$와\ 
+$B$-가군 준동형\  $N \to N'$로 주어진다. 어떤 의미에서 다음
+보조정리에 정의되는 쌍들의 함자\  $TF$는\  $F$의 접공간이다.
+이하에서는\  $B[N]$이\  $\textit{Alg}_A$의 대상인 쌍\  $(B, N)$만을
+고려한다.
+
+\begin{lemma}
+\label{lemma-tangent-functor}
+$A$를 환이라 하고, $F$를 가군값 함자라 하자.
+모든\  $B \in \Ob(\textit{Alg}_A)$와\  $B$-가군\  $N$에 대해 다음
+성질들로 특징지어지는 표준 분해가 있다.
+$$
+F(B[N]) = F(B) \oplus TF(B, N)
+$$
+\begin{enumerate}
+\item $TF(B, N) = \Ker(F(B[N]) \to F(B))$.
+\item $F(B[N])$ 위의\  $B[N]$-가군 구조와 양립하는\  $B$-가군 구조가\ 
+$TF(B, N)$ 위에 존재한다.
+\item $TF$는 쌍\  $(B, N)$들의 범주에서 정의된 함자이다.
+\item
+\label{item-mult-map}
+쌍\  $(B, N)$들의 범주에 정의된 함자들 사이의 변환을 유도하는
+표준 사상\  $N \otimes_B F(B) \to TF(B, N)$들이 있다.
+\item $TF(B, 0) = 0$이고, $N \to N'$가 영 사상이면 사상\ 
+$TF(B, N) \to TF(B, N')$도 영 사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$B \to B[N] \to B$의 합성이 항등사상이므로\  $F(B) \to F(B[N])$는
+직접인자이고, 그 여인자는 (1)에서 정의한\  $TF(N, B)$이다.
+이 구성은 쌍\  $(B, N)$에 대해 함자적이다. 실제로 쌍의 사상\ 
+$(B, N) \to (B', N')$이 주어지면\  $\textit{Alg}_A$에서 가환 그림
+$$
+\xymatrix{
+B' \ar[r] & B'[N'] \ar[r] & B' \\
+B \ar[r] \ar[u] & B[N] \ar[r] \ar[u] & B \ar[u]
+}
+$$
+을 얻는다. $B$-가군 구조는\  $B[N]$-가군 구조와 환 준동형\ 
+$B \to B[N]$으로부터 온다. (4)의 사상은 합성
+$$
+N \otimes_B F(B) \longrightarrow
+B[N] \otimes_{B[N]} F(B[N]) \longrightarrow F(B[N])
+$$
+이며, 그 상은\  $TF(B, N)$에 포함된다. (첫 번째 화살표는 포함\ 
+$N \to B[N]$과\  $F(B) \to F(B[N])$을 사용하고, 두 번째 화살표는
+곱셈 사상이다.) $N = 0$이면\  $B = B[N]$이므로\  $TF(B, 0) = 0$이다.
+$N \to N'$가 영 사상이면\  $N \to 0 \to N'$로 분해되므로,
+$TF(B, 0) = 0$에 의해 유도된 사상도 영 사상이다.
+\end{proof}
+
+\noindent
+$A$를 환, $M$을\  $A$-가군이라 하자. 그러면 가군값 함자\ 
+$\underline{M}$의 접공간\  $T\underline{M}$은\ 
+$T\underline{M}(B, N) = N \otimes_A M$으로 주어진다. 특히\  $B$가
+주어졌을 때 함자\  $N \mapsto T\underline{M}(B, N)$은 가법적이고
+오른쪽 완전이다. 단사 가군값 함자에 대해서도 같은 사실이 성립한다.
+
+\begin{lemma}
+\label{lemma-tangent-injective}
+$A$를 환이라 하고, $I$를 가군값 함자들의 범주의 단사대상이라 하자.
+임의의\  $B \in \Ob(\textit{Alg}_A)$와\  $B$-가군들의 짧은 완전열\ 
+$0 \to N_1 \to N \to N_2 \to 0$에 대해 열
+$$
+TI(B, N_1) \to TI(B, N) \to TI(B, N_2) \to 0
+$$
+은 완전하다.
+\end{lemma}
+
+\begin{proof}
+이하에서는\  Lemma \ref{lemma-tangent-functor}의 결과들을 별도의 언급
+없이 사용한다. $h : \textit{Alg}_A \to \textit{Sets}$를\ 
+$h(C) = \Mor_A(B[N], C)$로 주어지는 함자라 하자. $h_1$과\  $h_2$도
+마찬가지로 정의한다. 전사\  $N \to N_2$에 대응하는 사상\ 
+$B[N] \to B[N_2]$는 전사이다. 이는 모든\  $A$-대수\  $C$에 대해\ 
+$h_2(C) \to h(C)$가 단사인 사상\  $h_2 \to h$에 대응한다.
+한편 영 사상\  $N_1 \to N$과 단사\  $N_1 \to N$에 대응하는 두 사상\ 
+$p, q : h \to h_1$이 있다. 다음이 등화자 그림임에 유의하자.
+$$
+\xymatrix{
+h_2 \ar[r] & h \ar@<1ex>[r] \ar@<-1ex>[r] & h_1
+}
+$$
+$\mathcal{O}_h$를\  $C \mapsto \bigoplus_{h(C)} C$로 주어지는 가군값
+함자라 하자. $\mathcal{O}_{h_1}$과\  $\mathcal{O}_{h_2}$도 마찬가지로
+정의한다. 다음에 유의하자.
+$$
+\Hom_\mathcal{P}(\mathcal{O}_h, F) = F(B[N])
+$$
+여기서\  $\mathcal{P}$는\  $\textit{Alg}_A$ 위의 가군값 함자들의
+범주이다. 우리는\  $\mathcal{P}$에서 등화자 그림
+$$
+\xymatrix{
+\mathcal{O}_{h_2} \ar[r] &
+\mathcal{O}_h \ar@<1ex>[r] \ar@<-1ex>[r] &
+\mathcal{O}_{h_1}
+}
+$$
+이 있음을 주장한다. 실제로\  $C \in \Ob(\textit{Alg}_A)$이고\ 
+$\xi = \sum_{i = 1, \ldots, n} c_i \cdot f_i$라 하자. 여기서\ 
+$c_i \in C$이고\  $f_i : B[N] \to C$는\  $\mathcal{O}_h(C)$의 원소이다.
+$p(\xi) = q(\xi)$이면
+$$
+\sum c_i \cdot f_i \circ z = \sum c_i \cdot f_i \circ y
+$$
+임을 알 수 있다. 여기서\  $z, y : B[N_1] \to B[N]$는\ 
+$z : (b, m_1) \mapsto (b, 0)$와\ 
+$y : (b, m_1) \mapsto (b, m_1)$로 주어지는 사상이다. 이는 모든\ 
+$i$에 대해\  $f_j \circ z = f_i \circ y$를 만족하는\  $j$가 존재한다는
+뜻이다. 명백히 이로부터\  $f_i(N_1) = 0$, 즉\  $f_i$가 유일한 사상\ 
+$\overline{f}_i : B[N_2] \to C$를 통해 분해됨을 얻는다. 따라서\ 
+$\xi$는\  $\overline{\xi} = \sum c_i \cdot \overline{f}_i$의 상이다.
+$I$가 단사이므로 이 등화자 그림은 공등화자 그림
+$$
+\xymatrix{
+I(B[N_1]) \ar@<1ex>[r] \ar@<-1ex>[r] &
+I(B[N]) \ar[r] &
+I(B[N_2])
+}
+$$
+으로 보내진다. 이 그림은 직접합 분해\ 
+$I(B[N]) = I(B) \oplus TI(B, N)$ 및\ 
+$I(B[N_i]) = I(B) \oplus TI(B, N_i)$와 양립한다.
+영 사상\  $N \to N_1$은 영 사상\ 
+$TI(B, N) \to TI(B, N_1)$을 유도한다. 따라서 위 공등화자 성질은
+원하는 완전열\ 
+$TI(B, N_1) \to TI(B, N) \to TI(B, N_2) \to 0$을 준다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-exactness-implies}
+$A$를 환이라 하자. $F$를 다음 성질을 갖는 가군값 함자라 하자.
+임의의\  $B \in \Ob(\textit{Alg}_A)$에 대해\  $B$-가군 위의 함자\ 
+$TF(B, -)$는\  $B$-가군들의 짧은 완전열을 오른쪽 완전열로 보낸다.
+그러면
+\begin{enumerate}
+\item $TF(B, N_1 \oplus N_2) = TF(B, N_1) \oplus TF(B, N_2)$이다.
+\item $TF(B, N)$ 위에 두 번째 함자적\  $B$-가군 구조가 있다. 이는\ 
+$x \in TF(B, N)$와\  $b \in B$에 대해\ 
+$x \cdot b = TF(B, b\cdot 1_N)(x)$로 정의된다.
+\item
+\label{item-mult-map-linear}
+Lemma \ref{lemma-tangent-functor}의 표준 사상\ 
+$N \otimes_B F(B) \to TF(B, N)$은 두 번째\  $B$-가군 구조에
+대해서도\  $B$-선형이다.
+\item
+\label{item-tangent-right-exact}
+유한표시\  $B$-가군\  $N$이 주어지면 표준 동형\ 
+$TF(B, B) \otimes_B N \to TF(B, N)$이 있다. 여기서 텐서곱은\ 
+$TF(B, B)$ 위의 두 번째\  $B$-가군 구조를 사용한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이하에서는\  Lemma \ref{lemma-tangent-functor}의 결과들을 별도의 언급
+없이 사용한다. 사상\  $N_1 \to N_1 \oplus N_2$와\ 
+$N_2 \to N_1 \oplus N_2$는 사상\ 
+$TF(B, N_1) \oplus TF(B, N_2) \to TF(B, N_1 \oplus N_2)$를 준다.
+이는 단사이다. 실제로 사상\  $N_1 \oplus N_2 \to N_1$과\ 
+$N_1 \oplus N_2 \to N_2$가 역을 유도한다.
+$TF$가 오른쪽 완전이므로\ 
+$TF(B, N_1) \to TF(B, N_1 \oplus N_2) \to TF(B, N_2) \to 0$은
+완전하다. 따라서\ 
+$TF(B, N_1) \oplus TF(B, N_2) \to TF(B, N_1 \oplus N_2)$는
+동형이다. 이로써 (1)이 증명되었다.
+
+\medskip\noindent
+(2)를 위해 보일 것은\ 
+$x \cdot (b_1 + b_2) = x \cdot b_1 + x \cdot b_2$뿐이다.
+(결합법칙과 가법성은 명백하다.) 이를 보려면
+$$
+N \xrightarrow{(b_1, b_2)} N \oplus N \xrightarrow{+} N
+$$
+을 생각하고\  $TF(B, -)$를 적용한다.
+
+\medskip\noindent
+(3)은\  $N \otimes_B F(B) \to TF(B, N)$이 쌍\  $(B, N)$에 대해
+함자적이라는 사실로부터 바로 따른다.
+
+\medskip\noindent
+$N$을 유한표시\  $B$-가군이라 하자. 표시\ 
+$B^{\oplus m} \to B^{\oplus n} \to N \to 0$을 택한다. 그러면\ 
+$TF(B, -)$의 오른쪽 완전성에 의해 완전열
+$$
+TF(B, B^{\oplus m}) \to TF(B, B^{\oplus n}) \to TF(B, N) \to 0
+$$
+을 얻는다. (1)에 의해\ 
+$TF(B, B^{\oplus m}) = TF(B, B)^{\oplus m}$ 및\ 
+$TF(B, B^{\oplus n}) = TF(B, B)^{\oplus n}$으로 쓸 수 있다.
+이제\  $B^{\oplus m} \to B^{\oplus n}$이 행렬\  $T = (b_{ij})$로
+주어진다고 하자. 그러면 유도된 사상\ 
+$TF(B, B)^{\oplus m} \to TF(B, B)^{\oplus n}$은 성분이\ 
+$TF(B, b_{ij} \cdot 1_B)$인 행렬로 주어진다. 이를\  $\otimes$의
+오른쪽 완전성과 결합하면 (4)를 얻는다.
+\end{proof}
+
+\begin{example}
+\label{example-module-structure-different}
+$F$를\  Lemma \ref{lemma-exactness-implies}의 가군값 함자라 하자.
+$TF(B, N)$ 위의 두 가군 구조가 항상 일치하는 것은 아니다.
+다음은 한 예이다. $p$가 소수이고\  $A = \mathbf{F}_p$라고 하자.
+$F(B) = B$로 놓되, $B$-가군 구조를\  $b \cdot x = b^px$로 준다.
+그러면\  $TF(B, N) = N$이고, 그\  $B$-가군 구조는\  $x \in N$에 대해\ 
+$b \cdot x = b^px$로 주어진다. 그러나 두 번째\  $B$-가군 구조는\ 
+$x \cdot b = bx$로 주어진다. 이 경우 표준 사상\ 
+$N \otimes_B F(B) \to TF(B, N)$은 영 사상임에 유의하자. 실제로\ 
+$n \in B[N]$의\  $p$제곱은 영이다.
+\end{example}
+
+\noindent
+다음 보조정리에서는 다음 관찰을 자주 사용한다.
+$\textit{Alg}_A$ 위의 가군값 함자들의 완전열\ 
+$0 \to F \to G \to H \to 0$이 주어지면, 임의의 쌍\  $(B, N)$에
+대해 열\  $0 \to TF(B, N) \to TG(B, N) \to TH(B, N) \to 0$은
+완전하다. 이는\  $0 \to F(B[N]) \to G(B[N]) \to H(B[N]) \to 0$이
+완전하다는 사실로부터 따른다.
+
+\begin{lemma}
+\label{lemma-exactness-permanence}
+$A$를 환이라 하자. $F$가\  $\textit{Alg}_A$ 위의 가군값 함자일 때,
+모든\  $B \in \Ob(\textit{Alg}_A)$에 대해\  $B$-가군 위의 함자\ 
+$TF(B, -)$가\  $B$-가군들의 짧은 완전열을 오른쪽 완전열로 보내면\ 
+$(*)$가 성립한다고 하자. $\textit{Alg}_A$ 위의 가군값 함자들의
+짧은 완전열\  $0 \to F \to G \to H \to 0$을 택하자.
+\begin{enumerate}
+\item $F, G$에 대해\  $(*)$가 성립하면\  $H$에 대해서도\  $(*)$가 성립한다.
+\item $F, H$에 대해\  $(*)$가 성립하면\  $G$에 대해서도\  $(*)$가 성립한다.
+\item $H' \to H$가\  $\textit{Alg}_A$ 위의 가군값 함자들의 사상이고\ 
+$F$, $G$, $H$, $H'$에 대해\  $(*)$가 성립하면\ 
+$G \times_H H'$에 대해서도\  $(*)$가 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$B$가 주어졌다고 하자. $B$-가군들의 짧은 완전열\ 
+$0 \to N_1 \to N_2 \to N_3 \to 0$을 택하자. (1)은 다음 그림에서의
+그림쫓기로부터 따른다.
+$$
+\xymatrix{
+0 \ar[r] &
+TF(B, N_1) \ar[r] \ar[d] &
+TG(B, N_1) \ar[r] \ar[d] &
+TH(B, N_1) \ar[r] \ar[d] & 0 \\
+0 \ar[r] &
+TF(B, N_2) \ar[r] \ar[d] &
+TG(B, N_2) \ar[r] \ar[d] &
+TH(B, N_2) \ar[r] \ar[d] & 0 \\
+0 \ar[r] &
+TF(B, N_3) \ar[r] \ar[d] &
+TG(B, N_3) \ar[r] \ar[d] &
+TH(B, N_3) \ar[r] & 0 \\
+& 0 & 0
+}
+$$
+여기서 가로 행들은 완전하고, $TF$와\  $TG$를 포함하는 열들은
+완전하다. (2)를 증명하려면 다음 그림에서 그림쫓기를 한다.
+$$
+\xymatrix{
+0 \ar[r] &
+TF(B, N_1) \ar[r] \ar[d] &
+TG(B, N_1) \ar[r] \ar[d] &
+TH(B, N_1) \ar[r] \ar[d] & 0 \\
+0 \ar[r] &
+TF(B, N_2) \ar[r] \ar[d] &
+TG(B, N_2) \ar[r] \ar[d] &
+TH(B, N_2) \ar[r] \ar[d] & 0 \\
+0 \ar[r] &
+TF(B, N_3) \ar[r] \ar[d] &
+TG(B, N_3) \ar[r] &
+TH(B, N_3) \ar[r] \ar[d] & 0 \\
+& 0 & & 0
+}
+$$
+여기서 가로 행들은 완전하고, $TF$와\  $TH$를 포함하는 열들은
+완전하다. (3)은\  $G \times_H H'$가 완전열\ 
+$0 \to F \to G \times_H H' \to H' \to 0$에 놓이므로 (2)로부터
+따른다.
+\end{proof}
+
+\noindent
+이 절의 작업 대부분은 다음의 핵심적인 소멸 결과를 증명하기 위해
+수행되었다.
+
+\begin{lemma}
+\label{lemma-ext-group-zero-key}
+$A$를 환이라 하자. $M$, $P$를\  $A$-가군이라 하고\  $P$는 유한표시라고
+하자. 그러면\  $i > 0$에 대해\ 
+$\Ext^i_\mathcal{P}(\underline{P}, \underline{M}) = 0$이다. 여기서\ 
+$\mathcal{P}$는\  $\textit{Alg}_A$ 위의 가군값 함자들의 범주이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{P}$에서 단사 분해\  $\underline{M} \to I^\bullet$을 택한다.
+Lemma \ref{lemma-enough-injectives}를 보라. Derived Categories, Lemma
+\ref{derived-lemma-compute-ext-resolutions}에 의해\ 
+$\Ext^i_\mathcal{P}(\underline{P}, \underline{M})$의 임의의 원소는\ 
+$d^i \circ \varphi = 0$을 만족하는 사상\ 
+$\varphi : \underline{P} \to I^i$로부터 온다. $\varphi$에 대응하는\ 
+$\underline{P}$의\  $\underline{M}$에 의한\  Yoneda 확장
+$$
+E : 0 \to \underline{M} \to I^0 \to \ldots \to
+I^{i - 1} \times_{\Ker(d^i)} \underline{P} \to \underline{P} \to 0
+$$
+이 자명함을 보이겠다. 그러면\  Derived Categories, Lemma
+\ref{derived-lemma-yoneda-extension}에 의해 보조정리가 증명된다.
+
+\medskip\noindent
+$F$가\  $\textit{Alg}_A$ 위의 가군값 함자일 때, 모든\ 
+$B \in \Ob(\textit{Alg}_A)$에 대해\  $B$-가군 위의 함자\ 
+$TF(B, -)$가\  $B$-가군들의 짧은 완전열을 오른쪽 완전열로 보내면\ 
+$(*)$가 성립한다고 하자. 가군값 함자\ 
+$\underline{M}, I^n, \underline{P}$는 각각 성질\  $(*)$를 갖는다.
+Lemma \ref{lemma-tangent-injective}와 그 앞의 논의를 보라.
+$0 \to \underline{M} \to I^\bullet$을 짧은 완전열들로 나누고\ 
+Lemma \ref{lemma-exactness-permanence}를 적용하면, 각 함자\ 
+$\Im(d^{n - 1}) = \Ker(d^n) \subset I^n$가 성질\  $(*)$를 가지며\ 
+$I^{i - 1} \times_{\Ker(d^i)} \underline{P}$도 성질\  $(*)$를 가짐을
+알 수 있다.
+
+\medskip\noindent
+따라서\  Yoneda 확장이
+$$
+E : 0 \to \underline{M} \to F_{i - 1} \to \ldots \to
+F_0 \to \underline{P} \to 0
+$$
+으로 주어지고, 각 가군값 함자\  $F_j$가 성질\  $(*)$를 갖는다고
+가정해도 된다. $G_j(B) = TF_j(B, B)$로 놓고 이를\  Lemma
+\ref{lemma-exactness-implies}에서 정의한 {\it 두 번째} $B$-가군 구조를
+통해\  $B$-가군으로 본다. $TF_j$는 쌍들의 함자이므로\  $G_j$는\ 
+$\textit{Alg}_A$ 위의 가군값 함자이다. 또한\  $E$가 완전열이므로
+열\  $G_{j + 1} \to G_j \to G_{j - 1}$은 완전하다(Lemma
+\ref{lemma-exactness-permanence} 앞의 논의를 보라).
+$T\underline{M}(B, B) = M \otimes_A B = \underline{M}(B)$이고 여기서
+두\  $B$-가군 구조가 일치함에 유의하자. 따라서\  Yoneda 확장
+$$
+E' :  0 \to \underline{M} \to G_{i - 1} \to \ldots \to
+G_0 \to \underline{P} \to 0
+$$
+을 얻는다. 더욱이 표준 사상
+$$
+F_j(B) = B \otimes_B F_j(B) \longrightarrow TF_j(B, B) = G_j(B)
+$$
+은\  Lemma \ref{lemma-tangent-functor} (\ref{item-mult-map})의 사상이며,
+Lemma \ref{lemma-exactness-implies} (\ref{item-mult-map-linear})에 의해\ 
+$B$-선형이고\  $B$에 대해 함자적이다. 따라서\  Yoneda 확장들의 사상
+$$
+\xymatrix{
+0 \ar[r] &
+\underline{M} \ar[r] \ar[d]^1 &
+F_{i - 1} \ar[r] \ar[d] &
+\ldots \ar[r] &
+F_0 \ar[r] \ar[d] &
+\underline{P} \ar[r] \ar[d]^1 & 0 \\
+0 \ar[r] &
+\underline{M} \ar[r] &
+G_{i - 1} \ar[r] &
+\ldots \ar[r] &
+G_0 \ar[r] &
+\underline{P} \ar[r] & 0
+}
+$$
+을 얻는다. 특히 위에서 언급한\  Yoneda Ext에 관한 보조정리에 의해\ 
+$E$와\  $E'$는\  $\Ext^i_\mathcal{P}(\underline{P}, \underline{M})$에서
+같은 동치류를 갖는다. 마지막으로\  $N$을 유한표시\  $A$-가군이라 하자.
+그러면
+$$
+0 \to T\underline{M}(A, N) \to TF_{i - 1}(A, N) \to \ldots \to
+TF_0(A, N) \to T\underline{P}(A, N) \to 0
+$$
+은 완전하다. Lemma \ref{lemma-exactness-implies}
+(\ref{item-tangent-right-exact})에\  $B = A$를 대입하면, 이는\  $A$-가군들의
+열
+$$
+0 \to M \otimes_A N \to G_{i - 1}(A) \otimes_A N \to \ldots \to
+G_0(A) \otimes_A N \to P \otimes_A N \to 0
+$$
+이 완전하다는 뜻이다. 따라서\  $A$-가군들의 열\ 
+$0 \to M \to G_{i - 1}(A) \to \ldots \to G_0(A) \to P \to 0$은
+보편 완전하다. 즉 임의의 유한표시\  $A$-가군\  $N$과 텐서곱한 뒤에도
+완전하다. $K = \Ker(G_0(A) \to P)$로 놓으면 다음 완전열들이 있다.
+$$
+0 \to K \to G_0(A) \to P \to 0
+\quad\text{and}\quad
+G_2(A) \to G_1(A) \to K \to 0
+$$
+두 번째 열을\  $N$과 텐서곱하면\ 
+$K \otimes_A N = \Coker(G_2(A) \otimes_A N \to G_1(A) \otimes_A N)$을
+얻는다. 이어서\ 
+$G_2(A) \otimes_A N \to G_1(A) \otimes_A N \to G_0(A) \otimes_A N$의
+완전성으로부터\  $K \otimes_A N \to G_0(A) \otimes_A N$이 단사임을
+얻는다. Algebra, Theorem
+\ref{algebra-theorem-universally-exact-criteria}에 의해 이는\  $A$-가군 확장\ 
+$0 \to K \to G_0(A) \to P \to 0$이 완전하다는 뜻이다. $P$가
+유한표시라고 가정했으므로 이 열은 분할된다. Algebra, Lemma
+\ref{algebra-lemma-universally-exact-split}을 보라. 임의의 분할\ 
+$P \to G_0(A)$은 전사\  $G_0 \to \underline{P}$를 분할하는 사상\ 
+$\underline{P} \to G_0$를 정의한다. 따라서\  Yoneda 확장\  $E'$는 자명한\ 
+Yoneda 확장과 동치이고, 증명이 끝났다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-ext-group-zero}
+$A$를 환이라 하자. $M$을\  $A$-가군이라 하고, $L$을\ 
+$\textit{Alg}_A$ 위의 선형 적정 함자라 하자. 그러면\  $i > 0$에 대해\ 
+$\Ext^i_\mathcal{P}(L, \underline{M}) = 0$이다. 여기서\  $\mathcal{P}$는\ 
+$\textit{Alg}_A$ 위의 가군값 함자들의 범주이다.
+\end{lemma}
+
+\begin{proof}
+$L$이 선형 적정이므로 완전열
+$$
+0 \to L \to \underline{A^{\oplus m}} \to \underline{A^{\oplus n}} \to
+\underline{P} \to 0
+$$
+이 존재한다. 여기서\  $P = \Coker(A^{\oplus m} \to A^{\oplus n})$는
+선형 적정 함자의 정의에 나타나는 유한 자유\  $A$-가군들의 사상의
+여핵이다. Lemma \ref{lemma-ext-group-zero-key}에 의해\  $i > 0$에 대해\ 
+$\Ext^i_\mathcal{P}(\underline{P}, \underline{M})$와\ 
+$\Ext^i_\mathcal{P}(\underline{A}, \underline{M})$가 소멸한다.
+$K = \Ker(\underline{A^{\oplus n}} \to \underline{P})$로 놓자. 완전열\ 
+$0 \to K \to \underline{A^{\oplus n}} \to \underline{P} \to 0$에
+따르는\  Ext 군들의 긴 완전열에 의해\  $i > 0$에 대해\ 
+$\Ext^i_\mathcal{P}(K, \underline{M}) = 0$을 얻는다. 열\ 
+$0 \to L \to \underline{A^{\oplus m}} \to K \to 0$에 대해 같은 논증을
+반복하면 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-RQ-zero}
+Lemma \ref{lemma-enough-injectives}의 표기를 사용하자. 임의의 적정 함자\ 
+$F$와 모든\  $p > 0$에 대해\  $R^pQ(F) = 0$이다.
+\end{lemma}
+
+\begin{proof}
+완전열\  $0 \to F \to \underline{M^0} \to \underline{M^1}$을 택한다.
+$M^2 = \Coker(M^0 \to M^1)$로 놓으면\ 
+$0 \to F \to \underline{M^0} \to \underline{M^1}
+\to \underline{M^2} \to 0$은 분해이다. Derived Categories, Lemma
+\ref{derived-lemma-two-ss-complex-functor}에 의해 스펙트럼 열
+$$
+R^pQ(\underline{M^q}) \Rightarrow R^{p + q}Q(F)
+$$
+을 얻는다. $Q(\underline{M^q}) = \underline{M^q}$이므로 임의의\ 
+$A$-가군\  $M$과\  $p > 0$에 대해\  $R^pQ(\underline{M}) = 0$임을 보이면
+충분하다.
+
+\medskip\noindent
+범주\  $\mathcal{P}$에서 단사 분해\  $\underline{M} \to I^\bullet$을 택한다.
+$R^iQ(\underline{M})$이 영이 아니라고 하자. 그러면\ 
+$\Ker(Q(I^i) \to Q(I^{i + 1}))$는\  $Q(I^{i - 1}) \to Q(I^i)$의 상보다
+엄밀히 크다. 따라서\  Lemma \ref{lemma-adequate-surjection-from-linear}에
+의해 선형 적정 함자\  $L$과 사상\  $\varphi : L \to Q(I^i)$가 존재하여,
+그 상은\  $Q(I^i) \to Q(I^{i + 1})$의 핵에 놓이지만\ 
+$Q(I^{i - 1}) \to Q(I^i)$의 상을 통해 분해되지 않는다. $Q$가 포함함자의
+왼쪽 수반이므로 사상\  $\varphi$는 같은 성질을 갖는 사상\ 
+$\varphi' : L \to I^i$에 대응한다. 따라서\  $\varphi'$는\ 
+$\Ext^i_\mathcal{P}(L, \underline{M})$의 영이 아닌 원소를 주며, 이는\ 
+Lemma \ref{lemma-ext-group-zero}와 모순이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{적정 가군}
+\label{section-adequate}
+
+\noindent
+Descent, Section \ref{descent-section-quasi-coherent-sheaves}에서
+스킴\  $S$ 위의 준연접 가군은\  $S$에 딸린 임의의 큰 사이트\ 
+$(\Sch/S)_\tau$ 위의 준연접 가군과 같음을 보았다. 이 동일시에는
+두 가지 문제가 있음도 보았다.
+\begin{enumerate}
+\item $\QCoh(\mathcal{O}_S) \to
+\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$,
+$\mathcal{F} \mapsto \mathcal{F}^a$는 일반적으로 완전하지 않다
+(Descent, Lemma \ref{descent-lemma-equivalence-quasi-coherent-limits}).
+\item 준콤팩트이고 준분리인 사상\  $f : X \to S$가 주어져도
+함자\  $f_*$는 일반적으로 큰 사이트 위의 준연접층을 보존하지 않는다
+(Descent, Proposition
+\ref{descent-proposition-equivalence-quasi-coherent-functorial}).
+\end{enumerate}
+(1)은 코호몰로지층이 준연접인 복합체들로 이루어진\  $D(\mathcal{O})$의
+삼각 부분범주를 정의할 수 없음을 뜻한다. (2)는\  $\mathcal{F}$가
+준연접이고\  $f$가 준콤팩트이면서 준분리이더라도\ 
+$Rf_*\mathcal{F}$가 준연접 코호몰로지층을 갖는 복합체가 아님을 뜻한다.
+더욱이\  Descent, Lemma
+\ref{descent-lemma-equivalence-quasi-coherent-limits}와\ 
+Descent, Proposition
+\ref{descent-proposition-equivalence-quasi-coherent-functorial}의
+증명에 나오는 예들은 병적인 성격의 예가 아니다.
+
+\medskip\noindent
+이 절에서는\  $(\Sch/S)_\tau$ 위의\  $\mathcal{O}$-가군 가운데
+준연접 가군을 포함하고, 아벨 범주를 이루며, $f$가 준콤팩트이고
+준분리일 때\  $f_*$에 의해 보존되는 조금 더 큰 범주를 논한다.
+이를 위해\  $S$가 스킴이라고 하자. $\mathcal{F}$를\ 
+$(\Sch/S)_\tau$ 위의\  $\mathcal{O}$-가군의 전층이라 하자.
+$(\Sch/S)_\tau$의 임의의 아핀 대상\  $U = \Spec(A)$에 대해\ 
+$\mathcal{F}$를\  $(\textit{Aff}/U)_\tau$에 제한하면 이 사이트 위의\ 
+$\mathcal{O}$-가군의 전층을 얻는다. Section
+\ref{section-quasi-coherent}에서 본 대응하는 가군값 함자를
+$$
+F = F_{\mathcal{F}, A} :
+\textit{Alg}_A \longrightarrow \textit{Ab},
+\quad
+B \longmapsto \mathcal{F}(\Spec(B))
+$$
+로 나타내겠다. 대응\  $\mathcal{F} \mapsto F_{\mathcal{F}, A}$는
+아벨 범주들의 완전 함자이다.
+
+\begin{definition}
+\label{definition-adequate}
+$(\Sch/S)_\tau$ 위의\  $\mathcal{O}$-가군의 층\  $\mathcal{F}$가
+{\it 적정}하다는 것은, 모든\  $i \in I$에 대해\ 
+$F_{\mathcal{F}, A_i}$가 적정이 되게 하는\  $\tau$-피복\ 
+$\{\Spec(A_i) \to S\}_{i \in I}$가 존재한다는 뜻이다.
+\end{definition}
+
+\noindent
+아래에서 적정\  $\mathcal{O}$-가군의 범주가 선택한 위상\  $\tau$에
+의존하지 않음을 보일 것이다.
+
+\begin{lemma}
+\label{lemma-adequate-local}
+$S$를 스킴이라 하고, $\mathcal{F}$를\  $(\Sch/S)_\tau$ 위의 적정\ 
+$\mathcal{O}$-가군이라 하자. $S$ 위의 임의의 아핀 스킴\ 
+$\Spec(A)$에 대해 함자\  $F_{\mathcal{F}, A}$는 적정이다.
+\end{lemma}
+
+\begin{proof}
+모든\  $i \in I$에 대해\  $F_{\mathcal{F}, A_i}$가 적정이 되게 하는\ 
+$\tau$-피복\  $\{\Spec(A_i) \to S\}_{i \in I}$를 택하자.
+$\Spec(A'_j) \to \Spec(A) \to S$가 어떤\  $i(j) \in I$에 대해\ 
+$\Spec(A_{i(j)})$를 통해 분해되도록 하는 표준 아핀\  $\tau$-피복\ 
+$\{\Spec(A'_j) \to \Spec(A)\}_{j = 1, \ldots, m}$을 찾을 수 있다.
+그러면\  $F_{\mathcal{F}, A'_j}$는\  $F_{\mathcal{F}, A_{i(j)}}$를\ 
+$A'_j$-대수의 범주에 제한한 것이다. 따라서\  Lemma
+\ref{lemma-base-change-adequate}에 의해\  $F_{\mathcal{F}, A'_j}$는
+적정이다. Lemma \ref{lemma-adequate-product}에 의해\ 
+$F_{\mathcal{F}, A'_j}$들의 족은\ 
+$A' = A'_1 \times \ldots \times A'_m$ 위의 적정 ``곱'' 함자\ 
+$F'$에 대응한다. $\mathcal{F}$가 (Zariski 위상에 대한) 층이므로
+이 곱 함자\  $F'$는\  $F_{\mathcal{F}, A'}$와 같다. 즉\  $F$를\ 
+$A'$-대수에 제한한 것이다. 끝으로\ 
+$\{\Spec(A') \to \Spec(A)\}$는\  $\tau$-피복이다. 따라서\  Lemma
+\ref{lemma-adequate-descent}에 의해\  $F_{\mathcal{F}, A}$는 적정이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-adequate-affine}
+$S = \Spec(A)$를 아핀 스킴이라 하자. $(\Sch/S)_\tau$ 위의 적정\ 
+$\mathcal{O}$-가군의 범주는\  $\textit{Alg}_A$ 위의 적정 가군값
+함자의 범주와 동치이다.
+\end{lemma}
+
+\begin{proof}
+적정 가군\  $\mathcal{F}$가 주어지면\  Lemma
+\ref{lemma-adequate-local}에 의해 함자\  $F_{\mathcal{F}, A}$는 적정이다.
+적정 함자\  $F$가 주어지면 완전열\ 
+$0 \to F \to \underline{M} \to \underline{N}$을 택하고\ 
+$\mathcal{F} = \Ker(M^a \to N^a)$인\  $\mathcal{O}$-가군을 생각한다.
+여기서\  $M^a$는\  $S$ 위의 준연접층\  $\widetilde{M}$에 딸린\ 
+$(\Sch/S)_\tau$ 위의 준연접\  $\mathcal{O}$-가군을 나타낸다.
+$F = F_{\mathcal{F}, A}$이므로 특히 가군\  $\mathcal{F}$는 정의에
+의해 적정이다. 이 구성들이 서로 역인 범주의 동치를 정의한다는
+증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pullback-adequate}
+$f : T \to S$를 스킴의 사상이라 하자. $(\Sch/S)_\tau$ 위의 적정\ 
+$\mathcal{O}$-가군\  $\mathcal{F}$의 당김\  $f^*\mathcal{F}$는\ 
+$(\Sch/T)_\tau$ 위의 적정\  $\mathcal{O}$-가군이다.
+\end{lemma}
+
+\begin{proof}
+당김 사상\ 
+$f^* : \textit{Mod}((\Sch/S)_\tau, \mathcal{O}) \to
+\textit{Mod}((\Sch/T)_\tau, \mathcal{O})$는 제한으로 주어진다.
+즉\  $T$ 위의 임의의 스킴\  $V$에 대해\ 
+$f^*\mathcal{F}(V) = \mathcal{F}(V)$이다. 따라서 이 보조정리는\ 
+Lemma \ref{lemma-adequate-local}과 정의로부터 바로 따른다.
+\end{proof}
+
+\noindent
+적정\  $\mathcal{O}$-가군 범주의 한 특징화를 제시하겠다. 그 의미를
+이해하기 위해 스킴\  $S$ 위의 준연접\  $\mathcal{O}_S$-가군의 사상\ 
+$\mathcal{G} \to \mathcal{H}$를 생각하자. 이에 딸린\ 
+$\mathcal{O}$-가군의 사상\  $\mathcal{G}^a \to \mathcal{H}^a$의
+여핵은\  $(\mathcal{H}/\mathcal{G})^a$와 같으므로 준연접이다.
+그러나\  $\mathcal{G}^a \to \mathcal{H}^a$의 핵은 일반적으로
+준연접이 아니다. 그럼에도 이는 적정이다.
+
+\begin{lemma}
+\label{lemma-adequate-characterize}
+$S$를 스킴이라 하자. $\mathcal{F}$를\  $(\Sch/S)_\tau$ 위의\ 
+$\mathcal{O}$-가군이라 하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $\mathcal{F}$는 적정이다.
+\item 아핀 열린 피복\  $S = \bigcup S_i$와 준연접\ 
+$\mathcal{O}_{S_i}$-가군의 사상\  $\mathcal{G}_i \to \mathcal{H}_i$가
+존재하여\  $\mathcal{F}|_{(\Sch/S_i)_\tau}$가\ 
+$\mathcal{G}_i^a \to \mathcal{H}_i^a$의 핵이다.
+\item $\tau$-피복\  $\{S_i \to S\}_{i \in I}$와 준연접\ 
+$\mathcal{O}_{S_i}$-가군의 사상\  $\mathcal{G}_i \to \mathcal{H}_i$가
+존재하여\  $\mathcal{F}|_{(\Sch/S_i)_\tau}$가\ 
+$\mathcal{G}_i^a \to \mathcal{H}_i^a$의 핵이다.
+\item 각\  $f_i^*\mathcal{F}$가 적정이 되게 하는\  $\tau$-피복\ 
+$\{f_i : S_i \to S\}_{i \in I}$가 존재한다.
+\item $S$ 위의 임의의 아핀 스킴\  $U$에 대해 제한\ 
+$\mathcal{F}|_{(\Sch/U)_\tau}$는 준연접\  $\mathcal{O}_U$-가군의
+사상\  $\mathcal{G}^a \to \mathcal{H}^a$의 핵이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U = \Spec(A)$를\  $S$ 위의 아핀 스킴이라 하자.
+$F = F_{\mathcal{F}, A}$로 놓는다. 정의에 의해 함자\  $F$가 적정일
+필요충분조건은\  $F = \Ker(\underline{M} \to \underline{N})$이
+되게 하는\  $A$-가군의 사상\  $M \to N$이 존재하는 것이다.
+이를\  Lemma \ref{lemma-adequate-local} 및\ 
+\ref{lemma-adequate-affine}과 결합하면 (1)과 (5)가 동치임을 알 수 있다.
+
+\medskip\noindent
+(5)가 (2)를 함의하고 (2)가 (3)을 함의함은 명백하다. (3)이
+성립하면 각\  $S_i = \Spec(A_i)$가 아핀이 되도록 피복\ 
+$\{S_i \to S\}$를 세분할 수 있다. 그러면 증명 첫머리의 관찰로부터\ 
+$F_{\mathcal{F}, A_i}$가 적정임을 알 수 있다. 따라서 정의에 의해\ 
+$\mathcal{F}$는 적정이다. 이로써 (3)이 (1)을 함의한다.
+
+\medskip\noindent
+끝으로 한 방향에는\  Lemma \ref{lemma-pullback-adequate}를 사용하고,
+다른 방향에는\  $\tau$-피복의 합성이\  $\tau$-피복이라는 사실을
+사용하면 (4)와 (1)이 동치이다.
+\end{proof}
+
+\noindent
+준연접층의 경우와 마찬가지로 적정 가군의 범주는 위상에 의존하지 않는다.
+
+\begin{lemma}
+\label{lemma-adequate-fpqc}
+$\mathcal{F}$를\  $(\Sch/S)_\tau$ 위의 적정\  $\mathcal{O}$-가군이라
+하자. $S$ 위의 아핀 스킴들의 임의의 전사 평탄 사상\ 
+$\Spec(B) \to \Spec(A)$에 대해 증대된 {\v C}ech 복합체
+$$
+0 \to \mathcal{F}(\Spec(A)) \to
+\mathcal{F}(\Spec(B)) \to
+\mathcal{F}(\Spec(B \otimes_A B)) \to \ldots
+$$
+는 완전하다. 특히\  $\mathcal{F}$는\  fpqc 피복에 대한 층 조건을
+만족하고\  $(\Sch/S)_{fppf}$ 위의\  $\mathcal{O}$-가군의 층이다.
+\end{lemma}
+
+\begin{proof}
+보조정리에서와 같은\  $A \to B$에 대해\ 
+$F = F_{\mathcal{F}, A}$로 놓자. Lemma
+\ref{lemma-adequate-local}에 의해 이 함자는 적정이다. $A \to B$,
+$A \to B \otimes_A B$ 등이 평탄하므로\  Lemma
+\ref{lemma-adequate-flat}에 의해\ 
+$F(B) = F(A) \otimes_A B$,
+$F(B \otimes_A B) = F(A) \otimes_A B \otimes_A B$ 등을 얻는다.
+완전성은\  Descent, Lemma \ref{descent-lemma-ff-exact}에서 따른다.
+
+\medskip\noindent
+따라서\  $\mathcal{F}$는\  $\tau$-피복(특히\  Zariski 피복)과 아핀의
+충실히 평탄한 단일 아핀 피복에 대한 층 조건을 만족한다.
+Descent, Lemma \ref{descent-lemma-standard-fpqc-covering}과\ 
+Descent, Proposition
+\ref{descent-proposition-fpqc-descent-quasi-coherent}의 증명에서와 같이
+논증하면\  $\mathcal{F}$가 ($(\Sch/S)_\tau$의 대상들로 이루어진)
+모든\  fpqc 피복에 대한 층 조건을 만족한다고 결론내릴 수 있다.
+세부사항은 생략한다.
+\end{proof}
+
+\noindent
+특히\  Lemma \ref{lemma-adequate-fpqc}는 임의의 두 위상\ 
+$\tau, \tau'$에 대해\  $\tau$-위상의 적정 가군과\  $\tau'$-위상의
+적정 가군의 모임이 (바탕 범주\  $\Sch/S$ 위의 가군 전층으로서)
+같음을 보여 준다.
+
+\begin{definition}
+\label{definition-category-adequate-modules}
+$S$를 스킴이라 하자. $(\Sch/S)_\tau$ 위의 적정\ 
+$\mathcal{O}$-가군의 범주를 {\it $\textit{Adeq}(\mathcal{O})$} 또는
+{\it $\textit{Adeq}((\Sch/S)_\tau, \mathcal{O})$}로 나타낸다.
+위상을 선택하지 않고 적정 가군의 아벨 범주만 생각하고자 할 때는
+간단히 {\it $\textit{Adeq}(S)$}라고 쓴다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-same-cohomology-adequate}
+$S$를 스킴이라 하고, $\mathcal{F}$를\  $(\Sch/S)_\tau$ 위의 적정\ 
+$\mathcal{O}$-가군이라 하자.
+\begin{enumerate}
+\item 제한\  $\mathcal{F}|_{S_{Zar}}$는 스킴\  $S$ 위의 준연접\ 
+$\mathcal{O}_S$-가군이다.
+\item 제한\  $\mathcal{F}|_{S_\etale}$은\ 
+$\mathcal{F}|_{S_{Zar}}$에 딸린 준연접 가군이다.
+\item $S$ 위의 임의의 아핀 스킴\  $U$에 대해 모든\  $q > 0$에 대해\ 
+$H^q(U, \mathcal{F}) = 0$이다.
+\item 표준 동형
+$$
+H^q(S, \mathcal{F}|_{S_{Zar}}) =
+H^q((\Sch/S)_\tau, \mathcal{F}).
+$$
+이 있다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-adequate-flat}과\ 
+Lemma \ref{lemma-adequate-local}에 의해\  $S$ 위의 아핀 스킴들의
+임의의 평탄 사상\  $U \to V$에 대해\ 
+$\mathcal{F}(U) = \mathcal{F}(V) \otimes_{\mathcal{O}(V)} \mathcal{O}(U)$
+이다. 특히\  $U \subset V \subset S$가\  $S$의 아핀 열린집합이면
+이 사실을 적용할 수 있으므로\  $\mathcal{F}|_{S_{Zar}}$는 준연접이다.
+따라서 (1)이 성립한다.
+
+\medskip\noindent
+$S' \to S$를 스킴의 \'etale 사상이라 하자. 아핀 열린집합\ 
+$V \subset S$로 사상되는 아핀 열린집합\  $U \subset S'$에
+대해\  $U \to V$가 \'etale, 따라서 평탄이므로\ 
+$\mathcal{F}(U) = \mathcal{F}(V) \otimes_{\mathcal{O}(V)} \mathcal{O}(U)$
+이다. 그러므로\  $\mathcal{F}|_{S'_{Zar}}$는\ 
+$\mathcal{F}|_{S_{Zar}}$의 당김이다. 이로써 (2)가 증명된다.
+
+\medskip\noindent
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cech-vanish-collection}을
+사이트\  $(\Sch/S)_\tau$에 적용하겠다. 여기서\  $\mathcal{B}$는\ 
+$S$ 위의 아핀 스킴들의 집합이고, $\text{Cov}$는 표준 아핀\ 
+$\tau$-피복들의 집합이다. 그 보조정리의 가정 (3)은\  Descent,
+Lemma \ref{descent-lemma-standard-covering-Cech}에 의해, 그리고 단일
+아핀에 의한 피복의 경우에는\  Lemma \ref{lemma-adequate-fpqc}에 의해
+성립한다. 따라서\  $S$ 위의 모든 아핀 스킴\  $U$에 대해\ 
+$H^p(U, \mathcal{F}) = 0$이라고 결론내린다. 이로써 (3)이 증명된다.
+Descent, Proposition
+\ref{descent-proposition-same-cohomology-quasi-coherent}의 증명과
+완전히 같은 방식으로 이 사실은 코호몰로지의 등식 (4)를 함의한다.
+\end{proof}
+
+\begin{remark}
+\label{remark-compare}
+$S$를 스킴이라 하자. 다음 함자들이 있다.
+$u : \QCoh(\mathcal{O}_S) \to \textit{Adeq}(\mathcal{O})$
+및\ 
+$v : \textit{Adeq}(\mathcal{O}) \to \QCoh(\mathcal{O}_S)$.
+구체적으로 함자\  $u : \mathcal{F} \mapsto \mathcal{F}^a$는\ 
+Lemma \ref{lemma-adequate-characterize}에 의해 적정인, 딸린\ 
+$\mathcal{O}$-가군을 취하여 얻는다. 역으로 함자\  $v$는 제한\ 
+$v : \mathcal{G} \mapsto \mathcal{G}|_{S_{Zar}}$에서 얻는다.
+Lemma \ref{lemma-same-cohomology-adequate}를 보라.
+$\mathcal{F}^a$는 환 달린 토포스의 사상\ 
+$((\Sch/S)_\tau, \mathcal{O}) \to (S_{Zar}, \mathcal{O}_S)$ 아래의\ 
+$\mathcal{F}$의 당김으로 서술할 수 있다. Descent, Remark
+\ref{descent-remark-change-topologies-ringed-sites}를 보라. 또한 제한은
+직접상이므로\  $u$와\  $v$는 다음과 같이 수반이다.
+$$
+\SheafHom_{\mathcal{O}_S}(\mathcal{F}, v\mathcal{G})
+=
+\SheafHom_\mathcal{O}(u\mathcal{F}, \mathcal{G})
+$$
+여기서\  $\mathcal{O}$는 큰 사이트 위의 구조층을 나타낸다. 이 서술로부터
+모든 준연접층에 대해 수반 사상\ 
+$\mathcal{F} \to vu\mathcal{F}$가 동형임이 곧바로 따른다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-sheafification-adequate}
+$S$를 스킴이라 하자. $\mathcal{F}$를\  $(\Sch/S)_\tau$ 위의\ 
+$\mathcal{O}$-가군의 전층이라 하자. $S$ 위의 모든 아핀 스킴\ 
+$\Spec(A)$에 대해 함자\  $F_{\mathcal{F}, A}$가 적정이면\ 
+$\mathcal{F}$의 층화는 적정\  $\mathcal{O}$-가군이다.
+\end{lemma}
+
+\begin{proof}
+$U = \Spec(A)$를\  $S$ 위의 아핀 스킴이라 하자.
+$F = F_{\mathcal{F}, A}$로 놓는다. Sites, Section
+\ref{sites-section-sheafification}을 참조하면 층화는\ 
+$\mathcal{F}^\# = (\mathcal{F}^+)^+$이다. 구성에 의해
+$$
+(\mathcal{F})^+(U) =
+\colim_\mathcal{U} \check{H}^0(\mathcal{U}, \mathcal{F})
+$$
+이다. 여기서 여극한은 사이트\  $(\Sch/S)_\tau$의 피복들에 걸쳐
+취한다. $U$가 아핀이므로\  $U$의 표준 아핀\  $\tau$-피복\ 
+$\mathcal{U} = \{U_i \to U\}_{i \in I} =
+\{\Spec(A_i) \to \Spec(A)\}_{i \in I}$들만 취해도 충분하다.
+각\  $A \to A_i$와\  $A \to A_i \otimes_A A_j$가 평탄하므로\  Lemma
+\ref{lemma-adequate-flat}에 의해
+$$
+\check{H}^0(\mathcal{U}, \mathcal{F}) =
+\Ker(\prod F(A) \otimes_A A_i \to \prod F(A) \otimes_A A_i \otimes_A A_j)
+$$
+이다. $A \to \prod A_i$가 충실히 평탄하므로\  Descent, Lemma
+\ref{descent-lemma-ff-exact}에 의해 이는 언제나\  $F(A)$와 표준적으로
+동형이다. 따라서 전층\  $(\mathcal{F})^+$는\  $S$ 위의 모든 아핀
+스킴에서\  $\mathcal{F}$와 같은 값을 갖는다. 이 논증을 한 번 더
+반복하면\  $\mathcal{F}^\# = ((\mathcal{F})^+)^+$에 대해서도 같은
+결론을 얻는다. 따라서\ 
+$F_{\mathcal{F}, A} = F_{\mathcal{F}^\#, A}$이고,
+$\mathcal{F}^\#$가 적정이라고 결론내린다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-abelian-adequate}
+$S$를 스킴이라 하자.
+\begin{enumerate}
+\item 범주\  $\textit{Adeq}(\mathcal{O})$는 아벨 범주이다.
+\item 함자\ 
+$\textit{Adeq}(\mathcal{O}) \to
+\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$는 완전하다.
+\item $0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$이\ 
+$\mathcal{O}$-가군들의 짧은 완전열이고\  $\mathcal{F}_1$과\ 
+$\mathcal{F}_3$가 적정이면\  $\mathcal{F}_2$도 적정이다.
+\item 범주\  $\textit{Adeq}(\mathcal{O})$는 여극한들을 가지며,
+$\textit{Adeq}(\mathcal{O}) \to
+\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$는 이들과 가환한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\varphi : \mathcal{F} \to \mathcal{G}$를 적정\ 
+$\mathcal{O}$-가군들의 사상이라 하자. (1)과 (2)를 증명하려면\ 
+$\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$에서 계산한\ 
+$\mathcal{K} = \Ker(\varphi)$와\  $\mathcal{Q} = \Coker(\varphi)$가
+적정임을 보이면 충분하다. $U = \Spec(A)$를\  $S$ 위의 아핀
+스킴이라 하자. $F = F_{\mathcal{F}, A}$ 및\ 
+$G = F_{\mathcal{G}, A}$라 하자. Lemma
+\ref{lemma-kernel-adequate}와\  \ref{lemma-cokernel-adequate}에 의해
+유도된 사상\  $F \to G$의 핵\  $K$와 여핵\  $Q$는 적정 함자이다.
+핵은 전층의 수준에서 계산되므로\  $K = F_{\mathcal{K}, A}$이고,
+따라서\  $\mathcal{K}$는 적정이다. 여핵에 관한 결과를 증명하기 위해\ 
+$\mathcal{Q}'$를\  $\varphi$의 전층 여핵이라 하자. 그러면\ 
+$Q = F_{\mathcal{Q}', A}$이고\  $\mathcal{Q} = (\mathcal{Q}')^\#$이다.
+따라서\  Lemma \ref{lemma-sheafification-adequate}에 의해\ 
+$\mathcal{Q}$는 적정이다.
+
+\medskip\noindent
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$을\ 
+$\mathcal{O}$-가군들의 짧은 완전열이라 하고\  $\mathcal{F}_1$과\ 
+$\mathcal{F}_3$가 적정이라고 하자. $U = \Spec(A)$를\  $S$ 위의
+아핀 스킴이라 하고, $F_i = F_{\mathcal{F}_i, A}$라 하자.
+함자들의 열
+$$
+0 \to F_1 \to F_2 \to F_3 \to 0
+$$
+은 완전하다. 실제로\  $U$ 위의 아핀 스킴\  $V = \Spec(B)$에 대해\ 
+Lemma \ref{lemma-same-cohomology-adequate}에 의해\ 
+$H^1(V, \mathcal{F}_1) = 0$이다. Lemma
+\ref{lemma-adequate-local}에 의해\  $F_1$과\  $F_3$는 적정 함자이므로\ 
+Lemma \ref{lemma-extension-adequate}에 의해\  $F_2$도 적정이다.
+따라서\  $\mathcal{F}_2$는 적정이다.
+
+\medskip\noindent
+$\mathcal{I} \to \textit{Adeq}(\mathcal{O})$,
+$i \mapsto \mathcal{F}_i$를 도표라 하자.
+$\mathcal{F} = \colim_i \mathcal{F}_i$를\ 
+$\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$에서 계산한 여극한이라
+하자. (4)를 증명하려면\  $\mathcal{F}$가 적정임을 보이면 충분하다.
+$\mathcal{F}' = \colim_i \mathcal{F}_i$를\  $\mathcal{O}$-가군의
+전층에서 계산한 여극한이라 하자. 그러면\ 
+$\mathcal{F} = (\mathcal{F}')^\#$이다. $U = \Spec(A)$를\  $S$ 위의
+아핀 스킴이라 하고, $F_i = F_{\mathcal{F}_i, A}$라 하자.
+Lemma \ref{lemma-colimit-adequate}에 의해 함자\ 
+$\colim_i F_i = F_{\mathcal{F}', A}$는 적정이다. Lemma
+\ref{lemma-sheafification-adequate}는\  $\mathcal{F}$가 적정임을 보여 준다.
+\end{proof}
+
+\noindent
+다음 보조정리는 준콤팩트이고 준분리인 사상 아래에서 적정 가군의
+전체 직접상\  $Rf_*\mathcal{F}$가 적정 코호몰로지층을
+갖는 복합체임을 알려 준다.
+
+\begin{lemma}
+\label{lemma-direct-image-adequate}
+$f : T \to S$를 스킴의 준콤팩트이고 준분리인 사상이라 하자.
+$(\Sch/T)_\tau$ 위의 임의의 적정\  $\mathcal{O}_T$-가군에 대해 직접상\ 
+$f_*\mathcal{F}$와 고차 직접상\  $R^if_*\mathcal{F}$는\ 
+$(\Sch/S)_\tau$ 위의 적정\  $\mathcal{O}_S$-가군이다.
+\end{lemma}
+
+\begin{proof}
+먼저 고차 직접상을 계산하는 방법을 설명하자. 단사 분해\ 
+$\mathcal{F} \to \mathcal{I}^\bullet$을 택한다. 그러면\ 
+$R^if_*\mathcal{F}$는 복합체\  $f_*\mathcal{I}^\bullet$의\ 
+$i$번째 코호몰로지층이다. 따라서\  $R^if_*\mathcal{F}$는\ 
+$(\Sch/S)_\tau$의 대상\  $U/S$에 다음 가군을 대응시키는 전층에
+딸린 층이다.
+\begin{align*}
+\frac{\Ker(f_*\mathcal{I}^i(U) \to f_*\mathcal{I}^{i + 1}(U))}
+{\Im(f_*\mathcal{I}^{i - 1}(U) \to f_*\mathcal{I}^i(U))}
+& =
+\frac{\Ker(\mathcal{I}^i(U \times_S T) \to
+\mathcal{I}^{i + 1}(U \times_S T))}
+{\Im(\mathcal{I}^{i - 1}(U \times_S T) \to \mathcal{I}^i(U \times_S T))}
+\\
+& =
+H^i(U \times_S T, \mathcal{F}) \\
+& = H^i((\Sch/U \times_S T)_\tau,
+\mathcal{F}|_{(\Sch/U \times_S T)_\tau}) \\
+& = H^i(U \times_S T, \mathcal{F}|_{(U \times_S T)_{Zar}})
+\end{align*}
+첫 번째 등식은\  Topologies, Lemma
+\ref{topologies-lemma-morphism-big-fppf}(및 다른 위상들에 대한
+그 유사 명제)에서 따르고, 두 번째 등식은\  $(\Sch/T)_\tau$의 대상
+위에서\  $\mathcal{F}$의 코호몰로지를 정의하는 방식에서 따르며,
+세 번째 등식은\  Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cohomology-of-open}에서, 마지막 등식은\ 
+Lemma \ref{lemma-same-cohomology-adequate}에서 따른다. 따라서\ 
+Lemma \ref{lemma-sheafification-adequate}에 의해 다음 문단의 주장을
+증명하면 충분하다.
+
+\medskip\noindent
+$A$를 환이라 하자. $T$를\  $A$ 위에서 준콤팩트이고 준분리인
+스킴이라 하자. $\mathcal{F}$를\  $(\Sch/T)_\tau$ 위의 적정\ 
+$\mathcal{O}_T$-가군이라 하자. $A$-대수\  $B$에 대해\ 
+$T_B = T \times_{\Spec(A)} \Spec(B)$로 놓고,
+$\mathcal{F}_B = \mathcal{F}|_{(T_B)_{Zar}}$를\  $\mathcal{F}$의\ 
+$T_B$의 작은\  Zariski 사이트로의 제한이라 하자. (이는 스킴\ 
+$T_B$ 위의 ``보통의'' 준연접층임을 상기하자. Lemma
+\ref{lemma-same-cohomology-adequate}를 보라.) 주장: 함자
+$$
+B \longmapsto H^q(T_B, \mathcal{F}_B)
+$$
+는 적정이다. $T$를 조각들로 나누는 통상적인 절차로 보조정리를
+증명하겠다.
+
+\medskip\noindent
+경우\  I: $T$가 아핀인 경우. 이때 스킴\  $T_B$들은 모두 아핀이며
+모든\  $q \geq 1$에 대해\  $H^q(T_B, \mathcal{F}_B) = 0$이다.
+함자\  $B \mapsto H^0(T_B, \mathcal{F}_B)$는\  Lemma
+\ref{lemma-pushforward-adequate}에 의해 적정이다.
+
+\medskip\noindent
+경우\  II: $T$가 분리인 경우. $T$를 덮는 데 필요한 아핀들의 최소
+개수를\  $n$이라 하자. $n$에 대한 귀납법을 쓴다. 기초 단계는
+경우\  I이다. 아핀 열린 피복\  $T = V_1 \cup \ldots \cup V_n$을 택한다.
+$V = V_1 \cup \ldots \cup V_{n - 1}$ 및\  $U = V_n$으로 놓는다.
+$T$가 분리이므로
+$$
+U \cap V = (V_1 \cap V_n) \cup \ldots \cup (V_{n - 1} \cap V_n)
+$$
+도\  $n - 1$개의 아핀 열린집합의 합집합임에 유의하자. Schemes,
+Lemma \ref{schemes-lemma-characterize-separated}를 보라. 각\  $B$에
+대해 기저변환\  $U_B$, $V_B$와\ 
+$(U \cap V)_B = U_B \cap V_B$도 같은 방식으로 거동한다. 따라서
+각\  $B$에 대해\  $B$에 함자적인 긴 완전열
+$$
+0 \to
+H^0(T_B, \mathcal{F}_B) \to
+H^0(U_B, \mathcal{F}_B) \oplus H^0(V_B, \mathcal{F}_B) \to
+H^0((U \cap V)_B, \mathcal{F}_B) \to
+H^1(T_B, \mathcal{F}_B) \to \ldots
+$$
+을 얻는다. Cohomology, Lemma
+\ref{cohomology-lemma-mayer-vietoris}를 보라. 귀납가정에 의해 함자들\ 
+$B \mapsto H^q(U_B, \mathcal{F}_B)$,
+$B \mapsto H^q(V_B, \mathcal{F}_B)$ 및\ 
+$B \mapsto H^q((U \cap V)_B, \mathcal{F}_B)$는 적정이다.
+Lemma \ref{lemma-kernel-adequate}와\ 
+\ref{lemma-cokernel-adequate}를 사용하면 우리 함자\ 
+$B \mapsto H^q(T_B, \mathcal{F}_B)$가 바깥 항들이 적정인 짧은
+완전열의 가운데 놓임을 알 수 있다. 따라서 주장은\  Lemma
+\ref{lemma-extension-adequate}에서 따른다.
+
+\medskip\noindent
+경우\  III: 일반적인 준콤팩트 준분리 경우. 증명은 다시\  $T$를 덮는
+데 필요한 아핀들의 개수\  $n$에 대한 귀납법이다. 기초 단계\ 
+$n = 1$은 경우\  I이다. 아핀 열린 피복\ 
+$T = V_1 \cup \ldots \cup V_n$을 택하고,
+$V = V_1 \cup \ldots \cup V_{n - 1}$ 및\  $U = V_n$으로 놓는다.
+$T$가 준분리이므로\  $U \cap V$는 아핀 스킴의 준콤팩트 열린집합이다.
+따라서 경우\  II를 적용할 수 있다. 나머지 논증은 바로 위 문단과
+완전히 같은 방식으로 진행되므로 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+\section{기생 적정 가군}
+\label{section-parasitic}
+
+\noindent
+이 절에서는 스킴\  $S$ 위의 적정 가군과 준연접 가군을 비교하기
+시작한다. 함자\ 
+$u : \QCoh(\mathcal{O}_S) \to \textit{Adeq}(\mathcal{O})$
+및\ 
+$v : \textit{Adeq}(\mathcal{O}) \to \QCoh(\mathcal{O}_S)$가 있고,
+이들은 수반
+$$
+\SheafHom_{\QCoh(\mathcal{O}_S)}(\mathcal{F}, v\mathcal{G})
+=
+\SheafHom_{\textit{Adeq}(\mathcal{O})}(u\mathcal{F}, \mathcal{G})
+$$
+을 만족하며, 모든 준연접층\  $\mathcal{F}$에 대해\ 
+$\mathcal{F} \to vu\mathcal{F}$가 동형임을 상기하자. Remark
+\ref{remark-compare}를 보라. 따라서\  $u$는 충실충만 매장이며\ 
+$\QCoh(\mathcal{O}_S)$를\  $\textit{Adeq}(\mathcal{O})$의 충만한
+부분범주와 동일시할 수 있다. 함자\  $v$는 완전하지만\  $u$는
+일반적으로 왼쪽 완전하지 않다. $v$의 핵은 기생 적정 가군들의
+부분범주이다.
+
+\medskip\noindent
+Descent, Definition \ref{descent-definition-parasitic}에서 기생 가군을
+정의하였다. 적정 가군의 경우 이 개념은 선택한 위상에 의존하지 않는다.
+
+\begin{lemma}
+\label{lemma-parasitic-adequate}
+$S$를 스킴이라 하고, $\mathcal{F}$를\  $(\Sch/S)_\tau$ 위의 적정\ 
+$\mathcal{O}$-가군이라 하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $v\mathcal{F} = 0$,
+\item $\mathcal{F}$는 기생이다.
+\item $\mathcal{F}$는\  $\tau$-위상에 대해 기생이다.
+\item 모든 열린집합\  $U \subset S$에 대해\  $\mathcal{F}(U) = 0$이다.
+\item 모든\  $i$에 대해\  $\mathcal{F}(U_i) = 0$이 되게 하는 아핀 열린
+피복\  $S = \bigcup U_i$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+함의 (2) $\Rightarrow$ (3) $\Rightarrow$ (4) $\Rightarrow$ (5)는
+정의로부터 바로 따른다. (5)를 가정하자. 모든\  $i$에 대해\ 
+$\mathcal{F}(U_i) = 0$인 아핀 열린 피복\  $S = \bigcup U_i$가 있다고
+하자. $V \to S$를 평탄 사상이라 하자. 각\  $V_j$가 어떤\  $U_i$로
+사상되는 아핀 열린 피복\  $V = \bigcup V_j$가 존재한다. 사상\ 
+$V_j \to S$가 평탄하므로\  $V_j \to U_i$도 평탄하다. 따라서 대응하는
+환 사상\  $A_i = \mathcal{O}(U_i) \to \mathcal{O}(V_j) = B_j$는
+평탄하다. 그러므로\  Lemma \ref{lemma-adequate-local}과\ 
+Lemma \ref{lemma-adequate-flat}에 의해\ 
+$\mathcal{F}(U_i) \otimes_{A_i} B_j \to \mathcal{F}(V_j)$는
+동형이다. 따라서\  $\mathcal{F}(V_j) = 0$이다. $\mathcal{F}$는\ 
+Zariski 위상에 대한 층이므로\  $\mathcal{F}(V) = 0$이라고 결론내린다.
+이로써 (5)가 (2)를 함의함을 알 수 있다.
+
+\medskip\noindent
+이는 (2), (3), (4), (5)의 동치를 증명한다. (1)은 (3)과
+동치이므로(Remark \ref{remark-compare}를 보라), 다섯 조건이 모두
+동치라고 결론내린다.
+\end{proof}
+
+\noindent
+$S$를 스킴이라 하자. 기생 적정 가군들의 부분범주는\ 
+$\textit{Adeq}(\mathcal{O})$의\  Serre 부분범주이다. 그 몫은
+준연접 가군의 범주이다.
+
+\begin{lemma}
+\label{lemma-adequate-by-parasitic}
+$S$를 스킴이라 하자. 기생 적정 가군들의 부분범주\ 
+$\mathcal{C} \subset \textit{Adeq}(\mathcal{O})$는\  Serre
+부분범주이다. 더욱이 함자\  $v$는 범주의 동치
+$$
+\textit{Adeq}(\mathcal{O}) / \mathcal{C} = \QCoh(\mathcal{O}_S).
+$$
+를 유도한다.
+\end{lemma}
+
+\begin{proof}
+범주\  $\mathcal{C}$는 완전 함자\ 
+$v : \textit{Adeq}(\mathcal{O}) \to \QCoh(\mathcal{O}_S)$의 핵이다.
+Lemma \ref{lemma-parasitic-adequate}를 보라. 따라서\  Homology, Lemma
+\ref{homology-lemma-kernel-exact-functor}에 의해 이는\  Serre
+부분범주이다. Homology, Lemma
+\ref{homology-lemma-serre-subcategory-is-kernel}에 의해 유도된 완전 함자\ 
+$\overline{v} :
+\textit{Adeq}(\mathcal{O}) / \mathcal{C}
+\to
+\QCoh(\mathcal{O}_S)$를 얻는다. $u$가\  $v$의 오른쪽 역이므로\ 
+$\overline{v}$가 본질적으로 전사임을 곧바로 알 수 있다. Homology,
+Lemma \ref{homology-lemma-quotient-by-kernel-exact-functor}에 의해\ 
+$\overline{v}$는 충실하다. 끝으로\  $u$가\  $v$의 오른쪽 역이라는
+사실로부터\  $\overline{v}$가 충실충만이라고 결론내린다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-direct-image-parasitic-adequate}
+$f : T \to S$를 스킴의 준콤팩트이고 준분리인 사상이라 하자.
+$(\Sch/T)_\tau$ 위의 임의의 기생 적정\  $\mathcal{O}_T$-가군에 대해
+직접상\  $f_*\mathcal{F}$와 고차 직접상\  $R^if_*\mathcal{F}$는\ 
+$(\Sch/S)_\tau$ 위의 기생 적정\  $\mathcal{O}_S$-가군이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-direct-image-adequate}에서 이 고차 직접상들이
+적정임을 이미 보았다. 따라서 임의의 열린\  $\tau$-피복\ 
+$\{U_i \to S\}$에 대해\  $(R^if_*\mathcal{F})(U_i) = 0$임을 보이면
+충분하다. 그런데\  $R^if_*\mathcal{F}$가 기생이라는 것은\  Descent,
+Lemma \ref{descent-lemma-direct-image-parasitic}에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{적정 가군의 유도 범주\  I}
+\label{section-comparison}
+
+
+\noindent
+$S$를 스킴이라 하자. Section \ref{section-parasitic}에서 시작한
+논의를 계속한다. 완전 함자\  $v$는 함자
+$$
+D(\textit{Adeq}(\mathcal{O}))
+\longrightarrow
+D(\QCoh(\mathcal{O}_S))
+$$
+를 유도하며, 유계 버전들에 대해서도 마찬가지이다.
+
+\begin{lemma}
+\label{lemma-quotient-easy}
+$S$를 스킴이라 하고,
+$\mathcal{C} \subset \textit{Adeq}(\mathcal{O})$를 기생 적정 가군들로
+이루어진 충만한 부분범주라 하자. 그러면
+$$
+D(\textit{Adeq}(\mathcal{O}))/D_\mathcal{C}(\textit{Adeq}(\mathcal{O}))
+= D(\QCoh(\mathcal{O}_S))
+$$
+이며, 유계 버전들에 대해서도 마찬가지이다.
+\end{lemma}
+
+\begin{proof}
+Derived Categories, Lemma
+\ref{derived-lemma-quotient-by-serre-easy}에서 바로 따른다.
+\end{proof}
+
+\noindent
+다음으로 함자들
+$$
+K^+(\QCoh(\mathcal{O}_S))
+\longrightarrow
+K^+(\textit{Adeq}(\mathcal{O}))
+\longrightarrow
+D^+(\textit{Adeq}(\mathcal{O}))
+\longrightarrow
+D^+(\QCoh(\mathcal{O}_S)).
+$$
+을 살펴보아 반대 방향의 서술을 찾는다. 어떤 경우에는 적정 가군의
+유도 범주가 준연접 가군의 복합체들의 호모토피 범주를 보편
+준동형들에 대해 국소화한 범주이다. $S$를 스킴이라 하자.
+준연접\  $\mathcal{O}_S$-가군의 복합체들의 사상\ 
+$\varphi : \mathcal{F}^\bullet \to \mathcal{G}^\bullet$가
+{\it 보편 준동형}이라는 것은 스킴의 모든 사상\  $f : T \to S$에
+대해 당김\  $f^*\varphi$가 준동형이라는 뜻이다.
+
+\begin{lemma}
+\label{lemma-describe-Dplus-adequate}
+$U = \Spec(A)$를 아핀 스킴이라 하자. 아래로 유계인 유도 범주\ 
+$D^+(\textit{Adeq}(\mathcal{O}))$는\ 
+$K^+(\QCoh(\mathcal{O}_U))$를 보편 준동형들의 곱셈적 부분집합에
+대해 국소화한 범주이다.
+\end{lemma}
+
+\begin{proof}
+$\varphi : \mathcal{F}^\bullet \to \mathcal{G}^\bullet$가 준연접\ 
+$\mathcal{O}_U$-가군의 복합체들의 사상이면,
+$u\varphi : u\mathcal{F}^\bullet \to
+u\mathcal{G}^\bullet$가
+준동형일 필요충분조건은\  $\varphi$가 보편 준동형인 것이다.
+따라서 보편 준동형들의 모임\  $S$는\  Derived Categories, Lemma
+\ref{derived-lemma-triangle-functor-localize}에 의해 삼각 구조와
+양립하는 포화 곱셈계이다. 그러므로\ 
+$S^{-1}K^+(\QCoh(\mathcal{O}_U))$가 존재하고 삼각 범주이다.
+Derived Categories, Proposition
+\ref{derived-proposition-construct-localization}을 보라. Derived
+Categories, Lemma \ref{derived-lemma-universal-property-localization}에
+의해 표준 함자\ 
+$can : S^{-1}K^+(\QCoh(\mathcal{O}_U)) \to
+D^{+}(\textit{Adeq}(\mathcal{O}))$를 얻는다.
+
+\medskip\noindent
+거의 정의에 의해\  $U$ 위의 모든 적정 가군은 준연접층 안으로
+매장된다. Lemma \ref{lemma-adequate-characterize}를 보라. 따라서\ 
+Derived Categories, Lemma
+\ref{derived-lemma-subcategory-right-resolution}에 의해\ 
+$\mathcal{F}^\bullet \in \Ob(K^+(\textit{Adeq}(\mathcal{O})))$가
+주어지면 준동형\  $\mathcal{F}^\bullet \to u\mathcal{G}^\bullet$가
+존재하며, 여기서\ 
+$\mathcal{G}^\bullet \in \Ob(K^+(\QCoh(\mathcal{O}_U)))$이다.
+이는\  $can$이 본질적으로 전사임을 증명한다.
+
+\medskip\noindent
+마찬가지로\  $\mathcal{F}^\bullet$과\  $\mathcal{G}^\bullet$이 아래로
+유계인 준연접\  $\mathcal{O}_U$-가군의 복합체라고 하자.
+$D^+(\textit{Adeq}(\mathcal{O}))$에서 이들 사이의 사상은\ 
+$f : u\mathcal{F}^\bullet \to \mathcal{H}^\bullet$과\ 
+$s : u\mathcal{G}^\bullet \to \mathcal{H}^\bullet$의 쌍으로
+이루어지며, 여기서\  $s$는 준동형이다. 준동형\ 
+$s' : \mathcal{H}^\bullet \to u\mathcal{E}^\bullet$을 택하자.
+그러면\  $s' \circ f : \mathcal{F} \to \mathcal{E}^\bullet$와 보편
+준동형\  $s' \circ s : \mathcal{G}^\bullet \to \mathcal{E}^\bullet$은
+주어진 사상으로 보내지는\ 
+$S^{-1}K^{+}(\QCoh(\mathcal{O}_U))$의 사상을 준다. 이는 충실충만성
+가운데 ``충만'' 부분을 증명한다. 충실성도 마찬가지로 증명한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-right-adjoint-adequate}
+$U = \Spec(A)$를 아핀 스킴이라 하자. 포함 함자
+$$
+\textit{Adeq}(\mathcal{O}) \to
+\textit{Mod}((\Sch/U)_\tau, \mathcal{O})
+$$
+는 오른쪽 수반\  $A$\footnote{이를 ``적정화자''라고 한다.}를 갖는다.
+더욱이 모든 적정 가군\  $\mathcal{F}$에 대해 수반 사상\ 
+$A(\mathcal{F}) \to \mathcal{F}$는 동형이다.
+\end{lemma}
+
+\begin{proof}
+Topologies, Lemma \ref{topologies-lemma-affine-big-site-fppf}(그리고 다른
+위상들에 대해서도 마찬가지)에 의해\  $(\textit{Aff}/U)_\tau$ 위의\ 
+$\mathcal{O}$-가군을 다루어도 된다. $\mathcal{P}$를\ 
+$\textit{Alg}_A$ 위의 가군값 함자들의 범주, $\mathcal{A}$를\ 
+$\textit{Alg}_A$ 위의 적정 함자들의 범주라 하자. 포함 함자를\ 
+$i : \mathcal{A} \to \mathcal{P}$로 나타내고, Lemma
+\ref{lemma-adjoint}의 구성을\  $Q : \mathcal{P} \to \mathcal{A}$로
+나타내자. 다음 가환 그림이 있다.
+\begin{equation}
+\label{equation-categories}
+\vcenter{
+\xymatrix{
+\textit{Adeq}(\mathcal{O}) \ar[r]_-k \ar@{=}[d] &
+\textit{Mod}((\textit{Aff}/U)_\tau, \mathcal{O}) \ar[r]_-j &
+\textit{PMod}((\textit{Aff}/U)_\tau, \mathcal{O}) \ar@{=}[d] \\
+\mathcal{A} \ar[rr]^-i & & \mathcal{P}
+}
+}
+\end{equation}
+왼쪽 세로 등식은\  Lemma \ref{lemma-adequate-affine}이고, 오른쪽 세로
+등식은\  Section \ref{section-quasi-coherent}에서 설명하였다.
+$A(\mathcal{F}) = Q(j(\mathcal{F}))$로 정의한다. $j$가 충실충만이므로\ 
+$A$가 포함 함자\  $k$의 오른쪽 수반임이 곧바로 따른다. 또한\  $k$도
+충실충만이므로 마지막 주장은 형식적으로 따른다.
+\end{proof}
+
+\noindent
+함자\  $A$는 오른쪽 수반이므로 왼쪽 완전이다. 포함 함자가
+완전이므로(Lemma \ref{lemma-abelian-adequate}를 보라), $A$는
+단사대상을 단사대상으로 보내며 범주\  $\textit{Adeq}(\mathcal{O})$는
+충분한 단사대상을 갖는다고 결론내린다. Homology, Lemma
+\ref{homology-lemma-adjoint-enough-injectives}와\  Injectives, Theorem
+\ref{injectives-theorem-sheaves-modules-injectives}를 보라. 이는
+(\ref{equation-categories})의 동치와\  Lemma
+\ref{lemma-enough-injectives}에서도 따른다.
+
+\begin{lemma}
+\label{lemma-RA-zero}
+$U = \Spec(A)$를 아핀 스킴이라 하자. Lemma
+\ref{lemma-right-adjoint-adequate}에서와 같은\  $A$에 대해\ 
+$\textit{Adeq}(\mathcal{O})$의 모든 대상\  $\mathcal{F}$와
+모든\  $p > 0$에 대해\  $R^pA(\mathcal{F}) = 0$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-right-adjoint-adequate}의 증명에서와 같은 표기법을
+사용하자. $(\textit{Aff}/U)_\tau$ 위의\  $\mathcal{O}$-가군의
+범주에서 단사 분해\  $k(\mathcal{F}) \to \mathcal{I}^\bullet$을
+택한다. Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-include-modules}와\  Lemma
+\ref{lemma-same-cohomology-adequate}에 의해 복합체\ 
+$j(\mathcal{I}^\bullet)$은 완전하다. 한편 각\ 
+$j(\mathcal{I}^n)$은\  Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-injective-module-injective-presheaf}에 의해
+가군 전층 범주의 단사대상이다. 따라서\ 
+$R^pA(\mathcal{F}) = R^pQ(j(k(\mathcal{F})))$이다. 이제 결과는\ 
+Lemma \ref{lemma-RQ-zero}에서 따른다.
+\end{proof}
+
+\noindent
+$S$를 스킴이라 하자. Section \ref{section-adequate}의 논의에 의해
+매장\ 
+$\textit{Adeq}(\mathcal{O}) \subset
+\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$는\ 
+$\textit{Adeq}(\mathcal{O})$를 모든\  $\mathcal{O}$-가군의 범주의
+약한\  Serre 부분범주로 나타낸다. 코호몰로지층이 적정인 복합체들의
+삼각 부분범주를
+$$
+D_{\textit{Adeq}}(\mathcal{O}) \subset
+D(\mathcal{O}) = D(\textit{Mod}((\Sch/S)_\tau, \mathcal{O}))
+$$
+로 나타낸다. Derived Categories, Section
+\ref{derived-section-triangulated-sub}를 보라. 표준 함자
+$$
+D(\textit{Adeq}(\mathcal{O}))
+\longrightarrow
+D_{\textit{Adeq}}(\mathcal{O})
+$$
+를 얻는다. Derived Categories, Equation
+(\ref{derived-equation-compare})을 보라.
+
+\begin{lemma}
+\label{lemma-bounded-below}
+$U = \Spec(A)$가 아핀 스킴이면 위 함자의 아래로 유계인 버전
+\begin{equation}
+\label{equation-compare-bounded-adequate}
+D^+(\textit{Adeq}(\mathcal{O}))
+\longrightarrow
+D^+_{\textit{Adeq}}(\mathcal{O})
+\end{equation}
+은 동치이다.
+\end{lemma}
+
+\begin{proof}
+$A : \textit{Mod}(\mathcal{O}) \to \textit{Adeq}(\mathcal{O})$를\ 
+Lemma \ref{lemma-right-adjoint-adequate}에서 구성한 포함 함자의
+오른쪽 수반이라 하자. $A$가 왼쪽 완전이고\ 
+$\textit{Mod}(\mathcal{O})$가 충분한 단사대상을 가지므로\  $A$는
+오른쪽 유도함자\ 
+$RA : D^+_{\textit{Adeq}}(\mathcal{O}) \to D^+(\textit{Adeq}(\mathcal{O}))$
+를 갖는다. $RA$가 (\ref{equation-compare-bounded-adequate})의
+준역함자라고 주장한다. 이를 보이는 핵심 사실은\  $\mathcal{F}$가
+적정 가군이면 수반 사상\  $\mathcal{F} \to RA(\mathcal{F})$가\  Lemma
+\ref{lemma-RA-zero}에 의해 준동형이라는 것이다.
+
+\medskip\noindent
+구체적으로 보조정리를 완전히 증명하려면 다음을 보이면 충분하다.
+\begin{enumerate}
+\item $\mathcal{F}^\bullet \in K^+(\textit{Adeq}(\mathcal{O}))$가
+주어지면 표준 사상\ 
+$\mathcal{F}^\bullet \to RA(\mathcal{F}^\bullet)$는 준동형이다.
+\item $\mathcal{G}^\bullet \in K^+(\textit{Mod}(\mathcal{O}))$가
+주어지면 표준 사상\ 
+$RA(\mathcal{G}^\bullet) \to \mathcal{G}^\bullet$은 준동형이다.
+\end{enumerate}
+(1)과 (2)는 모두\  Derived Categories, Lemma
+\ref{derived-lemma-two-ss-complex-functor}의 스펙트럼 열 가운데 하나를
+사용하는 스펙트럼 열 논증으로 핵심 사실에서부터 따른다.
+몇 가지 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-ext-adequate}
+$U = \Spec(A)$를 아핀 스킴이라 하자. $\mathcal{F}$와\ 
+$\mathcal{G}$를 적정\  $\mathcal{O}$-가군이라 하자. 임의의\ 
+$i \geq 0$에 대해 자연 사상
+$$
+\Ext^i_{\textit{Adeq}(\mathcal{O})}(\mathcal{F}, \mathcal{G})
+\longrightarrow
+\Ext^i_{\textit{Mod}(\mathcal{O})}(\mathcal{F}, \mathcal{G})
+$$
+은 동형이다.
+\end{lemma}
+
+\begin{proof}
+정의에 의해 이\  Ext 군들은 유도 범주에서의\  Hom 집합으로 계산된다.
+따라서\  Lemma \ref{lemma-bounded-below}에서 바로 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{순수 확장}
+\label{section-pure}
+
+\noindent
+아핀 스킴의 큰 사이트 위의 준연접층들의 확장을 대수적으로
+특징짓고자 한다. 이를 위해 다음 개념을 도입한다.
+
+\begin{definition}
+\label{definition-pure}
+$A$를 환이라 하자.
+\begin{enumerate}
+\item $A$-가군\  $P$가 {\it 순수 사영}이라는 것은\  $A$-가군들의
+모든 보편 완전열\  $0 \to K \to M \to N \to 0$에 대해 열\ 
+$0 \to \Hom_A(P, K) \to \Hom_A(P, M) \to \Hom_A(P, N) \to 0$이
+완전하다는 뜻이다.
+\item $A$-가군\  $I$가 {\it 순수 단사}라는 것은\  $A$-가군들의
+모든 보편 완전열\  $0 \to K \to M \to N \to 0$에 대해 열\ 
+$0 \to \Hom_A(N, I) \to \Hom_A(M, I) \to \Hom_A(K, I) \to 0$이
+완전하다는 뜻이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+순수 사영 가군들을 특징짓자.
+
+\begin{lemma}
+\label{lemma-pure-projective}
+$A$를 환이라 하자.
+\begin{enumerate}
+\item 한 가군이 순수 사영일 필요충분조건은 유한표현\ 
+$A$-가군들의 직합의 직합인자인 것이다.
+\item 임의의 가군\  $M$에 대해\  $P$가 순수 사영인 보편 완전열\ 
+$0 \to N \to P \to M \to 0$이 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+먼저\  Algebra, Theorem
+\ref{algebra-theorem-universally-exact-criteria}에 의해 유한표현\ 
+$A$-가군은 순수 사영이다. 따라서 유한표현\  $A$-가군들의 직합의
+직합인자는 실제로 순수 사영이다. $M$을 임의의\  $A$-가군이라 하자.
+$M = \colim_{i \in I} P_i$를 유한표현\  $A$-가군들의 여과 여극한으로
+쓰고 열
+$$
+0 \to N \to \bigoplus P_i \to M \to 0.
+$$
+을 생각하자. 임의의 유한표현\  $A$-가군\  $P$에 대해 사상\ 
+$\Hom_A(P, \bigoplus P_i) \to \Hom_A(P, M)$는 전사이다. 실제로
+모든 사상\  $P \to M$은 어떤\  $P_i$를 통해 분해된다. 따라서\  Algebra,
+Theorem \ref{algebra-theorem-universally-exact-criteria}에 의해 이 열은
+보편 완전하다. 이로써 (2)가 증명된다. 이제\  $M$이 순수 사영이면
+이 열은 분할되고, $M$이\  $\bigoplus P_i$의 직합인자임을 알 수 있다.
+\end{proof}
+
+\noindent
+순수 단사 가군들을 특징짓자.
+
+\begin{lemma}
+\label{lemma-pure-injective}
+$A$를 환이라 하자. 임의의\  $A$-가군\  $M$에 대해\ 
+$M^\vee = \Hom_\mathbf{Z}(M, \mathbf{Q}/\mathbf{Z})$로 놓자.
+\begin{enumerate}
+\item 임의의\  $A$-가군\  $M$에 대해\  $A$-가군\  $M^\vee$는 순수 단사이다.
+\item $A$-가군\  $I$가 순수 단사일 필요충분조건은 사상\ 
+$I \to (I^\vee)^\vee$가 분할되는 것이다.
+\item 임의의 가군\  $M$에 대해\  $I$가 순수 단사인 보편 완전열\ 
+$0 \to M \to I \to N \to 0$이 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+More on Algebra, Section
+\ref{more-algebra-section-injectives-modules}에 있는 함자\ 
+$M \mapsto M^\vee$의 성질들을 별도의 언급 없이 사용하겠다.
+(1)은\ 
+$\Hom_A(N, M^\vee) =
+\Hom_\mathbf{Z}(N \otimes_A M, \mathbf{Q}/\mathbf{Z})$이고\ 
+$\mathbf{Q}/\mathbf{Z}$가 아벨 군의 범주에서 단사대상이므로 성립한다.
+따라서\  $I \to (I^\vee)^\vee$가 분할되면\  $I$는 순수 단사이다.
+임의의\  $A$-가군\  $M$에 대해 평가 사상\ 
+$ev : M \to (M^\vee)^\vee$가 보편 단사라고 주장한다. 이를 보려면\ 
+$ev^\vee : ((M^\vee)^\vee)^\vee \to M^\vee$가 오른쪽 역\ 
+$ev' : M^\vee \to ((M^\vee)^\vee)^\vee$을 가짐에 유의하자.
+그러면 임의의\  $A$-가군\  $N$에 대해 완전하고 충실한 함자\ 
+${}^\vee$를 사상\ 
+$N \otimes_A M \to N \otimes_A (M^\vee)^\vee$에 적용하면
+$$
+\Hom_A(N, ((M^\vee)^\vee)^\vee) =
+\Big(N \otimes_A (M^\vee)^\vee\Big)^\vee
+\to
+\Big(N \otimes_A M\Big)^\vee =
+\Hom_A(N, M^\vee)
+$$
+을 얻는데, 오른쪽 역의 존재에 의해 이는 전사이다. 따라서 주장이
+성립한다. 이 주장은 (3)과 (2)의 조건이 필요함을 함의한다.
+\end{proof}
+
+\noindent
+계속하기 전에 이 절의 나머지에서 자주 사용할 다음 관찰을 해 두자.
+
+\begin{lemma}
+\label{lemma-split-universally-exact-sequence}
+$A$를 환이라 하자.
+\begin{enumerate}
+\item $L \to M \to N$을\  $A$-가군들의 보편 완전열이라 하고\ 
+$K = \Im(M \to N)$라 하자. 그러면\  $K \to N$은 보편 단사이다.
+\item 모든 보편 완전 복합체는 보편 완전한 짧은 완전열들로
+분할할 수 있다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. 임의의\  $A$-가군\  $T$에 대해\  $\otimes$의 오른쪽
+완전성에 의해 열\ 
+$L \otimes_A T \to M \otimes_A T \to K \otimes_A T \to 0$은
+완전하다. 가정에 의해 열\ 
+$L \otimes_A T \to M \otimes_A T \to N \otimes_A T$도 완전하다.
+두 사실을 결합하면\  $K \otimes_A T \to N \otimes_A T$가 단사임을
+알 수 있다.
+
+\medskip\noindent
+(2)는 다음을 뜻한다. $M^\bullet$을\  $A$-가군들의 보편 완전 복합체라
+하고\  $K^i = \Ker(d^i) \subset M^i$로 놓자. 그러면 짧은 완전열\ 
+$0 \to K^i \to M^i \to K^{i + 1} \to 0$은 보편 완전하다.
+이는 (1)에서 바로 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-pure-resolution}
+$A$를 환이라 하고, $M$을\  $A$-가군이라 하자.
+\begin{enumerate}
+\item {\it 순수 사영 분해} $P_\bullet \to M$은 각\  $P_i$가
+순수 사영인 보편 완전열
+$$
+\ldots \to P_1 \to P_0 \to M \to 0
+$$
+이다.
+\item {\it 순수 단사 분해} $M \to I^\bullet$은 각\  $I^i$가
+순수 단사인 보편 완전열
+$$
+0 \to M \to I^0 \to I^1 \to \ldots
+$$
+이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 분해들은 보편 완전한 모든 왼쪽 또는 오른쪽 분해의 부류 안에서
+통상적인 유일성 성질을 만족한다.
+
+\begin{lemma}
+\label{lemma-pure-projective-resolutions}
+$A$를 환이라 하자.
+\begin{enumerate}
+\item 모든\  $A$-가군은 순수 사영 분해를 갖는다.
+\end{enumerate}
+$M \to N$을\  $A$-가군의 사상이라 하자. $P_\bullet \to M$을
+순수 사영 분해, $N_\bullet \to N$을 보편 완전 분해라 하자.
+\begin{enumerate}
+\item[(2)] 주어진 사상
+$$
+M = \Coker(P_1 \to P_0) \to \Coker(N_1 \to N_0) = N
+$$
+을 유도하는 복합체의 사상\  $P_\bullet \to N_\bullet$이 존재한다.
+\item[(3)] 같은 사상\  $M \to N$을 유도하는 두 사상\ 
+$\alpha, \beta : P_\bullet \to N_\bullet$은 서로 호모토픽이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은\  Lemma \ref{lemma-pure-projective}에서 바로 따른다. (2)와 (3)을
+증명하기 전에\  Lemma \ref{lemma-split-universally-exact-sequence}에 의해
+보편 완전 복합체\  $N_\bullet \to N \to 0$을 보편 완전한 짧은 완전열\ 
+$0 \to K_0 \to N_0 \to N \to 0$과\ 
+$0 \to K_i \to N_i \to K_{i - 1} \to 0$들로 분할할 수 있음에
+유의하자.
+
+\medskip\noindent
+(2)의 증명. $P_0$가 순수 사영이므로 사상\  $P_0 \to M \to N$을
+올리는 사상\  $P_0 \to N_0$을 찾을 수 있다. 이에 따라\ 
+$K_0$에 상을 갖는 사상\  $P_1 \to F_0 \to N_0$을 얻는다.
+$P_1$이 순수 사영이므로 이를 사상\  $P_1 \to N_1$로 올릴 수 있다.
+이는 다시\  $N_0$에서 영으로 가는, 즉\  $K_1$에 상을 갖는 사상\ 
+$P_2 \to P_1 \to N_1$을 유도한다. 따라서 올려서 사상\ 
+$P_2 \to N_2$를 얻을 수 있다. 이 과정을 반복한다.
+
+\medskip\noindent
+(3)의 증명. $\alpha, \beta$가 호모토픽임을 보이려면 차\ 
+$\gamma = \alpha - \beta$가 영 사상과 호모토픽임을 보이면 충분하다.
+$\gamma_0 : P_0 \to N_0$의 상은\  $K_0$에 포함된다. 따라서\ 
+$\gamma_0$를 사상\  $h_0 : P_0 \to N_1$로 올릴 수 있다. 사상\ 
+$\gamma_1' = \gamma_1 - h_0 \circ d_{P, 1} : P_1 \to N_1$을
+생각하자. $h_0$의 선택에 의해\  $\gamma_1'$의 상은\  $K_1$에 포함된다.
+$P_1$이 순수 사영이므로\  $\gamma_1'$를 사상\ 
+$h_1 : P_1 \to N_2$로 올릴 수 있다. 이 시점에서\ 
+$\gamma_1 = h_0 \circ d_{F, 1} + d_{N, 2} \circ h_1$이다.
+이 과정을 반복한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pure-injective-resolutions}
+$A$를 환이라 하자.
+\begin{enumerate}
+\item 모든\  $A$-가군은 순수 단사 분해를 갖는다.
+\end{enumerate}
+$M \to N$을\  $A$-가군의 사상이라 하자. $M \to M^\bullet$을
+보편 완전 분해, $N \to I^\bullet$을 순수 단사 분해라 하자.
+\begin{enumerate}
+\item[(2)] 주어진 사상
+$$
+M = \Ker(M^0 \to M^1) \to \Ker(I^0 \to I^1) = N
+$$
+을 유도하는 복합체의 사상\  $M^\bullet \to I^\bullet$이 존재한다.
+\item[(3)] 같은 사상\  $M \to N$을 유도하는 두 사상\ 
+$\alpha, \beta : M^\bullet \to I^\bullet$은 서로 호모토픽이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이 보조정리는\  Lemma \ref{lemma-pure-projective-resolutions}의 쌍대이다.
+모든 화살표를 뒤집어야 한다는 점을 제외하면 증명은 같다.
+\end{proof}
+
+\noindent
+위의 내용을 사용하여 순수 확장군을 다음과 같이 정의할 수 있다.
+$A$를 환이라 하고\  $M$, $N$을\  $A$-가군이라 하자. 순수 단사 분해\ 
+$N \to I^\bullet$을 택한다. Lemma
+\ref{lemma-pure-injective-resolutions}에 의해 복합체
+$$
+\Hom_A(M, I^\bullet)
+$$
+는 호모토피까지 잘 정의된다. 따라서 그\  $i$번째 코호몰로지 가군은\ 
+$M$과\  $N$의 잘 정의된 불변량이다.
+
+\begin{definition}
+\label{definition-pure-ext}
+$A$를 환이라 하고\  $M$, $N$을\  $A$-가군이라 하자. $i$번째
+{\it 순수 확장 가군} $\text{Pext}^i_A(M, N)$은\  $N$의 순수 단사
+분해\  $I^\bullet$에 대한 복합체\  $\Hom_A(M, I^\bullet)$의\ 
+$i$번째 코호몰로지 가군이다.
+\end{definition}
+
+\noindent
+주의: $A$-가군들의 완전열이 순수 확장군들의 긴 완전열을 유도한다는
+명제는 참이 아니다. (이를 위해서는 보편 완전열이 필요하다.)
+위의 내용에서 명백히 따르는 몇 가지 사실을 모아 두자.
+
+\begin{lemma}
+\label{lemma-facts-pext}
+$A$를 환이라 하자.
+\begin{enumerate}
+\item $N$이 순수 단사이면\  $i > 0$에 대해\ 
+$\text{Pext}^i_A(M, N) = 0$이다.
+\item $M$이 순수 사영이면\  $i > 0$에 대해\ 
+$\text{Pext}^i_A(M, N) = 0$이다. 특히\  $M$이 유한표현\ 
+$A$-가군이면 그러하다.
+\item $\text{Pext}^i_A(M, N)$은\  $M$의 순수 사영 분해\ 
+$P_\bullet$에 대한 복합체\  $\Hom_A(P_\bullet, N)$의\  $i$번째
+코호몰로지 가군이기도 하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3)을 보이기 위해 이중복합체
+$$
+A^{\bullet, \bullet} = \Hom_A(P_\bullet, I^\bullet)
+$$
+를 생각하자. 각 행은 차수\  $0$을 제외하면 완전하고, 그 차수에서의
+코호몰로지는\  $\Hom_A(M, I^q)$이다. 각 열은 차수\  $0$을 제외하면
+완전하고, 그 차수에서의 코호몰로지는\  $\Hom_A(P_p, N)$이다.
+따라서\  Homology, Section \ref{homology-section-double-complex}에서 이
+복합체에 딸린 두 스펙트럼 열이 퇴화하여 원하는 등식을 준다.
+\end{proof}
+
+
+
+
+
+\section{큰 사이트 위 준연접층의 고차\  Ext}
+\label{section-big}
+
+\noindent
+순수 단사 가군\  $I$에 딸린 가군값 함자\  $\underline{I}$는\ 
+$\textit{Alg}_A$ 위의 적정 함자들의 범주에서 단사대상을 준다.
+주의: 순수 사영 가군이 적정 함자들의 범주에서 사영대상을 준다는
+명제는 참이 아니다. 사영대상은 많이 존재하며, 바로 선형 적정
+함자들이 그러하다.
+
+\begin{lemma}
+\label{lemma-pure-injective-injective-adequate}
+$A$를 환이라 하자. $\mathcal{A}$를\  $\textit{Alg}_A$ 위의 적정
+함자들의 범주라 하자. $\mathcal{A}$의 단사대상들은 정확히 순수 단사\ 
+$A$-가군\  $I$에 대한 함자\  $\underline{I}$들이다.
+\end{lemma}
+
+\begin{proof}
+$I$를\  $\mathcal{A}$의 단사대상이라 하자. 어떤\  $A$-가군\  $M$에
+대해 매장\  $I \to \underline{M}$을 택하자. $I$가 단사이므로 어떤
+가군값 함자\  $F$에 대해\  $\underline{M} = I \oplus F$이다. 그러면\ 
+$M = I(A) \oplus F(A)$이고, 따라서\  $I = \underline{I(A)}$이다.
+이로부터 모든 단사대상이 어떤\  $A$-가군\  $I$에 대한\ 
+$\underline{I}$의 꼴임을 알 수 있다. 모든 보편 완전열\ 
+$0 \to M \to N \to L \to 0$이\  $\mathcal{A}$의 완전열\ 
+$0 \to \underline{M} \to \underline{N} \to \underline{L} \to 0$을
+유도하므로 가군\  $I$는 순수 단사여야 한다.
+
+\medskip\noindent
+끝으로\  $I$가 순수 단사\  $A$-가군이라고 하자. $\mathcal{A}$의
+단사대상 안으로의 매장\  $\underline{I} \to J$를 택한다(Lemma
+\ref{lemma-enough-injectives}를 보라). 위에서 어떤 순수 단사\ 
+$A$-가군\  $I'$에 대해\  $J = \underline{I'}$임을 보았다.
+$\underline{I} \to \underline{I'}$가 단사이므로 사상\ 
+$I \to I'$는 보편 단사이다. $I$에 관한 가정에 의해 이는 분할된다.
+따라서\  $\underline{I}$는\  $J = \underline{I'}$의 직합인자이고,
+그러므로 범주\  $\mathcal{A}$의 단사대상이다.
+\end{proof}
+
+\noindent
+$U = \Spec(A)$를 아핀 스킴, $M$을\  $A$-가군이라 하자. $U$ 위의
+준연접층\  $\widetilde{M}$에 딸린\  $(\Sch/U)_\tau$ 위의 준연접\ 
+$\mathcal{O}$-가군을\  $M^a$로 나타내겠다. 이제 다음 보조정리를
+서술하는 데 필요한 표기법이 모두 갖추어졌다.
+
+\begin{lemma}
+\label{lemma-big-ext}
+$U = \Spec(A)$를 아핀 스킴이라 하고, $M$, $N$을\  $A$-가군이라 하자.
+모든\  $i$에 대해\  $M$과\  $N$에 함자적인 표준 동형
+$$
+\Ext^i_{\textit{Mod}(\mathcal{O})}(M^a, N^a) = \text{Pext}^i_A(M, N)
+$$
+이 있다.
+\end{lemma}
+
+\begin{proof}
+오른쪽에서 왼쪽으로 가는 표준 화살표를 구성하자. 구체적으로\ 
+$N \to I^\bullet$이 순수 단사 분해이면\ 
+$M^a \to (I^\bullet)^a$는 (적정) $\mathcal{O}$-가군의 완전
+복합체이다. 따라서\  $\text{Pext}^i_A(M, N)$의 임의의 원소는\ 
+$D(\mathcal{O})$의 사상\  $N^a \to M^a[i]$, 즉 왼쪽 군의 원소를 준다.
+
+\medskip\noindent
+이 사상이 동형임을 증명하기 위해\  Lemma
+\ref{lemma-ext-adequate}에 따라\ 
+$\Ext^i_{\textit{Mod}(\mathcal{O})}(M^a, N^a)$를\ 
+$\Ext^i_{\textit{Adeq}(\mathcal{O})}(M^a, N^a)$로 바꾸어도 됨에
+유의하자. $\mathcal{A}$를\  $\textit{Alg}_A$ 위의 적정 함자들의
+범주라 하자. $\mathcal{A}$는\  $\textit{Adeq}(\mathcal{O})$와
+동치임을 이미 보았다. Lemma \ref{lemma-adequate-affine} 및\  Lemma
+\ref{lemma-right-adjoint-adequate}의 증명을 보라. 따라서 이제
+$$
+\Ext^i_\mathcal{A}(\underline{M}, \underline{N}) =
+\text{Pext}^i_A(M, N)
+$$
+을 증명하면 충분하다. 그러나 이는 순수 단사 분해\ 
+$N \to I^\bullet$이\  $\mathcal{A}$에서\  $\underline{N}$의 단사 분해와
+정확히 대응하므로\  Lemma
+\ref{lemma-pure-injective-injective-adequate}에서 명백히 따른다.
+\end{proof}
+
+
+
+
+
+
+\section{적정 가군의 유도 범주\  II}
+\label{section-derived-categories}
+
+\noindent
+$S$를 스킴이라 하자. $\mathcal{O}_S$를\  $S$의 구조층,
+$\mathcal{O}$를 큰 사이트\  $(\Sch/S)_\tau$의 구조층이라 하자.
+Descent, Remark \ref{descent-remark-change-topologies-ringed}에서 환 달린
+사이트의 사상
+\begin{equation}
+\label{equation-compare-big-small}
+f :
+((\Sch/S)_\tau, \mathcal{O})
+\longrightarrow
+(S_{Zar}, \mathcal{O}_S).
+\end{equation}
+을 구성하였다. 앞 절들에서 함자\ 
+$f_* : \textit{Mod}(\mathcal{O}) \to \textit{Mod}(\mathcal{O}_S)$가
+적정층을 준연접층으로 보내고 완전 함자\ 
+$v : \textit{Adeq}(\mathcal{O}) \to \QCoh(\mathcal{O}_S)$를 유도함을
+보았다. 실제로\  $f_* = v$는 동치\ 
+$\textit{Adeq}(\mathcal{O})/\mathcal{C} \to \QCoh(\mathcal{O}_S)$를
+유도하며, 여기서\  $\mathcal{C}$는 기생 적정 가군들의 부분범주이다.
+더욱이 함자\  $f^*$는 준연접 가군을 적정 가군으로 보내며,
+$v$의 왼쪽 수반인 함자\ 
+$u : \QCoh(\mathcal{O}_S) \to \textit{Adeq}(\mathcal{O})$를 유도한다.
+
+\medskip\noindent
+$D_{\textit{Adeq}}(\mathcal{O})$와\  $D_\QCoh(S)$ 사이에도 매우 비슷한
+관계가 있다. 먼저 범주\  $D_{\textit{Adeq}}(\mathcal{O})$가 선택한
+위상에 의존하지 않는 이유를 설명한다.
+
+\begin{remark}
+\label{remark-D-adeq-independence-topology}
+$S$를 스킴이라 하자.
+$\tau, \tau' \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+구조층\ $\mathcal{O}$를\  $(\Sch/S)_\tau$와\  $(\Sch/S)_{\tau'}$ 위의
+층으로 보았을 때 이를 각각\  $\mathcal{O}_\tau$와\ $\mathcal{O}_{\tau'}$로
+나타내자. 그러면\ 
+$D_{\textit{Adeq}}(\mathcal{O}_\tau)$와\ 
+$D_{\textit{Adeq}}(\mathcal{O}_{\tau'})$는 표준적으로 동형이다.
+이는\  Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-compare-topologies-derived-adequate-modules}에서
+따른다. 구체적으로\  $\tau$가 위상\  $\tau'$보다 강하다고 가정하고,
+$\mathcal{C} = (\Sch/S)_{fppf}$라 하며, $\mathcal{B}$를\  $S$ 위의
+아핀 스킴들의 모임이라 하자. 가정 (1)과 (2)는 위에서 보았다.
+가정 (3)은 명백하고, 가정 (4)는\  Lemma
+\ref{lemma-same-cohomology-adequate}에서 따른다.
+\end{remark}
+
+\begin{remark}
+\label{remark-D-adeq-and-D-QCoh}
+$S$를 스킴이라 하자. (\ref{equation-compare-big-small})의 사상\  $f$는
+서로 수반인 함자\ 
+$Rf_* : D_{\textit{Adeq}}(\mathcal{O}) \to D_\QCoh(S)$
+및\ 
+$Lf^* : D_\QCoh(S) \to D_{\textit{Adeq}}(\mathcal{O})$를 유도한다.
+더욱이\  $Rf_* Lf^* \cong \text{id}_{D_\QCoh(S)}$이다.
+
+\medskip\noindent
+증명을 개략적으로 제시하자. Remark
+\ref{remark-D-adeq-independence-topology}에 의해 위상\  $\tau$가\ 
+Zariski 위상이라고 가정해도 된다. $\mathcal{O}$-가군 위의 비유계
+전체 유도함자\  $Lf^*$와\  $Rf_*$의 존재 및 이들의 수반성을 사용한다.
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-adjoint}를 보라. 이 경우\  $f_*$는\ 
+$(\Sch/S)_{Zar}$의 부분범주\  $S_{Zar}$로의 제한일 뿐이다. 따라서\ 
+$Rf_* = f_*$가\ 
+$Rf_* : D_{\textit{Adeq}}(\mathcal{O}) \to D_\QCoh(S)$를 유도함은
+명백하다. $\mathcal{G}^\bullet$을\  $D_\QCoh(S)$의 대상이라 하자.
+항별 분할 단사인 전이 사상을 갖는, 위로 유계인 평탄\ 
+$\mathcal{O}_S$-가군의 복합체들의 계\ 
+$\mathcal{K}_1^\bullet \to \mathcal{K}_2^\bullet \to \ldots$와 그림
+$$
+\xymatrix{
+\mathcal{K}_1^\bullet \ar[d] \ar[r] &
+\mathcal{K}_2^\bullet \ar[d] \ar[r] & \ldots \\
+\tau_{\leq 1}\mathcal{G}^\bullet \ar[r] &
+\tau_{\leq 2}\mathcal{G}^\bullet \ar[r] & \ldots
+}
+$$
+을 택할 수 있다. 이들은\  Derived Categories, Lemma
+\ref{derived-lemma-special-direct-system}에 열거된 성질 (1), (2), (3)을
+만족하며, 여기서\  $\mathcal{P}$는 평탄\  $\mathcal{O}_S$-가군들의
+모임이다. 그러면\  $Lf^*\mathcal{G}^\bullet$은\ 
+$\colim f^*\mathcal{K}_n^\bullet$로 계산된다. Cohomology on Sites,
+Lemma \ref{sites-cohomology-lemma-pullback-K-flat}과\ 
+\ref{sites-cohomology-lemma-derived-base-change}를 보라(우리 사이트들은
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-points-fppf}에 의해 충분한 점을 갖는다).
+각\  $i$에 대해\ 
+$H^i(Lf^*\mathcal{G}^\bullet) =
+\colim H^i(f^*\mathcal{K}_n^\bullet)$가 적정임을 보여야 한다.
+Lemma \ref{lemma-abelian-adequate}에 의해 각\ 
+$H^i(f^*\mathcal{K}_n^\bullet)$가 적정임을 보이면 충분하다.
+
+\medskip\noindent
+$H^i(f^*\mathcal{K}_n^\bullet)$의 적정성은\  $S$ 위에서 국소적이므로\ 
+$S = \Spec(A)$가 아핀이라고 가정해도 된다. $S$가 아핀이므로\ 
+$D_\QCoh(S) = D(\QCoh(\mathcal{O}_S))$이다. Derived Categories of
+Schemes, Section \ref{perfect-section-derived-quasi-coherent}의 논의를
+보라. 따라서 준동형\ 
+$\mathcal{F}^\bullet \to \mathcal{K}_n^\bullet$이 존재하며, 여기서\ 
+$\mathcal{F}^\bullet$은 위로 유계인 평탄 준연접 가군의 복합체이다.
+그러면\  $f^*\mathcal{F}^\bullet \to f^*\mathcal{K}_n^\bullet$은
+준동형이고\  $f^*\mathcal{F}^\bullet$의 코호몰로지층들은 적정이다.
+
+\medskip\noindent
+마지막 주장\  $Rf_* Lf^* \cong \text{id}_{D_\QCoh(S)}$은 위 함자들의
+명시적 서술에서 따른다. (평이하게 말하면, $\mathcal{F}$가
+준연접이고\  $p > 0$이면\  $L_pf^*\mathcal{F}$는 기생 적정 가군이다.)
+\end{remark}
+
+
+\begin{remark}
+\label{remark-conclusion}
+위의\  Remark \ref{remark-D-adeq-and-D-QCoh}는 유도 범주들의 동치
+$$
+D_{\textit{Adeq}}(\mathcal{O})/D_\mathcal{C}(\mathcal{O})
+\longrightarrow
+D_\QCoh(S)
+$$
+가 있음을 함의한다. 여기서\  $\mathcal{C}$는 기생 적정 가군들의
+범주이다. 실제로\  $D_\mathcal{C}(\mathcal{O})$가\  $Rf_*$의 핵임은
+명백하므로 표시된 함자를 얻는다. $D_{\textit{Adeq}}(\mathcal{O})$의
+임의의 대상\  $X$에 대해 사상\  $Lf^*Rf_*X \to X$는\  $D_\QCoh(S)$에서
+준동형으로 보내진다. 따라서\  $Lf^*Rf_*X \to X$는\ 
+$D_{\textit{Adeq}}(\mathcal{O})/D_\mathcal{C}(\mathcal{O})$에서
+동형이다. 끝으로\  $D_{\textit{Adeq}}(\mathcal{O})$의 대상\  $X, Y$에
+대해 사상
+$$
+Rf_* :
+\Hom_{D_{\textit{Adeq}}(\mathcal{O})/D_\mathcal{C}(\mathcal{O})}(X, Y)
+\to
+\Hom_{D_\QCoh(S)}(Rf_*X, Rf_*Y)
+$$
+은 전단사이다. 위의 비고에 의해\  $Lf^*$가 그 역을 주기 때문이다.
+\end{remark}
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

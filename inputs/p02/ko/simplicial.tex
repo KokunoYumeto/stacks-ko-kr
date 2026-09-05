@@ -1,0 +1,6523 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{단체적 방법}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장은 단체적 방법에 대한 최소한의 입문이다.
+뒤에서 필요한 내용이 생길 때마다 여기에 덧붙인다.
+이 주제 전반에 관한 참고문헌으로는 
+\cite{SimpHom}을 들 수 있을 것이다.
+이 방법으로 할 수 있는 일의 예로는 Quillen의 호모토피 대수학 논문
+\cite{Quillen}과 Artin--Mazur의 에탈 호모토피 논문
+\cite{ArtinMazur}가 있다.
+
+\section{유한 순서집합의 범주}
+\label{section-Delta}
+
+\noindent
+범주 $\Delta$는 다음과 같이 정의된다.
+\begin{enumerate}
+\item 대상은 $[0], [1], [2], \ldots$이며,
+$[n] = \{0, 1, 2, \ldots, n\}$이다.
+\item 사상 $[n] \to [m]$은 대응하는 집합 사이의 비감소 사상
+$\{0, 1, 2, \ldots, n\} \to \{0, 1, 2, \ldots, m\}$이다.
+\end{enumerate}
+여기서 사상 $\varphi : [n] \to [m]$이 {\it 비감소}라는 것은 정의상
+$i \geq j$이면 $\varphi(i) \geq \varphi(j)$임을 뜻한다.
+달리 말하면 $\Delta$는 비어 있지 않은 유한 전순서집합과 비감소 사상으로
+이루어진 ``큰'' 범주와 동치이다. 사상 $[0] \to [n]$은 정확히 $n + 1$개이고
+사상 $[n] \to [0]$은 정확히 $1$개이다. 사상 $[1] \to [n]$은 정확히
+$(n + 1)(n + 2)/2$개이고 사상 $[n] \to [1]$은 정확히 $n + 2$개이다.
+이후도 마찬가지이다.
+
+\begin{definition}
+\label{definition-face-degeneracy}
+임의의 정수 $n\geq 1$과 임의의 $0\leq j \leq n$에 대하여,
+$j$를 건너뛰는 순서 보존 단사를
+{\it $\delta^n_j : [n-1] \to [n]$}
+로 나타낸다. 임의의 정수 $n\geq 0$과 임의의 $0\leq j \leq n$에 대하여,
+$(\sigma^n_j)^{-1}(\{j\}) = \{j, j + 1\}$을 만족하는 순서 보존 전사를
+{\it $\sigma^n_j : [n + 1]  \to [n]$}
+로 나타낸다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-face-degeneracy}
+$\Delta$의 임의의 사상은 사상 $\delta^n_j$와 $\sigma^n_j$의 합성으로 나타낼 수 있다.
+\end{lemma}
+
+\begin{proof}
+$\varphi : [n] \to [m]$을 $\Delta$의 사상이라 하자.
+$j \not \in \Im(\varphi)$이면 어떤 사상
+$\psi : [n] \to [m - 1]$에 대하여 $\varphi$를
+$\delta^m_j \circ \psi$로 나타낼 수 있다. $\varphi(j) = \varphi(j + 1)$이면
+어떤 사상 $\psi : [n - 1] \to [m]$에 대하여 $\varphi$를
+$\psi \circ \sigma^{n - 1}_j$로 나타낼 수 있다.
+위와 같이 치환할 때마다 $n + m$이 작아지므로, 어느 단계에서는
+$\varphi$가 단사이면서 전사가 되고, 따라서 항등사상이 된다.
+이로부터 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relations-face-degeneracy}
+사상 $\delta^n_j$와 $\sigma^n_j$는 다음 관계들을 만족한다.
+\begin{enumerate}
+\item $0 \leq i < j \leq n + 1$이면
+$\delta^{n + 1}_j \circ \delta^n_i =
+\delta^{n + 1}_i \circ \delta^n_{j - 1}$이다.
+달리 말하면 다음 도식은 가환이다.
+$$
+\xymatrix{
+& [n] \ar[rd]^{\delta^{n + 1}_j} & \\
+[n - 1] \ar[ru]^{\delta^n_i} \ar[rd]_{\delta^n_{j - 1}} & &
+[n + 1] \\
+& [n] \ar[ru]_{\delta^{n + 1}_i} &
+}
+$$
+\item $0 \leq i < j \leq n - 1$이면
+$\sigma^{n - 1}_j \circ \delta^n_i =
+\delta^{n - 1}_i \circ \sigma^{n - 2}_{j - 1}$이다.
+달리 말하면 다음 도식은 가환이다.
+$$
+\xymatrix{
+& [n] \ar[rd]^{\sigma^{n - 1}_j} & \\
+[n - 1] \ar[ru]^{\delta^n_i} \ar[rd]_{\sigma^{n - 2}_{j - 1}} & &
+[n - 1] \\
+& [n - 2] \ar[ru]_{\delta^{n - 1}_i} &
+}
+$$
+\item $0 \leq j \leq n - 1$이면
+$\sigma^{n - 1}_j \circ \delta^n_j = \text{id}_{[n - 1]}$
+이고
+$\sigma^{n - 1}_j \circ \delta^n_{j + 1} = \text{id}_{[n - 1]}$이다.
+달리 말하면 다음 도식은 가환이다.
+$$
+\xymatrix{
+& [n] \ar[rd]^{\sigma^{n - 1}_j} & \\
+[n - 1]
+\ar[ru]^{\delta^n_j}
+\ar[rd]_{\delta^n_{j + 1}}
+\ar[rr]^{\text{id}_{[n - 1]}} & & [n - 1] \\
+& [n] \ar[ru]_{\sigma^{n - 1}_j} &
+}
+$$
+\item $0 < j + 1 < i \leq n$이면
+$\sigma^{n - 1}_j \circ \delta^n_i =
+\delta^{n - 1}_{i - 1} \circ \sigma^{n - 2}_j$이다.
+달리 말하면 다음 도식은 가환이다.
+$$
+\xymatrix{
+& [n] \ar[rd]^{\sigma^{n - 1}_j} & \\
+[n - 1] \ar[ru]^{\delta^n_i} \ar[rd]_{\sigma^{n - 2}_j} & &
+[n - 1] \\
+& [n - 2] \ar[ru]_{\delta^{n - 1}_{i - 1}} &
+}
+$$
+\item $0 \leq i \leq j \leq n - 1$이면
+$\sigma^{n - 1}_j \circ \sigma^n_i =
+\sigma^{n - 1}_i \circ \sigma^n_{j + 1}$이다.
+달리 말하면 다음 도식은 가환이다.
+$$
+\xymatrix{
+& [n] \ar[rd]^{\sigma^{n - 1}_j} & \\
+[n + 1] \ar[ru]^{\sigma^n_i} \ar[rd]_{\sigma^n_{j + 1}} & &
+[n - 1] \\
+& [n] \ar[ru]_{\sigma^{n - 1}_i} &
+}
+$$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-face-degeneracy-category}
+범주 $\Delta$는 대상 $[n]$ ($n \geq 0$)과 사상
+$\delta^n_j$, $\sigma^n_j$를 가지며 다음 조건을 만족하는 보편 범주이다.
+(a) 모든 사상은 이 사상들의 합성이고, (b) 보조정리
+\ref{lemma-relations-face-degeneracy}에 열거한 관계들이 성립하며,
+(c) 이 사상들 사이의 모든 관계는 그 관계들로부터 따라 나온다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{단체 대상}
+\label{section-simplicial-object}
+
+\begin{definition}
+\label{definition-simplicial-object}
+$\mathcal{C}$를 범주라 하자.
+\begin{enumerate}
+\item $\mathcal{C}$의 {\it 단체 대상 $U$}란 $\Delta$에서
+$\mathcal{C}$로 가는 반변 함자 $U$를 말한다. 식으로 쓰면
+$$
+U : \Delta^{opp} \longrightarrow \mathcal{C}
+$$
+이다.
+\item $\mathcal{C}$가 집합의 범주이면 $U$를 {\it 단체 집합}이라 한다.
+\item $\mathcal{C}$가 아벨 군의 범주이면 $U$를
+{\it 단체 아벨 군}이라 한다.
+\item {\it 단체 대상들의 사상 $U \to U'$}이란 함자들의 변환이다.
+\item {$\mathcal{C}$의 단체 대상들의 범주}를
+$\text{Simp}(\mathcal{C})$로 나타낸다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이는 대상 $U([0]), U([1]), U([2]), \ldots$가 있고, 임의의 $\varphi$, 즉
+비감소 사상 $\varphi : [m] \to [n]$마다 사상
+$U(\varphi) : U([n]) \to U([m])$이 있으며,
+$U(\varphi \circ \psi) = U(\psi) \circ U(\varphi)$를 만족한다는 뜻이다.
+
+\medskip\noindent
+특히 유일한 사상 $U([0]) \to U([n])$이 있고,
+$n + 1$개의 사상 $[0] \to [n]$에 대응하는 사상
+$U([n]) \to U([0])$이 정확히 $n + 1$개 있다.
+이 단체 대상들을 제대로 다루려면 더 많은 기호가 필요함이 분명하다.
+이를 위해 위의 제\ref{section-Delta}절에서 특별히 고른 사상들을 살펴본다.
+
+\begin{lemma}
+\label{lemma-characterize-simplicial-object}
+$\mathcal{C}$를 범주라 하자.
+\begin{enumerate}
+\item $\mathcal{C}$의 단체 대상 $U$가 주어지면 대상들의 열
+$U_n = U([n])$과 사상
+$d^n_j = U(\delta^n_j) : U_n \to U_{n-1}$ 및
+$s^n_j = U(\sigma^n_j) : U_n \to U_{n + 1}$을 얻는다.
+이 사상들은 보조정리 \ref{lemma-relations-face-degeneracy}에 표시된
+관계들을 거꾸로 한 다음 관계들을 만족한다.
+\begin{enumerate}
+\item $0 \leq i < j \leq n + 1$이면
+$d^n_i \circ d^{n + 1}_j = d^n_{j - 1} \circ d^{n + 1}_i$이다.
+\item $0 \leq i < j \leq n - 1$이면
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_{j - 1} \circ d^{n - 1}_i$이다.
+\item $0 \leq j \leq n - 1$이면
+$\text{id} = d^n_j \circ s^{n - 1}_j = d^n_{j + 1} \circ s^{n - 1}_j$이다.
+\item $0 < j + 1 < i \leq n$이면
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_j \circ d^{n - 1}_{i - 1}$이다.
+\item $0 \leq i \leq j \leq n - 1$이면
+$s^n_i \circ s^{n - 1}_j = s^n_{j + 1} \circ s^{n - 1}_i$이다.
+\end{enumerate}
+\item 거꾸로, (1)(a)--(e)를 만족하는 대상들의 열 $U_n$과 사상
+$d^n_j$, $s^n_j$가 주어지면
+$U_n = U([n])$, $d^n_j = U(\delta^n_j)$,
+$s^n_j = U(\sigma^n_j)$를 만족하는 $\mathcal{C}$의 단체 대상 $U$가
+유일하게 존재한다.
+\item 단체 대상 $U$와 $U'$ 사이의 사상은 사상 $d^n_j$와 $s^n_j$와
+가환하는 사상들의 족 $U_n \to U'_n$으로 주어진다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-face-degeneracy-category}에서 바로 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-relations}
+기호를 남용하여 $d^n_i$ 대신 $d_i : U_n \to U_{n - 1}$라 쓰고,
+마찬가지로 $s_i : U_n \to U_{n + 1}$라 쓰기도 한다.
+사상 $d^n_i$와 $s^n_i$ 사이의 관계들은 다음과 같이 나타낼 수 있다.
+\begin{enumerate}
+\item $i < j$이면 $d_i \circ d_j = d_{j - 1} \circ d_i$이다.
+\item $i < j$이면 $d_i \circ s_j = s_{j - 1} \circ d_i$이다.
+\item $\text{id} = d_j \circ s_j = d_{j + 1} \circ s_j$이다.
+\item $i > j + 1$이면 $d_i \circ s_j = s_j \circ d_{i - 1}$이다.
+\item $i \leq j$이면 $s_i \circ s_j = s_{j + 1} \circ s_i$이다.
+\end{enumerate}
+이는 왼쪽과 오른쪽의 합성이 모두 정의될 때마다 해당 등식이
+성립해야 한다는 뜻이다.
+\end{remark}
+
+\noindent
+유일한 사상 $s^0_0 = U(\sigma^0_0) : U_0 \to U_1$과
+$U_1 \to U_0$인 두 사상 $d^1_0 = U(\delta^1_0)$,
+$d^1_1 = U(\delta^1_1)$을 얻는다.
+$U_1 \to U_2$인 두 사상
+$s^1_0 = U(\sigma^1_0)$, $s^1_1 = U(\sigma^1_1)$이 있다.
+$U_3 \to U_2$인 세 사상
+$d^2_0 = U(\delta^2_0)$, $d^2_1 = U(\delta^2_1)$,
+$d^2_2 = U(\delta^2_2)$가 있다. 이와 같이 계속된다.
+% SOURCE-ERRATUM-CANDIDATE P02-E0102: frozen source says d^2_i: U_3 -> U_2, but its own definition gives d^2_i: U_2 -> U_1.
+
+\medskip\noindent
+그림으로는 $U$를 다음과 같이 생각한다.
+$$
+\xymatrix{
+U_2
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+U_1
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+U_0
+\ar@<0ex>[l]
+}
+$$
+여기서 $d$-사상은 오른쪽을 향하는 화살표이고,
+$s$-사상은 왼쪽을 향하는 화살표이다.
+
+\begin{example}
+\label{example-constant-simplicial-object}
+가장 간단한 예는 값이 $X \in \Ob(\mathcal{C})$인
+{\it 상수} 단체 대상이다. 다시 말해 $U_n = X$이고
+모든 사상은 $\text{id}_X$이다.
+\end{example}
+
+\begin{example}
+\label{example-fibre-products-simplicial-object}
+$Y\to X$가 $\mathcal{C}$의 사상이고 모든 섬유곱
+$Y \times_X Y \times_X \ldots \times_X Y$가 존재한다고 하자.
+이때 $U_n$을 $(n + 1)$중 섬유곱으로 놓고,
+$\varphi : [n] \to [m]$이 ``좌표''에 대한 사상
+$(y_0, \ldots, y_m) \mapsto (y_{\varphi(0)}, \ldots, y_{\varphi(n)})$에
+대응하도록 한다. 다시 말해 사상
+$U_0 = Y \to U_1 = Y \times_X Y$는 대각 사상이다.
+두 사상 $U_1 = Y \times_X Y \to U_0 = Y$는 사영 사상이다.
+\end{example}
+
+\noindent
+기하학적으로 위의 예 \ref{example-fibre-products-simplicial-object}는
+중요한 예이다. 이 예는 사상 $d^n_j : U_n \to U_{n - 1}$을
+(제$j$성분을 잊는) 사영 사상으로, 사상
+$s^n_j : U_n \to U_{n + 1}$을 (제$j$좌표를 반복하는)
+대각 사상으로 생각하는 것이 좋음을 말해 준다.
+아래 절들에서 이를 다시 살펴볼 것이다.
+
+\begin{lemma}
+\label{lemma-si-injective}
+$\mathcal{C}$를 범주라 하자.
+$U$를 $\mathcal{C}$의 단체 대상이라 하자.
+각 사상 $s^n_i : U_n \to U_{n + 1}$은 왼쪽 역을 가진다.
+특히 $s^n_i$는 단사 사상이다.
+\end{lemma}
+
+\begin{proof}
+$d_i^{n + 1} \circ s^n_i = \text{id}_{U_n}$이므로 성립한다.
+\end{proof}
+
+\section{준층으로서의 단체 대상}
+\label{section-simplicial-presheaves}
+
+\noindent
+또 하나의 관찰은 $\mathcal{C}$의 단체 대상을 $\Delta$ 위의
+$\mathcal{C}$-값 준층으로 생각할 수 있다는 것이다.
+사이트, 정의 \ref{sites-definition-presheaf}를 보라.
+실제로 $U$, $U'$가 $\mathcal{C}$의 단체 대상이면
+\begin{equation}
+\label{equation-simplicial-set-presheaf}
+\Mor(U, U') = \Mor_{\textit{PSh}(\Delta)}(U, U').
+\end{equation}
+아래 내용의 일부는 사이트 장의 더 일반적인 구성들로 대체할 수 있다.
+하지만 단체 대상에 특유한 논증을 쓰는 편이 더 명확한 그림을
+주는 듯하다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{쌍대단체 대상}
+\label{section-cosimplicial-object}
+
+\noindent
+범주 $\mathcal{C}$의 쌍대단체 대상은 단순히 반대 범주
+$\mathcal{C}^{opp}$의 단체 대상으로 정의할 수도 있다.
+그러나 사람이 실제로 사고하는 방식은 그렇지 않으므로,
+여기서는 이를 따로 도입하고 몇 가지 간단한 성질을 지적한다.
+
+\begin{definition}
+\label{definition-cosimplicial-object}
+$\mathcal{C}$를 범주라 하자.
+\begin{enumerate}
+\item $\mathcal{C}$의 {\it 쌍대단체 대상 $U$}란 $\Delta$에서
+$\mathcal{C}$로 가는 공변 함자 $U$를 말한다. 식으로 쓰면
+$$
+U : \Delta \longrightarrow \mathcal{C}
+$$
+이다.
+\item $\mathcal{C}$가 집합의 범주이면 $U$를
+{\it 쌍대단체 집합}이라 한다.
+\item $\mathcal{C}$가 아벨 군의 범주이면 $U$를
+{\it 쌍대단체 아벨 군}이라 한다.
+\item {\it 쌍대단체 대상들의 사상 $U \to U'$}이란 함자들의 변환이다.
+\item {$\mathcal{C}$의 쌍대단체 대상들의 범주}를
+$\text{CoSimp}(\mathcal{C})$로 나타낸다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이는 대상 $U([0]), U([1]), U([2]), \ldots$가 있고,
+임의의 $\varphi$, 즉 비감소 사상 $\varphi : [m] \to [n]$마다 사상
+$U(\varphi) : U([m]) \to U([n])$이 있으며,
+$U(\varphi \circ \psi) = U(\varphi) \circ U(\psi)$를
+만족한다는 뜻이다.
+
+\medskip\noindent
+특히 유일한 사상 $U([n]) \to U([0])$이 있고,
+$n + 1$개의 사상 $[0] \to [n]$에 대응하는 사상
+$U([0]) \to U([n])$이 정확히 $n + 1$개 있다.
+이 단체 대상들을 제대로 다루려면 더 많은 기호가 필요함이 분명하다.
+% P02-E0103: frozen source says "these simplicial objects" in the cosimplicial section.
+이를 위해 위의 제\ref{section-Delta}절에서 특별히 고른 사상들을 살펴본다.
+
+\begin{lemma}
+\label{lemma-characterize-cosimplicial-object}
+$\mathcal{C}$를 범주라 하자.
+\begin{enumerate}
+\item $\mathcal{C}$의 쌍대단체 대상 $U$가 주어지면 대상들의 열
+$U_n = U([n])$과 사상
+$\delta^n_j = U(\delta^n_j) : U_{n - 1} \to U_n$ 및
+$\sigma^n_j = U(\sigma^n_j) : U_{n + 1} \to U_n$을 얻는다.
+이 사상들은 보조정리 \ref{lemma-relations-face-degeneracy}에 표시된
+관계들을 만족한다.
+\item 거꾸로, 이 관계들을 만족하는 대상들의 열 $U_n$과 사상
+$\delta^n_j$, $\sigma^n_j$가 주어지면
+$U_n = U([n])$, $\delta^n_j = U(\delta^n_j)$,
+$\sigma^n_j = U(\sigma^n_j)$를 만족하는 $\mathcal{C}$의
+쌍대단체 대상 $U$가 유일하게 존재한다.
+\item 쌍대단체 대상 $U$와 $U'$ 사이의 사상은 사상
+$\delta^n_j$와 $\sigma^n_j$와 가환하는 사상들의 족
+$U_n \to U'_n$으로 주어진다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-face-degeneracy-category}에서 바로 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-relations-cosimplicial}
+기호를 남용하여 $\delta^n_i$ 대신
+$\delta_i : U_{n - 1} \to U_n$라 쓰고, 마찬가지로
+$\sigma_i : U_{n + 1} \to U_n$라 쓰기도 한다.
+사상 $\delta^n_i$와 $\sigma^n_i$ 사이의 관계들은 다음과 같이
+나타낼 수 있다.
+\begin{enumerate}
+\item $i < j$이면
+$\delta_j \circ \delta_i = \delta_i \circ \delta_{j - 1}$이다.
+\item $i < j$이면
+$\sigma_j \circ \delta_i = \delta_i \circ \sigma_{j - 1}$이다.
+\item $\text{id} = \sigma_j \circ \delta_j = \sigma_j \circ \delta_{j + 1}$이다.
+\item $i > j + 1$이면
+$\sigma_j \circ \delta_i = \delta_{i - 1} \circ \sigma_j$이다.
+\item $i \leq j$이면
+$\sigma_j \circ \sigma_i = \sigma_i \circ \sigma_{j + 1}$이다.
+\end{enumerate}
+이는 왼쪽과 오른쪽의 합성이 모두 정의될 때마다 해당 등식이
+성립해야 한다는 뜻이다.
+\end{remark}
+
+\noindent
+유일한 사상 $\sigma^0_0 = U(\sigma^0_0) : U_1 \to U_0$과
+$U_0 \to U_1$인 두 사상 $\delta^1_0 = U(\delta^1_0)$,
+$\delta^1_1 = U(\delta^1_1)$을 얻는다.
+$U_2 \to U_1$인 두 사상
+$\sigma^1_0 = U(\sigma^1_0)$, $\sigma^1_1 = U(\sigma^1_1)$이 있다.
+$U_2 \to U_3$인 세 사상
+$\delta^2_0 = U(\delta^2_0)$, $\delta^2_1 = U(\delta^2_1)$,
+$\delta^2_2 = U(\delta^2_2)$가 있다. 이와 같이 계속된다.
+
+\medskip\noindent
+그림으로는 $U$를 다음과 같이 생각한다.
+$$
+\xymatrix{
+U_0
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+&
+U_1
+\ar@<0ex>[l]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+U_2
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+}
+$$
+여기서 $\delta$-사상은 오른쪽을 향하는 화살표이고,
+$\sigma$-사상은 왼쪽을 향하는 화살표이다.
+
+\begin{example}
+\label{example-constant-cosimplicial-object}
+가장 간단한 예는 값이 $X \in \Ob(\mathcal{C})$인
+{\it 상수} 쌍대단체 대상이다. 다시 말해 $U_n = X$이고
+모든 사상은 $\text{id}_X$이다.
+\end{example}
+
+\begin{example}
+\label{example-push-outs-simplicial-object}
+$X\to Y$가 $C$의 사상이고 모든 밂
+$Y\amalg_X Y \amalg_X \ldots \amalg_X Y$가 존재한다고 하자.
+% P02-E0104: frozen source uses plain C although the ambient category is mathcal C.
+이때 $U_n$을 $(n + 1)$중 밂으로 놓고,
+$\varphi : [n] \to [m]$이 ``좌표''에 대한 사상
+$$
+(y \text{ in }i\text{th component})
+\mapsto
+(y \text{ in }\varphi(i)\text{th component})
+$$
+에 대응하도록 한다. 다시 말해 사상
+$U_1 = Y \amalg_X Y \to U_0 = Y$는 각 성분에서 항등사상이다.
+두 사상 $U_0 = Y \to U_1 = Y \amalg_X Y$는 두 쌍대사영이다.
+\end{example}
+
+\begin{example}
+\label{example-simplex-cosimplicial-set}
+각 $n \geq 0$에 대해 쌍대단체 집합
+$$
+\Delta \longrightarrow \textit{Sets},\quad
+[k] \longmapsto \Mor_{\Delta}([n], [k])
+$$
+을 $C[n]$으로 나타낸다.
+이 예는 예 \ref{example-simplex-simplicial-set}의 쌍대이다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-di-injective}
+$\mathcal{C}$를 범주라 하자.
+$U$를 $\mathcal{C}$의 쌍대단체 대상이라 하자.
+각 사상 $\delta^n_i : U_{n - 1} \to U_n$은 왼쪽 역을 가진다.
+특히 $\delta^n_i$는 단사 사상이다.
+\end{lemma}
+
+\begin{proof}
+$j < n$일 때
+$\sigma_i^{n - 1} \circ \delta^n_i = \text{id}_{U_n}$이므로 성립한다.
+% P02-E0105: frozen source has a type/index mismatch: id_{U_n} and j<n.
+\end{proof}
+
+
+
+\section{단체 대상의 곱}
+\label{section-products}
+
+\noindent
+물론 단체 대상들의 곱을 단체 대상들의 범주에서의 곱으로 정의해야 한다.
+그러나 그렇게 하면 곱은 존재하지만 아래와 같이 기술되지 않는,
+혼동의 여지가 있는 상황이 생길 수 있다. 이를 피하기 위해 곱을
+다음과 같이 직접 정의한다.
+
+\begin{definition}
+\label{definition-product}
+$\mathcal{C}$를 범주라 하자.
+$U$와 $V$를 $\mathcal{C}$의 단체 대상이라 하자.
+곱 $U_n \times V_n$이 $\mathcal{C}$에서 존재한다고 가정하자.
+{$U$와 $V$의 {\it 곱}}은 다음과 같이 정의되는 단체 대상
+$U \times V$이다.
+\begin{enumerate}
+\item $(U \times V)_n = U_n \times V_n$,
+\item $d^n_i = (d^n_i, d^n_i)$, 그리고
+\item $s^n_i = (s^n_i, s^n_i)$.
+\end{enumerate}
+다시 말해 $U \times V$는 $\Delta$ 위의 준층 $U$와 $V$의 곱이다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-product}
+$U$와 $V$가 범주 $\mathcal{C}$의 단체 대상이고
+$U \times V$가 존재하면, $\mathcal{C}$의 임의의 세 번째 단체 대상
+$W$에 대해
+$$
+\Mor(W, U \times V) =
+\Mor(W, U) \times
+\Mor(W, V)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+\section{단체 대상의 섬유곱}
+\label{section-fibre-products}
+
+\noindent
+물론 단체 대상들의 섬유곱을 단체 대상들의 범주에서의 섬유곱으로
+정의해야 한다. 그러나 그렇게 하면 섬유곱은 존재하지만 아래와 같이
+기술되지 않는, 혼동의 여지가 있는 상황이 생길 수 있다.
+이를 피하기 위해 섬유곱을 다음과 같이 직접 정의한다.
+
+\begin{definition}
+\label{definition-fibre-product}
+$\mathcal{C}$를 범주라 하자.
+$U, V, W$를 $\mathcal{C}$의 단체 대상이라 하자.
+$a : V \to U$, $b : W \to U$를 사상이라 하자.
+섬유곱 $V_n \times_{U_n} W_n$이 $\mathcal{C}$에서 존재한다고 가정하자.
+{$U$ 위에서의 $V$와 $W$의 {\it 섬유곱}}은 다음과 같이 정의되는
+단체 대상 $V \times_U W$이다.
+\begin{enumerate}
+\item $(V \times_U W)_n = V_n \times_{U_n} W_n$,
+\item $d^n_i = (d^n_i, d^n_i)$, 그리고
+\item $s^n_i = (s^n_i, s^n_i)$.
+\end{enumerate}
+다시 말해 $V \times_U W$는 $\Delta$ 위의 준층 $U$ 위에서의
+준층 $V$와 $W$의 섬유곱이다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-fibre-product}
+$U, V, W$가 범주 $\mathcal{C}$의 단체 대상이고,
+$a : V \to U$, $b : W \to U$가 사상이며,
+$V \times_U W$가 존재하면, $\mathcal{C}$의 임의의 네 번째 단체 대상
+$T$에 대해
+$$
+\Mor(T, V \times_U W) =
+\Mor(T, V) \times_{\Mor(T, U)}
+\Mor(T, W)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\section{단체 대상의 밂}
+\label{section-push-outs}
+
+\noindent
+물론 단체 대상들의 밂을 단체 대상들의 범주에서의 밂으로 정의해야 한다.
+그러나 그렇게 하면 밂은 존재하지만 아래와 같이 기술되지 않는,
+혼동의 여지가 있는 상황이 생길 수 있다. 이를 피하기 위해 밂을
+다음과 같이 직접 정의한다.
+
+\begin{definition}
+\label{definition-push-out}
+$\mathcal{C}$를 범주라 하자.
+$U, V, W$를 $\mathcal{C}$의 단체 대상이라 하자.
+$a : U \to V$, $b : U \to W$를 사상이라 하자.
+밂 $V_n \amalg_{U_n} W_n$이 $\mathcal{C}$에서 존재한다고 가정하자.
+{$U$ 위에서의 $V$와 $W$의 {\it 밂}}은 다음과 같이 정의되는 단체 대상
+$V\amalg_U W$이다.
+\begin{enumerate}
+\item $(V \amalg_U W)_n = V_n \amalg_{U_n} W_n$,
+\item $d^n_i = (d^n_i, d^n_i)$, 그리고
+\item $s^n_i = (s^n_i, s^n_i)$.
+\end{enumerate}
+다시 말해 $V\amalg_U W$는 $\Delta$ 위의 준층 $U$ 위에서의
+준층 $V$와 $W$의 밂이다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-push-out}
+$U, V, W$가 범주 $\mathcal{C}$의 단체 대상이고,
+$a : U \to V$, $b : U \to W$가 사상이며,
+$V\amalg_U W$가 존재하면, $\mathcal{C}$의 임의의 네 번째 단체 대상
+$T$에 대해
+$$
+\Mor(V\amalg_U W, T) =
+\Mor(V, T) \times_{\Mor(U, T)}
+\Mor(W, T)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{쌍대단체 대상의 곱}
+\label{section-products-cosimplicial}
+
+\noindent
+물론 쌍대단체 대상들의 곱을 쌍대단체 대상들의 범주에서의 곱으로
+정의해야 한다. 그러나 그렇게 하면 곱은 존재하지만 아래와 같이
+기술되지 않는, 혼동의 여지가 있는 상황이 생길 수 있다.
+이를 피하기 위해 곱을 다음과 같이 직접 정의한다.
+
+\begin{definition}
+\label{definition-product-cosimplicial-objects}
+$\mathcal{C}$를 범주라 하자.
+$U$와 $V$를 $\mathcal{C}$의 쌍대단체 대상이라 하자.
+곱 $U_n \times V_n$이 $\mathcal{C}$에서 존재한다고 가정하자.
+{$U$와 $V$의 {\it 곱}}은 다음과 같이 정의되는 쌍대단체 대상
+$U \times V$이다.
+\begin{enumerate}
+\item $(U \times V)_n = U_n \times V_n$,
+\item 임의의 $\varphi : [n] \to [m]$에 대해 사상
+$(U \times V)(\varphi) : U_n \times V_n \to U_m \times V_m$은
+곱 $U(\varphi) \times V(\varphi)$이다.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{lemma-product-cosimplicial-objects}
+$U$와 $V$가 범주 $\mathcal{C}$의 쌍대단체 대상이고
+$U \times V$가 존재하면, $\mathcal{C}$의 임의의 세 번째 쌍대단체 대상
+$W$에 대해
+$$
+\Mor(W, U \times V) =
+\Mor(W, U) \times
+\Mor(W, V)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\section{쌍대단체 대상의 섬유곱}
+\label{section-fibre-products-cosimplicial}
+
+\noindent
+물론 쌍대단체 대상들의 섬유곱을 쌍대단체 대상들의 범주에서의
+섬유곱으로 정의해야 한다. 그러나 그렇게 하면 곱은 존재하지만
+아래와 같이 기술되지 않는, 혼동의 여지가 있는 상황이 생길 수 있다.
+이를 피하기 위해 섬유곱을 다음과 같이 직접 정의한다.
+
+\begin{definition}
+\label{definition-fibre-product-cosimplicial-objects}
+$\mathcal{C}$를 범주라 하자.
+$U, V, W$를 $\mathcal{C}$의 쌍대단체 대상이라 하자.
+$a : V \to U$와 $b : W \to U$를 사상이라 하자.
+섬유곱 $V_n \times_{U_n} W_n$이 $\mathcal{C}$에서 존재한다고 가정하자.
+{$U$ 위에서의 $V$와 $W$의 {\it 섬유곱}}은 다음과 같이 정의되는
+쌍대단체 대상 $V \times_U W$이다.
+\begin{enumerate}
+\item $(V \times_U W)_n = V_n \times_{U_n} W_n$,
+\item 임의의 $\varphi : [n] \to [m]$에 대해 사상
+$(V \times_U W)(\varphi) : V_n \times_{U_n} W_n \to V_m \times_{U_m} W_m$은
+곱 $V(\varphi) \times_{U(\varphi)} W(\varphi)$이다.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{lemma-fibre-product-cosimplicial-objects}
+$U, V, W$가 범주 $\mathcal{C}$의 쌍대단체 대상이고,
+$a : V \to U$, $b : W \to U$가 사상이며,
+$V \times_U W$가 존재하면, $\mathcal{C}$의 임의의 네 번째 쌍대단체 대상
+$T$에 대해
+$$
+\Mor(T, V \times_U W) =
+\Mor(T, V) \times_{\Mor(T, U)}
+\Mor(T, W)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\section{단체 집합}
+\label{section-simplicial-set}
+
+\noindent
+$U$를 단체 집합이라 하자. $U_0$을 {$0$-단체들의 집합},
+집합 $U_1$을 {$1$-단체들의 집합}, 집합 $U_2$를
+{$2$-단체들의 집합} 등으로 생각하는 것이 좋다.
+
+\medskip\noindent
+사상 $s^n_j : U_n \to U_{n + 1}$은 $n$-단체 $A$에,
+그 $(j, j + 1)$-변이 $A$의 꼭짓점 $j$로 축약된 퇴화
+$(n + 1)$-단체 $B$를 대응시키는 사상으로 생각한다.
+사상 $d^n_j : U_n \to U_{n - 1}$은 $n$-단체 $A$에 그 면들 가운데
+꼭짓점 $j$를 생략한 면을 대응시키는 사상으로 생각한다.
+이렇게 하면 사상 $s^n_j$와 $d^n_j$ 사이의 관계들을
+기하학적으로 시각화할 수 있다.
+
+\begin{definition}
+\label{definition-terminology-simplicial-sets}
+$U$를 단체 집합이라 하자.
+$x$가 $U_n$의 원소라는 뜻으로 $x$를 {$U$의 $n$-단체}라 한다.
+$d^n_jx = y$라는 뜻으로 $y$를 $x$의 제$j$ {\it 면}이라 한다.
+$z = s^n_jx$이면 $z$를 $x$의 제$j$ {\it 퇴화}라 한다.
+다른 단체의 퇴화인 단체를 {\it 퇴화}되었다고 한다.
+\end{definition}
+
+\noindent
+몇 가지 기본적인 예를 들자.
+
+\begin{example}
+\label{example-simplex-simplicial-set}
+각 $n \geq 0$에 대해 단체 집합
+$$
+\Delta^{opp} \longrightarrow \textit{Sets},\quad
+[k] \longmapsto \Mor_{\Delta}([k], [n])
+$$
+을 $\Delta[n]$으로 나타낸다. 다음 명제들의 확인은 독자에게 맡긴다.
+$m > n$인 $\Delta[n]$의 모든 $m$-단체는 퇴화되어 있다.
+$\Delta[n]$에는 비퇴화 $n$-단체가 유일하게 존재하며,
+그것은 $\text{id}_{[n]}$이다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-simplex-map}
+$U$를 단체 집합이라 하고 $n \geq 0$을 정수라 하자.
+표준적인 전단사
+$$
+\Mor(\Delta[n], U)
+\longrightarrow
+U_n
+$$
+가 존재하며, 이는 사상 $\varphi$를 $\Delta[n]$의 유일한 비퇴화
+$n$-단체에서의 $\varphi$의 값으로 보낸다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{example}
+\label{example-simplex-category}
+$\Delta$에서 $[n]$ 위에 놓인 대상들의 범주 $\Delta/[n]$을 생각하자.
+범주, 예 \ref{categories-example-category-over-X}를 보라.
+함자 $p : \Delta/[n] \to \Delta$가 존재한다.
+$[k]$ 위에서의 $p$의 섬유범주는 범주, 제
+\ref{categories-section-fibred-groupoids}절에서 말하는 것으로,
+$\Delta[n]$의 $k$-단체들의 집합 $\Delta[n]_k$를 대상으로 가지며
+사상으로는 항등사상만 가진다.
+$\Delta$의 각 사상 $\varphi : [k] \to [l]$과 $[l]$ 위의 섬유범주의
+각 대상 $\psi : [l] \to [n]$에 대해, $\varphi$를 덮는 사상을 가진
+$[k]$ 위의 대상이 유일하게 존재하며, 그것은
+$\psi \circ \varphi : [k] \to [n]$이다. 따라서 $\Delta/[n]$은
+$\Delta$ 위에서 집합들로 섬유화되어 있다. 다시 말해
+$\Delta/[n]$을 $\Delta$ 위의 집합 준층으로 생각할 수 있다.
+범주, 예 \ref{categories-example-fibred-category-from-functor-of-points}도 보라.
+그리고 이 집합 준층은 단체 집합 $\Delta[n]$과 일치한다.
+특히 식 (\ref{equation-simplicial-set-presheaf})과 위의 보조정리
+\ref{lemma-simplex-map}에서 임의의 단체 집합 $U$에 대한 식
+$$
+\Mor_{\textit{PSh}(\Delta)}(\Delta/[n], U) = U_n
+$$
+을 얻는다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-product-degenerate}
+$U$, $V$를 단체 집합이라 하자.
+$a, b \geq 0$을 정수라 하자.
+$n > a$이면 $U$의 모든 $n$-단체가 퇴화되어 있다고 가정하자.
+$n > b$이면 $V$의 모든 $n$-단체가 퇴화되어 있다고 가정하자.
+그러면 $n > a + b$일 때 $U \times V$의 모든 $n$-단체는 퇴화되어 있다.
+\end{lemma}
+
+\begin{proof}
+$n > a + b$라 하자.
+$(u, v) \in (U \times V)_n = U_n \times V_n$라 하자.
+가정에 의해 $u = U(\alpha)(u')$이고 $v = V(\beta)(v')$가 되도록 하는
+$\alpha : [n] \to [a]$와 $u' \in U_a$, 그리고
+$\beta : [n] \to [b]$와 $v' \in V_b$가 존재한다.
+$n > a + b$이므로 $\alpha(i) = \alpha(i + 1)$ 및
+$\beta(i) = \beta(i + 1)$을 만족하는 $0 \leq i \leq a + b$가 존재한다.
+따라서 $(u, v)$는 $s^{n - 1}_i$의 상에 속한다.
+\end{proof}
+
+
+
+\section{절단된 단체 대상과 뼈대 함자}
+\label{section-skeleton}
+
+\noindent
+$\Delta_{\leq n}$을 대상이 $[0], [1], [2], \ldots, [n]$인
+$\Delta$의 충만한 부분범주라 하자. $\mathcal{C}$를 범주라 하자.
+
+\begin{definition}
+\label{definition-truncated-simplicial-object}
+{$\mathcal{C}$의 $n$-절단 단체 대상}이란 $\Delta_{\leq n}$에서
+$\mathcal{C}$로 가는 반변 함자이다.
+{$n$-절단 단체 대상의 사상}이란 함자들의 변환이다.
+$\mathcal{C}$의 $n$-절단 단체 대상들의 범주를 기호
+$\text{Simp}_n(\mathcal{C})$로 나타낸다.
+\end{definition}
+
+\noindent
+$\mathcal{C}$의 단체 대상 $U$가 주어졌을 때 절단
+$\text{sk}_n U$는 $U$를 부분범주 $\Delta_{\leq n}$에 제한한 것이다.
+이는 $\mathcal{C}$의 단체 대상들의 범주에서 $\mathcal{C}$의
+$n$-절단 단체 대상들의 범주로 가는 {\it 뼈대 함자}
+$$
+\text{sk}_n :
+\text{Simp}(\mathcal{C}) \longrightarrow \text{Simp}_n(\mathcal{C})
+$$
+를 정의한다. 문헌의 다른 함자들과 혼동할 가능성을 피하려면
+주의 \ref{remark-sk-literature}를 보라.
+
+
+
+
+\section{단체 집합과의 곱}
+\label{section-product-with-simplicial-sets}
+
+\noindent
+$\mathcal{C}$를 범주라 하자.
+$U$를 단체 집합이라 하자.
+$V$를 $\mathcal{C}$의 단체 대상이라 하자.
+$\mathcal{C}$의 단체 대상 $W$에 집합
+\begin{equation}
+\label{equation-functor-product-with-simplicial-set}
+\left\{
+(f_{n, u} : V_n \to W_n)_{n \geq 0, u \in U_n}
+\text{ such that }
+\begin{matrix}
+\forall \varphi : [m] \to [n] \\
+f_{m, U(\varphi)(u)} \circ V(\varphi) = W(\varphi) \circ f_{n, u}
+\end{matrix}
+\right\}
+\end{equation}
+을 대응시키는 공변 함자를 생각할 수 있다.
+이 함자가 $\Mor_{\text{Simp}(\mathcal{C})}(Q, -)$ 꼴이면
+$Q$를 $U$와 $V$의 곱으로 생각할 수 있다.
+이 방식을 형식화하는 대신 곱을 다음과 같이 직접 정의한다.
+
+\begin{definition}
+\label{definition-product-with-simplicial-set}
+$\mathcal{C}$를 범주라 하자. $\mathcal{C}$의 임의의 두 대상의
+쌍대곱이 존재한다고 가정하자.
+$U$를 단체 집합이라 하고 $V$를 $\mathcal{C}$의 단체 대상이라 하자.
+각 $U_n$이 유한하고 공집합이 아니라고 가정하자.
+이 경우 {$U$와 $V$의 {\it 곱 $U \times V$}}을, 제$n$항이 대상
+$$
+(U \times V)_n = \coprod\nolimits_{u\in U_n} V_n
+$$
+이고 $\varphi : [m] \to [n]$에 대한 사상이
+$$
+\coprod\nolimits_{u\in U_n} V_n
+\longrightarrow
+\coprod\nolimits_{u'\in U_m} V_m
+$$
+인 $\mathcal{C}$의 단체 대상으로 정의한다.
+이 사상은 $u$에 대응하는 성분 $V_n$을
+$u' = U(\varphi)(u)$에 대응하는 성분 $V_m$으로 사상
+$V(\varphi)$를 통해 보낸다.
+좀 더 느슨하게는 $\mathcal{C}$에 관해 아무것도 가정하지 않고도
+위에 표시한 쌍대곱들이 모두 존재하면
+{{\it 곱 $U \times V$가 존재한다}}고 말할 것이다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-check-product-with-simplicial-set}
+$\mathcal{C}$를 범주라 하자. $\mathcal{C}$의 임의의 두 대상의
+쌍대곱이 존재한다고 가정하자.
+$U$를 단체 집합이라 하고 $V$를 $\mathcal{C}$의 단체 대상이라 하자.
+각 $U_n$이 유한하고 공집합이 아니라고 가정하자.
+함자 $W \mapsto \Mor_{\text{Simp}(\mathcal{C})}(U \times V, W)$는
+$W$를 식 (\ref{equation-functor-product-with-simplicial-set})의 집합으로
+보내는 함자와 표준적으로 동형이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-back-to-U}
+$\mathcal{C}$를 범주라 하자. $\mathcal{C}$의 임의의 두 대상의
+쌍대곱이 존재한다고 가정하자.
+모든 성분이 유한하고 공집합이 아닌 단체 집합들의 범주를 잠시
+$\textit{FSSets}$로 나타내자.
+\begin{enumerate}
+\item 규칙 $(U, V) \mapsto U \times V$는 함자
+$\textit{FSSets} \times \text{Simp}(\mathcal{C})
+\to \text{Simp}(\mathcal{C})$를 정의한다.
+\item 위와 같은 각 $U$, $V$에 대해 각 성분
+$(U \times V)_n = \coprod_u V_n$에서 항등사상을 취하여 정의되는
+단체 대상들의 표준 사상
+$$
+U \times V \longrightarrow V
+$$
+가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\noindent
+위 구성의 특수한 경우를 간단히 살펴보자.
+$\mathcal{C}$를 범주라 하고 $X$를 $\mathcal{C}$의 대상이라 하자.
+$k \geq 0$을 정수라 하자.
+모든 쌍대곱 $X \amalg \ldots \amalg X$가 존재하면 위 정의에 따라 곱
+$$
+X \times \Delta[k]
+$$
+가 존재한다. 여기서 $X$는 값이 바로 그 대상인 해당 상수 단체 대상으로
+생각한다.
+
+\begin{lemma}
+\label{lemma-morphism-from-coproduct}
+$X$와 $k$를 위와 같이 두자.
+$\mathcal{C}$의 임의의 단체 대상 $V$에 대해 다음 표준적인 전단사가 있다.
+$$
+\Mor_{\text{Simp}(\mathcal{C})}(X \times \Delta[k], V)
+\longrightarrow
+\Mor_\mathcal{C}(X, V_k).
+$$
+이는 $\gamma$를 $\text{id}_{[k]}$에 대응하는 성분에 제한한 사상
+$\gamma_k$로 보낸다.
+마찬가지로 임의의 $n \geq k$에 대해 $W$가 $\mathcal{C}$의
+$n$-절단 단체 대상이면
+$$
+\Mor_{\text{Simp}_n(\mathcal{C})}(\text{sk}_n(X \times \Delta[k]), W)
+=
+\Mor_\mathcal{C}(X, W_k).
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+사상 $\gamma : X \times \Delta[k] \to V$는
+$\alpha : [n] \to [k]$에 따른 사상들의 족
+$\gamma_\alpha : X \to V_n$으로 주어진다.
+이 사상들은 모든 $\varphi : [m] \to [n]$에 대해 도식
+$$
+\xymatrix{
+X \ar[r]^{\gamma_\alpha} \ar[d]^{\text{id}_X} & V_n \ar[d]^{V(\varphi)} \\
+X \ar[r]^{\gamma_{\alpha \circ \varphi}} & V_m
+}
+$$
+이 가환하도록 해야 한다. $\alpha = \text{id}_{[k]}$로 두면
+임의의 $\varphi : [m] \to [k]$에 대해
+$\gamma_\varphi = V(\varphi) \circ \gamma_{\text{id}_{[k]}}$임을 알 수 있다.
+따라서 사상 $\gamma$는 $\text{id}_{[k]}$에 대응하는 성분에서의
+$\gamma$의 값으로 결정된다. 거꾸로, 그러한 사상
+$f : X \to V_k$가 주어지면
+$\gamma_\alpha = V(\alpha) \circ f$로 놓아 사상 $\gamma$를 쉽게 구성한다.
+
+\medskip\noindent
+절단된 경우도 비슷하며 독자에게 맡긴다.
+\end{proof}
+
+\noindent
+그 특별한 예로 $k = 0$인 경우가 있다.
+이 경우 보조정리의 식은 단지
+$$
+\Mor_\mathcal{C}(X, V_0)
+=
+\Mor_{\text{Simp}(\mathcal{C})}(X, V)
+$$
+라는 뜻이다. 여기서 오른쪽의 $X$는 값이 $X$인 상수 단체 대상을
+나타낸다. 이후에는 이 식을 따로 언급하지 않고 사용할 것이다.
+
+
+
+
+\section{단체 집합에서 쌍대단체 대상으로 가는 Hom}
+\label{section-hom-from-simplicial-sets-into-cosimplicial}
+
+\noindent
+$\mathcal{C}$를 범주라 하자.
+$U$를 $\mathcal{C}$의 단체 대상이라 하고,
+$V$를 $\mathcal{C}$의 쌍대단체 대상이라 하자.
+그러면 다음과 같이 쌍대단체 집합 $\Hom_\mathcal{C}(U, V)$를 얻는다.
+\begin{enumerate}
+\item $\Hom_\mathcal{C}(U, V)_n = \Mor_\mathcal{C}(U_n, V_n)$으로 놓고,
+\item $\varphi : [m] \to [n]$에 대해
+$\Hom_\mathcal{C}(U, V)_m \to \Hom_\mathcal{C}(U, V)_n$으로
+$f \mapsto V(\varphi) \circ f \circ U(\varphi)$로 주어지는 사상을 취한다.
+\end{enumerate}
+이것이 다음 정의의 동기이다.
+
+\begin{definition}
+\label{definition-hom-deltak-cosimplicial}
+$\mathcal{C}$를 유한 곱을 가지는 범주라 하자.
+$V$를 $\mathcal{C}$의 쌍대단체 대상이라 하자.
+$U$를 각 $U_n$이 유한하고 공집합이 아닌 단체 집합이라 하자.
+{{\it $\Hom(U, V)$}}을 다음과 같이 정의되는
+$\mathcal{C}$의 쌍대단체 대상으로 정의한다.
+\begin{enumerate}
+\item $\Hom(U, V)_n = \prod_{u \in U_n} V_n$으로 놓는다.
+다시 말해, 이는 그 $X$-값 점들이
+$$
+\Mor_\mathcal{C}(X, \Hom(U, V)_n)
+=
+\text{Map}(U_n, \Mor_\mathcal{C}(X, V_n))
+$$
+을 만족하는 $\mathcal{C}$의 유일한 대상이다. 그리고
+\item $\varphi : [m] \to [n]$에 대해 위와 같은 $X$-값 점에서
+$f \mapsto V(\varphi) \circ f \circ U(\varphi)$로 주어지는 사상
+$\Hom(U, V)_m \to \Hom(U, V)_n$을 취한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+곱들 사이의 사상으로 이 정의를 풀어 쓰는 일은 독자에게 맡긴다.
+또한 단체 집합과 단체 대상의 곱에 관한 보조정리
+\ref{lemma-back-to-U}에서와 정확히 마찬가지로 이 구성은
+$U$에 대해서는 반변적으로, $V$에 대해서는 공변적으로 함자적이다.
+
+
+
+
+\section{쌍대단체 집합에서 단체 대상으로 가는 Hom}
+\label{section-hom-from-cosimplicial-sets-into-simplicial}
+
+\noindent
+$\mathcal{C}$를 범주라 하자. $U$를 $\mathcal{C}$의 쌍대단체 대상으로,
+$V$를 $\mathcal{C}$의 단체 대상으로 하자.
+그러면 다음과 같이 단체 집합 $\Hom_\mathcal{C}(U, V)$를 얻는다.
+\begin{enumerate}
+\item $\Hom_\mathcal{C}(U, V)_n = \Mor_\mathcal{C}(U_n, V_n)$으로 놓고,
+\item $\varphi : [m] \to [n]$에 대해
+$\Hom_\mathcal{C}(U, V)_n \to \Hom_\mathcal{C}(U, V)_m$으로
+$f \mapsto V(\varphi) \circ f \circ U(\varphi)$로 주어지는 사상을 취한다.
+\end{enumerate}
+이것이 다음 정의의 동기이다.
+
+\begin{definition}
+\label{definition-hom-deltak-simplicial}
+$\mathcal{C}$를 유한 곱을 가지는 범주라 하자.
+$V$를 $\mathcal{C}$의 단체 대상이라 하자.
+$U$를 각 $U_n$이 유한하고 공집합이 아닌 쌍대단체 집합이라 하자.
+{{\it $\Hom(U, V)$}}을 다음과 같이 정의되는
+$\mathcal{C}$의 단체 대상으로 정의한다.
+\begin{enumerate}
+\item $\Hom(U, V)_n = \prod_{u \in U_n} V_n$으로 놓는다.
+다시 말해, 이는 그 $X$-값 점들이
+$$
+\Mor_\mathcal{C}(X, \Hom(U, V)_n)
+=
+\text{Map}(U_n, \Mor_\mathcal{C}(X, V_n))
+$$
+을 만족하는 $\mathcal{C}$의 유일한 대상이다. 그리고
+\item $\varphi : [m] \to [n]$에 대해 위와 같은 $X$-값 점에서
+$f \mapsto V(\varphi) \circ f \circ U(\varphi)$로 주어지는 사상
+$\Hom(U, V)_n \to \Hom(U, V)_m$을 취한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+곱들 사이의 사상으로 이 정의를 풀어 쓰는 일은 독자에게 맡긴다.
+또한 단체 집합과 단체 대상의 곱에 관한 보조정리
+\ref{lemma-back-to-U}에서와 정확히 마찬가지로 이 구성은
+$U$에 대해서는 반변적으로, $V$에 대해서는 공변적으로 함자적이다.
+
+\medskip\noindent
+위 구성을 특수한 경우에 풀어 쓰자.
+$X$를 범주 $\mathcal{C}$의 대상이라 하자.
+자기곱 $X \times \ldots \times X$가 존재한다고 가정하자.
+$k$를 정수라 하자. 항이
+$$
+U_n = \prod\nolimits_{\alpha \in \Mor([k], [n])} X
+$$
+이고 $\varphi : [m] \to [n]$에 대한 사상이
+$$
+U(\varphi) :
+\prod\nolimits_{\alpha \in \Mor([k], [n])} X
+\longrightarrow
+\prod\nolimits_{\alpha' \in \Mor([k], [m])} X, \quad
+(f_{\alpha})_{\alpha} \longmapsto
+(f_{\varphi \circ \alpha'})_{\alpha'}
+$$
+로 주어지는 단체 대상 $U$를 생각하자.
+``좌표''로 말하면 원소 $(x_\alpha)_\alpha$는 원소
+$(x_{\varphi \circ \alpha'})_{\alpha'}$로 보내진다.
+이 대상은 $\Hom(C[k], X)$와 같다고 주장한다.
+여기서 $X$는 값이 $X$인 상수 단체 대상으로 생각하고,
+$C[k]$는 예 \ref{example-simplex-cosimplicial-set}의 쌍대단체 집합이다.
+
+\begin{lemma}
+\label{lemma-morphism-into-product}
+$X$, $k$, $U$를 위와 같이 두자.
+\begin{enumerate}
+\item $\mathcal{C}$의 임의의 단체 대상 $V$에 대해 표준적인 전단사
+$$
+\Mor_{\text{Simp}(\mathcal{C})}(V, U)
+\longrightarrow
+\Mor_\mathcal{C}(V_k, X).
+$$
+가 있다. 이는 $\gamma$를 $\text{id}_{[k]}$에 대응하는 인자로 사영한
+사상 $\gamma_k$와의 합성으로 보낸다.
+\item 마찬가지로 $W$가 $\mathcal{C}$의 $k$-절단 단체 대상이면
+$$
+\Mor_{\text{Simp}_k(\mathcal{C})}(W, \text{sk}_k U)
+=
+\Mor_\mathcal{C}(W_k, X).
+$$
+이다.
+\item 위에서 구성한 대상 $U$는, $C[k]$가 예
+\ref{example-simplex-cosimplicial-set}의 쌍대단체 집합일 때
+$\Hom(C[k], X)$를 실현한 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+먼저 (1)을 증명한다.
+$\gamma : V \to U$가 사상이라고 하자.
+이는 각 $\alpha : [k] \to [n]$에 대한 사상들의 족
+$\gamma_{\alpha} : V_n \to X$으로 주어진다.
+이 사상들은 모든 $\varphi : [m] \to [n]$에 대해 도식
+$$
+\xymatrix{
+X \ar[d]^{\text{id}_X} &
+V_n \ar[d]^{V(\varphi)}
+\ar[l]^{\gamma_{\varphi \circ \alpha'}} \\
+X &
+V_m \ar[l]_{\gamma_{\alpha'}}
+}
+$$
+이 모든 $\alpha' : [k] \to [m]$에 대해 가환하도록 해야 한다.
+$\alpha' = \text{id}_{[k]}$로 두면 임의의
+$\varphi : [k] \to [n]$에 대해
+$\gamma_\varphi = \gamma_{\text{id}_{[k]}} \circ V(\varphi)$임을 알 수 있다.
+따라서 사상 $\gamma$는 $\text{id}_{[k]}$에 대응하는
+$\gamma_k$의 성분으로 결정된다. 거꾸로, 그러한 사상
+$f : V_k \to X$가 주어지면
+$\gamma_\alpha = f \circ V(\alpha)$로 놓아 사상 $\gamma$를 쉽게 구성한다.
+
+\medskip\noindent
+절단된 경우도 비슷하며 독자에게 맡긴다.
+
+\medskip\noindent
+(3)은 $U$의 구성과, $U_n$의 구성에서 사용한 지표집합이 되는
+$C[k]_n = \Mor([k], [n])$이라는 사실에서 바로 따른다.
+\end{proof}
+
+
+
+
+\section{내부 Hom}
+\label{section-internal-hom}
+
+\noindent
+$\mathcal{C}$를 유한하고 공집합이 아닌 곱을 가지는 범주라 하자.
+$U$, $V$를 단체 대상 $\mathcal{C}$라 하자.
+% P02-E0106: frozen source omits “of” before the ambient category.
+어떤 경우에는 함자
+$$
+\text{Simp}(\mathcal{C})^{opp} \longrightarrow \textit{Sets}, \quad
+W \longmapsto \Mor_{\text{Simp}(\mathcal{C})}(W \times V, U)
+$$
+가 표현가능하다. 이 경우 얻어지는 $\mathcal{C}$의 단체 대상을
+$\SheafHom(V, U)$로 나타내고, {$V$에서 $U$로 가는 {\it 내부 Hom이
+존재한다}}고 한다. 또한 이 경우 $\mathcal{C}$의 $X$가 주어지면
+\begin{align*}
+\Mor_\mathcal{C}(X, \SheafHom(V, U)_n)
+& =
+\Mor_{\text{Simp}(\mathcal{C})}(X \times \Delta[n], \SheafHom(V, U)) \\
+& =
+\Mor_{\text{Simp}(\mathcal{C})}(X \times \Delta[n]\times V, U) \\
+& =
+\Mor_{\text{Simp}(\mathcal{C})}(X, \SheafHom(\Delta[n] \times V, U)) \\
+& =
+\Mor_\mathcal{C}(X, \SheafHom(\Delta[n] \times V, U)_0)
+\end{align*}
+이다. 단, $\SheafHom(\Delta[n] \times V, U)$도 존재한다고 가정한다.
+첫째 등식과 마지막 등식은 보조정리
+\ref{lemma-morphism-from-coproduct}에서 따른다.
+
+\medskip\noindent
+여기서 얻는 교훈은 $U$와 $V$가 주어졌을 때 내부 Hom을 구성하려면 대상
+$$
+\SheafHom(\Delta[n] \times V, U)_0
+$$
+을 구성해야 한다는 것이다. 이것들이 $\SheafHom(V, U)$의 제$n$항이어야
+하기 때문이다. 다음 절에서는 단체 대상
+``$\Hom(\Delta[n], U)$''의 한 구성을 연구한다.
+
+
+\section{단체 집합에서 단체 대상으로 가는 Hom}
+\label{section-hom-from-simplicial-sets}
+
+\noindent
+내부 Hom에 관한 논의에 동기를 받아, 단체 집합에서 범주
+$\mathcal{C}$의 주어진 단체 대상으로 가는 사상들을 분류해야 할
+단체 대상을 정의한다.
+
+\begin{definition}
+\label{definition-hom-from-simplicial-set}
+$\mathcal{C}$를 임의의 두 대상의 쌍대곱이 존재하는 범주라 하자.
+$U$를 모든 $n \geq 0$에 대해 $U_n$이 유한하고 공집합이 아닌
+단체 집합이라 하자. $V$를 $\mathcal{C}$의 단체 대상이라 하자.
+$\mathcal{C}$의 단체 대상 $W$에 대해 함자적으로
+$$
+\Mor_{\text{Simp}(\mathcal{C})}(W, \Hom(U, V))
+=
+\Mor_{\text{Simp}(\mathcal{C})}(W \times U, V)
+$$
+를 만족하는 $\mathcal{C}$의 임의의 단체 대상을
+{{\it $\Hom(U, V)$}}로 나타낸다.
+\end{definition}
+
+\noindent
+물론 $\Hom(U, V)$가 존재할 필요는 없다.
+또 제\ref{section-internal-hom}절의 논의에 따르면, 그것이 존재할 경우
+$\Hom(U, V)_n = \Hom(U \times \Delta[n], V)_0$일 것으로 예상한다.
+$\Hom(U, V)$는 내부 Hom이 아니므로 이 Hom 대상들에는 이탤릭체 기호를
+사용하지 않는다.
+
+\begin{lemma}
+\label{lemma-exists-hom-0-from-simplicial-set}
+범주 $\mathcal{C}$가 임의의 두 대상의 쌍대곱과 가산 극한을 가진다고
+가정하자. $U$를 모든 $n \geq 0$에 대해 $U_n$이 유한하고
+공집합이 아닌 단체 집합이라 하자.
+$V$를 $\mathcal{C}$의 단체 대상이라 하자. 그러면 함자
+\begin{eqnarray*}
+\mathcal{C}^{opp} & \longrightarrow & \textit{Sets} \\
+X
+& \longmapsto &
+\Mor_{\text{Simp}(\mathcal{C})}(X \times U, V)
+\end{eqnarray*}
+는 표현가능하다.
+\end{lemma}
+
+\begin{proof}
+$X \times U$에서 $V$로 가는 사상은 $n \geq 0$과 $u \in U_n$에 따른
+사상들의 모음 $f_u : X \to V_n$으로 주어진다.
+그리고 그러한 모음이 실제로 사상을 정의하는 것은 모든
+$\varphi : [m] \to [n]$에 대해 모든 도식
+$$
+\xymatrix{
+X \ar[r]^{f_u} \ar[d]_{\text{id}_X} & V_n \ar[d]^{V(\varphi)} \\
+X \ar[r]^{f_{U(\varphi)(u)}} & V_m
+}
+$$
+이 가환하는 것과 동치이다. 따라서 범주 $\mathcal{U}$와 함자
+$\mathcal{V} : \mathcal{U}^{opp} \to \mathcal{C}$를 다음과 같이
+도입하는 것이 자연스럽다.
+\begin{enumerate}
+\item $\mathcal{U}$의 대상들의 집합은 $\coprod_{n \geq 0} U_n$이다.
+\item $u' \in U_m$에서 $u \in U_n$으로 가는 사상은
+$U(\varphi)(u) = u'$을 만족하는 $\varphi : [m] \to [n]$이다.
+\item $u \in U_n$에 대해 $\mathcal{V}(u) = V_n$으로 놓는다. 그리고
+\item $U(\varphi)(u) = u'$을 만족하는 $\varphi : [m] \to [n]$에 대해
+$\mathcal{V}(\varphi) = V(\varphi) : V_n \to V_m$으로 놓는다.
+\end{enumerate}
+이제 우리의 함자가 다름 아닌
+$$
+\lim_{\mathcal{U}^{opp}} \mathcal{V}
+$$
+를 정의하는 함자임이 분명하다. 따라서 $\mathcal{C}$가 가산 극한을
+가지면 이 극한이 존재하고, 따라서 보조정리의 함자를 표현하는 대상도
+존재한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-exists-hom-0-from-simplicial-set-finite}
+범주 $\mathcal{C}$가 임의의 두 대상의 쌍대곱과 유한 극한을 가진다고
+가정하자. $U$를 모든 $n \geq 0$에 대해 $U_n$이 유한하고
+공집합이 아닌 단체 집합이라 하자.
+모든 $n \gg 0$에 대해 $U$의 모든 $n$-단체가 퇴화되어 있다고
+가정하자. $V$를 $\mathcal{C}$의 단체 대상이라 하자. 그러면 함자
+\begin{eqnarray*}
+\mathcal{C}^{opp} & \longrightarrow & \textit{Sets} \\
+X
+& \longmapsto &
+\Mor_{\text{Simp}(\mathcal{C})}(X \times U, V)
+\end{eqnarray*}
+는 표현가능하다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-exists-hom-0-from-simplicial-set}의 증명에서 설명한
+범주 $\mathcal{U}$가 유한한 부분범주 $\mathcal{U}'$을 가지며,
+$\mathcal{U}'$ 위에서의 $\mathcal{V}$의 극한이 $\mathcal{U}$ 위에서의
+$\mathcal{V}$의 극한과 같음을 보여야 한다.
+범주, 보조정리 \ref{categories-lemma-initial}을 사용할 것이다.
+$m > 0$에 대해 $\mathcal{U}_{\leq m}$을 대상이
+$\coprod_{0 \leq n \leq m} U_m$인 충만한 부분범주라 하자.
+% P02-E0107: frozen source uses U_m under an index n; likely U_n.
+$n > m_0$이면 단체 집합 $U$의 모든 $n$-단체가 퇴화되도록 하는
+정수 $m_0$를 택하자. 충분히 큰 임의의 $m \geq m_0$에 대해
+부분범주 $\mathcal{U}_{\leq m}$은 범주, 정의
+\ref{categories-definition-initial}의 성질 (1)을 만족한다.
+
+\medskip\noindent
+$n, n' \leq m_0$인 $u \in U_n$과 $u' \in U_{n'}$이 주어지고,
+$U(\varphi)(u) = U(\varphi')(u')$을 만족하는 사상
+$\varphi : [k] \to [n]$, $\varphi' : [k] \to [n']$이 주어졌다고 하자.
+간단한 조합론적 논증에 따르면 $k > 2m_0$이면
+$\varphi(i) =\varphi(i + 1)$ 및 $\varphi'(i) = \varphi'(i + 1)$을
+만족하는 지표 $0 \leq i \leq 2m_0$가 존재한다.
+(비둘기집 원리에 따르면 $k > m_0^2$일 때 이것이 성립하는데,
+어차피 아래 논증에는 그것으로 충분하다.) 따라서 $k > 2m_0$이면
+어떤 $\psi : [k - 1] \to [n]$과
+$\psi' : [k - 1] \to [n']$에 대해
+$\varphi = \psi \circ \sigma^{k - 1}_i$ 및
+$\varphi' = \psi' \circ \sigma^{k - 1}_i$로 쓸 수 있다.
+보조정리 \ref{lemma-si-injective}에서 보듯
+$s^{k - 1}_i : U_{k - 1} \to U_k$가 단사이므로
+$U(\psi)(u) = U(\psi')(u')$도 성립한다.
+이 과정을 계속하면 $u, u' \in \mathcal{U}_{\leq m_0}$인
+$\mathcal{U}$의 사상 $u \to z$와 $u' \to z$가 주어졌을 때
+가환도식
+$$
+\xymatrix{
+u \ar[rd] \ar[rrd] & & \\
+& a \ar[r] & z \\
+u' \ar[ru] \ar[rru]
+}
+$$
+이 어떤 $a \in \mathcal{U}_{\leq 2m_0}$에 대해 존재함을 얻는다.
+
+\medskip\noindent
+이로부터 유한한 부분범주 $\mathcal{U}_{\leq 2m_0}$가 원하는
+부분범주임을 쉽게 추론할 수 있다. 실제로
+$n, n' \leq 2m_0$인 $x' \in U_n$, $x'' \in U_{n'}$과,
+같은 공역을 가지는 $\mathcal{U}$의 사상 $x' \to x$와
+$x'' \to x$가 주어졌다고 하자. $m_0$의 선택에 의해
+$\mathcal{U}_{\leq m_0}$의 대상 $u, u'$과 사상
+$u \to x'$, $u' \to x''$을 찾을 수 있다.
+위에 의해 $a \in \mathcal{U}_{\leq 2m_0}$와 사상
+$u \to a$, $u' \to a$를 택하여
+$$
+\xymatrix{
+u \ar[rd] \ar[rrd] \ar[r] & x' \ar[rd] & \\
+& a \ar[r] & x \\
+u' \ar[ru] \ar[rru] \ar[r] & x'' \ar[ru] &
+}
+$$
+이 가환하게 할 수 있다. 이 도식을 시계방향으로 90도 돌리면
+범주, 정의 \ref{categories-definition-initial}의 (2)에 나오는
+원하는 도식을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-exists-hom-from-simplicial-set-finite}
+범주 $\mathcal{C}$가 임의의 두 대상의 쌍대곱과 유한 극한을 가진다고
+가정하자. $U$를 모든 $n \geq 0$에 대해 $U_n$이 유한하고
+공집합이 아닌 단체 집합이라 하자.
+모든 $n \gg 0$에 대해 $U$의 모든 $n$-단체가 퇴화되어 있다고
+가정하자. $V$를 $\mathcal{C}$의 단체 대상이라 하자.
+그러면 $\Hom(U, V)$가 존재하며, 더 나아가 예상한 등식
+$$
+\Hom(U, V)_n = \Hom(U \times \Delta[n], V)_0.
+$$
+이 성립한다.
+\end{lemma}
+
+\begin{proof}
+이 단체 대상을 다음과 같이 구성한다.
+$n \geq 0$에 대해 $\Hom(U, V)_n$을 함자
+$$
+X
+\longmapsto
+\Mor_{\text{Simp}(\mathcal{C})}(X \times U \times \Delta[n], V)
+$$
+를 표현하는 $\mathcal{C}$의 대상이라 하자.
+보조정리 \ref{lemma-exists-hom-0-from-simplicial-set-finite}에 의해
+이것이 존재한다. 실제로 단체 집합 $U \times \Delta[n]$은 단체들의
+집합이 유한하고, 보조정리 \ref{lemma-product-degenerate}에서 보듯
+충분히 높은 차수에서는 비퇴화 단체가 없다.
+$\varphi : [m] \to [n]$에 대해 단체 집합들의 유도 사상
+$\varphi : \Delta[m] \to \Delta[n]$을 얻는다.
+따라서 $X$에 대해 함자적인 사상
+$X \times U \times \Delta[m] \to X \times U \times \Delta[n]$을 얻고,
+그 결과 함자들의 변환을 얻으며, 이는 다시
+$$
+\Hom(U, V)(\varphi) :
+\Hom(U, V)_n
+\longrightarrow
+\Hom(U, V)_m.
+$$
+을 준다. 이것은 분명히 $\Delta$에서 범주 $\mathcal{C}$로 가는
+반변 함자 $\Hom(U, V)$를 정의한다.
+다시 말해 $\mathcal{C}$의 단체 대상을 얻었다.
+
+\medskip\noindent
+$\Hom(U, V)$가 원하는 보편성
+$$
+\Mor_{\text{Simp}(\mathcal{C})}(W, \Hom(U, V))
+=
+\Mor_{\text{Simp}(\mathcal{C})}(W \times U, V)
+$$
+을 만족함을 보여야 한다. 이를 위해 $f : W \to \Hom(U, V)$가
+주어졌다고 하자. 오른쪽의 원소 $f' : W \times U \to V$를
+구성하고자 한다. 구성에 의해 각
+$f_n : W_n \to \Hom(U, V)_n$은 사상
+$f_n : W_n \times U \times \Delta[n] \to V$에 대응한다.
+또한 각 사상 $\varphi : [m] \to [n]$에 대해 도식
+$$
+\xymatrix{
+W_n \times U \times \Delta[m]
+\ar[rr]_{W(\varphi)\times \text{id} \times \text{id}}
+\ar[d]_{\text{id} \times \text{id} \times \varphi} & &
+W_m \times U \times \Delta[m] \ar[d]^{f_m} \\
+W_n \times U \times \Delta[n] \ar[rr]^{f_n} & & V
+}
+$$
+은 가환이다. $(\Delta[n])_k$의
+$\psi : [n] \to [k]$에 대해 $(f_n)_k$의 원소 $\psi$에 대응하는
+성분을 $(f_n)_{k, \psi} : W_n \times U_k \to V_k$로 나타낸다.
+$f'_n : W_n \times U_n \to V_n$을
+$f'_n = (f_n)_{n, \text{id}}$로 정의한다. 다시 말해
+$(f_n)_n : W_n \times U_n \times (\Delta[n])_n \to V_n$을
+$W_n \times U_n \times \text{id}_{[n]}$에 제한한 것으로 정의한다.
+모음 $(f'_n)$이 단체 대상들의 사상을 정의함을 보이려면
+임의의 $\varphi : [m] \to [n]$에 대해
+$V(\varphi) \circ f'_n =
+f'_m \circ W(\varphi) \times U(\varphi)$임을 보여야 한다.
+위의 가환도식은
+$(f_n)_{m, \varphi} : W_n \times U_m \to V_m$이
+$(f_m)_{m, \text{id}} \circ W(\varphi) :
+W_n \times U_m \to V_m$과 같다는 뜻이다.
+한편 $f_n$이 단체 대상들의 사상이라는 사실에 의해 도식
+$$
+\xymatrix{
+W_n \times U_n \times (\Delta[n])_n
+\ar[r]_-{(f_n)_n}
+\ar[d]_{\text{id} \times U(\varphi) \times \varphi}
+& V_n \ar[d]^{V(\varphi)} \\
+W_n \times U_m \times (\Delta[n])_m \ar[r]^-{(f_n)_m} & V_m
+}
+$$
+은 가환이다. 따라서 $(f_n)_{m, \varphi} \circ U(\varphi)$는
+$V(\varphi) \circ (f_n)_{n, \text{id}}$와 같다.
+이를 모두 합하면 원하는 대로
+$
+V(\varphi) \circ (f_n)_{n, \text{id}}
+=
+(f_n)_{m, \varphi} \circ U(\varphi)
+=
+(f_m)_{m, \text{id}} \circ W(\varphi)\circ U(\varphi)
+=
+(f_m)_{m, \text{id}} \circ W(\varphi)\times U(\varphi)
+$
+을 얻는다.
+
+\medskip\noindent
+반대로 사상 $f' : W \times U \to V$가 주어졌을 때 사상
+$f : W \to \Hom(U, V)$를 다음과 같이 정의한다.
+보조정리 \ref{lemma-morphism-from-coproduct}에 의해 사상
+$\text{id} : W_n \to W_n$은 유일한 사상
+$c_n : W_n \times \Delta[n] \to W$에 대응한다.
+% P02-E0108: frozen source uses plural “the morphisms” for the single displayed identity morphism.
+따라서 합성
+$$
+W_n \times \Delta[n] \times U
+\xrightarrow{c_n}
+W \times U
+\xrightarrow{f'}
+V.
+$$
+을 생각할 수 있다. 구성에 의해 이것은 유일한 사상
+$f_n : W_n \to \Hom(U, V)_n$에 대응한다.
+이들이 원하는 대로 단체 집합들의 사상을 정의함을 확인하는 일은
+독자에게 맡긴다.
+% P02-E0109: frozen source says simplicial sets although W and Hom(U,V) are arbitrary C-valued simplicial objects.
+
+\medskip\noindent
+$f \mapsto f'$와 $f' \mapsto f$가 서로 역인 연산임을 확인하는 일도
+독자에게 맡긴다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-hom-from-coprod}
+범주 $\mathcal{C}$가 임의의 두 대상의 쌍대곱과 유한 극한을 가진다고
+가정하자. $a : U \to V$, $b : U \to W$를 단체 집합들의 사상이라 하자.
+모든 $n \geq 0$에 대해 $U_n, V_n, W_n$이 유한하고 공집합이 아니라고
+가정하자. 모든 $n \gg 0$에 대해 $U, V, W$의 모든 $n$-단체가
+퇴화되어 있다고 가정하자. $T$를 $\mathcal{C}$의 단체 대상이라 하자.
+그러면
+$$
+\Hom(V, T) \times_{\Hom(U, T)} \Hom(W, T)
+=
+\Hom(V \amalg_U W, T)
+$$
+이다. 다시 말해 왼쪽의 섬유곱은 오른쪽의 Hom 대상으로 표현된다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-exists-hom-from-simplicial-set-finite}에 의해 필요한
+$\Hom$ 대상들은 모두 존재하고 올바른 함자적 성질을 만족한다.
+이제 왼쪽의 제$n$항을 $X$에 다음 함자적 등식들의 열에서 첫 번째
+집합을 대응시키는 함자를 표현하는 대상으로 식별할 수 있다.
+\begin{align*}
+&
+\Mor(X \times \Delta[n],
+\Hom(V, T) \times_{\Hom(U, T)} \Hom(W, T)) \\
+& =
+\Mor(X \times \Delta[n], \Hom(V, T))
+\times_{\Mor(X \times \Delta[n], \Hom(U, T))}
+\Mor(X \times \Delta[n], \Hom(W, T)) \\
+& =
+\Mor(X \times \Delta[n] \times V, T)
+\times_{\Mor(X \times \Delta[n] \times U, T)}
+\Mor(X \times \Delta[n] \times W, T) \\
+& =
+\Mor(X \times \Delta[n] \times (V \amalg_U W), T))
+% P02-E0110: frozen source has an unmatched extra closing parenthesis in the final Hom term.
+\end{align*}
+여기서는 항별로 쉽게 확인할 수 있는 사실
+$$
+(X \times \Delta[n] \times V)
+\times_{X \times \Delta[n] \times U}
+(X \times \Delta[n] \times W)
+=
+X \times \Delta[n] \times (V \amalg_U W)
+$$
+을 사용했다.
+% P02-E0111: frozen source uses a fibre product for maps induced by U -> V and U -> W, although the typed construction is a pushout.
+표시된 등식들의 열에서 마지막 항이 $\Hom(V \amalg_U W, T)_n$에
+대응하므로 보조정리의 결론이 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{단체 대상의 분할}
+\label{section-splitting}
+
+\noindent
+범주 $\mathcal{C}$의 대상 $X$의 부분대상 $N$이란
+$\mathcal{C}$의 대상 $N$과 단사 사상 $N \to X$를 함께 말한다.
+물론 기호를 남용하여, $X$로 가는 사상들과 양립하는 동형사상
+$N \to N'$이 존재하면 부분대상 $N$, $N'$이 같다고 한다.
+부분대상들의 모음은 부분순서집합을 이룬다.
+(이는 범주에 관한 우리의 관례에 따른 것이며, 예를 들어 호모토피까지
+고려한 공간의 범주에서는 참이 아니다.)
+
+\begin{definition}
+\label{definition-split}
+$\mathcal{C}$를 유한하고 공집합이 아닌 쌍대곱을 허용하는 범주라 하자.
+$\mathcal{C}$의 단체 대상 $U$에 대해, 다음 성질을 가지는
+$U_m$의 부분대상 $N(U_m)$, $m \geq 0$이 존재하면 그 대상이
+{\it 분할된다}고 한다. 모든 $n \geq 0$에 대해
+\begin{equation}
+\label{equation-splitting}
+\coprod\nolimits_{\varphi : [n] \to [m]\text{ surjective}}
+N(U_m)
+\longrightarrow
+U_n
+\end{equation}
+은 동형사상이다. $U$가 $\mathcal{C}$의 $r$-절단 단체 대상이면,
+$U_m$의 부분대상 $N(U_m)$, $r \geq m \geq 0$이 존재하여
+(\ref{equation-splitting})이 $r \geq n \geq 0$에 대해 동형사상이 될 때
+$U$가 {\it 분할된다}고 한다.
+\end{definition}
+
+\noindent
+이 경우 $N(U_0) = U_0$이다. 다음으로
+$U_1 = U_0 \amalg N(U_1)$이다. 둘째로
+$$
+U_2 = U_0 \amalg N(U_1) \amalg N(U_1) \amalg N(U_2).
+$$
+이다. 많은 범주 $\mathcal{C}$에서는 모든 단체 대상이 분할됨이 밝혀진다.
+
+\begin{lemma}
+\label{lemma-splitting-simplicial-sets}
+$U$를 단체 집합이라 하자. 그러면 $U$에는
+$N(U_m)$이 비퇴화 $m$-단체들의 집합인 유일한 분할이 있다.
+\end{lemma}
+
+\begin{proof}
+정의에서, 분할이 있다면 $N(U_m)$은 비퇴화 단체들의 집합이어야 함이
+바로 따른다. $x \in U_n$이라 하자.
+$x = U(\varphi)(y)$ 및 $x = U(\psi)(z)$가 되도록 하는 전사
+$\varphi : [n] \to [k]$, $\psi : [n] \to [l]$과 비퇴화 단체
+$y \in U_k$, $z \in U_l$이 있다고 하자.
+$\psi$의 오른쪽 역 $\xi : [l] \to [n]$, 즉
+$\psi \circ \xi = \text{id}_{[l]}$을 택하자.
+그러면 $z = U(\xi)(x)$이다. 따라서
+$z = U(\xi)(x) = U(\varphi \circ \xi)(y)$이다.
+$z$가 비퇴화이므로 $\varphi \circ \xi : [l] \to [k]$는 전사이고,
+따라서 $l \geq k$이다. 마찬가지로 $k \geq l$이다.
+그러므로 $\psi$의 오른쪽 역 $\xi$를 어떻게 택하든
+$\varphi \circ \xi : [l] \to [k]$는 항등사상이어야 한다.
+이로부터 $\psi = \varphi$가 쉽게 따른다.
+\end{proof}
+
+\noindent
+물론 단체 집합들의 사상이 비퇴화 $n$-단체를 퇴화 $n$-단체로
+보내는 일이 생길 수 있다. 따라서 보조정리
+\ref{lemma-splitting-simplicial-sets}의 분할은 함자적이지 않다.
+다음은 그것이 함자적인 경우이다.
+
+\begin{lemma}
+\label{lemma-injective-map-simplicial-sets}
+$f : U \to V$를 단체 집합들의 사상이라 하자.
+(a) $U$의 모든 비퇴화 단체의 상이 $V$의 비퇴화 단체이고,
+(b) $f$를 $U$의 비퇴화 단체들의 집합에서 $V$의 비퇴화 단체들의
+집합으로 가는 사상에 제한한 것이 단사라고 가정하자.
+그러면 모든 $n$에 대해 $f_n$은 단사이다.
+``단사''를 ``전사'' 또는 ``전단사''로 바꾸어도 같은 명제가 성립한다.
+\end{lemma}
+
+\begin{proof}
+가정 (a)에 의해 사상 $f$는 보조정리
+\ref{lemma-splitting-simplicial-sets}의 분할에 따른 서로소 합 분해를
+보존한다. 다시 말해 가환도식
+$$
+\xymatrix{
+\coprod\nolimits_{\varphi : [n] \to [m]\text{ surjective}}
+N(U_m)
+\ar[r] \ar[d] &
+U_n \ar[d] \\
+\coprod\nolimits_{\varphi : [n] \to [m]\text{ surjective}}
+N(V_m)
+\ar[r] &
+V_n.
+}
+$$
+을 얻는다. 그러면 (b)에 의해 왼쪽 세로 화살표가 단사(각각 전사,
+각각 전단사)임이 분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-simplicial-set-n-skel-sub}
+$U$를 단체 집합이라 하자. $n \geq 0$을 정수라 하자. 규칙
+$$
+U'_m = \bigcup\nolimits_{\varphi : [m] \to [i], \ i\leq n} \Im(U(\varphi))
+$$
+은 $i \leq n$에 대해 $U'_i = U_i$인 부분 단체 집합
+$U' \subset U$를 정의한다. 또한 모든 $m > n$에 대해
+$U'$의 모든 $m$-단체는 퇴화되어 있다.
+\end{lemma}
+
+\begin{proof}
+$x \in U_m$이고 어떤 $y \in U_i$, $i \leq n$ 및
+$\varphi : [m] \to [i]$에 대해 $x = U(\varphi)(y)$라고 하자.
+그러면 임의의 $\psi : [m'] \to [m]$에 대한 상 $U(\psi)(x)$는
+$U(\varphi \circ \psi)(y)$와 같고
+$\varphi \circ \psi : [m'] \to [i]$이다.
+따라서 $U'$은 단체 집합이다. 구성에 의해 차원 $n + 1$ 이상인
+모든 단체는 퇴화되어 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-splitting-simplicial-groups}
+$U$를 단체 아벨 군이라 하자. 그러면 $N(U_0) = U_0$로 놓고,
+$m \geq 1$에 대해
+$$
+N(U_m) = \bigcap\nolimits_{i = 0}^{m - 1} \Ker(d^m_i).
+$$
+로 놓아 얻는 $U$의 분할이 있다. 또한 이 분할은 단체 아벨 군들의
+범주에서 함자적이다.
+\end{lemma}
+
+\begin{proof}
+$n$에 대한 귀납법으로, 보조정리의 $N(U_m)$의 선택에 의해
+(\ref{equation-splitting})이 $m \leq n$에 대해 동형사상이 됨을 보이겠다.
+$n = 0$인 경우는 분명하다. 이 증명의 나머지에서는 가독성을 높이기
+위해 사상 $d_i$와 $s_i$의 위첨자를 생략한다.
+주의 \ref{remark-relations}의 관계들도 반복해서 사용할 것이다.
+
+\medskip\noindent
+먼저 일반적인 관찰을 하나 하자.
+$0 \leq i \leq m$ 및 $z \in U_m$에 대해 $d_i(s_i(z)) = z$이다.
+따라서 임의의 $x \in U_{m + 1}$은
+$d_i(x') = 0$이고 $x'' \in \Im(s_i)$인
+$x = x' + x''$로 유일하게 쓸 수 있다. 실제로
+$x' = (x - s_i(d_i(x)))$ 및 $x'' = s_i(d_i(x))$로 택하면 된다.
+또한 $s_i$가 단사이므로 $x'' = s_i(z)$를 만족하는 원소
+$z \in U_m$은 유일하다.
+
+\medskip\noindent
+임의의 $x \in U_{n + 1}$을 분해하는 절차는 다음과 같다.
+먼저 $d_0(x_0) = 0$이 되도록 $x = x_0 + s_0(z_0)$로 쓴다.
+다음으로 $d_1(x_1) = 0$이 되도록
+$x_0 = x_1 + s_1(z_1)$로 쓴다. 이 과정을 계속하여
+\begin{eqnarray*}
+x & = & x_0 + s_0(z_0), \\
+x_0 & = & x_1 + s_1(z_1), \\
+x_1 & = & x_2 + s_2(z_2), \\
+\ldots & \ldots & \ldots \\
+x_{n - 1} & = & x_n + s_n(z_n)
+\end{eqnarray*}
+을 얻는다. 여기서 모든 $i = n, \ldots, 0$에 대해
+$d_i(x_i) = 0$이다. 위의 일반적인 관찰에 의해 모든 $x_i$와 $z_i$는
+$x$로부터 유일하게 결정된다. 우리는
+$x_i \in
+\Ker(d_0) \cap
+\Ker(d_1) \cap
+\ldots \cap
+\Ker(d_i)$
+이고
+$z_i \in
+\Ker(d_0) \cap
+\ldots \cap
+\Ker(d_{i - 1})$
+라고 주장한다. 여기서 $i = n, \ldots, 0$이다.
+여기와 아래에서 핵들의 공집합 교집합은 전체 공간을 뜻한다.
+즉 $i = 0$일 때 기호
+$z_0 \in \Ker(d_0) \cap
+\ldots \cap
+\Ker(d_{i - 1})$는 아무 제한 없이 $z_0 \in U_n$임을 뜻한다.
+
+\medskip\noindent
+$i$에 대한 오름차순 귀납법으로 이를 증명한다.
+$i = 0$인 경우는 $x_0$와 $z_0$의 구성에서 분명하다.
+$i - 1$에 대한 결과를 가정하고 $0 < i \leq n$인 경우를 증명하자.
+우선 구성에 의해 $d_i(x_i) = 0$이다.
+그러므로 $0 \leq j < i$인 $j$를 택하자.
+귀납법에 의해 $d_j(x_{i - 1}) = 0$이다. 따라서
+$$
+0 = d_j(x_{i - 1})
+= d_j(x_i) + d_j(s_i(z_i))
+= d_j(x_i) + s_{i - 1}(d_j(z_i)).
+$$
+마지막 등식은 주의 \ref{remark-relations}의 관계들에서 따른다.
+또한 이 관계들과 구성에 의한 $d_i(x_i)= 0$을 사용하면
+$d_{i - 1}(d_j(x_i)) = d_j(d_i(x_i)) = 0$이다.
+그러면 위의 일반적인 관찰에서의 유일성에 의해 등식
+$0 = x' + x'' = d_j(x_i) + s_{i - 1}(d_j(z_i))$이 성립하려면
+두 항이 모두 영이어야 한다. 따라서 $d_j(x_i) = 0$이고,
+$s_{i - 1}$의 단사성에 의해 $d_j(z_i) = 0$도 성립한다.
+이로써 주장이 증명되었다.
+
+\medskip\noindent
+이 주장에 의해
+$$
+x = s_0(z_0) + s_1(z_1) + \ldots + s_n(z_n) + x_n
+$$
+으로 유일하게 쓸 수 있다. 여기서 $x_n \in N(U_{n + 1})$이고
+$z_i \in \Ker(d_0) \cap \ldots \cap \Ker(d_{i - 1})$이다.
+이를 다음 직합 분해를 찾았다는 말로 다시 표현할 수 있다.
+$$
+U_{n + 1}
+=
+N(U_{n + 1})
+\oplus
+\bigoplus\nolimits_{i = 0}^{i = n}
+s_i\Big(\Ker(d_0) \cap \ldots \cap \Ker(d_{i - 1})\Big)
+$$
+이 분해는 $j = 0, \ldots, n$에 대해
+$$
+\Ker(d_0) \cap \ldots \cap \Ker(d_j)
+=
+N(U_{n + 1}) \oplus
+\bigoplus\nolimits_{i = j + 1}^{i = n}
+s_i\Big(\Ker(d_0) \cap \ldots \cap \Ker(d_{i - 1})\Big)
+$$
+이라는 성질을 가진다. 이 명제에서 다음과 같이 결과가 따른다.
+$x$의 표현에 나오는 각 $z_i$는
+$$
+z_i = s_i(z'_{i, i}) + \ldots + s_{n - 1}(z'_{i, n - 1}) + z_{i, 0}
+$$
+으로 유일하게 쓸 수 있다. 여기서 $z_{i, 0} \in N(U_n)$이고
+$z'_{i, j} \in \Ker(d_0) \cap \ldots \cap \Ker(d_{j - 1})$이다.
+$z_i$가 이미 $d_0, \ldots, d_i$의 핵에 속하므로 $z_i$의 분해에서
+처음 몇 단계는 영이다. 이로부터 다시
+$$
+x = x_n + s_0(z_{0, 0}) + s_1(z_{1, 0}) + \ldots + s_n(z_{n, 0}) +
+\sum\nolimits_{0 \leq i \leq j \leq n - 1} s_i(s_j(z'_{i, j})).
+$$
+을 유일하게 얻는다. 이 과정을 계속하면 결국 $x$를
+$$
+s_{i_1} s_{i_2} \ldots s_{i_k} (z)
+$$
+꼴의 항들의 합으로 분해하게 된다. 여기서
+$0 \leq i_1 \leq i_2 \leq \ldots \leq i_k \leq n - k + 1$이고
+$z \in N(U_{n + 1 - k})$이다. 이것이 정확히 필요한 분해이다.
+실제로 모든 전사 $[n + 1] \to [n + 1 - k]$는
+$$
+\sigma^{n - k}_{i_k} \ldots \sigma^{n - 1}_{i_2} \sigma^n_{i_1}
+$$
+꼴로 유일하게 나타낼 수 있으며, 여기서
+$0 \leq i_1 \leq i_2 \leq \ldots \leq i_k \leq n - k + 1$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-splitting-abelian-category}
+$\mathcal{A}$를 아벨 범주라 하자.
+$U$를 $\mathcal{A}$의 단체 대상이라 하자.
+그러면 $N(U_0) = U_0$로 놓고 $m \geq 1$에 대해
+$$
+N(U_m) = \bigcap\nolimits_{i = 0}^{m - 1} \Ker(d^m_i).
+$$
+로 놓아 얻는 $U$의 분할이 있다. 또한 이 분할은
+$\mathcal{A}$의 단체 대상들의 범주에서 함자적이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{A}$의 임의의 대상 $A$에 대해 단체 아벨 군
+$\Mor_\mathcal{A}(A, U)$를 얻는다. 이들 각각은 보조정리
+\ref{lemma-splitting-simplicial-groups}에 의해 표준적으로 분할된다.
+% P02-E0112: frozen source says “Each of these are” instead of “Each ... is”.
+또한
+$$
+N(\Mor_\mathcal{A}(A, U_m)) =
+\bigcap\nolimits_{i = 0}^{m - 1} \Ker(d^m_i) =
+\Mor_\mathcal{A}(A, N(U_m)).
+$$
+이다. 따라서 사상 (\ref{equation-splitting})에
+$\mathcal{A}$의 임의의 대상에 대한 함자 $\Mor_\mathcal{A}(A, -)$를
+적용하면 동형사상이 된다. 그러므로 Yoneda 보조정리에 의해 그 사상
+자체가 동형사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-injective-map-simplicial-abelian}
+\begin{slogan}
+Dold--Kan 정규화 함자는 단사성, 전사성, 동형성을 반영한다.
+\end{slogan}
+$\mathcal{A}$를 아벨 범주라 하자.
+$f : U \to V$를 $\mathcal{A}$의 단체 대상들의 사상이라 하자.
+모든 $i$에 대해 유도 사상 $N(f)_i : N(U)_i \to N(V)_i$가
+단사이면 모든 $i$에 대해 $f_i$가 단사이다.
+``단사''를 ``전사'' 또는 ``동형사상''으로 바꾸어도 같은 명제가
+성립한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-splitting-abelian-category}와 분할의 정의에서
+분명하다.
+\end{proof}
+
+
+\begin{lemma}
+\label{lemma-N-d-in-N}
+$\mathcal{A}$를 아벨 범주라 하자.
+$U$를 $\mathcal{A}$의 단체 대상이라 하자.
+위의 보조정리 \ref{lemma-splitting-abelian-category}에서와 같이
+$N(U_m)$을 두자.
+% P02-E0113: frozen source has “Let N(U_m) as in ...” without a finite verb.
+그러면 $d^m_m(N(U_m)) \subset N(U_{m - 1})$이다.
+\end{lemma}
+
+\begin{proof}
+$j = 0, \ldots, m - 2$에 대해 주의 \ref{remark-relations}의 관계들에
+의해 $d^{m - 1}_j d^m_m = d^{m - 1}_{m - 1} d^m_j$이다.
+결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-simplicial-abelian-n-skel-sub}
+$\mathcal{A}$를 아벨 범주라 하자.
+$U$를 $\mathcal{A}$의 단체 대상이라 하자.
+$n \geq 0$을 정수라 하자. 규칙
+$$
+U'_m = \sum\nolimits_{\varphi : [m] \to [i], \ i\leq n} \Im(U(\varphi))
+$$
+은 $i \leq n$에 대해 $U'_i = U_i$인 부분 단체 대상
+$U' \subset U$를 정의한다. 또한 모든 $m > n$에 대해
+$N(U'_m) = 0$이다.
+\end{lemma}
+
+\begin{proof}
+$m$, $i \leq n$ 및 어떤 $\varphi : [m] \to [i]$를 택하자.
+임의의 $\psi : [m'] \to [m]$에 대해 $U(\psi)$에 의한
+$\Im(U(\varphi))$의 상은 $U(\varphi \circ \psi)$의 상과 같고
+$\varphi \circ \psi : [m'] \to [i]$이다.
+따라서 $U'$은 단체 대상이다. $m > n$을 택하자.
+$N(U'_m) = 0$임을 보여야 한다.
+$N(U_m)$과 $N(U'_m)$의 정의에 의해
+$N(U'_m) = U'_m \cap N(U_m)$이다(부분대상들의 교집합).
+보조정리 \ref{lemma-splitting-abelian-category}에 의해 $U$가 분할되므로,
+$U'_m$이 합
+$$
+\sum\nolimits_{\varphi : [m] \to [m']\text{ surjective}, \ m' < m}
+\Im(U(\varphi)|_{N(U_{m'})}).
+$$
+에 포함됨을 보이면 충분하다. 분할에 의해 각 $U_{m'}$은 전사
+$\psi : [m'] \to [m'']$에 대한 $U(\psi)$를 통한 $N(U_{m''})$의
+상들의 합이다. 따라서 위에 표시한 합은
+$$
+\sum\nolimits_{\varphi : [m] \to [m']\text{ surjective}, \ m' < m}
+\Im(U(\varphi)).
+$$
+과 같다. $U'_m$의 정의에 나타나는 임의의
+$\varphi : [m] \to [i]$, $i \leq n$은
+$[m] \to [m'] \to [i]$로 인수분해할 수 있고, 여기서
+$[m] \to [m']$은 전사이며 $m' < m$이다.
+따라서 $U'_m$이 마지막에 표시한 합에 포함됨은 분명하다.
+\end{proof}
+
+\section{쌍대뼈대 함자}
+\label{section-coskeleton}
+
+\noindent
+$\mathcal{C}$를 범주라 하자.
+{\it 쌍대뼈대 함자}가 존재할 경우, 이는 뼈대 함자의 오른쪽 수반인 함자
+$$
+\text{cosk}_n :
+\text{Simp}_n(\mathcal{C}) \longrightarrow \text{Simp}(\mathcal{C})
+$$
+이다. 식으로 쓰면
+\begin{equation}
+\label{equation-cosk}
+\Mor_{\text{Simp}(\mathcal{C})}(U, \text{cosk}_n V)
+=
+\Mor_{\text{Simp}_n(\mathcal{C})}(\text{sk}_n U, V)
+\end{equation}
+이다. $n$-절단 단체 대상 $V$가 주어졌을 때,
+$\text{cosk}_nV \in \Ob(\text{Simp}(\mathcal{C}))$와 사상
+$\text{sk}_n \text{cosk}_n V \to V$가 존재하여 표시된 식이 성립하면,
+즉 함자 $U \mapsto \Mor_{\text{Simp}_n(\mathcal{C})}(\text{sk}_n U, V)$가
+표현가능하면 {{$\text{cosk}_nV$가 존재한다}}고 한다.
+그것이 존재하면 Yoneda 보조정리에 의해 유일한 동형사상까지 유일하다.
+범주, 제\ref{categories-section-opposite}절을 보라.
+
+\begin{example}
+\label{example-cosk0}
+범주 $\mathcal{C}$가 유한하고 공집합이 아닌 자기곱을 가진다고 하자.
+$\mathcal{C}$의 $0$-절단 단체 대상은 $\mathcal{C}$의 대상 $X$와 같다.
+이 경우 $\text{cosk}_0(X)$는 $U_n = X^{n + 1}$이 $X$의
+$(n + 1)$중 자기곱인 단체 대상 $U$이고, 단체 대상 구조는 예
+\ref{example-fibre-products-simplicial-object}와 같다고 주장한다.
+실제로 $V$가 단체 대상일 때 사상 $V \to U$는 모든 도식
+$$
+\xymatrix{
+V_n \ar[r] \ar[d]_{V([0] \to [n], 0 \mapsto i)} &
+X^{n + 1} \ar[d]^{\text{pr}_i} \\
+V_0 \ar[r] &
+X
+}
+$$
+이 가환하도록 하는 사상 $V_n \to X^{n + 1}$로 주어진다.
+이는 그 사상이 유일한 사상 $V_0 \to X$를 결정하고 또 그 사상에 의해
+결정된다는 뜻임이 분명하다. 이로써 식 (\ref{equation-cosk})이 성립한다.
+\end{example}
+
+\noindent
+예 \ref{example-simplex-category}의 범주 $\Delta/[n]$을 상기하자.
+$(\Delta/[n])_{\leq m}$을 $k \leq m$인 $\Delta/[n]$의 대상
+$[k] \to [n]$들로 이루어진 $\Delta/[n]$의 충만한 부분범주라 하자.
+다시 말해 범주와 함자들의 다음 가환도식이 있다.
+$$
+\xymatrix{
+(\Delta/[n])_{\leq m} \ar[r] \ar[d] &
+\Delta/[n] \ar[d] \\
+\Delta_{\leq m} \ar[r] &
+\Delta
+}
+$$
+$\mathcal{C}$의 $m$-절단 단체 대상 $U$가 주어졌을 때 규칙
+\begin{eqnarray*}
+([k] \to [n]) & \longmapsto & U_k \\
+\psi : ([k'] \to [n]) \to ([k] \to [n]) &
+\longmapsto &
+U(\psi) : U_k \to U_{k'}
+\end{eqnarray*}
+으로 함자
+$$
+U(n) : (\Delta/[n])_{\leq m}^{opp} \longrightarrow \mathcal{C}
+$$
+를 정의한다. $\Delta$의 주어진 사상 $\varphi : [n] \to [n']$에 대해
+$\alpha : [k] \to [n]$을 $\varphi \circ \alpha : [k] \to [n']$으로
+보내는 관련 함자
+$$
+\overline{\varphi} :
+(\Delta/[n])_{\leq m}
+\longrightarrow
+(\Delta/[n'])_{\leq m}
+$$
+가 있다. 합성 $U(n') \circ \overline{\varphi}$는 함자 $U(n)$과 같다.
+
+\begin{lemma}
+\label{lemma-existence-cosk}
+범주 $\mathcal{C}$가 유한 극한을 가지면 모든 $m$에 대해
+$\text{cosk}_m$ 함자들이 존재한다. 또한 임의의 $m$-절단 단체 대상
+$U$에 대해 단체 대상 $\text{cosk}_mU$는 식
+$$
+(\text{cosk}_mU)_n = \lim_{(\Delta/[n])_{\leq m}^{opp}} U(n)
+$$
+으로 기술된다. 그리고 $\varphi : [n] \to [n']$에 대한 사상
+$\text{cosk}_mU(\varphi)$는 위의 식별
+$U(n') \circ \overline{\varphi} = U(n)$과 범주, 보조정리
+\ref{categories-lemma-functorial-limit}에서 나온다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 증명에서는 $(\text{cosk}_mU)_n$이
+$\lim_{(\Delta/[n])_{\leq m}^{opp}} U(n)$과 같은 단체 대상을
+$\text{cosk}_mU$로 나타낸다. 증명 끝에서 이것이 필요한 사상 성질을
+만족한다고 결론 내릴 것이다.
+
+\medskip\noindent
+$V$를 단체 대상이라 하자.
+사상 $\gamma : V \to \text{cosk}_mU$는 사상들의 열
+$\gamma_n : V_n \to (\text{cosk}_mU)_n$으로 주어진다.
+극한의 정의에 따르면 이는 $\alpha$가 도는 $k \leq m$인 모든
+$\alpha : [k] \to [n]$에 따른 사상들의 모음
+$\gamma(\alpha) : V_n \to U_k$으로 주어진다.
+또 이 사상들은 임의의 $0 \leq k, k' \leq m$, $0 \leq n, n'$와
+$\varphi \circ \alpha = \alpha' \circ \psi$를 만족하는 $\Delta$의
+$\psi : [k] \to [k']$, $\varphi : [n] \to [n']$,
+$\alpha : [k] \to [n]$, $\alpha' : [k'] \to [n']$가 주어졌을 때 도식
+$$
+\xymatrix{
+V_n \ar[r]_{\gamma(\alpha)} &  U_k \\
+V_{n'} \ar[r]^{\gamma(\alpha')} \ar[u]^{V(\varphi)} & U_{k'} \ar[u]_{U(\psi)}
+}
+$$
+이 가환한다는 규칙도 만족한다.
+$n = k = k'$, $\varphi = \alpha'$, 그리고
+$\alpha = \psi = \text{id}_{[k]}$로 놓으면
+$\gamma(\alpha') = \gamma(\text{id}_{[k]}) \circ V(\alpha')$임을 얻는다.
+다시 말해 사상 $\gamma(\text{id}_{[k]})$, $k \leq m$이 사상
+$\gamma$를 결정한다. 이 사상들이 사상 $\text{sk}_m V \to U$를
+이룸을 쉽게 확인할 수 있다.
+
+\medskip\noindent
+거꾸로, 사상 $\gamma : \text{sk}_m V \to U$가 주어지면
+$\alpha$가 도는 $k \leq m$인 모든 $\alpha : [k] \to [n]$에 대해
+$\gamma(\alpha) = \gamma(\text{id}_{[k]}) \circ V(\alpha)$로 놓아
+사상들의 족 $\gamma(\alpha)$를 얻는다. 이 사상들은 위에 그림으로
+표시한 모든 가환성 제약을 만족하므로 사상
+$V \to \text{cosk}_m U$를 준다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-trivial-cosk}
+$\mathcal{C}$를 범주라 하자.
+$U$를 $\mathcal{C}$의 $m$-절단 단체 대상이라 하자.
+$n \leq m$에 대해 극한
+$\lim_{(\Delta/[n])_{\leq m}^{opp}} U(n)$이 존재하고
+$U_n$과 표준적으로 동형이다.
+\end{lemma}
+
+\begin{proof}
+이 경우 범주 $(\Delta/[n])_{\leq m}$이 끝 대상, 즉 항등사상
+$[n] \to [n]$을 가지기 때문에 성립한다.
+% P02-E0114: frozen source says “an final object”.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-recover-cosk}
+$\mathcal{C}$를 유한 극한을 가지는 범주라 하자.
+$U$를 $\mathcal{C}$의 $n$-절단 단체 대상이라 하자.
+사상 $\text{sk}_n \text{cosk}_n U \to U$는 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-existence-cosk}와 \ref{lemma-trivial-cosk}를 결합하면
+된다.
+\end{proof}
+
+\noindent
+쌍대뼈대 함자의 한 특별한 경우를 더 자세히 기술하자.
+기호를 남용하여, 임의의 $n' \geq n$에 대해 제한 함자
+$\text{Simp}_{n'}(\mathcal{C}) \to \text{Simp}_n(\mathcal{C})$도
+$\text{sk}_n$으로 나타낼 것이다. 함자
+$\text{sk}_n : \text{Simp}_{n + 1}(\mathcal{C})
+\to \text{Simp}_n(\mathcal{C})$의 오른쪽 수반을 기술하려 한다.
+$n \geq 1$, $0 \leq i < j \leq n + 1$에 대해
+$\delta^{n + 1}_{i, j} : [n - 1] \to [n + 1]$을 $i$와 $j$를 생략하는
+증가 사상으로 정의하자. 보조정리 \ref{lemma-relations-face-degeneracy}에서
+보듯
+$\delta^{n + 1}_{i, j} =
+\delta^{n + 1}_j \circ \delta^n_i =
+\delta^{n + 1}_i \circ \delta^n_{j - 1}$이다.
+이것이 다음 보조정리의 동기이다.
+
+\begin{lemma}
+\label{lemma-formula-limit}
+$n$을 $\geq 1$인 정수라 하자.
+$U$를 $\mathcal{C}$의 $n$-절단 단체 대상이라 하자.
+$\mathcal{C}$에서 $\textit{Sets}$로 가는 반변 함자 중 대상 $T$에 집합
+$$
+\{ (f_0, \ldots, f_{n + 1}) \in \Mor_\mathcal{C}(T, U_n)
+\mid
+d^n_{j - 1} \circ f_i = d^n_i \circ f_j
+\ \forall\ 0\leq i < j\leq n + 1\}
+$$
+을 대응시키는 함자를 생각하자.
+이 함자가 $\mathcal{C}$의 어떤 대상 $U_{n + 1}$로 표현되면
+$$
+U_{n + 1} = \lim_{(\Delta/[n + 1])_{\leq n}^{opp}} U(n)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+극한이 존재하면, 이는 대상 $T$에 집합
+$$
+\{
+(f_\alpha)_{\alpha : [k] \to [n + 1], k \leq n}
+\mid
+f_{\alpha \circ \psi} = U(\psi) \circ f_\alpha\ \forall
+\ \psi : [k'] \to [k], \alpha : [k] \to [n + 1]
+\}.
+$$
+을 대응시키는 함자를 표현한다.
+실제로 이 함자가 보조정리에 표시된 함자와 동형임을 보이겠다.
+한 방향의 사상은 규칙
+$$
+(f_\alpha)_{\alpha}
+\longmapsto
+(f_{\delta^{n + 1}_0}, \ldots, f_{\delta^{n + 1}_{n + 1}}).
+$$
+으로 주어진다. 이 사상은 보조정리 앞에서 상기한 관계들에 의해
+$$
+d^n_{j - 1} \circ f_{\delta^{n + 1}_i} =
+f_{\delta^{n + 1}_i \circ \delta^n_{j - 1}} =
+f_{\delta^{n + 1}_j \circ \delta^n_i} =
+d^n_i \circ f_{\delta^{n + 1}_j}
+$$
+이므로 보조정리의 조건들을 만족한다.
+반대 방향의 사상을 구성하려면 보조정리에 표시된 식과 같은 계
+$(f_0, \ldots, f_{n + 1})$에 사상들의 계 $f_\alpha$를 대응시켜야 한다.
+$\alpha : [k] \to [n + 1]$이 주어졌다고 하자.
+$k \leq n$이므로 사상 $\alpha$는 전사가 아니다.
+따라서 어떤 $0 \leq i \leq n + 1$ 및
+$\psi : [k] \to [n]$에 대해
+$\alpha = \delta^{n + 1}_i \circ \psi$로 쓸 수 있다.
+그러면 다음과 같이 정의할 수밖에 없다.
+$$
+f_\alpha = U(\psi) \circ f_i.
+$$
+물론 이것이 쌍 $(i, \psi)$의 선택과 무관함을 확인해야 한다.
+먼저 $i$가 주어지면 조건을 만족하는 $\psi$는 유일하다.
+둘째, $(j, \phi)$가 다른 쌍이라고 하자.
+그러면 $i \not = j$이고 $i < j$라고 가정해도 좋다.
+$i, j$가 모두 $\alpha$의 상에 없으므로 실제로
+$\alpha = \delta^{n + 1}_{i, j} \circ \xi$로 쓸 수 있다.
+그러면 $\psi = \delta^n_{j - 1} \circ \xi$이고
+$\phi = \delta^n_i \circ \xi$임을 알 수 있다. 따라서 원하는 대로
+\begin{eqnarray*}
+U(\psi) \circ f_i & = & U(\delta^n_{j - 1} \circ \xi) \circ f_i \\
+& = & U(\xi) \circ d^n_{j - 1} \circ f_i \\
+& = & U(\xi) \circ d^n_i \circ f_j \\
+& = & U(\delta^n_i \circ \xi) \circ f_j \\
+& = & U(\phi) \circ f_j
+\end{eqnarray*}
+이다. 이렇게 정의한 사상 $f_\alpha$가 사상들의 계
+$(f_\alpha)_\alpha$의 규칙을 만족함도 확인해야 한다.
+이를 위해 $k, k' \leq n$인
+$\psi : [k'] \to [k]$, $\alpha : [k] \to [n + 1]$가 주어졌다고 하자.
+$\alpha' = \alpha \circ \psi$로 놓자.
+$\alpha$의 상에 없는 $i$를 택하자.
+그러면 $i$는 분명히 $\alpha'$의 상에도 없다.
+$\alpha = \delta^{n + 1}_i \circ \phi$로 쓰자
+(문자 $\psi$는 이미 사용했으므로 여기서 다시 쓸 수 없다).
+그러면 분명히
+$\alpha' = \delta^{n + 1}_i \circ \phi \circ \psi$이다.
+위 구성에 의해 원하는 대로
+$$
+U(\psi) \circ f_\alpha = U(\psi) \circ U(\phi) \circ f_i
+= U(\phi \circ \psi) \circ f_i = f_{\alpha \circ \psi} = f_{\alpha'}
+$$
+이다. 우리의 두 구성이 서로 역인 전단사이고 $T$에 대해 함자적임을
+확인하는 즐거운 일은 독자에게 맡긴다.
+\end{proof}
+\begin{lemma}
+\label{lemma-work-out}
+$n$을 $\geq 1$인 정수라 하고, $U$를 $\mathcal{C}$의
+$n$-절단 단체 대상이라 하자. 대상 $T$에 집합
+$$
+\{ (f_0, \ldots, f_{n + 1}) \in \Mor_\mathcal{C}(T, U_n)
+\mid
+d^n_{j - 1} \circ f_i = d^n_i \circ f_j
+\ \forall\ 0\leq i < j\leq n + 1\}
+$$
+을 대응시키는 $\mathcal{C}$에서 $\textit{Sets}$로 가는 반변 함자를
+생각하자. 이 함자가 $\mathcal{C}$의 어떤 대상 $U_{n + 1}$로
+표현 가능하다면, $\text{sk}_n \tilde U = U$이고
+$\tilde U_{n + 1} = U_{n + 1}$인 $(n + 1)$-절단 단체 대상
+$\tilde U$가 존재하여 다음 수반성이 성립한다.
+$$
+\Mor_{\text{Simp}_{n + 1}(\mathcal{C})}(V, \tilde U)
+=
+\Mor_{\text{Simp}_n(\mathcal{C})}(\text{sk}_nV, U)
+$$
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-trivial-cosk}에 의해 다음과 같이 동일시할 수 있다.
+$$
+U_i = \lim_{(\Delta/[i])_{\leq n}^{opp}} U(i)
+$$
+여기서 $0 \leq i \leq n$이다. 보조정리 \ref{lemma-formula-limit}에 의해
+다음도 성립한다.
+$$
+U_{n + 1} = \lim_{(\Delta/[n + 1])_{\leq n}^{opp}} U(n).
+$$
+따라서 $i, j \leq n + 1$인 임의의
+$\varphi : [i] \to [j]$에 대해 대응하는 사상
+$\tilde U(\varphi) : \tilde U_j \to \tilde U_i$를
+보조정리 \ref{lemma-existence-cosk}에서와 똑같이 정의할 수 있다.
+이는 $\text{sk}_n \tilde U = U$인 $(n + 1)$-절단 단체 대상
+$\tilde U$를 정의한다.
+
+\medskip\noindent
+수반성을 보이기 위해 다음과 같이 논증한다. 식의 우변의 임의의 원소
+$\gamma : \text{sk}_n V \to U$가 주어졌다고 하자. 사상
+$f_i = \gamma_n \circ d^{n + 1}_i : V_{n + 1} \to V_n \to U_n$을
+생각하자. 이들은 명백히 관계식
+$d^n_{j - 1} \circ f_i = d^n_i \circ f_j$를 만족하므로,
+$U_{n + 1}$의 선택에 의해 유일한 사상
+$V_{n + 1} \to U_{n + 1}$을 정의한다.
+반대로 좌변의 사상 $\gamma' : V \to \tilde U$가 주어지면 이를 단순히
+$\Delta_{\leq n}$에 제한하여 우변의 원소를 얻을 수 있다.
+이 두 구성이 서로 역임을 보이는 일은 독자에게 맡긴다.
+\end{proof}
+
+\begin{remark}
+\label{remark-explicit-face-degeneracy}
+$U$와 $U_{n + 1}$이 보조정리 \ref{lemma-work-out}에서와 같다고 하자.
+$T$-값 점들 위에서 $\tilde U$의 면 사상과 퇴화 사상을 쉽게 기술할 수 있다.
+구체적으로 사상 $d^{n + 1}_i : U_{n + 1} \to U_n$은 다음으로 주어진다.
+$$
+(f_0, \ldots, f_{n + 1}) \longmapsto f_i.
+$$
+그리고 사상 $s^n_j : U_n \to U_{n + 1}$은 다음으로 주어진다.
+\begin{eqnarray*}
+f & \longmapsto & (
+s^{n - 1}_{j - 1} \circ d^{n - 1}_0 \circ f, \\
+& &
+s^{n - 1}_{j - 1} \circ d^{n - 1}_1 \circ f, \\
+& &
+\ldots\\
+& &
+s^{n - 1}_{j - 1} \circ d^{n - 1}_{j - 1} \circ f, \\
+& &
+f, \\
+& &
+f, \\
+& &
+s^{n - 1}_j \circ d^{n - 1}_{j + 1} \circ f, \\
+& &
+s^{n - 1}_j \circ d^{n - 1}_{j + 2} \circ f, \\
+& &
+\ldots\\
+& &
+s^{n - 1}_j \circ d^{n - 1}_n \circ f
+)
+\end{eqnarray*}
+우변이 보조정리 \ref{lemma-work-out}에 표시된 집합의 원소임을 확인하는
+일은 독자에게 맡긴다. $n = 0$이면 사상은 하나이며, 바로
+$f \mapsto (f, f)$이다. $n = 1$이면 사상은 두 개이며, 바로
+$f \mapsto (f, f, s_0d_1f)$와
+$f \mapsto (s_0d_0f, f, f)$이다.
+$n = 2$이면 사상은 세 개이며, 바로
+$f \mapsto (f, f, s_0d_1f, s_0d_2f)$,
+$f \mapsto (s_0d_0f, f, f, s_1d_2f)$, 그리고
+$f \mapsto (s_1d_0f, s_1d_1f, f, f)$이다.
+이와 같은 식으로 계속된다.
+\end{remark}
+
+\begin{remark}
+\label{remark-cosk-simplicial-sets}
+위 보조정리 \ref{lemma-work-out}의 구성을 단체 집합의 경우에 적용하면
+다음과 같다. $n$-절단 단체 집합 $U$가 주어졌을 때, 다음과 같이 표준적인
+$(n + 1)$-절단 단체 집합 $\tilde U$를 만든다. 보조정리의 식에 따라
+$(n + 1)$-단체들의 집합 $U_{n + 1}$을 덧붙인다. 즉,
+$U_{n + 1}$의 원소는 $n$-단체들의 번호 매긴 모음
+$(f_0, \ldots, f_{n + 1})$이며, 이들은 $(n + 1)$-단체 안에서 그러하듯이
+서로 붙는다는 성질을 가진다. 다시 말해 $i < j$일 때 $f_j$의 $i$번째 면은
+$f_i$의 $(j-1)$번째 면이다. 기하학적으로 $\tilde U$의 면 사상과
+퇴화 사상을 어떻게 정의할지는 명백하다.
+$V$가 $(n + 1)$-절단 단체 집합이면 그 $(n + 1)$-단체들은
+$f_i \in V_n$인 $n$-단체들의 양립 가능한 모음
+$(f_0, \ldots, f_{n + 1})$을 낳는다. 따라서 자연스러운 사상
+$\Mor(\text{sk}_nV, U) \to \Mor(V, \tilde U)$가 있으며, 이는 반대 방향의
+표준적인 제한 사상의 역이다.
+
+\medskip\noindent
+또한 이 구성의 조합론은 절단 단체 집합의 경우에만 수행해도 충분하다.
+실제로 범주 $\mathcal{C}$의 임의의 대상 $T$와 $\mathcal{C}$의 임의의
+$n$-절단 단체 대상 $U$에 대해 $n$-절단 단체 집합 $\Mor(T, U)$를
+생각할 수 있다. 여기에 구성을 적용하여 그 $(n + 1)$-단체들의 집합을
+취하고, 이것이 표현 가능할 것을 요구할 수 있다. 이는 보조정리
+\ref{lemma-work-out}의 결과를 이해하는 좋은 방법이다.
+\end{remark}
+
+\begin{remark}
+\label{remark-inductive-coskeleton}
+{\it 쌍대뼈대의 귀납적 구성.}
+$\mathcal{C}$가 유한 극한을 갖는 범주라고 하자. $U$가 $\mathcal{C}$의
+$m$-절단 단체 대상이라고 하자. 그러면 다음과 같이 $n$-절단 대상
+$U^n$을 귀납적으로 구성할 수 있다.
+\begin{enumerate}
+\item 먼저 $U^m = U$로 놓는다.
+\item $n \geq m$에 대해 $U^n$이 주어졌으면
+$U^{n + 1} = \tilde U^n$로 놓는다. 여기서 $\tilde U^n$은 보조정리
+\ref{lemma-work-out}에서처럼 $U^n$으로부터 구성한다.
+\end{enumerate}
+보조정리 \ref{lemma-work-out}의 구성은 $U^n$의 $n$-뼈대를 바꾸지 않으므로,
+다음 조건을 만족하는 단체 대상으로 $\text{cosk}_m U$를 정의할 수 있다.
+$(\text{cosk}_m U)_n = U^n_n = U^{n + 1}_n = \ldots$.
+또한 보조정리 \ref{lemma-work-out}에서 형식적으로 $U^n$이 다음 식을
+만족함이 따른다.
+$$
+\Mor_{\text{Simp}_n(\mathcal{C})}(V, U^n)
+=
+\Mor_{\text{Simp}_m(\mathcal{C})}(\text{sk}_mV, U)
+$$
+이는 모든 $n \geq m$에 대해 성립한다. 여기서 다시 형식적으로,
+위와 같이 $\text{cosk}_mU$를 택하면 다음이 따른다.
+$$
+\Mor_{\text{Simp}(\mathcal{C})}(V, \text{cosk}_mU)
+=
+\Mor_{\text{Simp}_m(\mathcal{C})}(\text{sk}_mV, U)
+$$
+\end{remark}
+
+\begin{lemma}
+\label{lemma-cosk-up}
+$\mathcal{C}$가 유한 극한을 갖는 범주라고 하자.
+\begin{enumerate}
+\item 모든 $n$에 대해 함자 $\text{sk}_n : \text{Simp}(\mathcal{C})
+\to \text{Simp}_n(\mathcal{C})$은 오른쪽 수반 $\text{cosk}_n$을 갖는다.
+\item 모든 $n' \geq n$에 대해 함자
+$\text{sk}_n : \text{Simp}_{n'}(\mathcal{C}) \to \text{Simp}_n(\mathcal{C})$은
+오른쪽 수반을 가지며, 이는 $\text{sk}_{n'}\text{cosk}_n$이다.
+\item 모든 $m \geq n \geq 0$과 $\mathcal{C}$의 모든 $n$-절단 단체 대상
+$U$에 대해
+$\text{cosk}_m \text{sk}_m \text{cosk}_n U = \text{cosk}_n U$이다.
+\item $U$가 $\mathcal{C}$의 단체 대상이고 어떤 $n \geq 0$에 대해
+표준 사상 $U \to \text{cosk}_n \text{sk}_nU$가 동형사상이라면,
+모든 $m \geq n$에 대해 표준 사상
+$U \to \text{cosk}_m \text{sk}_mU$도 동형사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 존재성은 위 보조정리 \ref{lemma-existence-cosk}에서 따른다.
+(2)와 (3)은 주석 \ref{remark-inductive-coskeleton}의 논의에서 따른다.
+그러면 (4)는 명백하다.
+\end{proof}
+
+\begin{remark}
+\label{remark-existence-cosk}
+쌍대뼈대 함자를 정의하기 위해 모든 유한 극한이 필요한 것은 아니다.
+몇 가지 사항을 적으면 다음과 같다.
+\begin{enumerate}
+\item 예 \ref{example-cosk0}에서 $\mathcal{C}$가 대상 쌍의 곱을 가지면
+$\text{cosk}_0$가 존재함을 보았다.
+\item $k > 0$일 때 $\mathcal{C}$가 유한 연결 극한을 가지면
+함자 $\text{cosk}_k$가 존재한다.
+\end{enumerate}
+이는 쌍대뼈대의 귀납적 구성(주석 \ref{remark-cosk-simplicial-sets}와
+\ref{remark-inductive-coskeleton})에서 명백하지만, 보조정리
+\ref{lemma-existence-cosk}에서 쓰인 범주
+$(\Delta/[n])_{\leq k}$가 $k \geq 1$이고 $n \geq k + 1$일 때 연결이라는
+사실에서도 따른다. 보조정리 \ref{lemma-trivial-cosk} 또는 보조정리
+\ref{lemma-recover-cosk}에 의해 $n \leq k$인 범주는 필요하지 않음에
+유의하라. ($k$가 커질수록 $k \geq 1$, $n \geq k + 1$인 범주
+$(\Delta/[n])_{\leq k}$는 위상적인 의미에서 점점 더 높은 연결성을 갖는다.)
+\end{remark}
+
+\begin{lemma}
+\label{lemma-cosk-product}
+$U$, $V$를 범주 $\mathcal{C}$의 $n$-절단 단체 대상이라 하자. 좌변과
+우변이 존재할 때 다음이 성립한다.
+$$
+\text{cosk}_n (U \times V) = \text{cosk}_nU \times \text{cosk}_nV
+$$
+\end{lemma}
+
+\begin{proof}
+$W$를 단체 대상이라 하자. 다음이 성립한다.
+\begin{eqnarray*}
+\Mor(W, \text{cosk}_n (U \times V))
+& = &
+\Mor(\text{sk}_n W, U \times V) \\
+& = &
+\Mor(\text{sk}_n W, U)
+\times
+\Mor(\text{sk}_nW, V) \\
+& = &
+\Mor(W, \text{cosk}_n U)
+\times
+\Mor(W, \text{cosk}_n V) \\
+& = &
+\Mor(W, \text{cosk}_n U \times \text{cosk}_n V)
+\end{eqnarray*}
+이로부터 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cosk-fibre-product}
+$\mathcal{C}$가 섬유곱을 갖는다고 가정하자. 범주 $\mathcal{C}$의
+$n$-절단 단체 대상의 사상 $U \to V$와 $W \to V$가 주어졌다고 하자.
+좌변과 우변이 존재할 때 다음이 성립한다.
+$$
+\text{cosk}_n (U \times_V W)
+=
+\text{cosk}_nU \times_{\text{cosk}_n V} \text{cosk}_nW
+$$
+\end{lemma}
+
+\begin{proof}
+생략한다. 위 보조정리 \ref{lemma-cosk-product}의 증명과 매우 비슷하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cosk-above-object}
+$\mathcal{C}$를 유한 극한을 갖는 범주라 하고 $X \in \Ob(\mathcal{C})$라
+하자. 함자 $\mathcal{C}/X \to \mathcal{C}$는 $k \geq 1$인 쌍대뼈대
+함자 $\text{cosk}_k$와 가환한다.
+\end{lemma}
+
+\begin{proof}
+명제의 뜻은 다음과 같다. $U$가 $\mathcal{C}/X$의 단체 대상이고, 이를
+상수 단체 대상 $X$로 향하는 사상을 갖춘 $\mathcal{C}$의 단체 대상으로
+생각할 때, $\mathcal{C}/X$에서 계산한 $\text{cosk}_k U$는
+$\mathcal{C}$에서 계산한 것과 같다. 이는 예를 들어 범주의 보조정리
+\ref{categories-lemma-connected-limit-over-X}에서 따른다. 실제로 보조정리
+\ref{lemma-existence-cosk}에서 쓰인 범주 $(\Delta/[n])_{\leq k}$는
+$k \geq 1$이고 $n \geq k + 1$일 때 연결이다. 보조정리
+\ref{lemma-trivial-cosk} 또는 보조정리 \ref{lemma-recover-cosk}에 의해
+$n \leq k$인 범주는 필요하지 않음에 유의하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-simplex-cosk}
+표준 사상 $\Delta[n] \to \text{cosk}_1 \text{sk}_1 \Delta[n]$은
+동형사상이다.
+\end{lemma}
+
+\begin{proof}
+단체 집합 $U$와 사상 $f : U \to \Delta[n]$을 생각하자. 이는 각
+$u \in U_i$에 $\Delta$의 사상 $f_u : [i] \to [n]$을 대응시키는 규칙이다.
+더 나아가 이 사상들은 임의의 $\varphi : [j] \to [i]$에 대해
+$f_u \circ \varphi = f_{U(\varphi)(u)}$라는 성질을 가져야 한다.
+$0$을 $j$로 보내는 사상 $\epsilon^i_j : [0] \to [i]$를 표시하자.
+사상 $u \mapsto f_u(0)$을 $F : U_0 \to [n]$으로 표시하자. 그러면
+$$
+f_u(j) = F(\epsilon^i_j(u))
+$$
+임을 모든 $0 \leq j \leq i$와 $u \in U_i$에 대해 알 수 있다.
+특히 함수 $F$를 알면 모든 $i$와 모든 $u\in U_i$에 대한 사상 $f_u$를
+안다. 반대로 사상 $F : U_0 \to [n]$가 주어졌을 때, 임의의 $i$,
+임의의 $u \in U_i$, 임의의 $0 \leq j \leq i$에 대해 다음과 같이 놓을 수 있다.
+$$
+f_u(j) = F(\epsilon^i_j(u))
+$$
+일반적으로 이는 위와 같은 단체 집합의 사상 $f$를 정의하지 않는다.
+조건은 모든 사상 $f_u$가 비감소여야 한다는 것이다. 이는 명백히
+$0 \leq j \leq j' \leq i$이고 $u \in U_i$일 때마다
+$F(\epsilon^i_j(u)) \leq F(\epsilon^i_{j'}(u))$라는 조건과 동치이다.
+그런데 이 경우 두 사상
+$$
+\epsilon^i_j, \epsilon^i_{j'} : [0] \to [i]
+$$
+은 모두 규칙 $0 \mapsto j$, $1 \mapsto j'$로 정의된 사상
+$\epsilon^i_{j, j'} : [1] \to [i]$을 통해 분해된다.
+% P02-E0115: frozen source switches from U to the undefined X_1 here.
+다시 말해 $i = 1$이고 $u \in X_1$인 경우에만 부등식을 확인하면
+충분하다. 따라서 원하는 대로 다음이 성립한다.
+$$
+\Mor(U, \Delta[n])
+=
+\Mor(\text{sk}_1 U, \text{sk}_1 \Delta[n])
+$$
+\end{proof}
+
+
+
+\section{증강}
+\label{section-augmentation}
+
+\begin{definition}
+\label{definition-augmentation}
+$\mathcal{C}$를 범주라 하고 $U$를 $\mathcal{C}$의 단체 대상이라 하자.
+$U$에서 상수 단체 대상 $X$로 가는 사상을
+{\it 범주 $\mathcal{C}$의 대상 $X$로 향하는 $U$의 증강
+$\epsilon : U \to X$}이라 한다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-augmentation-howto}
+$\mathcal{C}$를 범주라 하고 $X \in \Ob(\mathcal{C})$라 하자.
+$U$를 $\mathcal{C}$의 단체 대상이라 하자. $X$로 향하는 $U$의 증강을
+주는 것은 $\epsilon_0 \circ d^1_0 = \epsilon_0 \circ d^1_1$을 만족하는
+사상 $\epsilon_0 : U_0 \to X$를 주는 것과 같다.
+\end{lemma}
+
+\begin{proof}
+사상 $\epsilon : U \to X$가 주어지면 보조정리에서 말한
+$\epsilon_0$를 분명히 얻는다. 반대로 보조정리에서와 같은
+$\epsilon_0$가 주어졌다고 하자. 임의의 사상
+$\alpha : [0] \to [n]$을 택하고
+$\epsilon_n = \epsilon_0 \circ U(\alpha)$로 놓아
+$\epsilon_n : U_n \to X$를 정의한다. 실제로
+$\beta : [0] \to [n]$가 다른 선택이면, $\alpha$와 $\beta$가 모두
+$[0] \to [1] \to [n]$으로 분해되는 사상 $\gamma : [1] \to [n]$가
+존재한다. 따라서 $\epsilon_0$에 대한 조건으로부터 $\epsilon_n$이
+잘 정의됨을 알 수 있다. 그러면 $(\epsilon_n) : U \to X$가 단체 대상의
+사상임을 쉽게 보일 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cosk-minus-one}
+$\mathcal{C}$를 섬유곱을 갖는 범주라 하자. $f : Y\to X$를
+$\mathcal{C}$의 사상이라 하자. $U$를 그 $n$번째 항이 $(n + 1)$중 섬유곱
+$Y \times_X Y \times_X \ldots \times_X Y$인 $\mathcal{C}$의 단체 대상이라
+하자. 예 \ref{example-fibre-products-simplicial-object}를 보라.
+% P02-E0116: frozen source writes “(n + 1)fold” without its compound-modifier hyphen.
+$\mathcal{C}$의 임의의 단체 대상 $V$에 대해 다음이 성립한다.
+\begin{align*}
+\Mor_{\text{Simp}(\mathcal{C})}(V, U)
+& =
+\Mor_{\text{Simp}_1(\mathcal{C})}(\text{sk}_1 V, \text{sk}_1 U) \\
+& =
+\{g_0 : V_0 \to Y \mid f \circ g_0 \circ d^1_0 = f \circ g_0 \circ d^1_1\}
+\end{align*}
+특히 $U = \text{cosk}_1 \text{sk}_1 U$이다.
+\end{lemma}
+
+\begin{proof}
+$g : \text{sk}_1V \to \text{sk}_1U$가 $1$-절단 단체 대상의 사상이라고
+하자. 그러면 도식
+$$
+\xymatrix{
+V_1 \ar@<1ex>[r]^{d^1_0} \ar@<-1ex>[r]_{d^1_1} \ar[d]_{g_1} &
+V_0 \ar[d]^{g_0} \\
+Y \times_X Y \ar@<1ex>[r]^{pr_1} \ar@<-1ex>[r]_{pr_0} &
+Y \ar[r] & X
+}
+$$
+은 가환하며, 이로써 보조정리에 표시된 관계식이 성립한다.
+반대로 그 관계식 $f \circ g_0 \circ d^1_0 = f \circ g_0 \circ d^1_1$을
+만족하는 사상 $g_0$가 주어졌을 때 단체 대상의 유일한 사상
+$g : V \to U$를 얻음을 보여야 한다. 이는 다음과 같이 한다.
+임의의 $n \geq 1$에 대해
+$g_{n, i} = g_0 \circ V([0] \to [n], 0 \mapsto i) :
+V_n \to Y$로 놓는다. 위 등식과 가환 도식
+$$
+\xymatrix{
+[0] \ar[rd]_{0 \mapsto 0} \ar[rrrrrd]^{0 \mapsto i} \\
+& [1] \ar[rrrr]^{0 \mapsto i, 1\mapsto i + 1} & & & & [n] \\
+[0] \ar[ru]^{0 \mapsto 1} \ar[rrrrru]_{0 \mapsto i + 1}
+}
+$$
+에 의해 $f \circ g_{n, i} = f \circ g_{n, i + 1}$이다. 따라서 다음을 얻는다.
+$(g_{n, 0}, \ldots, g_{n, n}) : V_n \to Y \times_X\ldots \times_X Y = U_n$.
+이것이 단체 대상의 사상임을 확인하는 일은 독자에게 맡긴다.
+보조정리의 마지막 주장은 보조정리에 표시된 식의 첫째 등식과 동치이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-augmentation}
+$\mathcal{C}$를 섬유곱을 갖는 범주라 하고 $V$를 단체 대상이라 하자.
+$\epsilon : V \to X$를 증강이라 하자. $U$를 그 $n$번째 항이 $X$ 위에서의
+$V_0$의 $(n + 1)$중 섬유곱인 단체 대상이라 하자. 보조정리
+% P02-E0117: frozen source calls this the ordinal “(n + 1)st” fibred product.
+\ref{lemma-augmentation-howto}와 \ref{lemma-cosk-minus-one}을 간단히
+결합하면 표준 사상 $V \to U$를 얻는다.
+\end{remark}
+
+\section{뼈대 함자의 왼쪽 수반}
+\label{section-adjoint-left}
+
+\noindent
+이 절에서는 어떤 경우에 뼈대 함자 $\text{sk}_m$의 왼쪽 수반
+$i_{m!}$을 구성한다. 수반성 공식은 다음과 같다.
+$$
+\Mor_{\text{Simp}_m(\mathcal{C})}(U, \text{sk}_mV)
+=
+\Mor_{\text{Simp}(\mathcal{C})}(i_{m!}U, V).
+$$
+범주 $\mathcal{C}$가 유한 쌍대극한을 가지면 이 왼쪽 수반이 존재함을
+알게 될 것이다.
+
+\medskip\noindent
+절 \ref{section-skeleton}에서와 비슷한 구성을 사용한다.
+$[n]$ 아래 대상들의 범주 $[n]/\Delta$를 상기하라. 범주의 예
+\ref{categories-example-category-under-X}를 보라. 그 대상은 사상
+$\alpha : [n] \to [k]$이고 그 사상은 가환 삼각형이다.
+$[n]/\Delta$에서 $k \leq m$인 대상 $[n] \to [k]$들로 이루어진
+충만한 부분범주를 $([n]/\Delta)_{\leq m}$으로 표시하자.
+$\mathcal{C}$의 $m$-절단 단체 대상 $U$가 주어졌을 때, 다음 규칙으로
+함자를 정의한다.
+$$
+U(n) : ([n]/\Delta)_{\leq m}^{opp} \longrightarrow \mathcal{C}
+$$
+\begin{eqnarray*}
+([n] \to [k]) & \longmapsto & U_k \\
+\psi : ([n] \to [k']) \to ([n] \to [k])
+& \longmapsto &
+U(\psi) : U_k \to U_{k'}
+\end{eqnarray*}
+$\Delta$의 사상 $\varphi : [n] \to [n']$가 주어지면 연관된 함자
+$$
+\underline{\varphi} :
+([n']/\Delta)_{\leq m}
+\longrightarrow
+([n]/\Delta)_{\leq m}
+$$
+가 있으며, 이는 $\alpha : [n'] \to [k]$를
+$\varphi \circ \alpha : [n] \to [k]$로 보낸다. 합성
+$U(n) \circ \underline{\varphi}$는 함자 $U(n')$과 같다.
+
+\begin{lemma}
+\label{lemma-left-adjoint-exists}
+$\mathcal{C}$를 유한 쌍대극한을 갖는 범주라 하자. 모든 $m$에 대해
+함자 $i_{m!}$이 존재한다. $U$를 $\mathcal{C}$의 $m$-절단 단체 대상이라
+하자. 단체 대상 $i_{m!}U$는 다음 식으로 기술된다.
+$$
+(i_{m!}U)_n = \colim_{([n]/\Delta)_{\leq m}^{opp}} U(n)
+$$
+또한 $\varphi : [n] \to [n']$에 대한 사상 $i_{m!}U(\varphi)$은
+위 동일시 $U(n) \circ \underline{\varphi} = U(n')$와 범주의 보조정리
+\ref{categories-lemma-functorial-colimit}를 통해 얻어진다.
+\end{lemma}
+
+\begin{proof}
+이 증명에서는 그 $n$번째 항이 보조정리에 표시된 식으로 주어지는
+단체 대상을 $i_{m!}U$로 표시한다. 이것이 수반성 성질을 만족함을 보이겠다.
+
+\medskip\noindent
+$V$를 $\mathcal{C}$의 단체 대상이라 하고
+$\gamma : U \to \text{sk}_mV$가 주어졌다고 하자. 사상
+$$
+\colim_{([n]/\Delta)_{\leq m}^{opp}} U(n) \to T
+$$
+을 주는 것은 $k \leq m$인 $\alpha : [n] \to [k]$마다 양립 가능한
+사상들의 계 $f_\alpha : U_k \to T$를 주는 것이다. 분명히 합성
+$$
+U_k \xrightarrow{\gamma_k} V_k \xrightarrow{V(\alpha)} V_n.
+$$
+을 취하면 그러한 사상들의 계를 얻는다. 따라서 유도된 사상
+$(i_{m!}U)_n \to V_n$을 얻는다. 이들이 단체 대상의 사상
+$\gamma' : i_{m!}U \to V$를 이룸을 확인하는 일은 독자에게 맡긴다.
+
+\medskip\noindent
+반대로 사상 $\gamma' : i_{m!}U \to V$가 주어졌다고 하자.
+$\gamma_i : U_i \to V_i$를 합성
+$$
+U_i
+\xrightarrow{\text{id}_{[i]}}
+\colim_{([i]/\Delta)_{\leq m}^{opp}} U(i)
+\xrightarrow{\gamma'_i}
+V_i
+$$
+과 같게 놓아 사상 $\gamma : U \to \text{sk}_m V$를 얻는다.
+% P02-E0118: frozen source bounds these components by n rather than the truncation bound m.
+여기서 $0 \leq i \leq n$이다. 이것이 위 구성의 역임을 확인하는 일은
+독자에게 맡긴다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-recovering-U}
+$\mathcal{C}$를 범주라 하고 $U$를 $\mathcal{C}$의 $m$-절단 단체 대상이라
+하자. 임의의 $n \leq m$에 대해 쌍대극한
+$$
+\colim_{([n]/\Delta)_{\leq m}^{opp}} U(n)
+$$
+이 존재하며 $U_n$과 같다.
+\end{lemma}
+
+\begin{proof}
+범주 $([n]/\Delta)_{\leq m}$이 시작 대상
+$\text{id} : [n] \to [n]$을 가지기 때문이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-recovering-U-for-real}
+$\mathcal{C}$를 유한 쌍대극한을 갖는 범주라 하고 $U$를
+$\mathcal{C}$의 $m$-절단 단체 대상이라 하자. 사상
+$U \to \text{sk}_m i_{m!}U$는 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-left-adjoint-exists}와 \ref{lemma-recovering-U}를
+결합하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-imshriek-sets}
+$U$가 $m$-절단 단체 집합이고 $n > m$이면 $i_{m!}U$의 모든
+$n$-단체는 퇴화한다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{lemma-left-adjoint-exists}에서 $i_{m!}U$를 구성한
+방식으로부터 알 수 있지만, 다음과 같이 직접 논증할 수도 있다.
+$V = i_{m!}U$로 쓰자. $i \leq m$일 때 $V'_i = V_i$이고
+$i > m$일 때 모든 $i$-단체가 퇴화하는 단체 부분집합
+$V' \subset V$를 취하자. 보조정리
+\ref{lemma-simplicial-set-n-skel-sub}를 보라. 수반성 공식에 의해
+$\text{sk}_m V' = U$이므로 포함 $V' \to V$의 역이 존재한다.
+따라서 $V' = V$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-n-skeleton-sets}
+$U$를 단체 집합이라 하고 $n \geq 0$을 정수라 하자. 사상
+$i_{n!} \text{sk}_n U \to U$는 $i_{n!} \text{sk}_n U$를 보조정리
+\ref{lemma-simplicial-set-n-skel-sub}에서 정의한 단체 집합
+$U' \subset U$와 동일시한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-imshriek-sets}에 의해
+$i_{n!} \text{sk}_n U$의 비퇴화 단체들은 차수 $\leq n$에만 있다.
+사상 $i_{n!} \text{sk}_n U \to U$는 차수 $\leq n$에서 동형사상이다.
+두 사실을 결합하면 사상 $i_{n!} \text{sk}_n U \to U$가 비퇴화 단체를
+비퇴화 단체로 보내고 서로 다른 두 비퇴화 단체는 같은 상을 갖지 않음을
+알 수 있다. 따라서 보조정리 \ref{lemma-injective-map-simplicial-sets}를
+적용할 수 있다. 이로써 $i_{n!} \text{sk}_n U \to U$가 단사이며,
+결과가 쉽게 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-sk-literature}
+일부 문헌에서는 합성 함자
+$$
+\text{Simp}(\mathcal{C})
+\xrightarrow{\text{sk}_m}
+\text{Simp}_m(\mathcal{C})
+\xrightarrow{i_{m!}}
+\text{Simp}(\mathcal{C})
+$$
+를 $\text{sk}_m$으로 표시한다. 이는 단체 집합에 대해서는 타당하다.
+실제로 보조정리 \ref{lemma-n-skeleton-sets}에 따르면
+$i_{m!} \text{sk}_m V$는 $V$의 모든 $i \leq m$인 $i$-단체와 그 퇴화들로
+이루어진 $V$의 단체 부분집합일 뿐이다. 이 문헌들에서는 합성
+$$
+\text{Simp}(\mathcal{C})
+\xrightarrow{\text{sk}_m}
+\text{Simp}_m(\mathcal{C})
+\xrightarrow{\text{cosk}_m}
+\text{Simp}(\mathcal{C})
+$$
+을 $\text{cosk}_m$으로 표시하는 것도 관례이다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-glue-simplex}
+$U \subset V$를 단체 집합이라 하자. $n \geq 0$이고
+$x \in V_n$, $x \not \in U_n$이 다음을 만족한다고 하자.
+\begin{enumerate}
+\item $i < n$이면 $V_i = U_i$이다.
+\item $V_n = U_n \cup \{x\}$이다.
+\item $j > n$이고 $z \in V_j$, $z \not \in U_j$이면 그 단체는 퇴화한다.
+\end{enumerate}
+$\Delta[n]$의 비퇴화 $n$-단체를 $x$로 보내는 유일한 사상을
+$\Delta[n] \to V$라 하자. 이 경우 도식
+$$
+\xymatrix{
+\Delta[n] \ar[r] & V \\
+i_{(n - 1)!} \text{sk}_{n - 1} \Delta[n] \ar[r] \ar[u] & U \ar[u]
+}
+$$
+은 밂 도식이다.
+\end{lemma}
+
+\begin{proof}
+편의를 위해 $\partial \Delta[n] = i_{(n - 1)!} \text{sk}_{n - 1} \Delta[n]$로
+표시하자. 자연스러운 사상 $U \amalg_{\partial \Delta[n]} \Delta[n] \to V$가
+있다. 이것이 모든 $j$에 대해 차수 $j$에서 전단사임을 보여야 한다.
+$j \leq n$이면 이는 명백하다. $j > n$이라 하자. 셋째 조건에 따르면
+임의의 $z \in V_j$, $z \not \in U_j$는 퇴화 단체이므로
+$z = s^{j - 1}_i(z')$라고 쓰자. 물론 $z' \not \in U_{j - 1}$이다.
+귀납법에 의해 $z'$은 $x$의 퇴화이다. 따라서 $V$의 모든 $j$-단체는
+$U$에 속하거나 $x$의 퇴화임을 알 수 있다. 이는 사상
+$U \amalg_{\partial \Delta[n]} \Delta[n] \to V$가 전사임을 뜻한다.
+$U \amalg_{\partial \Delta[n]} \Delta[n]$의 비퇴화 단체는 $U$의 비퇴화
+단체의 상이거나 $\Delta[n]$의 유일한 비퇴화 $n$-단체의 상임에 유의하라.
+$x$는 명백히 비퇴화이므로
+$U \amalg_{\partial \Delta[n]} \Delta[n] \to V$는 비퇴화 단체를 비퇴화
+단체로 보내며 비퇴화 단체들 위에서 단사이다. 따라서 보조정리
+\ref{lemma-injective-map-simplicial-sets}에 의해 이 사상은 단사이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-add-simplices}
+$U \subset V$를 단체 집합이라 하자. 모든 $n$에 대해 $U_n, V_n$은
+유한 비공집합이라고 하자. $U$와 $V$가 유한 개의 비퇴화 단체를 가진다고
+가정하자. 그러면 단체 부분집합들의 열
+$$
+U = W^0 \subset W^1 \subset W^2 \subset \ldots W^r = V
+$$
+% P02-E0119: frozen source omits a subset relation between the ellipsis and W^r.
+이 존재하여 각 포함 $W^i \subset W^{i + 1}$에 보조정리
+\ref{lemma-glue-simplex}를 적용할 수 있다.
+\end{lemma}
+
+\begin{proof}
+$V$가 $U$에 속하지 않는 비퇴화 단체를 갖게 되는 가장 작은 정수를
+$n$이라 하자. 그러한 비퇴화 단체 $x \in V_n$, $x\not \in U_n$을 택하자.
+$W \subset V$를 $U$에 속하거나 $x$의 (반복된) 퇴화인 원소들의 집합으로
+놓자. 다시 말해 이는 $\varphi : [m] \to [n]$가 전사일 때
+$V(\varphi)(x)$ 꼴인 원소들이다. $W$가 단체 집합임은 쉽게 알 수 있다.
+포함 $U \subset W$는 보조정리 \ref{lemma-glue-simplex}의 조건들을
+만족한다. 더욱이 $W$에 들어 있지 않은 $V$의 비퇴화 단체의 수는
+$U$에 들어 있지 않은 $V$의 비퇴화 단체의 수보다 정확히 하나 작다.
+따라서 이 수에 대한 귀납법으로 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-imshriek-abelian}
+% P02-E0120: frozen source omits sentence-ending punctuation after “abelian category”.
+$\mathcal{A}$를 아벨 범주라 하자. $U$를 $\mathcal{A}$의 $m$-절단 단체
+대상이라 하자. $n > m$이면 $N(i_{m!}U)_n = 0$이다.
+\end{lemma}
+
+\begin{proof}
+$V = i_{m!}U$로 쓰자. $i \leq m$일 때 $V'_i = V_i$이고 $i > m$일 때
+$N(V'_i) = 0$인 $V$의 단체 부분대상 $V' \subset V$를 취하자.
+보조정리 \ref{lemma-simplicial-abelian-n-skel-sub}를 보라.
+수반성 공식에 의해 $\text{sk}_m V' = U$이므로 포함 $V' \to V$의 역이
+존재한다. 따라서 $V' = V$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-n-skeleton-abelian}
+$\mathcal{A}$를 아벨 범주라 하고 $U$를 $\mathcal{A}$의 단체 대상이라
+하자. $n \geq 0$을 정수라 하자. 사상 $i_{n!} \text{sk}_n U \to U$는
+$i_{n!} \text{sk}_n U$를 보조정리
+\ref{lemma-simplicial-abelian-n-skel-sub}에서 정의한 단체 부분대상
+$U' \subset U$와 동일시한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-imshriek-abelian}에 의해 $i > n$이면
+$N(i_{n!} \text{sk}_n U)_i = 0$이다. 사상
+$i_{n!} \text{sk}_n U \to U$는 차수 $\leq n$에서 동형사상이다.
+보조정리 \ref{lemma-recovering-U-for-real}를 보라. 두 사실을 결합하면
+사상 $i_{n!} \text{sk}_n U \to U$가 모든 $i$에 대해 단사 사상
+$N(i_{n!} \text{sk}_n U)_i \to N(U)_i$를 유도함을 알 수 있다.
+따라서 보조정리 \ref{lemma-injective-map-simplicial-abelian}을 적용할 수 있다.
+이에 따라 $i_{n!} \text{sk}_n U \to U$는 단사이며, 결과가 쉽게 따른다.
+\end{proof}
+
+\noindent
+위 내용을 사용하여 쌍대뼈대 함자를 생각하는 또 다른 방법을 설명한다.
+
+\begin{lemma}
+\label{lemma-cosk-shriek}
+$\mathcal{C}$를 유한 쌍대곱과 유한 극한을 갖는 범주라 하고 $V$를
+$\mathcal{C}$의 단체 대상이라 하자. 이 경우 다음이 성립한다.
+$$
+(\text{cosk}_n \text{sk}_n V)_{n + 1}
+=
+\Hom(i_{n !}\text{sk}_n \Delta[n + 1], V)_0.
+$$
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-morphism-from-coproduct}에 의해 좌변의 대상은 $X$에
+다음 등식들의 첫째 집합을 대응시키는 함자를 표현한다.
+\begin{eqnarray*}
+\Mor(X \times \Delta[n + 1], \text{cosk}_n \text{sk}_n V)
+& = &
+\Mor(X \times \text{sk}_n \Delta[n + 1], \text{sk}_n V) \\
+& = &
+\Mor(X \times i_{n !} \text{sk}_n \Delta[n + 1], V).
+\end{eqnarray*}
+보조정리의 식에서 우변의 대상은 $X$에 이 등식열의 마지막 집합을
+대응시키는 함자로 표현된다. 이로써 결과가 증명된다.
+
+\medskip\noindent
+이 등식열에서는
+$\text{sk}_n (X \times \Delta[n + 1]) = X \times \text{sk}_n \Delta[n + 1]$
+과
+$i_{n!}(X \times \text{sk}_n \Delta[n + 1]) =
+X \times i_{n !} \text{sk}_n \Delta[n + 1]$을 사용했다.
+첫째 등식은 명백하다. $\mathcal{C}$의 임의의 (절단되었을 수도 있는)
+단체 대상 $W$와 $\mathcal{C}$의 임의의 대상 $X$에 대해,
+(절단되었을 수도 있는) 단체 집합
+$[n] \mapsto \Mor_\mathcal{C}(X, W_n)$을 잠시
+$\Mor_\mathcal{C}(X, W)$로 표시하자. 정의로부터 (절단되었을 수도 있는)
+임의의 단체 집합 $U$에 대해
+$\Mor(U \times X, W) =
+\Mor(U, \Mor_\mathcal{C}(X, W))$임이 따른다. 따라서
+\begin{eqnarray*}
+\Mor(X \times i_{n !} \text{sk}_n \Delta[n + 1], W)
+& = &
+\Mor(i_{n !} \text{sk}_n \Delta[n + 1], \Mor_\mathcal{C}(X, W)) \\
+& = &
+\Mor(\text{sk}_n \Delta[n + 1],
+\text{sk}_n\Mor_\mathcal{C}(X, W)) \\
+& = &
+\Mor(X \times \text{sk}_n \Delta[n + 1], \text{sk}_nW) \\
+& = &
+\Mor(i_{n!}(X \times \text{sk}_n \Delta[n + 1]), W).
+\end{eqnarray*}
+이는 사용한 둘째 등식을 증명하며 보조정리의 증명을 끝낸다.
+\end{proof}
+
+
+\section{아벨 범주의 단체 대상}
+\label{section-abelian}
+
+\noindent
+아벨 범주의 정의는 호몰로지의 절
+\ref{homology-section-abelian-categories}에서 상기할 수 있다.
+
+\begin{lemma}
+\label{lemma-abelian}
+$\mathcal{A}$를 아벨 범주라 하자.
+\begin{enumerate}
+\item 범주 $\text{Simp}(\mathcal{A})$와 $\text{CoSimp}(\mathcal{A})$는
+아벨 범주이다.
+\item (쌍대)단체 대상의 사상 $f : A \to B$가 단사일 필요충분조건은
+각 $f_n : A_n \to B_n$이 단사인 것이다.
+\item (쌍대)단체 대상의 사상 $f : A \to B$가 전사일 필요충분조건은
+각 $f_n : A_n \to B_n$이 전사인 것이다.
+\item (쌍대)단체 대상의 열
+$$
+A \xrightarrow{f} B \xrightarrow{g} C
+$$
+이 $B$에서 완전할 필요충분조건은 각 열
+$$
+A_i \xrightarrow{f_i} B_i \xrightarrow{g_i} C_i
+$$
+이 $B_i$에서 완전인 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+준가법성은 쉽다. 모든 차수에서 $U_n = 0$으로 놓으면 끝 대상을 얻는다.
+직접곱의 존재성은 보조정리 \ref{lemma-product}와
+\ref{lemma-product-cosimplicial-objects}에서 보았다. 핵과 여핵은 항별로
+핵과 여핵을 취하여 얻는다.
+\end{proof}
+
+\noindent
+$\mathcal{A}$의 대상 $A$와 정수 $k$에 대해 다음 성질을 갖는
+$k$-절단 단체 대상 $U$를 생각하자.
+\begin{enumerate}
+\item $i < k$이면 $U_i = 0$이다.
+\item $U_k = A$이다.
+\item $U(\text{id}_{[k]}) = \text{id}_A$를 제외한 모든 사상
+$U(\varphi)$는 영이다.
+\end{enumerate}
+$\mathcal{A}$는 유한 극한과 유한 쌍대극한을 모두 가지므로
+$\text{cosk}_k U$와 $i_{k!}U$가 모두 존재한다. 이 두 대상과 표준 사상
+$i_{k!}U \to \text{cosk}_kU$를 기술하겠다.
+
+\begin{lemma}
+\label{lemma-eilenberg-maclane-object}
+$A$, $k$, $U$가 위와 같다고 하자. 따라서 $i < k$이면 $U_i = 0$이고
+$U_k = A$이다.
+\begin{enumerate}
+\item $k$-절단 단체 대상 $V$가 주어지면
+$$
+\Mor(U, V)
+=
+\{ f : A \to V_k \mid d^k_i \circ f = 0, \ i = 0, \ldots, k \}
+$$
+이고
+$$
+\Mor(V, U)
+=
+\{ f : V_k \to A \mid f \circ s^{k - 1}_i = 0, \ i = 0, \ldots, k - 1 \}.
+$$
+\item 대상 $i_{k!} U$의 $n$번째 항은 $\bigoplus_\alpha A$와 같다.
+여기서 $\alpha$는 모든 전사 $\alpha : [n] \to [k]$를 달린다.
+\item 임의의 $\varphi : [m] \to [n]$에 대해 사상
+$i_{k!} U(\varphi)$은 사상 $\bigoplus_\alpha A \to \bigoplus_{\alpha'} A$로
+기술된다. 이는 $\alpha : [n] \to [k]$에 대응하는 성분을
+$\alpha \circ \varphi$가 전사가 아니면 영으로 보내고, 전사이면
+$\alpha \circ \varphi$에 대응하는 성분으로 항등사상에 의해 보낸다.
+\item 대상 $\text{cosk}_k U$의 $n$번째 항은 $\bigoplus_\beta A$와 같다.
+여기서 $\beta$는 모든 단사 $\beta : [k] \to [n]$을 달린다.
+\item 임의의 $\varphi : [m] \to [n]$에 대해 사상
+$\text{cosk}_k U(\varphi)$은 사상
+$\bigoplus_\beta A \to \bigoplus_{\beta'} A$로 기술된다. 이는
+$\beta : [k] \to [n]$에 대응하는 성분을 $\beta$가 $\varphi$를 통해
+분해되지 않으면 영으로 보내고, 분해되면
+$\beta = \varphi \circ \beta'$를 만족하는 각 $\beta'$에 대응하는 성분으로
+항등사상에 의해 보낸다.
+\item 표준 사상
+$
+c : i_{k !} U \to \text{cosk}_k U
+$
+의 차수 $n$에서의 $(\alpha, \beta)$ 계수 $A \to A$는
+$\alpha \circ \beta$가 항등사상이 아니면 영이고, 항등사상이면
+$\text{id}_A$와 같다.
+\item 표준 사상
+$
+c : i_{k !} U \to \text{cosk}_k U
+$
+은 단사이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명은 독자에게 맡긴다.
+
+\medskip\noindent
+(2)와 (3)의 규칙들을 단체 대상의 정의로 삼고 이를 $\tilde U$라 하자.
+이것이 $i_{k!}U$의 한 구현임을 보이겠다. 그러면 (2), (3)이 동시에
+증명된다. 사상 $f : U \to \text{sk}_kV$가 주어졌을 때 $k$-뼈대를
+취하면 $f$를 복원하는 유일한 사상 $\tilde f : \tilde U \to V$가
+존재함을 보여야 한다. (1)에서 $f$는 모든 $i$에 대해 $d^k_i$의 핵으로
+사상되는 사상 $f_k : A \to V_k$에 대응함을 알 수 있다.
+임의의 전사 $\alpha : [n] \to [k]$에 대해
+$\tilde f_\alpha : A \to V_n$을 합성
+$\tilde f_\alpha = V(\alpha) \circ f_k : A \to V_n$과 같게 놓는다.
+$\tilde f_n : \tilde U_n \to V_n$을 모든 전사
+$\alpha : [n] \to [k]$에 대한 $\tilde f_\alpha$의 합으로 정의한다.
+그러한 $\tilde f_\alpha$들의 모음이 단체 대상의 사상을 정의할
+필요충분조건은 임의의 $\varphi : [m] \to [n]$에 대해 도식
+$$
+\xymatrix{
+\bigoplus_{\alpha : [n] \to [k]\text{ surjective}} A
+\ar[r]_-{\tilde f_n}
+\ar[d]_{(3)} &
+V_n \ar[d]^{V(\varphi)} \\
+\bigoplus_{\alpha' : [m] \to [k]\text{ surjective}} A
+\ar[r]^-{\tilde f_m} &
+V_m
+}
+$$
+이 가환하는 것이다. $\varphi = \alpha$를 택하면 $\tilde f_\alpha$의
+선택이 $f_k$에 의해 유일하게 결정됨을 알 수 있다. 일반적인 가환성은
+왼쪽 위 꼭짓점의 각 직합 성분에 대해 따로 확인할 수 있다.
+$\alpha \circ \varphi$가 전사인 $\alpha$에 대응하는 성분에서는
+명백하다. 실제로 이 성분은 $\text{id}_A$에 의해
+$\alpha' = \alpha \circ \varphi$인 성분으로 보내지며, 다음이 성립한다.
+$\tilde f_{\alpha'} = V(\alpha') \circ f_k =
+V(\alpha \circ \varphi) \circ f_k = V(\varphi) \circ \tilde f_\alpha$.
+$\alpha \circ \varphi$가 전사가 아닌 성분에서는
+$V(\varphi) \circ \tilde f_\alpha = 0$임을 보여야 한다.
+정의에 의해 이는
+$V(\varphi) \circ V(\alpha) \circ f_k = V(\alpha \circ \varphi) \circ f_k$와
+같다. $\alpha \circ \varphi$가 전사가 아니므로 이를
+$\delta^k_i \circ \psi$로 쓸 수 있으며, 위에서 본 대로
+$V(\varphi) \circ V(\alpha) \circ f_k =
+V(\psi) \circ d^k_i \circ f_k = 0$을 얻는다.
+
+\medskip\noindent
+(4)와 (5)의 규칙들을 단체 대상의 정의로 삼고 이를 $\tilde U$라 하자.
+이것이 $\text{cosk}_k U$의 한 구현임을 보이겠다. 그러면 (4), (5)가
+동시에 증명된다. 논증은 위 (2), (3)의 증명과 완전히 쌍대이지만 그래도
+적어 둔다. 사상 $f : \text{sk}_kV \to U$가 주어졌을 때 $k$-뼈대를
+취하면 $f$를 복원하는 유일한 사상 $\tilde f : V \to \tilde U$가
+존재함을 보여야 한다. (1)에서 $f$는 모든 $i$에 대해
+$s^{k - 1}_i$의 상에서 영인 사상 $f_k : V_k \to A$에 대응함을 알 수 있다.
+임의의 단사 $\beta : [k] \to [n]$에 대해
+$\tilde f_\beta : V_n \to A$를 합성
+$\tilde f_\beta = f_k \circ V(\beta) : V_n \to A$와 같게 놓는다.
+$\tilde f_n : V_n \to \tilde U_n$을 모든 단사
+$\beta : [k] \to [n]$에 대한 $\tilde f_\beta$의 합으로 정의한다.
+그러한 $\tilde f_\beta$들의 모음이 단체 대상의 사상을 정의할
+필요충분조건은 임의의 $\varphi : [m] \to [n]$에 대해 도식
+$$
+\xymatrix{
+V_n
+\ar[d]_{V(\varphi)}
+\ar[r]_-{\tilde f_n}
+&
+\bigoplus_{\beta : [k] \to [n]\text{ injective}} A
+\ar[d]^{(5)}
+\\
+V_m
+\ar[r]^-{\tilde f_m}
+&
+\bigoplus_{\beta' : [k] \to [m]\text{ injective}} A
+}
+$$
+이 가환하는 것이다. $\varphi = \beta$를 택하면 $\tilde f_\beta$의 선택이
+$f_k$에 의해 유일하게 결정됨을 알 수 있다. 일반적인 가환성은 오른쪽
+아래 꼭짓점의 각 직합 성분에 대해 따로 확인할 수 있다.
+$\varphi \circ \beta'$가 단사인 $\beta'$에 대응하는 성분에서는 명백하다.
+실제로 이 성분으로 들어오는 것은 $\beta = \varphi \circ \beta'$인 성분
+하나뿐이며, 이 경우
+$\tilde f_{\beta'} \circ V(\varphi) =
+f_k \circ V(\beta') \circ V(\varphi) =
+f_k \circ V(\beta) = \tilde f_\beta$이다.
+$\varphi \circ \beta'$가 단사가 아닌 성분에서는
+$\tilde f_{\beta'} \circ V(\varphi) = 0$임을 보여야 한다.
+정의에 의해 이는
+$f_k \circ V(\beta') \circ V(\varphi) =
+f_k \circ V(\varphi \circ \beta')$와 같다.
+$\varphi \circ \beta'$가 단사가 아니므로 이를
+$\psi \circ \sigma^{k - 1}_i$로 쓸 수 있으며, 위에서 본 대로
+$f_k \circ V(\beta') \circ V(\varphi) =
+f_k \circ s^{k - 1}_i \circ V(\psi) = 0$을 얻는다.
+
+\medskip\noindent
+합성 $i_{k!}U \to \text{cosk}_kU$는
+$A = U_k = (i_{k!}U)_k = (\text{cosk}_kU)_k$ 위에서 항등사상인
+단체 대상의 유일한 사상이다. 따라서 제시한 규칙이 단체 대상의 사상을
+정의함을 확인하면 충분하다. 이를 위해 임의의 $\varphi : [m] \to [n]$에
+대해 도식
+$$
+\xymatrix{
+\bigoplus_{\alpha : [n] \to [k]\text{ surjective}} A
+\ar[d]_{(3)}
+\ar[r]_{(6)}
+&
+\bigoplus_{\beta : [k] \to [n]\text{ injective}} A
+\ar[d]^{(5)}
+\\
+\bigoplus_{\alpha' : [m] \to [k]\text{ surjective}} A
+\ar[r]^{(6)}
+&
+\bigoplus_{\beta' : [k] \to [m]\text{ injective}} A
+}
+$$
+이 가환함을 보여야 한다. 이를 $0$과 $1$만으로 채워진 행렬로 생각할 수
+있다. (3)의 행렬은 $\alpha' = \alpha \circ \varphi$일 필요충분조건으로
+영이 아닌 $(\alpha', \alpha)$ 성분을 가진다. 마찬가지로 (5)의 행렬은
+$\beta = \varphi \circ \beta'$일 필요충분조건으로 영이 아닌
+$(\beta', \beta)$ 성분을 가진다. 위쪽 (6)의 행렬은
+$\alpha \circ \beta = \text{id}_{[k]}$일 필요충분조건으로 영이 아닌
+$(\alpha, \beta)$ 성분을 가진다. 아래쪽 (6)의 행렬도 마찬가지이다.
+따라서 도식의 가환성은 두 합성의 $(\alpha, \beta')$ 성분을 계산하여
+같음을 보이는 것으로 귀착된다. 이는 다음 등식으로 귀착된다.
+$$
+\# \left\{
+\beta
+\mid
+\beta = \varphi \circ \beta'
+\text{ and }
+\alpha \circ \beta = \text{id}_{[k]}
+\right\}
+=
+\# \left\{
+\alpha'
+\mid
+\alpha' = \alpha \circ \varphi
+\text{ and }
+\alpha' \circ \beta' = \text{id}_{[k]}
+\right\}
+$$
+그 증명은 안전하게 독자에게 맡길 수 있다.
+
+\medskip\noindent
+마지막으로 (7)을 증명한다. 이는 보조정리
+\ref{lemma-injective-map-simplicial-abelian}, \ref{lemma-recover-cosk},
+\ref{lemma-recovering-U-for-real}, \ref{lemma-imshriek-abelian}에서
+바로 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-eilenberg-maclane}
+$\mathcal{A}$를 아벨 범주라 하자. $A$를 $\mathcal{A}$의 대상이라 하고
+$k$를 $\geq 0$인 정수라 하자. {\it Eilenberg--MacLane 대상 $K(A, k)$}는
+위 보조정리 \ref{lemma-eilenberg-maclane-object}에서 기술한 대상
+$K(A, k) = i_{k!}U$로 주어진다.
+\end{definition}
+
+
+\begin{lemma}
+\label{lemma-extension}
+$\mathcal{A}$를 아벨 범주라 하자. $A$를 $\mathcal{A}$의 대상이라 하고
+$k$를 $\geq 0$인 정수라 하자. 다음 규칙으로 정의되는 단체 대상 $E$를
+생각하자.
+\begin{enumerate}
+\item $E_n = \bigoplus_\alpha A$이다. 여기서 합은 상이 $[k]$ 또는
+$[k + 1]$인 $\alpha : [n] \to [k + 1]$를 달린다.
+\item $\varphi : [m] \to [n]$가 주어졌다고 하자. 사상
+$E_n \to E_m$은 $\Im(\alpha \circ \varphi)$가 $[k]$ 또는 $[k + 1]$과
+같으면 $\alpha$에 대응하는 직합 성분을 $\text{id}_A$에 의해
+$\alpha \circ \varphi$에 대응하는 직합 성분으로 보낸다.
+\end{enumerate}
+그러면 항별로 분할 완전인 짧은 완전열
+$$
+0 \to K(A, k) \to E \to K(A, k + 1) \to 0
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+사상 $K(A, k)_n \to E_n$ 및 $E_n \to K(A, k + 1)_n$은 각각 지표 집합의
+포함에서 명백히 얻어지는 직합의 포함 및 직합의 사영으로 주어진다.
+이들이 단체 대상의 사상임은 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-abelian-limit-skeleta}
+$\mathcal{A}$를 아벨 범주라 하자. $\mathcal{A}$의 임의의 단체 대상
+$V$에 대해 다음이 성립한다.
+$$
+V = \colim_n i_{n!}\text{sk}_n V
+$$
+여기서 모든 전이 사상은 단사이다.
+\end{lemma}
+
+\begin{proof}
+$n \geq m$이 되자마자 각 $V_m$이 $(i_{n!}\text{sk}_n V)_m$과 같기
+때문이다. 전이 사상에 대해서는 보조정리
+\ref{lemma-n-skeleton-abelian}도 보라.
+\end{proof}
+
+\section{단체 대상과 사슬 복합체}
+\label{section-complexes}
+
+\noindent
+$\mathcal{A}$를 아벨 범주라 하자. 사슬 복합체에 관한 관례와 표기는
+호몰로지의 절 \ref{homology-section-complexes}를 보라.
+$U$를 $\mathcal{A}$의 단체 대상이라 하자. 때때로 {\it Moore 복합체}라
+불리는 {\it $U$의 연관 사슬 복합체 $s(U)$}는 사슬 복합체
+$$
+\ldots \to U_2 \to U_1 \to U_0 \to 0 \to 0 \to \ldots
+$$
+이며, 경계 사상 $d_n : U_n \to U_{n - 1}$은 다음 식으로 주어진다.
+$$
+d_n = \sum\nolimits_{i = 0}^n (-1)^i d^n_i.
+$$
+주석 \ref{remark-relations}에 나열한 관계식들에 의해
+\begin{eqnarray*}
+d_n \circ d_{n + 1}
+& = &
+(\sum\nolimits_{i = 0}^n (-1)^i d^n_i) \circ
+(\sum\nolimits_{j = 0}^{n + 1} (-1)^j d^{n + 1}_j) \\
+& = &
+\sum\nolimits_{0 \leq i < j \leq n + 1}
+(-1)^{i + j} d^n_{j - 1} \circ d^{n + 1}_i
++
+\sum\nolimits_{n \geq i \geq j \geq 0}
+(-1)^{i + j} d^n_i \circ d^{n + 1}_j \\
+& = & 0.
+\end{eqnarray*}
+이므로 이는 복합체이다. 부호들이 상쇄된다! 연관 사슬 복합체를
+$s(U)$로 표시한다. 이 구성은 명백히 함자적이므로 함자
+$$
+s : \text{Simp}(\mathcal{A}) \longrightarrow \text{Ch}_{\geq 0}(\mathcal{A}).
+$$
+를 정의한다. 따라서 혼동스럽지만 올바른 공식 $s(U)_n = U_n$을 얻는다.
+
+\begin{lemma}
+\label{lemma-s-exact}
+함자 $s$는 완전하다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-abelian}에서 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-homology-extension}
+$\mathcal{A}$를 아벨 범주라 하고 $A$를 $\mathcal{A}$의 대상이라 하며
+$k$를 정수라 하자. $E$를 보조정리 \ref{lemma-extension}에서 기술한
+대상이라 하자. 그러면 복합체 $s(E)$는 비순환이다.
+\end{lemma}
+
+\begin{proof}
+사상 $\alpha : [n] \to [k + 1]$에 대해 $\alpha' : [n + 1] \to [k + 1]$을
+$\alpha'|_{[n]} = \alpha$이고 $\alpha'(n + 1) = k + 1$인 사상으로
+정의한다. $\alpha$의 상이 $[k]$ 또는 $[k + 1]$이면 $\alpha'$의 상은
+$[k + 1]$임에 유의하라. $\alpha$에 대응하는 직합 성분을 $A$ 위의
+항등사상에 의해 $\alpha'$에 대응하는 직합 성분으로 보내는 사상들의
+족 $h_n : E_n \to E_{n + 1}$을 생각하자.
+$d_{n + 1} \circ h_n - h_{n - 1} \circ d_n$을 계산하자.
+먼저 범주 $\mathcal{A}$가 아벨 군의 범주인 경우에 계산하겠다.
+지표 집합에 나타나는 사상 $\alpha$에 대응하는 $E_n$의 직합 성분에서
+원소 $x \in A$를 나타내기 위해 표기 $x_\alpha$를 쓰자.
+$\Im(\alpha)$가 $[k]$도 $[k + 1]$도 아니면 $x_\alpha$가 $E_n$의
+영원소를 나타낸다는 관례도 채택하자. 이 관례 아래
+$$
+d_{n + 1}(h_n(x_\alpha)) =
+\sum\nolimits_{i = 0}^{n + 1} (-1)^i x_{\alpha' \circ \delta^{n + 1}_i}
+$$
+이고
+$$
+h_{n - 1}(d_n(x_\alpha)) =
+\sum\nolimits_{i = 0}^n (-1)^i x_{(\alpha \circ \delta_i^n)'}
+$$
+이다. $i = 0, \ldots, n$에 대해
+$\alpha' \circ \delta^{n + 1}_i = (\alpha \circ \delta_i^n)'$임은 쉽게
+알 수 있다. 또한 $\alpha' \circ \delta^{n + 1}_{n + 1} = \alpha$임도
+쉽게 알 수 있다. 따라서
+$$
+(d_{n + 1} \circ h_n - h_{n - 1} \circ d_n)(x_\alpha)
+=
+(-1)^{n + 1} x_\alpha
+$$
+임을 알 수 있다. 이 항등식들은 $\mathcal{A}$가 임의의 아벨 범주일
+때에도 계속 성립한다. 실제로 단체 아벨 군
+$[n] \mapsto \Hom(A, E_n)$에서 성립하기 때문이다. 세부사항은 독자에게
+맡긴다. 따라서 $E$ 위의 항등사상은 사상들의 계
+$h'_n = (-1)^{n + 1}h_n : E_n \to E_{n + 1}$으로 주어지는 호모토피에
+의해 영과 호모토픽이다. 그러므로 예를 들어 호몰로지의 보조정리
+\ref{homology-lemma-map-homology-homotopy}에 의해 $E$는 비순환이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-homology-eilenberg-maclane}
+$\mathcal{A}$를 아벨 범주라 하고 $A$를 $\mathcal{A}$의 대상이라 하며
+$k$를 정수라 하자. $i = k$이면 $H_i(s(K(A, k))) = A$이고, 그 밖에는
+$0$이다.
+\end{lemma}
+
+\begin{proof}
+먼저 $k = 0$일 때 이를 증명하자. 이 경우 모든 $n$에 대해
+$K(A, 0)_n = A$이다. 더 나아가 이 단체 아벨 군의 모든 사상은
+$\text{id}_A$이다. 다시 말해 $K(A, 0)$은 값이 $A$인 상수 단체 대상이다.
+경계 사상 $d_n = \sum_{i = 0}^n (-1)^i \text{id}_A
+= 0$은 $n$이 홀수일 때이고, $ = \text{id}_A$는 $n$이 짝수일 때이다.
+따라서 $s(K(A, 0))$은 다음과 같다.
+$$
+\ldots \to A \xrightarrow{0} A \xrightarrow{1} A \xrightarrow{0} A \to 0
+$$
+그러므로 결과는 명백하다.
+
+\medskip\noindent
+이제 모든 $k$에 대해 귀납법으로 결과를 증명한다. $k$에 대한 결과가
+주어졌다고 하고, 보조정리 \ref{lemma-extension}의 짧은 완전열
+$$
+0 \to K(A, k) \to E \to K(A, k + 1) \to 0
+$$
+을 생각하자. 보조정리 \ref{lemma-abelian}에 의해 연관 사슬 복합체들의
+열은 완전하다. 보조정리 \ref{lemma-homology-extension}에 의해
+$s(E)$는 비순환이다. 따라서 호몰로지의 긴 완전열로부터 $k + 1$에
+대한 결과가 따른다. 호몰로지의 보조정리
+\ref{homology-lemma-long-exact-sequence-chain}을 보라.
+\end{proof}
+
+\noindent
+$\mathcal{A}$의 단체 대상에 연관시킬 수 있는 둘째 사슬 복합체가 있다.
+보조정리 \ref{lemma-splitting-abelian-category}에 의해
+$\mathcal{A}$의 임의의 단체 대상 $U$는 표준적으로 분할되며
+$N(U_m) = \bigcap_{i = 0}^{m - 1} \Ker(d^m_i)$임을 상기하라.
+{\it 정규화 사슬 복합체 $N(U)$}를 사슬 복합체
+$$
+\ldots \to N(U_2) \to N(U_1) \to N(U_0) \to 0 \to 0 \to \ldots
+$$
+로 정의한다. 여기서 경계 사상 $d_n : N(U_n) \to N(U_{n - 1})$은
+$U_n$의 직합 성분 $N(U_n)$에 $(-1)^nd^n_n$을 제한하여 주어진다.
+보조정리 \ref{lemma-N-d-in-N}에 의해
+$d^n_n(N(U_n)) \subset N(U_{n - 1})$임에 유의하라. 이는 복합체이다.
+실제로 $d^n_n \circ d^{n + 1}_{n + 1} = d^n_n \circ d^{n + 1}_n$이고,
+정의상 $d^{n + 1}_n$은 $N(U_{n + 1})$ 위에서 영이다. 따라서 둘째 함자
+$$
+N : \text{Simp}(\mathcal{A}) \longrightarrow \text{Ch}_{\geq 0}(\mathcal{A}).
+$$
+를 얻는다. 다음은 미분에 부호가 들어가는 이유이다.
+
+\begin{lemma}
+\label{lemma-map-associated-complexes}
+$\mathcal{A}$를 아벨 범주라 하고 $U$를 $\mathcal{A}$의 단체 대상이라
+하자. 표준 사상 $N(U_n) \to U_n$은 복합체의 사상 $N(U) \to s(U)$을
+유도한다.
+\end{lemma}
+
+\begin{proof}
+$s(U)_n = U_n$ 위의 미분은 $\sum (-1)^i d^n_i$이고
+$i < n$인 사상 $d^n_i$들은 $N(U_n)$ 위에서 영인 반면,
+$(-1)^nd^n_n$의 제한은 정의상 $N(U)$의 경계 사상이므로 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-N-K}
+$\mathcal{A}$를 아벨 범주라 하고 $A$를 $\mathcal{A}$의 대상이라 하며
+$k$를 정수라 하자. $i = k$이면 $N(K(A, k))_i = A$이고 그 밖에는
+$0$이다.
+\end{lemma}
+
+\begin{proof}
+$i < k$일 때 $K(A, k)_i = 0$이므로 $N(K(A, k))_i = 0$임은 명백하다.
+$K(A, k)_{k - 1} = 0$이고 $K(A, k)_k = A$이므로
+$N(K(A, k))_k = A$임도 명백하다. $i > k$이면 보조정리
+\ref{lemma-imshriek-abelian}과 $K(A, k)$의 정의, 즉 정의
+\ref{definition-eilenberg-maclane}에 의해 $N(K(A, k))_i = 0$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-decompose-associated-complexes}
+$\mathcal{A}$를 아벨 범주라 하고 $U$를 $\mathcal{A}$의 단체 대상이라
+하자. 사슬 복합체의 표준 사상 $N(U) \to s(U)$은 분할된다. 실제로 어떤
+복합체 $D(U)$에 대해
+$$
+s(U) = N(U) \oplus D(U)
+$$
+이다. 구성 $U \mapsto D(U)$는 함자적이다.
+\end{lemma}
+
+\begin{proof}
+$D(U)_n$을 다음 사상의 상으로 정의하자.
+$$
+\bigoplus\nolimits_{\varphi : [n] \to [m]\text{ surjective}, \ m < n} N(U_m)
+\xrightarrow{\bigoplus U(\varphi)}
+U_n
+$$
+보조정리 \ref{lemma-splitting-abelian-category}와 정의
+\ref{definition-split}에 의해 이는 $N(U_n)$의 여공간인 $U_n$의
+부분대상이다. $D(U)$가 부분복합체임을 보이자. $m < n$인 전사
+$\varphi : [n] \to [m]$를 택하고 합성
+$$
+N(U_m) \xrightarrow{U(\varphi)} U_n \xrightarrow{d_n} U_{n - 1}.
+$$
+을 생각하자. 이 합성은 부호 $(-1)^i$, $i = 0, \ldots, n$을 갖는 사상들
+$$
+N(U_m) \xrightarrow{U(\varphi \circ \delta^n_i)} U_{n - 1}
+$$
+의 합이다.
+
+\medskip\noindent
+먼저 $0 \leq m < n - 1$인 $m$에 대한 오름차순 귀납법으로 모든 사상
+$U(\varphi \circ \delta^n_i)$이 $N(U_m)$을 $D(U)_{n - 1}$ 안으로 보냄을
+증명하겠다. ($m = n - 1$인 경우는 아래에서 다룬다.) 사상
+$\varphi \circ \delta^n_i : [n - 1] \to [m]$이 전사일 때마다 정의에 의해
+$U(\varphi \circ \delta^n_i)$ 아래 $N(U_m)$의 상은 $D(U)_{n - 1}$에
+포함된다. $\varphi \circ \delta^n_i : [n - 1] \to [m]$이 전사가 아니면
+$j = \varphi(i)$로 놓고, $\varphi$ 아래 상이 $j$인 지표는 $i$ 하나뿐임을
+관찰하라.
+% P02-E0121: frozen source inserts an extra delta_i^n in both ill-typed compositions below.
+어떤 $\psi : [n - 1] \to [m - 1]$에 대해
+$\varphi \circ \delta^n_i = \delta^m_j \circ \psi \circ \delta^n_i$로
+쓸 수 있다. 따라서
+$U(\varphi \circ \delta^n_i) = U(\psi \circ \delta^n_i) \circ d^m_j$이고,
+이는 $j = m$이 아니면 $N(U_m)$ 위에서 영이다. $j = m$이면
+$d^m_m(N(U_m)) \subset N(U_{m - 1})$이므로
+$U(\varphi \circ \delta^n_i)(N(U_m)) \subset
+U(\psi \circ \delta^n_i)(N(U_{m - 1}))$이고, 귀납 가정으로 결론을 얻는다.
+
+\medskip\noindent
+$D(U)$가 부분복합체임을 증명하려면 아직 합성
+$$
+N(U_m) \xrightarrow{U(\varphi)} U_n \xrightarrow{d_n} U_{n - 1}.
+$$
+% P02-E0122: frozen source ends the display with a full stop before the dependent case clause.
+을 $m =  n - 1$인 경우에 다루어야 한다. 이 경우 어떤
+$0 \leq j \leq n - 1$에 대해 $\varphi = \sigma^{n - 1}_j$이고
+$U(\varphi) = s^{n - 1}_j$이다. 따라서 합성은 다음 합으로 주어진다.
+$$
+\sum (-1)^i d^n_i \circ s^{n - 1}_j
+$$
+주석 \ref{remark-relations}에서
+$d^n_j \circ s^{n - 1}_j = d^n_{j + 1} \circ s^{n - 1}_j = \text{id}$임을
+상기하라. 대응하는 항들은 부호가 반대이므로 상쇄된다. $j < n - 1$이면
+사상 $d^n_n \circ s^{n - 1}_j$는
+$s^{n - 2}_j \circ d^{n - 1}_{n - 1}$과 같다.
+$d^{n - 1}_{n - 1}$은 $N(U_{n - 1})$을 $N(U_{n - 2})$ 안으로 보내므로,
+% P02-E0123: frozen source leaves the outer parenthesis unclosed in the image expression.
+상 $d^n_n ( s^{n - 1}_j (N(U_{n - 1}))$은
+$s^{n - 2}_j(N(U_{n - 2}))$에 포함된다.
+% P02-E0124: frozen source writes D(U_{n-1}) rather than the degree term D(U)_{n-1}.
+후자는 정의에 의해 $D(U_{n - 1})$에 포함된다. 그 밖의 모든
+$(i, j)$의 조합에 대해서는 $i < j$이면
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_{j - 1} \circ d^{n - 1}_i$이고,
+$n > i > j + 1$이면
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_j \circ d^{n - 1}_{i - 1}$이다.
+이 경우들에는 $N(U_{n - 1})$의 정의에 의해 사상이 영이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-degenerate-subcomplex}
+보조정리 \ref{lemma-decompose-associated-complexes}의 상황에서 부분복합체
+$D(U) \subset s(U)$는 항들이
+$$
+D(U)_n = \Im\left(
+\bigoplus\nolimits_{\varphi : [n] \to [m]\text{ surjective}, \ m < n} U_m
+\xrightarrow{\bigoplus U(\varphi)}
+U_n\right)
+$$
+인 부분복합체로도 정의할 수 있다. 실제로 $U_m$은 부분대상 $N(U_m)$과
+$k < m$인 전사 $[m] \to [k]$에 대한 $N(U_k)$의 상들의 직합이므로,
+이는 보조정리 \ref{lemma-decompose-associated-complexes}의 증명에서 준
+$D(U)_n$의 정의와 명백히 같다. 따라서 $U$가 단체 아벨 군이면
+$D(U)_n$의 원소들은 퇴화 $n$-단체들의 합과 정확히 같다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-N-exact}
+함자 $N$은 완전하다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-s-exact}와 보조정리
+\ref{lemma-decompose-associated-complexes}의 함자적 분해에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quasi-isomorphism}
+$\mathcal{A}$를 아벨 범주라 하고 $V$를 $\mathcal{A}$의 단체 대상이라
+하자. 사슬 복합체의 표준 사상 $N(V) \to s(V)$은 준동형사상이다.
+다시 말해 보조정리 \ref{lemma-decompose-associated-complexes}의 복합체
+$D(V)$는 비순환이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-homology-eilenberg-maclane}와 \ref{lemma-N-K}에 의해
+임의의 대상 $A$와 임의의 $k \geq 0$에 대해 결과가 $K(A, k)$에
+대해 성립함에 유의하라. 가정 $IH_{n, m}$을 다음과 같이 두자.
+$j \leq m$이면 $V_j = 0$인 모든 $V$와 모든 $i \leq n$에 대해 사상
+$N(V) \to s(V)$은 동형사상
+$H_i(N(V)) \to H_i(s(V))$을 유도한다.
+
+\medskip\noindent
+% P02-E0125: frozen source says “To start of the induction”.
+귀납법을 시작하기 위해 $IH_{n, n}$이 자명하게 참임에 유의하라.
+이 경우 $N(V)_n = 0$이고 $s(V)_n = 0$이기 때문이다.
+
+\medskip\noindent
+$m \leq n$이고 $IH_{n, m}$을 가정하자. $j < m$이면 $V_j = 0$인
+단체 대상 $V$를 택하자. 보조정리 \ref{lemma-eilenberg-maclane-object}와
+정의 \ref{definition-eilenberg-maclane}에 의해
+$K(V_m, m) = i_{m!} \text{sk}_mV$이다. 보조정리
+\ref{lemma-n-skeleton-abelian}에 의해 자연스러운 사상
+$$
+K(V_m, m) = i_{m!} \text{sk}_mV \to V
+$$
+은 단사이다. 따라서 $i = 0, \ldots, m$일 때 $W_i = 0$인 어떤 $W$에
+대해 짧은 완전열
+$$
+0 \to K(V_m, m) \to V \to W \to 0
+$$
+을 얻는다.
+% P02-E0126: frozen source says “a morphism of short exact sequence” in the singular.
+이 짧은 완전열은 연관 복합체의 짧은 완전열들 사이의 사상
+$$
+\xymatrix{
+0 \ar[r] &
+N(K(V_m, m)) \ar[r] \ar[d] &
+N(V) \ar[r] \ar[d] &
+N(W) \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+s(K(V_m, m)) \ar[r] &
+s(V) \ar[r] &
+s(W) \ar[r] &
+0
+}
+$$
+을 유도한다. 보조정리 \ref{lemma-s-exact}와 \ref{lemma-N-exact}를 보라.
+따라서 양 끝에 대한 결과로부터 $V$에 대한 결과를 얻는다.
+\end{proof}
+
+
+
+
+\section{Dold--Kan}
+\label{section-dold-kan}
+
+\noindent
+이 절에서는 아벨 범주의 단체 대상과 사슬 복합체를 연결하는
+Dold--Kan 정리를 증명한다.
+
+\begin{lemma}
+\label{lemma-N-faithful}
+$\mathcal{A}$를 아벨 범주라 하자. 함자 $N$은 충실하며, 동형사상,
+단사 사상, 전사 사상을 반영한다.
+\end{lemma}
+
+\begin{proof}
+충실성은 보조정리 \ref{lemma-splitting-abelian-category}의 표준 분할에서
+즉시 따른다. 단사, 전사, 동형사상을 반영한다는 명제는 보조정리
+\ref{lemma-injective-map-simplicial-abelian}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-S-N}
+$\mathcal{A}$와 $\mathcal{B}$를 아벨 범주라 하자. 함자
+$N : \mathcal{A} \to \mathcal{B}$와 $S : \mathcal{B} \to \mathcal{A}$가
+주어졌다고 하자. 다음을 가정하자.
+\begin{enumerate}
+\item 함자 $S$와 $N$은 완전하다.
+\item $\mathcal{B}$의 항등 함자로 가는 동형사상
+$g : N \circ S \to \text{id}_\mathcal{B}$가 있다.
+\item $N$은 충실하다.
+\item $S$는 본질적으로 전사이다.
+\end{enumerate}
+그러면 $S$와 $N$은 서로 준역인 범주의 동치이다.
+\end{lemma}
+
+\begin{proof}
+함자적 동형사상 $S(N(A)) \cong A$를 구성하면 충분하다.
+이를 위해 $B$와 동형사상 $f : A  \to S(B)$를 택하자. 사상
+$$
+f^{-1} \circ g_{S(B)} \circ S(N(f)) :
+S(N(A)) \to S(N(S(B))) \to S(B) \to A.
+$$
+을 생각하자. 이것이 $f, B$의 선택에 무관하며 원하는 동형사상
+$S \circ N \to \text{id}_\mathcal{A}$를 줌은 쉽게 보일 수 있다.
+\end{proof}
+
+\begin{theorem}
+\label{theorem-dold-kan}
+$\mathcal{A}$를 아벨 범주라 하자. 함자 $N$은 범주의 동치
+$$
+N :
+\text{Simp}(\mathcal{A})
+\longrightarrow
+\text{Ch}_{\geq 0}(\mathcal{A})
+$$
+를 유도한다.
+\end{theorem}
+
+\begin{proof}
+보조정리 \ref{lemma-extension}의 구성에서 착안한 반대 방향의 함자를
+기술하겠다. 다만 경계의 부호를 맞추기 위해 부호 하나를 삽입한다.
+$A_\bullet$을 경계 사상 $d_{A, n} : A_n \to A_{n - 1}$을 갖는 사슬
+복합체라 하자. 각 $n \geq 0$에 대해 다음과 같이 표시하자.
+$$
+I_n =
+\Big\{
+\alpha : [n] \to \{0, 1, 2, \ldots\}
+\mid
+\Im(\alpha) = [k]\text{ for some }k
+\Big\}.
+$$
+$\alpha \in I_n$에 대해 $\Im(\alpha) = [k]$인 유일한 정수를
+$k(\alpha)$로 표시한다. 단체 대상 $S(A_\bullet)$을 다음과 같이 정의한다.
+\begin{enumerate}
+\item $S(A_\bullet)_n = \bigoplus_{\alpha \in I_n} A_{k(\alpha)}$이다.
+이를 $\bigoplus_{\alpha \in I_n} A_{k(\alpha)} \cdot \alpha$로도 쓴다.
+이는 ``$\alpha$''를 그에 대응하는 직합 성분의 기저 벡터로 생각할 것을
+암시한다.
+\item $\varphi : [m] \to [n]$가 주어졌을 때, $S(A_\bullet)_n$의 직합 성분
+$A_{k(\alpha)} \cdot \alpha$ 위의 제한을 다음과 같이 주어
+$S(A_\bullet)(\varphi)$를 정의한다.
+\begin{enumerate}
+% P02-E0127: frozen source omits “if” in the first two parallel conditional items.
+\item $\alpha \circ \varphi \not \in I_m$이면 영으로 놓는다.
+\item $\alpha \circ \varphi \in I_m$이지만 $k(\alpha \circ \varphi)$가
+$k(\alpha)$도 $k(\alpha) - 1$도 아니면 역시 영으로 놓는다.
+\item $\alpha \circ \varphi \in I_m$이고
+$k(\alpha \circ \varphi) = k(\alpha)$이면 $S(A_\bullet)_m$의 직합 성분
+$A_{k(\alpha \circ \varphi)} \cdot (\alpha \circ \varphi)$로 가는
+항등사상을 사용한다.
+\item $\alpha \circ \varphi \in I_m$이고
+$k(\alpha \circ \varphi) = k(\alpha) - 1$이면 $S(A_\bullet)_m$의 직합 성분
+$A_{k(\alpha \circ \varphi)}\cdot (\alpha \circ \varphi)$로 가는
+$(-1)^{k(\alpha)} d_{A, k(\alpha)}$를 사용한다.
+\end{enumerate}
+\end{enumerate}
+$S(A_\bullet)$이 $\mathcal{A}$의 단체 대상임을 보이자.
+사상 $\varphi : [m] \to [n]$와 $\psi : [n] \to [p]$가 주어졌다고 하자.
+다음을 보이겠다.
+$S(A_\bullet)(\varphi) \circ S(A_\bullet)(\psi) =
+S(A_\bullet)(\psi \circ \varphi)$.
+$\beta \in I_p$를 택하고 $\alpha = \beta \circ \psi$,
+$\gamma = \alpha \circ \varphi$로 놓아 이들을 사상
+$\alpha : [n] \to \{0, 1, 2, \ldots\}$와
+$\gamma : [m] \to \{0, 1, 2, \ldots\}$로 보자. 다음 그림을 생각하라.
+$$
+\xymatrix{
+[m] \ar[r]_\varphi \ar[d]_\gamma &
+[n] \ar[r]_\psi \ar[d]_\alpha &
+[p] \ar[d]^\beta \\
+\Im(\gamma) \ar[r] &
+\Im(\alpha) \ar[r] &
+[k(\beta)]
+}
+$$
+% P02-E0128: frozen source inserts a full stop before the dependent summand phrase.
+사상 $S(A_\bullet)(\varphi) \circ S(A_\bullet)(\psi)$와
+$S(A_\bullet)(\psi \circ \varphi)$의 직합 성분
+$A_{k(\beta)} \cdot \beta$ 위 제한들이 일치함을 보이겠다.
+몇 가지 경우를 생각해야 한다.
+\begin{enumerate}
+\item $\alpha \not \in I_n$이라 하자. 그러면
+$A_{k(\beta)} \cdot \beta$ 위 $S(A_\bullet)(\psi)$의 제한은 영이다.
+이때 $\gamma \not \in I_m$이거나,
+$[k(\gamma)] = \Im(\gamma) \subset \Im(\alpha) \subset [k(\beta)]$이고
+$[k(\beta)]$의 부분집합 $\Im(\alpha)$에 틈이 있어
+$k(\gamma) < k(\beta) - 1$이다. 두 경우 모두
+$A_{k(\beta)} \cdot \beta$ 위 $S(A_\bullet)(\psi \circ \varphi)$의 제한도
+영이다.
+\item $\alpha \in I_n$이고 $k(\alpha) < k(\beta) - 1$이라 하자.
+그러면 $A_{k(\beta)} \cdot \beta$ 위 $S(A_\bullet)(\psi)$의 제한은 영이다.
+이때 $\gamma \not \in I_m$이거나
+$[k(\gamma)] \subset [k(\alpha)] \subset [k(\beta)]$이고,
+따라서 $k(\gamma) < k(\beta) - 1$이다. 두 경우 모두
+$A_{k(\beta)} \cdot \beta$ 위 $S(A_\bullet)(\psi \circ \varphi)$의 제한도
+영이다.
+\item $\alpha \in I_n$이고 $k(\alpha) = k(\beta)$라 하자.
+그러면 $A_{k(\beta)} \cdot \beta$ 위 $S(A_\bullet)(\psi)$의 제한은
+$A_{k(\beta)} \cdot \beta$에서 $A_{k(\alpha)} \cdot \alpha$로 가는
+항등사상이다. 이 경우 $\Im(\alpha) =[k(\beta)]$이므로 직합 성분
+$A_{k(\beta)} \cdot \beta$ 위 $S(A_\bullet)(\psi \circ \varphi)$의 제한을
+기술하는 규칙은 직합 성분 $A_{k(\alpha)} \cdot \alpha$ 위
+$S(A_\bullet)(\varphi)$의 제한을 기술하는 규칙과 정확히 같다.
+따라서 일치한다.
+\item $\alpha \in I_n$이고 $k(\alpha) = k(\beta) - 1$이라 하자.
+그러면 $A_{k(\beta)} \cdot \beta$ 위 $S(A_\bullet)(\psi)$의 제한은
+$A_{k(\alpha)} \cdot \alpha$로 가는
+$(-1)^{k(\beta)}d_{A, k(\beta)}$로 주어진다. 다음 부분 경우들이 있다.
+\begin{enumerate}
+\item $\gamma \not \in I_m$이면 직합 성분
+$A_{k(\beta)} \cdot \beta$ 위 $S(A_\bullet)(\psi \circ \varphi)$의 제한과
+직합 성분 $A_{k(\alpha)} \cdot \alpha$ 위
+$S(A_\bullet)(\varphi)$의 제한이 모두 영이므로 일치한다.
+\item $\gamma \in I_m$이지만 $k(\gamma) < k(\alpha) - 1$이면 역시 두
+제한이 모두 영이므로 일치한다.
+\item $\gamma \in I_m$이고 $k(\gamma) = k(\alpha)$이면
+$\Im(\gamma) = \Im(\alpha)$이다. 이 경우 직합 성분
+$A_{k(\beta)} \cdot \beta$ 위 $S(A_\bullet)(\psi \circ \varphi)$의 제한은
+$A_{k(\gamma)} \cdot \gamma$로 가는
+$(-1)^{k(\beta)}d_{A, k(\beta)}$로 주어지고, 직합 성분
+$A_{k(\alpha)} \cdot \alpha$ 위 $S(A_\bullet)(\varphi)$의 제한은
+항등사상 $A_{k(\alpha)} \cdot \alpha \to A_{k(\gamma)} \cdot \gamma$이다.
+따라서 일치한다.
+\item 마지막으로 $\gamma \in I_m$이고
+$k(\gamma) = k(\alpha) - 1$이라 하자. 직합 성분
+$A_{k(\alpha)} \cdot \alpha$ 위 $S(A_\bullet)(\varphi)$의 제한은
+$(-1)^{k(\alpha)} d_{A, k(\alpha)}$에 의해 사상
+% P02-E0129: frozen source gives the beta summand rather than the gamma summand as this codomain.
+$A_{k(\alpha)} \cdot \alpha \to A_{k(\beta)} \cdot \beta$로 주어진다.
+$A_\bullet$은 복합체이므로 합성
+$A_{k(\beta)} \cdot \beta \to
+A_{k(\alpha)} \cdot \alpha \to A_{k(\gamma)} \cdot \gamma$는 영이다.
+이는 $k(\gamma) = k(\beta) - 2 < k(\beta) - 1$이므로 직합 성분
+$A_{k(\beta)} \cdot \beta$ 위 $S(A_\bullet)(\psi \circ \varphi)$의
+제한에서 얻는 것과 일치한다.
+\end{enumerate}
+\end{enumerate}
+따라서 $S(A_\bullet)$은 $\mathcal{A}$의 단체 대상이다.
+
+\medskip\noindent
+$A_\bullet$에 대해 함자적인 동형사상
+$A_\bullet \to N(S(A_\bullet))$을 구성하자. 보조정리
+\ref{lemma-decompose-associated-complexes}에 의해 사슬 복합체로서
+$$
+S(A_\bullet) =  N(S(A_\bullet)) \oplus D(S(A_\bullet))
+$$
+임을 상기하라. 한편 주석 \ref{remark-degenerate-subcomplex}와
+$S(A_\bullet)$의 구성으로부터
+$$
+D(S(A_\bullet))_n =
+\bigoplus\nolimits_{\alpha \in I_n,\ k(\alpha) < n} A_{k(\alpha)} \cdot \alpha
+\subset
+\bigoplus\nolimits_{\alpha \in I_n} A_{k(\alpha)} \cdot \alpha
+$$
+임이 따른다. 그런데 $\alpha \in I_n$이면
+$k(\alpha) \geq n \Leftrightarrow \alpha = \text{id}_{[n]} : [n] \to [n]$이다.
+따라서 $S(A_\bullet)_n$의 직합 성분
+$A_n \cdot \text{id}_{[n]}$은 $D(S(A_\bullet))_n$의 여공간이다.
+% P02-E0130: frozen source gives the face maps codomain in degree n rather than n-1.
+모든 사상 $d^n_i : S(A_\bullet)_n \to S(A_\bullet)_n$은 직합 성분
+$A_n \cdot \text{id}_{[n]}$ 위에서 영으로 제한된다. 단,
+$d^n_n$은 $A_n \cdot \text{id}_{[n]}$에서
+$A_{n - 1} \cdot \text{id}_{[n - 1]}$로 가는
+$(-1)^n d_{A, n}$을 낳는다. 따라서 $A_n \cdot \text{id}_{[n]}$은
+직합 성분 $N(S(A_\bullet))_n$과 같아야 하며, 더욱이 미분
+$d_n = \sum (-1)^id^n_i : S(A_\bullet)_n \to S(A_\bullet)_{n - 1}$을
+직합 성분 $A_n \cdot \text{id}_{[n]}$에 제한하면 원하는 것을 얻는다.
+
+\medskip\noindent
+마지막으로 $S \circ N$이 항등 함자와 동형임을 보여야 한다.
+$U$를 $\mathcal{A}$의 단체 대상이라 하자. 각 $\alpha$에 대응하는 직합
+성분 위에서 $U(\alpha) : N(U)_{k(\alpha)} \to U_n$을 사용하여 명백한 사상
+$$
+S(N(U))_n = \bigoplus\nolimits_{\alpha \in I_n} N(U)_{k(\alpha)} \cdot \alpha
+\longrightarrow
+U_n
+$$
+을 정의할 수 있다. 정의 \ref{definition-split}에 의해 이는 동형사상이다.
+증명을 끝내려면 이것이 단체 대상의 사상들과 양립함을 보여야 한다.
+$\varphi : [m] \to [n]$이라 하고 $\alpha \in I_n$이라 하자.
+$\beta = \alpha \circ \varphi$로 놓자. 다음 그림을 생각하라.
+$$
+\xymatrix{
+[m] \ar[r]_\varphi \ar[d]_\beta &
+[n] \ar[d]_\alpha \\
+\Im(\beta) \ar[r] &
+[k(\alpha)]
+}
+$$
+몇 가지 경우를 생각해야 한다.
+\begin{enumerate}
+\item $\beta \not \in I_m$이라 하자. 그러면
+$0 \leq j < k(\alpha)$이고 $j \not \in \Im(\alpha \circ \varphi)$인 지표가
+존재하므로 어떤 $\psi : [m] \to [k(\alpha) - 1]$에 대해
+$\alpha \circ \varphi = \delta^{k(\alpha)}_j \circ \psi$라는 분해를
+택할 수 있다. 따라서 $U(\varphi)$는 직합 성분
+$N(U)_{k(\alpha)} \cdot \alpha$의 상 위에서 영이다. 실제로
+$U(\varphi) \circ U(\alpha) =
+U(\alpha \circ \varphi) = U(\psi) \circ d^{k(\alpha)}_j$는 $N$의 구성에
+의해 $N(U)_{k(\alpha)}$ 위에서 영이다. 이는 위에서 준 $S(N(U))$의
+규칙과 일치한다.
+\item $\beta \in I_m$이고 $k(\beta) < k(\alpha) - 1$이라 하자.
+여기서는 $j = k(\alpha) - 1$로 놓고 (1)과 똑같이 논증한다.
+\item $\beta \in I_m$이고 $k(\beta) = k(\alpha)$라 하자.
+이때 직합 성분 $N(U)_{k(\alpha)} \cdot \alpha$는 항등사상에 의해
+직합 성분 $N(U)_{k(\beta)} \cdot \beta$로 보내진다. 이 경우
+$U(\varphi) \circ U(\alpha) = U(\beta)$이므로 이는 $U(\varphi)$의
+작용과 같다.
+\item $\beta \in I_m$이고 $k(\beta) = k(\alpha) - 1$이라 하자.
+여기서는 미분 $(-1)^{k(\alpha)} d_{N(U), k(\alpha)}$을 사용하여 직합 성분
+$N(U)_{k(\alpha)} \cdot \alpha$를 직합 성분
+$N(U)_{k(\beta)} \cdot \beta$로 보낸다. 한편 이 경우
+$\Im(\beta) = [k(\beta)]$이므로
+$\alpha \circ \varphi = \delta^{k(\alpha)}_{k(\alpha)} \circ \beta$이다.
+따라서 $U(\varphi)$을 $N(U)_{k(\alpha)}$ 위 $U(\alpha)$의 제한과 합성한
+것은 $d^{k(\alpha)}_{k(\alpha)}$의 $N(U)_{k(\alpha)}$ 위 제한을 먼저
+합성한 $U(\beta)$와 같다. 이제
+$d_{N(U), k(\alpha)} = \sum (-1)^i d^{k(\alpha)}_i$이고
+$i < k(\alpha)$이면 $d^{k(\alpha)}_i$의 $N(U)_{k(\alpha)}$ 위 제한은
+영이므로 등식이 성립한다.
+\end{enumerate}
+이로써 정리의 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+\section{쌍대단체 대상에 대한 Dold--Kan}
+\label{section-dold-kan-cosimplicial}
+
+\noindent
+$\mathcal{A}$를 아벨 범주라 하자. 호몰로지의 보조정리
+\ref{homology-lemma-abelian-opposite}에 따르면 $\mathcal{A}^{opp}$도
+아벨 범주이다. 정의로부터 형식적으로 다음이 따른다.
+$$
+\text{CoSimp}(\mathcal{A}) = \text{Simp}(\mathcal{A}^{opp})^{opp}.
+$$
+따라서 Dold--Kan 정리 \ref{theorem-dold-kan}에 의해
+$\text{CoSimp}(\mathcal{A})$는 범주
+$\text{Ch}_{\geq 0}(\mathcal{A}^{opp})^{opp}$와 동치이다. 또한 정의로부터
+형식적으로 다음이 따른다.
+$$
+\text{CoCh}_{\geq 0}(\mathcal{A}) =
+\text{Ch}_{\geq 0}(\mathcal{A}^{opp})^{opp}.
+$$
+이 화살표들을 합치면 동치
+$$
+Q :
+\text{CoSimp}(\mathcal{A})
+\longrightarrow
+\text{CoCh}_{\geq 0}(\mathcal{A}).
+$$
+를 얻는다. 이 절에서는 $Q$를 기술한다.
+
+\medskip\noindent
+먼저 {\it 쌍대단체 대상 $U$에 연관된 쌍대사슬 복합체 $s(U)$}를
+정의한다. 이는 음의 차수에서 항이 영이고 $n \geq 0$이면
+$s(U)^n = U_n$인 쌍대사슬 복합체이다. 미분으로 사상
+$d^n : s(U)^n \to s(U)^{n + 1}$을 사용하며, 이는
+$d^n = \sum_{i = 0}^{n + 1} (-1)^i \delta^{n + 1}_i$로 정의된다.
+다시 말해 복합체 $s(U)$는 다음과 같다.
+$$
+\xymatrix{
+0 \ar[r] &
+U_0 \ar[rr]^{\delta^1_0 - \delta^1_1} & &
+U_1 \ar[rr]^{\delta^2_0 - \delta^2_1 + \delta^2_2} & &
+U_2 \ar[r] &
+\ldots
+}
+$$
+이를 때때로 $U$에 연관된 {\it Moore 복합체}라고도 한다.
+
+\medskip\noindent
+한편 $\mathcal{A}$의 쌍대단체 대상 $U$가 주어졌을 때
+$Q(U)^0 = U_0$으로 놓고
+$$
+Q(U)^n = \Coker(
+\xymatrix{
+\bigoplus_{i = 0}^{n - 1} U_{n - 1} \ar[r]^-{\delta^n_i} &
+U_n
+}).
+$$
+로 놓는다. 미분 $d^n : Q(U)^n \to Q(U)^{n + 1}$은
+$(-1)^{n + 1}\delta^{n + 1}_{n + 1}$에 의해 유도된다. 즉, 사상
+$(-1)^{n + 1}\delta^{n + 1}_{n + 1}$을 가환 도식
+% P02-E0131: frozen source labels the cochain differential below d_n rather than d^n.
+$$
+\xymatrix{
+U_n \ar[rr]_{(-1)^{n + 1}\delta^{n + 1}_{n + 1}} \ar[d] & &
+U_{n + 1} \ar[d] \\
+Q(U)^n \ar[rr]^{d_n} & &
+Q(U)^{n + 1}.
+}
+$$
+에 끼워 넣어 얻는다. 이 도식이 의미가 있음, 즉
+$i = 0, \ldots, n - 1$에 대해 $\delta^n_i$의 상이 오른쪽 세로 화살표의
+핵으로 보내짐을 보이는 일은 독자에게 맡긴다. (이는 보조정리
+\ref{lemma-N-d-in-N}의 쌍대이다.) 따라서 쌍대사슬 복합체 $Q(U)$는
+다음과 같다.
+$$
+0 \to Q(U)^0 \to Q(U)^1 \to Q(U)^2 \to \ldots
+$$
+이를 {\it $U$에 연관된 정규화 쌍대사슬 복합체}라 한다.
+Dold--Kan 정리 \ref{theorem-dold-kan}의 쌍대는 다음과 같다.
+
+\begin{lemma}
+\label{lemma-dual-dold-kan}
+$\mathcal{A}$를 아벨 범주라 하자.
+\begin{enumerate}
+\item 함자
+$s : \text{CoSimp}(\mathcal{A}) \to \text{CoCh}_{\geq 0}(\mathcal{A})$는
+완전하다.
+\item 사상들 $s(U)^n \to Q(U)^n$은 쌍대사슬 복합체의 사상을 정의한다.
+\item $\text{CoCh}_{\geq 0}(\mathcal{A})$ 안에 함자적 직합 분해
+$s(U) = D(U) \oplus Q(U)$가 존재한다.
+\item 함자 $Q$는 완전하다.
+\item 복합체의 사상 $s(U) \to Q(U)$은 준동형사상이다.
+\item 함자 $U \mapsto Q(U)^\bullet$은 범주의 동치
+$\text{CoSimp}(\mathcal{A}) \to \text{CoCh}_{\geq 0}(\mathcal{A})$를
+정의한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 이 결과들은 보조정리 \ref{lemma-s-exact},
+\ref{lemma-map-associated-complexes},
+\ref{lemma-decompose-associated-complexes}, \ref{lemma-N-exact},
+\ref{lemma-quasi-isomorphism}, 그리고 정리 \ref{theorem-dold-kan}의
+정확한 쌍대 명제들이다.
+\end{proof}
+\section{호모토피}
+\label{section-homotopy}
+
+\noindent
+단체 집합 $\Delta[0]$와 $\Delta[1]$을 생각하자. $0$을
+$[1] = \{0, 1\}$의 원소로 보내는 사상 $[0] \to [1]$에서 오는 두 사상
+$$
+e_0, e_1 : \Delta[0] \longrightarrow \Delta[1],
+$$
+이 있음을 상기하라. 각 집합 $\Delta[1]_k$가 유한임도 상기하라. 따라서
+범주 $\mathcal{C}$가 유한 쌍대곱을 가지면 $\mathcal{C}$의 임의의 단체
+대상 $U$에 대해 곱
+$$
+U \times \Delta[1]
+$$
+을 만들 수 있다. 정의 \ref{definition-product-with-simplicial-set}을 보라.
+$\Delta[0]$은 모든 $k \geq 0$에 대해
+$\Delta[0]_k = \{*\}$가 한원소 집합이라는 성질을 가진다. 따라서
+$U \times \Delta[0] = U$이다.
+% P02-E0132: frozen source gives plural e_0,e_1 the singular verb “gives rise”.
+그러므로 위의 $e_0, e_1$은 사상
+$$
+e_0, e_1 : U \to U \times \Delta[1].
+$$
+을 유도한다.
+
+\begin{definition}
+\label{definition-homotopy}
+$\mathcal{C}$를 유한 쌍대곱을 갖는 범주라 하자. $U$와 $V$를
+$\mathcal{C}$의 두 단체 대상이라 하고 $a, b : U \to V$를 두 사상이라
+하자.
+\begin{enumerate}
+\item 사상
+$$
+h : U \times \Delta[1] \longrightarrow V
+$$
+이 $a = h \circ e_0$와 $b = h \circ e_1$을 만족하면 이를
+{\it $a$에서 $b$로 가는 호모토피}라 한다.
+\item $U$에서 $V$로 가는 사상들의 열
+$a = a_0, a_1, \ldots, a_n = b$가 존재하여 각 $i = 1, \ldots, n$에
+대해 $a_{i - 1}$에서 $a_i$로 가는 호모토피가 있거나 $a_i$에서
+$a_{i - 1}$로 가는 호모토피가 있으면, 사상 $a$와 $b$가
+{\it 호모토픽} 또는 {\it 같은 호모토피류에 속한다}고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+``$a$에서 $b$로 가는 호모토피가 있다''는 관계는 일반적으로 추이적이지도
+대칭적이지도 않다. 예 \ref{example-trivial-homotopy}에서 반사적임을
+보겠다. 물론 ``호모토픽이다''는 $\Mor(U, V)$ 위의 동치관계이며,
+``$a$에서 $b$로 가는 호모토피가 있다''는 관계가 생성하는 동치관계이다.
+임의의 범주에서 단체 대상의 사상 쌍 사이의 호모토피를 정의할 수 있음이
+드러난다. 사상 $h : U \times \Delta[1] \to V$를 갖는다는 뜻을 조금 더
+상세히 계산한 뒤 주석 \ref{remark-homotopy-better}에서 이를 하겠다.
+
+\medskip\noindent
+$\mathcal{C}$를 유한 쌍대곱을 갖는 범주라 하고 $U$, $V$를
+$\mathcal{C}$의 단체 대상이라 하자. $a, b : U \to V$를 사상이라 하자.
+더 나아가 $h : U \times \Delta[1] \to V$가 $a$에서 $b$로 가는
+호모토피라고 하자. 모든 $n \geq 0$에 대해
+$$
+\Delta[1]_n = \{\alpha^n_0, \ldots, \alpha^n_{n + 1}\}
+$$
+로 쓰자. 여기서 $\alpha^n_i : [n] \to [1]$은 다음과 같은 사상이다.
+$$
+\alpha^n_i(j)
+=
+\left\{
+\begin{matrix}
+0 & \text{if} & j < i\\
+1 & \text{if} & j \geq i
+\end{matrix}
+\right.
+$$
+따라서
+$$
+h_n : (U \times \Delta[1])_n = \coprod U_n \cdot \alpha^n_i
+\longrightarrow
+V_n
+$$
+은 모든 $i = 0, \ldots, n + 1$에 대해 $\alpha^n_i$에 대응하는 직합
+성분으로 제한한 성분 $h_{n, i} : U_n \to V_n$을 갖는다.
+
+\begin{lemma}
+\label{lemma-relations-homotopy}
+위 상황에서 다음 관계식들이 성립한다.
+\begin{enumerate}
+\item $h_{n, 0} = b_n$이고 $h_{n, n + 1} = a_n$이다.
+\item $i > j$이면
+$d^n_j \circ h_{n, i} = h_{n - 1, i - 1} \circ d^n_j$이다.
+\item $i \leq j$이면
+$d^n_j \circ h_{n, i} = h_{n - 1, i} \circ d^n_j$이다.
+\item $i > j$이면
+$s^n_j \circ h_{n, i} = h_{n + 1, i + 1} \circ s^n_j$이다.
+\item $i \leq j$이면
+$s^n_j \circ h_{n, i} = h_{n + 1, i} \circ s^n_j$이다.
+\end{enumerate}
+반대로 위에 나열한 성질들을 만족하는 사상들의 계 $h_{n, i}$가 주어지면,
+이들은 $a$에서 $b$로 가는 호모토피인 사상 $h$를 정의한다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 마지막 명제는 단체 대상의 사상을 주는 것이 모든 $d^n_j$와
+$s^n_j$와 가환하는 사상들의 열 $h_n$을 주는 것과 같다는 사실을 사용하여
+증명할 수 있다. 보조정리 \ref{lemma-face-degeneracy-category}를 보라.
+\end{proof}
+
+\begin{example}
+\label{example-trivial-homotopy}
+위 상황에서 $a = b$라고 하자. 그러면 $a$에서 $b$로 가는
+{\it 자명한} 호모토피가 있으며, 이는 $h_{n, i} = a_n = b_n$인 것이다.
+\end{example}
+
+\begin{remark}
+\label{remark-homotopy-better}
+$\mathcal{C}$를 아무 가정도 하지 않은 임의의 범주라 하자. $U$와 $V$를
+$\mathcal{C}$의 단체 대상이라 하고, $a, b : U \to V$를
+$\mathcal{C}$의 단체 대상의 사상이라 하자. {\it $a$에서 $b$로 가는
+호모토피}는 보조정리 \ref{lemma-relations-homotopy}의 관계식들을 만족하는
+사상들\footnote{문헌에서는 사상 $h_{n, i}$ 대신 사상
+$h_{n + 1, i} \circ s_i : U_n \to V_{n + 1}$을 흔히 사용한다.
+물론 이 사상들이 만족하는 관계식은 보조정리
+\ref{lemma-relations-homotopy}의 것들과 다르다.}
+$h_{n, i} : U_n \to V_n$, $n \geq 0$, $i = 0, \ldots, n + 1$로 주어진다.
+정의 \ref{definition-homotopy}에서처럼 $U$에서 $V$로 가는 사상들의 열
+$a = a_0, a_1, \ldots, a_n = b$가 존재하여 각 $i = 1, \ldots, n$에
+대해 $a_{i - 1}$에서 $a_i$로 가는 호모토피가 있거나 $a_i$에서
+$a_{i - 1}$로 가는 호모토피가 있으면 사상 $a$와 $b$가
+{\it 호모토픽}이라고 한다. $F : \mathcal{C} \to \mathcal{C}'$가 임의의
+함자이고 $\{h_{n, i}\}$가 $a$에서 $b$로 가는 호모토피라면
+$\{F(h_{n, i})\}$는 $F(a)$에서 $F(b)$로 가는 호모토피임이 명백하다.
+마찬가지로 $a$와 $b$가 호모토픽이면 $F(a)$와 $F(b)$도 호모토픽이다.
+% P02-E0133: frozen source writes the malformed singular phrase “finite coproduct exist”.
+유한 쌍대곱이 존재할 때 새로운 개념이 기존 개념과 같다고 보조정리가
+말하므로, 특히 두 범주가 모두 유한 쌍대곱을 가지면 함자들이 기존의
+개념을 보존함을 알 수 있다.
+\end{remark}
+
+\begin{remark}
+\label{remark-homotopy-pre-post-compose}
+$\mathcal{C}$를 임의의 범주라 하자. 단체 대상의 두 사상
+$a, a' : U \to V$가 호모토픽이라고 하자. 그러면 임의의 사상
+$b : V \to W$에 대해 두 사상 $b \circ a, b \circ a' : U \to W$는
+호모토픽이다. 마찬가지로 임의의 사상 $c : X \to U$에 대해 두 사상
+$a \circ c, a' \circ c : X \to V$는 호모토픽이다. 실제로 사상
+$b \circ a \circ c, b \circ a' \circ c : X \to W$도 호모토픽이다.
+실제로 사상들 $h_{n, i} : U_n \to V_n$이 $a$에서 $a'$로 가는 호모토피를
+정의하면 사상들 $b \circ h_{n, i} \circ c$는
+$b \circ a \circ c$에서 $b \circ a' \circ c$로 가는 호모토피를 정의한다.
+이와 같이 $\text{Simp}(\mathcal{C})$와 대상은 같지만 사상은
+$\text{Simp}(\mathcal{C})$의 사상들의 호모토피류인 새 범주
+$\text{hSimp}(\mathcal{C})$를 얻는다. 따라서 본질적으로 전사이고
+사상 집합들 위에서 전사인 표준 함자
+$$
+\text{Simp}(\mathcal{C})
+\longrightarrow
+\text{hSimp}(\mathcal{C})
+$$
+가 있다.
+\end{remark}
+\begin{definition}
+\label{definition-homotopy-equivalent}
+$U$와 $V$를 범주 $\mathcal{C}$의 두 단체 대상이라 하자. 사상
+$a : U \to V$에 대해, 사상 $b : V \to U$가 존재하여
+$a \circ b$가 $\text{id}_V$와 호모토픽이고 $b \circ a$가
+$\text{id}_U$와 호모토픽이면 그 사상을 {\it 호모토피 동치}라 한다.
+호모토피 동치 $a : U \to V$가 존재하면 $U$와 $V$가
+{\it 호모토피 동치}라고 한다.
+\end{definition}
+
+\begin{example}
+\label{example-simplex-contractible}
+단체 집합 $\Delta[m]$은 $\Delta[0]$과 호모토피 동치이다. 실제로 유일한
+사상 $f : \Delta[m] \to \Delta[0]$과 $\Delta[m]$의 마지막 $0$-단체의
+포함으로 주어지는 사상 $g : \Delta[0] \to \Delta[m]$을 생각하자.
+$f \circ g = \text{id}$이다. $\text{id}_{\Delta[m]}$에서 $g \circ f$로
+가는 호모토피 $h : \Delta[m] \times \Delta[1] \to \Delta[m]$를 주겠다.
+$h$는 사상들
+$$
+\Mor_\Delta([n], [m]) \times \Mor_\Delta([n], [1]) \to \Mor_\Delta([n], [m])
+$$
+로 주어지며, $(\varphi, \alpha)$를 다음 사상으로 보낸다.
+$$
+k \mapsto
+\left\{
+\begin{matrix}
+\varphi(k) & \text{if} & \alpha(k) = 0 \\
+m & \text{if} & \alpha(k) = 1
+\end{matrix}
+\right.
+$$
+이것은 $g$를 마지막 $0$-단체의 포함으로 택했기 때문에만 작동함에
+유의하라. $g$를 첫째 $0$-단체의 포함으로 택했다면 $g \circ f$에서
+$\text{id}_{\Delta[m]}$으로 가는 호모토피를 찾을 수 있었을 것이다.
+이는 단체 집합의 범주에서 호모토피에 내재한 비대칭성을 보여 준다.
+\end{example}
+
+\noindent
+다음 보조정리는 $U \times \Delta[1]$이 $U$와 호모토피 동치임을 말한다.
+
+\begin{lemma}
+\label{lemma-contractible}
+$\mathcal{C}$를 유한 쌍대곱을 갖는 범주라 하고 $U$를 $\mathcal{C}$의
+단체 대상이라 하자. 사상 $e_1, e_0 : U \to U \times \Delta[1]$과
+$\pi : U \times \Delta[1] \to U$를 생각하자. 보조정리
+\ref{lemma-back-to-U}를 보라.
+\begin{enumerate}
+\item $\pi \circ e_1 = \pi \circ e_0 = \text{id}_U$이다.
+\item 사상 $\text{id}_{U \times \Delta[1]}$과 $e_0 \circ \pi$는
+호모토픽이다.
+\item 사상 $\text{id}_{U \times \Delta[1]}$과 $e_1 \circ \pi$는
+호모토픽이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+첫째 주장은 자명하다. 차수 $n$에서 쌍 $(\beta_1, \beta_2)$,
+$\beta_i : [n] \to [1]$에 규칙
+$$
+\beta(i) = \max\{\beta_1(i), \beta_2(i)\}.
+$$
+으로 정의되는 사상 $\beta : [n] \to [1]$을 대응시키는 단체 집합의 사상
+$\Delta[1] \times \Delta[1] \longrightarrow \Delta[1]$을 생각하자.
+이는 단체 집합의 사상이다. 실제로 $\varphi : [m] \to [n]$의 작용
+$\Delta[1](\varphi) : \Delta[1]_n \to \Delta[1]_m$은 전합성으로 주어진다.
+위에서 도입한 표기
+$\Delta[1]_n = \{\alpha^n_0, \ldots, \alpha^n_{n + 1}\}$를 사용하면,
+$\beta_2 = \alpha^n_0$일 때 $\beta = \alpha^n_0$이고
+$\beta_2 = \alpha^n_{n + 1}$일 때 $\beta = \beta_1$이다.
+$\alpha^n_0$ 및 $\alpha^n_{n + 1}$은 각각 값이 $1$ 및 $0$인 상수
+사상이므로, 보조정리 \ref{lemma-back-to-U}의 유도된 사상
+$$
+U \times \Delta[1] \times \Delta[1]
+\longrightarrow
+U \times \Delta[1]
+$$
+은 $\text{id}_{U \times \Delta[1]}$에서 $e_1 \circ \pi$로 가는
+호모토피이다. $e_0 \circ \pi$에 대해서도 마찬가지이다. 최댓값 대신
+최솟값을 사용하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fibre-products-simplicial-object-w-section}
+$f : Y \to X$를 섬유곱을 갖는 범주 $\mathcal{C}$의 사상이라 하자.
+$f$가 절단 $s$를 가진다고 가정하자. $f$에서 시작하여 예
+\ref{example-fibre-products-simplicial-object}에서 구성한 단체 대상
+$U$를 생각하자. 각 차수에서 $Y \times_X \ldots \times_X Y$의 각 인자
+위 $s \circ f$로 주어지는 자기 사상 $(s \circ f)^{n + 1}$인 사상
+$U \to U$는 $U$ 위의 항등사상과 호모토픽이다. 특히 $U$는 상수 단체
+대상 $X$와 호모토피 동치이다.
+\end{lemma}
+
+\begin{proof}
+$g^0 = \text{id}_Y$ 및 $g^1 = s \circ f$로 놓는다. 사상
+\begin{eqnarray*}
+Y \times_X \ldots \times_X Y \times \Mor([n], [1])
+& \to &
+Y \times_X \ldots \times_X Y \\
+(y_0, \ldots, y_n) \times \alpha
+& \mapsto &
+(g^{\alpha(0)}(y_0), \ldots, g^{\alpha(n)}(y_n))
+\end{eqnarray*}
+을 사용한다. 여기서는 사상을 정의하기 위해 점 함자 관점을 사용한다.
+% P02-E0134: frozen source redundantly says “functor of points point of view”.
+이를 달리 말하면
+$h_{n, 0} = \text{id}$, $h_{n, n + 1} = (s \circ f)^{n + 1}$이고
+$h_{n, i} = \text{id}_Y^{i + 1} \times (s \circ f)^{n + 1 - i}$이다.
+이들이 보조정리 \ref{lemma-relations-homotopy}의 관계식들을 만족함을
+보이는 일은 독자에게 맡긴다. 따라서 원하는 호모토피를 정의한다.
+범주 $\mathcal{C}$에 다른 가정을 할 필요가 없음을 보여 주는 주석
+\ref{remark-homotopy-better}도 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-products-homotopy}
+$\mathcal{C}$를 범주라 하고 $T$를 집합이라 하자. $t \in T$마다
+$X_t$, $Y_t$를 $\mathcal{C}$의 단체 대상이라 하자.
+$X = \prod_{t \in T} X_t$와 $Y = \prod_{t \in T} Y_t$가 존재한다고
+가정하자.
+\begin{enumerate}
+\item 모든 $t \in T$에 대해 $X_t$와 $Y_t$가 호모토피 동치이고
+$T$가 유한이면 $X$와 $Y$는 호모토피 동치이다.
+\end{enumerate}
+$t \in T$마다 $a_t, b_t : X_t \to Y_t$를 사상이라 하자.
+$a = \prod a_t : X \to Y$와 $b = \prod b_t : X \to Y$로 놓는다.
+\begin{enumerate}
+\item[(2)] 모든 $t \in T$에 대해 $a_t$에서 $b_t$로 가는 호모토피가
+있으면 $a$에서 $b$로 가는 호모토피가 있다.
+\item[(3)] $T$가 유한이고 $t \in T$에 대한
+$a_t, b_t : X_t \to Y_t$가 호모토픽이면 $a$와 $b$는 호모토픽이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$h_t = (h_{t, n , i})$가 $a_t$에서 $b_t$로 가는 호모토피라면
+(주석 \ref{remark-homotopy-better} 참조),
+$h = (\prod_t h_{t, n, i})$는 $\prod a_t$에서 $\prod b_t$로 가는
+호모토피이다. 이로써 (2)가 증명된다.
+
+\medskip\noindent
+(3)을 증명하자. $t \in T$를 택하자. 정수 $n \geq 0$과 열
+$a_t = a_{t, 0}, a_{t, 1}, \ldots, a_{t, n} = b_t$가 존재하여 각
+$1 \leq i \leq n$에 대해 $a_{t, i - 1}$에서 $a_{t, i}$로 가는
+호모토피가 있거나 $a_{t, i}$에서 $a_{t, i - 1}$로 가는 호모토피가 있다.
+$n = 0$이면 다른 $t$를 택한다. (모든 $t \in T$에 대해 $a_t = b_t$이면
+이미 끝났다.) 따라서 $n > 0$이라고 가정하자.
+% P02-E0135: frozen source says “there are is a homotopy”.
+예 \ref{example-trivial-homotopy}에 의해 모든
+$t' \in T \setminus \{t\}$에 대해 $b_{t'}$에서 $b_{t'}$로 가는
+호모토피가 있다. 따라서 (2)에 의해
+$a_{t, n - 1} \times \prod_{t'} b_{t'}$에서 $b$로 가는 호모토피가 있거나
+$b$에서 $a_{t, n - 1} \times \prod_{t'} b_{t'}$로 가는 호모토피가 있다.
+이렇게 하여 $n$을 $1$만큼 줄일 수 있다. 이로써 (3)이 증명된다.
+
+\medskip\noindent
+(1)은 (3)과 정의들에서 따른다.
+\end{proof}
+
+\section{아벨 범주에서의 호모토피}
+\label{section-homotopy-abelian}
+
+\noindent
+$\mathcal{A}$를 가법 범주라 하자. $U$, $V$를 $\mathcal{A}$의 단체
+대상이라 하자. $a, b : U \to V$를 사상이라 하자. 더 나아가
+$h : U \times \Delta[1] \to V$가 $a$에서 $b$로 가는 호모토피라고
+가정하자. 사슬 복합체의 두 사상
+$s(a), s(b) : s(U) \longrightarrow s(V)$가 호몰로지의 절
+\ref{homology-section-complexes}의 의미에서 호모토픽임을 증명하자.
+절 \ref{section-homotopy}에서 도입한 표기를 사용하여
+$$
+s(h)_n : U_n \longrightarrow V_{n + 1}
+$$
+을 공식
+\begin{equation}
+\label{equation-homotopy-to-homotopy}
+s(h)_n = \sum\nolimits_{i = 0}^n (-1)^{i + 1} h_{n + 1, i + 1} \circ s^n_i.
+\end{equation}
+으로 정의한다.
+$d_{n + 1} \circ s(h)_n + s(h)_{n - 1} \circ d_n$을 계산하자.
+먼저 다음을 계산한다.
+\begin{eqnarray*}
+d_{n + 1} \circ s(h)_n & = &
+\sum\nolimits_{j = 0}^{n + 1}
+\sum\nolimits_{i = 0}^n
+(-1)^{j + i + 1}
+d^{n + 1}_j \circ h_{n + 1, i + 1} \circ s^n_i \\
+& = &
+\sum\nolimits_{1 \leq i + 1 \leq j \leq n + 1}
+(-1)^{j + i + 1}
+h_{n, i + 1} \circ d^{n + 1}_j \circ s^n_i \\
+& &
++
+\sum\nolimits_{n \geq i \geq j \geq 0}
+(-1)^{i + j + 1}
+h_{n, i} \circ d^{n + 1}_j \circ s^n_i \\
+& = &
+\sum\nolimits_{1 \leq i + 1 < j \leq n + 1}
+(-1)^{j + i + 1}
+h_{n, i + 1} \circ s^{n - 1}_i \circ d^n_{j - 1} \\
+& &
++
+\sum\nolimits_{1 \leq i + 1 = j \leq n + 1}
+(-1)^{j + i + 1}
+h_{n, i + 1} \\
+& &
++
+\sum\nolimits_{n \geq i = j \geq 0}
+(-1)^{i + j + 1}
+h_{n, i} \\
+& &
++
+\sum\nolimits_{n \geq i > j \geq 0}
+(-1)^{i + j + 1}
+h_{n, i} \circ s^{n - 1}_{i - 1} \circ d^n_j
+\end{eqnarray*}
+네 합 가운데 첫째와 마지막 합이
+$$
+s(h)_{n - 1} \circ d_n
+=
+\sum_{i = 0}^{n - 1} \sum_{j = 0}^n
+(-1)^{i + 1 + j} h_{n, i + 1} \circ s^{n - 1}_i \circ d^n_j.
+$$
+의 모든 항과 정확히 상쇄됨은 독자에게 맡긴다. 따라서
+\begin{eqnarray*}
+d_{n + 1} \circ s(h)_n + s(h)_{n - 1} \circ d_n
+& = &
+\sum_{j = 1}^{n + 1} (-1)^{2j} h_{n, j}
++
+\sum_{i = 0}^n (-1)^{2i + 1} h_{n, i} \\
+& = &
+h_{n, n + 1} - h_{n , 0} \\
+& = &
+a_n - b_n
+\end{eqnarray*}
+을 얻으며, 이는 원하는 바이다.
+
+\begin{lemma}
+\label{lemma-homotopy-s-N}
+$\mathcal{A}$를 가법 범주라 하자. $a, b : U \to V$를
+$\mathcal{A}$의 단체 대상 사이의 사상이라 하자. $a$, $b$가 호모토픽이면
+$s(a), s(b) : s(U) \to s(V)$는 사슬 복합체의 호모토픽 사상이다.
+$\mathcal{A}$가 아벨 범주이면
+$N(a), N(b) : N(U) \to N(V)$도 사슬 복합체의 호모토픽 사상이다.
+\end{lemma}
+
+\begin{proof}
+$U$에서 $V$로 가는 사상들의 열
+$a = a_0, a_1, \ldots, a_n = b$를 택하여 각 $i = 1, \ldots, n$에
+대해 $a_i$에서 $a_{i - 1}$로 가는 호모토피가 있거나
+$a_{i - 1}$에서 $a_i$로 가는 호모토피가 있도록 할 수 있다.
+위 계산에 따르면 이 경우 $s(a_i)$가 사슬 복합체의 사상으로서
+$s(a_{i - 1})$와 호모토픽이거나, $s(a_{i - 1})$가 사슬 복합체의
+사상으로서 $s(a_i)$와 호모토픽이다. 물론 이 두 조건은 동치이고,
+더 나아가 사슬 복합체의 사상 집합에서 호모토픽이라는 관계는
+동치관계이다. 호몰로지의 절 \ref{homology-section-complexes}를 보라.
+따라서 $s(a)$와 $s(b)$는 사슬 복합체의 사상으로서 호모토픽이다.
+
+\medskip\noindent
+이제 $N(a)$와 $N(b)$를 살펴보자. 보조정리
+\ref{lemma-decompose-associated-complexes}에 의해 $N(a)$, $N(b)$는
+합성
+$$
+N(U) \to s(U) \to s(V) \to N(V)
+$$
+이며 가운데에는 각각 $s(a)$, $s(b)$를 사용한다. 따라서 주장은
+호몰로지의 보조정리 \ref{homology-lemma-compose-homotopy}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-homotopy-equivalence-s-N}
+$\mathcal{A}$를 가법 범주라 하자. $a : U \to V$를
+$\mathcal{A}$의 단체 대상 사이의 사상이라 하자. $a$가 호모토피 동치이면
+$s(a) : s(U) \to s(V)$는 사슬 복합체의 호모토피 동치이다.
+더 나아가 $\mathcal{A}$가 아벨 범주이면
+$N(a) : N(U) \to N(V)$도 사슬 복합체의 호모토피 동치이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 위 보조정리 \ref{lemma-homotopy-s-N}를 보라.
+\end{proof}
+
+
+
+
+\section{호모토피와 쌍대단체 대상}
+\label{section-homotopy-cosimplicial}
+
+\noindent
+$\mathcal{C}$를 유한 곱을 갖는 범주라 하자. $V$를 쌍대단체 대상이라
+하고 $\Hom(\Delta[1], V)$를 생각하자. 절
+\ref{section-hom-from-simplicial-sets-into-cosimplicial}을 보라.
+사상들 $e_0, e_1 : \Delta[0] \to \Delta[1]$은 두 사상
+$e_0, e_1 : \Hom(\Delta[1], V) \to V$를 준다.
+
+\begin{definition}
+\label{definition-homotopy-cosimplicial}
+$\mathcal{C}$를 유한 곱을 갖는 범주라 하자. $U$와 $V$를
+$\mathcal{C}$의 두 쌍대단체 대상이라 하자.
+$a, b : U \to V$를 $\mathcal{C}$의 쌍대단체 대상 사이의 두 사상이라 하자.
+\begin{enumerate}
+\item $a = e_0 \circ h$이고 $b = e_1 \circ h$인 사상
+$$
+h : U \longrightarrow \Hom(\Delta[1], V)
+$$
+을 {it $a$에서 $b$로 가는 호모토피}라 한다.
+\item $U$에서 $V$로 가는 사상들의 열
+$a = a_0, a_1, \ldots, a_n = b$가 존재하여 각
+$i = 1, \ldots, n$에 대해 $a_i$에서 $a_{i - 1}$로 가는 호모토피가
+있거나 $a_{i - 1}$에서 $a_i$로 가는 호모토피가 있으면,
+$a$와 $b$가 {it 호모토픽}이거나 {it 같은 호모토피류에 속한다}고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이는 절 \ref{section-homotopy}에서 단체 대상에 대해 도입한 개념의
+쌍대이다. 이를 설명하기 위해 정의에서와 같이 $a$에서 $b$로 가는
+호모토피 $h : U \to \Hom(\Delta[1], V)$를 생각하자.
+$\Delta[1]_n$은 유한 집합임을 상기하자. $h$의 차수 $n$ 성분은 사상
+% P02-E0136: frozen degree-n source U rather than U_n is preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+h_n = (h_{n, \alpha}) :
+U
+\longrightarrow
+\Hom(\Delta[1], V)_n =
+\prod\nolimits_{\alpha \in \Delta[1]_n} V_n
+$$
+이다. $\mathcal{C}$의 사상들 $h_{n, \alpha} : U_n \to V_n$은
+$\Delta$의 모든 사상 $f : [n] \to [m]$에 대해
+\begin{equation}
+\label{equation-property-homotopy-cosimplicial}
+h_{m, \alpha} \circ U(f) = V(f) \circ h_{n, \alpha \circ f}
+\end{equation}
+를 만족한다. 또한 $a = e_0 \circ h$라는 조건은
+$a_n = h_{n, 0 : [n] \to [1]}$라는 뜻이며, 여기서
+$0 : [n] \to [1]$은 값이 $0$인 상수 사상이다. 마찬가지로
+$b = e_1 \circ h$라는 조건은 $b_n = h_{n, 1 : [n] \to [1]}$라는
+뜻이며, 여기서 $1 : [n] \to [1]$은 값이 $1$인 상수 사상이다.
+역으로, $\Delta$의 모든 사상 $f$에 대해
+(\ref{equation-property-homotopy-cosimplicial})가 성립하고 모든
+$n \geq 0$에 대해 $a_n = h_{n, 0 : [n] \to [1]}$ 및
+$b_n = h_{n, 1 : [n] \to [1]}$가 성립하는 사상족
+$\{h_{n, \alpha}\}$가 주어졌다고 하자. 그러면
+$h = \prod_{\alpha \in \Delta[1]_n} h_{n, \alpha}$로 놓아
+$a$에서 $b$로 가는 호모토피 $h$를 얻는다.
+
+\begin{remark}
+\label{remark-homotopy-cosimplicial-better}
+$\mathcal{C}$를 아무 가정도 없는 임의의 범주라 하자. $U$와 $V$를
+$\mathcal{C}$의 쌍대단체 대상이라 하자. $a, b : U \to V$를
+$\mathcal{C}$의 쌍대단체 대상 사이의 사상이라 하자.
+{it $a$에서 $b$로 가는 호모토피}는 $n \geq 0$ 및
+$\alpha \in \Delta[1]_n$에 대해 주어진 사상
+$h_{n, \alpha} : U_n \to V_n$들로서, $\Delta$의 모든 사상 $f$에 대해
+(\ref{equation-property-homotopy-cosimplicial})를 만족하고 모든
+$n \geq 0$에 대해 $a_n = h_{n, 0 : [n] \to [1]}$ 및
+$b_n = h_{n, 1 : [n] \to [1]}$를 만족하는 것이다.
+정의 \ref{definition-homotopy-cosimplicial}에서와 같이, $U$에서 $V$로
+가는 사상들의 열 $a = a_0, a_1, \ldots, a_n = b$가 존재하여 각
+$i = 1, \ldots, n$에 대해 $a_{i - 1}$에서 $a_i$로 가는 호모토피가
+있거나 $a_i$에서 $a_{i - 1}$로 가는 호모토피가 있으면 사상들
+$a$와 $b$가 {it 호모토픽}이라고 한다. 임의의 함자
+$F : \mathcal{C} \to \mathcal{C}'$와 $a$에서 $b$로 가는 호모토피
+% P02-E0137: frozen integer-indexed family is preserved; see ERRATA_CANDIDATES.jsonl.
+$\{h_{n, i}\}$가 주어지면 $\{F(h_{n, i})\}$가 $F(a)$에서 $F(b)$로
+가는 호모토피임은 명백하다. 마찬가지로 $a$와 $b$가 호모토픽이면
+$F(a)$와 $F(b)$도 호모토픽이다. 유한 곱이 존재할 때 이 새 개념은
+기존 개념과 같다. 특히 두 범주가 모두 유한 곱을 가지면 함자는 기존
+개념을 보존한다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-compare-homotopies}
+$\mathcal{C}$를 범주라 하자. $U$와 $V$가 $\mathcal{C}$의 두 쌍대단체
+대상이라고 가정하자. $a, b : U \to V$를 쌍대단체 대상 사이의
+사상이라 하자. $U$, $V$가 $\mathcal{C}^{opp}$의 단체 대상
+$U'$, $V'$에 대응함을 상기하자. 또한 $a, b$는 사상
+$a', b' : V' \to U'$에 대응한다. 다음은 동치이다.
+\begin{enumerate}
+\item 주석 \ref{remark-homotopy-cosimplicial-better}에서와 같은
+$a$에서 $b$로 가는 호모토피 $h = \{h_{n, \alpha}\}$가 존재한다.
+\item 주석 \ref{remark-homotopy-better}에서와 같은 $a'$에서 $b'$로
+가는 호모토피 $h = \{h_{n, i}\}$가 존재한다.
+\end{enumerate}
+따라서 주석 \ref{remark-homotopy-cosimplicial-better}의 의미에서
+$a$가 $b$와 호모토픽인 것과 주석 \ref{remark-homotopy-better}의
+의미에서 $a'$가 $b'$와 호모토픽인 것은 동치이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}$가 유한 곱을 가지면 $\mathcal{C}^{opp}$는 유한 쌍대곱을
+가지므로, 정의 \ref{definition-homotopy-cosimplicial}과
+\ref{definition-homotopy}를 주석
+\ref{remark-homotopy-cosimplicial-better}와
+\ref{remark-homotopy-better} 대신 사용할 수 있다. 이 경우
+$h : U \to \Hom(\Delta[1], V)$는 사상
+$h' : \Hom(\Delta[1], V)' \to U'$와 같은 것이다. 곱과 쌍대곱도
+서로 바뀌므로 $(\Hom(\Delta[1], V))' = V' \times \Delta[1]$임은
+즉시 알 수 있다. 또한 사상
+$e_0, e_1 : \Hom(\Delta[1], V) \to V$의 ``소수표가 붙은'' 형태는 사상
+$e_0, e_1 : V' \to \Delta[1] \times V$이다. 따라서
+$e_0 \circ h = a$는 $h' \circ e_0 = a'$로 옮겨지고, 마찬가지로
+$e_1 \circ h = b$는 $h' \circ e_1 = b'$로 옮겨진다.
+이로써 이 경우의 보조정리가 증명된다.
+
+\medskip\noindent
+일반적인 경우에는 (\ref{equation-property-homotopy-cosimplicial})가
+주는 관계들을 보조정리 \ref{lemma-relations-homotopy}의 관계들로
+옮겨야 한다. 자세한 내용은 생략한다.
+
+\medskip\noindent
+마지막 명제는 (1)과 (2)의 동치에서 형식적으로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-functorial-homotopy}
+\begin{slogan}
+함자는 (쌍대)단체 대상의 호모토픽 사상들을 보존한다.
+\end{slogan}
+$\mathcal{C}, \mathcal{C}', \mathcal{D}, \mathcal{D}'$를 범주들이라 하자.
+% P02-E0138: frozen standalone introductory fragment is bound here; see ERRATA_CANDIDATES.jsonl.
+용어는 주석 \ref{remark-homotopy-cosimplicial-better}와
+\ref{remark-homotopy-better}에서와 같다.
+\begin{enumerate}
+\item $a, b : U \to V$를 $\mathcal{D}$의 단체 대상 사이의 사상이라 하자.
+$F : \mathcal{D} \to \mathcal{D}'$를 공변 함자라 하자. $a$와 $b$가
+호모토픽이면 $F(a)$, $F(b)$는 $F(U) \to F(V)$인 단체 대상 사이의
+호모토픽 사상이다.
+\item $a, b : U \to V$를 $\mathcal{C}$의 쌍대단체 대상 사이의
+사상이라 하자. $F : \mathcal{C} \to \mathcal{C}'$를 공변 함자라 하자.
+$a$와 $b$가 호모토픽이면 $F(a)$, $F(b)$는 $F(U) \to F(V)$인
+쌍대단체 대상 사이의 호모토픽 사상이다.
+\item $a, b : U \to V$를 $\mathcal{D}$의 단체 대상 사이의 사상이라 하자.
+$F : \mathcal{D} \to \mathcal{C}$를 반변 함자라 하자. $a$와 $b$가
+호모토픽이면 $F(a)$, $F(b)$는 $F(V) \to F(U)$인 쌍대단체 대상 사이의
+호모토픽 사상이다.
+\item $a, b : U \to V$를 $\mathcal{C}$의 쌍대단체 대상 사이의
+사상이라 하자. $F : \mathcal{C} \to \mathcal{D}$를 반변 함자라 하자.
+$a$와 $b$가 호모토픽이면 $F(a)$, $F(b)$는 $F(V) \to F(U)$인
+단체 대상 사이의 호모토픽 사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위 보조정리 \ref{lemma-compare-homotopies}에 의해 $F$를 한 쌍의 범주
+사이의 공변 함자로 바꿀 수 있으며, 이 함자가 호모토픽 사상쌍을
+보존함을 보이면 된다. 이는 주석 \ref{remark-homotopy-better}에 설명되어 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-push-outs-simplicial-object-w-section}
+$f : X \to Y$를 밂을 갖는 범주 $\mathcal{C}$의 사상이라 하자.
+$s \circ f = \text{id}_X$인 사상 $s : Y \to X$가 존재한다고 가정하자.
+$f$에서 출발하여 예 \ref{example-push-outs-simplicial-object}에서 구성한
+쌍대단체 대상 $U$를 생각하자. 각 차수에서 $Y \amalg_X \ldots \amalg_X Y$의
+각 인자에 $f \circ s$로 주어지는 자기 사상인 $U \to U$는 $U$의
+항등사상과 호모토픽이다. 특히 $U$는 상수 쌍대단체 대상 $X$와
+호모토피 동치이다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 보조정리
+\ref{lemma-fibre-products-simplicial-object-w-section}의 쌍대이다.
+따라서 보조정리 \ref{lemma-compare-homotopies}를 적용하면 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-homotopy-s-Q}
+\begin{slogan}
+(쌍대단체) Dold--Kan 함자는 호모토픽 사상들을 호모토픽 사상들로 보낸다.
+\end{slogan}
+$\mathcal{A}$를 가법 범주라 하자. $a, b : U \to V$를
+$\mathcal{A}$의 쌍대단체 대상 사이의 사상이라 하자. $a$, $b$가
+호모토픽이면 $s(a), s(b) : s(U) \to s(V)$는 쌍대사슬 복합체의
+호모토픽 사상이다. 더 나아가 $\mathcal{A}$가 아벨 범주이면
+$Q(a), Q(b) : Q(U) \to Q(V)$도 쌍대사슬 복합체의 호모토픽 사상이다.
+\end{lemma}
+
+\begin{proof}
+$(-)' : \mathcal{A} \to \mathcal{A}^{opp}$를 $A \mapsto A$인 반변
+함자라 하자.
+% P02-E0139: frozen inapplicable citation is preserved; see ERRATA_CANDIDATES.jsonl.
+보조정리 \ref{lemma-push-outs-simplicial-object-w-section}에 의해
+사상들 $a'$와 $b'$는 호모토픽이다. 보조정리
+\ref{lemma-homotopy-s-N}에 의해 $s(a')$와 $s(b')$는 사슬 복합체의
+호모토픽 사상이다. $s(a') = (s(a))'$이고 $s(b') = (s(b))'$이므로,
+가법 반변 함자 $(-)'' : \mathcal{A}^{opp} \to \mathcal{A}$를 적용하여
+$s(a)$와 $s(b)$도 호모토픽이라는 결론을 얻는다. $Q$-복합체에 대한
+결과도 $Q(U)' = N(U')$를 사용하여 같은 방식으로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-homotopy-equivalence-s-Q}
+$\mathcal{A}$를 가법 범주라 하자. $a : U \to V$를 $\mathcal{A}$의
+쌍대단체 대상 사이의 사상이라 하자. $a$가 호모토피 동치이면
+% P02-E0140: frozen source calls the cosimplicial targets chain complexes rather than cochain complexes.
+$s(a) : s(U) \to s(V)$는 사슬 복합체의 호모토피 동치이다.
+더 나아가 $\mathcal{A}$가 아벨 범주이면
+$Q(a) : Q(U) \to Q(V)$도 사슬 복합체의 호모토피 동치이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 위 보조정리 \ref{lemma-homotopy-s-Q}를 보라.
+\end{proof}
+
+
+
+
+\section{아벨 범주에서의 더 많은 호모토피}
+\label{section-backwards-homotopy}
+
+\noindent
+$\mathcal{A}$를 아벨 범주라 하자. 이 절에서는
+$\text{Ch}_{\geq 0}(\mathcal{A})$의 사상들 사이의 호모토피가 언제나
+단체 대상들의 범주에서 사상 $U \times \Delta[1] \to V$로부터 나옴을
+보인다. 어떤 의미에서 이는 보조정리 \ref{lemma-homotopy-s-N}의 역을
+줄 것이다. 먼저 사슬 복합체의 사상들 사이의 호모토피에 관한 몇 가지
+내용을 전개한다.
+
+\begin{lemma}
+\label{lemma-represent-homotopy}
+$\mathcal{A}$를 아벨 범주라 하자. $A$를 사슬 복합체라 하자. 공변 함자
+$$
+B \longmapsto
+\{
+(a, b, h)
+\mid
+a, b : A \to B\text{ and }h\text{ a homotopy between }a, b
+\}
+$$
+를 생각하자. 표시된 함자와
+$\Mor_{\text{Ch}(\mathcal{A})}(\diamond A, -)$가 동형이 되게 하는
+사슬 복합체 $\diamond A$가 존재한다. 구성 $A \mapsto \diamond A$는
+함자적이다.
+\end{lemma}
+
+\begin{proof}
+$\diamond A_n = A_n \oplus A_n \oplus A_{n - 1}$로 놓고,
+$d_{\diamond A, n}$을 행렬
+$$
+d_{\diamond A, n}
+=
+\left(
+\begin{matrix}
+d_{A, n} & 0 & \text{id}_{A_{n - 1}} \\
+0 & d_{A, n} & -\text{id}_{A_{n - 1}} \\
+0 & 0 & -d_{A, n - 1}
+\end{matrix}
+\right) :
+A_n \oplus A_n \oplus A_{n - 1} \to
+A_{n - 1} \oplus A_{n - 1} \oplus A_{n - 2}
+$$
+로 정의한다. $\mathcal{A}$가 아벨 군의 범주이고
+$(x, y, z) \in A_n \oplus A_n \oplus A_{n - 1}$이면
+$d_{\diamond A, n}(x, y, z) = (d_n(x) + z, d_n(y) - z, -d_{n - 1}(z))$이다.
+$d^2 = 0$임은 쉽게 확인할 수 있다. 분명 두 사상
+$\diamond a, \diamond b : A \to \diamond A$(첫째 직합 인자와 둘째 직합
+인자)와 사상 $\diamond A \to A[-1]$이 있어 항마다 분할되는 짧은 완전열
+$$
+0 \to
+A \oplus A \to
+\diamond A \to
+A[-1] \to
+0
+$$
+을 준다. 또한 사상들의 열 $\diamond h_n : A_n \to \diamond A_{n + 1}$가
+있다. 이는 $A_n$에서 $\diamond A_{n + 1}$의 직합 인자 $A_n$으로 가는
+항등사상이며, $\diamond h$는 $\diamond a$와 $\diamond b$ 사이의
+호모토피이다.
+
+\medskip\noindent
+따라서 임의의 사상 $f : \diamond A \to B$는
+$a = f \circ \diamond a$, $b = f \circ \diamond b$ 및
+$h_n = f_{n + 1} \circ \diamond h_n$로 놓음으로써 삼중항 $(a, b, h)$를
+준다. 역으로, 삼중항 $(a, b, h)$가 주어지면
+$$
+f_n = (a_n, b_n, h_{n - 1}).
+$$
+로 놓아 사상 $f : \diamond A \to B$를 얻는다. 이것이 사슬 복합체의
+사상임을 보려면 계산을 해야 한다. $\mathcal{A}$가 아벨 군의 범주인
+경우에만 계산하겠다.
+$(x, y, z) \in \diamond A_n = A_n \oplus A_n \oplus A_{n - 1}$이라 하자.
+그러면
+% P02-E0141: frozen degree-n chain-map components are preserved; see ERRATA_CANDIDATES.jsonl.
+\begin{eqnarray*}
+f_{n - 1}(d_n(x, y, z)) & = &
+f_{n - 1}(d_n(x) + z, d_n(y) - z, -d_{n - 1}(z)) \\
+& = &
+a_n(d_n(x)) + a_n(z) + b_n(d_n(y)) - b_n(z) - h_{n - 2}(d_{n - 1}(z))
+\end{eqnarray*}
+이고
+% P02-E0142: frozen missing outer parenthesis is preserved; see ERRATA_CANDIDATES.jsonl.
+\begin{eqnarray*}
+d_n(f_n(x, y, z) & = &
+d_n(a_n(x) + b_n(y) + h_{n - 1}(z)) \\
+& = &
+d_n(a_n(x)) + d_n(b_n(y)) + d_n(h_{n - 1}(z))
+\end{eqnarray*}
+이다. 이들은 호모토피의 정의에 의해 같다.
+\end{proof}
+
+\noindent
+확대
+$$
+0 \to
+A \oplus A \to
+\diamond A \to
+A[-1] \to
+0
+$$
+에는 사상들 $\diamond A_n \to A[-1]_n$의 절단들이 딸려 있으며,
+이들에 연관된 사상 $\delta : A[-1] \to (A \oplus A)[-1]$은
+호몰로지의 보조정리 \ref{homology-lemma-ses-termwise-split}에서처럼
+사상 $(1, -1) : A[-1] \to A[-1] \oplus A[-1]$과 같다는 점에 유의하라.
+
+\begin{lemma}
+\label{lemma-map-into-diamond}
+$\mathcal{A}$를 아벨 범주라 하자.
+$$
+0 \to A \oplus A \to B \to C \to 0
+$$
+을 $\mathcal{A}$의 사슬 복합체들의 짧은 완전열이라 하자. 또한
+차수 $n$에서 연관된 짧은 완전열을 분할하는 사상들
+$s_n : C_n \to B_n$이 주어졌다고 가정하자.
+$\delta(s) : C \to (A \oplus A)[-1] = A[-1] \oplus A[-1]$를
+복합체의 연관 사상이라 하자. 호몰로지의 보조정리
+\ref{homology-lemma-ses-termwise-split}를 보라. $\delta(s)$가 사상
+$(1, -1) : A[-1] \to A[-1] \oplus A[-1]$을 통해 분해되면, 가환도식
+$$
+\xymatrix{
+0 \ar[r] &
+A \oplus A \ar[d] \ar[r] &
+B \ar[r] \ar[d] &
+C \ar[d] \ar[r] &
+0 \\
+0 \ar[r] &
+A \oplus A \ar[r] &
+\diamond A \ar[r] &
+A[-1] \ar[r] &
+0
+}
+$$
+에 들어맞는 유일한 사상 $B \to \diamond A$가 존재한다. 여기서 수직
+사상들은 $s_n$ 및 $\diamond A_n \to A[-1]_n$의 절단들과도 양립한다.
+\end{lemma}
+
+\begin{proof}
+호몰로지의 보조정리 \ref{homology-lemma-ses-termwise-split}의 사상
+$\pi_n$을 $(p_n, q_n) : B_n \to A_n \oplus A_n$으로 나타내자.
+짧은 완전열의 사상들을
+$(a, b) : A \oplus A \to B$와 $r : B \to C$로도 쓰자.
+$\delta(s)$의 분해를 $\delta(s) = (1, -1) \circ f$로 쓰자. 이는
+$p_{n - 1} \circ d_{B, n} \circ s_n = f_n$이고
+$q_{n - 1} \circ d_{B, n} \circ s_n = - f_n$이라는 뜻이다.
+% P02-E0143: frozen dangling connective is bound here; see ERRATA_CANDIDATES.jsonl.
+$B_n \to \diamond A_n = A_n \oplus A_n \oplus A_{n - 1}$을
+$(p_n, q_n, f_n \circ r_n)$과 같다고 놓자.
+
+\medskip\noindent
+이제 이것이 실제로 복합체의 사상을 정의함을 확인해야 한다.
+아벨 군인 경우에만 확인하겠다. $x \in B_n$을 택하자. 그러면
+$x = a_n(x_1) + b_n(x_2) + s_n(x_3)$이고, 정의가 각 항에 대해
+따로 미분과 가환함을 보이면 충분하다. 항 $a_n(x_1)$에 대해서는
+$(p_n, q_n, f_n \circ r_n)(a_n(x_1)) = (x_1, 0, 0)$이고 결론은
+명백하다. 항 $b_n(x_2)$에 대해서도 마찬가지이다. 항 $s_n(x_3)$에
+대해서는
+% P02-E0144: frozen degree-n projection/splitting indices are preserved; see ERRATA_CANDIDATES.jsonl.
+\begin{eqnarray*}
+(p_n, q_n, f_n \circ r_n)(d_n(s_n(x_3))) & = &
+(p_n, q_n, f_n \circ r_n)( \\
+& & \ \ \ \ \ a_n(f_n(x_3)) - b_n(f_n(x_3)) + s_n(d_n(x_3))) \\
+& = &
+(f_n(x_3), -f_n(x_3), f_n(d_n(x_3)))
+\end{eqnarray*}
+이며, 이는 $f_n$의 정의에 의한 것이다. 그리고
+\begin{eqnarray*}
+d_n(p_n, q_n, f_n \circ r_n)(s_n(x_3)) & = & d_n(0, 0, f_n(x_3)) \\
+& = &
+(f_n(x_3), - f_n(x_3), d_{A[-1], n}(f_n(x_3)))
+\end{eqnarray*}
+이다. $f$가 복합체의 사상이므로 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-backwards-homotopy}
+$\mathcal{A}$를 아벨 범주라 하자. $U$, $V$를 $\mathcal{A}$의 단체
+대상이라 하자. $a, b : U \to V$를 한 쌍의 사상이라 하자.
+대응하는 사슬 복합체의 사상들
+$N(a), N(b) : N(U) \to N(V)$가 호모토피
+$\{N_n : N(U)_n \to N(V)_{n + 1}\}$에 의해 호모토픽이라고 가정하자.
+그러면 정의 \ref{definition-homotopy}에서와 같은 $a$에서 $b$로 가는
+호모토피가 존재한다. 더 나아가 $N_n = N(h)_n$이 되도록 호모토피
+$h : U \times \Delta[1] \to V$를 택할 수 있다. 여기서 $N(h)$는 절
+\ref{section-homotopy-abelian}에서처럼 $h$로부터 오는 호모토피이다.
+\end{lemma}
+
+\begin{proof}
+$(\diamond N(U), \diamond a, \diamond b, \diamond h)$를 보조정리
+\ref{lemma-represent-homotopy}와 그 증명에서와 같이 놓자. 그 보조정리에
+의해 삼중항 $(N(a), N(b), \{N_n\})$을 표현하는 사상
+$\diamond N(U) \to N(V)$가 존재한다. 사상
+$\psi : N(U \times \Delta[1]) \to \diamond{N(U)}$가 존재하여
+$\diamond a = \psi \circ N(e_0)$이고
+$\diamond b = \psi \circ N(e_1)$임을 보이겠다. 더 나아가
+(\ref{equation-homotopy-to-homotopy})와 보조정리
+\ref{lemma-homotopy-s-N}에서 $h = \text{id}_{U \times \Delta[1]}$로
+놓아 얻는 $N(e_0), N(e_1) : N(U) \to N(U \times \Delta[1])$ 사이의
+호모토피가 $\psi$에 의해 두 사상
+$\diamond a, \diamond b : N(U) \to \diamond{N(U)}$ 사이의 표준
+호모토피 $\diamond h$로 보내짐을 보이겠다. 이는 분명 보조정리를 함의한다.
+
+\medskip\noindent
+함자 $N : \text{Simp}(\mathcal{A}) \to \text{Ch}_{\geq 0}(\mathcal{A})$은
+함자 $s : \text{Simp}(\mathcal{A}) \to \text{Ch}_{\geq 0}(\mathcal{A})$의
+직합 인자임에 유의하라. 또한 함자 $\diamond$는 직합과 양립한다.
+따라서 대신 대응하는 성질들을 갖는 사상
+$\Psi : s(U \times \Delta[1]) \to \diamond{s(U)}$를 구성하면 충분하다.
+아래에서 이를 수행한다.
+
+\medskip\noindent
+정의 \ref{definition-homotopy}에 의해 사상
+$e_0 : U \to U \times \Delta[1]$과
+$e_1 : U \to U \times \Delta[1]$은 호모토피
+$\text{id}_{U \times \Delta[1]}$에 의해 호모토픽이다. 보조정리
+\ref{lemma-homotopy-s-N}에 의해 사슬 복합체의 사상
+$s(e_0) : s(U) \to s(U \times \Delta[1])$과
+$s(e_1) : s(U) \to s(U \times \Delta[1])$ 사이의 명시적 호모토피
+$\{h_n : s(U)_n \to s(U \times \Delta[1])_{n + 1}\}$를 얻는다.
+위 보조정리 \ref{lemma-map-into-diamond}에 의해 이에 대응하는 사상
+$$
+\Phi : \diamond{s(U)} \to s(U \times \Delta[1])
+$$
+을 얻는다. 구성에 따르면 $\diamond{s(U)}_n$의 직합 인자
+$s(U)[-1]_n = s(U)_{n - 1}$에 제한한 $\Phi_n$은 $h_{n - 1}$과 같다.
+그리고
+% P02-E0145: frozen degeneracy exponent is preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+h_{n - 1} = \sum\nolimits_{i = 0}^{n - 1}
+(-1)^{i + 1} s^n_i \cdot \alpha^n_{i + 1} :
+U_{n - 1} \to \bigoplus\nolimits_j U_n \cdot \alpha^n_j.
+$$
+이며, 표기는 자명하다.
+
+\medskip\noindent
+한편 사상들 $e_i : U \to U \times \Delta[1]$은 사상
+$(e_0, e_1) : U \oplus U \to U \times \Delta[1]$을 유도한다.
+그 여핵을 $W$로 나타내자.
+$(U \times \Delta[1])_n = \bigoplus_{\alpha : [n] \to [1]} U_n \cdot \alpha$
+로 쓰면 $W_n = \bigoplus_{i = 1}^n U_n \cdot \alpha^n_i$로 식별할 수
+있음에 유의하라. 여기서 $\alpha^n_i$는 절 \ref{section-homotopy}에서와
+같다. 다음 가환도식이 있다.
+$$
+\xymatrix{
+0 \ar[r] &
+U \oplus U \ar[rd]_{(1, 1)} \ar[r] &
+U \times \Delta[1] \ar[d]^\pi \ar[r] &
+W \ar[r] &
+0 \\
+& & U & &
+}
+$$
+이는 함자 $s$를 적용한 뒤에도 비슷한 가환도식이 있음을 함의한다.
+다음으로, 직합 인자 $U_n \cdot \alpha^n_i \subset W_n$을
+$(-1, 1)$에 의해 직합 인자
+$U_n \cdot \alpha^n_0 \oplus U_n \cdot \alpha^n_i
+\subset (U \times \Delta[1])_n$으로 보냄으로써 절단들
+$\sigma_n : s(W)_n \to s(U \times \Delta[1])_n$을 택한다.
+$s(\pi)_n \circ \sigma_n = 0$임에 유의하라. 따라서
+$(1, 1) \circ \delta(\sigma)_n = 0$이다. 그러므로 $\delta(\sigma)$는
+보조정리 \ref{lemma-map-into-diamond}에서와 같이 분해된다.
+그 보조정리에 의해 표준 사상
+$\Psi : s(U \times \Delta[1]) \to \diamond{s(U)}$를 얻는다.
+
+\medskip\noindent
+$\Psi$를 계산하기 위해 먼저 사상
+$\delta(\sigma) : s(W) \to s(U)[-1] \oplus s(U)[-1]$을 계산한다.
+호몰로지의 보조정리 \ref{homology-lemma-ses-termwise-split}와 그 증명에
+따르면, 이를 위해 다음을 계산하여야 한다.
+% P02-E0146: Korean grammar cannot reproduce the frozen missing infinitive marker.
+% P02-E0147: frozen lowercase interval symbols are preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+d_{s(U \times \delta[1]), n} \circ \sigma_n
+-
+\sigma_{n - 1} \circ d_{s(W), n}
+$$
+그리고 이를
+$U_{n - 1} \cdot \alpha^{n - 1}_0 \oplus U_{n - 1} \cdot \alpha^{n - 1}_n$으로
+가는 사상으로 써야 한다. $\mathcal{A}$가 아벨 군의 범주인 경우만
+다룬다. $x \in U_n$에 대해 $(U \times \Delta[1])_n$의 직합 인자
+$U_n \cdot \alpha$에 있는 원소 $x$를 나타내는 축약 표기
+$x_{\alpha}$를 사용한다. 다음을 상기하자.
+$$
+d_{s(U \times \delta[1]), n}
+=
+\sum\nolimits_{i = 0}^n (-1)^i d^n_i
+$$
+여기서 $d^n_i$는 단체 대상 $U$의 사상 $d^n_i$에 의해 직합 인자
+$U_n \cdot \alpha$를 직합 인자
+$U_{n - 1} \cdot (\alpha \circ \delta^n_i)$로 보낸다.
+위 표기로는 이는 다음을 뜻한다.
+$$
+d_{s(U \times \delta[1]), n}(x_\alpha) =
+\sum\nolimits_{i = 0}^n (-1)^i (d^n_i(x))_{\alpha \circ \delta^n_i}
+$$
+$x_\alpha \in W_n$, 다시 말해 어떤 $j \in \{1, \ldots, n\}$에 대해
+$\alpha = \alpha^n_j$인 것에서 출발하면
+$\sigma_n(x_\alpha) = x_\alpha - x_{\alpha^n_0}$이고, 따라서
+$$
+(d_{s(U \times \delta[1]), n} \circ \sigma_n)(x_\alpha)
+=
+\sum\nolimits_{i = 0}^n (-1)^i (d^n_i(x))_{\alpha \circ \delta^n_i}
+-
+\sum\nolimits_{i = 0}^n (-1)^i (d^n_i(x))_{\alpha^n_0 \circ \delta^n_i}
+$$
+이다. $d_{s(W), n}(x_\alpha)$를 계산하려면
+$\alpha \circ \delta^n_i = \alpha^{n - 1}_0, \alpha^{n - 1}_n$인 모든
+항을 생략해야 한다. 따라서
+% P02-E0148: frozen exclusion predicate is preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+\begin{matrix}
+(\sigma_{n - 1} \circ d_{s(W), n})(x_\alpha) = \\
+\sum\nolimits_{i = 0, \ldots, n\text{ and }
+\alpha \circ \delta^n_i \not = \alpha^{n - 1}_0\text{ or }\alpha^{n - 1}_n}
+\Big((-1)^i (d^n_i(x))_{\alpha \circ \delta^n_i}
+-
+(-1)^i (d^n_i(x))_{\alpha^{n - 1}_0}
+\Big)
+\end{matrix}
+$$
+를 얻는다. 두 항의 차는 분명 합
+$$
+\sum\nolimits_{i = 0, \ldots, n\text{ and }
+\alpha \circ \delta^n_i = \alpha^{n - 1}_0\text{ or }\alpha^{n - 1}_n}
+\Big((-1)^i (d^n_i(x))_{\alpha \circ \delta^n_i}
+-
+(-1)^i (d^n_i(x))_{\alpha^{n - 1}_0}
+\Big)
+$$
+이다. 물론 $\alpha \circ \delta^n_i = \alpha^{n - 1}_0$이면 그 항은
+사라진다. 어떤 $j \in \{1, \ldots, n\}$에 대해
+$\alpha = \alpha^n_j$임을 상기하자.
+$\alpha^n_j \circ \delta^n_i = \alpha^{n - 1}_n$이 될 수 있는 유일한
+경우는 $j = n$이고 $i = n$인 경우이다. 따라서 실제로 $j = n$이
+아니면 $0$을 얻고, 그 경우에는
+$(-1)^n(d^n_n(x))_{\alpha^{n - 1}_n} - (-1)^n(d^n_n(x))_{\alpha^{n - 1}_0}$을
+얻는다. 다시 말해 사상
+$$
+\delta(\sigma)_n :
+W_n
+\to
+(s(U)[-1] \oplus s(U)[-1])_n = U_{n - 1} \oplus U_{n - 1}
+$$
+은 $U_n \cdot \alpha^n_n$을 제외한 모든 직합 인자에서 영이고,
+그 직합 인자에서는 $((-1)^nd^n_n, -(-1)^nd^n_n)$과 같다는 결론을
+얻는다. (두 직합 인자 가운데 첫째는 $\alpha^{n - 1}_n$인 인자에
+대응한다. 이는 모든 원소를 $0$으로 보내는 사상
+$[n - 1] \to [1]$이므로 $e_0$에 대응하기 때문이다.)
+
+\medskip\noindent
+표준 도식
+$$
+\xymatrix{
+0 \ar[r] &
+s(U) \oplus s(U) \ar[r] \ar[d] &
+\diamond{s(U)} \ar[r] \ar[d]^{\Phi}&
+s(U)[-1] \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+s(U) \oplus s(U) \ar[r] \ar[d] &
+s(U \times \Delta[1]) \ar[r] \ar[d]^\Psi &
+s(W) \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+s(U) \oplus s(U) \ar[r] &
+\diamond{s(U)} \ar[r] &
+s(U)[-1] \ar[r] &
+0
+}
+$$
+을 얻는다. $\Phi \circ \Psi$가 항등사상이라고 주장한다.
+이를 보이려면 $\Phi$와 $\delta(\sigma)$의 합성이 사상
+$s(U)[-1] \to s(W) \to s(U)[-1] \oplus s(U)[-1]$으로서 첫째
+인자에서는 항등사상이고 둘째에서는 항등사상의 음수임을 보이면
+충분하다. 위 계산에 의해 이는
+% P02-E0149: frozen final face/degeneracy indices are preserved; see ERRATA_CANDIDATES.jsonl.
+$((-1)^nd^n_0, -(-1)^nd^n_0) \circ (-1)^n s^n_n = (1, -1)$
+이며, 이는 원하는 바이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{자명한 Kan 올뭉치}
+\label{section-trivial-kan}
+
+\noindent
+$n \geq 0$에 대해 단체 집합 $\Delta[n]$은 규칙
+$[k] \mapsto \Mor_\Delta([k], [n])$로 주어짐을 상기하자. 예
+\ref{example-simplex-simplicial-set}을 보라. $\Delta[n]$은 유일한
+비퇴화 $n$-단체를 가지며 모든 비퇴화 단체는 이 $n$-단체의 면임을
+상기하자. 실제로 $\Delta[n]$의 비퇴화 단체들은 단사 사상
+$[k] \to [n]$과 정확히 대응하며, 이를 $[n]$의 부분집합들과 식별할 수
+있다. 또한 임의의 단체 집합 $X$에 대해
+$\Mor(\Delta[n], X) = X_n$임을 상기하자(보조정리
+\ref{lemma-simplex-map}). 다음과 같이 놓는다.
+$$
+\partial \Delta[n] = i_{(n - 1)!}\text{sk}_{n - 1}\Delta[n]
+$$
+이를 $\Delta[n]$의 {it 경계}라 한다. 보조정리
+\ref{lemma-n-skeleton-sets}에 의해
+$\partial \Delta[n] \subset \Delta[n]$은 차수 $\leq n - 1$에서 같은
+비퇴화 단체들을 가지지만 비퇴화 $n$-단체를 포함하지 않는 단체
+부분집합이다.
+
+\begin{definition}
+\label{definition-trivial-kan}
+단체 집합의 사상 $X \to Y$에 대해 $X_0 \to Y_0$가 전사이고, 모든
+$n \geq 1$ 및 임의의 실선 가환도식
+$$
+\xymatrix{
+\partial \Delta[n] \ar[r] \ar[d] & X \ar[d] \\
+\Delta[n] \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+에 대해 도식을 가환으로 만드는 점선 화살표가 존재하면 이를
+{it 자명한 Kan 올뭉치}라 한다.
+\end{definition}
+
+\noindent
+자명한 Kan 올뭉치는 매우 일반적인 올림 성질을 만족한다.
+
+\begin{lemma}
+\label{lemma-trivial-kan}
+$f : X \to Y$를 단체 집합의 자명한 Kan 올뭉치라 하자. 단체 집합들의
+임의의 실선 가환도식
+$$
+\xymatrix{
+Z \ar[r]_b \ar[d] & X \ar[d] \\
+W \ar[r]^a \ar@{-->}[ru] & Y
+}
+$$
+에서 $Z \to W$가 각 항에서 단사이면, 도식을 가환으로 만드는 점선
+화살표가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$Z \not = W$라고 가정하자. $Z_n \not = W_n$인 가장 작은 정수 $n$을
+택하자. $x \in W_n$, $x \not \in Z_n$을 택하자. $Z$, $x$, 그리고
+$x$의 모든 퇴화를 포함하는 단체 부분집합을 $Z' \subset W$로 나타내자.
+$\varphi : \Delta[n] \to Z'$를 $x$에 대응하는 사상이라 하자
+(보조정리 \ref{lemma-simplex-map}).
+$\partial \Delta[n]$의 모든 비퇴화 단체가 $Z$로 보내지므로
+$\varphi|_{\partial \Delta[n]}$는 $Z$로 간다. 가정에 의해
+$b \circ \varphi|_{\partial \Delta[n]}$를
+$\beta : \Delta[n] \to X$로 확장할 수 있다. 보조정리
+\ref{lemma-glue-simplex}에 의해 단체 집합 $Z'$은
+$\partial \Delta[n]$을 따라 붙인 $\Delta[n]$과 $Z$의 밂이다. 따라서
+$b$와 $\beta$는 사상 $b' : Z' \to X$를 정의한다. 다시 말해 사상
+$b$를 $Z$의 더 큰 단체 부분집합으로 확장하였다.
+% P02-E0150: frozen proof calls Z' a larger simplicial subset of Z rather than W.
+
+\medskip\noindent
+초른 보조정리를 적용하면 증명이 끝난다(생략).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-trivial-kan-base-change}
+$f : X \to Y$를 단체 집합의 자명한 Kan 올뭉치라 하자.
+$Y' \to Y$를 단체 집합의 사상이라 하자. 그러면
+$X \times_Y Y' \to Y'$는 자명한 Kan 올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+이는 섬유곱의 함자적 성질(보조정리 \ref{lemma-fibre-product})과 정의에서
+즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-trivial-kan-composition}
+두 자명한 Kan 올뭉치의 합성은 자명한 Kan 올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-limit-trivial-kan}
+$\ldots \to U^2 \to U^1 \to U^0$를 자명한 Kan 올뭉치들의 열이라 하자.
+$U_n = \lim U_n^t$로 취하여 $U = \lim U^t$를 정의하자. 그러면
+$U \to U^0$는 자명한 Kan 올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 도움말: 집합의 가산 전사열의 역극한은 공집합이 아니라는
+사실을 사용하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-product-trivial-kan}
+\begin{slogan}
+자명한 Kan 올뭉치들의 곱은 자명한 Kan 올뭉치이다.
+\end{slogan}
+$X_i \to Y_i$를 자명한 Kan 올뭉치들의 집합이라 하자. 그러면
+$\prod X_i \to \prod Y_i$는 자명한 Kan 올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-filtered-colimit-trivial-kan}
+자명한 Kan 올뭉치들의 여과 쌍대극한은 자명한 Kan 올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 도움말: 범주론의 절
+\ref{categories-section-directed-colimits}에 있는 집합의 여과 쌍대극한
+설명을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-trivial-kan-homotopy}
+$f : X \to Y$를 단체 집합의 자명한 Kan 올뭉치라 하자. 그러면 $f$는
+호모토피 동치이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-trivial-kan}에 의해 $f$의 오른쪽 역
+$g : Y \to X$를 택할 수 있다.
+% P02-E0151: Korean grammar cannot reproduce the frozen “an right inverse”.
+도식
+$$
+\xymatrix{
+\partial \Delta[1] \times X \ar[d] \ar[r] & X \ar[d] \\
+\Delta[1] \times X \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+을 생각하자. 위쪽 수평 화살표는 $\text{id}_X$와 $g \circ f$로 주어진다.
+여기서 모든 $n \geq 0$에 대해
+$(\partial \Delta[1] \times X)_n = X_n \amalg X_n$임을 사용한다.
+아래쪽 수평 화살표는 사상 $\Delta[1] \to \Delta[0]$과
+$f : X \to Y$로 주어진다. $f \circ g \circ f = f$이므로 도식은
+가환이다. 보조정리 \ref{lemma-trivial-kan}에 의해 점선 화살표를 채울
+수 있고 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+\section{Kan 올뭉치}
+\label{section-kan}
+
+\noindent
+$n$, $k$를 $0 \leq k \leq n$이고 $1 \leq n$인 정수들이라 하자.
+$\sigma_0, \ldots, \sigma_n$을 $\Delta[n]$의 유일한 비퇴화
+$n$-단체 $\sigma$의 $n + 1$개 면, 즉 $\sigma_i = d_i\sigma$라 하자.
+$$
+\Lambda_k[n] \subset \Delta[n]
+$$
+을 $n$-단체 $\Delta[n]$의 {it $k$번째 뿔}이라 한다. 이는
+$\sigma_0, \ldots, \hat \sigma_k, \ldots, \sigma_n$으로 생성되는
+$\Delta[n]$의 단체 부분집합이다. 다시 말해, 표시된 포함의 상은
+$\sigma$와 $\sigma_k$를 제외한 $\Delta[n]$의 모든 비퇴화 단체를
+포함한다.
+
+\begin{definition}
+\label{definition-kan}
+단체 집합의 사상 $X \to Y$에 대해 모든 $k, n$ 중
+$1 \leq n$, $0 \leq k \leq n$인 것 및 임의의 실선 가환도식
+$$
+\xymatrix{
+\Lambda_k[n] \ar[r] \ar[d] & X \ar[d] \\
+\Delta[n] \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+에 대해 도식을 가환으로 만드는 점선 화살표가 존재하면 이를
+{it Kan 올뭉치}라 한다. {it Kan 복합체}란
+$X \to *$가 Kan 올뭉치인 단체 집합 $X$를 말한다. 여기서 $*$는
+한원소 집합 위의 상수 단체 집합이다.
+\end{definition}
+
+\noindent
+$\Lambda_k[n]$은 언제나 공집합이 아님에 유의하라. 따라서 공집합인
+단체 집합에서 임의의 단체 집합으로 가는 사상은 언제나 Kan 올뭉치이다.
+보조정리 \ref{lemma-trivial-kan}에 의해 자명한 Kan 올뭉치는 Kan
+올뭉치이다.
+
+\begin{lemma}
+\label{lemma-kan-base-change}
+$f : X \to Y$를 단체 집합의 Kan 올뭉치라 하자. $Y' \to Y$를
+단체 집합의 사상이라 하자. 그러면 $X \times_Y Y' \to Y'$는 Kan
+올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+이는 섬유곱의 함자적 성질(보조정리 \ref{lemma-fibre-product})과 정의에서
+즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-kan-composition}
+두 Kan 올뭉치의 합성은 Kan 올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-limit-kan}
+$\ldots \to U^2 \to U^1 \to U^0$를 Kan 올뭉치들의 열이라 하자.
+$U_n = \lim U_n^t$로 취하여 $U = \lim U^t$를 정의하자. 그러면
+$U \to U^0$는 Kan 올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 도움말: 집합의 가산 전사열의 역극한은 공집합이 아니라는
+사실을 사용하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-product-kan}
+$X_i \to Y_i$를 Kan 올뭉치들의 집합이라 하자. 그러면
+$\prod X_i \to \prod Y_i$는 Kan 올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+\noindent
+다음 보조정리는 J.C.\ Moore에 의한 것이다. \cite{Moore-Cartan}을 보라.
+
+\begin{lemma}
+\label{lemma-simplicial-group-kan}
+$X$를 단체 군이라 하자. 그러면 $X$는 Kan 복합체이다.
+\end{lemma}
+
+\begin{proof}
+다음 증명은 본질적으로 위에서 언급한 문헌의 증명을 영어로 옮긴 것에
+불과하다. 이 절의 도입부에서 설명한 용어를 사용하여
+$f : \Lambda_k[n] \to X$가 뿔로부터 오는 사상이라고 가정하자.
+$i = 0, \ldots, \hat k, \ldots, n$에 대해
+$x_i = f(\sigma_i) \in X_{n - 1}$로 놓자. 이는 $i, j \not = k$인
+$i < j$에 대해 $d_i x_j = d_{j - 1} x_i$라는 뜻이다.
+$i = 0, \ldots, \hat k, \ldots, n$에 대해 $x_i = d_ix$인
+$x \in X_n$을 찾아야 한다.
+
+\medskip\noindent
+먼저 $i < k$에 대해 $d_i u = x_i$인 $u \in X_n$이 존재함을
+증명한다. $k = 0$이면 자명하다. $k > 0$이면 $0 \leq i \leq r$에
+대해 $d_i u^r = x_i$인 원소 $u^r \in X_n$을 귀납적으로 정의한다.
+$u^0 = s_0x_0$으로 시작하자. $r < k - 1$이면 다음과 같이 놓는다.
+$$
+y^r = s_{r + 1}((d_{r + 1}u^r)^{-1}x_{r + 1}),\quad
+u^{r + 1} = u^r y^r.
+$$
+간단한 계산에 의해 $i \leq r$에 대해 $d_iy^r = 1$(군
+$X_{n - 1}$의 항등원)이고
+$d_{r + 1}y^r = (d_{r + 1}u^r)^{-1}x_{r + 1}$이다. 따라서
+$i \leq r + 1$에 대해 $d_iu^{r + 1} = x_i$이다. 마지막으로
+$u = u^{k - 1}$로 택하면 약속한 $u$를 얻는다.
+
+\medskip\noindent
+다음으로 정수 $r$, $0 \leq r \leq n - k$에 대한 귀납법으로
+% P02-E0152: Korean grammar cannot reproduce the frozen “a x^r”.
+$$
+d_i x^r = x_i\quad\text{for }i < k\text{ and }i > n - r.
+$$
+을 만족하는 $x^r \in X_n$이 존재함을 증명한다. $r = 0$에서는
+$x^0 = u$로 시작한다. $r \leq n - k - 1$에 대해 $x^r$을 정의했으면
+다음과 같이 놓는다.
+$$
+z^r = s_{n - r - 1}((d_{n - r}x^r)^{-1}x_{n - r}),\quad x^{r + 1} = x^rz^r
+$$
+주어진 관계들을 사용하는 간단한 계산에 의해 $i < k$ 및
+$i > n - r$에 대해 $d_iz^r = 1$이고
+$d_{n - r}(z^r) = (d_{n - r}x^r)^{-1}x_{n - r}$이다. 따라서
+$i < k$ 및 $i > n - r - 1$에 대해 $d_ix^{r + 1} = x_i$이다.
+마지막으로 $x = x^{n - k}$로 택하면 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-surjection-simplicial-abelian-groups-kan}
+$f : X \to Y$를 항마다 전사인 단체 아벨 군 사이의 준동형사상이라
+하자. 그러면 $f$는 단체 집합의 Kan 올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+정의 \ref{definition-kan}에서와 같은 실선 가환도식
+$$
+\xymatrix{
+\Lambda_k[n] \ar[r]_a \ar[d] & X \ar[d] \\
+\Delta[n] \ar[r]^b \ar@{-->}[ru] & Y
+}
+$$
+을 생각하자. 사상 $a$는 $i < j$, $i, j \not = k$에 대해
+$d_i x_j = d_{j - 1} x_i$를 만족하는
+$x_0, \ldots, \hat x_k, \ldots, x_n \in X_{n - 1}$에 대응한다.
+사상 $b$는 $i \not = k$에 대해 $d_iy = f(x_i)$인 원소
+$y \in Y_n$에 대응한다. $i \not = k$에 대해 $d_ix = x_i$이고
+$f(x) = y$인 $x \in X_n$을 만들어야 한다.
+
+\medskip\noindent
+$f$가 항마다 전사이므로 $f(x) = y$인 $x \in X_n$을 찾을 수 있다.
+$y$를 $0 = y - f(x)$로, 그리고 $i \not = k$에 대해 $x_i$를
+$x_i - d_ix$로 바꾸자. 그러면 $y = 0$이라고 가정할 수 있다.
+특히 $f(x_i) = 0$이다. 다시 말해 $X$를 $\Ker(f) \subset X$로,
+$Y$를 $0$으로 바꿀 수 있다. 이 경우 명제는 보조정리
+\ref{lemma-simplicial-group-kan}가 된다.
+% P02-E0153: Korean agreement cannot reproduce the frozen “statement become”.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-qis-simplicial-abelian-groups}
+$f : X \to Y$를 항마다 전사이고 연관 사슬 복합체에서 준동형사상을
+유도하는 단체 아벨 군 사이의 준동형사상이라 하자. 그러면 $f$는 단체
+집합의 자명한 Kan 올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+정의 \ref{definition-trivial-kan}에서와 같은 실선 가환도식
+$$
+\xymatrix{
+\partial \Delta[n] \ar[r]_a \ar[d] & X \ar[d] \\
+\Delta[n] \ar[r]^b \ar@{-->}[ru] & Y
+}
+$$
+을 생각하자. 사상 $a$는 $i < j$에 대해
+$d_i x_j = d_{j - 1} x_i$를 만족하는
+$x_0, \ldots, x_n \in X_{n - 1}$에 대응한다. 사상 $b$는
+$d_iy = f(x_i)$인 원소 $y \in Y_n$에 대응한다. $d_ix = x_i$이고
+$f(x) = y$인 $x \in X_n$을 만들어야 한다.
+
+\medskip\noindent
+$f$가 항마다 전사이므로 $f(x) = y$인 $x \in X_n$을 찾을 수 있다.
+$y$를 $0 = y - f(x)$로, 그리고 $x_i$를 $x_i - d_ix$로 바꾸자.
+그러면 $y = 0$이라고 가정할 수 있다. 특히 $f(x_i) = 0$이다.
+다시 말해 $X$를 $\Ker(f) \subset X$로, $Y$를 $0$으로 바꿀 수 있다.
+이렇게 해도 되는 까닭은 호몰로지의 보조정리
+\ref{homology-lemma-long-exact-sequence-chain}에 의해 $\Ker(f)$에 연관된
+사슬 복합체의 호몰로지가 영이고, 따라서 $\Ker(f) \to 0$이 연관 사슬
+복합체에서 준동형사상을 유도하기 때문이다.
+
+\medskip\noindent
+$X$가 Kan 복합체이므로(보조정리 \ref{lemma-simplicial-group-kan})
+$i = 0, \ldots, n - 1$에 대해 $d_i x = x_i$인 $x \in X_n$을 찾을 수
+있다. $i = 0, \ldots, n$에 대해 $x_i$를 $x_i - d_ix$로 바꾸면
+$x_0 = x_1 = \ldots = x_{n - 1} = 0$이라고 가정할 수 있다.
+이 경우 $i = 0, \ldots, n - 1$에 대해 $d_i x_n = 0$이다. 따라서
+$x_n \in N(X)_{n - 1}$이고 미분
+$N(X)_{n - 1} \to N(X)_{n - 2}$의 핵에 속한다. 여기서 $N(X)$는
+$X$에 연관된 정규화 사슬 복합체이다. 절 \ref{section-complexes}를
+보라. $N(X)$는 $s(X)$와 준동형이므로(보조정리
+\ref{lemma-quasi-isomorphism}) 비순환이고, 미분이 $x_n$인
+% P02-E0154: frozen N(X_n) notation is preserved; see ERRATA_CANDIDATES.jsonl.
+$x \in N(X_n)$을 찾을 수 있다. 이 $x$가 보조정리에서 요구한 답이고
+증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-homotopy-equivalence}
+$f : X \to Y$를 단체 아벨 군 사이의 사상이라 하자. $f$가 단체 집합의
+호모토피 동치이면, $f$는 연관 사슬 복합체의 준동형사상을 유도한다.
+\end{lemma}
+
+\begin{proof}
+이 증명에서는 $Z$가 단체 아벨 군일 때 절 \ref{section-complexes}에서와
+같은 $s$와 $N$을 사용하여
+$H_n(Z) = H_n(s(Z)) = H_n(N(Z))$로 쓰겠다. 단체 집합으로 본 $X$ 위의
+자유 아벨 군을 $\mathbf{Z}[X]$로 나타내고, $\mathbf{Z}[Y]$도 마찬가지로
+나타내자. 단체 아벨 군의 가환도식
+$$
+\xymatrix{
+\mathbf{Z}[X] \ar[r]_g \ar[d] &
+\mathbf{Z}[Y] \ar[d] \\
+X \ar[r]^f & Y
+}
+$$
+을 생각하자. 집합 위의 자유 아벨 군을 취하는 것은 함자이므로 수평
+화살표는 단체 아벨 군의 호모토피 동치이다. 보조정리
+\ref{lemma-functorial-homotopy}를 보라. 보조정리
+\ref{lemma-homotopy-equivalence-s-N}에 의해 모든 $n \geq 0$에 대해
+$H_n(g) : H_n(\mathbf{Z}[X]) \to H_n(\mathbf{Z}[Y])$는 전단사이다.
+
+\medskip\noindent
+$\xi \in H_n(Y)$라 하자. $N(Y)$의 정의에 의해 $\xi$는 경계가 영인
+원소 $y \in N(Y_n)$으로 나타낼 수 있다. 이는 $y \in N(Y_n)$이므로
+$y \in Y_n$이고 $d^n_0(y) = \ldots = d^n_{n - 1}(y) = 0$이며,
+$y$의 경계가 영이므로 $d^n_n(y) = 0$이라는 뜻이다.
+$0_n \in Y_n$을 영원소라 하자. 그러면
+$$
+\tilde y = [y] - [0_n] \in (\mathbf{Z}[Y])_n
+$$
+은 $d^n_0(\tilde y) = \ldots = d^n_{n - 1}(\tilde y) = 0$이고
+$d^n_n(\tilde y) = 0$인 원소이다. 따라서 $\tilde y$는
+$N(\mathbf{Z}[Y])_n$에 속하고 경계가 $0$이다. 즉, $\tilde y$는
+$\xi$로 가는 류 $\tilde \xi \in H_n(\mathbf{Z}[Y])$를 정한다.
+% P02-E0155: Korean supplies the conjunction omitted by the frozen English sentence.
+$H_n(\mathbf{Z}[X]) \to H_n(\mathbf{Z}[Y])$가 전단사이므로
+$\tilde \xi$를 $H_n(\mathbf{Z}[X])$의 류로 올릴 수 있다. 위 가환도식을
+보면 $\xi$가 $H_n(X) \to H_n(Y)$의 상에 속함을 알 수 있다.
+
+\medskip\noindent
+$\xi \in H_n(X)$가 $H_n(Y)$에서 영으로 가는 원소라 하자. 바로 앞
+문단에서와 똑같이 $\xi$를 경계가 영인 원소 $x \in N(X_n)$으로 나타낼
+수 있다. 즉,
+% P02-E0156: Korean carries the intended “paragraph” meaning; frozen typo is sidecar-bound.
+$d^n_0(x) = \ldots = d^n_{n - 1}(x) = d^n_n(x) = 0$이다. 특히
+$[x] - [0_n]$은 경계가 영인 $N(\mathbf{Z}[X])_n$의 원소이므로
+$\xi$의 올림 $\tilde \xi \in H_n(\mathbf{Z}[x])$를 정의한다.
+% P02-E0157: frozen lowercase x in the ambient homology group is preserved.
+$\xi$가 $H_n(Y)$에서 영으로 간다는 것은 경계가 $f_n(x)$인
+$y \in N(Y_{n + 1})$이 존재한다는 뜻이다. 이는
+$d^{n + 1}_0(y) = \ldots = d^{n + 1}_n(y) = 0$이고
+$d^{n + 1}_{n + 1}(y) = f(x)$라는 뜻이다. 그런데 이는 정확히
+% P02-E0158: frozen lowercase y in the ambient normalized complex is preserved.
+$z = [y] - [0_{n + 1}]$가 $N(\mathbf{Z}[y])_{n + 1}$에 속하고
+$$
+g([x] - [0_n]) = [f(x)] - [0_n] = \text{boundary of }z
+$$
+임을 뜻한다. 이로써 $\tilde \xi$가 $H_n(\mathbf{Z}[y])$에서 영으로
+감을 알 수 있다.
+% P02-E0159: frozen lowercase y in the target homology group is preserved.
+$H_n(\mathbf{Z}[X]) \to H_n(\mathbf{Z}[Y])$가 전단사이므로
+$\tilde \xi = 0$, 따라서 $\xi = 0$이라는 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+
+\section{한 호모토피 동치}
+\label{section-homotopy-equivalence}
+
+\noindent
+$A$, $B$를 집합이라 하고 $f : A \to B$를 사상이라 하자. 연관된
+단체 집합의 사상
+$$
+\xymatrix{
+\text{cosk}_0(A) \ar@{=}[r] &
+\Big(\ldots A \times A \times A
+\ar[d] \ar@<2ex>[r] \ar@<0ex>[r] \ar@<-2ex>[r] &
+A \times A \ar[d] \ar@<1ex>[r] \ar@<-1ex>[r] \ar@<1ex>[l] \ar@<-1ex>[l] &
+A \Big) \ar[d] \ar@<0ex>[l] \\
+\text{cosk}_0(B) \ar@{=}[r] &
+\Big( \ldots B \times B \times B \ar@<2ex>[r] \ar@<0ex>[r] \ar@<-2ex>[r] &
+B \times B \ar@<1ex>[r] \ar@<-1ex>[r] \ar@<1ex>[l] \ar@<-1ex>[l] &
+B \Big) \ar@<0ex>[l]
+}
+$$
+을 생각하자. 예 \ref{example-cosk0}을 보라. 다음 보조정리의
+$n = 0$인 경우에 따르면 $f$가 전사이면 이 단체 집합의 사상은
+자명한 Kan 올뭉치이다.
+
+\begin{lemma}
+\label{lemma-section}
+$f : V \to U$를 단체 집합의 사상이라 하자. $n \geq 0$을 정수라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $i < n$에 대해 사상 $f_i : V_i \to U_i$는 전단사이다.
+\item 사상 $f_n : V_n \to U_n$은 전사이다.
+\item 표준 사상 $U \to \text{cosk}_n \text{sk}_n U$는 동형사상이다.
+\item 표준 사상 $V \to \text{cosk}_n \text{sk}_n V$는 동형사상이다.
+\end{enumerate}
+그러면 $f$는 자명한 Kan 올뭉치이다.
+\end{lemma}
+
+\begin{proof}
+정의 \ref{definition-trivial-kan}에서와 같은 실선 도식
+$$
+\xymatrix{
+\partial \Delta[k] \ar[r] \ar[d] & V \ar[d] \\
+\Delta[k] \ar[r] \ar@{-->}[ru] & U
+}
+$$
+을 생각하자. 아래쪽 수평 화살표에 대응하는 $k$-단체를
+$x \in U_k$라 하자. $k \leq n$이면 점선 화살표는 $x$의 올림
+$y \in V_k$에 대응하는 화살표이다. $\Delta[k]$의 다른 비퇴화
+단체들은 $f$가 동형사상인 차수 $< k$에 있으므로 도식은 가환한다.
+$k > n$이면 조건 (3), (4)와 뼈대 및 쌍대뼈대 함자의 수반성을 사용하여
+$$
+\Mor(\Delta[k], U) =
+\Mor(\text{sk}_n\Delta[k], \text{sk}_nU) =
+\Mor(\text{sk}_n\partial\Delta[k], \text{sk}_nU) =
+\Mor(\partial \Delta[k], U)
+$$
+를 얻으며, $k > n$에 대해
+$\text{sk}_n\Delta[k] = \text{sk}_n\partial\Delta[k]$이므로 $V$에
+대해서도 마찬가지이다. 따라서 이 경우에도 도식에 들어맞는 유일한
+점선 화살표를 얻는다.
+\end{proof}
+
+\noindent
+$A, B$를 집합이라 하자. $f^0, f^1 : A \to B$를 집합의 사상이라 하자.
+같은 기호로 나타내는 유도 사상
+$f^0, f^1 : \text{cosk}_0(A) \to \text{cosk}_0(B)$를 생각하자. 다음
+보조정리의 $n = 0$인 경우에 따르면 $f^0$은 $f^1$과 호모토픽이다.
+실제로 성분이 다음과 같은, $f^0$에서 $f^1$로 가는 호모토피가 있다.
+% P02-E0160: frozen homotopy codomain cosk_0(A), rather than cosk_0(B), is preserved.
+$h : \text{cosk}_0(A) \times \Delta[1] \to \text{cosk}_0(A)$
+\begin{eqnarray*}
+h_m : A \times \ldots \times A \times \Mor_{\Delta}([m], [1])
+& \longrightarrow &
+B \times \ldots \times B, \\
+(a_0, \ldots, a_m, \alpha) & \longmapsto &
+(f^{\alpha(0)}(a_0), \ldots, f^{\alpha(m)}(a_m))
+\end{eqnarray*}
+이것이 성립함을 확인하기 위해 사상 $\varphi : [k] \to [m]$에 대한
+유도 사상들이
+$(a_0, \ldots, a_m) \mapsto (a_{\varphi(0)}, \ldots, a_{\varphi(k)})$와
+$\alpha \mapsto \alpha \circ \varphi$임에 유의하라. 따라서
+$h = (h_m)_{m \geq 0}$은 분명 원하는 단체 집합의 사상이다.
+
+\begin{lemma}
+\label{lemma-homotopy}
+$f^0, f^1 : V \to U$를 단체 집합의 사상이라 하자. $n \geq 0$을
+정수라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $j = 0, 1$에 대해 사상들 $f^j_i : V_i \to U_i$는
+$i < n$에서 같다.
+\item 표준 사상 $U \to \text{cosk}_n \text{sk}_n U$는 동형사상이다.
+\item 표준 사상 $V \to \text{cosk}_n \text{sk}_n V$는 동형사상이다.
+\end{enumerate}
+그러면 $f^0$은 $f^1$과 호모토픽이다.
+\end{lemma}
+
+\begin{proof}[첫째 증명]
+$W$를 $i < n$에 대해 $W_i = U_i$이고
+$W_n = U_n / \sim$인 $n$-절단 단체 집합이라 하자. 여기서 $\sim$은
+$y \in V_n$에 대한 $f^0(y) \sim f^1(y)$로 생성되는 동치관계이다.
+$i < n$인 $\varphi : [i] \to [n]$에 대응하는 사상
+$U(\varphi) : U_n \to U_i$는 몫사상 $U_n \to W_n$을 통해 분해되므로
+이는 잘 정의된다. 실제로 $f^0$과 $f^1$은 단체 집합의 사상이고 차수
+$< n$에서 같다. 다음으로 $\text{cosk}_n W$를 취하여 $W$를 단체
+집합으로 올린다. 보조정리 \ref{lemma-section}에 의해 사상
+$g : U \to W$는 자명한 Kan 올뭉치이다. 구성에 의해
+$g \circ f^0 = g \circ f^1$임에 유의하고, 이 사상을
+$f : V \to W$로 나타내자. 도식
+$$
+\xymatrix{
+\partial \Delta[1] \times V \ar[rr]_{f^0, f^1} \ar[d] & & U \ar[d] \\
+\Delta[1] \times V \ar[rr]^f \ar@{-->}[rru] & & W
+}
+$$
+을 생각하자. 보조정리 \ref{lemma-trivial-kan}에 의해 점선 화살표가
+존재하며 증명이 끝난다.
+\end{proof}
+
+\begin{proof}[둘째 증명]
+$e_i$와 합성하면 $f^i$를 되찾는 단체 집합의 사상
+$h : V \times \Delta[1] \to U$를 구성해야 한다. $n = 0$인 경우는
+보조정리 앞에서 다루었다. 따라서 $n \geq 1$이라고 가정할 수 있다.
+사상 $\Delta[1] \to \text{cosk}_1 \text{sk}_1 \Delta[1]$은
+동형사상이다. 보조정리 \ref{lemma-simplex-cosk}를 보라. 따라서
+$n \geq 1$이므로 $\Delta[1] \to \text{cosk}_n \text{sk}_n \Delta[1]$도
+동형사상이다. 보조정리 \ref{lemma-cosk-up}을 보라. 그러므로 사상
+$V \times \Delta[1] \to
+\text{cosk}_n \text{sk}_n (V \times \Delta[1])$도 동형사상이다.
+보조정리 \ref{lemma-cosk-product}를 보라. 다시 말해 호모토피를
+구성하려면 알맞은 $n$-절단 단체 집합의 사상
+$h : \text{sk}_n V \times \text{sk}_n \Delta[1] \to \text{sk}_n U$를
+구성하면 충분하다.
+
+\medskip\noindent
+$k = 0, \ldots, n - 1$에 대해 공식
+$h_k(v, \alpha) = f^0(v) = f^1(v)$로 $h_k$를 정의한다. 사상
+$h_n : V_n \times \Mor_{\Delta}([n], [1]) \to U_n$은 다음과 같이
+정의한다. $v \in V_n$과 $\alpha : [n] \to [1]$을 택하자.
+\begin{enumerate}
+\item $\Im(\alpha) = \{0\}$이면 $h_n(v, \alpha) = f^0(v)$로 놓는다.
+\item $\Im(\alpha) = \{0, 1\}$이면 $h_n(v, \alpha) = f^0(v)$로 놓는다.
+\item $\Im(\alpha) = \{1\}$이면 $h_n(v, \alpha) = f^1(v)$로 놓는다.
+\end{enumerate}
+$\varphi : [k] \to [l]$을 $\Delta_{\leq n}$의 사상이라 하자. 도식
+$$
+\xymatrix{
+V_{l} \times \Mor([l], [1]) \ar[r] \ar[d] & U_{l} \ar[d] \\
+V_{k} \times \Mor([k], [1]) \ar[r] & U_{k}
+}
+$$
+이 가환임을 보이겠다. $v \in V_{l}$과
+$\alpha : [l] \to [1]$을 택하자. 가환한다는 것은
+$$
+h_k(V(\varphi)(v), \alpha \circ \varphi)
+=
+U(\varphi)(h_l(v, \alpha)).
+$$
+라는 뜻이다. 거의 모든 경우에 이는
+$h_k(V(\varphi)(v), \alpha \circ \varphi) = f^0(V(\varphi)(v))$이고
+$U(\varphi)(h_l(v, \alpha)) = U(\varphi)(f^0(v))$라는 사실과
+$f^0$이 단체 집합의 사상이라는 사실로부터 따른다. 이것이 성립하지
+않는 유일한 경우들은 (A) $\Im(\alpha) = \{1\}$이고 $l = n$인 경우,
+또는 (B) $\Im(\alpha \circ \varphi) = \{1\}$이고 $k = n$인 경우이다.
+더 나아가 $V$의 임의의 퇴화 $n$-단체에 대해 반드시
+$f^0(v) = f^1(v)$이다. 따라서 위 경우들을 (A)
+$\Im(\alpha) = \{1\}$이고 $l = n$이며 $v$가 비퇴화인 경우와 (B)
+$\Im(\alpha \circ \varphi) = \{1\}$이고 $k = n$이며
+$V(\varphi)(v)$가 비퇴화인 경우로 더 좁힐 수 있다.
+
+\medskip\noindent
+경우 (A)에서는 $\Im(\alpha \circ \varphi) = \{1\}$도 성립한다.
+따라서 $h_l(v, \alpha) = f^1(v)$일 뿐만 아니라
+$h_k(V(\varphi)(v), \alpha \circ \varphi) = f^1(V(\varphi)(v))$이다.
+그러므로 $f^1$이 단체 집합의 사상이므로 관계가 성립한다.
+
+\medskip\noindent
+경우 (B)에서는 $l = k = n$이고 $\varphi$가 전단사라는 결론을 얻는다.
+그렇지 않으면 $V(\varphi)(v)$가 퇴화하기 때문이다. 따라서
+$\varphi = \text{id}_{[n]}$이고, 이는 자명한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cosk-minus-one-equivalence}
+$A$, $B$를 집합이라 하고 $f : A \to B$를 사상이라 하자.
+% P02-E0161: Korean grammar cannot reproduce the frozen “and that f”.
+$n$-단체가
+$$
+A \times_B A \times_B \ldots \times_B A\ (n + 1 \text{ factors)}.
+$$
+인 단체 집합 $U$를 생각하자. 예
+\ref{example-fibre-products-simplicial-object}을 보라. $f$가 전사이면
+$U \to B$는 자명한 Kan 올뭉치이다. 여기서 $B$는 값이 $B$인 상수
+단체 집합을 나타낸다.
+\end{lemma}
+
+\begin{proof}
+$U$가 데카르트적 정사각형
+$$
+\xymatrix{
+U \ar[d] \ar[r] & \text{cosk}_0(A) \ar[d] \\
+B \ar[r] & \text{cosk}_0(B)
+}
+$$
+에 들어맞음에 유의하라. 보조정리 \ref{lemma-section}에 의해 오른쪽
+수직 화살표가 자명한 Kan 올뭉치이므로, 보조정리
+\ref{lemma-trivial-kan-base-change}에 의해 왼쪽도 그러하다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{표준 분해를 위한 준비}
+\label{section-standard-pre}
+
+\noindent
+이 절의 내용은 \cite[부록 1]{Godement}에서 찾을 수 있다
+% P02-E0162: frozen introductory sentence has no terminal punctuation.
+
+\begin{example}
+\label{example-godement}
+$Y : \mathcal{C} \to \mathcal{C}$를 범주에서 자기 자신으로 가는
+함자라 하고, 함자 변환
+$$
+d : Y \longrightarrow \text{id}_\mathcal{C}
+\quad\text{and}\quad
+s : Y \longrightarrow Y \circ Y
+$$
+가 주어졌다고 가정하자. 이 변환들을 사용하여 단체 대상처럼 보이는
+것을 구성할 수 있다. 즉, $n \geq 0$에 대해
+$$
+X_n = Y \circ \ldots \circ Y \quad (n + 1\text{ compositions})
+$$
+로 정의한다. $n, m \geq 0$에 대해
+$X_{n + m + 1} = X_n \circ X_m$임에 유의하라. 다음으로 $n \geq 0$과
+$0 \leq j \leq n$에 대해 범주론의 절
+\ref{categories-section-formal-cat-cat}에서와 같은 표기를 사용하여
+$$
+d^n_j = 1_{X_{j - 1}} \star d \star 1_{X_{n - j - 1}} :
+X_n
+\to
+X_{n - 1}
+\quad\text{and}\quad
+s^n_j = 1_{X_{j - 1}} \star s \star 1_{X_{n - j - 1}} :
+X_n
+\to
+X_{n + 1}
+$$
+로 정의한다. 따라서 $d^n_j$, 각각 $s^n_j$는 $X_n$을 정의하는 합성에서
+왼쪽부터 센 $j$번째 $Y$에 각각 $d$, $s$를 사용하는 자연변환이다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-godement}
+예 \ref{example-godement}에서
+$$
+1_Y = (d \star 1_Y) \circ s = (1_Y \star d) \circ s
+\quad\text{and}\quad
+(s \star 1) \circ s = (1 \star s) \circ s
+$$
+이면 $X = (X_n, d^n_j, s^n_j)$는 $\mathcal{C}$의 자기함자 범주의
+단체 대상이고 $d : X_0 = Y \to \text{id}_\mathcal{C}$는 증강을
+정의한다.
+\end{lemma}
+
+\begin{proof}
+단체 대상을 얻음을 보이려면 보조정리
+\ref{lemma-characterize-simplicial-object}의 관계 (1)(a)--(e)가
+성립함을 확인해야 한다. $a \geq 0$에 대해 축약 표기
+$$
+1_a = 1_{X_{a - 1}} = 1_Y \star \ldots \star 1_Y \quad (a\text{ factors})
+$$
+를 사용하겠다. 이 표기로
+$$
+d^n_j = 1_j \star d \star 1_{n - j}
+\quad\text{and}\quad
+s^n_j = 1_j \star s \star 1_{n - j}
+$$
+이다. 함자의 변환 $a, a', b, b'$에 대해 이 공식의 $\star$와 $\circ$
+합성들이 잘 정의되면
+% P02-E0163: Korean carries the intended “functors”; frozen “funtors” is sidecar-bound.
+$(a' \circ a) \star (b' \circ b) = (a' \star b') \circ (a \star b)$
+라는 규칙을 거듭 사용할 것이다. 범주론의 보조정리
+\ref{categories-lemma-properties-2-cat-cats}를 보라.
+
+\medskip\noindent
+조건 (1)(a)는 언제나 성립한다($d$와 $s$에 아무 조건도 필요 없다).
+즉, $0 \leq i < j \leq n + 1$이라 하자. 다음을 보여야 한다.
+$d^n_i \circ d^{n + 1}_j = d^n_{j - 1} \circ d^{n + 1}_i$, 즉
+$$
+(1_i \star d \star 1_{n - i}) \circ
+(1_j \star d \star 1_{n + 1 - j}) =
+(1_{j - 1} \star d \star 1_{n + 1 - j}) \circ
+(1_i \star d \star 1_{n + 1 - i})
+$$
+이다. 왼쪽을 다음과 같이 다시 쓸 수 있다.
+\begin{align*}
+& (1_i \star d \star 1_{j - i - 1} \star 1_{n + 1 - j}) \circ
+(1_i \star 1_1 \star 1_{j - i - 1} \star d \star 1_{n + 1 - j}) \\
+& =
+1_i \star
+\left((d \star 1_{j - i - 1}) \circ
+(1_1 \star 1_{j - i - 1} \star d)\right) \star 1_{n + 1 - j} \\
+& =
+1_i \star d \star 1_{j - i - 1} \star d \star 1_{n + 1 - j} 
+\end{align*}
+둘째 등식은 $d \circ 1_1 = d$이고
+$1_{j - i} \circ (1_{j - i - 1} \star d) = 1_{j - i - 1} \star d$이므로
+성립한다. 비슷한 계산으로 오른쪽에서도 같은 결과를 얻는다.
+
+\medskip\noindent
+조건 (1)(b)를 확인하자. $0 \leq i < j \leq n - 1$이라 하자. 다음을
+보여야 한다.
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_{j - 1} \circ d^{n - 1}_i$, 즉
+$$
+(1_i \star d \star 1_{n - i}) \circ
+(1_j \star s \star 1_{n - 1 - j}) =
+(1_{j - 1} \star s \star 1_{n - 1 - j}) \circ
+(1_i \star d \star 1_{n - 1 - i})
+$$
+이다. 경우 (1)(a)와 같은 계산법에 의해 양변은
+$1_i \star d \star 1_{j - i - 1} \star s \star 1_{n - j - 1}$로
+간단해진다.
+
+\medskip\noindent
+조건 (1)(c)를 확인하자. $0 \leq j \leq n - 1$이라 하자. 다음을
+보여야 한다.
+$\text{id} = d^n_j \circ s^{n - 1}_j = d^n_{j + 1} \circ s^{n - 1}_j$, 즉
+$$
+1_n =
+(1_j \star d \star 1_{n - j}) \circ
+(1_j \star s \star 1_{n - 1 - j}) =
+(1_{j + 1} \star d \star 1_{n - j - 1}) \circ
+(1_j \star s \star 1_{n - 1 - j})
+$$
+이다. 이는 보조정리의 첫째 가정에서 쉽게 따른다.
+
+\medskip\noindent
+조건 (1)(d)를 확인하자. $0 < j + 1 < i \leq n$이라 하자. 다음을
+보여야 한다.
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_j \circ d^{n - 1}_{i - 1}$, 즉
+$$
+(1_i \star d \star 1_{n - i}) \circ
+(1_j \star s \star 1_{n - 1 - j}) =
+(1_j \star s \star 1_{n - 2 - j}) \circ
+(1_{i - 1} \star d \star 1_{n - i})
+$$
+이다. 경우 (1)(a)와 같은 계산법에 의해 양변은
+$1_j \star s \star 1_{i - j - 2} \star d \star 1_{n - i}$로
+간단해진다.
+
+\medskip\noindent
+조건 (1)(e)를 확인하자. $0 \leq i \leq j \leq n - 1$이라 하자.
+다음을 보여야 한다.
+$s^n_i \circ s^{n - 1}_j = s^n_{j + 1} \circ s^{n - 1}_i$, 즉
+$$
+(1_i \star s \star 1_{n - i}) \circ
+(1_j \star s \star 1_{n - 1 - j}) =
+(1_{j + 1} \star s \star 1_{n - 1 - j}) \circ
+(1_i \star s \star 1_{n - 1 - i})
+$$
+이다. 경우 (1)(a)와 같은 계산법에 의해 이는
+$$
+(s \star 1_{j - i + 1}) \circ (1_{j - i} \star s) =
+(1_{j - i + 1} \star s) \circ (s \star 1_{j - i})
+$$
+로 귀착된다. $j = i$이면 이는 보조정리의 두 가정 중 정확히 하나이다.
+$j > i$이면 경우 (1)(a)에서 한 것과 비슷한 계산에 의해 양변은 모두
+등식 $s \star 1_{j - i - 1} \star s$로 귀착된다.
+
+\medskip\noindent
+마지막으로 $d$가 증강을 정의함을 보이려면
+$d \circ (1_1 \star d) = d \circ (d \star 1_1)$임을 보여야 하는데,
+양변이 모두 $d \star d$와 같으므로 이는 성립한다.
+\end{proof}
+
+\begin{example}
+\label{example-godement-functorial}
+$\mathcal{C}$, $Y$, $d$, $s$를 예 \ref{example-godement}에서와 같이
+놓고 보조정리 \ref{lemma-godement}의 등식들을 만족한다고 하자.
+함자 $F : \mathcal{A} \to \mathcal{C}$와
+$G : \mathcal{C} \to \mathcal{B}$가 주어지면 $\mathcal{A}$에서
+$\mathcal{B}$로 가는 함자들의 범주에서 단체 대상
+$G \circ X \circ F$를 얻고, 이는 $G \circ F$로 가는 증강을 갖는다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-godement-section}
+$\mathcal{A}$, $\mathcal{B}$, $\mathcal{C}$, $Y$, $d$, $s$, $F$, $G$를
+예 \ref{example-godement-functorial}에서와 같이 놓자. 다음을 만족하는
+함자 변환 $h_0 : G \circ F \to G \circ Y \circ F$가 주어졌다고 하자.
+$$
+1_{G \circ F} = (1_G \star d \star 1_F) \circ h_0
+$$
+그러면 단체 대상의 사상 $h : G \circ F \to G \circ X \circ F$가
+존재하여 $\epsilon \circ h = \text{id}$이다. 여기서
+$\epsilon : G \circ X \circ F \to G \circ F$는 증강이다.
+\end{lemma}
+
+\begin{proof}
+$u_n : Y = X_0 \to X_n$을 $\Delta$의 유일한 사상 $[n] \to [0]$에
+대응하는 단체 대상 $X$의 사상이라 하자.
+$h_n : G \circ F \to G \circ X_n \circ F$를
+$(1_G \star u_n \star 1_F) \circ h_0$과 같다고 놓자.
+
+\medskip\noindent
+임의의 범주의 임의의 단체 대상 $X = (X_n)$에 대해
+$u =(u_n) : X_0 \to X$는 $X_0$ 위의 상수 단체 대상에서 $X$로 가는
+사상이다. 따라서 $h$는 $1_G \star u \star 1_F$와 $h_0$의 합성이므로
+단체 대상의 사상이다.
+
+\medskip\noindent
+$\epsilon \circ h = \text{id}$임을 확인하자. 다음을 계산한다.
+$$
+\epsilon_n \circ (1_G \star u_n \star 1_F) \circ h_0 =
+\epsilon_0 \circ h_0 = \text{id}
+$$
+첫째 등식은 $\epsilon$이 단체 대상의 사상이므로 성립하고, 둘째 등식은
+$\epsilon_0 = (1_G \star d \star 1_F)$이며 보조정리 명제의 가정을
+적용할 수 있으므로 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-godement-two-maps}
+$\mathcal{A}$, $\mathcal{B}$, $\mathcal{C}$, $Y$, $d$, $s$, $F$, $G$를
+예 \ref{example-godement-functorial}에서와 같이 놓자. 두 함자를
+$F' : \mathcal{A} \to \mathcal{C}$와
+$G' : \mathcal{C} \to \mathcal{B}$라 하자.
+$(a_n) : G \circ X \to G' \circ X$를 증강을 통해
+$a : G \to G'$와 양립하는 단체 대상의 사상이라 하자.
+$(b_n) : X \circ F \to X \circ F'$를 증강을 통해
+$b : F \to F'$와 양립하는 단체 대상의 사상이라 하자. 그러면 두 사상
+$$
+a \star (b_n), (a_n) \star b : G \circ X \circ F \to G' \circ X \circ F'
+$$
+는 호모토픽이다.
+\end{lemma}
+
+\begin{proof}
+사상들이 호모토픽임을 보이기 위해
+$$
+h_{n, i} : G \circ X_n \circ F \to G' \circ X_n \circ F'
+$$
+를 $n \geq 0$과 $0 \leq i \leq n + 1$에 대해 구성하여 보조정리
+\ref{lemma-relations-homotopy}에 설명된 관계들을 만족하게 한다.
+주석 \ref{remark-homotopy-better}도 보라. 보조정리
+\ref{lemma-relations-homotopy}의 조건 (1)을 만족시키려면
+$h_{n, 0} = a \star b_n$과 $h_{n , n + 1} = a_n \star b$로 놓아야
+한다. 따라서 자연스러운 선택은
+$$
+h_{n , i} = a_{i - 1} \star b_{n - i}
+$$
+이다($1 \leq i \leq n$). $a = a_{-1}$과 $b = b_{-1}$로 놓으면
+표시된 공식이 $0 \leq i \leq n + 1$에 대해 성립함을 알 수 있다.
+% P02-E0164: Korean carries the intended “formula”; frozen “formular” is sidecar-bound.
+
+\medskip\noindent
+$G \circ X \circ F$ 위에서
+$$
+d^n_j = 1_G \star 1_j \star d \star 1_{n - j} \star 1_F
+$$
+임을 상기하자. 여기서는 보조정리 \ref{lemma-godement}의 증명에서
+도입한 표기 $1_a = 1_{Y \circ \ldots \circ Y}$를 사용한다. 아래에서는
+이를 다음과 같이 다시 쓸 수 있다는 사실을 사용하겠다.
+\begin{align*}
+d^n_j
+& =
+d^j_j \star 1_{n - j} =
+d^{j + 1}_j \star 1_{n - j} = \ldots = d^{n - 1}_j \star 1_1 \\
+& =
+1_j \star d^{n - j}_0 = 1_{j - 1} \star d^{n - j + 1}_1 = \ldots =
+1_1 \star d^{n - 1}_{j - 1}
+\end{align*}
+물론 $G' \circ X \circ F'$ 위의 $d^n_j$에 대해서도 비슷한 공식들이
+있다.
+
+\medskip\noindent
+보조정리 \ref{lemma-relations-homotopy}의 조건 (2)를 확인하자.
+$i > j$라 하자. 다음을 보여야 한다.
+$$
+d^n_j \circ (a_{i - 1} \star b_{n - i}) =
+(a_{i - 2} \star b_{n - i}) \circ d^n_j
+$$
+$i - 1 \geq j$이므로 $d^n_j$의 가능한 표현 중 하나를 사용하여
+왼쪽을 다음과 같이 다시 쓸 수 있다.
+$$
+(d^{i - 1}_j \star 1_{n - i + 1}) \circ (a_{i - 1} \star b_{n - i}) =
+(d^{i - 1}_j \circ a_{i - 1}) \star b_{n - i} =
+(a_{i - 2} \circ d^{i - 1}_j) \star b_{n - i}
+$$
+마찬가지로 오른쪽은
+$$
+(a_{i - 2} \star b_{n - i}) \circ (d^{i - 1}_j \star 1_{n - i + 1}) =
+(a_{i - 2} \circ d^{i - 1}_j) \star b_{n - i}
+$$
+가 된다. 따라서 같은 결과를 얻어 (2)가 확인된다.
+
+\medskip\noindent
+보조정리 \ref{lemma-relations-homotopy}의 조건 (3)을 확인하자.
+$i \leq j$라 하자. 다음을 보여야 한다.
+$$
+d^n_j \circ (a_{i - 1} \star b_{n - i}) =
+(a_{i - 1} \star b_{n - 1 - i}) \circ d^n_j
+$$
+$j \geq i$이므로 왼쪽을 다음과 같이 다시 쓸 수 있다.
+$$
+(1_i \star d^{n - i}_{j - i}) \circ (a_{i - 1} \star b_{n - i}) =
+a_{i - 1} \star (b_{n - 1 - i} \circ d^{n - i}_{j - i})
+$$
+비슷한 변형으로 이것이 오른쪽과 같음을 알 수 있다.
+
+\medskip\noindent
+$G \circ X \circ F$ 위에서
+$$
+s^n_j = 1_G \star 1_j \star s \star 1_{n - j} \star 1_F
+$$
+임을 상기하자. 아래에서는 이를 다음과 같이 다시 쓸 수 있다는 사실을
+사용하겠다.
+\begin{align*}
+s^n_j
+& =
+s^j_j \star 1_{n - j} = s^{j + 1}_j \star 1_{n - j - 1} = \ldots =
+s^{n - 1}_j \star 1_1 \\
+& =
+1_j \star s^{n - j}_0 = 1_{j - 1} \star s^{n - j + 1}_1 = \ldots =
+1_1 \star s^{n - 1}_{j - 1}
+\end{align*}
+물론 $G' \circ X \circ F'$ 위의 $s^n_j$에 대해서도 비슷한 공식들이
+있다.
+
+\medskip\noindent
+보조정리 \ref{lemma-relations-homotopy}의 조건 (4)를 확인하자.
+$i > j$라 하자. 다음을 보여야 한다.
+$$
+s^n_j \circ (a_{i - 1} \star b_{n - i}) =
+(a_i \star b_{n - i}) \circ s^n_j
+$$
+$i - 1 \geq j$이므로 왼쪽을 다음과 같이 다시 쓸 수 있다.
+$$
+(s^{i - 1}_j \star 1_{n - i + 1}) \circ (a_{i - 1} \star b_{n - i}) =
+(s^{i - 1}_j \circ a_{i - 1}) \star b_{n - i} =
+(a_i \circ s^{i - 1}_j) \star b_{n - i}
+$$
+마찬가지로 오른쪽은
+$$
+(a_i \star b_{n - i}) \circ (s^{i - 1}_j \star 1_{n - i + 1}) =
+(a_i \circ s^{i - 1}_j) \star b_{n - i}
+$$
+가 되며, 이는 원하는 바이다.
+
+\medskip\noindent
+보조정리 \ref{lemma-relations-homotopy}의 조건 (5)를 확인하자.
+$i \leq j$라 하자. 다음을 보여야 한다.
+$$
+s^n_j \circ (a_{i - 1} \star b_{n - i}) =
+(a_{i - 1} \star b_{n + 1 - i}) \circ s^n_j
+$$
+위와 정확히 같은 논증에 의해 양변을 계산하면
+$a_{i - 1} \star (s^{n - i}_{j - i} \circ b_{n - i}) =
+a_{i - 1} \star (b_{n + 1 - i} \circ s^{n - i}_{j - i})$가 되므로
+이 등식은 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-godement-before-after}
+$\mathcal{C}$, $Y$, $d$, $s$를 예 \ref{example-godement}에서와 같이
+놓고 보조정리 \ref{lemma-godement}의 등식들을 만족한다고 하자.
+$f : \text{id}_\mathcal{C} \to \text{id}_\mathcal{C}$를 항등함자의
+자기준동형이라 하자. 그러면
+$f \star 1_X, 1_X \star f : X \to X$는 증강
+$\epsilon : X \to \text{id}_\mathcal{C}$을 통해 $f$와 양립하는 단체
+대상의 사상이다. 더 나아가 $f \star 1_X$와 $1_X \star f$는
+호모토픽이다.
+\end{lemma}
+
+\begin{proof}
+사상 $f \star 1_X$는 성분이
+$$
+X_n = \text{id}_\mathcal{C} \circ X_n
+\xrightarrow{f \star 1_{X_n}}
+\text{id}_\mathcal{C} \circ X_n = X_n
+$$
+인 사상이다. $\mathcal{C}$의 자기함자들의 변환 $a : F \to G$에 대해
+$a \circ (f \star 1_F) = f \star a = (f \star 1_G) \circ a$이다.
+따라서 $f \star 1_X$는 실제로 단체 대상의 사상이다.
+$1_X \star f$에 대해서도 마찬가지이다.
+
+\medskip\noindent
+사상들이 호모토픽임을 보이기 위해 $n \geq 0$과
+$0 \leq i \leq n + 1$에 대해 사상 $h_{n, i} : X_n \to X_n$을
+구성하여 보조정리 \ref{lemma-relations-homotopy}에 설명된 관계들을
+만족하게 한다. 주석 \ref{remark-homotopy-better}도 보라. 다음과 같이
+택할 수 있다.
+$$
+h_{n, i} = 1_i \star f \star 1_{n + 1 - i}
+$$
+여기서 $1_i$는 보조정리 \ref{lemma-godement}의 증명에서와 같은
+$Y \circ \ldots \circ Y$ 위의 항등변환이다.
+$h_{n, 0} = f \star 1_{X_n}$이고
+$h_{n, n + 1} = 1_{X_n} \star f$이므로 첫째 조건이 확인된다. 다른
+조건들을 확인할 때에는 보조정리 \ref{lemma-godement-two-maps}의
+증명에서 사상들 $d^n_j$와 $s^n_j$에 관해 한 논평을 사용한다.
+
+\medskip\noindent
+보조정리 \ref{lemma-relations-homotopy}의 조건 (2)를 확인하자.
+$i > j$라 하자. 다음을 보여야 한다.
+$$
+d^n_j \circ (1_i \star f \star 1_{n + 1 - i}) =
+(1_{i - 1} \star f \star 1_{n + 1 - i}) \circ d^n_j
+$$
+$i - 1 \geq j$이므로 $d^n_j$의 가능한 표현 중 하나를 사용하여
+왼쪽을 다음과 같이 다시 쓸 수 있다.
+$$
+(d^{i - 1}_j \star 1_{n - i + 1}) \circ (1_i \star f \star 1_{n + 1 - i}) =
+d^{i - 1}_j \star f \star 1_{n + 1 - i}
+$$
+마찬가지로 오른쪽은
+$$
+(1_{i - 1} \star f \star 1_{n + 1 - i}) \circ
+(d^{i - 1}_j \star 1_{n - i + 1}) =
+d^{i - 1}_j \star f \star 1_{n + 1 - i}
+$$
+가 된다. 따라서 같은 결과를 얻어 (2)가 확인된다.
+
+\medskip\noindent
+보조정리 \ref{lemma-relations-homotopy}의 조건 (3), (4), (5)는
+보조정리 \ref{lemma-godement-two-maps}의 증명 전략을 사용하여 정확히
+같은 방식으로 확인한다. 자세한 내용은 생략한다\footnote{$f$가
+가역이면 $(a_n) = 1_X$와
+$(b_n) = f^{-1} \star 1_X \star f$가 호모토픽임을 보이면 충분하다.
+그러나 이 경우 $a = b = 1_{\text{id}_\mathcal{C}}$이므로 이는 보조정리
+\ref{lemma-godement-two-maps}에서 따른다.}.
+\end{proof}
+
+
+
+
+
+
+\section{표준 분해}
+\label{section-standard}
+
+\noindent
+이 절의 내용 중 일부는 \cite[부록 1]{Godement}과
+\cite[I 1.5]{cotangent}에서 찾을 수 있다.
+
+\begin{situation}
+\label{situation-adjoint-functors}
+$\mathcal{A}$, $\mathcal{S}$를 범주라 하고
+$V : \mathcal{A} \to \mathcal{S}$를 왼쪽 수반
+$U : \mathcal{S} \to \mathcal{A}$를 갖는 함자라 하자.
+\end{situation}
+
+\noindent
+이 매우 일반적인 상황에서 $\mathcal{A}$에서 $\mathcal{A}$로 가는
+함자들의 범주에 단체 대상 $X$를 구성하겠다. 이 절의 본문을 읽기 전에
+뒤에서 제시할 예들을 살펴보기를 권한다.
+
+\medskip\noindent
+구성에는 범주론의 절 \ref{categories-section-formal-cat-cat}에서 정의한
+수평 합성을 사용한다. 범주론의 절 \ref{categories-section-adjoint}에
+있는 수반 사상들의 정의\footnote{수반의 여단위에 $\epsilon$을 사용할
+수 없다. 단체 대상의 증강에 $\epsilon$을 사용하려 하기 때문이다.}
+$$
+d : U \circ V \to \text{id}_\mathcal{A} \quad (\text{counit})
+\quad\text{and}\quad
+\eta : \text{id}_\mathcal{S} \to V \circ U \quad (\text{unit})
+$$
+에 따르면 합성들
+\begin{equation}
+\label{equation-composition}
+V \xrightarrow{\eta \star 1_V} V \circ U \circ V \xrightarrow{1_V \star d} V
+\quad\text{and}\quad
+U \xrightarrow{1_U \star \eta} U \circ V \circ U \xrightarrow{d \star 1_U} U
+\end{equation}
+은 항등사상이다. 여기서 사상 $\eta \star 1_V$를 정의할 때 $V$를
+$\text{id}_\mathcal{S} \circ V$와 말없이 식별하며, $1_V$는
+$\text{id}_V : V \to V$를 나타낸다. 뒤에서 이 표기와 이 관계들을
+거듭 사용하겠다. $n \geq 0$에 대해
+$$
+X_n = (U \circ V)^{\circ (n + 1)} =
+U \circ V \circ U \circ \ldots \circ U \circ V
+$$
+로 놓는다. 다시 말해 $X_n$은 $U \circ V$를 자기 자신과
+$(n + 1)$번 합성한 것이다. 또한 $X_{-1} = \text{id}_\mathcal{A}$로
+놓는다. 모든 $n, m \geq -1$에 대해
+$X_{n + m + 1} = X_n \circ X_m$이다. 함자의 사상들
+$$
+d^n_j : X_n \to X_{n - 1},\quad s^n_j : X_n \to X_{n + 1}
+$$
+을 구성하여 보조정리 \ref{lemma-relations-face-degeneracy}에 표시된
+관계들을 만족하게 함으로써 이 함자열에
+$\text{Fun}(\mathcal{A}, \mathcal{A})$의 단체 대상 구조를 주겠다.
+즉, 다음과 같이 놓는다.
+$$
+d^n_j = 1_{X_{j - 1}} \star d \star 1_{X_{n - j - 1}}
+\quad\text{and}\quad
+s^n_j = 1_{X_{j - 1} \circ U} \star \eta \star 1_{V \circ X_{n - j - 1}}
+$$
+마지막으로 $\epsilon_0 = d : X_0 \to X_{-1}$로 쓰자.
+
+\begin{lemma}
+\label{lemma-standard-simplicial}
+상황 \ref{situation-adjoint-functors}에서 계
+$X = (X_n, d^n_j, s^n_j)$는
+$\text{Fun}(\mathcal{A}, \mathcal{A})$의 단체 대상이고,
+$\epsilon_0$는 $X$에서 값이
+$X_{-1} = \text{id}_\mathcal{A}$인 상수 단체 대상으로 가는 증강
+$\epsilon$을 정의한다.
+\end{lemma}
+
+\begin{proof}
+$Y = U \circ V : \mathcal{A} \to \mathcal{A}$를 생각하자. 이미 변환
+$d : Y = U \circ V \to \text{id}_\mathcal{A}$가 있다. 다음과 같이
+나타내자.
+$$
+s = 1_U \star \eta \star 1_V :
+Y = U \circ \text{id}_\mathcal{S} \circ V
+\longrightarrow
+U \circ V \circ U \circ V = Y \circ Y
+$$
+이로써 예 \ref{example-godement}의 상황에 놓인다. 공식들로부터 위에서
+구성한 $X, d^n_i, s^n_i$와 예 \ref{example-godement}에서 $Y, d, s$로부터
+구성한 $X, s^n_i, s^n_i$가 일치함은 즉시 알 수 있다.
+% P02-E0165: frozen second triple repeats s_i^n and omits d_i^n; preserved here.
+따라서 보조정리 \ref{lemma-godement}에 의해 다음을 증명하면 충분하다.
+$$
+1_Y = (d \star 1_Y) \circ s = (1_Y \star d) \circ s
+\quad\text{and}\quad
+(s \star 1) \circ s = (1 \star s) \circ s
+$$
+첫째 등호는 등식
+$$
+1_U \star 1_V = (d \star 1_U \star 1_V) \circ (1_U \star \eta \star 1_V)
+$$
+으로 옮겨진다. 이는
+$1_U = (d \star 1_U) \circ (1_U \star \eta)$이면 성립하고, 이 등식은
+(\ref{equation-composition})에 의해 성립한다. 둘째 등호도 마찬가지이다.
+마지막 등식을 위해서는
+$$
+(1_U \star \eta \star 1_V \star 1_U \star 1_V) \circ
+(1_U \star \eta \star 1_V) =
+(1_U \star 1_V \star 1_U \star \eta \star 1_V) \circ
+(1_U \star \eta \star 1_V)
+$$
+을 증명해야 한다. 이를 위해서는
+$(\eta \star 1_V \star 1_U) \circ \eta = (1_V \star 1_U \star \eta) \circ \eta$
+를 증명하면 충분하며, 양변이 모두 $\eta \star \eta$와 같으므로 이는
+성립한다.
+\end{proof}
+
+\noindent
+다음 보조정리의 증명을 읽기 전에 보조정리의 목적을 이해하기 위해
+예 \ref{example-polynomial-algebra-homotopy}에서 논의할 예를 살펴보기를
+권한다.
+
+\begin{lemma}
+\label{lemma-standard-simplicial-homotopy}
+상황 \ref{situation-adjoint-functors}에서 사상들
+$$
+1_V \star \epsilon : V \circ X \to V,
+\quad\text{and}\quad
+\epsilon \star 1_U : X \circ U \to U
+$$
+은 호모토피 동치이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-standard-simplicial}의 증명에서와 같이
+$Y = U \circ V$로 놓아 예 \ref{example-godement}의 상황에 놓인다.
+
+\medskip\noindent
+첫째 호모토피 동치의 증명. 보조정리 \ref{lemma-godement-section}에
+의해 $1_V \star \epsilon$의 오른쪽 역인 사상
+$h : V \to V \circ X$를 구성하려면
+$1_V = (1_V \star d) \circ h_0$을 만족하는 사상
+$h_0 : V \to V \circ Y = V \circ U \circ V$를 구성하면 충분하다.
+물론 $h_0 = \eta \star 1_V$로 택하며, 등식은
+(\ref{equation-composition})에 의해 성립한다. 증명을 끝내려면 두 사상
+$$
+(1_V \star \epsilon) \circ h, 1_V \star \text{id}_X :
+V \circ X \longrightarrow V \circ X
+$$
+이 호모토픽임을 보여야 한다. 이는 보조정리
+\ref{lemma-godement-two-maps}에서 즉시 따른다(여기서
+$G = G' = V$이고 $F = F' = \text{id}_\mathcal{S}$이다).
+
+\medskip\noindent
+둘째 호모토피 동치의 증명. 보조정리 \ref{lemma-godement-section}에
+의해 $\epsilon \star 1_U$의 오른쪽 역인 사상
+$h : U \to X \circ U$를 구성하려면
+$1_U = (d \star 1_U) \circ h_0$을 만족하는 사상
+$h_0 : U \to Y \circ U = U \circ V \circ U$를 구성하면 충분하다.
+물론 $h_0 = 1_U \star \eta$로 택하며, 등식은
+(\ref{equation-composition})에 의해 성립한다. 증명을 끝내려면 두 사상
+$$
+(\epsilon \star 1_U) \circ h, \text{id}_X \star 1_U :
+X \circ U \longrightarrow X \circ U
+$$
+이 호모토픽임을 보여야 한다. 이는 보조정리
+\ref{lemma-godement-two-maps}에서 즉시 따른다(여기서
+$G = G' = \text{id}_\mathcal{A}$이고 $F = F' = U$이다).
+\end{proof}
+
+
+\begin{example}
+\label{example-module}
+$R$을 환이라 하자. 위 내용의 예로 망각 함자
+$i : \text{Mod}_R \to \textit{Sets}$와 집합 $E$에 $E$ 위의 자유
+$R$-가군 $R[E]$를 대응시키는 함자
+$F : \textit{Sets} \to \text{Mod}_R$를 취할 수 있다. $R$-가군 $M$에
+대해 단체 $R$-가군 $X(M)$은 다음 모양을 갖는다.
+$$
+X(M) =
+\left( \ldots
+\xymatrix{
+R[R[R[M]]]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+R[R[M]]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+R[M]
+\ar@<0ex>[l]
+}
+\right)
+$$
+이는 $M$으로 가는 증강을 갖는다. 또한 이 증강이 집합의 호모토피
+동치임을 보일 것이다. 보조정리들
+\ref{lemma-trivial-kan-homotopy}, \ref{lemma-homotopy-equivalence},
+\ref{lemma-qis-simplicial-abelian-groups}에 의해 이는 단체 가군
+$X(M)$에 연관된 사슬 복합체의 유일한 영이 아닌 코호몰로지 군이
+$M$이기를 요구하는 것과 동치이다.
+% P02-E0166: frozen source says cohomology group for a homologically indexed chain complex.
+\end{example}
+
+\begin{example}
+\label{example-polynomial-algebra}
+$A$를 환이라 하자. $\textit{Alg}_A$를 가환 $A$-대수들의 범주라 하자.
+위 내용의 예로 망각 함자 $i : \textit{Alg}_A \to \textit{Sets}$와
+집합 $E$에 $A$ 위에서 $E$에 관한 다항식 대수 $A[E]$를 대응시키는
+함자 $F : \textit{Sets} \to \textit{Alg}_A$를 취할 수 있다.
+(이 예와 예 \ref{example-module} 사이의 표기 중복을 양해해 주기 바란다.)
+$A$-대수 $B$에 대해 단체 $A$-대수 $X(B)$는 다음 모양을 갖는다.
+$$
+X(B) = \left( \ldots
+\xymatrix{
+A[A[A[B]]]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[A[B]]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[B]
+\ar@<0ex>[l]
+}
+\right)
+$$
+이는 $B$로 가는 증강을 갖는다. 또한 이 증강이 집합의 호모토피
+동치임을 보일 것이다. 보조정리들
+\ref{lemma-trivial-kan-homotopy}, \ref{lemma-homotopy-equivalence},
+\ref{lemma-qis-simplicial-abelian-groups}에 의해 이는 단체 $A$-가군으로
+본 $X(B)$에 연관된 $A$-가군 사슬 복합체의 유일한 영이 아닌
+코호몰로지 군이 $B$이기를 요구하는 것과 동치이다.
+% P02-E0166: second frozen cohomology-group occurrence is preserved.
+\end{example}
+
+\begin{example}
+\label{example-module-maps}
+예 \ref{example-module}에서 $X_n(M) = R[R[\ldots [M]\ldots]]$이며 괄호가
+$n + 1$개 있다. $X_1(M)$의 전형적인 원소
+$$
+\xi = \sum\nolimits_i r_i\left[\sum\nolimits_j r_{ij}[m_{ij}]\right]
+$$
+를 사용하여 위에서 구성한 사상들을 설명하자. 사상들
+$d_0, d_1 : R[R[M]] \to R[M]$은
+$$
+d_0(\xi) = \sum\nolimits_{i, j} r_ir_{ij}[m_{ij}]
+\quad\text{and}\quad
+d_1(\xi) = \sum\nolimits_i r_i\left[\sum\nolimits_j r_{ij}m_{ij}\right].
+$$
+로 주어진다. 사상들 $s_0, s_1 : R[R[M]] \to R[R[R[M]]]$은
+$$
+s_0(\xi) =
+\sum\nolimits_i r_i\left[\left[\sum\nolimits_j r_{ij}[m_{ij}]\right]\right]
+\quad\text{and}\quad
+s_1(\xi) = \sum\nolimits_i r_i\left[\sum\nolimits_j r_{ij}[[m_{ij}]]\right].
+$$
+로 주어진다.
+\end{example}
+
+\begin{example}
+\label{example-polynomial-algebra-maps}
+예 \ref{example-polynomial-algebra}에서
+$X_n(B) = A[A[\ldots [B]\ldots]]$이며 괄호가 $n + 1$개 있다.
+전형적인 원소
+$$
+\xi = \sum\nolimits_i a_i [x_{i, 1}] \ldots [x_{i, m_i}] \in A[A[B]] = X_1(B)
+$$
+를 사용하여 위에서 구성한 사상들을 설명하자. 여기서 각 $i, j$에 대해
+$$
+x_{i, j} = \sum a_{i, j, k} [b_{i, j, k, 1}] \ldots [b_{i, j, k, n_{i, j, k}}]
+\in A[B]
+$$
+로 쓸 수 있다. 물론 이는 끔찍하다! 표기를 간단히 하기 위해
+$A$-대수 사상들 $d_0, d_1 : A[A[B]] \to A[B]$이 무엇을 하는지
+알아보려면 일반적인 원소
+$$
+x = \sum a_k [b_{k, 1}] \ldots [b_{k, n_k}] \in A[B]
+$$
+에 대한 변수 $[x]$에 무슨 일이 생기는지 살펴보면 충분하다. 이에 대해
+$$
+d_0([x]) = x = \sum a_k [b_{k, 1}] \ldots [b_{k, n_k}]
+\quad\text{and}\quad
+d_1([x]) = \left[\sum a_k b_{k, 1} \ldots b_{k, n_k}\right]
+$$
+를 얻는다. 사상들 $s_0, s_1 : A[A[B]] \to A[A[A[B]]]$은
+$$
+s_0([x]) = \left[\left[\sum a_k [b_{k, 1}] \ldots [b_{k, n_k}]\right]\right]
+\quad\text{and}\quad
+s_1([x]) = \left[\sum a_k [[b_{k, 1}]] \ldots [[b_{k, n_k}]]\right]
+$$
+로 주어진다.
+\end{example}
+
+\begin{example}
+\label{example-polynomial-algebra-homotopy}
+예 \ref{example-polynomial-algebra}에서 논의한 예로 돌아가자. 보조정리
+\ref{lemma-standard-simplicial-homotopy}에 따르면 임의의 환 사상
+$A \to B$에 대해 단체 환의 사상
+$$
+\xymatrix{
+A[A[A[B]]] \ar[d]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[A[B]] \ar[d]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[B] \ar[d]
+\ar@<0ex>[l] \\
+B
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+B
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+B
+\ar@<0ex>[l]
+}
+$$
+은 기저 단체 집합에서 호모토피 동치이다. 더 나아가 보조정리
+\ref{lemma-standard-simplicial-homotopy}에서 구성한 역 사상은 차수
+$n$에서
+$$
+b \longmapsto [\ldots[b]\ldots]
+$$
+로 주어진다. 표기는 자명하다. 반대 방향으로 보조정리는 모든 집합
+$E$에 대해 환의 호모토피 동치
+$$
+\xymatrix{
+A[A[A[A[E]]]] \ar[d]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[A[A[E]]] \ar[d]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[A[E]] \ar[d]
+\ar@<0ex>[l] \\
+A[E]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[E]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[E]
+\ar@<0ex>[l]
+}
+$$
+가 있다고 말한다. 보조정리에서 구성한 역 사상은 차수 $n$에서 환 사상
+$$
+\sum a_{e_1,\ldots,e_p}[e_1][e_2] \ldots [e_p]
+\longmapsto
+\sum a_{e_1,\ldots,e_p}[\ldots[e_1]\ldots][\ldots[e_2]\ldots]
+\ldots [\ldots[e_p]\ldots]
+$$
+으로 주어진다(표기는 자명하다).
+\end{example}
+
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

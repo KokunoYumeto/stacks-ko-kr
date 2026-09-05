@@ -1,0 +1,1055 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{곡면의 특이점 해소 재론}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 차원 $2$인 뇌터 대수 공간의 특이점 해소를 논한다.
+앞 장에서 Lipman \cite{Lipman}을 따라 스킴의 곡면 특이점 해소를
+이미 논했다. 《곡면의 특이점 해소》 제
+\ref{resolve-section-introduction}절을 보라.
+이 장의 결과 대부분은 스킴에 관한 결과의 직접적인 귀결이다.
+
+\medskip\noindent
+별도로 명시하지 않는 한, 이 장의 모든 기하학적 대상은 대수 공간이다.
+따라서 ``$f : X \to Y$를 수정이라 하자''라고 말하면, 이는
+$f$가 《체 위의 공간》 정의
+\ref{spaces-over-fields-definition-modification}의 의미에서의 사상이라는 뜻이다.
+고유 사상 등의 용어에도 같은 관례를 적용한다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{수정}
+\label{section-modifications}
+
+\noindent
+$(A, \mathfrak m, \kappa)$를 뇌터 국소환이라 하자. 다음과 같이 놓는다.
+$S = \Spec(A)$이고 $U = S \setminus \{\mathfrak m\}$이다. 이 절에서는
+다음 범주를 생각한다.
+\begin{equation}
+\label{equation-modification}
+\left\{
+f : X \longrightarrow S
+\quad \middle| \quad
+\begin{matrix}
+X\text{는 대수 공간이다}\\
+f\text{는 고유 사상이다}\\
+f^{-1}(U) \to U\text{는 동형이다}
+\end{matrix}
+\right\}
+\end{equation}
+$X/S$에서 $X'/S$로 가는 사상은 $S$ 위의 구조 사상들과 양립하는
+대수 공간의 사상 $X \to X'$를 뜻한다. 《형식 공간의 대수화》
+제\ref{restricted-section-modifications}절에서 이 범주가 $A$의 완비화에만
+의존함을 보았고, 이 범주의 대상들이 갖는 몇 가지 기본 성질을 증명했다.
+이 절에서는 특히 $\dim(A) \leq 2$이거나 닫힌 올의 차원이
+기껏해야 $1$인 경우를 연구한다.
+
+\begin{lemma}
+\label{lemma-modification}
+$(A, \mathfrak m, \kappa)$를 $2$차원 뇌터 국소 정역이라 하고,
+$U = \Spec(A) \setminus \{\mathfrak m\}$이 정규 스킴이라고 하자.
+그러면 임의의 수정 $f : X \to \Spec(A)$는
+(\ref{equation-modification})에 속하는 사상이다.
+\end{lemma}
+
+\begin{proof}
+$f : X \to S$를 수정이라 하자. $f^{-1}(U) \to U$가 동형임을
+보이면 된다. $U$의 모든 닫힌점 $u$는 여차원 $1$이므로, 이는
+Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-modification-normal-iso-over-codimension-1}
+에서 따라온다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-closed-immersion-on-fibre}
+$(A, \mathfrak m, \kappa)$를 뇌터 국소환이라 하자.
+$g : X \to Y$를 범주 (\ref{equation-modification})의 사상이라 하자.
+특수 올 위에서 유도되는 사상 $X_\kappa \to Y_\kappa$가 닫힌 몰입이면,
+$g$도 닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+이는 More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-where-closed-immersion}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-dimension-special-fibre}
+$(A, \mathfrak m, \kappa)$를 차원이 $\geq 1$인 뇌터 국소 정역이라 하자.
+$f : X \to \Spec(A)$를 대수 공간의 사상이라 하자.
+다음 조건 중 적어도 하나가 성립한다고 가정하자.
+\begin{enumerate}
+\item $f$는 수정이다(Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-modification}),
+\item $f$는 alteration이다(Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-alteration}),
+\item $f$는 국소 유한형이고 준분리이며, $X$는 정수적이고,
+$\Spec(A)$의 일반점으로 가는 $|X|$의 점은 정확히 하나이다,
+\item $f$는 국소 유한형이고, $X$는 decent이며, $\Spec(A)$의 일반점으로
+가는 $|X|$의 점들은 $|X|$의 기약 성분들의 일반점들이다,
+% P10-E0403: frozen source contains the unresolved editorial placeholder below.
+\item 여기에 더 추가할 것.
+\end{enumerate}
+그러면 $\dim(X_\kappa) \leq \dim(A) - 1$이다.
+\end{lemma}
+
+\begin{proof}
+경우 (1), (2), (3)은 (4)의 특수한 경우이다. 아핀 스킴
+$U = \Spec(B)$와 \'etale 사상 $U \to X$를 택하자. 환 사상 $A \to B$는
+유한형이다. $\dim(U_\kappa) \leq \dim(A) - 1$임을 보여야 한다.
+$X$가 decent이므로, $U$의 기약 성분들의 일반점들은 $|X|$의 기약
+성분들의 일반점들 위에 놓이는 점들이다. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-generic-points}를 보라.
+따라서 $\Spec(B) \to \Spec(A)$의 $(0)$ 위 올은 $B$의 극소 소아이디얼
+$\mathfrak q_1, \ldots, \mathfrak q_r$들로 이루어진 (유한) 집합이다.
+그러므로 어떤 영이 아닌 $f \in A$에 대하여 $A_f \to B_f$는 유한이다
+(Algebra, Lemma \ref{algebra-lemma-generically-finite}).
+따라서 $\kappa(\mathfrak q_i)$는 $A$의 분수체의 유한 확대이다.
+$\mathfrak m$ 위에 놓이는 소아이디얼 $\mathfrak q \subset B$를 택하자. 그러면
+$$
+\dim(B_\mathfrak q) = \max \dim((B/\mathfrak q_i)_{\mathfrak q})
+\leq \dim(A)
+$$
+이다. 부등식은 $A \subset B/\mathfrak q_i$에 대한 차원 공식에서
+따라온다. Algebra, Lemma \ref{algebra-lemma-dimension-formula}를 보라.
+그러나 $B_\mathfrak q/\mathfrak m B_\mathfrak q$의 차원
+(이는 대응하는 점에서 $U_\kappa$의 국소환의 차원이다)은 적어도 하나 작다.
+극소 소아이디얼 $\mathfrak q_i$들이 $V(\mathfrak m)$에 들어 있지 않기 때문이다.
+Properties, Lemma \ref{properties-lemma-dimension}에 의해 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-modification-of-dim-2-is-projective-over-complete}
+$(A, \mathfrak m, \kappa)$가 차원 $2$인 완비 뇌터 국소 정역이면,
+$\Spec(A)$의 모든 수정은 $A$ 위에서 사영적이다.
+\end{lemma}
+
+\begin{proof}
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-projective-over-complete}에 의해,
+$\Spec(A)$의 임의의 수정 $X$의 특수 올의 차원이 $\leq 1$임을 보이면
+충분하다. 이는 Lemma \ref{lemma-dimension-special-fibre}에서 따라온다.
+\end{proof}
+
+
+
+
+
+
+
+\section{전략}
+\label{section-strategy}
+
+\noindent
+$S$를 스킴이라 하자. $X$를 $S$ 위의 decent 대수 공간이라 하자.
+$x_1, \ldots, x_n \in |X|$를 서로 다른 닫힌점들이라 하자.
+각 $i$에 대하여 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-space-elementary-etale-neighbourhood}에서와 같은
+초등 \'etale 근방 $(U_i, u_i) \to (X, x_i)$를 택한다.
+이는 $U_i$가 아핀 스킴이고, $U_i \to X$가 \'etale이고,
+$u_i$가 $x_i$ 위에 놓이는 $U_i$의 유일한 점이며,
+$\Spec(\kappa(u_i)) \to X$가 $x_i$를 표현하는 단사 사상이라는 뜻이다.
+$U_i$를 줄인 뒤, $j \not = i$이면 $x_j$로 가는 $U_i$의 점이 없다고
+가정할 수 있고 그렇게 가정한다. $u_i \in U_i$가 닫힌점임을 유의하라.
+
+\medskip\noindent
+$f^{-1}(X \setminus \{x_1, \ldots, x_n\}) \to
+X \setminus \{x_1, \ldots, x_n\}$가 동형을 유도하는 대수 공간의 사상
+$f : Y \to X$들의 범주를 $\mathcal{C}_{X, \{x_1, \ldots, x_n\}}$로
+나타낸다. 각 $i$에 대하여
+$g_i^{-1}(U_i \setminus \{u_i\}) \to U_i \setminus \{u_i\}$가 동형을
+유도하는 대수 공간의 사상 $g_i : Y_i \to U_i$들의 범주를
+$\mathcal{C}_{U_i, u_i}$로 나타낸다. 밑변환은 다음 함자를 정의한다.
+% P10-E0417: frozen source says "an functor"; Korean naturally has no article error.
+\begin{equation}
+\label{equation-equivalence}
+F :
+\mathcal{C}_{X, \{x_1, \ldots, x_n\}}
+\longrightarrow
+\mathcal{C}_{U_1, u_1} \times \ldots \times \mathcal{C}_{U_n, u_n}
+\end{equation}
+이 장의 문제들 중 적어도 일부를 스킴의 경우로 환원하기 위하여 다음
+보조정리를 사용한다.
+
+\begin{lemma}
+\label{lemma-equivalence}
+함자 $F$ (\ref{equation-equivalence})는 동치이다.
+\end{lemma}
+
+\begin{proof}
+$n = 1$인 경우는 Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-excision-modifications}이다.
+$n > 1$인 경우에도 정확히 같은 방식으로 증명할 수 있고, 또는 이 경우로부터
+유도할 수 있다. 예를 들어 $g_i : Y_i \to U_i$가
+$\mathcal{C}_{U_i, u_i}$의 대상들이라고 하자. 그러면 $n = 1$인 경우에 의해,
+$X \setminus \{x_i\}$ 위에서 동형이고 $U_i$로의 밑변환이
+% P10-E0404: frozen source names the undefined f_i rather than the given g_i.
+$f_i$인 $f'_i : Y'_i \to X$를 찾을 수 있다. 이제 다음과 같이 놓을 수 있다.
+$$
+f : Y = Y'_1 \times_X \ldots \times_X Y'_n \to X
+$$
+이는 $\mathcal{C}_{X, \{x_1, \ldots, x_n\}}$의 대상이고,
+$U_i \to X$에 의한 그 밑변환은 $g_i$를 복원한다. 따라서 이 함자는
+본질적으로 전사이다. 충실충만성의 증명은 생략한다.
+% P10-E0405: frozen English has the malformed phrase "fully faithfulness".
+\end{proof}
+
+\begin{lemma}
+\label{lemma-equivalence-properties}
+$X, x_i, U_i \to X, u_i$가 (\ref{equation-equivalence})에서와 같다고 하자.
+$f : Y \to X$가 $F$ 아래에서 $g_i : Y_i \to U_i$에 대응하면,
+$f$가 준콤팩트, 준분리, 분리, 국소 유한 표시, 유한 표시, 국소 유한형,
+유한형, 고유, 정수적, 유한인 것은 각각 모든 $i = 1, \ldots, n$에 대하여
+$g_i$가 그러한 것과 필요충분하다.
+\end{lemma}
+
+\begin{proof}
+이는 Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-excision-modifications-properties}에서 따라온다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-equivalence-fibre}
+$X, x_i, U_i \to X, u_i$가 (\ref{equation-equivalence})에서와 같다고 하자.
+$f : Y \to X$가 $F$ 아래에서 $g_i : Y_i \to U_i$에 대응하면,
+대수 공간으로서 $Y_{x_i} \cong (Y_i)_{u_i}$이다.
+\end{lemma}
+
+\begin{proof}
+$u_i \to x_i$가 동형이므로 명백하다.
+\end{proof}
+
+
+
+
+
+\section{이차 변환에 의한 지배}
+\label{section-quadratic-spaces}
+
+\noindent
+공간의 한 점에서의 블로업은 $X$가 decent인 경우에만 정의한다.
+
+\begin{definition}
+\label{definition-blowup-at-point}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 decent 대수 공간이라 하자.
+$x \in |X|$를 닫힌점이라 하자. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-space-closed-point}에 의해
+$x$를 닫힌 몰입 $i : \Spec(k) \to X$로 나타낼 수 있다.
+닫힌 부분공간 $Z = i(\Spec(k)) \subset X$에서의 $X$의 블로업을
+{\it $x$에서의 $X$의 블로업 $X' \to X$}이라 한다.
+\end{definition}
+
+\noindent
+이 일반성 아래에서는 $x$에서의 $X$의 블로업이 반드시 고유인 것은 아니다.
+그러나 $X$가 국소 뇌터이면 Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-blowing-up-projective}에 의해
+그 블로업은 고유이다.
+국소 뇌터 대수 공간이 뇌터일 필요충분조건은
+준콤팩트이고 준분리인 것임을 상기하자. 또한 국소 뇌터 대수 공간에서는
+준분리인 것과 decent인 것이 동치이다(Decent Spaces, Lemma
+\ref{decent-spaces-lemma-locally-Noetherian-decent-quasi-separated}).
+
+\begin{lemma}
+\label{lemma-equivalence-sequence-blowups}
+$X, x_i, U_i \to X, u_i$가 (\ref{equation-equivalence})에서와 같고,
+$f : Y \to X$가 $F$ 아래에서 $g_i : Y_i \to U_i$에 대응한다고 하자.
+그러면 $f$가 다음 분해를 가지며
+$$
+Y = Z_m \to Z_{m - 1} \to \ldots \to Z_1 \to Z_0 = X
+$$
+$Z_{j + 1} \to Z_j$가 $\{x_1, \ldots, x_n\}$ 위에 놓인 닫힌점
+$z_j$에서의 $Z_j$의 블로업인 것과, 각 $i$에 대하여 $g_i$가
+다음 분해를 가지며
+$$
+Y_i = Z_{i, m_i} \to Z_{i, m_i - 1} \to \ldots \to Z_{i, 1} \to Z_{i, 0} = U_i
+$$
+$Z_{i, j + 1} \to Z_{i, j}$가 $u_i$ 위에 놓인 닫힌점
+$z_{i, j}$에서의 $Z_{i, j}$의 블로업인 것은 필요충분하다.
+\end{lemma}
+
+\begin{proof}
+블로업은 표현 가능한 사상이다. 따라서 어느 경우든 귀납적으로
+$Z_j \to X$ 또는 $Z_{i, j} \to U_i$가 표현 가능함을 알 수 있다.
+그러므로 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-representable-named-properties}에 의해
+각 $Z_j$ 또는 $Z_{i, j}$는 decent 대수 공간이다.
+이로써 주장들이 의미를 가짐을 알 수 있다
+(블로업은 decent 공간에 대해서만 정의되기 때문이다).
+동치성을 보이기 위하여 먼저 블로업의 열
+$Z_m \to Z_{m - 1} \to \ldots \to Z_1 \to Z_0 = X$에서 시작하자.
+첫 사상 $Z_1 \to X$는 $x_i$ 중 하나, 이를테면 $x_1$에서의
+블로업으로 주어진다. $F$를 $Z_1 \to X$에 적용하면,
+% P10-E0406: frozen source repeats the predicate in this sentence.
+$Z_{1, 1} \to U_1$은 $u_1$에서의 블로업, 즉 $u_1$에서의 블로업이고,
+$i > 1$에 대해서는 $Z_{i, 0} = U_i$임을 알 수 있다.
+다음 단계에서는 $Z_1$ 위에서 $x_i$ 중 하나($i \geq 2$)를
+블로업하거나, $x_1$ 위의 $Z_1 \to X$의 올에서 닫힌점 $z_1$을 택한다.
+첫 번째 경우에는 무엇을 해야 할지가 명백하고, 두 번째 경우에는
+$(Z_1)_{x_1} \cong (Z_{1, 1})_{u_1}$
+(Lemma \ref{lemma-equivalence-fibre})을 이용하여 $z_1$에 대응하는
+닫힌점 $z_{1, 1} \in Z_{1, 1}$을 얻는다.
+그런 다음 $Z_{1, 2} \to Z_{1, 1}$을 $z_{1, 1}$에서의 블로업으로 둔다.
+이 과정을 계속하여 각 $g_i$의 분해를 구성한다.
+
+\medskip\noindent
+반대로 블로업의 열
+$Z_{i, m_i} \to Z_{i, m_i - 1} \to \ldots \to Z_{i, 1} \to Z_{i, 0} = U_i$
+가 주어지면, 정확히 같은 방식으로 $X$의 블로업의 열을 구성한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-make-ideal-principal}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 뇌터 대수 공간이라 하자.
+$T \subset |X|$를 다음을 만족하는 닫힌점 $x$들의 유한 집합이라 하자:
+(1) $X$는 $x$에서 정칙이고, (2) $x$에서의 $X$의 국소환은 차원 $2$이다.
+$\mathcal{I} \subset \mathcal{O}_X$를
+$\mathcal{O}_X/\mathcal{I}$가 $T$에 지지되는 준연접 아이디얼 층이라 하자.
+그러면 다음과 같은 열이 존재한다.
+$$
+X_m \to X_{m - 1} \to \ldots \to X_1 \to X_0 = X
+$$
+여기서 $X_{j + 1} \to X_j$는 $T$의 한 점 위에 놓인 닫힌점
+$x_j$에서의 $X_j$의 블로업이고,
+% P10-E0407: frozen source switches from the displayed X_m to X_n.
+$\mathcal{I}\mathcal{O}_{X_n}$은 가역 아이디얼 층이다.
+\end{lemma}
+
+\begin{proof}
+$T = \{x_1, \ldots, x_r\}$이라 하자. Section \ref{section-strategy}에서와 같은
+초등 \'etale 근방 $(U_i, u_i) \to (X, x_i)$를 택한다.
+각 $i$에 대하여 제한
+$\mathcal{I}_i = \mathcal{I}|_{U_i} \subset \mathcal{O}_{U_i}$는
+$u_i$에 지지되는 준연접 아이디얼 층이다.
+$u_i$에서의 $U_i$의 국소환은 정칙이고 차원 $2$이다.
+따라서 Resolution of Surfaces, Lemma
+\ref{resolve-lemma-make-ideal-principal}을 적용하여
+% P10-E0408: frozen i-indexed sequence uses the unindexed X_1.
+$$
+X_{i, m_i} \to X_{i, m_i - 1} \to \ldots \to X_1 \to X_{i, 0} = U_i
+$$
+라는, $u_i$ 위에 놓인 닫힌점들에서의 블로업의 열로서
+$\mathcal{I}_i \mathcal{O}_{X_{i, m_i}}$가 가역인 것을 얻는다.
+Lemma \ref{lemma-equivalence-sequence-blowups}에 의해
+다음과 같은, 보조정리의 명제에 나온 블로업의 열을 얻는다.
+$$
+X_m \to X_{m - 1} \to \ldots \to X_1 \to X_0 = X
+$$
+이 열을 우리의 $U_i$로 밑변환하면 주어진 열들이 나온다.
+따라서 $\mathcal{I}\mathcal{O}_{X_n}$은 가역 아이디얼 층이다.
+실제로 이것은
+% P10-E0409: frozen source uses the undefined n instead of r here.
+$X \setminus \{x_1, \ldots, x_n\}$ 위에서 성립함을 알고 있으며,
+각 $x_i$의 올의 한 \'etale 근방에서는 구성에 의해 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-dominate-by-blowing-up-in-points}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 뇌터 대수 공간이라 하자.
+$T \subset |X|$를 다음을 만족하는 닫힌점 $x$들의 유한 집합이라 하자:
+(1) $X$는 $x$에서 정칙이고, (2) $x$에서의 $X$의 국소환은 차원 $2$이다.
+$f : Y \to X$를 $U = X \setminus T$ 위에서 동형인
+대수 공간들의 고유 사상이라 하자. 그러면 다음과 같은 열이 존재한다.
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 = X
+$$
+여기서 $X_{i + 1} \to X_i$는 $T$의 한 점 위에 놓인 닫힌점
+$x_i$에서의 $X_i$의 블로업이고, 그 합성은
+$X_n \to Y \to X$로 분해된다.
+\end{lemma}
+
+\begin{proof}
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-dominate-modification-by-blowup}에 의해
+$Y \to X$를 지배하는 $U$-허용가능 블로업 $X' \to X$가 존재한다.
+따라서 $\mathcal{O}_X/\mathcal{I}$가 $T$에 지지되고
+$Y$가 $\mathcal{I}$에서의 $X$의 블로업이 되게 하는
+아이디얼 층 $\mathcal{I} \subset \mathcal{O}_X$가 존재한다고 가정해도 된다.
+Lemma \ref{lemma-make-ideal-principal}에 의해 다음과 같은 열이 존재한다.
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 = X
+$$
+여기서 $X_{i + 1} \to X_i$는 $T$의 한 점 위에 놓인 닫힌점
+$x_i$에서의 $X_i$의 블로업이고,
+$\mathcal{I}\mathcal{O}_{X_n}$은 가역 아이디얼 층이다.
+블로업의 보편 성질(Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-universal-property-blowing-up})에 의해
+원하는 분해를 얻는다.
+\end{proof}
+
+
+
+
+
+\section{정규화 블로업에 의한 지배}
+\label{section-normalized-blowups}
+
+\noindent
+이 절에서는 곡면의 수정이 점들에서의 정규화 블로업의 열에 의해
+지배됨을 증명한다.
+
+\begin{definition}
+\label{definition-normalized-blowup}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 decent 대수 공간으로서
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}의 동치 조건들을
+만족한다고 하자. $x \in |X|$를 닫힌점이라 하자.
+{\it $x$에서의 $X$의 정규화 블로업}은 합성
+$X'' \to X' \to X$이다. 여기서 $X' \to X$는
+$x$에서의 $X$의 블로업(Definition \ref{definition-blowup-at-point})이고,
+$X'' \to X'$는 $X'$의 정규화이다.
+\end{definition}
+
+\noindent
+% P10-E0410: the frozen source leaves the causal clause grammatically unattached.
+여기서 정규화 $X'' \to X'$는 대수 공간으로서 정의된다.
+실제로 $X'$가 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}의 동치 조건들을
+만족하기 때문이며, 이는 Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-blowup-finite-nr-irreducibles}에서 따른다.
+정규화의 정의는 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-normalization}을 보라.
+
+\medskip\noindent
+일반적으로 $X$가 뇌터인 경우에도 정규화 블로업은 반드시 고유인 것은 아니다.
+Nagata 환의 스펙트럼인 아핀들로 이루어진 \'etale 피복을 가지는 대수 공간을
+Nagata라 함을 상기하자(Properties of Spaces, Definition
+\ref{spaces-properties-definition-type-property}, Remark
+\ref{spaces-properties-remark-list-properties-local-etale-topology}, 그리고
+Properties, Definition \ref{properties-definition-nagata}).
+
+\begin{lemma}
+\label{lemma-Nagata-normalized-blowup}
+Definition \ref{definition-normalized-blowup}에서 $X$가 Nagata이면,
+$x$에서의 $X$의 정규화 블로업은 $X$ 위에서 고유인
+정규 Nagata 대수 공간이다.
+\end{lemma}
+
+\begin{proof}
+블로업 사상 $X' \to X$는 고유이다
+($X$가 국소 뇌터이므로 Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-blowing-up-projective}를 적용할 수 있다).
+따라서 $X'$는 Nagata이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-type-nagata}).
+그러므로 정규화 $X'' \to X'$는 유한이고
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-nagata-normalization}),
+$X'' \to X$도 고유임을 알 수 있다
+(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-finite-proper} and
+\ref{spaces-morphisms-lemma-composition-proper}).
+따라서 정규화 블로업은 정규(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-normalization-normal}) Nagata 대수 공간이다.
+\end{proof}
+
+\noindent
+다음은 정규화 블로업에 대한
+Lemma \ref{lemma-equivalence-sequence-blowups}의 유사 명제이다.
+
+\begin{lemma}
+\label{lemma-equivalence-sequence-normalized-blowups}
+$X, x_i, U_i \to X, u_i$가 (\ref{equation-equivalence})에서와 같고,
+$f : Y \to X$가 $F$ 아래에서 $g_i : Y_i \to U_i$에 대응한다고 하자.
+$X$가 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}의 동치 조건들을
+만족한다고 가정하자. 그러면 $f$가 다음 분해를 가지며
+$$
+Y = Z_m \to Z_{m - 1} \to \ldots \to Z_1 \to Z_0 = X
+$$
+$Z_{j + 1} \to Z_j$가 $\{x_1, \ldots, x_n\}$ 위에 놓인 닫힌점
+$z_j$에서의 $Z_j$의 정규화 블로업인 것과, 각 $i$에 대하여
+$g_i$가 다음 분해를 가지며
+$$
+Y_i = Z_{i, m_i} \to Z_{i, m_i - 1} \to \ldots \to Z_{i, 1} \to Z_{i, 0} = U_i
+$$
+$Z_{i, j + 1} \to Z_{i, j}$가 $u_i$ 위에 놓인 닫힌점
+$z_{i, j}$에서의 $Z_{i, j}$의 정규화 블로업인 것은 필요충분하다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-equivalence-sequence-blowups}의 증명에 사용한 것과
+정확히 같은 논증으로부터 따른다.
+\end{proof}
+
+\noindent
+Nagata 대수 공간은 국소 뇌터이다.
+
+\begin{lemma}
+\label{lemma-dominate-by-normalized-blowing-up}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 차원
+$\dim(X) = 2$인 뇌터 Nagata 대수 공간이라 하자.
+$f : Y \to X$를 고유 쌍유리 사상이라 하자.
+그러면 다음 가환 그림이 존재한다.
+$$
+\xymatrix{
+X_n \ar[r] \ar[d] &
+X_{n - 1} \ar[r] &
+\ldots \ar[r] &
+X_1 \ar[r] &
+X_0 \ar[d] \\
+Y \ar[rrrr]  & & & & X
+}
+$$
+여기서 $X_0 \to X$는 정규화이고,
+$X_{i + 1} \to X_i$는 닫힌점에서의 $X_i$의 정규화 블로업이다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리를 대수 공간에 대하여 직접 증명할 수도 있지만,
+위에서 사용한 접근을 계속하여 스킴의 경우로 환원하겠다.
+
+\medskip\noindent
+뇌터 대수 공간은 준분리이므로 점들이 잘 정의된 잉여체를 가짐을 사용할 것이다
+(예를 들어 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-space-elementary-etale-neighbourhood}).
+또한 Morphisms of Spaces, Sections
+\ref{spaces-morphisms-section-nagata},
+\ref{spaces-morphisms-section-dimension-formula}, and
+\ref{spaces-morphisms-section-normalization}의 결과들을
+더 언급하지 않고 사용할 것이다.
+$Y$를 그 정규화로 대체해도 된다. $X_0 \to X$를 정규화라 하자.
+사상 $Y \to X$는 $X_0$를 거쳐 분해된다.
+따라서 $X$와 $Y$가 모두 정규라고 가정해도 된다.
+
+\medskip\noindent
+$X$와 $Y$가 정규라고 가정하자. 사상 $f : Y \to X$는
+$Y$의 여차원 $0$과 $1$인 모든 점 및 올이 유한인 $Y$의 모든 점을
+포함하는 열린집합 위에서 동형이다. Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-modification-normal-iso-over-codimension-1}을 보라.
+따라서 $f$가 $X \setminus T$ 위에서 동형이 되게 하는
+닫힌점들의 유한 집합 $T \subset |X|$가 존재함을 알 수 있다.
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-dominate-modification-by-blowup}에 의해
+$Y$를 지배하는 $X \setminus T$-허용가능 블로업 $Y' \to X$가 존재한다.
+$Y$를 $Y'$의 정규화로 대체한 뒤에는
+$Y \to X$가 표현 가능하다고 가정해도 됨을 알 수 있다.
+
+\medskip\noindent
+$T = \{x_1, \ldots, x_r\}$이라 하자. Section \ref{section-strategy}에서와 같은
+초등 \'etale 근방 $(U_i, u_i) \to (X, x_i)$를 택한다.
+각 $i$에 대하여 사상 $Y_i = Y \times_X U_i \to U_i$는
+$U_i \setminus \{u_i\}$ 위에서 동형인 고유 쌍유리 사상이다.
+따라서 Resolution of Surfaces, Lemma
+\ref{resolve-lemma-dominate-by-normalized-blowing-up}을 적용하여
+% P10-E0411: frozen i-indexed sequence uses the unindexed X_1.
+$$
+X_{i, m_i} \to X_{i, m_i - 1} \to \ldots \to X_1 \to X_{i, 0} = U_i
+$$
+라는, $u_i$ 위에 놓인 닫힌점들에서의 정규화 블로업의 열로서
+$X_{i, m_i}$가 $Y_i$를 지배하는 것을 얻는다.
+Lemma \ref{lemma-equivalence-sequence-normalized-blowups}에 의해
+다음과 같은, 보조정리의 명제에 나온 정규화 블로업의 열을 얻는다.
+$$
+X_m \to X_{m - 1} \to \ldots \to X_1 \to X_0 = X
+$$
+이 열을 우리의 $U_i$로 밑변환하면 주어진 열들이 나온다.
+Lemma \ref{lemma-equivalence}의 범주 동치에 의해
+$X_m$이 $Y$를 지배함이 따른다.
+\end{proof}
+
+
+
+
+
+\section{완비화로의 밑변환}
+\label{section-aux}
+
+\noindent
+다음의 간단한 보조정리는 이후에 유용한 도구가 될 것이다.
+
+\begin{lemma}
+\label{lemma-iso-completions}
+$(A, \mathfrak m, \kappa)$를 극대 아이디얼 $\mathfrak m$이
+유한 생성인 국소환이라 하자. $X$를 $A$ 위의 decent 대수 공간이라 하자.
+$A^\wedge$가 $A$의 $\mathfrak m$-진 완비화일 때
+$Y = X \times_{\Spec(A)} \Spec(A^\wedge)$라 하자.
+$q \in |Y|$를 그 상 $p \in |X|$가 $\Spec(A)$의 닫힌점 위에 놓이는
+점이라 하자. 그러면 헨젤 국소환의 사상
+$\mathcal{O}_{X, p}^h \to \mathcal{O}_{Y, q}^h$는
+완비화 사이의 동형을 유도한다.
+\end{lemma}
+
+\begin{proof}
+이는 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-space-elementary-etale-neighbourhood}에서와 같은
+초등 \'etale 근방 $(U, u) \to (X, p)$를 택하고
+$V = U \times_X Y = U \times_{\Spec(A)} \Spec(A^\wedge)$ 및
+$v = (u, q)$로 둠으로써 스킴의 경우에서 즉시 따른다.
+스킴의 경우는 Resolution of Surfaces, Lemma
+\ref{resolve-lemma-iso-completions}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-port-regularity-to-completion}
+$(A, \mathfrak m, \kappa)$를 뇌터 국소환이라 하자.
+$X$가 decent 대수 공간인 국소 유한형 사상
+$X \to \Spec(A)$를 생각하자.
+$Y = X \times_{\Spec(A)} \Spec(A^\wedge)$라 하자.
+$y \in |Y|$의 상을 $x \in |X|$라 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item $\mathcal{O}_{Y, y}^h$가 정칙이면
+$\mathcal{O}_{X, x}^h$도 정칙이다.
+\item $y$가 닫힌 올에 속하면, $\mathcal{O}_{Y, y}^h$가 정칙이다
+$\Leftrightarrow \mathcal{O}_{X, x}^h$가 정칙이다.
+\item $X$가 $A$ 위에서 고유이면, $X$가 정칙일 필요충분조건은
+$Y$가 정칙인 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+% P10-E0418: frozen English splits the compound noun "counterpart".
+\'etale 국소화에 의해 처음 두 명제는 스킴에 대한 이 보조정리의 대응 명제로부터
+즉시 따른다. Resolution of Surfaces, Lemma
+\ref{resolve-lemma-port-regularity-to-completion}을 보라.
+(3)에 대하여, $Y \to X$가 전사이므로
+($A \to A^\wedge$가 충실히 평탄하기 때문이다),
+(1)에 의해 $Y$가 정칙이면 $X$가 정칙임을 알 수 있다.
+반대로 $X$가 정칙이면, 특수 올의 모든 점에서
+$Y$의 헨젤 국소환들이 정칙이다.
+$y \in |Y|$를 임의의 점이라 하자. 고유인 경우에는
+$|Y| \to |\Spec(A^\wedge)|$가 닫힌 사상이므로,
+닫힌 올에 속하는 $y_0$에 대한 특수화 $y \leadsto y_0$를 찾을 수 있다.
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-space-elementary-etale-neighbourhood}에서와 같은
+초등 \'etale 근방 $(V, v_0) \to (Y, y_0)$를 택한다.
+$Y$가 decent이므로 $y \leadsto y_0$를 $V$ 안의 특수화
+$v \leadsto v_0$로 올릴 수 있다
+(Decent Spaces, Lemma \ref{decent-spaces-lemma-decent-specialization}).
+그러면 $\mathcal{O}_{V, v}$는 $\mathcal{O}_{V, v_0}$의 국소화이므로
+정칙이고, 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-formally-unramified}
+$(A, \mathfrak m)$을 국소 뇌터 환이라 하자.
+$X$를 $A$ 위의 대수 공간이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $A$는 해석적 비분기이다
+(Algebra, Definition \ref{algebra-definition-analytically-unramified}).
+\item $X$는 $A$ 위에서 국소 유한형이다.
+\item $X \to \Spec(A)$는 $X$에서 여차원 $0$인 모든 점에서 \'etale이다.
+\end{enumerate}
+그러면 $X$의 정규화는 $X$ 위에서 유한이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 전사 \'etale 사상 $U \to X$를 택한다.
+그러면 $U \to \Spec(A)$는 Resolution of Surfaces, Lemma
+\ref{resolve-lemma-formally-unramified}의 가정들을 만족하고,
+따라서 그 결론도 만족한다.
+\end{proof}
+
+
+
+
+
+\section{함의되는 성질}
+\label{section-existence-gives}
+
+\noindent
+이 절에서는 뇌터 정수적 대수 공간에 정칙 alteration이 존재하면
+상당히 많은 결과가 따름을 증명한다.
+“나쁜” 뇌터 대수 공간에 관심이 없는 독자는 이 절을 건너뛰어도 된다.
+
+\begin{lemma}
+\label{lemma-regular-alteration-implies}
+$S$를 스킴이라 하자. $Y$를 $S$ 위의 뇌터 정수적 대수 공간이라 하자.
+$X$가 정칙인 alteration $f : X \to Y$가 존재한다고 가정하자.
+그러면 정규화 $Y^\nu \to Y$는 유한이고,
+$Y$는 정칙인 조밀한 열린부분을 가진다.
+\end{lemma}
+
+\begin{proof}
+\'etale 국소화에 의해 $Y = \Spec(A)$(여기서 $A$는 뇌터 정역이다)인
+경우를 증명하면 충분하다.
+$B$를 $A$의 분수체 안에서의 정수적 폐포라 하자.
+$C = \Gamma(X, \mathcal{O}_X)$라 두자. Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-proper-pushforward-coherent}에 의해
+$C$는 유한 $A$-가군이다.
+$X$가 정규이므로
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-regular-normal}),
+% P10-E0419: frozen English omits the article before "normal domain" here.
+$C$는 정규 정역임을 알 수 있다
+(Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-normal-integral-sections}).
+따라서 $B \subset C$이고, $A$가 뇌터이므로
+$B$가 $A$ 위에서 유한임을 결론짓는다.
+
+\medskip\noindent
+$f^{-1}V \to V$가 유한이 되는 공집합이 아닌 열린부분
+$V \subset Y$가 존재한다. Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-alteration}을 보라.
+$V$를 줄인 뒤에는 $f^{-1}V \to V$가 평탄하다고 가정해도 된다
+(Morphisms of Spaces, Proposition
+\ref{spaces-morphisms-proposition-generic-flatness-reduced}).
+따라서 $f^{-1}V \to V$는 충실히 평탄이다. 그러면 Algebra, Lemma
+\ref{algebra-lemma-descent-regular}에 의해 $V$는 정칙이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-regular-alteration-implies-local}
+$(A, \mathfrak m, \kappa)$를 국소 뇌터 정역이라 하자.
+$X$가 정칙인 alteration $f : X \to \Spec(A)$가 존재한다고 가정하자.
+그러면 다음이 성립한다.
+\begin{enumerate}
+\item 어떤 영이 아닌 $f \in A$에 대하여 $A_f$는 정칙이다.
+\item $A$의 분수체 안에서의 정수적 폐포 $B$는 $A$ 위에서 유한이다.
+\item $B$의 $\mathfrak m$-진 완비화는 정규환이다. 즉,
+$B$의 극대 아이디얼들에서의 완비화들은 정규 정역이다.
+\item $A$의 일반 형식 올은 정칙이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)는 Lemma \ref{lemma-regular-alteration-implies}에서 따른다.
+(3)의 증명을 위한 기호를 마련하려면 그 보조정리의 증명 일부를
+다시 해야 한다. $C = \Gamma(X, \mathcal{O}_X)$라 두자.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-proper-pushforward-coherent}에 의해
+$C$는 유한 $A$-가군이다.
+$X$가 정규이므로
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-regular-normal}),
+% P10-E0419: the second frozen occurrence also omits the article.
+$C$는 정규 정역임을 알 수 있다
+(Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-normal-integral-sections}).
+따라서 $B \subset C$이고, $A$가 뇌터이므로
+$B$가 $A$ 위에서 유한임을 결론짓는다.
+Resolution of Surfaces, Lemma \ref{resolve-lemma-algebra-helper}에 의해
+(3)을 증명하려면 $\mathfrak m$-진 완비화 $C^\wedge$가
+정규임을 보이면 충분하다.
+
+\medskip\noindent
+Algebra, Lemma \ref{algebra-lemma-completion-finite-extension}에 의해
+완비화 $C^\wedge$는 $\mathfrak m$ 위에 놓이는 $C$의
+소아이디얼들에서의 $C$의 완비화들의 곱이다.
+이러한 소아이디얼은 유한 개이고, 이들은 $C$의 극대 아이디얼
+$\mathfrak m_1, \ldots, \mathfrak m_r$이다.
+($B$에 대한 대응 결과가 보조정리의 마지막 명제를 설명한다.)
+따라서 $A$를 $C_{\mathfrak m_i}$로, $X$를
+$X_i = X \times_{\Spec(C)} \Spec(C_{\mathfrak m_i})$로 대체하면
+다음 문단에서 논하는 경우로 환원된다.
+(Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology}에 의해
+$\Gamma(X_i, \mathcal{O}) = C_{\mathfrak m_i}$임을 주의하라.)
+
+\medskip\noindent
+여기서 $A$는 뇌터 국소 정규 정역이고,
+$f : X \to \Spec(A)$는 $\Gamma(X, \mathcal{O}_X) = A$를 만족하는
+정칙 alteration이다. $A$의 완비화 $A^\wedge$가
+정규 정역임을 보여야 한다. Lemma
+\ref{lemma-port-regularity-to-completion}에 의해
+$Y = X \times_{\Spec(A)} \Spec(A^\wedge)$는 정칙이다.
+% P10-E0412: the frozen source sentence beginning with Since has no main clause.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology}에 의해
+$\Gamma(Y, \mathcal{O}_Y) = A^\wedge$이다.
+앞에서와 같이 $A^\wedge$가 정규임을 결론짓는다.
+실제로 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-regular-normal}에 의해 $Y$는 정규이다.
+$\Gamma(Y, \mathcal{O}_Y) = A^\wedge$가 국소환이므로 이 공간은 연결이다.
+따라서 $Y$는 정규이고 정수적이다
+(분리 대수 공간에서는 연결이고 정규이면 정수적이기 때문이다).
+그러므로 Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-normal-integral-sections}에 의해
+$\Gamma(Y, \mathcal{O}_Y) = A^\wedge$는 정규 정역이다.
+이로써 (3)을 증명했다.
+
+\medskip\noindent
+(4)의 증명. $\eta \in \Spec(A)$를 일반점이라 하고,
+아래첨자 $\eta$로 $\eta$로의 밑변환을 나타내자.
+$f$가 alteration이므로 스킴 $X_\eta$는 $\eta$ 위에서
+유한이고 충실히 평탄이다.
+$Y = X \times_{\Spec(A)} \Spec(A^\wedge)$가 Lemma
+\ref{lemma-port-regularity-to-completion}에 의해 정칙이므로,
+$Y_\eta$가 정칙임을 알 수 있다($Y$ 안의 열린부분들의 극한이기 때문이다).
+그러면 $Y_\eta \to \Spec(A^\wedge \otimes_A \kappa(\eta))$는
+일반 형식 올 위로 가는 유한 충실히 평탄 사상이다.
+Algebra, Lemma \ref{algebra-lemma-descent-regular}에 의해 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+\section{특이점 해소}
+\label{section-resolution}
+
+\noindent
+다음은 정의이다.
+
+\begin{definition}
+\label{definition-resolution}
+$S$를 스킴이라 하자. $Y$를 $S$ 위의 뇌터 정수적 대수 공간이라 하자.
+% P10-E0413: frozen source introduces Y but calls this a resolution of X.
+$X$의 {\it 특이점 해소}란 $X$가 정칙인 수정
+$f : X \to Y$를 말한다.
+\end{definition}
+
+\noindent
+곡면의 경우에는 때때로 조금 더 많은 정보가 필요하다.
+
+\begin{definition}
+\label{definition-resolution-surface}
+$S$를 스킴이라 하자. $Y$를 $S$ 위의 $2$차원 뇌터 정수적 대수 공간이라 하자.
+다음 열이 존재할 때 $Y$가
+{\it 정규화 블로업에 의한 특이점 해소}를 가진다고 한다.
+% P10-E0414: frozen sequence mixes Y_i and X_{n-1}; preserve exact symbols.
+$$
+Y_n \to X_{n - 1} \to \ldots \to Y_1 \to Y_0 \to Y
+$$
+여기서 다음이 성립한다.
+\begin{enumerate}
+\item $i = 0, \ldots, n$에 대하여 $Y_i$는 $Y$ 위에서 고유이다.
+\item $Y_0 \to Y$는 정규화이다.
+\item $i = 1, \ldots, n$에 대하여
+$Y_i \to Y_{i - 1}$은 정규화 블로업이다.
+\item $Y_n$은 정칙이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+조건 (1)은 $Y$의 정규화 $Y_0$가 $Y$ 위에서 유한이고,
+정규화 블로업에 사용되는 정규화들도 유한임을 함의한다.
+이제 마침내 이 장의 주정리에 이른다.
+
+\begin{theorem}
+\label{theorem-resolve}
+$S$를 스킴이라 하자. $Y$를 $S$ 위의 이차원 정수적
+뇌터 대수 공간이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $X$가 정칙인 alteration $X \to Y$가 존재한다.
+\item $Y$의 특이점 해소가 존재한다.
+\item $Y$는 정규화 블로업에 의한 특이점 해소를 가진다.
+\item 정규화 $Y^\nu \to Y$가 유한이고, $Y^\nu$는 유한 개의 특이점
+% P10-E0415: frozen source locates points of Y^nu in |Y|.
+$y_1, \ldots, y_m \in |Y|$를 가지며, 각 $i$에 대하여
+헨젤 국소환 $\mathcal{O}_{Y^\nu, y_i}^h$의 완비화가 정규이다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+함의 (3) $\Rightarrow$ (2) $\Rightarrow$ (1)은 즉시 성립한다.
+
+\medskip\noindent
+$X$가 정칙인 alteration $X \to Y$를 택하자.
+그러면 Lemma \ref{lemma-regular-alteration-implies}에 의해
+$Y^\nu \to Y$는 유한이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-normalization-normal}에서 얻는 분해
+$f : X \to Y^\nu$를 생각하자.
+Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-finite-in-codim-1}에 의해 $f$는
+$Y^\nu$에서 여차원 $\leq 1$인 모든 점을 포함하는 열린부분
+$V \subset Y^\nu$ 위에서 유한이다.
+Algebra, Lemma \ref{algebra-lemma-CM-over-regular-flat} 및
+Serre의 판정법에 의해 차원 $\leq 2$인 정규 국소환이
+Cohen--Macaulay라는 사실(Algebra, Lemma
+\ref{algebra-lemma-criterion-normal})에 의해 $f$는 $V$ 위에서 평탄이다.
+그러면 Algebra, Lemma \ref{algebra-lemma-descent-regular}에 의해
+$V$는 정칙이다. $Y^\nu$가 뇌터이므로
+$Y^\nu \setminus V = \{y_1, \ldots, y_m\}$은 유한임을 결론짓는다.
+각 $i$에 대하여 $\mathcal{O}_{Y^\nu, y_i}^h$를 헨젤 국소환이라 하자.
+그러면 $X \times_Y \Spec(\mathcal{O}_{Y^\nu, y_i}^h)$는
+$\Spec(\mathcal{O}_{Y^\nu, y_i}^h)$의 정칙 alteration이다
+(몇 가지 세부 사항은 생략한다).
+Lemma \ref{lemma-regular-alteration-implies-local}에 의해
+$\mathcal{O}_{Y^\nu, y_i}^h$의 완비화는 정규이다.
+이로써 (1) $\Rightarrow$ (4)를 얻는다.
+
+\medskip\noindent
+(4)를 가정하자. (3)을 증명해야 한다.
+$Y$를 즉시 그 정규화로 대체해도 된다.
+$y_1, \ldots, y_m \in |Y|$를 특이점들이라 하자.
+Section \ref{section-strategy}에서와 같은 초등 \'etale 근방의 족
+$(V_i, v_i) \to (Y, y_i)$를 택한다.
+각 $i$에 대하여 헨젤 국소환 $\mathcal{O}_{Y^\nu, y_i}^h$는
+$\mathcal{O}_{V_i, v_i}$의 헨젤화이다.
+따라서 이 환들은 서로 동형인 완비화를 가진다.
+그러므로 스킴에 대한 결과
+(Resolution of Surfaces, Theorem \ref{resolve-theorem-resolve})에 의해
+다음과 같은 정규화 블로업의 유한 열들이 존재한다.
+$$
+X_{i, n_i} \to X_{i, n_i - 1} \to \ldots \to V_i
+$$
+여기서는 $v_i$ 위에 놓인 점들만 블로업하고,
+$X_{i, n_i}$는 정칙이다.
+Lemma \ref{lemma-equivalence-sequence-normalized-blowups}에 의해
+다음과 같은 정규화 블로업의 열이 존재한다.
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to Y
+$$
+물론 $X_n$도 정칙이다(국소환들을 보라).
+이로써 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+\section{예}
+\label{section-examples}
+
+\noindent
+이 장에서 앞서 얻은 결과들과 관련된 몇 가지 예를 든다.
+
+\begin{example}
+\label{example-factorial}
+\begin{reference}
+\cite[4(c)]{Samuel-UFD}
+\end{reference}
+$k$를 체라 하자. $r, s, t$가 쌍마다 서로소인 정수이면 환
+$A = k[x, y, z]/(x^r + y^s + z^t)$는 UFD이다.
+실제로 $x^r + y^s + z^t$가 기약이므로 $A$는 정역이다.
+원소 $z$는 소원이다. 즉, $A$에서 소아이디얼을 생성한다.
+한편 어떤 $e$에 대하여 $t = 1 + ers$이면
+$$
+A[1/z] \cong k[x', y', 1/z]
+$$
+이다. 여기서 $x' = x/z^{es}$, $y' = y/z^{er}$이고
+$z = (x')^r + (y')^s$이다.
+따라서 $A[1/z]$는 다항식환의 국소화이고, 그러므로 UFD이다.
+Nagata의 논증으로부터 $A$가 UFD임이 따른다.
+Algebra, Lemma \ref{algebra-lemma-invert-prime-elements}를 보라.
+$t$가 $rs$를 법으로 $1$과 합동이 아닌 경우에도 비슷한 논증을 줄 수 있다.
+\end{example}
+
+\begin{example}
+\label{example-completion-not-factorial}
+\begin{reference}
+일반적으로 국소 Picard 군이 영이 아님에 대해서는
+\cite{Brieskorn}과 \cite{Lipman-rational}을 보라.
+\end{reference}
+$1 < r < s < t$가 쌍마다 서로소이고 $2, 3, 5$와 같지 않은 정수이면,
+환 $A = \mathbf{C}[[x, y, z]]/(x^r + y^s + z^t)$는 UFD가 아니다.
+예를 들어 특수한 경우
+$A = \mathbf{C}[[x, y, z]]/(x^2 + y^5 + z^7)$을 생각하자.
+다음 사상들을 생각하자.
+$$
+\psi_\zeta : \mathbf{C}[[x, y, z]]/(x^2 + y^5 + z^7) \to \mathbf{C}[[t]]
+$$
+이들은 다음으로 주어진다.
+$$
+x \mapsto t^7,\quad
+y \mapsto t^3,\quad
+z \mapsto -\zeta t^2(1 + t)^{1/7}
+$$
+여기서 $\zeta$는 1의 $7$제곱근이다.
+$\psi_\zeta$의 핵 $\mathfrak p_\zeta$는 높이 1인 소아이디얼이다.
+따라서 $A$가 UFD이면 이는 주아이디얼이고, 이를테면
+$f_\zeta \in \mathbf{C}[[x, y, z]]$로 생성된다.
+$V(x^3 - y^7) = \bigcup V(\mathfrak p_\zeta)$이고
+$A/(x^3 - y^7)$가 닫힌점 밖에서 기약임을 주의하자.
+따라서 계속해서 $A$가 UFD라고 가정하면 다음을 얻는다.
+$$
+\prod\nolimits_\zeta f_\zeta = u(x^3 - y^7) + a(x^2 + y^5 + z^7)
+\quad\text{in}\quad
+\mathbf{C}[[x, y, z]]
+$$
+여기서 $u \in \mathbf{C}[[x, y, z]]$는 단원이고
+$a \in \mathbf{C}[[x, y, z]]$는 어떤 원소이다.
+상수로 스케일링하여 $u(0, 0, 0) = 1$이라 가정해도 된다.
+좌변이 차수 $7$로 소멸함을 주의하자.
+따라서 $a = - x \bmod \mathfrak m^2$이다.
+그러나 그러면 우변에 항 $xy^5$가 생기지만 좌변에는 생기지 않는다.
+이는 모순이다.
+\end{example}
+
+\begin{example}
+\label{example-not-blow-up}
+우수한 $2$차원 뇌터 국소환과 스킴이 아닌 수정
+$X \to S = \Spec(A)$가 존재한다.
+한 구성을 개략적으로 설명하겠다. $X$를 유일한 특이점
+$x \in X$를 가지는 $\mathbf{C}$ 위의 정규 곡면이라 하자.
+예외 올 $C = \pi^{-1}(x)_{red}$가 매끄러운 사영 곡선이 되게 하는
+특이점 해소 $\pi : X' \to X$가 존재한다고 가정하자.
+또한 $\mathcal{O}_C(nc)$가 $\Pic(X') \to \Pic(C)$의 상에 속하면
+$n = 0$이 되게 하는 점 $c \in C$가 존재한다고 가정하자.
+$X'' \to X'$를 비특이점 $c$에서의 블로업이라 하자.
+$C' \subset X''$를 $C$의 엄밀 변환이라 하고,
+$E \subset X''$를 예외 올이라 하자.
+Artin의 결과들(\cite{ArtinII}; $C'$의 법다발이 음임을 보려면
+예를 들어 \cite{Mumford-topology}를 사용하라)에 의해
+$X''$에서 곡선 $C'$를 수축하여 대수 공간 $X'''$를 얻을 수 있다.
+그림은 다음과 같다.
+$$
+\xymatrix{
+& X'' \ar[ld] \ar[rd] \\
+X' \ar[rd] &  & X''' \ar[ld] \\
+& X
+}
+$$
+$X'''$가 스킴이 아니라고 주장한다. 이것이 우리의 예를 준다.
+왜냐하면 $X'''$가 스킴일 필요충분조건은
+$X'''$를 $A = \mathcal{O}_{X, x}$로 밑변환한 것이 스킴인 것이기 때문이다
+(세부 사항은 생략한다).
+% P10-E0416: frozen source writes "where" instead of "were" in this counterfactual.
+$X'''$가 스킴이라면 $X'''$ 안에서 $C'$의 상은 아핀 근방을 가질 것이다.
+이 근방의 여집합은 $X'''$ 위의 유효 Cartier 인자일 것이다
+($X'''$가 $1$점을 제외하면 비특이이기 때문이다).
+이 유효 Cartier 인자는 $X''$ 위에서 $E$와 만나고 $C'$를 피하는
+유효 Cartier 인자에 대응할 것이다.
+$X'$ 안에서 그 상을 취하면 집합론적으로 $C$와 $c$에서 만나는
+유효 Cartier 인자를 얻는다.
+가정에 의해 $c$의 어떤 배수도 Cartier 인자의 제한이 아니므로 이는 불가능하다.
+
+\medskip\noindent
+마지막으로 이러한 특이 곡면 $X$를 찾아야 한다.
+단순히 $\mathbf{A}^3_\mathbf{C} = \Spec(\mathbf{C}[x, y, z])$ 안에서
+$$
+x^3 + y^3 + z^3 + x^4 + y^4 + z^4 = 0
+$$
+으로 주어지고 특이점이 $(0, 0, 0)$인 아핀 곡면을 $X$로 택할 수 있다.
+그러면 $(0, 0, 0)$은 유일한 특이점이다.
+$(0, 0, 0)$에 대응하는 극대 아이디얼에서 $X$를 블로업하면,
+각각 다음 매끄러운 아핀 곡면과 동형인 세 개의 차트를 얻는다.
+$$
+1 + s^3 + t^3 + x(1 + s^4 + t^4) = 0
+$$
+이는 비특이이고 예외 인자 $C$는 $x = 0$으로 주어진다.
+독자는 $C$가 타원 곡선임을 알아볼 것이다.
+마지막으로 $(0, 0, 0)$에서의 사영으로 알 수 있듯이 곡면 $X$는 유리적이다.
+또는 블로업의 방정식에서 $x$에 대하여 풀어도 된다.
+마지막으로 비특이 유리 곡면의 Picard 군은 가산인 반면,
+복소수체 위의 타원 곡선의 Picard 군은 비가산이다.
+따라서 위에서 말한 닫힌점 $c$를 찾을 수 있다.
+\end{example}
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

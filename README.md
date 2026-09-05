@@ -1,10 +1,9 @@
 # Stacks Project Korean partial cumulative source and evidence
 
-This source package accompanies the unofficial `ko-KR` cumulative reader `2026.09.05-r2`.
-It contains exactly Chapters 17, 60-68, 71, and 91-100 of the 116-chapter Stacks Project universe, in that order. It is a substantial partial edition, not a complete corpus, official Stacks Project publication, or independent Korean language certification.
+This package accompanies the unofficial ko-KR cumulative reader `2026.09.05-r3`. It contains 52 complete chapters (11, 12, 13, 14, 17, 18, 34, 35, 39, 40, 41, 42, 43, 44, 45, 46, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 71, 72, 73, 74, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101) from the 116-chapter Stacks Project universe, in canonical order. It is substantial but not a complete corpus or an official Stacks Project publication.
 
-The controlling English authority is `stacks/stacks-project` commit `a04446e57ec1fbc252a871afcec7752fb2807b14`. Exact Korean TeX and the twenty-one comparison authority files are included under `inputs/` and `upstream/a04446e/`. The previously published r1 source/evidence tree is preserved, and the r5 successor build, compact receipts, component inputs, and QA hash ledgers are under `successor-r5/`. Suspected source errors remain non-rendering sidecar evidence; formula, label, citation, and reference structures remain bound to the frozen authority.
+The controlling English authority is `stacks/stacks-project` commit `a04446e57ec1fbc252a871afcec7752fb2807b14`. Editable Korean TeX and one comparison authority file for every included chapter are under `inputs/` and `upstream/a04446e/`. The prior r2 evidence remains preserved; `successor-r9/` records the 52-chapter manager build, exact r6 inheritance, correction history, page-complete visual QA, and deterministic replay tools.
 
-The GNU Free Documentation License 1.2-or-later text is at `LICENSES/COPYING`. There are no invariant sections, front-cover texts, or back-cover texts. This edition is unofficial and is not affiliated with or endorsed by the Stacks Project.
+The GNU Free Documentation License 1.2-or-later text is in `LICENSES/COPYING`. There are no invariant sections, front-cover texts, or back-cover texts. This edition is unofficial and is not affiliated with or endorsed by the Stacks Project.
 
-See `BUILD.md` for deterministic replay. Raster page renders, contact sheets, warning-probe images, font binaries, caches, local account paths, and credentials are excluded.
+Raster pages and contact sheets, font binaries, caches, credentials, and local-account paths are excluded. Their ordered hashes and explicit review outcomes remain in the compact receipts.

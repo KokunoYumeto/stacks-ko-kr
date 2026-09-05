@@ -1,0 +1,4083 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{스킴 위의 위상}
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 글에서는 스킴의 범주 위에 놓이는 여러 위상이 무엇인지 설명한다.
+참고 문헌으로는 \cite{SGA1} 및 \cite{Ner} 등이 있다. 이에 앞서,
+같은 기저 범주에서 동일한 층의 개념을 주는 사이트(Sites,
+Definition \ref{sites-definition-site}에서 정의됨)의 선택이 여럿임을
+지적해 둔다. 따라서 여기서 택하는 정의는 참고 문헌의 정의와 약간
+다를 수 있지만, 궁극적으로는 같은 코호몰로지 군 등을 준다.
+
+\section{일반적 절차}
+\label{section-procedure}
+
+\noindent
+이 절에서는 앞으로 사용할 사이트들을 만드는 일반적 절차를 설명한다.
+어떤 위상 $\tau$에 관하여 스킴 위의 층을 연구하고자 한다고 하자.
+그 위상을 지닌 스킴들로 Sites, Definition \ref{sites-definition-site}의
+의미에서 사이트를 만들려면 몇 가지 작업이 필요하다. 실제로
+``Zariski 위상을 지닌 모든 스킴을 생각한다''고 단순히 말할 수는 없다.
+그러면 ``큰'' 범주가 생기기 때문이다. 대신 이 장의 각 절에서는 다음과
+같이 진행한다.
+\begin{enumerate}
+\item Sites, Definition \ref{sites-definition-site}의 공리를 만족하는
+스킴 덮개들의 클래스 $\text{Cov}_\tau$를 정의한다. 스킴의 Zariski 열린
+덮개는 언제나 $\tau$-덮개가 된다.
+\item 아핀 스킴의 범주 안에서 표준 $\tau$-덮개라는 개념을 따로 정한다.
+\item ``절대적'' 큰 $\tau$-사이트 $\Sch_\tau$가 무엇인지 정의한다.
+이는 스킴들의 집합과 덮개들의 집합을 적절히 선택하여 얻는 사이트이다.
+\item $\Sch_\tau$의 임의의 대상 $S$에 대하여 큰 $\tau$-사이트
+$(\Sch/S)_\tau$를 정의하고, 적절한 $\tau$에 대해서는 작은
+\footnote{여기서 큰 사이트와 작은 사이트라는 말은 해당 범주의 크기와
+관계가 없다.} $\tau$-사이트 $S_\tau$도 정의한다.
+\item 또한 아핀의 표준 $\tau$-덮개라는 개념을 사용하는 사이트
+$(\textit{Aff}/S)_\tau$가 있다\footnote{ph 위상의 경우에는 이 접근에서
+아주 조금 벗어난다. Definition \ref{definition-big-small-ph}와 그 주변의
+논의를 보라.}. 이 사이트의 층 범주는 $(\Sch/S)_\tau$ 위의 층 범주와
+동치이다.
+\end{enumerate}
+위 절차는 스킴의 큰 $\tau$-사이트는 물론 작은 $\tau$-사이트에 대해서도
+표준적인 선택을 주지 않는다는 점에서 다소 번거롭다. 집합론적 어려움을
+무시해도 좋다면 클래스를 사용하여 표준적인 큰 사이트와 작은 사이트를
+얻을 수 있다\ldots
+
+
+
+
+
+
+
+\section{Zariski 위상}
+\label{section-zariski}
+
+\begin{definition}
+\label{definition-zariski-covering}
+$T$를 스킴이라 하자. $T$의 {\it Zariski 덮개}란 스킴 사상족
+$\{f_i : T_i \to T\}_{i \in I}$로서, 각 $f_i$가 열린 몰입이고
+$T = \bigcup f_i(T_i)$를 만족하는 것이다.
+\end{definition}
+
+\noindent
+이는 덮개들의 (진)클래스를 정의한다. 이제 이 개념이
+Sites, Definition \ref{sites-definition-site}의 조건들을 만족함을 보인다.
+
+\begin{lemma}
+\label{lemma-zariski}
+$T$를 스킴이라 하자.
+\begin{enumerate}
+\item $T' \to T$가 동형이면 $\{T' \to T\}$는 $T$의 Zariski 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 Zariski 덮개이고 각 $i$에 대하여
+$\{T_{ij} \to T_i\}_{j\in J_i}$가 Zariski 덮개이면,
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 Zariski 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 Zariski 덮개이고 $T' \to T$가
+스킴의 사상이면 $\{T' \times_T T_i \to T'\}_{i\in I}$는 Zariski
+덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-zariski-affine}
+$T$를 아핀 스킴이라 하고 $\{T_i \to T\}_{i \in I}$를 $T$의 Zariski
+덮개라 하자. 그러면 $\{T_i \to T\}_{i \in I}$의 세분인 Zariski 덮개
+$\{U_j \to T\}_{j = 1, \ldots, m}$가 존재하여, 각 $U_j$는 $T$의
+표준 열린집합이다. Schemes, Definition
+\ref{schemes-definition-standard-covering}을 보라. 더욱이 각 $U_j$를
+어떤 $T_i$의 열린부분으로 택할 수 있다.
+\end{lemma}
+
+\begin{proof}
+$T$가 준콤팩트이고 표준 열린집합들이 그 위상의 기저를 이루므로
+따른다. 이는 Schemes, Lemma \ref{schemes-lemma-standard-open}에서도
+증명되어 있다.
+\end{proof}
+
+\noindent
+따라서 이에 대응하는 아핀의 표준 덮개를 다음과 같이 정의한다.
+
+\begin{definition}
+\label{definition-standard-Zariski}
+Schemes, Definition \ref{schemes-definition-standard-covering}과 비교하라.
+$T$를 아핀 스킴이라 하자. $T$의 {\it 표준 Zariski 덮개}란 Zariski 덮개
+$\{U_j \to T\}_{j = 1, \ldots, m}$로서, 각 $U_j \to T$가 $T$의 어떤
+표준 아핀 열린부분과의 동형을 유도하는 것이다.
+\end{definition}
+
+\begin{definition}
+\label{definition-big-zariski-site}
+{\it 큰 Zariski 사이트}란 Sites, Definition
+\ref{sites-definition-site}의 사이트 $\Sch_{Zar}$ 가운데 다음과 같이
+구성된 임의의 것을 말한다.
+\begin{enumerate}
+\item 스킴들의 임의의 집합 $S_0$와 이 스킴들 사이의 Zariski 덮개들의
+임의의 집합 $\text{Cov}_0$를 택한다.
+\item 집합 $S_0$에서 시작하여 Sets, Lemma
+\ref{sets-lemma-construct-category}와 같이 구성한 임의의 범주
+$\Sch_\alpha$를 $\Sch_{Zar}$의 기저 범주로 삼는다.
+\item 범주 $\Sch_\alpha$, Zariski 덮개들의 클래스, 그리고 위에서 택한
+집합 $\text{Cov}_0$에서 시작하여 Sets, Lemma
+\ref{sets-lemma-coverings-site}와 같이 얻은 덮개들의 임의의 집합을
+$\Sch_{Zar}$의 덮개들로 택한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+Sites, Lemma \ref{sites-lemma-choice-set-coverings-immaterial}에 따르면,
+범주 $\Sch_\alpha$를 택하고 나면 $\Sch_\alpha$ 위의 층 범주는 위의
+(3)에서 택한 덮개들의 선택에 의존하지 않는다. 다시 말해 토포스
+$\Sh(\Sch_{Zar})$는 범주 $\Sch_\alpha$의 선택에만 의존한다. Sets,
+Lemma \ref{sets-lemma-what-is-in-it}에 따르면 이 범주들은 올곱을 취하거나
+열린 부분스킴과 닫힌 부분스킴을 취하는 것과 같은 대수기하학의 많은
+구성에 대하여 닫혀 있다. 또한 $\Sch_\alpha$의 정확한 선택도 그다지
+중요하지 않음을 보일 수 있다. Section \ref{section-change-alpha}를 보라.
+
+\medskip\noindent
+다른 방법으로는 강하게 도달 불가능한 기수가 존재한다고 가정하고,
+$\Sch_{Zar}$를 택한 우주에 속하는 스킴들의 범주로 정의하되 덮개들의
+집합은 같은 우주에 속하는 Zariski 덮개들로 정의할 수도 있다.
+
+\medskip\noindent
+스킴 $S$의 큰 Zariski 사이트를 도입하기에 앞서, 큰 Zariski 사이트
+$\Sch_{Zar}$ 위의 위상은 어떤 의미에서 모든 스킴의 범주 위의 Zariski
+위상으로부터 유도된다는 점을 지적해 둔다.
+
+\begin{lemma}
+\label{lemma-zariski-induced}
+$\Sch_{Zar}$를 Definition \ref{definition-big-zariski-site}와 같은 큰
+Zariski 사이트라 하고 $T \in \Ob(\Sch_{Zar})$라 하자.
+$\{T_i \to T\}_{i \in I}$를 $T$의 임의의 Zariski 덮개라 하자. 그러면
+사이트 $\Sch_{Zar}$ 안에서 $T$의 덮개 $\{U_j \to T\}_{j \in J}$가
+존재하여 $\{T_i \to T\}_{i \in I}$와 자명하게 동치이다(Sites,
+Definition \ref{sites-definition-combinatorial-tautological}을 보라).
+\end{lemma}
+
+\begin{proof}
+각 $T_i \to T$가 열린 몰입이므로 Sets, Lemma
+\ref{sets-lemma-what-is-in-it}에 의해 각 $T_i$는 $\Sch_{Zar}$의 어떤
+대상 $V_i$와 동형이다. 덮개 $\{V_i \to T\}_{i \in I}$는 $I$ 위의
+항등사상을 양방향으로 사용하면 $\{T_i \to T\}_{i \in I}$와 자명하게
+동치이다. 더욱이 Sets, Lemma \ref{sets-lemma-coverings-site}에 의해
+$\{V_i \to T\}_{i \in I}$는 사이트 $\Sch_{Zar}$ 안의 $T$의 어떤 덮개
+$\{U_j \to T\}_{j \in J}$와 조합적으로 동치이다.
+\end{proof}
+
+\begin{definition}
+\label{definition-big-small-Zariski}
+$S$를 스킴이라 하고 $\Sch_{Zar}$를 $S$를 포함하는 큰 Zariski
+사이트라 하자.
+\begin{enumerate}
+\item $(\Sch/S)_{Zar}$로 나타내는 $S$의 {\it 큰 Zariski 사이트}는
+Sites, Section \ref{sites-section-localize}에서 도입한 사이트
+$\Sch_{Zar}/S$이다.
+\item $S_{Zar}$로 나타내는 $S$의 {\it 작은 Zariski 사이트}는
+$(\Sch/S)_{Zar}$의 충만한 부분범주로서, 그 대상은 $U \to S$가 열린
+몰입인 $U/S$들이다. $S_{Zar}$의 덮개란 $U \in \Ob(S_{Zar})$인
+$(\Sch/S)_{Zar}$의 임의의 덮개 $\{U_i \to U\}$이다.
+\item $(\textit{Aff}/S)_{Zar}$로 나타내는 $S$의 {\it 큰 아핀 Zariski
+사이트}는 $(\Sch/S)_{Zar}$의 충만한 부분범주로서, 그 대상은 $U$가
+아핀 스킴인 $U/S$들이다. $(\textit{Aff}/S)_{Zar}$의 덮개란
+$U \in \Ob((\textit{Aff}/S)_{Zar})$이고 표준 Zariski 덮개인
+$(\Sch/S)_{Zar}$의 임의의 덮개 $\{U_i \to U\}$이다.
+\item $S_{affine, Zar}$로 나타내는 $S$의 {\it 작은 아핀 Zariski
+사이트}는 $S_{Zar}$의 충만한 부분범주로서, 그 대상은 $U$가 아핀
+스킴인 $U/S$들이다. $S_{affine, Zar}$의 덮개란
+$U \in \Ob(S_{affine, Zar})$이고 표준 Zariski 덮개인 $S_{Zar}$의
+임의의 덮개 $\{U_i \to U\}$이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+작은 Zariski 사이트, 큰 아핀 Zariski 사이트, 작은 아핀 Zariski
+사이트가 실제로 사이트라는 것은 완전히 자명하지 않다. 이제 이를
+확인한다.
+
+\begin{lemma}
+\label{lemma-verify-site-Zariski}
+$S$를 스킴이라 하고 $\Sch_{Zar}$를 $S$를 포함하는 큰 Zariski
+사이트라 하자. 위에서 정의한 구조 $S_{Zar}$, $(\textit{Aff}/S)_{Zar}$,
+$S_{affine, Zar}$는 사이트이다.
+\end{lemma}
+
+\begin{proof}
+$S_{Zar}$가 사이트임을 보이자. 이는 공통 표적을 가진 사상족들의 주어진
+집합을 갖는 범주이다. 따라서 Sites, Definition
+\ref{sites-definition-site}의 성질 (1), (2), (3)을 보여야 한다.
+$(\Sch/S)_{Zar}$가 사이트이므로, $U \in \Ob(S_{Zar})$인
+$(\Sch/S)_{Zar}$의 임의의 덮개 $\{U_i \to U\}$에 대하여
+$U_i \in \Ob(S_{Zar})$임을 보이면 충분하다. 열린 몰입의 합성이 열린
+몰입이므로 이는 정의에서 바로 따른다.
+
+\medskip\noindent
+$(\textit{Aff}/S)_{Zar}$가 사이트임을 보이자. 위와 같이 논하면 아핀의
+표준 Zariski 덮개들의 모임이 Sites, Definition
+\ref{sites-definition-site}의 성질 (1), (2), (3)을 만족함을 보이면
+충분하다. $R$을 환이라 하고 $f_1, \ldots, f_n \in R$이 단위 아이디얼을
+생성한다고 하자. 각 $i \in \{1, \ldots, n\}$에 대하여
+$g_{i1}, \ldots, g_{in_i} \in R_{f_i}$가 $R_{f_i}$의 단위 아이디얼을
+생성한다고 하자. 가능한 대로 $g_{ij} = f_{ij}/f_i^{e_{ij}}$라 쓰자.
+필요하면 $f_{ij}$를 $f_i f_{ij}$로 바꾼 뒤에는
+$D(f_{ij}) \subset D(f_i) \cong \Spec(R_{f_i})$가
+$D(g_{ij}) \subset \Spec(R_{f_i})$와 같다. 따라서 사상족
+$\{D(g_{ij}) \to \Spec(R)\}$는 표준 Zariski 덮개이다. 이 고찰로부터
+표준 Zariski 덮개에 대하여 (2)가 성립한다. (1)과 (3)의 확인은 생략한다.
+
+\medskip\noindent
+$S_{affine, Zar}$가 사이트라는 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fibre-products-Zariski}
+$S$를 스킴이라 하고 $\Sch_{Zar}$를 $S$를 포함하는 큰 Zariski
+사이트라 하자. 사이트 $\Sch_{Zar}$, $(\Sch/S)_{Zar}$, $S_{Zar}$,
+$(\textit{Aff}/S)_{Zar}$, $S_{affine, Zar}$의 기저 범주들은 올곱을 갖는다.
+각 경우에 모든 스킴의 범주 $\Sch$로 가는 자명한 함자는 올곱을 취하는
+것과 가환한다. 범주 $(\Sch/S)_{Zar}$와 $S_{Zar}$는 모두 끝 대상
+$S/S$를 갖는다.
+\end{lemma}
+
+\begin{proof}
+$\Sch_{Zar}$에 대해서는 구성상 참이다. Sets, Lemma
+\ref{sets-lemma-what-is-in-it}을 보라. $U, V, W \in \Ob(\Sch_{Zar})$이고
+$U \to S$, $V \to U$, $W \to U$가 스킴의 사상이라고 하자.
+$\Sch_{Zar}$에서의 올곱 $V \times_U W$는 $\Sch$에서도 올곱이며,
+$S$ 위의 모든 스킴의 범주에서 $U/S$ 위의 $V/S$와 $W/S$의 올곱이다.
+따라서 이는 $(\Sch/S)_{Zar}$에서도 올곱이다. 이로써
+$(\Sch/S)_{Zar}$의 경우를 얻는다. $U \to S$, $V \to U$, $W \to U$가
+열린 몰입이면 $V \times_U W \to S$도 열린 몰입이므로 $S_{Zar}$의
+경우를 얻는다. $U, V, W$가 아핀이면 $V \times_U W$도 아핀이므로
+$(\textit{Aff}/S)_{Zar}$와 $S_{affine, Zar}$의 경우를 얻는다.
+\end{proof}
+
+\noindent
+이제 큰 아핀 사이트와 작은 아핀 사이트가 각각 큰 사이트와 작은
+사이트와 같은 토포스를 정의함을 확인한다.
+
+\begin{lemma}
+\label{lemma-affine-big-site-Zariski}
+$S$를 스킴이라 하고 $\Sch_{Zar}$를 $S$를 포함하는 큰 Zariski
+사이트라 하자. 함자 $(\textit{Aff}/S)_{Zar} \to (\Sch/S)_{Zar}$는
+특수 공연속 함자이다. 따라서 이는 $\Sh((\textit{Aff}/S)_{Zar})$에서
+$\Sh((\Sch/S)_{Zar})$로 가는 토포스의 동치를 유도한다.
+\end{lemma}
+
+\begin{proof}
+특수 공연속 함자의 개념은 Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor}에서 도입한다.
+따라서 Sites, Lemma \ref{sites-lemma-equivalence}의 가정 (1)--(5)를
+확인해야 한다. 포함 함자를
+$u : (\textit{Aff}/S)_{Zar} \to (\Sch/S)_{Zar}$라 쓰자. 공연속이라는
+것은 아핀 $T$에 대한 $T/S$의 임의의 Zariski 덮개가 $T$의 표준 Zariski
+덮개로 세분될 수 있다는 뜻이다. 이것이 Lemma
+\ref{lemma-zariski-affine}의 내용이므로 (1)이 성립한다. 표준 Zariski
+덮개는 Zariski 덮개이므로 $u$가 연속임은 바로 보이고, 따라서 (2)가
+성립한다. (3)과 (4)는 $u$가 충실충만이라는 사실에서 즉시 따른다.
+마지막으로 (5)는 모든 스킴이 아핀 열린 덮개를 갖는다는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-alternative-zariski}
+$S$를 스킴이라 하고 $\Sch_{Zar}$를 $S$를 포함하는 큰 Zariski
+사이트라 하자. 함자 $S_{affine, Zar} \to S_{Zar}$는 특수 공연속
+함자이다. 따라서 이는 $\Sh(S_{affine, Zar})$에서 $\Sh(S_{Zar})$로
+가는 토포스의 동치를 유도한다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: Lemma \ref{lemma-affine-big-site-Zariski}의 증명과
+비교하라.
+\end{proof}
+
+\noindent
+작은 Zariski 사이트 위의 층 개념이 $S$ 위의 층 개념에 대응함을
+확인하자.
+
+\begin{lemma}
+\label{lemma-Zariski-usual}
+$S_{Zar}$ 위의 층 범주는 $S$의 기저 위상공간 위의 층 범주와 동치이다.
+\end{lemma}
+
+\begin{proof}
+$S_{Zar}$의 임의의 대상 $U/S$에 대하여 사상 $U \to S$가 어떤 열린
+부분스킴 위의 동형이라는 사실을 반복하여 사용한다. $\mathcal{F}$를
+$S$ 위의 층이라 하자. 그러면 규칙
+$\mathcal{F}'(U/S) = \mathcal{F}(\Im(U \to S))$로 $S_{Zar}$ 위의 층을
+정의한다. 반대로 각 열린 부분스킴 $U \subset S$에 대하여
+$\Im(U' \to S) = U$인 대상 $U'/S \in \Ob(S_{Zar})$를 택한다(여기서는
+Sets, Lemma \ref{sets-lemma-what-is-in-it}을 사용해야 한다).
+$S_{Zar}$ 위의 층 $\mathcal{G}$가 주어지면
+$\mathcal{G}'(U) = \mathcal{G}(U'/S)$로 두어 $S$ 위의 층을 정의한다.
+$\mathcal{G}'$가 층임을 보이기 위해, 임의의 열린 덮개
+$U = \bigcup_{i \in I} U_i$에 대하여 Sets, Lemma
+\ref{sets-lemma-coverings-site}에 의해 덮개
+$\{U_i \to U\}_{i \in I}$가 $S_{Zar}$ 안의 어떤 덮개
+$\{U_j' \to U'\}_{j \in J}$와 조합적으로 동치임을 사용하고, Sites,
+Lemma \ref{sites-lemma-tautological-same-sheaf}를 사용한다. 세부는
+생략한다.
+\end{proof}
+
+\noindent
+이제부터 $S_{Zar}$ 위의 층과 $S$ 위의 층을 구별하지 않는다. 두 개념을
+오갈 때에는 항상 위 보조정리의 증명에서 쓴 절차를 사용한다. 다음으로
+이 사이트들에 대응하는 토포스 사이의 몇 가지 관계를 확립한다.
+
+\begin{lemma}
+\label{lemma-put-in-T}
+$\Sch_{Zar}$를 큰 Zariski 사이트라 하고
+$f : T \to S$를 $\Sch_{Zar}$의 사상이라 하자.
+함자 $T_{Zar} \to (\Sch/S)_{Zar}$는 공연속이며 다음 토포스 사상을
+유도한다.
+$$
+i_f :
+\Sh(T_{Zar})
+\longrightarrow
+\Sh((\Sch/S)_{Zar})
+$$
+$(\Sch/S)_{Zar}$ 위의 층 $\mathcal{G}$에 대하여
+$(i_f^{-1}\mathcal{G})(U/T) = \mathcal{G}(U/S)$이다.
+또한 함자 $i_f^{-1}$에는 올곱 및 등화자와 가환하는 왼쪽 수반
+$i_{f, !}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+함자 $u : T_{Zar} \to (\Sch/S)_{Zar}$를 생각하자. 다시 말해,
+$T_{Zar}$의 대상에 대응하는 열린 몰입 $j : U \to T$가 주어지면
+$u(U \to T) = (f \circ j : U \to S)$로 둔다. 이 함자는 올곱과
+가환한다(Lemma \ref{lemma-fibre-products-Zariski} 참조). 또한
+$T_{Zar}$에는 등화자가 있고(시작 대상과 끝 대상이 같은 임의의 두
+사상이 서로 같기 때문이다), $u$는 등화자와 가환한다. 공연속임은
+명백하다. 또한 $u$는 덮개를 덮개로 보내고 올곱과
+가환하므로 연속이다. 따라서 Sites, Lemmas
+\ref{sites-lemma-when-shriek} 및
+\ref{sites-lemma-preserve-equalizers}로부터 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-at-the-bottom}
+$S$를 스킴이라 하고 $\Sch_{Zar}$를 $S$를 포함하는 큰 Zariski
+사이트라 하자. 포함 함자 $S_{Zar} \to (\Sch/S)_{Zar}$는
+Sites, Lemma \ref{sites-lemma-bigger-site}의 가정을 만족하므로
+다음 사이트 사상을 유도한다.
+$$
+\pi_S : (\Sch/S)_{Zar} \longrightarrow S_{Zar}
+$$
+그리고 다음 토포스 사상을 유도한다.
+$$
+i_S : \Sh(S_{Zar}) \longrightarrow \Sh((\Sch/S)_{Zar})
+$$
+여기서 $\pi_S \circ i_S = \text{id}$이다. 또한
+$i_S = i_{\text{id}_S}$이며, $i_{\text{id}_S}$는 Lemma
+\ref{lemma-put-in-T}에서와 같다. 특히 함자
+$i_S^{-1} = \pi_{S, *}$는
+$i_S^{-1}(\mathcal{G})(U/S) = \mathcal{G}(U/S)$로 주어진다.
+\end{lemma}
+
+\begin{proof}
+이 경우 함자 $u : S_{Zar} \to (\Sch/S)_{Zar}$는 위의 Lemma
+\ref{lemma-put-in-T}의 증명에서 본 성질들에 더하여 충실충만이고,
+끝 대상을 끝 대상으로 보낸다. 따라서 결론이 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-restriction-small-zariski}
+Lemma \ref{lemma-at-the-bottom}의 상황에서 함자
+$i_S^{-1} = \pi_{S, *}$를 흔히 {\it 작은 Zariski 사이트로의 제한}이라
+한다. 큰 Zariski 사이트 위의 층 $\mathcal{F}$에 대하여 이 제한을
+$\mathcal{F}|_{S_{Zar}}$로 나타낸다.
+\end{definition}
+
+\noindent
+이 표기를 쓰면 큰 사이트 위의 층 $\mathcal{F}$와 작은 사이트 위의 층
+$\mathcal{G}$에 대하여
+\begin{align*}
+\Mor_{\Sh(S_{Zar})}(\mathcal{F}|_{S_{Zar}}, \mathcal{G})
+& =
+\Mor_{\Sh((\Sch/S)_{Zar})}(\mathcal{F},
+i_{S, *}\mathcal{G}) \\
+\Mor_{\Sh(S_{Zar})}(\mathcal{G}, \mathcal{F}|_{S_{Zar}})
+& =
+\Mor_{\Sh((\Sch/S)_{Zar})}(\pi_S^{-1}\mathcal{G},
+\mathcal{F})
+\end{align*}
+이다. 또한 $(i_{S, *}\mathcal{G})|_{S_{Zar}} = \mathcal{G}$이고
+$(\pi_S^{-1}\mathcal{G})|_{S_{Zar}} = \mathcal{G}$이다.
+
+\begin{lemma}
+\label{lemma-morphism-big}
+$\Sch_{Zar}$를 큰 Zariski 사이트라 하고
+$f : T \to S$를 $\Sch_{Zar}$의 사상이라 하자. 함자
+$$
+u : (\Sch/T)_{Zar} \longrightarrow (\Sch/S)_{Zar},
+\quad
+V/T \longmapsto V/S
+$$
+는 공연속이고, 다음과 같은 연속인 오른쪽 수반을 갖는다.
+$$
+v : (\Sch/S)_{Zar} \longrightarrow (\Sch/T)_{Zar},
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+이 두 함자는 동일한 토포스 사상을 유도한다.
+$$
+f_{big} :
+\Sh((\Sch/T)_{Zar})
+\longrightarrow
+\Sh((\Sch/S)_{Zar})
+$$
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$이고
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$이다.
+또한 $f_{big}^{-1}$에는 올곱 및 등화자와 가환하는 왼쪽 수반
+$f_{big!}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+함자 $u$는 공연속이고 연속이며 올곱 및 등화자와 가환한다(세부는
+생략하며 Lemma \ref{lemma-put-in-T}의 증명과 비교하라). 따라서
+Sites, Lemmas \ref{sites-lemma-when-shriek} 및
+\ref{sites-lemma-preserve-equalizers}를 적용하여 $f_{big}^{-1}$의 공식과
+$f_{big!}$의 존재를 얻는다. 또한 $U/T$와 $V/S$가 주어졌을 때
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$이므로 함자 $v$는 오른쪽
+수반이다. 따라서 Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} 및
+\ref{sites-lemma-have-functor-other-way-morphism}를 적용하면
+$f_{big, *}$의 공식을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-morphism-big-small}
+$\Sch_{Zar}$를 큰 Zariski 사이트라 하고
+$f : T \to S$를 $\Sch_{Zar}$의 사상이라 하자.
+\begin{enumerate}
+\item $i_f = f_{big} \circ i_T$이다. 여기서 $i_f$는 Lemma
+\ref{lemma-put-in-T}에서와 같고 $i_T$는 Lemma
+\ref{lemma-at-the-bottom}에서와 같다.
+\item 함자 $S_{Zar} \to T_{Zar}$,
+$(U \to S) \mapsto (U \times_S T \to T)$는 연속이며 다음 사이트
+사상을 유도한다.
+$$
+f_{small} :
+T_{Zar}
+\longrightarrow
+S_{Zar}
+$$
+Lemma \ref{lemma-Zariski-usual}을 통해 $T_{Zar}$ 위의 층과 $T$ 위의
+층을, 그리고 $S_{Zar}$ 위의 층과 $S$ 위의 층을 각각 동일시하면,
+함자 $f_{small}^{-1}$와 $f_{small, *}$는 통상적인 $f^{-1}$ 및 $f_*$와
+일치한다.
+\item 다음은 사이트 사상들의 가환도식이다.
+$$
+\xymatrix{
+T_{Zar} \ar[d]_{f_{small}} &
+(\Sch/T)_{Zar} \ar[d]^{f_{big}} \ar[l]^{\pi_T} \\
+S_{Zar} &
+(\Sch/S)_{Zar} \ar[l]_{\pi_S}
+}
+$$
+따라서 토포스 사상으로서
+$f_{small} \circ \pi_T = \pi_S \circ f_{big}$이다.
+\item $f_{small} = \pi_S \circ f_{big} \circ i_T = \pi_S \circ i_f$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$i_f = f_{big} \circ i_T$라는 등식은
+$i_f^{-1} = i_T^{-1} \circ f_{big}^{-1}$에서 따르며, 후자의 등식은 위의
+함자 설명에서 명백하다. 이로써 (1)을 얻는다.
+
+\medskip\noindent
+명제 (2): Sites, Example \ref{sites-example-continuous-map}을 보라.
+
+\medskip\noindent
+(3)은 $\pi_S$와 $\pi_T$가 포함 함자로 주어지고, $f_{small}$과
+$f_{big}$이 기저변환 함자 $U \mapsto U \times_S T$로 주어지므로 따른다.
+
+\medskip\noindent
+(4)는 (3)에 $i_T$를 앞에서 합성하면 따른다.
+\end{proof}
+
+\noindent
+위 보조정리의 상황에서 Definition
+\ref{definition-restriction-small-zariski}의 용어를 쓰면, $T$의 큰
+Zariski 사이트 위의 층 $\mathcal{F}$에 대하여
+$$
+(f_{big, *}\mathcal{F})|_{S_{Zar}} =
+f_{small, *}(\mathcal{F}|_{T_{Zar}}),
+$$
+이다. 이 등식은 보조정리의 사이트 도식이 가환한다는 사실에서
+명백하다. 실제로 $T$와 $S$의 작은 Zariski 사이트로의 제한은 각각
+$\pi_{T, *}$와 $\pi_{S, *}$로 주어진다. 당김과 제한을 포함하는 이와
+비슷한 공식은 성립하지 않는다.
+
+\begin{lemma}
+\label{lemma-composition}
+$(\Sch/S)_{Zar}$의 스킴 $X$, $Y$, $Z$와 사상 $f : X \to Y$,
+$g : Y \to Z$가 주어지면
+$g_{big} \circ f_{big} = (g \circ f)_{big}$이고
+$g_{small} \circ f_{small} = (g \circ f)_{small}$이다.
+\end{lemma}
+
+\begin{proof}
+큰 사이트 위 함자들의 밂과 당김에 대한 Lemma
+\ref{lemma-morphism-big}의 간단한 설명으로부터 따른다. 작은 사이트 위
+함자들에 대해서는 Lemma \ref{lemma-Zariski-usual}의 동일시를 통하여
+Sheaves, Lemma \ref{sheaves-lemma-pushforward-composition}이 바로 이
+명제이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-morphism-big-small-cartesian-diagram}
+$\Sch_{Zar}$를 큰 Zariski 사이트라 하자. $\Sch_{Zar}$에서의 다음
+Cartesian 도식을 생각하자.
+$$
+\xymatrix{
+T' \ar[r]_{g'} \ar[d]_{f'} & T \ar[d]^f \\
+S' \ar[r]^g & S
+}
+$$
+그러면
+$i_g^{-1} \circ f_{big, *} = f'_{small, *} \circ (i_{g'})^{-1}$이고
+$g_{big}^{-1} \circ f_{big, *} = f'_{big, *} \circ (g'_{big})^{-1}$이다.
+\end{lemma}
+
+\begin{proof}
+도식이 Cartesian이므로 $U'/S'$에 대하여
+$U' \times_{S'} T' = U' \times_S T$이다. 따라서
+$i_g^{-1} \circ f_{big, *}$와 $f'_{small, *} \circ (i_{g'})^{-1}$는 모두
+$(\Sch/T)_{Zar}$ 위의 층 $\mathcal{F}$를 $S'_{Zar}$ 위의 층
+$U' \mapsto \mathcal{F}(U' \times_{S'} T')$로 보낸다(Lemmas
+\ref{lemma-put-in-T} 및 \ref{lemma-morphism-big-small}을 사용하라).
+두 번째 등식도 같은 방식으로 증명할 수 있으며, 더 일반적인 Sites,
+Lemma \ref{sites-lemma-localize-morphism}으로부터 유도할 수도 있다.
+\end{proof}
+
+\noindent
+$S$의 큰 Zariski 사이트 위의 층은 $S$ 위의 모든 스킴에 놓인
+``통상적인'' 층들의 모음으로 생각할 수 있다.
+
+\begin{lemma}
+\label{lemma-characterize-sheaf-big}
+$S$를 큰 Zariski 사이트 $\Sch_{Zar}$에 속하는 스킴이라 하자. 큰
+Zariski 사이트 $(\Sch/S)_{Zar}$ 위의 층 $\mathcal{F}$는 다음 자료로
+주어진다.
+\begin{enumerate}
+\item 각 $T/S \in \Ob((\Sch/S)_{Zar})$에 대하여 $T$ 위의 층
+$\mathcal{F}_T$,
+\item $(\Sch/S)_{Zar}$의 각 $f : T' \to T$에 대하여 사상
+$c_f : f^{-1}\mathcal{F}_T \to \mathcal{F}_{T'}$.
+\end{enumerate}
+이 자료는 다음 조건을 만족해야 한다.
+\begin{enumerate}
+\item[(a)] $(\Sch/S)_{Zar}$의 임의의 $f : T' \to T$와
+$g : T'' \to T'$에 대하여 합성 $c_g \circ g^{-1}c_f$는
+$c_{f \circ g}$와 같고,
+\item[(b)] $(\Sch/S)_{Zar}$의 $f : T' \to T$가 열린 몰입이면
+$c_f$는 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 Sites, Remark
+\ref{sites-remark-variant-glue-sheaves-absolute}에서 논의한 순수한
+층론적 명제로부터 따른다. 여기서는 직접적인 증명도 제시한다.
+
+\medskip\noindent
+$\Sh((\Sch/S)_{Zar})$ 위의 층 $\mathcal{F}$가 주어졌다고 하자.
+$p : T \to S$가 구조 사상일 때
+$\mathcal{F}_T = i_p^{-1}\mathcal{F}$로 둔다. 임의의 열린집합
+$U \subset T$와, 상이 $U$인 $(\Sch/T)_{Zar}$의 열린 몰입
+$U' \to T$에 대하여
+$\mathcal{F}_T(U) = \mathcal{F}(U'/S)$임에 유의하라(Lemmas
+\ref{lemma-Zariski-usual} 및 \ref{lemma-put-in-T} 참조). 따라서 $S$ 위의
+$f : T' \to T$와 $U, U' \to T$가 주어지면 표준 사상
+$\mathcal{F}_T(U) = \mathcal{F}(U'/S) \to \mathcal{F}(U'\times_T T'/S)
+= \mathcal{F}_{T'}(f^{-1}(U))$를 얻는다. 여기서 가운데 사상은 $S$ 위의
+사상 $U' \times_T T' \to U'$에 관한 $\mathcal{F}$의 제한 사상이다.
+이 사상들의 모음은 제한과 양립하므로 $\mathcal{F}_T$에서
+$\mathcal{F}_{T'}$로 가는 $f$-사상 $c_f$를 정의한다(Sheaves,
+Definition \ref{sheaves-definition-f-map}과 그 주변의 논의를 보라).
+$\mathcal{F}$의 제한 사상들을 합성하면 다시 제한 사상이 되므로
+$c_{f \circ g}$가 $c_f$와 $c_g$의 합성임은 명백하다.
+
+\medskip\noindent
+반대로 보조정리와 같은 계 $(\mathcal{F}_T, c_f)$가 주어졌다고 하자.
+$\mathcal{F}(T/S) = \mathcal{F}_T(T)$로 두어
+$\Sh((\Sch/S)_{Zar})$ 위의 준층 $\mathcal{F}$를 정의할 수 있다.
+제한 사상은 다음과 같이 정의한다. $f : T' \to T$와
+$s \in \mathcal{F}(T)$가 주어지면 당김 $f^*(s)$를 $c_f(s)$로 둔다
+(여기서도 $c_f$를 $f$-사상으로 생각한다). $c_f$들에 대한 조건은 이
+당김들이 필요한 함자성을 만족함을 보장한다. 이것이 층이라는 확인은
+생략한다. 이렇게 정의한 두 구성은 서로 역임이 명백하다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{\'Etale 위상}
+\label{section-etale}
+
+\noindent
+$S$를 스킴이라 하자. $S$ 위의 스킴 범주에 에탈 위상을 정의하고자
+한다. 앞서 정한 일반 원칙에 따라 먼저 에탈 덮개의 개념을 도입한다.
+
+\begin{definition}
+\label{definition-etale-covering}
+$T$를 스킴이라 하자. {\it $T$의 에탈 덮개}란 각 $f_i$가 에탈이고
+$T = \bigcup f_i(T_i)$를 만족하는 스킴 사상족
+$\{f_i : T_i \to T\}_{i \in I}$를 말한다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-zariski-etale}
+모든 Zariski 덮개는 에탈 덮개이다.
+\end{lemma}
+
+\begin{proof}
+정의와 열린 몰입이 에탈 사상이라는 사실로부터 명백하다(Morphisms,
+Lemma \ref{morphisms-lemma-open-immersion-etale} 참조).
+\end{proof}
+
+\noindent
+다음으로 이 개념이 Sites, Definition \ref{sites-definition-site}의
+조건을 만족함을 보인다.
+
+\begin{lemma}
+\label{lemma-etale}
+$T$를 스킴이라 하자.
+\begin{enumerate}
+\item $T' \to T$가 동형이면 $\{T' \to T\}$는 $T$의 에탈 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 에탈 덮개이고 각 $i$에 대하여
+$\{T_{ij} \to T_i\}_{j\in J_i}$가 에탈 덮개이면,
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 에탈 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 에탈 덮개이고 $T' \to T$가 스킴
+사상이면 $\{T' \times_T T_i \to T'\}_{i\in I}$는 에탈 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-etale-affine}
+$T$를 아핀 스킴이라 하고 $\{T_i \to T\}_{i \in I}$를 $T$의 에탈
+덮개라 하자. 그러면 각 $U_j$가 아핀 스킴이고
+$\{T_i \to T\}_{i \in I}$의 세분인 에탈 덮개
+$\{U_j \to T\}_{j = 1, \ldots, m}$가 존재한다. 더 나아가 각 $U_j$를
+어떤 $T_i$의 아핀 열린집합으로 택할 수 있다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\noindent
+따라서 아핀 스킴의 대응하는 표준 덮개를 다음과 같이 정의한다.
+
+\begin{definition}
+\label{definition-standard-etale}
+$T$를 아핀 스킴이라 하자. $T$의 {\it 표준 에탈 덮개}란 각 $U_j$가
+아핀이고 $T$ 위에서 에탈이며 $T = \bigcup f_j(U_j)$를 만족하는 사상족
+$\{f_j : U_j \to T\}_{j = 1, \ldots, m}$를 말한다.
+\end{definition}
+
+\noindent
+위 정의에서는 사상 $f_j$가 표준 에탈이라고 가정하지 {\bf 않는다}.
+그렇게 가정하면 표준 에탈 덮개가 $\textit{Aff}/S$ 위의 사이트를
+정의하지 못하기 때문이다. 예를 들어 Algebra, Lemma
+\ref{algebra-lemma-standard-etale}의 (4)항을 보라. 한편 아핀 스킴
+사이의 에탈 사상은 자동으로 표준 매끄러운 사상이다(Algebra, Lemma
+\ref{algebra-lemma-etale-standard-smooth} 참조). 따라서 표준 에탈
+덮개는 표준 매끄러운 덮개이자 표준 syntomic 덮개이다.
+
+\begin{definition}
+\label{definition-big-etale-site}
+{\it 큰 에탈 사이트}란 Sites, Definition
+\ref{sites-definition-site}에서와 같은 사이트로서 다음과 같이 구성한
+임의의 $\Sch_\etale$를 말한다.
+\begin{enumerate}
+\item 임의의 스킴들의 집합 $S_0$와 이 스킴들 사이의 임의의 에탈 덮개
+집합 $\text{Cov}_0$를 택한다.
+\item 기저 범주로, 집합 $S_0$에서 시작하여 Sets, Lemma
+\ref{sets-lemma-construct-category}에서와 같이 구성한 임의의 범주
+$\Sch_\alpha$를 택한다.
+\item 범주 $\Sch_\alpha$, 에탈 덮개들의 모임, 그리고 위에서 택한 집합
+$\text{Cov}_0$로부터 출발하여 Sets, Lemma
+\ref{sets-lemma-coverings-site}에서와 같은 임의의 덮개 집합을 택한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+큰 사이트 정의의 동기와 설명은 Definition
+\ref{definition-big-zariski-site} 뒤의 주석을 보라.
+
+\medskip\noindent
+스킴 $S$의 큰 에탈 사이트를 계속 도입하기 전에, 큰 에탈 사이트
+$\Sch_\etale$의 위상은 어떤 의미에서 모든 스킴의 범주 위의 에탈
+위상으로부터 유도됨을 지적해 두자.
+
+\begin{lemma}
+\label{lemma-etale-induced}
+$\Sch_\etale$를 Definition \ref{definition-big-etale-site}에서와 같은
+큰 에탈 사이트라 하자. $T \in \Ob(\Sch_\etale)$라 하고
+$\{T_i \to T\}_{i \in I}$를 $T$의 임의의 에탈 덮개라 하자.
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$를 세분하는 $\Sch_\etale$ 안의 $T$의
+덮개 $\{U_j \to T\}_{j \in J}$가 존재한다.
+\item $\{T_i \to T\}_{i \in I}$가 표준 에탈 덮개이면,
+$\Sch_\etale$ 안의 어떤 덮개와 자명하게 동치이다.
+\item $\{T_i \to T\}_{i \in I}$가 Zariski 덮개이면,
+$\Sch_\etale$ 안의 어떤 덮개와 자명하게 동치이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+각 $i$에 대하여, 모든 $T_{ij}$가 $T$의 어떤 아핀 열린 부분스킴으로
+사상되는 아핀 열린 덮개
+$T_i = \bigcup_{j \in J_i} T_{ij}$를 택한다. Lemma
+\ref{lemma-etale}에 의해 세분
+$\{T_{ij} \to T\}_{i \in I, j \in J_i}$도 $T$의 에탈 덮개이다. 따라서
+각 $T_i$가 아핀이고 $T$의 아핀 열린집합 $W_i$로 사상된다고 가정할 수
+있다. Sets, Lemma \ref{sets-lemma-what-is-in-it}을 적용하면 $W_i$가
+$\Sch_\etale$의 어떤 대상과 동형임을 알 수 있다. 그러면 $W_i$ 위의
+유한형 스킴인 $T_i$도 Sets, Lemma \ref{sets-lemma-what-is-in-it}을 다시
+적용하여 $\Sch_\etale$의 어떤 대상 $V_i$와 동형이다. 덮개
+$\{V_i \to T\}_{i \in I}$는 $\{T_i \to T\}_{i \in I}$를 세분한다(서로
+동형이기 때문이다). 또한 Sets, Lemma
+\ref{sets-lemma-what-is-in-it}에 의해 $\{V_i \to T\}_{i \in I}$는
+$\Sch_\etale$ 안의 $T$의 어떤 덮개 $\{U_j \to T\}_{j \in J}$와
+조합적으로 동치이다. 덮개 $\{U_j \to T\}_{j \in J}$는 (1)에서 요구한
+세분이다. (2), (3)의
+상황에서는 Sets, Lemma \ref{sets-lemma-what-is-in-it}에 의해 각 스킴
+$T_i$가 $\Sch_\etale$의 어떤 대상과 동형이고, Sets, Lemma
+\ref{sets-lemma-coverings-site}을 한 번 더 적용하면 원하는 결론을 얻는다.
+\end{proof}
+
+\begin{definition}
+\label{definition-big-small-etale}
+$S$를 스킴이라 하고 $\Sch_\etale$를 $S$를 포함하는 큰 에탈 사이트라
+하자.
+\begin{enumerate}
+\item {\it $S$의 큰 에탈 사이트} $(\Sch/S)_\etale$는 Sites, Section
+\ref{sites-section-localize}에서 도입한 사이트 $\Sch_\etale/S$이다.
+\item {\it $S$의 작은 에탈 사이트} $S_\etale$는 $(\Sch/S)_\etale$의
+충만한 부분범주로서, 그 대상은 $U \to S$가 에탈인 $U/S$이다.
+$S_\etale$의 덮개는 $U \in \Ob(S_\etale)$인
+$(\Sch/S)_\etale$의 임의의 덮개 $\{U_i \to U\}$이다.
+\item {\it $S$의 큰 아핀 에탈 사이트} $(\textit{Aff}/S)_\etale$는
+$(\Sch/S)_\etale$의 충만한 부분범주로서, 그 대상은 $U$가 아핀 스킴인
+$U/S$이다. $(\textit{Aff}/S)_\etale$의 덮개는
+$U \in \Ob((\textit{Aff}/S)_\etale)$인 $(\Sch/S)_\etale$의 덮개
+$\{U_i \to U\}$ 가운데 표준 에탈 덮개인 것이다.
+\item {\it $S$의 작은 아핀 에탈 사이트} $S_{affine, \etale}$는
+$S_\etale$의 충만한 부분범주로서, 그 대상은 $U$가 아핀 스킴인
+$U/S$이다. $S_{affine, \etale}$의 덮개는
+$U \in \Ob(S_{affine, \etale})$인 $S_\etale$의 덮개
+$\{U_i \to U\}$ 가운데 표준 에탈 덮개인 것이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+큰 아핀 에탈 사이트, 작은 에탈 사이트, 작은 아핀 에탈 사이트가
+실제로 사이트인지는 완전히 자명하지 않다. 이제 이를 확인한다.
+
+\begin{lemma}
+\label{lemma-verify-site-etale}
+$S$를 스킴이라 하고 $\Sch_\etale$를 $S$를 포함하는 큰 에탈 사이트라
+하자. 구조 $S_\etale$, $(\textit{Aff}/S)_\etale$, 그리고
+$S_{affine, \etale}$는 사이트이다.
+\end{lemma}
+
+\begin{proof}
+$S_\etale$가 사이트임을 보이자. 이는 끝 대상이 고정된 사상족들의
+집합이 주어진 범주이다. 따라서 Sites, Definition
+\ref{sites-definition-site}의 성질 (1), (2), (3)을 보이면 된다.
+$(\Sch/S)_\etale$가 사이트이므로, $U \in \Ob(S_\etale)$인
+$(\Sch/S)_\etale$의 임의의 덮개 $\{U_i \to U\}$에 대하여
+$U_i \in \Ob(S_\etale)$임을 보이면 충분하다. 에탈 사상의 합성은 에탈
+사상이므로 이는 정의에서 바로 따른다.
+
+\medskip\noindent
+$(\textit{Aff}/S)_\etale$가 사이트임을 보이자. 위와 같이 논하면,
+아핀 스킴의 표준 에탈 덮개들의 모음이 Sites, Definition
+\ref{sites-definition-site}의 성질 (1), (2), (3)을 만족함을 보이면
+충분하다. 이는 명백하다. 예를 들어 $\{T_i \to T\}_{i\in I}$가 표준
+에탈 덮개이고 각 $i$에 대하여
+$\{T_{ij} \to T_i\}_{j\in J_i}$가 표준 에탈 덮개이면,
+$\bigcup_{i\in I} J_i$가 유한이고 각 $T_{ij}$가 아핀이므로
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 표준 에탈 덮개이다.
+
+\medskip\noindent
+$S_{affine, \'etale}$가 사이트라는 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fibre-products-etale}
+$S$를 스킴이라 하고 $\Sch_\etale$를 $S$를 포함하는 큰 에탈 사이트라
+하자. 사이트 $\Sch_\etale$, $(\Sch/S)_\etale$, $S_\etale$,
+$(\textit{Aff}/S)_\etale$, 그리고 $S_{affine, \etale}$의 기저 범주에는
+올곱이 존재한다. 각 경우 모든 스킴의 범주 $\Sch$로 가는 자명한 함자는
+올곱을 취하는 연산과 가환한다. 범주 $(\Sch/S)_\etale$와 $S_\etale$에는
+모두 끝 대상이 있으며, 그것은 $S/S$이다.
+\end{lemma}
+
+\begin{proof}
+$\Sch_\etale$에 대해서는 구성상 참이다(Sets, Lemma
+\ref{sets-lemma-what-is-in-it} 참조). $U, V, W \in \Ob(\Sch_\etale)$인
+스킴 사상 $U \to S$, $V \to U$, $W \to U$가 주어졌다고 하자.
+$\Sch_\etale$ 안의 올곱 $V \times_U W$는 $\Sch$ 안의 올곱이며, 모든
+$S$-스킴의 범주에서 $U/S$ 위의 $V/S$와 $W/S$의 올곱이기도 하다.
+따라서 $(\Sch/S)_\etale$ 안의 올곱이다. 이로써
+$(\Sch/S)_\etale$에 대한 결론을 얻는다. $U \to S$, $V \to U$,
+$W \to U$가 에탈이면 $V \times_U W \to S$도 에탈이므로
+$S_\etale$에 대한 결론을 얻는다. $U, V, W$가 아핀이면
+$V \times_U W$도 아핀이므로 $(\textit{Aff}/S)_\etale$와
+$S_{affine, \etale}$에 대한 결론도 얻는다.
+\end{proof}
+
+\noindent
+다음으로 큰 아핀 사이트와 작은 아핀 사이트가 각각 큰 사이트와 작은
+사이트와 같은 토포스를 정의함을 확인한다.
+
+\begin{lemma}
+\label{lemma-affine-big-site-etale}
+$S$를 스킴이라 하고 $\Sch_\etale$를 $S$를 포함하는 큰 에탈 사이트라
+하자. 함자
+$(\textit{Aff}/S)_\etale \to (\Sch/S)_\etale$
+는 특수 공연속이며 $\Sh((\textit{Aff}/S)_\etale)$에서
+$\Sh((\Sch/S)_\etale)$로 가는 토포스의 동치를 유도한다.
+\end{lemma}
+
+\begin{proof}
+특수 공연속 함자의 개념은 Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor}에서 도입한다. 따라서
+Sites, Lemma \ref{sites-lemma-equivalence}의 가정 (1)--(5)를 확인해야
+한다. 포함 함자를
+$u : (\textit{Aff}/S)_\etale \to (\Sch/S)_\etale$라 쓰자. 공연속이라는
+것은 아핀 $T$에 대한 $T/S$의 임의의 에탈 덮개가 $T$의 표준 에탈
+덮개로 세분될 수 있다는 뜻이며, 이것이 Lemma
+\ref{lemma-etale-affine}의 내용이다. 따라서 (1)이 성립한다. 표준 에탈
+덮개는 에탈 덮개이므로 $u$는 연속이다. 따라서 (2)가 성립한다. (3)과
+(4)는 $u$가 충실충만이라는 사실에서 즉시 따른다. 마지막으로 모든
+스킴에는 아핀 열린 덮개가 존재하므로 조건 (5)가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-alternative}
+$S$를 스킴이라 하고 $\Sch_\etale$를 $S$를 포함하는 큰 에탈 사이트라
+하자. 함자 $S_{affine, \etale} \to S_\etale$는 특수 공연속이며
+$\Sh(S_{affine, \etale})$에서 $\Sh(S_\etale)$로 가는 토포스의 동치를
+유도한다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: Lemma \ref{lemma-affine-big-site-etale}의 증명과 비교하라.
+\end{proof}
+
+\noindent
+다음으로 이 사이트들에 대응하는 토포스 사이의 몇 가지 관계를
+확립한다.
+
+\begin{lemma}
+\label{lemma-put-in-T-etale}
+$\Sch_\etale$를 큰 에탈 사이트라 하고
+$f : T \to S$를 $\Sch_\etale$의 사상이라 하자. 함자
+$T_\etale \to (\Sch/S)_\etale$는 공연속이며 다음 토포스 사상을
+유도한다.
+$$
+i_f :
+\Sh(T_\etale)
+\longrightarrow
+\Sh((\Sch/S)_\etale)
+$$
+$(\Sch/S)_\etale$ 위의 층 $\mathcal{G}$에 대하여
+$(i_f^{-1}\mathcal{G})(U/T) = \mathcal{G}(U/S)$이다. 또한 함자
+$i_f^{-1}$에는 올곱 및 등화자와 가환하는 왼쪽 수반 $i_{f, !}$가
+존재한다.
+\end{lemma}
+
+\begin{proof}
+함자 $u : T_\etale \to (\Sch/S)_\etale$를 생각하자. 다시 말해,
+$T_\etale$의 대상에 대응하는 에탈 사상 $j : U \to T$가 주어지면
+$u(U \to T) = (f \circ j : U \to S)$로 둔다. 이 함자는 올곱과
+가환한다(Lemma \ref{lemma-fibre-products-etale} 참조).
+$a, b : U \to V$를 $T_\etale$의 두 사상이라 하자. 이때 (스킴의
+범주에서) $a$와 $b$의 등화자는
+$$
+V \times_{\Delta_{V/T}, V \times_T V, (a, b)} U
+$$
+이다. 이는 $T$ 위에서 에탈인 스킴들의 올곱이므로 $T$ 위에서 에탈이다.
+따라서 $T_\etale$에는 등화자가 있고 $u$는 등화자와 가환한다.
+공연속임은 명백하다. 또한 $u$는 덮개를 덮개로 보내고 올곱과
+가환하므로 연속이다. 따라서 Sites, Lemmas
+\ref{sites-lemma-when-shriek} 및
+\ref{sites-lemma-preserve-equalizers}로부터 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-at-the-bottom-etale}
+$S$를 스킴이라 하고 $\Sch_\etale$를 $S$를 포함하는 큰 에탈 사이트라
+하자. 포함 함자 $S_\etale \to (\Sch/S)_\etale$는 Sites, Lemma
+\ref{sites-lemma-bigger-site}의 가정을 만족하므로 다음 사이트 사상을
+유도한다.
+$$
+\pi_S : (\Sch/S)_\etale \longrightarrow S_\etale
+$$
+그리고 다음 토포스 사상을 유도한다.
+$$
+i_S : \Sh(S_\etale) \longrightarrow \Sh((\Sch/S)_\etale)
+$$
+여기서 $\pi_S \circ i_S = \text{id}$이다. 또한
+$i_S = i_{\text{id}_S}$이며, $i_{\text{id}_S}$는 Lemma
+\ref{lemma-put-in-T-etale}에서와 같다. 특히 함자
+$i_S^{-1} = \pi_{S, *}$는
+$i_S^{-1}(\mathcal{G})(U/S) = \mathcal{G}(U/S)$로 주어진다.
+\end{lemma}
+
+\begin{proof}
+이 경우 함자
+$u : S_\etale \to (\Sch/S)_\etale$는 위의 Lemma
+\ref{lemma-put-in-T-etale}의 증명에서 본 성질들에 더하여 충실충만이고,
+끝 대상을 끝 대상으로 보낸다. 따라서 Sites, Lemma
+\ref{sites-lemma-bigger-site}로부터 결론이 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-restriction-small-etale}
+Lemma \ref{lemma-at-the-bottom-etale}의 상황에서 함자
+$i_S^{-1} = \pi_{S, *}$를 흔히 {\it 작은 에탈 사이트로의 제한}이라
+한다. 큰 에탈 사이트 위의 층 $\mathcal{F}$에 대하여 이 제한을
+$\mathcal{F}|_{S_\etale}$로 나타낸다.
+\end{definition}
+
+\noindent
+이 표기를 쓰면 큰 사이트 위의 층 $\mathcal{F}$와 작은 사이트 위의 층
+$\mathcal{G}$에 대하여
+\begin{align*}
+\Mor_{\Sh(S_\etale)}(
+\mathcal{F}|_{S_\etale},
+\mathcal{G})
+& =
+\Mor_{\Sh((\Sch/S)_\etale)}(
+\mathcal{F},
+i_{S, *}\mathcal{G}) \\
+\Mor_{\Sh(S_\etale)}(
+\mathcal{G},
+\mathcal{F}|_{S_\etale})
+& =
+\Mor_{\Sh((\Sch/S)_\etale)}(
+\pi_S^{-1}\mathcal{G},
+\mathcal{F})
+\end{align*}
+이다. 또한 $(i_{S, *}\mathcal{G})|_{S_\etale} = \mathcal{G}$이고
+$(\pi_S^{-1}\mathcal{G})|_{S_\etale} = \mathcal{G}$이다.
+
+\begin{lemma}
+\label{lemma-morphism-big-etale}
+$\Sch_\etale$를 큰 에탈 사이트라 하고
+$f : T \to S$를 $\Sch_\etale$의 사상이라 하자. 함자
+$$
+u :
+(\Sch/T)_\etale
+\longrightarrow
+(\Sch/S)_\etale,
+\quad
+V/T \longmapsto V/S
+$$
+는 공연속이고, 다음과 같은 연속인 오른쪽 수반을 갖는다.
+$$
+v :
+(\Sch/S)_\etale
+\longrightarrow
+(\Sch/T)_\etale,
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+이 두 함자는 동일한 토포스 사상을 유도한다.
+$$
+f_{big} :
+\Sh((\Sch/T)_\etale)
+\longrightarrow
+\Sh((\Sch/S)_\etale)
+$$
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$이고
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$이다.
+또한 $f_{big}^{-1}$에는 올곱 및 등화자와 가환하는 왼쪽 수반
+$f_{big!}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+함자 $u$는 공연속이고 연속이며 올곱 및 등화자와 가환한다(세부는
+생략하며 Lemma \ref{lemma-put-in-T-etale}의 증명과 비교하라). 따라서
+Sites, Lemmas \ref{sites-lemma-when-shriek} 및
+\ref{sites-lemma-preserve-equalizers}를 적용하여 $f_{big}^{-1}$의 공식과
+$f_{big!}$의 존재를 얻는다. 또한 $U/T$와 $V/S$가 주어졌을 때
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$이므로 함자 $v$는 오른쪽
+수반이다. 따라서 Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} 및
+\ref{sites-lemma-have-functor-other-way-morphism}를 적용하면
+$f_{big, *}$의 공식을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-morphism-big-small-etale}
+$\Sch_\etale$를 큰 에탈 사이트라 하고
+$f : T \to S$를 $\Sch_\etale$의 사상이라 하자.
+\begin{enumerate}
+\item $i_f = f_{big} \circ i_T$이다. 여기서 $i_f$는 Lemma
+\ref{lemma-put-in-T-etale}에서와 같고 $i_T$는 Lemma
+\ref{lemma-at-the-bottom-etale}에서와 같다.
+\item 함자 $S_\etale \to T_\etale$,
+$(U \to S) \mapsto (U \times_S T \to T)$는 연속이며 다음 사이트
+사상을 유도한다.
+$$
+f_{small} : T_\etale \longrightarrow S_\etale
+$$
+$f_{small, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$이다.
+\item 다음은 사이트 사상들의 가환도식이다.
+$$
+\xymatrix{
+T_\etale \ar[d]_{f_{small}} &
+(\Sch/T)_\etale \ar[d]^{f_{big}} \ar[l]^{\pi_T}\\
+S_\etale &
+(\Sch/S)_\etale \ar[l]_{\pi_S}
+}
+$$
+따라서 토포스 사상으로서
+$f_{small} \circ \pi_T = \pi_S \circ f_{big}$이다.
+\item $f_{small} = \pi_S \circ f_{big} \circ i_T = \pi_S \circ i_f$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$i_f = f_{big} \circ i_T$라는 등식은
+$i_f^{-1} = i_T^{-1} \circ f_{big}^{-1}$에서 따르며, 후자의 등식은 위의
+함자 설명에서 명백하다. 이로써 (1)을 얻는다.
+
+\medskip\noindent
+함자
+$u :
+S_\etale
+\to
+T_\etale$, $u(U \to S) = (U \times_S T \to T)$
+는 덮개를 덮개로 보내고 올곱과 가환한다(Lemma \ref{lemma-etale} (3)
+및 \ref{lemma-fibre-products-etale} 참조). 또한 $S_\etale$, $T_\etale$에는
+각각 끝 대상 $S/S$와 $T/T$가 있고 $u(S/S) = T/T$이다. 따라서 Sites,
+Proposition \ref{sites-proposition-get-morphism}에 의해 함자 $u$는 사이트
+사상 $T_\etale \to S_\etale$에 대응한다. 이 사이트 사상은 다시 토포스
+사상을 유도한다(Sites, Lemma \ref{sites-lemma-morphism-sites-topoi}
+참조). 이 참고문헌들로부터 밂의 설명은 명백하다.
+
+\medskip\noindent
+(3)은 $\pi_S$와 $\pi_T$가 포함 함자로 주어지고, $f_{small}$과
+$f_{big}$이 기저변환 함자 $U \mapsto U \times_S T$로 주어지므로 따른다.
+
+\medskip\noindent
+(4)는 (3)에 $i_T$를 앞에서 합성하면 따른다.
+\end{proof}
+
+\noindent
+위 보조정리의 상황에서 Definition \ref{definition-restriction-small-etale}의
+용어를 쓰면, $T$의 큰 에탈 사이트 위의 층 $\mathcal{F}$에 대하여
+$$
+(f_{big, *}\mathcal{F})|_{S_\etale} =
+f_{small, *}(\mathcal{F}|_{T_\etale}),
+$$
+이다. 이 등식은 보조정리의 사이트 도식이 가환한다는 사실에서
+명백하다. 실제로 $T$와 $S$의 작은 에탈 사이트로의 제한은 각각
+$\pi_{T, *}$와 $\pi_{S, *}$로 주어진다. 당김과 제한을 포함하는 이와
+비슷한 공식은 성립하지 않는다.
+
+\begin{lemma}
+\label{lemma-composition-etale}
+% P05-EN-CH34-0001
+$\Sch_\etale$의 스킴 $X$, $Y$, $Y$와 사상
+$f : X \to Y$, $g : Y \to Z$가 주어지면
+$g_{big} \circ f_{big} = (g \circ f)_{big}$이고
+$g_{small} \circ f_{small} = (g \circ f)_{small}$이다.
+\end{lemma}
+
+\begin{proof}
+큰 사이트 위 함자들의 밂과 당김에 대한 Lemma
+\ref{lemma-morphism-big-etale}의 간단한 설명으로부터 따른다. 작은 사이트
+위 함자들에 대해서는 Lemma \ref{lemma-morphism-big-small-etale}의 밂
+함자 설명으로부터 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-morphism-big-small-cartesian-diagram-etale}
+$\Sch_\etale$를 큰 에탈 사이트라 하자. $\Sch_\etale$에서의 다음
+Cartesian 도식을 생각하자.
+$$
+\xymatrix{
+T' \ar[r]_{g'} \ar[d]_{f'} & T \ar[d]^f \\
+S' \ar[r]^g & S
+}
+$$
+그러면
+$i_g^{-1} \circ f_{big, *} = f'_{small, *} \circ (i_{g'})^{-1}$이고
+$g_{big}^{-1} \circ f_{big, *} = f'_{big, *} \circ (g'_{big})^{-1}$이다.
+\end{lemma}
+
+\begin{proof}
+도식이 Cartesian이므로 $U'/S'$에 대하여
+$U' \times_{S'} T' = U' \times_S T$이다. 따라서
+$i_g^{-1} \circ f_{big, *}$와 $f'_{small, *} \circ (i_{g'})^{-1}$는 모두
+$(\Sch/T)_\etale$ 위의 층 $\mathcal{F}$를 $S'_\etale$ 위의 층
+$U' \mapsto \mathcal{F}(U' \times_{S'} T')$로 보낸다(Lemmas
+\ref{lemma-put-in-T-etale} 및 \ref{lemma-morphism-big-etale}을 사용하라).
+두 번째 등식도 같은 방식으로 증명할 수 있으며, 더 일반적인 Sites,
+Lemma \ref{sites-lemma-localize-morphism}으로부터 유도할 수도 있다.
+\end{proof}
+
+\noindent
+$S$의 큰 에탈 사이트 위의 층은 $S$ 위의 모든 스킴에 놓인
+``통상적인'' 층들의 모음으로 생각할 수 있다.
+
+\begin{lemma}
+\label{lemma-characterize-sheaf-big-etale}
+$S$를 큰 에탈 사이트 $\Sch_\etale$에 속하는 스킴이라 하자. 큰 에탈
+사이트 $(\Sch/S)_\etale$ 위의 층 $\mathcal{F}$는 다음 자료로 주어진다.
+\begin{enumerate}
+\item 각 $T/S \in \Ob((\Sch/S)_\etale)$에 대하여 $T_\etale$ 위의 층
+$\mathcal{F}_T$,
+\item $(\Sch/S)_\etale$의 각 $f : T' \to T$에 대하여 사상
+$c_f : f_{small}^{-1}\mathcal{F}_T \to \mathcal{F}_{T'}$.
+\end{enumerate}
+이 자료는 다음 조건을 만족해야 한다.
+\begin{enumerate}
+\item[(a)] $(\Sch/S)_\etale$의 임의의 $f : T' \to T$와
+$g : T'' \to T'$에 대하여 합성 $c_g \circ g_{small}^{-1}c_f$는
+$c_{f \circ g}$와 같고,
+\item[(b)] $(\Sch/S)_\etale$의 $f : T' \to T$가 에탈이면 $c_f$는
+동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 Sites, Remark
+\ref{sites-remark-variant-glue-sheaves-absolute}에서 논의한 순수한 층론적
+명제로부터 따른다. 여기서는 직접적인 증명도 제시한다.
+
+\medskip\noindent
+$\Sh((\Sch/S)_\etale)$ 위의 층 $\mathcal{F}$가 주어졌다고 하자.
+$p : T \to S$가 구조 사상일 때 $\mathcal{F}_T = i_p^{-1}\mathcal{F}$로
+둔다. $T_\etale$의 임의의 $U \to T$에 대하여
+$\mathcal{F}_T(U) = \mathcal{F}(U/S)$임에 유의하라(Lemma
+\ref{lemma-put-in-T-etale} 참조). 따라서 $S$ 위의 $f : T' \to T$와
+$U \to T$가 주어지면 표준 사상
+$\mathcal{F}_T(U) = \mathcal{F}(U/S) \to \mathcal{F}(U \times_T T'/S)
+= \mathcal{F}_{T'}(U \times_T T')$를 얻는다. 여기서 가운데 사상은
+$S$ 위의 사상 $U \times_T T' \to U$에 관한 $\mathcal{F}$의 제한
+사상이다. 이 사상들의 모음은 제한과 양립하므로 사상
+$c'_f : \mathcal{F}_T \to f_{small, *}\mathcal{F}_{T'}$를 정의한다.
+여기서 $u : T_\etale \to T'_\etale$는 $f$에 대응하는 기저변환
+함자이다. $f_{small, *}$와 $f_{small}^{-1}$ 사이의 수반(Sites,
+Section \ref{sites-section-continuous-functors} 참조)에 의해 이는 사상
+$c_f : f_{small}^{-1}\mathcal{F}_T \to \mathcal{F}_{T'}$와 같다.
+$\mathcal{F}$의 제한 사상들을 합성하면 다시 제한 사상이 되므로
+$c'_{f \circ g}$는 $c'_f$와 $f_{small, *}c'_g$의 합성이다. 이로부터
+$c_f$, $c_g$, $c_{f \circ g}$ 사이의 원하는 관계를 얻는다.
+
+\medskip\noindent
+반대로 보조정리와 같은 계 $(\mathcal{F}_T, c_f)$가 주어졌다고 하자.
+$\mathcal{F}(T/S) = \mathcal{F}_T(T)$로 두어
+$\Sh((\Sch/S)_\etale)$ 위의 준층 $\mathcal{F}$를 정의할 수 있다. 제한
+사상은 다음과 같이 정의한다. $f : T' \to T$와
+$s \in \mathcal{F}(T)$가 주어지면 당김 $f^*(s)$를 $c_f(s)$로 둔다
+(여기서도 $c_f$를 사상
+$\mathcal{F}_T \to f_{small, *}\mathcal{F}_{T'}$로 생각한다). $c_f$들에
+대한 조건은 이 당김들이 필요한 함자성을 만족함을 보장한다. 이것이
+층이라는 확인은 생략한다. 이렇게 정의한 두 구성은 서로 역임이
+명백하다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{매끄러운 위상}
+\label{section-smooth}
+
+\noindent
+이 절에서는 매끄러운 위상을 정의한다. 뒤에서 이 위상이 에탈 위상과
+같은 토포스를 정의한다는 사실이 밝혀지므로(More on Morphisms, Section
+\ref{more-morphisms-section-etale-over-smooth} 참조) 다소 불필요해
+보인다. 그러나 이 위상은 여전히 의미가 있으며 때때로 사용된다.
+
+\begin{definition}
+\label{definition-smooth-covering}
+$T$를 스킴이라 하자. {\it $T$의 매끄러운 덮개}란 각 $f_i$가 매끄럽고
+$T = \bigcup f_i(T_i)$를 만족하는 스킴 사상족
+$\{f_i : T_i \to T\}_{i \in I}$를 말한다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-zariski-etale-smooth}
+모든 에탈 덮개는 매끄러운 덮개이며, 따라서 모든 Zariski 덮개도
+매끄러운 덮개이다.
+\end{lemma}
+
+\begin{proof}
+정의, 에탈 사상이 매끄럽다는 사실(Morphisms, Definition
+\ref{morphisms-definition-etale} 참조), 그리고 Lemma
+\ref{lemma-zariski-etale}로부터 명백하다.
+\end{proof}
+
+\noindent
+다음으로 이 개념이 Sites, Definition \ref{sites-definition-site}의
+조건을 만족함을 보인다.
+
+\begin{lemma}
+\label{lemma-smooth}
+$T$를 스킴이라 하자.
+\begin{enumerate}
+\item $T' \to T$가 동형이면 $\{T' \to T\}$는 $T$의 매끄러운 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 매끄러운 덮개이고 각 $i$에 대하여
+$\{T_{ij} \to T_i\}_{j\in J_i}$가 매끄러운 덮개이면,
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 매끄러운 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 매끄러운 덮개이고 $T' \to T$가
+스킴 사상이면 $\{T' \times_T T_i \to T'\}_{i\in I}$는 매끄러운
+덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smooth-affine}
+$T$를 아핀 스킴이라 하고 $\{T_i \to T\}_{i \in I}$를 $T$의 매끄러운
+덮개라 하자. 그러면 각 $U_j$가 아핀 스킴이고 각 사상 $U_j \to T$가
+표준 매끄러운 사상인, $\{T_i \to T\}_{i \in I}$의 세분
+$\{U_j \to T\}_{j = 1, \ldots, m}$가 존재한다(Morphisms, Definition
+\ref{morphisms-definition-smooth} 참조). 더 나아가 각 $U_j$를 어떤
+$T_i$의 아핀 열린집합으로 택할 수 있다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 다만 Algebra, Lemma \ref{algebra-lemma-smooth-syntomic}을 보라.
+\end{proof}
+
+\noindent
+따라서 아핀 스킴의 대응하는 표준 덮개를 다음과 같이 정의한다.
+
+\begin{definition}
+\label{definition-standard-smooth}
+$T$를 아핀 스킴이라 하자. $T$의 {\it 표준 매끄러운 덮개}란 각 $U_j$가
+아핀이고 $U_j \to T$가 표준 매끄러운 사상이며
+$T = \bigcup f_j(U_j)$를 만족하는 사상족
+$\{f_j : U_j \to T\}_{j = 1, \ldots, m}$를 말한다.
+\end{definition}
+
+\begin{definition}
+\label{definition-big-smooth-site}
+{\it 큰 매끄러운 사이트}란 Sites, Definition
+\ref{sites-definition-site}에서와 같은 사이트로서 다음과 같이 구성한
+임의의 $\Sch_{smooth}$를 말한다.
+\begin{enumerate}
+\item 임의의 스킴들의 집합 $S_0$와 이 스킴들 사이의 임의의 매끄러운
+덮개 집합 $\text{Cov}_0$를 택한다.
+\item 기저 범주로, 집합 $S_0$에서 시작하여 Sets, Lemma
+\ref{sets-lemma-construct-category}에서와 같이 구성한 임의의 범주
+$\Sch_\alpha$를 택한다.
+\item 범주 $\Sch_\alpha$, 매끄러운 덮개들의 모임, 그리고 위에서 택한
+집합 $\text{Cov}_0$로부터 출발하여 Sets, Lemma
+\ref{sets-lemma-coverings-site}에서와 같은 임의의 덮개 집합을 택한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+큰 사이트 정의의 동기와 설명은 Definition
+\ref{definition-big-zariski-site} 뒤의 주석을 보라.
+
+\medskip\noindent
+스킴 $S$의 큰 매끄러운 사이트를 계속 도입하기 전에, 큰 매끄러운
+사이트 $\Sch_{smooth}$의 위상은 어떤 의미에서 모든 스킴의 범주 위의
+매끄러운 위상으로부터 유도됨을 지적해 두자.
+
+\begin{lemma}
+\label{lemma-smooth-induced}
+$\Sch_{smooth}$를 Definition \ref{definition-big-smooth-site}에서와 같은
+큰 매끄러운 사이트라 하자. $T \in \Ob(\Sch_{smooth})$라 하고
+$\{T_i \to T\}_{i \in I}$를 $T$의 임의의 매끄러운 덮개라 하자.
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$를 세분하는 $\Sch_{smooth}$ 안의 $T$의
+덮개 $\{U_j \to T\}_{j \in J}$가 존재한다.
+\item $\{T_i \to T\}_{i \in I}$가 표준 매끄러운 덮개이면,
+$\Sch_{smooth}$의 어떤 덮개와 자명하게 동치이다.
+\item $\{T_i \to T\}_{i \in I}$가 Zariski 덮개이면,
+$\Sch_{smooth}$의 어떤 덮개와 자명하게 동치이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+각 $i$에 대하여, 모든 $T_{ij}$가 $T$의 어떤 아핀 열린 부분스킴으로
+사상되는 아핀 열린 덮개
+$T_i = \bigcup_{j \in J_i} T_{ij}$를 택한다. Lemma
+\ref{lemma-smooth}에 의해 세분
+$\{T_{ij} \to T\}_{i \in I, j \in J_i}$도 $T$의 매끄러운 덮개이다.
+따라서 각 $T_i$가 아핀이고 $T$의 아핀 열린집합 $W_i$로 사상된다고
+가정할 수 있다. Sets, Lemma \ref{sets-lemma-what-is-in-it}을 적용하면
+$W_i$가 $\Sch_{smooth}$의 어떤 대상과 동형임을 알 수 있다. 그러면
+$W_i$ 위의 유한형 스킴인 $T_i$도 Sets, Lemma
+\ref{sets-lemma-what-is-in-it}을 다시 적용하여 $\Sch_{smooth}$의 어떤
+대상 $V_i$와 동형이다. 덮개 $\{V_i \to T\}_{i \in I}$는
+$\{T_i \to T\}_{i \in I}$를 세분한다(서로 동형이기 때문이다). 또한
+Sets, Lemma \ref{sets-lemma-what-is-in-it}에 의해
+$\{V_i \to T\}_{i \in I}$는 $\Sch_{smooth}$ 안의 $T$의 어떤 덮개
+$\{U_j \to T\}_{j \in J}$와 조합적으로 동치이다. 덮개
+$\{U_j \to T\}_{j \in J}$는 (1)에서 요구한 세분이다. (2), (3)의
+상황에서는 Sets, Lemma \ref{sets-lemma-what-is-in-it}에 의해 각 스킴
+$T_i$가 $\Sch_{smooth}$의 어떤 대상과 동형이고, Sets, Lemma
+\ref{sets-lemma-coverings-site}을 한 번 더 적용하면 원하는 결론을 얻는다.
+\end{proof}
+
+\begin{definition}
+\label{definition-big-small-smooth}
+$S$를 스킴이라 하고 $\Sch_{smooth}$를 $S$를 포함하는 큰 매끄러운
+사이트라 하자.
+\begin{enumerate}
+\item {\it $S$의 큰 매끄러운 사이트} $(\Sch/S)_{smooth}$는 Sites,
+Section \ref{sites-section-localize}에서 도입한 사이트
+$\Sch_{smooth}/S$이다.
+\item {\it $S$의 큰 아핀 매끄러운 사이트} $(\textit{Aff}/S)_{smooth}$는
+$(\Sch/S)_{smooth}$의 충만한 부분범주로서, 그 대상은 아핀 $U/S$이다.
+$(\textit{Aff}/S)_{smooth}$의 덮개는 표준 매끄러운 덮개인
+$(\Sch/S)_{smooth}$의 임의의 덮개 $\{U_i \to U\}$이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+다음으로 큰 아핀 사이트가 큰 사이트와 같은 토포스를 정의함을
+확인한다.
+
+\begin{lemma}
+\label{lemma-affine-big-site-smooth}
+$S$를 스킴이라 하고 $\Sch_{smooth}$를 $S$를 포함하는 큰 매끄러운
+사이트라 하자. 함자
+$(\textit{Aff}/S)_{smooth} \to (\Sch/S)_{smooth}$
+는 특수 공연속이며 $\Sh((\textit{Aff}/S)_{smooth})$에서
+$\Sh((\Sch/S)_{smooth})$로 가는 토포스의 동치를 유도한다.
+\end{lemma}
+
+\begin{proof}
+특수 공연속 함자의 개념은 Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor}에서 도입한다. 따라서
+Sites, Lemma \ref{sites-lemma-equivalence}의 가정 (1)--(5)를 확인해야
+한다. 포함 함자를
+$u : (\textit{Aff}/S)_{smooth} \to (\Sch/S)_{smooth}$라 쓰자. 공연속이라는
+것은 아핀 $T$에 대한 $T/S$의 임의의 매끄러운 덮개가 $T$의 표준
+매끄러운 덮개로 세분될 수 있다는 뜻이며, 이것이 Lemma
+\ref{lemma-smooth-affine}의 내용이다. 따라서 (1)이 성립한다. 표준
+매끄러운 덮개는 매끄러운 덮개이므로 $u$는 연속이다. 따라서 (2)가
+성립한다. (3)과 (4)는 $u$가 충실충만이라는 사실에서 즉시 따른다.
+마지막으로 모든 스킴에는 아핀 열린 덮개가 존재하므로 조건 (5)가
+따른다.
+\end{proof}
+
+\noindent
+계속될 예정이다\ldots
+
+\begin{lemma}
+\label{lemma-morphism-big-smooth}
+$\Sch_{smooth}$를 큰 매끄러운 사이트라 하고
+$f : T \to S$를 $\Sch_{smooth}$의 사상이라 하자. 함자
+$$
+u : (\Sch/T)_{smooth} \longrightarrow (\Sch/S)_{smooth},
+\quad
+V/T \longmapsto V/S
+$$
+는 공연속이고, 다음과 같은 연속인 오른쪽 수반을 갖는다.
+$$
+v : (\Sch/S)_{smooth} \longrightarrow (\Sch/T)_{smooth},
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+이 두 함자는 동일한 토포스 사상을 유도한다.
+$$
+f_{big} :
+\Sh((\Sch/T)_{smooth})
+\longrightarrow
+\Sh((\Sch/S)_{smooth})
+$$
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$이고
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$이다.
+또한 $f_{big}^{-1}$에는 올곱 및 등화자와 가환하는 왼쪽 수반
+$f_{big!}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+함자 $u$는 공연속이고 연속이며 올곱 및 등화자와 가환한다. 따라서
+Sites, Lemmas \ref{sites-lemma-when-shriek} 및
+\ref{sites-lemma-preserve-equalizers}를 적용하여 $f_{big}^{-1}$의 공식과
+$f_{big!}$의 존재를 얻는다. 또한 $U/T$와 $V/S$가 주어졌을 때
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$이므로 함자 $v$는 오른쪽
+수반이다. 따라서 Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} 및
+\ref{sites-lemma-have-functor-other-way-morphism}를 적용하면
+$f_{big, *}$의 공식을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{신토믹 위상}
+\label{section-syntomic}
+
+\noindent
+이 절에서는 신토믹 위상을 정의한다. 이 위상은 흔히 fppf 위상과 같은
+코호몰로지 군을 가지면서도 기술적으로 다루기가 더 쉽다는 점에서 매우
+흥미롭다.
+
+\begin{definition}
+\label{definition-syntomic-covering}
+$T$를 스킴이라 하자. {\it $T$의 신토믹 덮개}란 각 $f_i$가 신토믹이고
+$T = \bigcup f_i(T_i)$를 만족하는 스킴 사상족
+$\{f_i : T_i \to T\}_{i \in I}$를 말한다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-zariski-etale-smooth-syntomic}
+모든 매끄러운 덮개는 신토믹 덮개이며, 따라서 모든 에탈 덮개나
+Zariski 덮개도 신토믹 덮개이다.
+\end{lemma}
+
+\begin{proof}
+정의와 매끄러운 사상이 신토믹이라는 사실로부터 명백하다(Morphisms,
+Lemma \ref{morphisms-lemma-smooth-syntomic} 및 Lemma
+\ref{lemma-zariski-etale-smooth} 참조).
+\end{proof}
+
+\noindent
+다음으로 이 개념이 Sites, Definition \ref{sites-definition-site}의
+조건을 만족함을 보인다.
+
+\begin{lemma}
+\label{lemma-syntomic}
+$T$를 스킴이라 하자.
+\begin{enumerate}
+\item $T' \to T$가 동형이면 $\{T' \to T\}$는 $T$의 신토믹 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 신토믹 덮개이고 각 $i$에 대하여
+$\{T_{ij} \to T_i\}_{j\in J_i}$가 신토믹 덮개이면,
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 신토믹 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 신토믹 덮개이고 $T' \to T$가 스킴
+사상이면 $\{T' \times_T T_i \to T'\}_{i\in I}$는 신토믹 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-syntomic-affine}
+$T$를 아핀 스킴이라 하고 $\{T_i \to T\}_{i \in I}$를 $T$의 신토믹
+덮개라 하자. 그러면 각 $U_j$가 아핀 스킴이고 각 사상 $U_j \to T$가
+표준 신토믹 사상인, $\{T_i \to T\}_{i \in I}$의 세분
+$\{U_j \to T\}_{j = 1, \ldots, m}$가 존재한다(Morphisms, Definition
+\ref{morphisms-definition-syntomic} 참조). 더 나아가 각 $U_j$를 어떤
+$T_i$의 아핀 열린집합으로 택할 수 있다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 다만 Algebra, Lemma \ref{algebra-lemma-syntomic}을 보라.
+\end{proof}
+
+\noindent
+따라서 아핀 스킴의 대응하는 표준 덮개를 다음과 같이 정의한다.
+
+\begin{definition}
+\label{definition-standard-syntomic}
+$T$를 아핀 스킴이라 하자. $T$의 {\it 표준 신토믹 덮개}란 각 $U_j$가
+아핀이고 $U_j \to T$가 표준 신토믹 사상이며
+$T = \bigcup f_j(U_j)$를 만족하는 사상족
+$\{f_j : U_j \to T\}_{j = 1, \ldots, m}$를 말한다.
+\end{definition}
+
+\begin{definition}
+\label{definition-big-syntomic-site}
+{\it 큰 신토믹 사이트}란 Sites, Definition
+\ref{sites-definition-site}에서와 같은 사이트로서 다음과 같이 구성한
+임의의 $\Sch_{syntomic}$을 말한다.
+\begin{enumerate}
+\item 임의의 스킴들의 집합 $S_0$와 이 스킴들 사이의 임의의 신토믹
+덮개 집합 $\text{Cov}_0$를 택한다.
+\item 기저 범주로, 집합 $S_0$에서 시작하여 Sets, Lemma
+\ref{sets-lemma-construct-category}에서와 같이 구성한 임의의 범주
+$\Sch_\alpha$를 택한다.
+\item 범주 $\Sch_\alpha$, 신토믹 덮개들의 모임, 그리고 위에서 택한
+집합 $\text{Cov}_0$로부터 출발하여 Sets, Lemma
+\ref{sets-lemma-coverings-site}에서와 같은 임의의 덮개 집합을 택한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+큰 사이트 정의의 동기와 설명은 Definition
+\ref{definition-big-zariski-site} 뒤의 주석을 보라.
+
+\medskip\noindent
+스킴 $S$의 큰 신토믹 사이트를 계속 도입하기 전에, 큰 신토믹 사이트
+$\Sch_{syntomic}$의 위상은 어떤 의미에서 모든 스킴의 범주 위의 신토믹
+위상으로부터 유도됨을 지적해 두자.
+
+\begin{lemma}
+\label{lemma-syntomic-induced}
+$\Sch_{syntomic}$을 Definition \ref{definition-big-syntomic-site}에서와
+같은 큰 신토믹 사이트라 하자. $T \in \Ob(\Sch_{syntomic})$라 하고
+$\{T_i \to T\}_{i \in I}$를 $T$의 임의의 신토믹 덮개라 하자.
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$를 세분하는 $\Sch_{syntomic}$ 안의 $T$의
+덮개 $\{U_j \to T\}_{j \in J}$가 존재한다.
+\item $\{T_i \to T\}_{i \in I}$가 표준 신토믹 덮개이면,
+$\Sch_{syntomic}$ 안의 어떤 덮개와 자명하게 동치이다.
+\item $\{T_i \to T\}_{i \in I}$가 Zariski 덮개이면,
+$\Sch_{syntomic}$ 안의 어떤 덮개와 자명하게 동치이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+각 $i$에 대하여, 모든 $T_{ij}$가 $T$의 어떤 아핀 열린 부분스킴으로
+사상되는 아핀 열린 덮개
+$T_i = \bigcup_{j \in J_i} T_{ij}$를 택한다. Lemma
+\ref{lemma-syntomic}에 의해 세분
+$\{T_{ij} \to T\}_{i \in I, j \in J_i}$도 $T$의 신토믹 덮개이다. 따라서
+각 $T_i$가 아핀이고 $T$의 아핀 열린집합 $W_i$로 사상된다고 가정할 수
+있다. Sets, Lemma \ref{sets-lemma-what-is-in-it}을 적용하면 $W_i$가
+$\Sch_{syntomic}$의 어떤 대상과 동형임을 알 수 있다. 그러면 $W_i$ 위의
+유한형 스킴인 $T_i$도 Sets, Lemma \ref{sets-lemma-what-is-in-it}을 다시
+적용하여 $\Sch_{syntomic}$의 어떤 대상 $V_i$와 동형이다. 덮개
+$\{V_i \to T\}_{i \in I}$는 $\{T_i \to T\}_{i \in I}$를 세분한다(서로
+동형이기 때문이다). 또한 Sets, Lemma
+\ref{sets-lemma-what-is-in-it}에 의해 $\{V_i \to T\}_{i \in I}$는
+$\Sch_{syntomic}$ 안의 $T$의 어떤 덮개 $\{U_j \to T\}_{j \in J}$와
+조합적으로 동치이다. 덮개 $\{U_j \to T\}_{j \in J}$는 (1)에서 말한
+덮개이다. (2), (3)의 상황에서는 Sets, Lemma
+\ref{sets-lemma-what-is-in-it}에 의해 각 스킴 $T_i$가
+$\Sch_{syntomic}$의 어떤 대상과 동형이고, Sets, Lemma
+\ref{sets-lemma-coverings-site}을 한 번 더 적용하면 원하는 결론을 얻는다.
+\end{proof}
+
+\begin{definition}
+\label{definition-big-small-syntomic}
+$S$를 스킴이라 하고 $\Sch_{syntomic}$을 $S$를 포함하는 큰 신토믹
+사이트라 하자.
+\begin{enumerate}
+\item {\it $S$의 큰 신토믹 사이트} $(\Sch/S)_{syntomic}$은 Sites,
+Section \ref{sites-section-localize}에서 도입한 사이트
+$\Sch_{syntomic}/S$이다.
+\item {\it $S$의 큰 아핀 신토믹 사이트} $(\textit{Aff}/S)_{syntomic}$은
+$(\Sch/S)_{syntomic}$의 충만한 부분범주로서, 그 대상은 아핀 $U/S$이다.
+$(\textit{Aff}/S)_{syntomic}$의 덮개는 표준 신토믹 덮개인
+$(\Sch/S)_{syntomic}$의 임의의 덮개 $\{U_i \to U\}$이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+다음으로 큰 아핀 사이트가 큰 사이트와 같은 토포스를 정의함을
+확인한다.
+
+\begin{lemma}
+\label{lemma-affine-big-site-syntomic}
+$S$를 스킴이라 하고 $\Sch_{syntomic}$을 $S$를 포함하는 큰 신토믹
+사이트라 하자. 함자
+$(\textit{Aff}/S)_{syntomic} \to (\Sch/S)_{syntomic}$
+는 특수 공연속이며 $\Sh((\textit{Aff}/S)_{syntomic})$에서
+$\Sh((\Sch/S)_{syntomic})$로 가는 토포스의 동치를 유도한다.
+\end{lemma}
+
+\begin{proof}
+특수 공연속 함자의 개념은 Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor}에서 도입한다. 따라서
+Sites, Lemma \ref{sites-lemma-equivalence}의 가정 (1)--(5)를 확인해야
+한다. 포함 함자를
+$u : (\textit{Aff}/S)_{syntomic} \to (\Sch/S)_{syntomic}$이라 쓰자.
+공연속이라는 것은 아핀 $T$에 대한 $T/S$의 임의의 신토믹 덮개가
+$T$의 표준 신토믹 덮개로 세분될 수 있다는 뜻이며, 이것이 Lemma
+\ref{lemma-syntomic-affine}의 내용이다. 따라서 (1)이 성립한다. 표준
+신토믹 덮개는 신토믹 덮개이므로 $u$는 연속이다. 따라서 (2)가
+성립한다. (3)과 (4)는 $u$가 충실충만이라는 사실에서 즉시 따른다.
+마지막으로 모든 스킴에는 아핀 열린 덮개가 존재하므로 조건 (5)가
+따른다.
+\end{proof}
+
+\noindent
+계속될 예정이다\ldots
+
+\begin{lemma}
+\label{lemma-morphism-big-syntomic}
+$\Sch_{syntomic}$을 큰 신토믹 사이트라 하고
+$f : T \to S$를 $\Sch_{syntomic}$의 사상이라 하자. 함자
+$$
+u : (\Sch/T)_{syntomic} \longrightarrow (\Sch/S)_{syntomic},
+\quad
+V/T \longmapsto V/S
+$$
+는 공연속이고, 다음과 같은 연속인 오른쪽 수반을 갖는다.
+$$
+v : (\Sch/S)_{syntomic} \longrightarrow (\Sch/T)_{syntomic},
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+이 두 함자는 동일한 토포스 사상을 유도한다.
+$$
+f_{big} :
+\Sh((\Sch/T)_{syntomic})
+\longrightarrow
+\Sh((\Sch/S)_{syntomic})
+$$
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$이고
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$이다.
+또한 $f_{big}^{-1}$에는 올곱 및 등화자와 가환하는 왼쪽 수반
+$f_{big!}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+함자 $u$는 공연속이고 연속이며 올곱 및 등화자와 가환한다. 따라서
+Sites, Lemmas \ref{sites-lemma-when-shriek} 및
+\ref{sites-lemma-preserve-equalizers}를 적용하여 $f_{big}^{-1}$의 공식과
+$f_{big!}$의 존재를 얻는다. 또한 $U/T$와 $V/S$가 주어졌을 때
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$이므로 함자 $v$는 오른쪽
+수반이다. 따라서 Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} 및
+\ref{sites-lemma-have-functor-other-way-morphism}를 적용하면
+$f_{big, *}$의 공식을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{fppf 위상}
+\label{section-fppf}
+
+\noindent
+$S$를 스킴이라 하자. $S$ 위의 스킴 범주에 fppf 위상\footnote{fppf는
+``fid\`element plat de pr\'esentation finie''의 약자이다.}을 정의하고자
+한다. 앞서 정한 일반 원칙에 따라 먼저 fppf 덮개의 개념을 도입한다.
+
+\begin{definition}
+\label{definition-fppf-covering}
+$T$를 스킴이라 하자. {\it $T$의 fppf 덮개}란 각 $f_i$가 평탄하고
+국소적으로 유한 표시이며 $T = \bigcup f_i(T_i)$를 만족하는 스킴 사상족
+$\{f_i : T_i \to T\}_{i \in I}$를 말한다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-zariski-etale-smooth-syntomic-fppf}
+모든 신토믹 덮개는 fppf 덮개이며, 따라서 모든 매끄러운 덮개, 에탈
+덮개, 또는 Zariski 덮개도 fppf 덮개이다.
+\end{lemma}
+
+\begin{proof}
+정의, 신토믹 사상이 평탄하고 국소적으로 유한 표시라는 사실(Morphisms,
+Lemmas \ref{morphisms-lemma-syntomic-locally-finite-presentation} 및
+\ref{morphisms-lemma-syntomic-flat} 참조), 그리고 Lemma
+\ref{lemma-zariski-etale-smooth-syntomic}으로부터 명백하다.
+\end{proof}
+
+\noindent
+다음으로 이 개념이 Sites, Definition \ref{sites-definition-site}의
+조건을 만족함을 보인다.
+
+\begin{lemma}
+\label{lemma-fppf}
+$T$를 스킴이라 하자.
+\begin{enumerate}
+\item $T' \to T$가 동형이면 $\{T' \to T\}$는 $T$의 fppf 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 fppf 덮개이고 각 $i$에 대하여
+$\{T_{ij} \to T_i\}_{j\in J_i}$가 fppf 덮개이면,
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 fppf 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 fppf 덮개이고 $T' \to T$가 스킴
+사상이면 $\{T' \times_T T_i \to T'\}_{i\in I}$는 fppf 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+첫 번째 주장은 명백하다. 두 번째 주장은 평탄 사상의 합성이 평탄하고
+(Morphisms, Lemma \ref{morphisms-lemma-composition-flat} 참조), 유한 표시
+사상의 합성이 유한 표시라는 사실(Morphisms, Lemma
+\ref{morphisms-lemma-composition-finite-presentation} 참조)에서 따른다.
+세 번째 주장은 평탄 사상의 기저변환이 평탄하고(Morphisms, Lemma
+\ref{morphisms-lemma-base-change-flat} 참조), 유한 표시 사상의 기저변환이
+유한 표시라는 사실(Morphisms, Lemma
+\ref{morphisms-lemma-base-change-finite-presentation} 참조)에서 따른다.
+또한 전사 사상족의 기저변환은 전사이다(증명은 생략한다).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fppf-affine}
+$T$를 아핀 스킴이라 하고 $\{T_i \to T\}_{i \in I}$를 $T$의 fppf
+덮개라 하자. 그러면 각 $U_j$가 아핀 스킴이고
+$\{T_i \to T\}_{i \in I}$의 세분인 fppf 덮개
+$\{U_j \to T\}_{j = 1, \ldots, m}$가 존재한다. 더 나아가 각 $U_j$를
+어떤 $T_i$의 아핀 열린집합으로 택할 수 있다.
+\end{lemma}
+
+\begin{proof}
+평탄하고 국소적으로 유한 표시인 사상이 열린 사상이라는 사실을 쓰면
+정의에서 바로 따른다(Morphisms, Lemma
+\ref{morphisms-lemma-fppf-open} 참조).
+\end{proof}
+
+\noindent
+따라서 아핀 스킴의 대응하는 표준 덮개를 다음과 같이 정의한다.
+
+\begin{definition}
+\label{definition-standard-fppf}
+$T$를 아핀 스킴이라 하자. $T$의 {\it 표준 fppf 덮개}란 각 $U_j$가
+아핀이고 $T$ 위에서 평탄하며 유한 표시이고
+$T = \bigcup f_j(U_j)$를 만족하는 사상족
+$\{f_j : U_j \to T\}_{j = 1, \ldots, m}$를 말한다.
+\end{definition}
+
+\begin{definition}
+\label{definition-big-fppf-site}
+{\it 큰 fppf 사이트}란 Sites, Definition
+\ref{sites-definition-site}에서와 같은 사이트로서 다음과 같이 구성한
+임의의 $\Sch_{fppf}$를 말한다.
+\begin{enumerate}
+\item 임의의 스킴들의 집합 $S_0$와 이 스킴들 사이의 임의의 fppf 덮개
+집합 $\text{Cov}_0$를 택한다.
+\item 기저 범주로, 집합 $S_0$에서 시작하여 Sets, Lemma
+\ref{sets-lemma-construct-category}에서와 같이 구성한 임의의 범주
+$\Sch_\alpha$를 택한다.
+\item 범주 $\Sch_\alpha$, fppf 덮개들의 모임, 그리고 위에서 택한 집합
+$\text{Cov}_0$로부터 출발하여 Sets, Lemma
+\ref{sets-lemma-coverings-site}에서와 같은 임의의 덮개 집합을 택한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+큰 사이트 정의의 동기와 설명은 Definition
+\ref{definition-big-zariski-site} 뒤의 주석을 보라.
+
+\medskip\noindent
+스킴 $S$의 큰 fppf 사이트를 계속 도입하기 전에, 큰 fppf 사이트
+$\Sch_{fppf}$의 위상은 어떤 의미에서 모든 스킴의 범주 위의 fppf
+위상으로부터 유도됨을 지적해 두자.
+
+\begin{lemma}
+\label{lemma-fppf-induced}
+$\Sch_{fppf}$를 Definition \ref{definition-big-fppf-site}에서와 같은 큰
+fppf 사이트라 하자. $T \in \Ob(\Sch_{fppf})$라 하고
+$\{T_i \to T\}_{i \in I}$를 $T$의 임의의 fppf 덮개라 하자.
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$를 세분하는 $\Sch_{fppf}$ 안의 $T$의
+덮개 $\{U_j \to T\}_{j \in J}$가 존재한다.
+\item $\{T_i \to T\}_{i \in I}$가 표준 fppf 덮개이면,
+$\Sch_{fppf}$의 어떤 덮개와 자명하게 동치이다.
+\item $\{T_i \to T\}_{i \in I}$가 Zariski 덮개이면,
+$\Sch_{fppf}$의 어떤 덮개와 자명하게 동치이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+각 $i$에 대하여, 모든 $T_{ij}$가 $T$의 어떤 아핀 열린 부분스킴으로
+사상되는 아핀 열린 덮개
+$T_i = \bigcup_{j \in J_i} T_{ij}$를 택한다. Lemma \ref{lemma-fppf}에
+의해 세분 $\{T_{ij} \to T\}_{i \in I, j \in J_i}$도 $T$의 fppf
+덮개이다. 따라서 각 $T_i$가 아핀이고 $T$의 아핀 열린집합 $W_i$로
+사상된다고 가정할 수 있다. Sets, Lemma
+\ref{sets-lemma-what-is-in-it}을 적용하면 $W_i$가 $\Sch_{fppf}$의 어떤
+대상과 동형임을 알 수 있다. 그러면 $W_i$ 위의 유한형 스킴인 $T_i$도
+Sets, Lemma \ref{sets-lemma-what-is-in-it}을 다시 적용하여
+$\Sch_{fppf}$의 어떤 대상 $V_i$와 동형이다. 덮개
+$\{V_i \to T\}_{i \in I}$는 $\{T_i \to T\}_{i \in I}$를 세분한다(서로
+동형이기 때문이다). 또한 Sets, Lemma
+\ref{sets-lemma-what-is-in-it}에 의해 $\{V_i \to T\}_{i \in I}$는
+$\Sch_{fppf}$ 안의 $T$의 어떤 덮개 $\{U_j \to T\}_{j \in J}$와
+조합적으로 동치이다. 덮개 $\{U_j \to T\}_{j \in J}$는 (1)에서
+요구한 세분이다. (2), (3)의 상황에서는 Sets, Lemma
+\ref{sets-lemma-what-is-in-it}에 의해 각 스킴 $T_i$가 $\Sch_{fppf}$의
+어떤 대상과 동형이고, Sets, Lemma \ref{sets-lemma-coverings-site}을 한
+번 더 적용하면 원하는 결론을 얻는다.
+\end{proof}
+
+\begin{definition}
+\label{definition-big-small-fppf}
+$S$를 스킴이라 하고 $\Sch_{fppf}$를 $S$를 포함하는 큰 fppf 사이트라
+하자.
+\begin{enumerate}
+\item {\it $S$의 큰 fppf 사이트} $(\Sch/S)_{fppf}$는 Sites, Section
+\ref{sites-section-localize}에서 도입한 사이트 $\Sch_{fppf}/S$이다.
+\item {\it $S$의 큰 아핀 fppf 사이트} $(\textit{Aff}/S)_{fppf}$는
+$(\Sch/S)_{fppf}$의 충만한 부분범주로서, 그 대상은 아핀 $U/S$이다.
+$(\textit{Aff}/S)_{fppf}$의 덮개는 표준 fppf 덮개인
+$(\Sch/S)_{fppf}$의 임의의 덮개 $\{U_i \to U\}$이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+큰 아핀 fppf 사이트가 실제로 사이트인지는 완전히 자명하지 않다.
+이제 이를 확인한다.
+
+\begin{lemma}
+\label{lemma-verify-site-fppf}
+$S$를 스킴이라 하고 $\Sch_{fppf}$를 $S$를 포함하는 큰 fppf 사이트라
+하자. 그러면 $(\textit{Aff}/S)_{fppf}$는 사이트이다.
+\end{lemma}
+
+\begin{proof}
+$(\textit{Aff}/S)_{fppf}$가 사이트임을 보이자. Lemma
+\ref{lemma-verify-site-etale}의 증명에서와 같이 논하면, 아핀 스킴의 표준
+fppf 덮개들의 모음이 Sites, Definition \ref{sites-definition-site}의
+성질 (1), (2), (3)을 만족함을 보이면 충분하다. 이는 명백하다. 예를
+들어 $\{T_i \to T\}_{i\in I}$가 표준 fppf 덮개이고 각 $i$에 대하여
+$\{T_{ij} \to T_i\}_{j\in J_i}$가 표준 fppf 덮개이면,
+$\bigcup_{i\in I} J_i$가 유한이고 각 $T_{ij}$가 아핀이므로
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 표준 fppf 덮개이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fibre-products-fppf}
+$S$를 스킴이라 하고 $\Sch_{fppf}$를 $S$를 포함하는 큰 fppf 사이트라
+하자. 사이트 $\Sch_{fppf}$, $(\Sch/S)_{fppf}$, 그리고
+$(\textit{Aff}/S)_{fppf}$의 기저 범주에는 올곱이 존재한다. 각 경우 모든
+스킴의 범주 $\Sch$로 가는 자명한 함자는 올곱을 취하는 연산과
+가환한다. 범주 $(\Sch/S)_{fppf}$에는 끝 대상이 있으며, 그것은
+$S/S$이다.
+\end{lemma}
+
+\begin{proof}
+$\Sch_{fppf}$에 대해서는 구성상 참이다(Sets, Lemma
+\ref{sets-lemma-what-is-in-it} 참조). $U, V, W \in \Ob(\Sch_{fppf})$인
+스킴 사상 $U \to S$, $V \to U$, $W \to U$가 주어졌다고 하자.
+$\Sch_{fppf}$ 안의 올곱 $V \times_U W$는 $\Sch$ 안의 올곱이며, 모든
+$S$-스킴의 범주에서 $U/S$ 위의 $V/S$와 $W/S$의 올곱이기도 하다.
+따라서 $(\Sch/S)_{fppf}$ 안의 올곱이다. 이로써 $(\Sch/S)_{fppf}$에
+대한 결론을 얻는다. $U, V, W$가 아핀이면 $V \times_U W$도 아핀이므로
+$(\textit{Aff}/S)_{fppf}$에 대한 결론도 얻는다.
+\end{proof}
+
+\noindent
+다음으로 큰 아핀 사이트가 큰 사이트와 같은 토포스를 정의함을
+확인한다.
+
+\begin{lemma}
+\label{lemma-affine-big-site-fppf}
+$S$를 스킴이라 하고 $\Sch_{fppf}$를 $S$를 포함하는 큰 fppf 사이트라
+하자. 함자 $(\textit{Aff}/S)_{fppf} \to (\Sch/S)_{fppf}$는 공연속이며
+$\Sh((\textit{Aff}/S)_{fppf})$에서 $\Sh((\Sch/S)_{fppf})$로 가는
+토포스의 동치를 유도한다.
+\end{lemma}
+
+\begin{proof}
+특수 공연속 함자의 개념은 Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor}에서 도입한다. 따라서
+Sites, Lemma \ref{sites-lemma-equivalence}의 가정 (1)--(5)를 확인해야
+한다. 포함 함자를
+$u : (\textit{Aff}/S)_{fppf} \to (\Sch/S)_{fppf}$라 쓰자. 공연속이라는
+것은 아핀 $T$에 대한 $T/S$의 임의의 fppf 덮개가 $T$의 표준 fppf
+덮개로 세분될 수 있다는 뜻이며, 이것이 Lemma
+\ref{lemma-fppf-affine}의 내용이다. 따라서 (1)이 성립한다. 표준 fppf
+덮개는 fppf 덮개이므로 $u$는 연속이다. 따라서 (2)가 성립한다. (3)과
+(4)는 $u$가 충실충만이라는 사실에서 즉시 따른다. 마지막으로 모든
+스킴에는 아핀 열린 덮개가 존재하므로 조건 (5)가 따른다.
+\end{proof}
+
+\noindent
+다음으로 이 사이트들에 대응하는 토포스 사이의 몇 가지 관계를
+확립한다.
+
+\begin{lemma}
+\label{lemma-morphism-big-fppf}
+$\Sch_{fppf}$를 큰 fppf 사이트라 하고
+$f : T \to S$를 $\Sch_{fppf}$의 사상이라 하자. 함자
+$$
+u : (\Sch/T)_{fppf} \longrightarrow (\Sch/S)_{fppf},
+\quad
+V/T \longmapsto V/S
+$$
+는 공연속이고, 다음과 같은 연속인 오른쪽 수반을 갖는다.
+$$
+v : (\Sch/S)_{fppf} \longrightarrow (\Sch/T)_{fppf},
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+이 두 함자는 동일한 토포스 사상을 유도한다.
+$$
+f_{big} :
+\Sh((\Sch/T)_{fppf})
+\longrightarrow
+\Sh((\Sch/S)_{fppf})
+$$
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$이고
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$이다.
+또한 $f_{big}^{-1}$에는 올곱 및 등화자와 가환하는 왼쪽 수반
+$f_{big!}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+함자 $u$는 공연속이고 연속이며 올곱 및 등화자와 가환한다. 따라서
+Sites, Lemmas \ref{sites-lemma-when-shriek} 및
+\ref{sites-lemma-preserve-equalizers}를 적용하여 $f_{big}^{-1}$의 공식과
+$f_{big!}$의 존재를 얻는다. 또한 $U/T$와 $V/S$가 주어졌을 때
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$이므로 함자 $v$는 오른쪽
+수반이다. 따라서 Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} 및
+\ref{sites-lemma-have-functor-other-way-morphism}를 적용하면
+$f_{big, *}$의 공식을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-fppf}
+$(\Sch/S)_{fppf}$의 스킴 $X$, $Y$, $Z$와 사상
+$f : X \to Y$, $g : Y \to Z$가 주어지면
+$g_{big} \circ f_{big} = (g \circ f)_{big}$이다.
+\end{lemma}
+
+\begin{proof}
+큰 사이트 위 함자들의 밂과 당김에 대한 Lemma
+\ref{lemma-morphism-big-fppf}의 간단한 설명으로부터 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{ph 위상}
+\label{section-ph}
+
+\noindent
+이 절에서는 ph 위상을 정의한다. 이는 Zariski 덮개와 고유 전사 사상으로
+생성되는 위상이다(Lemma \ref{lemma-characterize-sheaf} 참조).
+
+\medskip\noindent
+표기와 용어는 Goodwillie와 Lichtenbaum의 논문 \cite{ph}에서 빌려온다.
+이들은 Noetherian 스킴의 부분범주로 제한하면 ph 위상이 Voevodsky가
+처음 정의한 ``h 위상''과 같음을 보인다. 이는 Zariski 열린 덮개와
+보편적으로 몫사상인 유한형 사상으로 생성되는 위상이다. 또한 두 위상이
+비 Noetherian 스킴에서는 일치하지 않음을 보인다
+(\cite[Example 4.5]{ph} 참조). 우리의 h 위상은 More on Flatness,
+Section \ref{flat-section-h}에서 다시 다룬다.
+
+\medskip\noindent
+이 위상의 덮개를 정의하기 전에 약간의 준비가 필요하다.
+
+\begin{definition}
+\label{definition-standard-ph-covering}
+$T$를 아핀 스킴이라 하자. {\it 표준 ph 덮개}란 고유 전사 사상
+$f : U \to T$와 아핀 열린 덮개
+$U = \bigcup_{j = 1, \ldots, m} U_j$로부터 $f_j = f|_{U_j}$로 두어
+구성한 사상족 $\{f_j : U_j \to T\}_{j = 1, \ldots, m}$를 말한다.
+\end{definition}
+
+\noindent
+Chow 보조정리로부터 표준 ph 덮개를 전사 사영 사상에 대응하는 표준 ph
+덮개로 세분할 수 있음이 즉시 따른다.
+
+\begin{lemma}
+\label{lemma-base-change-standard-ph}
+$\{f_j : U_j \to T\}_{j = 1, \ldots, m}$를 표준 ph 덮개라 하고
+$T' \to T$를 아핀 스킴의 사상이라 하자. 그러면
+$\{U_j \times_T T' \to T'\}_{j = 1, \ldots, m}$는 표준 ph 덮개이다.
+\end{lemma}
+
+\begin{proof}
+Definition \ref{definition-standard-ph-covering}에서와 같이
+$f : U \to T$가 고유 전사이고 아핀 열린 덮개
+$U = \bigcup_{j = 1, \ldots, m} U_j$가 주어졌다고 하자. 그러면
+$U \times_T T' \to T'$는 고유 전사이다(Morphisms, Lemmas
+\ref{morphisms-lemma-base-change-surjective} 및
+\ref{morphisms-lemma-base-change-proper}). 또한
+$U \times_T T' = \bigcup_{j = 1, \ldots, m} U_j \times_T T'$는 아핀 열린
+덮개이다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-refine-by-standard-ph}
+$T$를 아핀 스킴이라 하자. 끝 대상이 $T$인 다음 각 유형의 사상족에는
+표준 ph 덮개에 의한 세분이 존재한다.
+\begin{enumerate}
+\item $T$의 임의의 Zariski 열린 덮개,
+\item $\{W_{ji} \to T\}_{j = 1, \ldots, m, i = 1, \ldots n_j}$
+단, $\{W_{ji} \to U_j\}_{i = 1, \ldots, n_j}$와
+$\{U_j \to T\}_{j = 1, \ldots, m}$는 표준 ph 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 $T$의 임의의 Zariski 열린 덮개가 유한 아핀 열린 덮개로 세분될
+수 있다는 사실에서 따른다.
+
+\medskip\noindent
+% P05-EN-CH34-0002
+(3)의 증명. 고유 전사 사상 $U \to T$와 Definition
+\ref{definition-standard-ph-covering}에서와 같은 덮개
+$U = \bigcup_{j = 1, \ldots, m} U_j$를 택한다.
+또한 고유 전사 사상 $W_j \to U_j$와
+$W_j = \bigcup W_{ji}$를 Definition
+\ref{definition-standard-ph-covering}에서와 같이 택한다. Chow 보조정리
+(Limits, Lemma \ref{limits-lemma-chow-finite-type})에 의해 고유 전사 사상
+$W'_j \to W_j$와 닫힌 몰입 $W'_j \to \mathbf{P}^{e_j}_{U_j}$를 찾을 수
+있다. 따라서 $W_j$를 $W'_j$로, $W_j = \bigcup W_{ji}$를 $W'_j$의
+적절한 아핀 열린 덮개로 바꾸어, 모든 $j = 1, \ldots, m$에 대하여
+닫힌 몰입 $W_j \subset \mathbf{P}^{e_j}_{U_j}$가 존재한다고 가정할 수
+있다.
+
+\medskip\noindent
+$\overline{W}_j \subset \mathbf{P}^{e_j}_U$를 $W_j$의 스킴론적 폐포라
+하자. 그러면 $W_j \subset \overline{W}_j$는 열린 부분스킴이다. 실제로
+$W_j$는 사상 $\overline{W}_j \to U$에 의한 $U_j \subset U$의 역상이다.
+(이를 보려면 $W_j \to \mathbf{P}^{e_j}_U$가 준콤팩트이므로 스킴론적
+상의 형성이 열린집합으로의 제한과 가환한다는 사실을 사용하라.
+Morphisms, Section \ref{morphisms-section-scheme-theoretic-image} 참조.)
+$Z_j = U \setminus U_j$에 유도된 축소 닫힌 부분스킴 구조를 주자. 그러면
+$$
+V_j = \overline{W}_j \amalg Z_j \to U
+$$
+는 고유 전사이고, 열린 부분스킴 $W_j \subset V_j$는 $U_j$의 역상이다.
+따라서 $v \in V_j$, $v \not \in W_j$에 대하여 어떤
+$1 \leq j' \leq m$인 $U_{j'}$로 사상되는 아핀 열린 근방
+$v \in V_{j, v} \subset V_j$를 택할 수 있다.
+
+\medskip\noindent
+증명을 마치기 위해 다음 고유 전사 사상을 생각한다.
+$$
+V = V_1 \times_U V_2 \times_U \ldots \times_U V_m
+\longrightarrow U \longrightarrow T
+$$
+그리고 다음 아핀 열린집합들에 의한 $V$의 덮개를 생각한다.
+$$
+V_{1, v_1} \times_U \ldots \times_U V_{j - 1, v_{j - 1}}
+\times_U W_{j i} \times_U
+V_{j + 1, v_{j + 1}} \times_U \ldots \times_U V_{m, v_m}
+$$
+이들은 실제로 덮개를 이룬다. $U$의 각 점은 어떤 $U_j$에 속하고,
+$V$에서 $U_j$의 역상은
+$V_1 \times \ldots \times V_{j - 1} \times W_j \times V_{j + 1} \times
+\ldots \times V_m$와 같기 때문이다. 위에 표시한 아핀 열린집합에서
+$T$로 가는 사상은 $W_{ji}$를 거쳐 분해되므로 세분을 얻는다. 마지막으로
+$V$는 준콤팩트이므로(아핀 스킴 $T$ 위의 고유 스킴이므로) 이 아핀
+열린집합들 가운데 유한 개만 필요하다.
+\end{proof}
+
+\begin{definition}
+\label{definition-ph-covering}
+$T$를 스킴이라 하자. {\it $T$의 ph 덮개}란 각 $f_i$가 국소적으로
+유한형이고, 모든 아핀 열린집합 $U \subset T$에 대하여 사상족
+$\{T_i \times_T U \to U\}_{i \in I}$를 세분하는 표준 ph 덮개
+$\{U_j \to U\}_{j = 1, \ldots, m}$가 존재하는 스킴 사상족
+$\{f_i : T_i \to T\}_{i \in I}$를 말한다.
+\end{definition}
+
+\noindent
+Lemma \ref{lemma-base-change-standard-ph}에 의해 표준 ph 덮개는 ph
+덮개이다.
+
+\begin{lemma}
+\label{lemma-zariski-ph}
+Zariski 덮개는 ph 덮개이다\footnote{More on Morphisms, Lemma
+\ref{more-morphisms-lemma-fppf-ph}에서 fppf 덮개(따라서 신토믹 덮개,
+매끄러운 덮개, 또는 에탈 덮개)도 ph 덮개임을 보일 것이다.}.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-refine-by-standard-ph}에 의해 아핀 스킴의 Zariski
+덮개는 표준 ph 덮개로 세분될 수 있으므로 참이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-surjective-proper-ph}
+$f : Y \to X$를 스킴의 고유 전사 사상이라 하자. 그러면
+$\{Y \to X\}$는 ph 덮개이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-refine-by-ph}
+$T$를 스킴이라 하고 $\{f_i : T_i \to T\}_{i \in I}$를 모든 $i$에
+대하여 $f_i$가 국소적으로 유한형인 사상족이라 하자. 다음은 서로
+동치이다.
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$는 ph 덮개이다.
+\item $\{T_i \to T\}_{i \in I}$를 세분하는 ph 덮개가 존재한다.
+\item $\{\coprod_{i \in I} T_i \to T\}$는 ph 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)의 동치는 Definition \ref{definition-ph-covering}과 세분의
+세분이 세분이라는 사실에서 즉시 따른다. (1)과 (2)의 동치 및
+$\{T_i \to T\}_{i \in I}$가 $\{\coprod_{i \in I} T_i \to T\}$를
+세분한다는 사실로부터 (1)이 (3)을 함의함을 알 수 있다. 마지막으로
+(3)이 성립한다고 가정하자. $U \subset T$를 아핀 열린집합이라 하고,
+$\{U \times_T \coprod_{i \in I} T_i \to U\}$를 세분하는 표준 ph 덮개
+$\{U_j \to U\}_{j = 1, \ldots, m}$를 택하자. 이는 각 $j$에 대하여
+다음 사상이 존재한다는 뜻이다.
+$$
+h_j :
+U_j
+\longrightarrow
+U \times_T \coprod\nolimits_{i \in I} T_i =
+\coprod\nolimits_{i \in I} U \times_T T_i
+$$
+이는 $U$ 위의 사상이다. $U_j$가 준콤팩트이므로, 거의 모두 공집합인
+열리고 닫힌 부분스킴들에 의한 서로소 합 분해
+$U_j = \coprod_{i \in I} U_{j, i}$를 얻을 수 있으며,
+$h_j|_{U_{j, i}}$는 $U_{j, i}$를 $U \times_T T_i$로 보낸다. 따라서
+$$
+\{U_{j, i} \to U\}_{j = 1, \ldots, m,\ i \in I,\ U_{j, i} \not = \emptyset}
+$$
+는 $\{U \times_T T_i \to U\}_{i \in I}$를 세분하는 표준 ph 덮개이다
+(작은 세부는 생략한다). 따라서 (1)이 성립한다.
+\end{proof}
+
+\noindent
+다음으로 이 개념이 Sites, Definition \ref{sites-definition-site}의
+조건을 만족함을 보인다.
+
+\begin{lemma}
+\label{lemma-ph}
+$T$를 스킴이라 하자.
+\begin{enumerate}
+\item $T' \to T$가 동형이면 $\{T' \to T\}$는 $T$의 ph 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 ph 덮개이고 각 $i$에 대하여
+$\{T_{ij} \to T_i\}_{j\in J_i}$가 ph 덮개이면,
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 ph 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 ph 덮개이고 $T' \to T$가 스킴
+사상이면 $\{T' \times_T T_i \to T'\}_{i\in I}$는 ph 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+주장 (1)은 명백하다.
+
+\medskip\noindent
+(3)의 증명. 기저변환 $T_i \times_T T' \to T'$는 Morphisms, Lemma
+\ref{morphisms-lemma-base-change-finite-type}에 의해 국소적으로 유한형이다.
+따라서 아핀 열린집합에 대한 조건만 확인하면 된다. $U' \subset T'$를
+아핀 열린 부분스킴이라 하자. $U'$가 준콤팩트이므로, $U'_j \to T$가
+아핀 열린집합 $U_j \subset T$로 사상되는 유한 아핀 열린 덮개
+% P05-EN-CH34-0003
+$U' = U'_1 \cup \ldots \cup U'$를 찾을 수 있다. 사상족
+$\{T_i \times_T U_j \to U_j\}$를 세분하는 표준 ph 덮개
+$\{U_{jl} \to U_j\}_{l = 1, \ldots, n_j}$를 택한다. Lemma
+\ref{lemma-base-change-standard-ph}에 의해 기저변환
+$\{U_{jl} \times_{U_j} U'_j \to U'_j\}$는 표준 ph 덮개이다. 또한
+$\{U'_j \to U'\}$도 표준 ph 덮개임에 유의하라. Lemma
+\ref{lemma-refine-by-standard-ph}에 의해 사상족
+$\{U_{jl} \times_{U_j} U'_j \to U'\}$는 표준 ph 덮개로 세분될 수 있다.
+$\{U_{jl} \times_{U_j} U'_j \to U'\}$가
+$\{T_i \times_T U' \to U'\}$를 세분하므로 결론을 얻는다.
+
+\medskip\noindent
+(2)의 증명. 합성은 국소적 유한형성을 보존한다(Morphisms, Lemma
+\ref{morphisms-lemma-composition-finite-type} 참조). 따라서 아핀
+열린집합에 대한 조건만 확인하면 된다. $U \subset T$를 아핀
+열린집합이라 하자. 먼저 $\{T_i \times_T U \to U\}$를 세분하는 표준 ph
+덮개 $\{U_k \to U\}_{k = 1, \ldots, m}$를 택한다. 이 세분이 $T$ 위의
+사상 $U_k \to T_{i_k}$로 주어진다고 하자. 그러면
+$$
+\{T_{i_kj} \times_{T_{i_k}} U_k \to U_k\}_{j \in J_{i_k}}
+$$
+는 (3)에 의해 ph 덮개이다. $U_k$가 아핀이므로 이 사상족을 세분하는
+표준 ph 덮개 $\{U_{ka} \to U_k\}_{a = 1, \ldots, b_k}$를 찾을 수 있다.
+이제 Lemma \ref{lemma-refine-by-standard-ph}를 적용하면
+$\{U_{ka} \to U\}$가 표준 ph 덮개로 세분될 수 있음을 알 수 있다.
+$\{U_{ka} \to U\}$가 $\{T_{ij} \times_T U \to U\}$를 세분하므로 증명이
+끝난다.
+\end{proof}
+
+\begin{definition}
+\label{definition-big-ph-site}
+{\it 큰 ph 사이트}란 Sites, Definition \ref{sites-definition-site}에서와
+같은 사이트로서 다음과 같이 구성한 임의의 $\Sch_{ph}$를 말한다.
+\begin{enumerate}
+\item 임의의 스킴들의 집합 $S_0$와 이 스킴들 사이의 임의의 ph 덮개
+집합 $\text{Cov}_0$를 택한다.
+\item 기저 범주로, 집합 $S_0$에서 시작하여 Sets, Lemma
+\ref{sets-lemma-construct-category}에서와 같이 구성한 임의의 범주
+$\Sch_\alpha$를 택한다.
+\item 범주 $\Sch_\alpha$, ph 덮개들의 모임, 그리고 위에서 택한 집합
+$\text{Cov}_0$로부터 출발하여 Sets, Lemma
+\ref{sets-lemma-coverings-site}에서와 같은 임의의 덮개 집합을 택한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+큰 사이트 정의의 동기와 설명은 Definition
+\ref{definition-big-zariski-site} 뒤의 주석을 보라.
+
+\medskip\noindent
+스킴 $S$의 큰 ph 사이트를 계속 도입하기 전에, 큰 ph 사이트
+$\Sch_{ph}$의 위상은 어떤 의미에서 모든 스킴의 범주 위의 ph 위상으로부터
+유도됨을 지적해 두자.
+
+\begin{lemma}
+\label{lemma-ph-induced}
+$\Sch_{ph}$를 Definition \ref{definition-big-ph-site}에서와 같은 큰 ph
+사이트라 하자. $T \in \Ob(\Sch_{ph})$라 하고
+$\{T_i \to T\}_{i \in I}$를 $T$의 임의의 ph 덮개라 하자.
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$를 세분하는 $\Sch_{ph}$ 안의 $T$의 덮개
+$\{U_j \to T\}_{j \in J}$가 존재한다.
+\item $\{T_i \to T\}_{i \in I}$가 표준 ph 덮개이면, $\Sch_{ph}$의 어떤
+덮개와 자명하게 동치이다.
+\item $\{T_i \to T\}_{i \in I}$가 Zariski 덮개이면, $\Sch_{ph}$의 어떤
+덮개와 자명하게 동치이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+각 $i$에 대하여, 모든 $T_{ij}$가 $T$의 어떤 아핀 열린 부분스킴으로
+사상되는 아핀 열린 덮개
+$T_i = \bigcup_{j \in J_i} T_{ij}$를 택한다. Lemmas
+\ref{lemma-zariski-ph} 및 \ref{lemma-ph}에 의해 세분
+$\{T_{ij} \to T\}_{i \in I, j \in J_i}$도 $T$의 ph 덮개이다. 따라서
+각 $T_i$가 아핀이고 $T$의 아핀 열린집합 $W_i$로 사상된다고 가정할 수
+있다. Sets, Lemma \ref{sets-lemma-what-is-in-it}을 적용하면 $W_i$가
+$\Sch_{ph}$의 어떤 대상과 동형임을 알 수 있다. 그러면 $W_i$ 위의
+유한형 스킴인 $T_i$도 Sets, Lemma \ref{sets-lemma-what-is-in-it}을 다시
+적용하여 $\Sch_{ph}$의 어떤 대상 $V_i$와 동형이다. 덮개
+$\{V_i \to T\}_{i \in I}$는 $\{T_i \to T\}_{i \in I}$를 세분한다(서로
+동형이기 때문이다). 또한 Sets, Lemma
+\ref{sets-lemma-what-is-in-it}에 의해 $\{V_i \to T\}_{i \in I}$는
+$\Sch_{ph}$ 안의 $T$의 어떤 덮개 $\{U_j \to T\}_{j \in J}$와 조합적으로
+동치이다. 덮개 $\{U_j \to T\}_{j \in J}$는 (1)에서 요구한 세분이다.
+(2), (3)의 상황에서는 Sets, Lemma \ref{sets-lemma-what-is-in-it}에 의해
+각 스킴 $T_i$가 $\Sch_{ph}$의 어떤 대상과 동형이고, Sets, Lemma
+\ref{sets-lemma-coverings-site}을 한 번 더 적용하면 원하는 결론을 얻는다.
+\end{proof}
+
+\begin{definition}
+\label{definition-big-small-ph}
+$S$를 스킴이라 하고 $\Sch_{ph}$를 $S$를 포함하는 큰 ph 사이트라 하자.
+\begin{enumerate}
+\item {\it $S$의 큰 ph 사이트} $(\Sch/S)_{ph}$는 Sites, Section
+\ref{sites-section-localize}에서 도입한 사이트 $\Sch_{ph}/S$이다.
+\item {\it $S$의 큰 아핀 ph 사이트} $(\textit{Aff}/S)_{ph}$는
+$(\Sch/S)_{ph}$의 충만한 부분범주로서, 그 대상은 아핀 $U/S$이다.
+$(\textit{Aff}/S)_{ph}$의 덮개는 $U_i$와 $U$가 아핀인
+$(\Sch/S)_{ph}$의 임의의 유한 덮개 $\{U_i \to U\}$이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$(\textit{Aff}/S)_{ph}$의 덮개는 표준 ph 덮개로 주어지는 것이
+{\it 아님}에 유의하라. 그렇게 하면 Sites, Definition
+\ref{sites-definition-site}의 두 번째 공리를 만족하지 못하기 때문이다.
+대신 $(\textit{Aff}/S)_{ph}$의 덮개는 $(\Sch/S)_{ph}$의 아핀 대상 사이의
+유한형 사상으로 이루어진 유한 사상족 $\{U_i \to U\}$ 가운데 표준 ph
+덮개로 세분될 수 있는 것들이다. 큰 아핀 ph 사이트가 사이트임을
+명시적으로 진술하고 증명한다.
+
+\begin{lemma}
+\label{lemma-verify-site-ph}
+$S$를 스킴이라 하고 $\Sch_{ph}$를 $S$를 포함하는 큰 ph 사이트라 하자.
+그러면 $(\textit{Aff}/S)_{ph}$는 사이트이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-verify-site-etale}의 증명에서와 같이 논하면, $U$와
+$U_i$가 아핀인 유한 ph 덮개 $\{U_i \to U\}$들의 모음이 Sites,
+Definition \ref{sites-definition-site}의 성질 (1), (2), (3)을 만족함을
+보이면 충분하다. 이는 명백하다. 예를 들어 $T_i, T$가 아핀인 유한 ph
+덮개 $\{T_i \to T\}_{i\in I}$가 주어지고, 각 $i$에 대하여 $T_{ij}$가
+아핀인 유한 ph 덮개 $\{T_{ij} \to T_i\}_{j\in J_i}$가 주어지면,
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 ph 덮개이고(Lemma
+\ref{lemma-ph}), $\bigcup_{i\in I} J_i$는 유한이며 각 $T_{ij}$는 아핀이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fibre-products-ph}
+$S$를 스킴이라 하고 $\Sch_{ph}$를 $S$를 포함하는 큰 ph 사이트라 하자.
+사이트 $\Sch_{ph}$, $(\Sch/S)_{ph}$, 그리고 $(\textit{Aff}/S)_{ph}$의
+기저 범주에는 올곱이 존재한다. 각 경우 모든 스킴의 범주 $\Sch$로 가는
+자명한 함자는 올곱을 취하는 연산과 가환한다. 범주 $(\Sch/S)_{ph}$에는
+끝 대상이 있으며, 그것은 $S/S$이다.
+\end{lemma}
+
+\begin{proof}
+$\Sch_{ph}$에 대해서는 구성상 참이다(Sets, Lemma
+\ref{sets-lemma-what-is-in-it} 참조). $U, V, W \in \Ob(\Sch_{ph})$인
+스킴 사상 $U \to S$, $V \to U$, $W \to U$가 주어졌다고 하자.
+$\Sch_{ph}$ 안의 올곱 $V \times_U W$는 $\Sch$ 안의 올곱이며, 모든
+$S$-스킴의 범주에서 $U/S$ 위의 $V/S$와 $W/S$의 올곱이기도 하다.
+따라서 $(\Sch/S)_{ph}$ 안의 올곱이다. 이로써 $(\Sch/S)_{ph}$에 대한
+결론을 얻는다. $U, V, W$가 아핀이면 $V \times_U W$도 아핀이므로
+$(\textit{Aff}/S)_{ph}$에 대한 결론도 얻는다.
+\end{proof}
+
+\noindent
+다음으로 큰 아핀 사이트가 큰 사이트와 같은 토포스를 정의함을
+확인한다.
+
+\begin{lemma}
+\label{lemma-affine-big-site-ph}
+$S$를 스킴이라 하고 $\Sch_{ph}$를 $S$를 포함하는 큰 ph 사이트라 하자.
+함자 $(\textit{Aff}/S)_{ph} \to (\Sch/S)_{ph}$는 공연속이며
+$\Sh((\textit{Aff}/S)_{ph})$에서 $\Sh((\Sch/S)_{ph})$로 가는 토포스의
+동치를 유도한다.
+\end{lemma}
+
+\begin{proof}
+특수 공연속 함자의 개념은 Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor}에서 도입한다. 따라서
+Sites, Lemma \ref{sites-lemma-equivalence}의 가정 (1)--(5)를 확인해야
+한다. 포함 함자를
+$u : (\textit{Aff}/S)_{ph} \to (\Sch/S)_{ph}$라 쓰자. 공연속성은 정의에
+의해 아핀 $T$에 대한 $T/S$의 임의의 ph 덮개가 $T$의 표준 ph 덮개로
+세분될 수 있다는 사실에서 따른다. 따라서 (1)이 성립한다. 아핀 스킴을
+아핀 스킴들로 덮는 유한 ph 덮개는 ph 덮개이므로 $u$는 연속이다.
+따라서 (2)가 성립한다. (3)과 (4)는 $u$가 충실충만이라는 사실에서 즉시
+따른다. 마지막으로 모든 스킴에는 아핀 열린 덮개가 존재하고 이는 ph
+덮개이므로 조건 (5)가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-sheaf}
+$\mathcal{F}$를 $(\Sch/S)_{ph}$ 위의 준층이라 하자. 그러면
+$\mathcal{F}$가 층일 필요충분조건은 다음과 같다.
+\begin{enumerate}
+\item $\mathcal{F}$는 Zariski 덮개에 대한 층 조건을 만족한다.
+\item $f : V \to U$가 고유 전사이면, $\mathcal{F}(U)$는 두 사상
+$\mathcal{F}(V) \to \mathcal{F}(V \times_U V)$의 등화자에 전단사로
+사상된다.
+\end{enumerate}
+또한 (1)이 성립할 때 성질 (2)는 다음 성질과 동치이다.
+\begin{enumerate}
+\item[(2')] (2)에서와 같이 $U$가 아핀인 $\{V \to U\}$에 대한 층 성질.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)가 성립하면 $\mathcal{F}$가 층임을 보이자.
+$\{T_i \to T\}$를 ph 덮개, 즉 $(\Sch/S)_{ph}$의 덮개라 하자. 이 덮개에
+대한 층 조건을 확인한다. $s_i \in \mathcal{F}(T_i)$를
+$T_i \times_T T_{i'}$ 위에서 같은 절단으로 제한되는 절단들이라 하자.
+각 $T_i$ 위에서 $s_i$로 제한되는 유일한 절단
+$s \in \mathcal{F}(T)$가 존재함을 보일 것이다. $T = \bigcup U_j$를
+아핀 열린 덮개라 하자. 성질 (1)에 의해, $U_j \cap U_{j'}$에서
+일치하는 절단 $s_j \in \mathcal{F}(U_j)$들을 구성하면 $s$를 구성하기에
+충분하다. ph 덮개 $\{T_i \times_T U_j \to U_j\}$를 생각하자. 그러면
+$s_{ji} = s_i|_{T_i \times_T U_j}$는
+$(T_i \times_T U_j) \times_{U_j} (T_{i'} \times_T U_j)$ 위에서 일치하는
+절단들이다. 표준 ph 덮개 $\{V_{jk} \to U_j\}$가
+$\{T_i \times_T U_j \to U_j\}$를 세분하도록 고유 전사 사상
+$V_j \to U_j$와 유한 아핀 열린 덮개 $V_j = \bigcup V_{jk}$를 택한다.
+$s_{jk} \in \mathcal{F}(V_{jk})$가 암묵적으로 주어진 사상에 의한
+$s_{ji}$의 $V_{jk}$로의 당김을 나타내면, $s_{jk}$들은 붙어서 절단
+$s'_j \in \mathcal{F}(V_j)$를 이룬다. 겹침에서의 일치를 다시 한 번
+사용하면 $s'_j$가 두 사상
+$\mathcal{F}(V_j) \to \mathcal{F}(V_j \times_{U_j} V_j)$의 등화자에
+속함을 알 수 있다. 따라서 (2)에 의해 $s'_j$는 유일한 절단
+$s_j \in \mathcal{F}(U_j)$에서 온다. 이 절단 $s_j$들이 원하는 모든
+성질을 가진다는 확인은 생략한다.
+
+\medskip\noindent
+(1)이 성립할 때 (2)와 (2')가 동치임을 증명하자.
+$V \to U$를 고유 전사인 $(\Sch/S)_{ph}$의 사상이라 하자. 아핀 열린
+덮개 $U = \bigcup U_i$를 택하고 $V_i = V \times_U U_i$로 둔다. (2')에
+의해 $\mathcal{F}(U_i) \to \mathcal{F}(V_i)$가 단사이고, (1)에 의해
+$\mathcal{F}(U) \to \prod \mathcal{F}(U_i)$가 단사이므로
+$\mathcal{F}(U) \to \mathcal{F}(V)$도 단사임을 알 수 있다. 마지막으로
+$t \in \mathcal{F}(V)$가 두 사상
+$\mathcal{F}(V) \to \mathcal{F}(V \times_U V)$의 등화자에 속한다고
+하자. 그러면 모든 $i$에 대하여 $t|_{V_i}$는 두 사상
+$\mathcal{F}(V_i) \to \mathcal{F}(V_i \times_{U_i} V_i)$의 등화자에
+속한다. 따라서 (2')에 의해 모든 $i$에 대하여 $t|_{V_i}$로 사상되는
+유일한 절단 $s_i \in \mathcal{F}(U_i)$를 얻는다. 모든 $i, j$에 대하여
+$s_i|_{U_i \cap U_j} = s_j|_{U_i \cap U_j}$라는 확인은 생략한다. 이는
+방금 보인 유일성을 사용한다. 덮개 $U = \bigcup U_i$에 대한 층 성질로
+절단 $s \in \mathcal{F}(U)$를 얻는다. $s$가 $\mathcal{F}(V)$에서 $t$로
+사상된다는 증명은 생략한다.
+\end{proof}
+
+\noindent
+다음으로 이 사이트들에 대응하는 토포스 사이의 몇 가지 관계를
+확립한다.
+
+\begin{lemma}
+\label{lemma-morphism-big-ph}
+$\Sch_{ph}$를 큰 ph 사이트라 하고
+$f : T \to S$를 $\Sch_{ph}$의 사상이라 하자. 함자
+$$
+u : (\Sch/T)_{ph} \longrightarrow (\Sch/S)_{ph},
+\quad
+V/T \longmapsto V/S
+$$
+는 공연속이고, 다음과 같은 연속인 오른쪽 수반을 갖는다.
+$$
+v : (\Sch/S)_{ph} \longrightarrow (\Sch/T)_{ph},
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+이 두 함자는 동일한 토포스 사상을 유도한다.
+$$
+f_{big} :
+\Sh((\Sch/T)_{ph})
+\longrightarrow
+\Sh((\Sch/S)_{ph})
+$$
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$이고
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$이다.
+또한 $f_{big}^{-1}$에는 올곱 및 등화자와 가환하는 왼쪽 수반
+$f_{big!}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+함자 $u$는 공연속이고 연속이며 올곱 및 등화자와 가환한다. 따라서
+Sites, Lemmas \ref{sites-lemma-when-shriek} 및
+\ref{sites-lemma-preserve-equalizers}를 적용하여 $f_{big}^{-1}$의 공식과
+$f_{big!}$의 존재를 얻는다. 또한 $U/T$와 $V/S$가 주어졌을 때
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$이므로 함자 $v$는 오른쪽
+수반이다. 따라서 Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} 및
+\ref{sites-lemma-have-functor-other-way-morphism}를 적용하면
+$f_{big, *}$의 공식을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-ph}
+% P05-EN-CH34-0004
+$(\Sch/S)_{ph}$의 스킴 $X$, $Y$, $Y$와 사상
+$f : X \to Y$, $g : Y \to Z$가 주어지면
+$g_{big} \circ f_{big} = (g \circ f)_{big}$이다.
+\end{lemma}
+
+\begin{proof}
+큰 사이트 위 함자들의 밂과 당김에 대한 Lemma
+\ref{lemma-morphism-big-ph}의 간단한 설명으로부터 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{fpqc 위상}
+\label{section-fpqc}
+
+\begin{definition}
+\label{definition-fpqc-covering}
+$T$를 스킴이라 하자. 스킴의 사상족
+$\{f_i : T_i \to T\}_{i \in I}$가 각 $f_i$가 평탄이고, 모든 아핀
+열린집합 $U \subset T$에 대하여 $n \geq 0$, 사상
+$a : \{1, \ldots, n\} \to I$, 그리고 아핀 열린집합
+$V_j \subset T_{a(j)}$, $j = 1, \ldots, n$가 존재하여
+$\bigcup_{j = 1}^n f_{a(j)}(V_j) = U$를 만족할 때, 이를
+{\it $T$의 fpqc 덮개}라 한다.
+\end{definition}
+
+\noindent
+물론 이 조건은 $T = \bigcup f_i(T_i)$를 함의한다. fpqc 덮개를
+판별하는 일은 조금 더 어려우므로 이를 위한 몇 가지 보조정리를 제시한다.
+
+\begin{lemma}
+\label{lemma-recognize-fpqc-covering}
+$T$를 스킴이라 하고, $\{f_i : T_i \to T\}_{i \in I}$를 끝 대상이
+$T$인 스킴 사상족이라 하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $\{f_i : T_i \to T\}_{i \in I}$는 fpqc 덮개이다.
+\item 각 $f_i$는 평탄이고, 모든 아핀 열린집합 $U \subset T$에 대하여
+거의 모두 공집합인 준콤팩트 열린집합 $U_i \subset T_i$들이 존재하여
+$U = \bigcup f_i(U_i)$이다.
+\item 각 $f_i$는 평탄이고, 아핀 열린 덮개
+$T = \bigcup_{\alpha \in A} U_\alpha$가 존재하며, 각 $\alpha \in A$에
+대하여 $i_{\alpha, 1}, \ldots, i_{\alpha, n(\alpha)} \in I$와 준콤팩트
+열린집합 $U_{\alpha, j} \subset T_{i_{\alpha, j}}$들이 존재하여
+$U_\alpha =
+\bigcup_{j = 1, \ldots, n(\alpha)} f_{i_{\alpha, j}}(U_{\alpha, j})$.
+\end{enumerate}
+$T$가 준분리이면 이들은 다음 조건과도 동치이다.
+\begin{enumerate}
+\item[(4)] 각 $f_i$는 평탄이고, 모든 $t \in T$에 대하여
+$i_1, \ldots, i_n \in I$와 준콤팩트 열린집합 $U_j \subset T_{i_j}$들이
+존재하여 $\bigcup_{j = 1, \ldots, n} f_{i_j}(U_j)$가 $T$에서 $t$의
+(열린집합일 필요는 없는) 근방이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1), (2), (3)의 동치에 대한 증명은 생략한다. 이제부터 $T$가
+준분리라고 가정한다. (4)가 (2)를 함의함을 보이자. 아핀 열린집합
+$U \subset T$를 택한다. (2)를 보이려면 모든 $t \in U$에 대하여
+유한 개의 준콤팩트 열린집합 $U_j \subset T_{i_j}$들이 존재하여
+$f_{i_j}(U_j) \subset U$이고 $\bigcup f_{i_j}(U_j)$가 $U$에서 $t$의
+근방임을 보이면 충분하다. 가정에 의해 유한 개의 준콤팩트 열린집합
+$U'_j \subset T_{i_j}$들이 존재하여
+% P05-EN-CH34-0005
+$\bigcup f_{i_j}(U'_j)$가 $T$에서 $t$의 근방이다. $T$가 준분리이므로
+$U_j = U'_j \cap f_{i_j}^{-1}(U) = (f_{i_j}|_{U'_j})^{-1}(U)$
+는 Schemes, Lemma \ref{schemes-lemma-quasi-compact-permanence}에 의해
+준콤팩트이다. 따라서 (2)가 성립한다. (2)가 (4)를 함의함은 명백하므로
+증명이 끝난다.
+\end{proof}
+
+\begin{example}
+\label{example-not-fpqc}
+Schemes, Example \ref{schemes-example-not-quasi-separated}의 준분리가 아닌
+스킴 $X = X_1 \cup X_2$를 생각하자. 여기서
+$X_1 = X_2 = \Spec(k[t_1,t_2,\dots])$이고,
+$Y = X_1 \amalg \Spec(\mathcal{O}_{X_2, 0})$로 둔다. 그러면 자명한 사상
+$f : Y \to X$는 평탄 전사이고, ($Y$가 준콤팩트이므로) Lemma
+\ref{lemma-recognize-fpqc-covering}의 (4)를 자명하게 만족한다. 그러나
+$\{f : Y \to X\}$는 fpqc 덮개가 아니다. 실제로 $f$에 의한 상이 $X_2$인
+$Y$의 준콤팩트 열린집합 $W$는 존재하지 않는다고 주장한다. 사실
+$f^{-1}(X_2) = X_1 \setminus \{0\} \amalg \Spec(\mathcal{O}_{X_2, 0})$이다.
+따라서 $W$가 존재한다면
+$X_1 \setminus \{0\} = X_2 \setminus \{0\}$의 어떤 준콤팩트 열린집합
+$U$에 대하여 $W = U \amalg \Spec(\mathcal{O}_{X_2, 0})$이다. 그런데
+$0$에서 소멸하는
+어떤 $f_i \in k[t_1, t_2, \ldots]$들에 대하여
+$U = D(f_1) \cup \ldots \cup D(f_n)$로 쓸 수 있다.
+% P05-ERR-0006
+$f_1, \ldots, f_n$이 변수 $x_1, \ldots, x_m$만을 사용한다고 하자.
+그러면 $(m + 1)$번째 성분이 $1$인
+$p = (0, \ldots, 0, 1, 0, \ldots)$은 $W$의 상에 속하지 않는 $X_2$의
+닫힌점이다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-disjoint-union-is-fpqc-covering}
+$T$를 스킴이라 하고, $\{f_i : T_i \to T\}_{i \in I}$를 끝 대상이
+$T$인 스킴 사상족이라 하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $\{f_i : T_i \to T\}_{i \in I}$는 fpqc 덮개이다.
+\item $T' = \coprod_{i \in I} T_i$ 및 $f = \coprod_{i \in I} f_i$로 두면
+$\{f : T' \to T\}$는 fpqc 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U \subset T$를 아핀 열린집합이라 하자. (1)이 성립하면
+$i_1, \ldots, i_n \in I$와 아핀 열린집합 $U_j \subset T_{i_j}$들을 찾아
+$U = \bigcup_{j = 1, \ldots, n} f_{i_j}(U_j)$로 둘 수 있다. 그러면
+$U_1 \amalg \ldots \amalg U_n \subset T'$은 $U$ 위로 전사하는 준콤팩트
+열린집합이다. 따라서 Lemma \ref{lemma-recognize-fpqc-covering}에 의해
+$\{f : T' \to T\}$는 fpqc 덮개이다. 역으로 (2)가 성립하면
+$U = f(U')$인 준콤팩트 열린집합 $U' \subset T'$이 존재한다. 이때
+$U_j = U' \cap T_j$는 $T_j$의 준콤팩트 열린집합이며 거의 모든 $j$에
+대하여 공집합이다. Lemma \ref{lemma-recognize-fpqc-covering}에 의해
+(1)이 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-family-flat-dominated-covering}
+$T$를 스킴이라 하고, $\{f_i : T_i \to T\}_{i \in I}$를 끝 대상이
+$T$인 스킴 사상족이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item 각 $f_i$는 평탄이다.
+\item 사상족 $\{f_i : T_i \to T\}_{i \in I}$에는 $T$의 fpqc 덮개에
+의한 세분이 존재한다.
+\end{enumerate}
+그러면 $\{f_i : T_i \to T\}_{i \in I}$는 $T$의 fpqc 덮개이다.
+\end{lemma}
+
+\begin{proof}
+$\{g_j : X_j \to T\}_{j \in J}$를 $\{f_i : T_i \to T\}$의 세분인 fpqc
+덮개라 하자. $U \subset T$를 아핀 열린집합이라 하자.
+$U = \bigcup g_{j_k}(V_k)$가 되도록 $j_1, \ldots, j_m \in J$와 아핀
+열린집합 $V_k \subset X_{j_k}$를 택한다. 각 $j$에 대하여
+$g_j = f_{i_j} \circ h_j$가 되도록 $i_j \in I$와 사상
+$h_j : X_j \to T_{i_j}$를 택한다. $h_{j_k}(V_k)$가 준콤팩트이므로
+준콤팩트 열린집합
+$h_{j_k}(V_k) \subset U_k \subset f_{i_{j_k}}^{-1}(U)$를 찾을 수 있다.
+그러면 $U = \bigcup f_{i_{j_k}}(U_k)$이다. Lemma
+\ref{lemma-recognize-fpqc-covering}에 의해
+$\{f_i : T_i \to T\}_{i \in I}$가 fpqc 덮개임을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-family-flat-fpqc-local-covering}
+$T$를 스킴이라 하고, $\{f_i : T_i \to T\}_{i \in I}$를 끝 대상이
+$T$인 스킴 사상족이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item 각 $f_i$는 평탄이다.
+\item fpqc 덮개 $\{g_j : S_j \to T\}_{j \in J}$가 존재하여, 각 지표에
+대하여 $\{S_j \times_T T_i \to S_j\}_{i \in I}$는 fpqc 덮개이다.
+\end{enumerate}
+그러면 $\{f_i : T_i \to T\}_{i \in I}$는 $T$의 fpqc 덮개이다.
+\end{lemma}
+
+\begin{proof}
+이후 별도 언급 없이 Lemma \ref{lemma-recognize-fpqc-covering}을 사용한다.
+$U \subset T$를 아핀 열린집합이라 하자. (2)에 의해 $j \in J$로 지표화된
+준콤팩트 열린집합 $V_j \subset S_j$들을 찾아, 거의 모두 공집합이고
+$U = \bigcup g_j(V_j)$가 되게 할 수 있다. 그러면 각 $j$에 대하여
+$i \in I$로 지표화된 준콤팩트 열린집합
+$W_{ij} \subset S_j \times_T T_i$들을 택하여, 거의 모두 공집합이고
+$V_j = \bigcup_i \text{pr}_1(W_{ij})$가 되게 할 수 있다. 따라서
+$\{S_j \times_T T_i \to T\}$는 fpqc 덮개이다. 이 덮개는
+$\{f_i : T_i \to T\}$를 세분하므로 Lemma
+\ref{lemma-family-flat-dominated-covering}으로 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-zariski-etale-smooth-syntomic-fppf-fpqc}
+모든 fppf 덮개는 fpqc 덮개이다. 따라서 특히 모든 신토믹 덮개, 매끄러운
+덮개, \'에탈 덮개 또는 Zariski 덮개는 fpqc 덮개이다.
+\end{lemma}
+
+\begin{proof}
+fppf 덮개가 fpqc 덮개임을 보이면 나머지는 Lemma
+\ref{lemma-zariski-etale-smooth-syntomic-fppf}에서 따른다.
+$\{f_i : U_i \to U\}_{i \in I}$를 fppf 덮개라 하자. 정의에 의해
+$f_i$들은 평탄이므로 Definition \ref{definition-fpqc-covering}의 첫째 조건이
+성립한다. 둘째 조건을 확인하기 위해 아핀 열린부분집합 $V \subset U$를
+택한다. 어떤 아핀 열린집합 $V_{ij} \subset U_i$들에 대하여
+$f_i^{-1}(V) = \bigcup_{j \in J_i} V_{ij}$로 쓰자. 각 $f_i$가 열린 사상이므로
+(Morphisms, Lemma \ref{morphisms-lemma-fppf-open}),
+$V = \bigcup_{i\in I} \bigcup_{j \in J_i} f_i(V_{ij})$
+는 $V$의 열린 덮개이다. $V$가 준콤팩트이므로 이 덮개에는 유한 세분이
+존재한다. 이로써 증명이 끝난다.
+\end{proof}
+
+\noindent
+fpqc\footnote{fpqc라는 글자는 ``fid\`element plat quasi-compacte''를
+뜻한다.} 위상은 fppf 위상과 같은 방식으로 다룰 수 없다\footnote{더 정확히
+말하면 fpqc 위상에 대해서는 Lemma \ref{lemma-fppf-induced}의 유사 명제가
+성립하지 않는다.}. 실제로 $R$이 영이 아닌 환이라고 하자. Lemma
+\ref{lemma-no-set-of-fpqc-covers-is-initial}에서 $\Spec(R)$의 fpqc 덮개들의
+집합 $A$로서 모든 fpqc 덮개가 $A$의 원소에 의해 세분되는 것은 존재하지
+않음을 볼 것이다. $R = k$가 체이면 이러한 비유계성의 이유는 $k$의 모든 체 확대를
+포함하는 하나의 $k$의 체 확대가 존재하지 않기 때문이다.
+
+\medskip\noindent
+집합론적 어려움을 무시하면 층화를 갖지 않는 전층을 만나게 된다.
+\cite[Theorem 5.5]{Waterhouse-fpqc-sheafification}를 보라. 다소 흥미로운
+선택지는 $R'$의 기수가 적절히 제한된 충실히 평탄한 환 확대
+$R \to R'$만을 생각하는 것이다. (SGA4에서처럼 고정된 우주에 속하는 모든
+스킴을 생각한다면, 이는 강불가접 기수로 기수를 제한하는 셈이다.) 그러나
+그 기수를 더 큰 것으로 바꾸면 무슨 일이 일어나는지는 그리 명확하지 않다.
+
+\medskip\noindent
+이러한 이유로 우리는 fpqc 사이트를 도입하지 않으며 fpqc 위상에 관한
+코호몰로지를 생각하지 않을 것이다.
+
+\medskip\noindent
+한편 반변 함자 $F : \Sch^{opp} \to \textit{Sets}$가 주어졌을 때 $F$가
+fpqc 위상에 대한 층 성질을 만족하는지 묻는 것은 의미가 있다. 아래를 보라.
+또한 fpqc 위상에서 대상의 내림 등을 물을 수 있다. 간단히 말해 어떤
+결과들에는 fpqc 덮개를 다루는 것이 올바른 일반성이다.
+
+\begin{lemma}
+\label{lemma-fpqc}
+$T$를 스킴이라 하자.
+\begin{enumerate}
+\item $T' \to T$가 동형이면 $\{T' \to T\}$는 $T$의 fpqc 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 fpqc 덮개이고 각 $i$에 대하여
+$\{T_{ij} \to T_i\}_{j\in J_i}$가 fpqc 덮개이면,
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 fpqc 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 fpqc 덮개이고 $T' \to T$가 스킴의
+사상이면 $\{T' \times_T T_i \to T'\}_{i\in I}$는 fpqc 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 즉시 성립한다. 평탄 사상의 합성은 평탄이고 평탄 사상의 기저변환은
+평탄임을 기억하라(Morphisms, Lemmas
+\ref{morphisms-lemma-base-change-flat} 및
+\ref{morphisms-lemma-composition-flat}). 따라서 각 경우에 Lemma
+\ref{lemma-recognize-fpqc-covering}을 적용하여 주어진 사상족이 fpqc
+덮개임을 확인할 수 있다.
+
+\medskip\noindent
+(2)의 증명. $\{T_i \to T\}_{i\in I}$가 fpqc 덮개이고 각 $i$에 대하여
+$\{f_{ij} : T_{ij} \to T_i\}_{j\in J_i}$가 fpqc 덮개라고 가정하자.
+$U \subset T$를 아핀 열린집합이라 하자. $i \in I$로 지표화된 준콤팩트
+열린집합 $U_i \subset T_i$들을 찾아, 거의 모두 공집합이고
+$U = \bigcup f_i(U_i)$가 되게 할 수 있다. 그러면 각 $i$에 대하여
+$j \in J_i$로 지표화된 준콤팩트 열린집합 $U_{ij} \subset T_{ij}$들을
+택하여, 거의 모두 공집합이고 $U_i = \bigcup_j f_{ij}(U_{ij})$가 되게 할
+수 있다. 따라서 $\{T_{ij} \to T\}$는 fpqc 덮개이다.
+
+\medskip\noindent
+(3)의 증명. $\{T_i \to T\}_{i\in I}$가 fpqc 덮개이고 $T' \to T$가 스킴의
+사상이라고 가정하자. $U' \subset T'$을 아핀 열린집합
+$U \subset T$ 안으로 사상되는 아핀 열린집합이라 하자. 거의 모두 공집합인
+준콤팩트 열린집합 $U_i \subset T_i$들을 택하여
+$U = \bigcup f_i(U_i)$가 되게 하자. 그러면 $U' \times_U U_i$는
+$T' \times_T T_i$의 준콤팩트 열린집합이고
+$U' = \bigcup \text{pr}_1(U' \times_U U_i)$이다. $T'$는 이러한 아핀
+열린집합 $U' \subset T'$들로 덮이므로, Lemma
+\ref{lemma-recognize-fpqc-covering}에 의해
+$\{T' \times_T T_i \to T'\}_{i\in I}$는 fpqc 덮개이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fpqc-affine}
+$T$를 아핀 스킴이라 하고 $\{T_i \to T\}_{i \in I}$를 $T$의 fpqc
+덮개라 하자. 그러면 $\{T_i \to T\}_{i \in I}$의 세분인 fpqc 덮개
+$\{U_j \to T\}_{j = 1, \ldots, n}$가 존재하여 각 $U_j$는 아핀 스킴이다.
+더 나아가 각 $U_j$를 어느 한 $T_i$의 아핀 열린집합으로 택할 수 있다.
+\end{lemma}
+
+\begin{proof}
+정의에서 바로 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-standard-fpqc}
+% P05-EN-CH34-0011
+$T$를 아핀 스킴이라 하자. 각 $U_j$가 아핀이고 $T$ 위에서 평탄이며
+$T = \bigcup f_j(U_j)$인 사상족
+$\{f_j : U_j \to T\}_{j = 1, \ldots, n}$을 $T$의
+{\it 표준 fpqc 덮개}라 한다.
+\end{definition}
+
+\noindent
+아핀 사이트를 도입하지 않으므로 모든 표준 fpqc 덮개들의 모임이 공리들을
+만족함을 직접 보여야 한다.
+
+\begin{lemma}
+\label{lemma-fpqc-affine-axioms}
+$T$를 아핀 스킴이라 하자.
+\begin{enumerate}
+\item $T' \to T$가 동형이면 $\{T' \to T\}$는 $T$의 표준 fpqc 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 표준 fpqc 덮개이고 각 $i$에 대하여
+$\{T_{ij} \to T_i\}_{j\in J_i}$가 표준 fpqc 덮개이면,
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 표준 fpqc 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 표준 fpqc 덮개이고 $T' \to T$가 아핀
+스킴의 사상이면 $\{T' \times_T T_i \to T'\}_{i\in I}$는 표준 fpqc
+덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+평탄 사상의 합성과 기저변환이 평탄이라는 사실(Morphisms, Lemmas
+\ref{morphisms-lemma-base-change-flat} 및
+\ref{morphisms-lemma-composition-flat}) 및 아핀 스킴의 섬유곱이 아핀이라는
+사실(Schemes, Lemma \ref{schemes-lemma-fibre-product-affines})에서 형식적으로
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fpqc-covering-affines-mapping-in}
+$T$를 스킴이라 하고, $\{f_i : T_i \to T\}_{i \in I}$를 끝 대상이
+$T$인 스킴 사상족이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item 각 $f_i$는 평탄이다.
+% P05-ERR-0007
+\item 모든 아핀 스킴 $Z$와 사상 $h : Z \to T$에 대하여 사상족
+$\{T_i \times_T Z \to Z\}_{i \in I}$을 세분하는 표준 fpqc 덮개
+$\{Z_j \to Z\}_{j = 1, \ldots, n}$가 존재한다.
+\end{enumerate}
+그러면 $\{f_i : T_i \to T\}_{i \in I}$는 $T$의 fpqc 덮개이다.
+\end{lemma}
+
+\begin{proof}
+$T = \bigcup U_\alpha$를 아핀 열린 덮개라 하자. 각 $\alpha$에 대하여
+당김 사상족 $\{T_i \times_T U_\alpha \to U_\alpha\}$에는 표준 fpqc
+덮개에 의한 세분이 존재하므로, Lemma
+\ref{lemma-family-flat-dominated-covering}에 의해 이는 fpqc 덮개이다.
+$\{U_\alpha \to T\}$가 fpqc 덮개이므로 Lemma
+\ref{lemma-family-flat-fpqc-local-covering}에 의해 $\{T_i \to T\}$가 fpqc
+덮개임을 얻는다.
+\end{proof}
+
+\begin{definition}
+\label{definition-sheaf-property-fpqc}
+$F$를 스킴의 범주에서 집합으로 가는 반변 함자라 하자.
+\begin{enumerate}
+\item $\{U_i \to T\}_{i \in I}$를 고정된 끝 대상을 갖는 스킴 사상족이라
+하자. 다음을 만족할 때 $F$가 {\it 주어진 사상족에 대한 층 성질을
+만족한다}고 한다. 즉,
+$\xi_i|_{U_i \times_T U_j} = \xi_j|_{U_i \times_T U_j}$
+를 만족하는 임의의 원소족 $\xi_i \in F(U_i)$에 대하여, $F(U_i)$에서
+$\xi_i = \xi|_{U_i}$를 만족하는 유일한 원소 $\xi \in F(T)$가 존재한다.
+\item 모든 fpqc 덮개에 대한 층 성질을 만족할 때, $F$가
+{\it fpqc 위상에 대한 층 성질을 만족한다}고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+위에서 설명했듯이 fpqc 층들의 범주를 정의하는 것이 아니므로, 이 상황에서는
+``$F$는 층이다''라는 용어를 되도록 사용하지 않는다.
+
+\begin{lemma}
+\label{lemma-sheaf-property-fpqc}
+$F$를 스킴의 범주에서 집합으로 가는 반변 함자라 하자. 그러면 $F$가 fpqc
+위상에 대한 층 성질을 만족할 필요충분조건은 다음을 만족하는 것이다.
+\begin{enumerate}
+\item 모든 Zariski 덮개에 대한 층 성질.
+\item 임의의 표준 fpqc 덮개에 대한 층 성질.
+\end{enumerate}
+더 나아가 (1)이 성립할 때 (2)는 다음 조건과 동치이다.
+\begin{enumerate}
+\item[(2')] $V$, $U$가 아핀이고 $V \to U$가 충실히 평탄인
+$\{V \to U\}$에 대한 층 성질.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)가 성립한다고 가정하자.
+$\{f_i : T_i \to T\}_{i \in I}$를 fpqc 덮개라 하자. $s_i$와 $s_j$가
+$F(T_i \times_T T_j)$의 같은 원소로 사상되는 원소족
+$s_i \in F(T_i)$를 택한다. 모든 $i$에 대하여
+$s|_{f_i^{-1}(W)} = s_i|_{f_i^{-1}(W)}$를 만족하는 유일한
+$s \in F(W)$가 존재하도록 하는 극대 열린부분집합 $W \subset T$를 택한다.
+$F$가 Zariski 덮개에 대한 층 성질을 만족하므로 이러한 극대 열린집합이
+존재한다. 실제로 $W$는 이 성질을 갖는 모든 열린집합의 합집합이다.
+$t \in T$를 택하자. $t \in W$임을 보이겠다. 이를 위해 아핀 열린집합
+$t \in U \subset T$를 택하고, 모든 $i$에 대하여
+$s|_{f_i^{-1}(U)} = s_i|_{f_i^{-1}(U)}$를 만족하는 유일한
+$s \in F(U)$가 존재함을 보이겠다.
+
+\medskip\noindent
+Lemma \ref{lemma-fpqc-affine}에 의해 $\{U \times_T T_i \to U\}$를
+세분하는 표준 fpqc 덮개 $\{U_j \to U\}_{j = 1, \ldots, n}$를 찾을 수
+있다. 그 세분 사상들을 $h_j : U_j \to T_{i_j}$라 하자. (2)에 의해
+$s|_{U_j} = F(h_j)(s_{i_j})$를 만족하는 유일한 원소 $s \in F(U)$를
+얻는다. $U$ 위의 임의의 스킴 $V \to U$에 대하여, 각
+$j = 1, \ldots, n$에 대해 $V \times_U U_j$ 위에서
+$F(h_j \circ \text{pr}_2)(s_{i_j})$로 제한되는 유일한 절단
+$s_V \in F(V)$가 존재함에 유의하라. 실제로 $V$가 아핀이면
+$\{V \times_U U_j \to V\}$가 표준 fpqc 덮개이므로 (2)에서 따르고,
+일반적으로는 $V$의 아핀 열린 덮개를 택한 뒤 (1)과 아핀인 경우에서
+따른다. 특히 $s_V = s|_V$이다. 이제 $V = U \times_T T_i$로 두고
+$s_{i_j}|_{T_{i_j} \times_T T_i} = s_i|_{T_{i_j} \times_T T_i}$
+임을 사용하면 $s|_{U \times_T T_i} = s_V = s_i|_{U \times_T T_i}$를
+얻는다. 이것이 보이고자 한 바이다.
+
+\medskip\noindent
+(1)이 성립할 때 (2)와 (2')가 동치임을 증명하자.
+$\{T_i \to T\}$가 표준 fpqc 덮개라고 하자. 그러면
+$\coprod T_i \to T$는 아핀 스킴의 충실히 평탄한 사상이다. (1)이
+성립하므로 $F(\coprod T_i) = \prod F(T_i)$이고, 마찬가지로
+$F((\coprod T_i) \times_T (\coprod T_i)) = \prod F(T_i \times_T T_{i'})$.
+따라서 $\{T_i \to T\}$와 $\{\coprod T_i \to T\}$에 대한 층 조건은
+같다.
+\end{proof}
+
+\noindent
+다음 보조정리는 집합론적 어려움이 실제로 생기며 대부분의 독자는 이를
+무시해도 됨을 지적하기 위해 제시한다.
+
+\begin{lemma}
+\label{lemma-no-set-of-fpqc-covers-is-initial}
+$R$을 영이 아닌 환이라 하자. $\Spec(R)$의 fpqc 덮개들의 집합 $A$로서
+모든 fpqc 덮개가 $A$의 원소에 의해 세분되는 것은 존재하지 않는다.
+\end{lemma}
+
+\begin{proof}
+먼저 $R = k$가 체인 경우를 설명하자. 임의의 집합 $I$에 대하여 순수
+초월 체 확대 $k_I = k(\{t_i\}_{i \in I})/k$를 생각한다. $k \to k_I$가
+충실히 평탄이므로 $\{\Spec(k_I) \to \Spec(k)\}$는 fpqc 덮개이다.
+$A$를 집합이라 하고, 각 $\alpha \in A$에 대하여
+$\mathcal{U}_\alpha = \{S_{\alpha, j} \to \Spec(k)\}_{j \in J_\alpha}$를
+fpqc 덮개라 하자. $\mathcal{U}_\alpha$가
+$\{\Spec(k_I) \to \Spec(k)\}$를 세분하면 사상
+$S_{\alpha, j} \to \Spec(k)$들은 $\Spec(k_I)$를 통하여 분해된다.
+$\mathcal{U}_\alpha$가 덮개이므로 적어도 하나의 $S_{\alpha, j}$는
+공집합이 아니다. 한 점 $s \in S_{\alpha, j}$를 택하자. 분해
+$S_{\alpha, j} \to \Spec(k_I) \to \Spec(k)$
+가 있으므로 체 준동형 $k_I \to \kappa(s)$를 얻는다. 특히
+$\kappa(s)$의 기수는 적어도 $I$의 기수이다. 따라서 모든 스킴
+$S_{\alpha, j}$의 잉여체들의 기수보다 큰 기수를 갖는 집합 $I$를 택하면
+그러한 분해가 존재하지 않는다. 이로써 $R = k$인 경우 보조정리가 성립한다.
+
+\medskip\noindent
+일반적인 경우를 보자. $R$이 영이 아니므로 잉여체가 $\kappa$인 극대
+소아이디얼 $\mathfrak m$을 갖는다. $I$를 집합이라 하고
+$R_I = S_I^{-1} R[\{t_i\}_{i \in I}]$를 생각하자. 여기서
+$S_I \subset R[\{t_i\}_{i \in I}]$는 $f \in R[\{t_i\}_{i \in I}]$들
+중 모든 $R$의 소아이디얼 $\mathfrak p$에 대하여 $f$가
+$R/\mathfrak p[\{t_i\}_{i \in I}]$의 영이 아닌 원소로 사상되는 것들로
+이루어진 곱셈적 부분집합이다. 그러면 $R_I$는 충실히 평탄한 $R$-대수이고
+$\{\Spec(R_I) \to \Spec(R)\}$는 fpqc 덮개이다. 다음을 보이는 일은
+독자의 연습문제로 남긴다.
+$R_I \otimes_R \kappa \cong \kappa(\{t_i\}_{i \in I}) = \kappa_I$
+표기는 위와 같으며, 힌트는 $R \to \kappa$가 전사이고 계수가 $1$인
+단항식을 하나라도 갖는 임의의 $f \in R[\{t_i\}_{i \in I}]$가 $S_I$의
+원소라는 사실을 사용하는 것이다. $A$를 집합이라 하고, 각
+$\alpha \in A$에 대하여
+$\mathcal{U}_\alpha = \{S_{\alpha, j} \to \Spec(R)\}_{j \in J_\alpha}$를
+fpqc 덮개라 하자. $\mathcal{U}_\alpha$가
+$\{\Spec(R_I) \to \Spec(R)\}$를 세분하면 기저변환에 의해
+$\{S_{\alpha, j} \times_{\Spec(R)} \Spec(\kappa) \to \Spec(\kappa)\}$
+가 $\{\Spec(\kappa_I) \to \Spec(\kappa)\}$를 세분함을 얻는다. 따라서
+앞 문단의 결과에 의해 이것이 성립하지 않게 하는 $I$가 존재하며,
+보조정리가 증명되었다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{V 위상}
+\label{section-V}
+
+\noindent
+V 위상은 이 장의 다른 모든 위상보다 강하다. 대략 말하면 이는 Zariski
+덮개와 특수화에 대한 올림 성질을 만족하는 준콤팩트 사상들로 생성된다
+(Lemma \ref{lemma-refine-qcqs-V}). 그러나 여기서 V 덮개를 정의하는
+절차는 조금 다르다. 먼저 아핀 스킴의 표준 V 덮개를 정의한 뒤 이를 사용하여
+일반적인 V 덮개를 정의한다. 표기상 문헌에서는 때때로 ``V 덮개'' 대신
+``$v$-덮개''를 사용한다.
+
+\begin{definition}
+\label{definition-standard-V-covering}
+$T$를 아핀 스킴이라 하자. $T_j$가 아핀인 유한 사상족
+$\{T_j \to T\}_{j = 1, \ldots, m}$가 다음 성질을 만족할 때 이를
+{\it 표준 V 덮개}라 한다. 즉, $V$가 값매김환인 모든 사상
+$g : \Spec(V) \to T$에 대하여 값매김환의 확대 $V \subset W$
+(More on Algebra, Definition
+\ref{more-algebra-definition-extension-valuation-rings}), 지표
+$1 \leq j \leq m$, 그리고 다음 가환 그림이 존재한다.
+$$
+\xymatrix{
+\Spec(W) \ar[r] \ar[d] & T_j \ar[d] \\
+\Spec(V) \ar[r]^g & T
+}
+$$
+\end{definition}
+
+\noindent
+먼저 이 개념에 관한 몇 가지 기본 보조정리를 증명한다.
+
+\begin{lemma}
+\label{lemma-standard-fpqc-standard-V}
+표준 fpqc 덮개는 표준 V 덮개이다.
+\end{lemma}
+
+\begin{proof}
+$\{X_i \to X\}_{i = 1, \ldots, n}$를 표준 fpqc 덮개라 하자
+(Definition \ref{definition-standard-fpqc}). $V$가 값매김환인 사상
+$g : \Spec(V) \to X$를 택한다. $x \in X$를 $\Spec(V)$의 닫힌점의 상이라
+하자. 어떤 $i$와 $x$로 사상되는 점 $x_i \in X_i$를 택한다. 그러면
+$\Spec(V) \times_X X_i$에는 $\Spec(V)$의 닫힌점으로 사상되는 점
+$x'_i$가 있다. $\Spec(V) \times_X X_i \to \Spec(V)$가 평탄이므로,
+$\Spec(V)$의 일반점으로 사상되는 $x''_i$를 갖는
+$\Spec(V) \times_X X_i$의 점들의 특수화 $x''_i \leadsto x'_i$를 찾을 수
+있다. Morphisms, Lemma \ref{morphisms-lemma-generalizations-lift-flat}를
+보라. Schemes, Lemma \ref{schemes-lemma-points-specialize}에 의해 값매김환
+$W$와 사상 $h : \Spec(W) \to \Spec(V) \times_X X_i$를 택하여, $h$가
+$\Spec(W)$의 일반점을 $x''_i$로, $\Spec(W)$의 닫힌점을 $x'_i$로 사상하게
+할 수 있다.
+다음 가환 그림을 얻는다.
+$$
+\xymatrix{
+\Spec(W) \ar[r] \ar[d] & X_i \ar[d] \\
+\Spec(V) \ar[r] & X
+}
+$$
+여기서 $V \to W$는 값매김환의 확대이다. 이로써 보조정리가 증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-standard-ph-standard-V}
+표준 ph 덮개는 표준 V 덮개이다.
+\end{lemma}
+
+\begin{proof}
+$T$를 아핀 스킴이라 하자. $f : U \to T$를 고유 전사 사상이라 하고
+$U = \bigcup_{j = 1, \ldots, m} U_j$를 유한 아핀 열린 덮개라 하자.
+Definition \ref{definition-standard-ph-covering}에 따라
+$\{U_j \to T\}$가 표준 V 덮개임을 보여야 한다. $V$가 분수체 $K$를 갖는
+값매김환인 사상 $g : \Spec(V) \to T$를 택한다. $U \to T$가 전사이므로
+체 확대 $L/K$와 다음 가환 그림을 택할 수 있다.
+$$
+\xymatrix{
+\Spec(L) \ar[rr] \ar[d] & & U \ar[d] \\
+\Spec(K) \ar[r] & \Spec(V) \ar[r]^g & T
+}
+$$
+Algebra, Lemma \ref{algebra-lemma-dominate}에 의해 $V$를 지배하는 값매김환
+$W \subset L$을 택할 수 있다. 고유성의 값매김 판정법(Morphisms, Lemma
+\ref{morphisms-lemma-characterize-proper})에 의해 다음 가환 그림의 사상
+$h$를 찾을 수 있다.
+$$
+\xymatrix{
+\Spec(L) \ar[r] \ar[d] & \Spec(W) \ar[r]_h \ar[d] & U \ar[d] \\
+% P05-ERR-0008
+\Spec(K) \ar[r] & \Spec(V) \ar[r]^g & X
+}
+$$
+$\Spec(W)$가 유일한 닫힌점을 가지므로 어떤 $j$에 대하여
+$\Im(h)$가 $U_j$에 포함됨을 알 수 있다. 따라서
+$h : \Spec(W) \to U_j$는 원하는 올림이며, $\{U_j \to T\}$가 표준 V
+덮개임을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-standard-V}
+$\{T_j \to T\}_{j = 1, \ldots, m}$를 표준 V 덮개라 하고
+$T' \to T$를 아핀 스킴의 사상이라 하자. 그러면
+$\{T_j \times_T T' \to T'\}_{j = 1, \ldots, m}$는 표준 V 덮개이다.
+\end{lemma}
+
+\begin{proof}
+$V$가 값매김환인 사상 $\Spec(V) \to T'$를 택한다. 가정에 의해 값매김환의
+확대 $V \subset W$, 어떤 $i$, 그리고 다음 가환 그림을 찾을 수 있다.
+$$
+\xymatrix{
+\Spec(W) \ar[r] \ar[d] & T_i \ar[d] \\
+\Spec(V) \ar[r] & T
+}
+$$
+섬유곱의 보편 성질에 의해 원하는 사상
+$\Spec(W) \to T' \times_T T_i$를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-standard-V}
+$T$를 아핀 스킴이라 하자. $\{T_j \to T\}_{j = 1, \ldots, m}$를 표준 V
+덮개라 하고, $\{T_{ji} \to T_j\}_{i = 1, \ldots n_j}$를 표준 V 덮개라
+하자. 그러면 $\{T_{ji} \to T\}_{i, j}$는 표준 V 덮개이다.
+\end{lemma}
+
+\begin{proof}
+$V \subset W$와 $W \subset \Omega$가 값매김환의 확대이면
+$V \subset \Omega$도 값매김환의 확대라는 관찰에서 형식적으로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-refine-standard-V}
+$T$를 아핀 스킴이라 하고, 모든 $j$에 대하여 $T_j$가 아핀인 사상족
+$\{T_j \to T\}_{j = 1, \ldots, m}$를 택하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $\{T_j \to T\}_{j = 1, \ldots, m}$는 표준 V 덮개이다.
+\item $\{T_j \to T\}_{j = 1, \ldots, m}$를 세분하는 표준 V 덮개가
+존재한다.
+\item $\{\coprod_{j = 1, \ldots, m} T_j \to T\}$는 표준 V 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 정의에서 거의 즉시 따른다. 조금 흥미로운 유일한 점은
+국소환의 스펙트럼에서 $\coprod_{j = 1, \ldots, m} T_j$로 가는 사상은
+어떤 $T_j$를 통하여 분해되어야 한다는 것이다.
+\end{proof}
+
+\begin{definition}
+\label{definition-V-covering}
+$T$를 스킴이라 하자. 모든 아핀 열린집합 $U \subset T$에 대하여 사상족
+$\{T_i \times_T U \to U\}_{i \in I}$을 세분하는 표준 V 덮개
+$\{U_j \to U\}_{j = 1, \ldots, m}$가 존재하는 스킴 사상족
+$\{T_i \to T\}_{i \in I}$을 {\it $T$의 V 덮개}라 한다.
+\end{definition}
+
+\noindent
+V 위상에는 fpqc 위상과 같은 집합론적 문제가 있다. 따라서 V 사이트를
+정의하지 않으며 V 위상에 관한 코호몰로지를 생각하지 않을 것이다. 한편
+$F : \Sch^{opp} \to \textit{Sets}$가 주어졌을 때 $F$가 V 위상에 대한
+층 성질을 만족하는지 묻는 것은 의미가 있다. 아래를 보라. 또한 V 위상에서
+대상의 내림 등을 물을 수 있다.
+
+\begin{lemma}
+\label{lemma-refine-by-V}
+$T$를 스킴이라 하고, $\{f_i : T_i \to T\}_{i \in I}$를 사상족이라 하자.
+다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$는 V 덮개이다.
+\item $\{T_i \to T\}_{i \in I}$을 세분하는 V 덮개가 존재한다.
+\item $\{\coprod_{i \in I} T_i \to T\}$는 V 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: Lemma \ref{lemma-refine-by-ph}의 증명과 비교하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-V}
+$T$를 스킴이라 하자.
+\begin{enumerate}
+\item $T' \to T$가 동형이면 $\{T' \to T\}$는 $T$의 V 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 V 덮개이고 각 $i$에 대하여
+$\{T_{ij} \to T_i\}_{j\in J_i}$가 V 덮개이면,
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$는 V 덮개이다.
+\item $\{T_i \to T\}_{i\in I}$가 V 덮개이고 $T' \to T$가 스킴의
+사상이면 $\{T' \times_T T_i \to T'\}_{i\in I}$는 V 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 명백하다.
+
+\medskip\noindent
+(3)의 증명. $U' \subset T'$을 아핀 열린 부분스킴이라 하자. $U'$이
+준콤팩트이므로, $U'_j \to T$가 어떤 아핀 열린집합 $U_j \subset T$ 안으로
+사상되도록 하는 유한 아핀 열린 덮개
+% P05-ERR-0009
+$U' = U'_1 \cup \ldots \cup U'$를 찾을 수 있다. 사상족
+$\{T_i \times_T U_j \to U_j\}$를 세분하는 표준 V 덮개
+$\{U_{jl} \to U_j\}_{l = 1, \ldots, n_j}$를 택한다. Lemma
+\ref{lemma-base-change-standard-V}에 의해 기저변환
+$\{U_{jl} \times_{U_j} U'_j \to U'_j\}$는 표준 V 덮개이다. 또한
+$\{U'_j \to U'\}$도 표준 V 덮개이다(예를 들어 Lemma
+\ref{lemma-standard-fpqc-standard-V}에 의함). Lemma
+\ref{lemma-composition-standard-V}에 의해 사상족
+$\{U_{jl} \times_{U_j} U'_j \to U'\}$는 표준 V 덮개이다.
+$\{U_{jl} \times_{U_j} U'_j \to U'\}$는
+$\{T_i \times_T U' \to U'\}$를 세분하므로 결론을 얻는다.
+
+\medskip\noindent
+(2)의 증명. $U \subset T$를 아핀 열린집합이라 하자. 먼저
+$\{T_i \times_T U \to U\}$를 세분하는 표준 V 덮개
+$\{U_k \to U\}_{k = 1, \ldots, m}$를 택한다. 이 세분이 $T$ 위의 사상
+$U_k \to T_{i_k}$들로 주어진다고 하자. 그러면
+$$
+\{T_{i_kj} \times_{T_{i_k}} U_k \to U_k\}_{j \in J_{i_k}}
+$$
+는 (3)에 의해 V 덮개이다. $U_k$가 아핀이므로 이 사상족을 세분하는 표준
+V 덮개 $\{U_{ka} \to U_k\}_{a = 1, \ldots, b_k}$를 찾을 수 있다. 이제
+Lemma \ref{lemma-composition-standard-V}를 적용하면
+$\{U_{ka} \to U\}$가 $\{T_{ij} \times_T U \to U\}$를 세분하는 표준 V
+덮개임을 알 수 있다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-zariski-etale-smooth-syntomic-fppf-fpqc-ph-V}
+모든 fpqc 덮개는 V 덮개이다. 따라서 특히 모든 fppf 덮개, 신토믹 덮개,
+매끄러운 덮개, \'에탈 덮개 또는 Zariski 덮개는 V 덮개이다. 또한 ph 덮개는
+V 덮개이다.
+\end{lemma}
+
+\begin{proof}
+fpqc 덮개는 아핀 국소적으로 표준 fpqc 덮개에 의해 세분된다. Lemma
+\ref{lemma-fpqc-affine}을 보라. 표준 fpqc 덮개는 표준 V 덮개이다. Lemma
+\ref{lemma-standard-fpqc-standard-V}를 보라. 따라서 첫째 명제는 표준 V
+덮개를 통한 V 덮개의 정의에서 따른다. fppf 덮개, 신토믹 덮개, 매끄러운
+덮개, \'에탈 덮개 또는 Zariski 덮개에 대한 결론은 이들이 fpqc 덮개라는
+사실에서 따른다. Lemma
+\ref{lemma-zariski-etale-smooth-syntomic-fppf-fpqc}를 보라.
+
+\medskip\noindent
+ph 덮개에 대한 명제도 같은 방식으로 Lemma
+\ref{lemma-standard-ph-standard-V}에서 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-sheaf-property-V}
+$F$를 스킴의 범주에서 집합으로 가는 반변 함자라 하자. 임의의 V 덮개에
+대한 층 성질을 만족할 때, $F$가
+{\it V 위상에 대한 층 성질을 만족한다}고 한다(Definition
+\ref{definition-sheaf-property-fpqc} 참조).
+\end{definition}
+
+\noindent
+위에서 설명했듯이 V 층들의 범주를 정의하는 것이 아니므로 이 상황에서는
+``$F$는 층이다''라는 용어를 되도록 사용하지 않는다.
+
+\begin{lemma}
+\label{lemma-sheaf-property-V}
+$F$를 스킴의 범주에서 집합으로 가는 반변 함자라 하자. 그러면 $F$가 V
+위상에 대한 층 성질을 만족할 필요충분조건은 다음을 만족하는 것이다.
+\begin{enumerate}
+\item 모든 Zariski 덮개에 대한 층 성질.
+\item 임의의 표준 V 덮개에 대한 층 성질.
+\end{enumerate}
+더 나아가 (1)이 성립할 때 (2)는 다음 조건과 동치이다.
+\begin{enumerate}
+\item[(2')] 하나의 화살표로 이루어진 $\{V \to U\}$ 꼴의 표준 V 덮개에
+대한 층 성질.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)가 성립한다고 가정하자. $\{f_i : T_i \to T\}_{i \in I}$를 V
+덮개라 하자. $s_i$와 $s_j$가 $F(T_i \times_T T_j)$의 같은 원소로 사상되는
+원소족 $s_i \in F(T_i)$를 택한다. 모든 $i$에 대하여
+$s|_{f_i^{-1}(W)} = s_i|_{f_i^{-1}(W)}$를 만족하는 유일한
+$s \in F(W)$가 존재하도록 하는 극대 열린부분집합 $W \subset T$를 택한다.
+$F$가 Zariski 덮개에 대한 층 성질을 만족하므로 이러한 극대 열린집합이
+존재한다. 실제로 $W$는 이 성질을 갖는 모든 열린집합의 합집합이다.
+$t \in T$를 택하자. $t \in W$임을 보이겠다. 이를 위해 아핀 열린집합
+$t \in U \subset T$를 택하고, 모든 $i$에 대하여
+$s|_{f_i^{-1}(U)} = s_i|_{f_i^{-1}(U)}$를 만족하는 유일한
+$s \in F(U)$가 존재함을 보이겠다.
+
+\medskip\noindent
+$\{U \times_T T_i \to U\}$를 세분하는 표준 V 덮개
+$\{U_j \to U\}_{j = 1, \ldots, n}$를 찾을 수 있다. 그 세분 사상들을
+$h_j : U_j \to T_{i_j}$라 하자. (2)에 의해
+$s|_{U_j} = F(h_j)(s_{i_j})$를 만족하는 유일한 원소 $s \in F(U)$를
+얻는다. $U$ 위의 임의의 스킴 $V \to U$에 대하여, 각
+$j = 1, \ldots, n$에 대해 $V \times_U U_j$ 위에서
+$F(h_j \circ \text{pr}_2)(s_{i_j})$로 제한되는 유일한 절단
+$s_V \in F(V)$가 존재함에 유의하라. 실제로 $V$가 아핀이면
+$\{V \times_U U_j \to V\}$가 표준 V 덮개이므로 (2)에서 따른다
+(Lemma \ref{lemma-base-change-standard-V}). 일반적으로는 $V$의 아핀 열린
+덮개를 택한 뒤 (1)과 아핀인 경우에서 따른다. 특히 $s_V = s|_V$이다.
+이제 $V = U \times_T T_i$로 두고
+$s_{i_j}|_{T_{i_j} \times_T T_i} = s_i|_{T_{i_j} \times_T T_i}$
+임을 사용하면 $s|_{U \times_T T_i} = s_V = s_i|_{U \times_T T_i}$를
+얻는다. 이것이 보이고자 한 바이다.
+
+\medskip\noindent
+(1)이 성립할 때 (2)와 (2')가 동치임을 증명하자.
+$\{T_i \to T\}_{i = 1, \ldots, n}$가 표준 V 덮개라고 하자. 그러면
+$\coprod_{i = 1, \ldots, n} T_i \to T$는 아핀 스킴의 사상이며, 명백히
+표준 V 덮개이기도 하다. (1)이 성립하므로
+$F(\coprod T_i) = \prod F(T_i)$이고, 마찬가지로
+$F((\coprod T_i) \times_T (\coprod T_i)) = \prod F(T_i \times_T T_{i'})$.
+따라서 $\{T_i \to T\}$와 $\{\coprod T_i \to T\}$에 대한 층 조건은
+같다.
+\end{proof}
+
+\noindent
+다음 보조정리는 V 덮개라는 조건이 특수화를 올릴 수 있는 가능성과 관련됨을
+보여 준다.
+
+\begin{lemma}
+\label{lemma-refine-qcqs-V}
+$X \to Y$를 스킴의 준콤팩트 사상이라 하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $\{X \to Y\}$는 V 덮개이다.
+\item 임의의 값매김환 $V$와 사상 $g : \Spec(V) \to Y$에 대하여 값매김환의
+확대 $V \subset W$와 다음 가환 그림이 존재한다.
+$$
+\xymatrix{
+\Spec(W) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(V) \ar[r] & Y
+}
+$$
+\item 임의의 사상 $Z \to Y$와 $Z$의 점들의 특수화 $z' \leadsto z$에
+대하여, $z' \leadsto z$로 사상되는 $Z \times_Y X$의 점들의 특수화
+$w' \leadsto w$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하고 $g : \Spec(V) \to Y$를 (2)에서와 같이 택하자. $V$가
+국소환이므로 어떤 아핀 열린집합 $U \subset Y$가 있어 $g$가 $U$를 통하여
+분해된다.
+Definition \ref{definition-V-covering}에 의해 $\{X \times_Y U \to U\}$를
+세분하는 표준 V 덮개 $\{U_j \to U\}$를 찾을 수 있다. Definition
+\ref{definition-standard-V-covering}에 의해 어떤 $j$, 값매김환의 확대
+$V \subset W$, 그리고 다음 가환 그림을 찾을 수 있다.
+$$
+\xymatrix{
+\Spec(W) \ar[r] \ar[d] & U_j \ar[d] \ar@{..>}[r] & X \ar[ld] \\
+\Spec(V) \ar[r] & Y
+}
+$$
+덮개의 세분 성질에 의해 그림을 가환하게 하는 점선 화살표가 존재하므로
+(2)가 성립한다.
+
+\medskip\noindent
+(2)를 가정하고 $Z \to Y$와 $z' \leadsto z$를 (3)에서와 같이 택하자.
+Schemes, Lemma \ref{schemes-lemma-points-specialize}에 의해 값매김환 $V$와
+사상 $\Spec(V) \to Z$를 찾아, $\Spec(V)$의 닫힌점이 $z$로,
+$\Spec(V)$의 일반점이 $z'$로 사상되게 할 수 있다. (2)에 의해 값매김환의
+확대 $V \subset W$와
+다음 가환 그림을 찾을 수 있다.
+$$
+\xymatrix{
+\Spec(W) \ar[rr] \ar[d] & & X \ar[d] \\
+\Spec(V) \ar[r] & Z \ar[r] & Y
+}
+$$
+$\Spec(W)$의 일반점과 닫힌점은 유도된 사상
+$\Spec(W) \to Z \times_Y X$에 의해 $Z \times_Y X$의 점들
+$w' \leadsto w$로 사상된다. 따라서 (3)이 성립한다.
+
+\medskip\noindent
+(3)이 성립한다고 가정하고 $U \subset Y$를 아핀 열린집합이라 하자. 유한
+아핀 열린 덮개 $U \times_Y X = \bigcup_{j = 1, \ldots, m} U_j$를 택한다.
+$X \to Y$가 준콤팩트이므로 이것이 가능하다. $\{U_j \to U\}$가 표준 V
+덮개라고 주장한다. 이 주장은 (1)을 함의하며 보조정리의 증명을 끝낸다.
+주장을 증명하기 위해 $V$를 값매김환이라 하고
+$g : \Spec(V) \to U$를 사상이라 하자. (3)에 의해 다음 공간의 점들의 특수화
+$w' \leadsto w$를 찾을 수 있다.
+$$
+% P05-EN-CH34-0006
+T = \Spec(V) \times_X Y = \Spec(V) \times_U (U \times_X Y)
+$$
+여기서 $w'$는 $\Spec(V)$의 일반점으로, $w$는 $\Spec(V)$의 닫힌점으로
+사상된다. Schemes, Lemma \ref{schemes-lemma-points-specialize}에 의해
+값매김환 $W$와 사상 $\Spec(W) \to T$를 찾아, $\Spec(W)$의 일반점이
+$w'$로, $\Spec(W)$의 닫힌점이 $w$로 사상되게 할 수 있다. 합성
+$\Spec(W) \to T \to \Spec(V)$는 포함 $V \subset W$에 대응하며, 이는
+$W$를 값매김환 $V$의 확대로 나타낸다.
+$T = \bigcup \Spec(V) \times_U U_j$가 열린 덮개이므로 어떤 $j$에 대하여
+$\Spec(W) \to T$가 $\Spec(V) \times_U U_j$를 통하여 분해됨을 알 수 있다.
+따라서 다음 가환 그림을 얻는다.
+$$
+\xymatrix{
+\Spec(W) \ar[d] \ar[r] & U_j \ar[d] \\
+\Spec(V) \ar[r] & U
+}
+$$
+이로써 주장의 증명이 끝난다.
+\end{proof}
+
+\noindent
+V 덮개는 보편적으로 몫사상인 사상족을 준다. 다음 보조정리의 역은
+거짓이다. Examples, Section
+\ref{examples-section-universally-submersive-not-V}를 보라.
+
+\begin{lemma}
+\label{lemma-V-covering-universally-submersive}
+$\{f_i : X_i \to X\}_{i \in I}$를 V 덮개라 하자. 그러면
+$$
+\coprod\nolimits_{i \in I} f_i :
+\coprod\nolimits_{i \in I} X_i
+\longrightarrow
+X
+$$
+는 스킴의 보편적 몫사상이다(Morphisms, Definition
+\ref{morphisms-definition-submersive}).
+\end{lemma}
+
+\begin{proof}
+V 덮개의 기저변환이 V 덮개라는 사실(Lemma \ref{lemma-V})을 이후 별도
+언급 없이 사용한다. 특히 주어진 사상이 몫사상임을 보이면 충분하다.
+몫사상성은 명백히 밑에서 Zariski 국소적이다. 따라서 $X$가 아핀이라고
+가정할 수 있다. 그러면 $\{X_i \to X\}$는 표준 V 덮개
+$\{Y_j \to X\}$에 의해 세분된다. $\coprod Y_j \to X$가 몫사상임을 보일
+수 있다면, 분해 $\coprod Y_j \to \coprod X_i \to X$가 존재하므로
+$\coprod X_i \to X$가 몫사상임을 얻는다. $Y = \coprod Y_j$로 두고 아핀
+스킴의 사상 $f : Y \to X$를 생각하자. Lemma
+\ref{lemma-refine-qcqs-V}에 의해 $X$의 임의의 특수화 $x' \leadsto x$를
+$Y$의 어떤 특수화 $y' \leadsto y$로 올릴 수 있다. 따라서
+$f^{-1}(T)$가 $Y$에서 닫힌집합인 부분집합 $T \subset X$가 주어지면
+$T \subset X$는 특수화에 대하여 닫혀 있다. $f^{-1}(T) \subset Y$에
+유도된 축소 닫힌 부분스킴 구조를 주면 이는 아핀 스킴이므로, Algebra,
+Lemma \ref{algebra-lemma-image-stable-specialization-closed}에 의해
+$T \subset X$가 닫혀 있음을 얻는다. 따라서 $f$는 몫사상이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{위상의 변경}
+\label{section-change-topologies}
+
+\noindent
+$f : X \to Y$를 밑스킴 $S$ 위의 스킴 사상이라 하자. 이 경우 다음과 같은
+사이트의 사상들이 존재한다\footnote{ph 위상과 다른 위상들 사이의 비교는
+포함하지 않았다. 이에 대해서는 More on Morphisms, Remark
+\ref{more-morphisms-remark-change-topologies}를 보라.}(아래 Remark
+\ref{remark-choice-sites}에서와 같이 사이트를 적절히 택한다).
+\begin{enumerate}
+\item $(\Sch/X)_{fppf} \longrightarrow (\Sch/Y)_{fppf}$,
+\item $(\Sch/X)_{fppf} \longrightarrow (\Sch/Y)_{syntomic}$,
+\item $(\Sch/X)_{fppf} \longrightarrow (\Sch/Y)_{smooth}$,
+\item $(\Sch/X)_{fppf} \longrightarrow
+(\Sch/Y)_\etale$,
+\item $(\Sch/X)_{fppf} \longrightarrow (\Sch/Y)_{Zar}$,
+\item $(\Sch/X)_{syntomic} \longrightarrow (\Sch/Y)_{syntomic}$,
+\item $(\Sch/X)_{syntomic} \longrightarrow (\Sch/Y)_{smooth}$,
+\item $(\Sch/X)_{syntomic} \longrightarrow
+(\Sch/Y)_\etale$,
+\item $(\Sch/X)_{syntomic} \longrightarrow (\Sch/Y)_{Zar}$,
+\item $(\Sch/X)_{smooth} \longrightarrow (\Sch/Y)_{smooth}$,
+\item $(\Sch/X)_{smooth} \longrightarrow
+(\Sch/Y)_\etale$,
+\item $(\Sch/X)_{smooth} \longrightarrow (\Sch/Y)_{Zar}$,
+\item $(\Sch/X)_\etale \longrightarrow
+(\Sch/Y)_\etale$,
+\item $(\Sch/X)_\etale \longrightarrow (\Sch/Y)_{Zar}$,
+\item $(\Sch/X)_{Zar} \longrightarrow (\Sch/Y)_{Zar}$,
+\item $(\Sch/X)_{fppf} \longrightarrow Y_\etale$,
+\item $(\Sch/X)_{syntomic} \longrightarrow Y_\etale$,
+\item $(\Sch/X)_{smooth} \longrightarrow Y_\etale$,
+\item $(\Sch/X)_\etale \longrightarrow Y_\etale$,
+\item $(\Sch/X)_{fppf} \longrightarrow Y_{Zar}$,
+\item $(\Sch/X)_{syntomic} \longrightarrow Y_{Zar}$,
+\item $(\Sch/X)_{smooth} \longrightarrow Y_{Zar}$,
+\item $(\Sch/X)_\etale \longrightarrow Y_{Zar}$,
+\item $(\Sch/X)_{Zar} \longrightarrow Y_{Zar}$,
+\item $X_\etale \longrightarrow Y_\etale$,
+\item $X_\etale \longrightarrow Y_{Zar}$,
+\item $X_{Zar} \longrightarrow Y_{Zar}$,
+\end{enumerate}
+각 경우 밑에 놓인 연속 함자 $\Sch/Y \to \Sch/X$ 또는
+$Y_\tau \to \Sch/X$는 함자 $Y'/Y \mapsto X \times_Y Y'/X$이다. 실제로
+앞 절들에서 위와 같은 $\tau$에 대하여 다음 사상들을 보았다.
+$f_{big} : (\Sch/X)_\tau \to (\Sch/Y)_\tau$
+및
+$f_{small} : X_\tau \to Y_\tau$
+또한 $\tau \in \{\etale, Zariski\}$에 대하여 사이트의 사상
+$\pi_Y : (\Sch/Y)_\tau \to Y_\tau$를 보았다. 한편 $\tau$가 $\tau'$보다
+강한 위상이면 항등 함자 $(\Sch/X)_\tau \to (\Sch/X)_{\tau'}$가 사이트의
+사상을 정의함은 명백하다. 따라서 이들을 합성하면 위의 가능한 사상 목록을
+얻는다.
+
+\medskip\noindent
+밑에 놓인 함자의 설명이 간단하므로, 스킴 사상 $X \to Y \to Z$가 주어졌을
+때 위 사이트 사상들 가운데 두 개의 합성, 예를 들어
+$$
+(\Sch/X)_{\tau_0} \longrightarrow
+(\Sch/Y)_{\tau_1} \longrightarrow
+(\Sch/Z)_{\tau_2}
+$$
+는 스킴 사상 $X \to Z$에 대응하여 결합된 사이트의 사상임이 명백하다.
+
+\begin{remark}
+\label{remark-choice-sites}
+스킴들의 집합 $\{X, Y, S\}$에서 시작하여 Sets, Lemma
+\ref{sets-lemma-construct-category}에서처럼 구성한 임의의 범주
+$\Sch_\alpha$를 택한다. 범주 $\Sch_\alpha$와 fppf 덮개들의 모임에서
+시작하여 Sets, Lemma \ref{sets-lemma-coverings-site}에서처럼
+$\Sch_\alpha$ 위의 임의의 덮개 집합 $\text{Cov}_{fppf}$를 택한다. 이렇게
+얻은 큰 fppf 사이트를 $\Sch_{fppf}$라 하자. 다음으로
+$\tau \in \{Zariski, \etale, smooth, syntomic\}$에 대하여 $\Sch_\tau$의
+밑 범주를 $\Sch_{fppf}$의 것과 같게 하고, 덮개를 단순히 $\tau$-덮개들로
+이루어진 부분집합 $\text{Cov}_\tau \subset \text{Cov}_{fppf}$로 둔다.
+이것이 큰 사이트 $\Sch_\tau$를 준다는 사실은 쉽게 확인할 수 있다.
+\end{remark}
+
+
+
+
+
+
+
+
+
+\section{큰 사이트의 변경}
+\label{section-change-alpha}
+
+\noindent
+이 절에서는 큰 Zariski/fppf/\'에탈 사이트를 바꿀 때 무슨 일이 일어나는지
+설명한다.
+
+\medskip\noindent
+$\tau, \tau' \in \{Zariski, \etale, smooth, syntomic, fppf\}$라 하자. 두 큰
+사이트 $\Sch_\tau$와 $\Sch'_{\tau'}$가 주어졌을 때,
+$\Ob(\Sch_\tau) \subset \Ob(\Sch'_{\tau'})$
+및
+$\text{Cov}(\Sch_\tau) \subset \text{Cov}(\Sch'_{\tau'})$.
+가 성립하면 {\it $\Sch_\tau$가 $\Sch'_{\tau'}$에 포함된다}고 한다. 이 경우
+$\tau$는 $\tau'$보다 강하다. 예를 들어 어떤 fppf 사이트도 \'에탈 사이트에
+포함될 수 없다.
+
+\begin{lemma}
+\label{lemma-contained-in}
+큰 Zariski 사이트들의 임의의 집합은 하나의 공통 큰 Zariski 사이트에
+포함된다. 필요한 부분을 바꾸면 큰 fppf 사이트와 큰 \'에탈 사이트에
+대해서도 같은 명제가 성립한다.
+\end{lemma}
+
+\begin{proof}
+집합들의 집합의 합집합은 집합이고, Sets, Lemmas
+\ref{sets-lemma-construct-category} 및
+\ref{sets-lemma-coverings-site}의 구성은 처음에 임의로 주어진 스킴과 덮개의
+집합에서 시작할 수 있으므로 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-change-alpha}
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$라 하자. 큰 사이트
+$\Sch_\tau$와 $\Sch'_\tau$가 주어지고 $\Sch_\tau$가 $\Sch'_\tau$에
+포함된다고 가정하자. 포함 함자 $\Sch_\tau \to \Sch'_\tau$는 Sites,
+Lemma \ref{sites-lemma-bigger-site}의 가정들을 만족한다. 다음 토포스의
+사상들이 존재한다.
+\begin{eqnarray*}
+g : \Sh(\Sch_\tau) &
+\longrightarrow &
+\Sh(\Sch'_\tau) \\
+f : \Sh(\Sch'_\tau) &
+\longrightarrow &
+\Sh(\Sch_\tau)
+\end{eqnarray*}
+이때 $f \circ g \cong \text{id}$이다. $\Sch_\tau$의 임의의 대상 $S$에
+대하여 포함 함자 $(\Sch/S)_\tau \to (\Sch'/S)_\tau$도 Sites, Lemma
+\ref{sites-lemma-bigger-site}의 가정들을 만족한다. 따라서 마찬가지로 다음
+사상들을 얻는다.
+\begin{eqnarray*}
+g : \Sh((\Sch/S)_\tau) &
+\longrightarrow &
+\Sh((\Sch'/S)_\tau) \\
+f : \Sh((\Sch'/S)_\tau) &
+\longrightarrow &
+\Sh((\Sch/S)_\tau)
+\end{eqnarray*}
+여기서 $f \circ g \cong \text{id}$이다.
+\end{lemma}
+
+\begin{proof}
+함자 $\Sch_\tau \to \Sch'_\tau$와
+$(\Sch/S)_\tau \to (\Sch'/S)_\tau$에 대하여 Sites, Lemma
+\ref{sites-lemma-bigger-site}의 가정 (b), (c), (e)는 즉시 성립한다. 성질
+(a)는 Lemma \ref{lemma-zariski-induced},
+\ref{lemma-etale-induced},
+\ref{lemma-smooth-induced},
+\ref{lemma-syntomic-induced}, 또는
+\ref{lemma-fppf-induced}에 의해 성립한다. 범주 $\Sch_\tau$와
+$\Sch'_\tau$에서 섬유곱이 존재하고 스킴의 범주에서의 섬유곱과 호환되므로
+성질 (d)가 성립한다.
+\end{proof}
+
+\noindent
+논의: 함자 $g^{-1} = f_*$는 $\Sch'_\tau$ 위의 층 $\mathcal{G}$에 제한
+$\mathcal{G}|_{\Sch_\tau}$를 대응시키는 제한 함자일 뿐이다. 따라서 이
+보조정리는 $\Sch_\tau$ 위의 임의의 집합 층 $\mathcal{F}$가 주어졌을 때
+$\Sch'_\tau$ 위의 표준적인 층 $\mathcal{F}'$가 존재하여 다음을 만족한다고
+말하는 것에 불과하다.
+% P05-ERR-0011
+$\mathcal{F}|_{\Sch'_\tau} = \mathcal{F}'$이다.
+$\mathcal{F}'$는 다음과 같이 기술된다. 즉, 다음 전층의 층화이다.
+$$
+\Sch'_\tau \longrightarrow \textit{Sets}, \quad
+V \longmapsto \colim_{V \to U} \mathcal{F}(U)
+$$
+여기서 $U$는 $\Sch_\tau$의 대상이다. Sites, Lemmas
+\ref{sites-lemma-when-shriek} 및 \ref{sites-lemma-bigger-site}에 따라
+$\mathcal{F}' = f^{-1}\mathcal{F} = (u_p\mathcal{F})^\#$이므로 이 설명이
+성립한다.
+
+
+
+
+
+
+\section{함자의 확장}
+\label{section-extending-functors}
+
+\noindent
+우리가 하려는 일을 설명하는 간단한 예로 시작하자. $R$을 환이라 하자.
+$F$가 다음 꼴의 $R$-대수들로 이루어진 범주 $\mathcal{C}$ 위에 정의된
+함자라고 하자.
+$$
+A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)
+$$
+여기서 $n, m \geq 0$은 정수이고
+$f_1, \ldots, f_m \in R[x_1, \ldots, x_n]$은 원소이다. 그러면 임의의
+$R$-대수 $B$에 대하여 다음과 같이 정의할 수 있다.
+$$
+F'(B) = \colim_{A \to B,\ A \in \mathcal{C}} F(A)
+$$
+$F'$는 모든 $R$-대수의 범주 위에서 $F$를 확장하고 여과 여극한과
+가환하는 유일한 함자임이 밝혀진다. 함자가 Zariski 층이라고 요구하면 같은
+절차가 스킴의 범주에서도 작동한다.
+
+\begin{lemma}
+\label{lemma-extend}
+$S$를 스킴이라 하고, $\mathcal{C}$를 $S$ 위의 모든 스킴으로 이루어진 범주
+$\Sch/S$의 충만 부분범주라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $X \to S$가 $\mathcal{C}$의 대상이고 $U \subset X$가 아핀
+열린집합이면, $U \to S$는 $\mathcal{C}$의 어떤 대상과 동형이다.
+\item $V$가 아핀 열린집합 $U \subset S$ 위의 아핀 스킴이고 $V \to U$가
+유한 표시이면, $V \to S$는 $\mathcal{C}$의 어떤 대상과 동형이다.
+\end{enumerate}
+$F : \mathcal{C}^{opp} \to \textit{Sets}$를 함자라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item[(a)] $X, X_i$가 $\mathcal{C}$의 대상인 임의의 Zariski 덮개
+$\{f_i : X_i \to X\}_{i \in I}$에 대하여 $F$와 이 사상족은 층 조건을
+만족한다\footnote{$X_i \times_X X_j$가 $\mathcal{C}$에 속하는지는 알 수
+없으므로 다음과 같이 해석해야 한다. 성질 (1)에 의해 $U_{ijk}$가
+$\mathcal{C}$의 대상인 Zariski 덮개
+$\{U_{ijk} \to X_i \times_X X_j\}_{k \in K_{ij}}$가 존재한다. 이때 층
+조건은 $F(X)$가 $\prod F(X_i)$에서 $\prod F(U_{ijk})$로 가는 두 사상의
+등화자라는 뜻이다.}.
+\item[(b)] $X = \lim X_i$가 $S$ 위의 아핀 스킴들의 유향 극한이고
+$X, X_i$가 $\mathcal{C}$의 대상이면 $F(X) = \colim F(X_i)$이다.
+\end{enumerate}
+그러면 (a), (b)의 유사 조건을 만족하는 함자
+$F' : (\Sch/S)^{opp} \to \textit{Sets}$로 $F$를 확장하는 방법이 유일하게
+존재한다. 즉, $F'$는 임의의 Zariski 덮개에 대한 층 조건을 만족하고,
+$X = \lim X_i$가 $S$ 위의 아핀 스킴들의 유향 극한일 때마다
+$F'(X) = \colim F'(X_i)$이다.
+\end{lemma}
+
+\begin{proof}
+먼저 $F$를 $S$ 위의 충분히 큰 아핀 스킴 모임으로 확장한 뒤 Zariski 층
+성질을 사용하여 모든 스킴으로 확장하는 것이 기본 발상이다.
+
+\medskip\noindent
+$V$를 $S$ 위의 아핀 스킴이라 하고, 그 구조 사상 $V \to S$가 어떤 아핀
+열린집합 $U \subset S$를 통하여 분해된다고 하자. 이 경우
+$$
+V = \lim V_i
+$$
+로 쓸 수 있다. 이는 $V_i \to U$가 유한 표시이고 $V_i$가 아핀인 공여과
+극한이다. Algebra, Lemma \ref{algebra-lemma-ring-colimit-fp}를 보라. 조건
+(1), (2)에 의해 $V_i$들을 $\mathcal{C}$의 대상들로 바꿀 수 있다.
+$V_i \to S$가 국소적으로 유한 표시임에 유의하라($S$가 준분리이면 이
+사상들은 실제로 유한 표시이다). 이제 다음과 같이 둔다.
+$$
+F'(V) = \colim F(V_i)
+$$
+실제로 다음과 같은 더 표준적인 식을 줄 수 있다.
+$$
+F'(V) = \colim_{V \to V'} F(V')
+$$
+여기서 여극한은 $S$ 위의 사상 $V \to V'$들의 범주에 걸치며, $V'$는
+구조 사상 $V' \to S$가 국소적으로 유한 표시인 $\mathcal{C}$의 대상이다.
+Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation}에 의해 역계
+$V_i$가 이 범주에서 공종이므로 이 식은 첫째 식과 같다. 마지막으로 $V$가
+$\mathcal{C}$의 대상이면 가정 (b)에 의해 $F'(V) = F(V)$임에 유의하라.
+
+\medskip\noindent
+둘째 식은 구조 사상이 $S$의 아핀 열린집합을 통하여 분해되는 $S$ 위의 아핀
+스킴 $V$들로 이루어진 범주에서 $F'$를 반변 함자로 만든다. $V$를 그러한
+$S$ 위의 아핀 스킴이라 하고,
+$V = \bigcup_{k = 1, \ldots, n} V_k$를 아핀들에 의한 유한 열린 덮개라고
+하자. 그러면 $F'$와 이 열린 덮개에 대하여 층 조건이 성립하는지 묻는 것이
+의미가 있다. 이는 참이며 쉽게 보일 수 있다. 앞 문단에서처럼
+$V = \lim V_i$로 쓰자. Limits, Lemma \ref{limits-lemma-descend-opens}에
+의해 충분히 큰 모든 $i$에 대하여 전이 사상들과 호환되고 $V$에서 $V_k$로
+당겨지는 아핀 열린집합 $V_{i, k} \subset V_i$들을 찾을 수 있다. 따라서
+$$
+F'(V_k) = \colim F(V_{i, k})
+\quad\text{및}\quad
+F'(V_k \cap V_l) = \colim F(V_{i, k} \cap V_{i, l})
+$$
+엄밀히 말하면 이 식들에서 함자 $F$를 적용하기 전에 $V_{i, k}$와
+$V_{i, k} \cap V_{i, l}$을 이들과 동형인 $\mathcal{C}$의 아핀 대상들로
+바꾸어야 한다. $I$가 유향이므로 여극한은 등화자와 가환한다. 따라서
+% P05-EN-CH34-0007
+$F$와 Zariski 덮개 $\{V_{i, k} \to V_i\}$에 대한 층 조건 (b)는 $F'$와
+이 덮개에 대한 층 조건을 함의한다.
+
+\medskip\noindent
+$X$를 $S$ 위의 일반적인 스킴이라 하자. $\mathcal{B}_X$를 구조 사상이
+$S$로 가며 그 상이 $S$의 어떤 아핀 열린집합에 포함되는 $X$의 아핀
+열린집합들의 모임이라
+하자. $\mathcal{B}_X$가 $X$의 위상의 기저임은 명백하다. 앞 문단의 결과와
+Sheaves, Lemma
+\ref{sheaves-lemma-cofinal-systems-coverings-standard-case}에 의해 $F'$는
+$\mathcal{B}_X$ 위의 층이다. 따라서 $\mathcal{B}_X$에 제한된 $F'$는
+$X$ 위의 층 $F'_X$로 유일하게 확장된다. Sheaves, Lemma
+\ref{sheaves-lemma-extend-off-basis}를 보라. $X$가 $\mathcal{C}$의 대상이면,
+$F'$와 $F$가 둘 다 정의된 대상에서 일치한다는 사실 및 $F$가 Zariski
+덮개에 대한 층 조건을 만족한다는 사실에 의해 표준적인 식별
+$F'_X(X) = F(X)$를 갖는다.
+
+\medskip\noindent
+$f : X \to Y$를 $S$ 위의 스킴 사상이라 하자. $f(U) \subset V$인 모든
+$U \in \mathcal{B}_X$와 $V \in \mathcal{B}_Y$에 대하여 사상
+$F'(V) \to F'(U)$들과 호환되는 $F'_Y$에서 $F'_X$로 가는 유일한
+$f$-사상을 얻는다. Sheaves, Lemma
+\ref{sheaves-lemma-f-map-basis-above-and-below-structures}를 보라. $S$ 위의
+스킴 사상 $X \to Y \to Z$가 주어졌을 때 이 사상들이 올바르게 합성됨에 대한
+확인은 생략한다. 또한 $f$가 $\mathcal{C}$의 사상이면 유도된 사상
+$F'_Y(Y) \to F'_X(X)$가 위의 식별 $F'_X(X) = F(X)$와
+$F'_Y(Y) = F(Y)$ 아래에서 사상 $F(Y) \to F(X)$와 같다는 확인도 생략한다.
+이렇게 하여 원하는 $F$의 확장은 $X/S$에 $F'_X(X)$를 대응시키는
+함자임을 알 수 있다.
+
+\medskip\noindent
+함자 $X \mapsto F'_X(X)$에 대한 성질 (a)는 구성에서 거의 즉시 따른다.
+세부 사항은 생략한다. $X = \lim_{i \in I} X_i$가 $S$ 위의 아핀 스킴들의
+유향 극한이라고 하자. 다음을 보여야 한다.
+$$
+F'_X(X) = \colim_{i \in I} F'_{X_i}(X_i)
+$$
+먼저 어떤 $i \in I$에 대하여 $X_i \to S$가 아핀 열린집합 $U \subset S$를
+통하여 분해된다고 가정하자. 그러면 $F'$는 $X$와 $i' \geq i$인 $X_{i'}$
+위에 정의되며, $i' \geq i$에 대하여
+$F'_{X_{i'}}(X_{i'}) = F'(X_{i'})$이고 $F'_X(X) = F'(X)$임을 알 수 있다.
+이 경우 $V$가 $S$ 위에서 국소적으로 유한 표시인 모든 화살표 $X \to V$는
+어떤 $i' \geq i$에 대하여 $X \to X_{i'} \to V$로 분해된다. Limits,
+Proposition \ref{limits-proposition-characterize-locally-finite-presentation}을
+보라. 따라서
+\begin{align*}
+F'_X(X)
+& =
+F'(X)  \\
+& = \colim_{X \to V} F(V) \\
+& =
+\colim_{i' \geq i} \colim_{X_{i'} \to V} F(V) \\
+& =
+\colim_{i' \geq i} F'(X_{i'}) \\
+& =
+\colim_{i' \geq i} F'_{X_{i'}}(X_{i'}) \\
+& =
+\colim_{i' \in I} F'_{X_{i'}}(X_{i'})
+\end{align*}
+를 얻는다. 이제 일반적인 경우 임의의 $i \in I$를 택하고,
+% P05-EN-CH34-0008
+$V_{i, k} \to S$가 $S$의 아핀 열린집합을 통하여 분해되도록 하는 유한
+아핀 열린 덮개 $V_i = V_{i, 1} \cup \ldots \cup V_{i, n}$을 택한다.
+$V_k \subset V$와 $i' \geq i$인 $V_{i', k}$를 $V_{i, k}$의 역상이라 하자.
+앞의 경우에 의해
+$$
+F'_{V_k}(V_k) = \colim_{i' \geq i} F'_{V_{i', k}}(V_{i', k})
+$$
+그리고
+$$
+F'_{V_k \cap V_l}(V_k \cap V_l) =
+\colim_{i' \geq i}
+F'_{V_{i', k} \cap V_{i', l}}(V_{i', k} \cap V_{i', l})
+$$
+층 성질과 여과 여극한의 완전성에 의해 이 경우에도
+$F'_X(X) = \colim_{i \in I} F'_{X_i}(X_i)$임을 얻는다. 이로써 성질 (b)의
+증명과 보조정리의 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-limit-fppf-topology}
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$라 하자. $T$를 아핀
+스킴들의 유향 역계의 극한 $T = \lim_{i \in I} T_i$로 쓰인 아핀 스킴이라
+하자.
+\begin{enumerate}
+\item $\mathcal{V} = \{V_j \to T\}_{j = 1, \ldots, m}$를 $T$의 표준
+$\tau$-덮개라 하자. Definitions
+\ref{definition-standard-Zariski},
+\ref{definition-standard-etale},
+\ref{definition-standard-smooth},
+\ref{definition-standard-syntomic} 및
+\ref{definition-standard-fppf}를 보라. 그러면 어떤 지표 $i$와 표준
+$\tau$-덮개
+$\mathcal{V}_i = \{V_{i, j} \to T_i\}_{j = 1, \ldots, m}$
+가 존재하여, $T$로의 기저변환 $T \times_{T_i} \mathcal{V}_i$는
+$\mathcal{V}$와 동형이다.
+\item $\mathcal{V}_i$, $\mathcal{V}'_i$를 $T_i$의 두 표준 $\tau$-덮개라
+하자. 다음
+$f : T \times_{T_i} \mathcal{V}_i \to T \times_{T_i} \mathcal{V}'_i$가
+$T$의 덮개의 사상이면
+어떤 지표 $i' \geq i$와 다음 사상이 존재하여
+% P05-EN-CH34-0009
+$f_{i'} : T_{i'} \times_{T_i} \mathcal{V} \to
+T_{i'} \times_{T_i} \mathcal{V}'_i$
+그 $T$로의 기저변환은 $f$이다.
+\item 다음이 $T_i$의 표준 $\tau$-덮개들의 사상이고
+% P05-EN-CH34-0009
+$f, g : \mathcal{V} \to \mathcal{V}'_i$
+그 $T$로의 기저변환 $f_T, g_T$가 같으면, 어떤 지표 $i' \geq i$가
+존재하여 $f_{T_{i'}} = g_{T_{i'}}$이다.
+\end{enumerate}
+다시 말해 $T$의 표준 $\tau$-덮개의 범주는 $T_i$의 표준 $\tau$-덮개의
+범주들을 $I$에 걸쳐 취한 여극한이다.
+\end{lemma}
+
+\begin{proof}
+$\tau = fppf$인 경우를 증명하자. Limits, Lemma
+\ref{limits-lemma-descend-finite-presentation}에 의해 $T$ 위의 유한 표시
+스킴들의 범주는 $T_i$ 위의 유한 표시 스킴들의 범주를 $I$에 걸쳐 취한
+여극한이다. Limits, Lemmas
+\ref{limits-lemma-descend-affine-finite-presentation} 및
+\ref{limits-lemma-descend-flat-finite-presentation}에 의해 $T$ 위에서 아핀이고
+평탄이며 유한 표시인 스킴들의 범주에 대해서도 같은 명제가 성립한다.
+보조정리의 증명을 끝내려면 다음을 보이면 충분하다. 즉,
+$\{V_{j, i} \to T_i\}_{j = 1, \ldots, m}$가 $V_{j, i}$가 아핀인 평탄 유한
+표시 사상들의 유한 사상족이고, 기저변환
+$\coprod_j T \times_{T_i} V_{j, i} \to T$가 전사이면, 어떤
+$i' \geq i$에 대하여 사상
+% P05-ERR-0016
+$\coprod T_{i'} \times_{T_i} V_{j, i} \to T_{i'}$
+가 전사이다. 그 상을 각각 $W_{i'} \subset T_{i'}$와 $W \subset T$로
+표기하자. 물론 가정에 의해 $W = T$이다. 사상들이 평탄 유한 표시이므로
+$W_i$는 $T_i$의 준콤팩트 열린집합이다. Morphisms, Lemma
+\ref{morphisms-lemma-fppf-open}을 보라. 더 나아가 상의 형성은 기저변환과
+가환하므로 $W = T \times_{T_i} W_i$이다. 따라서 Limits, Lemma
+\ref{limits-lemma-descend-opens}에 의해 충분히 큰 어떤 $i'$에 대하여
+$W_{i'} = T_{i'}$임을 얻고 결론이 따른다.
+
+\medskip\noindent
+$\tau \in \{Zariski, \etale, smooth, syntomic\}$에 대하여 표준
+$\tau$-덮개는 표준 fppf 덮개이다. 따라서 함자의 충만충실성이 성립한다.
+남은 유일한 문제는 어떤 $i$에 대한 표준 fppf 덮개 $\mathcal{V}_i$가
+$\mathcal{V}_i \times_{T_i} T$가 표준 $\tau$-덮개라는 성질을 만족하면,
+모든 $i' \gg i$에 대하여 $\mathcal{V}_i \times_{T_i} T_{i'}$도 표준
+$\tau$-덮개임을 보이는 것이다. 이는 Limits, Lemmas
+\ref{limits-lemma-descend-open-immersion},
+\ref{limits-lemma-descend-etale},
+\ref{limits-lemma-descend-smooth} 및
+\ref{limits-lemma-descend-syntomic}에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-extend-sheaf-general}
+$S$, $\mathcal{C}$, $F$가 Lemma \ref{lemma-extend}의 조건 (1), (2), (a),
+(b)를 만족한다고 하고, 그 보조정리에서 구성한 유일한 확장을
+$F' : (\Sch/S)^{opp} \to \textit{Sets}$로 표기하자.
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$라 하자. 다음을
+가정한다.
+\begin{enumerate}
+\item[(c)] $V \to S$가 아핀 열린집합 $U \subset S$를 통하여 분해되고
+$V \to U$가 유한 표시인, $\Sch/S$ 안의 아핀들의 임의의 표준 $\tau$-덮개
+$\{V_i \to V\}_{i = 1, \ldots, n}$에 대하여 $F$와
+$\{V_i \to V\}_{i = 1, \ldots, n}$는 층 조건을 만족한다\footnote{(2)에
+의해 $V$, $V_i$, $V_i \times_V V_j$가 $\mathcal{C}$의 대상들과
+동형이므로 이는 의미가 있다.}.
+\end{enumerate}
+그러면 $F'$는 모든 $\tau$-덮개에 대한 층 조건을 만족한다.
+\end{lemma}
+
+\begin{proof}
+$X$를 $S$ 위의 스킴이라 하고 $\{X_i \to X\}_{i \in I}$를
+$\tau$-덮개라 하자. 모든 $i, j \in I$에 대하여 $s_i$와 $s_j$가
+$F'(X_i \times_X X_j)$의 같은 원소로 사상되는 원소
+$s_i \in F'(X_i)$들을 택한다. 모든 $i \in I$에 대하여
+$s_i \in F'(X_i)$로 제한되는 유일한 원소 $s \in F'(X)$가 존재함을
+보여야 한다.
+
+\medskip\noindent
+특수한 경우: $X$가 구조 사상이 $S$의 아핀 열린집합 $U$ 안으로 사상되는
+아핀 스킴이고 덮개 $\{X_i \to X\}_{i \in I}$가 표준 $\tau$-덮개라고
+하자. 이 경우
+$$
+X = \lim V_k
+$$
+로 쓸 수 있다. 이는 $V_k \to U$가 유한 표시이고 $V_k$가 아핀인 공여과
+극한이다. Algebra, Lemma \ref{algebra-lemma-ring-colimit-fp}를 보라. Lemma
+\ref{lemma-limit-fppf-topology}에 의해 어떤 $k$와 표준 $\tau$-덮개
+$\{V_{k, i} \to V_k\}_{i \in I}$가 존재하여 그 $X$로의 기저변환은 주어진
+덮개이다. $k' \geq k$에 대하여 우리 덮개의 $V_{k'}$로의 기저변환을
+$\{V_{k', i} \to V_{k'}\}_{i \in I}$로 표기하자. 그러면
+\begin{align*}
+F'(X)
+& =
+% P05-EN-CH34-0010
+\colim_{k' \geq k} F(V_k) \\
+& =
+\colim_{k' \geq k}
+\text{Equalizer}(
+\xymatrix{
+\prod F(V_{k', i})
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\prod F(V_{k', i} \times_{V_{k'}} V_{k', j})
+}
+\\
+& =
+\text{Equalizer}(
+\xymatrix{
+\colim_{k' \geq k}
+\prod F(V_{k', i})
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\colim_{k' \geq k}
+\prod F(V_{k', i} \times_{V_{k'}} V_{k', j})
+}
+\\
+& =
+\text{Equalizer}(
+\xymatrix{
+\prod F'(X_i)
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\prod F'(X_i \times_X X_j)
+}
+\end{align*}
+첫째 등식은 $F'$의 구성에 의해 성립한다. 둘째는 가정 (c)에 의해 성립한다.
+셋째는 여과 여극한이 완전하기 때문에 성립한다. 넷째도 다시 $F'$의 구성에
+의해 성립한다. 이렇게 하여 $F'$가 $\{X_i \to X\}_{i \in I}$에 대한 층
+성질을 만족함을 얻는다.
+
+\medskip\noindent
+일반적인 경우. 각 $U_k$가 $S$의 아핀 열린집합 안으로 사상되도록 아핀
+열린 덮개 $X = \bigcup U_k$를 택한다. 모든 $k$에 대하여
+$\{X_i \times_X U_k \to U_k\}_{i \in I}$를 세분하는 표준 $\tau$-덮개
+$\{V_{k, j} \to U_k\}_{j = 1, \ldots, m_k}$를 택할 수 있다. 각
+$j \in \{1, \ldots, m_k\}$에 대하여 지표 $i_{k, j} \in I$와 $X$ 위의
+사상 $g_{k, j} : V_{k, j} \to X_{i_{k, j}}$를 택한다. $s_{k, j}$를
+$s_{i_{k, j}}$를 $g_{k, j}$를 통해 제한하여 얻는 $F'(V_{k, j})$의 원소라
+하자. 모든 $k$와 $k'$, 모든 $j \in \{1, \ldots, m_k\}$와
+$j' \in \{1, \ldots, m_{k'}\}$에 대하여 $s_{k, j}$와 $s_{k', j'}$가
+$F'(V_{k, j} \times_X V_{k', j'})$의 같은 원소로 제한됨에 유의하라.
+확인은 생략한다. 특히 앞 문단의 결과에 의해 모든 $j$에 대하여
+$s_{k, j}$로 제한되는 유일한 원소 $s_k \in F'(U_k)$가 존재한다. 이
+표기로 증명을 끝낼 준비가 되었다.
+
+\medskip\noindent
+$s$의 유일성에 대한 증명: $F'$가 Zariski 덮개에 대한 층 성질을 만족하고,
+$s|_{U_k}$와 $s_k$ 모두 모든 $j$에 대하여 $s_{k, j}$로 제한되므로
+두 절단은 같아야 한다. 또한 이 유일성에 의해 $s_k$와
+$s_{k'}$는 (아핀이 아닌 스킴) $U_k \cap U_{k'}$ 위에서 $F'$의 같은 절단으로
+제한되어야 한다. 실제로 이 절단들은 $\tau$-덮개
+$\{V_{k, j} \times_X V_{k', j'} \to U_k \cap U_{k'}\}$ 위의 같은 절단으로
+제한된다. 따라서 Zariski 덮개에 대한 층 성질에 의해, $U_k$로의 제한이
+$s_k$인 $X$ 위의 $F'$의 절단 $s$가 유일하게 존재한다. $s$가 $X_i$ 위에서
+$s_i$로 제한된다는 확인은 위와 비슷하므로 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-extend-sheaf}
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$라 하자. $S$를 큰
+사이트 $\Sch_\tau$에 포함된 스킴이라 하자.
+$F : (\Sch/S)_\tau^{opp} \to \textit{Sets}$를
+$\mathcal{C} = (\Sch/S)_\tau$로 둔 Lemma \ref{lemma-extend}의 성질 (b)를
+만족하는 $\tau$-층이라 하자. 그러면 $F$를 $S$ 위의 모든 스킴의 범주로
+확장한 $F'$는 모든 $\tau$-덮개에 대한 층 조건을 만족한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-extend-sheaf-general}에
+$\mathcal{C} = (\Sch/S)_\tau$를 적용하면 따른다. Lemma
+\ref{lemma-extend}의 조건 (1), (2), (a), (b)가 성립한다. 세부 사항은
+생략한다. 따라서 $S$ 위의 모든 스킴의 범주로 가는 유일한 확장 $F'$를
+얻는다. 마지막으로 임의의 표준 $\tau$-덮개는 $(\Sch/S)_\tau$ 안의 어떤
+덮개와 자명하게 동치임에 유의하라. Sets, Lemma
+\ref{sets-lemma-what-is-in-it} 및 Lemmas \ref{lemma-zariski-induced},
+\ref{lemma-etale-induced},
+\ref{lemma-smooth-induced},
+\ref{lemma-syntomic-induced} 및
+\ref{lemma-fppf-induced}를 보라. Sites, Lemma
+\ref{sites-lemma-tautological-same-sheaf}에 의해 층 성질은 덮개의 자명한
+동치를 따라 보존된다. 따라서 $F$가 $\tau$-층이라는 사실은 Lemma
+\ref{lemma-extend-sheaf-general}의 성질 (c)를 함의하며 결론을 얻는다.
+\end{proof}
+
+
+
+
+\input{chapters}
+
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

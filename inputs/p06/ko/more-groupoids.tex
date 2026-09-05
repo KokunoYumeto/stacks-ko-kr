@@ -1,0 +1,2842 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{준군 스킴 심화}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 준군 스킴에 관한 심화 주제를 다룬다.
+결과들은 준군 스킴의 용어로 진술되지만, 독자는 다음
+$2$-카르테시안 도식을 염두에 두어야 한다.
+\begin{equation}
+\label{equation-quotient-stack}
+\vcenter{
+\xymatrix{
+R \ar[r] \ar[d] & U \ar[d] \\
+U \ar[r] & [U/R]
+}
+}
+\end{equation}
+여기서 $[U/R]$는 몫 스택이다. Groupoids in Spaces, Remark
+\ref{spaces-groupoids-remark-fundamental-square}를 보라.
+많은 결과는 이 도식을 고찰하는 데서 동기를 얻는다.
+예를 들어 Keel과 Mori의 훌륭한 논문 \cite{K-M}을 보라.
+
+
+
+
+
+\section{표기법}
+\label{section-notation}
+
+\noindent
+앞서 Groupoids, Section \ref{groupoids-section-notation}에서 도입한
+관례와 표기법을 계속 따른다.
+
+
+
+
+
+
+\section{유용한 도식}
+\label{section-diagrams}
+
+\noindent
+이 장에서 쉽게 참조할 수 있도록 Groupoids, Lemmas
+\ref{groupoids-lemma-diagram} 및
+\ref{groupoids-lemma-diagram-pull}의 결과를 간단히 다시 적는다.
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+다음 가환도식에서
+\begin{equation}
+\label{equation-diagram}
+\vcenter{
+\xymatrix{
+& U & \\
+R \ar[d]_s \ar[ru]^t &
+R \times_{s, U, t} R
+\ar[l]^-{\text{pr}_0} \ar[d]^{\text{pr}_1} \ar[r]_-c &
+R \ar[d]^s \ar[lu]_t \\
+U & R \ar[l]_t \ar[r]^s & U
+}
+}
+\end{equation}
+아래쪽 두 정사각형은 섬유곱 정사각형이다.
+더욱이 위쪽 삼각형(실제로는 정사각형)도 카르테시안이다.
+
+\medskip\noindent
+도식
+\begin{equation}
+\label{equation-pull}
+\vcenter{
+\xymatrix{
+R \times_{t, U, t} R
+\ar@<1ex>[r]^-{\text{pr}_1} \ar@<-1ex>[r]_-{\text{pr}_0}
+\ar[d]_{\text{pr}_0 \times c \circ (i, 1)} &
+R \ar[r]^t \ar[d]^{\text{id}_R} &
+U \ar[d]^{\text{id}_U} \\
+R \times_{s, U, t} R
+\ar@<1ex>[r]^-c \ar@<-1ex>[r]_-{\text{pr}_0} \ar[d]_{\text{pr}_1} &
+R \ar[r]^t \ar[d]^s &
+U \\
+R \ar@<1ex>[r]^s \ar@<-1ex>[r]_t &
+U
+}
+}
+\end{equation}
+은 가환이다. 위쪽 두 행은 주어진 수직 사상들을 통해 서로 동형이다.
+왼쪽 아래의 두 정사각형은 카르테시안이다.
+
+
+
+
+
+\section{미분층}
+\label{section-differentials}
+
+\noindent
+다음 보조정리는 Groupoids, Lemma
+\ref{groupoids-lemma-group-scheme-module-differentials}와 유사한 결과이다.
+
+\begin{lemma}
+\label{lemma-sheaf-differentials}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$t$를 통해 $U$ 위의 스킴으로 본 $R$의 미분층은 몰입
+$e : U \to R$의 코노멀 층을 $t$로 당긴 층의 몫이다. 식으로 쓰면
+정준 전사 $t^*\mathcal{C}_{U/R} \to \Omega_{R/U}$가 존재한다.
+$s$가 평탄하면 이 사상은 동형이다.
+\end{lemma}
+
+\begin{proof}
+$e : U \to R$는 사상 $s$의 단면이므로 몰입이다. Schemes, Lemma
+\ref{schemes-lemma-section-immersion}를 보라.
+다음 도식을 생각하자.
+$$
+\xymatrix{
+R \ar[r]_-{(1, i)} \ar[d]_t &
+R \times_{s, U, t} R \ar[d]^c \ar[rr]_{(\text{pr}_0, i \circ \text{pr}_1)} & &
+R \times_{t, U, t} R \\
+U \ar[r]^e &
+R
+}
+$$
+$a \circ b = e$이면 $b = i(a)$이므로 왼쪽 정사각형은 카르테시안이다.
+가로사상들의 합성은 $t : R \to U$의 대각사상이다. 오른쪽 위 가로화살표는
+동형이다. 따라서 $\Omega_{R/U}$는 이 합성의 코노멀 층이므로
+$(1, i)$의 코노멀 층과 동형이다. Morphisms, Lemma
+\ref{morphisms-lemma-conormal-functorial-flat}에 의해 전사
+$t^*\mathcal{C}_{U/R} \to \Omega_{R/U}$를 얻으며, $c$가 평탄하면
+이 사상은 동형이다. 도식 (\ref{equation-pull})의 성질에 의해 $c$는
+$s$의 밑변환이므로, $s$가 평탄하면 $c$도 평탄하다. Morphisms, Lemma
+\ref{morphisms-lemma-base-change-flat}를 보라.
+\end{proof}
+
+
+
+
+
+
+\section{국소 구조}
+\label{section-local}
+
+\noindent
+$S$를 스킴이라 하자.
+$(U, R, s, t, c, e, i)$를 $S$ 위의 준군 스킴이라 하자.
+$u \in U$를 한 점이라 하자. 이 절에서는 국소환
+$$
+A = \mathcal{O}_{U, u}
+\quad\text{and}\quad
+B = \mathcal{O}_{R, e(u)}
+$$
+에 어떤 구조가 생기는지 설명한다. 사상 $s, t, c, e, i$가 유도하는
+국소환 준동형은 각각 같은 문자로 나타내기로 한다.
+특히 국소환들의 가환도식
+$$
+\xymatrix{
+A \ar[rd]_t \ar[rrd]^1 \\
+& B \ar[r]^e & A \\
+A \ar[ru]^s \ar[rru]_1
+}
+$$
+을 얻는다. 따라서 $I \subset B$가 $e : B \to A$의 핵이면
+$B = s(A) \oplus I = t(A) \oplus I$이다. 다음과 같이 쓰자.
+$$
+C = \mathcal{O}_{R \times_{s, U, t} R, (e(u), e(u))}
+$$
+그러면
+$$
+C = (B \otimes_{s, A, t} B)_{\mathfrak m_B \otimes B + B \otimes \mathfrak m_B}
+$$
+이다. $J \subset C$를 $I \otimes B + B \otimes I$가 생성하는 $C$의
+아이디얼이라 하자. 그러면 $J$는 국소환 준동형
+$$
+(e, e) : C \longrightarrow A
+$$
+의 핵이기도 하다. 합성법칙 $c : R \times_{s, U, t} R \to R$에는
+$I$를 $J$로 보내는 환 준동형
+$$
+c : B \longrightarrow C
+$$
+가 대응한다.
+
+\begin{lemma}
+\label{lemma-first-order-structure-c}
+$c$가 유도하는 사상 $I/I^2 \to J/J^2$는 합성
+$$
+I/I^2 \xrightarrow{(1, 1)} I/I^2 \oplus I/I^2 \to J/J^2
+$$
+이다. 여기서 두 번째 화살표는 등식
+$J = (I \otimes B + B \otimes I)C$에서 나온다.
+사상 $i : B \to B$는 사상 $-1 : I/I^2 \to I/I^2$을 유도한다.
+\end{lemma}
+
+\begin{proof}
+$C$에서 다른 국소환으로 가는 국소 준동형을 기술하려면
+$b_1 \otimes b_2$ 꼴의 원소가 어디로 가는지만 밝히면 충분하다.
+이를 염두에 두면 다음 두 정준 사상이 있다.
+$$
+e_2 : C \to B,\ b_1 \otimes b_2 \mapsto b_1s(e(b_2)),\quad
+e_1 : C \to B,\ b_1 \otimes b_2 \mapsto t(e(b_1))b_2
+$$
+이들은 각각 $r \mapsto (r, e(s(r)))$ 및 $r \mapsto (e(t(r)), r)$로
+주어지는 매장 $R \to R \times_{s, U, t} R$에 대응한다.
+이 사상들은 $J/J^2 \to I/I^2$인 두 사상을 정하며, 이 둘을 합치면
+보조정리의 사상 $I/I^2 \oplus I/I^2 \to J/J^2$의 역을 얻는다.
+따라서 $e_1 \circ c : B \to B$ 및 $e_2 \circ c : B \to B$가
+항등사상임을 보이면 충분하다. 이는 두 합성
+$R \to R \times_{s, U, t} R \to R$이 모두 항등사상이라는 사실에서 따른다.
+
+\medskip\noindent
+$i$에 관한 명제는 $c$에 관한 명제와 등식
+$c \circ (1, i) = e \circ t$에서 따른다. 세부사항은 생략한다.
+\end{proof}
+
+
+
+
+
+
+\section{준군의 성질}
+\label{section-technical-lemma}
+
+\noindent
+$(U, R, s, t, c)$를 준군 스킴이라 하자.
+이 절의 결과들에 깔린 생각은 $s: R \to U$가 사상
+$U \to [U/R]$의 밑변환이라는 것이다(도식
+(\ref{equation-quotient-stack})을 보라).
+따라서 $s : R \to U$의 국소 성질은 사상 $U \to [U/R]$의
+국소 성질을 반영해야 한다. 그러나 $[U/R]$가 항상 대수 스택인 것은
+아니므로 $U \to [U/R]$의 기하학적 또는 대수적 성질을 말할 수 없고,
+이 논리는 그대로는 성립하지 않는다. 그럼에도 몫 스택을 전혀
+언급하지 않고도 이 생각의 일부를 구현할 수 있다.
+
+\medskip\noindent
+다음은 그러한 결과의 첫 예이다. 보조정리에서 얻는 열린부분
+$W \subset U'$는 대략 사상 $U' \to [U/R]$가 성질
+$\mathcal{P}$를 가지는 자취이다.
+
+\begin{lemma}
+\label{lemma-local-source}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c, e, i)$를 $S$ 위의 준군이라 하자.
+$g : U' \to U$를 스킴의 사상이라 하자. 다음 합성을 $h$라 쓰자.
+$$
+\xymatrix{
+h : U' \times_{g, U, t} R \ar[r]_-{\text{pr}_1} & R \ar[r]_s & U.
+}
+$$
+$\mathcal{P}, \mathcal{Q}, \mathcal{R}$를 스킴 사상의 성질이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{R} \Rightarrow \mathcal{Q}$,
+\item $\mathcal{Q}$는 밑변환과 합성으로 보존된다.
+\item $\mathcal{Q}$를 가지는 임의의 사상 $f : X \to Y$에 대해
+$f|_{W(\mathcal{P}, f)}$가 $\mathcal{P}$를 가지도록 하는 가장 큰 열린부분
+$W(\mathcal{P}, f) \subset X$가 존재한다.
+\item $\mathcal{Q}$를 가지는 임의의 사상 $f : X \to Y$와
+$\mathcal{R}$를 가지는 임의의 사상 $Y' \to Y$에 대해
+$Y' \times_Y W(\mathcal{P}, f) = W(\mathcal{P}, f')$이다. 여기서
+$f' : X_{Y'} \to Y'$는 $f$의 밑변환이다.
+\end{enumerate}
+$s, t$가 $\mathcal{R}$를 가지고 $g$가 $\mathcal{Q}$를 가지면
+$W \times_{g, U, t} R = W(\mathcal{P}, h)$인 열린부분스킴
+$W \subset U'$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+다음 도식은 가환한다.
+$$
+\xymatrix{
+U' \times_{g, U, t} R \times_{t, U, t} R
+\ar[rr]_-{\text{pr}_{12}}
+\ar@<1ex>[d]^-{\text{pr}_{02}} \ar@<-1ex>[d]_-{\text{pr}_{01}} & &
+R \times_{t, U, t} R
+\ar@<1ex>[d]^-{\text{pr}_1} \ar@<-1ex>[d]_-{\text{pr}_0}
+\\
+U' \times_{g, U, t} R \ar[rr]^{\text{pr}_1} & & R
+}
+$$
+두 정사각형은 모두 카르테시안이다. 여기에는 두 사상
+$t \circ \text{pr}_i : R \times_{t, U, t} R \to U$가 같다는 사실을 썼다.
+이를 도식 (\ref{equation-pull})의 성질과 결합하면 다음 가환도식을 얻는다.
+$$
+\xymatrix{
+U' \times_{g, U, t} R \times_{t, U, t} R
+\ar[rr]_-{c \circ (i, 1)}
+\ar@<1ex>[d]^-{\text{pr}_{02}} \ar@<-1ex>[d]_-{\text{pr}_{01}} & &
+R
+\ar@<1ex>[d]^-{s} \ar@<-1ex>[d]_-{t}
+\\
+U' \times_{g, U, t} R \ar[rr]^h & & U
+}
+$$
+여기서 두 정사각형은 모두 카르테시안이다.
+
+\medskip\noindent
+$s, t$가 $\mathcal{R}$를 가지고 $g$가 $\mathcal{Q}$를 가진다고 하자.
+$h$는 $s$와 $g$의 밑변환의 합성이므로 $\mathcal{Q}$를 가진다.
+실제로 전자는 $\mathcal{R}$를 가지므로 $\mathcal{Q}$를 가지며,
+후자도 $\mathcal{Q}$를 가진다. 따라서
+$W(\mathcal{P}, h) \subset U' \times_{g, U, t} R$가 존재한다.
+가정에 의해
+$\text{pr}_{01}^{-1}(W(\mathcal{P}, h)) =
+\text{pr}_{02}^{-1}(W(\mathcal{P}, h))$
+이다. 두 집합 모두 $c \circ (i, 1)$이 $\mathcal{P}$를 가지는 가장 큰
+열린부분이기 때문이다. 사영 $U' \times_{g, U, t} R \to U'$에는 단면
+$\sigma : U' \to U' \times_{g, U, t} R$, $u' \mapsto (u', e(g(u')))$가 있다.
+또한 동형
+$$
+(U' \times_{g, U, t} R) \times_{U'} (U' \times_{g, U, t} R)
+=
+U' \times_{g, U, t} R \times_{t, U, t} R
+$$
+을 통하여 왼쪽에서 $U' \times_{g, U, t} R$로 가는 두 사영은
+오른쪽의 사상 $\text{pr}_{01}$ 및
+$\text{pr}_{02}$와 일치한다. 따라서
+$\text{pr}_{01}^{-1}(W(\mathcal{P}, h)) =
+\text{pr}_{02}^{-1}(W(\mathcal{P}, h))$이므로
+$W(\mathcal{P}, h)$는 $U$의 어떤 부분집합의 역상이다. 그 부분집합은
+반드시 열린집합 $W = \sigma^{-1}(W(\mathcal{P}, h))$이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-local-source-warning}
+경고:
+Lemma \ref{lemma-local-source}는 주의해서 사용해야 한다.
+예를 들어 이 보조정리는 $\mathcal{P}=$``flat'', $\mathcal{Q}=$``empty'',
+$\mathcal{R}=$``flat and locally of finite presentation''인 경우에 적용된다.
+그러나 스킴의 사상 $f : X \to Y$가 주어졌을 때 $f|_W$가 평탄하도록 하는
+가장 큰 열린부분 $W \subset X$는 $f$가 평탄한 점들의 집합이 {\it 아니다}!
+\end{remark}
+
+\begin{remark}
+\label{remark-local-source-apply}
+Remark \ref{remark-local-source-warning}의 경고에도 불구하고
+Lemma \ref{lemma-local-source}를 큰 모호성 없이 사용할 수 있는 경우들이 있다.
+그 목록을 제시한다. 각 경우에 가정 (1), (2)의 확인은 생략하고,
+(3), (4)를 함의하는 참고문헌을 제시한다. 목록은 다음과 같다.
+\begin{enumerate}
+\item $\mathcal{Q} = \mathcal{R} =$``locally of finite type'', 그리고
+$\mathcal{P} =$``relative dimension $\leq d$''.
+Morphisms, Definition \ref{morphisms-definition-relative-dimension-d} 및
+Morphisms, Lemmas \ref{morphisms-lemma-openness-bounded-dimension-fibres} 및
+\ref{morphisms-lemma-dimension-fibre-after-base-change}를 보라.
+\item $\mathcal{Q} = \mathcal{R} =$``locally of finite type'', 그리고
+$\mathcal{P} =$``locally quasi-finite''.
+이는 앞 항목에서 $d = 0$인 경우이다. Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-rel-dimension-0}을 보라.
+\item $\mathcal{Q} = \mathcal{R} =$``locally of finite type'', 그리고
+$\mathcal{P} =$``unramified''.
+Morphisms, Lemmas \ref{morphisms-lemma-unramified-characterize} 및
+\ref{morphisms-lemma-set-points-where-fibres-unramified}를 보라.
+\end{enumerate}
+위 경우들의 흥미로운 점은 사상 $h$가 성질 $\mathcal{P}$를 가지는 자취에
+관한 결론을 얻기 위해 $s, t$가 평탄하다고 가정할 필요가 없다는 것이다.
+목록을 계속한다.
+\begin{enumerate}
+\item[(4)] $\mathcal{Q} =$``locally of finite presentation'',
+$\mathcal{R} =$``flat and locally of finite presentation'', 그리고
+$\mathcal{P} =$``flat''. More on Morphisms, Theorem
+\ref{more-morphisms-theorem-openness-flatness} 및 Lemma
+\ref{more-morphisms-lemma-flat-locus-base-change}를 보라.
+\item[(5)] $\mathcal{Q} =$``locally of finite presentation'',
+$\mathcal{R} =$``flat and locally of finite presentation'', 그리고
+$\mathcal{P}=$``Cohen-Macaulay''. More on Morphisms, Definition
+\ref{more-morphisms-definition-CM} 및 More on Morphisms, Lemmas
+\ref{more-morphisms-lemma-base-change-CM} 및
+\ref{more-morphisms-lemma-flat-finite-presentation-CM-open}을 보라.
+\item[(6)] $\mathcal{Q} =$``locally of finite presentation'',
+$\mathcal{R} =$``flat and locally of finite presentation'', 그리고
+$\mathcal{P}=$``syntomic''인 경우에는 Morphisms, Lemma
+\ref{morphisms-lemma-set-points-where-fibres-lci}를 사용한다.
+이때 자취는 자동으로 열린다.
+\item[(7)] $\mathcal{Q} =$``locally of finite presentation'',
+$\mathcal{R} =$``flat and locally of finite presentation'', 그리고
+$\mathcal{P}=$``smooth''. Morphisms, Lemma
+\ref{morphisms-lemma-set-points-where-fibres-smooth}를 보라.
+이때 자취는 자동으로 열린다.
+\item[(8)] $\mathcal{Q} =$``locally of finite presentation'',
+$\mathcal{R} =$``flat and locally of finite presentation'', 그리고
+$\mathcal{P}=$``\'etale''. Morphisms, Lemma
+\ref{morphisms-lemma-set-points-where-fibres-etale}를 보라.
+이때 자취는 자동으로 열린다.
+\end{enumerate}
+\end{remark}
+
+\noindent
+다음은 두 번째 결과이다. $R$-불변 열린부분 $W \subset U$는
+사상 $U \to [U/R]$가 성질 $\mathcal{P}$를 가지게 되는 $[U/R]$의
+가장 큰 열린부분의 역상으로 생각해야 한다.
+
+\begin{lemma}
+\label{lemma-property-invariant}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 준군이라 하자.
+$\tau \in \{Zariski, \linebreak[0] fppf,
+\linebreak[0] \etale, \linebreak[0]
+smooth, \linebreak[0] syntomic\}$라 하자\footnote{$fpqc$가 빠진 것은
+오자가 아니다.}. $\mathcal{P}$를 목표에서 $\tau$-국소적인 스킴 사상의
+성질이라 하자(Descent, Definition
+\ref{descent-definition-property-morphisms-local}).
+$\{s : R \to U\}$와 $\{t : R \to U\}$가 $\tau$-위상의 덮개라고 하자.
+$s|_{s^{-1}(W)} : s^{-1}(W) \to W$가 성질 $\mathcal{P}$를 가지도록 하는
+극대 열린부분스킴을 $W \subset U$라 하자. 그러면 $W$는 $R$-불변이다.
+Groupoids, Definition \ref{groupoids-definition-invariant-open}을 보라.
+\end{lemma}
+
+\begin{proof}
+열린부분 $W \subset U$의 존재와 성질은 Descent, Lemma
+\ref{descent-lemma-largest-open-of-the-base}에 서술되어 있다.
+도식 (\ref{equation-diagram})에서 사상
+$\text{pr}_1 : R \times_{s, U, t} R \to R$이 성질 $\mathcal{P}$를
+가지게 되는 극대 열린부분스킴을 $W_1 \subset R$이라 하자.
+앞서 인용한 Descent, Lemma
+\ref{descent-lemma-largest-open-of-the-base}와
+$\{s : R \to U\}$ 및 $\{t : R \to U\}$가 $\tau$-위상의 덮개라는
+가정에 의해, 원하는 대로 $t^{-1}(W) = W_1 = s^{-1}(W)$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-property-G-invariant}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 준군이라 하자.
+$G \to U$를 그 안정자 군 스킴이라 하자.
+$\tau \in \{fppf, \linebreak[0] \etale, \linebreak[0]
+smooth, \linebreak[0] syntomic\}$라 하자.
+$\mathcal{P}$를 목표에서 $\tau$-국소적인 사상의 성질이라 하자.
+$\{s : R \to U\}$와 $\{t : R \to U\}$가 $\tau$-위상의 덮개라고 하자.
+$G_W \to W$가 성질 $\mathcal{P}$를 가지도록 하는 극대 열린부분스킴을
+$W \subset U$라 하자. 그러면 $W$는 $R$-불변이다
+(Groupoids, Definition
+\ref{groupoids-definition-invariant-open}을 보라).
+\end{lemma}
+
+\begin{proof}
+열린부분 $W \subset U$의 존재와 성질은 Descent, Lemma
+\ref{descent-lemma-largest-open-of-the-base}에 서술되어 있다.
+사상
+$$
+G \times_{U, t} R \longrightarrow R \times_{s, U} G, \quad
+(g, r) \longmapsto (r, r^{-1} \circ g \circ r)
+$$
+은 $R$ 위의 동형이다. 여기서 $\circ$는 준군에서의 합성을 뜻한다.
+따라서 앞서 인용한 Descent, Lemma
+\ref{descent-lemma-largest-open-of-the-base}에서 증명한 $W$의 성질에 의해
+$s^{-1}(W) = t^{-1}(W)$이다.
+\end{proof}
+
+
+
+\section{섬유의 비교}
+\label{section-fibres}
+
+\noindent
+$(U, R, s, t, c, e, i)$를 $S$ 위의 준군 스킴이라 하자.
+도식 (\ref{equation-diagram})을 이용하면 준군에서 사상
+$s : R \to U$의 섬유들을 비교할 수 있다. 점 $u \in U$에 대해
+$s : R \to U$의 $u$ 위 스킴론적 섬유를 $F_u = s^{-1}(u)$로 쓰겠다.
+예를 들어 이 도식에 따르면 $s(r) = u$이고 $t(r) = u'$인 점
+$u, u' \in U$가 있으면 $(F_u)_{\kappa(r)} \cong (F_{u'})_{\kappa(r)}$이다.
+이는 아래의 더 일반적이고 정밀한 Lemma \ref{lemma-two-fibres}의
+특수한 경우이다. 이를 보려면 $r' = i(r)$로 두면 된다.
+
+\medskip\noindent
+스킴 $X$와 점 $x \in X$로 이루어진 쌍 $(X, x)$를 때때로
+{\it $x$에서의 $X$의 싹}이라 한다.
+{\it 싹의 사상} $f : (X, x) \to (S, s)$은 $x$의 한 열린근방에서
+정의되고 $f(x) = s$를 만족하는 사상 $f : U \to S$이다.
+그러한 두 사상 $f$, $f'$가 $x$의 어떤 열린근방에서 일치할 필요충분조건은
+$f$와 $f'$가 같은 싹의 사상을 정하는 것이다.
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$라 하자.
+다음 개념을 임시로 도입한다. 싹의 두 사상
+$f : (X, x) \to (S, s)$와 $f' : (X', x') \to (S', s')$에 대해,
+점을 가진 스킴 $(S'', s'')$와 싹의 사상
+$g : (S'', s'') \to (S, s)$ 및 $g' : (S'', s'') \to (S', s')$가
+존재하여 다음을 만족하면 두 사상이 {\it 바닥의 $\tau$-위상에서
+국소적으로 동형}이라고 한다.
+\begin{enumerate}
+\item $g$와 $g'$는 $s''$에서 열린 몰입(resp.\ \'etale, smooth, syntomic,
+flat and locally of finite presentation)이다.
+\item $(s'', x)$ 및 $(s'', x')$ 위에 놓이는 점 $\tilde x$와
+$\tilde x'$를 적절히 택했을 때, 싹 $(S'', s'')$ 위 싹들의 동형
+$$
+(S'' \times_{g, S, f} X, \tilde x)
+\cong
+(S'' \times_{g', S', f'} X', \tilde  x')
+$$
+이 존재한다.
+\end{enumerate}
+끝으로 위와 같은 $S'', s'', g, g'$가 존재하되 (1) 대신 $g$와 $g'$가
+$s''$에서 평탄하다는 조건을 만족하면 싹의 사상
+$f : (X, x) \to (S, s)$와 $f' : (X', x') \to (S', s')$가
+{\it 바닥에서 평탄 국소적으로 동형}이라고 한다. 평탄사상이 열린사상일
+필요는 없으므로 이 조건은 위의 어느 $\tau$ 조건보다도 훨씬 약하다.
+
+\begin{lemma}
+\label{lemma-two-fibres}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 준군이라 하자.
+$U$에서 $t(r) = t(r')$인 $r, r' \in R$를 택하자.
+$u = s(r)$, $u' = s(r')$로 두고, 스킴론적 섬유를
+$F_u = s^{-1}(u)$ 및 $F_{u'} = s^{-1}(u')$로 쓰자.
+\begin{enumerate}
+\item 공통 체 확대 $\kappa(u) \subset k$, $\kappa(u') \subset k$와
+동형 $(F_u)_k \cong (F_{u'})_k$가 존재한다.
+\item (1)의 동형은 $r$ 위의 한 점을 $r'$ 위의 한 점으로 보내도록
+택할 수 있다.
+\item 사상 $s$, $t$가 평탄하면 싹의 사상
+$s : (R, r) \to (U, u)$와 $s : (R, r') \to (U, u')$는 바닥에서
+평탄 국소적으로 동형이다.
+\item 사상 $s$, $t$가 \'etale
+(resp.\ smooth, syntomic, or flat and locally of finite presentation)이면
+싹의 사상 $s : (R, r) \to (U, u)$와
+$s : (R, r') \to (U, u')$는 \'etale (resp.\ smooth, syntomic, or fppf)
+위상에서 바닥에 관해 국소적으로 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+도식 (\ref{equation-diagram})의 존재와 성질을 반복해서 사용한다.
+이 도식의 성질과 Schemes, Lemma
+\ref{schemes-lemma-points-fibre-product}에 의해
+$\text{pr}_0(\xi) = r$ 및 $c(\xi) = r'$인
+$R \times_{s, U, t} R$의 점 $\xi$가 존재한다.
+$\tilde r = \text{pr}_1(\xi) \in R$로 두자.
+
+\medskip\noindent
+(1)의 증명. $k = \kappa(\tilde r)$로 두자. $t(\tilde r) = u$이고
+$s(\tilde r) = u'$이므로 $k$는 $\kappa(u)$와 $\kappa(u')$의 공통 확대이다.
+더욱이 $(F_u)_k$와 $(F_{u'})_k$는 모두
+$\text{pr}_1 : R \times_{s, U, t} R \to R$의 $\tilde r$ 위 섬유와
+동형이다. 따라서 (1)이 증명된다.
+
+\medskip\noindent
+점 $\xi$가 각각 $r$, resp.\ $r'$로 가므로 (2)가 따른다.
+
+\medskip\noindent
+(3)은 위의 논의와 정의에서 바로 따른다. 이때 $\tilde u$와
+$\tilde u'$에는 점 $\xi$를 사용한다.
+
+\medskip\noindent
+$s$와 $t$가 평탄하고 유한 표시이면 이들은 열린사상이다
+(Morphisms, Lemma \ref{morphisms-lemma-fppf-open}). 따라서
+$\tilde r$의 어떤 아핀 열린근방 $V''$의 상은 $u$의 한 열린근방
+$V$, resp.\ $u'$의 한 열린근방 $V'$를 덮는다. 이를 사용하면
+``바닥의 $\tau$-위상에서 국소적으로 동형''이라는 정의의 성질
+(1), (2)를 확인할 수 있다.
+\end{proof}
+
+
+
+
+
+
+
+\section{Cohen--Macaulay 표현}
+\label{section-CM}
+
+\noindent
+$s, t$가 평탄하고 국소 유한 표시인 임의의 준군 $(U, R, s, t, c)$에 대해,
+$s'$와 $t'$가 Cohen--Macaulay 사상이며 국소 유한 표시인 ``동치인'' 준군
+$(U', R', s', t', c')$가 존재한다. Cohen--Macaulay 사상에 관한 자세한
+내용은 More on Morphisms, Section \ref{more-morphisms-section-CM}을 보라.
+여기서 ``동치인''은 몫 스택 $[U/R]$와 $[U'/R']$가 동치인 스택이라는
+뜻으로 취할 수 있다. Groupoids in Spaces, Section
+\ref{spaces-groupoids-section-stacks} 및 Section
+\ref{spaces-groupoids-section-quotient-stack-restrict}를 보라.
+
+\begin{lemma}
+\label{lemma-make-CM}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 준군이라 하자.
+$s$와 $t$가 평탄하고 국소 유한 표시라고 가정하자.
+그러면 다음을 만족하는 열린부분 $U' \subset U$가 존재한다.
+\begin{enumerate}
+\item $t^{-1}(U') \subset R$는 사상 $s$가 Cohen--Macaulay인
+$R$의 가장 큰 열린부분스킴이다.
+\item $s^{-1}(U') \subset R$는 사상 $t$가 Cohen--Macaulay인
+$R$의 가장 큰 열린부분스킴이다.
+\item 사상 $t|_{s^{-1}(U')} : s^{-1}(U') \to U$는 전사이다.
+\item 사상 $s|_{t^{-1}(U')} : t^{-1}(U') \to U$는 전사이다.
+\item $R$을 $U'$로 제한한 $R' = s^{-1}(U') \cap t^{-1}(U')$는
+준군 $(U', R', s', t', c')$를 정하며, 사상 $s'$와 $t'$는
+Cohen--Macaulay이고 국소 유한 표시이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$g = \text{id}$,
+$\mathcal{Q} =$``locally of finite presentation'',
+$\mathcal{R} =$``flat and locally of finite presentation'',
+$\mathcal{P}=$``Cohen-Macaulay''로 놓고 Lemma
+\ref{lemma-local-source}를 적용한다. Remark
+\ref{remark-local-source-apply}를 보라.
+그러면 사상 $s$가 Cohen--Macaulay인 $R$의 가장 큰 열린부분스킴이
+$t^{-1}(U') \subset R$가 되도록 하는 열린부분 $U' \subset U$를 얻는다.
+이로써 (1)이 증명된다. 준군의 역을 $i : R \to R$라 하자.
+$i$는 동형이고 $s \circ i = t$, $t \circ i = s$이므로
+$s^{-1}(U')$도 $t$가 Cohen--Macaulay인 $R$의 가장 큰 열린부분이다.
+이로써 (2)가 증명된다. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-flat-finite-presentation-CM-open}에 의해
+열린부분 $t^{-1}(U')$는 $s : R \to U$의 모든 섬유에서 조밀하다.
+이로써 (3)이 증명된다. (4)도 같은 논증으로 따른다.
+(5)는 (1), (2)와 Groupoids, Section
+\ref{groupoids-section-restrict-groupoid}의 제한에 관한 논의에서
+형식적으로 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{준군의 제한}
+\label{section-restricting-groupoids}
+
+\noindent
+이 절에서는 제한으로 유전되는 준군의 성질에 관한 여러 보조정리를 모은다.
+이 보조정리들의 대부분은 제한을 정의하는 도식
+\begin{equation}
+\label{equation-restriction}
+\vcenter{
+\xymatrix{
+R' \ar[d] \ar[r] \ar@/_3pc/[dd]_{t'} \ar@/^1pc/[rr]^{s'}&
+R \times_{s, U} U' \ar[r] \ar[d] &
+U' \ar[d]^g \\
+U' \times_{U, t} R \ar[d] \ar[r] &
+R \ar[r]^s \ar[d]_t &
+U \\
+U' \ar[r]^g &
+U
+}
+}
+\end{equation}
+을 살펴보면 증명할 수 있다. Groupoids, Lemma
+\ref{groupoids-lemma-restrict-groupoid}를 보라.
+
+\begin{lemma}
+\label{lemma-restrict-preserves-type}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$g : U' \to U$를 스킴의 사상이라 하자.
+$(U', R', s', t', c')$를 $g$에 의한 $(U, R, s, t, c)$의 제한이라 하자.
+\begin{enumerate}
+\item $s, t$가 국소 유한형이고 $g$가 국소 유한형이면
+$s', t'$도 국소 유한형이다.
+\item $s, t$가 국소 유한 표시이고 $g$가 국소 유한 표시이면
+$s', t'$도 국소 유한 표시이다.
+\item $s, t$가 평탄하고 $g$가 평탄하면 $s', t'$도 평탄하다.
+\item 여기에 더 추가할 것.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+국소 유한형이라는 성질은 합성과 임의의 밑변환으로 보존된다.
+Morphisms, Lemmas \ref{morphisms-lemma-composition-finite-type} 및
+\ref{morphisms-lemma-base-change-finite-type}를 보라.
+따라서 (1)은 도식 (\ref{equation-restriction})에서 바로 따른다.
+나머지 경우에는 Morphisms, Lemmas
+\ref{morphisms-lemma-composition-finite-presentation},
+\ref{morphisms-lemma-base-change-finite-presentation},
+\ref{morphisms-lemma-composition-flat}, 및
+\ref{morphisms-lemma-base-change-flat}을 보라.
+\end{proof}
+
+\noindent
+앞 보조정리의 결과들은 다음 보조정리를 사용하여 더 통일된 방식으로
+증명할 수도 있었다.
+
+\begin{lemma}
+\label{lemma-restrict-property}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$g : U' \to U$를 스킴의 사상이라 하자.
+$(U', R', s', t', c')$를 $g$에 의한 $(U, R, s, t, c)$의 제한이라 하고,
+$h = s \circ \text{pr}_1 : U' \times_{g, U, t} R \to U$라 하자.
+$\mathcal{P}$가 다음을 만족하는 스킴 사상의 성질이라고 하자.
+\begin{enumerate}
+\item $h$는 성질 $\mathcal{P}$를 가진다.
+\item $\mathcal{P}$는 밑변환으로 보존된다.
+\end{enumerate}
+그러면 $s', t'$는 성질 $\mathcal{P}$를 가진다.
+\end{lemma}
+
+\begin{proof}
+도식 (\ref{equation-restriction})에 의해 $s'$는 $h$의 밑변환이고,
+스킴의 사상으로서 $t'$는 $s'$와 동형이므로 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-double-restrict}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$g : U' \to U$와 $g' : U'' \to U'$를 스킴의 사상이라 하고
+$g'' = g \circ g'$로 두자.
+$(U', R', s', t', c')$를 $R$의 $U'$로의 제한이라 하자.
+$h = s \circ \text{pr}_1 : U' \times_{g, U, t} R \to U$,
+$h' = s' \circ \text{pr}_1 : U'' \times_{g', U', t} R \to U'$,
+$h'' = s \circ \text{pr}_1 : U'' \times_{g'', U, t} R \to U$라 하자.
+다음 도식은 가환한다.
+$$
+\xymatrix{
+U'' \times_{g', U', t} R' \ar[d]^{h'} &
+(U' \times_{g, U, t} R) \times_U (U'' \times_{g'', U, t} R)
+\ar[l] \ar[r] \ar[d] &
+U'' \times_{g'', U, t} R \ar[d]_{h''} \\
+U' &
+U' \times_{g, U, t} R \ar[l]_{\text{pr}_0} \ar[r]^h &
+U
+}
+$$
+두 정사각형은 모두 카르테시안이고, 왼쪽 위 가로화살표는 다음 규칙으로
+주어진다.
+$$
+\begin{matrix}
+(U' \times_{g, U, t} R) \times_U (U'' \times_{g'', U, t} R) &
+\longrightarrow &
+U'' \times_{g', U', t} R' \\
+((u', r_0), (u'', r_1)) &
+\longmapsto &
+(u'', (c(r_1, i(r_0)), (g'(u''), u')))
+\end{matrix}
+$$
+표기법은 증명에서 설명한다.
+\end{lemma}
+
+\begin{proof}
+함자적 관점을 활용하여 이 보조정리를 준군 범주의 제한에서 화살표에 관한
+명제로 환원한다. 보조정리 마지막 식의 표기
+$((u', r_0), (u'', r_1))$는
+$(U' \times_{g, U, t} R) \times_U (U'' \times_{g'', U, t} R)$의
+$T$-값 점을 뜻한다. 즉 $u', u'', r_0, r_1$는 각각
+$U', U'', R, R$의 $T$-값 점이고,
+$g(u') = t(r_0)$, $g(g'(u'')) = g''(u'') = t(r_1)$,
+$s(r_0) = s(r_1)$이다. 엄밀히는 $g \circ u' = t \circ r_0$ 등으로
+써야 하지만 그렇게 하면 표기가 더욱 읽기 어려워진다. $r_1$과 $r_0$를
+준군 범주의 화살표로 생각하면 다음 그림으로 나타낼 수 있다.
+$$
+\xymatrix{
+t(r_0) = g(u') &
+s(r_0) = s(r_1) \ar[l]_{r_0} \ar[r]^-{r_1} &
+t(r_1) = g(g'(u''))
+}
+$$
+특히 이 도식은 합성 $c(r_1, i(r_0))$가 정의됨을 보여준다. 등식
+$$
+R' = R \times_{(t, s), U \times_S U, g \times g} U' \times_S U'
+$$
+을 상기하자. 따라서 $R'$의 $T$-값 점은
+$t(r) = g(u'_0)$ 및 $s(r) = g(u'_1)$을 만족하는
+$(r, (u'_0, u'_1))$ 꼴이다. 특히 위와 같은
+$((u', r_0), (u'', r_1))$가 주어지면
+$t(c(r_1, i(r_0))) = t(r_1) = g(g'(u''))$ 및
+$s(c(r_1, i(r_0))) = s(i(r_0)) = t(r_0) = g(u')$이므로
+$R'$의 $T$-값 점 $(c(r_1, i(r_0)), (g'(u''), u'))$를 얻는다.
+이 정의로 왼쪽 정사각형이 가환함을 보이는 일은 독자에게 맡긴다.
+
+\medskip\noindent
+왼쪽 정사각형이 카르테시안임을 보이기 위해,
+$v' = s'(p')$을 만족하는
+$U'' \times_{g', U', t} R'$의 $T$-값 점 $(v'', p')$와
+$U' \times_{g, U, t} R$의 점 $(v', p)$가 주어졌다고 하자.
+이는 $g'(v'') = t'(p')$ 및 $g(v') = t(p)$이라는 뜻이기도 하다.
+앞 논의에 의해 $t(r) = g(u'_0)$ 및 $s(r) = g(u'_1)$을 만족하도록
+$p' = (r, (u_0', u_1'))$로 쓸 수 있다. 이 표기에서
+$v' = s'(p') = u_1'$이고 $g'(v'') = t'(p') = u_0'$이다. 그림으로 쓰면
+$$
+\xymatrix{
+s(p) \ar[r]^-p &
+g(v') = g(u'_1) \ar[r]^-r &
+g(u'_0) = g(g'(v''))
+}
+$$
+이다. 이제 위와 같은 $T$-값 점 $((u', r_0), (u'', r_1))$가 유일하게
+존재하여 $v' = u'$, $p = r_0$, $v'' = u''$ 및
+$p' = (c(r_1, i(r_0)), (g'(u''), u'))$을 만족함을 보여야 한다.
+위의 두 도식을 비교하면 다음과 같이 택할 수밖에 없음이 명백하다.
+$$
+((u', r_0), (u'', r_1)) = ((v', p), (v'', c(r, p))
+$$
+세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-double-restrict-property}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$g : U' \to U$와 $g' : U'' \to U'$를 스킴의 사상이라 하고,
+$g'' = g \circ g'$로 두자.
+$(U', R', s', t', c')$를 $R$의 $U'$로의 제한이라 하자.
+$h = s \circ \text{pr}_1 : U' \times_{g, U, t} R \to U$,
+$h' = s' \circ \text{pr}_1 : U'' \times_{g', U', t} R \to U'$,
+$h'' = s \circ \text{pr}_1 : U'' \times_{g'', U, t} R \to U$라 하자.
+$\tau \in \{Zariski, \linebreak[0] \etale, \linebreak[0]
+smooth, \linebreak[0] syntomic, \linebreak[0] fppf, \linebreak[0] fpqc\}$라 하자.
+$\mathcal{P}$를 밑변환으로 보존되고 목표 위에서
+$\tau$-위상에 대해 국소적인 스킴 사상의 성질이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $h(U' \times_U R)$은 $U$에서 열린집합이다.
+\item $\{h : U' \times_U R \to h(U' \times_U R)\}$은 $\tau$-덮개이다.
+\item $h'$는 성질 $\mathcal{P}$를 가진다.
+\end{enumerate}
+그러면 $h''$는 성질 $\mathcal{P}$를 가진다. 역으로 다음을 가정하자.
+\begin{enumerate}
+\item[(a)] $\{t : R \to U\}$는 $\tau$-덮개이다.
+\item[(d)] $h''$는 성질 $\mathcal{P}$를 가진다.
+\end{enumerate}
+그러면 $h'$는 성질 $\mathcal{P}$를 가진다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-double-restrict}의 도식이 가지는 성질에서
+형식적으로 따른다. 첫 번째 경우에는 $g'' = g \circ g'$이므로
+사상 $h''$의 상이 $h$의 상에 포함됨에 유의하자. 따라서 도식 오른쪽 아래의
+$U$를 $h(U' \times_U R)$로 바꿀 수 있다. 이것이 보조정리의 조건 (1)과
+(2)가 필요한 이유이다. 두 번째 경우에는
+$\{\text{pr}_0 : U' \times_{g, U, t} R \to U'\}$가 $\tau$-덮개임에 유의하자.
+이는 $\tau$의 밑변환이고 조건 (a)가 성립하기 때문이다.
+\end{proof}
+
+
+
+
+
+
+\section{체 위 준군의 성질}
+\label{section-properties-groupoids-on-fields}
+
+\noindent
+``체 위의 준군''이란 $U$가 체의 스펙트럼인 준군 스킴
+$(U, R, s, t, c)$를 뜻한다. 이것은 $(U, R, s, t, c)$가 체 위에서
+정의된다는 뜻이 {\bf 아니며}, 더 정확히 말하면 사상
+$s, t : R \to U$가 같다는 뜻도 {\bf 아니다}.
+임의의 체 $k$, 추상군 $G$, 군 준동형
+$\varphi : G \to \text{Aut}(k)$가 주어지면 다음과 같이 두어
+$\mathbf{Z}$ 위의 준군 스킴 $(U, R, s, t, c)$를 얻는다.
+\begin{align*}
+U & = \Spec(k) \\
+R & = \coprod\nolimits_{g \in G} \Spec(k) \\
+s & = \coprod\nolimits_{g \in G} \Spec(\text{id}_k) \\
+t & = \coprod\nolimits_{g \in G} \Spec(\varphi(g)) \\
+c & = \text{composition in }G
+\end{align*}
+이 예는 여전히 $\Spec(k^G)$ 위의 준군 스킴이다. 따라서 $G$가 유한이면
+$U = \Spec(k)$는 $\Spec(k^G)$ 위에서 유한이다. 이 절의 목표는 어떤 의미에서
+$s, t$에 대한 적절한 유한성 조건이 체 위의 임의의 준군을 유한 지수 부분체
+$k' \subset k$ 위에서 정의되도록 강제함을 보이는 것이다.
+
+\medskip\noindent
+$k$가 체이고 $(G, m)$이 $k$ 위의 군 스킴이며 구조 사상이
+$p : G \to \Spec(k)$이면, $(\Spec(k), G, p, p, m)$은 체 위 준군의 한 예이다.
+물론 이 경우 전체 구조가 체 위에서 정의된다. 따라서 이 절은
+Groupoids, Section \ref{groupoids-section-properties-group-schemes-field}의
+준군판으로 볼 수 있다.
+
+\begin{lemma}
+\label{lemma-groupoid-on-field-open-multiplication}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U$가 체의 스펙트럼이면 합성 사상
+$c : R \times_{s, U, t} R \to R$은 열린 사상이다.
+\end{lemma}
+
+\begin{proof}
+Diagram (\ref{equation-pull})에 의해 합성은 사영 사상
+$\text{pr}_1 : R \times_{t, U, t} R \to R$과 동형이다.
+이 사영은 Morphisms, Lemma
+\ref{morphisms-lemma-scheme-over-field-universally-open}에 의해 열린 사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-groupoid-on-field-separated}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U$가 체의 스펙트럼이면 $R$은 분리 스킴이다.
+\end{lemma}
+
+\begin{proof}
+Groupoids, Lemma \ref{groupoids-lemma-group-scheme-over-field-separated}에 의해
+안정자 군 스킴 $G \to U$는 분리이다. Groupoids, Lemma
+\ref{groupoids-lemma-diagonal}에 의해 사상
+$j = (t, s) : R \to U \times_S U$도 분리이다. $U$가 체의 스펙트럼이므로
+$U \times_S U$는 아핀이다(Schemes, Section
+\ref{schemes-section-fibre-products}의 올곱 구성 참조). 따라서 Schemes, Lemma
+\ref{schemes-lemma-separated-permanence}에 의해 $R$은 분리 스킴이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-groupoid-on-field-homogeneous}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U = \Spec(k)$이고 $k$가 체라고 가정하자. 임의의 점
+$r, r' \in R$에 대해 체 확대 $k'/k$, 점
+$r_1, r_2 \in R \times_{s, \Spec(k)} \Spec(k')$, 그리고 도식
+$$
+\xymatrix{
+R &
+R \times_{s, \Spec(k)} \Spec(k')
+\ar[l]_-{\text{pr}_0} \ar[r]^\varphi &
+R \times_{s, \Spec(k)} \Spec(k')
+\ar[r]^-{\text{pr}_0} &
+R
+}
+$$
+이 존재한다. 여기서 $\varphi$는 $\Spec(k')$ 위 스킴의 동형이고,
+$\varphi(r_1) = r_2$, $\text{pr}_0(r_1) = r$,
+$\text{pr}_0(r_2) = r'$이 성립한다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-two-fibres}의 (1), (2)의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-restrict-groupoid-on-field}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U = \Spec(k)$이고 $k$가 체라고 가정하자. $k'/k$를 체 확대,
+$U' = \Spec(k')$라 하고, $(U', R', s', t', c')$를
+$U' \to U$를 통한 $(U, R, s, t, c)$의 제한이라 하자. 정의 도식
+$$
+\xymatrix{
+R' \ar[d] \ar[r] \ar@/_3pc/[dd]_{t'} \ar@/^1pc/[rr]^{s'} \ar@{..>}[rd] &
+R \times_{s, U} U' \ar[r] \ar[d] &
+U' \ar[d] \\
+U' \times_{U, t} R \ar[d] \ar[r] &
+R \ar[r]^s \ar[d]_t &
+U \\
+U' \ar[r] &
+U
+}
+$$
+의 모든 사상은 전사이고 평탄이며 보편적으로 열린 사상이다.
+점선 화살표 $R' \to R$은 더 나아가 아핀이다.
+\end{lemma}
+
+\begin{proof}
+사상 $U' \to U$는 $\Spec(k') \to \Spec(k)$와 같으므로 아핀이고
+전사이며 평탄하다. 사상 $s, t : R \to U$와 $U' \to U$는
+Morphisms, Lemma \ref{morphisms-lemma-scheme-over-field-universally-open}에 의해
+보편적으로 열린 사상이다. $R$은 공집합이 아니고 $U$는 체의 스펙트럼이므로
+$s, t : R \to U$는 전사이고 평탄하다. 이제 Morphisms, Lemmas
+\ref{morphisms-lemma-base-change-surjective},
+\ref{morphisms-lemma-composition-surjective},
+\ref{morphisms-lemma-composition-open},
+\ref{morphisms-lemma-base-change-affine},
+\ref{morphisms-lemma-composition-affine},
+\ref{morphisms-lemma-base-change-flat},
+\ref{morphisms-lemma-composition-flat}을 적용하면 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-groupoid-on-field-explain-points}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U = \Spec(k)$이고 $k$가 체라고 가정하자. 임의의 점 $r \in R$에 대해
+다음이 존재한다.
+\begin{enumerate}
+\item $k'$가 대수적으로 닫혀 있는 체 확대 $k'/k$,
+\item $\Spec(k') \to \Spec(k)$를 통한 $(U, R, s, t, c)$의 제한을
+$(U', R', s', t', c')$라 할 때의 점 $r' \in R'$.
+\end{enumerate}
+이들은 다음 조건을 만족한다.
+\begin{enumerate}
+\item 점 $r'$은 사상 $R' \to R$ 아래에서 $r$로 간다.
+\item 사상 $s', t' : R' \to \Spec(k')$는 동형
+$k' \to \kappa(r')$을 유도한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+기하학적 명제를 체에 관한 명제로 옮기면, 다음 도식을 찾으면 된다는 뜻이다.
+$$
+\xymatrix{
+k' & k' \ar[l]^1 & \\
+k' \ar[u]^\tau & \kappa(r) \ar[lu]^\sigma & k \ar[l]^-s \ar[lu]_i \\
+& k \ar[lu]^i \ar[u]_t
+}
+$$
+여기서 $i : k \to k'$는 $k$를 $k'$에 매장하는 사상이고,
+$s, t : k \to \kappa(r)$는 $s, t : R \to U$가 유도하는 사상이며,
+$\tau : k' \to k'$는 자기동형이다. 이러한 도식은 다음과 같이 구성한다.
+\begin{enumerate}
+\item $k'$가 대수적으로 닫혀 있고 $k$ 위의 초월차수가 매우 크도록
+체 사상 $i : k \to k'$를 택한다.
+\item $\sigma \circ s = i$를 만족하는 매장
+$\sigma : \kappa(r) \to k'$를 택한다. 실제로 $k$ 위의 $\kappa(r)$의
+초월기저 $\{x_\alpha\}_{\alpha \in A}$를 택하고, $i(k)$ 위에서
+대수적으로 독립인 $y_\alpha \in k'$, $\alpha \in A$를 찾은 뒤,
+$\lambda \in k$에 대해 $s(\lambda) \mapsto i(\lambda)$,
+$\alpha \in A$에 대해 $x_\alpha \mapsto y_\alpha$라는 규칙으로
+$s(k)(\{x_\alpha\})$를 $k'$ 안으로 보낼 수 있으므로 이러한 $\sigma$가 존재한다.
+이제 $k'$가 대수적으로 닫혀 있음을 이용하여
+$\tau : \kappa(\alpha) \to k'$로 확장한다.
+\item $\tau \circ i = \sigma \circ t$를 만족하는 자기동형
+$\tau : k' \to k'$를 택한다. 이를 위해 $k$의 소체 위 초월기저
+$\{x_\alpha\}_{\alpha \in A}$를 택한다. 한편으로 $\{y_\beta\}_{\beta \in B}$를
+추가하여 $\{i(x_\alpha)\}$를 $k'$의 초월기저로 확장하고, 다른 한편으로
+$\{z_\gamma\}_{\gamma \in C}$를 추가하여 $\{\sigma(t(x_\alpha))\}$를
+$k'$의 초월기저로 확장한다. $k'$가 대수적으로 닫혀 있으므로 동형
+$\sigma \circ t \circ i^{-1} : i(k) \to \sigma(t(k))$을
+$k'$ 안에서 각각의 대수적 폐포 사이의 동형
+$\tau' : \overline{i(k)} \to \overline{\sigma(t(k))}$로 확장할 수 있다.
+$k'$의 초월차수가 크므로 집합 $B$와 $C$의 기수는 같다. 따라서 전단사
+$B \to C$를 사용하여 $\tau'$를 동형
+$$
+\overline{i(k)}(\{y_\beta\})
+\longrightarrow
+\overline{\sigma(t(k))}(\{z_\gamma\})
+$$
+으로 확장할 수 있다. $k'$는 양변의 대수적 폐포이므로, 이는 원하는 자기동형
+$\tau : k' \to k'$로 다시 확장된다.
+\end{enumerate}
+이로써 보조정리가 증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-groupoid-on-field-move-point}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U = \Spec(k)$이고 $k$가 체라고 가정하자. $r \in R$이 점이고
+$s, t$가 동형 $k \to \kappa(r)$을 유도하면, 사상
+$$
+R \longrightarrow R, \quad
+x \longmapsto c(r, x)
+$$
+(정확한 표기는 증명 참조)은 $e$를 $r$로 보내는 자기동형 $R \to R$이다.
+\end{lemma}
+
+\begin{proof}
+준군을 함자적으로 생각하면 이는 자명하지만, 내용을 모두 적어 보자.
+$s \circ a = \text{id}_U$이고 상이 $r$인 사상을 $a : U \to R$라 하자.
+이 사상은 $s : k \to \kappa(r)$이 동형이라는 가정에 의해 존재한다.
+마찬가지로 $t \circ b = \text{id}_U$이고 상이 $r$인 사상을
+$b : U \to R$라 하자. 다음에 유의하자.
+$b = a \circ (t \circ a)^{-1}$, 특히 $a \circ s \circ b = b$.
+
+\medskip\noindent
+$T$-값 점 위에서 다음과 같이 주어지는 사상 $\Psi : R \to R$를 생각하자.
+$$
+(f : T \to R) \longmapsto (c(a \circ t \circ f, f) : T \to R)
+$$
+이것이 정의됨을 보이려면 $s \circ a = 1$에서 자명한 등식
+$s \circ a \circ t \circ f = t \circ f$를 확인하면 된다.
+$\Phi(e) = a$이므로 보조정리를 증명하려면 $\Phi$가 $R$의 자기동형임을
+보이면 충분하다. $T$-값 점 위에서 다음과 같이 주어지는 사상을
+$\Phi : R \to R$라 하자.
+$$
+(g : T \to R) \longmapsto (c(i \circ b \circ t \circ g, g) : T \to R).
+$$
+이는
+$s \circ i \circ b \circ t \circ g = t \circ b \circ t \circ g =
+t \circ g$이므로 정의된다. $\Phi$와 $\Psi$가 서로 역임을 주장한다.
+실제로 다음과 같이 계산된다.
+\begin{align*}
+& c(a \circ t \circ c(i \circ b \circ t \circ g, g),
+c(i \circ b \circ t \circ g, g)) \\
+& =
+c(a \circ t \circ i \circ b \circ t \circ g,
+c(i \circ b \circ t \circ g, g)) \\
+& =
+c(a \circ s \circ b \circ t \circ g,
+c(i \circ b \circ t \circ g, g)) \\
+& =
+c(b \circ t \circ g, c(i \circ b \circ t \circ g, g)) \\
+& =
+c(c(b \circ t \circ g, i \circ b \circ t \circ g), g)) \\
+& =
+c(e, g) \\
+& = g
+\end{align*}
+여기서는 위에서 보인 관계 $a \circ s \circ b = b$를 사용하였다.
+반대 방향으로는 다음을 얻는다.
+\begin{align*}
+& c(i \circ b \circ t \circ c(a \circ t \circ f, f), c(a \circ t \circ f, f)) \\
+& =
+c(i \circ b \circ t \circ a \circ t \circ f, c(a \circ t \circ f, f)) \\
+& =
+c(i \circ a \circ (t \circ a)^{-1} \circ t \circ a \circ t \circ f,
+c(a \circ t \circ f, f)) \\
+& =
+c(i \circ a \circ t \circ f, c(a \circ t \circ f, f)) \\
+& =
+c(c(i \circ a \circ t \circ f, a \circ t \circ f), f) \\
+& =
+c(e, f) \\
+& = f
+\end{align*}
+보조정리가 증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-groupoid-on-field-translate-open}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U$가 체의 스펙트럼이고 $W \subset R$이 열린집합이며 $Z \to R$이
+스킴의 사상이면, 합성
+$Z \times_{s, U, t} W \to R \times_{s, U, t} R \to R$의 상은 열린집합이다.
+\end{lemma}
+
+\begin{proof}
+$U = \Spec(k)$로 쓰자. 체 확대 $k'/k$를 생각하고 $U' = \Spec(k')$라 하자.
+$R'$을 $U' \to U$를 통한 $R$의 제한이라 하고,
+$Z' = Z \times_R R'$ 및 $W' = R' \times_R W$로 두자.
+$Z \times_{s, U, t} W$의 점 $\xi = (z, w)$를 생각하고,
+$r \in R$을 $Z \to R$ 아래에서의 $z$의 상이라 하자.
+Lemma \ref{lemma-groupoid-on-field-explain-points}에서와 같은
+$k' \supset k$와 $r' \in R'$을 택한다. $z$와 $r'$로 가는
+$z' \in Z'$을 택할 수 있다. 그러면 $z'$와 $\xi$로 가는
+$\xi' \in Z' \times_{s', U', t'} W'$을 찾을 수 있다. 열린집합
+$c(r', W')$(Lemma \ref{lemma-groupoid-on-field-move-point})은
+$Z' \times_{s', U', t'} W' \to R'$의 상에 포함된다. 등식
+$Z' \times_{s', U', t'} W' = (Z \times_{s, U, t} W)
+\times_{R \times_{s, U, t} R} (R' \times_{s', U', t'} R')$에 유의하자.
+따라서 $Z' \times_{s', U', t'} W' \to R' \to R$의 상은
+$Z \times_{s, U, t} W \to R$의 상에 포함된다.
+$R' \to R$은 열린 사상이므로(Lemma
+\ref{lemma-restrict-groupoid-on-field}), 이 상은 원하는 대로 $\xi$의 상의
+열린 근방을 포함한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-groupoid-on-field-geometrically-irreducible}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U = \Spec(k)$이고 $k$가 체라고 가정하자. 표기를 조금 남용하여 항등 사상
+$e : U \to R$의 상을 $e \in R$로 나타내자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item $R$의 모든 국소환 $\mathcal{O}_{R, r}$은 유일한 극소 소아이디얼을 가진다.
+\item $e$를 지나는 $R$의 기약 성분 $Z$는 정확히 하나이다.
+\item $Z$는 $s$ 또는 $t$를 통해 $k$ 위에서 기하적으로 기약이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$r \in R$을 점이라 하자. 이 증명에서는 점 $r$을 지나는 $R$의 기약 성분과
+국소환 $\mathcal{O}_{R, r}$의 극소 소아이디얼 사이의 대응을 더 언급하지 않고
+사용한다. Lemma \ref{lemma-groupoid-on-field-explain-points}에서와 같은
+$k \subset k'$와 $r' \in R'$을 택하자. Lemma
+\ref{lemma-restrict-groupoid-on-field}에 의해
+$\mathcal{O}_{R, r} \to \mathcal{O}_{R', r'}$은 충실히 평탄한 국소 사상이다.
+따라서 $r' \in R'$에 대한 결과가 $r \in R$에 대한 결과를 함의한다.
+즉 $s, t : k \to \kappa(r)$가 동형이라고 가정해도 된다. Lemma
+\ref{lemma-groupoid-on-field-move-point}에 의해 $e$를 $r$로 보내는
+자기동형이 존재한다. 따라서 $r = e$라고 가정해도 되며, 곧 (1)은 (2)에서 따른다.
+
+\medskip\noindent
+먼저 $k$가 분리 대수적으로 닫혀 있는 경우에 (2)를 증명하자.
+$X, Y \subset R$을 $e$를 지나는 기약 성분이라 하자. 그러면 Varieties, Lemma
+\ref{varieties-lemma-bijection-irreducible-components}와
+\ref{varieties-lemma-separably-closed-irreducible}에 의해
+$X \times_{s, U, t} Y$도 기약이다. 따라서
+$c(X \times_{s, U, t} Y) \subset R$은 기약 부분집합이다. 이 부분집합이
+$X$와 $Y$를 모두 포함함을 보이자($R$의 부분집합으로서). $T$를 체의
+스펙트럼이라 하자. $x : T \to X$가 $X$의 $T$-값 점이면
+$c(x, e \circ s \circ x) = x$이고, $e \in Y$이므로
+$e \circ s \circ x$는 $Y$를 경유한다. $Y$의 점에 대해서도 마찬가지이다.
+이는 명백히 $X = Y$를 함의한다. 즉 $e$를 지나는 $R$의 기약 성분은 유일하다.
+
+\medskip\noindent
+이제 일반적인 경우에 (2)와 (3)을 증명하자. $k \subset k'$를 분리 대수적
+폐포라 하고, $(U', R', s', t', c')$를 $\Spec(k') \to \Spec(k)$를 통한
+$(U, R, s, t, c)$의 제한이라 하자. 앞 문단에 의해 $e'$를 지나는
+$R'$의 기약 성분 $Z'$는 정확히 하나이다. $e$의 밑변환을
+$e'' \in R \times_{s, U} U'$로 나타내자. Lemma
+\ref{lemma-restrict-groupoid-on-field}에 의해
+$R' \to R \times_{s, U} U'$은 충실히 평탄하고 $e' \mapsto e''$이므로,
+$e''$를 지나는 $R \times_{s, k} k'$의 기약 성분 $Z''$는 정확히 하나이다.
+또 $R \times_k k' \to R$이 충실히 평탄하므로 $e$를 지나는 $R$의
+기약 성분 $Z$도 정확히 하나이다. 이로써 (2)가 증명되었다.
+
+\medskip\noindent
+(3)을 증명하기 위해 $Z''' \subset R \times_k k'$를
+$Z \times_k k'$의 임의의 기약 성분이라 하자. Varieties, Lemma
+\ref{varieties-lemma-orbit-irreducible-components}에 의해 어떤
+$\sigma \in \text{Gal}(k'/k)$에 대해 $Z''' = \sigma(Z'')$이다.
+$\sigma(e'') = e''$이므로 $e'' \in Z'''$이고, 따라서 $Z''' = Z''$이다.
+이는 $Z$가 사상 $s$를 통해 $\Spec(k)$ 위에서 기하적으로 기약이라는 뜻이다.
+같은 논법으로 $Z$는 사상 $t$를 통해서도 $\Spec(k)$ 위에서
+기하적으로 기약이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-groupoid-on-field-locally-finite-type-dimension}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U = \Spec(k)$이고 $k$가 체라고 가정하자. $s, t$가 국소 유한형이라고
+가정하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item $R$은 등차원이다.
+\item 모든 $r \in R$에 대해 $\dim(R) = \dim_r(R)$이다.
+\item 임의의 $r \in R$에 대해
+$\text{trdeg}_{s(k)}(\kappa(r)) = \text{trdeg}_{t(k)}(\kappa(r))$이다.
+\item 임의의 닫힌점 $r \in R$에 대해
+$\dim(R) = \dim(\mathcal{O}_{R, r})$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$r, r' \in R$이라 하자. Lemma
+\ref{lemma-groupoid-on-field-homogeneous}와 Morphisms, Lemma
+\ref{morphisms-lemma-dimension-fibre-after-base-change}에 의해
+$\dim_r(R) = \dim_{r'}(R)$이다. Morphisms, Lemma
+\ref{morphisms-lemma-dimension-fibre-at-a-point}에 의해
+$$
+\dim_r(R) =
+\dim(\mathcal{O}_{R, r}) + \text{trdeg}_{s(k)}(\kappa(r)) =
+\dim(\mathcal{O}_{R, r}) + \text{trdeg}_{t(k)}(\kappa(r)).
+$$
+한편 $R$(또는 $R$의 임의의 열린 부분집합)의 차원은 $R$의 국소환들의
+차원의 상한이다. Properties, Lemma
+\ref{properties-lemma-codimension-local-ring}를 참조하라. 이는 닫힌점 $r$에서
+분명 최댓값을 가지며, 이 경우 힐베르트 영점정리에 의해
+$\text{trdeg}_k(\kappa(r)) = 0$이다(Morphisms, Section
+\ref{morphisms-section-points-finite-type} 참조). 따라서 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-groupoid-on-field-dimension-equal-stabilizer}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U = \Spec(k)$이고 $k$가 체라고 가정하자. $s, t$가 국소 유한형이라고
+가정하자. 그러면 $R$의 안정자 군 스킴을 $G$라 할 때
+$\dim(R) = \dim(G)$이다.
+\end{lemma}
+
+\begin{proof}
+$Z \subset R$을 $e$를 지나는 기약 성분으로 보고(Lemma
+\ref{lemma-groupoid-on-field-geometrically-irreducible} 참조), $R$의 정수적
+닫힌 부분스킴으로 생각하자. $\Gamma(Z, \mathcal{O}_Z)$ 안에서
+$s(k)$, resp.\ $t(k)$의 정수적 폐포를 $k'_s$, resp.\ $k'_t$라 하자.
+Varieties, Lemma \ref{varieties-lemma-integral-closure-ground-field}에서 보았듯이
+$k'_s$와 $k'_t$는 체이다. Varieties, Proposition
+\ref{varieties-proposition-unique-base-field}에 의해
+$\Gamma(Z, \mathcal{O}_Z)$의 부분환으로서 $k'_s = k'_t$이다.
+$e$가 $Z$를 경유하므로 다음 가환 도식을 얻는다.
+$$
+\xymatrix{
+k \ar[rd]_t \ar[rrd]^1 \\
+& \Gamma(Z, \mathcal{O}_Z) \ar[r]^e & k \\
+k \ar[ru]^s \ar[rru]_1
+}
+$$
+이는 한편으로 $k'_s = s(k)$, $k'_t = t(k)$이고 따라서
+$s(k) = t(k)$임을 보인다. 이를 위 도식과 결합하면 $s = t$임을 얻는다!
+다시 말해 $Z$는 $G = R \times_{(t, s), U \times_S U, \Delta} U$의
+닫힌 부분스킴이다. $G$와 $R$은 모두 등차원이므로 결론이 따른다. Lemma
+\ref{lemma-groupoid-on-field-locally-finite-type-dimension}과 Groupoids, Lemma
+\ref{groupoids-lemma-group-scheme-finite-type-field}를 참조하라.
+\end{proof}
+
+\begin{remark}
+\label{remark-warn-dimension-groupoid-on-field}
+주의:
+Lemma \ref{lemma-groupoid-on-field-dimension-equal-stabilizer}는
+$s$와 $t$가 국소 유한형이라는 조건이 없으면 거짓이다. 간단한 예로 작용
+$$
+\mathbf{G}_{m, \mathbf{Q}} \times_{\mathbf{Q}} \mathbf{A}^1_{\mathbf{Q}}
+\to \mathbf{A}^1_{\mathbf{Q}}
+$$
+에서 시작하여 그에 대응하는 준군 스킴을 $\mathbf{A}^1_{\mathbf{Q}}$의
+일반점으로 제한하자. 다시 말해 사상
+$\Spec(\mathbf{Q}(x)) \to
+\Spec(\mathbf{Q}[x]) = \mathbf{A}^1_{\mathbf{Q}}$를 통해 제한한다.
+그러면 $U = \Spec(\mathbf{Q}(x))$이고
+$$
+R = \Spec\left(
+\mathbf{Q}(x)[y]\left[
+\frac{1}{P(xy)}, P \in \mathbf{Q}[T], P \not = 0
+\right]
+\right)
+$$
+인 준군 스킴 $(U, R, s, t, c)$를 얻는다. 이 경우
+$\dim(R) = 1$이고 $\dim(G) = 0$이다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-groupoid-characteristic-zero-smooth}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $U = \Spec(k)$이고 $k$는 체이다.
+\item $s, t$는 국소 유한형이다.
+\item $k$의 표수는 영이다.
+\end{enumerate}
+그러면 $s, t : R \to U$는 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-sheaf-differentials}에 의해 $R \to U$의 미분층은
+자유이다. 따라서 Varieties, Lemma
+\ref{varieties-lemma-char-zero-differentials-free-smooth}에서 매끄러움이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-reduced-group-scheme-perfect-field-characteristic-p-smooth}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $U = \Spec(k)$이고 $k$는 체이다.
+\item $s, t$는 국소 유한형이다.
+\item $R$은 축약이다.
+\item $k$는 완전체이다.
+\end{enumerate}
+그러면 $s, t : R \to U$는 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-sheaf-differentials}에 의해 미분층 $\Omega_{R/U}$는 자유이다.
+따라서 Varieties, Lemma
+\ref{varieties-lemma-char-p-differentials-free-smooth}에서 결론이 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{체 위 준군의 사상}
+\label{section-morphisms-groupoids-on-fields}
+
+\noindent
+이 절에서는 체 위 준군 사이의 사상을 연구한다. 이는 조금 더 일반적이지만,
+체 위 군 스킴의 사상을 연구하는 것과 매우 유사하다.
+
+\begin{situation}
+\label{situation-morphism-groupoids-on-field}
+$S$를 스킴이라 하자. $k$를 체라 하고 $U = \Spec(k)$를 $S$ 위의
+스킴이라 하자. 첫 번째 성분이 같은 $S$ 위의 준군 스킴
+$(U, R_1, s_1, t_1, c_1)$, $(U, R_2, s_2, t_2, c_2)$를 잡자.
+$(\text{id}_U, a)$가 $S$ 위 준군 스킴의 사상을 정의하도록 하는 사상
+$a : R_1 \to R_2$를 잡자. Groupoids, Definition
+\ref{groupoids-definition-groupoid}를 참조하라. 특히 다음 도식들이 가환한다.
+$$
+\vcenter{
+\xymatrix{
+R_1 \ar[rrd]^{t_1} \ar[rdd]_{s_1} \ar[rd]_a \\
+& R_2 \ar[d]^{t_2} \ar[r]_{s_2} & U \\
+& U
+}
+}
+\quad\quad
+\vcenter{
+\xymatrix{
+R_1 \times_{s_1, U, t_1} R_1 \ar[r]_-{c_1} \ar[d]_{a \times a} &
+R_1 \ar[d]^a \\
+R_2 \times_{s_2, U, t_2} R_2 \ar[r]^-{c_2} &
+R_2
+}
+}
+$$
+\end{situation}
+
+\noindent
+다음 보조정리는 Groupoids, Lemma
+\ref{groupoids-lemma-open-subgroup-closed-over-field}의 일반화이다.
+
+\begin{lemma}
+\label{lemma-open-image-is-closed}
+표기와 가정은 Situation \ref{situation-morphism-groupoids-on-field}와 같다.
+$a(R_1)$이 $R_2$에서 열린집합이면 $a(R_1)$은 $R_2$에서 닫힌집합이다.
+\end{lemma}
+
+\begin{proof}
+$r_2 \in R_2$를 $a(R_1)$의 폐포에 속하는 점이라 하자.
+$r_2 \in a(R_1)$임을 보이고자 한다. Lemma
+\ref{lemma-groupoid-on-field-explain-points}에서와 같이
+$(U, R_2, s_2, t_2, c_2)$ 및 $r_2$에 맞춘 $k \subset k'$와
+$r_2' \in R'_2$를 택하자. $R_i'$을 사상
+$U' = \Spec(k') \to U = \Spec(k)$를 통한 $R_i$의 제한이라 하고,
+$a' : R'_1 \to R_2'$을 $a$의 밑변환이라 하자. 도식
+$$
+\xymatrix{
+R'_1 \ar[r]_{a'} \ar[d]_{p_1} & R'_2 \ar[d]^{p_2} \\
+R_1 \ar[r]^a & R_2
+}
+$$
+은 올곱 정사각형이다. 따라서 $a'$의 상은 사상
+$p_2 : R'_2 \to R_2$ 아래에서 $a$의 상의 역상이다. Lemma
+\ref{lemma-restrict-groupoid-on-field}에 의해 $p_2$는 전사인 열린 사상이다.
+그러므로 Topology, Lemma
+\ref{topology-lemma-open-morphism-quotient-topology}에 의해
+$r_2'$은 $a'(R'_1)$의 폐포에 속한다. 즉 $s_2$와 $t_2$가 유도하는 사상
+$k \to \kappa(r_2)$이 동형이라는 성질을 $r_2 \in R_2$가 가진다고
+가정해도 된다.
+
+\medskip\noindent
+이 경우 Lemma \ref{lemma-groupoid-on-field-move-point}를 사용할 수 있다.
+이 보조정리에 의해 $c(r_2, a(R_1))$은 $r_2$의 열린 근방이다.
+$r_2$가 $a(R_1)$의 폐포에 속한다고 가정했으므로
+$a(R_1) \cap c(r_2, a(R_1)) \not = \emptyset$이다. $R_2$와 $R_1$의
+역원을 사용하면 이는 $c_2(a(R_1), a(R_1))$이 $r_2$를 포함한다는 뜻이다.
+또 $c_2(a(R_1), a(R_1)) \subset a(c_1(R_1, R_1)) = a(R_1)$이므로
+원하는 대로 $r_2 \in a(R_1)$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-map-groupoids-on-field-image}
+표기와 가정은 Situation \ref{situation-morphism-groupoids-on-field}와 같다.
+$Z \subset R_2$를, 그 바탕 위상공간이 $a : R_1 \to R_2$의 상의 폐포인
+축약 닫힌 부분스킴이라 하자(Schemes, Definition
+\ref{schemes-definition-reduced-induced-scheme} 참조). 그러면 집합론적으로
+$c_2(Z \times_{s_2, U, t_2} Z) \subset Z$이다.
+\end{lemma}
+
+\begin{proof}
+다음 가환 도식을 생각하자.
+$$
+\xymatrix{
+R_1 \times_{s_1, U, t_1} R_1 \ar[r] \ar[d] & R_1 \ar[d] \\
+R_2 \times_{s_2, U, t_2} R_2 \ar[r] & R_2
+}
+$$
+Varieties, Lemma \ref{varieties-lemma-closure-image-product-map}에 의해 왼쪽
+세로화살표의 상의 폐포는 집합론적으로 $Z \times_{s_2, U, t_2} Z$이다.
+따라서 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-map-groupoids-on-perfect-field-image}
+표기와 가정은 Situation \ref{situation-morphism-groupoids-on-field}와 같다.
+$k$가 완전체라고 가정하자. $Z \subset R_2$를, 그 바탕 위상공간이
+$a : R_1 \to R_2$의 상의 폐포인 축약 닫힌 부분스킴이라 하자
+(Schemes, Definition \ref{schemes-definition-reduced-induced-scheme} 참조).
+그러면
+$$
+(U, Z, s_2|_Z, t_2|_Z, c_2|_Z)
+$$
+는 $S$ 위의 준군 스킴이다.
+\end{lemma}
+
+\begin{proof}
+먼저 명제가 의미를 가짐을 설명하자. $U$는 완전체 $k$의 스펙트럼이므로
+$Z$는 어느 사영을 통해서든 $k$ 위에서 기하적으로 축약이다. Varieties, Lemma
+\ref{varieties-lemma-perfect-reduced}를 참조하라. 따라서 스킴
+$Z \times_{s_2, U, t_2} Z \subset Z$는 축약이다. Varieties, Lemma
+\ref{varieties-lemma-geometrically-reduced-any-base-change}를 참조하라.
+따라서 Lemma \ref{lemma-map-groupoids-on-field-image}에 의해 $c$는 사상
+$Z \times_{s_2, U, t_2} Z \to Z$를 유도한다. 끝으로 $e_2$가 $Z$를
+경유하고 사상 $i_2 : R_2 \to R_2$가 $Z$를 보존함은 명백하다. 칠중항
+$(U, R_2, s_2, t_2, c_2, e_2, i_2)$의 사상들이 준군 공리를 만족하므로,
+$Z$로 제한한 뒤에도 이 공리들을 만족한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-locally-closed-image-is-closed}
+표기와 가정은 Situation \ref{situation-morphism-groupoids-on-field}와 같다.
+상 $a(R_1)$이 $R_2$의 국소 닫힌 부분집합이면 닫힌 부분집합이다.
+\end{lemma}
+
+\begin{proof}
+$k \subset k'$를 체 $k$의 완전폐포라 하자. $R_i'$을 사상
+$U' = \Spec(k') \to \Spec(k)$를 통한 $R_i$의 제한이라 하자.
+사상 $R_i' \to R_i$은 보편 위상동형 $U' \to U$의 밑변환들의 합성이므로
+보편 위상동형이다(Lemma \ref{lemma-restrict-groupoid-on-field}의 명제에 있는
+도식 참조). 따라서 $a'(R_1')$이 $R_2'$에서 닫혔음을 보이면 충분하다.
+즉 $k$가 완전체라고 가정해도 된다.
+
+\medskip\noindent
+$k$가 완전체이면 Lemma \ref{lemma-map-groupoids-on-perfect-field-image}에 의해
+상의 폐포는 준군 스킴 $Z \subset R_2$이다. 같은 보조정리를
+$\text{id}_{R_1} : R_1 \to R_1$에 적용하면 $(R_2)_{red}$가 준군 스킴임을
+알 수 있다. 따라서 사상 $a|_{(R_2)_{red}} : (R_2)_{red} \to Z$에 Lemma
+\ref{lemma-open-image-is-closed}를 적용하면 $Z$가 $a$의 상과 같다는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quasi-compact-map-groupoids-on-field-image}
+표기와 가정은 Situation \ref{situation-morphism-groupoids-on-field}와 같다.
+$a : R_1 \to R_2$가 준콤팩트 사상이라고 가정하자. $Z \subset R_2$를
+$a : R_1 \to R_2$의 스킴론적 상이라 하자(Morphisms, Definition
+\ref{morphisms-definition-scheme-theoretic-image} 참조). 그러면
+$$
+(U, Z, s_2|_Z, t_2|_Z, c_2|_Z)
+$$
+는 $S$ 위의 준군 스킴이다.
+\end{lemma}
+
+\begin{proof}
+주된 어려움은 $c_2|_{Z \times_{s_2, U, t_2} Z}$가 $Z$ 안으로 감을
+보이는 것이다. 다음 가환 도식을 생각하자.
+$$
+\xymatrix{
+R_1 \times_{s_1, U, t_1} R_1 \ar[r] \ar[d]^{a \times a} & R_1 \ar[d] \\
+R_2 \times_{s_2, U, t_2} R_2 \ar[r] & R_2
+}
+$$
+Varieties, Lemma \ref{varieties-lemma-scheme-theoretic-image-product-map}에 의해
+$a \times a$의 스킴론적 상은 $Z \times_{s_2, U, t_2} Z$이다.
+도식의 가환성에 의해 $Z \times_{s_2, U, t_2} Z$는 아래 가로화살표 아래에서
+$Z$ 안으로 간다. Lemma \ref{lemma-map-groupoids-on-perfect-field-image}의
+증명에서와 같이 $i_2(Z) \subset Z$이고 $e_2$는 $Z$를 경유한다.
+따라서 그 보조정리의 증명에서와 같이 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-groupoid-on-field-image}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U$가 체의 스펙트럼이라고 가정하자. $Z \subset U \times_S U$를,
+그 바탕 위상공간이 $j = (t, s) : R \to U \times_S U$의 상의 폐포인
+축약 닫힌 부분스킴이라 하자(Schemes, Definition
+\ref{schemes-definition-reduced-induced-scheme} 참조). 그러면 집합론적으로
+$\text{pr}_{02}(Z \times_{\text{pr}_1, U, \text{pr}_0} Z) \subset Z$이다.
+\end{lemma}
+
+\begin{proof}
+$(U, U \times_S U, \text{pr}_1, \text{pr}_0, \text{pr}_{02})$가
+$S$ 위의 준군 스킴이므로 이는 Lemma
+\ref{lemma-map-groupoids-on-field-image}의 특수한 경우이다.
+다음과 같이 직접 증명할 수도 있다.
+
+\medskip\noindent
+$U = \Spec(k)$로 쓰자. $R$, resp.\ $Z$, resp.\ $U \times_S U$를 각각
+$s$, resp.\ $\text{pr}_1|_Z$, resp.\ $\text{pr}_1$을 통해 $k$ 위의
+스킴으로 본 것을 $R_s$, resp.\ $Z_s$, resp.\ $U^2_s$라 하자.
+마찬가지로 $R$, resp.\ $Z$, resp.\ $U \times_S U$를 각각
+$t$, resp.\ $\text{pr}_0|_Z$, resp.\ $\text{pr}_0$을 통해 $k$ 위의
+스킴으로 본 것을 ${}_tR$, resp.\ ${}_tZ$, resp.\ ${}_tU^2$라 하자.
+사상 $j$는 $k$ 위 스킴의 사상
+$j_s : R_s \to U^2_s$와 ${}_tj : {}_tR \to {}_tU^2$를 유도한다.
+다음 가환 도식을 생각하자.
+$$
+\xymatrix{
+R_s \times_k {}_tR \ar[r]^c \ar[d]_{j_s \times {}_tj} &  R \ar[d]^j \\
+U^2_s \times_k {}_tU^2 \ar[r] & U \times_S U
+}
+$$
+Varieties, Lemma \ref{varieties-lemma-closure-image-product-map}에 의해
+$j_s \times {}_tj$의 상의 폐포는 $Z_s \times_k {}_tZ$이다.
+도식의 가환성에 의해 $Z_s \times_k {}_tZ$는 아래 가로화살표 아래에서
+$Z$ 안으로 간다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-groupoid-on-perfect-field-image}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U$가 완전체의 스펙트럼이라고 가정하자. $Z \subset U \times_S U$를,
+그 바탕 위상공간이 $j = (t, s) : R \to U \times_S U$의 상의 폐포인
+축약 닫힌 부분스킴이라 하자(Schemes, Definition
+\ref{schemes-definition-reduced-induced-scheme} 참조). 그러면
+$$
+(U, Z, \text{pr}_0|_Z, \text{pr}_1|_Z,
+\text{pr}_{02}|_{Z \times_{\text{pr}_1, U, \text{pr}_0} Z})
+$$
+는 $S$ 위의 준군 스킴이다.
+\end{lemma}
+
+\begin{proof}
+$(U, U \times_S U, \text{pr}_1, \text{pr}_0, \text{pr}_{02})$가
+$S$ 위의 준군 스킴이므로 이는 Lemma
+\ref{lemma-map-groupoids-on-perfect-field-image}의 특수한 경우이다.
+다음과 같이 직접 증명할 수도 있다.
+
+\medskip\noindent
+먼저 명제가 의미를 가짐을 설명하자. $U$가 완전체 $k$의 스펙트럼이므로
+$Z$는 어느 사영을 통해서든 $k$ 위에서 기하적으로 축약이다. Varieties, Lemma
+\ref{varieties-lemma-perfect-reduced}를 참조하라. 따라서 스킴
+$Z \times_{\text{pr}_1, U, \text{pr}_0} Z \subset Z$는 축약이다.
+Varieties, Lemma \ref{varieties-lemma-geometrically-reduced-any-base-change}를
+참조하라. 따라서 Lemma \ref{lemma-groupoid-on-field-image}에 의해
+$\text{pr}_{02}$는 사상
+$Z \times_{\text{pr}_1, U, \text{pr}_0} Z \to Z$를 유도한다.
+끝으로 $\Delta_{U/S}$가 $Z$를 경유하고 사상
+$\sigma : U \times_S U \to U \times_S U$, $(x, y) \mapsto (y, x)$가
+$Z$를 보존함은 명백하다.
+$(U, U \times_S U, \text{pr}_0, \text{pr}_1, \text{pr}_{02},
+\Delta_{U/S}, \sigma)$가 준군 공리를 만족하므로 $Z$로 제한한 뒤에도
+이 공리들을 만족한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quasi-compact-groupoid-on-field-image}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$U$가 체의 스펙트럼이고 $R$이 준콤팩트라고 가정하자(동치로
+$s, t$가 준콤팩트이다). $Z \subset U \times_S U$를
+$j = (t, s) : R \to U \times_S U$의 스킴론적 상이라 하자
+(Morphisms, Definition \ref{morphisms-definition-scheme-theoretic-image} 참조).
+그러면
+$$
+(U, Z, \text{pr}_0|_Z, \text{pr}_1|_Z,
+\text{pr}_{02}|_{Z \times_{\text{pr}_1, U, \text{pr}_0} Z})
+$$
+는 $S$ 위의 준군 스킴이다.
+\end{lemma}
+
+\begin{proof}
+$(U, U \times_S U, \text{pr}_1, \text{pr}_0, \text{pr}_{02})$가
+$S$ 위의 준군 스킴이므로 이는 Lemma
+\ref{lemma-quasi-compact-map-groupoids-on-field-image}의 특수한 경우이다.
+다음과 같이 직접 증명할 수도 있다.
+
+\medskip\noindent
+주된 어려움은 $\text{pr}_{02}|_{Z \times_{\text{pr}_1, U, \text{pr}_0} Z}$가
+$Z$ 안으로 감을 보이는 것이다. $U = \Spec(k)$로 쓰자.
+$R$, resp.\ $Z$, resp.\ $U \times_S U$를 각각 $s$, resp.\ $\text{pr}_1|_Z$,
+resp.\ $\text{pr}_1$을 통해 $k$ 위의 스킴으로 본 것을
+$R_s$, resp.\ $Z_s$, resp.\ $U^2_s$라 하자. 마찬가지로
+$R$, resp.\ $Z$, resp.\ $U \times_S U$를 각각 $t$, resp.\ $\text{pr}_0|_Z$,
+resp.\ $\text{pr}_0$을 통해 $k$ 위의 스킴으로 본 것을
+${}_tR$, resp.\ ${}_tZ$, resp.\ ${}_tU^2$라 하자. 사상 $j$는 $k$ 위
+스킴의 사상 $j_s : R_s \to U^2_s$와 ${}_tj : {}_tR \to {}_tU^2$를 유도한다.
+다음 가환 도식을 생각하자.
+$$
+\xymatrix{
+R_s \times_k {}_tR \ar[r]^c \ar[d]_{j_s \times {}_tj} &  R \ar[d]^j \\
+U^2_s \times_k {}_tU^2 \ar[r] & U \times_S U
+}
+$$
+Varieties, Lemma \ref{varieties-lemma-scheme-theoretic-image-product-map}에 의해
+$j_s \times {}_tj$의 스킴론적 상은 $Z_s \times_k {}_tZ$이다.
+도식의 가환성에 의해 $Z_s \times_k {}_tZ$는 아래 가로화살표 아래에서
+$Z$ 안으로 간다. Lemma \ref{lemma-groupoid-on-perfect-field-image}의
+증명에서와 같이 $\sigma(Z) \subset Z$이고 $\Delta_{U/S}$는 $Z$를 경유한다.
+따라서 그 보조정리의 증명에서와 같이 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+\section{준군의 절단}
+\label{section-slicing}
+
+\noindent
+다음 보조정리는 안정자의 차원이 작을 때 Cohen--Macaulay 준군 스킴을
+절단하여 올의 차원을 낮출 수 있음을 보인다. 이는 몫 스택의 주어진 표현을
+개선하는 과정에서 핵심 단계이다.
+
+\begin{situation}
+\label{situation-slice}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$g : U' \to U$를 스킴의 사상이라 하자. $u \in U$를 점이라 하고,
+$g(u') = u$를 만족하는 $u' \in U'$를 점이라 하자. 이 데이터가 주어졌을 때
+$(U', R', s', t', c')$를 사상 $g$를 통한 $(U, R, s, t, c)$의 제한이라 하자.
+$G \to U$를 $R$의 안정자 군 스킴이라 하자. 이는 $R$의 국소 닫힌
+부분스킴이다. 합성을 $h$라 하자.
+$$
+h = s \circ \text{pr}_1 : U' \times_{g, U, t} R \longrightarrow U.
+$$
+$F_u = s^{-1}(u)$를 스킴론적 올이라 하고, $G_u$를 $u$ 위에서의 $G$의
+스킴론적 올이라 하자. 마찬가지로 $R'$에 대해서는
+$F'_{u'} = (s')^{-1}(u')$라 하자. $g(u') = u$이므로
+$$
+F'_{u'} = h^{-1}(u) \times_{\Spec(\kappa(u))} \Spec(\kappa(u')).
+$$
+점 $e(u) \in R$은 $G_u$와 $F_u$의 점으로도 볼 수 있다. 또한
+$e'(u')$은 $R'$ (resp.\ $G'_{u'}$, resp.\ $F'_{u'}$)의 점으로서
+$R$ (resp.\ $G_u$, resp.\ $F_u$) 안의 $e(u)$로 간다.
+\end{situation}
+
+\begin{lemma}
+\label{lemma-slice}
+$S$를 스킴이라 하고 $(U, R, s, t, c, e, i)$를 $S$ 위의 준군 스킴이라 하자.
+$G \to U$를 안정자 군 스킴이라 하자. $s$와 $t$가 Cohen--Macaulay이고
+국소 유한 표시라고 가정하자. $u \in U$를 스킴 $U$의 유한형 점이라 하자.
+Morphisms, Definition \ref{morphisms-definition-finite-type-point}를 참조하라.
+Situation \ref{situation-slice}의 표기로
+$$
+d_1 = \dim(G_u), \quad
+d_2 = \dim_{e(u)}(F_u).
+$$
+라 두자. $d_2 > d_1$이면 다음을 만족하는 아핀 스킴 $U'$과 사상
+$g : U' \to U$가 존재한다(Situation \ref{situation-slice}의 표기 사용).
+\begin{enumerate}
+\item $g$는 몰입이다.
+\item $u \in U'$이다.
+\item $g$는 국소 유한 표시이다.
+\item 사상 $h : U' \times_{g, U, t} R \longrightarrow U$는
+$(u, e(u))$에서 Cohen--Macaulay이다.
+\item $\dim_{e'(u)}(F'_u) = d_2 - 1$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Spec(A) \subset U$를 $u$의 아핀 근방으로 택하되 $u$가 $U$의 닫힌점에
+대응하도록 하자. Morphisms, Lemma
+\ref{morphisms-lemma-identify-finite-type-points}를 참조하라.
+$\Spec(B) \subset R$을 $e(u)$의 아핀 근방으로 택하되, $j$ 아래에서 열린집합
+$\Spec(A) \times_S \Spec(A) \subset U \times_S U$ 안으로 가도록 하자.
+$\mathfrak m \subset A$를 $u$에 대응하는 극대 아이디얼,
+$\mathfrak q \subset B$를 $e(u)$에 대응하는 소아이디얼이라 하자. 그림으로는
+$$
+\vcenter{
+\xymatrix{
+B & A \ar[l]^s \\
+A \ar[u]^t
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+B_{\mathfrak q} & A_{\mathfrak m} \ar[l]^s \\
+A_{\mathfrak m} \ar[u]^t
+}
+}
+$$
+이다. $s \circ e = t \circ e = \text{id}_U$이므로 유도된 두 사상
+$s, t : \kappa(\mathfrak m) \to \kappa(\mathfrak q)$는 같고 동형이다.
+특히 $\mathfrak q$도 극대 아이디얼이다. 환 사상 $s, t : A \to B$는
+유한 표시이고 평탄하다. 가정에 의해 환
+$$
+\mathcal{O}_{F_u, e(u)} = B_{\mathfrak q}/s(\mathfrak m)B_{\mathfrak q}
+$$
+은 차원이 $d_2$인 Cohen--Macaulay 환이다. 차원의 등식은 Morphisms, Lemma
+\ref{morphisms-lemma-dimension-fibre-at-a-point}에 의해 성립한다.
+
+\medskip\noindent
+$R''$을 사상 $\Spec(\kappa(u)) \to U$를 통한
+$u = \Spec(\kappa(u))$로의 $R$의 제한이라 하자. $u \to U$가 국소 유한형이므로
+$(\Spec(\kappa(u)), R'', s'', t'', c'')$는 $s'', t''$가 국소 유한형인
+준군 스킴이다. Lemma \ref{lemma-restrict-preserves-type}를 참조하라.
+Lemma \ref{lemma-groupoid-on-field-dimension-equal-stabilizer}에 의해
+$\dim(G'') = \dim(R'')$이다. 또한 Lemma
+\ref{lemma-groupoid-on-field-locally-finite-type-dimension}에 의해
+$\dim(R'') = \dim_{e''}(R'') = \dim(\mathcal{O}_{R'', e''})$이다.
+Groupoids, Lemma \ref{groupoids-lemma-restrict-stabilizer}에 의해
+$G'' = G_u$이다. 따라서 $\dim(\mathcal{O}_{R'', e''}) = d_1$이다.
+
+\medskip\noindent
+스킴으로서 $R''$은
+$$
+R'' =
+R \times_{(U \times_S U)}
+\Big(
+\Spec(\kappa(\mathfrak m)) \times_S \Spec(\kappa(\mathfrak m))
+\Big)
+$$
+이다. 따라서 $e''$의 한 아핀 열린 근방은 환
+$$
+B \otimes_{(A \otimes A)} (\kappa(\mathfrak m) \otimes \kappa(\mathfrak m))
+=
+B/s(\mathfrak m)B + t(\mathfrak m)B
+$$
+의 스펙트럼이다. 그러므로
+$$
+\mathcal{O}_{R'', e''} =
+B_{\mathfrak q}/s(\mathfrak m)B_{\mathfrak q} + t(\mathfrak m)B_{\mathfrak q}
+$$
+이고, 이제 이 환의 차원이 $d_1$임을 안다.
+
+\medskip\noindent
+이로부터 다음을 만족하는 원소 $f \in \mathfrak m$을 찾을 수 있다고 주장한다.
+$$
+\dim(B_{\mathfrak q}/(s(\mathfrak m)B_{\mathfrak q} + fB_{\mathfrak q}) < d_2
+$$
+실제로 $\mathfrak n_j \supset s(\mathfrak m)B_{\mathfrak q}$,
+$j = 1, \ldots, m$이 국소환
+$B_{\mathfrak q}/s(\mathfrak m)B_{\mathfrak q}$의 극소 소아이디얼에 대응한다고
+하자. 이 환은 체 위에서 본질적으로 유한형이므로 뇌터 환이고, 따라서 이러한
+소아이디얼은 유한 개이다. Cohen--Macaulay 환이 뇌터 환이기 때문이라고 해도
+된다. Cohen--Macaulay 조건과 예컨대 Algebra, Lemma
+\ref{algebra-lemma-CM-dim-formula}에 의해
+$\dim(B_{\mathfrak q}/\mathfrak n_j) = d_2$이다. 한편
+$\dim(B_{\mathfrak q}/(\mathfrak n_j + t(\mathfrak m)B_{\mathfrak q}))
+\leq d_1$임에 유의하자. 이는 차원이 $d_1$인 환
+$\mathcal{O}_{R'', e''} =
+B_{\mathfrak q}/s(\mathfrak m)B_{\mathfrak q} + t(\mathfrak m)B_{\mathfrak q}$의
+몫이기 때문이다. $d_1 < d_2$이므로
+$\mathfrak m \not \subset t^{-1}(\mathfrak n_i)$이다. 소아이디얼 회피와
+Algebra, Lemma \ref{algebra-lemma-silly}에 의해, 모든
+$j = 1, \ldots, m$에 대해 $t(f) \not \in \mathfrak n_j$인
+$f \in \mathfrak m$을 찾을 수 있다. 이 $f$에 대해 위의 표시된 부등식이
+성립한다. Algebra, Lemma \ref{algebra-lemma-one-equation}을 참조하라.
+
+\medskip\noindent
+$A' = A/fA$ 및 $U' = \Spec(A')$로 두자. 그러면 $U' \to U$가
+국소 유한 표시인 몰입이고 $u \in U'$임은 명백하다. 따라서 보조정리의
+(1), (2), (3)이 성립한다. 사상
+$$
+U' \times_{g, U, t} R \longrightarrow U
+$$
+은 $\Spec(A)$를 경유하고 다음 환 사상에 대응한다.
+$$
+\xymatrix{
+B/t(f)B \ar@{=}[r] & A/(f) \otimes_{A, t} B & A \ar[l]_-s
+}
+$$
+이제 $B_{\mathfrak q}/s(\mathfrak m)B_{\mathfrak q}$는 양의 차원을 가진
+Cohen--Macaulay 환이고 $f$는 어느 극소 소아이디얼에도 속하지 않으므로,
+$t(f)$는 이 환의 영인자가 아니다. 예컨대 Algebra, Lemma
+\ref{algebra-lemma-reformulate-CM}를 참조하라. 따라서 Algebra, Lemma
+\ref{algebra-lemma-grothendieck-general}에 의해
+$s : A_{\mathfrak m} \to B_{\mathfrak q}/t(f)B_{\mathfrak q}$는 평탄하고,
+그 올환 $B_{\mathfrak q}/(s(\mathfrak m)B_{\mathfrak q} + t(f)B_{\mathfrak q})$은
+다시 Algebra, Lemma \ref{algebra-lemma-reformulate-CM}에 의해
+Cohen--Macaulay이다. 이는 보조정리의 (4)를 함의한다. (5)를 보려면
+Diagram (\ref{equation-restriction})에 의해 올 $F'_u$가 $u$ 위에서의
+$h$의 올과 같음에 유의하자. 따라서 Morphisms, Lemma
+\ref{morphisms-lemma-dimension-fibre-at-a-point}에 의해
+$\dim_{e'(u)}(F'_u) =
+\dim(B_{\mathfrak q}/(s(\mathfrak m)B_{\mathfrak q} + t(f)B_{\mathfrak q}))$이다.
+이 환의 차원은 다시 Algebra, Lemma
+\ref{algebra-lemma-reformulate-CM}에 의해 $d_2 - 1$이다.
+이로써 마지막 주장까지 증명되었다.
+\end{proof}
+
+\noindent
+이제 절단 방법을 알았으므로 앞의 결과들과 결합하여 다음의 ``최적'' 결과를
+얻을 수 있다. $G_u$가 $F_u$의 국소 닫힌 부분스킴이므로 항상 부등식
+$\dim(G_u) = \dim_{e(u)}(G_u) \leq \dim_{e(u)}(F_u)$가 성립한다는 의미에서
+최적이다. 따라서 다음 보조정리보다 더 절단할 수는 없다.
+
+\begin{lemma}
+\label{lemma-max-slice}
+$S$를 스킴이라 하고 $(U, R, s, t, c, e, i)$를 $S$ 위의 준군 스킴이라 하자.
+$G \to U$를 안정자 군 스킴이라 하자. $s$와 $t$가 Cohen--Macaulay이고
+국소 유한 표시라고 가정하자. $u \in U$를 스킴 $U$의 유한형 점이라 하자.
+Morphisms, Definition \ref{morphisms-definition-finite-type-point}를 참조하라.
+Situation \ref{situation-slice}의 표기로, 다음을 만족하는 아핀 스킴 $U'$과
+사상 $g : U' \to U$가 존재한다.
+\begin{enumerate}
+\item $g$는 몰입이다.
+\item $u \in U'$이다.
+\item $g$는 국소 유한 표시이다.
+\item 사상 $h : U' \times_{g, U, t} R \longrightarrow U$는
+Cohen--Macaulay이고 국소 유한 표시이다.
+\item 사상 $s', t' : R' \to U'$는 Cohen--Macaulay이고 국소 유한 표시이다.
+\item $\dim_{e(u)}(F'_u) = \dim(G'_u)$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$s$가 국소 유한 표시이므로 스킴 $F_u$는 $\kappa(u)$ 위에서 국소 유한형이다.
+따라서 $\dim_{e(u)}(F_u) < \infty$이고 $\dim_{e(u)}(F_u)$에 관해 귀납할 수 있다.
+
+\medskip\noindent
+$\dim_{e(u)}(F_u) = \dim(G_u)$이면 증명할 것이 없다.
+$\dim_{e(u)}(F_u) > \dim(G_u)$라고 가정하자. 그러면 Lemma
+\ref{lemma-slice}를 적용하여 성질 (1), (2), (3)을 만족하는 사상
+$g : U' \to U$를 얻는다. (6) 대신
+$\dim_{e(u)}(F'_u) < \dim_{e(u)}(F_u)$가 성립하고, (4), (5) 대신 합성
+$$
+h = s \circ \text{pr}_1 : U' \times_{g, U, t} R \longrightarrow U
+$$
+이 점 $(u, e(u))$에서 Cohen--Macaulay이다. Remark
+\ref{remark-local-source-apply}를 적용하면
+$U'' \times_{g, U, t} R \subset U' \times_{g, U, t} R$이 $h$가
+Cohen--Macaulay인 가장 큰 열린 부분스킴이 되도록 하는 열린 부분스킴
+$U'' \subset U'$를 얻는다. $(u, e(u)) \in U'' \times_{g, U, t} R$이므로
+$u \in U''$이다. 따라서 $U'$을 $U''$로 바꾸어 $h$가 모든 곳에서
+Cohen--Macaulay라고 가정할 수 있다. Lemma \ref{lemma-restrict-property}에 의해
+$s', t'$는 국소 유한 표시이고 Cohen--Macaulay이다(Morphisms, Lemma
+\ref{morphisms-lemma-base-change-finite-presentation}과 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-base-change-CM} 사용).
+
+\medskip\noindent
+구성에 의해 $\dim_{e'(u)}(F'_u) < \dim_{e(u)}(F_u)$이므로
+$(U', R', s', t', c')$ 및 점 $u \in U'$에 귀납 가정을 적용할 수 있다.
+$u$는 $U'$의 유한형 점이기도 하다. 예컨대 Morphisms, Lemma
+\ref{morphisms-lemma-identify-finite-type-points}의 유한형 점의 특성화를 사용하면
+이를 알 수 있다. $g' : U'' \to U'$와 $(U'', R'', s'', t'', c'')$를
+$(U', R', s', t', c')$ 및 점 $u \in U'$에서 시작한 대응 문제의 해라 하자.
+합성
+$$
+g'' = g \circ g' : U'' \longrightarrow U
+$$
+이 원래 문제의 해임을 주장한다. 성질 (1), (2), (3), (5), (6)은 즉시 따른다.
+(4)를 보려면 Lemma \ref{lemma-double-restrict-property}를 적용하여 사상
+$$
+h'' = s \circ \text{pr}_1 : U'' \times_{g'', U, t} R \longrightarrow U
+$$
+이 국소 유한 표시이고 Cohen--Macaulay임에 유의하자. Cohen--Macaulay 사상이
+목표에서 fppf 국소적임을 보려면 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-CM-local-source-and-target}를 사용한다.
+\end{proof}
+
+\noindent
+안정자 군 스킴의 올들이 차원 영인 경우에는 다음 절단 보조정리를 얻는다.
+
+\begin{lemma}
+\label{lemma-max-slice-quasi-finite}
+$S$를 스킴이라 하고 $(U, R, s, t, c, e, i)$를 $S$ 위의 준군 스킴이라 하자.
+$G \to U$를 안정자 군 스킴이라 하자. $s$와 $t$가 Cohen--Macaulay이고
+국소 유한 표시라고 가정하자. $u \in U$를 스킴 $U$의 유한형 점이라 하자.
+Morphisms, Definition \ref{morphisms-definition-finite-type-point}를 참조하라.
+$G \to U$가 국소 준유한이라고 가정하자. Situation
+\ref{situation-slice}의 표기로, 다음을 만족하는 아핀 스킴 $U'$과 사상
+$g : U' \to U$가 존재한다.
+\begin{enumerate}
+\item $g$는 몰입이다.
+\item $u \in U'$이다.
+\item $g$는 국소 유한 표시이다.
+\item 사상 $h : U' \times_{g, U, t} R \longrightarrow U$는 평탄하고,
+국소 유한 표시이며, 국소 준유한이다.
+\item 사상 $s', t' : R' \to U'$는 평탄하고, 국소 유한 표시이며,
+국소 준유한이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-max-slice}에서와 같은 $g : U' \to U$를 택하자.
+$h^{-1}(u) = F'_u$이므로 $h$는 $(u, e(u))$에서 상대차원 $\leq 0$이다.
+따라서 Remark \ref{remark-local-source-apply}에 의해 $u \in U''$이고
+$U'' \times_{g, U, t} R$이 $h$의 상대차원이 $\leq 0$인
+$U' \times_{g, U, t} R$의 극대 열린 부분스킴이 되도록 하는 열린 부분스킴
+$U'' \subset U'$를 얻는다. $U'$을 $U''$로 바꾸면 $h$의 상대차원은
+$\leq 0$이다. 따라서 Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-rel-dimension-0}에 의해 $h$는
+국소 준유한이다. 여전히 국소 유한 표시이고 Cohen--Macaulay이므로 평탄하고,
+국소 유한 표시이며, 국소 준유한이다. 즉 (4)가 성립한다. 사상 $s'$은 $h$의
+밑변환이므로 평탄하고, 국소 유한 표시이며, 국소 준유한이다. Lemma
+\ref{lemma-restrict-property}를 참조하라.
+\end{proof}
+
+
+
+
+
+
+
+\section{준군의 \'Etale 국소화}
+\label{section-etale-localize}
+
+\noindent
+이 절에서는 More on Morphisms, Section
+\ref{more-morphisms-section-etale-localization}의 \'etale 국소화 기법을
+준군 스킴에 적용하기 시작한다. 이 종류의 더 고급 내용은 More on Groupoids
+in Spaces, Section \ref{spaces-more-groupoids-section-etale-localize}에서 찾을 수 있다.
+Lemma \ref{lemma-quasi-finite-over-base-j-proper}는 스킴 위에서 분리이고
+준유한인 대수적 공간에 관한 결과, 즉 Morphisms of Spaces, Proposition
+\ref{spaces-morphisms-proposition-locally-quasi-finite-separated-over-scheme}과
+그 따름정리인 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite-separated-representable}를
+증명하는 데 사용된다.
+
+\begin{lemma}
+\label{lemma-quasi-finite-over-base}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$p \in S$를 점이라 하고 $u \in U$를 $p$ 위에 놓인 점이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $U \to S$는 국소 유한형이다.
+\item $U \to S$는 $u$에서 준유한이다.
+\item $U \to S$는 분리이다.
+\item $R \to S$는 분리이다.
+\item $s$, $t$는 평탄하고 국소 유한 표시이다.
+\item $s^{-1}(\{u\})$는 유한하다.
+\end{enumerate}
+그러면 $\kappa(p) = \kappa(p')$인 \'etale 근방
+$(S', p') \to (S, p)$와 다음 밑변환 도식이 존재한다.
+$$
+\xymatrix{
+R' \amalg W'
+\ar@{=}[r] &
+S' \times_S R
+\ar[r] \ar@<2ex>[d]^{s'} \ar@<-2ex>[d]_{t'} &
+R \ar@<1ex>[d]^s \ar@<-1ex>[d]_t \\
+U' \amalg W
+\ar@{=}[r] &
+S' \times_S U
+\ar[r] \ar[d] &
+U \ar[d] \\
+ &
+S' \ar[r] &
+S
+}
+$$
+여기서 등호들은 다음을 만족하는 열린 닫힌 부분스킴으로의 분해이다.
+\begin{enumerate}
+\item[(a)] $U$ 안의 $u$로 가는 $U'$의 점 $u'$이 존재한다.
+\item[(b)] 집합론적으로 올 $(U')_{p'}$는
+$t'\big((s')^{-1}(\{u'\})\big)$와 같다.
+\item[(c)] 집합론적으로 올 $(R')_{p'}$는
+$(s')^{-1}\big((U')_{p'}\big)$와 같다.
+\item[(d)] 스킴 $U'$과 $R'$은 $S'$ 위에서 유한이다.
+\item[(e)] $s'(R') \subset U'$ 및 $t'(R') \subset U'$이다.
+\item[(f)] $c'$가 $c$의 밑변환일 때
+$c'(R' \times_{s', U', t'} R') \subset R'$이다.
+\item[(g)] 사상 $s', t', c'$는 계
+$(U', R', s'|_{R'}, t'|_{R'}, c'|_{R' \times_{s', U', t'} R'})$를
+취함으로써 준군 구조를 정한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f : U \to S$를 $U$의 구조 사상이라 하자. 가정 (6)에 의해
+$s^{-1}(\{u\}) = \{r_1, \ldots, r_n\}$로 쓸 수 있다. 이 집합이
+유한하므로 $s$는 이 유한 개의 역상 각각에서 준유한이다. Morphisms, Lemma
+\ref{morphisms-lemma-finite-fibre}를 참조하라. 따라서
+$f \circ s : R \to S$는 각 $r_i$에서 준유한이다(Morphisms, Lemma
+\ref{morphisms-lemma-composition-quasi-finite}). 그러므로 $r_i$는 올 $R_p$에서
+고립되어 있다. Morphisms, Lemma
+\ref{morphisms-lemma-quasi-finite-at-point-characterize}를 참조하라.
+$t(\{r_1, \ldots, r_n\}) = \{u_1, \ldots, u_m\}$로 쓰자.
+$m < n$일 수도 있고 $u \in \{u_1, \ldots, u_m\}$임에 유의하자.
+$t$가 평탄하고 국소 유한 표시이므로 올의 사상 $t_p : R_p \to U_p$는
+평탄하고 국소 유한 표시이다(Morphisms, Lemmas
+\ref{morphisms-lemma-base-change-flat} 및
+\ref{morphisms-lemma-base-change-finite-presentation}). 따라서 열린 사상이다
+(Morphisms, Lemma \ref{morphisms-lemma-fppf-open}). 각 $r_i$가 $R_p$에서
+고립되어 있다는 사실로부터 각 $u_j = t(r_i)$가 $U_p$에서 고립되어 있음이
+따른다. Morphisms, Lemma
+\ref{morphisms-lemma-quasi-finite-at-point-characterize}를 다시 사용하면
+$f$는 $u_1, \ldots, u_m$에서 준유한이다.
+
+\medskip\noindent
+스킴론적 올을 $F_u = s^{-1}(u)$ 및 $F_{u_j} = s^{-1}(u_j)$라 하자.
+$F_u$는 $\kappa(u)$ 위에서 국소 유한형이고 점이 유한 개이므로
+$\kappa(u)$ 위에서 유한이다. 예컨대 훨씬 일반적인 Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-qc-source-universally-bounded}에서
+따른다. Lemma \ref{lemma-two-fibres}에 의해 $F_u$와 $F_{u_j}$는
+$\kappa(u)$와 $\kappa(u_j)$의 공통 체 확대 위에서 동형이 된다. 따라서
+$F_{u_j}$는 $\kappa(u_j)$ 위에서 유한이다. 특히 각
+$j = 1, \ldots, m$에 대해 $s^{-1}(\{u_j\})$는 유한집합이다.
+따라서 각 $u_j$에 대해서도 가정 (2), (6)이 성립한다. 위에서
+$U \to S$가 $u_j$에서 준유한임을 보았다. 그러므로 첫 문단의 논법을
+각 $u_j$에 적용하면 $R \to U$는 다음 집합의 각 점에서 준유한이다.
+$$
+\{r_1, \ldots, r_N\} = s^{-1}(\{u_1, \ldots, u_m\})
+$$
+$R$이 준군이므로\footnote{준군의 언어로 설명하면 다음과 같다.
+원래 집합 $\{r_1, \ldots, r_n\}$은 원천이 $u$인 화살표들의 집합이었다.
+집합 $\{u_1, \ldots, u_m\}$은 $u$와 동형인 대상들의 집합이었다.
+그리고 $\{r_1, \ldots, r_N\}$은 $u$와 동치인 모든 대상 사이의 모든
+화살표들의 집합이다.}
+$t(\{r_1, \ldots, r_N\}) = \{u_1, \ldots, u_m\}$ 및
+$t^{-1}(\{u_1, \ldots, u_m\}) = \{r_1, \ldots, r_N\}$이다. 또한
+$\text{pr}_0(c^{-1}(\{r_1, \ldots, r_N\})) = \{r_1, \ldots, r_N\}$ 및
+$\text{pr}_1(c^{-1}(\{r_1, \ldots, r_N\})) = \{r_1, \ldots, r_N\}$이다.
+마찬가지로 $e(\{u_1, \ldots, u_m\}) \subset \{r_1, \ldots, r_N\}$ 및
+$i(\{r_1, \ldots, r_N\}) = \{r_1, \ldots, r_N\}$이다.
+
+\medskip\noindent
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-splits-off-quasi-finite-part-technical}를 쌍
+$(U \to S, \{u_1, \ldots, u_m\})$과
+$(R \to S, \{r_1, \ldots, r_N\})$에 적용한다. 그러면
+$\kappa(p) = \kappa(p')$라는 식별을 유도하고 $S' \times_S U$와
+$S' \times_S R$에 다음 분해들을 주는 \'etale 근방
+$(S', p') \to (S, p)$를 얻는다.
+$$
+S' \times_S U = U' \amalg W, \quad
+S' \times_S R = R' \amalg W'
+$$
+여기서 $U' \to S'$은 유한이고 $(U')_{p'}$는
+$\{u_1, \ldots, u_m\}$에 전단사로 가며, $R' \to S'$은 유한이고
+$(R')_{p'}$는 $\{r_1, \ldots, r_N\}$에 전단사로 간다. 또한
+$W_{p'}$ (resp.\ $(W')_{p'}$)의 어느 점도 점 $u_j$ (resp.\ $r_i$)로
+가지 않는다. 이 시점에서 보조정리의 (a), (b), (c), (d)가 성립한다.
+또 (e), (f)의 포함관계는 $p'$ 위의 올에서 성립한다. 즉
+$s'((R')_{p'}) \subset (U')_{p'}$,
+$t'((R')_{p'}) \subset (U')_{p'}$, 그리고
+$c'((R' \times_{s', U', t'} R')_{p'}) \subset (R')_{p'}$이다.
+
+\medskip\noindent
+$S'$을 $p'$의 자리스키 열린 근방으로 바꾸어 (e), (f)의 포함관계가
+성립하도록 할 수 있다고 주장한다. 예를 들어 집합
+$E = (s'|_{R'})^{-1}(W)$를 생각하자. 이는 $R'$에서 열린 닫힌 집합이고,
+$p'$ 위에 놓인 $R'$의 어느 점도 포함하지 않는다. $R' \to S'$가 닫힌
+사상이므로 $S'$을 $S' \setminus (R' \to S')(E)$로 바꾸면 $E$가 공집합인
+상황에 이른다. 다시 말해 $s'$은 $R'$을 $U'$ 안으로 보낸다. 이 성질은
+$S'$을 더 축소해도 보존된다. 마찬가지로 $t'$가 $R'$을 $U'$ 안으로
+보내도록 할 수 있다. 이제 (e)가 성립한다. 같은 방식으로 집합
+$E = (c'|_{R' \times_{s', U', t'} R'})^{-1}(W')$를 생각하자.
+이는 $S'$ 위에서 유한인 스킴 $R' \times_{s', U', t'} R'$에서 열린 닫힌
+집합이고 $p'$ 위에 놓인 어느 점도 포함하지 않는다. 따라서 $S'$을
+$S' \setminus (R' \times_{s', U', t'} R' \to S')(E)$로 바꾸면
+$E$가 공집합인 상황에 이른다. 다시 말해 (f)의 포함관계를 얻는다.
+항등 사상 $e' : S' \times_S U \to S' \times_S R$과 역원 사상
+$i' : S' \times_S R \to S' \times_S R$에도 논법을 반복하면, $S'$을
+조금 더 축소한 뒤 $(e'|_{U'})^{-1}(W') = \emptyset$ 및
+$(i'|_{R'})^{-1}(W') = \emptyset$이라고 가정할 수 있다.
+
+\medskip\noindent
+이제 다음 구조를 생각할 수 있다.
+$$
+(U', R', s'|_{R'}, t'|_{R'}, c'|_{R' \times_{t', U', s'} R'},
+e'|_{U'}, i'|_{R'}).
+$$
+준군 스킴 $(S' \times_S U, S' \times_S R, s', t', c', e', i')$에 대해
+공리들이 성립하므로 $S'$ 위 준군 스킴의 공리들이 위 구조에 대해서도 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quasi-finite-over-base-j-proper}
+$S$를 스킴이라 하고 $(U, R, s, t, c)$를 $S$ 위의 준군 스킴이라 하자.
+$p \in S$를 점이라 하고 $u \in U$를 $p$ 위에 놓인 점이라 하자.
+Lemma \ref{lemma-quasi-finite-over-base}의 가정 (1)--(6)과 함께 다음을
+가정하자.
+\begin{enumerate}
+\item[(7)] $j : R \to U \times_S U$는 보편 닫힌 사상이다.\footnote{다른
+조건들을 고려하면 이는 $j$가 고유 사상일 것을 요구하는 것과 동치이다.}
+\end{enumerate}
+그러면 Lemma \ref{lemma-quasi-finite-over-base}의 (a)--(g)와 함께 다음이
+성립하도록 $(S', p') \to (S, p)$, 분해
+$S' \times_S U = U' \amalg W$ 및 $S' \times_S R = R' \amalg W'$, 그리고
+$u' \in U'$을 택할 수 있다.
+\begin{enumerate}
+\item[(h)] $R'$은 $S' \times_S R$의 $U'$로의 제한이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+스킴 $S$ 위의 준군 $(U, R, s, t, c)$와 점 $p$, $u$에 Lemma
+\ref{lemma-quasi-finite-over-base}를 적용한다. 그러면 \'etale 근방
+$(S', p') \to (S, p)$, 서로소 합 분해
+$$
+S' \times_S U = U' \amalg W, \quad
+S' \times_S R = R' \amalg W'
+$$
+및 결론 (a), (b), (c), (d), (e), (f), (g)를 만족하는 $u' \in U'$을 얻는다.
+결론 (a)--(g)에 영향을 주지 않고 $S'$을 $p'$의 더 작은 근방으로 축소할 수
+있다. 적절히 축소하면 (h)도 성립함을 보이겠다. $j'$을 $S'$로의 $j$의
+밑변환이라 하자. 결론 (e)에 의해 어떤 열린 닫힌 조각 $Rest$에 대해
+$$
+j'^{-1}(U' \times_{S'} U') = R' \amalg Rest
+$$
+임은 명백하다. 결론 (d)에 의해 $U' \to S'$가 유한이므로
+$U' \times_{S'} U'$는 $S'$ 위에서 유한이다. $j$가 보편 닫힌 사상이므로
+$j'$도 보편 닫힌 사상이고, 따라서 $j'|_{Rest}$도 보편 닫힌 사상이다.
+결론 (b), (c)에 의해
+$$
+(U' \times_{S'} U' \to S') \circ j'|_{Rest} :
+Rest
+\longrightarrow
+S'
+$$
+의 $p'$ 위의 올은 공집합이다. $Rest \to S'$는 닫힌 사상들의 합성이므로
+닫힌 사상이다. 따라서 $S'$을 $S' \setminus \Im(Rest \to S')$로 바꾸어
+$Rest = \emptyset$이라고 가정할 수 있다. 이는 정확히 $R'$이 열린 부분스킴
+$U' \subset S' \times_S U$로의 $S' \times_S R$의 제한이라는 조건이다.
+Groupoids, Lemma \ref{groupoids-lemma-restrict-groupoid-relation}과 그 증명을
+참조하라.
+\end{proof}
+
+
+
+
+
+
+\section{유한 준군}
+\label{section-finite-groupoids}
+
+\noindent
+준군 스킴 $(U, R, s, t, c)$에서 사상 $s$와 $t$가 유한이면 이를 때때로
+{\it 유한}이라고 한다. 그러나 이것은 $U$, $R$, 또는 몫 층 $U/R$이
+무언가 위에서 유한임을 함의하지 않으므로 혼동의 여지가 있다.
+
+\begin{lemma}
+\label{lemma-finite-stratify}
+$(U, R, s, t, c)$를 스킴 $S$ 위의 준군 스킴이라 하고 $s, t$가
+유한이라고 가정하자. 다음을 만족하는 $R$-불변 닫힌 부분스킴의 열
+$$
+U = Z_0 \supset Z_1 \supset Z_2 \supset \ldots
+$$
+이 존재한다. 즉 $\bigcap Z_r = \emptyset$이고,
+$s^{-1}(Z_{r - 1}) \setminus s^{-1}(Z_r) \to Z_{r - 1} \setminus Z_r$은
+계수가 $r$인 유한 국소 자유 사상이다.
+\end{lemma}
+
+\begin{proof}
+$\{Z_r\}$을 유한형 준연접 가군 $s_*\mathcal{O}_R$의 피팅 아이디얼들이
+주는 $U$의 층화라 하자. Divisors, Lemma
+\ref{divisors-lemma-locally-free-rank-r-pullback}를 참조하라. 항등 사상
+$e : U \to R$이 $s$의 단면이므로 $s_*\mathcal{O}_R$은
+$\mathcal{O}_S$를 직합인자로 포함한다. 따라서 $U = Z_{-1} = Z_0$이다
+(세부사항 생략). 피팅 아이디얼의 형성은 밑변환과 가환하므로(More on Algebra,
+Lemma \ref{more-algebra-lemma-fitting-ideal-basics}), 도식
+(\ref{equation-diagram})의 오른쪽 아래 정사각형이 카르테시안이라는 사실에서
+$s^{-1}(Z_r)$이 $\text{pr}_{1, *}\mathcal{O}_{R \times_{s, U, t} R}$의
+$r$번째 피팅 아이디얼에 대응함을 얻는다. 왼쪽 아래 정사각형도 카르테시안이라는
+사실을 사용하면 $s^{-1}(Z_r) = t^{-1}(Z_r)$이고, 다시 말해 $Z_r$은
+$R$-불변이다. Divisors, Lemma
+\ref{divisors-lemma-locally-free-rank-r-pullback}에 의해 가군
+$s_*\mathcal{O}_R$을 $Z_{r - 1} \setminus Z_r$로 당기면 계수가 $r$인
+유한 국소 자유 가군이 된다. 따라서 사상
+$s^{-1}(Z_{r - 1}) \setminus s^{-1}(Z_r) \to Z_{r - 1} \setminus Z_r$은
+계수가 $r$인 유한 국소 자유 사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-flat-over-almost-dense-subscheme}
+$(U, R, s, t, c)$를 스킴 $S$ 위의 준군 스킴이라 하고 $s, t$가
+유한이라고 가정하자. 다음을 만족하는 열린 부분스킴 $W \subset U$와
+닫힌 부분스킴 $W' \subset W$가 존재한다.
+\begin{enumerate}
+\item $W$와 $W'$은 $R$-불변이다.
+\item 집합론적으로 $U = t(s^{-1}(\overline{W}))$이다.
+\item $W$는 $W'$의 두꺼워짐이다.
+\item 제한 $(W', R', s', t', c')$의 사상 $s'$, $t'$는 유한 국소 자유이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-finite-stratify}의 층화
+$U = Z_0 \supset Z_1 \supset Z_2 \supset \ldots$를 생각하자.
+
+\medskip\noindent
+$U$의 $R$-불변 부분스킴들로 이루어진 서로소 합
+$W = \coprod_{r \geq 1} W_r$ 및 $W' = \coprod_{r \geq 1} W'_r$를
+구성하되, 각 $W'_r \to W_r$은 두꺼워짐이고 제한
+$(W_r', R_r', s_r', t_r', c_r')$의 사상 $s_r', t_r'$는 계수가 $r$인
+유한 국소 자유가 되게 하겠다. 먼저 $W_1 = W'_1 = U \setminus Z_1$로 둔다.
+이는 $U$의 $R$-불변 열린 부분스킴이고, $W_0$은 $W'_0$의 두꺼워짐이며,
+제한 $(W_1', R_1', s_1', t_1', c_1')$의 사상 $s_1'$, $t_1'$는
+동형, 즉 계수가 $1$인 유한 국소 자유 사상이다. 또한
+$U \setminus Z_1$의 모든 점은 $t(s^{-1}(\overline{W_1}))$에 속한다.
+
+\medskip\noindent
+$r \leq n$에 대해 다음을 만족하는 부분스킴
+$W'_r \subset W_r \subset U$를 찾았다고 가정하자.
+\begin{enumerate}
+\item $W_1, \ldots, W_n$은 서로소이다.
+\item $W_r$과 $W_r'$은 $R$-불변이다.
+\item 집합론적으로
+$U \setminus Z_n \subset \bigcup_{r \leq n} t(s^{-1}(\overline{W_r}))$이다.
+\item $W_r$은 $W'_r$의 두꺼워짐이다.
+\item 제한 $(W_r', R_r', s_r', t_r', c_r')$의 사상 $s_r'$, $t_r'$는
+계수가 $r$인 유한 국소 자유 사상이다.
+\end{enumerate}
+집합론적으로
+$$
+W_{n + 1} = Z_n \setminus
+\left(
+Z_{n + 1} \cup \bigcup\nolimits_{r \leq n} t(s^{-1}(\overline{W_r}))
+\right)
+$$
+라 두고, 스킴론적으로
+$$
+W'_{n + 1} = Z_n \setminus
+\left(
+Z_{n + 1} \cup \bigcup\nolimits_{r \leq n} t(s^{-1}(\overline{W_r}))
+\right)
+$$
+라 두자. 그러면 $W_{n + 1}$은 $U$의 $R$-불변 열린 부분스킴이다.
+실제로 $Z_{n + 1} \setminus \overline{U \setminus Z_{n + 1}}$는 $U$에서
+열리고, 성질 (3)과 $t$가 닫힌 사상이라는 사실에 의해
+$\overline{U \setminus Z_{n + 1}}$는 제거하는 닫힌 부분집합
+$\bigcup\nolimits_{r \leq n} t(s^{-1}(\overline{W_r}))$에 포함된다.
+$W'_{n + 1}$이 같은 바탕 위상공간을 가진 $W_{n + 1}$의 닫힌 부분스킴임은
+명백하다. 끝으로 성질 (1), (2), (3)은 명백하고, 성질 (5)는 Lemma
+\ref{lemma-finite-stratify}에서 따른다.
+
+\medskip\noindent
+Lemma \ref{lemma-finite-stratify}에 의해 $\bigcap Z_r = \emptyset$이다.
+따라서 $U$의 모든 점은 어떤 $n$에 대해 $U \setminus Z_n$에 속한다.
+그러므로 집합론적으로
+$U = \bigcup_{r \geq 1} t(s^{-1}(\overline{W_r}))$이고 (2)가 성립한다.
+따라서 $W' \subset W$는 (1), (2), (3), (4)를 만족한다.
+\end{proof}
+
+\noindent
+$(U, R, s, t, c)$를 준군 스킴이라 하자. 점 $u \in U$가 주어졌을 때
+$u$의 {\it $R$-궤도}는 $U$의 부분집합 $t(s^{-1}(\{u\}))$이다.
+
+\begin{lemma}
+\label{lemma-finite-flat-over-almost-dense-subscheme-addendum}
+Lemma \ref{lemma-finite-flat-over-almost-dense-subscheme}에서 $s$와 $t$가
+유한 표시라고 더 가정하자. 그러면
+\begin{enumerate}
+\item 사상 $W' \to W$는 유한 표시이다.
+\item $u \in U$가 그 $R$-궤도가 $U$의 기약 성분들의 일반점들로 이루어진
+점이면 $u \in W$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이 경우 Lemma \ref{lemma-finite-stratify}의 층화
+$U = Z_0 \supset Z_1 \supset Z_2 \supset \ldots$는 유한 표시인 닫힌 몰입
+$Z_k \to U$들로 주어진다. Divisors, Lemma
+\ref{divisors-lemma-locally-free-rank-r-pullback}를 참조하라.
+$W' \to W$가 국소적으로 열린집합 $W$와 $Z_r$의 교집합으로 주어지므로
+(1)은 즉시 따른다. (2)를 보이기 위해 $\{u_1, \ldots, u_n\}$을 $u$의
+궤도라 하자. 닫힌 부분스킴 $Z_k$들이 $R$-불변이고
+$\bigcap Z_k = \emptyset$이므로, 모든 $i$에 대해 $u_i \in Z_k$이고
+$u_i \not \in Z_{k + 1}$이 되게 하는 $k$를 찾을 수 있다.
+$Z_k \to U$와 $Z_{k + 1} \to U$의 상은 국소 구성가능이다(Morphisms,
+Theorem \ref{morphisms-theorem-chevalley}). $u_i \in U$가 $U$의 한 기약 성분의
+일반점이므로, 집합론적으로 $Z_k \setminus Z_{k + 1}$에 포함되는 $u_i$의
+열린 근방 $U_i$가 존재한다(Properties, Lemma
+\ref{properties-lemma-generic-point-in-constructible}). Lemma
+\ref{lemma-finite-flat-over-almost-dense-subscheme}의 증명에서 $W$를 서로소 합
+$\coprod W_r$로 구성하였고, $W_r \subset Z_{r - 1} \setminus Z_r$이며
+$U = \bigcup t(s^{-1}(\overline{W_r}))$이다. $\{u_1, \ldots, u_n\}$이
+$R$-궤도이므로 $u \in t(s^{-1}(\overline{W_r}))$이면 어떤 $i$에 대해
+$u_i \in \overline{W_r}$이다. 그러면 $U_i \cap W_r \not = \emptyset$이고,
+따라서 $r = k$이다. 그러므로 원하는 대로 $u$는
+$$
+W_{k + 1} = Z_k \setminus
+\left(
+Z_{k + 1} \cup \bigcup\nolimits_{r \leq k} t(s^{-1}(\overline{W_r}))
+\right)
+$$
+에 속한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-invariant-affine-open-around-generic-point}
+$(U, R, s, t, c)$를 스킴 $S$ 위의 준군 스킴이라 하자. $s, t$는 유한이고
+유한 표시이며 $U$는 준분리라고 가정하자. $u_1, \ldots, u_m \in U$를
+그 궤도가 $U$의 기약 성분들의 일반점들로 이루어진 점들이라 하자.
+그러면 다음을 만족하는 $R$-불변 부분스킴 $V' \subset V \subset U$가 존재한다.
+\begin{enumerate}
+\item $u_1, \ldots, u_m \in V'$이다.
+\item $V$는 $U$에서 열린다.
+\item $V'$과 $V$는 아핀이다.
+\item $V' \subset V$는 유한 표시인 두꺼워짐이다.
+\item 제한 $(V', R', s', t', c')$의 사상 $s', t'$는 유한 국소 자유이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$W' \subset W \subset U$를 Lemma
+\ref{lemma-finite-flat-over-almost-dense-subscheme}에서와 같이 택하자.
+Lemma \ref{lemma-finite-flat-over-almost-dense-subscheme-addendum}에 의해
+$u_j \in W$이고 $W' \to W$는 유한 표시인 두꺼워짐이다. Limits, Lemma
+\ref{limits-lemma-affines-glued-in-closed-affine}에 의해 $u_j$를 포함하는
+$W'$의 $R$-불변 아핀 열린 부분스킴 $V'$을 찾으면 충분하다. 그러면
+$V \subset W$를 이에 대응하는 열린 부분스킴으로 잡을 수 있고 이는 아핀이다.
+따라서 $(U, R, s, t, c)$를 $W'$로의 제한 $(W', R', s', t', c')$로
+바꾸어도 된다. 즉 사상 $s$와 $t$가 유한 국소 자유인 준군 스킴
+$(U, R, s, t, c)$가 주어졌다고 가정할 수 있다. Properties, Lemma
+\ref{properties-lemma-maximal-points-affine}에 의해 $u_1, \ldots, u_m$의
+궤도들의 합집합을 포함하는 아핀 열린집합을 찾을 수 있다. 끝으로 Groupoids,
+Lemma \ref{groupoids-lemma-find-invariant-affine}를 적용하면 결론이 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리는 Lemma
+\ref{lemma-invariant-affine-open-around-generic-point}의 특수한 경우이다.
+그러나 이 경우 논법이 조금 더 간단하므로 다시 증명한다. 특히 Lemma
+\ref{lemma-finite-flat-over-almost-dense-subscheme-addendum}를 사용하지 않는다.
+
+\begin{lemma}
+\label{lemma-invariant-affine-open-around-generic-point-Noetherian}
+$(U, R, s, t, c)$를 스킴 $S$ 위의 준군 스킴이라 하자. $s, t$는 유한이고,
+$U$는 국소 뇌터이며, $u_1, \ldots, u_m \in U$는 그 궤도가 $U$의
+기약 성분들의 일반점들로 이루어진 점들이라고 가정하자. 그러면 다음을
+만족하는 $R$-불변 부분스킴 $V' \subset V \subset U$가 존재한다.
+\begin{enumerate}
+\item $u_1, \ldots, u_m \in V'$이다.
+\item $V$는 $U$에서 열린다.
+\item $V'$과 $V$는 아핀이다.
+\item $V' \subset V$는 두꺼워짐이다.
+\item 제한 $(V', R', s', t', c')$의 사상 $s', t'$는 유한 국소 자유이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\{u_{j1}, \ldots, u_{jn_j}\}$를 $u_j$의 궤도라 하자.
+$W' \subset W \subset U$를 Lemma
+\ref{lemma-finite-flat-over-almost-dense-subscheme}에서와 같이 택하자.
+$U = t(s^{-1}(\overline{W}))$이므로 적어도 하나의
+$u_{ji} \in \overline{W}$가 존재한다. $u_{ji}$는 한 기약 성분의 일반점이고
+$U$는 국소 뇌터이므로 $u_{ji} \in W$이다. $W$가 $R$-불변이므로
+$u_j \in W$이고, 실제로 전체 궤도가 $W$에 포함된다. Cohomology of Schemes,
+Lemma \ref{coherent-lemma-image-affine-finite-morphism-affine-Noetherian}에 의해
+$u_1, \ldots, u_m$을 포함하는 $W'$의 $R$-불변 아핀 열린 부분스킴
+$V'$을 찾으면 충분하다. 그러면 $V \subset W$를 이에 대응하는 열린
+부분스킴으로 택할 수 있고 이는 아핀이다. 따라서 $(U, R, s, t, c)$를
+$W'$로의 제한 $(W', R', s', t', c')$로 바꾸어도 된다. 즉 사상 $s$와
+$t$가 유한 국소 자유인 준군 스킴 $(U, R, s, t, c)$가 주어졌다고 가정할
+수 있다. Properties, Lemma \ref{properties-lemma-maximal-points-affine}에 의해
+$\{u_{ij}\}$를 포함하는 아핀 열린집합을 찾을 수 있다. 여기서 국소 뇌터
+스킴은 준분리이다(Properties, Lemma
+\ref{properties-lemma-locally-Noetherian-quasi-separated}). 끝으로 Groupoids,
+Lemma \ref{groupoids-lemma-find-invariant-affine}를 적용하면 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-find-affine-integral}
+$(U, R, s, t, c)$를 $s, t$가 정수적인 스킴 $S$ 위의 준군 스킴이라 하자.
+$g : U' \to U$를 정수적 사상이라 하고, $U$의 모든 $R$-궤도가 $g(U')$와
+만난다고 가정하자. $(U', R', s', t', c')$를 $R$의 $U'$로의 제한이라 하자.
+$u' \in U'$이 어떤 $R'$-불변 아핀 열린집합에 포함되면, 그 상
+$u \in U$는 $U$의 어떤 $R$-불변 아핀 열린집합에 포함된다.
+\end{lemma}
+
+\begin{proof}
+$W' \subset U'$을 $R'$-불변 아핀 열린집합이라 하자. 사상
+$\text{pr}_0 : \tilde R \to U'$ 및 $h = s \circ \text{pr}_1 : \tilde R \to U$와
+함께 $\tilde R = U' \times_{g, U, t} R$로 두자. $\text{pr}_0$와 $h$는
+정수적이다. 따라서 $\tilde W = \text{pr}_0^{-1}(W')$는 아핀이다.
+$W'$이 $R'$-불변이므로 상 $W = h(\tilde W)$는 집합론적으로 $R$-불변이고
+집합론적으로 $\tilde W = h^{-1}(W)$이다(세부사항 생략). 따라서 $W$가
+열림을 보이면 $W$는 스킴이고 사상 $\tilde W \to W$는 정수적 전사이다.
+그러면 Limits, Proposition \ref{limits-proposition-affine}에 의해 $W$는
+아핀이다. 한편 모든 궤도가 $U'$과 만난다는 가정은
+$h : \tilde R \to U$가 전사임을 함의한다. 정수적 전사 사상은 몫사상이므로
+(Topology, Lemma \ref{topology-lemma-closed-morphism-quotient-topology} 및
+Morphisms, Lemma \ref{morphisms-lemma-integral-universally-closed}), $W$는 열린다.
+\end{proof}
+
+\noindent
+다음 기술적 보조정리는 준아핀 스킴 위의 유한 준군이라는 상황에서
+``거의'' 불변인 함수를 만든다.
+
+\begin{lemma}
+\label{lemma-find-almost-invariant-function}
+$(U, R, s, t, c)$를 $s, t$가 유한이고 유한 표시인 준군 스킴이라 하자.
+$u_1, \ldots, u_m \in U$를 그 $R$-궤도가 $U$의 기약 성분들의 일반점들로
+이루어진 점들이라 하자. $j : U \to \Spec(A)$를 몰입이라 하자.
+$I \subset A$를 $j(U) \cap V(I) = \emptyset$이고
+$V(I) \cup j(U)$가 $\Spec(A)$에서 닫히도록 하는 아이디얼이라 하자.
+그러면 $j^{-1}D(h)$가 $u_1, \ldots, u_m$을 포함하는 $U$의 $R$-불변
+아핀 열린 부분스킴이 되도록 하는 $h \in I$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$u_1, \ldots, u_m \in V' \subset V \subset U$를 Lemma
+\ref{lemma-invariant-affine-open-around-generic-point}에서와 같이 택하자.
+$U \setminus V$는 $U$에서 닫히고 $j$는 몰입이며
+$V(I) \cup j(U)$는 $\Spec(A)$에서 닫히므로
+$V(J) = V(I) \cup j(U \setminus V)$가 되도록 하는 아이디얼
+$J \subset I$를 찾을 수 있다. 예를 들어 $j(U \setminus V)$ 위에서
+영이 되는 $I$의 원소들의 아이디얼을 택할 수 있다. 따라서
+$(U, R, s, t, c)$, $j : U \to \Spec(A)$, $I$를 각각
+$(V', R', s', t', c')$, $j|_{V'} : V' \to \Spec(A)$, $J$로 바꾸어도 된다.
+즉 $U$가 아핀이고 $s$와 $t$가 유한 국소 자유라고 가정해도 된다.
+$u_1, \ldots, u_m$의 $R$-궤도에 있는 모든 점에서 영이 되지 않는
+$f \in I$를 택하자(Algebra, Lemma \ref{algebra-lemma-silly}). 다음을 생각하자.
+$$
+g = \text{Norm}_s(t^\sharp(j^\sharp(f))) \in \Gamma(U, \mathcal{O}_U)
+$$
+$f \in I$이고 $V(I) \cup j(U)$가 닫혔으므로
+$U \cap D(f) \to D(f)$는 닫힌 몰입이다. 따라서 어떤 $n > 0$에 대해
+$f^ng$는 어떤 원소 $h \in I$의 상이다. 이 $h$가 원하는 원소라고 주장한다.
+Groupoids, Lemma \ref{groupoids-lemma-determinant-trick}에서 보았듯이 $g$는
+$R$-불변 함수이고, 따라서 $D(g) \subset U$는 $R$-불변이다. $f$가 $u_j$의
+궤도 위에서 영이 되지 않으므로 $g$는 $u_j$에서 영이 되지 않는다. 또한
+$V(g) \supset V(j^\sharp(f))$이고, 따라서 $j^{-1}D(h) = D(g)$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-no-specializations-map-to-same-point}
+$(U, R, s, t, c)$를 준군 스킴이라 하자. $s, t$가 유한이고
+$u, u' \in R$이 같은 궤도의 서로 다른 점이면, $u'$은 $u$의 특수화가 아니다.
+\end{lemma}
+
+\begin{proof}
+$s(r) = u$ 및 $t(r) = u'$인 $r \in R$을 택하자. $u \leadsto u'$이면
+$s(r') = u'$인 자명하지 않은 특수화 $r \leadsto r'$을 찾을 수 있다.
+Schemes, Lemma \ref{schemes-lemma-quasi-compact-closed}를 참조하라.
+$u'' = t(r')$로 두자. 유한 사상의 올 안에는 특수화가 없으므로
+$u'' \not = u'$이다. 따라서 계속하여 $s(r'') = u''$인 자명하지 않은 특수화
+$r' \leadsto r''$ 등을 찾을 수 있다. 이는 $u$의 궤도가 특수화의 무한열
+$u \leadsto u' \leadsto u'' \leadsto \ldots$을 포함함을 보인다.
+그러나 궤도 $t(s^{-1}(\{u\}))$는 유한하므로 이는 불가능하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-get-affine}
+$j : V \to \Spec(A)$를 스킴의 준콤팩트 몰입이라 하자.
+$j^{-1}D(f)$가 아핀이고 $j(V) \cap V(f)$가 닫히도록 하는 $f \in A$가
+존재하면 $V$는 아핀이다.
+\end{lemma}
+
+\begin{proof}
+이는 Morphisms, Lemma \ref{morphisms-lemma-get-affine}에서 따르지만 직접
+증명도 제시하겠다. $A' = \Gamma(V, \mathcal{O}_V)$로 두자. 그러면
+$j' : V \to \Spec(A')$는 준콤팩트 열린 몰입이다. Properties, Lemma
+\ref{properties-lemma-quasi-affine}를 참조하라. $f' \in A'$을 $f$의 상이라 하자.
+그러면 $(j')^{-1}D(f') = j^{-1}D(f)$는 아핀이다. 한편
+$j'(V) \cap V(f')$는 $\Spec(A)$의 닫힌 부분스킴
+$j(V) \cap V(f)$와 동형으로 가는
+$\Spec(A')$의 부분스킴이다. 따라서 예컨대 Schemes, Lemma
+\ref{schemes-lemma-section-immersion}에 의해 이는 $\Spec(A')$에서 닫힌다.
+그러므로 $A$를 $A'$으로 바꾸어 $j$가 열린 몰입이고
+$A = \Gamma(V, \mathcal{O}_V)$라고 가정해도 된다.
+
+\medskip\noindent
+이 경우 $j(V) = \Spec(A)$임을 주장하며, 이것으로 증명이 끝난다.
+그렇지 않다면 여집합과 만나고 닫힌 부분집합 $j(V) \cap V(f)$를 피하는
+주 아핀 열린집합 $D(g) \subset \Spec(A)$를 찾을 수 있다. Properties, Lemma
+\ref{properties-lemma-invert-f-affine}에 의해 $j$는 $j^{-1}D(f)$를 $D(f)$에
+동형으로 보낸다. 따라서 $D(g)$는 $V(f)$와 만난다. 한편
+$j^{-1}D(g)$는 아핀 열린집합 $j^{-1}D(f)$의 주 열린집합이므로 아핀이다.
+따라서 Properties, Lemma \ref{properties-lemma-invert-f-affine}를 다시
+적용하면 $D(g)$는 $j^{-1}D(g) \subset j^{-1}D(f)$와 동형이고, 이는
+$D(g) \subset D(f)$를 함의한다. 이 모순으로 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-find-affine-codimension-1}
+$(U, R, s, t, c)$를 준군 스킴이라 하고 $u \in U$라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $s, t$는 유한 사상이다.
+\item $U$는 분리이고 국소 뇌터이다.
+\item $u$의 궤도에 있는 모든 점 $u'$에 대해
+$\dim(\mathcal{O}_{U, u'}) \leq 1$이다.
+\end{enumerate}
+그러면 $u$는 $U$의 어떤 $R$-불변 아핀 열린집합에 포함된다.
+\end{lemma}
+
+\begin{proof}
+$u$의 $R$-궤도는 유한하다. 조건 (2), (3)에 의해 이는 $U$의 어떤 아핀
+열린집합 $U'$에 포함된다. Varieties, Proposition
+\ref{varieties-proposition-finite-set-of-points-of-codim-1-in-affine}를 참조하라.
+그러면 $t(s^{-1}(U \setminus U'))$은 $u$를 포함하지 않는 $U$의 $R$-불변
+닫힌 부분집합이다. 따라서 $U \setminus t(s^{-1}(U \setminus U'))$은
+$u$를 포함하는 $U'$의 $R$-불변 열린집합이다. $U$를 이 열린집합으로
+바꾸어 $U$가 준아핀이라고 가정해도 된다.
+
+\medskip\noindent
+Lemma \ref{lemma-find-affine-integral}에 의해 $U$를 그 축약화로 바꾸어
+$U$가 축약이라고 가정해도 된다. 이는 Lemma
+\ref{lemma-finite-flat-over-almost-dense-subscheme}의 $R$-불변 부분스킴
+$W' \subset W \subset U$가 $W' = W$로 같다는 뜻이다.
+$U = t(s^{-1}(\overline{W}))$이므로 $u$의 $R$-궤도의 어떤 점
+$u'$은 $\overline{W}$에 포함된다. Lemma \ref{lemma-find-affine-integral}에 의해
+$U$를 $\overline{W}$로, $u$를 $u'$으로 바꾸어도 된다. 따라서 제한
+$(W, R_W, s_W, t_W, c_W)$의 사상 $s_W, t_W$가 유한 국소 자유가 되도록 하는
+조밀한 열린 $R$-불변 부분스킴 $W \subset U$가 존재한다고 가정할 수 있다.
+
+\medskip\noindent
+$u \in W$이면 Groupoids, Lemma
+\ref{groupoids-lemma-find-invariant-affine}에 의해 증명이 끝난다. 실제로 $W$가
+준아핀이므로 $W$의 임의의 유한 점 집합은 아핀 열린집합에 포함된다
+(Properties, Lemma \ref{properties-lemma-ample-finite-set-in-affine}).
+따라서 $u \not \in W$라고 가정하며, 그러면 $u$의 궤도의 어느 점도 $W$에
+속하지 않는다. $u$의 궤도에 있는 점 $u'$으로의 자명하지 않은 특수화를
+가지는 점을 $\xi \in U$라 하자. $u$의 궤도 안의 점들 사이에는 특수화가
+없으므로(Lemma \ref{lemma-no-specializations-map-to-same-point}), $\xi$는
+궤도에 속하지 않는다. 가정 (3)에 의해 $\xi$는 $U$의 일반점이고, 따라서
+$\xi \in W$이다. $U$가 뇌터이므로 이러한 점은 유한 개이며
+$\xi_1, \ldots, \xi_m \in W$로 나타내자. $s_W, t_W$가 평탄하므로 각
+$\xi_j$의 궤도는 $W$(따라서 $U$)의 기약 성분들의 일반점들로 이루어진다.
+
+\medskip\noindent
+$j : U \to \Spec(A)$를 $U$의 아핀 스킴으로의 몰입이라 하자. $U$가
+준아핀이므로 이러한 몰입이 존재한다. $J \subset A$를
+$V(J) \cap j(W) = \emptyset$이고 $V(J) \cup j(W)$가 닫히도록 하는
+아이디얼이라 하자. Lemma \ref{lemma-find-almost-invariant-function}를 준군 스킴
+$(W, R_W, s_W, t_W, c_W)$, 사상 $j|_W : W \to \Spec(A)$, 점들 $\xi_j$,
+아이디얼 $J$에 적용한다. 그러면 모든 $j$에 대해 $\xi_j$를 포함하고
+$(j|_W)^{-1}D(f)$가 $R_W$-불변 아핀 열린집합이 되도록 하는 $f \in J$를
+얻는다. $f \in J$이므로 $j^{-1}D(f) \subset W$이다. 즉 $j^{-1}D(f)$는
+모든 $\xi_j$를 포함하고 $W$ 안에 들어 있는 $U$의 $R$-불변 아핀 열린집합이다.
+
+\medskip\noindent
+$$
+U \setminus j^{-1}D(f) = j^{-1}V(f).
+$$
+위에 축약 유도 닫힌 부분스킴 구조를 준 것을 $Z$라 하자. 그러면 $Z$는
+집합론적으로 $R$-불변이지만 스킴론적으로는 $R$-불변이 아닐 수 있다.
+$(Z, R_Z, s_Z, t_Z, c_Z)$를 $R$의 $Z$로의 제한이라 하자. $Z \to U$가
+유한이므로 $s_Z$와 $t_Z$는 유한하다. $u \in Z$이므로 $u$의 궤도는 $Z$에
+들어 있고, $Z$의 점으로 본 $u$의 $R_Z$-궤도와 일치한다. 모든 $j$에 대해
+$\dim(\mathcal{O}_{U, u'}) \leq 1$이고 $\xi_j \not \in Z$이므로, $u$의
+궤도에 있는 모든 $u'$에 대해 $\dim(\mathcal{O}_{Z, u'}) \leq 0$이다.
+다시 말해 $u$의 $R_Z$-궤도는 $Z$의 기약 성분들의 일반점들로 이루어진다.
+
+\medskip\noindent
+$I \subset A$를 $V(I) \cap j(U) =\emptyset$이고 $V(I) \cup j(U)$가
+닫히도록 하는 아이디얼이라 하자. Lemma
+\ref{lemma-find-almost-invariant-function}를 준군 스킴
+$(Z, R_Z, s_Z, t_Z, c_Z)$, 제한 $j|_Z$, 아이디얼 $I$, 점 $u \in Z$에
+적용한다. 그러면 $j^{-1}D(h) \cap Z$가 $u$를 포함하는 $R_Z$-불변 아핀
+열린집합이 되도록 하는 $h \in I$를 얻는다.
+
+\medskip\noindent
+다음 $R_W$-불변 함수를 생각하자(Groupoids, Lemma
+\ref{groupoids-lemma-determinant-trick}).
+$$
+g = 
+\text{Norm}_{s_W}(t_W^\sharp(j^\sharp(h)|_W)) \in \Gamma(W, \mathcal{O}_W)
+$$
+다음에서는 $g$의 $j^{-1}D(f)$로의 제한만 필요하며, 이 경우 노름은 아핀
+스킴들 사이의 유한 국소 자유 사상을 따라 취한다. 다음이 보조정리의 증명을
+끝내는 $U$의 $R$-불변 아핀 열린집합이라고 주장한다.
+$$
+V = (W_g \cap j^{-1}D(f)) \cup (j^{-1}D(h) \cap Z)
+$$
+구성에 의해 이는 집합론적으로 $R$-불변이다. $V$는 구성가능 집합이므로,
+열림을 보이려면 $U$에서 일반화에 대해 닫혀 있음을 보이면 충분하다
+(Topology, Lemma \ref{topology-lemma-characterize-closed-Noetherian} 또는 더
+일반적인 Topology, Lemma
+\ref{topology-lemma-constructible-stable-specialization-closed}).
+$W_g \cap j^{-1}D(f)$가 $U$에서 열리므로
+$u_2 \in j^{-1}D(h) \cap Z$인 $U$의 특수화 $u_1 \leadsto u_2$만 생각하면
+충분하다. 이는 $h$가 $j(u_2)$에서 영이 아니고 $u_2 \in Z$라는 뜻이다.
+$u_1 \in Z$이면 $j(u_1) \leadsto j(u_2)$이고, $h$가 $j(u_2)$에서 영이
+아니므로 $j(u_1)$에서도 영이 아니다. 따라서 $u_1 \in V$이다.
+$u_1 \not \in Z$이고 $W_g \cap j^{-1}D(f)$에도 속하지 않으면,
+$Z = j^{-1}V(f)$의 여집합이 $W \cap j^{-1}D(f)$에 포함되므로
+$u_1 \in W$, $u_1 \not \in W_g$이다. 따라서 $s(r_1) = u_1$이고
+$h$가 $t(r_1)$에서 영이 되는 점 $r_1 \in R$이 존재한다. $s$가 유한이므로
+$s(r_2) = u_2$인 특수화 $r_1 \leadsto r_2$를 찾을 수 있다. 그러나 그러면
+$h$는 $u'_2 = t(r_2)$에서 영이다. 이는 $j^{-1}D(h) \cap Z$가 $R$-불변이고
+$u_2$가 그 안에 있다는 사실에 모순이다. 따라서 $V$는 열린다.
+
+\medskip\noindent
+함수 $h \in I$에 대해 $V \subset j^{-1}D(h)$임에 유의하자. 따라서 몰입
+$$
+j' : V \longrightarrow \Spec(A_h)
+$$
+을 얻는다. $f' \in A_h$를 $f$의 상이라 하자. 그러면
+$(j')^{-1}D(f')$는 $U$의 아핀 열린집합 $j^{-1}D(f)$ 안에서 $g$가 정하는
+주 열린집합이다. 따라서 $(j')^{-1}D(f)$는 아핀이다. 끝으로
+$j'(V) \cap V(f') = j'(j^{-1}D(h) \cap Z)$는 $h \in I$와 아이디얼 $I$의
+선택에 의해
+$\Spec(A_h/(f')) = \Spec((A/f)_h) = D(h) \cap V(f)$에서 닫힌다.
+따라서 Lemma \ref{lemma-get-affine}를 적용하면 위에서 주장한 대로 $V$는
+아핀이다.
+\end{proof}
+
+
+
+
+
+
+
+\section{ind-준아핀 사상의 하강}
+\label{section-ind-quasi-affine}
+
+\noindent
+ind-준아핀 사상은 More on Morphisms, Section
+\ref{more-morphisms-section-ind-quasi-affine}에서 정의하였다. 이 절은
+ind-준아핀 사상에 대한 Descent, Section
+\ref{descent-section-quasi-affine}의 유사체이다.
+
+\medskip\noindent
+$X$를 준분리 스킴이라 하자. $E \subset X$를 $X$의 준콤팩트 열린집합들의
+공집합이 아닌 족의 교집합인 부분집합이라 하자. 즉 $I$는 공집합이 아니고
+$U_i \subset X$는 준콤팩트 열린집합이며
+$E = \bigcap_{i \in I} U_i$라고 하자. 유한 교집합들을 추가하여,
+$i, j \in I$에 대해 $U_k \subset U_i \cap U_j$인 $k \in I$가 존재한다고
+가정해도 된다. 이 상황에서 $X$ 위에 정의된 임의의 층 $\mathcal{F}$에 대해
+\begin{equation}
+\label{equation-sections-of-intersection}
+\Gamma(E, \mathcal{F}|_E) = \colim \Gamma(U_i, \mathcal{F}|_{U_i})
+\end{equation}
+이다. 실제로 $i_0 \in I$를 고정하고 $X$를 $U_{i_0}$로,
+$I$를 $\{i \in I \mid U_i \subset U_{i_0}\}$로 바꾸자. 그러면 $X$는
+준콤팩트이고 준분리이므로 스펙트럴 공간이다. Properties, Lemma
+\ref{properties-lemma-quasi-compact-quasi-separated-spectral}를 참조하라.
+이제 Topology, Lemma \ref{topology-lemma-make-spectral-space}와 Sheaves, Lemma
+\ref{sheaves-lemma-descend-opens}에 의해 등식이 성립한다. 실제로
+$\mathcal{F}$가 아벨 층이면 이 공식은 고차 코호몰로지 군들에 대해서도
+성립한다. Cohomology, Lemma \ref{cohomology-lemma-colimit}를 참조하라.
+
+\begin{lemma}
+\label{lemma-sits-in-functions}
+$X$를 ind-준아핀 스킴이라 하자. $E \subset X$를 $X$의 준콤팩트
+열린집합들의 공집합이 아닌 족의 교집합이라 하자.
+$A = \Gamma(E, \mathcal{O}_X|_E)$ 및 $Y = \Spec(A)$로 두자.
+그러면 Schemes, Lemma \ref{schemes-lemma-morphism-into-affine}의 표준 사상
+$$
+j : (E, \mathcal{O}_X|_E) \longrightarrow (Y, \mathcal{O}_Y)
+$$
+은 동형 $(E, \mathcal{O}_X|_E) \to (E', \mathcal{O}_Y|_{E'})$을 정한다.
+여기서 $E' \subset Y$는 준콤팩트 열린집합들의 교집합이다.
+$W \subset E$가 $X$에서 열리면 $j(W)$는 $Y$에서 열린다.
+\end{lemma}
+
+\begin{proof}
+$(E, \mathcal{O}_X|_E)$는 국소환 달린 공간이므로 Schemes, Lemma
+\ref{schemes-lemma-morphism-into-affine}를
+$A \to \Gamma(E, \mathcal{O}_X|_E)$에 적용할 수 있다.
+$I \not = \emptyset$이고 $U_i \subset X$가 준콤팩트 열린집합이 되도록
+$E = \bigcap_{i \in I} U_i$로 쓰자. $i, j \in I$에 대해
+$U_k \subset U_i \cap U_j$인 $k \in I$가 존재한다고 가정해도 되고 그렇게
+하자. $A_i = \Gamma(U_i, \mathcal{O}_{U_i})$로 두면 다음 가환 도식을 얻는다.
+$$
+\xymatrix{
+(E, \mathcal{O}_X|_E) \ar[r] \ar[d] &
+(\Spec(A), \mathcal{O}_{\Spec(A)}) \ar[d] \\
+(U_i, \mathcal{O}_{U_i}) \ar[r] &
+(\Spec(A_i), \mathcal{O}_{\Spec(A_i)})
+}
+$$
+$U_i$가 준아핀이므로 $U_i \to \Spec(A_i)$는 준콤팩트 열린 몰입이다.
+한편 $A = \colim A_i$이다. 따라서 위상공간으로
+$\Spec(A) = \lim \Spec(A_i)$이다(Limits, Lemma
+\ref{limits-lemma-topology-limit}). 또한 Topology, Lemma
+\ref{topology-lemma-make-spectral-space}에 의해 $E = \lim U_i$이므로
+$E \to \Spec(A)$는 그 상 $E'$ 위의 위상동형이고, $E'$은 $\Spec(A)$ 안에서
+열린집합 $U_i \subset \Spec(A_i)$들의 역상들의 교집합이다. 임의의
+$e \in E$에 대해 국소환 $\mathcal{O}_{X, e}$는
+$\mathcal{O}_{U_i, e}$의 값이고, 이는 $\Spec(A)$ 위에서의 값과 같다.
+
+\medskip\noindent
+보조정리의 마지막 주장을 증명하자. $U_i \subset U_j$인 $i, j \in I$를
+택하고 다음 가환 도식들을 생각하자.
+$$
+\xymatrix{
+U_i \ar[r] \ar[d] & \Spec(A_i) \ar[d] \\
+U_i \ar[r] & \Spec(A_j)
+}
+\quad\quad
+\xymatrix{
+W \ar[r] \ar[d] & \Spec(A_i) \ar[d] \\
+W \ar[r] & \Spec(A_j)
+}
+\quad\quad
+\xymatrix{
+W \ar[r] \ar[d] & \Spec(A) \ar[d] \\
+W \ar[r] & \Spec(A_j)
+}
+$$
+Properties, Lemma \ref{properties-lemma-cartesian-diagram-quasi-affine}에 의해
+첫 번째 도식은 카르테시안이다. 따라서 두 번째 도식도 카르테시안이다.
+극한을 취하면 세 번째 도식이 카르테시안임을 얻고, 따라서 이 도식의 위쪽
+가로화살표는 열린 몰입이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-affine-base-change}
+다음 스킴의 카르테시안 도식이 주어졌다고 하자.
+$$
+\xymatrix{
+X \ar[d]_f \ar[r] & \Spec(B) \ar[d] \\
+Y \ar[r] & \Spec(A)
+}
+$$
+$E \subset Y$를 $Y$의 준콤팩트 열린집합들의 공집합이 아닌 족의
+교집합이라 하자. $Y$가 준분리이고 $A \to B$가 평탄이면
+$$
+\Gamma(f^{-1}(E), \mathcal{O}_X|_{f^{-1}(E)}) =
+\Gamma(E, \mathcal{O}_Y|_E) \otimes_A B
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$V_i \subset Y$가 준콤팩트 열린집합이 되도록
+$E = \bigcap_{i \in I} V_i$로 쓰자. $i, j \in I$에 대해
+$V_k \subset V_i \cap V_j$인 $k \in I$가 존재한다고 가정해도 되고 그렇게
+하자. 그러면 마찬가지로 $X$ 안에서
+$f^{-1}(E) = \bigcap_{i \in I} f^{-1}(V_i)$이다. 따라서 결과는 식
+(\ref{equation-sections-of-intersection})과 $V_i$, $f^{-1}(V_i)$에 대한
+대응 결과인 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-flat-base-change-cohomology}에서 따른다.
+\end{proof}
+
+\begin{lemma}[Gabber]
+\label{lemma-ind-quasi-affine}
+$S$를 스킴이라 하자. $\{X_i \to S\}_{i\in I}$를 fpqc 덮개라 하자.
+$\{X_i \to S\}$에 대한 하강 데이터 $(V_i/X_i, \varphi_{ij})$를 생각하자.
+Descent, Definition
+\ref{descent-definition-descent-datum-for-family-of-morphisms}를 참조하라.
+각 사상 $V_i \to X_i$가 ind-준아핀이면 이 하강 데이터는 유효하다.
+\end{lemma}
+
+\begin{proof}
+ind-준아핀은 임의의 밑변환으로 보존되는 스킴 사상의 성질이다. More on
+Morphisms, Lemma
+\ref{more-morphisms-lemma-base-change-ind-quasi-affine}를 참조하라. 따라서
+Descent, Lemma \ref{descent-lemma-descending-types-morphisms}를 적용하면,
+fpqc 덮개가 아핀들 사이의 하나의 평탄 전사 사상 $\{X \to S\}$로 주어진
+경우에 보조정리의 명제를 증명하는 것으로 충분하다. $X = \Spec(A)$ 및
+$S = \Spec(R)$로 쓰자. 그러면 $R \to A$는 충실 평탄 환 준동형이다.
+$(V, \varphi)$를 $S$ 위의 $X$에 대한 하강 데이터라 하고, $V \to X$가
+ind-준아핀이라고 가정하자. 다시 말해 $V$는 ind-준아핀이다.
+
+\medskip\noindent
+$U = X$, $R = X \times_S X$이고 $s$, $t$, $c$가 통상적인 사상인 $S$ 위의
+준군 스킴 $(U, R, s, t, c)$를 생각하자. Groupoids, Lemma
+\ref{groupoids-lemma-cartesian-equivalent-descent-datum}에 의해 쌍
+$(V, \varphi)$는 준군 스킴의 카르테시안 사상
+$(U', R', s', t', c') \to (U, R, s, t, c)$에 대응한다. 임의의 점
+$u' \in U'$를 택하자. Groupoids, Lemmas
+\ref{groupoids-lemma-constructing-invariant-opens},
+\ref{groupoids-lemma-first-observation}, 및
+\ref{groupoids-lemma-second-observation}에 의해
+$u' \in W \subset E \subset U'$를 택할 수 있다. 여기서 $W$는 열린
+$R'$-불변 부분집합이고, $E$는 집합론적으로 $R'$-불변이며 준콤팩트
+열린집합들의 공집합이 아닌 족의 교집합이다.
+
+\medskip\noindent
+이를 $(V, \varphi)$의 언어로 다시 옮기면, 임의의 $v \in V$에 대해 다음
+성질들을 가지는 $v \in W \subset E \subset V$를 찾을 수 있다.
+(a) $W$는 열리고 $\varphi(W \times_S X) = X \times_S W$이다.
+(b) $E$는 준콤팩트 열린집합들의 교집합이고
+$\varphi(E \times_S X) = X \times_S E$가 집합론적으로 성립한다.
+여기서 $E \times_S X$는 사영 사상에 의한 $V \times_S X$ 안의 $E$의
+역상을 뜻하며, $X \times_S E$도 마찬가지이다. Lemma
+\ref{lemma-affine-base-change}에 의해 이는 $\varphi$가 다음
+$A \otimes_R A$-대수의 동형을 정함을 뜻한다.
+\begin{align*}
+\Gamma(E, \mathcal{O}_V|_E) \otimes_R A
+& =
+\Gamma(E \times_S X, \mathcal{O}_{V \times_S X}|_{E \times_S X}) \\
+& \to
+\Gamma(X \times_S E, \mathcal{O}_{X \times_S V}|_{X \times_S E}) \\
+& =
+A \otimes_R \Gamma(E, \mathcal{O}_V|_E)
+\end{align*}
+이를 $\psi$라 부르자. $\varphi$의 코사이클 조건은 Descent, Definition
+\ref{descent-definition-descent-datum-modules}에서와 같이 $\psi$의 코사이클
+조건으로 옮겨진다(세부사항은 생략한다). Descent, Proposition
+\ref{descent-proposition-descent-module}에 의해 $R$-대수 $R'$과
+$A$-대수의 동형
+$\chi : R' \otimes_R A \to \Gamma(E, \mathcal{O}_V|_E)$
+을 얻는다. 이 동형은 $\psi$ 및 $R' \otimes_R A$ 위의 표준 하강 데이터와
+호환된다.
+
+\medskip\noindent
+Lemma \ref{lemma-sits-in-functions}에 의해 국소환 달린 공간의 표준
+``매장''
+$$
+j : (E, \mathcal{O}_V|_E) \longrightarrow
+\Spec(\Gamma(E, \mathcal{O}_V|_E)) = \Spec(R' \otimes_R A)
+$$
+을 얻는다. 이 사상의 구성은 표준적이므로 다음 가환 도식을 얻는다.
+$$
+\xymatrix{
+& E \times_S X \ar[rr]_\varphi \ar[ld] \ar[rd]^{j'} & &
+X \times_S E \ar[rd] \ar[ld]_{j''} \\
+E \ar[rd]^j  & &
+\Spec(R' \otimes_R A \otimes_R A) \ar[ld] \ar[rd] & &
+E \ar[ld]_j \\
+& \Spec(R' \otimes_R A) \ar[rd] && \Spec(R' \otimes_R A) \ar[ld] \\
+& & \Spec(R')
+}
+$$
+여기서 $j'$과 $j''$은 $\chi$와 $\psi$의 구성에 사용된 식별들을 통해
+$E \times_S X \subset V \times_S X$와
+$X \times_S E \subset X \times_S V$에 같은 구성을 적용하여 얻는다.
+따라서 $j(W)$는 $\Spec(R' \otimes_R A)$의 열린 부분스킴이고, 두 사영
+$\Spec(R' \otimes_R A \otimes_R A) \to \Spec(R' \otimes_R A)$에 의한
+그 역상들은 서로 같다. Descent, Lemma
+\ref{descent-lemma-open-fpqc-covering}에 의해 $\Spec(A)$로의 밑변환이
+$j(W)$인 열린집합 $W_0 \subset \Spec(R')$를 얻는다. 위 도식을 살펴보면
+하강 데이터 $(W, \varphi|_{W \times_S X})$가 유효함을 알 수 있다.
+Descent, Lemma
+\ref{descent-lemma-effective-for-fpqc-is-local-upstairs}에 의해 원래의 하강
+데이터도 유효하다.
+\end{proof}
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

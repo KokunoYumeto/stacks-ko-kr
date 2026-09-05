@@ -1,0 +1,5197 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{Weil 코호몰로지 이론}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 기초체 위의 매끄러운 사영 스킴에 대한\  Weil 코호몰로지 이론을
+논의한다. 간단히 말해 여기서 코호몰로지 이론\  $H^*$란\  K\"unneth 공식,
+Poincar\'e 쌍대성, 그리고 사이클류를 (적절한 호환성과 함께) 갖는 이론이다.
+문헌에서 무엇을 “Weil 코호몰로지 이론”이라 부를 것인지에 대해 보편적으로
+합의된 정의는 없음을 미리 밝혀 둔다.
+
+\medskip\noindent
+이 장을 읽기 전에 독자는 범주론 절\ 
+\ref{categories-section-monoidal}과 호몰로지 대수학 절\ 
+\ref{homology-section-monoidal}을 살펴보아야 한다. 그곳에서 (대칭)
+모노이드 범주를 정의하고, 이 장에 필요한 만큼의 기본 언어를 전개한다.
+이 언어를 사용하여 절\  \ref{section-correspondences}에서 대상이 매끄러운
+사영 스킴이고 사상이 대응인 대칭 모노이드 등급 범주를 구성한다.
+절\  \ref{section-chow-motives}에서는 사영자의 상을 추가하고\  Lefschetz
+모티브를 가역화하여\  Chow 모티브의 대칭 모노이드\  Karoubian 범주\  $M_k$를
+얻는다. 이 범주에는 반변 함자
+$$
+h : \{\text{smooth projective schemes over }k\} \longrightarrow M_k
+$$
+가 갖추어져 있다. 아래에서 보겠지만\  Weil 코호몰로지 이론의 핵심 성질은
+이 함자\  $h$를 거쳐 분해된다는 것이다.
+
+\medskip\noindent
+먼저 대수적으로 닫힌 기초체의 경우에 우리가 “고전적\  Weil 코호몰로지
+이론”이라 부를 개념을 정의한다. 절\  \ref{section-axioms-classical}을
+보라. 이 개념은\  \cite[Section 1.2]{Kleiman-cycles}에서 도입된 개념과
+같고, \cite[page 65]{Kleiman-motives}에서 도입된 개념과도 일치한다.
+그러나 우리의 개념은 선험적으로\  \cite[page 10]{Kleiman-standard}의
+개념과 일치하지 않는다. 그 문헌에서는 저자가 두 개의\  Lefschetz형 공리를
+추가하며, 이 장에서 정의한 임의의 고전적\  Weil 코호몰로지 이론이 그
+공리들을 만족하는지는 알려져 있지 않기 때문이다.
+절\  \ref{section-axioms-classical} 끝에서 고전적\  Weil 코호몰로지 이론이\ 
+$H^* = G \circ h$ 꼴임을 보인다. 여기서\  $G$는\  $M_k$에서\  $H^*$의
+계수체 위 등급 벡터공간 범주로 가는 대칭 모노이드 함자이다.
+
+\medskip\noindent
+절\  \ref{section-cycles-nonclosed}에서는 닫혀 있지 않은 체 위의
+사이클군에 관한 몇 가지 보조정리를 증명한다. 이 결과들은 임의의 체 위의
+매끄러운 사영 스킴에 대한\  Weil 코호몰로지 이론을 논의할 때 사용된다.
+
+\medskip\noindent
+일반적인 기초체\  $k$ 위의\  Weil 코호몰로지 이론\  $H^*$에 대한 우리 공리의
+동기는 다음과 같다.
+\begin{enumerate}
+\item $H^* = G \circ h$이고, $G$는\  $M_k$에서\  $H^*$의 계수체\  $F$ 위
+등급 벡터공간 범주로 가는 대칭 모노이드 함자이다.
+\item $G$는\  Tate 모티브(Lefschetz 모티브의 역)를 차수\  $-2$에 놓인\ 
+$1$차원 벡터공간\  $F(1)$로 보낸다.
+\item $k$가 대수적으로 닫혀 있을 때에는\  $F(1)$의 기저원소를 하나
+고르는 것을 제외하면 절\  \ref{section-axioms-classical}에서 논의한
+개념을 되찾아야 한다.
+\end{enumerate}
+먼저 절\  \ref{section-axioms}에서 앞의 두 조건을 분석한다. 이어서 절\ 
+\ref{section-further}에서 몇 가지 결과를 더 전개한 뒤, 절\ 
+\ref{section-old}에서 성질 (3)을 얻는 데 필요한 공리를 추가한다.
+
+\medskip\noindent
+마지막 절\  \ref{section-c1}에서는 사이클류 대신 제1 Chern 류 사상을
+사용하는\  Weil 코호몰로지 이론의 다른 접근법을 자세히 설명한다. 뒤의
+장들에서 특정 코호몰로지 이론이\  Weil 코호몰로지 이론임을 증명할 때에는
+이 접근법이 가장 적합하다. de Rham 코호몰로지 절\ 
+\ref{derham-section-weil}을 보라.
+
+
+
+
+
+\section{규약과 표기}
+\label{section-conventions}
+
+\noindent
+$F$를 체라 하자. 이 장에서는\  $F$-등급 벡터공간의 범주를 통상적인
+결합 제약과 부호를 포함하는 교환 제약을 갖춘\  $F$-선형 대칭 모노이드
+범주로 본다. 호몰로지 대수학 예\ 
+\ref{homology-example-graded-vector-spaces}를 보라.
+
+\medskip\noindent
+$R$을 환이라 하자. 이 장에서 {\it 등급 가환\  $R$-대수} $A$란
+미분이 영인 가환 미분 등급\  $R$-대수
+(미분 등급 대수 정의\  \ref{dga-definition-dga} 및\ 
+\ref{dga-definition-cdga})를 뜻한다. 따라서\  $A$는\  $R$-부분가군에
+의한 등급\  $A = \bigoplus_{n \in \mathbf{Z}} A^n$을 갖춘\ 
+$R$-가군이다. $R$-쌍선형 곱셈
+$$
+A^n \times A^m \longrightarrow A^{n + m},\quad
+\alpha \times \beta \longmapsto \alpha \cup \beta
+$$
+을 이 장에서는 {\it 컵곱}이라 부른다. 교환 제약은\ 
+$\alpha \in A^n$, $\beta \in A^m$일 때\ 
+$\alpha \cup \beta = (-1)^{nm} \beta \cup \alpha$이다.
+끝으로 곱셈 단위원\  $1 \in A^0$이 있다. 동치로\  $A$의\  $R$-가군
+구조와 호환되는 가법적이고 승법적인 사상\  $R \to A^0$이 있다.
+
+\medskip\noindent
+$k$를 체라 하고\  $X$를\  $k$ 위 유한형 스킴이라 하자. 유리 동치로 나눈\ 
+$X$의\  $k$차원 사이클의\  Chow 군\  $\CH_k(X)$는\  Chow 호몰로지 정의\ 
+\ref{chow-definition-rational-equivalence}에서 정의했다.
+$X$가 정규이거나\  Cohen--Macaulay이면 여차원\  $p$인 사이클의\  Chow 군\ 
+$\CH^p(X)$도 생각할 수 있다
+(Chow 호몰로지 절\  \ref{chow-section-cycles-codimension}).
+이때\  $[X] \in \CH^0(X)$는\  $X$의 “기본류”를 나타낸다.
+Chow 호몰로지 주의\  \ref{chow-remark-fundamental-class}를 보라.
+$X$가 매끄럽고\  $\alpha$, $\beta$가\  $X$ 위의 사이클이면\ 
+$\alpha \cdot \beta$는\  $\alpha$와\  $\beta$의 교차곱을 나타낸다.
+Chow 호몰로지 절\  \ref{chow-section-intersection-product}를 보라.
+
+
+
+
+
+
+
+
+
+
+
+\section{대응}
+\label{section-correspondences}
+
+\noindent
+$k$를 체라 하자. $k$ 위 스킴\  $X$, $Y$에 대해\  $X \times Y$는\ 
+$k$ 위 스킴의 범주에서\  $X$와\  $Y$의 곱을 뜻한다. 이 절에서는 대상이\ 
+$k$ 위의 매끄러운 사영 스킴이고 사상이 대응인\  $\mathbf{Q}$ 위 등급
+범주를 구성한다.
+
+\medskip\noindent
+$X$, $Y$를\  $k$ 위의 매끄러운 사영 스킴이라 하자.
+$X = \coprod X_d$를\  $X$의\  $\dim(X_d) = d$인 등차원 열린닫힌 부분스킴들로의
+분해라 하자. $X$에서\  $Y$로 가는 {\it 차수\  $r$의 대응}들의\ 
+$\mathbf{Q}$-벡터공간을 다음 공식으로 정의한다.
+$$
+\text{Corr}^r(X, Y) =
+\bigoplus\nolimits_d \CH^{d + r}(X_d \times Y) \otimes \mathbf{Q}
+\subset
+\CH^*(X \times Y) \otimes \mathbf{Q}
+$$
+$c \in \text{Corr}^r(X, Y)$와\ 
+$\beta \in \CH_j(Y) \otimes \mathbf{Q}$가 주어지면 다음 공식으로\ 
+$c$에 의한\  $\beta$의 {\it 당김}을 정의할 수 있다.
+$$
+c^*(\beta) = \text{pr}_{1, *}(c \cdot \text{pr}_2^*\beta)
+\quad\text{in}\quad
+\CH_{j - r}(X) \otimes \mathbf{Q}
+$$
+실제로\  $X_d \times Y$ 위에서\  $\text{pr}_2$는 상대차원\  $d$의
+평탄 사상이므로\  $\text{pr}_2^*\beta$는\  $X_d \times Y$ 위의
+차원\  $d + j$인 사이클이다. 따라서\ 
+$c \cdot \text{pr}_2^*\beta$는\  $X_d \times Y$ 위의
+차원\  $j - r$인 사이클이고, 고유 사상\  $\text{pr}_1$에 의한 그
+밀어올림도 같은 차원의 사이클이다.
+마찬가지로 여차원에 의한 등급으로 바꾸어\ 
+$\alpha \in \CH^i(X) \otimes \mathbf{Q}$가 주어지면 다음 공식으로\ 
+$c$에 의한\  $\alpha$의 {\it 밀어올림}을 정의할 수 있다.
+$$
+c_*(\alpha) = \text{pr}_{2, *}(c \cdot \text{pr}_1^*\alpha)
+\quad\text{in}\quad
+\CH^{i + r}(Y) \otimes \mathbf{Q}
+$$
+실제로\  $\text{pr}_1^*\alpha$는\  $X \times Y$ 위의 여차원\  $i$인
+사이클이므로\  $c \cdot \text{pr}_1^*\alpha$는\ 
+$X_d \times Y$ 위의 여차원\  $i + d + r$인 사이클이고, 이는\  $Y$ 위의
+여차원\  $i + r$인 사이클로 밀어올려진다.
+
+\medskip\noindent
+$k$ 위의 매끄러운 사영 스킴\  $X, Y, Z$가 주어졌다고 하자.
+{\it 대응의 합성}
+$$
+\text{Corr}^s(Y, Z)
+\times
+\text{Corr}^r(X, Y)
+\longrightarrow
+\text{Corr}^{r + s}(X, Z)
+$$
+을
+$$
+(c', c)
+\longmapsto
+c' \circ c =
+\text{pr}_{13, *}(\text{pr}_{12}^*c \cdot \text{pr}_{23}^*c')
+$$
+로 정의한다. 여기서\ 
+$\text{pr}_{12} : X \times Y \times Z \to X \times Y$는
+사영이고, $\text{pr}_{13}$과\  $\text{pr}_{23}$도 마찬가지이다.
+
+\begin{lemma}
+\label{lemma-composition-correspondences}
+대응에 대해 다음이 성립한다.
+\begin{enumerate}
+\item 대응의 합성은\  $\mathbf{Q}$-쌍선형이고 결합적이다.
+\item 표준 동형사상
+$$
+\CH_{-r}(X) \otimes \mathbf{Q} = \text{Corr}^r(X, \Spec(k))
+$$
+이 있으며, 이 아래에서 대응에 의한 당김은 합성에 대응한다.
+\item 표준 동형사상
+$$
+\CH^r(X) \otimes \mathbf{Q} = \text{Corr}^r(\Spec(k), X)
+$$
+이 있으며, 이 아래에서 대응에 의한 밀어올림은 합성에 대응한다.
+\item 대응의 합성은 사이클의 밀어올림과 당김에 호환된다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+쌍선형성은 밀어올림과 당김의 선형성 및 교차곱의 쌍선형성에서 바로
+따른다. 결합성을 증명하기 위해\  $X, Y, Z, W$와\ 
+$c \in \text{Corr}(X, Y)$,
+$c' \in \text{Corr}(Y, Z)$,
+$c'' \in \text{Corr}(Z, W)$가 주어졌다고 하자. 그러면
+\begin{align*}
+c'' \circ (c' \circ c)
+& =
+\text{pr}^{134}_{14, *}(
+\text{pr}^{134, *}_{13}
+\text{pr}^{123}_{13, *}(\text{pr}^{123, *}_{12}c \cdot
+\text{pr}^{123, *}_{23}c')
+\cdot \text{pr}^{134, *}_{34}c'') \\
+& =
+\text{pr}^{134}_{14, *}(
+\text{pr}^{1234}_{134, *}
+\text{pr}^{1234, *}_{123}(\text{pr}^{123, *}_{12}c \cdot
+\text{pr}^{123, *}_{23}c')
+\cdot \text{pr}^{134, *}_{34}c'') \\
+& =
+\text{pr}^{134}_{14, *}(
+\text{pr}^{1234}_{134, *}
+(\text{pr}^{1234, *}_{12}c \cdot
+\text{pr}^{1234, *}_{23}c')
+\cdot \text{pr}^{134, *}_{34}c'') \\
+& =
+\text{pr}^{134}_{14, *}
+\text{pr}^{1234}_{134, *}
+((\text{pr}^{1234, *}_{12}c \cdot
+\text{pr}^{1234, *}_{23}c')
+\cdot \text{pr}^{1234, *}_{34}c'') \\
+& =
+\text{pr}^{1234}_{14, *}(
+(\text{pr}^{1234, *}_{12}c \cdot
+\text{pr}^{1234, *}_{23}c') \cdot
+\text{pr}^{1234, *}_{34}c'')
+\end{align*}
+이다. 여기서
+$$
+p^{1234}_{134} : X \times Y \times Z \times W \to X \times Z \times W
+\quad\text{and}\quad
+p^{134}_{14} : X \times Z \times W \to X \times W
+$$
+는 사영을 나타내며, 다른 첨자도 마찬가지이다.
+첫 번째 등식은 합성의 정의이다. 두 번째 등식은\  Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-flat-pullback-proper-pushforward}에 의해\ 
+$\text{pr}^{134, *}_{13} \text{pr}^{123}_{13, *} =
+\text{pr}^{1234}_{134, *} \text{pr}^{1234, *}_{123}$이므로 성립한다.
+세 번째 등식은 교차곱이\  $p^{1234}_{123}$의\  Gysin 사상(평탄 당김으로
+주어진다)과 가환하기 때문에 성립한다. Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-lci-gysin-product}를 보라.
+네 번째 등식은\  $p^{1234}_{134}$에 대한 사영 공식,
+즉\  Chow 호몰로지 보조정리\  \ref{chow-lemma-projection-formula}에서
+따른다. 네 번째 등식은 고유 밀어올림이 합성과 호환된다는 것이다.
+Chow 호몰로지 보조정리\  \ref{chow-lemma-compose-pushforward}를 보라.
+교차곱은\  Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-associative}에 의해 결합적이므로 대응 합성의
+결합성이 증명되었다.
+
+\medskip\noindent
+(2)와 (3)의 증명은 생략한다. 이는 본질적으로 여러 사이클이 어느
+공간에 놓이는지와 어떤 (여)차원을 갖는지를 세심하게 추적하면 된다.
+
+\medskip\noindent
+사이클의 밀어올림과 당김에 관한 명제는\ 
+$(c' \circ c)^*(\alpha) = c^*((c')^*(\alpha))$와\ 
+$(c' \circ c)_*(\alpha) = (c')_*(c_*(\alpha))$를 뜻한다.
+이는 (1), (2), (3)을 결합하면 따른다.
+\end{proof}
+
+\begin{example}
+\label{example-graph-correspondence}
+$f : Y \to X$를\  $k$ 위 매끄러운 사영 스킴의 사상이라 하자.
+$\Gamma_f \subset X \times Y$를\  $f$의 그래프라 하자. 더 정확히는\ 
+$\Gamma_f$는 닫힌 몰입
+$$
+(f, \text{id}_Y) : Y \longrightarrow X \times Y
+$$
+의 상이다. $X = \coprod X_d$를\  $X$의 차원\  $d$인 등차원 열린닫힌 부분\ 
+$X_d$들로의 분해라 하자. 그러면\ 
+$\Gamma_f \cap (X_d \times Y)$의 순여차원은\  $d$이다. 따라서\ 
+$[\Gamma_f] \in \CH^*(X \times Y) \otimes \mathbf{Q}$는\ 
+$\text{Corr}^0(X \times Y)$에 속한다. 즉\  $[\Gamma_f]$는\ 
+$X$에서\  $Y$로 가는 차수\  $0$의 대응이다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-category-correspondences}
+$k$ 위의 매끄러운 사영 스킴들과 위에서 정의한 대응 및 대응의 합성은\ 
+$\mathbf{Q}$ 위의 등급 범주를 이룬다
+(미분 등급 대수 정의\  \ref{dga-definition-graded-category}).
+\end{lemma}
+
+\begin{proof}
+항등사상의 존재를 제외하면 구성과 보조정리\ 
+\ref{lemma-composition-correspondences}에서 모든 것이 명백하다.
+매끄러운 사영 스킴\  $X$가 주어지면 대각선\ 
+$\Delta \subset X \times X$의 류\  $[\Delta]$를\ 
+$\text{Corr}^0(X, X)$에서 생각하자. $\Delta$는 항등사상\ 
+$\text{id}_X : X \to X$의 그래프와 같으며, 아래에서 이 사실을
+사용한다.
+
+\medskip\noindent
+$[\Delta]$가 항등원 역할을 함을 보이려면 임의의 대응\ 
+$c \in \text{Corr}^r(Y, X)$와\ 
+$c' \in \text{Corr}^s(X, Y)$에 대해\ 
+$[\Delta] \circ c = c$ 및\  $c' \circ [\Delta] = c'$임을 보이면 된다.
+두 번째 경우에는
+$$
+c' = \text{pr}_{13, *}(\text{pr}_{12}^*[\Delta] \cdot \text{pr}_{23}^*c')
+$$
+를 보여야 한다. 여기서\ 
+$\text{pr}_{12} : X \times X \times Y \to X \times X$는 사영이고,
+$\text{pr}_{13}$과\  $\text{pr}_{23}$도 마찬가지이다.
+어떤 정수 닫힌 부분스킴\  $Z_i \subset X \times Y$와 유리수\  $a_i$에
+대해\  $c' = \sum a_i [Z_i]$로 쓸 수 있다. 따라서 임의의\ 
+$X \times Y$의 정수 닫힌 부분스킴\  $Z$에 대해\  $X \times Y$의\  Chow 군에서
+$$
+[Z] = \text{pr}_{13, *}(\text{pr}_{12}^*[\Delta] \cdot \text{pr}_{23}^*[Z])
+$$
+임을 보이면 충분함이 명백하다. 두 사영 아래에서\  $Z$의 상을 포함하는
+기약성분으로\  $X$와\  $Y$를 각각 바꾸면\  $X$, $Y$도 정수라고 가정할 수
+있다. 이제
+$$
+[Z] = \text{pr}_{13, *}([\Delta \times Y] \cdot [X \times Z])
+$$
+를 보여야 한다. $Z$의 사상\ 
+$(\Delta, 1) : X \times Y \to X \times X \times Y$에 의한 상을\ 
+$Z' \subset X \times X \times Y$라 하자. 그러면\  $Z'$은\ 
+$X \times X \times Y$의 닫힌 부분스킴이고\  $Z$와 동형이며,
+스킴론적으로\  $Z' = \Delta \times Y \cap X \times Z$이다.
+Chow 호몰로지 보조정리\  \ref{chow-lemma-intersect-properly}\footnote{
+독자는\  $\dim(Z') = \dim(\Delta \times Y) + \dim(X \times Z) -
+\dim(X \times X \times Y)$이고, $Z'$에\  $Z$의 일반점(그곳의
+국소환은\  Cohen--Macaulay이다)으로 사상되는 유일한 일반점이 있으며\ 
+$X$의 어떤 점(그곳의 국소환도\  Cohen--Macaulay이다)으로도 사상됨을
+확인할 수 있다. 따라서 보조정리의 모든 가정이 실제로 성립한다.}
+에 의해
+$$
+[Z'] = [\Delta \times Y] \cdot [X \times Z]
+$$
+이다. 또한\  $Z'$은\  $\text{pr}_{13}$에 의해\  $Z$로 동형적으로
+사상되므로 결론이 따른다. $[\Delta] \circ c = c$의 확인도
+마찬가지이므로 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-contravariant-functor}
+$k$ 위 매끄러운 사영 스킴의 범주에서 대응의 범주로 가는 반변 함자가
+존재한다. 이 함자는 대상에서는 항등이고, $f : Y \to X$를\ 
+$[\Gamma_f] \in \text{Corr}^0(X, Y)$로 보낸다.
+\end{lemma}
+
+\begin{proof}
+보조정리\  \ref{lemma-category-correspondences}의 증명에서 이 구성이
+항등사상을 항등사상으로 보냄을 보았다. 증명을 끝내기 위해\ 
+$g : Z \to Y$가\  $k$ 위 매끄러운 사영 스킴의 또 다른 사상이면\ 
+$[\Gamma_g] \circ [\Gamma_f] = [\Gamma_{f \circ g}]$가\ 
+$\text{Corr}^0(X, Z)$에서 성립함을 보여야 한다.
+보조정리\  \ref{lemma-category-correspondences}의 증명과 같이 논하면\ 
+$X$, $Y$, $Z$가 정수일 때\  $\CH^*(X \times Z)$에서
+$$
+[\Gamma_{f \circ g}] =
+\text{pr}_{13, *}([\Gamma_f \times Z] \cdot [X \times \Gamma_g])
+$$
+임을 보이면 충분하다. 닫힌 몰입\ 
+$(f \circ g, g, 1) : Z \to X \times Y \times Z$의 상을\ 
+$Z' \subset X \times Y \times Z$라 하자. 그러면 스킴론적으로\ 
+$Z' = \Gamma_f \times Z \cap X \times \Gamma_g$이고,
+Chow 호몰로지 보조정리\  \ref{chow-lemma-intersect-properly}를 사용하면
+다음이 성립한다.
+$$
+[Z'] = [\Gamma_f \times Z] \cdot [X \times \Gamma_g]
+$$
+$\text{pr}_{13, *}([Z']) = [\Gamma_{f \circ g}]$임은 명백하므로
+증명이 끝난다.
+\end{proof}
+
+\begin{remark}
+\label{remark-transpose}
+$X$와\  $Y$를\  $k$ 위의 매끄러운 사영 스킴이라 하자.
+$X$는 차원\  $d$인 등차원 스킴이고\  $Y$는 차원\  $e$인 등차원
+스킴이라고 가정하자. 인자들을 맞바꾸는 동형사상\ 
+$X \times Y \to Y \times X$는 다음 동형사상을 정한다.
+$$
+\text{Corr}^r(X, Y) \longrightarrow \text{Corr}^{d - e + r}(Y, X),\quad
+c \longmapsto c^t
+$$
+이를 {\it 전치}라 부른다. 이는 사이클과 사이클류 모두에 작용한다.
+때때로 유용한 예로, 사상\  $f : Y \to X$의 그래프의 전치는\ 
+$[\Gamma_f]^t = [\Gamma_f^t]$이다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-functor-and-cycles}
+$f : Y \to X$를\  $k$ 위 매끄러운 사영 스킴들의 사상이라 하고,
+$[\Gamma_f] \in \text{Corr}^0(X, Y)$를 예\ 
+\ref{example-graph-correspondence}에서와 같이 두자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item 대응\  $[\Gamma_f]$에 의한 사이클의 밀어올림은\ 
+Gysin 사상\  $f^! : \CH^*(X) \to \CH^*(Y)$과 일치한다.
+\item 대응\  $[\Gamma_f]$에 의한 사이클의 당김은
+밀어올림 사상\  $f_* : \CH_*(Y) \to \CH_*(X)$과 일치한다.
+\item $X$와\  $Y$가 각각 차원\  $d$와\  $e$인 등차원 스킴이면 다음이 성립한다.
+\begin{enumerate}
+\item 주의\  \ref{remark-transpose}의 대응\  $[\Gamma_f^t]$에 의한
+사이클의 밀어올림은\  $f$에 의한 사이클의 밀어올림에 대응한다.
+\item 주의\  \ref{remark-transpose}의 대응\  $[\Gamma_f^t]$에 의한
+사이클의 당김은\  Gysin 사상\  $f^!$에 대응한다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. 다음을 상기하자.
+$[\Gamma_f]_*(\alpha) =
+\text{pr}_{2, *}([\Gamma_f] \cdot \text{pr}_1^*\alpha)$.
+또한
+$$
+[\Gamma_f] \cdot \text{pr}_1^*\alpha =
+(f, 1)_*((f, 1)^! \text{pr}_1^*\alpha) =
+(f, 1)_*((f, 1)^! \text{pr}_1^!\alpha) =
+(f, 1)_*(f^!\alpha)
+$$
+이다. 첫 번째 등식은\  Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-intersect-regularly-embedded}에 따른다.
+두 번째 등식은\  Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-lci-gysin-flat}에 따른다.
+세 번째 등식은\  $\text{pr}_1 \circ (f, 1) = f$이고\  Chow 호몰로지
+보조정리\  \ref{chow-lemma-lci-gysin-composition}를 적용하면 얻는다.
+이제\  $\text{pr}_{2, *} \circ (f, 1)_* = 1_*$이\  Chow 호몰로지
+보조정리\  \ref{chow-lemma-compose-pushforward}에서 따르므로 결론을 얻는다.
+
+\medskip\noindent
+(2)의 증명. 다음을 상기하자. $[\Gamma_f]_*(\beta) =
+\text{pr}_{1, *}([\Gamma_f] \cdot \text{pr}_2^*\beta)$.
+위와 똑같이 논하면
+$$
+[\Gamma_f] \cdot \text{pr}_2^*\beta = (f, 1)_*\beta
+$$
+를 얻는다. 따라서 앞과 같이 결과가 따른다.
+
+\medskip\noindent
+(3)의 증명도 위와 완전히 같은 방식으로 한다.
+\end{proof}
+
+\begin{example}
+\label{example-decompose-P1}
+$X = \mathbf{P}^1_k$라 하자. 그러면
+$$
+\text{Corr}^0(X, X) = \CH^1(X \times X) \otimes \mathbf{Q} =
+\CH_1(X \times X) \otimes \mathbf{Q}
+$$
+이다. $k$-유리점\  $x \in X$를 하나 고르고 사이클\ 
+$c_0 = [x \times X]$와\  $c_2 = [X \times x]$를 생각하자.
+계산하면\  $\text{Corr}^0(X, X)$에서\ 
+$1 = [\Delta] = c_0 + c_2$이고, 합성에 대해 다음 규칙들이 성립한다.
+$c_0 \circ c_0 = c_0$,
+$c_0 \circ c_2 = 0$,
+$c_2 \circ c_0 = 0$, 그리고\ 
+$c_2 \circ c_2 = c_2$.
+다시 말해\  $c_0$와\  $c_2$는 대수\  $\text{Corr}^0(X, X)$의
+서로 직교하는 멱등원이며, 실제로\  $\mathbf{Q}$-대수로서
+$$
+\text{Corr}^0(X, X) = \mathbf{Q} \times \mathbf{Q}
+$$
+를 얻는다.
+\end{example}
+
+\noindent
+대응의 범주는 대칭 모노이드 범주이다. $k$ 위의 매끄러운 사영 스킴\ 
+$X$와\  $Y$가 주어지면\  $X \otimes Y = X \times Y$로 정의한다.
+$k$ 위의 매끄러운 사영 스킴 네 개\  $X, X', Y, Y'$에 대해 텐서곱을
+$$
+\otimes :
+\text{Corr}^r(X, Y) \times \text{Corr}^{r'}(X', Y')
+\longrightarrow
+\text{Corr}^{r + r'}(X \times X', Y \times Y')
+$$
+다음 규칙으로 정의한다.
+$$
+(c, c') \longmapsto
+c \otimes c' = \text{pr}_{13}^*c \cdot \text{pr}_{24}^*c'
+$$
+여기서\  $\text{pr}_{13} : X \times X' \times Y \times Y' \to X \times Y$와\ 
+$\text{pr}_{24} : X \times X' \times Y \times Y' \to X' \times Y'$는
+사영이다. 결합 제약으로는
+$$
+X \otimes (Y \otimes Z) = (X \otimes Y) \otimes Z
+$$
+라는 스킴 곱의 통상적인 결합 제약을 사용한다. 교환 제약은 인자를
+맞바꾸는 동형사상\  $X \times Y \to Y \times X$로 주어진다.
+
+\begin{lemma}
+\label{lemma-tensor-product}
+위에서 정의한 대응의 텐서곱은 대응의 범주를 단위원\ 
+$\Spec(k)$를 갖는 대칭 모노이드 범주로 만든다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-prep-dual}
+$f : Y \to X$를\  $k$ 위 매끄러운 사영 스킴들의 사상이라 하자.
+$X$와\  $Y$는 각각 차원\  $d$와\  $e$인 등차원 스킴이라고 가정하자.
+$a = [\Gamma_f] \in \text{Corr}^0(X, Y)$ 및\ 
+$a^t = [\Gamma_f^t] \in \text{Corr}^{d - e}(Y, X)$로 두고,
+$\eta_X = [\Gamma_{X \to X \times X}] \in \text{Corr}^0(X \times X, X)$,
+$\eta_Y = [\Gamma_{Y \to Y \times Y}] \in \text{Corr}^0(Y \times Y, Y)$,
+$[X] \in \text{Corr}^{-d}(X, \Spec(k))$, 그리고\ 
+$[Y] \in \text{Corr}^{-e}(Y, \Spec(k))$로 두자. 도식
+$$
+\xymatrix{
+X \otimes Y \ar[r]_{a \otimes \text{id}} \ar[d]_{\text{id} \otimes a^t} &
+Y \otimes Y \ar[r]_{\eta_Y} &
+Y \ar[d]^{[Y]} \\
+X \otimes X \ar[r]^{\eta_X} &
+X \ar[r]^{[X]} &
+\Spec(k)
+}
+$$
+은 대응의 범주에서 가환한다.
+\end{lemma}
+
+\begin{proof}
+임의의\  $k$ 위 매끄러운 사영 스킴\  $W$에 대해\ 
+$\text{Corr}^r(W, \Spec(k)) = \CH_{-r}(W)$임을 상기하자.
+$c \in \text{Corr}^s(W', W)$가 주어지면\  $c$와의 합성은 사상\ 
+$\CH_{-r}(W) \to \CH_{-r - s}(W')$로서\  $c$에 의한 당김과 일치한다
+(보조정리\  \ref{lemma-composition-correspondences}).
+끝으로 보조정리\  \ref{lemma-functor-and-cycles}는 이를 통상적인
+사이클의 밀어올림과 당김으로 바꾸는 방법을 알려 준다.
+한편
+$$
+(a \otimes \text{id})^* \eta_Y^* [Y] =
+(a \otimes \text{id})^* [\Delta_Y] =
+(f \times \text{id})_*\Delta_Y = [\Gamma_f]
+$$
+이고, 반대 방향으로는
+$$
+(\text{id} \otimes a^t)^* \eta_X^* [X] =
+(\text{id} \otimes a^t)^* [\Delta_X] =
+(\text{id} \times f)^![\Delta_X] = [\Gamma_f]
+$$
+를 얻는다. 마지막 등식은\  Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-lci-gysin-easy}에서 따른다.
+즉 도식의 어느 경로를 따라가도 사이클\ 
+$\Gamma_f \subset X \times Y$에 대응하는\ 
+$\text{Corr}^d(X \times Y, \Spec(k))$의 원소를 얻는다.
+\end{proof}
+
+
+
+
+
+
+\section{Chow 모티브}
+\label{section-chow-motives}
+
+\noindent
+기초체\  $k$를 고정하자. 이 절에서는 대칭 모노이드 구조와 반변 함자
+$$
+h : \{\text{smooth projective schemes over }k\} \longrightarrow M_k
+$$
+를 갖춘 가법적\  Karoubian $\mathbf{Q}$-선형 범주\  $M_k$를 구성한다.
+이 함자는 곱을 텐서곱으로, 서로소 합을 직합으로 보낸다.
+우리의 구성은 다음 성질로 특징지어진다. 즉\  $h$는 대상이 매끄러운
+사영 다형체이고 사상이 차수\  $0$의 대응인 대칭 모노이드 범주를 거쳐
+분해되며, 예\  \ref{example-decompose-P1}의\ 
+$h(\mathbf{P}^1_k)$ 위 사영자\  $c_2$의 상은\  $M_k$에서 가역이다.
+보조정리\  \ref{lemma-characterize-motives}를 보라.
+절의 끝에서는 모든 모티브, 즉\  $M_k$의 모든 대상이 (왼쪽) 쌍대를
+가짐을 보인다. 보조정리\  \ref{lemma-dual-general}을 보라.
+
+\medskip\noindent
+$k$ 위의 {\it 모티브} 또는 {\it Chow 모티브}란 다음 삼중항\ 
+$(X, p, m)$이다.
+\begin{enumerate}
+\item $X$는\  $k$ 위의 매끄러운 사영 스킴이다.
+\item $p \in \text{Corr}^0(X, X)$는\  $p \circ p = p$를 만족한다.
+\item $m \in \mathbf{Z}$이다.
+\end{enumerate}
+두 번째 모티브\  $(Y, q, n)$가 주어졌을 때, {\it 모티브의 사상} 또는
+{\it Chow 모티브의 사상}을 다음 집합의 원소로 정의한다.
+$$
+\Hom((X, p, m), (Y, q, n)) =
+q \circ \text{Corr}^{n - m}(X, Y) \circ p \subset \text{Corr}^{n - m}(X, Y)
+$$
+모티브 사상의 합성은 위에서 정의한 대응의 합성을 사용하여 정의한다.
+
+\begin{lemma}
+\label{lemma-motives}
+대상이\  $k$ 위의 모티브이고 사상이\  $k$ 위의 모티브 사상인 범주\ 
+$M_k$는\  $\mathbf{Q}$-선형 범주이다. 또한 다음과 같이 정의되는
+반변 함자가 존재한다.
+$$
+h : \{\text{smooth projective schemes over }k\} \longrightarrow M_k
+$$
+$h(X) = (X, 1, 0)$이고\  $h(f) = [\Gamma_f]$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리\  \ref{lemma-contravariant-functor}에서 바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-Karoubian}
+범주\  $M_k$는\  Karoubian이다.
+\end{lemma}
+
+\begin{proof}
+$M = (X, p, m)$을 모티브라 하고, $a \in \Mor(M, M)$를 사영자라 하자.
+그러면\  $\Mor(M, M)$에서뿐 아니라\  $\text{Corr}^0(X, X)$에서도\ 
+$a = a \circ a$이다. $N = (X, a, m)$으로 두자.
+$\text{Corr}^0(X, X)$에서\  $a = p \circ a \circ a$이므로\ 
+$a : N \to M$은\  $M_k$의 사상이다.
+다음으로\  $(1 - a) \circ b = 0$을 만족하는 사상\ 
+$b : (Y, q, n) \to M$이 주어졌다고 하자. 그러면\ 
+$b = a \circ b$이고\  $b = b \circ q$이다. 따라서\  $b$는 사상\ 
+$b : (Y, q, n) \to N$이기도 하다. 이로부터 사영자\  $1 - a$가
+핵\  $N$을 가짐을 알 수 있으므로\  $M_k$는\  Karoubian이다.
+호몰로지 대수학 정의\  \ref{homology-definition-karoubian}을 보라.
+\end{proof}
+
+\noindent
+함자
+$$
+\otimes : M_k \times M_k \longrightarrow M_k
+$$
+를 정의하자. 대상에서는 다음 공식을 사용한다.
+$$
+(X, p, m) \otimes (Y, q, n) = (X \times Y, p \otimes q, m + n)
+$$
+사상에서는
+$$
+\xymatrix{
+\Mor((X, p, m), (Y, q, n)) \times
+\Mor((X', p', m'), (Y', q', n')) \ar[d] \\
+\Mor(
+(X \times X', p \otimes p', m + m'),
+(Y \times Y', q \otimes q', n + n'))
+}
+$$
+를 다음 규칙으로 사용한다.
+$(a, a') \longmapsto a \otimes a'$ 여기서 대응의\  $\otimes$는 절\ 
+\ref{section-correspondences}에서와 같다. 이 정의가 타당함을 보자.
+모티브 사상의 정의에 의해\ 
+$a = q \circ c \circ p$ 및\  $a' = q' \circ c' \circ p'$로 쓸 수 있다.
+여기서\  $c \in \text{Corr}^{n - m}(X, Y)$이고\ 
+$c' \in \text{Corr}^{n' - m'}(X', Y')$이다. 그러면
+$$
+a \otimes a' =
+(q \circ c \circ p) \otimes (q' \circ c' \circ p') =
+(q \otimes q') \circ (c \otimes c') \circ (p \otimes p')
+$$
+를 얻으며, 이는 실제로\ 
+$(X \times X', p \otimes p', m + m')$에서\ 
+$(Y \times Y', q \otimes q', n + n')$로 가는 모티브 사상이다.
+
+\begin{lemma}
+\label{lemma-motives-monoidal}
+위에서 정의한 텐서곱을 갖춘 범주\  $M_k$는 명백한 결합 및 교환 제약과
+단위원\  $\mathbf{1} = (\Spec(k), 1, 0)$를 갖는 대칭 모노이드 범주이다.
+\end{lemma}
+
+\begin{proof}
+보조정리\  \ref{lemma-tensor-product}에서 쉽게 따른다. 세부사항은 생략한다.
+\end{proof}
+
+\noindent
+모티브\  $\mathbf{1}(n) = (\Spec(k), 1, n)$는 유용하다. 다음을 주목하자.
+$$
+\mathbf{1} = \mathbf{1}(0)
+\quad\text{and}\quad
+\mathbf{1}(n + m) = \mathbf{1}(n) \otimes \mathbf{1}(m)
+$$
+따라서\  $\mathbf{1}(1)$과의 텐서곱은 모티브 범주의 자기동치이다.
+모티브\  $M$이 주어지면 때때로\  $M(n) = M \otimes \mathbf{1}(n)$으로 쓴다.
+$M = (X, p, m)$이면\  $M(n) = (X, p, m + n)$임을 주목하자.
+
+\begin{lemma}
+\label{lemma-inverse-h2}
+예\  \ref{example-decompose-P1}의 표기를 사용하자.
+\begin{enumerate}
+\item
+모티브\  $(X, c_0, 0)$는 모티브\  $\mathbf{1} = (\Spec(k), 1, 0)$와 동형이다.
+\item
+모티브\  $(X, c_2, 0)$는 모티브\ 
+$\mathbf{1}(-1) = (\Spec(k), 1, -1)$와 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이후 별도 언급 없이 보조정리\  \ref{lemma-contravariant-functor}를 사용한다.
+구조사상\  $X \to \Spec(k)$는 대응\ 
+$a \in \text{Corr}^0(\Spec(k), X)$를 준다. 한편 유리점\  $x$는 사상\ 
+$\Spec(k) \to X$이고, 이는 대응\ 
+$b \in \text{Corr}^0(X, \Spec(k))$를 준다. $\Spec(k)$ 위의 대응으로\ 
+$b \circ a = 1$이다. 합성\  $a \circ b$는 합성\ 
+$X \to x \to X$의 그래프에 대응하며, 이는\ 
+$c_0 = [x \times X]$이다. 따라서\ 
+$a = a \circ b \circ a = c_0 \circ a$이고\ 
+$b = b \circ a \circ b = b \circ c_0$이다.
+정의를 풀어 쓰면\  $a$와\  $b$는 서로 역인 사상\ 
+$a : (\Spec(k), 1, 0) \to (X, c_0, 0)$ 및\ 
+$b : (X, c_0, 0) \to (\Spec(k), 1, 0)$임을 알 수 있다.
+
+\medskip\noindent
+두 번째 명제를 증명하기 위해 위와 똑같이 진행한다. 다음 류를 나타내자.
+$$
+a' \in \text{Corr}^1(\Spec(k), X) = \CH^1(X)
+$$
+이는 점\  $x$의 류이다. 또한
+$$
+b' \in \text{Corr}^{-1}(X, \Spec(k)) = \CH_1(X)
+$$
+는\  $[X]$의 류이다. $X = \Spec(k) \times X \times \Spec(k)$ 위에서\ 
+$[x] \cdot [X] = [x]$이므로\  $\Spec(k)$ 위의 대응으로\ 
+$b' \circ a' = 1$이다. $X \times \Spec(k) \times X$ 위의 교차곱\ 
+$\text{pr}_{12}^*b' \cdot \text{pr}_{23}^*a'$를 계산하면 사이클\ 
+$X \times \Spec(k) \times x$를 얻는다. 따라서 합성\ 
+$a' \circ b'$는\  $X$ 위의 대응으로\  $c_2$와 같다. 그러므로\ 
+$a' = a' \circ b \circ a' = c_2 \circ a'$이고\ 
+$b' = b' \circ a' \circ b' = b' \circ c_2$이다. 다음을 상기하자.
+$$
+\Mor((\Spec(k), 1, -1), (X, c_2, 0)) =
+c_2 \circ \text{Corr}^1(\Spec(k), X)
+\subset
+\text{Corr}^1(\Spec(k), X)
+$$
+그리고
+$$
+\Mor((X, c_2, 0), (\Spec(k), 1, -1)) =
+\text{Corr}^{-1}(X, \Spec(k)) \circ c_2
+\subset
+\text{Corr}^{-1}(X, \Spec(k))
+$$
+따라서\  $a'$와\  $b'$는 서로 역인 사상\ 
+$a' : (\Spec(k), 1, -1) \to (X, c_2, 0)$ 및\ 
+$b' : (X, c_2, 0) \to (\Spec(k), 1, -1)$임을 알 수 있다.
+\end{proof}
+
+\begin{remark}[Lefschetz와\  Tate 모티브]
+\label{remark-lefschetz-tate}
+$X = \mathbf{P}^1_k$라 하고\  $c_2$를 예\ 
+\ref{example-decompose-P1}에서와 같이 두자. 문헌에서는 모티브\ 
+$(X, c_2, 0)$를 때때로 {\it Lefschetz 모티브}라 부르며,
+참고문헌에 따라 이를\  $L$, $\mathbf{L}$, $\mathbf{Q}(-1)$ 또는\ 
+$h^2(\mathbf{P}^1_k)$로 표기한다. 보조정리\ 
+\ref{lemma-inverse-h2}에 의해\  Lefschetz 모티브는\ 
+$\mathbf{1}(-1)$과 동형이다. 따라서\  Lefschetz 모티브는 가역이고
+(범주론 정의\  \ref{categories-definition-invertible}), 그 역은\ 
+$\mathbf{1}(1)$이다. 모티브\  $\mathbf{1}(1)$은 때때로
+{\it Tate 모티브}라 부르며, 참고문헌에 따라 이를\ 
+$L^{-1}$, $\mathbf{L}^{-1}$, $\mathbf{T}$ 또는\  $\mathbf{Q}(1)$로
+표기한다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-additive}
+범주\  $M_k$는 가법적이다.
+\end{lemma}
+
+\begin{proof}
+$(Y, p, m)$과\  $(Z, q, n)$을 모티브라 하자. $n = m$이면 명백한
+표기 아래\  $(Y \amalg Z, p + q, m)$이 직합을 준다. 세부사항은 생략한다.
+
+\medskip\noindent
+$n < m$이라고 하자. $X$, $c_2$를 예\ 
+\ref{example-decompose-P1}에서와 같이 두자. 그러면 다음을 생각한다.
+\begin{align*}
+(Z, q, n)
+& =
+(Z, q, m) \otimes (\Spec(k), 1, -1) \otimes \ldots \otimes
+(\Spec(k), 1, -1) \\
+& \cong
+(Z, q, m) \otimes (X, c_2, 0) \otimes \ldots \otimes (X, c_2, 0) \\
+& \cong
+(Z \times X^{m - n}, q \otimes c_2 \otimes \ldots \otimes c_2, m)
+\end{align*}
+여기서 보조정리\  \ref{lemma-inverse-h2}를 사용했다.
+이로써 첫 번째 문단에서 다룬 경우로 환원된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-decompose-P1}
+$M_k$에서\  $h(\mathbf{P}^1_k) \cong \mathbf{1} \oplus \mathbf{1}(-1)$이다.
+\end{lemma}
+
+\begin{proof}
+예\  \ref{example-decompose-P1}과 보조정리\  \ref{lemma-inverse-h2}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-motives}
+$X$, $c_2$를 예\  \ref{example-decompose-P1}에서와 같이 두자.
+$\mathcal{C}$를\  $\mathbf{Q}$-선형\  Karoubian 대칭 모노이드 범주라 하자.
+대칭 모노이드 범주의 임의의\  $\mathbf{Q}$-선형 함자
+$$
+F :
+\left\{
+\begin{matrix}
+\text{smooth projective schemes over }k\\
+\text{morphisms are correspondences of degree }0
+\end{matrix}
+\right\}
+\longrightarrow
+\mathcal{C}
+$$
+가\  $F(X)$ 위\  $F(c_2)$의 상을 가역 대상으로 보낸다고 하자.
+그러면 이 함자는 대칭 모노이드 범주의 함자\ 
+$F : M_k \to \mathcal{C}$를 통해 유일하게 분해된다.
+\end{lemma}
+
+\begin{proof}
+보조정리의 명제에서 존재한다고 가정한\  $\mathcal{C}$의 가역 대상을\ 
+$U$라 하자. 다음과 같이 두어\  $F$를 모티브로 확장한다.
+$$
+F(X, p, m) = \left(\text{the image of
+the projector }F(p)\text{ in }F(X)\right) \otimes U^{\otimes -m}
+$$
+$U$가 가역이고\  $\mathcal{C}$가\  Karoubian이므로 이는 잘 정의된다.
+이 선택의 중요한 성질은\  $F(X, c_2, 0) = U$라는 것이다. 또한
+\begin{align*}
+F((X, p, m) \otimes (Y, q, n))
+& =
+F(X \times Y, p \otimes q, m + n) \\
+& =
+\left(\text{the image of }F(p \otimes q)\text{ in }F(X \times Y)\right)
+\otimes U^{\otimes -m - n} \\
+& =
+F(X, p, m) \otimes F(Y, q, n)
+\end{align*}
+이다. 따라서 우리의 규칙은 대상 수준에서 텐서곱과 호환된다
+(세부사항은 생략한다).
+
+\medskip\noindent
+이제\  $F$를 모티브의 사상으로 확장하자. 사상
+$$
+a \in
+\Hom((Y, p, m), (Z, q, n)) =
+q \circ \text{Corr}^{n - m}(Y, Z) \circ p \subset \text{Corr}^{n - m}(Y, Z)
+$$
+가 주어졌다고 하자. $n = m$이면\  $a$는 차수\  $0$의 대응이므로\ 
+$F(a) : F(Y) \to F(Z)$를 사용하여 원하는 사상\ 
+$F(Y, p, m) \to F(Z, q, n)$을 얻는다. $n < m$이면 표준 동형사상들을
+다음과 같이 얻는다.
+\begin{align*}
+s : F((Z, q, n))
+& \to
+F(Z, q, m) \otimes U^{m - n} \\
+& \to
+F(Z, q, m) \otimes F(X, c_2, 0) \otimes \ldots \otimes F(X, c_2, 0) \\
+& \to
+F((Z, q, m) \otimes (X, c_2, 0) \otimes \ldots \otimes (X, c_2, 0)) \\
+& \to
+F((Z \times X^{m - n}, q \otimes c_2 \otimes \ldots \otimes c_2, m))
+\end{align*}
+첫 번째 동형사상에는 위에서 정한 모티브 위\  $F$의 정의를 사용한다.
+두 번째에는\  $U$의 선택을, 세 번째에는 모티브 텐서곱 위\  $F$의
+호환성을 사용한다. 네 번째는 모티브 텐서곱의 정의이다. 한편 마찬가지로
+동형사상
+$$
+\sigma : (Z, q, n) \to
+(Z \times X^{m - n}, q \otimes c_2 \otimes \ldots \otimes c_2, m)
+$$
+도 있다(보조정리\  \ref{lemma-additive}의 증명을 보라). $a$와 이
+동형사상을 합성하면
+$$
+\sigma \circ a \in
+\Hom((Y, p, m),
+(Z \times X^{m - n}, q \otimes c_2 \otimes \ldots \otimes c_2, m))
+$$
+를 얻는다. 이들을 모두 합치면
+$$
+s^{-1} \circ F(\sigma \circ a) :
+F(Y, p, m) \to
+F(Z, q, n)
+$$
+를 얻는다. $n > m$이면 마찬가지로 동형사상
+$$
+t : F((Y, p, m)) \to
+F((Y \times X^{n - m}, p \otimes c_2 \otimes \ldots \otimes c_2, n))
+$$
+및
+$$
+\tau : (Y, p, m)) \to
+(Y \times X^{n - m}, p \otimes c_2 \otimes \ldots \otimes c_2, n)
+$$
+을 정의하고\  $F(a) = F(a \circ \tau^{-1}) \circ t$로 둔다.
+이 구성이 대칭 모노이드 범주의 함자를 정의한다는 확인은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-dual}
+$X$를\  $k$ 위의 차원\  $d$인 등차원 매끄러운 사영 스킴이라 하자.
+그러면\  $M_k$에서\  $h(X)(d)$는\  $h(X)$의 왼쪽 쌍대이다.
+\end{lemma}
+
+\begin{proof}
+이후 별도 언급 없이 보조정리\ 
+\ref{lemma-composition-correspondences}를 사용한다. 다음을 계산한다.
+$$
+\Hom(\mathbf{1}, h(X) \otimes h(X)(d)) =
+\text{Corr}^d(\Spec(k), X \times X) = \CH^d(X \times X)
+$$
+여기서\  $\eta = [\Delta]$이다. 한편
+$$
+\Hom(h(X)(d) \otimes h(X), \mathbf{1}) =
+\text{Corr}^{-d}(X \times X, \Spec(k)) = \CH_d(X \times X)
+$$
+이고, 여기서도\  $\epsilon = [\Delta]$는 대각선의 류이다.
+대응\  $[\Delta] \otimes 1$과\  $1 \otimes [\Delta]$를 어느 순서로
+합성해도\  $\text{Corr}^0(X, X)$에서 대응\  $[\Delta] = 1$을 얻는다.
+따라서 범주론 정의\  \ref{categories-definition-dual}에서 요구되는
+도식들이 가환한다. 구체적으로,
+$$
+[\Delta] \otimes 1 \in \text{Corr}^d(X, X \times X \times X) =
+\CH^{2d}(X \times X \times X \times X)
+$$
+는 명백한 표기 아래 사이클\ 
+$\text{pr}^{1234, -1}_{23}(\Delta) \cap \text{pr}^{1234, -1}_{14}(\Delta)$의
+류로 주어진다. 마찬가지로
+$$
+1 \otimes [\Delta] \in \text{Corr}^{-d}(X \times X \times X, X) =
+\CH^{2d}(X \times X \times X \times X)
+$$
+는 사이클\ 
+$\text{pr}^{1234, -1}_{23}(\Delta) \cap \text{pr}^{1234, -1}_{14}(\Delta)$의
+류로 주어진다. 합성\ 
+$(1 \otimes [\Delta]) \circ ([\Delta] \otimes 1)$은 정의에 의해
+다음 교차곱의 밀어올림\  $\text{pr}^{12345}_{15, *}$이다.
+$$
+[\text{pr}^{12345, -1}_{23}(\Delta) \cap \text{pr}^{12345, -1}_{14}(\Delta)]
+\cdot
+[\text{pr}^{12345, -1}_{34}(\Delta) \cap \text{pr}^{12345, -1}_{15}(\Delta)]
+=
+[\text{small diagonal in } X^5]
+$$
+이는 원하는 대로\  $\Delta$와 같다. 반대 순서의 합성에 대한 공식의
+증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-dual-general}
+$M_k$의 모든 대상은 왼쪽 쌍대를 갖는다.
+\end{lemma}
+
+\begin{proof}
+$M = (X, p, m)$을\  $M_k$의 대상이라 하자. 그러면\  $M$은\ 
+$(X, 1, m) = h(X)(m)$의 직합인자이다. 호몰로지 대수학 보조정리\ 
+\ref{homology-lemma-Karoubian-dual}에 의해\ 
+$h(X)(m) = h(X) \otimes \mathbf{1}(m)$이 쌍대를 가짐을 보이면 충분하다.
+구성상\  $\mathbf{1}(-m)$은\  $\mathbf{1}(m)$의 왼쪽 쌍대이다.
+따라서\  $h(X)$가 왼쪽 쌍대를 가짐을 보이면 충분하다. 범주론 보조정리\ 
+\ref{categories-lemma-tensor-dual}을 보라.
+$X = \coprod X_i$를\  $X$의 기약성분들로의 분해라 하자.
+그러면\  $h(X) = \bigoplus h(X_i)$이고, 호몰로지 대수학 보조정리\ 
+\ref{homology-lemma-additive-dual}에 의해 각\  $h(X_i)$가 왼쪽
+쌍대를 가짐을 보이면 충분하다. 이는 보조정리\  \ref{lemma-dual}에서 따른다.
+\end{proof}
+
+
+
+
+
+
+\section{모티브의\  Chow 군}
+\label{section-chow-groups-motives}
+
+\noindent
+모티브의\  Chow 군을 다음과 같이 정의한다.
+
+\begin{definition}
+\label{definition-chow-group-motives}
+$k$를 기초체라 하고\  $M = (X, p, m)$을\  $k$ 위의\  Chow 모티브라 하자.
+$i \in \mathbf{Z}$에 대해 {\it $M$의\  $i$번째\  Chow 군}을 다음 공식으로
+정의한다.
+$$
+\CH^i(M) = p\left(\CH^{i + m}(X) \otimes \mathbf{Q}\right)
+$$
+\end{definition}
+
+\noindent
+$X$가\  $k$ 위의 매끄러운 사영 스킴이면\ 
+$\CH^i(h(X)) = \CH^i(X) \otimes \mathbf{Q}$이다.
+
+\medskip\noindent
+$\CH^i(-)$는\  $M_k$에서\  $\mathbf{Q}$-벡터공간으로 가는 함자임을
+주목하자. 실제로 모티브\  $M = (X, p, m)$에서\ 
+$N = (Y, q, n)$으로 가는 모티브 사상\  $c : M \to N$이 주어지면,
+$c$는\  $X$에서\  $Y$로 가는 차수\  $n - m$의 대응이다.
+따라서\  $c$에 의한 밀어올림(절\  \ref{section-correspondences})은
+다음 사상들의 족이다.
+$$
+c_* :
+\CH^{i + m}(X) \otimes \mathbf{Q}
+\longrightarrow
+\CH^{i + n}(Y) \otimes \mathbf{Q}
+$$
+모티브 사상의 정의에 의해\  $c = q \circ c \circ p$이므로 모든\ 
+$i \in \mathbf{Z}$에 대해 실제로
+$$
+c_* : \CH^i(M) \to \CH^i(N)
+$$
+를 얻는다. 이것은 보조정리\ 
+\ref{lemma-composition-correspondences}에 의해 모티브 사상의 합성과
+호환된다. Chow 군의 이 함자성은 다음 보조정리에서도 도출할 수 있다.
+
+\begin{lemma}
+\label{lemma-chow-groups-representable}
+$k$를 기초체라 하자. 모티브의 범주\  $M_k$ 위 함자\  $\CH^i(-)$는\ 
+$\mathbf{1}(-i)$로 표현된다. 즉\  $M_k$의\  $M$에 대해 함자적으로
+$$
+\CH^i(M) = \Hom_{M_k}(\mathbf{1}(-i), M)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+정의와 보조정리\  \ref{lemma-composition-correspondences}에서 바로 따른다.
+\end{proof}
+
+\noindent
+독자는 보조정리\  \ref{lemma-chow-groups-representable}, Yoneda 보조정리,
+그리고 보조정리\  \ref{lemma-dual}의 쌍대성을 사용하여 다음을 얻을 수
+있음을 예상할 수 있다.
+
+\begin{lemma}[Manin]
+\label{lemma-manin}
+$k$를 기초체라 하고\  $c : M \to N$을 모티브의 사상이라 하자.
+모든\  $k$ 위 매끄러운 사영 스킴\  $X$에 대해 사상\ 
+$c \otimes 1 : M \otimes h(X) \to N \otimes h(X)$가\  Chow 군 위
+동형사상을 유도한다면, $c$는 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+$M_k$의 임의의 대상\  $L$은 어떤\  $k$ 위 매끄러운 사영 스킴\  $X$와
+어떤\  $m \in \mathbf{Z}$에 대해\  $h(X)(m)$의 직합인자이다.
+$M \otimes h(X)(m)$의\  Chow 군은 차수 이동을 제외하면\ 
+$M \otimes h(X)$의\  Chow 군과 같다. 따라서 우리의 가정에 의해
+모든\  $M_k$의 대상\  $L$에 대해\ 
+$c \otimes 1 : M \otimes L \to N \otimes L$은\  Chow 군 위
+동형사상을 유도한다. 보조정리\ 
+\ref{lemma-chow-groups-representable}에 의해 모든\  $L$에 대해
+$$
+\Hom_{M_k}(\mathbf{1}, M \otimes L) \to
+\Hom_{M_k}(\mathbf{1}, N \otimes L)
+$$
+은 동형사상이다. $M_k$의 모든 대상은 왼쪽 쌍대를 가지므로
+(보조정리\  \ref{lemma-dual-general}), 모든\  $M_k$의 대상\  $K$에 대해
+$$
+\Hom_{M_k}(K, M) \to \Hom_{M_k}(K, N)
+$$
+은 동형사상이다. 범주론 보조정리\ 
+\ref{categories-lemma-left-dual}를 보라. Yoneda 보조정리
+(범주론 보조정리\  \ref{categories-lemma-yoneda})로 결론을 얻는다.
+\end{proof}
+
+
+
+
+\section{사영공간 다발 공식}
+\label{section-projective-space-bundle}
+
+\noindent
+$k$를 기초체라 하고\  $X$를\  $k$ 위의 매끄러운 사영 스킴이라 하자.
+$\mathcal{E}$를 계수\  $r$인 국소 자유\  $\mathcal{O}_X$-가군이라 하자.
+우리의 규약에서\  $\mathcal{E}$에 {\it 연관된 사영다발}은 다음\  $X$ 위의 사상이다.
+$$
+\xymatrix{
+P = \mathbf{P}(\mathcal{E}) =
+\underline{\text{Proj}}_X(\text{Sym}^*(\mathcal{E}))
+\ar[r]^-p
+& X
+}
+$$
+여기서\  $p_*(\mathcal{O}_P(1)) = \mathcal{E}$가 되도록\ 
+$\mathcal{O}_P(1)$을 정규화한다. 다음을 상기하자.
+$$
+[\Gamma_p] \in \text{Corr}^0(X, P) \subset \CH^*(X \times P) \otimes \mathbf{Q}
+$$
+예\  \ref{example-graph-correspondence}을 보라.
+$i = 0, \ldots, r - 1$에 대해 대응
+$$
+c_i = c_1(\text{pr}_2^*\mathcal{O}_P(1))^i \cap [\Gamma_p]
+\in \text{Corr}^i(X, P)
+$$
+을 생각하자. $c_i$를 사상\  $h(X)(-i) \to h(P)$로 생각할 수 있고
+그렇게 하기로 한다.
+
+\begin{lemma}[사영공간 다발 공식]
+\label{lemma-projective-space-bundle-formula}
+위의 상황에서 사상
+$$
+\sum\nolimits_{i = 0, \ldots, r - 1} c_i :
+\bigoplus\nolimits_{i = 0, \ldots, r - 1} h(X)(-i)
+\longrightarrow
+h(P)
+$$
+은 모티브의 범주에서 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+보조정리\  \ref{lemma-manin}에 의해 임의의 매끄러운 사영 스킴\  $Z$와
+곱을 취한 뒤 우리의 사상이 모티브의\  Chow 군 위 동형사상을 정의함을
+보이면 충분하다. $P \times Z \to X \times Z$는\ 
+$X \times Z$로 당긴\  $\mathcal{E}$에 연관된 사영다발임을 주목하자.
+따라서\  Chow 군에 관한 명제는\  Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-chow-ring-projective-bundle}의 사영공간 다발 공식에서
+따른다. 구체적으로, 보조정리\  \ref{lemma-functor-and-cycles}와\ 
+Chow 호몰로지 보조정리\  \ref{chow-lemma-lci-gysin-flat}에 의해\ 
+$[\Gamma_p]$를 따른 사이클의 밀어올림은\  $p$에 의한 사이클의 당김이다.
+따라서\  $c_i$를 따른 밀어올림은\  $\alpha$를\ 
+$c_1(\mathcal{O}_P(1))^i \cap p^*\alpha$로 보낸다.
+몇몇 세부사항은 생략한다.
+\end{proof}
+
+\noindent
+위의 상황에서\  $j = 0, \ldots, r - 1$에 대해 대응
+$$
+c'_j = c_1(\text{pr}_1^*\mathcal{O}_P(1))^{r - 1 - j} \cap [\Gamma_p^t] \in
+\text{Corr}^{-j}(P, X)
+$$
+을 생각하자. $i, j \in \{0, \ldots, r - 1\}$에 대해
+$$
+c'_j \circ c_i =
+\text{pr}_{13, *}\left(
+c_1(\text{pr}_2^*\mathcal{O}_P(1))^{i + r - 1 - j} \cap
+(\text{pr}_{12}^*[\Gamma_p] \cdot \text{pr}_{23}^*[\Gamma_p^t])
+\right)
+$$
+이다. 사이클\  $\text{pr}_{12}^{-1}\Gamma_p$와\ 
+$\text{pr}_{23}^{-1}\Gamma_p^t$는 횡단적으로 교차하고, 그 교차는\ 
+$(p, 1, p) : P \to X \times P \times X$의 상과 같다. 사상\ 
+$(p, p) = \text{pr}_{13} \circ (p, 1, p) : P \to X \times X$의
+올은 차원\  $r - 1$임을 주목하자. 따라서\ 
+$i + r - 1 - j < r - 1$, 즉\  $i < j$이면\ 
+$c'_j \circ c_i = 0$임을 즉시 얻는다. 한편 사영공간 다발 공식
+(Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-chow-ring-projective-bundle})에 의해 사이클\ 
+$c_1(\mathcal{O}_P(1))^{r - 1} \cap [P]$는\  $X$에서\  $[X]$로
+사상된다. 따라서\  $i = j$이면 위의 밀어올림은 대각선의 류를 주므로
+모든\  $i \in \{0, \ldots, r - 1\}$에 대해
+$$
+c'_i \circ c_i = 1 \in \text{Corr}^0(X, X)
+$$
+임을 알 수 있다. 따라서 합성
+$$
+\bigoplus h(X)(-i)
+\xrightarrow{\bigoplus c_i}
+h(P)
+\xrightarrow{\bigoplus c'_j}
+\bigoplus h(X)(-j)
+$$
+의 행렬은 가역이다(대각성분이\  $1$인 상삼각행렬이다).
+사영공간 다발 공식(보조정리\ 
+\ref{lemma-projective-space-bundle-formula})으로부터 반대 방향의
+합성도 가역임을 얻지만, 이를 직접 증명하는 것은 조금 더 어려워 보인다.
+
+\begin{lemma}
+\label{lemma-diagonal-projective-bundle}
+$p : P \to X$를 보조정리\ 
+\ref{lemma-projective-space-bundle-formula}에서와 같이 두자.
+$\CH^*(P \times P)$에서\  $P$의 대각선의 류\  $[\Delta_P]$는
+다음과 같이 쓸 수 있다.
+$$
+[\Delta_P] =
+\left(\sum\nolimits_{i = 0, \ldots, r - 1}
+{r - 1 \choose i} c_{r - 1 - i}(\text{pr}_1^*\mathcal{S}^\vee) \cap
+c_1(\text{pr}_2^*\mathcal{O}_P(1))^i\right)
+\cap
+(p \times p)^*[\Delta_X]
+$$
+여기서\  $\mathcal{S}$는 표준 전사\ 
+$p^*\mathcal{E} \to \mathcal{O}_P(1)$의 핵이다.
+\end{lemma}
+
+\begin{proof}
+$(p \times p)^*[\Delta_X] = [P \times_X P]$임을 주목하자.
+$\Delta_P \subset P \times_X P \subset P \times P$이고\  Chern 류와의
+캡곱은 고유 밀어올림과 가환하므로(Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-pushforward-cap-cj}), $\CH^*(P \times_X P)$에서\ 
+$\Delta_P \subset P \times_X P$의 류가
+$$
+\left(\sum\nolimits_{i = 0, \ldots, r - 1}
+{r - 1 \choose i} c_{r - 1 - i}(q_1^*\mathcal{S}^\vee) \cap
+c_1(q_2^*\mathcal{O}_P(1))^i\right)
+\cap
+[P \times_X P]
+$$
+와 같음을 보이면 충분하다. 여기서\ 
+$q_i : P \times_X P \to P$, $i = 1, 2$는 사영이다.
+$q = p \circ q_1 = p \circ q_2 : P \times_X P \to X$로 두고, 사상
+$$
+q_1^*\mathcal{S} \otimes q_2^*\mathcal{O}_P(-1) \to
+q^*\mathcal{E} \otimes q^*\mathcal{E}^\vee \to
+\mathcal{O}_{P \times_X P}
+$$
+을 생각하자. 마지막 화살표는 평가 사상\ 
+$\mathcal{E} \otimes_{\mathcal{O}_X} \mathcal{E}^\vee \to \mathcal{O}_X$를\ 
+$q$로 당긴 것이다. 합성의 원천은 계수\  $r - 1$인 국소 자유 가군이고,
+국소 계산으로 이 사상이 정확히\  $\Delta_P$ 위에서 영이 됨을 알 수 있다.
+Chow 호몰로지 보조정리\  \ref{chow-lemma-top-chern-class}에 의해\ 
+$[\Delta_P]$는 다음 쌍대의 최고차\  Chern 류이다.
+$$
+q_1^*\mathcal{S}^\vee \otimes q_2^*\mathcal{O}_P(1)
+$$
+원하는 결과는\  Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-chern-classes-E-tensor-L}에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+\section{고전적\  Weil 코호몰로지 이론}
+\label{section-axioms-classical}
+
+\noindent
+이 절에서는 우리가 고전적\  Weil 코호몰로지 이론이라 부를 개념을
+정의한다. 이는\  \cite[Section 1.2]{Kleiman-cycles}에서\  Weil
+코호몰로지 이론이라 부르는 것과 정확히 같다.
+
+\medskip\noindent
+대수적으로 닫힌 체\  $k$(기초체)를 고정한다. 이 절에서 {\it 다형체}는\ 
+$k$ 위의 다형체를 뜻한다. 다형체 절\ 
+\ref{varieties-section-varieties}을 보라. 표수\  $0$인 체\  $F$(계수체)도
+고정한다. Weil 코호몰로지 이론은 데이터 (D1), (D2), (D3)으로 주어지며
+공리 (A), (B), (C)를 만족한다.
+
+\medskip\noindent
+데이터는 다음과 같다.
+\begin{enumerate}
+\item[(D1)] 매끄러운 사영 다형체의 범주에서 등급 가환\ 
+$F$-대수의 범주로 가는 반변 함자\  $H^*$.
+\item[(D2)] 모든 매끄러운 사영 다형체\  $X$에 대한 군 준동형사상\ 
+$\gamma : \CH^i(X) \to H^{2i}(X)$.
+\item[(D3)] 모든 차원\  $d$인 매끄러운 사영 다형체\  $X$에 대한 사상\ 
+$\int_X : H^{2d}(X) \to F$.
+\end{enumerate}
+이것이 의미하는 바를 설명하고 관련 용어를 도입하기 위해 몇 가지
+주의를 덧붙인다.
+
+\medskip\noindent
+(D1)에 관한 주의. 매끄러운 사영 다형체\  $X$가 주어지면\ 
+$H^*(X)$를\  $X$의 {\it 코호몰로지}라 부른다. 매끄러운 사영
+다형체들의 사상\  $f : X \to Y$가 주어지면\ 
+$H^*(f)$인 사상\  $f^* : H^*(Y) \to H^*(X)$를
+{\it 당김 사상}이라 부른다.
+
+\medskip\noindent
+(D2)에 관한 주의. 사상\  $\gamma$를 {\it 사이클류 사상}이라 부른다.
+$\gamma(\alpha)$를\  $\alpha$의 {\it 코호몰로지류}라 한다.
+$Z \subset Y \subset X$가 닫힌 부분스킴이고\  $Y$와\  $X$가 매끄러운
+사영 다형체이며\  $Z$가 정수라고 하자. 그러면\  $[Z]$는\ 
+$\CH^*(Y)$에서의 사이클\  $[Z]$의 류를 뜻할 수도 있고\ 
+$\CH^*(X)$에서의 류를 뜻할 수도 있다. 이 경우\ 
+$\gamma([Z])$라는 표기는 모호하며, 의도한 뜻은 문맥에서 판단해야 한다.
+
+\medskip\noindent
+(D3)에 관한 주의. 사상\  $\int_X$는 때때로 {\it 대각합 사상}이라
+부르며\  $\text{Tr}_X$로 표기하기도 한다.
+
+\medskip\noindent
+첫 번째 공리는 흔히 {\it Poincar\'e 쌍대성}이라 부른다.
+\begin{enumerate}
+\item[(A)] $X$를 차원\  $d$인 매끄러운 사영 다형체라 하자. 그러면
+\begin{enumerate}
+\item 모든\  $i$에 대해\  $\dim_F H^i(X) < \infty$이다.
+\item 모든\  $i$에 대해\ 
+$H^i(X) \times H^{2d - i}(X) \rightarrow H^{2d}(X) \rightarrow F$는
+완전쌍대이다. 여기서 마지막 사상은 대각합 사상\  $\int_X$이다.
+\item $i \in [0, 2d]$가 아니면\  $H^i(X) = 0$이다.
+\item $\int_X : H^{2d}(X) \to F$는 동형사상이다.
+\end{enumerate}
+\end{enumerate}
+$f : X \to Y$를\  $\dim(X) = d$이고\  $\dim(Y) = e$인 매끄러운 사영
+다형체들의 사상이라 하자. Poincar\'e 쌍대성을 사용하면 {\it 밀어올림}
+$$
+f_* : H^{2d - i}(X) \longrightarrow H^{2e - i}(Y)
+$$
+을 선형사상\  $f^* : H^i(Y) \to H^i(X)$의 반대쌍대로 정의할 수 있다.
+공식으로 쓰면\  $a \in H^{2d - i}(X)$에 대해\ 
+$f_*a \in H^{2e - i}(Y)$는 모든\  $b \in H^i(Y)$에 대한
+$$
+\int_X f^*b \cup a = \int_Y b \cup f_*a
+$$
+로 특징지어진다.
+
+\begin{lemma}
+\label{lemma-pushforward-classical}
+(A)를 만족하는 (D1)과 (D3)이 주어졌다고 하자.
+$f : X \to Y$가 매끄러운 사영 다형체들의 사상이면\ 
+$f_*(f^*b \cup a) = b \cup f_*a$이다. 또\ 
+$g : Y \to Z$가 매끄러운 사영 다형체들의 또 다른 사상이면\ 
+$g_* \circ f_* = (g \circ f)_*$이다.
+\end{lemma}
+
+\begin{proof}
+첫 번째 등식은 다음으로부터 성립한다.
+$$
+\int_Y c \cup b \cup f_*a =
+\int_X f^*c \cup f^*b \cup a =
+\int_Y c \cup f_*(f^*b \cup a).
+$$
+두 번째 등식은 다음으로부터 성립한다.
+$$
+\int_Z c \cup (g \circ f)_*a = \int_X (g \circ f)^*c \cup a =
+\int_X f^* g^* c \cup a = \int_Y g^*c \cup f_*a = \int_Z c \cup g_*f_*a
+$$
+이로써 증명이 끝난다.
+\end{proof}
+
+\noindent
+두 번째 공리는\  $H^*$가 {\it K\"unneth 공식}을 통해 곱으로 주어진
+모노이드 구조를 보존한다는 것이다.
+\begin{enumerate}
+\item[(B)] $X$와\  $Y$를 매끄러운 사영 다형체라 하자. 사상
+$$
+H^*(X) \otimes_F H^*(Y) \to H^*(X \times Y),\quad
+a \otimes b \mapsto \text{pr}_1^*a \cup \text{pr}_2^*b
+$$
+은 동형사상이다.
+\end{enumerate}
+세 번째 공리는 사이클류 사상에 관한 것이다.
+\begin{enumerate}
+\item[(C)] 사이클류 사상은 다음 규칙들을 만족한다.
+\begin{enumerate}
+\item 매끄러운 사영 다형체들의 사상\  $f : X \to Y$와\ 
+$\beta \in \CH^*(Y)$에 대해\ 
+$\gamma(f^!\beta) = f^*\gamma(\beta)$이다.
+\item 매끄러운 사영 다형체들의 사상\  $f : X \to Y$와\ 
+$\alpha \in \CH^*(X)$에 대해\ 
+$\gamma(f_*\alpha) = f_*\gamma(\alpha)$이다.
+\item 임의의 매끄러운 사영 다형체\  $X$와\ 
+$\alpha, \beta \in \CH^*(X)$에 대해\ 
+$\gamma(\alpha \cdot \beta) = \gamma(\alpha) \cup \gamma(\beta)$이다.
+\item $\int_{\Spec(k)} \gamma([\Spec(k)]) = 1$이다.
+\end{enumerate}
+\end{enumerate}
+
+\begin{remark}
+\label{remark-replace-cup-product-classical}
+$X$를 매끄러운 사영 다형체라 하자. 사상
+$$
+H^*(X) \otimes_F H^*(X) \longrightarrow H^*(X \times X)
+\xrightarrow{\Delta^*} H^*(X)
+$$
+을 얻는다. 여기서 첫 번째 화살표는 공리 (B)에서와 같고,
+$\Delta^*$는 대각사상\  $\Delta : X \to X \times X$을 따른 당김이다.
+당김은 대수 준동형사상이고\ 
+$\text{pr}_i \circ \Delta = \text{id}$이므로 이 합성은 컵곱이다.
+한편\  $X$ 위의 사이클\  $\alpha, \beta$가 주어지면 교차곱은
+$$
+\alpha \cdot \beta =
+\Delta^!(\alpha \times \beta)
+$$
+로 정의된다. 다시 말해\  $\alpha \cdot \beta$는\ 
+$X \times X$ 위 외적\  $\alpha \times \beta$를 대각선으로 당긴 것이다.
+또한\  $\CH^*(X \times X)$에서\ 
+$\alpha \times \beta = \text{pr}_1^*\alpha \cdot \text{pr}_2^*\beta$임을
+주목하자(증명은 생략한다). 따라서 공리 (C)(a)가 주어졌을 때,
+공리 (C)(c)는\  $\gamma$가 외적과 호환된다는 명제, 즉\ 
+$\gamma(\alpha \times \beta)$가\ 
+$\text{pr}_1^*\gamma(\alpha) \cup \text{pr}_2^*\gamma(\beta)$와
+같다는 명제와 동치이다. \cite{Kleiman-cycles}에서는 공리 (C)(c)를
+이와 같이 정식화한다.
+\end{remark}
+
+\begin{definition}
+\label{definition-weil-cohomology-theory-classical}
+$k$를 대수적으로 닫힌 체라 하고\  $F$를 표수\  $0$인 체라 하자.
+$k$ 위의 계수체\  $F$를 갖는 {\it 고전적\  Weil 코호몰로지 이론}은\ 
+Poincar\'e 쌍대성, K\"unneth 공식, 그리고 사이클류와의 호환성을
+만족하는 데이터 (D1), (D2), (D3), 더 정확히는 (A), (B), (C)를
+만족하는 데이터로 주어진다.
+\end{definition}
+
+\noindent
+약간의 준비를 한다.
+
+\begin{lemma}
+\label{lemma-degrees-cycles-classical}
+$H^*$를 고전적\  Weil 코호몰로지 이론이라 하자
+(정의\  \ref{definition-weil-cohomology-theory-classical}).
+$X$를 차원\  $d$인 매끄러운 사영 다형체라 하자. 도식
+$$
+\xymatrix{
+\CH^d(X) \ar[r]_-\gamma \ar@{=}[d] &
+H^{2d}(X) \ar[d]^{\int_X} \\
+\CH_0(X) \ar[r]^\deg & F
+}
+$$
+은 가환한다. 여기서\  $\deg : \CH_0(X) \to \mathbf{Z}$는\ 
+Chow 호몰로지 절\  \ref{chow-section-degree-zero-cycles}에서 논의한
+영차원 사이클의 차수이다.
+\end{lemma}
+
+\begin{proof}
+$\Spec(k)$에 대해서는 공리 (C)(d)에 의해 결과가 성립한다.
+$x : \Spec(k) \to X$를\  $X$의 닫힌점이라 하자. 그러면 공리 (C)(b)에
+의해\  $H^{2d}(X)$에서\ 
+$\gamma([x]) = x_*\gamma([\Spec(k)])$이다. 따라서\  $x_*$의 정의에 의해\ 
+$\int_X \gamma([x]) = 1$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-trace-product-classical}
+$H^*$를 고전적\  Weil 코호몰로지 이론이라 하자
+(정의\  \ref{definition-weil-cohomology-theory-classical}).
+$X$와\  $Y$를 매끄러운 사영 다형체라 하자. 그러면\ 
+$\int_{X \times Y} = \int_X \otimes \int_Y$이다.
+\end{lemma}
+
+\begin{proof}
+$\dim(X) = d$ 및\  $\dim(Y) = e$라 하자. 공리 (B)에 의해\ 
+$H^{2d + 2e}(X \times Y) = H^{2d}(X) \otimes H^{2e}(Y)$이고,
+공리 (A)(d)에 의해 이는\  $1$차원이다. 보조정리\ 
+\ref{lemma-degrees-cycles-classical}에 의해 이\  $1$차원 벡터공간은
+닫힌점\  $(x, y)$의 류\  $\gamma([x \times y])$로 생성되며,
+$\int_{X \times Y} \gamma([x \times y]) = 1$이다.
+공리 (C)(a)와 (C)(c)에 의해\ 
+$\gamma([x \times y]) = \gamma([x]) \otimes \gamma([y])$이고,
+$\int_X \gamma([x]) = 1$ 및\  $\int_Y \gamma([y]) = 1$이므로 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pr2star-classical}
+$H^*$를 고전적\  Weil 코호몰로지 이론이라 하자
+(정의\  \ref{definition-weil-cohomology-theory-classical}).
+$X$와\  $Y$를 매끄러운 사영 다형체라 하자. 그러면\ 
+$\text{pr}_{2, *} : H^*(X \times Y) \to H^*(Y)$는\ 
+$a \otimes b$를\  $(\int_X a) b$로 보낸다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리\  \ref{lemma-trace-product-classical}의 결과와 동치이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-class-diagonal-classical}
+$H^*$를 고전적\  Weil 코호몰로지 이론이라 하자
+(정의\  \ref{definition-weil-cohomology-theory-classical}).
+$X$를 차원\  $d$인 매끄러운 사영 다형체라 하자.
+$F$ 위\  $H^i(X)$의 기저\  $e_{i, j}, j = 1, \ldots, \beta_i$를 고르자.
+K\"unneth 공식을 사용하여
+$$
+\gamma([\Delta]) =
+\sum\nolimits_{i = 0, \ldots, 2d}
+\sum\nolimits_j e_{i, j} \otimes e'_{2d - i , j}
+\quad\text{in}\quad
+\bigoplus\nolimits_i H^i(X) \otimes_F H^{2d - i}(X)
+$$
+로 쓰자. 여기서\  $e'_{2d - i, j} \in H^{2d - i}(X)$이다.
+그러면\  $\int_X e_{i, j} \cup e'_{2d - i, j'} = (-1)^i\delta_{jj'}$이다.
+\end{lemma}
+
+\begin{proof}
+$\Delta^* : H^*(X \times X) \to H^*(X)$는 컵곱 사상\ 
+$H^*(X) \otimes_F H^*(X) \to H^*(X)$와 같다. 주의\ 
+\ref{remark-replace-cup-product-classical}를 보라.
+한편 공리 (C)(b)와\  $\gamma([X]) = 1$이라는 사실에 의해\ 
+$\gamma([\Delta]) = \Delta_*\gamma([X]) = \Delta_*1$이다.
+실제로\  $[X] \cdot [X] = [X]$이므로 공리 (C)(c)에 의해
+코호몰로지류\  $\gamma([X])$는\  $1$차원\  $F$-대수\  $H^0(X)$에서\ 
+$0$ 또는\  $1$이다. 여기서 공리 (A)(d)와 (A)(b)도 사용했다.
+그러나\  $X$의 닫힌점\  $x$에 대해\  $[X] \cdot [x] = [x]$이고
+보조정리\  \ref{lemma-degrees-cycles-classical}에 의해\ 
+$\gamma([x])$는 영이 아니므로\  $\gamma([X])$는 영일 수 없다. 따라서
+$$
+\int_{X \times X} \gamma([\Delta]) \cup a \otimes b =
+\int_{X \times X} \Delta_*1 \cup a \otimes b =
+\int_X a \cup b
+$$
+이다. 이는\  $\Delta_*$의 정의에 따른다. 한편 보조정리\ 
+\ref{lemma-trace-product-classical}에 의해
+$$
+\int_{X \times X} (\sum e_{i, j} \otimes e'_{2d -i , j}) \cup a \otimes b =
+\sum (\int_X a \cup e_{i, j})(\int_X e'_{2d - i, j} \cup b)
+$$
+이다. 부호가\  $1$이 되도록 두 번 순서를 바꾸었음에 유의하자.
+$\int_X a \cup e_{i, j} = 1$이고 다른 모든 쌍대값은 영이 되도록\ 
+$a$를 고르면, 모든\  $b$에 대해\ 
+$\int_X e'_{2d - i, j} \cup b = \int_X a \cup b$임을 얻는다.
+즉\  $e'_{2d - i, j} = a$이다. 이로써 보조정리가 증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-square-diagonal-classical}
+$H^*$를 고전적\  Weil 코호몰로지 이론이라 하자
+(정의\  \ref{definition-weil-cohomology-theory-classical}).
+$X$를 매끄러운 사영 다형체라 하자. 그러면
+$$
+\sum\nolimits_{i = 0, \ldots, 2\dim(X)} (-1)^i\dim_F H^i(X) =
+\deg([\Delta] \cdot [\Delta]) = \deg(c_d(\mathcal{T}_X) \cap [X])
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+오른쪽 등식. 다음이 성립한다.
+$[\Delta] \cdot [\Delta] = \Delta_*(\Delta^![\Delta])$
+(Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-intersect-regularly-embedded}).
+$\Delta_*$는\  $0$-사이클의 차수를 보존하므로\ 
+$\Delta^![\Delta]$의 차수를 계산하면 충분하다.
+$\Delta^![\Delta]$의 류는\ 
+$\Delta \subset X \times X$의 법선층의 최고차\  Chern 류를\ 
+$[\Delta]$와 캡곱하여 주어진다(Chow 호몰로지 보조정리\ 
+\ref{chow-lemma-gysin-fundamental}). $\Delta$의 여법선층은\ 
+$\Omega_{X/k}$이므로(스킴의 사상 보조정리\ 
+\ref{morphisms-lemma-differentials-diagonal}), 법선층은 원하는 대로
+접다발\ 
+$\mathcal{T}_X = \SheafHom_{\mathcal{O}_X}(\Omega_{X/k}, \mathcal{O}_X)$와
+같다.
+
+\medskip\noindent
+왼쪽 등식. 보조정리\  \ref{lemma-degrees-cycles-classical}에 의해
+\begin{align*}
+\deg([\Delta] \cdot [\Delta])
+& =
+\int_{X \times X} \gamma([\Delta]) \cup \gamma([\Delta]) \\
+& =
+\int_{X \times X} \Delta_*1 \cup \gamma([\Delta]) \\
+& =
+\int_{X \times X} \Delta_*(\Delta^*\gamma([\Delta])) \\
+& =
+\int_X \Delta^*\gamma([\Delta])
+\end{align*}
+이다. 보조정리\  \ref{lemma-class-diagonal-classical}에서와 같이\ 
+$\gamma([\Delta]) = \sum  e_{i, j} \otimes e'_{2d - i , j}$로 쓰자.
+$\Delta^*$가 컵곱으로 주어짐을 상기하면
+$$
+\int_X \sum\nolimits_{i, j} e_{i, j} \cup e'_{2d - i, j} =
+\sum\nolimits_{i, j} \int_X e_{i, j} \cup e'_{2d - i, j} =
+\sum\nolimits_{i, j} (-1)^i = \sum (-1)^i\beta_i
+$$
+를 얻는다. 이것이 원하는 등식이다.
+\end{proof}
+
+
+
+
+\noindent
+이제 고전적\  Weil 코호몰로지 이론을 다음과 같이 모티브와 연결한다.
+
+\begin{lemma}
+\label{lemma-from-functor-to-weil-classical}
+$k$를 대수적으로 닫힌 체라 하고\  $F$를 표수\  $0$인 체라 하자.
+대칭 모노이드 범주의\  $\mathbf{Q}$-선형 함자
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+를 생각하자. $G(\mathbf{1}(1))$가 차수\  $-2$에서만 영이 아니라고 하자.
+그러면 (A)(c)와 (A)(d)를 제외하고 (A), (B), (C)를 모두 만족하는
+데이터 (D1), (D2), (D3)을 얻는다.
+\end{lemma}
+
+\begin{proof}
+$H^*(X) = G(h(X))$로 두어 매끄러운 사영 다형체의 범주에서 등급\ 
+$F$-벡터공간의 범주로 가는 반변 함자를 얻는다. 가정에 의해 당김과
+호환되는 표준 동형사상
+$$
+H^*(X \times Y) = G(h(X \times Y)) = G(h(X) \otimes h(Y)) =
+G(h(X)) \otimes G(h(Y)) = H^*(X) \otimes H^*(Y)
+$$
+이 있다. 대각사상\  $\Delta : X \to X \times X$을 따른 당김을 사용하면
+당김과 호환되는 등급 벡터공간의 표준 사상
+$$
+H^*(X) \otimes H^*(X) = H^*(X \times X) \to H^*(X)
+$$
+을 얻는다. 이는\  $H^*(X)$ 위의 함자적인 등급\  $F$-대수 구조를 정의한다.
+$\Delta$는 인자를 맞바꾸는 교환 제약\ 
+$h(X) \otimes h(X) \to h(X) \otimes h(X)$과 가환하고, $G$는 대칭
+모노이드 범주의 함자이므로 교환 제약과 호환된다. 또한 호몰로지 대수학
+예\  \ref{homology-example-graded-vector-spaces}의 규약에 의해\ 
+$H^*(X)$는 등급 가환 대수이다. 따라서 데이터 (D1)을 얻는다.
+
+\medskip\noindent
+$\mathbf{1}(1)$은 모티브의 범주에서 가역이므로\ 
+$G(\mathbf{1}(1))$은 등급\  $F$-벡터공간의 범주에서 가역이다.
+따라서\  $\sum_i \dim_F G^i(\mathbf{1}(1)) = 1$이다. 가정에 의해
+차수\  $-2$에서만 영이 아닌 것을 얻으므로 등급\  $F$-벡터공간의 동형사상\ 
+$F[2] \to G(\mathbf{1}(1))$을 고를 수 있다. 여기와 아래에서\ 
+$F[n]$은 차수\  $-n$에서\  $F$이고 다른 차수에서는 영인 등급\ 
+$F$-벡터공간을 뜻한다. 텐서곱과의 호환성을 사용하면 모든\ 
+$n \in \mathbf{Z}$에 대해 텐서곱과 호환되는 동형사상\ 
+$F[2n] \to G(\mathbf{1}(n))$을 얻는다.
+
+\medskip\noindent
+$X$를 매끄러운 사영 다형체라 하자. 보조정리\ 
+\ref{lemma-composition-correspondences}에 의해
+$$
+\CH^r(X) \otimes \mathbf{Q} = \text{Corr}^r(\Spec(k), X) =
+\Hom(\mathbf{1}(-r), h(X))
+$$
+이다. 함자\  $G$를 적용하면
+$$
+\gamma :
+\CH^r(X) \otimes \mathbf{Q} \longrightarrow
+\Hom(G(\mathbf{1}(-r)), H^*(X)) = H^{2r}(X)
+$$
+를 얻는다. 이것이 데이터 (D2)이다.
+
+\medskip\noindent
+$X$를 차원\  $d$인 매끄러운 사영 다형체라 하자. 보조정리\ 
+\ref{lemma-composition-correspondences}에 의해
+$$
+\Mor(h(X)(d), \mathbf{1}) = \Mor((X, 1, d), (\Spec(k), 1, 0)) =
+\text{Corr}^{-d}(X, \Spec(k)) = \CH_d(X)
+$$
+이다. 따라서\  $\CH_d(X)$에서 사이클\  $[X]$의 류는 사상\ 
+$h(X)(d) \to \mathbf{1}$을 정의한다. $G$를 적용하면
+$$
+H^*(X) \otimes F[-2d] = G(h(X)(d)) \longrightarrow G(\mathbf{1}) = F
+$$
+를 얻는다. 이 사상은 차수\  $0$에서만 영이 아니며, 그 차수에서\ 
+$\int_X : H^{2d}(X) \to F$를 얻는다. 이것이 데이터 (D3)이다.
+
+\medskip\noindent
+$X$를 차원\  $d$인 매끄러운 사영 다형체라 하자.
+보조정리\  \ref{lemma-dual}에 의해\  $h(X)(d)$는\  $h(X)$의 왼쪽
+쌍대이다. 따라서\ 
+$G(h(X)(d)) = H^*(X) \otimes F[-2d]$는 등급\  $F$-벡터공간의 범주에서\ 
+$H^*(X)$의 왼쪽 쌍대이다. 호몰로지 대수학 보조정리\ 
+\ref{homology-lemma-left-dual-graded-vector-spaces}에 의해\ 
+$\sum_i \dim_F H^i(X) < \infty$이고,
+$\epsilon : h(X)(d) \otimes h(X) \to \mathbf{1}$은 비퇴화 쌍대\ 
+$H^{2d - i}(X) \otimes_F H^i(X) \to F$를 만든다. 보조정리\ 
+\ref{lemma-dual}의 증명에서 동형사상
+$$
+\Hom(h(X)(d) \otimes h(X), \mathbf{1}) =
+\text{Corr}^{-d}(X \times X, \Spec(k)) =
+\CH_d(X \times X)
+$$
+아래\  $\epsilon$이\  $[\Delta]$로 주어짐을 보았다. 따라서\ 
+$\epsilon$은\  $[X] : h(X)(d) \to \mathbf{1}$과\ 
+$h(\Delta)(d) : h(X)(d) \otimes h(X) \to h(X)(d)$의 합성이다.
+그러므로 위의 쌍대는 컵곱 뒤에\  $\int_X$를 적용하여 주어진다.
+이로써 공리 (A)의 (a)와 (b)가 증명된다.
+
+\medskip\noindent
+공리 (B)는\  $G$가 텐서 구조와 호환된다는 가정 및 위에서 구성한
+컵곱에서 따른다.
+
+\medskip\noindent
+공리 (C). 우리의\  $\gamma$ 구성은\  $X$ 위의 사이클\  $\alpha$를 어떤
+차수의\  $\Spec(k)$에서\  $X$로 가는 대응\  $a$로 해석한 다음\  $G$를
+적용한다. $f : Y \to X$가 매끄러운 사영 다형체들의 사상이면\ 
+$f^!\alpha$는\  $X$에서\  $Y$로 가는 대응\  $[\Gamma_f]$에 의한\ 
+$\alpha$의 밀어올림(!)이다. 보조정리\ 
+\ref{lemma-functor-and-cycles}를 보라. 따라서\  $\Spec(k)$에서\  $Y$로
+가는 대응으로 본\  $f^!\alpha$는\  $a \circ [\Gamma_f]$와 같다.
+보조정리\  \ref{lemma-composition-correspondences}를 보라.
+$G$가 함자이므로\  $\gamma$는 당김과 호환된다. 즉 공리 (C)(a)가 성립한다.
+
+\medskip\noindent
+$f : Y \to X$를 매끄러운 사영 다형체들의 사상이라 하고\ 
+$\beta \in \CH^r(Y)$를\  $Y$ 위의 사이클이라 하자. 모든\ 
+$c \in H^*(X)$에 대해
+$$
+\int_Y \gamma(\beta) \cup f^*c = \int_X \gamma(f_*\beta) \cup c
+$$
+임을 보여야 한다. $a, a^t, \eta_X, \eta_Y, [X], [Y]$를
+보조정리\  \ref{lemma-prep-dual}에서와 같이 두자. $b$를\ 
+$\Spec(k)$에서\  $Y$로 가는 차수\  $r$의 대응으로 본\  $\beta$라 하자.
+그러면\  $\Spec(k)$에서\  $X$로 가는 대응으로 본\  $f_*\beta$는\ 
+$a^t \circ b$와 같다. 보조정리\ 
+\ref{lemma-functor-and-cycles} 및\ 
+\ref{lemma-composition-correspondences}를 보라.
+위의 표시된 등식은
+$$
+h(X) = \mathbf{1} \otimes h(X)
+\xrightarrow{b \otimes 1}
+h(Y)(r) \otimes h(X)
+\xrightarrow{1 \otimes a}
+h(Y)(r) \otimes h(Y)
+\xrightarrow{\eta_Y}
+h(Y)(r)
+\xrightarrow{[Y]}
+\mathbf{1}(r - e)
+$$
+가
+$$
+h(X) = \mathbf{1} \otimes h(X)
+\xrightarrow{a^t \circ b \otimes 1}
+h(X)(r + d - e) \otimes h(X)
+\xrightarrow{\eta_X}
+h(X)(r + d - e)
+\xrightarrow{[X]}
+\mathbf{1}(r - e)
+$$
+와 같음을 보이면 성립한다. 이는 보조정리\ 
+\ref{lemma-prep-dual}에서 바로 따른다. 따라서 공리 (C)(b)가 성립한다.
+
+\medskip\noindent
+공리 (C)(c)를 증명하기 위해 주의\ 
+\ref{remark-replace-cup-product-classical}의 논의를 사용한다.
+따라서\  $\gamma$가 외적과 호환됨을 보이면 충분하다.
+$X$, $Y$를 매끄러운 사영 다형체라 하고\  $\alpha$, $\beta$를 각각 그
+위의 사이클이라 하자. 대응하는\  $\Spec(k)$에서\  $X$, $Y$로 가는 대응을\ 
+$a$, $b$라 하자. 그러면\  $\alpha \times \beta$는\ 
+$\Spec(k)$에서\  $X \otimes Y = X \times Y$로 가는 대응\ 
+$a \otimes b$에 대응한다. 따라서 필요한 성질은\  $G$가 양쪽의 텐서
+구조와 호환된다는 사실에서 따른다.
+
+\medskip\noindent
+사이클\  $[\Spec(k)]$는\  $h(\Spec(k))$의 항등사상에 대응하므로
+공리 (C)(d)가 성립한다. 이로써 보조정리의 증명이 끝난다.
+\end{proof}
+\begin{lemma}
+\label{lemma-from-weil-to-functor-classical}
+$k$를 대수적으로 닫힌 체라 하고\  $F$를 표수\  $0$인 체라 하자.
+$H^*$를 고전적\  Weil 코호몰로지 이론이라 하자. 그러면\ 
+$H^*(X) = G(h(X))$인 대칭 모노이드 범주의\  $\mathbf{Q}$-선형 함자
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+를 구성할 수 있다.
+\end{lemma}
+
+\begin{proof}
+보조정리\  \ref{lemma-characterize-motives}에 의해 대상이\  $k$ 위의
+매끄러운 사영 스킴이고 사상이 차수\  $0$의 대응인 범주 위 함자\  $G$를
+구성하여, $G(\mathbf{P}^1)$ 위\  $G(c_2)$의 상이 가역인 등급\ 
+$F$-벡터공간임을 보이면 충분하다. 모든 매끄러운 사영 스킴은 표준적으로
+매끄러운 사영 다형체들의 서로소 합이므로, 대상이 매끄러운 사영
+다형체이고 사상이 차수\  $0$의 대응인 범주 위\  $G$를 구성하면 충분하다
+(몇몇 세부사항은 생략한다).
+
+\medskip\noindent
+매끄러운 사영 다형체\  $X$가 주어지면\  $G(X) = H^*(X)$로 둔다.
+
+\medskip\noindent
+매끄러운 사영 다형체 사이의 대응\ 
+$c \in \text{Corr}^0(X, Y)$가 주어지면 사상\ 
+$G(c) : G(X) = H^*(X) \to G(Y) = H^*(Y)$를 다음 규칙으로 정의한다.
+$$
+a \longmapsto
+G(c)(a) = \text{pr}_{2, *}(\gamma(c) \cup \text{pr}_1^*a)
+$$
+$G(c)$가\  $c$에 대해 가법적이고 따라서\  $\mathbf{Q}$-선형임은 명백하다.
+공리 (C)(a), (C)(b), (C)(c)에서 주어진 당김, 밀어올림, 교차곱과\ 
+$\gamma$의 호환성은\  $c' \in \text{Corr}^0(Y, Z)$일 때\ 
+$G(c' \circ c) = G(c') \circ G(c)$임을 보인다. 실제로\ 
+$a \in H^*(X)$에 대해
+\begin{align*}
+(G(c') \circ G(c))(a)
+& =
+\text{pr}^{23}_{3, *}(\gamma(c') \cup
+\text{pr}^{23, *}_2(\text{pr}^{12}_{2, *}(\gamma(c) \cup
+\text{pr}^{12, *}_1a))) \\
+& =
+\text{pr}^{23}_{3, *}(\gamma(c') \cup
+\text{pr}^{123}_{23, *}(\text{pr}^{123, *}_{12}(\gamma(c) \cup
+\text{pr}^{12, *}_1 a))) \\
+& =
+\text{pr}^{23}_{3, *}
+\text{pr}^{123}_{23, *}(
+\text{pr}^{123, *}_{23}\gamma(c') \cup
+\text{pr}^{123, *}_{12}\gamma(c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{23}_{3, *}
+\text{pr}^{123}_{23, *}(
+\gamma(\text{pr}^{123, *}_{23}c') \cup
+\gamma(\text{pr}^{123, *}_{12}c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{13}_{3, *}
+\text{pr}^{123}_{13, *}(
+\gamma(\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{13}_{3, *}(
+\gamma(\text{pr}^{123}_{13, *}(
+\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c)) \cup
+\text{pr}^{13, *}_1 a) \\
+& =
+G(c' \circ c)(a)
+\end{align*}
+이다. 첫 번째 등식은 정의에서 따른다. 두 번째 등식은 보조정리\ 
+\ref{lemma-pr2star-classical}에서 주어진 사영을 따른 밀어올림의
+기술로부터 바로 얻는\ 
+$\text{pr}^{23, *}_2 \circ \text{pr}^{12}_{2, *} =
+\text{pr}^{123}_{23, *} \circ \text{pr}^{123, *}_{12}$에 의해 성립한다.
+세 번째 등식은 보조정리\  \ref{lemma-pushforward-classical}과\ 
+$H^*$가 함자라는 사실에 의해 성립한다. 네 번째 등식은 공리 (C)(a)와
+평탄 사상의\  Gysin 사상이 평탄 당김과 같다는 사실
+(Chow 호몰로지 보조정리\  \ref{chow-lemma-lci-gysin-flat})에 의해
+성립한다. 다섯 번째 등식에서는 공리 (C)(c)와 보조정리\ 
+\ref{lemma-pushforward-classical}을 사용하여\ 
+$\text{pr}^{23}_{3, *} \circ \text{pr}^{123}_{23, *} =
+\text{pr}^{13}_{3, *} \circ \text{pr}^{123}_{13, *}$임을 안다.
+여섯 번째 등식에서는 보조정리\ 
+\ref{lemma-pushforward-classical}의 사영 공식과 공리 (C)(b)를 사용하여\ 
+$
+\text{pr}^{123}_{13, *}
+\gamma(\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c) =
+\gamma(\text{pr}^{123}_{13, *}(
+\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c))$임을 안다.
+마지막 등식은 정의이다.
+
+\medskip\noindent
+$G$가 함자임을 증명하려면 항등사상이 보존됨을 보여야 한다.
+다시 말해 대응의 범주에서\ 
+$1 = [\Delta] \in \text{Corr}^0(X, X)$가 항등사상이면
+(보조정리\  \ref{lemma-category-correspondences}와 그 증명을 보라),
+$G([\Delta]) = \text{id}$임을 보여야 한다. 이는 보조정리\ 
+\ref{lemma-class-diagonal-classical}에서의\  $\gamma([\Delta])$의 결정과
+보조정리\  \ref{lemma-pr2star-classical}에서 따른다.
+이로써 매끄러운 사영 다형체와 차수\  $0$의 대응 위 함자\  $G$의
+구성이 끝난다.
+
+\medskip\noindent
+공리 (A)(c)와 (A)(d)에 의해\ 
+$G(\Spec(k)) = H^*(\Spec(k))$는\  $F$-대수로서 표준적으로\  $F$와
+동형이다. K\"unneth 공리 (B)는 우리의 함자가 텐서곱과 호환됨을
+보인다. 따라서 우리의 함자는 대칭 모노이드 범주의 함자이다.
+
+\medskip\noindent
+아직\  $G(\mathbf{P}^1)$ 위\  $G(c_2)$의 상이 가역인 등급\ 
+$F$-벡터공간임을 확인해야 한다(특히 아직\  $G$가\  $M_k$로 확장됨을
+알지 못한다). 공리 (A)(d)에 의해 사상\ 
+$\int_{\mathbf{P}^1} : H^2(\mathbf{P}^1) \to F$는 동형사상이다.
+공리 (A)(b)에 의해\  $\dim_F H^0(\mathbf{P}^1) = 1$이다.
+보조정리\  \ref{lemma-square-diagonal-classical}과 공리 (A)(c)에 의해\ 
+$2 - \dim_F H^1(\mathbf{P}^1) = c_1(T_{\mathbf{P}^1}) = 2$를 얻는다.
+따라서\  $H^1(\mathbf{P}^1) = 0$이다. 그러므로
+$$
+G(\mathbf{P}^1) = H^0(\mathbf{P}^1) \oplus H^2(\mathbf{P}^1)
+$$
+이다. $1 = c_0 + c_2$는\  $\text{Corr}^0(\mathbf{P}^1, \mathbf{P}^1)$의
+항등원을 서로 직교하는 멱등원들의 합으로 분해한 것임을 상기하자.
+예\  \ref{example-decompose-P1}을 보라. 또한\ 
+$a \in \text{Corr}^0(\Spec(k), \mathbf{P}^1)$ 및\ 
+$b \in \text{Corr}^0(\mathbf{P}^1, \Spec(k))$이고\ 
+$\text{Corr}^0(\Spec(k), \Spec(k))$에서\  $b \circ a = 1$인\ 
+$c_0 = a \circ b$가 있다. 보조정리\  \ref{lemma-inverse-h2}의 증명을
+보라. $F = G(\Spec(k))$이므로 함자성에 의해\  $G(c_0)$는
+직합인자\  $H^0(\mathbf{P}^1) \subset G(\mathbf{P}^1)$으로의 사영자이다.
+따라서\  $G(c_2)$는 반드시\  $H^2(\mathbf{P}^1)$으로의 사영자이고
+증명이 끝난다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-weil-cohomology-theory-classical}
+$k$를 대수적으로 닫힌 체라 하고\  $F$를 표수\  $0$인 체라 하자.
+고전적\  Weil 코호몰로지 이론은 대칭 모노이드 범주의\ 
+$\mathbf{Q}$-선형 함자
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+와 등급\  $F$-벡터공간의 동형사상\ 
+$F[2] \to G(\mathbf{1}(1))$ 중 다음 조건들을 추가로 만족하는 것과 같다.
+\begin{enumerate}
+\item $G(h(X))$는 음이 아닌 차수에 놓인다.
+\item $\dim_F G^0(h(X)) = 1$이다.
+\end{enumerate}
+여기서\  $X$는 임의의 매끄러운 사영 다형체이다.
+\end{proposition}
+
+\begin{proof}
+$G$와\  $F[2] \to G(\mathbf{1}(1))$가 주어졌을 때\ 
+$H^*(X) = G(h(X))$로 두면, (A)(c)와 (A)(d)를 제외하고
+(A), (B), (C)를 모두 만족하는 데이터 (D1), (D2), (D3)을 얻는다.
+보조정리\  \ref{lemma-from-functor-to-weil-classical}과 그 증명을 보라.
+이미 알고 있는 공리 (A)(a)와 (A)(b)가 있을 때 가정 (1), (2)는
+공리 (A)(c), (A)(d)를 함의함을 주목하자.
+
+\medskip\noindent
+반대로\  $H^*$가 주어지면 보조정리\ 
+\ref{lemma-from-weil-to-functor-classical}의 구성으로 함자\  $G$를 얻는다.
+$X = \mathbf{P}^1, c_0, c_2$를 예\ 
+\ref{example-decompose-P1}에서와 같이 두자. 보조정리\ 
+\ref{lemma-inverse-h2}에서 모티브의 동형사상\ 
+$1(-1) \to (X, c_2, 0)$을 구성했다. 보조정리\ 
+\ref{lemma-from-weil-to-functor-classical}의 증명에서\ 
+$G(1(-1)) = G(X, c_2, 0) = H^2(\mathbf{P}^1)[-2]$임을 보았다.
+따라서 공리 (A)(d)의 동형사상\ 
+$\int_{\mathbf{P}^1} : H^2(\mathbf{P}^1) \to F$는 동형사상\ 
+$G(1(-1)) \to F[-2]$를 주며, 이는 동형사상\ 
+$F[2] \to G(\mathbf{1}(1))$을 정한다. 끝으로\ 
+$G(h(X)) = H^*(X)$이므로 가정 (1), (2)는 공리 (A)에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{비닫힌 체 위의 사이클}
+\label{section-cycles-nonclosed}
+
+\noindent
+대수적으로 닫혀 있지 않은 기초체 위의 모티브를 연구하는 데 도움이 될
+몇 가지 보조정리를 제시한다.
+
+\begin{lemma}
+\label{lemma-generated-by-separable}
+$k$를 체라 하고\  $X$를\  $k$ 위의 매끄러운 사영 스킴이라 하자.
+그러면\  $\CH_0(X)$는 잉여체가\  $k$ 위에서 분리인 닫힌점들의 류로 생성된다.
+\end{lemma}
+
+\begin{proof}
+$k$의 표수가\  $0$이거나 완전체이면 보조정리는 즉시 성립한다.
+따라서\  $k$가 표수\  $p > 0$인 무한체인 경우만 생각하면 된다.
+
+\medskip\noindent
+$X$가 차원\  $d$인 기약 스킴이라고 가정해도 된다.
+그러면\  $k' = H^0(X, \mathcal{O}_X)$는\  $k$의 유한 분리 체확대이고\ 
+$X$는\  $k'$ 위에서 기하적으로 정역이다. Varieties, Lemmas
+\ref{varieties-lemma-smooth-geometrically-normal},
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections}, 그리고\ 
+\ref{varieties-lemma-baby-stein}을 보라. $k$를\  $k'$로 바꾸어\ 
+$X$가 기하적으로 정역이라고 가정한다.
+
+\medskip\noindent
+$x \in X$를 닫힌점이라 하자. 보조정리를 증명하기 위해\ 
+$[x] \in \CH_0(X)$가 잉여체가\  $k$ 위에서 분리인 닫힌점들의 류의
+정수 선형결합과 유리 동치임을 보이겠다. 풍부한 가역\ 
+$\mathcal{O}_X$-모듈\  $\mathcal{L}$을 고르고 다음과 같이 두자.
+$$
+V = \{s \in H^0(X, \mathcal{L}) \mid s(x) = 0 \}
+$$
+$\mathcal{L}$을 그 거듭제곱으로 바꾸어 다음을 가정할 수 있다.
+(a) $\mathcal{L}$은 매우 풍부하고, (b) $V$는\  $X \setminus x$ 위에서\ 
+$\mathcal{L}$을 생성하며, (c) 사상\ 
+$X \setminus x \to \mathbf{P}(V)$는 몰입이고, (d) 사상\ 
+$V \to \mathfrak m_x\mathcal{L}_x/\mathfrak m_x^2\mathcal{L}_x$는
+전사이다. Morphisms, Lemma
+\ref{morphisms-lemma-finite-type-ample-very-ample}, Varieties, Lemma
+\ref{varieties-lemma-generate-over-complement}, 그리고\  Properties,
+Proposition \ref{properties-proposition-characterize-ample}을 보라.
+다음 집합을 생각하자.
+$$
+V^d \supset U =
+\{
+(s_1, \ldots, s_d) \in V^d \mid s_1, \ldots, s_d
+\text{ generate }
+\mathfrak m_x\mathcal{L}_x/\mathfrak m_x^2\mathcal{L}_x
+\text{ over }\kappa(x)
+\}
+$$
+$\mathcal{O}_{X, x}$는 차원\  $d$인 정칙 국소환이므로\ 
+$\dim_{\kappa(x)}(\mathfrak m_x/\mathfrak m_x^2) = d$이다.
+따라서\  $U$는\  $V^d$의 공집합이 아닌 (Zariski) 열린집합이다.
+$(s_1, \ldots, s_d) \in U$에 대해\  $H_i = Z(s_i)$로 두자.
+$s_1, \ldots, s_d$가\  $\mathfrak m_x\mathcal{L}_x$를 생성하므로
+어떤 닫힌 부분스킴\  $Z \subset X$에 대해 스킴 이론적으로
+$$
+H_1 \cap \ldots \cap H_d = x \amalg Z
+$$
+이다. Bertini 정리(Varieties, Lemma
+\ref{varieties-lemma-bertini}의 형태)에 의해 일반 원소\ 
+$s_1 \in V$에 대해 스킴\  $H_1 \cap (X \setminus x)$는\ 
+$k$ 위에서 매끄럽고 차원은\  $d - 1$이다. $s_1$을 고른 뒤 일반 원소\ 
+$s_2 \in V$에 대해 스킴\  $H_1 \cap H_2 \cap (X \setminus x)$는\ 
+$k$ 위에서 매끄럽고 차원은\  $d - 2$이다. 같은 과정을 계속한다.
+따라서 충분히 일반적인\  $(s_1, \ldots, s_d) \in U$에 대해\ 
+$Z$는\  $\Spec(k)$ 위에서 \'etale이다. 특히\ 
+$H_1 \cap \ldots \cap H_d$는 차원\  $0$이고, 따라서\ 
+Chow Homology, Lemma \ref{chow-lemma-intersect-properly}를 반복하여
+적용하면(세부사항은 생략한다) $\CH_0(X)$에서
+$$
+[H_1] \cdot \ldots \cdot [H_d] = [x] + [Z]
+$$
+이다. 이는\  $[x] \sim_{rat} - [Z] + [Z']$임을 보이므로 증명이 끝난다.
+여기서\  $Z' = H'_1 \cap \ldots \cap H'_d$는\  $\mathcal{L}$의 충분히
+일반적인 절단들의 영점자취의 일반 완전교차이며, 앞과 같은 논법으로\ 
+$k$ 위에서 \'etale이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-chow-limit}
+$K/k$를 대수적 체확대라 하고\  $X$를\  $k$ 위 유한형 스킴이라 하자.
+그러면\  $\CH_i(X_K) = \colim \CH_i(X_{k'})$이다. 여기서 쌍극한은\ 
+$k'/k$가 유한인 중간확대\  $K/k'/k$ 전체에 걸쳐 취한다.
+\end{lemma}
+
+\begin{proof}
+이는\  Chow Homology, Lemma \ref{chow-lemma-chow-limit}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-divide-difference-points}
+$k$를 체라 하고\  $X$를\  $k$ 위의 기하적으로 기약인 매끄러운 사영
+스킴이라 하자. $x, x' \in X$를\  $k$-유리점이라 하고\  $n$을\  $k$에서
+가역인 정수라 하자. 그러면\  $[x] - [x']$의\  $X_{k'}$로의 당김이\ 
+$\CH_0(X_{k'})$에서\  $n$으로 나누어지는 유한 분리확대\  $k'/k$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$k'$을\  $k$의 분리 대수 폐포라 하자. $[x] - [x']$의\  $X_{k'}$로의
+당김이\  $\CH_0(X_{k'})$에서\  $n$으로 나누어짐을 보일 수 있다고 하자.
+그러면 보조정리\  \ref{lemma-chow-limit}에 의해 결론을 얻는다.
+따라서\  $k$가 분리폐체라고 가정한다.
+
+\medskip\noindent
+$\dim(X) > 1$이라고 하자. $\mathcal{L}$을\  $X$ 위 풍부한 가역층이라 하고
+다음과 같이 두자.
+$$
+V = \{s \in H^0(X, \mathcal{L}) \mid s(x) = 0\text{ and }s(x') = 0 \}
+$$
+$\mathcal{L}$을 그 거듭제곱으로 바꾸면 일반적인\  $v \in V$에 대응하는
+인자\  $H_v \subset X$가\  $x$와\  $x'$ 밖에서 매끄럽다는 것을 알 수 있다.
+Varieties, Lemmas \ref{varieties-lemma-generate-over-complement}와\ 
+\ref{varieties-lemma-bertini}을 보라. 이런\  $v$를 찾을 때\  $k$가
+분리폐체이므로 무한체라는 사실을 사용한다. 일반적인\  $s$를 고르면\ 
+$\mathfrak m_x\mathcal{L}_x/\mathfrak m_x^2\mathcal{L}_x$에서\  $s$의
+상은 영이 아니며, 이는\  $H_v$가\  $x$에서 매끄러움을 뜻한다
+(세부사항은 생략한다). $x'$에 대해서도 마찬가지이다. 따라서\  $H_v$는
+매끄럽다. 모든 대상을\  $k$의 대수 폐포로 기저변환한 뒤\  Varieties,
+Lemma \ref{varieties-lemma-connectedness-ample-divisor}를 적용하면\ 
+$H_v$가 기하적으로 연결임을 알 수 있다. $[x] - [x']$를\ 
+$\CH_0(H_v)$의 원소로 보아 결과를 증명하면 충분하다. 이로써 곡선의
+경우로 환원된다.
+
+\medskip\noindent
+$X$가 곡선이라고 하자. 그러면\  $\mathcal{O}_X(x - x')$는\ 
+$J = \underline{\Pic}^0_{X/k}$의\  $k$-유리점\  $g$를 정의한다.
+Picard Schemes of Curves, Lemma \ref{pic-lemma-picard-pieces}를 보라.
+$J$는\  $k$ 위의 고유 매끄러운 다형체이자\  $k$ 위의 군스킴이다
+(같은 참조). 따라서\  $J$는 기하적으로 정역이다(Varieties, Lemmas
+\ref{varieties-lemma-geometrically-connected-criterion}과\ 
+\ref{varieties-lemma-smooth-geometrically-normal}을 보라).
+다시 말해\  $J$는 아벨 다형체이다. Groupoids, Definition
+\ref{groupoids-definition-abelian-variety}를 보라. 따라서\  Groupoids,
+Proposition \ref{groupoids-proposition-review-abelian-varieties}에 의해\ 
+$[n] : J \to J$는 유한 \'etale이다(여기서\  $n$이\  $k$에서 가역임을
+사용한다). $k$가 분리폐체이므로 어떤\  $g' \in J(k)$에 대해\ 
+$g = [n](g')$이다. $\mathcal{L}$을\  $g'$에 대응하는\  $X$ 위의 차수\ 
+$0$인 가역 모듈이라 하면, 원하는 대로\ 
+$\mathcal{O}_X(x - x') \cong \mathcal{L}^{\otimes n}$을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-kernel-to-closure}
+$K/k$를 대수적 체확대라 하고\  $X$를\  $k$ 위 유한형 스킴이라 하자.
+보조정리\  \ref{lemma-chow-limit}에서 구성한 사상\ 
+$\CH_i(X) \to \CH_i(X_K)$의 핵은 꼬임군이다.
+\end{lemma}
+
+\begin{proof}
+임의의 유한확대\  $k'/k$에 대해\  $\pi : X_{k'} \to X$를 따른 평탄 당김\ 
+$\CH_i(X) \to \CH_i(X_{k'})$의 핵이 꼬임군임을 보이면 충분함은
+분명하다. Chow Homology, Lemma \ref{chow-lemma-finite-flat}에 의해\ 
+$\pi_* \pi^* \alpha = [k' : k] \alpha$이므로 이 또한 분명하다.
+\end{proof}
+
+\begin{lemma}[Voevodsky]
+\label{lemma-smash-nilpotence}
+\begin{reference}
+\cite{nilpotence}
+\end{reference}
+$k$를 체라 하고\  $X$를\  $k$ 위의 기하적으로 기약인 매끄러운 사영
+스킴이라 하자. $x, x' \in X$를\  $k$-유리점이라 하자. 충분히 큰\ 
+$n$에 대해 영 사이클
+$$
+([x] - [x']) \times \ldots \times ([x] - [x']) \in
+\CH_0(X^n)
+$$
+의 류는 꼬임원소이다.
+\end{lemma}
+
+\begin{proof}
+$k$의 대수 폐포로 기저변환한 뒤 이를 보일 수 있다면, 보조정리\ 
+\ref{lemma-kernel-to-closure}에 의해 당김의 핵이 꼬임군이므로\ 
+$k$ 위에서도 결론이 성립한다. 따라서\  $k$가 대수적으로 닫혀 있다고
+가정한다.
+
+\medskip\noindent
+Bertini 정리를 사용하면\  $x$와\  $x'$을 지나는 매끄러운 곡선\ 
+$C \subset X$를 고를 수 있다. 보조정리\ 
+\ref{lemma-divide-difference-points}의 증명을 보라. 따라서\  $X$가
+곡선이라고 가정할 수 있다.
+
+\medskip\noindent
+$X$가 곡선이고\  $k$가 대수적으로 닫혀 있다고 하자. Picard Schemes of
+Curves, Sections \ref{pic-section-hilbert-scheme-points}와\ 
+\ref{pic-section-divisors}의 표기법에 따라\ 
+$S^n(X) = \underline{\Hilbfunctor}^n_{X/k}$로 쓰자. 표준 사상
+$$
+\pi : X^n \longrightarrow S^n(X)
+$$
+이 있으며, 이는\  $k$-유리점\  $(x_1, \ldots, x_n)$을\  $X$ 위의 인자\ 
+$[x_1] + \ldots + [x_n]$에 대응하는\  $k$-유리점으로 보낸다.
+대칭군\  $S_n$은\  $X^n$ 위에 충실하게 작용한다. 사상\  $\pi$는\ 
+$S_n$-불변이고\  $\pi$의 섬유들은 집합론적으로\  $S_n$-궤도이다.
+마지막으로\  $\pi$는 차수\  $n!$인 유한 평탄 사상이다. Picard Schemes of
+Curves, Lemma \ref{pic-lemma-universal-object}를 보라.
+
+\medskip\noindent
+$\alpha_n$을 보조정리의 명제에 나온 공식으로 주어지는\  $X^n$ 위의
+영 사이클이라 하자. $\mathcal{L} = \mathcal{O}_X(x - x')$로 두자.
+그러면\  $c_1(\mathcal{L}) \cap [X] = [x] - [x']$이다. 따라서
+$$
+\alpha_n = c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_n) \cap [X^n]
+$$
+이다. 여기서\  $\mathcal{L}_i = \text{pr}_i^*\mathcal{L}$이고\ 
+$\text{pr}_i : X^n \to X$는\  $i$번째 사영이다. Divisors, Lemma
+\ref{divisors-lemma-finite-locally-free-has-norm} 또는\  Divisors, Lemma
+\ref{divisors-lemma-norm-in-normal-case}에 의해\  $\pi$에 대한 노름이
+존재한다. $\mathcal{N} = \text{Norm}_\pi(\mathcal{L}_1)$로 두자.
+Divisors, Lemma \ref{divisors-lemma-norm-invertible}을 보라. 계산하면\ 
+$\Pic(X^n)$에서
+$$
+\pi^*\mathcal{N} =
+(\mathcal{L}_1 \otimes \ldots \otimes \mathcal{L}_n)^{\otimes (n - 1)!}
+$$
+이다. 세부사항은 생략한다. 힌트: 이는\ 
+$\text{Norm}_\pi : \pi_*\mathcal{O}_{X^n} \to \mathcal{O}_{S^n(X)}$
+와 자연스러운 사상\  $\pi_*\mathcal{O}_{S^n(X)} \to \mathcal{O}_{X^n}$의
+합성이 모든\  $\sigma \in S_n$에 대한\  $\pi_*\mathcal{O}_{X^n}$ 위의\ 
+$\sigma$의 작용의 곱과 같다는 사실에서 따른다. 다음을 생각하자.
+$$
+\beta_n = c_1(\mathcal{N})^n \cap [S^n(X)]
+$$
+이는\  $\CH_0(S^n(X))$의 원소이다. $\mathcal{L}_i$가 곡선에서
+당겨온 것이므로\  $c_1(\mathcal{L}_i) \cap c_1(\mathcal{L}_i) = 0$이다.
+Chow Homology, Lemma \ref{chow-lemma-vanish-above-dimension}을 보라.
+따라서
+\begin{align*}
+\pi^*\beta_n
+& =
+((n - 1)!)^n
+(\sum\nolimits_{i = 1, \ldots, n} c_1(\mathcal{L}_i))^n \cap [X^n] \\
+& =
+((n - 1)!)^n n^n 
+c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_n) \cap [X^n] \\
+& =
+(n!)^n \alpha_n
+\end{align*}
+이다. 그러므로\  $\beta_n$이 꼬임원소임을 보이면 충분하다.
+
+\medskip\noindent
+표준 사상
+$$
+f : S^n(X) \longrightarrow \underline{\Picardfunctor}^n_{X/k}
+$$
+이 있다. Picard Schemes of Curves, Lemma
+\ref{pic-lemma-picard-pieces}를 보라. $n \geq 2g - 1$이면 이 사상은
+사영공간 다발이다(세부사항은 생략한다. Picard Schemes of Curves,
+Lemma \ref{pic-lemma-picard-pieces}의 증명과 비교하라).
+아래에서 보이듯이 가역층\  $\mathcal{N}$은\  $f$의 섬유 위에서 자명하다.
+따라서 사영공간 다발 공식(Chow Homology, Lemma
+\ref{chow-lemma-chow-ring-projective-bundle})에 의해 어떤\ 
+$\underline{\Picardfunctor}^n_{X/k}$ 위의 가역 모듈\  $\mathcal{M}$에 대해\ 
+$\mathcal{N} = f^*\mathcal{M}$이다. 물론 이로부터
+$$
+c_1(\mathcal{N})^n = f^*(c_1(\mathcal{M})^n)
+$$
+가 영임을 알 수 있다. 실제로\ 
+$n > g = \dim(\underline{\Picardfunctor}^n_{X/k})$이고, 앞에서처럼\ 
+Chow Homology, Lemma \ref{chow-lemma-vanish-above-dimension}을
+사용할 수 있다.
+
+\medskip\noindent
+$\mathcal{N}$이\  $f$의 한 섬유\  $F$ 위에서 자명함을 보이는 일이 남았다.
+$f$의 섬유들은 사영공간이고\  $\Pic(\mathbf{P}^m_k) = \mathbf{Z}$이므로
+(Divisors, Lemma \ref{divisors-lemma-Pic-projective-space-UFD}),
+섬유 안의 직선 위에서\  $\mathcal{N}$의 차수를 계산하여 이를 보일 수 있다.
+대신\  $\mathcal{N}$이 영과 대수적으로 동치임을 증명하겠다. 먼저\ 
+$k$ 위의 연결 유한형 스킴\  $T$, $T \times X$ 위의 가역 모듈\ 
+$\mathcal{L}'$, 그리고\  $\mathcal{M}_p \cong \mathcal{O}_X$ 및\ 
+$\mathcal{M}_q = \mathcal{L}$을 만족하는\  $k$-유리점\  $p, q \in T$가
+존재한다고 주장한다. 실제로\  $\mathcal{L} = \mathcal{O}_X(x - x')$이므로\ 
+$T = X$, $p = x'$, $q = x$, 그리고\ 
+$\mathcal{L}' = \mathcal{O}_{X \times X}(\Delta)
+\otimes \text{pr}_2^*\mathcal{O}_X(-x')$로 둘 수 있다.
+이제\  $i = 1, \ldots, n$에 대해\  $T \times X^n$ 위의\ 
+$\mathcal{L}'_i$를\  $\mathcal{L}'$의\ 
+$\text{id}_T \times \text{pr}_i : T \times X^n \to T \times X$를
+따른 당김으로 두자. 마지막으로\  $T \times S^n(X)$ 위에서\ 
+$\mathcal{N}' = \text{Norm}_{\text{id}_T \times \pi}(\mathcal{L}'_1)$로
+두자. 구성에 의해\  $\mathcal{N}'_p = \mathcal{O}_{S^n(X)}$이고\ 
+$\mathcal{N}'_q = \mathcal{N}$이다. 따라서
+$$
+\mathcal{N}'|_{T \times F}
+$$
+는\  $T \times F \cong T \times \mathbf{P}^m_k$ 위의 가역 모듈이고,
+$p$ 위의 섬유는 자명한 가역 모듈이며\  $q$ 위의 섬유는\ 
+$\mathcal{N}|_F$이다. 자명한 다발의 오일러 표수는\  $1$이고 이 오일러
+표수는 족에서 국소적으로 상수이므로(Derived Categories of Schemes,
+Lemma \ref{perfect-lemma-chi-locally-constant-geometric}), 모든\ 
+$s \in \mathbf{Z}$에 대해\  $\chi(F, \mathcal{N}^{\otimes s}|_F) = 1$이다.
+이는\  $\mathcal{N}|_F \cong \mathcal{O}_F$일 때만 가능하다(Cohomology of
+Schemes, Lemma
+\ref{coherent-lemma-cohomology-projective-space-over-ring}를 보라).
+따라서 증명이 끝난다. 몇 가지 세부사항은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Weil 코호몰로지 이론, I}
+\label{section-axioms}
+
+\noindent
+이 절은 임의의 체 위에서 절\  \ref{section-axioms-classical}에 대응한다.
+다시 말해 모티브의 범주에서 등급 벡터공간의 범주로 가는 대칭 모노이드
+범주의 함자\  $G$ 가운데\  $G(\mathbf{1}(1))$을 차수\  $-2$에 놓는 것에
+대응하는 데이터와 공리를 밝힌다. 절\  \ref{section-old}에서는 하나의
+보충 조건을 더하여\  Weil 코호몰로지 이론을 정의한다.
+
+\medskip\noindent
+체\  $k$(기초체)를 고정한다.
+표수\  $0$인 체\  $F$(계수체)를 고정한다.
+데이터는 다음과 같다.
+\begin{enumerate}
+\item[(D0)] $1$차원\  $F$-벡터공간\  $F(1)$.
+\item[(D1)] $k$ 위 매끄러운 사영 스킴의 범주에서 등급 가환\ 
+$F$-대수의 범주로 가는 반변 함자\  $H^*$.
+\item[(D2)] 모든\  $k$ 위 매끄러운 사영 스킴\  $X$에 대한 군 준동형사상\ 
+$\gamma : \CH^i(X) \to H^{2i}(X)(i)$.
+\item[(D3)] $k$ 위의 공집합이 아닌 매끄러운 사영 스킴\  $X$가 차원\ 
+$d$인 등차원 스킴일 때마다 주어지는 사상\ 
+$\int_X : H^{2d}(X)(d) \to F$.
+\end{enumerate}
+이 뜻을 설명하고 관련 용어를 도입하기 위해 몇 가지 주의를 덧붙인다.
+
+\medskip\noindent
+(D0)에 관한 주의.
+벡터공간\  $F(1)$은\  $F$-벡터공간의 범주 위에 {\it Tate 꼬임}을 준다.
+구체적으로\  $n \in \mathbf{Z}$에 대해\  $n \geq 0$이면\ 
+$F(n) = F(1)^{\otimes n}$으로 두고, $F(-1) = \Hom_F(F(1), F)$로 두며,
+$n < 0$이면\  $F(n) = F(-1)^{\otimes - n}$으로 둔다. More on Algebra,
+Section \ref{more-algebra-section-picard}와 비교하라. $F$-벡터공간\ 
+$V$에 대해 {\it $n$번째\  Tate 꼬임}을
+$$
+V(n) = V \otimes_F F(n)
+$$
+으로 정의한다. 자명한 표기법을 사용한다. 예를 들어\  $F$-벡터공간\ 
+$U$, $V$, $W$와 선형사상\  $U \otimes_F V \to W$가 주어지면\ 
+$n, m \in \mathbf{Z}$에 대해 선형사상\ 
+$U(n) \otimes_F V(m) \to W(n + m)$을 얻는다.
+
+\medskip\noindent
+(D1)에 관한 주의.
+$k$ 위의 매끄러운 사영 스킴\  $X$가 주어지면\  $H^*(X)$를\  $X$의
+{\it 코호몰로지}라 부른다. $k$ 위 매끄러운 사영 스킴들의 사상\ 
+$f : X \to Y$가 주어지면\  $H^*(f)$인 사상\ 
+$f^* : H^*(Y) \to H^*(X)$를 {\it 당김 사상}이라 부른다.
+
+\medskip\noindent
+(D2)에 관한 주의. 사상\  $\gamma$를 {\it 사이클류 사상}이라 부른다.
+$\gamma(\alpha)$를\  $\alpha$의 {\it 코호몰로지류}라 한다.
+$Z \subset Y \subset X$가 닫힌 부분스킴이고\  $Y$와\  $X$가\  $k$ 위의
+매끄러운 사영 스킴이며\  $Z$가 정역이라고 하자. 그러면\  $[Z]$는\ 
+$\CH^*(Y)$의 사이클\  $[Z]$의 류를 뜻할 수도 있고\  $\CH^*(X)$의 류를
+뜻할 수도 있다. 이 경우\  $\gamma([Z])$라는 표기는 모호하며 의도한
+뜻은 문맥에서 판단해야 한다.
+
+\medskip\noindent
+(D3)에 관한 주의. 사상\  $\int_X$는 때때로 {\it 대각합 사상}이라
+부르며\  $\text{Tr}_X$로 표기하기도 한다.
+
+\medskip\noindent
+첫 번째 공리는 흔히 {\it Poincar\'e 쌍대성}이라 부른다.
+\begin{enumerate}
+\item[(A)] $X$를\  $k$ 위의 공집합이 아닌 매끄러운 사영 스킴이라 하고
+차원\  $d$인 등차원 스킴이라고 하자. 그러면
+\begin{enumerate}
+\item 모든\  $i$에 대해\  $\dim_F H^i(X) < \infty$이고,
+\item 모든\  $i$에 대해\ 
+$H^i(X) \times H^{2d - i}(X)(d) \rightarrow
+H^{2d}(X)(d) \rightarrow F$
+는 완전쌍대이다. 여기서 마지막 사상은 대각합 사상\  $\int_X$이다.
+\end{enumerate}
+\end{enumerate}
+$f : X \to Y$를 공집합이 아닌 매끄러운 사영 스킴들의 사상이라 하자.
+$X$는 차원\  $d$인 등차원 스킴이고\  $Y$는 차원\  $e$인 등차원 스킴이라
+하자. Poincar\'e 쌍대성을 사용하면 {\it 밀어올림}
+$$
+f_* : H^{2d - i}(X)(d) \longrightarrow H^{2e - i}(Y)(e)
+$$
+을 선형사상\  $f^* : H^i(Y) \to H^i(X)$의 반대쌍대로 정의할 수 있다.
+공식으로 쓰면\  $a \in H^{2d - i}(X)(d)$에 대해\ 
+$f_*a \in H^{2e - i}(Y)(e)$는 모든\  $b \in H^i(Y)$에 대한
+$$
+\int_X f^*b \cup a = \int_Y b \cup f_*a
+$$
+로 특징지어진다.
+
+\begin{lemma}
+\label{lemma-pushforward}
+(A)를 만족하는 (D0), (D1), (D3)이 주어졌다고 하자.
+$f : X \to Y$가\  $k$ 위의 공집합이 아닌 등차원 매끄러운 사영
+스킴들의 사상이면\  $f_*(f^*b \cup a) = b \cup f_*a$이다. 또\ 
+$g : Y \to Z$가 두 번째 사상이고\  $Z$가 공집합이 아닌 등차원
+매끄러운 사영 스킴이면\  $g_* \circ f_* = (g \circ f)_*$이다.
+\end{lemma}
+
+\begin{proof}
+첫 번째 등식은 다음으로부터 성립한다.
+$$
+\int_Y c \cup b \cup f_*a =
+\int_X f^*c \cup f^*b \cup a =
+\int_Y c \cup f_*(f^*b \cup a).
+$$
+두 번째 등식은 다음으로부터 성립한다.
+$$
+\int_Z c \cup (g \circ f)_*a = \int_X (g \circ f)^*c \cup a =
+\int_X f^* g^* c \cup a = \int_Y g^*c \cup f_*a = \int_Z c \cup g_*f_*a
+$$
+이로써 증명이 끝난다.
+\end{proof}
+
+\noindent
+두 번째 공리는\  $H^*$가 {\it K\"unneth 공식}을 통해 곱으로 주어진
+모노이드 구조를 보존한다는 것이다.
+\begin{enumerate}
+\item[(B)] $X$와\  $Y$를\  $k$ 위의 매끄러운 사영 스킴이라 하자.
+\begin{enumerate}
+\item 사상\  $H^*(X) \otimes_F H^*(Y) \to H^*(X \times Y)$,
+$\alpha \otimes \beta \mapsto \text{pr}_1^*\alpha \cup \text{pr}_2^*\beta$
+는 동형사상이고,
+\item $X$와\  $Y$가 공집합이 아닌 등차원 스킴이면 (a)를 통해\ 
+$\int_{X \times Y} = \int_X \otimes \int_Y$이다.
+\end{enumerate}
+\end{enumerate}
+공리 (B)(b)를 사용하면 사영을 따른 밀어올림을 계산할 수 있다.
+
+\begin{lemma}
+\label{lemma-pr2star}
+(A)와 (B)를 만족하는 (D0), (D1), (D3)이 주어졌다고 하자.
+$X$와\  $Y$를\  $k$ 위의 공집합이 아닌 매끄러운 사영 스킴이라 하고
+각각 차원\  $d$, $e$인 등차원 스킴이라고 하자. 그러면\ 
+$\text{pr}_{2, *} : H^*(X \times Y)(d + e) \to H^*(Y)(e)$는\ 
+$a \otimes b$를\  $(\int_X a) b$로 보낸다.
+\end{lemma}
+
+\begin{proof}
+이는 공리 (B)(a)와 (B)(b)에서 따른다.
+\end{proof}
+
+\noindent
+세 번째 공리는 사이클류 사상에 관한 것이다.
+\begin{enumerate}
+\item[(C)] 사이클류 사상은 다음 규칙들을 만족한다.
+\begin{enumerate}
+\item $k$ 위 매끄러운 사영 스킴들의 사상\  $f : X \to Y$와\ 
+$\beta \in \CH^*(Y)$에 대해\  $\gamma(f^!\beta) = f^*\gamma(\beta)$이고,
+\item $k$ 위의 공집합이 아닌 등차원 매끄러운 사영 스킴들의 사상\ 
+$f : X \to Y$와\  $\alpha \in \CH^*(X)$에 대해\ 
+$\gamma(f_*\alpha) = f_*\gamma(\alpha)$이고,
+\item 임의의\  $k$ 위 매끄러운 사영 스킴\  $X$와\ 
+$\alpha, \beta \in \CH^*(X)$에 대해\ 
+$\gamma(\alpha \cdot \beta) = \gamma(\alpha) \cup \gamma(\beta)$이며,
+\item $\int_{\Spec(k)} \gamma([\Spec(k)]) = 1$이다.
+\end{enumerate}
+\end{enumerate}
+공리 (C)(b)를 자세히 설명하자. $f : X \to Y$가 (C)(b)에서와 같고\ 
+$\dim(X) = d$, $\dim(Y) = e$라고 하자. Chow 군의 밀어올림은
+$$
+f_* : \CH^{d - i}(X) = \CH_i(X) \to \CH_i(Y) = \CH^{e - i}(Y)
+$$
+을 준다. $\alpha \in \CH^{d - i}(X)$라고 하자. 한편으로\ 
+$f_*\alpha \in \CH^{e - i}(Y)$이고 따라서\ 
+$\gamma(f_*\alpha) \in H^{2e - 2i}(Y)(e - i)$이다. 다른 한편으로\ 
+$\gamma(\alpha) \in H^{2d - 2i}(X)(d - i)$이고 따라서\ 
+$f_*\gamma(\alpha) \in H^{2e - 2i}(Y)(e - i)$이다. 그러므로 조건\ 
+$\gamma(f_*\alpha) = f_*\gamma(\alpha)$은 의미가 있다.
+
+\begin{remark}
+\label{remark-replace-cup-product}
+(A), (B), (C)(a)를 만족하는 (D0), (D1), (D2), (D3)이 주어졌다고 하자.
+$X$를\  $k$ 위의 매끄러운 사영 스킴이라 하자. 사상
+$$
+H^*(X) \otimes_F H^*(X) \longrightarrow H^*(X \times X)
+\xrightarrow{\Delta^*} H^*(X)
+$$
+을 얻는다. 여기서 첫 번째 화살표는 공리 (B)에서와 같고\  $\Delta^*$는
+대각사상\  $\Delta : X \to X \times X$을 따른 당김이다. 당김은 대수
+준동형사상이고\  $\text{pr}_i \circ \Delta = \text{id}$이므로 이 합성은
+컵곱이다. 한편\  $X$ 위의 사이클\  $\alpha, \beta$가 주어지면 교차곱은
+공식
+$$
+\alpha \cdot \beta =
+\Delta^!(\alpha \times \beta)
+$$
+으로 정의된다. 즉\  $\alpha \cdot \beta$는\  $X \times X$ 위의 외적\ 
+$\alpha \times \beta$를 대각선을 따라 당긴 것이다. 또한\ 
+$\CH^*(X \times X)$에서\ 
+$\alpha \times \beta = \text{pr}_1^*\alpha \cdot \text{pr}_2^*\beta$이다
+(증명은 생략한다). 따라서 공리 (C)(a)가 주어졌을 때 공리 (C)(c)는\ 
+$\gamma$가 외적과 호환된다는 명제, 즉\  $\gamma(\alpha \times \beta)$가\ 
+$\text{pr}_1^*\gamma(\alpha) \cup \text{pr}_2^*\gamma(\beta)$와
+같다는 명제와 동치이다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-base}
+(A), (B), (C)를 만족하는 (D0), (D1), (D2), (D3)이 주어졌다고 하자.
+그러면\  $i \not = 0$에 대해\  $H^i(\Spec(k)) = 0$이고 유일한\ 
+$F$-대수 동형사상\  $F = H^0(\Spec(k))$이 존재한다.
+또\  $\gamma([\Spec(k)]) = 1$이고\  $\int_{\Spec(k)} 1 = 1$이다.
+\end{lemma}
+
+\begin{proof}
+공리 (C)(d)에 의해\  $H^0(\Spec(k))$가 영이 아니며, 더 나아가\ 
+$\gamma([\Spec(k)])$가 영이 아님을 알 수 있다.
+$\Spec(k) \times \Spec(k) = \Spec(k)$이므로 공리 (B)(a)에 의해
+$$
+H^*(\Spec(k)) \otimes_F H^*(\Spec(k)) = H^*(\Spec(k))
+$$
+이다. 차원을 보면\  $H^0$만 영이 아니며 그 차원은\  $1$임을 알 수 있다.
+따라서\  $1 \in F$를\  $1 \in H^0(\Spec(k))$로 보내는 유일한\ 
+$F$-대수 동형사상에 의해\  $F = H^0(\Spec(k))$이다.
+$\Spec(k)$의\  Chow 환에서\ 
+$[\Spec(k)] \cdot [\Spec(k)] = [\Spec(k)]$이므로 공리 (C)(c)에 의해\ 
+$\gamma([\Spec(k)) \cup \gamma([\Spec(k)]) = \gamma([\Spec(k)])$이다.
+이미\  $\gamma([\Spec(k)])$가 영이 아님을 알았으므로 이는\  $1$이어야 한다.
+끝으로 공리 (C)(d)에 의해\ 
+$\int_{\Spec(k)} \gamma([\Spec(k)]) = 1$이므로\ 
+$\int_{\Spec(k)} 1 = 1$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-unit}
+(A), (B), (C)를 만족하는 (D0), (D1), (D2), (D3)이 주어졌다고 하자.
+$X$를\  $k$ 위의 매끄러운 사영 스킴이라 하자.
+$X = \emptyset$이면\  $H^*(X) = 0$이다.
+$X$가 공집합이 아니면\  $\gamma([X]) = 1$이고\  $H^0(X)$에서\ 
+$1 \not = 0$이다.
+\end{lemma}
+
+\begin{proof}
+먼저\  $X$가 공집합이 아니라고 하자.
+$[X]$는 구조사상\  $p : X \to \Spec(k)$를 따른\  $[\Spec(k)]$의 당김이다.
+따라서 공리 (C)(a)와 보조정리\  \ref{lemma-base}에 의해\ 
+$\gamma([X]) = 1$이다. $X' \subset X$를 기약성분이라 하자.
+함자성에 의해\  $H^0(X')$에서\  $1 \not = 0$임을 보이면 충분하다.
+따라서\  $X$가 기약이고, 특히 공집합이 아닌 차원\  $d$의 등차원
+스킴이라고 가정한다. $1 \not = 0$임을 보이려면\  $H^*(X)$가 영이
+아님을 보이면 충분하다.
+
+\medskip\noindent
+$x \in X$를 잉여체\  $k'$이\  $k$ 위에서 분리인 닫힌점이라 하자.
+Varieties, Lemma
+\ref{varieties-lemma-smooth-separable-closed-points-dense}를 보라.
+$i : \Spec(k') \to X$를 포함사상이라 하자.
+$p : X \to \Spec(k)$를 구조사상이라 쓰자. 다음을 관찰하자.
+$\CH_0(\Spec(k))$에서\ 
+$p_*i_*[\Spec(k')] = [k' : k][\Spec(k)]$이다.
+공리 (C)(b)를 두 번 사용하고 보조정리\  \ref{lemma-base}를 적용하면
+$$
+p_*i_*\gamma([\Spec(k')]) = \gamma([k' : k][\Spec(k)]) = [k' : k]
+\in F = H^0(\Spec(k))
+$$
+가 영이 아님을 얻는다. 따라서\ 
+$i_*\gamma([\Spec(k)]) \in H^{2d}(X)(d)$는 영이 아니다
+($p_*$를 적용하면 영이 아닌 원소로 가기 때문이다). 이로써\  $X$가
+공집합이 아닌 경우의 증명이 끝난다.
+
+\medskip\noindent
+마지막으로 공집합 스킴의 경우를 생각하자. 공리 (B)(a)에 의해\ 
+$H^*(\emptyset) \otimes H^*(\emptyset) = H^*(\emptyset)$이고,
+$H^*(\emptyset)$은 영이거나 차수\  $0$에서\  $1$차원이다.
+다시 공리 (B)(a)에 의해 모든\  $k$ 위의 매끄러운 사영 스킴\  $X$에 대해\ 
+$H^*(\emptyset) \otimes H^*(X) = H^*(\emptyset)$이다.
+공리 (A)(b)와 위에서 본\  $H^0(X)$의 비소멸성을 사용하면\ 
+$\dim(X) > 0$일 때\  $H^*(X)$는 적어도 두 차수에서 영이 아니다.
+이는\  $H^*(\emptyset)$이 영이 되도록 강제한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-push-unit}
+(A), (B), (C)를 만족하는 (D0), (D1), (D2), (D3)이 주어졌다고 하자.
+$i : X \to Y$를\  $k$ 위의 공집합이 아닌 등차원 매끄러운 사영
+스킴들의 닫힌 몰입이라 하자. 그러면\ 
+$c = \dim(Y) - \dim(X)$일 때\  $H^{2c}(Y)(c)$에서\ 
+$\gamma([X]) = i_*1$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리\  \ref{lemma-unit}에 의해\  $H^0(X)$에서\ 
+$1 = \gamma([X])$이고, 이제 공리 (C)(b)를 적용하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-class-diagonal}
+(A), (B), (C)를 만족하는 (D0), (D1), (D2), (D3)이 주어졌다고 하자.
+$X$를\  $k$ 위의 공집합이 아닌 매끄러운 사영 스킴이라 하고 차원\ 
+$d$인 등차원 스킴이라고 하자. $F$ 위\  $H^i(X)$의 기저\ 
+$e_{i, j}, j = 1, \ldots, \beta_i$를 고르자. K\"unneth 공식을 사용하여
+$$
+\gamma([\Delta]) =
+\sum\nolimits_i
+\sum\nolimits_j e_{i, j} \otimes e'_{2d - i , j}
+\quad\text{in}\quad
+\bigoplus\nolimits_i H^i(X) \otimes_F H^{2d - i}(X)(d)
+$$
+로 쓰자. 여기서\  $e'_{2d - i, j} \in H^{2d - i}(X)(d)$이다.
+그러면\  $\int_X e_{i, j} \cup e'_{2d - i, j'} = (-1)^i\delta_{jj'}$이다.
+\end{lemma}
+
+\begin{proof}
+$\Delta^* : H^*(X \times X) \to H^*(X)$는 컵곱 사상\ 
+$H^*(X) \otimes_F H^*(X) \to H^*(X)$와 같음을 상기하자. 주의\ 
+\ref{remark-replace-cup-product}를 보라. 한편\ 
+$\gamma([\Delta]) = \Delta_*1$임을 상기하자(보조정리\ 
+\ref{lemma-push-unit}). 따라서 보조정리\  \ref{lemma-pushforward}에 의해
+$$
+\int_{X \times X} \gamma([\Delta]) \cup a \otimes b =
+\int_{X \times X} \Delta_*1 \cup a \otimes b =
+\int_X a \cup b
+$$
+이다. 다른 한편 공리 (B)(b)에 의해
+$$
+\int_{X \times X} (\sum e_{i, j} \otimes e'_{2d -i , j}) \cup a \otimes b =
+\sum (\int_X a \cup e_{i, j})(\int_X e'_{2d - i, j} \cup b)
+$$
+이다. 각 항의 부호가\  $1$이 되도록 순서를 두 번 바꾸었음에 유의하자.
+$\int_X a \cup e_{i, j} = 1$이고 다른 모든 쌍대값은 영이 되도록\ 
+$a$를 고르면, 모든\  $b$에 대해\ 
+$\int_X e'_{2d - i, j} \cup b = \int_X a \cup b$임을 얻는다.
+즉\  $e'_{2d - i, j} = a$이다. 이로써 보조정리가 증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cohomology-P1}
+(A), (B), (C)를 만족하는 (D0), (D1), (D2), (D3)이 주어졌다고 하자.
+그러면\  $H^*(\mathbf{P}^1_k)$는 차수\  $0$과\  $2$에서\  $1$차원이고 다른
+차수에서는 영이다.
+\end{lemma}
+
+\begin{proof}
+$x \in \mathbf{P}^1_k$를\  $k$-유리점이라 하자.
+$\mathbf{P}^1_k \times \mathbf{P}^1_k$ 위의 인자로서\ 
+$\Delta = \text{pr}_1^*x + \text{pr}_2^*x$임을 관찰하자.
+공리 (C)(a)와\  $\gamma$의 가법성을 사용하면
+$$
+\gamma([\Delta]) =
+\text{pr}_1^*\gamma([x]) +
+\text{pr}_2^*\gamma([x]) =
+\gamma([x]) \otimes 1 + 1 \otimes \gamma([x])
+$$
+를 얻는다. 이는\ 
+$H^*(\mathbf{P}^1_k \times \mathbf{P}^1_k) =
+H^*(\mathbf{P}^1_k) \otimes_F H^*(\mathbf{P}^1_k)$의 원소이다.
+그러나 보조정리\  \ref{lemma-class-diagonal}에 의해\ 
+$\gamma([\Delta])$는\  $\sum \beta_i$개보다 적은 단순 텐서의 합으로
+쓸 수 없다. 여기서\  $\beta_i = \dim_F H^i(\mathbf{P}^1_k)$이다.
+따라서\  $\sum \beta_i \leq 2$이다. 보조정리\  \ref{lemma-unit}에 의해\ 
+$H^0(\mathbf{P}^1_k) \not = 0$이다. Poincar\'e 쌍대성, 더 정확히는
+공리 (A)(b)에 의해\  $\beta_0 = \beta_2$이다. 따라서 보조정리가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-weil-additive}
+(A), (B), (C)를 만족하는 (D0), (D1), (D2), (D3)이 주어졌다고 하자.
+$X$와\  $Y$가\  $k$ 위의 매끄러운 사영 스킴이면\ 
+$H^*(X \amalg Y) \to H^*(X) \times H^*(Y)$,
+$a \mapsto (i^*a, j^*a)$는 동형사상이다. 여기서\  $i$, $j$는
+쌍대곱의 포함사상이다.
+\end{lemma}
+
+\begin{proof}
+$X$ 또는\  $Y$가 공집합이면 보조정리\  \ref{lemma-unit}에 의해\ 
+$H^*(\emptyset) = 0$이므로 이는 성립한다. 따라서\  $X$와\  $Y$가 모두
+공집합이 아니라고 가정할 수 있다.
+
+\medskip\noindent
+먼저 사상이 단사임을 보이자. 우선 매끄러운 사영 스킴들의 사상\ 
+$X' \to X$와\  $Y' \to Y$ 가운데\  $X'$와\  $Y'$가 같은 차원의 등차원
+스킴이고\  $X' \to X$와\  $Y' \to Y$가 각각 절단을 갖는 것을 찾을 수
+있음을 관찰하자. 실제로\  $X = \coprod X_d$와\  $Y = \coprod Y_e$를
+각각 차원\  $d$와\  $e$인 등차원 열린닫힌 부분스킴들로 분해한다.
+그런 다음 충분히 큰 어떤\  $n$에 대해\ 
+$X' = \coprod X_d \times \mathbf{P}^{n - d}$와\ 
+$Y' = \coprod Y_e \times \mathbf{P}^{n - e}$로 둔다. 따라서 절단이
+있으므로\  $X' \amalg Y' \to X \amalg Y$를 따른 당김은 단사이고,
+다음 문단에서 하듯이\  $X', Y'$에 대한 단사성을 보이면 충분하다.
+
+\medskip\noindent
+$X$와\  $Y$가 같은 차원\  $d$인 등차원 스킴일 때 사상이 단사임을 보이자.
+$\CH^0(X \amalg Y)$에서\  $[X \amalg Y] = [X] + [Y]$이고\ 
+$[X]$와\  $[Y]$는\  $\CH^0(X \amalg Y)$에서 서로 직교하는 멱등원임을
+관찰하자. 따라서
+$$
+1 = \gamma([X \amalg Y] = \gamma([X]) + \gamma([Y]) = i_*1 + j_*1
+$$
+은 서로 직교하는 멱등원들의 분해이다. 여기서 보조정리\ 
+\ref{lemma-unit}, \ref{lemma-push-unit}과 공리 (C)(c)를 사용했다.
+이제 사영 공식(보조정리\  \ref{lemma-pushforward})에 의해
+$$
+a = a \cup 1 = a \cup i_*1 + a \cup j_*1 =
+i_*(i^*a) + j_*(j^*a)
+$$
+이므로 사상은 단사이다.
+
+\medskip\noindent
+사상이 전사임을 보이자. $e = \gamma([X])$와\  $f = \gamma([Y])$를\ 
+$H^0(X \amalg Y)$의 원소로 보자. 공리 (C)(a)에 의해\ 
+$i^*e = 1$, $i^*f = 0$, $j^*e = 0$, 그리고\  $j^*f = 1$이다.
+따라서\  $i^* : H^*(X \amalg Y) \to  H^*(X)$와\ 
+$j^* : H^*(X \amalg Y) \to H^*(Y)$가 전사이면\  $(i^*, j^*)$도
+전사이다. 실제로\  $a, a' \in H^*(X \amalg Y)$에 대해
+$$
+(i^*a, j^*a') = (i^*(a \cup e + a' \cup f), j^*(a \cup e + a' \cup f))
+$$
+이다. 대칭성에 의해\  $i^* : H^*(X \amalg Y) \to  H^*(X)$가 전사임을
+보이면 충분하다. 사상\  $Y \to X$가 있으면\ 
+$g \circ i = \text{id}_X$인 사상\  $g : X \amalg Y \to X$가 있으므로
+결론을 얻는다. 증명을 마치기 위해, $i^*$가 전사임을 보일 때 영이 아닌
+등급\  $F$-벡터공간을 텐서한 뒤 이를 보이면 충분함을 관찰하자. 따라서
+공리 (B)(b)와 코호몰로지의 비소멸성(보조정리\  \ref{lemma-unit})에 의해
+어떤 유한 분리확대\  $k'/k$에 대해\  $X$와\  $Y$를 각각\ 
+$X \times \Spec(k')$와\  $Y \times \Spec(k')$로 바꾼 뒤\  $i^*$가
+전사임을 보이면 충분하다. $\kappa(x) = k'$인 닫힌점\  $x \in X$가
+존재하도록\  $k'$을 고르면(이는\  Varieties, Lemma
+\ref{varieties-lemma-smooth-separable-closed-points-dense}에 의해 가능하다),
+사상\  $Y \times \Spec(k') \to X \times \Spec(k')$가 존재하므로 증명이
+끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-from-functor-to-weil}
+$k$를 체라 하고\  $F$를 표수\  $0$인 체라 하자. 대칭 모노이드 범주의\ 
+$\mathbf{Q}$-선형 함자
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+가 주어지고\  $G(\mathbf{1}(1))$은 차수\  $-2$에서만 영이 아니라고 하자.
+그러면 위의 (A), (B), (C)를 모두 만족하는 데이터 (D0), (D1), (D2),
+(D3)을 얻는다.
+\end{lemma}
+
+\begin{proof}
+이 증명은 보조정리\  \ref{lemma-from-functor-to-weil-classical}의 증명과
+같다. 독자에게 그 보조정리의 증명을 대신 읽기를 권한다.
+
+\medskip\noindent
+$H^*(X) = G(h(X))$로 두어\  $k$ 위 매끄러운 사영 스킴의 범주에서
+등급\  $F$-벡터공간의 범주로 가는 반변 함자를 얻는다. 가정에 의해
+당김과 호환되는 표준 동형사상
+$$
+H^*(X \times Y) = G(h(X \times Y)) = G(h(X) \otimes h(Y)) =
+G(h(X)) \otimes G(h(Y)) = H^*(X) \otimes H^*(Y)
+$$
+이 있다. 대각사상\  $\Delta : X \to X \times X$을 따른 당김을 사용하면
+당김과 호환되는 등급 벡터공간의 표준 사상
+$$
+H^*(X) \otimes H^*(X) = H^*(X \times X) \to H^*(X)
+$$
+을 얻는다. 이는\  $H^*(X)$ 위의 함자적인 등급\  $F$-대수 구조를 정의한다.
+$\Delta$는 인자를 맞바꾸는 교환 제약\ 
+$h(X) \otimes h(X) \to h(X) \otimes h(X)$과 가환하고, $G$는 대칭
+모노이드 범주의 함자이므로 교환 제약과 호환된다. 또한\  Homology,
+Example \ref{homology-example-graded-vector-spaces}의 규약에 의해\ 
+$H^*(X)$는 등급 가환 대수이다. 따라서 데이터 (D1)을 얻는다.
+
+\medskip\noindent
+$\mathbf{1}(1)$은 모티브의 범주에서 가역이므로\ 
+$G(\mathbf{1}(1))$은 등급\  $F$-벡터공간의 범주에서 가역이다. 따라서\ 
+$\sum_i \dim_F G^i(\mathbf{1}(1)) = 1$이다. 가정에 의해 차수\  $-2$에서만
+영이 아닌 것을 얻는다. 데이터 (D0)는 벡터공간\ 
+$F(1) = G^{-2}(\mathbf{1}(1))$이다. $G$가 대칭 모노이드 함자이므로 모든\ 
+$n \in \mathbf{Z}$에 대해\  $F(n) = G^{-2n}(\mathbf{1}(n))$이다. 따라서
+$$
+H^{2r}(X)(r) = G^{2r}(h(X)) \otimes G^{-2r}(\mathbf{1}(r)) =
+G^0(h(X)(r))
+$$
+이다. 이 공식을 아래에서 자주 사용한다.
+
+\medskip\noindent
+$X$를\  $k$ 위의 매끄러운 사영 스킴이라 하자. 보조정리\ 
+\ref{lemma-composition-correspondences}에 의해
+$$
+\CH^r(X) \otimes \mathbf{Q} = \text{Corr}^r(\Spec(k), X) =
+\Hom(\mathbf{1}(-r), h(X)) = \Hom(\mathbf{1}, h(X)(r))
+$$
+이다. 함자\  $G$를 적용하면 이는\ 
+$\Hom(G(\mathbf{1}), G(h(X)(r)))$로 간다. $G^0(\mathbf{1}) = F$의\ 
+$1$의 상을\  $G^0(h(X)(r)) = H^{2r}(X)(r)$에서 취하면
+$$
+\gamma :
+\CH^r(X) \otimes \mathbf{Q} \longrightarrow H^{2r}(X)(r)
+$$
+를 얻는다. 이것이 데이터 (D2)이다.
+
+\medskip\noindent
+$X$를\  $k$ 위의 공집합이 아닌 매끄러운 사영 스킴이라 하고 차원\ 
+$d$인 등차원 스킴이라 하자. 보조정리\ 
+\ref{lemma-composition-correspondences}에 의해
+$$
+\Mor(h(X)(d), \mathbf{1}) = \Mor((X, 1, d), (\Spec(k), 1, 0)) =
+\text{Corr}^{-d}(X, \Spec(k)) = \CH_d(X)
+$$
+이다. 따라서\  $\CH_d(X)$에서 사이클\  $[X]$의 류는 사상\ 
+$h(X)(d) \to \mathbf{1}$을 정의한다. $G$를 적용하고 차수\  $0$ 부분을
+취하면
+$$
+H^{2d}(X)(d) = G^0(h(X)(d)) \longrightarrow G^0(\mathbf{1}) = F
+$$
+를 얻는다. 이 사상\  $\int_X : H^{2d}(X)(d) \to F$가 데이터 (D3)이다.
+
+\medskip\noindent
+$X$를\  $k$ 위의 공집합이 아닌 매끄러운 사영 스킴이라 하고 차원\ 
+$d$인 등차원 스킴이라 하자. 보조정리\  \ref{lemma-dual}에 의해\ 
+$h(X)(d)$는\  $h(X)$의 왼쪽 쌍대이다. 따라서\ 
+$G(h(X)(d)) = H^*(X) \otimes_F F(d)[2d]$는 등급\  $F$-벡터공간의
+범주에서\  $H^*(X)$의 왼쪽 쌍대이다. 여기서\  $[n]$은 등급 벡터공간의
+이동 함자이다. Homology, Lemma
+\ref{homology-lemma-left-dual-graded-vector-spaces}에 의해\ 
+$\sum_i \dim_F H^i(X) < \infty$이고,
+$\epsilon : h(X)(d) \otimes h(X) \to \mathbf{1}$은 비퇴화 쌍대\ 
+$H^{2d - i}(X)(d) \otimes_F H^i(X) \to F$를 만든다. 보조정리\ 
+\ref{lemma-dual}의 증명에서 동형사상
+$$
+\Hom(h(X)(d) \otimes h(X), \mathbf{1}) =
+\text{Corr}^{-d}(X \times X, \Spec(k)) =
+\CH_d(X \times X)
+$$
+아래\  $\epsilon$이\  $[\Delta]$로 주어짐을 보았다. 따라서\  $\epsilon$은\ 
+$[X] : h(X)(d) \to \mathbf{1}$과\ 
+$h(\Delta)(d) : h(X)(d) \otimes h(X) \to h(X)(d)$의 합성이다.
+그러므로 위의 쌍대는 컵곱 뒤에\  $\int_X$를 적용하여 주어진다.
+이로써 공리 (A)가 증명되었다.
+
+\medskip\noindent
+공리 (B)는\  $G$가 텐서 구조와 호환된다는 가정 및 위에서 구성한
+컵곱에서 따른다.
+
+\medskip\noindent
+공리 (C). 우리의\  $\gamma$ 구성은\  $X$ 위의 사이클\  $\alpha$를 어떤
+차수의\  $\Spec(k)$에서\  $X$로 가는 대응\  $a$로 해석한 다음\  $G$를
+적용한다. $f : Y \to X$가\  $k$ 위의 공집합이 아닌 등차원 매끄러운
+사영 스킴들의 사상이면\  $f^!\alpha$는\  $X$에서\  $Y$로 가는 대응\ 
+$[\Gamma_f]$에 의한\  $\alpha$의 밀어올림(!)이다. 보조정리\ 
+\ref{lemma-functor-and-cycles}를 보라. 따라서\  $\Spec(k)$에서\  $Y$로
+가는 대응으로 본\  $f^!\alpha$는\  $a \circ [\Gamma_f]$와 같다.
+보조정리\  \ref{lemma-composition-correspondences}를 보라. $G$가
+함자이므로\  $\gamma$는 당김과 호환된다. 즉 공리 (C)(a)가 성립한다.
+
+\medskip\noindent
+$f : Y \to X$를\  $k$ 위의 공집합이 아닌 등차원 매끄러운 사영
+스킴들의 사상이라 하고\  $\beta \in \CH^r(Y)$를\  $Y$ 위의 사이클이라
+하자. 모든\  $c \in H^*(X)$에 대해
+$$
+\int_Y \gamma(\beta) \cup f^*c = \int_X \gamma(f_*\beta) \cup c
+$$
+임을 보여야 한다. $a, a^t, \eta_X, \eta_Y, [X], [Y]$를 보조정리\ 
+\ref{lemma-prep-dual}에서와 같이 두자. $b$를\  $\Spec(k)$에서\  $Y$로
+가는 차수\  $r$의 대응으로 본\  $\beta$라 하자. 그러면\ 
+$\Spec(k)$에서\  $X$로 가는 대응으로 본\  $f_*\beta$는\ 
+$a^t \circ b$와 같다. 보조정리\  \ref{lemma-functor-and-cycles}와\ 
+\ref{lemma-composition-correspondences}를 보라. 위의 표시된 등식은
+$$
+h(X) = \mathbf{1} \otimes h(X)
+\xrightarrow{b \otimes 1}
+h(Y)(r) \otimes h(X)
+\xrightarrow{1 \otimes a}
+h(Y)(r) \otimes h(Y)
+\xrightarrow{\eta_Y}
+h(Y)(r)
+\xrightarrow{[Y]}
+\mathbf{1}(r - e)
+$$
+가
+$$
+h(X) = \mathbf{1} \otimes h(X)
+\xrightarrow{a^t \circ b \otimes 1}
+h(X)(r + d - e) \otimes h(X)
+\xrightarrow{\eta_X}
+h(X)(r + d - e)
+\xrightarrow{[X]}
+\mathbf{1}(r - e)
+$$
+와 같음을 보이면 성립한다. 이는 보조정리\  \ref{lemma-prep-dual}에서
+바로 따른다. 따라서 공리 (C)(b)가 성립한다.
+
+\medskip\noindent
+공리 (C)(c)를 증명하기 위해 주의\ 
+\ref{remark-replace-cup-product-classical}의 논의를 사용한다. 따라서\ 
+$\gamma$가 외적과 호환됨을 보이면 충분하다. $X$, $Y$를\  $k$ 위의
+공집합이 아닌 매끄러운 사영 스킴이라 하고\  $\alpha$, $\beta$를 각각
+그 위의 사이클이라 하자. 대응하는\  $\Spec(k)$에서\  $X$, $Y$로 가는
+대응을\  $a$, $b$라 하자. 그러면\  $\alpha \times \beta$는\ 
+$\Spec(k)$에서\  $X \otimes Y = X \times Y$로 가는 대응\ 
+$a \otimes b$에 대응한다. 따라서 필요한 성질은\  $G$가 양쪽의 텐서
+구조와 호환된다는 사실에서 따른다.
+
+\medskip\noindent
+사이클\  $[\Spec(k)]$는\  $h(\Spec(k))$의 항등사상에 대응하므로
+공리 (C)(d)가 성립한다. 이로써 보조정리의 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-from-weil-to-functor}
+$k$를 체라 하고\  $F$를 표수\  $0$인 체라 하자. (A), (B), (C)를
+만족하는 (D0), (D1), (D2), (D3)이 주어지면\ 
+$H^*(X) = G(h(X))$인 대칭 모노이드 범주의\  $\mathbf{Q}$-선형 함자
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+를 구성할 수 있다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 증명은 보조정리\ 
+\ref{lemma-from-weil-to-functor-classical}의 증명과 같다. 독자에게 그
+보조정리의 증명을 대신 읽기를 권한다.
+
+\medskip\noindent
+보조정리\  \ref{lemma-characterize-motives}에 의해\  $k$ 위의 매끄러운
+사영 스킴을 대상으로 하고 차수\  $0$의 대응을 사상으로 갖는 범주 위에
+함자\  $G$를 구성하여, $G(\mathbf{P}^1_k)$ 위\  $G(c_2)$의 상이 가역인
+등급\  $F$-벡터공간임을 보이면 충분하다.
+
+\medskip\noindent
+$X$를\  $k$ 위의 매끄러운 사영 스킴이라 하자. 다음과 같은 표준 분해가
+있다.
+$$
+X = \coprod\nolimits_{0 \leq d \le \dim(X)} X_d
+$$
+여기서\  $X_d$는 차원\  $d$인 등차원 열린닫힌 부분스킴이다. 보조정리\ 
+\ref{lemma-weil-additive}에 의해 이에 대응하여
+$$
+H^*(X) \longrightarrow \prod\nolimits_{0 \leq d \le \dim(X)} H^*(X_d)
+$$
+를 얻는다. $Y$가 두 번째\  $k$ 위 매끄러운 사영 스킴이고 마찬가지로\ 
+$Y = \coprod Y_e$로 분해하면
+$$
+\text{Corr}^0(X, Y) = \bigoplus \text{Corr}^0(X_d, Y_e)
+$$
+이다. 또한 대응의 범주에서\  $X \otimes Y = \coprod X_d \otimes Y_e$이다.
+이 관찰들로부터 대상이\  $k$ 위의 등차원 매끄러운 사영 스킴이고 사상이
+차수\  $0$의 대응인 범주 위에서\  $G$를 구성하면 충분함이 따른다
+(몇몇 세부사항은 생략한다).
+
+\medskip\noindent
+$k$ 위의 등차원 매끄러운 사영 스킴\  $X$가 주어지면\ 
+$G(X) = H^*(X)$로 둔다. $X = \emptyset$이면\  $G(X) = 0$임을 관찰하자
+(보조정리\  \ref{lemma-unit}). 따라서\  $G(\emptyset)$로 가거나
+그로부터 나오는 사상은 영이고, 아래 논의에서는 스킴들이 공집합이
+아니라고 가정한다.
+
+\medskip\noindent
+$k$ 위의 공집합이 아닌 등차원 매끄러운 사영 스킴 사이의 대응\ 
+$c \in \text{Corr}^0(X, Y)$가 주어지면 사상\ 
+$G(c) : G(X) = H^*(X) \to G(Y) = H^*(Y)$를 다음 규칙으로 정의한다.
+$$
+a \longmapsto
+G(c)(a) = \text{pr}_{2, *}(\gamma(c) \cup \text{pr}_1^*a)
+$$
+$G(c)$가\  $c$에 대해 가법적이고 따라서\  $\mathbf{Q}$-선형임은 명백하다.
+공리 (C)(a), (C)(b), (C)(c)에서 주어진 당김, 밀어올림, 교차곱과\ 
+$\gamma$의 호환성은\  $c' \in \text{Corr}^0(Y, Z)$일 때\ 
+$G(c' \circ c) = G(c') \circ G(c)$임을 보인다. 실제로\ 
+$a \in H^*(X)$에 대해
+\begin{align*}
+(G(c') \circ G(c))(a)
+& =
+\text{pr}^{23}_{3, *}(\gamma(c') \cup
+\text{pr}^{23, *}_2(\text{pr}^{12}_{2, *}(\gamma(c) \cup
+\text{pr}^{12, *}_1a))) \\
+& =
+\text{pr}^{23}_{3, *}(\gamma(c') \cup
+\text{pr}^{123}_{23, *}(\text{pr}^{123, *}_{12}(\gamma(c) \cup
+\text{pr}^{12, *}_1 a))) \\
+& =
+\text{pr}^{23}_{3, *}
+\text{pr}^{123}_{23, *}(
+\text{pr}^{123, *}_{23}\gamma(c') \cup
+\text{pr}^{123, *}_{12}\gamma(c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{23}_{3, *}
+\text{pr}^{123}_{23, *}(
+\gamma(\text{pr}^{123, *}_{23}c') \cup
+\gamma(\text{pr}^{123, *}_{12}c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{13}_{3, *}
+\text{pr}^{123}_{13, *}(
+\gamma(\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{13}_{3, *}(
+\gamma(\text{pr}^{123}_{13, *}(\text{pr}^{123, *}_{23}c' \cdot
+\text{pr}^{123, *}_{12}c)) \cup
+\text{pr}^{13, *}_1 a) \\
+& =
+G(c' \circ c)(a)
+\end{align*}
+이다. 표기는 자명하다. 첫 번째 등식은 정의에서 따른다. 두 번째 등식은
+보조정리\  \ref{lemma-pr2star}에서 주어진 사영을 따른 밀어올림의 기술로부터
+바로 얻는\ 
+$\text{pr}^{23, *}_2 \circ \text{pr}^{12}_{2, *} =
+\text{pr}^{123}_{23, *} \circ \text{pr}^{123, *}_{12}$에 의해 성립한다.
+세 번째 등식은 보조정리\  \ref{lemma-pushforward}와\  $H^*$가 함자라는
+사실에 의해 성립한다. 네 번째 등식은 공리 (C)(a)와 평탄 사상의\ 
+Gysin 사상이 평탄 당김과 같다는 사실(Chow Homology, Lemma
+\ref{chow-lemma-lci-gysin-flat})에 의해 성립한다. 다섯 번째 등식에서는
+공리 (C)(c)와 보조정리\  \ref{lemma-pushforward}를 사용하여\ 
+$\text{pr}^{23}_{3, *} \circ \text{pr}^{123}_{23, *} =
+\text{pr}^{13}_{3, *} \circ \text{pr}^{123}_{13, *}$임을 안다.
+여섯 번째 등식에서는 보조정리\  \ref{lemma-pushforward}의 사영 공식과
+공리 (C)(b)를 사용하여\  $
+\text{pr}^{123}_{13, *}
+\gamma(\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c) =
+\gamma(\text{pr}^{123}_{13, *}(
+\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c))$임을 안다.
+마지막 등식은 정의이다.
+
+\medskip\noindent
+$G$가 함자임을 증명하려면 항등사상이 보존됨을 보여야 한다. 다시 말해
+대응의 범주에서\  $1 = [\Delta] \in \text{Corr}^0(X, X)$가 항등사상이면
+(보조정리\  \ref{lemma-category-correspondences}),
+$G([\Delta]) = \text{id}$임을 보여야 한다. 이는 보조정리\ 
+\ref{lemma-class-diagonal}에서의\  $\gamma([\Delta])$의 결정과 보조정리\ 
+\ref{lemma-pr2star}에서 따른다. 이로써\  $k$ 위의 매끄러운 사영 스킴과
+차수\  $0$의 대응 위에서 함자\  $G$의 구성이 끝난다.
+
+\medskip\noindent
+보조정리\  \ref{lemma-base}에 의해\ 
+$G(\Spec(k)) = H^*(\Spec(k))$는\  $F$-대수로서 표준적으로\  $F$와
+동형이다. K\"unneth 공리 (B)(a)는 우리의 함자가 텐서곱과 호환됨을
+보인다. 따라서 우리의 함자는 대칭 모노이드 범주의 함자이다.
+
+\medskip\noindent
+아직\  $G(\mathbf{P}^1_k) = H^*(\mathbf{P}^1_k)$ 위\  $G(c_2)$의 상이
+가역인 등급\  $F$-벡터공간임을 확인해야 한다(특히 아직\  $G$가\  $M_k$로
+확장됨을 알지 못한다). 보조정리\  \ref{lemma-cohomology-P1}에 의해
+코호몰로지는 차수\  $0$과\  $2$에서만 영이 아니고 둘 다 차원\  $1$이다.
+$1 = c_0 + c_2$는\  $\text{Corr}^0(\mathbf{P}^1_k, \mathbf{P}^1_k)$의
+항등원을 서로 직교하는 멱등원들의 합으로 분해한 것임을 상기하자.
+예\  \ref{example-decompose-P1}을 보라. 또한\ 
+$a \in \text{Corr}^0(\Spec(k), \mathbf{P}^1_k)$ 및\ 
+$b \in \text{Corr}^0(\mathbf{P}^1_k, \Spec(k))$이고\ 
+$\text{Corr}^0(\Spec(k), \Spec(k))$에서\  $b \circ a = 1$인\ 
+$c_0 = a \circ b$가 있다. 보조정리\  \ref{lemma-inverse-h2}의 증명을
+보라. 따라서\  $G(c_0)$는 차수\  $0$ 부분으로의 사영자이다. 그러므로\ 
+$G(c_2)$는 차수\  $2$ 부분으로의 사영자여야 하고 증명이 끝난다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-weil-cohomology-theory}
+$k$를 체라 하고\  $F$를 표수\  $0$인 체라 하자. 다음 두 종류의 데이터
+사이에는\  $1$-대-$1$ 대응이 있다.
+\begin{enumerate}
+\item (A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3),
+\item $G(\mathbf{1}(1))$이 차수\  $-2$에서만 영이 아닌\ 
+$\mathbf{Q}$-선형 대칭 모노이드 함자
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(2)에서와 같은\  $G$가 주어졌을 때\  $H^*(X) = G(h(X))$로 두면
+(A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)을 얻는다.
+보조정리\  \ref{lemma-from-functor-to-weil}과 그 증명을 보라.
+
+\medskip\noindent
+반대로 (A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)이
+주어지면 보조정리\  \ref{lemma-from-weil-to-functor}의 증명에 나온
+구성으로 (2)에서와 같은 함자\  $G$를 얻는다.
+
+\medskip\noindent
+이 두 구성이 서로 역임을 보이는 자세한 증명은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{추가 성질}
+\label{section-further}
+
+\noindent
+이 절에서는\  \ref{section-axioms}절에서와 같이 (A), (B), (C)를
+만족하는 데이터 (D0), (D1), (D2), (D3)이 주어졌을 때 얻어지는
+몇 가지 결과를 더 증명한다.
+
+\begin{lemma}
+\label{lemma-trace-disjoint-union}
+(A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)이
+주어졌다고 하자. $X, Y$를 모두\  $k$ 위에서 차원\  $d$인 공집합이 아닌
+등차원 매끄러운 사영 스킴이라 하자. 그러면\ 
+$\int_{X \amalg Y} = \int_X + \int_Y$이다.
+\end{lemma}
+
+\begin{proof}
+$i : X \to X \amalg Y$와\  $j : Y \to X \amalg Y$를 표준 포함사상이라
+하자. 보조정리\  \ref{lemma-weil-additive}에 의해 사상\ 
+$(i^*, j^*) : H^*(X \amalg Y) \to H^*(X) \times H^*(Y)$는
+동형사상이다. 보조정리의 주장은 동형사상\ 
+$(i^*, j^*) : H^{2d}(X \amalg Y)(d) \to H^{2d}(X)(d) \oplus H^{2d}(Y)(d)$
+아래에서 사상\  $\int_X + \int_Y$가\  $\int_{X \amalg Y}$로
+옮겨진다는 뜻이다. 이는
+$$
+\int_{X \amalg Y} a =
+\int_{X \amalg Y} i_*(i^*a) + j_*(j^*a) =
+\int_X i^*a + \int_Y j^*a
+$$
+이므로 성립한다. 여기서 등식\  $a = i_*(i^*a) + j_*(j^*a)$는
+보조정리\  \ref{lemma-weil-additive}의 증명에서 보였다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-dim-0}
+(A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)이
+주어졌다고 하자. $X$를\  $k$ 위의 차원 영인 매끄러운 사영 스킴이라
+하자. 그러면
+\begin{enumerate}
+\item $H^i(X) = 0$ for $i \not = 0$,
+\item $H^0(X)$ is a finite separable algebra over $F$,
+\item $\dim_F H^0(X) = \deg(X \to \Spec(F))$,
+\item $\int_X : H^0(X) \to F$ is the trace map,
+\item $\gamma([X]) = 1$, and
+\item $\int_X \gamma([X]) = \deg(X \to \Spec(k))$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X = \Spec(k')$로 쓸 수 있으며, 여기서\  $k'$은\  $k$ 위의 유한 분리
+대수이다. $\deg(X \to \Spec(k)) = [k' : k]$임을 관찰하자.
+$k'$의 각 인자를 포함하는 유한\  Galois 확대\  $k''/k$를 택한다.
+(유한 분리\  $k$-대수는\  $k$의 유한 분리 체확대들의 곱임을 상기하자.)
+$\Sigma = \Hom_k(k', k'')$로 두면
+$$
+k' \otimes_k k'' = \prod\nolimits_{\sigma \in \Sigma} k''
+$$
+를 얻는다. $Y = \Spec(k'')$로 두면 공리 (B)(a)와 보조정리\ 
+\ref{lemma-weil-additive}에 의해
+$$
+H^*(X) \otimes_F H^*(Y) =
+\prod\nolimits_{\sigma \in \Sigma} H^*(Y)
+$$
+가 등급 가환\  $F$-대수의 동형사상으로 성립한다. 보조정리\ 
+\ref{lemma-unit}에 의해\  $F$-대수\  $H^*(Y)$는 영이 아니다.
+표시된 등식 양변의 차원을 비교하면\  $H^*(X)$는 차수\  $0$에만 놓이고\ 
+$\dim_F H^0(X) = [k' : k]$임을 얻는다. 이를\  $Y$에 적용하면\ 
+$H^*(Y) = H^0(Y)$를 얻는다.
+$$
+H^0(X) \otimes_F H^0(Y) = H^0(Y) \times \ldots \times H^0(Y)
+$$
+가\  $F$-대수의 동형사상이므로\  $H^0(X)$는 분리\  $F$-대수이다. 실제로
+이는 충실하게 평탄한 기저변환\  $F \to H^0(Y)$ 뒤에 확인할 수 있다.
+
+\medskip\noindent
+위의 표시된 동형사상은 다음 사상으로 주어진다.
+$$
+H^0(X) \otimes_F H^0(Y) \longrightarrow
+\prod\nolimits_{\sigma \in \Sigma} H^0(Y),\quad
+a \otimes b \longmapsto \prod\nolimits_\sigma \Spec(\sigma)^*a \cup b
+$$
+이 동형사상을 통해 보조정리\  \ref{lemma-trace-disjoint-union}에 의해\ 
+$\int_{X \times Y} = \sum_\sigma \int_Y$이다. 따라서\  $H^0(Y)$에서
+$$
+\int_X a = \text{pr}_{1, *}(a \otimes 1) = \sum \Spec(\sigma)^*a
+$$
+이다. 첫 번째 등식은 보조정리\  \ref{lemma-pr2star}에 의하고 두 번째
+등식은 방금 한 관찰에 의한다. 대수적 폐포\  $\overline{F}$와\ 
+$F$-대수 사상\  $\tau : H^0(Y) \to \overline{F}$를 택한다. 위의
+동형사상을 기저변환하면 동형사상
+$$
+H^0(X) \otimes_F \overline{F} \longrightarrow
+\prod\nolimits_{\sigma \in \Sigma} \overline{F},\quad
+a \otimes b \longmapsto \prod\nolimits_\sigma \tau(\Spec(\sigma)^*a) b
+$$
+를 얻는다. 따라서\  $a \mapsto \tau(\Spec(\sigma)^*a)$는\ 
+$H^0(X)$에서\  $\overline{F}$로 가는 매장들의 완전한 모임이다.
+위에서 얻은\  $\int_X a$의 공식에\  $\tau$를 적용하면\  $\int_X$가
+대각합 사상임을 얻는다. 보조정리\  \ref{lemma-unit}에 의해\ 
+$\gamma([X]) = 1$이다. 마지막으로\  $\gamma([X]) = 1$이고\  $1$의
+대각합은\  $[k' : k]$와 같으므로\ 
+$\int_X \gamma([X]) = \deg(X \to \Spec(k))$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-degrees-cycles}
+(A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)이
+주어졌다고 하자. $X$를\  $k$ 위에서 차원\  $d$인 공집합이 아닌 등차원
+매끄러운 사영 스킴이라 하자. 도식
+$$
+\xymatrix{
+\CH^d(X) \ar[r]_-\gamma \ar@{=}[d] &
+H^{2d}(X)(d) \ar[d]^{\int_X} \\
+\CH_0(X) \ar[r]^\deg & F
+}
+$$
+은 가환한다. 여기서\  $\deg : \CH_0(X) \to \mathbf{Z}$는\  Chow
+Homology, Section \ref{chow-section-degree-zero-cycles}에서 논의한
+영차원 사이클의 차수이다.
+\end{lemma}
+
+\begin{proof}
+$x$를 잉여체가\  $k$ 위에서 분리인\  $X$의 닫힌점이라 하자. $x$를
+스킴으로 보고\  $i : x \to X$를 포함사상이라 하자. 혼동을 피하기 위해\ 
+$x$의 사이클류 사상을\  $\gamma' : \CH_0(x) \to H^0(x)$라 쓰자.
+그러면
+$$
+\int_X \gamma([x]) = \int_X \gamma(i_*[x]) =
+\int_X i_*\gamma'([x]) = \int_x \gamma'([x]) = \deg(x \to \Spec(k))
+$$
+이다. 두 번째 등식은 공리 (C)(b)이고 세 번째 등식은 코호몰로지에서\ 
+$i_*$의 정의이다. 마지막 등식은 보조정리\  \ref{lemma-dim-0}이다.
+보조정리\  \ref{lemma-generated-by-separable}에 의해\  $\CH_0(X)$가
+위와 같은 점\  $x$들의 류로 생성되므로 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-square-diagonal}
+(A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)이
+주어졌다고 하자. $X$를\  $k$ 위에서 차원\  $d$인 공집합이 아닌 등차원
+매끄러운 사영 스킴이라 하자. 다음이 성립한다.
+$$
+\sum\nolimits_i (-1)^i\dim_F H^i(X) =
+\deg(\Delta \cdot \Delta) = \deg(c_d(\mathcal{T}_{X/k}))
+$$
+\end{lemma}
+
+\begin{proof}
+오른쪽 등식을 보이자. 다음이 성립한다.
+$[\Delta] \cdot [\Delta] = \Delta_*(\Delta^![\Delta])$
+(Chow Homology, Lemma \ref{chow-lemma-intersect-regularly-embedded}).
+$\Delta_*$가\  $0$차원 사이클의 차수를 보존하므로\ 
+$\Delta^![\Delta]$의 차수를 계산하면 충분하다. 류\ 
+$\Delta^![\Delta]$는\  $\Delta \subset X \times X$의 법선층의 최고\ 
+Chern 류를\  $[\Delta]$에 캡곱하여 주어진다(Chow Homology, Lemma
+\ref{chow-lemma-gysin-fundamental}). $\Delta$의 여법선층은\ 
+$\Omega_{X/k}$이므로(Morphisms, Lemma
+\ref{morphisms-lemma-differentials-diagonal}) 법선층은 원하는 대로
+접다발\  $\mathcal{T}_{X/k} = \SheafHom_{\mathcal{O}_X}(\Omega_{X/k}, \mathcal{O}_X)$와
+같다.
+
+\medskip\noindent
+왼쪽 등식을 보이자. 보조정리\  \ref{lemma-degrees-cycles}에 의해
+\begin{align*}
+\deg([\Delta] \cdot [\Delta])
+& =
+\int_{X \times X} \gamma([\Delta]) \cup \gamma([\Delta]) \\
+& =
+\int_{X \times X} \Delta_*1 \cup \gamma([\Delta]) \\
+& =
+\int_{X \times X} \Delta_*(\Delta^*\gamma([\Delta])) \\
+& =
+\int_X \Delta^*\gamma([\Delta])
+\end{align*}
+이다. 보조정리\  \ref{lemma-push-unit}과\  \ref{lemma-pushforward}를
+사용했다. 보조정리\  \ref{lemma-class-diagonal}에서와 같이\ 
+$\gamma([\Delta]) = \sum  e_{i, j} \otimes e'_{2d - i , j}$로 쓰자.
+$\Delta^*$가 컵곱으로 주어짐을 상기하면(주의\ 
+\ref{remark-replace-cup-product}) 다음을 얻는다.
+$$
+\int_X \sum\nolimits_{i, j} e_{i, j} \cup e'_{2d - i, j} =
+\sum\nolimits_{i, j} \int_X e_{i, j} \cup e'_{2d - i, j} =
+\sum\nolimits_{i, j} (-1)^i = \sum (-1)^i\beta_i
+$$
+이는 원하는 등식이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-algebra-relations}
+$F$를 표수\  $0$인 체라 하자. $F'$과\  $F_i$, $i = 1, \ldots, r$를
+유한 분리\  $F$-대수라 하고\  $A$를 유한\  $F$-대수라 하자.
+$\sigma, \sigma' : A \to F'$와\  $\sigma_i : A \to F_i$를\ 
+$F$-대수 사상이라 하자. $\sigma$와\  $\sigma'$이 전사라고 가정하자.
+관계식
+$$
+\text{Tr}_{F'/F} \circ \sigma - \text{Tr}_{F'/F} \circ \sigma' =
+n(\sum m_i \text{Tr}_{F_i/F} \circ \sigma_i)
+$$
+이 있고, 여기서\  $n > 1$이고\  $m_i$들이 정수이면\ 
+$\sigma = \sigma'$이다.
+\end{lemma}
+
+\begin{proof}
+$A = \prod A_j$를 국소\  Artin $F$-대수\ 
+$(A_j, \mathfrak m_j, \kappa_j)$들의 유한 곱으로 쓸 수 있다. Algebra,
+Lemma \ref{algebra-lemma-finite-dimensional-algebra}와\  Proposition
+\ref{algebra-proposition-dimension-zero-ring}을 보라.
+$\kappa_j/k$가 분리인\  $j$들에 대한 곱을\  $A' = \prod \kappa_j$라
+하자. 그러면 각 사상\  $\sigma, \sigma', \sigma_i$는 사상\ 
+$A \to A'$를 통해 분해된다. $A$를\  $A'$으로 바꾸면\  $A$가 유한 분리\ 
+$F$-대수인 경우로 환원된다.
+
+\medskip\noindent
+대수적 폐포\  $\overline{F}$를 택하자. 다음과 같이 둔다.
+$\overline{A} = A \otimes_F \overline{F}$,
+$\overline{F}' = F' \otimes_F \overline{F}$, and
+$\overline{F}_i = F_i \otimes_F \overline{F}$.
+$\sigma$, $\sigma'$, $\sigma_i$를 기저변환하여\ 
+$\overline{F}$-대수 사상\  $\overline{A} \to \overline{F}'$ 및\ 
+$\overline{A} \to \overline{F}_i$를 얻을 수 있다. 더욱이\ 
+$\text{Tr}_{\overline{F}'/\overline{F}}$는\ 
+$\text{Tr}_{F'/F}$의 기저변환이고\  $\text{Tr}_{F_i/F}$도 마찬가지다.
+따라서\  $F$를\  $\overline{F}$로 바꾸어 다음 문단에서 다루는 경우로
+환원할 수 있다.
+
+\medskip\noindent
+$F$가 대수적으로 닫혀 있고\  $A$가 유한 분리\  $F$-대수라고 가정하자.
+그러면\  $A$, $F'$, $F_i$는 각각\  $F$의 여러 복사본의 곱이다.
+$F$의 복사본들의 곱\  $F \times \ldots \times F$의 원소\  $e$가 한
+인자를 생성할 때, 즉\ 
+$e = (0, \ldots, 0, 1, 0, \ldots, 0)$일 때 이를 최소 멱등원이라
+하자. $e \in A$를 최소 멱등원이라 하자. $\sigma$와\  $\sigma'$이
+전사이므로\  $\sigma(e)$와\  $\sigma'(e)$는 최소 멱등원이거나 영이다.
+$\sigma \not = \sigma'$이면\  $\sigma(e) = 0$이고\ 
+$\sigma'(e) \not = 0$이거나 그 반대가 되도록 최소 멱등원\ 
+$e \in A$를 택할 수 있다. 그러면\ 
+$\text{Tr}_{F'/F}(\sigma(e)) = 0$이고\ 
+$\text{Tr}_{F'/F}(\sigma'(e)) = 1$이거나 그 반대이다. 한편\ 
+$\sigma_i(e)$는 멱등원이므로\ 
+$\text{Tr}_{F_i/F}(\sigma_i(e)) = r_i$는 정수이다. 따라서
+$$
+-1 = \sum n m_i r_i = n (\sum m_i r_i)
+\quad\text{or}\quad
+1 = \sum n m_i r_i = n (\sum m_i r_i)
+$$
+를 얻는데, 이는 불가능하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relations-classes-points}
+(A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)이
+주어졌다고 하자. $k'/k$를 유한 분리확대라 하고\  $X$를\  $k'$ 위의
+매끄러운 사영 스킴이라 하자. $x, x' \in X$를\  $k'$-유리점이라 하자.
+$\gamma(x) \not = \gamma(x')$이면\  $[x] - [x']$는\  $\CH_0(X)$에서
+어떤 정수\  $n > 1$로도 나누어지지 않는다.
+\end{lemma}
+
+\begin{proof}
+$x$와\  $x'$이\  $X$의 서로 다른 기약성분 위에 놓이면 결과는 자명하다.
+따라서\  $X$가 차원\  $d$인 기약 스킴이라고 가정할 수 있다.
+$[x] - [x']$가\  $\CH_0(X)$에서\  $n > 1$로 나누어진다고 하자. 보조정리\ 
+\ref{lemma-generated-by-separable}에 의해 잉여체가\  $k$ 위에서 분리인
+어떤 닫힌점\  $x_i \in X$와 정수 계수들에 대해\  $\CH_0(X)$에서\ 
+$[x] - [x'] = n(\sum m_i [x_i])$로 쓸 수 있다. 그러면
+$$
+\gamma([x]) - \gamma([x']) = n (\sum m_i \gamma([x_i]))
+$$
+가\  $H^{2d}(X)(d)$에서 성립한다. 당김 사상\ 
+$H^0(X) \to H^0(x)$, $H^0(X) \to H^0(x')$, $H^0(X) \to H^0(x_i)$를
+각각\  $i^*, (i')^*, i_i^*$라 쓰자. $H^0(x)$는 유한 분리\ 
+$F$-대수이고\  $\int_x : H^0(x) \to F$는 대각합 사상임을 상기하자
+(보조정리\  \ref{lemma-dim-0}). 이를\  $\text{Tr}_x$라 쓰겠다.
+$x'$과\  $x_i$에 대해서도 마찬가지다. 그러면 공리 (A)(b)의 형태로
+주어진\  Poincar\'e 쌍대성에 의해 위의 등식은
+$$
+\text{Tr}_x \circ i^* - \text{Tr}_{x'} \circ (i')^* =
+n(\sum m_i \text{Tr}_{x_i} \circ i_i^*)
+$$
+와 쌍대이며, 이는\  $\Hom_F(H^0(X), F)$에서 성립한다. 마지막으로\ 
+$x$와\  $x'$이\  $k'$-유리점이므로\  $i^*$와\  $(i')^*$은 전사임을
+관찰하자. 실제로 합성\ 
+$H^0(\Spec(k')) \to H^0(X) \to H^0(x)$와\ 
+$H^0(\Spec(k')) \to H^0(X) \to H^0(x')$는 동형사상이다.
+보조정리\  \ref{lemma-algebra-relations}에 의해\  $i^* = (i')^*$를
+얻는데, 이는\  $\gamma([x]) \not = \gamma([x'])$라는 가정에
+모순된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-classes-points}
+(A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)이
+주어졌다고 하자. $k'/k$를 유한 분리확대라 하자. $X$를\  $k'$ 위의
+차원\  $d$인 기하적으로 기약인 매끄러운 사영 스킴이라 하자. 그러면\ 
+$\gamma : \CH_0(X) \to H^{2d}(X)(d)$는\ 
+$\deg : \CH_0(X) \to \mathbf{Z}$를 통해 분해된다.
+\end{lemma}
+
+\begin{proof}
+보조정리\  \ref{lemma-generated-by-separable}에 의해 다음을 보이면
+충분하다. 잉여체가\  $k$ 위에서 분리인 닫힌점\  $x, x' \in X$가
+주어지면\ 
+$\deg(x') \gamma([x]) = \deg(x) \gamma([x'])$이다.
+
+\medskip\noindent
+먼저\  $k'$-유리점인 경우로 환원하자. $\kappa(x)$와\  $\kappa(x')$가\ 
+$k$ 위에서 매장되는\  Galois 확대\  $k''/k'$를 택한다.
+$Y = X \times_{\Spec(k')} \Spec(k'')$로 두고 사영을\  $p : Y \to X$라
+쓰자. $k''/k'$의 선택에 의해\  $Y$에는 각각\ $x$와\ $x'$으로 가는\ 
+$k''$-유리점\  $y$와\  $k''$-유리점\  $y'$이 존재한다. 그러면\  $\CH_0(X)$에서\ 
+$p_*[y] = [k'' : \kappa(x)][x]$이고\ 
+$p_*[y'] = [k'' : \kappa(x')][x']$이다. 공리 (C)(b)의 밀어올림
+호환성에 의해\  $\CH^{2d}(Y)(d)$에서\ 
+$\gamma([y]) = \gamma([y'])$임을 보이면 충분하다. 이로써 다음
+문단의 상황으로 환원된다.
+
+\medskip\noindent
+$x$와\  $x'$이\  $k'$-유리점이라고 가정하자. 보조정리\ 
+\ref{lemma-divide-difference-points}에 의해 체의 유한 분리확대\ 
+$k''/k'$가 존재하여 차이\  $[x] - [x']$의 당김\  $[y] - [y']$이\ 
+$Y = X \times_{\Spec(k')} \Spec(k'')$ 위에서 어떤 정수\  $n > 1$로
+나누어진다. ($y, y' \in Y$는\  $k''$-유리점임에 유의하자.)
+보조정리\  \ref{lemma-relations-classes-points}에 의해\ 
+$H^{2d}(Y)(d)$에서\  $\gamma([y]) = \gamma([y'])$이다. 공리 (C)(b)의
+밀어올림 호환성에 의해\  $x$와\  $x'$에 대해서도 같은 결론을 얻는다.
+\end{proof}
+\begin{lemma}
+\label{lemma-injective}
+(A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)이
+주어졌다고 하자. $f : X \to Y$를\  $k$ 위의 기약 매끄러운 사영 스킴들
+사이의 우세사상이라 하자. 그러면\  $H^*(Y) \to H^*(X)$는 단사이다.
+\end{lemma}
+
+\begin{proof}
+$Y$와 같은 차원이고\  $Y$ 위로 가는 정수적 닫힌 부분스킴\ 
+$Z \subset X$가 존재한다. 따라서 어떤\  $m > 0$에 대해\ 
+$f_*[Z] = m[Y]$이다. 보조정리\  \ref{lemma-unit}에 의해\ 
+$H^*(Y)$에서\  $f_* \gamma([Z]) = m \gamma([Y]) = m$이다. 따라서
+사영 공식(보조정리\  \ref{lemma-pushforward})에 의해\ 
+$f_*(f^*a \cup \gamma([Z])) = m a$이고, 이로부터 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-otimes}
+(A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)이
+주어졌다고 하자. $k''/k'/k$를 유한 분리 대수들이라 하고\  $X$를\ 
+$k'$ 위의 매끄러운 사영 스킴이라 하자. 그러면
+$$
+H^*(X) \otimes_{H^0(\Spec(k'))} H^0(\Spec(k'')) =
+H^*(X \times_{\Spec(k')} \Spec(k''))
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+이후 따로 언급하지 않고 보조정리\  \ref{lemma-dim-0}의 결과들을
+사용한다. 어떤 유한 분리\  $k'$-대수\  $l$에 대해
+$$
+k' \otimes_k k'' = k'' \times l
+$$
+로 쓰자. 다음과 같이 둔다.
+$F' = H^0(\Spec(k'))$, $F'' = H^0(\Spec(k''))$, and $G = H^0(\Spec(l))$.
+$\Spec(k') \times \Spec(k'') = \Spec(k'') \amalg \Spec(l)$이므로
+공리 (B)(a)와 보조정리\  \ref{lemma-weil-additive}에 의해
+$$
+F' \otimes_F F'' = F'' \times G
+$$
+를 얻는다. 왼쪽에서 오른쪽으로 가는 사상은\  $F''$을\ 
+$F' \otimes_{F'} F''$와 동일시한다. 같은 방식으로
+$$
+H^*(X) \otimes_F F'' = H^*(X \times_{\Spec(k')} \Spec(k''))
+\times H^*(X \times_{\Spec(k')} \Spec(l))
+$$
+가\  $F' \otimes_F F'' = F'' \times G$ 위의 가군의 동형사상으로
+성립한다. 이로써 보조정리가 증명된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Weil 코호몰로지 이론, II}
+\label{section-old}
+
+\noindent
+우리에게\  Weil 코호몰로지 이론은 바탕체\  $k$가 대수적으로 닫혀 있지
+않을 때 고전적\  Weil 코호몰로지 이론(\ref{section-axioms-classical}절)의
+유사물이다. \ref{section-axioms}절에서는 코호몰로지 이론이\  $k$ 위의
+모티브 범주에 정의된 대칭 모노이드 함자에서 나오도록 보장하는
+공리들을 열거했다. 지금까지의 공리에는\  $i < 0$일 때\ 
+$H^i(X) = 0$이라는 조건과, 차원\  $d$인 등차원\  $X$에 대한\ 
+$H^{2d}(X)(d)$의 조건으로서 고전적 공리 (A)(c), (A)(d)에 대응하는
+조건이 빠져 있다. 먼저 그러한 조건을 부과할 필요가 있음을
+확인하자.
+
+\begin{example}
+\label{example-weird-weil}
+$k = \mathbf{C}$와\  $F = \mathbf{C}$를 모두 복소수체와 같게 두자.
+$k$ 위의 매끄러운 사영 스킴\  $X$에 대해\ 
+$H^{p, q}(X) = H^q(X, \Omega^p_{X/k})$라 쓰자. 함자\  $(H')^*$가\ 
+$X$를 보통의 컵곱을 갖는\  $(H')^*(X) = \bigoplus H^{p, q}(X)$로
+보내게 하자. 이는 고전적\  Weil 코호몰로지 이론이다(여기에 향후
+참조를 삽입하라). 명제\ 
+\ref{proposition-weil-cohomology-theory-classical}에 의해\  $M_k$에서
+등급\  $F$-벡터공간의 범주로 가는\  $\mathbf{Q}$-선형 대칭 모노이드
+함자\  $G'$을 얻는다. 물론 이 경우\  $M_k$의 모든\  $M$에 대해\ 
+$G'(M)$은 자연스럽게 이중등급화되어 있다. 즉,
+$$
+(G')(M) = \bigoplus (G')^{p, q}(M),\quad
+(G')^n = \bigoplus\nolimits_{n = p + q} (G')^{p, q}(M)
+$$
+이고, 표시한 대로\  $(G')^{p, q}$는 전체 차수\  $p + q$에 놓인다.
+이제 다음과 같이 두어 등급\  $F$-벡터공간의 범주로 가는\ 
+$\mathbf{Q}$-선형 대칭 모노이드 함자\  $G$를 구성하겠다.
+$$
+G^n(M) = \bigoplus\nolimits_{n = 3p - q} (G')^{p, q}(M)
+$$
+이것이 대칭 모노이드 함자를 정의한다는 확인은 생략한다. 한 가지
+기술적인 점은 위에서 홀수\  $3$과\  $-1$을 택했기 때문에 함자\  $G$가
+교환 제약과 호환된다는 것이다.
+$G(\mathbf{1}(1))$이 여전히 차수\  $-2$에 놓임을 관찰하자!
+따라서 보조정리\  \ref{lemma-from-functor-to-weil-classical}에 의해
+고전적 공리 (A), (B), (C)를 모두 만족하는 함자\  $H^*$, 사이클류\ 
+$\gamma$, 대각합 사상을 얻는다. 다만 고전적 공리 (A)(a), (A)(d)는
+만족하지 않을 수 있다. 실제로\  $E$가\  $k$ 위의 타원곡선이면\ 
+$\dim H^{-1}(E) = 1$이고, 따라서 공리 (A)(a)가 실제로 위배된다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-H-0-separable}
+(A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)이
+주어졌다고 하자. $X$를\  $k$ 위의 매끄러운 사영 스킴이라 하고\ 
+$k' = \Gamma(X, \mathcal{O}_X)$로 두자. 다음 두 조건은 동치이다.
+\begin{enumerate}
+\item 잉여체가\  $k$ 위에서 분리인 유한 개의 닫힌점\ 
+$x_1, \ldots, x_r \in X$가 존재하여\ 
+$H^0(X) \to H^0(x_1) \oplus \ldots \oplus H^0(x_r)$가 단사이다.
+\item 사상\  $H^0(\Spec(k')) \to H^0(X)$가 동형사상이다.
+\end{enumerate}
+이들이 성립하면\  $H^0(X)$는 유한 분리\  $F$-대수이다. $X$가 차원\ 
+$d$인 등차원 스킴이면 (1), (2)는 다음 조건과도 동치이다.
+\begin{enumerate}
+\item[(3)] 닫힌점들의 류가\  $H^{2d}(X)(d)$를\  $H^0(X)$ 위의
+가군으로서 생성한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$k'$은\  $k$ 위의 유한 분리 대수이고(Varieties, Lemma
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections})
+따라서\  $\Spec(k')$이\  $k$ 위에서 매끄럽고 사영적이므로 이 명제는
+의미가 있다. $H^*$의 직합과의 호환성(보조정리\ 
+\ref{lemma-weil-additive}, \ref{lemma-trace-disjoint-union})에 의해\ 
+$X$가 연결인 경우에 보조정리를 증명하면 충분하다. 따라서\  $X$가
+기약이라고 가정할 수 있고, (1), (2), (3)의 동치성을 보여야 한다.
+$d = \dim(X)$로 두자. 이로부터\  $k'$은\  $k$의 유한 분리 체확대이고\ 
+$X$는\  $k'$ 위에서 기하적으로 기약임을 얻는다. Varieties, Lemmas
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections}와\ 
+\ref{varieties-lemma-baby-stein}을 보라.
+
+\medskip\noindent
+보조정리\  \ref{lemma-generated-by-separable}에 의해 (3)의 닫힌점들은
+잉여체가\  $k$ 위에서 분리라고 가정할 수 있다. 공리 (A)(a), (A)(b)에
+의해 조건 (1)과 (3)은 동치이다.
+
+\medskip\noindent
+(2)가 성립한다고 하자. 잉여체가\  $k'$ 위의 유한 분리확대인 임의의
+닫힌점\  $x \in X$를 택한다. 그러면 예를 들어 보조정리\ 
+\ref{lemma-injective}에 의해\ 
+$H^0(\Spec(k')) = H^0(X) \to H^0(x)$는 단사이다.
+
+\medskip\noindent
+동치인 조건 (1), (3)이 성립한다고 가정하자. (1)에서와 같이\ 
+$x_1, \ldots, x_r \in X$를 택하고 유한 분리확대\  $k''/k'$를 택한다.
+보조정리\  \ref{lemma-otimes}에 의해
+$$
+H^0(X) \otimes_{H^0(\Spec(k'))} H^0(\Spec(k'')) =
+H^0(X \times_{\Spec(k')} \Spec(k''))
+$$
+이다. 따라서\  $H^0(\Spec(k')) \to H^0(X)$가 동형사상임을 보일 때\ 
+$k'$을\  $k''$로 바꿀 수 있다. 그러므로\  $x_1, \ldots, x_r$이\ 
+$k'$-유리점이라고 가정할 수 있다(이 단계에서 각\  $x_i$를 여러
+점으로 바꾸므로\  $r$은 증가한다). 보조정리\ 
+\ref{lemma-classes-points}에 의해\ 
+$\gamma(x_1) = \gamma(x_2) = \ldots = \gamma(x_r)$이다.
+공리 (A)(b)에 의해 사상\  $H^0(X) \to H^0(x_i)$들은 모두 같다.
+이는 (2)가 성립한다는 뜻이다.
+
+\medskip\noindent
+마지막으로 (1)이 성립하면 보조정리\  \ref{lemma-dim-0}에 의해\ 
+$H^0(X)$는 분리\  $F$-대수이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-negative-cohomology}
+(A), (B), (C)를 만족하는 데이터 (D0), (D1), (D2), (D3)이
+주어졌다고 하자. 어떤\  $i < 0$에 대해\  $H^i(Y)$가 영이 아닌\ 
+$k$ 위의 매끄러운 사영 스킴\  $Y$가 존재하면\  $k$ 위의 등차원
+매끄러운 사영 스킴\  $X$가 존재하여 보조정리\ 
+\ref{lemma-H-0-separable}의 동치조건들이\  $X$에 대해 성립하지 않는다.
+\end{lemma}
+
+\begin{proof}
+보조정리\  \ref{lemma-weil-additive}에 의해\  $Y$가 기약이고, 따라서
+특히 등차원이라고 가정할 수 있다. $i$가 홀수이면\  $Y$를\ 
+$Y \times Y$로 바꾼 뒤\  $Y$가 등차원이고 어떤\  $l > 0$에 대해\ 
+$i = -2l$인 예를 얻는다. $X = Y \times (\mathbf{P}^1_k)^l$로 두자.
+공리 (B)(a)를 사용하면
+$$
+H^0(X) \supset H^0(Y) \oplus
+H^i(Y) \otimes_F H^2(\mathbf{P}^1_k)^{\otimes_F l}
+$$
+를 얻으며, 두 직합인자가 모두 영이 아니다. 따라서\  $H^0(X)$는\ 
+$\Gamma(X, \mathcal{O}_X) = \Gamma(Y, \mathcal{O}_Y)$의 스펙트럼의\ 
+$H^0$과 동형일 수 없다. 후자는 첫 번째 직합인자 안에 들어가기
+때문이다.
+\end{proof}
+
+\noindent
+따라서 이제 다음 정의를 내리는 것이 자연스럽다.
+
+\begin{definition}
+\label{definition-weil-cohomology-theory}
+$k$를 체라 하고\  $F$를 표수\  $0$인 체라 하자. $F$에 계수를 갖는\ 
+$k$ 위의 {\it Weil 코호몰로지 이론}은\  Poincar\'e 쌍대성,
+K\"unneth 공식, 사이클류와의 호환성을 만족하는 데이터 (D0), (D1),
+(D2), (D3)으로 주어진다. 더 정확히는\  \ref{section-axioms}절의
+공리 (A), (B), (C)를 만족하고, 추가로\  $k$ 위의 모든 매끄러운 사영\ 
+$X$에 대해 보조정리\  \ref{lemma-H-0-separable}의 동치조건 (1), (2)가
+성립해야 한다.
+\end{definition}
+
+\noindent
+보조정리\  \ref{lemma-negative-cohomology}에 의해 이는 영이 아닌
+음의 차수 코호몰로지군이 없다는 뜻이기도 하다. 특히\  $k$가
+대수적으로 닫혀 있으면 위와 같은\  Weil 코호몰로지 이론과 동형사상\ 
+$F \to F(1)$을 함께 주는 것은 고전적\  Weil 코호몰로지 이론을 주는
+것과 같다.
+
+\begin{remark}
+\label{remark-betti-numbers-in-some-sense}
+$H^*$를\  Weil 코호몰로지 이론이라 하자(정의\ 
+\ref{definition-weil-cohomology-theory}). $k'/k$가 체의 유한
+분리확대일 때\  $X$를\  $k'$ 위의 차원\  $d$인 기하적으로 기약인
+매끄러운 사영 스킴이라 하자. 어떤 체\  $F_i$들에 대해
+$$
+H^0(\Spec(k')) = F_1 \times \ldots \times F_r
+$$
+라고 가정하자. 그러면 이에 따라
+$$
+H^*(X) = \prod\nolimits_{i = 1, \ldots, r}
+H^*(X) \otimes_{H^0(\Spec(k'))} F_i
+$$
+로 쓸 수 있다. 정의\  \ref{definition-weil-cohomology-theory}의
+마지막 가정에 의해\  $H^0(X)$는\  $\prod F_i$ 위의 계수\  $1$인 자유
+가군이다. 다시 말해 각 인자\ 
+$H^0(X) \otimes_{H^0(\Spec(k'))} F_i$는\  $F_i$ 위에서 차원\  $1$이다.
+그러면\  Poincar\'e 쌍대성에 의해 차수\  $2d$의 코호몰로지에 대해서도
+같은 결론이 성립한다. 그러나 다른 차수에서도 같은 결론이
+성립하는지는 분명하지 않다. 즉, $0 < n < \dim(X)$가 주어졌을 때
+정수
+$$
+\dim_{F_i} H^n(X) \otimes_{H^0(\Spec(k'))} F_i
+$$
+가\  $i$와 무관함을 우리는 알지 못한다! 이 질문은 다음 미해결 문제와
+밀접하게 관련되어 있다. 대수적으로 닫힌 바탕체\  $\overline{k}$,
+표수 영인 체\  $F$, 계수체가\  $F$인\  $\overline{k}$ 위의 고전적\  Weil
+코호몰로지 이론\  $H^*$, 그리고\  $\overline{k}$ 위의 매끄러운 사영
+다양체\  $X$가 주어졌을 때, $X$의\  Betti 수
+$$
+\beta_i = \dim_F H^i(X)
+$$
+는\  $F$와\  Weil 코호몰로지 이론\  $H^*$에 무관한가?
+\end{remark}
+
+\begin{proposition}
+\label{proposition-weil-cohomology-theory-again}
+$k$를 체라 하고\  $F$를 표수\  $0$인 체라 하자. Weil 코호몰로지 이론을
+주는 것은 다음과 같은\  $\mathbf{Q}$-선형 대칭 모노이드 함자
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+를 주는 것과 같다.
+\begin{enumerate}
+\item $G(\mathbf{1}(1))$은 차수\  $-2$에서만 영이 아니다.
+\item $k$ 위의 모든 매끄러운 사영 스킴\  $X$에 대해\ 
+$k' = \Gamma(X, \mathcal{O}_X)$로 두면 등급\  $F$-벡터공간의 준동형사상\ 
+$G(h(\Spec(k'))) \to G(h(X))$는 차수\  $0$에서 동형사상이다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+명제\  \ref{proposition-weil-cohomology-theory}와 정의\ 
+\ref{definition-weil-cohomology-theory}에서 바로 따른다. 물론
+(2)를 다음 조건으로 바꾸어도 된다. 잉여체가\  $k$ 위에서 분리인
+어떤 닫힌점\  $x_1, \ldots, x_r \in X$를 택했을 때\ 
+$G(h(X)) \to \bigoplus G(h(x_i))$가 차수\  $0$에서 단사이다.
+\end{proof}
+
+
+
+
+
+
+
+\section{Chern 류}
+\label{section-chern}
+
+\noindent
+이 절에서는 제1 Chern 류와 사영공간 다발 공식을 이용하여 모든\ 
+Chern 류를 얻는 방법을 논의한다. 우리의 공리는 약간 다르지만 이
+절의 참고문헌은\  \cite{Grothendieck-chern}이다.
+
+\medskip\noindent
+$\mathcal{C}$를 다음 성질들을 갖는 스킴들의 범주라 하자.
+\begin{enumerate}
+\item 모든\  $X \in \Ob(\mathcal{C})$는 준콤팩트이고 준분리이다.
+\item $X \in \Ob(\mathcal{C})$이고\  $U \subset X$가 열린닫힌
+부분스킴이면\  $U \to X$는\  $\mathcal{C}$의 사상이다.
+$\mathcal{C}$의 사상\  $X' \to X$가\  $U$를 통해 분해되면\ 
+$X' \to U$도\  $\mathcal{C}$의 사상이다.
+\item $X \in \Ob(\mathcal{C})$이고\  $\mathcal{E}$가 유한 국소 자유\ 
+$\mathcal{O}_X$-가군이면 다음이 성립한다.
+\begin{enumerate}
+\item $p : \mathbf{P}(\mathcal{E}) \to X$는\  $\mathcal{C}$의 사상이다.
+\item $\mathcal{C}$의 사상\  $f : X' \to X$에 대해 유도된 사상\ 
+$\mathbf{P}(f^*\mathcal{E}) \to \mathbf{P}(\mathcal{E})$은\ 
+$\mathcal{C}$의 사상이다.
+\item $\mathcal{E} \to \mathcal{F}$가 다른 유한 국소 자유\ 
+$\mathcal{O}_X$-가군으로의 전사이면 닫힌 몰입\ 
+$\mathbf{P}(\mathcal{F}) \to \mathbf{P}(\mathcal{E})$은\ 
+$\mathcal{C}$의 사상이다.
+\end{enumerate}
+\end{enumerate}
+이제 범주\  $\mathcal{C}$에서 등급 대수의 범주로 가는 반변 함자\ 
+$A$가 주어졌다고 가정하자. 여기서 등급 대수\  $A$란 등급\ 
+$A = \bigoplus_{i \geq 0} A^i$을 갖는 단위원이 있는 결합적이고
+반드시 가환일 필요는 없는\  $\mathbf{Z}$-대수\  $A$이다.
+$\mathcal{C}$의 사상\  $f : X' \to X$에 의해 유도되는 대수 사상을\ 
+$f^* : A(X) \to A(X')$라 쓰겠다. $a, b \in A(X)$의 곱은\ 
+$a \cup b$라 쓰겠다. 마지막으로\  $\mathcal{C}$의 모든 대상\  $X$에
+대해 가법 사상
+$$
+c_1^A : \Pic(X) \longrightarrow A^1(X)
+$$
+이 주어졌다고 가정하자. 다음 공리들이 성립한다고 가정한다.
+\begin{enumerate}
+\item $X \in \Ob(\mathcal{C})$이고\  $\mathcal{L} \in \Pic(X)$이면
+원소\  $c_1^A(\mathcal{L})$은 대수\  $A(X)$의 중심에 속한다.
+\item $X \in \Ob(\mathcal{C})$이고\  $X = U \amalg V$이며\  $U$, $V$가
+열린닫힌 부분스킴이면 유도된 사상\  $A(X) \to A(U)$와\ 
+$A(X) \to A(V)$를 통해\  $A(X) = A(U) \times A(V)$이다.
+\item $f : X' \to X$가\  $\mathcal{C}$의 사상이고\  $\mathcal{L}$이
+가역\  $\mathcal{O}_X$-가군이면\  $f^*c_1^A(\mathcal{L}) =
+c_1^A(f^*\mathcal{L})$이다.
+\item $X \in \Ob(\mathcal{C})$이고\  $\mathcal{E}$가 계수\  $r$인 국소
+자유\  $\mathcal{O}_X$-가군일 때\  $\mathcal{C}$의 사상\ 
+$p : P = \mathbf{P}(\mathcal{E}) \to X$를 생각하자. 그러면 사상
+$$
+\bigoplus\nolimits_{i = 0, \ldots, r - 1} A(X)
+\longrightarrow A(P),\quad
+(a_0, \ldots, a_{r - 1}) \longmapsto
+\sum c_1^A(\mathcal{O}_P(1))^i \cup p^*(a_i)
+$$
+은 전단사이다.
+\item $X \in \Ob(\mathcal{C})$이고\  $\mathcal{E} \to \mathcal{F}$가
+각각 계수\  $r + 1$, $r$인 유한 국소 자유\  $\mathcal{O}_X$-가군들의
+전사라고 하자. 대응하는 포함사상을\ 
+$i : P' = \mathbf{P}(\mathcal{F}) \to \mathbf{P}(\mathcal{E}) = P$라
+쓰자. 이는\  $P'$을\  $P$ 위의 유효\  Cartier 인자로 나타내는\ 
+$\mathcal{C}$의 사상이다. $i^*a = 0$인\  $a \in A(P)$에 대해\ 
+$a \cup c_1^A(\mathcal{O}_P(P')) = 0$이다.
+\end{enumerate}
+결과를 서술하기 위해\  $\textit{Vect}(X)$가 유한 국소 자유\ 
+$\mathcal{O}_X$-가군들의 (완전) 범주를 뜻함을 상기하자. Derived
+Categories of Schemes, Section \ref{perfect-section-K-groups}에서 이
+범주의 제0 $K$-군\  $K_0(\textit{Vect}(X))$을 정의했다. 또한\ 
+$K_0(\textit{Vect}(X))$이 환임을 보았다. Derived Categories of
+Schemes, Remark \ref{perfect-remark-K-ring}을 보라.
+
+\begin{proposition}
+\label{proposition-chern-class}
+위의 상황에서 모든\  $X \in \Ob(\mathcal{C})$에 다음 “총\  Chern 류”
+$$
+c^A : K_0(\textit{Vect}(X)) \longrightarrow  \prod\nolimits_{i \geq 0} A^i(X)
+$$
+를 할당하며 다음 성질들을 만족하는 유일한 규칙이 있다.
+\begin{enumerate}
+\item $X \in \Ob(\mathcal{C})$에 대해\ 
+$c^A(\alpha + \beta) = c^A(\alpha) c^A(\beta)$이고\ 
+$c^A(0) = 1$이다.
+\item $f : X' \to X$가\  $\mathcal{C}$의 사상이면\ 
+$f^* \circ c^A =  c^A \circ f^*$이다.
+\item $X \in \Ob(\mathcal{C})$이고\  $\mathcal{L} \in \Pic(X)$이면\ 
+$c^A([\mathcal{L}]) = 1 + c_1^A(\mathcal{L})$이다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$X \in \Ob(\mathcal{C})$라 하고\  $\mathcal{E}$를 유한 국소 자유\ 
+$\mathcal{O}_X$-가군이라 하자. 먼저 원소\ 
+$c^A(\mathcal{E}) \in A(X)$를 정의하는 방법을 보이겠다.
+
+\medskip\noindent
+첫 단계로\  $X = \bigcup X_r$를\  $\mathcal{E}|_{X_r}$의 계수가 상수\ 
+$r$인 열린닫힌 부분스킴들로의 분해라 하자. $X$가 준콤팩트이므로 이
+분해는 유한이다. 따라서\  $A(X) = \prod A(X_r)$이다. 그러므로\ 
+$\mathcal{E}$의 계수가 상수\  $r$인 경우에\  $c^A(\mathcal{E})$를
+정의하면 충분하다. 이 경우\  $p : P \to X$를\  $\mathcal{E}$의
+사영다발이라 하자. $i \geq 0$에 대해\ 
+$c_i^A(\mathcal{E}) \in A^i(X)$를 유일하게 정의하여\ 
+$c_0^A(\mathcal{E}) = 1$이고 등식
+\begin{equation}
+\label{equation-chern-classes}
+\sum\nolimits_{i = 0}^r
+(-1)^i c_1(\mathcal{O}_P(1))^i \cup p^*c^A_{r - i}(\mathcal{E})
+= 0
+\end{equation}
+이 성립하게 할 수 있다. 평소와 같이\  $A(X)$에서\ 
+$c^A(\mathcal{E}) = c_0^A(\mathcal{E}) + c_1^A(\mathcal{E}) + \ldots
++ c_r^A(\mathcal{E})$로 둔다.
+
+\medskip\noindent
+$\mathcal{E}$가 가역이면\ 
+$c^A(\mathcal{E}) = 1 + c_1^A(\mathcal{L})$이다. 이는 위의
+구성에서 바로 따른다.
+
+\medskip\noindent
+원소\  $c_i^A(\mathcal{E})$들은\  $A(X)$의 중심에 속한다. 이를
+증명할 때\  $\mathcal{E}$의 계수가 상수\  $r$이라고 가정할 수 있다.
+$p : P \to X$를 대응하는 사영다발이라 하자. $a \in A(X)$이면\ 
+$p^*a \cup (-1)^r c_1(\mathcal{O}_P(1))^r =
+(-1)^r c_1(\mathcal{O}_P(1))^r \cup p^*a$이다. 따라서\ 
+$c_i^A(\mathcal{E})$을 정의하는 식의 다른 모든 항에 대해서도 같은
+등식이 성립해야 하므로 결론을 얻는다.
+
+\medskip\noindent
+$f : X' \to X$가\  $\mathcal{C}$의 사상이면\ 
+$f^*c_i^A(\mathcal{E}) = c_i^A(f^*\mathcal{E})$이다. 이를
+증명할 때\  $\mathcal{E}$의 계수가 상수\  $r$이라고 가정할 수 있다.
+$p : P \to X$와\  $p' : P' \to X'$을 각각\  $\mathcal{E}$와\ 
+$f^*\mathcal{E}$에 대응하는 사영다발이라 하자. 유도된 사상\ 
+$g : P' \to P$는\  $\mathcal{C}$의 사상이다.
+$c_i^A(\mathcal{E})$을 정의하는 등식을\  $g$로 당기면\ 
+$f^*\mathcal{E}$에 대응하는 등식을 얻으므로 결론이 따른다.
+
+\medskip\noindent
+$X \in \Ob(\mathcal{C})$라 하자. $\mathcal{L}$이 가역인 유한 국소
+자유\  $\mathcal{O}_X$-가군들의 짧은 완전열
+$$
+0 \to \mathcal{L} \to \mathcal{E} \to \mathcal{F} \to 0
+$$
+을 생각하자. 그러면
+$$
+c^A(\mathcal{E}) = c^A(\mathcal{L}) c^A(\mathcal{F})
+$$
+이다. 실제로\  $c^A_i$의 구성에 의해\  $\mathcal{E}$의 계수가 상수\ 
+$r + 1$이고\  $\mathcal{F}$의 계수가 상수\  $r$이라고 가정할 수 있다.
+포함사상
+$$
+i : P' = \mathbf{P}(\mathcal{F}) \longrightarrow \mathbf{P}(\mathcal{E}) = P
+$$
+은\  $\mathcal{C}$의 사상이며 가역 가군\ 
+$\mathcal{L}^{\otimes -1} \otimes \mathcal{O}_P(1)$의 정칙 단면의
+영점 스킴이다. 정의에 의해 원소
+$$
+\sum\nolimits_{i = 0}^r (-1)^i c_1^A(\mathcal{O}_P(1))^i \cup
+p^*c^A_i(\mathcal{F})
+$$
+는\  $P'$으로 당겼을 때 영이다. 따라서 코호몰로지\  $A$에 대한 가정
+(5)에 의해\  $A^*(P)$에서
+$$
+\left(c_1^A(\mathcal{O}_P(1)) - c_1^A(\mathcal{L})\right) \cup
+\left(\sum\nolimits_{i = 0}^r (-1)^i c_1^A(\mathcal{O}_P(1))^i \cup
+p^*c^A_i(\mathcal{F})\right) = 0
+$$
+이다. $c_1^A(\mathcal{E})$의 정의에 의해 원하는 등식을 얻는다.
+
+\medskip\noindent
+$X \in \Ob(\mathcal{C})$라 하자. 유한 국소 자유\ 
+$\mathcal{O}_X$-가군들의 짧은 완전열
+$$
+0 \to \mathcal{E} \to \mathcal{F} \to \mathcal{G} \to 0
+$$
+을 생각하자. 그러면
+$$
+c^A(\mathcal{F}) = c^A(\mathcal{E}) c^A(\mathcal{G})
+$$
+이다. 실제로\  $c^A_i$의 구성에 의해\  $\mathcal{E}$, $\mathcal{F}$,
+$\mathcal{G}$의 계수가 각각 상수\  $r$, $s$, $t$라고 가정할 수 있다.
+$r$에 대한 귀납법으로 증명하자. $r = 1$인 경우는 위에서 보였다.
+$r > 1$이면 사상\  $\mathbf{P}(\mathcal{E}^\vee) \to X$로 당긴 뒤
+등식을 확인하면 충분하다. 따라서 가역 부분가군\ 
+$\mathcal{L} \subset \mathcal{E}$이 있어\ 
+$\mathcal{E}' = \mathcal{E}/\mathcal{L}$과\ 
+$\mathcal{F}' = \mathcal{E}/\mathcal{L}$이 모두 유한 국소 자유라고
+가정할 수 있다(그 계수는\  $s - 1$과\  $t - 1$이다). 그러면
+$$
+c^A(\mathcal{E}) = c^A(\mathcal{L}) c^A(\mathcal{E}')
+\quad\text{and}\quad
+c^A(\mathcal{F}) = c^A(\mathcal{L}) c^A(\mathcal{F}')
+$$
+이다. 짧은 완전열
+$$
+0 \to \mathcal{E}' \to \mathcal{F}' \to \mathcal{G} \to 0
+$$
+이 있으므로 귀납가정에 의해
+$$
+c^A(\mathcal{F}') = c^A(\mathcal{E}') c^A(\mathcal{G})
+$$
+이다. 따라서 형식적인 계산으로 결과가 따른다.
+
+\medskip\noindent
+이제\  $X \in \Ob(\mathcal{C})$에 대해\ 
+$c^A : K_0(\textit{Vect}(X)) \to A(X)$를 정의할 수 있다. 즉,
+생성원\  $[\mathcal{E}]$을\  $c^A(\mathcal{E})$로 보내고 곱셈적으로
+확장한다. 예를 들어\ 
+$c^A(-[\mathcal{E}]) = c^A(\mathcal{E})^{-1}$은\ 
+$a^A([\mathcal{E}])$의 형식적 역원이다. 위에서 보인 짧은 완전열에
+대한 곱셈성이 이것이 잘 정의됨을 보장한다.
+
+\medskip\noindent
+유일성을 보이자. $X \in \Ob(\mathcal{C})$이고\  $\mathcal{E}$가 유한
+국소 자유\  $\mathcal{O}_X$-가군이라고 하자. 보조정리의 조건 (1),
+(2), (3)이\  $c^A([\mathcal{E}])$을 유일하게 결정함을 보이고자 한다.
+이를 증명할 때\  $\mathcal{E}$의 계수가 상수\  $r$이라고 가정할 수
+있다. 여기에는 이미 (2)를 사용했다. 이제\  $r$에 대한 귀납법을
+사용한다. $r = 1$이면 (3)에서 유일성이 따른다. $r > 1$이면 (2)를
+사용하여 사영다발\  $p : P \to X$로 당긴다. 그러면\ 
+$\mathcal{E}'$과\  $\mathcal{E}''$의 계수가 더 작은 짧은 완전열\ 
+$0 \to \mathcal{E}' \to \mathcal{E} \to \mathcal{E}'' \to 0$이
+있다고 가정할 수 있다. 귀납가정에 의해\ 
+$c^A(\mathcal{E}')$과\  $c^A(\mathcal{E}'')$은 유일하게 결정된다.
+따라서 공리 (1)에 의해\  $\mathcal{E}$에 대해서도 유일하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-splitting-principle}
+위의 상황을 가정하자. $X \in \Ob(\mathcal{C})$라 하고\ 
+$\mathcal{E}_i$를 계수가\  $r_i$인 유한 개의 국소 자유\ 
+$\mathcal{O}_X$-가군이라 하자. 다음을 만족하는\  $\mathcal{C}$의
+사상\  $p : P \to X$가 존재한다.
+\begin{enumerate}
+\item $p^* : A(X) \to A(P)$는 단사이다.
+\item 각\  $p^*\mathcal{E}_i$는 연속 몫\ 
+$\mathcal{L}_{i, 1}, \ldots, \mathcal{L}_{i, r_i}$가 가역\ 
+$\mathcal{O}_P$-가군인 여과를 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+모든\  $i$에 대해\  $r_i \geq 1$이라고 가정할 수 있다.
+$\sum (r_i - 1)$에 대한 귀납법으로 보조정리를 증명하자. 이 정수가\ 
+$0$이면 모든\  $i$에 대해\  $\mathcal{E}_i$가 가역이므로\ 
+$\pi = \text{id}_X$로 두어 결론을 얻는다. 그렇지 않으면\ 
+$r_i > 1$인\  $i$를 하나 택하여\  $\mathcal{E}_i$에 대응하는
+사영다발\  $p : P \to X$를 생각할 수 있다. 계수가 각각\  $r_i - 1$,
+$r_i$, $1$인 유한 국소 자유\  $\mathcal{O}_P$-가군들의 짧은 완전열
+$$
+0 \to \mathcal{F} \to p^*\mathcal{E}_i \to \mathcal{O}_P(1) \to 0
+$$
+이 있다. 가정에 의해\  $p^* : A(X) \to A(P)$는 단사임을 관찰하자.
+$i' \not = i$에 대해 유한 국소 자유\  $\mathcal{O}_P$-가군\ 
+$\mathcal{F}$와\  $p^*\mathcal{E}_{i'}$에 귀납가정을 적용하면
+보조정리에 서술된 성질을 갖는 사상\  $p' : P' \to P$를 얻는다.
+그러면 합성\  $p \circ p' : P' \to X$가 원하는 사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-chern-classes-E-tensor-L}
+$X \in \Ob(\mathcal{C})$라 하자. $\mathcal{E}$를 유한 국소 자유\ 
+$\mathcal{O}_X$-가군이라 하고\  $\mathcal{L}$을 가역\ 
+$\mathcal{O}_X$-가군이라 하자. 그러면
+$$
+c^A_i({\mathcal E} \otimes {\mathcal L})
+=
+\sum\nolimits_{j = 0}^i
+\binom{r - i + j}{j} c^A_{i - j}({\mathcal E}) \cup c^A_1({\mathcal L})^j
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$c^A_i$의 구성에 의해\  $\mathcal{E}$의 계수가 상수\  $r$이라고
+가정할 수 있다. $p : P \to X$와\  $p' : P' \to X$를 각각\ 
+$\mathcal{E}$와\  $\mathcal{E} \otimes \mathcal{L}$에 대응하는
+사영다발이라 하자. 그러면\ 
+$g^*\mathcal{O}_{P'}(1) = \mathcal{O}_P(1) \otimes p^*\mathcal{L}$인
+동형사상\  $g : P \to P'$이 있다. Constructions, Lemma
+\ref{constructions-lemma-twisting-and-proj}를 보라. 따라서
+$$
+g^*c_1^A(\mathcal{O}_{P'}(1)) =
+c_1^A(\mathcal{O}_P(1)) + p^*c_1^A(\mathcal{L})
+$$
+이다. 이 등식과 등식 (\ref{equation-chern-classes})을 사용하는\ 
+Chern 류의 정의에서 원하는 등식이 형식적으로 따른다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-chern-character}
+위의 상황에서 모든\  $X \in \Ob(\mathcal{C})$에 대해\  $A(X)$가\ 
+$\mathbf{Q}$-대수라고 가정하자. 모든\  $X \in \Ob(\mathcal{C})$에
+다음 “Chern 지표”
+$$
+ch^A : K_0(\textit{Vect}(X)) \longrightarrow
+\prod\nolimits_{i \geq 0} A^i(X)
+$$
+를 할당하며 다음 성질들을 만족하는 유일한 규칙이 있다.
+\begin{enumerate}
+\item 모든\  $X \in \Ob(\mathcal{C})$에 대해\  $ch^A$는 환사상이다.
+\item $f : X' \to X$가\  $\mathcal{C}$의 사상이면\ 
+$f^* \circ ch^A =  ch^A \circ f^*$이다.
+\item $X \in \Ob(\mathcal{C})$이고\  $\mathcal{L} \in \Pic(X)$이면\ 
+$ch^A([\mathcal{L}]) = \exp(c_1^A(\mathcal{L}))$이다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$X \in \Ob(\mathcal{C})$라 하고\  $\mathcal{E}$를 유한 국소 자유\ 
+$\mathcal{O}_X$-가군이라 하자. 먼저 계수\ 
+$r^A(\mathcal{E}) \in A^0(X)$를 정의하는 방법을 보이겠다.
+$X = \bigcup X_r$를\  $\mathcal{E}|_{X_r}$의 계수가 상수\  $r$인
+열린닫힌 부분스킴들로의 분해라 하자. $X$가 준콤팩트이므로 이 분해는
+유한이다. 이를\  $X = X_0 \amalg X_1 \amalg \ldots \amalg X_n$이라
+쓰자. 그러면\  $A(X) = A(X_0) \times A(X_1) \times \ldots \times A(X_n)$이다.
+따라서\  $r^A(\mathcal{E}) = (0, 1, \ldots, n) \in A^0(X)$로 정의할
+수 있다.
+
+\medskip\noindent
+$P_p(c_1, \ldots, c_p)$를\  Chow Homology, Example
+\ref{chow-example-power-sum}에서 구성한 다항식이라 하자. 그러면
+$$
+ch^A(\mathcal{E}) = r^A(\mathcal{E}) +
+\sum\nolimits_{i \geq 1} (1/i!)
+P_i(c^A_1(\mathcal{E}), \ldots, c^A_i(\mathcal{E}))
+\in \prod\nolimits_{i \geq 0} A^i(X)
+$$
+로 정의할 수 있다. 여기서\  $ci^A$는 명제\ 
+\ref{proposition-chern-class}의\  Chern 류들이다. 보조정리의 성질
+(2), (3)이 성립함은 곧바로 따른다.
+
+\medskip\noindent
+다음 세 명제를 증명해야 한다.
+\begin{enumerate}
+\item $X \in \Ob(\mathcal{C})$ 위의 유한 국소 자유\ 
+$\mathcal{O}_X$-가군들의 짧은 완전열\ 
+$0 \to \mathcal{E}_1 \to \mathcal{E} \to \mathcal{E}_2 \to 0$이
+있으면\ 
+$ch^A(\mathcal{E}) = ch^A(\mathcal{E}_1) + ch^A(\mathcal{E}_2)$이다.
+\item $\mathcal{E}_1$과\  $\mathcal{E}_2 \to 0$가\ 
+$X \in \Ob(\mathcal{C})$ 위의 유한 국소 자유\ 
+$\mathcal{O}_X$-가군이면\ 
+$ch^A(\mathcal{E}_1 \otimes \mathcal{E}_2) =
+ch^A(\mathcal{E}_1) ch^A(\mathcal{E}_2)$이다.
+\end{enumerate}
+실제로 첫째 명제는\  $ch^A$가\  $K_0(\textit{Vect}(X))$를 통해
+분해됨을 보이고, 첫째 명제와 둘째 명제를 함께 사용하면\  $ch^A$가
+환사상임을 보인다.
+
+\medskip\noindent
+이 명제들을 증명하기 위해\  $\mathcal{E}_1$과\  $\mathcal{E}_2$의
+계수가 각각 상수\  $r_1$, $r_2$인 경우로 환원할 수 있다. 이 경우\ 
+$A^0(X)$에서의 등식들은 자명하다. 더 높은 차수에서의 등식을
+증명하기 위해 보조정리\  \ref{lemma-splitting-principle}에 의해\ 
+$\mathcal{E}_1$, $\mathcal{E}_2$가 각각 가역 가군\ 
+$\mathcal{L}_{1, j}$, $j = 1, \ldots, r_1$과\ 
+$\mathcal{L}_{2, j}$, $j = 1, \ldots, r_2$를 등급 성분으로 갖는
+여과를 가진다고 가정할 수 있다. Chern 류의 곱셈성을 사용하면
+$$
+c_i^A(\mathcal{E}_1) =
+s_i(c_1^A(\mathcal{L}_{1, 1}), \ldots, c_1^A(\mathcal{L}_{1, r_1}))
+$$
+를 얻는다. 여기서\  $s_i$는\  Chow Homology, Example
+\ref{chow-example-power-sum}에서와 같은 제$i$ 기본대칭함수이다.
+$c_i^A(\mathcal{E}_2)$에 대해서도 마찬가지다. 경우 (1)에는
+$$
+c_i^A(\mathcal{E}) =
+s_i(c_1^A(\mathcal{L}_{1, 1}), \ldots, c_1^A(\mathcal{L}_{1, r_1}),
+c_1^A(\mathcal{L}_{2, 1}), \ldots, c_1^A(\mathcal{L}_{2, r_2}))
+$$
+를 얻고, 경우 (2)에는
+$$
+c_i^A(\mathcal{E}_1 \otimes \mathcal{E}_2) =
+s_i(c_1^A(\mathcal{L}_{1, 1}) + c_1^A(\mathcal{L}_{2, 1}),
+\ldots, c_1^A(\mathcal{L}_{1, r_1}) + c_1^A(\mathcal{L}_{2, r_2}))
+$$
+를 얻는다. 다항식\  $P_i$의 정의에 의해 이는
+$$
+P_i(c^A_1(\mathcal{E}_1), \ldots, c^A_i(\mathcal{E}_1)) =
+\sum\nolimits_{j = 1, \ldots, r_1} c_1^A(\mathcal{L}_{1, j})^i
+$$
+라는 뜻이다. $\mathcal{E}_2$에 대해서도 마찬가지다. 경우 (1)에는
+또한
+$$
+P_i(c^A_1(\mathcal{E}), \ldots, c^A_i(\mathcal{E})) =
+\sum\nolimits_{j = 1, \ldots, r_1} c_1^A(\mathcal{L}_{1, j})^i +
+\sum\nolimits_{j = 1, \ldots, r_2} c_1^A(\mathcal{L}_{2, j})^i
+$$
+이고, 경우 (2)에는 이에 따라
+$$
+P_i(c^A_1(\mathcal{E}_1 \otimes \mathcal{E}_2), \ldots,
+c^A_i(\mathcal{E}_1 \otimes \mathcal{E}_2)) =
+\sum\nolimits_{j = 1, \ldots, r_1}
+\sum\nolimits_{j' = 1, \ldots, r_2}
+(c_1^A(\mathcal{L}_{1, j}) + c_1^A(\mathcal{L}_{2, j'}))^i
+$$
+이다. 이제 원하는 등식들은 대칭다항식 사이의 기본적인 항등식에서
+따른다.
+
+\medskip\noindent
+유일성의 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-adams-and-chern}
+위의 상황에서\  $X \in \Ob(\mathcal{C})$라 하자. $\psi^2$가\  Chow
+Homology, Lemma \ref{chow-lemma-second-adams-operator}에서와 같고\ 
+$c^A$, $ch^A$가 각각 명제\  \ref{proposition-chern-class},
+\ref{proposition-chern-character}에서와 같으면 모든\ 
+$\alpha \in K_0(\textit{Vect}(X))$에 대해\ 
+$c^A_i(\psi^2(\alpha)) = 2^i c^A_i(\alpha)$이고\ 
+$ch^A_i(\psi^2(\alpha)) = 2^i ch^A_i(\alpha)$이다.
+\end{lemma}
+
+\begin{proof}
+$A^i(X)$에서\  $2^i$를 곱하는 사상\ 
+$\prod_{i \geq 0} A^i(X) \to \prod_{i \geq 0} A^i(X)$은 환사상임을
+관찰하자. 따라서\  $\psi^2$도 환사상이므로\ 
+$K_0(\textit{Vect}(X))$의 가법 생성원들에 대해 공식들을 증명하면
+충분하다. 그러므로 어떤 유한 국소 자유\  $\mathcal{O}_X$-가군\ 
+$\mathcal{E}$에 대해\  $\alpha = [\mathcal{E}]$라고 가정할 수 있다.
+$\mathcal{E}$의\  Chern 류 구성에 의해\  $\mathcal{E}$의 계수가 상수\ 
+$r$인 경우로 곧바로 환원된다. 이 경우 제한사상\ 
+$A^*(X) \to A^*(P)$가 단사이고\  $p^*\mathcal{E}$가 가역\ 
+$\mathcal{O}_P$-가군\  $\mathcal{L}_j$들을 등급 성분으로 갖는 유한
+여과를 갖도록 하는 사영 매끄러운 사상\  $p : P \to X$를 택할 수
+있다. 보조정리\  \ref{lemma-splitting-principle}을 보라. 그러면\ 
+$[p^*\mathcal{E}] = \sum [\mathcal{L}_j]$이고, 따라서\  $\psi^2$의
+정의에 의해\ 
+$\psi^2([p^*\mathcal{E}]) = \sum [\mathcal{L}_j^{\otimes 2}]$이다.
+$x_j  = c^A_1(\mathcal{L}_j)$로 두면
+$$
+c^A(\alpha) = \prod (1 + x_j)
+\quad\text{and}\quad
+c^A(\psi^2(\alpha)) = \prod (1 + 2 x_j)
+$$
+가\  $\prod A^i(P)$에서 성립하고,
+$$
+ch^A(\alpha) = \sum \exp(x_j)
+\quad\text{and}\quad
+ch^A(\psi^2(\alpha)) = \sum \exp(2 x_j)
+$$
+가\  $\prod A^i(P)$에서 성립한다. 이 공식들에서 원하는 결과가
+따른다.
+\end{proof}
+
+
+
+
+
+
+
+\section{외대수 거듭제곱과\  K-군}
+\label{section-lambda-operations}
+
+\noindent
+람다 연산자를 정의하는 데 필요한 최소한의 작업만 하겠다. $X$를
+스킴이라 하자. $\textit{Vect}(X)$가 유한 국소 자유\ 
+$\mathcal{O}_X$-가군들의 범주를 뜻함을 상기하자. 또한\  Derived
+Categories of Schemes, Section \ref{perfect-section-K-groups}에서 이
+범주에 대응하는 제0 $K$-군\  $K_0(\textit{Vect}(X))$을 구성했음을
+상기하자. 마지막으로\  $K_0(\textit{Vect}(X))$은 환이다. Derived
+Categories of Schemes, Remark \ref{perfect-remark-K-ring}을 보라.
+
+\begin{lemma}
+\label{lemma-lambda-operations}
+$X$를 스킴이라 하자. 사상
+$$
+\lambda^r : K_0(\textit{Vect}(X)) \longrightarrow K_0(\textit{Vect}(X))
+$$
+들이 존재하여, $\mathcal{E}$가 유한 국소 자유\  $\mathcal{O}_X$-가군일
+때\  $[\mathcal{E}]$을\  $[\wedge^r(\mathcal{E})]$로 보내며 당김과
+호환된다.
+\end{lemma}
+
+\begin{proof}
+$t$를 변수라 하고 환\  $R = K_0(\textit{Vect}(X))[[t]]$를 생각하자.
+유한 국소 자유\  $\mathcal{O}_X$-가군\  $\mathcal{E}$에 대해\  $R$에서
+$$
+c(\mathcal{E}) = \sum\nolimits_{i = 0}^\infty [\wedge^i(\mathcal{E})] t^i
+$$
+로 둔다. 유한 국소 자유\  $\mathcal{O}_X$-가군들의 짧은 완전열
+$$
+0 \to \mathcal{E}' \to \mathcal{E} \to \mathcal{E}'' \to 0
+$$
+이 주어지면\ 
+$c(\mathcal{E}) = c(\mathcal{E}') c(\mathcal{E}'')$라고 주장한다.
+이 주장에 의해\  $c$는 사상
+$$
+c :  K_0(\textit{Vect}(X)) \longrightarrow R
+$$
+으로 확장되며\  $K_0(\textit{Vect}(X))$의 덧셈을\  $R$의 곱셈으로
+바꾼다. $c(\alpha) = \sum \lambda^i(\alpha) t^i$로 쓰면 원하는
+연산자\  $\lambda^i$를 얻는다.
+
+\medskip\noindent
+주장을 보이기 위해 짧은 완전열을\  $\mathcal{E}$ 위의\  $2$단계
+여과로 보자. 그러면\  $\wedge^r(\mathcal{E})$ 위에\  $r + 1$단계의
+유도된 여과가 생기며 그 부분몫들은
+$$
+\wedge^r(\mathcal{E}'),
+\wedge^{r - 1}(\mathcal{E}') \otimes \mathcal{E}'',
+\wedge^{r - 2}(\mathcal{E}') \otimes \wedge^2(\mathcal{E}''), \ldots
+\wedge^r(\mathcal{E}'')
+$$
+이다. 따라서\  $[\wedge^r(\mathcal{E})]$는
+$$
+\sum\nolimits_{i = 0}^r
+[\wedge^{r - i}(\mathcal{E}')] [\wedge^i(\mathcal{E}'')]
+$$
+와 같다. 여기서 기본적인 대수 계산으로 결과가 쉽게 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{Weil 코호몰로지 이론, III}
+\label{section-c1}
+
+\noindent
+$k$를 체라 하고\  $F$를 표수 영인 체라 하자. 다음 데이터가
+주어졌다고 가정한다.
+\begin{enumerate}
+\item[(D0)] $1$차원\  $F$-벡터공간\  $F(1)$.
+\item[(D1)] $k$ 위의 매끄러운 사영 스킴의 범주에서 등급 가환\ 
+$F$-대수의 범주로 가는 반변 함자\  $H^*(-)$.
+\item[(D2')] $k$ 위의 모든 매끄러운 사영 스킴\  $X$에 대해 주어진
+아벨군의 준동형사상\  $c_1^H : \Pic(X) \to H^2(X)(1)$.
+\end{enumerate}
+(D0), (D1)에 관한 용어, 표기, 규약은\  \ref{section-axioms}절에서
+논의한 것을 사용한다. $k$ 위의 매끄러운 사영 스킴\  $X$와 가역\ 
+$\mathcal{O}_X$-가군\  $\mathcal{L}$이 주어졌을 때 (D2')의 코호몰로지류\ 
+$c_1^H(\mathcal{L}) \in H^2(X)(1)$를 때때로
+{\it 코호몰로지에서\  $\mathcal{L}$의 제1 Chern 류}라고 한다.
+
+\medskip\noindent
+공리들의 목록은 다음과 같다.
+\begin{enumerate}
+\item[(A1)] $H^*$는 유한 쌍대곱과 호환된다.
+\item[(A2)] $c_1^H$는 당김과 호환된다.
+\item[(A3)] $X$를\  $k$ 위의 매끄러운 사영 스킴이라 하자.
+$\mathcal{E}$를 계수\  $r \geq 1$인 국소 자유\ 
+$\mathcal{O}_X$-가군이라 하자. 사상\ 
+$p : P = \mathbf{P}(\mathcal{E}) \to X$를 생각하자. 그러면 사상
+$$
+\bigoplus\nolimits_{i = 0, \ldots, r - 1} H^*(X)(-i)
+\longrightarrow H^*(P),\quad
+(a_0, \ldots, a_{r - 1}) \longmapsto
+\sum c_1^H(\mathcal{O}_P(1))^i \cup p^*(a_i)
+$$
+은\  $F$-벡터공간의 동형사상이다.
+\item[(A4)] $i : Y \to X$를\  $k$ 위의 유효\  Cartier 인자의
+포함사상이라 하고\  $X$, $Y$가 모두\  $k$ 위에서 매끄럽고 사영적이라고
+하자. $i^*a = 0$인\  $a \in H^*(X)$에 대해\ 
+$a \cup c_1^H(\mathcal{O}_X(Y)) = 0$이다.
+\item[(A5)] $H^*$는 유한 곱과 호환된다.
+\item[(A6)] $X$를\  $k$ 위에서 차원\  $d$인 공집합이 아닌 등차원
+매끄러운 사영 스킴이라 하자. 그러면\ 
+$(\text{id} \otimes \lambda) \gamma([\Delta]) =  1$이\  $H^*(X)$에서
+성립하도록 하는\  $F$-선형 사상\ 
+$\lambda : H^{2d}(X)(d) \to F$가 존재한다.
+\item[(A7)] $b : X' \to X$가\  $k$ 위의 매끄러운 사영 스킴\  $X$의
+매끄러운 중심을 부풀리기한 것이면\footnote{그러면\  $X'$도\  $k$
+위에서 매끄럽고 사영적이다. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-blowup}을 보라.},
+$b^* : H^*(X) \to H^*(X')$는 단사이다.
+\item[(A8)] $X$가\  $k$ 위의 매끄러운 사영 스킴이고\ 
+$k' = \Gamma(X, \mathcal{O}_X)$이면 사상\ 
+$H^0(\Spec(k')) \to H^0(X)$는 동형사상이다.
+\item[(A9)] $X$를\  $k$ 위에서 차원\  $d$인 공집합이 아닌 등차원
+매끄러운 사영 스킴이라 하자. $i : Y \to X$를 공집합이 아니고\ 
+$k$ 위에서 매끄러운 유효\  Cartier 인자라 하자.
+$a \in H^{2d - 2}(X)(d - 1)$에 대해\ 
+$\lambda_Y(i^*(a)) = \lambda_X(a \cup c_1^H(\mathcal{O}_X(Y))$이다.
+여기서\  $\lambda_Y$와\  $\lambda_X$는\  $X$, $Y$에 대한 공리 (A6)에서와
+같다.
+\end{enumerate}
+각 공리의 뜻을 더 정확히 설명하자. 공리 (A3), (A4), (A7)은
+서술된 그대로 명확하다.
+
+\medskip\noindent
+(A1)에 대하여. 이는\  $H^*(\emptyset) = 0$이고\ 
+$(i^*, j^*) : H^*(X \amalg Y) \to H^*(X) \times H^*(Y)$가
+동형사상이라는 뜻이다. 여기서\  $i$, $j$는 표준 포함사상이다.
+
+\medskip\noindent
+(A2)에 대하여. 이는\  $k$ 위의 매끄러운 사영 스킴들의 사상\ 
+$f : X \to Y$와 가역\  $\mathcal{O}_Y$-가군\  $\mathcal{N}$이
+주어졌을 때\ 
+$f^*c_1^H(\mathcal{L}) = c_1^H(f^*\mathcal{L})$이라는 뜻이다.
+
+\medskip\noindent
+(A5)에 대하여. 이는\  $H^*(\Spec(k)) = F$이고\  $X$, $Y$가\  $k$ 위에서
+매끄럽고 사영적일 때 사상\ 
+$H^*(X) \otimes_F H^*(Y) \to H^*(X \times Y)$,
+$a \otimes b \mapsto p^*(a) \cup q^*(b)$가 동형사상이라는 뜻이다.
+여기서\  $p$, $q$는 사영이다.
+
+\medskip\noindent
+(A6)에 대하여. $X$를\  $k$ 위에서 차원\  $d$인 공집합이 아닌 등차원
+매끄러운 사영 스킴이라 하자. 공리 (A1) -- (A4)가 있으면 보조정리\ 
+\ref{lemma-cycle-classes}에 의해 대각선의 류
+$$
+\gamma([\Delta]) \in
+H^{2d}(X \times X)(d) = \bigoplus\nolimits_i H^i(X) \otimes_F H^{2d - i}(X)(d)
+$$
+를 생각할 수 있다. 여기서 텐서 분해는 공리 (A5)에서 나온다.
+$F$-선형 사상\  $\lambda : H^{2d}(X)(d) \to F$가 주어지면\ 
+$H^{2d}(X)(d)$로의 사영과 먼저 합성하여\  $\lambda$를\ 
+$F$-선형 사상\  $\lambda : H^*(X)(d) \to F$로 볼 수도 있다.
+이렇게 하면 공리 (A6)는 의미가 있다.
+
+\medskip\noindent
+(A8)에 대하여. $X$를\  $k$ 위의 매끄러운 사영 스킴이라 하자.
+그러면\  $k' = \Gamma(X, \mathcal{O}_X)$는 유한 분리\  $k$-대수이고
+(Varieties, Lemma
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections})
+따라서\  $\Spec(k')$은\  $k$ 위에서 매끄럽고 사영적이다. 그러므로\ 
+$H^*$를\  $\Spec(k')$에 적용할 수 있고 공리 (A8)는 의미가 있다.
+
+\medskip\noindent
+(A9)에 대하여. 공리 (A1) -- (A7)이 있으면 공리 (A6)의 사상\ 
+$\lambda$가 유일함을 주의\  \ref{remark-trace}에서 보겠다.
+
+\begin{lemma}
+\label{lemma-chern-classes}
+(A1), (A2), (A3), (A4)를 만족하는 데이터 (D0), (D1), (D2')이
+주어졌다고 하자. $k$ 위의 모든 매끄러운 사영\  $X$에 당김과
+호환되는 환준동형사상
+$$
+ch^H :
+K_0(\textit{Vect}(X))
+\longrightarrow
+\prod\nolimits_{i \geq 0} H^{2i}(X)(i)
+$$
+을 할당하며 모든 가역\  $\mathcal{O}_X$-가군\  $\mathcal{L}$에 대해\ 
+$ch^H(\mathcal{L}) = \exp(c_1^H(\mathcal{L}))$을 만족하는 유일한
+규칙이 있다.
+\end{lemma}
+
+\begin{proof}
+매끄러운 사영\  $k$-스킴들의 범주, 함자\ 
+$A : X \mapsto \bigoplus_{i \geq 0} H^{2i}(X)(i)$, 사상\  $c_1^H$에
+명제\  \ref{proposition-chern-character}를 적용하면 바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cycle-classes}
+(A1), (A2), (A3), (A4)를 만족하는 데이터 (D0), (D1), (D2')이
+주어졌다고 하자. $k$ 위의 모든 매끄러운 사영\  $X$에 당김과
+호환되는 등급환 준동형사상
+$$
+\gamma : \CH^*(X) \longrightarrow \bigoplus\nolimits_{i \geq 0} H^{2i}(X)(i)
+$$
+을 할당하며\  $K_0(\textit{Vect}(X))$의\  $\alpha$에 대해\ 
+$ch^H(\alpha) = \gamma(ch(\alpha))$를 만족하는 유일한 규칙이 있다.
+\end{lemma}
+
+\begin{proof}
+동형사상
+$$
+K_0(\textit{Vect}(X)) \otimes \mathbf{Q}
+\longrightarrow \CH^*(X) \otimes \mathbf{Q},\quad
+\alpha \longmapsto ch(\alpha) \cap [X]
+$$
+이 있음을 상기하자. Chow Homology, Lemma
+\ref{chow-lemma-K-tensor-Q}을 보라. Chow Homology, Remark
+\ref{chow-remark-chern-character-K}에 의해 이는 환의
+동형사상이다. $\gamma$를 공식\  $\gamma(\alpha) = ch^H(\alpha')$으로
+정의한다. 여기서\  $ch^H$는 보조정리\  \ref{lemma-chern-classes}에서와
+같고, $ch(\alpha') \cap [X] = \alpha$를\ 
+$\CH^*(X) \otimes \mathbf{Q}$에서 만족하는\ 
+$\alpha' \in K_0(\textit{Vect}(X))$를 택한다.
+
+\medskip\noindent
+구성\  $\alpha \mapsto \gamma(\alpha)$는 당김과 호환된다. 실제로\ 
+$ch^H$와\  Chern 류를 취하는 연산이 모두 당김과 호환된다. 보조정리\ 
+\ref{lemma-chern-classes}와\  Chow Homology, Remark
+\ref{chow-remark-gysin-chern-classes}를 보라.
+
+\medskip\noindent
+이제\  $\gamma$가 등급을 보존함을 확인해야 한다.
+$\psi^2 : K_0(\textit{Vect}(X)) \to K_0(\textit{Vect}(X))$를
+두 번째\  Adams 연산자라 하자. Chow Homology, Lemma
+\ref{chow-lemma-second-adams-operator}를 보라.
+$\alpha \in \CH^i(X)$이고\ 
+$ch(\alpha') \cap [X] = \alpha$인 유일한 원소\ 
+$\alpha' \in K_0(\textit{Vect}(X)) \otimes \mathbf{Q}$에 대해\ 
+Chow Homology, Section \ref{chow-section-intersection-regular}에서\ 
+$\psi^2(\alpha') = 2^i \alpha'$임을 보았다. 따라서 보조정리\ 
+\ref{lemma-adams-and-chern}에 의해 원하는 대로\ 
+$ch^H(\alpha') \in H^{2i}(X)(i)$임을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-divide-pullback-good-blowing-up}
+$b : X' \to X$를\  $k$ 위의 매끄러운 사영 스킴을 매끄러운 닫힌
+부분스킴\  $Z \subset X$에서 부풀리기한 것이라 하자. 도식
+$$
+\xymatrix{
+E \ar[r]_j \ar[d]_\pi & X' \ar[d]^b \\
+Z \ar[r]^i & X
+}
+$$
+을 생각하자. $Z$로 제한한 것이\  $K_0(Z)$에서\ 
+$\mathcal{C}_{Z/X}$의 류와 같은\  $K_0(X)$의 원소가 존재한다고
+가정하자. $Z$의 모든 기약성분의\  $X$ 안에서의 여차원이\  $r$이라고
+가정하자. 그러면 사이클\  $\theta \in \CH^{r - 1}(X')$가 존재하여\ 
+$\CH^r(X')$에서\  $b^![Z] = [E] \cdot \theta$이고\ 
+$\CH^r(Z)$에서\  $\pi_*j^!(\theta) = [Z]$이다.
+\end{lemma}
+
+\begin{proof}
+스킴\  $X$는\  $k$ 위에서 매끄럽고 사영적이므로\ 
+$K_0(X) = K_0(\textit{Vect}(X))$이다. Derived Categories of Schemes,
+Lemmas \ref{perfect-lemma-resolution-property-ample},
+\ref{perfect-lemma-K-is-old-K}를 보라. $Z$로 제한한 것이\ 
+$\mathcal{C}_{Z/X}$인 원소\  $\alpha \in K_0(\text{Vect}(X))$를
+택하자. Chow Homology, Lemma
+\ref{chow-lemma-minus-adams-operator}에 의해\ 
+$\mathcal{C}_{Z/X}^\vee$로 제한되는 원소\  $\alpha^\vee$가 존재한다.
+부풀리기 공식(Chow Homology, Lemma
+\ref{chow-lemma-blow-up-formula})에 의해
+$$
+b^![Z] = b^!i_*[Z] = j_* res(b^!)([Z]) =
+j_*(c_{r - 1}(\mathcal{F}^\vee) \cap \pi^*[Z]) =
+j_*(c_{r - 1}(\mathcal{F}^\vee) \cap [E])
+$$
+이다. 여기서\  $\mathcal{F}$는 전사\ 
+$\pi^*\mathcal{C}_{Z/X} \to \mathcal{C}_{E/X'}$의 핵이다.
+$b^*\alpha^\vee - [\mathcal{O}_{X'}(E)]$는\ 
+$K_0(\text{Vect}(X'))$의 원소이고, $E$로 제한하면\ 
+$[\pi^*\mathcal{C}_{Z/X}^\vee] - [\mathcal{C}_{E/X'}^\vee] =
+[\mathcal{F}^\vee]$임을 관찰하자. Chern 류와의 캡곱은\  $j_*$와
+가환하므로 위 식은\  $X'$의\  Chow 군에서
+$$
+c_{r - 1}(b^*\alpha^\vee - [\mathcal{O}_{X'}(E)]) \cap [E]
+$$
+와 같다. 따라서
+$$
+\theta = c_{r - 1}(b^*\alpha^\vee - [\mathcal{O}_{X'}(E)]) \cap [X']
+$$
+로 두면 첫 번째 관계\  $\theta \cdot [E] = b^![Z]$를 얻는다. 예를
+들어\  Chow Homology, Lemma
+\ref{chow-lemma-identify-chow-for-smooth}를 보라. 두 번째 관계를
+위해
+$$
+j^!\theta = j^!(c_{r - 1}(b^*\alpha^\vee - [\mathcal{O}_{X'}(E)]) \cap [X'])
+= c_{r - 1}(\mathcal{F}^\vee) \cap j^![X'] =
+c_{r - 1}(\mathcal{F}^\vee) \cap [E]
+$$
+임을\  $E$의\  Chow 군에서 관찰하자. 이것을\  $\pi_*$로 보낸 것이\ 
+$[Z]$와 같음을 보이려면\  $\pi$의 올 위에서 여차원\  $r - 1$인 사이클\ 
+$(-1)^{r - 1}c_{r - 1}(\mathcal{F}) \cap [E]$의 차수가\  $1$임을
+보이면 충분하다. 이 계산은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-A5-A6-imply}
+(A1)--(A4), (A7)을 만족하는 데이터 (D0), (D1), (D2')이
+주어졌다고 하자. $X$를\  $k$ 위의 매끄러운 사영 스킴이라 하자.
+$Z \subset X$를 매끄러운 닫힌 부분스킴이라 하고\  $Z$의 모든 기약성분의\ 
+$X$ 안에서의 여차원이\  $r$이라고 하자. $K_0(Z)$에서\ 
+$\mathcal{C}_{Z/X}$의 류가\  $K_0(X)$의 어떤 원소를 제한하여
+얻어진다고 가정하자. $a \in H^*(X)$이고\  $H^*(Z)$에서\ 
+$a|_Z = 0$이면\  $\gamma([Z]) \cup a = 0$이다.
+\end{lemma}
+
+\begin{proof}
+$b : X' \to X$를 부풀리기라 하자. (A7)에 의해
+$$
+b^*(\gamma([Z]) \cup a) = b^*\gamma([Z]) \cup b^*a = 0
+$$
+임을 보이면 충분하다. 보조정리\ 
+\ref{lemma-divide-pullback-good-blowing-up}에 의해
+$$
+b^*\gamma([Z]) = \gamma(b^*[Z]) =
+\gamma([E] \cdot \theta) =
+\gamma([E]) \cup \gamma(\theta)
+$$
+이다. $b^*a$를\  $E$로 제한하면 영이고\ 
+$\gamma([E]) = c^H_1(\mathcal{O}_{X'}(E))$이므로 (A4)에서 원하는
+결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-poincare-duality}
+(A1)--(A7)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+그러면\  \ref{section-axioms}절의 공리 (A)는 공리 (A6)에서와 같이\ 
+$\int_X = \lambda$로 두었을 때 성립한다.
+\end{lemma}
+
+\begin{proof}
+$X$를\  $k$ 위에서 차원\  $d$인 공집합이 아닌 등차원 매끄러운 사영
+스킴이라 하자. 등급\  $F$-벡터공간\  $H^*(X)(d)[2d]$가\  $H^*(X)$의
+왼쪽 쌍대임을 보이겠다. 그러면\  Homology, Lemma
+\ref{homology-lemma-left-dual-graded-vector-spaces}에 의해 원하는
+결론이 따른다. 특히 다음을 말하는 공리 (A5)를 사용하겠다.
+$$
+H^*(X \times X)(d) =
+\bigoplus H^i(X) \otimes H^j(X)(d) =
+\bigoplus H^i(X)(d) \otimes H^j(X)
+$$
+사상
+$$
+\eta : F \longrightarrow H^*(X \times X)(d)
+$$
+를\  $\gamma([\Delta]) \in H^{2d}(X \times X)(d)$와의 곱셈으로
+정의하자. 한편 사상
+$$
+\epsilon :
+H^*(X \times X)(d) \longrightarrow H^*(X)(d) \xrightarrow{\lambda} F
+$$
+을 먼저 대각사상\  $\Delta : X \to X \times X$에 의한 당김\ 
+$\Delta^*$을 사용한 다음 공리 (A6)의\  $F$-선형 사상\ 
+$\lambda : H^{2d}(X)(d) \to F$를 사용하여 정의한다. 이때 이 사상은
+사영\  $H^*(X)(d) \to H^{2d}(X)(d)$와 먼저 합성한다.
+$H^*(X)(d)$가\  $H^*(X)$의 왼쪽 쌍대임을 보이려면 사상
+$$
+\eta \otimes 1 :
+H^*(X) \longrightarrow H^*(X \times X \times X)(d)
+$$
+과
+$$
+1 \otimes \epsilon : H^*(X \times X \times X)(d) \longrightarrow H^*(X)
+$$
+의 합성이 항등사상임을 보여야 한다. $a \in H^*(X)$이면 이 합성은\ 
+$a$를
+$$
+(1 \otimes \lambda)(\Delta_{23}^*(q_{12}^*\gamma([\Delta]) \cup q_3^*a)) =
+(1 \otimes \lambda)(\gamma([\Delta]) \cup p_2^*a)
+$$
+로 보낸다. 여기서\  $q_i : X \times X \times X \to X$와\ 
+$q_{ij} : X \times X \times X \to X \times X$는 사영이고,
+$\Delta_{23} : X \times X \to X \times X \times X$는 대각사상이며,
+$p_i : X \times X \to X$는 사영이다. 등식은\ 
+$\Delta_{23}^*(q_{12}^*\gamma([\Delta]) =
+\Delta_{23}^*\gamma([\Delta \times X]) = \gamma([\Delta])$이고\ 
+$\Delta_{23}^* q_3^*a = p_2^*a$이므로 성립한다. 또한 아래에서
+보듯이\ 
+$\gamma([\Delta]) \cup p_1^*a = \gamma([\Delta]) \cup p_2^*a$이므로
+위 식은
+$$
+(1 \otimes \lambda)(\gamma([\Delta]) \cup p_1^*a) = a
+$$
+로 단순화된다. 이는 원하는 대로\  $\lambda$를 택한 방식에서 따른다.
+Categories, Definition \ref{categories-definition-dual}의 두 번째 조건\ 
+$(\epsilon \otimes 1) \circ (1 \otimes \eta) = \text{id}$도 완전히
+같은 방식으로 증명한다.
+
+\medskip\noindent
+$p_1^*a$와\  $\text{pr}_2^*a$를\  $\Delta \subset X \times X$로
+제한하면 같은 코호몰로지류가 됨에 유의하자. 또한\ 
+$\mathcal{C}_{\Delta/X \times X} = \Omega^1_\Delta$이고, 이는\ 
+$p_1^*\Omega^1_X$의 제한이다. 따라서 보조정리\ 
+\ref{lemma-A5-A6-imply}에 의해\ 
+$\gamma([\Delta]) \cup p_1^*a = \gamma([\Delta]) \cup p_2^*a$이고
+증명이 끝난다.
+\end{proof}
+
+\begin{remark}[대각합 사상의 유일성]
+\label{remark-trace}
+(A1)--(A7)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+$X$를\  $k$ 위에서 차원\  $d$인 공집합이 아닌 등차원 매끄러운 사영
+스킴이라 하자. 보조정리\  \ref{lemma-poincare-duality}와\  Homology,
+Lemma \ref{homology-lemma-left-dual-graded-vector-spaces}의 증명에서
+말한 내용을 합치면
+$$
+\gamma([\Delta]) \in \bigoplus\nolimits_i H^i(X) \otimes H^{2d - i}(X)(d)
+$$
+가 모든\  $i$에 대해\  $H^i(X)$와\  $H^{2d - i}(X)(d)$ 사이의 완전
+쌍대성을 정의함을 알 수 있다. 특히 공리 (A6)의 선형 사상\ 
+$\int_X = \lambda : H^{2d}(X)(d) \to F$는 유일하다! 이제부터 선형
+사상\  $\int_X$를\  $X$의 대각합 사상이라 부르겠다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-trace-product}
+(A1)--(A7)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+그러면\  \ref{section-axioms}절의 공리 (B)가 성립한다.
+\end{lemma}
+
+\begin{proof}
+공리 (B)(a)는 공리 (A5)에서 바로 따른다. $X$, $Y$를\  $k$ 위에서
+각각 차원\  $d$, $e$인 공집합이 아닌 등차원 매끄러운 사영
+스킴이라 하자. 공리 (B)(b)를 보이기 위해\  $X \times Y$의 대각선\ 
+$\Delta_{X \times Y}$는 사영\ 
+$p : X \times Y \times X \times Y \to X \times X$와\ 
+$q : X \times Y \times X \times Y \to Y \times Y$에 의한\ 
+$X$의 대각선\  $\Delta_X$와\  $Y$의 대각선\  $\Delta_Y$의 당김들의
+교차곱임을 관찰하자. $\gamma$와 교차곱의 호환성에 의해
+$$
+\gamma([\Delta_{X \times Y}]) \in
+H^{2d + 2e}(X \times Y \times X \times Y)(d + e)
+$$
+는\  $\gamma([\Delta_X])$, $\gamma([\Delta_Y])$를 각각\  $p$, $q$로
+당긴 것들의 컵곱이다. 다음과 같이 쓰자.
+$$
+\gamma([\Delta_{X \times Y}]) = \sum \eta_{X \times Y, i}
+\text{ with }
+\eta_{X \times Y, i} \in
+H^i(X \times Y) \otimes H^{2d + 2e - i}(X \times Y)(d + e)
+$$
+마찬가지로\  $\gamma([\Delta_X]) = \sum \eta_{X, i}$ 및\ 
+$\gamma([\Delta_Y]) = \sum \eta_{Y, i}$로 쓰자. 위의 관찰에 의해
+$$
+\eta_{X \times Y, 0} =
+\sum\nolimits_{i \in \mathbf{Z}} p^*\eta_{X, i} \cup q^*\eta_{Y, -i}
+$$
+이다. (코호몰로지 이론이 음의 차수에서 영이면, 거의 모든 경우
+그러하듯이\  $i = 0$인 항만 기여하고 예상대로\ 
+$\eta_{X \times Y, 0}$은\ 
+$H^0(X) \otimes H^0(Y) \otimes H^{2d}(X)(d) \otimes H^{2e}(Y)(e)$에
+놓이지만, 여기서는 필요하지 않다.)
+$\lambda_X : H^{2d}(X)(d) \to F$와\ 
+$\lambda_Y : H^{2e}(Y)(e) \to F$는\  $\eta_{X, 0}$과\ 
+$\eta_{Y, 0}$을 각각\  $H^*(X)$와\  $H^*(Y)$의\  $1$로 보낸다.
+따라서\  $\lambda_X \otimes \lambda_Y$는\  $\eta_{X \times Y, 0}$을\ 
+$H^*(X) \otimes H^*(Y) = H^*(X \times Y)$의\  $1$로 보내며,
+증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-trace-base}
+(A1)--(A7)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+그러면\  \ref{section-axioms}절의 공리 (C)(d)가 성립한다.
+\end{lemma}
+
+\begin{proof}
+구성에 의해\  $\gamma([\Spec(k)]) = 1 \in H^*(\Spec(k))$이다. 다음이
+성립한다.
+$$
+H^0(\Spec(k)) = F,\quad
+H^0(\Spec(k) \times \Spec(k)) = H^0(\Spec(k)) \otimes_F H^0(\Spec(k))
+$$
+보조정리\  \ref{lemma-trace-product}에서\ 
+$\int_{\Spec(k) \times \Spec(k)} = \int_{\Spec(k)} \int_{\Spec(k)}$임을
+보았으므로 공리 (A6)의 사상\  $\int_{\Spec(k)} = \lambda$는\  $1$을\ 
+$1$로 보내야 한다.
+\end{proof}
+
+\noindent
+(A1)--(A7)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+그러면\  \ref{section-axioms}절의 데이터 (D0), (D1), (D2), (D3)을
+얻으며, 이는\  \ref{section-axioms}절의 공리 (A), (B), (C)(a),
+(C)(c), (C)(d)를
+만족한다. 보조정리\  \ref{lemma-poincare-duality},
+\ref{lemma-trace-product}, \ref{lemma-trace-base}를 보라. 또한\ 
+\ref{section-axioms}절에서 구성한 밀어올림\ 
+$f_* : H^*(X) \to H^*(Y)$가 있다. 아직 분명하지 않은\ 
+\ref{section-axioms}절의 유일한 공리는 (C)(b)이다.
+
+\begin{lemma}
+\label{lemma-ok-for-projective-bundle}
+(A1)--(A7)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+$p : P \to X$를 공리 (A3)에서와 같이 두고\  $X$가 공집합이 아닌
+등차원 스킴이라고 하자. 그러면\  $\gamma$는\  $p$를 따른 밀어올림과
+가환한다.
+\end{lemma}
+
+\begin{proof}
+$\CH_*(P)$의 생성원들에 대해 증명하면 충분하다. 따라서\ 
+$0 \leq i \leq r - 1$이고\  $\alpha \in \CH_*(X)$일 때\ 
+$\xi^i \cdot p^*\alpha$ 꼴의 사이클류에 대해 증명하면 충분하다.
+$i < r - 1$이면\  $p_*(\xi^i \cdot p^*\alpha) = 0$이고\ 
+$p_*(\xi^{r - 1} \cdot p^*\alpha) = \alpha$임에 유의하자. 한편\ 
+$\gamma(\xi^i \cdot p^*\alpha) = c^i \cup p^*\gamma(\alpha)$이고
+사영 공식(보조정리\  \ref{lemma-pushforward})에 의해
+$$
+p_*\gamma(\xi^i \cdot p^*\alpha) = p_*(c^i) \cup \gamma(\alpha)
+$$
+이다. 따라서\  $i < r - 1$이면\  $p_*c^i = 0$이고\ 
+$p_*c^{r - 1} = 1$임을 보이면 충분하다. 동치로, 규칙
+$$
+\lambda_P(c^i \cup p^*(a)) =
+\left\{
+\begin{matrix}
+0 & \text{if} & i < r - 1 \\
+\int_X(a) & \text{if} & i = r - 1
+\end{matrix}
+\right.
+$$
+으로 정의한\ 
+$\lambda_P : H^{2d + 2r - 2}(P)(d + r - 1) \to F$가 공리 (A5)의
+조건을 만족함을 보이면 충분하다. 이는 보조정리\ 
+\ref{lemma-diagonal-projective-bundle}의\  $P$의 대각선류 계산에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-integrate-1}
+(A1)--(A7)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+$k'/k$가\  Galois 확대이면\ 
+$\int_{\Spec(k')} 1 = [k' : k]$이다.
+\end{lemma}
+
+\begin{proof}
+다음이\  $\Spec(k') \times \Spec(k')$ 위의 사이클로서 성립함을
+관찰하자.
+$$
+\Spec(k') \times \Spec(k') =
+\coprod\nolimits_{\sigma \in \text{Gal}(k'/k)}
+(\Spec(\sigma) \times \text{id})^{-1} \Delta
+$$
+우리의\  $\gamma$ 구성은 항상\  $[X]$를\  $H^0(X)$의\  $1$로 보낸다.
+따라서\ 
+$1 \otimes 1 = 1 = \sum (\Spec(\sigma) \times \text{id})^*\gamma([\Delta])$이다.
+공리 (A6)의 사상, 즉\  $H^0(\Spec(k'))$에서\ 
+$(\text{id} \otimes \lambda)(\gamma(\Delta)) = 1$을 만족하는 사상을\ 
+$\lambda : H^0(\Spec(k')) \to F$라 쓰자. 그러면
+\begin{align*}
+\lambda(1) 1
+& =
+(\text{id} \otimes \lambda)(1 \otimes 1) \\
+& =
+(\text{id} \otimes \lambda)(
+\sum (\Spec(\sigma) \times \text{id})^*\gamma([\Delta])) \\
+& =
+\sum (\Spec(\sigma) \times \text{id})^*(
+(\text{id} \otimes \lambda)(\gamma([\Delta])) \\
+& =
+\sum (\Spec(\sigma) \times \text{id})^*(1) \\
+& =
+[k' : k]
+\end{align*}
+이다. $\lambda$는\  $\int_{\Spec(k')}$의 다른 이름이므로(주의\ 
+\ref{remark-trace}) 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-enough}
+(A1)--(A7)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+$i : Z \to X$가\  $k$ 위의 공집합이 아닌 등차원 매끄러운 사영
+스킴들의 닫힌 몰입일 때\  $i_*(1) = \gamma([Z])$임을 보이면\ 
+$\gamma$가 밀어올림과 가환함을 보이는 데 충분하다.
+\end{lemma}
+
+\begin{proof}
+보조정리\  \ref{lemma-cycle-classes}에서 사이클류 사상\  $\gamma$를
+구성했고, 이것이 교차곱 및 당김과 호환됨을 이후 따로 언급하지 않고
+사용한다. 또한\  \ref{section-axioms}절의 공리 (A), (B), (C)(a),
+(C)(c), (C)(d)를 이미 보였다. 보조정리\ 
+\ref{lemma-poincare-duality}, 주의\  \ref{remark-trace}, 보조정리\ 
+\ref{lemma-trace-product}, \ref{lemma-trace-base}를 보라. 특히
+예를 들어 보조정리\  \ref{lemma-pushforward}를 사용하여\  $H^*$ 위의
+밀어올림이 합성과 호환되고 사영 공식을 만족함을 알 수 있다.
+
+\medskip\noindent
+$f : X \to Y$를\  $k$ 위의 공집합이 아닌 등차원 매끄러운 사영
+스킴들의 사상이라 하자. $X$ 위의 임의의 사이클류\  $\alpha$에 대해\ 
+$f_*\gamma(\alpha) = \gamma(f_*\alpha)$임을 보이고자 한다.
+$\alpha$는 국소 자유\  $\mathcal{O}_X$-가군들의\  Chern 류들의 곱들의\ 
+$\mathbf{Q}$-선형결합으로 쓸 수 있다(Chow Homology, Lemma
+\ref{chow-lemma-K-tensor-Q}). 따라서\  $\alpha$가 유한 국소 자유\ 
+$\mathcal{O}_X$-가군\  $\mathcal{E}_1, \ldots, \mathcal{E}_r$의\ 
+Chern 류들의 곱이라고 가정할 수 있다. 분해 원리(Chow Homology,
+Lemma \ref{chow-lemma-splitting-principle})에서와 같이\ 
+$p : P \to X$를 택하자. Chow Homology, Remark
+\ref{chow-remark-the-proof-shows-more}에 의해\  $p$는 사영공간
+다발들의 합성이고\ 
+$\alpha = p_*(\xi_1 \cap \ldots \cap \xi_d \cap \cdot p^*\alpha)$임을
+알 수 있다. 여기서\  $\xi_i$들은 가역 가군의 제1 Chern 류이다.
+보조정리\  \ref{lemma-ok-for-projective-bundle}에 의해\  $p_*$는
+사이클류와 가환한다. 따라서 합성\  $f \circ p$에 대해 그 성질을
+증명하면 충분하다. $p^*\mathcal{E}_1, \ldots, p^*\mathcal{E}_r$는
+연속 몫이 가역 가군인 여과를 가지므로, $\alpha$가 가역 가군\ 
+$\mathcal{L}_i$의 어떤 제1 Chern 류\  $\xi_i$들에 대해\ 
+$\xi_1 \cap \ldots \cap \xi_t \cap [X]$ 꼴인 경우로 환원된다.
+
+\medskip\noindent
+$X$ 위의 어떤 가역 가군\  $\mathcal{L}_i$들에 대해\ 
+$\alpha = c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_t) \cap [X]$
+라고 가정하자. $\mathcal{L}$을 충실한 가역\  $\mathcal{O}_X$-가군이라
+하자. $n \gg 0$이면 가역\  $\mathcal{O}_X$-가군\ 
+$\mathcal{L}^{\otimes n}$과\ 
+$\mathcal{L}_1 \otimes \mathcal{L}^{\otimes n}$은 모두\  $k$ 위의\ 
+$X$에서 매우 충실하다. Morphisms, Lemma
+\ref{morphisms-lemma-invertible-add-enough-ample-very-ample}를 보라.
+$c_1(\mathcal{L}_1) = c_1(\mathcal{L}_1 \otimes \mathcal{L}^{\otimes n})
+- c_1(\mathcal{L}^{\otimes n})$이므로\  $\mathcal{L}_1$이 매우 충실한
+경우로 환원된다. $i = 2, \ldots, t$에 대해\  $\mathcal{L}_i$로 이를
+반복하면 모든\  $i = 1, \ldots, t$에 대해\  $\mathcal{L}_i$가\  $k$ 위의\ 
+$X$에서 매우 충실한 경우로 환원된다.
+
+\medskip\noindent
+$k$가 무한체이고\  $k$ 위의\  $X$에서 매우 충실한 어떤 가역 가군\ 
+$\mathcal{L}_i$들에 대해\ 
+$\alpha = 
+c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_t) \cap [X]$
+라고 가정하자. Varieties, Lemma \ref{varieties-lemma-bertini}의\ 
+Bertini 정리에 의해 스킴\  $Z(s_1) \cap \ldots \cap Z(s_i)$가\ 
+$k$ 위에서 매끄럽고\  $X$에서의 여차원이\  $i$가 되도록\ 
+$\mathcal{L}_i$의 정칙 단면\  $s_i$들을 차례로 찾을 수 있다.
+가역 가군의 제1 류와의 캡곱 구성(Chow Homology, Definition
+\ref{chow-definition-divisor-invertible-sheaf}까지 거슬러 올라간다)에
+의해\  $\alpha = [Z]$이고\  $Z \subset X$가 공집합이 아닌 등차원
+매끄러운 닫힌 부분스킴인 경우로 환원된다.
+
+\medskip\noindent
+$Z \subset X$가 매끄러운 닫힌 부분스킴이고\  $\alpha = [Z]$라고
+가정하자. 닫힌 매장\  $X \to \mathbf{P}^n$을 택한다. $f$를
+$$
+X \to Y \times \mathbf{P}^n \to Y
+$$
+로 분해할 수 있다. 보조정리\  \ref{lemma-ok-for-projective-bundle}에
+의해 두 번째 사상에 대해서는 결과를 알고 있으므로\ 
+$\alpha = [Z]$이고\  $i : Z \to X$와\  $f$가 모두 닫힌 몰입인
+경우에 결과를 증명하면 충분하다. 그러면\  $j = f \circ i$도 닫힌
+매장이다. $i$, $j$에 대한 가정을 사용하면 결론을 얻는다.
+
+\medskip\noindent
+$k$가 유한체인 경우에 보조정리를 증명해야 한다. 독자에게 나머지
+증명을 건너뛰기를 권한다. 위에서 말한 모든 것은 계속 성립하지만,
+$k$가 유한하므로\  $k$ 위에서 우리의\  $Z$를 잘라내는 단면\  $s_i$들을
+택할 수 있는지는 알지 못한다. 그러나 같은 보조정리에 의해\  $k$의
+대수적 폐포\  $\overline{k}$ 위에서는 그러한\  $s_i$들을 찾을 수 있다.
+이는 어떤 유한확대\  $k'/k$를 택하여 단면\  $s_i$들이\  $k'$ 위에서
+정의되게 할 수 있다는 뜻이다. 사영을\  $\pi : X_{k'} \to X$라 쓰자.
+위의 논증에 의해
+사이클\  $\pi^*\alpha$와 사상\  $f \circ \pi : X_{k'} \to Y$에 대해
+(보조정리의 가정으로부터) 원하는 결론을 얻는다. Chow Homology,
+Lemma \ref{chow-lemma-finite-flat}에 의해\ 
+$\pi_*\pi^*\alpha = [k' : k] \alpha$이다. 한편 코호몰로지 이론의
+사영 공식에 의해
+$$
+\pi_*\gamma(\pi^*\alpha) = \pi_*\pi^*\gamma(\alpha) =
+\gamma(\alpha) \pi_*1
+$$
+이다. $\pi$는 사영(!)이므로 보조정리\  \ref{lemma-pr2star}에 의해\ 
+$\pi_*(1) = \int_{\Spec(k')}(1) 1$임을 관찰하자. 따라서 유한체인
+경우의 증명을 끝내려면\ 
+$\int_{\Spec(k')}(1) = [k' : k]$임을 보이면 충분한데, 이는 보조정리\ 
+\ref{lemma-integrate-1}에서 보였다.
+\end{proof}
+
+\noindent
+아래 보조정리들에서는\  Constructions, Section
+\ref{constructions-section-grassmannian}에서 정의하고 구성한\ 
+Grassmann 다양체들을 사용한다.
+
+\begin{lemma}
+\label{lemma-grassmanian}
+(A1)--(A7)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+정수\  $0 < l < n$과\  $k$ 위의 공집합이 아닌 등차원 매끄러운 사영
+스킴\  $X$가 주어졌을 때 사영\ 
+$p : X \times \mathbf{G}(l, n) \to X$를 생각하자. 그러면\ 
+$\gamma$는\  $p$를 따른 밀어올림과 가환한다.
+\end{lemma}
+
+\begin{proof}
+$l = 1$ 또는\  $l = n - 1$이면\  $p$는 사영다발이고 보조정리\ 
+\ref{lemma-ok-for-projective-bundle}에서 결과가 따른다. 일반적으로\ 
+$h$와\  $p \circ h$가 모두 사영공간 다발들의 합성이 되도록 하는 사상
+$$
+h : Y \to X \times \mathbf{G}(l, n)
+$$
+이 존재한다. 실제로 부분 깃발 다양체를\ 
+$\mathbf{G}(1, 2, \ldots, l; n)$이라 쓰자. 그러면 사상
+$$
+\mathbf{G}(1, 2, \ldots, l; n) \to \mathbf{G}(l, n)
+$$
+은 사영공간 다발들의 합성이고 구조사상\ 
+$\mathbf{G}(1, 2, \ldots, l; n) \to \Spec(k)$도 같은 꼴이다.
+따라서\  $Y = X \times \mathbf{G}(1, 2, \ldots, l; n)$로 둘 수 있다.
+$X \times \mathbf{G}(l, n)$의 모든 사이클은\  $Y$ 위의 사이클을
+밀어올려 얻어지므로\  $Y \to X$와\ 
+$Y \to X \times \mathbf{G}(l, n)$에 대한 결과로부터\  $p$에 대한
+결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-enough-better}
+(A1)--(A7)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+$i : Z \to X$가\  $k$ 위의 공집합이 아닌 등차원 매끄러운 사영
+스킴들의 닫힌 몰입이고, $K_0(Z)$에서\  $\mathcal{C}_{Z/X}$의 류가\ 
+$K_0(X)$의 어떤 류를 당겨서 얻어질 때\ 
+$i_*(1) = \gamma([Z])$임을 보이면\  $\gamma$가 밀어올림과 가환함을
+보이는 데 충분하다.
+\end{lemma}
+
+\begin{proof}
+보조정리\  \ref{lemma-enough}에 의해\  $i : Z \to X$가\  $k$ 위의 공집합이
+아닌 등차원 매끄러운 사영 스킴들의 닫힌 몰입일 때\ 
+$i_*(1) = \gamma([Z])$임을 보이면 충분하다. $X$ 안에서\  $Z$의
+여차원을\  $r$이라 하자. $\mathcal{L}$을\  $X$ 위에서 충분히 충실한
+가역 가군이라 하자. $n > 0$과 전사
+$$
+\mathcal{O}_Z^{\oplus n} \to \mathcal{C}_{Z/X} \otimes \mathcal{L}|_Z
+$$
+를 택한다. 이는\  $k$ 위의\  Grassmann 다양체로 가는 사상\ 
+$g : Z \to \mathbf{G}(n - r, n)$을 준다. Constructions, Section
+\ref{constructions-section-grassmannian}을 보라. 합성
+$$
+Z \to X \times \mathbf{G}(n - r, n) \to X
+$$
+을 생각하자. 보조정리\  \ref{lemma-grassmanian}에 의해 두 번째
+사상을 따른 밀어올림은 사이클류와 호환된다. 닫힌 몰입\ 
+$Z \to X \times \mathbf{G}(n - r, n)$의 여법선층\  $\mathcal{C}$는
+짧은 완전열
+$$
+0 \to \mathcal{C}_{Z/X} \to \mathcal{C} \to
+g^*\Omega_{\mathbf{G}(n - r, n)} \to 0
+$$
+안에 놓인다. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-two-unramified-morphisms-formally-smooth}를
+보라. $\mathcal{C}_{Z/X} \otimes \mathcal{L}|_Z$는\ 
+$\mathbf{G}(n - r, n)$ 위의 유한 국소 자유 층을 당겨서 얻어지므로\ 
+$K_0(Z)$에서\  $\mathcal{C}$의 류는\ 
+$K_0(X \times \mathbf{G}(n - r, n))$의 어떤 류를 당겨서 얻어진다.
+따라서\  $Z \to X \times \mathbf{G}(n - r, n)$에 대해 그 성질이
+성립하고 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-injective-H0}
+(A1)--(A7)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+$k''/k'/k$가 유한 분리 체확대들이면\ 
+$H^0(\Spec(k')) \to H^0(\Spec(k''))$는 단사이다.
+\end{lemma}
+
+\begin{proof}
+$k''$을\  $k$ 위의 정규폐포로 바꿀 수 있으며 이는\  $k$ 위의\  Galois
+확대이다. Fields, Lemma \ref{fields-lemma-normal-closure-galois}를
+보라. 그러면\  $k''$은\  $k'$ 위에서도\  Galois 확대이다. Fields, Lemma
+\ref{fields-lemma-galois-goes-up}을 보라. 따라서 동형사상
+$$
+k' \otimes_k k'' \longrightarrow
+\prod\nolimits_{\sigma \in \text{Gal}(k''/k')} k'',\quad
+\eta \otimes \zeta \longmapsto (\eta \sigma(\zeta))_\sigma
+$$
+을 얻는다. 이는 동형사상\ 
+$\coprod_\sigma \Spec(k'') \to \Spec(k') \times \Spec(k'')$을 만들며,
+코호몰로지에서는 동형사상
+$$
+H^*(\Spec(k')) \otimes_F H^*(\Spec(k''))
+\to
+\prod\nolimits_\sigma H^*(\Spec(k'')),\quad
+a' \otimes a'' \longmapsto (\pi^*a' \cup \Spec(\sigma)^*a'')_\sigma
+$$
+을 만든다. 여기서\  $\pi : \Spec(k'') \to \Spec(k')$는\  $k'$을\ 
+$k''$에 포함하는 것에 대응하는 사상이다. $a'' = 1$로 두면
+보조정리가 성립함을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pushforward-blowup}
+(A1)--(A8)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+$b : X' \to X$를\  $k$ 위에서 차원\  $d$인 공집합이 아닌 등차원
+매끄러운 사영 스킴\  $X$를 어디에서도 조밀하지 않은 매끄러운 중심\ 
+$Z$에서 부풀리기한 것이라 하자. 그러면\  $b_*(1) = 1$이다.
+\end{lemma}
+
+\begin{proof}
+$X$를\  $X$의 연결성분 하나로 바꿀 수 있다(몇몇 세부사항은 생략한다).
+따라서\  $X$가 연결이고, 그러므로 기약이라고 가정할 수 있다.
+$k' = \Gamma(X, \mathcal{O}_X) = \Gamma(X', \mathcal{O}_{X'})$로 두자.
+이 등식의 증명은 생략한다. 예외인자에 포함되지 않고 잉여체\  $k''$이\ 
+$k$ 위에서 분리인 닫힌점\  $x' \in X'$을 택하자. 이는\  Varieties,
+Lemma \ref{varieties-lemma-smooth-separable-closed-points-dense}에
+의해 가능하다. 그 상을\  $x \in X$라 쓰자(물론 그 잉여체도\  $k''$과
+같다). 도식
+$$
+\xymatrix{
+x' \times X' \ar[r] \ar[d] & X' \times X' \ar[d] \\
+x \times X \ar[r] & X \times X
+}
+$$
+을 생각하자. 대각선\  $\Delta = \Delta_X$의 류를 당기면 “대각점”
+$\delta_x : x \to x \times X$의 류가 되고 대각선\  $\Delta'$의 류도
+마찬가지다. 한편 대각점\  $\delta_x$를 왼쪽 수직 화살표로 당기면
+대각점\  $\delta_{x'}$가 된다. 다음과 같이 쓰자.
+$\gamma([\Delta]) = \sum \eta_i$ with
+$\eta_i \in H^i(X) \otimes H^{2d - i}(X)(d)$ and
+$\gamma([\Delta']) = \sum \eta'_i$ with
+$\eta'_i \in H^i(X') \otimes H^{2d - i}(X')(d)$.
+위의 논증에 의해\  $\eta_0$과\  $\eta'_0$은
+$$
+H^0(x') \otimes_F H^{2d}(X')(d)
+$$
+에서 같은 류로 간다. 공리 (A8)에 의해\ 
+$H^0(\Spec(k')) = H^0(X) = H^0(X')$이다. 보조정리\ 
+\ref{lemma-injective-H0}에 의해 이 공통값은\  $H^0(x')$로 단사적으로
+간다. 따라서 사상
+$$
+H^0(X) \otimes_F H^{2d}(X)(d)
+\longrightarrow
+H^0(X') \otimes_F H^{2d}(X')(d)
+$$
+에 의해\  $\eta_0$이\  $\eta'_0$으로 감을 얻는다. 이는\  $\int_X$가\ 
+$\int_{X'}$와 당김 사상의 합성과 같다는 뜻이다. 이로써 보조정리가
+증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-done}
+(A1)--(A8)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+그러면 사이클류 사상\  $\gamma$는 밀어올림과 가환한다.
+\end{lemma}
+
+\begin{proof}
+$i : Z \to X$를 보조정리\  \ref{lemma-enough-better}에서와 같이 두자.
+도식
+$$
+\xymatrix{
+E \ar[r]_j \ar[d]_\pi & X' \ar[d]^b \\
+Z \ar[r]^i & X
+}
+$$
+을 생각하자. $\theta \in \CH^{r - 1}(X')$를 보조정리\ 
+\ref{lemma-divide-pullback-good-blowing-up}에서와 같이 두자.
+$\CH_*(Z)$에서\  $\pi_*j^!\theta = [Z]$이므로, $\pi$가 사영공간
+다발인 것과 보조정리\  \ref{lemma-ok-for-projective-bundle}에 의해\ 
+$\pi_*\gamma(j^!\theta) = 1$이다. 따라서
+$$
+i_*(1) = i_*(\pi_*(\gamma(j^!\theta))) =
+b_*j_*(j^*\gamma(\theta)) =
+b_*(j_*(1) \cup \gamma(\theta))
+$$
+이다. (A9)에 의해\  $j_*(1) = \gamma([E])$이다. 따라서 이는
+$$
+b_*(\gamma([E]) \cup \gamma(\theta)) =
+b_*(\gamma([E] \cdot \theta)) =
+b_*(\gamma(b^*[Z])) =
+b_*b^*\gamma([Z]) = b_*(1) \cup \gamma([Z])
+$$
+와 같다. 보조정리\  \ref{lemma-pushforward-blowup}에 의해\ 
+$b_*(1) = 1$이므로 증명이 끝난다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-get-weil}
+(A1)--(A8)을 만족하는 데이터 (D0), (D1), (D2')이 주어졌다고 하자.
+그러면\  Weil 코호몰로지 이론을 얻는다.
+\end{proposition}
+
+\begin{proof}
+\ref{section-axioms}절의 공리 (A), (B), (C)(a), (C)(c), (C)(d)가
+보조정리\  \ref{lemma-poincare-duality}, \ref{lemma-trace-product},
+\ref{lemma-trace-base}에 의해 성립한다. 보조정리\ 
+\ref{lemma-done}에 의해 공리 (C)(b)가 성립한다. 마지막으로 정의\ 
+\ref{definition-weil-cohomology-theory}의 추가 조건은 우리의 공리
+(A8)과 같으므로 성립한다.
+\end{proof}
+
+\noindent
+다음 보조정리는 닫힌 체로 환원하여 닫혀 있지 않은 체 위에서\  Weil
+코호몰로지 이론을 얻는다는 것을 보일 때 유용하다.
+
+\begin{lemma}
+\label{lemma-check-over-extension}
+$k'/k$를 체확대라 하고\  $F'/F$를 표수\  $0$인 체의 확대라 하자.
+다음이 주어졌다고 가정하자.
+\begin{enumerate}
+\item $k$, $F$에 대한 데이터 (D0), (D1), (D2')을\ 
+$F(1), H^*, c_1^H$라 쓴다.
+\item $k'$, $F'$에 대한 데이터 (D0), (D1), (D2')을\ 
+$F'(1), (H')^*, c_1^{H'}$라 쓴다.
+\item 동형사상\  $F(1) \otimes_F F' \to F'(1)$과, $k$ 위의 매끄러운
+사영 스킴\  $X$의 범주 위에서 함자적인 동형사상\ 
+$H^*(X) \otimes_F F' \to (H')^*(X_{k'})$이 주어지고 도식
+$$
+\xymatrix{
+\Pic(X) \ar[r]_{c_1^H} \ar[d] & H^2(X)(1) \ar[d] \\
+\Pic(X_{k'}) \ar[r]^{c_1^{H'}} & (H')^2(X_{k'})(1)
+}
+$$
+이 가환한다.
+\end{enumerate}
+이 경우\  $F'(1), (H')^*, c_1^{H'}$가 공리 (A1)--(A9)를 만족하면\ 
+$F(1), H^*, c_1^H$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+공리들을 하나씩 살펴보자.
+
+\medskip\noindent
+공리 (A1). $H^*(\emptyset) = 0$이고, $i$, $j$가 표준
+포함사상일 때\ 
+$(i^*, j^*) : H^*(X \amalg Y) \to H^*(X) \times H^*(Y)$가
+동형사상임을 보여야 한다. 동형사상\ 
+$H^*(X) \otimes_F F' \to (H')^*(X_{k'})$의 함자성에 의해 이는
+다음 선형대수 사실에서 따른다. $F$-벡터공간의\  $F$-선형 사상\ 
+$\varphi : V \to W$에 대해\  $\varphi$가 동형사상일 필요충분조건은\ 
+$\varphi_{F'} : V \otimes_F F' \to W \otimes_F F'$가
+동형사상인 것이다.
+
+\medskip\noindent
+공리 (A2). 이는\  $k$ 위의 매끄러운 사영 스킴들의 사상\ 
+$f : X \to Y$와 가역\  $\mathcal{O}_Y$-가군\  $\mathcal{N}$이
+주어졌을 때\ 
+$f^*c_1^H(\mathcal{L}) = c_1^H(f^*\mathcal{L})$이라는 뜻이다.
+이는\  $c_1^{H'}$에 대한 대응하는 성질, 보조정리의 가환도식,
+그리고 모든\  $F$-벡터공간\  $V$에 대해 표준 사상\ 
+$V \to V \otimes_F F'$이 단사라는 사실에서 바로 분명하다.
+
+\medskip\noindent
+공리 (A3). 이는 공리 (A1)의 증명에서 서술한 원리와\  $c_1^H$,
+$c_1^{H'}$의 호환성에서 따른다.
+
+\medskip\noindent
+공리 (A4). $i : Y \to X$를\  $k$ 위의 유효\  Cartier 인자의
+포함사상이라 하고\  $X$, $Y$가 모두\  $k$ 위에서 매끄럽고 사영적이라고
+하자. $i^*a = 0$인\  $a \in H^*(X)$에 대해\ 
+$a \cup c_1^H(\mathcal{O}_X(Y)) = 0$임을 보여야 한다. $a$의 상을\ 
+$a' \in (H')^*(X_{k'})$라 쓰자. 가정에 의해\ 
+$(i')^*a' = 0$이며, 여기서\  $i' : Y_{k'} \to X_{k'}$은\  $i$의
+기저변환이다. 따라서\  $(H')^*$에 대한 공리에 의해\ 
+$a' \cup c_1^{H'}(\mathcal{O}_{X_{k'}}(Y_{k'})) = 0$이다.
+$a' \cup c_1^{H'}(\mathcal{O}_{X_{k'}}(Y_{k'}))$은\ 
+$a \cup c_1^H(\mathcal{O}_X(Y))$의 상이므로 공리 (A2)의 증명에서
+서술한 원리에 의해 결론을 얻는다.
+
+\medskip\noindent
+공리 (A5). 이는\  $H^*(\Spec(k)) = F$이고\  $X$, $Y$가\  $k$ 위에서
+매끄럽고 사영적일 때 사상\ 
+$H^*(X) \otimes_F H^*(Y) \to H^*(X \times Y)$,
+$a \otimes b \mapsto p^*(a) \cup q^*(b)$가 동형사상이라는 뜻이다.
+여기서\  $p$, $q$는 사영이다. 이는 공리 (A1)의 증명에서 서술한
+원리에서 따른다.
+
+\medskip\noindent
+논증의 흐름을 잠시 멈추고, $k$ 위의 모든 매끄러운 사영 스킴\ 
+$X$에 대해 도식
+$$
+\xymatrix{
+\CH^*(X) \ar[r]_-\gamma \ar[d]_{g^*} & \bigoplus H^{2i}(X)(i) \ar[d] \\
+\CH^*(X_{k'}) \ar[r]^-{\gamma'} & \bigoplus (H')^{2i}(X_{k'})(i)
+}
+$$
+이 가환함을 보이자. 공리 (A1)--(A4)를 이미 알고 있으므로\ 
+$\gamma$가 존재함을 관찰하자. 보조정리\ 
+\ref{lemma-cycle-classes}를 보라. 또한 왼쪽 수직 화살표는 바탕
+스킴의 사상\  $g : \Spec(k') \to \Spec(k)$에 대해\  Chow Homology,
+Section \ref{chow-section-change-base}에서 논의한 사상이다. 더
+정확히는\  Chow Homology, Lemma
+\ref{chow-lemma-pullback-base-change}에서 주어진 사상이다.
+$\alpha \in \CH^*(X)$를 택하자. 어떤\ 
+$\beta \in K_0(\textit{Vect}(X)) \otimes \mathbf{Q}$에 대해\ 
+$\CH^*(X) \otimes \mathbf{Q}$에서\ 
+$\alpha = ch(\beta) \cap [X]$로 쓰면\ 
+$\gamma(\alpha) = ch^{H}(\beta)$이다. 이것이 우리의\  $\gamma$
+구성이다. Chow Homology, Lemma
+\ref{chow-lemma-pullback-base-change}의 사상은\  Chow Homology,
+Lemma \ref{chow-lemma-pullback-base-change-chern-classes}에 의해\ 
+Chern 류와의 캡곱과 호환되므로\ 
+$g^*\alpha = ch((X_{k'} \to X)^*\beta) \cap [X_{k'}]$이다. 따라서\ 
+$\gamma'(g^*\alpha) = ch^{H'}((X_{k'} \to X)^*\beta)$이다. 그러므로
+계수\  $r$인 임의의 국소 자유\  $\mathcal{O}_X$-가군\  $\mathcal{E}$와\ 
+$0 \leq i \leq r$에 대해\  $H^{2i}(X)(i)$의 원소\ 
+$c_i^H(\mathcal{E})$가\  $(H')^{2i}(X_{k'})(i)$의 원소\ 
+$c_i^{H'}(\mathcal{E}_{k'})$로 감을 보이면 도식이 가환한다.
+$X$, $X'$ 양쪽에 사영공간 다발 공식이 있으므로 이를 보이기 위해\ 
+$X$를\  $X$ 위의 사영공간 다발로 유한 번 바꿀 수 있다. 따라서\ 
+$\mathcal{E}$가 가역\  $\mathcal{O}_X$-가군\ 
+$\mathcal{L}_1, \ldots, \mathcal{L}_r$을 등급 성분으로 갖는 여과를
+가진다고 가정할 수 있다. Chow Homology, Lemma
+\ref{chow-lemma-splitting-principle}과\  Remark
+\ref{chow-remark-the-proof-shows-more}를 보라. 그러면\ 
+$c^H_i(\mathcal{E}$는\ 
+$c^H_1(\mathcal{L}_1), \ldots, c^H_1(\mathcal{L}_r)$의 제$i$
+기본대칭다항식이므로 제1 Chern 류들이 일치한다는 가정에서 결론을
+얻는다.
+
+\medskip\noindent
+공리 (A6). $F$-벡터공간\  $V$, $W$, 원소\  $v \in V$, 텐서\ 
+$\xi \in V \otimes_F W$가 주어졌다고 하자.
+$V' = V \otimes_F F'$, $W' = W \otimes_F F'$로 쓰고\  $v$, $\xi$의\ 
+$V'$, $V' \otimes_{F'} W'$ 안에서의 상을\  $v'$, $\xi'$이라 쓰자.
+공리 (A6)의 증명에서 사용할 선형대수 원리는 다음과 같다.
+$(1 \otimes \lambda)\xi = v$가 되도록 하는\  $F$-선형 사상\ 
+$\lambda : W \to F$가 존재할 필요충분조건은\ 
+$(1 \otimes \lambda')\xi' = v'$가 되도록 하는\  $F'$-선형 사상\ 
+$\lambda' : W \otimes_F F' \to F'$가 존재하는 것이다.
+
+\medskip\noindent
+$X$를\  $k$ 위에서 차원\  $d$인 공집합이 아닌 등차원 매끄러운 사영
+스킴이라 하자. $H^{2d}(X \times X)(d)$에서\ 
+$\gamma = \gamma([\Delta])$라 쓰자(아무 표시가 없는 올곱은\  $k$
+위에서 취한다). 공리 (A1)--(A4)를 이미 알고 있으므로 이것이 의미가
+있음을 관찰하고 상기하자. 보조정리\  \ref{lemma-cycle-classes}를 보라.
+K\"unneth 분해에서
+$$
+\gamma = \sum \gamma_i, \quad
+\gamma_i \in H^i(X) \otimes_F H^{2d - i}(X)(d)
+$$
+로 분해할 수 있다. 마찬가지로\ 
+$(H')^{2d}(X_{k'} \times_{k'} X_{k'})(d)$에서\ 
+$\gamma' = \gamma([\Delta']) = \sum \gamma'_i$로 쓰자. 위에서
+언급한 선형대수 원리에 의해\  $\gamma_0$이\ 
+$(H')^0(X) \otimes_{F'} (H')^{2d}(X')(d)$에서\  $\gamma'_0$으로
+감을 보이면 충분하다. K\"unneth 분해의 호환성에 의해
+$$
+(H')^{2d}(X_{k'} \times_{k'} X_{k'})(d) = (H')^{2d}((X \times X)_{k'})(d)
+$$
+에서\  $\gamma$가\  $\gamma'$으로 감을 보이면 충분하다.
+$\Delta_{k'} = \Delta'$이므로 이는 위의 논의에서 따른다.
+
+\medskip\noindent
+공리 (A7). 이는 다음 선형대수 사실에서 따른다. $F$-벡터공간의
+선형사상\  $V \to W$가 단사일 필요충분조건은\ 
+$V \otimes_F F' \to W \otimes_F F'$가 단사인 것이다.
+
+\medskip\noindent
+공리 (A8). 공리 (A1)의 증명에서 사용한 선형대수 사실에서 따른다.
+
+\medskip\noindent
+공리 (A9). $X$를\  $k$ 위에서 차원\  $d$인 공집합이 아닌 등차원
+매끄러운 사영 스킴이라 하자. $i : Y \to X$를 공집합이 아니고\ 
+$k$ 위에서 매끄러운 유효\  Cartier 인자라 하자. $\lambda_Y$와\ 
+$\lambda_X$를\  $X$, $Y$에 대한 공리 (A6)에서와 같이 두자.
+$a \in H^{2d - 2}(X)(d - 1)$에 대해\ 
+$\lambda_Y(i^*(a)) = \lambda_X(a \cup c_1^H(\mathcal{O}_X(Y))$임을
+보여야 한다. 주의\  \ref{remark-trace}에 의해\ 
+$\lambda_X : H^{2d}(X)(d) \to F$와\ 
+$\lambda_Y : H^{2d - 2}(Y)(d - 1)$는 공리 (A6)의 조건에 의해
+유일하게 결정됨을 안다. 따라서 위에서\  $H^*$에 대한 공리 (A6)를
+증명한 방식에 의해, 주어진 동일시\ 
+$H^{2d}(X)(d) \otimes_F F' = H^{2d}(X_{k'})(d)$ 아래에서\ 
+$\lambda_X \otimes \text{id}_{F'}$은\  $\lambda_{X_{k'}}$에
+대응한다. 그러므로\  $F'(1), (H')^*, c_1^{H'}$에 대해 공리 (A9)를
+안다는 사실로부터 도식 추적으로\  $F(1), H^*, c_1^H$에 대한 공리가
+따른다. 이로써 보조정리의 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

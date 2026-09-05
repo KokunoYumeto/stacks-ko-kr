@@ -1,0 +1,2613 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{스킴의 에탈(\'Etale) 사상}
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 스킴의 에탈(\'etale) 사상을 논한다. 중요한 개념 몇 가지는
+뇌터 경우를 다루면서 설명한다. 우리의 주된 목표는 독자가 에탈(\'etale)
+코호몰로지에 관한 전문서를 읽기 시작하는 데 충분한 가환대수의
+결과를 모아 두는 것이다. 보조 목표는, 독자가 그러한 불경을 범하고
+있다면, “스킴의 에탈(\'etale) 위상”이라는 구절을 일반적 허튼소리의 연습이라고
+부르는 일을 멈추게 하기에 충분한 근거를 제공하는 것이다.
+
+\medskip\noindent
+스킴과 가환대수에 관한 대수기하학의 표준 결과는
+Stacks 프로젝트의 다른 장들을 참조한다. 여기에서 새로 진술하는
+결과에는 자세한 증명을 제시한다.
+
+
+
+
+\section{관례}
+\label{section-conventions}
+
+\noindent
+이 장에서는 스킴을 국소 뇌터라고 가정하고 환을 뇌터라고
+가정하는 경우가 많다. 그러나 필요한 곳에서는 모든 명제에 이
+가정을 다시 명시하고 가설을 빠짐없이 열거한다. 한편 자주 사용할
+일반적 사실 가운데 염두에 둘 만한 것은 다음과 같다.
+\begin{enumerate}
+\item $A$가 뇌터 환일 때 유한형 환 준동형 $A \to B$는 유한 표시이다.
+Algebra, Lemma
+\ref{algebra-lemma-Noetherian-finite-type-is-finite-presentation}를 보라.
+\item 국소 뇌터 스킴 사이의 (국소) 유한형 사상은 자동으로
+(국소) 유한 표시이다. Morphisms, Lemma
+\ref{morphisms-lemma-noetherian-finite-type-finite-presentation}를 보라.
+\item 이와 같은 사실을 여기에 더 추가할 것.
+\end{enumerate}
+
+
+
+
+\section{비분기 사상}
+\label{section-unramified-definition}
+
+\noindent
+먼저 뇌터 국소환에 대하여 “국소환의 비분기 준동형”을 정의한다.
+이미 Algebra, Section \ref{algebra-section-unramified}에 서로 다른
+비분기 환 사상의 개념이 있으므로 여기에서는 단순히 “비분기”라는
+용어를 사용할 수 없다. 이 개념을 조금 논한 뒤 이를 전역화하여
+국소 뇌터 스킴의 비분기 사상을 기술한다.
+
+\begin{definition}
+\label{definition-unramified-rings}
+$A$, $B$를 뇌터 국소환이라 하자. 국소 준동형 $A \to B$가 다음
+조건들을 만족하면 이를 {\it 국소환의 비분기 준동형}이라 한다.
+\begin{enumerate}
+\item $\mathfrak m_AB = \mathfrak m_B$,
+\item $\kappa(\mathfrak m_B)$는 $\kappa(\mathfrak m_A)$의 유한 분리 확대이고,
+\item $B$는 $A$ 위에서 본질적으로 유한형이다(즉, $B$는 유한형
+$A$-대수를 한 소아이디얼에서 국소화한 환이다).
+\end{enumerate}
+\end{definition}
+
+\noindent
+이는 Algebra, Section \ref{algebra-section-unramified}에 있는 정의의
+국소판이다. 그 절에서는 환 사상 $R \to S$가 유한형이고
+$\Omega_{S/R} = 0$일 필요충분조건으로 비분기라고 정의한다.
+어떤 $g \in S$, $g \not \in \mathfrak q$가 존재하여
+$R \to S_g$가 비분기 환 사상이면 $R \to S$가 소아이디얼
+$\mathfrak q \subset S$에서 비분기라고 한다. Algebra, Lemmas
+\ref{algebra-lemma-unramified-at-prime} 및
+\ref{algebra-lemma-characterize-unramified}에서는 유한형 환 사상
+$R \to S$와 $\mathfrak p \subset R$ 위에 놓이는 $S$의 소아이디얼
+$\mathfrak q$가 주어졌을 때 다음을 보인다.
+$$
+R \to S\text{ is unramified at }\mathfrak q
+\Leftrightarrow
+\mathfrak pS_{\mathfrak q} = \mathfrak q S_{\mathfrak q}
+\text{ and }
+\kappa(\mathfrak p) \subset \kappa(\mathfrak q)\text{ finite separable}
+$$
+따라서 국소환 사이의 국소 준동형에 대해서는 위 정의의 성질들이
+비분기성의 문제와 밀접히 관련됨을 알 수 있다. 실제로 다음 보조정리를
+이미 증명하였다.
+
+\begin{lemma}
+\label{lemma-characterize-unramified-Noetherian}
+\begin{slogan}
+비분기성은 줄기에서 국소적인 조건이다.
+\end{slogan}
+$A$가 뇌터 환이고 $A \to B$가 유한형이라 하자.
+$\mathfrak q$를 $\mathfrak p \subset A$ 위에 놓이는 $B$의
+소아이디얼이라 하자. 그러면 $A \to B$가 $\mathfrak q$에서
+비분기일 필요충분조건은 $A_{\mathfrak p} \to B_{\mathfrak q}$가
+국소환의 비분기 준동형인 것이다.
+\end{lemma}
+
+\begin{proof}
+위의 논의를 보라.
+\end{proof}
+
+\noindent
+비분기성을 완비화를 써서 특징짓고자 한다. 뇌터 국소환 $A$에 대해
+극대 아이디얼에 관한 $A$의 완비화를 $A^\wedge$로 나타낸다.
+이 역시 뇌터 국소환이다. Algebra, Lemma
+\ref{algebra-lemma-completion-Noetherian-Noetherian}를 보라.
+
+\begin{lemma}
+\label{lemma-unramified-completions}
+$A$, $B$를 뇌터 국소환이라 하고 $A \to B$를 국소 준동형이라 하자.
+\begin{enumerate}
+\item $A \to B$가 국소환의 비분기 준동형이면 $B^\wedge$는
+유한 $A^\wedge$-가군이다.
+\item $A \to B$가 국소환의 비분기 준동형이고
+$\kappa(\mathfrak m_A) = \kappa(\mathfrak m_B)$이면
+$A^\wedge \to B^\wedge$는 전사이다.
+\item $A \to B$가 국소환의 비분기 준동형이고
+$\kappa(\mathfrak m_A)$가 분리적으로 닫혀 있으면
+$A^\wedge \to B^\wedge$는 전사이다.
+\item $A$와 $B$가 완비 이산 값매김환이면, $A \to B$가 국소환의
+비분기 준동형일 필요충분조건은 $A$의 균등화원이 $B$의 균등화원으로
+가고 잉여체 확대가 유한 분리인 것이다(또한 $B$는 $A$ 위에서
+본질적으로 유한형이다).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 Algebra, Lemma
+\ref{algebra-lemma-finite-after-completion}의 특수한 경우이다.
+(2)에 대해서는 $\kappa(\mathfrak m_A)$-벡터공간
+$B^\wedge/\mathfrak m_{A^\wedge}B^\wedge$가 $1$에 의해 생성됨에
+유의하자. 그러므로 나카야마 보조정리(Algebra, Lemma
+\ref{algebra-lemma-NAK})에 의해 $A^\wedge \to B^\wedge$는 전사이다.
+(3)은 (2)의 특수한 경우이다. (4)는 정의에서 바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-unramified-completions}
+$A$, $B$를 뇌터 국소환이라 하자. $A \to B$를 국소 준동형이라 하고,
+$B$가 $A$ 위에서 본질적으로 유한형이라고 가정하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $A \to B$는 국소환의 비분기 준동형이다.
+\item $A^\wedge \to B^\wedge$는 국소환의 비분기 준동형이다.
+\item $A^\wedge \to B^\wedge$는 비분기이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)의 동치는 $\mathfrak m_AA^\wedge$가 $A^\wedge$의 극대
+아이디얼이라는 사실($B$에 대해서도 마찬가지이다)과
+$B \to B^\wedge$의 충실 평탄성에서 따른다. 예를 들어
+$A^\wedge \to B^\wedge$가 비분기이면
+$\mathfrak m_AB^\wedge = (\mathfrak m_AB)B^\wedge = \mathfrak m_BB^\wedge$
+이고, 따라서 $\mathfrak m_AB = \mathfrak m_B$이다.
+
+\medskip\noindent
+동치인 조건 (1)과 (2)를 가정하자. Lemma
+\ref{lemma-unramified-completions}에 의해 $A^\wedge \to B^\wedge$는
+유한이다. 따라서 $A^\wedge \to B^\wedge$는 유한 표시이고, Algebra,
+Lemma \ref{algebra-lemma-characterize-unramified}에 의해
+$A^\wedge \to B^\wedge$는 $\mathfrak m_{B^\wedge}$에서 비분기이다.
+$B^\wedge$가 국소환이므로 $A^\wedge \to B^\wedge$는 비분기이다.
+
+\medskip\noindent
+(3)을 가정하자. Algebra, Lemma
+\ref{algebra-lemma-unramified-at-prime}에 의해
+$A^\wedge \to B^\wedge$는 국소환의 비분기 준동형이다. 즉, (2)가 성립한다.
+\end{proof}
+
+\begin{definition}
+\label{definition-unramified-schemes}
+(일반적인 경우의 정의는 Morphisms, Definition
+\ref{morphisms-definition-unramified}을 보라.)
+$Y$를 국소 뇌터 스킴이라 하고 $f : X \to Y$를 국소 유한형이라 하자.
+$x \in X$라 하자.
+\begin{enumerate}
+\item $\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$가 국소환의
+비분기 준동형이면 $f$가 {\it $x$에서 비분기}라고 한다.
+\item $f : X \to Y$가 $X$의 모든 점에서 비분기이면 이 사상을
+{\it 비분기}라고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 정의가 스킴의 사상을 다루는 장의 정의와 일치함을 증명하자.
+특히 이로부터 사상이 비분기인 점들의 집합이 열린집합임이 보장된다.
+
+\begin{lemma}
+\label{lemma-unramified-definition}
+$Y$를 국소 뇌터 스킴이라 하고 $f : X \to Y$를 국소 유한형이라 하자.
+$x \in X$라 하자. 사상 $f$가 Definition
+\ref{definition-unramified-schemes}의 의미에서 $x$에서 비분기일
+필요충분조건은 Morphisms, Definition
+\ref{morphisms-definition-unramified}의 의미에서 비분기인 것이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-characterize-unramified-Noetherian}와 정의들에서 따른다.
+\end{proof}
+
+\noindent
+비분기 사상에 관한 몇 가지 결과를 적는다. 아래 목록의 진술은
+국소 뇌터 스킴 사이의 국소 유한형 사상에만 적용된다. 각 항목에는
+프로젝트에서 앞서 증명한 일반 결과의 참조를 제시한다. 다만 일부
+결과는 뇌터 경우에 더 쉽게 증명할 수 있다. 목록은 다음과 같다.
+\begin{enumerate}
+\item 비분기성은 자리스키 위상에 대하여 정의역과 공역에서 국소적이다.
+\item 비분기 사상은 밑변환과 합성에 대해 안정적이다. Morphisms, Lemmas
+\ref{morphisms-lemma-base-change-unramified} 및
+\ref{morphisms-lemma-composition-unramified}를 보라.
+\item 스킴의 비분기 사상은 국소 준유한이고, 준콤팩트 비분기 사상은
+준유한이다. Morphisms, Lemma
+\ref{morphisms-lemma-unramified-quasi-finite}를 보라.
+\item 비분기 사상의 상대차원은 $0$이다. Morphisms, Definition
+\ref{morphisms-definition-relative-dimension-d} 및 Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-rel-dimension-0}을 보라.
+\item 사상이 비분기일 필요충분조건은 모든 섬유가 비분기인 것이다.
+즉, 비분기성은 스킴론적 섬유에서 확인할 수 있다. Morphisms, Lemma
+\ref{morphisms-lemma-unramified-etale-fibres}를 보라.
+\item $X$와 $Y$를 기저 스킴 $S$ 위에서 비분기라 하자.
+$X$에서 $Y$로 가는 임의의 $S$-사상은 비분기이다.
+Morphisms, Lemma \ref{morphisms-lemma-unramified-permanence}를 보라.
+\end{enumerate}
+
+\section{비분기 사상의 다른 세 가지 특징짓기}
+\label{section-three-other}
+
+\noindent
+다음 정리는 한 점에서 비분기라는 것에 대한 서로 동치인 세 가지
+개념을 제시한다. 일반 스킴에 대한 진술의 일부는 Morphisms, Lemma
+\ref{morphisms-lemma-unramified-at-point}를 보라.
+
+\begin{theorem}
+\label{theorem-unramified-equivalence}
+$Y$를 국소 뇌터 스킴이라 하자. $f : X \to Y$를 국소 유한형인
+스킴의 사상이라 하고 $x$를 $X$의 한 점이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $f$는 $x$에서 비분기이다.
+\item $x$에서 상대 미분 가군의 줄기 $\Omega_{X/Y, x}$는 영이다.
+\item $x$의 열린 근방 $U$와 $f(x)$의 열린 근방 $V$, 그리고 다음
+가환도식이 존재한다.
+$$
+\xymatrix{
+U \ar[rr]_i \ar[rd] & & \mathbf{A}^n_V \ar[ld] \\
+& V
+}
+$$
+여기서 $i$는 준연접 아이디얼 층 $\mathcal{I}$로 정의되는 닫힌 몰입이고,
+$g \in \mathcal{I}_{i(x)}$에 대한 미분 $\text{d}g$들은
+$\Omega_{\mathbf{A}^n_V/V, i(x)}$를 생성한다.
+\item 대각사상 $\Delta_{X/Y} : X \to X \times_Y X$는 $x$에서
+국소 동형이다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1)과 (2)의 동치는 Morphisms, Lemma
+\ref{morphisms-lemma-unramified-at-point}에서 증명하였다.
+
+\medskip\noindent
+$f$가 $x$에서 비분기이면 $f$는 $x$의 어떤 열린 근방에서
+비분기이다. 이는 이 장의 Definition
+\ref{definition-unramified-schemes}에서 곧바로 따르지는 않지만,
+Morphisms, Definition \ref{morphisms-definition-unramified}에서는 따르며,
+이 정의와 동치임은 Lemma \ref{lemma-unramified-definition}에서 보였다.
+$f(U) \subset V$와 $x \in U$를 만족하는 아핀 열린집합
+$V \subset Y$, $U \subset X$를 택하되 $f$가 $U$ 위에서
+비분기, 즉 $f|_U : U \to V$가 비분기가 되게 하자.
+Morphisms, Lemma \ref{morphisms-lemma-diagonal-unramified-morphism}에 의해
+사상 $U \to U \times_V U$는 열린 몰입이다. 따라서 (1)은 (4)를 함의한다.
+
+\medskip\noindent
+$\Delta_{X/Y}$가 $x$에서 국소 동형이면 Morphisms, Lemma
+\ref{morphisms-lemma-differentials-diagonal}에 의해
+$\Omega_{X/Y, x} = 0$이다. 따라서 (4)는 (2)를 함의한다.
+이제 (1), (2), (4)가 모두 서로 동치임을 안다.
+
+\medskip\noindent
+(3)을 가정하자. 도식에 대한 가정과 Morphisms, Lemma
+\ref{morphisms-lemma-differentials-relative-immersion}를 함께 쓰면
+$\Omega_{U/V, x} = 0$이다. $\Omega_{U/V, x} = \Omega_{X/Y, x}$이므로
+(2)가 성립한다.
+
+\medskip\noindent
+마지막으로 (2)를 가정하자. (3)을 보이기 위해 $X$와 $Y$에서
+국소화하여 $X$와 $Y$가 아핀이라고 가정할 수 있다.
+$X = \Spec(B)$, $Y = \Spec(A)$라 쓰자. 점 $x \in X$는
+소아이디얼 $\mathfrak q \subset B$에 대응한다. 우리의 가정은
+$\Omega_{B/A, \mathfrak q} = 0$이다(스킴 위의 미분과 가환대수의
+미분 가군 사이의 관계는 Morphisms, Lemma
+\ref{morphisms-lemma-differentials-affine}를 보라).
+$Y$가 국소 뇌터이고 $f$가 국소 유한형이므로 $A$는 뇌터이고
+$B \cong A[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$
+이다. Properties, Lemma \ref{properties-lemma-locally-Noetherian} 및
+Morphisms, Lemma \ref{morphisms-lemma-locally-finite-type-characterize}를
+보라. 특히 $\Omega_{B/A}$는 유한 $B$-가군이다. 따라서 하나의
+$g \in B$, $g \not \in \mathfrak q$를 택하여 주국소화
+$(\Omega_{B/A})_g$가 영이 되게 할 수 있다. 그러므로 $B$를 $B_g$로
+바꾸면 $\Omega_{B/A} = 0$이다(미분 가군의 형성은 국소화와 가환한다.
+Algebra, Lemma \ref{algebra-lemma-differentials-localize}를 보라).
+이는 $\text{d}(f_j)$들이 표준사상
+$\Omega_{A[x_1, \ldots, x_n]/A} \otimes_A B \to \Omega_{B/A}$의
+핵을 생성한다는 뜻이다. 따라서 $A$-대수의 전사
+$A[x_1, \ldots, x_n] \to B$가 (3)의 가환도식을 주며, 정리가 증명되었다.
+\end{proof}
+
+\noindent
+이 정리를 어떻게 사용할 수 있을까? 몇 가지 주의를 적는다.
+\begin{enumerate}
+\item $f : X \to Y$와 $g : Y \to Z$를 국소 뇌터 스킴 사이의
+국소 유한형 사상이라 하자. 표준적인 짧은 완전열
+$$
+f^*(\Omega_{Y/Z}) \to \Omega_{X/Z} \to \Omega_{X/Y} \to 0
+$$
+이 있다. Morphisms, Lemma
+\ref{morphisms-lemma-triangle-differentials}를 보라. 따라서 정리에
+의해 $g \circ f$가 비분기이면 $f$도 비분기이다. 이는 Morphisms,
+Lemma \ref{morphisms-lemma-unramified-permanence}이다.
+\item $\Omega_{X/Y}$는 대각사상의 코노멀 층과 동형이므로
+(Morphisms, Lemma \ref{morphisms-lemma-differentials-diagonal}),
+국소 뇌터 스킴의 국소 유한형 단사사상인 $X \to Y$는
+$X \to Y$가 비분기이다.
+특히 국소 뇌터 스킴의 열린 몰입과 닫힌 몰입은 비분기이다.
+Morphisms, Lemmas
+\ref{morphisms-lemma-open-immersion-unramified} 및
+\ref{morphisms-lemma-closed-immersion-unramified}를 보라.
+\item 또한 이 정리에 의해 국소 뇌터 스킴 사이의 국소 유한형 사상
+$f : X \to Y$가 비분기가 아닌 점들의 집합은 연접층
+$\Omega_{X/Y}$의 지지집합이다. 이로써 “분기 궤적”을 스킴론적으로
+정의할 수 있다.
+\end{enumerate}
+
+\section{비분기 사상의 함자적 특징짓기}
+\label{section-functorial-unramified}
+
+\noindent
+기초 대수기하학에서는 어떤 종류의 사상을 함자적으로 특징지을 수 있고,
+그러한 기술이 매우 유용하다는 것을 배운다.
+비분기 사상에도 이러한 특징짓기가 있다.
+
+\begin{theorem}
+\label{theorem-formally-unramified}
+$f : X \to S$를 스킴의 사상이라 하자.
+$S$가 국소 뇌터 스킴이고 $f$가 국소 유한형이라고 가정하자.
+그러면 다음은 서로 동치이다.
+\begin{enumerate}
+\item $f$는 비분기이다.
+\item 사상 $f$는 형식적으로 비분기이다.
+아핀 $S$-스킴 $T$와 제곱영 아이디얼로 정의되는 $T$의 부분스킴
+$T_0$가 주어질 때마다 자연사상
+$$
+\Hom_S(T, X) \longrightarrow \Hom_S(T_0, X)
+$$
+은 단사이다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+더 일반적인 진술과 증명은 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-unramified-formally-unramified}를 보라.
+다음은 현재 경우의 증명 개요이다.
+
+\medskip\noindent
+먼저 두 성질이 정의역과 공역에서 국소적임을 확인한다.
+따라서 $S$와 $X$가 아핀이라고 가정할 수 있다.
+$X = \Spec(B)$, $S = \Spec(R)$라 하자.
+$T = \Spec(C)$라 하자. $T_0 = \Spec(C/J)$로 두고,
+$J$를 $C$의 제곱영 아이디얼이라 하자. 다음 도식이 주어졌다고 하자.
+$$
+\xymatrix{
+& B \ar[d]^\phi \ar[rd]^{\bar{\phi}}
+& \\
+R \ar[r] \ar[ur] & C \ar[r]
+& C/J
+}
+$$
+둘째로, 연관
+$\phi' \mapsto \phi' - \phi$가 $\bar{\phi}$의 올림들의 집합과
+$\text{Der}_R(B, J)$ 사이의 전단사임을 확인한다.
+따라서 미분 가군이 자명한 비분기 사상의 기술인 정리
+\ref{theorem-unramified-equivalence}를 통해 (1) $\Rightarrow$ (2)를 얻는다.
+
+\medskip\noindent
+역함의를 얻기 위해 제곱영 아이디얼
+$J = I/I^2$로 정의되는 전사
+$q : C = (B \otimes_R B)/I^2 \to B = C/J$를 생각하자.
+여기서 $I$는 곱셈사상 $B \otimes_R B \to B$의 핵이다.
+이미 $B \to C$의 올림을 하나 갖고 있으며, 예를 들어
+$b \mapsto b \otimes 1$로 정의된다. 따라서 위와 같은 추론으로
+$\text{id} : B \to C/J$의 올림들과 $\text{Der}_R(B, J)$ 사이에
+전단사 대응을 얻는다. 가정에 의해 후자의 가군은 자명하다.
+그런데 $J \cong \Omega_{B/R}$임을 알고 있다. 따라서 $B/R$는 비분기이다.
+\end{proof}
+\section{비분기 사상의 위상적 성질}
+\label{section-topological-unramified}
+
+\noindent
+우리에게 유용할 첫 번째 위상적 결과는 비분기 사상과 분리 사상이
+“좋은” 단면을 갖는다는 것이다.
+이 절의 내용에는 어떠한 뇌터 가정도 필요하지 않다.
+
+\begin{proposition}
+\label{proposition-properties-sections}
+비분기 사상의 단면.
+\begin{enumerate}
+\item 비분기 사상의 임의의 단면은 열린 몰입이다.
+\item 분리 사상의 임의의 단면은 닫힌 몰입이다.
+\item 비분기 분리 사상의 임의의 단면은 열린 동시에 닫힌 몰입이다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+기저 스킴 $S$를 고정하자.
+$f : X' \to X$가 임의의 $S$-사상이면 그래프
+$\Gamma_f : X' \to X' \times_S X$는 사영
+$X' \times_S X \to X \times_S X$에 의한 대각사상
+$\Delta_{X/S} : X \to X \times_S X$의 밑변환으로 얻어진다.
+$g : X \to S$가 분리(각각 비분기)이면, Schemes, Definition
+\ref{schemes-definition-separated}(각각 Morphisms, Lemma
+\ref{morphisms-lemma-diagonal-unramified-morphism})에 의해 대각사상은
+닫힌 몰입(각각\ 열린 몰입)이다.
+따라서 그래프도 밑변환에 의해 같은 종류의 몰입이다
+(Schemes, Lemma \ref{schemes-lemma-base-change-immersion}).
+특수한 경우 $X' = S$를 취하면 (1), 각각\ (2)를 얻는다.
+(3)은 (1)과 (2)를 결합하면 따른다.
+\end{proof}
+
+\noindent
+이제 비분기 사상의 단면을 명시적으로 기술할 수 있다.
+
+\begin{theorem}
+\label{theorem-sections-unramified-maps}
+$Y$를 연결 스킴이라 하자.
+$f : X \to Y$를 비분기이고 분리라고 하자.
+$f$의 모든 단면은 어떤 연결 성분으로의 동형사상이다.
+다음과 같은 전단사 대응이 존재한다.
+$$
+\text{sections of }f
+\leftrightarrow
+\left\{
+\begin{matrix}
+\text{connected components }X'\text{ of }X\text{ such that}\\
+\text{the induced map }X' \to Y\text{ is an isomorphism}
+\end{matrix}
+\right\}
+$$
+특히 $x \in X$가 주어지면 $x$를 지나는 단면은 많아야 하나이다.
+\end{theorem}
+
+\begin{proof}
+Proposition \ref{proposition-properties-sections}의 (3)에서 바로 따른다.
+\end{proof}
+
+\noindent
+앞의 정리는 비분기 사상의 “강직성”을 어느 정도 보여 준다.
+다음 명제는 본질적으로 흥미로울 뿐 아니라 대수적 기본군의 이론에도
+유용하다( \cite[Expos\'e V]{SGA1} 참조).
+더 일반적인 결과는 Morphisms, Lemma
+\ref{morphisms-lemma-value-at-one-point}도 보라.
+
+\begin{proposition}
+\label{proposition-equality}
+$S$를 스킴이라 하자.
+$\pi : X \to S$를 비분기이고 분리라고 하자.
+$Y$를 $S$-스킴, $y \in Y$를 한 점이라 하자.
+$f, g : Y \to X$를 두 $S$-사상이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $Y$는 연결이다.
+\item $x = f(y) = g(y)$이고,
+\item 잉여체 위에서 유도된 사상
+$f^\sharp, g^\sharp : \kappa(x) \to \kappa(y)$가 서로 같다.
+\end{enumerate}
+그러면 $f = g$이다.
+\end{proposition}
+
+\begin{proof}
+사상 $f, g : Y \to X$는 구조사상 $X_Y \to Y$의 단면인
+$f', g' : Y \to X_Y = Y \times_S X$를 정의한다.
+$f = g$일 필요충분조건은 $f' = g'$이다.
+구조사상 $X_Y \to Y$는 $\pi$의 밑변환이므로 역시 비분기이고 분리이다
+(다음 참조:
+Morphisms, Lemmas \ref{morphisms-lemma-base-change-unramified} 및
+Schemes, Lemma \ref{schemes-lemma-separated-permanence}).
+따라서 Theorem \ref{theorem-sections-unramified-maps}에 의하면
+$f'$와 $g'$가 $X_Y$의 같은 점을 지난다는 것을 보이면 충분하다.
+이는 가정 (2), (3)이 정확히 보장하는 내용, 즉
+$f'(y) = g'(y) \in X_Y$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finitely-many-maps-to-unramified}
+$S$를 뇌터 스킴이라 하자. $X \to S$를 준콤팩트 비분기 사상이라 하자.
+$Y \to S$를 사상이고 $Y$가 뇌터라고 하자. 그러면
+$\Mor_S(Y, X)$는 유한 집합이다.
+\end{lemma}
+
+\begin{proof}
+먼저 $X \to S$가 분리라고 가정하자(실제로 자주 그렇다).
+$Y$는 뇌터이므로 연결 성분이 유한 개이다. 따라서 $Y$가 연결이라고
+가정할 수 있다. 상이 $s \in S$인 점 $y \in Y$를 택하자.
+$X \to S$가 비분기이고 준콤팩트이므로 섬유 $X_s$는 유한하다.
+$X_s = \{x_1, \ldots, x_n\}$라 쓰고
+$\kappa(x_i)/\kappa(s)$가 유한 체 확대라고 하자.
+Morphisms, Lemma \ref{morphisms-lemma-unramified-quasi-finite},
+\ref{morphisms-lemma-residue-field-quasi-finite}, 및
+\ref{morphisms-lemma-quasi-finite}를 보라.
+각 $i$에 대해 $\kappa(s)$-대수 사상
+$\kappa(x_i) \to \kappa(y)$는 (초등 체론에 의해) 많아야 유한 개이다.
+따라서 Proposition \ref{proposition-equality}에 의해
+$\Mor_S(Y, X)$는 유한하다.
+
+\medskip\noindent
+일반적인 경우를 보자. Morphisms, Lemma
+\ref{morphisms-lemma-generically-finite}에 의해 어떤 공집합이 아닌
+열린집합 $U \subset S$가 존재하여 $X_U \to U$가 유한하다
+(특히 분리이다). 이 보조정리는, 앞에서 준콤팩트 비분기 사상이
+준유한임을 보였고 $X \to S$가 준분리임을 이용하여 적용한 것이다.
+이는 Morphisms, Lemma
+\ref{morphisms-lemma-finite-type-Noetherian-quasi-separated}에 따른다.
+$Z \subset S$를 $U$의 여집합을 지지하는 축약 닫힌 부분스킴이라 하자.
+뇌터 귀납법에 의해 $\Mor_Z(Y_Z, X_Z)$가 유한임을 안다(세부사항 생략).
+첫 단락의 결과에 의해 $\Mor_U(Y_U, X_U)$도 유한이다.
+따라서 다음 사상이 단사임을 보이면 충분하다.
+$$
+\Mor_S(Y, X) \longrightarrow \Mor_Z(Y_Z, X_Z) \times \Mor_U(Y_U, X_U)
+$$
+이는 두 사상 $a, b : Y \to X$가 일치하는 점들의 집합이 $Y$에서
+열린집합이라는 사실에서 따른다. 대각사상
+$\Delta : X \to X \times_S X$가 열려 있기 때문이다.
+Morphisms, Lemma \ref{morphisms-lemma-diagonal-unramified-morphism}를 보라.
+\end{proof}
+
+
+
+\section{보편적으로 단사인 비분기 사상}
+\label{section-universally-injective-unramified}
+
+\noindent
+스킴의 사상 $f : X \to Y$가 보편적으로 단사라는 것은 $f$의 모든 밑변환이
+(기저 위상공간에서) 단사라는 뜻이다. Morphisms, Definition
+\ref{morphisms-definition-universally-injective}을 보라.
+보편적으로 단사인 비분기 사상은 다음과 같이 특징지을 수 있다.
+
+\begin{lemma}
+\label{lemma-universally-injective-unramified}
+스킴의 사상 $f : X \to S$를 생각하자.
+다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $f$는 비분기이고 단사사상이다.
+\item $f$는 비분기이고 보편적으로 단사이다.
+\item $f$는 국소적으로 유한형이고 단사사상이다.
+\item $f$는 보편적으로 단사이고, 국소적으로 유한형이며,
+형식적으로 비분기이다.
+\item $f$는 국소적으로 유한형이고, $X_s$는 공집합이거나
+모든 $s \in S$에 대하여 $X_s \to s$가 동형사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-unramified-formally-unramified}에서
+형식적으로 비분기이고 국소적으로 유한형인 것은 비분기인 것과
+동치임을 보았다. 따라서 (4)는 (2)와 동치이다.
+단사사상은 분명히 보편적으로 단사이고 형식적으로 비분기이므로
+(3)은 (4)를 함의한다.
+(1)이 (3)을 함의함은 명백하다. 마지막으로 (2)가 성립하면
+$\Delta : X \to X \times_S X$는 열린 몰입이면서
+(Morphisms, Lemma
+\ref{morphisms-lemma-diagonal-unramified-morphism})
+전사이다
+(Morphisms, Lemma
+\ref{morphisms-lemma-universally-injective}).
+따라서 이는 동형사상이고, 즉 $f$는 단사사상이다.
+이로써 (2)가 (1)을 함의함을 알 수 있다.
+
+\medskip\noindent
+단사사상은 밑변환에 의해 보존되므로 (Schemes, Lemma
+\ref{schemes-lemma-base-change-monomorphism}), (3)은 (5)를
+함의한다. 또한 체의 스펙트럼을 향하는 단사사상의 기술을
+Schemes, Lemma
+\ref{schemes-lemma-mono-towards-spec-field}에서 얻는다.
+(5)는 Morphisms, Lemmas
+\ref{morphisms-lemma-universally-injective} 및
+\ref{morphisms-lemma-unramified-etale-fibres}에 의해 (4)를
+함의한다.
+\end{proof}
+
+\noindent
+이는 닫힌 몰입을 특징짓는 다음의 유용한 결과로 이어진다.
+
+\begin{lemma}
+\label{lemma-characterize-closed-immersion}
+스킴의 사상 $f : X \to S$를 생각하자.
+다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $f$는 닫힌 몰입이다.
+\item $f$는 고유 단사사상이다.
+\item $f$는 고유하고 비분기이며 보편적으로 단사이다.
+\item $f$는 보편적으로 닫혀 있고, 비분기이며 단사사상이다.
+\item $f$는 보편적으로 닫혀 있고, 비분기이며 보편적으로 단사이다.
+\item $f$는 보편적으로 닫혀 있고, 국소적으로 유한형이며 단사사상이다.
+\item $f$는 보편적으로 닫혀 있고, 보편적으로 단사이며,
+국소적으로 유한형이고 형식적으로 비분기이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(4) -- (7)의 동치는 Lemma
+\ref{lemma-universally-injective-unramified}에서 즉시 따른다.
+
+\medskip\noindent
+$f : X \to S$가 (6)을 만족한다고 하자. 그러면 $f$는 분리 사상이다
+(Schemes, Lemma
+\ref{schemes-lemma-monomorphism-separated} 참조).
+또한 유한한 올을 갖는다. 따라서
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-characterize-finite}에 의해 $f$는
+유한이다. 이어서 Morphisms, Lemma
+\ref{morphisms-lemma-finite-monomorphism-closed}는 $f$가
+닫힌 몰입임을 보인다. 즉 (1)이 성립한다.
+
+\medskip\noindent
+닫힌 몰입은 고유하고 단사사상이므로 (1) $\Rightarrow$ (2)이다
+(Morphisms, Lemma
+\ref{morphisms-lemma-closed-immersion-proper} 및
+Schemes, Lemma
+\ref{schemes-lemma-immersions-monomorphisms}).
+Lemma \ref{lemma-universally-injective-unramified}에 의해 (2)는
+(3)을 함의한다. (3)이 (5)를 함의함은 명백하다.
+\end{proof}
+
+\noindent
+비슷한 성격의 다른 결과를 보자.
+
+\begin{lemma}
+\label{lemma-finite-unramified-one-point}
+스킴의 사상 $\pi : X \to S$가 주어지고 $s \in S$라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $\pi$는 유한이다.
+\item $\pi$는 비분기이다.
+\item $\pi^{-1}(\{s\}) = \{x\}$이다.
+\item $\kappa(s) \subset \kappa(x)$는 순수
+비분리이다\footnote{조건 (2)에 비추어 보면 이는
+$\kappa(s) = \kappa(x)$와 동치이다.}.
+\end{enumerate}
+그러면 $s$의 어떤 열린 근방 $U$가 존재하여
+$\pi|_{\pi^{-1}(U)} : \pi^{-1}(U) \to U$가 닫힌 몰입이 된다.
+\end{lemma}
+
+\begin{proof}
+이 문제는 $S$ 위에서 국소적이다. 따라서 $S = \Spec(A)$라고
+가정해도 된다. 유한 사상의 정의에 의해 이는 $X = \Spec(B)$를
+뜻한다. $\pi$를 정의하는 환 사상 $\varphi : A \to B$는
+유한 비분기 환 사상임에 유의하자.
+$s$에 대응하는 소아이디얼을 $\mathfrak p \subset A$,
+$x$에 대응하는 소아이디얼을 $\mathfrak q \subset B$라 하자.
+조건 (2), (3), (4)에 의해
+$B_{\mathfrak q}/\mathfrak pB_{\mathfrak q} = \kappa(\mathfrak p)$이다.
+Algebra, Lemma
+\ref{algebra-lemma-unique-prime-over-localize-below}에 의해
+$B_{\mathfrak q} = B_{\mathfrak p}$이다
+(유한 환 사상은 going up을 만족한다는 점에 유의하자. Algebra,
+Section \ref{algebra-section-going-up} 참조).
+따라서
+$B_{\mathfrak p}/\mathfrak pB_{\mathfrak p} = \kappa(\mathfrak p)$이다.
+$B$가 유한 $A$-가군이므로 Nakayama 보조정리(Algebra, Lemma
+\ref{algebra-lemma-NAK})에 의해
+$B_{\mathfrak p} = \varphi(A_{\mathfrak p})$이다. 따라서
+(다시 $B$가 $A$-가군으로 유한임을 사용하면) 어떤
+$f \in A$, $f \not \in \mathfrak p$가 존재하여
+$B_f = \varphi(A_f)$가 된다.
+\end{proof}
+
+\noindent
+앞에서 제시한 위상적 결과는 Theorem
+\ref{theorem-formally-unramified}와 유사한 \'etale 사상의 함자적
+특징짓기를 주는 데 사용된다.
+
+
+\section{비분기 사상의 예}
+\label{section-examples}
+
+\noindent
+몇 가지 예를 들어 보자.
+
+\begin{example}
+\label{example-etale-field-extensions}
+체 $k$를 체라고 하자.
+비분기 준콤팩트 사상 $X \to \Spec(k)$은 아핀이다.
+이는 $X$의 차원이 $0$이고 뇌터이므로 유한 이산집합이 되며,
+각 점이 아핀 열린집합을 주기 때문이다. 따라서 $X$는 아핀들의
+유한 서로소 합집합이고, 그러므로 아핀이다.
+뇌터 정규화에 의해 $X$는 유한 $k$-대수 $A$의 스펙트럼이다.
+이 대수는 $k$의 유한 분리 체 확장들의 곱이다.
+따라서 $\Spec(k)$로 가는 비분기 준콤팩트 사상은
+$k$의 유한 개 유한 분리 체 확장에 대응한다.
+특히 연결된 원천과 한 점짜리 표적을 갖는 비분기 사상은
+유한 분리 체 확장일 수밖에 없다.
+뒤에서 보겠지만 $X \to \Spec(k)$가 \'etale인 것은
+그것이 비분기인 경우에 그리고 그 경우에만 성립한다.
+따라서 적어도 이 경우에는 스킴의 \'etale 위상에 대한
+아주 쉬운 기술을 얻는다. 물론 이 위상의 코호몰로지는
+또 다른 이야기이다.
+\end{example}
+
+\begin{example}
+\label{example-standard-etale}
+Theorem \ref{theorem-unramified-equivalence}의 (3)번 성질은
+비분기 사상의 예를 제공하는 표준적인 원천이다.
+환 $R$와 정수 $n$을 고정하자. $I = (g_1, \ldots, g_m)$을
+$R[x_1, \ldots, x_n]$의 아이디얼이라 하자.
+$\mathfrak q \subset R[x_1, \ldots, x_n]$를 소아이디얼이라 하자.
+$I \subset \mathfrak q$이고 다음 행렬이
+$$
+\left(\frac{\partial g_i}{\partial x_j}\right) \bmod \mathfrak q
+\quad\in\quad
+\text{Mat}(n \times m, \kappa(\mathfrak q))
+$$
+계수 $n$을 갖는다고 가정하자. 그러면
+$f : Z = \Spec(R[x_1, \ldots, x_n]/I) \to \Spec(R)$는
+$\mathfrak q$에 대응하는 $x \in Z \subset \mathbf{A}^n_R$에서
+비분기이다. 분명히 $m \geq n$이어야 한다.
+극단적인 경우 $m = n$, 즉 $g_i$들이 정의하는
+$\mathbf{A}^n_R \to \mathbf{A}^n_R$의 미분이 접공간의
+동형사상인 경우에는 $f$는 또한 “flat $x$”이고, 따라서
+\'etale 사상이다 (Algebra, Definition
+\ref{algebra-definition-standard-smooth},
+Lemma \ref{algebra-lemma-standard-smooth} 및
+Example \ref{algebra-example-make-standard-smooth} 참조).
+\end{example}
+
+\begin{example}
+\label{example-number-theory-etale}
+정수환 $\mathcal{O}_L$와 $\mathcal{O}_K$를 갖는 수체의 확장
+$L/K$를 고정하자. 포함사상 $K \to L$은
+$f : \Spec(\mathcal{O}_L) \to \Spec(\mathcal{O}_K)$를 정의한다.
+앞서 논한 바와 같이, 우리의 의미에서 $f$가 비분기인 점들은
+통상적인 의미에서 $f$가 비분기인 점들의 집합과 일치한다.
+통상적인 의미에서 $\Spec(\mathcal{O}_L)$에서 분기하는 장소는
+different의 영점집합으로 정의할 수 있다. 이는
+$\mathcal{O}_L$의 아이디얼이다. 실제로 different는
+$\Omega_{\mathcal{O}_L/\mathcal{O}_K}$ 가군의 소멸자에 불과하다.
+마찬가지로 discriminant는 $\mathcal{O}_K$의 아이디얼이며,
+구체적으로 different의 노름이다.
+discriminant의 영점집합은 $L$에서 분기하는 $K$의 점들의
+집합과 정확히 일치한다.
+따라서 $X$를 $\Spec(\mathcal{O}_L)$에서 different가 정의하는
+닫힌 부분집합의 여집합으로 두면,
+비분기 사상 $X \to \Spec(\mathcal{O}_K)$를 얻는다.
+더 나아가 이 사상은 평탄하기도 하다. 이산 값매김환 사이의
+모든 국소 준동형은 평탄하기 때문이다. 따라서 이 사상은 실제로
+\'etale이다. $L/K$가 유한 갈루아 확장이면,
+$\Spec(\mathcal{O}_K)$에서 discriminant가 정의하는 닫힌
+부분집합의 여집합을 $Y$라 할 때, 유한 \'etale 사상
+$X \to Y$를 얻는다.
+따라서 이는 유한 \'etale 피복의 한 예이다.
+\end{example}
+
+
+\section{평탄 사상}
+\label{section-flat-morphisms}
+
+\noindent
+이 절은 우리에게 유용한 평탄성의 성질을 요약하기 위해 마련되었다.
+따라서 정리를 정확히 진술하고 증명의 참고문헌을 제시하는 것으로
+충분히 하겠다.
+
+\medskip\noindent
+뇌터 환 위의 평탄 가군에 필요한 사실을 간단히 되새긴 뒤,
+특정 가군의 “초평면 단면”이 평탄하기 위한 충분조건을 주는
+그로텐디크의 정리를 진술한다.
+
+\begin{definition}
+\label{definition-flat-rings}
+가군과 환의 평탄성.
+\begin{enumerate}
+\item 환 $A$ 위의 가군 $N$이 {\it 평탄}이라고 하는 것은
+함자 $M \mapsto M \otimes_A N$이 완전하다는 뜻이다.
+\item 이 함자가 충실하기도 하면 $N$이 $A$ 위에서
+{\it 충실 평탄}이라고 한다.
+\item 환의 사상 $f : A \to B$가
+{\it 평탄 (각각 충실 평탄)}이라고 하는 것은
+함자 $M \mapsto M \otimes_A B$가 완전
+(각각 충실하고 완전)하다는 뜻이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+대수 장의 참고문헌과 함께 몇 가지 사실을 열거한다.
+\begin{enumerate}
+\item 자유 가군과 사영 가군은 평탄하다. 자유 가군의 경우는
+명백하고, 사영 가군의 경우에는 자유 가군의 직합인자이며
+$\otimes$가 직합과 교환한다는 사실에서 따른다.
+\item 평탄성은 국소적 성질이다. 즉 $M$이 $A$ 위에서 평탄할 필요충분조건은
+모든 $\mathfrak p \in \Spec(A)$에 대해 $M_{\mathfrak p}$가
+$A_{\mathfrak p}$ 위에서 평탄한 것이다.
+Algebra, Lemma \ref{algebra-lemma-flat-localization}을 보라.
+\item $M$이 평탄한 $A$-가군이고 $A \to B$가 환 사상이면
+$M \otimes_A B$는 평탄한 $B$-가군이다. Algebra, Lemma
+\ref{algebra-lemma-flat-base-change}를 보라.
+\item 국소환 위의 유한 평탄 가군은 자유 가군이다.
+Algebra, Lemma \ref{algebra-lemma-finite-flat-local}을 보라.
+\item 임의의 환의 사상 $f : A \to B$에 대하여 $f$가 평탄할
+필요충분조건은 유도된 사상
+$A_{f^{-1}(\mathfrak q)} \to B_{\mathfrak q}$가 모든
+$\mathfrak q \in \Spec(B)$에 대해 평탄한 것이다.
+Algebra, Lemma \ref{algebra-lemma-flat-localization}을 보라.
+\item 국소환의 국소 준동형 $f : A \to B$에 대하여, $f$가 평탄할 필요충분조건은
+충실 평탄한 것이다.
+Algebra, Lemma \ref{algebra-lemma-local-flat-ff}를 보라.
+\item 환의 사상 $A \to B$가 충실 평탄할 필요충분조건은 평탄하고
+스펙트럼에 유도된 사상이 전사인 것이다.
+Algebra, Lemma \ref{algebra-lemma-ff-rings}를 보라.
+\item $A$가 뇌터 국소환이면 완비화 $A^\wedge$는 $A$ 위에서
+충실 평탄하다.
+Algebra, Lemma \ref{algebra-lemma-completion-faithfully-flat}를 보라.
+\item $A$를 뇌터 국소환, $M$을 $A$-가군이라 하자.
+그러면 $M$이 $A$ 위에서 평탄할 필요충분조건은
+$M \otimes_A A^\wedge$가 $A^\wedge$ 위에서 평탄한 것이다.
+(앞의 명제와 Algebra, Lemma
+\ref{algebra-lemma-flatness-descends}를 결합하면 된다.)
+\end{enumerate}
+기하적 범주로 넘어가기 전에 평탄 가군을 만드는 편리한 방법을
+제공하는 그로텐디크의 정리를 제시한다.
+
+\begin{theorem}
+\label{theorem-flatness-grothendieck}
+$A$, $B$를 뇌터 국소환이라 하자.
+$f : A \to B$를 국소 준동형이라 하자.
+$M$이 $A$-가군으로 평탄한 유한 $B$-가군이고,
+$t \in \mathfrak m_B$가 $M/\mathfrak m_AM$ 위에서 원소 $t$에 의한 곱셈이
+단사라고 하자. 그러면 $M/tM$도 $A$-평탄이다.
+\end{theorem}
+
+\begin{proof}
+Algebra, Lemma \ref{algebra-lemma-mod-injective}를 보라.
+\cite[Section 20]{MatCA}도 보라.
+\end{proof}
+
+\begin{definition}
+\label{definition-flat-schemes}
+(Morphisms, Definition \ref{morphisms-definition-flat} 참조).
+스킴의 사상 $f : X \to Y$를 생각하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+\begin{enumerate}
+\item $x \in X$라 하자. $\mathcal{F}$가
+{\it $x \in X$에서 $Y$ 위에 평탄}하다는 것은
+$\mathcal{F}_x$가 평탄한 $\mathcal{O}_{Y, f(x)}$-가군이라는 뜻이다.
+이는 사상 $\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$를 통해
+$\mathcal{F}_x$를 $\mathcal{O}_{Y, f(x)}$-가군으로 보는 것이다.
+\item $x \in X$라 하자. $f$가 {\it $x \in X$에서 평탄}하다는 것은
+$\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$가 평탄하다는 뜻이다.
+\item $f$가 {\it 평탄}하다는 것은 $X$의 모든 점에서 평탄하다는 뜻이다.
+\item 평탄하고 전사인 사상 $f : X \to Y$를 때때로
+{\it 충실 평탄}이라고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+다시 결과를 열거한다.
+\begin{enumerate}
+\item 사상이 평탄하다는 성질은 정의상 원천과 표적의 자리스키 위상에서
+국소적이다.
+\item 열린 몰입은 평탄하다. (국소환에 동형사상을 유도하므로 명백하다.)
+\item 평탄 사상은 밑변환과 합성에 대해 안정적이다.
+Morphisms, Lemmas \ref{morphisms-lemma-base-change-flat} 및
+\ref{morphisms-lemma-composition-flat}.
+\item $f : X \to Y$가 평탄하면 당김 함자
+$\QCoh(\mathcal{O}_Y) \to \QCoh(\mathcal{O}_X)$는 완전하다.
+이는 줄기를 보면 즉시 따른다.
+\item 스킴의 사상 $f : X \to Y$에서 $Y$가 준콤팩트이고
+준분리라고 하자. 이 경우 함자 $f^*$가 완전하면 $f$는 평탄하다.
+(증명은 생략한다. 힌트: Properties, Lemma
+\ref{properties-lemma-extend-trivial}을 사용하여 $Y$에 충분한
+아이디얼 층이 있음을 보이고 Algebra, Lemma
+\ref{algebra-lemma-flat}에서 평탄성의 특징을 사용하라.)
+\end{enumerate}
+
+
+
+\section{평탄 사상의 위상적 성질}
+\label{section-topological-flat}
+
+\noindent
+아래에서 평탄 사상이 누리는 몇 가지 열린집합 성질을 “상기한다”.
+
+\begin{theorem}
+\label{theorem-flat-open}
+$Y$를 국소 뇌터 스킴이라 하자.
+$f : X \to Y$를 국소적으로 유한형인 사상이라 하자.
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{F}$가 $Y$ 위에서 평탄인 $X$의 점들의 집합은 열린집합이다.
+특히 $f$가 평탄인 점들의 집합은 $X$에서 열린집합이다.
+\end{theorem}
+
+\begin{proof}
+More on Morphisms, Theorem
+\ref{more-morphisms-theorem-openness-flatness}를 보라.
+\end{proof}
+
+\begin{theorem}
+\label{theorem-flat-map-open}
+$Y$를 국소 뇌터 스킴이라 하자.
+$f : X \to Y$를 평탄하고 국소적으로 유한형인 사상이라 하자.
+그러면 $f$는 (보편적으로) 열린 사상이다.
+\end{theorem}
+
+\begin{proof}
+Morphisms, Lemma \ref{morphisms-lemma-fppf-open}을 보라.
+\end{proof}
+
+\begin{theorem}
+\label{theorem-flat-is-quotient}
+충실 평탄 준콤팩트 사상은 자리스키 위상에 대한
+몫사상이다.
+\end{theorem}
+
+\begin{proof}
+Morphisms, Lemma \ref{morphisms-lemma-fpqc-quotient-topology}를 보라.
+\end{proof}
+
+\noindent
+평탄 사상을 연구하는 중요한 이유는 다른 스킴의 점들로 매개화된
+스킴의 족이라는 개념을 포착하기에 적절한 틀을 제공하기 때문이다.
+순진하게는 임의의 사상 $f : X \to S$를 $S$의 점들로 매개화된
+족으로 생각할 수 있다. 그러나 $f$에 평탄성 조건이 없으면
+이른바 족에서 정말 이상한 일이 일어날 수 있다.
+예를 들어 족에서 상대차원(섬유의 차원)이 일정하다는 보장이 없다.
+힐베르트 다항식과 같은 다른 수치 불변량도 섬유마다 변할 수 있다.
+평탄성은 이런 일을 막아 주며, 따라서 섬유에 어느 정도의
+“연속성”을 부여한다.
+
+
+
+
+
+\section{\'Etale 사상}
+\label{section-etale-morphisms}
+
+\noindent
+이 절에서는 \'etale 사상을 정의하고 그 중요한 성질들을 여러 가지
+증명한다. 의심할 여지 없이 가장 중요한 성질은 Theorem
+\ref{theorem-formally-etale}에서 제시하는 함자적 특징짓기이다.
+이어서 \'etale 확장에 대해 불변인 환의 성질, 즉 어떤 환에서 성립할
+필요충분조건이 그 모든 \'etale 확장에서도 성립하는 성질도 논한다.
+이는 \'etale 코호몰로지의 기본 원리인 “\'etale 사상은 국소
+동형사상의 대수적 유사물이다”를 뒷받침한다.
+
+\medskip\noindent
+제목이 말하듯이, 기저 스킴 $S$ 위의 스킴 범주에서 피복으로
+간주할 사상(그 전사족)을 이루는 \'etale 사상의 부류를 정의하여
+\'etale 사이트 $S_\etale$를 정의한다.
+직관적으로 \'etale 사상은 피복공간의 개념을 포착해야 하므로
+국소 동형사상에 가까워야 한다. 대수적으로 닫힌 체 위의 다양체를
+다룬다면, “국소 동형사상”을 “형식적 국소 동형사상”(완비화 뒤의
+동형사상)으로 바꾸면 이 문장을 정의로 만들 수 있다.
+그렇다면 대수적 폐포로의 밑변환이 \'etale이 되도록 요구하여
+임의의 기저체 위에서 정의할 수 있다. 그러나 이러한 미학적으로
+불쾌한 구성을 따르기보다, 더 깔끔하지만 조금 더 추상적인
+대수적 접근을 택한다.
+
+\medskip\noindent
+먼저 뇌터 국소환에 대해 “국소환의 \'etale 준동형”을 정의한다.
+이미 \'etale 환 사상의 개념이 있으므로 “\'etale”이라는 용어를
+그대로 쓸 수는 없다(Algebra, Section
+\ref{algebra-section-etale}). 두 개념은 서로 다르다.
+
+\begin{definition}
+\label{definition-etale-ring}
+$A$, $B$를 뇌터 국소환이라 하자.
+국소 준동형 $f : A \to B$가 {\it 국소환의 \'etale 준동형}이라고
+하는 것은 평탄하고 국소환의 비분기 준동형일 때이다
+(Definition \ref{definition-unramified-rings} 참조).
+\end{definition}
+
+\noindent
+이는 Algebra, Section \ref{algebra-section-etale}에서 정의한
+\'etale 환 사상의 국소적 형태이다. 그 절에서 주어진 정확한
+정의는 상대차원 $0$인 매끄러운 환 사상이라는 것이다.
+(Algebra, Lemma \ref{algebra-lemma-etale-standard-smooth})에서
+\'etale $R$-대수 $S$는 항상 다음과 같은 표시를 갖는다고 보였다.
+$$
+S = R[x_1, \ldots, x_n]/(f_1, \ldots, f_n)
+$$
+그리고
+$$
+g =
+\det
+\left(
+\begin{matrix}
+\partial f_1/\partial x_1 &
+\partial f_2/\partial x_1 &
+\ldots &
+\partial f_n/\partial x_1 \\
+\partial f_1/\partial x_2 &
+\partial f_2/\partial x_2 &
+\ldots &
+\partial f_n/\partial x_2 \\
+\ldots & \ldots & \ldots & \ldots \\
+\partial f_1/\partial x_n &
+\partial f_2/\partial x_n &
+\ldots &
+\partial f_n/\partial x_n
+\end{matrix}
+\right)
+$$
+가 $S$에서 가역원으로 사상된다. 다음 두 보조정리는
+이 두 개념을 연결한다.
+
+\begin{lemma}
+\label{lemma-characterize-etale-Noetherian}
+$A$가 뇌터 환이고 $A \to B$가 유한형이라고 하자.
+$\mathfrak q$를 $\mathfrak p \subset A$ 위에 놓인 $B$의 소아이디얼이라 하자.
+그러면 $A \to B$가 $\mathfrak q$에서 \'etale일 필요충분조건은
+$A_{\mathfrak p} \to B_{\mathfrak q}$가 국소환의
+\'etale 준동형인 것이다.
+\end{lemma}
+
+\begin{proof}
+Algebra, Lemmas \ref{algebra-lemma-etale} (\'etale 사상의 평탄성),
+\ref{algebra-lemma-etale-at-prime} (\'etale 사상은 비분기임) 및
+\ref{algebra-lemma-characterize-etale} (평탄 비분기 사상은
+\'etale임)를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-etale-completions}
+$A$, $B$를 뇌터 국소환이라 하자.
+$A \to B$를 국소 준동형이고 $B$가 $A$ 위에서 본질적으로
+유한형이라고 하자.
+다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $A \to B$는 국소환의 \'etale 준동형이다.
+\item $A^\wedge \to B^\wedge$는 국소환의 \'etale 준동형이고,
+\item $A^\wedge \to B^\wedge$는 \'etale이다.
+\end{enumerate}
+더 나아가 이 경우 어떤 $n \geq 1$에 대하여
+$B^\wedge \cong (A^\wedge)^{\oplus n}$이
+$A^\wedge$-가군으로서 성립한다.
+\end{lemma}
+
+\begin{proof}
+(1), (2), (3)의 동치를 보이려면, 비분기 환 사상에 대해
+상응하는 결과(Lemma \ref{lemma-characterize-unramified-completions})가
+있으므로 $A \to B$가 평탄일 필요충분조건과
+$A^\wedge \to B^\wedge$가 평탄일 필요충분조건이 같음을
+보이면 충분하다.
+환 사상 $A \to A^\wedge$와 $B \to B^\wedge$가 충실 평탄이라는
+평탄 사상의 성질 목록에서 이는 명백하다.
+마지막 명제는 Lemma \ref{lemma-unramified-completions}에 의해
+$B^\wedge$가 유한 평탄 $A^\wedge$-가군임을 뜻한다.
+따라서 \ref{section-flat-morphisms} 절의 평탄 가군 성질 목록에
+의해 유한 자유 가군이다.
+\end{proof}
+
+\noindent
+위 보조정리에 나오는 정수 $n$은 잉여체 확장
+$[\kappa(\mathfrak m_B) : \kappa(\mathfrak m_A)]$의 차수와
+다르지 않다. 특히 $\kappa(\mathfrak m_A)$가 분리폐포이면
+$A^\wedge \to B^\wedge$가 동형사상임을 알 수 있고,
+이는 앞에서 한 주장을 뒷받침한다.
+
+\begin{definition}
+\label{definition-etale-schemes-1}
+(Morphisms, Definition \ref{morphisms-definition-etale} 참조.)
+$Y$를 국소 뇌터 스킴이라 하자.
+$f : X \to Y$를 국소적으로 유한형인 스킴의 사상이라 하자.
+\begin{enumerate}
+\item $x \in X$라 하자. $f$가 {\it $x \in X$에서 \'etale}이라고
+하는 것은 $\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$가
+국소환의 \'etale 준동형일 때이다.
+\item 이 사상이 {\it \'etale}이라고 하는 것은 모든 점에서
+\'etale일 때이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 정의가 스킴 사상 장의 정의와 일치함을 보이자.
+특히 사상이 \'etale인 점들의 집합이 열린집합임을 보장한다.
+
+\begin{lemma}
+\label{lemma-etale-definition}
+$Y$를 국소 뇌터 스킴, $f : X \to Y$를 국소적으로 유한형이라 하자.
+$x \in X$라 하자. Definition
+\ref{definition-etale-schemes-1}의 의미에서 $f$가 $x$에서
+\'etale일 필요충분조건은 Morphisms, Definition
+\ref{morphisms-definition-etale}의 의미에서 $x$에서 \'etale인 것이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-characterize-etale-Noetherian}과 정의에서 따른다.
+\end{proof}
+
+\noindent
+\'etale 사상에 관한 몇 가지 결과를 열거한다.
+다음 목록의 진술은 국소 뇌터 스킴 사이의 국소 유한형 사상에만
+적용된다. 각 경우 프로젝트 앞부분에서 증명한 일반 결과의
+참고문헌을 제시하지만, 어떤 경우에는 뇌터 경우에 더 쉽게
+증명할 수 있다. 목록은 다음과 같다.
+\begin{enumerate}
+\item \'Etale 사상은 비분기이다. (정의에서 명백하다.)
+\item \'Etale성은 원천과 표적의 자리스키 위상에서 국소적이다.
+\item \'Etale 사상은 밑변환과 합성에 대해 안정적이다.
+Morphisms, Lemmas \ref{morphisms-lemma-base-change-etale} 및
+\ref{morphisms-lemma-composition-etale}를 보라.
+\item 스킴의 \'Etale 사상은 국소적으로 준유한이고,
+준콤팩트 \'Etale 사상은 준유한이다. (앞에서 비분기 사상에 대해
+성립함을 보였기 때문이다.)
+\item \'Etale 사상은 상대차원 $0$을 갖는다. Morphisms, Definition
+\ref{morphisms-definition-relative-dimension-d} 및
+Morphisms, Lemma \ref{morphisms-lemma-locally-quasi-finite-rel-dimension-0}를 보라.
+\item 사상이 \'Etale일 필요충분조건은 평탄하고 모든 섬유가
+\'Etale인 것이다. Morphisms, Lemma
+\ref{morphisms-lemma-etale-flat-etale-fibres}를 보라.
+\item \'Etale 사상은 열린 사상이다. \'Etale 사상은 평탄하고
+Theorem \ref{theorem-flat-map-open}이 성립하기 때문이다.
+\item $X$, $Y$가 기저 스킴 $S$ 위에서 \'Etale이라고 하자.
+$X$에서 $Y$로 가는 임의의 $S$-사상은 \'Etale이다.
+Morphisms, Lemma \ref{morphisms-lemma-etale-permanence}를 보라.
+\end{enumerate}
+
+
+\section{구조 정리}
+\label{section-structure-etale-map}
+
+\noindent
+\'etale 사상과 비분기 사상의 국소 구조를 기술하는 정리를 제시한다.
+명백히 독립적인 중요성이 있을 뿐 아니라, 이 정리는 지금까지
+사용한 것보다 기하적 직관을 더 잘 포착하는 \'etale 사상의 또 다른
+정의로 넘어가게 해 준다.
+
+\medskip\noindent
+이를 진술하려면 {\it 표준 \'etale 환 사상}이라는 개념이 필요하다.
+Algebra, Definition \ref{algebra-definition-standard-etale}를 보라.
+즉 $R$가 환이고 $f, g \in R[t]$가 다음 조건을 만족하는 다항식이라 하자.
+\begin{enumerate}
+\item[(a)] $f$는 최고차항 계수가 1인 다항식이고,
+\item[(b)] $f' = \text{d}f/\text{d}t$는 국소화
+$R[t]_g/(f)$에서 가역이다.
+\end{enumerate}
+그러면 사상
+$$
+R \longrightarrow R[t]_g/(f) = R[t, 1/g]/(f)
+$$
+은 표준 \'etale 대수이다. 모든 표준 \'etale 대수는 이와 같은 것 중
+하나와 동형이다. 이러한 환 사상이 평탄이고 비분기이므로
+(따라서 물론 \'etale이므로)임을 보이는 것은 즐거운 연습문제이다.
+표준 \'etale 환 사상의 특수한 경우는 다음과 같은 임의의 환 사상이다.
+$$
+R \longrightarrow R[t]_{f'}/(f) = R[t, 1/f']/(f)
+$$
+여기서 $f$는 최고차항 계수가 1인 다항식이고, 모든 표준 \'etale
+대수는 이들 중 하나의 주 아이디얼 국소화와 동형이다.
+
+\begin{theorem}
+\label{theorem-structure-etale}
+국소환의 \'etale 준동형 $f : A \to B$를 생각하자.
+그러면 $f, g \in A[t]$가 존재하여
+\begin{enumerate}
+\item $B' = A[t]_g/(f)$는 표준 \'etale이다. 위의 (a), (b)를 보라.
+\item $B$는 $B'$를 어떤 소아이디얼에서 국소화한 것과 동형이다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+$B = B'_{\mathfrak q}$로 쓸 수 있는 어떤 유한형 $A$-대수 $B'$를
+택하자($B$가 $A$ 위에서 본질적으로 유한형이므로 가능하다).
+Lemma \ref{lemma-characterize-etale-Noetherian}에 의해
+$A \to B'$는 $\mathfrak q$에서 \'etale이다.
+따라서 Algebra, Proposition
+\ref{algebra-proposition-etale-locally-standard}를 적용하면
+$B'$의 주 아이디얼 국소화가 표준 \'etale임을 얻는다.
+\end{proof}
+
+\noindent
+국소환의 비분기 준동형에 대해서도 다음과 같은 버전이 있다.
+
+\begin{theorem}
+\label{theorem-structure-unramified}
+국소환의 비분기 준동형 $f : A \to B$를 생각하자.
+그러면 $f, g \in A[t]$가 존재하여
+\begin{enumerate}
+\item $B' = A[t]_g/(f)$는 표준 \'etale이다. 위의 (a), (b)를 보라.
+\item $B$는 $B'$를 어떤 소아이디얼에서 국소화한 것의 몫과 동형이다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+$B = B'_{\mathfrak q}$로 쓸 수 있는 어떤 유한형 $A$-대수 $B'$를
+택하자($B$가 $A$ 위에서 본질적으로 유한형이므로 가능하다).
+Lemma \ref{lemma-characterize-unramified-Noetherian}에 의해
+$A \to B'$는 $\mathfrak q$에서 비분기이다.
+따라서 Algebra, Proposition
+\ref{algebra-proposition-unramified-locally-standard}를 적용하면
+$B'$의 주 아이디얼 국소화가 표준 \'etale $A$-대수의 몫임을 얻는다.
+\end{proof}
+
+\noindent
+이제 표준적인 올림 논의를 통해 우리에게 본질적으로 유용한
+다음 기하적 명제를 얻는다.
+
+\begin{theorem}
+\label{theorem-geometric-structure}
+스킴의 사상 $\varphi : X \to Y$와 $x \in X$가 주어졌다고 하자.
+$V \subset Y$를 $\varphi(x)$의 아핀 열린 근방이라 하자.
+$\varphi$가 $x$에서 \'etale이면 $x \in U$이고
+$\varphi(U) \subset V$인 아핀 열린집합 $U \subset X$가
+존재한다 존재한다. 또한 다음 도식을 갖는다.
+$$
+\xymatrix{
+X \ar[d] & U \ar[l] \ar[d] \ar[r]_-j & \Spec(R[t]_{f'}/(f)) \ar[d] \\
+Y & V \ar[l] \ar@{=}[r] & \Spec(R)
+}
+$$
+여기서 $j$는 열린 몰입이고 $f \in R[t]$는 최고차항 계수가
+1인 다항식이다.
+\end{theorem}
+
+\begin{proof}
+이는 Morphisms, Lemma
+\ref{morphisms-lemma-etale-locally-standard-etale}와 동치이지만
+진술은 조금 다르다.
+비분기 사상에 대한 변형은 Varieties, Lemma
+\ref{varieties-lemma-geometric-structure-unramified}도 보라.
+\end{proof}
+
+
+
+\section{\'Etale 사상과 매끄러운 사상}
+\label{section-etale-smooth}
+
+\noindent
+\'etale 사상은 상대차원 0인 매끄러운 사상이다.
+사영 $\mathbf{A}^n_S \to S$는 상대차원 $n$인 매끄러운 사상의
+표준적인 예이다.
+실제로 모든 매끄러운 사상은 이러한 형태의 \'etale 국소 사상이다.
+정확한 진술은 다음과 같다.
+
+\begin{theorem}
+\label{theorem-smooth-etale-over-n-space}
+스킴의 사상 $\varphi : X \to Y$와 $x \in X$가 주어졌다고 하자.
+$\varphi$가 $x$에서 매끄러우면 정수 $n \geq 0$와
+$x \in U$, $\varphi(U) \subset V$를 만족하는
+아핀 열린집합 $V \subset Y$, $U \subset X$가 존재하여
+다음 가환도식이 존재한다.
+$$
+\xymatrix{
+X \ar[d] & U \ar[l] \ar[d] \ar[r]_-\pi &
+\mathbf{A}^n_R \ar[d] \ar@{=}[r] &  \Spec(R[x_1, \ldots, x_n]) \ar[dl] \\
+Y & V \ar[l] \ar@{=}[r] & \Spec(R)
+}
+$$
+여기서 $\pi$는 \'etale이다.
+\end{theorem}
+
+\begin{proof}
+Morphisms, Lemma \ref{morphisms-lemma-smooth-etale-over-affine-space}를
+보라.
+\end{proof}
+
+
+
+
+
+\section{\'Etale 사상의 위상적 성질}
+\label{section-topological-etale}
+
+\noindent
+\'etale 사상과 비분기 사상의 위상적 성질 몇 가지를 제시한다.
+먼저 그로텐디크가 {\it \'etale 사상의 기본 성질}이라고 부른 것을
+제시한다. \cite[Expos\'e I.5]{SGA1}을 보라.
+
+\begin{theorem}
+\label{theorem-etale-radicial-open}
+스킴의 사상 $f : X \to Y$에 대하여 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $f$는 열린 몰입이다.
+\item $f$는 보편적으로 단사이고 \'etale이다.
+\item $f$는 평탄 단사사상이며 국소적으로 유한 표시이다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+열린 몰입은 그 밑변환이 모두 열린 몰입이므로 보편적으로 단사이다.
+또한 Morphisms, Lemma
+\ref{morphisms-lemma-open-immersion-etale}에 의해 \'etale이다.
+따라서 (1)은 (2)를 함의한다.
+
+\medskip\noindent
+$f$가 보편적으로 단사이고 \'etale이라고 가정하자.
+$f$는 \'etale이므로 평탄이고 국소적으로 유한 표시이다.
+Morphisms, Lemmas \ref{morphisms-lemma-etale-flat} 및
+\ref{morphisms-lemma-etale-locally-finite-presentation}을 보라.
+Lemma \ref{lemma-universally-injective-unramified}에 의해
+$f$는 단사사상이다. 따라서 (2)는 (3)을 함의한다.
+
+\medskip\noindent
+$f$가 평탄하고 국소적으로 유한 표시인 단사사상이라고 가정하자.
+그러면 Morphisms, Lemma
+\ref{morphisms-lemma-fppf-open}에 의해 $f$는 열린 사상이다.
+따라서 $Y$를 $f(X)$로 바꾸어 $f$가 전사라고 가정할 수 있다.
+그러면 $f$는 열린 전단사이므로 위상동형사상이다.
+따라서 $f$는 준콤팩트이다. Descent, Lemma
+\ref{descent-lemma-flat-surjective-quasi-compact-monomorphism-isomorphism}에
+의해 $f$는 동형사상이고 증명이 끝난다.
+\end{proof}
+
+\noindent
+비슷한 성격의 또 다른 결과를 보자.
+
+\begin{lemma}
+\label{lemma-finite-etale-one-point}
+스킴의 사상 $\pi : X \to S$와 $s \in S$가 주어졌다고 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $\pi$는 유한이다.
+\item $\pi$는 \'etale이다.
+\item $\pi^{-1}(\{s\}) = \{x\}$이다.
+\item $\kappa(s) \subset \kappa(x)$는 순수
+비분리이다\footnote{조건 (2)에 비추어 보면 이는
+$\kappa(s) = \kappa(x)$와 동치이다.}.
+\end{enumerate}
+그러면 $s$의 어떤 열린 근방 $U$가 존재하여
+$\pi|_{\pi^{-1}(U)} : \pi^{-1}(U) \to U$가 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-finite-unramified-one-point}에 의해
+$s$의 어떤 열린 근방 $U$가 존재하여
+$\pi|_{\pi^{-1}(U)} : \pi^{-1}(U) \to U$가 닫힌 몰입이다.
+그러나 \'etale이고 닫힌 몰입인 사상은 열린 몰입이다
+(예를 들어 Theorem \ref{theorem-etale-radicial-open}에 의해서).
+따라서 $U$를 더 작게 잡으면 동형사상을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-frobenius-etale}
+$X$가 표수 $p$인 스킴일 때, $U \to X$를 스킴의
+\'etale 사상이라 하자.
+그러면 상대 프로베니우스
+$F_{U/X} : U \to U \times_{X, F_X} X$는 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+사상 $F_{U/X}$는 Varieties, Lemma
+\ref{varieties-lemma-relative-frobenius}에 의해 보편 위상동형사상이다.
+또한 $F_{U/X}$는 $X$ 위에서 \'etale인 스킴 사이의 사상이므로
+\'etale이다
+(Morphisms, Lemma \ref{morphisms-lemma-etale-permanence}).
+따라서 Theorem \ref{theorem-etale-radicial-open}에 의해
+$F_{U/X}$는 동형사상이다.
+\end{proof}
+
+
+
+
+
+\section{\'Etale 위상의 위상적 불변성}
+\label{section-topological-invariance}
+
+\noindent
+다음으로 대략 말해 \'etale성이 위상적 성질임을 말해 주는
+대단히 중요한 정리를 제시한다.
+
+\begin{theorem}
+\label{theorem-etale-topological}
+$X$, $Y$를 기저 스킴 $S$ 위의 두 스킴이라 하자.
+$S_0$를 $S$와 같은 기저 위상공간을 갖는 닫힌 부분스킴이라 하자
+(예를 들어 $S$에서 $S_0$의 아이디얼 층의 제곱이 영인 경우).
+$X_0$ (각각\ $Y_0$)로 밑변환 $S_0 \times_S X$
+(각각\ $S_0 \times_S Y$)를 나타내자.
+$X$가 $S$ 위에서 \'etale이면 사상
+$$
+\Mor_S(Y, X) \longrightarrow \Mor_{S_0}(Y_0, X_0)
+$$
+은 전단사이다.
+\end{theorem}
+
+\begin{proof}
+$Y \to S$를 따라 밑변환한 뒤 $Y = S$라고 가정할 수 있다.
+이 경우 정리는 임의의 $S$-사상 $\sigma_0 : S_0 \to X$가
+\'etale 구조사상 $f : X \to S$의 단면 $S \to X$를 통해
+유일하게 인수분해된다고 말한다.
+
+\medskip\noindent
+유일성을 보이자. $\sigma_0$가 인수분해되는 두 단면
+$\sigma, \sigma'$가 있다고 하자. $X \to S$가 \'etale이므로
+$\Delta : X \to X \times_S X$는 열린 몰입이다
+(Morphisms, Lemma
+\ref{morphisms-lemma-diagonal-unramified-morphism}).
+사상 $(\sigma, \sigma') : S \to X \times_S X$는 이 열린집합을
+통해 인수분해된다. 실제로 임의의 $s \in S$에 대하여
+$(\sigma, \sigma')(s) = (\sigma_0(s), \sigma_0(s))$이기 때문이다.
+따라서 $\sigma = \sigma'$이다.
+
+\medskip\noindent
+존재성을 증명하기 위해 먼저 아핀 경우로 환원한다
+(독자는 이 단계를 건너뛰어도 좋다).
+각 $X_i$가 $S$의 아핀 열린집합 $S_i$ 안으로 사상되는
+아핀 열린 피복 $X = \bigcup X_i$를 잡자.
+모든 $s \in S$에 대해 $\sigma_0(s) \in X_i$를 만족하는
+$i$를 택할 수 있다.
+$\sigma_0(U_0) \subset X_{i, 0}$를 만족하는 $s$의
+아핀 열린 근방 $U \subset S_i$를 택하자.
+$X' = X_i \times_S U = X_i \times_{S_i} U$는 아핀임에 유의하자.
+$\sigma_0|_{U_0} : U_0 \to X'_0$를 $U \to X'$로 올릴 수 있다면
+유일성에 의해 이 국소 올림들은 전역 사상 $S \to X$로 붙는다.
+따라서 $S$와 $X$가 아핀이라고 가정할 수 있다.
+
+\medskip\noindent
+$S$와 $X$가 아핀일 때의 존재성을 보이자.
+$S = \Spec(A)$, $X = \Spec(B)$로 쓰자. 그러면 $A \to B$는
+\'etale이고, 특히 (상대차원 $0$인) 매끄러운 사상이다.
+$|S_0| = |S|$이므로 국소 멱영 아이디얼 $I \subset A$에 대해
+$S_0 = \Spec(A/I)$임을 알 수 있다. 따라서 존재성은
+Algebra, Lemma \ref{algebra-lemma-smooth-strong-lift}에서 따른다.
+\end{proof}
+
+\noindent
+앞 정리의 증명으로부터 약속한 \'etale 사상의 함자적 특징짓기 중
+한 방향도 얻는다. 다음 정리는 \'Etale Cohomology,
+Theorem \ref{etale-cohomology-theorem-topological-invariance}에서
+강화된다.
+
+\begin{theorem}[Une equivalence remarquable de cat\'egories]
+\label{theorem-remarkable-equivalence}
+\begin{reference}
+\cite[IV, Theorem 18.1.2]{EGA}
+\end{reference}
+$S$를 스킴이라 하자.
+$S_0 \subset S$를 같은 기저 위상공간을 갖는 닫힌 부분스킴이라 하자
+(예를 들어 $S$에서 $S_0$의 아이디얼 층의 제곱이 영인 경우).
+함자
+$$
+X \longmapsto X_0 = S_0 \times_S X
+$$
+는 다음 범주들의 동치를 정의한다.
+$$
+\{
+\text{schemes }X\text{ \'etale over }S
+\}
+\leftrightarrow
+\{
+\text{schemes }X_0\text{ \'etale over }S_0
+\}
+$$
+\end{theorem}
+
+\begin{proof}
+Theorem \ref{theorem-etale-topological}에 의해 이 함자가
+충만충실임을 알 수 있다. 본질적 전사임을 보이는 일만 남는다.
+스킴의 \'etale 사상 $Y \to S_0$가 주어졌다고 하자.
+
+\medskip\noindent
+$S$와 $Y$가 아핀일 때 결과가 성립한다고 가정하자.
+이 경우 각 $V_j$가 $S$의 아핀 열린집합 안으로 사상되는
+아핀 열린 피복 $Y = \bigcup V_j$를 택한다.
+가정한 아핀 경우에 의해 $W_{j, 0} \cong V_j$를 만족하는
+\'etale 사상 $W_j \to S$를 찾을 수 있다
+($S_0$ 위의 스킴으로서).
+$W_{j, j'} \subset W_j$를 그 기저 위상공간이
+$V_j \cap V_{j'}$에 대응하는 열린 부분스킴이라 하자.
+$S_0$ 위의 스킴으로서 다음 동형사상들이 있으므로
+$$
+W_{j, j', 0} \cong V_j \cap V_{j'} \cong W_{j', j, 0}
+$$
+충만충실성에 의해 $S$ 위의 스킴의 동형사상
+$\theta_{j, j'} : W_{j, j'} \to W_{j', j}$를 얻는다.
+이 동형사상들이 Schemes, Section
+\ref{schemes-section-glueing-schemes}의 코사이클 조건을
+만족한다는 확인은 생략한다.
+Schemes, Lemma \ref{schemes-lemma-glue-schemes}를 적용하여
+스킴 $W_j$들을 식별 $\theta_{j, j'}$를 따라 붙여
+스킴 $X \to S$를 얻는다. 구성상 $X \to S$가 \'etale이고
+$X_0 \cong Y$임은 명백하다.
+
+\medskip\noindent
+따라서 $S$와 $Y$가 아핀인 경우에 보조정리를 보이면 충분하다.
+$S = \Spec(R)$, $S_0 = \Spec(R/I)$라 하고 $I$가 국소 멱영이라고 하자.
+Algebra, Lemma \ref{algebra-lemma-etale-standard-smooth}에 의해
+$Y$는 다음 환 $\overline{A}$의 스펙트럼이다.
+$$
+\overline{A} = (R/I)[x_1, \ldots, x_n]/(\overline{f}_1, \ldots, \overline{f}_n)
+$$
+그리고
+$$
+\overline{g} =
+\det
+\left(
+\begin{matrix}
+\partial \overline{f}_1/\partial x_1 &
+\partial \overline{f}_2/\partial x_1 &
+\ldots &
+\partial \overline{f}_n/\partial x_1 \\
+\partial \overline{f}_1/\partial x_2 &
+\partial \overline{f}_2/\partial x_2 &
+\ldots &
+\partial \overline{f}_n/\partial x_2 \\
+\ldots & \ldots & \ldots & \ldots \\
+\partial \overline{f}_1/\partial x_n &
+\partial \overline{f}_2/\partial x_n &
+\ldots &
+\partial \overline{f}_n/\partial x_n
+\end{matrix}
+\right)
+$$
+는 $\overline{A}$에서 가역원으로 사상된다.
+임의의 올림 $f_i \in R[x_1, \ldots, x_n]$를 택하고 다음과 같이 두자.
+$$
+A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_n)
+$$
+$I$가 국소 멱영이므로 아이디얼 $IA$는 국소 멱영이다
+(Algebra, Lemma \ref{algebra-lemma-locally-nilpotent}).
+$\overline{A} = A/IA$임에 유의하자.
+따라서 $f_i$의 편미분 행렬의 행렬식은
+Algebra, Lemma \ref{algebra-lemma-locally-nilpotent-unit}에 의해
+대수 $A$에서 가역이다. 그러므로 $R \to A$는 \'etale이고
+증명이 끝난다.
+\end{proof}
+
+
+
+
+\section{함자적 특징짓기}
+\label{section-functorial-etale}
+
+\noindent
+마침내 약속한 함자적 특징짓기를 제시한다.
+따라서 스킴의 \'etale 사상을 생각하는 방법은 네 가지이다.
+\begin{enumerate}
+\item 상대차원 $0$인 매끄러운 사상으로서,
+\item 국소적으로 유한 표시이고 평탄이며 비분기인 사상으로서,
+\item 구조 정리를 이용하여,
+\item 함자적 특징짓기를 이용하여.
+\end{enumerate}
+
+\begin{theorem}
+\label{theorem-formally-etale}
+$f : X \to S$를 국소적으로 유한 표시인 사상이라 하자.
+다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $f$는 \'etale이다.
+\item 모든 아핀 $S$-스킴 $Y$와 제곱영 아이디얼로 정의되는
+닫힌 부분스킴 $Y_0 \subset Y$에 대해 자연스러운 사상
+$$
+\Mor_S(Y, X) \longrightarrow \Mor_S(Y_0, X)
+$$
+은 전단사이다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+이는 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-formally-etale}이다.
+\end{proof}
+
+\noindent
+이 특징짓기는 $X$를 정의하는 방정식들의 해를 멱영 두껍게 하기를
+통해 유일하게 올릴 수 있다고 말한다.
+
+
+
+
+\section{비분기 사상의 \'Etale 국소 구조}
+\label{section-unramified-etale-local}
+
+\noindent
+More on Morphisms 장의 Section
+\ref{more-morphisms-section-etale-localization}에서 독자는 준유한 사상의
+\'etale 국소 구조에 관한 몇 가지 결과를 찾을 수 있다. 이 절에서는
+그 결과를 이 장에서 살펴본 비분기 사상의 위상적 성질과 결합하고자 한다.
+염두에 둘 기본적인 전체 그림은
+$$
+\xymatrix{
+V \ar[r] \ar[dr] & X_U \ar[d] \ar[r] & X \ar[d]^f \\
+& U \ar[r] & S
+}
+$$
+이며, More on Morphisms, Equation
+(\ref{more-morphisms-equation-basic-diagram})을 참조하라.
+아주 일반적인 경우부터 시작한다.
+
+\begin{lemma}
+\label{lemma-unramified-etale-local}
+$f : X \to S$를 스킴의 사상이라 하자.
+$x_1, \ldots, x_n \in X$를 $S$에서 같은 상 $s$를 갖는 점들이라 하자.
+각 $x_i$에서 $f$가 비분기라고 가정하자.
+그러면 \'etale 근방 $(U, u) \to (S, s)$와 열린 부분스킴
+$V_{i, j} \subset X_U$, $i = 1, \ldots, n$, $j = 1, \ldots, m_i$가 존재하여
+다음을 만족한다.
+\begin{enumerate}
+\item $V_{i, j} \to U$는 $u$를 지나는 닫힌 몰입이다.
+\item $i = i'$이고 $j = j'$인 경우가 아니면
+$u$는 $V_{i, j} \cap V_{i', j'}$의 상에 속하지 않는다.
+\item $(X_U)_u$의 점 가운데 $x_i$로 가는 것은 모두 어떤 $V_{i, j}$에 속한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Morphisms, Definition \ref{morphisms-definition-unramified}에 의해
+각 $x_i$에는 $S$ 위에서 국소 유한형인 열린 근방이 존재한다.
+$X$를 $\{x_1, \ldots, x_n\}$의 열린 근방으로 바꾸면
+$f$가 국소 유한형이라고 가정할 수 있다. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points-var}를
+적용하여 \'etale 근방 $(U, u)$와 $U$ 위에서 유한인 열린 부분스킴
+$V_{i, j}$를 얻는다. Lemma \ref{lemma-finite-unramified-one-point}에 의해
+필요하면 $U$를 축소한 뒤 $V_{i, j} \to U$가 닫힌 몰입이 된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-unramified-etale-local-technical}
+$f : X \to S$를 스킴의 사상이라 하자.
+$x_1, \ldots, x_n \in X$를 $S$에서 같은 상 $s$를 갖는 점들이라 하자.
+$f$가 분리이고 $f$가 각 $x_i$에서 비분기라고 가정하자.
+그러면 \'etale 근방 $(U, u) \to (S, s)$와 서로소 합 분해
+$$
+X_U =
+W \amalg \coprod\nolimits_{i, j} V_{i, j}
+$$
+가 존재하여 다음을 만족한다.
+\begin{enumerate}
+\item $V_{i, j} \to U$는 $u$를 지나는 닫힌 몰입이다.
+\item 올 $W_u$에는 어떤 $x_i$로 가는 점도 없다.
+\end{enumerate}
+특히 $f^{-1}(\{s\}) = \{x_1, \ldots, x_n\}$이면 올 $W_u$는 공집합이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-unramified-etale-local}을 적용하자.
+$U$가 아핀이라고 가정할 수 있으므로 $X_U$는 분리이다.
+그러면 $V_{i, j} \to X_U$는 닫힌 사상이다. Morphisms, Lemma
+\ref{morphisms-lemma-image-proper-scheme-closed}을 참조하라.
+$(i, j) \not = (i', j')$라고 하자.
+그러면 $V_{i, j} \cap V_{i', j'}$는 $V_{i, j}$에서 닫혀 있고
+$U$에서의 그 상은 $u$를 포함하지 않는다. 따라서 $U$를 축소한 뒤
+$V_{i, j} \cap V_{i', j'} = \emptyset$이라고 가정할 수 있다.
+또한 $\bigcup V_{i, j}$는 $X_U$의 열린 동시에 닫힌 부분스킴이므로
+열리고 닫힌 여부분 $W$를 갖는다. 이로써 증명이 끝난다.
+\end{proof}
+
+\noindent
+다음 보조정리는 어떤 의미에서는 앞의 것보다 훨씬 약하지만,
+여기에 명시적으로 진술해 두면 유용할 수 있다. 이 보조정리는
+유한 비분기 사상이 밑에서 \'etale 국소적으로 닫힌 몰입이라고 말한다.
+
+\begin{lemma}
+\label{lemma-finite-unramified-etale-local}
+$f : X \to S$를 스킴의 유한 비분기 사상이라 하자.
+$s \in S$라 하자.
+\'etale 근방 $(U, u) \to (S, s)$와 유한 서로소 합 분해
+$$
+X_U = \coprod\nolimits_j V_j
+$$
+가 존재하여 각 $V_j \to U$는 닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+$X \to S$가 유한이므로 $s$ 위의 올은 $X$의 점들로 이루어진
+유한집합 $\{x_1, \ldots, x_n\}$이다.
+이 집합에 Lemma \ref{lemma-unramified-etale-local-technical}을 적용한다
+(유한 사상은 분리이다. Morphisms, Section
+\ref{morphisms-section-integral}을 참조하라).
+$U$에서 $W$의 상은 $u$를 포함하지 않는 닫힌 부분집합이다
+($X_U \to U$가 유한이고 따라서 고유이기 때문이다).
+이를 $U$에서 제거하면 원하는 대로 $W = \emptyset$임을 알 수 있다.
+\end{proof}
+
+
+
+
+\section{\'Etale 사상의 \'etale 국소 구조}
+\label{section-etale-local-etale}
+
+\noindent
+이는 다소 자명해 보이지만 \'etale 사상에 대한 직관을 형성하는 데
+도움이 될 수 있다. Section \ref{section-unramified-etale-local}의 결과를
+그대로 옮기고 “닫힌 몰입”을 “동형사상”으로 바꾸기만 하면 된다.
+
+\begin{lemma}
+\label{lemma-etale-etale-local}
+$f : X \to S$를 스킴의 사상이라 하자.
+$x_1, \ldots, x_n \in X$를 $S$에서 같은 상 $s$를 갖는 점들이라 하자.
+각 $x_i$에서 $f$가 \'etale이라고 가정하자.
+그러면 \'etale 근방 $(U, u) \to (S, s)$와 열린 부분스킴
+$V_{i, j} \subset X_U$, $i = 1, \ldots, n$, $j = 1, \ldots, m_i$가 존재하여
+다음을 만족한다.
+\begin{enumerate}
+\item $V_{i, j} \to U$는 동형사상이다.
+\item $i = i'$이고 $j = j'$인 경우가 아니면
+$u$는 $V_{i, j} \cap V_{i', j'}$의 상에 속하지 않는다.
+\item $(X_U)_u$의 점 가운데 $x_i$로 가는 것은 모두 어떤 $V_{i, j}$에 속한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\'etale 사상은 비분기이므로 Lemma
+\ref{lemma-unramified-etale-local}을 적용할 수 있다.
+이제 $V_{i, j} \to U$는 닫힌 몰입이면서 \'etale이다.
+따라서 열린 몰입이다. 예를 들어 Theorem
+\ref{theorem-etale-radicial-open}을 참조하라.
+$U$를 $V_{i, j} \to U$들의 상의 교집합으로 바꾸면 보조정리를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-etale-etale-local-technical}
+$f : X \to S$를 스킴의 사상이라 하자.
+$x_1, \ldots, x_n \in X$를 $S$에서 같은 상 $s$를 갖는 점들이라 하자.
+$f$가 분리이고 $f$가 각 $x_i$에서 \'etale이라고 가정하자.
+그러면 \'etale 근방 $(U, u) \to (S, s)$와 스킴의 유한 서로소 합 분해
+$$
+X_U =
+W \amalg \coprod\nolimits_{i, j} V_{i, j}
+$$
+가 존재하여 다음을 만족한다.
+\begin{enumerate}
+\item $V_{i, j} \to U$는 동형사상이다.
+\item 올 $W_u$에는 어떤 $x_i$로 가는 점도 없다.
+\end{enumerate}
+특히 $f^{-1}(\{s\}) = \{x_1, \ldots, x_n\}$이면 올 $W_u$는 공집합이다.
+\end{lemma}
+
+\begin{proof}
+\'etale 사상은 비분기이므로 Lemma
+\ref{lemma-unramified-etale-local-technical}을 적용할 수 있다.
+Lemma \ref{lemma-etale-etale-local}의 증명에서와 같이
+사상 $V_{i, j} \to U$는 열린 몰입이며,
+$U$를 그 상들의 교집합으로 바꾸면 결론을 얻는다.
+\end{proof}
+
+\noindent
+다음 보조정리는 어떤 의미에서는 앞의 것보다 훨씬 약하지만,
+여기에 명시적으로 진술해 두면 유용할 수 있다. 이 보조정리는
+유한 \'etale 사상이 밑에서 \'etale 국소적으로 “위상적 피복공간”,
+즉 밑의 복사본들의 유한 곱이라고 말한다.
+
+\begin{lemma}
+\label{lemma-finite-etale-etale-local}
+$f : X \to S$를 스킴의 유한 \'etale 사상이라 하자.
+$s \in S$라 하자. \'etale 근방 $(U, u) \to (S, s)$와
+스킴의 유한 서로소 합 분해
+$$
+X_U = \coprod\nolimits_j V_j
+$$
+가 존재하여 각 $V_j \to U$는 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+\'etale 사상은 비분기이므로 Lemma
+\ref{lemma-finite-unramified-etale-local}을 적용할 수 있다.
+Lemma \ref{lemma-etale-etale-local}의 증명에서와 같이
+$V_{i, j} \to U$가 열린 몰입임을 알 수 있으며,
+$U$를 그 상들의 교집합으로 바꾸면 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+\section{보존 성질}
+\label{section-properties-permanence}
+
+\noindent
+이제 뇌터 국소환의 \'etale 준동형(Definition
+\ref{definition-etale-ring}에서 정의한 것)의 몇 가지 “보존” 성질을 제시한다.
+뇌터 국소환의 완비화와 헨젤화에 관한 유사한 내용은
+More on Algebra, Sections \ref{more-algebra-section-permanence-completion}와
+\ref{more-algebra-section-permanence-henselization}을 참조하라.
+
+\begin{lemma}
+\label{lemma-etale-dimension}
+$A$, $B$를 뇌터 국소환이라 하자.
+$A \to B$를 국소환의 \'etale 준동형이라 하자.
+그러면 $\dim(A) = \dim(B)$이다.
+\end{lemma}
+
+\begin{proof}
+예를 들어 Algebra, Lemma
+\ref{algebra-lemma-dimension-base-fibre-equals-total}을 참조하라.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-etale-depth}
+$A$, $B$를 뇌터 국소환이라 하자.
+$f : A \to B$를 국소환의 \'etale 준동형이라 하자.
+그러면 $\text{depth}(A) = \text{depth}(B)$이다.
+\end{proposition}
+
+\begin{proof}
+Algebra, Lemma \ref{algebra-lemma-apply-grothendieck}을 참조하라.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-etale-CM}
+\begin{slogan}
+Cohen--Macaulay 성질은 \'etale 사상을 따라 상승하고 하강한다.
+\end{slogan}
+$A$, $B$를 뇌터 국소환이라 하자.
+$f : A \to B$를 국소환의 \'etale 준동형이라 하자.
+그러면 $A$가 Cohen--Macaulay인 것과 $B$가 그러한 것은 동치이다.
+\end{proposition}
+
+\begin{proof}
+국소환 $A$가 Cohen--Macaulay인 것은
+$\dim(A) = \text{depth}(A)$인 것과 동치이다.
+이 두 불변량은 모두 \'etale 확대에서 보존되므로 주장이 따른다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-etale-regular}
+$A$, $B$를 뇌터 국소환이라 하자.
+$f : A \to B$를 국소환의 \'etale 준동형이라 하자.
+그러면 $A$가 정칙인 것과 $B$가 정칙인 것은 동치이다.
+\end{proposition}
+
+\begin{proof}
+$B$가 정칙이면 Algebra, Lemma
+\ref{algebra-lemma-flat-under-regular}에 의해 $A$도 정칙이다.
+$A$가 정칙이라고 가정하자. $\mathfrak m$을 $A$의 극대 아이디얼이라 하자.
+그러면 $\dim_{\kappa(\mathfrak m)} \mathfrak m/\mathfrak m^2 =
+\dim(A) = \dim(B)$이다(Lemma \ref{lemma-etale-dimension} 참조).
+한편 $\mathfrak mB$는 $B$의 극대 아이디얼이고,
+따라서 $\mathfrak m_B/\mathfrak m_B = \mathfrak mB/\mathfrak m^2B$는
+많아야 $\dim(B)$개의 원소로 생성된다. 따라서 $B$는 정칙이다.
+(조금 더 일반적인 Algebra, Lemma
+\ref{algebra-lemma-flat-over-regular-with-regular-fibre}를 사용해도 된다.)
+\end{proof}
+
+
+\begin{proposition}
+\label{proposition-etale-reduced}
+$A$, $B$를 뇌터 국소환이라 하자.
+$f : A \to B$를 국소환의 \'etale 준동형이라 하자.
+그러면 $A$가 축약인 것과 $B$가 축약인 것은 동치이다.
+\end{proposition}
+
+\begin{proof}
+$A \to B$의 충실 평탄성으로부터 $B$가 축약이면 $A$도 축약임은 분명하다.
+Algebra, Lemma \ref{algebra-lemma-descent-reduced}도 참조하라.
+역으로 $A$가 축약이라고 가정하자. 가정에 의해 $B$는 어떤 소아이디얼
+$\mathfrak q$에서 유한형 $A$-대수 $B'$을 국소화한 것이다.
+$B'$을 국소화로 바꾸어 $B'$이 $A$ 위에서 \'etale이라고 가정할 수 있다.
+Lemma \ref{lemma-characterize-etale-Noetherian}을 참조하라.
+그러면 Algebra, Lemma \ref{algebra-lemma-reduced-goes-up}을
+$A \to B'$에 적용할 수 있으므로 $B'$은 축약이다. 따라서 $B$도 축약이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-technicality-needed}
+“축약성”에 관한 결과는, $B$가 $A$ 위에서 본질적으로 유한형이라는
+가정을 버린 \'etale 국소환 사상 $A \to B$의 더 약한 정의에서는 성립하지 않는다.
+실제로 뇌터 국소 정역 $A$의 완비화 $A^\wedge$가 비축약일 수 있다.
+Examples, Section \ref{examples-section-local-completion-nonreduced}를 참조하라.
+그러나 환 사상 $A \to A^\wedge$는 평탄이고,
+$\mathfrak m_AA^\wedge$는 $A^\wedge$의 극대 아이디얼이며,
+물론 $A$와 $A^\wedge$의 잉여체는 같다.
+이 때문에 이 개념을 본질적으로 유한형인 환 확대에 대해서만
+(또는 $A$가 뇌터가 아니면 본질적으로 유한 표시인 환 확대에 대해서만)
+고려하는 것이 중요하다.
+\end{remark}
+
+\begin{proposition}
+\label{proposition-etale-normal}
+\begin{reference}
+\cite[Expose I, Theorem 9.5 part (i)]{SGA1}
+\end{reference}
+$A$, $B$를 뇌터 국소환이라 하자.
+$f : A \to B$를 국소환의 \'etale 준동형이라 하자.
+그러면 $A$가 정규 정역인 것과 $B$가 그러한 것은 동치이다.
+\end{proposition}
+
+\begin{proof}
+정규성의 하강은 Algebra, Lemma
+\ref{algebra-lemma-descent-normal}을 참조하라.
+역으로 $A$가 정규라고 가정하자. 가정에 의해 $B$는 어떤 소아이디얼
+$\mathfrak q$에서 유한형 $A$-대수 $B'$을 국소화한 것이다.
+$B'$을 국소화로 바꾸어 $B'$이 $A$ 위에서 \'etale이라고 가정할 수 있다.
+Lemma \ref{lemma-characterize-etale-Noetherian}을 참조하라.
+그러면 Algebra, Lemma \ref{algebra-lemma-normal-goes-up}을
+$A \to B'$에 적용할 수 있으므로 $B'$이 정규임을 얻는다.
+따라서 $B$는 정규 정역이다.
+\end{proof}
+
+\noindent
+앞의 명제들은 왜 \'etale 사상을 “국소 동형사상”으로 생각하고자 하는지
+어느 정도 보여 준다. 우리가 “올바른” 정의를 얻었음을 훌륭히 보여 주는
+또 다른 성질은 다음 사실이다. 유한형 $\mathbf{C}$-스킴의 사상은
+연관된 해석공간(복소 위상을 준 $\mathbf{C}$-값 점들) 사이의 사상이
+해석적 의미에서 국소 동형사상(정의역에서 국소적으로 열린 매장)인 것과
+그 사상이 \'etale인 것이 동치이다. 이 사실은 구조 정리와 해석화가
+완비 국소환을 취하는 연산과 가환한다는 사실을 이용하여 증명할 수 있다.
+세부사항은 독자에게 맡긴다.
+
+
+
+
+
+
+
+
+\section{\'etale 사상의 하강}
+\label{section-descending-etale}
+
+\noindent
+이 절에서 사용하는 언어를 이해하기 위해 Descent, Section
+\ref{descent-section-descent-datum}을 살펴보기를 권한다.
+$f : X \to S$를 스킴의 사상이라 하자. 다음 당김 함자를 생각하자.
+\begin{equation}
+\label{equation-descent-etale}
+\text{schemes }U\text{ \'etale over }S \longrightarrow
+\begin{matrix}
+\text{descent data }(V, \varphi)\text{ relative to }X/S \\
+\text{ with }V\text{ \'etale over }X
+\end{matrix}
+\end{equation}
+이 함자는 $U$를 표준 하강 데이터 $(X \times_S U, can)$으로 보낸다.
+
+\begin{lemma}
+\label{lemma-faithful}
+$f : X \to S$가 전사이면 함자
+(\ref{equation-descent-etale})는 충실하다.
+\end{lemma}
+
+\begin{proof}
+$S$ 위에서 \'etale인 스킴 사이의 두 사상을
+$a, b : U_1 \to U_2$라 하자. $a$와 $b$를 $X$로 밑변환한 것이
+일치한다고 가정하자. $a = b$임을 보여야 한다.
+Proposition \ref{proposition-equality}에 의해 $a$와 $b$가 점과
+잉여체에서 일치함을 보이면 충분하다. 모든 $u \in U_1$에 대해
+$u$로 가는 점 $v \in X \times_S U_1$을 찾을 수 있으므로 이는 분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fully-faithful}
+$f : X \to S$가 몫위상 사상이고 $f$의 모든 \'etale 밑변환도
+몫위상 사상이라고 가정하자. 그러면 함자
+(\ref{equation-descent-etale})는 충만충실하다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-faithful}에 의해 함자는 충실하다.
+$U_1 \to S$와 $U_2 \to S$를 \'etale 사상이라 하고,
+$a : X \times_S U_1 \to X \times_S U_2$를 표준 하강 데이터와
+양립하는 사상이라 하자. $a$가 어떤 사상 $U_1 \to U_2$의
+밑변환임을 보이겠다.
+
+\medskip\noindent
+$U'_2 \subset U_2$를 열린 부분스킴이라 하자.
+$W = a^{-1}(X \times_S U'_2)$를 생각하자. 이는
+$V_1 = X \times_S U_1$ 위의 표준 하강 데이터와 양립하는
+$X \times_S U_1$의 열린 부분스킴이다. 이는 사영
+$V_1 \times_{U_1} V_1 \to V_1$에 의한 $W$의 두 역상이
+일치한다는 뜻이다. $V_1 \to U_1$은 전사이므로
+($X \to S$의 밑변환이므로), $W$가 어떤 부분집합
+$U'_1 \subset U_1$의 역상임을 얻는다. $W$가 열려 있으므로
+$f$에 관한 가정에 의해 $U'_1 \subset U_1$도 열려 있다.
+
+\medskip\noindent
+$U_2 = \bigcup U_{2, i}$를 아핀 열린 덮개라 하자.
+앞 문단의 결과로 열린 덮개 $U_1 = \bigcup U_{1, i}$를 얻으며,
+$X \times_S U_{1, i} = a^{-1}(X \times_S U_{2, i})$이다.
+그 밑변환이 사상
+$a_i : X \times_S U_{1, i} \to X \times_S U_{2, i}$인
+사상 $U_{1, i} \to U_{2, i}$가 존재함을 보일 수 있다면,
+충실성을 이용하여 이 사상들을 붙여 사상 $U_1 \to U_2$를 얻을 수 있다.
+이렇게 하여 $U_2$가 아핀인 경우로 환원한다. 특히
+$U_2 \to S$는 분리이다(Schemes, Lemma
+\ref{schemes-lemma-compose-after-separated}).
+
+\medskip\noindent
+$U_2 \to S$가 분리라고 가정하자. 그러면 $a$의 그래프
+$\Gamma_a$는 Schemes, Lemma \ref{schemes-lemma-semi-diagonal}에 의해
+$$
+V = (X \times_S U_1) \times_X (X \times_S U_2) = X \times_S U_1 \times_S U_2
+$$
+의 닫힌 부분스킴이다. 한편 이 그래프는 예를 들어 \'etale 사상의
+단면이므로 열려 있다(Proposition
+\ref{proposition-properties-sections}). $a$가 하강 데이터의
+사상이므로 사영
+$V \times_{U_1 \times_S U_2} V \to V$에 의한
+$\Gamma_a \subset V$의 두 역상은 같다. 따라서 증명의 두 번째
+문단과 같이 논증하면, $X$로 밑변환하면 $\Gamma_a$가 되는
+열리고 닫힌 부분스킴 $\Gamma \subset U_1 \times_S U_2$를 얻는다.
+그러면 $\Gamma \to U_1$은 \'etale 사상이고, 이를 $X$로 밑변환하면
+동형사상이다. 이는 $\Gamma \to U_1$이 보편적으로 전단사라는 뜻이므로
+Theorem \ref{theorem-etale-radicial-open}에 의해 동형사상이다.
+따라서 $\Gamma$는 사상 $U_1 \to U_2$의 그래프이고,
+이 사상을 밑변환하면 원하는 대로 $a$가 된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fully-faithful-cases}
+$f : X \to S$를 스킴의 사상이라 하자. 다음 경우에 함자
+(\ref{equation-descent-etale})는 충만충실하다.
+\begin{enumerate}
+\item $f$가 전사이고 보편적으로 닫혀 있다
+(예를 들어 유한, 정수적 또는 고유이다).
+\item $f$가 전사이고 보편적으로 열려 있다
+(예를 들어 국소 유한 표시이고 평탄하거나, 매끄럽거나, 에탈이다).
+\item $f$가 전사이고 준콤팩트이며 평탄이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-fully-faithful}에서 따른다.
+예를 들어 위상공간의 닫힌 전사사상은 몫위상 사상이다
+(Topology, Lemma
+\ref{topology-lemma-closed-morphism-quotient-topology}).
+유한, 정수적, 고유 사상은 보편적으로 닫혀 있다.
+Morphisms, Lemmas \ref{morphisms-lemma-integral-universally-closed}와
+\ref{morphisms-lemma-finite-proper}, 그리고 Definition
+\ref{morphisms-definition-proper}을 참조하라.
+한편 위상공간의 열린 전사사상은 몫위상 사상이다
+(Topology, Lemma
+\ref{topology-lemma-open-morphism-quotient-topology}).
+평탄하고 국소 유한 표시인 사상, 매끄러운 사상, \'etale 사상은
+보편적으로 열려 있다. Morphisms, Lemmas
+\ref{morphisms-lemma-fppf-open},
+\ref{morphisms-lemma-smooth-open}, 그리고
+\ref{morphisms-lemma-etale-open}을 참조하라.
+전사이고 준콤팩트이며 평탄인 경우는 Morphisms, Lemma
+\ref{morphisms-lemma-fpqc-quotient-topology}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-reduce-to-affine}
+$f : X \to S$를 스킴의 사상이라 하자.
+$(V, \varphi)$를 $X/S$에 관한 하강 데이터라 하고
+$V \to X$가 \'etale이라고 하자.
+$S = \bigcup S_i$를 열린 덮개라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item 하강 데이터 $(V, \varphi)$를 $X \times_S S_i/S_i$로
+당긴 것이 유효하다.
+\item $X \times_S (S_i \cap S_j) \to (S_i \cap S_j)$에 대한
+함자 (\ref{equation-descent-etale})가 충만충실하다.
+\item $X \times_S (S_i \cap S_j \cap S_k) \to (S_i \cap S_j \cap S_k)$에
+대한 함자 (\ref{equation-descent-etale})가 충실하다.
+\end{enumerate}
+그러면 $(V, \varphi)$는 유효하다.
+\end{lemma}
+
+\begin{proof}
+(하강 데이터의 당김은 Descent, Definition
+\ref{descent-definition-pullback-functor}에서 정의했음을 상기하라.)
+$X_i = X \times_S S_i$라 두자. $(V_i, \varphi_i)$로
+$(V, \varphi)$를 $X_i/S_i$로 당긴 것을 나타내자.
+가정 (1)에 의해 \'etale 사상 $U_i \to S_i$와
+$can$ 및 $\varphi_i$와 양립하는 동형사상
+$X_i \times_{S_i} U_i \to V_i$를 찾을 수 있다.
+가정 (2)에 의해 동형사상
+$\psi_{ij} : U_i \times_{S_i} (S_i \cap S_j) \to
+U_j \times_{S_j} (S_i \cap S_j)$를 얻는다.
+가정 (3)에 의해 이 동형사상들은 코사이클 조건을 만족하므로
+$(U_i, \psi_{ij})$는 자리스키 덮개 $\{S_i \to S\}$에 대한
+하강 데이터이다. 그러면 Descent, Lemma
+\ref{descent-lemma-Zariski-refinement-coverings-equivalence}
+(이는 본질적으로 Schemes, Section
+\ref{schemes-section-glueing-schemes}을 다시 표현한 것일 뿐이다)에 의해
+스킴의 사상 $U \to S$와 $\psi_{ij}$와 양립하는 동형사상
+$U \times_S S_i \to U_i$가 존재한다.
+동형사상 $U \times_S S_i \to U_i$들은 대응하는 동형사상
+$X_i \times_S U \to V_i$를 결정하며, 이들은 붙어서 표준 하강 데이터와
+$\varphi$와 양립하는 사상 $X \times_S U \to V$가 된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-split-henselian}
+$(A, I)$를 헨젤 쌍이라 하자. $U \to \Spec(A)$를 준콤팩트하고 분리인
+\'etale 사상이라 하고,
+$U \times_{\Spec(A)} \Spec(A/I) \to \Spec(A/I)$가 유한이라고 하자.
+그러면
+$$
+U = U_{fin} \amalg U_{away}
+$$
+이며, 여기서 $U_{fin} \to \Spec(A)$는 유한이고
+$U_{away}$에는 $Z$ 위에 놓이는 점이 없다.
+\end{lemma}
+
+\begin{proof}
+자리스키 주정리에 의해 스킴 $U$는 준아핀이다.
+실제로 아핀인 $T$와 유한 사상 $T \to \Spec(A)$에 대해
+열린 몰입 $U \to T$를 찾을 수 있다. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-quasi-finite-separated-pass-through-finite}를
+참조하라. $Z = \Spec(A/I)$라 쓰고 밑변환을 $U_Z \to T_Z$로 나타내자.
+$U_Z \to Z$가 유한이므로 $U_Z \to T_Z$는 열리면서 닫혀 있다.
+따라서 More on Algebra, Lemma
+\ref{more-algebra-lemma-characterize-henselian-pair}에 의해
+$T'_Z = U_Z$를 만족하는 유일한 분해 $T = T' \amalg T''$을 얻는다.
+$U_{fin} = U \cap T'$ 및 $U_{away} = U \cap T''$라 두자.
+$T'_Z \subset U_Z$이므로 $T'$의 모든 닫힌점은 $U$에 속한다.
+따라서 $T' \subset U$이고, 따라서 $U_{fin} = T'$이며,
+따라서 $U_{fin} \to \Spec(A)$는 유한이다.
+분해의 유일성에 대한 증명은 생략한다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-effective}
+$f : X \to S$를 전사 정수적 사상이라 하자.
+함자 (\ref{equation-descent-etale})는 다음 동치를 유도한다.
+$$
+\begin{matrix}
+\text{schemes quasi-compact,}\\
+\text{separated, \'etale over }S
+\end{matrix}
+\longrightarrow
+\begin{matrix}
+\text{descent data }(V, \varphi)\text{ relative to }X/S\text{ with}\\
+V\text{ quasi-compact, separated, \'etale over }X
+\end{matrix}
+$$
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{lemma-fully-faithful-cases}에 의해 함자
+(\ref{equation-descent-etale})는 충만충실하며,
+이는 임의의 밑변환 $S \to S'$ 뒤에도 마찬가지이다.
+$(V, \varphi)$를 $X/S$에 관한 하강 데이터라 하고
+$V \to X$가 준콤팩트하고 분리이며 \'etale이라고 하자.
+Lemma \ref{lemma-reduce-to-affine}을 사용하면 $S$ 위에서
+자리스키 국소적으로 유효성을 증명하면 충분함을 알 수 있다.
+특히 $S$가 아핀이라고 가정할 수 있고 그렇게 하겠다.
+
+\medskip\noindent
+$S$가 아핀이면 유향집합 $\Lambda$와
+$\Spec(\mathbf{Z})$ 위에서 유한형인 아핀 스킴의 유한 사상들로 이루어진
+역계 $X_\lambda \to S_\lambda$를 찾아
+$(X \to S) = \lim (X_\lambda \to S_\lambda)$가 되게 할 수 있다.
+Algebra, Lemma \ref{algebra-lemma-limit-integral}을 참조하라.
+극한은 극한과 가환하므로
+$X \times_S X = \lim X_\lambda \times_{S_\lambda} X_\lambda$이고
+$X \times_S X \times_S X = \lim
+X_\lambda \times_{S_\lambda} X_\lambda \times_{S_\lambda} X_\lambda$임을 얻는다.
+$V \to X$가 유한 표시 사상임에 유의하라.
+Limits, Lemmas \ref{limits-lemma-descend-finite-presentation}를 사용하면
+어떤 $\lambda$와 $X_\lambda/S_\lambda$에 관한 하강 데이터
+$(V_\lambda, \varphi_\lambda)$를 찾아, 이를 $X/S$로 당긴 것이
+$(V, \varphi)$가 되게 할 수 있다.
+물론 $(V_\lambda, \varphi_\lambda)$가 유효임을 보이면 충분하다.
+구성에 의해 $V_\lambda$는 준콤팩트이다.
+필요하면 $\lambda$를 증가시켜 $V_\lambda \to X_\lambda$가
+분리이고 \'etale이라고 가정할 수 있다. Limits, Lemma
+\ref{limits-lemma-descend-separated-finite-presentation}와
+\ref{limits-lemma-descend-etale}을 참조하라.
+따라서 $f$가 유한 전사이고 $S$가 $\mathbf{Z}$ 위에서
+유한형인 아핀이라고 가정할 수 있다.
+
+\medskip\noindent
+어떤 열린 부분집합 $S' \subset S$에 대해 $(V, \varphi)$를
+$X' = X \times_S S'$로 당긴 것을 $(V', \varphi')$라 하고,
+이것이 유효라고 하자. 아래에서 $S' \not = S$이면 하강 데이터가
+유효인 더 큰 열린 부분집합이 엄밀히 존재함을 증명하겠다.
+$S$가 뇌터이고 따라서 그 밑 위상공간도 뇌터이므로 이것으로 증명이 끝난다.
+닫힌 부분집합 $Z = S \setminus S'$의 한 기약 성분의 일반점을
+$\xi \in S$라 하자. 하강 데이터가 어떤 열린 부분집합
+$\xi \in S'' \subset S$ 위에서 유효이면, 첫 문단의 붙이기 논증에 의해
+$S' \cup S''$ 위에서도 유효이다. 따라서 증명의 나머지에서는
+$S$를 $\xi$의 아핀 열린 근방으로 바꿀 수 있다.
+
+\medskip\noindent
+그러한 교체를 한 번 수행하여 $Z$가 일반점 $Z$를 갖는 기약공간이라고
+가정할 수 있다. $Z$에 축약 유도 닫힌 부분스킴 구조를 주자.
+다시 축소하여
+$X_Z = X \times_S Z = f^{-1}(Z) \to Z$가 평탄이라고 가정할 수 있다.
+Morphisms, Proposition \ref{morphisms-proposition-generic-flatness}를 참조하라.
+$(V_Z, \varphi_Z)$를 하강 데이터를 $X_Z/Z$로 당긴 것이라 하자.
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-morphisms-fppf-descend}에
+의해 이 하강 데이터는 유효이고, 그 밑변환이 하강 데이터와 양립하는
+방식으로 $V_Z$와 동형인 \'etale 사상 $U_Z \to Z$를 얻는다.
+물론 $U_Z \to Z$는 준콤팩트하고 분리이다
+(Descent, Lemmas \ref{descent-lemma-descending-property-quasi-compact}와
+\ref{descent-lemma-descending-property-separated}).
+따라서 한 번 더 축소하여 $U_Z \to Z$가 유한이라고 가정할 수 있다.
+Morphisms, Lemma \ref{morphisms-lemma-generically-finite}를 참조하라.
+
+\medskip\noindent
+$S = \Spec(A)$라 하고, $I \subset A$를 $Z \subset S$에 대응하는
+소아이디얼이라 하자. $(A^h, IA^h)$를 쌍 $(A, I)$의 헨젤화라 하자.
+$S^h = \Spec(A^h)$ 및 $Z^h = V(IA^h) \cong Z$라 쓰자.
+$S^h$로 밑변환한 뒤 유효성을 보이면 충분하다고 주장한다.
+실제로 $\{S^h \to S, S' \to S\}$는 fpqc 덮개이다
+($A \to A^h$는 More on Algebra, Lemma
+\ref{more-algebra-lemma-henselization-flat}에 의해 평탄이다).
+또 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-morphisms-fppf-descend}에
+의해 분리 \'etale 사상에 대해 fpqc 하강을 갖는다.
+즉 $U^h \to S^h$와 $U' \to S'$가 각각 당긴 데이터
+$(V^h, \varphi^h)$와 $(V', \varphi')$에 대응하는 대상이면,
+필요한 동형사상
+$$
+U^h \times_S S^h \to S^h \times_S V^h
+\quad\text{and}\quad
+U^h \times_S S' \to S^h \times_S U'
+$$
+은 첫 문단에서 지적한 충만충실성으로 얻는다.
+이렇게 하여 다음 문단에서 설명하는 상황으로 환원한다.
+
+\medskip\noindent
+여기서 $S = \Spec(A)$, $Z = V(I)$, $S' = S \setminus Z$이고
+$(A, I)$는 헨젤 쌍이다. 하강 데이터 $(V', \varphi')$에 대응하는
+$U' \to S'$와 하강 데이터 $(V_Z, \varphi_Z)$에 대응하는
+유한 \'etale 사상 $U_Z \to Z$가 주어져 있다.
+이제 $A$가 $\mathbf{Z}$ 위에서 유한형이라고 할 수는 없지만,
+나머지 논증에서는 $A$가 뇌터라는 사실조차 사용하지 않는다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-finite-etale-equivalence}에 의해
+$Z$로 제한하면 $U_Z \to Z$와 동형인 유한 \'etale 사상
+$U_{fin} \to S$를 찾을 수 있다.
+$X = \Spec(B)$ 및 $Y = V(IB)$라 쓰자.
+$(B, IB)$는 헨젤 쌍이고(More on Algebra, Lemma
+\ref{more-algebra-lemma-integral-over-henselian-pair}),
+$V \to X$를 $Y$로 제한한 것은 유한이므로
+($U_Z \to Z$의 밑변환이므로) 표준적인 서로소 합 분해
+$$
+V = V_{fin} \amalg V_{away}
+$$
+가 존재한다. 여기서 $V_{fin} \to X$는 유한이고
+$V_{away}$에는 $Y$ 위에 놓이는 점이 없다.
+Lemma \ref{lemma-split-henselian}을 참조하라.
+$X \times_S X$ 위에서 이 분해가 유일함을 사용하면
+$\varphi$가 이를 보존함을 알 수 있고, 하강 데이터의 범주에서
+$$
+(V, \varphi) = (V_{fin}, \varphi_{fin}) \amalg (V_{away}, \varphi_{away})
+$$
+를 얻는다. More on Algebra, Lemma
+\ref{more-algebra-lemma-finite-etale-equivalence}에 의해
+주어진 동형사상 $Y \times_Z U_Z \to V \times_X Y$와
+$Y$ 위에서 양립하는 유일한 동형사상
+$$
+X \times_S U_{fin} \longrightarrow V_{fin}
+$$
+이 존재한다. 유일성에 의해 이 동형사상은 하강 데이터와 양립한다.
+즉 $(X \times_S U_{fin}, can) \cong (V_{fin}, \varphi_{fin})$이다.
+$U'_{fin} = U_{fin} \times_S S'$라 쓰자. 충만충실성에 의해
+열리고 닫힌 부분스킴의 포함인 사상 $U'_{fin} \to U'$을 얻는다.
+그러면 $U = U_{fin} \amalg_{U'_{fin}} U'$라 둔다
+(Schemes, Section \ref{schemes-section-glueing-schemes}에서와 같은
+스킴의 붙이기). 사상 $X \times_S U_{fin} \to V$와
+$X \times_S U' \to V$는 붙어서 사상 $X \times_S U \to V$가 되며,
+이것이 원하는 동형사상이다.
+\end{proof}
+
+
+
+
+
+\section{정규 교차 인자}
+\label{section-normal-crossings}
+
+\noindent
+정의는 다음과 같다.
+
+\begin{definition}
+\label{definition-strict-normal-crossings}
+$X$를 국소 뇌터 스킴이라 하자. $X$ 위의
+{\it 엄밀 정규 교차 인자}란 다음 성질을 갖는 유효 카르티에 인자
+$D \subset X$이다. 모든 $p \in D$에 대해 국소환
+$\mathcal{O}_{X, p}$는 정칙이고, 정칙 매개변수계
+$x_1, \ldots, x_d \in \mathfrak m_p$와 $1 \leq r \leq d$가 존재하여
+$D$가 $\mathcal{O}_{X, p}$에서 $x_1 \ldots x_r$로 정의된다.
+\end{definition}
+
+\noindent
+국소 뇌터 스킴 $X$ 위의 유효 카르티에 인자 $E$ 가운데,
+어떤 엄밀 정규 교차 인자 $D$가 존재하여 집합론적으로
+$E \subset D$인 경우를 자주 만난다.
+이 경우 $D$를 기약 성분들로 분해한 것이
+$D = \bigcup_{i \in I} D_i$이면
+$E = \sum a_i D_i$, $a_i \geq 0$이다.
+$D' = \bigcup_{a_i > 0} D_i$은 엄밀 정규 교차 인자이고
+집합론적으로 $E = D'$임에 유의하라.
+위 상황에서는 $E$가 {\it 엄밀 정규 교차 인자 위에 지지된다}고 말한다.
+
+\begin{lemma}
+\label{lemma-strict-normal-crossings}
+$X$를 국소 뇌터 스킴이라 하자. $D \subset X$를 유효 카르티에 인자라 하자.
+$D_i \subset D$, $i \in I$를 $X$의 축약 닫힌 부분스킴으로 본
+그 기약 성분들이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $D$는 엄밀 정규 교차 인자이다.
+\item $D$는 축약이고, 각 $D_i$는 유효 카르티에 인자이며,
+유한한 $J \subset I$에 대해 스킴론적 교차
+$D_J = \bigcap_{j \in J} D_j$는 정칙 스킴이고,
+그 각 기약 성분은 $X$에서 여차원 $|J|$를 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$D$가 엄밀 정규 교차 인자라고 가정하자. $p \in D$를 택하고
+Definition \ref{definition-strict-normal-crossings}에서처럼
+정칙 매개변수계 $x_1, \ldots, x_d \in \mathfrak m_p$와
+$1 \leq r \leq d$를 택하자.
+$\mathcal{O}_{X, p}/(x_i)$가 정칙 국소환이고
+(특히 정역이고), $p$를 지나는 $D$의 기약 성분
+$D_1, \ldots, D_r$는 $\mathcal{O}_{X, p}$의 높이 1 소아이디얼
+$(x_1), \ldots, (x_r)$와 $1$-대-$1$로 대응함을 알 수 있다.
+Algebra, Lemma \ref{algebra-lemma-regular-ring-CM}에 의해
+교차 $D_{i_1} \cap \ldots \cap D_{i_s}$는 $p$의 어떤 열린 근방에서
+여차원 $s$를 가지며, 이 교차의 $p$에서의 국소환은 정칙이다.
+이는 모든 $p \in D$에 대해 성립하므로 (2)를 얻는다.
+
+\medskip\noindent
+(2)를 가정하자. $p \in D$라 하자. $\mathcal{O}_{X, p}$가
+유한 차원이므로 $p$는 많아야 $\dim(\mathcal{O}_{X, p})$개의
+성분 $D_i$에 속한다. 어떤 $r \geq 1$에 대해
+$p \in D_1, \ldots, D_r$라고 하자.
+$x_1, \ldots, x_r \in \mathfrak m_p$를
+$D_1, \ldots, D_r$의 국소 방정식이라 하자.
+그러면 $x_1$은 $\mathcal{O}_{X, p}$의 영인자가 아니고,
+$\mathcal{O}_{X, p}/(x_1) = \mathcal{O}_{D_1, p}$는 정칙이다.
+따라서 $\mathcal{O}_{X, p}$는 정칙이다. Algebra, Lemma
+\ref{algebra-lemma-regular-mod-x}를 참조하라.
+$D_1 \cap \ldots \cap D_r$는 정칙이고 따라서 정규인 스킴이므로
+그 기약 성분들의 서로소 합이다(Properties, Lemma
+\ref{properties-lemma-normal-Noetherian}).
+$Z \subset D_1 \cap \ldots \cap D_r$를 $p$를 포함하는 기약 성분이라 하자.
+그러면 $\mathcal{O}_{Z, p} = \mathcal{O}_{X, p}/(x_1, \ldots, x_r)$는
+여차원 $r$인 정칙환이다(이미 $\mathcal{O}_{X, p}$가 정칙이고 따라서
+Cohen--Macaulay임을 알므로 여차원에 모호함이 없다. 이 환은 카테너리이다.
+Algebra, Lemmas \ref{algebra-lemma-regular-ring-CM}과
+\ref{algebra-lemma-CM-dim-formula}를 참조하라).
+따라서 $\dim(\mathcal{O}_{Z, p}) = \dim(\mathcal{O}_{X, p}) - r$이다.
+$\mathfrak m_{Z, p}$의 극소 생성계로 가는
+$x_{r + 1}, \ldots, x_n \in \mathfrak m_p$를 더 택하자.
+그러면 나카야마 보조정리에 의해
+$\mathfrak m_p = (x_1, \ldots, x_n)$이고,
+$D$가 정규 교차 인자임을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smooth-pullback-strict-normal-crossings}
+\begin{slogan}
+매끄러운 사상으로 엄밀 정규 교차 인자를 당기면
+엄밀 정규 교차 인자이다.
+\end{slogan}
+$X$를 국소 뇌터 스킴이라 하자. $D \subset X$를
+엄밀 정규 교차 인자라 하자. $f : Y \to X$가 스킴의 매끄러운 사상이면
+당김 $f^*D$는 $Y$ 위의 엄밀 정규 교차 인자이다.
+\end{lemma}
+
+\begin{proof}
+$f$가 평탄이므로 Divisors, Lemma
+\ref{divisors-lemma-pullback-effective-Cartier-defined}에 의해
+당김이 정의되어 있어 진술이 의미를 갖는다.
+$q \in f^*D$가 $p \in D$로 간다고 하자.
+Definition \ref{definition-strict-normal-crossings}에서처럼
+정칙 매개변수계 $x_1, \ldots, x_d \in \mathfrak m_p$와
+$1 \leq r \leq d$를 택하자. $f$가 매끄러우므로 국소환 준동형
+$\mathcal{O}_{X, p} \to \mathcal{O}_{Y, q}$는 평탄이고 올환
+$$
+\mathcal{O}_{Y, q}/\mathfrak m_p \mathcal{O}_{Y, q} =
+\mathcal{O}_{Y_p, q}
+$$
+은 정칙 국소환이다(예를 들어 Algebra, Lemma
+\ref{algebra-lemma-characterize-smooth-over-field} 참조).
+$\mathcal{O}_{Y_p, q}$의 정칙 매개변수계로 가는
+$y_1, \ldots, y_n \in \mathfrak m_q$를 택하자.
+그러면 $x_1, \ldots, x_d, y_1, \ldots, y_n$은 극대 아이디얼
+$\mathfrak m_q$를 생성한다. 따라서 Algebra, Lemma
+\ref{algebra-lemma-dimension-base-fibre-equals-total}에 의해
+$\mathcal{O}_{Y, q}$는 차원 $d + n$인 정칙 국소환이고,
+$x_1, \ldots, x_d, y_1, \ldots, y_n$은 정칙 매개변수계이다.
+$f^*D$는 $\mathcal{O}_{Y, q}$에서 $x_1 \ldots x_r$로 정의되므로
+보조정리가 참임을 얻는다.
+\end{proof}
+
+\noindent
+이제 정규 교차 인자를 정의한다.
+
+\begin{definition}
+\label{definition-normal-crossings}
+$X$를 국소 뇌터 스킴이라 하자. $X$ 위의 {\it 정규 교차 인자}란
+다음 성질을 갖는 유효 카르티에 인자 $D \subset X$이다.
+모든 $p \in D$에 대해 상이 $p$를 포함하는 \'etale 사상
+$U \to X$가 존재하고, $D \times_X U$는 $U$ 위의
+엄밀 정규 교차 인자이다.
+\end{definition}
+
+\noindent
+예를 들어 $D = V(x^2 + y^2)$는 $\Spec(\mathbf{R}[x, y])$ 위의
+정규 교차 인자이지만 엄밀 정규 교차 인자는 아니다.
+실제로 \'etale 덮개 $\Spec(\mathbf{C}[x, y])$로 당기면
+$(x - iy)(x + iy) = 0$을 얻는다.
+
+\begin{lemma}
+\label{lemma-smooth-pullback-normal-crossings}
+\begin{slogan}
+매끄러운 사상으로 정규 교차 인자를 당기면 정규 교차 인자이다.
+\end{slogan}
+$X$를 국소 뇌터 스킴이라 하자. $D \subset X$를 정규 교차 인자라 하자.
+$f : Y \to X$가 스킴의 매끄러운 사상이면 당김 $f^*D$는
+$Y$ 위의 정규 교차 인자이다.
+\end{lemma}
+
+\begin{proof}
+$f$가 평탄이므로 Divisors, Lemma
+\ref{divisors-lemma-pullback-effective-Cartier-defined}에 의해
+당김이 정의되어 있어 진술이 의미를 갖는다.
+$q \in f^*D$가 $p \in D$로 간다고 하자.
+상이 $p$를 포함하고 $D \times_X U \subset U$가 엄밀 정규 교차 인자인
+\'etale 사상 $U \to X$를 Definition
+\ref{definition-normal-crossings}에서처럼 택하자.
+$V = Y \times_X U$라 두자. 그러면 $V \to Y$는 $U \to X$의
+밑변환이므로 \'etale이다(Morphisms, Lemma
+\ref{morphisms-lemma-base-change-etale}).
+Lemma \ref{lemma-smooth-pullback-strict-normal-crossings}에 의해
+당김 $D \times_X V$는 $V$ 위의 엄밀 정규 교차 인자이다.
+따라서 $q \in f^*D$에 대해 Definition
+\ref{definition-normal-crossings}의 조건을 확인했으므로 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-normal-crossings-normalization}
+$X$를 국소 뇌터 스킴이라 하자. $D \subset X$를 닫힌 부분스킴이라 하자.
+다음은 서로 동치이다.
+\begin{enumerate}
+\item $D$는 $X$의 정규 교차 인자이다.
+\item $D$는 축약이고, 정규화 $\nu : D^\nu \to D$는 비분기이며,
+임의의 $n \geq 1$에 대해 스킴
+$$
+Z_n = D^\nu \times_D \ldots \times_D D^\nu
+\setminus \{(p_1, \ldots, p_n) \mid p_i = p_j\text{ for some }i\not = j\}
+$$
+은 정칙이고, 사상 $Z_n \to X$는 국소 완전교차 사상이며
+그 여법선층은 계수 $n$인 국소 자유층이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+먼저 조건 (2)를 어떻게 생각해야 하는지 설명한다.
+비분기 사상의 대각사상은 열려 있다(Morphisms, Lemma
+\ref{morphisms-lemma-diagonal-unramified-morphism}).
+한편 $D^\nu \to D$는 분리이므로 대각사상
+$D^\nu \to D^\nu \times_D D^\nu$는 닫혀 있다.
+따라서 $Z_n$은 $D^\nu \times_D \ldots \times_D D^\nu$의
+열리고 닫힌 부분스킴이다. 한편 $Z_n \to X$는 합성
+$$
+Z_n \to D^\nu \times_D \ldots \times_D D^\nu \to \ldots \to
+D^\nu \times_D D^\nu \to D^\nu \to D \to X
+$$
+이고 각 화살표가 비분기이므로 비분기이다.
+비분기 사상은 형식적으로 비분기이므로(More on Morphisms, Lemma
+\ref{more-morphisms-lemma-unramified-formally-unramified}),
+$Z_n \to X$의 여법선층
+$\mathcal{C}_n = \mathcal{C}_{Z_n/X}$을 갖는다. More on Morphisms,
+Definition \ref{more-morphisms-definition-universal-thickening}을 참조하라.
+
+\medskip\noindent
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-normalization-and-smooth}에 의해
+정규화를 취하는 것은 \'etale 국소화와 가환한다.
+국소환이 정칙인지, 사상이 비분기인지, 사상이 국소 완전교차인지,
+또는 사상이 비분기이고 주어진 계수의 국소 자유 여법선층을 갖는지는
+\'etale 국소적으로 확인할 수 있다(More on Algebra, Lemma
+\ref{more-algebra-lemma-regular-etale-extension},
+Descent, Lemma \ref{descent-lemma-descending-property-unramified},
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-descending-property-lci}, 그리고
+Descent, Lemma \ref{descent-lemma-finite-locally-free-descends} 참조).
+
+\medskip\noindent
+앞 문단의 설명과 정규 교차 인자의 정의에 의해
+엄밀 정규 교차 인자 $D = \bigcup_{i \in I} D_i$가 (2)를 만족함을
+증명하면 충분하다. 이 경우 $D^\nu = \coprod D_i$이고
+$D^\nu \to D$는 비분기이다(비분기라는 것은 정의역에서 국소적이고,
+$D_i \to D$는 비분기인 닫힌 몰입이다).
+마찬가지로 $Z_1 = D^\nu \to X$는 국소 완전교차 사상이다.
+이는 정의역에서 국소적으로 확인할 수 있고, 각 사상
+$D_i \to X$는 카르티에 인자의 포함이므로 정칙 몰입이기 때문이다
+(Lemma \ref{lemma-strict-normal-crossings}와 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-regular-immersion-lci} 참조).
+유효 카르티에 인자의 여법선층은 가역이므로 여법선층에 대한 요건이
+성립함을 얻는다. 마찬가지로 $n \geq 2$일 때 스킴 $Z_n$은,
+$J \subset I$가 크기 $n$인 부분집합들을 달릴 때의 스킴
+$D_J = \bigcap_{j \in J} D_j$들의 서로소 합이다.
+$D_J \to X$는 여차원 $n$인 정칙 몰입이므로
+(엄밀 정규 교차의 정의와 Divisors, Lemma
+\ref{divisors-lemma-Noetherian-scheme-regular-ideal}에 의해
+줄기에서 이를 확인할 수 있다는 사실을 사용한다),
+같은 방식으로 $Z_n \to X$가 필요한 성질들을 가짐을 얻는다.
+일부 세부사항은 생략한다.
+
+\medskip\noindent
+(2)를 가정하자. $p \in D$라 하자. $D^\nu \to D$는 비분기이므로
+유한이다(Morphisms, Lemma \ref{morphisms-lemma-finite-integral}).
+따라서 $D^\nu \to X$는 유한 비분기이다.
+Lemma \ref{lemma-finite-unramified-etale-local}과 \'etale 국소화
+(두 번째 문단의 논의와 정규 교차 인자의 정의에 의해 허용된다)를 사용하여,
+$I$가 유한이고 $D_i \to U$가 닫힌 몰입인
+$D^\nu = \coprod_{i \in I} D_i$인 경우로 환원한다.
+필요하면 $X$를 축소하여 모든 $i \in I$에 대해 $p \in D_i$라고
+가정할 수 있다. $Z_1 =  D^\nu \to X$가 비분기 국소 완전교차 사상이고
+여법선층이 계수 $1$인 국소 자유층이라는 조건에 의해
+$D_i \subset X$는 유효 카르티에 인자이다. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-lci}와 Divisors, Lemma
+\ref{divisors-lemma-regular-immersion-noetherian}을 참조하라.
+증명을 끝내기 위해 $X = \Spec(A)$가 아핀이고,
+$D_i = V(f_i)$이며 $f_i \in A$가 영인자가 아니라고 가정할 수 있다.
+$I = \{1, \ldots, r\}$이면
+$p \in Z_r = V(f_1, \ldots, f_r)$이다.
+위와 같은 참고문헌에 의해 $(f_1, \ldots, f_r)$는
+$A$의 코쥘 정칙 아이디얼이다. 여법선층의 계수가 $r$이므로
+$f_1, \ldots, f_r$는 $\mathcal{O}_{X, p}$에서 $Z_r$을 정의하는
+아이디얼의 극소 생성계임을 알 수 있다.
+이는 $f_1, \ldots, f_r$가 $\mathcal{O}_{X, p}$의 정칙열이고
+$\mathcal{O}_{X, p}/(f_1, \ldots, f_r)$가 정칙임을 뜻한다.
+따라서 Algebra, Lemma \ref{algebra-lemma-regular-mod-x}에 의해
+$f_1, \ldots, f_r$를 $\mathcal{O}_{X, p}$의 정칙 매개변수계로
+확장할 수 있고, 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-normal-crossings}
+$X$를 국소 뇌터 스킴이라 하자. $D \subset X$를 닫힌 부분스킴이라 하자.
+$X$가 J-2이거나 나가타이면 다음은 서로 동치이다.
+\begin{enumerate}
+\item $D$는 $X$의 정규 교차 인자이다.
+\item 모든 $p \in D$에 대해 $D$를 엄밀 헨젤화
+$\mathcal{O}_{X, p}^{sh}$의 스펙트럼으로 당긴 것은
+엄밀 정규 교차 인자이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2)는 곧바로 따르며,
+$X$가 J-2이거나 나가타라는 가정도 필요하지 않다.
+실제로 $p \in D$라 하고, $D$의 당김이 $U$ 위의 엄밀 정규 교차 인자인
+\'etale 근방 $(U, u) \to (X, p)$를 택하자.
+그러면 $\mathcal{O}_{X, p}^{sh} = \mathcal{O}_{U, u}^{sh}$이고,
+$\Spec(\mathcal{O}_{U, u}^{sh})$ 위에서 $D$의 자취는
+정칙 매개변수계의 일부로 정의됨을 알 수 있다.
+이미 $\mathcal{O}_{U, u}$에서 그러하기 때문이다.
+
+\medskip\noindent
+역방향 함의를 증명하기 위해 Lemma
+\ref{lemma-characterize-normal-crossings-normalization}의 판정법을 사용하겠다.
+정규화 $D^\nu \to D$를 취하는 것은 엄밀 헨젤화와 가환함에 유의하라.
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-normalization-and-henselization}을 참조하라.
+$D^\nu \to D$가 유한임을 보일 수 있다면,
+$D^\nu \to D$와 스킴 $Z_n$이 원하는 모든 성질을 만족함을 알 수 있다.
+이 성질들은 모두 국소환 수준에서 확인할 수 있기 때문이다
+(그러나 사상 $D^\nu \to D$의 유한성은 국소환에서 확인할 수 있는
+성질이 아니다). 자세한 확인은 생략한다.
+
+\medskip\noindent
+$X$가 나가타이면 Morphisms, Lemma
+\ref{morphisms-lemma-nagata-normalization}에 의해
+$D^\nu \to D$는 유한이다.
+
+\medskip\noindent
+$X$가 J-2라고 가정하자. 점 $p \in D$를 택하자.
+$D^\nu \to D$가 $p$의 한 근방 위에서 유한임을 보이겠다.
+가정에 의해 $\mathcal{O}_{X, p}^{sh}$의 정칙 매개변수계
+$f_1, \ldots, f_d$와 $1 \leq r \leq d$가 존재하여,
+$\Spec(\mathcal{O}_{X, p}^{sh})$ 위에서 $D$의 자취가
+$f_1 \ldots f_r$로 정의된다. 그러면
+$$
+D^\nu \times_X \Spec(\mathcal{O}_{X, p}^{sh}) = 
+\coprod\nolimits_{i = 1, \ldots, r} V(f_i)
+$$
+이고, $f_i$가 어떤 $f_i \in \mathcal{O}_U(U)$에서 오는
+아핀 \'etale 근방 $(U, u) \to (X, p)$를 택하자.
+$D_i = V(f_i) \subset U$라 두자.
+$\mathcal{O}_{D_i, u}$의 엄밀 헨젤화는 정칙인
+$\mathcal{O}_{X, p}^{sh}/(f_i)$이다.
+따라서 $\mathcal{O}_{D_i, u}$는 정칙이다
+(예를 들어 More on Algebra, Lemma
+\ref{more-algebra-lemma-henselization-regular} 참조).
+$X$가 J-2이므로 정칙 궤적은 $D_i$에서 열려 있다.
+따라서 $U$를 자리스키 열린 부분으로 바꾸어
+각 $i$에 대해 $D_i$가 정칙이라고 가정할 수 있다.
+그 결과
+$$
+\coprod\nolimits_{i = 1, \ldots, r} D_i = D^\nu \times_X U
+\longrightarrow D \times_X U
+$$
+는 정규화 사상이고 분명 유한이다.
+즉 $(X, p)$의 \'etale 근방 $(U, u)$를 찾아,
+$D^\nu \to D$를 이 근방으로 밑변환한 것이 유한이 되게 했다.
+하강에 의해 이는 $D^\nu \to D$가 유한임을 뜻한다
+(Descent, Lemma \ref{descent-lemma-descending-property-finite}).
+이로써 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+\input{chapters}
+
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

@@ -1,0 +1,1904 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{대수 공간의 코호몰로지 심화}
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+% P10-E0147
+이 장에서는 Cohomology of Spaces, Section
+\ref{spaces-cohomology-section-introduction}에서 시작한 논의를 계속한다.
+또한 이 장은 스킴에 대한 \'etale 코호몰로지 장의 대수 공간 유사물로
+볼 수 있다. \'Etale Cohomology, Section
+\ref{etale-cohomology-section-introduction}을 보라.
+
+\medskip\noindent
+실제로 이 장은 주로 스킴에 대해 이미 증명된 결과를 대수 공간의
+언어로 옮기는 것을 목적으로 한다. 그 결과 가운데 일부는
+\cite{Kn}에서도 찾을 수 있다.
+
+
+
+
+\section{관례}
+\label{section-conventions}
+
+\noindent
+모든 스킴은 큰 fppf 사이트 $\Sch_{fppf}$ 안에 들어 있다고 항상 가정한다.
+또한 고려하는 모든 환 $A$는 $\Spec(A)$가 이 큰 사이트의
+한 대상과 동형이라는 성질을 가진다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+이 장과 다음 장들에서는 $S$ 위 대수 공간의 범주에서 취한
+$X$와 자기 자신의 곱을 $X \times X$ 대신 $X \times_S X$로 쓴다.
+
+
+
+
+
+
+\section{스킴의 결과 옮기기}
+\label{section-api}
+
+\noindent
+이 절에서는 스킴에 대한 결과로부터 (표현가능한) 대수 공간과
+대수 공간의 (표현가능한) 사상에 대한 결과가 어떻게 따라오는지를
+간략히 설명한다. 준연접 가군에 대해서는 더 강한 결과가 성립한다
+(스킴 위 준연접 가군의 \'etale 코호몰로지가 Zariski 코호몰로지와
+일치하기 때문이다). 이는 이미 Cohomology of Spaces, Section
+\ref{spaces-cohomology-section-higher-direct-image}에서 논의했다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+이제 $X$가 스킴 $X_0$로 표현된다고 가정하자
+(다소 어색하지만 임시로 쓰는 표기이다. 보통은 단지 “$X$가
+스킴이다”라고 말한다). 이 경우 $X$와 $X_0$의 작은
+\'etale 사이트는 같다:
+$$
+X_\etale = (X_0)_\etale
+$$
+이는 Properties of Spaces, Section
+\ref{spaces-properties-section-etale-site}에서 지적했다.
+더 나아가 $f : X \to Y$가 $S$ 위의 표현가능한 대수 공간들의
+사상이고 $f_0 : X_0 \to Y_0$가 $f$를 표현하는 스킴의 사상이면,
+유도된 작은 \'etale 토포스들의 사상은 일치한다:
+$$
+\xymatrix{
+\Sh(X_\etale) \ar[rr]_{f_{small}} \ar@{=}[d] & &
+\Sh(Y_\etale) \ar@{=}[d] \\
+\Sh((X_0)_\etale) \ar[rr]^{(f_0)_{small}} & &
+\Sh((Y_0)_\etale)
+}
+$$
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-functoriality-etale-site}와
+Topologies, Lemma \ref{topologies-lemma-morphism-big-small-etale}를 보라.
+
+\medskip\noindent
+따라서 스킴의 \'etale 코호몰로지와 이에 대응하는 대수 공간의
+\'etale 코호몰로지 사이에는 아무 차이도 없다.
+스킴의 사상을 따른 고차 직접상에 대해서도 마찬가지이다.
+실제로 $f : X \to Y$가 $S$ 위 대수 공간들의 사상이고
+(스킴으로) 표현가능하다면, $X_\etale$ 위의 층 $\mathcal{F}$의
+고차 직접상 $R^if_*\mathcal{F}$는 $Y$ 위에서 \'etale 국소적으로
+계산할 수 있다
+(Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-higher-direct-images}).
+따라서 계산과 증명을 $Y$와 $X$가 스킴인 경우로 환원할 수 있는
+경우가 많다.
+
+\medskip\noindent
+이 장에서는 위 사실들을 더 언급하지 않고 사용한다.
+다른 위상에 대해서도 같은 내용이 성립한다. 여기서는 코호몰로지에
+관한 진술을 보조정리로 명시한다.
+
+\begin{lemma}
+\label{lemma-compare-cohomology-other-topologies}
+$S$를 스킴이라 하자. $\tau \in \{\etale, fppf, ph\}$라 하자
+(여기에 더 추가할 것).
+% P10-E0148
+포함함자
+$$
+(\Sch/S)_\tau \longrightarrow (\textit{Spaces}/S)_\tau
+$$
+는 특수 쌍대연속 함자이고
+(Sites, Definition \ref{sites-definition-special-cocontinuous-functor}),
+따라서 두 토포스를 동일시한다.
+\end{lemma}
+
+\begin{proof}
+이 함자는 완전충실하고 모든 대수 공간은 스킴들로 이루어진
+\'etale 피복을 가지므로, Sites, Lemma
+\ref{sites-lemma-equivalence}의 조건은 즉시 확인된다.
+\end{proof}
+
+
+
+
+
+
+\section{고유 밑변환}
+\label{section-proper-base-change}
+
+\noindent
+대수 공간에 대한 고유 밑변환 정리는 스킴에 대한 고유 밑변환 정리와
+Chow 보조정리에서 약간의 작업을 거쳐 따라온다.
+
+\begin{lemma}
+\label{lemma-surjective-proper}
+$S$를 스킴이라 하자. $f : Y \to X$를 $S$ 위 대수 공간들의
+전사 고유사상이라 하자. $\mathcal{F}$를 $X_\etale$ 위의 층이라 하자.
+그러면 $\mathcal{F} \to f_*f^{-1}\mathcal{F}$는 단사이고,
+그 상은 두 사상
+$f_*f^{-1}\mathcal{F} \to g_*g^{-1}\mathcal{F}$의 등화자이다.
+여기서 $g$는 구조사상 $g : Y \times_X Y \to X$이다.
+\end{lemma}
+
+\begin{proof}
+$S$ 위 대수 공간들의 임의의 전사사상 $f : Y \to X$에 대하여
+사상 $\mathcal{F} \to f_*f^{-1}\mathcal{F}$는 단사이다.
+실제로 $\overline{x}$가 $X$의 기하점이면, $\overline{x}$ 위에 놓이는
+$Y$의 기하점 $\overline{y}$를 택하고 다음을 고찰한다:
+$$
+\mathcal{F}_{\overline{x}} \to
+(f_*f^{-1}\mathcal{F})_{\overline{x}} \to
+(f^{-1}\mathcal{F})_{\overline{y}} = \mathcal{F}_{\overline{x}}
+$$
+마지막 등식은 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-stalk-pullback}를 보라.
+
+\medskip\noindent
+두 번째 명제는 $X$ 위에서 \'etale 국소적이므로,
+% P10-E0605
+$Y$가 아핀 스킴이라고 가정할 수 있고 그렇게 한다.
+
+\medskip\noindent
+$Z$가 스킴인 전사 고유사상 $Z \to Y$를 택하자.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-weak-chow}를 보라.
+$Z \to X$에 대한 결과는 $Y \to X$에 대한 결과를 함의한다.
+$Z \to X$는 스킴들의 전사 고유사상이고 따라서 ph 피복이므로
+(Topologies, Lemma \ref{topologies-lemma-surjective-proper-ph}),
+$Z \to X$에 대한 결과는 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-describe-pullback-pi-ph}에서 따라온다
+(실제로 어떤 의미에서는 이 보조정리와 동치이다).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-h0-proper-over-henselian-pair}
+$(A, I)$를 헨젤 쌍이라 하자. $X$를 $A$ 위의 대수 공간이라 하고
+구조사상 $f : X \to \Spec(A)$가 고유라고 하자.
+$i : X_0 \to X$를 $X \times_{\Spec(A)} \Spec(A/I)$의 포함이라 하자.
+$X_\etale$ 위의 임의의 층 $\mathcal{F}$에 대하여
+$\Gamma(X, \mathcal{F}) = \Gamma(X_0, i^{-1}\mathcal{F})$이다.
+\end{lemma}
+
+\begin{proof}
+$Y$가 스킴인 전사 고유사상 $Y \to X$를 택하자.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-weak-chow}를 보라.
+다음 도식을 고찰하자:
+$$
+\xymatrix{
+\Gamma(X_0, \mathcal{F}_0) \ar[r] &
+\Gamma(Y_0, \mathcal{G}_0) \ar@<1ex>[r] \ar@<-1ex>[r] &
+\Gamma((Y \times_X Y)_0, \mathcal{H}_0) \\
+\Gamma(X, \mathcal{F}) \ar[r] \ar[u] &
+\Gamma(Y, \mathcal{G}) \ar@<1ex>[r] \ar@<-1ex>[r] \ar[u] &
+\Gamma(Y \times_X Y, \mathcal{H}) \ar[u]
+}
+$$
+여기서 $\mathcal{G}$와 $\mathcal{H}$는 각각 $\mathcal{F}$의
+$Y$와 $Y \times_X Y$로의 당김이고,
+% P10-E0149
+첨자 $0$은 $\Spec(A/I)$로의 밑변환을 나타낸다.
+스킴의 경우
+(\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-h0-proper-over-henselian-pair})에 의해
+가운데와 오른쪽 수직 화살표는 전단사이다.
+Lemma \ref{lemma-surjective-proper}에 의해 왼쪽 화살표도 전단사이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-h0-proper-over-henselian-local}
+$A$를 헨젤 국소환이라 하자. $X$를 $A$ 위의 대수 공간이라 하고
+$f : X \to \Spec(A)$가 고유사상이라고 하자.
+$X_0 \subset X$를 닫힌점 위의 $f$의 섬유라 하자.
+$X_\etale$ 위의 임의의 층 $\mathcal{F}$에 대하여
+$\Gamma(X, \mathcal{F}) = \Gamma(X_0, \mathcal{F}|_{X_0})$이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-h0-proper-over-henselian-pair}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-base-change-f-star}
+$S$를 스킴이라 하자. $f : X \to Y$와 $g : Y' \to Y$를
+$S$ 위 대수 공간들의 사상이라 하자.
+% P10-E0150
+$f$가 고유라고 가정하자.
+$X' = Y' \times_Y X$라 놓고 사영들을
+$f' : X' \to Y'$와 $g' : X' \to X$라 하자.
+$\mathcal{F}$를 $X_\etale$ 위의 임의의 층이라 하자. 그러면
+$g^{-1}f_*\mathcal{F} = f'_*(g')^{-1}\mathcal{F}$이다.
+\end{lemma}
+
+\begin{proof}
+문제는 $Y'$ 위에서 \'etale 국소적이다. 스킴 $V$와 전사
+\'etale 사상 $V \to Y$를 택하자. 스킴 $V'$와 전사
+\'etale 사상 $V' \to V \times_Y Y'$를 택하자.
+그러면 $Y'$를 $V'$로, $Y$를 $V$로 바꿀 수 있다.
+따라서 $Y$와 $Y'$가 스킴이라고 가정할 수 있다.
+이제 $Y$와 $Y'$ 위에서 Zariski 국소적으로 작업할 수 있으므로
+$Y$와 $Y'$가 아핀 스킴이라고 가정할 수 있다.
+
+\medskip\noindent
+$Y$와 $Y'$가 아핀 스킴이라고 가정하자.
+$X_1$이 스킴인 전사 고유사상 $h_1 : X_1 \to X$를 택하자.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-weak-chow}를 보라.
+$X_2 = X_1 \times_X X_1$라 놓고 구조사상을
+$h_2 : X_2 \to X$라 쓰자. 이것은 스킴임을 유의하라.
+스킴의 경우
+(\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change-f-star})에 의해
+다음 Cartesian 도식들과
+$$
+\vcenter{
+\xymatrix{
+X'_1 \ar[r] \ar[d] & X_1 \ar[d] \\
+Y' \ar[r] & Y
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+X'_2 \ar[r] \ar[d] & X_2 \ar[d] \\
+Y' \ar[r] & Y
+}
+}
+$$
+층들 $\mathcal{F}_i = (X_i \to X)^{-1}\mathcal{F}$에 대해
+보조정리가 성립함을 안다.
+Lemma \ref{lemma-surjective-proper}에 의해 완전열
+$0 \to \mathcal{F} \to h_{1, *}\mathcal{F}_1 \to h_{2, *}\mathcal{F}_2$를
+얻고, $X'_2 = X'_1 \times_{X'} X'_1$이므로
+$(g')^{-1}\mathcal{F}$에 대해서도 마찬가지이다.
+따라서 보조정리가 성립한다(일부 세부사항은 생략한다).
+% P10-E0151
+\end{proof}
+
+\noindent
+$S$를 스킴이라 하자.
+$f : Y \to X$를 $S$ 위 대수 공간들의 사상이라 하자.
+% P10-E0152
+$\overline{x} : \Spec(k) \to S$를 기하점이라 하자.
+$\overline{x}$에서 $f$의 섬유는 $\Spec(k)$ 위의 대수 공간
+$Y_{\overline{x}} = \Spec(k) \times_{\overline{x}, X} Y$이다.
+$\mathcal{F}$가 $Y_\etale$ 위의 층이면,
+$\mathcal{F}_{\overline{x}} = p^{-1}\mathcal{F}$로
+$\mathcal{F}$의 $(Y_{\overline{x}})_\etale$로의 당김을 나타낸다.
+여기서 $p : Y_{\overline{x}} \to Y$는 사영이다.
+이하에서는 집합
+$\Gamma(Y_{\overline{x}}, \mathcal{F}_{\overline{x}})$를 고찰한다.
+
+\begin{lemma}
+\label{lemma-proper-pushforward-stalk}
+$S$를 스킴이라 하자.
+$f : Y \to X$를 $S$ 위 대수 공간들의 고유사상이라 하자.
+$\overline{x} \to X$를 기하점이라 하자.
+$Y_\etale$ 위의 임의의 층 $\mathcal{F}$에 대하여 표준사상
+$$
+(f_*\mathcal{F})_{\overline{x}} \longrightarrow
+\Gamma(Y_{\overline{x}}, \mathcal{F}_{\overline{x}})
+$$
+은 전단사이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-proper-base-change-f-star}의 특수한 경우이다.
+\end{proof}
+
+\begin{theorem}
+\label{theorem-proper-base-change}
+$S$를 스킴이라 하자. 다음이 $S$ 위 대수 공간들의 Cartesian
+정사각형이라 하자:
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+$f$가 고유라고 가정하자.
+$\mathcal{F}$를 $X_\etale$ 위의 꼬임 아벨 층이라 하자.
+그러면 밑변환 사상
+$$
+g^{-1}Rf_*\mathcal{F} \longrightarrow Rf'_*(g')^{-1}\mathcal{F}
+$$
+은 동형이다.
+\end{theorem}
+
+\begin{proof}
+이 증명은 스킴에 대한 고유 밑변환 정리의 증명에 주어진
+논증 일부를 되풀이한다. 자세한 내용은
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-proper-base-change}을 보라.
+
+\medskip\noindent
+명제는 $Y'$와 $Y$ 위에서 \'etale 국소적이므로, $Y$와 $Y'$가 둘 다
+아핀 스킴이라고 가정할 수 있다. 특히 이는 $f$가 표현가능한 경우에
+정리를 증명한다는 점을 유의하라(아래에서 이를 사용한다).
+
+\medskip\noindent
+각 $n \geq 1$에 대하여 $\mathcal{F}[n]$을 $n$에 의해 소멸하는
+$\mathcal{F}$의 단면들로 이루어진 부분층이라 하자. 그러면
+$\mathcal{F} = \colim \mathcal{F}[n]$이다.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-colimit-cohomology}에 의해 함자
+$g^{-1}R^pf_*$와 $R^pf'_*(g')^{-1}$는 여과쌍극한과 가환한다.
+따라서 $\mathcal{F}$가 $n$에 의해 소멸하는 경우에 정리를
+증명하는 것으로 충분하다.
+
+\medskip\noindent
+$\mathcal{F} \to \mathcal{I}^\bullet$을
+$\mathbf{Z}/n\mathbf{Z}$-가군의 단사층들에 의한 해소라 하자.
+Lemma \ref{lemma-proper-base-change-f-star}에 의해
+$g^{-1}f_*\mathcal{I}^\bullet = f'_*(g')^{-1}\mathcal{I}^\bullet$임을
+유의하라. Leray 비순환성 보조정리
+(Derived Categories, Lemma \ref{derived-lemma-leray-acyclicity})를
+적용하면, $p > 0$ 및 $m \in \mathbf{Z}$에 대하여
+$R^pf'_*(g')^{-1}\mathcal{I}^m = 0$임을 증명하는 것으로 충분하다.
+
+\medskip\noindent
+$Z$가 스킴인 전사 고유사상 $h : Z \to X$를 택하자.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-weak-chow}를 보라.
+$\mathcal{J}$가 $Z_\etale$ 위의
+$\mathbf{Z}/n\mathbf{Z}$-가군의 단사층인 단사사상
+$h^{-1}\mathcal{I}^m \to \mathcal{J}$를 택하자.
+$h$가 전사이므로 사상 $\mathcal{I}^m \to h_*\mathcal{J}$는
+단사이다(Lemma \ref{lemma-surjective-proper}를 보라).
+$\mathcal{I}^m$이 단사이므로 $\mathcal{I}^m$은
+$h_*\mathcal{J}$의 직합인자이다. 따라서
+$h_*\mathcal{J}$에 대해 원하는 소멸을 증명하는 것으로 충분하다.
+
+\medskip\noindent
+% P10-E0153
+$h'$를 $g$에 의한 밑변환이라 하고
+$g'' : Z' \to Z$를 사영이라 하자. 다음 스펙트럴 수열이 있다:
+$$
+E_2^{p, q} = R^pf'_* R^qh'_* (g'')^{-1}\mathcal{J}
+$$
+이는 $R^{p + q}(f' \circ h')_*(g'')^{-1}\mathcal{J}$로 수렴한다.
+$h$와 $f \circ h$는 (스킴으로) 표현가능하므로, 우리가 원하는
+결과가 이들에 대해 성립함을 안다. 따라서 이 스펙트럴 수열에서
+$q > 0$이면 $E_2^{p, q} = 0$이고, $p + q > 0$이면
+$R^{p + q}(f' \circ h')_*(g'')^{-1}\mathcal{J} = 0$이다.
+그러므로 $p > 0$이면 $E_2^{p, 0} = 0$이다. 이제
+$$
+E_2^{p, 0} = R^pf'_* h'_* (g'')^{-1}\mathcal{J} =
+R^pf'_* (g')^{-1}h_*\mathcal{J}
+$$
+이다. 여기서 Lemma \ref{lemma-proper-base-change-f-star}를 사용했다.
+이로써 증명이 끝난다.
+\end{proof}
+
+
+
+\begin{lemma}
+\label{lemma-proper-base-change}
+$S$를 스킴이라 하자. 다음이 $S$ 위 대수 공간들의 Cartesian
+정사각형이라 하자:
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+$f$가 고유라고 가정하자.
+$E \in D^+(X_\etale)$의 코호몰로지 층들이 꼬임이라고 하자.
+그러면 밑변환 사상 $g^{-1}Rf_*E \to Rf'_*(g')^{-1}E$는 동형이다.
+\end{lemma}
+
+\begin{proof}
+이는 스펙트럴 수열
+$$
+E_2^{p, q} = R^pf_*H^q(E)
+\quad\text{and}\quad
+{E'}_2^{p, q} = R^pf'_*(g')^{-1}H^q(E)
+$$
+을 사용하여 고유 밑변환 정리
+(Theorem \ref{theorem-proper-base-change})에서 간단히 따라온다.
+이 수열들은 각각 $R^nf_*E$와 $R^nf'_*(g')^{-1}E$로 수렴한다.
+스펙트럴 수열들은 Derived Categories, Lemma
+\ref{derived-lemma-two-ss-complex-functor}에서 구성한다.
+일부 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-base-change-stalk}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 대수 공간들의 고유사상이라 하자.
+$\overline{y} \to Y$를 기하점이라 하자.
+\begin{enumerate}
+\item $X_\etale$ 위의 꼬임 아벨 층 $\mathcal{F}$에 대하여
+$(R^nf_*\mathcal{F})_{\overline{y}} =
+H^n_\etale(X_{\overline{y}}, \mathcal{F}_{\overline{y}})$이다.
+\item 코호몰로지 층들이 꼬임인 $E \in D^+(X_\etale)$에 대하여
+$(R^nf_*E)_{\overline{y}} = H^n_\etale(X_{\overline{y}},
+E_{\overline{y}})$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+명제에서 $\mathcal{F}_{\overline{y}}$는 $\mathcal{F}$의
+$X_{\overline{y}} = \overline{y} \times_Y X$로의 당김을 뜻한다.
+$\overline{y} \to Y$에 의한 당김은 $\mathcal{F}$의 줄기를
+주므로, 첫 번째 명제는 Theorem
+\ref{theorem-proper-base-change}의 특수한 경우이다.
+두 번째 명제는 Lemma \ref{lemma-proper-base-change}의
+특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-separably-closed}
+$k'/k$를 분리적으로 닫힌 체들의 확대라 하자.
+$X$를 $k$ 위의 고유 대수 공간이라 하자.
+$\mathcal{F}$를 $X$ 위의 꼬임 아벨 층이라 하자.
+그러면 $q \geq 0$에 대하여 사상
+$H^q_\etale(X, \mathcal{F}) \to
+H^q_\etale(X_{k'}, \mathcal{F}|_{X_{k'}})$는 동형이다.
+\end{lemma}
+
+\begin{proof}
+이는 Theorem \ref{theorem-proper-base-change}의 특수한 경우이다.
+\end{proof}
+
+
+\section{큰 토포스와 작은 토포스의 비교}
+\label{section-compare}
+
+\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-at-the-bottom-etale}에서 비교사상
+$\pi_X : (\textit{Spaces}/X)_\etale \to X_{spaces, \etale}$와
+$i_X : \Sh(X_\etale) \to \Sh((\textit{Spaces}/X)_\etale)$를 도입했다.
+토포스의 사상으로서 $\pi_X \circ i_X = \text{id}$이고
+$\pi_{X, *} = i_X^{-1}$이다.
+더 일반적으로, $f : Y \to X$가 $(\textit{Spaces}/X)_\etale$의 대상이면
+사상
+$i_f : \Sh(Y_\etale) \to \Sh((\textit{Spaces}/X)_\etale)$가 존재하여
+$f_{small} = \pi_X \circ i_f$가 된다. Topologies on Spaces, Lemmas
+\ref{spaces-topologies-lemma-put-in-T-etale}와
+\ref{spaces-topologies-lemma-morphism-big-small-etale}를 보라.
+Topologies on Spaces, Remark
+\ref{spaces-topologies-remark-change-topologies-ringed}에서 이들을 환 달린
+사이트의 사상
+$$
+\pi_X :
+((\textit{Spaces}/X)_\etale, \mathcal{O})
+\to
+(X_{spaces, \etale}, \mathcal{O}_X)
+$$
+과 환 달린 토포스의 사상들
+$$
+i_X :
+(\Sh(X_\etale), \mathcal{O}_X)
+\to
+(\Sh((\textit{Spaces}/X)_\etale), \mathcal{O})
+$$
+및
+$$
+i_f :
+(\Sh(Y_\etale), \mathcal{O}_Y)
+\to
+(\Sh((\textit{Spaces}/X)_\etale, \mathcal{O}))
+$$
+로 확장했다. 제한 $i_X^{-1} = \pi_{X, *}$가
+(Topologies, Definition
+\ref{topologies-definition-restriction-small-etale}을 보라)
+$\mathcal{O}$를 $\mathcal{O}_X$로 보냄을 유의하라.
+마찬가지로 $i_f^{-1}$는 $\mathcal{O}$를 $\mathcal{O}_Y$로 보낸다.
+Topologies on Spaces, Remark
+\ref{spaces-topologies-remark-change-topologies-ringed}를 보라.
+따라서 $(\textit{Spaces}/X)_\etale$ 위의 임의의 $\mathcal{O}$-가군
+$\mathcal{F}$에 대하여 $i_X^*\mathcal{F} = i_X^{-1}\mathcal{F}$이고
+$i_f^*\mathcal{F} = i_f^{-1}\mathcal{F}$이다. 특히 $i_X^*$와 $i_f^*$는
+완전함자이다. 함자 $i_X^*$는 흔히
+$\mathcal{F} \mapsto \mathcal{F}|_{X_\etale}$로 나타낸다(이는
+Topologies on Spaces, Definition
+\ref{spaces-topologies-definition-restriction-small-etale}의 표기와
+충돌하지 않는다).
+
+\begin{lemma}
+\label{lemma-describe-pullback}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+$\mathcal{F}$를 $X_\etale$ 위의 층이라 하자. 그러면
+$\pi_X^{-1}\mathcal{F}$는 다음 규칙으로 주어진다:
+$$
+(\pi_X^{-1}\mathcal{F})(Y) = \Gamma(Y_\etale, f_{small}^{-1}\mathcal{F})
+$$
+여기서 $f : Y \to X$는 $(\textit{Spaces}/X)_\etale$의 대상이다.
+% P10-E0154
+또한 $\pi_Y^{-1}\mathcal{F}$는 매끄러운, syntomic, fppf, fpqc 및 ph
+피복에 관하여 층 조건을 만족한다.
+\end{lemma}
+
+\begin{proof}
+당김은 추이적이고 $f_{small} = \pi_X \circ i_f$이므로(위를 보라),
+$i_f^{-1} \pi_X^{-1}\mathcal{F} = f_{small}^{-1}\mathcal{F}$임을 안다.
+이는 $\pi_X^{-1}$가 보조정리에 주어진 기술을 가짐을 보인다.
+
+\medskip\noindent
+$\pi_X^{-1}\mathcal{F}$가 ph 위상에 대한 층임을 증명하려면,
+Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-characterize-sheaf}에 의해
+$X$ 위 대수 공간들의 전사 고유사상 $V \to U$에 대하여
+$(\pi_X^{-1}\mathcal{F})(U)$가 두 사상
+$(\pi_X^{-1}\mathcal{F})(V) \to (\pi_X^{-1}\mathcal{F})(V \times_U V)$의
+등화자임을 보이면 충분하다. 이는 Lemma
+\ref{lemma-surjective-proper}에서 이미 보았다.
+
+\medskip\noindent
+매끄러운, syntomic 및 fppf 피복의 경우는 Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-zariski-etale-smooth-syntomic-fppf-ph}에 의해
+ph 피복의 경우에서 따라온다.
+
+\medskip\noindent
+$\mathcal{U} = \{U_i \to U\}_{i \in I}$를 $X$ 위 대수 공간들의 fpqc
+피복이라 하자. $s_i \in (\pi_X^{-1}\mathcal{F})(U_i)$를
+$U_i \times_U U_j$ 위에서 서로 일치하는 단면들이라 하자.
+$U_i$ 위에서 $s_i$로 제한되는 유일한
+$s \in (\pi_X^{-1}\mathcal{F})(U)$가 존재함을 증명해야 한다.
+경우 I: $U$와 $U_i$가 스킴인 경우이다. 이 경우는
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-describe-pullback}에서 따라온다.
+경우 II: $U$가 스킴인 경우이다. 여기서 $T_i$가 스킴인 전사
+\'etale 사상 $T_i \to U_i$를 택한다. 그러면
+$\mathcal{T} = \{T_i \to U\}$는 스킴들로 이루어진 fpqc 피복이고,
+경우 I에 의해 $\mathcal{T}$에 대해 결과가 성립한다.
+이로부터 $\mathcal{U}$에 대한 결과가 따라온다는 확인은 생략한다.
+경우 III: 일반적인 경우이다. $W$가 스킴인 전사 \'etale 사상
+$W \to U$를 택한다. 그러면
+$\mathcal{W} = \{U_i \times_U W \to W\}$는 스킴 $W$의
+fpqc 피복(대수 공간들에 의한)이다.
+% P10-E0155
+경우 II에 의해 $\mathcal{W}$에 대해 결과가 성립한다.
+이로부터 $\mathcal{U}$에 대한 결과가 따라온다는 확인은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-injectives}
+$S$를 스킴이라 하자.
+$Y \to X$를 $(\textit{Spaces}/S)_\etale$의 사상이라 하자.
+\begin{enumerate}
+\item $\mathcal{I}$가
+$\textit{Ab}((\textit{Spaces}/X)_\etale)$에서 단사이면,
+\begin{enumerate}
+\item $i_f^{-1}\mathcal{I}$는 $\textit{Ab}(Y_\etale)$에서 단사이고,
+\item $\mathcal{I}|_{X_\etale}$는 $\textit{Ab}(X_\etale)$에서 단사이다.
+\end{enumerate}
+\item $\mathcal{I}^\bullet$이
+$\textit{Ab}((\textit{Spaces}/X)_\etale)$의 K-단사 복합체이면,
+\begin{enumerate}
+\item $i_f^{-1}\mathcal{I}^\bullet$은
+$\textit{Ab}(Y_\etale)$의 K-단사 복합체이고,
+\item $\mathcal{I}^\bullet|_{X_\etale}$은
+$\textit{Ab}(X_\etale)$의 K-단사 복합체이다.
+\end{enumerate}
+\end{enumerate}
+가군에 대한 대응하는 명제들은 성립하지 않는다.
+\end{lemma}
+
+\begin{proof}
+(1)(b)와 (2)(b)는 제한함자 $\pi_{X, *} = i_X^{-1}$가 완전함자
+$\pi_X^{-1}$의 오른쪽 수반이라는 사실에서 형식적으로 따라온다.
+Homology, Lemma \ref{homology-lemma-adjoint-preserve-injectives}와
+Derived Categories, Lemma
+\ref{derived-lemma-adjoint-preserve-K-injectives}를 보라.
+
+\medskip\noindent
+(1)(a)와 (2)(a)는 두 방식으로 볼 수 있다. 첫 번째 증명에서는
+$i_f^{-1}$가 완전함자 $i_{f, !}$의 오른쪽 수반임을 사용할 수 있다.
+이 함자는 집합의 층에 대해서는 Topologies, Lemma
+\ref{topologies-lemma-put-in-T-etale}에서, 아벨 층에 대해서는
+Modules on Sites, Lemma
+\ref{sites-modules-lemma-g-shriek-adjoint}에서 구성된다.
+Modules on Sites, Lemma
+\ref{sites-modules-lemma-exactness-lower-shriek}에서 이 함자가 완전함을
+보였다. 두 번째 증명에서는 Topologies, Lemma
+\ref{topologies-lemma-morphism-big-small-etale}에서 보인
+$i_f = i_Y \circ f_{big}$을 사용할 수 있다.
+$f_{big}$은 국소화이므로 이에 의한 당김은 단사대상과 K-단사대상을
+보존한다. Cohomology on Sites, Lemmas
+\ref{sites-cohomology-lemma-cohomology-of-open}와
+\ref{sites-cohomology-lemma-restrict-K-injective-to-open}을 보라.
+그런 다음 이미 증명한 (1)(b)와 (2)(b)를 함자 $i_Y^{-1}$에 적용하면
+결론을 얻는다.
+
+\medskip\noindent
+가군의 경우에 대한 반례는 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-compare-injectives}를 보라.
+\end{proof}
+
+\noindent
+$S$를 스킴이라 하자.
+$f : Y \to X$를 $S$ 위 대수 공간들의 사상이라 하자.
+Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-morphism-big-small-etale} (3)의 가환도식은
+환 달린 사이트들의 가환도식
+$$
+\xymatrix{
+(Y_{spaces, \etale}, \mathcal{O}_Y) \ar[d]_{f_{spaces, \etale}} &
+((\textit{Spaces}/Y)_\etale, \mathcal{O}) \ar[d]^{f_{big}} \ar[l]^{\pi_Y} \\
+(X_{spaces, \etale}, \mathcal{O}_X) &
+((\textit{Spaces}/X)_\etale, \mathcal{O}) \ar[l]_{\pi_X}
+}
+$$
+을 준다. 이는 $f_{small}^\sharp$, $f_{big}^\sharp$,
+$\pi_X^\sharp$, $\pi_Y^\sharp$의 정의를 풀어 쓰면 쉽게 알 수 있다.
+특히 이는 $(\textit{Spaces}/Y)_\etale$ 위의 임의의 층
+$\mathcal{F}$에 대하여
+\begin{equation}
+\label{equation-compare-big-small}
+(f_{big, *}\mathcal{F})|_{X_\etale} =
+f_{small, *}(\mathcal{F}|_{Y_\etale})
+\end{equation}
+임을 뜻한다. 또한 $\mathcal{F}$가 $\mathcal{O}$-가군의 층이면
+(\ref{equation-compare-big-small})은 $X_\etale$ 위
+$\mathcal{O}_X$-가군들의 동형이다.
+
+\begin{lemma}
+\label{lemma-compare-higher-direct-image}
+$S$를 스킴이라 하자.
+$f : Y \to X$를 $S$ 위 대수 공간들의 사상이라 하자.
+\begin{enumerate}
+\item $D((\textit{Spaces}/Y)_\etale)$의 $K$에 대하여\\
+$
+(Rf_{big, *}K)|_{X_\etale} = Rf_{small, *}(K|_{Y_\etale})
+$
+가 $D(X_\etale)$에서 성립한다.
+\item $D((\textit{Spaces}/Y)_\etale, \mathcal{O})$의 $K$에 대하여\\
+$
+(Rf_{big, *}K)|_{X_\etale} = Rf_{small, *}(K|_{Y_\etale})
+$
+가 $D(\textit{Mod}(X_\etale, \mathcal{O}_X))$에서 성립한다.
+\end{enumerate}
+더 일반적으로, $g : X' \to X$를
+$(\textit{Spaces}/X)_\etale$의 대상이라 하자. 섬유곱
+$$
+\xymatrix{
+Y' \ar[r]_{g'} \ar[d]_{f'} & Y \ar[d]^f \\
+X' \ar[r]^g & X
+}
+$$
+을 고찰하자. 그러면
+\begin{enumerate}
+\item[(3)] $D((\textit{Spaces}/Y)_\etale)$의 $K$에 대하여
+$i_g^{-1}(Rf_{big, *}K) = Rf'_{small, *}(i_{g'}^{-1}K)$가
+$D(X'_\etale)$에서 성립한다.
+\item[(4)] $D((\textit{Spaces}/Y)_\etale, \mathcal{O})$의 $K$에 대하여\\
+$i_g^*(Rf_{big, *}K) = Rf'_{small, *}(i_{g'}^*K)$가
+$D(\textit{Mod}(X'_\etale, \mathcal{O}_{X'}))$에서 성립한다.
+\item[(5)] $D((\textit{Spaces}/Y)_\etale)$의 $K$에 대하여\\
+$g_{big}^{-1}(Rf_{big, *}K) = Rf'_{big, *}((g'_{big})^{-1}K)$가
+$D((\textit{Spaces}/X')_\etale)$에서 성립한다.
+\item[(6)] $D((\textit{Spaces}/Y)_\etale, \mathcal{O})$의 $K$에 대하여\\
+$g_{big}^*(Rf_{big, *}K) = Rf'_{big, *}((g'_{big})^*K)$가
+$D(\textit{Mod}(X'_\etale, \mathcal{O}_{X'}))$에서 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 $K$를 나타내는 아벨 층들의 K-단사 복합체를 택한 뒤
+Lemma \ref{lemma-compare-injectives}와
+(\ref{equation-compare-big-small})을 적용하면 따라온다.
+
+\medskip\noindent
+(3)은 $K$를 나타내는 아벨 층들의 K-단사 복합체를 택한 뒤
+Lemma \ref{lemma-compare-injectives}와 Topologies, Lemma
+\ref{topologies-lemma-morphism-big-small-cartesian-diagram-etale}을
+적용하면 따라온다.
+
+\medskip\noindent
+(5)는 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-localize-cartesian-square}이다.
+
+\medskip\noindent
+(6)은 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-localize-cartesian-square-modules}이다.
+
+\medskip\noindent
+(2)는 다음과 같이 증명할 수 있다. 위에서 환 달린 사이트의 사상으로서
+$\pi_X \circ f_{big} = f_{small} \circ \pi_Y$임을 보았다. 따라서
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-derived-pushforward-composition}에 의해
+$R\pi_{X, *} \circ Rf_{big, *} = Rf_{small, *} \circ R\pi_{Y, *}$를
+얻는다. 제한함자 $\pi_{X, *}$와 $\pi_{Y, *}$는 완전하므로 결론을 얻는다.
+
+\medskip\noindent
+(4)는 (6)과 $f' : Y' \to X'$에 적용한 (2)에서 따라온다.
+\end{proof}
+
+\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+$\mathcal{H}$를 $(\textit{Spaces}/X)_\etale$ 위의 아벨 층이라 하자.
+$H^n_\etale(U, \mathcal{H})$는 $(\textit{Spaces}/X)_\etale$의 대상
+$U$ 위에서의 $\mathcal{H}$의 코호몰로지를 나타냄을 상기하자.
+
+\begin{lemma}
+\label{lemma-compare-cohomology}
+$S$를 스킴이라 하자.
+$f : Y \to X$를 $S$ 위 대수 공간들의 사상이라 하자. 그러면
+\begin{enumerate}
+\item $D(X_\etale)$의 $K$에 대하여
+$H^n_\etale(X, \pi_X^{-1}K) = H^n(X_\etale, K)$이다.
+\item $D(X_\etale, \mathcal{O}_X)$의 $K$에 대하여\\
+$H^n_\etale(X, L\pi_X^*K) = H^n(X_\etale, K)$이다.
+\item $D(X_\etale)$의 $K$에 대하여
+$H^n_\etale(Y, \pi_X^{-1}K) = H^n(Y_\etale, f_{small}^{-1}K)$이다.
+\item $D(X_\etale, \mathcal{O}_X)$의 $K$에 대하여\\
+$H^n_\etale(Y, L\pi_X^*K) = H^n(Y_\etale, Lf_{small}^*K)$이다.
+\item $D((\textit{Spaces}/X)_\etale)$의 $M$에 대하여
+$H^n_\etale(Y, M) = H^n(Y_\etale, i_f^{-1}M)$이다.
+\item $D((\textit{Spaces}/X)_\etale, \mathcal{O})$의 $M$에 대하여\\
+$H^n_\etale(Y, M) = H^n(Y_\etale, i_f^*M)$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(5)를 증명하려면 $M$을 아벨 층들의 K-단사 복합체로 나타내고
+Lemma \ref{lemma-compare-injectives}를 적용한 뒤 정의를 풀어 쓴다.
+(3)은 $i_f^{-1}\pi_X^{-1} = f_{small}^{-1}$이므로 여기서 따라온다.
+(1)은 (3)의 특수한 경우이다.
+
+\medskip\noindent
+(6)은 매우 일반적인 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-pullback-same-cohomology}에서 따라온다.
+그런 다음 $Lf_{small}^* = i_f^* \circ L\pi_X^*$이므로 (4)가 따라온다.
+(2)는 (4)의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cohomological-descent-etale}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+$K \in D(X_\etale)$에 대하여 사상
+$$
+K \longrightarrow R\pi_{X, *}\pi_X^{-1}K
+$$
+은 동형이다. 여기서
+$\pi_X : \Sh((\textit{Spaces}/X)_\etale) \to \Sh(X_\etale)$는 위와 같다.
+\end{lemma}
+
+\begin{proof}
+$\pi_X^{-1}$와 $\pi_{X, *} = i_X^{-1}$가 모두 완전함자이고 합성
+$\pi_{X, *} \circ \pi_X^{-1}$가 항등함자이므로 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-higher-direct-image-proper}
+$S$를 스킴이라 하자.
+$f : Y \to X$를 $S$ 위 대수 공간들의 고유사상이라 하자.
+그러면 다음이 성립한다.
+\begin{enumerate}
+\item 함자 $\Sh(Y_\etale) \to \Sh((\textit{Spaces}/X)_\etale)$로서
+$\pi_X^{-1} \circ f_{small, *} = f_{big, *} \circ \pi_Y^{-1}$이고,
+\item 코호몰로지 층들이 꼬임인 $D^+(Y_\etale)$의 $K$에 대하여\\
+$\pi_X^{-1}Rf_{small, *}K = Rf_{big, *}\pi_Y^{-1}K$이며,
+\item $f$가 유한이면 모든 $D(Y_\etale)$의 $K$에 대하여
+$\pi_X^{-1}Rf_{small, *}K = Rf_{big, *}\pi_Y^{-1}K$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. $\mathcal{F}$를 $Y_\etale$ 위의 층이라 하자.\\
+$g : X' \to X$를 $(\textit{Spaces}/X)_\etale$의 대상이라 하자.
+섬유곱
+$$
+\xymatrix{
+Y' \ar[r]_{f'} \ar[d]_{g'} & X' \ar[d]^g \\
+Y \ar[r]^f & X
+}
+$$
+을 고찰하자. 그러면
+$$
+\begin{aligned}
+(f_{big, *}\pi_Y^{-1}\mathcal{F})(X')
+&= (\pi_Y^{-1}\mathcal{F})(Y') \\
+&= ((g'_{small})^{-1}\mathcal{F})(Y') \\
+&= (f'_{small, *}(g'_{small})^{-1}\mathcal{F})(X')
+\end{aligned}
+$$
+이다. 두 번째 등식에는 Lemma \ref{lemma-describe-pullback}을 사용했다.
+한편 다시 Lemma \ref{lemma-describe-pullback}에 의해
+$$
+(\pi_X^{-1}f_{small, *}\mathcal{F})(X') =
+(g_{small}^{-1}f_{small, *}\mathcal{F})(X')
+$$
+이다. 따라서 집합의 층에 대한 고유 밑변환
+(Lemma \ref{lemma-proper-base-change-f-star})에 의해 두 집합은 표준적으로
+동형이다. 이 동형은 제한사상들과 양립하며 동형
+$\pi_X^{-1}f_{small, *}\mathcal{F} = f_{big, *}\pi_Y^{-1}\mathcal{F}$를
+정의한다. 따라서 함자들의 동형
+$\pi_X^{-1} \circ f_{small, *} = f_{big, *} \circ \pi_Y^{-1}$를 얻는다.
+
+\medskip\noindent
+(2)의 증명. 임의의 $D(Y_\etale)$의 $K$에 대하여 표준 밑변환 사상\\
+$\pi_X^{-1}Rf_{small, *}K \to Rf_{big, *}\pi_Y^{-1}K$가 존재한다.
+Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-base-change}를 보라.
+이 사상이 동형임을 증명하려면, $(\Sch/X)_\etale$의 임의의 대상
+% P10-E0157
+$g : X' \to X$에 대하여 밑변환 사상의\\
+$i_g : \Sh(X'_\etale) \to \Sh((\Sch/X)_\etale)$에 의한 당김이
+동형임을 증명하면 충분하다.
+% P10-E0156
+$T', g', f'$를 앞 단락에서와 같이 두자.
+밑변환 사상의 당김은
+\begin{align*}
+g_{small}^{-1}Rf_{small, *}K
+& =
+i_g^{-1}\pi_X^{-1}Rf_{small, *}K \\
+& \to
+i_g^{-1}Rf_{big, *}\pi_Y^{-1}K \\
+& =
+Rf'_{small, *}(i_{g'}^{-1}\pi_Y^{-1}K) \\
+& =
+Rf'_{small, *}((g'_{small})^{-1}K)
+\end{align*}
+이다. 여기서 $\pi_X \circ i_g = g_{small}$,
+$\pi_Y \circ i_{g'} = g'_{small}$ 및
+Lemma \ref{lemma-compare-higher-direct-image}를 사용했다.
+$K$가 아래로 유계이고 $K$의 코호몰로지 층들이 꼬임이면,
+이 사상은 고유 밑변환 정리
+(Lemma \ref{lemma-proper-base-change})에 의해 동형이다.
+
+\medskip\noindent
+(3)의 증명. $f$가 유한이면 함자 $f_{small, *}$와 $f_{big, *}$는
+완전하다. $f_{small}$에 대해서는 Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-finite-higher-direct-image-zero}에서 따라온다.
+$f$의 모든 밑변환 $f'$도 유한이므로, Lemma
+\ref{lemma-compare-higher-direct-image} (3)에서 $f_{big, *}$도
+완전함을 얻는다(고차 유도함자들이 영이기 때문이다).
+따라서 이 경우는 (1)에서 따라온다.
+\end{proof}
+
+
+\section{fppf 위상과 \'etale 위상의 비교}
+\label{section-fppf-etale}
+
+\noindent
+이 절은 \'Etale Cohomology, Section
+\ref{etale-cohomology-section-fppf-etale}에 대응한다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+범주 $\textit{Spaces}/X$ 위의 fppf 위상과 \'etale 위상을 고찰한다.
+항등함자
+$(\textit{Spaces}/X)_\etale \to (\textit{Spaces}/X)_{fppf}$는
+연속이고, Sites, Proposition \ref{sites-proposition-get-morphism}을
+적용하면 사이트의 사상
+$$
+\epsilon_X :
+(\textit{Spaces}/X)_{fppf} \longrightarrow (\textit{Spaces}/X)_\etale
+$$
+을 정의한다. $\epsilon_{X, *}$는 기저 프리시프 위의 항등함자이고,
+$\epsilon_X^{-1}$는 \'etale 층에 그 fppf 층화를 대응시킴을 유의하라.
+큰 \'etale 사이트와 작은 \'etale 사이트를 비교하는 사이트의 사상
+$$
+\pi_X : (\textit{Spaces}/X)_\etale \longrightarrow X_{spaces, \etale}
+$$
+을 고찰하자. Section \ref{section-compare}를 보라.
+그 합성은 사이트의 사상
+$$
+a_X = \pi_X \circ \epsilon_X :
+(\textit{Spaces}/X)_{fppf}
+\longrightarrow
+X_{spaces, \etale}
+$$
+을 정한다. $\mathcal{H}$가 $(\textit{Spaces}/X)_{fppf}$ 위의 아벨
+층이면, $(\textit{Spaces}/X)_{fppf}$의 대상 $U$ 위에서의
+$\mathcal{H}$의 코호몰로지를 $H^n_{fppf}(U, \mathcal{H})$로 쓰겠다.
+
+\begin{lemma}
+\label{lemma-comparison-fppf-etale}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+\begin{enumerate}
+\item $\mathcal{F} \in \Sh(X_\etale)$에 대하여
+$\epsilon_{X, *}a_X^{-1}\mathcal{F} = \pi_X^{-1}\mathcal{F}$이고
+$a_{X, *}a_X^{-1}\mathcal{F} = \mathcal{F}$이다.
+\item $\mathcal{F} \in \textit{Ab}(X_\etale)$에 대하여
+$i > 0$이면 $R^i\epsilon_{X, *}(a_X^{-1}\mathcal{F}) = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$a_X^{-1}\mathcal{F} = \epsilon_X^{-1} \pi_X^{-1}\mathcal{F}$이다.
+Lemma \ref{lemma-describe-pullback}에 의해 \'etale 층
+$\pi_X^{-1}\mathcal{F}$는 fppf 위상에 대해서도 층이므로
+$a_X^{-1}\mathcal{F}$와 같다($\epsilon_X$에 의한 당김은 fppf 층화로
+주어지기 때문이다). 또한 $\epsilon_{X, *}$가 기저 프리시프 위의
+항등임을 상기하라. 이제 (1)은 Lemma
+\ref{lemma-describe-pullback}의 $\pi_X^{-1}$에 대한 명시적 기술에서
+즉시 따라온다.
+
+\medskip\noindent
+(2)는 스킴의 경우, 즉 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-V-C-all-n-etale-fppf} (1)로 환원하여
+증명하겠다. 모든 대수 공간은 \'etale 국소적으로 스킴이므로 이는
+``명백히 작동할 것이다''. 아래에 세부사항을 주지만 독자에게는
+증명을 건너뛰기를 권한다.
+
+\medskip\noindent
+$(\textit{Spaces}/X)_{fppf}$ 위의 아벨 층 $\mathcal{H}$에 대하여\\
+고차 직접상 $R^p\epsilon_{X, *}\mathcal{H}$는
+$(\textit{Spaces}/X)_\etale$ 위 프리시프\\
+$U \mapsto H^p_{fppf}(U, \mathcal{H})$에 연관된 층이다.
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-higher-direct-images}를 보라.
+$(\textit{Spaces}/X)_\etale$의 모든 대상은 스킴들에 의한 피복을 가지므로,
+스킴 $U/X$와
+$\xi \in H^p_{fppf}(U, a_X^{-1}\mathcal{F})$가 주어졌을 때
+$\xi$가 $U_i$ 위에서 영으로 제한되는 \'etale 피복
+$\{U_i \to U\}$가 존재함을 증명하면 충분하다. 다음 등식들이 있다:
+\begin{align*}
+H^p_{fppf}(U, a_X^{-1}\mathcal{F})
+& =
+H^p((\textit{Spaces}/U)_{fppf}, (a_X^{-1}\mathcal{F})|_{\textit{Spaces}/U}) \\
+& =
+H^p((\Sch/U)_{fppf}, (a_X^{-1}\mathcal{F})|_{\Sch/U})
+\end{align*}
+두 번째 동일시는 Lemma
+\ref{lemma-compare-cohomology-other-topologies}이고, 첫 번째 동일시는
+제한에 대한 일반적 사실
+(Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cohomology-of-open})이다.
+첫 단락과 스킴의 경우에 대한 대응하는 결과
+(\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-describe-pullback-pi-fppf})를 살펴보면,
+층 $(a_X^{-1}\mathcal{F})|_{\Sch/U}$가 ``$a_U$의 스킴 버전에 의한
+당김''과 일치함을 얻는다. 따라서 각 $i$에 대하여 우리 코호몰로지류가
+$H^p((\Sch/U_i)_{fppf}, (a_X^{-1}\mathcal{F})|_{\Sch/U_i})$에서
+사라지는 \'etale 피복 $\{U_i \to U\}$를 찾을 수 있다.
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-V-C-all-n-etale-fppf}를 보라
+(여기서 사용해야 할 정확한 명제는 모든 $n$에 대하여 $V_n$이
+성립한다는 것이며, 이는 스킴의 경우에 대한 (2)의 명제이다).
+같은 공식들을 이제 $U_i$에 적용하여 되돌아오면, 원하는 대로
+$\xi$가 $U_i$ 위에서 영으로 제한됨을 얻는다.
+\end{proof}
+
+\noindent
+스킴의 경우에 이루어진 어려운 작업으로부터 이제 작은 \'etale
+사이트에서 오는 층들에 대해서는 \'etale 코호몰로지와 fppf
+코호몰로지가 일치함을 얻는다.
+
+\begin{lemma}
+\label{lemma-cohomological-descent-etale-fppf}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+$K \in D^+(X_\etale)$에 대하여 사상들
+$$
+\pi_X^{-1}K \longrightarrow R\epsilon_{X, *}a_X^{-1}K
+\quad\text{and}\quad
+K \longrightarrow Ra_{X, *}a_X^{-1}K
+$$
+은 동형이다. 여기서
+$a_X : \Sh((\textit{Spaces}/X)_{fppf}) \to \Sh(X_\etale)$는 위와 같다.
+\end{lemma}
+
+\begin{proof}
+두 번째 명제만 증명한다. 첫 번째 명제는 더 쉽고 정확히 같은 방식으로
+증명된다. $K$가 하나의 아벨 층으로 주어진 경우로 즉시 환원된다.
+실제로 $K$를 아래로 유계인 복합체 $\mathcal{F}^\bullet$로 나타내자.
+층의 경우에 의해
+$\mathcal{F}^n = a_{X, *} a_X^{-1} \mathcal{F}^n$이고
+$q > 0$에 대하여 층들 $R^qa_{X, *}a_X^{-1}\mathcal{F}^n$은 영이다.
+Leray 비순환성 보조정리
+(Derived Categories, Lemma \ref{derived-lemma-leray-acyclicity})를
+$a_X^{-1}\mathcal{F}^\bullet$과 함자 $a_{X, *}$에 적용하면 결론을
+얻는다. 이제부터 $K = \mathcal{F}$라고 가정하자.
+
+\medskip\noindent
+Lemma \ref{lemma-comparison-fppf-etale}에 의해
+$a_{X, *}a_X^{-1}\mathcal{F} = \mathcal{F}$이다. 따라서\\
+$q > 0$에 대하여 $R^qa_{X, *}a_X^{-1}\mathcal{F} = 0$임을 보이면
+충분하다. 이를 위해
+% P10-E0159
+$a_X = \epsilon_X \circ \pi_X$와 Leray 스펙트럴 수열
+(Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-relative-Leray})을 사용할 수 있다.
+Lemma \ref{lemma-comparison-fppf-etale}에 의해 $i > 0$이면
+$R^i\epsilon_{X, *}(a_X^{-1}\mathcal{F}) = 0$이다. 또한\\
+$\epsilon_{X, *}a_X^{-1}\mathcal{F} = \pi_X^{-1}\mathcal{F}$이고,
+Lemma \ref{lemma-cohomological-descent-etale}에 의해 $j > 0$이면
+$R^j\pi_{X, *}(\pi_X^{-1}\mathcal{F}) = 0$이다.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-cohomology-etale-fppf}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+위와 같은 $a_X : \Sh((\textit{Spaces}/X)_{fppf}) \to \Sh(X_\etale)$에
+대하여 다음이 성립한다.
+\begin{enumerate}
+\item $X_\etale$ 위의 아벨 층 $\mathcal{F}$에 대하여
+$H^q(X_\etale, \mathcal{F}) = H^q_{fppf}(X, a_X^{-1}\mathcal{F})$이다.
+\item $K \in D^+(X_\etale)$에 대하여
+$H^q(X_\etale, K) = H^q_{fppf}(X, a_X^{-1}K)$이다.
+\end{enumerate}
+예를 들어 $A$가 아벨군이면
+$H^q_\etale(X, \underline{A}) = H^q_{fppf}(X, \underline{A})$이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-cohomological-descent-etale-fppf}에서
+Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-before-Leray}에 의해 따라온다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-push-pull-fppf-etale}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위 대수 공간들의 사상이라 하자.
+그러면 토포스들의 가환도식
+$$
+\xymatrix{
+\Sh((\textit{Spaces}/X)_{fppf}) \ar[rr]_{f_{big, fppf}} \ar[d]_{\epsilon_X} & &
+\Sh((\textit{Spaces}/Y)_{fppf}) \ar[d]^{\epsilon_Y} \\
+\Sh((\textit{Spaces}/X)_\etale) \ar[rr]^{f_{big, \etale}} & &
+\Sh((\textit{Spaces}/Y)_\etale)
+}
+$$
+과
+$$
+\xymatrix{
+\Sh((\textit{Spaces}/X)_{fppf}) \ar[rr]_{f_{big, fppf}} \ar[d]_{a_X} & &
+\Sh((\textit{Spaces}/Y)_{fppf}) \ar[d]^{a_Y} \\
+\Sh(X_\etale) \ar[rr]^{f_{small}} & &
+\Sh(Y_\etale)
+}
+$$
+이 있다. 여기서 $a_X = \pi_X \circ \epsilon_X$이고
+% P10-E0160
+$a_Y = \pi_X \circ \epsilon_X$이다.
+\end{lemma}
+
+\begin{proof}
+관련된 사상들의 정의를 풀어 쓰면 즉시 따라온다.
+Topologies on Spaces, Section
+\ref{spaces-topologies-section-fppf}와 Section \ref{section-compare}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-push-pull-fppf-etale}
+Lemma \ref{lemma-push-pull-fppf-etale}에서 $f$가 고유이면 다음이 성립한다.
+\begin{enumerate}
+\item $a_Y^{-1} \circ f_{small, *} = f_{big, fppf, *} \circ a_X^{-1}$이고,
+\item 코호몰로지 층들이 꼬임인 $D^+(X_\etale)$의 $K$에 대하여\\
+$a_Y^{-1}(Rf_{small, *}K) = Rf_{big, fppf, *}(a_X^{-1}K)$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. Lemma \ref{lemma-compare-higher-direct-image-proper} (1)의
+증명을 되풀이하여 이를 증명할 수도 있지만, 여기서는 그 결과로부터
+이끌어 내겠다. $\epsilon_{Y, *}$는 기저 프리시프 위의 항등함자이므로
+동형을 반영한다. Lemma \ref{lemma-comparison-fppf-etale}에 의해
+$\epsilon_{Y, *} \circ a_Y^{-1} = \pi_Y^{-1}$이고 $X$에 대해서도
+마찬가지이다. 표준사상
+$a_Y^{-1}f_{small, *}\mathcal{F} \to f_{big, fppf, *}a_X^{-1}\mathcal{F}$가
+동형임을 보이려면 다음 사상이 동형임을 보이면 충분하다:
+\begin{align*}
+\pi_Y^{-1}f_{small, *}\mathcal{F}
+& =
+\epsilon_{Y, *}a_Y^{-1}f_{small, *}\mathcal{F} \\
+& \to 
+\epsilon_{Y, *}f_{big, fppf, *}a_X^{-1}\mathcal{F} \\
+& =
+f_{big, \etale, *} \epsilon_{X, *}a_X^{-1}\mathcal{F} \\
+& =
+f_{big, \etale, *}\pi_X^{-1}\mathcal{F}
+\end{align*}
+이는 Lemma \ref{lemma-compare-higher-direct-image-proper} (1)이다.
+
+\medskip\noindent
+(2)를 보이기 위해 다음 등식들을 사용한다:
+\begin{align*}
+R\epsilon_{Y, *}Rf_{big, fppf, *}a_X^{-1}K
+& =
+Rf_{big, \etale, *}R\epsilon_{X, *}a_X^{-1}K \\
+& =
+Rf_{big, \etale, *}\pi_X^{-1}K \\
+& =
+\pi_Y^{-1}Rf_{small, *}K \\
+& =
+R\epsilon_{Y, *} a_Y^{-1}Rf_{small, *}K
+\end{align*}
+% P10-E0158
+첫 번째 등식은 Lemma \ref{lemma-push-pull-fppf-etale}의 가환도식과
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-derived-pushforward-composition}에서 따라온다.
+% P10-E0161
+두 번째 등식은 Lemma \ref{lemma-cohomological-descent-etale-fppf}이다.
+세 번째 등식은 Lemma \ref{lemma-compare-higher-direct-image-proper} (2)이다.
+네 번째 등식은 다시 Lemma
+\ref{lemma-cohomological-descent-etale-fppf}이다. 따라서 밑변환 사상
+$a_Y^{-1}(Rf_{small, *}K) \to Rf_{big, fppf, *}(a_X^{-1}K)$는 동형
+$$
+R\epsilon_{Y, *}a_Y^{-1}Rf_{small, *}K \to
+R\epsilon_{Y, *}Rf_{big, fppf, *}a_X^{-1}K
+$$
+을 유도한다. 다음 관찰로 증명이 끝난다. $D^+(Y_\etale)$의 $L$과\\
+$D^+((\textit{Spaces}/Y)_{fppf})$의 $M$에 대한 사상\\
+$\alpha : a_Y^{-1}L \to M$에서 $R\epsilon_{Y, *}\alpha$가 동형이면,\\
+그 사상 자체도 동형이다. 실제로 $H^i(\alpha)$가 동형임을 $i$에 대한
+귀납법으로 보인다. 충분히 작은 모든 $i$에 대해서는 참이다.
+$i \leq i_0$에 대해 성립한다고 하자. 이 범위에서는
+$H^i(M) = a_Y^{-1}H^i(L)$이므로, Lemma
+\ref{lemma-comparison-fppf-etale}에 의해 $j > 0$ 및 $i \leq i_0$에 대해\\
+$R^j\epsilon_{Y, *}H^i(M) = 0$이다. 따라서 스펙트럴 수열 논증에 의해\\
+$\epsilon_{Y, *}H^{i_0 + 1}(M) = H^{i_0 + 1}(R\epsilon_{Y, *}M)$이다.
+그러므로\\
+$\epsilon_{Y, *}H^{i_0 + 1}(M) = \pi_Y^{-1}H^{i_0 + 1}(L) =
+\epsilon_{Y, *}a_Y^{-1}H^{i_0 + 1}(L)$이다. 이는 원하는 대로
+$H^{i_0 + 1}(\alpha)$가 동형임을 함의한다
+($\epsilon_{Y, *}$는 기저 프리시프 위의 항등이므로 동형을 반영한다).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-push-pull-fppf-etale}
+Lemma \ref{lemma-push-pull-fppf-etale}에서 $f$가 유한이면,
+$K$가 $D^+(X_\etale)$에 속할 때
+$a_Y^{-1}(Rf_{small, *}K) = Rf_{big, fppf, *}(a_X^{-1}K)$이다.
+\end{lemma}
+
+\begin{proof}
+$V$가 스킴인 전사 \'etale 사상 $V \to Y$를 택하자.
+밑변환 사상이 동형임을 $V$로 제한한 뒤 증명하면 충분하다.
+따라서 $Y$가 스킴이라고 가정할 수 있다. 사상이 유한이고 따라서
+표현가능하므로 $X$와 $Y$가 모두 스킴이라고 가정할 수 있다.
+이 경우 결과는 스킴의 경우
+(\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-V-C-all-n-etale-fppf} (2))에서 따라온다.
+여기에는 Section \ref{section-api}에서 논의하고 특히 Lemma
+\ref{lemma-compare-cohomology-other-topologies}에 주어진 토포스의 비교를
+사용한다.
+일부 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descent-sheaf-fppf-etale}
+Lemma \ref{lemma-push-pull-fppf-etale}에서 $f$가 평탄하고 국소 유한
+표현이며 전사라고 가정하자. 그러면 함자
+$$
+\Sh(Y_\etale) \longrightarrow
+\left\{
+(\mathcal{G}, \mathcal{H}, \alpha)
+\middle|
+\begin{matrix}
+\mathcal{G} \in \Sh(X_\etale),\ \mathcal{H} \in \Sh((\Sch/Y)_{fppf}), \\
+\alpha : a_X^{-1}\mathcal{G} \to f_{big, fppf}^{-1}\mathcal{H}
+\text{ 동형}
+\end{matrix}
+\right\}
+$$
+는 동치이다. 이 함자는 $\mathcal{F}$를
+$(f_{small}^{-1}\mathcal{F}, a_Y^{-1}\mathcal{F}, can)$으로 보낸다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-comparison-fppf-etale}에 의해
+$a_{X, *}a_X^{-1} = \text{id}$이므로 함자 $a_X^{-1}$는 충실충만하다.
+따라서 망각함자
+$(\mathcal{G}, \mathcal{H}, \alpha) \mapsto \mathcal{H}$는 삼중항의
+범주를 $\Sh((\Sch/Y)_{fppf})$의 충만 부분범주와 동일시한다.
+또한 함자 $a_Y^{-1}$도 충실충만하므로 보조정리의 함자 역시
+충실충만하다.
+
+\medskip\noindent
+\'etale 피복 $\{Y_i \to Y\}$가 주어졌다고 하자.
+$f_i : X_i \to Y_i$를 $f$의 밑변환이라 하자.
+$f_{ij} = f_i \times f_j : X_i \times_X X_j  \to Y_i \times_Y Y_j$라 쓰자.
+주장: 모든 $i, j$에 대해 $f_i$와 $f_{ij}$에 보조정리가 성립하면
+$f$에도 보조정리가 성립한다. 이를 보기 위해, 주어진 \'etale 피복이
+네 사이트 $Y_\etale, X_\etale, (\Sch/Y)_{fppf}, (\Sch/X)_{fppf}$
+각각의 종대상의 \'etale 피복을 정한다는 점을 유의하라.
+따라서 네 경우 각각에서 층의 범주는 이 피복에 대한 접합 데이터의
+범주와 동치이다
+(Sites, Lemma \ref{sites-lemma-mapping-property-glue}).
+이제 범주들의 거대한 가환도식이 주장의 증명을 끝낸다.
+세부사항은 생략한다. 이 주장은 $Y$ 위에서 \'etale 국소적으로
+작업할 수 있음을 보인다. 특히 $Y$가 스킴이라고 가정할 수 있다.
+
+\medskip\noindent
+$Y$가 스킴이라고 가정하자. 스킴 $X'$과 전사 \'etale 사상
+$s : X' \to X$를 택하자. $f' = f \circ s : X' \to Y$라 놓고
+$f'$가 전사이고 국소 유한 표현이며 평탄함을 유의하라.
+주장: $f'$에 보조정리가 성립하면 $f$에도 성립한다.
+실제로 $f$에 대한 삼중항 $(\mathcal{G}, \mathcal{H}, \alpha)$가
+주어지면, $s$로 당겨 $f'$에 대한 삼중항
+$(s_{small}^{-1}\mathcal{G}, \mathcal{H}, s_{big, fppf}^{-1}\alpha)$를
+얻을 수 있다. 이 삼중항의 해는 $a_Y^{-1}\mathcal{F} = \mathcal{H}$인
+$Y_\etale$ 위의 층 $\mathcal{F}$를 준다. 증명의 첫 단락에 의해 이는
+삼중항이 본질적 상에 속한다는 뜻이다. 이로써 $X$와 $Y$가 모두
+스킴인 경우로 환원된다. 이 경우는 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-descent-sheaf-fppf-etale}에서 따라온다.
+여기에는 Section \ref{section-api}의 논의, 특히 Lemma
+\ref{lemma-compare-cohomology-other-topologies}를 사용한다.
+\end{proof}
+
+
+\section{fppf 위상과 \'etale 위상의 비교: 가군}
+\label{section-fppf-etale-modules}
+
+\noindent
+Section \ref{section-fppf-etale}의 논의를 계속하되, 이 절에서는
+가군의 층에 어떤 일이 일어나는지 간단히 논의한다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+Section \ref{section-fppf-etale}에서 도입한 사이트의 사상
+$\epsilon_X$, $\pi_X$ 및 그 합성 $a_X$에는 환 달린 사이트의 사상으로
+자연스러운 강화가 있다. 첫 번째 것은
+$$
+\epsilon_X :
+((\textit{Spaces}/X)_{fppf}, \mathcal{O})
+\longrightarrow
+((\textit{Spaces}/X)_\etale, \mathcal{O})
+$$
+로 쓴다. 실제로 두 층은 같은 기저 프리시프를 가지므로 구조층에
+같은 기호를 사용할 수 있음을 유의하라. 두 번째 것은
+$$
+\pi_X :
+((\textit{Spaces}/X)_\etale, \mathcal{O})
+\longrightarrow
+(X_\etale, \mathcal{O}_X)
+$$
+이다. 세 번째 것은 사상
+$$
+a_X :
+((\textit{Spaces}/X)_{fppf}, \mathcal{O})
+\longrightarrow
+(X_\etale, \mathcal{O}_X)
+$$
+이다. 이제 이 사이트들 위의 준연접가군에 대해 이미 알고 있는
+내용을 살펴보자.
+
+\begin{lemma}
+\label{lemma-review-quasi-coherent}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+\begin{enumerate}
+\item 규칙
+$$
+\mathcal{F}^a : (\textit{Spaces}/X)_\etale \longrightarrow \textit{Ab},\quad
+(f : Y \to X) \longmapsto \Gamma(Y, f^*\mathcal{F})
+$$
+은 fpqc 피복, 따라서 특히 fppf 피복과 \'etale 피복에 대하여
+층 조건을 만족한다.
+\item $(\textit{Spaces}/X)_\etale$ 위에서
+$\mathcal{F}^a = \pi_X^*\mathcal{F}$이다.
+\item $(\textit{Spaces}/X)_{fppf}$ 위에서
+$\mathcal{F}^a = a_X^*\mathcal{F}$이다.
+\item 규칙 $\mathcal{F} \mapsto \mathcal{F}^a$는 준연접
+$\mathcal{O}_X$-가군들과
+$((\textit{Spaces}/X)_\etale, \mathcal{O})$ 위 준연접가군들 사이의
+동치를 정의한다.
+\item 규칙 $\mathcal{F} \mapsto \mathcal{F}^a$는 준연접
+$\mathcal{O}_X$-가군들과
+$((\textit{Spaces}/X)_{fppf}, \mathcal{O})$ 위 준연접가군들 사이의
+동치를 정의한다.
+\item $\epsilon_{X, *}a_X^*\mathcal{F} = \pi_X^*\mathcal{F}$이고
+$a_{X, *}a_X^*\mathcal{F} = \mathcal{F}$이다.
+\item $i > 0$에 대하여 $R^i\epsilon_{X, *}(a_X^*\mathcal{F}) = 0$이고
+$R^ia_{X, *}(a_X^*\mathcal{F}) = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 준연접가군의 fppf 하강에서 따라온다. 실제로
+$\{f_i : U_i \to U\}$가 $(\textit{Spaces}/X)_\etale$의 fpqc
+피복이라고 하자. 구조사상을 $g : U \to X$라 쓰자.
+$s_i|_{U_i \times_U U_j} = s_j|_{U_i \times_U U_j}$를 만족하는
+단면들의 족 $s_i \in \Gamma(U_i , f_i^*g^*\mathcal{F})$가
+주어졌다고 하자.
+% P10-E0163
+이에 대응하는 단면 $s \in \Gamma(U, g^*\mathcal{F})$를 찾아야 한다.
+$s_i$를 $U$ 위의 준연접층 $\mathcal{O}_U$와 $g^*\mathcal{F}$에 연관된 표준
+하강 데이터와 양립하는 사상들의 족
+$\varphi_i : f_i^*\mathcal{O}_U = \mathcal{O}_{U_i} \to f_i^*g^*\mathcal{F}$로
+다시 해석할 수 있다. 따라서 Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}에 의해 이를
+유일하게 사상 $\mathcal{O}_U \to g^*\mathcal{F}$로 하강시킬 수 있고,
+이 사상이 원하는 단면 $s$를 준다.
+
+\medskip\noindent
+(2)--(7)은 스킴에 대한 대응하는 명제에서 이끌어 내겠다.
+각 $X_i$가 스킴인 \'etale 피복
+$\{X_i \to X\}_{i \in I}$를 택하자. $X_i \times_X X_j$도 스킴임을
+유의하라. 이 피복은 세 사이트
+$(\textit{Spaces}/X)_{fppf}$, $(\textit{Spaces}/X)_\etale$ 및 $X_\etale$
+각각에서 종대상의 피복을 유도한다. 따라서 이 사이트들 위 층의
+범주는 이 피복에 대한 하강 데이터와 동치이다. Sites, Lemma
+\ref{sites-lemma-mapping-property-glue}를 보라.
+(2), (3)은 국소적이다(접합 명제가 있기 때문이다).
+준연접이라는 것은 국소적 성질이므로 (4), (5)도 국소적이다.
+(6), (7)도 명백히 국소적이다. 따라서 $X$가 스킴일 때 보조정리의
+(2)--(7)을 증명하면 충분하다.
+
+\medskip\noindent
+$X$가 스킴이라고 가정하자. 매장\\
+$(\Sch/X)_\etale \subset (\textit{Spaces}/X)_\etale$과\\
+$(\Sch/X)_{fppf} \subset (\textit{Spaces}/X)_{fppf}$는 Lemma
+\ref{lemma-compare-cohomology-other-topologies}에 의해 환 달린
+토포스들의 동치를 정한다. 따라서 (2)--(7)은 스킴의 경우
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-review-quasi-coherent}에서 따라온다.
+이 동치를 통해 준연접이라는 성질을 옮기려면, Modules on Sites,
+Section \ref{sites-modules-section-local}에서 설명한 대로 준연접성이
+가군의 내재적 성질임을 사용한다. 사소한 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cohomological-descent-etale-fppf-modules}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+준연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대하여 사상들
+$$
+\pi_X^*\mathcal{F} \longrightarrow R\epsilon_{X, *}(a_X^*\mathcal{F})
+\quad\text{and}\quad
+\mathcal{F} \longrightarrow Ra_{X, *}(a_X^*\mathcal{F})
+$$
+은 동형이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-review-quasi-coherent}의 (6)과 (7)에서
+즉시 따라온다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-vanishing-adequate}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+$\mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3$를 준연접
+$\mathcal{O}_X$-가군들의 복합체라 하자.
+$(\textit{Spaces}/X)_\etale$ 위에서
+$$
+\mathcal{H}_\etale =
+\Ker(\pi_X^*\mathcal{F}_2 \to \pi_X^*\mathcal{F}_3)/
+\Im(\pi_X^*\mathcal{F}_1 \to \pi_X^*\mathcal{F}_2)
+$$
+라 놓고, $(\textit{Spaces}/X)_{fppf}$ 위에서
+$$
+\mathcal{H}_{fppf} =
+\Ker(a_X^*\mathcal{F}_2 \to a_X^*\mathcal{F}_3)/
+\Im(a_X^*\mathcal{F}_1 \to a_X^*\mathcal{F}_2)
+$$
+라 놓자. 그러면
+$\mathcal{H}_\etale = \epsilon_{X, *}\mathcal{H}_{fppf}$이고,
+$(\textit{Spaces}/X)_\etale$의 임의의 아핀 대상 $U$와 $p > 0$에 대하여
+$$
+H^p_\etale(U, \mathcal{H}_\etale) = H^p_{fppf}(U, \mathcal{H}_{fppf}) = 0
+$$
+이다.
+\end{lemma}
+
+\noindent
+더 강한 사실이 성립한다. 즉 $(\textit{Spaces}/X)_{fppf}$ 위에서
+fppf 국소적으로 보조정리의 가군처럼 보이는 가군들을 adequate
+가군이라 부른다.
+% P10-E0164
+이들은 모든 $\mathcal{O}$-가군의 범주의 약한 Serre 부분범주를 이루며,
+그 코호몰로지는 Adequate Modules, Section
+\ref{adequate-section-adequate}에서 연구한다.
+
+\begin{proof}
+$(\textit{Spaces}/X)_\etale$의 임의의 대상 $f : U \to X$에 대하여,
+Section \ref{section-compare}에서 논의한 함자
+$i_f^* = i_f^{-1}$를 통해 $\mathcal{H}_\etale$를 $U_\etale$로 제한한
+$\mathcal{H}_\etale|_{U_\etale}$를 고찰하자.
+층 $\mathcal{H}_\etale|_{U_\etale}$는 복합체
+$f^*\mathcal{F}_\bullet$의 차수 $1$ 코호몰로지와 같다.
+이는 환 달린 사이트의 사상 $U_\etale \to X_\etale$로서
+$i_f \circ \pi_X = f$이기 때문이다. 특히
+$\mathcal{H}_\etale|_{U_\etale}$는 준연접 $\mathcal{O}_U$-가군이다.
+다음으로 $g : V \to U$를 $(\textit{Spaces}/X)_\etale$의 평탄사상이라
+하자. 사이트의 사상 $V_\etale \to X_\etale$로서
+$$
+i_{f \circ g}^* \circ \pi_X^* = (f \circ g)^* = g^* \circ f^*
+$$
+이고, $g$가 평탄하여 $g^*$가 완전하므로
+$$
+\mathcal{H}_\etale|_{V_\etale} =
+g^*\left(\mathcal{H}_\etale|_{U_\etale}\right)
+$$
+을 얻는다. 이제 이러한 준비로 보조정리를 증명할 수 있다.
+
+\medskip\noindent
+$f : U \to X$를 위와 같이 두고
+$\mathcal{U} = \{g_i : U_i \to U\}_{i \in I}$를 fppf 피복이라 하자.
+Lemma \ref{lemma-review-quasi-coherent} (1)을
+$\mathcal{H}_\etale|_{U_\etale}$와 위의 사실에 적용하면
+$\mathcal{H}_\etale$와 피복 $\mathcal{U}$에 대해 층 조건이 성립한다.
+따라서 $\mathcal{H}_\etale$는 이미 fppf 층이고, 이는 프리시프로서
+$\mathcal{H}_{fppf}$가 $\mathcal{H}_\etale$와 같다는 뜻이다.
+특히 $\mathcal{H}_\etale = \epsilon_{X, *}\mathcal{H}_{fppf}$이다.
+
+\medskip\noindent
+마지막으로 소멸을 증명하기 위해 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cech-vanish-collection}을 사용한다.
+$\mathcal{B}$를 $(\textit{Spaces}/X)_{fppf}$의 아핀 대상들로 이루어진
+모임이라 하고, $\text{Cov}$를 $U$, $U_i$가 아핀인 유한 fppf 피복
+$\mathcal{U} = \{U_i \to U\}_{i = 1, \ldots, n}$들의 집합이라 하자.
+다음이 성립한다:
+$$
+{\check H}^p(\mathcal{U}, \mathcal{H}_\etale) =
+{\check H}^p(\mathcal{U}, \left(\mathcal{H}_\etale|_{U_\etale}\right)^a)
+$$
+실제로 첫 단락에 의해, $U$ 위에 평탄한 아핀 스킴들
+$U_{i_0} \times_U \ldots \times_U U_{i_p}$에서의
+$\mathcal{H}_\etale$의 값은 준연접가군
+$\mathcal{H}_\etale|_{U_\etale}$의 당김의 값과 일치한다.
+따라서 Descent, Lemma
+\ref{descent-lemma-standard-covering-Cech-quasi-coherent}에 의해
+소멸을 얻는다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cohomological-descent-etale-fppf-modules-unbounded}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+$K \in D_\QCoh(\mathcal{O}_X)$에 대하여 사상들
+$$
+L\pi_X^*K \longrightarrow R\epsilon_{X, *}(La_X^*K)
+\quad\text{and}\quad
+K \longrightarrow Ra_{X, *}(La_X^*K)
+$$
+은 동형이다. 여기서
+$a_X : \Sh((\textit{Spaces}/X)_{fppf}) \to \Sh(X_\etale)$는 위와 같다.
+\end{lemma}
+
+\begin{proof}
+문제는 $X$ 위에서 \'etale 국소적이므로 $X$가 아핀이라고 가정할 수
+있다. $X = \Spec(A)$라 하자. 그러면 Derived Categories of Spaces,
+Lemma \ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site}와
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-affine-compare-bounded}에 의해
+$D_\QCoh(\mathcal{O}_X) = D(A)$이다. 따라서 $K$를 나타내는 준연접
+$\mathcal{O}_X$-가군들의 대응하는 복합체 $\mathcal{K}^\bullet$을 갖는
+$A$-가군들의 K-평탄 복합체 $K^\bullet$을 택할 수 있다.
+% P10-E0165
+$\mathcal{K}^\bullet$이 $\mathcal{O}_X$-가군들의 K-평탄 복합체임을
+주장한다.
+
+\medskip\noindent
+주장의 증명. Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-affine-K-flat}에 의해
+$\widetilde{K}^\bullet$은 스킴
+$(\Spec(A), \mathcal{O}_{\Spec(A)})$ 위에서 K-평탄하다.
+다음으로 $\mathcal{K}^\bullet = \epsilon^*\widetilde{K}^\bullet$임을
+유의하라. 여기서 $\epsilon$은 Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site}에서와 같다.
+따라서 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-pullback-K-flat-points}와 스킴의 \'etale
+사이트가 충분한 점들을 갖는다는 사실
+(\'Etale Cohomology, Remarks
+\ref{etale-cohomology-remarks-enough-points})에 의해
+$\mathcal{K}^\bullet$은 K-평탄하다.
+
+\medskip\noindent
+주장에 의해
+$La_X^*K = a_X^*\mathcal{K}^\bullet$이고
+$L\pi_X^*K = \pi_X^*\mathcal{K}^\bullet$이다.
+증명의 첫 부분에서 준연접가군의 당김
+$a_X^*\mathcal{K}^n$은 $\epsilon_{X, *}$와 각각 $a_{X, *}$에 대해
+비순환적임을 보였으므로, Leray 비순환성 보조정리로 증명이
+끝나는 듯하다. 그러나 실제로는 그렇지 않은데, Leray 비순환성
+보조정리는 아래로 유계인 복합체에만 적용되기 때문이다.
+하지만 다음 단락에서 우리 복합체가 준연접가군들의 아래로 유계인
+복합체들의 유도극한이므로 아래로 유계인 경우로부터 결과가
+따라옴을 보이겠다.
+
+\medskip\noindent
+$\pi_X^*\mathcal{K}^\bullet$과 $a_X^*\mathcal{K}^\bullet$의
+코호몰로지 층들은 Lemma \ref{lemma-vanishing-adequate}에 의해
+$(\textit{Spaces}/X)_\etale$의 아핀 대상들 위에서 고차 코호몰로지군이
+소멸한다. 따라서 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-is-limit-dimension}에 의해
+$$
+L\pi_X^*K = R\lim \tau_{\geq -n}(L\pi_X^*K)
+\quad\text{and}\quad
+La_X^*K = R\lim \tau_{\geq -n}(La_X^*K)
+$$
+이다.
+
+\medskip\noindent
+% P10-E0166
+$L\pi_X^*K = R\epsilon_{X, *}(La_X^*\mathcal{F})$의 증명.
+위의 사실과 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-Rf-commutes-with-Rlim}에 의해
+$$
+R\epsilon_{X, *}La_X^*K =
+R\lim R\epsilon_{X, *}(\tau_{\geq -n}(La_X^*K))
+$$
+이다. $\tau_{\geq -n}(La_X^*K)$는
+$\tau_{\geq -n}(a_X^*\mathcal{K}^\bullet)$로 나타내어지지만,
+이는 $a_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)$과 같지 않을 수 있다.
+그러나 계들
+$$
+\{\tau_{\geq -n}(a_X^*\mathcal{K}^\bullet)\}_{n \geq 1}
+\quad\text{and}\quad
+\{a_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)\}_{n \geq 1}
+$$
+은 pro-계로서 동형임이 명백하다. Leray 비순환성 보조정리
+(Derived Categories, Lemma \ref{derived-lemma-leray-acyclicity})와
+보조정리의 첫 부분에 의해
+$$
+R\epsilon_{X, *}(a_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)) =
+\pi_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)
+$$
+임을 안다. 이제 계들
+$$
+\{\tau_{\geq -n}(\pi_X^*\mathcal{K}^\bullet)\}_{n \geq 1}
+\quad\text{and}\quad
+\{\pi_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)\}_{n \geq 1}
+$$
+이 pro-계로서 동형임을 사용할 수 있다. 마지막으로 모든 것을 다음과
+같이 종합한다:
+\begin{align*}
+R\epsilon_{X, *}La_X^*K
+& =
+R\epsilon_{X, *} (R\lim \tau_{\geq -n}(La_X^*K)) \\
+& =
+R\lim R\epsilon_{X, *}(\tau_{\geq -n}(La_X^*K)) \\
+& =
+R\lim R\epsilon_{X, *}(\tau_{\geq -n}(a_X^*\mathcal{K}^\bullet)) \\
+& =
+R\lim R\epsilon_{X, *}(a_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)) \\
+& =
+R\lim \pi_X^*(\tau_{\geq -n}\mathcal{K}^\bullet) \\
+& =
+R\lim \tau_{\geq -n}(\pi_X^*\mathcal{K}^\bullet) \\
+& =
+R\lim \tau_{\geq -n}(L\pi_X^*K) \\
+& =
+L\pi_X^*K
+\end{align*}
+여기서 네 번째와 여섯 번째 등식에는 동형인 pro-계들이 같은
+$R\lim$을 갖는다는 사실을 사용했다(사소한 세부사항은 생략한다).
+이 단계를 피하려면 Lemma \ref{lemma-vanishing-adequate}에서 증명한
+복합체 $\tau_{\geq -n}a_X^*\mathcal{K}^\bullet$의 항들의 코호몰로지에
+대한 더 많은 정보를 사용할 수 있다. 그러면
+$R\epsilon_{X, *}(\tau_{\geq -n}(a_X^*\mathcal{K}^\bullet)) =
+\tau_{\geq -n}(\pi_X^*\mathcal{K}^\bullet)$임을 직접 증명한다.
+
+\medskip\noindent
+% P10-E0167
+등식 $K = Ra_{X, *}(La_X^*\mathcal{F})$도 정확히 같은 방식으로
+증명한다. 마지막 단계에서 Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-nice-K-injective}에 의한
+$K = R\lim \tau_{\geq -n}K$를 사용한다.
+\end{proof}
+
+
+\section{ph 위상과 \'etale 위상의 비교}
+\label{section-ph-etale}
+
+\noindent
+이 절은 \'Etale Cohomology, Section
+\ref{etale-cohomology-section-ph-etale}에 대응한다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+범주 $\textit{Spaces}/X$ 위의 ph 위상과 \'etale 위상을 고찰한다.
+모든 \'etale 피복은 Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-zariski-etale-smooth-syntomic-fppf-ph}에 의해
+ph 피복이므로 항등함자
+$(\textit{Spaces}/X)_\etale \to (\textit{Spaces}/X)_{ph}$는 연속이다.
+따라서 Sites, Proposition \ref{sites-proposition-get-morphism}을 적용하면
+사이트의 사상
+$$
+\epsilon_X :
+(\textit{Spaces}/X)_{ph} \longrightarrow (\textit{Spaces}/X)_\etale
+$$
+을 정의한다. $\epsilon_{X, *}$는 기저 프리시프 위의 항등함자이고,
+$\epsilon_X^{-1}$는 \'etale 층에 그 ph 층화를 대응시킴을 유의하라.
+큰 \'etale 사이트와 작은 \'etale 사이트를 비교하는 사이트의 사상
+$$
+\pi_X : (\textit{Spaces}/X)_\etale \longrightarrow X_{spaces, \etale}
+$$
+을 고찰하자. Section \ref{section-compare}를 보라.
+그 합성은 사이트의 사상
+$$
+a_X = \pi_X \circ \epsilon_X :
+(\textit{Spaces}/X)_{ph}
+\longrightarrow
+X_{spaces, \etale}
+$$
+을 정한다. $\mathcal{H}$가 $(\textit{Spaces}/X)_{ph}$ 위의 아벨
+층이면, $(\textit{Spaces}/X)_{ph}$의 대상 $U$ 위에서의
+$\mathcal{H}$의 코호몰로지를 $H^n_{ph}(U, \mathcal{H})$로 쓰겠다.
+
+\begin{lemma}
+\label{lemma-comparison-ph-etale}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+\begin{enumerate}
+\item $\mathcal{F} \in \Sh(X_\etale)$에 대하여
+$\epsilon_{X, *}a_X^{-1}\mathcal{F} = \pi_X^{-1}\mathcal{F}$이고
+$a_{X, *}a_X^{-1}\mathcal{F} = \mathcal{F}$이다.
+\item 꼬임인 $\mathcal{F} \in \textit{Ab}(X_\etale)$에 대하여
+$i > 0$이면 $R^i\epsilon_{X, *}(a_X^{-1}\mathcal{F}) = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$a_X^{-1}\mathcal{F} = \epsilon_X^{-1} \pi_X^{-1}\mathcal{F}$이다.
+Lemma \ref{lemma-describe-pullback}에 의해 \'etale 층
+$\pi_X^{-1}\mathcal{F}$는 ph 위상에 대해서도 층이므로
+$a_X^{-1}\mathcal{F}$와 같다($\epsilon_X$에 의한 당김은 ph 층화로
+주어지기 때문이다). 또한 $\epsilon_{X, *}$가 기저 프리시프 위의
+항등임을 상기하라. 이제 (1)은 Lemma
+\ref{lemma-describe-pullback}의 $\pi_X^{-1}$에 대한 명시적 기술에서
+즉시 따라온다.
+
+\medskip\noindent
+(2)는 스킴의 경우, 즉 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-V-C-all-n-etale-ph} (1)로 환원하여
+증명하겠다. 모든 대수 공간은 \'etale 국소적으로 스킴이므로 이는
+``명백히 작동할 것이다''. 아래에 세부사항을 주지만 독자에게는
+증명을 건너뛰기를 권한다.
+
+\medskip\noindent
+$(\textit{Spaces}/X)_{ph}$ 위의 아벨 층 $\mathcal{H}$에 대하여\\
+고차 직접상 $R^p\epsilon_{X, *}\mathcal{H}$는
+$(\textit{Spaces}/X)_\etale$ 위 프리시프\\
+$U \mapsto H^p_{ph}(U, \mathcal{H})$에 연관된 층이다.
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-higher-direct-images}를 보라.
+$(\textit{Spaces}/X)_\etale$의 모든 대상은 스킴들에 의한 피복을 가지므로,
+스킴 $U/X$와
+$\xi \in H^p_{ph}(U, a_X^{-1}\mathcal{F})$가 주어졌을 때
+$\xi$가 $U_i$ 위에서 영으로 제한되는 \'etale 피복
+$\{U_i \to U\}$가 존재함을 증명하면 충분하다. 다음 등식들이 있다:
+\begin{align*}
+H^p_{ph}(U, a_X^{-1}\mathcal{F})
+& =
+H^p((\textit{Spaces}/U)_{ph}, (a_X^{-1}\mathcal{F})|_{\textit{Spaces}/U}) \\
+& =
+H^p((\Sch/U)_{ph}, (a_X^{-1}\mathcal{F})|_{\Sch/U})
+\end{align*}
+두 번째 동일시는 Lemma
+\ref{lemma-compare-cohomology-other-topologies}이고, 첫 번째 동일시는
+제한에 대한 일반적 사실
+(Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cohomology-of-open})이다.
+첫 단락과 스킴의 경우에 대한 대응하는 결과
+(\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-describe-pullback-pi-ph})를 살펴보면,
+층 $(a_X^{-1}\mathcal{F})|_{\Sch/U}$가 ``$a_U$의 스킴 버전에 의한
+당김''과 일치함을 얻는다. 따라서 각 $i$에 대하여 우리 코호몰로지류가
+$H^p((\Sch/U_i)_{ph}, (a_X^{-1}\mathcal{F})|_{\Sch/U_i})$에서
+사라지는 \'etale 피복 $\{U_i \to U\}$를 찾을 수 있다.
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-V-C-all-n-etale-ph}를 보라
+(여기서 사용해야 할 정확한 명제는 모든 $n$에 대하여 $V_n$이
+성립한다는 것이며, 이는 스킴의 경우에 대한 (2)의 명제이다).
+같은 공식들을 이제 $U_i$에 적용하여 되돌아오면, 원하는 대로
+$\xi$가 $U_i$ 위에서 영으로 제한됨을 얻는다.
+\end{proof}
+
+\noindent
+스킴의 경우에 이루어진 어려운 작업으로부터 이제 작은 \'etale
+사이트에서 오는 꼬임 아벨 층들에 대해서는 \'etale 코호몰로지와
+ph 코호몰로지가 일치함을 얻는다.
+
+\begin{lemma}
+\label{lemma-cohomological-descent-etale-ph}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+코호몰로지 층들이 꼬임인 $K \in D^+(X_\etale)$에 대하여 사상들
+$$
+\pi_X^{-1}K \longrightarrow R\epsilon_{X, *}a_X^{-1}K
+\quad\text{and}\quad
+K \longrightarrow Ra_{X, *}a_X^{-1}K
+$$
+은 동형이다. 여기서
+$a_X : \Sh((\textit{Spaces}/X)_{ph}) \to \Sh(X_\etale)$는 위와 같다.
+\end{lemma}
+
+\begin{proof}
+두 번째 명제만 증명한다. 첫 번째 명제는 더 쉽고 정확히 같은 방식으로
+증명된다. $K$가 하나의 꼬임 아벨 층으로 주어진 경우로 환원된다.
+실제로 $K$를 꼬임 아벨 층들의 아래로 유계인 복합체
+$\mathcal{F}^\bullet$로 나타내자. 이는 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-torsion}에 의해 가능하다.
+층의 경우에 의해
+$\mathcal{F}^n = a_{X, *} a_X^{-1} \mathcal{F}^n$이고
+$q > 0$에 대하여 층들 $R^qa_{X, *}a_X^{-1}\mathcal{F}^n$은 영이다.
+Leray 비순환성 보조정리
+(Derived Categories, Lemma \ref{derived-lemma-leray-acyclicity})를
+$a_X^{-1}\mathcal{F}^\bullet$과 함자 $a_{X, *}$에 적용하면 결론을
+얻는다. 이제부터 $K = \mathcal{F}$이고 $\mathcal{F}$가 꼬임 아벨
+층이라고 가정하자.
+
+\medskip\noindent
+Lemma \ref{lemma-comparison-ph-etale}에 의해
+$a_{X, *}a_X^{-1}\mathcal{F} = \mathcal{F}$이다. 따라서\\
+$q > 0$에 대하여 $R^qa_{X, *}a_X^{-1}\mathcal{F} = 0$임을 보이면
+충분하다. 이를 위해
+% P10-E0168
+$a_X = \epsilon_X \circ \pi_X$와 Leray 스펙트럴 수열
+(Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-relative-Leray})을 사용할 수 있다.
+Lemma \ref{lemma-comparison-ph-etale}에 의해 $i > 0$이면
+$R^i\epsilon_{X, *}(a_X^{-1}\mathcal{F}) = 0$이다. 또한\\
+$\epsilon_{X, *}a_X^{-1}\mathcal{F} = \pi_X^{-1}\mathcal{F}$이고,
+Lemma \ref{lemma-cohomological-descent-etale}에 의해 $j > 0$이면
+$R^j\pi_{X, *}(\pi_X^{-1}\mathcal{F}) = 0$이다.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-cohomology-etale-ph}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+위와 같은 $a_X : \Sh((\textit{Spaces}/X)_{ph}) \to \Sh(X_\etale)$에
+대하여 다음이 성립한다.
+\begin{enumerate}
+\item $X_\etale$ 위의 꼬임 아벨 층 $\mathcal{F}$에 대하여
+$H^q(X_\etale, \mathcal{F}) = H^q_{ph}(X, a_X^{-1}\mathcal{F})$이다.
+\item 코호몰로지 층들이 꼬임인 $K \in D^+(X_\etale)$에 대하여\\
+$H^q(X_\etale, K) = H^q_{ph}(X, a_X^{-1}K)$이다.
+\end{enumerate}
+예를 들어 $A$가 꼬임 아벨군이면
+$H^q_\etale(X, \underline{A}) = H^q_{ph}(X, \underline{A})$이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-cohomological-descent-etale-ph}에서
+Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-before-Leray}에 의해 따라온다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-push-pull-ph-etale}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위 대수 공간들의 사상이라 하자.
+그러면 토포스들의 가환도식
+$$
+\xymatrix{
+\Sh((\textit{Spaces}/X)_{ph}) \ar[rr]_{f_{big, ph}} \ar[d]_{\epsilon_X} & &
+\Sh((\textit{Spaces}/Y)_{ph}) \ar[d]^{\epsilon_Y} \\
+\Sh((\textit{Spaces}/X)_\etale) \ar[rr]^{f_{big, \etale}} & &
+\Sh((\textit{Spaces}/Y)_\etale)
+}
+$$
+과
+$$
+\xymatrix{
+\Sh((\textit{Spaces}/X)_{ph}) \ar[rr]_{f_{big, ph}} \ar[d]_{a_X} & &
+\Sh((\textit{Spaces}/Y)_{ph}) \ar[d]^{a_Y} \\
+\Sh(X_\etale) \ar[rr]^{f_{small}} & &
+\Sh(Y_\etale)
+}
+$$
+이 있다. 여기서 $a_X = \pi_X \circ \epsilon_X$이고
+% P10-E0169
+$a_Y = \pi_X \circ \epsilon_X$이다.
+\end{lemma}
+
+\begin{proof}
+관련된 사상들의 정의를 풀어 쓰면 즉시 따라온다.
+Topologies on Spaces, Section
+\ref{spaces-topologies-section-ph}와 Section \ref{section-compare}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-push-pull-ph-etale}
+Lemma \ref{lemma-push-pull-ph-etale}에서 $f$가 고유이면 다음이 성립한다.
+\begin{enumerate}
+\item $a_Y^{-1} \circ f_{small, *} = f_{big, ph, *} \circ a_X^{-1}$이고,
+\item 코호몰로지 층들이 꼬임인 $D^+(X_\etale)$의 $K$에 대하여\\
+$a_Y^{-1}(Rf_{small, *}K) = Rf_{big, ph, *}(a_X^{-1}K)$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. Lemma \ref{lemma-compare-higher-direct-image-proper} (1)의
+증명을 되풀이하여 이를 증명할 수도 있지만, 여기서는 그 결과로부터
+이끌어 내겠다. $\epsilon_{Y, *}$는 기저 프리시프 위의 항등함자이므로
+동형을 반영한다. Lemma \ref{lemma-comparison-ph-etale}에 의해
+$\epsilon_{Y, *} \circ a_Y^{-1} = \pi_Y^{-1}$이고 $X$에 대해서도
+마찬가지이다. 표준사상
+$a_Y^{-1}f_{small, *}\mathcal{F} \to f_{big, ph, *}a_X^{-1}\mathcal{F}$가
+동형임을 보이려면 다음 사상이 동형임을 보이면 충분하다:
+\begin{align*}
+\pi_Y^{-1}f_{small, *}\mathcal{F}
+& =
+\epsilon_{Y, *}a_Y^{-1}f_{small, *}\mathcal{F} \\
+& \to 
+\epsilon_{Y, *}f_{big, ph, *}a_X^{-1}\mathcal{F} \\
+& =
+f_{big, \etale, *} \epsilon_{X, *}a_X^{-1}\mathcal{F} \\
+& =
+f_{big, \etale, *}\pi_X^{-1}\mathcal{F}
+\end{align*}
+이는 Lemma \ref{lemma-compare-higher-direct-image-proper} (1)이다.
+
+\medskip\noindent
+(2)를 보이기 위해 다음 등식들을 사용한다:
+\begin{align*}
+R\epsilon_{Y, *}Rf_{big, ph, *}a_X^{-1}K
+& =
+Rf_{big, \etale, *}R\epsilon_{X, *}a_X^{-1}K \\
+& =
+Rf_{big, \etale, *}\pi_X^{-1}K \\
+& =
+\pi_Y^{-1}Rf_{small, *}K \\
+& =
+R\epsilon_{Y, *} a_Y^{-1}Rf_{small, *}K
+\end{align*}
+% P10-E0170
+첫 번째 등식은 Lemma \ref{lemma-push-pull-ph-etale}의 가환도식과
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-derived-pushforward-composition}에서 따라온다.
+% P10-E0171
+두 번째 등식은 Lemma \ref{lemma-cohomological-descent-etale-ph}이다.
+세 번째 등식은 Lemma \ref{lemma-compare-higher-direct-image-proper} (2)이다.
+네 번째 등식은 다시 Lemma
+\ref{lemma-cohomological-descent-etale-ph}이다. 따라서 밑변환 사상
+$a_Y^{-1}(Rf_{small, *}K) \to Rf_{big, ph, *}(a_X^{-1}K)$는 동형
+$$
+R\epsilon_{Y, *}a_Y^{-1}Rf_{small, *}K \to
+R\epsilon_{Y, *}Rf_{big, ph, *}a_X^{-1}K
+$$
+을 유도한다. 다음 관찰로 증명이 끝난다. 코호몰로지 층들이 꼬임인
+$D^+(Y_\etale)$의 $L$과 $D^+((\textit{Spaces}/Y)_{ph})$의 $M$에 대한
+사상 $\alpha : a_Y^{-1}L \to M$을 고찰하자.
+$R\epsilon_{Y, *}\alpha$가 동형이면 $\alpha$도 동형이다.
+실제로 $H^i(\alpha)$가 동형임을 $i$에 대한 귀납법으로 보인다.
+충분히 작은 모든 $i$에 대해서는 참이다. $i \leq i_0$에 대해
+성립한다고 하자. 이 범위에서는
+$H^i(M) = a_Y^{-1}H^i(L)$이므로 Lemma
+\ref{lemma-comparison-ph-etale}에 의해 $j > 0$ 및 $i \leq i_0$에 대해
+$R^j\epsilon_{Y, *}H^i(M) = 0$이다. 따라서 스펙트럴 수열 논증에 의해
+$\epsilon_{Y, *}H^{i_0 + 1}(M) = H^{i_0 + 1}(R\epsilon_{Y, *}M)$이다.
+그러므로
+$\epsilon_{Y, *}H^{i_0 + 1}(M) = \pi_Y^{-1}H^{i_0 + 1}(L) =
+\epsilon_{Y, *}a_Y^{-1}H^{i_0 + 1}(L)$이다. 이는 원하는 대로
+$H^{i_0 + 1}(\alpha)$가 동형임을 함의한다
+($\epsilon_{Y, *}$는 기저 프리시프 위의 항등이므로 동형을 반영한다).
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

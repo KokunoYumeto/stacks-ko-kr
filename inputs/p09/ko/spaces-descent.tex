@@ -1,0 +1,3183 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{하강과 대수공간}
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+대수공간 위의 위상을 다룬 장(Topologies on Spaces, Section
+\ref{spaces-topologies-section-introduction}을 보라)에서 대수공간의
+에탈, fppf, 매끄러운, 신토믹, fpqc 덮개를 도입하였다. 이 장에서는
+대수공간 위의 어떤 종류의 구조를 이러한 덮개를 따라 하강시킬 수 있는지
+논의한다. 예를 들어 \cite{Gr-I}, \cite{Gr-II}, \cite{Gr-III},
+\cite{Gr-IV}, \cite{Gr-V}, \cite{Gr-VI}를 보라.
+
+\section{규약}
+\label{section-conventions}
+
+\noindent
+항상 모든 스킴은 하나의 큰 fppf 사이트 $\Sch_{fppf}$에 들어 있다고
+가정한다. 또한 고려하는 모든 환 $A$는 $\Spec(A)$가 이 큰 사이트의 한
+대상과 동형이라는 성질을 갖는다고 가정한다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자. 이 장과 이후의
+장에서는 $X \times_S X$를 쓴다. 이는 $X$와 자기 자신의 곱, 곧 $S$ 위
+대수공간의 범주에서 취한 곱이다. $X \times X$로 쓰지 않는다.
+
+\section{준연접층의 하강 자료}
+\label{section-equivalence}
+
+\noindent
+이 절은 Descent, Section \ref{descent-section-equivalence}의 대수공간
+버전이다. 그 절을 먼저 읽는 것이 좋다.
+
+\begin{definition}
+\label{definition-descent-datum-quasi-coherent}
+$S$를 스킴이라 하자. $\{f_i : X_i \to X\}_{i \in I}$를 $S$ 위
+대수공간의 사상족이라 하고 그 공역을 $X$로 고정하자.
+\begin{enumerate}
+\item 주어진 족에 대한 {\it 준연접층의 하강 자료
+$(\mathcal{F}_i, \varphi_{ij})$}란 준연접층 $\mathcal{F}_i$가 $X_i$ 위에
+각 $i \in I$마다 주어지고, 준연접
+$\mathcal{O}_{X_i \times_X X_j}$-가군의 동형
+$\varphi_{ij} : \text{pr}_0^*\mathcal{F}_i \to \text{pr}_1^*\mathcal{F}_j$
+가 각 쌍 $(i,j) \in I^2$마다 주어져서, 모든 세 지표
+$(i,j,k) \in I^3$에 대해
+$$
+\xymatrix{
+\text{pr}_0^*\mathcal{F}_i \ar[rd]_{\text{pr}_{01}^*\varphi_{ij}}
+\ar[rr]_{\text{pr}_{02}^*\varphi_{ik}} & &
+\text{pr}_2^*\mathcal{F}_k \\
+& \text{pr}_1^*\mathcal{F}_j \ar[ru]_{\text{pr}_{12}^*\varphi_{jk}} &
+}
+$$
+가 $\mathcal{O}_{X_i \times_X X_j \times_X X_k}$-가군의 가환도식이 되는
+것을 말한다. 이를 {\it 코사이클 조건}이라 한다.
+\item {\it 하강 자료의 사상
+$\psi : (\mathcal{F}_i, \varphi_{ij}) \to
+(\mathcal{F}'_i, \varphi'_{ij})$}란 사상족
+$\psi=(\psi_i)_{i\in I}$가 주어지는 것으로, 그 각 성분은
+$\mathcal{O}_{X_i}$-가군의 사상
+$\psi_i : \mathcal{F}_i \to \mathcal{F}'_i$이며 모든 도식
+$$
+\xymatrix{
+\text{pr}_0^*\mathcal{F}_i \ar[r]_{\varphi_{ij}} \ar[d]_{\text{pr}_0^*\psi_i}
+& \text{pr}_1^*\mathcal{F}_j \ar[d]^{\text{pr}_1^*\psi_j} \\
+\text{pr}_0^*\mathcal{F}'_i \ar[r]^{\varphi'_{ij}} &
+\text{pr}_1^*\mathcal{F}'_j \\
+}
+$$
+가 가환인 것을 말한다.
+\end{enumerate}
+\end{definition}
+
+
+
+
+
+
+
+\begin{lemma}
+\label{lemma-map-families}
+$S$를 스킴이라 하자. $\mathcal{U}=\{U_i\to U\}_{i\in I}$와
+$\mathcal{V}=\{V_j\to V\}_{j\in J}$를 공역이 고정된 $S$ 위 대수공간의
+사상족이라 하자. $(g,\alpha:I\to J,(g_i)):\mathcal{U}\to\mathcal{V}$를
+공역이 고정된 사상족의 사상이라 하자. Sites, Definition
+\ref{sites-definition-morphism-coverings}을 보라. 또한
+$(\mathcal{F}_j,\varphi_{jj'})$를 족 $\{V_j\to V\}_{j\in J}$에 대한
+준연접층의 하강 자료라 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item 계
+$$
+\left(g_i^*\mathcal{F}_{\alpha(i)},
+(g_i \times g_{i'})^*\varphi_{\alpha(i)\alpha(i')}\right)
+$$
+은 족 $\{U_i\to U\}_{i\in I}$에 대한 하강 자료이다.
+\item 이 구성은 하강 자료 $(\mathcal{F}_j,\varphi_{jj'})$에 관해
+함자적이다.
+\item 공역이 고정된 사상족의 두 번째 사상
+$(g',\alpha':I\to J,(g'_i))$가 주어지고 $g=g'$이면 하강 자료의 함자적
+동형
+$$
+(g_i^*\mathcal{F}_{\alpha(i)},
+(g_i \times g_{i'})^*\varphi_{\alpha(i)\alpha(i')})
+\cong
+((g'_i)^*\mathcal{F}_{\alpha'(i)},
+(g'_i \times g'_{i'})^*\varphi_{\alpha'(i)\alpha'(i')}).
+$$
+이 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: (3)의 하강 자료의 동형을 주는 사상
+$g_i^*\mathcal{F}_{\alpha(i)} \to (g'_i)^*\mathcal{F}_{\alpha'(i)}$는
+$\varphi_{\alpha(i)\alpha'(i)}$를 사상
+$(g_i,g'_i):U_i\to V_{\alpha(i)}\times_VV_{\alpha'(i)}$로 당겨온 것이다.
+\end{proof}
+
+
+\noindent
+$g:U\to V$를 대수공간의 사상이라 하자. 위 보조정리에 따르면 공역이
+$V$와 $U$인 사상족 사이에 ``$g$ 위에 놓이는'' 사상이 있으면, 그 사상족들에
+대한 하강 자료의 범주 사이에 잘 정의된 당김 함자가 존재한다.
+
+\begin{definition}
+\label{definition-descent-datum-effective-quasi-coherent}
+$S$를 스킴이라 하자. $\{U_i\to U\}_{i\in I}$를 공역이 고정된 $S$ 위
+대수공간의 사상족이라 하자.
+\begin{enumerate}
+\item $\mathcal{F}$를 준연접 $\mathcal{O}_U$-가군이라 하자.
+$\mathcal{F}$ 위에 놓이고 덮개 $\{U\to U\}$에 대한 유일한 하강 자료를
+{\it 자명한 하강 자료}라 한다.
+% P09-ERR-0337
+\item 자명한 하강 자료를 $\{U_i\to U\}$로 당겨온 것을
+{\it 표준 하강 자료}라 한다. 표기는 $(\mathcal{F}|_{U_i},can)$이다.
+\item 주어진 족에 대한 준연접층의 하강 자료
+$(\mathcal{F}_i,\varphi_{ij})$가 {\it 유효하다}는 것은 준연접층
+$\mathcal{F}$가 $U$ 위에 존재하여 $(\mathcal{F}_i,\varphi_{ij})$가
+$(\mathcal{F}|_{U_i},can)$과 동형이라는 뜻이다.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{lemma-zariski-descent-effective}
+$S$를 스킴이라 하고 $U$를 $S$ 위의 대수공간이라 하자.
+$\{U_i\to U\}$를 $U$의 Zariski 덮개라 하자. Topologies on Spaces,
+Definition \ref{spaces-topologies-definition-zariski-covering}을 보라.
+족 $\mathcal{U}=\{U_i\to U\}$에 대한 준연접층의 모든 하강 자료는
+유효하다. 더 나아가 준연접 $\mathcal{O}_U$-가군의 범주에서
+$\{U_i\to U\}$에 대한 하강 자료의 범주로 가는 함자는 충실충만하다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\section{준연접층의 fpqc 하강}
+\label{section-fpqc-descent-quasi-coherent}
+
+\noindent
+가군의 평탄 하강을 주로 응용하면 fpqc 덮개에 대한 준연접층의 대응하는
+하강 명제를 얻는다.
+
+\begin{proposition}
+\label{proposition-fpqc-descent-quasi-coherent}
+$S$를 스킴이라 하자. $\{X_i\to X\}$를 $S$ 위 대수공간의 fpqc 덮개라
+하자. Topologies on Spaces, Definition
+\ref{spaces-topologies-definition-fpqc-covering}을 보라.
+$\{X_i\to X\}$에 대한 준연접층의 모든 하강 자료는 유효하다. 더 나아가
+준연접 $\mathcal{O}_X$-가군의 범주에서 $\{X_i\to X\}$에 대한 하강
+자료의 범주로 가는 함자는 충실충만하다.
+\end{proposition}
+
+\begin{proof}
+이는 스킴에 대한 대응 결과의 거의 형식적인 귀결이다. Descent,
+Proposition \ref{descent-proposition-fpqc-descent-quasi-coherent}를 보라.
+증명 전략은 다음과 같다.
+\begin{enumerate}
+\item $\{X_i\to X\}$가 자명한 덮개 $\{X\to X\}$의 세분이라는 사실은
+Lemma \ref{lemma-map-families}를 통해 함자
+$\QCoh(\mathcal{O}_X)\to DD(\{X_i\to X\})$를 준다. 이는 준연접
+$\mathcal{O}_X$-가군의 범주에서 주어진 족에 대한 하강 자료의 범주로 가는
+함자이다.
+\item 명제를 증명하기 위해 준역함자
+$back:DD(\{X_i\to X\})\to\QCoh(\mathcal{O}_X)$를 구성할 것이다.
+\item Lemma \ref{lemma-map-families}를 다시 적용하면 함자
+$DD(\{X_i\to X\})\to DD(\{T_j\to X\})$가 $\{T_j\to X\}$가
+주어진 족의 세분일 때 존재함을 알 수 있다. 따라서
+$back$을 구성할 때 각 $X_i$가 스킴이라고 가정해도 된다. Topologies on
+Spaces, Lemma \ref{spaces-topologies-lemma-refine-fpqc-schemes}를 보라.
+이로써 모든 $X_i$가 스킴인 경우로 환원된다.
+\item $X$ 위의 준연접층은 정의상 준연접 $\mathcal{O}_X$-가군이며
+$X_\etale$ 위에 놓인다. 이제 모든 $U\in\Ob(X_\etale)$에 대해 스킴으로
+이루어진 fppf 덮개 $\{U_i\times_XX_i\to U\}$와 덮개의 사상
+$g:\{U_i\times_XX_i\to U\}\to\{X_i\to X\}$를 얻으며, 이 사상은
+$U\to X$ 위에 놓인다.
+% P09-ERR-0338
+하강 자료 $\xi=(\mathcal{F}_i,\varphi_{ij})$가 주어지면 준연접
+$\mathcal{O}_U$-가군 $\mathcal{F}_{\xi,U}$를 얻는다. 이는 Lemma
+\ref{lemma-map-families}의 당김 $g^*\xi$를 $U$의 덮개에 취하고 스킴의
+fppf 덮개에 대한 유효성을 사용하여 얻는 대상에 대응한다. Descent,
+Proposition \ref{descent-proposition-fpqc-descent-quasi-coherent}를 보라.
+\item $\xi\mapsto\mathcal{F}_{\xi,U}$가 $\xi$에 관해 함자적임을 확인한다.
+생략한다.
+\item $\xi\mapsto\mathcal{F}_{\xi,U}$가 사상 $U\to U'$와 양립함을
+확인한다. 이 사상은 사이트 $X_\etale$의 사상이다. 그러면 층들의 계
+$\mathcal{F}_{\xi,U}$는 준연접층 $\mathcal{F}_\xi$에 대응하며, 이는
+$X_\etale$ 위에 놓인다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-characterize-quasi-coherent-small-etale}를 보라.
+세부는 생략한다.
+\item $back:\xi\mapsto\mathcal{F}_\xi$가 (1)에서 구성한 함자의
+준역함자임을 확인한다. 생략한다.
+\end{enumerate}
+이로써 증명이 끝난다.
+\end{proof}
+
+\section{준연접 가군과 아핀}
+\label{section-alternative-quasi-coherent}
+
+\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$X_{affine, \etale}$은 $X_\etale$의 충만한 부분범주이며, 그 대상은 아핀
+대상이고 표준 에탈 덮개들을 덮개로 선언하여 사이트로 만든 것임을
+상기하자. Properties of Spaces, Definition
+\ref{spaces-properties-definition-affine-etale-site}를 보라. Properties of
+Spaces, Lemma \ref{spaces-properties-lemma-alternative}에 의해 당김 함자가
+제한으로 주어지는 토포스의 동치
+$g : \Sh(X_{affine, \etale}) \to \Sh(X_\etale)$
+가 있다. $\mathcal{O}_X$는 $X_\etale$ 위의 구조층을 나타냄을 상기하자.
+그러면 환 달린 토포스의 동치
+\begin{equation}
+\label{equation-alternative-small-ringed}
+(\Sh(X_{affine, \etale}), \mathcal{O}_X|_{X_{affine, \etale}})
+\longrightarrow
+(\Sh(X_\etale), \mathcal{O}_X)
+\end{equation}
+를 얻는다. 흔히 $\mathcal{O}_X$를
+$\mathcal{O}_X|_{X_{affine, \etale}}$ 대신 쓸 것이다.
+% P09-ERR-0339
+이제 준연접 가군도 비교할 수 있다.
+
+\begin{lemma}
+\label{lemma-quasi-coherent-alternative-small}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 $\mathcal{O}_X$-가군의 앞층이라 하고
+$X_{affine, \etale}$ 위에 놓여 있다고 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item 모든 사상 $U\to U'$에 대해, 이 사상이 $X_{affine, \etale}$의
+사상일 때 사상
+$\mathcal{F}(U') \otimes_{\mathcal{O}_X(U')} \mathcal{O}_X(U)
+\to \mathcal{F}(U)$가 동형이다.
+\item $\mathcal{F}$는 Modules on Sites, Definition
+\ref{sites-modules-definition-site-local}의 의미에서 환 달린 사이트
+$(X_{affine, \etale}, \mathcal{O}_X)$ 위의 준연접 가군이다.
+\item $\mathcal{F}$는 동치 (\ref{equation-alternative-small-ringed})를 통해
+$X$ 위의 준연접 가군에 대응한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하자. $\mathcal{F}$가 층임을 보이기 위해
+$\mathcal{U}=\{U_i\to U\}_{i=1,\ldots,n}$을
+$X_{affine,\etale}$의 덮개라 하자. $\mathcal{F}$와 $\mathcal{U}$에
+대한 층 조건은 $\mathcal{F}$에 관한 가정에 의해
+$$
+0 \to \mathcal{F}(U) \to
+\prod \mathcal{F}(U) \otimes_{\mathcal{O}_X(U)} \mathcal{O}_X(U_i) \to
+\prod \mathcal{F}(U) \otimes_{\mathcal{O}_X(U)} \mathcal{O}_X(U_i \times_U U_j)
+$$
+가 완전함을 보이는 것으로 환원된다. 이는
+$\mathcal{O}_X(U)\to\prod\mathcal{O}_X(U_i)$가 충실 평탄이기 때문에
+참이다(Descent, Lemma \ref{descent-lemma-standard-covering-Cech}와
+$X_{affine,\etale}$의 덮개들이 표준 에탈 덮개라는 사실에 의한다).
+따라서 Descent, Lemma \ref{descent-lemma-ff-exact}를 적용할 수 있다.
+다음으로 $\mathcal{F}$가 $X_{affine,\etale}$ 위에서 준연접임을 보인다.
+즉 $U$를 $X_{affine,\etale}$의 대상으로 하고 $R=\mathcal{O}_X(U)$로
+놓은 뒤 표시
+$$
+\bigoplus\nolimits_{k \in K} R
+\longrightarrow
+\bigoplus\nolimits_{l \in L} R
+\longrightarrow
+\mathcal{F}(U)
+\longrightarrow 0
+$$
+를 택하자. 이는 자유 $R$-가군들로 된 표시이다. 성질 (1)과 텐서곱의
+오른쪽 완전성에 의해 모든 사상 $U'\to U$가 $X_{affine,\etale}$에
+놓일 때 표시
+$$
+\bigoplus\nolimits_{k \in K} \mathcal{O}_X(U')
+\longrightarrow
+\bigoplus\nolimits_{l \in L} \mathcal{O}_X(U')
+\longrightarrow
+\mathcal{F}(U')
+\longrightarrow 0
+$$
+를 얻는다. 달리 말해 $\mathcal{F}$를 국소화 범주
+$X_{affine, etale}/U$에 제한하면 다음 표시를 갖는다.
+% P09-ERR-0340
+$$
+\bigoplus\nolimits_{k \in K} \mathcal{O}_X|_{X_{affine, \etale}/U}
+\longrightarrow
+\bigoplus\nolimits_{l \in L} \mathcal{O}_X|_{X_{affine, \etale}/U}
+\longrightarrow
+\mathcal{F}|_{X_{affine, \etale}/U}
+\longrightarrow 0
+$$
+이는 $\mathcal{F}$가 준연접임을 보이는 데 필요한 바로 그 표시이다.
+끔찍한 표기에 양해를 구하며, 이것으로 (1)이 (2)를 함의한다는 증명을
+마친다.
+
+\medskip\noindent
+준연접 가군의 개념은 내재적이므로(Modules on Sites, Lemma
+\ref{sites-modules-lemma-special-locally-free}) 동치
+(\ref{equation-alternative-small-ringed})는 준연접 가군의 범주 사이의
+동치를 유도한다. 따라서 (2)와 (3)은 동치이다.
+
+\medskip\noindent
+(3)을 가정하고 (1)을 증명하자. 즉 $\mathcal{G}$를 $X$ 위의 준연접
+가군으로서 $\mathcal{F}$에 대응하는 것이라 하자.
+$h:U\to U'\to X$를 $X_{affine,\etale}$의 사상이라 하자.
+$f:U\to X$와 $f':U'\to X$를 구조 사상이라 쓰자.
+% P09-ERR-0341
+그러면 $f=f'\circ h$이다. 다음 등식들이 성립한다.
+$\mathcal{F}(U')=\Gamma(U',(f')^*\mathcal{G})$ 그리고
+$\mathcal{F}(U)=\Gamma(U,f^*\mathcal{G})=\Gamma(U,h^*(f')^*\mathcal{G})$.
+따라서 Schemes, Lemma \ref{schemes-lemma-widetilde-pullback}에 의해 (1)이
+성립한다.
+\end{proof}
+
+\section{가군의 유한성 성질의 하강}
+\label{section-descent-finiteness}
+
+\noindent
+이 절은 Descent, Section \ref{descent-section-descent-finiteness}의
+대수공간 버전이다. 목표는 준연접 가군이 어떤 유한성 조건을 갖는지를
+덮개의 각 원소 위에서 확인할 수 있음을 보이는 것이다.
+% P09-ERR-0342
+다음 증명 방식을 반복해서 사용할 것이다. $X$가 대수공간이고
+$\{X_i\to X\}$가 fppf(각각 fpqc) 덮개라고 하자. $U\to X$를 전사 에탈
+사상이라 하고 $U$가 스킴이라고 하자. 그러면 다음 성질을 갖는 fppf
+(각각 fpqc) 덮개 $\{Y_j\to X\}$가 존재한다.
+\begin{enumerate}
+\item $\{Y_j\to X\}$는 $\{X_i\to X\}$의 세분이다.
+\item 각 $Y_j$는 스킴이다.
+\item 각 사상 $Y_j\to X$는 $U$를 거쳐 분해된다.
+% P09-ERR-0343
+\item $\{Y_j\to U\}$는 $U$의 fppf(각각 fpqc) 덮개이다.
+\end{enumerate}
+실제로 먼저 $\{X_i\to X\}$를 각 $X_i$가 스킴인 fppf(각각 fpqc)
+덮개로 세분한다. Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-refine-fppf-schemes}, 각각 Lemma
+\ref{spaces-topologies-lemma-refine-fpqc-schemes}를 보라. 그런 다음
+$Y_i=U\times_XX_i$로 놓는다. 준연접 $\mathcal{O}_X$-가군
+$\mathcal{F}$가 유한형, 유한 표시 등인 것은 준연접
+$\mathcal{O}_U$-가군 $\mathcal{F}|_U$가 유한형, 유한 표시 등인 것과
+동치이다. 그러므로 세분 $\{Y_j\to X\}$의 존재를 이용하여 아래
+보조정리들의 증명을 스킴의 경우로 환원할 수 있다. 이를 ``{\it 결과는
+에탈 국소화를 통해 스킴의 경우에서 따른다}''라고 표현할 것이다.
+
+\begin{lemma}
+\label{lemma-finite-type-descends}
+$X$를 스킴 $S$ 위의 대수공간이라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. $\{f_i:X_i\to X\}_{i\in I}$를 fpqc
+덮개라 하고, 각 $f_i^*\mathcal{F}$가 유한형
+$\mathcal{O}_{X_i}$-가군이라고 하자. 그러면 $\mathcal{F}$는 유한형
+$\mathcal{O}_X$-가군이다.
+\end{lemma}
+
+\begin{proof}
+이는 에탈 국소화를 통해 스킴의 경우에서 따른다. Descent, Lemma
+\ref{descent-lemma-finite-type-descends}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-presentation-descends}
+$X$를 스킴 $S$ 위의 대수공간이라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. $\{f_i:X_i\to X\}_{i\in I}$를 fpqc
+덮개라 하고, 각 $f_i^*\mathcal{F}$가 유한 표시
+$\mathcal{O}_{X_i}$-가군이라고 하자. 그러면 $\mathcal{F}$는 유한 표시
+$\mathcal{O}_X$-가군이다.
+\end{lemma}
+
+\begin{proof}
+이는 에탈 국소화를 통해 스킴의 경우에서 따른다. Descent, Lemma
+\ref{descent-lemma-finite-presentation-descends}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-descends}
+$X$를 스킴 $S$ 위의 대수공간이라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. $\{f_i:X_i\to X\}_{i\in I}$를 fpqc
+덮개라 하고, 각 $f_i^*\mathcal{F}$가 평탄
+$\mathcal{O}_{X_i}$-가군이라고 하자. 그러면 $\mathcal{F}$는 평탄
+$\mathcal{O}_X$-가군이다.
+\end{lemma}
+
+\begin{proof}
+이는 에탈 국소화를 통해 스킴의 경우에서 따른다. Descent, Lemma
+\ref{descent-lemma-flat-descends}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-locally-free-descends}
+$X$를 스킴 $S$ 위의 대수공간이라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. $\{f_i:X_i\to X\}_{i\in I}$를 fpqc
+덮개라 하고, 각 $f_i^*\mathcal{F}$가 유한 국소 자유
+$\mathcal{O}_{X_i}$-가군이라고 하자. 그러면 $\mathcal{F}$는 유한 국소
+자유 $\mathcal{O}_X$-가군이다.
+\end{lemma}
+
+\begin{proof}
+이는 에탈 국소화를 통해 스킴의 경우에서 따른다. Descent, Lemma
+\ref{descent-lemma-finite-locally-free-descends}를 보라.
+\end{proof}
+
+\noindent
+국소 사영 준연접층의 정의는 Properties of Spaces, Section
+\ref{spaces-properties-section-locally-projective}에 있다. 그 개념이 당김에
+의해 보존된다는 것도 그곳에서 증명된다.
+
+\begin{lemma}
+\label{lemma-locally-projective-descends}
+$X$를 스킴 $S$ 위의 대수공간이라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. $\{f_i:X_i\to X\}_{i\in I}$를 fpqc
+덮개라 하고, 각 $f_i^*\mathcal{F}$가 국소 사영
+$\mathcal{O}_{X_i}$-가군이라고 하자. 그러면 $\mathcal{F}$는 국소 사영
+$\mathcal{O}_X$-가군이다.
+\end{lemma}
+
+\begin{proof}
+이는 에탈 국소화를 통해 스킴의 경우에서 따른다. Descent, Lemma
+\ref{descent-lemma-locally-projective-descends}를 보라.
+\end{proof}
+
+\noindent
+위 결과들과 관련되지만 성격이 조금 다른 두 결과도 여기에 덧붙인다.
+
+\begin{lemma}
+\label{lemma-finite-over-finite-module}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자. $f$가 유한
+사상이라고 가정하자. 그러면 $\mathcal{F}$가 유한형
+$\mathcal{O}_X$-가군인 것과 $f_*\mathcal{F}$가 유한형
+$\mathcal{O}_Y$-가군인 것은 동치이다.
+\end{lemma}
+
+\begin{proof}
+$f$는 유한이므로 표현 가능하다. 스킴 $V$와 전사 에탈 사상 $V\to Y$를
+택하자. 그러면 $U=V\times_YX$는 스킴이고 $X$로 가는 전사 에탈 사상과
+유한 사상 $\psi:U\to V$를 갖는다. 후자는 $f$의 밑변환이다. 등식
+$\psi_*(\mathcal{F}|_U)=f_*\mathcal{F}|_V$에 의해 보조정리의 결론은
+스킴 버전인 다음 결과에서 곧바로 따른다.
+% P09-ERR-0344
+Descent, Lemma \ref{descent-lemma-finite-over-finite-module}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-finitely-presented-module}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자. $f$가 유한이며
+유한 표시라고 가정하자. 그러면 $\mathcal{F}$가 유한 표시
+$\mathcal{O}_X$-가군인 것과 $f_*\mathcal{F}$가 유한 표시
+$\mathcal{O}_Y$-가군인 것은 동치이다.
+\end{lemma}
+
+\begin{proof}
+$f$는 유한이므로 표현 가능하다. 스킴 $V$와 전사 에탈 사상 $V\to Y$를
+택하자. 그러면 $U=V\times_YX$는 스킴이고 $X$로 가는 전사 에탈 사상과
+유한 사상 $\psi:U\to V$를 갖는다. 후자는 $f$의 밑변환이다. 등식
+$\psi_*(\mathcal{F}|_U)=f_*\mathcal{F}|_V$에 의해 보조정리의 결론은
+스킴 버전인 다음 결과에서 곧바로 따른다.
+% P09-ERR-0345
+Descent, Lemma \ref{descent-lemma-finite-finitely-presented-module}.
+\end{proof}
+
+\section{Fpqc 덮개}
+\label{section-fpqc}
+
+\noindent
+이 절은 Descent, Section
+\ref{descent-section-fpqc-universal-effective-epimorphisms}의 대응물이다.
+현재로서는 스킴의 fpqc 덮개에 관한 모든 내용이 대수공간에도 성립하는지
+알지 못한다.
+
+\begin{lemma}
+\label{lemma-open-fpqc-covering}
+$S$를 스킴이라 하자. $\{f_i:T_i\to T\}_{i\in I}$를 $S$ 위
+대수공간의 fpqc 덮개라 하자. 각 $i$에 대해 열린 부분공간
+$W_i\subset T_i$가 주어져 있고, 모든 $i,j\in I$에 대해
+$\text{pr}_0^{-1}(W_i)=\text{pr}_1^{-1}(W_j)$가
+$T_i\times_TT_j$의 열린 부분공간으로서 성립한다고 하자. 그러면 유일한
+열린 부분공간 $W\subset T$가 존재하여 $W_i=f_i^{-1}(W)$가 각 $i$에
+대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-refine-fpqc-schemes}에 의해 각 $T_i$가
+스킴이라고 가정해도 된다. 스킴 $U$와 전사 에탈 사상 $U\to T$를
+택하자. 그러면 $\{T_i\times_TU\to U\}$는 $U$의 fpqc 덮개이고,
+$T_i\times_TU$는 각 $i$에 대해 스킴이다. 따라서 열린집합들의 모임
+$W_i\times_TU$는 유일한 열린 부분스킴 $W'\subset U$에서 온다.
+Descent, Lemma \ref{descent-lemma-open-fpqc-covering}를 보라.
+% P09-ERR-0346
+$U\to X$가 열린 사상이므로 Zariski 열린집합 $W\subset X$를
+$W'$의 상으로 정의할 수 있다. Properties of Spaces, Section
+\ref{spaces-properties-section-points}를 보라. 이것이 실제로 작동한다는
+확인, 즉 $W_i$가 $W$의 역상이라는 확인을 각 $i$에 대해 하는 것은
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fpqc-universal-effective-epimorphisms}
+$S$를 스킴이라 하자. $\{T_i\to T\}$를 $S$ 위 대수공간의 fpqc
+덮개라 하자. Topologies on Spaces, Definition
+\ref{spaces-topologies-definition-fpqc-covering}을 보라. 그러면 대수공간
+$B$가 $S$ 위에 주어졌을 때 수열
+$$
+\xymatrix{
+\Mor_S(T, B) \ar[r] &
+\prod\nolimits_i \Mor_S(T_i, B) \ar@<1ex>[r] \ar@<-1ex>[r] &
+\prod\nolimits_{i, j} \Mor_S(T_i \times_T T_j, B)
+}
+$$
+은 등화자 도식이다. 달리 말하면 $S$ 위 대수공간의 범주에서 표현가능한
+모든 함자는 fpqc 덮개에 대한 층 조건을 만족한다.
+\end{lemma}
+
+\begin{proof}
+$\{T_i\to T\}$가 스킴의 fpqc 덮개인 경우 이는 참임을 알고 있다.
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-sheaf-fpqc}를 보라. 이것이 핵심 사실이며,
+독자에게 나머지 형식적인 증명을 건너뛰도록 권한다. 스킴 $U$와 전사 에탈
+사상 $U\to T$를 택하자. 스킴 $U_i$와 전사 에탈 사상
+$U_i\to T_i\times_TU$를 택하자. 그러면 $\{U_i\to U\}$는 fpqc
+덮개이다. 이는 Topologies on Spaces, Lemmas
+\ref{spaces-topologies-lemma-fpqc}와
+\ref{spaces-topologies-lemma-recognize-fpqc-covering}에서 따른다. 위 결과에
+의해 $\{U_i\to U\}$에 대해서는 결론이 성립한다.
+
+\medskip\noindent
+구체적으로 이는 다음을 뜻한다. 사상족 $b_i:T_i\to B$가 주어져서
+$b_i\circ\text{pr}_0=b_j\circ\text{pr}_1$이 사상
+$T_i\times_TT_j\to B$로서 성립한다고 하자. $a_i:U_i\to B$를
+$U_i\to T_i$와 $b_i$의 합성으로 놓는다. 위에서 말한 사실에 의해 유일한
+사상 $a:U\to B$가 존재하여 $a_i$가 $a$와 $U_i\to U$의 합성이 된다.
+유일성은 $a\circ\text{pr}_0=a\circ\text{pr}_1$이 사상
+$U\times_TU\to B$로서 성립함을 보장한다. 이제 층으로서
+$T=U/(U\times_TU)$이므로 $a$는 유일한 사상 $b:T\to B$에서 온다.
+도식을 따라가면 $b$가 우리가 찾는 사상임을 알 수 있다.
+\end{proof}
+
+\section{사상의 유한성 및 매끄러움 성질의 하강}
+\label{section-descent-finiteness-morphisms}
+
+\noindent
+다음 유형의 보조정리는 때때로 유용하다.
+
+\begin{lemma}
+\label{lemma-curiosity}
+$S$를 스킴이라 하자. $X\to Y\to Z$를 대수공간의 사상이라 하자.
+% P09-ERR-0347
+$P$를 $S$ 위 대수공간의 사상이 갖는 다음 성질 중 하나라 하자:
+평탄, 국소 유한형, 국소 유한 표시. $X\to Z$가 $P$를 갖고
+$X\to Y$가 $(\Sch/S)_{fppf}$ 위 층의 전사라고 가정하자. 그러면
+$Y\to Z$는 $P$를 갖는다.
+\end{lemma}
+
+\begin{proof}
+스킴 $W$와 전사 에탈 사상 $W\to Z$를 택하자. 스킴 $V$와 전사 에탈
+사상 $V\to W\times_ZY$를 택하자. 스킴 $U$와 전사 에탈 사상
+$U\to V\times_YX$를 택하자. 가정에 의해 fppf 덮개
+$\{V_i\to V\}$와 올림 $V_i\to X$를 사상 $V_i\to Y$에 대해 찾을 수 있다.
+$U\to X$가 전사 에탈이므로 fppf 덮개
+$\{V_i\times_XU\to V\}$의 원소들 위에서는 $U$로 가는 올림이 있다.
+따라서 $U\to V$는 $(\Sch/S)_{fppf}$ 위 층의 전사를 유도한다.
+대수공간의 사상이 성질 $P$를 갖는다는 정의(Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-flat}, Definition
+\ref{spaces-morphisms-definition-locally-finite-type}, Definition
+\ref{spaces-morphisms-definition-locally-finite-presentation}을 보라)에 의해
+$U\to W$는 $P$를 갖고, 우리가 보일 것은 $V\to W$가 $P$를 갖는다는
+것이다. 이로써 문제는 스킴의 사상인 경우로 환원되며, 그 경우는 Descent,
+Lemma \ref{descent-lemma-curiosity}에서 다룬다.
+\end{proof}
+
+\noindent
+위 보조정리의 더 표준적인 경우는 다음과 같다. (``평탄''인 버전은
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-permanence}에서 따른다.)
+
+\begin{lemma}
+\label{lemma-flat-finitely-presented-permanence}
+$S$를 스킴이라 하자. 다음 가환도식
+$$
+\xymatrix{
+X \ar[rr]_f \ar[rd]_p & &
+Y \ar[dl]^q \\
+& B
+}
+$$
+이 주어졌다고 하자. 이는 $S$ 위 대수공간의 사상들로 이루어져 있다.
+$f$가 전사이고 평탄이며 국소 유한 표시라고
+가정하고, $p$가 국소 유한 표시(각각 국소 유한형)라고 가정하자. 그러면
+$q$는 국소 유한 표시(각각 국소 유한형)이다.
+\end{lemma}
+
+\begin{proof}
+$\{X\to Y\}$는 fppf 덮개이므로 fppf 층의 전사를 유도한다(Topologies
+on Spaces, Lemma \ref{spaces-topologies-lemma-fppf-covering-surjective}).
+따라서 이는 Lemma \ref{lemma-curiosity}의 특수한 경우이다. 한편 더 쉬운
+논증으로 스킴의 대응 결과에서 이를 끌어낼 수도 있다. 즉 문제는 $B$와
+$Y$ 위에서 에탈 국소적이다(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-finite-type-local}와
+\ref{spaces-morphisms-lemma-finite-presentation-local}). 따라서 $B$와
+$Y$가 아핀 스킴이라고 가정해도 된다. $|X|\to|Y|$가 열림이므로
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-fppf-open}) 아핀
+스킴 $U$와 에탈 사상 $U\to X$를 택하여 합성 $U\to Y$가 전사가 되게
+할 수 있다. 이 경우 결론은 Descent, Lemma
+\ref{descent-lemma-flat-finitely-presented-permanence}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-syntomic-smooth-etale-permanence}
+$S$를 스킴이라 하자. 다음 가환도식
+$$
+\xymatrix{
+X \ar[rr]_f \ar[rd]_p & &
+Y \ar[dl]^q \\
+& B
+}
+$$
+이 주어졌다고 하자. 이는 $S$ 위 대수공간의 사상들로 이루어져 있다.
+다음을 가정한다.
+\begin{enumerate}
+\item $f$는 전사이고 신토믹(각각 매끄러운, 각각 에탈)이다.
+\item $p$는 신토믹(각각 매끄러운, 각각 에탈)이다.
+\end{enumerate}
+그러면 $q$는 신토믹(각각 매끄러운, 각각 에탈)이다.
+\end{lemma}
+
+\begin{proof}
+이를 스킴의 대응 결과에서 끌어낸다. 즉 문제는 $B$와 $Y$ 위에서 에탈
+국소적이다(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-syntomic-local},
+\ref{spaces-morphisms-lemma-smooth-local},
+\ref{spaces-morphisms-lemma-etale-local}). 따라서 $B$와 $Y$가 아핀
+스킴이라고 가정해도 된다. $|X|\to|Y|$가 열림이므로(Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-fppf-open}) 아핀 스킴 $U$와
+에탈 사상 $U\to X$를 택하여 합성 $U\to Y$가 전사가 되게 할 수 있다.
+이 경우 결론은 Descent, Lemma
+\ref{descent-lemma-syntomic-smooth-etale-permanence}에서 따른다.
+\end{proof}
+
+\noindent
+사실 이 결과를 다음과 같이 강화할 수 있다.
+
+\begin{lemma}
+\label{lemma-smooth-permanence}
+$S$를 스킴이라 하자. 다음 가환도식
+$$
+\xymatrix{
+X \ar[rr]_f \ar[rd]_p & &
+Y \ar[dl]^q \\
+& B
+}
+$$
+이 주어졌다고 하자. 이는 $S$ 위 대수공간의 사상들로 이루어져 있다.
+다음을 가정한다.
+\begin{enumerate}
+\item $f$는 전사이고 평탄이며 국소 유한 표시이다.
+\item $p$는 매끄러운(각각 에탈) 사상이다.
+\end{enumerate}
+그러면 $q$는 매끄러운(각각 에탈) 사상이다.
+\end{lemma}
+
+\begin{proof}
+이를 스킴의 대응 결과에서 끌어낸다. 즉 문제는 $B$와 $Y$ 위에서 에탈
+국소적이다(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-smooth-local}와
+\ref{spaces-morphisms-lemma-etale-local}). 따라서 $B$와 $Y$가 아핀
+스킴이라고 가정해도 된다. $|X|\to|Y|$가 열림이므로(Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-fppf-open}) 아핀 스킴 $U$와
+에탈 사상 $U\to X$를 택하여 합성 $U\to Y$가 전사가 되게 할 수 있다.
+이 경우 결론은 Descent, Lemma
+\ref{descent-lemma-smooth-permanence}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-syntomic-permanence}
+$S$를 스킴이라 하자. 다음 가환도식
+$$
+\xymatrix{
+X \ar[rr]_f \ar[rd]_p & &
+Y \ar[dl]^q \\
+& B
+}
+$$
+이 주어졌다고 하자. 이는 $S$ 위 대수공간의 사상들로 이루어져 있다.
+다음을 가정한다.
+\begin{enumerate}
+\item $f$는 전사이고 평탄이며 국소 유한 표시이다.
+\item $p$는 신토믹이다.
+\end{enumerate}
+그러면 $q$와 $f$는 모두 신토믹이다.
+\end{lemma}
+
+\begin{proof}
+이를 스킴의 대응 결과에서 끌어낸다. 즉 문제는 $B$와 $Y$ 위에서 에탈
+국소적이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-syntomic-local}). 따라서 $B$와 $Y$가 아핀
+스킴이라고 가정해도 된다. $|X|\to|Y|$가 열림이므로(Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-fppf-open}) 아핀 스킴 $U$와
+에탈 사상 $U\to X$를 택하여 합성 $U\to Y$가 전사가 되게 할 수 있다.
+이 경우 결론은 Descent, Lemma
+\ref{descent-lemma-syntomic-permanence}에서 따른다.
+\end{proof}
+
+\section{공간의 성질의 하강}
+\label{section-descending-properties-spaces}
+
+\noindent
+이 절에는 다음 유형의 결과들을 모아 둔다.
+
+\begin{lemma}
+\label{lemma-descend-unibranch}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자.
+$x\in|X|$라 하자. $f$가 $x$에서 평탄이고 $X$가 $x$에서 기하학적으로
+단일분지이면, $Y$는 $f(x)$에서 기하학적으로 단일분지이다.
+\end{lemma}
+
+\begin{proof}
+에탈 국소환의 사상
+$\mathcal{O}_{Y,f(\overline{x})}\to\mathcal{O}_{X,\overline{x}}$을
+생각하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-at-point-etale-local-rings}에 의해 이는
+평탄하다. 따라서 $\mathcal{O}_{X,\overline{x}}$가 유일한 최소
+소아이디얼을 가지면 $\mathcal{O}_{Y,f(\overline{x})}$도 그러하다(going
+down에 의한다. Algebra, Lemma \ref{algebra-lemma-flat-going-down}을 보라).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descend-reduced}
+\begin{slogan}
+축약된 정의역을 갖는 대수공간의 평탄 전사 사상은 축약된 공역을 갖는다.
+\end{slogan}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자.
+$f$가 평탄이고 전사이며 $X$가 축약이면 $Y$도 축약이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $V$와 전사 에탈 사상 $V\to Y$를 택하자. 스킴 $U$와 전사 에탈
+사상 $U\to X\times_YV$를 택하자. $f$가 전사이고 평탄이므로 스킴의 사상
+$U\to V$도 전사이고 평탄이다. 이런 식으로 문제를 스킴의 경우로
+환원한다. 실제로 $X$와 $Y$의 축약성은 $U$와 $V$의 축약성으로 정의된다.
+Properties of Spaces, Section
+\ref{spaces-properties-section-types-properties}를 보라. 스킴의 경우는
+Descent, Lemma \ref{descent-lemma-descend-reduced}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descend-locally-Noetherian}
+$f:X\to Y$를 대수공간의 사상이라 하자. $f$가 국소 유한 표시이고
+평탄이며 전사이고, $X$가 국소 뇌터이면 $Y$도 국소 뇌터이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $V$와 전사 에탈 사상 $V\to Y$를 택하자. 스킴 $U$와 전사 에탈
+사상 $U\to X\times_YV$를 택하자. $f$가 전사이고 평탄이며 국소 유한
+표시이므로 스킴의 사상 $U\to V$도 전사이고 평탄이며 국소 유한 표시이다.
+이런 식으로 문제를 스킴의 경우로 환원한다. 실제로 $X$와 $Y$가 국소
+뇌터라는 것은 $U$와 $V$가 국소 뇌터라는 것으로 정의된다. Properties
+of Spaces, Section \ref{spaces-properties-section-types-properties}를 보라.
+스킴의 경우 결론은 Descent, Lemma
+\ref{descent-lemma-Noetherian-local-fppf}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descend-regular}
+$f:X\to Y$를 대수공간의 사상이라 하자. $f$가 국소 유한 표시이고
+평탄이며 전사이고, $X$가 정칙이면 $Y$도 정칙이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-descend-locally-Noetherian}에 의해 $Y$가 국소 뇌터임을
+안다. 스킴 $V$와 전사 에탈 사상 $V\to Y$를 택하자. $V$의 모든
+국소환이 정칙 국소환임을 보이면 충분하다. Properties, Lemma
+\ref{properties-lemma-characterize-regular}를 보라. 스킴 $U$와 전사 에탈
+사상 $U\to X\times_YV$를 택하자. $f$가 전사이고 평탄이므로 스킴의 사상
+$U\to V$도 전사이고 평탄이다. 가정에 의해 $U$는 정칙 스킴이며, 특히
+그 모든 국소환은 정칙이다(위 보조정리에 의한다). 따라서 결론은 Algebra,
+Lemma \ref{algebra-lemma-flat-under-regular}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-reduced-local-smooth}
+$f:X\to Y$를 대수공간의 매끄러운 사상이라 하자. $Y$가 축약이면 $X$도
+축약이다. $f$가 전사이고 $X$가 축약이면 $Y$도 축약이다.
+\end{lemma}
+
+\begin{proof}
+가환도식
+$$
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+$$
+을 택하되, $U$와 $V$는 스킴이고 수직 화살표들은 전사 에탈이며
+$U\to X\times_YV$는 전사 에탈이라고 하자. 대수공간 $X$가 축약인 것과
+스킴 $U$가 축약인 것은 동치임을 주목하자. 이는 Properties of Spaces,
+Section \ref{spaces-properties-section-types-properties}에서 주어진 축약
+대수공간의 정의에 따른다. $Y$와 $V$도 마찬가지이다.
+사상 $U\to V$는 스킴의 매끄러운 사상이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-smooth-local}을 보라. 축약이라는 성질은 스킴의
+매끄러운 위상에서 국소적이므로(Descent, Lemma
+\ref{descent-lemma-reduced-local-smooth}) $U$는 $V$가 축약이면
+축약이다. 한편 $X\to Y$가 전사이면 $U\to V$도 전사이고, 이 경우
+$U$가 축약이면 $V$도 축약이다.
+\end{proof}
+
+\section{사상의 성질의 하강}
+\label{section-descending-properties-morphisms}
+
+\noindent
+이 절에서는 대수공간의 사상이 갖는 성질이 어떤 위상에서 공역에 관해
+국소적이라는 개념을 도입한다. Descent, Section
+\ref{descent-section-descending-properties-morphisms}와 비교하라.
+
+\begin{definition}
+\label{definition-property-morphisms-local}
+$S$를 스킴이라 하자. $\mathcal{P}$를 $S$ 위 대수공간의 사상이 갖는
+성질이라 하자. $\tau\in\{fpqc,fppf,syntomic,smooth,\etale\}$라 하자.
+$\mathcal{P}$가 {\it 밑에 관해 $\tau$-국소적}, 또는
+{\it 공역에 관해 $\tau$-국소적}, 또는 {\it $\tau$-위상에서 밑에 관해
+국소적}이라고 하는 것은, 모든 대수공간의 $\tau$-덮개
+$\{Y_i\to Y\}_{i\in I}$와 모든 대수공간의 사상 $f:X\to Y$에 대해
+$$
+f \text{ has }\mathcal{P}
+\Leftrightarrow
+\text{each }Y_i \times_Y X \to Y_i\text{ has }\mathcal{P}.
+$$
+가 성립한다는 뜻이다.
+\end{definition}
+
+\noindent
+동형은 언제나 덮개이므로, 성질 $\mathcal{P}$가 $X\to Y$에 대해
+성립하는 것과 임의의 화살표 $X'\to Y'$가 $X\to Y$와 동형일 때 그
+화살표에 대해 성립하는 것은 동치임을 알 수 있다(또는 이를 요구한다). 성질이 공역에
+관해 $\tau$-국소적이면 $\tau$-덮개에 등장하는 사상에 의한 밑변환으로
+보존된다. 형식적인 명제는 다음과 같다.
+
+\begin{lemma}
+\label{lemma-pullback-property-local-target}
+$S$를 스킴이라 하자. $\tau\in\{fpqc,fppf,syntomic,smooth,\etale\}$라
+하자. $\mathcal{P}$를 $S$ 위 대수공간의 사상이 갖는 성질로서 공역에
+관해 $\tau$-국소적인 것이라 하자. $f:X\to Y$가 성질 $\mathcal{P}$를
+갖는다고 하자. 임의의 사상 $Y'\to Y$가 평탄, 각각 평탄이고 국소 유한
+표시, 각각 신토믹, 각각 에탈이면 밑변환
+% P09-ERR-0348
+$f':Y'\times_YX\to Y'$는 $f$의 밑변환이며 성질 $\mathcal{P}$를 갖는다.
+\end{lemma}
+
+\begin{proof}
+$Y'\to Y$를 $\tau$-덮개를 이루는 사상족에 넣을 수 있기 때문이다.
+\end{proof}
+
+\noindent
+위 결과에서 자주 쓰이는 간단한 귀결은 다음과 같다.
+% P09-ERR-0349
+$f:X\to Y$가 성질 $\mathcal{P}$를 갖고, 이 성질이 공역에 관해
+$\tau$-국소적이며, $f(X)\subset V$가 어떤 열린 부분공간
+$V\subset Y$에 대해 성립하면 유도된
+사상 $X\to V$도 $\mathcal{P}$를 갖는다. 증명: $f$를 $V\to Y$로
+밑변환하면 $X\to V$를 얻는다.
+
+\begin{lemma}
+\label{lemma-largest-open-of-the-base}
+$S$를 스킴이라 하자. $\tau\in\{fppf,syntomic,smooth,\etale\}$라 하자.
+$\mathcal{P}$를 $S$ 위 대수공간의 사상이 갖는 성질로서 공역에 관해
+$\tau$-국소적인 것이라 하자. 임의의 사상 $f:X\to Y$가 $S$ 위
+대수공간의 사상일 때 가장 큰 열린 부분공간 $W(f)\subset Y$가 존재하며,
+그 위에서 제한 $X_{W(f)}\to W(f)$는 $\mathcal{P}$를 갖는다. 더 나아가
+다음이 성립한다.
+\begin{enumerate}
+\item $g:Y'\to Y$가 평탄이고 국소 유한 표시, 신토믹, 매끄러운, 또는
+에탈인 대수공간의 사상이고 밑변환 $f':X_{Y'}\to Y'$가
+$\mathcal{P}$를 가지면, $g$는 $W(f)$를 거쳐 분해된다.
+\item $g:Y'\to Y$가 평탄이고 국소 유한 표시, 신토믹, 매끄러운, 또는
+에탈이면 $W(f')=g^{-1}(W(f))$이다.
+\item $\{g_i:Y_i\to Y\}$가 $\tau$-덮개이면
+$g_i^{-1}(W(f))=W(f_i)$이다. 여기서 $f_i$는 $f$를 $Y_i\to Y$로
+밑변환한 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$W_{set}\subset|Y|$을 다음 성질을 갖는 사상들의 상
+$g(|Y'|)\subset|Y|$, 즉 $g:Y'\to Y$들의 상의 합집합이라 하자.
+\begin{enumerate}
+\item $g$는 평탄이고 국소 유한 표시, 신토믹, 매끄러운, 또는 에탈이다.
+\item 밑변환 $Y'\times_{g,Y}X\to Y'$는 성질 $\mathcal{P}$를 갖는다.
+\end{enumerate}
+그러한 사상 $g$는 열려 있으므로(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open}) $W_{set}$은 $|Y|$의 열린
+부분집합이다. 열린 부분공간 $W\subset Y$를 그 밑 점집합이
+$W_{set}$인 것으로 쓰자.
+% P09-ERR-0350
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-open-subspaces}를 보라. $\mathcal{P}$가
+$\tau$-위상에서 국소적이므로 제한 $X_W\to W$는 성질 $\mathcal{P}$를
+갖는다. 실제로 덮개 $\{Y'\to W\}$가 $W$에 대해 주어져 있으며 그 당김들은
+$\mathcal{P}$를 갖는다. 이것으로 존재성이 증명되며 $W(f)$가 (1)을
+만족함도 증명된다. (2)를 보이기 위해
+$W(f')\supset g^{-1}(W(f))$임을 주목하자. 이는 $\mathcal{P}$가 평탄이고
+국소 유한 표시, 신토믹, 매끄러운, 또는 에탈 사상에 의한 밑변환으로
+안정하기 때문이다. Lemma
+\ref{lemma-pullback-property-local-target}를 보라. 한편
+$Y''\subset Y'$가 열린 부분공간이고 $X_{Y''}\to Y''$가 성질
+$\mathcal{P}$를 가지면, 구성에 의해 $Y''\to Y$는 $W$를 거쳐
+분해된다. 즉 $Y''\subset g^{-1}(W(f))$이다. 이것으로 (2)가 증명된다.
+(3)은 (2)에서 따르는데, 각 사상 $Y_i\to Y$가 평탄이고 국소 유한 표시,
+신토믹, 매끄러운, 또는 에탈이기 때문이다. 이는 $\tau$-덮개의 정의에
+의한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-properties-morphisms}
+$S$를 스킴이라 하자. $\mathcal{P}$를 $S$ 위 대수공간의 사상이 갖는
+성질이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $X_i\to Y_i$, $i=1,2$가 성질 $\mathcal{P}$를 가지면
+% P09-ERR-0351
+$X_1\amalg X_2\to Y_1\amalg Y_2$도 그러하다.
+\item 대수공간의 사상 $f:X\to Y$가 성질 $\mathcal{P}$를 갖는 것과,
+모든 아핀 스킴 $Z$와 사상 $Z\to Y$에 대해 밑변환
+$Z\times_YX\to Z$가 $f$의 밑변환으로서 성질 $\mathcal{P}$를 갖는 것은
+동치이다.
+\item 임의의 전사 평탄 사상 $Z'\to Z$가 $S$ 위 아핀 스킴의 사상이고,
+임의의 사상 $f:X\to Z$가 대수공간에서 $Z$로 가는 사상일 때
+$$
+f' : Z' \times_Z X \to Z'\text{ has }\mathcal{P}
+\Rightarrow
+f\text{ has }\mathcal{P}.
+$$
+가 성립한다.
+\end{enumerate}
+그러면 $\mathcal{P}$는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{P}$가 (2)를 만족하면 임의의 밑변환으로 자동으로 보존된다.
+따라서 Definition \ref{definition-property-morphisms-local}의 정방향 함의가
+성립한다.
+
+\medskip\noindent
+$\{Y_i\to Y\}_{i\in I}$를 $S$ 위 대수공간의 fpqc 덮개라 하자.
+$f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자. 각 밑변환
+$f_i:Y_i\times_YX\to Y_i$가 성질 $\mathcal{P}$를 갖는다고 가정하자.
+목표는 $f$가 $\mathcal{P}$를 가짐을 보이는 것이다. $Z$를 아핀
+스킴이라 하고 $Z\to Y$를 사상이라 하자. (2)에 의해 대수공간의 사상
+$Z\times_YX\to Z$가 $\mathcal{P}$를 가짐을 보이면 충분하다.
+$\{Y_i\to Y\}_{i\in I}$가 fpqc 덮개이므로 표준 fpqc 덮개
+$\{Z_j\to Z\}_{j=1,\ldots,n}$와 사상 $Z_j\to Y_{i_j}$가 $Y$ 위에서
+존재한다. 여기서 $i_j\in I$는 적절한 지표이다. $f_{i_j}$가
+$\mathcal{P}$를 가지므로
+$$
+Z_j \times_Y X
+=
+Z_j \times_{Y_{i_j}} (Y_{i_j} \times_Y X)
+\longrightarrow
+Z_j
+$$
+는 $\mathcal{P}$를 가지며, 이는 $f_{i_j}$의 밑변환이다(증명의 첫 번째
+언급을 보라). $Z'=\coprod_{j=1,\ldots,n}Z_j$로 놓으면 $Z'\to Z$는
+$S$ 위 아핀 스킴의 평탄 전사 사상이다. (1)에 의해
+$Z'\times_YX\to Z'$는 성질 $\mathcal{P}$를 갖는다. 이것은 사상
+$Z\times_YX\to Z$를 사상 $Z'\to Z$로 밑변환한 것이므로 원하는 대로
+$Z\times_YX\to Z$가 성질 $\mathcal{P}$를 갖는다.
+\end{proof}
+
+\section{fpqc 위상에서 사상의 성질의 하강}
+\label{section-descending-properties-morphisms-fpqc}
+
+\noindent
+이 절에서는 fpqc 위상에서 밑에 관해 국소적인 대수공간 사상의 성질을
+많이 찾아낸다. 스킴의 사상인 경우에 대해서는 Descent, Section
+\ref{descent-section-descending-properties-morphisms-fpqc}와 비교하라.
+
+\begin{lemma}
+\label{lemma-descending-property-quasi-compact}
+$S$를 스킴이라 하자. 성질 $\mathcal{P}(f)=$``$f$는 준콤팩트이다''는
+$S$ 위 대수공간에서 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-local}에서 따른다. $Z'\to Z$를
+$S$ 위 아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를 대수공간의
+사상이라 하고, 밑변환 $f':Z'\times_ZX\to Z'$가 준콤팩트이라고
+가정하자. $f$가 준콤팩트임을 보여야 한다. 이를 위해 Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-quasi-compact-local}를 다시
+사용하면, 모든 아핀 스킴 $Y$와 사상 $Y\to Z$에 대해 섬유곱
+$Y\times_ZX$가 준콤팩트임을 보이는 것으로 충분하다. 도식은 다음과 같다.
+\begin{equation}
+\label{equation-cube}
+\vcenter{
+\xymatrix{
+Y \times_Z Z' \times_Z X \ar[dd] \ar[rr] \ar[rd] & &
+Z' \times_Z X \ar'[d][dd]^{f'} \ar[rd] \\
+& Y \times_Z X \ar[dd] \ar[rr] & & X \ar[dd]^f \\
+Y \times_Z Z' \ar'[r][rr] \ar[rd] & & Z' \ar[rd] \\
+& Y \ar[rr] & & Z
+}
+}
+\end{equation}
+모든 사각형은 Cartesian이고 아래쪽 사각형은 아핀 스킴들로 이루어짐을
+주목하자. $f'$가 준콤팩트이라는 가정과 $Y\times_ZZ'$가 아핀이라는
+사실로부터 $Y\times_ZZ'\times_ZX$가 준콤팩트임을 얻는다. 사상
+$$
+Y \times_Z Z' \times_Z X \longrightarrow Y \times_Z X
+$$
+은 $Z'\to Z$의 밑변환으로서 전사이므로 $Y\times_ZX$는 준콤팩트이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-surjection-from-quasi-compact}를 보라. 이것으로
+증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-quasi-separated}
+$S$를 스킴이라 하자. 성질 $\mathcal{P}(f)=$``$f$는 준분리이다''는
+$S$ 위 대수공간에서 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+준분리 사상의 밑변환은 준분리이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-separated}를 보라. 따라서
+Definition \ref{definition-property-morphisms-local}의 정방향 함의가
+성립한다.
+
+\medskip\noindent
+$\{Y_i\to Y\}_{i\in I}$를 $S$ 위 대수공간의 fpqc 덮개라 하자.
+$f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자. 각 밑변환
+$X_i:=Y_i\times_YX\to Y_i$가 준분리라고 가정하자. 이는 각 사상
+$$
+\Delta_i:
+X_i
+\longrightarrow
+X_i \times_{Y_i} X_i = Y_i \times_Y (X \times_Y X)
+$$
+이 준콤팩트이라는 뜻이다. fpqc 덮개의 밑변환은 fpqc 덮개이다.
+Topologies on Spaces, Lemma \ref{spaces-topologies-lemma-fpqc}를 보라.
+% P09-ERR-0352
+따라서 $\{Y_i\times_Y(X\times_YX)\to X\times_YX\}$는 대수공간의
+fpqc 덮개이다. 더 나아가 각 $\Delta_i$는 사상
+$\Delta:X\to X\times_YX$의 밑변환이다. 그러므로 Lemma
+\ref{lemma-descending-property-quasi-compact}에 의해 $\Delta$는
+준콤팩트이고, 즉 $f$는 준분리이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-universally-closed}
+$S$를 스킴이라 하자. 성질 $\mathcal{P}(f)=$``$f$는 보편적으로
+닫혔다''는 $S$ 위 대수공간에서 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local}에서 따른다.
+$Z'\to Z$를 $S$ 위 아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를
+대수공간의 사상이라 하고, 밑변환 $f':Z'\times_ZX\to Z'$가
+보편적으로 닫혔다고 가정하자. $f$가 보편적으로 닫혔음을 보여야 한다.
+이를 위해 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local}을 다시 사용하면, 모든
+아핀 스킴 $Y$와 사상 $Y\to Z$에 대해 사상
+$|Y\times_ZX|\to|Y|$가 닫혔음을 보이는 것으로 충분하다. 정육면체
+(\ref{equation-cube})를 생각하자. $f'$가 보편적으로 닫혔다는 가정은
+$|Y\times_ZZ'\times_ZX|\to|Y\times_ZZ'|$가 닫혔음을 함의한다.
+$Y\times_ZZ'\to Y$는 $Z'\to Z$의 밑변환으로서 준콤팩트이고 전사이며
+평탄하므로 사상 $|Y\times_ZZ'|\to|Y|$는 몫사상이다. Morphisms,
+Lemma \ref{morphisms-lemma-fpqc-quotient-topology}를 보라. 더 나아가 사상
+$$
+|Y \times_Z Z' \times_Z X|
+\longrightarrow
+|Y \times_Z Z'| \times_{|Y|} |Y \times_Z X|
+$$
+은 전사이다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}를 보라. 초등 위상수학에 의해
+$|Y\times_ZX|\to|Y|$가 닫혔음이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-universally-open}
+$S$를 스킴이라 하자. 성질 $\mathcal{P}(f)=$``$f$는 보편적으로
+열려 있다''는 $S$ 위 대수공간에서 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+증명은 Lemma \ref{lemma-descending-property-universally-closed}의 증명과
+같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-universally-submersive}
+성질 $\mathcal{P}(f)=$``$f$는 보편적 몫사상이다''는 밑에 관해 fpqc
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+증명은 Lemma \ref{lemma-descending-property-universally-closed}의 증명과
+같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-surjective}
+성질 $\mathcal{P}(f)=$``$f$는 전사이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. (힌트: Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}를 사용하라.)
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-universally-injective}
+성질 $\mathcal{P}(f)=$``$f$는 보편적으로 단사이다''는 밑에 관해 fpqc
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local}에서 따른다.
+% P09-ERR-0353
+$Z'\to Z$를 $S$ 위 아핀 스킴의 평탄 전사 사상이라 하고
+$f:X\to Z$를 대수공간에서 $Z$로 가는 사상이라 하자. 밑변환
+$f':X'\to Z'$가 보편적으로 단사라고 가정하자. $K$를 체라 하고
+$a,b:\Spec(K)\to X$를 $f\circ a=f\circ b$를 만족하는 두 사상이라
+하자. $Z'\to Z$가 전사이므로 체 확대 $K'/K$와 사상
+$\Spec(K')\to Z'$가 존재하여 다음 실선 도식이 가환한다.
+$$
+\xymatrix{
+\Spec(K') \ar[rrd] \ar@{-->}[rd]_{a', b'} \ar[dd] \\
+ &
+X' \ar[r] \ar[d] &
+Z' \ar[d] \\
+\Spec(K) \ar[r]^{a, b} &
+X \ar[r] &
+Z
+}
+$$
+사각형이 Cartesian이므로 도식을 가환하게 하는 두 점선 화살표 $a'$와
+$b'$를 얻는다. $X'\to Z'$가 보편적으로 단사이므로 $a'=b'$이다. 따라서
+$a=b$가 강제되는데, 이는 $\{\Spec(K')\to\Spec(K)\}$가 fpqc 덮개이기
+때문이다.
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-sheaf-fpqc}를 보라. 따라서 원하는 대로
+$f$는 보편적으로 단사이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-universal-homeomorphism}
+성질 $\mathcal{P}(f)=$``$f$는 보편 위상동형이다''는 밑에 관해 fpqc
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-descending-property-universally-closed}와 정확히 같은
+방식으로 증명할 수 있다. 또는 위상공간의 사상이 위상동형인 것은 그것이
+단사이고 전사이며 열린 사상인 것과 동치라는 사실을 사용할 수 있다.
+따라서 보편 위상동형은 전사이고 보편적으로 단사이며 보편적으로 열린
+사상과 같다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-surjective}와 Morphisms of Spaces,
+Definitions \ref{spaces-morphisms-definition-universally-injective},
+\ref{spaces-morphisms-definition-surjective},
+\ref{spaces-morphisms-definition-open},
+\ref{spaces-morphisms-definition-universal-homeomorphism}을 보라. 그러므로
+보조정리는 Lemmas \ref{lemma-descending-property-surjective},
+\ref{lemma-descending-property-universally-injective},
+\ref{lemma-descending-property-universally-open}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-locally-finite-type}
+성질 $\mathcal{P}(f)=$``$f$는 국소 유한형이다''는 밑에 관해 fpqc
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-type-local}에서 따른다. $Z'\to Z$를
+$S$ 위 아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를 대수공간의
+사상이라 하고, 밑변환 $f':Z'\times_ZX\to Z'$가 국소 유한형이라고
+가정하자. $f$가 국소 유한형임을 보여야 한다. $U$를 스킴이라 하고
+$U\to X$를 전사 에탈이라 하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-type-local}을 다시 사용하면
+$U\to Z$가 국소 유한형임을 보이는 것으로 충분하다. $f'$가 국소
+유한형이고 $Z'\times_ZU$가 $Z'\times_ZX$ 위의 에탈 스킴이므로, 같은
+보조정리에 의해 $Z'\times_ZU\to Z'$가 국소 유한형이라고 결론짓는다.
+$\{Z'\to Z\}$가 fpqc 덮개이므로 Descent, Lemma
+\ref{descent-lemma-descending-property-locally-finite-type}에 의해 원하는
+대로 $U\to Z$가 국소 유한형이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-locally-finite-presentation}
+성질 $\mathcal{P}(f)=$``$f$는 국소 유한 표시이다''는 밑에 관해 fpqc
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-local}에서 따른다.
+$Z'\to Z$를 $S$ 위 아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를
+대수공간의 사상이라 하고, 밑변환 $f':Z'\times_ZX\to Z'$가 국소 유한
+표시라고 가정하자. $f$가 국소 유한 표시임을 보여야 한다. $U$를
+스킴이라 하고 $U\to X$를 전사 에탈이라 하자. Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-finite-presentation-local}을 다시 사용하면
+$U\to Z$가 국소 유한 표시임을 보이는 것으로 충분하다. $f'$가 국소
+유한 표시이고 $Z'\times_ZU$가 $Z'\times_ZX$ 위의 에탈 스킴이므로,
+같은 보조정리에 의해 $Z'\times_ZU\to Z'$가 국소 유한 표시라고
+결론짓는다. $\{Z'\to Z\}$가 fpqc 덮개이므로 Descent, Lemma
+\ref{descent-lemma-descending-property-locally-finite-presentation}에 의해
+원하는 대로 $U\to Z$가 국소 유한 표시이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-finite-type}
+성질 $\mathcal{P}(f)=$``$f$는 유한형이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{lemma-descending-property-quasi-compact}와
+\ref{lemma-descending-property-locally-finite-type}을 결합하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-finite-presentation}
+성질 $\mathcal{P}(f)=$``$f$는 유한 표시이다''는 밑에 관해 fpqc
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{lemma-descending-property-quasi-compact},
+\ref{lemma-descending-property-quasi-separated},
+\ref{lemma-descending-property-locally-finite-presentation}을 결합하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-flat}
+성질 $\mathcal{P}(f)=$``$f$는 평탄하다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-local}에서 따른다. $Z'\to Z$를 $S$ 위
+아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를 대수공간의 사상이라
+하고 밑변환 $f':Z'\times_ZX\to Z'$가 평탄하다고 가정하자. $f$가
+평탄함을 보여야 한다. $U$를 스킴이라 하고 $U\to X$를 전사 에탈이라
+하자. Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-flat-local}을
+다시 사용하면 $U\to Z$가 평탄함을 보이는 것으로 충분하다. $f'$가
+평탄하고 $Z'\times_ZU$가 $Z'\times_ZX$ 위의 에탈 스킴이므로 같은
+보조정리에 의해 $Z'\times_ZU\to Z'$가 평탄하다고 결론짓는다.
+$\{Z'\to Z\}$가 fpqc 덮개이므로 Descent, Lemma
+\ref{descent-lemma-descending-property-flat}에 의해 원하는 대로
+$U\to Z$가 평탄하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-open-immersion}
+성질 $\mathcal{P}(f)=$``$f$는 열린 몰입이다''는 밑에 관해 fpqc
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local}에서 따른다. Cartesian 도식
+$$
+\xymatrix{
+X' \ar[r] \ar[d] & X \ar[d] \\
+Z' \ar[r] & Z
+}
+$$
+을 생각하자. 이는 $S$ 위 대수공간의 도식이다. 여기서 $Z'\to Z$는
+아핀 스킴의 전사 평탄 사상이고,
+$X'\to Z'$는 열린 몰입이다. $X\to Z$가 열린 몰입임을 보여야 한다.
+$|X'|\subset|Z'|$은 열린 부분스킴 $U'\subset Z'$에 대응하고($X'$와
+동형이다), 열린 부분스킴으로서
+$\text{pr}_0^{-1}(U')=\text{pr}_1^{-1}(U')$가
+$Z'\times_ZZ'$ 안에서 성립한다. 따라서 열린 부분스킴 $U\subset Z$가
+존재하여 $X'=(Z'\to Z)^{-1}(U)$이다. Descent, Lemma
+\ref{descent-lemma-open-fpqc-covering}을 보라. Properties of Spaces,
+Proposition \ref{spaces-properties-proposition-sheaf-fpqc}에 의해 $X$가
+fpqc 위상에 대한 층 조건을 만족함을 안다. 이제 fpqc 덮개
+$\mathcal{U}=\{U'\to U\}$와 원소
+$U'\to X'\to X\in\check{H}^0(\mathcal{U},X)$가 있다. 층 조건에 의해
+사상 $U\to X$를 얻으며, 이 사상에 대해 도식
+$$
+\xymatrix{
+U' \ar[r] \ar[d]^{\cong} \ar@/_3ex/[dd] & U \ar[d] \ar@/^3ex/[dd] \\
+X' \ar[r] \ar[d] & X \ar[d] \\
+Z' \ar[r] & Z
+}
+$$
+은 가환이다. 한편 임의의 스킴 $T$가 $S$ 위에 있고 $T$-값 점
+$T\to X$에 대해 합성 $T\to X\to Z$는 사상
+$Z'\times_ZT\to Z'$가 $U'$를 거쳐 분해되는 성질을 갖는다. 이는
+$T\to Z$가 $U$를 거쳐 분해된다는 뜻임이 분명하다. 달리 말하면 층의
+사상 $U\to X$는 전단사이며, 이것으로 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-isomorphism}
+성질 $\mathcal{P}(f)=$``$f$는 동형이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{lemma-descending-property-surjective}와
+\ref{lemma-descending-property-open-immersion}을 결합하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-affine}
+성질 $\mathcal{P}(f)=$``$f$는 아핀이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-local}에서 따른다. $Z'\to Z$를 $S$ 위
+아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를 대수공간의 사상이라
+하고 밑변환 $f':Z'\times_ZX\to Z'$가 아핀이라고 가정하자.
+$X'$을 $Z'\times_ZX$를 표현하는 스킴이라 하자. 표준 동형
+$$
+\varphi : X' \times_Z Z' \longrightarrow Z' \times_Z X'
+$$
+을 얻는다. 두 스킴 모두 대수공간 $Z'\times_ZZ'\times_ZX$를 표현하기
+때문이다. 이는 $X'/Z'/Z$의 하강 자료이다. Descent, Definition
+\ref{descent-definition-descent-datum}을 보라(확인은 생략한다. Descent,
+Lemma \ref{descent-lemma-descent-data-sheaves}와 비교하라). $X'\to Z'$가
+아핀이므로 이 하강 자료는 유효하다. Descent, Lemma
+\ref{descent-lemma-affine}을 보라. 따라서 스킴 $Y\to Z$가 $Z$ 위에 존재하고, 하강
+자료와 양립하는 동형 $\psi:Z'\times_ZY\to X'$가 존재한다. 물론
+$Y\to Z$는 아핀이다(구성 또는 Descent, Lemma
+\ref{descent-lemma-descending-property-affine}에 의한다). 이제
+$\mathcal{Y}=\{Z'\times_ZY\to Y\}$가 fpqc 덮개임을 주목하자.
+$\psi$를 $X(Z'\times_ZY)$의 원소로 해석하면
+$\psi\in\check{H}^0(\mathcal{Y},X)$임을 알 수 있다. 이 덮개에 대한
+$X$의 층 조건(Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-sheaf-fpqc}를 보라)에 의해 사상
+$Y\to X$를 얻는다. 구성상 이를 $Z'$로 밑변환하면 동형이고, 따라서
+Lemma \ref{lemma-descending-property-isomorphism}에 의해 원래 사상도
+동형이다. 이것으로 $X$가 아핀 스킴으로 표현됨이 증명되고 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-closed-immersion}
+성질 $\mathcal{P}(f)=$``$f$는 닫힌 몰입이다''는 밑에 관해 fpqc
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local}에서 따른다. Cartesian 도식
+$$
+\xymatrix{
+X' \ar[r] \ar[d] & X \ar[d] \\
+Z' \ar[r] & Z
+}
+$$
+을 생각하자. 이는 $S$ 위 대수공간의 도식이다. 여기서 $Z'\to Z$는
+아핀 스킴의 전사 평탄 사상이고,
+$X'\to Z'$는 닫힌 몰입이다. $X\to Z$가 닫힌 몰입임을 보여야 한다.
+사상 $X'\to Z'$는 아핀이다. 따라서 Lemma
+\ref{lemma-descending-property-affine}에 의해 $X$는 스킴이고
+$X\to Z$는 아핀이다. Descent, Lemma
+\ref{descent-lemma-descending-property-closed-immersion}에 의해 원하는
+대로 $X\to Z$가 닫힌 몰입이라고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-separated}
+성질 $\mathcal{P}(f)=$``$f$는 분리이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+분리 사상의 밑변환은 분리이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-separated}를 보라. 따라서
+Definition \ref{definition-property-morphisms-local}의 정방향 함의가
+성립한다.
+
+\medskip\noindent
+$\{Y_i\to Y\}_{i\in I}$를 $S$ 위 대수공간의 fpqc 덮개라 하자.
+$f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자. 각 밑변환
+$X_i:=Y_i\times_YX\to Y_i$가 분리라고 가정하자. 이는 각 사상
+$$
+\Delta_i:
+X_i
+\longrightarrow
+X_i \times_{Y_i} X_i = Y_i \times_Y (X \times_Y X)
+$$
+이 닫힌 몰입이라는 뜻이다. fpqc 덮개의 밑변환은 fpqc 덮개이다.
+Topologies on Spaces, Lemma \ref{spaces-topologies-lemma-fpqc}를 보라.
+따라서 $\{Y_i\times_Y(X\times_YX)\to X\times_YX\}$는 대수공간의
+fpqc 덮개이다. 더 나아가 각 $\Delta_i$는 사상
+$\Delta:X\to X\times_YX$의 밑변환이다. 그러므로 Lemma
+\ref{lemma-descending-property-closed-immersion}에 의해 $\Delta$는 닫힌
+몰입이고, 즉 $f$는 분리이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-proper}
+성질 $\mathcal{P}(f)=$``$f$는 고유이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+보조정리는 Lemmas \ref{lemma-descending-property-universally-closed},
+\ref{lemma-descending-property-separated},
+\ref{lemma-descending-property-finite-type}을 결합하여 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-quasi-affine}
+성질 $\mathcal{P}(f)=$``$f$는 준아핀이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-affine-local}에서 따른다. $Z'\to Z$를
+$S$ 위 아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를 대수공간의
+사상이라 하고 밑변환 $f':Z'\times_ZX\to Z'$가 준아핀이라고 가정하자.
+$X'$을 $Z'\times_ZX$를 표현하는 스킴이라 하자. 표준 동형
+$$
+\varphi : X' \times_Z Z' \longrightarrow Z' \times_Z X'
+$$
+을 얻는다. 두 스킴 모두 대수공간 $Z'\times_ZZ'\times_ZX$를 표현하기
+때문이다. 이는 $X'/Z'/Z$의 하강 자료이다. Descent, Definition
+\ref{descent-definition-descent-datum}을 보라(확인은 생략한다. Descent,
+Lemma \ref{descent-lemma-descent-data-sheaves}와 비교하라). $X'\to Z'$가
+준아핀이므로 이 하강 자료는 유효하다. Descent, Lemma
+\ref{descent-lemma-quasi-affine}을 보라. 따라서 스킴 $Y\to Z$가 $Z$ 위에 존재하고,
+하강 자료와 양립하는 동형 $\psi:Z'\times_ZY\to X'$가 존재한다. 물론
+$Y\to Z$는 준아핀이다(구성 또는 Descent, Lemma
+\ref{descent-lemma-descending-property-quasi-affine}에 의한다). 이제
+$\mathcal{Y}=\{Z'\times_ZY\to Y\}$가 fpqc 덮개임을 주목하자.
+$\psi$를 $X(Z'\times_ZY)$의 원소로 해석하면
+$\psi\in\check{H}^0(\mathcal{Y},X)$임을 알 수 있다. $X$의 층 조건
+(Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-sheaf-fpqc}를 보라)에 의해 사상
+$Y\to X$를 얻는다. 구성상 이를 $Z'$로 밑변환하면 동형이고, 따라서
+Lemma \ref{lemma-descending-property-isomorphism}에 의해 원래 사상도
+동형이다. 이것으로 $X$가 준아핀 스킴으로 표현됨이 증명되고 결론을
+얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-quasi-compact-immersion}
+성질 $\mathcal{P}(f)=$``$f$는 준콤팩트 몰입이다''는 밑에 관해 fpqc
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-closed-immersion-local}과
+\ref{spaces-morphisms-lemma-quasi-compact-local}에서 따른다. Cartesian 도식
+$$
+\xymatrix{
+X' \ar[r] \ar[d] & X \ar[d] \\
+Z' \ar[r] & Z
+}
+$$
+을 생각하자. 이는 $S$ 위 대수공간의 도식이다. 여기서 $Z'\to Z$는
+아핀 스킴의 전사 평탄 사상이고,
+$X'\to Z'$는 준콤팩트 몰입이다.
+% P09-ERR-0354
+$X\to Z$가 닫힌 몰입임을 보여야 한다. 사상 $X'\to Z'$는
+준아핀이다. 따라서 Lemma \ref{lemma-descending-property-quasi-affine}에
+의해 $X$는 스킴이고 $X\to Z$는 준아핀이다. Descent, Lemma
+\ref{descent-lemma-descending-property-quasi-compact-immersion}에 의해
+원하는 대로 $X\to Z$가 준콤팩트 몰입이라고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-integral}
+성질 $\mathcal{P}(f)=$``$f$는 정수적이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+정수적 사상은 아핀이면서 보편적으로 닫힌 사상과 같다. Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-integral-universally-closed}를
+보라. 따라서 Lemmas \ref{lemma-descending-property-universally-closed}와
+\ref{lemma-descending-property-affine}을 결합하면 이 보조정리를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-finite}
+성질 $\mathcal{P}(f)=$``$f$는 유한이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+유한 사상은 정수적이면서 국소 유한형인 사상과 같다.
+% P09-ERR-0355
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-finite-integral}을
+보라. 따라서 Lemmas \ref{lemma-descending-property-locally-finite-type}과
+\ref{lemma-descending-property-integral}을 결합하면 이 보조정리를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-quasi-finite}
+성질
+$\mathcal{P}(f)=$``$f$는 국소 준유한이다''와
+성질
+$\mathcal{P}(f)=$``$f$는 준유한이다''는
+밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+``준콤팩트''가 밑에 관해 fpqc 국소적임은 이미 보았다. Lemma
+\ref{lemma-descending-property-quasi-compact}를 보라. 따라서
+``국소 준유한''에 대해서만 보조정리를 증명하면 충분하다. 이를 위해
+Lemma \ref{lemma-descending-properties-morphisms}를 사용한다. 그 보조정리의
+가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-local}에서 따른다. $Z'\to Z$를
+$S$ 위 아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를 대수공간의
+사상이라 하고, 밑변환 $f':Z'\times_ZX\to Z'$가 국소 준유한이라고
+가정하자. $f$가 국소 준유한임을 보여야 한다. $U$를 스킴이라 하고
+$U\to X$를 전사 에탈 사상이라 하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-local}을 다시 사용하면
+$U\to Z$가 국소 준유한임을 보이는 것으로 충분하다. $f'$가 국소
+준유한이고 $Z'\times_ZU$가 $Z'\times_ZX$ 위의 에탈 스킴이므로,
+같은 보조정리에 의해 $Z'\times_ZU\to Z'$가 국소 준유한이라고
+결론짓는다. $\{Z'\to Z\}$가 fpqc 덮개이므로 Descent, Lemma
+\ref{descent-lemma-descending-property-quasi-finite}에 의해 원하는 대로
+$U\to Z$가 국소 준유한이라고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-syntomic}
+성질 $\mathcal{P}(f)=$``$f$는 신토믹이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-syntomic-local}에서 따른다. $Z'\to Z$를 $S$ 위
+아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를 대수공간의 사상이라
+하고, 밑변환 $f':Z'\times_ZX\to Z'$가 신토믹이라고 가정하자. $f$가
+신토믹임을 보여야 한다. $U$를 스킴이라 하고 $U\to X$를 전사 에탈
+사상이라 하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-syntomic-local}을 다시 사용하면 $U\to Z$가
+신토믹임을 보이는 것으로 충분하다. $f'$가 신토믹이고 $Z'\times_ZU$가
+$Z'\times_ZX$ 위의 에탈 스킴이므로, 같은 보조정리에 의해
+$Z'\times_ZU\to Z'$가 신토믹이라고 결론짓는다. $\{Z'\to Z\}$가 fpqc
+덮개이므로 Descent, Lemma \ref{descent-lemma-descending-property-syntomic}에
+의해 원하는 대로 $U\to Z$가 신토믹이라고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-smooth}
+성질 $\mathcal{P}(f)=$``$f$는 매끄럽다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-smooth-local}에서 따른다. $Z'\to Z$를 $S$ 위
+아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를 대수공간의 사상이라
+하고, 밑변환 $f':Z'\times_ZX\to Z'$가 매끄럽다고 가정하자. $f$가
+매끄러움을 보여야 한다. $U$를 스킴이라 하고 $U\to X$를 전사 에탈
+사상이라 하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-smooth-local}을 다시 사용하면 $U\to Z$가
+매끄러움을 보이는 것으로 충분하다. $f'$가 매끄럽고 $Z'\times_ZU$가
+$Z'\times_ZX$ 위의 에탈 스킴이므로, 같은 보조정리에 의해
+$Z'\times_ZU\to Z'$가 매끄럽다고 결론짓는다. $\{Z'\to Z\}$가 fpqc
+덮개이므로 Descent, Lemma \ref{descent-lemma-descending-property-smooth}에
+의해 원하는 대로 $U\to Z$가 매끄럽다고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-unramified}
+성질 $\mathcal{P}(f)=$``$f$는 비분기이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-unramified-local}에서 따른다. $Z'\to Z$를
+$S$ 위 아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를 대수공간의
+사상이라 하고, 밑변환 $f':Z'\times_ZX\to Z'$가 비분기라고 가정하자.
+$f$가 비분기임을 보여야 한다. $U$를 스킴이라 하고 $U\to X$를 전사
+에탈 사상이라 하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-unramified-local}을 다시 사용하면 $U\to Z$가
+비분기임을 보이는 것으로 충분하다. $f'$가 비분기이고 $Z'\times_ZU$가
+$Z'\times_ZX$ 위의 에탈 스킴이므로, 같은 보조정리에 의해
+$Z'\times_ZU\to Z'$가 비분기라고 결론짓는다. $\{Z'\to Z\}$가 fpqc
+덮개이므로 Descent, Lemma
+\ref{descent-lemma-descending-property-unramified}에 의해 원하는 대로
+$U\to Z$가 비분기라고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-etale}
+성질 $\mathcal{P}(f)=$``$f$는 에탈이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 Lemma \ref{lemma-descending-properties-morphisms}를
+사용한다. 그 보조정리의 가정 (1)과 (2)는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-local}에서 따른다. $Z'\to Z$를 $S$ 위
+아핀 스킴의 전사 평탄 사상이라 하자. $f:X\to Z$를 대수공간의 사상이라
+하고, 밑변환 $f':Z'\times_ZX\to Z'$가 에탈이라고 가정하자. $f$가
+에탈임을 보여야 한다. $U$를 스킴이라 하고 $U\to X$를 전사 에탈
+사상이라 하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-local}을 다시 사용하면 $U\to Z$가
+에탈임을 보이는 것으로 충분하다. $f'$가 에탈이고 $Z'\times_ZU$가
+$Z'\times_ZX$ 위의 에탈 스킴이므로, 같은 보조정리에 의해
+$Z'\times_ZU\to Z'$가 에탈이라고 결론짓는다. $\{Z'\to Z\}$가 fpqc
+덮개이므로 Descent, Lemma \ref{descent-lemma-descending-property-etale}에
+의해 원하는 대로 $U\to Z$가 에탈이라고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-finite-locally-free}
+성질 $\mathcal{P}(f)=$``$f$는 유한 국소 자유이다''는 밑에 관해 fpqc
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+유한 국소 자유인 것은 유한이고 평탄하며 국소 유한 표시인 것과 동치이다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-finite-flat}).
+따라서 이는 Lemmas \ref{lemma-descending-property-finite},
+\ref{lemma-descending-property-flat}, 그리고
+\ref{lemma-descending-property-locally-finite-presentation}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-property-monomorphism}
+성질 $\mathcal{P}(f)=$``$f$는 단사사상이다''는 밑에 관해 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+$f:X\to Y$를 대수공간의 사상이라 하자. $\{Y_i\to Y\}$를 fpqc 덮개라
+하고, 각 밑변환 $f_i:X_i\to Y_i$가 $f$의 밑변환이며 단사사상이라고
+가정하자.
+$f$가 단사사상임을 보여야 한다.
+
+\medskip\noindent
+첫째 증명. $f$가 단사사상인 것은
+$\Delta:X\to X\times_YX$가 동형인 것과 동치임을 주목하자. 이를
+$f_i$에 적용하면 각 사상
+$$
+\Delta_i :
+X_i
+\longrightarrow
+X_i \times_{Y_i} X_i = Y_i \times_Y (X \times_Y X)
+$$
+이 동형임을 알 수 있다. fpqc 덮개의 밑변환은 fpqc 덮개이다.
+Topologies on Spaces, Lemma \ref{spaces-topologies-lemma-fpqc}를 보라.
+따라서 $\{Y_i\times_Y(X\times_YX)\to X\times_YX\}$는 대수공간의
+fpqc 덮개이다. 더욱이 각 $\Delta_i$는 사상
+$\Delta:X\to X\times_YX$의 밑변환이다. 따라서 Lemma
+\ref{lemma-descending-property-isomorphism}에 의해 $\Delta$는 동형이고,
+즉 $f$는 단사사상이다.
+
+\medskip\noindent
+둘째 증명.
+$V$를 스킴이라 하고 $V\to Y$를 전사 에탈 사상이라 하자.
+$V\times_YX\to V$가 단사사상임을 보일 수 있다면 $X\to Y$가
+단사사상임이 따른다. 실제로 층의 임의의 Cartesian 도식
+$$
+\vcenter{
+\xymatrix{
+\mathcal{F} \ar[r]_a \ar[d]_b & \mathcal{G} \ar[d]^c \\
+\mathcal{H} \ar[r]^d & \mathcal{I}
+}
+}
+\quad
+\quad
+\mathcal{F} = \mathcal{H} \times_\mathcal{I} \mathcal{G}
+$$
+에서 $c$가 층의 전사이고 $a$가 단사이면 $d$도 단사이다. 이로써 문제는
+$Y$가 스킴인 경우로 환원된다. 더 나아가 이 경우에는 대수공간 $Y_i$들도
+스킴이라고 가정해도 된다. 실제로 덮개를 언제나 세분하여 이 상황에
+놓일 수 있다. Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-refine-fpqc-schemes}를 보라.
+
+\medskip\noindent
+$\{Y_i\to Y\}$를 스킴의 fpqc 덮개라고 가정하자. $a,b:T\to X$를
+$f\circ a=f\circ b$를 만족하는 두 사상이라 하자. $a=b$임을 보여야
+한다. $f_i$가 단사사상이므로 $a_i=b_i$이며, 여기서
+$a_i,b_i:Y_i\times_YT\to X_i$는 밑변환이다. 특히 합성
+$Y_i\times_YT\to T\to X$들은 서로 같다. $\{Y_i\times_YT\to T\}$가
+fpqc 덮개이므로 Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-sheaf-fpqc}에 의해 $a=b$를 얻는다.
+\end{proof}
+
+\section{fppf 위상에서 사상의 성질을 하강하기}
+\label{section-descending-properties-morphisms-fppf}
+
+\noindent
+이 절에서는 밑에 관해 fpqc 위상에서 국소적임을 (아직) 보이지 못했지만
+fppf 위상에서는 밑에 관해 국소적인 대수공간 사상의 몇 가지 성질을
+찾는다.
+
+\begin{lemma}
+\label{lemma-descending-fppf-property-immersion}
+성질 $\mathcal{P}(f)=$``$f$는 몰입이다''는 밑에 관해 fppf 국소적이다.
+\end{lemma}
+
+\begin{proof}
+$f:X\to Y$를 대수공간의 사상이라 하자. $\{Y_i\to Y\}_{i\in I}$를
+$Y$의 fppf 덮개라 하자. $f_i:X_i\to Y_i$를 $f$의 밑변환이라 하자.
+
+\medskip\noindent
+$f$가 몰입이면 Spaces, Lemma \ref{spaces-lemma-base-change-immersions}에
+의해 각 $f_i$도 몰입이다. 이것으로 Definition
+\ref{definition-property-morphisms-local}의 정방향 함의를 증명한다.
+
+\medskip\noindent
+역으로 각 $f_i$가 몰입이라고 가정하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-immersions-monomorphisms}에 의해 각 $f_i$는
+분리이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-immersion-quasi-finite}에 의해 각 $f_i$는
+국소 준유한이다. 따라서 Lemmas \ref{lemma-descending-property-separated}와
+\ref{lemma-descending-property-quasi-finite}을 적용하면 $f$가 국소
+준유한이고 분리임을 알 수 있다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite-separated-representable}에
+의해 이는 $f$가 표현 가능함을 뜻한다!
+
+\medskip\noindent
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local}에 의해 모든 스킴 $Z$와
+사상 $Z\to Y$에 대해 밑변환 $Z\times_YX\to Z$가 몰입임을 보이면
+충분하다. Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-refine-fppf-schemes}에 의해 스킴의 fppf 덮개
+$\{Z_i\to Z\}$를 찾을 수 있는데, 이는 덮개 $\{Y_i\to Y\}$를 $Z$로
+당겨온 것을 세분한다. 따라서 $Z\times_YX\to Z$는(앞 단락의
+결과에 따르면 스킴의 사상이다) $Z$의 스킴별 fppf 덮개의 각 원소로
+당겨오면 몰입이 된다.
+% P09-ERR-0356
+그러므로 스킴에 대한 결과인 Descent, Lemma
+\ref{descent-lemma-descending-fppf-property-immersion}에 의해
+$Z\times_YX\to Z$는 몰입이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descending-fppf-property-locally-separated}
+성질 $\mathcal{P}(f)=$``$f$는 국소 분리이다''는 밑에 관해 fppf
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+국소 분리 사상의 밑변환은 국소 분리이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-separated}를 보라. 따라서 Definition
+\ref{definition-property-morphisms-local}의 정방향 함의를 얻는다.
+
+\medskip\noindent
+$\{Y_i\to Y\}_{i\in I}$를 $S$ 위 대수공간의 fppf 덮개라 하자.
+$f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자. 각 밑변환
+$X_i:=Y_i\times_YX\to Y_i$가 국소 분리라고 가정하자. 이는 각 사상
+$$
+\Delta_i :
+X_i
+\longrightarrow
+X_i \times_{Y_i} X_i = Y_i \times_Y (X \times_Y X)
+$$
+이 몰입이라는 뜻이다. fppf 덮개의 밑변환은 fppf 덮개이다. Topologies
+on Spaces, Lemma \ref{spaces-topologies-lemma-fppf}를 보라.
+% P09-ERR-0357
+따라서 $\{Y_i\times_Y(X\times_YX)\to X\times_YX\}$는 대수공간의
+fppf 덮개이다. 더욱이 각 $\Delta_i$는 사상
+$\Delta:X\to X\times_YX$의 밑변환이다. 따라서 Lemma
+\ref{lemma-descending-fppf-property-immersion}에 의해 $\Delta$는 몰입이고,
+즉 $f$는 국소 분리이다.
+\end{proof}
+
+\section{사상 성질의 하강을 응용하기}
+\label{section-application-descending-properties-morphisms}
+
+\noindent
+이 절은 Descent, Section
+\ref{descent-section-application-descending-properties-morphisms}에 대응한다.
+
+\begin{lemma}
+\label{lemma-descending-property-ample}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$\{g_i:Y_i\to Y\}_{i\in I}$를 fpqc 덮개라 하자. $f_i:X_i\to Y_i$를
+$f$의 밑변환이라 하고, $\mathcal{L}_i$를 $\mathcal{L}$의 $X_i$로의
+당김이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $\mathcal{L}$은 $X/Y$ 위에서 풍부하다.
+\item $\mathcal{L}_i$는 $X_i/Y_i$ 위에서 풍부하며, 이는 모든 $i\in I$에
+대해 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+함의 (1) $\Rightarrow$ (2)는 Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-ample-base-change}에서 따른다. (2)를 가정하자.
+$\mathcal{L}$이 $X/Y$ 위에서 풍부한지 확인하기 위해 $Y$ 위에서 에탈
+국소적으로 작업해도 된다. Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-relatively-ample-local}을 보라. 따라서 $Y$가
+스킴이라고 가정해도 되고, 이어서 각 $Y_i$도 스킴이라고 가정해도 된다.
+Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-refine-fpqc-schemes}를 보라. 달리 말하면
+$\{Y_i\to Y\}$가 스킴의 fpqc 덮개라고 가정해도 된다.
+
+\medskip\noindent
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-relatively-ample-properties}에 의해
+$X_i\to Y_i$는 표현 가능하고(즉 $X_i$는 스킴이다), 준콤팩트이며
+분리이다. 따라서 Lemmas \ref{lemma-descending-property-quasi-compact}와
+\ref{lemma-descending-property-separated}에 의해 $f$는 준콤팩트이고
+분리이다. 이는
+$\mathcal{A}=\bigoplus_{d\geq 0}f_*\mathcal{L}^{\otimes d}$가 준연접
+등급 $\mathcal{O}_Y$-대수라는 뜻이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward}). 더욱이 Cohomology of Spaces,
+Lemma \ref{spaces-cohomology-lemma-flat-base-change-cohomology}에 의해
+$\mathcal{A}$의 형성은 평탄 밑변환과 가환한다. 특히
+$\mathcal{A}_i=\bigoplus_{d\geq 0}f_{i,*}\mathcal{L}_i^{\otimes d}$로 놓으면
+$\mathcal{A}_i=g_i^*\mathcal{A}$이다. 그러므로 자연스러운 사상
+$\psi_d:f^*\mathcal{A}_d\to\mathcal{L}^{\otimes d}$는 $\mathcal{O}_X$의
+사상이며, 이를 당겨오면 자연스러운 사상
+$\psi_{i,d}:f_i^*(\mathcal{A}_i)_d\to\mathcal{L}_i^{\otimes d}$를 얻는데,
+이는 $\mathcal{O}_{X_i}$-가군의 사상이다.
+$\mathcal{L}_i$가 $X_i/Y_i$ 위에서 풍부하므로, 임의의 점 $x_i\in X_i$에
+대해 어떤 $d\geq 1$이 존재하여
+$f_i^*(\mathcal{A}_i)_d\to\mathcal{L}_i^{\otimes d}$가 $x_i$에서의 줄기
+위에서 전사이다. 이는 상대적으로 풍부한 가군의 정의에서 직접 따르거나
+Morphisms, Lemma \ref{morphisms-lemma-characterize-relatively-ample}에서
+따른다. $x\in|X|$이면 어떤 $i$와 $x_i\in X_i$를 택할 수 있으며 후자는
+$x$로 간다.
+$\mathcal{O}_{X,\overline{x}}\to\mathcal{O}_{X_i,\overline{x}_i}$가 평탄이고
+따라서 충실 평탄이므로,
+% P09-ERR-0358
+모든 $x\in|X|$에 대해 어떤 $d\geq 1$이 존재하여
+$f^*\mathcal{A}_d\to\mathcal{L}^{\otimes d}$가 $x$에서의 줄기 위에서
+전사라고 결론짓는다. 이는 열린 부분집합 $U(\psi)\subset X$가 Divisors
+on Spaces, Lemma
+\ref{spaces-divisors-lemma-invertible-map-into-relative-proj}에서 사상
+$\psi:f^*\mathcal{A}\to\bigoplus_{d\geq 0}\mathcal{L}^{\otimes d}$에
+대응함을 뜻한다. 이 사상은 등급 $\mathcal{O}_X$-대수의 사상이며, 그
+열린 부분집합은 $X$와 같다.
+대응하는 사상
+$$
+r_{\mathcal{L}, \psi} : X \longrightarrow \underline{\text{Proj}}_Y(\mathcal{A})
+$$
+을 생각하자. 위에서 알 수 있듯이 $r_{\mathcal{L},\psi}$를 $Y_i$로
+밑변환하면 사상 $r_{\mathcal{L}_i,\psi_i}$가 되며, 이는 Morphisms,
+Lemma \ref{morphisms-lemma-characterize-relatively-ample}에 의해 열린
+몰입이다. 따라서 Lemma \ref{lemma-descending-property-open-immersion}에
+의해 $r_{\mathcal{L},\psi}$는 열린 몰입이다. 그러므로 $X$는 스킴이고,
+Morphisms, Lemma \ref{morphisms-lemma-characterize-relatively-ample}에 의해
+$\mathcal{L}$이 $X/Y$ 위에서 풍부하다고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-ample-in-neighbourhood}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위 대수공간의 고유 사상이라
+하자. $\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자. 다음 성질로
+특징지어지는 열린 부분공간 $V\subset Y$가 존재한다. 대수공간의 사상
+$Y'\to Y$가 $V$를 거쳐 분해되는 것과, 당김 $\mathcal{L}'$가---즉
+$\mathcal{L}$을 $X'=Y'\times_YX$로 당겨온 것이---$X'/Y'$ 위에서 풍부한 것은
+동치이다(Divisors on Spaces, Definition
+\ref{spaces-divisors-definition-relatively-ample}의 의미에서).
+\end{lemma}
+
+\begin{proof}
+$Y$가 스킴일 때 보조정리가 성립한다고 가정하자. $U$를 스킴이라 하고
+$U\to Y$를 전사 에탈 사상이라 하자. $R=U\times_YU$라 놓고 사영을
+$t,s:R\to U$라 하자. $X_U=U\times_YX$라 쓰고 당김을
+$\mathcal{L}_U$라 하자. 그러면 보조정리에 나오는 열린 부분스킴
+$V'\subset U$를 $(X_U\to U,\mathcal{L}_U)$에 대해 얻는다. 함자적 특징에
+의해 $s^{-1}(V')=t^{-1}(V')$임을 알 수 있다. 따라서 열린 부분공간
+$V\subset Y$가 존재하여 $V'$는 $V$의 $U$에서의 역상이다. 특히
+$V'\to V$는 전사 에탈이고, $\mathcal{L}_V$가 $X_V/V$ 위에서 풍부하다고
+결론짓는다(Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-relatively-ample-local}). 이제 $Y'\to Y$가
+$\mathcal{L}'$가 $X'/Y'$ 위에서 풍부한 사상이면 $U\times_YY'\to Y'$는
+$V'$를 거쳐 분해되어야 하고, $Y'\to Y$가 $V$를 거쳐 분해된다고
+결론짓는다. 따라서 $V\subset Y$는 보조정리의 명제에 나오는 공간이다.
+이렇게 하여 다음 단락에서 다루는 경우로 환원한다.
+
+\medskip\noindent
+$Y$가 스킴이라고 가정하자. 문제는 $Y$ 위에서 국소적이므로 $Y$가 아핀
+스킴이라고 가정해도 된다. 다음을 보이겠다.
+\begin{enumerate}
+\item[(A)] 사상 $\Spec(k)\to Y$가 주어지고 $\mathcal{L}_k$가 $X_k/k$
+위에서 풍부하면, 열린 근방 $V\subset Y$가 존재하며 이는
+$\Spec(k)\to Y$의 상의 근방이고, $\mathcal{L}_V$가 $X_V/V$ 위에서 풍부하다.
+\end{enumerate}
+(A)가 보조정리를 함의함은 분명하다.
+
+\medskip\noindent
+$X\to Y$, $\mathcal{L}$, $\Spec(k)\to Y$가 (A)에서와 같다고 하자.
+Lemma \ref{lemma-descending-property-ample}에 의해 $k=\kappa(y)$라고
+가정해도 되며, 여기서 점 $y$는 $Y$에 놓인다.
+
+\medskip\noindent
+$Y$가 아핀이므로 유향집합 $I$와 대수공간 사상들의 역계
+$X_i\to Y_i$를 찾을 수 있다. 여기서 $Y_i$는 $\mathbf{Z}$ 위 유한
+표시이고, 전이 사상 $X_i\to X_{i'}$와 $Y_i\to Y_{i'}$는 아핀이며,
+$X_i\to Y_i$는 고유이고 유한 표시이며,
+$X\to Y=\lim(X_i\to Y_i)$이다. Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-proper-limit-of-proper-finite-presentation-noetherian}을
+보라. $I$를 줄인 뒤 $Y_i$가 (아핀) 스킴이라고 가정해도 되며, 이는 모든
+$i$에 대해 성립한다. Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-limit-is-affine}을 보라. 다시 $I$를 줄이면, 가역
+$\mathcal{O}_{X_i}$-가군들의 양립하는 계 $\mathcal{L}_i$가 있다고
+가정할 수 있으며, 이들은 $\mathcal{L}$로 당겨진다. Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-descend-invertible-modules}를 보라. $y_i\in Y_i$를
+$y$의 상이라 하자. 그러면 $\kappa(y)=\colim\kappa(y_i)$이다. 따라서
+$X_y=\lim X_{i,y_i}$이고, $I$를 줄인 뒤 $X_{i,y_i}$가 스킴이라고
+가정해도 되며 이는 모든 $i$에 대해 성립한다. Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-limit-is-scheme}을 보라. 그러므로 어떤 $i$에 대해
+$\mathcal{L}_{i,y_i}$가 $X_{i,y_i}$ 위에서 풍부하다. Limits, Lemma
+\ref{limits-lemma-limit-ample}을 보라. Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-ample-in-neighbourhood}에 의해 열린 근방
+$V_i\subset Y_i$를 찾는데 이는 $y_i$의 근방이고, $\mathcal{L}_i$를 $f_i^{-1}(V_i)$에 제한한 것이
+$V_i$에 대해 상대적으로 풍부하게 할 수 있다. $V\subset Y$를 $V_i$의
+역상으로 놓으면 증명이 끝난다(힌트: Morphisms, Lemma
+\ref{morphisms-lemma-ample-base-change}, $X\to Y\times_{Y_i}X_i$가 아핀이라는
+사실, 그리고 아핀 사상에 의한 풍부한 가역층의 당김이 풍부하다는 사실인
+Morphisms, Lemma
+\ref{morphisms-lemma-pullback-ample-tensor-relatively-ample}을 사용하라).
+\end{proof}
+
+\section{정의역에서 국소적인 사상의 성질}
+\label{section-properties-morphisms-local-source}
+
+\noindent
+이 절에서는 대수공간 사상의 성질이 정의역에서 국소적이라는 것이 무엇을
+뜻하는지 정의한다. Descent, Section
+\ref{descent-section-properties-morphisms-local-source}와 비교하라.
+
+\begin{definition}
+\label{definition-property-morphisms-local-source}
+$S$를 스킴이라 하자. $\mathcal{P}$를 $S$ 위 대수공간 사상의 성질이라
+하자. $\tau\in\{fpqc,\linebreak[0] fppf,\linebreak[0] syntomic,\linebreak[0]
+smooth,\linebreak[0]\etale\}$라 하자. $\mathcal{P}$가
+{\it 정의역에서 $\tau$ 국소적이다}, 또는
+{\it $\tau$-위상에 대해 정의역에서 국소적이다}라는 것은 다음을
+뜻한다. 대수공간의 임의의 사상 $f:X\to Y$가 $S$ 위에 있고, 대수공간의 임의의
+$\tau$-덮개 $\{X_i\to X\}_{i\in I}$에 대해
+$$
+f \text{ has }\mathcal{P}
+\Leftrightarrow
+\text{each }X_i \to Y\text{ has }\mathcal{P}.
+$$
+가 성립한다.
+\end{definition}
+
+\noindent
+동형은 언제나 덮개이므로, 성질 $\mathcal{P}$가 $X\to Y$에 대해
+성립하는 것과 임의의 화살 $X'\to Y'$가 $X\to Y$와 동형일 때 그
+화살에 대해
+성립하는 것이 동치임을 알 수 있다(또는 이를 요구한다). 어떤 성질이
+정의역에서 $\tau$-국소적이면, $\tau$-덮개에 나타나는 사상을 앞에
+합성해도 그 성질이 보존된다. 다음은 형식적인 진술이다.
+
+\begin{lemma}
+\label{lemma-precompose-property-local-source}
+$S$를 스킴이라 하자.
+$\tau\in\{fpqc,\linebreak[0] fppf,\linebreak[0] syntomic,\linebreak[0]
+smooth,\linebreak[0]\etale\}$라 하자. $\mathcal{P}$를 $S$ 위 대수공간
+사상의 성질로서 정의역에서 $\tau$ 국소적이라고 하자. $f:X\to Y$가
+성질 $\mathcal{P}$를 갖는다고 하자. 평탄, 각각 평탄이고 국소 유한 표시,
+각각 신토믹, 각각 매끄러운, 각각 에탈인 임의의 사상 $a:X'\to X$에 대해
+합성 $f\circ a:X'\to Y$는 성질 $\mathcal{P}$를 갖는다.
+\end{lemma}
+
+\begin{proof}
+$X'\to X$를 $\tau$-덮개를 이루는 사상족에 넣을 수 있기 때문에
+성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-transfer-from-schemes}
+$S$를 스킴이라 하자.
+$\tau\in\{fpqc,\linebreak[0] fppf,\linebreak[0] syntomic,\linebreak[0]
+smooth,\linebreak[0]\etale\}$라 하자. $\mathcal{P}$가 $S$ 위 스킴 사상의
+성질로서 정의역과 공역에서 에탈 국소적이라고 가정하자. 대응하는
+대수공간 사상의 성질을 $\mathcal{P}_{spaces}$라 쓰자. 이는 $S$ 위
+사상의 성질이다.
+% P09-ERR-0361
+Morphisms of Spaces, Definition \ref{spaces-morphisms-definition-P}를 보라.
+$\mathcal{P}$가 $\tau$-위상에 대해 정의역에서 국소적이면
+$\mathcal{P}_{spaces}$도 $\tau$-위상에 대해 정의역에서 국소적이다.
+\end{lemma}
+
+\begin{proof}
+$f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자.
+$\{X_i\to X\}_{i\in I}$를 대수공간의 $\tau$-덮개라 하자. 스킴 $V$와
+전사 에탈 사상 $V\to Y$를 택하자. 스킴 $U$와 전사 에탈 사상
+$U\to X\times_YV$를 택하자. 각 $i$에 대해 스킴 $U_i$와 전사 에탈 사상
+$U_i\to X_i\times_XU$를 택하자.
+
+\medskip\noindent
+$\{X_i\times_XU\to U\}_{i\in I}$는 $\tau$-덮개임을 주목하자. 각각의
+$\{U_i\to X_i\times_XU\}$는 에탈 덮개이고, 따라서 $\tau$-덮개이다.
+그러므로 $\{U_i\to U\}_{i\in I}$는 $\tau$-덮개인 $S$ 위 대수공간의
+덮개이다. 그러나 $U$와 각 $U_i$가 스킴이므로
+$\{U_i\to U\}_{i\in I}$는 $\tau$-덮개인 $S$ 위 스킴의 덮개이다.
+% P09-ERR-0360
+
+\medskip\noindent
+이제
+\begin{align*}
+f \text{ has }\mathcal{P}_{spaces}
+& \Leftrightarrow
+U \to V \text{ has }\mathcal{P} \\
+& \Leftrightarrow
+\text{each }U_i \to V \text{ has }\mathcal{P} \\
+& \Leftrightarrow
+\text{each }X_i \to Y\text{ has }\mathcal{P}_{spaces}.
+\end{align*}
+첫째와 마지막 동치는 $\mathcal{P}_{spaces}$의 정의에 의하고,
+% P09-ERR-0359
+가운데 동치는 $\mathcal{P}$가 $\tau$-위상에서 정의역에 관해
+국소적이라고 가정한 데 의한다.
+\end{proof}
+
+\section{정의역의 fpqc 위상에서 국소적인 사상의 성질}
+\label{section-fpqc-local-source}
+
+\noindent
+다음은 정의역에서 fpqc 국소적인 사상의 몇 가지 성질이다.
+
+\begin{lemma}
+\label{lemma-flat-fpqc-local-source}
+성질 $\mathcal{P}(f)=$``$f$는 평탄이다''는 정의역에서 fpqc 국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-transfer-from-schemes}를 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-flat} 및 Descent, Lemma
+\ref{descent-lemma-flat-fpqc-local-source}와 함께 적용하면 따른다.
+\end{proof}
+
+\section{정의역의 fppf 위상에서 국소적인 사상의 성질}
+\label{section-fppf-local-source}
+
+\noindent
+다음은 정의역에서 fppf 국소적인 사상의 몇 가지 성질이다.
+
+\begin{lemma}
+\label{lemma-locally-finite-presentation-fppf-local-source}
+성질 $\mathcal{P}(f)=$``$f$는 국소 유한 표시이다''는 정의역에서 fppf
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-transfer-from-schemes}를 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-locally-finite-presentation} 및 Descent,
+Lemma \ref{descent-lemma-locally-finite-presentation-fppf-local-source}와
+함께 적용하면 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-locally-finite-type-fppf-local-source}
+성질 $\mathcal{P}(f)=$``$f$는 국소 유한형이다''는 정의역에서 fppf
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-transfer-from-schemes}를 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-locally-finite-type} 및 Descent, Lemma
+\ref{descent-lemma-locally-finite-type-fppf-local-source}와 함께 적용하면
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-open-fppf-local-source}
+성질 $\mathcal{P}(f)=$``$f$는 열린 사상이다''는 정의역에서 fppf
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-transfer-from-schemes}를 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-open} 및 Descent, Lemma
+\ref{descent-lemma-open-fppf-local-source}와 함께 적용하면 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-universally-open-fppf-local-source}
+성질 $\mathcal{P}(f)=$``$f$는 보편적으로 열린 사상이다''는 정의역에서
+fppf 국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-transfer-from-schemes}를 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-open} 및 Descent, Lemma
+\ref{descent-lemma-universally-open-fppf-local-source}와 함께 적용하면
+따른다.
+\end{proof}
+
+\section{정의역의 신토믹 위상에서 국소적인 사상의 성질}
+\label{section-syntomic-local-source}
+
+\noindent
+다음은 정의역에서 신토믹 국소적인 사상의 몇 가지 성질이다.
+
+\begin{lemma}
+\label{lemma-syntomic-syntomic-local-source}
+성질 $\mathcal{P}(f)=$``$f$는 신토믹이다''는 정의역에서 신토믹
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-transfer-from-schemes}를 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-syntomic} 및 Descent, Lemma
+\ref{descent-lemma-syntomic-syntomic-local-source}와 함께 적용하면 따른다.
+\end{proof}
+
+\section{정의역의 매끄러운 위상에서 국소적인 사상의 성질}
+\label{section-smooth-local-source}
+
+\noindent
+다음은 정의역에서 매끄럽게 국소적인 사상의 몇 가지 성질이다.
+
+\begin{lemma}
+\label{lemma-smooth-smooth-local-source}
+성질 $\mathcal{P}(f)=$``$f$는 매끄럽다''는 정의역에서 매끄럽게
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-transfer-from-schemes}를 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-smooth} 및 Descent, Lemma
+\ref{descent-lemma-smooth-smooth-local-source}와 함께 적용하면 따른다.
+\end{proof}
+
+\section{정의역의 에탈 위상에서 국소적인 사상의 성질}
+\label{section-etale-local-source}
+
+\noindent
+다음은 정의역에서 에탈 국소적인 사상의 몇 가지 성질이다.
+
+\begin{lemma}
+\label{lemma-etale-etale-local-source}
+성질 $\mathcal{P}(f)=$``$f$는 에탈이다''는 정의역에서 에탈 국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-transfer-from-schemes}를 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-etale} 및 Descent, Lemma
+\ref{descent-lemma-etale-etale-local-source}와 함께 적용하면 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-locally-quasi-finite-etale-local-source}
+성질 $\mathcal{P}(f)=$``$f$는 국소 준유한이다''는 정의역에서 에탈
+국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-transfer-from-schemes}를 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-locally-quasi-finite} 및 Descent, Lemma
+\ref{descent-lemma-locally-quasi-finite-etale-local-source}와 함께 적용하면
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-unramified-etale-local-source}
+성질 $\mathcal{P}(f)=$``$f$는 비분기이다''는 정의역에서 에탈 국소적이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-transfer-from-schemes}를 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-unramified} 및 Descent, Lemma
+\ref{descent-lemma-unramified-etale-local-source}와 함께 적용하면 따른다.
+\end{proof}
+
+\section{정의역과 공역에서 매끄럽게 국소적인 사상의 성질}
+\label{section-properties-local-source-target}
+
+\noindent
+$\mathcal{P}$를 대수공간 사상의 성질이라 하자. ``$\mathcal{P}$가
+정의역과 공역에서 매끄럽게 국소적이다''라는 말에는 직관적인 뜻이 있다.
+그러나 이 개념은 $\mathcal{P}$가 정의역에서 매끄럽게 국소적인 동시에
+공역에서 매끄럽게 국소적이라고 요구하는 것과 같지 않다. 에탈 위상과
+스킴의 범주에 대해서는 Descent, Section
+\ref{descent-section-properties-etale-local-source-target}에서 비슷한 현상을
+상세히 논의했다(빠르게 훑어보려면 Descent, Remark
+\ref{descent-remark-compare-definitions}을 보라). 그러나 매끄러운 위상과
+에탈 위상의 경우 사이에는 중요한 차이가 있다. 이 차이를 보려면 Descent,
+Lemma \ref{descent-lemma-local-source-target-implies}와 Lemma
+\ref{lemma-local-source-target-implies}의 차이, 그리고 Descent, Lemma
+\ref{descent-lemma-local-source-target-characterize}와 Lemma
+\ref{lemma-local-source-target-characterize}의 차이를 생각해 보라. 즉 에탈
+상황에서는 공역의 에탈 ``덮개''를 어떻게 택하는지가 중요하지 않지만,
+매끄러운 상황에서는 그렇지 않다.
+
+\begin{definition}
+\label{definition-local-source-target}
+$S$를 스킴이라 하자. $\mathcal{P}$를 $S$ 위 대수공간 사상의 성질이라
+하자. 다음 조건들이 성립하면 $\mathcal{P}$가 {\it 정의역과 공역에서
+매끄럽게 국소적이다}라고 한다.
+\begin{enumerate}
+\item (매끄러운 사상을 앞에 합성해도 안정적임)
+$f:X\to Y$가 매끄럽고 $g:Y\to Z$가 $\mathcal{P}$를 가지면
+$g\circ f$도 $\mathcal{P}$를 갖는다.
+\item (매끄러운 밑변환에 대해 안정적임)
+$f:X\to Y$가 $\mathcal{P}$를 갖고 $Y'\to Y$가 매끄러우면, 밑변환
+$f':Y'\times_YX\to Y'$도 $\mathcal{P}$를 갖는다.
+\item (국소성) 사상 $f:X\to Y$가 주어졌을 때 다음은 동치이다.
+\begin{enumerate}
+\item $f$는 $\mathcal{P}$를 갖는다.
+\item 모든 $x\in|X|$에 대해 가환 도식
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+이 존재한다. 여기서 수직 화살은 매끄럽고, 점 $u\in|U|$가 존재하여
+$a(u)=x$이며, $h$는 $\mathcal{P}$를 갖는다.
+\end{enumerate}
+\end{enumerate}
+\end{definition}
+
+\noindent
+위 내용을 우리의 정의로 삼는다. 아래 보조정리들에서 이것이
+$\mathcal{P}$가 공역에서 매끄럽게 국소적이고, 정의역에서 매끄럽게
+국소적이며, 매끄러운 사상을 뒤에 합성해도 안정적이라는 것과 동치임을
+보인다.
+
+\begin{lemma}
+\label{lemma-local-source-target-implies}
+$S$를 스킴이라 하자. $\mathcal{P}$를 $S$ 위 대수공간 사상의 성질로서
+정의역과 공역에서 매끄럽게 국소적이라고 하자. 그러면
+\begin{enumerate}
+\item $\mathcal{P}$는 정의역에서 매끄럽게 국소적이다.
+\item $\mathcal{P}$는 공역에서 매끄럽게 국소적이다.
+\item $\mathcal{P}$는 매끄러운 사상을 뒤에 합성해도 안정적이다. 즉
+$f:X\to Y$가 $\mathcal{P}$를 갖고 $g:Y\to Z$가 매끄러우면
+$g\circ f$는 $\mathcal{P}$를 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+모든 내용을 완전히 써 보자.
+
+\medskip\noindent
+(1)의 증명. $f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자.
+$\{X_i\to X\}_{i\in I}$를 $X$의 매끄러운 덮개라 하자. 각 합성
+$h_i:X_i\to Y$가 $\mathcal{P}$를 가지면, 각 $|x|\in X$에 대해
+% P09-ERR-0362
+$i\in I$와 점 $x_i\in|X_i|$를 찾을 수 있으며, 이 점은 $x$로 간다. 그러면
+$(X_i,x_i)\to(X,x)$는 쌍의 매끄러운 사상이고,
+$\text{id}_Y:Y\to Y$는 매끄러운 사상이며, $h_i$는 Definition
+\ref{definition-local-source-target}의 (3)에 나오는 것과 같다. 따라서
+$f$는 $\mathcal{P}$를 갖는다. 역으로 $f$가 $\mathcal{P}$를 가지면,
+Definition \ref{definition-local-source-target}의 (1)에 의해 각
+$X_i\to Y$도 $\mathcal{P}$를 갖는다.
+
+\medskip\noindent
+(2)의 증명. $f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자.
+$\{Y_i\to Y\}_{i\in I}$를 $Y$의 매끄러운 덮개라 하자.
+$X_i=Y_i\times_YX$라 쓰고 $h_i:X_i\to Y_i$를 $f$의 밑변환이라 하자.
+각 $h_i:X_i\to Y_i$가 $\mathcal{P}$를 가지면, 각 $x\in|X|$에 대해
+$i\in I$와 점 $x_i\in|X_i|$를 택하며, 이 점은 $x$로 간다. 그러면
+$(X_i,x_i)\to(X,x)$는 쌍의 매끄러운 사상이고, $Y_i\to Y$는 매끄러우며,
+$h_i$는 Definition \ref{definition-local-source-target}의 (3)에 나오는 것과
+같다. 따라서 $f$는 $\mathcal{P}$를 갖는다. 역으로 $f$가
+$\mathcal{P}$를 가지면 Definition \ref{definition-local-source-target}의
+(2)에 의해 각 $X_i\to Y_i$도 $\mathcal{P}$를 갖는다.
+
+\medskip\noindent
+(3)의 증명. $f:X\to Y$가 $\mathcal{P}$를 갖고 $g:Y\to Z$가
+매끄럽다고 가정하자. 모든 $x\in|X|$에 대해 $(X,x)\to(X,x)$를 쌍의
+매끄러운 사상으로 생각할 수 있고, $Y\to Z$는 매끄러운 사상이며,
+$h=f$는 Definition \ref{definition-local-source-target}의 (3)에 나오는 것과
+같다. 따라서 $g\circ f$는 $\mathcal{P}$를 갖는다.
+\end{proof}
+
+\noindent
+다음 보조정리는 Morphisms, Lemma
+\ref{morphisms-lemma-locally-P-characterize}에 대응한다.
+
+\begin{lemma}
+\label{lemma-local-source-target-characterize}
+$S$를 스킴이라 하자. $\mathcal{P}$를 $S$ 위 대수공간 사상의 성질로서
+정의역과 공역에서 매끄럽게 국소적이라고 하자. $f:X\to Y$를 $S$ 위
+대수공간의 사상이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item[(a)] $f$는 성질 $\mathcal{P}$를 갖는다.
+\item[(b)] 모든 $x\in|X|$에 대해 쌍의 매끄러운 사상
+$a:(U,u)\to(X,x)$, 매끄러운 사상 $b:V\to Y$, 그리고 사상
+$h:U\to V$가 존재하여 $f\circ a=b\circ h$이고 $h$가 $\mathcal{P}$를
+갖는다.
+\item[(c)] 어떤 가환 도식
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+에서 $a$, $b$가 매끄럽고 $a$가 전사이며, 사상 $h$가 $\mathcal{P}$를
+갖는다.
+\item[(d)] 임의의 가환 도식
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+에서 $b$가 매끄럽고 $U\to X\times_YV$가 매끄러우면, 사상 $h$는
+$\mathcal{P}$를 갖는다.
+\item[(e)] 매끄러운 덮개 $\{Y_i\to Y\}_{i\in I}$가 존재하여 각 밑변환
+$Y_i\times_YX\to Y_i$가 $\mathcal{P}$를 갖는다.
+\item[(f)] 매끄러운 덮개 $\{X_i\to X\}_{i\in I}$가 존재하여 각 합성
+$X_i\to Y$가 $\mathcal{P}$를 갖는다.
+\item[(g)] 매끄러운 덮개 $\{Y_i\to Y\}_{i\in I}$가 존재하고, 각
+$i\in I$에 대해 매끄러운 덮개
+$\{X_{ij}\to Y_i\times_YX\}_{j\in J_i}$가 존재하여 각 사상
+$X_{ij}\to Y_i$가 $\mathcal{P}$를 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a)와 (b)의 동치는 Definition \ref{definition-local-source-target}의
+일부이다. (a)와 (e)의 동치는 Lemma
+\ref{lemma-local-source-target-implies}의 (2)이다. (a)와 (f)의 동치는
+Lemma \ref{lemma-local-source-target-implies}의 (1)이다. 이제 (a)는
+(e) 및 (f)와 동치이므로,
+% P09-ERR-0363
+(a)가 (g)와 동치임이 따른다.
+
+\medskip\noindent
+(c)가 (b)를 함의함은 분명하다. (b)가 성립하면 모든 $x\in|X|$에 대해
+쌍의 매끄러운 사상 $a_x:(U_x,u_x)\to(X,x)$, 매끄러운 사상
+$b_x:V_x\to Y$, 그리고 사상 $h_x:U_x\to V_x$를 택하여
+$f\circ a_x=b_x\circ h_x$이고 $h_x$가 $\mathcal{P}$를 갖게 할 수 있다.
+그러면 $h=\coprod h_x:\coprod U_x\to\coprod V_x$, 그리고
+$a=\coprod a_x$와 $b=\coprod b_x$는 (c)에 나오는 도식을 이룬다.
+($h$는 성질 $\mathcal{P}$를 갖는다. 실제로
+$\{V_x\to\coprod V_x\}$는 매끄러운 덮개이고 $\mathcal{P}$는 공역에서
+매끄럽게 국소적이다.) 따라서 (b)와
+(c)는 동치이다.
+
+\medskip\noindent
+이제 (a), (b), (c), (e), (f), (g)가 동치임을 안다. (a)가 성립한다고
+가정하자. $U,V,a,b,h$가 (d)에서와 같다고 하자. $X\times_YV\to V$는
+$\mathcal{P}$를 갖는데, 이는 $\mathcal{P}$가 매끄러운 밑변환에 대해
+안정적이기 때문이다. 따라서 $U\to V$는 $\mathcal{P}$를 갖는데, 이는
+$\mathcal{P}$가 매끄러운 사상을 앞에 합성해도 안정적이기 때문이다. 역으로 (d)가
+성립하면 $U=X$, $V=Y$로 놓아 $f$가 $\mathcal{P}$를 가짐을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smooth-local-source-target}
+$S$를 스킴이라 하자. $\mathcal{P}$를 $S$ 위 대수공간 사상의 성질이라
+하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{P}$는 정의역에서 매끄럽게 국소적이다.
+\item $\mathcal{P}$는 공역에서 매끄럽게 국소적이다.
+\item $\mathcal{P}$는 매끄러운 사상을 뒤에 합성해도 안정적이다. 즉
+$f:X\to Y$가 $\mathcal{P}$를 갖고 $Y\to Z$가 매끄러운 사상이면
+$X\to Z$는 $\mathcal{P}$를 갖는다.
+\end{enumerate}
+그러면 $\mathcal{P}$는 정의역과 공역에서 매끄럽게 국소적이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{P}$를 대수공간 사상의 성질로서 보조정리의 조건 (1), (2),
+(3)을 만족한다고 하자. Lemma \ref{lemma-precompose-property-local-source}에
+의해 $\mathcal{P}$는 매끄러운 사상을 앞에 합성해도 안정적이다. Lemma
+\ref{lemma-pullback-property-local-target}에 의해 $\mathcal{P}$는 매끄러운
+밑변환에 대해 안정적이다. 따라서 Definition
+\ref{definition-local-source-target}의 (3)이 성립함을 보이면 충분하다.
+
+\medskip\noindent
+더 정확히, $f:X\to Y$가 $S$ 위 대수공간의 사상으로 Definition
+\ref{definition-local-source-target}의 (3)(b)를 만족한다고 하자. 달리
+말하면 모든
+% P09-ERR-0364
+$x\in X$에 대해 매끄러운 사상 $a_x:U_x\to X$, 점 $u_x\in|U_x|$로서
+$x$로 가는 것, 매끄러운 사상 $b_x:V_x\to Y$, 그리고 사상
+$h_x:U_x\to V_x$가 존재하여 $f\circ a_x=b_x\circ h_x$이고 $h_x$가
+$\mathcal{P}$를 갖는다. $f$가 $\mathcal{P}$를 가짐을 보이면 보조정리의
+증명이 끝난다. $U=\coprod U_x$, $a=\coprod a_x$, $V=\coprod V_x$,
+$b=\coprod b_x$, $h=\coprod h_x$로 놓자. 가환 도식
+% P09-ERR-0365
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+을 얻는다. 여기서 $a$, $b$는 매끄럽고 $a$는 전사이다. $h$는
+$\mathcal{P}$를 갖는다. 실제로 각 $h_x$가 그러하고 $\mathcal{P}$는
+공역에서 매끄럽게 국소적이다. $a$가 전사이고 $\mathcal{P}$가 정의역에서
+매끄럽게 국소적이므로 $b\circ h$가 $\mathcal{P}$를 가짐을 보이면
+충분하다. 이는 $\mathcal{P}$가 매끄러운 사상을 뒤에 합성해도 안정적이라고
+가정했고 $b$가 매끄럽기 때문에 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-list-local-source-target}
+Lemma \ref{lemma-smooth-local-source-target}와 이 장의 앞 절들에서 한 작업을
+사용하면 정의역과 공역에서 매끄럽게 국소적인 사상 유형의 목록을 쉽게
+만들 수 있다. 각 경우에 그 성질이 정의역에서 매끄럽게 국소적임을
+함의하는 보조정리와 공역에서 매끄럽게 국소적임을 함의하는 보조정리를
+나열한다. 각 경우에 Lemma \ref{lemma-smooth-local-source-target}의 셋째
+가정은 자명하게 확인되므로 생략한다. 목록은 다음과 같다.
+\begin{enumerate}
+\item 평탄. Lemmas \ref{lemma-flat-fpqc-local-source}와
+\ref{lemma-descending-property-flat}을 보라.
+\item 국소 유한 표시. Lemmas
+\ref{lemma-locally-finite-presentation-fppf-local-source}와
+\ref{lemma-descending-property-locally-finite-presentation}을 보라.
+\item 국소 유한형.
+% P09-ERR-0366
+Lemmas \ref{lemma-locally-finite-type-fppf-local-source}와
+\ref{lemma-descending-property-locally-finite-type}을 보라.
+\item 보편적으로 열린 사상. Lemmas
+\ref{lemma-universally-open-fppf-local-source}와
+\ref{lemma-descending-property-universally-open}을 보라.
+\item 신토믹. Lemmas \ref{lemma-syntomic-syntomic-local-source}와
+\ref{lemma-descending-property-syntomic}을 보라.
+\item 매끄러운 사상. Lemmas \ref{lemma-smooth-smooth-local-source}와
+\ref{lemma-descending-property-smooth}를 보라.
+% P09-ERR-0367
+\item 필요에 따라 여기에 더 추가한다.
+\end{enumerate}
+\end{remark}
+
+\section{정의역과 공역에서 에탈--매끄럽게 국소적인 사상의 성질}
+\label{section-properties-etale-smooth-local-source-target}
+
+\noindent
+이 절은 정의역에서 에탈 국소적이고 공역에서 매끄럽게 국소적인 사상의
+성질에 대해 Section \ref{section-properties-local-source-target}에 대응한다.
+이 성질을 너무 자주 사용하지 않도록 터무니없이 긴 이름을 붙인다.
+
+\begin{definition}
+\label{definition-etale-smooth-local-source-target}
+$S$를 스킴이라 하자. $\mathcal{P}$를 $S$ 위 대수공간 사상의 성질이라
+하자. 다음 조건들이 성립하면 $\mathcal{P}$가 {\it 정의역과 공역에서
+에탈--매끄럽게 국소적이다}라고 한다.
+\begin{enumerate}
+\item (에탈 사상을 앞에 합성해도 안정적임)
+$f:X\to Y$가 에탈이고 $g:Y\to Z$가 $\mathcal{P}$를 가지면
+$g\circ f$도 $\mathcal{P}$를 갖는다.
+\item (매끄러운 밑변환에 대해 안정적임)
+$f:X\to Y$가 $\mathcal{P}$를 갖고 $Y'\to Y$가 매끄러우면, 밑변환
+$f':Y'\times_YX\to Y'$도 $\mathcal{P}$를 갖는다.
+\item (국소성) 사상 $f:X\to Y$가 주어졌을 때 다음은 동치이다.
+\begin{enumerate}
+\item $f$는 $\mathcal{P}$를 갖는다.
+\item 모든 $x\in|X|$에 대해 가환 도식
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+이 존재한다. 여기서 $b$는 매끄럽고 $U\to X\times_YV$는 에탈이며,
+점 $u\in|U|$가 존재하여 $a(u)=x$이고, $h$는 $\mathcal{P}$를 갖는다.
+\end{enumerate}
+\end{enumerate}
+\end{definition}
+
+\noindent
+위 내용을 우리의 정의로 삼는다. 아래 보조정리들에서 이것이
+% P09-ERR-0368
+$\mathcal{P}$가 공역에서 에탈 국소적이고, 정의역에서 매끄럽게
+국소적이며, 에탈 사상을 뒤에 합성해도 안정적이라는 것과 동치임을 보인다.
+
+\begin{lemma}
+\label{lemma-etale-smooth-local-source-target-implies}
+$S$를 스킴이라 하자. $\mathcal{P}$를 $S$ 위 대수공간 사상의 성질로서
+정의역과 공역에서 에탈--매끄럽게 국소적이라고 하자. 그러면
+\begin{enumerate}
+\item $\mathcal{P}$는 정의역에서 에탈 국소적이다.
+\item $\mathcal{P}$는 공역에서 매끄럽게 국소적이다.
+\item $\mathcal{P}$는 에탈 사상을 뒤에 합성해도 안정적이다. 즉
+$f:X\to Y$가 $\mathcal{P}$를 갖고 $g:Y\to Z$가 에탈이면
+$g\circ f$는 $\mathcal{P}$를 갖는다.
+\item $\mathcal{P}$는 다음 영속성 성질을 갖는다. $f:X\to Y$와 에탈
+사상 $g:Y\to Z$가 주어져 $g\circ f$가 $\mathcal{P}$를 가지면 $f$도
+$\mathcal{P}$를 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+모든 내용을 완전히 써 보자.
+
+\medskip\noindent
+(1)의 증명. $f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자.
+$\{X_i\to X\}_{i\in I}$를 $X$의 에탈 덮개라 하자. 각 합성
+$h_i:X_i\to Y$가 $\mathcal{P}$를 가지면, 각
+% P09-ERR-0369
+$|x|\in X$에 대해 $i\in I$와 점 $x_i\in|X_i|$를 찾을 수 있으며 이 점은
+$x$로 간다. 그러면 $(X_i,x_i)\to(X,x)$는 쌍의 에탈 사상이고,
+$\text{id}_Y:Y\to Y$는 매끄러운 사상이며, $h_i$는 Definition
+\ref{definition-etale-smooth-local-source-target}의 (3)에 나오는 것과 같다.
+따라서 $f$는 $\mathcal{P}$를 갖는다. 역으로 $f$가 $\mathcal{P}$를 가지면
+Definition \ref{definition-etale-smooth-local-source-target}의 (1)에 의해
+각 $X_i\to Y$도 $\mathcal{P}$를 갖는다.
+
+\medskip\noindent
+(2)의 증명. $f:X\to Y$를 $S$ 위 대수공간의 사상이라 하자.
+$\{Y_i\to Y\}_{i\in I}$를 $Y$의 매끄러운 덮개라 하자.
+$X_i=Y_i\times_YX$라 쓰고 $h_i:X_i\to Y_i$를 $f$의 밑변환이라 하자.
+각 $h_i:X_i\to Y_i$가 $\mathcal{P}$를 가지면, 각 $x\in|X|$에 대해
+$i\in I$와 점 $x_i\in|X_i|$를 택하며 이 점은 $x$로 간다. 그러면
+$X_i\to X\times_YY_i$는 에탈 사상이고(실제로 동형이다), $Y_i\to Y$는
+매끄러우며, $h_i$는
+% P09-ERR-0370
+Definition \ref{definition-local-source-target}의 (3)에 나오는 것과 같다.
+따라서 $f$는 $\mathcal{P}$를 갖는다. 역으로 $f$가 $\mathcal{P}$를 가지면
+Definition \ref{definition-local-source-target}의 (2)에 의해 각
+$X_i\to Y_i$도 $\mathcal{P}$를 갖는다.
+
+\medskip\noindent
+(3)의 증명. $f:X\to Y$가 $\mathcal{P}$를 갖고 $g:Y\to Z$가 에탈이라고
+가정하자. 사상 $X\to Y\times_ZX$는 $X$ 위에서 에탈인 대수공간들
+사이의 사상이므로 에탈이다(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-permanence}). 또한 $Y\to Z$는
+에탈이고 따라서 매끄러운 사상이다.
+% P09-ERR-0371
+그러므로 도식
+$$
+\xymatrix{
+X \ar[d] \ar[r]_f & Y \ar[d] \\
+X \ar[r]^{g \circ f} & Z
+}
+$$
+은 모든 $x\in|X|$에 대해
+% P09-ERR-0372
+Definition \ref{definition-local-source-target}의 (3)에 적용되고,
+$g\circ f$가 $\mathcal{P}$를 갖는다고 결론짓는다.
+
+\medskip\noindent
+(4)의 증명. $f:X\to Y$를 사상이라 하고 $g:Y\to Z$를 에탈 사상으로서
+$g\circ f$가 $\mathcal{P}$를 갖는다고 하자. Definition
+\ref{definition-etale-smooth-local-source-target}의 (2)에 의해
+$\text{pr}_Y:Y\times_ZX\to Y$가 $\mathcal{P}$를 갖는다. 한편 사상
+$(f,1):X\to Y\times_ZX$는 에탈 사영
+$\text{pr}_X:Y\times_ZX\to X$의 단면이므로 에탈이다. Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-etale-permanence}를 보라. 따라서 Definition
+\ref{definition-etale-smooth-local-source-target}의 (1)에 의해
+$f=\text{pr}_Y\circ(f,1)$은 $\mathcal{P}$를 갖는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-etale-smooth-local-source-target-characterize}
+$S$를 스킴이라 하자. $\mathcal{P}$를 $S$ 위 대수공간 사상의 성질로서
+정의역과 공역에서 etale--매끄럽게 국소적이라고 하자. $f:X\to Y$를
+$S$ 위 대수공간의 사상이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item[(a)] $f$는 성질 $\mathcal{P}$를 갖는다.
+\item[(b)] 모든 $x\in|X|$에 대해 매끄러운 사상 $b:V\to Y$, 에탈 사상
+$a:U\to V\times_YX$, 그리고 점 $u\in|U|$가 존재하며 이 점은 $x$로 가고,
+$U\to V$가 $\mathcal{P}$를 갖는다.
+\item[(c)] 어떤 가환 도식
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+에서 $b$가 매끄럽고 $U\to V\times_YX$가 에탈이며 $a$가 전사이면,
+사상 $h$는 $\mathcal{P}$를 갖는다.
+\item[(d)] 임의의 가환 도식
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+에서 $b$가 매끄럽고 $U\to X\times_YV$가 에탈이면, 사상 $h$는
+$\mathcal{P}$를 갖는다.
+\item[(e)] 매끄러운 덮개 $\{Y_i\to Y\}_{i\in I}$가 존재하여 각 밑변환
+$Y_i\times_YX\to Y_i$가 $\mathcal{P}$를 갖는다.
+\item[(f)] 에탈 덮개 $\{X_i\to X\}_{i\in I}$가 존재하여 각 합성
+$X_i\to Y$가 $\mathcal{P}$를 갖는다.
+\item[(g)] 매끄러운 덮개 $\{Y_i\to Y\}_{i\in I}$가 존재하고, 각
+$i\in I$에 대해 에탈 덮개 $\{X_{ij}\to Y_i\times_YX\}_{j\in J_i}$가
+존재하여 각 사상 $X_{ij}\to Y_i$가 $\mathcal{P}$를 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a)와 (b)의 동치는 Definition
+\ref{definition-etale-smooth-local-source-target}의 일부이다. (a)와 (e)의
+동치는 Lemma \ref{lemma-etale-smooth-local-source-target-implies}의 (2)이다.
+(a)와 (f)의 동치는 Lemma
+\ref{lemma-etale-smooth-local-source-target-implies}의 (1)이다. 이제 (a)는
+(e) 및 (f)와 동치이므로,
+% P09-ERR-0373
+(a)가 (g)와 동치임이 따른다.
+
+\medskip\noindent
+(c)가 (b)를 함의함은 분명하다. (b)가 성립하면 모든 $x\in|X|$에 대해
+매끄러운 사상
+% P09-ERR-0374
+$b_x:V_x\to Y$, 에탈 사상 $U_x\to V_x\times_YX$, 그리고 점
+$u_x\in|U_x|$로서 $x$로 가고 $U_x\to V_x$가 $\mathcal{P}$를 갖는 것을
+택할 수 있다. 그러면
+% P09-ERR-0375
+$h=\coprod h_x:\coprod U_x\to\coprod V_x$는 $a=\coprod a_x$ 및
+$b=\coprod b_x$와 함께 (c)에 나오는 도식을 이룬다. ($h$는 성질
+$\mathcal{P}$를 갖는다. 실제로 $\{V_x\to\coprod V_x\}$는 매끄러운
+덮개이고 $\mathcal{P}$는 공역에서 매끄럽게 국소적이다.) 따라서 (b)와
+(c)는 동치이다.
+
+\medskip\noindent
+이제 (a), (b), (c), (e), (f), (g)가 동치임을 안다. (a)가 성립한다고
+가정하자. $U,V,a,b,h$가 (d)에서와 같다고 하자. $X\times_YV\to V$는
+$\mathcal{P}$를 갖는데, 이는 $\mathcal{P}$가 매끄러운 밑변환에 대해
+안정적이기 때문이다. 따라서 $U\to V$는 $\mathcal{P}$를 갖는데, 이는
+$\mathcal{P}$가 에탈 사상을 앞에 합성해도 안정적이기 때문이다. 역으로
+(d)가 성립하면 $U=X$, $V=Y$로 놓아 $f$가 $\mathcal{P}$를 가짐을 알 수
+있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-etale-smooth-local-source-target}
+$S$를 스킴이라 하자. $\mathcal{P}$를 $S$ 위 대수공간 사상의 성질이라
+하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{P}$는 정의역에서 에탈 국소적이다.
+\item $\mathcal{P}$는 공역에서 매끄럽게 국소적이다.
+\item $\mathcal{P}$는 열린 몰입을 뒤에 합성해도 안정적이다. 즉
+$f:X\to Y$가 $\mathcal{P}$를 갖고 $Y\subset Z$가 열린 매장이면
+$X\to Z$는 $\mathcal{P}$를 갖는다.
+\end{enumerate}
+그러면 $\mathcal{P}$는 정의역과 공역에서 에탈--매끄럽게 국소적이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{P}$를 대수공간 사상의 성질로서 보조정리의 조건 (1), (2),
+(3)을 만족한다고 하자. Lemma \ref{lemma-precompose-property-local-source}에
+의해 $\mathcal{P}$는 에탈 사상을 앞에 합성해도 안정적이다. Lemma
+\ref{lemma-pullback-property-local-target}에 의해 $\mathcal{P}$는 매끄러운
+밑변환에 대해 안정적이다. 따라서
+% P09-ERR-0376
+Definition \ref{definition-local-source-target}의 (3)이 성립함을 보이면
+충분하다.
+
+\medskip\noindent
+더 정확히, $f:X\to Y$가 $S$ 위 대수공간의 사상으로 Definition
+\ref{definition-local-source-target}의 (3)(b)를 만족한다고 하자. 달리
+말하면 모든
+% P09-ERR-0377
+$x\in X$에 대해 매끄러운 사상 $b_x:V_x\to Y$, 에탈 사상
+$U_x\to V_x\times_YX$, 그리고 점 $u_x\in|U_x|$가 존재하며 이 점은 $x$로 가고,
+$h_x:U_x\to V_x$가 $\mathcal{P}$를 갖는다. $f$가 $\mathcal{P}$를 가짐을
+보이면 보조정리의 증명이 끝난다.
+
+\medskip\noindent
+$a_x:U_x\to X$를 합성 $U_x\to V_x\times_YX\to X$라 하자.
+$U=\coprod U_x$, $a=\coprod a_x$, $V=\coprod V_x$,
+$b=\coprod b_x$, $h=\coprod h_x$로 놓자. 가환 도식
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+을 얻는다. 여기서 $b$는 매끄럽고 $U\to V\times_YX$는 에탈이며,
+% P09-ERR-0378
+$a$는 전사이다. $h$는 $\mathcal{P}$를 갖는다. 실제로 각 $h_x$가
+그러하고 $\mathcal{P}$는 공역에서 매끄럽게 국소적이다. 다음 단락에서
+$U,V,X,Y$가 스킴이라고 가정해도 됨을 증명한다. 독자는 그 단락을
+건너뛰어도 좋다.
+
+\medskip\noindent
+$X,Y,U,V,a,b,f,h$가 앞 단락에서와 같다고 하자. $f$가 $\mathcal{P}$를
+가짐을 보여야 한다. $X'\to X$를 전사 에탈 사상으로 택하여
+% P09-ERR-0379
+$X_i$가 스킴이게 하자. $U'=X'\times_XU$로 놓자. 그러면
+$U'\to X'$는 전사이고 $U'\to X'\times_YV$는 에탈이다. $\mathcal{P}$가
+정의역에서 에탈 국소적이므로 $U'\to V$는 $\mathcal{P}$를 가지며,
+$X'\to Y$가 $\mathcal{P}$를 가짐을 보이는 것으로 충분하다. 달리 말하면
+$X$가 스킴이라고 가정해도 된다. 다음으로 전사 에탈 사상 $Y'\to Y$를
+택하여 $Y'$가 스킴이게 하자. $V'=V\times_YY'$,
+$X'=X\times_YY'$, $U'=U\times_YY'$로 놓자. 그러면 $U'\to X'$는 전사이고
+$U'\to X'\times_{Y'}V'$는 에탈이다. $\mathcal{P}$가 공역에서 매끄럽게
+국소적이므로 $U'\to V'$는 $\mathcal{P}$를 가지며, $X'\to Y'$가
+$\mathcal{P}$를 가짐을 보이는 것으로 충분하다. 따라서 $X$와 $Y$가 모두
+스킴이라고 가정해도 된다. 전사 에탈 사상 $V'\to V$를 택하여 $V'$가
+스킴이게 하자. $U'=U\times_VV'$로 놓자. 그러면 $U'\to X$는 전사이고
+$U'\to X\times_YV'$는 에탈이다.
+% P09-ERR-0380
+$\mathcal{P}$가 정의역에서 매끄럽게 국소적이므로 $U'\to V'$는
+$\mathcal{P}$를 갖는다. 따라서 $U,V$를 $U',V'$로 바꾸어 $X,Y,V$가
+스킴이라고 가정해도 된다. 마지막으로 $U$를 $U$ 위의 전사 에탈 스킴으로
+바꾸면 $U,V,X,Y$가 모두 스킴이라고 가정해도 됨을 알 수 있다.
+
+\medskip\noindent
+$U,V,X,Y$가 스킴이면 Descent, Lemma
+\ref{descent-lemma-etale-tau-local-source-target}에 의해 $f$는
+$\mathcal{P}$를 갖는다.
+\end{proof}
+
+\begin{remark}
+\label{remark-list-etale-smooth-local-source-target}
+Lemma \ref{lemma-etale-smooth-local-source-target}와 이 장의 앞 절들에서 한
+작업을 사용하면
+% P09-ERR-0381
+정의역과 공역에서 매끄럽게 국소적인 사상 유형의 목록을 쉽게 만들 수
+있다. 각 경우에 그 성질이 정의역에서 etale 국소적임을 함의하는
+보조정리와 공역에서 매끄럽게 국소적임을 함의하는 보조정리를 나열한다.
+각 경우에 Lemma \ref{lemma-etale-smooth-local-source-target}의 셋째 가정은
+자명하게 확인되므로 생략한다. 목록은 다음과 같다.
+\begin{enumerate}
+\item 에탈. Lemmas \ref{lemma-etale-etale-local-source}와
+\ref{lemma-descending-property-etale}을 보라.
+\item 국소 준유한. Lemmas \ref{lemma-locally-quasi-finite-etale-local-source}와
+\ref{lemma-descending-property-quasi-finite}을 보라.
+\item 비분기. Lemmas \ref{lemma-unramified-etale-local-source}와
+\ref{lemma-descending-property-unramified}를 보라.
+% P09-ERR-0382
+\item 필요에 따라 여기에 더 추가한다.
+\end{enumerate}
+물론 Remark \ref{remark-list-local-source-target}에 나열한 모든 성질은
+여기에 나열할 수 있는 예이기도 하다.
+\end{remark}
+
+\section{대수공간 위 대수공간의 하강 자료}
+\label{section-descent-datum}
+
+\noindent
+이 절은 대수공간에 대해 Descent, Section
+\ref{descent-section-descent-datum}에 대응한다. 이 절의 논증 대부분은
+하강 자료의 정의에만 의존하는 형식적인 논증이다.
+
+\begin{definition}
+\label{definition-descent-datum}
+$S$를 스킴이라 하자. $f:Y\to X$를 $S$ 위 대수공간의 사상이라 하자.
+\begin{enumerate}
+\item $V\to Y$를 대수공간의 사상이라 하자. $V/Y/X$의
+{\it 하강 자료}란 동형 $\varphi:V\times_XY\to Y\times_XV$로서,
+$Y\times_XY$ 위 대수공간의 동형이고 도식
+$$
+\xymatrix{
+V \times_X Y \times_X Y \ar[rd]^{\varphi_{01}} \ar[rr]_{\varphi_{02}} &
+&
+Y \times_X Y \times_X V\\
+&
+Y \times_X V \times_X Y \ar[ru]^{\varphi_{12}}
+}
+$$
+이 가환이라는 {\it 코사이클 조건}을 만족하는 것이다(표기는 자명하다).
+\item 쌍 $(V/Y,\varphi)$를 $Y\to X$에 대한 {\it 상대 하강 자료}라고도 한다.
+\item {\it 사상 $f:(V/Y,\varphi)\to(V'/Y,\varphi')$}으로서 $Y\to X$에
+대한 상대 하강 자료의 사상인 것이란, 대수공간의 사상 $f:V\to V'$로서
+$Y$ 위에 있고 도식
+$$
+\xymatrix{
+V \times_X Y \ar[r]_{\varphi} \ar[d]_{f \times \text{id}_Y} &
+Y \times_X V \ar[d]^{\text{id}_Y \times f} \\
+V' \times_X Y \ar[r]^{\varphi'} & Y \times_X V'
+}
+$$
+이 가환인 것이다.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+\label{remark-easier}
+$S$를 스킴이라 하자. $Y\to X$를 $S$ 위 대수공간의 사상이라 하자.
+$(V/Y,\varphi)$를 $Y\to X$에 대한 상대 하강 자료라 하자. 동형
+$\varphi$를 대수공간의 동형
+$$
+(Y \times_X Y) \times_{\text{pr}_0, Y} V
+\longrightarrow
+(Y \times_X Y) \times_{\text{pr}_1, Y} V
+$$
+으로 생각할 수 있으며, 이는 $Y\times_XY$ 위에 있다. 따라서 느슨하게 말하면 $\varphi$를 사상
+$\varphi:\text{pr}_0^*V\to\text{pr}_1^*V$로 생각할 수 있다\footnote{불행히도
+여기서 화살의 ``잘못된'' 방향을 택했다. ``함수''와 ``공간''이 쌍대라는
+일반 원리에 비추어 Definitions \ref{definition-descent-datum}과
+\ref{definition-descent-datum-for-family-of-morphisms}에서는 Definition
+\ref{definition-descent-datum-quasi-coherent}에서 택한 방향의 반대 방향을
+택했어야 한다.}. 그러면 코사이클 조건은
+$\text{pr}_{02}^*\varphi=\text{pr}_{12}^*\varphi\circ
+\text{pr}_{01}^*\varphi$라고 말한다. 이 점에서 준연접층의 하강 자료와
+매우 비슷하다.
+\end{remark}
+
+\noindent
+다음은 공역이 고정된 사상족이 있을 때의 정의이다.
+
+\begin{definition}
+\label{definition-descent-datum-for-family-of-morphisms}
+$S$를 스킴이라 하자. $\{X_i\to X\}_{i\in I}$를 대수공간의 사상족이라
+하자. 이는 $S$ 위에 있고 공역은 $X$로 고정되어 있다.
+\begin{enumerate}
+\item {\it 하강 자료 $(V_i,\varphi_{ij})$}로서 족 $\{X_i\to X\}$에
+대한 것은 대수공간 $V_i$로서 $X_i$ 위의 것이 각 $i\in I$에 대해
+주어지고, 동형 $\varphi_{ij}:V_i\times_XX_j\to X_i\times_XV_j$로서
+$X_i\times_XX_j$ 위 대수공간의 동형인 것이 각 쌍 $(i,j)\in I^2$에
+대해 주어지며, 모든 세
+지표 $(i,j,k)\in I^3$에 대해 도식
+$$
+\xymatrix{
+V_i \times_X X_j \times_X X_k
+\ar[rd]^{\text{pr}_{01}^*\varphi_{ij}}
+\ar[rr]_{\text{pr}_{02}^*\varphi_{ik}} &
+&
+X_i \times_X X_j \times_X V_k\\
+&
+X_i \times_X V_j \times_X X_k
+\ar[ru]^{\text{pr}_{12}^*\varphi_{jk}}
+}
+$$
+이 $X_i\times_XX_j\times_XX_k$ 위 대수공간의 도식으로서 가환한다
+(표기는 자명하다).
+\item 하강 자료의 {\it 사상
+$\psi:(V_i,\varphi_{ij})\to(V'_i,\varphi'_{ij})$}은 사상족
+$\psi=(\psi_i)_{i\in I}$로 주어지며, 각 $\psi_i:V_i\to V'_i$는
+$X_i$ 위 대수공간의 사상이고 모든
+도식
+$$
+\xymatrix{
+V_i \times_X X_j \ar[r]_{\varphi_{ij}} \ar[d]_{\psi_i \times \text{id}} &
+X_i \times_X V_j \ar[d]^{\text{id} \times \psi_j} \\
+V'_i \times_X X_j \ar[r]^{\varphi'_{ij}} & X_i \times_X V'_j
+}
+$$
+이 가환한다.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+\label{remark-easier-family}
+$S$를 스킴이라 하자. $\{X_i\to X\}_{i\in I}$를 대수공간의 사상족이라
+하자. 이는 $S$ 위에 있고 공역은 $X$로 고정되어 있다. $(V_i,\varphi_{ij})$를
+$\{X_i\to X\}$에 대한 상대 하강 자료라 하자. 동형 $\varphi_{ij}$를
+대수공간의 동형
+$$
+(X_i \times_X X_j) \times_{\text{pr}_0, X_i} V_i
+\longrightarrow
+(X_i \times_X X_j) \times_{\text{pr}_1, X_j} V_j
+$$
+으로 생각할 수 있으며, 이는 $X_i\times_XX_j$ 위에 있다. 따라서
+느슨하게 말하면 $\varphi_{ij}$를 동형
+$\text{pr}_0^*V_i\to\text{pr}_1^*V_j$로 생각할 수 있으며, 이는
+$X_i\times_XX_j$ 위에 있다. 그러면 코사이클
+조건은 $\text{pr}_{02}^*\varphi_{ik}=\text{pr}_{12}^*\varphi_{jk}\circ
+\text{pr}_{01}^*\varphi_{ij}$라고 말한다. 이 점에서 준연접층의 하강
+자료와 매우 비슷하다.
+\end{remark}
+
+\noindent
+보통 하나의 사상으로 이루어진 족의 판본을 사용하는 이유는 다음
+보조정리이다.
+
+\begin{lemma}
+\label{lemma-family-is-one}
+$S$를 스킴이라 하자. $\{X_i\to X\}_{i\in I}$를 대수공간의 사상족이라
+하자. 이는 $S$ 위에 있고 공역은 $X$로 고정되어 있다.
+$Y=\coprod_{i\in I}X_i$로 놓자.
+다음 범주의 표준 동치가 있다.
+$$
+\begin{matrix}
+\text{category of descent data } \\
+\text{relative to the family } \{X_i \to X\}_{i \in I}
+\end{matrix}
+\longrightarrow
+\begin{matrix}
+\text{ category of descent data} \\
+\text{ relative to } Y/X
+\end{matrix}
+$$
+이 동치는 $(V_i,\varphi_{ij})$를 $(V,\varphi)$로 보내며, 여기서
+$V=\coprod_{i\in I}V_i$이고 $\varphi=\coprod\varphi_{ij}$이다.
+\end{lemma}
+
+\begin{proof}
+$Y\times_XY=\coprod_{ij}X_i\times_XX_j$이며 고차 올곱도 마찬가지임을
+주목하자. 사상 $V\to Y$를 주는 것은 사상족 $V_i\to X_i$를 주는 것과
+정확히 같다. 그리고 하강 자료 $\varphi$를 주는 것은 족
+$\varphi_{ij}$를 주는 것과 정확히 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pullback}
+하강 자료의 당김. $S$를 스킴이라 하자.
+\begin{enumerate}
+\item 대수공간의 가환 도식
+$$
+\xymatrix{
+Y' \ar[r]_f \ar[d]_{a'} & Y \ar[d]^a \\
+X' \ar[r]^h & X
+}
+$$
+이 $S$ 위에 있다고 하자. 다음 구성을 생각하자.
+$$
+(V \to Y, \varphi) \longmapsto f^*(V \to Y, \varphi) = (V' \to Y', \varphi')
+$$
+여기서 $V'=Y'\times_YV$로 놓고, $\varphi'$는 아래의 합성으로 정의한다.
+$$
+\xymatrix{
+V' \times_{X'} Y' \ar@{=}[r] &
+(Y' \times_Y V) \times_{X'} Y' \ar@{=}[r] &
+(Y' \times_{X'} Y') \times_{Y \times_X Y} (V \times_X Y)
+\ar[d]^{\text{id} \times \varphi} \\
+Y' \times_{X'} V' \ar@{=}[r] &
+Y' \times_{X'} (Y' \times_Y V) &
+% P09-ERR-0383
+(Y' \times_X Y') \times_{Y \times_X Y} (Y \times_X V) \ar@{=}[l]
+}
+$$
+이 구성은 $Y\to X$에 대한 상대 하강 자료의 범주에서 $Y'\to X'$에 대한
+상대 하강 자료의 범주로 가는 함자를 정의한다.
+\item 도식을 가환하게 하는 두 사상 $f_i:Y'\to Y$, $i=0,1$이 주어지면
+함자 $f_0^*$와 $f_1^*$는 표준적으로 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명은 생략하지만, Remark \ref{remark-easier}의 표기에서 사상
+$\varphi'$가 사상 $(f\times f)^*\varphi$임을 지적한다. (2)에 대해서는
+어느 사상 $f_0^*V\to f_1^*V$가 함자적 동형을 주는지 나타낸다. 실제로
+$f_0$와 $f_1$ 모두 가환 도식에 들어가므로 유일한 사상
+$r:Y'\to Y\times_XY$가 있으며, 이는 $f_i=\text{pr}_i\circ r$를 만족한다. 이제 다음 사상을
+택한다.
+\begin{eqnarray*}
+f_0^*V & = &
+Y' \times_{f_0, Y} V \\
+& = &
+Y' \times_{\text{pr}_0 \circ r, Y} V \\
+& = &
+Y' \times_{r, Y \times_X Y} (Y \times_X Y) \times_{\text{pr}_0, Y} V \\
+& \xrightarrow{\varphi} &
+Y' \times_{r, Y \times_X Y} (Y \times_X Y) \times_{\text{pr}_1, Y} V \\
+& = &
+Y' \times_{\text{pr}_1 \circ r, Y} V \\
+& = &
+Y' \times_{f_1, Y} V \\
+& = & f_1^*V
+\end{eqnarray*}
+이것이 잘 작동한다는 확인은 생략한다.
+\end{proof}
+
+\begin{definition}
+\label{definition-pullback-functor}
+Lemma \ref{lemma-pullback}에서와 같은 $S,X,X',Y,Y',f,a,a',h$에 대해,
+그 보조정리에서 구성한 함자
+$$
+(V, \varphi) \longmapsto f^*(V, \varphi)
+$$
+를 하강 자료의 {\it 당김 함자}라고 한다.
+\end{definition}
+
+
+\begin{lemma}
+\label{lemma-pullback-family}
+$S$를 스킴이라 하자. 공역이 고정된 사상족
+$\mathcal{U}'=\{X'_i\to X'\}_{i\in I'}$와
+% P09-ERR-0384
+$\mathcal{U}=\{X_j\to X\}_{i\in I}$가 주어졌다고 하자.
+$\alpha:I'\to I$, $g:X'\to X$, $g_i:X'_i\to X_{\alpha(i)}$를 공역이
+고정된 사상족들의 사상이라 하자. Sites, Definition
+\ref{sites-definition-morphism-coverings}를 보라.
+\begin{enumerate}
+\item $(V_i,\varphi_{ij})$를 족 $\mathcal{U}$에 대한 상대 하강 자료라
+하자. 계
+$$
+\left(
+g_i^*V_{\alpha(i)}, (g_i \times g_j)^*\varphi_{\alpha(i) \alpha(j)}
+\right)
+$$
+(Remark \ref{remark-easier-family}의 표기를 사용한다)는 $\mathcal{U}'$에
+대한 상대 하강 자료이다.
+\item 이 구성은 $\mathcal{U}$에 대한 상대 하강 자료의 범주와
+$\mathcal{U}'$에 대한 상대 하강 자료의 범주 사이의 함자를 정의한다.
+\item 둘째 사상족의 사상 $\beta:I'\to I$, $h:X'\to X$,
+$h'_i:X'_i\to X_{\beta(i)}$가 주어지면, $g=h$일 때 결과로 얻는 두 하강
+자료 함자는 표준적으로 동형이다.
+\item 이 함자들은 Lemma \ref{lemma-family-is-one}을 통해 Lemma
+\ref{lemma-pullback}에서 구성한 당김 함자들과 일치한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-pullback}에서 Lemma \ref{lemma-family-is-one}의 대응을
+통해 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-pullback-functor-family}
+Lemma \ref{lemma-pullback-family}에서와 같은
+$\mathcal{U}'=\{X'_i\to X'\}_{i\in I'}$,
+$\mathcal{U}=\{X_i\to X\}_{i\in I}$, $\alpha:I'\to I$,
+$g:X'\to X$, $g_i:X'_i\to X_{\alpha(i)}$에 대해, 그 보조정리에서 구성한
+함자
+$$
+(V_i, \varphi_{ij}) \longmapsto
+(g_i^*V_{\alpha(i)}, (g_i \times g_j)^*\varphi_{\alpha(i) \alpha(j)})
+$$
+를 하강 자료의 {\it 당김 함자}라고 한다.
+\end{definition}
+
+\noindent
+$\mathcal{U}$와 $\mathcal{U}'$가 같은 공역 $X$를 갖고,
+$\mathcal{U}'$가 $\mathcal{U}$를 세분하지만(Sites, Definition
+\ref{sites-definition-morphism-coverings}을 보라) 명시적인 쌍
+$(\alpha,g_i)$가 주어지지 않은 경우에도 당김 함자에 관해 말할 수 있다.
+실제로 Lemma \ref{lemma-pullback-family}에서 그 쌍의 선택은 표준 동형을
+제외하면 중요하지 않음을 보았다.
+
+\begin{definition}
+\label{definition-effective}
+$S$를 스킴이라 하자. $f:Y\to X$를 $S$ 위 대수공간의 사상이라 하자.
+\begin{enumerate}
+\item 대수공간 $U$가 $X$ 위에 주어지면, $U$에는
+$\text{id}:X\to X$에 대한 {\it 자명한 하강 자료}, 즉 $U$ 위의 항등
+사상이 있다.
+\item Lemma \ref{lemma-pullback}에 의해 {\it 표준 하강 자료}를
+$Y\times_XU$ 위에 얻는다. 이는 $Y\to X$에 대한 것이며 자명한 하강
+자료를 $f$를 따라 당겨온 것이다.
+% P09-ERR-0385
+이 하강 자료를 흔히 $(Y\times_XU,can)$으로 쓴다.
+\item 하강 자료 $(V,\varphi)$로서 $Y/X$에 대한 것이 {\it 유효하다}는
+것은 $(V,\varphi)$가 표준 하강 자료 $(Y\times_XU,can)$과 동형이고,
+여기서 대수공간 $U$는 $X$ 위에 있다는 뜻이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+따라서 유효하다는 것은 대수공간 $U$가 존재하여 $X$ 위에 있고, 동형
+$\psi:V\to Y\times_XU$가 존재하여 $Y$ 위에 있으며, $\varphi$가 합성
+% P09-ERR-0386
+$$
+V \times_X Y \xrightarrow{\psi \times \text{id}_Y}
+Y \times_X U \times_S Y =
+Y \times_X Y \times_X U
+\xrightarrow{\text{id}_Y \times \psi^{-1}}
+Y \times_X V
+$$
+과 같다는 뜻이다. 여기에는 약간의 문제가 있다. 이 정의는 정신상 $Y$와
+$X$가 스킴인 경우 Descent, Definition
+\ref{descent-definition-effective}의 정의와 충돌한다. 그러나 어느 판본을
+뜻하는지는 언제나 문맥에서 분명할 것이다.
+
+\begin{definition}
+\label{definition-effective-family}
+$S$를 스킴이라 하자. $\{X_i\to X\}$를 대수공간의 사상족이라 하자. 이는
+$S$ 위에 있고 공역은 $X$로 고정되어 있다.
+\begin{enumerate}
+\item 대수공간 $U$가 주어져 $X$ 위에 있으면, 대수공간족
+$X_i\times_XU$ 위에 {\it 표준 하강 자료}가 있다. 이는 $U$의 자명한
+하강 자료를
+% P09-ERR-0387
+$\{\text{id}:S\to S\}$에 대해 당겨와 얻는다. 이 하강 자료를
+$(X_i\times_XU,can)$으로 쓴다.
+\item 하강 자료 $(V_i,\varphi_{ij})$로서
+% P09-ERR-0388
+$\{X_i\to S\}$에 대한 것이 {\it 유효하다}는 것은 대수공간 $U$가
+존재하여 $X$ 위에 있고, $(V_i,\varphi_{ij})$가 $(X_i\times_XU,can)$과
+동형이라는 뜻이다.
+\end{enumerate}
+\end{definition}
+
+
+
+
+
+
+\section{층으로 나타낸 하강 자료}
+\label{section-descent-data-sheaves}
+
+\noindent
+이 절은 Descent, Section \ref{descent-section-descent-data-sheaves}에
+대응한다. 대수공간 자체가 이미 층이므로 내용은 조금 다르다.
+
+\begin{lemma}
+\label{lemma-descent-data-sheaves}
+$S$를 스킴이라 하자. $\{X_i\to X\}_{i\in I}$를 $S$ 위 대수공간의
+fppf 덮개라 하자(Topologies on Spaces, Definition
+\ref{spaces-topologies-definition-fppf-covering}). 다음 두 범주는 동치이다.
+$$
+\left\{
+\begin{matrix}
+\text{아래 족에 대한 하강 자료 }(V_i, \varphi_{ij})\\
+\text{해당 족: }\{X_i \to X\}
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+\text{층 }F\text{는 }(\Sch/S)_{fppf}\text{ 위에 있고}\\
+\text{사상 }F \to X\text{가 주어져 각각}\\
+X_i \times_X F\text{가 대수공간인 것}
+\end{matrix}
+\right\}.
+$$
+더 나아가 다음이 성립한다.
+\begin{enumerate}
+\item 오른쪽의 대수공간 $X_i\times_XF$는 왼쪽의 $V_i$에 대응한다.
+\item 층 $F$가 대수공간인 것은\footnote{$I$가 지나치게 크지 않으면 항상
+그렇다는 것을 뒤에서 보일 것이다. Bootstrap, Lemma
+\ref{bootstrap-lemma-descend-algebraic-space}를 보라.}
+% P09-ERR-0389
+대응하는 하강 자료 $(X_i,\varphi_{ij})$가 유효한 것과 동치이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+먼저 오른쪽에서 왼쪽으로 가는 함자를 구성하자.
+사상 $F\to X$가 $(\Sch/S)_{fppf}$ 위 층의 사상으로 주어지고 각
+$V_i=X_i\times_XF$가 대수공간이라고 하자. 사영 $V_i\to X_i$가 있다.
+그러면 $V_i\times_XX_j$와 $X_i\times_XV_j$는 모두 층
+$X_i\times_XF\times_XX_j$를 표현하므로 동형
+% P09-ERR-0390
+$$
+\varphi_{ii'} : V_i \times_X X_j \to X_i \times_X V_j
+$$
+을 얻는다. 사상 $\varphi_{ij}$가 $X_i\times_XX_j$ 위의 사상이고
+코사이클 조건을 만족함은 곧바로 확인된다. 이 구성
+$F\mapsto(V_i,\varphi_{ij})$가 오른쪽에서 왼쪽으로 가는 함자를 준다.
+
+\medskip\noindent
+이제 왼쪽에서 오른쪽으로 가는 함자를 구성하자. 동형
+$\varphi_{ij}$는 동형
+$$
+\varphi_{ij} : V_i \times_X X_j \longrightarrow X_i \times_X V_j
+$$
+을 준다. 이는
+% P09-ERR-0391
+$X_i\times X_j$ 위의 동형이다. 다음 도식의 쌍대등화자를 $F$로 둔다.
+% P09-ERR-0392
+$$
+\xymatrix{
+\coprod_{i, i'} V_i \times_X X_j
+\ar@<1ex>[rr]^-{\text{pr}_0}
+\ar@<-1ex>[rr]_-{\text{pr}_1 \circ \varphi_{ij}}
+& &
+\coprod_i V_i \ar[r]
+&
+F
+}
+$$
+코사이클 조건에 의해 $F$에는 사상 $F\to X$가 주어지고
+$X_i\times_XF$는 $V_i$와 동형이다. 이 구성
+$(V_i,\varphi_{ij})\mapsto F$가 왼쪽에서 오른쪽으로 가는 함자를 준다.
+
+\medskip\noindent
+이 두 구성이 서로 준역함자라는 확인은 생략한다. 마지막 명제 (1)과
+(2)는 이 구성들에서 따른다.
+\end{proof}
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+
+\end{document}

@@ -1,0 +1,1317 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{대수공간 위의 위상}
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 대수공간의 범주 위에 몇 가지 위상을 도입한다. 관련 내용은
+\cite{SGA1}, \cite{Ner}, \cite{LM-B}, \cite{Kn}과 비교하라.
+이에 앞서, 같은 바탕 범주 위에서 동일한 층 개념을 주는 사이트(Sites,
+Definition \ref{sites-definition-site}의 의미에서)의 선택은 여러 가지임을
+지적해 둔다. 따라서 여기서 택하는 사이트는 참고문헌의 것과 약간 다를
+수 있지만, 궁극적으로는 같은 코호몰로지 군 등을 준다.
+
+
+
+
+\section{일반 절차}
+\label{section-procedure}
+
+\noindent
+이 절에서는 앞으로 사용할 사이트들을 만드는 일반 절차를 설명한다.
+독자가 Topologies, Section \ref{topologies-section-procedure}를 읽지
+않았다면 이 논의는 거의 이해되지 않을 것이다.
+
+\medskip\noindent
+$S$를 밑스킴이라 하자. 임의의 범주 $\Sch_\alpha$를 택하되, 이는
+$S$와 포함시키고자 하는 $S$ 위 스킴들의 임의의 집합에서 출발하여
+Sets, Lemma \ref{sets-lemma-construct-category}와 같이 구성한 것이다.
+덮개들의 임의의 집합 $\text{Cov}_{fppf}$를 $\Sch_\alpha$ 위에 택하되,
+이는 Sets, Lemma \ref{sets-lemma-coverings-site}와 같이 범주
+$\Sch_\alpha$와 fppf 덮개들의 모임에서 출발하여 택한 것이다. 이렇게
+얻은 큰 fppf 사이트를 $\Sch_{fppf}$로 쓴다. 이에 대응하는 큰 fppf
+사이트 $(\Sch/S)_{fppf}$를 택하며, 이것을 $S$의 큰 fppf 사이트라 한다.
+(위 절차는 전적으로 Topologies, Section
+\ref{topologies-section-fppf}의 규정에 따른 것이다.)
+
+\medskip\noindent
+위와 같이 선택하면 $S$ 위 대수공간의 범주는 동형류들의 집합을 갖는다.
+이를 보는 한 가지 방법은 $S$ 위 임의의 대수공간이 $U/R$ 꼴이며, 여기서
+$j : R \to U \times_S U$는 어떤 에탈 동치관계이고
+$U, R \in \Ob((\Sch/S)_{fppf})$라는 사실을 쓰는 것이다. Spaces, Lemma
+\ref{spaces-lemma-space-presentation}을 보라. 따라서 대수공간 범주의 충만한
+부분범주 $\textit{Spaces}/S$를 택할 수 있는데, 이는 $S$ 위 대수공간들로
+이루어지고 이 범주는
+대상들의 집합을 가지며 모든 대수공간은 $\textit{Spaces}/S$의 어떤
+대상과 동형이다. 이러한 범주 하나를 고정한다.
+
+\medskip\noindent
+아래 절들에서 위상 $\tau$가 주어지면, 큰 사이트
+$(\textit{Spaces}/S)_\tau$ (각각 큰 사이트
+$(\textit{Spaces}/X)_\tau$이며, 여기서 $X$는 $S$ 위 대수공간이다)의
+바탕 범주는 $\textit{Spaces}/S$ (각각 부분범주 $\textit{Spaces}/X$이며,
+이는 $\textit{Spaces}/S$의 부분범주이다. 또한
+Categories, Example \ref{categories-example-category-over-X}를 보라)이다.
+이를 사이트로 만드는 절차는 통상대로 $\tau$-덮개들의 모임을 정의한 뒤,
+Sets, Lemma \ref{sets-lemma-coverings-site}를 써서 그 위상을 정의하는
+충분히 큰 덮개들의 집합을 택하는 것이다.
+
+\medskip\noindent
+{\it 작은 에탈 사이트 $X_\etale$}는 대수공간 $X$에 대해 이미 Properties of
+Spaces, Definition \ref{spaces-properties-definition-etale-site}에서
+정의되었음을 지적한다. 그 대상은 $X$ 위 에탈 스킴이며, 대수공간의
+정의상 그러한 스킴은 충분히 많이 존재한다.
+% P09-ERR-0312
+그러나 이 장의 관점에서 더 자연스러운 사이트는(Topologies, Definition
+\ref{topologies-definition-big-small-etale}과 비교하라) Properties of
+Spaces, Definition \ref{spaces-properties-definition-spaces-etale-site}의
+사이트 $X_{spaces, \etale}$이다. 이 두 사이트는 같은 토포스를 정의한다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-compare-etale-sites}를 보라. 이 장에서는
+이들을 다시 정의하지 않고 그대로 사용한다.
+
+
+
+
+
+\section{Zariski 위상}
+\label{section-zariski}
+
+\noindent
+Spaces, Section \ref{spaces-section-Zariski}에서 열린 부분공간들로 이루어진
+대수공간의 Zariski 덮개 개념을 도입하였다. 열린 부분공간을 열린 몰입으로
+바꾸면 이에 대응하는 다음 개념을 얻는다.
+
+\begin{definition}
+\label{definition-zariski-covering}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자. {\it $X$의
+Zariski 덮개}란 족 $\{f_i : X_i \to X\}_{i \in I}$로서, 그 원소들은
+$S$ 위 대수공간의 사상이고 각 $f_i$가 열린 몰입이며
+$$
+|X| = \bigcup\nolimits_{i \in I} |f_i|(|X_i|),
+$$
+즉 이 사상들은 모두 합쳐 전사이다.
+\end{definition}
+
+\noindent
+Zariski 덮개가 때때로 유용하기는 하지만, 대수공간의 범주 위에 대응하는
+위상은 실제로 너무 엉성하여 특별히 유용하지는 않다. 그래도 하나의
+사이트를 정의하기는 한다.
+
+\begin{lemma}
+\label{lemma-zariski}
+$S$를 스킴이라 하자. $X$를 $S$ 위 대수공간이라 하자.
+\begin{enumerate}
+\item $X' \to X$가 동형이면 $\{X' \to X\}$는 $X$의 Zariski 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 Zariski 덮개이고 각 $i$에 대해
+$\{X_{ij} \to X_i\}_{j\in J_i}$가 Zariski 덮개이면,
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$는 Zariski 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 Zariski 덮개이고 $X' \to X$가
+대수공간의 사상이면
+$\{X' \times_X X_i \to X'\}_{i\in I}$는 Zariski 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{에탈 위상}
+\label{section-etale}
+
+\noindent
+이 절에서는 대수공간의 에탈 덮개 개념을 논의하고, 대수공간의 큰 에탈
+사이트를 정의한다. Topologies, Section
+\ref{topologies-section-etale}와 비교하라.
+
+\begin{definition}
+\label{definition-etale-covering}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자. {\it $X$의 에탈
+덮개}란 족 $\{f_i : X_i \to X\}_{i \in I}$로서, 그 원소들은
+$S$ 위 대수공간의 사상이고 각 $f_i$가 에탈이며
+$$
+|X| = \bigcup\nolimits_{i \in I} |f_i|(|X_i|),
+$$
+즉 이 사상들은 모두 합쳐 전사이다.
+\end{definition}
+
+\noindent
+이는 Topologies, Definition \ref{topologies-definition-etale-covering}과
+정확히 같은 정의이다. 특히 $X$와 모든 $X_i$가 스킴이면 스킴의 통상적인
+에탈 덮개 개념을 되찾는다.
+
+\begin{lemma}
+\label{lemma-zariski-etale}
+모든 Zariski 덮개는 에탈 덮개이다.
+\end{lemma}
+
+\begin{proof}
+이는 정의와 열린 몰입이 에탈 사상이라는 사실에서 분명하다. 후자는
+Morphisms, Lemma \ref{morphisms-lemma-open-immersion-etale}에서, 몰입이
+표현 가능하므로 Spaces, Lemma
+\ref{spaces-lemma-representable-transformations-property-implication}을 거쳐 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-etale}
+$S$를 스킴이라 하자. $X$를 $S$ 위 대수공간이라 하자.
+\begin{enumerate}
+\item $X' \to X$가 동형이면 $\{X' \to X\}$는 $X$의 에탈 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 에탈 덮개이고 각 $i$에 대해
+$\{X_{ij} \to X_i\}_{j\in J_i}$가 에탈 덮개이면,
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$는 에탈 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 에탈 덮개이고 $X' \to X$가
+대수공간의 사상이면
+$\{X' \times_X X_i \to X'\}_{i\in I}$는 에탈 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\noindent
+다음 보조정리는 사이트 $(\textit{Spaces}/X)_\etale$와
+$(\textit{Spaces}/X)_{smooth}$가 같은 층 범주를 가짐을 말해 준다.
+
+\begin{lemma}
+\label{lemma-etale-dominates-smooth}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자.
+$\{X_i \to X\}_{i \in I}$를 $X$의 매끄러운 덮개라 하자. 그러면 에탈
+덮개 $\{U_j \to X\}_{j \in J}$가 $X$에 존재하며, 이는
+$\{X_i \to X\}_{i \in I}$를 세분한다.
+\end{lemma}
+
+\begin{proof}
+먼저 스킴 $U$와 전사 에탈 사상 $U \to X$를 택한다. 각 $i$에 대해 스킴
+$W_i$와 전사 에탈 사상 $W_i \to X_i$를 택한다. 그러면
+$\{W_i \to X\}_{i \in I}$는 $\{X_i \to X\}_{i \in I}$를 세분하는
+매끄러운 덮개이다. 따라서
+$\{W_i \times_X U \to U\}_{i \in I}$는 스킴들의 매끄러운 덮개이다.
+More on Morphisms, Lemma \ref{more-morphisms-lemma-etale-dominates-smooth}에
+의해 에탈 덮개 $\{U_j \to U\}$를 택할 수 있으며, 이는
+$\{W_i \times_X U \to U\}$를 세분한다. 그러면 $\{U_j \to X\}_{j \in J}$는
+$\{X_i \to X\}_{i \in I}$를 세분하는 에탈 덮개이다.
+\end{proof}
+\begin{definition}
+\label{definition-big-etale-site}
+$S$를 스킴이라 하자. 큰 에탈 사이트 {\it $(\textit{Spaces}/S)_\etale$}란
+다음과 같이 구성한 임의의 사이트이다.
+\begin{enumerate}
+\item Topologies, Section \ref{topologies-section-etale}에서처럼 큰 에탈
+사이트 $(\Sch/S)_\etale$를 택한다.
+\item 바탕 범주로 범주 $\textit{Spaces}/S$를 택한다. 이는 $S$ 위
+대수공간들의 범주이다(이것이 집합인 이유는 Section
+\ref{section-procedure}의 논의를 보라).
+\item Sets, Lemma \ref{sets-lemma-coverings-site}와 같이 덮개들의 임의의
+집합을 택하되, 범주 $\textit{Spaces}/S$와 Definition
+\ref{definition-etale-covering}의 에탈 덮개들의 모임에서 출발한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이를 정의했으므로, 이제 국소화하여 대수공간의 에탈 사이트를 얻을 수 있다.
+
+\begin{definition}
+\label{definition-big-small-etale}
+$S$를 스킴이라 하자. $(\textit{Spaces}/S)_\etale$는 Definition
+\ref{definition-big-etale-site}에서와 같다고 하자. $X$를 $S$ 위
+대수공간, 즉 $(\textit{Spaces}/S)_\etale$의 대상이라 하자. 그러면 큰
+에탈 사이트 {\it $(\textit{Spaces}/X)_\etale$}는 $X$의 사이트이며,
+사이트 $(\textit{Spaces}/S)_\etale$를 $X$에서 국소화한 것이다. 이는 Sites,
+Section \ref{sites-section-localize}에서 도입되었다.
+\end{definition}
+
+\noindent
+정의에서와 같은 대수공간 $X$가 $S$ 위에 주어졌을 때, 작은 에탈 사이트
+$X_{spaces, \etale}$와 $X_\etale$는 이미 정의되어 있음을 상기하자.
+Properties of Spaces, Section
+\ref{spaces-properties-section-etale-site}를 보라. 포함함자
+$X_\etale \subset X_{spaces, \etale}$를 써서 대응하는 토포스들을 말없이
+동일시하고(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-compare-etale-sites}), 이를 $X$의 작은 에탈
+토포스라 부르겠다. 다음으로 이 사이트들에 대응하는 토포스들 사이의 몇
+가지 관계를 확립한다.
+
+\begin{lemma}
+\label{lemma-put-in-T-etale}
+$S$를 스킴이라 하자. $f : Y \to X$를 $(\textit{Spaces}/S)_\etale$의
+사상이라 하자. 포함함자
+$Y_{spaces, \etale} \to (\textit{Spaces}/X)_\etale$는 코연속이고 토포스의
+사상
+$$
+i_f :
+\Sh(Y_\etale)
+\longrightarrow
+\Sh((\textit{Spaces}/X)_\etale)
+$$
+을 유도한다. 층 $\mathcal{G}$가 $(\textit{Spaces}/X)_\etale$ 위에 주어지면
+공식 $(i_f^{-1}\mathcal{G})(U/Y) = \mathcal{G}(U/X)$가 성립한다.
+함자 $i_f^{-1}$는 올곱 및 등화자와 가환하는 왼쪽 수반 $i_{f, !}$도 갖는다.
+\end{lemma}
+
+\begin{proof}
+그 함자를 $u : Y_{spaces, \etale} \to (\textit{Spaces}/X)_\etale$로 쓰자.
+달리 말해, 에탈 사상 $j : U \to Y$가 주어지고 이것이
+$Y_{spaces, \etale}$의 대상에 대응하면
+$u(U \to T) = (f \circ j : U \to S)$로 둔다.
+% P09-ERR-0313
+범주 $Y_{spaces, \etale}$는 올곱과 등화자를 가지며 $u$는 이들과 가환한다.
+$u$가 코연속임은 자명하다.
+% P09-ERR-0314
+또한 함자 $u$는 연속인데, 이는 $u$가 덮개를 덮개로 보내고 올곱과
+가환하기 때문이다. 따라서 이
+보조정리는 Sites, Lemmas \ref{sites-lemma-when-shriek}와
+\ref{sites-lemma-preserve-equalizers}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-at-the-bottom-etale}
+$S$를 스킴이라 하자. $X$를 $(\textit{Spaces}/S)_\etale$의 대상이라 하자.
+포함함자 $X_{spaces, \etale} \to (\textit{Spaces}/X)_\etale$는 Sites,
+Lemma \ref{sites-lemma-bigger-site}의 가정들을 만족하므로 사이트의 사상
+$$
+\pi_X :
+(\textit{Spaces}/X)_\etale
+\longrightarrow
+X_{spaces, \etale}
+$$
+와 토포스의 사상
+$$
+i_X :
+\Sh(X_\etale)
+\longrightarrow
+\Sh((\textit{Spaces}/X)_\etale)
+$$
+을 유도하고, $\pi_X \circ i_X = \text{id}$가 성립한다. 또한
+$i_X = i_{\text{id}_X}$이며, 여기서 $i_{\text{id}_X}$는 Lemma
+\ref{lemma-put-in-T-etale}에서와 같다. 특히 함자
+$i_X^{-1} = \pi_{X, *}$는 규칙
+$i_X^{-1}(\mathcal{G})(U/X) = \mathcal{G}(U/X)$로 주어진다.
+\end{lemma}
+
+\begin{proof}
+이 경우 함자
+$u : X_{spaces, \etale} \to (\textit{Spaces}/X)_\etale$는 위의 Lemma
+\ref{lemma-put-in-T-etale}의 증명에서 본 성질들에 더하여 충실충만하고 끝
+대상을 끝 대상으로 보낸다. 따라서 Sites, Lemma
+\ref{sites-lemma-bigger-site}로부터 보조정리가 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-restriction-small-etale}
+Lemma \ref{lemma-at-the-bottom-etale}의 상황에서 함자
+$i_X^{-1} = \pi_{X, *}$는 흔히 {\it 작은 에탈 사이트로의 제한}이라
+불리며, 큰 에탈 사이트 위의 층 $\mathcal{F}$에 대해 이 제한을 흔히
+$\mathcal{F}|_{X_\etale}$로 나타낸다.
+% P09-ERR-0315
+\end{definition}
+
+\noindent
+이 표기법을 쓰면 큰 사이트 위의 층 $\mathcal{F}$와 작은 사이트 위의 층
+$\mathcal{G}$에 대해 다음이 성립한다.
+\begin{align*}
+\Mor_{\Sh(X_\etale)}(
+\mathcal{F}|_{X_\etale},
+\mathcal{G})
+& =
+\Mor_{\Sh((\textit{Spaces}/X)_\etale)}(
+\mathcal{F},
+i_{X, *}\mathcal{G}) \\
+\Mor_{\Sh(X_\etale)}(
+\mathcal{G},
+\mathcal{F}|_{X_\etale})
+& =
+\Mor_{\Sh((\textit{Spaces}/X)_\etale)}(
+\pi_X^{-1}\mathcal{G},
+\mathcal{F})
+\end{align*}
+또한 $(i_{X, *}\mathcal{G})|_{X_\etale} = \mathcal{G}$이고
+$(\pi_X^{-1}\mathcal{G})|_{X_\etale} = \mathcal{G}$이다.
+
+\begin{lemma}
+\label{lemma-morphism-big-etale}
+$S$를 스킴이라 하자. $f : Y \to X$를 $(\textit{Spaces}/S)_\etale$의
+사상이라 하자. 함자
+$$
+u :
+(\textit{Spaces}/Y)_\etale
+\longrightarrow
+(\textit{Spaces}/X)_\etale,
+\quad
+V/Y \longmapsto V/X
+$$
+는 코연속이고, 연속인 오른쪽 수반
+$$
+v :
+(\textit{Spaces}/X)_\etale
+\longrightarrow
+(\textit{Spaces}/Y)_\etale,
+\quad
+(U \to X) \longmapsto (U \times_X Y \to Y).
+$$
+를 갖는다. 이들은 같은 토포스의 사상
+$$
+f_{big} :
+\Sh((\textit{Spaces}/Y)_\etale)
+\longrightarrow
+\Sh((\textit{Spaces}/X)_\etale)
+$$
+을 유도한다. 공식
+$f_{big}^{-1}(\mathcal{G})(U/Y) = \mathcal{G}(U/X)$ 및
+$f_{big, *}(\mathcal{F})(U/X) = \mathcal{F}(U \times_X Y/Y)$가 성립한다.
+또한 $f_{big}^{-1}$는 올곱 및 등화자와 가환하는 왼쪽 수반 $f_{big!}$를
+갖는다.
+\end{lemma}
+
+\begin{proof}
+함자 $u$는 코연속이고 연속이며 올곱 및 등화자와 가환한다(자세한 내용은
+생략한다. Lemma \ref{lemma-put-in-T-etale}의 증명과 비교하라). 따라서
+Sites, Lemmas \ref{sites-lemma-when-shriek}와
+\ref{sites-lemma-preserve-equalizers}를 적용하여 $f_{big}^{-1}$의 공식과
+$f_{big!}$의 존재를 얻는다. 한편 함자 $v$는 오른쪽 수반이다. 실제로
+$U/Y$와 $V/X$가 주어지면 원하는 대로
+$\Mor_X(u(U), V) = \Mor_Y(U, V \times_X Y)$가 성립한다. 따라서 Sites,
+Lemmas \ref{sites-lemma-have-functor-other-way}와
+\ref{sites-lemma-have-functor-other-way-morphism}을 적용하여 $f_{big, *}$의
+공식을 얻을 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-morphism-big-small-etale}
+$S$를 스킴이라 하자. $f : Y \to X$를
+$(\textit{Spaces}/S)_\etale$의 사상이라 하자.
+\begin{enumerate}
+\item $i_f = f_{big} \circ i_T$가 성립하며, 여기서 $i_f$는 Lemma
+\ref{lemma-put-in-T-etale}에서와 같고 $i_T$는 Lemma
+\ref{lemma-at-the-bottom-etale}에서와 같다.
+% P09-ERR-0316
+\item 함자 $X_{spaces, \etale} \to T_{spaces, \etale}$,
+$(U \to X) \mapsto (U \times_X Y \to Y)$는 연속이고 사이트의 사상
+% P09-ERR-0317
+$$
+f_{spaces, \etale} : Y_{spaces, \etale} \longrightarrow X_{spaces, \etale}
+$$
+을 유도한다. 대응하는 작은 에탈 토포스의 사상을
+$$
+f_{small} : \Sh(Y_\etale) \to \Sh(X_\etale)
+$$
+로 쓴다. 공식
+$f_{small, *}(\mathcal{F})(U/X) = \mathcal{F}(U \times_X Y/Y)$가 성립한다.
+\item 사이트의 사상들로 이루어진 다음 가환도식이 있다.
+$$
+\xymatrix{
+Y_{spaces, \etale} \ar[d]_{f_{spaces, \etale}} &
+(\textit{Spaces}/Y)_\etale \ar[d]^{f_{big}} \ar[l]^-{\pi_Y}\\
+X_{spaces, \etale} &
+(\textit{Spaces}/X)_\etale \ar[l]_-{\pi_X}
+}
+$$
+따라서 토포스의 사상으로서
+$f_{small} \circ \pi_Y = \pi_X \circ f_{big}$이다.
+\item $f_{small} = \pi_X \circ f_{big} \circ i_Y = \pi_X \circ i_f$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+등식 $i_f = f_{big} \circ i_Y$는 등식
+$i_f^{-1} = i_T^{-1} \circ f_{big}^{-1}$에서 따르며, 후자는 위의 함자
+설명으로부터 분명하다.
+% P09-ERR-0318
+따라서 (1)을 얻는다.
+
+\medskip\noindent
+함자 $u : X_{spaces, \etale} \to Y_{spaces, \etale}$,
+$u(U \to X) = (U \times_X Y \to Y)$가 사이트의 사상과 그에 대응하는
+작은 에탈 토포스의 사상을 유도한다는 것은 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-functoriality-etale-site}에서 보였다.
+% P09-ERR-0319
+직상의 설명은 분명하다.
+
+\medskip\noindent
+(3)은 $\pi_X$와 $\pi_Y$가 포함함자로 주어지고
+$f_{spaces, \etale}$와 $f_{big}$가 기저변환 함자
+$U \mapsto U \times_X Y$로 주어지기 때문에 성립한다.
+
+\medskip\noindent
+(4)는 (3)에 $i_Y$를 앞합성하면 따른다.
+\end{proof}
+
+\noindent
+보조정리의 상황에서 Definition \ref{definition-restriction-small-etale}의
+용어를 사용하면, 층 $\mathcal{F}$가 $Y$의 큰 에탈 사이트 위에 주어질 때
+$$
+(f_{big, *}\mathcal{F})|_{X_\etale} =
+f_{small, *}(\mathcal{F}|_{Y_\etale}),
+$$
+% P09-ERR-0320
+가 성립한다. 이 등식은 보조정리의 사이트 도식이 가환한다는 사실에서
+분명하다. 실제로 $Y$, 각각 $X$의 작은 에탈 사이트로의 제한은
+$\pi_{Y, *}$, 각각 $\pi_{X, *}$로 주어진다. 당김과 제한을 포함하는
+비슷한 공식은 거짓이다.
+
+\begin{lemma}
+\label{lemma-composition-etale}
+$S$를 스킴이라 하자. 사상 $f : X \to Y$, $g : Y \to Z$가 주어지고
+이들이 $(\textit{Spaces}/S)_\etale$에 속하면
+$g_{big} \circ f_{big} = (g \circ f)_{big}$이고
+$g_{small} \circ f_{small} = (g \circ f)_{small}$이다.
+\end{lemma}
+
+\begin{proof}
+큰 사이트 위 함자들에 대해서는 Lemma \ref{lemma-morphism-big-etale}의
+직상과 역상에 대한 간단한 설명에서 따른다. 작은 사이트 위 함자들에
+대해서는 Lemma \ref{lemma-morphism-big-small-etale}의 직상함자 설명에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-morphism-big-small-cartesian-diagram-etale}
+$S$를 스킴이라 하자. 다음 Cartesian 도식을 생각하자.
+$$
+\xymatrix{
+Y' \ar[r]_{g'} \ar[d]_{f'} & Y \ar[d]^f \\
+X' \ar[r]^g & X
+}
+$$
+이는 $(\textit{Spaces}/S)_\etale$ 안의 도식이라 하자. 그러면
+$i_g^{-1} \circ f_{big, *} = f'_{small, *} \circ (i_{g'})^{-1}$이고
+$g_{big}^{-1} \circ f_{big, *} = f'_{big, *} \circ (g'_{big})^{-1}$이다.
+\end{lemma}
+
+\begin{proof}
+도식이 Cartesian이므로 $U'/X'$에 대해
+$U' \times_{X'} Y' = U' \times_X Y$이다. 따라서
+$i_g^{-1} \circ f_{big, *}$와 $f'_{small, *} \circ (i_{g'})^{-1}$는 모두
+층 $\mathcal{F}$가 $(\textit{Spaces}/Y)_\etale$ 위에 있으면 이를 층
+$U' \mapsto \mathcal{F}(U' \times_{X'} Y')$로 보내며, 이 층은
+$X'_\etale$ 위에 있다(Lemmas
+\ref{lemma-put-in-T-etale}와 \ref{lemma-morphism-big-etale}를 사용하라).
+둘째 등식도 같은 방식으로 증명할 수 있고, 또는 매우 일반적인 Sites,
+Lemma \ref{sites-lemma-localize-morphism}에서 도출할 수 있다.
+\end{proof}
+
+\begin{remark}
+\label{remark-change-topologies-ringed}
+사이트 $(\textit{Spaces}/X)_\etale$와 $X_{spaces, \etale}$에는 구조층이
+주어진다. 작은 에탈 사이트에 대해서는 Properties of Spaces, Section
+\ref{spaces-properties-section-structure-sheaf}에서 이를 보았다. 구조층
+$\mathcal{O}$를 큰 에탈 사이트 $(\textit{Spaces}/X)_\etale$ 위에서 각 대상
+$U$에 $U$의 구조층의 대역단면을 대응시켜 정의한다. 이는 결국 $U$ 자체가
+대수공간이므로 구조층을 갖기 때문에 의미가 있다. $\mathcal{O}_U$는
+$U$의 에탈 사이트 위의 층이므로, 이렇게 정의한 전층 $\mathcal{O}$는
+$U$의 덮개들에 대한 층 조건을 만족한다. 즉 $\mathcal{O}$는 층이다.
+위에서 정의한 사상 $i_f$, $\pi_X$, $i_X$, $f_{small}$, $f_{big}$를 각각
+환 달린 사이트, 또는 토포스의 사상으로 승격시킬 수 있다. 하나씩 다루자.
+\begin{enumerate}
+\item Lemma \ref{lemma-put-in-T-etale}에서 구조층을 $\mathcal{O}$로 쓰고,
+이는 $(\textit{Spaces}/X)_\etale$ 위에 있다고 하자. 구성상
+$(i_f^{-1}\mathcal{O})(U/Y) = \mathcal{O}_U(U) = \mathcal{O}_Y(U)$이다.
+따라서 동형
+$i_f^\sharp : i_f^{-1}\mathcal{O} \to \mathcal{O}_Y$가 존재한다.
+% P09-ERR-0321
+\item Lemma \ref{lemma-at-the-bottom-etale}에서 $i_X$는 $i_f$의 특별한
+경우이고 이때 $f = \text{id}_X$임을 보았으므로 (1)의 경우로
+돌아간다.
+\item Lemma \ref{lemma-at-the-bottom-etale}에서 사상 $\pi_X$는
+$(\pi_{X, *}\mathcal{O})(U) = \mathcal{O}(U) = \mathcal{O}_X(U)$를 만족한다.
+따라서 이를 이용해
+$\pi_X^\sharp : \mathcal{O}_X \to \pi_{X, *}\mathcal{O}$를 정의할 수 있다.
+\item Lemma \ref{lemma-morphism-big-small-etale}에서 $f_{small}$을 환 달린
+토포스의 사상으로 확장하는 것은 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-morphism-ringed-topoi}에서 논의하였다.
+\item Lemma \ref{lemma-morphism-big-small-etale}에서 함자 $f_{big}^{-1}$는
+포함함자
+$(\textit{Spaces}/Y)_\etale \to (\textit{Spaces}/X)_\etale$를 통한 제한일
+뿐이다. 구조층을 $\mathcal{O}_1$이라 하고 이는
+$(\textit{Spaces}/X)_\etale$ 위에 있다고 하자. 또 다른 구조층을
+$\mathcal{O}_2$라 하고 이는 $(\textit{Spaces}/Y)_\etale$ 위에 있다고 하자.
+그러면 표준 동형
+$f_{big}^\sharp : f_{big}^{-1}\mathcal{O}_1 \to \mathcal{O}_2$를 얻는다.
+\end{enumerate}
+또한 이 정의들에 대해서 합성도 올바르게 작동한다. 자세한 명제와 증명은
+생략한다.
+\end{remark}
+
+
+
+
+
+
+
+
+\section{매끄러운 위상}
+\label{section-smooth}
+
+\noindent
+이 절에서는 대수공간의 매끄러운 덮개 개념을 논의하고, 대수공간의 큰
+매끄러운 사이트를 정의한다. Topologies, Section
+\ref{topologies-section-smooth}와 비교하라.
+
+\begin{definition}
+\label{definition-smooth-covering}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자. {\it $X$의
+매끄러운 덮개}란 족 $\{f_i : X_i \to X\}_{i \in I}$로서, 그 원소들은
+$S$ 위 대수공간의 사상이고 각 $f_i$가 매끄러우며
+$$
+|X| = \bigcup\nolimits_{i \in I} |f_i|(|X_i|),
+$$
+즉 이 사상들은 모두 합쳐 전사인 것을 말한다.
+\end{definition}
+
+\noindent
+이는 Topologies, Definition \ref{topologies-definition-smooth-covering}과
+정확히 같은 정의이다. 특히 $X$와 모든 $X_i$가 스킴이면 스킴의 통상적인
+매끄러운 덮개 개념을 되찾는다.
+
+\begin{lemma}
+\label{lemma-zariski-etale-smooth}
+모든 에탈 덮개는 매끄러운 덮개이고, 따라서 특히 모든 Zariski 덮개는
+매끄러운 덮개이다.
+\end{lemma}
+
+\begin{proof}
+이는 정의들, 에탈 사상이 매끄럽다는 사실(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-smooth}), 그리고 Lemma
+\ref{lemma-zariski-etale}에서 분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smooth}
+$S$를 스킴이라 하자. $X$를 $S$ 위 대수공간이라 하자.
+\begin{enumerate}
+\item $X' \to X$가 동형이면 $\{X' \to X\}$는 $X$의 매끄러운 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 매끄러운 덮개이고 각 $i$에 대해
+$\{X_{ij} \to X_i\}_{j\in J_i}$가 매끄러운 덮개이면,
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$는 매끄러운 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 매끄러운 덮개이고 $X' \to X$가
+대수공간의 사상이면
+$\{X' \times_X X_i \to X'\}_{i\in I}$는 매끄러운 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\noindent
+계속될 예정이다...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{신토믹 위상}
+\label{section-syntomic}
+
+\noindent
+이 절에서는 대수공간의 신토믹 덮개 개념을 논의하고, 대수공간의 큰
+신토믹 사이트를 정의한다. Topologies, Section
+\ref{topologies-section-syntomic}과 비교하라.
+
+\begin{definition}
+\label{definition-syntomic-covering}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자. {\it $X$의
+신토믹 덮개}란 족 $\{f_i : X_i \to X\}_{i \in I}$로서, 그 원소들은
+$S$ 위 대수공간의 사상이고 각 $f_i$가 신토믹이며
+$$
+|X| = \bigcup\nolimits_{i \in I} |f_i|(|X_i|),
+$$
+즉 이 사상들은 모두 합쳐 전사인 것을 말한다.
+\end{definition}
+
+\noindent
+이는 Topologies, Definition \ref{topologies-definition-syntomic-covering}과
+정확히 같은 정의이다. 특히 $X$와 모든 $X_i$가 스킴이면 스킴의 통상적인
+신토믹 덮개 개념을 되찾는다.
+
+\begin{lemma}
+\label{lemma-zariski-etale-smooth-syntomic}
+모든 매끄러운 덮개는 신토믹 덮개이고, 따라서 특히 모든 에탈 덮개와
+Zariski 덮개는 신토믹 덮개이다.
+\end{lemma}
+
+\begin{proof}
+이는 정의들, 매끄러운 사상이 신토믹이라는 사실(Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-smooth-syntomic}), 그리고 Lemma
+\ref{lemma-zariski-etale-smooth}에서 분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-syntomic}
+$S$를 스킴이라 하자. $X$를 $S$ 위 대수공간이라 하자.
+\begin{enumerate}
+\item $X' \to X$가 동형이면 $\{X' \to X\}$는 $X$의 신토믹 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 신토믹 덮개이고 각 $i$에 대해
+$\{X_{ij} \to X_i\}_{j\in J_i}$가 신토믹 덮개이면,
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$는 신토믹 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 신토믹 덮개이고 $X' \to X$가
+대수공간의 사상이면
+$\{X' \times_X X_i \to X'\}_{i\in I}$는 신토믹 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\noindent
+계속될 예정이다...
+\section{Fppf 위상}
+\label{section-fppf}
+
+\noindent
+이 절에서는 대수공간의 fppf 덮개 개념을 논의하고, 대수공간의 큰 fppf
+사이트를 정의한다. Topologies, Section \ref{topologies-section-fppf}와
+비교하라.
+
+\begin{definition}
+\label{definition-fppf-covering}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자. {\it $X$의 fppf
+덮개}란 족 $\{f_i : X_i \to X\}_{i \in I}$로서, 그 원소들은 $S$ 위
+대수공간의 사상이고 각 $f_i$가 평탄하고 국소 유한표현이며
+$$
+|X| = \bigcup\nolimits_{i \in I} |f_i|(|X_i|),
+$$
+즉 이 사상들은 모두 합쳐 전사인 것을 말한다.
+\end{definition}
+
+\noindent
+이는 Topologies, Definition \ref{topologies-definition-fppf-covering}과
+정확히 같은 정의이다. 특히 $X$와 모든 $X_i$가 스킴이면 스킴의 통상적인
+fppf 덮개 개념을 되찾는다.
+
+\begin{lemma}
+\label{lemma-zariski-etale-smooth-syntomic-fppf}
+모든 신토믹 덮개는 fppf 덮개이고, 따라서 특히 모든 매끄러운 덮개, 에탈
+덮개 또는 Zariski 덮개는 fppf 덮개이다.
+\end{lemma}
+
+\begin{proof}
+이는 정의들, 신토믹 사상이 평탄하고 국소 유한표현이라는 사실(Morphisms
+of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-syntomic-locally-finite-presentation}와
+\ref{spaces-morphisms-lemma-syntomic-flat}), 그리고 Lemma
+\ref{lemma-zariski-etale-smooth-syntomic}에서 분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fppf}
+$S$를 스킴이라 하자. $X$를 $S$ 위 대수공간이라 하자.
+\begin{enumerate}
+\item $X' \to X$가 동형이면 $\{X' \to X\}$는 $X$의 fppf 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 fppf 덮개이고 각 $i$에 대해
+$\{X_{ij} \to X_i\}_{j\in J_i}$가 fppf 덮개이면,
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$는 fppf 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 fppf 덮개이고 $X' \to X$가
+대수공간의 사상이면
+$\{X' \times_X X_i \to X'\}_{i\in I}$는 fppf 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-refine-fppf-schemes}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자.
+$\mathcal{U} = \{f_i : X_i \to X\}_{i \in I}$가 $X$의 fppf 덮개라고
+가정하자. 그러면 세분 $\mathcal{V} = \{g_i : T_i \to X\}$가
+$\mathcal{U}$에 대해 존재하여, 이는 fppf 덮개이고 각
+$T_i$는 스킴이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 각 $i$에 대해 스킴 $T_i$와 전사 에탈 사상
+$T_i \to X_i$를 택한다. 그러면 $\{T_i \to X\}$가 fppf 덮개인지 확인하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fppf-covering-surjective}
+$S$를 스킴이라 하자. $\{f_i : X_i \to X\}_{i \in I}$를 $S$ 위
+대수공간의 fppf 덮개라 하자. 그러면 층의 사상
+$$
+\coprod X_i \longrightarrow X
+$$
+은 전사이다.
+\end{lemma}
+
+\begin{proof}
+이는 Spaces, Lemma
+\ref{spaces-lemma-surjective-flat-locally-finite-presentation}에서 따른다.
+이 보조정리의 의미가 혼동된다면 Spaces, Remark
+\ref{spaces-remark-warning}도 보라.
+\end{proof}
+
+\begin{definition}
+\label{definition-big-fppf-site}
+$S$를 스킴이라 하자. 큰 fppf 사이트 {\it $(\textit{Spaces}/S)_{fppf}$}란
+다음과 같이 구성한 임의의 사이트이다.
+\begin{enumerate}
+\item Topologies, Section \ref{topologies-section-fppf}에서처럼 큰 fppf
+사이트 $(\Sch/S)_{fppf}$를 택한다.
+\item 바탕 범주로 범주 $\textit{Spaces}/S$를 택한다. 이는 $S$ 위
+대수공간들의 범주이다(이것이 집합인 이유는 Section
+\ref{section-procedure}의 논의를 보라).
+\item Sets, Lemma \ref{sets-lemma-coverings-site}와 같이 덮개들의 임의의
+집합을 택하되, 범주 $\textit{Spaces}/S$와 Definition
+\ref{definition-fppf-covering}의 fppf 덮개들의 모임에서 출발한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이를 정의했으므로, 이제 국소화하여 대수공간의 fppf 사이트를 얻을 수 있다.
+
+\begin{definition}
+\label{definition-big-small-fppf}
+$S$를 스킴이라 하자. $(\textit{Spaces}/S)_{fppf}$는 Definition
+\ref{definition-big-fppf-site}에서와 같다고 하자. $X$를 $S$ 위
+대수공간, 즉 $(\textit{Spaces}/S)_{fppf}$의 대상이라 하자. 그러면 큰
+fppf 사이트 {\it $(\textit{Spaces}/X)_{fppf}$}는 $X$의 사이트이며,
+사이트 $(\textit{Spaces}/S)_{fppf}$를 $X$에서 국소화한 것이다. 이는
+Sites, Section \ref{sites-section-localize}에서 도입되었다.
+\end{definition}
+
+\noindent
+다음으로 이 사이트들에 대응하는 토포스들 사이의 몇 가지 관계를 확립한다.
+
+\begin{lemma}
+\label{lemma-morphism-big-fppf}
+$S$를 스킴이라 하자. $f : Y \to X$를 $S$ 위 대수공간의 사상이라 하자.
+함자
+$$
+u : (\textit{Spaces}/Y)_{fppf} \longrightarrow (\textit{Spaces}/X)_{fppf},
+\quad
+V/Y \longmapsto V/X
+$$
+는 코연속이고, 연속인 오른쪽 수반
+$$
+v : (\textit{Spaces}/X)_{fppf} \longrightarrow (\textit{Spaces}/Y)_{fppf},
+\quad
+(U \to Y) \longmapsto (U \times_X Y \to Y).
+% P09-ERR-0322
+$$
+를 갖는다. 이들은 같은 토포스의 사상
+$$
+f_{big} :
+\Sh((\textit{Spaces}/Y)_{fppf})
+\longrightarrow
+\Sh((\textit{Spaces}/X)_{fppf})
+$$
+을 유도한다. 공식
+$f_{big}^{-1}(\mathcal{G})(U/Y) = \mathcal{G}(U/X)$ 및
+$f_{big, *}(\mathcal{F})(U/X) = \mathcal{F}(U \times_X Y/Y)$가 성립한다.
+또한 $f_{big}^{-1}$는 올곱 및 등화자와 가환하는 왼쪽 수반 $f_{big!}$를
+갖는다.
+\end{lemma}
+
+\begin{proof}
+함자 $u$는 코연속이고 연속이며 올곱 및 등화자와 가환한다. 따라서 Sites,
+Lemmas \ref{sites-lemma-when-shriek}와
+\ref{sites-lemma-preserve-equalizers}를 적용하여 $f_{big}^{-1}$의 공식과
+$f_{big!}$의 존재를 얻는다. 한편 함자 $v$는 오른쪽 수반이다. 실제로
+$U/T$와 $V/X$가 주어지면 원하는 대로
+$\Mor_X(u(U), V) = \Mor_Y(U, V \times_X Y)$가 성립한다.
+% P09-ERR-0323
+따라서 Sites, Lemmas \ref{sites-lemma-have-functor-other-way}와
+\ref{sites-lemma-have-functor-other-way-morphism}을 적용하여 $f_{big, *}$의
+공식을 얻을 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-fppf}
+$S$를 스킴이라 하자. 사상 $f : X \to Y$, $g : Y \to Z$가 대수공간들
+사이에 주어지고 이 대수공간들이 $S$ 위에 있으면
+$g_{big} \circ f_{big} = (g \circ f)_{big}$이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-morphism-big-fppf}의 큰 사이트 위 함자들의 직상과
+역상에 대한 간단한 설명에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{ph 위상}
+\label{section-ph}
+
+\noindent
+이 절에서는 ph 위상을 정의한다. 이는 에탈 덮개들과 고유 전사 사상들이
+생성하는 위상이다. Lemma \ref{lemma-characterize-sheaf}를 보라.
+
+\begin{definition}
+\label{definition-ph-covering}
+$S$를 스킴이라 하고 $X$를 $S$ 위 대수공간이라 하자. {\it $X$의 ph
+덮개}란 족 $\{X_i \to X\}_{i \in I}$로서, 그 원소들은 $S$ 위
+대수공간의 사상이고 $f_i$가 국소 유한형이며 다음 조건을 만족하는 것을
+말한다. 모든 $U \to X$ 중 $U$가 아핀인 것에 대해 표준 ph 덮개
+$\{U_j \to U\}_{j = 1, \ldots, m}$가 존재하며, 이는 족
+$\{X_i \times_X U \to U\}_{i \in I}$를 세분한다.
+% P09-ERR-0324
+\end{definition}
+
+\noindent
+달리 말해, 지표 $i_1, \ldots, i_m \in I$와 사상
+$h_j : U_j \to X_{i_j}$가 존재하여
+$f_{i_j} \circ h_j = h \circ g_j$를 만족한다.
+% P09-ERR-0325
+$X$와 모든 $X_i$가 표현 가능하면, 이는 Topologies, Definition
+\ref{topologies-definition-ph-covering}에 의해 스킴의 ph 덮개와 같다.
+
+\begin{lemma}
+\label{lemma-zariski-etale-smooth-syntomic-fppf-ph}
+모든 fppf 덮개는 ph 덮개이고, 따라서 특히 모든 신토믹 덮개, 매끄러운
+덮개, 에탈 덮개 또는 Zariski 덮개는 ph 덮개이다.
+\end{lemma}
+
+\begin{proof}
+fppf 덮개가 ph 덮개임을 보이면, 나머지는 Lemma
+\ref{lemma-zariski-etale-smooth-syntomic-fppf}에서 따른다. fppf 덮개
+$\{X_i \to X\}_{i \in I}$를 대수공간들에 대해 택하되, 이 공간들은
+밑스킴 $S$ 위에 있다고 하자. $U$를 아핀 스킴이라 하고 사상
+$U \to X$를 택하자. fppf 덮개
+$\{X_i \times_U U \to U\}_{i \in I}$를 fppf 덮개
+$\{T_i \to U\}_{i \in I}$로 세분할 수 있고, 여기서 $T_i$는 스킴이다
+(Lemma \ref{lemma-refine-fppf-schemes}).
+% P09-ERR-0326
+그러면 More on Morphisms, Lemma \ref{more-morphisms-lemma-fppf-ph}에 의해
+(그리고 스킴의 ph 덮개 정의에 의해) 표준 ph 덮개
+$\{U_j \to U\}_{j = 1, \ldots, m}$를 찾을 수 있으며, 이는
+$\{T_i \to U\}_{i \in I}$를 세분한다.
+따라서 정의에 의해 $\{X_i \to X\}_{i \in I}$는 ph 덮개이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-surjective-proper-ph}
+$S$를 스킴이라 하자. $f : Y \to X$를 $S$ 위 대수공간의 전사 고유
+사상이라 하자. 그러면 $\{Y \to X\}$는 ph 덮개이다.
+\end{lemma}
+
+\begin{proof}
+$U \to X$를 사상이라 하고 $U$를 아핀이라 하자. Chow 보조정리(Cohomology of
+Spaces, Lemma \ref{spaces-cohomology-lemma-weak-chow}에 주어진 약한
+형태)에 의해 스킴의 전사 고유 사상 $V \to U$가 존재하고, 이는
+$Y \times_X U \to U$를 통해 인수분해된다. $V$의 임의의 유한 아핀 열린
+덮개를 택하면 $U$의 표준 ph 덮개를 얻으며, 이는 원하는 대로
+$\{X \times_Y U \to U\}$를 세분한다.
+% P09-ERR-0327
+\end{proof}
+
+\begin{lemma}
+\label{lemma-ph}
+$S$를 스킴이라 하자. $X$를 $S$ 위 대수공간이라 하자.
+\begin{enumerate}
+\item $X' \to X$가 동형이면 $\{X' \to X\}$는 $X$의 ph 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 ph 덮개이고 각 $i$에 대해
+$\{X_{ij} \to X_i\}_{j\in J_i}$가 ph 덮개이면,
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$는 ph 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 ph 덮개이고 $X' \to X$가
+대수공간의 사상이면
+$\{X' \times_X X_i \to X'\}_{i\in I}$는 ph 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 분명하다. (3)에서와 같이 $g : X' \to X$와 ph 덮개
+$\{X_i \to X\}_{i\in I}$를 생각하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-finite-type}에 의해 사상
+$X' \times_X X_i \to X'$는 국소 유한형이다. 사상 $h' : Z \to X'$가
+아핀 스킴에서 주어지고 $X'$를 향하면 $h = g \circ h' : Z \to X$로 둔다.
+$\{X_i \to X\}_{i\in I}$에 대한 가정은 표준 ph 덮개
+$\{Z_j \to Z\}_{j = 1, \ldots, n}$와 사상 $Z_j \to X_{i(j)}$가
+존재함을 뜻하며, 이 사상은 $h$를 덮고 여기서 $i(j) \in I$이다. 올곱의
+보편성에 의해 사상 $Z_j \to X' \times_X X_{i(j)}$도 얻으며, 이는
+$h'$ 위에 있다. 따라서
+$\{X' \times_X X_i \to X'\}_{i\in I}$는 ph 덮개이다. 이로써 (3)을
+증명하였다.
+
+\medskip\noindent
+(2)에서와 같은 $\{X_i \to X\}_{i\in I}$와
+$\{X_{ij} \to X_i\}_{j\in J_i}$를 택하자. 사상 $h : Z \to X$를 아핀
+스킴에서 택하고 이는 $X$를 향한다고 하자. 가정에 의해 표준 ph 덮개
+$\{Z_j \to Z\}_{j = 1, \ldots, n}$와 사상
+$h_j : Z_j \to X_{i(j)}$가 존재하며, 이는 $h$를 덮고 여기서 어떤 지표
+$i(j) \in I$이다.
+다시 가정에 의해
+표준 ph 덮개 $\{Z_{j, l} \to Z_j\}_{l = 1, \ldots, n(j)}$와 사상
+$Z_{j, l} \to X_{i(j)j(l)}$가 존재하며, 이는 $h_j$를 덮고 여기서 어떤 지표
+$j(l) \in J_{i(j)}$이다. Topologies, Lemma
+\ref{topologies-lemma-refine-by-standard-ph}에 의해 족
+$\{Z_{j, l} \to Z\}$는 표준 ph 덮개로 세분될 수 있다. 따라서
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$가 ph 덮개라고 결론 내린다.
+\end{proof}
+
+\begin{definition}
+\label{definition-big-ph-site}
+$S$를 스킴이라 하자. 큰 ph 사이트 {\it $(\textit{Spaces}/S)_{ph}$}란
+다음과 같이 구성한 임의의 사이트이다.
+\begin{enumerate}
+\item Topologies, Section \ref{topologies-section-ph}에서처럼 큰 ph 사이트
+$(\Sch/S)_{ph}$를 택한다.
+\item 바탕 범주로 범주 $\textit{Spaces}/S$를 택한다. 이는 $S$ 위
+대수공간들의 범주이다(이것이 집합인 이유는 Section
+\ref{section-procedure}의 논의를 보라).
+\item Sets, Lemma \ref{sets-lemma-coverings-site}와 같이 덮개들의 임의의
+집합을 택하되, 범주 $\textit{Spaces}/S$와 Definition
+\ref{definition-ph-covering}의 ph 덮개들의 모임에서 출발한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이를 정의했으므로, 이제 국소화하여 대수공간의 ph 사이트를 얻을 수 있다.
+
+\begin{definition}
+\label{definition-big-small-ph}
+$S$를 스킴이라 하자. $(\textit{Spaces}/S)_{ph}$는 Definition
+\ref{definition-big-ph-site}에서와 같다고 하자. $X$를 $S$ 위 대수공간,
+즉 $(\textit{Spaces}/S)_{ph}$의 대상이라 하자. 그러면 큰 ph 사이트
+{\it $(\textit{Spaces}/X)_{ph}$}는 $X$의 사이트이며, 사이트
+$(\textit{Spaces}/S)_{ph}$를 $X$에서 국소화한 것이다. 이는 Sites,
+Section \ref{sites-section-localize}에서 도입되었다.
+\end{definition}
+
+\noindent
+약속한 ph 층의 특징은 다음과 같다.
+
+\begin{lemma}
+\label{lemma-characterize-sheaf}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자. $\mathcal{F}$를
+$(\textit{Spaces}/X)_{ph}$ 위의 전층이라 하자. 그러면 $\mathcal{F}$가
+층일 필요충분조건은 다음과 같다.
+\begin{enumerate}
+\item $\mathcal{F}$는 에탈 덮개들에 대한 층 조건을 만족한다.
+\item $f : V \to U$가 $(\textit{Spaces}/X)_{ph}$의 고유 전사 사상이면,
+$\mathcal{F}(U)$는 두 사상
+$\mathcal{F}(V) \to \mathcal{F}(V \times_U V)$의 등화자에 전단사로
+사상된다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)가 성립하면 $\mathcal{F}$가 층임을 보이겠다.
+$\{T_i \to T\}$를 ph 덮개, 즉 $(\textit{Spaces}/X)_{ph}$의 덮개라 하자.
+이 덮개에 대한 층 조건을 확인하겠다. $s_i \in \mathcal{F}(T_i)$를
+$T_i \times_T T_{i'}$ 위에서 같은 단면으로 제한되는 단면들이라 하자.
+유일한 단면 $s \in \mathcal{F}$가 존재하고 이것이 $s_i$로 제한되며,
+그 제한은 $T_i$ 위에서 이루어짐을 보이겠다.
+% P09-ERR-0328
+에탈 덮개 $\{U_j \to T\}$를 택하되 $U_j$는 아핀이라 하자. 성질 (1)에
+의해 단면 $s_j \in \mathcal{F}(U_j)$를 $U_j \cap U_{j'}$ 위에서
+일치하도록 만들면 $s$를 만드는 데 충분하다.
+% P09-ERR-0329
+ph 덮개 $\{T_i \times_T U_j \to U_j\}$를 생각하자. 그러면
+$s_{ji} = s_i|_{T_i \times_T U_j}$는
+$(T_i \times_T U_j) \times_{U_j} (T_{i'} \times_T U_j)$ 위에서 일치하는
+단면들이다. 고유 전사 사상 $V_j \to U_j$와 유한 아핀 열린 덮개
+$V_j = \bigcup V_{jk}$를 택하되, 표준 ph 덮개
+$\{V_{jk} \to U_j\}$가 $\{T_i \times_T U_j \to U_j\}$를 세분하게 하자.
+$s_{jk} \in \mathcal{F}(V_{jk})$가 암시된 사상들을 따른 $s_{ji}$의
+$V_{jk}$로의 당김이라면, $s_{jk}$들이 단면
+$s'_j \in \mathcal{F}(V_j)$로 이어붙음을
+알 수 있다. 겹침에서의 일치를 한 번 더 사용하면 $s'_j$가 두 사상
+$\mathcal{F}(V_j) \to \mathcal{F}(V_j \times_{U_j} V_j)$의 등화자에
+속함을 알 수 있다. 따라서 (2)에 의해 $s'_j$는 유일한 단면
+$s_j \in \mathcal{F}(U_j)$에서 온다. 이 단면들 $s_j$가 원하는 모든
+성질을 갖는다는 확인은 생략한다.
+\end{proof}
+
+\noindent
+다음으로 이 사이트들에 대응하는 토포스들 사이의 몇 가지 관계를 확립한다.
+
+\begin{lemma}
+\label{lemma-morphism-big-ph}
+$S$를 스킴이라 하자. $f : Y \to X$를 $S$ 위 대수공간의 사상이라 하자.
+함자
+$$
+u : (\textit{Spaces}/Y)_{ph} \longrightarrow (\textit{Spaces}/X)_{ph},
+\quad
+V/Y \longmapsto V/X
+$$
+는 코연속이고, 연속인 오른쪽 수반
+$$
+v : (\textit{Spaces}/X)_{ph} \longrightarrow (\textit{Spaces}/Y)_{ph},
+\quad
+(U \to Y) \longmapsto (U \times_X Y \to Y).
+% P09-ERR-0330
+$$
+를 갖는다. 이들은 같은 토포스의 사상
+$$
+f_{big} :
+\Sh((\textit{Spaces}/Y)_{ph})
+\longrightarrow
+\Sh((\textit{Spaces}/X)_{ph})
+$$
+을 유도한다. 공식
+$f_{big}^{-1}(\mathcal{G})(U/Y) = \mathcal{G}(U/X)$ 및
+$f_{big, *}(\mathcal{F})(U/X) = \mathcal{F}(U \times_X Y/Y)$가 성립한다.
+또한 $f_{big}^{-1}$는 올곱 및 등화자와 가환하는 왼쪽 수반 $f_{big!}$를
+갖는다.
+\end{lemma}
+
+\begin{proof}
+함자 $u$는 코연속이고 연속이며 올곱 및 등화자와 가환한다. 따라서 Sites,
+Lemmas \ref{sites-lemma-when-shriek}와
+\ref{sites-lemma-preserve-equalizers}를 적용하여 $f_{big}^{-1}$의 공식과
+$f_{big!}$의 존재를 얻는다. 한편 함자 $v$는 오른쪽 수반이다. 실제로
+$U/T$와 $V/X$가 주어지면 원하는 대로
+$\Mor_X(u(U), V) = \Mor_Y(U, V \times_X Y)$가 성립한다.
+% P09-ERR-0331
+따라서 Sites, Lemmas \ref{sites-lemma-have-functor-other-way}와
+\ref{sites-lemma-have-functor-other-way-morphism}을 적용하여 $f_{big, *}$의
+공식을 얻을 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-ph}
+$S$를 스킴이라 하자. 사상 $f : X \to Y$, $g : Y \to Z$가 대수공간들
+사이에 주어지고 이 대수공간들이 $S$ 위에 있으면
+$g_{big} \circ f_{big} = (g \circ f)_{big}$이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-morphism-big-ph}의 큰 사이트 위 함자들의 직상과
+역상에 대한 간단한 설명에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cech-enough}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자. $P$를
+$(\textit{Spaces}/X)_{fppf}$의 대상들에 관한 성질이라 하되, 다음 조건을
+만족한다고 하자. $\{U_i \to U\}$가 $(\textit{Spaces}/X)_{fppf}$의
+덮개일 때마다
+$$
+P(U_{i_0} \times_U \ldots \times_U U_{i_p})
+\text{ for all }
+p \geq 0,\ i_0, \ldots, i_p \in I
+\Rightarrow P(U)
+$$
+가 성립한다. $P(U)$가 모든 $U$에 대해 성립하고, 이 대상은 아핀이고
+평탄하며 $X$ 위에서 국소 유한표현이면 $P(X)$이다.
+\end{lemma}
+
+\begin{proof}
+$U$를 $X$ 위 국소 유한표현인 분리 대수공간이라 하자. 에탈 덮개
+$\{U_i \to U\}_{i \in I}$를 택할 수 있고, 이때 $V_i$는 아핀이다.
+% P09-ERR-0332
+$U$가 분리이므로
+$U_{i_0} \times_U \ldots \times_U U_{i_p}$는 항상 아핀이다. 따라서
+$P(U_{i_0} \times_U \ldots \times_U U_{i_p})$가 항상 성립한다. 그러므로
+$P(U)$가 성립한다. 아핀들의 서로소 합인 스킴 $U$와 전사 에탈 사상
+$U \to X$를 택하자. 그러면 $U \times_X \ldots \times_X U$는
+($p + 1$개의 인자를 가지며) $X$ 위 에탈인 분리 대수공간이다. 따라서
+위 결과로 $P(U \times_X \ldots \times_X U)$이다. 그러므로 $P(X)$가
+참이라고 결론 내린다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{Fpqc 위상}
+\label{section-fpqc}
+
+\noindent
+대수공간의 fpqc 덮개 개념을 간략히 논의한다. Topologies, Section
+\ref{topologies-section-fpqc}와 비교하라. Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}에서 준연접 층이
+이러한 덮개를 따라 하강함을 보일 것이다.
+% P09-ERR-0333
+
+\begin{definition}
+\label{definition-fpqc-covering}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자. {\it $X$의 fpqc
+덮개}란 대수공간의 사상들로 이루어진 족
+$\{f_i : X_i \to X\}_{i \in I}$로서, 각 $f_i$가 평탄하고 다음 조건을
+만족하는 것을 말한다. 모든 아핀 스킴 $Z$와 사상 $h : Z \to X$에 대해
+표준 fpqc 덮개 $\{g_j : Z_j \to Z\}_{j = 1, \ldots, m}$가 존재하여 족
+$\{X_i \times_X Z \to Z\}_{i \in I}$를 세분한다.
+\end{definition}
+
+\noindent
+달리 말해, 지표 $i_1, \ldots, i_m \in I$와 사상
+$h_j : Z_j \to X_{i_j}$가 존재하여
+$f_{i_j} \circ h_j = h \circ g_j$를 만족한다.
+% P09-ERR-0334
+$X$와 모든 $X_i$가 표현 가능하면, 이는 Topologies, Lemma
+\ref{topologies-lemma-fpqc-covering-affines-mapping-in}에 의해 스킴의 fpqc
+덮개와 같다.
+
+\begin{lemma}
+\label{lemma-zariski-etale-smooth-syntomic-fppf-fpqc}
+모든 fppf 덮개는 fpqc 덮개이고, 따라서 특히 모든 신토믹 덮개, 매끄러운
+덮개, 에탈 덮개 또는 Zariski 덮개는 fpqc 덮개이다.
+\end{lemma}
+
+\begin{proof}
+fppf 덮개가 fpqc 덮개임을 보이면 나머지는 Lemma
+\ref{lemma-zariski-etale-smooth-syntomic-fppf}에서 따른다. fppf 덮개
+$\{f_i : U_i \to U\}_{i \in I}$를 대수공간들에 대해 택하되, 이 공간들은
+$S$ 위에 있다고 하자. 정의상
+$f_i$들은 평탄하며, 이는 Definition \ref{definition-fpqc-covering}의 첫째
+조건을 확인한다. 둘째 조건을 확인하기 위해 $V \to U$를 사상이라 하고
+$V$가 아핀이라고 하자. 에탈 덮개 $\{V_{ij} \to V \times_U U_i\}$를
+택할 수 있고, 이때 $V_{ij}$는 아핀이다. 그러면 합성
+$f_{ij} : V_{ij} \to V \times_U U_i \to V$는 그러한 사상들의 합성이므로
+평탄하고 국소 유한표현이다(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-presentation},
+\ref{spaces-morphisms-lemma-composition-flat},
+\ref{spaces-morphisms-lemma-etale-flat},
+\ref{spaces-morphisms-lemma-etale-locally-finite-presentation}). 따라서 이
+사상들은 열린 사상이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open}). 그리고
+$|V| = \bigcup_{i \in I} \bigcup_{j \in J_i} f_{ij}(|V_{ij}|)$가 $|V|$의
+열린 덮개임을 알 수 있다. $|V|$가 준콤팩트이므로 이 덮개는 유한 세분을
+갖는다. $V_{i_1j_1}, \ldots, V_{i_Nj_N}$이 그 역할을 한다고 하자. 그러면
+$\{V_{i_kj_k} \to V\}_{k = 1, \ldots, N}$은 $V$의 표준 fpqc 덮개이며 족
+$\{U_i \times_U V \to V\}$를 세분한다.
+% P09-ERR-0335
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fpqc}
+$S$를 스킴이라 하자. $X$를 $S$ 위 대수공간이라 하자.
+\begin{enumerate}
+\item $X' \to X$가 동형이면 $\{X' \to X\}$는 $X$의 fpqc 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 fpqc 덮개이고 각 $i$에 대해
+$\{X_{ij} \to X_i\}_{j\in J_i}$가 fpqc 덮개이면,
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$는 fpqc 덮개이다.
+\item $\{X_i \to X\}_{i\in I}$가 fpqc 덮개이고 $X' \to X$가
+대수공간의 사상이면
+$\{X' \times_X X_i \to X'\}_{i\in I}$는 fpqc 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 분명하다. (3)에서와 같이 $g : X' \to X$와 fpqc 덮개
+$\{X_i \to X\}_{i\in I}$를 생각하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-flat}에 의해 사상
+$X' \times_X X_i \to X'$는 평탄하다. 사상 $h' : Z \to X'$가 아핀
+스킴에서 주어지고 $X'$를 향하면 $h = g \circ h' : Z \to X$로 둔다.
+$\{X_i \to X\}_{i\in I}$에 대한 가정은 표준 fpqc 덮개
+$\{Z_j \to Z\}_{j = 1, \ldots, n}$와 사상 $Z_j \to X_{i(j)}$가
+존재함을 뜻하며, 이 사상은 $h$를 덮고 여기서 $i(j) \in I$이다. 올곱의
+보편성에 의해 사상 $Z_j \to X' \times_X X_{i(j)}$도 얻으며, 이는
+$h'$ 위에 있다. 따라서 $\{X' \times_X X_i \to X'\}_{i\in I}$는 fpqc
+덮개이다. 이로써 (3)을 증명하였다.
+
+\medskip\noindent
+(2)에서와 같은 $\{X_i \to X\}_{i\in I}$와
+$\{X_{ij} \to X_i\}_{j\in J_i}$를 택하자. 사상 $h : Z \to X$를 아핀
+스킴에서 택하고 이는 $X$를 향한다고 하자. 가정에 의해 표준 fpqc 덮개
+$\{Z_j \to Z\}_{j = 1, \ldots, n}$와 사상
+$h_j : Z_j \to X_{i(j)}$가 존재하며, 이는 $h$를 덮고 여기서 어떤 지표
+$i(j) \in I$이다. 다시 가정에 의해 표준 fpqc 덮개
+$\{Z_{j, l} \to Z_j\}_{l = 1, \ldots, n(j)}$와 사상
+$Z_{j, l} \to X_{i(j)j(l)}$가 존재하며, 이는 $h_j$를 덮고 여기서 어떤
+지표 $j(l) \in J_{i(j)}$이다. Topologies, Lemma
+\ref{topologies-lemma-fpqc-affine-axioms}에 의해 족
+$\{Z_{j, l} \to Z\}$는 표준 fpqc 덮개이다. 따라서
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$가 fpqc 덮개라고 결론 내린다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-recognize-fpqc-covering}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자.
+$\{f_i : X_i \to X\}_{i \in I}$가 목표가 $X$인 대수공간의 사상들로
+이루어진 족이라고 가정하자. $U \to X$를 스킴에서 $X$로 가는 전사 에탈
+사상이라 하자. 그러면 $\{f_i : X_i \to X\}_{i \in I}$가 $X$의 fpqc
+덮개일 필요충분조건은 $\{U \times_X X_i \to U\}_{i \in I}$가 $U$의
+fpqc 덮개인 것이다.
+\end{lemma}
+
+\begin{proof}
+$\{X_i \to X\}_{i \in I}$가 fpqc 덮개이면 Lemma \ref{lemma-fpqc}에 의해
+$\{U \times_X X_i \to U\}_{i \in I}$도 그러하다.
+$\{U \times_X X_i \to U\}_{i \in I}$가 fpqc 덮개라고 가정하자. 사상
+$h : Z \to X$를 아핀 스킴에서 택하고 이는 $X$를 향한다고 하자. 그러면
+$U \times_X Z \to Z$는 스킴의 전사 에탈 사상이고, 특히 열린 사상이다.
+따라서 유한 개의 아핀 열린집합 $W_1, \ldots, W_t$를
+$U \times_X Z$에서 택하여 그 상들이 $Z$를 덮게 할 수 있다. 각 $j$에
+대해 $\{U \times_X X_i \to U\}_{i \in I}$가 fpqc 덮개라는 조건을 사상
+$W_j \to U$에 적용하여 표준 fpqc 덮개 $\{W_{jl} \to W_j\}$를 얻으며,
+이는 $\{W_j \times_X X_i \to W_j\}_{i \in I}$를 세분한다. 따라서
+$\{W_{jl} \to Z\}$는 $Z$의 표준 fpqc 덮개이고(Topologies, Lemma
+\ref{topologies-lemma-fpqc-affine-axioms}를 보라),
+$\{Z \times_X X_i \to X\}$를 세분하므로 결론을 얻는다.
+% P09-ERR-0336
+\end{proof}
+
+\begin{lemma}
+\label{lemma-refine-fpqc-schemes}
+$S$를 스킴이라 하고, $X$를 $S$ 위 대수공간이라 하자.
+$\mathcal{U} = \{f_i : X_i \to X\}_{i \in I}$가 $X$의 fpqc 덮개라고
+가정하자. 그러면 세분 $\mathcal{V} = \{g_i : T_i \to X\}$가
+$\mathcal{U}$에 대해 존재하여, 이는 fpqc 덮개이고 각 $T_i$는 스킴이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 각 $i$에 대해 스킴 $T_i$와 전사 에탈 사상
+$T_i \to X_i$를 택한다. 그러면 $\{T_i \to X\}$가 fpqc 덮개인지 확인하라.
+\end{proof}
+
+\noindent
+계속될 예정이다...
+
+
+
+
+
+
+\input{chapters}
+
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

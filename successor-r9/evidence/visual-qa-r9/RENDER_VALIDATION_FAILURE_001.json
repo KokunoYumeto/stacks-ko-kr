@@ -1,0 +1,32 @@
+{
+  "schema": "interlanguage.stacks_cjk.ko_kr_r9_render_validation_failure/v1",
+  "record_id": "STACKS-CJK-KO-KR-R9-RENDER-VALIDATION-FAILURE-001",
+  "supersedes_result_only": "STACKS-CJK-KO-KR-R9-RENDER-RESUME-001",
+  "resume_receipt": {
+    "path": "evidence/visual-qa-r9/RENDER_RESUME_RECEIPT_001.json",
+    "bytes": 841789,
+    "sha256": "CDA7CAB04DAE991A95813600CA9D11326ED4F48A58E4D14C6A6B9A0E09265210"
+  },
+  "validation": {
+    "tool": "Pillow Image.verify",
+    "script": {
+      "path": "build/validate_render_pages.py",
+      "bytes": 1062,
+      "sha256": "31D43A732FDEEC9A187DD242EFF8D3D931632C0EA35D6F8F13F28117F7C73EB8"
+    },
+    "page_files_seen": 2316,
+    "decodable_pages": 2315,
+    "failed_pages": 1
+  },
+  "failure": {
+    "page_one_based": 2200,
+    "path": "evidence/visual-qa-r9/pages-144dpi/page-002200.png",
+    "bytes": 57482,
+    "sha256": "98214223106F3057888AA2260E3102F5845E7C4E665878164E5F2CFD0974D7C5",
+    "exception": "OSError",
+    "message": "truncated PNG file"
+  },
+  "interpretation": "The interrupted first renderer created a nonzero but incomplete final prefix file. Therefore the verified reusable prefix is pages 1-2199, not pages 1-2200. Pages 2201-2316 were rendered only once by the resume command and are not implicated.",
+  "next_exact_action": "Re-render only page 2200 from the unchanged bound cumulative PDF, verify all 2316 PNGs decode, and then resume deterministic visual-delta preparation without replacing any other page.",
+  "result": "FAIL_ONE_TRUNCATED_PREFIX_PAGE_REQUIRES_SINGLE_PAGE_REPAIR"
+}

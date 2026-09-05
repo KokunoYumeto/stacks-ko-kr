@@ -1,0 +1,1417 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{곡선의\  Picard 스킴}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 대수적으로 닫힌 체 위의 비특이 사영곡선의\  Picard 스킴을
+구성하는 데 꼭 필요한 만큼만 전개한다. 더 자세한 논의와 역사적 배경은\ 
+\cite{Kleiman-Picard}를 보라.
+
+\medskip\noindent
+Stacks project의 뒤쪽에서는\  Hilbert 함자와\  Quot 함자를 훨씬 더 일반적으로
+논의할 것이다.
+
+
+\section{점들의\  Hilbert 스킴}
+\label{section-hilbert-scheme-points}
+
+\noindent
+$X \to S$를 스킴의 사상이라 하고, $d \geq 0$을 정수라 하자.
+$S$ 위의 스킴\  $T$에 대해
+$$
+\Hilbfunctor^d_{X/S}(T) =
+\left\{
+\begin{matrix}
+Z \subset X_T\text{ closed subscheme such that }\\
+Z \to T\text{ is finite locally free of degree }d
+\end{matrix}
+\right\}
+$$
+로 둔다. $T' \to T$가\  $S$ 위 스킴들의 사상이고\ 
+$Z \in \Hilbfunctor^d_{X/S}(T)$이면, 기저변환\ 
+$Z_{T'} \subset X_{T'}$는\  $\Hilbfunctor^d_{X/S}(T')$의 원소이다.
+이로써 함자
+$$
+\Hilbfunctor^d_{X/S} :
+(\Sch/S)^{opp} \longrightarrow \textit{Sets},\quad
+T \longrightarrow \Hilbfunctor^d_{X/S}(T)
+$$
+를 얻는다. 일반적으로\  $\Hilbfunctor^d_{X/S}$는 대수공간이다
+(여기에 장래의 참조를 삽입할 것). 이 절에서는\  $X \to S$의 한 섬유 안의
+임의의 유한 개 점이 어떤 아핀 열린집합에 포함되면\ 
+$\Hilbfunctor^d_{X/S}$가 스킴으로 표현 가능함을 보인다.
+$\Hilbfunctor^d_{X/S}$가 스킴으로 표현 가능하면 이 스킴을 흔히\ 
+$\underline{\Hilbfunctor}^d_{X/S}$로 쓴다.
+
+\begin{lemma}
+\label{lemma-hilb-d-sheaf}
+$X \to S$를 스킴의 사상이라 하자. 함자\  $\Hilbfunctor^d_{X/S}$는\ 
+fpqc 위상에 대한 층 성질을 만족한다
+(Topologies, Definition \ref{topologies-definition-sheaf-property-fpqc}).
+\end{lemma}
+
+\begin{proof}
+$\{T_i \to T\}_{i \in I}$를\  $S$ 위 스킴들의\  fpqc 덮개라 하자.
+$X_i = X_{T_i} = X \times_S T_i$로 둔다.
+$\{X_i \to X_T\}_{i \in I}$는\ 
+$X_T$의\  fpqc 덮개이고(Topologies, Lemma \ref{topologies-lemma-fpqc}),
+$X_{T_i \times_T T_{i'}} = X_i \times_{X_T} X_{i'}$임을 유의하자.
+$Z_i \in \Hilbfunctor^d_{X/S}(T_i)$가 원소들의 모임이고, $Z_i$와\ 
+$Z_{i'}$가\  $\Hilbfunctor^d_{X/S}(T_i \times_T T_{i'})$의 같은 원소로
+사상된다고 가정하자. 닫힌 몰입의 유효 하강
+(Descent, Lemma \ref{descent-lemma-closed-immersion})에 의해 닫힌 몰입\ 
+$Z \to X_T$가 존재하며, $X_i \to X_T$에 의한 그 기저변환은\ 
+$Z_i \to X_i$와 같다. 그러면 사상\  $Z \to T$를\  $T_i$로 기저변환한 것은\ 
+$Z_i \to T_i$이다. 따라서\  Descent, Lemma
+\ref{descent-lemma-descending-property-finite-locally-free}에 의해\ 
+$Z \to T$는 계수\  $d$인 유한 국소 자유 사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-hilb-d-limit-preserving}
+$X \to S$를 스킴의 사상이라 하자. $X \to S$가 유한 표시이면 함자\ 
+$\Hilbfunctor^d_{X/S}$는 극한을 보존한다
+(Limits, Remark \ref{limits-remark-limit-preserving}).
+\end{lemma}
+
+\begin{proof}
+$T = \lim T_i$를\  $S$ 위 아핀 스킴들의 극한이라 하자. 등식\ 
+$\Hilbfunctor^d_{X/S}(T) = \colim \Hilbfunctor^d_{X/S}(T_i)$를
+보여야 한다. $Z \to X_T$가\  $\Hilbfunctor^d_{X/S}(T)$의 원소이면\ 
+$Z \to T$는 유한 표시임을 관찰하자. 따라서\  Limits, Lemma
+\ref{limits-lemma-descend-finite-presentation}에 의해 어떤\  $i$, $T_i$ 위의
+유한 표시 스킴\  $Z_i$, 그리고\  $T_i$ 위의 사상\  $Z_i \to X_{T_i}$가
+존재하여, $T$로의 기저변환이\  $Z \to X_T$를 준다. Limits, Lemma
+\ref{limits-lemma-descend-closed-immersion-finite-presentation}을 적용하고\ 
+$i$를 늘리면\  $Z_i \to X_{T_i}$가 닫힌 몰입이라고 가정할 수 있다.
+또\  Limits, Lemma \ref{limits-lemma-descend-finite-locally-free}를 적용하고
+필요하면\  $i$를 늘리면\  $Z_i \to T_i$가 계수\  $d$인 유한 국소 자유
+사상이라고 가정할 수 있다. 그러므로 원하는 대로\ 
+$Z_i \in \Hilbfunctor^d_{X/S}(T_i)$이다.
+\end{proof}
+
+\noindent
+$S$를 스킴이라 하고, $i : X \to Y$를\  $S$ 위 스킴들의 닫힌 몰입이라 하자.
+그러면 함자의 변환
+$$
+\Hilbfunctor^d_{X/S} \longrightarrow \Hilbfunctor^d_{Y/S}
+$$
+이 있으며, 이는\  $Z \in \Hilbfunctor^d_{X/S}(T)$를\ 
+$\Hilbfunctor^d_{Y/S}$ 안의\  $i_T(Z) \subset Y_T$로 보낸다. 여기서\ 
+$i_T : X_T \to Y_T$는\  $i$의 기저변환이다.
+
+\begin{lemma}
+\label{lemma-hilb-d-of-closed}
+$S$를 스킴이라 하고, $i : X \to Y$를 스킴들의 닫힌 몰입이라 하자.
+$\Hilbfunctor^d_{Y/S}$가 스킴으로 표현 가능하면\ 
+$\Hilbfunctor^d_{X/S}$도 그러하며, 대응하는 스킴의 사상\ 
+$\underline{\Hilbfunctor}^d_{X/S} \to \underline{\Hilbfunctor}^d_{Y/S}$는
+닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+$T$를\  $S$ 위의 스킴이라 하고\  $Z \in \Hilbfunctor^d_{Y/S}(T)$라 하자.
+주장: 닫힌 부분스킴\  $T_X \subset T$가 존재하여, 스킴의 사상\ 
+$T' \to T$가\  $T_X$를 거쳐 인수분해될 필요충분조건은\ 
+$Z_{T'} \to Y_{T'}$가\  $X_{T'}$를 거쳐 인수분해되는 것이다.
+$\Hilbfunctor^d_{Y/S}$를 표현하는 스킴\  $T_{univ}$와 보편 대상\ 
+\footnote{Categories, Section \ref{categories-section-opposite}를 보라.}
+$Z_{univ} \in \Hilbfunctor^d_{Y/S}(T_{univ})$에 이를 적용하면,
+닫힌 부분스킴\  $T_{univ, X} \subset T_{univ}$가 존재하여\ 
+$Z_{univ, X} = Z_{univ} \times_{T_{univ}} T_{univ, X}$는\ 
+$X \times_S T_{univ, X}$의 닫힌 부분스킴이 되고, 따라서\ 
+$\Hilbfunctor^d_{X/S}(T_{univ, X})$의 원소를 정의한다.
+이제 형식적 논증으로\  $T_{univ, X}$가 보편 대상\  $Z_{univ, X}$와 함께\ 
+$\Hilbfunctor^d_{X/S}$를 표현하는 스킴임을 알 수 있다.
+
+\medskip\noindent
+주장의 증명. $Z' = X_T \times_{Y_T} Z$를 생각하자. $T' \to T$가
+주어지면\  $Z_{T'} \to Y_{T'}$가\  $X_{T'}$를 거쳐 인수분해될 필요충분조건은\ 
+$Z'_{T'} \to Z_{T'}$가 동형사상인 것이다. 따라서 주장은 매우 일반적인\ 
+More on Flatness, Lemma \ref{flat-lemma-Weil-restriction-closed-subschemes}에서
+따른다. 그러나 이 특수한 경우에는 다음과 같이 직접 증명할 수 있다.
+먼저\  $T = \Spec(A)$이고\  $Z = \Spec(B)$인 경우로 환원한다.
+$T$를 더 축소하면\  $A$-모듈로서의 동형사상\ 
+$\varphi : B \to A^{\oplus d}$가 있다고 가정할 수 있다. 그러면 어떤 아이디얼\ 
+$J \subset B$에 대해\  $Z' = \Spec(B/J)$이다. $g_\beta \in J$인 생성원들의
+모임을 택하고\  $\varphi(g_\beta) = (g_\beta^1, \ldots, g_\beta^d)$로 쓰자.
+그러면\  $T_X$가\  $\Spec(A/(g_\beta^j))$로 주어짐은 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-hilb-d-separated}
+$X \to S$를 스킴의 사상이라 하자. $X \to S$가 분리이고\ 
+$\Hilbfunctor^d_{X/S}$가 표현 가능하면\ 
+$\underline{\Hilbfunctor}^d_{X/S} \to S$는 분리이다.
+\end{lemma}
+
+\begin{proof}
+이 증명에서 장식 없는 모든 곱은\  $S$ 위에서 취한다.
+$H = \underline{\Hilbfunctor}^d_{X/S}$라 하고\ 
+$Z \in \Hilbfunctor^d_{X/S}(H)$를 보편 대상이라 하자. 두 사영\ 
+$H \times H \to H$로\  $Z$를 당겨 얻는 두 대상\ 
+$Z_1, Z_2 \in \Hilbfunctor^d_{X/S}(H \times H)$를 생각하자.
+그러면\  $Z_1 = Z \times H \subset X_{H \times H}$이고\ 
+$Z_2 = H \times Z
+\subset X_{H \times H}$이다. $H$가 함자\ 
+$\Hilbfunctor^d_{X/S}$를 표현하므로 대각 사상\ 
+$\Delta : H \to H \times H$는 다음 보편 성질을 갖는다. 스킴의 사상\ 
+$T \to H \times H$가\  $\Delta$를 거쳐 인수분해될 필요충분조건은\ 
+$Z_{1, T} = Z_{2, T}$가\  $\Hilbfunctor^d_{X/S}(T)$의 원소로서 성립하는
+것이다. $Z = Z_1 \times_{X_{H \times H}} Z_2$로 둔다. 그러면\ 
+$T \to H \times H$가\  $\Delta$를 거쳐 인수분해될 필요충분조건은
+사상\  $Z_T \to Z_{1, T}$와\  $Z_T \to Z_{2, T}$가 동형사상인 것이다.
+매우 일반적인\  More on Flatness, Lemma
+\ref{flat-lemma-Weil-restriction-closed-subschemes}에 의해\  $\Delta$는
+닫힌 몰입이다. Lemma \ref{lemma-hilb-d-of-closed}의 증명에는 이 특수한
+경우에 필요한 결과의 더 쉬운 다른 증명이 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-hilb-d-An}
+$X \to S$를 아핀 스킴들의 사상이라 하자. $d \geq 0$이라 하자.
+그러면\  $\Hilbfunctor^d_{X/S}$는 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+$S = \Spec(R)$이라 하자. 충분히 큰 기수의 어떤 집합\  $I$에 대해\ 
+$X$를\  $R[x_i; i \in I]$의 스펙트럼 안에 닫히게 몰입시킬 수 있다.
+따라서\  Lemma \ref{lemma-hilb-d-of-closed}에 의해\ 
+$X = \Spec(A)$, $A = R[x_i; i \in I]$라고 가정해도 된다.
+이 경우\  Schemes, Lemma \ref{schemes-lemma-glue-functors}를 사용하여
+보조정리를 증명하겠다.
+
+\medskip\noindent
+그 보조정리의 조건 (1)은\  Lemma \ref{lemma-hilb-d-sheaf}에서 따른다.
+
+\medskip\noindent
+기수가\  $d$인 모든 부분집합\  $W \subset A$에 대해\ 
+$\Hilbfunctor^d_{X/S}$의 부분함자\  $F_W$를 구성한다.
+($W$가\  $x_i$들의 단항식들의 모임인 경우만 생각해도 충분하지만,
+여기서는 그럴 필요가 없다.) 구체적으로,
+$Z \in \Hilbfunctor^d_{X/S}(T)$가\  $F_W(T)$에 속한다는 것을\ 
+$\mathcal{O}_T$-선형사상
+$$
+\bigoplus\nolimits_{f \in W} \mathcal{O}_T
+\longrightarrow
+(Z \to T)_*\mathcal{O}_Z,\quad
+(g_f) \longmapsto \sum g_f f|_Z
+$$
+이 전사인 것(동치로, 동형사상인 것)으로 정의한다. 여기서\ 
+$f \in A$와\  $Z \in \Hilbfunctor^d_{X/S}(T)$에 대해\  $f|_Z$는 사상\ 
+$Z \to X_T \to X$에 의한\  $f$의 당김을 뜻한다.
+
+\medskip\noindent
+열림성, 즉 보조정리의 조건 (2)(b). 이는\  Algebra, Lemma
+\ref{algebra-lemma-cokernel-flat}에서 따른다.
+
+\medskip\noindent
+덮개성, 즉 보조정리의 조건 (2)(c). 사상
+$$
+A \otimes_R \mathcal{O}_T =
+(X_T \to T)_*\mathcal{O}_{X_T} \to (Z \to T)_*\mathcal{O}_Z
+$$
+은 전사이고\  $(Z \to T)_*\mathcal{O}_Z$는 랭크\  $d$인 유한 국소 자유이므로,
+모든 점\  $t \in T$에 대해 기수가\  $d$인 유한 부분집합\  $W \subset A$를
+찾아서 그 상들이\  $d$차원\  $\kappa(t)$-벡터공간\ 
+$((Z \to T)_*\mathcal{O}_Z)_t \otimes_{\mathcal{O}_{T, t}} \kappa(t)$의
+기저를 이루게 할 수 있다. Nakayama 보조정리에 의해\  $t$의 열린 근방\ 
+$V \subset T$가 존재하여\  $Z_V \in F_W(V)$이다.
+
+\medskip\noindent
+표현 가능성, 즉 보조정리의 조건 (2)(a). 기수가\  $d$인\ 
+$W \subset A$를 택하자. $F_W$가\  $R$ 위의 아핀 스킴으로 표현 가능하다고
+주장한다. 여기서 이 아핀 스킴을 구성하겠지만, 독자가 직접 따져 보기를
+권한다. $W$의 원소들을\  $f_1, \ldots, f_d$로 번호 매기자. 다음과 같이\ 
+$T_{univ} = \Spec(R_{univ})$ 위의\  $F_W$의 보편 원소\ 
+$Z_{univ} = \Spec(B_{univ})$를 구성한다. 먼저
+$$
+R_{univ} = R[c_{kl}^m, b^l, b_i^l]/\mathfrak a_{univ}
+$$
+로 둔다. 여기서\  $\mathfrak a_{univ}$는 아래에서 설명할 아이디얼이고,
+첨자\  $k, l, m, i$는 모두\  $\{1, \ldots, d\}$를 돈다. 이어서
+$$
+B_{univ} = R_{univ}e_1 \oplus R_{univ}e_2 \oplus \ldots \oplus R_{univ}e_d
+$$
+로 두고, $R_{univ}$-모듈인 여기에 규칙
+$$
+e_ke_l = \sum c_{kl}^m e_m
+$$
+으로 대수 구조를 준다. 닫힌 몰입\  $Z_{univ} \to X_{T_{univ}}$는\ 
+$1 \otimes 1$을\  $\sum b^le_l$로, $x_i$를\  $\sum b_i^le_l$로 보내는\ 
+$R_{univ}$-대수 사상
+$$
+\Psi : A \otimes_R R_{univ} \longrightarrow B_{univ}
+$$
+으로 주어진다(존재성은 아래를 보라). 아이디얼\  $\mathfrak a_{univ}$는
+다음 조건으로 정한다.
+\begin{enumerate}
+\item $B_{univ}$ 위의 곱셈은 가환이어야 한다. 즉\ 
+$c_{lk}^m - c_{kl}^m \in \mathfrak a_{univ}$이어야 한다.
+\item $B_{univ}$ 위의 곱셈은 결합적이어야 한다. 즉\ 
+$c_{lk}^m c_{m n}^p - c_{lq}^p c_{kn}^q \in \mathfrak a_{univ}$이어야 한다.
+\item $\sum b^le_l$은\  $B_{univ}$의 곱셈 항등원\  $1$이어야 한다.
+달리 말해 모든\  $k$에 대해\  $(\sum b^le_l)e_k = e_k$이어야 하며,
+이는\  $\sum b^lc_{lk}^m - \delta_{km} \in \mathfrak a_{univ}$라는 뜻이다
+(Kronecker 델타).
+\end{enumerate}
+$B_{univ}$가\  $\sum b^le_l$을\  $1$로 갖는 가환\ 
+$R_{univ}$-대수임을 보장했으므로 준동형\  $\Psi$가 존재한다.
+마지막 조건은 다음과 같다.
+\begin{enumerate}
+\item[(5)] $f_l$은\  $B_{univ}$ 안의\  $e_l$로 사상되어야 한다.
+어떤\  $h_l^m \in R[c_{kl}^m, b^l, b_i^l]$에 대해\ 
+$\Psi(f_l) - e_l \equiv \sum h_l^me_m$로 쓰면\ 
+$h_l^m \in \mathfrak a_{univ}$이어야 한다.
+\end{enumerate}
+$\mathfrak a_{univ} \subset R[c_{kl}^m, b^l, b_i^l]$를 (1)--(5)에
+열거한 원소들로 생성되는 아이디얼로 두면\  $F_W$가\ 
+$\Spec(R_{univ})$로 표현됨은 명백하다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-hilb-d-representable}
+$X \to S$를 스킴의 사상이라 하고\  $d \geq 0$이라 하자.
+$s \in S$이고\  $x_1, \ldots, x_d \in X_s$인 모든\ 
+$(s, x_1, \ldots, x_d)$에 대해\  $x_1, \ldots, x_d \in U$인 아핀 열린집합\ 
+$U \subset X$가 존재한다고 가정하자. 그러면\  $\Hilbfunctor^d_{X/S}$는
+스킴으로 표현 가능하다.
+\end{proposition}
+
+\begin{proof}
+상대 붙이기(Constructions, Section
+\ref{constructions-section-relative-glueing})를 사용하거나 함자적 관점
+(Schemes, Lemma \ref{schemes-lemma-glue-functors})을 사용하면\ 
+$S$가 아핀인 경우로 환원된다. 세부사항은 생략한다.
+
+\medskip\noindent
+$S$가 아핀이라고 가정하자. 아핀 열린집합\  $U \subset X$에 대해\ 
+$F_U \subset \Hilbfunctor^d_{X/S}$를 다음 부분함자로 두자.
+스킴\  $T/S$에 대해\  $Z \in \Hilbfunctor^d_{X/S}(T)$가\ 
+$F_U(T)$에 속한다는 것은\  $Z \subset U_T$라는 뜻이다. Schemes, Lemma
+\ref{schemes-lemma-glue-functors}와 부분함자\  $F_U$들을 사용하여 결론을
+내리겠다.
+
+\medskip\noindent
+조건 (1)은\  Lemma \ref{lemma-hilb-d-sheaf}이다.
+
+\medskip\noindent
+조건 (2)(a)는\  $F_U = \Hilbfunctor^d_{U/S}$라는 사실과 이것이\  Lemma
+\ref{lemma-hilb-d-An}에 의해 표현 가능하다는 사실에서 따른다.
+실제로\  $Z \in F_U(T)$이면\  $Z$는\  $U_T$의 닫힌 부분스킴으로 볼 수 있고\ 
+$T$ 위에서 계수\  $d$인 유한 국소 자유이므로\ 
+$Z \in \Hilbfunctor^d_{U/S}(T)$이다. 역으로\ 
+$Z \in \Hilbfunctor^d_{U/S}(T)$이면\  $Z \to U_T \to X_T$는 닫힌 몰입이다\ 
+\footnote{$X \to S$가 분리인 경우 이는 명백하다. 실제로 이 경우\ 
+Morphisms, Lemma \ref{morphisms-lemma-image-proper-scheme-closed}에 의해
+몰입\  $\varphi : Z \to X_T$의 상이 닫혀 있고, Schemes, Lemma
+\ref{schemes-lemma-immersion-when-closed}에 의해 이는 닫힌 몰입이다.
+$X \to S$에 대한 가정은 성립하지만\  $X \to S$가 분리가 아닌 예를 알지
+못하므로, 독자는 이 각주의 나머지를 건너뛰어도 좋다. 일반적인 경우에는\ 
+$x \in X_T$를\  $\varphi(Z)$의 폐포 안의 점이라 하자. 보여야 할 것은\ 
+$x \in \varphi(Z)$이다. $x$의 상을\ 
+$t \in T$라 하자. $X \to S$에 대한 가정에 의해\  $x$와\ 
+$\varphi(Z_t)$를 포함하는 아핀 열린집합\  $W \subset X_T$를 택할 수 있다.
+그러면\  $\varphi^{-1}(W)$는 섬유\  $Z_t$ 전체를 포함하는 열린집합이고\ 
+$Z \to T$가 닫힌 사상이므로, $T$를\  $t$의 열린 근방으로 바꾼 뒤\ 
+$Z = \varphi^{-1}(W)$라고 가정할 수 있다. 이제\  $W \to T$가 분리이므로
+분리인 경우에 의해\  $\varphi(Z) \subset W$는 닫혀 있고,
+$x \in \varphi(Z)$라는 결론을 얻는다.}
+따라서\  $Z$를\  $F_U(T)$의 원소로 볼 수 있다.
+
+\medskip\noindent
+어떤\  $S$ 위의 스킴\  $T$와\  $Z \in \Hilbfunctor^d_{X/S}(T)$가 주어졌다고
+하자. 다음과 같이 둔다.
+$$
+B = (Z \to T)\left((Z \to X_T \to X)^{-1}(X \setminus U)\right)
+$$
+이는\  $T$의 닫힌 부분집합이고, 열린집합\  $T_{Z, U} = T \setminus B$ 위에서
+제한\  $Z_{t'}$가\  $U_{T'}$ 안으로 사상됨은 명백하다. 한편 모든\ 
+$b \in B$에 대해 섬유\  $Z_b$는\  $U$ 안으로 사상되지 않는다. 따라서
+사상\  $T' \to T$가 주어지면\ 
+$Z_{T'} \in F_U(T')$ $\Leftrightarrow$ $T' \to T$가 열린집합\ 
+$T_{Z, U}$를 거쳐 인수분해된다. 이것으로 조건 (2)(b)가 증명된다.
+
+\medskip\noindent
+조건 (2)(c)는\  $X/S$에 대한 가정에서 따른다. 다음만 보이면 된다.
+$T$가 체의 스펙트럼이고\  $Z \subset X_T$가\  $T$ 위에서 계수\  $d$인 유한
+평탄 닫힌 부분스킴이면\  $Z \to X_T \to X$는\  $X$의 어떤 아핀 열린집합\ 
+$U$를 거쳐 인수분해된다. $Z$는 많아야\  $d$개의 점을 갖고, 이 점들이 모두\ 
+$T \to S$의 상인 점 위의\  $X$의 섬유 안으로 사상되므로 이는 명백하다.
+\end{proof}
+
+\begin{remark}
+\label{remark-when-proposition-applies}
+$f : X \to S$를 스킴의 사상이라 하자. 다음 각 경우에는\  Proposition
+\ref{proposition-hilb-d-representable}의 가정과 따라서 결론이 성립한다.
+\begin{enumerate}
+\item $X$가 준아핀인 경우,
+\item $f$가 준아핀인 경우,
+\item $f$가 준사영인 경우,
+\item $f$가 국소 사영인 경우,
+\item $X$ 위에 풍부한 가역층이 존재하는 경우,
+\item $X$ 위에\  $f$-풍부한 가역층이 존재하는 경우,
+\item $X$ 위에\  $f$-매우 풍부한 가역층이 존재하는 경우.
+\end{enumerate}
+실제로 각 경우에 섬유\  $X_s$의 모든 유한 점 집합은\  $X$의 준콤팩트
+열린집합\  $U$에 포함되고, 이는 풍부한 가역층을 갖거나 아핀 스킴의
+열린집합과 동형이거나 등급환의\  $\text{Proj}$의 열린집합과 동형이다
+(각 경우 모두 정의를 풀면 알 수 있다). 따라서\  Properties, Lemma
+\ref{properties-lemma-ample-finite-set-in-affine}에 의해 적절한 아핀
+열린집합이 존재한다.
+\end{remark}
+
+
+
+
+\section{매끄러운 곡선 위 약수의 모듈라이}
+\label{section-divisors}
+
+\noindent
+상대차원이\  $1$인 매끄러운 사상\  $X \to S$에 대해 함자\ 
+$\Hilbfunctor^d_{X/S}$는\  Divisors, Section
+\ref{divisors-section-effective-Cartier-morphisms}에서 정의한 상대 유효\ 
+Cartier 약수들을 매개화한다.
+
+\begin{lemma}
+\label{lemma-divisors-on-curves}
+$X \to S$를 상대차원이\  $1$인 스킴의 매끄러운 사상이라 하고,
+$D \subset X$를 닫힌 부분스킴이라 하자. 다음 조건들을 생각하자.
+\begin{enumerate}
+\item $D \to S$는 유한 국소 자유이다.
+\item $D$는\  $X/S$ 위의 상대 유효\  Cartier 약수이다.
+\item $D \to S$는 국소 준유한이고 평탄이며 국소 유한 표시이다.
+\item $D \to S$는 국소 준유한이고 평탄이다.
+\end{enumerate}
+항상 다음 함의들이 성립한다.
+$$
+(1) \Rightarrow (2) \Leftrightarrow (3) \Rightarrow (4)
+$$
+$S$가 국소 뇌터이면 마지막 화살표는 필요충분조건이다.
+$X \to S$가 고유이면($S$는 임의) 첫째 화살표도 필요충분조건이다.
+\end{lemma}
+
+\begin{proof}
+(2)와 (3)의 동치. $S$가 체\  $k$의 스펙트럼일 때 (2)와 (3)이
+동치임을 보이면, 이는\  Divisors, Lemma
+\ref{divisors-lemma-fibre-Cartier}에서 따른다. $x \in X$를 닫힌점이라 하자.
+$X$는\  $k$ 위 상대차원\  $1$의 매끄러운 스킴이므로\ 
+$\mathcal{O}_{X, x}$는 차원\  $1$의 정칙 국소환이다
+(Varieties, Lemma \ref{varieties-lemma-smooth-regular} 참조).
+따라서\  $\mathcal{O}_{X, x}$는 이산 값매김환이고
+(Algebra, Lemma \ref{algebra-lemma-characterize-dvr}), 따라서\  PID이다.
+그러므로\  $X$의 모든 일반점에서 영이 아닌 모든 아이디얼층\ 
+$\mathcal{I} \subset \mathcal{O}_X$는 가역이다
+(Divisors, Lemma \ref{divisors-lemma-effective-Cartier-in-points}).
+달리 말해 일반점을 포함하지 않는\  $X$의 모든 닫힌 부분스킴은 유효\ 
+Cartier 약수이다. 따라서 (2)와 (3)은 동치이다.
+
+\medskip\noindent
+$S$가 뇌터이면 임의의 국소 준유한 사상\  $D \to S$는 국소 유한 표시이다
+(Morphisms, Lemma
+\ref{morphisms-lemma-noetherian-finite-type-finite-presentation}).
+따라서 (3)과 (4)는 동치이다.
+
+\medskip\noindent
+$X \to S$가 고유이면($S$는 임의) $D \to S$도 고유이다.
+고유 국소 준유한 사상은 유한이고
+(More on Morphisms, Lemma \ref{more-morphisms-lemma-characterize-finite}),
+유한이고 평탄이며 유한 표시인 사상은 유한 국소 자유이므로
+(Morphisms, Lemma \ref{morphisms-lemma-finite-flat}),
+(1)과 (2)는 동치이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-sum-divisors-on-curves}
+$X \to S$를 상대차원이\  $1$인 스킴의 매끄러운 사상이라 하자.
+$D_1, D_2 \subset X$를\  $S$ 위에서 각각 계수\  $d_1$, $d_2$인 유한 국소
+자유 닫힌 부분스킴이라 하자. 그러면\  $D_1 + D_2$는\  $S$ 위에서 계수\ 
+$d_1 + d_2$인 유한 국소 자유이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-divisors-on-curves}에 의해\  $D_1$과\  $D_2$는\ 
+$X/S$ 위의 상대 유효\  Cartier 약수이다. 따라서\ 
+Divisors, Lemma \ref{divisors-lemma-sum-relative-effective-Cartier-divisor}에
+의해\  $D = D_1 + D_2$는\  $X/S$ 위의 상대 유효\  Cartier 약수이다.
+그러므로\  Lemma \ref{lemma-divisors-on-curves}에 의해\  $D \to S$는 국소
+준유한이고 평탄이며 국소 유한 표시이다. 전사 정수 사상\ 
+$D_1 \amalg D_2 \to D$에\  Morphisms, Lemma
+\ref{morphisms-lemma-image-universally-closed-separated}를 적용하면\ 
+$D \to S$가 분리임을 알 수 있다. 이어서\  Morphisms, Lemma
+\ref{morphisms-lemma-image-proper-is-proper}에 의해\  $D \to S$는 고유이다.
+따라서\  $D \to S$는 유한이고
+(More on Morphisms, Lemma \ref{more-morphisms-lemma-characterize-finite}),
+다시\  $D \to S$는 유한 국소 자유이다
+(Morphisms, Lemma \ref{morphisms-lemma-finite-flat}).
+그러므로\  $D \to S$의 계수가\  $d_1 + d_2$임만 보이면 된다.
+이를 위해\  $X \to S$의 한 섬유로 기저변환할 수 있으므로, 어떤 체\  $k$에
+대해\  $S = \Spec(k)$라고 가정해도 된다. 이 경우\  $D_1$과\  $D_2$의 지지가\ 
+$\{x_1, \ldots, x_n\}$에 들어가는 유한 개의 닫힌점\ 
+$x_1, \ldots, x_n \in X$가 존재한다. 실제로 영인자가 아닌\ 
+$f_{i, j} \in \mathcal{O}_{X, x_i}$들이 존재하여
+$$
+D_1 = \coprod \Spec(\mathcal{O}_{X, x_i}/(f_{i, 1}))
+\quad\text{and}\quad
+D_2 = \coprod \Spec(\mathcal{O}_{X, x_i}/(f_{i, 2}))
+$$
+이다. 따라서
+$$
+D = \coprod \Spec(\mathcal{O}_{X, x_i}/(f_{i, 1}f_{i, 2}))
+$$
+임을 알 수 있다. 이로부터\  $D$가\  $k$ 위에서 계수\  $d_1 + d_2$임을 쉽게
+알 수 있다(필요하면\  Algebra, Lemma \ref{algebra-lemma-ord-additive}를
+사용하라).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-difference-divisors-on-curves}
+$X \to S$를 상대차원이\  $1$인 스킴의 매끄러운 사상이라 하자.
+$D_1, D_2 \subset X$를\  $S$ 위에서 각각 계수\  $d_1$, $d_2$인 유한 국소
+자유 닫힌 부분스킴이라 하자. $D_1 \subset D_2$이면(닫힌 부분스킴으로서)
+$D_2 = D_1 + D$이고\  $S$ 위에서 계수\  $d_2 - d_1$인 유한 국소 자유 닫힌
+부분스킴\  $D \subset X$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+이 증명은\  Lemma \ref{lemma-sum-divisors-on-curves}의 증명과 거의 완전히
+같다. Lemma \ref{lemma-divisors-on-curves}에 의해\  $D_1$과\  $D_2$는\ 
+$X/S$ 위의 상대 유효\  Cartier 약수이다. Divisors, Lemma
+\ref{divisors-lemma-difference-relative-effective-Cartier-divisor}에 의해\ 
+$D_2 = D_1 + D$인 상대 유효\  Cartier 약수\  $D \subset X$가 존재한다.
+따라서\  Lemma \ref{lemma-divisors-on-curves}에 의해\  $D \to S$는 국소
+준유한이고 평탄이며 국소 유한 표시이다. $D$는\  $D_2$의 닫힌 부분스킴이므로\ 
+$D \to S$는 유한이다. 그러므로\  $D \to S$는 유한 국소 자유이다
+(Morphisms, Lemma \ref{morphisms-lemma-finite-flat}).
+이제\  $D \to S$의 계수가\  $d_2 - d_1$임만 보이면 되며, 이는\  Lemma
+\ref{lemma-sum-divisors-on-curves}에서 따른다.
+\end{proof}
+
+\noindent
+$X \to S$를 상대차원이\  $1$인 스킴의 매끄러운 사상이라 하자.
+Lemma \ref{lemma-divisors-on-curves}에 의해, $S$ 위의 스킴\  $T$와\ 
+$D \in \Hilbfunctor^d_{X/S}(T)$에 대해\  $D$를\  $X_T/T$ 위의 상대 유효\ 
+Cartier 약수로 볼 수 있으며, $D \to T$는 계수\  $d$인 유한 국소 자유이다.
+따라서\  Lemma \ref{lemma-sum-divisors-on-curves}에 의해 함자의 변환
+$$
+\Hilbfunctor^{d_1}_{X/S} \times \Hilbfunctor^{d_2}_{X/S}
+\longrightarrow
+\Hilbfunctor^{d_1 + d_2}_{X/S},\quad
+(D_1, D_2) \longmapsto D_1 + D_2
+$$
+을 얻는다. 모든 계수\  $d$에 대해\  $\Hilbfunctor^d_{X/S}$가 표현 가능하면,
+이 함자의 변환은\  $S$ 위 스킴들의 사상
+$$
+\underline{\Hilbfunctor}^{d_1}_{X/S}
+\times_S
+\underline{\Hilbfunctor}^{d_2}_{X/S}
+\longrightarrow
+\underline{\Hilbfunctor}^{d_1 + d_2}_{X/S}
+$$
+에 대응한다. $\underline{\Hilbfunctor}^0_{X/S} = S$이고\ 
+$\underline{\Hilbfunctor}^1_{X/S} = X$임을 유의하자.
+위 사상의 한 특수한 경우는 다음 사상이다.
+$$
+\underline{\Hilbfunctor}^d_{X/S} \times_S X
+\longrightarrow
+\underline{\Hilbfunctor}^{d + 1}_{X/S},\quad
+(D, x) \longmapsto D + x
+$$
+
+\begin{lemma}
+\label{lemma-universal-object}
+$X \to S$를 상대차원이\  $1$인 스킴의 매끄러운 사상이라 하고, 함자들\ 
+$\Hilbfunctor^d_{X/S}$가 표현 가능하다고 하자. 사상\ 
+$\underline{\Hilbfunctor}^d_{X/S} \times_S X \to
+\underline{\Hilbfunctor}^{d + 1}_{X/S}$는 계수\  $d + 1$인 유한 국소
+자유 사상이다.
+\end{lemma}
+
+\begin{proof}
+$D_{univ} \subset X \times_S \underline{\Hilbfunctor}^{d + 1}_{X/S}$를
+보편 대상이라 하자. 다음 가환도식이 있다.
+$$
+\xymatrix{
+\underline{\Hilbfunctor}^d_{X/S} \times_S X \ar[rr] \ar[rd] & &
+D_{univ} \ar[ld] \ar@{^{(}->}[r] &
+\underline{\Hilbfunctor}^{d + 1}_{X/S} \times_S X \\
+& \underline{\Hilbfunctor}^{d + 1}_{X/S}
+}
+$$
+위쪽 수평 화살표는\  $(D', x)$를\  $(D' + x, x)$로 보낸다.
+이 사상이 동형사상이라고 주장한다. 그러면 보조정리는 바로 증명된다.
+실제로\  $S$ 위의 스킴\  $T$가 주어졌을 때, $D_{univ}$의\  $T$-값 점\  $\xi$는
+쌍\  $\xi = (D, x)$로 주어진다. 여기서\  $D \subset X_T$는\  $T$ 위에서 계수\ 
+$d + 1$인 유한 국소 자유 닫힌 부분스킴이고, $x : T \to X$는 그 그래프\ 
+$x : T \to X_T$가\  $D$를 거쳐 인수분해되는 사상이다. 그러면\  Lemma
+\ref{lemma-difference-divisors-on-curves}에 의해\  $T$ 위에서 계수\  $d$인
+유한 국소 자유인 어떤\  $D' \subset X_T$에 대해\  $D = D' + x$로 쓸 수 있다.
+$\xi = (D, x)$를 쌍\  $(D', x)$로 보내는 것이 원하는 역함수이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-hilb-d-smooth}
+$X \to S$를 상대차원이\  $1$인 스킴의 매끄러운 사상이라 하고, 함자들\ 
+$\Hilbfunctor^d_{X/S}$가 표현 가능하다고 하자. 스킴들\ 
+$\underline{\Hilbfunctor}^d_{X/S}$는\  $S$ 위에서 상대차원\  $d$인 매끄러운
+스킴이다.
+\end{lemma}
+
+\begin{proof}
+$\underline{\Hilbfunctor}^0_{X/S} = S$이고\ 
+$\underline{\Hilbfunctor}^1_{X/S} = X$이므로 결과는\  $d = 0, 1$일 때
+참이다. $d$에 대해 결과가 참이라고 가정하면\ 
+$\underline{\Hilbfunctor}^d_{X/S} \times_S X$는\  $S$ 위에서 매끄럽다
+(Morphisms, Lemma \ref{morphisms-lemma-base-change-smooth}와\ 
+\ref{morphisms-lemma-composition-smooth}). Lemma
+\ref{lemma-universal-object}에 의해\ 
+$\underline{\Hilbfunctor}^d_{X/S} \times_S X \to
+\underline{\Hilbfunctor}^{d + 1}_{X/S}$는 계수\  $d + 1$인 유한 국소 자유
+사상이므로, 결과는\  Descent, Lemma
+\ref{descent-lemma-smooth-permanence}에서 따른다. 상대차원이 주장한 값임의
+확인은 생략한다(섬유를 살피거나 위 논증에서 차원을 추적하면 된다).
+\end{proof}
+
+\noindent
+지금까지 얻은 모든 정보를 체 위의 고유 매끄러운 곡선인 경우에 모은다.
+
+\begin{proposition}
+\label{proposition-hilb-d}
+$X$를 체\  $k$ 위의 기하적으로 기약인 매끄러운 고유 곡선이라 하자.
+\begin{enumerate}
+\item 함자\  $\Hilbfunctor^d_{X/k}$는\  $k$ 위에서 차원\  $d$인 매끄러운 고유
+다양체\  $\underline{\Hilbfunctor}^d_{X/k}$로 표현된다.
+\item 체 확장\  $k'/k$에 대해\  $\underline{\Hilbfunctor}^d_{X/k}$의\ 
+$k'$-유리점들은\  $X_{k'}$ 위의 차수\  $d$인 유효\  Cartier 약수들과\ 
+$1$-대-$1$로 대응한다.
+\item $d_1, d_2 \geq 0$에 대해 사상
+$$
+\underline{\Hilbfunctor}^{d_1}_{X/k}
+\times_k
+\underline{\Hilbfunctor}^{d_2}_{X/k}
+\longrightarrow
+\underline{\Hilbfunctor}^{d_1 + d_2}_{X/k}
+$$
+이 있으며, 이는 계수\  ${d_1 + d_2 \choose d_1}$인 유한 국소 자유이다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+함자\  $\Hilbfunctor^d_{X/k}$는\  Proposition
+\ref{proposition-hilb-d-representable}에 의해 표현 가능하다
+(Remark \ref{remark-when-proposition-applies}도 보라). 여기서는\  $X$가
+사영이라는 사실도 사용한다
+(Varieties, Lemma \ref{varieties-lemma-dim-1-proper-projective}).
+Lemma \ref{lemma-hilb-d-separated}에 의해 스킴\ 
+$\underline{\Hilbfunctor}^d_{X/k}$는\  $k$ 위에서 분리이다.
+Lemma \ref{lemma-hilb-d-smooth}에 의해 스킴\ 
+$\underline{\Hilbfunctor}^d_{X/k}$는\  $k$ 위에서 매끄럽다.
+$X = \underline{\Hilbfunctor}^1_{X/k}$에서 시작하여\  Lemma
+\ref{lemma-universal-object}의 사상들을 쓰고 귀납하면 사상
+$$
+X^d = X \times_k X \times_k \ldots \times_k X \longrightarrow
+\underline{\Hilbfunctor}^d_{X/k},\quad
+(x_1, \ldots, x_d) \longrightarrow x_1 + \ldots + x_d
+$$
+을 얻으며, 이는 계수\  $d!$인 유한 국소 자유이다. $X$가\  $k$ 위에서
+고유이므로\  $X^d$도 그러하고, 따라서\  Morphisms, Lemma
+\ref{morphisms-lemma-image-proper-is-proper}에 의해\ 
+$\underline{\Hilbfunctor}^d_{X/k}$는\  $k$ 위에서 고유이다.
+$X$가\  $k$ 위에서 기하적으로 기약이므로 곱\  $X^d$는 기약이고
+(Varieties, Lemma \ref{varieties-lemma-bijection-irreducible-components}),
+따라서 그 상은 기약이다(실제로 기하적으로 기약이다). 이것으로 (1)이
+증명된다. (2)는 정의에서 따르고, (3)은 가환도식
+$$
+\xymatrix{
+X^{d_1} \times_k X^{d_2} \ar[d] \ar@{=}[r] & X^{d_1 + d_2} \ar[d] \\
+\underline{\Hilbfunctor}^{d_1}_{X/k}
+\times_k
+\underline{\Hilbfunctor}^{d_2}_{X/k}
+\ar[r] &
+\underline{\Hilbfunctor}^{d_1 + d_2}_{X/k}
+}
+$$
+과 유한 국소 자유 사상들의 계수의 곱셈성에서 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-universal-object-hilb-d}
+$X$를\  Proposition \ref{proposition-hilb-d}에서처럼 체\  $k$ 위의 기하적으로
+기약인 매끄러운 고유 곡선이라 하고, $d \geq 0$이라 하자.
+보편 닫힌 대상은\  $\underline{\Hilbfunctor}^{d + 1}_{X/k}$ 위의 상대 유효
+약수
+$$
+D_{univ} \subset \underline{\Hilbfunctor}^{d + 1}_{X/k} \times_k X
+$$
+이다(Lemma \ref{lemma-divisors-on-curves}). 실제로\  $D_{univ}$는 스킴으로서\ 
+$\underline{\Hilbfunctor}^d_{X/k} \times_k X$와 동형이다. Lemma
+\ref{lemma-universal-object}의 증명을 보라. 특히\  $D_{univ}$는 유효\  Cartier
+약수이고, 가역 모듈\  $\mathcal{O}(D_{univ})$를 얻는다.
+$[D] \in \underline{\Hilbfunctor}^{d + 1}_{X/k}$가 차수\  $d + 1$인 유효\  Cartier 약수\ 
+$D \subset X$에 대응하는\  $k$-유리점을 나타내면,
+$\mathcal{O}(D_{univ})$를 섬유\  $[D] \times X$에 제한한 것은\ 
+$\mathcal{O}_X(D)$이다.
+\end{remark}
+
+
+\section{Picard 함자}
+\label{section-picard-functor}
+
+\noindent
+임의의 스킴\  $X$가 주어지면 가역\  $\mathcal{O}_X$-모듈들의 동형류의
+집합을\  $\Pic(X)$로 쓴다. Modules, Definition
+\ref{modules-definition-pic}을 보라. 스킴의 사상\  $f : X \to Y$가 주어지면
+당김은 군 준동형\  $\Pic(Y) \to \Pic(X)$를 정의한다. 대응\ 
+$X \leadsto \Pic(X)$는 스킴의 범주에서 아벨군의 범주로 가는 반변함자이다.
+이 함자는 표현 가능하지 않지만, 이 구성의 상대적인 변형은 때때로 표현
+가능함이 드러난다.
+
+\medskip\noindent
+스킴의 사상\  $f : X \to S$에 대한\  Picard 함자를 정의하자. 구성의 배후에
+있는 생각은 고차 직접상을 계산할 때\  fppf 위상을 사용하여 이 함자를 층\ 
+$R^1f_*\mathbf{G}_m$으로 취하는 것이다. 정의를 풀면 다음의 더 직접적인
+정의에 이른다.
+
+\begin{definition}
+\label{definition-picard-functor}
+$\Sch_{fppf}$를\  Topologies, Definition
+\ref{topologies-definition-big-small-fppf}에서와 같은 큰 사이트라 하자.
+$f : X \to S$를 이 사이트의 사상이라 하자. {\it Picard 함자}
+$\Picardfunctor_{X/S}$는 함자
+$$
+(\Sch/S)_{fppf} \longrightarrow \textit{Sets},\quad
+T \longmapsto \Pic(X_T)
+$$
+의\  fppf 층화이다. 이 함자가 표현 가능하면 이를 표현하는 스킴을\ 
+$\underline{\Picardfunctor}_{X/S}$로 쓴다.
+\end{definition}
+
+\noindent
+흔히 사용하는 사실은\  $T \in \Ob((\Sch/S)_{fppf})$이면\ 
+$\Picardfunctor_{X_T/T}$가\  $\Picardfunctor_{X/S}$를\ 
+$(\Sch/T)_{fppf}$에 제한한 것이라는 점이다. $S$ 위의 스킴\  $T$에서\ 
+$\Picardfunctor_{X/S}$가 갖는 값을 알아내는 일은 자명하지 않다.
+다음 보조정리가 이 작업에 도움이 된다.
+
+\begin{lemma}
+\label{lemma-flat-geometrically-connected-fibres}
+$f : X \to S$가\  Definition \ref{definition-picard-functor}에서와 같다고 하자.
+모든\  $T \in \Ob((\Sch/S)_{fppf})$에 대해\ 
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$가 동형사상이면, 모든\  $T$에
+대해
+$$
+0 \to \Pic(T) \to \Pic(X_T) \to \Picardfunctor_{X/S}(T)
+$$
+는 완전열이다.
+\end{lemma}
+
+\begin{proof}
+표기를 간단히 하기 위해\  $S$를\  $T$로, $X$를\  $X_T$로 바꾸어\ 
+$S = T$라고 가정해도 된다. $\mathcal{N}$을 가역\ 
+$\mathcal{O}_S$-모듈이라 하자. $f^*\mathcal{N} \cong \mathcal{O}_X$이면
+가정에 의해\ 
+$f_*f^*\mathcal{N} \cong f_*\mathcal{O}_X \cong \mathcal{O}_S$이다.
+$\mathcal{N}$은 국소적으로 자명하므로 표준 사상\ 
+$\mathcal{N} \to f_*f^*\mathcal{N}$은 국소적으로 동형사상이다
+(가정에 의해\  $\mathcal{O}_S \to f_*f^*\mathcal{O}_S$가 동형사상이기
+때문이다). 따라서\ 
+$\mathcal{N} \to f_*f^*\mathcal{N} \to \mathcal{O}_S$가 동형사상이고,
+$\mathcal{N}$은 자명하다. 이것으로 첫째 화살표가 단사임이 증명된다.
+
+\medskip\noindent
+$\mathcal{L}$을\  $\Pic(X) \to \Picardfunctor_{X/S}(S)$의 핵에 속하는 가역\ 
+$\mathcal{O}_X$-모듈이라 하자. $\mathcal{L}$을\  $X_{S_i}$로 당기면 자명한
+가역층이 되도록 하는\  fppf 덮개\  $\{S_i \to S\}$가 존재한다. 이를 자명화하는
+단면\  $s_i$를 택하자. 그러면\  $\text{pr}_0^*s_i$와\ 
+$\text{pr}_1^*s_j$는 둘 다\  $X_{S_i \times_S S_j}$ 위의\  $\mathcal{L}$을
+자명화하는 단면이므로, 다음 곱셈 가역원만큼 차이 난다.
+$$
+f_{ij} \in
+\Gamma(X_{S_i \times_S S_j}, \mathcal{O}_{X_{S_i \times_S S_j}}^*) =
+\Gamma(S_i \times_S S_j, \mathcal{O}_{S_i \times_S S_j}^*)
+$$
+(등식은 구조층의 직접상에 관한 가정에서 따른다.) 물론 이 원소들은\ 
+$S_i \times_S S_j \times_S S_k$ 위에서 코사이클 조건을 만족하므로,
+fppf 덮개\  $\{S_i \to S\}$에 대한 가역층의 하강 데이터를 정의한다.
+Descent, Proposition \ref{descent-proposition-fpqc-descent-quasi-coherent}에
+의해 가역\  $\mathcal{O}_S$-모듈\  $\mathcal{N}$과\  $S_i$ 위의 자명화들이
+존재하여 그에 딸린 하강 데이터가\  $\{f_{ij}\}$이다. 하강 데이터에서
+모듈로 가는 함자는 충실충만이므로(위에서 인용한 명제를 보라)
+$f^*\mathcal{N} \cong \mathcal{L}$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-geometrically-connected-fibres-with-section}
+$f : X \to S$가\  Definition \ref{definition-picard-functor}에서와 같다고 하자.
+$f$가 단면\  $\sigma$를 갖고, 모든\  $T \in \Ob((\Sch/S)_{fppf})$에 대해\ 
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$가 동형사상이라고 가정하자.
+그러면
+$$
+0 \to \Pic(T) \to \Pic(X_T) \to \Picardfunctor_{X/S}(T) \to 0
+$$
+은 분해 완전열이며, 분해는\ 
+$\sigma_T^* : \Pic(X_T) \to \Pic(T)$로 주어진다.
+\end{lemma}
+
+\begin{proof}
+$K(T) = \Ker(\sigma_T^* : \Pic(X_T) \to \Pic(T))$로 쓰자.
+$\sigma$는\  $f$의 단면이므로\  $\Pic(X_T)$는\  $\Pic(T)$와\  $K(T)$의 직합이다.
+따라서\  Lemma \ref{lemma-flat-geometrically-connected-fibres}에 의해 모든\ 
+$T$에 대해\  $K(T) \subset \Picardfunctor_{X/S}(T)$이다. 더욱이 구성에서\ 
+$\Picardfunctor_{X/S}$가 전층\  $K$의 층화임은 명백하다. 증명을 마치려면\ 
+$K$가\  fppf 덮개에 대한 층 조건을 만족함만 보이면 되며, 다음 문단에서
+이를 보인다.
+
+\medskip\noindent
+$\{T_i \to T\}$를\  fppf 덮개라 하자. 모든\  $i$, $j$에 대해\ 
+$K(T_i \times_T T_j)$의 같은 원소로 사상되는\  $K(T_i)$의 원소\ 
+$\mathcal{L}_i$들을 택하자. 각\  $i$에 대해 동형사상\ 
+$\alpha_i : \mathcal{O}_{T_i} \to \sigma_{T_i}^*\mathcal{L}_i$를 택하고,
+동형사상
+$$
+\varphi_{ij} :
+\mathcal{L}_i|_{X_{T_i \times_T T_j}}
+\longrightarrow
+\mathcal{L}_j|_{X_{T_i \times_T T_j}}
+$$
+을 택하자. 사상
+$$
+\alpha_j|_{T_i \times_T T_j} \circ
+\sigma_{T_i \times_T T_j}^*\varphi_{ij} \circ
+\alpha_i|_{T_i \times_T T_j} :
+\mathcal{O}_{T_i \times_T T_j} \to \mathcal{O}_{T_i \times_T T_j}
+$$
+이\  $1$에 의한 곱셈이 아니라 어떤\  $u_{ij}$에 의한 곱셈이면,
+$\varphi_{ij}$에\  $u_{ij}^{-1}$을 곱하여 이를 바로잡을 수 있다.
+이렇게 한 뒤 자기 사상
+$$
+\varphi_{ki}|_{X_{T_i \times_T T_j \times_T T_k}} \circ
+\varphi_{jk}|_{X_{T_i \times_T T_j \times_T T_k}} \circ
+\varphi_{ij}|_{X_{T_i \times_T T_j \times_T T_k}}
+\quad\text{on}\quad
+\mathcal{L}_i|_{X_{T_i \times_T T_j \times_T T_k}}
+$$
+을 생각하자. 이는 스킴\  $X_{T_i \times_T T_j \times_T T_k}$ 위의 어떤
+정칙함수\  $f_{ijk}$에 의한 곱셈으로 주어진다. $\varphi_{ij}$의 선택에 의해
+이 사상을\  $\sigma$로 당긴 것은\  $1$에 의한 곱셈이다. $X$ 위의 함수에 관한
+가정에 의해\  $f_{ijk} = 1$이다. 따라서\  fppf 덮개\ 
+$\{X_{T_i} \to X\}$에 대한 하강 데이터를 얻는다. Descent, Proposition
+\ref{descent-proposition-fpqc-descent-quasi-coherent}에 의해 가역\ 
+$\mathcal{O}_{X_T}$-모듈\  $\mathcal{L}$과 동형사상\ 
+$\alpha : \mathcal{O}_T \to \sigma_T^*\mathcal{L}$이 존재하여,
+$X_{T_i}$로 당기면\  $(\mathcal{L}_i, \alpha_i)$를 회복한다
+(작은 세부사항은 생략한다). 따라서\  $\mathcal{L}$은 원하는 대로\ 
+$K(T)$의 대상을 정의한다.
+\end{proof}
+
+
+
+\section{표현 가능성의 판정 조건}
+\label{section-representability}
+
+\noindent
+Picard 함자가 표현 가능함을 증명하기 위해 다음 판정 조건을 사용한다.
+
+\begin{lemma}
+\label{lemma-criterion}
+$k$를 체라 하고\  $G : (\Sch/k)^{opp} \to \textit{Groups}$를 함자라 하자.
+Schemes, Definition
+\ref{schemes-definition-representable-by-open-immersions}의 용어를 사용하여
+다음을 가정하자.
+\begin{enumerate}
+\item $G$는\  Zariski 위상에 대한 층 성질을 만족한다.
+\item 다음을 만족하는 부분함자\  $F \subset G$가 존재한다.
+\begin{enumerate}
+\item $F$는 표현 가능하다.
+\item $F \subset G$는 열린 몰입으로 표현 가능하다.
+\item $k$의 모든 체 확장\  $K$와\  $g \in G(K)$에 대해\ 
+$g'g \in F(K)$인\  $g' \in G(k)$가 존재한다.
+\end{enumerate}
+\end{enumerate}
+그러면\  $G$는\  $k$ 위의 군 스킴으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+이는\  Schemes, Lemma \ref{schemes-lemma-glue-functors}에서 따른다.
+실제로\  $I = G(k)$로 두고, $i = g' \in I$에 대해\  $F_i \subset G$를 다음
+부분함자로 잡는다. 이는\  $k$ 위의\  $T$에\  $g'g \in F(T)$인 원소\ 
+$g \in G(T)$들의 집합을 대응시킨다. $g'$에 의한 곱셈으로\ 
+$F_i \cong F$이다. 사상\  $F_i \to G$는\  $g'$에 의한 곱셈을 통해 사상\ 
+$F \to G$와 동형이므로 열린 몰입으로 표현 가능하다. 끝으로 가정
+(2)(c)에 의해 모임\  $(F_i)_{i \in I}$는\  $G$를 덮는다. 따라서 위에서
+언급한 보조정리를 적용할 수 있고 증명이 끝난다.
+\end{proof}
+
+
+
+\section{곡선의\  Picard 스킴}
+\label{section-picard-curve}
+
+\noindent
+이 절에서는\  $k$가 대수적으로 닫힌 체이고\  $X$가\  $k$ 위의 매끄러운
+사영곡선일 때\  Lemma \ref{lemma-criterion}을 적용하여\ 
+$\Picardfunctor_{X/k}$가 표현 가능함을 보인다. 이를 위해 스킴의 유도범주를
+다룬 장에서 전개한 코호몰로지와 기저변환의 일부를 사용한다.
+
+\begin{lemma}
+\label{lemma-check-conditions}
+$k$를 체라 하자. $X$를\  $k$-유리점을 갖는\  $k$ 위의 매끄러운 사영곡선이라
+하자. 그러면\  Lemma
+\ref{lemma-flat-geometrically-connected-fibres-with-section}의 가정들이
+만족된다.
+\end{lemma}
+
+\begin{proof}
+“$k$-유리점을 갖는다”는 말의 뜻은 정확히 구조 사상\ 
+$f : X \to \Spec(k)$가 단면을 갖는다는 것이므로, 첫째 조건이 확인된다.
+Varieties, Lemma \ref{varieties-lemma-regular-functions-proper-variety}에 의해\ 
+$k' = H^0(X, \mathcal{O}_X)$는\  $k$의 체 확장이다. $X$가\  $k$-유리점을
+가지므로\  $k$-대수 준동형\  $k' \to k$가 있고, 따라서\  $k' = k$이다.
+$k$가 체이므로 임의의 사상\  $T \to \Spec(k)$는 평탄하다. 따라서
+코호몰로지와 기저변환
+(Cohomology of Schemes, Lemma
+\ref{coherent-lemma-flat-base-change-cohomology})에 의해\ 
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$는 동형사상이다.
+이것으로 증명이 끝난다.
+\end{proof}
+
+\noindent
+$X$를\  $k$-유리점\  $\sigma$를 갖는 체\  $k$ 위의 매끄러운 사영곡선이라 하자.
+그러면 함자
+$$
+\Picardfunctor_{X/k, \sigma} : (\Sch/k)^{opp} \longrightarrow \textit{Ab},\quad
+T \longmapsto \Ker(\Pic(X_T) \xrightarrow{\sigma_T^*} \Pic(T))
+$$
+는\  Lemma \ref{lemma-check-conditions}와\ 
+\ref{lemma-flat-geometrically-connected-fibres-with-section}에 의해\ 
+$(\Sch/k)_{fppf}$ 위에서\  $\Picardfunctor_{X/k}$와 동형이다.
+따라서\  $\Picardfunctor_{X/k, \sigma}$가 표현 가능함을 보이면 충분하다.
+“$\mathcal{L} \in \Picardfunctor_{X/k, \sigma}(T)$”라는 표기는\  $T$가\ 
+$k$ 위의 스킴이고\  $\mathcal{L}$이 가역\  $\mathcal{O}_{X_T}$-모듈이며,
+$\sigma_T$를 통해\  $T$에 제한한 것이\  $\mathcal{O}_T$와 동형임을 뜻한다.
+
+\begin{lemma}
+\label{lemma-define-open}
+$k$를 체라 하고, $X$를\  $k$-유리점\  $\sigma$를 갖는\  $k$ 위의 매끄러운
+사영곡선이라 하자. $k$ 위의 스킴\  $T$에 대해\ 
+$F(T) \subset \Picardfunctor_{X/k, \sigma}(T)$를\  $Rf_{T, *}\mathcal{L}$이 차수\  $0$에 놓인
+가역\  $\mathcal{O}_T$-모듈과 동형인\  $\mathcal{L}$들의 부분집합으로 두자.
+그러면\  $F \subset \Picardfunctor_{X/k, \sigma}$는 부분함자이고 이 포함은
+열린 몰입으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-open-where-cohomology-in-degree-i-rank-r-geometric}을\ 
+$i = 0$, $r = 1$로 적용하고\  Schemes, Definition
+\ref{schemes-definition-representable-by-open-immersions}을 적용하면 바로
+따른다.
+\end{proof}
+
+\noindent
+계속하기 위해 다음 정의를 두는 것이 편리하다.
+
+\begin{definition}
+\label{definition-genus}
+$k$를 체라 하고\  $X$를\  $k$ 위의 매끄럽고 사영이며 기하적으로 기약인
+곡선이라 하자. $X$의 {\it 종수}는\ 
+$g = \dim_k H^1(X, \mathcal{O}_X)$이다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-open-representable}
+$k$를 체라 하고, $X$를\  $k$-유리점\  $\sigma$를 갖는\  $k$ 위의 종수\  $g$인
+매끄러운 사영곡선이라 하자. Lemma \ref{lemma-define-open}에서 정의한 열린
+부분함자\  $F$는\  $\underline{\Hilbfunctor}^g_{X/k}$의 열린 부분스킴으로
+표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+이 증명에서 장식 없는 모든 곱은\  $\Spec(k)$ 위에서 취한다.
+Proposition \ref{proposition-hilb-d}에 의해 스킴\ 
+$H = \underline{\Hilbfunctor}^g_{X/k}$가 존재한다. 보편 약수\ 
+$D_{univ} \subset H \times X$와 이에 딸린 가역층\ 
+$\mathcal{O}(D_{univ})$를 생각하자. Remark
+\ref{remark-universal-object-hilb-d}를 보라. $\sigma_H : H \to H \times X$에
+의한 당김을 텐서하여 조정하면
+$$
+\mathcal{L}_H =
+\mathcal{O}(D_{univ})
+\otimes_{\mathcal{O}_{H \times X}}
+\text{pr}_H^*\sigma_H^*\mathcal{O}(D_{univ})^{\otimes -1}
+\in
+\Picardfunctor_{X/k, \sigma}(H)
+$$
+를 얻는다. 요네다 보조정리(Categories, Lemma
+\ref{categories-lemma-yoneda})에 의해 가역층\  $\mathcal{L}_H$는 자연변환
+$$
+h_H \longrightarrow \Picardfunctor_{X/k, \sigma}
+$$
+을 정의한다. $F$가 열린 부분함자이므로\ 
+$\mathcal{L}_H|_{W \times X}$가\  $F(W)$에 속하는 최대 열린집합\ 
+$W \subset H$가 존재한다. 물론 이 열린집합은 사상\  $H \times X \to H$와
+층\  $\mathcal{F} = \mathcal{O}(D_{univ})$에 대해\  $i = 0$, $r = 1$로\ 
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-open-where-cohomology-in-degree-i-rank-r-geometric}에서
+구성한 열린 부분스킴과 다르지 않다. 요네다 보조정리를 다시 적용하면
+가환도식
+$$
+\xymatrix{
+h_W \ar[d] \ar[r] & F \ar[d] \\
+h_H \ar[r] & \Picardfunctor_{X/k, \sigma}
+}
+$$
+을 얻는다. 증명을 마치려면 위쪽 수평 화살표가 동형사상임을 보이면 된다.
+
+\medskip\noindent
+$\mathcal{L} \in F(T) \subset \Picardfunctor_{X/k, \sigma}(T)$라 하자.
+$Rf_{T, *}\mathcal{L} \cong \mathcal{N}[0]$인 가역\ 
+$\mathcal{O}_T$-모듈\  $\mathcal{N}$을 택하자. 수반 사상
+$$
+f_T^*\mathcal{N} \longrightarrow \mathcal{L}
+\quad\text{corresponds to a section }s\text{ of}\quad
+\mathcal{L} \otimes f_T^*\mathcal{N}^{\otimes -1}
+$$
+을\  $X_T$ 위에서 생각하자. 주장: $s$의 영점 스킴은\  $(T \times X)/T$ 위의
+상대 유효\  Cartier 약수\  $D$이며\  $T$ 위에서 계수\  $g$인 유한 국소 자유이다.
+
+\medskip\noindent
+주장을 인정하고 보조정리의 증명을 마치자. $D$는 사상\ 
+$m : T \to H$를 정의하며, $D$는\  $D_{univ}$의 당김이다. 따라서
+$$
+(m \times \text{id}_X)^*\mathcal{O}(D_{univ}) \cong
+\mathcal{O}_{T \times X}(D)
+$$
+이다. 또한\ 
+$\mathcal{O}_{T \times X}(D) \cong
+\mathcal{L} \otimes f_T^*\mathcal{N}^{\otimes -1}$이므로\ 
+$(m \times \text{id}_X)^*\mathcal{L}_H$와\  $\mathcal{L}$은\  $T$ 위의 가역
+모듈을 당긴 것만큼 차이 난다. 이것으로\  $m : T \to H$가 위의 열린집합\ 
+$W \subset H$를 거쳐 인수분해됨을 알 수 있다. 더욱이 위와 같이\ 
+$\sigma_T$에 의한 당김으로 조정하면 이 가역 모듈들이\ 
+$\Picardfunctor_{X/k, \sigma}(T)$의 같은 원소를 정의함이 따른다.
+요네다 보조정리를 사용하여 도식을 추적하면\  $m \in h_W(T)$가\ 
+$\mathcal{L} \in F(T)$로 사상됨을 알 수 있다. 규칙\ 
+$F(T) \to h_W(T)$, $\mathcal{L} \mapsto m$이 위 함자 변환의 역을
+정의한다는 확인은 생략한다.
+
+\medskip\noindent
+주장의 증명. $D$는\  $T \times X$의 국소 주 아이디얼 닫힌 부분스킴이므로,
+$T$ 위의\  $D$의 섬유들이 유효\  Cartier 약수임을 보이면 충분하다.
+Lemma \ref{lemma-divisors-on-curves}와\  Divisors, Lemma
+\ref{divisors-lemma-fibre-Cartier}를 보라. $\mathcal{L}$의 코호몰로지를 취하는
+것은 기저변환과 가환하므로(Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-flat-proper-perfect-direct-image-general}), $K/k$가 체
+확장인\  $T = \Spec(K)$의 경우로 환원된다. 그러면\  $\mathcal{L}$은\  $X_K$ 위의
+가역층이고\  $H^0(X_K, \mathcal{L}) = K$,
+$H^1(X_K, \mathcal{L}) = 0$이다. 따라서
+$$
+\deg(\mathcal{L}) = \chi(X_K, \mathcal{L}) - \chi(X_K, \mathcal{O}_{X_K})
+= 1 - (1 - g) = g
+$$
+이다. Varieties, Definition
+\ref{varieties-definition-degree-invertible-sheaf}를 보라. 증명을 마치려면\ 
+$\mathcal{L}$의 영이 아닌 단면이\  $X_K$ 위의 유효\  Cartier 약수를 정의함을
+보여야 한다. 이는 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-twist-with-general-divisor}
+$k$를 분리폐체라 하고, $X$를\  $k$ 위의 종수\  $g$인 매끄러운 사영곡선이라
+하자. $K/k$를 체 확장이라 하고\  $\mathcal{L}$을\  $X_K$ 위의 가역층이라 하자.
+그러면\  $X$ 위의 가역층\  $\mathcal{L}_0$가 존재하여\ 
+$\dim_K H^0(X_K,
+\mathcal{L} \otimes_{\mathcal{O}_{X_K}} \mathcal{L}_0|_{X_K}) = 1$이고\ 
+$\dim_K H^1(X_K,
+\mathcal{L} \otimes_{\mathcal{O}_{X_K}} \mathcal{L}_0|_{X_K}) = 0$이다.
+\end{lemma}
+
+\begin{proof}
+이 증명은\  Varieties, Lemma
+\ref{varieties-lemma-general-degree-g-line-bundle}의 증명을 변형한 것이다.
+독자는 먼저 그 증명을 읽어 보기를 권한다.
+
+\medskip\noindent
+먼저 풍부한 가역층\  $\mathcal{L}_0$를 택하고, 어떤\  $n \gg 0$에 대해\ 
+$\mathcal{L}$을\ 
+$\mathcal{L} \otimes_{\mathcal{O}_{X_K}} \mathcal{L}_0^{\otimes n}|_{X_K}$로
+바꾼다. 그 결과\  $H^0(X_K, \mathcal{L}) \not = 0$이고\ 
+$H^1(X_K, \mathcal{L}) = 0$이라고 가정할 수 있다. 실제로 소멸은\ 
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-vanshing-gives-ample}에서 얻고, 텐서곱의 차수가\ 
+$\gg 0$이므로 비소멸을 얻는다. 이제\ 
+$t = \dim_K H^0(X_K, \mathcal{L})$에 관한 하강 귀납법으로 증명을
+마친다. 기초 단계\  $t = 1$은 자명하다. $t > 1$이라고 가정하자.
+
+\medskip\noindent
+$X$의\  $k$-유리점\  $x$에 대해 역상\  $x_K$는\  $X_K$의\  $K$-유리점임을
+관찰하자. 또한\  Varieties, Lemma
+\ref{varieties-lemma-smooth-separable-closed-points-dense}에 의해\ 
+$k$-유리점은 무한히 많다. 따라서 점들\  $x_K$는\  $X_K$ 안에서\  Zariski
+조밀한 점들의 모임을 이룬다.
+
+\medskip\noindent
+$s \in H^0(X_K, \mathcal{L})$를 영이 아니라고 하자. 앞 문단에서\ 
+$s$가\  $x_K$에서 영이 아닌\  $k$-유리점\  $x$가 존재함을 알 수 있다.
+$\mathcal{I}$를\  Varieties, Lemma
+\ref{varieties-lemma-regular-point-on-curve}에서와 같은\ 
+$i : x_K \to X_K$의 아이디얼층이라 하자. 짧은 완전열
+$$
+0 \to \mathcal{I} \otimes_{\mathcal{O}_{X_K}} \mathcal{L} \to
+\mathcal{L} \to i_*i^*\mathcal{L} \to 0
+$$
+을 보자. $H^0(X_K, i_*i^*\mathcal{L}) = H^0(x_K, i^*\mathcal{L})$은\ 
+$K$ 위에서 차원\  $1$이다. $s$가\  $x$에서 영이 아니므로
+$$
+H^0(X_K, \mathcal{L}) \longrightarrow H^0(X, i_*i^*\mathcal{L})
+$$
+는 전사이다. 따라서\ 
+$\dim_K H^0(X_K, \mathcal{I} \otimes_{\mathcal{O}_{X_K}} \mathcal{L}) = t - 1$이다.
+끝으로 코호몰로지의 긴 완전열에 의해서도\ 
+$H^1(X_K, \mathcal{I} \otimes_{\mathcal{O}_{X_K}} \mathcal{L}) = 0$임을
+알 수 있으므로 귀납 단계의 증명이 끝난다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-pic-curve}
+$k$를 분리폐체라 하고\  $X$를\  $k$ 위의 매끄러운 사영곡선이라 하자.
+Picard 함자\  $\Picardfunctor_{X/k}$는 표현 가능하다.
+\end{proposition}
+
+\begin{proof}
+$k$가 분리폐체이므로\  $X$의\  $k$-유리점\  $\sigma$가 존재한다. Varieties,
+Lemma \ref{varieties-lemma-smooth-separable-closed-points-dense}를 보라.
+위에서 논의했듯이\  $\sigma$를 따라 자명한 가역 모듈들을 분류하는 함자\ 
+$\Picardfunctor_{X/k, \sigma}$가 표현 가능함을 보이면 충분하다.
+이를 위해\  Lemma \ref{lemma-criterion}의 조건 (1), (2)(a), (2)(b),
+(2)(c)를 확인한다.
+
+\medskip\noindent
+함자\  $\Picardfunctor_{X/k, \sigma}$는\  $\Picardfunctor_{X/k}$와 동형이므로\ 
+fppf 위상에 대한 층 조건을 만족한다. 더 정확히는\  Lemma
+\ref{lemma-flat-geometrically-connected-fibres-with-section}의 증명에서\ 
+$\Picardfunctor_{X/k, \sigma}$에 대한 이 층 조건을 보였다고 해야 하며,
+이 보조정리는\  Lemma \ref{lemma-check-conditions}에
+의해 적용할 수 있다.
+이것으로 조건 (1)이 증명된다.
+
+\medskip\noindent
+부분함자로는\  Lemma \ref{lemma-define-open}에서 정의한\  $F$를 사용한다.
+조건 (2)(b)가 따른다. 조건 (2)(a)는\  Lemma
+\ref{lemma-open-representable}이다. 조건 (2)(c)는\  Lemma
+\ref{lemma-twist-with-general-divisor}이다.
+\end{proof}
+
+\noindent
+실제로 위의 증명은 더 많은 정보를 주며, 이를 여기에 모은다.
+
+\begin{lemma}
+\label{lemma-picard-pieces}
+$k$를 분리폐체라 하고, $X$를\  $k$ 위의 종수\  $g$인 매끄러운 사영곡선이라
+하자.
+\begin{enumerate}
+\item $\underline{\Picardfunctor}_{X/k}$는\  $g$차원의 매끄러운 고유
+다양체들\  $\underline{\Picardfunctor}^d_{X/k}$의 서로소 합이다.
+\item $\underline{\Picardfunctor}^d_{X/k}$의\  $k$-점들은 차수\  $d$인 가역\ 
+$\mathcal{O}_X$-모듈들에 대응한다.
+\item $\underline{\Picardfunctor}^0_{X/k}$는 열린 닫힌 부분군 스킴이다.
+\item $d \geq 0$에 대해 표준 사상\ 
+$\gamma_d :
+\underline{\Hilbfunctor}^d_{X/k} \to \underline{\Picardfunctor}^d_{X/k}$가 있다.
+\item 사상\  $\gamma_d$들은\  $d \geq g$일 때 전사이고\ 
+$d \geq 2g - 1$일 때 매끄럽다.
+\item 사상\ 
+$\underline{\Hilbfunctor}^g_{X/k} \to \underline{\Picardfunctor}^g_{X/k}$는
+쌍유리이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X$의\  $k$-유리점\  $\sigma$를 택하자. $\Picardfunctor_{X/k}$가 함자\ 
+$\Picardfunctor_{X/k, \sigma}$와 동형임을 상기하자. Derived Categories of
+Schemes, Lemma \ref{perfect-lemma-chi-locally-constant-geometric}에 의해 모든\ 
+$d \in \mathbf{Z}$에 대해 열린 부분함자
+$$
+\Picardfunctor^d_{X/k, \sigma} \subset \Picardfunctor_{X/k, \sigma}
+$$
+가 존재하며, $k$ 위의 스킴\  $T$에서 그 값은\ 
+$\chi(X_t, \mathcal{L}_t) = d + 1 - g$인\ 
+$\mathcal{L} \in \Picardfunctor_{X/k, \sigma}(T)$들로 이루어진다. 더욱이\ 
+fppf 층으로서
+$$
+\Picardfunctor_{X/k, \sigma} =
+\coprod\nolimits_{d \in \mathbf{Z}} \Picardfunctor^d_{X/k, \sigma}
+$$
+이다. 따라서\  Proposition \ref{proposition-pic-curve}에 의해 존재하는 스킴\ 
+$\underline{\Picardfunctor}_{X/k}$는 대응하는 분해
+$$
+\underline{\Picardfunctor}_{X/k, \sigma} =
+\coprod\nolimits_{d \in \mathbf{Z}} \underline{\Picardfunctor}^d_{X/k, \sigma}
+$$
+를 가지며, $\underline{\Picardfunctor}^d_{X/k, \sigma}$의 점들은\  $X$ 위의
+차수\  $d$인 가역 모듈의 동형류에 대응한다.
+
+\medskip\noindent
+$d \geq 0$을 고정하자.
+$\underline{\Hilbfunctor}^d_{X/k} \times_k X$ 위의 가역층\ 
+$\mathcal{O}(D_{univ})$(Remark \ref{remark-universal-object-hilb-d})와
+요네다 보조정리(Categories, Lemma \ref{categories-lemma-yoneda})에서 사상
+$$
+\gamma_d :
+\underline{\Hilbfunctor}^d_{X/k}
+\longrightarrow
+\underline{\Picardfunctor}^d_{X/k}
+$$
+를 얻는다. Proposition \ref{proposition-pic-curve}와\  Lemma
+\ref{lemma-open-representable}에서\  $X/k$의\  Picard 함자의 표현 가능성을
+증명한 방식에 따르면\  $\gamma_g$는\ 
+$\underline{\Hilbfunctor}^g_{X/k}$의 영이 아닌 열린집합 위에서 열린 몰입을
+유도한다. 더욱이 그 증명에 따르면 군 스킴\ 
+$\underline{\Picardfunctor}_{X/k}$의\  $k$-유리점들로 이 열린집합을 평행이동한
+것들이 열린 덮개를 정의한다. $\underline{\Hilbfunctor}^g_{X/K}$는\  $k$ 위의
+차원\  $g$인 매끄러운 스킴이므로(Proposition \ref{proposition-hilb-d}),
+군 스킴\  $\underline{\Picardfunctor}_{X/k}$는\  $k$ 위에서 차원\  $g$인
+매끄러운 스킴이라는 결론을 얻는다.
+
+\medskip\noindent
+Groupoids, Lemma \ref{groupoids-lemma-group-scheme-over-field-separated}에 의해\ 
+$\underline{\Picardfunctor}_{X/k}$는 분리이다. 따라서 모든\  $d \geq 0$에
+대해\  $\gamma_d$의 상은\  $k$ 위의 고유 다양체이다
+(Morphisms, Lemma \ref{morphisms-lemma-scheme-theoretic-image-is-proper}).
+
+\medskip\noindent
+$d \geq g$라 하자. 임의의 체 확장\  $K/k$와 차수\  $d$인 가역\ 
+$\mathcal{O}_{X_K}$-모듈\  $\mathcal{L}$에 대해\ 
+$\chi(X_K, \mathcal{L}) = d + 1 - g > 0$이다. 따라서\  $\mathcal{L}$은 영이
+아닌 단면을 가지며, 어떤 차수\  $d$인 약수\  $D \subset X_K$에 대해\ 
+$\mathcal{L} = \mathcal{O}_{X_K}(D)$라는 결론을 얻는다. 그러므로\ 
+$\gamma_d$는 전사이다.
+
+\medskip\noindent
+위 사실들을 종합하면\  $d \geq g$일 때\ 
+$\underline{\Picardfunctor}^d_{X/k}$는 고유이다. 이것으로 (2)의 증명이
+끝난다. 실제로\  $d \geq g$일 때\  $\underline{\Picardfunctor}^d_{X/k}$가
+고유임을 알았고, 그러면 평행이동에 의해 모든\ 
+$\underline{\Picardfunctor}^d_{X/k}$가 고유이다.
+
+\medskip\noindent
+$d \geq 2g - 1$일 때\  $\gamma_d$가 매끄러움만 증명하면 된다.
+차수\  $d$인 가역\  $\mathcal{O}_X$-모듈\  $\mathcal{L}$을 생각하자.
+$\mathcal{L}$에 대응하는 점의 섬유는 자연스러운 스킴 구조와 함께
+$$
+Z = \{D \subset X \mid \mathcal{O}_X(D) \cong \mathcal{L}\} \subset
+\underline{\Hilbfunctor}^d_{X/k}
+$$
+이다. 임의의 동형사상\  $\mathcal{O}_X(D) \to \mathcal{L}$은 영이 아닌
+스칼라를 곱하는 것까지 잘 정의되므로, 표준 단면\ 
+$1 \in \mathcal{O}_X(D)$은 영이 아닌 스칼라를 곱하는 것까지 잘 정의된
+단면\  $s \in \Gamma(X, \mathcal{L})$로 사상된다. 이로써 사상
+$$
+Z \longrightarrow
+\text{Proj}(\text{Sym}(\Gamma(X, \mathcal{L})^*))
+$$
+을 얻는다(우리의 규약 때문에 쌍대를 취한다). 이 사상은 동형사상이다.
+실제로\  $\mathcal{L}$의 단면이 주어지면 이에 딸린 유효\  Cartier 약수를
+취하여 표시된 사상의 역을 구성할 수 있다. 정확한 정식화와 증명은
+생략한다. Varieties, Lemma
+\ref{varieties-lemma-vanishing-degree-2g-and-1-line-bundle}에 의해 차수\ 
+$d \geq 2g - 1$인 모든\  $\mathcal{L}$에 대해\ 
+$\dim H^0(X, \mathcal{L}) = d + 1 - g$이므로\ 
+$\text{Proj}(\text{Sym}(\Gamma(X, \mathcal{L})^*))
+\cong \mathbf{P}^{d - g}_k$이다. 따라서\ 
+$\dim(Z) = \dim(\mathbf{P}^{d - g}_k) = d - g$이다.
+그러므로 사상\  $\gamma_d$의 모든 섬유의 차원은\ 
+$\underline{\Hilbfunctor}^d_{X/k}$와\ 
+$\underline{\Picardfunctor}^d_{X/k}$의 차원의 차이와 같다.
+Algebra, Lemma \ref{algebra-lemma-CM-over-regular-flat}에 의해\ 
+$\gamma_d$는 평탄하다. 또한 섬유들이 매끄러우므로\  Morphisms, Lemma
+\ref{morphisms-lemma-smooth-flat-smooth-fibres}에 의해\  $\gamma_d$는
+매끄럽다.
+\end{proof}
+
+
+
+
+
+\section{Picard 군에 관한 몇 가지 주의}
+\label{section-remarks-picard}
+
+\noindent
+이 절은\  Varieties, Section \ref{varieties-section-picard-groups}의 논의를
+이어 가며, Algebraic Curves, Section \ref{curves-section-torsion-in-pic}에서
+다시 계속된다.
+
+\begin{lemma}
+\label{lemma-pic-descends}
+$k$를 체라 하고, $X$를\  $H^0(X, \mathcal{O}_X) = k$인\  $k$ 위의
+준콤팩트 준분리 스킴이라 하자. $X$가\  $k$-유리점을 가지면 임의의\  Galois
+확장\  $k'/k$에 대해
+$$
+\Pic(X) = \Pic(X_{k'})^{\text{Gal}(k'/k)}
+$$
+이다. 또한\  $\Pic(X_{k'})$ 위의\  $\text{Gal}(k'/k)$의 작용은 연속이다.
+\end{lemma}
+
+\begin{proof}
+$\text{Gal}(k'/k) = \text{Aut}(k'/k)$이므로 이는\  $\Spec(k')$ 위에
+(오른쪽에서) 작용하고, 따라서\ 
+$X_{k'} = X \times_{\Spec(k)} \Spec(k')$ 위에 (오른쪽에서) 작용한다.
+$\Pic(-)$가 반변함자이므로 이는\  $\Pic(X_{k'})$ 위에 (왼쪽에서) 작용한다.
+$k'/k$가 무한\  Galois 확장이면\  Fields, Lemma
+\ref{fields-lemma-infinite-galois-limit}에서처럼 유한\  Galois 확장들의
+여과쌍극한으로\  $k' = \colim k'_\lambda$라 쓴다. 그러면\ 
+$X_{k'} = \lim X_{k_\lambda}$이고
+(Limits, Section \ref{limits-section-limits}에서처럼), Limits, Lemma
+\ref{limits-lemma-descend-invertible-modules}에 의해
+$$
+\Pic(X_{k'}) = \colim \Pic(X_{k_\lambda})
+$$
+를 얻는다. 더욱이 이 아벨군 계에서 전이 사상들은\  Varieties, Lemma
+\ref{varieties-lemma-change-fields-pic}에 의해 단사이다. 따라서\ 
+$\Pic(X_{k'})$의 모든 원소는 열린 부분군들 중 하나인\ 
+$\text{Gal}(k'/k_\lambda)$에 의해 고정되며, 이는 정확히 그 작용이
+연속이라는 뜻이다. 전이 사상들의 단사성에 의해 고정점에 관한 명제는\ 
+$k'/k$가 유한\  Galois인 경우에 증명하면 충분하다.
+
+\medskip\noindent
+$k'/k$가\  Galois 군\  $G = \text{Gal}(k'/k)$를 갖는 유한\  Galois 확장이라고
+가정하자. $\mathcal{L}$을\  $G$에 의해 고정되는\ 
+$\Pic(X_{k'})$의 원소라 하자. Galois 하강(Descent, Lemma
+\ref{descent-lemma-galois-descent})을 사용하여\  $\mathcal{L}$이\  $X$ 위의
+가역층을 당긴 것임을 증명하겠다.
+$f_\sigma = \text{id}_X \times \Spec(\sigma) : X_{k'} \to X_{k'}$이고,
+$\sigma$가\  $f_\sigma$에 의한 당김으로\  $\Pic(X_{k'})$ 위에 작용함을
+상기하자. $\mathcal{L}$이\  $G$-작용에 의해 고정되므로 각\ 
+$\sigma \in G$에 대해 동형사상\ 
+$\varphi_\sigma : \mathcal{L} \to f_\sigma^*\mathcal{L}$을 택할 수 있다.
+문제는 코사이클 조건\ 
+$\varphi_{\sigma\tau} = f_\sigma^*\varphi_\tau \circ \varphi_\sigma$가
+성립하도록\  $\varphi_\sigma$를 택할 수 있는지 아직 모른다는 점이다.
+이것이 가능함을 보이기 위해\  $X$가\  $k$-유리점\  $x \in X(k)$를 갖는다는
+사실을 사용한다. 물론\  $x$는 마찬가지로 모든\  $\sigma$에 대해\ 
+$f_\sigma$에 의해 고정되는\  $k'$-유리점\  $x' \in X_{k'}$를 정한다.
+$x'$에서\  $\mathcal{L}$의 섬유의 영이 아닌 원소\  $s$를 택하자. 이 섬유는\ 
+$1$차원\  $k' = \kappa(x')$-벡터공간
+$$
+\mathcal{L}_{x'} \otimes_{\mathcal{O}_{X_{k'}, x'}} \kappa(x').
+$$
+이다. 그러면\  $f_\sigma^*s$는\  $x'$에서\  $f_\sigma^*\mathcal{L}$의 섬유의
+영이 아닌 원소이다. $\varphi_\sigma$에\  $(k')^*$의 원소를 곱할 수 있으므로\ 
+$\varphi_\sigma$가\  $s$를\  $f_\sigma^*s$로 보낸다고 가정해도 된다.
+그러면\  $\varphi_{\sigma\tau}$와\ 
+$f_\sigma^*\varphi_\tau \circ \varphi_\sigma$는 둘 다\  $s$를\ 
+$f_{\sigma\tau}^*s = f_\tau^*f_\sigma^*s$로 보낸다.
+$H^0(X_{k'}, \mathcal{O}_{X_{k'}}) = k'$이므로 이 두 동형사상은 같아야 한다
+(하나는 다른 것에 전역 가역원을 곱한 것이고\  $x'$에서 서로 같기 때문이다).
+이것으로 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-torsion-descends}
+$k$를 표수가\  $p > 0$인 체라 하자. $X$를\ 
+$H^0(X, \mathcal{O}_X) = k$인\  $k$ 위의 준콤팩트 준분리 스킴이라 하자.
+$n$을\  $p$와 서로소인 정수라 하자. 그러면 임의의 순수 비분리 확장\ 
+$k'/k$에 대해 사상
+$$
+\Pic(X)[n] \longrightarrow \Pic(X_{k'})[n]
+$$
+은 전단사이다.
+\end{lemma}
+
+\begin{proof}
+먼저\  Varieties, Lemma \ref{varieties-lemma-change-fields-pic}에 의해 사상\ 
+$\Pic(X) \to \Pic(X_{k'})$가 단사임을 관찰하자. 따라서 보조정리의 사상이
+전사임을 보이면 된다. $\mathcal{L}$을\  $\Pic(X_{k'})$에서 위수가\  $n$의
+약수인 가역\  $\mathcal{O}_{X_{k'}}$-모듈이라 하고, 가역 모듈의 동형사상\ 
+$\alpha : \mathcal{L}^{\otimes n} \to \mathcal{O}_{X_{k'}}$를 택하자.
+쌍\  $(\mathcal{L}, \alpha)$을\  $X$로 하강시킬 수 있음을 증명하겠다.
+
+\medskip\noindent
+$A = k' \otimes_k k'$로 두자. $k'/k$가 순수 비분리이므로 곱셈 사상\ 
+$A \to k'$의 핵은\  $A$의 국소 멱영 아이디얼\  $I$이다. 등식
+$$
+X_A = X \times_{\Spec(k)} \Spec(A) = X_{k'} \times_X X_{k'}
+$$
+과 두 사영\  $\text{pr}_i : X_A \to X_{k'}$, $i = 0, 1$을 생각하자.
+두 사영은\  $A/I$ 위에서 일치한다. 따라서 가역 모듈\ 
+$\mathcal{L}_i = \text{pr}_i^*\mathcal{L}$은 닫힌 부분스킴\ 
+$X_{A/I} = X_{k'}$ 위에서 일치한다. $X_{A/I} \to X_A$는 두꺼워짐이고\ 
+$\mathcal{L}_i$들은\  $n$-꼬임이므로\  More on Morphisms, Lemma
+\ref{more-morphisms-lemma-torsion-pic-thickening}에 의해 동형사상\ 
+$\varphi : \mathcal{L}_0 \to \mathcal{L}_1$이 존재한다.
+$\varphi$를\  $I$로 나눈 뒤 항등사상으로 환원되도록 택할 수 있다.
+실제로\  $H^0(X, \mathcal{O}_X) = k$이므로\  Cohomology of Schemes, Lemma
+\ref{coherent-lemma-flat-base-change-cohomology}에 의해\ 
+$H^0(X_{k'}, \mathcal{O}_{X_{k'}}) = k'$이고, $A \to k'$는 전사이므로\ 
+$\varphi$에\  $A$의 적절한 원소를 곱하여 조정할 수 있다. 사상
+$$
+\lambda : \mathcal{O}_{X_A}
+\xrightarrow{\text{pr}_0^*\alpha^{-1}}
+\mathcal{L}_0^{\otimes n}
+\xrightarrow{\varphi^{\otimes n}}
+\mathcal{L}_1^{\otimes n}
+\xrightarrow{\text{pr}_0^*\alpha}
+\mathcal{O}_{X_A}
+$$
+을 생각하자. $H^0(X_A, \mathcal{O}_{X_A}) = A$이므로(위와 같은 참조)
+$\lambda$를\  $A$의 원소로 볼 수 있다. $\varphi$가\  $I$로 나눈 뒤
+항등사상으로 환원되므로\  $\lambda = 1 \bmod I$이다. 그러면\  $1 + I$ 안에\ 
+$\lambda$의 유일한\  $n$제곱근이 존재하고
+(Algebra, Lemma \ref{algebra-lemma-lift-nth-roots}), 그 역을\ 
+$\varphi$에 곱하면\  $\lambda = 1$을 얻는다.
+$(\mathcal{L}, \varphi)$가\  fpqc 덮개\  $\{X_{k'} \to X\}$에 대한 하강
+데이터라고 주장한다(Descent, Definition
+\ref{descent-definition-descent-datum-quasi-coherent}). 이것이 참이면\ 
+Descent, Proposition \ref{descent-proposition-fpqc-descent-quasi-coherent}에
+의해\  $\mathcal{L}$은 가역\  $\mathcal{O}_X$-모듈\  $\mathcal{N}$을 당긴 것이다.
+Picard 군 위 사상의 단사성에 의해\  $\mathcal{N}$은\  $\Pic(X)$에서\ 
+$\mathcal{L}$과 같은 위수를 갖는 꼬임 원소이다.
+
+\medskip\noindent
+주장의 증명. 다음 등식을 확인해야 한다.
+$$
+\text{pr}_{12}^*\varphi \circ
+\text{pr}_{01}^*\varphi =
+\text{pr}_{02}^*\varphi
+\quad\text{on}\quad
+X_{k'} \times_X X_{k'} \times_X X_{k'} = X_{k' \otimes_k k' \otimes_k k'}
+$$
+앞에서처럼 대각 사상\ 
+$\Delta : X_{k'} \to X_{k' \otimes_k k' \otimes_k k'}$는 두꺼워짐이다.
+등호의 좌변과 우변은\ 
+$p_0^*\alpha$ 및\  $p_2^*\alpha$와 양립하는 사상\ 
+$a, b : p_0^*\mathcal{L} \to p_2^*\mathcal{L}$이다. 여기서\ 
+$p_i : X_{k' \otimes_k k' \otimes_k k'} \to X_{k'}$는 사영 사상이다.
+끝으로\  $a, b$는\  $\Delta$로 당기면 같은 사상이 된다. 아핀 국소적으로
+(국소 자명화 안에서) 이는\  $a, b$가 다음 성질을 갖는 가역함수에 의한
+곱셈으로 주어진다는 뜻이다. 이 함수들은 어떤 국소 멱영 아이디얼로 나누면
+같은 함수로 환원되고, 같은\  $n$제곱을 갖는다. 따라서\  Algebra, Lemma
+\ref{algebra-lemma-lift-nth-roots}에 의해 이 함수들은 서로 같다.
+\end{proof}
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

@@ -1,0 +1,2175 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{부트스트랩}
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 앞 절들에서 마련한 내용을 사용하여, 스킴의 범주 위 집합의
+준층이 대수 공간이 되는 판정 기준을 제시한다. 이 내용 가운데 일부는
+Artin의 연구에서 비롯한다. 다음을 참조하라:
+\cite{ArtinI}, \cite{ArtinII},
+\cite{Artin-Theorem-Representability},
+\cite{Artin-Construction-Techniques},
+\cite{Artin-Algebraic-Spaces},
+\cite{Artin-Algebraic-Approximation},
+\cite{Artin-Implicit-Function},
+그리고 \cite{ArtinVersal}.
+그러나 여기서는 가능한 한 Keel--Mori 논문의 논증과 비슷한
+논증을 사용하는 방법을 취한다. \cite{K-M}을 참조하라.
+
+\section{관례}
+\label{section-conventions}
+
+\noindent
+이 장 전체에서 모든 스킴은 큰 fppf 사이트 $\Sch_{fppf}$ 안에 있다고
+가정한다. 또한 여기서 다루는 모든 환 $A$는 $\Spec(A)$가 이 큰
+사이트의 한 대상과 동형이라는 성질을 갖는다고 가정한다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+이 장과 다음 장들에서는 $S$ 위 대수 공간들의 범주에서 취한 $X$와
+자기 자신의 곱을 $X \times X$ 대신 $X \times_S X$로 쓴다.
+
+
+
+
+\section{대수 공간으로 표현 가능한 사상}
+\label{section-morphism-representable-by-spaces}
+
+\noindent
+여기서는 한 준층이 다른 준층 위에서 상대적으로 대수 공간으로
+표현 가능하다는 개념을 정의하고, 이 개념의 몇 가지 성질을 증명한다.
+
+\begin{definition}
+\label{definition-morphism-representable-by-spaces}
+$S$를 $\Sch_{fppf}$에 포함되는 스킴이라 하자.
+$F$, $G$를 $\Sch_{fppf}/S$ 위의 준층이라 하자.
+사상 $a : F \to G$가 {\it 대수 공간으로 표현 가능하다}는 것은,
+모든 $U \in \Ob((\Sch/S)_{fppf})$와 임의의 $\xi : U \to G$에 대하여
+섬유곱 $U \times_{\xi, G} F$가 대수 공간이라는 뜻이다.
+\end{definition}
+
+\noindent
+먼저 간단히 확인해 보자.
+
+\begin{lemma}
+\label{lemma-morphism-spaces-is-representable-by-spaces}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위 대수 공간들의 사상이라 하자.
+그러면 $f$는 대수 공간으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+이는 형식적으로 따라온다. $S$ 위 대수 공간들의 범주가 섬유곱을
+갖는다는 사실을 사용한다. Spaces, Lemma
+\ref{spaces-lemma-fibre-product-spaces}를 참조하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-transformation}
+\begin{slogan}
+준층 사이의 대수 공간으로 표현 가능한 사상을 밑변환하면 역시
+대수 공간으로 표현 가능하다.
+\end{slogan}
+$S$를 스킴이라 하자. $(\Sch/S)_{fppf}$ 위 준층들의 섬유곱 도식
+$$
+\xymatrix{
+G' \times_G F \ar[r] \ar[d]^{a'} & F \ar[d]^a \\
+G' \ar[r] & G
+}
+$$
+이 주어졌다고 하자. $a$가 대수 공간으로 표현 가능하면 $a'$도
+대수 공간으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 이는 형식적으로 따라온다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-representable-by-spaces-transformation-to-sheaf}
+$S$를 $\Sch_{fppf}$에 포함되는 스킴이라 하자.
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$라 하자.
+$a : F \to G$가 대수 공간으로 표현 가능하다고 하자.
+$G$가 층이면 $F$도 층이다.
+\end{lemma}
+
+\begin{proof}
+(Spaces, Lemma
+\ref{spaces-lemma-representable-transformation-to-sheaf}의 증명과 같다.)
+$\{\varphi_i : T_i \to T\}$를 사이트 $(\Sch/S)_{fppf}$의 피복이라 하자.
+층 조건을 만족하는 $s_i \in F(T_i)$를 잡는다.
+그러면 $\sigma_i = a(s_i) \in G(T_i)$도 층 조건을 만족한다.
+따라서 $\sigma_i = \sigma|_{T_i}$를 만족하는 유일한
+$\sigma \in G(T)$가 존재한다. 가정에 의해
+$F' = h_T \times_{\sigma, G, a} F$는 층이다.
+또한 $(\varphi_i, s_i) \in F'(T_i)$도 층 조건을 만족하므로, 어떤 유일한
+$(\text{id}_T, s) \in F'(T)$에서 온다. 분명히 $s$가 우리가 찾는
+$F$의 단면이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-representable-by-spaces-transformation-diagonal}
+$S$를 $\Sch_{fppf}$에 포함되는 스킴이라 하자.
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$라 하자.
+$a : F \to G$가 대수 공간으로 표현 가능하다고 하자.
+그러면 $\Delta_{F/G} : F \to F \times_G F$는 대수 공간으로
+표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+(Spaces, Lemma
+\ref{spaces-lemma-representable-transformation-diagonal}의 증명과 같다.)
+$U$를 스킴이라 하고 $\xi = (\xi_1, \xi_2) \in (F \times_G F)(U)$라 하자.
+$\xi' = a(\xi_1) = a(\xi_2) \in G(U)$로 놓는다.
+가정에 의해 섬유곱 $U \times_{\xi', G} F$를 표현하는 대수 공간 $V$와
+사상 $V \to U$가 존재한다. 특히 원소 $\xi_1, \xi_2$는 $U$ 위의 사상
+$f_1, f_2 : U \to V$를 준다. $V$가 섬유곱
+$U \times_{\xi', G} F$를 표현하고
+$\xi' = a \circ \xi_1 = a \circ \xi_2$이므로, 사상 $g : U' \to U$에
+대하여
+$$
+g^*\xi_1 = g^*\xi_2
+\Leftrightarrow
+f_1 \circ g = f_2 \circ g.
+$$
+따라서 $U \times_{\xi, F \times_G F} F$는
+$V \times_{\Delta, V \times V, (f_1, f_2)} U$로 표현되며,
+이는 대수 공간이다.
+\end{proof}
+
+\noindent
+아래의 Lemma \ref{lemma-representable-by-spaces-over-space}의 증명에는
+실제로 약간 주의가 필요하다. 아직 대수 공간으로 표현 가능한 변환들의
+합성이 다시 대수 공간으로 표현 가능하다는 사실을 모르므로,
+Spaces, Lemma \ref{spaces-lemma-representable-over-space}의 증명에 쓰인
+논증을 사용할 수 없기 때문이다. 실제로 우리는 바로 이 보조정리를
+사용하여 그 명제를 증명할 것이다.
+
+\begin{lemma}
+\label{lemma-representable-by-spaces-over-space}
+$S$를 $\Sch_{fppf}$에 포함되는 스킴이라 하자.
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$라 하자.
+$a : F \to G$가 대수 공간으로 표현 가능하다고 하자.
+$G$가 대수 공간이면 $F$도 대수 공간이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-representable-by-spaces-transformation-to-sheaf}에서
+$F$가 층임을 보였다.
+
+\medskip\noindent
+$U$를 스킴이라 하고 $U \to G$를 전사인 \'etale 사상이라 하자.
+이 경우 $U \times_G F$는 대수 공간이다. $W$를 스킴이라 하고
+$W \to U \times_G F$를 전사인 \'etale 사상이라 하자.
+
+\medskip\noindent
+먼저 $W \to F$가 표현 가능함을 보이자. 이를 위해 $X$를 스킴이라 하고
+$X \to F$를 사상이라 하자. 그러면
+$$
+W \times_F X = W \times_{U \times_G F} U \times_G F \times_F X
+= W \times_{U \times_G F} (U \times_G X)
+$$
+$U \times_G F$와 $G$가 모두 대수 공간이므로 이것은 스킴이다.
+
+\medskip\noindent
+다음으로 $W \to F$가 전사이고 \'etale임을 보이자(이 사상이 표현
+가능함을 이제 알았으므로 이 표현에는 의미가 있다). 이는 위 공식에서
+따라온다. 실제로 $W \to U \times_G F$와 $U \to G$가 모두 전사이고
+\'etale이므로
+$W \times_{U \times_G F} (U \times_G X) \to U \times_G X$와
+$U \times_G X \to X$가 전사인 \'etale 사상이고, 전사인 \'etale
+사상들의 합성도 전사이고 \'etale이다.
+
+\medskip\noindent
+$R = W \times_F W$로 놓는다. 위에서 본 바에 따라 $R$은 스킴이고
+사영 $t, s : R \to W$는 \'etale이다. $R$이 동치관계임은 분명하고,
+$W \to F$는 층들의 전사이다. 따라서 $R$은 \'etale 동치관계이고
+$F = W/R$이다. 그러므로 Spaces,
+Theorem \ref{spaces-theorem-presentation}에 의해 $F$는 대수 공간이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-representable-by-spaces}
+$S$를 스킴이라 하자.
+$a : F \to G$를 $(\Sch/S)_{fppf}$ 위 준층들의 사상이라 하자.
+$a : F \to G$가 대수 공간으로 표현 가능하다고 가정하자.
+$X$가 $S$ 위의 대수 공간이고 $X \to G$가 준층들의 사상이면,
+$X \times_G F$는 대수 공간이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-base-change-transformation}에 의해 변환
+$X \times_G F \to X$는 대수 공간으로 표현 가능하다. 따라서
+Lemma \ref{lemma-representable-by-spaces-over-space}에 의해 이는
+대수 공간이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-transformation}
+$S$를 스킴이라 하자. $(\Sch/S)_{fppf}$ 위 준층들의 사상
+$$
+\xymatrix{
+F \ar[r]^a & G \ar[r]^b & H
+}
+$$
+이 주어졌다고 하자. $a$와 $b$가 대수 공간으로 표현 가능하면
+$b \circ a$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+$T$를 $S$ 위의 스킴이라 하고 $T \to H$를 사상이라 하자.
+가정에 의해 $T \times_H G$는 대수 공간이다. 따라서
+Lemma \ref{lemma-representable-by-spaces}에 의해
+$T \times_H F = (T \times_H G) \times_G F$도 대수 공간이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-product-transformations}
+$F_i, G_i : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$, $i = 1, 2$라 하고,
+$S$를 스킴이라 하자. $a_i : F_i \to G_i$, $i = 1, 2$가
+대수 공간으로 표현 가능하다고 하자. 그러면
+$$
+a_1 \times a_2 : F_1 \times F_2 \longrightarrow G_1 \times G_2
+$$
+는 대수 공간으로 표현 가능하다.
+% P10-E0518: frozen English has a spurious article before “representable”.
+\end{lemma}
+
+\begin{proof}
+$a_1 \times a_2$를 합성
+$F_1 \times F_2 \to G_1 \times F_2 \to G_1 \times G_2$로 쓴다.
+첫 번째 화살표는 사상 $G_1 \times F_2 \to G_1$에 의한 $a_1$의
+밑변환이고, 두 번째 화살표는 사상 $G_1 \times G_2 \to G_2$에 의한
+$a_2$의 밑변환이다. 따라서 이 보조정리는 Lemma
+\ref{lemma-composition-transformation}과
+\ref{lemma-base-change-transformation}의 형식적 귀결이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-representable-by-spaces-permanence}
+$S$를 스킴이라 하자. $a : F \to G$와 $b : G \to H$를 함자
+$(\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ 사이의 변환이라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $\Delta : G \to G \times_H G$가 대수 공간으로 표현 가능하고,
+\item $b \circ a : F \to H$가 대수 공간으로 표현 가능하다.
+\end{enumerate}
+그러면 $a$는 대수 공간으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+$U$를 $S$ 위의 스킴이라 하고 $\xi \in G(U)$라 하자. 그러면
+$$
+U \times_{\xi, G, a} F =
+(U \times_{b(\xi), H, b \circ a} F) \times_{(\xi, a), (G \times_H G), \Delta} G
+$$
+이므로 Lemma \ref{lemma-representable-by-spaces}에 의해 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-glueing-sheaves}
+$S \in \Ob(\Sch_{fppf})$라 하자. $F$를 $(\Sch/S)_{fppf}$ 위 집합의
+준층이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $F$는 $(\Sch/S)_{fppf}$ 위의 Zariski 위상에 대한 층이다.
+\item 지표집합 $I$와 부분함자 $F_i \subset F$가 존재하여 다음을
+만족한다.
+\begin{enumerate}
+\item 각 $F_i$는 fppf 층이다.
+\item 각 $F_i \to F$는 대수 공간으로 표현 가능하다.
+\item $\coprod F_i \to F$는 fppf 층화 후 전사가 된다.
+\end{enumerate}
+\end{enumerate}
+그러면 $F$는 fppf 층이다.
+\end{lemma}
+
+\begin{proof}
+$T \in \Ob((\Sch/S)_{fppf})$라 하고 $s \in F(T)$라 하자. (2)(c)에 의해
+어떤 fppf 피복 $\{T_j \to T\}$가 존재하여, 각 지표에 대해
+어떤 $\alpha(j) \in I$에 대하여 $s|_{T_j}$가 $F_{\alpha(j)}$의
+단면이 된다. $W_j \subset T$를 $T_j \to T$의 상이라 하자.
+% P10-E0519: frozen English omits “by” before the cited justification.
+이는 Morphisms, Lemma \ref{morphisms-lemma-fppf-open}에 의해 열린
+부분스킴이다. (2)(b)에 의해
+$F_{\alpha(j)} \times_{F, s|_{W_j}} W_j \to W_j$는 대수 공간의
+단사사상이고 $T_j$는 이 사상을 통해 분해된다. $\{T_j \to W_j\}$가
+fppf 피복이므로
+$F_{\alpha(j)} \times_{F, s|_{W_j}} W_j = W_j$이고, 다시 말해
+$s|_{W_j} \in F_{\alpha(j)}(W_j)$이다. 따라서
+$\coprod F_i \to F$가 Zariski 위상에 대하여 전사임을 얻는다.
+
+\medskip\noindent
+$\{T_j \to T\}$를 $(\Sch/S)_{fppf}$의 fppf 피복이라 하고,
+모든 $j$에 대해 $s|_{T_j} = s'|_{T_j}$인 $s, s' \in F(T)$를 잡는다.
+$s, s'$가 같음을 보이고자 한다. (1)에 의해 $F$는 Zariski 층이므로
+$T$ 위에서 Zariski 국소적으로 작업해도 된다. 앞 문단의 결과에 따라
+어떤 $i$가 존재하여 $s \in F_i(T)$라고 가정해도 된다. 그러면
+$s'|_{T_j}$가 $F_i$의 단면임을 알 수 있다. (2)(b)에 의해
+$F_{i} \times_{F, s'} T \to T$는 대수 공간의 단사사상이고, 모든
+$T_j$는 이를 통해 분해된다. 따라서 $s' \in F_i(T)$이다.
+$F_i$가 fppf 위상에 대한 층이므로 $s = s'$이다.
+
+\medskip\noindent
+$\{T_j \to T\}$를 $(\Sch/S)_{fppf}$의 fppf 피복이라 하고,
+$s_j \in F(T_j)$가
+$s_j|_{T_j \times_T T_{j'}} = s_{j'}|_{T_j \times_T T_{j'}}$를
+만족한다고 하자. 가정 (2)(c)에 의해 피복을
+세분하여, 어떤 $\alpha(j) \in I$에 대해
+$s_j \in F_{\alpha(j)}(T_j)$라고 가정해도 된다. $W_j \subset T$를
+$T_j \to T$의 상이라 하자.
+% P10-E0519: second frozen-English occurrence of the same missing preposition.
+이는 Morphisms, Lemma \ref{morphisms-lemma-fppf-open}에 의해 열린
+부분스킴이다. 그러면 $\{T_j \to W_j\}$는 fppf 피복이다.
+$F_{\alpha(j)}$가 $F$의 부분 준층이므로, $s_j$를
+$T_j \times_{W_j} T_j$로 제한하는 두 방식은
+$F_{\alpha(j)}(T_j \times_{W_j} T_j)$의 원소로서 일치한다.
+따라서 $F_{\alpha(j)}$의 층 조건에 의해, $T_j$로의 제한이 $s_j$인
+$s'_j \in F_{\alpha(j)}(W_j)$가 존재한다. 두 지표 $j$, $j'$에 대하여
+$F$의 단면 $s'_j|_{W_j \cap W_{j'}}$와
+$s'_{j'}|_{W_j \cap W_{j'}}$는 앞 문단의 결과에 의해 일치한다.
+$F$가 Zariski 층이므로 이로써 증명이 끝난다.
+\end{proof}
+
+
+
+\section{대수 공간으로 표현 가능한 준층 사상의 성질}
+\label{section-representable-by-spaces-properties}
+
+\noindent
+다음 정의를 사용하면 이 방법이 작동한다.
+
+\begin{definition}
+\label{definition-property-transformation}
+$S$를 스킴이라 하자. $a : F \to G$를 $(\Sch/S)_{fppf}$ 위 준층들의
+사상이라 하고, 이 사상이 대수 공간으로 표현 가능하다고 하자.
+$\mathcal{P}$를 대수 공간 사상의 성질로서 다음을 만족한다고 하자.
+\begin{enumerate}
+\item 임의의 밑변환 아래 보존되고,
+\item 밑에서 fppf 국소적이다. Descent on Spaces,
+Definition \ref{spaces-descent-definition-property-morphisms-local}을 참조하라.
+\end{enumerate}
+이때 모든 스킴 $U$와 $\xi : U \to G$에 대하여 그로부터 얻는 대수
+공간의 사상 $U \times_G F \to U$가 성질 $\mathcal{P}$를 가지면,
+$a$가 {\it 성질 $\mathcal{P}$}를 갖는다고 한다.
+\end{definition}
+
+\noindent
+우리는 밑변환 아래 안정적이고 밑의 fppf 위상에서 국소적인 사상의
+성질에 대해서만 이 정의를 사용할 것임을 유의해야 한다. 이는 그렇지
+않으면 정의 자체가 의미가 없어서가 아니라, 염두에 둔 성질에 더 잘
+맞는 다른 정의를 주고자 할 수도 있기 때문이다.
+
+\medskip\noindent
+위 정의는 예를 들어 다음 성질들에 적용된다\footnote{밑변환 아래
+보존된다는 사실은 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-surjective},
+\ref{spaces-morphisms-lemma-base-change-quasi-compact},
+\ref{spaces-morphisms-lemma-base-change-etale},
+\ref{spaces-morphisms-lemma-base-change-smooth},
+\ref{spaces-morphisms-lemma-base-change-flat},
+\ref{spaces-morphisms-lemma-base-change-separated},
+\ref{spaces-morphisms-lemma-base-change-finite-type},
+\ref{spaces-morphisms-lemma-base-change-quasi-finite},
+\ref{spaces-morphisms-lemma-base-change-finite-presentation},
+\ref{spaces-morphisms-lemma-base-change-affine},
+\ref{spaces-morphisms-lemma-base-change-proper}, 그리고
+Spaces, Lemma
+\ref{spaces-lemma-base-change-immersions}에서 따라온다.
+밑에서 fppf 국소적이라는 사실은 Descent on Spaces, Lemmas
+\ref{spaces-descent-lemma-descending-property-surjective},
+\ref{spaces-descent-lemma-descending-property-quasi-compact},
+\ref{spaces-descent-lemma-descending-property-etale},
+\ref{spaces-descent-lemma-descending-property-smooth},
+\ref{spaces-descent-lemma-descending-property-flat},
+\ref{spaces-descent-lemma-descending-property-separated},
+\ref{spaces-descent-lemma-descending-property-finite-type},
+\ref{spaces-descent-lemma-descending-property-quasi-finite},
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation},
+\ref{spaces-descent-lemma-descending-property-affine},
+\ref{spaces-descent-lemma-descending-property-proper}, 그리고
+\ref{spaces-descent-lemma-descending-property-closed-immersion}에서 따라온다.
+}:
+``전사'',
+``준콤팩트'',
+``\'etale'',
+``매끄러운'',
+``평탄'',
+``분리'',
+``(국소) 유한형'',
+``(국소) 준유한'',
+``(국소) 유한 표시'',
+``아핀'',
+``고유'', 그리고
+``닫힌 몰입''.
+다시 말해, 모든 스킴 $T$와 사상 $\xi : T \to G$에 대하여 대수 공간의
+사상 $T \times_{\xi, G} F \to T$가 전사
+(각각\ 준콤팩트,
+\'etale,
+% P10-E0001/P10-E0521: the frozen parallel criterion omits smooth.
+평탄,
+분리,
+(국소) 유한형,
+(국소) 준유한,
+(국소) 유한 표시,
+% P10-E0001/P10-E0522: the frozen predicate and criterion omit affine.
+고유,
+닫힌 몰입)이면, $a$가 {\it 전사}
+(각각\ {\it 준콤팩트},
+{\it \'etale},
+{\it 매끄러운},
+{\it 평탄},
+{\it 분리},
+{\it (국소) 유한형},
+{\it (국소) 준유한},
+{\it (국소) 유한 표시},
+{\it 고유},
+{\it 닫힌 몰입})이라고 한다.
+
+\medskip\noindent
+다음으로 이 정의가 이미 존재하는 개념들과 일치하는지 확인한다.
+Lemma \ref{lemma-morphism-spaces-is-representable-by-spaces}에 의해
+$S$ 위 대수 공간들 사이의 모든 사상은 대수 공간으로 표현 가능하다.
+또한 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-surjective-local}
+(각각\ \ref{spaces-morphisms-lemma-quasi-compact-local},
+\ref{spaces-morphisms-lemma-etale-local},
+\ref{spaces-morphisms-lemma-smooth-local},
+\ref{spaces-morphisms-lemma-flat-local},
+\ref{spaces-morphisms-lemma-separated-local},
+\ref{spaces-morphisms-lemma-finite-type-local},
+\ref{spaces-morphisms-lemma-quasi-finite-local},
+\ref{spaces-morphisms-lemma-finite-presentation-local},
+\ref{spaces-morphisms-lemma-affine-local},
+\ref{spaces-morphisms-lemma-proper-local},
+\ref{spaces-morphisms-lemma-closed-immersion-local})에 의해, 위에서 정의한
+전사(각각\ 준콤팩트, \'etale, 매끄러운, 평탄, 분리, (국소) 유한형,
+(국소) 준유한, (국소) 유한 표시, 아핀, 고유, 닫힌 몰입)는 대수 공간
+사상에 대해 이미 존재하는 정의와 일치한다.
+
+\medskip\noindent
+이제 몇 가지 형식적 보조정리를 제시한다.
+
+\begin{lemma}
+\label{lemma-base-change-transformation-property}
+$S$를 스킴이라 하자. $\mathcal{P}$를
+Definition \ref{definition-property-transformation}에서와 같은 성질이라
+하자. $(\Sch/S)_{fppf}$ 위 준층들의 섬유곱 도식
+$$
+\xymatrix{
+G' \times_G F \ar[r] \ar[d]^{a'} & F \ar[d]^a \\
+G' \ar[r] & G
+}
+$$
+이 주어졌다고 하자. $a$가 대수 공간으로 표현 가능하고
+$\mathcal{P}$를 가지면 $a'$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 이는 형식적으로 따라온다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-transformation-property}
+$S$를 스킴이라 하자. $\mathcal{P}$를
+Definition \ref{definition-property-transformation}에서와 같은 성질이라
+하고, $\mathcal{P}$가 합성 아래 안정적이라고 가정하자.
+$(\Sch/S)_{fppf}$ 위 준층들의 사상
+$$
+\xymatrix{
+F \ar[r]^a & G \ar[r]^b & H
+}
+$$
+이 주어졌다고 하자. $a$, $b$가 대수 공간으로 표현 가능하고
+$\mathcal{P}$를 가지면 $b \circ a$도 그러하다.
+% P10-E0520: frozen English has agreement and clause-separation defects.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: Lemma \ref{lemma-composition-transformation}과 합성 아래의
+안정성을 사용하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-product-transformations-property}
+$S$를 스킴이라 하자.
+$F_i, G_i : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$, $i = 1, 2$라 하자.
+$a_i : F_i \to G_i$, $i = 1, 2$가 대수 공간으로 표현 가능하다고 하자.
+$\mathcal{P}$를 Definition \ref{definition-property-transformation}에서와
+같은 성질이라 하고, 합성 아래 안정적이라고 하자. $a_1$과 $a_2$가
+성질 $\mathcal{P}$를 가지면
+$a_1 \times a_2 : F_1 \times F_2 \longrightarrow G_1 \times G_2$도
+그러하다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 Lemma \ref{lemma-product-transformations}에 의해 의미를
+갖는다. 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-transformations-property-implication}
+$S$를 스킴이라 하자.
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$라 하자.
+$a : F \to G$를 대수 공간으로 표현 가능한 함자들의 변환이라 하자.
+$\mathcal{P}$, $\mathcal{P}'$를
+Definition \ref{definition-property-transformation}에서와 같은 성질들이라
+하자. $S$ 위 대수 공간들의 임의의 사상 $f : X \to Y$에 대하여
+$\mathcal{P}(f) \Rightarrow \mathcal{P}'(f)$라고 가정하자.
+$a$가 성질 $\mathcal{P}$를 가지면 $a$는 성질 $\mathcal{P}'$도 갖는다.
+\end{lemma}
+
+\begin{proof}
+형식적으로 따라온다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-surjective-flat-locally-finite-presentation}
+$S$를 스킴이라 하자.
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를 층들이라 하자.
+$a : F \to G$가 대수 공간으로 표현 가능하고, 평탄하고, 국소 유한
+표시이며 전사라고 하자. 그러면 $a : F \to G$는 층들의 사상으로서
+전사이다.
+\end{lemma}
+
+\begin{proof}
+$T$를 $S$ 위의 스킴이라 하고 $g : T \to G$를 $G$의 $T$-값 점이라
+하자. 가정에 의해 $T' = F \times_G T$는 대수 공간이고,
+$T' \to T$는 평탄하고 국소 유한 표시인 전사 대수 공간 사상이다.
+$U$를 스킴이라 하고 $U \to T'$를 전사인 \'etale 사상이라 하자.
+그러면 대수 공간의 평탄 사상에 대한 정의에 의해 스킴의 사상
+$U \to T$는 평탄하다. ``국소 유한 표시''에 대해서도 마찬가지다.
+또한 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-surjective-local}에 의해 $U \to T$는 전사이다.
+따라서 $\{U \to T\}$는 fppf 피복이고, $g|_U \in G(U)$는 $F(U)$의
+한 원소, 즉 사상 $U \to T' \to F$에서 온다. Sites, Definition
+\ref{sites-definition-sheaves-injective-surjective}에 의해 이는 층들의
+사상으로서 이 사상이 전사임을 증명한다.
+\end{proof}
+
+
+\section{대각사상의 부트스트랩}
+\label{section-bootstrap-diagonal}
+
+\noindent
+이 절에서는 $(\Sch/S)_{fppf}$ 위 층 $F$의 대각사상은, $F$가 스킴 또는
+대수 공간에 의한 ``fppf 피복''을 갖기만 하면 표현 가능함을 증명한다.
+Lemma \ref{lemma-bootstrap-diagonal}을 참조하라.
+
+\begin{lemma}
+\label{lemma-representable-diagonal}
+\begin{slogan}
+준층의 대각사상이 대수 공간으로 표현 가능할 필요충분조건은 스킴에서
+그 준층으로 가는 모든 사상이 대수 공간으로 표현 가능한 것이다.
+\end{slogan}
+$S$를 스킴이라 하자.
+% P10-E0523: frozen English has a conditional fragment with no consequent.
+$F$를 $(\Sch/S)_{fppf}$ 위의 준층이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $\Delta_F : F \to F \times F$는 대수 공간으로 표현 가능하다.
+\item 모든 스킴 $T$에 대하여 임의의 사상 $T \to F$는 대수 공간으로
+표현 가능하다.
+\item 모든 대수 공간 $X$에 대하여 임의의 사상 $X \to F$는 대수
+공간으로 표현 가능하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하자. (3)에서와 같은 $X \to F$를 잡는다. $T$를 스킴이라
+하고 $T \to F$를 사상이라 하자. 그러면
+$$
+T \times_F X = (T \times_S X) \times_{F \times F, \Delta} F
+$$
+이고, 이는 Lemma \ref{lemma-representable-by-spaces}와 (1)에 의해
+대수 공간이다. 따라서 $X \to F$는 표현 가능하고, 즉 (3)이 성립한다.
+(3) $\Rightarrow$ (2)는 자명하다. (2)를 가정하자. $T$를 스킴이라 하고
+$(a, b) : T \to F \times F$를 사상이라 하자. 그러면
+$$
+F \times_{\Delta_F, F \times F} T =
+(T \times_{a, F, b} T) \times_{T \times T, \Delta_T} T
+$$
+이고, 이는 가정에 의해 대수 공간이다. 따라서 $\Delta_F$는 대수
+공간으로 표현 가능하고, 즉 (1)이 성립한다.
+\end{proof}
+
+\noindent
+특히 $F$가 이 보조정리의 동치인 조건들을 만족하는 준층이면,
+$X$가 대수 공간인 임의의 사상 $X \to F$에 대하여
+Definition \ref{definition-property-transformation}을 사용해서
+$X \to F$가 전사(각각\ \'etale, 평탄, 국소 유한 표시)라고 말할 수 있다.
+
+\medskip\noindent
+실제로 부트스트랩을 수행하기 전에 흥미로운 보조정리 하나를 증명한다.
+
+\begin{lemma}
+\label{lemma-after-fppf-sep-lqf}
+$S$를 스킴이라 하자. $(\Sch/S)_{fppf}$ 위 층들의 Cartesian 도식
+$$
+\xymatrix{
+E \ar[r]_a \ar[d]_f & F \ar[d]^g \\
+H \ar[r]^b & G
+}
+$$
+이 주어져서 $E = H \times_G F$라고 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $g$는 대수 공간으로 표현 가능하고, 전사이고, 평탄하며, 국소
+유한 표시이다.
+\item $a$는 대수 공간으로 표현 가능하고, 분리이며, 국소 준유한이다.
+\end{enumerate}
+그러면 $b$도 (스킴으로) 표현 가능하고, 분리이며, 국소 준유한이다.
+\end{lemma}
+
+\begin{proof}
+$T$를 스킴이라 하고 $T \to G$를 사상이라 하자. $T \times_G H$가
+스킴이고 사상 $T \times_G H \to T$가 분리이며 국소 준유한임을
+보여야 한다. 따라서 전체 도식을 $T$로 밑변환하여 $G$가 스킴이라고
+가정해도 된다. 이 경우 $F$는 대수 공간이다. $U$를 스킴이라 하고
+$U \to F$를 전사인 \'etale 사상이라 하자. 그러면 Morphisms of Spaces,
+Lemmas \ref{spaces-morphisms-lemma-etale-flat}와
+\ref{spaces-morphisms-lemma-etale-locally-finite-presentation}에 의해
+$U \to F$는 표현 가능하고, 전사이고, 평탄하며, 국소 유한 표시이다.
+Lemma \ref{lemma-composition-transformation}에 의해 $U \to G$도
+전사이고 평탄하며 국소 유한 표시이다. $a$의 밑변환
+$E \times_F U \to U$는 여전히 분리이고 국소 준유한임을 유의하라
+(Lemma \ref{lemma-base-change-transformation-property}). 따라서 보조정리
+도식의 윗부분을 $E \times_F U \to U$로 바꾸어도 된다. 다시 말해,
+$F \to G$가 국소 유한 표시인 전사 평탄 스킴 사상이라고 가정해도 된다.
+특히 $\{F \to G\}$는 스킴들의 fppf 피복이다. Morphisms of Spaces,
+Proposition
+\ref{spaces-morphisms-proposition-locally-quasi-finite-separated-over-scheme}에
+의해 $E$도 스킴이다. Descent, Lemma
+\ref{descent-lemma-descent-data-sheaves}에 의해 $E = H \times_G F$라는
+사실은 fppf 피복 $\{F \to G\}$에 관한 $E$ 위의 하강 데이터를 준다.
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-morphisms-fppf-descend}에
+의해 이 하강 데이터는 유효하다. Descent, Lemma
+\ref{descent-lemma-descent-data-sheaves}를 다시 적용하면 $H$가 스킴임을
+얻는다. 이제 Descent, Lemmas
+\ref{descent-lemma-descending-property-separated}와
+\ref{descent-lemma-descending-property-quasi-finite}에 의해 $b$가 분리이고
+국소 준유한임을 얻는다.
+\end{proof}
+
+\noindent
+이제 절 제목이 가리키는 결과를 제시한다.
+
+\begin{lemma}
+\label{lemma-bootstrap-diagonal}
+$S$를 스킴이라 하자.
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를 함자라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item 준층 $F$는 층이다.
+\item 대수 공간 $X$와 사상 $X \to F$가 존재하여, 이 사상이 대수
+공간으로 표현 가능하고 전사이고 평탄하며 국소 유한 표시이다.
+\end{enumerate}
+그러면 $\Delta_F$는 (스킴으로) 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+$U \to X$를 스킴에서 $X$로 가는 전사인 \'etale 사상이라 하자.
+그러면 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-etale-flat}와
+\ref{spaces-morphisms-lemma-etale-locally-finite-presentation}에 의해
+$U \to X$는 표현 가능하고, 전사이고, 평탄하며, 국소 유한 표시이다.
+Lemma \ref{lemma-composition-transformation-property}에 의해 합성
+$U \to F$도 대수 공간으로 표현 가능하고, 전사이고, 평탄하며, 국소
+유한 표시이다. 따라서 $R = U \times_F U$는 대수 공간이다.
+Lemma \ref{lemma-representable-by-spaces}를 참조하라. 대수 공간의 사상
+$R \to U \times_S U$는 단사사상이므로 분리이다(단사사상의 대각사상은
+동형이기 때문이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism}을 참조하라). $U \to F$가 국소
+유한 표시이므로 두 사상 $R \to U$도 국소 유한 표시이다. Lemma
+\ref{lemma-base-change-transformation-property}을 참조하라. 따라서
+$R \to U \times_S U$는 국소 유한형이다(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-finite-presentation-finite-type}와
+\ref{spaces-morphisms-lemma-permanence-finite-type}을 사용하라).
+종합하면 $R \to U \times_S U$는 국소 유한형 단사사상이므로 분리이고
+국소 준유한인 사상이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-loc-finite-type-loc-quasi-finite}를
+참조하라.
+
+\medskip\noindent
+이제 $\Delta_F$가 표현 가능함을 증명할 준비가 되었다. $T$를 스킴이라
+하고 $(a, b) : T \to F \times F$를 사상이라 하자. 다음과 같이 놓는다.
+$$
+T' = (U \times_S U) \times_{F \times F} T.
+$$
+$U \times_S U \to F \times F$는
+Lemma \ref{lemma-product-transformations-property}에 의해 대수 공간으로
+표현 가능하고, 전사이고, 평탄하며, 국소 유한 표시임을 유의하라.
+따라서 $T'$는 대수 공간이고 사영 $T' \to T$는 전사이고 평탄하며 국소
+유한 표시이다. $Z = T \times_{F \times F} F$를 생각하자(이는 층이다).
+또한
+$$
+Z' = T' \times_{U \times_S U} R
+= T' \times_T Z.
+$$
+$Z'$가 대수 공간임을 알 수 있다. 또한 증명의 첫 문단에서 $R$이 대수
+공간이고 사상 $R \to U \times_S U$가 분리이고 국소 준유한임을
+보였으므로, $Z' \to T'$도 그러하다. 따라서 도식
+$$
+\xymatrix{
+Z' \ar[r] \ar[d] & T' \ar[d] \\
+Z \ar[r] & T
+}
+$$
+에 Lemma \ref{lemma-after-fppf-sep-lqf}를 적용하여 결론을 얻는다.
+\end{proof}
+
+\noindent
+위 결과의 한 변형을 제시한다.
+
+\begin{lemma}
+\label{lemma-bootstrap-locally-quasi-finite}
+$S$를 스킴이라 하자. $F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를
+함자라 하자. $X$를 스킴이라 하고 $X \to F$가 대수 공간으로 표현
+가능하고 국소 준유한이라고 하자. 그러면 $X \to F$는 (스킴으로)
+표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+$T$를 스킴이라 하고 $T \to F$를 사상이라 하자. 대수 공간
+$X \times_F T$가 스킴으로 표현 가능함을 보여야 한다. 사상
+$$
+X \times_F T  \longrightarrow X \times_{\Spec(\mathbf{Z})} T
+$$
+을 생각하자. $X \times_F T \to T$가 국소 준유한이므로 표시된 화살표도
+국소 준유한이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-permanence-quasi-finite}). 한편 표시된 화살표는
+단사사상이므로 분리이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-separated}). 따라서 Morphisms of
+Spaces, Proposition
+\ref{spaces-morphisms-proposition-locally-quasi-finite-separated-over-scheme}에
+의해 $X \times_F T$는 스킴이다.
+\end{proof}
+
+
+\section{부트스트랩}
+\label{section-bootstrap}
+
+\noindent
+이 절의 결과는 더 강한 Theorem \ref{theorem-final-bootstrap}에 의해
+대체될 것임을 먼저 독자에게 알려 둔다. 한편 이 절의 정리는 증명이
+훨씬 쉽고, 특히 주로 Deligne--Mumford 스택에 관심이 있는 독자에게는
+이 이론이 작동하는 방식에 대한 상당한 통찰을 준다.
+
+\medskip\noindent
+Spaces, Section \ref{spaces-section-algebraic-spaces}에서 우리는 대수
+공간을, 대각사상이 표현 가능하고 스킴에서 그 공간으로 가는 전사인
+\'etale 사상이 존재하는 fppf 위상의 층으로 정의했다. 이 절에서는
+대각사상이 대수 공간으로 표현 가능하고 대수 공간에 의한 전사인
+\'etale 피복을 갖는 fppf 위상의 층도 대수 공간임을 보인다.
+다시 말해, 대수 공간의 범주는 표현 가능한 대각사상과 스킴에 의한
+\'etale 피복을 갖는 fppf 층 $F$들을 스킴의 범주에 추가하여 얻는
+확대이다. 이 절의 결과는 대수 공간의 범주에서 출발하여 같은 과정을
+다시 수행해도 또 다른 범주가 생기지 않는다는 것이다.
+
+\medskip\noindent
+이 절의 내용에 대한 또 다른 동기는, 뒤에서 관성 스택이 자명한
+Deligne--Mumford 스택이 대수 공간과 동치임을 보장한다는 점이다.
+Algebraic Stacks, Lemma
+\ref{algebraic-lemma-algebraic-stack-no-automorphisms}를 참조하라.
+
+\medskip\noindent
+다음은 이 절의 주결과이다(앞에서 말했듯이 이는 더 강한
+Theorem \ref{theorem-final-bootstrap}에 의해 대체된다).
+
+\begin{theorem}
+\label{theorem-bootstrap}
+$S$를 스킴이라 하자.
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를 함자라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item 준층 $F$는 층이다.
+\item 대각사상 $F  \to F \times F$는 대수 공간으로 표현 가능하다.
+\item 대수 공간 $X$와 전사이고 \'etale인 사상 $X \to F$가 존재한다.
+\end{enumerate}
+또는 다음을 가정한다.
+\begin{enumerate}
+\item[(a)] 준층 $F$는 층이다.
+\item[(b)] 대수 공간 $X$와 사상 $X \to F$가 존재하여, 이 사상이
+대수 공간으로 표현 가능하고 전사이며 \'etale이다.
+\end{enumerate}
+그러면 $F$는 대수 공간이다.
+\end{theorem}
+
+\begin{proof}
+Definition \ref{definition-property-transformation} 바로 아래의 설명을
+더 언급하지 않고 사용한다.
+
+\medskip\noindent
+(1), (2), (3)을 가정하고, (3)에서와 같은 $X \to F$를 잡는다.
+Lemma \ref{lemma-representable-diagonal}에 의해 사상 $X \to F$는 대수
+공간으로 표현 가능하다. 따라서 (a)와 (b)가 성립한다.
+
+\medskip\noindent
+(a)와 (b)를 가정하고, (b)에서와 같은 $X \to F$를 잡는다. $U \to X$를
+스킴에서 $X$로 가는 전사인 \'etale 사상이라 하자. Lemma
+\ref{lemma-composition-transformation}에 의해 변환 $U \to F$는 대수
+공간으로 표현 가능하고 전사이며 \'etale이다. 따라서 $F$가 대수 공간임을
+증명하는 문제는 $\Delta_F$가 표현 가능함을 증명하는 것으로 귀착된다
+(Spaces, Definition \ref{spaces-definition-algebraic-space}). 이는 Lemma
+\ref{lemma-bootstrap-diagonal}에서 즉시 따라온다. 한편 이 보조정리를
+우회하여 다음 문단처럼 $F$가 대수 공간임을 직접 보일 수도 있다.
+
+\medskip\noindent
+구체적으로, $U$를 스킴이라 하고 $U \to F$가 대수 공간으로 표현
+가능하고 전사이며 \'etale이라고 하자. 섬유곱 $R = U \times_F U$를
+생각하자. 두 사영 $R \to U$는 모두 대수 공간으로 표현 가능하고
+전사이며 \'etale이다(Lemma \ref{lemma-base-change-transformation-property}).
+특히 Lemma \ref{lemma-representable-by-spaces-over-space}에 의해 $R$은
+대수 공간이다. 대수 공간의 사상 $R \to U \times_S U$는 단사사상이므로
+분리이다(단사사상의 대각사상은 동형이기 때문이다). $R \to U$가
+\'etale이므로 $R \to U$는 국소 준유한이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-locally-quasi-finite}를 참조하라. 따라서
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-permanence-quasi-finite}에 의해
+$R \to U \times_S U$도 국소 준유한이다. 그러므로 Morphisms of Spaces,
+Proposition
+\ref{spaces-morphisms-proposition-locally-quasi-finite-separated-over-scheme}을
+적용할 수 있고 $R$은 스킴이다. Lemma
+\ref{lemma-surjective-flat-locally-finite-presentation}에 의해 $U \to F$는
+층들의 전사이다. 따라서 $F = U/R$이다. Spaces, Theorem
+\ref{spaces-theorem-presentation}에 의해 $F$는 대수 공간이다.
+\end{proof}
+
+
+\section{열린 부분 찾기}
+\label{section-finding-opens}
+
+
+\medskip\noindent
+먼저 Spaces, Lemma \ref{spaces-lemma-finding-opens}를 군대상에 딸린
+몫층으로 약간 개선하고 일반화한 보조정리를 증명한다.
+
+\begin{lemma}
+\label{lemma-better-finding-opens}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 군대상 스킴이라 하자.
+$g : U' \to U$를 사상이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item 합성
+$$
+\xymatrix{
+U' \times_{g, U, t} R \ar[r]_-{\text{pr}_1} \ar@/^3ex/[rr]^h
+& R \ar[r]_s & U
+}
+$$
+의 상은 열린 부분 $W \subset U$이고,
+\item 그로부터 얻는 사상 $h : U' \times_{g, U, t} R \to W$는 fppf
+위상에서 층들의 전사를 정의한다.
+\end{enumerate}
+$R' = R|_{U'}$를 $R$의 $U'$로의 제한이라 하자. 그러면 fppf 위상에서
+몫층들의 사상
+$$
+U'/R' \to U/R
+$$
+은 표현 가능하고 열린 몰입이다.
+\end{lemma}
+
+\begin{proof}
+$W$는 $U$의 $R$-불변 열린 부분스킴임을 유의하라. 실제로 $W$의
+점들의 집합은 Groupoids, Lemma
+\ref{groupoids-lemma-pre-equivalence-equivalence-relation-points}의 의미에서
+$g(U') \subset U$의 한 점과 동치인 $U$의 점들로 이루어진다(이
+보조정리는 Groupoids, Lemma
+\ref{groupoids-lemma-groupoid-pre-equivalence}에 의해
+$j : R \to U \times_S U$가 전동치관계이므로 적용할 수 있다).
+또한 $g : U' \to U$는 $W$를 통해 분해된다. $R|_W$를 $R$의 $W$로의
+제한이라 하자. 그러면 $R'$은 $R|_W$의 $U'$로의 제한이기도 하다.
+따라서 이 보조정리의 층 사상을 다음과 같이 분해할 수 있다.
+$$
+U'/R' \longrightarrow W/R|_W \longrightarrow U/R
+$$
+Groupoids, Lemma \ref{groupoids-lemma-quotient-groupoid-restrict}에 의해
+첫 번째 화살표는 층들의 동형이다. 따라서 $g$가 $R$-불변 열린 부분의
+$U$로의 몰입인 경우에 보조정리를 보이면 충분하다.
+
+\medskip\noindent
+$U' \subset U$가 $R$-불변 열린 부분이고 $g$가 포함사상이라고 하자.
+$F = U/R$ 및 $F' = U'/R'$로 놓는다. Groupoids, Lemma
+\ref{groupoids-lemma-quotient-pre-equivalence-relation-restrict} 또는
+\ref{groupoids-lemma-quotient-groupoid-restrict}에 의해 사상 $F' \to F$는
+단사이다. $\xi \in F(T)$라 하자. $T \times_{\xi, F} F'$가 $T$의 열린
+부분스킴으로 표현 가능함을 보여야 한다. 어떤 fppf 피복
+$\{f_i : T_i \to T\}$가 존재하여 $\xi|_{T_i}$는 사상
+$a_i : T_i \to U$의 $U \to U/R$에 의한 상이다.
+$V_i = a_i^{-1}(U')$로 놓는다. $T_i \times_T T_j$의 열린 부분스킴으로서
+$V_i \times_T T_j = T_i \times_T V_j$임을 주장한다.
+
+\medskip\noindent
+$a_i \circ \text{pr}_0$와 $a_j \circ \text{pr}_1$은 모두 단면
+$\xi|_{T_i \times_T T_j} \in F(T_i \times_T T_j)$로 가는 사상
+$T_i \times_T T_j \to U$이므로, 어떤 fppf 피복
+$\{f_{ijk} : T_{ijk} \to T_i \times_T T_j\}$와 사상
+$r_{ijk} : T_{ijk} \to R$가 존재하여
+$$
+a_i \circ \text{pr}_0 \circ f_{ijk} = s \circ r_{ijk},
+\quad
+a_j \circ \text{pr}_1 \circ f_{ijk} = t \circ r_{ijk},
+$$
+를 만족한다. Groupoids, Lemma
+\ref{groupoids-lemma-quotient-pre-equivalence}를 참조하라. $U'$가
+$R$-불변이므로 $s^{-1}(U') = t^{-1}(U')$이고, 따라서
+$f_{ijk}^{-1}(V_i \times_T T_j) = f_{ijk}^{-1}(T_i \times_T V_j)$이다.
+$\{f_{ijk}\}$가 전사이므로 위의 주장을 얻는다. 따라서 Descent, Lemma
+\ref{descent-lemma-open-fpqc-covering}에 의해 $f_i^{-1}(V) = V_i$를
+만족하는 열린 부분스킴 $V \subset T$가 존재한다. $V$가
+$T \times_{\xi, F} F'$를 표현한다고 주장한다.
+
+\medskip\noindent
+첫 단계로 $\xi|_V$가 $F'(V) \subset F(V)$에 속함을 보이자. 실제로
+사상족 $\{V_i \to V\}$는 fppf 피복이고, 구성에 의해
+$\xi|_{V_i} \in F'(V_i)$이다. 따라서 $F'$의 층 성질에 의해
+$\xi|_V \in F'(V)$를 얻는다. 마지막으로 $T' \to T$를 스킴의 사상이라
+하고 $\xi|_{T'} \in F'(T')$라고 가정하자.
+% P10-E0524: frozen English lacks the verb governing this second assumption.
+증명을 끝내려면 $T' \to T$가 $V$를 통해 분해됨을 보여야 한다.
+어떤 fppf 피복 $\{T'_j \to T'\}_{j \in J}$와 사상
+$b_j : T'_j \to U'$가 존재하여 $\xi|_{T'_j}$는 $b_j$의
+$U' \to U/R$에 의한 상이다. 합성 $T'_j \to T$가 $V$를 통해
+분해됨을 보이면 충분함은 분명하다. 따라서 $\xi|_{T'}$가 사상
+$b : T' \to U'$의 상이라고 가정해도 된다. 이제
+$T'\times_T T_i \to T_i$가 $V_i$를 통해 분해됨을 보이면 충분하다.
+스킴 $T' \times_T T_i$ 위에서 $\xi$의 제한은
+$(U/R)(T' \times_T T_i)$의 두 원소 $a_i \circ \text{pr}_1$과
+$b \circ \text{pr}_0$의 상이며, 그중 두 번째는 $R$-불변 열린 부분
+$U'$를 통해 분해된다. 따라서 Groupoids, Lemma
+\ref{groupoids-lemma-quotient-pre-equivalence}에 의해 어떤 피복
+$\{h_k : Z_k \to T' \times_T T_i\}$와 사상 $r_k : Z_k \to R$가 존재하여
+$a_i \circ \text{pr}_1 \circ h_k = s \circ r_k$ 및
+$b \circ \text{pr}_0 \circ h_k = t \circ r_k$를 만족한다. $U'$가
+$R$-불변 열린 부분이고 $b$의 상이 $U'$에 포함되므로, 각
+$a_i \circ \text{pr}_1 \circ h_k$의 상도 $U'$에 포함된다. $V_i$의
+정의에 의해 $T' \times_T T_i \to T_i$의 상이 $V_i$에 포함되며,
+이로써 증명이 끝난다.
+\end{proof}
+
+\section{동치관계의 슬라이싱}
+\label{section-slicing}
+
+\noindent
+이 절에서는 주어진 동치관계를 슬라이싱하여 ``개선''하는 방법을
+설명한다. 이는 익숙할 법한 ``\'etale 슬라이싱''이 아니라 훨씬 더
+거친 종류의 슬라이싱이다.
+
+
+\begin{lemma}
+\label{lemma-slice-equivalence-relation}
+$S$를 스킴이라 하자.
+$j : R \to U \times_S U$를 $S$ 위 스킴들의 동치관계라 하자.
+$s, t : R \to U$가 평탄하고 국소 유한 표시라고 가정하자.
+그러면 $S$ 위 스킴들의 동치관계 $j' : R' \to U'\times_S U'$와 동형
+$$
+U'/R' \longrightarrow U/R
+$$
+이 존재한다. 이 동형은 $R'$을 $R$ 안으로 보내는 사상 $U' \to U$에
+의해 유도되고, $s', t' : R \to U$는 평탄하고 국소 유한 표시이며
+국소 준유한이다.
+% P10-E0002/P10-E0525: frozen source types s',t' as R -> U, not R' -> U'.
+\end{lemma}
+
+\begin{proof}
+이 보조정리를 여러 단계로 증명한다. 동치관계가 군대상 스킴을 주고,
+동치관계의 제한도 동치관계라는 사실을 더 언급하지 않고 사용한다.
+Groupoids, Lemmas
+\ref{groupoids-lemma-restrict-relation},
+\ref{groupoids-lemma-equivalence-groupoid}, 그리고
+\ref{groupoids-lemma-restrict-groupoid-relation}을 참조하라.
+
+\medskip\noindent
+단계 1: $s, t : R \to U$가 국소 유한 표시인 Cohen--Macaulay 사상이라고
+가정해도 된다. 실제로 More on Groupoids, Lemma
+\ref{more-groupoids-lemma-make-CM}에서와 같이, $s : R \to U$가
+Cohen--Macaulay인 최대 열린 부분이 $t^{-1}(U') \subset R$가 되도록 하는
+열린 부분스킴 $g : U' \to U$를 잡고, $R$의 $U'$로의 제한을 $R'$이라
+쓰자.
+% P10-E0526: frozen English omits “by” in its notation-introduction phrase.
+위에서 인용한 보조정리에 의해
+$$
+\xymatrix{
+t^{-1}(U') \ar@{=}[r] &
+U' \times_{g, U, t} R \ar[r]_-{\text{pr}_1} \ar@/^3ex/[rr]^h &
+R \ar[r]_s &
+U
+}
+$$
+가 전사임을 안다. $h$가 평탄하고 국소 유한 표시이므로 $\{h\}$는
+fppf 피복이다. 따라서 Groupoids, Lemma
+\ref{groupoids-lemma-quotient-groupoid-restrict}에 의해
+$U'/R' \to U/R$가 동형임을 안다. $U'$의 구성에 의해 $s', t'$는
+Cohen--Macaulay이고 국소 유한 표시이다.
+
+\medskip\noindent
+단계 2. $s, t$가 Cohen--Macaulay이고 국소 유한 표시라고 가정하자.
+$u \in U$를 유한형인 점이라 하자. More on Groupoids, Lemma
+\ref{more-groupoids-lemma-max-slice-quasi-finite}에 의해 아핀 스킴 $U'$와
+사상 $g : U' \to U$가 존재하여 다음을 만족한다.
+\begin{enumerate}
+\item $g$는 몰입이다.
+\item $u \in U'$이다.
+\item $g$는 국소 유한 표시이다.
+\item $h$는 평탄하고 국소 유한 표시이며 국소 준유한이다.
+\item 사상 $s', t' : R' \to U'$는 평탄하고 국소 유한 표시이며 국소
+준유한이다.
+\end{enumerate}
+여기서는 More on Groupoids, Situation
+\ref{more-groupoids-situation-slice}에서 도입한 표기법을 사용했다.
+
+\medskip\noindent
+단계 3. 유한형인 각 점 $u \in U$에 대해 단계 2에서와 같은
+$g_u : U'_u \to U$를 하나 택하고, $R$의 $U'_u$로의 제한을 $R'_u$라
+쓰자. 다음과 같이 쓴다.
+$h_u = s \circ \text{pr}_1 : U'_u \times_{g_u, U, t} R \to U$.
+$U' = \coprod_{u \in U} U'_u$ 및 $g = \coprod g_u$로 놓는다. 위와 같이
+$R'$을 $R$의 $U'$로의 제한이라 하자. 순서쌍 $(U', g)$가 원하는
+성질을 만족한다고 주장한다\footnote{여기서는 $U'$가 지나치게 크지
+않은지, 즉 범주 $\Sch_{fppf}$의 한 대상과 동형인지 확인해야 한다.
+Section \ref{section-conventions}을 참조하라. 이는 순전히 집합론적인
+문제이다. Sets, Section \ref{sets-section-categories-schemes}에서 도입한
+스킴의 크기 개념을 사용하자. 각 $U'_u$의 크기는 $U$의 크기 이하이고,
+지표집합의 기수는 $U$의 크기로 제한되는 $|U|$의 기수 이하임을
+유의하라. 따라서 Sets, Lemma \ref{sets-lemma-what-is-in-it}의 (6)에
+의해 $U'$는 $\Sch_{fppf}$의 한 대상과 동형이다.} 다음을 유의하라.
+\begin{align*}
+R' = &
+\coprod\nolimits_{u_1, u_2 \in U}
+(U'_{u_1} \times_{g_{u_1}, U, t} R)
+\times_R
+(R \times_{s, U, g_{u_2}} U'_{u_2}) \\
+= &
+\coprod\nolimits_{u_1, u_2 \in U}
+(U'_{u_1} \times_{g_{u_1}, U, t} R) \times_{h_{u_1}, U, g_{u_2}} U'_{u_2}
+\end{align*}
+따라서 사영 $s' : R' \to U' = \coprod U'_{u_2}$는
+$\coprod h_{u_1}$의 밑변환으로서 평탄하고 국소 유한 표시이며 국소
+준유한이다. 마지막으로, 구성에 의해 사상
+$h : U' \times_{g, U, t} R \to U$는 $\coprod h_u$와 같으므로 그 상은
+$U$의 모든 유한형 점을 포함한다. 각 $h_u$가 평탄하고 국소 유한
+표시이므로 $h$도 평탄하고 국소 유한 표시이다. 특히 $h$의 상은 열린
+부분이다(Morphisms, Lemma \ref{morphisms-lemma-fppf-open}을 참조하라).
+또한 유한형 점들의 집합은 조밀하므로(Morphisms, Lemma
+\ref{morphisms-lemma-enough-finite-type-points}를 참조하라), $h$의 상이
+$U$임을 얻는다. 이는 $\{h\}$가 fppf 피복임을 뜻한다. Groupoids, Lemma
+\ref{groupoids-lemma-quotient-groupoid-restrict}에 의해
+$U'/R' \to U/R$는 동형이다. 이로써 보조정리의 증명이 끝난다.
+\end{proof}
+
+
+\section{부분군대상으로 나눈 몫}
+\label{section-dividing}
+
+\noindent
+마지막 부트스트랩을 수행하기 전에 보조정리 하나가 더 필요하다.
+스킴론적 판본을 다루기 전에 ``보통'' 군대상의 관점에서 무슨 일이
+일어나는지 논의하자.
+
+\medskip\noindent
+$\mathcal{C}$를 군대상이라 하자. Categories, Definition
+\ref{categories-definition-groupoid}를 참조하라. Groupoids, Section
+\ref{groupoids-section-groupoids}에서 논의했듯이 이는 오중항
+$(\text{Ob}, \text{Arrows}, s, t, c)$에 대응한다. 다음을 만족하는 부분집합
+$P \subset \text{Arrows}$가 주어졌다고 하자:
+$(\text{Ob}, P, s|_P, t|_P, c|_P)$도 군대상이고 $P$ 안에는 자명하지 않은
+자기동형이 없다. 그러면 몫 군대상
+$(\overline{\text{Ob}}, \overline{\text{Arrows}}, \overline{s},
+\overline{t}, \overline{c})$를 다음과 같이 구성할 수 있다.
+\begin{enumerate}
+\item $\overline{\text{Ob}} = \text{Ob}/P$는 $P$-동형류들의 집합이다.
+\item $\overline{\text{Arrows}} = P\backslash \text{Arrows}/P$는
+$\mathcal{C}$의 화살표들을 $P$의 화살표와 전합성 및 후합성하는 것까지
+동일시한 집합이다.
+\item 원천 및 표적 사상
+$\overline{s}, \overline{t} : P\backslash \text{Arrows}/P \to \text{Ob}/P$
+는 $s, t$에 의해 유도된다.
+\item 합성은 잘 정의되는 규칙
+$\overline{c}(\overline{a}, \overline{b}) = \overline{c(a, b)}$로 정의한다.
+\end{enumerate}
+실제로 원래 군대상 $(\text{Ob}, \text{Arrows}, s, t, c)$는 몫사상
+$g : \text{Ob} \to \overline{\text{Ob}}$에 의한 군대상
+$(\overline{\text{Ob}}, \overline{\text{Arrows}}, \overline{s},
+\overline{t}, \overline{c})$의 제한과 표준적으로 동형이다(Groupoids,
+Section \ref{groupoids-section-restrict-groupoid}의 논의를 참조하라).
+이는 다음 등식이 성립한다는 뜻임을 상기하라.
+$$
+\text{Arrows} =
+\text{Ob}
+\times_{g, \overline{\text{Ob}}, \overline{t}}
+\overline{\text{Arrows}}
+\times_{\overline{s}, \overline{\text{Ob}}, g}
+\text{Ob}
+$$
+$P$에 자명하지 않은 자기동형이 없으므로 이 등식이 성립한다. 자세한
+내용은 생략한다.
+
+\medskip\noindent
+다음 보조정리는 훨씬 더 일반적으로 성립하지만, 여기서는 마지막
+부트스트랩의 증명에서 사용할 판본만 제시한다(그 뒤에는 이 보조정리의
+더 일반적인 판본들을 더 쉽게 증명할 수 있다).
+
+\begin{lemma}
+\label{lemma-divide-subgroupoid}
+$S$를 스킴이라 하자.
+$(U, R, s, t, c)$를 $S$ 위의 군대상 스킴이라 하자.
+$P \to R$를 스킴의 단사사상이라 하자. 다음을 가정한다.
+% P10-E0527: Korean needs no article corresponding to frozen English “a”.
+\begin{enumerate}
+\item $(U, P, s|_P, t|_P, c|_{P \times_{s, U, t}P})$는 군대상 스킴이다.
+\item $s|_P, t|_P : P \to U$는 유한 국소 자유이다.
+\item $j|_P : P \to U \times_S U$는 단사사상이다.
+\item $U$는 아핀이다.
+\item $j : R \to U \times_S U$는 분리이고 국소 준유한이다.
+\end{enumerate}
+그러면 $U/P$는 아핀 스킴 $\overline{U}$로 표현 가능하고, 몫사상
+$U \to \overline{U}$는 유한 국소 자유이며,
+$P = U \times_{\overline{U}} U$이다. 또한 $R$은 몫사상
+$U \to \overline{U}$에 의한 $\overline{U}$ 위 군대상 스킴
+$(\overline{U}, \overline{R}, \overline{s}, \overline{t}, \overline{c})$의
+제한이다.
+\end{lemma}
+
+\begin{proof}
+조건 (1), (2), (3), (4)와 Groupoids, Proposition
+\ref{groupoids-proposition-finite-flat-equivalence}에 의해 $U/P$를
+표현하는 아핀 스킴 $\overline{U}$가 존재하고, 사상
+$U \to \overline{U}$는 유한 국소 자유이며,
+$P = U \times_{\overline{U}} U$이다. 식별
+$P = U \times_{\overline{U}} U$은
+$t|_P = \text{pr}_0$ 및 $s|_P = \text{pr}_1$이 되며, 합성이
+$\text{pr}_{02} : U \times_{\overline{U}} U \times_{\overline{U}} U
+\to U \times_{\overline{U}} U$와 같아지도록 주어진다. 유한 국소 자유
+사상들의 곱은 유한 국소
+자유이다(Spaces, Lemma
+\ref{spaces-lemma-product-representable-transformations-property}와
+Morphisms, Lemmas \ref{morphisms-lemma-base-change-finite-locally-free} 및
+\ref{morphisms-lemma-composition-finite-locally-free}를 참조하라).
+$\overline{R}$을 얻기 위해 유한 국소 자유 사상
+$U \times_S U \to \overline{U} \times_S \overline{U}$를 따라 스킴 $R$을
+하강시킨다. 구체적으로, 위의 결과에 의해
+$$
+(U \times_S U)
+\times_{(\overline{U} \times_S \overline{U})}
+(U \times_S U)
+=
+P \times_S P
+$$
+임을 유의하라. 따라서
+$R / U \times_S U / \overline{U} \times_S \overline{U}$에 대한 하강
+데이터(Descent, Definition \ref{descent-definition-descent-datum} 참조)를
+주는 것은, 코사이클 조건을 만족하는 $P \times_S P$ 위의 동형
+$$
+\varphi :
+R \times_{(U \times_S U), t \times t} (P \times_S P)
+\longrightarrow
+(P \times_S P) \times_{s \times s, (U \times_S U)} R
+$$
+를 주는 것이다. $T$-값 점에 대해 $\varphi$를 다음 규칙으로 정의한다.
+$$
+\varphi : (r, (p, p')) \longmapsto ((p, p'), p^{-1} \circ r \circ p')
+$$
+여기서 합성은 군대상 범주 $(U(T), R(T), s, t, c)$에서 취한다.
+$(r, (p, p'))$가 $\varphi$의 원천의 $T$-값 점이 되려면
+$t(r) = t(p)$와 $s(r) = t(p')$가 성립해야 하므로 이 정의에는 의미가
+있다. 이 사상은 동형이고, 그 역은
+$((p, p'), r') \mapsto (p \circ r' \circ (p')^{-1}, (p, p'))$로 주어진다.
+코사이클 조건을 확인하려면 다음 등식 위의 사상으로서
+$\varphi_{02} = \varphi_{12} \circ \varphi_{01}$임을 확인해야 한다.
+$$
+(U \times_S U)
+\times_{(\overline{U} \times_S \overline{U})} (U \times_S U)
+\times_{(\overline{U} \times_S \overline{U})} (U \times_S U) =
+(P \times_S P) \times_{s \times s, (U \times_S U), t \times t} (P \times_S P)
+$$
+직접 계산하면 다음을 얻는다.
+$$
+\begin{matrix}
+\varphi_{02} & (r, (p_1, p_1'), (p_2, p_2')) & \mapsto &
+((p_1, p_1'), (p_2, p_2'),
+(p_1 \circ p_2)^{-1} \circ r \circ (p_1' \circ p_2')) \\
+\varphi_{01} & (r, (p_1, p_1'), (p_2, p_2')) & \mapsto &
+((p_1, p_1'), p_1^{-1} \circ r \circ p_1', (p_2, p_2')) \\
+\varphi_{12} & ((p_1, p_1'), r, (p_2, p_2')) & \mapsto &
+((p_1, p_1'), (p_2, p_2'), p_2^{-1} \circ r \circ p_2')
+\end{matrix}
+$$
+(표기는 명백하다.) 이는 원하는 결론을 준다. (5)에 의해 $j$가 분리이고
+국소 준유한이므로 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-morphisms-fppf-descend}를
+적용하여 스킴 $\overline{R} \to \overline{U} \times_S \overline{U}$와 동형
+$$
+R \to \overline{R} \times_{(\overline{U} \times_S \overline{U})} (U \times_S U)
+$$
+을 얻는다. 이 동형은 하강 데이터 $\varphi$를
+$\overline{R} \times_{(\overline{U} \times_S \overline{U})} (U \times_S U)$
+위의 표준 하강 데이터와 식별한다. Descent, Definition
+\ref{descent-definition-effective}을 참조하라.
+
+\medskip\noindent
+$U \times_S U \to \overline{U} \times_S \overline{U}$가 유한 국소
+자유이므로, 밑변환인 $R \to \overline{R}$도 유한 국소 자유이다.
+따라서 $R \to \overline{R}$는 $(\Sch/S)_{fppf}$ 위 층들의 사상으로서
+전사이다. $\varphi$를 위와 같이 택했으므로, $T$-값 점
+$r, r' \in R(T)$가 $\overline{R}$에서 같은 상을 가질 필요충분조건은
+어떤 $p, p' \in P(T)$에 대하여 $p^{-1} \circ r \circ p'$이다.
+% P10-E0003/P10-E0528: frozen source omits the equality relating r' to this expression.
+따라서 $\overline{R}$은 앞의 논의에서 쓴 표기법에 따라 층
+$$
+T \longmapsto  \overline{R(T)} = P(T)\backslash R(T)/P(T)
+$$
+을 표현한다. 그러므로 ``보통'' 군대상의 경우에 대한 논의에서와 똑같이
+$(\overline{U} = U/P, \overline{R} = P\backslash R/P)$ 위의 군대상 구조를
+정의할 수 있다. 이로부터 $(U, R, s, t, c)$가 사상
+$U \to \overline{U}$에 의한 이 군대상 구조의 당김임을 얻는다.
+이로써 증명이 끝난다.
+\end{proof}
+ 
+\section{최종 부트스트랩}
+\label{section-final-bootstrap}
+
+\noindent
+다음 결과는 앞의 결과들보다 상당히 더 나아간다.
+
+\begin{theorem}
+\label{theorem-final-bootstrap}
+$S$를 스킴이라 하자.
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를 함자라 하자.
+다음 조건 가운데 어느 하나라도 성립하면 $F$는 대수 공간이다.
+\begin{enumerate}
+\item $F = U/R$이고, 여기서 $(U, R, s, t, c)$는 $S$ 위 대수 공간들의
+군대상이며 $s, t$는 평탄이고 국소 유한 표시이고
+$j = (t, s) : R \to U \times_S U$는 동치관계인 경우,
+\item $F = U/R$이고, 여기서 $(U, R, s, t, c)$는 $S$ 위 군대상 스킴이며
+$s, t$는 평탄이고 국소 유한 표시이고
+$j = (t, s) : R \to U \times_S U$는 동치관계인 경우,
+\item $F$가 층이고, 어떤 대수 공간 $U$와 대수 공간으로 표현 가능하며
+전사이고 평탄이고 국소 유한 표시인 사상 $U \to F$가 존재하는 경우,
+\item $F$가 층이고, 어떤 스킴 $U$와 대수 공간 또는 스킴으로 표현
+가능하며 전사이고 평탄이고 국소 유한 표시인 사상 $U \to F$가
+존재하는 경우,
+\item $F$가 층이고, $\Delta_F$가 대수 공간으로 표현 가능하며,
+어떤 대수 공간 $U$와 전사이고 평탄이고 국소 유한 표시인 사상
+$U \to F$가 존재하는 경우, 또는
+\item $F$가 층이고, $\Delta_F$가 표현 가능하며,
+어떤 스킴 $U$와 전사이고 평탄이고 국소 유한 표시인 사상
+$U \to F$가 존재하는 경우.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+자명한 관찰부터 하자. (6)은 (5)의 특수한 경우이고
+(4)는 (3)의 특수한 경우이다.
+먼저 (5)와 (3)의 경우가 (1)의 경우로 환원됨을 증명하자.
+실제로 대각사상을 부트스트랩하는
+Lemma \ref{lemma-bootstrap-diagonal}에 의해
+(3)이 (5)를 함의함을 알 수 있다. (5)의 경우에는
+$R = U \times_F U$로 놓는데, 가정에 의해 이는 대수 공간이다.
+더욱이 가정에 의해 두 사영 $s, t : R \to U$는 모두
+전사이고 평탄이고 국소 유한 표시이다.
+사상 $j : R \to U \times_S U$는 명백히 동치관계이다.
+Lemma \ref{lemma-surjective-flat-locally-finite-presentation}에 의해
+사상 $U \to F$는 층들의 전사이다. 따라서 $F = U/R$이고,
+이로써 (1)의 경우로 환원된다.
+
+\medskip\noindent
+다음으로 (1)이 (2)로 환원됨을 보이자.
+실제로 $(U, R, s, t, c)$를 $S$ 위 대수 공간들의 군대상이라 하되,
+$s, t$는 평탄이고 국소 유한 표시이고
+$j = (t, s) : R \to U \times_S U$는 동치관계라 하자.
+스킴 $U'$과 전사 \'etale 사상 $U' \to U$를 택하자.
+$R' = R|_{U'}$를 $R$의 $U'$에 대한 제한이라 하자.
+Groupoids in Spaces,
+Lemma \ref{spaces-groupoids-lemma-quotient-pre-equivalence-relation-restrict}에
+의해 $U/R = U'/R'$임을 알 수 있다. 또한
+$s', t' : R' \to U'$도 평탄이고 국소 유한 표시이므로
+(More on Groupoids in Spaces,
+Lemma \ref{spaces-more-groupoids-lemma-restrict-preserves-type}를 참조하라),
+$U$가 스킴인 경우로 환원된다.
+$j$가 동치관계이므로 $j$는 단사사상이다.
+$s : R \to U$가 국소 유한 표시이므로
+$j : R \to U \times_S U$는 국소 유한형이다. Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-permanence-finite-type}를 참조하라.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-loc-finite-type-loc-quasi-finite}에
+의해 $j$는 국소 준유한이고 분리이다.
+따라서 $U$가 스킴이면 Morphisms of Spaces, Proposition
+\ref{spaces-morphisms-proposition-locally-quasi-finite-separated-over-scheme}에
+의해 $R$도 스킴이다.
+그러므로 정리를 (2)의 경우에 증명하는 것으로 환원된다.
+
+\medskip\noindent
+$F = U/R$라 가정하자. 여기서 $(U, R, s, t, c)$는 $S$ 위 군대상
+스킴이고, $s, t$는 평탄이고 국소 유한 표시이며,
+$j = (t, s) : R \to U \times_S U$는 동치관계이다.
+Lemma \ref{lemma-slice-equivalence-relation}에 의해
+$s, t$가 평탄이고 국소 유한 표시이고 국소 준유한인 경우로 환원된다.
+$U = \bigcup_{i \in I} U_i$를 아핀 열린 덮개라 하자.
+% P10-E0529: frozen source has a redundant comparison word; Korean renders the intended comparison without altering the formula.
+(뒤에서 집합론적 문제를 피하려고 첨자집합 $I$의 기수와 $U$의 크기가
+$\leq$ 관계를 이루도록 택한다. 대부분의 독자는 이 언급을 무시해도 좋다.)
+$(U_i, R_i, s_i, t_i, c_i)$를 $R$의 $U_i$에 대한 제한이라 하자.
+$R_i$는 $R$의 열린 부분스킴
+$s^{-1}(U_i) \cap t^{-1}(U_i)$이고 $s_i, t_i$는 이 열린 부분에 대한
+$s, t$의 제한이므로, $s_i, t_i$도 여전히 평탄이고 국소 유한 표시이고
+국소 준유한임이 명백하다.
+Lemma \ref{lemma-better-finding-opens}
+(또는 더 간단한 Spaces, Lemma \ref{spaces-lemma-finding-opens})에 의해
+사상 $U_i/R_i \to U/R$는 열린 몰입으로 표현 가능하다.
+따라서 $F_i = U_i/R_i$가 대수 공간임을 보일 수 있다면,
+Spaces, Lemma \ref{spaces-lemma-coproduct-algebraic-spaces}에 의해
+$\coprod_{i \in I} F_i$도 대수 공간이다.
+$U = \bigcup U_i$가 열린 덮개이므로
+$\coprod F_i \to F$가 전사임은 명백하다.
+따라서 Spaces, Lemma \ref{spaces-lemma-glueing-algebraic-spaces}에 의해
+$U/R$는 대수 공간이다.
+이렇게 하여 $U$가 아핀이고 $s, t$는 평탄이고 국소 유한 표시이고
+국소 준유한이며 $j$는 동치관계인 경우로 환원된다.
+
+\medskip\noindent
+$(U, R, s, t, c)$가 $S$ 위 군대상 스킴이고, $U$는 아핀이며,
+$s, t$는 평탄이고 국소 유한 표시이고 국소 준유한이며,
+$j$는 동치관계라 가정하자.
+$u \in U$를 택하자. More on Groupoids in Spaces,
+Lemma \ref{spaces-more-groupoids-lemma-quasi-splitting-affine-scheme}를
+$u \in U, R, s, t, c$에 적용한다. 그러면 아핀 스킴 $U'$,
+\'etale 사상 $g : U' \to U$, 그리고
+$\kappa(u) = \kappa(u')$인 점 $u' \in U'$를 얻으며,
+제한 $R' = R|_{U'}$는 $u'$ 위에서 준분할이다.
+$g$가 \'etale이므로 상 $g(U')$는 열리고 $u$를 포함한다.
+따라서 이 보조정리를 반복해서 적용하면 유한 개의 점
+$u_i \in U$, $i = 1, \ldots, n$, 아핀 스킴 $U'_i$,
+\'etale 사상 $g_i : U_i' \to U$, 그리고
+% P10-E0004/P10-E0530: frozen source uses g rather than the indexed g_i; preserve it literally.
+$g(u'_i) = u_i$인 점 $u'_i \in U'_i$를 찾을 수 있어서,
+(a) 각 제한 $R'_i$는 $U'_i$의 어떤 점 위에서 준분할이고
+(b) $U = \bigcup_{i = 1, \ldots, n} g_i(U'_i)$이다.
+이제 앞 단락의 논증 마지막 부분을 다시 적용한다.
+Lemma \ref{lemma-better-finding-opens}
+(또는 더 간단한 Spaces, Lemma \ref{spaces-lemma-finding-opens})에 의해
+사상 $U'_i/R'_i \to U/R$는 열린 몰입으로 표현 가능하다.
+$F_i = U'_i/R'_i$가 대수 공간임을 보일 수 있다면,
+% P10-E0005/P10-E0531: frozen source retains the earlier index set I here; preserve it literally.
+Spaces, Lemma \ref{spaces-lemma-coproduct-algebraic-spaces}에 의해
+$\coprod_{i \in I} F_i$도 대수 공간이다.
+$\{g_i : U'_i \to U\}$가 \'etale 덮개이므로
+$\coprod F_i \to F$가 전사임은 명백하다.
+따라서 Spaces, Lemma \ref{spaces-lemma-glueing-algebraic-spaces}에 의해
+$U/R$는 대수 공간이다.
+이렇게 하여 $U$가 아핀이고 $s, t$는 평탄이고 국소 유한 표시이고
+국소 준유한이며, $j$는 동치관계이고, 어떤 $u \in U$에 대하여
+$R$이 $u$ 위에서 준분할인 경우로 환원된다.
+
+\medskip\noindent
+$(U, R, s, t, c)$가 $S$ 위 군대상 스킴이고, $U$는 아핀이며,
+$u \in U$이고, $s, t$는 평탄이고 국소 유한 표시이고 국소 준유한이며,
+$j = (t, s) : R \to U \times_S U$는 동치관계이고,
+$R$은 $u$ 위에서 준분할이라 가정하자.
+$P \subset R$를 $u$ 위에서 $R$의 준분할이라 하자.
+Lemma \ref{lemma-divide-subgroupoid}에 의해
+$(U, R, s, t, c)$는 전사 유한 국소 자유 사상
+$U \to \overline{U}$에 의한 군대상
+$(\overline{U}, \overline{R}, \overline{s}, \overline{t}, \overline{c})$의
+제한이고,
+$P = U \times_{\overline{U}} U$임을 알 수 있다.
+$s$가 다음 분해를 가짐에 유의하라.
+$$
+R = U \times_{\overline{U}, \overline{t}} \overline{R}
+\times_{\overline{s}, \overline{U}} U
+\xrightarrow{\text{pr}_{23}}
+\overline{R} \times_{\overline{s}, \overline{U}} U
+\xrightarrow{\text{pr}_2} U
+$$
+사상 $\text{pr}_2$는 $\overline{s}$의 밑변환이고,
+사상 $\text{pr}_{23}$은 전사 유한 국소 자유 사상
+$U \to \overline{U}$의 밑변환이다.
+$s$가 평탄이고 국소 유한 표시이고 국소 준유한이며
+$\text{pr}_{23}$이 전사 유한 국소 자유이므로
+(그러한 사상의 밑변환이므로), Descent, Lemmas
+\ref{descent-lemma-flat-fpqc-local-source}와
+\ref{descent-lemma-locally-finite-presentation-fppf-local-source},
+그리고 Morphisms, Lemma
+\ref{morphisms-lemma-quasi-finite-local-source}에 의해
+$\text{pr}_2$는 평탄이고 국소 유한 표시이고 국소 준유한이다.
+$\text{pr}_2$는 $U \to \overline{U}$에 의한 사상 $\overline{s}$의
+밑변환이고 $\{U \to \overline{U}\}$는 fppf 덮개이므로,
+Descent, Lemmas \ref{descent-lemma-descending-property-flat},
+\ref{descent-lemma-descending-property-locally-finite-presentation},
+\ref{descent-lemma-descending-property-quasi-finite}에 의해
+$\overline{s}$가 평탄이고 국소 유한 표시이고 국소 준유한임을 얻는다.
+$\overline{t}$도 마찬가지이다. 다음 가환 도식을 생각하자.
+$$
+\xymatrix{
+U \times_{\overline{U}} U \ar@{=}[r] \ar[rd] & P \ar[r] \ar[d] & R \ar[d] \\
+& \overline{U} \ar[r]^{\overline{e}} & \overline{R}
+}
+$$
+제한에 관한 일반적 사실에 의해 바깥쪽 네 꼭짓점은 Cartesian 도식을
+이룬다. 이 등식에 의해 안쪽 정사각형도 Cartesian이다.
+$P$는 $R$에서 열려 있으므로(준분할의 정의에 의해),
+Descent, Lemma \ref{descent-lemma-descending-property-open-immersion}에
+의해 $\overline{e}$는 열린 몰입이다.
+Groupoids,
+Lemma \ref{groupoids-lemma-quotient-pre-equivalence-relation-restrict}를
+적용하면 $U/R = \overline{U}/\overline{R}$이다.
+따라서 $(U, R, s, t, c)$가 $S$ 위 군대상 스킴이고,
+$U$는 아핀이며, $u \in U$이고, $s, t$는 평탄이고 국소 유한 표시이고
+국소 준유한이며, $j = (t, s) : R \to U \times_S U$는 동치관계이고,
+$e : U \to R$가 열린 몰입인 경우로 환원되었다!
+
+\medskip\noindent
+물론 $e$가 열린 몰입이고 $s, t$가 평탄이고 국소 유한 표시이면,
+사상 $t, s$는 \'etale이다.
+예를 들어 More on Groupoids, Lemma
+\ref{more-groupoids-lemma-sheaf-differentials}를 적용하면 이를 알 수 있다.
+이 보조정리는 $\Omega_{R/U} = 0$임을 보이고, 이는 다시
+% P10-E0532: Korean supplies natural plural agreement while preserving the frozen formula and morphisms.
+$s, t : R \to U$가 G-비분기임을 함의하며(Morphisms, Lemma
+\ref{morphisms-lemma-unramified-omega-zero}를 참조하라), 이는 다시
+$s, t$가 \'etale임을 함의한다(Morphisms, Lemma
+\ref{morphisms-lemma-flat-unramified-etale}를 참조하라).
+마지막으로 $s, t$가 \'etale이면 Spaces, Theorem
+\ref{spaces-theorem-presentation}에 의해 $U/R$는 대수 공간이다.
+\end{proof}
+
+\section{응용}
+\label{section-applications}
+
+\noindent
+첫 번째 응용으로 다음 기본 사실을 얻는다.
+$$
+\fbox{fppf 국소적으로 대수 공간인 층은 대수 공간이다.}
+$$
+이것이 다음 보조정리의 내용이다.
+가정 (2)는 $F|_{(\Sch/S_i)_{fppf}}$가 대수 공간이라는 조건과
+동치임에 유의하라. Spaces, Lemma \ref{spaces-lemma-rephrase}를
+참조하라. 가정 (3)은 집합론적 조건이며, 집합론적 문제를 염려하지
+않는 독자는 무시해도 된다.
+
+\begin{lemma}
+\label{lemma-locally-algebraic-space}
+\begin{slogan}
+대수 공간의 정의는 fppf 국소적이다.
+\end{slogan}
+$S$를 스킴이라 하자.
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를 함자라 하자.
+$\{S_i \to S\}_{i \in I}$를 $(\Sch/S)_{fppf}$의 덮개라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $F$는 층이다.
+\item 각 $F_i = h_{S_i} \times F$는 대수 공간이다.
+\item $\coprod_{i \in I} F_i$는 대수 공간이다(Spaces, Lemma
+\ref{spaces-lemma-coproduct-algebraic-spaces}를 참조하라).
+\end{enumerate}
+그러면 $F$는 대수 공간이다.
+\end{lemma}
+
+\begin{proof}
+사상 $\coprod F_i \to F$를 생각하자. 이는 $F \to S$에 의한
+$\coprod S_i \to S$의 밑변환이다. 따라서 fppf 덮개의 정의와
+Lemma \ref{lemma-base-change-transformation-property}에 의해
+표현 가능하고 국소 유한 표시이고 평탄이고 전사이다.
+그러므로 Theorem \ref{theorem-final-bootstrap}을 적용하면
+$F$가 대수 공간임을 얻는다.
+\end{proof}
+
+\noindent
+다음은 Lemma \ref{lemma-locally-algebraic-space}의 특수한 경우로,
+집합론적 문제를 염려할 필요가 없다.
+
+\begin{lemma}
+\label{lemma-locally-algebraic-space-finite-type}
+$S$를 스킴이라 하자.
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를 함자라 하자.
+$\{S_i \to S\}_{i \in I}$를 $(\Sch/S)_{fppf}$의 덮개라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $F$는 층이다.
+\item 각 $F_i = h_{S_i} \times F$는 대수 공간이다.
+\item 사상 $F_i \to S_i$는 유한형이다.
+\end{enumerate}
+그러면 $F$는 대수 공간이다.
+\end{lemma}
+
+\begin{proof}
+위의 Lemma \ref{lemma-locally-algebraic-space}를 사용할 것이다.
+이를 위해 $F_i$가 $S_i$ 위에서 유한형이라는 가정으로부터
+그 보조정리의 집합론적 조건이 성립함을 보이겠다
+(필요하다면 주어진 $S$의 덮개를 조금 세분한 뒤에).
+% P10-E0533: Korean supplies the missing governing predicate in the frozen English sentence.
+독자에게는 증명의 나머지 부분을 건너뛰기를 권한다.
+
+\medskip\noindent
+$S'_i \to S_i$가 스킴의 사상이면
+$$
+h_{S'_i} \times F =
+h_{S'_i} \times_{h_{S_i}} h_{S_i} \times F =
+h_{S'_i} \times_{h_{S_i}} F_i
+$$
+는 $S'_i$ 위 유한형 대수 공간이다. Spaces, Lemma
+\ref{spaces-lemma-fibre-product-spaces}와 Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-finite-type}를 참조하라.
+따라서 주어진 덮개를 세분할 수 있다. 그렇게 한 뒤에는
+(a) 각 $S_i$가 아핀이고, (b) $I$의 기수가 $S$의 점들의 집합의
+기수 이하라고 가정할 수 있다.
+(실제로 $S$ 전체를 덮으려면 각 점이 어떤 $i$에 대한
+$S_i \to S$의 상에 속하는 것으로 충분하다.)
+
+\medskip\noindent
+각 $S_i$가 아핀이고 각 $F_i$가 $S_i$ 위에서 유한형이므로
+$F_i$는 준콤팩트이다. 따라서 Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-quasi-compact-affine-cover}에 의해
+아핀 $U_i \in \Ob((\Sch/S)_{fppf})$와 전사 \'etale 사상
+$U_i \to F_i$를 찾을 수 있다.
+$F_i \to S_i$가 국소 유한형이라는 사실로부터
+$U_i \to S_i$가 국소 유한형이고, 특히 $U_i \to S$가 국소 유한형이다.
+Sets, Lemma \ref{sets-lemma-bound-finite-type}에 의해
+$\text{size}(U_i) \leq \text{size}(S)$를 얻는다.
+또한 $|I| \leq \text{size}(S)$이므로 Sets, Lemma
+\ref{sets-lemma-bound-size}와 $\Sch$의 구성에 의해
+$\coprod_{i \in I} U_i$는 $(\Sch/S)_{fppf}$의 한 대상과 동형이다.
+그러므로 Spaces, Lemma
+\ref{spaces-lemma-coproduct-algebraic-spaces}에 의해
+$\coprod F_i$는 대수 공간이고, 원하는 결론을 얻는다.
+\end{proof}
+
+\noindent
+두 번째 응용으로 다음을 얻는다.
+$$
+\fbox{대수 공간에 대한 모든 fppf 하강 데이터는 유효하다.}
+$$
+이는 집합론적 난점을 제외하면 성립한다. 그 한 예로 다음 보조정리를
+제시한다.
+
+\begin{lemma}
+\label{lemma-descend-algebraic-space}
+\begin{slogan}
+대수 공간에 대한 fppf 하강 데이터는 유효하다.
+\end{slogan}
+$S$를 스킴이라 하자. $\{X_i \to X\}_{i \in I}$를
+$S$ 위 대수 공간들의 fppf 덮개라 하자.
+\begin{enumerate}
+\item $I$가 가산이면\footnote{가산성에 대한 제한은 집합론적 문제를
+고려하지 않는 독자는 무시해도 된다. 하강시키는 대수 공간의 크기에
+상계를 줄 수 있다면 여기서 더 큰 첨자집합도 허용할 수 있다.
+예를 들어 Lemma
+\ref{lemma-locally-algebraic-space-finite-type}를 참조하라.},
+% P10-E0534: Korean uses the correctly formed term for the frozen misspelling of countability.
+$\{X_i \to X\}$에 대한 대수 공간의 모든 하강 데이터는 유효하다.
+\item $\{X_i \to X\}_{i \in I}$에 대한 하강 데이터
+$(Y_i, \varphi_{ij})$가 주어졌다고 하자(Descent on Spaces,
+Definition
+\ref{spaces-descent-definition-descent-datum-for-family-of-morphisms}).
+각 $Y_i \to X_i$가 유한형이면 이 하강 데이터는 유효하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descent-data-sheaves}에 의해 이는 다음
+명제로 바뀐다. 사상 $F \to X$를 갖춘 fppf 층 $F$에 대하여,
+각 $F \times_X X_i$가 대수 공간이면 그 층도 대수 공간이다.
+$I$의 기수에 대한 제한으로부터 $I$로 첨자화된 대수 공간들의
+쌍대합은 대수 공간이다. Spaces, Lemma
+\ref{spaces-lemma-coproduct-algebraic-spaces}와
+Sets, Lemma \ref{sets-lemma-what-is-in-it}를 참조하라.
+사상
+$$
+\coprod F \times_X X_i \longrightarrow F
+$$
+은 대수 공간으로 표현 가능하다($\coprod X_i \to X$의
+밑변환이므로, Lemma \ref{lemma-base-change-transformation}을 참조하라).
+또한 전사이고 평탄이고 국소 유한 표시이다
+($\coprod X_i \to X$의 밑변환이므로, Lemma
+\ref{lemma-base-change-transformation-property}를 참조하라).
+따라서 (1)은 Theorem \ref{theorem-final-bootstrap}으로부터 따른다.
+
+\medskip\noindent
+(2)의 증명. 먼저 Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descent-data-sheaves}를 적용하여
+사상 $F \to X$를 갖춘 fppf 층 $F$를 얻되,
+모든 $i \in I$에 대하여 $F \times_X X_i = Y_i$이도록 한다.
+목표는 $F$가 대수 공간임을 보이는 것이다.
+스킴 $U$와 전사 \'etale 사상 $U \to X$를 택하자.
+그러면 $F' = U \times_X F \to F$는 $U \to X$의 밑변환이므로
+표현 가능하고 전사이고 \'etale이다.
+Theorem \ref{theorem-final-bootstrap}에 의해
+$F' = U \times_X F$가 대수 공간임을 보이는 것으로 충분하다.
+$U_j$가 스킴인 fppf 덮개 $\{U_j \to U\}_{j \in J}$를 택하여
+fppf 덮개 $\{X_i \times_X U \to U\}_{i \in I}$를 세분하게 할 수 있다.
+Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-refine-fppf-schemes}를 참조하라.
+따라서 사상 $a : J \to I$와 각 $j$에 대하여 $X$ 위의 사상
+$U_j \to X_{a(j)}$를 얻는다.
+그러면
+$U_j \times_U F' = U_j \times_{X_{a(j)}} Y_{a(j)}$는
+$U_j$ 위에서 유한형이다.
+따라서 Lemma \ref{lemma-locally-algebraic-space-finite-type}에 의해
+$F'$는 대수 공간이다.
+\end{proof}
+
+\noindent
+다음은 다른 유형의 응용이다.
+
+\begin{lemma}
+\label{lemma-representable-by-spaces-cover}
+$S$를 스킴이라 하자. $a : F \to G$와 $b : G \to H$를
+함자 $(\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ 사이의 변환이라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $F, G, H$는 층이다.
+\item $a : F \to G$는 대수 공간으로 표현 가능하고 평탄이고
+국소 유한 표시이고 전사이다.
+\item $b \circ a : F \to H$는 대수 공간으로 표현 가능하다.
+\end{enumerate}
+그러면 $b$는 대수 공간으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+$U$를 $S$ 위 스킴이라 하고 $\xi \in H(U)$라 하자.
+$U \times_{\xi, H} G$가 대수 공간임을 보여야 한다.
+한편 $U \times_{\xi, H} F$가 대수 공간임을 알고 있으며,
+사상
+$U \times_{\xi, H} F \to U \times_{\xi, H} G$는 $a$의 밑변환이므로
+대수 공간으로 표현 가능하고 평탄이고 국소 유한 표시이고 전사이다
+(Lemma \ref{lemma-base-change-transformation-property}를 참조하라).
+따라서 결과는 Theorem \ref{theorem-final-bootstrap}으로부터 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quotient-stack-isom}
+$B \to S$와 $(U, R, s, t, c)$가 Groupoids in Spaces,
+Definition \ref{spaces-groupoids-definition-quotient-stack} (1)에서와
+같다고 하자. $S$ 위의 임의의 스킴 $T$와 $T$ 위 $[U/R]$의 대상
+$x, y$에 대하여, $(\Sch/T)_{fppf}$ 위의 층
+$\mathit{Isom}(x, y)$는 대수 공간이다.
+\end{lemma}
+
+\begin{proof}
+Groupoids in Spaces,
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-isom}에 의해,
+각 $i$에 대하여
+$\mathit{Isom}(x, y)|_{(\Sch/T_i)_{fppf}}$가 대수 공간인
+fppf 덮개 $\{T_i \to T\}_{i \in I}$가 존재한다.
+Spaces, Lemma \ref{spaces-lemma-rephrase}에 의해 이는 각
+% P10-E0535: frozen source uses the undefined S_i in this formula; preserve it literally.
+$F_i = h_{S_i} \times \mathit{Isom}(x, y)$가 대수 공간이라는 뜻이다.
+따라서 보조정리를 증명하려면 위의
+Lemma \ref{lemma-locally-algebraic-space}의 집합론적 조건,
+즉 $\coprod F_i$가 대수 공간임을 확인하기만 하면 된다.
+이를 위해 Spaces, Lemma
+\ref{spaces-lemma-coproduct-algebraic-spaces}를 사용하는데,
+그러려면 $I$와 $F_i$들이 지나치게 크지 않음을 보여야 한다.
+독자에게는 증명의 나머지 부분을 건너뛰기를 권한다.
+
+\medskip\noindent
+$U' \in \Ob(\Sch/S)_{fppf}$와 전사 \'etale 사상 $U' \to U$를
+택하자. $R'$를 $R$의 $U'$에 대한 제한이라 하자.
+$[U/R] = [U'/R']$이므로 $U$를 $U'$으로 바꾼 뒤
+$U$가 스킴이라고 가정할 수 있다.
+(이 단계는 아래의 섬유곱들이 스킴 위에 놓이도록 하기 위한 것이다.)
+
+\medskip\noindent
+덮개 $\{T_i \to T\}$를 세분해도 각 $F_i$가 대수 공간이라는
+사실은 그대로임에 유의하라. 따라서 각 $T_i$가 아핀이라고
+가정할 수 있다. 그러면 $T_i \to T$가 국소 유한 표시이므로
+Sets, Lemma \ref{sets-lemma-bound-finite-type}에 의해
+$\text{size}(T_i) \leq \text{size}(T)$이다.
+또한 덮개를 이루려면 $T$의 각 점이 상에 속하는지만 확인하면
+되므로, 첨자집합 $I$의 기수가 $T$의 점들의 집합의 기수 이하라고
+가정할 수 있다. 따라서 $|I| \leq \text{size}(T)$이다.
+$W \in \Ob((\Sch/S)_{fppf})$와 전사 \'etale 사상 $W \to R$를
+택하자. Groupoids in Spaces,
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-isom}의 증명에서
+어떤 $x_i, y_i : T_i \to U$에 대하여 $F_i$가
+$T_i \times_{(y_i, x_i), U \times_B U} R$로 표현됨을 보였다.
+따라서 이제
+$V_i = T_i \times_{(y_i, x_i), U \times_B U} W$는 스킴이고,
+\'etale 전사 $V_i \to F_i$를 갖는다.
+Sets, Lemma \ref{sets-lemma-bound-size-fibre-product}에 의해
+$$
+\text{size}(V_i) \leq \max\{\text{size}(T_i), \text{size}(W)\}
+\leq \max\{\text{size}(T), \text{size}(W)\}
+$$
+이다. 따라서 Sets, Lemma \ref{sets-lemma-bound-size}에 의해
+$$
+\text{size}(\coprod\nolimits_{i \in I} V_i)
+\leq \max\{|I|, \text{size}(T), \text{size}(W)\}.
+$$
+그러므로 $\Sch$의 구성에 의해
+$\coprod_{i \in I} V_i$는 $(\Sch/S)_{fppf}$의 어떤 대상 $V$와
+동형이다. 이는 Spaces, Lemma
+\ref{spaces-lemma-coproduct-algebraic-spaces}의 가정을 확인하며,
+원하는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-covering-quotient}
+$S$를 스킴이라 하자. $F = U/R$ 꼴의 대수 공간 $F$를 생각하자.
+여기서 $(U, R, s, t, c)$는 $S$ 위 대수 공간들의 군대상이고,
+$s, t$는 평탄이고 국소 유한 표시이며,
+$j = (t, s) : R \to U \times_S U$는 동치관계이다.
+그러면 $U \to F$는 전사이고 평탄이고 국소 유한 표시이다.
+\end{lemma}
+
+\begin{proof}
+이는 거의 자명하지만 완전히 자명하지는 않다.
+실제로 Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-pre-equivalence}와
+$j$가 단사사상이라는 사실에 의해 $R = U \times_F U$이다.
+스킴 $W$와 전사 \'etale 사상 $W \to F$를 택하자.
+$U \to F$는 층들의 전사이므로, fppf 덮개
+$\{W_i \to W\}$와 사상 $W_i \to F$를 올리는 사상 $W_i \to U$를
+찾을 수 있다. 그러면
+$$
+W_i \times_F U = W_i \times_U U \times_F U = W_i \times_{U, t} R
+$$
+임을 알 수 있고, 사영 $W_i \times_F U \to W_i$는
+$t : R \to U$의 밑변환이므로 평탄이고 국소 유한 표시이다.
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-flat}와
+\ref{spaces-morphisms-lemma-base-change-finite-presentation}를 참조하라.
+따라서 Descent on Spaces, Lemmas
+\ref{spaces-descent-lemma-descending-property-flat}와
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation}에
+의해 $U \to F$는 평탄이고 국소 유한 표시이다.
+Spaces, Remark \ref{spaces-remark-warning}에 의해 이는 전사이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quotient-free-action}
+$S$를 스킴이라 하자. $X \to B$를 $S$ 위 대수 공간들의 사상이라 하자.
+$G$를 $B$ 위 군 대수 공간이라 하고,
+$a : G \times_B X \to X$를 $B$ 위에서 $X$에 대한 $G$의 작용이라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $a$는 자유 작용이다.
+\item $G \to B$는 평탄이고 국소 유한 표시이다.
+\end{enumerate}
+그러면 $X/G$는(Groupoids in Spaces, Definition
+\ref{spaces-groupoids-definition-quotient-sheaf}를 참조하라)
+대수 공간이고, 사상 $X \to X/G$는 전사이고 평탄이고
+국소 유한 표시이며, $X$는 $X/G$ 위 fppf $G$-토서이다.
+\end{lemma}
+
+\begin{proof}
+$X/G$가 대수 공간이라는 사실은
+Theorem \ref{theorem-final-bootstrap}과 정의들로부터 즉시 따른다.
+실제로 $X/G = X/R$이고, 여기서 $R = G \times_B X$이다.
+사상 $s, t : G \times_B X \to X$는 평탄이고 국소 유한 표시이다
+($s$의 경우에는 $G \to B$의 밑변환이므로 명백하고,
+$t$의 경우에는 역원을 이용한 대칭성으로부터 따른다).
+작용이 자유이므로 Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-free-action}에 의해
+사상 $j : G \times_B X \to X \times_B X$는 단사사상이다.
+Lemma \ref{lemma-covering-quotient}에 의해 사상 $X \to X/G$는
+전사이고 평탄이고 국소 유한 표시이다.
+$X \to X/G$가 fppf $G$-토서임을 보이려면
+(Groupoids in Spaces, Definition
+\ref{spaces-groupoids-definition-principal-homogeneous-space}),
+% P10-E0537: frozen source uses G times_S X rather than G times_B X at both comparison-map loci.
+$G \times_S X \to X \times_{X/G} X$가 동형이고
+$X \to X/G$가 fppf 국소적으로 절단을 가짐을 보여야 한다.
+두 번째 주장은 이미 보인 $X \to X/G$의 성질들로부터 명백하다.
+작용이 자유이므로 사상
+$G \times_S X \to X \times_{X/G} X$는 fppf 층들의 사상으로서
+단사이다. 마지막으로 Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-pre-equivalence}에 의해
+이 사상은 층들의 사상으로서 전사이기도 하다.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descent-torsor}
+$\{S_i \to S\}_{i \in I}$를 $(\Sch/S)_{fppf}$의 덮개라 하자.
+$G$를 $S$ 위 군 대수 공간이라 하고,
+밑변환을 $G_i = G_{S_i}$로 표기하자.
+% P10-E0538: Korean supplies the construction omitted after “denote” in the frozen English.
+다음이 주어졌다고 하자.
+\begin{enumerate}
+\item 각 $i \in I$에 대하여 $S_i$ 위 fppf $G_i$-토서 $X_i$,
+\item 각 $i, j \in I$에 대하여
+$G_{S_i \times_S S_j}$-등변 동형
+$\varphi_{ij} : X_i \times_S S_j \to S_i \times_S X_j$로서 모든
+% P10-E0536: frozen source repeats j in the triple product; preserve it literally.
+$S_i \times_S S_j \times_S S_j$ 위에서 코사이클 조건을 만족하는 것.
+\end{enumerate}
+그러면 $S$ 위 fppf $G$-토서 $X$가 존재하여,
+$S_i$로의 밑변환은 $X_i$와 동형이고 하강 데이터
+$\varphi_{ij}$를 복원한다.
+\end{lemma}
+
+\begin{proof}
+$X_i$를 $(\Sch/S_i)_{fppf}$ 위의 층으로 생각할 수 있다.
+Spaces, Section \ref{spaces-section-change-base-scheme}을 참조하라.
+Sites, Section \ref{sites-section-glueing-sheaves}에 의해
+하강 데이터 $(X_i, \varphi_{ij})$는 다음 의미에서 유효하다.
+$(\Sch/S)_{fppf}$ 위의 유일한 층 $X$가 존재하여,
+이를 $(\Sch/S_i)_{fppf}$로 다시 제한하면 대수 공간 $X_i$를 복원한다.
+따라서 $X_i = h_{S_i} \times X$이다.
+Lemma \ref{lemma-locally-algebraic-space}에 의해 $X$는 대수 공간이다.
+단, $\coprod X_i$가 대수 공간임을 확인해야 하며 이는 증명의
+마지막에서 하겠다.
+Sites, Lemma \ref{sites-lemma-mapping-property-glue}의 범주 동치에 의해
+작용 사상 $G_i \times_{S_i} X_i \to X_i$들이 붙어서
+사상 $a : G \times_S X \to X$를 준다.
+이제 $a$가 작용이고 $X$가 유사 토서이며 fppf 국소적으로
+자명함을 보여야 한다(Groupoids in Spaces, Definition
+\ref{spaces-groupoids-definition-principal-homogeneous-space}을 참조하라).
+이 성질들은 fppf 국소적으로 확인할 수 있으므로,
+작용 $G_i \times_{S_i} X_i \to X_i$의 해당 성질들로부터 따른다.
+따라서 보조정리가 성립한다.
+
+\medskip\noindent
+독자에게는 순전히 집합론적인 증명의 나머지 부분을 건너뛰기를 권한다.
+$G_i$-토서 $X_i$를 자명화하는
+$(\Sch/S)_{fppf}$의 덮개
+$\{S_{ij} \to S_j\}_{j \in J_i}$를 택하자
+(가정과 Topologies, Lemma
+\ref{topologies-lemma-fppf-induced} (1)에 의해 가능하다).
+그러면 $\{S_{ij} \to S\}_{i \in I, j \in J_i}$는
+$(\Sch/S)_{fppf}$의 덮개이므로, 각 $X_i$가 자명한 토서라고
+가정할 수 있다! 물론 덮개를 더 세분할 수도 있으므로,
+각 $S_i$가 아핀이고 첨자집합 $I$의 기수가 $S$의 점들의 집합의
+기수로 상계된다고 가정할 수 있다.
+$U \in \Ob((\Sch/S)_{fppf})$와 전사 \'etale 사상 $U \to G$를
+택하자. 그러면 $U_i = U \times_S S_i$는
+$X_i \cong G_i$로 가는 \'etale 전사 사상을 갖는다.
+Sets, Lemma \ref{sets-lemma-bound-size-fibre-product}에 의해
+$\text{size}(U_i) \leq \max\{\text{size}(U), \text{size}(S_i)\}$이다.
+Sets, Lemma \ref{sets-lemma-bound-finite-type}에 의해
+$\text{size}(S_i) \leq \text{size}(S)$이다.
+따라서 모든 $i \in I$에 대하여
+$\text{size}(U_i) \leq \max\{\text{size}(U), \text{size}(S)\}$이다.
+이 식을 위에서 얻은 $|I|$의 상계와 함께 사용하면
+Sets, Lemma \ref{sets-lemma-bound-size}에 의해
+$\text{size}(\coprod U_i) \leq \max\{\text{size}(U), \text{size}(S)\}$를
+얻는다. 따라서 Spaces, Lemma
+\ref{spaces-lemma-coproduct-algebraic-spaces}을 적용하면
+$\coprod X_i$가 대수 공간임을 얻으며, 이것이 증명할 내용이었다.
+\end{proof}
+
+\section{\'etale 위상에서의 대수 공간}
+\label{section-spaces-etale}
+
+\noindent
+$S$를 스킴이라 하자. 큰 fppf 사이트 $(\Sch/S)_{fppf}$ 위의 층을
+다루는 대신 큰 \'etale 사이트 $(\Sch/S)_\etale$ 위의 층을 다룰
+수도 있다. Algebraic Spaces, Sections
+\ref{spaces-section-representable}와
+\ref{spaces-section-representable-properties}의 모든 내용은
+$(\Sch/S)_\etale$ 위의 층에 대해서도 의미가 있다.
+따라서 \'etale 위상에서 작업하면 대수 공간의 두 번째 개념을 얻는다.
+이 개념은 (선험적으로) Algebraic Spaces, Definition
+\ref{spaces-definition-algebraic-space}에서 도입한 개념보다 약하다.
+% P10-E0539: Korean supplies the correct comparative relation for frozen “weaker then”.
+실제로 fppf 위상의 층은 분명히 \'etale 위상의 층이다.
+그러나 다음 보조정리가 보이듯 두 개념은 동치이다.
+
+\begin{lemma}
+\label{lemma-spaces-etale}
+$\Sch_{fppf}$와 $\Sch_\etale$의 공통 바탕 범주를
+$\Sch_\alpha$로 표기하자(Topologies, Remark
+\ref{topologies-remark-choice-sites}를 참조하라).
+$S$를 $\Sch_\alpha$의 대상이라 하자. 다음 전층
+$$
+F : (\Sch_\alpha/S)^{opp} \longrightarrow \textit{Sets}
+$$
+이 다음 성질들을 갖는다고 하자.
+\begin{enumerate}
+\item $F$는 \'etale 위상에 대한 층이다.
+\item 대각사상 $\Delta : F \to F \times F$는 표현 가능하다.
+\item $U \in \Ob(\Sch_\alpha/S)$와 전사 \'etale 사상
+$U \to F$가 존재한다.
+\end{enumerate}
+그러면 $F$는 Algebraic Spaces, Definition
+\ref{spaces-definition-algebraic-space}의 의미에서 대수 공간이다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 성질 (2), (3)과 Algebraic Spaces, Definition
+\ref{spaces-definition-algebraic-space}의 해당 성질 (2), (3)은
+위상과 무관함에 유의하라. 실제로 이 성질들에는 전층의 섬유곱,
+전층의 사상, 함자 사이의 표현 가능한 변환, 그리고 그러한 변환이
+전사이고 \'etale이라는 말의 의미만 관여한다.
+따라서 증명할 것은 성질 (2), (3)을 갖는 \'etale 층 $F$가
+fppf 층이기도 하다는 사실뿐이다.
+
+\medskip\noindent
+이를 위해 $R = U \times_F U$로 놓자. (2)에 의해 전층 $R$은
+스킴으로 표현되고, (3)에 의해 사영 $R \to U$들은 \'etale이다.
+따라서 $j : R \to U \times_S U$는 \'etale 동치관계이다.
+더욱이 $U \to F$는 $F$를 \'etale 위상에서 $U$를 $R$로 나눈
+몫과 식별한다. 실제로 (a) 사상 $T \to F$가 주어지면
+$\{T \times_F U \to T\}$는 \'etale 덮개이므로,
+$U \to F$는 \'etale 위상에 대한 층들의 전사이고,
+(b) $a, b : T \to U$가 $F$의 같은 절단으로 가면
+$(a, b) : T \to R$이므로 $a$와 $b$는 \'etale 위상에서
+$U$를 $R$로 나눈 몫에서 같은 상을 갖는다.
+다음으로 $U/R$를 fppf 위상의 몫층이라 하자. 이는
+Spaces, Theorem \ref{spaces-theorem-presentation}에 의해 대수 공간이다.
+따라서 다음 사상들(함자의 변환들)을 얻는다.
+$$
+U \to F \to U/R.
+$$
+앞서 언급한 Spaces, Theorem
+\ref{spaces-theorem-presentation}에 의해 합성은 표현 가능하고
+전사이고 \'etale이다. 따라서 임의의 스킴 $T$와 사상
+$T \to U/R$에 대하여 섬유곱 $V = T \times_{U/R} U$는
+$T$ 위에서 전사이고 \'etale인 스킴이다. 다시 말해
+% P10-E0540: frozen source writes the covering as V to U rather than V to T; preserve it literally.
+$\{V \to U\}$는 \'etale 덮개이다. 이는 $U \to U/R$가
+\'etale 위상의 층들의 사상으로서 전사임을 증명한다.
+따라서 $F \to U/R$도 \'etale 위상의 층들의 사상으로서 전사이다.
+한편 Spaces, Theorem \ref{spaces-theorem-presentation}에 의해 다시
+$R = U \times_{U/R} U$이므로, 사상 $F \to U/R$는
+전층들의 사상으로서 단사이다.
+따라서 $F \to U/R$는 \'etale 층들의 동형이다.
+Sites, Lemma \ref{sites-lemma-mono-epi-sheaves}를 참조하라.
+이로써 증명이 끝난다.
+\end{proof}
+
+\noindent
+Spaces, Lemma
+\ref{spaces-lemma-etale-locally-representable-gives-space}의
+다음 유사형도 있다.
+
+\begin{lemma}
+\label{lemma-spaces-etale-locally-representable}
+$\Sch_{fppf}$와 $\Sch_\etale$의 공통 바탕 범주를
+$\Sch_\alpha$로 표기하자(Topologies, Remark
+\ref{topologies-remark-choice-sites}를 참조하라).
+$S$를 $\Sch_\alpha$의 대상이라 하자. 다음 전층
+$$
+F : (\Sch_\alpha/S)^{opp} \longrightarrow \textit{Sets}
+$$
+이 다음 성질들을 갖는다고 하자.
+\begin{enumerate}
+\item $F$는 \'etale 위상에 대한 층이다.
+\item $S$ 위 대수 공간 $U$와, 대수 공간으로 표현 가능하고
+전사이고 \'etale인 사상 $U \to F$가 존재한다.
+\end{enumerate}
+그러면 $F$는 Algebraic Spaces, Definition
+\ref{spaces-definition-algebraic-space}의 의미에서 대수 공간이다.
+\end{lemma}
+
+\begin{proof}
+$R = U \times_F U$로 놓자. $U \to F$가 대수 공간으로 표현
+가능하다고 가정했으므로 이는 대수 공간이다.
+$U \to F$가 \'etale이라고 가정했으므로 사영
+$s, t : R \to U$는 대수 공간의 \'etale 사상이다.
+$R = U \times_F U$이므로 사상
+$j = (t, s) : R \to U \times_S U$는 단사사상이고 동치관계이다.
+Theorem \ref{theorem-final-bootstrap}에 의해 fppf 몫층
+$F' = U/R$는 대수 공간이다.
+Lemma \ref{lemma-covering-quotient}에 의해 사상 $U \to F'$는
+전사이고 평탄이고 국소 유한 표시이다.
+Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-pre-equivalence}에 의해
+사상 $R \to U \times_{F'} U$는 fppf 층들의 사상으로서 전사이고,
+$j$가 단사사상이므로 이 사상은 동형이다.
+따라서 $U \to F'$를 $U \to F'$로 밑변환한 사상은 \'etale이고,
+Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-etale}에 의해
+$U \to F'$도 \'etale이다.
+그러므로 $U \to F'$는 \'etale 층들의 사상으로서 전사이다.
+이는 $F'$가 \'etale 위상에서의 몫층 $U/R$와 같다는 뜻이다
+(작은 확인은 생략한다). 따라서 표준 분해
+$U \to F' \to F$를 얻고, $F' \to F$는 층들의 단사 사상이다.
+한편 $U \to F$는 \'etale 층들의 사상으로서 전사이므로
+$F' \to F$도 전사이다. 따라서 $F' = F$이고 증명이 끝난다.
+\end{proof}
+
+\noindent
+실제로 스킴에 의한 매끄러운 덮개만 있어도 충분하고,
+대각사상이 대수 공간으로 표현 가능하다고 가정하는 것만으로도
+충분하다.
+
+\begin{lemma}
+\label{lemma-spaces-etale-smooth-cover}
+$\Sch_{fppf}$와 $\Sch_\etale$의 공통 바탕 범주를
+$\Sch_\alpha$로 표기하자(Topologies, Remark
+\ref{topologies-remark-choice-sites}를 참조하라).
+$S$를 $\Sch_\alpha$의 대상이라 하자.
+% P10-E0541: Korean supplies the governing “let” missing from the frozen English statement.
+다음 전층
+$$
+F : (\Sch_\alpha/S)^{opp} \longrightarrow \textit{Sets}
+$$
+이 다음 성질들을 갖는다고 하자.
+\begin{enumerate}
+\item $F$는 \'etale 위상에 대한 층이다.
+\item 대각사상 $\Delta : F \to F \times F$는 대수 공간으로
+표현 가능하다.
+\item $U \in \Ob(\Sch_\alpha/S)$와 전사이고 매끄러운 사상
+$U \to F$가 존재한다.
+\end{enumerate}
+그러면 $F$는 Algebraic Spaces, Definition
+\ref{spaces-definition-algebraic-space}의 의미에서 대수 공간이다.
+\end{lemma}
+
+\begin{proof}
+증명은 Lemma \ref{lemma-spaces-etale}의 증명을 그대로 따른다.
+$R = U \times_F U$로 놓자. (2)에 의해 전층 $R$은 대수 공간이고,
+(3)에 의해 사영 $R \to U$들은 매끄럽고 전사이다.
+% P10-E0542: Korean supplies the prepositional construction omitted after “Denote” in the frozen English.
+동치관계 $j : R \to U \times_S U$에 결부된 군대상을
+$(U, R, s, t, c)$로 표기하자(Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-equivalence-groupoid}를 참조하라).
+Theorem \ref{theorem-final-bootstrap}에 의해
+$X = U/R$(fppf 위상에서의 몫)은 대수 공간이다.
+매끄러운 위상과 \'etale 위상이 같은 층들을 갖는다는 사실
+(More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-dominates-smooth})을 사용하면,
+사상 $U \to F$는 $F$를 매끄러운 위상에서 $U$를 $R$로 나눈
+몫과 식별한다(세부사항은 생략한다).
+따라서 다음 사상들(함자의 변환들)을 얻는다.
+$$
+U \to F \to X.
+$$
+Lemma \ref{lemma-covering-quotient}에 의해 $U \to X$는
+전사이고 평탄이고 국소 유한 표시이다.
+Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-pre-equivalence}와
+$j$가 단사사상이라는 사실에 의해 $R = U \times_X U$이다.
+Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-smooth}에 의해
+$U \to X$는 매끄럽고 전사이다(사영 $R \to U$들이 매끄럽고
+전사이며 $\{U \to X\}$가 fppf 덮개이므로).
+따라서 임의의 스킴 $T$와 사상 $T \to X$에 대하여
+섬유곱 $T \times_X U$는 $T$ 위에서 전사이고 매끄러운 대수 공간이다.
+스킴 $V$와 전사 \'etale 사상 $V \to T \times_X U$를 택하자.
+그러면 $\{V \to T\}$는 매끄러운 덮개이고,
+$V \to T \to X$는 사상 $V \to U$로 올라간다.
+이는 $U \to X$가 매끄러운 위상의 층들의 사상으로서 전사임을
+증명한다. 따라서 $F \to X$는 매끄러운 위상의 층들의 사상으로서
+전사이다. 한편 $R = U \times_X U$이므로 사상 $F \to X$는
+전층들의 사상으로서 단사이다.
+그러므로 $F \to X$는 매끄러운 ($=$ \'etale) 층들의 동형이다.
+Sites, Lemma \ref{sites-lemma-mono-epi-sheaves}를 참조하라.
+이로써 증명이 끝난다.
+\end{proof}
+
+\noindent
+마지막으로, 공간을 덮는 매끄러운 사상을 사용하는
+Spaces, Lemma
+\ref{spaces-lemma-etale-locally-representable-gives-space}의
+유사형은 다음과 같다.
+
+\begin{lemma}
+\label{lemma-spaces-smooth-locally-representable}
+$\Sch_{fppf}$와 $\Sch_\etale$의 공통 바탕 범주를
+$\Sch_\alpha$로 표기하자(Topologies, Remark
+\ref{topologies-remark-choice-sites}를 참조하라).
+$S$를 $\Sch_\alpha$의 대상이라 하자. 다음 전층
+$$
+F : (\Sch_\alpha/S)^{opp} \longrightarrow \textit{Sets}
+$$
+이 다음 성질들을 갖는다고 하자.
+\begin{enumerate}
+\item $F$는 \'etale 위상에 대한 층이다.
+\item $S$ 위 대수 공간 $U$와, 대수 공간으로 표현 가능하고
+전사이고 매끄러운 사상 $U \to F$가 존재한다.
+\end{enumerate}
+그러면 $F$는 Algebraic Spaces, Definition
+\ref{spaces-definition-algebraic-space}의 의미에서 대수 공간이다.
+\end{lemma}
+
+\begin{proof}
+증명은 Lemma
+\ref{lemma-spaces-etale-locally-representable}의 증명과 동일하다.
+$R = U \times_F U$로 놓자. $U \to F$가 대수 공간으로 표현
+가능하다고 가정했으므로 이는 대수 공간이다.
+$U \to F$가 매끄럽다고 가정했으므로 사영
+$s, t : R \to U$는 대수 공간의 매끄러운 사상이다.
+$R = U \times_F U$이므로 사상
+$j = (t, s) : R \to U \times_S U$는 단사사상이고 동치관계이다.
+Theorem \ref{theorem-final-bootstrap}에 의해 fppf 몫층
+$F' = U/R$는 대수 공간이다.
+Lemma \ref{lemma-covering-quotient}에 의해 사상 $U \to F'$는
+전사이고 평탄이고 국소 유한 표시이다.
+Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-pre-equivalence}에 의해
+사상 $R \to U \times_{F'} U$는 fppf 층들의 사상으로서 전사이고,
+$j$가 단사사상이므로 이 사상은 동형이다.
+따라서 $U \to F'$를 $U \to F'$로 밑변환한 사상은 매끄럽고,
+Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-smooth}에 의해
+$U \to F'$도 매끄럽다.
+따라서 $U \to F'$는 \'etale 층들의 사상으로서 전사이다.
+% P10-E0543: frozen source identifies the smooth and etale topologies themselves; preserve the claim rather than upgrading it to the categorical statement.
+(More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-dominates-smooth}에 의해 매끄러운 위상은
+\'etale 위상과 같기 때문이다.)
+이는 $F'$가 \'etale 위상에서의 몫층 $U/R$와 같다는 뜻이다
+(작은 확인은 생략한다). 따라서 표준 분해
+$U \to F' \to F$를 얻고, $F' \to F$는 층들의 단사 사상이다.
+한편 매끄러운 위상은 \'etale 위상과 같으므로
+% P10-E0543: second frozen topology-equality locus retained literally.
+$U \to F$는 \'etale 층들의 사상으로서 전사이고,
+따라서 $F' \to F$도 전사이다. 그러므로 $F' = F$이고
+증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+\input{chapters}
+
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

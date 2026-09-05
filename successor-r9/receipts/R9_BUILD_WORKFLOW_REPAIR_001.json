@@ -1,0 +1,51 @@
+{
+  "schema": "interlanguage.stacks_cjk.ko_kr_r9_build_workflow_repair/v1",
+  "record_id": "STACKS-CJK-KO-KR-R9-BUILD-WORKFLOW-REPAIR-001",
+  "date": "2026-09-05",
+  "trigger_failure": {
+    "path": "receipts/R9_COMPONENT_BUILD_FAILURE_001.json",
+    "bytes": 3073,
+    "sha256": "5DFC0E1D20E1BC7EAE479ED8813B1154D243C9BB358902C4DDF3510F5EBBBC99"
+  },
+  "mutex_attempt": {
+    "path": "receipts/TEX_MUTEX_ATTEMPT_001.json",
+    "bytes": 1113,
+    "sha256": "F51CC8C9AA270EE0401B2C62D623BF60A48D2BB7BDD84B3AC2B502A3574AFCD8"
+  },
+  "failure_cause": "Chapter 89 completed all five serialized TeX/BibTeX passes and passed the component validation gates, but attempt.rename(final) raised WinError 3 because the manager-owned evidence/components destination parent did not exist.",
+  "intact_completed_attempt_tree": {
+    "path": "evidence/build-attempts/ch089-spaces-resolve-a001",
+    "files": 13,
+    "bytes": 356015,
+    "serialization_bytes": 1246,
+    "sha256": "A91A4B153E9F0477062BDBE6E7D09FFF10E8C626D6BBF0BFA263B2DA0990761A"
+  },
+  "intact_completed_pdf": {
+    "path": "evidence/build-attempts/ch089-spaces-resolve-a001/ch089-spaces-resolve.pdf",
+    "bytes": 218783,
+    "sha256": "74EF576700EF1382E7BB84FA0104F35DA0F904F8B14A3470DE04E30C4FCB132F"
+  },
+  "builder_before": {
+    "path": "build/build_components.py",
+    "bytes": 32687,
+    "sha256": "CE8E1F83CC62E8CA4AA902A68630343FA3CF16FFC60873C179AD3AA986B40D21"
+  },
+  "builder_after": {
+    "path": "build/build_components.py",
+    "bytes": 34872,
+    "sha256": "7A11B9A2299C6D357D585BB853C4FE5AB67E6A0777053B2F2FC1A5A07371D1BB"
+  },
+  "repair": [
+    "Create the narrowly scoped manager-owned evidence/components parent before final component adoption.",
+    "Detect exactly one complete prior attempt only when all five nonempty pass consoles and the final log, PDF, BBL, BLG, and FLS exist.",
+    "Run the same final log, bibliography, recorder, strict-PDF, font, Korean-extraction, and profile gates before adopting the completed attempt.",
+    "Record recovered pass-console identities and bind this failure receipt in the component receipt; do not rerun Chapter 89 TeX.",
+    "Fail closed if more than one complete attempt is present."
+  ],
+  "producer_or_predecessor_bytes_mutated": false,
+  "completed_tex_passes_discarded": false,
+  "chapter_89_tex_reexecution_authorized": false,
+  "python_compile": "PASS",
+  "next_action": "Under one fresh acquisition of Global\\InterlanguageTeXSlotV1, adopt and revalidate the intact Chapter 89 attempt, then build Chapters 90 and 101 exactly once and assemble/replay the 52-chapter cumulative PDF.",
+  "result": "PASS_APPEND_ONLY_WORKFLOW_REPAIR_READY_TO_RESUME"
+}

@@ -1,0 +1,4729 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{대수 공간의 Chow 군}
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+
+\tableofcontents
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 먼저 대수 공간의 Chow 군을 논한다.
+이를 정의한 뒤 벡터 다발의 Chern 특성류를 이 Chow 군들 위의
+작용소로 정의한다. 전략은 스킴의 경우와 완전히 같다. 따라서 독자에게
+스킴에 관한 대응 장의 서론
+(Chow Homology, Section \ref{chow-section-introduction})
+을 살펴볼 것을 권한다.
+
+\medskip\noindent
+관련 논문으로는 \cite{edidin-graham}과 \cite{kresch_cycle}가 있다.
+
+
+
+\section{설정}
+\label{section-setup}
+
+\noindent
+먼저 이 장에서 다룰 대수 공간의 범주를 고정한다.
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-locally-Noetherian-decent-quasi-separated}
+에 따르면 ``decent $+$ 국소 뇌터''와
+``준분리 $+$ 국소 뇌터''는 같은 조건임을 이 장 전체에서 유의하라.
+
+\begin{situation}
+\label{situation-setup}
+여기서 $S$는 스킴이고 $B$는 $S$ 위의 대수 공간이다.
+$B$가 준분리이고 국소 뇌터이며 보편적으로 catenary라고 가정한다
+(Decent Spaces, Definition
+\ref{decent-spaces-definition-universally-catenary}).
+또한 차원 함수
+$\delta : |B| \longrightarrow \mathbf{Z}$
+가 주어졌다고 가정한다. $X$가 $B$ 위의 대수 공간이고 그 구조 사상
+$f : X \to B$가 준분리이며 국소 유한형이면 $X/B$가
+{\it 좋다}고 한다. 이 경우
+$$
+\delta = \delta_{X/B} : |X| \longrightarrow \mathbf{Z}
+$$
+를 $x$를 $\delta(f(x))$와 $x/f(x)$의 초월차수의 합으로 보내는 사상으로
+정의한다(Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre}).
+이는 More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-universally-catenary-dimension-function}
+에 의해 차원 함수이다.
+\end{situation}
+
+\noindent
+특별한 경우로 $S = B$가 스킴이고 $(S, \delta)$가
+Chow Homology, Situation \ref{chow-situation-setup}에서와 같은 경우가 있다.
+따라서 $B$는 체의 스펙트럼일 수도 있고
+(Chow Homology, Example \ref{chow-example-field}),
+$B = \Spec(\mathbf{Z})$일 수도 있다
+(Chow Homology, Example \ref{chow-example-domain-dimension-1}).
+
+\medskip\noindent
+% P10-E0036
+Situation \ref{situation-setup}의 설정에서는 우리가 다루는 대수 공간이
+준분리이고(따라서 특히 decent이고) 국소 뇌터이므로, 대수 공간에 관한
+많은 보조정리, 명제, 정리, 정의를 더 쉽게 다룰 수 있다. 이 점을
+강조하기 위해 이 장 곳곳에 다음과 같은 주석을 둔다.
+
+\begin{remark}
+\label{remark-sober}
+Situation \ref{situation-setup}에서 $X/B$가 좋으면 $|X|$는 sober
+위상공간이다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-separated-sober} 또는
+Decent Spaces, Proposition
+\ref{decent-spaces-proposition-reasonable-sober}를 보라.
+이후에는 별도의 언급 없이 이 사실을 사용하여 $|X|$의 기약 닫힌 부분집합의
+일반점을 택한다.
+\end{remark}
+
+\begin{remark}
+\label{remark-integral}
+Situation \ref{situation-setup}에서 $X/B$가 좋으면 $X$가 정수적인 것
+(Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-integral-algebraic-space})과
+$X$가 축약이고 $|X|$가 기약인 것은 동치이다. 또한 임의의 점
+$\xi \in |X|$에 대하여, $\xi$가 닫힌 부분집합 $|Z| \subset |X|$의
+일반점이 되는 유일한 정수적인 닫힌 부분공간 $Z \subset X$가 존재한다.
+Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-decent-irreducible-closed}를 보라.
+\end{remark}
+
+\noindent
+$B$가 Jacobson이고 $\delta$가 닫힌 점을 영으로 보내면, $\delta$는
+각 점을 그 폐포의 차원으로 보내는 함수이다.
+
+\begin{lemma}
+\label{lemma-delta-is-dimension}
+Situation \ref{situation-setup}에서 $B$가 Jacobson이고 $|B|$의 모든
+닫힌 점 $b$에 대해 $\delta(b) = 0$이라고 가정하자. $X/B$가 좋다고 하자.
+$Z \subset X$가 일반점 $\xi \in |Z|$를 갖는 정수적인 닫힌 부분공간이면,
+다음 정수들은 모두 같다.
+\begin{enumerate}
+\item $\delta(\xi) = \delta_{X/B}(\xi)$,
+\item $\dim(|Z|)$,
+\item 닫힌 점 $z \in |Z|$에 대한 $\text{codim}(\{z\}, |Z|)$,
+\item 닫힌 점 $z \in |Z|$에 대하여 $z$에서 $Z$의 국소환의 차원, 그리고
+\item 닫힌 점 $z \in |Z|$에 대한 $\dim(\mathcal{O}_{Z, \overline{z}})$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X$, $Z$, $\xi$를 보조정리에서와 같이 두자.
+$X$가 $B$ 위에서 국소 유한형이므로 $X$는 Jacobson이다. Decent Spaces,
+Lemma \ref{decent-spaces-lemma-Jacobson-universally-Jacobson}를 보라.
+따라서 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-Jacobson-ft-pts}에 의해
+$X_{\text{ft-pts}} \subset |X|$는 닫힌 점들의 집합이다.
+$|Z|$의 기약 닫힌 부분집합들의 사슬
+$T_0 \supset \ldots \supset T_e$
+가 주어지면 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-enough-finite-type-points}에 의해
+$T_e \cap X_{\text{ft-pts}}$는 공집합이 아니다.
+따라서 이런 사슬은 항상 어떤 닫힌 점 $z \in |Z|$에 대하여
+$T_e = \{z\}$로 끝난다고 가정할 수 있다. 그러므로
+$\dim(Z) = \sup_z \text{codim}(\{z\}, |Z|)$이고, 여기서 $z$는
+$|Z|$의 닫힌 점 전체를 돈다. Topology, Lemma
+\ref{topology-lemma-dimension-function-catenary}에 의해
+$\text{codim}(\{z\}, Z) = \delta(\xi) - \delta(z)$이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-type-points-morphism}에 의해 $z$의 상은
+$B$의 유한형 점, 즉 $|B|$의 닫힌 점이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-jacobson-finite-type-points}에 의해 $z/b$의
+초월차수는 $0$이다. 따라서 가정에 의해
+$\delta(z) = \delta(b) = 0$이다. 그러므로 모든 닫힌 점
+$z \in |Z|$에 대하여
+$$
+\dim(|Z|) = \text{codim}(\{z\}, Z) = \delta(\xi)
+$$
+를 얻는다. 마지막으로 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-codimension-local-ring}에 의해
+$\text{codim}(\{z\}, Z)$는 $z$에서 $Z$의 국소환의 차원과 같고,
+이는 다시 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-dimension-local-ring}에 의해
+$\dim(\mathcal{O}_{Z, \overline{z}})$와 같다.
+\end{proof}
+
+\noindent
+위 보조정리의 상황에서 닫힌 기약 부분집합의 일반점에서 $\delta$의 값은
+그 기약 닫힌 부분집합의 차원이다. 이는 다음 정의의 동기가 된다.
+
+\begin{definition}
+\label{definition-delta-dimension}
+Situation \ref{situation-setup}에서 좋은 $X/B$와 임의의 기약 닫힌 부분집합
+$T \subset |X|$에 대하여
+$$
+\dim_\delta(T) = \delta(\xi)
+$$
+로 정의한다. 여기서 $\xi \in T$는 $T$의 일반점이다. 이를
+{\it $T$의 $\delta$-차원}이라 한다. $T \subset |X|$가 임의의 닫힌
+부분집합이면 $\dim_\delta(T)$를 $T$의 기약 성분들의 $\delta$-차원의
+상한으로 정의한다. $Z$가 $X$의 닫힌 부분공간이면
+$\dim_\delta(Z) = \dim_\delta(|Z|)$로 둔다.
+\end{definition}
+
+\noindent
+물론 이는 단지
+$\dim_\delta(T) = \sup \{\delta(t) \mid t \in T\}$라는 뜻이다.
+
+
+
+
+
+
+\section{사이클}
+\label{section-cycles}
+
+\noindent
+이는 Chow Homology, Section \ref{chow-section-cycles}에 대응한다.
+
+\medskip\noindent
+여기서는 공간들이 준콤팩트라고 가정하지 않으므로 사이클을 정의할 때
+조금 주의해야 한다. 예를 들어 유리함수는 극점을 무한히 많이 가질 수
+있으므로 무한합을 허용해야 한다. 어떤 경우든 $X$가 준콤팩트이면
+사이클은 평소와 같이 유한합이다.
+
+\begin{definition}
+\label{definition-cycles}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$k \in \mathbf{Z}$라 하자.
+\begin{enumerate}
+\item $X$ 위의 {\it 사이클}은 형식적 합
+$$
+\alpha = \sum n_Z [Z]
+$$
+이다. 여기서 합은 정수적인 닫힌 부분공간 $Z \subset X$ 전체를 돌고,
+각 $n_Z \in \mathbf{Z}$이며,
+$\{|Z|; n_Z \not = 0\}$는 $|X|$의 부분집합들의 국소 유한 모음이다
+(Topology, Definition \ref{topology-definition-locally-finite}).
+\item $X$ 위의 {\it $k$-사이클}은
+$$
+\alpha = \sum n_Z [Z]
+$$
+꼴의 사이클로서 $n_Z \not = 0 \Rightarrow \dim_\delta(Z) = k$를
+만족하는 것이다.
+\item $X$ 위의 모든 $k$-사이클의 아벨 군을 $Z_k(X)$로 나타낸다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+달리 말하면, $X$ 위의 $k$-사이클은 $\delta$-차원이 $k$인 정수적인
+닫힌 부분공간(Remark \ref{remark-integral})들의 국소 유한 형식적
+$\mathbf{Z}$-선형결합이다. $k$-사이클 $\alpha = \sum n_Z[Z]$와
+$\beta = \sum m_Z[Z]$의 합은
+$$
+\alpha + \beta = \sum (n_Z + m_Z)[Z],
+$$
+즉 계수들을 더하여 주어진다.
+
+
+
+
+\section{중복도}
+\label{section-multiplicities}
+
+\noindent
+길이와 중복도에 관한 몇 가지 간단한 결과를 모은 절이다.
+
+\begin{lemma}
+\label{lemma-length}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$x \in |X|$라 하자. $d \in \{0, 1, 2, \ldots, \infty\}$라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item
+$\text{length}_{\mathcal{O}_{X, \overline{x}}} \mathcal{F}_{\overline{x}} = d$
+\item $U$가 스킴인 어떤 \'etale 사상 $U \to X$와 $x$로 가는
+$u \in U$에 대하여
+$\text{length}_{\mathcal{O}_{U, u}} (\mathcal{F}|_U)_u = d$이다.
+\item $U$가 스킴인 임의의 \'etale 사상 $U \to X$와 $x$로 가는
+$u \in U$에 대하여
+$\text{length}_{\mathcal{O}_{U, u}} (\mathcal{F}|_U)_u = d$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U \to X$와 $u \in U$를 (2) 또는 (3)에서와 같이 두자. 그러면
+$\mathcal{O}_{X, \overline{x}}$가 $\mathcal{O}_{U, u}$의 엄밀 Hensel화이고
+$$
+\mathcal{F}_{\overline{x}} =
+(\mathcal{F}|_U)_u \otimes_{\mathcal{O}_{U, u}} \mathcal{O}_{X, \overline{x}}
+$$
+임을 안다. Properties of Spaces, Lemmas
+\ref{spaces-properties-lemma-describe-etale-local-ring}와
+\ref{spaces-properties-lemma-stalk-quasi-coherent}를 보라.
+따라서 길이의 등식은 Algebra, Lemma
+\ref{algebra-lemma-pullback-module},
+$\mathcal{O}_{U, u} \to \mathcal{O}_{X, \overline{x}}$가 평탄이라는 사실,
+그리고
+$\mathcal{O}_{X, \overline{x}}/\mathfrak m_u\mathcal{O}_{X, \overline{x}}$가
+$\mathcal{O}_{X, \overline{x}}$의 잉여체와 같다는 사실에서 따른다.
+엄밀 Hensel화에 관한 이 사실들은 More on Algebra, Lemma
+\ref{more-algebra-lemma-dumb-properties-henselization}에 있다.
+\end{proof}
+
+\begin{definition}
+\label{definition-length-at-x}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수 공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$x \in |X|$라 하자. $d \in \{0, 1, 2, \ldots, \infty\}$라 하자.
+Lemma \ref{lemma-length}의 동치인 조건들이 성립하면
+{\it $x$에서 $\mathcal{F}$의 길이가 $d$이다}라고 한다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-length-closed-immersion}
+$S$를 스킴이라 하자. $i : Y \to X$를 $S$ 위 대수 공간들의 닫힌
+몰입이라 하자. $\mathcal{G}$를 준연접 $\mathcal{O}_Y$-가군이라 하자.
+$y \in |Y|$의 상이 $x \in |X|$라 하자.
+$d \in \{0, 1, 2, \ldots, \infty\}$라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $y$에서 $\mathcal{G}$의 길이가 $d$이다.
+\item $x$에서 $i_*\mathcal{G}$의 길이가 $d$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U$가 스킴인 \'etale 사상 $f : U \to X$와 $x$로 가는 $u \in U$를
+택하자. $V = Y \times_X U$로 두자. 사영들을 $g : V \to Y$와
+$j : V \to U$로 나타내자. 그러면 $j : V \to U$는 닫힌 몰입이고,
+$y \in |Y|$와 $u \in U$로 가는 유일한 점 $v \in V$가 존재한다
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}와 Spaces, Lemma
+\ref{spaces-lemma-base-change-immersions}를 사용한다).
+% P10-E0037
+스킴 $V$ 위의 가군으로서
+$j_*(\mathcal{G}|_V) = (i_*\mathcal{G})|_U$이고, $j_*$는 스킴의 사상
+$j$에 대한 가군의 ``통상적인'' 푸시포워드이다. Cohomology of Spaces,
+Equation
+(\ref{spaces-cohomology-equation-representable-higher-direct-image})
+주변의 논의를 보라. 이로써 스킴의 경우로 환원된다. 즉,
+$i : Y \to X$가 스킴들의 닫힌 몰입이면
+$$
+(i_*\mathcal{G})_x = \mathcal{G}_y
+$$
+가 $\mathcal{O}_{X, x}$-가군으로서 성립하며, 오른쪽의 가군 구조는
+전사 사상 $i_y^\sharp : \mathcal{O}_{X, x} \to \mathcal{O}_{Y, y}$로
+주어진다. 따라서 Algebra, Lemma
+\ref{algebra-lemma-length-independent}에 의해 길이가 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-length-finite}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 국소 뇌터 대수 공간이라 하자.
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+$x \in |X|$라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $U$가 스킴인 어떤 \'etale 사상 $U \to X$와 $x$로 가는
+$u \in U$에 대하여, $u$는 $\text{Supp}(\mathcal{F}|_U)$의 기약 성분의
+일반점이다.
+\item $U$가 스킴인 임의의 \'etale 사상 $U \to X$와 $x$로 가는
+$u \in U$에 대하여, $u$는 $\text{Supp}(\mathcal{F}|_U)$의 기약 성분의
+일반점이다.
+\item $x$에서 $\mathcal{F}$의 길이는 유한하고 영이 아니다.
+\end{enumerate}
+$X$가 decent이면(동치로 준분리이면) 이 조건들은 다음 조건과도 동치이다.
+\begin{enumerate}
+\item[(4)] $x$는 $\text{Supp}(\mathcal{F})$의 기약 성분의 일반점이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f : U \to X$가 $U$가 스킴인 \'etale 사상이고 $u \in U$가 $x$로
+간다고 가정하자. 그러면 $\mathcal{F}|_U = f^*\mathcal{F}$는 국소 뇌터
+스킴 $U$ 위의 연접 $\mathcal{O}_U$-가군이고, 특히
+$(\mathcal{F}|_U)_u$는 유한 $\mathcal{O}_{U, u}$-가군이다.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian}와
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-coherent-Noetherian}를 보라.
+$\mathcal{F}|_U$의 지지집합은 $U$의 닫힌 부분집합이고
+(Morphisms, Lemma \ref{morphisms-lemma-support-finite-type}),
+$(\mathcal{F}|_U)_u$의 지지집합은 사상
+$\Spec(\mathcal{O}_{U, u}) \to U$에 의한 $\mathcal{F}|_U$의
+지지집합의 역상임을 상기하자. 따라서 $u$가
+$\text{Supp}(\mathcal{F}|_U)$의 기약 성분의 일반점인 것과
+$(\mathcal{F}|_U)_u$의 지지집합이 $\mathcal{O}_{U, u}$의 극대 아이디얼과
+같은 것은 동치이다. 이제 (1), (2), (3)의 동치는
+% P10-E0038
+Algebra, Lemma \ref{algebra-lemma-support-point}에서 따른다.
+
+\medskip\noindent
+$X$가 decent라고 하자. \'etale 사상 $f : U \to X$와 $x$로 가는 점
+$u \in U$를 택하자. $\mathcal{F}$의 지지집합은
+$\mathcal{F}|_U$의 지지집합으로 역상된다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-support-finite-type}를 보라.
+또한 $|X|$에서의 특수화 $x' \leadsto x$는 $U$에서의 특수화
+$u' \leadsto u$로 올라가고, $U$에서의 임의의 자명하지 않은 특수화
+$u' \leadsto u$는 $|X|$에서의 자명하지 않은 특수화
+$f(u') \leadsto f(u)$로 간다. Decent Spaces, Lemmas
+\ref{decent-spaces-lemma-decent-specialization}과
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point}를 보라.
+$|X|$와 $U$가 sober 위상공간이라는 사실
+(Decent Spaces, Proposition
+\ref{decent-spaces-proposition-reasonable-sober}와
+Schemes, Lemma \ref{schemes-lemma-scheme-sober})을 사용하면,
+$x$가 $\mathcal{F}$의 지지집합의 일반점인 것과 $u$가
+$\mathcal{F}|_U$의 지지집합의 일반점인 것은 동치이다.
+따라서 (4)는 (1)과 동치이다.
+
+\medskip\noindent
+괄호 속 주장은 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-locally-Noetherian-decent-quasi-separated}
+에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-point-of-max-dimension}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$T \subset |X|$를 닫힌 부분집합이라 하고 $t \in T$라 하자.
+$\dim_\delta(T) \leq k$이고 $\delta(t) = k$이면,
+$t$는 $T$의 기약 성분의 일반점이다.
+\end{lemma}
+
+\begin{proof}
+$t$가 어떤 기약 성분 $T' \subset T$에 포함됨을 안다.
+$t' \in T'$를 그 일반점이라 하자. 그러면
+$k \geq \delta(t') \geq \delta(t)$이다. $\delta$가 차원 함수이므로
+$t = t'$임을 알 수 있다.
+\end{proof}
+
+
+\section{닫힌 부분공간에 결부된 사이클}
+\label{section-cycle-of-closed-subscheme}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-cycle-of-closed-subscheme}에 대응한다.
+
+\begin{remark}
+\label{remark-irreducible-component}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$Y \subset X$를 닫힌 부분공간이라 하자. Remarks
+\ref{remark-sober}와 \ref{remark-integral}에 의해 다음 사이에는
+$1$-대-$1$ 대응이 있다.
+\begin{enumerate}
+\item $|Y|$의 기약 성분 $T$,
+\item $|Y|$의 기약 성분의 일반점, 그리고
+\item $|Z|$가 $|Y|$의 기약 성분이라는 성질을 갖는 정수적인 닫힌
+부분공간 $Z \subset Y$.
+\end{enumerate}
+이 장에서는 (3)에서와 같은 $Z$를 {\it $Y$의 기약 성분}이라 하고,
+$\xi \in |Z|$를 그 {\it 일반점}이라 한다.
+\end{remark}
+
+\begin{definition}
+\label{definition-cycle-associated-to-closed-subscheme}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$Y \subset X$를 닫힌 부분공간이라 하자.
+\begin{enumerate}
+\item 일반점이 $\xi$인 기약 성분 $Z \subset Y$에 대하여,
+$\xi$에서 $\mathcal{O}_Y$의 길이
+(Definition \ref{definition-length-at-x})를
+{\it $Y$에서 $Z$의 중복도}라 한다.
+$Y$ 위의 $\mathcal{O}_Y$에 Lemma \ref{lemma-length-finite}를 적용하면
+이는 양의 정수이다.
+\item $\dim_\delta(Y) \leq k$라고 가정하자.
+{\it $Y$에 결부된 $k$-사이클}은
+$$
+[Y]_k = \sum m_{Z, Y}[Z]
+$$
+이다. 여기서 합은 $Y$의 기약 성분 중 $\delta$-차원이 $k$인
+$Z$ 전체를 돌고, $m_{Z, Y}$는 $Y$에서 $Z$의 중복도이다.
+이는 Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-components-locally-finite}에 의해
+$k$-사이클이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$Y$의 $\delta$-차원이 $k$를 넘지 않을 때에만 $[Y]_k$를 정의한다는
+점을 유의해야 한다. 달리 말하면, 관례상 $[Y]_k$라고 쓰면
+$\dim_\delta(Y) \leq k$임을 함의한다.
+
+
+
+
+
+
+\section{연접 층에 결부된 사이클}
+\label{section-cycle-of-coherent-sheaf}
+
+\noindent
+이는 Chow Homology, Section
+\ref{chow-section-cycle-of-coherent-sheaf}에 대응한다.
+
+\begin{definition}
+\label{definition-cycle-associated-to-coherent-sheaf}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+\begin{enumerate}
+\item 일반점이 $\xi$인 정수적인 닫힌 부분공간 $Z \subset X$에 대하여,
+$|Z|$가 $\text{Supp}(\mathcal{F})$의 기약 성분이면 $\xi$에서
+$\mathcal{F}$의 길이(Definition \ref{definition-length-at-x})를
+{\it $\mathcal{F}$에서 $Z$의 중복도}라 한다.
+Lemma \ref{lemma-length-finite}에 의해 이는 양의 정수이다.
+\item $\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$라고 가정하자.
+{\it $\mathcal{F}$에 결부된 $k$-사이클}은
+$$
+[\mathcal{F}]_k = \sum m_{Z, \mathcal{F}}[Z]
+$$
+이다. 여기서 합은 $\text{Supp}(\mathcal{F})$의 $\delta$-차원이 $k$인
+기약 성분에 대응하는 정수적인 닫힌 부분공간 $Z \subset X$ 전체를 돌고,
+$m_{Z, \mathcal{F}}$는 $\mathcal{F}$에서 $Z$의 중복도이다.
+이는 Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-components-locally-finite}에 의해
+$k$-사이클이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$\mathcal{F}$가 연접이고 $\text{Supp}(\mathcal{F})$의 $\delta$-차원이
+$k$를 넘지 않을 때에만 $[\mathcal{F}]_k$를 정의한다는 점을 유의해야 한다.
+달리 말하면, 관례상 $[\mathcal{F}]_k$라고 쓰면 $\mathcal{F}$가
+$X$ 위에서 연접이고
+$\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$임을 함의한다.
+
+\begin{lemma}
+\label{lemma-reformulate-coeff-coherent}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{F}$를 $\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$를 만족하는
+연접 $\mathcal{O}_X$-가군이라 하자.
+$Z$를 $\dim_\delta(Z) = k$인 $X$의 정수적인 닫힌 부분공간이라 하자.
+$\xi \in |Z|$를 일반점이라 하자. 그러면 $[\mathcal{F}]_k$에서
+$Z$의 계수는 $\xi$에서 $\mathcal{F}$의 길이이다.
+\end{lemma}
+
+\begin{proof}
+$|Z|$가 $\text{Supp}(\mathcal{F})$의 기약 성분인 것은
+$\xi \in \text{Supp}(\mathcal{F})$인 것과 동치임을 유의하라.
+Lemma \ref{lemma-point-of-max-dimension}을 보라. 또한
+$\xi \not \in \text{Supp}(\mathcal{F})$이면 $\xi$에서
+$\mathcal{F}$의 길이는 영이다. 이를 Definition
+\ref{definition-cycle-associated-to-coherent-sheaf}와 결합하면 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cycle-closed-coherent}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$Y \subset X$를 닫힌 부분공간이라 하자. $\dim_\delta(Y) \leq k$이면
+$[Y]_k = [i_*\mathcal{O}_Y]_k$이다. 여기서 $i : Y \to X$는 포함 사상이다.
+\end{lemma}
+
+\begin{proof}
+$Z$를 $\dim_\delta(Z) = k$인 $X$의 정수적인 닫힌 부분공간이라 하자.
+% P10-E0039
+$Z \not \subset Y$이면 $Z$는 $[Y]_k$와 $[i_*\mathcal{O}_Y]_k$에서 모두
+계수가 영이다. $Z \subset Y$이면 $Z$의 일반점을 그 상이 $x \in |X|$인
+점 $y \in |Y|$로 볼 수 있다. 그러면 $[Y]_k$에서 $Z$의 계수는
+$y$에서 $\mathcal{O}_Y$의 길이이고, $[i_*\mathcal{O}_Y]_k$에서
+$Z$의 계수는 $x$에서 $i_*\mathcal{O}_Y$의 길이이다. 따라서 계수들의
+등식은 Lemma \ref{lemma-length-closed-immersion}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-additivity-sheaf-cycle}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$0 \to \mathcal{F} \to \mathcal{G} \to \mathcal{H} \to 0$을 연접
+$\mathcal{O}_X$-가군들의 짧은 완전열이라 하자. $\mathcal{F}$,
+$\mathcal{G}$, $\mathcal{H}$의 지지집합들의 $\delta$-차원이
+$\leq k$라고 가정하자. 그러면
+$[\mathcal{G}]_k = [\mathcal{F}]_k + [\mathcal{H}]_k$이다.
+\end{lemma}
+
+\begin{proof}
+$Z$를 $\dim_\delta(Z) = k$인 $X$의 정수적인 닫힌 부분공간이라 하자.
+$[\mathcal{G}]_k$, $[\mathcal{F}]_k$, $[\mathcal{H}]_k$에서 $Z$의
+계수들이 대응하는 가법성을 만족함을 보이면 충분하다. Lemma
+\ref{lemma-reformulate-coeff-coherent}에 의해 다음을 보이면 충분하다.
+$$
+\mathcal{G}\text{의 }x\text{에서의 길이} =
+\mathcal{F}\text{의 }x\text{에서의 길이} +
+\mathcal{H}\text{의 }x\text{에서의 길이}
+$$
+이는 임의의 $x \in |X|$에 대하여 성립해야 한다. Definition
+\ref{definition-length-at-x}를 보면 길이의 가법성에서 곧바로 따르며,
+Algebra, Lemma \ref{algebra-lemma-length-additive}를 보라.
+\end{proof}
+
+
+
+\section{고유 푸시포워드를 위한 준비}
+\label{section-preparation-pushforward}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-preparation-pushforward}에 대응한다.
+
+\begin{lemma}
+\label{lemma-proper-image}
+Situation \ref{situation-setup}에서 $X,Y/B$가 좋고 $f : X \to Y$가
+$B$ 위의 사상이라고 하자. $Z \subset X$가 정수적인 닫힌 부분공간이면,
+다음 가환도식이 존재하고 $Z \to Z'$가 우세하도록 하는 유일한 정수적인
+닫힌 부분공간 $Z' \subset Y$가 존재한다.
+$$
+\xymatrix{
+Z \ar[r] \ar[d] & X \ar[d]^f \\
+Z' \ar[r] & Y
+}
+$$
+$f$가 고유이면 $Z \to Z'$는 고유이고 전사이다.
+\end{lemma}
+
+\begin{proof}
+$\xi \in |Z|$를 일반점이라 하자. $Z' \subset Y$를 그 일반점이
+$\xi' = f(\xi)$인 정수적인 닫힌 부분공간이라 하자. Remark
+\ref{remark-integral}을 보라. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해
+$\xi \in |f^{-1}(Z')| = |f|^{-1}(|Z'|)$이고,
+% P10-E0040
+$Z$가 축약이며 $|Z| = \overline{\{\xi\}}$이므로, $X$의 닫힌
+부분공간으로서 $Z \subset f^{-1}(Z')$임을 안다(Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-map-into-reduction}을 보라).
+따라서 사상 $Z \to Z'$를 얻는다. $Z$의 일반점이 $Z'$의 일반점으로
+가므로 이 사상은 우세이다. $Z'$의 유일성은 명백하다.
+$f$가 고유이면 고유 사상들의 합성으로서 $Z \to Y$는 고유이다
+(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-proper}과
+\ref{spaces-morphisms-lemma-closed-immersion-proper}).
+그러면 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-permanence}에 의해
+$Z \to Z'$가 고유임을 얻는다. 고유 사상의 상은 닫혀 있으므로 전사성도 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-residue-field}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자. 모든
+$x \in |X|$는 $k$가 체인 (유일한) 단사 사상 $\Spec(k) \to X$로
+나타낼 수 있다. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-points-monomorphism}을 보라. 이때 $k$를
+$x$의 {\it 잉여체}라 하고 $\kappa(x)$로 나타낸다. $X$가 조밀한 열린
+부분스킴 $U \subset X$를 가짐을 상기하자(Properties of Spaces,
+Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}).
+$x \in U$이면 $\kappa(x)$는 스킴 $U$ 위의 점 $x$의 잉여체와 일치한다.
+Decent Spaces, Section
+\ref{decent-spaces-section-residue-fields-henselian-local-rings}를 보라.
+\end{remark}
+
+\begin{remark}
+\label{remark-function-field}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자. $X$가 정수적이라고
+가정하자. 이 경우 $X$의 {\it 함수체} $R(X)$가 정의되며, 이는 $X$의
+일반점에서의 잉여체와 같다. Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-function-field}을 보라.
+이를 Remark \ref{remark-integral}과 결합하면, 임의의 $x \in X$에 대하여
+잉여체 $\kappa(x)$는 그 일반점이 $x$인 유일한 정수적인 닫힌 부분공간
+$Z \subset X$의 함수체임을 알 수 있다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-equal-dimension}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋고 $f : X \to Y$가
+$B$ 위의 사상이라고 하자. $X$, $Y$가 정수적이고
+$\dim_\delta(X) = \dim_\delta(Y)$라고 가정하자. 그러면 $f$는 $Y$의
+진 닫힌 부분공간을 통해 분해되거나, 아니면 $f$는 우세이고 함수체 확대
+$R(X) / R(Y)$는 유한이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-proper-image}에 의해 $f$가 우세 사상 $X \to Z$를 통해
+분해되도록 하는 유일한 정수적인 닫힌 부분공간 $Z \subset Y$가 존재한다.
+그러면 $Z = Y$인 것은 $\dim_\delta(Z) = \dim_\delta(Y)$인 것과 동치이다.
+한편 차원 함수의 구성(Situation \ref{situation-setup}을 보라)에 의해
+% P10-E0041
+$\dim_\delta(X) = \dim_\delta(Z) + r$이고, 여기서 $r$은 확대
+$R(X)/R(Z)$의 초월차수이다. 이를 Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-finite-degree}와 결합하면 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quasi-compact-locally-finite}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 $B$ 위의 사상이라 하자. $f$가 준콤팩트이고
+$\{T_i\}_{i \in I}$가 $|X|$의 닫힌 부분집합들의 국소 유한 모음이라고
+가정하자. 그러면 $\{\overline{|f|(T_i)}\}_{i \in I}$는 $|Y|$의 닫힌
+부분집합들의 국소 유한 모음이다.
+\end{lemma}
+
+\begin{proof}
+$V \subset |Y|$를 준콤팩트 열린 부분집합이라 하자. Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-quasi-compact-is-quasi-compact}에 의해
+$|f|^{-1}(V) \subset |X|$는 준콤팩트이다. 따라서 집합
+$\{i \in I : T_i \cap |f|^{-1}(V) \not = \emptyset \}$는 우리가 생략하는
+간단한 위상적 논증에 의해 유한이다. 이는 다음 집합과 같으므로 보조정리가
+증명된다.
+$$
+\{i \in I : |f|(T_i) \cap V \not = \emptyset \} =
+\{i \in I : \overline{|f|(T_i)} \cap V \not = \emptyset \}
+$$
+\end{proof}
+
+
+
+\section{고유 푸시포워드}
+\label{section-proper-pushforward}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-proper-pushforward}에 대응한다.
+
+\begin{definition}
+\label{definition-proper-pushforward}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 $B$ 위의 사상이라 하고, $f$가 고유라고 가정하자.
+\begin{enumerate}
+\item $Z \subset X$를 $\dim_\delta(Z) = k$인 정수적인 닫힌
+부분공간이라 하자. $Z' \subset Y$를 Lemma \ref{lemma-proper-image}에서와
+같은 $Z$의 상이라 하자. 다음과 같이 정의한다.
+$$
+f_*[Z] =
+\left\{
+\begin{matrix}
+0 & \text{이면} & \dim_\delta(Z')< k, \\
+\deg(Z/Z') [Z'] & \text{이면} & \dim_\delta(Z') = k.
+\end{matrix}
+\right.
+$$
+$\dim_\delta(Z') = \dim_\delta(Z)$이면 Lemma
+\ref{lemma-equal-dimension}과 Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-degree}에 의해 $Z$의 $Z'$ 위 차수가
+정의되고 유한하다.
+\item $\alpha = \sum n_Z [Z]$를 $X$ 위의 $k$-사이클이라 하자.
+% P10-E0042
+$\alpha$의 {\it 푸시포워드}를 다음 합으로 정의한다.
+$$
+f_* \alpha = \sum n_Z f_*[Z]
+$$
+여기서 각 $f_*[Z]$는 위와 같이 정의된다. 위의 Lemma
+\ref{lemma-quasi-compact-locally-finite}에 의해 이 합은 국소 유한이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+정의에 의해 사이클의 고유 푸시포워드
+$$
+f_* : Z_k(X) \longrightarrow Z_k(Y)
+$$
+는 아벨 군의 준동형이다.
+% P10-E0043
+이는 $X \mapsto Z_k(X)$를, 대상이 $B$ 위의 좋은 대수 공간이고 사상이
+$B$ 위의 고유 사상인 범주 위의 공변 함자로 만든다.
+
+\begin{lemma}
+\label{lemma-compose-pushforward}
+Situation \ref{situation-setup}에서 $X, Y, Z/B$가 좋다고 하자.
+$f : X \to Y$와 $g : Y \to Z$를 $B$ 위의 고유 사상이라 하자.
+그러면 사상 $Z_k(X) \to Z_k(Z)$로서
+$g_* \circ f_* = (g \circ f)_*$이다.
+\end{lemma}
+
+\begin{proof}
+$W \subset X$를 차원이 $k$인 정수적인 닫힌 부분공간이라 하자.
+먼저 $f$와 $W$에, 이어서 $g$와 $W'$에 Lemma
+\ref{lemma-proper-image}를 적용하여 얻는 정수적인 닫힌 부분공간들을
+$W' \subset Y$와 $W'' \subset Z$라 하자. 그러면 $W \to W'$와
+$W' \to W''$는 전사이고 고유이다.
+% P10-E0044
+$g_*(f_*[W]) = (f \circ g)_*[W]$임을 보여야 한다.
+$\dim_\delta(W'') < k$이면 양변은 모두 영이다.
+$\dim_\delta(W'') = k$이면 $W \to W'$와 $W' \to W''$가 모두
+Lemma \ref{lemma-equal-dimension}의 가정을 만족함을 알 수 있다. 따라서
+$$
+g_*(f_*[W]) = \deg(W/W')\deg(W'/W'')[W''],
+\quad
+(f \circ g)_*[W] = \deg(W/W'')[W''].
+$$
+이제 Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-degree-composition}을 적용하면 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cycle-push-sheaf}
+Situation \ref{situation-setup}에서 $f : X \to Y$를 $B$ 위의 좋은 대수
+공간들의 고유 사상이라 하자.
+\begin{enumerate}
+\item $Z \subset X$를 $\dim_\delta(Z) \leq k$인 닫힌 부분공간이라 하자.
+그러면
+$$
+f_*[Z]_k = [f_*{\mathcal O}_Z]_k.
+$$
+\item $\mathcal{F}$를 $\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$를
+만족하는 $X$ 위의 연접 층이라 하자. 그러면
+$$
+f_*[\mathcal{F}]_k = [f_*{\mathcal F}]_k.
+$$
+\end{enumerate}
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-proper-pushforward-coherent}에 의해
+$f_*\mathcal{F}$와 $f_*\mathcal{O}_Z$가 연접 $\mathcal{O}_Y$-가군이므로
+이 명제는 의미가 있음을 유의하라.
+\end{lemma}
+
+\begin{proof}
+(1)은 (2)와 Lemma \ref{lemma-cycle-closed-coherent}에서 따른다.
+$\mathcal{F}$를 $X$ 위의 연접 층이라 하고
+$\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$라고 가정하자.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-support-closed}에 의해 닫힌 몰입
+$i : Z \to X$와 연접 $\mathcal{O}_Z$-가군 $\mathcal{G}$가 존재하여
+$i_*\mathcal{G} \cong \mathcal{F}$이고 $\mathcal{F}$의 지지집합은
+$Z$이다. $Z' \subset Y$를 $f|_Z : Z \to Y$의 스킴론적 상이라 하자.
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-image}를 보라.
+$B$ 위의 대수 공간들의 가환도식
+$$
+\xymatrix{
+Z \ar[r]_i \ar[d]_{f|_Z} &
+X \ar[d]^f \\
+Z' \ar[r]^{i'} & Y
+}
+$$
+을 생각하자. $f|_Z$는 전사이고(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-scheme-theoretic-image}와
+$|f|$가 닫힌 사상이라는 사실에서 따른다) 고유임을 유의하라
+(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-proper},
+\ref{spaces-morphisms-lemma-closed-immersion-proper}, 그리고
+\ref{spaces-morphisms-lemma-universally-closed-permanence}에서 따른다).
+도식을 두 방향으로 돌아가면
+$f_*\mathcal{F} = f_*i_*\mathcal{G} = i'_*(f|_Z)_*\mathcal{G}$를 얻는다.
+닫힌 몰입과 $f|_Z$에 대하여 결과가 성립한다고 가정하자. 그러면
+$$
+f_*[\mathcal{F}]_k = f_*i_*[\mathcal{G}]_k
+= (i')_*(f|_Z)_*[\mathcal{G}]_k =
+(i')_*[(f|_Z)_*\mathcal{G}]_k =
+[(i')_*(f|_Z)_*\mathcal{G}]_k = [f_*\mathcal{F}]_k
+$$
+를 얻는다. 닫힌 몰입의 경우는 Lemma
+\ref{lemma-length-closed-immersion}과 정의들에서 따른다. 따라서
+$\dim_\delta(X) \leq k$이고 $f : X \to Y$가 고유이고 전사인 경우로
+환원하였다.
+
+\medskip\noindent
+$\dim_\delta(X) \leq k$이고 $f : X \to Y$가 고유이고 전사라고 가정하자.
+일반점이 $\eta$인 모든 기약 성분 $Z \subset Y$에 대하여
+$f(\xi) = \eta$를 만족하는 점 $\xi \in X$가 존재한다. 따라서
+$\delta(\eta) \leq \delta(\xi) \leq k$이다. 그러므로 다음 식들에서
+$$
+f_*[\mathcal{F}]_k = \sum n_Z[Z],
+\quad
+\text{그리고}
+\quad
+[f_*\mathcal{F}]_k = \sum m_Z[Z].
+$$
+$n_Z \not = 0$이거나 $m_Z \not = 0$이면 정수적인 닫힌 부분공간
+$Z$는 실제로 $\delta$-차원이 $k$인 $Y$의 기약 성분이다(Lemma
+\ref{lemma-point-of-max-dimension}을 보라). 그런 정수적인 닫힌 부분공간
+$Z \subset Y$를 택하고 그 일반점을 $\eta$라 하자.
+$f(\xi) = \eta$를 만족하는 임의의 $\xi \in X$에 대하여
+$\delta(\xi) \geq k$이므로 $\xi$는 역시 $\delta$-차원이 $k$인
+$X$의 기약 성분의 일반점이다(Lemma
+\ref{lemma-point-of-max-dimension}을 보라). Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-finite-in-codim-1}에 의해
+$f^{-1}(V) \to V$가 유한이 되도록 하는 열린 부분공간
+$\eta \in V \subset Y$가 존재한다. $\eta$가 $|Y|$의 기약 성분의
+일반점이므로 $V$가 아핀 스킴이라고 가정할 수 있다. Properties of Spaces,
+Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}
+을 보라. $Y$를 $V$로, $X$를 $f^{-1}(V)$로 바꾸어 $Y$가 아핀이고
+$f$가 유한인 경우로 환원한다. 특히 $X$와 $Y$는 스킴이고, 스킴에 대한
+대응하는 결과인 Chow Homology, Lemma
+\ref{chow-lemma-cycle-push-sheaf}로 환원된다($S = Y$로 적용한다).
+\end{proof}
+
+\section{평탄 풀백을 위한 준비}
+\label{section-preparation-flat-pullback}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-preparation-flat-pullback}에 대응한다.
+
+\medskip\noindent
+대수 공간의 사상이 상대차원 $r$을 가진다고 함은, 원천과 목표에서
+\'etale 국소적으로 상대차원 $r$을 갖는 스킴의 사상을 얻는 경우를 말한다.
+정확한 정의는 이에 동치이지만 실제로는 약간 다르다. Morphisms of Spaces,
+Definition
+\ref{spaces-morphisms-definition-relative-dimension}을 보라.
+
+\begin{lemma}
+\label{lemma-flat-inverse-image-dimension}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 $B$ 위의 사상이라 하자.
+$f$가 상대차원 $r$인 평탄 사상이라고 가정하자.
+임의의 닫힌 부분집합 $T \subset |Y|$에 대하여
+$$
+\dim_\delta(|f|^{-1}(T)) = \dim_\delta(T) + r.
+$$
+단, $|f|^{-1}(T)$는 공집합이 아니라고 한다.
+$Z \subset Y$가 정수적인 닫힌 부분스킴이고
+% P10-E0045
+$Z' \subset f^{-1}(Z)$가 기약 성분이면, $Z'$는 $Z$ 위에 우세하고
+$\dim_\delta(Z') = \dim_\delta(Z) + r$이다.
+\end{lemma}
+
+\begin{proof}
+닫힌 부분집합의 $\delta$-차원은 그 기약 성분들의 $\delta$-차원들의
+상한이므로 마지막 명제를 증명하면 충분하다. $Y$를 정수적인 닫힌 부분스킴
+$Z$로, $X$를 $f^{-1}(Z) = Z \times_Y X$로 바꾸어도 된다.
+따라서 $Z = Y$가 정수적이고 $f$가 상대차원 $r$인 평탄 사상이라고
+가정할 수 있다. $Y$가 국소 Noether이므로 국소 유한형인 사상 $f$는
+실제로 국소 유한 표시이다. 따라서 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open}을 적용할 수 있고, $f$는 열린 사상이다.
+$\xi \in X$를 $X$의 한 기약 성분의 일반점이라 하자.
+$f$의 열림성에 의해 $f(\xi)$는 $Z = Y$의 일반점 $\eta$이다.
+따라서 $Z'$는 $Z = Y$ 위에 우세한다. 마지막으로 Properties of Spaces,
+Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}
+에 의해 $\xi$와 $\eta$는 $X$와 $Y$의 스킴 자취에 놓인다.
+$\xi$가 $X$의 일반점이므로
+$\mathcal{O}_{X, \xi} = \mathcal{O}_{X_\eta, \xi}$는 소 아이디얼을
+하나만 가지며, 따라서 차원이 $0$이다($\xi$와 $\eta$가 $X$와 $Y$의
+스킴 자취에 있으므로 통상적인 국소환을 사용해도 된다).
+그러므로 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-dimension-fibre-at-a-point}
+(그리고 주어진 상대차원을 갖는 사상의 정의)에 의해
+$\kappa(\xi)$의 $\kappa(\eta)$ 위 초월차수는 $r$이다.
+다시 말해 $\delta(\xi) = \delta(\eta) + r$이며, 이것이 원하는 결론이다.
+\end{proof}
+
+\noindent
+다음 보조정리는 닫힌 부분스킴들의 국소 유한 모음의 평탄 풀백이
+국소 유한임을 증명하는 데 사용할 것이다.
+
+\begin{lemma}
+\label{lemma-inverse-image-locally-finite}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 $B$ 위의 사상이라 하자.
+$\{T_i\}_{i \in I}$가 $|Y|$의 닫힌 부분집합들의 국소 유한 모음이라고
+가정하자. 그러면 $\{|f|^{-1}(T_i)\}_{i \in I}$는 $X$의 닫힌
+부분집합들의 국소 유한 모음이다.
+\end{lemma}
+
+\begin{proof}
+$U \subset |X|$를 준콤팩트 열린 부분집합이라 하자.
+상 $|f|(U) \subset |Y|$가 준콤팩트 부분집합이므로
+$|f|(U) \subset V$를 만족하는 준콤팩트 열린집합
+$V \subset |Y|$가 존재한다. 다음을 유의하라.
+$$
+\{i \in I : |f|^{-1}(T_i) \cap U \not = \emptyset \}
+\subset
+\{i \in I : T_i \cap V \not = \emptyset \}.
+$$
+오른쪽 집합은 가정에 의해 유한이므로 결론을 얻는다.
+\end{proof}
+
+\section{평탄 풀백}
+\label{section-flat-pullback}
+
+\noindent
+이 절은 Chow Homology, Section \ref{chow-section-flat-pullback}에 대응한다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $f : X \to Y$를 $S$ 위 대수 공간들의 사상이라 하자.
+$Z \subset Y$를 닫힌 부분공간이라 하자. 이 장에서는 Morphisms of Spaces,
+Definition
+\ref{spaces-morphisms-definition-inverse-image-closed-subspace}에서 구성한
+$Z$의 역상 $f^{-1}(Z)$를 때때로 {\it 스킴론적 역상}이라고 부른다.
+스킴론적 역상은 다음 섬유곱이다.
+$$
+\xymatrix{
+f^{-1}(Z) \ar[r] \ar[d] & X \ar[d] \\
+Z \ar[r] & Y
+}
+$$
+$\mathcal{I} \subset \mathcal{O}_Y$가 $Y$ 안의 $Z$에 대응하는
+준연접 아이디얼 층이면, $f^{-1}(\mathcal{I})\mathcal{O}_X$는
+$X$ 안의 $f^{-1}(Z)$에 대응하는 준연접 아이디얼 층이다.
+
+\begin{definition}
+\label{definition-flat-pullback}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 $B$ 위의 사상이라 하자.
+$f$가 상대차원 $r$인 평탄 사상이라고 가정하자.
+\begin{enumerate}
+\item $Z \subset Y$를 $\delta$-차원이 $k$인 정수적인 닫힌 부분공간이라
+하자. $f^*[Z]$를 스킴론적 역상에 결부된 $X$ 위의 $(k+r)$-사이클로
+정의한다.
+$$
+f^*[Z] = [f^{-1}(Z)]_{k+r}.
+$$
+Lemma \ref{lemma-flat-inverse-image-dimension}에 의해
+$\dim_\delta(f^{-1}(Z)) = k + r$이므로 이는 의미가 있다.
+\item $\alpha = \sum n_i [Z_i]$를 $Y$ 위의 $k$-사이클이라 하자.
+{\it $f$에 의한 $\alpha$의 평탄 풀백}은 다음 합이다.
+$$
+f^* \alpha = \sum n_i f^*[Z_i]
+$$
+여기서 각 $f^*[Z_i]$는 위와 같이 정의한다. Lemma
+\ref{lemma-inverse-image-locally-finite}에 의해 이 합은 국소 유한이다.
+\item 이렇게 얻은 아벨 군의 사상을
+$f^* : Z_k(Y) \to Z_{k + r}(X)$로 쓴다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+열린 몰입은 평탄하다. 이는 평탄 사상의 자명하지만 중요한 특수한 경우이다.
+$U \subset X$가 열린 부분공간이면, 사이클을 $j : U \to X$로 풀백한 것을
+때때로 그 사이클의 $U$로의 {\it 제한}이라고 부른다. 이 경우 모든 사상
+$$
+j^* : Z_k(X) \longrightarrow Z_k(U)
+$$
+은 {\it 전사}임을 유의하라. 실제로 임의의 정수적인 닫힌 부분공간
+$Z' \subset U$가 주어지면, $Z'$의 $X$에서의 폐포를 $Z$로 잡고
+% P10-E0046
+이를 $X$의 축소된 닫힌 부분공간으로 생각할 수 있다(Properties of Spaces,
+Definition
+\ref{spaces-properties-definition-reduced-induced-space}을 보라).
+또한 명백히 $Z \cap U = Z'$, 다시 말해 $j^*[Z] = [Z']$이므로
+전사성을 얻는다. 사실은 이보다 조금 더 강하다.
+
+\begin{lemma}
+\label{lemma-exact-sequence-open}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$U \subset X$를 열린 부분공간이라 하자. $Y$를
+$|Y| = |X| \setminus |U|$인 $X$의 축소된 닫힌 부분공간이라 하고,
+포함 사상을 $i : Y \to X$로 쓰자. 모든 $k \in \mathbf{Z}$에 대하여
+수열
+$$
+\xymatrix{
+Z_k(Y) \ar[r]^{i_*} & Z_k(X) \ar[r]^{j^*} & Z_k(U) \ar[r] & 0
+}
+$$
+은 아벨 군들의 완전 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$j^*$의 전사성은 위에서 보았다. 먼저 $X$가 준콤팩트라고 가정하자.
+그러면 $Z_k(X)$는 $\delta$-차원이 $k$인 정수적인 닫힌 부분공간
+$Z \subset X$에 대응하는 원소 $[Z]$들을 기저로 갖는 자유
+$\mathbf{Z}$-가군이다. 이러한 기저 원소는 $Z_k(U)$의 기저 원소
+$[Z \cap U]$로 가거나, $Z \subset Y$이면 0으로 간다.
+따라서 이 경우 보조정리는 명백하다. 일반적인 경우도 비슷하므로
+증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-etale-pullback}
+Situation \ref{situation-setup}에서 $f : X \to Y$를 $B$ 위의 좋은
+대수 공간들 사이의 \'etale 사상이라 하자. $Z \subset Y$가 정수적인
+닫힌 부분공간이면
+$f^*[Z] = \sum [Z']$이다. 여기서 합은 $f^{-1}(Z)$의 기약 성분들
+(Remark \ref{remark-irreducible-component}) 전체를 돈다.
+\end{lemma}
+
+\begin{proof}
+보조정리의 뜻은 $[Z']$의 계수가 $1$이라는 것이다.
+$f^{-1}(Z)$는 정수적인 대수 공간 $Z$ 위에서 \'etale이므로 축소된
+대수 공간이라는 사실에서 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compose-flat-pullback}
+Situation \ref{situation-setup}에서 $X, Y, Z/B$가 좋다고 하자.
+$f : X \to Y$와 $g : Y \to Z$를 $B$ 위의 상대차원이 각각
+$r$과 $s$인 평탄 사상이라 하자. 그러면 $g \circ f$는 상대차원이
+$r + s$인 평탄 사상이고
+$$
+f^* \circ g^* = (g \circ f)^*
+$$
+이다. 이는 사상 $Z_k(Z) \to Z_{k + r + s}(X)$들의 등식이다.
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-dimension-fibre-at-a-point-additive}와
+\ref{spaces-morphisms-lemma-composition-flat}에 의해 합성은 상대차원이
+$r + s$인 평탄 사상이다. 다음을 가정하자.
+\begin{enumerate}
+\item $A \subset Z$는 $\delta$-차원이 $k$인 닫힌 정수적인 부분공간이다.
+\item $A' \subset Y$는 $\delta$-차원이 $k + s$이고
+$A' \subset g^{-1}(A)$인 닫힌 정수적인 부분공간이다.
+\item $A'' \subset Y$는 $\delta$-차원이 $k + s + r$이고
+% P10-E0047
+$A'' \subset f^{-1}(W')$인 닫힌 정수적인 부분공간이다.
+% P10-E0048
+\end{enumerate}
+$(g \circ f)^*[A]$에서 $[A'']$의 계수 $n$과
+$f^*(g^*[A])$에서 $[A'']$의 계수 $m$이 같음을 보여야 한다.
+다음 가환도식을 택할 수 있다.
+$$
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \ar[r] & W \ar[d] \\
+X \ar[r] & Y \ar[r] & Z
+}
+$$
+여기서 $U, V, W$는 스킴이고 수직 화살표들은 \'etale이며,
+$u \mapsto v \mapsto w$이고 $u, v, w$가 각각 $A'', A', A$의
+일반점으로 가는 점들 $u \in U$, $v \in V$, $w \in W$가 존재한다.
+(세부사항은 생략한다.) 그러면 평탄 국소환 준동형
+% P10-E0049
+$\mathcal{O}_{W, w} \to \mathcal{O}_{V, v}$,
+$\mathcal{O}_{V, v} \to \mathcal{O}_{U, u}$가 있고,
+Lemma \ref{lemma-length}를 거듭 사용하면
+$$
+n = \text{length}_{\mathcal{O}_{U, u}}(
+\mathcal{O}_{U, u}/\mathfrak m_w\mathcal{O}_{U, u})
+$$
+및
+$$
+m =
+\text{length}_{\mathcal{O}_{V, v}}(
+\mathcal{O}_{V, v}/\mathfrak m_w\mathcal{O}_{V, v})
+\text{length}_{\mathcal{O}_{U, u}}(
+\mathcal{O}_{U, u}/\mathfrak m_v\mathcal{O}_{U, u})
+$$
+을 얻는다. 따라서 등식은 Algebra, Lemma
+\ref{algebra-lemma-pullback-transitive}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pullback-coherent}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 상대차원 $r$인 평탄 사상이라 하자.
+\begin{enumerate}
+\item $Z \subset Y$를 $\dim_\delta(Z) \leq k$인 닫힌 부분공간이라
+하자. 그러면 $\dim_\delta(f^{-1}(Z)) \leq k + r$이고
+$Z_{k + r}(X)$에서
+$[f^{-1}(Z)]_{k + r} = f^*[Z]_k$이다.
+\item $\mathcal{F}$를
+$\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$인 $Y$ 위의 연접
+층이라 하자. 그러면
+$\dim_\delta(\text{Supp}(f^*\mathcal{F})) \leq k + r$이고
+$$
+f^*[{\mathcal F}]_k = [f^*{\mathcal F}]_{k+r}
+$$
+이다. 이는 $Z_{k + r}(X)$에서의 등식이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 (2)와 Lemma \ref{lemma-cycle-closed-coherent}, 그리고
+$f^*\mathcal{O}_Z = \mathcal{O}_{f^{-1}(Z)}$라는 사실에서 따른다.
+
+\medskip\noindent
+(2)의 증명.
+$X$, $Y$가 국소 Noether이므로 Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian}를 적용하여
+$\mathcal{F}$가 유한형임을 알 수 있다. 따라서
+$f^*\mathcal{F}$는 유한형이고(Modules on Sites, Lemma
+\ref{sites-modules-lemma-local-pullback}), 다시 Cohomology of Spaces,
+Lemma \ref{spaces-cohomology-lemma-coherent-Noetherian}에 의해
+$f^*\mathcal{F}$는 연접이다. 그러므로 보조정리는 의미가 있다.
+$W \subset Y$를 $\delta$-차원이 $k$인 정수적인 닫힌 부분공간이라 하고,
+$W' \subset X$를 차원이 $k + r$이며 $f$에 의해 $W$로 가는 정수적인
+닫힌 부분공간이라 하자. $f^*[{\mathcal F}]_k$에서 $[W']$의 계수
+$n$과 $[f^*{\mathcal F}]_{k+r}$에서 $[W']$의 계수 $m$이 같음을
+보여야 한다. 다음 가환도식을 택할 수 있다.
+$$
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+$$
+여기서 $U, V$는 스킴이고 수직 화살표들은 \'etale이며,
+$u \mapsto v$이고 $u, v$가 각각 $W', W$의 일반점으로 가는 점들
+$u \in U$, $v \in V$가 존재한다. (세부사항은 생략한다.)
+줄기 $M = (\mathcal{F}|_V)_v$를 $\mathcal{O}_{V, v}$-가군으로
+생각하자. (차원 가정에 의해 $M$의 길이는 유한하지만, 실제로 이를
+확인할 필요는 없다. Lemma \ref{lemma-length-finite}를 보라.)
+다음을 얻는다.
+$(f^*\mathcal{F}|_U)_u = \mathcal{O}_{U, u} \otimes_{\mathcal{O}_{V, v}} M$.
+따라서
+$$
+n = \text{length}_{\mathcal{O}_{U, u}}
+(\mathcal{O}_{U, u} \otimes_{\mathcal{O}_{V, v}} M)
+\quad
+\text{그리고}
+\quad
+m = \text{length}_{\mathcal{O}_{V, v}}(M)
+\text{length}_{\mathcal{O}_{V, v}}(
+\mathcal{O}_{U, u}/\mathfrak m_v \mathcal{O}_{U, u})
+$$
+이다. 따라서 등식은 Algebra, Lemma
+\ref{algebra-lemma-pullback-module}에서 따른다.
+\end{proof}
+
+\section{푸시포워드와 풀백}
+\label{section-push-pull}
+
+\noindent
+이 절은 Chow Homology, Section \ref{chow-section-push-pull}에 대응한다.
+
+\medskip\noindent
+이 절에서는 의미가 있을 때 고유 푸시포워드와 평탄 풀백이 서로 양립함을
+확인한다. 위에서 한 작업에 의해 이는 코호몰로지와 밑변환의 결과이다.
+
+\begin{lemma}
+\label{lemma-flat-pullback-proper-pushforward}
+Situation \ref{situation-setup}에서
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+가 $B$ 위의 좋은 대수 공간들의 섬유곱 도식이라고 하자.
+$f : X \to Y$가 고유이고 $g : Y' \to Y$가 상대차원 $r$인 평탄
+사상이라고 가정하자. 그러면 $f'$도 고유이고 $g'$도 상대차원 $r$인
+평탄 사상이다. $X$ 위의 임의의 $k$-사이클 $\alpha$에 대하여
+$$
+g^*f_*\alpha = f'_*(g')^*\alpha
+$$
+가 $Z_{k + r}(Y')$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+$f'$가 고유라는 명제는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-proper}에서 따른다.
+$g'$가 상대차원 $r$인 평탄 사상이라는 명제는 Morphisms of Spaces,
+Lemmas
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change}와
+\ref{spaces-morphisms-lemma-base-change-flat}에서 따른다.
+$\alpha = [W]$이고 $W \subset X$가 $\delta$-차원이 $k$인 어떤
+정수적인 닫힌 부분공간인 경우에 사이클의 등식을 증명하면 충분하다.
+이 경우 Lemma \ref{lemma-cycle-closed-coherent}에 의해
+$\alpha = [\mathcal{O}_W]_k$임을 유의하라. 따라서 Lemmas
+\ref{lemma-cycle-push-sheaf}와 \ref{lemma-pullback-coherent}에 의해
+$f'_*(g')^*\mathcal{O}_W$가 $g^*f_*\mathcal{O}_W$와 동형임을
+보이면 충분하다. 이는 코호몰로지와 밑변환, 즉 Cohomology of Spaces,
+Lemma \ref{spaces-cohomology-lemma-flat-base-change-cohomology}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-flat}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 차수 $d$인 유한 국소 자유 사상이라 하자
+(Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-finite-locally-free}을 보라).
+그러면 $f$는 고유이면서 상대차원 $0$인 평탄 사상이고,
+$$
+f_*f^*\alpha = d\alpha
+$$
+가 모든 $\alpha \in Z_k(Y)$에 대하여 성립한다.
+\end{lemma}
+
+\begin{proof}
+유한 국소 자유 사상은 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-flat}에 의해 평탄이고 유한하며,
+유한 사상은 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-proper}에 의해 고유이다.
+유한 사상의 상대차원이 $0$임을 보이는 일은 생략한다. 따라서 공식은
+의미가 있다. $Z \subset Y$를 $\delta$-차원이 $k$인 정수적인 닫힌
+부분스킴이라 하자.
+% P10-E0590
+$\alpha = [Z]$인 경우에 공식을 증명하면 충분하다. 유한 국소 자유
+사상의 밑변환은 유한 국소 자유이므로(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-finite-locally-free}),
+$f_*f^*\mathcal{O}_Z$는 $Z$ 위의 랭크 $d$인 유한 국소 자유 층이다.
+따라서 $f_*f^*\mathcal{O}_Z$는 $Z$의 일반점에서 명백히 길이 $d$를
+갖는다. 그러므로
+$$
+f_*f^*[Z] = f_*f^*[\mathcal{O}_Z]_k =
+[f_*f^*\mathcal{O}_Z]_k = d[Z]
+$$
+이다. 여기서 Lemmas \ref{lemma-pullback-coherent}와
+\ref{lemma-cycle-push-sheaf}를 사용하였다.
+\end{proof}
+
+\section{주인자를 위한 준비}
+\label{section-preparation-principal-divisors}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-preparation-principal-divisors}에 대응한다.
+이 절의 내용 일부는 Spaces over Fields, Section
+\ref{spaces-over-fields-section-Weil-divisors}의 논의와 부분적으로 겹친다.
+
+\begin{lemma}
+\label{lemma-divisor-delta-dimension}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$X$가 정수적이라고 가정하자.
+\begin{enumerate}
+\item $Z \subset X$가 정수적인 닫힌 부분공간이면 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $Z$는 소인자이다.
+\item $|Z|$는 $|X|$에서 여차원 $1$을 갖는다.
+\item $\dim_\delta(Z) = \dim_\delta(X) - 1$이다.
+\end{enumerate}
+\item $Z$가 $X$ 위 유효 Cartier 인자의 기약 성분이면
+$\dim_\delta(Z) = \dim_\delta(X) - 1$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 소인자의 정의(Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-Weil-divisor}), Decent Spaces, Lemma
+\ref{decent-spaces-lemma-codimension-local-ring}, 그리고 차원 함수의 정의
+(Topology, Definition \ref{topology-definition-dimension-function})에서 따른다.
+
+\medskip\noindent
+$D \subset X$를 유효 Cartier 인자라 하자. $Z \subset D$를 기약
+성분이라 하고 $\xi \in |Z|$를 일반점이라 하자. $U = \Spec(A)$이고
+$D \times_X U$가 영인자가 아닌 원소 $f \in A$로 잘려 나오는
+\'etale 근방 $(U, u) \to (X, \xi)$를 택하자. Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-characterize-effective-Cartier-divisor}를 보라.
+그러면 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-generic-points}에 의해 $u$는 $V(f)$의
+일반점이다. 따라서 크룰의 주 아이디얼 정리(Algebra, Lemma
+\ref{algebra-lemma-minimal-over-1})에 의해 $\mathcal{O}_{U, u}$의
+차원은 $1$이다. 그러므로 $\xi$는 $X$ 위의 여차원 $1$인 점이고
+$Z$는 원하던 대로 소인자이다.
+\end{proof}
+
+\section{주인자}
+\label{section-principal-divisors}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-principal-divisors}에 대응한다.
+다음 정의는 현재 설정에서 Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-principal-divisor}에 대응하는 정의이다.
+
+\begin{definition}
+\label{definition-principal-divisor}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$X$가 정수적이고 $\dim_\delta(X) = n$이라고 가정하자.
+$f \in R(X)^*$라 하자. {\it $f$에 결부된 주인자}는 Spaces over Fields,
+Definition \ref{spaces-over-fields-definition-principal-divisor}에서 정의한
+$(n - 1)$-사이클
+$$
+\text{div}(f) = \text{div}_X(f) = \sum \text{ord}_Z(f) [Z]
+$$
+이다. Lemma \ref{lemma-divisor-delta-dimension}에 의해 소인자들의
+$\delta$-차원이 $n - 1$이므로 이는 의미가 있다.
+\end{definition}
+
+\noindent
+이 정의의 상황에서 $f, g \in R(X)^*$에 대하여
+$$
+\text{div}_X(fg) = \text{div}_X(f) + \text{div}_X(g)
+$$
+가 $Z_{n - 1}(X)$에서 성립한다. Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-div-additive}를 보라.
+다음 보조정리를 이용하면 주인자에 관한 명제를 스킴의 경우로 환원할 수 있다.
+
+\begin{lemma}
+\label{lemma-etale-pullback-principal-divisor}
+Situation \ref{situation-setup}에서 $f : X \to Y$를 $B$ 위의 좋은 대수
+공간들 사이의 \'etale 사상이라 하자. $Y$가 정수적이라고 가정하자.
+$g \in R(Y)^*$라 하자. $X$ 위의 사이클로서
+$$
+f^*(\text{div}_Y(g)) =
+\sum\nolimits_{X'} (X' \to X)_*\text{div}_{X'}(g \circ f|_{X'})
+$$
+이다. 여기서 합은 $X$의 기약 성분들(Remark
+\ref{remark-irreducible-component}) 전체를 돈다.
+\end{lemma}
+
+\begin{proof}
+사상 $|X| \to |Y|$는 열려 있다. $|X|$의 기약 성분들의 집합은
+$|X|$에서 국소 유한이다. 따라서 모든 기약 성분 $X' \subset X$에
+대하여 $f|_{X'} : X' \to Y$는 우세이다. 그러므로
+$g \circ f|_{X'}$가 정의되고(Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-rational-maps}),
+$\text{div}_{X'}(g \circ f|_{X'})$도 정의된다. 또한 합은 국소
+유한이므로 오른쪽은 실제로 $X$ 위의 사이클이다. 왼쪽은 Definition
+\ref{definition-flat-pullback}과 \'etale 사상이 상대차원 $0$인
+평탄 사상이라는 사실에 의해 정의된다.
+
+\medskip\noindent
+$f$가 \'etale이므로 모든 $x \in |X|$에 대하여
+$\delta_X(x) = \delta_y(f(x))$이다. 따라서
+$\dim_\delta(Y) = n$이면 $X$의 모든 기약 성분 $X'$에 대하여
+$\dim_\delta(X') = n$이다($X$의 일반점들이 $Y$의 일반점으로 가기
+때문이다. 위를 보라). 그러므로 양변 모두 $(n - 1)$-사이클이다.
+
+\medskip\noindent
+$Z \subset X$를 $\dim_\delta(Z) = n - 1$인 정수적인 닫힌
+부분공간이라 하자. 등식을 증명하려면 $Z$의 계수들이 같음을 보여야 한다.
+$Z' \subset Y$를 Lemma \ref{lemma-proper-image}에서 구성한 정수적인
+닫힌 부분공간이라 하자. 그러면 $\dim_\delta(Z') = n - 1$이다.
+$\xi \in |Z|$를 일반점이라 하자. 그러면
+$\xi' = f(\xi) \in |Z'|$가 일반점이다. Decent Spaces, Remark
+\ref{decent-spaces-remark-functoriality-henselian-local-ring}의 가환도식
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{X, \xi}^h) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(\mathcal{O}_{Y, \xi'}^h) \ar[r] & Y
+}
+$$
+을 생각하자. 축소된 Noether 국소환
+$\mathcal{O}_{X, \xi}^h$와 $\mathcal{O}_{Y, \xi'}^h$가 정역일
+필요는 없으므로 약간 주의해야 한다. 따라서 분수체 대신 전분수환
+$Q(-)$을 사용한다. 정의에 따라 $\text{div}_Y(g)$에서 $Z'$의 계수를
+구하려면 $Q(\mathcal{O}_{Y, \xi'}^h)$에서 $g$의 상을
+$a/b$로 쓴다. 여기서 $a, b \in \mathcal{O}_{Y, \xi'}^h$는
+영인자가 아닌 원소들이다. 그리고 다음을 취한다.
+$$
+\text{ord}_{Z'}(g) =
+\text{length}_{\mathcal{O}_{Y, \xi'}^h}
+(\mathcal{O}_{Y, \xi'}^h/a \mathcal{O}_{Y, \xi'}^h) -
+\text{length}_{\mathcal{O}_{Y, \xi'}^h}
+(\mathcal{O}_{Y, \xi'}^h/b \mathcal{O}_{Y, \xi'}^h)
+$$
+$f^*\text{div}_Y(G)$에서 $Z$의 계수도 같은 정수임을 유의하라.
+% P10-E0050
+Lemma \ref{lemma-etale-pullback}을 보라. $\xi \in X'$라고 가정하자.
+그러면 사상들
+$$
+\mathcal{O}_{Y, \xi'}^h \to
+\mathcal{O}_{X, \xi}^h \to
+\mathcal{O}_{X', \xi}^h
+$$
+을 생각할 수 있다. 첫째 화살표는 평탄하고 둘째 화살표는 차원이
+$1$인 축소된 Noether 국소환들의 전사 사상이다. 따라서 두 사상 모두
+영인자가 아닌 원소를 영인자가 아닌 원소로 보내며,
+$\text{div}_{X'}(g \circ f|_{X'})$에서 $Z'$의 계수는
+% P10-E0051
+위와 같은 규칙에 의해
+$$
+\text{ord}_Z(g \circ f|_{X'}) =
+\text{length}_{\mathcal{O}_{X', \xi}^h}
+(\mathcal{O}_{X', \xi}^h/a \mathcal{O}_{X', \xi}^h) -
+\text{length}_{\mathcal{O}_{Y, \xi'}^h}
+% P10-E0052
+(\mathcal{O}_{X', \xi}^h/b \mathcal{O}_{X', \xi}^h)
+$$
+이다. 따라서 다음을 보이면 충분하다.
+$$
+\text{length}_{\mathcal{O}_{Y, \xi'}^h}
+(\mathcal{O}_{Y, \xi'}^h/a \mathcal{O}_{Y, \xi'}^h) =
+\sum\nolimits_{\xi \in |X'|}
+% P10-E0053
+\text{length}_{\mathcal{O}_{X', \xi}^h}
+(\mathcal{O}_{X', \xi}^h/a \mathcal{O}_{X', \xi}^h)
+$$
+먼저 환 사상
+$\mathcal{O}_{Y, \xi'}^h \to \mathcal{O}_{X, \xi}^h$가 평탄이고
+비분기이므로
+$$
+\text{length}_{\mathcal{O}_{Y, \xi'}^h}
+(\mathcal{O}_{Y, \xi'}^h/a \mathcal{O}_{Y, \xi'}^h) =
+\text{length}_{\mathcal{O}_{X, \xi}^h}
+(\mathcal{O}_{X, \xi}^h/a \mathcal{O}_{X, \xi}^h)
+$$
+이다. 이는 Algebra, Lemma \ref{algebra-lemma-pullback-module}에서 따른다.
+$\mathfrak q_1, \ldots, \mathfrak q_t$를
+$\mathcal{O}_{X, \xi}^h$의 극대가 아닌 소 아이디얼들이라 하고
+$R_j = \mathcal{O}_{X, \xi}^h/\mathfrak q_j$라 두자.
+위와 같은 $X'$에 대하여, $\mathfrak q_j$가 $X'$의 한 점에 대응하는,
+즉 전사
+$\mathcal{O}_{X, \xi}^h \to \mathcal{O}_{X', \xi}$ 아래에서
+% P10-E0054
+$\mathfrak q_j$가 $\mathcal{O}_{X', \xi}$의 소 아이디얼에 대응하는
+지표들의 집합을 $J(X') \subset \{1, \ldots, t\}$로 쓰자.
+Chow Homology, Lemma
+\ref{chow-lemma-additivity-divisors-restricted}에 의해
+$$
+\text{length}_{\mathcal{O}_{X, \xi}^h}
+(\mathcal{O}_{X, \xi}^h/a \mathcal{O}_{X, \xi}^h) =
+\sum\nolimits_j \text{length}_{R_j}(R_j/a R_j)
+$$
+및
+$$
+\text{length}_{\mathcal{O}_{X', \xi}^h}
+(\mathcal{O}_{X', \xi}^h/a \mathcal{O}_{X', \xi}^h) =
+\sum\nolimits_{j \in J(X')} \text{length}_{R_j}(R_j/a R_j)
+$$
+을 얻는다. 따라서 $\{1, \ldots, t\}$가 집합들 $J(X')$의 서로소
+합집합이므로 보조정리의 결과가 성립한다. $X$ 위의 여차원 $0$인
+각 점은 유일한 $X'$ 위에 놓인다.
+\end{proof}
+
+\section{주인자와 푸시포워드}
+\label{section-two-fun}
+
+\noindent
+이 절은 Chow Homology, Section \ref{chow-section-two-fun}에 대응한다.
+
+\begin{lemma}
+\label{lemma-proper-pushforward-alteration}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$X$와 $Y$가 정수적이고
+$n = \dim_\delta(X) = \dim_\delta(Y)$라고 가정하자.
+$p : X \to Y$를 고유 우세 사상이라 하자.
+$f \in R(X)^*$라 하고
+$$
+g = \text{Nm}_{R(X)/R(Y)}(f).
+$$
+로 두자. 그러면 $p_*\text{div}(f) = \text{div}(g)$이다.
+\end{lemma}
+
+\begin{proof}
+이를 스킴의 경우에서 \'etale 국소화를 통해 유도할 것이다.
+$Z \subset Y$를 $\delta$-차원이 $n - 1$인 정수적인 닫힌
+부분공간이라 하자. $p_*\text{div}(f)$와 $\text{div}(g)$에서
+$[Z]$의 계수가 같음을 보이고자 한다. Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-finite-in-codim-1}을 사상
+$p : X \to Y$와 일반점 $\xi \in |Z|$에 적용하자.
+$Y$를 $\xi$를 포함하는 열린 부분공간으로 바꾸어
+$p : X \to Y$가 유한이라고 가정할 수 있다.
+$V$가 아핀 스킴인 \'etale 근방 $(V, v) \to (Y, \xi)$를 택하자.
+Lemma \ref{lemma-etale-pullback}에 의해 $V$로 풀백한 뒤 사이클들의
+등식을 증명하면 충분하다. $U = V \times_Y X$로 두고 가환도식
+$$
+\xymatrix{
+U \ar[r]_a \ar[d]_{p'} & X \ar[d]^p \\
+V \ar[r]^b & Y
+}
+$$
+을 생각하자. $V_j \subset V$, $j = 1, \ldots, m$을 $V$의 기약
+성분들이라 하자. 각 $i$에 대하여,
+% P10-E0055
+$U_{j, i}$, $i = 1, \ldots, n_j$를 $V_j$ 위에 우세한 $U$의
+기약 성분들이라 하자. $p' : U \to V$의 제한을
+$p'_{j, i} : U_{j, i} \to V_j$로 쓰자. 스킴의 경우(Chow Homology,
+Lemma \ref{chow-lemma-proper-pushforward-alteration})에 의해
+$$
+p'_{j, i, *}\text{div}_{U_{j, i}}(f_{j, i}) = \text{div}_{V_j}(g_{j, i})
+$$
+이다. 여기서 $f_{j, i}$는 $f$의 $U_{j, i}$로의 제한이고,
+$g_{j, i}$는 유한 확대 $R(U_{j, i})/R(V_j)$을 따른
+$f_{j, i}$의 노름이다. Lemmas
+\ref{lemma-flat-pullback-proper-pushforward},
+\ref{lemma-etale-pullback-principal-divisor}, 그리고
+\ref{lemma-compose-pushforward}에 의해
+\begin{align*}
+b^* p_*\text{div}_X(f)
+& =
+p'_* a^* \text{div}_X(f) \\
+& =
+p'_*\left(\sum\nolimits_{j, i}
+(U_{j, i} \to U)_*\text{div}_{U_{j, i}}(f_{j, i})\right) \\
+& =
+\sum\nolimits_{j, i}
+(V_j \to V)_*p'_{j, i, *}\text{div}_{U_{j, i}}(f_{j, i}) \\
+& =
+\sum\nolimits_j
+(V_j \to V)_*\left(\sum\nolimits_i \text{div}_{V_j}(g_{j, i})\right) \\
+& =
+\sum\nolimits_j (V_j \to V)_*\text{div}_{V_j}(\prod\nolimits_i g_{j, i})
+\end{align*}
+을 얻는다. 증명을 끝내기 위해 Lemma
+\ref{lemma-etale-pullback-principal-divisor}를 다시 사용하면,
+$V_j$의 함수체의 원소로서
+$$
+g \circ b|_{V_j} = \prod\nolimits_i g_{j, i}
+$$
+임을 보이면 충분하다. 체의 말로 쓰면 이는 다음 명제이다.
+$L/K$를 유한 확대라 하자. $M/K$를 유한 분리 확대라 하자.
+$M \otimes_K L = \prod M_i$라고 쓰자. $t \in L$의 상들을
+$t_i \in M_i$라 하면, $\text{Norm}_{L/K}(t)$의 $M$에서의 상은
+$\prod \text{Norm}_{M_i/M}(t_i)$이다. 증명은 생략한다.
+\end{proof}
+
+\section{유리 동치}
+\label{section-rational-equivalence}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-rational-equivalence}에 대응한다.
+이 절에서는 $k$-사이클 위의 {\it 유리 동치}를 정의한다.
+닫힌 몰입 아래에서 주인자들의 상들의 국소 유한 합을 허용할 것이다.
+이 때문에 상당히 기이한 현상들이 생긴다(스킴에 관한 장의 예들을 보라).
+그러나 이를 허용하지 않으면 선다발의 Chern 특성류로 캡하는 연산이
+유리 동치를 통해 인수분해됨을 어떻게 증명할지 알 수 없다.
+
+\begin{definition}
+\label{definition-rational-equivalence}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$k \in \mathbf{Z}$라 하자.
+\begin{enumerate}
+\item $\dim_\delta(W_j) = k + 1$인 정수적인 닫힌 부분공간들의 임의의
+국소 유한 모음 $\{W_j \subset X\}$와 임의의
+$f_j \in R(W_j)^*$가 주어지면
+$$
+\sum (i_j)_*\text{div}(f_j) \in Z_k(X)
+$$
+를 생각할 수 있다. 여기서 $i_j : W_j \to X$는 포함 사상이다.
+사상 $\coprod i_j : \coprod W_j \to X$가 고유이므로 이는 의미가 있다.
+\item $\alpha \in Z_k(X)$가 위에 표시한 형태의 사이클이면
+$\alpha$는 {\it 영과 유리 동치}라고 한다.
+\item $\alpha, \beta \in Z_k(X)$에 대하여 $\alpha - \beta$가
+영과 유리 동치이면 이 두 사이클이 {\it 유리 동치}라고 하고
+$\alpha \sim_{rat} \beta$라고 쓴다.
+\item
+$$
+\CH_k(X) = Z_k(X) / \sim_{rat}
+$$
+를 {\it $X$ 위 $k$-사이클들의 Chow 군}이라고 정의한다.
+이를 때때로 {\it $X$ 위의 유리 동치로 나눈 $k$-사이클들의 Chow 군}
+이라고 부른다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+그 밖에도 흥미로운 동치관계가 많이 있다. 유리 동치는 이들 가운데
+가장 거친 동치관계이다. 다음은 매우 간단하지만 중요한 보조정리이다.
+
+\begin{lemma}
+\label{lemma-restrict-to-open}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$U \subset X$를 열린 부분공간이라 하자. $Y$를
+$|Y| = |X| \setminus |U|$인 $X$의 축소된 닫힌 부분공간이라 하고,
+포함 사상을 $i : Y \to X$로 쓰자. $k \in \mathbf{Z}$라 하자.
+$\alpha, \beta \in Z_k(X)$라고 가정하자.
+$\alpha|_U \sim_{rat} \beta|_U$이면 다음을 만족하는 사이클
+$\gamma \in Z_k(Y)$가 존재한다.
+$$
+\alpha \sim_{rat} \beta + i_*\gamma.
+$$
+다시 말해 수열
+$$
+\xymatrix{
+\CH_k(Y) \ar[r]^{i_*} & \CH_k(X) \ar[r]^{j^*} & \CH_k(U) \ar[r] & 0
+}
+$$
+은 아벨 군들의 완전 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$\{W_j\}_{j \in J}$를 $\delta$-차원이 $k + 1$인 $U$의 정수적인
+닫힌 부분공간들의 국소 유한 모음이라 하고, 정의에서와 같이
+$(\alpha - \beta)|_U = \sum (i_j)_*\text{div}(f_j)$가 되도록 하는
+원소들 $f_j \in R(W_j)^*$를 택하자. $W_j' \subset X$를
+$W_j$와 같은 일반점을 갖는, 이에 대응하는 $X$의 정수적인 닫힌
+부분공간이라 하자. $V \subset X$가 준콤팩트 열린 부분공간이라고
+가정하자. $V$가 Noether이므로 $V \cap U$도 $U$에서 준콤팩트
+열린 부분공간이다. 따라서 $\{W_j\}$가 국소 유한이므로 집합
+$\{j \in J \mid W_j \cap V \not = \emptyset\}
+= \{j \in J \mid W'_j \cap V \not = \emptyset\}$은 유한하다.
+다시 말해 $\{W'_j\}$도 국소 유한임을 알 수 있다.
+$R(W_j) = R(W'_j)$이므로
+$$
+\alpha - \beta - \sum (i'_j)_*\text{div}(f_j)
+$$
+는 $X$ 위의 사이클이고 $U$로의 제한은 영이다.
+Lemma \ref{lemma-exact-sequence-open}을 적용하면 보조정리가 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-infinite-sums-rational-equivalences}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$X$ 위의 $k$-사이클들의 무한 모음
+$\alpha_i, \beta_i \in Z_k(X)$, $i \in I$가 있다고 가정하자.
+$\sum \alpha_i$와 $\sum \beta_i$가 사이클로 정의되도록,
+$\alpha_i$와 $\beta_i$의 지지집합들이 $X$의 닫힌 부분집합들의
+국소 유한 모음을 이룬다고 가정하자. 또한 각 $i$에 대하여
+$\alpha_i \sim_{rat} \beta_i$라고 가정하자. 그렇더라도
+$\sum \alpha_i \sim_{rat} \sum \beta_i$인지는 명백하지 않다.
+문제는 유리 동치들이 국소 유한 족
+$\{W_{i, j}, f_{i, j} \in R(W_{i, j})^*\}_{j \in J_i}$로 주어질
+수 있지만, 합집합 $\{W_{i, j}\}_{i \in I, j\in J_i}$는 국소
+유한이 아닐 수 있다는 점이다.
+
+\medskip\noindent
+실제로 많은 경우에는 $|X|$의 닫힌 부분집합들의 국소 유한 족
+$\{T_i\}_{i \in I}$가 있어서 $\alpha_i, \beta_i$는 $T_i$ 위에
+지지되고, $\alpha_i \sim_{rat} \beta_i$가 $T_i$ ``위에서''
+성립한다. 더 정확히 말하면 족들
+$\{W_{i, j}, f_{i, j} \in R(W_{i, j})^*\}_{j \in J_i}$는
+$|W_{i, j}| \subset T_i$인 정수적인 닫힌 부분공간 $W_{i, j}$들로
+이루어진다. 이 경우 족
+$\{W_{i, j}\}_{i \in I, j\in J_i}$가 자동으로 국소 유한이므로
+$\sum \alpha_i \sim_{rat} \sum \beta_i$가 $X$ 위에서 성립한다.
+\end{remark}
+
+\section{유리 동치와 푸시포워드 및 풀백}
+\label{section-properties-rational-equivalence}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-properties-rational-equivalence}에 대응한다.
+이 절에서는 평탄 풀백과 고유 푸시포워드가 유리 동치와 가환함을 보인다.
+
+\begin{lemma}
+\label{lemma-prepare-flat-pullback-rational-equivalence}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$Y$가 정수적이고 $\dim_\delta(Y) = k$라고 가정하자.
+$f : X \to Y$를 상대차원 $r$인 평탄 사상이라 하자.
+그러면 $g \in R(Y)^*$에 대하여
+$$
+f^*\text{div}_Y(g) =
+\sum m_{X', X} (X' \to X)_*\text{div}_{X'}(g \circ f|_{X'})
+$$
+이다. 이는 $X$ 위의 $(k + r - 1)$-사이클들의 등식이며, 합은
+$X$의 기약 성분 $X'$ 전체를 돌고 $m_{X', X}$는 $X$에서 $X'$의
+중복도이다.
+\end{lemma}
+
+\begin{proof}
+$X$의 모든 기약 성분은 $Y$ 위에 우세함을 유의하라
+(Lemma \ref{lemma-flat-inverse-image-dimension}). 따라서 합성
+$g \circ f|_{X'}$가 정의된다(Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-rational-maps}).
+이를 스킴의 경우로 환원하자. 스킴 $V$와 전사 \'etale 사상
+$V \to Y$를 택한다. 스킴 $U$와 전사 \'etale 사상
+$U \to V \times_Y X$를 택한다. 도식은 다음과 같다.
+$$
+\xymatrix{
+U \ar[r]_a \ar[d]_h & X \ar[d]^f \\
+V \ar[r]^b & Y
+}
+$$
+$a$가 전사이고 \'etale이므로 Lemma \ref{lemma-etale-pullback}에
+의해 $a$로 풀백한 뒤 사이클들의 등식을 증명하면 충분하다.
+Lemma \ref{lemma-etale-pullback-principal-divisor}를 사용하면
+$$
+b^*\text{div}_Y(g) = \sum (V' \to V)_*\text{div}_{V'}(g \circ b|_{V'})
+$$
+라고 쓸 수 있다. 여기서 합은 $V$의 기약 성분 $V'$ 전체를 돈다.
+Lemma \ref{lemma-flat-pullback-proper-pushforward}를 사용하면
+$$
+h^*b^*\text{div}_Y(g) =
+\sum (V' \times_V U \to U)_*(h')^*\text{div}_{V'}(g \circ b|_{V'})
+$$
+를 얻는다. 여기서 $h' : V' \times_V U \to V'$는 사영이다.
+스킴의 경우의 보조정리(Chow Homology, Lemma
+\ref{chow-lemma-prepare-flat-pullback-rational-equivalence})를
+사상 $h' : V' \times_V U \to V'$에 적용하면
+$$
+(h')^*\text{div}_{V'}(g \circ b|_{V'}) =
+\sum
+m_{U', V' \times_V U}
+(U' \to V' \times_V U)_*\text{div}_{U'}(g \circ b|_{V'} \circ h'|_{U'})
+$$
+이다. 여기서 합은 $V' \times_V U$의 기약 성분 $U'$ 전체를 돈다.
+이 합에 나타나는 각 $U'$는 $U$의 기약 성분이며, 역으로 $U$의 모든
+기약 성분 $U'$는 유일한 기약 성분 $V' \subset V$에 대하여
+$V' \times_V U$의 기약 성분이다. 기약 성분 $U' \subset U$가
+주어지면, Lemma \ref{lemma-proper-image}의 $X$ 안의 ``상''
+$\overline{a(U')} \subset X$를 쓰자. 이는 예를 들어 Lemma
+\ref{lemma-flat-inverse-image-dimension}에 의해 $X$의 기약 성분이다.
+% P10-E0056
+중복도 $m_{U', V' \times_V U}$는 중복도
+$m_{\overline{a(U')}, X}$와 같다. 이는 등식
+$h^*a^*[Y] = b^*f^*[Y]$(Lemma
+\ref{lemma-compose-flat-pullback}), 정의들, 그리고 Lemma
+\ref{lemma-etale-pullback}에서 따른다. 지금까지의 내용을 합치면
+$$
+a^*f^*\text{div}_Y(g) =
+h^*b^*\text{div}_Y(g) =
+\sum m_{\overline{a(U')}, X}
+(U' \to U)_*\text{div}_{U'}(g \circ (f \circ a)|_{U'})
+$$
+를 얻는다. 다음으로 보조정리의 명제에 있는 공식의 오른쪽을 $a$로
+풀백할 때 일어나는 일을 분석한다. 먼저 Lemma
+\ref{lemma-flat-pullback-proper-pushforward}를 사용하여
+$$
+a^*\sum m_{X', X} (X' \to X)_*\text{div}_{X'}(g \circ f|_{X'}) =
+\sum m_{X', X} (X' \times_X U \to U)_*(a')^*\text{div}_{X'}(g \circ f|_{X'})
+$$
+를 얻는다. 여기서 $a' : X' \times_X U \to X'$는 사영이다.
+Lemma \ref{lemma-etale-pullback-principal-divisor}에 의해
+$$
+(a')^*\text{div}_{X'}(g \circ f|_{X'}) =
+\sum (U' \to X' \times_X U)_*\text{div}_{U'}(g \circ (f \circ a)|_{U'})
+$$
+이다. 여기서 합은 $X' \times_X U$의 기약 성분 $U'$ 전체를 돈다.
+이 $U'$들은 $U$의 기약 성분들이며, 실제로
+$\overline{a(U')} = X'$를 만족하는 $U$의 기약 성분들과 정확히 같다.
+위에서 얻은 것과 비교하면 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-pullback-rational-equivalence}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 상대차원 $r$인 평탄 사상이라 하자.
+$\alpha \sim_{rat} \beta$를 $Y$ 위의 유리 동치인 $k$-사이클들이라
+하자. 그러면 $f^*\alpha \sim_{rat} f^*\beta$가 $X$ 위의
+$(k + r)$-사이클들로서 성립한다.
+\end{lemma}
+
+\begin{proof}
+무엇을 보여야 하는가? 닫힌 몰입들의 모음
+$$
+i_j : W_j \longrightarrow Y
+$$
+가 주어졌다고 하자. 각 $W_j$는 $\delta$-차원이 $k + 1$인
+정수적인 공간이고, 유리함수 $g_j \in R(W_j)^*$가 주어졌다고 하자.
+또한 모음 $\{|i_j|(|W_j|)\}_{j \in J}$가 $|Y|$에서 국소 유한이라고
+가정하자. 그러면
+$$
+f^*(\sum i_{j, *}\text{div}(g_j)) = \sum f^*i_{j, *}\text{div}(g_j)
+$$
+가 $X$ 위에서 영과 유리 동치임을 보여야 한다. Lemma
+\ref{lemma-inverse-image-locally-finite}에 의해 오른쪽의 합은
+의미가 있다.
+
+\medskip\noindent
+섬유곱
+$$
+i'_j : W'_j = W_j \times_Y X \longrightarrow X.
+$$
+을 생각하고, 첫째 사영을 $f_j : W'_j \to W_j$로 쓰자.
+Lemma \ref{lemma-flat-pullback-proper-pushforward}에 의해 위의 합을
+$$
+\sum i'_{j, *}(f_j^*\text{div}(g_j))
+$$
+라고 쓸 수 있다. Lemma
+\ref{lemma-prepare-flat-pullback-rational-equivalence}에 의해 각
+$f_j^*\text{div}(g_j)$는 $W'_j$ 위에서 영과 유리 동치이다.
+따라서 각 $i'_{j, *}(f_j^*\text{div}(g_j))$는 영과 유리 동치이다.
+그러므로 Remark \ref{remark-infinite-sums-rational-equivalences}의
+논의에 의해 표시한 합도 그러하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-pushforward-rational-equivalence}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$p : X \to Y$를 고유 사상이라 하자.
+$\alpha, \beta \in Z_k(X)$가 유리 동치라고 가정하자.
+그러면 $p_*\alpha$는 $p_*\beta$와 유리 동치이다.
+\end{lemma}
+
+\begin{proof}
+무엇을 보여야 하는가? 닫힌 몰입들의 모음
+$$
+i_j : W_j \longrightarrow X
+$$
+가 주어졌다고 하자. 각 $W_j$는 $\delta$-차원이 $k + 1$인
+정수적인 공간이고, 유리함수 $f_j \in R(W_j)^*$가 주어졌다고 하자.
+또한 모음 $\{i_j(W_j)\}_{j \in J}$가 $X$에서 국소 유한이라고
+가정하자. 그러면
+$$
+p_*\left(\sum i_{j, *}\text{div}(f_j)\right)
+$$
+가 $X$ 위에서 영과 유리 동치임을 보여야 한다.
+% P10-E0057
+
+\medskip\noindent
+이 합은
+$$
+\sum p_*i_{j, *}\text{div}(f_j).
+$$
+와 같음을 유의하라. $W'_j \subset Y$를 $p \circ i_j$의 상인
+정수적인 닫힌 부분공간이라 하자. Lemma \ref{lemma-proper-image}를
+보라. Lemma \ref{lemma-quasi-compact-locally-finite}에 의해
+모음 $\{W'_j\}$는 $Y$에서 국소 유한이다. 따라서 주어진 $j$에
+대하여 $p_*i_{j, *}\text{div}(f_j) = 0$이거나, 어떤
+$g_j \in R(W'_j)^*$에 대하여
+$i'_{j, *}\text{div}(g_j)$와 같음을 보이면 충분하다.
+
+\medskip\noindent
+따라서 위의 논증을 통해 $\delta$-차원이 $k + 1$인 하나의 정수적인
+닫힌 부분공간 $W \subset X$인 경우로 환원된다.
+% P10-E0058
+$f \in R(W)^*$라 하자. 위와 같이 $W' = p(W)$라 하자.
+사상들의 가환도식
+$$
+\xymatrix{
+W \ar[r]_i \ar[d]_{p'} & X \ar[d]^p \\
+W' \ar[r]^{i'} & Y
+}
+$$
+을 얻는다. Lemma \ref{lemma-compose-pushforward}에 의해
+$p_*i_*\text{div}(f) = i'_*(p')_*\text{div}(f)$임을 유의하라.
+위에서 설명했듯이 $(p')_*\text{div}(f)$가 $W'$ 위 유리함수의
+인자이거나 영임을 보여야 한다. 세 경우를 구분한다.
+
+\medskip\noindent
+$\dim_\delta(W') < k$인 경우. 이 경우 자동으로
+$(p')_*\text{div}(f) = 0$이므로 증명할 것이 없다.
+
+\medskip\noindent
+$\dim_\delta(W') = k$인 경우. 이 경우
+$(p')_*\text{div}(f) = 0$임을 보이자.
+$(p')_*\text{div}(f)$가 $k$-사이클이므로 어떤
+$n \in \mathbf{Z}$에 대하여 $(p')_*\text{div}(f) = n[W']$이다.
+$n = 0$임을 증명하기 위해 $W'$를 공집합이 아닌 열린 부분공간으로
+바꾸어도 된다. 특히 $W'$가 스킴이라고 가정할 수 있고 그렇게 한다.
+$\eta \in W'$를 일반점이라 하자.
+$K = \kappa(\eta) = R(W')$를 함수체라 하자. 밑변환 도식
+$$
+\xymatrix{
+W_\eta \ar[r] \ar[d]_c & W \ar[d]^{p'} \\
+\Spec(K) \ar[r]^\eta & W'
+}
+$$
+을 생각하자. $c$는 고유임을 유의하라. 또한 $|W_\eta|$의 차원은
+$1$이다. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-topology-fibre}를 사용하여 $|W_\eta|$를
+$\eta$로 가는 $|W|$의 점들의 부분공간과 동일시하라.
+$\dim_\delta(W) = k + 1$이고 $\delta(\eta) = k$이므로
+$W_\eta$의 점들의 $\delta$-값은 $k$ 또는 $k + 1$이어야 함을
+유의하라. 따라서 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-codimension-local-ring}에 의해 국소환들의
+차원은 $\leq 1$이다. Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus}에 의해
+$W_\eta$는 스킴이다. $\Spec(K)$는 $W'$의 공집합이 아닌 아핀 열린
+부분스킴들의 극한이므로 Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-limit-is-scheme}에 의해 $W$가 스킴이라고
+가정할 수 있다고 결론 내린다. 마지막으로 스킴의 경우(Chow Homology,
+Lemma \ref{chow-lemma-proper-pushforward-rational-equivalence})에 의해
+$n = 0$임을 얻는다.
+
+\medskip\noindent
+$\dim_\delta(W') = k + 1$인 경우. 이 경우 Lemma
+\ref{lemma-proper-pushforward-alteration}을 적용할 수 있고,
+원하는 대로 어떤 $g \in R(W')^*$에 대하여
+$p'_*\text{div}(f) = \text{div}(g)$임을 알 수 있다.
+\end{proof}
+
+\section{가역 층에 결부된 인자}
+\label{section-divisor-invertible-sheaf}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-divisor-invertible-sheaf}에 대응한다.
+다음 정의는 현재 설정에서 Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-divisor-invertible-sheaf}에 대응한다.
+
+\begin{definition}
+\label{definition-divisor-invertible-sheaf}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$X$가 정수적이고 $n = \dim_\delta(X)$라고 가정하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+\begin{enumerate}
+\item $\mathcal{L}$의 영이 아닌 임의의 유리형 단면 $s$에 대하여
+{\it $s$에 결부된 Weil 인자}를 $(n - 1)$-사이클
+% P10-E0059
+$$
+\text{div}_\mathcal{L}(s) =
+\sum \text{ord}_{Z, \mathcal{L}}(s) [Z]
+$$
+로 정의한다. 이는 Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-divisor-invertible-sheaf}에서
+정의된 사이클이다. Lemma \ref{lemma-divisor-delta-dimension}에 의해
+Weil 인자들의 $\delta$-차원이 $n - 1$이므로 이는 의미가 있다.
+\item {\it $\mathcal{L}$에 결부된 Weil 인자}를
+$$
+c_1(\mathcal{L}) \cap [X] =
+\text{div}_\mathcal{L}(s)\text{의 류} \in \CH_{n - 1}(X)
+$$
+로 정의한다. 여기서 $s$는 $X$ 위의 $\mathcal{L}$의 영이 아닌 임의의
+유리형 단면이다. 이는 Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-divisor-meromorphic-well-defined}에 의해
+잘 정의된다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+영이 아닌 단면의 영점 스킴은 유효 Cartier 인자이며, 그 Weil 인자류는
+가역 가군에 결부된 Weil 인자를 계산한다.
+
+\begin{lemma}
+\label{lemma-compute-c1}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$X$가 정수적이고 $n = \dim_\delta(X)$라고 가정하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$s \in \Gamma(X, \mathcal{L})$를 영이 아닌 전역 단면이라 하자.
+그러면 $Z_{n - 1}(X)$에서
+$$
+\text{div}_\mathcal{L}(s) = [Z(s)]_{n - 1}
+$$
+이고, $\CH_{n - 1}(X)$에서
+$$
+c_1(\mathcal{L}) \cap [X] = [Z(s)]_{n - 1}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$Z \subset X$를 $\delta$-차원이 $n - 1$인 정수적인 닫힌
+부분공간이라 하자. $\xi \in |Z|$를 일반점이라 하자. 첫째 등식을
+증명하기 위해 양변에서 $Z$의 계수를 비교한다.
+기본 \'etale 근방 $(U, u) \to (X, \xi)$를 택하자. Decent Spaces,
+Section
+\ref{decent-spaces-section-residue-fields-henselian-local-rings}을 보라.
+이 경우 $\mathcal{O}_{X, \xi}^h = \mathcal{O}_{U, u}^h$임을
+상기하라. $U$를 $u$의 열린 근방으로 바꾼 뒤
+$\mathcal{L}|_U$의 자명화 단면 $s_U$가 존재한다고 가정할 수 있다.
+어떤 $f \in \Gamma(U, \mathcal{O}_U)$에 대하여
+$s|_U = f s_U$라고 쓰자. 그러면 $Z \times_X U$는 $U$의 닫힌
+부분스킴으로서 $V(f)$와 같다. Divisors on Spaces, Definition
+\ref{spaces-divisors-definition-zero-scheme-s}를 보라.
+Spaces over Fields, Section \ref{spaces-over-fields-section-c1}에서와
+같이, 표준 사상 $c_\xi : \Spec(\mathcal{O}_{X, \xi}^h) \to X$에
+따른 $\mathcal{L}$의 풀백을 $\mathcal{L}_\xi$로 쓰자.
+$s_U$의 풀백을 $s_\xi$로 쓰면 이는 $\mathcal{L}_\xi$의
+자명화이다. 그러면 $c_\xi^*(s) = fs_\xi$임을 알 수 있다.
+$[Z(s)]_{n - 1}$에서 $Z$의 계수는 정의에 따라
+$$
+\text{length}_{\mathcal{O}_{U, u}}(\mathcal{O}_{U, u}/f\mathcal{O}_{U, u})
+$$
+이다. $\mathcal{O}_{U, u} \to \mathcal{O}_{X, \xi}^h$는
+평탄이고 잉여체들을 동일시하므로, 이는 Algebra, Lemma
+\ref{algebra-lemma-pullback-module}에 의해
+$$
+\text{length}_{\mathcal{O}_{X, \xi}^h}
+(\mathcal{O}_{X, \xi}^h/f\mathcal{O}_{X, \xi}^h)
+$$
+와 같다. 이 마지막 양은 Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-order-vanishing-meromorphic}에 의해
+$\text{ord}_{Z, \mathcal{L}}(s)$와 같다. 즉 원하는 대로
+$\text{div}_\mathcal{L}(s)$에서 $Z$의 계수와 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-Gm-torsor}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자. 사상
+$$
+q :
+T = \underline{\Spec}\left(
+\bigoplus\nolimits_{n \in \mathbf{Z}} \mathcal{L}^{\otimes n}\right)
+\longrightarrow
+X
+$$
+는 다음 성질들을 갖는다.
+\begin{enumerate}
+\item $q$는 전사이고 매끄럽고 아핀이며 상대차원이 $1$이다.
+\item 동형사상 $\alpha : q^*\mathcal{L} \cong \mathcal{O}_T$가 존재한다.
+\item $(q : T \to X, \alpha)$의 구성은 밑변환과 가환한다.
+\item $q^* : Z_k(X) \to Z_{k + 1}(T)$는 단사이다.
+\item $Z \subset X$가 정수적인 닫힌 부분공간이면
+$q^{-1}(Z) \subset T$도 정수적인 닫힌 부분공간이다.
+\item $Z \subset X$가 $\delta$-차원이 $\leq k$인 $X$의 닫힌
+부분공간이면, $q^{-1}(Z)$는 $\delta$-차원이 $\leq k + 1$인
+$T$의 닫힌 부분공간이고
+$q^*[Z]_k = [q^{-1}(Z)]_{k + 1}$이다.
+\item $\xi' \in |T|$가 $\xi$ 위의 $|T| \to |X|$의 섬유의
+일반점이면, 환 사상
+$\mathcal{O}_{X, \xi}^h \to \mathcal{O}_{T, \xi'}^h$는 평탄이고,
+$\mathfrak m_{\xi'}^h = \mathfrak m_\xi^h \mathcal{O}_{T, \xi'}^h$이며,
+잉여체 확대는 초월차수가 $1$인 순수 초월 확대이다.
+\item 필요에 따라 여기에 더 추가한다.
+% P10-E0061
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{L}|_U$가 자명하도록 하는 \'etale 사상 $U \to X$를
+택하자. 그러면 $T \times_X U \to U$는 사영
+$\mathbf{G}_m \times U \to U$와 동형이다. 여기서
+% P10-E0060
+$\mathbf{G}_m$은 곱셈군 스킴이다. Groupoids, Example
+\ref{groupoids-example-multiplicative-group}을 보라. 따라서 (1)은
+명백하다.
+
+\medskip\noindent
+(2)를 보기 위해
+$q_*q^*\mathcal{L} =
+\bigoplus_{n \in \mathbf{Z}} \mathcal{L}^{\otimes n + 1}$임을 유의하라.
+따라서 $q_*\mathcal{O}_T$-가군의 자명한 동형사상
+$q_*q^*\mathcal{L} \to q_*\mathcal{O}_T$가 있다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-equivalence-modules}에 의해 이는
+동형사상 $q^*\mathcal{L} \to \mathcal{O}_T$를 결정한다.
+
+\medskip\noindent
+상대 스펙트럼의 구성은 임의의 밑변환과 가환하고 동형사상
+$\alpha$도 명백히 그러하므로 (3)이 성립한다.
+
+\medskip\noindent
+(4)는 (1)과 정의들에서 곧바로 따른다.
+
+\medskip\noindent
+(5)는 $Z$가 정수적인 대수 공간이면
+$\mathbf{G}_m \times Z$도 정수적인 대수 공간이라는 사실에서 따른다.
+
+\medskip\noindent
+(6)은 길이가 보존된다는 사실에서 따른다.
+$(A, \mathfrak m)$이 국소환이고
+$B = A[x]_{\mathfrak m A[x]}$이며 $M$이 $A$-가군이면
+$\text{length}_A(M) = \text{length}_B(M \otimes_A B)$이다.
+이는 $\mathcal{F}$가 연접 $\mathcal{O}_X$-가군이고
+$\xi \in |X|$이며 $\xi' \in |T|$가 $\xi$ 위 섬유의 일반점이면,
+$\xi$에서 $\mathcal{F}$의 길이가 $\xi'$에서
+$q^*\mathcal{F}$의 길이와 같음을 뜻한다. 정의들을 추적하면
+(6)과 그보다 더 많은 것을 얻는다.
+
+\medskip\noindent
+(7)의 사상은 Decent Spaces, Remark
+\ref{decent-spaces-remark-functoriality-henselian-local-ring}에서 온다.
+하지만 이 경우에는
+$$
+\Spec(\mathcal{O}_{X, \xi}^h) \times_X T =
+\mathbf{G}_m \times \Spec(\mathcal{O}_{X, \xi}^h) =
+\Spec(\mathcal{O}_{X, \xi}^h[t, t^{-1}])
+$$
+이고, $\xi'$는 $\Spec(\mathcal{O}_{X, \xi}^h)$ 위에서 이 공간의
+특수섬유의 일반점에 대응한다. 따라서
+$\mathcal{O}_{T, \xi'}^h$는 대응하는 소 아이디얼에서
+$\mathcal{O}_{X, \xi}^h[t, t^{-1}]$의 국소화의 Hensel화이다.
+여기서 (7)과 몇 가지 가환대수가 따른다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-Gm-torsor-divisor-meromorphic-section}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$X$가 정수적이라고 가정하자. $s$를 $\mathcal{L}$의 영이 아닌
+유리형 단면이라 하자. $q : T \to X$를 Lemma
+\ref{lemma-Gm-torsor}의 사상이라 하자. 그러면
+$$
+q^*\text{div}_\mathcal{L}(s) = \text{div}_T(q^*(s))
+$$
+이다. 여기서 동형사상 $q^*\mathcal{L} \to \mathcal{O}_T$를 사용하여
+풀백 $q^*(s)$를 $T$ 위의 영이 아닌 유리형 함수로 본다.
+\end{lemma}
+
+\begin{proof}
+Spaces over Fields, Sections
+\ref{spaces-over-fields-section-Weil-divisors}와
+\ref{spaces-over-fields-section-c1}에서 주어진 구성들의 양립성에 의해
+$\text{div}_T(q^*(s)) = \text{div}_{\mathcal{O}_T}(q^*(s))$임을
+유의하라. 이 증명에서는 $\text{div}_{\mathcal{O}_T}(q^*(s))$와
+일치함을 보이겠다. Lemma \ref{lemma-Gm-torsor}에 서술된
+$q : T \to X$의 모든 성질을 이후 별도의 언급 없이 사용하겠다.
+$Z \subset T$를 소인자라 하자. 그러면 $Z \to X$가 우세이거나,
+어떤 소인자 $Z' \subset X$에 대하여 $Z = q^{-1}(Z')$이다.
+$Z \to X$가 우세이면 이 보조정리의 등식 양변에서 $Z$의 계수는
+영이다. 따라서 $Z' \subset X$가 소인자이고
+$Z = q^{-1}(Z')$이라고 가정해도 된다.
+$\xi' \in |Z'|$와 $\xi \in |Z|$를 각각의 일반점이라 하자.
+그러면 가환 그림
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{T, \xi}^h) \ar[r]_-{c_\xi} \ar[d]_h & T \ar[d]^q \\
+\Spec(\mathcal{O}_{X, \xi'}^h) \ar[r]^-{c_{\xi'}} & X
+}
+$$
+을 얻는다. Decent Spaces, Remark
+\ref{decent-spaces-remark-functoriality-henselian-local-ring}을 보라.
+$\mathcal{L}_{\xi'} = c_{\xi'}^*\mathcal{L}$의 자명화
+$s_{\xi'}$를 택하자. 그러면 $s_{\xi'}$를 $h$에 따라 풀백한
+$s_\xi$를 $\mathcal{L}_\xi = c_\xi^* q^*\mathcal{L}$의
+자명화로 사용할 수 있다. 영인자가 아닌
+$a, b \in \mathcal{O}_{X, \xi'}$에 대하여
+$s/s_{\xi'} = a/b$라고 쓰자. 정의에 따라
+$\text{div}_\mathcal{L}(s)$에서 $Z'$의 계수는
+$$
+\text{length}_{\mathcal{O}_{X, \xi'}^h}(
+\mathcal{O}_{X, \xi'}^h/a \mathcal{O}_{X, \xi'}^h)
+-
+\text{length}_{\mathcal{O}_{X, \xi'}^h}(
+\mathcal{O}_{X, \xi'}^h/b \mathcal{O}_{X, \xi'}^h)
+$$
+이다. $Z = q^{-1}(Z')$이므로 이는
+$q^*\text{div}_\mathcal{L}(s)$에서 $Z$의 계수이기도 하다.
+$\mathcal{O}_{X, \xi'}^h \to \mathcal{O}_{T, \xi}^h$가
+평탄하므로 원소 $a, b$는 $\mathcal{O}_{T, \xi}^h$에서
+영인자가 아닌 원소로 간다. 따라서 $\mathcal{O}_{T, \xi}^h$의
+전분수환에서 $q^*(s)/s_\xi = a/b$이다. 정의에 따라
+$\text{div}_T(q^*(s))$에서 $Z$의 계수는
+$$
+\text{length}_{\mathcal{O}_{T, \xi}^h}(
+\mathcal{O}_{T, \xi}^h/a \mathcal{O}_{T, \xi}^h)
+-
+\text{length}_{\mathcal{O}_{T, \xi}^h}(
+\mathcal{O}_{T, \xi}^h/b \mathcal{O}_{T, \xi}^h)
+$$
+이다. Algebra, Lemma \ref{algebra-lemma-pullback-module}와 Lemma
+\ref{lemma-Gm-torsor}에서 보인
+$\mathfrak m_\xi^h = \mathfrak m_{\xi'}^h\mathcal{O}_{T, \xi}^h$에
+의해 이 길이들은 앞의 길이들과 같으므로 증명이 끝난다.
+\end{proof}
+
+\section{가역 층과의 교차}
+\label{section-intersecting-with-divisors}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-intersecting-with-divisors}에 해당한다.
+이 절에서는 다음 구성을 연구한다.
+
+\begin{definition}
+\label{definition-cap-c1}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+각 정수 $k$에 대하여
+$$
+c_1(\mathcal{L}) \cap - :
+Z_{k + 1}(X) \to \CH_k(X)
+$$
+라는 연산을 정의하고, 이를 {\it $\mathcal{L}$의 제1 Chern 특성류와의
+교차}라 부른다.
+\begin{enumerate}
+\item $\dim_\delta(W) = k + 1$인 정수적 닫힌 부분공간
+$i : W \to X$가 주어졌을 때
+$$
+c_1(\mathcal{L}) \cap [W] = i_*(c_1({i^*\mathcal{L}}) \cap [W])
+$$
+로 정의한다. 여기서 우변은 Definition
+\ref{definition-divisor-invertible-sheaf}에 정의되어 있다.
+\item 일반적인 $(k + 1)$-사이클 $\alpha = \sum n_i [W_i]$에 대해서는
+$$
+c_1(\mathcal{L}) \cap \alpha = \sum n_i c_1(\mathcal{L}) \cap [W_i]
+$$
+로 둔다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+% P10-E0062
+각 $c_1(\mathcal{L}) \cap W_i = \sum_j n_{i, j} [Z_{i, j}]$를
+$\{Z_{i, j}\}_j$가 $W_i$의 정수적 닫힌 부분공간들의 국소 유한 합이
+되도록 쓰자. $\{W_i\}$가 $X$ 위 정수적 닫힌 부분공간들의 국소 유한
+족이므로, $\{Z_{i, j}\}_{i, j}$도 $X$의 닫힌 부분공간들의 국소 유한
+족임을 쉽게 알 수 있다. 따라서
+% P10-E0063
+$c_1(\mathcal{L}) \cap \alpha = \sum n_in_{i, j}[Z_{i, j}]$는
+사이클이다. 이를 생각하는 또 다른, 흔히 더 편리한 방법은 사상
+$\coprod W_i \to X$가 고유임을 유의하는 것이다. 따라서
+$c_1(\mathcal{L}) \cap \alpha$는
+$\CH_k(\coprod W_i) = \prod \CH_k(W_i)$의 한 류를 푸시포워드한
+것으로 볼 수 있다. 이는 결과가 $X$ 위 유리 동치를 제외하고
+잘 정의되는 이유도 설명한다.
+
+\medskip\noindent
+다음 몇 절의 주된 목표는 $c_1(\mathcal{L})$과의 교차가 유리 동치를
+통해 인수분해됨을 보이는 것이다. 이는 자명하지 않다.
+
+\begin{lemma}
+\label{lemma-c1-cap-additive}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+% P10-E0065
+$\mathcal{L}$, $\mathcal{N}$을 $X$ 위의 가역 층들이라 하자. 그러면
+$$
+c_1(\mathcal{L}) \cap \alpha  + c_1(\mathcal{N}) \cap \alpha =
+c_1(\mathcal{L} \otimes_{\mathcal{O}_X} \mathcal{N}) \cap \alpha
+$$
+% P10-E0064
+가 모든 $\alpha \in Z_{k - 1}(X)$에 대하여 $\CH_k(X)$에서 성립한다.
+또한 모든 $\alpha$에 대하여 $c_1(\mathcal{O}_X) \cap \alpha = 0$이다.
+\end{lemma}
+
+\begin{proof}
+가법성은 Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-c1-additive}와 정의들에서 곧바로 따른다.
+$c_1(\mathcal{O}_X) \cap \alpha = 0$임을 보기 위해 단면
+$1 \in \Gamma(X, \mathcal{O}_X)$을 생각하자. 이는 임의의 정수적 닫힌
+부분공간 $W \subset X$ 위에서 어디서나 영이 아닌 단면으로 제한된다.
+따라서 원하는 대로 $c_1(\mathcal{O}_X) \cap [W] = 0$이다.
+\end{proof}
+
+\noindent
+$Z(s) \subset X$는 대수 공간 $X$ 위 가역 층의 대역 단면 $s$의
+영점 스킴을 뜻함을 상기하자. Divisors on Spaces, Definition
+\ref{spaces-divisors-definition-zero-scheme-s}을 보라.
+
+\begin{lemma}
+\label{lemma-prepare-geometric-cap}
+Situation \ref{situation-setup}에서 $Y/B$가 좋다고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_Y$-가군이라 하자.
+$s \in \Gamma(Y, \mathcal{L})$를 정칙 단면이라 하고
+$\dim_\delta(Y) \leq k + 1$이라고 가정하자.
+$[Y]_{k + 1} = \sum n_i[Y_i]$라고 쓰자. 여기서 $Y_i \subset Y$들은
+$\delta$-차원이 $k + 1$인 $Y$의 기약 성분들이다.
+$s_i = s|_{Y_i} \in \Gamma(Y_i, \mathcal{L}|_{Y_i})$로 두자. 그러면
+\begin{equation}
+\label{equation-equal-as-cycles}
+[Z(s)]_k =  \sum n_i[Z(s_i)]_k
+\end{equation}
+가 $Y$ 위의 $k$-사이클로서 성립한다.
+\end{lemma}
+
+\begin{proof}
+$\varphi : V \to Y$를 $V$가 스킴인 전사 \'etale 사상이라 하자.
+Lemma \ref{lemma-etale-pullback}에 의해 $\varphi$로 풀백한 뒤 등식을
+증명하면 충분하다. 같은 보조정리에 의해
+$\varphi^*[Y_i] = [\varphi^{-1}(Y_i)] = \sum [V_{i, j}]$이다. 여기서
+$V_{i, j}$들은 $Y_i$ 위에 놓인 $V$의 기약 성분들이다. 따라서 먼저
+$Y_i \times_Y V$ 위의 $\varphi^*s_i$에 스킴인 경우(Chow Homology,
+Lemma \ref{chow-lemma-prepare-geometric-cap})를 적용하면
+$\varphi^*[Z(s_i)]_k = [Z(\varphi^*s_i)] =
+\sum [Z(s_{i, j})]_k$임을 얻는다. 여기서 $s_{i, j}$는 $s$를
+$V_{i, j}$로 풀백한 것이다. $\varphi^*s$에 스킴인 경우를 적용하면
+$$
+\varphi^*[Z(s)]_k =
+[Z(\varphi^*s)]_k =
+\sum n_i[Z(s_{i, j})]_k
+$$
+를 얻는다. 이는 위에서 말한 중복도에 관한 설명에 의한다.
+위의 모든 사실을 합치면 증명이 끝난다.
+\end{proof}
+
+\noindent
+다음 보조정리는 가역 층의 $c_1$과 닫힌 부분스킴에 결부된 사이클의
+교차곱을 계산하는 데 유용하다. $Z(s) \subset X$는 스킴 $X$ 위 가역
+층의 대역 단면 $s$의 영점 스킴을 뜻함을 상기하자. Divisors,
+Definition \ref{divisors-definition-zero-scheme-s}을 보라.
+
+\begin{lemma}
+\label{lemma-geometric-cap}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$Y \subset X$를 $\dim_\delta(Y) \leq k + 1$인 닫힌 부분스킴이라 하고,
+$s \in \Gamma(Y, \mathcal{L}|_Y)$를 정칙 단면이라 하자. 그러면
+$$
+c_1(\mathcal{L}) \cap [Y]_{k + 1} = [Z(s)]_k
+$$
+가 $\CH_k(X)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+$$
+[Y]_{k + 1} = \sum n_i[Y_i]
+$$
+라고 쓰자. 여기서 $Y_i \subset Y$들은 $\delta$-차원이 $k + 1$인
+$Y$의 기약 성분들이고 $n_i > 0$이다. 가정에 의해 제한
+$s_i = s|_{Y_i} \in \Gamma(Y_i, \mathcal{L}|_{Y_i})$는 영이 아니며,
+따라서 정칙 단면이다. Lemma \ref{lemma-compute-c1}에 의해
+$[Z(s_i)]_k$가 $c_1(\mathcal{L}|_{Y_i})$를 나타냄을 알 수 있다.
+따라서 정의에 의해
+$$
+c_1(\mathcal{L}) \cap [Y]_{k + 1} = \sum n_i[Z(s_i)]_k
+$$
+이다. 이제 Lemma \ref{lemma-prepare-geometric-cap}에서 결과가 따른다.
+\end{proof}
+
+\section{가역 층과의 교차 및 푸시포워드와 풀백}
+\label{section-intersecting-with-divisors-push-pull}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-intersecting-with-divisors-push-pull}에 해당한다.
+이 절에서는 연산 $c_1(\mathcal{L}) \cap -$가 평탄 풀백 및 고유
+푸시포워드와 가환함을 증명한다.
+
+\begin{lemma}
+\label{lemma-prepare-flat-pullback-cap-c1}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 상대차원이 $r$인 평탄 사상이라 하자.
+$\mathcal{L}$을 $Y$ 위의 가역 층이라 하자.
+$Y$가 정수적이고 $n = \dim_\delta(Y)$라고 가정하자.
+$s$를 $\mathcal{L}$의 영이 아닌 유리형 단면이라 하자. 그러면
+$$
+f^*\text{div}_\mathcal{L}(s) = \sum n_i\text{div}_{f^*\mathcal{L}|_{X_i}}(s_i)
+$$
+가 $Z_{n + r - 1}(X)$에서 성립한다. 여기서 합은 $\delta$-차원이
+$n + r$인 기약 성분 $X_i \subset X$ 전체를 돌고, 단면
+$s_i = f|_{X_i}^*(s)$는 $s$의 풀백이며,
+$n_i = m_{X_i, X}$는 $X$에서 $X_i$의 중복도이다.
+\end{lemma}
+
+\begin{proof}
+약간의 기교를 써서 이를 Lemma
+\ref{lemma-prepare-flat-pullback-rational-equivalence}에서 도출하겠다.
+(다른 방법은 가역 가군의 유리형 단면이라는 설정에서 그 보조정리의
+증명을 다시 하는 것이다.) 즉, $q : T \to Y$를 $Y$ 위의
+$\mathcal{L}$을 사용하여 구성한 Lemma \ref{lemma-Gm-torsor}의
+사상이라 하자. 이 보조정리에 서술된 $T$의 모든 성질을 사용하겠다.
+섬유곱 그림
+$$
+\xymatrix{
+T' \ar[r]_{q'} \ar[d]_h & X \ar[d]^f \\
+T \ar[r]^q & Y
+}
+$$
+을 생각하자. 그러면 $q' : T' \to X$는 $X$ 위의
+$f^*\mathcal{L}$을 사용하여 구성한 사상이다. 이제
+$$
+(q')^*f^*\text{div}_\mathcal{L}(s) =
+\sum n_i (q')^*\text{div}_{f^*\mathcal{L}|_{X_i}}(s_i)
+$$
+를 증명하면 충분하다.
+% P10-E0066
+$T'_i = q^{-1}(X_i)$들은 $T'$의 기약 성분이고,
+$n_i$는 $T'$에서 $T'_i$의 중복도임을 유의하라.
+좌변은 Lemma \ref{lemma-Gm-torsor-divisor-meromorphic-section}
+(그리고 Lemma \ref{lemma-compose-flat-pullback})에 의해
+$$
+h^*q^*\text{div}_\mathcal{L}(s) = h^*\text{div}_T(q^*(s))
+$$
+와 같다. 한편 $q'$의 제한을 $q'_i : T'_i \to X_i$로 나타내면,
+Lemma \ref{lemma-Gm-torsor-divisor-meromorphic-section}에 의해
+우변은
+% P10-E0067
+$$
+\sum n_i \text{div}_{T_i}((q'_i)^*(s_i))
+$$
+와 같다. 이 두 식에서 표현 $q^*(s)$와 $(q'_i)^*(s_i)$는
+동형사상 $\alpha : q^*\mathcal{L} \to \mathcal{O}_T$와 이를
+$T$ 위의 공간들로 풀백한 동형사상들을 통해,
+$q^*\mathcal{L}$과 $(q'_i)^*f^*\mathcal{L}|_{X_i}$의 풀백된 유리형
+단면들에 대응하는 유리함수들을 나타낸다. 이 규약 아래에서는
+$(q'_i)^*(s_i)$가 $T$ 위의 유리함수 $q^*(s)$와 사상
+$h|_{T'_i} : T'_i \to T$의 합성임이 명백하다. 따라서 Lemma
+\ref{lemma-prepare-flat-pullback-rational-equivalence}는 정확히
+% P10-E0067
+$$
+h^*\text{div}_T(q^*(s)) = \sum n_i \text{div}_{T_i}((q'_i)^*(s_i))
+$$
+라고 말하며, 이는 원하는 결과이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-pullback-cap-c1}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 상대차원이 $r$인 평탄 사상이라 하자.
+$\mathcal{L}$을 $Y$ 위의 가역 층이라 하자.
+$\alpha$를 $Y$ 위의 $k$-사이클이라 하자. 그러면
+$$
+f^*(c_1(\mathcal{L}) \cap \alpha) = c_1(f^*\mathcal{L}) \cap f^*\alpha
+$$
+가 $\CH_{k + r - 1}(X)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+$\alpha = \sum n_i[W_i]$라고 쓰자. $X$의 닫힌 부분공간
+$f^{-1}(W_i)$ 위에서 유리 동치를 구성함으로써
+$$
+f^*(c_1(\mathcal{L}) \cap [W_i]) = c_1(f^*\mathcal{L}) \cap f^*[W_i]
+$$
+가 $\CH_{k + r - 1}(X)$에서 성립함을 보이겠다. Remark
+\ref{remark-infinite-sums-rational-equivalences}의 논의에 의해 이로부터
+보조정리의 등식이 성립함이 증명된다.
+
+\medskip\noindent
+$W \subset Y$를 $\delta$-차원이 $k$인 정수적 닫힌 부분공간이라 하자.
+닫힌 부분공간 $W' = f^{-1}(W) = W \times_Y X$를 생각하면 섬유곱 그림
+$$
+\xymatrix{
+W' \ar[r] \ar[d]_h & X \ar[d]^f \\
+W \ar[r] & Y
+}
+$$
+을 얻는다.
+$f^*(c_1(\mathcal{L}) \cap [W]) = c_1(f^*\mathcal{L}) \cap f^*[W]$임을
+보여야 한다. $\mathcal{L}|_W$의 영이 아닌 유리형 단면 $s$를 택하자.
+$W'_i \subset W'$를 $\delta$-차원이 $k + r$인 기약 성분들이라 하자.
+정의에 따라 $n_i$를 $W'$에서 $W'_i$의 중복도로 하여
+$[W']_{k + r} = \sum n_i[W'_i]$라고 쓰자. 그러면
+$Z_{k + r}(X)$에서 $f^*[W] = \sum n_i[W'_i]$이다.
+각 $W'_i \to W$가 우세이므로 각 $i$에 대하여
+$s_i = s|_{W'_i}$가 영이 아닌 유리형 단면임을 알 수 있다.
+Lemma \ref{lemma-prepare-flat-pullback-cap-c1}에 의해 사이클의 등식
+$$
+h^*\text{div}_{\mathcal{L}|_W}(s) =
+\sum n_i\text{div}_{f^*\mathcal{L}|_{W'_i}}(s_i)
+$$
+가 $Z_{k + r - 1}(W')$에서 성립한다. 좌변은 $W'$ 위의 사이클이고
+그 푸시포워드는 $\CH_{k + r - 1}(X)$에서
+$f^*(c_1(\mathcal{L}) \cap [W])$이며, 우변은 $W'$ 위의 사이클이고
+그 푸시포워드는 $\CH_{k + r - 1}(X)$에서
+$c_1(f^*\mathcal{L}) \cap f^*[W]$이므로 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-equal-c1-as-cycles}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 고유 사상이라 하자.
+$\mathcal{L}$을 $Y$ 위의 가역 층이라 하자.
+$X$, $Y$가 정수적이고, $f$가 우세이며,
+$\dim_\delta(X) = \dim_\delta(Y)$라고 가정하자.
+% P10-E0594
+$s$를 $Y$ 위의 $\mathcal{L}$의 영이 아닌 유리형 단면 $s$라 하자.
+그러면
+$$
+f_*\left(\text{div}_{f^*\mathcal{L}}(f^*s)\right) =
+[R(X) : R(Y)]\text{div}_\mathcal{L}(s).
+$$
+가 $Y$ 위의 사이클로서 성립한다. 특히
+% P10-E0068
+$$
+f_*(c_1(f^*\mathcal{L}) \cap [X]) = c_1(\mathcal{L}) \cap f_*[Y].
+$$
+\end{lemma}
+
+\begin{proof}
+정의에 따라 $f_*[X] = [R(X) : R(Y)][Y]$이므로 마지막 등식은 첫째
+등식에서 따른다.
+% P10-E0069
+첫째 등식을 증명하자. $q : T \to Y$를 $Y$ 위의 $\mathcal{L}$을
+사용하여 구성한 Lemma \ref{lemma-Gm-torsor}의 사상이라 하자.
+이 보조정리에 서술된 $T$의 모든 성질을 사용하겠다. 섬유곱 그림
+$$
+\xymatrix{
+T' \ar[r]_{q'} \ar[d]_h & X \ar[d]^f \\
+T \ar[r]^q & Y
+}
+$$
+을 생각하자. 그러면 $q' : T' \to X$는 $X$ 위의
+$f^*\mathcal{L}$을 사용하여 구성한 사상이다.
+% P10-E0070
+$T'$로 풀백한 뒤 등식을 증명하면 충분하다. 좌변을 풀백하면
+\begin{align*}
+q^*f_*\left(\text{div}_{f^*\mathcal{L}}(f^*s)\right)
+& =
+h_*(q')^*\text{div}_{f^*\mathcal{L}}(f^*s) \\
+& =
+h_*\text{div}_{(q')^*f^*\mathcal{L}}((q')^*f^*s) \\
+& =
+h_*\text{div}_{h^*q^*\mathcal{L}}(h^*q^*s)
+\end{align*}
+이다. 첫째 등식은 Lemma \ref{lemma-flat-pullback-proper-pushforward}에
+의한다. 둘째 등식은 $T'$가 정수적임을 사용하는 Lemma
+\ref{lemma-prepare-flat-pullback-cap-c1}에 의한다. 셋째 등식은 표시된
+그림이 가환하기 때문이다. 우변을 풀백하면
+$$
+[R(X) : R(Y)]q^*\text{div}_\mathcal{L}(s) =
+[R(T') : R(T)]\text{div}_{q^*\mathcal{L}}(q^*s)
+$$
+이다. 이는 Lemma \ref{lemma-prepare-flat-pullback-cap-c1}, $T$가
+정수적이라는 사실, 그리고 등식
+$[R(T') : R(T)] = [R(X) : R(Y)]$에서 따른다. 그 증명은 생략한다
+(Lemma \ref{lemma-flat-pullback-proper-pushforward}에서 따르지만,
+그것은 이 등식을 증명하는 어리석은 방법일 것이다). 따라서 사상
+$h : T' \to T$, 가역 가군
+% P10-E0071
+$q^\mathcal{L}$, 그리고 단면 $q^*s$에 대하여 보조정리를 증명하면
+충분하다. $q^*\mathcal{L} = \mathcal{O}_T$이므로 다음 문단에서 논의할
+$\mathcal{L} \cong \mathcal{O}$인 경우로 환원된다.
+
+\medskip\noindent
+$\mathcal{L} = \mathcal{O}_Y$라고 가정하자. 이 경우 $s$는 유리함수
+% P10-E0592
+$g \in R(Y)$에 대응한다. 매장 $R(Y) \subset R(X)$을 사용하면
+% P10-E0593
+$g$를 $X$ 위의 유리함수로 볼 수 있고, 우리가 증명하려는 것은 단지
+$$
+f_*\left(\text{div}_X(g)\right) = [R(X) : R(Y)]\text{div}_Y(g).
+$$
+이다. 이를 Lemma \ref{lemma-proper-pushforward-alteration}의 결과와
+비교하면, $g \in R(Y)^*$이므로
+$\text{Nm}_{R(X)/R(Y)}(g) = g^{[R(X) : R(Y)]}$여서 참임을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pushforward-cap-c1}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$p : X \to Y$를 고유 사상이라 하자.
+$\alpha \in Z_{k + 1}(X)$라 하자.
+$\mathcal{L}$을 $Y$ 위의 가역 층이라 하자. 그러면
+$$
+p_*(c_1(p^*\mathcal{L}) \cap \alpha) = c_1(\mathcal{L}) \cap p_*\alpha
+$$
+가 $\CH_k(Y)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+$p$가 다음 성질을 갖는다고 하자. 즉, 모든 정수적 닫힌 부분공간
+$W \subset X$에 대하여 사상 $p|_W : W \to Y$가 닫힌 몰입이라고 하자.
+그러면 $c_1(\mathcal{L})$과의 교차의 정의에 의해 보조정리가 성립한다.
+
+\medskip\noindent
+이 설명을 사용하여 특별한 경우로 환원하겠다. 즉,
+$n_i \not = 0$이고 $W_i$들이 서로 다르도록
+$\alpha = \sum n_i[W_i]$라고 쓰자. $W'_i \subset Y$를 Lemma
+\ref{lemma-proper-image}에서와 같은 $W_i$의 ``상''이라 하자. 그림
+$$
+\xymatrix{
+X' = \coprod W_i \ar[r]_-q \ar[d]_{p'} & X \ar[d]^p \\
+Y' = \coprod W'_i \ar[r]^-{q'} & Y.
+}
+$$
+을 생각하자. $\{W_i\}$가 $X$ 위에서 국소 유한이고 $p$가 고유이므로,
+$\{W'_i\}$가 $Y$ 위에서 국소 유한이며 $q, q', p'$도 고유 사상임을
+알 수 있다.
+% P10-E0072
+$\sum n_i[W_i]$를 $k$-사이클 $\alpha' \in Z_k(X')$로 볼 수도 있다.
+명백히 $q_*\alpha' = \alpha$이다. 그리고 증명의 첫 설명에 의해
+$q_*(c_1(q^*p^*\mathcal{L}) \cap \alpha')
+= c_1(p^*\mathcal{L}) \cap q_*\alpha'$이고
+$(q')_*(c_1((q')^*\mathcal{L}) \cap p'_*\alpha') =
+c_1(\mathcal{L}) \cap q'_*p'_*\alpha'$이다. 따라서 사상 $p'$와
+사이클 $\sum n_i[W_i]$에 대하여 보조정리를 증명하면 충분하다.
+이는 명백히 $X$, $Y$가 정수적이고,
+% P10-E0073
+$f : X \to Y$가 우세이며 $\alpha = [X]$이라고 가정해도 됨을 뜻한다.
+이 경우 결과는 Lemma \ref{lemma-equal-c1-as-cycles}에서 따른다.
+\end{proof}
+
+\section{핵심 공식}
+\label{section-key}
+
+\noindent
+이 절은 Chow Homology, Section \ref{chow-section-key}에 해당한다.
+독자에게 먼저 그 경우의 증명을 읽을 것을 강력히 권한다.
+
+\medskip\noindent
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자. $X$가
+정수적이고 $\dim_\delta(X) = n$이라고 가정하자. $\mathcal{L}$과
+$\mathcal{N}$을 가역 $\mathcal{O}_X$-가군이라 하자. $s$를
+$\mathcal{L}$의 영이 아닌 유리형 단면이라 하고, $t$를
+$\mathcal{N}$의 영이 아닌 유리형 단면이라 하자.
+$Z \subset X$를 일반점이 $\xi \in |Z|$인 소인자라 하자.
+Spaces over Fields, Section \ref{spaces-over-fields-section-c1}에서
+사용된 사상
+$$
+c_\xi : \Spec(\mathcal{O}_{X, \xi}^h) \longrightarrow X
+$$
+을 생각하자. $\mathcal{L}_\xi$와 $\mathcal{N}_\xi$로
+$c_\xi$에 따른 $\mathcal{L}$과 $\mathcal{N}$의 풀백을 나타낸다.
+흔히 $\mathcal{L}_\xi$와 $\mathcal{N}_\xi$를 이들이 주는 계수
+$1$의 자유 $\mathcal{O}_{X, \xi}^h$-가군으로 생각한다.
+$s$, 각각\ $t$의 풀백은 $\mathcal{L}_\xi$, 각각\ $\mathcal{N}_\xi$의
+정칙 유리형 단면임을 유의하라.
+
+\medskip\noindent
+$Z_i \subset X$, $i \in I$를 다음 성질을 갖는 소인자들의 국소 유한
+집합이라 하자. $Z \not \in \{Z_i\}$이면 $s$는
+$\mathcal{L}_\xi$의 생성원이고 $t$는 $\mathcal{N}_\xi$의 생성원이다.
+그러한 집합은 Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-divisor-meromorphic-locally-finite}에
+의해 존재한다. 그러면
+$$
+\text{div}_\mathcal{L}(s) = \sum \text{ord}_{Z_i, \mathcal{L}}(s) [Z_i]
+$$
+이고, 마찬가지로
+$$
+\text{div}_\mathcal{N}(t) = \sum \text{ord}_{Z_i, \mathcal{N}}(t) [Z_i]
+$$
+이다. 정의를 더 풀어 쓰기 위해 각 $i$에 대하여 생성원
+$s_i \in \mathcal{L}_{\xi_i}$와 $t_i \in \mathcal{N}_{\xi_i}$를
+택하자. 여기서 $\xi_i$는 $Z_i$의 일반점이다. 그러면
+$$
+s = f_i s_i
+\quad\text{그리고}\quad
+t = g_i t_i
+$$
+라고 쓸 수 있다. 여기서 $f_i, g_i$는 전분수환
+$Q(\mathcal{O}_{X, \xi_i}^h)$의 가역원이다.
+$B_i = \mathcal{O}_{X, \xi_i}^h$로 줄여 쓰자. 다음을 나타내자.
+$$
+\text{ord}_{B_i} : Q(B_i)^* \longrightarrow \mathbf{Z},\quad
+a/b \longmapsto
+\text{length}_{B_i}(B_i/aB_i) - \text{length}_{B_i}(B_i/bB_i)
+$$
+즉, Algebra, Definition \ref{algebra-definition-ord}를 차원이 $1$인 이
+축소 Noether 국소환들로 임시로 확장한다. 그러면 정의에 따라
+$$
+\text{ord}_{Z_i, \mathcal{L}}(s) = \text{ord}_{B_i}(f_i)
+\quad\text{그리고}\quad
+\text{ord}_{Z_i, \mathcal{N}}(t) = \text{ord}_{B_i}(g_i)
+$$
+이다. $\xi_i$가 $Z_i$의 일반점이므로 잉여체 $\kappa(\xi_i)$가
+$Z_i$의 함수체임을 알 수 있다. 더구나 $\kappa(\xi_i)$는
+$B_i$의 잉여체이다. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-residue-field-henselian-local-ring}을 보라.
+$t_i$가 $\mathcal{N}_{\xi_i}$의 생성원이므로 섬유
+$\mathcal{N}_{\xi_i} \otimes_{B_i} \kappa(\xi_i)$에서 그 상은
+$\mathcal{N}|_{Z_i}$의 영이 아닌 유리형 단면이다. 이 상을
+$t_i|_{Z_i}$로 나타내겠다. 우리의 정의에서
+$$
+c_1(\mathcal{N}) \cap \text{div}_\mathcal{L}(s) =
+\sum \text{ord}_{B_i}(f_i)
+(Z_i \to X)_*\text{div}_{\mathcal{N}|_{Z_i}}(t_i|_{Z_i})
+$$
+이고, 마찬가지로
+$$
+c_1(\mathcal{L}) \cap \text{div}_\mathcal{N}(t) =
+\sum \text{ord}_{B_i}(g_i)
+(Z_i \to X)_*\text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i})
+$$
+가 $\CH_{n - 2}(X)$에서 성립한다. 이 두 사이클 사이의 유리 동치를
+찾겠다. 이를 위해 테임 기호
+$$
+\partial_{B_i}(f_i, g_i) \in \kappa(\xi_i)^* = R(Z_i)^*
+$$
+를 생각한다. Chow Homology, Section
+\ref{chow-section-tame-symbol}을 보라.
+
+\begin{lemma}[핵심 공식]
+\label{lemma-key-formula}
+위 상황에서 사이클
+$$
+\sum
+(Z_i \to X)_*\left(
+\text{ord}_{B_i}(f_i) \text{div}_{\mathcal{N}|_{Z_i}}(t_i|_{Z_i}) -
+\text{ord}_{B_i}(g_i) \text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i}) \right)
+$$
+은 사이클
+$$
+\sum (Z_i \to X)_*\text{div}(\partial_{B_i}(f_i, g_i))
+$$
+과 같다.
+\end{lemma}
+
+\begin{proof}
+증명의 전략은 다음과 같다. 먼저 $\mathcal{L}$과 $\mathcal{N}$이
+자명한 가역 가군인 경우로 환원하고, 다음으로 국소 자명화의 선택을
+바꾸며, 마지막으로 \'etale 국소화를 사용하여 스킴인 경우로
+환원한다\footnote{즉시 \'etale 국소화를 적용하면 더 짧은 증명을
+제시할 수 있을지도 모른다.}.
+
+\medskip\noindent
+첫째 단계. $q : T \to X$를 Lemma \ref{lemma-Gm-torsor}에서 구성한
+사상이라 하자. 거기 서술된 모든 성질을 별도의 언급 없이 사용하겠다.
+특히 $q$로 풀백한 뒤 두 사이클이 같음을 보이면 충분하다.
+$s'$와 $t'$로 $s$와 $t$를 $q^*\mathcal{L}$과
+$q^*\mathcal{N}$의 유리형 단면으로 풀백한 것을 나타내자.
+$Z'_i = q^{-1}(Z_i)$로 쓰고, $\xi'_i \in |Z'_i|$를 일반점이라 하며,
+$B'_i = \mathcal{O}_{T, \xi'_i}^h$로 쓰자. 또한
+$\mathcal{L}_{\xi'_i}$와 $\mathcal{N}_{\xi'_i}$로
+$\mathcal{L}$과 $\mathcal{N}$을 $\Spec(B'_i)$로 풀백한 것을 나타내자.
+가환 그림
+$$
+\xymatrix{
+\Spec(B'_i) \ar[r]_-{c_{\xi'_i}} \ar[d] & T \ar[d]^q \\
+\Spec(B_i) \ar[r]^-{c_{\xi_i}} & X
+}
+$$
+을 갖는다는 것을 상기하자. Decent Spaces, Remark
+\ref{decent-spaces-remark-functoriality-henselian-local-ring}을 보라.
+$s'_i$와 $t'_i$로 $s_i$와 $t_i$의 풀백을 나타내자. 이들은
+$\mathcal{L}_{\xi'_i}$와 $\mathcal{N}_{\xi'_i}$의 생성원이다. 그러면
+$$
+s' = f'_i s'_i
+\quad\text{그리고}\quad
+t' = g'_i t'_i
+$$
+이다. 여기서 $f'_i$와 $g'_i$는 $B_i \to B'_i$가 유도하는 사상
+$Q(B_i) \to Q(B'_i)$에 따른 $f_i, g_i$의 상이다. Algebra, Lemma
+\ref{algebra-lemma-pullback-module}에 의해
+$$
+\text{ord}_{B_i}(f_i) = \text{ord}_{B'_i}(f'_i)
+\quad\text{그리고}\quad
+\text{ord}_{B_i}(g_i) = \text{ord}_{B'_i}(g'_i)
+$$
+이다. $q : Z'_i \to Z_i$에 Lemma
+\ref{lemma-prepare-flat-pullback-cap-c1}를 적용하면
+$$
+q^*\text{div}_{\mathcal{N}|_{Z_i}}(t_i|_{Z_i}) =
+\text{div}_{q^*\mathcal{N}|_{Z'_i}}(t'_i|_{Z'_i})
+\quad\text{그리고}\quad
+q^*\text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i}) =
+\text{div}_{q^*\mathcal{L}|_{Z'_i}}(s'_i|_{Z'_i})
+$$
+이다. 이는 보조정리의 명제에 나오는 첫째 사이클이
+$s', t', Z'_i, s'_i, t'_i$에 해당하는 사이클로 풀백됨을 이미 보인다.
+둘째 사이클도 그러함을 보기 위해 Chow Homology, Lemma
+\ref{chow-lemma-tame-symbol-formally-smooth}에 의해
+$$
+\partial_{B_i}(f_i, g_i) \mapsto
+\partial_{B'_i}(f'_i, g'_i)
+\quad\text{를 통해}\quad
+\kappa(\xi_i) \to \kappa(\xi'_i)
+$$
+임을 유의하라. 따라서 앞과 같은 보조정리에 의해
+$$
+q^*\text{div}(\partial_{B_i}(f_i, g_i)) =
+\text{div}(\partial_{B'_i}(f'_i, g'_i))
+$$
+이다. $q^*\mathcal{L} \cong \mathcal{O}_T$이므로
+$\mathcal{L}$이 자명한 경우에 등식을 증명하면 충분함을 알 수 있다.
+$\mathcal{L}$과 $\mathcal{N}$의 역할을 바꾸면 마찬가지로
+$\mathcal{N}$도 자명하다고 가정할 수 있다. 이로써 첫째 단계의
+증명이 끝난다.
+
+\medskip\noindent
+둘째 단계. $\mathcal{L} = \mathcal{O}_X$이고
+$\mathcal{N} = \mathcal{O}_X$라고 가정하자. $1$로
+$\mathcal{L}$의 자명화 단면을 나타내자. 그러면 어떤 단위원
+$u \in B_i$에 대하여 $s_i = u \cdot 1$이다. $s_i$를 $1$로
+바꾸면 어떤 일이 생기는지 살펴보자. 그러면 $f_i$는 $u f_i$로
+바뀐다. 따라서 보조정리의 첫째 표현 중 첫 부분은 변하지 않고,
+둘째 부분에는
+$$
+\text{ord}_{B_i}(g_i)\text{div}(u|_{Z_i})
+$$
+를 더한다. 여기서 $u|_{Z_i}$는 Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-divisor-meromorphic-well-defined}에
+따른 잉여체에서의 $u$의 상이다. 둘째 표현에는 테임 기호의
+쌍선형성에 의해
+$$
+\text{div}(\partial_{B_i}(u, g_i))
+$$
+를 더한다. 이 항들은 Chow Homology, Equation
+(\ref{chow-item-normalization})에 주어진 테임 기호의 성질에 의해
+일치한다.
+
+\medskip\noindent
+$Y \subset X$를 $\dim_\delta(Y) = n - 2$인 정수적 닫힌
+부분공간이라 하자.
+% P10-E0074
+보조정리의 두 사이클에서 $Y$의 계수들이 같음을 보이기 위해,
+앞 문단에서처럼 $s_i$를 $1$로 바꾸어도 된다. 완전히 같은 방식으로
+$t_i$를 $1$로 바꾸어도 됨을 보인다. $Y \subset Z_i$인 $Z_i$는
+유한 개뿐이므로 이 모든 $Z_i$에 대하여 $s_i = 1$이고
+$t_i = 1$이라고 가정할 수 있다.
+
+\medskip\noindent
+셋째 단계. 여기서는 $\dim_\delta(Y) = n - 2$인 정수적 닫힌
+부분공간 $Y$에 대하여 보조정리의 두 사이클에서 $Y$의 계수들이
+일치함을 증명한다. 더 나아가 $\mathcal{L} = \mathcal{O}_X$이고
+$\mathcal{N} = \mathcal{O}_X$이며, $Y \subset Z_i$인 모든 $Z_i$에
+대하여 $s_i = 1$이고 $t_i = 1$이라고 하자. $X$를 더 작은 열린
+부분공간으로 바꾼 뒤 실제로 모든 $i$에 대하여 $s_i$와 $t_i$가
+$1$이라고 가정할 수 있다. 이 경우 첫째 사이클은 영이다. 우리의
+과제는 둘째 사이클에서 $Y$의 계수도 영임을 보이는 것이다.
+
+\medskip\noindent
+먼저 $\mathcal{L} = \mathcal{O}_X$이고
+$\mathcal{N} = \mathcal{O}_X$이므로, $s, t$를 $X$ 위의 유리함수
+$f, g$로 보아도 되며 그렇게 하겠다. $s_i$와 $t_i$가 $1$과 같으므로,
+모든 $i$에 대하여 $f_i$, 각각\ $g_i$는 $Q(B_i)$에서 $f$, 각각\ $g$의
+상이다. $\zeta \in |Y|$를 일반점이라 하자. \'etale 근방
+$$
+(U, u) \longrightarrow (X, \zeta)
+$$
+을 택하고 $Y' = \overline{\{u\}} \subset U$로 쓰자. \'etale 사상은
+평탄하므로 $f$와 $g$를 $U$ 위의 정칙 유리형 함수로 풀백할 수 있고,
+이를 역시 $f$와 $g$로 나타내겠다.
+모든 소인자 $Y \subset Z \subset X$에 대하여 스킴
+$Z \times_X U$는 $U$의 소인자들의 합집합이다. 역으로 소인자
+$Y' \subset Z' \subset U$가 주어지면, $Z'$가 $Z \times_X U$의
+한 성분이 되는 소인자 $Y \subset Z \subset X$가 존재한다.
+그러한 쌍 $(Z, Z')$가 주어졌을 때 환 사상
+$$
+\mathcal{O}_{X, \xi}^h \to \mathcal{O}_{U, \xi'}^h
+$$
+은 \'etale이다(실제로 유한 \'etale이다). 따라서 Chow Homology,
+Lemma \ref{chow-lemma-tame-symbol-formally-smooth}에 의해
+$$
+\partial_{\mathcal{O}_{X, \xi}^h}(f, g) \mapsto
+\partial_{\mathcal{O}_{U, \xi'}^h}(f, g)
+\quad\text{를 통해}\quad
+\kappa(\xi) \to \kappa(\xi')
+$$
+임을 알 수 있다. 따라서 Lemma
+\ref{lemma-etale-pullback-principal-divisor}를 적용하면
+$$
+(Z \times_X U \to Z)^*\text{div}_Z(\partial_{\mathcal{O}_{X, \xi}^h}(f, g))
+=
+\sum\nolimits_{Z' \subset Z \times_X U}
+\text{div}_{Z'}(\partial_{\mathcal{O}_{U, \xi'}^h}(f, g))
+$$
+이다. 평탄 풀백은 닫힌 몰입에 따른 푸시포워드와 가환하므로
+(Lemma \ref{lemma-flat-pullback-proper-pushforward}), 다음 식에서
+$Y'$의 계수가 영임을 증명하면 충분함을 알 수 있다.
+$$
+\sum\nolimits_{Z' \subset U} 
+(Z' \to U)_*\text{div}_{Z'}(\partial_{\mathcal{O}_{U, \xi'}^h}(f, g))
+$$
+
+\medskip\noindent
+$A = \mathcal{O}_{U, u}$라 하자. 그러면 $f, g \in Q(A)^*$이다.
+따라서 영인자가 아닌 $a, b, c, d \in A$에 대하여
+$f = a/b$와 $g = c/d$라고 쓸 수 있다. 위 표현에서 $Y'$의 계수는
+% P10-E0075
+$$
+\sum\nolimits_{\mathfrak q \subset A\text{ 높이 }1}
+\text{ord}_{A/\mathfrak q}(\partial_{A_\mathfrak q}(f, g))
+$$
+이다. $\partial_A$의 쌍선형성에 의해
+% P10-E0075
+$$
+\sum\nolimits_{\mathfrak q \subset A\text{ 높이 }1}
+\text{ord}_{A/\mathfrak q}(\partial_{A_\mathfrak q}(a, c))
+$$
+가 영임을 증명하면 충분하며, 다른 쌍 $(a, d)$, $(b, c)$,
+$(b, d)$도 마찬가지이다. 이는 Chow Homology, Lemma
+\ref{chow-lemma-key-nonzerodivisors}에 의해 참이다.
+\end{proof}
+
+\section{가역 층과의 교차 및 유리 동치}
+\label{section-commutativity}
+
+\noindent
+이 절은 Chow Homology, Section \ref{chow-section-commutativity}에
+해당한다. 핵심 보조정리를 적용하여 가역 층과의 교차가 갖는
+기본 성질들을 얻는다. 특히 $c_1(\mathcal{L}) \cap -$가 유리 동치를
+통해 인수분해되고, 서로 다른 가역 층들에 대한 이 연산들이
+가환함을 보겠다.
+
+\begin{lemma}
+\label{lemma-commutativity-on-integral}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$X$가 정수적이고 $\dim_\delta(X) = n$이라고 가정하자.
+$\mathcal{L}$, $\mathcal{N}$을 $X$ 위의 가역 층이라 하자.
+$\mathcal{L}$의 영이 아닌 유리형 단면 $s$와 $\mathcal{N}$의
+영이 아닌 유리형 단면 $t$를 택하자.
+$\alpha = \text{div}_\mathcal{L}(s)$ 및
+$\beta = \text{div}_\mathcal{N}(t)$로 두자. 그러면
+$$
+c_1(\mathcal{N}) \cap \alpha
+=
+c_1(\mathcal{L}) \cap \beta
+$$
+가 $\CH_{n - 2}(X)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+핵심 Lemma \ref{lemma-key-formula}와 그 앞의 논의에서 곧바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-factors}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{L}$을 $X$ 위의 가역 층이라 하자. 연산
+$\alpha \mapsto c_1(\mathcal{L}) \cap \alpha$는 유리 동치를 통해
+인수분해되어 연산
+$$
+c_1(\mathcal{L}) \cap - : \CH_{k + 1}(X) \to \CH_k(X)
+$$
+을 준다.
+\end{lemma}
+
+\begin{proof}
+$\alpha \in Z_{k + 1}(X)$이고 $\alpha \sim_{rat} 0$이라 하자.
+Definition \ref{definition-cap-c1}에서 정의된
+$c_1(\mathcal{L}) \cap \alpha$가 영임을 보여야 한다.
+Definition \ref{definition-rational-equivalence}에 의해
+$\dim_\delta(W_j) = k + 2$인 정수적 닫힌 부분공간들의 국소 유한 족
+$\{W_j\}$와 유리함수 $f_j \in R(W_j)^*$가 존재하여
+$$
+\alpha = \sum (i_j)_*\text{div}_{W_j}(f_j)
+$$
+이다. $p : \coprod W_j \to X$는 고유 사상임을 유의하라. 따라서
+$\alpha = p_*\alpha'$이다. 여기서
+$\alpha' \in Z_{k + 1}(\coprod W_j)$는 주인자들
+$\text{div}_{W_j}(f_j)$의 합이다. Lemma
+\ref{lemma-pushforward-cap-c1}에 의해
+$c_1(\mathcal{L}) \cap \alpha =
+p_*(c_1(p^*\mathcal{L}) \cap \alpha')$이다. 따라서 각각의
+$c_1(\mathcal{L}|_{W_j}) \cap \text{div}_{W_j}(f_j)$가 영임을
+보이면 충분하다. 즉, $X$가 정수적이고 어떤 $f \in R(X)^*$에 대하여
+$\alpha = \text{div}_X(f)$라고 가정해도 된다.
+
+\medskip\noindent
+$X$가 정수적이고 어떤 $f \in R(X)^*$에 대하여
+$\alpha = \text{div}_X(f)$라고 가정하자.
+% P10-E0077
+$f$를 가역 층 $\mathcal{N} = \mathcal{O}_X$의 정칙 유리형 단면으로
+생각할 수 있다. $\mathcal{L}$의 유리형 단면 $s$를 택하고
+$\beta = \text{div}_\mathcal{L}(s)$로 나타내자. Lemma
+\ref{lemma-commutativity-on-integral}에 의해
+$$
+c_1(\mathcal{L}) \cap \alpha = c_1(\mathcal{O}_X) \cap \beta.
+$$
+이다. 그러나 Lemma \ref{lemma-c1-cap-additive}에 의해 우변은
+원하는 대로 $\CH_k(X)$에서 영이다.
+\end{proof}
+
+\noindent
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{L}$을 $X$ 위의 가역 층이라 하자. 연산
+$$
+c_1(\mathcal{L})^s \cap - : \CH_{k + s}(X) \to \CH_k(X)
+$$
+을 $c_1(\mathcal{L}) \cap - $라 나타내겠다. 이는 Lemma
+\ref{lemma-factors}에 의해 말이 된다.
+% P10-E0076
+모든 $s \geq 0$에 대하여 $c_1(\mathcal{L}^s \cap -$로 이 연산의
+$s$회 반복을 나타내겠다.
+
+\begin{lemma}
+\label{lemma-cap-commutative}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{L}$, $\mathcal{N}$을 $X$ 위의 가역 층이라 하자.
+임의의 $\alpha \in \CH_{k + 2}(X)$에 대하여
+$$
+c_1(\mathcal{L}) \cap c_1(\mathcal{N}) \cap \alpha
+=
+c_1(\mathcal{N}) \cap c_1(\mathcal{L}) \cap \alpha
+$$
+가 $\CH_k(X)$의 원소로서 성립한다.
+\end{lemma}
+
+\begin{proof}
+$\dim_\delta(Z_j) = k + 2$인 정수적 닫힌 부분공간들의 어떤 국소
+유한 족 $Z_j \subset X$에 대하여
+$\alpha = \sum m_j[Z_j]$라고 쓰자. 고유 사상
+$p : \coprod Z_j \to X$를 생각하자. $\coprod Z_j$ 위의
+$(k + 2)$-사이클로서 $\alpha' = \sum m_j[Z_j]$로 두자.
+Lemma \ref{lemma-pushforward-cap-c1}를 여러 번 적용하면
+$c_1(\mathcal{L}) \cap c_1(\mathcal{N}) \cap \alpha
+= p_*(c_1(p^*\mathcal{L}) \cap c_1(p^*\mathcal{N}) \cap \alpha')$이고
+$c_1(\mathcal{N}) \cap c_1(\mathcal{L}) \cap \alpha
+= p_*(c_1(p^*\mathcal{N}) \cap c_1(p^*\mathcal{L}) \cap \alpha')$임을
+알 수 있다. 따라서 $X$가 정수적이고 $\alpha = [X]$인 경우의 공식을
+증명하면 충분하다. 이 경우 결과는 Lemma
+\ref{lemma-commutativity-on-integral}과 정의들에서 따른다.
+\end{proof}
+
+\section{유효 Cartier 인자와의 교차}
+\label{section-intersecting-effective-Cartier}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-intersecting-effective-Cartier}에 해당한다.
+% P10-E0078
+동기를 위해 그 절의 도입부를 읽어 주기 바란다.
+
+\medskip\noindent
+유효 Cartier 인자는 $\mathcal{L}$이 가역 층이고 $s$가 대역 단면인
+쌍 $(\mathcal{L}, s)$의 동형류와 $1$ 대 $1$로 대응함을 상기하자.
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-characterize-OD}를 보라.
+$D$가 $(\mathcal{L}, s)$에 대응하면
+$\mathcal{L} = \mathcal{O}_X(D)$이다. 이 절을 읽는 동안 이를
+기억해 두기 바란다.
+
+\begin{definition}
+\label{definition-gysin-homomorphism}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+가역 층과 대역 단면 $s \in \Gamma(X, \mathcal{L})$으로 이루어진
+쌍 $(\mathcal{L}, s)$를 취하자. $D = Z(s)$를 $s$의 영점 자취라 하고,
+$i : D \to X$로 닫힌 몰입을 나타내자. 각 정수 $k$에 대하여
+(정제된) {\it Gysin 준동형}
+$$
+i^* : Z_{k + 1}(X) \to \CH_k(D).
+$$
+을 다음 규칙으로 정의한다.
+\begin{enumerate}
+\item $\dim_\delta(W) = k + 1$인 정수적 닫힌 부분공간
+$W \subset X$가 주어졌을 때 다음과 같이 정의한다.
+\begin{enumerate}
+\item $W \not \subset D$이면 $D$ 위의 $k$-사이클로서
+$i^*[W] = [D \cap W]_k$로 두고,
+\item $W \subset D$이면
+$i^*[W] = i'_*(c_1(\mathcal{L}|_W) \cap [W])$로 둔다. 여기서
+$i' : W \to D$는 유도된 닫힌 몰입이다.
+\end{enumerate}
+\item 일반적인 $(k + 1)$-사이클 $\alpha = \sum n_j[W_j]$에 대해서는
+$$
+i^*\alpha = \sum n_j i^*[W_j]
+$$
+로 둔다.
+\item $D$가 유효 Cartier 인자이면 그 류를 $X$ 위의 류로
+푸시포워드한 것을 $D \cdot \alpha = i_*i^*\alpha$로 나타낸다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+실제로 나중에 보겠지만, 이 Gysin 준동형 $i^*$는 비평탄 풀백의
+한 예로 볼 수 있다. 따라서 때때로 비형식적으로 류 $i^*\alpha$를
+류 $\alpha$의 {\it 풀백}이라 부르겠다.
+
+\begin{remark}
+\label{remark-on-cycles}
+$S$, $B$, $X$, $\mathcal{L}$, $s$, $i : D \to X$가 Definition
+\ref{definition-gysin-homomorphism}에서와 같고
+$\mathcal{L}|_D \cong \mathcal{O}_D$라고 가정하자.
+이 경우 $W \subset D$일 때마다 $i^*[W] = 0$이 되도록 요구함으로써
+사이클들 위에 표준 사상 $i^* : Z_{k + 1}(X) \to Z_k(D)$를 정의할 수
+있다. 이렇게 할 수 있다는 사실은 나중에 유용할 것이다.
+\end{remark}
+
+\begin{remark}
+\label{remark-pullback-pairs}
+$f : X' \to X$를 Situation \ref{situation-setup}에서와 같은
+$B$ 위의 좋은 대수 공간들의 사상이라 하자.
+$(\mathcal{L}, s, i : D \to X)$를 Definition
+\ref{definition-gysin-homomorphism}에서와 같은 삼중항이라 하자.
+그러면 $\mathcal{L}' = f^*\mathcal{L}$, $s' = f^*s$ 및
+$D' = X' \times_X D = Z(s')$로 둘 수 있다. 이로부터 가환 그림
+$$
+\xymatrix{
+D' \ar[d]_g \ar[r]_{i'} & X' \ar[d]^f \\
+D \ar[r]^i & X
+}
+$$
+을 얻으며, $i^*$와 $(i')^*$ 사이의 여러 양립성을 물을 수 있다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-support-cap-effective-Cartier}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$(\mathcal{L}, s, i : D \to X)$를 Definition
+\ref{definition-gysin-homomorphism}에서와 같이 취하자.
+$\alpha$를 $X$ 위의 $(k + 1)$-사이클이라 하자. 그러면
+$i_*i^*\alpha = c_1(\mathcal{L}) \cap \alpha$가 $\CH_k(X)$에서
+성립한다. 특히 $D$가 유효 Cartier 인자이면
+$D \cdot \alpha = c_1(\mathcal{O}_X(D)) \cap \alpha$이다.
+\end{lemma}
+
+\begin{proof}
+% P10-E0079
+$\alpha = \sum n_j[W_j]$라고 쓰자. 여기서
+$i_j : W_j \to X$들은 $\dim_\delta(W_j) = k$인 정수적 닫힌
+부분공간들이다. $D$가 $s$의 영점 자취이므로
+$D \cap W_j$는 제한 $s|_{W_j}$의 영점 자취임을 알 수 있다.
+따라서 $W_j \not \subset D$인 각 $j$에 대하여 Lemma
+\ref{lemma-geometric-cap}에 의해
+$c_1(\mathcal{L}) \cap [W_j] = [D \cap W_j]_k$이다. 그러므로
+$$
+c_1(\mathcal{L}) \cap \alpha
+=
+\sum\nolimits_{W_j \not \subset D} n_j[D \cap W_j]_k
++
+\sum\nolimits_{W_j \subset D}
+% P10-E0080
+n_j i_{j, *}(c_1(\mathcal{L})|_{W_j}) \cap [W_j])
+$$
+가 Definition \ref{definition-cap-c1}에 의해 $\CH_k(X)$에서
+성립한다. 우변은 Definition \ref{definition-gysin-homomorphism}의
+$D$ 위 류 $i^*\alpha$를 푸시포워드한 것과 항별로 일치한다.
+따라서 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-closed-in-X-gysin}
+% P10-E0595
+Situation \ref{situation-setup}에서 $f : X' \to X$를 $B$ 위의 좋은
+대수 공간들의 고유 사상이라 하자.
+$(\mathcal{L}, s, i : D \to X)$를 Definition
+\ref{definition-gysin-homomorphism}에서와 같이 취하자. Remark
+\ref{remark-pullback-pairs}에서와 같은 그림
+$$
+\xymatrix{
+D' \ar[d]_g \ar[r]_{i'} & X' \ar[d]^f \\
+D \ar[r]^i & X
+}
+$$
+을 만들자. $X'$ 위의 임의의 $(k + 1)$-사이클 $\alpha'$에 대하여
+$i^*f_*\alpha' = g_*(i')^*\alpha'$가 $\CH_k(D)$에서 성립한다
+(이는 $f_*$가 사이클 수준에서 정의되므로 말이 된다).
+\end{lemma}
+
+\begin{proof}
+% P10-E0081
+어떤 정수적 닫힌 부분공간 $W' \subset X'$에 대하여
+$\alpha = [W']$라고 하자. $W \subset X$를 Lemma
+\ref{lemma-proper-image}에서와 같은 $W'$의 “상”이라 하자.
+$W' \not \subset D'$인 경우에는 $W \not \subset D$이고
+$$
+[W' \cap D']_k = \text{div}_{\mathcal{L}'|_{W'}}({s'|_{W'}})
+\quad\text{그리고}\quad
+[W \cap D]_k = \text{div}_{\mathcal{L}|_W}(s|_W)
+$$
+임을 알 수 있다. 그러므로 Lemma \ref{lemma-equal-c1-as-cycles}에
+의해 첫째 사이클의 $f_*$는 둘째 사이클과 같다. 따라서 등식은
+사이클로서 성립한다. $W' \subset D'$인 경우에는 $W \subset D$이고,
+% P10-E0596
+$f_*(c_1(\mathcal{L}|_{W'}) \cap [W'])$는 Lemma
+\ref{lemma-equal-c1-as-cycles}의 둘째 주장에 의해 $\CH_k(W)$에서
+$c_1(\mathcal{L}|_W) \cap [W]$와 같다. Remark
+\ref{remark-infinite-sums-rational-equivalences}에 의해 일반적인
+$\alpha'$에 대한 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-gysin-flat-pullback}
+% P10-E0595
+Situation \ref{situation-setup}에서 $f : X' \to X$를 상대차원이
+$r$인 $B$ 위의 좋은 대수 공간들의 평탄 사상이라 하자.
+$(\mathcal{L}, s, i : D \to X)$를 Definition
+\ref{definition-gysin-homomorphism}에서와 같이 취하자. Remark
+\ref{remark-pullback-pairs}에서와 같은 그림
+$$
+\xymatrix{
+D' \ar[d]_g \ar[r]_{i'} & X' \ar[d]^f \\
+D \ar[r]^i & X
+}
+$$
+을 만들자. $X$ 위의 임의의 $(k + 1)$-사이클 $\alpha$에 대하여
+% P10-E0082
+% P10-E0083
+$(i')^*f^*\alpha = g^*i^*\alpha'$가 $\CH_{k + r}(D)$에서 성립한다
+(이는 $f^*$가 사이클 수준에서 정의되므로 말이 된다).
+\end{lemma}
+
+\begin{proof}
+어떤 정수적 닫힌 부분공간 $W \subset X$에 대하여
+$\alpha = [W]$라고 하자. $W' = f^{-1}(W) \subset X'$라 하자.
+$W \not \subset D$인 경우에는 $W' \not \subset D'$이고
+$$
+W' \cap D' = g^{-1}(W \cap D)
+$$
+임을 $D'$의 닫힌 부분공간으로서 알 수 있다. 따라서 Lemma
+\ref{lemma-pullback-coherent}에 의해 등식은 사이클로서 성립한다.
+$W \subset D$인 경우에는 $W' \subset D'$이고
+$W' = g^{-1}(W)$이며, $[W']_{k + 1 + r} = g^*[W]$이다.
+그러므로 Lemma \ref{lemma-flat-pullback-cap-c1}에 의해 등식은
+$\CH_{k + r}(D')$에서 성립한다. Remark
+\ref{remark-infinite-sums-rational-equivalences}에 의해
+% P10-E0082
+일반적인 $\alpha'$에 대한 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-easy-gysin}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$(\mathcal{L}, s, i : D \to X)$를 Definition
+\ref{definition-gysin-homomorphism}에서와 같이 취하자.
+$Z \subset X$를 $\dim_\delta(Z) \leq k + 1$이고
+$D \cap Z$가 $Z$ 위의 유효 Cartier 인자인 닫힌 부분스킴이라 하자.
+그러면 $i^*([Z]_{k + 1}) = [D \cap Z]_k$이다.
+\end{lemma}
+
+\begin{proof}
+가정은 $s|_Z$가 $\mathcal{L}|_Z$의 정칙 단면임을 뜻한다.
+따라서 $D \cap Z = Z(s)$이고
+$$
+[D \cap Z]_k = \sum n_i [Z(s_i)]_k
+$$
+를 사이클로서 얻는다. 여기서 $s_i = s|_{Z_i}$이고, $Z_i$들은
+$\delta$-차원이 $k + 1$인 기약 성분들이며,
+$[Z]_{k + 1} = \sum n_i[Z_i]$이다. Lemma
+\ref{lemma-prepare-geometric-cap}을 보라.
+$D \cap Z_i = Z(s_i)$이다. Gysin 사상의 정의와 비교하면 결론을 얻는다.
+\end{proof}
+
+\section{Gysin 준동형}
+\label{section-gysin}
+
+\noindent
+이 절은 Chow Homology, Section \ref{chow-section-gysin}에 해당한다.
+이 절에서는 핵심 공식을 이용하여 Gysin 준동형이
+유리 동치를 통해 인수분해됨을 보인다.
+% P10-E0084
+
+\begin{lemma}
+\label{lemma-gysin-factors-general}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$X$가 정수적이고 $n = \dim_\delta(X)$라고 가정하자.
+$i : D \to X$를 유효 Cartier 인자라 하자.
+$\mathcal{N}$을 가역 $\mathcal{O}_X$-가군이라 하고,
+$t$를 $\mathcal{N}$의 영이 아닌 유리형 단면이라 하자. 그러면
+$i^*\text{div}_\mathcal{N}(t) = c_1(\mathcal{N}) \cap [D]_{n - 1}$가
+$\CH_{n - 2}(D)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+어떤 $\delta$-차원이 $n - 1$인 정수적 닫힌 부분공간
+$Z_i \subset X$들에 대하여
+$\text{div}_\mathcal{N}(t) = \sum \text{ord}_{Z_i, \mathcal{N}}(t)[Z_i]$
+라고 쓰자. 족 $\{Z_i\}$가 국소 유한이고,
+$U = X \setminus \bigcup Z_i$에서
+$t \in \Gamma(U, \mathcal{N}|_U)$가 생성원이며, $D$의 모든 기약 성분이
+$Z_i$ 중 하나라고 가정해도 좋다. Spaces over Fields, Lemmas
+\ref{spaces-over-fields-lemma-components-locally-finite},
+\ref{spaces-over-fields-lemma-divisor-locally-finite}, and
+\ref{spaces-over-fields-lemma-divisor-meromorphic-locally-finite}를 보라.
+
+\medskip\noindent
+$\mathcal{L} = \mathcal{O}_X(D)$로 두자. 표준 단면을
+$s \in \Gamma(X, \mathcal{O}_X(D)) = \Gamma(X, \mathcal{L})$로 나타내자.
+Section \ref{section-key}의 논의를 현재 상황에 적용하겠다.
+각 $i$에 대하여 $\xi_i \in |Z_i|$를 그 일반점이라 하고,
+$B_i = \mathcal{O}_{X, \xi_i}^h$로 두자. 각 $i$에 대하여
+$B_i$ 위에서 $\mathcal{L}_{\xi_i}$의 생성원 $s_i$와
+$\mathcal{N}_{\xi_i}$의 생성원 $t_i$를 택하되,
+$Z_i \not \subset D$이면 $s_i = s$를 택하도록 요구한다.
+$s = f_i s_i$와 $t = g_i t_i$로 쓰자. 여기서 $f_i, g_i \in B_i$이다.
+% P10-E0085
+그러면 $\text{ord}_{Z_i, \mathcal{N}}(t) = \text{ord}_{B_i}(g_i)$이다.
+한편 $f_i \in B_i$이고, $s_i$의 선택으로부터
+$$
+[D]_{n - 1} = \sum \text{ord}_{B_i}(f_i)[Z_i]
+$$
+이다. 우리는 사이클로서
+$$
+i^*\text{div}_\mathcal{N}(t) =
+\sum \text{ord}_{B_i}(g_i) \text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i})
+$$
+라고 주장한다. 더 정확히는 우변이 좌변을 나타내는 사이클이다.
+실제로 이는 $\text{div}_\mathcal{N}(t)$에 대한 공식과 다음 사실에서
+명백하다. $Z_i \not \subset D$이면
+$\text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i}) = [Z(s_i|_{Z_i})]_{n - 2} =
+[Z_i \cap D]_{n - 2}$인데, 이 경우
+$s_i|_{Z_i} = s|_{Z_i}$가 정칙 단면이기 때문이다. Lemma
+\ref{lemma-compute-c1}을 보라. 마찬가지로
+$$
+c_1(\mathcal{N}) \cap [D]_{n - 1} =
+\sum \text{ord}_{B_i}(f_i) \text{div}_{\mathcal{N}|_{Z_i}}(t_i|_{Z_i})
+$$
+이다. 핵심 공식(Lemma \ref{lemma-key-formula})은 사이클의 등식
+$$
+\sum \left(
+\text{ord}_{B_i}(f_i) \text{div}_{\mathcal{N}|_{Z_i}}(t_i|_{Z_i}) -
+\text{ord}_{B_i}(g_i) \text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i}) \right) =
+\sum \text{div}_{Z_i}(\partial_{B_i}(f_i, g_i))
+$$
+을 준다. $Z_i \not \subset D$이면 $f_i = 1$이고, 따라서
+$\text{div}_{Z_i}(\partial_{B_i}(f_i, g_i)) = 0$이다.
+그러므로 $D$ 위에서 $i^*\text{div}_\mathcal{N}(t)$와
+$c_1(\mathcal{N}) \cap [D]_{n - 1}$를 나타내는 위의 구체적인
+사이클들 사이의 유리 동치를 얻는다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-gysin-factors}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$(\mathcal{L}, s, i : D \to X)$를 Definition
+\ref{definition-gysin-homomorphism}에서와 같이 취하자.
+Gysin 준동형은 유리 동치를 통해 인수분해되어
+사상 $i^* : \CH_{k + 1}(X) \to \CH_k(D)$를 준다.
+\end{lemma}
+
+\begin{proof}
+$\alpha \in Z_{k + 1}(X)$라 하고 $\alpha \sim_{rat} 0$이라 가정하자.
+이는 $\delta$-차원이 $k + 2$인 정수적 닫힌 부분공간
+$W_j \subset X$들의 국소 유한 모음과 $f_j \in R(W_j)^*$가 존재하여
+$\alpha = \sum i_{j, *}\text{div}_{W_j}(f_j)$가 됨을 뜻한다.
+$X' = \coprod W_i$로 두고 다음 그림을 생각하자.
+% P10-E0086
+$$
+\xymatrix{
+D' \ar[d]_q \ar[r]_{i'} & X' \ar[d]^p \\
+D \ar[r]^i & X
+}
+$$
+이는 Remark \ref{remark-pullback-pairs}의 그림이다.
+$X' \to X$가 고유이므로 Lemma \ref{lemma-closed-in-X-gysin}에 의해
+$i^*p_* = q_*(i')^*$임을 알 수 있다. 또한 $q_*$가 유리 동치를 통해
+인수분해됨을 알고 있으므로(Lemma
+\ref{lemma-proper-pushforward-rational-equivalence}),
+$X'$ 위의 $\alpha' = \sum \text{div}_{W_j}(f_j)$에 대해 결과를
+증명하면 충분하다. 이는 명백히 $X$가 정수적이고 어떤
+$f \in R(X)^*$에 대해 $\alpha = \text{div}(f)$인 경우로 귀착된다.
+
+\medskip\noindent
+$X$가 정수적이고 어떤 $f \in R(X)^*$에 대해
+$\alpha = \text{div}(f)$라고 가정하자. $X = D$이면
+$i^*\alpha$는 $c_1(\mathcal{L}) \cap \alpha$와 같다.
+이는 Lemma \ref{lemma-factors}에 의해 영과 유리 동치이다.
+$D \not = X$이면 Lemma \ref{lemma-gysin-factors-general}에 의해
+$i^*\text{div}_X(f)$는 $\CH_k(D)$에서
+$c_1(\mathcal{O}_D) \cap [D]_{n - 1}$와 같다.
+% P10-E0087
+물론 $c_1(\mathcal{O}_D)$와의 교차는 영사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-gysin-commutes-cap-c1}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$(\mathcal{L}, s, i : D \to X)$를 Definition
+\ref{definition-gysin-homomorphism}에서와 같은 삼중항이라 하자.
+$\mathcal{N}$을 가역 $\mathcal{O}_X$-가군이라 하자. 그러면 모든
+$\alpha \in \CH_k(Z)$에 대하여
+$i^*(c_1(\mathcal{N}) \cap \alpha) = c_1(i^*\mathcal{N}) \cap i^*\alpha$가
+$\CH_{k - 2}(D)$에서 성립한다.
+% P10-E0088
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-gysin-factors}와 완전히 같은 증명으로 이는 Lemmas
+\ref{lemma-pushforward-cap-c1},
+\ref{lemma-cap-commutative}, and
+\ref{lemma-gysin-factors-general}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-gysin-commutes-gysin}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$(\mathcal{L}, s, i : D \to X)$와
+$(\mathcal{L}', s', i' : D' \to X)$를 Definition
+\ref{definition-gysin-homomorphism}에서와 같은 두 삼중항이라 하자.
+그러면 그림
+$$
+\xymatrix{
+\CH_k(X) \ar[r]_{i^*} \ar[d]_{(i')^*} & \CH_{k - 1}(D) \ar[d] \\
+\CH_{k - 1}(D') \ar[r] & \CH_{k - 2}(D \cap D')
+}
+$$
+은 가환이며, 여기서 각 사상은 Gysin 사상이다.
+\end{lemma}
+
+\begin{proof}
+$j : D \cap D' \to D$와 $j' : D \cap D' \to D'$로
+$(\mathcal{L}|_{D'}, s|_{D'}$와
+$(\mathcal{L}'_D, s|_D)$에 대응하는 닫힌 몰입들을 나타내자.
+% P10-E0089
+모든 $\alpha \in \CH_k(X)$에 대하여
+$(j')^*i^*\alpha = j^* (i')^*\alpha$임을 보여야 한다.
+$W \subset X$를 차원이 $k$인 정수적 닫힌 부분스킴이라 하자.
+% P10-E0090
+$\alpha = [W]$인 경우에 등식을 증명하겠다.
+그러면 일반적인 경우는 Remark
+\ref{remark-infinite-sums-rational-equivalences}의 관찰
+(그리고 아래에서 만들어지는 유리 동치의 구체적인 형태)에서 따른다.
+$\alpha = [W]$인 경우의 등식을 핵심 공식에서 도출하겠다.
+
+\medskip\noindent
+$\sigma$를 $\mathcal{L}|_W$의 영이 아닌 유리형 단면이라 하고,
+$W \not \subset D$이면 $s|_W$와 같도록 요구한다.
+$\sigma'$를 $\mathcal{L}'|_W$의 영이 아닌 유리형 단면이라 하고,
+$W \not \subset D'$이면 $s'|_W$와 같도록 요구한다.
+Section \ref{section-key}의 논의에서와 같이
+$$
+\text{div}_{\mathcal{L}|_W}(\sigma) =
+\sum \text{ord}_{Z_i, \mathcal{L}|_W}(\sigma)[Z_i] = \sum n_i[Z_i]
+$$
+라고 쓰고, 마찬가지로
+$$
+\text{div}_{\mathcal{L}'|_W}(\sigma') =
+\sum \text{ord}_{Z_i, \mathcal{L}'|_W}(\sigma')[Z_i] = \sum n'_i[Z_i]
+$$
+라고 쓰자. 그러면 $n_i \not = 0$이면 $Z_i \subset D$이고,
+$n'_i \not = 0$이면 $Z'_i \subset D'$이다.
+% P10-E0091
+각 $i$에 대하여 $\xi_i \in |Z_i|$를 일반점이라 하자.
+Section \ref{section-key}에서와 같이 각 $i$에 대하여 원소
+$\sigma_i \in \mathcal{L}_{\xi_i}$와 각각\ 
+$\sigma'_i \in \mathcal{L}'_{\xi_i}$를 택하자. 이들은
+$B_i = \mathcal{O}_{W, \xi_i}^h$ 위의 생성원이고,
+$Z_i \not \subset D$일 때와 각각\ $Z_i \not \subset D'$일 때
+$s$와 각각\ $s'$의 상과 같도록 한다.
+$\sigma = f_i \sigma_i$와 $\sigma' = f'_i\sigma'_i$로 쓰면
+$n_i = \text{ord}_{B_i}(f_i)$이고
+$n'_i = \text{ord}_{B_i}(f'_i)$이다.
+정의로부터 사이클로서
+$$
+(j')^*i^*[W] =
+\sum \text{ord}_{B_i}(f_i) \text{div}_{\mathcal{L}'|_{Z_i}}(\sigma'_i|_{Z_i})
+$$
+이고,
+$$
+j^*(i')^*[W] =
+\sum \text{ord}_{B_i}(f'_i) \text{div}_{\mathcal{L}|_{Z_i}}(\sigma_i|_{Z_i})
+$$
+이다. 핵심 공식(Lemma \ref{lemma-key-formula})은 이제 사이클의 등식
+$$
+\sum \left(
+\text{ord}_{B_i}(f_i) \text{div}_{\mathcal{L}'|_{Z_i}}(\sigma'_i|_{Z_i}) -
+\text{ord}_{B_i}(f'_i) \text{div}_{\mathcal{L}|_{Z_i}}(\sigma_i|_{Z_i})
+\right) =
+\sum \text{div}_{Z_i}(\partial_{B_i}(f_i, f'_i))
+$$
+을 준다. $Z_i \not \subset D \cap D'$이면 이 경우
+$f_i = 1$ 또는 $f'_i = 1$이므로
+$\text{div}_{Z_i}(\partial_{B_i}(f_i, f'_i)) = 0$임에 유의하라.
+따라서 $D \cap D' \cap W$ 위에서 $(j')^*i^*[W]$와
+$j^*(i')^*[W]$를 나타내는 위의 구체적인 사이클들 사이의
+유리 동치를 얻는다.
+\end{proof}
+
+\section{상대 유효 Cartier 인자}
+\label{section-relative-effective-cartier}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-relative-effective-cartier}에 해당한다.
+상대 유효 Cartier 인자는 Divisors on Spaces, Section
+\ref{spaces-divisors-section-effective-Cartier-morphisms}에서 정의된다.
+벡터 다발의 Chern 특성류에 관한 기본 결과를 전개하는 데에는
+주변 스킴과 유효 Cartier 인자가 모두 밑 위에서 평탄한 경우만 필요하다.
+% P10-E0092
+
+\begin{lemma}
+\label{lemma-relative-effective-cartier}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+% P10-E0597
+$p : X \to Y$를 상대차원이 $r$인 평탄 사상이라 하자.
+$i : D \to X$를 상대 유효 Cartier 인자라 하자
+(Divisors on Spaces, Definition
+\ref{spaces-divisors-definition-relative-effective-Cartier-divisor}).
+$\mathcal{L} = \mathcal{O}_X(D)$로 두자.
+임의의 $\alpha \in \CH_{k + 1}(Y)$에 대하여
+$$
+i^*p^*\alpha = (p|_D)^*\alpha
+$$
+가 $\CH_{k + r}(D)$에서 성립하고,
+$$
+c_1(\mathcal{L}) \cap p^*\alpha = i_* ((p|_D)^*\alpha)
+$$
+가 $\CH_{k + r}(X)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+$W \subset Y$를 $\delta$-차원이 $k + 1$인 정수적 닫힌 부분공간이라 하자.
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-relative-Cartier}에 의해
+$D \cap p^{-1}W$는 $p^{-1}W$ 위의 유효 Cartier 인자이다.
+Lemma \ref{lemma-easy-gysin}에 의해 다음 등식들의 첫 번째 등식을 얻는다.
+$$
+i^*[p^{-1}W]_{k + r + 1} =
+[D \cap p^{-1}W]_{k + r} =
+[(p|_D)^{-1}(W)]_{k + r}.
+$$
+두 번째 등식은 대수 공간으로서
+$D \cap p^{-1}(W) = (p|_D)^{-1}(W)$이기 때문에 성립한다.
+% P10-E0598
+정의에 의해 $p^*[W] = [p^{-1}W]_{k + r + 1}$이므로
+$i^*p^*[W] = (p|_D)^*[W]$가 사이클로서 성립함을 알 수 있다.
+$\alpha = \sum m_j[W_j]$가 일반적인 $k + 1$-사이클이면
+$i^*\alpha = \sum m_j i^*p^*[W_j] = \sum m_j(p|_D)^*[W_j]$가
+사이클로서 성립한다.
+% P10-E0093
+이로써 첫 번째 등식이 증명된다.
+% P10-E0094
+첫 번째 등식에서 두 번째 등식을 도출하려면 Lemma
+\ref{lemma-support-cap-effective-Cartier}를 적용하면 된다.
+\end{proof}
+
+\section{아핀 다발}
+\label{section-affine-vector}
+
+\noindent
+이 절은 Chow Homology, Section \ref{chow-section-affine-vector}에 해당한다.
+아핀 다발에 대해서는 Chow 군 위의 풀백 사상이 전사이다.
+
+\begin{lemma}
+\label{lemma-pullback-affine-fibres-surjective}
+Situation \ref{situation-setup}에서 $X, Y/B$가 좋다고 하자.
+$f : X \to Y$를 $B$ 위의 상대차원이 $r$인 준콤팩트 평탄 사상이라 하자.
+모든 $y \in Y$에 대하여
+$X_y \cong \mathbf{A}^r_{\kappa(y)}$라고 가정하자.
+그러면 모든 $k \in \mathbf{Z}$에 대하여
+$f^* : \CH_k(Y) \to \CH_{k + r}(X)$는 전사이다.
+\end{lemma}
+
+\begin{proof}
+$\alpha \in \CH_{k + r}(X)$라 하자. $\alpha = \sum m_j[W_j]$라고 쓰자.
+여기서 $m_j \not = 0$이고 $W_j$들은 서로 다른,
+$\delta$-차원이 $k + r$인 정수적 닫힌 부분공간들이다.
+그러면 족 $\{W_j\}$는 $X$에서 국소 유한이다.
+Lemma \ref{lemma-proper-image}에서와 같이 우세 사상
+$W_j \to Z_j$를 얻도록 하는 정수적 닫힌 부분공간
+$Z_j \subset Y$를 취하자. 임의의 준콤팩트 열린집합
+$V \subset Y$에 대하여 $f^{-1}(V) \cap W_j$가 공집합이 아닌
+$j$는 유한 개뿐임을 알 수 있다. 따라서 상들의 폐포인 $Z_j$들의
+모음은 $Y$의 정수적 닫힌 부분공간들의 국소 유한 모음이다.
+
+\medskip\noindent
+섬유곱 그림
+$$
+\xymatrix{
+f^{-1}(Z_j) \ar[r] \ar[d]_{f_j} & X \ar[d]^f \\
+Z_j \ar[r] & Y
+}
+$$
+을 생각하자. 어떤 $k$-사이클 $\beta_j \in \CH_k(Z_j)$에 대하여
+$[W_j] \in Z_{k + r}(f^{-1}(Z_j))$가 $f_j^*\beta_j$와
+유리 동치라고 가정하자. 그러면
+$\beta = \sum m_j \beta_j$는 $Y$ 위의 $k$-사이클이고,
+$f^*\beta = \sum m_j f_j^*\beta_j$는 $\alpha$와 유리 동치이다
+(Remark \ref{remark-infinite-sums-rational-equivalences}를 보라).
+이로써 $Y$가 정수적이고 $\alpha = [W]$이며
+$X$의 어떤 정수적 닫힌 부분스킴이 $Y$ 위에 우세한 경우로 귀착된다.
+% P10-E0095
+특히 $d = \dim_\delta(Y) < \infty$라고 가정해도 좋다.
+
+\medskip\noindent
+따라서 $d = \dim_\delta(Y)$에 대한 귀납법을 사용할 수 있다.
+$d < k$이면 $\CH_{k + r}(X) = 0$이므로 보조정리가 성립한다.
+이것이 귀납법의 기초 단계이다. 공집합이 아닌 열린집합
+$V \subset Y$를 생각하자. 어떤 $\beta \in Z_k(V)$에 대하여
+$\alpha|_{f^{-1}(V)} = f^*\beta$임을 보일 수 있다고 하자.
+Lemma \ref{lemma-exact-sequence-open}에 의해 어떤
+$\beta' \in Z_k(Y)$에 대하여 $\beta = \beta'|_V$임을 알 수 있다.
+Lemma \ref{lemma-restrict-to-open}의 완전열
+$\CH_k(f^{-1}(Y \setminus V)) \to \CH_k(X) \to \CH_k(f^{-1}(V))$에 의해
+$\alpha - f^*\beta'$는 어떤 사이클
+$\alpha' \in \CH_{k + r}(f^{-1}(Y \setminus V))$에서 옴을 알 수 있다.
+% P10-E0096
+$\dim_\delta(Y \setminus V) < d$이므로 $d$에 대한 귀납법으로 결론을 얻는다.
+
+\medskip\noindent
+특히 $Y$를 적당한 열린집합으로 바꾸어, $Y$가 일반점
+$\eta$를 갖는 스킴이라고 가정해도 좋다. 동형
+$Y_\eta \cong \mathbf{A}^r_\eta$는 공집합이 아닌 열린집합
+$V \subset Y$ 위의 동형으로 확장된다. Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-descend-finite-presentation}을 보라.
+% P10-E0097
+이로써 스킴의 경우로 귀착되는데, 이는 Chow Homology, Lemma
+\ref{chow-lemma-pullback-affine-fibres-surjective}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-linebundle}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자. $X$ 위의 결부된
+벡터 다발을
+$$
+p :
+L = \underline{\Spec}(\text{Sym}^*(\mathcal{L}))
+\longrightarrow
+X
+$$
+라 하자. 그러면 모든 $k$에 대하여
+$p^* : \CH_k(X) \to \CH_{k + 1}(L)$는 동형이다.
+\end{lemma}
+
+\begin{proof}
+전사성은 Lemma \ref{lemma-pullback-affine-fibres-surjective}를 보라.
+$o : X \to L$을 $L \to X$의 영단면, 즉 모든 $n > 0$에 대하여
+$\mathcal{L}^{\otimes n}$을 영으로 보내는 전사
+$\text{Sym}^*(\mathcal{L}) \to \mathcal{O}_X$에 대응하는 사상이라 하자.
+그러면 $p \circ o = \text{id}_X$이고 $o(X)$는 $L$ 위의
+유효 Cartier 인자이다. 따라서 Lemma
+\ref{lemma-relative-effective-cartier}에 의해
+$o^* \circ p^* = \text{id}$임을 알 수 있고, $p^*$도 단사라는
+결론을 얻는다.
+\end{proof}
+
+\section{쌍변 교차 이론}
+\label{section-bivariant}
+
+\noindent
+이 절은 Chow Homology, Section \ref{chow-section-bivariant}에 해당한다.
+벡터 다발의 고차 Chern 특성류를 제대로 논하기 위해
+\cite{FM}을 따라 다음 개념을 도입한다.
+\cite[Theorem 17.1]{F}에서, 서로 다른 설정에서 작업한다는 유의점을
+제외하면 우리의 정의가 \cite{F}의 정의와 일치함이 따른다.
+
+\begin{definition}
+\label{definition-bivariant-class}
+\begin{reference}
+\cite[Definition 17.1]{F}와 유사하다.
+\end{reference}
+Situation \ref{situation-setup}에서
+$f : X \to Y$를 $B$ 위의 좋은 대수 공간들의 사상이라 하자.
+$p \in \mathbf{Z}$라 하자.
+{\it $f$에 대한 차수 $p$의 쌍변류 $c$}란,
+$B$ 위의 좋은 대수 공간들의 모든 사상 $Y' \to Y$와 모든 $k$에
+사상
+$$
+c \cap - : \CH_k(Y') \longrightarrow \CH_{k - p}(X')
+$$
+을 대응시키는 규칙이다. 여기서 $X' = Y' \times_Y X$이고,
+다음 조건들을 만족해야 한다.
+\begin{enumerate}
+\item $Y'' \to Y'$이 고유 사상이면 모든 $Y''$ 위의
+$\alpha''$에 대하여
+$c \cap (Y'' \to Y')_*\alpha'' = (X'' \to X')_*(c \cap \alpha'')$이고,
+\item $Y'' \to Y'$이 $B$ 위의 좋은 대수 공간들의 사상이며
+상대차원이 $r$인 평탄 사상이면, 모든 $Y'$ 위의 $\alpha'$에 대하여
+$c \cap (Y'' \to Y')^*\alpha' = (X'' \to X')^*(c \cap \alpha')$이고,
+% P10-E0098
+\item $(\mathcal{L}', s', i' : D' \to Y')$가 Definition
+\ref{definition-gysin-homomorphism}에서와 같고, 이를 $X'$로 풀백한
+것이 $(\mathcal{N}', t', j' : E' \to X')$이면, 모든
+$Y'$ 위의 $\alpha'$에 대하여
+$c \cap (i')^*\alpha' = (j')^*(c \cap \alpha')$이다.
+\end{enumerate}
+$f$에 대한 차수 $p$의 모든 쌍변류의 모음을
+$A^p(X \to Y)$로 나타낸다.
+\end{definition}
+
+\noindent
+Situation \ref{situation-setup}에서 $X \to Y$와 $Y \to Z$를
+$B$ 위의 좋은 대수 공간들의 사상이라 하자.
+$p \in \mathbf{Z}$라 하자. $A^p(X \to Y)$가 아벨 군임은 명백하다.
+더 나아가 결합적인 쌍선형 합성
+$$
+A^p(X \to Y) \times A^q(Y \to Z) \to A^{p + q}(X \to Z)
+$$
+이 있음도 명백하다.
+우리는 주로 $A^p(X) = A^p(X \to X)$에 관심을 둘 것이다.
+이는 항상 $\text{id}_X$에 대한 쌍변 코호몰로지류를 뜻한다.
+바로 이곳에 Chern 특성류들이 놓인다.
+
+\begin{definition}
+\label{definition-chow-cohomology}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$X$의 {\it Chow 코호몰로지}는 차수 $p$ 성분이
+$A^p(X \to X)$인 등급 $\mathbf{Z}$-대수 $A^*(X)$이다.
+\end{definition}
+
+\noindent
+경고: $A^*(X)$ 위의 $\mathbf{Z}$-대수 구조가 가환인지는 명확하지 않다.
+그러나 Chern 특성류들이 그 중심에 놓임을 보게 될 것이다.
+
+\begin{remark}
+\label{remark-pullback-cohomology}
+Situation \ref{situation-setup}에서
+$f : X \to Y$를 $B$ 위의 좋은 대수 공간들의 사상이라 하자.
+그러면 표준적인 $\mathbf{Z}$-대수 사상 $A^*(Y) \to A^*(X)$가 있다.
+실제로 $c \in A^p(Y)$와 $X' \to X$가 주어지면,
+$X'$를 $Y$ 위의 대수 공간으로 생각하여 주어지는 사상
+$c \cap - : \CH_k(X') \to \CH_{k - p}(X')$으로 $f^*c$를 정의할 수 있다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-cap-c1-bivariant}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$f : X' \to X$에
+$c_1(f^*\mathcal{L}) \cap - : \CH_k(X') \to \CH_{k - 1}(X')$를
+대응시키는 규칙은 차수 $1$의 쌍변류이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemmas \ref{lemma-factors},
+\ref{lemma-pushforward-cap-c1},
+\ref{lemma-flat-pullback-cap-c1}, and
+\ref{lemma-gysin-commutes-cap-c1}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-pullback-bivariant}
+Situation \ref{situation-setup}에서
+$f : X \to Y$를 $B$ 위의 좋은 대수 공간들의 사상이며
+상대차원이 $r$인 평탄 사상이라 하자.
+$Y' \to Y$에 $(f')^* : \CH_k(Y') \to \CH_{k + r}(X')$를
+대응시키는 규칙은 차수 $-r$의 쌍변류이다. 여기서
+$X' = X \times_Y Y'$이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemmas
+\ref{lemma-flat-pullback-rational-equivalence},
+\ref{lemma-compose-flat-pullback},
+\ref{lemma-flat-pullback-proper-pushforward}, and
+\ref{lemma-gysin-flat-pullback}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-gysin-bivariant}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$(\mathcal{L}, s, i : D \to X)$를 Definition
+\ref{definition-gysin-homomorphism}에서와 같은 삼중항이라 하자.
+$f : X' \to X$에
+$(i')^* : \CH_k(X') \to \CH_{k - 1}(D')$를 대응시키는 규칙은
+차수 $1$의 쌍변류이다. 여기서 $D' = D \times_X X'$이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemmas \ref{lemma-gysin-factors},
+\ref{lemma-closed-in-X-gysin},
+\ref{lemma-gysin-flat-pullback}, and
+\ref{lemma-gysin-commutes-gysin}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-push-proper-bivariant}
+Situation \ref{situation-setup}에서
+$f : X \to Y$와 $g : Y \to Z$를
+$B$ 위의 좋은 대수 공간들의 사상이라 하자.
+$c \in A^p(X \to Z)$라 하고 $f$가 고유라고 가정하자.
+그러면 $X' \to X$에
+$\alpha \longmapsto f_*(c \cap \alpha)$를 대응시키는 규칙은
+차수 $p$의 쌍변류이다.
+% P10-E0099
+\end{lemma}
+
+\begin{proof}
+이는 Lemmas \ref{lemma-compose-pushforward},
+\ref{lemma-flat-pullback-proper-pushforward}, and
+\ref{lemma-closed-in-X-gysin}에서 따른다.
+\end{proof}
+
+\noindent
+여기서 $c_1(\mathcal{L})$이 $A^*(X)$의 중심에 놓임을 알 수 있다.
+
+\begin{lemma}
+\label{lemma-c1-center}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+그러면 $c_1(\mathcal{L}) \in A^1(X)$은 모든 원소
+$c \in A^p(X)$와 가환한다.
+\end{lemma}
+
+\begin{proof}
+$p : L \to X$를 Lemma \ref{lemma-linebundle}에서와 같이 취하고,
+$o : X \to L$을 영단면이라 하자.
+$p^*\mathcal{L}^{\otimes -1}$에는 그 영점 자취가 정확히
+유효 Cartier 인자 $o(X)$인 표준 단면이 있음을 관찰하자.
+$\alpha \in \CH_k(X)$라 하자. 그러면 Lemmas
+\ref{lemma-flat-pullback-cap-c1} and
+\ref{lemma-relative-effective-cartier}에 의해
+$$
+p^*(c_1(\mathcal{L}^{\otimes -1}) \cap \alpha) =
+c_1(p^*\mathcal{L}^{\otimes -1}) \cap p^*\alpha =
+o_* o^* p^*\alpha
+$$
+임을 알 수 있다. $c$가 쌍변류이므로
+\begin{align*}
+p^*(c \cap c_1(\mathcal{L}^{\otimes -1}) \cap \alpha)
+& =
+c \cap p^*(c_1(\mathcal{L}^{\otimes -1}) \cap \alpha) \\
+& =
+c \cap o_* o^* p^*\alpha \\
+& =
+o_* o^* p^*(c \cap \alpha) \\
+& =
+p^*(c_1(\mathcal{L}^{\otimes -1}) \cap c \cap \alpha)
+\end{align*}
+이다(마지막 등식은 위의 내용을 $c \cap \alpha$에 적용한 것이다).
+위에서 인용한 보조정리에 의해 $p^*$가 단사이므로
+$c_1(\mathcal{L}^{\otimes -1})$이 $A^*(X)$의 중심에 놓인다.
+이는 보조정리를 증명한다.
+\end{proof}
+
+\noindent
+다음은 쌍변류가 영이 되는 경우에 대한 판정법이다.
+% P10-E0100
+
+\begin{lemma}
+\label{lemma-bivariant-zero}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$c \in A^p(X)$라 하자. 그러면 $X$ 위에서 국소 유한형인 모든
+정수적 대수 공간 $Y$에 대하여
+$c \cap [Y] = 0$이 $\CH_*(Y)$에서 성립할 때, 그리고 그때에만
+$c$는 영이다.
+\end{lemma}
+
+\begin{proof}
+한 방향은 명백하다. 역으로, $X$ 위에서 국소 유한형인 모든 정수적
+대수 공간 $Y$에 대하여 $c \cap [Y] = 0$이 $\CH_*(Y)$에서
+성립한다고 가정하자.
+$X' \to X$가 국소 유한형이라 하자. $\alpha \in \CH_k(X')$라 하자.
+$\alpha = \sum n_i [Y_i]$라고 쓰자. 여기서
+$Y_i \subset X'$들은 $\delta$-차원이 $k$인 정수적 닫힌
+부분스킴들의 국소 유한 모음이다.
+% P10-E0101
+그러면 $\alpha$는 고유 사상 $X'' \to X'$ 아래에서
+$X'' = \coprod Y_i$ 위의 사이클
+$\alpha' = \sum n_i[Y_i]$의 푸시포워드이다.
+쌍변류의 성질에 의해
+$c \cap \alpha' = 0$이 $\CH_{k - p}(X'')$에서 성립함을
+증명하면 충분하다. 정의에서 즉시
+$\CH_{k - p}(X'') = \prod \CH_{k - p}(Y_i)$임을 알 수 있다.
+사영 사상 $\CH_{k - p}(X'') \to \CH_{k - p}(Y_i)$들은
+평탄 풀백으로 주어진다. $c$와의 교차는 평탄 풀백과 가환하므로
+$c \cap [Y_i]$가 $\CH_{k - p}(Y_i)$에서 영임을 보이면 충분하다.
+이는 가정에 의해 참이다.
+\end{proof}
+
+\section{사영공간 다발 공식}
+\label{section-projective-space-bundle-formula}
+
+\noindent
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+계수가 $r$인 유한 국소 자유 $\mathcal{O}_X$-가군
+$\mathcal{E}$를 생각하자.
+우리의 규약에서 {\it $\mathcal{E}$에 결부된 사영 다발}은
+$X$ 위의 사상
+$$
+\xymatrix{
+\mathbf{P}(\mathcal{E}) =
+\underline{\text{Proj}}_X(\text{Sym}^*(\mathcal{E}))
+\ar[r]^-\pi
+& X
+}
+$$
+이며, 여기서
+$\mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)$은
+$\pi_*(\mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)) = \mathcal{E}$가
+되도록 규격화되어 있다. 특히 전사
+$\pi^*\mathcal{E} \to \mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)$가 있다.
+비형식적으로 “$(\pi : P \to X, \mathcal{O}_P(1))$를
+$\mathcal{E}$에 결부된 사영 다발이라 하자”라고 말할 때에는
+$P = \mathbf{P}(\mathcal{E})$이고
+$\mathcal{O}_P(1) = \mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)$인
+상황을 뜻하겠다.
+
+\begin{lemma}
+\label{lemma-cap-projective-bundle}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$를 계수가 $r$인 유한 국소 자유
+$\mathcal{O}_X$-가군 $\mathcal{E}$라 하자.
+% P10-E0102
+$(\pi : P \to X, \mathcal{O}_P(1))$를
+$\mathcal{E}$에 결부된 사영 다발이라 하자.
+임의의 $\alpha \in \CH_k(X)$에 대하여 원소
+$$
+\pi_*\left(
+c_1(\mathcal{O}_P(1))^s \cap \pi^*\alpha
+\right)
+\in
+\CH_{k + r - 1 - s}(X)
+$$
+는 $s < r - 1$이면 $0$이고 $s = r - 1$이면 $\alpha$와 같다.
+\end{lemma}
+
+\begin{proof}
+$Z \subset X$를 $\delta$-차원이 $k$인 정수적 닫힌 부분공간이라 하자.
+$\alpha = [Z]$인 경우에 보조정리를 증명하겠다. 이 특수한 경우에서
+일반적인 경우를 도출하는 논증은 생략한다. 힌트: Remark
+\ref{remark-infinite-sums-rational-equivalences}에서처럼 논증하라.
+
+\medskip\noindent
+$P_Z = P \times_X Z$를 밑변환이라 하자. 물론
+$\pi_Z : P_Z \to Z$는 $\mathcal{E}|_Z$에 결부된 사영 다발이고,
+$\mathcal{O}_P(1)$은 $P_Z$ 위의 대응하는 가역 가군으로 풀백된다.
+Lemmas \ref{lemma-cap-c1-bivariant} and
+\ref{lemma-flat-pullback-bivariant}에 의해
+$c_1(\mathcal{O}_P(1) \cap -$와 $\pi^*$는 쌍변류이므로
+% P10-E0103
+$$
+\pi_*\left(
+c_1(\mathcal{O}_P(1))^s \cap \pi^*[Z]
+\right)
+=
+(Z \to X)_*\pi_{Z, *}\left(
+c_1(\mathcal{O}_{P_Z}(1))^s \cap \pi_Z^*[Z]
+\right)
+$$
+임을 알 수 있다. 따라서 $X$가 정수적이고
+$\alpha  = [X]$인 경우에 보조정리를 증명하면 충분하다.
+
+\medskip\noindent
+$X$가 정수적이고 $\dim_\delta(X) = k$이며
+$\alpha = [X]$라고 가정하자.
+$P$는 $\delta$-차원이 $r - 1$인 정수적 공간이므로
+$\pi^*[X] = [P]$임을 유의하라.
+% P10-E0104
+$s < r - 1$이면 구성에 의해
+$c_1(\mathcal{O}_P(1))^s \cap [P]$는
+$(k + r - 1 - s)$-사이클이다.
+% P10-E0105
+따라서 이 사이클의 푸시포워드는 차원상의 이유로 영이다.
+
+\medskip\noindent
+$s = r - 1$이라 하자. 위의 논증에 의해 어떤
+$n \in \mathbf{Z}$에 대하여
+$\pi_*(c_1(\mathcal{O}_P(1))^s \cap [P]) = n [X]$임을 알 수 있다.
+$n = 1$임을 보이려 한다. 위와 같은 차원상의 이유로
+$X$를 조밀한 열린집합으로 바꾼 뒤 이 결과를 증명하면 충분하다.
+따라서 $X$가 스킴이라고 가정해도 좋고, 결과는 Chow Homology, Lemma
+\ref{chow-lemma-cap-projective-bundle}에서 따른다.
+\end{proof}
+
+\begin{lemma}[사영공간 다발 공식]
+\label{lemma-chow-ring-projective-bundle}
+$(S, \delta)$를 Situation \ref{situation-setup}에서와 같이 취하자.
+$X$가 $S$ 위에서 국소 유한형이라고 하자.
+$\mathcal{E}$를 계수가 $r$인 유한 국소 자유
+$\mathcal{O}_X$-가군 $\mathcal{E}$라 하자.
+% P10-E0106
+$(\pi : P \to X, \mathcal{O}_P(1))$를
+$\mathcal{E}$에 결부된 사영 다발이라 하자. 사상
+$$
+\bigoplus\nolimits_{i = 0}^{r - 1}
+\CH_{k + i}(X)
+\longrightarrow
+\CH_{k + r - 1}(P),
+$$
+$$
+(\alpha_0, \ldots, \alpha_{r-1})
+\longmapsto
+\pi^*\alpha_0 +
+c_1(\mathcal{O}_P(1)) \cap \pi^*\alpha_1
++ \ldots +
+c_1(\mathcal{O}_P(1))^{r - 1} \cap \pi^*\alpha_{r-1}
+$$
+은 동형이다.
+\end{lemma}
+
+\begin{proof}
+$k \in \mathbf{Z}$를 고정하자. 먼저 사상이 단사임을 보이자.
+좌변의 원소 $(\alpha_0, \ldots, \alpha_{r - 1})$가 영으로
+보내진다고 가정하자. Lemma \ref{lemma-cap-projective-bundle}에 의해
+$$
+0 = \pi_*(\pi^*\alpha_0 +
+c_1(\mathcal{O}_P(1)) \cap \pi^*\alpha_1
++ \ldots +
+c_1(\mathcal{O}_P(1))^{r - 1} \cap \pi^*\alpha_{r-1})
+= \alpha_{r - 1}
+$$
+임을 알 수 있다. 다음으로
+$$
+0 = \pi_*(c_1(\mathcal{O}_P(1)) \cap (\pi^*\alpha_0 +
+c_1(\mathcal{O}_P(1)) \cap \pi^*\alpha_1
++ \ldots +
+c_1(\mathcal{O}_P(1))^{r - 2} \cap \pi^*\alpha_{r - 2}))
+= \alpha_{r - 2}
+$$
+임을 알 수 있고, 이와 같이 계속한다. 따라서 사상은 단사이다.
+
+\medskip\noindent
+사상이 전사임을 증명하기 위해 Lemma
+\ref{lemma-pullback-affine-fibres-surjective}의 증명과 정확히
+같이 논증하여 스킴의 경우로 귀착시키겠다.
+독자에게 이 증명을 건너뛰기를 권한다.
+
+\medskip\noindent
+$\beta \in \CH_{k + r - 1}(P)$라 하자.
+$\beta = \sum m_j[W_j]$라고 쓰자. 여기서 $m_j \not = 0$이고
+$W_j$들은 서로 다른, $\delta$-차원이 $k + r$인 정수적
+닫힌 부분공간들이다.
+% P10-E0107
+그러면 족 $\{W_j\}$는 $P$에서 국소 유한이다.
+$Z_j \subset X$를 Lemma \ref{lemma-proper-image}에서와 같은
+$W_j$의 “상”이라 하자. 임의의 준콤팩트 열린집합
+$U \subset X$에 대하여 $\pi^{-1}(U) \cap W_j$가 공집합이 아닌
+$j$는 유한 개뿐임을 알 수 있다. 따라서 상들 $Z_j$의 모음은
+$X$의 정수적 닫힌 부분공간들의 국소 유한 모음이다.
+
+\medskip\noindent
+섬유곱 그림
+$$
+\xymatrix{
+P_j \ar[r] \ar[d]_{\pi_j} & P \ar[d]^\pi \\
+Z_j \ar[r] & X
+}
+$$
+을 생각하자. 어떤 $(k + i)$-사이클
+$\alpha_{j, i} \in \CH_{k + i}(Z_j)$에 대하여
+$[W_j] \in Z_{k + r - 1}(P_j)$가
+$$
+\pi_j^*\alpha_{j, 0} +
+c_1(\mathcal{O}(1)) \cap \pi_j^*\alpha_{j, 1} +
+\ldots +
+c_1(\mathcal{O}(1))^{r - 1} \cap \pi_j^*\alpha_{j, r - 1}
+$$
+와 유리 동치라고 가정하자. 그러면
+$\alpha_i = \sum m_j \beta_{j, i}$는 $X$ 위의
+$(k + i)$-사이클이고,
+% P10-E0108
+$$
+\pi^*\alpha_0 +
+c_1(\mathcal{O}(1)) \cap \pi^*\alpha_1 +
+\ldots +
+c_1(\mathcal{O}(1))^{r - 1} \cap \pi^*\alpha_{r - 1}
+$$
+은 $\beta$와 유리 동치이다(Remark
+\ref{remark-infinite-sums-rational-equivalences}를 보라).
+이로써 $X$가 정수적이고, $\alpha = [W]$이며
+어떤 $P$의 정수적 닫힌 부분스킴이 $X$ 위에 우세한 경우로 귀착된다.
+% P10-E0109
+% P10-E0110
+특히 $d = \dim_\delta(X) < \infty$라고 가정해도 좋다.
+
+\medskip\noindent
+따라서 $d = \dim_\delta(X)$에 대한 귀납법을 사용할 수 있다.
+$d < k$이면 $\CH_{k + r - 1}(X) = 0$이므로 보조정리가 성립한다.
+% P10-E0111
+이것이 귀납법의 기초 단계이다. 공집합이 아닌 열린집합
+$U \subset X$를 생각하자. 어떤
+$\alpha_i \in Z_{k + i}(U)$에 대하여
+$$
+\beta|_{\pi^{-1}(U)} =
+\pi^*\alpha_0 +
+c_1(\mathcal{O}(1)) \cap \pi^*\alpha_1 +
+\ldots +
+c_1(\mathcal{O}(1))^{r - 1} \cap \pi^*\alpha_{r - 1}
+$$
+임을 보일 수 있다고 하자. Lemma \ref{lemma-exact-sequence-open}에 의해
+어떤 $\alpha'_i \in Z_{k + i}(X)$에 대하여
+$\alpha_i = \alpha'_i|_U$임을 알 수 있다.
+Lemma \ref{lemma-restrict-to-open}의 완전열들
+$\CH_{k + i}(\pi^{-1}(X \setminus U)) \to \CH_{k + i}(P) \to
+\CH_{k + i}(\pi^{-1}(U))$에 의해
+% P10-E0112
+$$
+\beta -
+\left(\pi^*\alpha'_0 +
+c_1(\mathcal{O}(1)) \cap \pi^*\alpha'_1 +
+\ldots +
+c_1(\mathcal{O}(1))^{r - 1} \cap \pi^*\alpha'_{r - 1}\right)
+$$
+은 어떤 사이클 $\beta' \in \CH_{k + r}(\pi^{-1}(X \setminus U))$에서
+온다는 것을 알 수 있다.
+% P10-E0113
+$\dim_\delta(X \setminus U) < d$이므로 $d$에 대한 귀납법으로 결론을 얻는다.
+
+\medskip\noindent
+특히 $X$를 적당한 열린집합으로 바꾸어 $X$가 스킴이라고
+가정해도 좋고, 문제는 Chow Homology, Lemma
+\ref{chow-lemma-chow-ring-projective-bundle}으로 귀착된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-vectorbundle}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$를 $X$ 위의 계수가 $r$인 유한 국소 자유 층이라 하자.
+$X$ 위의 결부된 벡터 다발을
+$$
+p :
+E = \underline{\Spec}(\text{Sym}^*(\mathcal{E}))
+\longrightarrow
+X
+$$
+라 하자. 그러면 모든 $k$에 대하여
+$p^* : \CH_k(X) \to \CH_{k + r}(E)$는 동형이다.
+\end{lemma}
+
+\begin{proof}
+(선다발의 경우에는 Lemma \ref{lemma-linebundle}을 보라.)
+% P10-E0599
+전사성은 Lemma \ref{lemma-pullback-affine-fibres-surjective}를 보라.
+$(\pi  : P \to X, \mathcal{O}_P(1))$를 유한 국소 자유 층
+$\mathcal{E} \oplus \mathcal{O}_X$에 결부된 사영공간 다발이라 하자.
+$s \in \Gamma(P, \mathcal{O}_P(1))$를 대역 단면
+$(0, 1) \in \Gamma(X, \mathcal{E} \oplus \mathcal{O}_X)$에 대응하는
+단면이라 하자. $D = Z(s) \subset P$로 두자.
+$(\pi|_D : D \to X , \mathcal{O}_P(1)|_D)$가
+$\mathcal{E}$에 결부된 사영공간 다발임을 유의하라.
+$\pi_D = \pi|_D$ 및
+$\mathcal{O}_D(1) = \mathcal{O}_P(1)|_D$로 나타내자.
+더 나아가 $D$는 $P$ 위의 유효 Cartier 인자이다. 따라서
+$\mathcal{O}_P(D) = \mathcal{O}_P(1)$이다(Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-characterize-OD}를 보라).
+또한 동형 $E \cong P \setminus D$가 있다.
+$j : E \to P$로 대응하는 열린 몰입을 나타내자.
+단사성을 위해
+$$
+j^* :
+\CH_{k + r}(P)
+\longrightarrow
+\CH_{k + r}(E)
+$$
+의 핵은 유효 Cartier 인자 $D$에 지지된 사이클들이라는 사실을
+사용한다. Lemma \ref{lemma-restrict-to-open}을 보라.
+% P10-E0600
+따라서 $p^*\alpha = 0$이면 어떤
+$\beta \in \CH_{k + r}(D)$에 대하여
+$\pi^*\alpha = i_*\beta$이다.
+% P10-E0114
+Lemma \ref{lemma-chow-ring-projective-bundle}에 의해
+$$
+\beta = \pi_D^*\beta_0 +
+\ldots + c_1(\mathcal{O}_D(1))^{r - 1} \cap \pi_D^* \beta_{r - 1}.
+$$
+라고 쓸 수 있다. 여기서 어떤
+$\beta_i \in \CH_{k + i}(X)$들이 존재한다.
+% P10-E0115
+% P10-E0601
+Lemmas \ref{lemma-relative-effective-cartier}
+and \ref{lemma-pushforward-cap-c1}에 의해 이는
+$$
+\pi^*\alpha = i_*\beta =
+c_1(\mathcal{O}_P(1)) \cap \pi^*\beta_0 +
+\ldots +
+c_1(\mathcal{O}_D(1))^r \cap \pi^*\beta_{r - 1}.
+$$
+를 함의한다.
+% P10-E0116
+$\mathcal{E} \oplus \mathcal{O}_X$의 계수는 $r + 1$이므로,
+모든 $\alpha$와 모든 $\beta_i$가 영이지 않으면 이는 Lemma
+\ref{lemma-pushforward-cap-c1}와 모순이다.
+% P10-E0117
+% P10-E0602
+\end{proof}
+
+\section{벡터 다발의 Chern 특성류}
+\label{section-chern-classes-vector-bundles}
+
+\noindent
+이 절은 Chow Homology, Sections
+\ref{chow-section-chern-classes-vector-bundles} and
+\ref{chow-section-intersecting-chern-classes}에 해당한다.
+그러나 그곳에서 한 것과 달리, 우리는 벡터 다발의 Chern 특성류를
+쌍변류로 직접 정의한다. 이로써 상당한 작업을 줄일 수 있다.
+
+\begin{lemma}
+\label{lemma-segre-classes}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$를 $X$ 위의 계수가 $r$인 유한 국소 자유 층이라 하자.
+$(\pi : P \to X, \mathcal{O}_P(1))$를 $\mathcal{E}$에 결부된
+사영공간 다발이라 하자. $B$ 위의 좋은 대수 공간들의 모든 사상
+$X' \to X$에 대하여 유일한 사상들
+$$
+c_i(\mathcal{E}) \cap - : \CH_k(X') \longrightarrow \CH_{k - i}(X'),\quad
+i = 0, \ldots, r
+$$
+이 존재하며, $\alpha \in \CH_k(X')$에 대하여
+$c_0(\mathcal{E}) \cap \alpha = \alpha$이고
+$$
+\sum\nolimits_{i = 0, \ldots, r}
+(-1)^i c_1(\mathcal{O}_{P'}(1))^i \cap
+(\pi')^*\left(c_{r - i}(\mathcal{E}) \cap \alpha\right) = 0
+$$
+이다.
+% P10-E0118
+여기서 $\pi' : P' \to X'$는 $\pi$의 밑변환이다.
+더 나아가 이 사상들은 $X$ 위의 차수 $i$인 쌍변류
+$c_i(\mathcal{E})$를 정의한다.
+\end{lemma}
+
+\begin{proof}
+사상들 $c_i(\mathcal{E}) \cap -$의 유일성과 존재성은 Lemma
+\ref{lemma-chow-ring-projective-bundle}과 주어진
+$c_0(\mathcal{E})$의 기술에서 즉시 따른다.
+% P10-E0122
+모든 $i \in \mathbf{Z}$에 대하여, $B$ 위의 좋은 대수 공간들의
+각 사상 $X' \to X$에 사상
+$$
+t_i(\mathcal{E}) \cap - :
+\CH_k(X') \longrightarrow \CH_{k - i}(X'),\quad
+\alpha \longmapsto
+\pi'_*(c_1(\mathcal{O}_{P'}(1))^{r - 1 + i} \cap (\pi')^*\alpha)
+$$
+을 대응시키는 규칙은 Lemmas \ref{lemma-cap-c1-bivariant},
+\ref{lemma-flat-pullback-bivariant}, and
+\ref{lemma-push-proper-bivariant}에 의해 쌍변류이다
+\footnote{부호를 제외하면 이것들은 $\mathcal{E}$의 Segre 특성류이다.}.
+% P10-E0119
+Lemma \ref{lemma-cap-projective-bundle}에 의해
+$i < 0$이면 $t_i(\mathcal{E}) = 0$이고 $t_0(\mathcal{E}) = 1$이다.
+보조정리의 명제에 있는 등식에 푸시포워드를 적용하면
+Lemma \ref{lemma-cap-projective-bundle}에서
+$$
+(-1)^r t_1(\mathcal{E}) + (-1)^{r - 1}c_1(\mathcal{E}) = 0
+$$
+을 얻는다. 특히 $c_1(\mathcal{E})$가 쌍변류임을 알 수 있다.
+보조정리의 명제에 있는 등식에
+$c_1(\mathcal{O}_{P'}(1))$을 곱하고 그 결과를 $X'$로
+푸시포워드하면
+$$
+(-1)^r t_2(\mathcal{E}) +
+(-1)^{r - 1} t_1(\mathcal{E}) \cap c_1(\mathcal{E}) +
+(-1)^{r - 2} c_2(\mathcal{E}) = 0
+$$
+을 얻는다. 앞에서와 같이 $c_2(\mathcal{E})$가 쌍변류라고
+결론 내린다. 이와 같이 계속한다.
+\end{proof}
+
+\begin{definition}
+\label{definition-chern-classes}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$를 $X$ 위의 계수가 $r$인 유한 국소 자유 층이라 하자.
+$i = 0, \ldots, r$에 대하여 {\it $\mathcal{E}$의 $i$번째 Chern 특성류}는
+Lemma \ref{lemma-segre-classes}에서 구성한 차수 $i$의 쌍변류
+$c_i(\mathcal{E}) \in A^i(X)$이다.
+{\it $\mathcal{E}$의 전체 Chern 특성류}는 형식적 합
+$$
+c(\mathcal{E}) =
+c_0(\mathcal{E}) + c_1(\mathcal{E}) + \ldots + c_r(\mathcal{E})
+$$
+이며, 이를 $X$ 위의 비동차 쌍변류로 본다.
+\end{definition}
+
+\noindent
+편의를 위해 종종 $i > r$ 및 $i < 0$에 대하여
+$c_i(\mathcal{E}) = 0$으로 둔다. 정의에 의해
+$c_0(\mathcal{E}) = 1 \in A^0(X)$이다.
+다음은 타당성 확인이다.
+
+\begin{lemma}
+\label{lemma-first-chern-class}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+Definition \ref{definition-chern-classes}의 $X$ 위
+$\mathcal{L}$의 제1 Chern 특성류는 Lemma
+\ref{lemma-cap-c1-bivariant}의 쌍변류와 같다.
+\end{lemma}
+
+\begin{proof}
+실제로 이 경우, 사영 다발의 규격화에 의해
+$P = \mathbf{P}(\mathcal{L}) = X$이고
+$\mathcal{O}_P(1) = \mathcal{L}$이다. Section
+\ref{section-projective-space-bundle-formula}을 보라.
+따라서 Lemma \ref{lemma-segre-classes}의 등식은
+$$
+(-1)^0 c_1(\mathcal{L})^0 \cap c^{new}_1(\mathcal{L}) \cap \alpha +
+(-1)^1 c_1(\mathcal{L})^1 \cap c^{new}_0(\mathcal{L}) \cap \alpha = 0
+$$
+이 된다. 여기서 $c_i^{new}(\mathcal{L})$은 Definition
+\ref{definition-chern-classes}에서와 같다.
+$c_0^{new}(\mathcal{L}) = 1$이고 $c_1(\mathcal{L})^0 = 1$이므로
+결론을 얻는다.
+\end{proof}
+
+\noindent
+다음으로 Chern 특성류들이 쌍변 Chow 코호몰로지 환
+$A^*(X)$의 중심에 놓임을 보인다.
+
+\begin{lemma}
+\label{lemma-cap-commutative-chern}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$를 계수가 $r$인 국소 자유 $\mathcal{O}_X$-가군이라 하자.
+그러면 $c_j(\mathcal{L}) \in A^j(X)$는 모든 원소
+$c \in A^p(X)$와 가환한다.
+% P10-E0120
+특히 $\mathcal{F}$가 $X$ 위의 계수가 $s$인 두 번째 국소 자유
+$\mathcal{O}_X$-가군이면, 모든 $\alpha \in \CH_k(X)$에 대하여
+$$
+c_i(\mathcal{E}) \cap c_j(\mathcal{F}) \cap \alpha
+=
+c_j(\mathcal{F}) \cap c_i(\mathcal{E}) \cap \alpha
+$$
+가 $\CH_{k - i - j}(X)$의 원소로서 성립한다.
+\end{lemma}
+
+\begin{proof}
+$X' \to X$를 $B$ 위의 좋은 대수 공간들의 사상이라 하자.
+$\alpha \in \CH_k(X')$라 하자.
+$\alpha_j = c_j(\mathcal{E}) \cap \alpha$라고 쓰면
+$\alpha_0 = \alpha$이다. Lemma \ref{lemma-segre-classes}에 의해
+$$
+\sum\nolimits_{i = 0}^r
+(-1)^i c_1(\mathcal{O}_{P'}(1))^i \cap
+(\pi')^*(\alpha_{r - i}) = 0
+$$
+이 $(X' \to X)^*\mathcal{E}$에 결부된 사영 다발
+$(\pi' : P' \to X', \mathcal{O}_{P'}(1))$의 Chow 군에서 성립한다.
+$c \cap -$를 적용하고 Lemma \ref{lemma-c1-center}와 쌍변류의
+성질을 사용하면
+$$
+\sum\nolimits_{i = 0}^r
+(-1)^i c_1(\mathcal{O}_{P'}(1))^i \cap
+\pi^*(c \cap \alpha_{r - i}) = 0
+$$
+을 $P'$의 Chow 군에서 얻는다.
+% P10-E0121
+따라서 Lemma \ref{lemma-segre-classes}의 유일성에 의해
+$c \cap \alpha_j$는 $c_j(\mathcal{E}) \cap (c \cap \alpha)$와 같다.
+이는 보조정리를 증명한다.
+\end{proof}
+
+\begin{remark}
+\label{remark-extend-to-finite-locally-free}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$를 유한 국소 자유 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{E}$의 계수가 상수이지 않아도 $\mathcal{E}$의 Chern
+특성류들을 정의할 수 있다. 실제로 이 경우
+$$
+X = X_0 \amalg X_1 \amalg X_2 \amalg \ldots
+$$
+라고 쓸 수 있다. 여기서 $X_r \subset X$는
+$\mathcal{E}$의 계수가 $r$인 열린닫힌 부분공간이다.
+$X' \to X$가 $B$ 위의 좋은 대수 공간들의 사상이면, 풀백에 의해
+$X'$의 대응하는 분해를 얻고, 우리의 정의에 의해
+$$
+\CH_*(X') = \prod\nolimits_{r \geq 0} \CH_*(X'_r)
+$$
+임을 알 수 있다. 그러면 $c_i(\mathcal{E})$를 이 직적 분해들을
+보존하고 각 인자에서 이미 정의된 연산
+$c_i(\mathcal{E}|_{X_r}) \cap -$로 작용하는 쌍변류로 정의한다.
+이 설정에서는 무한히 많은 $i$에 대하여
+$c_i(\mathcal{E})$가 영이 아닐 수도 있음을 관찰하라.
+\end{remark}
+
+\section{Chern 특성류들 사이의 다항식 관계}
+\label{section-relations-chern-classes}
+
+\noindent
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}_i$를 유한 국소 자유 $\mathcal{O}_X$-가군들의
+유한 모음이라 하자. Lemma \ref{lemma-cap-commutative-chern}에 의해
+Chern 특성류들
+$$
+c_j(\mathcal{E}_i) \in A^*(X)
+$$
+은 Chow 코호몰로지 $A^*(X)$의 가환(더 나아가 중심적인)
+$\mathbf{Z}$-부분대수를 생성함을 알 수 있다.
+따라서 이 Chern 특성류들의 다항식이 영이라는 것과 두 다항식이
+같다는 것이 무엇을 뜻하는지 말할 수 있다. 예를 들어
+$c_1(\mathcal{E}_1)^5 + c_2(\mathcal{E}_2)c_3(\mathcal{E}_3) = 0$이라고
+말하는 것은 $B$ 위의 좋은 대수 공간들의 모든 사상
+$f : Y \to X$에 대하여 연산들
+$$
+\CH_k(Y) \longrightarrow \CH_{k - 5}(Y), \quad
+\alpha \longmapsto
+c_1(\mathcal{E}_1)^5 \cap \alpha +
+c_2(\mathcal{E}_2) \cap c_3(\mathcal{E}_3) \cap \alpha
+$$
+이 영이라는 뜻이다. Lemma \ref{lemma-bivariant-zero}에 의해 이는
+$Y$가 $X$ 위에서 국소 유한형인 정수적 대수 공간인 임의의 사상
+$f : Y \to X$가 주어졌을 때 사이클
+$$
+c_1(\mathcal{E}_1)^5 \cap [Y] +
+c_2(\mathcal{E}_2) \cap c_3(\mathcal{E}_3) \cap [Y]
+$$
+이 $\CH_{\dim(Y) - 5}(Y)$에서 영이어야 한다는 조건과 동치이다.
+% P10-E0123
+
+\medskip\noindent
+구체적인 예는 Lemma \ref{lemma-c1-cap-additive}에서 증명된 관계
+$$
+c_1(\mathcal{L} \otimes_{\mathcal{O}_X} \mathcal{N})
+=
+c_1(\mathcal{L}) + c_1(\mathcal{N})
+$$
+이다. 더 일반적으로 임의의 국소 자유 층에 가역 층을 텐서곱하면
+다음과 같은 일이 일어난다.
+
+\begin{lemma}
+\label{lemma-chern-classes-E-tensor-L}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$를 $X$ 위의 계수가 $r$인 유한 국소 자유 층이라 하자.
+$\mathcal{L}$을 $X$ 위의 가역 층이라 하자. 그러면
+\begin{equation}
+\label{equation-twist}
+c_i({\mathcal E} \otimes {\mathcal L})
+=
+\sum\nolimits_{j = 0}^i
+\binom{r - i + j}{j} c_{i - j}({\mathcal E}) c_1({\mathcal L})^j
+\end{equation}
+가 $A^*(X)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+증명은 Chow Homology, Lemma
+\ref{chow-lemma-chern-classes-E-tensor-L}의 증명에서 그곳에 사용된
+보조정리들을 Lemmas \ref{lemma-bivariant-zero} and
+\ref{lemma-segre-classes}로 바꾸면 완전히 같다.
+\end{proof}
+
+\section{Chern 특성류의 가법성}
+\label{section-additivity-chern-classes}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-additivity-chern-classes}에 해당한다.
+
+\begin{lemma}
+\label{lemma-get-rid-of-trivial-subbundle}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$와 $\mathcal{F}$를 각각 계수가 $r$, $r - 1$이고
+짧은 완전열
+$$
+0 \to \mathcal{O}_X \to \mathcal{E} \to \mathcal{F} \to 0
+$$
+에 놓이는 $X$ 위의 유한 국소 자유 층들이라 하자. 그러면
+$$
+c_r(\mathcal{E}) = 0, \quad
+c_j(\mathcal{E}) = c_j(\mathcal{F}), \quad j = 0, \ldots, r - 1
+$$
+가 $A^*(X)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+증명은 Chow Homology, Lemma
+\ref{chow-lemma-get-rid-of-trivial-subbundle}의 증명에서 그곳에
+사용된 보조정리들을 Lemmas
+\ref{lemma-bivariant-zero},
+\ref{lemma-relative-effective-cartier},
+\ref{lemma-pushforward-cap-c1}, and
+\ref{lemma-segre-classes}로 바꾸면 완전히 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-additivity-invertible-subsheaf}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$와 $\mathcal{F}$를 각각 계수가 $r$, $r - 1$이고
+짧은 완전열
+$$
+0 \to \mathcal{L} \to \mathcal{E} \to \mathcal{F} \to 0
+$$
+에 놓이는 $X$ 위의 유한 국소 자유 층들이라 하자.
+여기서 $\mathcal{L}$은 가역 층이다. 그러면
+$$
+c(\mathcal{E}) = c(\mathcal{L}) c(\mathcal{F})
+$$
+가 $A^*(X)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+증명은 Chow Homology, Lemma
+\ref{chow-lemma-additivity-invertible-subsheaf}의 증명에서 그곳에
+사용된 보조정리들을 Lemmas
+\ref{lemma-get-rid-of-trivial-subbundle} and
+\ref{lemma-chern-classes-E-tensor-L}로 바꾸면 완전히 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-additivity-chern-classes}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$가 완전열
+$$
+0
+\to
+\mathcal{E}_1
+\to
+\mathcal{E}
+\to
+\mathcal{E}_2
+\to
+0
+$$
+에 놓인다고 가정하자. 여기서 $\mathcal{E}_i$는 계수가 $r_i$인
+유한 국소 자유 층들이다. 전체 Chern 특성류들은
+$$
+c(\mathcal{E}) = c(\mathcal{E}_1) c(\mathcal{E}_2)
+$$
+를 $A^*(X)$에서 만족한다.
+\end{lemma}
+
+\begin{proof}
+증명은 Chow Homology, Lemma
+\ref{chow-lemma-additivity-chern-classes}의 증명에서 그곳에 사용된
+보조정리들을 Lemmas
+\ref{lemma-bivariant-zero},
+\ref{lemma-additivity-invertible-subsheaf}, and
+\ref{lemma-segre-classes}로 바꾸면 완전히 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-chern-filter-by-linebundles}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+${\mathcal L}_i$, $i = 1, \ldots, r$를 가역
+$\mathcal{O}_X$-가군들이라 하자.
+$\mathcal{E}$를 여과
+$$
+0 = \mathcal{E}_0 \subset \mathcal{E}_1 \subset \mathcal{E}_2
+\subset \ldots \subset \mathcal{E}_r = \mathcal{E}
+$$
+가 주어진 국소 자유 계수 $\mathcal{O}_X$-가군이라 하자.
+% P10-E0124
+$\mathcal{E}_i/\mathcal{E}_{i - 1} \cong \mathcal{L}_i$라고 가정하자.
+$c_1({\mathcal L}_i) = x_i$로 두자. 그러면
+$$
+c(\mathcal{E})
+=
+\prod\nolimits_{i = 1}^r (1 + x_i)
+$$
+가 $A^*(X)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-additivity-invertible-subsheaf}와 귀납법을 적용하라.
+\end{proof}
+
+\section{분할 원리}
+\label{section-splitting-principle}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-additivity-chern-classes}에 해당한다.
+
+\begin{lemma}
+\label{lemma-splitting-principle}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}_i$를 계수가 $r_i$인 국소 자유
+$\mathcal{O}_X$-가군들의 유한 모음이라 하자.
+다음을 만족하는 상대차원이 $d$인 사영 평탄 사상
+$\pi : P \to X$가 존재한다.
+\begin{enumerate}
+\item $B$ 위의 좋은 대수 공간들의 임의의 사상
+$f : Y \to X$에 대하여 사상
+$\pi_Y^* : \CH_*(Y) \to \CH_{* + d}(Y \times_X P)$는 단사이고,
+\item 각 $\pi^*\mathcal{E}_i$에는 연속 몫들
+$\mathcal{L}_{i, 1}, \ldots, \mathcal{L}_{i, r_i}$가 가역
+${\mathcal O}_P$-가군인 여과가 있다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+정수 $r = \sum r_i$에 대한 귀납법으로 증명한다.
+$r = 0$이면 $\pi = \text{id}_X$로 취할 수 있다.
+모든 $i$에 대하여 $r_i = 1$이면 역시
+$\pi = \text{id}_X$로 취할 수 있다.
+어떤 $i_0$에 대하여 $r_{i_0} > 1$이라고 가정하자.
+$(\pi : P \to X, \mathcal{O}_P(1))$를
+$\mathcal{E}_{i_0}$에 결부된 사영 다발이라 하자.
+표준 사상 $\pi^*\mathcal{E}_{i_0} \to \mathcal{O}_P(1)$은
+전사이므로 그 핵 $\mathcal{E}'_{i_0}$은 계수가
+$r_{i_0} - 1$인 유한 국소 자유 가군이다.
+$B$ 위의 좋은 대수 공간들의 임의의 사상
+$f : Y \to X$에 대하여 $\pi_Y^*$가 단사임을 관찰하라.
+Lemma \ref{lemma-chow-ring-projective-bundle}을 보라.
+따라서 $P$와 국소 자유 층들 $\pi^*\mathcal{E}_i$에 대하여
+보조정리를 증명하면 충분하다. 그러나 가역 몫을 갖는 부분다발
+$\mathcal{E}_{i_0} \subset \pi^*\mathcal{E}_{i_0}$이 있으므로,
+이제 모음
+$\{\mathcal{E}_i\}_{i \not = i_0} \cup \{\mathcal{E}'_{i_0}\}$에
+대하여 보조정리를 증명하면 충분하다.
+% P10-E0125
+이는 $r$을 $1$만큼 감소시키므로 귀납 가정으로 결론을 얻는다.
+\end{proof}
+
+\noindent
+분할 원리가 무엇을 말하는지 설명하는 대신, 몇몇 보조정리의 증명에서
+이를 사용해 보자.
+
+\begin{lemma}
+\label{lemma-chern-classes-dual}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$를 쌍대 $\mathcal{E}^\vee$를 갖는 유한 국소 자유
+$\mathcal{O}_X$-가군이라 하자. 그러면
+$$
+c_i(\mathcal{E}^\vee) = (-1)^i c_i(\mathcal{E})
+$$
+가 $A^i(X)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-splitting-principle}에서와 같은 사상
+$\pi : P \to X$를 택하자. (임의의 밑변환 뒤에도)
+$\pi^*$가 단사이므로, $P$로 풀백한 뒤
+$\mathcal{E}$와 $\mathcal{E}^\vee$의 Chern 특성류들 사이의
+관계를 증명하면 충분하다. 따라서 가역 $\mathcal{O}_X$-가군들
+${\mathcal L}_i$, $i = 1, \ldots, r$와 여과
+$$
+0 = \mathcal{E}_0 \subset \mathcal{E}_1 \subset \mathcal{E}_2
+\subset \ldots \subset \mathcal{E}_r = \mathcal{E}
+$$
+가 존재하여
+$\mathcal{E}_i/\mathcal{E}_{i - 1} \cong \mathcal{L}_i$라고
+가정해도 좋다. 그러면 연속 몫들이
+$\mathcal{E}_{i - 1}^\perp/\mathcal{E}_i^\perp \cong
+\mathcal{L}_i^{\otimes -1}$인 쌍대 여과
+$$
+0 = \mathcal{E}_r^\perp \subset \mathcal{E}_1^\perp \subset \mathcal{E}_2^\perp
+\subset \ldots \subset \mathcal{E}_0^\perp = \mathcal{E}^\vee
+$$
+를 얻는다.
+% P10-E0126
+$x_i = c_1(\mathcal{L}_i)$로 두자.
+Lemma \ref{lemma-c1-cap-additive}에 의해
+$c_1(\mathcal{L}_i^{\otimes -1}) = - x_i$이다.
+Lemma \ref{lemma-chern-filter-by-linebundles}에 의해
+$$
+c(\mathcal{E}) = \prod\nolimits_{i = 1}^r (1 + x_i)
+\quad\text{and}\quad
+c(\mathcal{E}^\vee) = \prod\nolimits_{i = 1}^r (1 - x_i)
+$$
+가 $A^*(X)$에서 성립한다. 결과는 생략하는 형식적 계산에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-chern-classes-tensor-product}
+Situation \ref{situation-setup}에서 $X/B$가 좋다고 하자.
+$\mathcal{E}$와 $\mathcal{F}$를 각각 계수가 $r$ 및 $s$인 유한 국소 자유
+$\mathcal{O}_X$-가군들이라 하자.
+% P10-E0127
+그러면
+$$
+c_1(\mathcal{E} \otimes \mathcal{F})
+=
+r c_1(\mathcal{F}) + s c_1(\mathcal{E})
+$$
+이고,
+$$
+c_2(\mathcal{E} \otimes \mathcal{F})
+=
+r^2 c_2(\mathcal{F}) +
+rs c_1(\mathcal{F})c_1(\mathcal{E}) +
+s^2 c_2(\mathcal{E})
+$$
+이며, 이와 같이 계속된다(증명을 보라).
+% P10-E0128
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-chern-classes-dual}의 증명에서와 정확히 같이 논증하여,
+가역 $\mathcal{O}_X$-가군들
+${\mathcal L}_i$, $i = 1, \ldots, r$,
+${\mathcal N}_i$, $i = 1, \ldots, s$와 여과들이 있다고
+가정해도 좋다.
+% P10-E0603
+% P10-E0604
+$$
+0 = \mathcal{E}_0 \subset \mathcal{E}_1 \subset \mathcal{E}_2
+\subset \ldots \subset \mathcal{E}_r = \mathcal{E}
+\quad\text{and}\quad
+0 = \mathcal{F}_0 \subset \mathcal{F}_1 \subset \mathcal{F}_2
+\subset \ldots \subset \mathcal{F}_s = \mathcal{F}
+$$
+이고
+$\mathcal{E}_i/\mathcal{E}_{i - 1} \cong \mathcal{L}_i$이며
+$\mathcal{F}_j/\mathcal{F}_{j - 1} \cong \mathcal{N}_j$라고
+가정한다. 쌍 $(i, j)$들을 사전식으로 순서 매기면 여과
+$$
+0 \subset \ldots \subset
+\mathcal{E}_i \otimes \mathcal{F}_j
++
+\mathcal{E}_{i - 1} \otimes \mathcal{F}
+\subset \ldots \subset \mathcal{E} \otimes \mathcal{F}
+$$
+를 얻으며, 그 연속 몫들은
+$$
+\mathcal{L}_1 \otimes \mathcal{N}_1,
+\mathcal{L}_1 \otimes \mathcal{N}_2,
+\ldots,
+\mathcal{L}_1 \otimes \mathcal{N}_s,
+\mathcal{L}_2 \otimes \mathcal{N}_1,
+\ldots,
+\mathcal{L}_r \otimes \mathcal{N}_s
+$$
+이다. Lemma \ref{lemma-chern-filter-by-linebundles}에 의해
+$$
+c(\mathcal{E}) = \prod (1 + x_i),
+\quad
+c(\mathcal{F}) = \prod (1 + y_j),
+\quad\text{and}\quad
+c(\mathcal{F}) = \prod (1 + x_i + y_j),
+$$
+가 $A^*(X)$에서 성립한다.
+% P10-E0129
+결과는 생략하는 형식적 계산에서 따른다.
+\end{proof}
+
+\section{영차원 사이클의 차수}
+\label{section-degree-zero-cycles}
+
+\noindent
+이 절은 Chow Homology, Section
+\ref{chow-section-degree-zero-cycles}에 해당한다.
+체 위의 고유 대수 공간에서 영차원 사이클의 차수를 정의하는 것으로 시작한다.
+
+\begin{definition}
+\label{definition-degree-zero-cycle}
+$k$를 체라 하자. $p : X \to \Spec(k)$를 대수 공간들의 고유 사상이라 하자.
+$X$ 위의 {\it 영차원 사이클의 차수}는 Lemma
+\ref{lemma-proper-pushforward-rational-equivalence}의 고유 푸시포워드
+$$
+p_* : \CH_0(X) \longrightarrow \CH_0(\Spec(k)) \longrightarrow \mathbf{Z}
+$$
+와 $[\Spec(k)]$를 $1$로 보내는 자연 동형
+$\CH_0(\Spec(k)) \to \mathbf{Z}$의 합성으로 주어진다.
+표기: $\deg(\alpha)$.
+\end{definition}
+
+\noindent
+이를 더 자세히 풀어 쓰자.
+
+\begin{lemma}
+\label{lemma-spell-out-degree-zero-cycle}
+$k$를 체라 하자. $X$를 $k$ 위의 고유 대수 공간이라 하자.
+$\alpha = \sum n_i[Z_i]$가 $Z_0(X)$에 속한다고 하자. 그러면
+$$
+\deg(\alpha) = \sum n_i\deg(Z_i)
+$$
+이다. 여기서 $\deg(Z_i)$는 $Z_i \to \Spec(k)$의 차수, 즉
+$\deg(Z_i) = \dim_k \Gamma(Z_i, \mathcal{O}_{Z_i})$이다.
+\end{lemma}
+
+\begin{proof}
+이는 고유 푸시포워드의 정의이다
+(Definition \ref{definition-proper-pushforward}).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-degrees-and-numerical-intersections}
+$k$를 체라 하자. $X$를 $k$ 위의 고유 대수 공간이라 하자.
+$Z \subset X$를 차원이 $d$인 닫힌 부분공간이라 하자.
+$\mathcal{L}_1, \ldots, \mathcal{L}_d$를 가역
+$\mathcal{O}_X$-가군들이라 하자. 그러면
+$$
+(\mathcal{L}_1 \cdots \mathcal{L}_d \cdot Z) =
+\deg(
+c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_1) \cap [Z]_d)
+$$
+이다.
+% P10-E0130
+여기서 좌변은 Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-intersection-number}에서 정의된다.
+\end{lemma}
+
+\begin{proof}
+$Z_i \subset Z$, $i = 1, \ldots, t$를 차원이 $d$인 기약 성분들이라 하자.
+$m_i$를 $Z$에서 $Z_i$의 중복도라 하자. 그러면
+$[Z]_d = \sum m_i[Z_i]$이고
+$c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_d) \cap [Z]_d$는
+사이클들
+$m_i c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_d) \cap [Z_i]$의
+합이다. Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-numerical-polynomial-leading-term}에 의해
+$(\mathcal{L}_1 \cdots \mathcal{L}_d \cdot Z)$에도 비슷한 분해가
+있으므로, $Z = X$가 $k$ 위의 고유 정수적 대수 공간인 경우에
+보조정리를 증명하면 충분하다.
+
+\medskip\noindent
+Chow의 보조정리에 의해 조밀한 열린집합 $U \subset X$ 위에서
+동형이고 $X'$가 스킴인 고유 사상 $f : X' \to X$가 존재한다.
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-chow-noetherian-separated}을 보라.
+그러면 $X'$는 $k$ 위의 고유 스킴이다. $X'$를
+$f^{-1}(U)$의 스킴론적 폐포로 바꾸어 $X'$가 정수적이라고
+가정해도 좋다. 그러면 Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-intersection-number-and-pullback}에 의해
+$$
+(f^*\mathcal{L}_1 \cdots f^*\mathcal{L}_d \cdot X') =
+(\mathcal{L}_1 \cdots \mathcal{L}_d \cdot X)
+$$
+이고, Lemma \ref{lemma-pushforward-cap-c1}에 의해
+$$
+f_*(c_1(f^*\mathcal{L}_1) \cap \ldots \cap c_1(f^*\mathcal{L}_d) \cap [Y]) =
+c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_d) \cap [X]
+$$
+이다.
+% P10-E0131
+따라서 $X$를 $X'$로 바꾸어 $X$가 $k$ 위의 고유 스킴이라고
+가정해도 좋다. 이 경우는 Chow Homology, Lemma
+\ref{chow-lemma-degrees-and-numerical-intersections}에서 증명되었다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}
