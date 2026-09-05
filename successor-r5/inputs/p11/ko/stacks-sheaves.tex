@@ -1,0 +1,4780 @@
+\input{ko_preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{대수 스택 위의 층}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+대수 스택 위의 층을 생각하는 방법은 매우 다양하다.
+이 장에서는 대수 스택의 기초에 특히 잘 맞는 한 가지 접근법을 논의한다.
+층의 한 유형을 도입할 때마다 문헌의 유사한 개념과의 정확한 관계를
+명시한다.
+이 장의 목표는 명백히 참이거나 증명하기 쉬운 결과를 서술하고,
+더 복잡한 구성은 뒤로 미루는 것이다.
+
+\medskip\noindent
+실제로 구성가능 \'etale 층의 완전한 이론을 전개하거나,
+코호몰로지 층이 준연접인 $\mathcal{O}$-가군 복합체의 유도 범주를
+충분히 논의하려면 상당한 작업이 필요하다. \cite{olsson_sheaves}를
+보라. 이 문제는 스택의 코호몰로지, 절
+\ref{stacks-cohomology-section-introduction}에서 다시 다룬다.
+
+\medskip\noindent
+대수 스택 위의 층에 관한 문헌과 연구 논문에서는 대수 스택의
+lisse-\'etale 자리가 자주 중요한 역할을 한다. 그러나 대수 스택의
+사상이 lisse-\'etale 토포스의 사상을 유도하지 않는다는 점에서
+문제가 있다. 따라서 가능한 한 오래 lisse-\'etale 자리를 언급하지
+않기로 결정했다. 전통적으로 lisse-\'etale 자리를 사용하는 논증은
+아래에서 정의하는 자리 $\mathcal{X}_{smooth}$에서의 {\v C}ech
+피복을 사용하는 논증으로 대체한다.
+
+\medskip\noindent
+이 장의 표기, 규약 및 용어 중 일부는 어색하고 경험 많은 독자에게는
+거꾸로 보일 수 있다. 이는 의도된 것이다. 설명은 Quot, 절
+\ref{quot-section-conventions}을 보라.
+
+
+
+
+\section{규약}
+\label{section-conventions}
+
+\noindent
+이 장에서 사용하는 규약은 대수 스택 장의 규약과 같다. 대수 스택,
+절 \ref{algebraic-section-conventions}을 보라.
+편의를 위해 여기서 반복한다.
+
+\medskip\noindent
+위상, 정의 \ref{topologies-definition-big-fppf-site}에서와 같이
+적절한 큰 fppf 자리 $\Sch_{fppf}$에서 작업한다. 따라서 명시적으로
+달리 말하지 않는 한 모든 스킴은 $\Sch_{fppf}$의 대상이다. 큰 fppf
+자리를 바꿀 때 무엇이 달라지는지는 다른 곳에서 기록한다(향후
+참조를 삽입할 것).
+
+\medskip\noindent
+항상 $\Sch_{fppf}$에 들어 있는 바탕 $S$에 상대하여 작업한다.
+그리고 큰 fppf 자리 $(\Sch/S)_{fppf}$에서 작업한다. 위상, 정의
+\ref{topologies-definition-big-small-fppf}를 보라.
+절대적인 경우는 $S = \Spec(\mathbf{Z})$로 두어 얻을 수 있다.
+
+
+
+
+
+\section{프리시프}
+\label{section-presheaves}
+
+\noindent
+이 절에서는 $(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주 위에서 프리시프를 정의한다.
+논의의 대부분은 임의의 기저 범주 위의 범주에도 적용된다.
+또한 이 절은 뒤에서 사용할 표기를 도입한다.
+
+\begin{definition}
+\label{definition-presheaves}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$가 군들로 섬유화된 범주라고 하자.
+\begin{enumerate}
+\item $\mathcal{X}$ 위의 {\it 프리시프}란 $\mathcal{X}$의 바탕 범주 위의 프리시프를 말한다.
+\item $\mathcal{X}$ 위의 프리시프의 {\it 사상}은 $\mathcal{X}$의 바탕 범주 위의 프리시프의 사상이다.
+\end{enumerate}
+$\mathcal{X}$ 위의 프리시프 범주를 $\textit{PSh}(\mathcal{X})$로 나타낸다.
+\end{definition}
+
+\noindent
+이는 집합의 프리시프를 정의한다. 물론 점을 가진 집합, 아벨 군, 군, 모노이드, 환,
+고정된 환 위의 가군, 고정된 체 위의 리 대수 등의 프리시프도 다룰 수 있다.
+{\it 아벨 프리시프}, 즉 아벨 군의 프리시프 범주는 $\textit{PAb}(\mathcal{X})$로 나타낸다.
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의 군들로
+섬유화된 범주 사이의 $1$-사상이라고 하자. 이는 $f$가
+$(\Sch/S)_{fppf}$ 위의 함자라는 뜻임을 상기하자.
+사이트, 절 \ref{sites-section-more-functoriality-PSh}의 내용은
+수반 함자 한 쌍을 제공한다.\footnote{이 함자들은
+보조정리 \ref{lemma-functoriality-sheaves}를 증명한 뒤
+$f^{-1}$ 및 $f_*$로 나타낼 것이다.}
+\begin{equation}
+\label{equation-pushforward-pullback}
+f^p : \textit{PSh}(\mathcal{Y}) \longrightarrow \textit{PSh}(\mathcal{X})
+\quad\text{and}\quad
+{}_pf : \textit{PSh}(\mathcal{X}) \longrightarrow \textit{PSh}(\mathcal{Y}).
+\end{equation}
+수반성은 다음과 같다.
+$$
+\Mor_{\textit{PSh}(\mathcal{X})}(f^p\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{PSh}(\mathcal{Y})}(\mathcal{G}, {}_pf\mathcal{F})
+$$
+여기서 $\mathcal{F} \in \Ob(\textit{PSh}(\mathcal{X}))$이고
+$\mathcal{G} \in \Ob(\textit{PSh}(\mathcal{Y}))$이다. $f^p\mathcal{G}$를
+$\mathcal{G}$의 {\it 당김}이라 부른다. 정의로부터
+$$
+f^p\mathcal{G}(x) = \mathcal{G}(f(x))
+$$
+$x \in \Ob(\mathcal{X})$마다 성립한다. 프리시프 ${}_pf\mathcal{F}$는
+$\mathcal{F}$의 {\it 전진}이라 부르며 다음 식으로 기술된다.
+$$
+({}_pf\mathcal{F})(y) = \lim_{f(x) \to y} \mathcal{F}(x).
+$$
+이 절의 나머지 부분은 사이트 장으로 옮기는 것이 좋을 것이며,
+어쨌든 첫 번째 읽기에서는 건너뛰어야 한다.
+
+\begin{lemma}
+\label{lemma-1-morphisms-presheaves}
+$f : \mathcal{X} \to \mathcal{Y}$와 $g : \mathcal{Y} \to \mathcal{Z}$가
+$(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주 사이의 $1$-사상이라고 하자.
+그러면 $(g \circ f)^p = f^p \circ g^p$이고, 정준 동형사상
+${}_p(g \circ f) \to {}_pg \circ {}_pf$가 존재하며, 이는 수반성
+$(f^p, {}_pf)$, $(g^p, {}_pg)$ 및
+$((g \circ f)^p, {}_p(g \circ f))$와 양립하는 정준 동형사상이
+존재한다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{H}$를 $\mathcal{Z}$ 위의 프리시프라 하자. 그러면
+$(g \circ f)^p\mathcal{H} = f^p (g^p\mathcal{H})$이며 다음 등식으로
+주어진다.
+$$
+(g \circ f)^p\mathcal{H}(x) = \mathcal{H}((g \circ f)(x))
+= \mathcal{H}(g(f(x))) = f^p (g^p\mathcal{H})(x).
+$$
+이것이 제한 사상과 양립함은 확인하지 않는다.
+
+\medskip\noindent
+다음으로 변환 ${}_p(g \circ f) \to {}_pg \circ {}_pf$를 정의한다.
+이제 $\mathcal{F}$를 $\mathcal{X}$ 위의 프리시프라 하자.
+$z$가 $\mathcal{Z}$의 대상이면 네 쌍
+$(x, f(x) \to y, y, g(y) \to z)$의 범주 $\mathcal{J}$와
+$(x, g(f(x)) \to z)$의 범주 $\mathcal{I}$를 얻는다. 정준 함자
+$\mathcal{J} \to \mathcal{I}$는 대상을
+$(x, \alpha : f(x) \to y, y, \beta : g(y) \to z)$에서
+$(x, \beta \circ f(\alpha) : g(f(x)) \to z)$로 보내며,
+따라서 다음 식의 화살표를 준다.
+\begin{align*}
+({}_p(g \circ f)\mathcal{F})(z) & =
+\lim_{g(f(x)) \to z} \mathcal{F}(x) \\
+& = \lim_\mathcal{I} \mathcal{F} \\
+& \to \lim_\mathcal{J} \mathcal{F} \\
+& = \lim_{g(y) \to z}
+\Big(\lim_{f(x) \to y} \mathcal{F}(x)\Big) \\
+& =
+({}_pg \circ {}_pf\mathcal{F})(x)
+\end{align*}
+이는 범주, 보조정리 \ref{categories-lemma-functorial-limit}에 의한다.
+이것이 제한 사상과 양립함은 확인하지 않는다. 이 직접 구성의 대안은
+${}_p(g \circ f) \cong {}_pg \circ {}_pf$를 수반성 성질과 양립하는 유일한 사상으로
+정의하는 것이다. 이 방법은 양립성을 증명할 필요가 없다는 장점도 있다.
+
+\medskip\noindent
+$(f^p, {}_pf)$, $(g^p, {}_pg)$ 및
+$((g \circ f)^p, {}_p(g \circ f))$의 수반성과 양립한다는 것은 위의
+프리시프 $\mathcal{H}$와 $\mathcal{F}$에 대해 다음 가환 그림이 있다는
+뜻이다.
+$$
+\xymatrix@C=0.8em{
+\Mor_{\textit{PSh}(\mathcal{X})}(f^pg^p\mathcal{H}, \mathcal{F})
+\ar@{=}[r] \ar@{=}[d] &
+\Mor_{\textit{PSh}(\mathcal{Y})}(g^p\mathcal{H}, {}_pf\mathcal{F})
+\ar@{=}[r] &
+\Mor_{\textit{PSh}(\mathcal{Y})}(\mathcal{H}, {}_pg{}_pf\mathcal{F})
+\\
+\Mor_{\textit{PSh}(\mathcal{X})}((g \circ f)^p\mathcal{G}, \mathcal{F})
+\ar@{=}[rr] & &
+\Mor_{\textit{PSh}(\mathcal{Y})}(\mathcal{G}, {}_p(g \circ f)\mathcal{F})
+\ar[u]
+}
+$$
+증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-2-morphisms-presheaves}
+$f, g : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의 군들로
+섬유화된 범주 사이의 $1$-사상이라고 하자. $t : f \to g$를
+$(\Sch/S)_{fppf}$ 위의 같은 범주 사이의 $2$-사상이라 하자.
+$t$에 대응하여 함자 사이의 정준
+동형
+$$
+t^p : g^p \longrightarrow f^p
+\quad\text{and}\quad
+{}_pt : {}_pf \longrightarrow {}_pg
+$$
+을 얻으며, 이는 $(f^p, {}_pf)$와 $(g^p, {}_pg)$의 수반성 및
+$2$-사상의 수직·수평 합성과 양립한다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{G}$를 $\mathcal{Y}$ 위의 프리시프라 하자. 그러면
+$t^p : g^p\mathcal{G} \to f^p\mathcal{G}$는 다음 사상들의 족으로
+주어진다.
+$$
+g^p\mathcal{G}(x) = \mathcal{G}(g(x))
+\xrightarrow{\mathcal{G}(t_x)}
+\mathcal{G}(f(x)) = f^p\mathcal{G}(x)
+$$
+$x \in \Ob(\mathcal{X})$로 매개화된다. 이는
+$t_x : f(x) \to g(x)$이고 $\mathcal{G}$가 반변 함자이기 때문에
+의미가 있다. 제한 사상과의 양립성 확인은 생략한다.
+
+\medskip\noindent
+$y \in \Ob(\mathcal{Y})$에 대한 변환 ${}_pt$를 정의하기 위해
+${}_y^f\mathcal{I}$와 ${}_y^g\mathcal{I}$를 각각
+쌍 $(x, \psi : f(x) \to y)$와 $(x, \psi : g(x) \to y)$의 범주로 정의하자.
+사이트, 절 \ref{sites-section-more-functoriality-PSh}를 보라.
+$t$가 함자
+${}_yt : {}_y^g\mathcal{I} \to {}_y^f\mathcal{I}$를
+다음 규칙으로 정의함을 보자.
+$$
+(x, g(x) \to y) \longmapsto (x, f(x) \xrightarrow{t_x} g(x) \to y).
+$$
+$\mathcal{X}$ 위의 프리시프 $\mathcal{F}$에 대해
+${}_yt$와 $\mathcal{F} : {}_y^f\mathcal{I}^{opp} \to \textit{Sets}$의 합성,
+$(x, f(x) \to y) \mapsto \mathcal{F}(x)$는
+$\mathcal{F} : {}_y^g\mathcal{I}^{opp} \to \textit{Sets}$와 같음을 보자.
+따라서 범주, 보조정리 \ref{categories-lemma-functorial-limit}에 의해
+모든 $y \in \Ob(\mathcal{Y})$에 대해 다음 정준 사상을 얻는다.
+$$
+({}_pf\mathcal{F})(y) = \lim_{{}_y^f\mathcal{I}} \mathcal{F}
+\longrightarrow
+\lim_{{}_y^g\mathcal{I}} \mathcal{F} = ({}_pg\mathcal{F})(y)
+$$
+이것이 제한 사상과 양립함을 확인하는 것은 생략한다. 이 직접 구성의
+대안은 $(f^p, {}_pf)$와 $(g^p, {}_pg)$의 수반성 성질과 양립하는
+유일한 사상으로 ${}_pt$를 정의하는 것이다(아래를 보라).
+이 방법은 양립성을 증명할 필요가 없다는 장점도 있다.
+
+\medskip\noindent
+$(f^p, {}_pf)$와 $(g^p, {}_pg)$의 수반성과 양립한다는 것은 위의
+프리시프 $\mathcal{G}$와 $\mathcal{F}$에 대해 다음 가환 그림이
+있다는 뜻이다.
+$$
+\xymatrix{
+\Mor_{\textit{PSh}(\mathcal{X})}(f^p\mathcal{G}, \mathcal{F})
+\ar@{=}[r] \ar[d]_{- \circ t^p} &
+\Mor_{\textit{PSh}(\mathcal{Y})}(\mathcal{G}, {}_pf\mathcal{F})
+\ar[d]^{{}_pt \circ -} \\
+\Mor_{\textit{PSh}(\mathcal{X})}(g^p\mathcal{G}, \mathcal{F})
+\ar@{=}[r] &
+\Mor_{\textit{PSh}(\mathcal{Y})}(\mathcal{G}, {}_pg\mathcal{F})
+}
+$$
+증명은 생략한다. 힌트: 사이트, 보조정리
+\ref{sites-lemma-adjoints-pu}의 증명을 따라가고 그림의 수평 및
+수직 사상의 명시적 기술에서 양립성을 확인하라.
+
+\medskip\noindent
+수직 및 수평 합성과의 양립성 확인은 생략한다. 힌트: $t^p$에 대한
+증명은 간단하며, 수반성과의 양립성을 사용하면 전진 변환 사상
+${}_pt$에
+대해서도 결론을 얻을 수 있다.
+\end{proof}
+
+
+
+
+
+
+
+\section{층}
+\label{section-sheaves}
+
+\noindent
+먼저 중요하면서도 자명한 관찰을 한다(특히 집합론적 문제를 걱정하지
+않는 독자에게는 그렇다).
+
+\medskip\noindent
+$\Sch_{fppf}$를 위상, 정의 \ref{topologies-definition-big-fppf-site}에서와
+같은 큰 fppf 자리라 하고 그 기저 범주를 $\Sch_\alpha$로 나타내자.
+fppf 자리의 기저 범주인 것 외에도 $\Sch_\alpha$는 큰 자리스키 자리,
+큰 \'etale 자리, 큰 smooth 자리 및 큰 syntomic 자리의 기저 범주로
+사용할 수 있다. 위상, 주석 \ref{topologies-remark-choice-sites}을 보라.
+이 자리들을 각각 $\Sch_{Zar}$, $\Sch_\etale$, $\Sch_{smooth}$,
+및 $\Sch_{syntomic}$으로 나타낸다.
+이 상황에서 $S$의 큰 자리스키 자리 $(\Sch/S)_{Zar}$, $S$의 큰 \'etale 자리
+$(\Sch/S)_\etale$, $S$의 큰 smooth 자리 $(\Sch/S)_{smooth}$, $S$의 큰 syntomic 자리
+$(\Sch/S)_{syntomic}$, $S$의 큰 fppf 자리 $(\Sch/S)_{fppf}$를 국소화로
+정의한다(사이트, 절 \ref{sites-section-localize} 참조). 이 절대적인
+큰 자리들의 국소화인 $\Sch_{Zar}/S$, $\Sch_\etale/S$,
+$\Sch_{smooth}/S$, $\Sch_{syntomic}/S$, $\Sch_{fppf}/S$는 모두 같은
+기저 범주, 즉 $\Sch_\alpha/S$를 갖는다.
+
+\medskip\noindent
+따라서 군들로 섬유화된 범주
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$가 주어지면 $\mathcal{X}$는
+자리스키, \'etale, smooth, syntomic 및 fppf 위상을 물려받는다. 스택,
+정의 \ref{stacks-definition-topology-inherited}를 보라.
+
+\begin{definition}
+\label{definition-inherited-topologies}
+$\mathcal{X}$를 $(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주라 하자.
+\begin{enumerate}
+\item $\mathcal{X}_{Zar}$로 나타내는 {\it 부착된 자리스키 자리}는
+$(\Sch/S)_{Zar}$에서 $\mathcal{X}$로 물려받은 자리 구조이다.
+\item $\mathcal{X}_\etale$로 나타내는 {\it 부착된 \'etale 자리}는
+$(\Sch/S)_\etale$에서 $\mathcal{X}$로 물려받은 자리 구조이다.
+\item $\mathcal{X}_{smooth}$로 나타내는 {\it 부착된 smooth 자리}는
+$(\Sch/S)_{smooth}$에서 $\mathcal{X}$로 물려받은 자리 구조이다.
+\item $\mathcal{X}_{syntomic}$로 나타내는 {\it 부착된 syntomic 자리}는
+$(\Sch/S)_{syntomic}$에서 $\mathcal{X}$로 물려받은 자리 구조이다.
+\item $\mathcal{X}_{fppf}$로 나타내는 {\it 부착된 fppf 자리}는
+$(\Sch/S)_{fppf}$에서 $\mathcal{X}$로 물려받은 자리 구조이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+위의 논의에 의해 이 정의는 의미가 있다. $\mathcal{X}$가 대수
+스택이면 문헌에서는 $\mathcal{X}_{fppf}$(또는 이에 동치인 자리)를
+$\mathcal{X}$의 {\it 큰 fppf 자리}라 부르며 다른 위상에 대해서도
+마찬가지로 부른다. 이 구성을 다른 구성과 구별하기 위해 때때로 이
+용어를 사용한다.
+
+\begin{remark}
+\label{remark-ambiguity}
+기호 $\mathcal{X}$가 스킴이나 대수공간 등이 아니라 군들로 섬유화된
+범주를 가리킬 때에만 이 표기를 사용한다. 이렇게 하면 스킴 또는
+대수공간의 작은 \'etale 자리와 혼동하지 않는다. 작은 자리는
+$X_\etale$로 나타내며, 이 경우 칼리그래픽 대문자 대신 로마자
+대문자를 사용한다.
+\end{remark}
+
+\noindent
+이 위상들을 정의했으므로 이제 $\mathcal{X}$ 위의 층이 무엇인지,
+즉 대응하는 토포스를 정의할 수 있다.
+
+\begin{definition}
+\label{definition-sheaves}
+$\mathcal{X}$를 $(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주라 하고,
+$\mathcal{F}$를 $\mathcal{X}$ 위의 프리시프라 하자.
+\begin{enumerate}
+\item $\mathcal{F}$가 부착된 자리스키 자리 $\mathcal{X}_{Zar}$ 위의
+층, 즉 $\mathcal{F}$가 그 자리 위의 층이면 이를 {\it 자리스키 층},
+또는 {\it 자리스키 위상의 층}이라 한다.
+\item $\mathcal{F}$가 부착된 \'etale 자리 $\mathcal{X}_\etale$ 위의
+층, 즉 $\mathcal{F}$가 그 자리 위의 층이면 이를 {\it \'etale 층},
+또는 {\it \'etale 위상의 층}이라 한다.
+\item $\mathcal{F}$가 부착된 smooth 자리 $\mathcal{X}_{smooth}$ 위의
+층, 즉 $\mathcal{F}$가 그 자리 위의 층이면 이를 {\it smooth 층},
+또는 {\it smooth 위상의 층}이라 한다.
+\item $\mathcal{F}$가 부착된 syntomic 자리 $\mathcal{X}_{syntomic}$
+위의 층, 즉 $\mathcal{F}$가 그 자리 위의 층이면 이를 {\it syntomic 층},
+또는 {\it syntomic 위상의 층}이라 한다.
+\item $\mathcal{F}$가 부착된 fppf 자리 $\mathcal{X}_{fppf}$ 위의
+층, 즉 $\mathcal{F}$가 그 자리 위의 층이면 이를 {\it fppf 층},
+{\it 층}, 또는 {\it fppf 위상의 층}이라 한다.
+\end{enumerate}
+층의 사상은 단지 프리시프의 사상이다. 이 층 범주들을 각각
+$\Sh(\mathcal{X}_{Zar})$,
+$\Sh(\mathcal{X}_\etale)$,
+$\Sh(\mathcal{X}_{smooth})$,
+$\Sh(\mathcal{X}_{syntomic})$ 및
+$\Sh(\mathcal{X}_{fppf})$.
+\end{definition}
+
+\noindent
+물론 점을 가진 집합, 아벨 군, 군, 모노이드, 환, 고정된 환 위의
+가군, 고정된 체 위의 리 대수 등의 층도 말할 수 있다. {\it 아벨 층},
+즉 아벨 군의 층 범주는 $\textit{Ab}(\mathcal{X}_{fppf})$로 나타내며
+다른 위상에서도 마찬가지다. $\mathcal{X}$가 대수 스택이면
+$\Sh(\mathcal{X}_{fppf})$는 집합론적 문제를 제외하면 문헌에서
+말하는 {\it $\mathcal{X}$의 큰 fppf 자리 위의 층 범주}와 동치이다.
+다른 위상도 마찬가지다. 이 구성을 다른 것과 구별하기 위해 때때로
+이 용어를 사용한다.
+
+\medskip\noindent
+위상들이 강도가 증가하는 순서로 나열되어 있으므로 다음의 엄밀한
+전범주 포함을 갖는다.
+$$
+\Sh(\mathcal{X}_{fppf}) \subset
+\Sh(\mathcal{X}_{syntomic}) \subset
+\Sh(\mathcal{X}_{smooth}) \subset
+\Sh(\mathcal{X}_\etale) \subset
+\Sh(\mathcal{X}_{Zar}) \subset \textit{PSh}(\mathcal{X})
+$$
+때때로 다음과 같이 쓴다.
+$\Sh(\mathcal{X}_{fppf}) = \Sh(\mathcal{X})$
+및
+$\textit{Ab}(\mathcal{X}_{fppf}) = \textit{Ab}(\mathcal{X})$
+이는 $\mathcal{X}$ 위의 층을 $\mathcal{X}$ 위의 fppf 층이라고 부르는
+우리의 용어와 일치한다.
+
+\medskip\noindent
+이 설정에서 이 토포스들의 함자성은 자명하며 위의 포함 함자들과도
+양립한다.
+
+\begin{lemma}
+\label{lemma-functoriality-sheaves}
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의 군들로
+섬유화된 범주 사이의 $1$-사상이라고 하자. 또한
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+(\ref{equation-pushforward-pullback})의 전진 함자 ${}_pf$ 및
+당김 함자 $f^p$는
+$\tau$ 층을 $\tau$ 층으로 보내며 다음 토포스 사상을 정의한다.
+$f : \Sh(\mathcal{X}_\tau) \to \Sh(\mathcal{Y}_\tau)$.
+\end{lemma}
+
+\begin{proof}
+이는 스택, 보조정리 \ref{stacks-lemma-topology-inherited-functorial}에서
+즉시 따른다.
+\end{proof}
+
+\noindent
+다시 말해 절 \ref{section-presheaves}에서 정의한 프리시프의 전진과
+당김은 $\tau$ 층의 {\it 전진}과 {\it 당김}도 준다. 따라서 혼동의
+가능성 없이 $f^p = f^{-1}$ 및 $ {}_pf = f_*$로 쓸 수 있다.
+
+\begin{definition}
+\label{definition-morphism}
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의 군들로
+섬유화된 범주 사이의 사상이라고 하자. 위에서 구성한
+$$
+f = (f^{-1}, f_*) :
+\Sh(\mathcal{X}_{fppf})
+\longrightarrow
+\Sh(\mathcal{Y}_{fppf})
+$$
+를 위에서 구성한 {\it 부착된 fppf 토포스의 사상}이라 부른다.
+부착된 자리스키, \'etale, smooth 및 syntomic 토포스에 대해서도
+마찬가지로 정의한다.
+\end{definition}
+
+\noindent
+사이트, 절 \ref{sites-section-sheaves-algebraic-structures}에서
+논의하듯이 같은 식(기저 집합층에 대한 식)이 점을 가진 집합, 아벨 군,
+군, 모노이드, 환, 고정된 환 위의 가군, 고정된 체 위의 리 대수 등의
+층에 대해서도(우리 위상 중 하나에 대해) 전진과 당김을 정의한다.
+
+
+
+
+
+
+
+
+\section{전진의 계산}
+\label{section-pushforward}
+
+\noindent
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의 군들로
+섬유화된 범주 사이의 $1$-사상이라고 하자. $\mathcal{F}$를
+$\mathcal{X}$ 위의 프리시프라 하고 $y \in \Ob(\mathcal{Y})$라 하자.
+$f_*\mathcal{F}(y)$는 다음과 같이 계산할 수 있다. $y$가 스킴 $V$
+위에 놓인다고 하고, $2$-Yoneda 보조정리를 사용하여 $y$를
+$1$-사상으로 생각하자. 다음 사영을 고려한다.
+$$
+\text{pr} :
+(\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}
+\longrightarrow
+\mathcal{X}
+$$
+그러면 다음 정준 동일시가 있다.
+\begin{equation}
+\label{equation-pushforward}
+f_*\mathcal{F}(y) = \Gamma\Big(
+(\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{F}\Big)
+\end{equation}
+실제로 $2$-섬유곱의 대상은 삼중항
+$(h : U \to V, x, f(x) \to h^*y)$이다. 표기에서 $h$를 생략하면
+이는 $\mathcal{X}$의 대상 $x$와 $\mathcal{Y}$의 사상
+$\alpha : f(x) \to y$의 자료와 동치임을 알 수 있다. 정의에 따라
+$f_*\mathcal{F}(y) = \lim_{f(x) \to y} \mathcal{F}(x)$이므로 등식이 따른다.
+
+\medskip\noindent
+그 결과 전진에 관한 다음 “밑변환” 결과를 얻는다. 이 결과는
+자명하며 우리가 “큰” 자리를 사용한다는 사실에 의존한다.
+
+\begin{lemma}
+\label{lemma-base-change}
+$S$를 스킴이라 하자. 다음 그림이
+$$
+\xymatrix{
+\mathcal{Y}' \times_\mathcal{Y} \mathcal{X} \ar[r]_{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r]^g & \mathcal{Y}
+}
+$$
+$S$ 위의 군들로 섬유화된 범주들의 $2$-데카르트 그림이라고 하자.
+그러면 정준 동형사상
+$$
+g^{-1}f_*\mathcal{F} \longrightarrow f'_*(g')^{-1}\mathcal{F}
+$$
+이 있으며, 이는 $\mathcal{X}$ 위의 프리시프 $\mathcal{F}$에 대해 함자적이다.
+\end{lemma}
+
+\begin{proof}
+$V$ 위에 놓인 $\mathcal{Y}'$의 대상 $y'$가 주어지면 동치
+$$
+(\Sch/V)_{fppf} \times_{g(y'), \mathcal{Y}} \mathcal{X}
+=
+(\Sch/V)_{fppf} \times_{y', \mathcal{Y}'}
+(\mathcal{Y}' \times_\mathcal{Y} \mathcal{X})
+$$
+가 있다. 따라서 (\ref{equation-pushforward})에 의해 전단사
+$g^{-1}f_*\mathcal{F}(y') \to f'_*(g')^{-1}\mathcal{F}(y')$를 얻는다.
+이것이 제한 사상과 양립함을 확인하는 것은 생략한다.
+\end{proof}
+
+\noindent
+군들로 섬유화된 범주의 표현가능 사상인 경우 식
+(\ref{equation-pushforward})은 단순해진다. 독자는 이 절의 나머지를
+건너뛰어도 좋다.
+
+\begin{lemma}
+\label{lemma-representable}
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의 군들로
+섬유화된 범주 사이의 $1$-사상이라고 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $f$는 표현가능하다.
+\item 모든 $y \in \Ob(\mathcal{Y})$에 대해 함자
+$\mathcal{X}^{opp} \to \textit{Sets}$,
+$x \mapsto \Mor_\mathcal{Y}(f(x), y)$
+는 표현가능하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+대수 스택, 절 \ref{algebraic-section-representable-morphism}의
+논의에 따르면 $f$가 표현가능할 필요충분조건은 $U$ 위에 놓인
+모든 $y \in \Ob(\mathcal{Y})$에 대해 $2$-섬유곱
+$(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$
+이 표현가능한 것, 즉 $U$ 위의 어떤 스킴 $V_y$에 대해
+$(\Sch/V_y)_{fppf}$의 꼴인 것이다. 이 $2$-섬유곱의 대상은
+$\alpha$가 $\text{id}_V$ 위에 놓이는 삼중항
+$(h : V \to U, x, \alpha : f(x) \to h^*y)$이다. 표기에서 $h$를
+생략하면 이는 $\mathcal{X}$의 대상 $x$와 사상 $f(x) \to y$의
+자료와 동치임을 알 수 있다. 따라서 $V_y$ 위의 $\mathcal{X}$의
+대상 $x_y$에 대해 $V_y$와 $f(x_y) \to y$가 이 $2$-섬유곱을
+표현할 필요충분조건은 (2)의 함자가 $x_y$에 의해 표현되고
+그 보편 대상이 사상 $f(x_y) \to y$인 것이다.
+\end{proof}
+
+\noindent
+다음 그림을 생각하자.
+$$
+\xymatrix{
+\mathcal{X} \ar[rr]_f \ar[rd]_p & &  \mathcal{Y} \ar[ld]^q \\
+& (\Sch/S)_{fppf}
+}
+$$
+$f$가 군들로 섬유화된 범주 사이의 표현가능한 $1$-사상이라고 하자.
+모든 $y \in \Ob(\mathcal{Y})$에 대해 보조정리
+\ref{lemma-representable}의 함자
+$x \mapsto \Mor_\mathcal{Y}(f(x), y)$를 표현하는 대상
+$u(y) \in \Ob(\mathcal{X})$를 선택한다(이는 선택공리에 의해 가능하다).
+구성상 이 대상들은 정준 사상 $f(u(y)) \to y$를 갖는다.
+$\mathcal{Y}$의 모든 사상 $\beta : y' \to y$에 대해 다음 그림을
+가환으로 만드는 $\mathcal{X}$의 유일한 사상
+$u(\beta) : u(y') \to u(y)$를 얻는다.
+$$
+\xymatrix{
+f(u(y')) \ar[d] \ar[rr]_{f(u(\beta))} & & f(u(y)) \ar[d] \\
+y' \ar[rr] & & y
+}
+$$
+즉 $u : \mathcal{Y} \to \mathcal{X}$는 함자이다.
+실제로 조금 더 말할 수 있다. 즉
+$V' = q(y')$, $V = q(y)$, $U' = p(u(y'))$ 및 $U = p(u(y))$라고 하자.
+$$
+\xymatrix{
+U' \ar[rr]_{p(u(\beta))} \ar[d] & & U \ar[d] \\
+V' \ar[rr]^{q(\beta)} & & V
+}
+$$
+라고 하자. 그러면 위 그림은 섬유곱 정사각형이다. 이는 $U' \to U$가
+다음 밑변환을 표현하기 때문이다.
+$(\Sch/V')_{fppf} \times_{y', \mathcal{Y}} \mathcal{X} \to
+(\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$
+이는 $V' \to V$의 밑변환이다.
+
+\begin{lemma}
+\label{lemma-representable-pushforward}
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의 군들로
+섬유화된 범주 사이의 표현가능한 $1$-사상이라고 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+그러면 함자 $u : \mathcal{Y}_\tau \to \mathcal{X}_\tau$는 연속이고,
+자리의 사상 $\mathcal{X}_\tau \to \mathcal{Y}_\tau$를 정의하며,
+그것이 유도하는 토포스 사상
+$\Sh(\mathcal{X}_\tau) \to \Sh(\mathcal{Y}_\tau)$
+은 보조정리 \ref{lemma-functoriality-sheaves}에서 구성한 사상 $f$와 같다.
+더욱이 $\mathcal{X}$ 위의 임의의 프리시프 $\mathcal{F}$에 대해
+$f_*\mathcal{F}(y) = \mathcal{F}(u(y))$이다.
+\end{lemma}
+
+\begin{proof}
+$\{y_i \to y\}$를 $\mathcal{Y}$의 $\tau$-피복이라 하자. 정의상 이는
+$\{q(y_i) \to q(y)\}$가 스킴들의 $\tau$-피복이라는 뜻이다.
+보조정리 앞의 마지막 관찰에 의해
+$\{p(u(y_i)) \to p(u(y))\}$는 $\tau$-피복
+$\{q(y_i) \to q(y)\}$를 $p(u(y)) \to q(y)$로 밑변환한 것이므로,
+자리의 공리에 따라 그 자체가 $\tau$-피복이다. 따라서
+$\{u(y_i) \to u(y)\}$는 $\mathcal{X}$의 $\tau$-피복이다.
+그러므로 $u$는 연속이다.
+
+\medskip\noindent
+사이트, 절 \ref{sites-section-functoriality-PSh} 및
+\ref{sites-section-continuous-functors}의 표기
+$u_p, u_s, u^p, u^s$를 사용하자.
+보조정리의 마지막 주장을 보이면 위에서 확인한 $u$의 연속성에 의해
+$f_* = u^p = u^s$이고, 따라서 수반성에 의해 $f^{-1} = u_s$이다.
+이는 $u_s$가 완전함을 보여 주므로 $u$가 자리의 사상을 정하고,
+두 사상의 동일성도 분명해진다.
+$f_*\mathcal{F}(y) = \mathcal{F}(u(y))$임을 보려면 정의상
+$$
+f_*\mathcal{F}(y) = ({}_pf\mathcal{F})(y) =
+\lim_{f(x) \to y} \mathcal{F}(x).
+$$
+극한을 취하는 범주에서 $u(y)$가 끝 대상이므로 결론이 따른다.
+\end{proof}
+
+
+
+
+
+\section{구조층}
+\label{section-structure-sheaf}
+
+\noindent
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+$(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주의 2-범주에는 끝 대상
+$\text{id} : (\Sch/S)_{fppf} \to (\Sch/S)_{fppf}$
+이 있으며, $p$는 $\mathcal{X}$에서 이 끝 대상으로 가는 $1$-사상이다.
+따라서 $(\Sch/S)_{fppf}$ 위의 임의의 프리시프 $\mathcal{G}$는
+규칙 $p^{-1}\mathcal{G}(x) = \mathcal{G}(p(x))$로 정의되는
+$\mathcal{X}$ 위의 프리시프 $p^{-1}\mathcal{G}$를 준다. 더욱이
+절 \ref{section-sheaves}의 논의에 따르면 $\mathcal{G}$가
+$\tau$-층일 때마다 $p^{-1}\mathcal{G}$도 $\tau$ 층이다.
+
+\medskip\noindent
+자리 $(\Sch/S)_{fppf}$가 다음 규칙으로 정의되는 구조층
+$\mathcal{O}$를 갖는 환 달린 자리임을 상기하자.
+$$
+(\Sch/S)^{opp} \longrightarrow \textit{Rings},
+\quad
+U/S \longmapsto \Gamma(U, \mathcal{O}_U)
+$$
+내림, 정의 \ref{descent-definition-structure-sheaf}를 보라.
+
+\begin{definition}
+\label{definition-structure-sheaf}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+{\it $\mathcal{X}$의 구조층}은 다음 환의 층이다.
+$\mathcal{O}_\mathcal{X} = p^{-1}\mathcal{O}$.
+\end{definition}
+
+\noindent
+$U$ 위에 놓인 $\mathcal{X}$의 대상 $x$에 대해
+$\mathcal{O}_\mathcal{X}(x) = \mathcal{O}(U) = \Gamma(U, \mathcal{O}_U)$.
+물론 $\mathcal{O}_\mathcal{X}$는 자리스키, \'etale, smooth 및
+syntomic 층이기도 하다. 따라서 각 자리
+$\mathcal{X}_{Zar}$, $\mathcal{X}_\etale$, $\mathcal{X}_{smooth}$,
+$\mathcal{X}_{syntomic}$ 및 $\mathcal{X}_{fppf}$는 환 달린 자리이다.
+이 구성은 함자적이기도 하다.
+
+\begin{lemma}
+\label{lemma-functoriality-structure-sheaf}
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의 군들로
+섬유화된 범주 사이의 $1$-사상이라고 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+정준 동일시
+$f^{-1}\mathcal{O}_\mathcal{Y} = \mathcal{O}_\mathcal{X}$
+가 있으며, 이는
+$f : \Sh(\mathcal{X}_\tau) \to \Sh(\mathcal{Y}_\tau)$
+를 환 달린 토포스의 사상으로 만든다.
+\end{lemma}
+
+\begin{proof}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$와
+$q : \mathcal{Y} \to (\Sch/S)_{fppf}$를 구조 함자로 나타내자.
+그러면 $p = q \circ f$이므로 보조정리
+\ref{lemma-1-morphisms-presheaves}에 의해
+$p^{-1} = f^{-1} \circ q^{-1}$이다.
+$\mathcal{O}_\mathcal{X} = p^{-1}\mathcal{O}$이고
+$\mathcal{O}_\mathcal{Y} = q^{-1}\mathcal{O}$
+이므로 결과가 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-flat}
+보조정리 \ref{lemma-functoriality-structure-sheaf}의 상황에서
+환 달린 토포스의 사상
+$f : \Sh(\mathcal{X}_\tau) \to \Sh(\mathcal{Y}_\tau)$
+은 다음 등식에서 분명하듯 평탄하다.
+$f^{-1}\mathcal{O}_\mathcal{X} = \mathcal{O}_\mathcal{Y}$.
+이는 다소 직관에 어긋난다. 예를 들어 대수 스택의 닫힌 몰입은 보통
+대수 스택의 사상으로서 평탄하지 않기 때문이다. 그러나 스킴의 닫힌
+몰입 $i : X \to Y$를 취할 때에도 정확히 같은 현상이 일어난다.
+이 경우 결부된 큰 $\tau$-자리의 사상
+$i : (\Sch/X)_\tau \to (\Sch/Y)_\tau$
+도 평탄하다.
+\end{remark}
+
+
+
+
+\section{가군의 층}
+\label{section-modules}
+
+\noindent
+구조층이 있으므로 가군을 정의할 수 있다.
+
+\begin{definition}
+\label{definition-modules}
+$\mathcal{X}$를 $(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주라 하자.
+\begin{enumerate}
+\item {\it $\mathcal{X}$ 위의 가군 프리시프}는
+$\mathcal{O}_\mathcal{X}$-가군의 프리시프이다. 가군 프리시프의 범주는
+$\textit{PMod}(\mathcal{O}_\mathcal{X})$로 나타낸다.
+\item 가군 프리시프 $\mathcal{F}$에 대해 $\mathcal{F}$가 fppf 층이면 이를
+{\it $\mathcal{O}_\mathcal{X}$-가군}, 더 정확히는
+{\it $\mathcal{O}_\mathcal{X}$-가군의 층}이라 한다.
+$\mathcal{O}_\mathcal{X}$-가군의 범주는
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$로 나타낸다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+문헌에서는 이 가군의 (프리)층을
+{\it $\mathcal{X}$의 큰 fppf 자리 위의 $\mathcal{O}_\mathcal{X}$-가군의
+(프리)층}이라 부른다. 이 범주들을 다른 범주와 구별할 필요가 있을 때
+때때로 이 용어를 사용한다. 또한 자리스키, \'etale, smooth 또는
+syntomic 위상에서는 층이지만 반드시 fppf 층일 필요는 없는 가군
+프리시프도 다룬다. 필요하면 이를
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+로 나타내며 다른 위상도 마찬가지로 나타낸다.
+
+\medskip\noindent
+다음으로 함자성을 다루되 먼저 가군 프리시프를 생각한다. 다음 그림을
+생각하자.
+$$
+\xymatrix{
+\mathcal{X} \ar[rr]_f \ar[rd]_p & &  \mathcal{Y} \ar[ld]^q \\
+& (\Sch/S)_{fppf}
+}
+$$
+이는 군들로 섬유화된 범주 사이의 $1$-사상이라고 하자.
+아벨 프리시프 위의 함자 $f^{-1}$, $f_*$는 다음 함자들로 확장된다.
+\begin{equation}
+\label{equation-functoriality-presheaves-modules}
+f^{-1} :
+\textit{PMod}(\mathcal{O}_\mathcal{Y})
+\longrightarrow
+\textit{PMod}(\mathcal{O}_\mathcal{X})
+\quad\text{and}\quad
+f_* :
+\textit{PMod}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\textit{PMod}(\mathcal{O}_\mathcal{Y})
+\end{equation}
+이는 $f^{-1}$에 대해서는 즉시 알 수 있다. 실제로
+$f^{-1}\mathcal{G}(x) = \mathcal{G}(f(x))$는
+$\mathcal{O}_\mathcal{Y}(f(x)) = \mathcal{O}(q(f(x))) = \mathcal{O}(p(x)) =
+\mathcal{O}_\mathcal{X}(x)$ 위의 가군이다. 또는
+$f^{-1}\mathcal{O}_\mathcal{Y} = \mathcal{O}_\mathcal{X}$
+이고 $f^{-1}$가 프리시프의 극한과 가환한다는 사실로부터도 따른다.
+$f_*$는 오른쪽 수반이므로 프리시프의 모든 극한, 특히 곱과 가환한다.
+따라서 자리 위의 가군, 보조정리
+\ref{sites-modules-lemma-pushforward-module}의 증명에서처럼
+$f_*$를 가군 프리시프 위의 함자로 확장할 수 있다.
+함자 (\ref{equation-functoriality-presheaves-modules})가 다음 수반 함자
+쌍을 이룬다고 주장한다.
+$$
+\Mor_{\textit{PMod}(\mathcal{O}_\mathcal{X})}(
+f^{-1}\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{PMod}(\mathcal{O}_\mathcal{Y})}(
+\mathcal{G}, f_*\mathcal{F}).
+$$
+$f^{-1}\mathcal{O}_\mathcal{Y} = \mathcal{O}_\mathcal{X}$이므로,
+$\mathcal{X}$와 $\mathcal{Y}$에 무질서 위상을 부여하고 자리 위의 가군,
+보조정리 \ref{sites-modules-lemma-adjoint-push-pull-modules}를 적용하면
+이를 얻는다.
+
+\medskip\noindent
+다음으로 가군, 즉 fppf 위상에서의 가군의 층에 대한 함자성을 논의한다.
+유도된 환 달린 토포스의 사상도 $f$로 나타내자. 현재 fppf 위상에
+대해서는 보조정리 \ref{lemma-functoriality-structure-sheaf}를 보라.
+(\ref{equation-functoriality-presheaves-modules})의 함자
+$f^{-1}$과 $f_*$는 가군의 층 부분범주를 보존한다
+(보조정리 \ref{lemma-functoriality-sheaves} 참조).
+따라서 다음 함자들은
+\begin{equation}
+\label{equation-functoriality-sheaves-modules}
+f^{-1} :
+\textit{Mod}(\mathcal{O}_\mathcal{Y})
+\longrightarrow
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+\quad\text{and}\quad
+f_* :
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\textit{Mod}(\mathcal{O}_\mathcal{Y})
+\end{equation}
+수반 함자 쌍을 이룬다.
+$$
+\Mor_{\textit{Mod}(\mathcal{O}_\mathcal{X})}(
+f^{-1}\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{Mod}(\mathcal{O}_\mathcal{Y})}(
+\mathcal{G}, f_*\mathcal{F}).
+$$
+수반의 유일성에 의해 $f^* = f^{-1}$이다. 여기서 $f^*$는 위의
+환 달린 토포스의 사상 $f$에 대해 자리 위의 가군, 절
+\ref{sites-modules-section-functoriality-modules}에서 정의한 것이다.
+물론 다음 두 사실로부터 직접 볼 수도 있다.
+$f^*(-) = f^{-1}(-) \otimes_{f^{-1}\mathcal{O}_\mathcal{Y}}
+\mathcal{O}_\mathcal{X}$이고
+$f^{-1}\mathcal{O}_\mathcal{Y} = \mathcal{O}_\mathcal{X}$.
+
+\medskip\noindent
+자리스키, \'etale, smooth 및 syntomic 위상의 가군의 층에 대해서도
+마찬가지이다.
+
+
+
+\section{표현가능한 범주}
+\label{section-representable}
+
+\noindent
+이 짧은 절에서는 우리의 정의를 해당 대수 스택들이 표현가능한 경우와
+비교한다.
+
+\begin{lemma}
+\label{lemma-compare-with-scheme}
+$S$를 스킴이라 하자. $\mathcal{X}$를 $(\Sch/S)$ 위의 군들로
+섬유화된 범주라 하자. $\mathcal{X}$가 스킴 $X$로 표현가능하다고 하자.
+$\tau \in \{Zar,\linebreak[0] \etale,\linebreak[0]
+smooth,\linebreak[0] syntomic,\linebreak[0] fppf\}$
+에 대해 환 달린 자리의 정준 동치
+$$
+(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X}) =
+((\Sch/X)_\tau, \mathcal{O}_X)
+$$
+가 있다.
+\end{lemma}
+
+\begin{proof}
+$(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주의 동치
+$(\Sch/X)_\tau \to \mathcal{X}$를 선택하고 구성
+$\mathcal{X} \leadsto \mathcal{X}_\tau$의 함자성을 적용하면 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-with-morphism-of-schemes}
+$S$를 스킴이라 하자. $f : \mathcal{X} \to \mathcal{Y}$가 $S$ 위의
+군들로 섬유화된 범주 사이의 사상이라고 하자.
+$\mathcal{X}$와 $\mathcal{Y}$가 스킴 $X$, $Y$로 표현가능하다고 하자.
+$f : X \to Y$를 $f$에 대응하는 스킴의 사상이라 하자.
+$\tau \in \{Zar,\linebreak[0] \etale,\linebreak[0]
+smooth,\linebreak[0] syntomic,\linebreak[0] fppf\}$
+에 대해 환 달린 토포스의 사상
+$f : (\Sh(\mathcal{X}_\tau), \mathcal{O}_\mathcal{X}) \to
+(\Sh(\mathcal{Y}_\tau), \mathcal{O}_\mathcal{Y})$
+은 환 달린 토포스의 사상
+$f : (\Sh((\Sch/X)_\tau), \mathcal{O}_X) \to 
+(\Sh((\Sch/Y)_\tau), \mathcal{O}_Y)$와 보조정리
+\ref{lemma-compare-with-scheme}의 동일시를 통해 일치한다.
+\end{lemma}
+
+\begin{proof}
+정의를 풀어 쓰면 따른다.
+\end{proof}
+
+
+
+
+\section{제한}
+\label{section-restriction}
+
+
+\noindent
+자명하지만 유용한 관찰은 군들로 섬유화된 범주를 한 대상에서
+국소화한 것이 그 대상이 놓인 스킴의 큰 자리와 동치라는 것이다.
+
+\begin{lemma}
+\label{lemma-localizing}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+$x \in \Ob(\mathcal{X})$가 $U = p(x)$ 위에 놓인다고 하자.
+함자 $p$는 자리의 동치
+$\mathcal{X}_\tau/x \to (\Sch/U)_\tau$.
+\end{lemma}
+
+\begin{proof}
+스택, 보조정리 \ref{stacks-lemma-localizing}의 특수한 경우이다.
+\end{proof}
+
+\noindent
+위 보조정리를 사용하여 (프리)층의 스킴으로의 당김과 제한을 말한다.
+
+\begin{definition}
+\label{definition-pullback}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+$x \in \Ob(\mathcal{X})$가 $U = p(x)$ 위에 놓인다고 하자.
+$\mathcal{F}$를 $\mathcal{X}$ 위의 프리시프라 하자.
+\begin{enumerate}
+\item {\it $\mathcal{F}$의 당김 $x^{-1}\mathcal{F}$}은 제한
+$\mathcal{F}|_{(\mathcal{X}/x)}$를 보조정리
+\ref{lemma-localizing}의 동치
+$\mathcal{X}/x \to (\Sch/U)_{fppf}$
+를 통해 $(\Sch/U)_{fppf}$ 위의 프리시프로 본 것이다.
+\item {\it $\mathcal{F}$의 $U_\etale$로의 제한}은
+$x^{-1}\mathcal{F}|_{U_\etale}$이며, 표기를 남용하여
+$\mathcal{F}|_{U_\etale}$라고 쓴다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 표기는 타당하다. 실제로 $2$-Yoneda 보조정리(대수 스택, 절
+\ref{algebraic-section-2-yoneda} 참조)는 대상 $x$에
+$p : \mathcal{X}/x \to (\Sch/U)_{fppf}$의 준역인 $1$-사상
+$x : (\Sch/U)_{fppf} \to \mathcal{X}/x$를 대응시킨다.
+따라서 $x^{-1}\mathcal{F}$는 실제로 이 $1$-사상을 통한
+$\mathcal{F}$의 당김이다. 특히 위의 내용에 의해 $\mathcal{F}$가
+층(또는 자리스키, \'etale, smooth, syntomic 층)이면
+$x^{-1}\mathcal{F}$는 $(\Sch/U)_{fppf}$ 위의 층(또는
+$(\Sch/U)_{Zar}$, $(\Sch/U)_\etale$,
+$(\Sch/U)_{smooth}$, $(\Sch/U)_{syntomic}$ 위의 층)이다.
+
+\medskip\noindent
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+$\varphi : x \to y$가 스킴의 사상 $a : U \to V$ 위에 놓이는
+$\mathcal{X}$의 사상이라고 하자. $a$가 작은 \'etale 자리의 사상
+$a_{small} : U_\etale \to V_\etale$를 유도함을 상기하자
+(에탈 코호몰로지, 절
+\ref{etale-cohomology-section-functoriality} 참조).
+$\mathcal{F}$를 $\mathcal{X}$ 위의 프리시프라 하자.
+$\mathcal{F}|_{U_\etale}$와 $\mathcal{F}|_{V_\etale}$를 각각
+$x$와 $y$를 통한 $\mathcal{F}$의 제한이라 하자. 자연스러운
+{\it 대조} 사상
+\begin{equation}
+\label{equation-comparison-push}
+c_\varphi :
+\mathcal{F}|_{V_\etale}
+\longrightarrow
+a_{small, *}(\mathcal{F}|_{U_\etale})
+\end{equation}
+이 있다. 이는 $U_\etale$ 위의 프리시프의 사상이다. 구체적으로
+$V' \to V$가 \'etale이면 $U' = V' \times_V U$로 놓고,
+$V'$ 위의 절단에 대한 $c_\varphi$를 다음으로 정의한다.
+$$
+\xymatrix{
+a_{small, *}(\mathcal{F}|_{U_\etale})(V') &
+\mathcal{F}|_{U_\etale}(U') \ar@{=}[l] &
+\mathcal{F}(x') \ar@{=}[l] \\
+\mathcal{F}|_{V_\etale}(V') \ar@{=}[rr] \ar[u]^{c_\varphi} &
+&
+\mathcal{F}(y') \ar[u]_{\mathcal{F}(\varphi')}
+}
+$$
+여기서 $\varphi' : x' \to y'$는 다음 가환 그림에 들어가는
+$\mathcal{X}$의 사상이다.
+$$
+\vcenter{
+\xymatrix{
+x' \ar[r] \ar[d]_{\varphi'} & x \ar[d]^\varphi \\
+y' \ar[r] & y
+}
+}
+\quad\text{lying over}\quad
+\vcenter{
+\xymatrix{
+U' \ar[r] \ar[d] & U \ar[d]^a \\
+V' \ar[r] & V
+}
+}
+$$
+$\varphi'$의 존재성과 유일성은 군들로 섬유화된 범주의 공리에서
+따른다. 이렇게 정의한 $c_\varphi$가 실제로 프리시프의 사상, 즉
+제한 사상과 양립하는 사상이며 $\mathcal{F}$에 대해 함자적임을
+확인하는 것은 생략한다. $\mathcal{F}$가 \'etale 위상의 층이면
+{\it 대조} 사상
+\begin{equation}
+\label{equation-comparison}
+c_\varphi : a_{small}^{-1}(\mathcal{F}|_{V_\etale})
+\longrightarrow
+\mathcal{F}|_{U_\etale}
+\end{equation}
+을 얻으며, 표시한 대로 이 사상도 $c_\varphi$로 나타낸다
+(수반 사상들을 구별하지 않는 관례적인 표기 남용이다).
+
+\begin{lemma}
+\label{lemma-comparison}
+$\mathcal{F}$를 $\mathcal{X} \to (\Sch/S)_{fppf}$ 위의 \'etale 층이라 하자.
+\begin{enumerate}
+\item $\varphi : x \to y$와 $\psi : y \to z$가 각각
+$a : U \to V$와 $b : V \to W$ 위에 놓이는 $\mathcal{X}$의 사상이면,
+합성
+$$
+a_{small}^{-1}(b_{small}^{-1} (\mathcal{F}|_{W_\etale}))
+\xrightarrow{a_{small}^{-1}c_\psi}
+a_{small}^{-1}(\mathcal{F}|_{V_\etale})
+\xrightarrow{c_\varphi}
+\mathcal{F}|_{U_\etale}
+$$
+은 다음 동일시를 통해 $c_{\psi \circ \varphi}$와 같다.
+$$
+(b \circ a)_{small}^{-1}(\mathcal{F}|_{W_\etale}) =
+a_{small}^{-1}(b_{small}^{-1} (\mathcal{F}|_{W_\etale})).
+$$
+\item $\varphi : x \to y$가 스킴의 \'etale 사상 $a : U \to V$
+위에 놓이면 (\ref{equation-comparison})은 동형사상이다.
+\item $f : \mathcal{Y} \to \mathcal{X}$가 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이고, $\mathcal{Y}$의 대상
+$y$가 스킴 $U$ 위에 놓이며 그 상이 $x = f(y)$라고 하자.
+그러면 정준 동일시
+$f^{-1}\mathcal{F}|_{U_\etale} = \mathcal{F}|_{U_\etale}$.
+\item 더욱이 $\mathcal{Y}$의 사상 $\psi : y' \to y$가
+$a : U' \to U$ 위에 놓이면 대조 사상
+$c_\psi : a_{small}^{-1}(f^{-1}\mathcal{F}|_{U_\etale}) \to
+f^{-1}\mathcal{F}|_{U'_\etale}$는 (3)의 동일시를 통해 대조 사상
+$c_{f(\psi)} : a_{small}^{-1}\mathcal{F}|_{U_\etale}
+\to \mathcal{F}|_{U'_\etale}$와 같다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이 성질들의 확인은 생략한다.
+\end{proof}
+
+\noindent
+다음으로 가군의 (프리)층의 제한을 다룬다.
+
+\begin{lemma}
+\label{lemma-localizing-structure-sheaf}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+$x \in \Ob(\mathcal{X})$가 $U = p(x)$ 위에 놓인다고 하자.
+보조정리 \ref{lemma-localizing}의 동치는 환 달린 자리의 동치
+$(\mathcal{X}_\tau/x, \mathcal{O}_\mathcal{X}|_x) \to
+((\Sch/U)_\tau, \mathcal{O})$.
+\end{lemma}
+
+\begin{proof}
+구조층의 구성에서 즉시 따른다.
+\end{proof}
+
+\noindent
+$\mathcal{X}$를 $(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주라 하자.
+$\mathcal{F}$를 정의 \ref{definition-modules}에서와 같은
+$\mathcal{X}$ 위의 가군의 (프리)층이라 하자.
+$x$를 $U$ 위에 놓인 $\mathcal{X}$의 대상이라 하자. 그러면
+보조정리 \ref{lemma-localizing-structure-sheaf}에 의해 제한
+$x^{-1}\mathcal{F}$는 $(\Sch/U)_{fppf}$ 위의 가군의 (프리)층이다.
+이 경우 때때로 $x^*\mathcal{F} = x^{-1}\mathcal{F}$라고 쓴다.
+마찬가지로 $\mathcal{F}$가 자리스키, \'etale, smooth 또는 syntomic
+위상의 층이면 $x^{-1}\mathcal{F}$도 그러하다. 더욱이 제한
+$\mathcal{F}|_{U_\etale} = x^{-1}\mathcal{F}|_{U_\etale}$
+은 $U$ 위의 $\mathcal{O}_{U_\etale}$-가군 프리시프이다.
+$\mathcal{F}$가 \'etale 위상의 층이면
+$\mathcal{F}|_{U_\etale}$는 가군의 층이다. 더욱이
+$\varphi : x \to y$가 $a : U \to V$ 위에 놓이는 $\mathcal{X}$의
+사상이면 대조 사상 (\ref{equation-comparison})은
+$a_{small}^\sharp$와 양립하고(내림, 주석
+\ref{descent-remark-change-topologies-ringed} 참조),
+{\it 대조} 사상
+\begin{equation}
+\label{equation-comparison-modules}
+c_\varphi : a_{small}^*(\mathcal{F}|_{V_\etale})
+\longrightarrow
+\mathcal{F}|_{U_\etale}
+\end{equation}
+을 유도한다. 이는 $\mathcal{O}_{U_\etale}$-가군의 사상이다.
+보조정리 \ref{lemma-comparison}의 성질 (1), (2), (3), (4)는
+가군의 \'etale 층의 설정에서도 성립한다. 아래에서는 더 언급하지
+않고 이를 사용한다.
+
+\begin{lemma}
+\label{lemma-enough-points}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+자리 $\mathcal{X}_\tau$는 충분히 많은 점을 갖는다.
+\end{lemma}
+
+\begin{proof}
+사이트, 보조정리 \ref{sites-lemma-enough-points-local}에 의해,
+$\mathcal{X}_\tau/x$가 충분히 많은 점을 갖고 층 $h_x^\#$들이
+층 범주의 끝 대상을 덮도록 하는 $\mathcal{X}$의 대상 $x$들의
+족이 존재함을 보이면 된다. 보조정리 \ref{lemma-localizing} 및
+에탈 코호몰로지, 보조정리
+\ref{etale-cohomology-lemma-points-fppf}에 의해 모든 대상 $x$에 대해
+$\mathcal{X}_\tau/x$가 충분히 많은 점을 가짐을 알 수 있으므로 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+\section{대수공간으로의 제한}
+\label{section-restriction-algebraic-spaces}
+
+\noindent
+이 절에서는 대수공간으로 표현가능한 범주 위의 층을 다룬다.
+다음 보조정리는 위상, 보조정리
+\ref{topologies-lemma-at-the-bottom-etale}의 대수공간에 대한
+대응물이다.
+
+\begin{lemma}
+\label{lemma-compare}
+$S$를 스킴이라 하자. $\mathcal{X} \to (\Sch/S)_{fppf}$를 군들로
+섬유화된 범주라 하자. $\mathcal{X}$가 대수공간 $F$로
+표현가능하다고 하자. 그러면 연속이고 쌍연속인 함자
+$
+F_\etale \to \mathcal{X}_\etale
+$
+가 존재하며, 이는 환 달린 자리의 사상
+$$
+\pi_F :
+(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+\longrightarrow
+(F_\etale, \mathcal{O}_F)
+$$
+과 환 달린 토포스의 사상
+$$
+i_F :
+(\Sh(F_\etale), \mathcal{O}_F)
+\longrightarrow
+(\Sh(\mathcal{X}_\etale), \mathcal{O}_\mathcal{X})
+$$
+을 유도한다. 이때 $\pi_F \circ i_F = \text{id}$이고,
+더욱이 $\pi_{F, *} = i_F^{-1}$이다.
+\end{lemma}
+
+\begin{proof}
+동치 $j : \mathcal{S}_F \to \mathcal{X}$를 선택하자. 대수 스택, 절
+\ref{algebraic-section-split} 및
+\ref{algebraic-section-representable-by-algebraic-spaces}를 보라.
+$F_\etale$의 대상은 스킴 $U$와 \'etale 사상
+$\varphi : U \to F$로 이루어진다. 그러면 $\varphi$는 $U$ 위의
+$\mathcal{S}_F$의 대상이므로 $j(\varphi)$는 $U$ 위의
+$\mathcal{X}$의 대상이다. 이와 같이 $j$는 함자
+$u : F_\etale \to \mathcal{X}$를 유도한다. $u$는
+$\mathcal{X}$의 \'etale 위상에 대해 연속이고 쌍연속임이 분명하다.
+$j$가 동치이므로 함자 $u$는 충실충만하다. 또한 $F_\etale$에는
+섬유곱과 동등화자가 존재하며, 이들은 $F_\etale$의 바탕 스킴
+수준에서 계산되므로 $u$는 이들과 가환한다. 따라서 사이트,
+보조정리 \ref{sites-lemma-when-shriek},
+\ref{sites-lemma-preserve-equalizers} 및
+\ref{sites-lemma-back-and-forth}를 적용할 수 있다. 특히 $u$는
+토포스의 사상 $i_F : \Sh(F_\etale) \to \Sh(\mathcal{X}_\etale)$를
+정의하며, $i_F^{-1}$의 왼쪽 수반 $i_{F, !}$가 존재하여 섬유곱 및
+동등화자와 가환한다.
+
+\medskip\noindent
+$i_{F, !}$가 완전하다고 주장한다. 그렇다면
+$\pi_F^{-1} = i_{F, !}$ 및 $\pi_{F, *} = i_F^{-1}$이라는 규칙으로
+$\pi_F$를 정의할 수 있고 모든 것이 분명해진다. 이 주장을 증명하자.
+$i_{F, !}$가 오른쪽 완전하고 섬유곱을 보존함은 이미 안다.
+따라서 $i_{F, !}* = *$임을 보이면 충분하다. 여기서 $*$는 집합층
+범주의 끝 대상을 나타낸다. $U$를 스킴이라 하고
+$\varphi : U \to F$가 전사 \'etale이라고 하자.
+$R = U \times_F U$로 놓는다. 그러면
+다음 그림은
+$$
+\xymatrix{
+h_R \ar@<1ex>[r] \ar@<-1ex>[r] & h_U \ar[r] & {*}
+}
+$$
+은 $\Sh(F_\etale)$에서의 쌍대동등화자 그림이다.
+$i_{F, !}$의 오른쪽 완전성, $i_{F, !} = (u_p\ )^\#$ 및 사이트,
+보조정리 \ref{sites-lemma-pullback-representable-presheaf}를
+사용하면 다음 그림이
+$$
+\xymatrix{
+h_{u(R)} \ar@<1ex>[r] \ar@<-1ex>[r] & h_{u(U)} \ar[r] & i_{F, !}{*}
+}
+$$
+$\Sh(\mathcal{X}_\etale)$에서의 쌍대동등화자 그림임을 알 수 있다.
+$j$가 동치이고 $F = U/R$임을 사용하면 두 사상
+$h_{u(R)} \to h_{u(U)}$의 $\Sh(\mathcal{X}_\etale)$에서의
+쌍대동등화자가 $*$임이 따른다. 이 사상들이 구조층과 양립함을
+증명하는 것은 생략한다.
+\end{proof}
+
+\begin{remark}
+\label{remark-compare}
+보조정리 \ref{lemma-compare}의 구성은 \'etale 국소화와 양립한다.
+정확한 서술은 다음과 같다. $S$를 스킴이라 하자.
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 사상이라고 하자.
+$\mathcal{X}$와 $\mathcal{Y}$가 대수공간 $F$, $G$로 표현가능하고,
+유도된 대수공간의 사상 $f : F \to G$가 \'etale이라고 하자.
+대응하는 환 달린 토포스의 사상을
+$f_{small} : F_\etale \to G_\etale$로 나타내자. 그러면
+$$
+\xymatrix{
+(\Sh(F_\etale), \mathcal{O}_F) \ar[rr]_{f_{small}} \ar[d]_{i_F} & &
+(\Sh(G_\etale), \mathcal{O}_G) \ar[d]^{i_G} \\
+(\Sh(\mathcal{X}_\etale), \mathcal{O}_\mathcal{X})
+\ar[d]_{\pi_F} \ar[rr]_f & &
+(\Sh(\mathcal{Y}_\etale), \mathcal{O}_\mathcal{Y}) \ar[d]^{\pi_G} \\
+(\Sh(F_\etale), \mathcal{O}_F) \ar[rr]^{f_{small}} & &
+(\Sh(G_\etale), \mathcal{O}_G)
+}
+$$
+은 환 달린 토포스의 가환 그림이다. 세부 사항은 생략한다.
+\end{remark}
+
+\noindent
+$\mathcal{X}$가 대수공간 $F$로 표현되는 대수 스택이라고 하자.
+$j : \mathcal{S}_F \to \mathcal{X}$를 동치라 하고,
+위의 보조정리 \ref{lemma-compare}의 증명에 나온 함자를
+$u : F_\etale \to \mathcal{X}_\etale$로 나타내자.
+$\mathcal{X}_\etale$ 위의 층 $\mathcal{F}$가 주어지면
+$$
+\pi_{F, *}\mathcal{F}(U) = i_F^{-1}\mathcal{F}(U) = \mathcal{F}(u(U)).
+$$
+따라서 $i_F^{-1}$를 흔히 {\it 제한 함자}로 생각한다. 이는 정의
+\ref{definition-pullback} 및 스킴의 큰 \'etale 자리 위의 층을
+그 스킴의 작은 \'etale 자리로 제한하는 것과 유사하다.
+이 상황에서는 흔히 표기
+\begin{equation}
+\label{equation-restrict}
+\mathcal{F}|_{F_\etale} = i_F^{-1}\mathcal{F} = \pi_{F, *}\mathcal{F}
+\end{equation}
+를 사용한다.
+
+\begin{lemma}
+\label{lemma-compare-morphism}
+$S$를 스킴이라 하자. $f : \mathcal{X} \to \mathcal{Y}$가
+$(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주 사이의 사상이라고 하자.
+$\mathcal{X}$와 $\mathcal{Y}$가 대수공간 $F$, $G$로 표현가능하다고 하자.
+유도된 대수공간의 사상을 $f : F \to G$로, 대응하는 환 달린 토포스의
+사상을 $f_{small} : F_\etale \to G_\etale$로 나타내자. 그러면
+$$
+\xymatrix{
+(\Sh(\mathcal{X}_\etale), \mathcal{O}_\mathcal{X})
+\ar[d]_{\pi_F} \ar[rr]_f & &
+(\Sh(\mathcal{Y}_\etale), \mathcal{O}_\mathcal{Y}) \ar[d]^{\pi_G} \\
+(\Sh(F_\etale), \mathcal{O}_F) \ar[rr]^{f_{small}} & &
+(\Sh(G_\etale), \mathcal{O}_G)
+}
+$$
+은 환 달린 토포스의 가환 그림이다.
+\end{lemma}
+
+\begin{proof}
+이는 위상, 보조정리
+\ref{topologies-lemma-morphism-big-small-etale} (3)과 유사하지만,
+$F \to G$가 스킴으로 표현가능하지 않을 수 있다는 작은 문제가 있다.
+특히 환 달린 자리의 가환 그림은 얻지 못하고 환 달린 토포스의
+가환 그림만 얻는다.
+
+\medskip\noindent
+본격적인 증명에 앞서 동치 $j : \mathcal{S}_F \to \mathcal{X}$ 및
+$j' : \mathcal{S}_G \to \mathcal{Y}$를 선택하자. 이들은 보조정리
+\ref{lemma-compare}의 증명에서처럼 함자
+$u : F_\etale \to \mathcal{X}$ 및
+$u' : G_\etale \to \mathcal{Y}$를 유도한다.
+$\Sch_{fppf}$ 위의 군들로 섬유화된 범주 위 층의 2-함자성
+(절 \ref{section-presheaves}의 논의 참조)에 의해
+$\mathcal{X} = \mathcal{S}_F$, $\mathcal{Y} = \mathcal{S}_G$이고
+$f : \mathcal{S}_F \to \mathcal{S}_G$가 사상 $f : F \to G$에
+결부된 함자라고 가정해도 된다. 이에 따라 표기에서 $u$와 $u'$를
+생략한다. 즉 $F_\etale$의 대상 $U \to F$가 주어지면
+$\mathcal{X}$의 대응하는 대상을 $U/F$로 나타낸다. $G$도 마찬가지다.
+
+\medskip\noindent
+$\mathcal{G}$를 $\mathcal{X}_\etale$ 위의 층이라 하자.
+(2)를 증명하기 위해 $\pi_{G, *}f_*\mathcal{G}$와
+$f_{small, *}\pi_{F, *}\mathcal{G}$를 계산한다. 이를 위해
+$V \to G$를 $G_\etale$의 대상이라 하자. 그러면
+$$
+\pi_{G, *}f_*\mathcal{G}(V) = f_*\mathcal{G}(V/G) =
+\Gamma\Big(
+(\Sch/V)_{fppf} \times_{\mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{G}\Big)
+$$
+이다. (\ref{equation-pushforward})을 보라. 이 식의 섬유곱은
+$$
+(\Sch/V)_{fppf} \times_{\mathcal{Y}} \mathcal{X} =
+(\Sch/V)_{fppf} \times_{\mathcal{S}_G} \mathcal{S}_F =
+\mathcal{S}_{V \times_G F}
+$$
+이다. 즉 대수공간 $V \times_G F$에 결부된 분할된 군들로 섬유화된
+범주이다. 또한 $\text{pr}^{-1}\mathcal{G}$는
+$\mathcal{S}_{V \times_G F}$ 위의 \'etale 위상에 대한 층이다.
+
+\medskip\noindent
+특히 $V \times_G F$가 표현가능한 경우, 즉 스킴인 경우에는
+$\pi_{G, *}f_*\mathcal{G}(V) = \mathcal{G}(V \times_G F/F)$이고 또한
+$$
+f_{small, *}\pi_{F, *}\mathcal{G}(V) =
+\pi_{F, *}\mathcal{G}(V \times_G F) =
+\mathcal{G}(V \times_G F/F)
+$$
+이므로 이 특수한 경우에 원하는 등식이 증명된다.
+
+\medskip\noindent
+일반적으로 스킴 $U$와 전사 \'etale 사상
+$U \to V \times_G F$를 선택하자. $R = U \times_{V \times_G F} U$로
+놓는다. 그러면 $U/V \times_G F$와 $R/V \times_G F$는 위 섬유곱
+범주의 대상이다. $\text{pr}^{-1}\mathcal{G}$가
+$\mathcal{S}_{V \times_G F}$ 위의 \'etale 위상에 대한 층이므로 그림
+$$
+\xymatrix@C=0.8em{
+\Gamma\Big(
+(\Sch/V)_{fppf} \times_{\mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{G}\Big)
+\ar[r] &
+\text{pr}^{-1}\mathcal{G}(U/V \times_G F) \ar@<1ex>[r] \ar@<-1ex>[r] &
+\text{pr}^{-1}\mathcal{G}(R/V \times_G F)
+}
+$$
+은 동등화자 그림이다. 당김의 정의에 의해
+$\text{pr}^{-1}\mathcal{G}(U/V \times_G F) = \mathcal{G}(U/F)$
+이고 $\text{pr}^{-1}\mathcal{G}(R/V \times_G F) = \mathcal{G}(R/F)$이다.
+더욱이 공간의 성질, 절
+\ref{spaces-properties-section-etale-site}의 내용, 특히 공간의 성질,
+주석 \ref{spaces-properties-remark-explain-equivalence} 및 보조정리
+\ref{spaces-properties-lemma-functoriality-etale-site}에 의해
+다음 동등화자 그림이 있다.
+$$
+\xymatrix{
+f_{small, *}\pi_{F, *}\mathcal{G}(V)
+\ar[r] &
+\pi_{F, *}\mathcal{G}(U/F) \ar@<1ex>[r] \ar@<-1ex>[r] &
+\pi_{F, *}\mathcal{G}(R/F)
+}
+$$
+또한 $\pi_{F, *}\mathcal{G}(U/F) = \mathcal{G}(U/F)$이고
+$\pi_{F, *}\mathcal{G}(U/F) = \mathcal{G}(U/F)$이므로 정준 동일시
+$f_{small, *}\pi_{F, *}\mathcal{G}(V) = \pi_{G, *}f_*\mathcal{G}(V)$.
+를 얻는다. 이것이 제한 사상과 양립하고 $\mathcal{G}$에 대해
+함자적임을 증명하는 것은 생략한다.
+\end{proof}
+
+\noindent
+$f : \mathcal{X} \to \mathcal{Y}$와 $f : F \to G$가 위 보조정리의
+둘째 부분에서와 같다고 하자. 보조정리와
+(\ref{equation-restrict})로부터
+\begin{equation}
+\label{equation-compare-big-small}
+(f_*\mathcal{F})|_{G_\etale} =
+f_{small, *}(\mathcal{F}|_{F_\etale})
+\end{equation}
+가 $\mathcal{X}_\etale$ 위의 임의의 층 $\mathcal{F}$에 대해 따른다.
+더욱이 $\mathcal{F}$가 $\mathcal{O}$-가군의 층이면
+(\ref{equation-compare-big-small})은 $G_\etale$ 위의
+$\mathcal{O}_G$-가군의 동형사상이다.
+
+\medskip\noindent
+마지막으로 다음 $2$-가환 그림이
+$$
+\xymatrix{
+\mathcal{U} \ar[r]^a \ar[dr]_f \drtwocell<\omit>{<-2>\varphi} &
+\mathcal{V} \ar[d]^g \\
+& \mathcal{X}
+}
+$$
+$(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주 사이의 $1$-사상들로
+이루어져 있고, $\mathcal{F}$가 $\mathcal{X}_\etale$ 위의 층이며,
+$\mathcal{U}, \mathcal{V}$가 대수공간 $U, V$로
+표현가능하다고 하자. 그러면 대조 사상
+\begin{equation}
+\label{equation-comparison-algebraic-spaces}
+c_\varphi : a_{small}^{-1}(g^{-1}\mathcal{F}|_{V_\etale})
+\longrightarrow
+f^{-1}\mathcal{F}|_{U_\etale}
+\end{equation}
+을 얻는다. 여기서 $a : U \to V$는 $a$에 대응하는 대수공간의
+사상을 나타낸다. 이는 (\ref{equation-comparison})의 대응물이다.
+$c_\varphi$를 다음 사상의 수반으로 정의한다.
+$$
+g^{-1}\mathcal{F}|_{V_\etale}
+\longrightarrow
+a_{small, *}(f^{-1}\mathcal{F}|_{U_\etale}) =
+(a_*f^{-1}\mathcal{F})|_{V_\etale}
+$$
+(등식은 (\ref{equation-compare-big-small})에 의한다). 이는 다음
+사상을 (\ref{equation-restrict})에 따라 $V$로 제한한 것이다.
+$$
+g^{-1}\mathcal{F} \to a_*a^{-1}g^{-1}\mathcal{F} = a_*f^{-1}\mathcal{F}
+$$
+마지막 등식은 위 그림의 $2$-가환성을 사용한다.
+$\mathcal{F}$가 $\mathcal{O}_\mathcal{X}$-가군의 층인 경우
+$c_\varphi$는 {\it 대조} 사상
+\begin{equation}
+\label{equation-comparison-algebraic-spaces-modules}
+c_\varphi : a_{small}^*(g^*\mathcal{F}|_{V_\etale})
+\longrightarrow
+f^*\mathcal{F}|_{U_\etale}
+\end{equation}
+을 유도한다. 이는 $\mathcal{O}_{U_\etale}$-가군의 사상이며,
+(\ref{equation-comparison-modules})의 대응물이다.
+보조정리 \ref{lemma-comparison}의 성질 (1), (2), (3), (4)는
+이 설정에서도 성립한다.
+
+
+
+
+
+
+
+
+
+
+
+
+\section{준연접 가군}
+\label{section-quasi-coherent}
+
+\noindent
+이제 준연접 가군의 일반적인 정의를 이 장에서 다루는 상황에
+적용할 수 있다.
+
+\begin{definition}
+\label{definition-quasi-coherent}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+{\it $\mathcal{X}$ 위의 준연접 가군}, 또는
+{\it 준연접 $\mathcal{O}_\mathcal{X}$-가군}은 자리 위의 가군,
+정의 \ref{sites-modules-definition-site-local}에서와 같은
+환 달린 자리 $(\mathcal{X}_{fppf}, \mathcal{O}_\mathcal{X})$ 위의
+준연접 가군이다. $\mathcal{X}$ 위의 준연접층 범주는
+$\QCoh(\mathcal{O}_\mathcal{X})$로 나타낸다.
+\end{definition}
+
+\noindent
+$\mathcal{X}$가 대수 스택이면 이 정의는 문헌의 모든 정의와 일치한다.
+즉 $\QCoh(\mathcal{O}_\mathcal{X})$는 집합론적 문제를 제외하면
+문헌에 정의된 이 범주의 모든 변형과 동치이다. 예를 들어 스택 위의
+코호몰로지, 보조정리 \ref{lemma-quasi-coherent}에서 우리의 정의를
+\cite[정의 6.1]{olsson_sheaves}의 정의와 맞춘다.
+이 범주의 다른 구성들도 뒤에서 살펴본다.
+
+\medskip\noindent
+일반적으로 스킴의 사상에서와 마찬가지로 $1$-사상을 따른
+준연접층의 전진은 준연접일 필요가 없다. 당김은 준연접성을 보존한다.
+
+\begin{lemma}
+\label{lemma-pullback-quasi-coherent}
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의 군들로
+섬유화된 범주 사이의 $1$-사상이라고 하자. 당김 함자
+$f^* = f^{-1} : \textit{Mod}(\mathcal{O}_\mathcal{Y}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})$
+는 준연접층을 보존한다.
+\end{lemma}
+
+\begin{proof}
+이는 일반적인 사실이다. 자리 위의 가군, 보조정리
+\ref{sites-modules-lemma-local-pullback}을 보라.
+\end{proof}
+
+\noindent
+준연접층은 그 당김으로 매우 간단하게 특징지을 수 있다.
+제한에 의한 특징화는 보조정리 \ref{lemma-quasi-coherent}도 보라.
+
+\begin{lemma}
+\label{lemma-characterize-quasi-coherent}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하고,
+$\mathcal{F}$를 $\mathcal{O}_\mathcal{X}$-가군의 층이라 하자.
+그러면 $\mathcal{F}$가 준연접일 필요충분조건은 $U = p(x)$인
+$\mathcal{X}$의 모든 대상 $x$에 대해 $x^*\mathcal{F}$가
+$(\Sch/U)_{fppf}$ 위의 준연접층인 것이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-pullback-quasi-coherent}에 의해 조건은 필요하다.
+반대로 $x^*\mathcal{F}$는 단지 $\mathcal{X}_{fppf}/x$로의 제한이므로,
+준연접층의 정의에서 이 조건이 충분함이 바로 따른다. 여기서는
+준연접이라는 개념이 가군의 층의 내재적 성질이라는 사실도 사용한다.
+자리 위의 가군, 절 \ref{sites-modules-section-intrinsic}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-quasi-coherent-bis}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+$\mathcal{F}$를 $\mathcal{X}$ 위의 가군 프리시프라 하자.
+다음은 서로 동치이다.
+\begin{enumerate}
+\item $\mathcal{F}$는
+$\textit{Mod}(\mathcal{X}_{Zar}, \mathcal{O}_\mathcal{X})$
+의 대상이고, $\mathcal{F}$는 자리 위의 가군, 정의
+\ref{sites-modules-definition-site-local}의 의미에서
+$(\mathcal{X}_{Zar}, \mathcal{O}_\mathcal{X})$ 위의 준연접 가군이다.
+\item $\mathcal{F}$는
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+의 대상이고, $\mathcal{F}$는 자리 위의 가군, 정의
+\ref{sites-modules-definition-site-local}의 의미에서
+$(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ 위의 준연접 가군이다.
+\item $\mathcal{F}$는 정의 \ref{definition-quasi-coherent}의 의미에서
+$\mathcal{X}$ 위의 준연접 가군이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1), (2), (3) 가운데 하나가 성립한다고 하자.
+$x$를 스킴 $U$ 위에 놓인 $\mathcal{X}$의 대상이라 하자.
+$x^*\mathcal{F} = x^{-1}\mathcal{F}$는 단지
+$\mathcal{X}/x = (\Sch/U)_\tau$로의 제한임을 상기하자. 여기서
+$\tau = fppf$, $\tau = \etale$ 또는 $\tau = Zar$이다.
+절 \ref{section-restriction}을 보라.
+환 달린 자리 위의 준연접 가군의 정의에 의해 $\mathcal{F}$가
+준연접이면 이 제한도 준연접이다. 내림, 명제
+\ref{descent-proposition-equivalence-quasi-coherent}에 의해
+$x^*\mathcal{F}$는 준연접 $\mathcal{O}_U$-가군에 결부된 층이며,
+따라서 fppf, \'etale 및 자리스키 위상에서 준연접 가군이다.
+여기서는 내림, 보조정리 \ref{descent-lemma-sheaf-condition-holds}와
+정의 \ref{descent-definition-structure-sheaf}도 사용한다.
+이는 $\mathcal{X}$의 모든 대상 $x$에 대해 성립하므로,
+$\mathcal{F}$는 세 위상 모두에서 층이다. 더욱이 준연접성의 정의와
+$x$가 $\mathcal{X}$의 임의의 대상이라는 사실에서
+$\mathcal{F}$가 세 위상 모두에서 준연접임을 바로 알 수 있다.
+\end{proof}
+
+
+
+
+
+
+
+\section{국소 준연접 가군}
+\label{section-locally-quasi-coherent}
+
+\noindent
+자리스키 위상을 위한 변형도 있지만, 다음 정의에서는
+\'etale 위상을 사용하는 것이 자연스러운 것으로 보인다.
+
+\begin{definition}
+\label{definition-locally-quasi-coherent}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+$\mathcal{F}$를 $\mathcal{O}_\mathcal{X}$-가군의 프리시프라 하자.
+$\mathcal{F}$가 \'etale 위상에 대한 층이고
+$\mathcal{X}$의 모든 대상 $x$에 대해 제한
+$x^*\mathcal{F}|_{U_\etale}$가 준연접층이면,
+$\mathcal{F}$를 {\it 국소 준연접}이라고 한다\footnote{이는
+비표준 표기이다.}. 여기서 $U = p(x)$이다.
+\end{definition}
+
+\noindent
+국소 준연접 가군의 범주는
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$로 나타낸다.
+이제 다음과 같은 가군 범주들의 도식이 있다.
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_\mathcal{X}) \ar[r] \ar[d] &
+\textit{Mod}(\mathcal{O}_\mathcal{X}) \ar[d] \\
+\textit{LQCoh}(\mathcal{O}_\mathcal{X}) \ar[r] &
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+}
+$$
+여기서 화살표들은 엄밀히 충실충만한 매장이다.
+준연접층에 관한 많은 결과에는 국소 준연접 가군에 관한 대응물이 있다.
+더욱이 여러 관점에서(뒤에서 보겠지만) 이는 고려하기 자연스러운 범주이다.
+예를 들어 준연접층은 정확히 ``데카르트적''인 국소 준연접 가군,
+즉 아래 보조정리의 두 번째 조건을 만족하는 가군이다.
+
+\begin{lemma}
+\label{lemma-quasi-coherent}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+$\mathcal{F}$를 $\mathcal{O}_\mathcal{X}$-가군의 프리시프라 하자.
+그러면 $\mathcal{F}$가 준연접일 필요충분조건은 다음 두 조건이
+성립하는 것이다.
+\begin{enumerate}
+\item $\mathcal{F}$는 국소 준연접이고,
+\item $f : U \to V$ 위에 놓인 $\mathcal{X}$의 임의의 사상
+$\varphi : x \to y$에 대해 식
+(\ref{equation-comparison-modules})의 비교 사상
+$c_\varphi : f_{small}^*\mathcal{F}|_{V_\etale} \to
+\mathcal{F}|_{U_\etale}$는 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$가 준연접이라고 가정하자. 그러면 $\mathcal{F}$는
+fppf 위상에 대한 층이고, 따라서 \'etale 위상에 대한 층이다.
+또한 $\mathcal{F}$를 임의의 환 달린 토포스로 당기면 준연접이므로,
+제한들 $x^*\mathcal{F}|_{U_\etale}$도 준연접이다.
+따라서 $\mathcal{F}$는 국소 준연접이다.
+$y$를 $V = p(y)$인 $\mathcal{X}$의 대상이라 하자.
+앞에서 $\mathcal{X}/y = (\Sch/V)_{fppf}$임을 보았다.
+내림, 명제 \ref{descent-proposition-equivalence-quasi-coherent}에 의해
+$y^*\mathcal{F}$는 스킴 $V$ 위의 (통상적인) 준연접 가군
+$\mathcal{F}_V$에 결부된 준연접 가군이다.
+따라서 비교 사상들 (\ref{equation-comparison-modules})은 동형이다.
+
+\medskip\noindent
+반대로 $\mathcal{F}$가 (1)과 (2)를 만족한다고 하자.
+$y$를 $V = p(y)$인 $\mathcal{X}$의 대상이라 하자.
+가정 (1)에 의해 준연접인 제한 $y^*\mathcal{F}|_{V_\etale}$에
+대응하는 스킴 $V$ 위의 준연접 가군을 $\mathcal{F}_V$로 나타내자.
+내림, 명제 \ref{descent-proposition-equivalence-quasi-coherent}를 보라.
+이제 조건 (2)는 $y$ 위에 놓인 $x$에 대한 각 제한
+$x^*\mathcal{F}|_{U_\etale}$가 대응하는 스킴 사상 $U \to V$를
+따른 $\mathcal{F}_V$의 당김에 결부된 \'etale 층과 동형임을 뜻한다.
+따라서 $y^*\mathcal{F}$는 $\mathcal{F}_V$에 결부된
+$(\Sch/V)_{fppf}$ 위의 층이다. 그러므로 다시 내림, 명제
+\ref{descent-proposition-equivalence-quasi-coherent}에 의해 이는
+준연접이고, 보조정리 \ref{lemma-characterize-quasi-coherent}에 의해
+$\mathcal{F}$는 $\mathcal{X}$ 위에서 준연접이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pullback-lqc}
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의 군들로
+섬유화된 범주 사이의 $1$-사상이라 하자. 당김 함자
+$f^* = f^{-1} :
+\textit{Mod}(\mathcal{Y}_\etale, \mathcal{O}_\mathcal{Y})
+\to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+는 국소 준연접층을 보존한다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{G}$가 $\mathcal{Y}$ 위에서 국소 준연접이라고 하자.
+스킴 $U$ 위에 놓인 $\mathcal{X}$의 대상 $x$를 택하자.
+제한 $x^*f^*\mathcal{G}|_{U_\etale}$는
+$(f \circ x)^*\mathcal{G}|_{U_\etale}$
+와 같고, 따라서 $\mathcal{G}$에 대한 가정에 의해 준연접층이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-lqc-colimits}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+\begin{enumerate}
+\item 범주 $\textit{LQCoh}(\mathcal{O}_\mathcal{X})$는 쌍대극한을 가지며,
+이는 범주
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+에서의 쌍대극한과 일치한다.
+\item 범주 $\textit{LQCoh}(\mathcal{O}_\mathcal{X})$는 아벨 범주이고,
+핵과 여핵은
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+에서 계산된다. 다시 말해 포함 함자는 완전하다.
+\item $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의
+짧은 완전열
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$에서
+셋 중 둘이 국소 준연접이면 나머지 하나도 국소 준연접이다.
+\item $\mathcal{F}, \mathcal{G}$가
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$의 대상이면,
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$에서의 텐서곱
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$는
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$의 대상이다.
+\item $\mathcal{F}, \mathcal{G}$가
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$의 대상이고
+$\mathcal{F}$가 $\mathcal{X}_\etale$ 위에서 유한 표시이면,
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$에서의 층
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$는
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$의 대상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+아래 논증에서 $x$는 스킴 $U$ 위에 놓인 $\mathcal{X}$의 임의의
+대상을 뜻한다. $\textit{Mod}(\mathcal{X}_\etale,
+\mathcal{O}_\mathcal{X})$의 대상 $\mathcal{H}$가
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$에 속함을 보이기 위해,
+제한 $x^*\mathcal{H}|_{U_\etale} = \mathcal{H}|_{U_\etale}$가
+$\textit{Mod}(U_\etale, \mathcal{O}_U)$의 준연접 대상임을 보이겠다.
+
+\medskip\noindent
+(1)의 증명. 도식
+$\mathcal{I} \to \textit{LQCoh}(\mathcal{O}_\mathcal{X})$,
+$i \mapsto \mathcal{F}_i$가 주어졌다고 하자.
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의 대상
+$\mathcal{F} = \colim_i \mathcal{F}_i$를 생각하자.
+당김 함자 $x^*$는 왼쪽 수반이므로 모든 쌍대극한과 가환한다.
+따라서 $x^*\mathcal{F} = \colim_i x^*\mathcal{F}_i$이다.
+마찬가지로
+$x^*\mathcal{F}|_{U_\etale} =
+\colim_i x^*\mathcal{F}_i|_{U_\etale}$이다.
+가정에 의해 각 $x^*\mathcal{F}_i|_{U_\etale}$는 준연접이다.
+그러므로 내림, 보조정리
+\ref{descent-lemma-properties-quasi-coherent}에 의해
+$\colim_i x^*\mathcal{F}_i|_{U_\etale}$도 준연접이다.
+따라서 원하는 대로 $x^*\mathcal{F}|_{U_\etale}$가 준연접이다.
+
+\medskip\noindent
+(2)의 증명. (1)에 의해
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$에는 여핵이 존재하며,
+이는 $\textit{Mod}(\mathcal{X}_\etale,
+\mathcal{O}_\mathcal{X})$에서 계산한 여핵과 일치한다.
+$\varphi : \mathcal{F} \to \mathcal{G}$를
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$의 사상이라 하고,
+$\mathcal{K} = \Ker(\varphi)$를
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$에서
+계산한 핵이라 하자. $\mathcal{K}$가 국소 준연접 가군임을 보이면
+(2)의 증명이 끝난다. 이를 위해 핵은 프리시프 범주에서
+계산됨을 주의하자(층화는 필요하지 않다).
+따라서 $\mathcal{K}|_{U_\etale}$는 사상
+$\mathcal{F}|_{U_\etale} \to \mathcal{G}|_{U_\etale}$,
+의 핵이다. 즉 $U_\etale$ 위의 준연접층 사이 사상의 핵이므로,
+내림, 보조정리 \ref{descent-lemma-properties-quasi-coherent}에 의해
+준연접이다. 이로써 (2)가 증명되었다.
+
+\medskip\noindent
+(3)의 증명.
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$
+을 $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의
+짧은 완전열이라 하자.
+\'etale 위상을 사용하고 있으므로 제한
+$0 \to \mathcal{F}_1|_{U_\etale} \to
+\mathcal{F}_2|_{U_\etale} \to \mathcal{F}_3|_{U_\etale} \to 0$
+도 짧은 완전열이다. 따라서 (3)은 내림, 보조정리
+\ref{descent-lemma-properties-quasi-coherent}의 대응하는 명제에서 따른다.
+
+\medskip\noindent
+(4)의 증명. $\mathcal{F}$와 $\mathcal{G}$가
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$에 속한다고 하자.
+$U_\etale$로의 제한은 환 달린 토포스의 사상
+$U_\etale \to (\Sch/U)_\etale \to \mathcal{X}_\etale$
+을 따른 당김으로 주어지므로, 텐서곱
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$
+의 $U_\etale$로의 제한은
+$\mathcal{F}|_{U_\etale} \otimes_{\mathcal{O}_U} \mathcal{G}|_{U_\etale}$,
+와 같다. 자리 위의 가군, 보조정리
+\ref{sites-modules-lemma-tensor-product-pullback}을 보라.
+$\mathcal{F}|_{U_\etale}$와 $\mathcal{G}|_{U_\etale}$가
+준연접이므로, 내림, 보조정리
+\ref{descent-lemma-properties-quasi-coherent}에 의해
+그 텐서곱도 준연접이다.
+
+\medskip\noindent
+(5)의 증명. $\mathcal{F}$와 $\mathcal{G}$가
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$에 속하고
+$\mathcal{F}$가 유한 표시라고 하자.
+$(\Sch/U)_\etale = \mathcal{X}_\etale/x$
+는 $\mathcal{X}_\etale$를 한 대상에서 국소화한 것이므로,
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+의 $(\Sch/U)_\etale$로의 제한은
+$$
+\mathcal{H} =
+\SheafHom_{\mathcal{O}|_{(\Sch/U)_\etale}}(
+\mathcal{F}|_{(\Sch/U)_\etale}, \mathcal{G}|_{(\Sch/U)_\etale})
+$$
+와 같다. 자리 위의 가군, 보조정리
+\ref{sites-modules-lemma-internal-hom-restriction}을 보라.
+환 달린 토포스의 사상
+$(U_\etale, \mathcal{O}_U) \to ((\Sch/U)_\etale, \mathcal{O})$
+은 $\mathcal{O}$의 당김이 $\mathcal{O}_U$이므로 평탄하다.
+따라서 이 사상을 따른 $\mathcal{H}$의 당김은
+$\SheafHom_{\mathcal{O}_U}(\mathcal{F}|_{U_\etale}, \mathcal{G}|_{U_\etale})$
+와 같다. 자리 위의 가군, 보조정리
+\ref{sites-modules-lemma-pullback-internal-hom}을 보라.
+다시 말해
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+의 $U_\etale$로의 제한은
+$\SheafHom_{\mathcal{O}_U}(\mathcal{F}|_{U_\etale}, \mathcal{G}|_{U_\etale})$.
+$\mathcal{F}|_{U_\etale}$와 $\mathcal{G}|_{U_\etale}$가 준연접이므로,
+$\SheafHom_{\mathcal{O}_U}(\mathcal{F}|_{U_\etale}, \mathcal{G}|_{U_\etale})$
+도 준연접이다. 내림, 보조정리
+\ref{descent-lemma-properties-quasi-coherent}를 보라.
+앞에서와 같이 결론을 얻는다.
+\end{proof}
+
+\noindent
+여기서 논의하는 일반성에서는 준연접층의 범주가 아벨 범주가 아니다.
+예, 절 \ref{examples-section-nonabelian-QCoh}을 보라.
+추가 작업 없이 다음을 증명할 수 있다.
+
+\begin{lemma}
+\label{lemma-qc-colimits}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+\begin{enumerate}
+\item 범주 $\QCoh(\mathcal{O}_\mathcal{X})$는 쌍대극한을 가지며,
+이는 다음 네 범주에서의 쌍대극한과 일치한다:
+$\textit{Mod}(\mathcal{X}_{Zar}, \mathcal{O}_\mathcal{X})$,
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$,
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ 및
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$.
+\item $\mathcal{F}, \mathcal{G}$가 $\QCoh(\mathcal{O}_\mathcal{X})$에
+속한다고 하자. 텐서곱
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$
+을
+$\textit{Mod}(\mathcal{X}_{Zar}, \mathcal{O}_\mathcal{X})$,
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ 또는
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$에서 계산한 세 결과는
+서로 일치하며, 그 공통값은
+$\QCoh(\mathcal{O}_\mathcal{X})$의 대상이다.
+\item $\mathcal{F}, \mathcal{G}$가 $\QCoh(\mathcal{O}_\mathcal{X})$에
+속하고 $\mathcal{F}$가 유한 국소 자유라고 하자
+(fppf 위상에서, 또는 이와 동치로 \'etale 위상에서, 또는 이와
+동치로 자리스키 위상에서). 내부 Hom
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+을
+$\textit{Mod}(\mathcal{X}_{Zar}, \mathcal{O}_\mathcal{X})$,
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ 또는
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$에서 계산한 세 결과는
+서로 일치하며, 그 공통값은
+$\QCoh(\mathcal{O}_\mathcal{X})$의 대상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$x$를 스킴 $U$ 위에 놓인 $\mathcal{X}$의 임의의 대상이라 하자.\par\noindent
+$\tau \in \{Zariski, \etale, fppf\}$라 하자.
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$의 대상
+$\mathcal{H}$가 $\QCoh(\mathcal{O}_\mathcal{X})$에 속함을 보이려면,
+제한 $x^*\mathcal{H}$(절 \ref{section-restriction})가
+$\textit{Mod}((\Sch/U)_\tau, \mathcal{O})$의 준연접 대상임을
+보이는 것으로 충분하다. 보조정리
+\ref{lemma-characterize-quasi-coherent}와
+\ref{lemma-characterize-quasi-coherent-bis}를 보라.
+유한 국소 자유인 것에 대해서도 마찬가지이다.
+$(\Sch/U)_\tau = \mathcal{X}_\tau/x$가
+$\mathcal{X}_\tau$를 한 대상에서 국소화한 것임을 상기하자.
+따라서 제한은 쌍대극한, 텐서곱 및 내부 Hom의 형성과 가환한다
+(자리 위의 가군, 보조정리
+\ref{sites-modules-lemma-exactness-pushforward-pullback},
+\ref{sites-modules-lemma-tensor-product-pullback} 및
+\ref{sites-modules-lemma-internal-hom-restriction}를 보라).
+그러면 이 보조정리는 내림, 보조정리
+\ref{descent-lemma-qc-colimits}로 환원된다.
+\end{proof}
+
+
+
+
+
+
+\section{스택화와 층}
+\label{section-stackification}
+
+\noindent
+군들로 섬유화된 범주 위의 층 범주는 그 스택화만을
+``알고 있음''이 드러난다.
+
+\begin{lemma}
+\label{lemma-stackification}
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+$f$가 스택화들의 동치를 유도하면, 토포스의 사상
+$f : \Sh(\mathcal{X}_{fppf}) \to \Sh(\mathcal{Y}_{fppf})$
+은 동치이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{Y}$가 $\mathcal{X}$의 스택화라고 가정해도 된다.
+$f : \mathcal{X} \to \mathcal{Y}$가 특수 쌍대연속 함자라고
+주장한다. 자리, 정의
+\ref{sites-definition-special-cocontinuous-functor}를 보라.
+이 주장이 보조정리를 증명한다. 스택, 보조정리
+\ref{stacks-lemma-topology-inherited-functorial}에 의해 함자 $f$는
+연속이고 쌍대연속이다. 스택, 보조정리
+\ref{stacks-lemma-stackify}에 의해 자리, 보조정리
+\ref{sites-lemma-equivalence}의 조건 (3), (4), (5)가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-stackification-quasi-coherent}
+$f : \mathcal{X} \to \mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+$f$가 스택화들의 동치를 유도하면, $f^*$는 다음 동치들을 유도한다.
+% P11-E0116
+$\textit{Mod}(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{Y})$
+및
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\QCoh(\mathcal{O}_\mathcal{Y})$.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{Y}$가 $\mathcal{X}$의 스택화라고 가정해도 된다.
+보조정리 \ref{lemma-stackification}과 등식
+$\mathcal{O}_\mathcal{X} = f^{-1}\mathcal{O}_\mathcal{Y}$에서
+첫 번째 주장은 명백하다. 준연접층의 당김은 준연접이다.
+% P11-E0114
+보조정리 \ref{lemma-pullback-quasi-coherent}를 보라.
+따라서 $f^*\mathcal{G}$가 준연접이면 $\mathcal{G}$도 준연접임을
+보이는 것으로 충분하다.
+이를 위해 $y$를 $\mathcal{Y}$의 대상이라 하자.
+$\mathcal{Y}$가 $\mathcal{X}$의 스택화라는 조건을 풀어 쓰면,
+$\mathcal{Y}$ 안에 fppf 덮개 $\{y_i \to y\}$가 존재하여
+$\mathcal{X}$의 어떤 대상
+% P11-E0115
+$x_i$에 대해 $y_i \cong f(x_i)$임을 알 수 있다.
+$x_i$와 $y_i$가 스킴 $U_i$ 위에 놓인다고 하자.
+$f^*\mathcal{G}$가 준연접이므로 $x_i^*f^*\mathcal{G}$는 준연접이다.
+$x_i^*f^*\mathcal{G}$는 $y_i^*\mathcal{G}$와 동형이므로
+(층들로서
+% P11-E0113
+$(\Sch/U_i)_{fppf}$ 위에서 $y_i^*\mathcal{G}$가 준연접임을 알 수 있다.
+자리 위의 가군, 보조정리
+\ref{sites-modules-lemma-local-final-object}에 의해
+$\mathcal{G}$의 $\mathcal{Y}/y$로의 제한은 준연접이다.
+따라서 보조정리 \ref{lemma-characterize-quasi-coherent}에 의해
+$\mathcal{G}$는 준연접이다.
+\end{proof}
+
+
+
+
+
+\section{준연접층과 제시}
+\label{section-quasi-coherent-presentation}
+
+\noindent
+먼저 준연접층을 스킴과 대수공간에 대해 앞서 정의한 개념들과 맞추자.
+
+\begin{lemma}
+\label{lemma-compare-locally-quasi-coherent}
+$S$를 스킴이라 하자. $\mathcal{X} \to (\Sch/S)_{fppf}$가
+대수공간 $F$로 표현가능한, 군들로 섬유화된 범주라고 하자.
+$\mathcal{F}$가 $\textit{LQCoh}(\mathcal{O}_\mathcal{X})$에 속하면,
+제한 $\mathcal{F}|_{F_\etale}$ (\ref{equation-restrict})은 준연접이다.
+\end{lemma}
+
+\begin{proof}
+$U$를 $F$ 위의 \'etale 스킴이라 하자. 그러면
+$\mathcal{F}|_{U_\etale} = (\mathcal{F}|_{F_\etale})|_{U_\etale}$.
+이는 명백하지만 주 \ref{remark-compare}도 보라.
+따라서 주장은 정의에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-quasi-coherent}
+$S$를 스킴이라 하자. $\mathcal{X} \to (\Sch/S)_{fppf}$가
+대수공간 $F$로 표현가능한, 군들로 섬유화된 범주라고 하자.
+함자 (\ref{equation-restrict})은 동치
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \to \QCoh(\mathcal{O}_F),\quad
+\mathcal{F} \longmapsto \mathcal{F}|_{F_\etale}
+$$
+를 정의하며, 그 준역함자는
+$\mathcal{G} \mapsto \pi_F^*\mathcal{G}$로 주어진다.
+이 동치는 대수공간으로 표현가능한, 군들로 섬유화된 범주 사이의
+사상에 대한 당김과 양립한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-characterize-quasi-coherent-bis}에 의해
+\'etale 위상에서 작업해도 된다. 보조정리 \ref{lemma-compare}의
+표기와 결과를 더 언급하지 않고 사용하겠다.
+제한 함자
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(F_\etale, \mathcal{O}_F)$,
+$\mathcal{F} \mapsto \mathcal{F}|_{F_\etale}$가 $i_F^*$로
+주어짐을 상기하자. 보조정리
+\ref{lemma-compare-locally-quasi-coherent} 또는 자리 위의 가군,
+보조정리 \ref{sites-modules-lemma-local-pullback}에 의해
+$\mathcal{F}$가 준연접이면 $\mathcal{F}|_{F_\etale}$도 준연접이다.
+따라서 보조정리의 명제에 표시된 함자와 반대 방향의 함자
+$\pi_F^*$를 얻는다. $\pi_F \circ i_F = \text{id}$이므로
+$i_F^*\pi_F^*\mathcal{G} = \mathcal{G}$.
+
+\medskip\noindent
+다음 범주의 $\mathcal{F}$에 대해
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+에는 표준 사상
+$\pi_F^*(\mathcal{F}|_{F_\etale}) \to \mathcal{F}$가 있다.
+이는 식별
+$\mathcal{F}|_{F_\etale} = \pi_{F, *}\mathcal{F}$에
+수반하는 사상이다. $\mathcal{F}$가 $\mathcal{X}$ 위의
+준연접 가군이면 이 사상이 동형임을 보이겠다.
+스킴 $U$와 전사 \'etale 사상 $U \to F$를 택하자.
+대응하는 $U$ 위의 $\mathcal{X}$의 대상을
+$x : U \to \mathcal{X}$로 나타내자. 사상
+$\pi_F^*(\mathcal{F}|_{F_\etale}) \to \mathcal{F}$을
+$\mathcal{X}_\etale/x = (\Sch/U)_\etale$로 제한하면
+동형임을 보이는 것으로 충분하다.
+$U \to F$가 \'etale이므로 주 \ref{remark-compare}에서
+$$
+\pi_F^*(\mathcal{F}|_{F_\etale})|_{\mathcal{X}_\etale/x} =
+\pi_U^*(\mathcal{F}|_{U_\etale})
+$$
+임이 따르고, 사상
+$\pi_F^*(\mathcal{F}|_{F_\etale}) \to \mathcal{F}$
+의 $\mathcal{X}_\etale/x = (\Sch/U)_\etale$로의 제한은
+대응하는 사상
+$\pi_U^*(\mathcal{F}|_{U_\etale}) \to \mathcal{F}|_{(\Sch/U)_\etale}$
+과 같다. 내림, 절
+\ref{descent-section-quasi-coherent-sheaves}\footnote{구체적으로,
+$U$가 스킴이고 $\mathcal{F}$가 $(\Sch/U)_\etale$ 위에서 준연접이면,
+내림, 명제 \ref{descent-proposition-equivalence-quasi-coherent}에 의해
+스킴 $U$ 위의 어떤 준연접 가군 $\mathcal{H}$에 대해
+$\mathcal{F} = \mathcal{H}^a$이다. 다시 말해 내림, 주
+\ref{descent-remark-change-topologies-ringed-sites}에 의해,
+내림, 보조정리 \ref{descent-lemma-compare-sites}의 표기를 사용하면
+$\mathcal{F} = (\text{id}_{\etale,Zar})^*\mathcal{H}$이다.
+또한
+$\text{id}_{\etale,Zar} = \pi_U \circ \text{id}_{small,\etale,Zar}$
+이고, 따라서
+$\mathcal{G} = (\text{id}_{small,\etale,Zar})^*\mathcal{H}$가
+준연접인 경우 $\mathcal{F} = \pi_U^*\mathcal{G}$임을 알 수 있다.
+그러면 원하는 대로
+$\pi_U^*i_U^*\mathcal{F} = \pi_U^*i_U^*\pi_U^*\mathcal{G} =
+\pi_U^*\mathcal{G} = \mathcal{F}$이다.}에서 이 결과가 스킴에 대해
+참임을 보았으므로 결론을 얻는다.
+
+\medskip\noindent
+당김과의 양립성은 준역함자가 $\pi_F^*$로 주어진다는 사실과
+보조정리 \ref{lemma-compare-morphism}의 환 달린 토포스의
+가환 도식에서 따른다.
+\end{proof}
+
+\noindent
+대수공간의 준군, 정의
+\ref{spaces-groupoids-definition-groupoid-module}에서 임의의 준군 위의
+준연접 가군 개념을 정의했다. 다음 (형식적인) 명제는 몫 스택 위의
+준연접층을 제시 위의 준연접 가군으로 연구할 수 있음을 말해 준다.
+
+\begin{proposition}
+\label{proposition-quasi-coherent}
+$(U, R, s, t, c)$를 $S$ 위 대수공간의 준군이라 하자.
+$\mathcal{X} = [U/R]$를 몫 스택이라 하자.
+$\mathcal{X}$ 위의 준연접 가군 범주는
+$(U, R, s, t, c)$ 위의 준연접 가군 범주와 동치이다.
+\end{proposition}
+
+\begin{proof}
+다음 준역함자들을 구성하겠다.
+$$
+\QCoh(\mathcal{O}_\mathcal{X})
+\longleftrightarrow
+\QCoh(U, R, s, t, c).
+$$
+여기서 $\QCoh(U, R, s, t, c)$는 준군 $(U, R, s, t, c)$ 위의
+준연접 가군 범주를 뜻한다.
+
+\medskip\noindent
+$\mathcal{F}$를 $\QCoh(\mathcal{O}_\mathcal{X})$의 대상이라 하자.
+$U$와 $R$에 대응하는 군들로 섬유화된 범주를 각각
+$\mathcal{U}$, $\mathcal{R}$로 나타내자.
+$U$ 위의 $\mathcal{X}$의 (정의하는) 대상을 $x$로 나타내자.
+다음 $2$-가환 도식이 있음을 상기하자.
+$$
+\xymatrix{
+\mathcal{R} \ar[r]_s \ar[d]_t & \mathcal{U} \ar[d]^x \\
+\mathcal{U} \ar[r]^x & \mathcal{X}
+}
+$$
+대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-2-arrow}를 보라.
+보조정리 \ref{lemma-2-morphisms-presheaves}에 의해 도식에 내재한
+$2$-화살표는 동형
+$\alpha : t^*x^*\mathcal{F} \to s^*x^*\mathcal{F}$
+을 유도하며, 이는
+$\mathcal{R} \times_{s, \mathcal{U}, t} \mathcal{R}$ 위에서
+코사이클 조건을 만족한다. 이는 대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-cocycle}의 결과이다.
+따라서 $\mathcal{G} = x^*\mathcal{F}|_{U_\etale}$로 놓으면,
+보조정리 \ref{lemma-compare-quasi-coherent}의 범주 동치
+(당김과 양립하도록 여러 번 사용한다)는 동형
+$\alpha : t_{small}^*\mathcal{G} \to s_{small}^*\mathcal{G}$
+을 주며, 이는 $R \times_{s, U, t} R$ 위에서 코사이클 조건을
+만족한다. 즉 $(\mathcal{G}, \alpha)$는
+$\QCoh(U, R, s, t, c)$의 대상이다.
+규칙 $\mathcal{F} \mapsto (\mathcal{G}, \alpha)$가 왼쪽에서
+오른쪽으로 가는 함자이다.
+
+\medskip\noindent
+반대 방향의 함자를 구성하자.
+$(\mathcal{G}, \alpha)$를 $\QCoh(U, R, s, t, c)$의 대상이라 하자.
+보조정리 \ref{lemma-stackification-quasi-coherent}에 의해 스택화 사상
+$[U/_{\!p}R] \to [U/R]$(대수공간의 준군, 정의
+\ref{spaces-groupoids-definition-quotient-stack}를 보라)은
+준연접층 범주의 동치를 유도한다. 따라서 $[U/_{\!p}R]$ 위에
+준연접 가군 $\mathcal{F}$를 구성하는 것으로 충분하다.
+
+\medskip\noindent
+$[U/_{\!p}R]$의 대상 $x = (T, u)$는 스킴 $T$와 사상
+$u : T \to U$로 주어짐을 상기하자. 사상
+$(T, u) \to (T', u')$는 $f : T \to T'$, $r : T \to R$이고
+$s \circ r = u$, $t \circ r = u' \circ f$인 쌍 $(f, r)$로 주어진다.
+다음 꼴의 사상을 {\it 특수 사상}이라 부르자.
+$(f, e \circ u' \circ f) : (T, u' \circ f) \to (T', u')$.
+대상 $(T, u)$와 특수 사상으로 이루어진 범주는 바로
+$U$ 위의 스킴 범주이다.
+
+\medskip\noindent
+이 표기를 사용하여 $[U/_{\!p}R]$의 대상 $(T, u)$가 주어지면 다음과 같이 놓는다.
+$$
+\mathcal{F}(T, u) : = \Gamma(T, u_{small}^*\mathcal{G}).
+$$
+사상 $(f, r) : (T, u) \to (T', u')$가 주어지면 다음 사상을 얻는다.
+\begin{align*}
+\mathcal{F}(T', u') & = \Gamma(T', (u')_{small}^*\mathcal{G}) \\
+& \to \Gamma(T, f_{small}^*(u')_{small}^*\mathcal{G}) =
+\Gamma(T, (u' \circ f)_{small}^*\mathcal{G}) \\
+& = \Gamma(T, (t \circ r)_{small}^*\mathcal{G}) =
+\Gamma(T, r_{small}^*t_{small}^*\mathcal{G}) \\
+& \to \Gamma(T, r_{small}^*s_{small}^*\mathcal{G}) =
+\Gamma(T, (s \circ r)_{small}^*\mathcal{G}) \\
+& = \Gamma(T, u_{small}^*\mathcal{G}) \\
+& = \mathcal{F}(T, u)
+\end{align*}
+여기서 첫 번째 화살표는 $f$를 따른 당김이고 두 번째 화살표는
+$\alpha$이다. $(f, r)$이 특수 사상이면, 준군 위의 준연접 가군층의
+공리로부터 $e_{small}^*\alpha = \text{id}$이므로 이 사상은 단지
+$f$를 따른 당김임을 주의하자.
+코사이클 조건은 $\mathcal{F}$가 가군의 프리시프임을 함의한다
+(세부사항은 생략한다). 특수 사상의 경우 $\mathcal{F}$의 제한 사상을
+간단히 기술할 수 있으므로, $\mathcal{F}$의 $(\Sch/T)_{fppf}$로의
+제한은 준연접이다. 따라서 $\mathcal{F}$는 $[U/_{\!p}R]$ 위의
+층이고 준연접이다(보조정리 \ref{lemma-characterize-quasi-coherent}).
+
+\medskip\noindent
+위에서 구성한 함자들이 서로 준역함자임을 확인하는 것은 생략한다.
+\end{proof}
+
+\noindent
+준연접층에서 나가는 사상에 관한 기술적인 보조정리로 이 절을 마친다.
+이는 스킴, 보조정리 \ref{schemes-lemma-compare-constructions}의
+유사물이다. 뒤에서(표현가능성의 판정법, 정리
+\ref{criteria-theorem-flat-groupoid-gives-algebraic-stack}) 준군에 대한
+가정들이 $\mathcal{X}$가 대수 스택임을 함의한다는 것을 볼 것이다.
+
+\begin{lemma}
+\label{lemma-map-from-quasi-coherent}
+$(U, R, s, t, c)$를 $S$ 위 대수공간의 준군이라 하자.
+$s, t$가 평탄하고 유한 표시 국소적이라고 가정하자.
+$\mathcal{X} = [U/R]$를 몫 스택이라 하자.
+$U$ 위의 $\mathcal{X}$의 대상을 $x$로 나타내자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_\mathcal{X}$-가군이라 하고,
+$\mathcal{H}$를 $\textit{Mod}(\mathcal{O}_\mathcal{X})$의
+임의의 대상이라 하자. 사상
+$$
+\Hom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{H})
+\longrightarrow
+\Hom_{\mathcal{O}_U}(x^*\mathcal{F}|_{U_\etale},
+x^*\mathcal{H}|_{U_\etale}),
+\quad
+\phi \longmapsto x^*\phi|_{U_\etale}
+$$
+은 단사이고, 그 상은 정확히 다음 조건을 만족하는
+$\varphi : x^*\mathcal{F}|_{U_\etale} \to
+x^*\mathcal{H}|_{U_\etale}$들로 이루어진다. 즉 다음 도식이 가환한다.
+$$
+\xymatrix@C=0.8em{
+s_{small}^*(x^*\mathcal{F}|_{U_\etale})
+\ar[r] \ar[d]^{s_{small}^*\varphi} &
+(x \circ s)^*\mathcal{F}|_{R_\etale} =
+(x \circ t)^*\mathcal{F}|_{R_\etale} &
+t_{small}^*(x^*\mathcal{F}|_{U_\etale})
+\ar[l] \ar[d]_{t_{small}^*\varphi} \\
+s_{small}^*(x^*\mathcal{H}|_{U_\etale})
+\ar[r] &
+(x \circ s)^*\mathcal{H}|_{R_\etale} =
+(x \circ t)^*\mathcal{H}|_{R_\etale} &
+t_{small}^*(x^*\mathcal{H}|_{U_\etale})
+\ar[l]
+}
+$$
+이는 $R_\etale$ 위의 가군 도식이며, 수평 화살표들은
+(\ref{equation-comparison-algebraic-spaces-modules})의 비교 사상이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-stackification-quasi-coherent}에 의해 스택화 사상
+$[U/_{\!p}R] \to [U/R]$(대수공간의 준군, 정의
+\ref{spaces-groupoids-definition-quotient-stack}를 보라)은
+준연접층 범주들과 fppf $\mathcal{O}$-가군 범주들의 동치를 유도한다.
+따라서 $\mathcal{X} = [U/_{\!p}R]$인 경우에 보조정리를 증명하는
+것으로 충분하다. 명제 \ref{proposition-quasi-coherent}와 그 증명에
+의해 $(U, R, s, t, c)$ 위에 준연접 가군
+$(\mathcal{G}, \alpha)$가 존재하여 $\mathcal{F}$는 규칙
+$\mathcal{F}(T, u) = \Gamma(T, u^*\mathcal{G})$로 주어진다.
+특히 $x^*\mathcal{F}|_{U_\etale} = \mathcal{G}$이고,
+보조정리의 명제에 나오는 사상이 단사임은 명백하다.
+더욱이 사상
+$\varphi : \mathcal{G} \to x^*\mathcal{H}|_{U_\etale}$
+과 $[U/_{\!p}R]$의 임의의 대상 $y = (T, u)$가 주어지면
+다음 사상을 생각할 수 있다.
+$$
+\mathcal{F}(y) = \Gamma(T, u^*\mathcal{G})
+\xrightarrow{u_{small}^*\varphi}
+\Gamma(T, u_{small}^*x^*\mathcal{H}|_{U_\etale})
+\rightarrow
+\Gamma(T, y^*\mathcal{H}|_{T_\etale}) = \mathcal{H}(y)
+$$
+여기서 두 번째 화살표는 층 $\mathcal{H}$에 대한
+(\ref{equation-comparison-modules})의 비교 사상이다.
+보조정리의 코사이클 조건이 만족되면, 이 할당은
+$[U/_{\!p}R]$의 사상에 대한 층 $\mathcal{F}$와 $\mathcal{G}$의
+제한 사상들과 양립한다. 증명은 생략한다. 힌트: 명제
+\ref{proposition-quasi-coherent}의 증명에서 $\mathcal{F}$의 제한
+사상들을 $(\mathcal{G}, \alpha)$로 명시적으로 나타냈다.
+\end{proof}
+
+
+
+
+
+
+
+\section{대수 스택 위의 준연접층}
+\label{section-quasi-coherent-algebraic-stacks}
+
+\noindent
+$\mathcal{X}$를 $S$ 위의 대수 스택이라 하자.
+대수 스택, 보조정리 \ref{algebraic-lemma-stack-presentation}에 의해
+$(U, R, s, t, c)$가 대수공간의 매끄러운 준군인 동치
+$[U/R] \to \mathcal{X}$를 찾을 수 있다. 그러면
+$$
+\QCoh(\mathcal{O}_\mathcal{X})
+\cong
+\QCoh(\mathcal{O}_{[U/R]})
+\cong
+\QCoh(U, R, s, t, c)
+$$
+이고, 두 번째 동치는 명제 \ref{proposition-quasi-coherent}이다.
+따라서 대수 스택 위의 준연접층 범주는 대수공간의 매끄러운 준군
+위의 준연접 가군 범주와 동치이다. 특히 대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-abelian}에 의해
+$\QCoh(\mathcal{O}_\mathcal{X})$는 아벨 범주이다!
+
+\medskip\noindent
+현재 설정에는 약간 불편한 점이 있다. 충실충만 매장
+$$
+\QCoh(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+$$
+은 일반적으로 완전하지 {\bf 않다}. 그러나 스킴에서도 정확히 같은
+현상이 일어난다. 대부분의 스킴 $X$에 대해 매장
+$$
+\QCoh(\mathcal{O}_X) \cong
+\QCoh((\Sch/X)_{fppf}, \mathcal{O}_X) \longrightarrow
+\textit{Mod}((\Sch/X)_{fppf}, \mathcal{O}_X)
+$$
+은 완전하지 않다. 내림, 보조정리
+\ref{descent-lemma-equivalence-quasi-coherent-limits}를 보라.
+덧붙여 내림, 보조정리
+\ref{descent-lemma-equivalence-quasi-coherent-limits}의 증명에 나오는
+예는 일반적으로 엄밀한 충실충만 매장
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}(\mathcal{O}_\mathcal{X})$도 완전하지 않음을 보여 준다.
+
+\medskip\noindent
+지금까지 얻은 모든 결과를 하나의 명제로 모은다.
+
+\begin{lemma}
+\label{lemma-quasi-coherent-algebraic-stack}
+$\mathcal{X}$를 $S$ 위의 대수 스택이라 하자.
+\begin{enumerate}
+\item $[U/R] \to \mathcal{X}$가 $\mathcal{X}$의 제시면,
+표준 동치
+$\QCoh(\mathcal{O}_\mathcal{X}) \cong
+\QCoh(U, R, s, t, c)$가 있다.
+\item 범주 $\QCoh(\mathcal{O}_\mathcal{X})$는 아벨 범주이다.
+\item 포함 함자 $\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})$는 오른쪽 완전이지만,
+일반적으로 완전하지 {\bf 않다}.
+\item 범주 $\QCoh(\mathcal{O}_\mathcal{X})$는 쌍대극한을 가지며,
+이는 범주 $\textit{Mod}(\mathcal{O}_\mathcal{X})$에서의
+쌍대극한과 일치한다.
+\item $\mathcal{F}, \mathcal{G}$가
+$\QCoh(\mathcal{O}_\mathcal{X})$에 속하면,
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$에서의 텐서곱
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$는
+$\QCoh(\mathcal{O}_\mathcal{X})$의 대상이다.
+\item $\mathcal{F}, \mathcal{G}$가
+$\QCoh(\mathcal{O}_\mathcal{X})$에 속하고
+$\mathcal{F}$가 유한 국소 자유이면,
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$에서의 층
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+$\QCoh(\mathcal{O}_\mathcal{X})$의 대상이다.
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$의 짧은 완전열
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$
+에서 $\mathcal{F}_1$과 $\mathcal{F}_3$가 준연접이면,
+$\mathcal{F}_2$도 준연접이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(4), (5), (6)은 보조정리 \ref{lemma-qc-colimits}에서 증명했다.
+(1)은 명제 \ref{proposition-quasi-coherent}이다.
+위에서 논의했듯이 (2)는 (1)과 대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-abelian}에서 따른다.
+(3)의 포함 함자가 오른쪽 완전인 것은 (4)에서 따른다.
+호몰로지, 보조정리 \ref{homology-lemma-exact-functor}와 비교하라.
+(3)의 포함 함자가 완전하지 않다는 것에 대해서는 내림, 보조정리
+\ref{descent-lemma-equivalence-quasi-coherent-limits}를 보라.
+(7)을 보기 위해 $\mathcal{F}_2$를 스킴의 큰 자리로 제한한 것이
+준연접인지 확인하는 것으로 충분함을 주의하자
+(보조정리 \ref{lemma-characterize-quasi-coherent}).
+따라서 이는 내림, 보조정리
+\ref{descent-lemma-equivalence-quasi-coherent-limits}의
+대응하는 부분에서 따른다.
+\end{proof}
+
+\noindent
+이제 대수 스택 위의 가군에 대한 코히레이터를 구성한다.
+
+\begin{proposition}
+\label{proposition-coherator}
+$\mathcal{X}$를 $S$ 위의 대수 스택이라 하자.
+\begin{enumerate}
+\item 범주 $\QCoh(\mathcal{O}_\mathcal{X})$는 그로텐디크 아벨
+범주이다. 따라서 $\QCoh(\mathcal{O}_\mathcal{X})$는 충분한
+단사 대상과 모든 극한을 갖는다.
+\item 포함 함자
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})$에는 오른쪽 수반\footnote{이
+함자를 때때로 {\it 코히레이터}라고 한다.}
+$$
+Q :
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{X})
+$$
+가 존재하며, 모든 준연접층 $\mathcal{F}$에 대해 수반 사상
+$Q(\mathcal{F}) \to \mathcal{F}$는 동형이다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+이 증명은 스킴의 경우의 증명(성질, 명제
+\ref{properties-proposition-coherator}를 보라)과 대수공간의
+경우의 증명(공간의 성질, 명제
+\ref{spaces-properties-proposition-coherator}를 보라)을 되풀이한다.
+독자에게 먼저 그 두 증명 중 하나를 읽을 것을 권한다.
+
+\medskip\noindent
+(1)은 다음을 뜻한다: $\QCoh(\mathcal{O}_\mathcal{X})$가
+(a) 모든 쌍대극한을 가지며, (b) 여과 쌍대극한이 완전하고,
+(c) 생성자를 갖는다. 단사 대상, 절
+\ref{injectives-section-grothendieck-conditions}를 보라.
+보조정리 \ref{lemma-quasi-coherent-algebraic-stack}에 의해
+$\QCoh(\mathcal{O}_X)$의 쌍대극한은 존재하며
+$\textit{Mod}(\mathcal{O}_X)$의 쌍대극한과 일치한다.
+자리 위의 가군, 보조정리
+\ref{sites-modules-lemma-limits-colimits}에 의해
+여과 쌍대극한은 완전하다. 따라서 (a)와 (b)가 성립한다.
+
+\medskip\noindent
+$(U, R, s, t, c)$가 대수공간의 매끄러운 준군인 제시
+$\mathcal{X} = [U/R]$를 택하자. 특히 $s$와 $t$는 대수공간의
+평탄 사상이다. 위의 보조정리
+\ref{lemma-quasi-coherent-algebraic-stack}에 의해
+$\QCoh(\mathcal{O}_\mathcal{X}) = \QCoh(U, R, s, t, c)$.
+대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-set-generators}에 의해 집합 $T$와
+$\mathcal{X}$ 위의 준연접층의 족 $(\mathcal{F}_t)_{t \in T}$가
+존재하여, $\mathcal{X}$ 위의 모든 준연접층은 그 부분층들 가운데
+어떤 $\mathcal{F}_t$와 동형인 것들의 유향 쌍대극한이다.
+따라서 $\bigoplus_t \mathcal{F}_t$는
+$\QCoh(\mathcal{O}_X)$의 생성자이고, (c)가 성립한다.
+극한과 단사 대상에 관한 주장들은 모든 그로텐디크 아벨 범주에서 성립한다.
+단사 대상, 정리
+\ref{injectives-theorem-injective-embedding-grothendieck}와 보조정리
+\ref{injectives-lemma-grothendieck-products}를 보라.
+
+\medskip\noindent
+(2)의 증명. $Q$를 구성하기 위해 다음 일반 절차를 사용한다.
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$의 대상 $\mathcal{F}$가
+주어지면 함자
+$$
+\QCoh(\mathcal{O}_\mathcal{X})^{opp}
+\longrightarrow
+\textit{Sets},
+\quad
+\mathcal{G}
+\longmapsto
+\Hom_\mathcal{X}(\mathcal{G}, \mathcal{F})
+$$
+를 생각하자. 이 함자는 쌍대극한을 극한으로 보내므로 표현가능하다.
+단사 대상, 보조정리
+\ref{injectives-lemma-grothendieck-brown}을 보라.
+따라서 준연접층 $Q(\mathcal{F})$와 함자적인 동형
+$\Hom_\mathcal{X}(\mathcal{G}, \mathcal{F}) =
+\Hom_\mathcal{X}(\mathcal{G}, Q(\mathcal{F}))$
+이 존재한다. 여기서 $\mathcal{G}$는
+$\QCoh(\mathcal{O}_\mathcal{X})$의 대상이다.
+Yoneda 보조정리(범주, 보조정리
+\ref{categories-lemma-yoneda})에 의해 구성
+$\mathcal{F} \leadsto Q(\mathcal{F})$는 $\mathcal{F}$에 대해
+함자적이다. 구성상 $Q$는 포함 함자의 오른쪽 수반이다.
+$\mathcal{F}$가 준연접일 때
+$Q(\mathcal{F}) \to \mathcal{F}$가 동형이라는 사실은 포함 함자
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})$
+가 충실충만하다는 사실의 형식적인 결과이다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{코호몰로지}
+\label{section-cohomology-general}
+
+\noindent
+$S$를 스킴이라 하고, $\mathcal{X}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주라 하자.
+임의의 $\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$에 대해
+범주 $\textit{Ab}(\mathcal{X}_\tau)$와
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$는
+충분한 단사 대상을 갖는다. 단사 대상, 정리
+\ref{injectives-theorem-sheaves-injectives}와
+\ref{injectives-theorem-sheaves-modules-injectives}를 보라.
+따라서 자리 위의 코호몰로지, 절
+\ref{sites-cohomology-section-cohomology-sheaves}의 기법을 사용하여
+코호몰로지 군
+$$
+H^p(\mathcal{X}_\tau, \mathcal{F}) = H^p_\tau(\mathcal{X}, \mathcal{F})
+\quad\text{and}\quad
+H^p(x, \mathcal{F}) = H^p_\tau(x, \mathcal{F})
+$$
+을 정의할 수 있다. 여기서 $x \in \Ob(\mathcal{X})$는 임의이고,
+$\mathcal{F}$는 $\textit{Ab}(\mathcal{X}_\tau)$ 또는
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$의
+임의의 대상이다. 더욱이 $f : \mathcal{X} \to \mathcal{Y}$가
+$(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주 사이의 $1$-사상이면,
+$\textit{Ab}(\mathcal{Y}_\tau)$ 또는
+$\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y})$에서의
+고차 직접상 $R^if_*\mathcal{F}$를 얻는다.
+물론 자리 위의 코호몰로지, 절
+\ref{sites-cohomology-section-derived-functors}에서 설명했듯이
+$H^p(-)$와 $R^if_*$의 유도된 판도 있다.
+
+\begin{lemma}
+\label{lemma-cohomology-restriction}
+$S$를 스킴이라 하자. $\mathcal{X}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주라 하자.
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$라 하자.
+$x \in \Ob(\mathcal{X})$를 스킴 $U$ 위에 놓인 대상이라 하자.
+$\mathcal{F}$를 $\textit{Ab}(\mathcal{X}_\tau)$ 또는
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$의
+대상이라 하자. 그러면
+$$
+H^p_\tau(x, \mathcal{F}) = H^p((\Sch/U)_\tau, x^{-1}\mathcal{F})
+$$
+이고, $\tau = \etale$이면 또한
+$$
+H^p_\etale(x, \mathcal{F}) =
+H^p(U_\etale, \mathcal{F}|_{U_\etale}).
+$$
+\end{lemma}
+
+\begin{proof}
+첫 번째 명제는 자리 위의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-cohomology-of-open}와 보조정리
+\ref{lemma-localizing-structure-sheaf}의 동치에서 따른다.
+두 번째 명제는 첫 번째 명제와 에탈 코호몰로지, 보조정리
+\ref{etale-cohomology-lemma-compare-cohomology-big-small}에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{단사층}
+\label{section-lower-shriek}
+
+\noindent
+단사 아벨 층 또는 단사 가군의 전진은 단사이다.
+
+\begin{lemma}
+\label{lemma-pushforward-injective}
+$f : \mathcal{X} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+\begin{enumerate}
+\item $\mathcal{I}$가 $\textit{Ab}(\mathcal{X}_\tau)$에서 단사이면,
+$f_*\mathcal{I}$는 $\textit{Ab}(\mathcal{Y}_\tau)$에서 단사이고,
+\item $\mathcal{I}$가
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$에서 단사이면,
+$f_*\mathcal{I}$는
+$\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y})$
+에서 단사이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f^{-1}$가 $f_*$의 완전한 왼쪽 수반이라는 사실에서 형식적으로 따른다.
+호몰로지, 보조정리 \ref{homology-lemma-adjoint-preserve-injectives}를 보라.
+\end{proof}
+
+\noindent
+이 절의 나머지에서는 아벨 층과 가군에 대한 당김 $f^{-1}$이
+왼쪽 수반 $f_!$를 가짐을 증명한다. $f$가 (스킴 또는
+대수공간으로) 표현가능하면 $f_!$는 완전이고 $f^{-1}$은 단사 대상을
+보존한다는 것이 드러날 것이다. 먼저 군들로 섬유화된 범주의 섬유곱과
+동등화자, 그리고 사상에 대한 그들의 거동에 관한 몇 가지 예비
+보조정리를 증명한다.
+
+\begin{lemma}
+\label{lemma-fibre-products}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군들로 섬유화된 범주라 하자.
+\begin{enumerate}
+\item 범주 $\mathcal{X}$는 섬유곱을 갖는다.
+\item $\mathcal{X}$의 $\mathit{Isom}$-프리시프들이
+대수공간으로 표현가능하면, $\mathcal{X}$는 동등화자를 갖는다.
+\item $\mathcal{X}$가 대수 스택(더 일반적으로는 몫 스택)이면,
+$\mathcal{X}$는 동등화자를 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 $(\Sch/S)_{fppf}$가 섬유곱을 갖는다는 사실과
+% P11-E0124
+범주, 보조정리
+\ref{categories-lemma-fibred-groupoids-fibre-product-goes-up}에서 따른다.
+
+\medskip\noindent
+$a, b : x \to y$를 $\mathcal{X}$의 사상이라 하자.
+$U = p(x)$, $V = p(y)$로 놓자. 스킴의 범주는 동등화자를 가지므로
+$W \to U$를 $p(a)$와 $p(b)$의 동등화자라 할 수 있다.
+% P11-E0125
+$W \to U$ 위에 놓인 $\mathcal{X}$의 사상을 $c : z \to x$로 나타내자.
+$a$와 $b$의 동등화자가 존재한다면, 이는 $a \circ c$와
+$b \circ c$의 동등화자이다. 따라서
+$p(a) = p(b) = f : U \to V$라고 가정해도 된다.
+$\mathcal{X}$가 군들로 섬유화되었으므로, $U$ 위의
+$\mathcal{X}$의 섬유 범주에는 유일한 자기동형
+$i : x \to x$가 존재하여 $a \circ i = b$이다.
+다시 $a$와 $b$의 동등화자는 $\text{id}_x$와 $i$의 동등화자이다.
+$\mathit{Isom}_\mathcal{X}(x)$는 $(\Sch/U)_{fppf}$ 위의
+프리시프로서, $T/U$에 $T$ 위의 $\mathcal{X}$의 섬유 범주 안에서
+$x|_T$의 자기동형들의 집합을 대응시킴을 상기하자.
+스택, 정의 \ref{stacks-definition-mor-presheaf}를 보라.
+$\mathit{Isom}_\mathcal{X}(x)$가 대수공간 $G \to U$로 표현가능하면,
+$\text{id}_x$와 $i$는 $U$ 위의 사상 $e, i : U \to G$를 정의한다.
+$M = U \times_{e, G, i} U$로 놓자. 공간의 사상, 보조정리
+\ref{spaces-morphisms-lemma-section-immersion}에 의해 이는 스킴이다.
+그러면 $x|_M \to x$가 $\mathcal{X}$ 안에서 사상 $\text{id}_x$와
+$i$의 동등화자임은 명백하다. 이로써 (2)가 증명되었다.
+
+\medskip\noindent
+$\mathcal{X} = [U/R]$이고 $(U, R, s, t, c)$가 $S$ 위 대수공간의
+준군이면, 부트스트랩, 보조정리
+\ref{bootstrap-lemma-quotient-stack-isom}에 의해 (2)의 가정이 성립한다.
+$\mathcal{X}$가 대수 스택이면 대수 스택, 보조정리
+\ref{algebraic-lemma-stack-presentation}에 의해 제시
+$[U/R] \cong \mathcal{X}$를 택할 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fibre-products-morphism}
+$f : \mathcal{X} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+\begin{enumerate}
+\item 함자 $f$는 섬유곱을 섬유곱으로 보낸다.
+\item $f$가 충실하면, $f$는 동등화자를 동등화자로 보낸다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+범주, 보조정리
+\ref{categories-lemma-fibred-groupoids-fibre-product-goes-up}에 의해
+$\mathcal{X}$에서의 섬유곱은 $(\Sch/S)_{fppf}$의 섬유곱 도식
+위에 놓인 임의의 가환 정사각형임을 알 수 있다.
+$\mathcal{Y}$에 대해서도 마찬가지이다. 따라서 (1)은 명백하다.
+
+\medskip\noindent
+$x \to x'$를 $\mathcal{X}$의 두 사상 $a, b : x' \to x''$의
+동등화자라 하자. $f(x) \to f(x')$가 $f(a)$와 $f(b)$의
+동등화자임을 보이겠다. $y \to f(x')$를 $f(a)$와 $f(b)$를
+동등하게 하는 $\mathcal{Y}$의 사상이라 하자.
+$x, x', x''$이 각각 스킴 $U, U', U''$ 위에 놓이고,
+$y$가 $V$ 위에 놓인다고 하자.
+% P11-E0126
+스킴 범주에서 $y \to f(x')$의 상을 $h : V \to U'$로 나타내자.
+섬유화된 범주의 공리에 의해 사상 $y \to f(x')$는
+$f(h^*x') \to f(x')$와 동형이다. 따라서 $f$가 충실하므로
+$h^*x' \to x'$가 $a$와 $b$를 동등하게 함을 알 수 있다.
+그러므로 유일한 사상 $h^*x' \to x$를 얻고, 그 상
+$y = f(h^*x') \to f(x)$가 $\mathcal{Y}$에서 원하는 사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fibre-products-preserve-properties}
+$f : \mathcal{X} \to \mathcal{Y}$와
+$g : \mathcal{Z} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 충실한 $1$-사상이라 하자.
+\begin{enumerate}
+\item 함자 $\mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to \mathcal{Y}$는
+충실하고,
+\item $\mathcal{X}, \mathcal{Z}$가 동등화자를 가지면
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$도 동등화자를 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+범주 $\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$의 대상을 사중항
+$(U, x, z, \alpha)$로 생각한다. 여기서
+$\alpha : f(x) \to g(z)$는 $U$ 위의 동형이다.
+범주, 보조정리 \ref{categories-lemma-2-product-categories-over-C}를 보라.
+사상 $(U, x, z, \alpha) \to (U', x', z', \alpha')$는
+$\alpha$와 $\alpha'$와 양립하는 사상 $a : x \to x'$와
+$b : z \to z'$의 쌍이다. 따라서 $f$와 $g$가 충실하면 함자
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to \mathcal{Y}$
+도 충실함은 명백하다. 이제
+$(a, b), (a', b') : (U, x, z, \alpha) \to (U', x', z', \alpha')$
+가 $2$-섬유곱의 두 사상이라고 하자. $a$와 $a'$의 동등화자
+$x'' \to x$, 그리고 $b$와 $b'$의 동등화자 $z'' \to z$를 생각하자.
+$f$는 동등화자와 가환하므로(보조정리
+\ref{lemma-fibre-products-morphism}),
+$f(x'') \to f(x)$는 $f(a)$와 $f(a')$의 동등화자이다.
+마찬가지로 $g(z'') \to g(z)$는 $g(b)$와 $g(b')$의 동등화자이다.
+다음 그림을 보자.
+$$
+\xymatrix{
+f(x'') \ar[r] \ar@{..>}[d]_{\alpha''}&
+f(x) \ar[d]_\alpha
+\ar@<0.5ex>[r]^{f(a)}
+\ar@<-0.5ex>[r]_{f(a')}
+ &
+f(x') \ar[d]^{\alpha'} \\
+g(z'') \ar[r] &
+g(z)
+\ar@<0.5ex>[r]^{g(b)}
+\ar@<-0.5ex>[r]_{g(b')}
+ &
+g(z')
+}
+$$
+점선 화살표가 존재하고 동형임은 명백하다.
+그러나 스킴 범주에서 $\alpha''$의 상이 그 원천의 항등사상이라는
+것은 선험적으로 참이 아니다. 한편 $\alpha''$가 존재한다는 것은
+$x''$과 $z''$이 같은 스킴 위에서 정의되고, 사상
+$x'' \to x$와 $z'' \to z$가 스킴 범주에서 같은 상을 갖는다고
+가정할 수 있음을 뜻한다. 위 도식을 다시 만들면 이제 점선 화살표가
+실제로 항등사상으로 사영됨을 알 수 있고, 결론을 얻는다.
+일부 세부사항은 생략한다.
+\end{proof}
+
+\noindent
+큰 자리에서 작업하고 있으므로 다음과 같은 다소 직관에 반하는 결과를
+얻는다(스킴의 큰 자리 사이의 사상에 대해서도 성립한다).
+주의: $f$가 충실하다는 가정을 버리면 이 결과는 참이 아니다.
+
+\begin{lemma}
+\label{lemma-pullback-injective}
+$f : \mathcal{X} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자. 함자
+$f^{-1} : \textit{Ab}(\mathcal{Y}_\tau) \to \textit{Ab}(\mathcal{X}_\tau)$
+에는 왼쪽 수반
+$f_! : \textit{Ab}(\mathcal{X}_\tau) \to \textit{Ab}(\mathcal{Y}_\tau)$
+가 있다. $f$가 충실하고 $\mathcal{X}$가 동등화자를 가지면
+\begin{enumerate}
+\item $f_!$는 완전이고,
+\item $\mathcal{I}$가 $\textit{Ab}(\mathcal{Y}_\tau)$에서 단사이면
+$f^{-1}\mathcal{I}$는 $\textit{Ab}(\mathcal{X}_\tau)$에서 단사이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+스택, 보조정리 \ref{stacks-lemma-topology-inherited-functorial}에 의해
+함자 $f$는 연속이고 쌍대연속이다. 따라서 자리 위의 가군, 보조정리
+\ref{sites-modules-lemma-g-shriek-adjoint}에 의해 함자
+$f^{-1} : \textit{Ab}(\mathcal{Y}_\tau) \to \textit{Ab}(\mathcal{X}_\tau)$
+에는 왼쪽 수반
+$f_! : \textit{Ab}(\mathcal{X}_\tau) \to \textit{Ab}(\mathcal{Y}_\tau)$
+가 있다. (1)을 보기 위해 자리 위의 가군, 보조정리
+\ref{sites-modules-lemma-exactness-lower-shriek}을 적용한다.
+그 보조정리의 가정이 만족됨을 보기 위해 위의 보조정리
+\ref{lemma-fibre-products}와
+\ref{lemma-fibre-products-morphism}을 사용한다.
+(2)는 여기서 형식적으로 따른다. 호몰로지, 보조정리
+\ref{homology-lemma-adjoint-preserve-injectives}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pullback-injective-modules}
+$f : \mathcal{X} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자. 함자
+$f^* : \textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y}) \to
+\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$
+에는 왼쪽 수반
+$f_! : \textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y})$가 있고,
+이는 바탕 아벨 층 위에서 보조정리
+\ref{lemma-pullback-injective}의 함자 $f_!$와 일치한다.
+$f$가 충실하고 $\mathcal{X}$가 동등화자를 가지면
+\begin{enumerate}
+\item $f_!$는 완전이고,
+\item $\mathcal{I}$가
+% P11-E0127
+$\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{X})$에서 단사이면,
+$f^{-1}\mathcal{I}$는
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$
+에서 단사이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f$가 자리의 연속이고 쌍대연속인 함자이며
+$f^{-1}\mathcal{O}_\mathcal{Y} = \mathcal{O}_\mathcal{X}$임을 상기하자.
+따라서 자리 위의 가군, 보조정리
+\ref{sites-modules-lemma-lower-shriek-modules}에 의해
+$f^*$에는 왼쪽 수반 $f_!^{Mod}$가 있다.
+$x$를 스킴 $U$ 위에 놓인 $\mathcal{X}$의 대상이라 하자.
+그러면 $f$는 환 달린 자리의 동치
+$$
+\mathcal{X}/x \longrightarrow \mathcal{Y}/f(x)
+$$
+를 유도한다. 양변 모두 $(\Sch/U)_\tau$와 동치이기 때문이다.
+보조정리 \ref{lemma-localizing-structure-sheaf}를 보라.
+자리 위의 가군, 주
+\ref{sites-modules-remark-when-shriek-equal}는
+% P11-E0128
+$f_!$가 아벨 층 위의 함자와 일치함을 보여 준다.
+
+\medskip\noindent
+이제 $\mathcal{X}$가 동등화자를 갖고 $f$가 충실하다고 가정하자.
+보조정리 \ref{lemma-pullback-injective}에 의해 $f_!$는 완전이다.
+마지막으로 호몰로지, 보조정리
+\ref{homology-lemma-adjoint-preserve-injectives}는 단사 가군의
+당김에 관한 명제를 함의한다.
+\end{proof}
+
+
+
+
+\section{체흐 복합체}
+\label{section-cech}
+
+\noindent
+대수 스택 위의 층의 코호몰로지를 계산하기 위해, 이를 주어진
+대수 스택의 덮개들로 제한한 층의 코호몰로지와 비교한다.
+
+\medskip\noindent
+이 절 전체에서 상황은 다음과 같다. 군들로 섬유화된 범주의
+$1$-사상
+\begin{equation}
+\label{equation-covering}
+\vcenter{
+\xymatrix{
+\mathcal{U} \ar[rr]_f \ar[rd]_q & &  \mathcal{X} \ar[ld]^p \\
+& (\Sch/S)_{fppf}
+}
+}
+\end{equation}
+이 주어져 있다. $\mathcal{U}$를 $\mathcal{X}$의 ``덮개''로
+생각할 것이다. 따라서 단체 대상
+$$
+\xymatrix{
+\mathcal{U} \times_\mathcal{X} \mathcal{U} \times_\mathcal{X} \mathcal{U}
+\ar@<1ex>[r]
+\ar@<0ex>[r]
+\ar@<-1ex>[r]
+&
+\mathcal{U} \times_\mathcal{X} \mathcal{U}
+\ar@<0.5ex>[r]
+\ar@<-0.5ex>[r]
+&
+\mathcal{U}
+}
+$$
+을 $(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주들의 범주에서
+생각하고자 한다. 그러나 이는 범주가 아니라 $(2, 1)$-범주이므로
+그 뜻을 명시해야 한다. 구체적으로 $\mathcal{U}_n$을
+다음 꼴의 대상을 갖는 범주라 하자.
+$(u_0, \ldots, u_n, x, \alpha_0, \ldots, \alpha_n)$
+여기서 $\alpha_i : f(u_i) \to x$는 $\mathcal{X}$ 안의 동형이다.
+대상 $(u_0, \ldots, u_n, x, \alpha_0, \ldots, \alpha_n)$에
+$x$를 대응시키는 $1$-사상을
+$f_n : \mathcal{U}_n \to \mathcal{X}$로 나타내자.
+$\mathcal{U}_0 = \mathcal{U}$이고 $f_0 = f$임을 주의하자.
+사상 $\varphi : [m] \to [n]$이 주어지면 다음 $1$-사상을 생각한다.
+% P11-E0537
+$\mathcal{U}_\varphi : \mathcal{U}_n \longrightarrow \mathcal{U}_n$
+이는 대상 위에서 다음 규칙으로 주어진다.
+$$
+(u_0, \ldots, u_n, x, \alpha_0, \ldots, \alpha_n)
+\longmapsto
+(u_{\varphi(0)}, \ldots, u_{\varphi(m)}, x,
+\alpha_{\varphi(0)}, \ldots, \alpha_{\varphi(m)})
+$$
+이 모든 $1$-사상은 엄밀히 올바르게 합성되며
+($2$-사상은 필요하지 않다), 이 모든 $1$-사상은
+$\mathcal{X}$ 위의 $1$-사상이다.
+이 단체 대상을 $\mathcal{U}_\bullet$로 나타낸다.
+$\mathcal{F}$가 $\mathcal{X}$ 위의 집합의 프리시프이면
+쌍대단체 집합
+$$
+\xymatrix{
+\Gamma(\mathcal{U}_0, f_0^{-1}\mathcal{F})
+\ar@<0.5ex>[r]
+\ar@<-0.5ex>[r]
+&
+\Gamma(\mathcal{U}_1, f_1^{-1}\mathcal{F})
+\ar@<1ex>[r]
+\ar@<0ex>[r]
+\ar@<-1ex>[r]
+&
+\Gamma(\mathcal{U}_2, f_2^{-1}\mathcal{F})
+}
+$$
+을 얻는다. 여기서 화살표들은 단체 대상의 주어진 사상들을 따른
+당김 사상이다. $\mathcal{F}$가 아벨 군의 프리시프이면
+이는 쌍대단체 아벨 군이다.
+
+\medskip\noindent
+위와 같은 $\mathcal{U} \to \mathcal{X}$가 주어지고,
+$\mathcal{F}$가 $\mathcal{X}$ 위의 아벨 프리시프라고 하자.
+이 상황에 결부된 {\it 체흐 복합체}는
+$\check{\mathcal{C}}^\bullet(\mathcal{U} \to \mathcal{X}, \mathcal{F})$로
+나타낸다. 이는 위의 쌍대단체 아벨 군에 결부된 공사슬
+복합체이다. 단체적 방법, 절
+\ref{simplicial-section-dold-kan-cosimplicial}을 보라.
+그 항들은
+$$
+\check{\mathcal{C}}^n(\mathcal{U} \to \mathcal{X}, \mathcal{F})
+= \Gamma(\mathcal{U}_n, f_n^{-1}\mathcal{F}).
+$$
+경계 사상들은
+$$
+d^n = \sum\nolimits_{i = 0}^{n + 1} (-1)^i \delta^{n + 1}_i :
+\Gamma(\mathcal{U}_n, f_n^{-1}\mathcal{F})
+\longrightarrow
+\Gamma(\mathcal{U}_{n + 1}, f_{n + 1}^{-1}\mathcal{F})
+$$
+이다. 여기서 $\delta^{n + 1}_i$는 지표 $i$를 생략하는 사상
+$[n] \to [n + 1]$에 대응한다. 사상
+% P11-E0131
+$\Gamma(\mathcal{X}, \mathcal{F}) \to
+\Gamma(\mathcal{U}_0, f_0^{-1}\mathcal{F}_0)$
+은 미분 $d^0$의 핵에 속함을 주의하자. 따라서
+{\it 확장 체흐 복합체}를 다음 복합체로 정의한다.
+$$
+\ldots \to 0 \to
+\Gamma(\mathcal{X}, \mathcal{F}) \to
+\Gamma(\mathcal{U}_0, f_0^{-1}\mathcal{F}_0) \to
+\Gamma(\mathcal{U}_1, f_1^{-1}\mathcal{F}_1) \to \ldots
+$$
+여기서 $\Gamma(\mathcal{X}, \mathcal{F})$는 차수 $-1$에 놓인다.
+확장 체흐 복합체가 비순환일 필요충분조건은 표준 사상
+$$
+\Gamma(\mathcal{X}, \mathcal{F})[0]
+\longrightarrow
+\check{\mathcal{C}}^\bullet(\mathcal{U} \to \mathcal{X}, \mathcal{F})
+$$
+이 복합체의 준동형사상인 것이다.
+
+\begin{lemma}
+\label{lemma-generalities}
+체흐 복합체의 일반사항은 다음과 같다.
+\begin{enumerate}
+\item 군들로 섬유화된 범주의 도식
+$$
+\xymatrix{
+\mathcal{V} \ar[d]_g \ar[r]_h & \mathcal{U} \ar[d]^f \\
+\mathcal{Y} \ar[r]^e & \mathcal{X}
+}
+$$
+이 $(\Sch/S)_{fppf}$ 위에서 $2$-가환이면, 체흐 복합체의 사상
+$$
+\check{\mathcal{C}}^\bullet(\mathcal{U} \to \mathcal{X}, \mathcal{F})
+\longrightarrow
+\check{\mathcal{C}}^\bullet(\mathcal{V} \to \mathcal{Y}, e^{-1}\mathcal{F})
+$$
+이 존재한다.
+\item $h$와 $e$가 동치이면 (1)의 사상은 동형이다.
+\item $f, f' : \mathcal{U} \to \mathcal{X}$가 $2$-동형이면,
+결부된 체흐 복합체들은 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 상황에서 $t : f \circ h \to e \circ g$를 $2$-사상이라 하자.
+복합체의 사상은 차수 $n$에서 다음 규칙으로 주어진 $1$-사상
+$\mathcal{V}_n \to \mathcal{U}_n$을 따른 당김으로 주어진다.
+$$
+(v_0, \ldots, v_n, y, \beta_0, \ldots, \beta_n)
+\longmapsto
+(h(v_0), \ldots, h(v_n), e(y),
+e(\beta_0) \circ t_{v_0}, \ldots, e(\beta_n) \circ t_{v_n}).
+$$
+(2)를 위해, 범주의 동치를 따라 당길 때 집합의 임의의 프리시프에
+대한 대역 단면의 당김이 동형임을 주의하자.
+(3)은 (1)과 (2)를 결합하여 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-homotopy}
+$f \circ s$가 $\text{id}_\mathcal{X}$와 $2$-동형인 $1$-사상
+$s : \mathcal{X} \to \mathcal{U}$가 존재하면,
+확장 체흐 복합체는 영과 호모토픽이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{U}' = \mathcal{U} \times_\mathcal{X} \mathcal{X}$를
+범주, 보조정리 \ref{categories-lemma-2-product-categories-over-C}에서
+기술한 섬유곱으로 놓자.
+$f' : \mathcal{U}' \to \mathcal{X}$를 두 번째 사영으로 놓자.
+그러면
+% P11-E0133
+$\mathcal{U} \to \mathcal{U}'$, $u \mapsto (u, f(x), 1)$는
+$\mathcal{X}$ 위의 동치이므로, 보조정리 \ref{lemma-generalities}에 의해
+$(\mathcal{U}, f)$를 $(\mathcal{U}', f')$로 바꿀 수 있다.
+이렇게 하면 $f'$는 $f' \circ s' = \text{id}_\mathcal{X}$를 엄밀히
+만족하는 단면 $s'$를 갖는다는 장점이 있다. 구체적으로
+% P11-E0134
+$t : s \circ f \to \text{id}_\mathcal{X}$가 $2$-동형이면
+$s'(x) = (s(x), x, t_x)$로 놓을 수 있다.
+따라서 $f \circ s = \text{id}_\mathcal{X}$라고 가정해도 된다.
+
+\medskip\noindent
+$f \circ s = \text{id}_\mathcal{X}$인 경우에는 결과가 일반 원리에서
+따른다. 호모토피를 명시적으로 주자. $n \geq 0$에 대해
+$s_n : \mathcal{U}_n \to \mathcal{U}_{n + 1}$을 대상 위의
+다음 규칙으로 정의된 $1$-사상이라 하자.
+$$
+(u_0, \ldots, u_n, x, \alpha_0, \ldots, \alpha_n)
+\longmapsto
+(u_0, \ldots, u_n, s(x), x,
+\alpha_0, \ldots, \alpha_n, \text{id}_x).
+$$
+다음을 정의하자.
+$$
+h^{n + 1} :
+\Gamma(\mathcal{U}_{n + 1}, f_{n + 1}^{-1}\mathcal{F})
+\longrightarrow
+\Gamma(\mathcal{U}_n, f_n^{-1}\mathcal{F})
+$$
+이는 $s_n$을 따른 당김이다. 또한 $s_{-1} = s$로 놓고,
+$h^0 : \Gamma(\mathcal{U}_0, f_0^{-1}\mathcal{F}) \to
+\Gamma(\mathcal{X}, \mathcal{F})$를 $s_{-1}$을 따른 당김으로 놓는다.
+그러면 사상들의 족 $\{h^n\}_{n \geq 0}$은 확장 체흐 복합체 위에서
+$1$과 $0$ 사이의 호모토피이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{상대 체흐 복합체}
+\label{section-sheaf-cech-complex}
+
+\noindent
+(\ref{equation-covering})에서와 같이 $f : \mathcal{U} \to \mathcal{X}$를
+$(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+이에 대응하는 단체 대상 $\mathcal{U}_\bullet$과 사상
+$f_n : \mathcal{U}_n \to \mathcal{X}$를 생각하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+마지막으로 $\mathcal{F}$가 $\mathcal{X}_\tau$ 위의 (집합의) 층이라고 하자.
+그러면
+$$
+\xymatrix{
+f_{0, *}f_0^{-1}\mathcal{F}
+\ar@<0.5ex>[r]
+\ar@<-0.5ex>[r]
+&
+f_{1, *}f_1^{-1}\mathcal{F}
+\ar@<1ex>[r]
+\ar@<0ex>[r]
+\ar@<-1ex>[r]
+&
+f_{2, *}f_2^{-1}\mathcal{F}
+}
+$$
+은 $\mathcal{X}_\tau$ 위의 쌍대단체 층이다. 여기서는
+사이트, 절 \ref{sites-section-pullback}에서 도입한
+당김 사상들을 사용한다.
+$\mathcal{F}$가 아벨층이면 $f_{n, *}f_n^{-1}\mathcal{F}$들은
+$\mathcal{X}_\tau$ 위의 쌍대단체 아벨층을 이룬다.
+이에 대응하는 복합체
+(단체적 방법, 절 \ref{simplicial-section-dold-kan-cosimplicial} 참조)
+$$
+\ldots \to 0 \to
+f_{0, *}f_0^{-1}\mathcal{F} \to
+f_{1, *}f_1^{-1}\mathcal{F} \to
+f_{2, *}f_2^{-1}\mathcal{F} \to \ldots
+$$
+를 이 상황에 대응하는 {\it 상대 체흐 복합체}라 한다.
+이 복합체를 $\mathcal{K}^\bullet(f, \mathcal{F})$로 나타낸다.
+{\it 확장 상대 체흐 복합체}는 다음 복합체이다.
+$$
+\ldots \to 0 \to
+\mathcal{F} \to
+f_{0, *}f_0^{-1}\mathcal{F} \to
+f_{1, *}f_1^{-1}\mathcal{F} \to
+f_{2, *}f_2^{-1}\mathcal{F} \to \ldots
+$$
+여기서 $\mathcal{F}$는 차수 $-1$에 놓인다. 확장 상대 체흐 복합체가
+비순환일 필요충분조건은 사상
+$\mathcal{F}[0] \to \mathcal{K}^\bullet(f, \mathcal{F})$
+가 층의 복합체의 준동형사상인 것이다.
+
+\begin{remark}
+\label{remark-cech-complex-presheaves}
+$\mathcal{F}$가 프리시프인 경우에도
+복합체 $\mathcal{K}^\bullet(f, \mathcal{F})$를 정의할 수 있다.
+다만 이때 당김 사상을 정의하는 데
+사이트, 절 \ref{sites-section-pullback}을 사용할 수는 없다.
+당김 사상을 설명하기 위해 가환 도표
+$$
+\xymatrix{
+\mathcal{V} \ar[rd]_g \ar[rr]_h & &  \mathcal{U} \ar[ld]^f \\
+& \mathcal{X}
+}
+$$
+와 $\mathcal{U}$ 위의 프리시프 $\mathcal{G}$가 주어졌다고 하자.
+여기서 도표는 $(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주들로
+이루어져 있다. 당김 사상
+$f_*\mathcal{G} \to g_*h^{-1}\mathcal{G}$를 합성
+$$
+f_*\mathcal{G} \longrightarrow
+f_*h_*h^{-1}\mathcal{G} = g_*h^{-1}\mathcal{G}
+$$
+으로 정의할 수 있다. 여기서 첫 사상은 수반 사상
+$\mathcal{G} \to h_*h^{-1}\mathcal{G}$에서 온다.
+우리 상황에서는 함자 $h_*$와 $h^{-1}$가 프리시프 범주에서
+수반이고, 층 위에서의 대응물과 일치하므로 이 정의가 성립한다.
+절 \ref{section-presheaves}와 \ref{section-sheaves}를 참조하라.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-generalities-sheafified}
+상대 체흐 복합체에 관한 일반 사항은 다음과 같다.
+\begin{enumerate}
+\item 만일
+$$
+\xymatrix{
+\mathcal{V} \ar[d]_g \ar[r]_h & \mathcal{U} \ar[d]^f \\
+\mathcal{Y} \ar[r]^e & \mathcal{X}
+}
+$$
+가 $(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주들의
+$2$-가환 도표이면, 사상
+$e^{-1}\mathcal{K}^\bullet(f, \mathcal{F}) \to
+\mathcal{K}^\bullet(g, e^{-1}\mathcal{F})$이 존재한다.
+\item $h$와 $e$가 동치이면 (1)의 사상은 동형사상이다.
+\item $f, f' : \mathcal{U} \to \mathcal{X}$가 $2$-동형이면
+이에 대응하는 상대 체흐 복합체들은 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-generalities}의 증명과 글자 그대로 같으며,
+주석 \ref{remark-cech-complex-presheaves}의 당김 사상들을 사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-homotopy-sheafified}
+$f \circ s$가 $\text{id}_\mathcal{X}$와 $2$-동형인 $1$-사상
+$s : \mathcal{X} \to \mathcal{U}$가 존재하면,
+확장 상대 체흐 복합체는 영과 호모토픽이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-homotopy}의 증명과 글자 그대로 같다.
+\end{proof}
+
+\begin{remark}
+\label{remark-cech-complex-sections}
+$\mathcal{X}$의 대상 $x$에서 상대 체흐 복합체의 값을
+``계산''해 보자. $p(x) = U$라 하자.
+표기 $g : \mathcal{V} \to \mathcal{Y}$를 도입하는 다음
+$2$-섬유곱 도표를 생각하자.
+$$
+\xymatrix{
+\mathcal{V} \ar@{=}[r] \ar[d]_g &
+(\Sch/U)_{fppf} \times_{x, \mathcal{X}} \mathcal{U} \ar[r] \ar[d] &
+\mathcal{U} \ar[d]^f \\
+\mathcal{Y} \ar@{=}[r] &
+(\Sch/U)_{fppf} \ar[r]^-x & \mathcal{X}
+}
+$$
+보조정리 \ref{lemma-generalities}의 증명에 나오는 사상
+$\mathcal{V}_n \to \mathcal{U}_n$은 동치
+$\mathcal{V}_n =
+(\Sch/U)_{fppf} \times_{x, \mathcal{X}} \mathcal{U}_n$을 유도한다.
+따라서 (\ref{equation-pushforward})에서
+$$
+\Gamma(x, \mathcal{K}^\bullet(f, \mathcal{F})) =
+\check{\mathcal{C}}^\bullet(\mathcal{V} \to \mathcal{Y}, x^{-1}\mathcal{F})
+$$
+임을 알 수 있다. 말로 하면, $\mathcal{X}$의 대상 $x$에서
+상대 체흐 복합체의 값은 $f$를
+$\mathcal{X}/x \cong (\Sch/U)_{fppf}$로 밑변환한 것의 체흐 복합체이다.
+예를 들어 이로부터 보조정리 \ref{lemma-homotopy}가
+보조정리 \ref{lemma-homotopy-sheafified}를 함의함을 알 수 있으며,
+더 일반적으로 (보통의) 체흐 복합체에 관한 결과들은
+상대 체흐 복합체에 관한 결과들을 함의한다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-base-change-cech-complex}
+다음을
+$$
+\xymatrix{
+\mathcal{V} \ar[d]_g \ar[r]_h & \mathcal{U} \ar[d]^f \\
+\mathcal{Y} \ar[r]^e & \mathcal{X}
+}
+$$
+$(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주들의 $2$-섬유곱이라 하고,
+$\mathcal{F}$를 $\mathcal{X}$ 위의 아벨 프리시프라 하자. 그러면
+보조정리 \ref{lemma-generalities-sheafified}의 사상
+$e^{-1}\mathcal{K}^\bullet(f, \mathcal{F}) \to
+\mathcal{K}^\bullet(g, e^{-1}\mathcal{F})$은
+아벨 프리시프의 복합체의 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+$y$를 스킴 $T$ 위에 놓인 $\mathcal{Y}$의 대상이라 하고
+$x = e(y)$로 놓자. 이 사상이 $y$ 위의 단면들에 동형사상을
+유도함을 보이겠다. 주석 \ref{remark-cech-complex-sections}에 의해
+$$
+\Gamma(y, e^{-1}\mathcal{K}^\bullet(f, \mathcal{F}))\!=\!
+\Gamma(x, \mathcal{K}^\bullet(f, \mathcal{F}))\!=\!
+\check{\mathcal{C}}^\bullet(
+(\Sch/T)_{fppf} \times_{x, \mathcal{X}} \mathcal{U} \to
+(\Sch/T)_{fppf}, x^{-1}\mathcal{F})
+$$
+이다. 한편 역시 주석 \ref{remark-cech-complex-sections}에 의해
+$$
+\Gamma(y, \mathcal{K}^\bullet(g, e^{-1}\mathcal{F})) =
+\check{\mathcal{C}}^\bullet(
+(\Sch/T)_{fppf} \times_{y, \mathcal{Y}} \mathcal{V} \to
+(\Sch/T)_{fppf}, y^{-1}e^{-1}\mathcal{F})
+$$
+이다. $y^{-1}e^{-1}\mathcal{F} = x^{-1}\mathcal{F}$임을 주의하자.
+또한 도표가 $2$-카르테시안이므로 $1$-사상
+$$
+(\Sch/T)_{fppf} \times_{y, \mathcal{Y}} \mathcal{V} \to
+(\Sch/T)_{fppf} \times_{x, \mathcal{X}} \mathcal{U}
+$$
+은 동치이다. 따라서 보조정리 \ref{lemma-generalities}에 의해
+$y$ 위의 단면들 사이의 사상은 동형사상이다.
+\end{proof}
+
+\noindent
+완전성은 ``덮개'' 위에서 확인할 수 있다.
+
+\begin{lemma}
+\label{lemma-check-exactness-covering}
+$f : \mathcal{U} \to \mathcal{X}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+다음을
+$$
+\mathcal{F} \to \mathcal{G} \to \mathcal{H}
+$$
+$\textit{Ab}(\mathcal{X}_\tau)$의 복합체라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{X}$의 모든 대상 $x$에 대해
+$\mathcal{X}_\tau$의 덮개 $\{x_i \to x\}$가 존재하여,
+각 $x_i$가 $\mathcal{U}$의 어떤 대상 $u_i$에 대한
+$f(u_i)$와 동형이다.
+\item $f^{-1}\mathcal{F} \to f^{-1}\mathcal{G} \to f^{-1}\mathcal{H}$는 완전하다.
+\end{enumerate}
+그러면 열 $\mathcal{F} \to \mathcal{G} \to \mathcal{H}$는 완전하다.
+\end{lemma}
+
+\begin{proof}
+$x$를 스킴 $T$ 위에 놓인 $\mathcal{X}$의 대상이라 하자.
+$(\Sch/T)_\tau$ 위의 아벨층의 열
+$x^{-1}\mathcal{F} \to x^{-1}\mathcal{G} \to x^{-1}\mathcal{H}$
+을 생각하자. 이 열이 완전함을 보이면 충분하다.
+가정에 의해 $\tau$-덮개 $\{T_i \to T\}$가 존재하여,
+$x|_{T_i}$는 $T_i$ 위에 놓인 $\mathcal{U}$의 어떤 대상 $u_i$에 대한
+$f(u_i)$와 동형이고, 더욱이 $(\Sch/T_i)_\tau$ 위의 아벨층의 열
+$u_i^{-1}f^{-1}\mathcal{F} \to u_i^{-1}f^{-1}\mathcal{G} \to
+u_i^{-1}f^{-1}\mathcal{H}$는 완전하다.
+$u_i^{-1}f^{-1}\mathcal{F} = x^{-1}\mathcal{F}|_{(\Sch/T_i)_\tau}$
+이므로 열
+$x^{-1}\mathcal{F} \to x^{-1}\mathcal{G} \to x^{-1}\mathcal{H}$
+은 덮개의 각 원소에서 국소화하면 완전해진다.
+따라서 이 열은 완전하다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-exactness-cech-complex}
+$f : \mathcal{U} \to \mathcal{X}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{F}$는 $\mathcal{X}_\tau$ 위의 아벨층이다.
+\item $\mathcal{X}$의 모든 대상 $x$에 대해
+$\mathcal{X}_\tau$의 덮개 $\{x_i \to x\}$가 존재하여,
+각 $x_i$가 $\mathcal{U}$의 어떤 대상 $u_i$에 대한
+$f(u_i)$와 동형이다.
+\end{enumerate}
+그러면 확장 상대 체흐 복합체
+$$
+\ldots \to 0 \to
+\mathcal{F} \to
+f_{0, *}f_0^{-1}\mathcal{F} \to
+f_{1, *}f_1^{-1}\mathcal{F} \to
+f_{2, *}f_2^{-1}\mathcal{F} \to \ldots
+$$
+는 $\textit{Ab}(\mathcal{X}_\tau)$에서 완전하다.
+\end{proposition}
+
+\begin{proof}
+보조정리 \ref{lemma-check-exactness-covering}에 의해
+$\mathcal{U}$로 당긴 뒤 완전성을 확인하면 충분하다.
+보조정리 \ref{lemma-base-change-cech-complex}에 의해
+확장 상대 체흐 복합체의 당김은 사상
+$\mathcal{U} \times_\mathcal{X} \mathcal{U} \to \mathcal{U}$
+과 $\mathcal{U}_\tau$ 위의 아벨층에 대한 확장 상대 체흐 복합체와
+동형이다. 단면
+$\Delta_{\mathcal{U}/\mathcal{X}} : \mathcal{U} \to
+\mathcal{U} \times_\mathcal{X} \mathcal{U}$가 존재하므로
+완전성은 보조정리 \ref{lemma-homotopy-sheafified}에서 따른다.
+\end{proof}
+
+\noindent
+이를 사용하여 다음과 같이 체흐-코호몰로지 스펙트럴 열을
+구성할 수 있다. 먼저 기술적이고 정확한 형태를 제시한다.
+다음 절에서는 대수 스택에만 적용되는 형태를 제시한다.
+
+\begin{lemma}
+\label{lemma-cech-to-cohomology}
+$f : \mathcal{U} \to \mathcal{X}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{F}$는 $\mathcal{X}_\tau$ 위의 아벨층이다.
+\item $\mathcal{X}$의 모든 대상 $x$에 대해
+$\mathcal{X}_\tau$의 덮개 $\{x_i \to x\}$가 존재하여,
+각 $x_i$가 $\mathcal{U}$의 어떤 대상 $u_i$에 대한
+$f(u_i)$와 동형이다.
+\item 범주 $\mathcal{U}$는 동등화자를 가진다.
+\item 함자 $f$는 충실하다.
+\end{enumerate}
+그러면 아벨 군의 제1사분면 스펙트럴 열
+$$
+E_1^{p, q} = H^q((\mathcal{U}_p)_\tau, f_p^{-1}\mathcal{F})
+\Rightarrow
+H^{p + q}(\mathcal{X}_\tau, \mathcal{F})
+$$
+이 존재하며, $\tau$-위상에서의 $\mathcal{F}$의 코호몰로지로
+수렴한다.
+\end{lemma}
+
+\begin{proof}
+증명을 시작하기 전에 몇 가지를 언급하자.
+보조정리 \ref{lemma-fibre-products-preserve-properties}와
+수학적 귀납법에 의해 모든 군들로 섬유화된 범주
+$\mathcal{U}_p$는 동등화자를 가지며, 모든 사상
+$f_p : \mathcal{U}_p \to \mathcal{X}$는 충실하다.
+$\mathcal{I}$를 $\textit{Ab}(\mathcal{X}_\tau)$의 단사 대상이라 하자.
+보조정리 \ref{lemma-pullback-injective}에 의해
+$f_p^{-1}\mathcal{I}$는
+$\textit{Ab}((\mathcal{U}_p)_\tau)$의 단사 대상이다.
+따라서 보조정리 \ref{lemma-pushforward-injective}에 의해
+$f_{p, *}f_p^{-1}\mathcal{I}$는
+$\textit{Ab}(\mathcal{X}_\tau)$의 단사 대상이다.
+그러므로 명제 \ref{proposition-exactness-cech-complex}는
+확장 상대 체흐 복합체
+$$
+\ldots \to 0 \to
+\mathcal{I} \to
+f_{0, *}f_0^{-1}\mathcal{I} \to
+f_{1, *}f_1^{-1}\mathcal{I} \to
+f_{2, *}f_2^{-1}\mathcal{I} \to \ldots
+$$
+가 $\textit{Ab}(\mathcal{X}_\tau)$에서 완전하고 모든 항이
+단사 대상임을 보인다. 이 복합체의 전역 단면을 취하는 것은
+완전하므로, 체흐 복합체
+$\check{\mathcal{C}}^\bullet(\mathcal{U} \to \mathcal{X}, \mathcal{I})$
+는 $\Gamma(\mathcal{X}_\tau, \mathcal{I})[0]$와 준동형사상이다.
+
+\medskip\noindent
+이 준비를 마쳤으므로 다음 이중 복합체에 대응하는 두 스펙트럴 열을
+생각하자(호몰로지 대수학, 절 \ref{homology-section-double-complex} 참조).
+$$
+\check{\mathcal{C}}^\bullet(\mathcal{U} \to \mathcal{X}, \mathcal{I}^\bullet)
+$$
+여기서 $\mathcal{F} \to \mathcal{I}^\bullet$는
+$\textit{Ab}(\mathcal{X}_\tau)$에서의 단사 분해이다.
+위의 논의에 의해 호몰로지 대수학, 보조정리
+\ref{homology-lemma-double-complex-gives-resolution}를 적용할 수 있고,
+따라서
+$\Gamma(\mathcal{X}_\tau, \mathcal{I}^\bullet)$
+는 이중 복합체에 대응하는 전체 복합체와 준동형사상이다.
+위에서 언급한 바에 의해 복합체 $f_p^{-1}\mathcal{I}^\bullet$는
+$f_p^{-1}\mathcal{F}$의 단사 분해이다. 따라서 다른 스펙트럴 열은
+보조정리의 진술에 표시된 형태를 갖는다.
+\end{proof}
+
+\noindent
+가군에 대해서도 같은 형태가 있음을 덧붙인다.
+
+\begin{lemma}
+\label{lemma-cech-to-cohomology-modules}
+$f : \mathcal{U} \to \mathcal{X}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{F}$는
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$의 대상이다.
+\item $\mathcal{X}$의 모든 대상 $x$에 대해
+$\mathcal{X}_\tau$의 덮개 $\{x_i \to x\}$가 존재하여,
+각 $x_i$가 $\mathcal{U}$의 어떤 대상 $u_i$에 대한
+$f(u_i)$와 동형이다.
+\item 범주 $\mathcal{U}$는 동등화자를 가진다.
+\item 함자 $f$는 충실하다.
+\end{enumerate}
+그러면 $\Gamma(\mathcal{O}_\mathcal{X})$-가군의 제1사분면
+스펙트럴 열
+$$
+E_1^{p, q} = H^q((\mathcal{U}_p)_\tau, f_p^*\mathcal{F})
+\Rightarrow
+H^{p + q}(\mathcal{X}_\tau, \mathcal{F})
+$$
+가 존재하며, $\tau$-위상에서의 $\mathcal{F}$의 코호몰로지로 수렴한다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 증명은 보조정리 \ref{lemma-cech-to-cohomology}의
+증명과 같지만, $\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$에서
+단사 분해를 사용하고 보조정리 \ref{lemma-pullback-injective-modules}를
+보조정리 \ref{lemma-pullback-injective} 대신 사용한다.
+\end{proof}
+
+\noindent
+다음 보조정리는 앞에서 만난 덮개들을 더 익숙한 형태의 덮개로
+옮겨 준다.
+
+\begin{lemma}
+\label{lemma-surjective-flat-locally-finite-presentation}
+$f : \mathcal{X} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위의
+군들로 섬유화된 범주 사이의 $1$-사상이라 하자.
+\begin{enumerate}
+\item $f$가 대수공간으로 표현가능하고 전사, 평탄하며 국소적으로
+유한 표시라고 하자. 그러면 $\mathcal{Y}$의 임의의 대상 $y$에 대해
+fppf 덮개 $\{y_i \to y\}$와 $\mathcal{X}$의 대상 $x_i$들이 존재하여
+$\mathcal{Y}$에서 $f(x_i) \cong y_i$이다.
+\item $f$가 대수공간으로 표현가능하고 전사이며 매끄럽다고 하자.
+그러면 $\mathcal{Y}$의 임의의 대상 $y$에 대해 에탈 덮개
+$\{y_i \to y\}$와 $\mathcal{X}$의 대상 $x_i$들이 존재하여
+$\mathcal{Y}$에서 $f(x_i) \cong y_i$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+증명 (1). $y$가 스킴 $V$ 위에 놓인다고 하자.
+$y$를 사상 $(\Sch/V)_{fppf} \to \mathcal{Y}$로 생각할 수 있다.
+정의에 의해 $2$-섬유곱
+$\mathcal{X} \times_\mathcal{Y} (\Sch/V)_{fppf}$
+은 대수공간 $W$로 표현가능하고 사상 $W \to V$는 전사,
+평탄하며 국소적으로 유한 표시이다. 스킴 $U$와 전사 에탈 사상
+$U \to W$를 택하자. 그러면 $U \to V$도 전사, 평탄하고 국소적으로
+유한 표시이다(대수 공간의 사상에 있는 다음 보조정리들을 참조하라:
+\ref{spaces-morphisms-lemma-etale-flat},
+\ref{spaces-morphisms-lemma-etale-locally-finite-presentation},
+\ref{spaces-morphisms-lemma-composition-surjective},
+\ref{spaces-morphisms-lemma-composition-finite-presentation} 및
+\ref{spaces-morphisms-lemma-composition-flat}).
+따라서 $\{U \to V\}$는 fppf 덮개이다. $U$ 위의
+$1$-사상 $(\Sch/U)_{fppf} \to \mathcal{X}$에 대응하는
+$\mathcal{X}$의 대상을 $x$라 하자. 그러면
+$\{f(x) \to y\}$가 원하는 $\mathcal{Y}$의 fppf 덮개이다.
+
+\medskip\noindent
+증명 (2). $y$가 스킴 $V$ 위에 놓인다고 하자.
+$y$를 사상 $(\Sch/V)_{fppf} \to \mathcal{Y}$로 생각할 수 있다.
+정의에 의해 $2$-섬유곱
+$\mathcal{X} \times_\mathcal{Y} (\Sch/V)_{fppf}$
+은 대수공간 $W$로 표현가능하고 사상 $W \to V$는 전사이며
+매끄럽다. 스킴 $U$와 전사 에탈 사상 $U \to W$를 택하자.
+그러면 $U \to V$도 전사이고 매끄럽다
+(대수 공간의 사상에 있는 다음 보조정리들을 참조하라:
+\ref{spaces-morphisms-lemma-etale-smooth},
+\ref{spaces-morphisms-lemma-composition-surjective} 및
+\ref{spaces-morphisms-lemma-composition-smooth}).
+따라서 $\{U \to V\}$는 매끄러운 덮개이다.
+사상 심화, 보조정리 \ref{more-morphisms-lemma-etale-dominates-smooth}에
+의해 에탈 덮개 $\{V_i \to V\}$가 존재하여 각 $V_i \to V$가
+$U$를 통과한다. $V_i$ 위의 $1$-사상
+$$
+(\Sch/V_i)_{fppf} \to (\Sch/U)_{fppf} \to \mathcal{X}.
+$$
+에 대응하는 $\mathcal{X}$의 대상을 $x_i$라 하자. 그러면
+$\{f(x_i) \to y\}$가 원하는 $\mathcal{Y}$의 에탈 덮개이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cech-to-cohomology-relative}
+$f : \mathcal{U} \to \mathcal{X}$와 $g : \mathcal{X} \to \mathcal{Y}$가
+$(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주 사이의 합성 가능한
+$1$-사상이라고 하자. $\tau \in \{Zar, \etale, smooth, syntomic,
+\linebreak[0] fppf\}$라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{F}$는 $\mathcal{X}_\tau$ 위의 아벨층이다.
+\item $\mathcal{X}$의 모든 대상 $x$에 대해
+$\mathcal{X}_\tau$의 덮개 $\{x_i \to x\}$가 존재하여,
+각 $x_i$가 $\mathcal{U}$의 어떤 대상 $u_i$에 대한
+$f(u_i)$와 동형이다.
+\item 범주 $\mathcal{U}$는 동등화자를 가진다.
+\item 함자 $f$는 충실하다.
+\end{enumerate}
+그러면 $\mathcal{Y}_\tau$ 위의 아벨층의 제1사분면
+스펙트럴 열
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+이 존재한다. 모든 고차 직접상은 $\tau$-위상에서 계산한다.
+\end{lemma}
+
+\begin{proof}
+함자 $f : \mathcal{U} \to \mathcal{X}$와 $\mathcal{F}$에 대한 가정은
+보조정리 \ref{lemma-cech-to-cohomology}의 가정과 동일하다.
+따라서 그 보조정리의 증명에서 한 준비 관찰을 여기에도 적용할 수 있다.
+특히 이 관찰에 의해
+$$
+0 \to g_*\mathcal{I} \to
+(g \circ f_0)_*f_0^{-1}\mathcal{I} \to
+(g \circ f_1)_*f_1^{-1}\mathcal{I} \to \ldots
+$$
+는 $\mathcal{I}$가 $\textit{Ab}(\mathcal{X}_\tau)$의 단사 대상일 때
+완전하다. 이제 항
+$$
+\mathcal{C}^{p, q} = (g \circ f_p)_*\mathcal{I}^q
+$$
+를 갖는 이중 복합체 $\mathcal{C}^{\bullet,\bullet}$에 대응하는
+두 스펙트럴 열을 호몰로지 대수학, 절
+\ref{homology-section-double-complex}에 따라 생각하자.
+여기서 $\mathcal{F} \to \mathcal{I}^\bullet$는
+$\textit{Ab}(\mathcal{X}_\tau)$에서의 단사 분해이다.
+첫 번째 스펙트럴 열에 호몰로지 대수학, 보조정리
+\ref{homology-lemma-double-complex-gives-resolution}를 적용하면
+$g_*\mathcal{I}^\bullet$는 $\mathcal{C}^{\bullet,\bullet}$에 대응하는
+전체 복합체와 준동형사상이다.
+$f_p^{-1}\mathcal{I}^\bullet$가
+$f_p^{-1}\mathcal{F}$의 단사 분해임은
+보조정리 \ref{lemma-pullback-injective}에 따른다.
+따라서 두 번째 스펙트럴 열의 항은 보조정리의 진술에 표시된
+$E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cech-to-cohomology-relative-modules}
+$f : \mathcal{U} \to \mathcal{X}$와 $g : \mathcal{X} \to \mathcal{Y}$가
+$(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주 사이의 합성 가능한
+$1$-사상이라고 하자. $\tau \in \{Zar, \etale, smooth, syntomic,
+\linebreak[0] fppf\}$라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{F}$는
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$의 대상이다.
+\item $\mathcal{X}$의 모든 대상 $x$에 대해
+$\mathcal{X}_\tau$의 덮개 $\{x_i \to x\}$가 존재하여,
+각 $x_i$가 $\mathcal{U}$의 어떤 대상 $u_i$에 대한
+$f(u_i)$와 동형이다.
+\item 범주 $\mathcal{U}$는 동등화자를 가진다.
+\item 함자 $f$는 충실하다.
+\end{enumerate}
+그러면 $\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y})$의
+제1사분면 스펙트럴 열
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+가 존재한다. 모든 고차 직접상은 $\tau$-위상에서 계산한다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 증명은 보조정리
+\ref{lemma-cech-to-cohomology-relative}의 증명과 같지만,
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$에서
+단사 분해를 사용하고 보조정리 \ref{lemma-pullback-injective-modules}를
+보조정리 \ref{lemma-pullback-injective} 대신 사용한다.
+\end{proof}
+
+
+
+
+
+
+\section{대수 스택 위의 코호몰로지}
+\label{section-cohomology}
+
+\noindent
+$\mathcal{X}$를 $S$ 위의 대수 스택이라 하자. 앞 절들에서
+$\mathcal{X}$ 위의 \'etale, ..., fppf 위상에 대한 층을
+정의하는 방법을 보았다. 실제로 각
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$에 대해
+사이트 $\mathcal{X}_\tau$를 구성했다. 이 사이트들 위에는
+아벨층 $\mathcal{F}$라는 개념이 있다. 사이트의 코호몰로지에
+관한 장에서 코호몰로지를 정의하는 방법을 설명했다.
+이를 종합하여 {\it 유도 전역 단면} 또는 {\it 전체 코호몰로지}
+를 다음과 같이 정의하자.
+$$
+R\Gamma_{Zar}(\mathcal{X}, \mathcal{F}),
+R\Gamma_\etale(\mathcal{X}, \mathcal{F}), \ldots,
+R\Gamma_{fppf}(\mathcal{X}, \mathcal{F})
+$$
+를 $\mathcal{F} \to \mathcal{I}^\bullet$가
+$\textit{Ab}(\mathcal{X}_\tau)$에서의 단사 분해일 때
+$\Gamma(\mathcal{X}_\tau, \mathcal{I}^\bullet)$로 정의한다.
+$\mathcal{F}$의 $i$번째 코호몰로지 군은 전체 코호몰로지의
+$i$번째 코호몰로지이다. 이를
+$$
+H^i_{Zar}(\mathcal{X}, \mathcal{F}),
+H^i_\etale(\mathcal{X}, \mathcal{F}), \ldots,
+H^i_{fppf}(\mathcal{X}, \mathcal{F}).
+$$
+사상 심화, 보조정리
+\ref{more-morphisms-lemma-etale-dominates-smooth}에 의해
+$H^i_\etale = H^i_{smooth}$임을 알게 될 것이다.
+
+\medskip\noindent
+$\mathcal{F}$가 $\mathcal{O}_\mathcal{X}$-가군의 프리시프이면서
+$\tau$-위상에서 층이라면, 전체 코호몰로지와 코호몰로지 군을
+계산할 때 $\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$에서
+단사 분해를 사용한다. 매우 일반적인
+사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-cohomology-modules-abelian-agree}에 의해
+그 결과는 각각 $\mathcal{F}$를 아벨 군의 층으로 본 코호몰로지와
+준동형사상, 동형사상이다.
+
+\medskip\noindent
+지금까지 코호몰로지 군을 계산하는 유일한 도구는 앞에서 증명한
+체흐 복합체에 관한 결과였다. 이를 여기서 \'etale 위상과 fppf
+위상에 대한 대수 스택의 언어로 다시 서술한다.
+$f : \mathcal{U} \to \mathcal{X}$를 대수 스택 사이의
+$1$-사상이라 하자. 다음을 상기하자.
+$$
+f_p : \mathcal{U}_p =
+\mathcal{U} \times_\mathcal{X} \ldots \times_\mathcal{X} \mathcal{U}
+\longrightarrow
+\mathcal{X}
+$$
+는 $(p+1)$개의 인자를 갖는 구조 사상이다. 또한
+$\mathcal{X}$ 위의 층은 fppf 위상의 층임을 상기하자.
+$\mathcal{U}$가 대수공간이면
+$f : \mathcal{U} \to \mathcal{X}$는 대수공간으로 표현가능하다
+(대수적 스택, 보조정리
+\ref{algebraic-lemma-representable-diagonal} 참조).
+따라서 다음 명제는 특히 스킴에 의한 대수 스택
+$\mathcal{X}$의 매끄러운 덮개에 적용된다.
+
+\begin{proposition}
+\label{proposition-smooth-covering-compute-cohomology}
+\begin{slogan}
+스택의 코호몰로지는 제시의 체흐 신경에서 계산할 수 있다
+\end{slogan}
+$f : \mathcal{U} \to \mathcal{X}$를 대수 스택 사이의
+$1$-사상이라 하자.
+\begin{enumerate}
+\item $\mathcal{F}$를 $\mathcal{X}$ 위의 아벨 \'etale 층이라 하자.
+$f$가 대수공간으로 표현가능하고 전사이며 매끄럽다고 가정하자.
+그러면 다음 스펙트럴 열이 존재한다.
+$$
+E_1^{p, q} = H^q_\etale(\mathcal{U}_p, f_p^{-1}\mathcal{F})
+\Rightarrow
+H^{p + q}_\etale(\mathcal{X}, \mathcal{F})
+$$
+\item $\mathcal{F}$를 $\mathcal{X}$ 위의 아벨층이라 하자.
+$f$가 대수공간으로 표현가능하고 전사, 평탄하며 국소적으로
+유한 표시라고 가정하자. 그러면 다음 스펙트럴 열이 존재한다.
+$$
+E_1^{p, q} = H^q_{fppf}(\mathcal{U}_p, f_p^{-1}\mathcal{F})
+\Rightarrow
+H^{p + q}_{fppf}(\mathcal{X}, \mathcal{F})
+$$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+이를 보이기 위해 보조정리 \ref{lemma-cech-to-cohomology}의
+가정 (1)--(4)를 확인하자.
+$1$-사상 $f$가 충실하다는 것은 대수적 스택, 보조정리
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces}에
+따른다. 이것이 (4)를 보인다.
+(3)은 $\mathcal{U}$가 대수 스택이라는 사실에서 따른다
+(보조정리 \ref{lemma-fibre-products} 참조).
+(2)는 보조정리 \ref{lemma-surjective-flat-locally-finite-presentation}을
+적용하면 된다. (1)은 정의상 성립한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{대수 스택과 고차 직접상}
+\label{section-higher-direct-images}
+
+\noindent
+$g : \mathcal{X} \to \mathcal{Y}$를 $S$ 위의 대수 스택 사이의
+$1$-사상이라 하자. 앞 절들에서 각
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$에 대해
+고리 달린 토포스의 사상
+$g : \Sh(\mathcal{X}_\tau) \to \Sh(\mathcal{Y}_\tau)$를 구성했다.
+사이트의 코호몰로지에 관한 장에서 고차 직접상을 정의하는 방법을
+설명했다. 따라서 $\mathcal{F} \to \mathcal{I}^\bullet$가
+$\textit{Ab}(\mathcal{X}_\tau)$에서의 단사 분해일 때
+{\it 전체 직접상} $Rg_*\mathcal{F}$를
+$g_*\mathcal{I}^\bullet$로 정의한다. $i$번째 고차 직접상
+$R^ig_*\mathcal{F}$는 전체 직접상의 $i$번째 코호몰로지이다.
+중요한 점은 여기서 어떤 위상 $\tau$를 사용하는지가 중요하다는 것이다!
+
+\medskip\noindent
+$\mathcal{F}$가 $\mathcal{O}_\mathcal{X}$-가군의 프리시프이면서
+$\tau$-위상에서 층이라면, 전체 직접상과 고차 직접상을 계산할 때
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$에서
+단사 분해를 사용한다.
+
+\medskip\noindent
+지금까지 $g_*$의 고차 직접상을 계산하는 유일한 도구는
+앞에서 증명한 체흐 복합체에 관한 결과였다. 이를 위해
+``덮개'' $f : \mathcal{U} \to \mathcal{X}$를 선택해야 한다.
+$\mathcal{U}$가 대수공간이면
+$f : \mathcal{U} \to \mathcal{X}$는 대수공간으로 표현가능하다
+(대수적 스택, 보조정리
+\ref{algebraic-lemma-representable-diagonal} 참조).
+따라서 다음 명제는 특히 스킴에 의한 대수 스택
+$\mathcal{X}$의 매끄러운 덮개에 적용된다.
+
+\begin{proposition}
+\label{proposition-smooth-covering-compute-direct-image}
+$f : \mathcal{U} \to \mathcal{X}$와 $g : \mathcal{X} \to \mathcal{Y}$가
+대수 스택 사이의 합성 가능한 $1$-사상이라고 하자.
+\begin{enumerate}
+\item $f$가 대수공간으로 표현가능하고 전사이며 매끄럽다고 하자.
+\begin{enumerate}
+\item $\mathcal{F}$가 $\textit{Ab}(\mathcal{X}_\etale)$의 대상이면
+다음 스펙트럴 열이
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+고차 직접상을 \'etale 위상에서 계산하는
+$\textit{Ab}(\mathcal{Y}_\etale)$에 존재한다.
+\item $\mathcal{F}$가
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의 대상이면
+다음 스펙트럴 열이
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+$\textit{Mod}(\mathcal{Y}_\etale, \mathcal{O}_\mathcal{Y})$에 존재한다.
+\end{enumerate}
+\item $f$가 대수공간으로 표현가능하고 전사, 평탄하며 국소적으로
+유한 표시라고 하자.
+\begin{enumerate}
+\item $\mathcal{F}$가 $\textit{Ab}(\mathcal{X})$의 대상이면
+다음 스펙트럴 열이
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+고차 직접상을 fppf 위상에서 계산하는
+$\textit{Ab}(\mathcal{Y})$에 존재한다.
+\item $\mathcal{F}$가 $\textit{Mod}(\mathcal{O}_\mathcal{X})$의 대상이면
+다음 스펙트럴 열이
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+$\textit{Mod}(\mathcal{O}_\mathcal{Y})$에 존재한다.
+\end{enumerate}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+이를 보이기 위해 보조정리 \ref{lemma-cech-to-cohomology-relative}와
+보조정리 \ref{lemma-cech-to-cohomology-relative-modules}의
+가정 (1)--(4)를 확인하자.
+$1$-사상 $f$가 충실하다는 것은 대수적 스택, 보조정리
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces}에
+따른다. 이것이 (4)를 보인다.
+(3)은 $\mathcal{U}$가 대수 스택이라는 사실에서 따른다
+(보조정리 \ref{lemma-fibre-products} 참조).
+(2)는 보조정리 \ref{lemma-surjective-flat-locally-finite-presentation}을
+적용하면 된다. 네 경우 모두 (1)은 정의상 성립한다.
+\end{proof}
+
+\noindent
+다음은 대수 스택의 사상에 대한 고차 직접상의 기술이다.
+
+\begin{lemma}
+\label{lemma-pushforward-restriction}
+$S$를 스킴이라 하자. $f : \mathcal{X} \to \mathcal{Y}$를
+$S$ 위의 대수 스택 사이의 $1$-사상이라 하자
+\footnote{이 결과는 $(\Sch/S)_{fppf}$ 위의 군들로 섬유화된
+범주 사이의 임의의 $1$-사상에 대해서도 성립해야 한다.}.
+$\tau \in \{Zariski,\linebreak[0] \etale,\linebreak[0]
+smooth,\linebreak[0] syntomic,\linebreak[0] fppf\}$라 하자.
+$\mathcal{F}$를 $\textit{Ab}(\mathcal{X}_\tau)$ 또는
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$의
+대상이라 하자. 그러면 층 $R^if_*\mathcal{F}$는 다음 프리시프에
+대응하는 층이다.
+$$
+y \longmapsto
+H^i_\tau\Big((\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{F}\Big)
+$$
+여기서 $y$는 스킴 $V$ 위에 놓인 $\mathcal{Y}$의 대상이다.
+\end{lemma}
+
+\begin{proof}
+단사 분해 $\mathcal{F}[0] \to \mathcal{I}^\bullet$를 택하자.
+전진 공식 (\ref{equation-pushforward})에 의해
+$R^if_*\mathcal{F}$는 $y$에 다음 복합체의 코호몰로지를
+대응시키는 프리시프에 대응하는 층임을 알 수 있다.
+$$
+\begin{matrix}
+\Gamma\Big((\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{I}^{i - 1}\Big) \\
+\downarrow \\
+\Gamma\Big((\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{I}^i\Big) \\
+\downarrow \\
+\Gamma\Big((\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{I}^{i + 1}\Big)
+\end{matrix}
+$$
+$\text{pr}^{-1}$가 완전하므로 $\text{pr}^{-1}$가 단사 대상을
+보존함을 보이면 충분하다. 이는 보조정리 \ref{lemma-pullback-injective}와
+\ref{lemma-pullback-injective-modules}, 그리고 $\text{pr}$가
+대수 스택의 표현가능한 사상이라는 사실에서 따른다
+(따라서 대수적 스택, 보조정리
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces}에
+의해 $\text{pr}$는 충실하고,
+$(\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$
+는 보조정리 \ref{lemma-fibre-products}에 의해 동등화자를 가진다).
+\end{proof}
+
+\noindent
+다음은 자명한 밑변환 결과이다.
+
+\begin{lemma}
+\label{lemma-base-change-higher-direct-images}
+$S$를 스킴이라 하자.
+$\tau \in \{Zariski,\linebreak[0] \etale,\linebreak[0]
+smooth,\linebreak[0] syntomic,\linebreak[0] fppf\}$라 하자.
+$$
+\xymatrix{
+\mathcal{Y}' \times_\mathcal{Y} \mathcal{X} \ar[r]_{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r]^g & \mathcal{Y}
+}
+$$
+$S$ 위의 대수 스택들의 $2$-카르테시안 도표라 하자.
+그러면 밑변환 사상은 동형사상이다.
+$$
+g^{-1}Rf_*\mathcal{F} \longrightarrow Rf'_*(g')^{-1}\mathcal{F}
+$$
+$\textit{Ab}(\mathcal{X}_\tau)$의 $\mathcal{F}$ 또는
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$의
+$\mathcal{F}$에 대해 함자적이다.
+\end{lemma}
+
+\begin{proof}
+동형사상 $g^{-1}f_*\mathcal{F} = f'_*(g')^{-1}\mathcal{F}$는
+보조정리 \ref{lemma-base-change}이다(임의의 프리시프에 대해서도
+성립한다). 전체 직접상에 대해서는 사상 $g$와 $g'$가 평탄하므로
+밑변환 사상이 존재한다(사이트 코호몰로지, 절
+\ref{sites-cohomology-section-base-change-map} 참조).
+이 사상이 준동형사상임을 보이기 위해, 스킴 $V$ 위의
+$\mathcal{Y}'$의 대상 $y'$에 대해 다음 동치가 있음을 사용한다.
+$$
+(\Sch/V)_{fppf} \times_{g(y'), \mathcal{Y}} \mathcal{X}
+=
+(\Sch/V)_{fppf} \times_{y', \mathcal{Y}'}
+(\mathcal{Y}' \times_\mathcal{Y} \mathcal{X})
+$$
+따라서 유도된 사상
+$g^{-1}R^if_*\mathcal{F} \to R^if'_*(g')^{-1}\mathcal{F}$
+은 보조정리 \ref{lemma-pushforward-restriction}에 의해 동형사상이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{비교}
+\label{section-compare}
+
+\noindent
+이 절에서는 스택으로 정의한 코호몰로지와 대수공간으로 정의한
+코호몰로지를 비교하는 몇 가지 결과를 모은다.
+
+\begin{lemma}
+\label{lemma-compare-injectives}
+$S$를 스킴이라 하자. $\mathcal{X}$를 $S$ 위의 대수 스택이라 하고,
+대수공간 $F$로 표현가능하다고 하자.
+\begin{enumerate}
+\item $\mathcal{I}$가 $\textit{Ab}(\mathcal{X}_\etale)$에서 단사이면
+$\mathcal{I}|_{F_\etale}$는 $\textit{Ab}(F_\etale)$에서 단사이다.
+\item $\mathcal{I}^\bullet$가 $\textit{Ab}(\mathcal{X}_\etale)$의
+K-단사 복합체이면 $\mathcal{I}^\bullet|_{F_\etale}$는
+$\textit{Ab}(F_\etale)$의 K-단사 복합체이다.
+\end{enumerate}
+가군에 대해서는 같은 명제가 성립하지 않는다.
+\end{lemma}
+
+\begin{proof}
+이는 제한 함자 $\pi_{F,*}=i_F^{-1}$
+(보조정리 \ref{lemma-compare} 참조)가 완전한 함자 $\pi_F^{-1}$의
+오른쪽 수반이라는 사실에서 형식적으로 따른다. 호몰로지 대수학, 보조정리
+\ref{homology-lemma-adjoint-preserve-injectives} 및 유도 범주,
+보조정리 \ref{derived-lemma-adjoint-preserve-K-injectives}를 참조하라.
+가군에 대해 명제가 성립하지 않음은 에탈 코호몰로지, 보조정리
+\ref{etale-cohomology-lemma-compare-injectives}를 참조하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-morphism-cohomology}
+$S$를 스킴이라 하자. $f : \mathcal{X} \to \mathcal{Y}$를 $S$ 위의
+대수 스택 사이의 사상이라 하자. $\mathcal{X}$와 $\mathcal{Y}$가
+각각 대수공간 $F$, $G$로 표현가능하다고 하자. 유도된 대수공간의
+사상을 $f : F \to G$로 나타내자.
+\begin{enumerate}
+\item 임의의 $\mathcal{F} \in \textit{Ab}(\mathcal{X}_\etale)$에 대해
+$$
+(Rf_*\mathcal{F})|_{G_\etale} =
+Rf_{small, *}(\mathcal{F}|_{F_\etale})
+$$
+$D(G_\etale)$에서 성립한다.
+\item $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의
+임의의 대상 $\mathcal{F}$에 대해
+$$
+(Rf_*\mathcal{F})|_{G_\etale} =
+Rf_{small, *}(\mathcal{F}|_{F_\etale})
+$$
+$D(\mathcal{O}_G)$에서 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+ $\mathcal{F}$의 단사 분해를 택하면 (1)은 보조정리 \ref{lemma-compare-injectives}와
+(\ref{equation-compare-big-small})에서 즉시 따른다.
+
+\medskip\noindent
+ (2)는 다음과 같이 증명할 수 있다. 보조정리
+\ref{lemma-compare-morphism}에서 $\pi_G \circ f =
+f_{small} \circ \pi_F$가 고리 달린 사이트의 사상으로서 성립함을
+보았다. 따라서
+$R\pi_{G, *} \circ Rf_* = Rf_{small, *} \circ R\pi_{F, *}$
+사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-derived-pushforward-composition}에 의해
+등식을 얻는다. 제한 함자 $\pi_{F,*}$와 $\pi_{G,*}$가 완전하므로
+결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-representable-morphism-cohomology}
+$S$를 스킴이라 하자. 다음 $2$-섬유곱 정사각형을 생각하자.
+$$
+\xymatrix{
+\mathcal{X}' \ar[r]_{g'} \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r]^g & \mathcal{Y}
+}
+$$
+을 $S$ 위의 대수 스택들의 도표라 하자. $f$가 대수공간으로
+표현가능하고 $\mathcal{Y}'$가 대수공간 $G'$로 표현가능하다고
+가정하자. 그러면 $\mathcal{X}'$는 대수공간 $F'$로 표현가능하며,
+유도된 대수공간 사상 $f' : F' \to G'$에 대해 다음이 성립한다.
+$$
+g^{-1}(Rf_*\mathcal{F})|_{G'_\etale} =
+Rf'_{small, *}((g')^{-1}\mathcal{F}|_{F'_\etale})
+$$
+이는 $\textit{Ab}(\mathcal{X}_\etale)$ 또는
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의
+임의의 $\mathcal{F}$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{lemma-base-change-higher-direct-images}와
+보조정리 \ref{lemma-compare-morphism-cohomology}를 결합하면 형식적으로
+따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{위상의 변경}
+\label{section-change-topology}
+
+\noindent
+다음 기술적 보조정리는 평탄 사상 위에 놓인
+$\mathcal{X}$의 사상들에 대한 비교 사상들이 동형사상이라는
+조건 아래에서, 국소 준연접층의 fppf 코호몰로지가
+그 \'etale 코호몰로지와 같음을 말한다.
+
+\begin{lemma}
+\label{lemma-lqc-flat-base-change-fppf-sheaf}
+$S$를 스킴이라 하자. $\mathcal{X}$를 $S$ 위의 대수 스택이라 하자.
+$\mathcal{F}$를 $\mathcal{O}_\mathcal{X}$-가군의 프리시프라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item[(a)] $\mathcal{F}$는 국소 준연접이다.
+\item[(b)] $\mathcal{X}$의 임의의 사상 $\varphi : x \to y$가
+평탄하고 국소적으로 유한 표시인 스킴의 사상 $f : U \to V$ 위에
+놓인다고 하자. 그러면 비교 사상
+$c_\varphi : f_{small}^*\mathcal{F}|_{V_\etale} \to
+\mathcal{F}|_{U_\etale}$ (식
+(\ref{equation-comparison-modules}))은 동형사상이다.
+\end{enumerate}
+그러면 $\mathcal{F}$는 fppf 위상의 층이다.
+\end{lemma}
+
+\begin{proof}
+$\{x_i \to x\}$를 $\mathcal{X}$의 fppf 덮개라 하고,
+$S$ 위의 스킴들의 fppf 덮개 $\{f_i : U_i \to U\}$ 위에 놓인다고 하자.
+가정에 의해 제한 $\mathcal{G} = \mathcal{F}|_{U_\etale}$는 준연접이고
+비교 사상
+$f_{i, small}^*\mathcal{G} \to \mathcal{F}|_{U_{i, \etale}}$는
+동형사상이다. 따라서 $\mathcal{F}$에 대한 층 조건과
+덮개 $\{x_i \to x\}$는 $(\Sch/U)_{fppf}$ 위의
+$\mathcal{G}^a$에 대한 층 조건 및 덮개 $\{U_i \to U\}$에 대한
+층 조건과 동치이다. 후자는 하강, 보조정리
+\ref{descent-lemma-sheaf-condition-holds}에 의해 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-fppf-etale}
+$S$를 스킴이라 하자. $\mathcal{X}$를 $S$ 위의 대수 스택이라 하자.
+$\mathcal{F}$를 다음 조건을 만족하는 $\mathcal{O}_\mathcal{X}$-가군
+프리시프라 하자.
+\begin{enumerate}
+\item[(a)] $\mathcal{F}$는 국소 준연접이다.
+\item[(b)] $\mathcal{X}$의 임의의 사상 $\varphi : x \to y$가
+평탄하고 국소적으로 유한 표시인 스킴의 사상 $f : U \to V$ 위에
+놓인다고 하자. 그러면 비교 사상
+$c_\varphi : f_{small}^*\mathcal{F}|_{V_\etale} \to
+\mathcal{F}|_{U_\etale}$ (식
+(\ref{equation-comparison-modules}))은 동형사상이다.
+\end{enumerate}
+그러면 $\mathcal{F}$는 $\mathcal{O}_\mathcal{X}$-가군이고 다음이 성립한다.
+\begin{enumerate}
+\item $\epsilon : \mathcal{X}_{fppf} \to \mathcal{X}_\etale$가
+비교 사상이면
+$R\epsilon_*\mathcal{F} = \epsilon_*\mathcal{F}$.
+\item 코호몰로지 군 $H^p_{fppf}(\mathcal{X}, \mathcal{F})$는
+$\mathcal{X}$의 \'etale 위상에서 계산한 코호몰로지 군과 같다.
+코호몰로지 군 $H^p_{fppf}(x, \mathcal{F})$ 및 유도 버전
+$R\Gamma(\mathcal{X}, \mathcal{F})$, $R\Gamma(x, \mathcal{F})$도
+마찬가지이다.
+\item $f : \mathcal{X} \to \mathcal{Y}$가
+$(\Sch/S)_{fppf}$ 위의 군들로 섬유화된 범주 사이의
+$1$-사상이면, $R^if_*\mathcal{F}$는 \'etale 코호몰로지에서
+계산한 고차 직접상의 fppf 층화와 같다.
+유도 당김에 대해서도 마찬가지이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+ $\mathcal{F}$가 $\mathcal{O}_\mathcal{X}$-가군이라는 주장은
+보조정리 \ref{lemma-lqc-flat-base-change-fppf-sheaf}에서 따른다.
+$\epsilon$은 $\mathcal{X}$ 위의 항등 함자로 주어진 사이트의
+사상임을 주의하자. 따라서 층 $R^p\epsilon_*\mathcal{F}$는
+프리시프
+$x \mapsto H^p_{fppf}(x, \mathcal{F})$에 대응하는 층이다
+(사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-higher-direct-images} 참조).
+(1)을 증명하려면
+$H^p_{fppf}(x, \mathcal{F}) = 0$에 대해 $p > 0$인 경우
+가 $x$가 아핀 스킴 $U$ 위에 놓일 때 성립함을 보이면 충분하다.
+보조정리 \ref{lemma-cohomology-restriction}에 의해
+$H^p_{fppf}(x, \mathcal{F}) = H^p((\Sch/U)_{fppf}, x^{-1}\mathcal{F})$.
+하강, 보조정리 \ref{descent-lemma-quasi-coherent-and-flat-base-change}와
+스킴의 코호몰로지, 보조정리
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}를 결합하면
+이 코호몰로지 군들이 0임을 알 수 있다.
+
+\medskip\noindent
+위에서 $\epsilon_*\mathcal{F}$와 $\mathcal{F}$는 각각
+$\mathcal{X}_\etale$와 $\mathcal{X}_{fppf}$ 위에서
+$\mathcal{X}$의 같은 프리시프에 대응하는 층임을 보았다
+($\mathcal{X}$ 위의 임의의 fppf 층에 대해서도 성립한다).
+때때로 $\mathcal{F}$와 $\epsilon_*\mathcal{F}$를 편의상 동일시하며,
+보조정리의 (2), (3)은 이 의미로 이해해야 한다.
+따라서 (2)는 (1)과 Leray 스펙트럴 열에서 형식적으로 따른다
+(사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-apply-Leray} 참조).
+
+\medskip\noindent
+마지막으로 (3)을 증명하자. 층 $R^if_*\mathcal{F}$
+(각각 $Rf_{\etale,*}\mathcal{F}$)는 다음 프리시프에 대응하는 층이다.
+$$
+y \longmapsto
+H^i_\tau\Big((\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{F}\Big)
+$$
+여기서 $\tau$는 $fppf$ (각각 $\etale$)이다
+(보조정리 \ref{lemma-pushforward-restriction} 참조).
+$\text{pr}^{-1}\mathcal{F}$도 (a), (b)를 만족한다
+(보조정리 \ref{lemma-pullback-lqc}와 \ref{lemma-comparison}에 의해).
+따라서 (2)에 의해 이 두 프리시프는 같다.
+그러므로 (3)이 즉시 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리를 사용하여 대수 스택 위의 층의
+\'etale 코호몰로지와 lisse-\'etale 토포스에서의 코호몰로지를 비교한다.
+
+\begin{lemma}
+\label{lemma-cohomology-on-subcategory}
+$S$를 스킴이라 하자. $\mathcal{X}$를 $S$ 위의 대수 스택이라 하자.
+$\tau = \etale$ (각각 $\tau = fppf$)로 놓자.
+$\mathcal{X}' \subset \mathcal{X}$를 다음 성질을 갖는 전충실
+부분범주라 하자.
+\begin{enumerate}
+\item $x \to x'$가 스킴의 매끄러운
+(각각 평탄하고 국소적으로 유한 표시인) 사상 위에 놓인
+$\mathcal{X}$의 사상이고 $x' \in \Ob(\mathcal{X}')$이면,
+$x \in \Ob(\mathcal{X}')$이다.
+\item 어떤 $x \in \Ob(\mathcal{X}')$가 스킴 $U$ 위에 놓이며,
+이에 대응하는 $1$-사상
+$x : (\Sch/U)_{fppf} \to \mathcal{X}$가 매끄럽고 전사이다.
+\end{enumerate}
+ $\mathcal{X}'$의 덮개를 $\mathcal{X}_\tau$에서 덮개인
+$\mathcal{X}'$ 안의 사상족 $\{x_i \to x\}$로 선언하여
+사이트 $\mathcal{X}'_\tau$를 얻는다. 그러면 포함 함자
+$\mathcal{X}' \to \mathcal{X}_\tau$는 전충실이고 쌍대연속이며
+연속이다. 따라서 토포스의 사상
+$$
+g : \Sh(\mathcal{X}'_\tau) \longrightarrow \Sh(\mathcal{X}_\tau)
+$$
+를 정의하며, 모든 $p \geq 0$와 모든
+$\mathcal{F} \in \textit{Ab}(\mathcal{X}_\tau)$에 대해
+$H^p(\mathcal{X}'_\tau, g^{-1}\mathcal{F}) =
+H^p(\mathcal{X}_\tau, \mathcal{F})$이다.
+\end{lemma}
+
+\begin{proof}
+가정 (1)에 의해 $\{x_i \to x\}$가 $\mathcal{X}_\tau$의 덮개이고
+$x \in \Ob(\mathcal{X}')$이면 $x_i \in \Ob(\mathcal{X}')$임을
+주의하자. 따라서 $\mathcal{X}'_\tau$의 대상에 대한 덮개는
+$\mathcal{X}_\tau$의 대상으로 보았을 때의 덮개와 일치하므로
+$\mathcal{X}' \to \mathcal{X}$는 연속이고 쌍대연속이다.
+토포스의 사상 $g$를 얻으며, 함자 $g^{-1}$는 제한 함자로
+식별된다(사이트, 보조정리 \ref{sites-lemma-when-shriek} 참조).
+
+\medskip\noindent
+특히 $\{x_i \to x\}$가 $\mathcal{X}'_\tau$의 덮개이면,
+$\mathcal{X}$ 위의 임의의 아벨층 $\mathcal{F}$에 대해
+$$
+\check H^p(\{x_i \to x\}, g^{-1}\mathcal{F}) =
+\check H^p(\{x_i \to x\}, \mathcal{F})
+$$
+따라서 $\mathcal{I}$가 $\mathcal{X}_\tau$ 위의 단사 아벨층이면
+고차 체흐 코호몰로지 군은 0이다(사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-injective-trivial-cech}).
+그러므로 모든 $\mathcal{X}'$의 대상 $x$에 대해
+$H^p(x, g^{-1}\mathcal{I}) = 0$이다(사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-cech-vanish-collection}).
+즉 $\mathcal{X}_\tau$ 위의 단사 아벨층은 함자
+$H^0(x, g^{-1}-)$에 대해 오른쪽 완전 비순환이다.
+따라서 모든 $\mathcal{F} \in \textit{Ab}(\mathcal{X})$와
+$x \in \Ob(\mathcal{X}')$에 대해
+$H^p(x, g^{-1}\mathcal{F}) = H^p(x, \mathcal{F})$이다.
+
+\medskip\noindent
+가정 (2)의 스킴 $U$ 위에 놓인 대상
+$x \in \mathcal{X}'$를 택하자. 특히
+$\mathcal{X}/x \to \mathcal{X}$는 대수공간으로 표현가능하고
+전사이며 매끄러운 대수 스택의 사상이다.
+($\mathcal{X}/x$가 $(\Sch/U)_{fppf}$와 동치임을 주의하라.
+보조정리 \ref{lemma-localizing} 참조.)
+층의 사상
+$$
+h_x \longrightarrow *
+$$
+은 $\Sh(\mathcal{X}_\tau)$에서 전사이다. 실제로
+$\mathcal{X}$의 임의의 대상 $x'$에 대해 $\tau$-덮개
+$\{x'_i \to x'\}$가 존재하여 어떤 사상 $x'_i \to x$가 존재한다
+(보조정리 \ref{lemma-surjective-flat-locally-finite-presentation} 참조).
+$g$가 완전하므로 층의 사상
+$$
+g^{-1}h_x \longrightarrow * = g^{-1}*
+$$
+$\Sh(\mathcal{X}'_\tau)$에서도 전사이다. $h_{x,n}$을
+$(n+1)$중 곱 $h_x \times \ldots \times h_x$라 하자.
+그러면 다음 스펙트럴 열들이 존재한다.
+\begin{equation}
+\label{equation-spectral-sequence-one}
+E_1^{p, q} = H^q(h_{x, p}, \mathcal{F}) \Rightarrow
+H^{p + q}(\mathcal{X}_\tau, \mathcal{F})
+\end{equation}
+및
+\begin{equation}
+\label{equation-spectral-sequence-two}
+E_1^{p, q} = H^q(g^{-1}h_{x, p}, g^{-1}\mathcal{F}) \Rightarrow
+H^{p + q}(\mathcal{X}'_\tau, g^{-1}\mathcal{F})
+\end{equation}
+이는 사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-cech-to-cohomology-sheaf-sets}에 따른다.
+
+\medskip\noindent
+경우 I: $\mathcal{X}$가 최종 대상 $x$를 가지며 이 대상이
+$\mathcal{X}'$의 대상이기도 한 경우. 이 경우는 위의 두 번째
+문단의 논의에서 즉시 따른다.
+
+\medskip\noindent
+경우 II: $\mathcal{X}$가 대수공간 $F$로 표현가능한 경우.
+이 경우 층 $h_{x, n}$은 $\mathcal{X}$의 대상 $x_n$으로
+표현가능하다. (즉, $\mathcal{S}_F = \mathcal{X}$이고
+$x : U \to F$가 주어진 대상이면, $h_{x, n}$은
+$\mathcal{S}_F$의 대상 $U \times_F \ldots \times_F U \to F$로
+표현가능하다.) 따라서 $H^q(h_{x, p}, \mathcal{F}) = H^q(x_p, \mathcal{F})$이다.
+사상 $x_n \to x$는 스킴의 매끄러운 사상 위에 놓이므로 모든 $n$에 대해
+$x_n \in \mathcal{X}'$이다. 따라서
+$H^q(g^{-1}h_{x, p}, g^{-1}\mathcal{F}) = H^q(x_p, g^{-1}\mathcal{F})$이다.
+그러므로 위의 두 스펙트럴 열
+(\ref{equation-spectral-sequence-one}) 및
+(\ref{equation-spectral-sequence-two})에서 $E_1^{p, q}$ 항은
+두 번째 문단의 논의에 의해 일치한다. 경우 II에서도 보조정리가 따른다.
+
+\medskip\noindent
+경우 III: $\mathcal{X}$가 대수 스택인 경우. 이 경우 코호몰로지 군
+$H^q(h_{x, p}, \mathcal{F})$와
+$H^q(g^{-1}h_{x, n}, g^{-1}\mathcal{F})$가 위의 경우 II에 의해
+일치함을 보이겠다. 이를 증명하면 결과는 앞과 같이 따른다.
+
+\medskip\noindent
+구체적으로 $\mathcal{X}/h_{x, n}$을 생각하자. 사이트, 보조정리
+\ref{sites-lemma-localize-topos-site}를 보라.
+$h_{x, n}$은 $h_x$의 $(n + 1)$중 곱이므로 이 범주의 대상은
+$(n + 2)$-튜플
+$(y, s_0, \ldots, s_n)$이며, 여기서 $y$는 $\mathcal{X}$의 대상이고 각
+$s_i : y \to x$는 $\mathcal{X}$의 사상이다.
+이는 $(\Sch/S)_{fppf}$ 위의 범주이다. 다음 동치가 존재한다.
+$$
+\mathcal{X}/h_{x, n}
+\longrightarrow
+(\Sch/U)_{fppf} \times_\mathcal{X} \ldots \times_\mathcal{X} (\Sch/U)_{fppf}
+=: \mathcal{U}_n
+$$
+$(\Sch/S)_{fppf}$ 위에서 성립한다. 즉, $x : (\Sch/U)_{fppf} \to \mathcal{X}$를
+$x$에 대응하는 $1$-사상으로도 나타내고
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 구조 함자로 나타내면,
+$(y, s_0, \ldots, s_n)$을 다음과 같이 생각할 수 있다.
+$(y, f_0, \ldots, f_n, \alpha_0, \ldots, \alpha_n)$
+여기서 $y$는 $\mathcal{X}$의 대상이고, $f_i : p(y) \to p(x)$는
+스킴의 사상이며, $\alpha_i : y \to x(f_i)$는 동형사상이다.
+$2n+3$-튜플의 범주
+$(y, f_0, \ldots, f_n, \alpha_0, \ldots, \alpha_n)$
+은 위에 표시한 대수 스택의 $(n + 1)$중 섬유곱 $\mathcal{U}_n$의
+한 구현이며, 이는 절 \ref{section-cech}에서 논의했다.
+사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-cohomology-on-sheaf-sets}
+다음을 얻는다.
+$$
+H^p(\mathcal{U}_n, \mathcal{F}|_{\mathcal{U}_n}) =
+H^p(\mathcal{X}/h_{x, n}, \mathcal{F}|_{\mathcal{X}/h_{x, n}}) =
+H^p(h_{x, n}, \mathcal{F}).
+$$
+마지막으로 이 구성의 ``프라임'' 유사물을 논의하자. 즉,
+$\mathcal{X}'/h_{x, n}$은 위 동치에 의해 다음 튜플들로 이루어진
+전충실 부분범주 $\mathcal{U}'_n \subset \mathcal{U}_n$에 대응한다.
+$(y, f_0, \ldots, f_n, \alpha_0, \ldots, \alpha_n)$
+이때 $y \in \mathcal{X}'$이다. 따라서 포함 $\mathcal{U}'_n \subset \mathcal{U}_n$에
+대해 보조정리의 성질 (1)은 확실히 성립한다.
+성질 (2)를 보이기 위해 $(\Sch/W)_{fppf} \to \mathcal{U}_n$이
+매끄럽고 전사인 스킴 $W$ 위에 놓인 대상
+$\xi = (y, s_0, \ldots, s_n)$을 택하자( $\mathcal{U}_n$이 대수 스택이므로
+이는 가능하다). 그러면
+$(\Sch/W)_{fppf} \to \mathcal{U}_n \to (\Sch/U)_{fppf}$
+은 사상 $x : (\Sch/U)_{fppf} \to \mathcal{X}$의 밑변환들의 합성이므로
+매끄럽다. 대수적 스택, 보조정리
+\ref{algebraic-lemma-base-change-representable-transformations-property} 및
+\ref{algebraic-lemma-composition-representable-transformations-property}.
+따라서 $\mathcal{X}$의 공리 (1)에 의해 $y$는 $\mathcal{X}'$의 대상이고,
+그러므로 $\xi$는 $\mathcal{U}'_n$의 대상이다.
+다시
+$$
+H^p(\mathcal{U}'_n, \mathcal{F}|_{\mathcal{U}'_n}) =
+H^p(\mathcal{X}'/h_{x, n}, \mathcal{F}|_{\mathcal{X}'/h_{x, n}}) =
+H^p(g^{-1}h_{x, n}, g^{-1}\mathcal{F}).
+$$
+을 사용하면, 이제 $\mathcal{U}'_n \subset \mathcal{U}_n$에 대해 경우 II를
+적용하여 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{아핀 스킴으로의 제한}
+\label{section-alternative}
+
+\noindent
+이 절에서는 $(\Sch/S)_{fppf}$ 위에서 군체로 섬유화된 범주
+$\mathcal{X}$가 주어졌을 때, 아핀 스킴 $U$ 위에 놓인 대상 $x$들로
+이루어진 $\mathcal{X}$의 전충실 부분범주 $\mathcal{X}_{affine}$를
+고려한다. 자리스키 위상보다 더 세밀한 임의의 위상 $\tau$에 대해
+$\mathcal{X}$와 $\mathcal{X}_{affine, \tau}$ 위의 층의 범주가
+일치함을 보이겠다.
+
+\begin{definition}
+\label{definition-alternative}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군체로 섬유화된 범주라 하자.
+{\it 연관된 아핀 사이트}를 $\mathcal{X}$의 전충실 부분범주
+$\mathcal{X}_{affine}$로 정의하자. 그 대상은 어떤 아핀 스킴 $U$ 위에
+놓인 $x \in \Ob(\mathcal{X})$이다. 즉 $U$가 아핀이다.
+$\mathcal{X}_{affine}$의 위상은
+혼돈 위상으로 한다. 즉 $\mathcal{X}_{affine}$ 위의 층은 프리시프와 같다.
+\end{definition}
+
+\noindent
+따라서 함자 $p : \mathcal{X} \to (\Sch/S)_{fppf}$는 다음 함자로 제한된다.
+$$
+p : \mathcal{X}_{affine} \longrightarrow (\textit{Aff}/S)_{fppf}
+$$
+오른쪽 표기는 스킴 위의 위상, 정의 \ref{topologies-definition-big-small-fppf}에서
+도입했다. $\mathcal{X}_{affine}$는 $(\textit{Aff}/S)_{fppf}$ 위에서
+군체로 섬유화된 범주임이 분명하다. 따라서 $\mathcal{X}_{affine}$는
+$(\textit{Aff}/S)_{Zar}$, $(\textit{Aff}/S)_\etale$,
+$(\textit{Aff}/S)_{smooth}$, $(\textit{Aff}/S)_{syntomic}$ 및
+$(\textit{Aff}/S)_{fppf}$로부터 자리스키, \'etale, smooth, syntomic 및
+fppf 위상을 물려받는다. Stacks, 정의
+\ref{stacks-definition-topology-inherited}를 보라.
+
+\begin{definition}
+\label{definition-alternative-inherited-topologies}
+ $p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군체로 섬유화된 범주라 하자.
+\begin{enumerate}
+\item {\it 연관된 아핀 자리스키 사이트} $\mathcal{X}_{affine, Zar}$는
+$(\textit{Aff}/S)_{Zar}$에서 물려받은 $\mathcal{X}_{affine}$ 위의
+사이트 구조이다.
+\item {\it 연관된 아핀 \'etale 사이트} $\mathcal{X}_{affine, \etale}$는
+$(\textit{Aff}/S)_\etale$에서 물려받은 $\mathcal{X}_{affine}$ 위의 사이트 구조이다.
+\item {\it 연관된 아핀 smooth 사이트} $\mathcal{X}_{affine, smooth}$는
+$(\textit{Aff}/S)_{smooth}$에서 물려받은 $\mathcal{X}_{affine}$ 위의 사이트 구조이다.
+\item {\it 연관된 아핀 syntomic 사이트} $\mathcal{X}_{affine, syntomic}$는
+$(\textit{Aff}/S)_{syntomic}$에서 물려받은 $\mathcal{X}_{affine}$ 위의 사이트 구조이다.
+\item {\it 연관된 아핀 fppf 사이트} $\mathcal{X}_{affine, fppf}$는
+$(\textit{Aff}/S)_{fppf}$에서 물려받은 $\mathcal{X}_{affine}$ 위의 사이트 구조이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+위의 논의에 의해 이 정의는 의미가 있다.\par\noindent
+각 $\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$에 대해
+$\mathcal{X}_{affine}$에서 고정된 표적을 갖는 사상족
+$\{x_i \to x\}_{i \in I}$가 $\mathcal{X}_{affine, \tau}$의 덮개인 것은
+사상족 $\{p(x_i) \to p(x)\}_{i \in I}$인 아핀 스킴의 사상들이
+스킴 위의 위상의 다음 정의들에서 말하는 표준 $\tau$-덮개인 경우와 동치이다.
+스킴 위의 위상, 정의
+\ref{topologies-definition-standard-Zariski},
+\ref{topologies-definition-standard-etale},
+\ref{topologies-definition-standard-smooth},
+\ref{topologies-definition-standard-syntomic} 및
+\ref{topologies-definition-standard-fppf}.
+
+\begin{lemma}
+\label{lemma-alternative}
+ $p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군체로 섬유화된 범주라 하자.
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$라 하자. 함자
+$\mathcal{X}_{affine, \tau} \to \mathcal{X}_\tau$는 특수 쌍대연속 함자이다.
+따라서 이는 $\Sh(\mathcal{X}_{affine, \tau})$에서
+$\Sh(\mathcal{X}_\tau)$로의 토포스 동치를 유도한다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 증명은 스킴 위의 위상에 있는 다음 보조정리들의 증명과 정확히 같다.
+스킴 위의 위상, 보조정리
+\ref{topologies-lemma-affine-big-site-Zariski},
+\ref{topologies-lemma-affine-big-site-etale},
+\ref{topologies-lemma-affine-big-site-smooth},
+\ref{topologies-lemma-affine-big-site-syntomic} 및
+\ref{topologies-lemma-affine-big-site-fppf}.
+\end{proof}
+
+\noindent
+ $p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군체로 섬유화된 범주라 하자.
+$\mathcal{O}$를 $\mathcal{O}_\mathcal{X}$의 $\mathcal{X}_{affine}$로의
+제한이라 하자. 그러면 $\mathcal{O}$는 $\mathcal{X}_{affine}$ 위의
+자리스키, \'etale, smooth, syntomic 및 fppf 위상에서 층이다. 더욱이
+보조정리 \ref{lemma-alternative}의 토포스 동치는 다음 동치로 확장된다.
+\begin{equation}
+\label{equation-alternative-ringed}
+(\Sh(\mathcal{X}_{affine, \tau}), \mathcal{O})
+\longrightarrow
+(\Sh(\mathcal{X}_\tau), \mathcal{O}_\mathcal{X})
+\end{equation}
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$에 대한 환 달린 토포스의 동치이다.
+
+
+
+
+
+
+
+
+
+\section{준연접 가군과 아핀 스킴}
+\label{section-alternative-quasi-coherent}
+
+\noindent
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군체로 섬유화된 범주라 하자.
+절 \ref{section-alternative}에서 이에 환 달린 사이트
+$(\mathcal{X}_{affine}, \mathcal{O})$를 연관시켰다.
+
+\begin{lemma}
+\label{lemma-quasi-coherent-alternative}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군체로 섬유화된 범주라 하자.
+$\mathcal{F}$를 $\mathcal{X}_{affine}$ 위의 $\mathcal{O}$-가군이라 하자.
+다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $\mathcal{X}_{affine}$의 모든 사상 $x \to x'$에 대해 사상
+$\mathcal{F}(x') \otimes_{\mathcal{O}(x')} \mathcal{O}(x) \to \mathcal{F}(x)$
+은 동형사상이다.
+\item $\mathcal{F}$는 사이트 위의 가군, 정의
+\ref{sites-modules-definition-site-local}의 의미에서
+$(\mathcal{X}_{affine}, \mathcal{O})$ 위의 준연접 가군이다.
+\item $\mathcal{F}$는 $\mathcal{X}_{affine}$의 자리스키 위상에 대한 층이고,
+사이트 위의 가군, 정의 \ref{sites-modules-definition-site-local}의 의미에서
+$(\mathcal{X}_{affine, Zar}, \mathcal{O})$ 위의 준연접 가군이다.
+\item (3)과 같되 \'etale 위상을 사용하는 경우,
+\item (3)과 같되 smooth 위상을 사용하는 경우,
+\item (3)과 같되 syntomic 위상을 사용하는 경우,
+\item (3)과 같되 fppf 위상을 사용하는 경우, 그리고
+\item $\mathcal{F}$가 동치 (\ref{equation-alternative-ringed})를 통해
+$\mathcal{X}$ 위의 준연접 가군에 대응하는 경우.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+항 (2)의 의미를 위해 $\mathcal{X}_{affine}$가 정의
+\ref{definition-alternative}에서처럼 혼돈 위상을 부여한 사이트임을
+상기하자. 즉 $\mathcal{X}_{affine}$라는 범주에 이 위상을 부여한 것이다.
+따라서 $\mathcal{O}$-가군의 층 $\mathcal{F}$는
+$\mathcal{O}$-가군의 프리시프와 같다. 조건 (1)과 (2)는 사이트 위의 가군,
+보조정리
+\ref{sites-modules-lemma-chaotic-quasi-coherent}에 의해 동치이다.
+ $\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$에 대해
+$\mathcal{F}$가 $\tau$-층인 것은 모든 $x \in \Ob(\mathcal{X}_{affine})$에
+대해 $\mathcal{X}_{affine}/x$로의 제한이 $\tau$-층인 것과 동치임을
+관찰하자. $U = p(x)$로 둔다. 절 \ref{section-restriction}의
+논의와 마찬가지로 $\mathcal{X}_{affine}$의 대상 $x$는 사이트의 동치
+$\mathcal{X}_{affine, \etale}/x \to (\textit{Aff}/U)_\etale$를 유도한다.
+따라서 각 사이트에 하강, 보조정리
+\ref{descent-lemma-quasi-coherent-alternative}를 적용하면 (1)과 (3)--(7)의
+동치가 따른다. (8)과 (7)의 동치는 ``준연접임''이 가군층의 내재적
+성질이라는 사실에서 즉시 따른다. 다음을 보라.
+사이트 위의 가군, 절 \ref{sites-modules-section-intrinsic}
+\end{proof}
+
+\begin{lemma}
+\label{lemma-locally-quasi-coherent-alternative}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군체로 섬유화된 범주라 하자.
+$\mathcal{F}$를 $\mathcal{X}_{affine}$ 위의 $\mathcal{O}$-가군이라 하자.
+다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $p(x) \to p(x')$가 (아핀 스킴의) \'etale 사상인
+$\mathcal{X}_{affine}$의 모든 사상 $x \to x'$에 대해 사상
+$\mathcal{F}(x') \otimes_{\mathcal{O}(x')} \mathcal{O}(x) \to \mathcal{F}(x)$
+은 동형사상이다.
+\item $\mathcal{F}$는 $\mathcal{X}_{affine}$의 \'etale 위상에 대한 층이고,
+$\mathcal{X}_{affine}$의 모든 대상 $x$에 대해 제한
+$x^*\mathcal{F}|_{U_{affine, \etale}}$가 준연접이며, 여기서 $U = p(x)$이다.
+\item $\mathcal{F}$가 \'etale 위상에 대한 동치
+(\ref{equation-alternative-ringed})를 통해 $\mathcal{X}$ 위의 국소
+준연접 가군에 대응하는 경우.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+조건 (2)의 의미를 위해 $U_{affine, \etale}$가 아핀 대상을 이루는
+$U_\etale$의 전충실 부분범주임을 상기하자. 스킴 위의 위상, 정의
+\ref{topologies-definition-big-small-etale}를 보라. 절
+\ref{section-restriction}의 논의와 마찬가지로 $\mathcal{X}_{affine}$의
+대상 $x$는 사이트의 동치
+$\mathcal{X}_{affine, \etale}/x \to (\textit{Aff}/U)_\etale$를 유도한다.
+그러면 $x^*\mathcal{F}$는 제한
+$\mathcal{F}|_{\mathcal{X}_{affine, \etale}/x}$에 대응하는
+$(\textit{Aff}/U)_\etale$ 위의 가군층이다. 마지막으로 연속이고
+쌍대연속인 포함 함자 $U_{affine, \etale} \to (\textit{Aff}/U)_\etale$를
+사용해 다시 제한하면 $x^*\mathcal{F}|_{U_{affine, \etale}}$를 얻는다.
+
+\medskip\noindent
+위의 관찰과, 아핀 스킴 $U$ 위에 놓인 $\mathcal{X}$의 모든 대상 $x$에
+대해 $\mathcal{F}$를 $U_{affine, \etale}$로 제한한 것에 하강,
+보조정리 \ref{descent-lemma-quasi-coherent-alternative-small}을 적용하면
+(1)과 (2)의 동치가 따른다. (2)와 (3)의 동치는 정의와
+$U_{affine, \etale}$ 및 $U_\etale$ 위의 준연접 가군이 서로 대응한다는
+사실에서 즉시 따른다(다시
+하강, 보조정리 \ref{descent-lemma-quasi-coherent-alternative-small}에
+의해서도 알 수 있다).
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{유도 범주의 준연접 대상}
+\label{section-QC}
+
+\noindent
+대수기하학자들은 수십 년 동안 $\Sch/S$ 위의 (집합 또는 군체 값을
+갖는) 표현가능하지 않은 함자 $X$의 불변량을 연구해 왔다. 예를 들어
+스택이라는 개념이 발명되기 전에 Mumford는 타원곡선의 모듈라이 함자
+$X$에 대한 Picard 군체 $\Pic(X)$를, $X$로의 사상(즉 타원곡선의
+족)을 갖춘 모든 스킴 $U$의 범주 위에서 $Pic(U)$의 $2$-극한으로
+정의했다 \cite{mumford_picard}. 마찬가지로 Beilinson--Drinfeld는
+ind-스킴 $X = \colim X_i$에 대해 범주 $\QCoh(X)$를
+$2$-극한 $\lim \QCoh(X_i)$로 정의했다 \cite{BVGD}.
+이 전략은 $\QCoh(-)$와 같은 $1$-범주적 불변량을 정의하기에는 충분하지만,
+삼각 범주의 $2$-극한은 잘 작동하지 않으므로 유도 범주적 불변량
+(예를 들어 준연접 유도 범주)에는 부적절하다. 고차 범주 기술과
+유도 대수기하학의 출현으로 이 문제를 우아하게 해결할 수 있다.
+즉 함자 $X$의 준연접 유도 $\infty$-범주 $\mathcal{D}_{qc}(X)$를
+X 위의 모든 유도 아핀 스킴 $U$에 대해 취한 극한
+$\lim \mathcal{D}_{qc}(U)$로 정의할 수 있다(\cite{lurie-thesis} 참조).
+
+\medskip\noindent
+이 절의 목적은 위와 같은 함자 $X$(집합 또는 군체 값을 갖는)에
+삼각 범주 $\mathit{QC}(X)$를 부여하는 것이다. 실제로 이 구성은
+분할된 경우뿐 아니라 군체로 섬유화된 임의의 범주
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$에도 작동한다. 좋은 경우에는
+$\mathit{QC}(\mathcal{X})$가 $\mathcal{D}_{qc}(\mathcal{X})$의
+호모토피 범주와 일치함을 보일 수 있지만, 이 비교를 설명하는 것은
+이 문서의 범위를 벗어난다. 이 구성의 핵심 성질은 다음과 같다.
+\begin{enumerate}
+\item[(a)] 구성에 의해 $\mathit{QC}(\mathcal{X})$는
+$D(\mathcal{X}_{affine}, \mathcal{O})$의 전충실 부분범주이다.
+\item[(b)] $\mathcal{X}$가 대수공간 $X$로 표현가능하면
+$\mathit{QC}(\mathcal{X})$는 $D_\QCoh(\mathcal{O}_X)$와 일치한다.
+\item[(c)] $\mathcal{X}$가 대수 스택이면 $\mathit{QC}(\mathcal{X})$는
+$D_\QCoh(\mathcal{O}_\mathcal{X})$와 일치한다.
+\item[(d)] $X = \text{Spf}(A)$가 아이디얼 $I$에 대한 $I$-진 위상을
+갖는 노에터 환 $A$에 붙은 아핀 형식 대수공간이면, 삼각 범주
+$\mathit{QC}(X)$는 유도 완비 대상들의 전충실 부분범주
+$D_{comp}(A, I) \subset D(A)$와 일치한다.
+\end{enumerate}
+이 결과들은 명제 \ref{proposition-QC-compare}, 스택의 유도 범주,
+명제 \ref{stacks-perfect-proposition-QC-compare}, 및 명제
+\ref{proposition-QC-derived-complete}에서 증명한다.
+
+\medskip\noindent
+ $\mathit{QC}(\mathcal{X})$의 정확한 정의를 동기 부여하기 위해,
+보조정리 \ref{lemma-quasi-coherent-alternative}에서 준연접 가군을
+$\mathcal{X}$ 위의 $\mathcal{O}$-가군 프리시프로서 $\mathcal{X}_{affine}$
+위에서 특정한 밑변환 성질을 만족하는 것으로 특징짓는 내용을 참고하라.
+
+\begin{definition}
+\label{definition-QC}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 군체로 섬유화된 범주라 하자.
+$\mathcal{O}$를 절 \ref{section-alternative}에서 도입한
+$\mathcal{X}_{affine}$ 위의 환의 층이라 하자. 다음 식으로
+{\it 유도 범주의 준연접 대상들의 삼각 범주}를 정의한다.
+$$
+\mathit{QC}(\mathcal{X}) = \mathit{QC}(\mathcal{X}_{affine}, \mathcal{O})
+$$
+우변은 사이트 코호몰로지, 정의
+\ref{sites-cohomology-definition-cartesian}에서 정의한 것이다.
+\end{definition}
+
+\noindent
+ $\mathcal{X}_{affine}$는 범주이고 혼돈 위상을 부여하여 사이트로
+간주되며, $\mathcal{O}$는 이 범주 위의 환의 층이므로 이 정의는 의미가
+있다. 이는 사이트 코호몰로지, 정의
+\ref{sites-cohomology-definition-cartesian}에서 요구하는 바로 그 조건이다.
+
+\medskip\noindent
+이 정의와 $\mathcal{X}$ 위의 준연접 가군 범주의 관계는 일반적으로
+그리 명확하지 않다! 예를 들어 $M$이 $\mathit{QC}(\mathcal{X})$의
+대상이라고 하자. 그러면 $M$의 코호몰로지 층 $H^i(M)$는
+$\mathcal{X}_{affine}$ 위의 $\mathcal{O}$-가군 (프리)층이지만,
+일반적으로 준연접이지 않다. 그러나 0이 아닌 코호몰로지 중 마지막
+층은 준연접이다.
+
+\begin{lemma}
+\label{lemma-QC-bounded-above}
+정의 \ref{definition-QC}의 상황에서 $M$이 $\mathit{QC}(\mathcal{X})$의
+대상이고 $b \in \mathbf{Z}$가 모든 $i > b$에 대해 $H^i(M) = 0$을
+만족한다고 하자. 그러면 $H^b(M)$는
+$(\mathcal{X}_{affine}, \mathcal{O})$ 위의 준연접 가군이다. 보조정리
+\ref{lemma-quasi-coherent-alternative}를 보라.
+\end{lemma}
+
+\begin{proof}
+이는 사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-QC-bounded-above}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-QC-compare}
+$S$를 스킴이라 하자. $\mathcal{X} \to (\Sch/S)_{fppf}$를 군체로
+섬유화된 범주라 하자. 비교 사상
+$\epsilon : \mathcal{X}_{affine, \etale} \to \mathcal{X}_{affine}$
+은 사이트 코호몰로지, 보조정리의 가정과 결론을 만족한다.
+\ref{sites-cohomology-lemma-cartesion-plus-topology}.
+\end{lemma}
+
+\begin{proof}
+ $\mathcal{X}_{affine}$의 정의에 의해 가정 (1)이 성립한다.
+조건 (2)에 대해서는 아핀 스킴 $U = p(x)$ 위에 놓인
+$x \in \Ob(\mathcal{X})$에 대해 다음 동치가 있고
+$\mathcal{X}_{affine, \etale}/x = (\textit{Aff}/U)_\etale$는 구조층과 호환되고
+절 \ref{section-restriction}의 논의를 보라.
+따라서 아핀 스킴 $U = \Spec(R)$와 $R$-가군의 복합체 $M^\bullet$가
+주어졌을 때 $(\textit{Aff}/U)_\etale$ 위에서 $M^\bullet$에 대응하는
+가군 복합체의 전체 코호몰로지가 $M^\bullet$와 준동형임을 보이면 충분하다.
+이는 다음 결과들의 결합으로 따른다.
+스킴의 유도 범주, 보조정리
+\ref{perfect-lemma-affine-compare-bounded} (자리스키 위상에서 아핀 위의
+가군 복합체의 전체 코호몰로지), 대수 공간의 유도 범주, 주석
+\ref{spaces-perfect-remark-match-total-direct-images}
+(준연접 가군 복합체에 대해 작은 자리스키 및 \'etale 위상에서 전체
+코호몰로지가 일치함), 및 에탈 코호몰로지, 보조정리
+\ref{etale-cohomology-lemma-compare-cohomology} (스킴의 큰 \'etale
+사이트 위의 가군 복합체의 \'etale 코호몰로지를 작은 \'etale 사이트로
+제한하여 계산할 수 있음을 보이는 결과).
+\end{proof}
+
+\noindent
+군체로 섬유화된 범주 $\mathcal{X}$가 대수공간 $X$로 표현가능한 경우에
+이 정의를 적용하면 $D_\QCoh(\mathcal{O}_X)$를 되찾는다. 대수 스택에
+대한 유사한 결과는 나중에 서술하고 증명할 것이다(향후 참조를 삽입할 것).
+
+\begin{proposition}
+\label{proposition-QC-compare}
+$S$를 스킴이라 하자. $\mathcal{X} \to (\Sch/S)_{fppf}$를 군체로
+섬유화된 범주라 하자. $\mathcal{X}$가 대수공간 $X$로 표현가능하다고
+가정하자. 그러면 $\mathit{QC}(\mathcal{X})$는
+$D_\QCoh(\mathcal{O}_X)$와 정준적으로 동치이다.
+\end{proposition}
+
+\begin{proof}
+$X_{affine}$를 $X$에 \'etale인 아핀 스킴들의 범주에 혼돈 위상을
+부여하고 구조층 $\mathcal{O}_X$를 갖춘 것으로 하자. 대수 공간의 유도 범주,
+절 \ref{spaces-perfect-section-QC}를 보라.
+보조정리 \ref{lemma-compare}의 함자
+$u : X_\etale \to \mathcal{X}_\etale$는 함자
+$X_{affine} \to \mathcal{X}_{affine}$를 유도한다.
+이는 구조층과 호환되어 다음 함자를 준다.
+$$
+G :
+\mathit{QC}(\mathcal{X}) = \mathit{QC}(\mathcal{X}_{affine}, \mathcal{O})
+\longrightarrow
+\mathit{QC}(X_{affine}, \mathcal{O}_X)
+$$
+다음을 보라: 사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-cartesian-functorial}.
+대수 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-DQCoh-alternative-small}에 의해 삼각 범주
+$\mathit{QC}(X_{affine}, \mathcal{O}_X)$는
+$D_\QCoh(\mathcal{O}_X)$와 동치이다. 따라서 $G$가 동치임을
+증명하면 충분하다.
+
+\medskip\noindent
+환 달린 사이트의 평탄 비교 사상\par\noindent
+$\epsilon_\mathcal{X} : \mathcal{X}_{affine, \etale} \to \mathcal{X}_{affine}$\par\noindent
+및 $\epsilon_X : X_{affine, \etale} \to X_{affine}$
+을 생각하자. 보조정리 \ref{lemma-QC-compare}와 대수 공간의 유도 범주,
+보조정리 \ref{spaces-perfect-lemma-DQCoh-alternative-small}의 (증명)은
+다음 함자들이
+$\epsilon_\mathcal{X}^*$ 및 $\epsilon_X^*$
+ $\mathit{QC}(\mathcal{X}_{affine}, \mathcal{O})$와
+$\mathit{QC}(X_{affine}, \mathcal{O}_X)$를 다음 부분범주들과
+각각 식별함을 보인다.
+$Q_\mathcal{X} \subset D(\mathcal{X}_{affine, \etale}, \mathcal{O})$
+및
+$Q_X \subset D(X_{affine, \etale}, \mathcal{O}_X)$.
+이 식별 아래에서 첫 문단의 함자 $G$는 다음 함자에 의해 유도된다.
+$$
+Li_X^* = R\pi_{X, *}:
+D(\mathcal{X}_{affine, \etale}, \mathcal{O})
+\longrightarrow
+D(X_{affine, \etale}, \mathcal{O}_X)
+$$
+여기서 $i_X$와 $\pi_X$는 보조정리 \ref{lemma-compare}의 사상에서
+\'etale 사이트를 대응하는 아핀 사이트로 바꾼 것이다. 이 교체가
+허용됨은 독자가 아핀 사이트에 대해 보조정리를 직접 다시 증명하거나
+다음 토포스 동치를 사용하여 보일 수 있다.
+$\Sh(\mathcal{X}_{affine, \etale}) = \Sh(\mathcal{X}_\etale)$ 및
+$\Sh(X_{affine, \etale}) = \Sh(X_\etale)$.
+같은 보조정리에 의해 $Li_X^*$는 다음 왼쪽 수반을 갖는다.
+$$
+L\pi_X^*:
+D(X_{affine, \etale}, \mathcal{O}_X)
+\longrightarrow
+D(\mathcal{X}_{affine, \etale}, \mathcal{O})
+$$
+또한 $\pi_X \circ i_X$가 항등이므로
+$Li_X^* \circ L\pi_X^* = \text{id}$이다. 따라서 (a) $L\pi_X^*$가
+$Q_X$를 $Q_\mathcal{X}$ 안으로 보내고 (b) $Li_X^*$의 핵이 $0$임을
+보이면 충분하다. 유도 범주, 보조정리
+\ref{derived-lemma-fully-faithful-adjoint-kernel-zero}.
+
+\medskip\noindent
+ (a)의 증명. 대수 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-DQCoh-alternative-small}\linebreak[1]
+ $Q_X = D_\QCoh(X_{affine, \etale}, \mathcal{O}_X)$이다.
+$K$를 $Q_X$의 대상으로, $x$를
+$\mathcal{X}_{affine, \etale}$의 대상으로 하자. 이는 아핀
+스킴 $U = p(x)$ 위에 놓이며, 이에 대응하는 사상
+$f : U \to X$를 $x$에 대해 쓰면 다음을 얻는다.
+$$
+R\Gamma(x, L\pi_X^*K) = R\Gamma(U, Lf^*K)
+$$
+이는 밑변환의 추이성에서 따른다. 절
+\ref{section-restriction-algebraic-spaces}의 논의를 보라.
+이제 아핀 스킴의 사상 $h : U \to U'$ 위에 놓인
+$\mathcal{X}_{affine, \etale}$의 사상 $x \to x'$를 생각하자.
+앞과 같이 $x$, $x'$에 대응하는 사상을 각각 $f : U \to X$,
+$f' : U' \to X$로 쓰면 $f = f' \circ h$이다. 그러면
+\begin{align*}
+R\Gamma(x, L\pi_X^*K)
+& =
+R\Gamma(U, Lf^*K) \\
+& =
+R\Gamma(U, Lh^*L(f')^*K) \\
+& =
+R\Gamma(U', L(f')^*K) \otimes_{\mathcal{O}(U')}^\mathbf{L} \mathcal{O}(U) \\
+& =
+R\Gamma(x', L\pi_X^*K) \otimes_{\mathcal{O}(x')}^\mathbf{L} \mathcal{O}(x)
+\end{align*}
+따라서 사이트 코호몰로지, 보조정리의 서술에 붙은 각주에 의해 (a)를
+얻는다. 보조정리
+\ref{sites-cohomology-lemma-cartesion-plus-topology}를 보라. 세 번째
+등식은 스킴의 유도 범주, 보조정리
+\ref{perfect-lemma-quasi-coherence-pullback}.
+
+\medskip\noindent
+ (b)의 증명. $M$을 $Q_\mathcal{X}$의 대상으로서 $Li_X^*M = 0$을
+만족한다고 하자. $x'$를 아핀 스킴 $U' = p(x')$ 위에 놓인
+$\mathcal{X}_{affine, \etale}$의 대상으로 택하고, 이에 대응하는
+사상 $f' : U' \to X$가 \'etale이라고 하자. 그러면
+$f' : U' \to X$는 $X_{affine, \etale}$의 대상이고
+$Li_X^*M = 0$은 $M|_{U'_\etale} = 0$을 함의한다.
+특히 $R\Gamma(x', M) = 0$이다. 그러나 사이트
+$\mathcal{X}_{affine, \etale}$의 임의의 대상 $x$에 대해 다음 덮개가
+존재한다. 즉 $\{x_i \to x\}$가 존재하여 각 $i$에 대해
+$X_{affine, \etale}$의 대상에 대응하는 $x'_i$로의 사상
+$x_i \to x'_i$가 존재한다. 이제 $M$이 $Q_\mathcal{X}$에 속하므로
+$$
+R\Gamma(x_i, M) =
+R\Gamma(x_i', M) \otimes_{\mathcal{O}(x_i')}^\mathbf{L} \mathcal{O}(x_i) =
+0
+$$
+따라서 원하는 대로 $M$은 영 대상이다.
+\end{proof}
+
+\noindent
+이 구성이 또 다른 경우에도 의미 있는 범주를 준다는 것을 보이기 위해,
+노에터 아딕 환 $A$의 형식 스펙트럼에 대한
+$\mathit{QC}(\text{Spf}(A))$의 특징을 서술하고 증명하자.
+
+\begin{proposition}
+\label{proposition-QC-derived-complete}
+ $S$를 스킴이라 하자. $X = \text{Spf}(A)$이고 $A$가 정의 아이디얼
+$I$를 갖는 아딕 노에터 위상 $S$-대수라고 하자. 대수학 심화, 정의
+\ref{more-algebra-definition-topological-ring} 및 형식 대수 공간, 정의
+\ref{formal-spaces-definition-affine-formal-spectrum}.
+ $p : \mathcal{X} \to (\Sch/S)_{fppf}$를 함자 $X$에 대응하는
+집합으로 섬유화된 범주라 하자. 범주, 예
+\ref{categories-example-presheaf}를 보라. 그러면
+$\mathit{QC}(\mathcal{X})$는 $I$에 대해 유도 완비인 $D(A)$의 대상들의
+범주 $D_{comp}(A, I)$와 정준적으로 동치이다.
+\end{proposition}
+
+\begin{proof}
+ $X = \colim \Spec(A/I^n)$가 fppf 층으로서 성립함을 상기하자.
+$\mathcal{X}_{affine}$의 대상은 주어진 사상 $f : U \to X$를 갖는
+아핀 스킴 $U = \Spec(R)$과 같다. 형식 대수 공간, 보조정리
+\ref{formal-spaces-lemma-factor-through-thickening}에 의해 어떤
+$n \geq 1$이 존재하여 $f$가 단사사상
+$\Spec(A/I^n) \to X$를 통해 인수분해된다.
+대상 $\Spec(A/I^n) \to X$들로 이루어진 전충실 부분범주
+$\mathcal{C} \subset \mathcal{X}_{affine}$를 생각하자.
+방금의 관찰과 미분 등급 층, 보조정리
+\ref{sdga-lemma-cartesian-cofinal-subcategory}
+에 의해 $\mathcal{C}$로의 제한은 다음 정확한 동치이다.
+$\mathit{QC}(\mathcal{X}) \to
+\mathit{QC}(\mathcal{C}, \mathcal{O}|_\mathcal{C})$.
+간단히 하기 위해 다음을 가정하자.
+$I^n \not = I^{n + 1}$가 모든 $n \geq 1$에 대해 성립한다고 하자.
+그러면 $(\mathcal{C}, \mathcal{O}|_\mathcal{C})$는 환 달린 사이트로서
+환 달린 사이트 $(\mathbf{N}, (A/I^n))$와 동형이다. 미분 등급 층, 절
+\ref{sdga-section-qc-inverse-system}.
+따라서 미분 등급 층, 명제
+\ref{sdga-proposition-derived-complete}.
+\end{proof}
+
+\noindent
+다음 보조정리는 $\mathcal{X}$가 대수 스택일 때
+$\mathit{QC}(\mathcal{X})$와 $D_\QCoh(\mathcal{O}_\mathcal{X})$를
+비교하는 데 사용한다.
+
+\begin{lemma}
+\label{lemma-QC-compare-fppf}
+$S$를 스킴이라 하자. $\mathcal{X} \to (\Sch/S)_{fppf}$를 군체로
+섬유화된 범주라 하자. 비교 사상
+$\epsilon : \mathcal{X}_{affine, fppf} \to \mathcal{X}_{affine}$
+은 사이트 코호몰로지, 보조정리의 가정과 결론을 만족한다.
+\ref{sites-cohomology-lemma-cartesion-plus-topology}.
+\end{lemma}
+
+\begin{proof}
+증명은 보조정리 \ref{lemma-QC-compare}의 증명과 정확히 같다.
+$\mathcal{X}_{affine}$의 정의에 의해 가정 (1)이 성립한다.
+조건 (2)에 대해서는 아핀 스킴 $U = p(x)$ 위에 놓인
+$x \in \Ob(\mathcal{X})$에 대해 다음 동치가 있고
+$\mathcal{X}_{affine, \etale}/x = (\textit{Aff}/U)_\etale$는 구조층과
+호환되고 절 \ref{section-restriction}의 논의를 보라.
+따라서 아핀 스킴 $U = \Spec(R)$와 $R$-가군의 복합체 $M^\bullet$에
+대해 $(\textit{Aff}/U)_{fppf}$ 위에서 $M^\bullet$에 대응하는 가군
+복합체의 전체 코호몰로지가 $M^\bullet$와 준동형임을 보이면 충분하다.
+이는 에탈 코호몰로지, 보조정리
+\ref{etale-cohomology-lemma-cohomological-descent-complex-modules}.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

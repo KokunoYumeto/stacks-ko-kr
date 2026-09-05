@@ -1,0 +1,2921 @@
+\input{ko_preamble}
+
+% Korean (ko-KR) Part 11 target; source identity frozen in p11/control/CONTROL.md.
+
+% OK, start here.
+%
+\begin{document}
+
+\title{대수 스택의 성질}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+대수 스택에 대한 간략한 소개는
+대수 스택, 절 \ref{algebraic-section-introduction}을 보라.
+또한 여기서 사용하는 대수 스택의 기초를 위해 그 장의 일부를 읽어 두어야 한다.
+그 장에서는 스킴, 대수공간, 대수 스택을 주의 깊게 구별하지만,
+이 장부터는 이 개념들을 서로 바꾸어 사용하는 통상적인 용어의 남용을 따른다.
+
+\medskip\noindent
+이 장의 목적은 대수 스택의 몇 가지 기본 개념과 성질을 소개하는 것이다.
+대각사상이 표현가능한 준분리 대수 스택의 경우에 관한 기본 참고문헌은
+\cite{LM-B}이다.
+
+
+
+\section{규약과 용어의 남용}
+\label{section-conventions}
+
+\noindent
+큰 fppf 사이트 $\Sch_{fppf}$를 하나 택한다.
+모든 스킴은 $\Sch_{fppf}$에 포함된다고 한다.
+또한 여기서 다루는 모든 환 $A$는 $\Spec(A)$가 이 큰 사이트의
+한 대상과 동형이라는 성질을 갖는다.
+
+\medskip\noindent
+바탕 스킴 $S$도 하나 고정한다. 위 규약에 따라 이는
+$\Sch_{fppf}$의 한 대상이다. 절대적인 경우에만 관심 있는 독자는
+$S = \Spec(\mathbf{Z})$로 택하면 된다.
+
+\medskip\noindent
+대수 스택에 관한 규약은 다음과 같다.
+\begin{enumerate}
+\item {\it 대수 스택}이라 함은 $S$ 위의 대수 스택, 즉 준군 섬유화 범주
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$
+로서 『대수 스택』의 정의
+\ref{algebraic-definition-algebraic-stack}에 있는 조건을
+만족하는 것을 뜻한다.
+\item $f : \mathcal{X} \to \mathcal{Y}$가
+{\it 대수 스택의 사상}이라 함은 $S$ 위 대수 스택들의 $1$-사상,
+즉 $(\Sch/S)_{fppf}$ 위 준군 섬유화 범주들의 $1$-사상이라는 뜻이다.
+『대수 스택』의 정의
+\ref{algebraic-definition-morphism-algebraic-stacks}를 보라.
+\item {\it $2$-사상} $\alpha : f \to g$라 함은 $S$ 위 대수 스택들의
+$2$-범주에서의 $2$-사상을 뜻한다. 『대수 스택』의 정의
+\ref{algebraic-definition-morphism-algebraic-stacks}를 보라.
+\item 대수 스택의 사상 $\mathcal{X} \to \mathcal{Z}$와
+$\mathcal{Y} \to \mathcal{Z}$가 주어지면, 용어를 남용하여 $2$-섬유곱
+$\mathcal{X} \times_\mathcal{Z} \mathcal{Y}$를 {\it 섬유곱}이라 부른다.
+\item 대수 스택 $\mathcal{X}$와 $\mathcal{Y}$의 곱을
+$\mathcal{X} \times_S \mathcal{Y}$로 쓴다.
+\item 두 대수 스택 $\mathcal{X}$와 $\mathcal{Y}$가 이 $2$-범주에서
+동치이면, 흔히 기호를 남용하여 둘이 {\it 동형}이라고 한다.
+\end{enumerate}
+대수공간에 관한 규약은 다음과 같다.
+\begin{enumerate}
+\item $X$가 {\it 대수공간}이라 함은 $X$가 $S$ 위의 대수공간,
+즉 $X$가 $(\Sch/S)_{fppf}$ 위의 프리시프로서 『공간』의 정의
+\ref{spaces-definition-algebraic-space}에 있는 조건을
+만족한다는 뜻이다.
+\item {\it 대수공간의 사상} $f :X \to Y$는 『공간』의 정의
+\ref{spaces-definition-morphism-algebraic-spaces}에서 정의한
+$S$ 위 대수공간의 사상이다.
+\item 대수공간 $X$와 그로부터 생기는 대수 스택
+$\mathcal{S}_X \to (\Sch/S)_{fppf}$를 구별하지 {\bf 않는다}.
+『대수 스택』의 보조정리
+\ref{algebraic-lemma-representable-algebraic}를 보라.
+\item 특히 $X$에서 대수 스택 $\mathcal{Y}$로 가는 {\it 사상}
+$f : X \to \mathcal{Y}$라 함은 대수 스택의 사상
+$f : \mathcal{S}_X \to \mathcal{Y}$를 뜻한다.
+사상 $\mathcal{Y} \to X$도 마찬가지이다.
+\item 또한 대수 스택 $\mathcal{X}$가 주어졌을 때
+{\it $\mathcal{X}$가 대수공간이다}라고 함은 $\mathcal{X}$가
+대수공간으로 표현가능하다는 뜻이다. 『대수 스택』의 정의
+\ref{algebraic-definition-representable-by-algebraic-space}를 보라.
+\item 다음 기호 규약을 사용한다. 대수 스택을 로마체 대문자
+($X, Y, Z, A, B, \ldots$ 등)로 나타내면 그 관성 스택은 자명하며,
+따라서 그 대수 스택은 대수공간이라고 한다. 『대수 스택』의 명제
+\ref{algebraic-proposition-algebraic-stack-no-automorphisms}를 보라.
+\end{enumerate}
+스킴에 관한 규약은 다음과 같다.
+\begin{enumerate}
+\item $X$가 {\it 스킴}이라 함은 $X$가 $S$ 위의 스킴,
+즉 $X$가 $(\Sch/S)_{fppf}$의 한 대상이라는 뜻이다.
+\item {\it 스킴의 사상}이라 함은 $S$ 위 스킴의 사상을 뜻한다.
+\item 스킴 $X$와 그로부터 생기는 대수 스택
+$\mathcal{S}_X \to (\Sch/S)_{fppf}$를 구별하지 {\bf 않는다}.
+『대수 스택』의 보조정리
+\ref{algebraic-lemma-representable-algebraic}를 보라.
+\item 특히 스킴 $X$에서 대수 스택 $\mathcal{Y}$로 가는 {\it 사상}
+$f : X \to \mathcal{Y}$라 함은 대수 스택의 사상
+$f : \mathcal{S}_X \to \mathcal{Y}$를 뜻한다.
+사상 $\mathcal{Y} \to X$도 마찬가지이다.
+\item 또한 대수 스택 $\mathcal{X}$가 주어졌을 때
+{\it $\mathcal{X}$가 스킴이다}라고 함은 $\mathcal{X}$가
+표현가능하다는 뜻이다. 『대수 스택』의 절
+\ref{algebraic-section-representable}을 보라.
+\end{enumerate}
+대수 스택의 사상에 관한 규약은 다음과 같다.
+\begin{enumerate}
+\item 대수 스택의 사상 $f : \mathcal{X} \to \mathcal{Y}$가
+{\it 표현가능하다}, 또는 {\it 스킴으로 표현가능하다}고 함은
+모든 스킴 $T$와 사상 $T \to \mathcal{Y}$에 대해 섬유곱
+$T \times_\mathcal{Y} \mathcal{X}$가 스킴이라는 뜻이다.
+『대수 스택』의 절
+\ref{algebraic-section-representable-morphism}을 보라.
+\item 대수 스택의 사상 $f : \mathcal{X} \to \mathcal{Y}$가
+{\it 대수공간으로 표현가능하다}고 함은 모든 스킴 $T$와 사상
+$T \to \mathcal{Y}$에 대해 섬유곱
+$T \times_\mathcal{Y} \mathcal{X}$가 대수공간이라는 뜻이다.
+『대수 스택』의 정의
+\ref{algebraic-definition-representable-by-algebraic-spaces}를 보라.
+이 경우 원천이 대수공간인 사상 $Z \to \mathcal{Y}$에 대해
+$Z \times_\mathcal{Y} \mathcal{X}$는 대수공간이다.
+『대수 스택』의 보조정리
+\ref{algebraic-lemma-base-change-by-space-representable-by-space}를 보라.
+\item 기호를 남용하여 대수 스택들의 도식이 대수 스택들의 $2$-범주에서
+$2$-가환이면 그 도식이 가환한다고 말하기도 한다.
+\end{enumerate}
+대수공간에서 대수 스택으로 가는 모든 사상 $X \to \mathcal{Y}$는
+대수공간으로 표현가능함에 유의하자. 『대수 스택』의 보조정리
+\ref{algebraic-lemma-representable-diagonal}을 보라.
+이 기본 결과는 앞으로 따로 언급하지 않고 사용한다.
+
+
+
+
+\section{대수공간으로 표현가능한 사상의 성질}
+\label{section-properties-morphisms}
+
+\noindent
+대수 스택의 (임의의) 사상의 성질은 별도의 장에서 연구한다.
+대수공간으로 표현가능한 사상에 대해서는 전사, 매끄러움, \'etale 등의
+성질이 무엇을 뜻하는지 이미 알고 있다. 이는 특히 대수공간에서 대수 스택으로
+가는 사상 $X \to \mathcal{Y}$에 적용된다. 이 절에서는 그 정의 방식을
+상기하고, 적용되는 성질들을 열거하며, 몇 가지 쉬운 보조정리를 증명한다.
+
+\medskip\noindent
+첫 번째 보조정리는 평탄하고 국소 유한 표시이며 전사인 사상으로
+밑변환한 뒤 대수공간으로 표현가능하면 원래 사상도
+대수공간으로 표현가능하다는 내용이다.
+
+\begin{lemma}
+\label{lemma-check-representable-covering}
+대수 스택의 사상 $f : \mathcal{X} \to \mathcal{Y}$가 주어졌다고 하자.
+$W$를 대수공간이라 하고, $W \to \mathcal{Y}$가 전사이고
+국소 유한 표시이며 평탄하다고 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $f$는 대수공간으로 표현가능하다.
+\item $W \times_\mathcal{Y} \mathcal{X}$는 대수공간이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2)는 『대수 스택』의 보조정리
+\ref{algebraic-lemma-base-change-by-space-representable-by-space}이다.
+거꾸로 $W \to \mathcal{Y}$가 (2)와 같다고 하자. (1)을 보이려면
+$f$가 섬유범주마다 충실함을 보이면 충분하다. 『대수 스택』의 보조정리
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces}를
+보라. 가정 (2)는 특히
+$W \times_\mathcal{Y} \mathcal{X} \to W$가 충실함을 뜻한다.
+따라서 $f$의 충실성은 『스택』의 보조정리
+\ref{stacks-lemma-faithful-descent}에서 따른다.
+\end{proof}
+
+\noindent
+$P$를 대수공간 사상의 성질로서 표적에서 fppf 국소적이고
+임의의 밑변환으로 보존되는 것이라 하자. 대수 스택의 사상
+$f : \mathcal{X} \to \mathcal{Y}$가 대수공간으로 표현가능하다고 하자.
+모든 스킴 $T$와 사상 $T \to \mathcal{Y}$에 대해 대수공간의 사상
+$T \times_\mathcal{Y} \mathcal{X} \to T$가 성질 $P$를 가질 때, 그리고
+그때에만 {\it $f$가 성질 $P$를 갖는다}고 한다. 『대수 스택』의 정의
+\ref{algebraic-definition-relative-representable-property}를 보라.
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$가 대수공간으로 표현가능하고 성질
+$P$를 가지면, 대수 스택의 임의의 사상
+$\mathcal{Y}' \to \mathcal{Y}$에 의한 밑변환
+$\mathcal{Y}' \times_\mathcal{Y} \mathcal{X} \to \mathcal{Y}'$도
+성질 $P$를 갖는다. 『대수 스택』의 보조정리
+\ref{algebraic-lemma-base-change-representable-by-spaces}와
+\ref{algebraic-lemma-base-change-representable-transformations-property}를
+보라. 성질 $P$가 합성으로 보존되면 이 사실은 대수공간으로 표현가능한
+대수 스택의 사상들을 합성할 때에도 성립한다. 『대수 스택』의 보조정리
+\ref{algebraic-lemma-composition-representable-by-spaces}와
+\ref{algebraic-lemma-composition-representable-transformations-property}를
+보라. 또한 이 경우 성질 $\mathcal{P}$를 갖고 대수공간으로 표현가능한
+사상들의 곱
+$\mathcal{X}_1 \times \mathcal{X}_2 \to \mathcal{Y}_1 \times \mathcal{Y}_2$도
+성질 $\mathcal{P}$를 갖는다. 『대수 스택』의 보조정리
+\ref{algebraic-lemma-product-representable-transformations-property}를 보라.
+
+\medskip\noindent
+마지막으로, $P, P'$가 표적에서 fppf 국소적이고 임의의 밑변환으로
+보존되는 대수공간 사상의 두 성질이며, 모든 사상 $f$에 대해
+$P(f) \Rightarrow P'(f)$라 하자. 그러면 대수공간으로 표현가능한
+대수 스택의 사상에 대한 대응 성질에도 같은 함의가 성립한다.
+『대수 스택』의 보조정리
+\ref{algebraic-lemma-representable-transformations-property-implication}를
+보라. 이하와 뒤의 장들에서는 이 사실을 {\it 따로 언급하지 않고} 사용한다.
+
+\medskip\noindent
+위 논의는 대수공간 사상의 다음 각 성질에 적용된다.
+\begin{enumerate}
+\item 준콤팩트: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-quasi-compact}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-quasi-compact}을 보라.
+\item 준분리: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-separated}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-quasi-separated}를 보라.
+\item 보편 닫힘: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-universally-closed}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-universally-closed}를 보라.
+\item 보편 열림: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-universally-open}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-universally-open}을 보라.
+\item 보편 몫사상: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-universally-submersive}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-universally-submersive}를 보라.
+\item 보편 위상동형사상: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-universal-homeomorphism}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-universal-homeomorphism}을 보라.
+\item 전사: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-surjective}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-surjective}를 보라.
+\item 보편 단사: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-universally-injective}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-universally-injective}를 보라.
+\item 국소 유한형: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-finite-type}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-locally-finite-type}을 보라.
+\item 국소 유한 표시: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-finite-presentation}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation}을 보라.
+\item 유한형: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-finite-type}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-finite-type}을 보라.
+\item 유한 표시: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-finite-presentation}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-finite-presentation}을 보라.
+\item 평탄: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-flat}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-flat}을 보라.
+\item 열린 몰입: 『대수공간의 사상』의 절
+\ref{spaces-morphisms-section-immersions}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-open-immersion}을 보라.
+\item 동형사상: 『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-isomorphism}을 보라.
+\item 아핀: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-affine}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-affine}을 보라.
+\item 닫힌 몰입: 『대수공간의 사상』의 절
+\ref{spaces-morphisms-section-immersions}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-closed-immersion}을 보라.
+\item 분리: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-separated}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-separated}를 보라.
+\item 고유: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-proper}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-proper}를 보라.
+\item 준아핀: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-quasi-affine}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-quasi-affine}을 보라.
+\item 정수적: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-integral}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-integral}을 보라.
+\item 유한: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-integral}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-finite}를 보라.
+\item (국소) 준유한: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-quasi-finite}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-quasi-finite}를 보라.
+\item 신토믹: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-syntomic}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-syntomic}을 보라.
+\item 매끄러운: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-smooth}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-smooth}를 보라.
+\item 비분기: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-unramified}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-unramified}를 보라.
+\item \'etale: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-etale}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-etale}을 보라.
+\item 유한 국소 자유: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-finite-locally-free}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-finite-locally-free}를 보라.
+\item 단사사상: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-monomorphism}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-monomorphism}을 보라.
+\item 몰입: 『대수공간의 사상』의 절
+\ref{spaces-morphisms-section-immersions}과
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-fppf-property-immersion}을 보라.
+\item 국소 분리: 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-separated}와
+『대수공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-fppf-property-locally-separated}를 보라.
+\end{enumerate}
+
+\begin{lemma}
+\label{lemma-property-spaces-too}
+위와 같은 대수공간 사상의 성질을 $P$라 하자.
+$f : \mathcal{X} \to \mathcal{Y}$를 대수공간으로 표현가능한
+대수 스택의 사상이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $f$가 $P$를 갖는다.
+\item 모든 대수공간 $Z$와 사상 $Z \to \mathcal{Y}$에 대해 사상
+$Z \times_\mathcal{Y} \mathcal{X} \to Z$가 $P$를 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) $\Rightarrow$ (1)은 자명하다. (1)을 가정하자.
+$Z \to \mathcal{Y}$가 (2)와 같다고 하자. 스킴 $U$와
+전사 \'etale 사상 $U \to Z$를 택한다. 가정에 의해 사상
+$U \times_\mathcal{Y} \mathcal{X} \to U$는 $P$를 갖는다. 그런데 도식
+$$
+\xymatrix{
+U \times_\mathcal{Y} \mathcal{X} \ar[d] \ar[r] &
+Z \times_\mathcal{Y} \mathcal{X} \ar[d] \\
+U \ar[r] & Z
+}
+$$
+은 데카르트이다. 따라서 $\{U \to Z\}$가 fppf 덮개이므로
+오른쪽 수직 화살표도 $P$를 갖는다.
+\end{proof}
+
+\noindent
+다음 보조정리는 전사이고 평탄하며 국소 유한 표시인 사상으로
+밑변환한 뒤 $P$를 확인하면 충분하다는 것을 말한다.
+
+\begin{lemma}
+\label{lemma-check-property-covering}
+위와 같은 대수공간 사상의 성질을 $P$라 하자.
+$f : \mathcal{X} \to \mathcal{Y}$를 대수공간으로 표현가능한
+대수 스택의 사상이라 하자.
+$W$를 대수공간이라 하고, $W \to \mathcal{Y}$가 전사이고
+국소 유한 표시이며 평탄하다고 하자.
+$V = W \times_\mathcal{Y} \mathcal{X}$로 놓자. 그러면
+$$
+(f\text{ has }P) \Leftrightarrow (\text{the projection }V \to W\text{ has }P).
+$$
+\end{lemma}
+
+\begin{proof}
+왼쪽에서 오른쪽으로의 함의는 보조정리
+\ref{lemma-property-spaces-too}에서 따른다.
+$V \to W$가 $P$를 갖는다고 가정하자. $T$를 스킴이라 하고
+$T \to \mathcal{Y}$를 사상이라 하자. 대수공간들의 가환 도식
+$$
+\xymatrix{
+T \times_\mathcal{Y} \mathcal{X} \ar[d] &
+T \times_\mathcal{Y} V \ar[d] \ar[l] \ar[r] &
+V \ar[d] \\
+T & T \times_\mathcal{Y} W \ar[l] \ar[r] & W
+}
+$$
+을 생각하자. 두 정사각형은 데카르트이다.
+왼쪽 아래 사상은 전사이고 평탄하며 국소 유한 표시이다.
+따라서 $\{T \times_\mathcal{Y} V \to T\}$는 fppf 덮개이다.
+그러므로 오른쪽 수직 화살표가 성질 $P$를 갖는다는 사실에서
+왼쪽 수직 화살표도 성질 $P$를 가짐이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-check-property-weak-covering}
+위와 같은 대수공간 사상의 성질을 $P$라 하자.
+$f : \mathcal{X} \to \mathcal{Y}$를 대수공간으로 표현가능한
+대수 스택의 사상이라 하자.
+$\mathcal{Z} \to \mathcal{Y}$를 대수공간으로 표현가능하고 전사이며
+평탄하고 국소 유한 표시인 대수 스택의 사상이라 하자.
+$\mathcal{W} = \mathcal{Z} \times_\mathcal{Y} \mathcal{X}$로 놓자. 그러면
+$$
+(f\text{ has }P) \Leftrightarrow
+(\text{the projection }\mathcal{W} \to \mathcal{Z}\text{ has }P).
+$$
+\end{lemma}
+
+\begin{proof}
+대수공간 $W$와 전사이고 평탄하며 국소 유한 표시인 사상
+$W \to \mathcal{Z}$를 택한다. 위 논의에 의해 합성
+$W \to \mathcal{Y}$도 전사이고 평탄하며 국소 유한 표시이다. 다음과 같이 쓰자.
+$V = W \times_\mathcal{Z} \mathcal{W} = V \times_\mathcal{Y} \mathcal{X}$.
+보조정리 \ref{lemma-check-property-covering}에 의해
+$f$가 $\mathcal{P}$를 가질 필요충분조건은 $V \to W$가 이를 갖는 것이고,
+$\mathcal{W} \to \mathcal{Z}$가 $\mathcal{P}$를 가질 필요충분조건도
+$V \to W$가 이를 갖는 것이다. 따라서 보조정리가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-check-property-after-precomposing}
+위와 같은 대수공간 사상의 성질을 $P$라 하자.
+$\tau \in \{\etale, smooth, syntomic, fppf\}$라 하자.
+$\mathcal{X} \to \mathcal{Y}$와 $\mathcal{Y} \to \mathcal{Z}$를
+대수공간으로 표현가능한 대수 스택의 사상들이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{X} \to \mathcal{Y}$는 전사이고, \'etale, 매끄럽거나,
+신토믹이거나, 또는 평탄하고 국소 유한 표시이다.
+\item 그 합성은 $P$를 갖는다.
+\item $P$는 $\tau$ 위상에서 원천에 국소적이다.
+\end{enumerate}
+그러면 $\mathcal{Y} \to \mathcal{Z}$는 성질 $P$를 갖는다.
+\end{lemma}
+
+\begin{proof}
+$Z$를 스킴이라 하고 $Z \to \mathcal{Z}$를 사상이라 하자.
+$X = \mathcal{X} \times_\mathcal{Z} Z$,
+$Y = \mathcal{Y} \times_\mathcal{Z} Z$로 놓는다. (1)에 의해
+$\{X \to Y\}$는 대수공간들의 $\tau$ 덮개이고, (2)에 의해
+$X \to Z$는 성질 $P$를 갖는다. (3)에 의해 $Y \to Z$도 성질
+$P$를 가지므로 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-representable-in-terms-presentations}
+$g : \mathcal{X}' \to \mathcal{X}$를 대수공간으로 표현가능한
+대수 스택의 사상이라 하자. $[U/R] \to \mathcal{X}$를 제시라 하자.
+$U' = U \times_\mathcal{X} \mathcal{X}'$,
+$R' = R \times_\mathcal{X} \mathcal{X}'$로 놓는다.
+그러면 $(U', R', s', t', c')$ 꼴의 대수공간의 준군과 제시
+$[U'/R'] \to \mathcal{X}'$가 존재하고, 도식
+$$
+\xymatrix{
+[U'/R'] \ar[d]_{[\text{pr}]} \ar[r] & \mathcal{X}' \ar[d]^g \\
+[U/R] \ar[r] & \mathcal{X}
+}
+$$
+은 $2$-가환이다. 여기서 사상 $[\text{pr}]$은 준군의 사상
+$\text{pr} : (U', R', s', t', c') \to (U, R, s, t, c)$에서 유도된다.
+\end{lemma}
+
+\begin{proof}
+$U \to \mathcal{Y}$가 전사이고 매끄러우므로(『대수 스택』의 보조정리
+\ref{algebraic-lemma-smooth-quotient-smooth-presentation}을 보라),
+그 밑변환 $U' \to \mathcal{X}'$도 전사이고 매끄럽다.
+따라서 『대수 스택』의 보조정리
+\ref{algebraic-lemma-stack-presentation}에 의해, 매끄러운 준군
+$(U', R', s', t', c')$와 제시 $[U'/R'] \to \mathcal{X}'$를 얻으려면
+$R' = U' \times_{\mathcal{X}'} U'$임을 보이면 충분하다.
+$R = V \times_\mathcal{Y} V$라는 사실(『공간의 준군』의 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-2-cartesian}을 보라)을 쓰면
+이는 다음에서 따른다.
+$$
+R' =
+U \times_\mathcal{X} U \times_\mathcal{X} \mathcal{X}' =
+(U \times_\mathcal{X} \mathcal{X}')
+\times_{\mathcal{X}'}
+(U \times_\mathcal{X} \mathcal{X}')
+$$
+『범주』의 보조정리
+\ref{categories-lemma-associativity-2-fibre-product}와
+\ref{categories-lemma-2-fibre-product-erase-factor}를 보라.
+사영사상 $U' \to U$와 $R' \to R$는 분명 원하는 준군의 사상
+$\text{pr} : (U', R', s', t', c') \to (U, R, s, t, c)$.
+을 준다. 따라서 『공간의 준군』의 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-functorial}에 의해
+몫 스택의 사상 $[\text{pr}]$을 얻는다.
+
+\medskip\noindent
+이제 그 도식이 $2$-가환임을 보여야 한다. 도식
+$$
+\xymatrix{
+U' \ar[d]_{\text{pr}_U} \ar[r]_{f'} & \mathcal{X}' \ar[d]^g \\
+U \ar[r]^f & \mathcal{X}
+}
+$$
+은 $2$-가환임이 분명하다. 여기서 $\text{pr}_U : U' \to U$는 사영이다.
+$R = U \times_\mathcal{X} U$, $t = \text{pr}_0$,
+$s = \text{pr}_1$에서 오는 표준 $2$-화살표
+$\tau : f \circ t \to f \circ s$가 $\Mor(R, \mathcal{X})$ 안에 있다.
+마찬가지로 동형사상 $R' \to U' \times_{\mathcal{X}'} U'$을 이용하면
+동형사상 $\tau' : f' \circ t' \to f' \circ s'$을 얻는다. 또한
+$g \circ f' \circ t' = f \circ t \circ \text{pr}_R$이고
+$g \circ f' \circ s' = f \circ s \circ \text{pr}_R$이다. 여기서
+$\text{pr}_R : R' \to R$는 사영이다. 따라서 다음 등식이 성립하는지
+묻는 것은 의미가 있다.
+\begin{equation}
+\label{equation-verify}
+\tau \star \text{id}_{\text{pr}_R} = \text{id}_g \star \tau'.
+\end{equation}
+이다. 이제 다음 두 가지를 주장한다. (1) 식 (\ref{equation-verify})이
+성립하면 도식은 $2$-가환이고, (2) 식 (\ref{equation-verify})은 성립한다.
+두 주장의 증명은 생략한다. 힌트는 다음과 같다. (1)은 『대수 스택』의 보조정리
+\ref{algebraic-lemma-map-space-into-stack}에 있는
+$f = f_{can}$과 $f' = f'_{can}$의 구성에서 따르고,
+(2)는 정의를 주의 깊게 풀어 보면 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-representable-over}
+$\mathcal{Y}$를 대수 스택이라 하자. 다음 $2$-범주를 생각하자.
+\begin{enumerate}
+\item 대상은 대수공간으로 표현가능한 사상
+$f : \mathcal{X} \to \mathcal{Y}$이다.
+\item $1$-사상
+$(g, \beta) :
+(f_1 : \mathcal{X}_1 \to \mathcal{Y})
+\to
+(f_2 : \mathcal{X}_2 \to \mathcal{Y})$
+은 사상 $g : \mathcal{X}_1 \to \mathcal{X}_2$와
+$2$-사상 $\beta : f_1 \to f_2 \circ g$로 이루어진다.
+\item
+$(g, \beta), (g', \beta') :
+(f_1 : \mathcal{X}_1 \to \mathcal{Y})
+\to
+(f_2 : \mathcal{X}_2 \to \mathcal{Y})$
+사이의 $2$-사상은
+$(\text{id}_{f_2} \star \alpha) \circ \beta = \beta'$를 만족하는
+$2$-사상 $\alpha : g \to g'$이다.
+\end{enumerate}
+『공간의 위상』의 절 \ref{spaces-topologies-section-procedure}의
+기호와 유사하게 이 $2$-범주를 $\textit{Spaces}/\mathcal{Y}$로 쓰자.
+이제 이 $2$-범주의 사상 범주
+$$
+\Mor_{\textit{Spaces}/\mathcal{Y}}(
+(f_1 : \mathcal{X}_1 \to \mathcal{Y}),
+(f_2 : \mathcal{X}_2 \to \mathcal{Y}))
+$$
+는 모두 셋토이드라고 주장한다. 실제로 $2$-사상 $\alpha$는
+$\mathcal{X}_1$의 각 대상 $x_1$에 $\mathcal{X}_2$의 해당 섬유범주 안의
+동형사상 $\alpha_{x_1} : g(x_1) \longrightarrow g'(x_1)$을 대응시켜
+도식
+$$
+\xymatrix{
+& f_2(x_1) \ar[ld]_{\beta_{x_1}} \ar[rd]^{\beta'_{x_1}} \\
+f_2(g(x_1)) \ar[rr]^{f_2(\alpha_{x_1})} & &
+f_2(g'(x_1))
+}
+$$
+을 가환하게 하는 규칙이다. 그런데 $f_2$가 충실하므로(『대수 스택』의
+보조정리
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces}를 보라),
+$\alpha_{x_1}$이 존재하면 유일하다. 다시 말해 $2$-범주
+$\textit{Spaces}/\mathcal{Y}$는 범주에 매우 가깝다. 즉 $1$-사상들을
+$1$-사상의 동형류로 바꾸면 범주를 얻는다. 앞으로 이 치환은 흔히
+따로 언급하지 않고 수행한다.
+\end{remark}
+
+
+
+
+\section{대수 스택의 점}
+\label{section-points}
+
+\noindent
+$\mathcal{X}$를 대수 스택이라 하자. $K, L$을 두 체라 하고
+$p : \Spec(K) \to \mathcal{X}$와
+$q : \Spec(L) \to \mathcal{X}$를 사상이라 하자.
+어떤 체 $\Omega$와 $2$-가환 도식
+$$
+\xymatrix{
+\Spec(\Omega) \ar[r] \ar[d] &
+\Spec(L) \ar[d]^q \\
+\Spec(K) \ar[r]^p &
+\mathcal{X}.
+}
+$$
+이 존재하면 $p$와 $q$가 {\it 동치}라고 한다.
+
+\begin{lemma}
+\label{lemma-equivalence}
+위 개념은 체의 스펙트럼에서 대수 스택 $\mathcal{X}$로 가는
+사상들 위에 실제로 동치관계를 정의한다.
+\end{lemma}
+
+\begin{proof}
+이 관계가 반사적이고 대칭적임은 분명하다.
+따라서 추이성을 보이면 된다. 이는 다음으로 환원된다. 두 정사각형이
+$2$-가환인 도식
+$$
+\xymatrix{
+\Spec(\Omega) \ar[r]_b \ar[d]_a &
+\Spec(L) \ar[d]^q & \Spec(\Omega') \ar[l]^{b'} \ar[d]^{a'} \\
+\Spec(K) \ar[r]^p &
+\mathcal{X} &
+\Spec(K') \ar[l]_{p'}
+}
+$$
+이 주어지면 $p$와 $p'$이 동치임을 보여야 한다.
+$2$-Yoneda 보조정리(『대수 스택』의 절
+\ref{algebraic-section-2-yoneda}를 보라)에 의해, 사상 $p$, $p'$, $q$는
+각각 $\Spec(K)$, $\Spec(K')$, $\Spec(L)$ 위 $\mathcal{X}$의
+섬유범주에 있는 대상 $x$, $x'$, $y$로 주어진다. 두 정사각형의
+$2$-가환성은 $\Spec(\Omega)$와 $\Spec(\Omega')$ 위
+$\mathcal{X}$의 섬유범주에 동형사상
+$\alpha : a^*x \to b^*y$와
+$\alpha' : (a')^*x' \to (b')^*y$가 존재한다는 뜻이다.
+$L$ 위에서 일치하는 매장 $\Omega \to \Omega''$와
+$\Omega' \to \Omega''$을 갖는 체 $\Omega''$을 하나 택한다.
+그러면 위 도식을 다음과 같이 확장할 수 있다.
+$$
+\xymatrix{
+& \Spec(\Omega'') \ar[ld]_c \ar[d]^{q'} \ar[rd]^{c'} \\
+\Spec(\Omega) \ar[r]_b \ar[d]_a &
+\Spec(L) \ar[d]^q & \Spec(\Omega') \ar[l]^{b'} \ar[d]^{a'} \\
+\Spec(K) \ar[r]^p &
+\mathcal{X} &
+\Spec(K') \ar[l]_{p'}
+}
+$$
+여기서 삼각형들은 가환이고
+$$
+(q')^*(\alpha')^{-1} \circ (q')^*\alpha :
+(a \circ c)^*x
+\longrightarrow
+(a' \circ c')^*x'
+$$
+는 $\Spec(\Omega'')$ 위 섬유범주에서 동형사상이다.
+따라서 원하는 대로 $p$와 $p'$은 동치이다.
+\end{proof}
+
+\begin{definition}
+\label{definition-points}
+$\mathcal{X}$를 대수 스택이라 하자.
+$\mathcal{X}$의 {\it 점}은 체의 스펙트럼에서 $\mathcal{X}$로 가는
+사상들의 동치류이다. $\mathcal{X}$의 점들의 집합을 $|\mathcal{X}|$로 쓴다.
+\end{definition}
+
+\noindent
+이는 대수공간의 점에 관한 정의와 일치한다. 『대수공간의 성질』의 정의
+\ref{spaces-properties-definition-points}를 보라.
+또한 스킴의 경우에는 통상적인 점의 개념을 되찾는다. 『대수공간의 성질』의
+보조정리 \ref{spaces-properties-lemma-scheme-points}를 보라.
+$f : \mathcal{X} \to \mathcal{Y}$가 대수 스택의 사상이면 유도사상
+$|f| : |\mathcal{X}| \to |\mathcal{Y}|$가 있으며, 이는 대표원
+$x : \Spec(K) \to \mathcal{X}$를 대표원
+$f \circ x : \Spec(K) \to \mathcal{Y}$로 보낸다. 이는 잘 정의된다.
+실제로 $2$-동형인 $1$-사상들은 $1$-사상과 앞이나 뒤에서 합성한 뒤에도
+$2$-동형이다. 주어진 $1$-사상의 항등사상을 수평으로 앞이나 뒤에서
+합성할 수 있기 때문이다. 이는 임의의 (엄밀한) $(2, 1)$-범주에서 성립한다.
+만일
+$$
+\xymatrix{
+\mathcal{X} \ar[d] \ar[r] & \mathcal{Y} \ar[d] \\
+\mathcal{W} \ar[r] & \mathcal{Z}
+}
+$$
+이 대수 스택들의 $2$-가환 도식이면 집합들의 도식
+$$
+\xymatrix{
+|\mathcal{X}| \ar[d] \ar[r] & |\mathcal{Y}| \ar[d] \\
+|\mathcal{W}| \ar[r] & |\mathcal{Z}|
+}
+$$
+은 가환이다. 특히 $\mathcal{X} \to \mathcal{Y}$가 동치이면
+$|\mathcal{X}| \to |\mathcal{Y}|$는 전단사이다.
+
+\begin{lemma}
+\label{lemma-points-cartesian}
+다음이 대수 스택들의 섬유곱이라 하자.
+$$
+\xymatrix{
+\mathcal{Z} \times_\mathcal{Y} \mathcal{X} \ar[r] \ar[d] &
+\mathcal{X} \ar[d] \\
+\mathcal{Z} \ar[r] & \mathcal{Y}
+}
+$$
+그러면 점들의 집합 사이의 사상
+$$
+|\mathcal{Z} \times_\mathcal{Y} \mathcal{X}|
+\longrightarrow
+|\mathcal{Z}| \times_{|\mathcal{Y}|} |\mathcal{X}|
+$$
+은 전사이다.
+\end{lemma}
+
+\begin{proof}
+실제로 체 $K$, $L$과 사상
+$\Spec(K) \to \mathcal{X}$, $\Spec(L) \to \mathcal{Z}$가
+주어졌다고 하자. 이들이 $|\mathcal{Y}|$의 원소로서 일치한다는 가정은
+공통 확대 $M/K$, $M/L$이 존재하여
+$\Spec(M) \to \Spec(K) \to \mathcal{X} \to \mathcal{Y}$와
+$\Spec(M) \to \Spec(L) \to \mathcal{Z} \to \mathcal{Y}$
+가 $2$-동형이라는 뜻이다. 이것이 바로 사상
+$\Spec(M) \to \mathcal{Z} \times_\mathcal{Y} \mathcal{X}$를
+얻는다는 조건이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-surjective}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수공간으로 표현가능한
+대수 스택의 사상이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $|f| : |\mathcal{X}| \to |\mathcal{Y}|$는 전사이다.
+\item $f$는 전사이다
+(절 \ref{section-properties-morphisms}의 의미에서).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하자. $T \to \mathcal{Y}$를 원천이 스킴인 사상이라 하자.
+(2)를 보이려면 대수공간의 사상
+$T \times_\mathcal{Y} \mathcal{X} \to T$가 전사임을 보여야 한다.
+『대수공간의 사상』의 정의
+\ref{spaces-morphisms-definition-surjective}에 의해 이는
+$|T \times_\mathcal{Y} \mathcal{X}| \to |T|$가 전사임을 보이는 것과 같다.
+보조정리 \ref{lemma-points-cartesian}을 적용하면 이는 (1)에서 따른다.
+
+\medskip\noindent
+거꾸로 (2)를 가정하자. $y : \Spec(K) \to \mathcal{Y}$를
+체의 스펙트럼에서 $\mathcal{Y}$로 가는 사상이라 하자. 가정에 의해
+대수공간의 사상
+$\Spec(K) \times_{y, \mathcal{Y}} \mathcal{X} \to \Spec(K)$
+은 전사이다. 『대수공간의 사상』의 정의
+\ref{spaces-morphisms-definition-surjective}에 의해, 체 확대
+$K'/K$와 사상
+$\Spec(K') \to \Spec(K) \times_{y, \mathcal{Y}} \mathcal{X}$
+가 존재하여 도식
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d] &
+\Spec(K) \times_{y, \mathcal{Y}} \mathcal{X} \ar[d] \ar[r] &
+\mathcal{X} \ar[d]
+\\
+\Spec(K) \ar@{=}[r] &
+\Spec(K) \ar[r]^-y &
+\mathcal{Y}
+}
+$$
+의 왼쪽 정사각형이 가환이다. 이는 $|X| \to |\mathcal{Y}|$가
+전사임을 보인다.
+\end{proof}
+
+\noindent
+다음 보조정리는 제시를 이용하여 점들의 집합을 계산하는 법을 설명한다.
+
+\begin{lemma}
+\label{lemma-points-presentation}
+$\mathcal{X}$를 대수 스택이라 하자.
+$\mathcal{X} = [U/R]$를 $\mathcal{X}$의 제시라 하자.
+『대수 스택』의 정의 \ref{algebraic-definition-presentation}을 보라.
+그러면 $|R| \to |U| \times |U|$의 상은 동치관계이고,
+$|\mathcal{X}|$는 이 동치관계에 의한 $|U|$의 몫이다.
+\end{lemma}
+
+\begin{proof}
+이 가정은 대수공간의 매끄러운 준군 $(U, R, s, t, c)$와
+동치 $f : [U/R] \to \mathcal{X}$가 주어졌다는 뜻이다.
+$\mathcal{X} = [U/R]$라고 가정해도 된다.
+유도사상 $p : U \to \mathcal{X}$는 매끄럽고 전사이다.
+『대수 스택』의 보조정리
+\ref{algebraic-lemma-smooth-quotient-smooth-presentation}을 보라.
+따라서 보조정리 \ref{lemma-characterize-surjective}에 의해
+$|U| \to |\mathcal{X}|$는 전사이다.
+$R = U \times_\mathcal{X} U$임에 유의하자. 『공간의 준군』의 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-2-cartesian}를 보라.
+그러므로 보조정리 \ref{lemma-points-cartesian}에 의해 사상
+$$
+|R| \longrightarrow |U| \times_{|\mathcal{X}|} |U|
+$$
+은 전사이다. 따라서 $|R| \to |U| \times |U|$의 상은
+$u_1$과 $u_2$가 $|\mathcal{X}|$에서 같은 상을 갖는 순서쌍
+$(u_1, u_2) \in |U| \times |U|$ 전체의 집합과 정확히 같다.
+이 두 명제를 합치면 보조정리의 결론을 얻는다.
+\end{proof}
+
+\begin{remark}
+\label{remark-more-general-presentation}
+보조정리 \ref{lemma-points-presentation}의 결과는 다음과 같이 일반화된다.
+$\mathcal{X}$를 대수 스택이라 하자.
+$U$를 대수공간이라 하고 $f : U \to \mathcal{X}$를 전사라 하자
+(이는 절 \ref{section-properties-morphisms}에 의해 의미가 있다).
+$R = U \times_\mathcal{X} U$라 하고, $(U, R, s, t, c)$를 대수공간의
+준군이라 하며, $f_{can} : [U/R] \to \mathcal{X}$를 『대수 스택』의
+보조정리 \ref{algebraic-lemma-map-space-into-stack}에서 구성한
+표준 사상이라 하자. 그러면 $|R| \to |U| \times |U|$의 상은
+동치관계이고 $|\mathcal{X}| = |U|/|R|$이다.
+보조정리 \ref{lemma-points-presentation}의 증명은 그대로 적용된다.
+(물론 일반적으로 $[U/R]$은 대수 스택이 아니며,
+$f_{can}$도 일반적으로 동형사상이 아니다.)
+\end{remark}
+
+\begin{lemma}
+\label{lemma-topology-points}
+대수 스택의 점들의 집합 위에 다음 성질을 갖는 위상이 유일하게 존재한다.
+\begin{enumerate}
+\item 대수 스택의 모든 사상 $\mathcal{X} \to \mathcal{Y}$에 대해
+사상 $|\mathcal{X}| \to |\mathcal{Y}|$는 연속이다.
+\item $U$가 대수공간이고 $U \to \mathcal{X}$가 평탄하고 국소 유한
+표시인 모든 사상에 대해 위상공간의 사상
+$|U| \to |\mathcal{X}|$는 연속이고 열린사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U$가 대수공간이고 전사이며 평탄하고 국소 유한 표시인 사상
+$p : U \to \mathcal{X}$를 택한다. 대수 스택의 정의에 의해
+이런 사상이 존재한다. 실제로 매끄러운 사상은 평탄하고 국소 유한 표시이다
+(『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-smooth-locally-finite-presentation}과
+\ref{spaces-morphisms-lemma-smooth-flat}을 보라).
+$|\mathcal{X}|$ 위의 위상을 다음 규칙으로 정의한다.
+$W \subset |\mathcal{X}|$가 열린집합일 필요충분조건은
+$|p|^{-1}(W)$가 $|U|$에서 열린 것이다. 이 정의가 $p$의 선택에
+무관함을 보이자. 대수공간에서 $\mathcal{X}$로 가는 또 다른 전사이고
+평탄하며 국소 유한 표시인 사상을 $p' : U' \to \mathcal{X}$라 하자.
+$U'' = U \times_\mathcal{X} U'$로 놓으면 $2$-가환 도식
+$$
+\xymatrix{
+U'' \ar[r] \ar[d] & U' \ar[d] \\
+U \ar[r] & \mathcal{X}
+}
+$$
+을 얻는다. $U \to \mathcal{X}$와 $U' \to \mathcal{X}$가 전사이고
+평탄하며 국소 유한 표시이므로, 보조정리
+\ref{lemma-property-spaces-too}에 의해
+$U'' \to U'$와 $U'' \to U$도 전사이고 평탄하며 국소 유한 표시이다.
+따라서 사상 $|U''| \to |U'|$와 $|U''| \to |U|$는 연속이고 열린사상이며
+전사이다. 『대수공간의 사상』의 정의
+\ref{spaces-morphisms-definition-surjective}와 보조정리
+\ref{spaces-morphisms-lemma-fppf-open}을 보라.
+이로부터 정의가 $p : U \to \mathcal{X}$의 선택에 무관함이 분명히 따른다.
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$를 대수 스택의 사상이라 하자.
+『대수 스택』의 보조정리
+\ref{algebraic-lemma-lift-morphism-presentations}에 의해
+수직 화살표들이 전사이고 매끄러운 $2$-가환 도식
+$$
+\xymatrix{
+U \ar[d]_x \ar[r]_a & V \ar[d]^y \\
+\mathcal{X} \ar[r]^f & \mathcal{Y}
+}
+$$
+을 찾을 수 있다. 이에 결부된 집합들의 가환 도식
+$$
+\xymatrix{
+|U| \ar[d]_{|x|} \ar[r]_{|a|} & |V| \ar[d]^{|y|} \\
+|\mathcal{X}| \ar[r]^{|f|} & |\mathcal{Y}|
+}
+$$
+을 생각하자. $W \subset |\mathcal{Y}|$가 열린집합이면 위 정의에 의해
+이는 정확히 $|y|^{-1}(W)$가 $|V|$에서 열린집합이라는 뜻이다.
+$|a|$가 연속이므로
+$|a|^{-1}|y|^{-1}(W) = |x|^{-1}|f|^{-1}(W)$는 $|W|$에서 열린집합이다.
+이는 정의상 $|f|^{-1}(W)$가 $|\mathcal{X}|$에서 열린집합이라는 뜻이다.
+따라서 $|f|$는 연속이다.
+
+\medskip\noindent
+마지막으로 $U$가 대수공간이고 $U \to \mathcal{X}$가 평탄하고 국소 유한
+표시이면 $|U| \to |\mathcal{X}|$가 열린사상임을 보여야 한다.
+$V$가 대수공간이고 $V \to \mathcal{X}$가 전사이고 평탄하며
+국소 유한 표시라고 하자. 가환 도식
+$$
+\xymatrix{
+|U \times_\mathcal{X} V| \ar[r]_e \ar[rd]_f &
+|U| \times_{|\mathcal{X}|} |V| \ar[d]_c \ar[r]_d &
+|V| \ar[d]^b \\
+& |U| \ar[r]^a & |\mathcal{X}|
+}
+$$
+을 생각하자. 사상 $U \times_\mathcal{X} V \to U$는 전사이다.
+즉 $f : |U \times_\mathcal{X} V| \to |U|$는 전사이다.
+왼쪽 위 수평 화살표도 전사이다. 보조정리
+\ref{lemma-points-cartesian}을 보라.
+사상 $U \times_\mathcal{X} V \to V$는 평탄하고 국소 유한 표시이므로
+$d \circ e : |U \times_\mathcal{X} V| \to |V|$는 열린사상이다.
+『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-fppf-open}을 보라.
+열린집합 $W \subset |U|$를 택한다. 위 성질들에 의해
+$b^{-1}(a(W)) = (d \circ e)(f^{-1}(W))$는 열린집합이다.
+구성상 이는 원하는 대로 $a(W)$가 열린집합이라는 뜻이다.
+\end{proof}
+
+\begin{definition}
+\label{definition-topological-space}
+$\mathcal{X}$를 대수 스택이라 하자.
+$\mathcal{X}$의 바탕 {\it 위상공간}은 보조정리
+\ref{lemma-topology-points}에서 구성한 위상을 갖춘 점들의 집합
+$|\mathcal{X}|$이다.
+\end{definition}
+
+\noindent
+$\mathcal{X}$가 대수공간이면 이 정의는 $|\mathcal{X}|$ 위에
+이미 있는 위상과 모순되지 않는다.
+
+\begin{lemma}
+\label{lemma-space-locally-quasi-compact}
+$\mathcal{X}$를 대수 스택이라 하자.
+$|\mathcal{X}|$의 모든 점은 준콤팩트 열린 근방들로 이루어진 근방기저를 갖는다.
+특히 $|\mathcal{X}|$는 『위상』의 정의
+\ref{topology-definition-locally-quasi-compact}의 의미에서 국소 준콤팩트이다.
+\end{lemma}
+
+\begin{proof}
+이는 스킴 $U$와 위상공간의 전사이고 열린 연속사상
+$U \to |\mathcal{X}|$가 존재한다는 사실에서 형식적으로 따른다.
+실제로 $U \to \mathcal{X}$가 전사이고 매끄러우면 보조정리
+\ref{lemma-topology-points}에 의해
+$|U| \to |\mathcal{X}|$는 연속이고 전사이며 열린사상이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{전사 사상}
+\label{section-surjective}
+
+\noindent
+$f : \mathcal{X} \to \mathcal{Y}$를 대수공간으로 표현가능한
+대수 스택의 사상이라 하자. 절 \ref{section-properties-morphisms}에서
+$f$가 전사라는 뜻을 이미 정의하였다. 보조정리
+\ref{lemma-characterize-surjective}에서 이는
+$|f| : |\mathcal{X}| \to |\mathcal{Y}|$가 전사라는 조건과
+동치임을 보았다. 따라서 다음 정의를 내릴 수 있다.
+
+\begin{definition}
+\label{definition-surjective}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수 스택의 사상이라 하자.
+결부된 위상공간의 사상
+$|f| : |\mathcal{X}| \to |\mathcal{Y}|$가 전사이면
+$f$가 {\it 전사}라고 한다.
+\end{definition}
+
+\noindent
+다음은 몇 가지 보조정리이다.
+
+\begin{lemma}
+\label{lemma-composition-surjective}
+전사 사상들의 합성은 전사이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-surjective}
+전사 사상의 밑변환은 전사이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 보조정리 \ref{lemma-points-cartesian}을 사용하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descent-surjective}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수 스택의 사상이라 하자.
+$\mathcal{Y}' \to \mathcal{Y}$를 대수 스택의 전사 사상이라 하자.
+$f$의 밑변환
+$f' : \mathcal{Y}' \times_\mathcal{Y} \mathcal{X}
+\to \mathcal{Y}'$이 전사이면 $f$도 전사이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-points-cartesian}에서 바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-surjective-permanence}
+$\mathcal{X} \to \mathcal{Y} \to \mathcal{Z}$를 대수 스택의
+사상들이라 하자. $\mathcal{X} \to \mathcal{Z}$가 전사이면
+$\mathcal{Y} \to \mathcal{Z}$도 전사이다.
+\end{lemma}
+
+\begin{proof}
+자명하다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{준콤팩트 대수 스택}
+\label{section-quasi-compact}
+
+\noindent
+다음 정의는 『대수공간의 성질』의 보조정리
+\ref{spaces-properties-lemma-quasi-compact-space}에 의해
+대수공간에 대한 정의와 동치이다.
+
+\begin{definition}
+\label{definition-quasi-compact}
+$\mathcal{X}$를 대수 스택이라 하자.
+$|\mathcal{X}|$가 준콤팩트일 때, 그리고 그때에만
+$\mathcal{X}$가 {\it 준콤팩트}라고 한다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-quasi-compact-stack}
+$\mathcal{X}$를 대수 스택이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $\mathcal{X}$는 준콤팩트이다.
+\item $U$가 아핀 스킴인 전사 매끄러운 사상
+$U \to \mathcal{X}$가 존재한다.
+\item $U$가 준콤팩트 스킴인 전사 매끄러운 사상
+$U \to \mathcal{X}$가 존재한다.
+\item $U$가 준콤팩트 대수공간인 전사 매끄러운 사상
+$U \to \mathcal{X}$가 존재한다.
+\item $\mathcal{U}$가 준콤팩트인 대수 스택의 전사 사상
+$\mathcal{U} \to \mathcal{X}$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-characterize-surjective}를 사용한다.
+$\mathcal{U}$와 $\mathcal{U} \to \mathcal{X}$가 (5)와 같다고 하자.
+$|\mathcal{U}| \to |\mathcal{X}|$가 전사이고 연속이므로
+$|\mathcal{X}|$는 준콤팩트이다. 따라서 (5)는 (1)을 함의한다. 함의
+(2) $\Rightarrow$ (3) $\Rightarrow$ (4) $\Rightarrow$ (5)
+은 자명하다. (1), 즉 $\mathcal{X}$가 준콤팩트이고
+$|\mathcal{X}|$가 준콤팩트라고 가정하자. 스킴 $U$와 전사 매끄러운 사상
+$U \to \mathcal{X}$를 택한다. $|U| \to |\mathcal{X}|$가 열린사상이므로,
+%% P11-E0623: 동결 원문의 |X|를 그대로 보존한다.
+$|U'| \to |X|$가 전사이고 여전히 매끄럽게 되는 준콤팩트 열린부분
+$U' \subset U$가 존재한다. 유한 아핀 열린 덮개
+$U' = U_1 \cup \ldots \cup U_n$을 택한다. 그러면
+$U_1 \amalg \ldots \amalg U_n \to \mathcal{X}$는 원천이 아핀 스킴인
+전사 매끄러운 사상이다(『스킴』의 보조정리
+\ref{schemes-lemma-disjoint-union-affines}). 따라서 (2)가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-disjoint-quasi-compact}
+준콤팩트 대수 스택들의 유한 서로소 합은 준콤팩트 대수 스택이다.
+\end{lemma}
+
+\begin{proof}
+대응하는 위상적 사실에서 분명하다.
+\end{proof}
+
+
+\section{스킴의 성질로 정의되는 대수 스택의 성질}
+\label{section-types-properties}
+
+\noindent
+스킴의 매끄러운 국소적 성질은 다음 보조정리를 통해 대수 스택의
+대응 성질을 낳는다. 모든 \'etale 덮개는 매끄러운 덮개이므로
+스킴의 매끄러운 국소적 성질은 \'etale 국소적이기도 하다.
+따라서 스킴의 매끄러운 국소적 성질 $P$에 대하여 대수공간이
+$P$를 갖는다는 뜻을 알고 있다. 『대수공간의 성질』의 절
+\ref{spaces-properties-section-types-properties}를 보라.
+
+\begin{lemma}
+\label{lemma-type-property}
+$\mathcal{P}$를 매끄러운 위상에서 국소적인 스킴의 성질이라 하자.
+『하강』의 정의 \ref{descent-definition-property-local}을 보라.
+$\mathcal{X}$를 대수 스택이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item 어떤 스킴 $U$와 어떤 전사 매끄러운 사상
+$U \to \mathcal{X}$에 대해 스킴 $U$는 성질 $\mathcal{P}$를 갖는다.
+\item 모든 스킴 $U$와 모든 매끄러운 사상 $U \to \mathcal{X}$에 대해
+스킴 $U$는 성질 $\mathcal{P}$를 갖는다.
+\item 어떤 대수공간 $U$와 어떤 전사 매끄러운 사상
+$U \to \mathcal{X}$에 대해 대수공간 $U$는 성질 $\mathcal{P}$를 갖는다.
+\item 모든 대수공간 $U$와 모든 매끄러운 사상
+$U \to \mathcal{X}$에 대해 대수공간 $U$는 성질 $\mathcal{P}$를 갖는다.
+\end{enumerate}
+$\mathcal{X}$가 스킴 $U$이면 이는 $\mathcal{P}(U)$와 동치이다.
+$\mathcal{X}$가 대수공간 $X$이면 이는 $X$가 성질
+$\mathcal{P}$를 갖는 것과 동치이다.
+\end{lemma}
+
+\begin{proof}
+$U$가 대수공간이고 $U \to \mathcal{X}$가 전사이고 매끄럽다고 하자.
+$V$가 대수공간이고 $V \to \mathcal{X}$가 매끄럽다고 하자.
+스킴 $U'$, $V'$과 전사 \'etale 사상
+$U' \to U$, $V' \to V$를 택한다. 마지막으로 스킴 $W$와 전사
+\'etale 사상 $W \to V' \times_\mathcal{X} U'$을 택한다.
+그러면 $W \to V'$와 $W \to U'$은 대수공간의 \'etale 사상과
+매끄러운 사상의 합성이므로 스킴의 매끄러운 사상이다.
+『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-etale-smooth}와
+\ref{spaces-morphisms-lemma-composition-smooth}를 보라.
+또한 $U' \to \mathcal{X}$가 전사이므로 $W \to V'$도 전사이다.
+따라서
+$$
+\mathcal{P}(U) \Leftrightarrow
+\mathcal{P}(U') \Rightarrow
+\mathcal{P}(W) \Rightarrow
+\mathcal{P}(V') \Leftrightarrow \mathcal{P}(V)
+$$
+를 얻는다. 여기서 동치들은 대수공간의 성질 $\mathcal{P}$의 정의에서
+오고, 두 함의는 『하강』의 정의
+\ref{descent-definition-property-local}에서 온다.
+이로써 (3) $\Rightarrow$ (4)를 증명하였다.
+
+\medskip\noindent
+함의 (2) $\Rightarrow$ (1), (1) $\Rightarrow$ (3),
+(4) $\Rightarrow$ (2)는 자명하다.
+\end{proof}
+
+\begin{definition}
+\label{definition-type-property}
+$\mathcal{X}$를 대수 스택이라 하자.
+$\mathcal{P}$를 매끄러운 위상에서 국소적인 스킴의 성질이라 하자.
+보조정리 \ref{lemma-type-property}의 동치 조건 가운데 하나가 성립하면
+$\mathcal{X}$가 {\it 성질 $\mathcal{P}$를 갖는다}고 한다.
+\end{definition}
+
+\begin{remark}
+\label{remark-list-properties-local-smooth-topology}
+다음은 매끄러운 위상에서 국소적인 성질들의 목록이다
+(fpqc, fppf, 신토믹 위상은 매끄러운 위상보다 강하다는 것을 기억하라).
+\begin{enumerate}
+\item 국소 뇌터: 『하강』의 보조정리
+\ref{descent-lemma-Noetherian-local-fppf}를 보라.
+\item Jacobson: 『하강』의 보조정리
+\ref{descent-lemma-Jacobson-local-fppf}를 보라.
+\item 국소 뇌터이고 $(S_k)$: 『하강』의 보조정리
+\ref{descent-lemma-Sk-local-syntomic}을 보라.
+\item Cohen--Macaulay: 『하강』의 보조정리
+\ref{descent-lemma-CM-local-syntomic}을 보라.
+\item 축약: 『하강』의 보조정리
+\ref{descent-lemma-reduced-local-smooth}를 보라.
+\item 정규: 『하강』의 보조정리
+\ref{descent-lemma-normal-local-smooth}를 보라.
+\item 국소 뇌터이고 $(R_k)$: 『하강』의 보조정리
+\ref{descent-lemma-Rk-local-smooth}를 보라.
+\item 정칙: 『하강』의 보조정리
+\ref{descent-lemma-regular-local-smooth}를 보라.
+\item Nagata: 『하강』의 보조정리
+\ref{descent-lemma-Nagata-local-smooth}를 보라.
+\end{enumerate}
+\end{remark}
+
+\noindent
+스킴의 싹의 매끄러운 국소적 성질은 대수 스택의 대응 성질을 낳는다.
+매끄러운 국소적인 싹의 성질은 \'etale 국소적이기도 하다.
+따라서 스킴의 싹의 매끄러운 국소적 성질 $P$에 대해 대수공간 $X$가
+$x \in |X|$에서 성질 $P$를 갖는다는 뜻을 알고 있다.
+『대수공간의 성질』의 절 \ref{section-types-properties}를 보라.
+
+\begin{lemma}
+\label{lemma-local-source-target-at-point}
+$\mathcal{X}$를 대수 스택이라 하자.
+$x \in |\mathcal{X}|$를 $\mathcal{X}$의 점이라 하자.
+$\mathcal{P}$를 매끄러운 국소적인 스킴의 싹의 성질이라 하자.
+『하강』의 정의 \ref{descent-definition-local-at-point}를 보라.
+다음은 서로 동치이다.
+\begin{enumerate}
+%% P11-E0438: 네 조건의 정의되지 않은 a를 동결 원문 그대로 보존한다.
+\item $U$가 스킴인 임의의 매끄러운 사상 $U \to \mathcal{X}$와
+$a(u) = x$인 $u \in U$에 대해 $\mathcal{P}(U, u)$가 성립한다.
+\item $U$가 스킴인 어떤 매끄러운 사상 $U \to \mathcal{X}$와
+$a(u) = x$인 어떤 $u \in U$에 대해 $\mathcal{P}(U, u)$가 성립한다.
+\item $U$가 대수공간인 임의의 매끄러운 사상
+$U \to \mathcal{X}$와 $a(u) = x$인 $u \in |U|$에 대해
+대수공간 $U$는 $u$에서 성질 $\mathcal{P}$를 갖는다.
+\item $U$가 대수공간인 어떤 매끄러운 사상
+$U \to \mathcal{X}$와 $a(u) = x$인 어떤 $u \in |U|$에 대해
+대수공간 $U$는 $u$에서 성질 $\mathcal{P}$를 갖는다.
+\end{enumerate}
+$\mathcal{X}$가 표현가능하면 이는 $\mathcal{P}(\mathcal{X}, x)$와
+동치이다. $\mathcal{X}$가 대수공간이면 이는 $\mathcal{X}$가
+$x$에서 성질 $\mathcal{P}$를 갖는 것과 동치이다.
+\end{lemma}
+
+\begin{proof}
+$a : U \to \mathcal{X}$와 $u \in |U|$가 (3)과 같다고 하자.
+$b : V \to \mathcal{X}$를 $V$가 대수공간인 또 다른 매끄러운
+사상이라 하고, $b(v) = x$인 $v \in |V|$도 택하자.
+스킴 $U'$, \'etale 사상 $U' \to U$, 그리고 $u$로 가는
+$u' \in U'$을 택한다. 스킴 $V'$, \'etale 사상 $V' \to V$,
+그리고 $v$로 가는 $v' \in V'$도 택한다.
+보조정리 \ref{lemma-points-cartesian}에 의해 $u'$과 $v'$로 가는 점
+$\overline{w} \in |V' \times_\mathcal{X} U'|$가 존재한다.
+스킴 $W$와 전사 \'etale 사상
+$W \to V' \times_\mathcal{X} U'$을 택한다.
+$\overline{w}$로 가는 $w \in |W|$를 택할 수 있다
+(『대수공간의 성질』의 보조정리
+\ref{spaces-properties-lemma-characterize-surjective}를 보라).
+그러면 $W \to V'$와 $W \to U'$은 대수공간의 \'etale 사상과
+매끄러운 사상의 합성이므로 스킴의 매끄러운 사상이다.
+『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-etale-smooth}와
+\ref{spaces-morphisms-lemma-composition-smooth}를 보라. 따라서
+$$
+\mathcal{P}(U, u)
+\Leftrightarrow
+\mathcal{P}(U', u')
+\Leftrightarrow
+\mathcal{P}(W, w)
+\Leftrightarrow
+\mathcal{P}(V', v')
+\Leftrightarrow
+\mathcal{P}(V, v)
+$$
+를 얻는다. 바깥쪽 두 동치는 『대수공간의 성질』의 정의
+\ref{spaces-properties-definition-property-at-point}에서 오고,
+나머지 두 동치는 스킴의 싹의 매끄러운 국소적 성질이라는 뜻에서 온다.
+이로써 (4) $\Rightarrow$ (3)을 증명하였다.
+
+\medskip\noindent
+함의 (1) $\Rightarrow$ (2), (2) $\Rightarrow$ (4),
+(3) $\Rightarrow$ (1)은 자명하다.
+\end{proof}
+
+\begin{definition}
+\label{definition-property-at-point}
+$\mathcal{P}$를 매끄러운 국소적인 스킴의 싹의 성질이라 하자.
+$\mathcal{X}$를 대수 스택이라 하고 $x \in |\mathcal{X}|$라 하자.
+보조정리 \ref{lemma-local-source-target-at-point}의 동치 조건 가운데
+하나가 성립하면 $\mathcal{X}$가
+{\it $x$에서 성질 $\mathcal{P}$를 갖는다}고 한다.
+\end{definition}
+
+
+
+
+
+
+
+
+
+
+\section{대수 스택의 단사사상}
+\label{section-monomorphisms}
+
+\noindent
+대수 스택의 단사사상을 다음과 같이 정의한다.
+보조정리 \ref{lemma-monomorphism}에서 이 정의가 대응하는
+$2$-범주론적 개념과 양립함을 볼 것이다.
+
+\begin{definition}
+\label{definition-monomorphism}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수 스택의 사상이라 하자.
+이 사상이 대수공간으로 표현가능하고 절
+\ref{section-properties-morphisms}의 의미에서 단사사상이면
+$f$를 {\it 단사사상}이라 한다.
+\end{definition}
+
+\noindent
+먼저 몇 가지 기본 보조정리를 제시한다.
+
+\begin{lemma}
+\label{lemma-base-change-monomorphism}
+$\mathcal{X} \to \mathcal{Y}$를 대수 스택의 사상이라 하고,
+$\mathcal{Z} \to \mathcal{Y}$를 단사사상이라 하자.
+그러면 $\mathcal{Z} \times_\mathcal{Y} \mathcal{X} \to \mathcal{X}$는
+단사사상이다.
+\end{lemma}
+
+\begin{proof}
+절 \ref{section-properties-morphisms}의 일반적인 논의에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-monomorphism}
+대수 스택의 단사사상들의 합성은 단사사상이다.
+\end{lemma}
+
+\begin{proof}
+절 \ref{section-properties-morphisms}의 일반적인 논의와
+『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-composition-monomorphism}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-monomorphism}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수 스택의 사상이라 하자.
+다음은 서로 동치이다.
+\begin{enumerate}
+\item $f$는 단사사상이다.
+\item $f$는 충실충만이다.
+\item 대각사상
+$\Delta_f : \mathcal{X} \to \mathcal{X} \times_\mathcal{Y} \mathcal{X}$
+은 동치이다.
+\item 대수공간 $W$와 전사이고 평탄하며 국소 유한 표시인 사상
+$W \to \mathcal{Y}$가 존재하여
+$V = \mathcal{X} \times_\mathcal{Y} W$는 대수공간이고
+$V \to W$는 대수공간의 단사사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (4)의 동치는 절 \ref{section-properties-morphisms}의
+일반적인 논의, 특히 보조정리
+\ref{lemma-check-representable-covering}과
+\ref{lemma-check-property-covering}에서 따른다.
+
+\medskip\noindent
+(2)와 (3)의 동치는 『범주』의 보조정리
+\ref{categories-lemma-fully-faithful-diagonal-equivalence}이다.
+
+\medskip\noindent
+동치 조건 (2), (3)을 가정하자. 그러면 『대수 스택』의 보조정리
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces}에
+의해 $f$는 대수공간으로 표현가능하다. 또한 $2$-Yoneda 보조정리와
+충실충만성을 함께 쓰면 모든 스킴 $T$에 대해 함자
+$$
+\Mor(T, \mathcal{X})
+\longrightarrow
+\Mor(T, \mathcal{Y})
+$$
+는 충실충만이다. 따라서 사상 $y : T \to \mathcal{Y}$가 주어지면,
+$y \cong f \circ x$를 만족하는 사상 $x : T \to \mathcal{X}$는
+유일한 $2$-동형을 제외하면 많아야 하나 존재한다. 특히 스킴의 사상
+$h : T' \to T$가 주어지면 $h$의 올림
+$\tilde h : T' \to T \times_\mathcal{Y} \mathcal{X}$는 많아야 하나
+존재한다. 따라서 $T \times_\mathcal{Y} \mathcal{X} \to T$는
+대수공간의 단사사상이며, 이로써 (1)을 증명하였다.
+
+\medskip\noindent
+마지막으로 (1)을 가정하자. 그러면 모든 스킴 $T$와 사상
+$y : T \to \mathcal{Y}$에 대해 섬유곱
+$T \times_\mathcal{Y} \mathcal{X}$는 대수공간이고,
+$T \times_\mathcal{Y} \mathcal{X} \to T$는 단사사상이다.
+%% P11-E0624: 동결 원문의 exactly one 존재 주장을 그대로 보존한다.
+따라서 동형사상을 제외하면 정확히 하나의 순서쌍 $(x, \alpha)$가 존재한다.
+여기서 $x : T \to \mathcal{X}$는 사상이고
+$\alpha : f \circ x \to y$는 $2$-사상이다.
+$2$-Yoneda 보조정리를 적용하면 이는 정확히 $f$가 충실충만,
+즉 (2)가 성립한다는 뜻이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-monomorphism-injective-points}
+\begin{slogan}
+스택의 단사사상은 점들 위에서 단사이다.
+\end{slogan}
+대수 스택의 단사사상은 점들의 집합 사이의 단사 사상을 유도한다.
+\end{lemma}
+
+\begin{proof}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수 스택의 단사사상이라 하자.
+사상 $x_i : \Spec(K_i) \to \mathcal{X}$가 주어져
+$f \circ x_1$과 $f \circ x_2$가 $|\mathcal{Y}|$의 같은 원소를
+정의한다고 하자. 정의를 적용하면 대응하는 사상
+$c_i : \Spec(\Omega) \to \Spec(K_i)$를 갖는 공통 확대 $\Omega$와
+%% P11-E0440: 두 식의 반복된 x_1을 동결 원문 그대로 보존한다.
+$2$-동형사상 $\beta : f \circ x_1 \circ c_1 \to f \circ x_1 \circ c_2$를
+얻는다. 보조정리 \ref{lemma-monomorphism}에 의해 $f$가 충실충만이므로
+$\beta$를 동형사상
+$\alpha : x_1 \circ c_1 \to x_1 \circ c_2$로 올릴 수 있다.
+따라서 원하는 대로 $x_1$과 $x_2$는 $|\mathcal{X}|$의 같은 점을 정의한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-monomorphism-diagonal}
+$\mathcal{X} \to \mathcal{X}' \to \mathcal{Y}$를 대수 스택의
+사상들이라 하자. $\mathcal{X} \to \mathcal{X}'$가 단사사상이면
+표준 도식
+$$
+\xymatrix{
+\mathcal{X} \ar[r] \ar[d] &
+\mathcal{X} \times_\mathcal{Y} \mathcal{X} \ar[d] \\
+\mathcal{X}' \ar[r] &
+\mathcal{X}' \times_\mathcal{Y} \mathcal{X}'
+}
+$$
+은 섬유곱 정사각형이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-monomorphism}에 의해
+$\mathcal{X} = \mathcal{X} \times_{\mathcal{X}'} \mathcal{X}$이다.
+따라서 『범주』의 보조정리
+\ref{categories-lemma-fibre-product-after-map}를 적용하면 결론이 따른다.
+\end{proof}
+
+
+
+
+
+
+
+\section{대수 스택의 몰입}
+\label{section-immersions}
+
+\noindent
+대수 스택의 몰입을 다음과 같이 정의한다.
+
+\begin{definition}
+\label{definition-immersion}
+몰입.
+\begin{enumerate}
+\item 대수 스택의 사상이 표현가능하고
+제\ref{section-properties-morphisms}절의 의미에서 열린 몰입이면
+이를 {\it 열린 몰입}이라 한다.
+\item 대수 스택의 사상이 표현가능하고
+제\ref{section-properties-morphisms}절의 의미에서 닫힌 몰입이면
+이를 {\it 닫힌 몰입}이라 한다.
+\item 대수 스택의 사상이 표현가능하고
+제\ref{section-properties-morphisms}절의 의미에서 몰입이면
+이를 {\it 몰입}이라 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+우리에게 이것은 몰입을 이해하는 가장 편리한 방식은 아니다.
+대수공간으로 표현가능하고 제\ref{section-properties-morphisms}절의
+의미에서 몰입인 대수 스택의 사상을 몰입으로 생각하는 편이 조금 더 편리하다.
+닫힌 몰입과 열린 몰입도 마찬가지다.
+이는 방금 정의한 개념과 명백히 동치이므로 앞으로 별도의 언급 없이
+이 특징화를 사용한다. 이 개념에 관한 몇 가지 간단한 보조정리를 증명한다.
+
+\begin{lemma}
+\label{lemma-base-change-immersion}
+$\mathcal{X} \to \mathcal{Y}$를 대수 스택의 사상이라 하자.
+$\mathcal{Z} \to \mathcal{Y}$가 (각각 닫힌, 열린) 몰입이면
+$\mathcal{Z} \times_\mathcal{Y} \mathcal{X} \to \mathcal{X}$도
+(각각 닫힌, 열린) 몰입이다.
+\end{lemma}
+
+\begin{proof}
+이는 제\ref{section-properties-morphisms}절의 일반적인 논의로부터 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-immersion}
+대수 스택의 몰입들의 합성은 몰입이다.
+닫힌 몰입과 열린 몰입에 대해서도 마찬가지다.
+\end{lemma}
+
+\begin{proof}
+이는 제\ref{section-properties-morphisms}절의 일반적인 논의와
+Spaces, Lemma \ref{spaces-lemma-composition-immersions}로부터 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-check-immersion-covering}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수 스택의 사상이라 하자.
+$W$를 대수공간이라 하고, $W \to \mathcal{Y}$를 국소 유한 표시인
+평탄 전사사상이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $f$는 (각각 열린, 닫힌) 몰입이다.
+\item $V = W \times_\mathcal{Y} \mathcal{X}$는 대수공간이고,
+$V \to W$는 (각각 열린, 닫힌) 몰입이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이는 제\ref{section-properties-morphisms}절의 일반적인 논의,
+특히 보조정리 \ref{lemma-check-representable-covering}과
+\ref{lemma-check-property-covering}으로부터 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-immersion-monomorphism}
+몰입은 단사사상이다.
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-immersions-monomorphisms}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-subspace-induced-topology}
+$f : \mathcal{X} \to \mathcal{Y}$가 몰입이면
+$|f| : |\mathcal{X}| \to |\mathcal{Y}|$는 어떤 국소 닫힌 부분집합 위로의
+위상동형사상이다. $f$가 각각 닫힌 몰입 또는 열린 몰입이면
+$|f|$도 각각 닫힌 사상 또는 열린 사상이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\noindent
+다음 두 보조정리는 몰입을 제시의 관점에서 어떻게 이해할 수 있는지 설명한다.
+
+\begin{lemma}
+\label{lemma-immersion-into-presentation}
+$(U, R, s, t, c)$를 대수공간에서의 매끄러운 준군이라 하고,
+$i : \mathcal{Z} \to [U/R]$를 몰입이라 하자.
+그러면 $R$-불변인 국소 닫힌 부분공간 $Z \subset U$와
+제시 $[Z/R_Z] \to \mathcal{Z}$가 존재한다. 여기서 $R_Z$는
+$R$의 $Z$로의 제한이며,
+$$
+\xymatrix{
+[Z/R_Z] \ar[dr] \ar[rr] & & \mathcal{Z} \ar[ld]^i \\
+& [U/R]
+}
+$$
+는 $2$-가환이다. $i$가 닫힌 (각각 열린) 몰입이면
+$Z$는 $U$의 닫힌 (각각 열린) 부분공간이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-representable-in-terms-presentations}에 의해
+가환 그림
+$$
+\xymatrix{
+[U'/R'] \ar[dr] \ar[rr] & & \mathcal{Z} \ar[ld] \\
+& [U/R]
+}
+$$
+를 얻는다. 여기서 $U' = \mathcal{Z} \times_{[U/R]} U$이고
+$R' = \mathcal{Z} \times_{[U/R]} R$이다.
+$\mathcal{Z} \to [U/R]$가 몰입이므로 $U' \to U$는 대수공간의 몰입이다.
+$U' \to U$가 $Z$를 통해 분해되고 동형사상 $U' \to Z$를 유도하도록 하는
+국소 닫힌 부분공간 $Z \subset U$를 택하자.
+$R'$의 구성으로부터
+$R' = U' \times_{U, t} R = R \times_{s, U} U'$.
+이다. 따라서 $Z \cong U'$는 $R$-불변이고, $R' \to R$의 상을 통해
+$R'$는 $R$의 $Z$로의 제한
+$R_Z = s^{-1}(Z) = t^{-1}(Z)$와 동일시된다. 그러므로 보조정리가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-immersion-presentation}
+$(U, R, s, t, c)$를 대수공간에서의 매끄러운 준군이라 하자.
+$\mathcal{X} = [U/R]$를 이에 결부된 대수 스택이라 하자
+(Algebraic Stacks,
+Theorem \ref{algebraic-theorem-smooth-groupoid-gives-algebraic-stack} 참조).
+$Z \subset U$를 $R$-불변인 국소 닫힌 부분공간이라 하자. 그러면
+$$
+[Z/R_Z] \longrightarrow [U/R]
+$$
+는 대수 스택의 몰입이다. 여기서 $R_Z$는 $R$의 $Z$로의 제한이다.
+$Z \subset U$가 열린 (각각 닫힌) 부분공간이면 이 사상은
+대수 스택의 열린 (각각 닫힌) 몰입이다.
+\end{lemma}
+
+\begin{proof}
+Groupoids in Spaces,
+Definition \ref{spaces-groupoids-definition-invariant-open}
+(정의 뒤의 논의도 참조)에 의해
+$R_Z = s^{-1}(Z) = t^{-1}(Z)$는 $R$의 국소 닫힌 부분공간임을 상기하자.
+따라서 두 사상 $R_Z \to Z$는 $s$와 $t$의 밑변환이므로 매끄럽다. 그러므로
+$(Z, R_Z, s|_{R_Z}, t|_{R_Z}, c|_{R_Z \times_{s, Z, t} R_Z})$는
+대수공간에서의 매끄러운 준군이고, $[Z/R_Z]$는 대수 스택이다
+(Algebraic Stacks,
+Theorem \ref{algebraic-theorem-smooth-groupoid-gives-algebraic-stack} 참조).
+Groupoids in Spaces,
+Lemma \ref{spaces-groupoids-lemma-criterion-fibre-product}의 가정들이
+모두 충족되므로 다음 $2$-섬유곱 정사각형을 얻는다.
+$$
+\xymatrix{
+Z \ar[d] \ar[r] & [Z/R_Z] \ar[d] \\
+U \ar[r] & [U/R]
+}
+$$
+이 사실과 보조정리 \ref{lemma-check-representable-covering}에 의해
+$[Z/R_Z] \to [U/R]$는 대수공간으로 표현가능하다.
+이제 보조정리 \ref{lemma-check-property-covering}에 의해 오른쪽 수직 화살표가
+몰입 (각각 닫힌 몰입, 열린 몰입)일 필요충분조건은 왼쪽 수직 화살표가
+그러한 것이다.
+\end{proof}
+
+\noindent
+열린 부분스택, 닫힌 부분스택, 국소 닫힌 부분스택을 다음과 같이 정의할 수 있다.
+
+\begin{definition}
+\label{definition-substacks}
+$\mathcal{X}$를 대수 스택이라 하자.
+\begin{enumerate}
+\item $\mathcal{X}$의 {\it 열린 부분스택}이란 $\mathcal{X}'$가 대수 스택이고
+$\mathcal{X}' \to \mathcal{X}$가 열린 몰입인 엄밀한 충만 부분범주
+$\mathcal{X}' \subset \mathcal{X}$이다.
+\item $\mathcal{X}$의 {\it 닫힌 부분스택}이란 $\mathcal{X}'$가 대수 스택이고
+$\mathcal{X}' \to \mathcal{X}$가 닫힌 몰입인 엄밀한 충만 부분범주
+$\mathcal{X}' \subset \mathcal{X}$이다.
+\item $\mathcal{X}$의 {\it 국소 닫힌 부분스택}이란 $\mathcal{X}'$가 대수 스택이고
+$\mathcal{X}' \to \mathcal{X}$가 몰입인 엄밀한 충만 부분범주
+$\mathcal{X}' \subset \mathcal{X}$이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 정의는 주의해서 사용해야 한다. 즉,
+$f : \mathcal{X} \to \mathcal{Y}$가 대수 스택의 동치이고
+$\mathcal{X}' \subset \mathcal{X}$가 열린 부분스택이더라도,
+부분범주 $f(\mathcal{X}')$가 반드시 $\mathcal{Y}$의 열린 부분스택인 것은 아니다.
+문제는 이것이 {\it 엄밀한} 충만 부분범주가 아닐 수 있다는 점이며,
+이것이 유일한 문제이기도 하다. 이를 형식적으로 진술하면 다음과 같다.
+
+\begin{lemma}
+\label{lemma-substack-image}
+임의의 몰입 $i : \mathcal{Z} \to \mathcal{X}$에 대하여 유일한 국소 닫힌
+부분스택 $\mathcal{X}' \subset \mathcal{X}$가 존재하여, $i$는 동치
+$i' : \mathcal{Z} \to \mathcal{X}'$와 포함 사상
+$\mathcal{X}' \to \mathcal{X}$의 합성으로 분해된다.
+$i$가 닫힌 (각각 열린) 몰입이면 $\mathcal{X}'$는
+$\mathcal{X}$의 닫힌 (각각 열린) 부분스택이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-substacks-presentation}
+$[U/R] \to \mathcal{X}$를 대수 스택의 제시라 하자. 다음 표준적인 전단사가 있다.
+$$
+\mathcal{X}\text{의 국소 닫힌 부분스택 }\mathcal{Z}
+\longrightarrow
+U\text{의 }R\text{-불변 국소 닫힌 부분공간 }Z
+$$
+이는 $\mathcal{Z}$를 $U \times_\mathcal{X} \mathcal{Z}$로 보낸다.
+또한 대수 스택의 사상 $f : \mathcal{Y} \to \mathcal{X}$가
+$\mathcal{Z}$를 통해 분해될 필요충분조건은
+$\mathcal{Y} \times_\mathcal{X} U \to U$가 $Z$를 통해 분해되는 것이다.
+닫힌 부분스택과 열린 부분스택에 대해서도 마찬가지다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-immersion-into-presentation}과
+\ref{lemma-immersion-presentation}에 의해 이 사상이 전단사임을 알 수 있다.
+$\mathcal{Y} \to \mathcal{X}$가 $\mathcal{Z}$를 통해 분해되면 그 밑변환
+$\mathcal{Y} \times_\mathcal{X} U \to U$도 물론 $Z$를 통해 분해된다.
+% P11-E0442: frozen source has ``Converse'' rather than ``Conversely''.
+반대로 $\mathcal{Y} \times_\mathcal{X} U \to U$가 $Z$를 통해 분해되도록 하는
+사상 $\mathcal{Y} \to \mathcal{X}$가 주어졌다고 하자.
+임의의 스킴 $T$와 사상 $T \to \mathcal{Y}$, 즉 $T$ 위에서
+$\mathcal{Y}$의 섬유 범주에 속하는 대상 $y$에 대하여, $y$가 실제로
+$T$ 위에서 $\mathcal{Z}$의 섬유 범주에 속함을 보이겠다.
+실제로 섬유곱 $T \times_\mathcal{X} U$는 대수공간이고
+$T \times_\mathcal{X} U \to T$는 매끄러운 전사사상이다.
+따라서 모든 $i$에 대해 $T_i \to T$가
+$T \times_\mathcal{X} U \to T$를 통해 분해되는 fppf 덮개
+$\{T_i \to T\}$가 존재한다.
+그러면 $T_i \to \mathcal{X}$는 $\mathcal{Y} \times_\mathcal{X} U$를 통해,
+따라서 $Z \subset U$를 통해 분해된다. 그러므로 $y|_{T_i}$는
+$\mathcal{Z}$의 대상이다($Z$는 $\mathcal{X}$ 위에서 $U$와
+$\mathcal{Z}$의 섬유곱이다). $\mathcal{Z}$가 엄밀한 충만 부분스택이므로,
+원하는 대로 $y$는 $\mathcal{Z}$의 대상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-open-substacks}
+$\mathcal{X}$를 대수 스택이라 하자. 대응
+$\mathcal{U} \mapsto |\mathcal{U}|$는 $\mathcal{X}$의 열린 부분스택들과
+$|\mathcal{X}|$의 열린 부분집합들 사이에 포함관계를 보존하는 전단사를 정의한다.
+\end{lemma}
+
+\begin{proof}
+제시 $[U/R] \to \mathcal{X}$를 택하자
+(Algebraic Stacks, Lemma \ref{algebraic-lemma-stack-presentation} 참조).
+보조정리 \ref{lemma-substacks-presentation}에 의해 열린 부분스택들은
+$U$의 $R$-불변 열린 부분스킴들과 대응한다. 한편 보조정리
+\ref{lemma-points-presentation}과 \ref{lemma-topology-points}에 의해
+이들은 $|\mathcal{X}|$의 열린 부분집합들과 전단사로 대응한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-open-image-substack}
+$\mathcal X$를 대수 스택, $U$를 대수공간이라 하고
+$U \to \mathcal X$를 매끄러운 전사사상이라 하자. 열린 몰입
+$V \hookrightarrow U$에 대하여, 대수 스택 $\mathcal Y$, 열린 몰입
+$\mathcal Y \to \mathcal X$, 매끄러운 전사사상 $V \to \mathcal Y$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$(\Sch/S)_{fppf}$의 대상 $T$ 위의 섬유 범주 $\mathcal{Y}_T$를,
+사영 사상 $V \times_{\mathcal X, y} T \to T$가 전사인 모든
+$y \in \Ob(\mathcal{X}_T)$로 이루어진 $\mathcal{X}_T$의 충만 부분범주로
+정하여 준군들로 섬유화된 범주 $\mathcal Y$를 정의한다.
+% P11-E0443: frozen source omits ``is'' before ``surjective''.
+이제 임의의 사상 $x : T \to \mathcal X$에 대하여 $2$-섬유곱
+$T \times_{x, \mathcal X} \mathcal Y$의 $T'$ 위 섬유 범주는
+$V \times_{\mathcal X, y} T' \to T'$가 전사인 삼중항
+$(f : T' \to T, y \in \mathcal{X}_{T'}, f^*x \simeq y)$들로 이루어진다.
+$\mathcal Y \to \mathcal X$가 충실하므로
+$T \times_{x, \mathcal X} \mathcal Y$는 세토이드들로 섬유화되어 있음에
+유의하자(Stacks,
+Lemma \ref{stacks-lemma-2-fibre-product-gives-stack-in-setoids} 참조).
+이제 동형사상 $f^*x \simeq y$는 그림
+$$
+\xymatrix{
+V \times_{\mathcal X, y} T' \ar[d] \ar[r] &
+V \times_{\mathcal X, x} T \ar[r] \ar[d] &
+V \ar[d] \\
+T' \ar[r]^f &
+T \ar[r]^x &
+\mathcal X
+}
+$$
+을 주며 두 정사각형은 모두 데카르트적이다. 사상
+$V \times_{\mathcal X, x} T \to T$는 밑변환에 의해 매끄럽고, 따라서 열린 사상이다.
+그 상을 $T_0 \subset T$라 하자. 데카르트 정사각형들로부터
+$V \times_{\mathcal X, y} T' \to T'$가 전사일 필요충분조건은 $f$의 상이
+$T_0$에 놓이는 것임을 알 수 있다. 따라서
+$T \times_{x, \mathcal X} \mathcal Y$는 $T_0$로 표현되므로 포함 사상
+$\mathcal Y \to \mathcal X$는 열린 몰입이다.
+Algebraic Stacks,
+Lemma \ref{algebraic-lemma-open-fibred-category-is-algebraic}에 의해
+$\mathcal{Y}$는 대수 스택이다.
+마지막으로 사상 $V \to \mathcal X$를 $g$라 쓰면
+$V \times_{\mathcal X} V \to V$는 전사이다(대각선이 단면을 준다).
+따라서 $g$는 $\mathcal{Y}_V \to \mathcal{X}_V$의 상에 속한다. 즉,
+다음 가환 그림에 맞는 사상 $g' : V \to \mathcal{Y}$를 얻는다.
+$$
+\xymatrix{
+V \ar[r] \ar[d]^{g'} & U \ar[d] \\
+\mathcal{Y} \ar[r] & \mathcal{X}
+}
+$$
+$V \times_{g, \mathcal X} \mathcal Y \to V$는 단사사상이고
+$(1, g')$가 단면을 정의하므로 실제로 동형사상이다.
+따라서 $g' : V \to \mathcal Y$는 매끄러운 사상
+$g : V \to \mathcal{X}$의 밑변환이므로 매끄럽다.
+$\mathcal{Y}$의 구성에 의해 이는 전사이며, 이로써 보조정리의 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-union-open-substacks}
+$\mathcal X$를 대수 스택이라 하고, $\mathcal{X}_i \subset \mathcal X$를
+$i \in I$로 지표화된 열린 부분스택들의 모음이라 하자. 그러면 열린 부분스택
+$\bigcup_{i\in I} \mathcal{X}_i \subset \mathcal X$가 존재하여,
+$\mathcal{X}_i$들은 이를 덮는 열린 부분스택들이다.
+\end{lemma}
+
+\begin{proof}
+$(\Sch/S)_{fppf}$의 대상 $T$ 위의 섬유 범주를, 사상
+$\coprod_{i \in I} (\mathcal{X}_i \times_{\mathcal X} T) \to T$가
+전사인 모든 $x \in \Ob(\mathcal{X}_T)$로 이루어진
+$\mathcal{X}_T$의 충만 부분범주로 정하여 섬유화된 부분범주
+$\mathcal{X}' = \bigcup_{i \in I} \mathcal{X}_i$를 정의한다.
+$x_i \in \Ob((\mathcal{X}_i)_T)$라 하자. 그러면 $(x_i, 1)$은
+$\mathcal{X}_i \times_{\mathcal X} T \to T$의 단면을 주므로
+동형사상을 얻는다. 따라서 $\mathcal{X}_i \subset \mathcal{X}'$는 충만 부분범주이다.
+이제 $x \in \Ob(\mathcal{X}_T)$라 하자. 그러면
+$\mathcal{X}_i \times_{\mathcal X} T$는 열린 부분스킴 $T_i \subset T$로
+표현가능하다. $2$-섬유곱 $\mathcal{X}' \times_{\mathcal X} T$의
+$T'$ 위 섬유는
+$\coprod (\mathcal{X}_i \times_{\mathcal X, y} T') \to T'$가 전사인
+$(y \in \mathcal{X}_{T'}, f : T' \to T, f^*x \simeq y)$들로 이루어진다.
+동형사상 $f^*x \simeq y$는 동형사상
+$\mathcal{X}_i \times_{\mathcal X, y} T' \simeq T_i \times_T T'$를 유도한다.
+따라서 $T_i \times_T T'$들이 $T'$를 덮을 필요충분조건은 $f$의 상이
+$\bigcup T_i$에 놓이는 것이다. 그러므로 다음 그림을 얻는다.
+$$
+\xymatrix{
+T_i \ar[r] \ar[d] &
+\bigcup T_i \ar[r] \ar[d] &
+T \ar[d] \\
+\mathcal{X}_i \ar[r] &
+\mathcal{X}' \ar[r] &
+\mathcal{X}
+}
+$$
+두 정사각형은 모두 데카르트적이다. Algebraic Stacks,
+Lemma \ref{algebraic-lemma-open-fibred-category-is-algebraic}에 의해
+% P11-E0444: frozen source writes \mathcal{X'} instead of \mathcal{X}'.
+$\mathcal{X'} \subset \mathcal{X}$는 대수적이며 열린 부분스택이다.
+% P11-E0445: frozen source omits the predicate ``is surjective''.
+또한 위 데카르트 정사각형들로부터 사상
+$\coprod_{i \in I} \mathcal{X}_i \to \mathcal{X}'$가 전사임도 분명하다.
+이로써 보조정리의 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quasi-compact-finite-subcover}
+$\mathcal X$를 대수 스택이라 하고 $\mathcal X' \subset \mathcal X$를
+준콤팩트 열린 부분스택이라 하자. 보조정리 \ref{lemma-union-open-substacks}에서와
+같이 합집합을 정의할 때,
+$\mathcal{X}' \subset \bigcup_{i \in I} \mathcal{X}_i$를 만족하는
+$i \in I$로 지표화된 열린 부분스택들의 모음
+$\mathcal{X}_i \subset \mathcal X$가 주어졌다고 하자.
+그러면 $\mathcal{X}' \subset \bigcup_{i \in I'} \mathcal{X}_i$를 만족하는
+유한 부분집합 $I' \subset I$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal X$가 대수적이므로 어떤 스킴 $U$와 매끄러운 전사사상
+$U \to \mathcal X$가 존재한다. $U_i \subset U$를
+$\mathcal{X}_i \times_{\mathcal X} U$를 표현하는 열린 부분스킴,
+$U' \subset U$를 $\mathcal{X}' \times_{\mathcal X} U$를 표현하는
+열린 부분스킴이라 하자. 가정에 의해 $U'\subset \bigcup_{i\in I} U_i$이다.
+보조정리 \ref{lemma-quasi-compact-stack}의 증명에 의해
+$V \to \mathcal{X}'$가 매끄러운 전사사상이 되도록 하는 준콤팩트 열린
+부분집합 $V \subset U'$가 존재한다. 따라서
+$V \subset \bigcup_{i \in I'} U_i$를 만족하는 유한 부분집합
+$I' \subset I$가 존재한다. 이제
+$\mathcal{X}' \subset \bigcup_{i \in I'} \mathcal{X}_i$임을 보이겠다.
+$T \in \Ob((\Sch/S)_{fppf})$와
+$x \in \Ob(\mathcal{X}'_T)$를 택하자.
+$\mathcal{X}' \to \mathcal{X}$가 단사사상이므로 다음 데카르트 정사각형들을 얻는다.
+$$
+\xymatrix{
+V \times_\mathcal{X} T \ar[r] \ar[d] &
+T \ar[d]^x \ar@{=}[r] &
+T \ar[d]^x \\
+V \ar[r] &
+\mathcal{X}' \ar[r] &
+\mathcal X
+}
+$$
+밑변환에 의해 $V \times_{\mathcal X} T \to T$는 전사이다. 따라서
+$\bigcup_{i \in I'} U_i \times_{\mathcal X} T \to T$도 전사이다.
+$T_i \subset T$를 $\mathcal{X}_i \times_{\mathcal X} T$를 표현하는
+열린 부분스킴이라 하자. 형식적인 논증으로 다음 데카르트 정사각형을 얻는다.
+$$
+\xymatrix{
+U_i \times_{\mathcal{X}_i} T_i \ar[r] \ar[d] &
+U \times_{\mathcal X} T \ar[d] \\
+T_i \ar[r] & T
+}
+$$
+밑변환에 의해 수직 화살표들은 전사이다.
+$U_i \times_{\mathcal{X}_i} T_i \simeq U_i \times_{\mathcal X} T$이므로
+$\bigcup_{i \in I'} T_i = T$를 얻는다. 따라서 합집합의 정의에 의해
+$x$는 $(\bigcup_{i\in I'} \mathcal{X}_i)_T$의 대상이다.
+포함관계 $\mathcal{X}' \subset \bigcup_{i \in I'} \mathcal{X}_i$는
+자동적으로 열린 부분스택임에 유의하자.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-zariski-open-cover-stack-is-space}
+$\mathcal X$를 대수 스택이라 하고, $\mathcal{X}_i$ ($i \in I$)를
+$\mathcal{X}$의 열린 부분스택들의 집합이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{X} = \bigcup_{i \in I} \mathcal{X}_i$이다.
+\item 각 $\mathcal{X}_i$는 대수공간이다.
+\end{enumerate}
+그러면 $\mathcal{X}$는 대수공간이다.
+\end{lemma}
+
+\begin{proof}
+사상 $\coprod_{i \in I} \mathcal{X}_i \to \mathcal{X}$와
+$\text{id} : \mathcal{X} \to \mathcal{X}$에
+Stacks, Lemma \ref{stacks-lemma-stack-in-setoids-descent}를 적용하면
+$\mathcal{X}$는 세토이드에서의 스택이다. 따라서 $\mathcal{X}$는 대수공간이다
+(Algebraic Stacks,
+Proposition \ref{algebraic-proposition-algebraic-stack-no-automorphisms} 참조).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-zariski-open-cover-stack-is-scheme}
+$\mathcal X$를 대수 스택이라 하고, $\mathcal{X}_i$ ($i \in I$)를
+$\mathcal{X}$의 열린 부분스택들의 집합이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{X} = \bigcup_{i \in I} \mathcal{X}_i$이다.
+\item 각 $\mathcal{X}_i$는 스킴이다.
+\end{enumerate}
+그러면 $\mathcal{X}$는 스킴이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-zariski-open-cover-stack-is-space}에 의해
+$\mathcal{X}$는 대수공간이다. 모든 대수공간에는 스킴인 최대 열린 부분공간이
+존재하므로(Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-subscheme} 참조),
+$\mathcal{X}$는 스킴이다.
+\end{proof}
+
+
+\noindent
+다음 보조정리는 More on Groupoids,
+Lemma \ref{more-groupoids-lemma-local-source}의 유사물이다.
+
+\begin{lemma}
+\label{lemma-local-source}
+$\mathcal{P}, \mathcal{Q}, \mathcal{R}$을 대수공간의 사상들의 성질이라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $\mathcal{P}, \mathcal{Q}, \mathcal{R}$은 공역에 대해 fppf 국소적이고
+임의의 밑변환 아래 안정적이다.
+\item $\text{smooth} \Rightarrow \mathcal{R}$이다.
+\item $\mathcal{Q}$를 갖는 임의의 사상 $f : X \to Y$에 대하여,
+$f|_{W(\mathcal{P}, f)}$가 $\mathcal{P}$를 갖도록 하는 최대 열린 부분공간
+$W(\mathcal{P}, f) \subset X$가 존재한다.
+\item $\mathcal{Q}$를 갖는 임의의 사상 $f : X \to Y$와
+$\mathcal{R}$을 갖는 임의의 사상 $Y' \to Y$에 대하여
+$Y' \times_Y W(\mathcal{P}, f) = W(\mathcal{P}, f')$이다. 여기서
+$f' : X_{Y'} \to Y'$는 $f$의 밑변환이다.
+\end{enumerate}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수공간으로 표현가능한 대수 스택의
+사상이라 하고, $f$가 $\mathcal{Q}$를 갖는다고 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item[(A)] $f|_{\mathcal{X}'}$가 $\mathcal{P}$를 갖도록 하는 최대 열린
+부분스택 $\mathcal{X}' \subset \mathcal{X}$가 존재한다.
+\item[(B)] $\mathcal{Z} \to \mathcal{Y}$가 $\mathcal{R}$을 갖는,
+대수공간으로 표현가능한 대수 스택의 사상이면,
+$\mathcal{Z} \times_\mathcal{Y} \mathcal{X}'$는 밑변환
+$\text{id}_\mathcal{Z} \times f$가 성질 $\mathcal{P}$를 갖게 하는
+$\mathcal{Z} \times_\mathcal{Y} \mathcal{X}$의 최대 열린 부분스택이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$V$를 스킴이라 하고 $V \to \mathcal{Y}$를 매끄러운 전사사상으로 택하자.
+$U = V \times_\mathcal{Y} \mathcal{X}$라 놓고 $f' : U \to V$를
+$f$의 밑변환이라 하자. 대수공간의 사상 $f' : U \to V$는
+성질 $\mathcal{Q}$를 갖는다. 따라서 가정 (3)에 의해 열린 부분공간
+$W(\mathcal{P}, f') \subset U$를 얻는다. 이제
+$U \times_\mathcal{X} U =
+(V \times_\mathcal{Y} V) \times_\mathcal{Y} \mathcal{X}$
+이므로 사상 $f'' : U \times_\mathcal{X} U \to V \times_\mathcal{Y} V$는
+두 사영 $V \times_\mathcal{Y} V \to V$ 중 어느 것을 통해서도 얻는
+$f$의 밑변환이다. $V$의 선택에 의해 이 사영들은 매끄럽고,
+따라서 (2)에 의해 성질 $\mathcal{R}$을 갖는다. 그러므로 (4)에 의해
+두 사영 $\text{pr}_i : U \times_\mathcal{X} U \to U$ 아래에서
+$W(\mathcal{P}, f')$의 역상들이 일치한다. 다시 말해,
+$W(\mathcal{P}, f')$는 $U$의 $R$-불변 부분공간이다. 여기서
+$R = U \times_\mathcal{X} U$이다.
+% P11-E0446: frozen source uses W(P,f) instead of W(P,f') at this and later loci.
+보조정리 \ref{lemma-immersion-into-presentation}에 의해
+$W(\mathcal{P}, f)$에 대응하는 $\mathcal{X}$의 열린 부분스택을
+$\mathcal{X}'$라 하자. 구성에 의해
+$W(\mathcal{P}, f') = \mathcal{X}' \times_\mathcal{Y} V$이므로
+보조정리 \ref{lemma-check-property-covering}에 의해
+$f|_{\mathcal{X}'}$는 성질 $\mathcal{P}$를 갖는다.
+또한 $W(\mathcal{P}, f)$에 대해 같은 최대성이 성립하므로
+$\mathcal{X}'$는 $f|_{\mathcal{X}'}$가 $\mathcal{P}$를 갖게 하는
+최대 열린 부분스택이다. 이로써 (A)가 증명되었다.
+
+\medskip\noindent
+마지막으로 $\mathcal{Z} \to \mathcal{Y}$가 성질 $\mathcal{R}$을 갖는,
+대수공간으로 표현가능한 대수 스택의 사상이면
+$T = V \times_\mathcal{Y} \mathcal{Z}$라 놓는다. 그러면
+$T \to V$는 성질 $\mathcal{R}$을 갖는 대수공간의 사상이다.
+$f'_T : T \times_V U \to T$를 $f'$의 밑변환이라 하자.
+(4)에 의해 다시 $W(\mathcal{P}, f'_T)$는 $T \times_V U$에서
+$W(\mathcal{P}, f)$의 역상임을 알 수 있다. 이는 (B)를 함의한다.
+일부 세부사항은 생략한다.
+\end{proof}
+
+\begin{remark}
+\label{remark-local-source-warning}
+주의:
+보조정리 \ref{lemma-local-source}는 주의해서 사용해야 한다.
+예를 들어 $\mathcal{P}=$``평탄'', $\mathcal{Q}=$``공집합'',
+$\mathcal{R}=$``평탄하고 국소 유한 표시''인 경우에 적용된다.
+그러나 대수공간의 사상 $f : X \to Y$가 주어졌을 때
+$f|_W$가 평탄인 최대 열린 부분공간 $W \subset X$는
+$f$가 평탄인 점들의 집합이 {\it 아니다}!
+\end{remark}
+
+\begin{remark}
+\label{remark-local-source-apply}
+주의 \ref{remark-local-source-warning}에도 불구하고
+보조정리 \ref{lemma-local-source}를 모호함 없이 사용할 수 있는 경우들이 있다.
+그 목록을 제시한다. 각 경우에 가정 (1)과 (2)의 확인은 생략하고,
+(3)과 (4)를 함의하는 참고문헌을 제시한다. 목록은 다음과 같다.
+\begin{enumerate}
+\item
+\label{item-rel-dim-leq-d}
+$\mathcal{Q} = $``국소 유한형'', $\mathcal{R} = \emptyset$,
+$\mathcal{P} =$``상대 차원 $\leq d$''.
+다음을 보라.
+Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-relative-dimension} 및
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-openness-bounded-dimension-fibres}와
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change}.
+\item
+\label{item-loc-quasi-finite}
+$\mathcal{Q} =$``국소 유한형'', $\mathcal{R} = \emptyset$,
+$\mathcal{P} =$``국소 준유한''.
+이는 앞 항목에서 $d = 0$인 경우이다. 다음을 보라.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite-rel-dimension-0}.
+한편 성질 (3)과 (4)는 다음에 명시되어 있다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-quasi-finite-part}.
+\item
+\label{item-unramified}
+$\mathcal{Q} = $``국소 유한형'', $\mathcal{R} = \emptyset$,
+$\mathcal{P} =$``비분기''. 이는 다음 보조정리이다.
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-where-unramified}.
+\item
+\label{item-flat}
+$\mathcal{Q} =$``국소 유한 표시'',
+$\mathcal{R} =$``평탄하고 국소 유한 표시'',
+$\mathcal{P} =$``평탄''. 다음을 보라.
+More on Morphisms of Spaces, Theorem
+\ref{spaces-more-morphisms-theorem-openness-flatness}와
+Lemma \ref{spaces-more-morphisms-lemma-flat-locus-base-change}.
+여기서는 $f$가 $\mathcal{Q}$를 가질 때에만 이 열린 부분집합을 고려하므로,
+$W(\mathcal{P}, f)$는 항상 사상 $f$가 평탄인 점들의 집합과 정확히 일치한다
+(앞의 문헌 참조).
+\item
+\label{item-etale}
+$\mathcal{Q} =$``국소 유한 표시'',
+$\mathcal{R} =$``평탄하고 국소 유한 표시'',
+$\mathcal{P}=$``에탈''. 이는 (\ref{item-unramified})과
+(\ref{item-flat})를 결합하여 따른다. 평탄하고 국소 유한 표시인 비분기
+사상은 에탈이기 때문이다. 다음을 보라.
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-unramified-flat-lfp-etale}.
+\item 필요에 따라 여기에 더 추가한다(More on Groupoids,
+Remark \ref{more-groupoids-remark-local-source-apply}의 더 긴 목록과 비교하라).
+\end{enumerate}
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+\section{축약 대수 스택}
+\label{section-reduced}
+
+\noindent
+제\ref{section-types-properties}절에서 이미 축약 대수 스택을 정의했다.
+
+\begin{lemma}
+\label{lemma-reduced-closed-substack}
+$\mathcal{X}$를 대수 스택이라 하고 $T \subset |\mathcal{X}|$를 닫힌 부분집합이라 하자.
+다음 성질들을 갖는 유일한 닫힌 부분스택
+$\mathcal{Z} \subset \mathcal{X}$가 존재한다.
+(a) $|\mathcal{Z}| = T$이고, (b) $\mathcal{Z}$는 축약이다.
+\end{lemma}
+
+\begin{proof}
+$U$가 대수공간인 매끄러운 전사사상 $U \to \mathcal{X}$를 택하자.
+$R = U \times_\mathcal{X} U$라 놓으면 제시 $[U/R] \to \mathcal{X}$를 얻는다
+(Algebraic Stacks, Lemma \ref{algebraic-lemma-stack-presentation} 참조).
+통상과 같이 두 매끄러운 사영을 $s, t : R \to U$라 쓰자.
+보조정리 \ref{lemma-points-presentation}에 의해 $T$는
+$|s|^{-1}(T') = |t|^{-1}(T')$를 만족하는 닫힌 부분집합
+$T' \subset |U|$에 대응한다. $Z \subset U$를 $T'$ 위의 축약 유도
+대수공간 구조라 하자(Properties of Spaces,
+Definition \ref{spaces-properties-definition-reduced-induced-space} 참조).
+섬유곱 $Z \times_{U, t} R$와 $R \times_{s, U} Z$는 $R$의 닫힌 부분공간이다
+(Spaces, Lemma \ref{spaces-lemma-base-change-immersions}).
+사영 $Z \times_{U, t} R \to Z$와 $R \times_{s, U} Z \to Z$는
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-smooth}에 의해 매끄럽다.
+따라서 $Z$가 축약이므로 $Z \times_{U, t} R$와
+$R \times_{s, U} Z$도 축약이다
+(주의 \ref{remark-list-properties-local-smooth-topology} 참조).
+그런데
+% P11-E0447: final point-set bars are absent in the frozen source.
+$$
+|Z \times_{U, t} R| = |t|^{-1}(T') = |s|^{-1}(T') = R \times_{s, U} Z
+$$
+이므로 Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-reduced-closed-subspace}의 유일성에 의해
+$Z \times_{U, t} R = R \times_{s, U} Z$이다.
+따라서 $Z$는 $U$의 $R$-불변 닫힌 부분공간이다.
+보조정리 \ref{lemma-substacks-presentation}의 대응에 의해
+$Z = \mathcal{Z} \times_\mathcal{X} U$를 만족하는 닫힌 부분스택
+$\mathcal{Z} \subset \mathcal{X}$를 얻는다. 그러면
+$[Z/R_Z] \to \mathcal{Z}$는 제시이다
+(보조정리 \ref{lemma-immersion-into-presentation}).
+따라서 $|\mathcal{Z}| = |Z|/|R_Z| = |T'|/\sim$은 주어진 닫힌 부분집합
+$T$이다. 유일성의 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-reduced-stack-determined-by-points}
+$\mathcal{X}$를 대수 스택이라 하자.
+$\mathcal{X}' \subset \mathcal{X}$가 닫힌 부분스택이고,
+$\mathcal{X}$가 축약이며 $|\mathcal{X}'| = |\mathcal{X}|$이면
+$\mathcal{X}' = \mathcal{X}$이다.
+\end{lemma}
+
+\begin{proof}
+$U$가 스킴인 제시 $[U/R] \to \mathcal{X}$를 택하자.
+$\mathcal{X}$가 축약이므로 $U$도 축약이다(축약 대수 스택의 정의에 의함).
+보조정리 \ref{lemma-substacks-presentation}에 의해 $\mathcal{X}'$는
+$R$-불변 닫힌 부분스킴 $Z \subset U$에 대응한다.
+이제 $|Z| \subset |U|$는 $|\mathcal{X}'|$의 역상이므로
+$|Z| = |U|$이다. 따라서 $Z$는 $U$와 기저 점집합이 같은 닫힌 부분스킴이다.
+Schemes, Lemma \ref{schemes-lemma-map-into-reduction}에 의해
+사상 $\text{id}_U : U \to U$는 $Z \to U$를 통해 분해된다. 그러므로
+$Z = U$, 즉 $\mathcal{X}' = \mathcal{X}$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-map-into-reduction}
+$\mathcal{X}$와 $\mathcal{Y}$를 대수 스택이라 하자.
+% P11-E0448: frozen source omits punctuation after ``closed substack''.
+$\mathcal{Z} \subset \mathcal{X}$를 닫힌 부분스택이라 하자.
+$\mathcal{Y}$가 축약이라고 가정하자. 사상
+$f : \mathcal{Y} \to \mathcal{X}$가 $\mathcal{Z}$를 통해 분해될
+필요충분조건은 $f(|\mathcal{Y}|) \subset |\mathcal{Z}|$인 것이다.
+\end{lemma}
+
+\begin{proof}
+$f(|\mathcal{Y}|) \subset |\mathcal{Z}|$라 가정하고
+$\mathcal{Y} \times_\mathcal{X} \mathcal{Z} \to \mathcal{Y}$를 생각하자.
+보조정리 \ref{lemma-base-change-immersion}과
+\ref{lemma-substack-image}에 의해, $\mathcal{Y}$의 어떤 닫힌 부분스택
+$\mathcal{Y}'$에 대한 동치
+$\mathcal{Y} \times_\mathcal{X} \mathcal{Z} \to \mathcal{Y}'$가 존재한다.
+보조정리 \ref{lemma-points-cartesian},
+\ref{lemma-monomorphism-injective-points},
+\ref{lemma-immersion-monomorphism}을 사용하면
+$|\mathcal{Y}'| = |\mathcal{Y}|$임을 알 수 있다.
+따라서 보조정리 \ref{lemma-reduced-stack-determined-by-points}로 환원된다.
+\end{proof}
+
+\begin{definition}
+\label{definition-reduced-induced-stack}
+$\mathcal{X}$를 대수 스택이라 하고 $Z \subset |\mathcal{X}|$를
+닫힌 부분집합이라 하자. $Z$와 같은 $|\mathcal{Z}|$를 갖는
+$\mathcal{X}$의 닫힌 부분스택 $\mathcal{Z}$를
+{$Z$ 위의 \it 대수 스택 구조}라 한다.
+$Z$ 위의 {\it 축약 유도 대수 스택 구조}란
+보조정리 \ref{lemma-reduced-closed-substack}에서 구성한 구조이다.
+{$\mathcal{X}$의 \it 축약 $\mathcal{X}_{red}$}이란
+$|\mathcal{X}|$ 위의 축약 유도 대수 스택 구조이다.
+\end{definition}
+
+\noindent
+실제로 이를 사용하여 국소 닫힌 부분집합 위의 축약 유도 대수 스택 구조를
+정의할 수 있다.
+
+\begin{remark}
+\label{remark-stack-structure-locally-closed-subset}
+% P11-E0449: frozen source inconsistently alternates X and \mathcal{X}.
+$X$를 대수 스택이라 하자. $T \subset |\mathcal{X}|$를 국소 닫힌
+부분집합이라 하고, $\partial T$를 위상공간 $|\mathcal{X}|$에서
+$T$의 경계라 하자. 식으로 쓰면
+$$
+\partial T = \overline{T} \setminus T.
+$$
+$\mathcal{U} \subset \mathcal{X}$를
+$|\mathcal{U}| = |\mathcal{X}| \setminus \partial T$인 $X$의 열린 부분스택이라 하자
+(보조정리 \ref{lemma-open-substacks} 참조).
+$\mathcal{Z}$를 축약 유도 닫힌 부분공간 구조를 취하여 얻는,
+$|\mathcal{Z}| = T$를 만족하는 $\mathcal{U}$의 축약 닫힌 부분스택이라 하자
+(정의 \ref{definition-reduced-induced-stack} 참조).
+구성에 의해 $\mathcal{Z} \to \mathcal{U}$는 대수 스택의 닫힌 몰입이고
+$\mathcal{U} \to \mathcal{X}$는 열린 몰입이다. 따라서 보조정리
+\ref{lemma-composition-immersion}에 의해
+$\mathcal{Z} \to \mathcal{X}$는 대수 스택의 몰입이다.
+$\mathcal{Z}$가 축약 대수 스택이고 $|X|$의 부분집합으로서
+$|\mathcal{Z}| = T$임에 유의하자. 때때로 $\mathcal{Z}$를
+$T$ 위의 {\it 축약 유도 부분스택 구조}라고 한다.
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{잔여 gerbe}
+\label{section-residual-gerbe}
+
+\noindent
+Stacks 프로젝트에서는 점 $x \in |\mathcal{X}|$에서 대수 스택
+$\mathcal{X}$의 {\it 잔여 gerbe}를 대수 스택의 단사사상
+$m_x : \mathcal{Z}_x \to \mathcal{X}$로 정의하고자 한다. 여기서
+$\mathcal{Z}_x$는 유일한 점을 갖는 축약 대수 스택이고, 그 점은
+$m_x$에 의해 $x$로 보내진다. 이 개념에는 여러 문제가 있음이 드러난다.
+일반적으로 존재성도 유일성도 명확하지 않다. 우리는 대수 스택
+$\mathcal{Z}_x$에 조금 더 강한 조건을 부과하여 유일성 문제를 해결한다.
+유일한 점을 갖는 축약 대수 스택에 관한 몇 가지 간단한 보조정리를 통해
+이를 더 자세히 논의한다.
+
+\begin{lemma}
+\label{lemma-flat-cover-by-field}
+$\mathcal{Z}$를 대수 스택, $k$를 체라 하고
+$\Spec(k) \to \mathcal{Z}$가 전사이고 평탄하다고 하자. 그러면 체 $k'$에 대한
+임의의 사상 $\Spec(k') \to \mathcal{Z}$도 전사이고 평탄하다.
+\end{lemma}
+
+\begin{proof}
+다음 섬유곱 정사각형을 생각하자.
+$$
+\xymatrix{
+T \ar[d] \ar[r] & \Spec(k) \ar[d] \\
+\Spec(k') \ar[r] & \mathcal{Z}
+}
+$$
+$T \to \Spec(k')$는 평탄 전사이므로 $T$는 공집합이 아니다.
+한편 $k$가 체이므로 $T \to \Spec(k)$는 평탄하다. 따라서
+$T \to \mathcal{Z}$는 평탄 전사이다. Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-flat-permanence}
+(제\ref{section-properties-morphisms}절의 논의를 통하여)에 의해
+$\Spec(k') \to \mathcal{Z}$는 평탄하다. 가정에 의해
+$|\mathcal{Z}|$가 한원소 집합이므로 전사임은 분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-unique-point}
+$\mathcal{Z}$를 대수 스택이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $\mathcal{Z}$는 축약이고 $|\mathcal{Z}|$는 한원소 집합이다.
+\item 어떤 체 $k$와 평탄 전사사상 $\Spec(k) \to \mathcal{Z}$가 존재한다.
+\item 어떤 체 $k$와 국소 유한형인 평탄 전사사상
+$\Spec(k) \to \mathcal{Z}$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하자. $W$를 스킴이라 하고 $W \to \mathcal{Z}$를
+매끄러운 전사사상이라 하자. 그러면 $W$는 축약 스킴이다.
+$\eta \in W$를 $W$의 한 기약 성분의 일반점이라 하자.
+$W$가 축약이므로 $\mathcal{O}_{W, \eta} = \kappa(\eta)$이다.
+따라서 표준 사상 $\eta = \Spec(\kappa(\eta)) \to W$는 평탄하다.
+합성 $\eta \to \mathcal{Z}$도 평탄하다(Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-composition-flat} 참조).
+$|\mathcal{Z}|$가 한원소 집합이므로 이는 전사이기도 하다.
+즉, (2)가 성립한다.
+
+\medskip\noindent
+(2)를 가정하자. $W$를 스킴이라 하고 $W \to \mathcal{Z}$를
+매끄러운 전사사상이라 하자. 체 $k$와 평탄 전사사상
+$\Spec(k) \to \mathcal{Z}$를 택하자. 그러면
+$W \times_\mathcal{Z} \Spec(k)$는 $k$ 위에서 매끄러운 대수공간이므로
+정칙이고(Spaces over Fields,
+Lemma \ref{spaces-over-fields-lemma-smooth-regular} 참조), 특히 축약이다.
+$W \times_\mathcal{Z} \Spec(k) \to W$가 평탄 전사이므로 $W$는 축약이다
+(Descent on Spaces, Lemma \ref{spaces-descent-lemma-descend-reduced}).
+즉, (1)이 성립한다.
+
+\medskip\noindent
+(3)이 (2)를 함의함은 분명하다. 마지막으로 (2)를 가정하자.
+공집합이 아닌 아핀 스킴 $W$와 매끄러운 사상
+$W \to \mathcal{Z}$를 택하자. 닫힌점 $w \in W$를 택하고
+$k = \kappa(w)$라 놓자. 합성
+$$
+\Spec(k) \xrightarrow{w} W \longrightarrow \mathcal{Z}
+$$
+은 Morphisms of Spaces의 보조정리
+\ref{spaces-morphisms-lemma-composition-finite-type}과
+\ref{spaces-morphisms-lemma-smooth-locally-finite-type}에 의해 국소 유한형이다.
+또한 보조정리 \ref{lemma-flat-cover-by-field}에 의해 평탄 전사이다.
+따라서 (3)이 성립한다.
+\end{proof}
+
+\noindent
+다음 보조정리는 앞 보조정리보다 조금 더 좋은 한원소 대수 스택들의 부류를 골라낸다.
+
+\begin{lemma}
+\label{lemma-unique-point-better}
+$\mathcal{Z}$를 대수 스택이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $\mathcal{Z}$는 축약이고 국소 뇌터이며
+$|\mathcal{Z}|$는 한원소 집합이다.
+\item 어떤 체 $k$와 국소 유한 표시인 평탄 전사사상
+$\Spec(k) \to \mathcal{Z}$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)가 성립한다고 하자. 보조정리 \ref{lemma-unique-point}에 의해
+$\mathcal{Z}$는 축약이고 $|\mathcal{Z}|$는 한원소 집합이다.
+$W$를 스킴이라 하고 $W \to \mathcal{Z}$를 매끄러운 전사사상이라 하자.
+체 $k$와 국소 유한 표시인 평탄 전사사상
+$\Spec(k) \to \mathcal{Z}$를 택하자. 그러면
+$W \times_\mathcal{Z} \Spec(k)$는 $k$ 위에서 매끄러운 대수공간이므로
+국소 뇌터이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian} 참조).
+$W \times_\mathcal{Z} \Spec(k) \to W$가 평탄하고 전사이며
+국소 유한 표시이므로
+$\{W \times_\mathcal{Z} \Spec(k) \to W\}$는 fppf 덮개이다.
+따라서 $W$는 국소 뇌터이다(Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descend-locally-Noetherian}). 즉, (1)이 성립한다.
+
+\medskip\noindent
+(1)을 가정하자. 공집합이 아닌 아핀 스킴 $W$와 매끄러운 사상
+$W \to \mathcal{Z}$를 택하자. 닫힌점 $w \in W$를 택하고
+$k = \kappa(w)$라 놓자. $W$가 국소 뇌터이므로 사상
+$w : \Spec(k) \to W$는 유한 표시이다(Morphisms,
+Lemma \ref{morphisms-lemma-closed-immersion-finite-presentation} 참조).
+따라서 합성
+$$
+\Spec(k) \xrightarrow{w} W \longrightarrow \mathcal{Z}
+$$
+은 Morphisms of Spaces의 보조정리
+\ref{spaces-morphisms-lemma-composition-finite-presentation}과
+\ref{spaces-morphisms-lemma-smooth-locally-finite-presentation}에 의해
+국소 유한 표시이다. 또한 보조정리 \ref{lemma-flat-cover-by-field}에 의해
+평탄 전사이다. 따라서 (2)가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-monomorphism-into-point}
+$\mathcal{Z}' \to \mathcal{Z}$를 대수 스택의 단사사상이라 하자.
+어떤 체 $k$와 국소 유한 표시인 평탄 전사사상
+$\Spec(k) \to \mathcal{Z}$가 존재한다고 가정하자. 그러면
+$\mathcal{Z}'$는 공집합이거나 $\mathcal{Z}' \to \mathcal{Z}$는 동치이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{Z}'$가 공집합이 아니라고 가정해도 된다. 이 경우 섬유곱
+$T = \mathcal{Z}' \times_\mathcal{Z} \Spec(k)$는 공집합이 아니다
+(보조정리 \ref{lemma-points-cartesian} 참조).
+이제 $T$는 대수공간이고 사영 $T \to \Spec(k)$는 단사사상이다.
+따라서 $T = \Spec(k)$이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-toward-field} 참조).
+그러므로 $\Spec(k) \to \mathcal{Z}$는 $\mathcal{Z}'$를 통해 분해된다.
+사상 $z : \Spec(k) \to \mathcal{Z}$가 $\Spec(k)$ 위의 대상 $\xi$로
+주어진다고 하자. 방금 $\xi$가 $\Spec(k)$ 위에서 $\mathcal{Z}'$의
+어떤 대상 $\xi'$와 동형임을 보였다. $z$가 전사이고 평탄하며
+국소 유한 표시이므로 임의의 스킴 위에서 $\mathcal{Z}$의 모든 대상은
+fppf 국소적으로 $\xi$의 당김과, 따라서 $\xi'$의 당김과 동형이다.
+준군에서의 스택에 대한 대상의 하강에 의해 이는
+$\mathcal{Z}' \to \mathcal{Z}$가 본질적 전사임을 뜻한다
+(완전충실하기도 하다. 보조정리 \ref{lemma-monomorphism} 참조).
+따라서 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-improve-unique-point}
+$\mathcal{Z}$를 대수 스택이라 하고, $\mathcal{Z}$가 보조정리
+\ref{lemma-unique-point}의 동치 조건들을 만족한다고 하자.
+그러면 $\mathcal{Z}'$가 보조정리 \ref{lemma-unique-point-better}의
+동치 조건들을 만족하는 대수 스택이 되도록 하는 유일한 엄밀한 충만 부분범주
+$\mathcal{Z}' \subset \mathcal{Z}$가 존재한다. 포함 사상
+$\mathcal{Z}' \to \mathcal{Z}$는 대수 스택의 단사사상이다.
+\end{lemma}
+
+\begin{proof}
+마지막 주장은 첫 번째 주장과 보조정리 \ref{lemma-monomorphism}으로부터 즉시 따른다.
+체 $k$와 전사이고 평탄하며 국소 유한형인 사상
+$\Spec(k) \to \mathcal{Z}$를 택하자.
+$U = \Spec(k)$와 $R = U \times_\mathcal{Z} U$라 놓자.
+사영 $s, t : R \to U$는 국소 유한형이다. $U$가 체의 스펙트럼이므로
+$s, t$는 평탄하고 국소 유한 표시이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-noetherian-finite-type-finite-presentation}에 의함).
+Criteria for Representability,
+Theorem \ref{criteria-theorem-flat-groupoid-gives-algebraic-stack}에 의해
+$\mathcal{Z}' = [U/R]$는 대수 스택이다.
+Algebraic Stacks, Lemma \ref{algebraic-lemma-map-space-into-stack}에 의해
+표준 사상
+$$
+f : \mathcal{Z}' \longrightarrow \mathcal{Z}
+$$
+를 얻고, 이는 완전충실하다. 따라서 이 사상은 대수공간으로 표현가능하고
+(Algebraic Stacks, Lemma
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces} 참조),
+단사사상이다(보조정리 \ref{lemma-monomorphism} 참조).
+Criteria for Representability,
+Lemma \ref{criteria-lemma-flat-quotient-flat-presentation}에 의해
+사상 $U \to \mathcal{Z}'$는 전사이고 평탄하며 국소 유한 표시이다.
+따라서 $\mathcal{Z}'$는 보조정리 \ref{lemma-unique-point-better}의
+동치 조건들을 만족하는 대수 스택이다.
+Algebraic Stacks, Lemma \ref{algebraic-lemma-equivalent}에 의해
+$\mathcal{Z}'$를 $\mathcal{Z}$ 안에서의 그 본질적 상으로 대체할 수 있다.
+따라서 $\mathcal{Z}' \subset \mathcal{Z}$의 유일성을 제외한
+보조정리의 모든 주장을 증명했다. $\mathcal{Z}'' \subset \mathcal{Z}$가
+그러한 두 번째 대수 스택이라고 하자.
+그러면 사영
+$$
+\mathcal{Z}'
+\longleftarrow
+\mathcal{Z}' \times_\mathcal{Z} \mathcal{Z}''
+\longrightarrow
+\mathcal{Z}''
+$$
+은 단사사상들이다. 보조정리 \ref{lemma-points-cartesian}에 의해
+가운데 대수 스택은 공집합이 아니다. 따라서 보조정리
+\ref{lemma-monomorphism-into-point}에 의해 두 사영은 동형사상이다.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{example}
+\label{example-distinct}
+다음은 보조정리 \ref{lemma-improve-unique-point}에서 구성한 사상이
+동형사상이 아닌 예이다. 이 예는 정의 \ref{definition-residual-gerbe}에서
+잔여 gerbe가 국소 뇌터라는 조건을 부과해야 함을 보여 준다.
+실제로 이 예는 심지어 대수공간이다!
+$\text{Gal}(\overline{\mathbf{Q}}/\mathbf{Q})$를 프로유한 위상을 갖는
+$\mathbf{Q}$의 절대 갈루아 군이라 하자. 다음과 같이 놓자.
+$$
+U =
+\Spec(\overline{\mathbf{Q}})
+\times_{\Spec(\mathbf{Q})}
+\Spec(\overline{\mathbf{Q}}) =
+\text{Gal}(\overline{\mathbf{Q}}/\mathbf{Q}) \times
+\Spec(\overline{\mathbf{Q}})
+$$
+(마지막 등호의 의미에 관한 정확한 설명은 생략한다.)
+$G$를 이산 위상을 갖는 절대 갈루아 군
+$\text{Gal}(\overline{\mathbf{Q}}/\mathbf{Q})$를
+$\Spec(\overline{\mathbf{Q}})$ 위의 상수 군 스킴으로 본 것이라 하자
+(Groupoids, Example \ref{groupoids-example-constant-group} 참조).
+그러면 $G$는 $U$ 위에 자유롭고 추이적으로 작용한다.
+$X = U/G$라 하자(Spaces, Definition \ref{spaces-definition-quotient} 참조).
+그러면 $X$는 정확히 한 점을 갖는 비뇌터 축약 대수공간이다.
+더 나아가 $X$에는 (국소) 유한형인 점이 있다.
+$$
+x :
+\Spec(\overline{\mathbf{Q}}) \longrightarrow
+U \longrightarrow X
+$$
+실제로 $U$의 모든 점은 닫혀 있다!
+$X$가 $\overline{\mathbf{Q}}$ 위의 대수공간이므로 $x$는 단사사상이다.
+따라서 $x$는 보조정리 \ref{lemma-improve-unique-point}에서 구성한 사상이지만
+$x$는 동형사상이 아니다. 실제로
+$\Spec(\overline{\mathbf{Q}}) \to X$는 $x$에서 $X$의 잔여 gerbe이다.
+\end{example}
+
+\noindent
+뒤에서 대수 스택 $\mathcal{X}$에 약한 가정을 두면 다음 보조정리의
+동치 조건들이 모든 점 $x \in |\mathcal{X}|$에 대해 성립함을 알게 될 것이다
+(Morphisms of Stacks, Section
+\ref{stacks-morphisms-section-existence-residual-gerbes} 참조).
+
+\begin{lemma}
+\label{lemma-residual-gerbe}
+$\mathcal{X}$를 대수 스택이라 하고 $x \in |\mathcal{X}|$를 점이라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item 한원소 집합인 $|\mathcal{Z}|$를 갖고 $|\mathcal{Z}|$의
+$|\mathcal{X}|$ 안에서의 상이 $x$가 되도록 하는 대수 스택
+$\mathcal{Z}$와 단사사상 $\mathcal{Z} \to \mathcal{X}$가 존재한다.
+\item 한원소 집합인 $|\mathcal{Z}|$를 갖고 $|\mathcal{Z}|$의
+$|\mathcal{X}|$ 안에서의 상이 $x$가 되도록 하는 축약 대수 스택
+$\mathcal{Z}$와 단사사상 $\mathcal{Z} \to \mathcal{X}$가 존재한다.
+\item 어떤 대수 스택 $\mathcal{Z}$, 단사사상
+$f : \mathcal{Z} \to \mathcal{X}$, 체 $k$에 대한 평탄 전사사상
+$z : \Spec(k) \to \mathcal{Z}$가 존재하여 $x = f(z)$이다.
+\end{enumerate}
+또한 이 조건들이 성립하면, $\mathcal{Z}_x$가 축약이고 국소 뇌터인
+대수 스택이며 $|\mathcal{Z}_x| \to |\mathcal{X}|$에 의해 $x$로 보내지는
+한원소 집합 $|\mathcal{Z}_x|$를 갖도록 하는 유일한 엄밀한 충만 부분범주
+$\mathcal{Z}_x \subset \mathcal{X}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+(1)과 같은 $\mathcal{Z} \to \mathcal{X}$가 주어지면
+$\mathcal{Z}_{red} \to \mathcal{X}$는 (2)와 같다
+(대수 스택의 축약 개념은 제\ref{section-reduced}절 참조).
+따라서 (1)은 (2)를 함의한다. (2)가 (1)을 함의함은 즉시 알 수 있다.
+(2)와 (3)의 동치는 보조정리 \ref{lemma-unique-point}으로부터 즉시 따른다.
+
+\medskip\noindent
+이제 (1)--(3)의 동치를 보였다. (2)와 같은 단사사상
+$f : \mathcal{Z} \to \mathcal{X}$를 택하자. 이는 $f$가 완전충실함을
+뜻한다(보조정리 \ref{lemma-monomorphism} 참조).
+함자 $f$의 본질적 상을 $\mathcal{Z}' \subset \mathcal{X}$라 쓰자.
+그러면 $f : \mathcal{Z} \to \mathcal{Z}'$는 동치이고, 따라서
+$\mathcal{Z}'$는 대수 스택이다(Algebraic Stacks,
+Lemma \ref{algebraic-lemma-equivalent} 참조).
+보조정리 \ref{lemma-improve-unique-point}을 적용하면 보조정리의 진술과 같은
+엄밀한 충만 부분범주 $\mathcal{Z}_x \subset \mathcal{Z}'$를 얻는다.
+이로써 유일성을 제외한 보조정리의 모든 주장을 증명했다.
+
+\medskip\noindent
+유일성을 증명하기 위해 $\mathcal{Z}_x \subset \mathcal{X}$와
+$\mathcal{Z}'_x \subset \mathcal{X}$가 보조정리의 진술과 같은
+두 엄밀한 충만 부분범주라고 하자. 그러면 사영
+$$
+\mathcal{Z}'_x
+\longleftarrow
+\mathcal{Z}'_x \times_\mathcal{X} \mathcal{Z}_x
+\longrightarrow
+\mathcal{Z}_x
+$$
+은 단사사상이다. 보조정리 \ref{lemma-points-cartesian}에 의해
+가운데 대수 스택은 공집합이 아니다. 따라서 보조정리
+\ref{lemma-monomorphism-into-point}에 의해 두 사영은 동형사상이다.
+이로써 증명이 끝난다.
+\end{proof}
+
+\noindent
+위 내용을 설명했으므로 이제 다음과 같이 정의할 수 있다.
+
+\begin{definition}
+\label{definition-residual-gerbe}
+$\mathcal{X}$를 대수 스택이라 하고 $x \in |\mathcal{X}|$라 하자.
+\begin{enumerate}
+\item 보조정리 \ref{lemma-residual-gerbe}의 동치 조건 (1), (2), (3)이
+성립하면 {$x$에서 $\mathcal{X}$의 \it 잔여 gerbe가 존재한다}고 한다.
+\item $x$에서 $\mathcal{X}$의 잔여 gerbe가 존재하면,
+{$x$에서 $\mathcal{X}$의 \it 잔여 gerbe}\footnote{이는 정신상으로는
+\cite{LM-B}와 충돌하지만 실제로는 그렇지 않다. 그 문헌의 제11장에서는
+임의의 준분리 대수 스택의 임의의 점에 (반드시 대수적이지는 않은) gerbe를
+결부시키고 이를 잔여 gerbe라 부른다. Morphisms of Stacks,
+Lemma \ref{stacks-morphisms-lemma-every-point-residual-gerbe}에서
+준분리 대수 스택의 모든 점은 우리의 의미에서 잔여 gerbe를 가지며,
+그것이 그들의 것과 동치임을 보게 될 것이다. 이 주제에 관한 자세한 내용은
+\cite[Appendix B]{rydh_etale_devissage}를 보라.}란
+보조정리 \ref{lemma-residual-gerbe}에서 구성한 엄밀한 충만 부분범주
+$\mathcal{Z}_x \subset \mathcal{X}$이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+특히 $\mathcal{Z}_x$가 존재하면 이는 국소 뇌터인 축약 대수 스택이고,
+어떤 체와 국소 유한 표시인 평탄 전사사상
+$$
+\Spec(k) \longrightarrow \mathcal{Z}_x.
+$$
+이 존재함을 안다. Morphisms of Stacks,
+Lemma \ref{stacks-morphisms-lemma-noetherian-singleton-stack-gerbe}에서
+$\mathcal{Z}_x$가 gerbe임을 보게 될 것이다. 잔여 gerbe의 존재성은
+Morphisms of Stacks, Section
+\ref{stacks-morphisms-section-existence-residual-gerbes}에서 논의한다.
+
+\begin{example}
+\label{example-residual-gerbe}
+$X$를 스킴이라 하고 $x \in X$를 점이라 하자. 통상과 같이 $x$를
+스킴 $x = \Spec(\kappa(x))$와 동일시하면 단사사상 $x \to X$는
+$x$에서 $X$의 잔여 gerbe이다. $X$가 대수공간이고 $x \in |X|$이면
+$x$에서의 잔여 gerbe(이를 잔여 공간이라 한다)는 항상 존재한다
+(Decent Spaces, Section \ref{decent-spaces-section-singleton} 참조).
+\end{example}
+
+\noindent
+잔여 gerbe가 존재하면 다음 보조정리에 의해 정칙 대수 스택이다.
+
+\begin{lemma}
+\label{lemma-residual-gerbe-regular}
+$|\mathcal{Z}|$가 한원소 집합인 국소 뇌터 축약 대수 스택
+$\mathcal{Z}$는 정칙이다.
+\end{lemma}
+
+\begin{proof}
+$W$가 스킴인 매끄러운 전사사상 $W \to \mathcal{Z}$를 택하자.
+$k$를 체라 하고 $\Spec(k) \to \mathcal{Z}$를 전사이고 평탄하며
+국소 유한 표시인 사상으로 택하자
+(보조정리 \ref{lemma-unique-point-better} 참조).
+대수공간 $T = W \times_\mathcal{Z} \Spec(k)$는 $k$ 위에서 매끄럽고,
+특히 정칙이다(Spaces over Fields,
+Lemma \ref{spaces-over-fields-lemma-smooth-regular} 참조).
+$T \to W$가 국소 유한 표시이고 평탄하며 전사이므로
+Descent on Spaces, Lemma \ref{spaces-descent-lemma-descend-regular}에 의해
+$W$는 정칙이다. 정의에 따라 이는 $\mathcal{Z}$가 정칙임을 뜻한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-residual-gerbe-points}
+$\mathcal{X}$를 대수 스택이라 하고 $x \in |\mathcal{X}|$라 하자.
+$\mathcal{X}$의 잔여 gerbe $\mathcal{Z}_x$가 존재한다고 가정하자.
+$K$를 체라 하고 $f : \Spec(K) \to \mathcal{X}$를 $x$의 동치류에
+속하는 사상이라 하자. 그러면 $f$는 포함 사상
+$\mathcal{Z}_x \to \mathcal{X}$를 통해 분해된다.
+\end{lemma}
+
+\begin{proof}
+% P11-E0450: frozen source has malformed ``locally finite presentation''.
+체 $k$와 전사이고 평탄하며 국소 유한 표시인 사상
+$\Spec(k) \to \mathcal{Z}_x$를 택하자.
+$T = \Spec(K) \times_\mathcal{X} \mathcal{Z}_x$라 놓자.
+보조정리 \ref{lemma-points-cartesian}에 의해 $T$는 공집합이 아니다.
+$\mathcal{Z}_x \to \mathcal{X}$가 단사사상이므로
+$T \to \Spec(K)$도 단사사상이다. 따라서 Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-monomorphism-toward-field}에 의해
+$T = \Spec(K)$이다. 이로써 보조정리가 증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-residual-gerbe-unique}
+$\mathcal{X}$를 대수 스택이라 하고 $x \in |\mathcal{X}|$라 하자.
+$\mathcal{Z}$를 보조정리 \ref{lemma-unique-point-better}의 동치 조건들을
+만족하는 대수 스택이라 하고, $|\mathcal{Z}| \to |\mathcal{X}|$의 상이
+$x$가 되도록 하는 $\mathcal{Z} \to \mathcal{X}$를 단사사상이라 하자.
+그러면 $x$에서 $\mathcal{X}$의 잔여 gerbe $\mathcal{Z}_x$가 존재하고,
+$\mathcal{Z} \to \mathcal{X}$는
+$\mathcal{Z} \to \mathcal{Z}_x \to \mathcal{X}$로 분해되며
+첫 번째 화살표는 동치이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{Z}_x \subset \mathcal{X}$를 함자
+$\mathcal{Z} \to \mathcal{X}$의 본질적 상에 대응하는 충만 부분범주라 하자.
+그러면 $\mathcal{Z} \to \mathcal{Z}_x$는 동치이므로
+$\mathcal{Z}_x$는 대수 스택이다(Algebraic Stacks,
+Lemma \ref{algebraic-lemma-equivalent} 참조).
+$\mathcal{Z}_x$는 이 동치로부터 $\mathcal{Z}$의 모든 성질을 물려받으므로,
+보조정리 \ref{lemma-residual-gerbe}의 유일성에 의해
+$\mathcal{Z}_x$는 $x$에서 $\mathcal{X}$의 잔여 gerbe이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-residual-gerbe-functorial}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수 스택의 사상이라 하자.
+$x \in |\mathcal{X}|$의 상을 $y \in |\mathcal{Y}|$라 하자.
+$x$와 $y$의 잔여 gerbe $\mathcal{Z}_x \subset \mathcal{X}$와
+$\mathcal{Z}_y \subset \mathcal{Y}$가 존재하면, $f$는 가환 그림
+$$
+\xymatrix{
+\mathcal{X} \ar[d]_f & \mathcal{Z}_x \ar[l] \ar[d] \\
+\mathcal{Y} & \mathcal{Z}_y \ar[l]
+}
+$$
+\end{lemma}
+
+\begin{proof}
+체 $k$와 국소 유한 표시인 평탄 전사사상
+$\Spec(k) \to \mathcal{Z}_x$를 택하자. 보조정리
+\ref{lemma-residual-gerbe-points}에 의해 사상
+$\Spec(k) \to \mathcal{Y}$는 $\mathcal{Z}_y$를 통해 분해된다.
+따라서 $\mathcal{Z}_x \times_\mathcal{Y} \mathcal{Z}_y$는
+$\mathcal{Z}_x$의 공집합이 아닌 부분스택이고, 보조정리
+\ref{lemma-monomorphism-into-point}에 의해 $\mathcal{Z}_x$와 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-residual-gerbe-isomorphic}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수 스택의 사상이라 하자.
+$x \in |\mathcal{X}|$의 상을 $y \in |\mathcal{Y}|$라 하자.
+$x$와 $y$의 잔여 gerbe $\mathcal{Z}_x \subset \mathcal{X}$와
+$\mathcal{Z}_y \subset \mathcal{Y}$가 존재한다고 가정하자.
+또한 $x$의 동치류에 속하는 사상 $\Spec(k) \to \mathcal{X}$가 존재하여
+$$
+\Spec(k) \times_\mathcal{X} \Spec(k)
+\longrightarrow
+\Spec(k) \times_\mathcal{Y} \Spec(k)
+$$
+가 동형사상이라고 하자. 그러면 $\mathcal{Z}_x \to \mathcal{Z}_y$는
+동형사상이다.
+\end{lemma}
+
+\begin{proof}
+$k'/k$를 체의 확대라 하자. 그러면
+$$
+\Spec(k') \times_\mathcal{X} \Spec(k')
+\longrightarrow
+\Spec(k') \times_\mathcal{Y} \Spec(k')
+$$
+는 보조정리에 나오는 사상을 충실 평탄 사상
+$\Spec(k' \otimes k') \to \Spec(k \otimes k)$로 밑변환한 것이다.
+따라서 보조정리에서 서술한 성질은 $x$의 동치류에 속하는 사상
+$\Spec(k) \to \mathcal{X}$의 선택과 무관하다. 그러므로
+$\Spec(k) \to \mathcal{Z}_x$가 전사이고 평탄하며 국소 유한 표시라고
+가정해도 된다. 이 경우
+$$
+\mathcal{Z}_x = [\Spec(k)/R]
+$$
+이고 $R = \Spec(k) \times_\mathcal{X} \Spec(k)$이다.
+보조정리 \ref{lemma-improve-unique-point}의 증명을 보라.
+또한 $R = \Spec(k) \times_\mathcal{Y} \Spec(k)$이므로
+보조정리 \ref{lemma-residual-gerbe-functorial}의 사상
+$\mathcal{Z}_x \to \mathcal{Z}_y$는 Algebraic Stacks, Lemma
+\ref{algebraic-lemma-map-space-into-stack}에 의해 완전충실하다.
+예를 들어 보조정리 \ref{lemma-residual-gerbe-unique}에 의해 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{스택의 차원}
+\label{section-dimension}
+
+\noindent
+한 점에서 대수공간의 차원이라는 개념(Properties of Spaces,
+Definition \ref{spaces-properties-definition-dimension-at-point})을 사용하여
+점 $x$에서 대수 스택 $\mathcal{X}$의 차원을 정의할 수 있다.
+다음 보조정리에서 그 값은 $\infty$일 수 있다. 이는 $\mathcal{X}$가
+준콤팩트가 아니기 때문이거나 Examples, Section
+\ref{examples-section-Noetherian-infinite-dimension}에 서술된 현상이
+나타나기 때문이다.
+
+\begin{lemma}
+\label{lemma-dimension-at-point-well-defined}
+$\mathcal{X}$를 스킴 $S$ 위의 국소 뇌터 대수 스택이라 하고
+$x \in |\mathcal{X}|$를 $\mathcal{X}$의 점이라 하자.
+$U$가 스킴인 제시 $[U/R] \to \mathcal{X}$를 택하자
+(Algebraic Stacks, Definition \ref{algebraic-definition-presentation}).
+$u \in U$를 $x$로 보내지는 점이라 하자. $e : U \to R$를 ``항등'' 사상,
+$s : R \to U$를 대수공간의 매끄러운 사상인 ``시작점'' 사상이라 하자.
+$R_u$를 $u$ 위에서 $s : R \to U$의 섬유라 하자. 원소
+$$
+\dim_x(\mathcal{X}) = \dim_u(U) - \dim_{e(u)}(R_u) \in \mathbf{Z} \cup \infty
+$$
+는 제시와 $x$ 위의 점 $u$의 선택과 무관하다.
+\end{lemma}
+
+\begin{proof}
+$R \to U$가 매끄러우므로 스킴 $R_u$는 $\kappa(u)$ 위에서 매끄럽고,
+따라서 유한 차원이다. 한편 스킴 $U$는 국소 뇌터이지만 이것만으로
+$\dim_u(U)$가 유한임이 보장되지는 않는다. 따라서 이 차는
+$\mathbf{Z} \cup \{\infty\}$의 원소이다.
+
+\medskip\noindent
+$U'$가 스킴이고 $u'$가 $x$로 보내지는 두 번째 제시
+$[U'/R'] \to \mathcal{X}$와 점 $u' \in U'$를 택하자.
+대수공간 $P = U \times_\mathcal{X} U'$를 생각하자.
+보조정리 \ref{lemma-points-cartesian}에 의해 $u$와 $u'$로 보내지는
+$p \in |P|$가 존재한다. $P \to U$와 $P \to U'$가 매끄러우므로
+$\dim_p(P) = \dim_u(U) + \dim_p(P_u)$이고
+$\dim_p(P) = \dim_{u'}(U') + \dim_p(P_{u'})$이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-smoothness-dimension-spaces} 참조).
+다음에 유의하자.
+$$
+R'_{u'} = \Spec(\kappa(u')) \times_\mathcal{X} U'
+\quad\text{and}\quad
+P_u = \Spec(\kappa(u)) \times_\mathcal{X} U'
+$$
+$p \in |P|$를 사상 $\Spec(\Omega) \to P$로 나타내자.
+$p$는 $u$와 $u'$ 모두로 보내지므로 합성
+$\Spec(\Omega) \to \Spec(\kappa(u')) \to \mathcal{X}$와
+$\Spec(\Omega) \to \Spec(\kappa(u)) \to \mathcal{X}$ 사이의
+$2$-사상을 유도하고, 이는 다시 동형사상
+$$
+\Spec(\Omega) \times_{\Spec(\kappa(u'))} R'_{u'}
+\cong
+\Spec(\Omega) \times_{\Spec(\kappa(u))} P_u
+$$
+을 정의한다. 이는 $\Omega$-유리점 $(1, e'(u'))$를 $(1, p)$로 보내는
+$\Spec(\Omega)$ 위 대수공간들의 동형사상이다(일부 세부사항은 생략한다).
+따라서
+$$
+\dim_{e'(u')}(R'_{u'}) = \dim_p(P_u)
+$$
+임을 Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-dimension-fibre-after-base-change}로부터 얻는다.
+대칭성에 의해 $\dim_{e(u)}(R_u) = \dim_p(P_{u'})$이다.
+이들을 모두 종합하면 선택과 무관함을 얻는다.
+\end{proof}
+
+\noindent
+위 보조정리를 사용하여 다음과 같이 정의할 수 있다.
+
+\begin{definition}
+\label{definition-dimension-at-point}
+$\mathcal{X}$를 스킴 $S$ 위의 국소 뇌터 대수 스택이라 하고
+$x \in |\mathcal{X}|$를 $\mathcal{X}$의 점이라 하자.
+$U$가 스킴인 제시 $[U/R] \to \mathcal{X}$를 택하고
+(Algebraic Stacks, Definition \ref{algebraic-definition-presentation}),
+$u \in U$를 $x$로 보내지는 점이라 하자.
+{$x$에서 $\mathcal{X}$의 \it 차원}을 다음을 만족하는 원소
+$\dim_x(\mathcal{X}) \in \mathbf{Z} \cup \infty$로 정의한다.
+% P11-E0451: frozen source breaks the sentence before its notation clause.
+$$
+\dim_x(\mathcal{X}) = \dim_u(U)-\dim_{e(u)}(R_u).
+$$
+여기서 표기는 보조정리 \ref{lemma-dimension-at-point-well-defined}와 같다.
+\end{definition}
+
+\noindent
+$\mathcal{X}$가 스킴인 경우(Topology, Definition
+\ref{topology-definition-Krull}), 더 일반적으로 $\mathcal{X}$가
+국소 뇌터 대수공간인 경우(Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-at-point}), 점에서 스택의 차원은
+통상적인 개념과 일치한다.
+
+\begin{definition}
+\label{definition-dimension}
+$S$를 스킴이라 하고 $\mathcal{X}$를 $S$ 위의 국소 뇌터 대수 스택이라 하자.
+$\mathcal{X}$의 {\it 차원} $\dim(\mathcal{X})$을 다음과 같이 정의한다.
+$$
+\dim(\mathcal{X}) = \sup\nolimits_{x \in |\mathcal{X}|} \dim_x(\mathcal{X})
+$$
+\end{definition}
+
+\noindent
+$\mathcal{X}$가 스킴이거나(Properties, Lemma
+\ref{properties-lemma-dimension}) 대수공간이면(Properties of Spaces,
+Definition \ref{spaces-properties-definition-dimension})
+이 차원의 정의는 통상적인 개념과 일치한다.
+
+\begin{remark}
+\label{remark-dimension-empty-stack}
+$\mathcal{X}$가 체 위의 공집합이 아닌 유한형 스택이면
+$\dim(\mathcal{X})$는 정수이다. 임의의 국소 뇌터 대수 스택
+$\mathcal{X}$에 대하여,
+% P11-E0452: frozen source uses undefined italic Z instead of \mathbf{Z}.
+$\dim(\mathcal{X})$는 $Z\cup \{\pm \infty\}$에 속하고,
+$\dim(\mathcal{X}) = -\infty$일 필요충분조건은 $\mathcal{X}$가
+공집합인 것이다.
+\end{remark}
+
+\begin{example}
+\label{example-dimension-quotient-stack}
+$X$를 체 $k$ 위의 유한형 스킴이라 하고, $G$를 $X$ 위에 작용하는
+$k$ 위의 유한형 군 스킴이라 하자. 그러면 몫 스택 $[X/G]$의 차원은
+$\dim(X)-\dim(G)$와 같다. 특히 분류 스택 $BG=[\Spec(k)/G]$의 차원은
+$-\dim(G)$이다. 따라서 스킴이나 대수공간의 경우와 달리,
+대수 스택의 차원은 음의 정수일 수 있다.
+\end{example}
+
+
+
+
+
+
+\section{국소 기약성}
+\label{section-irreducible-local-ring}
+
+\noindent
+한 점에서 스킴의 기하적 가지 수는 Properties, Section
+\ref{properties-section-unibranch}에서, 한 점에서 대수공간의 기하적 가지 수는
+Properties of Spaces, Section
+\ref{spaces-properties-section-irreducible-local-ring}에서 정의했다.
+$n \in \mathbf{N}$이라 하자. 국소환 $A$에 대하여 다음과 같이 놓는다.
+$$
+P_n(A) = A\text{의 기하적 가지 수가 }n\text{이다}
+$$
+매끄러운 환 사상 $A \to B$와 $A$의 소 아이디얼 $\mathfrak p$ 위에 놓이는
+$B$의 소 아이디얼 $\mathfrak q$에 대하여
+$$
+P_n(A_\mathfrak p) \Leftrightarrow P_n(B_\mathfrak q)
+$$
+이다(More on Algebra, Lemma
+\ref{more-algebra-lemma-invariance-number-branches-smooth}).
+Properties of Spaces, Remark
+\ref{spaces-properties-remark-list-properties-local-ring-local-etale-topology}에서와 같이,
+$\mathcal{P}_n(U, u) = P_n(\mathcal{O}_{U, u})$로 놓아 $P_n$을 사용해
+스킴의 싹 $(U, u)$의 에탈 국소 성질 $\mathcal{P}_n$을 정의할 수 있다.
+점 $x$에서 대수공간 $X$의 대응하는 성질 $\mathcal{P}_n$
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-property-at-point} 참조)은 바로
+``$x$에서 $X$의 기하적 가지 수가 $n$이다''라는 성질이다
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-number-of-geometric-branches} 참조).
+또한 성질 $\mathcal{P}_n$은 매끄러운 위상에서 국소적이다
+(Descent, Definition \ref{descent-definition-local-at-point} 참조).
+이는 위에 표시한 동치 또는 More on Morphisms,
+Lemma \ref{more-morphisms-lemma-number-of-branches-and-smooth}로부터 따른다.
+따라서 정의 \ref{definition-property-at-point}을 적용하여 한 점에서
+대수 스택에 대한 개념을 얻는다.
+
+\begin{definition}
+\label{definition-number-of-geometric-branches}
+$\mathcal{X}$를 대수 스택이라 하고 $x \in |\mathcal{X}|$라 하자.
+\begin{enumerate}
+\item 위에서 정의한 $\mathcal{P}_n$에 대해 보조정리
+\ref{lemma-local-source-target-at-point}의 동치 조건들이 성립하면
+{$x$에서 $\mathcal{X}$의 \it 기하적 가지 수}는 $n \in \mathbf{N}$이고,
+그렇지 않으면 $\infty$이다.
+\item $x$에서 $\mathcal{X}$의 기하적 가지 수가 $1$이면
+$\mathcal{X}$는 {$x$에서 \it 기하적으로 단일분지}라고 한다.
+\end{enumerate}
+\end{definition}
+
+
+
+
+
+
+\section{유한성 조건과 점}
+\label{section-points-conditions}
+
+\noindent
+이 절은 대수 스택의 점에 대한 Decent Spaces, Section
+\ref{decent-spaces-section-points-monomorphisms}의 유사물이다.
+
+\begin{lemma}
+\label{lemma-UR-quasi-compact-above-x}
+$\mathcal{X}$를 대수 스택이라 하고 $x \in |\mathcal{X}|$를 점이라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item $x$의 동치류에 속하는 어떤 사상
+$\Spec(k) \to \mathcal{X}$가 준콤팩트이다.
+\item $x$의 동치류에 속하는 모든 사상
+$\Spec(k) \to \mathcal{X}$가 준콤팩트이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Spec(k) \to \mathcal{X}$가 $x$의 동치류에 속한다고 하고,
+$k'/k$를 체의 확대라 하자. 그러면 $\Spec(k) \to \mathcal{X}$가
+준콤팩트일 필요충분조건이 $\Spec(k') \to \mathcal{X}$가 준콤팩트임을
+보이면 된다. 이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-surjection-from-quasi-compact}과
+Algebraic Stacks, Lemma
+\ref{algebraic-lemma-representable-transformations-property-implication}의
+원리로부터 따른다.
+\end{proof}
+
+\noindent
+때때로 보조정리 \ref{lemma-UR-quasi-compact-above-x}의 동치 조건들을 만족하는
+점 $x \in |\mathcal{X}|$를 ``{\it 준콤팩트 점}''이라 한다.
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

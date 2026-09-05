@@ -1,0 +1,1645 @@
+\input{ko_preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{스택의 예}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+여기서는 대수기하학에 나타나는 스택의 예들을 논의한다. 그중 일부는 대수
+스택이고 일부는 그렇지 않다. 어느 것이 대수 스택인지는 뒤의 장에서
+논의한다. 따라서 이 장에서는 주로 하강 조건을 다룬다. 예를 들어
+\cite{Vis2}를 보라.
+
+\medskip\noindent
+이 장의 표기, 규약, 용어 중 일부는 어색하며 숙련된 독자에게는 거꾸로인
+것처럼 보일 수도 있다. 이는 의도된 것이다. 설명은 Quot, 절
+\ref{quot-section-conventions}를 보라.
+
+
+
+
+\section{표기}
+\label{section-notation}
+
+\noindent
+이 장에서는 위상, 정의 \ref{topologies-definition-big-fppf-site}에서와
+같이 적절한 큰 fppf 자리 $\Sch_{fppf}$를 고정한다. 따라서 명시적으로
+달리 말하지 않는 한 모든 스킴은 $\Sch_{fppf}$의 대상이다. 항상
+$\Sch_{fppf}$에 들어 있는 바탕 $S$에 상대하여 작업하고, 큰 fppf 자리
+$(\Sch/S)_{fppf}$를 사용한다. 위상, 정의
+\ref{topologies-definition-big-small-fppf}를 보라. $S = \Spec(\mathbf{Z})$로
+두면 절대적인 경우를 얻는다.
+
+
+
+
+\section{스택의 예}
+\label{section-examples-stacks}
+
+\noindent
+먼저 $(\Sch/S)_{fppf}$ 위의 스택에 대한 몇 가지 중요한 예를 제시한다.
+
+
+
+
+
+\section{준연접층}
+\label{section-stack-of-quasi-coherent-sheaves}
+
+\noindent
+범주 $\QCohstack$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item $\QCohstack$의 대상은 쌍 $(X, \mathcal{F})$이다. 여기서 $X/S$는
+$(\Sch/S)_{fppf}$의 대상이고, $\mathcal{F}$는 준연접
+$\mathcal{O}_X$-가군이다.
+\item 사상 $(f, \varphi) : (Y, \mathcal{G}) \to (X, \mathcal{F})$는
+$S$ 위의 스킴의 사상 $f : Y \to X$와 $f$-사상(층, 절
+\ref{sheaves-section-ringed-spaces-functoriality-modules}를 보라)
+$\varphi : \mathcal{F} \to \mathcal{G}$로 이루어진 쌍이다.
+\item 사상들의 합성
+$$
+(Z, \mathcal{H}) \xrightarrow{(g, \psi)}
+(Y, \mathcal{G}) \xrightarrow{(f, \phi)} (X, \mathcal{F})
+$$
+은 $(f \circ g, \psi \circ \phi)$이다. 여기서 $\psi \circ \phi$는
+$f$-사상들의 합성이다.
+\end{enumerate}
+따라서 $\QCohstack$는 범주이고
+$$
+p : \QCohstack \to (\Sch/S)_{fppf},
+\quad
+(X, \mathcal{F}) \mapsto X
+$$
+는 함자이다. 스킴 $X$ 위의 $\QCohstack$의 섬유범주는 준연접
+$\mathcal{O}_X$-가군의 범주 $\QCoh(\mathcal{O}_X)$의 반대범주임에
+유의하자. 뒤에서 사용할 다음 사실도 기록해 둔다.
+$(X, \mathcal{F}), (Y, \mathcal{G}) \in \Ob(\QCohstack)$
+가 주어지면
+\begin{equation}
+\label{equation-morphisms-qcoh}
+\Mor_{\QCohstack}((Y, \mathcal{G}), (X, \mathcal{F}))
+=
+\coprod\nolimits_{f \in \Mor_S(Y, X)}
+\Mor_{\QCoh(\mathcal{O}_Y)}(f^*\mathcal{F}, \mathcal{G})
+\end{equation}
+이다. 가군의 $f$-사상에 대한 논의는 층, 절
+\ref{sheaves-section-ringed-spaces-functoriality-modules}를 보라.
+
+\medskip\noindent
+범주 $\QCohstack$는 대상들의 모임이 진클래스이므로
+$(\Sch/S)_{fppf}$ 위의 스택이 아니다. 한편 스택의 모든 공리를 만족함은
+보게 될 것이다. 집합론적 문제는 절
+\ref{section-stack-of-finitely-generated-quasi-coherent-sheaves}에서
+해결한다.
+
+\begin{lemma}
+\label{lemma-quasi-coherent-strongly-cartesian}
+$\QCohstack$의 사상
+$(f, \varphi) : (Y, \mathcal{G}) \to (X, \mathcal{F})$가 강하게
+데카르트일 필요충분조건은 사상 $\varphi$가 동형
+$f^*\mathcal{F} \to \mathcal{G}$를 유도하는 것이다.
+\end{lemma}
+
+\begin{proof}
+$(X, \mathcal{F}) \in \Ob(\QCohstack)$라 하고,
+$f : Y \to X$를 $(\Sch/S)_{fppf}$의 사상이라 하자. 표준적인 $f$-사상
+$c : \mathcal{F} \to f^*\mathcal{F}$가 있으므로 사상
+$(f, c) : (Y, f^*\mathcal{F}) \to (X, \mathcal{F})$를 얻는다.
+$(f, c)$가 강하게 데카르트라고 주장한다. 실제로 $\QCohstack$의 임의의
+대상 $(Z, \mathcal{H})$에 대하여
+\begin{align*}
+\Mor_{\QCohstack}((Z, \mathcal{H}), (Y, f^*\mathcal{F}))
+& =
+\coprod\nolimits_{g \in \Mor_S(Z, Y)}
+\Mor_{\QCoh(\mathcal{O}_Z)}(g^*f^*\mathcal{F}, \mathcal{H}) \\
+& =
+\coprod\nolimits_{g \in \Mor_S(Z, Y)}
+\Mor_{\QCoh(\mathcal{O}_Z)}((f \circ g)^*\mathcal{F}, \mathcal{H}) \\
+& =
+\Mor_{\QCohstack}((Z, \mathcal{H}), (X, \mathcal{F}))
+\times_{\Mor_S(Z, X)} \Mor_S(Z, Y)
+\end{align*}
+이고, 여기서 식 (\ref{equation-morphisms-qcoh})을 두 번 사용하였다. 이로써
+$(f, c)$가 범주, 정의 \ref{categories-definition-cartesian-over-C}의 조건을
+만족하므로 주장이 성립한다. 이제 범주, 보조정리
+\ref{categories-lemma-composition-cartesian}에 의해 동형은 강하게
+데카르트이고 강하게 데카르트인 사상들의 합성도 강하게 데카르트이다.
+따라서 보조정리의 ``충분'' 부분이 증명된다. 역으로 $(X, \mathcal{F})$와
+$f : Y \to X$가 주어졌을 때, 목표가 $(X, \mathcal{F})$이고 $f$를 올리는
+강하게 데카르트인 사상이 존재하면 이는 $(f, c)$와 동형이어야 한다. 범주,
+정의 \ref{categories-definition-cartesian-over-C} 뒤의 논의를 보라. 따라서
+보조정리의 ``필요'' 부분도 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-stack-of-quasi-coherent-sheaves}
+함자 $p : \QCohstack \to (\Sch/S)_{fppf}$는 스택, 정의
+\ref{stacks-definition-stack}의 조건 (1), (2), (3)을 만족한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-quasi-coherent-strongly-cartesian}에서
+$\QCohstack$가 $(\Sch/S)_{fppf}$ 위의 섬유화된 범주임이 명백하다.
+$(\Sch/S)_{fppf}$의 피복
+$\mathcal{U} = \{X_i \to X\}_{i \in I}$가 주어지면 함자
+$$
+\QCoh(\mathcal{O}_X) \longrightarrow DD(\mathcal{U})
+$$
+는 충실충만이고 본질적으로 전사이다. 하강, 명제
+\ref{descent-proposition-fpqc-descent-quasi-coherent}를 보라. 따라서 스택,
+보조정리 \ref{stacks-lemma-stack-equivalences}를 적용하면 $\QCohstack$가
+스택의 모든 공리를 만족함을 알 수 있다.
+\end{proof}
+
+
+
+
+
+\section{유한 생성 준연접층의 스택}
+\label{section-stack-of-finitely-generated-quasi-coherent-sheaves}
+
+\noindent
+유한형 준연접 가군만을 고려하면 준연접층의 스택을 얻을 수 있다.
+$$
+p_{fg} : \QCohstack_{fg} \to (\Sch/S)_{fppf}
+$$
+를 $\mathcal{F}$가 유한형 준연접 $\mathcal{O}_T$-가군인 쌍
+$(T, \mathcal{F})$들로 이루어진, $(\Sch/S)_{fppf}$ 위의 $\QCohstack$의
+충만한 부분범주로 나타내자.
+
+\begin{lemma}
+\label{lemma-stack-of-finite-type-quasi-coherent-sheaves}
+함자 $p_{fg} : \QCohstack_{fg} \to (\Sch/S)_{fppf}$는 스택, 정의
+\ref{stacks-definition-stack}의 조건 (1), (2), (3)을 만족한다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 스택, 보조정리 \ref{stacks-lemma-substack}의 가정
+(1), (2), (3)을 확인한다. 보조정리
+\ref{lemma-quasi-coherent-strongly-cartesian}에 의해 사상
+$(Y, \mathcal{G}) \to (X, \mathcal{F})$가 강하게 데카르트일 필요충분조건은
+동형 $f^*\mathcal{F} \to \mathcal{G}$를 유도하는 것이다. 가군,
+보조정리 \ref{modules-lemma-pullback-finite-type}에 의해 유한형
+$\mathcal{O}_X$-가군의 당김은 유한형이다. 따라서 스택, 보조정리
+\ref{stacks-lemma-substack}의 가정 (1)이 성립한다. 가정 (2)는 자명하다.
+마지막으로 가정 (3)을 증명하려면 다음을 보여야 한다. $\mathcal{F}$가
+준연접 $\mathcal{O}_X$-가군이고 $\{f_i : X_i \to X\}$가 각
+$f_i^*\mathcal{F}$가 유한형이 되게 하는 fppf 피복이면,
+$\mathcal{F}$도 유한형이다. $X$의 아핀 열린집합에 대한 $\mathcal{F}$의
+제한을 생각하면 이는 다음 대수 명제로 환원된다. $R \to S$가 유한
+제시이고 충실하게 평탄한 환 준동형이며 $M$이 $R$-가군이라고 하자.
+$M \otimes_R S$가 유한 생성 $S$-가군이면 $M$은 유한 생성
+$R$-가군이다. 이 대수 사실의 더 강한 형태는 대수, 보조정리
+\ref{algebra-lemma-descend-properties-modules}에 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-type}
+$(X, \mathcal{O}_X)$가 환 달린 공간이라고 하자.
+\begin{enumerate}
+\item 유한형 $\mathcal{O}_X$-가군의 범주의 동형류들은 집합을 이룬다.
+\item 유한형 준연접 $\mathcal{O}_X$-가군의 범주의 동형류들은 집합을
+이룬다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)의 범주는 (1)의 범주의 충만한 부분범주이므로 (2)는 (1)에서 따른다.
+임의의 열린 피복 $\mathcal{U} : X = \bigcup_{i \in I} U_i$를 생각하자.
+포함사상을 $j_i : U_i \to X$로 쓰자. 임의의 사상
+$r : I \to \mathbf{N}$을 생각하자. $\mathcal{F}$가 각 $U_i$에 대한 제한이
+$\mathcal{F}(U_i)$의 단면을 많아야 $r(i)$개 사용하여 생성되는
+$\mathcal{O}_X$-가군이면, $\mathcal{F}$는 층
+$$
+\mathcal{H}_{\mathcal{U}, r} =
+\bigoplus\nolimits_{i \in I} j_{i, !}\mathcal{O}_{U_i}^{\oplus r(i)}
+$$
+의 몫이다. 정의상 $\mathcal{F}$가 유한형이면 지표집합이 $I = X$인 어떤
+열린 피복 $\mathcal{U}$가 존재하여 이 조건이 성립한다. 따라서 가능한
+$\mathcal{U}$의 선택들이 집합을 이루고(명백하다), 가능한
+$r : I \to \mathbf{N}$의 선택들이 집합을 이루며(명백하다), 각
+$\mathcal{U}$와 $r$에 대하여 $\mathcal{H}_{\mathcal{U}, r}$의 가능한 몫
+가군들이 집합을 이룸을 보이면 충분하다. 다시 말해
+$\mathcal{O}_X$-가군 $\mathcal{H}$가 주어졌을 때 그 몫의 동형류들이 많아야
+집합을 이룸을 보이면 충분하다. 이 마지막 주장은 몫사상
+$\mathcal{H} \to \mathcal{F}$의 핵들이
+$\prod_{U \subset X\text{ open}} \mathcal{H}(U)$의 멱집합의 부분집합으로
+매개화된다고 생각하면 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-stack-fg-quasi-coherent}
+다음 성질들을 갖는 부분범주
+$\QCohstack_{fg, small} \subset \QCohstack_{fg}$
+가 존재한다.
+\begin{enumerate}
+\item 포함 함자 $\QCohstack_{fg, small} \to \QCohstack_{fg}$는
+충실충만이고 본질적으로 전사이다.
+\item 함자 $p_{fg, small} : \QCohstack_{fg, small} \to (\Sch/S)_{fppf}$는
+$\QCohstack_{fg, small}$를 $(\Sch/S)_{fppf}$ 위의 스택으로 만든다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-stack-of-finite-type-quasi-coherent-sheaves}와
+\ref{lemma-finite-type}에서 $p_{fg} : \QCohstack_{fg} \to (\Sch/S)_{fppf}$가
+스택, 정의 \ref{stacks-definition-stack}의 (1), (2), (3)과 스택, 주
+\ref{stacks-remark-stack-make-small}의 추가 조건 (4)를 만족함을 보았다.
+따라서 그 주의 논의에서 $\QCohstack_{fg, small}$를 얻는다.
+\end{proof}
+
+\noindent
+뒤에서 종종 더 언급하지 않고 치환
+$$
+\QCohstack_{fg} \leadsto \QCohstack_{fg, small}
+$$
+을 시행하고, 표기를 남용하여 이 치환 결과도 단순히 $\QCohstack_{fg}$로
+나타낼 것이다.
+
+\begin{remark}
+\label{remark-higher-rank}
+이 절의 논의 전체는 어떤 무한 기수 $\kappa$, 예를 들어
+$\kappa = \aleph_0$에 대하여 국소적으로 많아야 $\kappa$개의 단면으로
+생성되는 준연접층들을 고려할 때에도 성립한다.
+\end{remark}
+
+
+
+
+
+\section{유한 \'etale 피복}
+\label{section-finite-etale}
+
+\noindent
+범주 $\textit{F\'Et}$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item $\textit{F\'Et}$의 대상은 스킴의 유한 \'etale 사상 $Y \to X$이다.
+우리의 규약에 따르면 이는 $(\Sch/S)_{fppf}$ 안의 유한 \'etale 사상을
+뜻한다.
+\item $\textit{F\'Et}$의 사상
+$(b, a) : (Y \to X) \to (Y' \to X')$는 스킴의 범주에서의 가환 도표
+$$
+\xymatrix{
+Y \ar[d] \ar[r]_b & Y' \ar[d] \\
+X \ar[r]_a & X'
+}
+$$
+이다.
+\end{enumerate}
+따라서 $\textit{F\'Et}$는 범주이고
+$$
+p : \textit{F\'Et} \to (\Sch/S)_{fppf},
+\quad
+(Y \to X) \mapsto X
+$$
+는 함자이다. 스킴 $X$ 위의 $\textit{F\'Et}$의 섬유범주는 기본군, 절
+\ref{pione-section-finite-etale}에서 연구한 범주
+$\textit{F\'Et}_X$와 같음에 유의하자.
+
+\begin{lemma}
+\label{lemma-finite-etale-stack}
+함자
+$$
+p : \textit{F\'Et} \longrightarrow (\Sch/S)_{fppf}
+$$
+는 $(\Sch/S)_{fppf}$ 위의 스택을 정의한다.
+\end{lemma}
+
+\begin{proof}
+유한 \'etale 사상의 fppf 하강은 하강, 보조정리
+\ref{descent-lemma-affine},
+\ref{descent-lemma-descending-property-finite}, 및
+\ref{descent-lemma-descending-property-etale}에서 따른다. 세부사항은
+생략한다.
+\end{proof}
+
+
+
+
+
+
+\section{대수공간}
+\label{section-stack-of-spaces}
+
+\noindent
+범주 $\Spacesstack$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item $\Spacesstack$의 대상은 $S$ 위의 대수공간의 사상 $X \to U$이다.
+여기서 $U$는 $(\Sch/S)_{fppf}$의 대상으로 표현가능하다.
+\item 사상 $(f, g) : (X \to U) \to (Y \to V)$는 $S$ 위의 대수공간의
+사상들로 이루어진 가환 도표
+$$
+\xymatrix{
+X \ar[d] \ar[r]_f & Y \ar[d] \\
+U \ar[r]^g & V
+}
+$$
+이다.
+\end{enumerate}
+따라서 $\Spacesstack$는 범주이고
+$$
+p : \Spacesstack \to (\Sch/S)_{fppf},
+\quad
+(X \to U) \mapsto U
+$$
+는 함자이다. 스킴 $U$ 위의 $\Spacesstack$의 섬유범주는 $U$ 위의
+대수공간의 범주 $\textit{Spaces}/U$와 같다. 대수공간의 위상, 절
+\ref{spaces-topologies-section-procedure}를 보라. 따라서 때로
+$\Spacesstack$의 대상을 스킴 $U$와 $U$ 위의 대수공간 $X$로 이루어진 쌍
+$X/U$로 생각한다. 뒤에서 사용할 다음 사실도 기록해 둔다.
+$(X/U), (Y/V) \in \Ob(\Spacesstack)$
+가 주어지면
+\begin{equation}
+\label{equation-morphisms-spaces}
+\Mor_{\Spacesstack}(X/U, Y/V)
+=
+\coprod\nolimits_{g \in \Mor_S(U, V)}
+\Mor_{\textit{Spaces}/U}(X, U \times_{g, V} Y)
+\end{equation}
+이다. 범주 $\Spacesstack$는 $(\Sch/S)_{fppf}$ 위의 스택에 거의
+가깝지만 정확히 스택은 아니다. 아래에서 설명하듯 문제는 집합론적이다.
+
+\begin{lemma}
+\label{lemma-spaces-strongly-cartesian}
+$\Spacesstack$의 사상 $(f, g) : X/U \to Y/V$가 강하게 데카르트일
+필요충분조건은 사상 $f$가 동형 $X \to U \times_{g, V} Y$를 유도하는
+것이다.
+\end{lemma}
+
+\begin{proof}
+$Y/V \in \Ob(\Spacesstack)$라 하고, $g : U \to V$를
+$(\Sch/S)_{fppf}$의 사상이라 하자. 사영
+$p : U \times_{g, V} Y \to Y$는 $\Spacesstack$의 사상
+$(p, g) : U \times_{g, V} Y/U \to Y/V$를 준다. $(p, g)$가 강하게
+데카르트라고 주장한다. 실제로 $\Spacesstack$의 임의의 대상 $Z/W$에 대하여
+\begin{align*}
+\Mor_{\Spacesstack}(Z/W, U \times_{g, V} Y/U)
+& =
+\coprod\nolimits_{h \in \Mor_S(W, U)}
+\Mor_{\textit{Spaces}/W}(Z, W \times_{h, U} U \times_{g, V} Y) \\
+& =
+\coprod\nolimits_{h \in \Mor_S(W, U)}
+\Mor_{\textit{Spaces}/W}(Z, W \times_{g \circ h, V} Y) \\
+& =
+\Mor_{\Spacesstack}(Z/W, Y/V)
+\times_{\Mor_S(W, V)} \Mor_S(W, U)
+\end{align*}
+이고, 여기서 식 (\ref{equation-morphisms-spaces})을 두 번 사용하였다.
+이로써 $(p, g)$가 범주, 정의
+\ref{categories-definition-cartesian-over-C}의 조건을 만족하므로 주장이
+성립한다. 이제 범주, 보조정리
+\ref{categories-lemma-composition-cartesian}에 의해 동형은 강하게
+데카르트이고 강하게 데카르트인 사상들의 합성도 강하게 데카르트이다.
+따라서 보조정리의 ``충분'' 부분이 증명된다. 역으로 $Y/V$와
+$g : U \to V$가 주어졌을 때, 목표가 $Y/V$이고 $g$를 올리는 강하게
+데카르트인 사상이 존재하면 이는 $(p, g)$와 동형이어야 한다. 범주, 정의
+\ref{categories-definition-cartesian-over-C} 뒤의 논의를 보라. 따라서
+보조정리의 ``필요'' 부분도 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pre-stack-of-spaces}
+함자 $p : \Spacesstack \to (\Sch/S)_{fppf}$는 스택, 정의
+\ref{stacks-definition-stack}의 조건 (1), (2)를 만족한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-spaces-strongly-cartesian}에서 $\Spacesstack$가
+$(\Sch/S)_{fppf}$ 위의 섬유화된 범주임이 따르므로 (1)이 증명된다.
+$\{U_i \to U\}_{i \in I}$가 $(\Sch/S)_{fppf}$의 피복이라고 하자.
+$X, Y$가 $U$ 위의 대수공간이라고 하자. 마지막으로
+$\varphi_i : X_{U_i} \to Y_{U_i}$가 $\textit{Spaces}/U_i$의 사상들이고,
+$\varphi_i$와 $\varphi_j$의 $U_i \times_U U_j$ 위로의 제한이 같은
+대수공간의 사상 $X_{U_i \times_U U_j} \to Y_{U_i \times_U U_j}$라고 하자.
+(2)를 증명하려면 $U_i$로의 밑변환이 $\varphi_i$와 같은 $U$ 위의 유일한
+사상 $\varphi  : X \to Y$가 존재함을 보여야 한다. $X$에서 $Y$로의
+사상은 층의 사상과 같으므로 이는 자리, 보조정리
+\ref{sites-lemma-glue-maps}에서 곧바로 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-stack-spaces}
+집합론적 어려움을 무시하면\footnote{어려움은 $\Spacesstack$가 진클래스라는
+데 있지 않다. $S$ 위의 대수공간에 대한 우리의 정의에 따르면 $S$ 위의
+대수공간의 동형류들은 집합을 이루기 때문이다. 오히려 대수공간들의 임의의
+분리합이 너무 커져서 우리가 택한 집합의 ``부분 우주'' 밖에 놓일 수 있다는
+것이 문제이다.} $\Spacesstack$는 대상에 대한 하강도 만족하므로 스택이다.
+즉, 다음이 주어지면
+\begin{enumerate}
+\item fppf 피복 $\{U_i \to U\}_{i \in I}$,
+\item 각 $i \in I$에 대하여 대수공간 $X_i/U_i$,
+\item 각 $i, j \in I$에 대하여 $U_i \times_U U_j$ 위의 대수공간의 동형
+$\varphi_{ij} : X_i \times_U U_j \to U_i \times_U X_j$로서
+$U_i \times_U U_j \times_U U_k$ 위에서 쌍대순환 조건을 만족하는 것,
+\end{enumerate}
+대수공간 $X/U$와 $U_i$ 위의 동형 $X_{U_i} \cong X_i$가 존재하여 동형
+$\varphi_{ij}$를 복원함을 보여야 한다. 먼저 자리, 보조정리
+\ref{sites-lemma-glue-sheaves}에 의해 $X_i$와 $\varphi_{ij}$를 복원하는
+$(\Sch/U)_{fppf}$ 위의 층 $X$가 존재한다. 그러면 부트스트랩, 보조정리
+\ref{bootstrap-lemma-locally-algebraic-space}에 의해, 그 보조정리의 집합론적
+조건을 무시하면 $X$가 대수공간임을 알 수 있다. 다음 절에서는 이 논증을
+사용하여 유한형 대수공간만을 고려하면 스택을 얻음을 보인다.
+\end{remark}
+
+
+
+
+
+
+\section{유한형 대수공간의 스택}
+\label{section-stack-of-finite-type-spaces}
+
+
+\noindent
+유한형 대수공간만을 고려하면 대수공간의 스택을 얻을 수 있다.
+$$
+p_{ft} : \Spacesstack_{ft} \to (\Sch/S)_{fppf}
+$$
+를 $X \to U$가 유한형 사상인 쌍 $X/U$들로 이루어진,
+$(\Sch/S)_{fppf}$ 위의 $\Spacesstack$의 충만한 부분범주로 나타내자.
+
+\begin{lemma}
+\label{lemma-stack-of-finite-type-spaces}
+함자
+$p_{ft} : \Spacesstack_{ft} \to (\Sch/S)_{fppf}$
+는 스택, 정의 \ref{stacks-definition-stack}의 조건 (1), (2), (3)을
+만족한다.
+\end{lemma}
+
+\begin{proof}
+무슨 일이 일어나는지 오히려 알아보기 어려울 만큼 지나치게 자세히 적겠다.
+
+\medskip\noindent
+보조정리 \ref{lemma-spaces-strongly-cartesian}에서 $\Spacesstack$의 사상
+$(f, g) : X/U \to Y/V$가 강하게 데카르트일 조건은 유도된 사상
+$f : X \to U \times_V Y$가 동형인 것임을 보았다. $Y \to V$가 유한형이면
+$U \times_V Y \to U$도 유한형임에 유의하자. 대수공간의 사상, 보조정리
+\ref{spaces-morphisms-lemma-base-change-finite-type}를 보라. 따라서
+$\Spacesstack$의 $(f, g) : X/U \to Y/V$가 $\Spacesstack$에서 강하게
+데카르트이고 $Y/V$가 $\Spacesstack_{ft}$의 대상이면, 자동으로 $X/U$도
+$\Spacesstack_{ft}$의 대상이며 물론 $(f, g)$도 $\Spacesstack_{ft}$에서
+강하게 데카르트이다. 이로써 $\Spacesstack_{ft}$가 $(\Sch/S)_{fppf}$ 위의
+섬유화된 범주임을 알 수 있다. 이것으로 (1)이 증명된다.
+
+\medskip\noindent
+위의 논증은 포함 함자 $\Spacesstack_{ft} \to \Spacesstack$가 강하게
+데카르트인 사상을 강하게 데카르트인 사상으로 보냄도 보여 준다. 다시 말해
+$\Spacesstack_{ft} \to \Spacesstack$는 $(\Sch/S)_{fppf}$ 위의 섬유화된
+범주들의 $1$-사상이다.
+
+\medskip\noindent
+$U \in \Ob((\Sch/S)_{fppf})$라 하고, $X, Y$를 $U$ 위의 유한형
+대수공간이라 하자. 스택, 보조정리
+\ref{stacks-lemma-presheaf-mor-map-fibred-categories}에 의해 준층의 사상
+$$
+\mathit{Mor}_{\Spacesstack_{ft}}(X, Y)
+\longrightarrow
+\mathit{Mor}_{\Spacesstack}(X, Y)
+$$
+을 얻는다. $\Spacesstack_{ft}$가 $\Spacesstack$의 충만한 부분범주이므로
+이는 동형이다. 보조정리 \ref{lemma-pre-stack-of-spaces}에서 오른쪽이
+층임을 보였으므로 왼쪽도 층이다. 이것으로 (2)가 증명된다.
+
+\medskip\noindent
+스택, 정의 \ref{stacks-definition-stack}의 조건 (3)을 증명하려면 다음을
+보여야 한다. 다음이 주어졌다고 하자.
+\begin{enumerate}
+\item $(\Sch/S)_{fppf}$의 피복 $\{U_i \to U\}_{i \in I}$,
+\item 각 $i \in I$에 대하여 $U_i$ 위의 유한형 대수공간 $X_i$,
+\item 각 $i, j \in I$에 대하여 $U_i \times_U U_j$ 위의 대수공간의 동형
+$\varphi_{ij} : X_i \times_U U_j \to U_i \times_U X_j$로서
+$U_i \times_U U_j \times_U U_k$ 위에서 쌍대순환 조건을 만족하는 것.
+\end{enumerate}
+그러면 $U$ 위의 유한형 대수공간 $X$와 $U_i$ 위의 동형
+$X_{U_i} \cong X_i$가 존재하여 동형 $\varphi_{ij}$를 복원해야 한다. 이는
+부트스트랩, 보조정리 \ref{bootstrap-lemma-descend-algebraic-space}의 (2)에서
+따른다. 대수공간 위의 하강, 보조정리
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation}에
+의해 $X \to U$가 유한형임을 알 수 있으며, 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-stack-ft-spaces}
+다음 성질들을 갖는 부분범주
+$\Spacesstack_{ft, small} \subset \Spacesstack_{ft}$
+가 존재한다.
+\begin{enumerate}
+\item 포함 함자 $\Spacesstack_{ft, small} \to \Spacesstack_{ft}$는
+충실충만이고 본질적으로 전사이다.
+\item 함자
+$p_{ft, small} : \Spacesstack_{ft, small} \to (\Sch/S)_{fppf}$는
+$\Spacesstack_{ft, small}$를 $(\Sch/S)_{fppf}$ 위의 스택으로 만든다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-stack-of-finite-type-spaces}에서
+$p_{ft} : \Spacesstack_{ft} \to (\Sch/S)_{fppf}$가 스택, 정의
+\ref{stacks-definition-stack}의 (1), (2), (3)을 만족함을 보았다. 모든
+$S$ 위의 대수공간 $X$는 어떤
+$U, R \in \Ob((\Sch/S)_{fppf})$에 대하여 $U/R$ 꼴이므로 스택, 주
+\ref{stacks-remark-stack-make-small}의 추가 조건 (4)도 성립한다. 대수공간,
+보조정리 \ref{spaces-lemma-space-presentation}을 보라. 따라서 대상의
+동형류들은 집합을 이룬다. 그러므로 그 주의 논의에서
+$\Spacesstack_{ft, small}$를 얻는다.
+\end{proof}
+
+\noindent
+뒤에서 종종 더 언급하지 않고 치환
+$$
+\Spacesstack_{ft} \leadsto \Spacesstack_{ft, small}
+$$
+을 시행하고, 표기를 남용하여 이 치환 결과도 단순히 $\Spacesstack_{ft}$로
+나타낼 것이다.
+
+\begin{remark}
+\label{remark-higher-cardinality-spaces}
+이 절의 논의 전체는 다음과 같은 국소 유한형 대수공간 $X/U$를 고려할
+때에도 성립한다. 즉, $U$의 아핀 열린집합의 $X$ 안에서의 역상이 가산개의
+아핀으로 덮이는 경우이다. 필요하다면 기수 $\kappa$에 대하여
+$\kappa$-형 사상이라는 개념도 도입할 수 있다. 이는 환 확대의 생성자 수에
+대한 어떤 상계와, 바탕의 주어진 아핀 위에 놓인 아핀들의 기수에 대한 어떤
+상계를 뜻한다. 그러면 위와 정확히 같은 방식으로 스택
+$$
+\Spacesstack_\kappa \longrightarrow (\Sch/S)_{fppf}
+$$
+를 만들 수 있다. 단, $\Sch$가 $\kappa$에 따라 충분히 크도록 해야 한다.
+\end{remark}
+
+
+
+
+
+\section{준군 스택의 예}
+\label{section-examples-stacks-in-groupoids}
+
+\noindent
+위의 예들은 준군 스택이 아닌 스택의 예이다. 이 장의 나머지에서는
+준군 스택의 대수기하적 예들을 제시한다.
+
+
+
+\section{층에 결부된 스택}
+\label{section-stack-associated-to-sheaf}
+
+\noindent
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를 준층이라 하자.
+집합들로 섬유화된 범주
+$$
+p_F : \mathcal{S}_F \to (\Sch/S)_{fppf},
+$$
+를 얻는다. 범주, 예 \ref{categories-example-presheaf}를 보라.
+이는 $F$가 층일 필요충분조건으로 집합 스택이다. 스택, 보조정리
+\ref{stacks-lemma-stack-in-setoids-characterize}를 보라.
+
+
+
+\section{유한 생성 준연접층의 준군 스택}
+\label{section-stack-in-groupoids-of-quasi-coherent-sheaves}
+
+\noindent
+$p : \QCohstack_{fg} \to (\Sch/S)_{fppf}$를 절
+\ref{section-stack-of-finitely-generated-quasi-coherent-sheaves}에서
+도입한 스택이라 하자(그곳에서 도입한 표기법의 남용을 사용한다).
+범주, 보조정리
+\ref{categories-lemma-fibred-gives-fibred-groupoids}의 절차로 이를 준군 스택
+$p' : \QCohstack_{fg}' \to (\Sch/S)_{fppf}$로 바꿀 수 있다. 스택,
+보조정리 \ref{stacks-lemma-stack-gives-stack-groupoids}를 보라.
+이 특별한 경우 이는 단지 $\QCohstack_{fg}'$가 $\QCohstack_{fg}$와 같은
+대상들을 가지되, 사상은 쌍
+$(f, g) : (U, \mathcal{F}) \to (U', \mathcal{F}')$이고 여기서 $g$는
+동형사상 $g : f^*\mathcal{F}' \to \mathcal{F}$라는 뜻이다.
+
+
+\section{유한형 대수공간의 준군 스택}
+\label{section-stack-in-groupoids-of-finite-type-spaces}
+
+\noindent
+$p : \Spacesstack_{ft} \to (\Sch/S)_{fppf}$를 절
+\ref{section-stack-of-finite-type-spaces}에서 도입한 스택이라 하자
+(그곳에서 도입한 표기법의 남용을 사용한다). 범주, 보조정리
+\ref{categories-lemma-fibred-gives-fibred-groupoids}의 절차로 이를 준군 스택
+$p' : \Spacesstack_{ft}' \to (\Sch/S)_{fppf}$로 바꿀 수 있다. 스택,
+보조정리 \ref{stacks-lemma-stack-gives-stack-groupoids}를 보라.
+이 특별한 경우 이는 단지 $\Spacesstack_{ft}'$가 $\Spacesstack_{ft}$와
+같은 대상들, 즉 $X$가 $S$ 위의 대수공간이고 $U$가 $S$ 위의 스킴인
+유한형 사상 $X \to U$들을 가진다는 뜻이다. 그러나 이제 사상
+$(f, g) : X/U \to Y/V$는 다음 가환 도표이며
+$$
+\xymatrix{
+X \ar[d] \ar[r]_f & Y \ar[d] \\
+U \ar[r]^g & V
+}
+$$
+이 도표는 데카르트이다.
+
+
+
+\section{몫 스택}
+\label{section-quotient-stacks}
+
+\noindent
+$(U, R, s, t, c)$가 $S$ 위 대수공간의 준군이라고 하자. 이 경우 몫 스택
+$$
+[U/R] \longrightarrow (\Sch/S)_{fppf}
+$$
+는 구성상 준군 스택이다. 대수공간의 준군, 정의
+\ref{spaces-groupoids-definition-quotient-stack}를 보라.
+나아가 $\mathit{Isom}$-층들은 대수공간으로 표현가능하다. 부트스트랩,
+보조정리 \ref{bootstrap-lemma-quotient-stack-isom}를 보라.
+이러한 몫 스택들은 대수 스택 이론에서 근본적으로 중요하다.
+
+\medskip\noindent
+위 구성의 특별한 경우는 데이터 $(B, G/B, m, X/B, a)$에 결부된 몫 스택
+$$
+[X/G] \longrightarrow (\Sch/S)_{fppf}
+$$
+이다. 여기서
+\begin{enumerate}
+\item $B$는 $S$ 위의 대수공간이고,
+\item $(G, m)$은 $B$ 위의 대수군 공간이며,
+\item $X$는 $B$ 위의 대수공간이고,
+\item $a : G \times_B X \to X$는 $B$ 위에서 $X$에 대한 $G$의 작용이다.
+\end{enumerate}
+실제로 대수공간의 준군, 정의
+\ref{spaces-groupoids-definition-quotient-stack}에 의해 준군 스택
+$[X/G]$는 위에서 주어진 몫 스택 $[X/G \times_B X]$이다. 범주
+$[X/G]$가 실제로 어떤 모습인지 명시할 필요가 있다. 이는 절
+\ref{section-group-quotient-stacks}에서 하겠다.
+
+
+
+\section{토서의 분류}
+\label{section-torsors}
+
+\noindent
+대수군 공간 $G$ 또는 군 층 $\mathcal{G}$에 대한 토서의 스택을 연구한다는
+것이 무엇을 뜻할 수 있는지 몇 가지 변형을 세심하게 설명하고자 한다.
+
+
+
+\subsection{군 층 토서}
+\label{subsection-torsors-sheaf}
+
+\noindent
+$\mathcal{G}$를 $(\Sch/S)_{fppf}$ 위의 군 층이라 하자.
+$U \in \Ob((\Sch/S)_{fppf})$에 대하여 $\mathcal{G}$의
+$(\Sch/U)_{fppf}$로의 제한을 $\mathcal{G}|_U$로 나타낸다. 범주
+$\mathcal{G}\textit{-Torsors}$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item $\mathcal{G}\textit{-Torsors}$의 대상은 쌍 $(U, \mathcal{F})$이다.
+여기서 $U$는 $(\Sch/S)_{fppf}$의 대상이고 $\mathcal{F}$는
+$\mathcal{G}|_U$-토서이다. 사이트 위의 코호몰로지, 정의
+\ref{sites-cohomology-definition-torsor}를 보라.
+\item 사상 $(U, \mathcal{F}) \to (V, \mathcal{H})$는 쌍
+$(f, \alpha)$로 주어진다. 여기서 $f : U \to V$는 $S$ 위의 스킴 사상이고
+$\alpha : f^{-1}\mathcal{H} \to \mathcal{F}$는
+$\mathcal{G}|_U$-토서의 동형사상이다.
+\end{enumerate}
+따라서 $\mathcal{G}\textit{-Torsors}$는 범주이고
+$$
+p : \mathcal{G}\textit{-Torsors} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(U, \mathcal{F}) \longmapsto U
+$$
+는 함자이다. $U$ 위의 $\mathcal{G}\textit{-Torsors}$의 섬유범주는
+$\mathcal{G}|_U$-토서의 범주이며, 이는 준군임에 유의하자.
+
+\begin{lemma}
+\label{lemma-torsors-sheaf-stack-in-groupoids}
+스택, 주의 \ref{stacks-remark-stack-make-small}에서와 같이 대체하면 함자
+$$
+p : \mathcal{G}\textit{-Torsors} \longrightarrow (\Sch/S)_{fppf}
+$$
+는 $(\Sch/S)_{fppf}$ 위의 준군 스택을 정의한다.
+\end{lemma}
+
+\begin{proof}
+증명에서 가장 어려운 부분은 대상의 내림이 성립함을 보이는 것이다.
+$\{U_i \to U\}_{i \in I}$를 $(\Sch/S)_{fppf}$의 피복이라 하자.
+각 $i$에 대해 $\mathcal{G}|_{U_i}$-토서 $\mathcal{F}_i$가 주어지고,
+각 $i, j \in I$에 대해 동형사상
+$\varphi_{ij} :
+\mathcal{F}_i|_{U_i \times_U U_j} \to \mathcal{F}_j|_{U_i \times_U U_j}$
+이 주어졌다고 하자. 이는 $\mathcal{G}|_{U_i \times_U U_j}$-토서의
+동형사상이고 $U_i \times_U U_j \times_U U_k$ 위에서 적절한 코사이클
+조건을 만족한다. 그러면 사이트, 절
+\ref{sites-section-glueing-sheaves}에 의해 $(\Sch/U)_{fppf}$ 위의 층
+$\mathcal{F}$를 얻으며, 이를 각 $U_i$로 제한하면 $\mathcal{F}_i$와
+내림 데이터를 모두 되찾는다. 사이트, 보조정리
+\ref{sites-lemma-mapping-property-glue}의 범주 동치에 의해 작용 사상들
+$\mathcal{G}|_{U_i} \times \mathcal{F}_i \to \mathcal{F}_i$는 이어 붙어서
+사상 $a : \mathcal{G}|_U \times \mathcal{F} \to \mathcal{F}$를 준다.
+이제 $a$가 작용이고 $\mathcal{F}$가 $\mathcal{G}|_U$-토서가 됨을 보여야
+한다. 두 성질 모두 국소적으로 확인할 수 있으므로, 작용
+$\mathcal{G}|_{U_i} \times \mathcal{F}_i \to \mathcal{F}_i$의 대응하는
+성질에서 따른다. 이로써 $\mathcal{G}\textit{-Torsors}$에서 대상의
+내림이 성립한다. 몇몇 세부사항은 생략한다.
+\end{proof}
+
+
+
+\subsection{층에 대한 토서의 변형}
+\label{subsection-variant-torsor-sheaf}
+
+\noindent
+소절 \ref{subsection-torsors-sheaf}의 구성을 조금 일반화할 수 있다.
+구체적으로 $\mathcal{G} \to \mathcal{B}$를 $(\Sch/S)_{fppf}$ 위의 층
+사상이라 하고
+$$
+m :
+\mathcal{G} \times_\mathcal{B} \mathcal{G}
+\longrightarrow
+\mathcal{G}
+$$
+을 $\mathcal{G}/\mathcal{B}$ 위의 군 법칙이라 하자. 다시 말해 쌍
+$(\mathcal{G}, m)$은 토포스 $\Sh((\Sch/S)_{fppf})/\mathcal{B}$의
+군 대상이다. 토포스의 국소화에 관해서는 사이트, 절
+\ref{sites-section-localize-topoi}를 보라. 이 상황에서 범주
+$\mathcal{G}/\mathcal{B}\textit{-Torsors}$를 다음과 같이 정의할 수 있다
+(Yoneda 매장을 사용하여 스킴을 층으로 생각한다).
+\begin{enumerate}
+\item $\mathcal{G}/\mathcal{B}\textit{-Torsors}$의 대상은 삼중항
+$(U, b, \mathcal{F})$이며, 여기서
+\begin{enumerate}
+\item $U$는 $(\Sch/S)_{fppf}$의 대상이고,
+\item $b : U \to \mathcal{B}$는 $U$ 위의 $\mathcal{B}$의 절단이며,
+\item $\mathcal{F}$는 $U$ 위의
+$U \times_{b, \mathcal{B}}\mathcal{G}$-토서이다.
+\end{enumerate}
+\item 사상 $(U, b, \mathcal{F}) \to (U', b', \mathcal{F}')$는 쌍
+$(f, g)$로 주어진다. 여기서 $f : U \to U'$는 $b = b' \circ f$를
+만족하는 $S$ 위의 스킴 사상이고, $g : f^{-1}\mathcal{F}' \to \mathcal{F}$는
+$U \times_{b, \mathcal{B}} \mathcal{G}$-토서의 동형사상이다.
+\end{enumerate}
+따라서 $\mathcal{G}/\mathcal{B}\textit{-Torsors}$는 범주이고
+$$
+p :
+\mathcal{G}/\mathcal{B}\textit{-Torsors}
+\longrightarrow
+(\Sch/S)_{fppf},
+\quad
+(U, b, \mathcal{F}) \longmapsto U
+$$
+는 함자이다. $U$ 위의 $\mathcal{G}/\mathcal{B}\textit{-Torsors}$의
+섬유범주는 모든 $b : U \to \mathcal{B}$에 대한
+$U \times_{b, \mathcal{B}} \mathcal{G}$-토서의 범주들의 서로소 합이며,
+따라서 준군이다.
+
+\medskip\noindent
+특별한 경우 $\mathcal{B} = S$에는 소절
+\ref{subsection-torsors-sheaf}에서 도입한 범주
+$\mathcal{G}\textit{-Torsors}$를 되찾는다.
+
+\begin{lemma}
+\label{lemma-variant-torsors-sheaf-stack-in-groupoids}
+스택, 주의 \ref{stacks-remark-stack-make-small}에서와 같이 대체하면 함자
+$$
+p :
+\mathcal{G}/\mathcal{B}\textit{-Torsors}
+\longrightarrow
+(\Sch/S)_{fppf}
+$$
+는 $(\Sch/S)_{fppf}$ 위의 준군 스택을 정의한다.
+\end{lemma}
+
+\begin{proof}
+이 증명은 보조정리 \ref{lemma-torsors-sheaf-stack-in-groupoids}의 증명을
+되풀이한다. 그 증명의 표기법이 덜 번거로우므로 독자는 먼저 그것을 읽기를
+권한다. 가장 어려운 부분은 대상의 내림이 성립함을 보이는 것이다.
+$\{U_i \to U\}_{i \in I}$를 $(\Sch/S)_{fppf}$의 피복이라 하자.
+각 $i$에 대해 사상 $b_i : U_i \to \mathcal{B}$와
+$U_i \times_{b_i, \mathcal{B}} \mathcal{G}$-토서 $\mathcal{F}_i$로 이루어진
+쌍 $(b_i, \mathcal{F}_i)$가 주어졌다고 하자. 또한 각 $i, j \in I$에 대해
+$b_i|_{U_i \times_U U_j} = b_j|_{U_i \times_U U_j}$이고 동형사상
+$\varphi_{ij} :
+\mathcal{F}_i|_{U_i \times_U U_j} \to \mathcal{F}_j|_{U_i \times_U U_j}$
+이 주어졌다고 하자. 이는
+$(U_i \times_U U_j) \times_\mathcal{B} \mathcal{G}$-토서의 동형사상이고
+$U_i \times_U U_j \times_U U_k$ 위에서 적절한 코사이클 조건을 만족한다.
+그러면 사이트, 절 \ref{sites-section-glueing-sheaves}에 의해
+$(\Sch/U)_{fppf}$ 위의 층 $\mathcal{F}$를 얻으며, 이를 각 $U_i$로 제한하면
+$\mathcal{F}_i$와 내림 데이터를 모두 되찾는다. $\mathcal{B}$의 층 공리에
+의해 사상들 $b_i$는 유일한 사상 $b : U \to \mathcal{B}$에서 온다.
+사이트, 보조정리 \ref{sites-lemma-mapping-property-glue}의 범주 동치에 의해
+작용 사상들
+$(U_i \times_{b_i, \mathcal{B}} \mathcal{G}) \times_{U_i} \mathcal{F}_i
+\to \mathcal{F}_i$
+은 이어 붙어서 사상
+$(U \times_{b, \mathcal{B}} \mathcal{G}) \times \mathcal{F} \to \mathcal{F}$.
+를 준다. 이제 이것이 작용이고 $\mathcal{F}$가
+$U \times_{b, \mathcal{B}} \mathcal{G}$-토서가 됨을 보여야 한다.
+두 성질 모두 국소적으로 확인할 수 있으므로 $\mathcal{F}_i$ 위 작용들의
+대응하는 성질에서 따른다. 이로써
+$\mathcal{G}/\mathcal{B}\textit{-Torsors}$에서 대상의 내림이 성립한다.
+몇몇 세부사항은 생략한다.
+\end{proof}
+
+
+
+\subsection{주동차 공간}
+\label{subsection-principal-homogeneous-spaces}
+
+\noindent
+$B$를 $S$ 위의 대수공간이라 하고 $G$를 $B$ 위의 대수군 공간이라 하자.
+범주 $G\textit{-Principal}$을 다음과 같이 정의한다.
+\begin{enumerate}
+\item $G\textit{-Principal}$의 대상은 삼중항 $(U, b, X)$이며, 여기서
+\begin{enumerate}
+\item $U$는 $(\Sch/S)_{fppf}$의 대상이고,
+\item $b : U \to B$는 $S$ 위의 사상이며,
+\item $X$는 $U$ 위의 주동차 $G_U$-공간이고
+$G_U = U \times_{b, B} G$이다.
+\end{enumerate}
+대수공간의 준군, 정의
+\ref{spaces-groupoids-definition-principal-homogeneous-space}를 보라.
+\item 사상 $(U, b, X) \to (U', b', X')$는 쌍 $(f, g)$로 주어진다.
+여기서 $f : U \to U'$는 $B$ 위의 스킴 사상이고
+$g : X \to U \times_{f, U'} X'$는 주동차 $G_U$-공간의 동형사상이다.
+\end{enumerate}
+따라서 $G\textit{-Principal}$은 범주이고
+$$
+p : G\textit{-Principal} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(U, b, X) \longmapsto U
+$$
+는 함자이다. $U$ 위의 $G\textit{-Principal}$의 섬유범주는 모든
+$b : U \to B$에 대한 주동차 $U \times_{b, B} G$-공간의 범주들의 서로소
+합이며, 따라서 준군이다.
+
+\medskip\noindent
+특별한 경우 $S = B$에 대상들은 단지 쌍 $(U, X)$이다. 여기서 $U$는
+$S$ 위의 스킴이고 $X$는 $U$ 위의 주동차 $G_U$-공간이다. 또한 사상들은
+단지 다음 데카르트 도표들이며
+$$
+\xymatrix{
+X \ar[d] \ar[r]_g & X' \ar[d] \\
+U \ar[r]^f & U'
+}
+$$
+여기서 $g$는 $G$-등변이다.
+
+\begin{remark}
+\label{remark-principal-stack-in-groupoids}
+스택, 주의 \ref{stacks-remark-stack-make-small}에서와 같이 대체하면 함자
+$$
+p : G\textit{-Principal} \longrightarrow (\Sch/S)_{fppf}
+$$
+가 $(\Sch/S)_{fppf}$ 위의 준군 스택을 정의할 것이라고 추측한다. 이는 다음
+데이터가 주어졌을 때
+\begin{enumerate}
+\item $(\Sch/S)_{fppf}$의 피복 $\{U_i \to U\}_{i \in I}$,
+\item $U$ 위의 대수군 공간 $H$,
+\item 모든 $i$에 대해 $U_i$ 위의 주동차 $H_{U_i}$-공간 $X_i$, 그리고
+\item 코사이클 조건을 만족하는 $H$-등변 동형사상
+$\varphi_{ij} : X_{i, U_i \times_U U_j} \to X_{j, U_i \times_U U_j}$
+\end{enumerate}
+$(X_i, \varphi_{ij})$를 되찾는 $U$ 위의 주동차 $H$-공간 $X$가 존재함을
+보일 수 있다면 따른다. 부트스트랩, 보조정리
+\ref{bootstrap-lemma-descent-torsor}의 증명 기법은 이를 집합론적 문제로
+환원한다. 따라서 집합론적 문제를 무시하는 독자는 이 결과가 참임을
+``알게'' 될 것이다. 다음에는 이 문제에 접근하는 방법에 대한 제안이 있다.
+\url{https://math.columbia.edu/~dejong/wordpress/?p=591}
+\end{remark}
+
+
+
+\subsection{주동차 공간의 변형}
+\label{subsection-variant-principal-homogeneous-spaces}
+
+\noindent
+$S$를 스킴이라 하고 $B = S$라 하자. $G$를 $B = S$ 위의 군 스킴이라 하자.
+이 상황에서 충만 부분범주
+$G\textit{-Principal-Schemes} \subset G\textit{-Principal}$
+를 정의할 수 있다. 그 대상은 쌍 $(U, X)$이며, 여기서 $U$는
+$(\Sch/S)_{fppf}$의 대상이고 $X \to U$는 $U$ 위의 표현가능한, 즉 스킴인
+주동차 $G$-공간이다.
+
+\medskip\noindent
+일반적으로 $G\textit{-Principal-Schemes}$는 $(\Sch/S)_{fppf}$ 위의 준군
+스택이 아니다. 실제로 일반적으로 스킴이 아닌 주동차 공간이 존재하므로
+대상에 대한 내림이 일반적으로 성립하지 않기 때문이다.
+
+
+
+\subsection{fppf 위상에서의 토서}
+\label{subsection-fppf-torsors}
+
+\noindent
+$B$를 $S$ 위의 대수공간이라 하고 $G$를 $B$ 위의 대수군 공간이라 하자.
+범주 $G\textit{-Torsors}$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item $G\textit{-Torsors}$의 대상은 삼중항 $(U, b, X)$이며, 여기서
+\begin{enumerate}
+\item $U$는 $(\Sch/S)_{fppf}$의 대상이고,
+\item $b : U \to B$는 사상이며,
+\item $X$는 $U$ 위의 fppf $G_U$-토서이고 $G_U = U \times_{b, B} G$이다.
+\end{enumerate}
+대수공간의 준군, 정의
+\ref{spaces-groupoids-definition-principal-homogeneous-space}를 보라.
+\item 사상 $(U, b, X) \to (U', b', X')$는 쌍 $(f, g)$로 주어진다.
+여기서 $f : U \to U'$는 $B$ 위의 스킴 사상이고
+$g : X \to U \times_{f, U'} X'$는 $G_U$-토서의 동형사상이다.
+\end{enumerate}
+따라서 $G\textit{-Torsors}$는 범주이고
+$$
+p : G\textit{-Torsors} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(U, a, X) \longmapsto U
+$$
+는 함자이다. $U$ 위의 $G\textit{-Torsors}$의 섬유범주는 모든
+$b : U \to B$에 대한 fppf $U \times_{b, B} G$-토서 범주들의 서로소
+합이며, 따라서 준군이다.
+
+\medskip\noindent
+특별한 경우 $S = B$에 대상들은 단지 쌍 $(U, X)$이다. 여기서 $U$는
+$S$ 위의 스킴이고 $X$는 $U$ 위의 fppf $G_U$-토서이다. 또한 사상들은
+단지 다음 데카르트 도표들이며
+$$
+\xymatrix{
+X \ar[d] \ar[r]_g & X' \ar[d] \\
+U \ar[r]^f & U'
+}
+$$
+여기서 $g$는 $G$-등변이다.
+
+\begin{lemma}
+\label{lemma-torsors-stack-in-groupoids}
+스택, 주의 \ref{stacks-remark-stack-make-small}에서와 같이 대체하면 함자
+$$
+p : G\textit{-Torsors} \longrightarrow (\Sch/S)_{fppf}
+$$
+는 $(\Sch/S)_{fppf}$ 위의 준군 스택을 정의한다.
+\end{lemma}
+
+\begin{proof}
+증명에서 가장 어려운 부분은 대상의 내림이 성립함을 보이는 것이며, 이는
+부트스트랩, 보조정리 \ref{bootstrap-lemma-descent-torsor}이다.
+스택, 정의 \ref{stacks-definition-stack-in-groupoids}의 공리 (1)과 (2)의
+증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-torsors}
+$B$를 $S$ 위의 대수공간이라 하고 $G$를 $B$ 위의 대수군 공간이라 하자.
+대수공간 $G$, 각각 $B$를 $(\Sch/S)_{fppf}$ 위의 층으로 본 것을
+$\mathcal{G}$, 각각 $\mathcal{B}$로 나타내자. 함자
+$$
+G\textit{-Torsors} \longrightarrow \mathcal{G}/\mathcal{B}\textit{-Torsors}
+$$
+는 삼중항 $(U, b, X)$에 삼중항 $(U, b, \mathcal{X})$를 대응시킨다.
+여기서 $\mathcal{X}$는 $X$를 층으로 본 것이다. 이 함자는
+$(\Sch/S)_{fppf}$ 위 준군 스택들의 동치이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 스택, 보조정리
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff}의 결과를
+사용한다. $S$ 위 대수공간의 범주는 $(\Sch/S)_{fppf}$ 위의 층의 범주의
+충만 부분범주이므로 이 함자는 완전충실하다. 또한 양쪽의 모든 대상은
+국소 자명 토서이므로 위에서 인용한 보조정리의 조건 (2)가 성립한다.
+따라서 이 함자는 동치이다.
+\end{proof}
+
+
+
+\subsection{fppf 위상에서 토서의 변형}
+\label{subsection-variant-fppf-torsors}
+
+\noindent
+$S$를 스킴이라 하고 $B = S$라 하자. $G$를 $B = S$ 위의 군 스킴이라 하자.
+이 상황에서 충만 부분범주
+$G\textit{-Torsors-Schemes} \subset G\textit{-Torsors}$
+를 정의할 수 있다. 그 대상은 쌍 $(U, X)$이며, 여기서 $U$는
+$(\Sch/S)_{fppf}$의 대상이고 $X \to U$는 $U$ 위의 표현가능한, 즉 스킴인
+fppf $G$-토서이다.
+
+\medskip\noindent
+일반적으로 $G\textit{-Torsors-Schemes}$는 $(\Sch/S)_{fppf}$ 위의 준군
+스택이 아니다. 실제로 일반적으로 스킴이 아닌 fppf $G$-토서가 존재하므로
+대상에 대한 내림이 일반적으로 성립하지 않기 때문이다.
+
+
+
+
+
+
+\section{군 작용에 의한 몫}
+\label{section-group-quotient-stacks}
+
+\noindent
+이제 충분한 표기법을 도입했으므로 절 \ref{section-quotient-stacks}의 스택
+$[X/G]$가 어떤 모습인지 더 자세히 알아볼 수 있다.
+
+\begin{situation}
+\label{situation-quotient-stack}
+다음을 가정한다.
+\begin{enumerate}
+\item $S$는 $\Sch_{fppf}$에 들어 있는 스킴이고,
+\item $B$는 $S$ 위의 대수공간이며,
+\item $(G, m)$은 $B$ 위의 대수군 공간이고,
+\item $\pi : X \to B$는 $B$ 위의 대수공간이며,
+\item $a : G \times_B X \to X$는 $B$ 위에서 $X$에 대한 $G$의 작용이다.
+\end{enumerate}
+\end{situation}
+
+\noindent
+이 상황에서 범주 $[[X/G]]$\footnote{이중 괄호를 쓴 표기 $[[X/G]]$는 이
+범주를 앞서 도입한 스택 $[X/G]$와 구별한다. 명제
+\ref{proposition-equal-quotient-stacks}에서 둘이 표준적으로 동치임을 보인다.
+그 뒤에는 표기 $[X/G]$를 둘 중 어느 것에도 사용한다.}를 다음과 같이
+구성한다.
+\begin{enumerate}
+\item $[[X/G]]$의 대상은 사중항 $(U, b, P, \varphi : P \to X)$이며, 여기서
+\begin{enumerate}
+\item $U$는 $(\Sch/S)_{fppf}$의 대상이고,
+\item $b : U \to B$는 $S$ 위의 사상이며,
+\item $P$는 $U$ 위의 fppf $G_U$-토서이고 $G_U = U \times_{b, B} G$이며,
+\item $\varphi : P \to X$는 다음 가환 도표에 들어맞는 $G$-등변 사상이다.
+$$
+\xymatrix{
+P \ar[d] \ar[r]_{\varphi} & X \ar[d] \\
+U \ar[r]^b & B
+}
+$$
+\end{enumerate}
+\item $[[X/G]]$의 사상은 쌍
+$(f, g) : (U, b, P, \varphi) \to (U', b', P', \varphi')$
+이다. 여기서 $f : U \to U'$는 $B$ 위의 스킴 사상이고 $g : P \to P'$는
+$f$ 위의 $G$-등변 사상으로서 동형사상 $P \cong U \times_{f, U'} P'$를
+유도하며 $\varphi = \varphi' \circ g$를 만족한다. 다시 말해 $(f, g)$는
+다음 가환 도표에 들어맞는다.
+$$
+\xymatrix{
+P \ar[d] \ar[rrrd]_\varphi \ar[r]^g & P' \ar[d] \ar[rrd]^{\varphi'} \\
+U \ar[rrrd]_b \ar[r]^f & U' \ar[rrd]^{b'} & & X \ar[d] \\
+& & & B
+}
+$$
+\end{enumerate}
+따라서 $[[X/G]]$는 범주이고
+$$
+p : [[X/G]] \longrightarrow (\Sch/S)_{fppf},
+\quad
+(U, b, P, \varphi) \longmapsto U
+$$
+는 함자이다. $U$ 위의 $[[X/G]]$의 섬유범주는 모든
+$b \in \Mor_S(U, B)$에 대해 $X$로 가는 $G$-등변 사상이 갖추어진 fppf
+$U \times_{b, B} G$-토서 $P$들의 서로소 합이다. 따라서 $[[X/G]]$의
+섬유범주들은 준군이다.
+
+\medskip\noindent
+함자
+$$
+[[X/G]] \longrightarrow G\textit{-Torsors},
+\quad
+(U, b, P, \varphi) \longmapsto (U, b, P)
+$$
+는 $(\Sch/S)_{fppf}$ 위 범주들의 $1$-사상임에 유의하자.
+
+\begin{lemma}
+\label{lemma-group-quotient-stack-in-groupoids}
+스택, 주의 \ref{stacks-remark-stack-make-small}에서와 같이 대체하면 함자
+$$
+p : [[X/G]] \longrightarrow (\Sch/S)_{fppf}
+$$
+는 $(\Sch/S)_{fppf}$ 위의 준군 스택을 정의한다.
+\end{lemma}
+
+\begin{proof}
+증명에서 가장 어려운 부분은 대상의 내림이 성립함을 보이는 것이다.
+$\{U_i \to U\}_{i \in I}$가 $(\Sch/S)_{fppf}$의 피복이라고 하자.
+$\xi_i = (U_i, b_i, P_i, \varphi_i)$를 $U_i$ 위의 $[[X/G]]$의 대상이라 하고
+$\varphi_{ij} : \text{pr}_0^*\xi_i \to \text{pr}_1^*\xi_j$를 내림 데이터라
+하자. 특히 위의 함자 $[[X/G]] \to G\textit{-Torsors}$를 적용하면 준군
+스택 $G\textit{-Torsors}$에서 삼중항 $(U_i, b_i, P_i)$에 대한 내림 데이터를
+얻는다. $G\textit{-Torsors}$가 준군 스택임은 이미 보았다(보조정리
+\ref{lemma-torsors-stack-in-groupoids}). 따라서 어떤 사상 $b : U \to B$에
+대하여 $b_i = b|_{U_i}$이고, $U$ 위의 어떤 fppf
+$G_U = U \times_{b, B} G$-토서 $P$에 대하여 $P_i = U_i \times_U P$라고
+가정할 수 있다. 사상들 $\varphi_i$는 제한들 $U_i \times_U P$ 위의 표준
+내림 데이터와 양립하므로 사상 $\varphi : P \to X$를 정의한다. (예를 들어
+$\varphi$를 얻기 위해 사이트, 보조정리
+\ref{sites-lemma-mapping-property-glue} 또는 대수공간 위의 내림, 보조정리
+\ref{spaces-descent-lemma-fpqc-universal-effective-epimorphisms}를 사용할 수
+있다.) 이로써 대상의 내림이 증명된다. 스택, 정의
+\ref{stacks-definition-stack-in-groupoids}의 공리 (1)과 (2)의 증명은 생략한다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-equal-quotient-stacks}
+상황 \ref{situation-quotient-stack}에서 $(\Sch/S)_{fppf}$ 위 준군 스택들의
+표준 동치
+$$
+[X/G] \longrightarrow [[X/G]]
+$$
+가 존재한다.
+\end{proposition}
+
+\begin{proof}
+모든 정의가 정확히 올바르게 작동하는지 확인하기 위해 이를 자세히 적는다.
+$[X/G]$는 대수공간의 준군 $(X, G \times_B X, s, t, c)$에 결부된 몫
+스택임을 상기하자. 대수공간의 준군, 정의
+\ref{spaces-groupoids-definition-quotient-stack}를 보라. 이는 $[X/G]$가 함자
+$$
+(\Sch/S)_{fppf} \longrightarrow \textit{Groupoids},
+\quad
+U \longmapsto (X(U), G(U) \times_{B(U)} X(U), s, t, c)
+$$
+에 결부된 준군들로 섬유화된 범주 $[X/_{\!p}G]$의 스택화라는 뜻이다.
+여기서 $s(g, x) = x$, $t(g, x) = a(g, x)$이고
+$c((g, x), (g', x')) = (m(g, g'), x')$이다. 범주, 예
+\ref{categories-example-functor-groupoids}의 구성에 의해
+$[X/_{\!p}G]$의 대상은 $x \in X(U)$인 쌍 $(U, x)$이고,
+$[X/_{\!p}G]$의 사상 $(f, g) : (U, x) \to (U', x')$는 스킴 사상
+$f : U \to U'$와 $a(g, x) = x' \circ f$를 만족하는 원소 $g \in G(U)$로
+주어진다. 따라서 준군 스택들의 $1$-사상
+$$
+F_p : [X/_{\!p}G] \longrightarrow [[X/G]]
+$$
+을 다음 규칙으로 정의할 수 있다. 대상에 대해서는
+$$
+F_p(U, x) =
+(U, \pi \circ x, G \times_{B, \pi \circ x} U, a \circ (\text{id}_G \times x))
+$$
+로 둔다. 다음 도표는 가환하고
+$$
+\xymatrix{
+G \times_{B, \pi \circ x} U \ar[d] \ar[r]_{\text{id}_G \times x} &
+G \times_{B, \pi} X \ar[r]_-a &
+X \ar[d]^\pi \\
+U \ar[rr]^{\pi \circ x} & & B
+}
+$$
+섬유곱들을 각각 $U$, $X$ 위의 자명한 $G$-토서로 생각하면 두 수평 화살표는
+$G$-등변이므로 이 정의는 타당하다. 사상
+$(f, g) : (U, x) \to (U', x')$에 대해서는
+$F_p(f, g) = (f, R_{g^{-1}})$로 둔다. 여기서 $R_{g^{-1}}$는 $g$의 역원에
+의한 오른쪽 평행이동을 뜻한다. 더 정확히 말해 사상
+$F_p(f, g) : F_p(U, x) \to F_p(U', x')$는 다음 데카르트 도표로 주어진다.
+$$
+\xymatrix{
+G \times_{B, \pi \circ x} U \ar[d] \ar[r]_{R_{g^{-1}}} &
+G \times_{B, \pi \circ x'} U' \ar[d] \\
+U \ar[r]^f & U'
+}
+$$
+$T$-값 점들에서 $R_{g^{-1}}$는 다음과 같이 주어진다.
+$$
+R_{g^{-1}}(g', u) = (m(g', i(g(u))), f(u))
+$$
+이것이 잘 정의됨을 보이려면
+$$
+a \circ (\text{id}_G \times x)
+=
+a \circ (\text{id}_G \times x') \circ R_{g^{-1}}
+$$
+를 확인해야 한다. 오른쪽을 $T$-값 점 $(g', u)$에 적용하면 원하는 등식
+\begin{align*}
+a((\text{id}_G \times x')(m(g', i(g(u))), f(u)))
+& =
+a(m(g', i(g(u))), x'(f(u))) \\
+& =
+a(g', a(i(g(u)), x'(f(u)))) \\
+& =
+a(g', x(u))
+\end{align*}
+을 얻기 때문이다. 실제로 $a(g, x) = x' \circ f$이므로
+$a(i(g), x' \circ f) = x$이다.
+
+\medskip\noindent
+스택, 보조정리 \ref{stacks-lemma-stackify-groupoids-universal-property}의
+스택화의 보편 성질에 의해 위의 $1$-사상 $F_p$의 표준 연장
+$F : [X/G] \to [[X/G]]$를 얻는다. 먼저 $F$가 완전충실함을 증명한다.
+출발점과 도착점이 모두 준군 스택이므로, 이를 위해서는 $F$ 아래에서
+$\mathit{Isom}$-층들이 동일시됨을 증명하면 충분하다. 스킴 $U$와 $U$ 위의
+$[X/G]$의 대상들 $\xi, \xi'$를 택하자. 다음 사상이 층의 동형사상임을
+보이고자 한다.
+$$
+F :
+\mathit{Isom}_{[X/G]}(\xi, \xi')
+\longrightarrow
+\mathit{Isom}_{[[X/G]]}(F(\xi), F(\xi'))
+$$
+이를 위해서는 $U$ 위에서 국소적으로 작업하면 충분하므로
+$\xi, \xi'$가 $U$ 위의 $[X/_{\!p}G]$의 대상들 $(U, x)$, $(U, x')$에서
+온다고 가정할 수 있다. 이는 스택화의 구성에서 바로 따르며, 대수공간의
+준군, 절 \ref{spaces-groupoids-section-explicit-quotient-stacks}에도 자세히
+설명되어 있다. 위의 $[X/_{\!p}G]$의 사상에 대한 기술을 직접 사용하거나
+대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-morphisms}를 사용하면 이 경우
+$$
+\mathit{Isom}_{[X/G]}(\xi, \xi') =
+U \times_{(x, x'), X \times_S X, (s, t)} (G \times_B X)
+$$
+임을 알 수 있다. 이 섬유곱의 $T$-값 점은 $u \in U(T)$이고
+$g \in G(T)$이며 $a(g, x \circ u) = x' \circ u$를 만족하는 쌍 $(u, g)$에
+대응한다. (이는 $\pi \circ x \circ u = \pi \circ x' \circ u$를 함의함에
+유의하자.) 한편 정의에 따라
+$\mathit{Isom}_{[[X/G]]}(F(\xi), F(\xi'))$의 $T$-값 점은
+$\pi \circ x \circ u = \pi \circ x' \circ u : T \to B$를 만족하는 사상
+$u : T \to U$와 동형사상
+$$
+R :
+G \times_{B, \pi \circ x \circ u} T
+\longrightarrow
+G \times_{B, \pi \circ x' \circ u} T
+$$
+으로 이루어진다. 이 동형사상은 자명한 $G_T$-토서의 동형사상이며 주어진
+$X$로 가는 사상들과 양립한다. 토서들이 자명하므로 어떤 $g \in G(T)$에
+대하여 $R = R_{g^{-1}}$(오른쪽 곱셈)이다. 사상들
+$a \circ (1_G, x \circ u), a \circ (1_G, x' \circ u) : G \times_B T \to X$
+와의 양립성은 조건 $a(g, x \circ u) = x' \circ u$와 동치이다. 따라서
+원하는 $\mathit{Isom}$-층의 등식을 얻는다.
+
+\medskip\noindent
+이제 $F$가 완전충실함을 알았으므로 스택, 보조정리
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff}를 적용할 수
+있다. 따라서 $F$가 동치임을 보이려면 $[[X/G]]$의 대상들이 fppf 국소적으로
+$F$의 본질적 상에 들어감을 보이면 충분하다. fppf 토서는 fppf 국소적으로
+자명하므로 이는 명백하며, 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-classifying-stacks}
+\begin{slogan}
+군 스킴 또는 대수군 공간의 분류 스택.
+\end{slogan}
+$S$를 스킴이라 하고 $B$를 $S$ 위의 대수공간이라 하자. $G$를 $B$ 위의
+대수군 공간이라 하자. 그러면 준군 스택들
+$$
+[B/G],\quad
+[[B/G]],\quad
+G\textit{-Torsors},\quad
+\mathcal{G}/\mathcal{B}\textit{-Torsors}
+$$
+은 모두 표준적으로 동치이다. $G \to B$가 평탄하고 국소 유한 표시이면
+이들은 $G\textit{-Principal}$과도 동치이다.
+\end{lemma}
+
+\begin{proof}
+동치 $G\textit{-Torsors} \to \mathcal{G}/\mathcal{B}\textit{-Torsors}$는
+보조정리 \ref{lemma-compare-torsors}에 주어져 있다. 동치
+$[B/G] \to [[B/G]]$는 명제 \ref{proposition-equal-quotient-stacks}에
+주어져 있다. 절 \ref{section-group-quotient-stacks}에 주어진
+$[[B/G]]$의 정의를 풀어 쓰면 $[[B//G]] = G\textit{-Torsors}$임을 알 수 있다.
+
+\medskip\noindent
+마지막으로 $G \to B$가 평탄하고 국소 유한 표시라고 가정하자. 자연스러운
+함자 $G\textit{-Torsors} \to G\textit{-Principal}$이 동치임을 보이려면
+$B$ 위의 스킴 $U$에 대하여 주동차 $G_U$-공간 $X \to U$가 fppf
+국소적으로 자명함을 보이면 충분하다. 주동차 공간의 정의(대수공간의 준군,
+정의 \ref{spaces-groupoids-definition-principal-homogeneous-space})에 의해
+$U_i$ 위의 대수공간으로서 $U_i \times_U X \cong G \times_B U_i$인 fpqc 피복
+$\{U_i \to U\}$가 존재한다. 이는 $X \to U$가 전사이고 평탄하며 국소 유한
+표시임을 함의한다. 대수공간 위의 내림, 보조정리
+\ref{spaces-descent-lemma-descending-property-surjective},
+\ref{spaces-descent-lemma-descending-property-flat} 및
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation}를
+보라. 스킴 $W$와 전사 \'etale 사상 $W \to X$를 택하자. 방금 말한 것으로부터
+$\{W \to U\}$는 $X_W \to W$가 절단을 갖는 fppf 피복이다. 따라서 $X$는
+fppf $G_U$-토서이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-X-mod-G-group}
+$S$를 스킴이라 하고 $G$를 추상군이라 하자. $X$를 $S$ 위의 대수공간이라
+하고 $G \to \text{Aut}_S(X)$를 군 준동형이라 하자. 이 상황에서 위와
+비슷하게 $[[X/G]]$를 다음과 같이 정의할 수 있다.
+\begin{enumerate}
+\item $[[X/G]]$의 대상은 삼중항 $(U, P, \varphi : P \to X)$이며, 여기서
+\begin{enumerate}
+\item $U$는 $(\Sch/S)_{fppf}$의 대상이고,
+\item $P$는 $(\Sch/U)_{fppf}$ 위의 층이며, 값이 $G$인 상수층 아래의 토서로
+만드는 $G$의 작용이 갖추어져 있고,
+\item $\varphi : P \to X$는 층의 $G$-등변 사상이다.
+\end{enumerate}
+\item 사상
+$(f, g) : (U, P, \varphi) \to (U', P', \varphi')$
+은 스킴 사상 $f : T \to T'$와 $\varphi = \varphi' \circ g$를 만족하는
+$G$-등변 동형사상 $g : P \to f^{-1}P'$로 주어진다.
+\end{enumerate}
+위와 정확히 같은 방식으로 함자
+$$
+[[X/G]] \longrightarrow (\Sch/S)_{fppf}
+$$
+를 얻으며, 이는 $[[X/G]]$를 $(\Sch/S)_{fppf}$ 위의 준군 스택으로 만든다.
+상수층 $\underline{G}$는 ($G$의 기수가 지나치게 크지 않다면)
+$(\Sch/S)_{fppf}$ 위에서 $G_S$로 표현가능하고, 이 버전의 $[[X/G]]$는
+위에서 도입한 스택 $[[X/G_S]]$와 동치이다.
+\end{remark}
+
+
+
+
+
+
+\section{Picard 스택}
+\label{section-picard-stack}
+
+\noindent
+이 절에서는 Picard 스택을 완전히 일반적으로 도입한다. Quot 및 Hilb 장에서
+적절한 가정 아래 이것이 대수 스택임을 보일 것이다. Quot, 절
+\ref{quot-section-picard-stack}를 보라.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $\pi : X \to B$를 $S$ 위 대수공간의 사상이라 하자.
+범주 $\Picardstack_{X/B}$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item 대상은 삼중항 $(U, b, \mathcal{L})$이며, 여기서
+\begin{enumerate}
+\item $U$는 $(\Sch/S)_{fppf}$의 대상이고,
+\item $b : U \to B$는 $S$ 위의 사상이며,
+\item $\mathcal{L}$은 밑변환 $X_U = U \times_{b, B} X$ 위의 가역층이다.
+\end{enumerate}
+\item 사상 $(f, g) : (U, b, \mathcal{L}) \to (U', b', \mathcal{L}')$는
+$B$ 위의 스킴 사상 $f : U \to U'$와 동형사상
+$g : f^*\mathcal{L}' \to \mathcal{L}$로 주어진다.
+\end{enumerate}
+사상
+$(f, g) : (U, b, \mathcal{L}) \to (U', b', \mathcal{L}')$
+과 사상
+$(f', g') : (U', b', \mathcal{L}') \to (U'', b'', \mathcal{L}'')$
+의 합성은 $(f' \circ f, g \circ f^*(g'))$로 주어진다. 따라서 범주
+$\Picardstack_{X/B}$를 얻고
+$$
+p : \Picardstack_{X/B} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(U, b, \mathcal{L}) \longmapsto U
+$$
+는 함자이다. $U$ 위의 $\Picardstack_{X/B}$의 섬유범주는 모든
+$b \in \Mor_S(U, B)$에 대한 $X_U = U \times_{b, B} X$ 위 가역층의 범주들의
+서로소 합이다. 따라서 섬유범주들은 준군이다.
+
+\begin{lemma}
+\label{lemma-picard-stack}
+스택, 주의 \ref{stacks-remark-stack-make-small}에서와 같이 대체하면 함자
+$$
+\Picardstack_{X/B} \longrightarrow (\Sch/S)_{fppf}
+$$
+는 $(\Sch/S)_{fppf}$ 위의 준군 스택을 정의한다.
+\end{lemma}
+
+\begin{proof}
+언제나처럼 가장 어려운 부분은 대상의 내림을 보이는 것이다.
+$\{U_i \to U\}$를 $(\Sch/S)_{fppf}$의 피복이라 하자.
+$\xi_i = (U_i, b_i, \mathcal{L}_i)$를 $U_i$ 위에 놓인
+$\Picardstack_{X/B}$의 대상이라 하고
+$\varphi_{ij} : \text{pr}_0^*\xi_i \to \text{pr}_1^*\xi_j$를 내림 데이터라
+하자. 특히 사상들 $b_i$는 어떤 사상 $b : U \to B$의 제한임이 따른다.
+$X_U = U \times_{b, B} X$ 및
+$X_i = U_i \times_{b_i, B} X =
+U_i \times_U U \times_{b, B} X = U_i \times_U X_U$.
+로 쓰자. $\mathcal{L}_i$는 가역 $\mathcal{O}_{X_i}$-가군이다.
+$\{X_i \to X_U\}$도 fppf 피복을 이룸에 유의하자. 더욱이 내림 데이터
+$\varphi_{ij}$는 fppf 피복 $\{X_i \to X_U\}$에 관한 가역층들
+$\mathcal{L}_i$ 위의 내림 데이터로 옮겨진다. 따라서 대수공간 위의 내림,
+명제 \ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}에 의해
+$X_i$ 위에서 $\mathcal{L}_i$와 내림 데이터를 되찾는 $X_U$ 위의 유일한
+가역층 $\mathcal{L}$을 얻는다. 그러므로 삼중항 $(U, b, \mathcal{L})$은
+우리가 찾던 $U$ 위의 $\Picardstack_{X/B}$의 대상이다. 세부사항은 생략한다.
+\end{proof}
+
+
+
+
+
+\section{관성 스택의 예}
+\label{section-examples-inertia}
+
+\noindent
+관성 스택의 몇 가지 예를 살펴보자.
+
+\begin{example}
+\label{example-inertia-stack-of-X-mod-G}
+$S$를 스킴이라 하고 $G$를 가환군이라 하자. $X \to S$를 $S$ 위의 스킴이라
+하고 $a : G \times X \to X$를 $X$에 대한 $G$의 작용이라 하자.
+$g \in G$에 대응하는 자기동형사상 $g : X \to X$로 나타내자.
+이 경우 $[X/G]$의 관성 스택(주의 \ref{remark-X-mod-G-group}를 보라)은
+다음과 같다.
+$$
+I_{[X/G]} = \coprod\nolimits_{g\in G} [X^g/G],
+$$
+여기서 $G$의 원소 $g$가 주어졌을 때 기호 $X^g$는 스킴
+$X^g = \{x \in X \mid g(x) = x\}$를 나타낸다. 식으로 쓰면 $X^g$는 실제로
+다음 섬유곱이다.
+$$
+X^g =  X \times_{(1, 1), X \times_S X, (g, 1)} X.
+$$
+$S$-스킴 $T$에 대해 $[X/G]$의 관성 스택 위 $T$-점은 삼중항
+$(P/T, \phi, \alpha)$이다. 즉 fppf $G$-토서 $P \to T$, $G$-등변 사상
+$\phi : P \to X$, 그리고 $\phi \circ \alpha = \phi$를 만족하는 $T$ 위의
+$P$의 자기동형사상 $\alpha$로 이루어진다. $G$는 \emph{가환}군의 층이므로
+$\alpha$는 $T$ 위 fppf 위상에서 국소적으로 $G$의 어떤 원소 $g$에 의한
+곱셈으로 주어진다. $\phi \circ \alpha = \phi$라는 조건은 $\phi$가
+$X^g$의 $X$로의 포함을 통해 인수분해됨을 뜻한다. 즉 이 포함과 사상
+$P \to X^g$의 합성으로 $\phi$가 얻어진다. 위 논의로부터
+$T$-점에서 위와 같이 주어지는 섬유화 범주의 사상
+$I_{[X/G]} \to \coprod_{g\in G} [X^g/G]$를 정의할 수 있다. 이것이
+동치임을 보이는 것은 생략한다.
+\end{example}
+
+\begin{example}
+\label{example-inertia-stack-of-picard}
+$f : X \to S$를 스킴의 사상이라 하자. 임의의 $T \to S$에 대해 밑변환
+$f_T : X_T \to T$가 사상 $\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$가
+동형사상이라는 성질을 갖는다고 가정하자. (이는 $f$가
+\textit{차원 $0$에서 코호몰로지적으로 평탄}함을 함의하지만, 그보다 강한
+조건이다. 미래의 참고문헌을 삽입할 것.) Picard 스택
+$\Picardstack_{X/S}$를 생각하자. 절 \ref{section-picard-stack}을 보라.
+그 관성 스택의 $S$-스킴 $T$ 위 점은 쌍 $(\mathcal{L}, \alpha)$로 이루어진다.
+여기서 $\mathcal{L}$은 $X_T$ 위의 선다발이고 $\alpha$는 그 선다발의
+자기동형사상이다. 위 가정에 의해 $\alpha$를
+$H^0(X_T, \mathcal{O}_{X_T})^\times = H^0(T, \mathcal{O}_T^*)$의 원소로
+생각할 수 있다. $H^0(T, \mathcal{O}_T^*) = \mathbf{G}_{m, S}(T)$임에
+유의하자. 군 준군, 예 \ref{groupoids-example-multiplicative-group}를 보라.
+따라서 $\Picardstack_{X/S}$의 관성 스택은
+$$
+I_{\Picardstack_{X/S}} = \mathbf{G}_{m, S} \times_S \Picardstack_{X/S}.
+$$
+$(\Sch/S)_{fppf}$ 위의 스택으로서 주어진다.
+\end{example}
+
+
+
+
+
+
+\section{유한 Hilbert 스택}
+\label{section-hilbert-d-stack}
+
+\noindent
+여기서는 꼭 필요한 것보다 조금 더 일반적인 형태로 정식화한다. 준군 스택들
+사이의 $1$-사상
+$$
+F : \mathcal{X} \longrightarrow \mathcal{Y}
+$$
+을 $(\Sch/S)_{fppf}$ 위에서 고정하자. 각 정수 $d \geq 1$에 대해 범주
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item 대상 $(U, Z, y, x, \alpha)$는 다음 데이터이다. $U, Z$는
+$(\Sch/S)_{fppf}$의 대상이고 $Z$는 $U$ 위에서 차수 $d$인 유한 국소
+자유이며,
+$y \in \Ob(\mathcal{Y}_U)$, $x \in \Ob(\mathcal{X}_Z)$이고
+$\alpha : y|_Z \to F(x)$는 동형사상\footnote{
+이는 $2$-Yoneda 보조정리(범주, 보조정리
+\ref{categories-lemma-yoneda-2category})에 의해 이 데이터가 다음과 같은
+$2$-가환 도표를 준다는 뜻이다.
+$$
+\xymatrix{
+(\Sch/Z)_{fppf} \ar[r]_-x \ar[d] & \mathcal{X} \ar[d]^F \\
+(\Sch/U)_{fppf} \ar[r]^-y & \mathcal{Y}
+}
+$$
+이는 $(\Sch/S)_{fppf}$ 위 준군 스택들의 도표이다. 또는 $\alpha$를 다음
+$2$-사상으로 그려도 된다.
+$$
+\xymatrix{
+(\Sch/Z)_{fppf}
+\rrtwocell^{y \circ (Z \to U)}_{F \circ x}{\alpha} & &
+\mathcal{Y}.
+}
+$$
+}.
+\item 사상 $(U, Z, y, x, \alpha) \to (U', Z', y', x', \alpha')$는 스킴
+사상 $f : U \to U'$, $Z \to Z' \times_U U'$의 동형사상을 유도하는 스킴
+사상 $g : Z \to Z'$, 그리고 다음 가환 도표를 유도하는 동형사상
+$b : y \to f^*y'$, $a : x \to g^*x'$로 주어진다.
+$$
+\xymatrix{
+y|_Z \ar[rr]_\alpha \ar[d]_{b|_Z} & &
+F(x) \ar[d]^{F(a)} \\
+f^*y'|_Z \ar[rr]^{\alpha'} & &
+F(g^*x') \\
+}
+$$
+\end{enumerate}
+정의로부터 표준 망각 함자
+$$
+p :
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+\longrightarrow
+(\Sch/S)_{fppf}
+$$
+가 존재함은 명백하다. 이 함자는 오중항 $(U, Z, y, x, \alpha)$에 스킴 $U$를
+대응시키고, 사상
+$(f, g, b, a) : (U, Z, y, x, \alpha) \to (U', Z', y', x', \alpha')$
+에 사상 $f : U \to U'$를 대응시킨다.
+
+\begin{lemma}
+\label{lemma-hilbert-d-stack}
+범주 $\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$에 위의 함자 $p$를 갖추면
+$(\Sch/S)_{fppf}$ 위의 준군 스택을 정의한다.
+\end{lemma}
+
+\begin{proof}
+언제나처럼 가장 어려운 부분은 대상의 내림을 보이는 것이다.
+$\{U_i \to U\}$를 $(\Sch/S)_{fppf}$의 피복이라 하자.
+$\xi_i = (U_i, Z_i, y_i, x_i, \alpha_i)$를 $U_i$ 위에 놓인
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$의 대상이라 하고
+$\varphi_{ij} : \text{pr}_0^*\xi_i \to \text{pr}_1^*\xi_j$를 내림 데이터라
+하자. 먼저 $\varphi_{ij}$가 $(Z_i/U_i, \varphi_{ij})$ 위의 내림 데이터를
+유도하며, 이는 내림, 보조정리 \ref{descent-lemma-affine}에 의해 유효함에
+유의하자. 내림, 보조정리
+\ref{descent-lemma-descending-property-finite-locally-free}에 의해 이는
+차수 $d$인 유한 국소 자유인 스킴 $Z/U$를 준다. 이제부터 $Z_i$를
+$Z \times_U U_i$와 동일시한다. 다음으로 섬유범주 $\mathcal{Y}_{U_i}$의
+대상 $y_i$들은 $\mathcal{Y}$가 준군 스택이므로 $\mathcal{Y}_U$의 대상
+$y$로 내린다. 마찬가지로 섬유범주 $\mathcal{X}_{Z_i}$의 대상 $x_i$들은
+$\mathcal{X}$가 준군 스택이므로 $\mathcal{X}_Z$의 대상 $x$로 내린다.
+마지막으로 주어진 동형사상들
+$$
+\alpha_i :
+(y|_Z)_{Z_i} = y_i|_{Z_i}
+\longrightarrow
+F(x_i) = F(x|_{Z_i})
+$$
+은 $\mathcal{Y}$가 스택이고 따라서
+$\mathit{Isom}_\mathcal{Y}(y|_Z, F(x))$가 층이므로 사상
+$\alpha : y|_Z \to F(x)$로 이어 붙는다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{definition}
+\label{definition-hilbert-d-stack}
+위에서 구성한 $\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$를
+{\it $\mathcal{Y}$ 위의 $\mathcal{X}$의 차수 $d$ 유한 Hilbert 스택}이라
+부르기로 하자. $\mathcal{Y} = S$이면
+$\mathcal{H}_d(\mathcal{X}) = \mathcal{H}_d(\mathcal{X}/\mathcal{Y})$로
+쓴다. $\mathcal{X} = \mathcal{Y} = S$이면 이를 $\mathcal{H}_d$로 나타낸다.
+\end{definition}
+
+\noindent
+위와 같이 $F : \mathcal{X} \to \mathcal{Y}$가 주어지면
+$(\Sch/S)_{fppf}$ 위 준군 스택들의 다음 자연스러운 $1$-사상들이 있음에
+유의하자.
+\begin{equation}
+\label{equation-diagram-hilbert-d-stack}
+\vcenter{
+\xymatrix{
+\mathcal{H}_d(\mathcal{X}) \ar[rd] &
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y}) \ar[d] \ar[l] \ar[r] &
+\mathcal{Y} \\
+& \mathcal{H}_d
+}
+}
+\end{equation}
+각 화살표는 ``망각 함자''로 주어진다.
+
+\begin{lemma}
+\label{lemma-faithful-hilbert}
+ $1$-사상
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y}) \to \mathcal{H}_d(\mathcal{X})$는
+충실하다.
+\end{lemma}
+
+\begin{proof}
+이를 확인하려면 $\mathcal{H}_d(\mathcal{X}/\mathcal{Y}) \to
+\mathcal{H}_d(\mathcal{X})$가 섬유범주들 위에서 충실함을 증명하면 충분하다.
+스킴 $U$ 위의 $\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$의 두 대상
+$\xi = (U, Z, y, x, \alpha)$와 $\xi' = (U, Z', y', x', \alpha')$를
+택하자. $U$ 위 $\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$의 섬유범주에서 두 사상
+$(g, b, a), (g', b', a') : \xi \to \xi'$를 택하자.
+이 사상들의 $\mathcal{H}_d(\mathcal{X})$에서의 상이 일치하는 것은
+$g = g'$ 및 $a = a'$일 때이고 그때뿐이다. 그러면 다음 가환 도표는
+$$
+\xymatrix{
+y|_Z \ar[rr]_\alpha \ar[d]_{b|_Z, \ b'|_Z} & &
+F(x) \ar[d]^{F(a) = F(a')} \\
+y'|_Z \ar[rr]^-{\alpha'} & &
+F(g^*x') = F((g')^*x') \\
+}
+$$
+로부터 $b|_Z = b'|_Z$를 함의한다. $Z \to U$가 차수 $d$인 유한 국소 자유
+사상이므로 $\{Z \to U\}$는 fppf 피복이다. 따라서 $b = b'$이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

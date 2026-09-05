@@ -1,0 +1,2948 @@
+\input{ko_preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{변형 문제}
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장의 목표는 형식적 변형 이론, 변형 이론, 코탄젠트 복합체 장에서
+전개한 일반 이론의 예들을 구체적으로 계산하는 것이다.
+
+\medskip\noindent
+Schlessinger의 논문 \cite{Sch}의 절 3에서도 몇 가지 예를 논의한다.
+
+
+
+
+
+
+\section{변형 문제의 예}
+\label{section-examples}
+
+\noindent
+여기에 들어가야 할 항목의 목록은 다음과 같다.
+\begin{enumerate}
+\item 스킴의 변형:
+\begin{enumerate}
+\item Rim--Schlessinger 조건.
+\item 접공간의 계산.
+\item 무한소 변형의 계산.
+\item 아핀 초곡면의 변형 범주.
+\end{enumerate}
+\item 층의 변형(예를 들어 $X/S$, $S$의 유한형 점 $s$, 그리고
+$X_s$ 위의 준연접층 $\mathcal{F}_s$를 고정한다).
+\item 대수공간의 변형(스킴의 변형과 매우 비슷하며, 어쩌면 더 쉬울 수도 있다).
+\item 사상의 변형(예를 들어 스킴 사이의 사상. 공역 및 정의역 가운데
+둘 다 또는 하나를 고정할 수 있다).
+\item 여기에 더 추가할 것.
+\end{enumerate}
+
+
+
+
+
+\section{일반 개요}
+\label{section-general}
+
+\noindent
+이 절에서는 이어지는 몇 가지 예를 논의하는 절차를 제시한다.
+
+\medskip\noindent
+단계 I. 각 절에서 Noether 환 $\Lambda$와 유한 환 준동형
+$\Lambda \to k$를 고정하며, 여기서 $k$는 체이다. 평소와 같이
+$\mathcal{C}_\Lambda = \mathcal{C}_{\Lambda, k}$를 바탕 범주로 둔다.
+형식적 변형 이론, 정의 \ref{formal-defos-definition-CLambda}를 참조하라.
+
+\medskip\noindent
+단계 II. 각 절에서 $\mathcal{C}_\Lambda$ 위에 준군들로 공섬유화된
+범주 $\mathcal{F}$를 정의한다. 때로는 그 대신 함자
+$F : \mathcal{C}_\Lambda \to \textit{Sets}$를 생각한다.
+
+\medskip\noindent
+단계 III. 형식적 변형 이론, 절
+\ref{formal-defos-section-RS-condition}에서 논의한
+Rim--Schlessinger 조건 (RS)를 $\mathcal{F}$가 어느 정도 만족하는지
+설명한다. 마찬가지로 $\mathcal{F}$가 (S1)과 (S2)를 어느 정도 만족하는지,
+또는 $F$가 이에 대응하는 Schlessinger 조건 (H1)과 (H2)를 어느 정도
+만족하는지 논의할 수 있다. 형식적 변형 이론, 절
+\ref{formal-defos-section-schlessinger-conditions}를 참조하라.
+
+\medskip\noindent
+단계 IV. $x_0$를 $\mathcal{F}(k)$의 대상, 다시 말해 $k$ 위의
+$\mathcal{F}$의 대상이라 하자. 이 장에서는 표기
+$$
+\Deformationcategory_{x_0} = \mathcal{F}_{x_0}
+$$
+를 형식적 변형 이론, 주
+\ref{formal-defos-remark-localize-cofibered-groupoid}에서 구성한
+전변형 범주를 나타내는 데 사용한다. $\mathcal{F}$가 (RS)를 만족하면
+$\Deformationcategory_{x_0}$는 변형 범주이고
+(형식적 변형 이론, 보조정리 \ref{formal-defos-lemma-localize-RS}),
+(S1)과 (S2)를 만족한다
+(형식적 변형 이론, 보조정리 \ref{formal-defos-lemma-RS-implies-S1-S2}).
+(S1)과 (S2)가 성립한다면 중요한 문제는 접공간
+$$
+T\Deformationcategory_{x_0} = T_{x_0}\mathcal{F} = T\mathcal{F}_{x_0}
+$$
+(형식적 변형 이론, 주
+\ref{formal-defos-remark-tangent-space-cofibered-groupoid} 및
+정의 \ref{formal-defos-definition-tangent-space} 참조)
+이 유한 차원인지 여부이다. 실제로 이는
+$\Deformationcategory_{x_0}$가 versal 형식적 대상을 가짐을 보장한다
+(형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-versal-object-existence}).
+
+\medskip\noindent
+단계 V. $\mathcal{F}$가 단계 IV를 통과한다면, 다음 문제는 $x_0$의
+무한소 자기동형으로 이루어진 $k$-벡터 공간
+$$
+\text{Inf}(\Deformationcategory_{x_0}) = \text{Inf}_{x_0}(\mathcal{F})
+$$
+이 유한 차원인지 여부이다. 그렇다면
+$\Deformationcategory_{x_0}$는 $\mathcal{C}_\Lambda$ 위의 함자들로 이루어진
+매끄러운 pro-표현가능 준군에 의한 표현을 갖는다. 형식적 변형 이론, 정리
+\ref{formal-defos-theorem-presentation-deformation-groupoid}를 참조하라.
+
+
+
+
+\section{유한 사영 가군}
+\label{section-finite-projective-modules}
+
+\noindent
+이 절은 준비운동에 지나지 않는다. 물론 유한 사영 가군에는 어떠한
+``모듈라이''도 없어야 한다.
+
+\begin{example}[유한 사영 가군]
+\label{example-finite-projective-modules}
+$\mathcal{F}$를 다음과 같이 정의되는 범주라 하자.
+\begin{enumerate}
+\item 대상은 $\mathcal{C}_\Lambda$의 대상 $A$와 유한 사영
+$A$-가군 $M$으로 이루어진 쌍 $(A, M)$이고,
+\item 사상 $(f, g) : (B, N) \to (A, M)$은
+$\mathcal{C}_\Lambda$의 사상 $f : B \to A$와, $f$-선형이고
+동형 $N \otimes_{B, f} A \cong M$을 유도하는 사상
+$g : N \to M$으로 이루어진다.
+\end{enumerate}
+함자 $p : \mathcal{F} \to \mathcal{C}_\Lambda$는 $(A, M)$을 $A$로,
+$(f, g)$를 $f$로 보낸다. $p$가 준군들로 공섬유화되어 있음은 명백하다.
+유한 차원 $k$-벡터 공간 $V$가 주어졌을 때, $x_0 = (k, V)$를 이에
+대응하는 $\mathcal{F}(k)$의 대상이라 하자. 다음과 같이 둔다.
+$$
+\Deformationcategory_V = \mathcal{F}_{x_0}
+$$
+\end{example}
+
+\noindent
+국소환 위의 모든 유한 사영 가군은 유한 자유 가군이므로
+(대수학, 보조정리 \ref{algebra-lemma-finite-projective}),
+$$
+\begin{matrix}
+\mathcal{F}(A)\text{의 대상들의} \\
+\text{동형류}
+\end{matrix}
+= \coprod\nolimits_{n \geq 0} \{*\}
+$$
+이다. 이는 $\mathcal{F}$의 변형 이론이 본질적으로 자명함을 뜻하지만,
+쉬운 예를 제공하기 위해 절 \ref{section-general}에서 개괄한 단계들을
+그래도 수행한다.
+
+\begin{lemma}
+\label{lemma-finite-projective-modules-RS}
+예 \ref{example-finite-projective-modules}은 Rim--Schlessinger 조건
+(RS)를 만족한다. 특히 $k$ 위의 임의의 유한 차원 벡터 공간 $V$에 대하여
+$\Deformationcategory_V$는 변형 범주이다.
+\end{lemma}
+
+\begin{proof}
+$A_1 \to A$와 $A_2 \to A$를 $\mathcal{C}_\Lambda$의 사상이라 하자.
+$A_2 \to A$가 전사라고 가정하자. 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-2-categorical}
+에 의해 다음 함자
+$\mathcal{F}(A_1 \times_A A_2) \to
+\mathcal{F}(A_1) \times_{\mathcal{F}(A)} \mathcal{F}(A_2)$가
+범주의 동치임을 보이면 충분하다.
+
+\medskip\noindent
+따라서 $A_1 \times_A A_2$ 위의 유한 사영 가군의 범주가,
+$A$ 위의 유한 사영 가군의 범주를 바탕으로 한 $A_1$ 위와 $A_2$ 위의
+유한 사영 가군 범주들의 섬유곱과 동치임을 보여야 한다.
+이는 대수학 심화, 보조정리
+\ref{more-algebra-lemma-finitely-presented-module-over-fibre-product}의
+특수한 경우이다. 역함자는 삼중항 $(M_1, M_2, \varphi)$를
+유한 사영 $A_1 \times_A A_2$-가군
+$M_1 \times_\varphi M_2$로 보낸다는 것을 상기하자. 여기서 $M_1$은 유한 사영
+$A_1$-가군이고, $M_2$는 유한 사영 $A_2$-가군이며,
+$\varphi : M_1 \otimes_{A_1} A \to M_2 \otimes_{A_2} A$
+는 $A$-가군의 동형이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-projective-modules-TI}
+예 \ref{example-finite-projective-modules}에서 $V$를 유한 차원
+$k$-벡터 공간이라 하자. 그러면
+$$
+T\Deformationcategory_V = (0)
+\;\text{및}\;
+\text{Inf}(\Deformationcategory_V) = \text{End}_k(V)
+$$
+은 유한 차원이다.
+\end{lemma}
+
+\begin{proof}
+예 \ref{example-finite-projective-modules}의 $\mathcal{F}$에 대하여
+$x_0 = (k, V) \in \Ob(\mathcal{F}(k))$로 두자.
+$T\Deformationcategory_V = T_{x_0}\mathcal{F}$는 다음 쌍
+$(x, \alpha)$의 동형류의 집합임을 상기하자. 여기서 $x$는 쌍대수
+$k[\epsilon]$ 위의 $\mathcal{F}$의 대상이고,
+$\alpha : x \to x_0$는 $k[\epsilon] \to k$ 위에 놓이는
+$\mathcal{F}$의 사상이다.
+
+\medskip\noindent
+동형을 제외하면, $k[\epsilon]$ 위의 유한 사영 가군 $M$과
+동형 $M \otimes_{k[\epsilon]} k \to V$를 유도하는
+$k[\epsilon]$-선형 사상 $\alpha : M \to V$로 이루어진 쌍
+$(M, \alpha)$은 유일하다. 예를 들어 $V = k^{\oplus n}$이면,
+$M = k[\epsilon]^{\oplus n}$과 명백한 사상 $\alpha$를 택한다.
+
+\medskip\noindent
+마찬가지로 $\text{Inf}(\Deformationcategory_V) = \text{Inf}_{x_0}(\mathcal{F})$는
+$k[\epsilon]$ 위의 $x_0$의 자명한 변형 $x'_0$의 자기동형들의 집합이다.
+자세한 내용은 형식적 변형 이론, 정의
+\ref{formal-defos-definition-infinitesimal-auts}를 참조하라.
+
+\medskip\noindent
+둘째 문단의 $(M, \alpha)$가 주어졌다고 하자.
+$\text{Inf}_{x_0}(\mathcal{F})$의 원소는
+$\gamma \bmod \epsilon = \text{id}$를 만족하는 자기동형
+$\gamma : M \to M$이다. 그러면
+$\gamma = \text{id}_M + \epsilon \psi$로 쓸 수 있으며, 여기서
+$\psi : M/\epsilon M \to M/\epsilon M$는 $k$-선형이다.
+$\alpha$를 사용하면 $\psi$를 $\text{End}_k(V)$의 원소로 볼 수 있고,
+이로써 증명이 끝난다.
+\end{proof}
+
+
+\section{군의 표현}
+\label{section-representations}
+
+\noindent
+표현의 변형 이론은 매우 흥미로울 수 있다.
+
+\begin{example}[군의 표현]
+\label{example-representations}
+$\Gamma$를 군이라 하자. $\mathcal{F}$를 다음과 같이 정의되는 범주라 하자.
+\begin{enumerate}
+\item 대상은 $\mathcal{C}_\Lambda$의 대상 $A$, 유한 사영 $A$-가군 $M$,
+그리고 준동형 $\rho : \Gamma \to \text{GL}_A(M)$으로 이루어진 삼중항
+$(A, M, \rho)$이고,
+\item 사상 $(f, g) : (B, N, \tau) \to (A, M, \rho)$은
+$\mathcal{C}_\Lambda$의 사상 $f : B \to A$와, $f$-선형이고
+$\Gamma$-등변이며 동형 $N \otimes_{B, f} A \cong M$을 유도하는 사상
+$g : N \to M$으로 이루어진다.
+\end{enumerate}
+함자 $p : \mathcal{F} \to \mathcal{C}_\Lambda$는 $(A, M, \rho)$를 $A$로,
+$(f, g)$를 $f$로 보낸다. $p$가 준군들로 공섬유화되어 있음은 명백하다.
+유한 차원 $k$-벡터 공간 $V$와 표현
+$\rho_0 : \Gamma \to \text{GL}_k(V)$가 주어졌을 때,
+$x_0 = (k, V, \rho_0)$를 이에 대응하는 $\mathcal{F}(k)$의 대상이라 하자.
+다음과 같이 둔다.
+$$
+\Deformationcategory_{V, \rho_0} = \mathcal{F}_{x_0}
+$$
+\end{example}
+
+\noindent
+국소환 위의 모든 유한 사영 가군은 유한 자유 가군이므로
+(대수학, 보조정리 \ref{algebra-lemma-finite-projective}),
+$$
+\begin{matrix}
+\mathcal{F}(A)\text{의 대상들의} \\
+\text{동형류}
+\end{matrix}
+=
+\coprod\nolimits_{n \geq 0}\quad
+\begin{matrix}
+\text{준동형 }\rho : \Gamma \to \text{GL}_n(A)\text{의}\\
+\text{GL}_n(A)\text{-켤레류}
+\end{matrix}
+$$
+이다. 이는 이미 절 \ref{section-finite-projective-modules}의 논의보다
+더 흥미롭다.
+
+\begin{lemma}
+\label{lemma-representations-RS}
+예 \ref{example-representations}은 Rim--Schlessinger 조건 (RS)를
+만족한다. 특히 임의의 유한 차원 표현
+$\rho_0 : \Gamma \to \text{GL}_k(V)$에 대하여
+$\Deformationcategory_{V, \rho_0}$는 변형 범주이다.
+\end{lemma}
+
+\begin{proof}
+$A_1 \to A$와 $A_2 \to A$를 $\mathcal{C}_\Lambda$의 사상이라 하자.
+$A_2 \to A$가 전사라고 가정하자. 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-2-categorical}
+에 의해 다음 함자
+$\mathcal{F}(A_1 \times_A A_2) \to
+\mathcal{F}(A_1) \times_{\mathcal{F}(A)} \mathcal{F}(A_2)$
+가 범주의 동치임을 보이면 충분하다.
+
+\medskip\noindent
+범주 $\mathcal{F}(A_1) \times_{\mathcal{F}(A)} \mathcal{F}(A_2)$의 대상
+$$
+((A_1, M_1, \rho_1), (A_2, M_2, \rho_2), (\text{id}_A, \varphi))
+$$
+를 생각하자. 보조정리 \ref{lemma-finite-projective-modules-RS}의 증명에서
+보았듯이, 유한 사영 $A_1 \times_A A_2$-가군
+$M_1 \times_\varphi M_2$를 생각할 수 있다.
+$\varphi$가 주어진 작용들과 양립하므로 다음을 얻는다.
+$$
+\rho_1 \times \rho_2 : \Gamma \longrightarrow
+\text{GL}_{A_1 \times_A A_2}(M_1 \times_\varphi M_2)
+$$
+그러면 $(M_1 \times_\varphi M_2, \rho_1 \times \rho_2)$는
+$\mathcal{F}(A_1 \times_A A_2)$의 대상이다. 이 구성은 위 함자의
+준역함자를 결정한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-representations-TI}
+예 \ref{example-representations}에서
+$\rho_0 : \Gamma \to \text{GL}_k(V)$를 유한 차원 표현이라 하자. 그러면
+$$
+T\Deformationcategory_{V, \rho_0} = \Ext^1_{k[\Gamma]}(V, V) =
+H^1(\Gamma, \text{End}_k(V))
+\;\text{및}\;
+\text{Inf}(\Deformationcategory_{V, \rho_0}) = H^0(\Gamma, \text{End}_k(V))
+$$
+따라서 $\text{Inf}(\Deformationcategory_{V, \rho_0})$는 언제나 유한 차원이고,
+$\Gamma$가 유한 생성이면 $T\Deformationcategory_{V, \rho_0}$도
+유한 차원이다.
+\end{lemma}
+
+\begin{proof}
+먼저 무한소 자기동형을 다룬다. $M = V \otimes_k k[\epsilon]$라 하고,
+유도된 작용을 $\rho_0' : \Gamma \to \text{GL}_n(M)$이라 하자.
+그러면 무한소 자기동형, 즉
+$\text{Inf}(\Deformationcategory_{V, \rho_0})$의 원소는 자기동형
+$\gamma = \text{id} + \epsilon \psi : M \to M$
+로 주어진다. 이는 보조정리 \ref{lemma-finite-projective-modules-TI}의
+증명에서와 같되, 추가로 $\psi$는 $\rho_0$로 주어지는
+$\Gamma$의 작용과 가환해야 한다. 따라서
+$$
+\text{Inf}(\Deformationcategory_{V, \rho_0}) = H^0(\Gamma, \text{End}_k(V))
+$$
+이며, 이는 보조정리의 예측과 같다.
+
+\medskip\noindent
+다음으로 $(k[\epsilon], M, \rho)$를 $k[\epsilon]$ 위의
+$\mathcal{F}$의 대상이라 하고, $\alpha : M \to V$를 동형
+$M/\epsilon M \to V$를 유도하는 $\Gamma$-등변 사상이라 하자.
+$M$은 $k[\epsilon]$-가군으로서 자유이므로 $\Gamma$-가군의 확대
+$$
+0 \to V \to M \xrightarrow{\alpha} V \to 0
+$$
+를 얻는다. 왼쪽 사상의 자세한 구성은 생략한다.
+반대로 위와 같은 $\Gamma$-가군의 확대가 있으면, 이를 사용하여 $M$에
+$k[\epsilon]$-가군 구조를 부여하고, 위와 같은 사상 $\alpha$와 함께
+$\mathcal{F}(k[\epsilon])$의 대상을 얻을 수 있다. 따라서
+$$
+T\Deformationcategory_{V, \rho_0} = \Ext^1_{k[\Gamma]}(V, V)
+$$
+이며, 이는 보조정리의 예측과 같다. 에탈 코호몰로지, 보조정리
+\ref{etale-cohomology-lemma-ext-modules-hom}에 의해 이는
+$H^1(\Gamma, \text{End}_k(V))$와 같다.
+
+\medskip\noindent
+차원에 관한 명제는 에탈 코호몰로지, 보조정리
+\ref{etale-cohomology-lemma-finite-dim-group-cohomology}에서 따른다.
+\end{proof}
+
+\noindent
+예 \ref{example-representations}에서 $\Gamma$가 유한 생성이고
+$(V, \rho_0)$가 $k$ 위의 $\Gamma$의 유한 차원 표현이면,
+$\Deformationcategory_{V, \rho_0}$는 $\mathcal{C}_\Lambda$ 위의
+함자들로 이루어진 매끄러운 pro-표현가능 준군에 의한 제시를 가지며,
+따라서 특히 (최소) versal 형식적 대상을 가진다. 이는 보조정리
+\ref{lemma-representations-RS}, \ref{lemma-representations-TI}와
+절 \ref{section-general}의 일반적인 논의에서 따른다.
+
+\begin{lemma}
+\label{lemma-representations-hull}
+예 \ref{example-representations}에서 $\Gamma$가 유한 생성이라고 가정하자.
+$\rho_0 : \Gamma \to \text{GL}_k(V)$를 유한 차원 표현이라 하자.
+$\Lambda$가 잉여체 $k$를 갖는 완비 국소환이라고 가정하자
+(고전적인 경우). 그러면 대상들의 동형류로 이루어진 함자
+$$
+F : \mathcal{C}_\Lambda \longrightarrow \textit{Sets},\quad
+A \longmapsto \Ob(\Deformationcategory_{V, \rho_0}(A))/\cong
+$$
+는 포락을 가진다. $H^0(\Gamma, \text{End}_k(V)) = k$이면
+$F$는 pro-표현가능하다.
+\end{lemma}
+
+\begin{proof}
+포락의 존재는 보조정리 \ref{lemma-representations-RS},
+\ref{lemma-representations-TI}와 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-implies-S1-S2} 및 주석
+\ref{formal-defos-remark-compose-minimal-into-iso-classes}에서 따른다.
+
+\medskip\noindent
+$H^0(\Gamma, \text{End}_k(V)) = k$라고 가정하자. $F$가
+pro-표현가능함을 보이려면 $F$가 변형 함자임을 보이면 충분하다.
+형식적 변형 이론, 정리
+\ref{formal-defos-theorem-Schlessinger-prorepresentability}를 참조하라.
+즉, $F$가 (RS)를 만족함을 보여야 한다. 이를 위해 형식적 변형 이론,
+보조정리 \ref{formal-defos-lemma-RS-associated-functor}의 판정법을
+사용할 수 있다. 다음을 보이면 필요한 자기동형군들의 전사성이 따른다.
+$$
+A \cdot \text{id}_M =
+\text{End}_{A[\Gamma]}(M)
+$$
+$M \otimes_A k$가 $\Gamma$의 표현으로서 $V$와 동형인
+$\mathcal{F}$의 임의의 대상 $(A, M, \rho)$에 대하여 이 등식이
+성립해야 한다. 좌변은 우변에 포함되므로
+$\text{length}_A \text{End}_{A[\Gamma]}(M) \leq \text{length}_A A$
+를 보이면 충분하다. $n = \text{length}(A)$인 서로 다른 아이디얼
+$(0) = I_n \subset \ldots \subset I_1 \subset A$
+을 택하자. 이에 맞추어 $M$을 여과하면
+$\Hom_{A[\Gamma]}(M, I_tM/I_{t + 1}M)$의 길이가 $1$임을
+보이는 것으로 충분함을 알 수 있다. $I_tM/I_{t + 1}M \cong M \otimes_A k$
+이고, 임의의 $A[\Gamma]$-가군 사상 $M \to M \otimes_A k$는
+몫사상 $M \to M \otimes_A k$를 통해 유일하게 분해되어 다음의 원소를
+주므로
+$$
+\text{End}_{A[\Gamma]}(M \otimes_A k) = \text{End}_{k[\Gamma]}(V) = k
+$$
+결론을 얻는다.
+\end{proof}
+
+
+
+\section{연속 표현}
+\label{section-continuous-representations}
+
+\noindent
+무한 Galois 군을 택하고 그 표현의 변형 이론을 연구하는 것은
+매우 흥미로운 일이다. \cite{Mazur-deforming}을 참조하라.
+
+\begin{example}[위상군의 표현]
+\label{example-continuous-representations}
+$\Gamma$를 위상군이라 하자. $\mathcal{F}$를 다음과 같이 정의되는
+범주라 하자.
+\begin{enumerate}
+\item 대상은 $\mathcal{C}_\Lambda$의 대상 $A$, 유한 사영 $A$-가군 $M$,
+그리고 $\text{GL}_A(M)$에 이산 위상을 주었을 때의 연속 준동형
+$\rho : \Gamma \to \text{GL}_A(M)$으로 이루어진 삼중항
+$(A, M, \rho)$이고,\footnote{% P11-E0045
+다른 방법으로는, $\rho$가 주는 $G$-작용을 갖춘 $A$-가군 $M$이
+에탈 코호몰로지, 정의
+\ref{etale-cohomology-definition-G-module-continuous}에서 정의한
+$A\text{-}G$-가군이라고 요구할 수 있다. 그러나 $M$이 유한
+$A$-가군이므로 이는 동치이다.}
+\item 사상 $(f, g) : (B, N, \tau) \to (A, M, \rho)$은
+$\mathcal{C}_\Lambda$의 사상 $f : B \to A$와, $f$-선형이고
+$\Gamma$-등변이며 동형 $N \otimes_{B, f} A \cong M$을 유도하는
+사상 $g : N \to M$으로 이루어진다.% P11-E0044
+\end{enumerate}
+함자 $p : \mathcal{F} \to \mathcal{C}_\Lambda$는 $(A, M, \rho)$를 $A$로,
+$(f, g)$를 $f$로 보낸다. $p$가 준군들로 공섬유화되어 있음은 명백하다.
+유한 차원 $k$-벡터 공간 $V$와 연속 표현
+$\rho_0 : \Gamma \to \text{GL}_k(V)$가 주어졌을 때,
+$x_0 = (k, V, \rho_0)$를 이에 대응하는 $\mathcal{F}(k)$의 대상이라 하자.
+다음과 같이 둔다.
+$$
+\Deformationcategory_{V, \rho_0} = \mathcal{F}_{x_0}
+$$
+\end{example}
+
+\noindent
+국소환 위의 모든 유한 사영 가군은 유한 자유 가군이므로
+(대수학, 보조정리 \ref{algebra-lemma-finite-projective}), 다음을 얻는다.
+$$
+\begin{matrix}
+\mathcal{F}(A)\text{의 대상들의} \\
+\text{동형류}
+\end{matrix}
+=
+\coprod\nolimits_{n \geq 0}\quad
+\begin{matrix}
+\text{연속 준동형 }\rho : \Gamma \to \text{GL}_n(A)\text{의}\\
+\text{GL}_n(A)\text{-켤레류}
+\end{matrix}
+$$
+
+\begin{lemma}
+\label{lemma-continuous-representations-RS}
+예 \ref{example-continuous-representations}은 Rim--Schlessinger 조건
+(RS)를 만족한다. 특히 임의의 유한 차원 연속 표현
+$\rho_0 : \Gamma \to \text{GL}_k(V)$에 대하여
+$\Deformationcategory_{V, \rho_0}$는 변형 범주이다.
+\end{lemma}
+
+\begin{proof}
+증명은 보조정리 \ref{lemma-representations-RS}의 증명과 완전히 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-continuous-representations-TI}
+예 \ref{example-continuous-representations}에서
+$\rho_0 : \Gamma \to \text{GL}_k(V)$를 유한 차원 연속 표현이라 하자.
+그러면
+$$
+T\Deformationcategory_{V, \rho_0} = H^1(\Gamma, \text{End}_k(V))
+\quad\text{그리고}\quad
+\text{Inf}(\Deformationcategory_{V, \rho_0}) = H^0(\Gamma, \text{End}_k(V))
+$$
+따라서 $\text{Inf}(\Deformationcategory_{V, \rho_0})$는 언제나
+유한 차원이고, $\Gamma$가 위상적으로 유한 생성이면
+$T\Deformationcategory_{V, \rho_0}$도 유한 차원이다.
+\end{lemma}
+
+\begin{proof}
+증명은 보조정리 \ref{lemma-representations-TI}의 증명과 완전히 같다.
+\end{proof}
+
+\noindent
+예 \ref{example-continuous-representations}에서 $\Gamma$가 위상적으로
+유한 생성이고 $(V, \rho_0)$가 $k$ 위의 $\Gamma$의 유한 차원 연속 표현이면,
+$\Deformationcategory_{V, \rho_0}$는 $\mathcal{C}_\Lambda$ 위의
+함자들로 이루어진 매끄러운 pro-표현가능 준군에 의한 제시를 가지며,
+따라서 특히 (최소) versal 형식적 대상을 가진다. 이는 보조정리
+\ref{lemma-continuous-representations-RS},
+\ref{lemma-continuous-representations-TI}와 절 \ref{section-general}의
+일반적인 논의에서 따른다.
+
+\begin{lemma}
+\label{lemma-continuous-representations-hull}
+예 \ref{example-continuous-representations}에서 $\Gamma$가 위상적으로
+유한 생성이라고 가정하자.
+$\rho_0 : \Gamma \to \text{GL}_k(V)$를 유한 차원 표현이라 하자.
+$\Lambda$가 잉여체 $k$를 갖는 완비 국소환이라고 가정하자
+(고전적인 경우). 그러면 대상들의 동형류로 이루어진 함자
+$$
+F : \mathcal{C}_\Lambda \longrightarrow \textit{Sets},\quad
+A \longmapsto \Ob(\Deformationcategory_{V, \rho_0}(A))/\cong
+$$
+는 포락을 가진다. $H^0(\Gamma, \text{End}_k(V)) = k$이면
+$F$는 pro-표현가능하다.
+\end{lemma}
+
+\begin{proof}
+증명은 보조정리 \ref{lemma-representations-hull}의 증명과 완전히 같다.
+\end{proof}
+
+
+
+\section{등급 대수}
+\label{section-graded-algebras}
+
+\noindent
+이 절의 예는 극화된 고유 스킴의 스택이 대수적 스택임을 증명할 때
+사용할 것이다. 따라서 동차 성분들이 유한 사영 가군인 가환 등급 대수를
+생각한다(때로는 ``국소 유한''이라고 한다).
+
+\begin{example}[등급 대수]
+\label{example-graded-algebras}
+$\mathcal{F}$를 다음과 같이 정의되는 범주라 하자.
+\begin{enumerate}
+\item 대상은 $\mathcal{C}_\Lambda$의 대상 $A$와, 모든 $d \geq 0$에 대하여
+$P_d$가 유한 사영 $A$-가군인 등급 $A$-대수 $P$로 이루어진 순서쌍
+$(A, P)$이고,
+\item 사상 $(f, g) : (B, Q) \to (A, P)$은
+$\mathcal{C}_\Lambda$의 사상 $f : B \to A$와, $f$-선형이며
+동형 $Q \otimes_{B, f} A \cong P$을 유도하는 사상
+$g : Q \to P$로 이루어진다.% P11-E0044
+\end{enumerate}
+함자 $p : \mathcal{F} \to \mathcal{C}_\Lambda$는 $(A, P)$를 $A$로,
+$(f, g)$를 $f$로 보낸다. $p$가 준군들로 공섬유화되어 있음은 명백하다.
+모든 $d \geq 0$에 대하여 $\dim_k(P_d) < \infty$인 등급 $k$-대수 $P$가
+주어졌을 때, $x_0 = (k, P)$를 이에 대응하는 $\mathcal{F}(k)$의 대상이라
+하자. 다음과 같이 둔다.
+$$
+\Deformationcategory_P = \mathcal{F}_{x_0}
+$$
+\end{example}
+
+\begin{lemma}
+\label{lemma-graded-algebras-RS}
+예 \ref{example-graded-algebras}은 Rim--Schlessinger 조건 (RS)를
+만족한다. 특히 임의의 등급 $k$-대수 $P$에 대하여
+$\Deformationcategory_P$는 변형 범주이다.
+\end{lemma}
+
+\begin{proof}
+$A_1 \to A$와 $A_2 \to A$를 $\mathcal{C}_\Lambda$의 사상이라 하자.
+$A_2 \to A$가 전사라고 가정하자. 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-2-categorical}에 의해 다음 함자
+$\mathcal{F}(A_1 \times_A A_2) \to
+\mathcal{F}(A_1) \times_{\mathcal{F}(A)} \mathcal{F}(A_2)$
+가 범주의 동치임을 보이면 충분하다.
+
+\medskip\noindent
+범주 $\mathcal{F}(A_1) \times_{\mathcal{F}(A)} \mathcal{F}(A_2)$의 대상
+$$
+((A_1, P_1), (A_2, P_2), (\text{id}_A, \varphi))
+$$
+를 생각하자. 이제 $P_1 \times_\varphi P_2$를 생각한다.
+$\varphi : P_1 \otimes_{A_1} A \to P_2 \otimes_{A_2} A$가 등급 대수의
+동형이므로, $P_1 \times_\varphi P_2$의 등급 성분들은 유한 사영
+$A_1 \times_A A_2$-가군이다. 보조정리
+\ref{lemma-finite-projective-modules-RS}의 증명을 참조하라. 따라서
+$P_1 \times_\varphi P_2$는 $\mathcal{F}(A_1 \times_A A_2)$의 대상이다.
+이 구성은 위 함자의 준역함자를 결정하며, 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-graded-algebras-TI}
+예 \ref{example-graded-algebras}에서 $P$를 등급 $k$-대수라 하자. 그러면
+$$
+T\Deformationcategory_P
+\quad\text{그리고}\quad
+\text{Inf}(\Deformationcategory_P) = \text{Der}_k(P, P)
+$$
+는 $P$가 $k$ 위에서 유한 생성일 때 유한 차원이다.
+\end{lemma}
+
+\begin{proof}
+먼저 무한소 자기동형을 다룬다. $Q = P \otimes_k k[\epsilon]$라 하자.
+그러면 $\text{Inf}(\Deformationcategory_P)$의 원소는 위와 같은 자기동형
+$\gamma = \text{id} + \epsilon \delta : Q \to Q$로 주어지며,
+이제 $\delta : P \to P$이다. $\gamma$가 등급을 보존한다는 사실로부터
+$\delta$가 차수 $0$인 동차 사상임이 따른다. $\gamma$가 $k$-선형이라는
+사실로부터 $\delta$가 $k$-선형임이 따르고, $\gamma$가 곱셈을 보존한다는
+사실로부터 $\delta$가 $k$-미분임이 따른다. 반대로 차수 $0$인 동차
+$k$-미분 $\delta : P \to P$가 주어지면, 위와 같은 자기동형
+$\gamma = \text{id} + \epsilon \delta$를 얻는다. 따라서
+$$
+\text{Inf}(\Deformationcategory_P) = \text{Der}_k(P, P)
+$$
+이며, 이는 보조정리의 예측과 같다. 명백히 $P$가 $0 \leq i \leq N$인
+차수 $P_i$들에서 생성되면, $\delta$는 $0 \leq i \leq N$인 선형사상
+$\delta_i : P_i \to P_i$들에 의해 결정된다. 따라서
+$$
+\dim_k \text{Der}_k(P, P) < \infty
+$$
+이며, 원하는 바를 얻는다.
+
+\medskip\noindent
+보조정리의 증명을 끝내기 위해 변형 공간이 유한 차원임을 보인다.
+이를 위해 등급 $k$-대수의 표시
+$$
+k[X_1, \ldots, X_n]/(F_1, \ldots, F_m) \longrightarrow P
+$$
+를 택하자. 여기서 $\deg(X_i) = d_i$이고 $F_j$는 차수 $e_j$인
+동차 원소이다. 각 차수에서 유한 자유인 임의의 등급
+$k[\epsilon]$-대수 $Q$와, $(Q, \alpha)$가
+$T\Deformationcategory_P$의 원소를 정하도록 하는 동형
+$\alpha : Q/\epsilon Q \to P$가 주어졌다고 하자.% P11-E0046
+$P$에서 $X_i$의 상으로 가는 차수 $d_i$의 동차 원소 $q_i \in Q$를
+택한다. 그러면 다음을 얻는다.
+$$
+k[\epsilon][X_1, \ldots, X_n] \longrightarrow Q,\quad
+X_i \longmapsto q_i
+$$
+$P = Q/\epsilon Q$이므로 이 사상은 Nakayama 보조정리에 의해 전사이다.
+간단한 도표 추적으로, $Q$에서는 영으로 가고
+$k[X_1, \ldots, X_n]$에서는 $F_j$로 가는 차수 $e_j$의 동차 원소
+$F_{\epsilon, j} \in k[\epsilon][X_1, \ldots, X_n]$를 택할 수 있음을
+알 수 있다. 그러면
+$$
+k[\epsilon][X_1, \ldots, X_n]/(F_{\epsilon, 1}, \ldots, F_{\epsilon, m})
+\longrightarrow Q
+$$
+는 $Q$가 $k[\epsilon]$ 위에서 평탄하므로 $Q$의 표시이다. 다음과 같이 쓴다.
+$$
+F_{\epsilon, j} =  F_j + \epsilon G_j
+$$
+벡터 $(G_1, \ldots, G_m)$에는 선택의 여지가 있다. 먼저
+$F_{\epsilon, j}$를 다르게 택하면, $G_j$를
+$k[X_1, \ldots, X_n] \to P$의 핵에 속하는 차수 $e_j$의 임의의 원소만큼
+바꿀 수 있다. 따라서 $(G_1, \ldots, G_m)$ 대신 원소
+$$
+(g_1, \ldots, g_m) \in P_{e_1} \oplus \ldots \oplus P_{e_m}
+$$
+를 기억한다. 여기서 $g_j$는 $P_{e_j}$에서 $G_j$의 상이다. 더욱이
+$p_i$가 차수 $d_i$일 때 $q_i$의 선택을 $q_i + \epsilon p_i$로 바꾸면,
+생략한 계산에 의해 $g_j$는 다음으로 바뀐다.
+$$
+g_j^{new} = g_j - \sum\nolimits_{i = 1}^n p_i \partial F_j / \partial X_i
+$$
+따라서 $Q$의 동형류는 다음 $k$-벡터 공간에서 벡터
+$(G_1, \ldots, G_m)$의 상에 의해 결정된다.
+$$
+W  = \Coker(P_{d_1} \oplus \ldots \oplus P_{d_n}
+\xrightarrow{(\frac{\partial F_j}{\partial X_i})}
+P_{e_1} \oplus \ldots \oplus P_{e_m})
+$$
+이로써 단사 사상
+$$
+T\Deformationcategory_P \longrightarrow W
+$$
+$W$가 명백히 유한 차원이므로 보조정리가 성립한다.
+\end{proof}
+
+\noindent
+예 \ref{example-graded-algebras}에서 $P$가 유한 생성 등급 $k$-대수이면,
+$\Deformationcategory_P$는 $\mathcal{C}_\Lambda$ 위의 함자들로 이루어진
+매끄러운 pro-표현가능 준군에 의한 제시를 가지며, 따라서 특히
+(최소) versal 형식적 대상을 가진다. 이는 보조정리
+\ref{lemma-graded-algebras-RS}, \ref{lemma-graded-algebras-TI}와
+절 \ref{section-general}의 일반적인 논의에서 따른다.
+
+\begin{lemma}
+\label{lemma-graded-algebras-hull}
+예 \ref{example-graded-algebras}에서 $P$가 유한 생성 등급 $k$-대수라고
+가정하자. $\Lambda$가 잉여체 $k$를 갖는 완비 국소환이라고 가정하자
+(고전적인 경우). 그러면 대상들의 동형류로 이루어진 함자
+$$
+F : \mathcal{C}_\Lambda \longrightarrow \textit{Sets},\quad
+A \longmapsto \Ob(\Deformationcategory_P(A))/\cong
+$$
+는 포락을 가진다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{lemma-graded-algebras-RS},
+\ref{lemma-graded-algebras-TI}와 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-implies-S1-S2} 및 주석
+\ref{formal-defos-remark-compose-minimal-into-iso-classes}에서 곧바로 따른다.
+\end{proof}
+
+
+
+
+
+
+
+\section{환}
+\label{section-rings}
+
+\noindent
+환의 변형 이론은 아핀 스킴의 변형 이론과 같다. 환과 스킴에 관하여
+변형을 말할 때에는 {\it 평탄} 변형을 생각한다는 뜻이다.
+
+\begin{example}[환]
+\label{example-rings}
+$\mathcal{F}$를 다음과 같이 정의되는 범주라 하자.
+\begin{enumerate}
+\item 대상은 $\mathcal{C}_\Lambda$의 대상 $A$와 평탄 $A$-대수 $P$로
+이루어진 순서쌍 $(A, P)$이고,
+\item 사상 $(f, g) : (B, Q) \to (A, P)$은
+$\mathcal{C}_\Lambda$의 사상 $f : B \to A$와, $f$-선형이며
+동형 $Q \otimes_{B, f} A \cong P$을 유도하는 사상
+$g : Q \to P$로 이루어진다.% P11-E0044
+\end{enumerate}
+함자 $p : \mathcal{F} \to \mathcal{C}_\Lambda$는 $(A, P)$를 $A$로,
+$(f, g)$를 $f$로 보낸다. $p$가 준군들로 공섬유화되어 있음은 명백하다.
+$k$-대수 $P$가 주어졌을 때, $x_0 = (k, P)$를 이에 대응하는
+$\mathcal{F}(k)$의 대상이라 하자. 다음과 같이 둔다.
+$$
+\Deformationcategory_P = \mathcal{F}_{x_0}
+$$
+\end{example}
+
+\begin{lemma}
+\label{lemma-rings-RS}
+예 \ref{example-rings}은 Rim--Schlessinger 조건 (RS)를 만족한다.
+특히 임의의 $k$-대수 $P$에 대하여 $\Deformationcategory_P$는
+변형 범주이다.
+\end{lemma}
+
+\begin{proof}
+$A_1 \to A$와 $A_2 \to A$를 $\mathcal{C}_\Lambda$의 사상이라 하자.
+$A_2 \to A$가 전사라고 가정하자. 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-2-categorical}에 의해 다음 함자
+$\mathcal{F}(A_1 \times_A A_2) \to
+\mathcal{F}(A_1) \times_{\mathcal{F}(A)} \mathcal{F}(A_2)$
+가 범주의 동치임을 보이면 충분하다. 이는 대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-properties-algebras-over-fibre-product}의
+특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-rings-TI}
+예 \ref{example-rings}에서 $P$를 $k$-대수라 하자. 그러면
+$$
+T\Deformationcategory_P = \text{Ext}^1_P(\NL_{P/k}, P)
+\quad\text{그리고}\quad
+\text{Inf}(\Deformationcategory_P) = \text{Der}_k(P, P)
+$$
+\end{lemma}
+
+\begin{proof}
+$\text{Inf}(\Deformationcategory_P)$는 $P$의 $k[\epsilon]$로의 자명한 변형
+$P[\epsilon] = P \otimes_k k[\epsilon]$ 가운데 $\epsilon$을 법으로 하여
+항등인 자기동형들의 집합임을 상기하자. 변형 이론, 보조정리
+\ref{defos-lemma-huge-diagram}에 의해 이는
+$\Hom_P(\Omega_{P/k}, P)$와 같고, 다시 대수학, 보조정리
+\ref{algebra-lemma-universal-omega}에 의해 $\text{Der}_k(P, P)$와 같다.
+
+\medskip\noindent
+$T\Deformationcategory_P$는 $P$의 $k[\epsilon]$로의 평탄 변형 $Q$의
+동형류들의 집합, 더 정확히는 $\Deformationcategory_P(k[\epsilon])$의
+동형류들의 집합임을 상기하자. $Q/\epsilon Q = P$인
+$k[\epsilon]$-대수 $Q$가 $k[\epsilon]$ 위에서 평탄일 필요충분조건은
+$$
+0 \to P \xrightarrow{\epsilon} Q \to P \to 0
+$$
+가 완전한 것이다. 이는 사상 더 보기, 보조정리
+\ref{more-morphisms-lemma-deform}에서, 더 일반적으로는 변형 이론,
+보조정리 \ref{defos-lemma-deform-module}에서 증명된다. 따라서 변형 이론,
+보조정리 \ref{defos-lemma-choices}를 적용하면 이러한 변형들의 동형류
+집합이 $\text{Ext}^1_P(\NL_{P/k}, P)$와 같음을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smooth}
+예 \ref{example-rings}에서 $P$를 매끄러운 $k$-대수라 하자. 그러면
+$T\Deformationcategory_P = (0)$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-rings-TI}에 의해
+$\text{Ext}^1_P(\NL_{P/k}, P) = (0)$임을 보이면 된다.
+$k \to P$가 매끄러우므로 $\NL_{P/k}$는 차수 $0$에 놓인 유한 사영
+$P$-가군으로 이루어진 복합체와 준동형이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-type-rings-TI}
+보조정리 \ref{lemma-rings-TI}에서 $P$가 유한형 $k$-대수이면 다음이 성립한다.
+\begin{enumerate}
+\item $\text{Inf}(\Deformationcategory_P)$가 유한 차원일 필요충분조건은
+$\dim(P) = 0$인 것이다.
+\item $\Spec(P) \to \Spec(k)$가 유한 개의 점을 제외하고 매끄러우면
+$T\Deformationcategory_P$는 유한 차원이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. $\text{Der}_k(P, P)$를 $P$-가군으로 보자. 이것이 $k$ 위에서
+유한 차원이면 $P$-가군으로서 유한 길이를 가지므로, 지지집합은
+$\Spec(P)$의 유한 개 닫힌점에 포함된다
+(대수학, 보조정리 \ref{algebra-lemma-simple-pieces}).
+$\text{Der}_k(P, P) = \Hom_P(\Omega_{P/k}, P)$이므로, 임의의 소 아이디얼
+$\mathfrak p \subset P$에 대하여
+$\text{Der}_k(P, P)_\mathfrak p = \text{Der}_k(P_\mathfrak p, P_\mathfrak p)$
+이다. 여기에는 대수학, 보조정리
+\ref{algebra-lemma-differentials-localize},
+\ref{algebra-lemma-differentials-finitely-presented} 및
+\ref{algebra-lemma-hom-from-finitely-presented}를 사용하였다.
+$\mathfrak p$를 차원 $d > 0$인 기약 성분에 대응하는 $P$의 극소
+소 아이디얼이라 하자. 그러면 $P_\mathfrak p$는 $k$ 위 본질적으로
+유한형인 아르틴 국소환이고 잉여체를 가지며,% P11-E0047
+예를 들어 대수학, 보조정리
+\ref{algebra-lemma-characterize-smooth-over-field}에 의해
+$\Omega_{P_\mathfrak p/k}$는 영이 아니다. 아르틴 국소환 위의 영이 아닌
+유한 가군은 잉여체와 동형인 부분가군과 몫가군을 모두 가진다. 따라서
+$\text{Der}_k(P_\mathfrak p, P_\mathfrak p) =
+\Hom_{P_\mathfrak p}(\Omega_{P_\mathfrak p/k}, P_\mathfrak p)$
+도 영이 아니다. 위의 사실들을 모두 종합하면 (1)을 얻는다.
+
+\medskip\noindent
+(2)의 증명. $P$의 소 아이디얼 $\mathfrak p$에 대하여 다음을 사용한다.
+$\NL_{P_\mathfrak p/k} = (\NL_{P/k})_\mathfrak p$
+(대수학, 보조정리 \ref{algebra-lemma-localize-NL}) 또한 다음을 사용한다.
+$\text{Ext}_P^1(\NL_{P/k}, P)_\mathfrak p =
+\text{Ext}_{P_\mathfrak p}^1(\NL_{P_\mathfrak p/k}, P_\mathfrak p)$
+(대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-pseudo-coherence-and-base-change-ext}).
+소 아이디얼 $\mathfrak p \subset P$가 주어졌을 때, $k \to P$가
+$\mathfrak p$에서 매끄러울 필요충분조건은 $(\NL_{P/k})_\mathfrak p$가
+차수 $0$에 놓인 유한 사영 가군과 준동형인 것이다. 이는 매끄러운 환
+준동형의 정의에서 곧바로 따르지만, 더 강한 대수학, 보조정리
+\ref{algebra-lemma-smooth-at-point}에서도 따른다.
+
+\medskip\noindent
+$P$가 유한 개의 소 아이디얼을 제외하고 $k$ 위에서 매끄럽다고 가정하자.
+이 ``나쁜'' 소 아이디얼들은 대수학, 보조정리
+\ref{algebra-lemma-finite-type-algebra-finite-nr-primes}와 ``나쁜''
+소 아이디얼들이 $\Spec(P)$의 닫힌 부분집합을 이룬다는 사실에 의해
+극대 아이디얼 $\mathfrak m_1, \ldots, \mathfrak m_n \subset P$이다.
+$\mathfrak p \not \in \{\mathfrak m_1, \ldots, \mathfrak m_n\}$이면 위의
+결과에 의해 $\text{Ext}^1_P(\NL_{P/k}, P)_\mathfrak p = 0$이다. 따라서
+$\text{Ext}^1_P(\NL_{P/k}, P)$는 지지집합이
+$\{\mathfrak m_1, \ldots, \mathfrak m_r\}$에 포함되는 유한
+$P$-가군이다.% P11-E0048
+예를 들어 대수학, 명제
+\ref{algebra-proposition-minimal-primes-associated-primes}에 의해
+$\text{Ext}^1_P(\NL_{P/k}, P)$의 $k$ 위 차원은
+$\dim_k \kappa(\mathfrak m_i)$들의 유한한 정수 선형결합임을 알 수 있고,
+따라서 Hilbert 영점정리(대수학, 정리
+\ref{algebra-theorem-nullstellensatz})에 의해 유한하다.
+\end{proof}
+
+\noindent
+예 \ref{example-rings}에서 $P$를 유한형 $k$-대수라 하자.
+$\Deformationcategory_P$가 $\mathcal{C}_\Lambda$ 위의 함자들로 이루어진
+매끄러운 pro-표현가능 준군에 의한 제시를 가질 필요충분조건은
+$\dim(P) = 0$인 것이다. 더욱이 $\Spec(P) \to \Spec(k)$의 특이점이
+유한 개이면 $\Deformationcategory_P$는 versal 형식적 대상을 가진다.
+이는 보조정리 \ref{lemma-rings-RS}, \ref{lemma-finite-type-rings-TI}와
+절 \ref{section-general}의 일반적인 논의에서 따른다.
+
+\begin{lemma}
+\label{lemma-rings-hull}
+예 \ref{example-rings}에서 $P$가 유한형 $k$-대수이고
+$\Spec(P) \to \Spec(k)$가 유한 개의 점을 제외하고 매끄럽다고 가정하자.
+$\Lambda$가 잉여체 $k$를 갖는 완비 국소환이라고 가정하자
+(고전적인 경우). 그러면 대상들의 동형류로 이루어진 함자
+$$
+F : \mathcal{C}_\Lambda \longrightarrow \textit{Sets},\quad
+A \longmapsto \Ob(\Deformationcategory_P(A))/\cong
+$$
+는 포락을 가진다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{lemma-rings-RS}, \ref{lemma-finite-type-rings-TI}와
+형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-implies-S1-S2} 및 주석
+\ref{formal-defos-remark-compose-minimal-into-iso-classes}에서 곧바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-localization}
+예 \ref{example-rings}에서 $P$를 $k$-대수라 하자.
+$S \subset P$를 곱셈적 부분집합이라 하자. 변형 범주들의 자연스러운 함자
+$$
+\Deformationcategory_P \longrightarrow \Deformationcategory_{S^{-1}P}
+$$
+가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$P$의 변형을 국소화하면 그 국소화의 변형을 얻는다. 이는 명백하므로
+독자는 이 증명을 건너뛰어도 좋다. 더 정확히, $(A, Q) \to (k, P)$를
+$\mathcal{F}$의 사상, 즉 $\Deformationcategory_P$의 대상이라 하자.
+$S_Q \subset Q$를 $S$의 역상이라 하자. 그러면% P11-E0049
+$(A, S_Q^{-1}Q) \to (k, S^{-1}P)$는
+$\Deformationcategory_{S^{-1}P}$에서 원하는 대상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-henselization}
+예 \ref{example-rings}에서 $P$를 $k$-대수라 하자.
+$J \subset P$를 아이디얼이라 하자. $(P^h, J^h)$로 순서쌍 $(P, J)$의
+헨젤화를 나타낸다. 변형 범주들의 자연스러운 함자
+$$
+\Deformationcategory_P \longrightarrow \Deformationcategory_{P^h}
+$$
+가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$P$의 변형을 헨젤화하면 그 헨젤화의 변형을 얻는다. 이는 명백하므로
+독자는 이 증명을 건너뛰어도 좋다. 더 정확히, $(A, Q) \to (k, P)$를
+$\mathcal{F}$의 사상, 즉 $\Deformationcategory_P$의 대상이라 하자.
+$J_Q \subset Q$로 $Q$에서 $J$의 역상을 나타낸다. $(Q^h, J_Q^h)$를
+순서쌍 $(Q, J_Q)$의 헨젤화라 하자. $Q \to Q^h$는 평탄하고
+(대수학 더 보기, 보조정리 \ref{more-algebra-lemma-henselization-flat}),
+따라서 $Q^h$는 $A$ 위에서 평탄임을 상기하자. 대수학 더 보기,
+보조정리 \ref{more-algebra-lemma-henselization-integral}에 의해
+$Q^h \to P^h$는 동형 $Q^h \otimes_A k = Q^h \otimes_Q P = P^h$를
+유도한다. 따라서 $(A, Q^h) \to (k, P^h)$는
+$\Deformationcategory_{P^h}$에서 원하는 대상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-strict-henselization}
+예 \ref{example-rings}에서 $P$를 $k$-대수라 하자. $P$가 국소환이라고
+가정하고 $P^{sh}$를 $P$의 엄밀 헨젤화라 하자. 변형 범주들의 자연스러운 함자
+$$
+\Deformationcategory_P \longrightarrow \Deformationcategory_{P^{sh}}
+$$
+가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$P$의 변형을 엄밀 헨젤화하면 그 엄밀 헨젤화의 변형을 얻는다. 이는
+명백하므로 독자는 이 증명을 건너뛰어도 좋다. 더 정확히,
+$(A, Q) \to (k, P)$를 $\mathcal{F}$의 사상, 즉
+$\Deformationcategory_P$의 대상이라 하자. 전사 $Q \to P$의 핵이
+멱영이므로 $Q$는 $P$와 같은 잉여체를 갖는 국소환이다. $Q^{sh}$를
+$Q$의 엄밀 헨젤화라 하자. $Q \to Q^{sh}$는 평탄하고
+(대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-dumb-properties-henselization}), 따라서 $Q^{sh}$는
+$A$ 위에서 평탄임을 상기하자. 대수학, 보조정리
+\ref{algebra-lemma-quotient-strict-henselization}에 의해
+$Q^{sh} \to P^{sh}$는 동형
+$Q^{sh} \otimes_A k = Q^{sh} \otimes_Q P = P^{sh}$를 유도한다. 따라서
+$(A, Q^{sh}) \to (k, P^{sh})$는 $\Deformationcategory_{P^{sh}}$에서
+원하는 대상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-completion}
+예 \ref{example-rings}에서 $P$를 $k$-대수라 하자. $P$가 뇌터 환이라고
+가정하고 $J \subset P$를 아이디얼이라 하자.% P11-E0050
+$P^\wedge$로 $J$-진 완비화를 나타낸다. 변형 범주들의 자연스러운 함자
+$$
+\Deformationcategory_P \longrightarrow \Deformationcategory_{P^\wedge}
+$$
+가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$P$의 변형을 완비화하면 그 완비화의 변형을 얻는다. 이는 명백하므로
+독자는 이 증명을 건너뛰어도 좋다. 더 정확히, $(A, Q) \to (k, P)$를
+$\mathcal{F}$의 사상, 즉 $\Deformationcategory_P$의 대상이라 하자.
+$Q$는 뇌터 환이다. 실제로 전사 환 준동형 $Q \to P$의 핵은 멱영이고
+유한 생성이며 $P$는 뇌터 환이므로, 대수학, 보조정리
+\ref{algebra-lemma-completion-Noetherian}를 적용하면 된다.
+$J_Q \subset Q$로 $Q$에서 $J$의 역상을 나타내고, $Q^\wedge$를 $Q$의
+$J_Q$-진 완비화라 하자. $Q \to Q^\wedge$는 평탄하고
+(대수학, 보조정리 \ref{algebra-lemma-completion-flat}), 따라서
+$Q^\wedge$는 $A$ 위에서 평탄임을 상기하자. 예를 들어 대수학, 보조정리
+\ref{algebra-lemma-completion-tensor}에 의해 유도된 사상
+$Q^\wedge \to P^\wedge$는 동형
+$Q^\wedge \otimes_A k = Q^\wedge \otimes_Q P = P^\wedge$를 유도한다.
+따라서 $(A, Q^\wedge) \to (k, P^\wedge)$는
+$\Deformationcategory_{P^\wedge}$에서 원하는 대상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-power-series-rings-TI}
+보조정리 \ref{lemma-rings-TI}에서 영이 아닌 어떤
+$f \in (x_1, \ldots, x_n)^2$에 대하여
+$P = k[[x_1, \ldots, x_n]]/(f)$이면 다음이 성립한다.
+\begin{enumerate}
+\item $\text{Inf}(\Deformationcategory_P)$가 유한 차원일 필요충분조건은
+$n = 1$인 것이다.
+\item 다음이 성립하면 $T\Deformationcategory_P$는 유한 차원이다.
+$$
+\sqrt{(f, \partial f/\partial x_1, \ldots,  \partial f/\partial x_n)} =
+(x_1, \ldots, x_n)
+$$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. $k[[x_1, \ldots, x_n]]$의 $k$ 위 미분
+$\partial/\partial x_i$를 생각하자. $f_i = \partial f/\partial x_i$라 쓰자.
+$k[[x_1, \ldots, x_n]]$의 미분
+$$
+\theta = \sum h_i \partial/\partial x_i
+$$
+가 $P = k[[x_1, \ldots, x_n]]/(f)$의 미분을 유도할 필요충분조건은
+$\sum h_i f_i \in (f)$인 것이다. 더욱이 $P$에 유도된 미분이 영일
+필요충분조건은 $i = 1, \ldots, n$에 대하여 $h_i \in (f)$인 것이다.
+따라서
+$$
+\Ker((f_1, \ldots, f_n) : P^{\oplus n} \longrightarrow P) \subset
+\text{Der}_k(P, P)
+$$
+이다. 좌변이 유한 차원 $k$-벡터 공간일 수 있는 것은 $n = 1$일 때뿐이며,
+그 증명은 생략한다. $n = 1$일 때 우변이 유한 차원임을 확인하는 것도
+독자에게 맡긴다. 이로써 (1)을 증명하였다.
+
+\medskip\noindent
+(2)의 증명. 보조정리 \ref{lemma-rings-TI}의 증명에서와 같이 $Q$를
+$P$의 $k[\epsilon]$ 위 평탄 변형이라 하자. $P$에서 $x_i$의 상을
+올리는 원소 $q_i \in Q$를 택하자. 그러면 $Q$는 극대 아이디얼이
+$q_1, \ldots, q_n$과 $\epsilon$으로 생성되는 완비 국소환이다
+(간단한 논증은 생략한다). 따라서 전사 사상
+$$
+k[\epsilon][[x_1, \ldots, x_n]] \longrightarrow Q,\quad
+x_i \longmapsto q_i
+$$
+$Q$에서 영으로 가는 꼴
+$f + \epsilon g \in k[\epsilon][[x_1, \ldots, x_n]]$의 원소를 택하자.
+$g$는 $(f)$를 법으로 하여 잘 정의됨에 주의하자. $Q$가
+$k[\epsilon]$ 위에서 평탄하므로
+$$
+Q = k[\epsilon][[x_1, \ldots, x_n]]/(f + \epsilon g)
+$$
+를 얻는다. 마지막으로 $q_i$의 선택을 바꾸는 것은 어떤
+$h_i \in k[[x_1, \ldots, x_n]]$에 대하여 좌표 $x_i$를
+$x_i + \epsilon h_i$로 바꾸는 것에 해당한다.% P11-E0051
+그러면 $f_i = \partial f/\partial x_i$일 때 $f + \epsilon g$는
+$f + \epsilon (g + \sum h_i f_i)$로 바뀐다. 따라서 변형 $Q$의 동형류는
+다음의 원소에 의해 결정된다.
+$$
+k[[x_1, \ldots, x_n]]/
+(f, \partial f/\partial x_1, \ldots,  \partial f/\partial x_n)
+$$
+이것이 $k$ 위에서 유한 차원일 필요충분조건은 그 지지집합이
+$k[[x_1, \ldots, x_n]]$의 닫힌점인 것이고, 다시 그 필요충분조건은
+$\sqrt{(f, \partial f/\partial x_1, \ldots,  \partial f/\partial x_n)} =
+(x_1, \ldots, x_n)$인 것이다.
+\end{proof}
+
+
+
+
+
+
+\section{스킴}
+\label{section-schemes}
+
+\noindent
+스킴의 변형 이론을 다룬다.
+
+\begin{example}[스킴]
+\label{example-schemes}
+$\mathcal{F}$를 다음과 같이 정의되는 범주라 하자.
+\begin{enumerate}
+\item 대상은 $\mathcal{C}_\Lambda$의 대상 $A$와 $A$ 위에서 평탄한 스킴
+$X$로 이루어진 순서쌍 $(A, X)$이고,
+\item 사상 $(f, g) : (B, Y) \to (A, X)$은
+$\mathcal{C}_\Lambda$의 사상 $f : B \to A$와 다음 도표가 스킴의
+데카르트 가환 도표가 되게 하는 사상 $g : X \to Y$로 이루어진다.
+$$
+\xymatrix{
+X \ar[r]_g \ar[d] & Y \ar[d] \\
+\Spec(A) \ar[r]^f & \Spec(B)
+}
+$$
+\end{enumerate}
+함자 $p : \mathcal{F} \to \mathcal{C}_\Lambda$는 $(A, X)$를 $A$로,
+$(f, g)$를 $f$로 보낸다. $p$가 준군들로 공섬유화되어 있음은 명백하다.
+$k$ 위의 스킴 $X$가 주어졌을 때, $x_0 = (k, X)$를 이에 대응하는
+$\mathcal{F}(k)$의 대상이라 하자. 다음과 같이 둔다.
+$$
+\Deformationcategory_X = \mathcal{F}_{x_0}
+$$
+\end{example}
+
+\begin{lemma}
+\label{lemma-schemes-RS}
+예 \ref{example-schemes}은 Rim--Schlessinger 조건 (RS)를 만족한다.
+특히 $k$ 위의 임의의 스킴 $X$에 대하여 $\Deformationcategory_X$는
+변형 범주이다.
+\end{lemma}
+
+\begin{proof}
+$A_1 \to A$와 $A_2 \to A$를 $\mathcal{C}_\Lambda$의 사상이라 하자.
+$A_2 \to A$가 전사라고 가정하자. 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-2-categorical}에 의해 다음 함자
+$\mathcal{F}(A_1 \times_A A_2) \to
+\mathcal{F}(A_1) \times_{\mathcal{F}(A)} \mathcal{F}(A_2)$
+가 범주의 동치임을 보이면 충분하다. 다음에 주의하자.
+$$
+\xymatrix{
+\Spec(A) \ar[r] \ar[d] & \Spec(A_2) \ar[d] \\
+\Spec(A_1) \ar[r] &
+\Spec(A_1 \times_A A_2)
+}
+$$
+이는 사상 더 보기, 보조정리
+\ref{more-morphisms-lemma-pushout-along-thickening}에서와 같은 밀어내기
+도표이다. 따라서 이 보조정리는 사상 더 보기, 보조정리
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout-flat}의
+특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-schemes-TI}
+예 \ref{example-schemes}에서 $X$를 $k$ 위의 스킴이라 하자. 그러면
+$$
+\text{Inf}(\Deformationcategory_X) =
+\text{Ext}^0_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X) =
+\Hom_{\mathcal{O}_X}(\Omega_{X/k}, \mathcal{O}_X) =
+\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X)
+$$
+그리고
+$$
+T\Deformationcategory_X =
+\text{Ext}^1_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)
+$$
+\end{lemma}
+
+\begin{proof}
+$\text{Inf}(\Deformationcategory_X)$는 $X$의 $k[\epsilon]$로의 자명한 변형
+$X' = X \times_{\Spec(k)} \Spec(k[\epsilon])$ 가운데 $\epsilon$을 법으로 하여
+항등인 자기동형들의 집합임을 상기하자. 변형 이론, 보조정리
+\ref{defos-lemma-deform}에 의해 이는
+$\text{Ext}^0_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)$와 같다. 등식
+$\text{Ext}^0_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X) =
+\Hom_{\mathcal{O}_X}(\Omega_{X/k}, \mathcal{O}_X)$는 사상 더 보기,
+보조정리 \ref{more-morphisms-lemma-netherlander-quasi-coherent}에서 따른다.
+등식
+$\Hom_{\mathcal{O}_X}(\Omega_{X/k}, \mathcal{O}_X) =
+\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X)$
+는 사상, 보조정리 \ref{morphisms-lemma-universal-derivation-universal}에서
+따른다.
+
+\medskip\noindent
+$T_{x_0}\Deformationcategory_X$는 $X$의 $k[\epsilon]$로의 평탄 변형 $X'$의
+동형류들의 집합, 더 정확히는 $\Deformationcategory_X(k[\epsilon])$의
+동형류들의 집합임을 상기하자. 따라서 보조정리의 두 번째 명제는
+변형 이론, 보조정리 \ref{defos-lemma-deform}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-schemes-TI}
+보조정리 \ref{lemma-schemes-TI}에서 $X$가 $k$ 위에서 고유이면
+$\text{Inf}(\Deformationcategory_X)$와 $T\Deformationcategory_X$는
+유한 차원이다.
+\end{lemma}
+
+\begin{proof}
+보조정리에 의해 $\Ext^1_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)$와
+$\Ext^0_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)$가 유한 차원임을
+보이면 된다. 사상 더 보기, 보조정리
+\ref{more-morphisms-lemma-netherlander-fp}와 $X$가 뇌터라는 사실에 의해
+$\NL_{X/k}$의 코호몰로지 층들은 결맞고, 차수 $0$과 $-1$을 제외하면
+영이다. 스킴의 유도 범주, 보조정리 \ref{perfect-lemma-ext-finite}에 의해
+표시된 $\Ext$-군들은 유한 $k$-벡터 공간이며, 증명이 끝난다.
+\end{proof}
+
+\noindent
+예 \ref{example-schemes}에서 $X$가 $k$ 위의 고유 스킴이면,
+$\Deformationcategory_X$는 $\mathcal{C}_\Lambda$ 위의 함자들로 이루어진
+매끄러운 pro-표현가능 준군에 의한 제시를 가지며, 따라서 특히
+(최소) versal 형식적 대상을 가진다. 이는 보조정리
+\ref{lemma-schemes-RS}, \ref{lemma-proper-schemes-TI}와
+절 \ref{section-general}의 일반적인 논의에서 따른다.
+
+\begin{lemma}
+\label{lemma-schemes-hull}
+예 \ref{example-schemes}에서 $X$가 고유 $k$-스킴이라고 가정하자.
+$\Lambda$가 잉여체 $k$를 갖는 완비 국소환이라고 가정하자
+(고전적인 경우). 그러면 대상들의 동형류로 이루어진 함자
+$$
+F : \mathcal{C}_\Lambda \longrightarrow \textit{Sets},\quad
+A \longmapsto \Ob(\Deformationcategory_X(A))/\cong
+$$
+는 포락을 가진다. $\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X) = 0$이면
+$F$는 pro-표현가능하다.
+\end{lemma}
+
+\begin{proof}
+포락의 존재는 보조정리 \ref{lemma-schemes-RS},
+\ref{lemma-proper-schemes-TI}와 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-implies-S1-S2} 및 주석
+\ref{formal-defos-remark-compose-minimal-into-iso-classes}에서 곧바로 따른다.
+
+\medskip\noindent
+$\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X) = 0$이라고 가정하자. 그러면
+형식적 변형 이론, 보조정리 \ref{formal-defos-lemma-infdef-trivial}에 의해
+$\Deformationcategory_X$와 $F$는 동치이다. 따라서 $F$는 유한 차원
+접공간을 갖는 변형 함자이다($\Deformationcategory_X$가 변형 범주이기
+때문이다). 이제 형식적 변형 이론, 정리
+\ref{formal-defos-theorem-Schlessinger-prorepresentability}를 적용할 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-open}
+예 \ref{example-schemes}에서 $X$를 $k$ 위의 스킴이라 하자.
+$U \subset X$를 열린 부분스킴이라 하자. 변형 범주들의 자연스러운 함자
+$$
+\Deformationcategory_X \longrightarrow \Deformationcategory_U
+$$
+가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$X$의 변형에서 이에 대응하는 열린 부분을 취하면 $U$의 변형을 얻는다.
+자세한 내용은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-affine}
+예 \ref{example-schemes}에서 $X = \Spec(P)$를 $k$ 위의 아핀 스킴이라 하자.
+\ref{example-rings}의 $\Deformationcategory_P$를 사용하면 변형 범주들의
+자연스러운 동치
+$$
+\Deformationcategory_X \longrightarrow \Deformationcategory_P
+$$
+가 존재한다.
+\end{lemma}
+
+\begin{proof}
+이 함자는 $(A, Y)$를 $\Gamma(Y, \mathcal{O}_Y)$로 보낸다. 사상 더 보기,
+보조정리 \ref{more-morphisms-lemma-thickening-affine-scheme}에 의해
+$X$의 모든 변형이 아핀이므로 이 구성이 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-local-ring}
+예 \ref{example-schemes}에서 $X$를 $k$ 위의 스킴이라 하자.% P11-E0605
+$p \in X$를 점이라 하자. 예 \ref{example-rings}의
+$\Deformationcategory_{\mathcal{O}_{X, p}}$를 사용하면 변형 범주들의
+자연스러운 함자
+$$
+\Deformationcategory_X
+\longrightarrow
+\Deformationcategory_{\mathcal{O}_{X, p}}
+$$
+가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$p$를 포함하는 아핀 열린 부분 $U = \Spec(P) \subset X$를 택하자.
+그러면 $\mathcal{O}_{X, p}$는 $P$의 국소화이다. 보조정리
+\ref{lemma-open}, \ref{lemma-affine}, \ref{lemma-localization}의 함자들을
+합성한다.
+\end{proof}
+
+\begin{situation}
+\label{situation-glueing}
+$\Lambda \to k$를 절 \ref{section-general}에서와 같이 두자. $X$를
+$k$ 위의 스킴이라 하고, $U_{12} = U_1 \cap U_2$도 아핀인 아핀 열린 덮개
+$X = U_1 \cup U_2$를 가진다고 하자. $U_1 = \Spec(P_1)$,
+$U_2 = \Spec(P_2)$, $U_{12} = \Spec(P_{12})$라 쓰자.
+$\Deformationcategory_X$, $\Deformationcategory_{U_1}$,
+$\Deformationcategory_{U_2}$, $\Deformationcategory_{U_{12}}$를 예
+\ref{example-schemes}에서와 같이 두고, $\Deformationcategory_{P_1}$,
+$\Deformationcategory_{P_2}$, $\Deformationcategory_{P_{12}}$를 예
+\ref{example-rings}에서와 같이 두자.
+\end{situation}
+
+\begin{lemma}
+\label{lemma-glueing}
+상황 \ref{situation-glueing}에서 변형 범주들의 동치
+$$
+\Deformationcategory_X =
+\Deformationcategory_{P_1}
+\times_{\Deformationcategory_{P_{12}}}
+\Deformationcategory_{P_2}
+$$
+가 존재한다. 예 \ref{example-schemes}와 \ref{example-rings}을 참조하라.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-open}의 함자들이 동치
+$$
+\Deformationcategory_X \longrightarrow
+\Deformationcategory_{U_1}
+\times_{\Deformationcategory_{U_{12}}}
+\Deformationcategory_{U_2}
+$$
+를 정함을 보이면 충분하다. 그러면 보조정리 \ref{lemma-affine}를 적용하여
+환의 경우로 옮길 수 있기 때문이다. 이를 위해 준역함자를 구성한다.
+$F_i : \Deformationcategory_{U_i} \to \Deformationcategory_{U_{12}}$로
+보조정리 \ref{lemma-open}의 함자를 나타내자. 우변의 대상은
+$\mathcal{C}_\Lambda$의 대상 $A$, 대상 $(A, V_1) \to (k, U_1)$과
+$(A, V_2) \to (k, U_2)$, 그리고 사상
+$$
+g : F_1(A, V_1) \to F_2(A, V_2)
+$$
+으로 주어진다. 이제 $F_i(A, V_i) = (A, V_{i, 3 - i})$이며, 여기서
+$V_{i, 3 - i} \subset V_i$는 $k$로 밑변환하면
+$U_{12} \subset U_i$가 되는 열린 부분스킴이다. 사상 $g$는 $k$ 위의
+$\text{id} : U_{12} \to U_{12}$와 양립하는 $A$ 위 스킴의 동형
+$V_{1, 2} \to V_{2, 1}$을 정한다. 따라서
+$(\{1, 2\}, V_i, V_{i, 3 - i}, g, g^{-1})$는 스킴, 절
+\ref{schemes-section-glueing-schemes}에서와 같은 붙이기 자료이다.
+$Y$를 붙여 얻은 스킴이라 하자. 스킴, 보조정리
+\ref{schemes-lemma-glue}를 참조하라. 그러면 $Y$는 $A$ 위의 스킴이고,
+위에서 언급한 양립성에 의해 표준 동형
+$Y \times_{\Spec(A)} \Spec(k) = X$.
+이 존재한다. 따라서 $(A, Y) \to (k, X)$는
+$\Deformationcategory_X$의 대상이다. 이 구성이 함자이고 주어진 함자의
+준역함자임을 확인하는 것은 생략한다.
+\end{proof}
+
+
+
+
+
+
+\section{스킴의 사상}
+\label{section-schemes-morphisms}
+
+\noindent
+스킴의 사상에 대한 변형 이론을 다룬다. 물론 이는 단지 스킴 도표의
+변형에 대한 한 가지 예이다.
+
+\begin{example}[스킴의 사상]
+\label{example-schemes-morphisms}
+$\mathcal{F}$를 다음과 같이 정의되는 범주라 하자.
+\begin{enumerate}
+\item 대상은 $\mathcal{C}_\Lambda$의 대상 $A$와, $X$와 $Y$가 모두
+$A$ 위에서 평탄한 $A$ 위 스킴의 사상 $X \to Y$로 이루어진 순서쌍
+$(A, X \to Y)$이고,
+\item 사상 $(f, g, h) : (A', X' \to Y') \to (A, X \to Y)$은
+$\mathcal{C}_\Lambda$의 사상 $f : A' \to A$와, 다음 도표가 두 정사각형이
+모두 데카르트인 스킴의 가환 도표가 되게 하는 스킴의 사상
+$g : X \to X'$와 $h : Y \to Y'$로 이루어진다.
+$$
+\xymatrix{
+X \ar[r]_g \ar[d] & X' \ar[d] \\
+Y \ar[r]_h \ar[d] & Y' \ar[d] \\
+\Spec(A) \ar[r]^f & \Spec(A')
+}
+$$
+\end{enumerate}
+함자 $p : \mathcal{F} \to \mathcal{C}_\Lambda$는 $(A, X \to Y)$를 $A$로,
+$(f, g, h)$를 $f$로 보낸다. $p$가 준군들로 공섬유화되어 있음은
+명백하다. $k$ 위의 스킴 사상 $X \to Y$가 주어졌을 때,
+$x_0 = (k, X \to Y)$를 이에 대응하는 $\mathcal{F}(k)$의 대상이라 하자.
+다음과 같이 둔다.
+$$
+\Deformationcategory_{X \to Y} = \mathcal{F}_{x_0}
+$$
+\end{example}
+
+\begin{lemma}
+\label{lemma-schemes-morphisms-RS}
+예 \ref{example-schemes-morphisms}은 Rim--Schlessinger 조건 (RS)를
+만족한다. 특히 $k$ 위의 임의의 스킴 사상 $X \to Y$에 대하여
+$\Deformationcategory_{X \to Y}$는 변형 범주이다.
+\end{lemma}
+
+\begin{proof}
+$A_1 \to A$와 $A_2 \to A$를 $\mathcal{C}_\Lambda$의 사상이라 하자.
+$A_2 \to A$가 전사라고 가정하자. 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-2-categorical}에 의해 다음 함자
+$\mathcal{F}(A_1 \times_A A_2) \to
+\mathcal{F}(A_1) \times_{\mathcal{F}(A)} \mathcal{F}(A_2)$
+가 범주의 동치임을 보이면 충분하다. 다음에 주의하자.
+$$
+\xymatrix{
+\Spec(A) \ar[r] \ar[d] & \Spec(A_2) \ar[d] \\
+\Spec(A_1) \ar[r] &
+\Spec(A_1 \times_A A_2)
+}
+$$
+이는 사상 더 보기, 보조정리
+\ref{more-morphisms-lemma-pushout-along-thickening}에서와 같은 밀어내기
+도표이다. 사상 더 보기, 보조정리
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout-flat}는
+$A_1 \times_A A_2$ 위에서 평탄한 스킴의 범주를, $A$ 위에서 평탄한
+스킴의 범주 위에서 $A_1$ 위에서 평탄한 스킴의 범주와 $A_2$ 위에서
+평탄한 스킴의 범주의 섬유곱으로 기술한다. 따라서 이 보조정리는
+그 결과에서 곧바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-schemes-morphisms-TI}
+예 \ref{example-schemes}에서 $f : X \to Y$를 $k$ 위의 스킴 사상이라
+하자.% P11-E0052
+$k$-벡터 공간의 표준 완전열
+$$
+\xymatrix{
+0 \ar[r] &
+\text{Inf}(\Deformationcategory_{X \to Y}) \ar[r] &
+\text{Inf}(\Deformationcategory_X \times \Deformationcategory_Y) \ar[r] &
+\text{Der}_k(\mathcal{O}_Y, f_*\mathcal{O}_X) \ar[lld] \\
+& T\Deformationcategory_{X \to Y} \ar[r] &
+T(\Deformationcategory_X \times \Deformationcategory_Y) \ar[r] &
+\text{Ext}^1_{\mathcal{O}_X}(Lf^*\NL_{Y/k}, \mathcal{O}_X)
+}
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+변형 범주의 명백한 사상
+$\Deformationcategory_{X \to Y} \to
+\Deformationcategory_X \times \Deformationcategory_Y$는 보조정리의
+완전열에 있는 화살표 중 두 개를 준다.
+$\text{Inf}(\Deformationcategory_{X \to Y})$는 $X \to Y$의
+$k[\epsilon]$로의 자명한 변형
+$$
+f' :  X' = X \times_{\Spec(k)} \Spec(k[\epsilon])
+\xrightarrow{f \times \text{id}}
+Y' = Y \times_{\Spec(k)} \Spec(k[\epsilon])
+$$
+가운데 $\epsilon$을 법으로 하여 항등인 자기동형들의 집합임을 상기하자.
+이는 명백히 $f'$와 양립하는 $X$와 $Y$의 무한소 자기동형의 순서쌍
+$(\alpha, \beta) \in
+\text{Inf}(\Deformationcategory_X \times \Deformationcategory_Y)$
+과 같은 것이다. 즉, $f' \circ \alpha = \beta \circ f'$를 만족하는
+순서쌍이다. 변형 이론, 보조정리
+\ref{defos-lemma-huge-diagram-ringed-spaces}에 의해, 임의의 순서쌍
+$(\alpha, \beta)$에 대하여 사상 $f' : X' \to Y'$와 사상
+$\beta^{-1} \circ f' \circ \alpha : X' \to Y'$의 차이는 다음의 원소를
+정한다.
+$$
+\text{Der}_k(\mathcal{O}_Y, f_*\mathcal{O}_X) =
+\Hom_{\mathcal{O}_Y}(\Omega_{Y/k}, f_*\mathcal{O}_X)
+$$
+등식은 사상 더 보기, 보조정리
+\ref{more-morphisms-lemma-netherlander-quasi-coherent}에 의한 것이다.
+이로써 위쪽 마지막 수평 화살표가 정의되고 처음 두 자리에서의 완전성이
+증명된다. 사상
+$$
+\text{Der}_k(\mathcal{O}_Y, f_*\mathcal{O}_X)
+\to
+T\Deformationcategory_{X \to Y}
+$$
+에 대해서는 변형 이론, 보조정리
+\ref{defos-lemma-huge-diagram-ringed-spaces}를 사용하여 정의역의 원소를
+$\epsilon$을 법으로 하여 $f$와 같은 $\Spec(k[\epsilon])$ 위의 사상
+$f_\epsilon : X' \to Y'$로 해석한다. $f_\epsilon$을
+$T\Deformationcategory_{X \to Y}$에서 $(f_\epsilon : X' \to Y')$의
+동형류로 보낸다. $(f_\epsilon : X' \to Y')$가 자명한 변형
+$(f' : X' \to Y')$와 동형일 필요충분조건은 어떤 순서쌍
+$(\alpha, \beta)$에 대하여
+$f_\epsilon  = \beta^{-1} \circ f \circ \alpha$인 것이다.% P11-E0053
+이로써 세 번째 자리에서의 완전성이 따른다. 명백히 어떤 일차 변형
+$(f_\epsilon : X_\epsilon \to Y_\epsilon)$
+이 $T(\Deformationcategory_X \times \Deformationcategory_Y)$에서 영으로
+가면, 동형 $X' \to X_\epsilon$과 $Y' \to Y_\epsilon$을 택할 수 있고
+그 원소가 남서쪽 화살표의 상에 속함을 알 수 있다. 따라서 네 번째
+자리에서 완전하다. 마지막으로 $X$, $Y$의 두 일차 변형
+$X_\epsilon$, $Y_\epsilon$이 주어지면 다음에 장애 원소가 존재한다.
+$$
+ob(X_\epsilon, Y_\epsilon) \in
+\text{Ext}^1_{\mathcal{O}_X}(Lf^*\NL_{Y/k}, \mathcal{O}_X)
+$$
+이 원소가 영일 필요충분조건은 $f : X \to Y$가
+$X_\epsilon \to Y_\epsilon$로 올라가는 것이다. 변형 이론, 보조정리
+\ref{defos-lemma-huge-diagram-ringed-spaces}를 참조하라. 이로써 증명이
+끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-schemes-morphisms-TI}
+보조정리 \ref{lemma-schemes-morphisms-TI}에서 $X$와 $Y$가 모두
+$k$ 위에서 고유이면 $\text{Inf}(\Deformationcategory_{X \to Y})$와
+$T\Deformationcategory_{X \to Y}$는 유한 차원이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 도움말: 보조정리 \ref{lemma-proper-schemes-TI}에서와 같이
+논증하고 이 보조정리의 완전열을 사용하라.
+\end{proof}
+
+\noindent
+예 \ref{example-schemes-morphisms}에서 $X \to Y$가 $k$ 위의 고유 스킴의
+사상이면, $\Deformationcategory_{X \to Y}$는 $\mathcal{C}_\Lambda$ 위의
+함자들로 이루어진 매끄러운 pro-표현가능 준군에 의한 제시를 가지며,
+따라서 특히 (최소) versal 형식적 대상을 가진다. 이는 보조정리
+\ref{lemma-schemes-morphisms-RS},
+\ref{lemma-proper-schemes-morphisms-TI}와 절 \ref{section-general}의
+일반적인 논의에서 따른다.
+
+\begin{lemma}
+\label{lemma-schemes-morphisms-hull}
+예 \ref{example-schemes-morphisms}에서 $X \to Y$가 고유 $k$-스킴의
+사상이라고 가정하자. $\Lambda$가 잉여체 $k$를 갖는 완비 국소환이라고
+가정하자(고전적인 경우). 그러면 대상들의 동형류로 이루어진 함자
+$$
+F : \mathcal{C}_\Lambda \longrightarrow \textit{Sets},\quad
+A \longmapsto \Ob(\Deformationcategory_{X \to Y}(A))/\cong
+$$
+는 포락을 가진다. 만약
+$\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X) =
+\text{Der}_k(\mathcal{O}_Y, \mathcal{O}_Y) = 0$이면
+$F$는 pro-표현가능하다.
+\end{lemma}
+
+\begin{proof}
+포락의 존재는 보조정리 \ref{lemma-schemes-morphisms-RS},
+\ref{lemma-proper-schemes-morphisms-TI}와 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-implies-S1-S2} 및 주석
+\ref{formal-defos-remark-compose-minimal-into-iso-classes}에서 곧바로 따른다.
+
+\medskip\noindent
+$\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X) =
+\text{Der}_k(\mathcal{O}_Y, \mathcal{O}_Y) = 0$이라고 가정하자. 보조정리
+\ref{lemma-schemes-morphisms-TI}의 완전열과 보조정리
+\ref{lemma-schemes-TI}를 함께 사용하면
+$\text{Inf}(\Deformationcategory_{X \to Y}) = 0$임을 알 수 있다.
+그러면 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-infdef-trivial}에 의해
+$\Deformationcategory_{X \to Y}$와 $F$는 동치이다. 따라서 $F$는 유한
+차원 접공간을 갖는 변형 함자이다($\Deformationcategory_{X \to Y}$가
+변형 범주이기 때문이다). 이제 형식적 변형 이론, 정리
+\ref{formal-defos-theorem-Schlessinger-prorepresentability}를 적용할 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-schemes-morphisms-smooth-to-base}
+\begin{reference}
+이는 \cite[5.3절]{Ravi-Murphys-Law}와
+\cite[정리 3.3]{Ran-deformations}에서 논의된다.
+\end{reference}
+예 \ref{example-schemes}에서 $f : X \to Y$를 $k$ 위의 스킴 사상이라
+하자.% P11-E0052
+$f_*\mathcal{O}_X = \mathcal{O}_Y$이고 $R^1f_*\mathcal{O}_X = 0$이면,
+변형 범주의 사상
+$$
+\Deformationcategory_{X \to Y} \to \Deformationcategory_X
+$$
+은 동치이다.
+\end{lemma}
+
+\begin{proof}
+보조정리의 망각 함자에 대한 준역함자를 구성한다. 즉, $(A, U)$가
+$\Deformationcategory_X$의 대상이라고 하자. 주어진 사상 $X \to U$는
+유한 차수 두꺼워짐이므로, 이를 사용하여 $U$와 $X$의 바탕 위상공간을
+동일시할 수 있다. 사상 더 보기, 절
+\ref{more-morphisms-section-thickenings}를 참조하라. 따라서
+$\mathcal{O}_U$를 $X$ 위의 $A$-대수층으로 볼 수 있고 실제로 그렇게 한다.
+더욱이 $U \to \Spec(A)$가 평탄하다는 사실은 $\mathcal{O}_U$가
+$A$-가군층으로서 평탄하다는 뜻이다. 특히 다음 여과를 얻는다.
+$$
+0 = \mathfrak m_A^n\mathcal{O}_U \subset
+\mathfrak m_A^{n - 1}\mathcal{O}_U \subset \ldots \subset
+\mathfrak m_A^2\mathcal{O}_U \subset
+\mathfrak m_A\mathcal{O}_U \subset \mathcal{O}_U
+$$
+평탄성에 의해 그 부분몫은
+$\mathcal{O}_X \otimes_k \mathfrak m_A^i/\mathfrak m_A^{i + 1}$와 같다.
+사상 더 보기, 보조정리 \ref{more-morphisms-lemma-deform} 또는 더 일반적인
+변형 이론, 보조정리 \ref{defos-lemma-deform-module}를 참조하라. 다음과
+같이 둔다.
+$$
+\mathcal{O}_V = f_*\mathcal{O}_U
+$$
+이를 $Y$ 위의 $A$-대수층으로 본다. $R^1f_*\mathcal{O}_X = 0$이므로,
+위의 기술에 의해 모든 $i$에 대하여
+$R^1f_*(\mathfrak m_A^i\mathcal{O}_U/\mathfrak m_A^{i + 1}\mathcal{O}_U) = 0$
+임을 알 수 있다. 따라서 모든 $i$에 대하여 열
+$$
+0 \to
+(f_*\mathcal{O}_X) \otimes_k \mathfrak m_A^i/\mathfrak m_A^{i + 1} \to
+f_*(\mathcal{O}_U/\mathfrak m_A^{i + 1}\mathcal{O}_U) \to
+f_*(\mathcal{O}_U/\mathfrak m_A^i\mathcal{O}_U) \to 0
+$$
+은 완전하다. 위에 제시한 참고 결과를 거꾸로 읽고 귀납법을 사용하면
+$\mathcal{O}_V$가 $\mathcal{O}_V/\mathfrak m_A\mathcal{O}_V =
+\mathcal{O}_Y$를 만족하는 평탄한 $A$-대수층임을 알 수 있다. 사상 더 보기,
+보조정리 \ref{more-morphisms-lemma-first-order-thickening}를 사용하면
+$(Y, \mathcal{O}_V)$가 스킴임을 알 수 있으며, 이를 $V$라 하자. 등식
+$\mathcal{O}_V = f_*\mathcal{O}_U$는 환 달린 공간의 사상 $U \to V$를
+정하고, 이것이 스킴의 사상임은 쉽게 알 수 있다. 이미 확립한 평탄성에
+의해 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+\section{대수공간}
+\label{section-algebraic-spaces}
+
+\noindent
+대수공간의 변형 이론을 다룬다.
+
+\begin{example}[대수공간]
+\label{example-spaces}
+$\mathcal{F}$를 다음과 같이 정의되는 범주라 하자.
+\begin{enumerate}
+\item 대상은 $\mathcal{C}_\Lambda$의 대상 $A$와 $A$ 위에서 평탄한
+대수공간 $X$로 이루어진 순서쌍 $(A, X)$이고,
+\item 사상 $(f, g) : (B, Y) \to (A, X)$은
+$\mathcal{C}_\Lambda$의 사상 $f : B \to A$와, 다음 도표가 대수공간의
+데카르트 가환 도표가 되게 하는 $\Lambda$ 위 대수공간의 사상
+$g : X \to Y$로 이루어진다.
+$$
+\xymatrix{
+X \ar[r]_g \ar[d] & Y \ar[d] \\
+\Spec(A) \ar[r]^f & \Spec(B)
+}
+$$
+\end{enumerate}
+함자 $p : \mathcal{F} \to \mathcal{C}_\Lambda$는 $(A, X)$를 $A$로,
+$(f, g)$를 $f$로 보낸다. $p$가 준군들로 공섬유화되어 있음은 명백하다.
+$k$ 위의 대수공간 $X$가 주어졌을 때, $x_0 = (k, X)$를 이에 대응하는
+$\mathcal{F}(k)$의 대상이라 하자. 다음과 같이 둔다.
+$$
+\Deformationcategory_X = \mathcal{F}_{x_0}
+$$
+\end{example}
+
+\begin{lemma}
+\label{lemma-spaces-RS}
+예 \ref{example-spaces}는 Rim--Schlessinger 조건 (RS)를 만족한다.
+특히 $k$ 위의 임의의 대수공간 $X$에 대하여 $\Deformationcategory_X$는
+변형 범주이다.
+\end{lemma}
+
+\begin{proof}
+$A_1 \to A$와 $A_2 \to A$를 $\mathcal{C}_\Lambda$의 사상이라 하자.
+$A_2 \to A$가 전사라고 가정하자. 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-2-categorical}에 의해 다음 함자
+$\mathcal{F}(A_1 \times_A A_2) \to
+\mathcal{F}(A_1) \times_{\mathcal{F}(A)} \mathcal{F}(A_2)$
+가 범주의 동치임을 보이면 충분하다. 다음에 주의하자.
+$$
+\xymatrix{
+\Spec(A) \ar[r] \ar[d] & \Spec(A_2) \ar[d] \\
+\Spec(A_1) \ar[r] &
+\Spec(A_1 \times_A A_2)
+}
+$$
+이는 공간의 밀어내기, 보조정리
+\ref{spaces-pushouts-lemma-pushout-along-thickening}에서와 같은 밀어내기
+도표이다. 따라서 이 보조정리는 공간의 밀어내기, 보조정리
+\ref{spaces-pushouts-lemma-equivalence-categories-spaces-pushout-flat}의
+특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-spaces-TI}
+예 \ref{example-spaces}에서 $X$를 $k$ 위의 대수공간이라 하자. 그러면
+$$
+\text{Inf}(\Deformationcategory_X) =
+\text{Ext}^0_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X) =
+\Hom_{\mathcal{O}_X}(\Omega_{X/k}, \mathcal{O}_X) =
+\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X)
+$$
+그리고
+$$
+T\Deformationcategory_X =
+\text{Ext}^1_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)
+$$
+\end{lemma}
+
+\begin{proof}
+$\text{Inf}(\Deformationcategory_X)$는 $X$의 $k[\epsilon]$로의 자명한 변형
+$X' = X \times_{\Spec(k)} \Spec(k[\epsilon])$ 가운데 $\epsilon$을 법으로 하여
+항등인 자기동형들의 집합임을 상기하자. 변형 이론, 보조정리
+\ref{defos-lemma-deform-spaces}에 의해 이는
+$\text{Ext}^0_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)$와 같다. 등식
+$\text{Ext}^0_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X) =
+\Hom_{\mathcal{O}_X}(\Omega_{X/k}, \mathcal{O}_X)$는 공간의 사상 더 보기,
+보조정리 \ref{spaces-more-morphisms-lemma-netherlander-quasi-coherent}에서
+따른다. 등식
+$\Hom_{\mathcal{O}_X}(\Omega_{X/k}, \mathcal{O}_X) =
+\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X)$
+는 공간의 사상 더 보기, 정의
+\ref{spaces-more-morphisms-definition-sheaf-differentials}와 사이트 위의 가군,
+정의 \ref{sites-modules-definition-module-differentials}에서 따른다.
+
+\medskip\noindent
+$T_{x_0}\Deformationcategory_X$는 $X$의 $k[\epsilon]$로의 평탄 변형 $X'$의
+동형류들의 집합, 더 정확히는 $\Deformationcategory_X(k[\epsilon])$의
+동형류들의 집합임을 상기하자. 따라서 보조정리의 두 번째 명제는
+변형 이론, 보조정리 \ref{defos-lemma-deform-spaces}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-spaces-TI}
+보조정리 \ref{lemma-spaces-TI}에서 $X$가 $k$ 위에서 고유이면
+$\text{Inf}(\Deformationcategory_X)$와 $T\Deformationcategory_X$는
+유한 차원이다.
+\end{lemma}
+
+\begin{proof}
+보조정리에 의해 $\Ext^1_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)$와
+$\Ext^0_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)$가 유한 차원임을
+보이면 된다. 공간의 사상 더 보기, 보조정리
+\ref{spaces-more-morphisms-lemma-netherlander-fp}와 $X$가 뇌터라는 사실에
+의해 $\NL_{X/k}$의 코호몰로지 층들은 결맞고, 차수 $0$과 $-1$을
+제외하면 영이다. 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-ext-finite}에 의해 표시된 $\Ext$-군들은 유한
+$k$-벡터 공간이며, 증명이 끝난다.
+\end{proof}
+
+\noindent
+예 \ref{example-spaces}에서 $X$가 $k$ 위의 고유 대수공간이면,
+$\Deformationcategory_X$는 $\mathcal{C}_\Lambda$ 위의 함자들로 이루어진
+매끄러운 pro-표현가능 준군에 의한 제시를 가지며, 따라서 특히
+(최소) versal 형식적 대상을 가진다. 이는 보조정리
+\ref{lemma-spaces-RS}, \ref{lemma-proper-spaces-TI}와
+절 \ref{section-general}의 일반적인 논의에서 따른다.
+
+\begin{lemma}
+\label{lemma-spaces-hull}
+예 \ref{example-spaces}에서 $X$가 $k$ 위의 고유 대수공간이라고 가정하자.
+$\Lambda$가 잉여체 $k$를 갖는 완비 국소환이라고 가정하자
+(고전적인 경우). 그러면 대상들의 동형류로 이루어진 함자
+$$
+F : \mathcal{C}_\Lambda \longrightarrow \textit{Sets},\quad
+A \longmapsto \Ob(\Deformationcategory_X(A))/\cong
+$$
+는 포락을 가진다. $\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X) = 0$이면
+$F$는 pro-표현가능하다.
+\end{lemma}
+
+\begin{proof}
+포락의 존재는 보조정리 \ref{lemma-spaces-RS},
+\ref{lemma-proper-spaces-TI}와 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-RS-implies-S1-S2} 및 주석
+\ref{formal-defos-remark-compose-minimal-into-iso-classes}에서 곧바로 따른다.
+
+\medskip\noindent
+$\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X) = 0$이라고 가정하자. 그러면
+형식적 변형 이론, 보조정리 \ref{formal-defos-lemma-infdef-trivial}에 의해
+$\Deformationcategory_X$와 $F$는 동치이다. 따라서 $F$는 유한 차원
+접공간을 갖는 변형 함자이다($\Deformationcategory_X$가 변형 범주이기
+때문이다). 이제 형식적 변형 이론, 정리
+\ref{formal-defos-theorem-Schlessinger-prorepresentability}를 적용할 수 있다.
+\end{proof}
+
+
+
+
+
+\section{완비화의 변형}
+\label{section-compare}
+
+\noindent
+이 절에서는 대수와 그 완비화가 주는 변형 문제를 비교한다. 먼저
+``올림 가능성''을 논의한다.
+
+\begin{lemma}
+\label{lemma-lift-equivalence-module-derived}
+$A' \to A$를 핵이 멱영인 환의 전사라 하자. $A' \to P'$를 평탄한 환
+준동형이라 하고 $P = P' \otimes_{A'} A$라 두자. $M$을 $A$-평탄
+$P$-가군이라 하자. 그러면 다음은 동치이다.
+\begin{enumerate}
+\item $M' \otimes_{P'} P = M$을 만족하는 $A'$-평탄 $P'$-가군 $M'$가
+존재한다.
+\item $K' \otimes_{P'}^\mathbf{L} P = M$을 만족하는 대상
+$K' \in D^-(P')$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)에서와 같은 $M'$가 있다고 하자. 그러면
+$$
+M = M' \otimes_P P' = M' \otimes_{A'} A =
+M' \otimes_A^\mathbf{L} A' = M' \otimes_{P'}^\mathbf{L} P
+$$% P11-E0054
+이다. 처음 두 등식은 명백하고, 세 번째 등식은 $M'$가 $A'$ 위에서
+평탄하기 때문에 성립하며, 네 번째 등식은 대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-base-change-comparison}에 의해 성립한다. 따라서
+(2)가 성립한다. 반대로 (2)에서와 같은 $K'$가 있다고 하자. $M$이 영이
+아니라고 가정해도 되고 실제로 그렇게 한다. $H^t(K')$가 영이 아니게 하는
+가장 큰 정수 $t$를 택하자($M$이 영이 아니므로 존재한다). $t > 0$이면
+$H^t(K') \otimes_{P'} P = H^t(K' \otimes_{P'}^\mathbf{L} P)$는 영이다.
+$P' \to P$의 핵이 멱영이므로 Nakayama 보조정리에 의해
+$H^t(K') = 0$이고, 이는 모순이다. 따라서 $t = 0$이다($t < 0$인 경우도
+불가능하다). 그러면 $M' = H^0(K')$는
+$M = M' \otimes_{P'} P$를 만족하는 $P'$-가군이고, Tor의 스펙트럼 열은
+단사 사상
+$$
+\text{Tor}_1^{P'}(M', P) \to H^{-1}(M' \otimes_{P'}^\mathbf{L} P) = 0
+$$
+을 준다. 위에서 인용한 유도 밑변환 결과에 의해
+$0 = \text{Tor}_1^{P'}(M', P) = \text{Tor}_1^{A'}(M', A)$이다.
+대수학, 보조정리 \ref{algebra-lemma-what-does-it-mean}에 의해 $M'$는
+$A'$-평탄이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-lift-equivalence-module}
+다음 뇌터 환의 가환 도표를 생각하자.
+$$
+\xymatrix{
+A' \ar[d] \ar[r] &
+P' \ar[d] \ar[r] &
+Q' \ar[d] \\
+A \ar[r] &
+P \ar[r] &
+Q
+}
+$$
+두 정사각형은 데카르트이고, 수평 화살표들은 평탄하며, 수직 화살표들은
+핵이 멱영인 전사라고 하자. $J' \subset P'$를
+$P'/J' = Q'/J'Q'$를 만족하는 아이디얼이라 하자. $M$을 $A$-평탄
+$P$-가군이라 하자. 모든 $g \in J'$에 대하여 $M_g$를 올리는
+$A'$-평탄 $(P')_g$-가군이 존재한다고 가정하자. 그러면 다음은 동치이다.
+\begin{enumerate}
+\item $M$은 $P'$-가군으로의 $A'$-평탄 올림을 가진다.
+\item $M \otimes_P Q$는 $Q'$-가군으로의 $A'$-평탄 올림을 가진다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$I = \Ker(A' \to A)$라 하자. $I^n = 0$을 만족하는 정수 $n > 1$에 대한
+귀납법으로 $I$가 제곱영 아이디얼인 경우로 환원한다. 자세한 내용은
+생략한다. $M$의 올림 가능성 조건을 보조정리
+\ref{lemma-lift-equivalence-module-derived}에서와 같은 $D^-(P')$의 대상을
+찾는 문제로 옮긴다. 이에 대한 장애 원소는
+$$
+\omega(M) \in \text{Ext}^2_P(M, M \otimes_P^\mathbf{L} IP) =
+\text{Ext}^2_P(M, M \otimes_P IP)
+$$
+이며, 변형 이론, 보조정리
+\ref{defos-lemma-canonical-class-algebra}에서 구성된다. 표시된 식의 등식은
+$M$과 $P$가 $A$-평탄이므로
+$M \otimes_P^\mathbf{L} IP = M \otimes_P IP$인 데서 성립한다.\footnote{
+자유 $A$-가군들에 의한 분해 $F_\bullet \to I$를 택하자.
+$A \to P$가 평탄이므로 $P \otimes_A F_\bullet$는 $IP$의 자유 분해이다.
+따라서 $M \otimes_P^\mathbf{L} IP$는
+$M \otimes_P P \otimes_A F_\bullet = M \otimes_A F_\bullet$로 표현된다.
+$M$이 $A$-평탄이므로 이것은 차수 $0$에서만 코호몰로지를 가진다.}
+마찬가지로 $M \otimes_P Q$를 올리는 데 대한 장애 원소는
+$$
+\omega(M \otimes_P Q) \in
+\text{Ext}^2_Q(M \otimes_P Q, (M \otimes_P Q) \otimes_Q IQ)
+$$
+이고, 이는 변형 이론, 보조정리
+\ref{defos-lemma-canonical-class-algebra}의 구성 $\omega(-)$의 함자성에 의해
+$\omega(M)$의 상이다. 대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-base-change-RHom}에 의해
+$$
+\text{Ext}^2_Q(M \otimes_P Q, (M \otimes_P Q) \otimes_Q IQ) =
+\text{Ext}^2_P(M, M \otimes_P IP) \otimes_P Q
+$$
+이다. 여기서 $P$가 뇌터이고 $M$이 유한임을 사용하였다.% P11-E0055
+$P' \to Q'$에 대한 가정은 임의의 $P$-가군 $E$에 대하여% P11-E0057
+사상 $E \to E \otimes_P Q$가 $J'$-멱 꼬임 부분에서 전단사임을 보장한다.
+대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-neighbourhood-equivalence}를 참조하라. 따라서
+$\omega(M)$이 $J'$-멱 꼬임임을 보이면 충분하다. 다시 말해, 모든
+$g \in J'$에 대하여 $\omega(M)$이
+$$
+\text{Ext}^2_P(M, M \otimes_P IP)_g =
+\text{Ext}^2_{P_g}(M_g, M_g \otimes_{P_g} IP_g)
+$$
+에서 영이 됨을 보이면 충분하다. 그러나 다시 $\omega(M)$의 구성이
+밑변환과 양립한다는 사실에 의해, $M_g$가 올림을 가진다는 가정으로부터
+이것이 참임을 얻는다(물론 동치들의 전체 연쇄를 다시 사용해야 한다).% P11-E0056
+\end{proof}
+
+\begin{lemma}
+\label{lemma-lift-equivalence}
+$A' \to A$를 핵이 멱영인 뇌터 환의 전사 준동형이라 하자.
+$A \to B$를 유한형 평탄 환 준동형이라 하자.
+$\mathfrak b \subset B$를 $\Spec(B) \to \Spec(A)$가
+$V(\mathfrak b)$의 여집합에서 신토믹이게 하는 아이디얼이라 하자.
+그러면 $B$가 $A'$로의 평탄 올림을 가질 필요충분조건은
+$\mathfrak b$-진 완비화 $B^\wedge$가 $A'$로의 평탄 올림을 갖는 것이다.
+\end{lemma}
+
+\begin{proof}
+$A$-대수의 전사 $P = A[x_1, \ldots, x_n] \to B$를 택하자.
+$\mathfrak p \subset P$를 $\mathfrak b$의 역상이라 하자.
+$P' = A'[x_1, \ldots, x_n]$라 두고 $\mathfrak p' \subset P'$로
+$\mathfrak p$의 역상을 나타내자(물론 여기서 $\mathfrak p$와
+$\mathfrak p'$는 소 아이디얼을 나타내지 않는다). 각각의 완비화를
+$P^\wedge$와 $(P')^\wedge$로 나타내겠다.
+
+\medskip\noindent
+$A' \to B'$가 $A \to B$의 평탄 올림이라고 하자. 즉,
+$A' \to B'$는 평탄하고 $A$-대수 동형 $B = B' \otimes_{A'} A$가
+존재한다고 하자. 그러면 주어진 전사 $P \to B$를 올리는 $A'$-대수
+사상 $P' \to B'$를 택할 수 있다. Nakayama 보조정리(대수학, 보조정리
+\ref{algebra-lemma-NAK})에 의해 $B'$가 $P'$의 몫임을 알 수 있다.
+특히 $A$-평탄 $P$-가군인 $B$를 올리는 $A'$-평탄 $P'$-가군 구조를
+$B'$에 줄 수 있다. 반대로 $B$를 $A'$ 위에서 평탄한 $P'$-가군 $M'$로
+올릴 수 있다면, $M'$는 순환 가군 $M' \cong P'/J'$이다(다시 Nakayama를
+사용한다). $B' = P'/J'$라 두면 대수로서 $B$의 평탄 올림을 얻는다.
+
+\medskip\noindent
+$C = B^\wedge$, $\mathfrak c = \mathfrak bC$라 두자.
+$A' \to C'$가 $A \to C$의 평탄 올림이라고 하자. 그러면 $C'$는
+$\mathfrak c$의 역상 $\mathfrak c'$에 관하여 완비이다(대수학, 보조정리
+\ref{algebra-lemma-complete-modulo-nilpotent}). $A$-대수 사상
+$P \to C$를 올리는 $A'$-대수 사상 $P' \to C'$를 택한다. 이 사상들은
+완비화를 거쳐 전사 $P^\wedge \to C$와 $(P')^\wedge \to C'$를 준다
+(두 번째 사상에는 다시 Nakayama 보조정리를 사용한다). 특히
+$A$-평탄 $P^\wedge$-가군인 $C$를 올리는 $A'$-평탄
+$(P')^\wedge$-가군 구조를 $C'$에 줄 수 있다. 반대로 $C$를 $A'$ 위에서
+평탄한 $(P')^\wedge$-가군 $N'$로 올릴 수 있다면, $N'$는 순환 가군
+$N' \cong (P')^\wedge/\tilde J$이다(다시 Nakayama를 사용한다).
+$C' = (P')^\wedge/\tilde J$라 두면 대수로서 $C$의 평탄 올림을 얻는다.
+
+\medskip\noindent
+$P' \to (P')^\wedge$가 동형
+$P'/\mathfrak p' = (P')^\wedge/\mathfrak p'(P')^\wedge$를 유도하는 평탄
+환 준동형임에 주의하자. $g \in \mathfrak p'$에 대하여 $B_g$가
+$A'$-평탄 $P'_g$-가군으로 올라감을 보일 수 있다면, 이 보조정리는
+보조정리 \ref{lemma-lift-equivalence-module}의 결과이다. 그런데 환 준동형
+$A \to B_g$는 신토믹이므로 환 준동형의 평활화, 명제
+\ref{smoothing-proposition-lift-smooth}에 의해 $A'$-평탄 대수 $B'$로
+올라간다. $A' \to P'_g$가 매끄러우므로, 앞에서와 같이
+$P_g \to B_g$를 전사 사상 $P'_g \to B'$로 올릴 수 있고 원하는 결과를
+얻는다.
+\end{proof}
+
+\noindent
+표기. $A \to B$를 환 준동형이라 하고 $N$을 $B$-가군이라 하자.
+$\text{Exal}_A(B, N)$으로 $N$이 $C$의 제곱영 아이디얼인 $A$-대수의 확대
+$$
+0 \to N \to C \to B \to 0
+$$
+의 동형류들의 집합을 나타낸다. 이러한 또 하나의 확대
+$0 \to N \to C' \to B \to 0$가 주어졌을 때, 동형은 다음 도표가
+가환이게 하는 $A$-대수 동형 $C \to C'$이다.% P11-E0044; P11-E0059
+$$
+\xymatrix{
+0 \ar[r] &
+N \ar[r] \ar[d]_{\text{id}} &
+C \ar[r] \ar[d] &
+B \ar[r] \ar[d]_{\text{id}} & 0 \\
+0 \ar[r] &
+N \ar[r] &
+C' \ar[r] &
+B \ar[r] & 0
+}
+$$
+대응 $N \mapsto \text{Exal}_A(B, N)$은 곱을 곱으로 보내는 함자이다.
+따라서 이는 가법 함자이고 $\text{Exal}_A(B, N)$은 자연스러운
+$B$-가군 구조를 가진다. 실제로 변형 이론, 보조정리
+\ref{defos-lemma-choices}에 의해
+$\text{Exal}_A(B, N) = \text{Ext}^1_B(\NL_{B/A}, N)$이다.
+
+\begin{lemma}
+\label{lemma-first-order-completion}
+$k$를 체라 하고 $B$를 유한형 $k$-대수라 하자. $J \subset B$를
+$\Spec(B) \to \Spec(k)$가 $V(J)$의 여집합에서 매끄럽게 하는 아이디얼이라
+하자. $N$을 유한 $B$-가군이라 하자. 그러면 표준 전단사
+$$
+\text{Exal}_k(B, N) \to \text{Exal}_k(B^\wedge, N^\wedge)
+$$
+가 존재한다. 여기서 $B^\wedge$와 $N^\wedge$는 $J$-진 완비화이다.
+\end{lemma}
+
+\begin{proof}
+이 사상은 완비화로 주어진다. $\text{Exal}_k(B, N)$의 원소
+$0 \to N \to C \to B \to 0$를, $J$의 역상에 관한 $C$의 완비화
+$C^\wedge$로 보낸다. 보조정리 \ref{lemma-completion}의 증명과 비교하라.
+
+\medskip\noindent
+$k \to B$가 유한 표시이므로 복합체 $\NL_{B/k}$는 $N^i$가 유한
+$B$-가군인 복합체 $N^{-1} \to N^0$로 표현할 수 있다. 대수학, 절
+\ref{algebra-section-netherlander}, 특히 대수학, 보조정리
+\ref{algebra-lemma-NL-homotopy}를 참조하라. $B$가 뇌터이므로 이는
+$\NL_{B/k}$가 유사결맞이라는 뜻이다. $g \in J$에 대하여 $k$-대수
+$B_g$는 매끄럽고, 따라서 $(\NL_{B/k})_g = \NL_{B_g/k}$는 차수 $0$에
+놓인 유한 사영 $B$-가군과 준동형이다.% P11-E0058
+그러므로 모든 $i \geq 1$과 임의의 $B$-가군 $N$에 대하여
+$\text{Ext}^i_B(\NL_{B/k}, N)_g = 0$이다. 대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-ext-annihilated-into}에 의해
+$$
+\text{Ext}^1_B(\NL_{B/k}, N) \longrightarrow
+\lim_n \text{Ext}^1_B(\NL_{B/k}, N/J^n N)
+$$
+는 임의의 유한 $B$-가군 $N$에 대하여 동형이다.
+
+\medskip\noindent
+사상의 단사성. $0 \to N \to C \to B \to 0$가
+$\text{Exal}_k(B, N)$의 원소이고 $\text{Exal}_k(B^\wedge, N^\wedge)$에서
+영으로 간다고 하자. 분할 $C^\wedge = B^\wedge \oplus N^\wedge$를
+택하자. 그러면 유도된 사상 $C \to C^\wedge \to N^\wedge$는 모든 $n$에
+대하여 사상 $C \to N/J^nN$을 준다. 따라서 우리의 원소는 모든 $n$에
+대하여 사상
+$$
+\text{Ext}^1_B(\NL_{B/k}, N) \to
+\text{Ext}^1_B(\NL_{B/k}, N/J^n N)
+$$
+의 핵에 속한다. 앞 문단에 의해 우리의 원소는 영이다.
+
+\medskip\noindent
+사상의 전사성. $0 \to N^\wedge \to C' \to B^\wedge \to 0$를
+$\text{Exal}_k(B^\wedge, N^\wedge)$의 원소라 하자. $B \to B^\wedge$에
+따라 당겨서 $\text{Exal}_k(B, N^\wedge)$의 원소
+$0 \to N^\wedge \to C'' \to B \to 0$를 얻는다. 다음이 성립한다.% P11-E0059
+$$
+\text{Ext}^1_B(\NL_{B/k}, N^\wedge) =
+\text{Ext}^1_B(\NL_{B/k}, N) \otimes_B B^\wedge =
+\text{Ext}^1_B(\NL_{B/k}, N)
+$$
+첫 번째 등식은 $N^\wedge = N \otimes_B B^\wedge$(대수학, 보조정리
+\ref{algebra-lemma-completion-tensor})와 대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-pseudo-coherence-and-ext}에 의한 것이다. 두 번째
+등식은 $\text{Ext}^1_B(\NL_{B/k}, N)$이 $J$-멱 꼬임이고(위를 보라),
+$B \to B^\wedge$가 평탄하며 동형 $B/J \to B^\wedge/JB^\wedge$를
+유도한다는 사실 및 대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-neighbourhood-equivalence}에 의한 것이다. 따라서
+$\text{Exal}_k(B, N^\wedge)$에서 $C''$로 가는
+$C \in \text{Exal}_k(B, N)$를 찾을 수 있다. 그러므로
+$$
+0 \to N^\wedge \to C' \to B^\wedge \to 0
+\quad\text{그리고}\quad
+0 \to N^\wedge \to C^\wedge \to B^\wedge \to 0
+$$
+는 $\text{Exal}_k(B^\wedge, N^\wedge)$의 두 원소이고,
+$\text{Exal}_k(B, N^\wedge)$의 같은 원소로 간다. 차를 취하면
+$\text{Exal}_k(B^\wedge, N^\wedge)$의 원소
+$0 \to N^\wedge \to C' \to B^\wedge \to 0$를 얻으며, 그 상은
+$\text{Exal}_k(B, N^\wedge)$에서 영이다. 이는 다음이 존재한다는 뜻이다.
+$$
+\xymatrix{
+0 \ar[r] &
+N^\wedge \ar[r] &
+C' \ar[r] &
+B^\wedge \ar[r] & 0 \\
+& & B \ar[u]^\sigma \ar[ru]
+}
+$$
+$J' \subset C'$를 $JB^\wedge \subset B^\wedge$의 역상이라 하자. 증명을
+끝내려면 $\sigma$가 $B$의 $J$-진 위상과 $C'$의 $J'$-진 위상에 관하여
+연속이고, 대수학, 보조정리
+\ref{algebra-lemma-complete-modulo-nilpotent}에 의해 $C'$가 $J'$-진
+완비임에 주의하면 충분하다(여기서는 $C'$가 뇌터라는 사실도 사용한다.
+간단한 세부 사항은 생략한다). 즉, 이는 $\sigma$가 완비화 $B^\wedge$를
+통해 분해되고 $\text{Exal}_k(B^\wedge, N^\wedge)$에서 $C' = 0$이라는
+뜻이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smooth-completion}
+예 \ref{example-rings}에서 $P$를 $k$-대수라 하자. $J \subset P$를
+아이디얼이라 하고 $P^\wedge$로 $J$-진 완비화를 나타내자. 다음을 가정하자.
+\begin{enumerate}
+\item $k \to P$는 유한형이다.
+\item $\Spec(P) \to \Spec(k)$는 $V(J)$의 여집합에서 매끄럽다.
+\end{enumerate}
+그러면 보조정리 \ref{lemma-completion}의 변형 범주 사이의 함자
+$$
+\Deformationcategory_P \longrightarrow \Deformationcategory_{P^\wedge}
+$$
+는 매끄럽고 접공간 위의 동형을 유도한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-rings-RS}에 의해 $\Deformationcategory_P$와
+$\Deformationcategory_{P^\wedge}$가 변형 범주임을 안다. 따라서 위 함자가
+접공간들을 동일시하고 올림 가능성 사이의 대응을 주는지 확인하면
+충분하다. 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-easy-check-smooth}를 참조하라. 올림 가능성에 관한
+성질은 보조정리 \ref{lemma-lift-equivalence}에서 증명되며, 접공간 위의
+동형은 보조정리 \ref{lemma-first-order-completion}에서 $N = B$인
+특수한 경우이다.
+\end{proof}
+
+
+
+\section{국소화의 변형}
+\label{section-compare-localization}
+
+\noindent
+이 절에서는 대수와 그 곱셈적 부분집합에 대한 국소화가 주는 변형 문제를
+비교한다. 먼저 ``올림 가능성''을 논의한다.
+
+\begin{lemma}
+\label{lemma-lift-equivalence-localization}
+$A' \to A$를 핵이 멱영인 뇌터 환의 전사 준동형이라 하자.
+$A \to B$를 유한형 평탄 환 준동형이라 하자. $S \subset B$를 다음을
+만족하는 곱셈적 부분집합이라 하자. $\Spec(B) \to \Spec(A)$가
+$\mathfrak q$에서 신토믹이 아니면 $S \cap \mathfrak q = \emptyset$이다.
+그러면 $B$가 $A'$로의 평탄 올림을 가질 필요충분조건은 $S^{-1}B$가
+$A'$로의 평탄 올림을 갖는 것이다.
+\end{lemma}
+
+\begin{proof}
+이 증명은 보조정리 \ref{lemma-lift-equivalence}의 증명과 같지만 더 쉽다.
+독자는 이 증명을 건너뛰어도 좋다. $A$-대수의 전사
+$P = A[x_1, \ldots, x_n] \to B$를 택하자. $S_P \subset P$를 $S$의
+역상이라 하자. $P' = A'[x_1, \ldots, x_n]$라 두고
+$S_{P'} \subset P'$로 $S_P$의 역상을 나타내자.
+
+\medskip\noindent
+$A' \to B'$가 $A \to B$의 평탄 올림이라고 하자. 즉,
+$A' \to B'$는 평탄하고 $A$-대수 동형 $B = B' \otimes_{A'} A$가
+존재한다고 하자. 그러면 주어진 전사 $P \to B$를 올리는 $A'$-대수
+사상 $P' \to B'$를 택할 수 있다. Nakayama 보조정리(대수학, 보조정리
+\ref{algebra-lemma-NAK})에 의해 $B'$가 $P'$의 몫임을 알 수 있다.
+특히 $A$-평탄 $P$-가군인 $B$를 올리는 $A'$-평탄 $P'$-가군 구조를
+$B'$에 줄 수 있다. 반대로 $B$를 $A'$ 위에서 평탄한 $P'$-가군 $M'$로
+올릴 수 있다면, $M'$는 순환 가군 $M' \cong P'/J'$이다(다시 Nakayama를
+사용한다). $B' = P'/J'$라 두면 대수로서 $B$의 평탄 올림을 얻는다.
+
+\medskip\noindent
+$C = S^{-1}B$라 두자. $A' \to C'$가 $A \to C$의 평탄 올림이라고 하자.
+$C'$에서 $C$의 가역원으로 가는 원소는 가역원이다. $A$-대수 사상
+$P \to C$를 올리는 $A'$-대수 사상 $P' \to C'$를 택한다. 위의 관찰에
+의해 이 사상들은 국소화를 거쳐 전사 $S_P^{-1}P \to C$와
+$S_{P'}^{-1}P' \to C'$를 준다(두 번째 사상에는 Nakayama 보조정리를
+사용한다). 특히 $A$-평탄 $S_P^{-1}P$-가군인 $C$를 올리는 $A'$-평탄
+$S_{P'}^{-1}P'$-가군 구조를 $C'$에 줄 수 있다. 반대로 $C$를 $A'$ 위에서
+평탄한 $S_{P'}^{-1}P'$-가군 $N'$로 올릴 수 있다면, $N'$는 순환 가군
+$N' \cong S_{P'}^{-1}P'/\tilde J$이다(다시 Nakayama를 사용한다).
+$C' = S_{P'}^{-1}P'/\tilde J$라 두면 대수로서 $C$의 평탄 올림을 얻는다.
+
+\medskip\noindent
+스킴 사상의 신토믹 자취는 정의에 의해 열린집합이다.
+$J_B \subset B$를 $\Spec(B) \to \Spec(A)$가 신토믹이 아닌
+$\Spec(B)$의 점들의 집합을 잘라내는 아이디얼이라 하자.
+$J_P \subset P$와 $J_{P'} \subset P'$로 이에 대응하는 아이디얼들을
+나타내자. 보조정리에서 $S$에 둔 가정에 의해
+$P' \to S_{P'}^{-1}P'$는 동형
+$P'/J_{P'} = S_{P'}^{-1}P'/J_{P'}S_{P'}^{-1}P'$를 유도하는 평탄 환
+준동형임에 주의하자. 즉, 보조정리의 가정은 정확히
+$B/J_B = S^{-1}(B/J_B)$이라는 것이다. $g \in J_B$에 대하여 $B_g$가
+$A'$-평탄 $P'_g$-가군으로 올라감을 보일 수 있다면, 이 보조정리는
+보조정리 \ref{lemma-lift-equivalence-module}의 결과이다.% P11-E0063
+그런데 환 준동형 $A \to B_g$는 신토믹이므로 환 준동형의 평활화, 명제
+\ref{smoothing-proposition-lift-smooth}에 의해 $A'$-평탄 대수 $B'$로
+올라간다. $A' \to P'_g$가 매끄러우므로, 앞에서와 같이
+$P_g \to B_g$를 전사 사상 $P'_g \to B'$로 올릴 수 있고 원하는 결과를
+얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-first-order-localization}
+$k$를 체라 하고 $B$를 유한형 $k$-대수라 하자. $S \subset B$를 다음을
+만족하는 곱셈적 부분집합 아이디얼이라 하자.% P11-E0060
+$\Spec(B) \to \Spec(k)$가 $\mathfrak q$에서 매끄럽지 않으면
+$S \cap \mathfrak q = \emptyset$이다. $N$을 유한 $B$-가군이라 하자.
+그러면 표준 전단사
+$$
+\text{Exal}_k(B, N) \to \text{Exal}_k(S^{-1}B, S^{-1}N)
+$$
+가 존재한다.
+\end{lemma}
+
+\begin{proof}
+이 증명은 보조정리 \ref{lemma-first-order-completion}의 증명과 같지만
+더 쉽다. 독자는 이 증명을 건너뛰어도 좋다. 이 사상은 국소화로 주어진다.
+$\text{Exal}_k(B, N)$의 원소 $0 \to N \to C \to B \to 0$를,
+$S$의 역상 $S_C \subset C$에 관한 $C$의 국소화 $S_C^{-1}C$로 보낸다.
+보조정리 \ref{lemma-localization}의 증명과 비교하라.
+
+\medskip\noindent
+스킴 사상의 매끄러운 자취는 정의에 의해 열린집합이다.
+$J \subset B$를 $\Spec(B) \to \Spec(A)$가 매끄럽지 않은% P11-E0061
+$\Spec(B)$의 점들의 집합을 잘라내는 아이디얼이라 하자. $k \to B$가
+유한 표시이므로 복합체 $\NL_{B/k}$는 $N^i$가 유한 $B$-가군인 복합체
+$N^{-1} \to N^0$로 표현할 수 있다. 대수학, 절
+\ref{algebra-section-netherlander}, 특히 대수학, 보조정리
+\ref{algebra-lemma-NL-homotopy}를 참조하라. $B$가 뇌터이므로 이는
+$\NL_{B/k}$가 유사결맞이라는 뜻이다. $g \in J$에 대하여 $k$-대수
+$B_g$는 매끄럽고, 따라서 $(\NL_{B/k})_g = \NL_{B_g/k}$는 차수 $0$에
+놓인 유한 사영 $B$-가군과 준동형이다.% P11-E0062
+그러므로 모든 $i \geq 1$과 임의의 $B$-가군 $N$에 대하여
+$\text{Ext}^i_B(\NL_{B/k}, N)_g = 0$이다. 마지막으로 다음을 얻는다.
+$$
+\text{Ext}^1_{S^{-1}B}(\NL_{S^{-1}B/k}, S^{-1}N) =
+\text{Ext}^1_B(\NL_{B/k}, N) \otimes_B S^{-1}B =
+\text{Ext}^1_B(\NL_{B/k}, N)
+$$
+첫 번째 등식은 대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-base-change-RHom}와 대수학, 보조정리
+\ref{algebra-lemma-localize-NL}에 의한 것이다. 두 번째 등식은
+$\text{Ext}^1_B(\NL_{B/k}, N)$이 $J$-멱 꼬임이고 $S$의 원소들이
+$J$-멱 꼬임 가군 위에서 가역적으로 작용하기 때문에 성립한다.
+보조정리 \ref{lemma-first-order-completion} 바로 위에서
+$\text{Exal}_A(B, N)$을 $\text{Ext}^1_B(\NL_{B/A}, N)$으로 기술한 것에
+의해 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smooth-localization}
+예 \ref{example-rings}에서 $P$를 $k$-대수라 하자. $S \subset P$를
+곱셈적 부분집합이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $k \to P$는 유한형이다.
+\item 모든 $g \in S$에 대하여 $\Spec(P) \to \Spec(k)$는 $V(g)$의
+모든 점에서 매끄럽다.
+\end{enumerate}
+그러면 보조정리 \ref{lemma-localization}의 변형 범주 사이의 함자
+$$
+\Deformationcategory_P \longrightarrow \Deformationcategory_{S^{-1}P}
+$$
+는 매끄럽고 접공간 위의 동형을 유도한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-rings-RS}에 의해 $\Deformationcategory_P$와
+$\Deformationcategory_{S^{-1}P}$가 변형 범주임을 안다. 따라서 위 함자가
+접공간들을 동일시하고 올림 가능성 사이의 대응을 주는지 확인하면
+충분하다. 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-easy-check-smooth}를 참조하라. 올림 가능성에 관한
+성질은 보조정리 \ref{lemma-lift-equivalence-localization}에서 증명되며,
+접공간 위의 동형은 보조정리 \ref{lemma-first-order-localization}에서
+$N = B$인 특수한 경우이다.
+\end{proof}
+
+
+
+\section{헨젤화의 변형}
+\label{section-compare-henselization}
+
+\noindent
+이 절에서는 대수와 그 완비화가 주는 변형 문제를 비교한다.% P11-E0064
+먼저 ``올림 가능성''을 논의한다.
+
+\begin{lemma}
+\label{lemma-lift-equivalence-henselization}
+$A' \to A$를 핵이 멱영인 뇌터 환의 전사 준동형이라 하자.
+$A \to B$를 유한형 평탄 환 준동형이라 하자.
+$\mathfrak b \subset B$를 $\Spec(B) \to \Spec(A)$가
+$V(\mathfrak b)$의 여집합에서 신토믹이게 하는 아이디얼이라 하자.
+$(B^h, \mathfrak b^h)$를 순서쌍 $(B, \mathfrak b)$의 헨젤화라 하자.
+그러면 $B$가 $A'$로의 평탄 올림을 가질 필요충분조건은 $B^h$가
+$A'$로의 평탄 올림을 갖는 것이다.
+\end{lemma}
+
+\begin{proof}[첫 번째 증명]
+이 증명은 편법이다. 실제로 $B$가 평탄 올림 $B'$를 가지면, 헨젤화
+$(B')^h$를 취하여 $B^h$의 평탄 올림을 얻는다(보조정리
+\ref{lemma-henselization}의 증명과 비교하라). 반대로 $C'$가
+$(B')^h$의 $A'$-평탄 올림이라고 하자.% P11-E0065
+$\mathfrak c' \subset C'$를 아이디얼 $\mathfrak b^h$의 역상이라 하자.
+그러면 $\mathfrak c'$에 관한 $C'$의 완비화 $(C')^\wedge$는
+$B^\wedge$의 올림이다(자세한 내용은 생략한다). 따라서 보조정리
+\ref{lemma-lift-equivalence}에 의해 $B$가 평탄 올림을 가짐을 알 수 있다.
+\end{proof}
+
+\begin{proof}[두 번째 증명]
+$A$-대수의 전사 $P = A[x_1, \ldots, x_n] \to B$를 택하자.
+$\mathfrak p \subset P$를 $\mathfrak b$의 역상이라 하자.
+$P' = A'[x_1, \ldots, x_n]$라 두고 $\mathfrak p' \subset P'$로
+$\mathfrak p$의 역상을 나타내자(물론 여기서 $\mathfrak p$와
+$\mathfrak p'$는 소 아이디얼을 나타내지 않는다). 각각의 헨젤화를
+$P^h$와 $(P')^h$로 나타내겠다. 헨젤화를 취하는 것이 함자적이고, 몫의
+헨젤화가 헨젤화의 대응하는 몫이라는 사실을 사용하겠다. 대수학 더 보기,
+보조정리 \ref{more-algebra-lemma-irreducible-henselian-pair-connected}과
+\ref{more-algebra-lemma-henselization-integral}을 참조하라.
+
+\medskip\noindent
+$A' \to B'$가 $A \to B$의 평탄 올림이라고 하자. 즉,
+$A' \to B'$는 평탄하고 $A$-대수 동형 $B = B' \otimes_{A'} A$가
+존재한다고 하자. 그러면 주어진 전사 $P \to B$를 올리는 $A'$-대수
+사상 $P' \to B'$를 택할 수 있다. Nakayama 보조정리(대수학, 보조정리
+\ref{algebra-lemma-NAK})에 의해 $B'$가 $P'$의 몫임을 알 수 있다.
+특히 $A$-평탄 $P$-가군인 $B$를 올리는 $A'$-평탄 $P'$-가군 구조를
+$B'$에 줄 수 있다. 반대로 $B$를 $A'$ 위에서 평탄한 $P'$-가군 $M'$로
+올릴 수 있다면, $M'$는 순환 가군 $M' \cong P'/J'$이다(다시 Nakayama를
+사용한다). $B' = P'/J'$라 두면 대수로서 $B$의 평탄 올림을 얻는다.
+
+\medskip\noindent
+$C = B^h$, $\mathfrak c = \mathfrak bC$라 두자. $A' \to C'$가
+$A \to C$의 평탄 올림이라고 하자. 그러면 $C'$는 $\mathfrak c$의 역상
+$\mathfrak c'$에 관하여 헨젤 환이다. 이는 대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-henselian-henselian-pair}와 $C' \to C$의 핵이
+멱영이라는 사실에 의한 것이다. $A$-대수 사상 $P \to C$를 올리는
+$A'$-대수 사상 $P' \to C'$를 택한다. 이 사상들은 헨젤화를 거쳐 전사
+$P^h \to C$와 $(P')^h \to C'$를 준다(두 번째 사상에는 다시 Nakayama
+보조정리를 사용한다). 특히 $A$-평탄 $P^h$-가군인 $C$를 올리는
+$A'$-평탄 $(P')^h$-가군 구조를 $C'$에 줄 수 있다. 반대로 $C$를
+$A'$ 위에서 평탄한 $(P')^h$-가군 $N'$로 올릴 수 있다면, $N'$는 순환
+가군 $N' \cong (P')^h/\tilde J$이다(다시 Nakayama를 사용한다).
+$C' = (P')^h/\tilde J$라 두면 대수로서 $C$의 평탄 올림을 얻는다.
+
+\medskip\noindent
+$P' \to (P')^h$가 동형
+$P'/\mathfrak p' = (P')^h/\mathfrak p'(P')^h$를 유도하는 평탄 환
+준동형임에 주의하자(대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-henselization-flat}). $g \in \mathfrak p'$에 대하여
+$B_g$가 $A'$-평탄 $P'_g$-가군으로 올라감을 보일 수 있다면, 이 보조정리는
+보조정리 \ref{lemma-lift-equivalence-module}의 결과이다. 그런데 환 준동형
+$A \to B_g$는 신토믹이므로 환 준동형의 평활화, 명제
+\ref{smoothing-proposition-lift-smooth}에 의해 $A'$-평탄 대수 $B'$로
+올라간다. $A' \to P'_g$가 매끄러우므로, 앞에서와 같이
+$P_g \to B_g$를 전사 사상 $P'_g \to B'$로 올릴 수 있고 원하는 결과를
+얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-first-order-henselization}
+$k$를 체라 하고 $B$를 유한형 $k$-대수라 하자. $J \subset B$를
+$\Spec(B) \to \Spec(k)$가 $V(J)$의 여집합에서 매끄럽게 하는 아이디얼이라
+하자. $N$을 유한 $B$-가군이라 하자. 그러면 표준 전단사
+$$
+\text{Exal}_k(B, N) \to \text{Exal}_k(B^h, N^h)
+$$
+가 존재한다. 여기서 $(B^h, J^h)$는 $(B, J)$의 헨젤화이고
+$N^h = N \otimes_B B^h$이다.
+\end{lemma}
+
+\begin{proof}
+이 증명은 보조정리 \ref{lemma-first-order-completion}의 증명과 같지만
+더 쉽다. 독자는 이 증명을 건너뛰어도 좋다. 이 사상은 헨젤화로 주어진다.
+$\text{Exal}_k(B, N)$의 원소 $0 \to N \to C \to B \to 0$를,
+$J$의 역상 $J_C \subset C$에 관한 $C$의 헨젤화 $C^h$로 보낸다.
+보조정리 \ref{lemma-henselization}의 증명과 비교하라.
+
+\medskip\noindent
+$k \to B$가 유한 표시이므로 복합체 $\NL_{B/k}$는 $N^i$가 유한
+$B$-가군인 복합체 $N^{-1} \to N^0$로 표현할 수 있다. 대수학, 절
+\ref{algebra-section-netherlander}, 특히 대수학, 보조정리
+\ref{algebra-lemma-NL-homotopy}를 참조하라. $B$가 뇌터이므로 이는
+$\NL_{B/k}$가 유사결맞이라는 뜻이다. $g \in J$에 대하여 $k$-대수
+$B_g$는 매끄럽고, 따라서 $(\NL_{B/k})_g = \NL_{B_g/k}$는 차수 $0$에
+놓인 유한 사영 $B$-가군과 준동형이다.% P11-E0066
+그러므로 모든 $i \geq 1$과 임의의 $B$-가군 $N$에 대하여
+$\text{Ext}^i_B(\NL_{B/k}, N)_g = 0$이다. 마지막으로 다음을 얻는다.
+\begin{align*}
+\text{Ext}^1_{B^h}(\NL_{B^h/k}, N^h)
+& =
+\text{Ext}^1_{B^h}(\NL_{B/k} \otimes_B B^h, N \otimes_B B^h) \\
+& =
+\text{Ext}^1_B(\NL_{B/k}, N) \otimes_B B^h \\
+& =
+\text{Ext}^1_B(\NL_{B/k}, N)
+\end{align*}
+첫 번째 등식은 대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-henselization-NL}(더 정확히는 순서쌍의 헨젤화에
+대한 그 유사 결과)에 의한 것이다. 두 번째 등식은 대수학 더 보기,
+보조정리 \ref{more-algebra-lemma-base-change-RHom}에 의한 것이다.
+세 번째 등식은 $\text{Ext}^1_B(\NL_{B/k}, N)$이 $J$-멱 꼬임이고,
+$B \to B^h$가 평탄하며 동형 $B/J \to B^h/JB^h$를 유도한다는 사실
+(대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-henselization-flat}) 및 대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-neighbourhood-equivalence}에 의한 것이다.
+보조정리 \ref{lemma-first-order-completion} 바로 위에서
+$\text{Exal}_A(B, N)$을 $\text{Ext}^1_B(\NL_{B/A}, N)$으로 기술한 것에
+의해 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smooth-henselization}
+예 \ref{example-rings}에서 $P$를 $k$-대수라 하자. $J \subset P$를
+아이디얼이라 하고 $(P^h, J^h)$로 순서쌍 $(P, J)$의 헨젤화를 나타내자.
+다음을 가정하자.
+\begin{enumerate}
+\item $k \to P$는 유한형이다.
+\item $\Spec(P) \to \Spec(k)$는 $V(J)$의 여집합에서 매끄럽다.
+\end{enumerate}
+그러면 보조정리 \ref{lemma-henselization}의 변형 범주 사이의 함자
+$$
+\Deformationcategory_P \longrightarrow \Deformationcategory_{P^h}
+$$
+는 매끄럽고 접공간 위의 동형을 유도한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-rings-RS}에 의해 $\Deformationcategory_P$와
+$\Deformationcategory_{P^h}$가 변형 범주임을 안다. 따라서 위 함자가
+접공간들을 동일시하고 올림 가능성 사이의 대응을 주는지 확인하면
+충분하다. 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-easy-check-smooth}를 참조하라. 올림 가능성에 관한
+성질은 보조정리 \ref{lemma-lift-equivalence-henselization}에서 증명되며,
+접공간 위의 동형은 보조정리 \ref{lemma-first-order-henselization}에서
+$N = B$인 특수한 경우이다.
+\end{proof}
+
+
+
+\section{고립 특이점에의 응용}
+\label{section-isolated}
+
+\noindent
+위의 논의를 적용하여 특이점이 유한 개인 유한형 대수의 변형 이론을
+연구한다.
+
+\begin{lemma}
+\label{lemma-isolated}
+예 \ref{example-rings}에서 $P$를 $k$-대수라 하자. $k \to P$가 유한형이고
+$\Spec(P) \to \Spec(k)$가 $P$의 극대 아이디얼
+$\mathfrak m_1, \ldots, \mathfrak m_n$을 제외하고 매끄럽다고 가정하자.
+$P_{\mathfrak m_i}$, $P_{\mathfrak m_i}^h$,
+$P_{\mathfrak m_i}^\wedge$를 각각 국소환, 헨젤화, 완비화라 하자.
+그러면 변형 범주의 사상
+$$
+\Deformationcategory_P \to
+\prod \Deformationcategory_{P_{\mathfrak m_i}} \to
+\prod \Deformationcategory_{P_{\mathfrak m_i}^h} \to
+\prod \Deformationcategory_{P_{\mathfrak m_i}^\wedge}
+$$
+들은 매끄럽고 유한 차원 접공간들 위의 동형을 유도한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-finite-type-rings-TI}에 의해 접공간은 유한 차원이다.
+범주 사이의 함자들은 보조정리 \ref{lemma-localization},
+\ref{lemma-henselization}, \ref{lemma-completion}에서 구성된다
+(헨젤화의 완비화가 완비화라는 식의 몇 가지 확인은 생략한다).
+
+\medskip\noindent
+$J = \mathfrak m_1 \cap \ldots \cap \mathfrak m_n$라 두고 보조정리
+\ref{lemma-smooth-completion}을 적용하면
+$\Deformationcategory_P \to \Deformationcategory_{P^\wedge}$
+가 매끄럽고 접공간 위의 동형을 유도함을 얻는다. 여기서 $P^\wedge$는
+$P$의 $J$-진 완비화이다. 그런데
+$P^\wedge = \prod P_{\mathfrak m_i}^\wedge$이므로, 사상
+$\Deformationcategory_P \to
+\prod \Deformationcategory_{P_{\mathfrak m_i}^\wedge}$가 매끄럽고
+접공간 위의 동형을 유도함을 알 수 있다.
+
+\medskip\noindent
+$(P^h, J^h)$를 순서쌍 $(P, J)$의 헨젤화라 하자. 그러면
+$P^h = \prod P_{\mathfrak m_i}^h$이다(멱등원들을 살펴보고 대수학 더 보기,
+보조정리 \ref{more-algebra-lemma-characterize-henselian-pair}를 사용하라).
+따라서 보조정리 \ref{lemma-smooth-henselization}을 적용하여 완비화의 경우와
+같이 결론 내릴 수 있다.
+
+\medskip\noindent
+마지막 경우를 얻으려면 각 $i$에 대하여 따로
+$\Deformationcategory_{P_{\mathfrak m_i}} \to
+\Deformationcategory_{P_{\mathfrak m_i}^\wedge}$
+가 매끄럽고 접공간 위의 동형을 유도함을 보이면 충분하다.% P11-E0067
+이를 위해 $P$를 유일한 특이점이 극대 아이디얼 $\mathfrak m$인
+주원소 국소화로 바꾸어도 된다(이는 원래 $P$의 $\mathfrak m_i$에
+대응한다). 이제 곱셈적 부분집합 $S = P \setminus \mathfrak m$에 대하여
+보조정리 \ref{lemma-smooth-localization}을 적용하면 결론을 얻는다.
+사소한 세부 사항은 생략한다.
+\end{proof}
+
+
+
+
+
+
+\section{무장애 변형 문제}
+\label{section-unobstructed}
+
+\noindent
+$p : \mathcal{F} \to \mathcal{C}_\Lambda$를 준군들로 공섬유화된 범주라
+하자. $p$가 매끄러우면 $\mathcal{F}$가 {\it 매끄럽다} 또는
+{\it 무장애이다}라고 함을 상기하자. 이는 $\mathcal{C}_\Lambda$의 전사
+$\varphi : A' \to A$와 $x \in \Ob(\mathcal{F}(A))$가 주어졌을 때,
+$p(f) = \varphi$를 만족하는 $\mathcal{F}$의 사상 $f : x' \to x$가
+존재한다는 뜻이다. 형식적 변형 이론, 절
+\ref{formal-defos-section-smooth}를 참조하라. 이 절에서는 기하학적으로
+의미 있는 몇 가지 예를 제시한다.
+
+\begin{lemma}
+\label{lemma-lci-unobstructed}
+예 \ref{example-rings}에서 $P$를 $k$ 위의 국소 완전 교차라 하자
+(대수학, 정의 \ref{algebra-definition-lci-field}). 그러면
+$\Deformationcategory_P$는 무장애이다.
+\end{lemma}
+
+\begin{proof}
+$(A, Q) \to (k, P)$를 $\Deformationcategory_P$의 대상이라 하자.
+대수학, 정의 \ref{algebra-definition-lci}에 의해 $A \to Q$는 신토믹 환
+준동형이다. 따라서 $\mathcal{C}_\Lambda$의 임의의 전사 $A' \to A$에
+대하여 환 준동형의 평활화, 명제
+\ref{smoothing-proposition-lift-smooth}에 의해 $A' \to A$를 올리는 사상
+$(A', Q') \to (A, Q)$가 존재한다. 이로써 보조정리를 증명하였다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-glueing-smooth}
+상황 \ref{situation-glueing}에서 $U_{12} \to \Spec(k)$가 매끄러우면 사상
+$$
+\Deformationcategory_X
+\longrightarrow
+\Deformationcategory_{U_1} \times \Deformationcategory_{U_2} =
+\Deformationcategory_{P_1} \times \Deformationcategory_{P_2}
+$$
+은 매끄럽다. 추가로 $U_1$이 $k$ 위의 국소 완전 교차이면 사상
+$$
+\Deformationcategory_X
+\longrightarrow
+\Deformationcategory_{U_2} = \Deformationcategory_{P_2}
+$$
+은 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+등호들은 보조정리 \ref{lemma-affine}에 의해 성립한다. 형식적 변형 이론,
+절 \ref{formal-defos-section-smooth}에서와 같이
+$\mathcal{C}_\Lambda$를 $\mathcal{C}_\Lambda$ 위의 변형 범주로 생각하자.
+그러면
+$$
+\Deformationcategory_{P_1} \times \Deformationcategory_{P_2} =
+\Deformationcategory_{P_1}
+\times_{\mathcal{C}_\Lambda}
+\Deformationcategory_{P_2},
+$$
+이다. 형식적 변형 이론, 주석
+\ref{formal-defos-remarks-cofibered-groupoids}
+(\ref{formal-defos-item-product})을 참조하라. 보조정리
+\ref{lemma-glueing}을 사용하면 첫 번째 명제는 함자
+$$
+\Deformationcategory_{P_1}
+\times_{\Deformationcategory_{P_{12}}}
+\Deformationcategory_{P_2}
+\longrightarrow
+\Deformationcategory_{P_1}
+\times_{\mathcal{C}_\Lambda}
+\Deformationcategory_{P_2}
+$$
+가 매끄럽다는 것이다. $T\Deformationcategory_{P_{12}} = (0)$임을 보일 수
+있다면, 이는 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-map-fibre-products-smooth}에서 따른다.
+$P_{12}$가 $k$ 위에서 매끄러우므로 이 소멸은 보조정리
+\ref{lemma-smooth}에서 따른다. 두 번째 명제에 대해서는
+$\Deformationcategory_{P_1} \to \mathcal{C}_\Lambda$가 매끄러움을 보이면
+충분하다. 형식적 변형 이론, 보조정리
+\ref{formal-defos-lemma-smooth-properties}를 참조하라. 다시 말해
+$\Deformationcategory_{P_1}$이 무장애임을 보여야 하는데, 이는 보조정리
+\ref{lemma-lci-unobstructed}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-curve-isolated}
+예 \ref{example-schemes}에서 $X$를 $k$ 위의 스킴이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $X$는 분리이고 $k$ 위에서 유한형이며 $\dim(X) \leq 1$이다.
+\item $X \to \Spec(k)$는 닫힌점 $p_1, \ldots, p_n \in X$을 제외하고
+매끄럽다.
+\end{enumerate}
+$\mathcal{O}_{X, p_1}$, $\mathcal{O}_{X, p_1}^h$,
+$\mathcal{O}_{X, p_1}^\wedge$를 각각 국소환, 헨젤화, 완비화라 하자.% P11-E0068
+다음 변형 범주의 사상들을 생각하자.
+$$
+\Deformationcategory_X
+\longrightarrow
+\prod \Deformationcategory_{\mathcal{O}_{X, p_i}}
+\longrightarrow
+\prod \Deformationcategory_{\mathcal{O}_{X, p_i}^h}
+\longrightarrow
+\prod \Deformationcategory_{\mathcal{O}_{X, p_i}^\wedge}
+$$
+첫 번째 화살표는 매끄럽고, 두 번째와 세 번째 화살표는 매끄러우며
+접공간 위의 동형을 유도한다.
+\end{lemma}
+
+\begin{proof}
+$p_1, \ldots, p_n$과 $X$의 모든 기약 성분의 일반점을 포함하는 아핀
+열린 부분 $U_2 \subset X$를 택하자. 이는 다형체, 보조정리
+\ref{varieties-lemma-dim-1-quasi-projective}와 성질, 보조정리
+\ref{properties-lemma-ample-finite-set-in-affine}에 의해 가능하다. 그러면
+$X \setminus U_2$는 유한이고, $X = U_1 \cup U_2$를 만족하는 아핀 열린
+부분 $U_1 \subset X \setminus \{p_1, \ldots, p_n\}$을 택할 수 있다.
+$U_{12} = U_1 \cap U_2$라 두자. 그러면 $U_1$과 $U_{12}$는 $k$ 위의
+매끄러운 아핀 스킴이다. 따라서
+$$
+\Deformationcategory_X \longrightarrow \Deformationcategory_{U_2}
+$$
+는 보조정리 \ref{lemma-glueing-smooth}에 의해 매끄럽다. 보조정리
+\ref{lemma-affine}과 \ref{lemma-isolated}을 적용하면 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-curve-isolated-lci}
+예 \ref{example-schemes}에서 $X$를 $k$ 위의 스킴이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $X$는 분리이고 $k$ 위에서 유한형이며 $\dim(X) \leq 1$이다.
+\item $X$는 $k$ 위의 국소 완전 교차이다.
+\item $X \to \Spec(k)$는 유한 개의 점을 제외하고 매끄럽다.
+\end{enumerate}
+그러면 $\Deformationcategory_X$는 무장애이다.
+\end{lemma}
+
+\begin{proof}
+$p_1, \ldots, p_n \in X$를 $X \to \Spec(k)$가 매끄럽지 않은 점들이라
+하자. $p_1, \ldots, p_n$과 $X$의 모든 기약 성분의 일반점을 포함하는
+아핀 열린 부분 $U_2 \subset X$를 택하자. 이는 다형체, 보조정리
+\ref{varieties-lemma-dim-1-quasi-projective}와 성질, 보조정리
+\ref{properties-lemma-ample-finite-set-in-affine}에 의해 가능하다. 그러면
+$X \setminus U_2$는 유한이고, $X = U_1 \cup U_2$를 만족하는 아핀 열린
+부분 $U_1 \subset X \setminus \{p_1, \ldots, p_n\}$을 택할 수 있다.
+$U_{12} = U_1 \cap U_2$라 두자. 그러면 $U_1$과 $U_{12}$는 $k$ 위의
+매끄러운 아핀 스킴이다. 따라서
+$$
+\Deformationcategory_X \longrightarrow \Deformationcategory_{U_2}
+$$
+는 보조정리 \ref{lemma-glueing-smooth}에 의해 매끄럽다. 보조정리
+\ref{lemma-affine}과 \ref{lemma-lci-unobstructed}를 적용하면 결론을 얻는다.
+\end{proof}
+
+
+
+
+\section{평활화}
+\label{section-smoothing}
+
+\noindent
+체 $k$ 위의 유한형 스킴 또는 대수공간 $X$가 주어졌다고 하자. 일반
+섬유가 매끄럽고 특수 섬유가 $X$와 동형인 유한형 평탄 사상
+$Y \to \Spec(k[[t]])$를 찾는 것이 흔히 유용하다. 이러한 것을 $X$의
+평활화라고 한다. 이 절에서는 고립된 국소 완전 교차 특이점을 갖는
+$1$차원 분리 $X$의 평활화를 찾는다.
+
+\begin{lemma}
+\label{lemma-criterion-smoothing}
+$k$를 체라 하자. $S = \Spec(k[[t]])$와
+$S_n = \Spec(k[t]/(t^n))$라 두자. $Y \to S$를 특수 섬유 $X$가
+Cohen--Macaulay이고 차원 $d$로 등차원인 스킴의 고유 평탄 사상이라 하자.
+$X_n = Y \times_S S_n$로 나타내자. 어떤 $n \geq 1$에 대하여
+$\Omega_{X_n/S_n}$의 $d$번째 Fitting 아이디얼이 $t^{n - 1}$을 포함하면,
+$Y \to S$의 일반 섬유는 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+사상 더 보기, 보조정리
+\ref{more-morphisms-lemma-flat-finite-presentation-CM-open}에 의해
+$Y \to S$는 Cohen--Macaulay 사상이다. 사상, 보조정리
+\ref{morphisms-lemma-flat-finite-presentation-CM-fibres-relative-dimension}에
+의해 $Y \to S$의 상대 차원은 $d$이다. 인자, 보조정리
+\ref{divisors-lemma-d-fitting-ideal-omega-smooth}에 의해
+$\Omega_{Y/S}$의 $d$번째 Fitting 아이디얼
+$\mathcal{I} \subset \mathcal{O}_Y$는 사상 $Y \to S$의 특이 자취를
+잘라낸다. 즉, $V(\mathcal{I}) \subset Y$는 $Y \to S$가 매끄럽지 않은
+점들의 닫힌 부분집합이다. 인자, 보조정리
+\ref{divisors-lemma-base-change-and-fitting-ideal-omega}에 의해 이 Fitting
+아이디얼의 구성은 밑변환과 가환한다. 가정에 의해 $t^{n - 1}$은
+$\mathcal{I} + t^n\mathcal{O}_Y$의 절이다. 따라서 모든
+$x \in X = V(t) \subset Y$에 대하여 $t^{n - 1} \in \mathcal{I}_x$이다.
+여기서 $\mathcal{I}_x$는 $x$에서의 줄기이다. 이로부터 $Y$에서 $X$의
+어떤 열린 근방에서는 $V(\mathcal{I}) \subset V(t)$임이 따른다.
+$Y \to S$가 고유이므로 원하는 대로 $V(\mathcal{I}) \subset V(t)$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-jouanolou-type-thing}
+$k$를 체라 하고 $1 \leq c \leq n$을 정수라 하자.
+$f_1, \ldots, f_c \in k[x_1, \ldots x_n]$를 원소라 하자.% P11-E0069
+$0 \leq i \leq n$, $1 \leq j \leq c$에 대하여 $a_{ij}$를 변수라 하자.
+다음을 생각하자.
+$$
+g_j = f_j + a_{0j} + a_{1j}x_1 + \ldots + a_{nj}x_n \in
+k[a_{ij}][x_1, \ldots, x_n]
+$$
+$Y \subset \mathbf{A}^{n + c(n + 1)}_k$로 $g_1, \ldots, g_c$가 잘라내는
+닫힌 부분스킴을 나타내자. $\pi : Y \to \mathbf{A}^{c(n + 1)}_k$로
+변수 $a_{ij}$를 갖는 아핀 공간 위로의 사영을 나타내자. 그러면
+$\pi$가 그 위에서 매끄러운 $\mathbf{A}^{c(n + 1)}_k$의 영이 아닌
+Zariski 열린 부분이 존재한다.% P11-E0070
+\end{lemma}
+
+\begin{proof}
+$\pi$가 매끄러운 점들의 집합이 열린집합임을 상기하자. 따라서 그 여집합,
+즉 특이 자취는 닫힌집합이다. Chevalley 정리(사상, 보조정리
+\ref{morphisms-lemma-chevalley}의 형태)에 의해 특이 자취의 상은
+구성가능하다. 그러므로 $\mathbf{A}^{c(n + 1)}_k$의 일반점이 특이 자취의
+상에 속하지 않으면 보조정리가 따른다(예를 들어 위상수학, 보조정리
+\ref{topology-lemma-generic-point-in-constructible}에 의한다). 따라서
+$\pi$가 매끄럽지 않고 $\mathbf{A}^{c(n + 1)}_k$의 일반점으로 가는 점
+$y \in Y$가 없음을 보여야 한다. 편미분 행렬
+$$
+(\frac{\partial g_j}{\partial x_i}) =
+(\frac{\partial f_j}{\partial x_i} + a_{ij})
+$$
+의 $\kappa(y)$에서의 상은 계수가 $< c$이어야 한다. 그렇지 않으면
+$\pi$가 $y$에서 매끄럽기 때문이다. 환 준동형의 평활화, 절
+\ref{smoothing-section-singular-ideal}의 논의를 참조하라. 따라서 모두
+영은 아닌 $\lambda_1, \ldots, \lambda_c \in \kappa(y)$를 찾아서 벡터
+$(\lambda_1, \ldots, \lambda_c)$가 이 행렬의 핵에 속하게 할 수 있다.
+번호를 다시 매겨 $\lambda_1 \not = 0$이라고 가정해도 된다.
+$\lambda_1$로 나누어 우리의 벡터가
+$(1, \lambda_2, \ldots, \lambda_c)$ 꼴이라고 가정해도 된다. 그러면
+$$
+a_{i1} = -
+\frac{\partial f_j}{\partial x_1} -
+\sum\nolimits_{j = 2, \ldots, c} \lambda_j(\frac{\partial f_j}{\partial x_i} + a_{ij})
+$$
+를 $i = 1, \ldots, n$에 대하여 $\kappa(y)$에서 얻는다.% P11-E0071
+더욱이 $y \in Y$이므로 다음도 성립한다.
+$$
+a_{0j} = -f_j - a_{1j}x_1 - \ldots - a_{nj}x_n
+$$
+이는 $\kappa(y)$에서 성립한다. 따라서 $a_{ij}$들이 생성하는 $\kappa(y)$의
+부분체는 $x_1, \ldots, x_n, \lambda_2, \ldots, \lambda_c$의 상들과,
+$a_{i1}$ 및 $a_{0j}$를 제외한 $a_{ij}$들이 생성하는 $\kappa(y)$의
+부분체에 포함된다는 뜻이다. 개수를 세면 이것의 초월차수가 많아야
+$c(n + 1) - 1$임을 알 수 있다. 따라서 원하는 대로 $y$는 일반점으로
+갈 수 없다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smoothing-affine-lci}
+$k$를 체라 하고 $A$를 $k$ 위의 전역 완전 교차라 하자. $B/tB \cong A$를
+만족하고 $B[1/t]$가 $k((t))$ 위에서 매끄러운 유한형 평탄 환 준동형
+$k[[t]] \to B$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+대수학, 정의 \ref{algebra-definition-lci-field}에서와 같이
+$A = k[x_1, \ldots, x_n]/(f_1, \ldots, f_c)$라 쓰자.
+$a_{ij} \in (t) \subset k[[t]]$를 택하고 다음과 같이 둘 것이다.
+$$
+g_j = f_j + a_{0j} + a_{1j}x_1 + \ldots + a_{nj}x_n \in
+k[[t]][x_1, \ldots, x_n]
+$$
+그런 다음 $B = k[[t]][x_1, \ldots, x_n]/(g_1, \ldots, g_c)$를 취한다.
+$k[[t]] \to B$가 $(t)$ 위에 놓이는 모든 소 아이디얼에서 평탄이라고
+주장한다. 실제로 $f_1, \ldots, f_c$는 $f_1, \ldots, f_c$를 포함하는
+$k[x_1, \ldots, x_n]$의 임의의 소 아이디얼 $\mathfrak p$에서의
+국소환 안에서 정칙열을 이룬다(대수학, 보조정리
+\ref{algebra-lemma-lci}). 따라서 $g_1, \ldots, g_c$는 국소적으로
+정칙열의 올림이고 대수학, 보조정리
+\ref{algebra-lemma-grothendieck-regular-sequence}를 적용할 수 있다.
+$k((t)) = k[[t]]_{(0)}$가 체이므로 $(0) \subset k[[t]]$ 위에 놓이는
+소 아이디얼에서의 평탄성은 자동이다. 따라서 $B$는 $k[[t]]$ 위에서
+평탄하다.
+
+\medskip\noindent
+남은 것은 $a_{ij}$들을 적절히 택하면 일반 섬유 $B_{(0)}$가
+$k((t))$ 위에서 매끄러움을 보이는 일뿐이다. 이를 위해 유도된 사상
+$$
+(a_{ij}) : \Spec(k[[t]]) \longrightarrow \mathbf{A}^{c(n + 1)}_k
+$$
+이 보조정리 \ref{lemma-jouanolou-type-thing}의 영이 아닌 Zariski 열린
+부분으로 가도록 $a_{ij}$들을 택할 수 있음을 보여야 한다. 이는
+$(t)^{\oplus c(n + 1)}$ 위에서 소멸하는 $a_{ij}$들의 영이 아닌 다항식이
+없으므로 명백하다(이를 확인하는 것은 독자에게 연습문제로 맡긴다).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smoothing-artinian-lci}
+$k$를 체라 하고 $A$를 $k$ 위의 국소 완전 교차인 유한 차원
+$k$-대수라 하자. 그러면 $B/tB \cong A$이고 $B[1/t]$가 $k((t))$ 위에서
+에탈인 유한 평탄 $k[[t]]$-대수 $B$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$A$는 아르틴 환이므로(대수학, 보조정리
+\ref{algebra-lemma-finite-dimensional-algebra}), $A$를 아르틴 국소환들의
+곱으로 쓸 수 있다(대수학, 보조정리
+\ref{algebra-lemma-artinian-finite-length}). 따라서 $A$가 국소인 경우에
+보조정리를 증명하면 충분하다. 여기서는 주원소 국소화를 취해도 국소 완전
+교차라는 성질이 보존된다는 사실을 사용한다. 대수학, 보조정리
+\ref{algebra-lemma-localize-lci}를 참조하라. 이 경우 $A$는 전역 완전
+교차이다. 보조정리 \ref{lemma-smoothing-affine-lci}에서 구성한 대수
+$B$를 생각하자. 그러면 $k[[t]] \to B$는 $(t)$ 위에 놓이는 $B$의 유일한
+소 아이디얼에서 준유한이다(대수학, 정의
+\ref{algebra-definition-quasi-finite}). $k[[t]]$가 헨젤 국소환임에 주의하자
+(대수학, 보조정리 \ref{algebra-lemma-complete-henselian}). 따라서
+$B = B' \times C$이며, 여기서 $B'$는 $k[[t]]$ 위에서 유한이고 $C$에는
+$(t)$ 위에 놓이는 소 아이디얼이 없다. 대수학, 보조정리
+\ref{algebra-lemma-characterize-henselian}을 참조하라. 이제 $B'$가 우리가
+찾던 환이다(에탈이라는 것은 상대 차원 $0$으로 매끄럽다는 것과 같음을
+상기하라).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smoothing-at-lci-point}
+$k$를 체라 하고 $A$를 $k$-대수라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $A$는 $k$ 위 본질적으로 유한형인 국소환이다.
+\item $A$는 $k$ 위의 완전 교차이다
+(대수학, 정의 \ref{algebra-definition-lci-local-ring}).
+\end{enumerate}
+$\kappa$를 $A$의 잉여체라 하고
+$d = \dim(A) + \text{trdeg}_k(\kappa)$라 두자. 그러면 정수 $n$과,
+$B/tB \cong A$를 만족하고 $t^n$이 $\Omega_{B/k[[t]]}$의 $d$번째 Fitting
+아이디얼에 속하는 평탄하고 본질적으로 유한형인 환 준동형
+$k[[t]] \to B$가 존재한다.% P11-E0072
+\end{lemma}
+
+\begin{proof}
+대수학, 보조정리 \ref{algebra-lemma-lci-local}에 의해 $A$를 $k$ 위의
+전역 완전 교차 $P$의 소 아이디얼 $\mathfrak p$에서의 국소화로 쓸 수
+있다. 대수학, 보조정리
+\ref{algebra-lemma-dimension-at-a-point-finite-type-field}에 의해
+$\dim(P) = d$임에 주의하자. 보조정리
+\ref{lemma-smoothing-affine-lci}에 의해 $P \cong Q/tQ$이고
+$k((t)) \to Q[1/t]$가 매끄러운 유한형 평탄 환 준동형
+$k[[t]] \to Q$를 찾을 수 있다. 보조정리에서 $Q$를 구성한 방식으로부터
+$k[[t]] \to Q$가 상대 차원 $d$인 상대 전역 완전 교차임이 따른다.
+또는 대수학, 보조정리 \ref{algebra-lemma-syntomic}에 의해 $Q$나 $Q$의
+적절한 주원소 국소화가 그러한 전역 완전 교차이다. 따라서 인자, 보조정리
+\ref{divisors-lemma-d-fitting-ideal-omega-smooth}에 의해
+$\Omega_{Q/k[[t]]}$의 $d$번째 Fitting 아이디얼 $I \subset Q$는
+$\Spec(Q) \to \Spec(k[[t]])$의 특이 자취를 잘라낸다. 그러므로 어떤
+$n$에 대하여 $t^n \in I$이다. $\mathfrak q \subset Q$를
+$\mathfrak p$의 역상이라 하고 $B = Q_\mathfrak q$라 두자. 보조정리가
+증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smoothing-proper-curve-isolated-lci}
+$X$를 체 $k$ 위의 스킴이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $X$는 $k$ 위에서 고유이다.
+\item $X$는 $k$ 위의 국소 완전 교차이다.
+\item $X$의 차원은 $\leq 1$이다.
+\item $X \to \Spec(k)$는 유한 개의 점을 제외하고 매끄럽다.
+\end{enumerate}
+그러면 일반 섬유가 매끄럽고 특수 섬유가 $X$와 동형인 평탄 사영 사상
+$Y \to \Spec(k[[t]])$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$X$가 Cohen--Macaulay임에 주의하자. 대수학, 보조정리
+\ref{algebra-lemma-lci-CM}를 참조하라. 따라서
+$X = X' \amalg X''$로 쓸 수 있으며, 여기서 $\dim(X') = 0$이고 $X''$는
+차원 $1$로 등차원이다. 사상, 보조정리
+\ref{morphisms-lemma-flat-finite-presentation-CM-fibres-relative-dimension}을
+참조하라. $X'$는 $k$ 위에서 유한이므로(다형체, 보조정리
+\ref{varieties-lemma-algebraic-scheme-dim-0}), 보조정리
+\ref{lemma-smoothing-artinian-lci}에 의해 특수 섬유가 $X'$이고 일반
+섬유가 매끄러운 $Y' \to \Spec(k[[t]])$를 찾을 수 있다. 따라서 $X''$에
+대하여 보조정리를 증명하면 충분하다. $X$를 $X''$로 바꾼 뒤에는 $X$가
+Cohen--Macaulay이고 차원 $1$로 등차원이다.
+
+\medskip\noindent
+상황 $\Lambda = k \to k$에 대한 변형 이론을 사용하겠다.
+$p_1, \ldots, p_r \in X$를 $X$의 닫힌 특이점들, 즉
+$X \to \Spec(k)$가 매끄럽지 않은 점들이라 하자. 각 $i$에 대하여 정수
+$n_i$와 평탄하고 본질적으로 유한형인 환 준동형
+$$
+k[[t]] \longrightarrow B_i
+$$
+를 택하여 $B_i/tB_i \cong \mathcal{O}_{X, p_i}$이고 $t^{n_i}$가
+$\Omega_{B_i/k[[t]]}$의 $1$번째 Fitting 아이디얼에 속하게 한다.
+이는 보조정리 \ref{lemma-smoothing-at-lci-point}에 의해 가능하다. 계
+$(B_i/t^nB_i)$가 $k[[t]]$ 위의
+$\Deformationcategory_{\mathcal{O}_{X, p_i}}$의 형식적 대상을 정함에
+주의하자. 보조정리 \ref{lemma-curve-isolated}에 의해 사상
+$$
+\Deformationcategory_X
+\longrightarrow
+\prod\nolimits_{i = 1, \ldots, r} \Deformationcategory_{\mathcal{O}_{X, p_i}}
+$$
+은 변형 범주 사이의 매끄러운 사상이다. 따라서 형식적 변형 이론,
+보조정리 \ref{formal-defos-lemma-smooth-morphism-essentially-surjective}에
+의해 $\Deformationcategory_X$ 안에 형식적 대상 $(X_n)$이 존재하여 위
+화살표에 의해 형식적 대상 $\prod_i (B_i/t^n)$으로 간다. 공간의 사상 더
+보기, 보조정리
+\ref{spaces-more-morphisms-lemma-formal-algebraic-space-proper-reldim-1}에
+의해 $k[[t]]$ 위의 사영 스킴 $Y$와 양립하는 동형
+$Y \times_{\Spec(k[[t]])} \Spec(k[t]/(t^n)) \cong X_n$이 존재한다.
+사상 더 보기, 보조정리
+\ref{more-morphisms-lemma-check-flatness-on-infinitesimal-nbhds}에 의해
+$Y \to \Spec(k[[t]])$는 평탄하다.
+$X$가 Cohen--Macaulay이고 차원 $1$로 등차원이므로 보조정리
+\ref{lemma-criterion-smoothing}을 적용하여 $Y$의 일반 섬유가 매끄러움을
+확인할 수 있다\footnote{주의: 일반적으로 점 $p_i$에서 $Y$의 국소환이
+$B_i$와 동형이라는 것은 {\bf 참이 아니다}. 양변을 $t^n$으로 나눈 뒤에만
+이것이 참임을 알고 있을 뿐이다!}. 위에서 찾은 정수 $n_i$들의 최댓값보다
+엄밀히 큰 $n$을 택하자. $S_n = \Spec(k[t]/(t^n))$이라 할 때
+$t^{n - 1}$이 $\Omega_{X_n/S_n}$의 첫 번째 Fitting 아이디얼에 속함을
+보일 수 있으면 증명은 끝난다. 이를 위해서는 모든 닫힌점 $p$에서
+$X_n$의 국소환마다 이 명제가 참임을 증명하면 충분하다. 그런데 $p$가
+$X \to \Spec(k)$의 매끄러운 점에 대응하면 $\Omega_{X_n/S_n, p}$는 계수
+$1$인 자유 가군이고 첫 번째 Fitting 아이디얼은 국소환과 같다. 어떤
+$i$에 대하여 $p = p_i$이면
+$$
+\Omega_{X_n/S_n, p_i} =
+\Omega_{(B_i/t^nB_i)/(k[t]/(t^n))} =
+\Omega_{B_i/k[[t]]}/t^n\Omega_{B_i/k[[t]]}
+$$
+Fitting 아이디얼을 취하는 것은 밑변환과 가환하고(우리는 이를 이미
+사용했지만, 이 대수적 상황에서는 대수학 더 보기, 보조정리
+\ref{more-algebra-lemma-fitting-ideal-basics}에서 따른다),% P11-E0073
+$n - 1 \geq n_i$이므로 $t^{n - 1}$은 원하는 대로 $B_i/t^nB_i$ 위의
+이 가군의 Fitting 아이디얼에 속한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smoothing-curve-isolated-lci}
+$k$를 체라 하고 $X$를 $k$ 위의 스킴이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $X$는 분리이고 $k$ 위에서 유한형이며 $\dim(X) \leq 1$이다.
+\item $X$는 $k$ 위의 국소 완전 교차이다.
+\item $X \to \Spec(k)$는 유한 개의 점을 제외하고 매끄럽다.
+\end{enumerate}
+그러면 일반 섬유가 매끄럽고 특수 섬유가 $X$와 동형인 평탄하고 분리인
+유한형 사상 $Y \to \Spec(k[[t]])$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$X$가 환원이면 다형체, 보조정리
+\ref{varieties-lemma-reduced-dim-1-projective-completion}에서와 같은 매장
+$X \subset \overline{X}$를 택할 수 있다.
+$X = \overline{X} \setminus \{x_1, \ldots, x_n\}$라 쓰면
+$\mathcal{O}_{\overline{X}, x_i}$는 이산 값매김환이고, 따라서 특히 국소
+완전 교차임을 알 수 있다(대수학, 정의
+\ref{algebra-definition-lci-local-ring}). 이는 열린 부분 $X$ 위에서
+성립하고 대수학, 보조정리 \ref{algebra-lemma-lci-local}에 의해 점 $x_i$들에서도
+성립하므로, $\overline{X}$는 $k$ 위의 국소 완전 교차이다. 따라서 보조정리
+\ref{lemma-smoothing-proper-curve-isolated-lci}를 적용하여 일반 섬유가
+매끄럽고 특수 섬유가 $\overline{X}$인 사영 평탄 사상
+$\overline{Y} \to \Spec(k[[t]])$를 찾을 수 있다. 그런 다음
+$\overline{Y}$에서 $x_1, \ldots, x_n$을 제거하여 $Y$를 얻는다.
+
+\medskip\noindent
+일반적인 경우에는 $\dim(X') = 0$이고 $X''$가 차원 $1$로 등차원인
+$X = X' \amalg X''$로 쓴다.% P11-E0074
+그러면 $X''$는 환원이고 첫 번째 문단을 적용할 수 있다. 한편 $X'$는
+보조정리 \ref{lemma-smoothing-proper-curve-isolated-lci}의 증명에서와 같이
+다룰 수 있다. 몇몇 세부사항은 생략한다.
+\end{proof}
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

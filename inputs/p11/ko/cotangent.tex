@@ -1,0 +1,4361 @@
+\input{ko_preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{코탄젠트 복합체}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장의 목표는 환 준동형, 스킴의 사상, 그리고 대수공간의 사상에 대한
+코탄젠트 복합체를 구성하는 것이다. 참고 문헌으로는 노트
+\cite{quillenhomology}, 논문 \cite{quillencohomology}, 그리고 저서
+\cite{Andre}와 \cite{cotangent}가 있다.
+
+
+
+
+\section{독자에게 드리는 조언}
+\label{section-advice-reader}
+
+\noindent
+이 장을 쓰면서 우리는 단체적 기법의 사용을 최소화하려고 했다. 환 $A$
+위의 환 $B$의 {\it 분해} $P_\bullet$을 택하는 일을 범주
+$\mathcal{C}_{B/A}$ 위 아벨 군층의 {\it 호몰로지}를 계산하는 도구로 본다.
+주 \ref{remark-resolution}을 보라. 이는 {\v C}ech 복합체로 코호몰로지를
+계산할 때 ``좋은 덮개''가 하는 역할과 비슷하다. 범주 위의 호몰로지에
+관해 간단히 읽으려면 사이트 코호몰로지, 절
+\ref{sites-cohomology-section-homology}를 보라. 유도 하방 느낌표 함자
+$L\pi_!$가 호몰로지에 대하여 하는 역할은
+$R\Gamma(\mathcal{C}_{B/A}, -)$가 코호몰로지에 대하여 하는 역할과 같다.
+절 \ref{section-compute-L-pi-shriek}에서 연구하는 범주
+$\mathcal{C}_{B/A}$는 $P$가 $A$ 위의 다항식 대수인 인수분해
+$A \to P \to B$들의 범주의 반대 범주이다. 이 범주에는 다음 환층의
+사상들이 있다.
+$$
+\underline{A} \longrightarrow \mathcal{O} \longrightarrow \underline{B}
+$$
+그리고 대상 $U=(P\to B)$ 위에서 $\mathcal{O}(U)=P$이다. $A$ 위의
+$B$의 코탄젠트 복합체는 다음과 같이 얻어진다.
+$$
+L_{B/A} =
+L\pi_!(\Omega_{\mathcal{O}/\underline{A}} \otimes_\mathcal{O} \underline{B})
+$$
+보조정리 \ref{lemma-compute-cotangent-complex}를 보라. 우리는 환 준동형의
+코탄젠트 복합체의 기본 성질들을 증명할 때 일관되게 이 관점을 사용하려고
+했다. 특히 표준 분해의 존재에 의존하지 않고도 모든 결과를 증명할 수
+있지만, 여기서는 그렇게 하지 않았다. 이 이론은 상당히 만족스럽다.
+다만 기본 삼각형(명제 \ref{proposition-triangle})의 증명에는 유도 하방
+느낌표 함자에 관한 이론이 조금 더 필요할 수도 있다. 다른 방법도 제시하기
+위하여 주 \ref{remark-triangle}과 \ref{remark-explicit-map}에서 표준
+분해의 간단한 성질들에 바탕을 둔 이 결과의 접근법을 상당히 완전하게
+개괄한다.
+
+\medskip\noindent
+환 달린 토포스의 사상, 스킴의 사상, 대수공간의 사상 등에 대한 코탄젠트
+복합체는 위에서 논의한 ``보통의 환 준동형''인 경우로부터 가능한 한 많은
+결과를 이끌어 내는 방식으로 다룬다.
+
+
+
+
+
+\section{환 준동형의 코탄젠트 복합체}
+\label{section-cotangent-ring-map}
+
+\noindent
+$A$를 환이라 하자. $\textit{Alg}_A$를 $A$-대수의 범주라 하자. 수반
+함자의 쌍 $(U,V)$를 생각하자. 여기서
+$V:\textit{Alg}_A\to\textit{Sets}$는 망각 함자이고,
+$U:\textit{Sets}\to\textit{Alg}_A$는 집합 $E$를 $A$ 위에서 $E$를
+변수집합으로 갖는 다항식 대수 $A[E]$로 보낸다. $X_\bullet$을 단체적
+방법, 절 \ref{simplicial-section-standard}에서 구성한
+$\text{Fun}(\textit{Alg}_A,\textit{Alg}_A)$의 단체 대상으로 두자.
+
+\medskip\noindent
+$A$-대수 $B$를 생각하자. 이렇게 얻은 단체 $A$-대수를
+$P_\bullet=X_\bullet(B)$로 쓰자. $P_0=A[B]$, $P_1=A[A[B]]$ 등임을
+상기하자. 특히 각 항 $P_n$은 다항식 $A$-대수이다. 또한 다음 증강이 있다.
+$$
+\epsilon : P_\bullet \longrightarrow B
+$$
+여기서 $B$는 상수 단체 $A$-대수로 본다.
+
+\begin{definition}
+\label{definition-standard-resolution}
+환 준동형 $A\to B$가 주어졌다고 하자. {\it $A$ 위의 $B$의 표준 분해}는
+각 항이
+$$
+P_0 = A[B],\quad P_1 = A[A[B]],\quad \ldots
+$$
+이고 사상들이 단체적 방법, 예
+\ref{simplicial-example-polynomial-algebra-maps}에서 구성한 것인 증강
+$\epsilon:P_\bullet\to B$이다.
+\end{definition}
+
+\noindent
+특정한 상황에서는 표준 분해를 사용하여 왼쪽 유도 함자를 계산할 수 있음을
+보게 될 것이다.
+
+\begin{definition}
+\label{definition-cotangent-complex-ring-map}
+환 준동형 $A\to B$의 {\it 코탄젠트 복합체} $L_{B/A}$는 다음 단체
+$B$-가군에 딸린 $B$-가군의 복합체이다.
+$$
+\Omega_{P_\bullet/A} \otimes_{P_\bullet, \epsilon} B
+$$
+여기서 $\epsilon:P_\bullet\to B$는 $A$ 위의 $B$의 표준 분해이다.
+\end{definition}
+
+\noindent
+단체적 방법, 절 \ref{simplicial-section-complexes}에서는 단체 가군에
+사슬 복합체를 대응시키지만, 여기서는 공사슬 복합체를 사용한다. 따라서
+차수 $-n$에서 항 $L_{B/A}^{-n}$은 $B$-가군
+$\Omega_{P_n/A}\otimes_{P_n,\epsilon_n}B$이고, $m>0$이면
+$L_{B/A}^m=0$이다.
+
+\begin{remark}
+\label{remark-variant-cotangent-complex}
+환 준동형 $A\to B$가 주어졌다고 하자. $\mathcal{A}$를 $A$-대수의
+화살표 $\psi:C\to B$들의 범주라 하고, $\mathcal{S}$를 $E$가 집합인
+사상 $E\to B$들의 범주라 하자. 수반 함자
+$V:\mathcal{A}\to\mathcal{S}$와 $U:\mathcal{S}\to\mathcal{A}$가 있다.
+앞의 것은 망각 함자이고, 뒤의 것은 $E\to B$를 $A[E]\to B$로 보낸다.
+$X_\bullet$을 단체적 방법, 절 \ref{simplicial-section-standard}에서 구성한
+$\text{Fun}(\mathcal{A},\mathcal{A})$의 단체 대상으로 두자. 다음 도표는
+가환한다.
+$$
+\xymatrix{
+\mathcal{A} \ar[d] \ar[r] & \mathcal{S} \ar@<1ex>[l] \ar[d] \\
+\textit{Alg}_A \ar[r] & \textit{Sets} \ar@<1ex>[l]
+}
+$$
+따라서 $X_\bullet(\text{id}_B:B\to B)$는 $A$ 위의 $B$의 표준 분해와 같다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-colimit-cotangent-complex}
+유향 지표집합 $I$ 위의 환 준동형 계 $A_i\to B_i$가 주어졌다고 하자.
+그러면 $\colim L_{B_i/A_i}=L_{\colim B_i/\colim A_i}$이다.
+\end{lemma}
+
+\begin{proof}
+이는 망각 함자 $V:A\textit{-Alg}\to\textit{Sets}$와 그 수반 함자
+$U:\textit{Sets}\to A\textit{-Alg}$가 여과 쌍대극한과 가환하기 때문이다.
+또한 함자 $B/A\mapsto\Omega_{B/A}$도 마찬가지이다(가환대수학, 보조정리
+\ref{algebra-lemma-colimit-differentials}).
+\end{proof}
+
+
+
+
+
+\section{단체 분해와 유도 하방 느낌표 함자}
+\label{section-compute-L-pi-shriek}
+
+\noindent
+환 준동형 $A\to B$가 주어졌다고 하자. 다음 범주를 생각하자. 그 대상은
+$A$-대수 준동형 $\alpha:P\to B$인데, 여기서 $P$는 어떤 변수집합
+\footnote{$B$의 기수 이하인 기수의 집합들만 생각하면 충분하다.}에 대한
+$A$ 위의 다항식 대수이다. 사상
+$s:(\alpha:P\to B)\to(\alpha':P'\to B)$는
+$\alpha'\circ s=\alpha$를 만족하는 $A$-대수 준동형 $s:P\to P'$이다.
+이 범주의 {\bf 반대 범주}를 $\mathcal{C}=\mathcal{C}_{B/A}$로 쓰자.
+반대 범주를 택하는 이유는 대상 $(P,\alpha)$를 다음 아핀 스킴의 도표에
+대응하는 것으로 생각하고자 하기 때문이다.
+$$
+\xymatrix{
+\Spec(B) \ar[d] \ar[r] & \Spec(P) \ar[ld] \\
+\Spec(A)
+}
+$$
+$\mathcal{C}$에 비이산 위상(사이트, 예
+\ref{sites-example-indiscrete})을 주자. 즉 항등사상들이 덮개를 주어서 모든
+준층이 층이 되는 사이트의 구조를 $\mathcal{C}$에 준다. 또한
+$\mathcal{C}$에 두 환층을 준다. 첫 번째는 대상 $(P,\alpha)$를 $P$로
+보내는 층 $\mathcal{O}$이다. 두 번째는 상수층 $B$이며 이를
+$\underline{B}$로 쓰겠다. 다음 환 달린 토포스의 사상 도표를 얻는다.
+\begin{equation}
+\label{equation-pi}
+\vcenter{
+\xymatrix{
+(\Sh(\mathcal{C}), \underline{B}) \ar[r]_i \ar[d]_\pi &
+(\Sh(\mathcal{C}), \mathcal{O}) \\
+(\Sh(*), B)
+}
+}
+\end{equation}
+$i$는 바탕 토포스에서 항등사상이고
+$i^\sharp:\mathcal{O}\to\underline{B}$는 명백한 사상이다. $\pi$는
+사이트 코호몰로지, 예
+\ref{sites-cohomology-example-category-to-point}의 사상이다. 다음 두 유도
+함자가 아래에서 중요한 역할을 한다.
+$
+Li^* : D(\mathcal{O}) \longrightarrow D(\underline{B})
+$
+이는 $Ri_*=i_*:D(\underline{B})\to D(\mathcal{O})$의 왼쪽 수반이고,
+$
+L\pi_! : D(\underline{B}) \longrightarrow D(B)
+$
+이는 $\pi^*=\pi^{-1}:D(B)\to D(\underline{B})$의 왼쪽 수반이다.
+
+\begin{lemma}
+\label{lemma-identify-pi-shriek}
+위의 표기 아래에서 $P_\bullet$을 증강
+$\epsilon:P_\bullet\to B$가 주어진 단체 $A$-대수라 하자. 각 $P_n$이
+$A$ 위의 다항식 대수이고 $\epsilon$이 바탕 단체집합에서 자명한 Kan
+올뭉치라고 가정하자. 그러면
+$$
+L\pi_!(\mathcal{F}) = \mathcal{F}(P_\bullet, \epsilon)
+$$
+가 각각 $D(\textit{Ab})$와 $D(B)$에서 성립하고, 각각
+$\textit{Ab}(\mathcal{C})$와 $\textit{Mod}(\underline{B})$의
+$\mathcal{F}$에 대하여 함자적이다.
+\end{lemma}
+
+\begin{proof}
+사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution}의 판정법을
+사용하겠다. $\mathcal{C}$의 대상 $U=(Q,\beta)$가 주어졌을 때 다음
+단체집합이 한원소 집합과 호모토피 동치임을 보이면 된다.
+$$
+S_\bullet = \Mor_\mathcal{C}((P_\bullet, \epsilon), (Q, \beta))
+$$
+$Q=A[E]$로 쓰자. 여기서 $E$는 어떤 집합이다($\mathcal{C}$를 택한
+방식 때문에 이렇게 쓸 수 있다). 그러면
+$$
+S_\bullet = \Mor_{\textit{Sets}}((E, \beta|_E), (P_\bullet, \epsilon))
+$$
+$*$를 한원소 집합 위의 상수 단체집합이라 하자. $b\in B$에 대하여 다음
+데카르트 도표로 정의되는 단체집합을 $F_{b,\bullet}$이라 하자.
+$$
+\xymatrix{
+F_{b, \bullet} \ar[r] \ar[d] & P_\bullet \ar[d]_\epsilon \\
+{*} \ar[r]^b & B
+}
+$$
+이 표기에서 $S_\bullet=\prod_{e\in E}F_{\beta(e),\bullet}$이다.
+$\epsilon$이 자명한 Kan 올뭉치라고 가정했으므로
+$F_{b,\bullet}\to *$도 자명한 Kan 올뭉치이다(단체적 방법, 보조정리
+\ref{simplicial-lemma-trivial-kan-base-change}). 따라서
+$S_\bullet\to *$도 자명한 Kan 올뭉치이고(단체적 방법, 보조정리
+\ref{simplicial-lemma-product-trivial-kan}), 그러므로 $S_\bullet$은 $*$와
+호모토피 동치이다(단체적 방법, 보조정리
+\ref{simplicial-lemma-trivial-kan-homotopy}).
+\end{proof}
+
+\noindent
+특히 $A$ 위의 $B$의 표준 분해를 사용하여 유도 하방 느낌표 함자를
+계산할 수 있다.
+
+\begin{lemma}
+\label{lemma-pi-shriek-standard}
+환 준동형 $A\to B$가 주어졌다고 하자. $\epsilon:P_\bullet\to B$를
+$A$ 위의 $B$의 표준 분해라 하고, $\pi$를 (\ref{equation-pi})와 같이
+두자. 그러면
+$$
+L\pi_!(\mathcal{F}) = \mathcal{F}(P_\bullet, \epsilon)
+$$
+가 각각 $D(\textit{Ab})$와 $D(B)$에서 성립하고, 각각
+$\textit{Ab}(\mathcal{C})$와 $\textit{Mod}(\underline{B})$의
+$\mathcal{F}$에 대하여 함자적이다.
+\end{lemma}
+
+\begin{proof}[첫 번째 증명]
+보조정리 \ref{lemma-identify-pi-shriek}를 적용하겠다. 각 항 $P_n$이
+다항식 대수이므로 그 보조정리의 첫 번째 가정은 만족된다. 두 번째 가정은
+다음과 같이 증명한다. 단체적 방법, 보조정리
+\ref{simplicial-lemma-standard-simplicial-homotopy}에 의해 $\epsilon$은
+바탕 단체집합의 호모토피 동치이다. 단체적 방법, 보조정리
+\ref{simplicial-lemma-homotopy-equivalence}에 의해 이는 $\epsilon$이 딸린
+아벨 군의 복합체들 사이에 준동형사상을 유도함을 뜻한다. 단체적 방법,
+보조정리 \ref{simplicial-lemma-qis-simplicial-abelian-groups}에 의해 이는
+$\epsilon$이 바탕 단체집합의 자명한 Kan 올뭉치임을 뜻한다.
+\end{proof}
+
+\begin{proof}[두 번째 증명]
+사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution}의 판정법을
+사용하겠다. $U=(Q,\beta)$를 $\mathcal{C}$의 대상이라 하자. 다음
+단체집합이 한원소 집합과 호모토피 동치임을 보이면 된다.
+$$
+S_\bullet = \Mor_\mathcal{C}((P_\bullet, \epsilon), (Q, \beta))
+$$
+$Q=A[E]$로 쓰자. 여기서 $E$는 어떤 집합이다($\mathcal{C}$를 택한 방식
+때문에 이렇게 쓸 수 있다). 주 \ref{remark-variant-cotangent-complex}의
+표기를 사용하면
+$$
+S_\bullet = \Mor_\mathcal{S}((E \to B), i(P_\bullet \to B))
+$$
+단체적 방법, 보조정리
+\ref{simplicial-lemma-standard-simplicial-homotopy}에 의해 사상
+$i(P_\bullet\to B)\to i(B\to B)$는 $\mathcal{S}$에서 호모토피 동치이다.
+따라서 $S_\bullet$은 다음과 호모토피 동치이다.
+$$
+\Mor_\mathcal{S}((E \to B), (B \to B)) = \{*\}
+$$
+이는 원하는 결론이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compute-cotangent-complex}
+환 준동형 $A\to B$가 주어졌다고 하고 $\pi$와 $i$를
+(\ref{equation-pi})와 같이 두자. $D(B)$에서 다음 표준 동형사상이 있다.
+$$
+L_{B/A} = L\pi_!(Li^*\Omega_{\mathcal{O}/A}) =
+L\pi_!(i^*\Omega_{\mathcal{O}/A}) =
+L\pi_!(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B})
+$$
+\end{lemma}
+
+\begin{proof}
+범주 $\mathcal{C}$의 대상 $\alpha:P\to B$에 대하여 가군
+$\Omega_{P/A}$는 자유 $P$-가군이다. 따라서
+$\Omega_{\mathcal{O}/A}$는 평탄 $\mathcal{O}$-가군이다. 그러므로
+$Li^*\Omega_{\mathcal{O}/A}=i^*\Omega_{\mathcal{O}/A}$는
+$\alpha:P\to A$에 $B$-가군
+$\Omega_{P/A}\otimes_{P,\alpha}B$를 대응시키는
+$\underline{B}$-가군층이다. 보조정리 \ref{lemma-pi-shriek-standard}에
+의해 우변은 이 층을 표준 분해에서 취한 값으로 계산된다. 이것이 바로
+좌변의 정의이다(정의 \ref{definition-cotangent-complex-ring-map}).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pi-lower-shriek-constant-sheaf}
+환 준동형 $A\to B$가 주어지고 $\pi$를 (\ref{equation-pi})와 같이 두면
+$L\pi_!(\pi^{-1}M)=M$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-identify-pi-shriek}에 의해
+$L\pi_!(\pi^{-1}M)$은 $(\pi^{-1}M)(P_\bullet,\epsilon)$으로 계산되는데,
+이는 $M$ 위의 상수 단체 대상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-identify-H0}
+환 준동형 $A\to B$가 주어지면 $H^0(L_{B/A})=\Omega_{B/A}$이다.
+\end{lemma}
+
+\begin{proof}
+직접 계산하여 증명하겠다. 보조정리
+\ref{lemma-compute-cotangent-complex}의 동일시를 사용한다.
+$\Omega_{\mathcal{O}/A}\otimes\underline{B}$에서 값이
+$\Omega_{B/A}$인 상수층으로 가는 명백한 사상이 있다. 따라서 이 사상은
+다음 사상을 유도한다.
+$$
+H^0(L_{B/A}) = H^0(L\pi_!(\Omega_{\mathcal{O}/A} \otimes \underline{B}))
+= \pi_!(\Omega_{\mathcal{O}/A} \otimes \underline{B}) \to \Omega_{B/A}
+$$
+$P\to B$가 전사인 $\mathcal{C}_{B/A}$의 대상 $P\to B$를 택하면 이
+사상이 전사임을 알 수 있다(가환대수학, 보조정리
+\ref{algebra-lemma-differential-surjective}). 단사임을 보이기 위하여
+$P\to B$가 $\mathcal{C}_{B/A}$의 대상이고
+$\xi\in\Omega_{P/A}\otimes_PB$가 $\Omega_{B/A}$에서 영으로 가는
+원소라고 하자. 먼저 $P'\to B$가 전사이고 $P'$가 $A$ 위의 다항식
+대수가 되도록 분해 $P\to P'\to B$를 택한다. $P$를 $P'$로 바꾸어도
+된다. $B=P/I$이면, 준동형
+$\Omega_{P/A}\otimes_PB\to\Omega_{B/A}$의 핵은 $I/I^2$의 상이다
+(가환대수학, 보조정리 \ref{algebra-lemma-differential-seq}).
+$\xi$가 $f\in I$의 상이라고 하자. 이제 두 사상
+$a,b:P'=P[x]\to P$를 생각하자. 첫 번째는 $x$를 $0$으로 보내고 두
+번째는 $x$를 $f$로 보낸다(두 경우 모두 $P[x]\to B$는 $x$를 영으로
+보낸다). 그러면 $\xi$와 $0$은 $\Omega_{P'/A}\otimes_{P'}B$의 원소
+$\text{d}x\otimes1$의 두 상이다. 따라서 원하는 대로 $\xi$와 $0$은
+쌍대극한(사이트 코호몰로지, 예
+\ref{sites-cohomology-example-category-to-point} 참조)
+$\pi_!(\Omega_{\mathcal{O}/A}\otimes\underline{B})$에서 같은 상을 갖는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pi-lower-shriek-polynomial-algebra}
+$B$가 환 $A$ 위의 다항식 대수이면, $\pi$를 (\ref{equation-pi})와 같이
+둘 때 $\pi_!$는 완전하고 $\pi_!\mathcal{F}=\mathcal{F}(B\to B)$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-identify-pi-shriek}에 의해 $B$ 위의 상수 단체 대수를
+사용하여 $L\pi_!$를 계산할 수 있으므로 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cotangent-complex-polynomial-algebra}
+$B$가 환 $A$ 위의 다항식 대수이면 $L_{B/A}$는
+$\Omega_{B/A}[0]$과 준동형사상이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-compute-cotangent-complex}과
+\ref{lemma-pi-lower-shriek-polynomial-algebra}에서 바로 따른다.
+\end{proof}
+
+
+
+
+
+\section{분해의 구성}
+\label{section-polynomial}
+
+\noindent
+뇌터 유한형인 경우에는 유한형 환 준동형에 대한 ``작은'' 단체 분해를
+구성할 수 있다.
+
+\begin{lemma}
+\label{lemma-polynomial}
+$A$를 뇌터 환이라 하고 $A\to B$를 유한형 환 준동형이라 하자.
+$\mathcal{A}$를 $A$-대수 준동형 $C\to B$들의 범주라 하자. $n\geq0$이고
+$P_\bullet$이 다음 조건을 만족하는 $\mathcal{A}$의 단체 대상이라 하자.
+\begin{enumerate}
+\item $P_\bullet\to B$는 단체집합의 자명한 Kan 올뭉치이다.
+\item $k\leq n$이면 $P_k$는 $A$ 위의 유한형이다.
+\item $\mathcal{A}$의 단체 대상으로서
+$P_\bullet=\text{cosk}_n\text{sk}_nP_\bullet$이다.
+\end{enumerate}
+그러면 $P_{n+1}$은 유한형 $A$-대수이다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 증명은 직접적이지만 다소 번잡하다. 착상을 분명히 하기
+위하여 일반적인 증명에 앞서 작은 $n$에서 무슨 일이 일어나는지 설명한다.
+예를 들어 $n=0$이면 (3)은 $P_1=P_0\times_BP_0$임을 뜻한다. 환 준동형
+$P_0\to B$가 전사이므로, 대수학 심화, 보조정리
+\ref{more-algebra-lemma-fibre-product-finite-type}에 의해 이는 $A$ 위의
+유한형이다.
+
+\medskip\noindent
+$n=1$이면 (3)은 다음을 뜻한다.
+$$
+P_2 = \{(f_0, f_1, f_2) \in P_1^3 \mid
+d_0f_0 = d_0f_1,\ d_1f_0 = d_0f_2,\ d_1f_1 = d_1f_2 \}
+$$
+여기서 등식들은 $P_0$에서 성립한다. 다음 삼중항은 $B$ 위의 섬유곱
+$P_0\times_BP_0\times_BP_0$의 원소임을 관찰하자.
+$$
+(d_0f_0, d_1f_0, d_1f_1) = (d_0f_1, d_0f_2, d_1f_2)
+$$
+실제로 사상 $d_i:P_1\to P_0$은 $B$ 위의 사상이다. 따라서 다음 사상을
+얻는다.
+$$
+\psi : P_2 \longrightarrow P_0 \times_B P_0 \times_B P_0
+$$
+원소 $(g_0,g_1,g_2)\in P_0\times_BP_0\times_BP_0$ 위의 $\psi$의 섬유는
+다음을 만족하는 $1$-단체들의 삼중항 $(f_0,f_1,f_2)$의 집합이다.
+$(d_0,d_1)(f_0)=(g_0,g_1)$,
+$(d_0,d_1)(f_1)=(g_0,g_2)$, 그리고
+$(d_0,d_1)(f_2)=(g_1,g_2)$. $P_\bullet\to B$가 자명한 Kan
+올뭉치이므로 사상 $(d_0,d_1):P_1\to P_0\times_BP_0$은 전사이다.
+따라서 $P_2$는 다음 데카르트 도표에 들어간다.
+$$
+\xymatrix{
+P_2 \ar[d] \ar[r] & P_1^3 \ar[d] \\
+P_0 \times_B P_0 \times_B P_0 \ar[r] & (P_0 \times_B P_0)^3
+}
+$$
+대수학 심화, 보조정리 \ref{more-algebra-lemma-formal-consequence}에서 결론이
+따른다. 일반적인 경우도 비슷하지만 표기가 조금 더 필요하다.
+
+\medskip\noindent
+$n>1$인 경우를 보자. 단체적 방법, 보조정리
+\ref{simplicial-lemma-cosk-above-object}에 의해 조건
+$P_\bullet=\text{cosk}_n\text{sk}_nP_\bullet$은 같은 등식이 단체
+$A$-대수의 범주에서, 따라서 집합의 범주에서 성립함을 뜻한다($A$-대수에서
+집합으로 가는 망각 함자는 극한과 가환한다). 그러므로 단체적 방법,
+보조정리 \ref{simplicial-lemma-simplex-map}과 등식
+(\ref{simplicial-equation-cosk})에 의해
+$$
+P_{n + 1} =
+\Mor(\Delta[n + 1], P_\bullet) =
+\Mor(\text{sk}_n \Delta[n + 1], \text{sk}_n P_\bullet)
+$$
+이다. $1\leq k<m\leq n+1$에 관하여 귀납하여 다음 환이 $A$ 위의
+유한형임을 보이겠다.
+$$
+Q_{k, m} = \Mor(\text{sk}_k \Delta[m], \text{sk}_k P_\bullet)
+$$
+$k=1$, $1<m\leq n+1$인 경우는 위에서 $n=1$인 경우에 한 논의와 완전히
+같다. 즉 다음 데카르트 도표가 있다.
+$$
+\xymatrix{
+Q_{1, m} \ar[d] \ar[r] & P_1^N \ar[d] \\
+P_0 \times_B \ldots \times_B P_0 \ar[r] & (P_0 \times_B P_0)^N
+}
+$$
+여기서 $N={m+1\choose2}$이다. 앞에서와 같이 결론을 얻는다.
+
+\medskip\noindent
+$1\leq k_0\leq n$이라 하고, 모든 $1\leq k\leq k_0$와
+$k<m\leq n+1$에 대하여 $Q_{k,m}$이 $A$ 위의 유한형이라고 가정하자.
+$k_0+1<m\leq n+1$에 대하여 다음 데카르트 정사각형이 있다고 주장한다.
+$$
+\xymatrix{
+Q_{k_0 + 1, m} \ar[d] \ar[r] & P_{k_0 + 1}^N \ar[d] \\
+Q_{k_0, m} \ar[r] & Q_{k_0, k_0 + 1}^N
+}
+$$
+여기서 $N$은 $\Delta[m]$의 비퇴화 $(k_0+1)$-단체의 개수이다. 이를
+보려면 $Q_{k_0+1,m}$의 원소를 $\Delta[m]$의 $(k_0+1)$-골격에서
+$P_\bullet$로 가는 함수 $f$로 생각하자. $f$를 $k_0$-골격에 제한하면
+도표의 왼쪽 세로 사상을 얻고, 각 비퇴화 $(k_0+1)$-단체에 제한하면 위쪽
+가로 사상을 얻는다. 또한 이러한 $f$를 주는 것은 $k_0$-골격과 각 비퇴화
+$(k_0+1)$-면 위의 제한들을 주되 이들이 겹치는 부분에서 일치하게 하는
+것과 같다. 이것이 바로 도표의 내용이다. 더 나아가
+$P_\bullet\to B$가 자명한 Kan 올뭉치이므로 다음 사상은 전사이다.
+$$
+P_{k_0} \to Q_{k_0, k_0 + 1} = \Mor(\partial \Delta[k_0 + 1], P_\bullet)
+$$
+실제로 $k_0\geq1$이면 모든 사상
+$\partial\Delta[k_0+1]\to B$를 $\Delta[k_0+1]\to B$로 연장할 수 있다
+(상수 단체집합에 관한 짧은 논증은 생략한다). 귀납가정에 의해 환
+$Q_{k_0,m}$과 $Q_{k_0,k_0+1}$은 유한형 $A$-대수이므로, 대수학 심화,
+보조정리 \ref{more-algebra-lemma-formal-consequence}를 다시 적용하면
+$Q_{k_0+1,m}$도 그러하다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-polynomial}
+$A$를 뇌터 환이라 하고 $A\to B$를 유한형 환 준동형이라 하자. 각
+$P_n$이 $A$ 위의 유한형 다항식 대수이고 $\epsilon$이 단체집합의 자명한
+Kan 올뭉치가 되도록, 증강 $\epsilon:P_\bullet\to B$를 갖는 단체
+$A$-대수 $P_\bullet$이 존재한다.
+\end{proposition}
+
+\begin{proof}
+$\mathcal{A}$를 $A$-대수 준동형 $C\to B$들의 범주라 하자. 이 증명에서
+단체 대상과 골격 및 쌍대골격 함자는 이 범주에서 취한다.
+
+\medskip\noindent
+$A$ 위의 유한형 다항식 대수 $P_0$과 전사 준동형 $P_0\to B$를 택한다.
+첫 번째 근사로 $P_\bullet=\text{cosk}_0(P_0)$를 취한다. 다시 말해
+$P_\bullet$은 각 항이 $P_n=P_0\times_A\ldots\times_AP_0$인 단체
+$A$-대수이다. (증명의 마지막 문단에서는 이 단체 대상을
+$P^0_\bullet$로 쓸 것이다.) 단체적 방법, 보조정리
+\ref{simplicial-lemma-cosk-minus-one-equivalence}에 의해 사상
+$P_\bullet\to B$는 단체집합의 자명한 Kan 올뭉치이다. 또한
+$P_\bullet=\text{cosk}_0\text{sk}_0P_\bullet$임을 관찰하자.
+
+\medskip\noindent
+어떤 $n\geq0$에 대하여 다음을 만족하는 $P_\bullet$을 구성했다고 하자
+(증명의 마지막 문단에서는 이를 $P^n_\bullet$로 쓸 것이다).
+\begin{enumerate}
+\item[(a)] $P_\bullet\to B$는 단체집합의 자명한 Kan 올뭉치이다.
+\item[(b)] $0\leq k\leq n$이면 $P_k$는 유한 생성 다항식 대수이다.
+\item[(c)] $P_\bullet = \text{cosk}_n \text{sk}_n P_\bullet$
+\end{enumerate}
+보조정리 \ref{lemma-polynomial}에 의해 $A$ 위의 유한 생성 다항식 대수
+$Q$와 전사 준동형 $Q\to P_{n+1}$을 찾을 수 있다. $P_n$이 다항식
+대수이므로 $A$-대수 준동형 $s_i:P_n\to P_{n+1}$은
+$s'_i:P_n\to Q$로 올려진다. $d'_j:Q\to P_n$을
+$Q\to P_{n+1}$과 $d_j:P_{n+1}\to P_n$의 합성으로 둔다.
+$k\leq n$이면 $P'_k=P_k$, $P'_{n+1}=Q$로 두고, 차수
+$k\leq n-1$에서는 사상 $d'_i=d_i$와 $s'_i=s_i$를, 차수 $n$에서는
+사상 $d'_j$와 $s'_i$를 사용하면 $\mathcal{A}$의 절단 단체 대상
+$P'_\bullet$을 얻는다. $\text{cosk}_{n+1}$을 사용하여 이를
+$\mathcal{A}$의 완전한 단체 대상 $P'_\bullet$로 연장한다. 쌍대골격
+함자의 함자성에 의해, 주어진 $(n+1)$-절단 단체 대상의 사상을 연장하는
+단체 대상의 사상 $P'_\bullet\to P_\bullet$이 있다. (증명의 마지막
+문단에서는 이 사상을 $P^{n+1}_\bullet\to P^n_\bullet$로 쓸 것이다.)
+
+\medskip\noindent
+$n$을 $n+1$로 바꾸면 $P'_\bullet$이 조건 (b)와 (c)를 만족함에
+유의하자. 사상 $P'_\bullet\to P_\bullet$이 단체적 방법, 보조정리
+\ref{simplicial-lemma-section}에서 $n$ 대신 $n+1$로 둔 가정
+(1), (2), (3), (4)를 만족한다고 주장한다. 조건 (1)과 (2)는 구성에 의해
+성립한다. 단체적 방법, 보조정리
+\ref{simplicial-lemma-cosk-above-object}에 의해
+$P_\bullet = \text{cosk}_{n + 1}\text{sk}_{n + 1}P_\bullet$
+및
+$P'_\bullet = \text{cosk}_{n + 1}\text{sk}_{n + 1}P'_\bullet$
+가 $\mathcal{A}$에서뿐만 아니라 $A$-대수의 범주에서, 따라서 집합의
+범주에서도 성립한다($A$-대수에서 집합으로 가는 망각 함자는 모든 극한과
+가환한다). 이것으로 (3)과 (4)가 증명된다. 따라서 그 보조정리를 적용할 수
+있고 $P'_\bullet\to P_\bullet$은 자명한 Kan 올뭉치이다. 단체적 방법,
+보조정리 \ref{simplicial-lemma-trivial-kan-composition}에 의해
+$P'_\bullet\to B$도 자명한 Kan 올뭉치이므로 (a)도 성립한다.
+
+\medskip\noindent
+증명을 끝내기 위하여 위에서 구성한 단체 대수의 열
+$$
+\ldots \to P^2_\bullet \to P^1_\bullet \to P^0_\bullet
+$$
+의 역극한 $P_\bullet=\lim P^n_\bullet$을 취한다. 단체적 방법, 보조정리
+\ref{simplicial-lemma-limit-trivial-kan}에 의해 사상 $P_\bullet\to B$는
+자명한 Kan 올뭉치이다. 한편 위의 구성은 각 차수에서 고정된 유한 생성
+다항식 대수로 안정된다. 이것이 원하는 결론이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pi-shriek-finite}
+$A$를 뇌터 환이라 하고 $A\to B$를 유한형 환 준동형이라 하자. $\pi$와
+$\underline{B}$를 (\ref{equation-pi})와 같이 두자. 모든
+$\alpha:P=A[x_1,\ldots,x_n]\to B$에 대하여
+$\mathcal{F}(P,\alpha)$가 유한 $B$-가군이 되는
+$\underline{B}$-가군 $\mathcal{F}$가 주어지면,
+$L\pi_!(\mathcal{F})$의 코호몰로지 가군들은 유한 $B$-가군이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-identify-pi-shriek}와 명제
+\ref{proposition-polynomial}에 의해, 유한형 다항식 대수에서의
+$\mathcal{F}$의 값들로 구성한 복합체로 $L\pi_!(\mathcal{F})$를 계산할 수
+있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cotangent-finite}
+$A$를 뇌터 환이라 하고 $A\to B$를 유한형 환 준동형이라 하자. 모든
+$n\in\mathbf{Z}$에 대하여 $H^n(L_{B/A})$는 유한 $B$-가군이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-compute-cotangent-complex}과
+\ref{lemma-pi-shriek-finite}를 적용한다.
+\end{proof}
+
+\begin{remark}[분해]
+\label{remark-resolution}
+임의의 환 준동형 $A\to B$를 잡자. 증강된 단체 $A$-대수
+$\epsilon:P_\bullet\to B$에서 각 $P_n$이 다항식 대수이고 $\epsilon$이
+단체집합의 자명한 Kan 올뭉치이면 이를 {\it $A$ 위의 $B$의 분해}라
+부르자. $P_\bullet\to B$가 단체 $A$-대수의 증강이고 각 $P_n$이 $B$로
+전사하는 다항식 대수이면 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $\epsilon:P_\bullet\to B$는 $A$ 위의 $B$의 분해이다.
+\item $\epsilon:P_\bullet\to B$는 딸린 복합체들 사이의 준동형사상이다.
+\item $\epsilon:P_\bullet\to B$는 단체집합의 호모토피 동치를 유도한다.
+\end{enumerate}
+이를 보려면 단체적 방법의 보조정리
+\ref{simplicial-lemma-trivial-kan-homotopy},
+\ref{simplicial-lemma-homotopy-equivalence}, 그리고
+\ref{simplicial-lemma-qis-simplicial-abelian-groups}를 사용한다. $A$ 위의
+$B$의 분해 $P_\bullet$은 사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution}
+에서와 같은 $\mathcal{C}_{B/A}$의 쌍대단체 대상 $U_\bullet$을 주며,
+따라서
+$$
+L\pi_!\mathcal{F} = \mathcal{F}(P_\bullet)
+$$
+$\mathcal{F}$에 대하여 함자적으로 성립한다. 보조정리
+\ref{lemma-identify-pi-shriek}를 보라. 명제 \ref{proposition-polynomial}
+증명의 형식적인 부분은 분해가 존재함을 보인다. 또한 보조정리
+\ref{lemma-pi-shriek-standard}의 첫 번째 증명에서 $A$ 위의 $B$의 표준
+분해가 분해임을 보았다(따라서 이 용어법은 충돌을 일으키지 않는다).
+그러나 명제 \ref{proposition-polynomial}의 증명에 나오는 논증은 단체적
+방법, 절 \ref{simplicial-section-standard}의 단체 계산을 사용하지 않고도
+분해의 존재를 보인다. 더 나아가 분해를 {\it 어떻게} 택하든 보조정리
+\ref{lemma-compute-cotangent-complex}에 의해 $D(B)$에서 표준 동형사상
+$$
+L_{B/A} = \Omega_{P_\bullet/A} \otimes_{P_\bullet, \epsilon} B
+$$
+을 얻는다. 임의의 분해를 택할 수 있다는 자유는 상당히 유용할 수 있다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-O-homology-B-homology}
+환 준동형 $A\to B$가 주어졌다고 하고 $\pi$, $\mathcal{O}$,
+$\underline{B}$를 (\ref{equation-pi})와 같이 두자. 임의의
+$\mathcal{O}$-가군 $\mathcal{F}$에 대하여 $D(\textit{Ab})$에서
+$$
+L\pi_!(\mathcal{F}) = L\pi_!(Li^*\mathcal{F}) =
+L\pi_!(\mathcal{F} \otimes_\mathcal{O}^\mathbf{L} \underline{B})
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}_{B/A}$ 위의 $\mathcal{O}\to\underline{B}$가 사이트
+코호몰로지, 보조정리 \ref{sites-cohomology-lemma-O-homology-qis}의 가정들을
+만족함을 확인하면 충분하다. 더 언급하지 않고 주
+\ref{remark-resolution}의 결과들을 사용하겠다. $A$ 위의 $B$의 분해
+$P_\bullet$을 택하여 $\mathcal{C}_{B/A}$의 적절한 쌍대단체 대상
+$U_\bullet$을 얻는다. $P_\bullet\to B$는 딸린 아벨 군의 복합체들 사이의
+준동형사상을 유도하므로 $L\pi_!\mathcal{O}=B$이다. 한편
+$L\pi_!\underline{B}$는 $\underline{B}(U_\bullet)=B$로 계산된다. 이로써
+사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-O-homology-qis}의 두 번째 가정이 확인되어
+증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-apply-O-B-comparison}
+환 준동형 $A\to B$가 주어졌다고 하고 $\pi$, $\mathcal{O}$,
+$\underline{B}$를 (\ref{equation-pi})와 같이 두자. $D(\textit{Ab})$에서
+$$
+L\pi_!(\mathcal{O}) = L\pi_!(\underline{B}) = B
+\quad\text{그리고}\quad
+L_{B/A} = L\pi_!(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}) =
+L\pi_!(\Omega_{\mathcal{O}/A})
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-O-homology-B-homology}를 적용하면 된다(오른쪽의 첫
+등식은 보조정리 \ref{lemma-compute-cotangent-complex}이다).
+\end{proof}
+
+\noindent
+다음은 쉽게 증명할 수 있는 기본 삼각형의 특수한 경우이다.
+
+\begin{lemma}
+\label{lemma-special-case-triangle}
+환 준동형 $A\to B\to C$가 주어졌다고 하자. $B$가 $A$ 위의 다항식
+대수이면 $D(C)$에 완전 삼각형
+$L_{B/A}\otimes_B^\mathbf{L}C\to L_{C/A}\to L_{C/B}\to
+L_{B/A}\otimes_B^\mathbf{L}C[1]$이 있다.
+\end{lemma}
+
+\begin{proof}
+더 언급하지 않고 주 \ref{remark-resolution}의 관찰들을 사용하겠다.
+$B$ 위의 $C$의 분해 $\epsilon:P_\bullet\to C$를 택한다(예를 들어 표준
+분해). $B$가 $A$ 위의 다항식 대수이므로 $P_\bullet$은 $A$ 위의
+$C$의 분해이기도 하다. 따라서 $L_{C/A}$는
+$\Omega_{P_\bullet/A}\otimes_{P_\bullet,\epsilon}C$로 계산되고
+$L_{C/B}$는 $\Omega_{P_\bullet/B}\otimes_{P_\bullet,\epsilon}C$로
+계산된다. 각 $n$에 대하여 짧은 완전열
+$0\to\Omega_{B/A}\otimes_BP_n\to\Omega_{P_n/A}\to
+\Omega_{P_n/B}\to0$이 있고(가환대수학, 보조정리
+\ref{algebra-lemma-ses-formally-smooth}),
+$L_{B/A}=\Omega_{B/A}[0]$이므로(보조정리
+\ref{lemma-cotangent-complex-polynomial-algebra}) 결론을 얻는다.
+\end{proof}
+
+\begin{example}
+\label{example-resolution-length-two}
+환 준동형 $A\to B$가 주어졌다고 하자. 이 예에서는 길이가 $2$인 $A$
+위의 $B$의 ``명시적'' 분해 $P_\bullet$을 구성한다. 이를 위하여 명제
+\ref{proposition-polynomial} 증명의 절차를 따른다. 주
+\ref{remark-resolution}의 논의도 보라.
+
+\medskip\noindent
+$u_i$가 변수집합인 전사 준동형 $P_0=A[u_i]\to B$를 택한다. 아이디얼
+$\Ker(P_0\to B)$의 생성원 $f_t\in P_0$, $t\in T$를 택한다.
+$P_1=A[u_i,x_t]$로 두고, 면 사상 $d_0$과 $d_1$을
+$d_j(u_i)=u_i$, $d_0(x_t)=0$, $d_1(x_t)=f_t$를 만족하는 유일한
+$A$-대수 준동형으로 둔다. 사상 $s_0:P_0\to P_1$은
+$s_0(u_i)=u_i$를 만족하는 유일한 $A$-대수 준동형이다. 다음 열이
+완전함은 명백하다.
+$$
+P_1 \xrightarrow{d_0 - d_1} P_0 \to B \to 0
+$$
+특히 사상 $(d_0,d_1):P_1\to P_0\times_BP_0$은 전사이다. 따라서
+$P_\bullet$이 $P_0$, $P_1$, $d_0$, $d_1$, $s_0$로 주어지는 $1$-절단
+단체 $A$-대수를 나타내면, 증강 $\text{cosk}_1(P_\bullet)\to B$는
+자명한 Kan 올뭉치이다. 명제 \ref{proposition-polynomial} 증명의 절차에서
+다음 단계는 다항식 대수 $P_2$와 전사 준동형
+$$
+P_2 \longrightarrow \text{cosk}_1(P_\bullet)_2
+$$
+를 택하는 것이다. 다음을 상기하자.
+$$
+\text{cosk}_1(P_\bullet)_2 =
+\{(g_0, g_1, g_2) \in P_1^3 \mid d_0(g_0) = d_0(g_1),
+d_1(g_0) = d_0(g_2), d_1(g_1) = d_1(g_2)\}
+$$
+$g_i\in P_1$을 $x_t$에 관한 다항식으로 생각하면 조건들은 다음과 같다.
+$$
+g_0(0) = g_1(0),\quad
+g_0(f_t) = g_2(0),\quad
+g_1(f_t) = g_2(f_t)
+$$
+따라서 $\text{cosk}_1(P_\bullet)_2$는 원소
+$y_t=(x_t,x_t,f_t)$와 $z_t=(0,x_t,x_t)$를 포함한다.
+$\text{cosk}_1(P_\bullet)_2$의 모든 원소 $G$는
+$G=H+(0,0,g)$ 꼴이다. 여기서 $H$는
+$A[u_i,y_t,z_t]\to\text{cosk}_1(P_\bullet)_2$의 상에 속하고,
+$g\in P_1$은 상수항이 영이며 $P_0$에서 $g(f_t)=0$을 만족하는
+다항식이다. 다음 두 종류의 원소가 원하는 꼴의 $P_1$의 원소임을 관찰하자.
+\begin{enumerate}
+\item $g=x_tx_{t'}-f_tx_{t'}$, 그리고
+\item $P_0$에서 $\sum r_tf_t=0$일 때 $r_t\in P_0$인
+$g=\sum r_tx_t$.
+\end{enumerate}
+다음과 같이 두자.
+$$
+Rel = \Ker(\bigoplus\nolimits_{t \in T} P_0 \longrightarrow P_0),\quad
+(r_t) \longmapsto \sum r_tf_t
+$$
+$r=(r_t)\in Rel$에 대하여
+$P_2=A[u_i,y_t,z_t,v_r,w_{t,t'}]$로 두고, 다음 사상을 준다.
+$$
+P_2 \longrightarrow \text{cosk}_1(P_\bullet)_2
+$$
+이는 $y_t\mapsto(x_t,x_t,f_t)$,
+$z_t\mapsto(0,x_t,x_t)$,
+$v_r\mapsto(0,0,\sum r_tx_t)$, 그리고
+$w_{t,t'}\mapsto(0,0,x_tx_{t'}-f_tx_{t'})$로 주어진다. 계산(생략한다)하면
+이 사상이 전사임을 알 수 있다. 위에 표시한 사상을 택하면 사상
+$d_0,d_1,d_2:P_2\to P_1$이 정해진다. 끝으로 명제
+\ref{proposition-polynomial} 증명의 절차에 따라 두 사상
+$P_1\to\text{cosk}_1(P_\bullet)_2$의 올림인 사상
+$s_0,s_1:P_1\to P_2$를 택한다. $s_0(x_t)=y_t$와
+$s_1(x_t)=z_t$로 정해지는 유일한 $A$-대수 준동형들을 $s_i$로 취할 수
+있음은 명백하다.
+\end{example}
+
+
+
+
+
+
+
+
+\section{함자성}
+\label{section-functoriality}
+
+\noindent
+이 절에서는 다음 환 준동형의 가환 정사각형을 생각한다.
+\begin{equation}
+\label{equation-commutative-square}
+\vcenter{
+\xymatrix{
+B \ar[r] & B' \\
+A \ar[u] \ar[r] & A' \ar[u]
+}
+}
+\end{equation}
+이 도표에 딸린 다음 표준적인 복합체의 $B$-선형 사상이 있다고 주장한다.
+$$
+L_{B/A} \longrightarrow L_{B'/A'}
+$$
+실제로 $P_\bullet\to B$가 $A$ 위의 $B$의 표준 분해이고
+$P'_\bullet\to B'$가 $A'$ 위의 $B'$의 표준 분해이면, 증강
+$P_\bullet\to B$ 및 $P'_\bullet\to B'$와 양립하는 표준적인 단체
+$A$-대수의 사상 $P_\bullet\to P'_\bullet$이 있다. 이는 단체적 방법,
+절 \ref{simplicial-section-standard}의 표준 분해 구성으로부터 볼 수 있다.
+그러나 지금의 특수한 경우에는 사상
+$$
+P_0 = A[B] \longrightarrow A'[B'] = P'_0,\quad
+P_1 = A[A[B]] \longrightarrow A'[A'[B']] = P'_1,
+$$
+등이 주어진 사상 $A\to A'$와 $B\to B'$에 의해 정해진다고 말하는
+것으로 충분할 것이다. 원하는 사상 $L_{B/A}\to L_{B'/A'}$는 이제 딸린
+사상 $\Omega_{P_n/A}\to\Omega_{P'_n/A'}$에서 얻어진다.
+
+\medskip\noindent
+함자성 사상을 다음과 같이 달리 기술할 수도 있다. $\mathcal{C}=\mathcal{C}_{B/A}$와
+$\mathcal{C}'=\mathcal{C}_{B'/A}'$를 절
+\ref{section-compute-L-pi-shriek}에서 생각한 범주들이라 하자. 다음 함자가
+있다.
+$$
+u : \mathcal{C} \longrightarrow \mathcal{C}',\quad
+(P, \alpha) \longmapsto (P \otimes_A A', c \circ (\alpha \otimes 1))
+$$
+여기서 $c:B\otimes_AA'\to B'$는 명백한 사상이다. 사이트 코호몰로지,
+예 \ref{sites-cohomology-example-morphism-categories}에서 논의한 대로
+토포스의 사상 $g:\Sh(\mathcal{C})\to\Sh(\mathcal{C}')$와 다음 환 달린
+토포스의 사상들의 가환 도표를 얻는다.
+\begin{equation}
+\label{equation-double-square}
+\vcenter{
+\xymatrix{
+(\Sh(\mathcal{C}'), \underline{B}) \ar[d]_{\pi'} &
+(\Sh(\mathcal{C}'), \underline{B'}) \ar[d]_{\pi'} \ar[l]^h &
+(\Sh(\mathcal{C}), \underline{B'}) \ar[d]_\pi \ar[l]^g \\
+(\Sh(*), B) &
+(\Sh(*), B') \ar[l]_f &
+(\Sh(*), B') \ar[l]
+}
+}
+\end{equation}
+여기서 $h$는 바탕 토포스에서 항등사상이고, 환층에서는 환 준동형
+$B\to B'$로 주어진다. 사이트 코호몰로지, 주
+\ref{sites-cohomology-remark-morphism-fibred-categories}에 의해
+$\mathcal{C}$ 위의 $\mathcal{F}$, $\mathcal{C}'$ 위의 $\mathcal{F}'$,
+그리고 변환 $t:\mathcal{F}\to g^{-1}\mathcal{F}'$가 주어지면 표준 사상
+$L\pi_!(\mathcal{F})\to L\pi'_!(\mathcal{F}')$을 얻는다. 이를 층
+$$
+\mathcal{F} : (P, \alpha) \mapsto \Omega_{P/A} \otimes_P B,\quad
+\mathcal{F}' : (P', \alpha') \mapsto \Omega_{P'/A'} \otimes_{P'} B',
+$$
+과 다음 표준 사상들로 주어지는 변환 $t$에 적용하자.
+$$
+\Omega_{P/A} \otimes_P B \longrightarrow
+\Omega_{P \otimes_A A'/A'} \otimes_{P \otimes_A A'} B'
+$$
+그러면 표준 사상
+$$
+L\pi_!(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B})
+\longrightarrow
+L\pi'_!(\Omega_{\mathcal{O}'/A'} \otimes_{\mathcal{O}'} \underline{B'})
+$$
+을 얻는다. 보조정리 \ref{lemma-compute-cotangent-complex}에 의해 이는
+$L_{B/A}\to L_{B'/A'}$를 준다. 이 사상이 위에서 단체 분해로 정의한
+사상과 일치한다는 확인은 생략한다.
+
+\begin{lemma}
+\label{lemma-flat-base-change}
+(\ref{equation-commutative-square})가 준동형사상
+$B\otimes_A^\mathbf{L}A'=B'$을 유도한다고 가정하자.
+(\ref{equation-double-square})의 표기와
+$\mathcal{F}'\in\textit{Ab}(\mathcal{C}')$에 대하여
+$L\pi_!(g^{-1}\mathcal{F}')=L\pi'_!(\mathcal{F}')$이다.
+\end{lemma}
+
+\begin{proof}
+더 언급하지 않고 주 \ref{remark-resolution}의 결과들을 사용한다. 사이트
+코호몰로지, 보조정리 \ref{sites-cohomology-lemma-get-it-now}를 적용하겠다.
+$P_\bullet\to B$를 분해라 하자.
+$u(P_\bullet)=P_\bullet\otimes_AA'\to B'$가 준동형사상임을 보이면
+증명이 끝난다. $P_\bullet$을 단체 $A$-가군으로 보았을 때 이에 딸린
+$A$-가군의 복합체 $s(P_\bullet)$은 $B$의 자유 $A$-가군 분해이다. 실제로
+$P_n$은 자유 $A$-가군이고 $s(P_\bullet)\to B$는 준동형사상이다. 따라서
+$B\otimes_A^\mathbf{L}A'$은
+$s(P_\bullet)\otimes_AA'=s(P_\bullet\otimes_AA')$로 계산된다. 그러므로
+보조정리의 가정은
+$\epsilon':P_\bullet\otimes_AA'\to B'$가 준동형사상임을 뜻한다.
+\end{proof}
+
+\noindent
+특히 $A\to A'$가 평탄하고 $B'=B\otimes_AA'$일 때(평탄한 밑변환) 다음
+보조정리를 적용할 수 있다.
+
+\begin{lemma}
+\label{lemma-flat-base-change-cotangent-complex}
+(\ref{equation-commutative-square})가 준동형사상
+$B\otimes_A^\mathbf{L}A'=B'$을 유도하면, 함자성 사상은 동형사상
+$$
+L_{B/A} \otimes_B^\mathbf{L} B' \longrightarrow L_{B'/A'}
+$$
+을 유도한다.
+\end{lemma}
+
+\begin{proof}
+등식 (\ref{equation-double-square})에서 도입한 표기를 사용하겠다. 다음이
+성립한다.
+$$
+L_{B/A} \otimes_B^\mathbf{L} B' =
+L\pi_!(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B})
+\otimes_B^\mathbf{L} B' =
+L\pi_!(Lh^*(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}))
+$$
+첫 등식은 보조정리 \ref{lemma-compute-cotangent-complex}에서, 둘째 등식은
+사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-change-of-rings}에서 따른다.
+$\Omega_{\mathcal{O}/A}$는 평탄 $\mathcal{O}$-가군이므로
+$\Omega_{\mathcal{O}/A}\otimes_\mathcal{O}\underline{B}$는 평탄
+$\underline{B}$-가군이다. 따라서
+$Lh^*(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}) =
+\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B'}$
+이고, 이는 직접 확인하면
+$g^{-1}(\Omega_{\mathcal{O}'/A'} \otimes_{\mathcal{O}'} \underline{B'})$
+와 같다. 보조정리 \ref{lemma-flat-base-change}와 $L_{B'/A'}$가
+$L\pi'_!(\Omega_{\mathcal{O}'/A'}\otimes_{\mathcal{O}'}\underline{B'})$로
+계산된다는 사실로부터 결론이 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-homotopy-triangle}
+정사각형 (\ref{equation-commutative-square})가 주어지고 다음 도표를
+가환시키는 화살표 $\kappa:B\to A'$가 존재한다고 하자.
+$$
+\xymatrix{
+B \ar[r]_\beta \ar[rd]_\kappa & B' \\
+A \ar[u] \ar[r]^\alpha & A' \ar[u]
+}
+$$
+이 경우 함자성 사상 $P_\bullet\to P'_\bullet$은 합성
+$P_\bullet\to B\to A'\to P'_\bullet$과 호모토픽이라고 주장한다.
+실제로 $\kappa$를 사용하면 함자성 사상은 다음과 같이 분해된다.
+$$
+P_\bullet \to P_{A'/A', \bullet} \to P'_\bullet
+$$
+여기서 $P_{A'/A',\bullet}$은 $A'$ 위의 $A'$의 표준 분해이다. $A'$는
+$A'$ 위에서 공집합을 변수집합으로 하는 다항식 대수이므로, 단체적 방법,
+보조정리 \ref{simplicial-lemma-standard-simplicial-homotopy}에 의해 증강
+$\epsilon_{A'/A'}:P_{A'/A',\bullet}\to A'$은 단체 환의 호모토피 동치이다.
+그 보조정리의 증명에서 구성한 호모토피 역 사상
+$c:A'\to P_{A'/A',\bullet}$은 바로 구조사상임을 관찰하자. 그러므로 다음
+두 합성이 위에서 논의한 두 사상이고 서로 호모토픽이므로 원하는 결론을
+얻는다.
+$$
+\xymatrix{
+P_\bullet \ar[r] &
+P_{A'/A', \bullet} \ar@<1ex>[rr]^{\text{id}}
+\ar@<-1ex>[rr]_{c \circ \epsilon_{A'/A'}} & &
+P_{A'/A', \bullet} \ar[r] &
+P'_\bullet
+}
+$$
+(단체적 방법, 주 \ref{simplicial-remark-homotopy-pre-post-compose}). 두 번째
+사상 $P_\bullet\to P'_\bullet$은 영 사상
+$\Omega_{P_\bullet/A}\to\Omega_{P'_\bullet/A'}$을 유도하므로, 이 경우
+함자성 사상 $L_{B/A}\to L_{B'/A'}$은 영과 호모토픽이다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-cotangent-complex-product}
+환 준동형 $A\to B$와 $A\to C$가 주어졌다고 하자. 그러면 사상
+$L_{B\times C/A}\to L_{B/A}\oplus L_{C/A}$는 $D(B\times C)$에서
+동형사상이다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 기본 삼각형에서 유도할 수 있지만, 여기서는 직접적이고
+기본적인 증명을 주겠다. 환 준동형 $A\to B\times C$를
+$x\mapsto(1,0)$인 $A\to A[x]\to B\times C$로 분해한다. 보조정리
+\ref{lemma-special-case-triangle}에 의해 $D(B\times C)$에 완전 삼각형
+$$
+L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} (B \times C) \to L_{B \times C/A} \to
+L_{B \times C/A[x]} \to L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} (B \times C)[1]
+$$
+이 있다. 마찬가지로 다음 완전 삼각형들이 있다.
+$$
+\begin{matrix}
+L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} B \to L_{B/A} \to L_{B/A[x]}
+\to L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} B[1] \\
+L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} C \to L_{C/A} \to L_{C/A[x]}
+\to L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} C[1]
+\end{matrix}
+$$
+따라서 $A[x]$ 위의 $B\times C$에 대하여 결과를 증명하면 충분하다.
+$A[x]\to A[x,x^{-1}]$은 평탄하고,
+$(B\times C)\otimes_{A[x]}A[x,x^{-1}]
+=B\otimes_{A[x]}A[x,x^{-1}]$이며,
+$C\otimes_{A[x]}A[x,x^{-1}]=0$임에 유의하자. 따라서 밑변환(보조정리
+\ref{lemma-flat-base-change-cotangent-complex})에 의해 사상
+$L_{B\times C/A[x]}\to L_{B/A[x]}\oplus L_{C/A[x]}$는 $x$를 가역화한
+뒤 동형사상이 된다. 같은 방식으로 이 사상이 $x-1$을 가역화한 뒤에도
+동형사상이 됨을 보일 수 있다. 이것으로 보조정리가 증명된다.
+\end{proof}
+
+
+
+
+\section{기본 삼각형}
+\label{section-triangle}
+
+\noindent
+이 절에서는 환 준동형의 열 $A\to B\to C$를 생각한다. 우리의 목표는 이
+삼각형이 $D(C)$의 다음 완전 삼각형을 준다는 것을 보이는 것이다.
+\begin{equation}
+\label{equation-triangle}
+L_{B/A} \otimes_B^\mathbf{L} C \to L_{C/A} \to L_{C/B} \to
+L_{B/A} \otimes_B^\mathbf{L} C[1]
+\end{equation}
+이는 명제 \ref{proposition-triangle}에서 증명한다. 다른 접근법은 주
+\ref{remark-triangle}을 보라.
+
+\medskip\noindent
+다음을 대상으로 하는 범주의 {\bf 반대 범주}
+$\mathcal{C}_{C/B/A}$를 생각하자. 대상은 $(P\to B,Q\to C)$이고,
+\begin{enumerate}
+\item $P$는 $A$ 위의 다항식 대수이다.
+\item $P\to B$는 $A$-대수 준동형이다.
+\item $Q$는 $P$ 위의 다항식 대수이다.
+\item $Q\to C$는 $P$-대수 준동형이다.
+\end{enumerate}
+반대 범주를 택하는 까닭은 $(P\to B,Q\to C)$를 다음 가환 도표에
+대응하는 것으로 생각하고자 하기 때문이다.
+$$
+\xymatrix{
+\Spec(C) \ar[d] \ar[r] & \Spec(Q) \ar[d] \\
+\Spec(B) \ar[d] \ar[r] & \Spec(P) \ar[dl] \\
+\Spec(A)
+}
+$$
+$\mathcal{C}_{B/A}$, $\mathcal{C}_{C/A}$, $\mathcal{C}_{C/B}$를 절
+\ref{section-compute-L-pi-shriek}에서 생각한 범주들이라 하자. 다음
+함자들이 있다.
+$$
+\begin{matrix}
+u_1 : \mathcal{C}_{C/B/A} \to \mathcal{C}_{B/A}, &
+(P \to B, Q \to C) \mapsto (P \to B) \\
+u_2 : \mathcal{C}_{C/B/A} \to \mathcal{C}_{C/A}, &
+(P \to B, Q \to C) \mapsto (Q \to C) \\
+u_3 : \mathcal{C}_{C/B/A} \to \mathcal{C}_{C/B}, &
+(P \to B, Q \to C) \mapsto (Q \otimes_P B \to C)
+\end{matrix}
+$$
+이 함자들은 대응하는 토포스의 사상 $g_i$를 유도한다.
+$\mathcal{O}_i=g_i^{-1}\mathcal{O}$로 쓰면 다음 환 달린 토포스의 사상들을
+얻는다.
+\begin{equation}
+\label{equation-three-maps}
+\begin{matrix}
+g_1 : (\Sh(\mathcal{C}_{C/B/A}), \mathcal{O}_1)
+\longrightarrow (\Sh(\mathcal{C}_{B/A}), \mathcal{O}) \\
+g_2 : (\Sh(\mathcal{C}_{C/B/A}), \mathcal{O}_2)
+\longrightarrow (\Sh(\mathcal{C}_{C/A}), \mathcal{O}) \\
+g_3 : (\Sh(\mathcal{C}_{C/B/A}), \mathcal{O}_3)
+\longrightarrow (\Sh(\mathcal{C}_{C/B}), \mathcal{O})
+\end{matrix}
+\end{equation}
+$\pi:\Sh(\mathcal{C}_{C/B/A})\to\Sh(*)$,
+$\pi_1:\Sh(\mathcal{C}_{B/A})\to\Sh(*)$,
+$\pi_2:\Sh(\mathcal{C}_{C/A})\to\Sh(*)$,
+$\pi_3:\Sh(\mathcal{C}_{C/B})\to\Sh(*)$로 쓰자. 그러면
+$\pi=\pi_i\circ g_i$이다. 보조정리
+\ref{lemma-compute-cotangent-complex}의 코탄젠트 복합체 동일시와 다음
+보조정리들로부터 원하는 완전 삼각형을 얻을 것이다.
+
+\begin{lemma}
+\label{lemma-triangle-ses}
+(\ref{equation-three-maps})의 표기 아래에서 다음과 같이 두자.
+$$
+\begin{matrix}
+\Omega_1 = \Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}
+\text{는 }\mathcal{C}_{B/A}\text{ 위에서} \\
+\Omega_2 = \Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{C}
+\text{는 }\mathcal{C}_{C/A}\text{ 위에서} \\
+\Omega_3 = \Omega_{\mathcal{O}/B} \otimes_\mathcal{O} \underline{C}
+\text{는 }\mathcal{C}_{C/B}\text{ 위에서}
+\end{matrix}
+$$
+그러면 $\mathcal{C}_{C/B/A}$ 위에 다음 표준적인
+$\underline{C}$-가군층의 짧은 완전열이 있다.
+$$
+0 \to g_1^{-1}\Omega_1 \otimes_{\underline{B}} \underline{C} \to
+g_2^{-1}\Omega_2 \to
+g_3^{-1}\Omega_3 \to 0
+$$
+\end{lemma}
+
+\begin{proof}
+$g_i^{-1}$은 단순히 $u_i$와 미리 합성하여 얻는다는 것을 상기하자. 대상
+$U=(P\to B,Q\to C)$가 주어지면, 예를 들어 가환대수학, 보조정리
+\ref{algebra-lemma-ses-formally-smooth}에 의해 분할 짧은 완전열
+$$
+0 \to \Omega_{P/A} \otimes Q \to \Omega_{Q/A} \to \Omega_{Q/P} \to 0
+$$
+이 있다. $Q$ 위에서 $C$와 텐서곱하면 짧은 완전열
+$$
+0 \to \Omega_{P/A} \otimes C \to \Omega_{Q/A} \otimes C \to
+\Omega_{Q/P} \otimes C \to 0
+$$
+을 얻는다. $\Omega_{P/A}\otimes C=\Omega_{P/A}\otimes B\otimes C$이므로
+이는 $U$에서 $g_1^{-1}\Omega_1\otimes_{\underline{B}}\underline{C}$의
+값이다. 가군 $\Omega_{Q/A}\otimes C$는 $U$에서 $g_2^{-1}\Omega_2$의
+값이다. 가환대수학, 보조정리
+\ref{algebra-lemma-differentials-base-change}에 의해
+$\Omega_{Q/P}\otimes C=\Omega_{Q\otimes_PB/B}\otimes C$이므로 이는
+$U$에서 $g_3^{-1}\Omega_3$의 값이다. 따라서 보조정리의 짧은 완전열은
+$U$에 마지막으로 표시한 짧은 완전열을 대응시켜 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-polynomial-on-top}
+(\ref{equation-three-maps})의 표기 아래에서 $C$가 $B$ 위의 다항식
+대수라고 하자. 그러면 $\mathcal{C}_{C/B}$ 위의 임의의 아벨 층
+$\mathcal{F}$에 대하여
+$L\pi_!(g_3^{-1}\mathcal{F}) = L\pi_{3, !}\mathcal{F} = \pi_{3, !}\mathcal{F}$
+이다.
+\end{lemma}
+
+\begin{proof}
+어떤 집합 $E$에 대하여 $C=B[E]$로 쓰자. $A$ 위의 $B$의 분해
+$P_\bullet\to B$를 택한다. 모든 $n$에 대하여
+$\mathcal{C}_{C/B/A}$의 대상 $U_n=(P_n\to B,P_n[E]\to C)$를 생각하자.
+그러면 $U_\bullet$은 $\mathcal{C}_{C/B/A}$의 쌍대단체 대상이다.
+$u_3(U_\bullet)$은 값이 $(C\to C)$인 $\mathcal{C}_{C/B}$의 상수
+쌍대단체 대상임에 유의하자. $\mathcal{C}_{C/B/A}$의 대상
+$U_\bullet$이 사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution}의 가정들을
+만족함을 보이겠다. 그러면 $L\pi_!(g_3^{-1}\mathcal{F})$가 상수 단체 아벨 군
+$\mathcal{F}(C\to C)$로 계산됨을 알 수 있다. 보조정리
+\ref{lemma-pi-lower-shriek-polynomial-algebra}에 의해 이것은
+$L\pi_{3,!}\mathcal{F}=\pi_{3,!}\mathcal{F}$의 값이므로 보조정리가 따른다.
+
+\medskip\noindent
+$U=(\beta:P\to B,\gamma:Q\to C)$를 $\mathcal{C}_{C/B/A}$의 대상이라
+하자. 범주 $\mathcal{C}_{C/B/A}$의 정의에 의해
+$P=A[S]$, $Q=A[S\amalg T]$로 쓸 수 있다. 다음 단체집합이 한원소
+단체집합 $*$와 호모토피 동치임을 보여야 한다.
+$$
+\Mor_{\mathcal{C}_{C/B/A}}(U_\bullet, U)
+$$
+이 단체집합은 다음 곱임을 관찰하자.
+$$
+\prod\nolimits_{s \in S} F_s \times \prod\nolimits_{t \in T} F'_t
+$$
+여기서 $F_s$는 $U_s=(A[\{s\}]\to B,A[\{s\}]\to C)$에 대응하는
+단체집합이고, $F'_t$는 $U_t=(A\to B,A[\{t\}]\to C)$에 대응하는
+단체집합이다. 실제로 대상 $U$는 $\mathcal{C}_{C/B/A}$에서 곱
+$\prod U_s\times\prod U_t$이다. 각 $F_s$와 $F'_t$가 $*$와 호모토피
+동치임을 보이면 충분하다. 단체적 방법, 보조정리
+\ref{simplicial-lemma-products-homotopy}를 보라. $F_s$의 경우는
+$P_\bullet\to B$가 분해이므로 자명한 Kan 올뭉치이고 $F_s$가 이 사상의
+$\beta(s)$ 위의 섬유이므로 따른다. (단체적 방법의 보조정리
+\ref{simplicial-lemma-trivial-kan-base-change}와
+\ref{simplicial-lemma-trivial-kan-homotopy}를 사용한다.) $F'_t$의 경우는
+조금 더 흥미롭다. 여기서는 다음 사상의 $\gamma(t)\in C$ 위의 섬유가
+한 점과 호모토피 동치라고 말하고 있다.
+$$
+P_\bullet[E] \longrightarrow C = B[E]
+$$
+실제로 이 사상이 자명한 Kan 올뭉치임을 보이겠다.
+$P_\bullet\to B$는 자명한 Kan 올뭉치이다. 임의의 환 $R$에 대하여
+$$
+R[E] =
+\colim_{\Sigma \subset \text{Map}(E, \mathbf{Z}_{\geq 0})\text{ 유한}}
+\prod\nolimits_{I \in \Sigma} R
+$$
+(여과 쌍대극한)이다. 따라서 위에 표시한 단체집합의 사상은 자명한 Kan
+올뭉치들의 여과 쌍대극한이므로, 단체적 방법, 보조정리
+\ref{simplicial-lemma-filtered-colimit-trivial-kan}에 의해 자명한 Kan
+올뭉치이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-triangle-compute-lower-shriek}
+(\ref{equation-three-maps})의 표기 아래에서
+$Lg_{i,!}\circ g_i^{-1}=\text{id}$가 $i=1,2,3$에 대하여 성립하고,
+따라서 $L\pi_!\circ g_i^{-1}=L\pi_{i,!}$도 $i=1,2,3$에 대하여
+성립한다.
+\end{lemma}
+
+\begin{proof}
+$i=1$인 경우를 증명하자. 함자 $\mathcal{C}_{C/B/A}$는
+$\mathcal{C}_{B/A}$ 위의 섬유화 범주라고 주장한다. 실제로
+$(P\to B,Q\to C)$와 $\mathcal{C}_{B/A}$의 사상
+$(P'\to B)\to(P\to B)$가 주어졌다고 하자. 이는 $B$로 가는 사상들과
+양립하는 $A$-대수 준동형 $P\to P'$가 있다는 뜻임을 상기하자.
+$Q'=Q\otimes_PP'$로 두고 유도된 $C$로 가는 사상과 다음 사상을 취한다.
+$$
+(P' \to B, Q' \to C) \longrightarrow (P \to B, Q \to C)
+$$
+이는 $\mathcal{C}_{C/B/A}$의 사상이며 $\mathcal{C}_{B/A}$ 위에서
+$\mathcal{C}_{C/B/A}$ 안의 강하게 데카르트인 사상이다(화살표가 다시
+반대임에 유의하라). 또한
+$P\to B$ 위의 $u_1$의 섬유범주는 $\mathcal{C}_{C/P}$임을 관찰하자.
+$\mathcal{F}$를 $\mathcal{C}_{B/A}$ 위의 아벨 층이라 하자. 섬유화 범주가
+있으므로 사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-left-derived-pi-shriek}를 적용할 수 있다.
+따라서 $L_ng_{1,!}g_1^{-1}\mathcal{F}$는
+$U\in\Ob(\mathcal{C}_{B/A})$에 $U$ 위의 섬유범주로 제한한
+$g_1^{-1}\mathcal{F}$의 $n$차 호몰로지를 대응시키는 (준)층이다. 이
+제한들은 상수이므로 위의 섬유범주 동일시와 보조정리
+\ref{lemma-pi-lower-shriek-constant-sheaf}에서 원하는 결과가 따른다.
+
+\medskip\noindent
+$i=2$인 경우를 보자. $\mathcal{C}_{C/B/A}$는 $\mathcal{C}_{C/A}$ 위의
+섬유화 범주라고 주장한다. 실제로 $(P\to B,Q\to C)$와
+$\mathcal{C}_{C/A}$의 사상 $(Q'\to C)\to(Q\to C)$가 주어졌다고 하자.
+이는 $C$로 가는 사상들과 양립하는 $B$-대수 준동형 $Q\to Q'$가 있다는
+뜻임을 상기하자. 그러면
+$$
+(P \to B, Q' \to C) \longrightarrow (P \to B, Q \to C)
+$$
+은 $\mathcal{C}_{C/A}$ 위에서 $\mathcal{C}_{C/B/A}$ 안의 강하게
+데카르트인 사상이다. $Q\to C$ 위의 $u_2$의 섬유범주는 끝 대상
+$(A\to B,Q\to C)$를 갖는다는 점에 유의하자(화살표가 반대임을
+주의하라). $\mathcal{F}$를 $\mathcal{C}_{C/A}$ 위의 아벨 층이라 하자.
+섬유화 범주가 있으므로 사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-left-derived-pi-shriek}를 적용할 수 있다.
+따라서 $L_ng_{2,!}g_2^{-1}\mathcal{F}$는
+$U\in\Ob(\mathcal{C}_{C/A})$에 $U$ 위의 섬유범주로 제한한
+$g_1^{-1}\mathcal{F}$의 $n$차 호몰로지를 대응시키는 (준)층이다. 이
+제한들은 상수이고 모든 섬유범주가 끝 대상을 가지므로, 사이트 코호몰로지,
+보조정리 \ref{sites-cohomology-lemma-initial-final}에서 원하는 결과가 따른다.
+
+\medskip\noindent
+$i=3$인 경우를 보자. 이 경우에는 $\mathcal{C}_{C/B}$ 위의 어떤 아벨 층
+$\mathcal{F}$에 대하여 $u=u_3:\mathcal{C}_{C/B/A}\to\mathcal{C}_{C/B}$와
+$\mathcal{F}'=g_3^{-1}\mathcal{F}$에 사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-left-derived-g-shriek}를 적용하겠다.
+$U=(\overline{Q}\to C)$가 $\mathcal{C}_{C/B}$의 대상이라고 하자. 그러면
+$\mathcal{I}_U=\mathcal{C}_{\overline{Q}/B/A}$이다(화살표가 다시 반대임에
+주의하라). 층 $\mathcal{F}'_U$는
+$(P\to B,Q\to\overline{Q})\mapsto
+\mathcal{F}(Q\otimes_PB\to C)$로 주어진다. 다시 말해 이 층은 사상
+$\Sh(\mathcal{C}_{\overline{Q}/B/A})\to
+\Sh(\mathcal{C}_{\overline{Q}/B})$에 따른
+$\mathcal{C}_{\overline{Q}/C}$ 위 층의 당김이다. 따라서 보조정리
+\ref{lemma-polynomial-on-top}에 의해 $n>0$이면
+$H_n(\mathcal{I}_U,\mathcal{F}'_U)=0$이고, $n=0$이면 이는
+$\mathcal{F}(\overline{Q}\to C)$와 같다. 앞서 말한 사이트 코호몰로지,
+보조정리 \ref{sites-cohomology-lemma-compute-left-derived-g-shriek}에 의해
+$Lg_{3,!}(g_3^{-1}\mathcal{F})=\mathcal{F}$이므로 증명이 끝난다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-triangle}
+환 준동형 $A\to B\to C$가 주어졌다고 하자. $D(C)$에 표준적인 완전
+삼각형
+$$
+L_{B/A} \otimes_B^\mathbf{L} C \to L_{C/A} \to L_{C/B} \to
+L_{B/A} \otimes_B^\mathbf{L} C[1]
+$$
+이 있다.
+\end{proposition}
+
+\begin{proof}
+보조정리 \ref{lemma-triangle-ses}의 층의 짧은 완전열에 유도 함자
+$L\pi_!$를 적용하여 $D(C)$의 완전 삼각형
+$$
+L\pi_!(g_1^{-1}\Omega_1 \otimes_{\underline{B}} \underline{C}) \to
+L\pi_!(g_2^{-1}\Omega_2) \to
+L\pi_!(g_3^{-1}\Omega_3) \to
+L\pi_!(g_1^{-1}\Omega_1 \otimes_{\underline{B}} \underline{C})[1]
+$$
+을 얻는다. 보조정리 \ref{lemma-triangle-compute-lower-shriek}와
+\ref{lemma-compute-cotangent-complex}을 사용하면 둘째 항과 셋째 항이
+각각 $L_{C/A}$와 $L_{C/B}$와 일치하고 첫째 항은
+$$
+L\pi_{1, !}(\Omega_1 \otimes_{\underline{B}} \underline{C}) =
+L\pi_{1, !}(\Omega_1) \otimes_B^\mathbf{L} C =
+L_{B/A} \otimes_B^\mathbf{L} C
+$$
+와 같다. 첫 등식은 사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-change-of-rings}와 $\underline{B}$-가군층으로서
+$\Omega_1$의 평탄성에서 따르고, 둘째 등식은 보조정리
+\ref{lemma-compute-cotangent-complex}에서 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-triangle}
+기본 삼각형의 존재에 대한, 어쩌면 더 간단한 다른 증명을 개괄한다.
+환 준동형 $A\to B\to C$가 주어지고 $B\to C$가 단사라고 가정하자.
+$P_\bullet\to B$를 $A$ 위의 $B$의 표준 분해라 하고
+$Q_\bullet\to C$를 $B$ 위의 $C$의 표준 분해라 하자. 다음을 그려 보자.
+$$
+\xymatrix{
+P_\bullet : &
+A[A[A[B]]] \ar[d]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[A[B]] \ar[d]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[B] \ar[d] \ar@<0ex>[l] \ar[r] &
+B \\
+Q_\bullet : &
+A[A[A[C]]]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[A[C]]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[C] \ar@<0ex>[l] \ar[r] &
+C
+}
+$$
+$B\to C$가 단사이므로 모든 $n$에 대하여 환 $Q_n$은 $P_n$ 위의
+다항식 대수임을 관찰하자. 따라서 $\mathcal{C}_{C/B/A}$의 쌍대단체 대상을
+얻는다(화살표가 반대임을 주의하라). 이제
+$\overline{Q}_\bullet=Q_\bullet\otimes_{P_\bullet}B$로 두자. 명제
+\ref{proposition-triangle} 증명의 핵심은 $\overline{Q}_\bullet$이 $B$
+위의 $C$의 분해임을 보이는 것이다. 이는 $\mathcal{C}=\Delta$,
+$\mathcal{O}=P_\bullet$, $\mathcal{O}'=B$, $\mathcal{F}=Q_\bullet$로 두고
+사이트 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-O-homology-qis}를 적용하면 따른다(여기서는
+$Q_n$이 $P_n$ 위에서 평탄하다는 것을 사용한다. 단체 가군과 층을
+관련시키려면 사이트 코호몰로지, 주
+\ref{sites-cohomology-remark-simplicial-modules}를 보라). 이 핵심 사실에
+의해 명제 \ref{proposition-triangle}의 완전 삼각형은 다음 단체
+$C$-가군의 짧은 완전열에 딸린 완전 삼각형이다.
+$$
+0 \to
+\Omega_{P_\bullet/A} \otimes_{P_\bullet} C \to
+\Omega_{Q_\bullet/A} \otimes_{Q_\bullet} C \to
+\Omega_{\overline{Q}_\bullet/B} \otimes_{\overline{Q}_\bullet} C \to 0
+$$
+이는 가환대수학, 보조정리 \ref{algebra-lemma-ses-formally-smooth}의 짧은
+완전열 $0\to\Omega_{P_n/A}\otimes_{P_n}Q_n\to\Omega_{Q_n/A}\to
+\Omega_{Q_n/P_n}\to0$에서 유도된다. 실제로 주
+\ref{remark-resolution}과 핵심 사실에 의해 우변의 복합체는 $D(C)$에서
+$L_{C/B}$를 나타낸다.
+
+\medskip\noindent
+$B\to C$가 단사가 아니면 위의 결과를 사용하여
+$A\to B\to B\times C$의 기본 삼각형을 얻을 수 있다. 사상
+$L_{B\times C/B}\to L_{B/B}\oplus L_{C/B}$와
+$L_{B\times C/A}\to L_{B/A}\oplus L_{C/A}$는 $D(B\times C)$에서
+준동형사상이므로(보조정리 \ref{lemma-cotangent-complex-product}), 평탄
+환 준동형 $B\times C\to C$와 텐서곱하면 $D(C)$에서 원하는 완전
+삼각형을 얻는다.
+\end{remark}
+
+\begin{remark}
+\label{remark-explicit-map}
+$B\to C$가 단사인 환 준동형 $A\to B\to C$가 주어졌다고 하자. 주
+\ref{remark-triangle}의 표기 $P_\bullet$, $Q_\bullet$,
+$\overline{Q}_\bullet$을 상기하자. $R_\bullet$을 $B$ 위의 $C$의 표준
+분해라 하자. 이 주에서는
+$\Omega_{\overline{Q}_\bullet/B}\otimes_{\overline{Q}_\bullet}C$와
+$L_{C/B}=\Omega_{R_\bullet/B}\otimes_{R_\bullet}C$의 표준 동일시를 얻는
+방법을 설명한다. $S_\bullet\to B$를 $B$ 위의 $B$의 표준 분해라 하자.
+$B\to C$가 단사이므로 함자성 사상 $S_\bullet\to R_\bullet$은 $R_n$을
+$S_n$ 위의 다항식 대수로 나타냄에 유의하자. 예를 들어 차수 $0$에서는
+사상 $B[B]\to B[C]$가 있고 차수 $1$에서는 사상
+$B[B[B]]\to B[B[C]]$가 있으며, 이후도 마찬가지이다. 따라서
+$\overline{R}_\bullet=R_\bullet\otimes_{S_\bullet}B$도 $B$ 위의 단체
+다항식 대수이고, 주 \ref{remark-triangle}에서와 같이 사이트 코호몰로지,
+보조정리 \ref{sites-cohomology-lemma-O-homology-qis}에 의해
+$\overline{R}_\bullet\to C$는 분해이다.
+다음 가환 도표가 있으므로
+$$
+\xymatrix{
+Q_\bullet \ar[r] & R_\bullet \\
+P_\bullet \ar[u] \ar[r] & S_\bullet \ar[u] \ar[r] & B
+}
+$$
+표준 사상
+$\overline{Q}_\bullet=Q_\bullet\otimes_{P_\bullet}B\to
+\overline{R}_\bullet$을 얻는다. 따라서 사상들
+$$
+L_{C/B} = \Omega_{R_\bullet/B} \otimes_{R_\bullet} C
+\longrightarrow
+\Omega_{\overline{R}_\bullet/B} \otimes_{\overline{R}_\bullet} C
+\longleftarrow
+\Omega_{\overline{Q}_\bullet/B} \otimes_{\overline{Q}_\bullet} C
+$$
+은 준동형사상이고(주 \ref{remark-resolution}), 하나와 다른 하나의 역을
+합성하면 원하는 동일시를 얻는다.
+\end{remark}
+
+
+
+
+
+\section{국소화와 에탈 환 준동형}
+\label{section-localization}
+
+\noindent
+이 절에서는 환들을 국소화할 때 무슨 일이 일어나는지 연구한다.
+$B=B\otimes_A^\mathbf{L}A'$을 만족하는 환 준동형
+$A\to A'\to B$가 주어졌다고 하자. 예를 들어 $S\subset A$가 곱셈적
+부분집합이고 $A'=S^{-1}A$가 그 부분집합에서 $A$를 국소화한 환이면 이러한
+상황이 생긴다. 이 경우 $\mathcal{C}_{B/A'}$ 위의 아벨 층
+$\mathcal{F}'$에 대하여 $\mathcal{C}_{B/A}$ 위의
+$g^{-1}\mathcal{F}'$의 호몰로지는 $\mathcal{C}_{B/A'}$ 위의
+$\mathcal{F}'$의 호몰로지와 일치한다. 정확한 명제는 보조정리
+\ref{lemma-flat-base-change}를 보라.
+
+\begin{lemma}
+\label{lemma-localize-at-bottom}
+$B=B\otimes_A^\mathbf{L}A'$을 만족하는 환 준동형
+$A\to A'\to B$가 주어지면 $D(B)$에서 $L_{B/A}=L_{B/A'}$이다.
+\end{lemma}
+
+\begin{proof}
+위의 논의(즉 보조정리 \ref{lemma-flat-base-change})와 보조정리
+\ref{lemma-compute-cotangent-complex}에 따르면,
+$\mathcal{C}_{B/A}$ 위에서 규칙
+$(P\to B)\mapsto\Omega_{P/A}\otimes_PB$로 주어지는 층이 규칙
+$(P\to B)\mapsto\Omega_{P/A'}\otimes_PB$로 주어지는 층의 당김임을
+보여야 한다. 당김 함자 $g^{-1}$은 함자
+$u:\mathcal{C}_{B/A}\to\mathcal{C}_{B/A'}$,
+$(P\to B)\mapsto(P\otimes_AA'\to B)$와 미리 합성하여 주어진다. 따라서
+다음을 보여야 한다.
+$$
+\Omega_{P/A} \otimes_P B =
+\Omega_{P \otimes_A A'/A'} \otimes_{(P \otimes_A A')} B
+$$
+가환대수학, 보조정리 \ref{algebra-lemma-differentials-base-change}에 의해
+우변은
+$$
+(\Omega_{P/A} \otimes_A A') \otimes_{(P \otimes_A A')} B
+$$
+와 같다. $P$가 $A$ 위의 다항식 대수이므로 가군 $\Omega_{P/A}$는
+자유이고, 등식은 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-derived-diagonal}
+$B=B\otimes_A^\mathbf{L}B$를 만족하는 환 준동형 $A\to B$가 주어지면
+$D(B)$에서 $L_{B/A}=0$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-localize-at-bottom}과
+\ref{lemma-cotangent-complex-polynomial-algebra}에 의해
+$L_{B/A}=L_{B/B}=0$이므로 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-bootstrap}
+$i>0$에 대하여 $\text{Tor}^A_i(B,B)=0$이고
+$L_{B/B\otimes_AB}=0$인 환 준동형 $A\to B$가 주어지면 $D(B)$에서
+$L_{B/A}=0$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-flat-base-change-cotangent-complex}에 의해
+$L_{B/A} \otimes_B^\mathbf{L} (B \otimes_A B) = L_{B \otimes_A B/B}$.
+이제 환 준동형 $B\to B\otimes_AB\to B$에 딸린 완전 삼각형
+(\ref{equation-triangle})
+$$
+L_{B \otimes_A B/B} \otimes^\mathbf{L}_{(B \otimes_A B)} B \to
+L_{B/B} \to L_{B/B \otimes_A B} \to
+L_{B \otimes_A B/B} \otimes^\mathbf{L}_{(B \otimes_A B)} B[1]
+$$
+과 $L_{B/B}$의 소멸(보조정리
+\ref{lemma-cotangent-complex-polynomial-algebra}) 및 가정한
+$L_{B/B\otimes_AB}$의 소멸을 사용하면
+$$
+0 =
+L_{B \otimes_A B/B} \otimes^\mathbf{L}_{(B \otimes_A B)} B =
+L_{B/A} \otimes_B^\mathbf{L} (B \otimes_A B)
+\otimes^\mathbf{L}_{(B \otimes_A B)} B = L_{B/A}
+$$
+를 얻는다. 이것이 원하는 결론이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-when-zero}
+다음 각 경우에 코탄젠트 복합체 $L_{B/A}$는 영이다.
+\begin{enumerate}
+\item $A\to B$와 $B\otimes_AB\to B$가 평탄하다. 즉 $A\to B$가
+약 에탈이다(대수학 심화, 정의
+\ref{more-algebra-definition-weakly-etale}).
+\item $A\to B$가 환의 평탄한 전사 사상이다.
+\item 어떤 곱셈적 부분집합 $S\subset A$에 대하여 $B=S^{-1}A$이다.
+\item $A\to B$가 비분기이고 평탄하다.
+\item $A\to B$가 에탈이다.
+\item $A\to B$가 코탄젠트 복합체가 소멸하는 환 준동형들의 여과
+쌍대극한이다.
+\item $B$가 $A$의 한 국소환의 헨젤화이다.
+\item $B$가 $A$의 한 국소환의 엄밀 헨젤화이다. 그리고
+\item 여기에 더 추가한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 경우 전사 평탄 환 준동형 $B\otimes_AB\to B$에 보조정리
+\ref{lemma-derived-diagonal}을 적용하여 $L_{B/B\otimes_AB}=0$을 얻고,
+보조정리 \ref{lemma-bootstrap}을 사용하여 결론을 얻는다. (2)--(5)는 각각
+(1)의 특수한 경우이다. (6)은 보조정리
+\ref{lemma-colimit-cotangent-complex}에서 따른다. (7)과 (8)은 (엄밀)
+헨젤화가 $A$의 에탈 환 확대들의 여과 쌍대극한이라는 사실에서 따른다.
+가환대수학의 보조정리 \ref{algebra-lemma-henselization-different}와
+\ref{algebra-lemma-strict-henselization-different}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-localize-on-top}
+$L_{C/B}=0$인 환 준동형 $A\to B\to C$가 주어지면
+$L_{C/A}=L_{B/A}\otimes_B^\mathbf{L}C$이다.
+\end{lemma}
+
+\begin{proof}
+완전 삼각형 (\ref{equation-triangle})에서 바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-localize}
+환 준동형 $A\to B$와 곱셈적 부분집합 $S\subset A$, $T\subset B$가
+주어지고 $S$가 $T$ 안으로 간다고 하자. 그러면 $D(T^{-1}B)$에서
+$L_{T^{-1}B/S^{-1}A}=L_{B/A}\otimes_BT^{-1}B$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-localize-on-top}에 의해
+$L_{T^{-1}B/A}=L_{B/A}\otimes_BT^{-1}B$이고, 보조정리
+\ref{lemma-localize-at-bottom}에 의해
+$L_{T^{-1}B/A}=L_{T^{-1}B/S^{-1}A}$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cotangent-complex-henselization}
+$A\to B$를 국소환들의 국소 환 준동형이라 하자. $A^h\to B^h$와
+$A^{sh}\to B^{sh}$를 각각 유도된 헨젤화와 엄밀 헨젤화의 사상이라 하자.
+그러면 각각 $D(B^h)$와 $D(B^{sh})$에서
+$$
+L_{B^h/A^h} = L_{B^h/A} = L_{B/A} \otimes_B^\mathbf{L} B^h
+\quad\text{각각}\quad
+L_{B^{sh}/A^{sh}} = L_{B^{sh}/A} = L_{B/A} \otimes_B^\mathbf{L} B^{sh}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-when-zero}에 의해 복합체 $L_{A^h/A}$,
+$L_{A^{sh}/A}$, $L_{B^h/B}$, $L_{B^{sh}/B}$는 모두 영이다.
+$A\to B\to B^h$에 기본 완전 삼각형 (\ref{equation-triangle})을 사용하면
+$L_{B^h/A}=L_{B/A}\otimes_B^\mathbf{L}B^h$을 얻는다.
+$A\to A^h\to B^h$에 기본 삼각형을 사용하면
+$L_{B^h/A^h}=L_{B^h/A}$를 얻는다. 엄밀 헨젤화도 마찬가지이다.
+\end{proof}
+
+
+
+
+\section{매끄러운 환 준동형}
+\label{section-smooth}
+
+\noindent
+$C\to B$를 핵이 $I$인 전사 환 준동형이라 하자. $I/I^2$이 평탄
+$B$-가군이고 $\text{Tor}_*^C(B,B)$가 $I/I^2$ 위의 외대수이면 이러한
+환 준동형을 ``약 준정칙''이라고 부르자. 보조정리
+\ref{lemma-when-zero}에서 ``에탈 환 준동형''에 대하여 한 일을
+``매끄러운 환 준동형''으로 일반화하려면, 곱셈 사상
+$B\otimes_AB\to B$가 약 준정칙인 평탄 환 준동형 $A\to B$를 살펴보아야
+한다. 당분간은 매끄러운 환 준동형만 다룬다.
+
+\begin{lemma}
+\label{lemma-when-projective}
+$A\to B$가 매끄러운 환 준동형이면 $L_{B/A}=\Omega_{B/A}[0]$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-identify-H0}에 의해 코호몰로지 차수 $0$에서는
+일치한다. 따라서 다른 코호몰로지 군들이 영임을 보이면 충분하다. 보조정리
+\ref{lemma-localize-on-top}에 의해 $g\in B$에 대하여
+$L_{B_g/A}=(L_{B/A})_g$이므로 이를 $\Spec(B)$ 위에서 국소적으로 증명하면
+충분하다. 따라서 $A\to B$가 표준 매끄러운 환 준동형이라고 가정해도 된다
+(가환대수학, 보조정리 \ref{algebra-lemma-smooth-syntomic}). 즉
+$A[x_1,\ldots,x_n]\to B$가 에탈이 되도록 $A\to B$를
+$A\to A[x_1,\ldots,x_n]\to B$로 분해할 수 있다. 이 경우 보조정리
+\ref{lemma-when-zero}와 \ref{lemma-localize-on-top}에 의해
+$L_{B/A}=L_{A[x_1,\ldots,x_n]/A}\otimes B$이고, 보조정리
+\ref{lemma-cotangent-complex-polynomial-algebra}에서 결론이 따른다.
+\end{proof}
+
+
+
+
+
+\section{양의 표수}
+\label{section-positive-characteristic}
+
+\noindent
+이 절에서는 소수 $p$를 고정한다. 환 $A$가 주어지고 $p=0$이 $A$에서 성립하면
+$F_A:A\to A$는 Frobenius 자기준동형 $a\mapsto a^p$를 나타낸다.
+
+\begin{lemma}
+\label{lemma-frobenius-homotopy}
+$A$에서 $p=0$인 환 준동형 $A\to B$가 주어졌다고 하자.
+$P_\bullet$을 $A$ 위의 $B$의 표준 분해라 하자. 절
+\ref{section-functoriality}에서 논의한 다음 도표가 유도하는 사상
+$P_\bullet\to P_\bullet$은 각 $P_n$에서 Frobenius로 주어지는 Frobenius
+자기준동형 $P_\bullet\to P_\bullet$과 호모토픽이다.
+$$
+\xymatrix{
+B \ar[r]_{F_B} & B \\
+A \ar[u] \ar[r]^{F_A} & A \ar[u]
+}
+$$
+\end{lemma}
+
+\begin{proof}
+$\mathcal{A}$를 $\mathbf{F}_p$-대수 준동형 $A\to B$들의 범주라 하자.
+$\mathcal{S}$를 $A$가 $\mathbf{F}_p$-대수이고 $E$가 집합인 쌍
+$(A,E)$들의 범주라 하자. 다음 수반 함자들을 생각한다.
+$$
+V : \mathcal{A} \to \mathcal{S}, \quad (A \to B) \mapsto (A, B)
+$$
+그리고
+$$
+U : \mathcal{S} \to \mathcal{A}, \quad (A, E) \mapsto (A \to A[E])
+$$
+$X$를 단체적 방법, 절 \ref{simplicial-section-standard}에서 구성한,
+$\mathcal{A}$에서 $\mathcal{A}$로 가는 함자들의 범주의 단체 대상이라
+하자. $P_\bullet=X(A\to B)$임은 명백하다. 실제로 $A$를 고정하면 \ldots.
+
+\medskip\noindent
+$Y=U\circ V$로 두자. $X$는 $Y$와 특정 사상들로 구성되고, 그 항은
+$n+1$개의 인자를 갖는 $X_n=Y\circ\ldots\circ Y$임을 상기하자. 이
+구성은 단체적 방법, 예 \ref{simplicial-example-godement}에 주어져 있으며,
+자세한 내용은 단체적 방법, 보조정리
+\ref{simplicial-lemma-standard-simplicial}의 증명을 보라.
+
+\medskip\noindent
+$f:\text{id}_\mathcal{A}\to\text{id}_\mathcal{A}$를 항등 함자의 Frobenius
+자기준동형이라 하자. 다시 말해
+$f_{A\to B}=(F_A,F_B):(A\to B)\to(A\to B)$로 둔다. 그러면
+$X(A\to B)$ 위의 두 사상은 자연변환 $f\star1_X$와 $1_X\star f$로
+주어진다. 자세한 내용은 생략한다. 따라서 단체적 방법, 보조정리
+\ref{simplicial-lemma-godement-before-after}에서 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-frobenius-acts-as-zero}
+$p$를 소수라 하고 $A\to B$를 환 준동형이라 하며, $A$에서 $p=0$이라고
+가정하자. Frobenius 사상 $F_A$와 $F_B$가 유도하는 절
+\ref{section-functoriality}의 사상 $L_{B/A}\to L_{B/A}$은 영과
+호모토픽이다.
+\end{lemma}
+
+\begin{proof}
+$P_\bullet$을 $A$ 위의 $B$의 표준 분해라 하자. 보조정리
+\ref{lemma-frobenius-homotopy}에 의해 $F_A$와 $F_B$가 유도하는 사상
+$P_\bullet\to P_\bullet$은 각 항에서 Frobenius로 주어지는 사상
+$F_{P_\bullet}:P_\bullet\to P_\bullet$과 호모토픽이다. 그런데
+$F_{P_\bullet}$은 명백히 영 사상
+$\Omega_{P_n/A}\to\Omega_{P_n/A}$을 유도하므로 원하는 결론을 얻는다
+($p$제곱의 미분은 영이다).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-perfect-zero}
+$p$를 소수라 하고 $A\to B$를 환 준동형이라 하며, $A$에서 $p=0$이라고
+가정하자. $A$와 $B$가 완전환이면 $D(B)$에서 $L_{B/A}$는 영이다.
+\end{lemma}
+
+\begin{proof}
+사상 $(F_A,F_B):(A\to B)\to(A\to B)$는 동형사상이므로 $L_{B/A}$에서
+동형사상을 유도한다. 한편 보조정리
+\ref{lemma-frobenius-acts-as-zero}에 의해 $L_{B/A}$에서 영을 유도한다.
+\end{proof}
+
+
+
+
+
+\section{소박한 코탄젠트 복합체와의 비교}
+\label{section-surjections}
+
+\noindent
+소박한 코탄젠트 복합체는 가환대수학, 절
+\ref{algebra-section-netherlander}에서 도입했다.
+
+\begin{remark}
+\label{remark-make-map}
+$A \to B$를 환 준동형이라 하자. 절
+\ref{section-compute-L-pi-shriek}에서처럼 $\mathcal{C}_{B/A}$ 위에서
+작업하고, $\mathcal{J} \subset \mathcal{O}$를
+$\mathcal{O} \to \underline{B}$의 핵이라 하자. 보조정리
+\ref{lemma-apply-O-B-comparison}에 의해 $L\pi_!(\mathcal{J}) = 0$임에
+유의하자. 다음과 같이 두자.
+$\Omega =  \Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}$
+그러면 보조정리 \ref{lemma-compute-cotangent-complex}에 의해
+$L_{B/A} = L\pi_!(\Omega)$이다. 따라서
+$L\pi_!(\mathcal{J} \to \Omega) = L\pi_!(\Omega) = L_{B/A}$이다.
+그러므로 $\mathcal{C}_{B/A}$의 임의의 대상 $U = (P \to B)$에 대하여
+다음 사상을 얻는다.
+\begin{equation}
+\label{equation-comparison-map-A}
+(J \to \Omega_{P/A} \otimes_P B) \longrightarrow L_{B/A}
+\end{equation}
+여기서 $D(A)$에서 $J = \Ker(P \to B)$이다. 사이트 위의 코호몰로지, 주
+\ref{sites-cohomology-remark-map-evaluation-to-derived}를 보라.
+이 과정을 계속하자. 보조정리
+\ref{lemma-O-homology-B-homology}에 의해
+$L\pi_!(\mathcal{J} \otimes_\mathcal{O}^\mathbf{L} \underline{B}) =
+L\pi_!(\mathcal{J}) = 0$임에 유의하자.
+$\text{Tor}_0^\mathcal{O}(\mathcal{J}, \underline{B}) =
+\mathcal{J}/\mathcal{J}^2$이므로 스펙트럼 열
+$$
+H_p(\mathcal{C}_{B/A}, \text{Tor}_q^\mathcal{O}(\mathcal{J}, \underline{B}))
+\Rightarrow 
+H_{p + q}(\mathcal{C}_{B/A},
+\mathcal{J} \otimes_\mathcal{O}^\mathbf{L} \underline{B}) = 0
+$$
+(유도 범주, 보조정리 \ref{derived-lemma-two-ss-complex-functor}의 쌍대)에서
+$H_0(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2) = 0$
+및 $H_1(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2) = 0$이 따른다.
+따라서 $\underline{B}$-가군 복합체
+$\mathcal{J}/\mathcal{J}^2 \to \Omega$는
+$\tau_{\geq -1}L\pi_!(\mathcal{J}/\mathcal{J}^2 \to \Omega) =
+\tau_{\geq -1}L_{B/A}$을 만족한다. 그러므로 $\mathcal{C}_{B/A}$의 임의의
+대상 $U = (P \to B)$에 대하여 다음 사상을 얻는다.
+\begin{equation}
+\label{equation-comparison-map}
+(J/J^2 \to \Omega_{P/A} \otimes_P B) \longrightarrow \tau_{\geq -1}L_{B/A}
+\end{equation}
+이는 $D(B)$ 안의 사상이다. 사이트 위의 코호몰로지, 주
+\ref{sites-cohomology-remark-map-evaluation-to-derived}를 보라.
+\end{remark}
+
+\noindent
+첫 번째 경우는 환의 전사가 주어진 경우이다.
+
+\begin{lemma}
+\label{lemma-surjection}
+\begin{slogan}
+전사 환 준동형의 코탄젠트 복합체의 코호몰로지는 차수 영에서 자명하고,
+차수 $-1$에서는 핵을 그 제곱으로 나눈 것이다.
+\end{slogan}
+$A \to B$를 핵이 $I$인 전사 환 준동형이라 하자. 그러면
+$H^0(L_{B/A}) = 0$이고 $H^{-1}(L_{B/A}) = I/I^2$이다. 이 동형사상은
+$\mathcal{C}_{B/A}$의 대상 $(A \to B)$에 대한 사상
+(\ref{equation-comparison-map})에서 나온다.
+\end{lemma}
+
+\begin{proof}
+아래에서 ($A \to B$의 전사성을 이용하여) $\mathcal{C}_{B/A}$ 위의 짧은
+완전열
+$$
+0 \to \pi^{-1}(I/I^2) \to \mathcal{J}/\mathcal{J}^2 \to \Omega \to 0
+$$
+이 존재함을 보이겠다. 여기에 $L\pi_!$를 취하고, 그에 딸린 호몰로지
+긴 완전열과 주 \ref{remark-make-map}에서 보인
+$H_1(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2)$ 및
+$H_0(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2)$
+의 소멸을 이용하면, 보조정리
+\ref{lemma-pi-lower-shriek-constant-sheaf}에 의해 원하는 결론을 얻는다.
+
+\medskip\noindent
+남은 것은 위에서 언급한 국소 명제를 확인하는 일이다.
+$\mathcal{C}_{B/A}$의 모든 대상 $U = (P \to B)$에 대하여, 사상
+$P \to B$가 각 $e \in E$를 영으로 보내도록 하는 동형사상
+$P = A[E]$를 택할 수 있다. 그러면
+$J = \mathcal{J}(U) \subset P = \mathcal{O}(U)$
+이고 $J = IP + (e; e \in E)$이다. 위의 짧은 층 완전열을 $U$에서
+평가한 것은 다음 열이다.
+$$
+0 \to I/I^2 \to J/J^2 \to \Omega_{P/A} \otimes_P B \to 0
+$$
+확인은 생략한다. (힌트: 까다로운 점은 $IP \cap J^2 = IJ$뿐이며, 이는
+예를 들어 대수학 심화, 보조정리
+\ref{more-algebra-lemma-conormal-sequence-H1-regular}에서 따른다.)
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relation-with-naive-cotangent-complex}
+$A \to B$를 환 준동형이라 하자. 그러면 $\tau_{\geq -1}L_{B/A}$는
+소박한 코탄젠트 복합체와 표준적으로 준동형이다.
+\end{lemma}
+
+\begin{proof}
+핵이 $I$인 $P = A[B] \to B$를 생각하자. $A$ 위의 $B$의 소박한
+코탄젠트 복합체 $\NL_{B/A}$는 복합체
+$I/I^2 \to \Omega_{P/A} \otimes_P B$,
+이다. 가환대수학, 정의
+\ref{algebra-definition-naive-cotangent-complex}를 보라. 사상
+(\ref{equation-comparison-map})에서 이미 표준 사상
+$$
+c : \NL_{B/A} \longrightarrow \tau_{\geq -1}L_{B/A}
+$$
+을 구성했음에 유의하자. 환 준동형 $A \to A[B] \to B$에 딸린 완전 삼각형
+(\ref{equation-triangle})
+$$
+L_{P/A} \otimes_P^\mathbf{L} B \to L_{B/A} \to L_{B/P} \to 
+(L_{P/A} \otimes_P^\mathbf{L} B)[1]
+$$
+을 생각하자. 보조정리
+\ref{lemma-cotangent-complex-polynomial-algebra}와 가환대수학, 보조정리
+\ref{algebra-lemma-NL-polynomial-algebra}에 의해 $D(P)$에서
+$L_{P/A} = \Omega_{P/A}[0] = \NL_{P/A}$
+이고, 보조정리 \ref{lemma-surjection}과 가환대수학, 보조정리
+\ref{algebra-lemma-NL-surjection}에 의해 $D(B)$에서
+$\tau_{\geq -1}L_{B/P} = I/I^2[1] = \NL_{B/P}$
+임을 알고 있다. 가환대수학, 보조정리
+\ref{algebra-lemma-exact-sequence-NL}와 완전 삼각형에 딸린 코호몰로지
+긴 완전열에 의해, $c$가 준동형임을 보이려면 사상
+$L_{P/A} \to L_{B/A} \to L_{B/P}$가 코호몰로지 군 위에서 소박한
+코탄젠트 복합체의 대응하는 사상
+$\NL_{P/A} \to \NL_{B/A} \to \NL_{B/P}$
+와 양립함을 보이면 충분하다. 확인은 생략한다.
+\end{proof}
+
+\begin{remark}
+\label{remark-explicit-comparison-map}
+보조정리 \ref{lemma-relation-with-naive-cotangent-complex}의 비교 사상을
+다음과 같이 명시적으로 나타낼 수 있다. $P_\bullet$을 $A$ 위의 $B$의
+표준 분해라 하고 $I = \Ker(A[B] \to B)$로 두자. $P_0 = A[B]$임을
+상기하자. 이 보조정리의 사상은 다음 가환 도표로 주어진다.
+$$
+\xymatrix{
+L_{B/A} \ar[d] & \ldots \ar[r] &
+\Omega_{P_2/A} \otimes_{P_2} B
+\ar[r] \ar[d] &
+\Omega_{P_1/A} \otimes_{P_1} B
+\ar[r] \ar[d] &
+\Omega_{P_0/A} \otimes_{P_0} B
+\ar[d] \\
+\NL_{B/A} & \ldots \ar[r] &
+0 \ar[r] & 
+I/I^2 \ar[r] &
+\Omega_{P_0/A} \otimes_{P_0} B
+}
+$$
+표적이 $I/I^2$인 아래쪽 화살표는 $\text{d}f \otimes b$를 $I/I^2$에서
+$(d_0(f) - d_1(f))b$의 동치류로 보내어 구성한다. 여기서
+$d_i : P_1 \to P_0$, $i = 0, 1$은 단체 구조의 두 면 사상이다.
+$d_0 - d_1$이 $P_1$을 $I = \Ker(P_0 \to B)$ 안으로 보내므로 이는
+의미가 있다. 이 규칙이 잘 정의됨은 확인을 생략한다. 미분
+$\Omega_{P_1/A} \otimes_{P_1} B \to \Omega_{P_0/A} \otimes_{P_0} B$
+이 $\text{d}f \otimes b$를 $\text{d}(d_0(f) - d_1(f)) \otimes b$로
+보내므로 우리 사상은 이 미분과 양립한다. 또한 미분
+$\Omega_{P_2/A} \otimes_{P_2} B \to \Omega_{P_1/A} \otimes_{P_1} B$
+은 $\text{d}f \otimes b$를
+$\text{d}(d_0(f) - d_1(f) + d_2(f)) \otimes b$로 보내며, 이것은 우리
+아래쪽 화살표에 의해 영이 된다. 따라서 복합체의 사상을 얻는다. 이것이
+보조정리 \ref{lemma-relation-with-naive-cotangent-complex}의 사상과 같다는
+확인은 생략한다.
+\end{remark}
+
+\begin{remark}
+\label{remark-surjection}
+주 \ref{remark-make-map}의 표기를 사용하자. 거기서 제시한 논증은 스펙트럼
+열의 미분
+$$
+H_2(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2)
+\longrightarrow
+H_0(\mathcal{C}_{B/A}, \text{Tor}_1^\mathcal{O}(\mathcal{J}, \underline{B}))
+$$
+이 동형사상임을 보인다. $\mathcal{C}'_{B/A}$를 전사 사상 $P \to B$로
+이루어진 $\mathcal{C}_{B/A}$의 충만한 부분범주라 하자. 코탄젠트 복합체와
+소박한 코탄젠트 복합체의 일치(보조정리
+\ref{lemma-relation-with-naive-cotangent-complex})에 의해
+$\mathcal{C}'_{B/A}$ 위에 다음 층 완전열이 있다.
+$$
+0 \to \underline{H_1(L_{B/A})} \to
+\mathcal{J}/\mathcal{J}^2 \xrightarrow{\text{d}} \Omega \to
+\underline{H_2(L_{B/A})} \to 0
+$$
+따라서 전체 범주 $\mathcal{C}_{B/A}$ 위의 $\Ker(d)$와 $\Coker(d)$는
+고차 호몰로지 군이 소멸한다. 실제로 보조정리
+\ref{lemma-identify-pi-shriek}에 의해 이들은 상수 단체 아벨 군의 호몰로지
+군으로 계산된다. 그러므로 모든 $n \geq 2$에 대하여
+$$
+H_n(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2) \to H_n(L_{B/A})
+$$
+가 동형사상이다. 이를 위의 주와 결합하면 다음 공식을 얻는다.
+\par\noindent
+$H_2(L_{B/A}) =
+H_0(\mathcal{C}_{B/A}, \text{Tor}_1^\mathcal{O}(\mathcal{J}, \underline{B}))$
+\end{remark}
+
+
+
+
+
+\section{Quillen의 스펙트럼 열}
+\label{section-spectral-sequence}
+
+\noindent
+이 절에서는 유도 텐서곱과 코탄젠트 복합체를 연결하는 스펙트럼 열을
+논의한다.
+
+\begin{lemma}
+\label{lemma-vanishing-symmetric-powers}
+표기와 가정은 사이트 위의 코호몰로지, 예
+\ref{sites-cohomology-example-category-to-point}과 같다고 하자.
+$\mathcal{C}$가 사이트 위의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution}에서와 같은
+쌍대단체 대상을 갖는다고 가정하자. $\mathcal{F}$를
+$H_0(\mathcal{C}, \mathcal{F}) = 0$을 만족하는 평탄
+$\underline{B}$-가군이라 하자. 그러면 $l < k$에 대하여
+$H_l(\mathcal{C}, \text{Sym}_{\underline{B}}^k(\mathcal{F})) = 0$이다.
+\end{lemma}
+
+\begin{proof}
+텐서곱, 외승, 대칭 거듭제곱에서 아래첨자 ${}_{\underline{B}}$를 생략한다.
+$k$에 대한 귀납법으로 보조정리를 증명하겠다. $k = 0, 1$인 경우는
+가정에서 따른다. $k > 1$이면 Koszul 복합체에서와 같은 미분을 갖는
+완전 복합체
+$$
+\ldots \to
+\wedge^2\mathcal{F} \otimes \text{Sym}^{k - 2}\mathcal{F} \to
+\mathcal{F} \otimes \text{Sym}^{k - 1}\mathcal{F} \to
+\text{Sym}^k\mathcal{F} \to 0
+$$
+를 생각하자. 이를 $\text{Sym}^k\mathcal{F}$의 분해로 보면 제1사분면
+스펙트럼 열
+$$
+E_1^{p, q} =
+H_p(\mathcal{C},
+\wedge^{q + 1}\mathcal{F} \otimes \text{Sym}^{k - q - 1}\mathcal{F})
+\Rightarrow
+H_{p + q}(\mathcal{C}, \text{Sym}^k(\mathcal{F}))
+$$
+을 얻는다. 사이트 위의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-eilenberg-zilber}에 의해
+$$
+L\pi_!(\wedge^{q + 1}\mathcal{F} \otimes \text{Sym}^{k - q - 1}\mathcal{F}) =
+L\pi_!(\wedge^{q + 1}\mathcal{F}) \otimes_B^\mathbf{L}
+L\pi_!(\text{Sym}^{k - q - 1}\mathcal{F}))
+$$
+이다. 유도 텐서곱의 구성에서, 귀납 가정과
+$H_0(\mathcal{C}, \wedge^{q + 1}(\mathcal{F})) = 0$의 소멸을 결합하면
+원하는 결론을 얻는다. 실제로 $\wedge^{q + 1}(\mathcal{F})$는
+$\mathcal{F}^{\otimes q + 1}$의 몫이고,
+$H_0(\mathcal{C}, \mathcal{F}^{\otimes q + 1})$
+는 영인 $H_0(\mathcal{C}, \mathcal{F})^{\otimes q + 1}$의 몫이기 때문이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-first-homology-symmetric-power}
+보조정리 \ref{lemma-vanishing-symmetric-powers}의 상황에서
+$H_k(\mathcal{C}, \text{Sym}^k(\mathcal{F})) =
+\wedge^k_B(H_1(\mathcal{C}, \mathcal{F}))$임을 보일 수 있다. 실제로 위
+증명에서 $H_k(\mathcal{C}, \text{Sym}^k(\mathcal{F}))$가 다음 것의
+$S_k$-여불변량임을 추론할 수 있다.
+$$
+H^{-k}(L\pi_!(\mathcal{F}) \otimes_B^\mathbf{L}
+L\pi_!(\mathcal{F}) \otimes_B^\mathbf{L}
+\ldots \otimes_B^\mathbf{L} L\pi_!(\mathcal{F})) =
+H_1(\mathcal{C}, \mathcal{F})^{\otimes k}
+$$
+따라서 우리의 주장은 이 작용이 텐서곱 위의 $S_k$의 통상적인 작용에 부호
+지표를 곱한 것으로 주어진다는 것이다. 이를 증명하려면 다중 복합체에 딸린
+전체 복합체의 정의에서 부호 규약을 하나씩 확인해야 한다. 확인은 생략한다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-map-tors-zero}
+$A$를 환이라 하고 $P = A[E]$를 다항식환이라 하자.
+$I = (e; e \in E) \subset P$로 두자. 모든 $i$와 $n$에 대하여 사상
+$\text{Tor}_i^P(A, I^{n + 1}) \to \text{Tor}_i^P(A, I^n)$
+은 영이다.
+\end{lemma}
+
+\begin{proof}
+$e \in E$에 대응하는 변수를 $x_e \in P$로 나타내자. $P$ 위의 $A$의
+자유 분해는 $x_e$들에 대한 Koszul 복합체 $K_\bullet$로 주어진다. 여기서
+$K_i$는 $e_1, \ldots, e_i \in E$에 대한 쐐기곱
+$e_1 \wedge \ldots \wedge e_i$를 기저로 가지며 $d(e) = x_e$이다. 따라서
+$K_\bullet \otimes_P I^n = I^nK_\bullet$는
+$\text{Tor}_i^P(A, I^n)$을 계산한다. 모든 것에
+$\deg(x_e) = 1$, $\deg(e) = 1$, 그리고 $a \in A$에 대하여
+$\deg(a) = 0$인 등급이 매겨져 있음에 유의하자. $\xi \in I^{n + 1}K_i$가
+차수 $m$인 동차 순환원이라고 하자. $m \geq i + 1 + n$임에 유의하자.
+$K_\bullet$는 차수 $ > 0$에서 완전하므로 어떤 $\eta \in K_{i + 1}$에
+대하여 $\xi = \text{d}\eta$이다. ($i = 0$인 경우는 독자에게 맡긴다.)
+이제 $\deg(\eta) = m \geq i + 1 + n$이다. 따라서 $\eta$를 이 기저로
+표현하면 그 좌표들이 $I^n$에 속함을 알 수 있다. 그러므로 원하는 대로
+$\xi$는 $I^nK_\bullet$의 호몰로지에서 영으로 간다.
+\end{proof}
+
+\begin{theorem}[Quillen 스펙트럼 열]
+\label{theorem-quillen-spectral-sequence}
+$A \to B$를 전사 환 준동형이라 하자. 절
+\ref{section-compute-L-pi-shriek}에서처럼 $\mathcal{C}_{B/A}$ 위의
+$\underline{B}$-가군 층
+$\Omega = \Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}$
+을 생각하자. 그러면 $E_1$-쪽이
+$$
+E_1^{p, q} =
+H_{- p - q}(\mathcal{C}_{B/A}, \text{Sym}^p_{\underline{B}}(\Omega))
+\Rightarrow \text{Tor}^A_{- p - q}(B, B)
+$$
+이고 $d_r$의 쌍차수가 $(r, -r + 1)$인 스펙트럼 열이 있다. 또한
+$i < k$에 대하여
+$H_i(\mathcal{C}_{B/A}, \text{Sym}^k_{\underline{B}}(\Omega)) = 0$이다.
+\end{theorem}
+
+\begin{proof}
+$I \subset A$를 $A \to B$의 핵이라 하고, $\mathcal{J} \subset \mathcal{O}$를
+$\mathcal{O} \to \underline{B}$의 핵이라 하자. 그러면
+$I\mathcal{O} \subset \mathcal{J}$이다. 다음과 같이 두자.
+$\mathcal{K} = \mathcal{J}/I\mathcal{O}$ 그리고
+$\overline{\mathcal{O}} = \mathcal{O}/I\mathcal{O}$.
+
+\medskip\noindent
+$\mathcal{C}_{B/A}$의 모든 대상 $U = (P \to B)$에 대하여, 사상
+$P \to B$가 각 $e \in E$를 영으로 보내도록 하는 동형사상
+$P = A[E]$를 택할 수 있다. 그러면
+$J = \mathcal{J}(U) \subset P = \mathcal{O}(U)$
+이고 $J = IP + (e; e \in E)$이다. 또한
+$\overline{\mathcal{O}}(U) = B[E]$이고 $K = \mathcal{K}(U) = (e; e \in E)$
+이며, 후자는 다항식환 $B[E]$에서 변수들로 생성되는 아이디얼이다. 특히
+$$
+K/K^2 \xrightarrow{\text{d}} \Omega_{P/A} \otimes_P B
+$$
+가 전단사임은 명백하다. 다시 말해
+$\Omega = \mathcal{K}/\mathcal{K}^2$이고
+$\text{Sym}_B^k(\Omega) = \mathcal{K}^k/\mathcal{K}^{k + 1}$이다.
+$\pi_!(\Omega) = \Omega_{B/A} = 0$임에 유의하자(보조정리
+\ref{lemma-identify-H0}). 이는 $A \to B$가 전사이기 때문이다(가환대수학,
+보조정리 \ref{algebra-lemma-trivial-differential-surjective}). 보조정리
+\ref{lemma-vanishing-symmetric-powers}에 의해
+$$
+H_i(\mathcal{C}_{B/A}, \mathcal{K}^k/\mathcal{K}^{k + 1}) =
+H_i(\mathcal{C}_{B/A}, \text{Sym}^k_{\underline{B}}(\Omega)) = 0
+$$
+이 $i < k$에 대하여 성립한다. 이로써 정리의 마지막 명제를 증명했다.
+
+\medskip\noindent
+이 정리에 접근하기 위해 다음 등식에 유의하자.
+$$
+B \otimes_A^\mathbf{L} B = L\pi_!(\mathcal{O}) \otimes_A^\mathbf{L} B =
+L\pi_!(\mathcal{O} \otimes_{\underline{A}}^\mathbf{L} \underline{B}) =
+L\pi_!(\overline{\mathcal{O}})
+$$
+첫 번째 등식은 보조정리 \ref{lemma-apply-O-B-comparison}, 두 번째 등식은
+사이트 위의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-change-of-rings}에서 따르고, 세 번째 등식은
+$\mathcal{O}$가 $\underline{A}$ 위에서 평탄하기 때문에 성립한다. 층
+$\overline{\mathcal{O}}$에는 여과
+$$
+\ldots \subset
+\mathcal{K}^3 \subset
+\mathcal{K}^2 \subset
+\mathcal{K} \subset
+\overline{\mathcal{O}}
+$$
+가 있다. 이는 $L\pi_!(\overline{\mathcal{O}})$를 나타내는 복합체 $C$에
+여과 $F$를 유도하며, $F^pC$는 $L\pi_!(\mathcal{K}^p)$를 나타낸다
+($C$와 $F$의 구성은 생략한다). $(C, F)$에 딸린 호몰로지, 절
+\ref{homology-section-filtered-complex}의 스펙트럼 열을 생각하자. 그
+$E_1$-쪽은
+$$
+E_1^{p, q} = H_{- p - q}(\mathcal{C}_{B/A}, \mathcal{K}^p/\mathcal{K}^{p + 1})
+\quad\Rightarrow\quad
+H_{- p - q}(\mathcal{C}_{B/A}, \overline{\mathcal{O}}) = 
+\text{Tor}_{- p - q}^A(B, B)
+$$
+이고 미분은 $E_r^{p, q} \to E_r^{p + r, q - r + 1}$이다. 수렴을 보이기
+위하여, 모든 $k$에 대하여 다음 조건을 만족하는 $c$가 존재함을 보이겠다.
+$H_i(\mathcal{C}_{B/A}, \mathcal{K}^n) = 0$
+이는 $i < k$ 및 $n > c$일 때 성립한다\footnote{사후적으로는 $i < n$일
+때 성립하는 ``올바른'' 소멸
+$H_i(\mathcal{C}_{B/A}, \mathcal{K}^n) = 0$을 결론지을 수 있다.}.
+
+\medskip\noindent
+$k \geq 0$이 주어졌을 때 $c = k^2$로 두자. $i < k$이고 $n \geq 0$이면
+사상
+$$
+H_i(\mathcal{C}_{B/A}, \mathcal{K}^{n + c}) \to
+H_i(\mathcal{C}_{B/A}, \mathcal{K}^n)
+$$
+이 영이라고 주장한다. $\mathcal{K}^n/\mathcal{K}^{n + c}$에는 연속한 몫이
+$\mathcal{K}^m/\mathcal{K}^{m + 1}$, $n \leq m < n + c$인 유한 여과가
+있음에 유의하자. 위에서 보았듯이 이 몫들은 $i < n$에 대하여
+$H_i(\mathcal{C}_{B/A}, \mathcal{K}^m/\mathcal{K}^{m + 1}) = 0$을
+만족한다. 따라서 이 주장에서 모든 $n \geq k$와 $i < k$에 대하여
+$H_i(\mathcal{C}_{B/A}, \mathcal{K}^{n + c}) = 0$이 따르며, 이것이
+우리가 보여야 할 명제이다.
+
+\medskip\noindent
+주장의 증명. 임의의 $\mathcal{O}$-가군 $\mathcal{F}$에 대하여 사상
+$\mathcal{F} \to \mathcal{F} \otimes_\mathcal{O}^\mathbf{L} B$는
+$L\pi_!$를 적용하면 동형사상을 유도함을 상기하자. 보조정리
+\ref{lemma-O-homology-B-homology}를 보라. 다음 사상을 생각하자.
+$$
+\mathcal{K}^{n + k} \otimes_\mathcal{O}^\mathbf{L} B
+\longrightarrow
+\mathcal{K}^n \otimes_\mathcal{O}^\mathbf{L} B
+$$
+이 사상이 차수 $0, -1, \ldots, - k + 1$의 코호몰로지 층 위에서 영
+사상을 유도한다고 주장한다. 이 두 번째 주장이 성립하면 $k$중 합성
+$$
+\mathcal{K}^{n + c} \otimes_\mathcal{O}^\mathbf{L} B
+\longrightarrow
+\mathcal{K}^n \otimes_\mathcal{O}^\mathbf{L} B
+$$
+은 $\tau_{\leq -k}\mathcal{K}^n \otimes_\mathcal{O}^\mathbf{L} B$를 통하여
+분해된다. 따라서 $i < k$일 때
+$H_i(\mathcal{C}_{B/A}, -) = L_i\pi_!( - )$ 위에서 영을 유도한다. 유도
+범주, 보조정리 \ref{derived-lemma-trick-vanishing-composition}를 보라. 위의
+주에 의해 이는 사상
+$H_i(\mathcal{C}_{B/A}, \mathcal{K}^{n + c}) \to
+H_i(\mathcal{C}_{B/A}, \mathcal{K}^n)$
+에도 같은 명제가 성립함을 뜻하며, 이로써 첫 번째 주장이 증명된다.
+
+\medskip\noindent
+두 번째 주장의 증명. 이 명제는 국소적이므로 위와 같은 대상
+$U = (P \to B)$ 위에서 작업해도 된다. $i < k$에 대하여 사상
+$$
+\text{Tor}_i^P(B, K^{n + k}) \to \text{Tor}_i^P(B, K^n)
+$$
+이 영임을 보여야 한다. 스펙트럼 열
+$$
+\text{Tor}_a^P(P/IP, \text{Tor}_b^{P/IP}(B, K^n))
+\Rightarrow
+\text{Tor}_{a + b}^P(B, K^n),
+$$
+이 있다. 대수학 심화, 예 \ref{more-algebra-example-tor-change-rings}를
+보라. 따라서 모든 $i$에 대하여 사상
+$$
+\text{Tor}_i^{P/IP}(B, K^{n + 1}) \to \text{Tor}_i^{P/IP}(B, K^n)
+$$
+이 영임을 보이면 충분하다. 이것이 보조정리
+\ref{lemma-map-tors-zero}이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-elucidate-ss}
+정리 \ref{theorem-quillen-spectral-sequence}의 상황에서
+$I = \Ker(A \to B)$로 두자. 그러면
+$H^{-1}(L_{B/A}) = H_1(\mathcal{C}_{B/A}, \Omega) = I/I^2$이다. 보조정리
+\ref{lemma-surjection}를 보라. 따라서 주
+\ref{remark-first-homology-symmetric-power}에 의해
+$H_k(\mathcal{C}_{B/A}, \text{Sym}^k(\Omega)) = \wedge^k_B(I/I^2)$이다.
+그러므로 $E_1$-쪽은 다음과 같다.
+$$
+\begin{matrix}
+B \\
+0 \\
+0 & I/I^2 \\
+0 & H^{-2}(L_{B/A}) \\
+0 & H^{-3}(L_{B/A}) & \wedge^2(I/I^2) \\
+0 & H^{-4}(L_{B/A}) & H_3(\mathcal{C}_{B/A}, \text{Sym}^2(\Omega)) \\
+0 & H^{-5}(L_{B/A}) & H_4(\mathcal{C}_{B/A}, \text{Sym}^2(\Omega)) &
+\wedge^3(I/I^2)
+\end{matrix}
+$$
+미분은 수평 방향이다. 따라서 가장자리 사상
+$\text{Tor}_i^A(B, B) \to H^{-i}(L_{B/A})$, $i > 0$ 및
+$\wedge^i_B(I/I^2) \to \text{Tor}_i^A(B, B)$를 얻는다. 끝으로
+$\text{Tor}_1^A(B, B) = I/I^2$이고, 낮은 차수의 항들로 이루어진 5항
+완전열
+$$
+\text{Tor}_3^A(B, B) \to H^{-3}(L_{B/A}) \to \wedge^2_B(I/I^2) \to
+\text{Tor}_2^A(B, B) \to H^{-2}(L_{B/A}) \to 0
+$$
+이 있다.
+\end{remark}
+
+\begin{remark}
+\label{remark-elucidate-degree-two}
+$A \to B$를 환 준동형이라 하자. $P_\bullet$을 $A$ 위의 $B$의 분해라
+하자(주 \ref{remark-resolution}). $J_n = \Ker(P_n \to B)$로 두자. 다음에
+유의하자.
+$$
+\text{Tor}_2^{P_n}(B, B) = 
+\text{Tor}_1^{P_n}(J_n, B) =
+\Ker(J_n \otimes_{P_n} J_n \to J_n^2).
+$$
+따라서 주 \ref{remark-surjection}에 의해 $H_2(L_{B/A})$는 표준적으로
+$$
+\Coker(\text{Tor}_2^{P_1}(B, B) \to \text{Tor}_2^{P_0}(B, B))
+$$
+와 같다. 이를 더 명시적으로 나타내기 위하여 예
+\ref{example-resolution-length-two}에서와 같이 $P_2$, $P_1$, $P_0$을
+택한다. 다음과 같다고 주장한다.
+$$
+\text{Tor}_2^{P_1}(B, B) =
+\wedge^2(\bigoplus\nolimits_{t \in T} B)\ \oplus
+\ \bigoplus\nolimits_{t \in T} J_0\ \oplus
+\ \text{Tor}_2^{P_0}(B, B)
+$$
+실제로 첫 번째 직합항의 기저 원소 $x_t \wedge x_{t'}$는
+$J_1 \otimes_{P_1} J_1$의 원소
+$x_t \otimes x_{t'} - x_{t'} \otimes x_t$에 대응한다. $f \in J_0$에
+대하여 두 번째 직합항의 원소 $x_t \otimes f$는
+$J_1 \otimes_{P_1} J_1$의 원소
+$x_t \otimes s_0(f) - s_0(f) \otimes x_t$에 대응한다. 끝으로 사상
+$\text{Tor}_2^{P_0}(B, B) \to \text{Tor}_2^{P_1}(B, B)$은 $s_0$로
+주어진다. 사상
+$d_0 - d_1 : \text{Tor}_2^{P_1}(B, B) \to \text{Tor}_2^{P_0}(B, B)$
+은 마지막 직합항에서 영이고, $x_t \otimes f$를
+$f \otimes f_t - f_t \otimes f$로 보내며, $x_t \wedge x_{t'}$를
+$f_t \otimes f_{t'} - f_{t'} \otimes f_t$로 보낸다. 종합하면 완전열
+$$
+\wedge^2_B(J_0/J_0^2) \to \text{Tor}_2^{P_0}(B, B) \to H^{-2}(L_{B/A}) \to 0
+$$
+이 있다. 이와 같이 주 \ref{remark-elucidate-ss}에서 논의한 Quillen
+스펙트럼 열의 한 귀결을 직접 증명한다.
+\end{remark}
+
+
+
+
+
+
+\section{Lichtenbaum--Schlessinger와의 비교}
+\label{section-compare-higher}
+
+\noindent
+$A \to B$를 환 준동형이라 하자. \cite{Lichtenbaum-Schlessinger}에는
+$\tau_{\geq -2}L_{B/A}$를 상당히 명시적으로 결정하는 방법이 있으며,
+이는 특이점의 versal 변형 공간을 계산할 때 자주 쓰인다. 그 구성은 다음과
+같다. $A$ 위의 다항식 대수 $P$와 핵이 $I$인 전사 $P \to B$를 택하자.
+$I$의 생성원 $f_t$, $t \in T$를 택하여, $F$가 자유 $P$-가군인 전사
+$F = \bigoplus_{t \in T} P \to I$를 얻는다. $Rel \subset F$를
+$F \to I$의 핵이라 하자. 다시 말해 $Rel$은 $f_t$들 사이의 관계식들의
+집합이다. $TrivRel \subset Rel$을 자명한 관계식들의 부분가군, 즉 원소
+$(\ldots, f_{t'}, 0, \ldots, 0, -f_t, 0, \ldots)$들로 생성되는 $Rel$의
+부분가군이라 하자. 다음 $B$-가군 복합체를 생각하자.
+\begin{equation}
+\label{equation-lichtenbaum-schlessinger}
+Rel/TrivRel \longrightarrow
+F \otimes_P B \longrightarrow
+\Omega_{P/A} \otimes_P B
+\end{equation}
+여기서 마지막 항은 차수 $0$에 놓인다. 첫 번째 사상은 명백한 사상이고,
+두 번째 사상은 $t \in T$에 대응하는 기저 원소를
+$\text{d}f_t \otimes 1$로 보낸다.
+
+\begin{definition}
+\label{definition-biderivation}
+$A \to B$를 환 준동형이라 하자. $M$을 $A$ 위의 $(B, B)$-쌍가군이라
+하자. {\it $A$-쌍미분}이란
+$\lambda(xy) = x\lambda(y) + \lambda(x)y$를 만족하는 $A$-선형 사상
+$\lambda : B \to M$이다.
+\end{definition}
+
+\noindent
+다항식 대수의 쌍미분은 쉽게 기술할 수 있다.
+
+\begin{lemma}
+\label{lemma-polynomial-ring-unique}
+$P = A[S]$를 $A$ 위의 다항식환이라 하고, $M$을 $A$ 위의
+$(P, P)$-쌍가군이라 하자. $s \in S$에 대하여 $m_s \in M$이 주어지면,
+각 $s \in S$에 대하여 $s$를 $m_s$로 보내는 유일한 $A$-쌍미분
+$\lambda : P \to M$이 존재한다.
+\end{lemma}
+
+\begin{proof}
+다음과 같이 두자.
+$$
+\lambda(s_1 \ldots s_t) =
+\sum s_1 \ldots s_{i - 1} m_{s_i} s_{i + 1} \ldots s_t
+$$
+이는 $M$의 원소이다. 이를 $A$-선형으로 연장하면 쌍미분을 얻는다.
+\end{proof}
+
+\noindent
+이제 비교 명제를 제시한다. 독자는 \cite[206쪽, 명제
+12]{Andre-Homologie} 또는 복합체
+(\ref{equation-lichtenbaum-schlessinger})에 한 항을 덧붙이고 비교를
+$\tau_{\geq -3}$까지 확장하는 논문 \cite{Doncel}도 참고할 수 있다.
+
+\begin{lemma}
+\label{lemma-compare-higher}
+위 상황에서 복합체 (\ref{equation-lichtenbaum-schlessinger})를 $L$로
+나타내자. $D(B)$에 표준 사상 $L_{B/A} \to L$이 있으며, 이 사상은
+$D(B)$에서 동형사상 $\tau_{\geq -2}L_{B/A} \to L$을 유도한다.
+\end{lemma}
+
+\begin{proof}
+$P_\bullet \to B$를 $A$ 위의 $B$의 분해라 하자(주
+\ref{remark-resolution}). $L_{B/A}$를
+$\Omega_{P_\bullet/A} \otimes B$와 동일시하겠다. 사상을 구성하기 위하여
+몇 가지를 선택한다.
+
+\medskip\noindent
+주어진 사상 $P_0 \to B$ 및 $P \to B$와 양립하는 $A$-대수 준동형
+$\psi : P_0 \to P$를 택하자.
+
+\medskip\noindent
+어떤 집합 $S$에 대하여 $P_1 = A[S]$로 쓰자. $s \in S$에 대하여
+$$
+\psi(d_0(s) - d_1(s)) = \sum p_{s, t} f_t
+$$
+인 $p_{s, t} \in P$들이 존재한다. 사상
+$(\psi \circ d_0, \psi \circ d_1)$을 통하여
+$F = \bigoplus_{t \in T} P$를 $(P_1, P_1)$-쌍가군으로 생각하자. 보조정리
+\ref{lemma-polynomial-ring-unique}에 의해 $s$를 좌표가 $p_{s, t}$인
+벡터로 보내는 유일한 $A$-쌍미분 $\lambda : P_1 \to F$를 얻는다. 구성상
+합성
+$$
+P_1 \longrightarrow F \longrightarrow P
+$$
+은 $f \in P_1$을 $\psi(d_0(f) - d_1(f))$로 보낸다. 실제로 사상
+$f \mapsto \psi(d_0(f) - d_1(f))$는 생성원 위에서 이 합성과 일치하는
+$A$-쌍미분이다.
+
+\medskip\noindent
+$g \in P_2$에 대하여 $\lambda(d_0(g) - d_1(g) + d_2(g))$가 $Rel$의
+원소라고 주장한다. 실제로 앞 문단의 마지막 관찰에 의해
+$\lambda(d_0(g) - d_1(g) + d_2(g))$의 $P$에서의 상은
+$$
+\psi((d_0 - d_1)(d_0(g) - d_1(g) + d_2(g)))
+$$
+이며, 이는 단체적 방법, 절 \ref{simplicial-section-complexes}에 의해
+영이다).
+
+\medskip\noindent
+$\psi$의 선택은 사상
+$$
+\text{d}\psi \otimes 1 :
+\Omega_{P_0/A} \otimes B
+\longrightarrow
+\Omega_{P/A} \otimes B
+$$
+을 결정한다. $F \otimes B$ 위의 두 $P_1$-가군 구조가 일치하므로
+$\lambda$를 사상 $F \to F \otimes B$와 합성하면 통상적인
+$A$-미분을 얻는다. 따라서 $\lambda$는 사상
+$$
+\overline{\lambda} :
+\Omega_{P_1/A} \otimes B
+\longrightarrow
+F \otimes B
+$$
+을 결정한다. 끝으로 $\text{d}g$를 몫에서
+$\lambda(d_0(g) - d_1(g) + d_2(g))$의 동치류로 보내어 $B$-선형 사상
+$$
+q :
+\Omega_{P_2/A} \otimes B
+\longrightarrow
+Rel/TrivRel
+$$
+을 얻는다.
+
+\medskip\noindent
+도표
+$$
+\xymatrix{
+\Omega_{P_3/A} \otimes B \ar[r] \ar[d] &
+\Omega_{P_2/A} \otimes B \ar[r] \ar[d]_q &
+\Omega_{P_1/A} \otimes B \ar[r] \ar[d]_{\overline{\lambda}} &
+\Omega_{P_0/A} \otimes B \ar[d]_{\text{d}\psi \otimes 1} \\
+0 \ar[r] &
+Rel/TrivRel \ar[r] &
+F \otimes B \ar[r] &
+\Omega_{P/A} \otimes B
+}
+$$
+는 가환한다(계산은 생략한다). 따라서 보조정리의 사상을 얻는다. 주
+\ref{remark-explicit-comparison-map}와 보조정리
+\ref{lemma-relation-with-naive-cotangent-complex}에 의해 이 사상은 동형사상
+$H_1(L_{B/A}) \to H_1(L)$ 및 $H_0(L_{B/A}) \to H_0(L)$을 유도한다.
+
+\medskip\noindent
+이제 우리 사상 $L_{B/A} \to L$이 동형사상
+$H_2(L_{B/A}) \to H_2(L)$을 유도함을 보이면 된다. $P_0 = P = A[u_i]$인
+$A$ 위의 $B$의 분해를 택하고, 이어서 예
+\ref{example-resolution-length-two}에서처럼 $P_1$과 $P_2$를 택하자. 주
+\ref{remark-elucidate-degree-two}에서 완전열
+$$
+\wedge^2_B(J_0/J_0^2) \to \text{Tor}_2^{P_0}(B, B) \to H^{-2}(L_{B/A}) \to 0
+$$
+을 구성했다. 여기서 $P_0 = P$이고 $J_0 = \Ker(P \to B) = I$이다. 짧은
+완전열 $0 \to I \to P \to B \to 0$과
+$0 \to Rel \to F \to I \to 0$을 이용하여 Tor 군을 계산하면
+$\text{Tor}_2^P(B, B) = \Ker(Rel \otimes B \to F \otimes B)$.
+이 동일시 아래에서 사상
+$\wedge^2_B(I/I^2) \to \text{Tor}_2^P(B, B)$의 상은 정확히
+$TrivRel \otimes B$의 상이다. 따라서
+$H_2(L_{B/A}) \cong H_2(L)$임을 알 수 있다.
+
+\medskip\noindent
+끝으로 우리 사상 $L_{B/A} \to L$이 실제로 이 동형사상을 유도함을
+확인해야 한다. 예 \ref{example-resolution-length-two}와 주
+\ref{remark-elucidate-degree-two} 및 \ref{remark-surjection}에서 논의한
+표기와 결과를 더 언급하지 않고 사용하겠다.
+$\text{Tor}_2^{P_0}(B, B) = \Ker(I \otimes_P I \to I^2)$의 원소 $\xi$를
+택하자. 어떤 $h_{t', t} \in P$에 대하여
+$\xi = \sum h_{t', t}f_{t'} \otimes f_t$로 쓰자. 위의 완전열들을 따라가면
+$\xi$는 $t$번째 좌표가
+$r_t = \sum_{t' \in T} h_{t', t}f_{t'}$인 원소
+$r \in Rel \subset F = \bigoplus_{t \in T} P$의 $Rel \otimes B$에서의
+상에 대응한다. 한편 $\xi$는 다음 $2$-확대 아래에서 $\xi$의 경계를
+$\text{d} : H_2(\mathcal{J}/\mathcal{J}^2) \to H_2(\Omega)$로 보낸 상인
+$H_2(L_{B/A}) = H_2(\Omega)$의 원소에 대응한다.
+$$
+0 \to
+\text{Tor}_2^\mathcal{O}(\underline{B}, \underline{B})
+\to 
+\mathcal{J} \otimes_\mathcal{O} \mathcal{J} \to \mathcal{J}
+\to
+\mathcal{J}/\mathcal{J}^2 \to 0
+$$
+우리 원소의 연속적인 횡단 사상을 계산하자. 먼저
+$$
+\xi = (d_0 - d_1)(- \sum s_0(h_{t', t} f_{t'}) \otimes x_t)
+$$
+이고, 다음으로
+$$
+\sum s_0(h_{t', t} f_{t'}) x_t = d_0(v_r) - d_1(v_r) + d_2(v_r)
+$$
+이다. 이는 예 \ref{example-resolution-length-two}에서 변수 $v$를 택한
+방법에 따른다. 위의 사상 $\lambda$를 $\lambda(u_i) = 0$이고
+$\lambda(x_t) = - e_t$가 되도록 택할 수 있다. 여기서 $e_t \in F$는
+$t \in T$에 대응하는 기저 벡터이다. 따라서 위의 사상 $q$의 구성은
+$\text{d}v_r$를
+$$
+\lambda(\sum s_0(h_{t', t} f_{t'}) x_t) =
+\sum\nolimits_t \left(\sum\nolimits_{t'} h_{t', t}f_{t'}\right) e_t
+$$
+로 보내며, 이는 $Rel \otimes B$에서 $\xi$의 상과 일치한다(위에서 얻은
+두 음의 부호는 서로 상쇄된다). 이 일치로 증명이 끝난다.
+\end{proof}
+
+\begin{remark}[Lichtenbaum--Schlessinger 복합체의 함자성]
+\label{remark-functoriality-lichtenbaum-schlessinger}
+환 준동형들의 가환 사각형
+$$
+\xymatrix{
+A' \ar[r] & B' \\
+A \ar[u] \ar[r] & B \ar[u]
+}
+$$
+을 생각하자. 분해
+$$
+\xymatrix{
+A' \ar[r] & P' \ar[r] & B' \\
+A \ar[u] \ar[r] & P \ar[u] \ar[r] & B \ar[u]
+}
+$$
+$P$가 $A$ 위의 다항식 대수이고 $P'$이 $A'$ 위의 다항식 대수가 되도록
+택하자. $\Ker(P \to B)$의 생성원 $f_t$, $t \in T$를 택하자.
+$t \in T$에 대하여 $P'$에서 $f_t$의 상을 $f'_t$로 나타내자.
+$t \in T' = T \amalg S$인 원소 $f'_t$들이 $P' \to B'$의 핵을 생성하도록
+$f'_s \in P'$을 택하자. $F = \bigoplus_{t \in T} P$ 및
+$F' = \bigoplus_{t' \in T'} P'$로 두자. 좌표마다 각각 $f_t$와 $f'_t$를
+곱하여 주어지는 사상에 대하여 $Rel = \Ker(F \to P)$ 및
+$Rel' = \Ker(F' \to P')$로 두자. 끝으로 $TrivRel$ 및 각각 $TrivRel'$을
+$Rel$ 및 각각 $TrivRel$의 다음 원소들로 생성되는 부분가군이라 하자.
+$(\ldots, f_{t'}, 0, \ldots, 0, -f_t, 0, \ldots)$
+여기서 $t, t' \in T$ 및 각각 $T'$이다. 이들을 택하면 표준 가환 도표
+$$
+\xymatrix{
+L' : &
+Rel'/TrivRel' \ar[r] &
+F' \otimes_{P'} B' \ar[r] &
+\Omega_{P'/A'} \otimes_{P'} B' \\
+L : \ar[u] &
+Rel/TrivRel \ar[r] \ar[u] &
+F \otimes_P B \ar[r] \ar[u] &
+\Omega_{P/A} \otimes_P B \ar[u]
+}
+$$
+를 얻는다. 또한 보조정리 \ref{lemma-compare-higher}의 증명에서 한 선택들을
+따라가면 다음 가환 도표를 얻음을 알 수 있다.
+$$
+\xymatrix{
+L_{B'/A'} \ar[r] & L' \\
+L_{B/A} \ar[r] \ar[u] & L \ar[u]
+}
+$$
+\end{remark}
+
+
+
+
+
+\section{국소 완전 교차의 코탄젠트 복합체}
+\label{section-lci}
+
+\noindent
+$A \to B$가 국소 완전 교차 준동형이면 $L_{B/A}$는 완전 복합체이다.
+이를 증명하는 핵심은 다음 보조정리이다.
+
+\begin{lemma}
+\label{lemma-special-case}
+$A = \mathbf{Z}[x_1, \ldots, x_n] \to B = \mathbf{Z}$를
+$i = 1, \ldots, n$에 대하여 $x_i$를 $0$으로 보내는 환 준동형이라 하자.
+$I = (x_1, \ldots, x_n) \subset A$로 두자. 그러면 $L_{B/A}$는
+$I/I^2[1]$과 준동형이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하는 방법은 여러 가지이다. 예를 들어 $A$ 위의 $B$의 분해를
+명시적으로 구성하여 계산할 수 있다. 여기서는 (\ref{equation-triangle})을
+사용하겠다. 즉, 완전 삼각형
+$$
+L_{\mathbf{Z}[x_1, \ldots, x_n]/\mathbf{Z}}
+\otimes_{\mathbf{Z}[x_1, \ldots, x_n]} \mathbf{Z} \to
+L_{\mathbf{Z}/\mathbf{Z}} \to
+L_{\mathbf{Z}/\mathbf{Z}[x_1, \ldots, x_n]}\to
+L_{\mathbf{Z}[x_1, \ldots, x_n]/\mathbf{Z}}
+\otimes_{\mathbf{Z}[x_1, \ldots, x_n]} \mathbf{Z}[1]
+$$
+을 생각하자. 보조정리 \ref{lemma-cotangent-complex-polynomial-algebra}에 의해
+복합체 $L_{\mathbf{Z}[x_1, \ldots, x_n]/\mathbf{Z}}$는
+$\Omega_{\mathbf{Z}[x_1, \ldots, x_n]/\mathbf{Z}}$와 준동형이다. 보조정리
+\ref{lemma-when-zero}에 의해 복합체 $L_{\mathbf{Z}/\mathbf{Z}}$는
+$D(\mathbf{Z})$에서 영이다. 따라서 $L_{B/A}$는 영이 아닌 코호몰로지
+군을 하나만 가지며, 보조정리 \ref{lemma-surjection}에 의해 그것은 이
+보조정리에 기술한 것과 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-mod-regular-sequence}
+$A \to B$를 핵 $I$가 Koszul-정칙열(예를 들어 정칙열)로 생성되는 전사
+환 준동형이라 하자. 그러면 $L_{B/A}$는 $I/I^2[1]$과 준동형이다.
+\end{lemma}
+
+\begin{proof}
+$f_1, \ldots, f_r \in I$를 $I$를 생성하는 Koszul 정칙열이라 하자.
+$x_i$를 $f_i$로 보내는 환 준동형
+$\mathbf{Z}[x_1, \ldots, x_r] \to A$를 생각하자.
+$x_1, \ldots, x_r$은 $\mathbf{Z}[x_1, \ldots, x_r]$의 정칙열이므로,
+$x_1, \ldots, x_r$에 대한 Koszul 복합체는
+$\mathbf{Z} = \mathbf{Z}[x_1, \ldots, x_r]/(x_1, \ldots, x_r)$
+의 $\mathbf{Z}[x_1, \ldots, x_r]$ 위의 자유 분해이다(대수학 심화,
+보조정리 \ref{more-algebra-lemma-regular-koszul-regular}를 보라). 따라서
+$f_1, \ldots, f_r$이 Koszul 정칙이라는 가정은 정확히
+$B = A \otimes_{\mathbf{Z}[x_1, \ldots, x_r]}^\mathbf{L} \mathbf{Z}$.
+를 뜻한다. 따라서 보조정리
+\ref{lemma-flat-base-change-cotangent-complex}와
+\ref{lemma-special-case}에 의해
+$L_{B/A} = L_{\mathbf{Z}/\mathbf{Z}[x_1, \ldots, x_r]}
+\otimes_\mathbf{Z}^\mathbf{L} B$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-mod-Koszul-regular-ideal}
+$A \to B$를 핵 $I$가 Koszul 아이디얼인 전사 환 준동형이라 하자. 그러면
+$L_{B/A}$는 $I/I^2[1]$과 준동형이다.
+\end{lemma}
+
+\begin{proof}
+$\Spec(A)$ 위에서 국소적으로 아이디얼 $I$는 Koszul 정칙열로 생성된다.
+대수학 심화, 정의 \ref{more-algebra-definition-regular-ideal}를 보라. 따라서
+보조정리 \ref{lemma-flat-base-change-cotangent-complex}에서 결론이 따른다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-cotangent-complex-local-complete-intersection}
+$A \to B$를 국소 완전 교차 준동형이라 하자. 그러면 $L_{B/A}$는
+Tor-진폭이 $[-1, 0]$에 놓이는 완전 복합체이다.
+\end{proposition}
+
+\begin{proof}
+핵이 $J$인 전사 $P = A[x_1, \ldots, x_n] \to B$를 택하자. 보조정리
+\ref{lemma-relation-with-naive-cotangent-complex}에 의해
+$J/J^2 \to \bigoplus B\text{d}x_i$는
+$\tau_{\geq -1}L_{B/A}$와 준동형이다. $J/J^2$이 유한 사영임에 유의하자
+(대수학 심화, 보조정리
+\ref{more-algebra-lemma-quasi-regular-ideal-finite-projective}). 따라서
+$\tau_{\geq -1}L_{B/A}$는 Tor-진폭이 $[-1, 0]$에 놓이는 완전 복합체이다.
+그러므로 $i \not \in [-1, 0]$에 대하여 $H^i(L_{B/A}) = 0$임을 보이면
+충분하다. 이는 (\ref{equation-triangle})의 삼각형
+$$
+L_{P/A} \otimes_P^\mathbf{L} B \to L_{B/A} \to L_{B/P} \to
+L_{P/A} \otimes_P^\mathbf{L} B[1]
+$$
+과 보조정리 \ref{lemma-mod-Koszul-regular-ideal}에서 따른다. 실제로
+$i \in \{-1, 0\}$가 아니면 $H^i(L_{B/P})$는 영이다. (왼쪽 항에는
+보조정리 \ref{lemma-cotangent-complex-polynomial-algebra}도 사용한다.)
+\end{proof}
+
+
+
+
+
+
+
+
+\section{텐서곱과 코탄젠트 복합체}
+\label{section-tensor-product}
+
+\noindent
+$R$을 환이라 하고 $A$, $B$를 $R$-대수라 하자. 이 절에서는
+$L_{A \otimes_R B/R}$을 논의한다. 우리가 원하는 정보의 대부분은 다음
+도표에 들어 있다.
+\begin{equation}
+\label{equation-tensor-product}
+\vcenter{
+\xymatrix{
+L_{A/R} \otimes_A^\mathbf{L} (A \otimes_R B) \ar[r] &
+L_{A \otimes_R B/B} \ar[r] &
+E \\
+L_{A/R} \otimes_A^\mathbf{L} (A \otimes_R B) \ar[r] \ar@{=}[u] &
+L_{A \otimes_R B/R} \ar[r] \ar[u] &
+L_{A \otimes_R B/A} \ar[u] \\
+ &
+L_{B/R} \otimes_B^\mathbf{L} (A \otimes_R B) \ar[u] \ar@{=}[r] &
+L_{B/R} \otimes_B^\mathbf{L} (A \otimes_R B) \ar[u]
+}
+}
+\end{equation}
+설명: 가운데 행은 환 준동형 $R \to A \to A \otimes_R B$에 대한 기본
+삼각형 (\ref{equation-triangle})이다. 가운데 열은 환 준동형
+$R \to B \to A \otimes_R B$에 대한 기본 삼각형
+(\ref{equation-triangle})이다. 다음으로 $E$는 오른쪽 위 모서리에
+``들어맞는'' $D(A \otimes_R B)$의 대상, 즉 위쪽 행과 오른쪽 열을 모두
+완전 삼각형으로 만드는 대상이다. 이러한 $E$는 왼쪽 아래 사각형에
+유도 범주, 명제 \ref{derived-proposition-9}를 적용하면 존재한다(빈 자리에
+$0$을 놓는다). 더 명시적으로 말하면, 예를 들어 $E$를 다음 복합체 사상의
+사상뿔로 정의할 수 있다(유도 범주, 정의 \ref{derived-definition-cone}).
+$$
+L_{A/R} \otimes_A^\mathbf{L} (A \otimes_R B) \oplus
+L_{B/R} \otimes_B^\mathbf{L} (A \otimes_R B)
+\longrightarrow
+L_{A \otimes_R B/R}
+$$
+그리고 TR3을 적용하여 표적이 $E$인 두 사상을 얻는다. Tor-독립인 경우
+대상 $E$는 영이다.
+
+\begin{lemma}
+\label{lemma-tensor-product-tor-independent}
+$A$와 $B$가 Tor-독립인 $R$-대수이면 (\ref{equation-tensor-product})의
+대상 $E$는 영이다. 이 경우
+$$
+L_{A \otimes_R B/R} =
+L_{A/R} \otimes_A^\mathbf{L} (A \otimes_R B) \oplus
+L_{B/R} \otimes_B^\mathbf{L} (A \otimes_R B)
+$$
+이고, 이는 $A \otimes_R B$-가군 복합체
+$L_{A/R} \otimes_R B \oplus L_{B/R} \otimes_R A $
+로 나타내어진다.
+\end{lemma}
+
+\begin{proof}
+첫 두 명제는 보조정리 \ref{lemma-flat-base-change-cotangent-complex}에서
+즉시 따른다. 마지막 명제는 $L_{A/R}$이 자유 $A$-가군들의 복합체이므로
+$L_{A/R} \otimes_A^\mathbf{L} (A \otimes_R B)$가
+$L_{A/R} \otimes_A (A \otimes_R B) = L_{A/R} \otimes_R B$
+로 나타내어진다는 사실에서 따른다.
+\end{proof}
+
+\noindent
+일반적으로 대상 $E$에 관하여 다음을 말할 수 있다.
+
+\begin{lemma}
+\label{lemma-tensor-product}
+$R$을 환이라 하고 $A$, $B$를 $R$-대수라 하자.
+(\ref{equation-tensor-product})의 대상 $E$는 다음을 만족한다.
+$$
+H^i(E) =
+\left\{
+\begin{matrix}
+0 & \text{일 때} & i \geq -1 \\
+\text{Tor}_1^R(A, B) & \text{일 때} & i = -2
+\end{matrix}
+\right.
+$$
+\end{lemma}
+
+\begin{proof}
+$E$를 사상
+$L_{B/R} \otimes_B^\mathbf{L} (A \otimes_R B) \to L_{A \otimes_R B/A}$의
+사상뿔로 기술한 것을 사용한다. 보조정리 \ref{lemma-compare-higher}에 의해
+표준 절단 $\tau_{\geq -2}L_{B/R}$과
+$\tau_{\geq -2}L_{A \otimes_R B/A}$는 Lichtenbaum--Schlessinger 복합체
+(\ref{equation-lichtenbaum-schlessinger})로 계산된다. 이 동형사상들은
+함자성과 양립한다(주
+\ref{remark-functoriality-lichtenbaum-schlessinger}). 따라서 이
+증명에서는 Lichtenbaum--Schlessinger 복합체를 사용한다.
+
+\medskip\noindent
+$R$ 위의 다항식 대수 $P$와 전사 $P \to B$를 택하자. 이 전사의 핵의
+생성원 $f_t \in P$, $t \in T$를 택하자. $Rel \subset F =
+\bigoplus_{t \in T} P$를 $t$에 대응하는 기저 벡터를 $f_t$로 보내는 사상
+$F \to P$의 핵이라 하자. $P_A = A \otimes_R P$ 및
+$F_A = A \otimes_R F = P_A \otimes_P F$로 두자. $Rel_A$를 사상
+$F_A \to P_A$의 핵이라 하자. 완전열
+$$
+0 \to Rel \to F \to P \to B \to 0
+$$
+과 Tor에 대한 표준 짧은 완전열들을 이용하면 완전열
+$$
+A \otimes_R Rel \to Rel_A \to \text{Tor}_1^R(A, B) \to 0
+$$
+을 얻는다. $P_A \to A \otimes_R B$가 핵이 $P_A$의 원소
+$1 \otimes f_t$들로 생성되는 전사임에 유의하자. $TrivRel_A \subset Rel_A$
+를 다음 원소들로 생성되는 $P_A$-부분가군이라 하자.
+$(\ldots, 1 \otimes f_{t'}, 0, \ldots,
+0, - 1 \otimes f_t \otimes 1, 0, \ldots)$.
+$TrivRel \otimes_R A \to TrivRel_A$가 전사이므로 표준 완전열
+$$
+A \otimes_R (Rel/TrivRel) \to Rel_A/TrivRel_A \to \text{Tor}_1^R(A, B) \to 0
+$$
+을 얻는다. Lichtenbaum--Schlessinger 복합체들의 사상은 도표
+$$
+\xymatrix{
+Rel_A/TrivRel_A \ar[r] &
+F_A \otimes_{P_A} (A \otimes_R B) \ar[r] &
+\Omega_{P_A/A \otimes_R B} \otimes_{P_A} (A \otimes_R B) \\
+Rel/TrivRel \ar[r] \ar[u]_{-2} &
+F \otimes_P B \ar[r] \ar[u]_{-1} &
+\Omega_{P/A} \otimes_P B \ar[u]_0
+}
+$$
+로 주어진다. 수직 사상 $-1$과 $-0$은 원천에 함자
+$A \otimes_R - = P_A \otimes_P -$를 적용한 뒤 동형사상을 유도하고,
+수직 사상 $-2$는 위에서 본 대로 그 여핵이 원하는 Tor 가군인 사상을
+정확히 준다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{환 준동형의 변형과 코탄젠트 복합체}
+\label{section-deformations}
+
+\noindent
+이 절은 변형 이론, 절 \ref{defos-section-deformations}의 계속이며, 독자에게
+먼저 그 절을 읽기를 권한다. 핵이 제곱이 영인 아이디얼 $I$인 전사 환
+준동형 $A' \to A$에서 시작하자. 또한 환 준동형 $A \to B$, $B$-가군
+$N$, 그리고 $A$-가군 준동형 $c : I \to N$이 주어졌다고 가정하자. 이
+절에서는 다음 도표의 물음표에 들어갈 대상을 찾을 수 있는지 묻는다.
+\begin{equation}
+\label{equation-to-solve}
+\vcenter{
+\xymatrix{
+0 \ar[r] & N \ar[r] & {?} \ar[r] & B \ar[r] & 0 \\
+0 \ar[r] & I \ar[u]^c \ar[r] & A' \ar[u] \ar[r] & A \ar[u] \ar[r] & 0
+}
+}
+\end{equation}
+또 그러한 해가 존재할 때 얼마나 유일한지도 묻는다. 더 정확히 말하면,
+핵이 제곱이 영인 아이디얼이며 $N$과 동일시되고, $A' \to B'$가 주어진
+사상 $c$를 유도하는 $A'$-대수의 전사 $B' \to B$를 찾는다. 이러한
+$B'$를 (\ref{equation-to-solve})의 {\it 해}라고 부른다.
+
+\begin{lemma}
+\label{lemma-find-obstruction}
+위의 상황에서 다음이 성립한다.
+\begin{enumerate}
+\item 표준 원소 $\xi \in \Ext^2_B(L_{B/A}, N)$가 있으며, 이 원소의
+소멸은 (\ref{equation-to-solve})의 해가 존재하기 위한 필요충분조건이다.
+\item 해가 존재하면 해의 동형류들의 집합은
+$\Ext^1_B(L_{B/A}, N)$ 아래의 주동차 공간이다.
+\item 해 $B'$가 주어지면 (\ref{equation-to-solve})에 들어맞는 $B'$의
+자기동형사상들의 집합은 $\Ext^0_B(L_{B/A}, N)$과 표준적으로 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+동일시 $\NL_{B/A} = \tau_{\geq -1}L_{B/A}$(보조정리
+\ref{lemma-relation-with-naive-cotangent-complex}) 및
+$H^0(L_{B/A}) = \Omega_{B/A}$(보조정리 \ref{lemma-identify-H0})를 통하여
+(2)와 (3)은 변형 이론, 보조정리 \ref{defos-lemma-huge-diagram}과
+\ref{defos-lemma-choices}에서 이미 보았다.
+
+\medskip\noindent
+(1)의 증명. 대략 말하면, 변형 이론, 주
+\ref{defos-remark-parametrize-solutions}의 논의에서 소박한 코탄젠트
+복합체를 전체 코탄젠트 복합체로 바꾸면 결론이 따른다. 더 자세히
+설명하자. 변형 이론, 보조정리 \ref{defos-lemma-parametrize-solutions}와 주
+\ref{defos-remark-parametrize-solutions}에 의해 원소
+$$
+\xi' \in
+\Ext^1_A(\NL_{A/A'}, N) =
+\Ext^1_B(\NL_{A/A'} \otimes_A^\mathbf{L} B, N) =
+\Ext^1_B(L_{A/A'} \otimes_A^\mathbf{L} B, N)
+$$
+가 존재한다. (등식들은 변형 이론, 주
+\ref{defos-remark-parametrize-solutions}를 보고
+$\NL_{A'/A} = \tau_{\geq -1} L_{A'/A}$임을 이용하라.) 해가 존재하는 것은
+이 원소가 사상
+$$
+\Ext^1_B(\NL_{B/A'}, N) = \Ext^1_B(L_{B/A'}, N)
+\longrightarrow
+\Ext^1_B(L_{A/A'} \otimes_A^\mathbf{L} B, N)
+$$
+의 상에 속하는 것과 필요충분하다. $A' \to A \to B$에 대한 완전 삼각형
+(\ref{equation-triangle})은 긴 완전열
+$$
+\ldots \to
+\Ext^1_B(L_{B/A'}, N) \to
+\Ext^1_B(L_{A/A'} \otimes_A^\mathbf{L} B, N) \to
+\Ext^2_B(L_{B/A}, N) \to \ldots
+$$
+을 유도한다. 따라서 $\xi$를 $\xi'$의 상으로 택하면 된다.
+\end{proof}
+
+
+
+
+
+\section{가군의 Atiyah 동치류}
+\label{section-atiyah}
+
+\noindent
+$A \to B$를 환 준동형이라 하고 $M$을 $B$-가군이라 하자.
+$P \to B$를 $\mathcal{C}_{B/A}$의 대상이라 하자(절
+\ref{section-compute-L-pi-shriek}). 주부분의 확대
+$$
+0 \to \Omega_{P/A} \otimes_P M \to P^1_{P/A}(M) \to M \to 0
+$$
+를 생각하자. 가환대수학, 보조정리
+\ref{algebra-lemma-sequence-of-principal-parts}를 보라. 가환대수학, 주
+\ref{algebra-remark-functoriality-principal-parts}에 의해 이 열은 $P$에
+대하여 함자적이다. 따라서 $\mathcal{C}_{B/A}$ 위의
+$\mathcal{O}$-가군 층들의 짧은 완전열
+$$
+0 \to \Omega_{\mathcal{O}/\underline{A}} \otimes_\mathcal{O} \underline{M} \to
+P^1_{\mathcal{O}/\underline{A}}(M) \to \underline{M} \to 0
+$$
+을 얻는다. 보조정리 \ref{lemma-pi-shriek-standard}와 $L_{B/A}$의 항들의
+평탄성에 의해
+$L\pi_!(\Omega_{\mathcal{O}/\underline{A}} \otimes_\mathcal{O} \underline{M})
+= L_{B/A} \otimes_B M = L_{B/A} \otimes_B^\mathbf{L} M$
+이다. 보조정리 \ref{lemma-pi-lower-shriek-constant-sheaf}에 의해
+$L\pi_!(\underline{M}) = M$이다. 따라서 $D(B)$에 완전 삼각형
+\begin{equation}
+\label{equation-atiyah}
+L_{B/A} \otimes_B^\mathbf{L} M \to
+L\pi_!\left(P^1_{\mathcal{O}/\underline{A}}(M)\right) \to M
+\to L_{B/A} \otimes_B^\mathbf{L} M [1]
+\end{equation}
+이 있다. 여기서는 단지 $D(A)$에서가 아니라 $D(B)$에서 완전 삼각형을
+얻기 위하여 사이트 위의 코호몰로지, 주
+\ref{sites-cohomology-remark-O-homology-B-homology-general}를 사용한다.
+
+\begin{definition}
+\label{definition-atiyah-class}
+$A \to B$를 환 준동형이라 하고 $M$을 $B$-가군이라 하자.
+(\ref{equation-atiyah})의 사상
+$M \to L_{B/A} \otimes_B^\mathbf{L} M[1]$을 $M$의 {\it Atiyah 동치류}라
+한다.
+\end{definition}
+
+
+
+
+\section{코탄젠트 복합체}
+\label{section-cotangent-complex}
+
+\noindent
+이 절에서는 사이트 위의 환의 층들의 준동형에 대한 코탄젠트 복합체를
+논의한다. 이후의 절들에서는 이를 특수화하여 환 달린 토포스의 사상,
+환 달린 공간의 사상, 스킴의 사상, 대수 공간의 사상 등의 코탄젠트
+복합체를 얻는다.
+
+\medskip\noindent
+$\mathcal{C}$를 사이트라 하고 $\Sh(\mathcal{C})$로 그에 딸린 토포스를
+나타내자. $\mathcal{A}$를 $\mathcal{C}$ 위의 환의 층이라 하자.
+$\mathcal{A}\textit{-Alg}$를 $\mathcal{A}$-대수들의 범주라 하자. 수반
+함자쌍 $(U, V)$를 생각하자. 여기서
+$V : \mathcal{A}\textit{-Alg} \to \Sh(\mathcal{C})$는 망각 함자이고,
+$U : \Sh(\mathcal{C}) \to \mathcal{A}\textit{-Alg}$는 집합의 층
+$\mathcal{E}$에 $\mathcal{A}$ 위에서 $\mathcal{E}$에 대한 다항식 대수
+$\mathcal{A}[\mathcal{E}]$를 대응시킨다. $X_\bullet$을 단체적 방법, 절
+\ref{simplicial-section-standard}에서 구성한
+$\text{Fun}(\mathcal{A}\textit{-Alg}, \mathcal{A}\textit{-Alg})$의 단체
+대상이라 하자.
+
+\medskip\noindent
+이제 $\mathcal{A} \to \mathcal{B}$가 환의 층들의 준동형이라고 가정하자.
+그러면 $\mathcal{B}$는 범주 $\mathcal{A}\textit{-Alg}$의 대상이다. 그 결과인
+단체 $\mathcal{A}$-대수를
+$\mathcal{P}_\bullet = X_\bullet(\mathcal{B})$로 나타내자.
+$\mathcal{P}_0 = \mathcal{A}[\mathcal{B}]$,
+$\mathcal{P}_1 = \mathcal{A}[\mathcal{A}[\mathcal{B}]]$ 등임을 상기하자. 또한
+증강
+$$
+\epsilon : \mathcal{P}_\bullet \longrightarrow \mathcal{B}
+$$
+이 있음을 상기하자. 여기서 $\mathcal{B}$는 상수 단체
+$\mathcal{A}$-대수로 본다.
+
+\begin{definition}
+\label{definition-standard-resolution-sheaves-rings}
+$\mathcal{C}$를 사이트라 하고 $\mathcal{A} \to \mathcal{B}$를
+$\mathcal{C}$ 위의 환의 층들의 준동형이라 하자. {\it $\mathcal{A}$ 위의
+$\mathcal{B}$의 표준 분해}란 항들이
+$$
+\mathcal{P}_0 = \mathcal{A}[\mathcal{B}],\quad
+\mathcal{P}_1 = \mathcal{A}[\mathcal{A}[\mathcal{B}]],\quad \ldots
+$$
+이고 사상들이 위에서 구성한 것과 같은 증강
+$\epsilon : \mathcal{P}_\bullet \to \mathcal{B}$이다.
+\end{definition}
+
+\noindent
+이 정의를 바탕으로 환의 층들의 준동형의 코탄젠트 복합체를 다음과 같이
+정의한다. 사이트 위의 가군, 절
+\ref{sites-modules-section-differentials}에서 정의한 미분 가군을 사용한다.
+
+\begin{definition}
+\label{definition-cotangent-complex-morphism-sheaves-rings}
+$\mathcal{C}$를 사이트라 하고 $\mathcal{A} \to \mathcal{B}$를
+$\mathcal{C}$ 위의 환의 층들의 준동형이라 하자. {\it 코탄젠트 복합체}
+$L_{\mathcal{B}/\mathcal{A}}$는 단체 가군
+$$
+\Omega_{\mathcal{P}_\bullet/\mathcal{A}}
+\otimes_{\mathcal{P}_\bullet, \epsilon} \mathcal{B}
+$$
+에 딸린 $\mathcal{B}$-가군 복합체이다. 여기서
+$\epsilon : \mathcal{P}_\bullet \to \mathcal{B}$는 $\mathcal{A}$ 위의
+$\mathcal{B}$의 표준 분해이다. 보통 $L_{\mathcal{B}/\mathcal{A}}$를
+$D(\mathcal{B})$의 대상으로 생각한다.
+\end{definition}
+
+\noindent
+이 구성들은 절 \ref{section-functoriality}에서 논의한 것과 비슷한 함자성을
+만족한다. 즉, $\mathcal{C}$ 위의 환의 층들의 가환 도표
+\begin{equation}
+\label{equation-commutative-square-sheaves}
+\vcenter{
+\xymatrix{
+\mathcal{B} \ar[r] & \mathcal{B}' \\
+\mathcal{A} \ar[u] \ar[r] & \mathcal{A}' \ar[u]
+}
+}
+\end{equation}
+가 주어지면 복합체들의 표준 $\mathcal{B}$-선형 사상
+$$
+L_{\mathcal{B}/\mathcal{A}} \longrightarrow L_{\mathcal{B}'/\mathcal{A}'}
+$$
+이 있다. 이는 다음과 같이 구성한다. $\mathcal{P}_\bullet \to \mathcal{B}$가
+$\mathcal{A}$ 위의 $\mathcal{B}$의 표준 분해이고
+$\mathcal{P}'_\bullet \to \mathcal{B}'$가 $\mathcal{A}'$ 위의
+$\mathcal{B}'$의 표준 분해이면, 증강 $\mathcal{P}_\bullet \to \mathcal{B}$ 및
+$\mathcal{P}'_\bullet \to \mathcal{B}'$와 양립하는 단체
+$\mathcal{A}$-대수들의 표준 사상
+$\mathcal{P}_\bullet \to \mathcal{P}'_\bullet$이 있다. 사상들
+$$
+\mathcal{P}_0 = \mathcal{A}[\mathcal{B}]
+\longrightarrow
+\mathcal{A}'[\mathcal{B}'] = \mathcal{P}'_0,
+\quad
+\mathcal{P}_1 = \mathcal{A}[\mathcal{A}[\mathcal{B}]]
+\longrightarrow
+\mathcal{A}'[\mathcal{A}'[\mathcal{B}']] = \mathcal{P}'_1
+$$
+등은 주어진 사상 $\mathcal{A} \to \mathcal{A}'$ 및
+$\mathcal{B} \to \mathcal{B}'$로 주어진다. 그러면 원하는 사상
+$L_{\mathcal{B}/\mathcal{A}} \to L_{\mathcal{B}'/\mathcal{A}'}$은 미분의
+층들 위의 대응하는 사상에서 나온다.
+
+\begin{lemma}
+\label{lemma-pullback-cotangent-morphism-topoi}
+$f : \Sh(\mathcal{D}) \to \Sh(\mathcal{C})$를 토포스의 사상이라 하고,
+$\mathcal{A} \to \mathcal{B}$를 $\mathcal{C}$ 위의 환의 층들의 준동형이라
+하자. 그러면
+$f^{-1}L_{\mathcal{B}/\mathcal{A}} = L_{f^{-1}\mathcal{B}/f^{-1}\mathcal{A}}$.
+\end{lemma}
+
+\begin{proof}
+도표
+$$
+\xymatrix{
+\mathcal{A}\textit{-Alg} \ar[d]_{f^{-1}} \ar[r] &
+\Sh(\mathcal{C}) \ar@<1ex>[l] \ar[d]^{f^{-1}} \\
+f^{-1}\mathcal{A}\textit{-Alg} \ar[r] & \Sh(\mathcal{D}) \ar@<1ex>[l]
+}
+$$
+는 가환한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compute-L-morphism-sheaves-rings}
+$\mathcal{C}$를 사이트라 하고 $\mathcal{A} \to \mathcal{B}$를
+$\mathcal{C}$ 위의 환의 층들의 준동형이라 하자. 그러면
+$H^i(L_{\mathcal{B}/\mathcal{A}})$는 준층
+$U \mapsto H^i(L_{\mathcal{B}(U)/\mathcal{A}(U)})$에 딸린 층이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}$에 비이산 위상을 주어 얻는 사이트를 $\mathcal{C}'$라 하자
+(준층은 층이다). 토포스의 사상
+$f : \Sh(\mathcal{C}) \to \Sh(\mathcal{C}')$이 있으며, 여기서 $f_*$는
+층에서 준층으로의 포함이고 $f^{-1}$은 층화이다. 보조정리
+\ref{lemma-pullback-cotangent-morphism-topoi}에 의해 $\mathcal{C}'$에 대하여,
+즉 $\mathcal{C}$가 비이산 위상을 갖는 경우에 결과를 증명하면 충분하다.
+
+\medskip\noindent
+만약 $\mathcal{C}$가 비이산 위상을 가지면
+$L_{\mathcal{B}/\mathcal{A}}(U)$는
+$L_{\mathcal{B}(U)/\mathcal{A}(U)}$와 같다. 실제로 도표
+$$
+\xymatrix{
+\mathcal{A}\textit{-Alg} \ar[d]_{U\text{ 위의 절단}} \ar[r] &
+\Sh(\mathcal{C}) \ar@<1ex>[l] \ar[d]^{U\text{ 위의 절단}} \\
+\mathcal{A}(U)\textit{-Alg} \ar[r] & \textit{집합} \ar@<1ex>[l]
+}
+$$
+는 가환한다.
+\end{proof}
+
+\begin{remark}
+\label{remark-map-sections-over-U}
+보조정리 \ref{lemma-compute-L-morphism-sheaves-rings}의 증명에서 임의의
+$U \in \Ob(\mathcal{C})$에 대하여 $\mathcal{B}(U)$-가군 복합체들의 표준
+사상
+$L_{\mathcal{B}(U)/\mathcal{A}(U)} \to L_{\mathcal{B}/\mathcal{A}}(U)$
+이 있음은 명백하다. 또한 이 사상들은 제한 사상들과 양립하고, 복합체
+$L_{\mathcal{B}/\mathcal{A}}$는 규칙
+$U \mapsto L_{\mathcal{B}(U)/\mathcal{A}(U)}$의 층화이다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-H0-L-morphism-sheaves-rings}
+$\mathcal{C}$를 사이트라 하고 $\mathcal{A} \to \mathcal{B}$를
+$\mathcal{C}$ 위의 환의 층들의 준동형이라 하자. 그러면
+$H^0(L_{\mathcal{B}/\mathcal{A}}) = \Omega_{\mathcal{B}/\mathcal{A}}$.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-compute-L-morphism-sheaves-rings} 및
+\ref{lemma-identify-H0}, 그리고 사이트 위의 가군, 보조정리
+\ref{sites-modules-lemma-differentials-sheafify}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compute-L-product-sheaves-rings}
+$\mathcal{C}$를 사이트라 하고 $\mathcal{A} \to \mathcal{B}$ 및
+$\mathcal{A} \to \mathcal{B}'$를 $\mathcal{C}$ 위의 환의 층들의
+준동형이라 하자. 그러면
+$$
+L_{\mathcal{B} \times \mathcal{B}'/\mathcal{A}}
+\longrightarrow
+L_{\mathcal{B}/\mathcal{A}} \oplus L_{\mathcal{B}'/\mathcal{A}}
+$$
+는 $D(\mathcal{B} \times \mathcal{B}')$에서 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-compute-L-morphism-sheaves-rings}에 의해 환 준동형에
+대하여 이를 증명하면 충분하다. 환의 경우에는 보조정리
+\ref{lemma-cotangent-complex-product}가 바로 이 명제이다.
+\end{proof}
+
+\noindent
+환의 층들의 코탄젠트 복합체에 대한 기본 삼각형은 환 준동형에 대한 결과의
+쉬운 귀결이다.
+
+\begin{lemma}
+\label{lemma-triangle-sheaves-rings}
+$\mathcal{D}$를 사이트라 하고
+$\mathcal{A} \to \mathcal{B} \to \mathcal{C}$를 $\mathcal{D}$ 위의 환의
+층들의 준동형이라 하자. $D(\mathcal{C})$에 표준 완전 삼각형
+$$
+L_{\mathcal{B}/\mathcal{A}} \otimes_\mathcal{B}^\mathbf{L} \mathcal{C}
+\to L_{\mathcal{C}/\mathcal{A}} \to L_{\mathcal{C}/\mathcal{B}} \to
+L_{\mathcal{B}/\mathcal{A}} \otimes_\mathcal{B}^\mathbf{L} \mathcal{C}[1]
+$$
+이 있다.
+\end{lemma}
+
+\begin{proof}
+주 \ref{remark-triangle}과 \ref{remark-explicit-map}에 기술한 방법으로 이
+삼각형을 구성하며, 거기서 언급한 결과들을 자유롭게 사용하겠다. 그
+주들에서처럼 먼저 $\mathcal{B} \to \mathcal{C}$가 환의 층들의 단사
+준동형인 경우에 삼각형을 구성한다. 이 경우 다음과 같이 둔다.
+\begin{enumerate}
+\item $\mathcal{P}_\bullet$은 $\mathcal{A}$ 위의 $\mathcal{B}$의 표준 분해이다.
+\item $\mathcal{Q}_\bullet$은 $\mathcal{A}$ 위의 $\mathcal{C}$의 표준 분해이다.
+\item $\mathcal{R}_\bullet$은 $\mathcal{B}$ 위의 $\mathcal{C}$의 표준 분해이다.
+\item $\mathcal{S}_\bullet$은 $\mathcal{B}$ 위의 $\mathcal{B}$의 표준 분해이다.
+\item $\overline{\mathcal{Q}}_\bullet =
+\mathcal{Q}_\bullet \otimes_{\mathcal{P}_\bullet} \mathcal{B}$이다.
+\item $\overline{\mathcal{R}}_\bullet =
+\mathcal{R}_\bullet \otimes_{\mathcal{S}_\bullet} \mathcal{B}$이다.
+\end{enumerate}
+이 완전 삼각형은 단체 $\mathcal{C}$-가군들의 짧은 완전열
+$$
+0 \to
+\Omega_{\mathcal{P}_\bullet/\mathcal{A}}
+\otimes_{\mathcal{P}_\bullet} \mathcal{C} \to
+\Omega_{\mathcal{Q}_\bullet/\mathcal{A}}
+\otimes_{\mathcal{Q}_\bullet} \mathcal{C} \to
+\Omega_{\overline{\mathcal{Q}}_\bullet/\mathcal{B}}
+\otimes_{\overline{\mathcal{Q}}_\bullet} \mathcal{C} \to 0
+$$
+에 딸린 완전 삼각형이다. 첫 두 항은 보조정리의 명제에 있는 삼각형의
+첫 두 항과 같다. 마지막 항을 $L_{\mathcal{C}/\mathcal{B}}$와 동일시할
+때에는 복합체들의 준동형사상
+$$
+L_{\mathcal{C}/\mathcal{B}} =
+\Omega_{\mathcal{R}_\bullet/\mathcal{B}}
+\otimes_{\mathcal{R}_\bullet} \mathcal{C}
+\longrightarrow
+\Omega_{\overline{\mathcal{R}}_\bullet/\mathcal{B}}
+\otimes_{\overline{\mathcal{R}}_\bullet} \mathcal{C}
+\longleftarrow
+\Omega_{\overline{\mathcal{Q}}_\bullet/\mathcal{B}}
+\otimes_{\overline{\mathcal{Q}}_\bullet} \mathcal{C}
+$$
+을 사용한다. 위에서 사용한 모든 구성은 먼저 준층 수준에서 수행한 뒤
+층화할 수 있다. 따라서 열들이 완전하거나 사상들이 준동형사상임을
+보이려면 환 준동형
+$\mathcal{A}(U) \to \mathcal{B}(U) \to \mathcal{C}(U)$
+에 대한 대응하는 명제를 증명하면 충분하며, 이는 이미 알려져 있다.
+이로써 $\mathcal{B} \to \mathcal{C}$가 단사인 경우의 증명이 끝난다.
+
+\medskip\noindent
+일반적인 경우에는 필요하다면 $\mathcal{C}$를
+$\mathcal{B} \times \mathcal{C}$로 바꾸어
+$\mathcal{B} \to \mathcal{C}$가 단사인 경우로 환원한다. 이는 주
+\ref{remark-triangle}에 제시한 논증과 보조정리
+\ref{lemma-compute-L-product-sheaves-rings}에 의해 가능하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-stalk-cotangent-complex}
+$\mathcal{C}$를 사이트라 하고 $\mathcal{A} \to \mathcal{B}$를
+$\mathcal{C}$ 위의 환의 층들의 준동형이라 하자. $p$가 $\mathcal{C}$의
+점이면
+$(L_{\mathcal{B}/\mathcal{A}})_p = L_{\mathcal{B}_p/\mathcal{A}_p}$.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{lemma-pullback-cotangent-morphism-topoi}의 특수한
+경우이다.
+\end{proof}
+
+\noindent
+소박한 코탄젠트 복합체의 구성과 그 성질에 대해서는 사이트 위의 가군,
+절 \ref{sites-modules-section-netherlander}를 참고하라.
+
+\begin{lemma}
+\label{lemma-compare-cotangent-complex-with-naive}
+$\mathcal{C}$를 사이트라 하고 $\mathcal{A} \to \mathcal{B}$를
+$\mathcal{C}$ 위의 환의 층들의 준동형이라 하자. 표준 사상
+$L_{\mathcal{B}/\mathcal{A}} \to \NL_{\mathcal{B}/\mathcal{A}}$
+이 있으며, 이는 소박한 코탄젠트 복합체를 절단
+$\tau_{\geq -1}L_{\mathcal{B}/\mathcal{A}}$와 동일시한다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{P}_\bullet$을 $\mathcal{A}$ 위의 $\mathcal{B}$의 표준 분해라
+하자. $\mathcal{I} = \Ker(\mathcal{A}[\mathcal{B}] \to \mathcal{B})$로
+두자. $\mathcal{P}_0 = \mathcal{A}[\mathcal{B}]$임을 상기하자. 보조정리의
+사상은 다음 가환 도표로 주어진다.
+$$
+\xymatrix{
+L_{\mathcal{B}/\mathcal{A}} \ar[d] & \ldots \ar[r] &
+\Omega_{\mathcal{P}_2/\mathcal{A}} \otimes_{\mathcal{P}_2} \mathcal{B}
+\ar[r] \ar[d] &
+\Omega_{\mathcal{P}_1/\mathcal{A}} \otimes_{\mathcal{P}_1} \mathcal{B}
+\ar[r] \ar[d] &
+\Omega_{\mathcal{P}_0/\mathcal{A}} \otimes_{\mathcal{P}_0} \mathcal{B}
+\ar[d] \\
+\NL_{\mathcal{B}/\mathcal{A}} & \ldots \ar[r] &
+0 \ar[r] & 
+\mathcal{I}/\mathcal{I}^2 \ar[r] &
+\Omega_{\mathcal{P}_0/\mathcal{A}} \otimes_{\mathcal{P}_0} \mathcal{B}
+}
+$$
+표적이 $\mathcal{I}/\mathcal{I}^2$인 아래쪽 화살표는 국소 절단
+$\text{d}f \otimes b$를 $\mathcal{I}/\mathcal{I}^2$에서
+$(d_0(f) - d_1(f))b$의 동치류로 보내어 구성한다. 여기서
+$d_i : \mathcal{P}_1 \to \mathcal{P}_0$, $i = 0, 1$은 단체 구조의 두 면
+사상이다. $d_0 - d_1$이 $\mathcal{P}_1$을
+$\mathcal{I} = \Ker(\mathcal{P}_0 \to \mathcal{B})$ 안으로 보내므로 이는
+의미가 있다. 이 규칙이 잘 정의됨은 확인을 생략한다. 우리 사상은 미분
+$\Omega_{\mathcal{P}_1/\mathcal{A}} \otimes_{\mathcal{P}_1} \mathcal{B}
+\to \Omega_{\mathcal{P}_0/\mathcal{A}} \otimes_{\mathcal{P}_0} \mathcal{B}$
+과 양립한다. 실제로 이 미분은 국소 절단 $\text{d}f \otimes b$를
+$\text{d}(d_0(f) - d_1(f)) \otimes b$로 보낸다. 또한 미분
+$\Omega_{\mathcal{P}_2/\mathcal{A}} \otimes_{\mathcal{P}_2} \mathcal{B}
+\to \Omega_{\mathcal{P}_1/\mathcal{A}} \otimes_{\mathcal{P}_1} \mathcal{B}$
+은 국소 절단 $\text{d}f \otimes b$를
+$\text{d}(d_0(f) - d_1(f) + d_2(f)) \otimes b$
+로 보내며, 이것은 우리 아래쪽 화살표에 의해 영이 된다. 따라서 복합체의
+사상을 얻는다.
+
+\medskip\noindent
+우리 사상이 코호몰로지 층 $H^0$과 $H^{-1}$ 위에서 동형사상을 유도함을
+보기 위하여 다음과 같이 논증한다. $\mathcal{C}'$를 바탕 범주는
+$\mathcal{C}$와 같지만 비이산 위상을 준 사이트라 하자. 당김 함자가
+층화인 토포스의 사상을
+$f : \Sh(\mathcal{C}) \to \Sh(\mathcal{C}')$라 하자. 주어진 사상을
+$\mathcal{C}'$ 위의 환의 층들의 사상으로 생각한 것을
+$\mathcal{A}' \to \mathcal{B}'$라 하자. 위 구성은 $\mathcal{C}'$ 위에 사상
+$L_{\mathcal{B}'/\mathcal{A}'} \to \NL_{\mathcal{B}'/\mathcal{A}'}$을 주며,
+$\mathcal{C}'$의 임의의 대상 $U$ 위에서 그 값은 바로 사상
+$$
+L_{\mathcal{B}(U)/\mathcal{A}(U)} \to \NL_{\mathcal{B}(U)/\mathcal{A}(U)}
+$$
+이다. 이는 주 \ref{remark-explicit-comparison-map}의 사상이며 $H^0$과
+$H^{-1}$ 위에서 동형사상을 유도한다. 보조정리
+\ref{lemma-pullback-cotangent-morphism-topoi}에 의해
+$f^{-1}L_{\mathcal{B}'/\mathcal{A}'} = L_{\mathcal{B}/\mathcal{A}}$
+이고, 사이트 위의 가군, 보조정리
+\ref{sites-modules-lemma-pullback-NL}에 의해
+$f^{-1}\NL_{\mathcal{B}'/\mathcal{A}'} = \NL_{\mathcal{B}/\mathcal{A}}$
+이므로 보조정리가 증명된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{가군의 층의 Atiyah 동치류}
+\label{section-atiyah-general}
+
+\noindent
+$\mathcal{C}$를 사이트라 하고 $\mathcal{A} \to \mathcal{B}$를 환의 층들의
+준동형이라 하자. $\mathcal{F}$를 $\mathcal{B}$-가군의 층이라 하자.
+$\mathcal{P}_\bullet \to \mathcal{B}$를 $\mathcal{A}$ 위의
+$\mathcal{B}$의 표준 분해라 하자(절 \ref{section-cotangent-complex}). 모든
+$n \geq 0$에 대하여 주부분의 확대
+\begin{equation}
+\label{equation-atiyah-extension}
+0 \to
+\Omega_{\mathcal{P}_n/\mathcal{A}} \otimes_{\mathcal{P}_n} \mathcal{F} \to
+\mathcal{P}^1_{\mathcal{P}_n/\mathcal{A}}(\mathcal{F}) \to
+\mathcal{F} \to 0
+\end{equation}
+를 생각하자. 사이트 위의 가군, 보조정리
+\ref{sites-modules-lemma-sequence-of-principal-parts}를 보라. 이 구성의
+함자성(사이트 위의 가군, 주
+\ref{sites-modules-remark-functoriality-principal-parts})에 의해
+(\ref{equation-atiyah-extension})은 단체 $\mathcal{P}_\bullet$-가군들의
+짧은 완전열의 차수 $n$인 부분이다(사이트 위의 코호몰로지, 절
+\ref{sites-cohomology-section-simplicial-modules}). 사이트 위의 코호몰로지,
+주 \ref{sites-cohomology-remark-homology-augmentation}의 함자
+$L\pi_! : D(\mathcal{P}_\bullet) \to D(\mathcal{B})$를 사용하면(여기서는
+$\mathcal{P}_\bullet \to \mathcal{A}$가 분해임을 사용한다) 완전 삼각형
+\begin{equation}
+\label{equation-atiyah-general}
+L_{\mathcal{B}/\mathcal{A}} \otimes_\mathcal{B}^\mathbf{L} \mathcal{F} \to
+L\pi_!\left(\mathcal{P}^1_{\mathcal{P}_\bullet/\mathcal{A}}(\mathcal{F})\right)
+\to \mathcal{F} \to
+L_{\mathcal{B}/\mathcal{A}} \otimes_\mathcal{B}^\mathbf{L} \mathcal{F} [1]
+\end{equation}
+을 $D(\mathcal{B})$에서 얻는다.
+
+\begin{definition}
+\label{definition-atiyah-class-general}
+$\mathcal{C}$를 사이트라 하고 $\mathcal{A} \to \mathcal{B}$를 환의 층들의
+준동형이라 하자. $\mathcal{F}$를 $\mathcal{B}$-가군의 층이라 하자.
+(\ref{equation-atiyah-general})의 사상 $\mathcal{F} \to
+L_{\mathcal{B}/\mathcal{A}} \otimes_\mathcal{B}^\mathbf{L} \mathcal{F}[1]$
+을 $\mathcal{F}$의 {\it Atiyah 동치류}라 한다.
+\end{definition}
+
+
+
+
+
+
+
+
+
+\section{환 달린 공간의 사상의 코탄젠트 복합체}
+\label{section-cotangent-morphism-ringed-spaces}
+
+\noindent
+환 달린 공간의 사상의 코탄젠트 복합체는 위에서 정의한 코탄젠트 복합체로
+정의한다.
+
+\begin{definition}
+\label{definition-cotangent-complex-morphism-ringed-spaces}
+$f : (X, \mathcal{O}_X) \to (S, \mathcal{O}_S)$를 환 달린 공간의 사상이라
+하자. $f$의 {\it 코탄젠트 복합체} $L_f$는
+$L_f = L_{\mathcal{O}_X/f^{-1}\mathcal{O}_S}$.
+이다. 다음 표기도 사용한다.
+$L_f = L_{X/S} = L_{\mathcal{O}_X/\mathcal{O}_S}$.
+\end{definition}
+
+\noindent
+더 정확히 말하면, 위상 공간 $X$에 딸린 사이트 위의 환의 층들의 준동형
+$f^\sharp : f^{-1}\mathcal{O}_S \to \mathcal{O}_X$의 코탄젠트 복합체(정의
+\ref{definition-cotangent-complex-morphism-sheaves-rings})를 생각한다. 사이트,
+예 \ref{sites-example-site-topological}를 보라.
+
+\begin{lemma}
+\label{lemma-H0-L-morphism-ringed-spaces}
+$f : (X, \mathcal{O}_X) \to (S, \mathcal{O}_S)$를 환 달린 공간의 사상이라
+하자. 그러면 $H^0(L_{X/S}) = \Omega_{X/S}$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-H0-L-morphism-sheaves-rings}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-triangle-ringed-spaces}
+$f : X \to Y$ 및 $g : Y \to Z$를 환 달린 공간의 사상이라 하자. 그러면
+$D(\mathcal{O}_X)$에 표준 완전 삼각형
+$$
+Lf^* L_{Y/Z} \to L_{X/Z} \to L_{X/Y} \to Lf^*L_{Y/Z}[1]
+$$
+이 있다.
+\end{lemma}
+
+\begin{proof}
+$h = g \circ f$로 두자. 그러면
+$h^{-1}\mathcal{O}_Z = f^{-1}g^{-1}\mathcal{O}_Z$이다. 보조정리
+\ref{lemma-pullback-cotangent-morphism-topoi}에 의해
+$f^{-1}L_{Y/Z} = L_{f^{-1}\mathcal{O}_Y/h^{-1}\mathcal{O}_Z}$
+이고, 이는 평탄한 $f^{-1}\mathcal{O}_Y$-가군들의 복합체이다. 따라서 위의
+완전 삼각형은 보조정리 \ref{lemma-triangle-sheaves-rings}의 완전 삼각형에서
+$\mathcal{A} = h^{-1}\mathcal{O}_Z$, $\mathcal{B} = f^{-1}\mathcal{O}_Y$,
+그리고 $\mathcal{C} = \mathcal{O}_X$로 둔 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-cotangent-complex-with-naive-ringed-spaces}
+$f : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$를 환 달린 공간의 사상이라
+하자. 소박한 코탄젠트 복합체를 절단 $\tau_{\geq -1}L_{X/Y}$와 동일시하는
+표준 사상 $L_{X/Y} \to \NL_{X/Y}$이 있다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-compare-cotangent-complex-with-naive}의 특수한 경우이다.
+\end{proof}
+
+
+
+
+
+
+\section{환 달린 공간의 변형과 코탄젠트 복합체}
+\label{section-deformations-ringed-spaces}
+
+\noindent
+이 절은 변형 이론, 절 \ref{defos-section-deformations-ringed-spaces}의
+계속이며, 독자에게 먼저 그 절을 읽기를 권한다. 설정을 간단히 상기하자.
+$\mathcal{J} = \Ker(t^\sharp)$인 환 달린 공간의 1차 두꺼워짐
+$t : (S, \mathcal{O}_S) \to (S', \mathcal{O}_{S'})$, 환 달린 공간의 사상
+$f : (X, \mathcal{O}_X) \to (S, \mathcal{O}_S)$, $\mathcal{O}_X$-가군
+$\mathcal{G}$, 그리고 가군의 층들의 $f$-사상
+$c : \mathcal{J} \to \mathcal{G}$가 주어져 있다. 다음 도표의 물음표에
+들어갈 대상을 찾을 수 있는지 묻는다.
+\begin{equation}
+\label{equation-to-solve-ringed-spaces}
+\vcenter{
+\xymatrix{
+0 \ar[r] & \mathcal{G} \ar[r] & {?} \ar[r] & \mathcal{O}_X \ar[r] & 0 \\
+0 \ar[r] & \mathcal{J} \ar[u]^c \ar[r] & \mathcal{O}_{S'} \ar[u] \ar[r] &
+\mathcal{O}_S \ar[u] \ar[r] & 0
+}
+}
+\end{equation}
+또 그러한 해가 존재할 때 얼마나 유일한지도 묻는다. 더 정확히 말하면,
+1차 두꺼워짐
+$i : (X, \mathcal{O}_X) \to (X', \mathcal{O}_{X'})$
+과 변형 이론, 식 (\ref{defos-equation-morphism-thickenings})에서와 같은
+두꺼워짐의 사상 $(f, f')$을 찾는다. 여기서 $\Ker(i^\sharp)$은
+$\mathcal{G}$와 동일시되고 $(f')^\sharp$은 주어진 사상 $c$를 유도해야
+한다. 이러한 $X'$를 (\ref{equation-to-solve-ringed-spaces})의
+{\it 해}라고 부른다.
+
+\begin{lemma}
+\label{lemma-find-obstruction-ringed-spaces}
+위의 상황에서 다음이 성립한다.
+\begin{enumerate}
+\item 표준 원소
+$\xi \in \Ext^2_{\mathcal{O}_X}(L_{X/S}, \mathcal{G})$
+가 있으며, 이 원소의 소멸은 (\ref{equation-to-solve-ringed-spaces})의 해가
+존재하기 위한 필요충분조건이다.
+\item 해가 존재하면 해의 동형류들의 집합은
+$\Ext^1_{\mathcal{O}_X}(L_{X/S}, \mathcal{G})$ 아래의 주동차 공간이다.
+\item 해 $X'$가 주어지면 (\ref{equation-to-solve-ringed-spaces})에 들어맞는
+$X'$의 자기동형사상들의 집합은
+$\Ext^0_{\mathcal{O}_X}(L_{X/S}, \mathcal{G})$와 표준적으로 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+동일시 $\NL_{X/S} = \tau_{\geq -1}L_{X/S}$(보조정리
+\ref{lemma-compare-cotangent-complex-with-naive-ringed-spaces}) 및
+$H^0(L_{X/S}) = \Omega_{X/S}$(보조정리
+\ref{lemma-H0-L-morphism-ringed-spaces})를 통하여 (2)와 (3)은 변형 이론,
+보조정리 \ref{defos-lemma-huge-diagram-ringed-spaces}과
+\ref{defos-lemma-choices-ringed-spaces}에서 이미 보았다.
+
+\medskip\noindent
+(1)의 증명. 대략 말하면, 변형 이론, 주
+\ref{defos-remark-parametrize-solutions-ringed-spaces}의 논의에서 소박한
+코탄젠트 복합체를 전체 코탄젠트 복합체로 바꾸면 결론이 따른다. 더 자세히
+설명하자. 변형 이론, 보조정리
+\ref{defos-lemma-parametrize-solutions-ringed-spaces}에 의해 원소
+$$
+\xi' \in
+\Ext^1_{\mathcal{O}_X}(Lf^*\NL_{S/S'}, \mathcal{G}) =
+\Ext^1_{\mathcal{O}_X}(Lf^*L_{S/S'}, \mathcal{G})
+$$
+가 존재하며, 해가 존재하는 것은 이 원소가 사상
+$$
+\Ext^1_{\mathcal{O}_X}(NL_{X/S'}, \mathcal{G}) =
+\Ext^1_{\mathcal{O}_X}(L_{X/S'}, \mathcal{G})
+\longrightarrow
+\Ext^1_{\mathcal{O}_X}(Lf^*L_{S/S'}, \mathcal{G})
+$$
+의 상에 속하는 것과 필요충분하다. $X \to S \to S'$에 대한 보조정리
+\ref{lemma-triangle-ringed-spaces}의 완전 삼각형은 긴 완전열
+$$
+\ldots \to
+\Ext^1_{\mathcal{O}_X}(L_{X/S'}, \mathcal{G}) \to
+\Ext^1_{\mathcal{O}_X}(Lf^*L_{S/S'}, \mathcal{G}) \to
+\Ext^2_{\mathcal{O}_X}(L_{X/S}, \mathcal{G}) \to \ldots
+$$
+을 유도한다. 따라서 $\xi$를 $\xi'$의 상으로 택하면 된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{환 달린 토포스의 사상의 코탄젠트 복합체}
+\label{section-cotangent-morphism-ringed-topoi}
+
+\noindent
+환 달린 토포스의 사상의 코탄젠트 복합체는 위에서 정의한 코탄젠트
+복합체로 정의한다.
+
+\begin{definition}
+\label{definition-cotangent-complex-morphism-ringed-topoi}
+$(f, f^\sharp) : (\Sh(\mathcal{C}), \mathcal{O}_\mathcal{C}) \to
+(\Sh(\mathcal{D}), \mathcal{O}_\mathcal{D})$를 환 달린 토포스의 사상이라
+하자. $f$의 {\it 코탄젠트 복합체} $L_f$는
+$L_f = L_{\mathcal{O}_\mathcal{C}/f^{-1}\mathcal{O}_\mathcal{D}}$.
+이다. 때로는 $L_f = L_{\mathcal{O}_\mathcal{C}/\mathcal{O}_\mathcal{D}}$로
+쓴다.
+\end{definition}
+
+\noindent
+이 정의는 많은 상황에 적용되지만 언제나 기대하는 대상을 주지는 않는다.
+예를 들어 $f : X \to Y$가 스킴의 사상이면 $f$는 큰 에탈 사이트들의 사상
+$f_{big} : (\Sch/X)_\etale \to (\Sch/Y)_\etale$
+을 유도하며, 이는 환 달린 토포스의 사상이다(내림, 주
+\ref{descent-remark-change-topologies-ringed}). 그러나
+$(f_{big})^\sharp$이 동형사상이므로 $L_{f_{big}} = 0$이다. 한편 $f$를 바탕
+Zariski 환 달린 토포스 사이의 사상으로 생각하여 $L_f$를 취하면, $L_f$는
+아래에서 정의할 코탄젠트 복합체 $L_{X/Y}$와 일치하며 그 0차 코호몰로지
+층은 $\Omega_{X/Y}$이다.
+
+\begin{lemma}
+\label{lemma-H0-L-morphism-ringed-topoi}
+$f : (\Sh(\mathcal{C}), \mathcal{O}) \to
+(\Sh(\mathcal{B}), \mathcal{O}_\mathcal{B})$를 환 달린 토포스의 사상이라
+하자. 그러면 $H^0(L_f) = \Omega_f$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-H0-L-morphism-sheaves-rings}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-triangle-ringed-topoi}
+$f : (\Sh(\mathcal{C}_1), \mathcal{O}_1) \to
+(\Sh(\mathcal{C}_2), \mathcal{O}_2)$ 및
+$g : (\Sh(\mathcal{C}_2), \mathcal{O}_2) \to
+(\Sh(\mathcal{C}_3), \mathcal{O}_3)$를 환 달린 토포스의 사상이라 하자.
+그러면 $D(\mathcal{O}_1)$에 표준 완전 삼각형
+$$
+Lf^* L_g \to L_{g \circ f} \to L_f \to Lf^*L_g[1]
+$$
+이 있다.
+\end{lemma}
+
+\begin{proof}
+$h = g \circ f$로 두자. 그러면
+$h^{-1}\mathcal{O}_3 = f^{-1}g^{-1}\mathcal{O}_3$이다. 보조정리
+\ref{lemma-pullback-cotangent-morphism-topoi}에 의해
+$f^{-1}L_g = L_{f^{-1}\mathcal{O}_2/h^{-1}\mathcal{O}_3}$
+이고, 이는 평탄한 $f^{-1}\mathcal{O}_2$-가군들의 복합체이다. 따라서 위의
+완전 삼각형은 보조정리 \ref{lemma-triangle-sheaves-rings}의 완전 삼각형에서
+$\mathcal{A} = h^{-1}\mathcal{O}_3$, $\mathcal{B} = f^{-1}\mathcal{O}_2$,
+그리고 $\mathcal{C} = \mathcal{O}_1$로 둔 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-cotangent-complex-with-naive-ringed-topoi}
+$f : (\Sh(\mathcal{C}), \mathcal{O}) \to
+(\Sh(\mathcal{B}), \mathcal{O}_\mathcal{B})$를 환 달린 토포스의 사상이라
+하자. 소박한 코탄젠트 복합체를 절단 $\tau_{\geq -1}L_f$와 동일시하는
+표준 사상 $L_f \to \NL_f$가 있다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-compare-cotangent-complex-with-naive}의 특수한 경우이다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{환 달린 토포스의 변형과 코탄젠트 복합체}
+\label{section-deformations-ringed-topoi}
+
+\noindent
+이 절은 변형 이론, 절 \ref{defos-section-deformations-ringed-topoi}의
+계속이며, 독자에게 먼저 그 절을 읽기를 권한다. 설정을 간단히 상기하자.
+환 달린 토포스의 1차 두꺼워짐
+$t : (\Sh(\mathcal{B}), \mathcal{O}_\mathcal{B}) \to
+(\Sh(\mathcal{B}'), \mathcal{O}_{\mathcal{B}'})$
+에서 $\mathcal{J} = \Ker(t^\sharp)$이고, 환 달린 토포스의 사상
+$f : (\Sh(\mathcal{C}), \mathcal{O}) \to
+(\Sh(\mathcal{B}), \mathcal{O}_\mathcal{B})$, $\mathcal{O}$-가군
+$\mathcal{G}$, 그리고 $f^{-1}\mathcal{O}_\mathcal{B}$-가군의 층들의 사상
+$f^{-1}\mathcal{J} \to \mathcal{G}$가 주어져 있다. 다음 도표의 물음표에
+들어갈 대상을 찾을 수 있는지 묻는다.
+\begin{equation}
+\label{equation-to-solve-ringed-topoi}
+\vcenter{
+\xymatrix{
+0 \ar[r] & \mathcal{G} \ar[r] & {?} \ar[r] & \mathcal{O} \ar[r] & 0 \\
+0 \ar[r] & f^{-1}\mathcal{J} \ar[u]^c \ar[r] &
+f^{-1}\mathcal{O}_{\mathcal{B}'} \ar[u] \ar[r] &
+f^{-1}\mathcal{O}_\mathcal{B} \ar[u] \ar[r] & 0
+}
+}
+\end{equation}
+또 그러한 해가 존재할 때 얼마나 유일한지도 묻는다. 더 정확히 말하면,
+1차 두꺼워짐
+$i : (\Sh(\mathcal{C}), \mathcal{O}) \to (\Sh(\mathcal{C}'), \mathcal{O}')$
+과 변형 이론, 식
+(\ref{defos-equation-morphism-thickenings-ringed-topoi})에서와 같은 두꺼워짐의
+사상 $(f, f')$을 찾는다. 여기서 $\Ker(i^\sharp)$은 $\mathcal{G}$와
+동일시되고 $(f')^\sharp$은 주어진 사상 $c$를 유도해야 한다.
+$(\Sh(\mathcal{C}'), \mathcal{O}')$을
+(\ref{equation-to-solve-ringed-topoi})의 {\it 해}라고 부른다.
+
+\begin{lemma}
+\label{lemma-find-obstruction-ringed-topoi}
+위의 상황에서 다음이 성립한다.
+\begin{enumerate}
+\item 표준 원소
+$\xi \in \Ext^2_\mathcal{O}(L_f, \mathcal{G})$
+가 있으며, 이 원소의 소멸은 (\ref{equation-to-solve-ringed-topoi})의 해가
+존재하기 위한 필요충분조건이다.
+\item 해가 존재하면 해의 동형류들의 집합은
+$\Ext^1_\mathcal{O}(L_f, \mathcal{G})$ 아래의 주동차 공간이다.
+\item 해 $X'$가 주어지면 (\ref{equation-to-solve-ringed-topoi})에 들어맞는
+$X'$의 자기동형사상들의 집합은 $\Ext^0_\mathcal{O}(L_f, \mathcal{G})$와
+표준적으로 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+동일시 $\NL_f = \tau_{\geq -1}L_f$(보조정리
+\ref{lemma-compare-cotangent-complex-with-naive-ringed-topoi}) 및
+$H^0(L_f) = \Omega_f$(보조정리 \ref{lemma-H0-L-morphism-ringed-topoi})를
+통하여 (2)와 (3)은 변형 이론, 보조정리
+\ref{defos-lemma-huge-diagram-ringed-topoi}과
+\ref{defos-lemma-choices-ringed-topoi}에서 이미 보았다.
+
+\medskip\noindent
+(1)의 증명. 표기를 변형 이론, 절
+\ref{defos-section-deformations-ringed-topoi}과 맞추기 위하여
+$\NL_f = \NL_{\mathcal{O}/\mathcal{O}_\mathcal{B}}$이고
+$L_f = L_{\mathcal{O}/\mathcal{O}_\mathcal{B}}$로 쓰고, 사상 $t$와
+$t \circ f$에 대해서도 마찬가지로 쓰겠다. 변형 이론, 보조정리
+\ref{defos-lemma-parametrize-solutions-ringed-topoi}에 의해 원소
+$$
+\xi' \in
+\Ext^1_\mathcal{O}(
+Lf^*\NL_{\mathcal{O}_\mathcal{B}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G}) =
+\Ext^1_\mathcal{O}(
+Lf^*L_{\mathcal{O}_\mathcal{B}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G})
+$$
+가 존재하며, 해가 존재하는 것은 이 원소가 사상
+$$
+\Ext^1_\mathcal{O}(
+\NL_{\mathcal{O}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G}) =
+\Ext^1_\mathcal{O}(
+L_{\mathcal{O}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G})
+\longrightarrow
+\Ext^1_\mathcal{O}(
+Lf^*L_{\mathcal{O}_\mathcal{B}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G})
+$$
+의 상에 속하는 것과 필요충분하다. $f$와 $t$에 대한 보조정리
+\ref{lemma-triangle-ringed-topoi}의 완전 삼각형은 긴 완전열
+$$
+\ldots \to
+\Ext^1_\mathcal{O}(
+L_{\mathcal{O}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G}) \to
+\Ext^1_\mathcal{O}(
+Lf^*L_{\mathcal{O}_\mathcal{B}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G})
+\to
+\Ext^1_\mathcal{O}(
+L_{\mathcal{O}/\mathcal{O}_\mathcal{B}}, \mathcal{G})
+$$
+을 유도한다. 따라서 $\xi$를 $\xi'$의 상으로 택하면 된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{스킴의 사상의 코탄젠트 복합체}
+\label{section-cotangent-morphism-schemes}
+
+\noindent
+앞에서 약속한 대로 스킴의 사상의 코탄젠트 복합체를 다음과 같이 정의한다.
+
+\begin{definition}
+\label{definition-cotangent-morphism-schemes}
+$f : X \to Y$를 스킴의 사상이라 하자. {\it $Y$ 위의 $X$의 코탄젠트 복합체
+$L_{X/Y}$}는 환 달린 공간의 사상으로서의 $f$의 코탄젠트 복합체이다
+(정의 \ref{definition-cotangent-complex-morphism-ringed-spaces}).
+\end{definition}
+
+\noindent
+특히 절 \ref{section-cotangent-morphism-ringed-spaces}의 결과는
+스킴의 사상의 코탄젠트 복합체에 적용된다.
+다음 보조정리는 이 정의가 환 준동형에 대한 정의와 양립함을 보이며,
+또한 $L_{X/Y}$가 $D_\QCoh(\mathcal{O}_X)$의 대상임을 함의한다.
+
+\begin{lemma}
+\label{lemma-morphism-affine-schemes}
+$f : X \to Y$를 스킴의 사상이라 하자. $U = \Spec(B) \subset X$와
+$V = \Spec(A) \subset Y$를 $f(U) \subset V$를 만족하는 아핀 열린부분이라 하자.
+다음과 같은 표준 사상이 존재한다.
+$$
+\widetilde{L_{B/A}} \longrightarrow L_{X/Y}|_U
+$$
+이는 복합체의 사상이며 $D(\mathcal{O}_U)$에서 동형이다.
+이 사상은 $X$와 $Y$의 더 작은 아핀 열린부분으로의 제한과 양립한다.
+\end{lemma}
+
+\begin{proof}
+주의 \ref{remark-map-sections-over-U}에 의해 복합체의 표준 사상
+$L_{\mathcal{O}_X(U)/f^{-1}\mathcal{O}_Y(U)} \to L_{X/Y}(U)$
+$B = \mathcal{O}_X(U)$-가군의 복합체의 사상이 존재하며, 이는 더 작은
+열린부분으로의 제한과 양립한다. 표준 사상
+$A \to f^{-1}\mathcal{O}_Y(U)$를 사용하면 $B$-가군의 복합체의 표준 사상
+$L_{B/A} \to L_{\mathcal{O}_X(U)/f^{-1}\mathcal{O}_Y(U)}$
+를 얻는다.
+$\widetilde{\ }$ 함자의 보편 성질을 사용하면
+(스킴, 보조정리 \ref{schemes-lemma-compare-constructions} 참조)
+보조정리의 명제에 나오는 사상을 얻는다.
+이 사상이 줄기 위에서 동형을 유도하는지 확인함으로써,
+코호몰로지 층 위에서 동형인지 확인할 수 있다.
+이는 보조정리 \ref{lemma-stalk-cotangent-complex}와
+\ref{lemma-localize}에서 곧바로 따른다
+(점 $\mathfrak p \in \Spec(B)$에서 $\mathcal{O}_X$와
+$f^{-1}\mathcal{O}_Y$의 줄기는 각각 $B_\mathfrak p$와
+$A_\mathfrak q$이고, 여기서 $\mathfrak q = A \cap \mathfrak p$이다.
+사용한 참고문헌은 스킴, 보조정리 \ref{schemes-lemma-spec-sheaves}와
+층, 보조정리 \ref{sheaves-lemma-stalk-pullback}이다).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-scheme-over-ring}
+$\Lambda$를 환이라 하고 $X$를 $\Lambda$ 위의 스킴이라 하자. 그러면
+$$
+L_{X/\Spec(\Lambda)} = L_{\mathcal{O}_X/\underline{\Lambda}}
+$$
+여기서 $\underline{\Lambda}$는 $X$ 위에서 값이 $\Lambda$인 상수층이다.
+\end{lemma}
+
+\begin{proof}
+$p : X \to \Spec(\Lambda)$를 구조 사상이라 하고,
+$q : \Spec(\Lambda) \to (*, \Lambda)$를 명백한 사상이라 하자.
+보조정리 \ref{lemma-triangle-ringed-spaces}의 완전 삼각형에 의해
+$L_q = 0$임을 보이면 충분하다. 이를 위해서는
+$\mathfrak p \in \Spec(\Lambda)$에 대하여
+$$
+(L_q)_\mathfrak p =
+L_{\mathcal{O}_{\Spec(\Lambda), \mathfrak p}/\Lambda} =
+L_{\Lambda_\mathfrak p/\Lambda}
+$$
+(보조정리 \ref{lemma-stalk-cotangent-complex})
+가 영임을 보이면 충분하며, 이는 보조정리 \ref{lemma-when-zero}에서 따른다.
+\end{proof}
+
+
+
+
+
+
+\section{환 위의 스킴의 코탄젠트 복합체}
+\label{section-cotangent-schemes-variant}
+
+\noindent
+$\Lambda$를 환이라 하고 $X$를 $\Lambda$ 위의 스킴이라 하자.
+보조정리 \ref{lemma-scheme-over-ring}에 따라
+$L_{X/\Spec(\Lambda)} = L_{X/\Lambda}$로 쓴다.
+이 절에서는 보조정리 \ref{lemma-compute-cotangent-complex}와 비슷하게
+$L_{X/\Lambda}$를 기술한다. 구체적으로 $X_{Zar}$ 위에 섬유화된 범주
+$\mathcal{C}_{X/\Lambda}$를 구성하고, 그 위에 다음을 만족하는
+(다항식) $\Lambda$-대수의 층 $\mathcal{O}$를 부여한다.
+$$
+L_{X/\Lambda} =
+L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}} \otimes_\mathcal{O}
+\underline{\mathcal{O}}_X).
+$$
+뒤에서 범주 $\mathcal{C}_{X/\Lambda}$를 사용하여 연접층의 스택에 대한
+소박한 장애 이론을 구성할 것이다.
+
+\medskip\noindent
+$\Lambda$를 환이라 하고 $X$를 $\Lambda$ 위의 스킴이라 하자.
+$\mathcal{C}_{X/\Lambda}$를 그 대상이 다음 가환 도표인 범주라 하자.
+\begin{equation}
+\label{equation-object}
+\vcenter{
+\xymatrix{
+X \ar[d] & U \ar[l] \ar[d] \\
+\Spec(\Lambda) & \mathbf{A} \ar[l]
+}
+}
+\end{equation}
+여기서 이들은 스킴의 도표이고,
+\begin{enumerate}
+\item $U$는 $X$의 열린 부분스킴이고,
+\item $P$가 $\Lambda$ 위의 다항식 대수(어떤 변수의 집합에 대한)일 때
+$\mathbf{A} = \Spec(P)$라는 동형이 존재한다.
+\end{enumerate}
+다시 말해 $\mathbf{A}$는 $\Spec(\Lambda)$ 위의 (무한 차원) 아핀 공간이다.
+사상은 가환 도표로 주어진다. $X_{Zar}$는 $X$의 작은 Zariski 자리를
+뜻한다는 것을 상기하자. 망각 함자
+$$
+u : \mathcal{C}_{X/\Lambda} \to X_{Zar},\ (U \to \mathbf{A}) \mapsto U
+$$
+$U$ 위의 섬유 범주는 절 \ref{section-compute-L-pi-shriek}에서 도입한
+범주 $\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$와 표준적으로 동치이다.
+
+\begin{lemma}
+\label{lemma-category-fibred}
+위 상황에서 범주 $\mathcal{C}_{X/\Lambda}$는 $X_{Zar}$ 위에 섬유화되어 있다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}_{X/\Lambda}$의 대상 $U \to \mathbf{A}$와 $X_{Zar}$의 사상
+$U' \to U$가 주어졌다고 하자. $U' \to \mathbf{A}$가
+$U' \to U$와 $U \to \mathbf{A}$의 합성인 $\mathcal{C}_{X/\Lambda}$의 대상
+$U' \to \mathbf{A}$를 생각하자. 사상
+$(U' \to \mathbf{A}) \to (U \to \mathbf{A})$는
+$\mathcal{C}_{X/\Lambda}$에서 $X_{Zar}$ 위의 강한 데카르트 사상이다.
+\end{proof}
+
+\noindent
+$\mathcal{C}_{X/\Lambda}$에 $X_{Zar}$에서 상속된 위상을 부여한다
+(스택, 절 \ref{stacks-section-topology} 참조).
+함자 $u$는 토포스의 사상
+$\pi : \Sh(\mathcal{C}_{X/\Lambda}) \to \Sh(X_{Zar})$를 정의한다.
+자리 $\mathcal{C}_{X/\Lambda}$에는 다음과 같은 환의 층들이 있다.
+\begin{enumerate}
+\item 다음 규칙으로 주어지는 층 $\mathcal{O}$,
+$(U \to \mathbf{A}) \mapsto \Gamma(\mathbf{A}, \mathcal{O}_\mathbf{A})$.
+\item 규칙 $(U \to \mathbf{A}) \mapsto \mathcal{O}_X(U)$로 주어지는 층
+$\underline{\mathcal{O}}_X = \pi^{-1}\mathcal{O}_X$,
+\item 상수층 $\underline{\Lambda}$.
+\end{enumerate}
+환 달린 토포스의 사상들을 얻는다.
+\begin{equation}
+\label{equation-pi-schemes}
+\vcenter{
+\xymatrix{
+(\Sh(\mathcal{C}_{X/\Lambda}), \underline{\mathcal{O}}_X) \ar[r]_i \ar[d]_\pi &
+(\Sh(\mathcal{C}_{X/\Lambda}), \mathcal{O}) \\
+(\Sh(X_{Zar}), \mathcal{O}_X)
+}
+}
+\end{equation}
+사상 $i$는 바탕 토포스 위의 항등 사상이고,
+$i^\sharp : \mathcal{O} \to \underline{\mathcal{O}}_X$는 명백한 사상이다.
+사상 $\pi$는 자리 위의 코호몰로지, 상황
+\ref{sites-cohomology-situation-fibred-category}의 특수한 경우이다.
+다음에서는 유도 함자
+$
+Li^* : D(\mathcal{O}) \longrightarrow D(\underline{\mathcal{O}}_X)
+$
+$Ri_* = i_* : D(\underline{\mathcal{O}}_X) \to D(\mathcal{O})$의 왼쪽 수반인
+함자와
+$
+L\pi_! : D(\underline{\mathcal{O}}_X) \longrightarrow D(\mathcal{O}_X)
+$
+$\pi^* = \pi^{-1} : D(\mathcal{O}_X) \to D(\underline{\mathcal{O}}_X)$의
+왼쪽 수반인 함자가 중요한 역할을 한다.
+앞에서 한 작업 덕분에 $L\pi_!$를 계산할 수 있다.
+
+\begin{remark}
+\label{remark-compute-L-pi-shriek}
+위 상황에서 각 열린부분 $U \subset X$에 대하여 $P_{\bullet, U}$를
+$\Lambda$ 위의 $\mathcal{O}_X(U)$의 표준 분해라 하자.
+$\mathbf{A}_{n, U} = \Spec(P_{n, U})$로 두자. 그러면
+$\mathbf{A}_{\bullet, U}$
+는 $U$ 위의 $\mathcal{C}_{X/\Lambda}$의 섬유 범주
+$\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$의 쌍대단체 대상이다.
+더욱이 주의 \ref{remark-resolution}에서 논의했듯이,
+$\mathbf{A}_{\bullet, U}$는 자리 위의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution}에 나오는
+$\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$의 쌍대단체 대상이다.
+구성 $U \mapsto \mathbf{A}_{\bullet, U}$는 $U$에 대하여 함자적이므로,
+$\mathcal{C}_{X/\Lambda}$ 위의 임의의 (아벨) 층 $\mathcal{F}$가 주어지면
+전층의 복합체
+$$
+U \longmapsto \mathcal{F}(\mathbf{A}_{\bullet, U})
+$$
+를 얻으며, 그 코호몰로지 군은 섬유 범주 위의 $\mathcal{F}$의 호몰로지를
+계산한다. 자리 위의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-left-derived-pi-shriek}에 의해
+그 층화가 $L_n\pi_!(\mathcal{F})$를 계산한다.
+다시 말해, 차수 $-n$의 항이
+$U \mapsto \mathcal{F}(\mathbf{A}_{n, U})$의 층화인 층의 복합체는
+$L\pi_!(\mathcal{F})$를 계산한다.
+\end{remark}
+
+\noindent
+이 주의를 바탕으로 이 절의 주요 결과를 진술할 수 있다.
+
+\begin{lemma}
+\label{lemma-cotangent-morphism-schemes}
+위 상황에서 다음 표준 동형이 존재한다.
+$$
+L_{X/\Lambda} = 
+L\pi_!(Li^*\Omega_{\mathcal{O}/\underline{\Lambda}}) =
+L\pi_!(i^*\Omega_{\mathcal{O}/\underline{\Lambda}}) =
+L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)
+$$
+이는 $D(\mathcal{O}_X)$에서의 동형이다.
+\end{lemma}
+
+\begin{proof}
+먼저 $\mathcal{C}_{X/\Lambda}$의 임의의 대상 $(U \to \mathbf{A})$에서
+층 $\mathcal{O}$의 값은 $\Lambda$ 위의 다항식 대수임을 관찰하자.
+따라서 $\Omega_{\mathcal{O}/\underline{\Lambda}}$는 평탄한
+$\mathcal{O}$-가군이고, 보조정리의 명제에서 둘째와 셋째 등식이 성립한다.
+
+\medskip\noindent
+주의 \ref{remark-compute-L-pi-shriek}에 의해 대상
+$L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)$
+는 다음 전층의 복합체의 층화로 계산된다.
+$$
+U \mapsto
+\left(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X\right)(\mathbf{A}_{\bullet, U})
+=
+\Omega_{P_{\bullet, U}/\Lambda} \otimes_{P_{\bullet, U}} \mathcal{O}_X(U) =
+L_{\mathcal{O}_X(U)/\Lambda}
+$$
+여기서는 주의 \ref{remark-compute-L-pi-shriek}의 표기를 사용했다.
+이제 주의 \ref{remark-map-sections-over-U}에 의해
+$L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)$
+는 $X$ 위의 환 준동형 $\underline{\Lambda} \to \mathcal{O}_X$의
+코탄젠트 복합체를 계산한다. 보조정리 \ref{lemma-scheme-over-ring}에 의해
+이는 바로 원하는 결과이다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{대수공간의 사상의 코탄젠트 복합체}
+\label{section-cotangent-morphism-spaces}
+
+\noindent
+대응하는 작은 에탈 자리 사이의 사상을 사용하여
+대수공간의 사상의 코탄젠트 복합체를 정의한다.
+
+\begin{definition}
+\label{definition-cotangent-morphism-spaces}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+{\it $Y$ 위의 $X$의 코탄젠트 복합체 $L_{X/Y}$}는 $X$와 $Y$의 작은
+에탈 자리 사이의 환 달린 토포스의 사상 $f_{small}$의 코탄젠트 복합체이다
+(공간의 성질, 보조정리
+\ref{spaces-properties-lemma-morphism-ringed-topoi}
+및 정의 \ref{definition-cotangent-complex-morphism-ringed-topoi} 참조).
+\end{definition}
+
+\noindent
+특히 절 \ref{section-cotangent-morphism-ringed-topoi}의 결과는
+대수공간의 사상의 코탄젠트 복합체에 적용된다.
+다음 보조정리들은 이 정의가 환 준동형과 스킴에 대한 정의와 양립하고,
+$L_{X/Y}$가 $D_\QCoh(\mathcal{O}_X)$의 대상임을 보인다.
+
+\begin{lemma}
+\label{lemma-etale-localization}
+$S$를 스킴이라 하자. 다음과 같은 가환 도표를 생각하자.
+$$
+\xymatrix{
+U \ar[d]_p \ar[r]_g & V \ar[d]^q \\
+X \ar[r]^f & Y
+}
+$$
+이는 $S$ 위의 대수공간의 도표이고 $p$와 $q$는 에탈 사상이다.
+그러면 $D(\mathcal{O}_U)$에서 표준 동일시
+$L_{X/Y}|_{U_\etale} = L_{U/V}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+코탄젠트 복합체의 형성은 당김과 가환하며
+(보조정리 \ref{lemma-pullback-cotangent-morphism-topoi}),
+$p_{small}^{-1}\mathcal{O}_X = \mathcal{O}_U$이고
+$g_{small}^{-1}\mathcal{O}_{V_\etale} =
+p_{small}^{-1}f_{small}^{-1}\mathcal{O}_{Y_\etale}$
+$q_{small}^{-1}\mathcal{O}_{Y_\etale} =
+\mathcal{O}_{V_\etale}$
+(공간의 성질, 보조정리
+\ref{spaces-properties-lemma-etale-exact-pullback}).
+이므로 그러하다. 정의를 따라가면
+$L_{X/Y}|_{U_\etale} = L_{U/V}$임을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-spaces-schemes}
+$S$를 스킴이라 하고 $f : X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+$X$와 $Y$가 각각 스킴 $X_0$와 $Y_0$로 표현된다고 가정하자.
+그러면 표준 동일시
+$L_{X/Y} = \epsilon^*L_{X_0/Y_0}$가 $D(\mathcal{O}_X)$에서 존재한다.
+여기서 $\epsilon$은 공간의 유도 범주, 절
+\ref{spaces-perfect-section-derived-quasi-coherent-etale}
+에 나오는 사상이고, $L_{X_0/Y_0}$는
+정의 \ref{definition-cotangent-morphism-schemes}에 나오는 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$f_0 : X_0 \to Y_0$를 $f$에 대응하는 스킴의 사상이라 하자.
+다음 표준 사상이 존재한다.
+$\epsilon^{-1}f_0^{-1}\mathcal{O}_{Y_0} \to f_{small}^{-1}\mathcal{O}_Y$
+이는
+$\epsilon^\sharp : \epsilon^{-1}\mathcal{O}_{X_0} \to \mathcal{O}_X$
+와 양립한다. 실제로 다음 가환 도표가 존재한다.
+$$
+\xymatrix{
+X_{0, Zar} \ar[d]_{f_0} & X_\etale \ar[l]^\epsilon \ar[d]^f \\
+Y_{0, Zar} & Y_\etale \ar[l]_\epsilon
+}
+$$
+공간의 유도 범주, 주의
+\ref{spaces-perfect-remark-match-total-direct-images}를 참조하라.
+따라서 절 \ref{section-cotangent-complex}에서 논의한 함자성과
+보조정리 \ref{lemma-pullback-cotangent-morphism-topoi}에 의해 표준 사상
+$$
+\epsilon^{-1}L_{X_0/Y_0} =
+\epsilon^{-1}L_{\mathcal{O}_{X_0}/f_0^{-1}\mathcal{O}_{Y_0}} =
+L_{\epsilon^{-1}\mathcal{O}_{X_0}/\epsilon^{-1}f_0^{-1}\mathcal{O}_{Y_0}}
+\longrightarrow
+L_{\mathcal{O}_X/f^{-1}_{small}\mathcal{O}_Y} = L_{X/Y}
+$$
+을 얻는다.
+유도된 사상 $\epsilon^*L_{X_0/Y_0} \to L_{X/Y}$가 동형임을 보이려면
+기하점에서의 줄기 위에서 확인하면 된다
+(공간의 성질, 정리
+\ref{spaces-properties-theorem-exactness-stalks}).
+줄기를 계산하기 위해 보조정리 \ref{lemma-stalk-cotangent-complex}를
+사용할 것이다. $\overline{x} : \Spec(k) \to X_0$를 $x \in X_0$ 위의
+기하점이라 하고, $\overline{y} = f \circ \overline{x}$가
+$y \in Y_0$ 위에 놓인다고 하자. 그러면
+$$
+L_{X/Y, \overline{x}} =
+L_{\mathcal{O}_{X, \overline{x}}/\mathcal{O}_{Y, \overline{y}}}
+$$
+이고
+$$
+(\epsilon^*L_{X_0/Y_0})_{\overline{x}} =
+L_{X_0/Y_0, x} \otimes_{\mathcal{O}_{X_0, x}}
+\mathcal{O}_{X, \overline{x}} =
+L_{\mathcal{O}_{X_0, x}/\mathcal{O}_{Y_0, y}}
+\otimes_{\mathcal{O}_{X_0, x}} \mathcal{O}_{X, \overline{x}}
+$$
+이다. 몇 가지 세부사항은 생략한다(힌트: 당김의 줄기는 상의 점에서의
+줄기라는 사실을 사용하라. 자리, 보조정리
+\ref{sites-lemma-point-morphism-sites} 및 가군에 대한 대응 결과인
+자리 위의 가군, 보조정리 \ref{sites-modules-lemma-pullback-stalk} 참조).
+$\mathcal{O}_{X, \overline{x}}$는 $\mathcal{O}_{X_0, x}$의 엄밀 헨젤화이고,
+$\mathcal{O}_{Y, \overline{y}}$에 대해서도 마찬가지임을 관찰하자
+(공간의 성질, 보조정리
+\ref{spaces-properties-lemma-describe-etale-local-ring}).
+따라서 결과는 보조정리 \ref{lemma-cotangent-complex-henselization}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-space-over-ring}
+$\Lambda$를 환이라 하고 $X$를 $\Lambda$ 위의 대수공간이라 하자. 그러면
+$$
+L_{X/\Spec(\Lambda)} = L_{\mathcal{O}_X/\underline{\Lambda}}
+$$
+여기서 $\underline{\Lambda}$는 $X_\etale$ 위에서 값이 $\Lambda$인 상수층이다.
+\end{lemma}
+
+\begin{proof}
+$p : X \to \Spec(\Lambda)$를 구조 사상이라 하고,
+$q : \Spec(\Lambda)_\etale \to (*, \Lambda)$를 명백한 사상이라 하자.
+보조정리 \ref{lemma-triangle-ringed-topoi}의 완전 삼각형에 의해
+$L_q = 0$임을 보이면 충분하다. 이를 위해서는
+(공간의 성질, 정리
+\ref{spaces-properties-theorem-exactness-stalks})
+기하점 $\overline{t} : \Spec(k) \to \Spec(\Lambda)$에 대하여
+$$
+(L_q)_{\overline{t}} =
+L_{\mathcal{O}_{\Spec(\Lambda)_\etale, \overline{t}}/\Lambda}
+$$
+(보조정리 \ref{lemma-stalk-cotangent-complex})
+가 영임을 보이면 충분하다. $\mathcal{O}_{\Spec(\Lambda)_\etale, \overline{t}}$는
+$\Lambda$의 한 국소환의 엄밀 헨젤화이므로
+(공간의 성질, 보조정리
+\ref{spaces-properties-lemma-describe-etale-local-ring})
+이는 보조정리 \ref{lemma-when-zero}에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{환 위의 대수공간의 코탄젠트 복합체}
+\label{section-cotangent-spaces-variant}
+
+\noindent
+$\Lambda$를 환이라 하고 $X$를 $\Lambda$ 위의 대수공간이라 하자.
+보조정리 \ref{lemma-space-over-ring}에 따라
+$L_{X/\Spec(\Lambda)} = L_{X/\Lambda}$로 쓴다.
+이 절에서는 보조정리 \ref{lemma-compute-cotangent-complex}와 비슷하게
+$L_{X/\Lambda}$를 기술한다. 구체적으로 $X_\etale$ 위에 섬유화된 범주
+$\mathcal{C}_{X/\Lambda}$를 구성하고, 그 위에 다음을 만족하는
+(다항식) $\Lambda$-대수의 층 $\mathcal{O}$를 부여한다.
+$$
+L_{X/\Lambda} =
+L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}} \otimes_\mathcal{O}
+\underline{\mathcal{O}}_X).
+$$
+뒤에서 범주 $\mathcal{C}_{X/\Lambda}$를 사용하여 연접층의 스택에 대한
+소박한 장애 이론을 구성할 것이다.
+
+\medskip\noindent
+$\Lambda$를 환이라 하고 $X$를 $\Lambda$ 위의 대수공간이라 하자.
+$\mathcal{C}_{X/\Lambda}$를 그 대상이 다음 가환 도표인 범주라 하자.
+\begin{equation}
+\label{equation-object-space}
+\vcenter{
+\xymatrix{
+X \ar[d] & U \ar[l] \ar[d] \\
+\Spec(\Lambda) & \mathbf{A} \ar[l]
+}
+}
+\end{equation}
+여기서 이들은 스킴의 도표이고,
+\begin{enumerate}
+\item $U$는 스킴이고,
+\item $U \to X$는 에탈 사상이며,
+\item $P$가 $\Lambda$ 위의 다항식 대수(어떤 변수의 집합에 대한)일 때
+$\mathbf{A} = \Spec(P)$라는 동형이 존재한다.
+\end{enumerate}
+다시 말해 $\mathbf{A}$는 $\Spec(\Lambda)$ 위의 (무한 차원) 아핀 공간이다.
+사상은 가환 도표로 주어진다. $X_\etale$는 그 대상이 $X$ 위의 에탈
+스킴인 $X$의 작은 에탈 자리를 뜻한다는 것을 상기하자.
+망각 함자
+$$
+u : \mathcal{C}_{X/\Lambda} \to X_\etale,
+\quad
+(U \to \mathbf{A}) \mapsto U
+$$
+$U$ 위의 섬유 범주는 절 \ref{section-compute-L-pi-shriek}에서 도입한
+범주 $\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$와 표준적으로 동치이다.
+
+\begin{lemma}
+\label{lemma-category-fibred-space}
+위 상황에서 범주 $\mathcal{C}_{X/\Lambda}$는 $X_\etale$ 위에 섬유화되어 있다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}_{X/\Lambda}$의 대상 $U \to \mathbf{A}$와 $X_\etale$의 사상
+$U' \to U$가 주어졌다고 하자. $U' \to \mathbf{A}$가
+$U' \to U$와 $U \to \mathbf{A}$의 합성인 $\mathcal{C}_{X/\Lambda}$의 대상
+$U' \to \mathbf{A}$를 생각하자. 사상
+$(U' \to \mathbf{A}) \to (U \to \mathbf{A})$는
+$\mathcal{C}_{X/\Lambda}$에서 $X_\etale$ 위의 강한 데카르트 사상이다.
+\end{proof}
+
+\noindent
+$\mathcal{C}_{X/\Lambda}$에 $X_\etale$에서 상속된 위상을 부여한다
+(스택, 절 \ref{stacks-section-topology} 참조).
+함자 $u$는 토포스의 사상
+$\pi : \Sh(\mathcal{C}_{X/\Lambda}) \to \Sh(X_\etale)$를 정의한다.
+자리 $\mathcal{C}_{X/\Lambda}$에는 다음과 같은 환의 층들이 있다.
+\begin{enumerate}
+\item 다음 규칙으로 주어지는 층 $\mathcal{O}$,
+$(U \to \mathbf{A}) \mapsto \Gamma(\mathbf{A}, \mathcal{O}_\mathbf{A})$.
+\item 규칙 $(U \to \mathbf{A}) \mapsto \mathcal{O}_X(U)$로 주어지는 층
+$\underline{\mathcal{O}}_X = \pi^{-1}\mathcal{O}_X$,
+\item 상수층 $\underline{\Lambda}$.
+\end{enumerate}
+환 달린 토포스의 사상들을 얻는다.
+\begin{equation}
+\label{equation-pi-spaces}
+\vcenter{
+\xymatrix{
+(\Sh(\mathcal{C}_{X/\Lambda}), \underline{\mathcal{O}}_X) \ar[r]_i \ar[d]_\pi &
+(\Sh(\mathcal{C}_{X/\Lambda}), \mathcal{O}) \\
+(\Sh(X_\etale), \mathcal{O}_X)
+}
+}
+\end{equation}
+사상 $i$는 바탕 토포스 위의 항등 사상이고,
+$i^\sharp : \mathcal{O} \to \underline{\mathcal{O}}_X$는 명백한 사상이다.
+사상 $\pi$는 자리 위의 코호몰로지, 상황
+\ref{sites-cohomology-situation-fibred-category}의 특수한 경우이다.
+다음에서는 유도 함자
+$
+Li^* : D(\mathcal{O}) \longrightarrow D(\underline{\mathcal{O}}_X)
+$
+$Ri_* = i_* : D(\underline{\mathcal{O}}_X) \to D(\mathcal{O})$의 왼쪽 수반인
+함자와
+$
+L\pi_! : D(\underline{\mathcal{O}}_X) \longrightarrow D(\mathcal{O}_X)
+$
+$\pi^* = \pi^{-1} : D(\mathcal{O}_X) \to D(\underline{\mathcal{O}}_X)$의
+왼쪽 수반인 함자가 중요한 역할을 한다.
+앞에서 한 작업 덕분에 $L\pi_!$를 계산할 수 있다.
+
+\begin{remark}
+\label{remark-compute-L-pi-shriek-spaces}
+위 상황에서 $X_\etale$의 각 대상 $U \to X$에 대하여
+$P_{\bullet, U}$를 $\Lambda$ 위의 $\mathcal{O}_X(U)$의 표준 분해라 하자.
+$\mathbf{A}_{n, U} = \Spec(P_{n, U})$로 두자. 그러면
+$\mathbf{A}_{\bullet, U}$는 $U$ 위의 $\mathcal{C}_{X/\Lambda}$의 섬유 범주
+$\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$의 쌍대단체 대상이다.
+더욱이 주의 \ref{remark-resolution}에서 논의했듯이,
+$\mathbf{A}_{\bullet, U}$는 자리 위의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution}에 나오는
+$\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$의 쌍대단체 대상이다.
+구성 $U \mapsto \mathbf{A}_{\bullet, U}$는 $U$에 대하여 함자적이므로,
+$\mathcal{C}_{X/\Lambda}$ 위의 임의의 (아벨) 층 $\mathcal{F}$가 주어지면
+전층의 복합체
+$$
+U \longmapsto \mathcal{F}(\mathbf{A}_{\bullet, U})
+$$
+를 얻으며, 그 코호몰로지 군은 섬유 범주 위의 $\mathcal{F}$의 호몰로지를
+계산한다. 자리 위의 코호몰로지, 보조정리
+\ref{sites-cohomology-lemma-compute-left-derived-pi-shriek}에 의해
+그 층화가 $L_n\pi_!(\mathcal{F})$를 계산한다.
+다시 말해, 차수 $-n$의 항이
+$U \mapsto \mathcal{F}(\mathbf{A}_{n, U})$의 층화인 층의 복합체는
+$L\pi_!(\mathcal{F})$를 계산한다.
+\end{remark}
+
+\noindent
+이 주의를 바탕으로 이 절의 주요 결과를 진술할 수 있다.
+
+\begin{lemma}
+\label{lemma-cotangent-morphism-spaces}
+위 상황에서 다음 표준 동형이 존재한다.
+$$
+L_{X/\Lambda} = 
+L\pi_!(Li^*\Omega_{\mathcal{O}/\underline{\Lambda}}) =
+L\pi_!(i^*\Omega_{\mathcal{O}/\underline{\Lambda}}) =
+L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)
+$$
+이는 $D(\mathcal{O}_X)$에서의 동형이다.
+\end{lemma}
+
+\begin{proof}
+먼저 $\mathcal{C}_{X/\Lambda}$의 임의의 대상 $(U \to \mathbf{A})$에서
+층 $\mathcal{O}$의 값은 $\Lambda$ 위의 다항식 대수임을 관찰하자.
+따라서 $\Omega_{\mathcal{O}/\underline{\Lambda}}$는 평탄한
+$\mathcal{O}$-가군이고, 보조정리의 명제에서 둘째와 셋째 등식이 성립한다.
+
+\medskip\noindent
+주의 \ref{remark-compute-L-pi-shriek-spaces}에 의해 대상
+$L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)$
+는 다음 전층의 복합체의 층화로 계산된다.
+$$
+U \mapsto
+\left(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X\right)(\mathbf{A}_{\bullet, U})
+=
+\Omega_{P_{\bullet, U}/\Lambda} \otimes_{P_{\bullet, U}} \mathcal{O}_X(U) =
+L_{\mathcal{O}_X(U)/\Lambda}
+$$
+여기서는 주의 \ref{remark-compute-L-pi-shriek-spaces}의 표기를 사용했다.
+이제 주의 \ref{remark-map-sections-over-U}에 의해
+$L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)$
+는 $X_\etale$ 위의 환 준동형 $\underline{\Lambda} \to \mathcal{O}_X$의
+코탄젠트 복합체를 계산한다. 보조정리 \ref{lemma-space-over-ring}에 의해
+이는 바로 원하는 결과이다.
+\end{proof}
+
+
+
+
+
+
+\section{대수공간의 섬유곱과 코탄젠트 복합체}
+\label{section-fibre-product}
+
+\noindent
+$S$를 스킴이라 하자. $X \to B$와 $Y \to B$를 $S$ 위의 대수공간의
+사상이라 하자. 사영 사상 $p : X \times_B Y \to X$와
+$q : X \times_B Y \to Y$를 갖는 섬유곱 $X \times_B Y$를 생각하자.
+이 절에서는 $L_{X \times_B Y/B}$를 논의한다. 원하는 정보의 대부분은
+다음 도표에 들어 있다.
+\begin{equation}
+\label{equation-fibre-product}
+\vcenter{
+\xymatrix{
+Lp^*L_{X/B} \ar[r] &
+L_{X \times_B Y/Y} \ar[r] &
+E \\
+Lp^*L_{X/B} \ar[r] \ar@{=}[u] &
+L_{X \times_B Y/B} \ar[r] \ar[u] &
+L_{X \times_B Y/X} \ar[u] \\
+ &
+Lq^*L_{Y/B} \ar[u] \ar@{=}[r] &
+Lq^*L_{Y/B} \ar[u]
+}
+}
+\end{equation}
+설명: 가운데 행은 사상 $X \times_B Y \to X \to B$에 대한
+보조정리 \ref{lemma-triangle-ringed-topoi}의 기본 삼각형이다.
+가운데 열은 사상 $X \times_B Y \to Y \to B$에 대한 기본 삼각형이다.
+다음으로 $E$는 오른쪽 위 모서리에 ``들어맞는''
+$D(\mathcal{O}_{X \times_B Y})$의 대상이다. 즉, 위쪽 행과 오른쪽 열을
+모두 완전 삼각형으로 만든다. 이러한 $E$는 왼쪽 아래 정사각형에
+유도 범주, 명제 \ref{derived-proposition-9}를 적용하면 존재한다
+(빈 자리에 $0$을 둔다). 더 구체적으로, 예를 들어 $E$를 복합체의 사상
+$$
+Lp^*L_{X/B} \oplus Lq^*L_{Y/B} \longrightarrow L_{X \times_B Y/B}
+$$
+의 사상뿔(유도 범주, 정의 \ref{derived-definition-cone})로 정의하고,
+TR3을 적용하여 $E$를 공역으로 하는 두 사상을 얻을 수 있다.
+Tor-독립인 경우 대상 $E$는 영이다.
+
+\begin{lemma}
+\label{lemma-fibre-product-tor-independent}
+위 상황에서 $X$와 $Y$가 $B$ 위에서 Tor-독립이면,
+(\ref{equation-fibre-product})의 대상 $E$는 영이다. 이 경우
+$$
+L_{X \times_B Y/B} = Lp^*L_{X/B} \oplus Lq^*L_{Y/B}
+$$
+\end{lemma}
+
+\begin{proof}
+스킴 $W$와 전사 에탈 사상 $W \to B$를 택하자.
+스킴 $U$와 전사 에탈 사상 $U \to X \times_B W$를 택하자.
+스킴 $V$와 전사 에탈 사상 $V \to Y \times_B W$를 택하자.
+그러면 $U \times_W V \to X \times_B Y$도 전사 에탈 사상이다.
+따라서 $E$를 $U \times_W V$로 제한한 것이 영임을 보이면 충분하다.
+보조정리 \ref{lemma-compare-spaces-schemes}와 공간의 유도 범주, 보조정리
+\ref{spaces-perfect-lemma-tor-independent}에 의해 스킴의 경우로 환원된다.
+적절한 아핀 열린부분을 택하면 아핀 스킴의 경우로 환원된다.
+보조정리 \ref{lemma-morphism-affine-schemes}를 사용하면 환의 텐서곱의
+경우, 즉 보조정리 \ref{lemma-tensor-product-tor-independent}로 환원된다.
+\end{proof}
+
+\noindent
+일반적으로 대상 $E$에 관해 다음을 말할 수 있다.
+
+\begin{lemma}
+\label{lemma-fibre-product}
+$S$를 스킴이라 하자. $X \to B$와 $Y \to B$를 $S$ 위의 대수공간의
+사상이라 하자. (\ref{equation-fibre-product})의 대상 $E$는
+$i = 0, -1$에 대하여 $H^i(E) = 0$을 만족하고, 기하점
+$(\overline{x}, \overline{y}) : \Spec(k) \to X \times_B Y$에 대하여
+$$
+H^{-2}(E)_{(\overline{x}, \overline{y})} =
+\text{Tor}_1^R(A, B) \otimes_{A \otimes_R B} C
+$$
+여기서 $R = \mathcal{O}_{B, \overline{b}}$, $A = \mathcal{O}_{X, \overline{x}}$,
+$B = \mathcal{O}_{Y, \overline{y}}$이고
+$C = \mathcal{O}_{X \times_B Y, (\overline{x}, \overline{y})}$이다.
+\end{lemma}
+
+\begin{proof}
+코탄젠트 복합체의 형성은 줄기 및 당김을 취하는 것과 가환한다.
+보조정리 \ref{lemma-stalk-cotangent-complex}와
+\ref{lemma-pullback-cotangent-morphism-topoi}를 참조하라.
+$C$는 $A \otimes_R B$의 헨젤화임에 주의하자.
+$L_{C/R} = L_{A \otimes_R B/R} \otimes_{A \otimes_R B} C$
+는 절 \ref{section-localization}의 결과에서 따른다.
+따라서 이 기하점에서 $E$의 줄기는 사상
+$L_{A/R} \otimes C \to L_{A \otimes_R B/R} \otimes C$의 사상뿔이다.
+그러므로 보조정리의 결과는 환의 경우, 즉 보조정리
+\ref{lemma-tensor-product}에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+\input{ko_chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

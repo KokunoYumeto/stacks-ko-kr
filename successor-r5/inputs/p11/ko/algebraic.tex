@@ -1,0 +1,2367 @@
+\input{ko_preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{대수 스택}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+여기서는 대수 스택을 정의하고 몇 가지 매우 기초적인 관찰을 한다.
+일반적인 방침은 분리 조건을 전혀 가정하지 않고, 보조정리, 명제, 정리를
+참이게 하거나 증명가능하게 하는 데 필요한 조건만을 덧붙이는 것이다.
+따라서 여기서 다루는 개념들은 예를 들어 \cite{LM-B}와 같이 문헌의 다른
+곳에서 쓰이는 개념들과 약간 다르다.
+
+\medskip\noindent
+이 장은 대수 스택의 입문서가 아니다. 대수 스택에 관한 비형식적인 논의는
+「대수 스택 소개」, 절 \ref{stacks-introduction-section-introduction}을 보라.
+
+
+\section{규약}
+\label{section-conventions}
+
+\noindent
+이 장에서 사용하는 규약은 대수공간을 다루는 장의 규약과 같다.
+편의를 위해 여기서 다시 적는다.
+
+\medskip\noindent
+위상, 정의 \ref{topologies-definition-big-fppf-site}에서와 같이 적절한
+큰 fppf 사이트 $\Sch_{fppf}$에서 작업한다. 따라서 명시적으로 달리
+말하지 않는 한 모든 스킴은 $\Sch_{fppf}$의 대상이다. 큰 fppf 사이트를
+바꾸면 무엇이 달라지는지는 절 \ref{section-change-big-site}에서 논의한다.
+
+\medskip\noindent
+항상 $\Sch_{fppf}$에 들어 있는 바탕 $S$에 상대하여 작업하며, 이때 큰
+fppf 사이트 $(\Sch/S)_{fppf}$를 사용한다. 위상, 정의
+\ref{topologies-definition-big-small-fppf}를 보라. $S = \Spec(\mathbf{Z})$
+로 두면 절대적인 경우를 얻는다.
+
+\medskip\noindent
+$U, T$가 $S$ 위의 스킴이면, $S$ {\it 위의} $T$-값 점들의 집합을
+$U(T)$로 나타낸다. 식으로 쓰면 $U(T) = \Mor_S(T, U)$이다.
+
+\medskip\noindent
+모든 fpqc 덮개는 보편 유효 전사임에 유의하자. 하강, 보조정리
+\ref{descent-lemma-fpqc-universal-effective-epimorphisms}를 보라.
+따라서 $\Sch_{fppf}$ 위의 위상은 표준 위상보다 약하며, 모든 표현가능
+준층은 층이다.
+
+
+
+
+
+
+
+
+\section{표기}
+\label{section-notation}
+
+\noindent
+문자 $S, T, U, V, X, Y$는 스킴을 나타내는 데 쓴다. 문자
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$는 $(\Sch/S)_{fppf}$ 위의
+범주(섬유화된 범주, 준군들로 섬유화된 범주, 스택 등)를 나타내는 데 쓴다.
+소문자 $f$, $g$는 $(\Sch/S)_{fppf}$ 위의
+$f : \mathcal{X} \to \mathcal{Y}$와 같은 함자를 나타내는 데 쓴다.
+대문자 $F$, $G$, $H$는 $S$ 위의 대수공간, 더 일반적으로는
+$(\Sch/S)_{fppf}$ 위의 집합 준층을 나타내는 데 쓴다. (뒤의 장들에서는
+대수공간에도 다시 $X$, $Y$ 등을 사용한다.)
+
+\medskip\noindent
+이렇게 표기를 정한 이유는 기초를 세우는 이 장에서 서로 다른 종류의
+대상들을 명확히 구별하려는 데 있다.
+
+
+
+
+
+
+
+
+
+\section{표현가능한 준군 섬유화 범주}
+\label{section-representable}
+
+\noindent
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자. 이 장에서 연구할 기본
+대상은 준군들로 섬유화된 범주
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$이다. 범주, 정의
+\ref{categories-definition-fibred-groupoids}를 보라. 이 상황을 나타내기
+위해 흔히 단순히 ``$\mathcal{X}$를 $(\Sch/S)_{fppf}$ 위에서 준군들로
+섬유화된 범주라 하자''라고 말한다. $(\Sch/S)_{fppf}$ 위에서 준군들로
+섬유화된 범주들의 $1$-사상 $\mathcal{X} \to \mathcal{Y}$는
+$(\Sch/S)_{fppf}$ 위의 그러한 범주들이 이루는 $2$-범주에서의
+$1$-사상이다. 범주, 정의
+\ref{categories-definition-categories-fibred-in-groupoids-over-C}를 보라.
+이는 단순히 $(\Sch/S)_{fppf}$ 위의 함자
+$\mathcal{X} \to \mathcal{Y}$이다. 이 범주는 실제로 $(2, 1)$-범주이고
+모든 $2$-섬유곱이 존재함을 상기하자.
+
+\medskip\noindent
+$(\Sch/S)_{fppf}$ 위에서 준군들로 섬유화된 범주 $\mathcal{X}$를
+생각하자. 스킴 $U \in \Ob((\Sch/S)_{fppf})$와 $(\Sch/S)_{fppf}$
+위의 범주 동치
+$$
+j : \mathcal{X} \longrightarrow (\Sch/U)_{fppf}
+$$
+가 존재하면 $\mathcal{X}$가 {\it 표현가능하다}고 한다. 범주, 정의
+\ref{categories-definition-representable-fibred-category}를 보라. 아래에서
+$\mathcal{X}$가 대수공간으로 표현되는 경우와 구별하기 위해 때로는
+$\mathcal{X}$가 {\it 스킴으로 표현가능하다}고 말한다.
+
+\medskip\noindent
+$\mathcal{X}, \mathcal{Y}$가 준군들로 섬유화되어 있고 각각 $U, V$로
+표현가능하다면
+\begin{equation}
+\label{equation-morphisms-schemes}
+\Mor_{\textit{Cat}/(\Sch/S)_{fppf}}(\mathcal{X}, \mathcal{Y})
+\Big/
+2\text{-동형}
+=
+\Mor_{\Sch/S}(U, V)
+\end{equation}
+가 성립한다. 범주, 보조정리
+\ref{categories-lemma-morphisms-representable-fibred-categories}를 보라.
+더 정확히 말하면, 임의의 $1$-사상 $\mathcal{X} \to \mathcal{Y}$는
+사상 $U \to V$를 유도한다. 반대로 $S$ 위 스킴들의 사상 $U \to V$가
+주어지면 이 $U \to V$를 유도하는 $1$-사상
+$\phi : \mathcal{X} \to \mathcal{Y}$가
+존재하며, 이는 유일한 $2$-동형을 제외하고 유일하다.
+
+
+
+
+
+
+\section{2-Yoneda 보조정리}
+\label{section-2-yoneda}
+
+\noindent
+$U \in \Ob((\Sch/S)_{fppf})$라 하고, $\mathcal{X}$를
+$(\Sch/S)_{fppf}$ 위에서 준군들로 섬유화된 범주라 하자. 우리는
+$2$-Yoneda 보조정리를 자주 사용할 것이다. 범주, 보조정리
+\ref{categories-lemma-yoneda-2category}를 보라. 엄밀히 말해 이 보조정리는
+다음 범주 동치가 존재함을 말한다.
+$$
+\Mor_{\textit{Cat}/(\Sch/S)_{fppf}}(
+(\Sch/U)_{fppf}, \mathcal{X})
+\longrightarrow
+\mathcal{X}_U, \quad
+f \longmapsto f(U/U).
+$$
+즉 $1$-사상 $(\Sch/U)_{fppf} \to \mathcal{X}$는 섬유범주
+$\mathcal{X}_U$의 대상 $x$와 대응한다. 실제로 $1$-사상
+$f : (\Sch/U)_{fppf} \to \mathcal{X}$가 주어지면 대상
+$x = f(U/U) \in \Ob(\mathcal{X}_U)$를 얻는다. 반대로 범주, 정의
+\ref{categories-definition-pullback-functor-fibred-category}에서와 같이
+$\mathcal{X}$의 당김들을 택하고 $\mathcal{X}_U$의 대상 $x$를 주면,
+대상에 대해 다음 규칙으로 정의되는 함자
+$(\Sch/U)_{fppf} \to \mathcal{X}$를 얻는다.
+$$
+(\varphi : V \to U) \longmapsto \varphi^*x
+$$
+표기를 남용하여 이 함자를 $x : (\Sch/U)_{fppf} \to \mathcal{X}$로도
+나타낸다. 이 함자는 실제로 $x(U/U) = x$를 만족하며, 더 나아가
+$f(U/U) = x$인 다른 임의의 함자 $f$에 대하여 유일한 $2$-동형
+$x \to f$가 존재한다. 다시 말해 함자 $x$는 유일한 $2$-동형을
+제외하면 대상 $x$에 의해 잘 결정된다.
+
+\medskip\noindent
+이하에서는 이를 더 언급하지 않고 사용한다.
+
+
+
+
+
+\section{준군 섬유화 범주의 표현가능 사상}
+\label{section-representable-morphism}
+
+
+\noindent
+$\mathcal{X}$와 $\mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위에서 준군들로
+섬유화된 범주라 하자. $f : \mathcal{X} \to \mathcal{Y}$를
+{\it 표현가능한 $1$-사상}이라 하자. 범주, 정의
+\ref{categories-definition-representable-map-categories-fibred-in-groupoids}를
+보라. 이는 모든 $U \in \Ob((\Sch/S)_{fppf})$와 임의의
+$y \in \Ob(\mathcal{Y}_U)$에 대하여 $2$-섬유곱
+$(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$가
+$(\Sch/U)_{fppf}$ 위에서 준군들로 섬유화된 범주로서 표현가능하다는
+뜻이다. 표현 대상 $f_y : V_y \to U$와 동치
+$$
+(\Sch/V_y)_{fppf}
+\longrightarrow
+(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}.
+$$
+를 택한다. 사상 $f_y$는 사영
+$(\Sch/V_y)_{fppf} \to
+(\Sch/U)_{fppf} \times_\mathcal{Y} \mathcal{Y}
+\to (\Sch/U)_{fppf}$
+에 대응한다. 절 \ref{section-representable}, 식
+(\ref{equation-morphisms-schemes})을 보라. 이를 다음 도표로 나타낸다.
+\begin{equation}
+\label{equation-representable}
+\vcenter{
+\xymatrix{
+V_y \ar@{~>}[r] \ar[d]_{f_y} &
+(\Sch/V_y)_{fppf} \ar[d] \ar[r] &
+\mathcal{X} \ar[d]^f \\
+U \ar@{~>}[r] &
+(\Sch/U)_{fppf} \ar[r]^-y &
+\mathcal{Y}
+}
+}
+\end{equation}
+여기서 물결 화살표들은 $2$-Yoneda 매장을 나타낸다. 이제 이 개념에 관해
+매우 일반적으로 성립하는 몇 가지 보조정리를 제시한다. 즉 이 보조정리들은
+섬유곱을 갖는 임의의 바탕 범주 위에서 준군들로 섬유화된 범주에 성립한다.
+
+\begin{lemma}
+\label{lemma-morphism-schemes-gives-representable-transformation}
+$f : X \to Y$를 $(\Sch/S)_{fppf}$의 사상이라 하자. 그러면 $f$가
+유도하는 $1$-사상
+$$
+(\Sch/X)_{fppf} \longrightarrow (\Sch/Y)_{fppf}
+$$
+은 표현가능한 $1$-사상이다.
+\end{lemma}
+
+\begin{proof}
+이는 형식적이며 범주 $(\Sch/S)_{fppf}$가 섬유곱을 갖는다는 사실에만
+의존한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-representable-morphism-equivalent}
+$S$를 $\Sch_{fppf}$의 대상이라 하자. $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주들의 $1$-사상으로 이루어진 다음 $2$-가환 도표를
+생각하자.
+$$
+\xymatrix{
+\mathcal{X}' \ar[r] \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r] & \mathcal{Y}
+}
+$$
+수평 화살표들이 동치라고 가정하자. 그러면 $f$가 표현가능할 필요충분조건은
+$f'$가 표현가능한 것이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-representable-transformations}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$를 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주라 하자. $f : \mathcal{X} \to \mathcal{Y}$와
+$g : \mathcal{Y} \to \mathcal{Z}$가 표현가능한 $1$-사상이면
+$$
+g \circ f : \mathcal{X} \longrightarrow \mathcal{Z}
+$$
+도 표현가능한 $1$-사상이다.
+\end{lemma}
+
+\begin{proof}
+이는 완전히 형식적이며 임의의 범주에서 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-representable-transformations}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$를 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주라 하자. $f : \mathcal{X} \to \mathcal{Y}$를
+표현가능한 $1$-사상이라 하고, $g : \mathcal{Z} \to \mathcal{Y}$를
+임의의 $1$-사상이라 하자. 다음 섬유곱 도표를 생각하자.
+$$
+\xymatrix{
+\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \ar[r]_-{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Z} \ar[r]^g & \mathcal{Y}
+}
+$$
+그러면 밑변환 $f'$는 표현가능한 $1$-사상이다.
+\end{lemma}
+
+\begin{proof}
+이는 완전히 형식적이며 임의의 범주에서 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-product-representable-transformations}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$\mathcal{X}_i, \mathcal{Y}_i$를 $(\Sch/S)_{fppf}$ 위에서 준군들로
+섬유화된 범주라 하자. 여기서 $i = 1, 2$이다. 표현가능한 $1$-사상
+$f_i : \mathcal{X}_i \to \mathcal{Y}_i$, $i = 1, 2$가 주어지면
+$$
+f_1 \times f_2 :
+\mathcal{X}_1 \times \mathcal{X}_2
+\longrightarrow
+\mathcal{Y}_1 \times \mathcal{Y}_2
+$$
+는 표현가능한 $1$-사상이다.
+\end{lemma}
+
+\begin{proof}
+$f_1 \times f_2$를 합성
+$\mathcal{X}_1 \times \mathcal{X}_2 \to
+\mathcal{Y}_1 \times \mathcal{X}_2 \to
+\mathcal{Y}_1 \times \mathcal{Y}_2$로 쓴다. 첫 화살표는 사상
+$\mathcal{Y}_1 \times \mathcal{X}_2 \to \mathcal{Y}_1$에 의한
+$f_1$의 밑변환이고, 둘째 화살표는 사상
+$\mathcal{Y}_1 \times \mathcal{Y}_2 \to \mathcal{Y}_2$에 의한
+$f_2$의 밑변환이다. 따라서 이 보조정리는 보조정리
+\ref{lemma-composition-representable-transformations}와
+\ref{lemma-base-change-representable-transformations}의 형식적 귀결이다.
+\end{proof}
+
+
+
+\section{분할된 준군 섬유화 범주}
+\label{section-split}
+
+\noindent
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자. ``준군의 준층''
+$$
+F : (\Sch/S)_{fppf}^{opp} \longrightarrow \textit{Groupoids}
+$$
+가 주어지면 $(\Sch/S)_{fppf}$ 위에서 준군들로 섬유화된 범주
+$\mathcal{S}_F$를 얻는다. 범주, 예
+\ref{categories-example-functor-groupoids}를 보라. 이들 가운데 하나와
+동형인(!) 준군 섬유화 범주를 {\it 분할된 준군 섬유화 범주}라 한다.
+모든 준군 섬유화 범주는 분할된 것과 동치이다.
+
+\medskip\noindent
+$F$가 집합의 준층이면 $\mathcal{S}_F$는 집합들로 섬유화되어 있다.
+범주, 정의 \ref{categories-definition-category-fibred-sets}와 범주, 예
+\ref{categories-example-presheaf}를 보라. 준층에 대한 규칙
+$F \mapsto \mathcal{S}_F$는 어떤 의미에서 충실충만하다. 범주, 보조정리
+\ref{categories-lemma-2-category-fibred-sets}를 보라. $F, G$가 준층이면
+$$
+\mathcal{S}_{F \times G}
+=
+\mathcal{S}_F \times_{(\Sch/S)_{fppf}} \mathcal{S}_G
+$$
+이고, $F \to H$와 $G \to H$가 집합 준층의 사상이면
+$$
+\mathcal{S}_{F \times_H G} =
+\mathcal{S}_F \times_{\mathcal{S}_H} \mathcal{S}_G
+$$
+이다. 여기서 우변들은 $2$-섬유곱이다.
+$\mathcal{S}_F, \mathcal{S}_G, \mathcal{S}_H$의 섬유범주들은
+항등사상만을 가지므로,
+이는 정의에서 곧바로 따른다.
+
+\medskip\noindent
+더 특수한 경우로 $F = h_X$가 표현가능 준층일 때가 있다. 이때
+$\mathcal{S}_{h_X} = (\Sch/X)_{fppf}$이다. 범주, 예
+\ref{categories-example-fibred-category-from-functor-of-points}를 보라.
+
+\medskip\noindent
+이하에서는 표기 $\mathcal{S}_F$를 더 언급하지 않고 사용한다.
+
+
+
+
+\section{대수공간으로 표현가능한 준군 섬유화 범주}
+\label{section-representable-by-algebraic-spaces}
+
+\noindent
+표현가능함보다 약간 약한 개념으로 대수공간에 의한 표현가능함이 있으며,
+이 절에서 이를 논의한다. 범주 $\Sch_{fppf}$ 대신 대수공간들의 어떤 범주
+$\textit{Spaces}_{fppf}$에서 작업했다면 이 논의를 피할 수도 있었을 것이다.
+그러나 대수 스택의 섬유범주를 정의하는 ``시험 대상''의 자연스러운 모임으로
+스킴의 범주를 택하는 것이 자연스럽다고 본다.
+
+\medskip\noindent
+범주, 정의 \ref{categories-definition-representable-fibred-category}와
+유사하게 다음을 정의한다.
+
+\begin{definition}
+\label{definition-representable-by-algebraic-space}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자. 준군들로 섬유화된 범주
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$에 대하여, $S$ 위의 대수공간
+$F$와 $(\Sch/S)_{fppf}$ 위의 범주 동치
+$j : \mathcal{X} \to \mathcal{S}_F$가 존재하면 그 범주가
+{\it $S$ 위의 대수공간으로 표현가능하다}고 한다.
+\end{definition}
+
+\noindent
+이러한 상황에서는 계속해서 표기를 남용하여 동치 $j$를 생략한다.
+위의 논의에서 형식적으로, $\mathcal{X}$가 (스킴으로) 표현가능하면
+대수공간으로도 표현가능함이 따른다. 다음은 범주, 보조정리
+\ref{categories-lemma-characterize-representable-fibred-category}에
+대응하는 결과이다.
+
+\begin{lemma}
+\label{lemma-characterize-representable-by-space}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고,
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$를 준군들로 섬유화된 범주라
+하자. 그러면 $\mathcal{X}$가 $S$ 위의 대수공간으로 표현가능할
+필요충분조건은 다음 조건들이 성립하는 것이다.
+\begin{enumerate}
+\item $\mathcal{X}$는 셋토이드들로 섬유화되어 있다\footnote{이는
+그 범주가 준군들로 섬유화되어 있고 섬유범주의 대상들이 비자명한
+자기동형을 갖지 않는다는 뜻이다. 범주, 정의
+\ref{categories-definition-category-fibred-setoids}를 보라.}.
+\item 준층 $U \mapsto \Ob(\mathcal{X}_U)/\!\!\cong$는 대수공간이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 다만 범주, 보조정리
+\ref{categories-lemma-characterize-representable-fibred-category}를 보라.
+\end{proof}
+
+\noindent
+$\mathcal{X}, \mathcal{Y}$가 준군들로 섬유화되어 있고 각각 $S$ 위의
+대수공간 $F, G$로 표현가능하면
+\begin{equation}
+\label{equation-morphisms-spaces}
+\Mor_{\textit{Cat}/(\Sch/S)_{fppf}}(\mathcal{X}, \mathcal{Y})
+\Big/
+2\text{-동형}
+=
+\Mor_{\Sch/S}(F, G)
+\end{equation}
+가 성립한다. 범주, 보조정리
+\ref{categories-lemma-2-category-fibred-setoids}를 보라. 더 정확히 말하면,
+임의의 $1$-사상 $\mathcal{X} \to \mathcal{Y}$는 사상 $F \to G$를
+유도한다. 반대로 $S$ 위의 층들의 사상 $F \to G$가 주어지면 이
+$F \to G$를 유도하는 $1$-사상
+$\phi : \mathcal{X} \to \mathcal{Y}$가 존재하며,
+이는 유일한 $2$-동형을 제외하고 유일하다.
+
+
+
+\section{대수공간으로 표현가능한 사상}
+\label{section-morphisms-representable-by-algebraic-spaces}
+
+\noindent
+범주, 정의
+\ref{categories-definition-representable-map-categories-fibred-in-groupoids}와
+유사하게 다음을 정의한다.
+
+\begin{definition}
+\label{definition-representable-by-algebraic-spaces}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자. $(\Sch/S)_{fppf}$
+위에서 준군들로 섬유화된 범주들의 $1$-사상
+$f : \mathcal{X} \to \mathcal{Y}$에 대하여, 임의의
+$U \in \Ob((\Sch/S)_{fppf})$와 임의의
+$y : (\Sch/U)_{fppf} \to \mathcal{Y}$에 대해 준군들로 섬유화된 범주
+$$
+(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}
+$$
+가 $(\Sch/U)_{fppf}$ 위에서 $U$ 위의 대수공간으로 표현가능하면 이
+사상이 {\it 대수공간으로 표현가능하다}고 한다.
+\end{definition}
+
+\noindent
+$(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$를 표현하는
+$U$ 위의 대수공간 $F_y$를 택하자. $F_y$는 $S$ 위의 표준 사상
+$f_y : F_y \to U$를 갖춘 $S$ 위의 대수공간으로 볼 수 있다.
+대수공간, 절 \ref{spaces-section-change-base-scheme}을 보라. 이에 대한
+도표는 다음과 같다.
+\begin{equation}
+\label{equation-representable-by-algebraic-spaces}
+\vcenter{
+\xymatrix{
+F_y \ar[d]_{f_y} &
+(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}
+\ar@{~>}[l] \ar[d]_{\text{pr}_0} \ar[r]_-{\text{pr}_1} &
+\mathcal{X} \ar[d]^f \\
+U &
+(\Sch/U)_{fppf} \ar@{~>}[l] \ar[r]^-y &
+\mathcal{Y}
+}
+}
+\end{equation}
+여기서 물결 화살표들은 셋토이드들로 섬유화된 스택에 그 대상들의 동형류로
+이루어진 연관층을 대응시키는 구성을 나타낸다. 오른쪽 사각형은
+$2$-가환이며 $2$-섬유곱 사각형이다.
+
+\medskip\noindent
+다음은 범주, 보조정리
+\ref{categories-lemma-criterion-representable-map-stack-in-groupoids}에
+대응하는 결과이다.
+
+\begin{lemma}
+\label{lemma-criterion-map-representable-spaces-fibred-in-groupoids}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$f : \mathcal{X} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주들의 $1$-사상이라 하자. $f$가 대수공간으로
+표현가능할 필요충분조건은 다음과 같다.
+\begin{enumerate}
+\item 각 스킴 $U/S$에 대하여 섬유범주들 사이의 함자
+$f_U : \mathcal{X}_U \longrightarrow \mathcal{Y}_U$가 충실하다.
+\item 각 $U$와 각 $y \in \Ob(\mathcal{Y}_U)$에 대하여 준층
+$$
+(h : V \to U)
+\longmapsto
+\{(x, \phi) \mid x \in \Ob(\mathcal{X}_V), \phi : h^*y \to f(x)\}/\cong
+$$
+은 $U$ 위의 대수공간이다.
+\end{enumerate}
+여기서는 $\mathcal{Y}$의 당김들을 하나 선택하였다.
+\end{lemma}
+
+\begin{proof}
+범주, 보조정리 \ref{categories-lemma-identify-fibre-product}에 있는
+$2$-섬유곱 $(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$의
+섬유범주에 대한 기술과 보조정리
+\ref{lemma-characterize-representable-by-space}를 함께 적용하면 된다.
+\end{proof}
+
+\noindent
+이제 이 개념에 관해 매우 일반적으로 성립하는 몇 가지 보조정리를 제시한다.
+
+\begin{lemma}
+\label{lemma-representable-by-spaces-morphism-equivalent}
+$S$를 $\Sch_{fppf}$의 대상이라 하자. $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주들의 $1$-사상으로 이루어진 다음 $2$-가환 도표를
+생각하자.
+$$
+\xymatrix{
+\mathcal{X}' \ar[r] \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r] & \mathcal{Y}
+}
+$$
+수평 화살표들이 동치라고 가정하자. 그러면 $f$가 대수공간으로 표현가능할
+필요충분조건은 $f'$가 대수공간으로 표현가능한 것이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-morphism-spaces-gives-representable-by-spaces}
+$S$를 $\Sch_{fppf}$의 대상이라 하자. $f : \mathcal{X} \to \mathcal{Y}$를
+$S$ 위에서 준군들로 섬유화된 범주들의 $1$-사상이라 하자.
+$\mathcal{X}$와 $\mathcal{Y}$가 $S$ 위의 대수공간으로 표현가능하면,
+$1$-사상 $f$는 대수공간으로 표현가능하다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 이는 $S$ 위의 대수공간들의 범주가 섬유곱을 갖는다는 사실에만
+의존한다. 대수공간, 보조정리 \ref{spaces-lemma-fibre-product-spaces}를
+보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-map-presheaves-representable-by-algebraic-spaces}
+$S$를 $\Sch_{fppf}$의 대상이라 하자. $a : F \to G$를
+$(\Sch/S)_{fppf}$ 위의 집합 준층들의 사상이라 하자. 이에 대응하는,
+집합들로 섬유화된 범주들의 사상을
+$a' : \mathcal{S}_F  \to \mathcal{S}_G$로 나타내자. 그러면 $a$가
+대수공간으로 표현가능할 필요충분조건은 $a'$가 대수공간으로 표현가능한
+것이다. 부트스트랩, 정의
+\ref{bootstrap-definition-morphism-representable-by-spaces}를 보라.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-map-fibred-setoids-representable-algebraic-spaces}
+$S$를 $\Sch_{fppf}$의 대상이라 하자. $f : \mathcal{X} \to \mathcal{Y}$를
+$(\Sch/S)_{fppf}$ 위에서 셋토이드들로 섬유화된 범주들의 $1$-사상이라
+하자. $T$에 각각 $\mathcal{X}_T$, $\mathcal{Y}_T$의 대상들의 동형류
+집합을 대응시키는 준층을 각각 $F$, $G$라 하자. $a : F \to G$를 $f$에
+대응하는 준층의 사상이라 하자. 그러면 $a$가 대수공간으로 표현가능할
+필요충분조건은 $f$가 대수공간으로 표현가능한 것이다. 부트스트랩, 정의
+\ref{bootstrap-definition-morphism-representable-by-spaces}를 보라.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 보조정리
+\ref{lemma-representable-by-spaces-morphism-equivalent}와
+\ref{lemma-map-presheaves-representable-by-algebraic-spaces}를 함께
+적용하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-representable-by-spaces}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$를 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주라 하자. $f : \mathcal{X} \to \mathcal{Y}$를
+대수공간으로 표현가능한 $1$-사상이라 하고,
+$g : \mathcal{Z} \to \mathcal{Y}$를 임의의 $1$-사상이라 하자.
+다음 섬유곱 도표를 생각하자.
+$$
+\xymatrix{
+\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \ar[r]_-{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Z} \ar[r]^g & \mathcal{Y}
+}
+$$
+그러면 밑변환 $f'$는 대수공간으로 표현가능한 $1$-사상이다.
+\end{lemma}
+
+\begin{proof}
+이는 형식적이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-by-space-representable-by-space}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$를 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주라 하자. $f : \mathcal{X} \to \mathcal{Y}$,
+$g : \mathcal{Z} \to \mathcal{Y}$를 $1$-사상이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $f$는 대수공간으로 표현가능하다.
+\item $\mathcal{Z}$는 $S$ 위의 대수공간으로 표현가능하다.
+\end{enumerate}
+그러면 $2$-섬유곱
+$\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X}$
+는 대수공간으로 표현가능하다.
+\end{lemma}
+
+\begin{proof}
+이는 부트스트랩, 보조정리
+\ref{bootstrap-lemma-representable-by-spaces-over-space}를 다시 서술한
+것이다. 먼저
+$\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X}$가
+$(\Sch/S)_{fppf}$ 위에서 셋토이드들로 섬유화되어 있음에 유의하자.
+따라서 이는 $(\Sch/S)_{fppf}$ 위의 어떤 준층 $F$에 대한
+$\mathcal{S}_F$와 동치이다. 범주, 보조정리
+\ref{categories-lemma-setoid-fibres}를 보라. 또한 $G$를 $\mathcal{Z}$를
+표현하는 대수공간이라 하자. $1$-사상
+$\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \to \mathcal{Z}$는
+보조정리 \ref{lemma-base-change-representable-by-spaces}에 의해
+대수공간으로 표현가능하다. 그리고 범주, 보조정리
+\ref{categories-lemma-2-category-fibred-setoids}에 의해 이
+$\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \to \mathcal{Z}$는
+사상 $F \to G$에 대응한다. 보조정리
+\ref{lemma-map-fibred-setoids-representable-algebraic-spaces}에 의해
+$F \to G$는 대수공간으로 표현가능하다. 따라서 부트스트랩, 보조정리
+\ref{bootstrap-lemma-representable-by-spaces-over-space}에 의해 원하는
+대로 $F$는 대수공간이다.
+\end{proof}
+
+\noindent
+$S$, $\mathcal{X}$, $\mathcal{Y}$, $\mathcal{Z}$, $f$, $g$를 보조정리
+\ref{lemma-base-change-by-space-representable-by-space}에서와 같이 두자.
+$F$와 $G$를 $S$ 위의 대수공간이라 하고, $F$가
+$\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X}$를 표현하고
+$G$가 $\mathcal{Z}$를 표현한다고 하자. 식
+(\ref{equation-morphisms-spaces})에 의해 $1$-사상
+$f' : \mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \to \mathcal{Z}$는
+대수공간의 사상 $f' : F \to G$에 대응한다. 따라서 다음 도표를 얻는다.
+\begin{equation}
+\label{equation-representable-by-algebraic-spaces-on-space}
+\vcenter{
+\xymatrix{
+F \ar[d]_{f'} &
+\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X}
+\ar@{~>}[l] \ar[d] \ar[r] &
+\mathcal{X} \ar[d]^f \\
+G &
+\mathcal{Z} \ar@{~>}[l] \ar[r]^-g &
+\mathcal{Y}
+}
+}
+\end{equation}
+여기서 물결 화살표들은 셋토이드들로 섬유화된 스택에 그 대상들의 동형류로
+이루어진 연관층을 대응시키는 구성을 나타낸다.
+
+\begin{lemma}
+\label{lemma-composition-representable-by-spaces}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$를 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주라 하자. $f : \mathcal{X} \to \mathcal{Y}$,
+$g : \mathcal{Y} \to \mathcal{Z}$가 대수공간으로 표현가능한
+$1$-사상이면
+$$
+g \circ f : \mathcal{X} \longrightarrow \mathcal{Z}
+$$
+도 대수공간으로 표현가능한 $1$-사상이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-base-change-by-space-representable-by-space}에서
+따른다. 자세한 내용은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-product-representable-by-spaces}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$\mathcal{X}_i, \mathcal{Y}_i$를 $(\Sch/S)_{fppf}$ 위에서 준군들로
+섬유화된 범주라 하자. 여기서 $i = 1, 2$이다. 대수공간으로 표현가능한
+$1$-사상 $f_i : \mathcal{X}_i \to \mathcal{Y}_i$, $i = 1, 2$가
+주어지면
+$$
+f_1 \times f_2 :
+\mathcal{X}_1 \times \mathcal{X}_2
+\longrightarrow
+\mathcal{Y}_1 \times \mathcal{Y}_2
+$$
+는 대수공간으로 표현가능한 $1$-사상이다.
+\end{lemma}
+
+\begin{proof}
+$f_1 \times f_2$를 합성
+$\mathcal{X}_1 \times \mathcal{X}_2 \to
+\mathcal{Y}_1 \times \mathcal{X}_2 \to
+\mathcal{Y}_1 \times \mathcal{Y}_2$로 쓴다. 첫 화살표는 사상
+$\mathcal{Y}_1 \times \mathcal{X}_2 \to \mathcal{Y}_1$에 의한
+$f_1$의 밑변환이고, 둘째 화살표는 사상
+$\mathcal{Y}_1 \times \mathcal{Y}_2 \to \mathcal{Y}_2$에 의한
+$f_2$의 밑변환이다. 따라서 이 보조정리는 보조정리
+\ref{lemma-composition-representable-by-spaces}와
+\ref{lemma-base-change-representable-by-spaces}의 형식적 귀결이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-get-a-stack}
+\begin{reference}
+2016년 6월 15일자 Matthew Emerton의 이메일에 있는 보조정리
+\end{reference}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$\mathcal{X} \to \mathcal{Z}$와 $\mathcal{Y} \to \mathcal{Z}$를
+$(\Sch/S)_{fppf}$ 위에서 준군들로 섬유화된 범주들의 $1$-사상이라 하자.
+$\mathcal{X} \to \mathcal{Z}$가 대수공간으로 표현가능하고
+$\mathcal{Y}$가 준군 스택이면
+$\mathcal{X} \times_\mathcal{Z} \mathcal{Y}$도 준군 스택이다.
+\end{lemma}
+
+\begin{proof}
+사상이 대수공간으로 표현가능하다는 성질은 밑변환으로 보존된다(보조정리
+\ref{lemma-base-change-by-space-representable-by-space}). 따라서
+$\mathcal{Y}$ 위의 밑변환 $\mathcal{X} \times_\mathcal{Z} \mathcal{Y}$로
+옮겨, 대수공간으로 표현가능하며 공역이 준군 스택인 준군 섬유화 범주의
+사상 $\mathcal{X} \to \mathcal{Y}$인 경우로 환원할 수 있다. 이제
+$\mathcal{X}$도 준군 스택임을 보이면 된다. 이는 스택, 보조정리
+\ref{stacks-lemma-relative-sheaf-over-stack-is-stack}에서 따르며, 그 가정은
+보조정리
+\ref{lemma-criterion-map-representable-spaces-fibred-in-groupoids}에 의해
+만족된다.
+\end{proof}
+
+
+
+
+
+
+
+\section{대수공간으로 표현가능한 사상의 성질}
+\label{section-representable-properties}
+
+\noindent
+다음 정의를 사용하면 이 논의를 전개할 수 있다.
+
+\begin{definition}
+\label{definition-relative-representable-property}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$f : \mathcal{X} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주들의 $1$-사상이라 하며, $f$가 대수공간으로
+표현가능하다고 가정하자. $\mathcal{P}$를 다음 조건을 만족하는
+대수공간 사상의 성질이라 하자.
+\begin{enumerate}
+\item 임의의 밑변환으로 보존된다.
+\item 바탕에서 fppf 국소적이다. 대수공간의 하강, 정의
+\ref{spaces-descent-definition-property-morphisms-local}를 보라.
+\end{enumerate}
+이 경우 모든 $U \in \Ob((\Sch/S)_{fppf})$와 임의의
+$y \in \mathcal{Y}_U$에 대하여 그 결과로 얻는 대수공간의 사상
+$f_y : F_y \to U$가 성질 $\mathcal{P}$를 가지면, $f$가
+{\it 성질 $\mathcal{P}$를 갖는다}고 한다. 도표
+(\ref{equation-representable-by-algebraic-spaces})를 보라.
+\end{definition}
+
+\noindent
+이 정의는 밑변환으로 안정적이고 공역의 fppf 위상에서 국소적인 사상의
+성질에 대해서만 사용할 것임을 강조한다. 그렇지 않으면 정의가 의미 없기
+때문이 아니라, 염두에 둔 성질에는 다른 정의가 더 적합할 수도 있기
+때문이다.
+
+\begin{lemma}
+\label{lemma-property-morphism-equivalent}
+$S$를 $\Sch_{fppf}$의 대상이라 하고, $\mathcal{P}$를 정의
+\ref{definition-relative-representable-property}에서와 같이 두자.
+$(\Sch/S)_{fppf}$ 위에서 준군들로 섬유화된 범주들의 $1$-사상으로
+이루어진 다음 $2$-가환 도표를 생각하자.
+$$
+\xymatrix{
+\mathcal{X}' \ar[r] \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r] & \mathcal{Y}
+}
+$$
+수평 화살표들이 동치이고 $f$(또는 동치인 조건으로 $f'$)가 대수공간으로
+표현가능하다고 가정하자. 그러면 $f$가 $\mathcal{P}$를 가질
+필요충분조건은 $f'$가 $\mathcal{P}$를 갖는 것이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-representable-by-spaces-morphism-equivalent}에 의해
+이 명제가 의미 있음에 유의하자. 증명은 생략한다.
+\end{proof}
+
+\noindent
+다음은 일관성 확인이다.
+
+\begin{lemma}
+\label{lemma-map-presheaves-representable-by-spaces-transformation-property}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자. $a : F \to G$를
+$(\Sch/S)_{fppf}$ 위의 준층들의 사상이라 하고, $\mathcal{P}$를 정의
+\ref{definition-relative-representable-property}에서와 같이 두자.
+$a$가 대수공간으로 표현가능하다고 가정하자. 그러면
+$a : F \to G$가 성질 $\mathcal{P}$를 가질 필요충분조건은 준군들로
+섬유화된 범주들의 대응하는 사상 $\mathcal{S}_F \to \mathcal{S}_G$가
+성질 $\mathcal{P}$를 갖는 것이다. 부트스트랩, 정의
+\ref{bootstrap-definition-property-transformation}을 보라.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-map-presheaves-representable-by-algebraic-spaces}에
+의해 이 보조정리가 의미 있음에 유의하자. 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-map-fibred-setoids-property}
+$S$를 $\Sch_{fppf}$의 대상이라 하고, $\mathcal{P}$를 정의
+\ref{definition-relative-representable-property}에서와 같이 두자.
+$f : \mathcal{X} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위에서
+셋토이드들로 섬유화된 범주들의 $1$-사상이라 하자. $T$에 각각
+$\mathcal{X}_T$, $\mathcal{Y}_T$의 대상들의 동형류 집합을 대응시키는
+준층을 각각 $F$, $G$라 하고, $a : F \to G$를 $f$에 대응하는 준층의
+사상이라 하자. 그러면 $a$가 $\mathcal{P}$를 가질 필요충분조건은
+$f$가 $\mathcal{P}$를 갖는 것이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-map-fibred-setoids-representable-algebraic-spaces}에
+의해 이 보조정리가 의미 있다. 보조정리
+\ref{lemma-property-morphism-equivalent}와
+\ref{lemma-map-presheaves-representable-by-spaces-transformation-property}를
+함께 적용하면 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-representable-transformations-property}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$\mathcal{X}$, $\mathcal{Y}$, $\mathcal{Z}$를 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주라 하자. $\mathcal{P}$를 정의
+\ref{definition-relative-representable-property}에서와 같은 성질이며
+합성으로 안정적이라고 하자. $f : \mathcal{X} \to \mathcal{Y}$,
+$g : \mathcal{Y} \to \mathcal{Z}$가 대수공간으로 표현가능한
+$1$-사상이라 하자. $f$와 $g$가 성질 $\mathcal{P}$를 가지면
+$g \circ f : \mathcal{X} \to \mathcal{Z}$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-composition-representable-by-spaces}에 의해 이
+보조정리가 의미 있음에 유의하자. 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-representable-transformations-property}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$를 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주라 하고, $\mathcal{P}$를 정의
+\ref{definition-relative-representable-property}에서와 같이 두자.
+$f : \mathcal{X} \to \mathcal{Y}$를 대수공간으로 표현가능한
+$1$-사상이라 하고, $g : \mathcal{Z} \to \mathcal{Y}$를 임의의
+$1$-사상이라 하자. 다음 $2$-섬유곱 도표를 생각하자.
+$$
+\xymatrix{
+\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \ar[r]_-{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Z} \ar[r]^g & \mathcal{Y}
+}
+$$
+$f$가 $\mathcal{P}$를 가지면 밑변환 $f'$도 $\mathcal{P}$를 갖는다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-base-change-representable-by-spaces}에 의해 이
+보조정리가 의미 있다. 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descent-representable-transformations-property}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$를 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주라 하고, $\mathcal{P}$를 정의
+\ref{definition-relative-representable-property}에서와 같이 두자.
+$f : \mathcal{X} \to \mathcal{Y}$를 대수공간으로 표현가능한
+$1$-사상이라 하고, $g : \mathcal{Z} \to \mathcal{Y}$를 임의의
+$1$-사상이라 하자. 다음 섬유곱 도표를 생각하자.
+$$
+\xymatrix{
+\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \ar[r]_-{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Z} \ar[r]^g & \mathcal{Y}
+}
+$$
+모든 스킴 $U$와 $\mathcal{Y}_U$의 대상 $x$에 대하여 fppf 덮개
+$\{U_i \to U\}$가 존재하여 $x|_{U_i}$가 함자
+$g : \mathcal{Z}_{U_i} \to \mathcal{Y}_{U_i}$의 본질적 상에 들어간다고
+가정하자. 이 경우 $f'$가 $\mathcal{P}$를 가지면 $f$도
+$\mathcal{P}$를 갖는다.
+\end{lemma}
+
+\begin{proof}
+증명은 생략한다. 힌트: 대수공간, 보조정리
+\ref{spaces-lemma-descent-representable-transformations-property}의 증명과
+비교하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-product-representable-transformations-property}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자. $\mathcal{P}$를 정의
+\ref{definition-relative-representable-property}에서와 같은 성질이며
+합성으로 안정적이라고 하자. $\mathcal{X}_i, \mathcal{Y}_i$를
+$(\Sch/S)_{fppf}$ 위에서 준군들로 섬유화된 범주라 하자. 여기서
+$i = 1, 2$이다. $f_i : \mathcal{X}_i \to \mathcal{Y}_i$,
+$i = 1, 2$를 대수공간으로 표현가능한 $1$-사상이라 하자. $f_1$과
+$f_2$가 성질 $\mathcal{P}$를 가지면 다음 사상도 그러하다.
+$
+f_1 \times f_2 :
+\mathcal{X}_1 \times \mathcal{X}_2
+\to
+\mathcal{Y}_1 \times \mathcal{Y}_2
+$.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-product-representable-by-spaces}에 의해 이
+보조정리가 의미 있다. 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-representable-transformations-property-implication}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자. $\mathcal{X}$,
+$\mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위에서 준군들로 섬유화된 범주라
+하고, $f : \mathcal{X} \to \mathcal{Y}$를 대수공간으로 표현가능한
+$1$-사상이라 하자. $\mathcal{P}$, $\mathcal{P}'$를 정의
+\ref{definition-relative-representable-property}에서와 같은 성질이라
+하자. 임의의 대수공간 사상 $a : F \to G$에 대하여
+$\mathcal{P}(a) \Rightarrow \mathcal{P}'(a)$라고 가정하자. $f$가 성질
+$\mathcal{P}$를 가지면 $f$는 성질 $\mathcal{P}'$도 갖는다.
+\end{lemma}
+
+\begin{proof}
+형식적이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-open-fibred-category-is-full}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+$j : \mathcal X \to \mathcal Y$를 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주들의 $1$-사상이라 하자. $j$가 대수공간으로
+표현가능하고 단사사상이라고 가정하자. 정의
+\ref{definition-relative-representable-property}와 대수공간의 하강,
+보조정리 \ref{spaces-descent-lemma-descending-property-monomorphism}을 보라.
+그러면 $j$는 섬유범주 위에서 충실충만하다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-criterion-map-representable-spaces-fibred-in-groupoids}에서
+$j$가 섬유범주 위에서 충실함을 보았다. 스킴 $U$와
+$\mathcal{X}_U$의 두 대상 $u, v$, 그리고 $\mathcal{Y}_U$의 동형사상
+$t : j(u) \to j(v)$를 생각하자. $\mathcal{X}_U$에서 $u$와 $v$ 사이의
+동형사상을 구성해야 한다. $2$-Yoneda 보조정리(절
+\ref{section-2-yoneda})에 의해 $u$, $v$를 $1$-사상
+$u, v : (\Sch/U)_{fppf} \to \mathcal{X}$로 보고, $2$-섬유곱
+$$
+(\Sch/U)_{fppf} \times_{j \circ v, \mathcal{Y}} \mathcal{X}.
+$$
+을 생각하자. 가정에 의해 이는 $U$ 위의 대수공간 $F_{j \circ v}$로
+표현되고 사상 $F_{j \circ v} \to U$는 단사사상이다. 그런데
+$(1_U, v, 1_{j(v)})$가 $(\Sch/U)_{fppf}$에서 위 $2$-섬유곱으로 가는
+$1$-사상을 주므로 $F_{j \circ v} = U$이다. 여기서는 절단을 갖는
+대수공간의 단사사상 $V \to U$에 대하여 $V = U$라는 사실을 사용했다.
+따라서 첫째 좌표로 사영하는 $1$-사상
+$$
+(\Sch/U)_{fppf} \times_{j \circ v, \mathcal{Y}} \mathcal{X}
+\to (\Sch/U)_{fppf}
+$$
+은 섬유범주의 동치이다. $(1_U, u, t)$와 $(1_U, v, 1_{j(v)})$는
+$((\Sch/U)_{fppf} \times_{j \circ v, \mathcal{Y}} \mathcal{X})_U$에서
+첫째 좌표가 같은 두 대상을 주므로, $2$-섬유곱 안에서 이들 사이의
+$2$-사상이 존재해야 한다. 정의에 따라 이는 $j(\tilde t) = t$를
+만족하는 사상 $\tilde t : u \to v$이다.
+\end{proof}
+
+\noindent
+다음은 대각사상이 대수공간으로 표현가능한 준군 섬유화 범주의
+특징짓기이다.
+
+\begin{lemma}
+\label{lemma-representable-diagonal}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고, $\mathcal{X}$를
+$(\Sch/S)_{fppf}$ 위에서 준군들로 섬유화된 범주라 하자. 다음 조건들은
+동치이다.
+\begin{enumerate}
+\item 대각사상 $\mathcal{X} \to \mathcal{X} \times \mathcal{X}$는
+대수공간으로 표현가능하다.
+\item $S$ 위의 모든 스킴 $U$와 임의의
+$x, y \in \Ob(\mathcal{X}_U)$에 대하여 층 $\mathit{Isom}(x, y)$는
+$U$ 위의 대수공간이다.
+\item $S$ 위의 모든 스킴 $U$와 임의의 $x \in \Ob(\mathcal{X}_U)$에
+대하여 연관된 $1$-사상 $x : (\Sch/U)_{fppf} \to \mathcal{X}$는
+대수공간으로 표현가능하다.
+\item $S$ 위의 모든 스킴 쌍 $T_1, T_2$와 임의의
+$x_i \in \Ob(\mathcal{X}_{T_i})$, $i = 1, 2$에 대하여 $2$-섬유곱
+$(\Sch/T_1)_{fppf} \times_{x_1, \mathcal{X}, x_2}
+(\Sch/T_2)_{fppf}$
+은 대수공간으로 표현가능하다.
+\item $(\Sch/S)_{fppf}$ 위의 모든 표현가능한 준군 섬유화 범주
+$\mathcal{U}$에 대하여 모든 $1$-사상 $\mathcal{U} \to \mathcal{X}$는
+대수공간으로 표현가능하다.
+\item $(\Sch/S)_{fppf}$ 위의 모든 표현가능한 준군 섬유화 범주 쌍
+$\mathcal{T}_1, \mathcal{T}_2$와 임의의 $1$-사상
+$x_i : \mathcal{T}_i \to \mathcal{X}$, $i = 1, 2$에 대하여
+$2$-섬유곱 $\mathcal{T}_1 \times_{x_1, \mathcal{X}, x_2} \mathcal{T}_2$
+은 대수공간으로 표현가능하다.
+\item $(\Sch/S)_{fppf}$ 위에서 대수공간으로 표현가능한 모든 준군 섬유화
+범주 $\mathcal{U}$에 대하여 모든 $1$-사상
+$\mathcal{U} \to \mathcal{X}$는 대수공간으로 표현가능하다.
+\item $(\Sch/S)_{fppf}$ 위에서 대수공간으로 표현가능한 모든 준군 섬유화
+범주 쌍 $\mathcal{T}_1, \mathcal{T}_2$와 임의의 $1$-사상
+$x_i : \mathcal{T}_i \to \mathcal{X}$에 대하여
+$2$-섬유곱 $\mathcal{T}_1 \times_{x_1, \mathcal{X}, x_2} \mathcal{T}_2$
+은 대수공간으로 표현가능하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)의 동치는 스택, 보조정리
+\ref{stacks-lemma-isom-as-2-fibre-product}와 정의들에서 따른다.
+(1)과 (3)의 동치를 증명하자. 바탕 범주를
+$\mathcal{C} = (\Sch/S)_{fppf}$로 쓰자. 유사한 범주, 보조정리
+\ref{categories-lemma-representable-diagonal-groupoids}의 증명에 있는
+관찰 몇 가지를 사용할 것이다. 기호 $\cong$는 ``$\mathcal{C} =
+(\Sch/S)_{fppf}$ 위에서 준군들로 섬유화된 범주들의 동치''를 뜻하게
+한다. (1)을 가정하고 (3)에서와 같은 $U$와 $x$가 주어졌다고 하자.
+임의의 스킴 $V$와 $y \in \Ob(\mathcal{X}_V)$에 대하여(위 참고문헌과
+비교하면)
+$$
+\mathcal{C}/U
+\times_{x, \mathcal{X}, y}
+\mathcal{C}/V
+\cong
+(\mathcal{C}/U \times_S V)
+\times_{(x, y), \mathcal{X} \times \mathcal{X}, \Delta}
+\mathcal{X}
+$$
+이며, 이는 가정에 의해 대수공간으로 표현가능하다. 반대로 (3)을
+가정하자. $S$ 위의 임의의 스킴 $U$와 $U$ 위의 $\mathcal{X}$의 대상
+쌍 $(x, x')$을 생각하자. 다음이 대수공간으로 표현가능함을 보여야 한다.
+$\mathcal{X} \times_{\Delta, \mathcal{X} \times \mathcal{X}, (x, x')} U$
+이는 다음 등식(위 참고문헌과 비교하라) 때문에 명백하다.
+$$
+\mathcal{X}
+\times_{\Delta, \mathcal{X} \times \mathcal{X}, (x, x')}
+\mathcal{C}/U
+\cong
+(\mathcal{C}/U \times_{x, \mathcal{X}, x'} \mathcal{C}/U)
+\times_{\mathcal{C}/U \times_S U, \Delta}
+\mathcal{C}/U
+$$
+가정 및 $S$ 위 대수공간들의 범주가 섬유곱을 갖고 $U$와 $S$를
+포함한다는 사실에 의해 우변은 대수공간으로 표현가능하다.
+
+\medskip\noindent
+(3) $\Leftrightarrow$ (4), (5) $\Leftrightarrow$ (6), (7)
+$\Leftrightarrow$ (8)은 형식적이다. (3) $\Leftrightarrow$ (5)와
+(4) $\Leftrightarrow$ (6)은 보조정리
+\ref{lemma-representable-by-spaces-morphism-equivalent}에서 따른다.
+(3)을 가정하고 $\mathcal{U} \to \mathcal{X}$를 (7)에서와 같이 두자.
+(7)을 증명하려면 모든 스킴 $V$와 $1$-사상
+$y : (\Sch/V)_{fppf} \to \mathcal{X}$에 대하여 $2$-섬유곱
+$(\Sch/V)_{fppf} \times_{y, \mathcal{X}} \mathcal{U}$
+이 대수공간으로 표현가능함을 보이면 된다. 성질 (3)에 의해 $y$는
+대수공간으로 표현가능하므로, 보조정리
+\ref{lemma-base-change-by-space-representable-by-space}에서 원하는 결론이
+따른다. 마지막으로 (7)은 (3)을 곧바로 함의한다.
+\end{proof}
+
+\noindent
+보조정리의 상황에서, 그 보조정리에 나오는 임의의 $1$-사상
+$x : (\Sch/U)_{fppf} \to \mathcal{X}$에 대하여 정의
+\ref{definition-relative-representable-property}에서와 같은 임의의 성질
+$\mathcal{P}$를 $x$가 갖는다고 말할 수 있다. 특히 이는
+$\mathcal{P} = $ ``전사'', $\mathcal{P} = $ ``매끄러운'',
+$\mathcal{P} = $ ``\'etale''에 적용된다. 대수공간의 하강, 보조정리
+\ref{spaces-descent-lemma-descending-property-surjective},
+\ref{spaces-descent-lemma-descending-property-smooth},
+\ref{spaces-descent-lemma-descending-property-etale}을 보라. 아래의 대수 스택
+정의에서 이 세 경우를 사용할 것이다.
+
+
+
+
+
+
+
+
+\section{준군 스택}
+\label{section-stacks}
+
+\noindent
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자. $(\Sch/S)_{fppf}$
+위의 범주 $p : \mathcal{X} \to (\Sch/S)_{fppf}$가
+{\it 준군 스택}일 필요충분조건은 다음과 같음을 상기하자. 스택, 정의
+\ref{stacks-definition-stack-in-groupoids}를 보라.
+\begin{enumerate}
+\item $p : \mathcal{X} \to (\Sch/S)_{fppf}$는 $(\Sch/S)_{fppf}$
+위에서 준군들로 섬유화되어 있다.
+\item 모든 $U \in \Ob((\Sch/S)_{fppf})$와 모든
+$x, y\in \Ob(\mathcal{X}_U)$에 대하여 준층
+$\mathit{Isom}(x, y)$는 사이트 $(\Sch/U)_{fppf}$ 위의 층이다.
+\item $(\Sch/S)_{fppf}$의 모든 덮개
+$\mathcal{U} = \{U_i \to U\}$에 대하여 $\mathcal{U}$의 모든 하강
+데이터 $(x_i, \phi_{ij})$는 유효하다.
+\end{enumerate}
+예들은 스택의 예, 절
+\ref{examples-stacks-section-examples-stacks-in-groupoids} 이하를 보라.
+
+
+
+
+
+
+
+
+
+
+\section{대수 스택}
+\label{section-algebraic-stacks}
+
+\noindent
+이제 대수 스택을 정의한다. 조건 (2)에 의해 (3)의 사상
+$(\Sch/U)_{fppf} \to \mathcal{X}$가 매끄럽고 전사라는 조건이 의미를
+가짐에 유의하자. 보조정리 \ref{lemma-representable-diagonal} 뒤의 논의를
+보라.
+
+\begin{definition}
+\label{definition-algebraic-stack}
+$S$를 $\Sch_{fppf}$에 들어 있는 바탕 스킴이라 하자.
+{\it $S$ 위의 대수 스택}은 $(\Sch/S)_{fppf}$ 위의 범주
+$$
+p : \mathcal{X} \to (\Sch/S)_{fppf}
+$$
+로서 다음 성질들을 만족하는 것이다.
+\begin{enumerate}
+\item 범주 $\mathcal{X}$는 $(\Sch/S)_{fppf}$ 위의 준군 스택이다.
+\item 대각사상
+$\Delta : \mathcal{X} \to \mathcal{X} \times \mathcal{X}$는
+대수공간으로 표현가능하다.
+\item 스킴 $U \in \Ob((\Sch/S)_{fppf})$와 전사이고 매끄러운 $1$-사상
+$(\Sch/U)_{fppf} \to \mathcal{X}$가 존재한다\footnote{뒤의 장들에서는
+문헌의 관례대로 이를 단순히 $U \to \mathcal{X}$로 나타낼 것이다.
+또 다른 좋은 방법은 이 조건을 표현가능한 준군 섬유화 범주
+$\mathcal{U}$와 전사이고 매끄러운 $1$-사상
+$\mathcal{U} \to \mathcal{X}$의 존재로 서술하는 것이다.}.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 정의는 문헌의 다른 정의들과 몇 가지 차이가 있다.
+
+\medskip\noindent
+첫째, 많은 참고문헌은 \'etale 위상을 사용하지만 우리는 $\mathcal{X}$가
+fppf 위상에서 준군 스택일 것을 요구한다. 어떤 의미에서는 fppf 위상이
+작업하기에 자연스러운 위상으로 보인다. 결국 얻는 대수 스택의 $2$-범주는
+동일하다. 이는 표현가능성의 판정법, 절
+\ref{criteria-section-stacks-etale}에서 설명한다.
+
+\medskip\noindent
+둘째, 대부분의 참고문헌은 다른 조건들도 부과하지만 우리는
+$\mathcal{X}$의 대각사상이 대수공간으로 표현가능할 것만을 요구한다.
+우리의 관점은 $\mathcal{X}$의 대각사상이 대수공간으로 표현가능하다는
+가정만으로 뒤따르는 결과들을 가능한 한 증명하고, 필요한 곳에만 추가
+가정을 넣는 것이다. 이 관점에는 임의의 대수공간(대수공간, 정의
+\ref{spaces-definition-algebraic-space}에서 정의한 의미)이 대수 스택을
+준다는 이점도 있다.
+
+\medskip\noindent
+셋째, 어떤 논문들은 스킴 $U$와 전사 \'etale 사상
+$U \to \mathcal{X}$의 존재를 요구한다. 대수 스택을 처음 도입한 기념비적
+논문 \cite{DM}에서 Deligne과 Mumford는 이 정의를 사용하여 종수
+$g > 1$인 안정 곡선의 모듈라이 스택이 스킴에 의한 \'etale 덮개를 갖는
+대수 스택임을 보였다. Michael Artin은 \cite{ArtinVersal}에서 대수 스택에
+관한 많은 자연스러운 결과가 스킴에 의한 매끄러운 덮개만을 가정하는
+경우로 일반화됨을 알아냈다. 이것이 위의 정의를 택한 이유이다. 두 경우를
+구별하기 위해 문헌에서는 ``Deligne--Mumford 스택''과 ``Artin 스택''이라는
+용어를 사용한다. ``Artin 스택''이라는 용어는 나중의 사용을 위해 남겨
+두고(향후 참고문헌을 여기에 넣는다), 계속 ``대수 스택''이라 부르겠다.
+다만 스킴에 의한 \'etale 덮개를 갖는 대수 스택은
+``Deligne--Mumford 스택''이라 부른다.
+
+\begin{definition}
+\label{definition-deligne-mumford}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고, $\mathcal{X}$를
+$S$ 위의 대수 스택이라 하자. 스킴 $U$와 전사 \'etale 사상
+$(\Sch/U)_{fppf} \to \mathcal{X}$가 존재하면 $\mathcal{X}$를
+{\it Deligne--Mumford 스택}이라 한다.
+\end{definition}
+
+\noindent
+뒤에서 우리의 Deligne--Mumford 스택 개념을 Deligne과 Mumford의 논문에서
+정의한 개념과 비교할 것이다(향후 참고문헌을 여기에 넣는다).
+
+\medskip\noindent
+$S$ 위의 대수 스택들의 범주는 $2$-범주를 이룬다. 정확한 정의는 다음과
+같다.
+
+\begin{definition}
+\label{definition-morphism-algebraic-stacks}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+{\it $S$ 위의 대수 스택들의 $2$-범주}는 $(\Sch/S)_{fppf}$ 위에서
+준군들로 섬유화된 범주들의 $2$-범주(범주, 정의
+\ref{categories-definition-categories-fibred-in-groupoids-over-C})의
+다음과 같은 부분 $2$-범주이다.
+\begin{enumerate}
+\item 대상은 $(\Sch/S)_{fppf}$ 위에서 준군들로 섬유화된 범주 가운데
+$S$ 위의 대수 스택인 것들이다.
+\item $1$-사상 $f : \mathcal{X} \to \mathcal{Y}$는 범주, 정의
+\ref{categories-definition-categories-over-C}에서와 같은
+$(\Sch/S)_{fppf}$ 위 범주들의 임의의 함자이다.
+\item $2$-사상은 범주, 정의 \ref{categories-definition-categories-over-C}에서와
+같은 $(\Sch/S)_{fppf}$ 위 함자들 사이의 변환이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+다시 말해 이 $2$-범주는 대상이 대수 스택인
+$\textit{Cat}/(\Sch/S)_{fppf}$의 충만 부분 $2$-범주이다. 모든
+$2$-사상은 자동으로 동형사상이다. 따라서 이는 단순한 $2$-범주가 아니라
+실제로 $(2, 1)$-범주이다.
+
+\medskip\noindent
+뒤에서(향후 참고문헌을 여기에 넣는다) 이 $2$-범주가 $2$-섬유곱을
+가짐을 볼 것이다.
+
+\medskip\noindent
+위의 설명과 마찬가지로 $S$ 위의 대수 스택들의 $2$-범주는
+$(\Sch/S)_{fppf}$ 위에서 준군들로 섬유화된 범주들의 $2$-범주의 충만
+부분 $2$-범주이다. 이 부분범주는 동치에 대해 닫혀 있다. 정확한 명제는
+다음과 같다.
+
+\begin{lemma}
+\label{lemma-equivalent}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고, $\mathcal{X}$,
+$\mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위의 범주라 하자. $\mathcal{X}$와
+$\mathcal{Y}$가 $(\Sch/S)_{fppf}$ 위의 범주로서 동치라고 가정하자.
+그러면 $\mathcal{X}$가 대수 스택일 필요충분조건은 $\mathcal{Y}$가
+대수 스택인 것이다. 마찬가지로 $\mathcal{X}$가 Deligne--Mumford 스택일
+필요충분조건은 $\mathcal{Y}$가 Deligne--Mumford 스택인 것이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X}$가 대수 스택(각각 Deligne--Mumford 스택)이라고 가정하자.
+스택, 보조정리 \ref{stacks-lemma-stack-in-groupoids-equivalent}에 의해
+$\mathcal{Y}$는 $\Sch_{fppf}$ 위의 준군 스택이다. $\Sch_{fppf}$ 위의
+동치 $f : \mathcal{X} \to \mathcal{Y}$를 택하자. 이는 다음 $2$-가환
+도표를 준다.
+$$
+\xymatrix{
+\mathcal{X} \ar[r]_f \ar[d]_{\Delta_\mathcal{X}} &
+\mathcal{Y} \ar[d]^{\Delta_\mathcal{Y}} \\
+\mathcal{X} \times \mathcal{X} \ar[r]^{f \times f} &
+\mathcal{Y} \times \mathcal{Y}
+}
+$$
+수평 화살표들은 동치이다. 따라서 보조정리
+\ref{lemma-representable-by-spaces-morphism-equivalent}에 의해
+$\Delta_\mathcal{Y}$는 대수공간으로 표현가능하다. 마지막으로 $U$를
+$S$ 위의 스킴이라 하고, $x : (\Sch/U)_{fppf} \to \mathcal{X}$를
+전사이고 매끄러운(각각 \'etale) $1$-사상이라 하자. 다음 도표를
+생각하자.
+$$
+\xymatrix{
+(\Sch/U)_{fppf} \ar[r]_{\text{id}} \ar[d]_x &
+(\Sch/U)_{fppf} \ar[d]^{f \circ x} \\
+\mathcal{X} \ar[r]^f &
+\mathcal{Y}
+}
+$$
+여기에 보조정리 \ref{lemma-property-morphism-equivalent}를 적용하면
+$f \circ x$가 원하는 대로 전사이고 매끄러운(각각 \'etale) 사상임을
+얻는다.
+\end{proof}
+
+
+
+
+\section{대수 스택과 대수공간}
+\label{section-stacks-spaces}
+
+\noindent
+이 절에서는 대수 스택이 대수공간임을 함의하는 몇 가지 간단한 판정법을
+논의한다. 주된 결과는 섬유범주의 대상들이 비자명한 자기동형을 갖지 않을
+때 정확히 이 일이 일어난다는 것이다. 이는 자명하지 않다! 그 결과에
+이르기 전에 먼저 일관성을 확인한다.
+
+\begin{lemma}
+\label{lemma-representable-algebraic}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자.
+\begin{enumerate}
+\item 대수공간으로 표현가능한 준군 섬유화 범주
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$는 Deligne--Mumford 스택이다.
+\item $F$가 $S$ 위의 대수공간이면 연관된 준군 섬유화 범주
+$p : \mathcal{S}_F \to (\Sch/S)_{fppf}$는 Deligne--Mumford 스택이다.
+\item $X \in \Ob((\Sch/S)_{fppf})$이면
+$(\Sch/X)_{fppf} \to (\Sch/S)_{fppf}$는 Deligne--Mumford 스택이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)가 (3)을 함의함은 명백하다. (1)과 (2)는 보조정리
+\ref{lemma-equivalent}에 의해 동치이다. 따라서 (2)를 증명하면 충분하다.
+먼저 $F$가 층이므로 $\mathcal{S}_F$는 집합 스택임에 유의하자(스택,
+보조정리 \ref{stacks-lemma-stack-in-setoids-characterize}). 따라서 특히
+준군 스택이다. 둘째, 대각사상
+$\mathcal{S}_F \to \mathcal{S}_F  \times \mathcal{S}_F$는 $F$의
+대각사상에서 나오는 사상
+$\mathcal{S}_F \to \mathcal{S}_{F \times F}$와 같다. 따라서 보조정리
+\ref{lemma-morphism-spaces-gives-representable-by-spaces}에 의해
+대수공간으로 표현가능하다. 실제로 대수공간의 대각사상은 표현가능하므로
+이는 (스킴으로) 표현가능하기까지 하지만, 여기서는 필요하지 않다.
+$U$를 스킴이라 하고 $h_U \to F$를 전사 \'etale 사상이라 하자. 이를
+대수공간의 전사 \'etale 사상으로 볼 수 있다. 따라서 보조정리
+\ref{lemma-map-presheaves-representable-by-spaces-transformation-property}에
+의해 대응하는 $1$-사상 $(\Sch/U)_{fppf} \to \mathcal{S}_F$는 전사이고
+\'etale이다.
+\end{proof}
+
+\noindent
+다음 결과는 관성이 자명한 Deligne--Mumford 스택이 대수공간``이다''라고
+말한다. 이 보조정리는 아래의 더 강한 명제
+\ref{proposition-algebraic-stack-no-automorphisms}로 대체될 것이다. 그
+명제는 이 사실이 대수 스택에 대해 더 일반적으로 성립한다고 말한다.
+
+\begin{lemma}
+\label{lemma-algebraic-stack-no-automorphisms}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고, $\mathcal{X}$를
+$S$ 위의 대수 스택이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $\mathcal{X}$는 Deligne--Mumford 스택이며 셋토이드 스택이다.
+\item $\mathcal{X}$는 Deligne--Mumford 스택이고 표준 $1$-사상
+$\mathcal{I}_\mathcal{X} \to \mathcal{X}$는 동치이다.
+\item $\mathcal{X}$는 대수공간으로 표현가능하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)의 동치는 스택, 보조정리
+\ref{stacks-lemma-characterize-stack-in-setoids}에서 따른다.
+(3) $\Rightarrow$ (1)은 보조정리 \ref{lemma-representable-algebraic}에서
+따른다. 마지막으로 (1)을 가정하자. 스택, 보조정리
+\ref{stacks-lemma-stack-in-setoids-characterize}에 의해
+$(\Sch/S)_{fppf}$ 위의 층 $F$와 동치
+$j : \mathcal{X} \to \mathcal{S}_F$가 존재한다. 보조정리
+\ref{lemma-map-presheaves-representable-by-algebraic-spaces}에 의해
+$\Delta_\mathcal{X}$가 대수공간으로 표현가능하다는 사실은
+$\Delta_F : F \to F \times F$가 대수공간으로 표현가능하다는 뜻이다.
+$U$를 스킴이라 하고 $x : (\Sch/U)_{fppf} \to \mathcal{X}$를 전사
+\'etale 사상이라 하자. 합성
+$j \circ x : (\Sch/U)_{fppf} \to \mathcal{S}_F$는 층들의 사상
+$h_U \to F$에 대응한다. 부트스트랩, 보조정리
+\ref{bootstrap-lemma-representable-diagonal}에 의해 이 사상은
+대수공간으로 표현가능하다. 따라서 보조정리
+\ref{lemma-map-fibred-setoids-property}에 의해 $h_U \to F$는 전사이고
+\'etale이다. 마지막으로 부트스트랩, 정리
+\ref{bootstrap-theorem-bootstrap}을 적용하면 $F$는 대수공간이다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-algebraic-stack-no-automorphisms}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고, $\mathcal{X}$를
+$S$ 위의 대수 스택이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $\mathcal{X}$는 셋토이드 스택이다.
+\item 표준 $1$-사상 $\mathcal{I}_\mathcal{X} \to \mathcal{X}$는
+동치이다.
+\item $\mathcal{X}$는 대수공간으로 표현가능하다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1)과 (2)의 동치는 스택, 보조정리
+\ref{stacks-lemma-characterize-stack-in-setoids}에서 따른다.
+(3) $\Rightarrow$ (1)은 보조정리
+\ref{lemma-algebraic-stack-no-automorphisms}에서 따른다. 마지막으로 (1)을
+가정하자. 스택, 보조정리
+\ref{stacks-lemma-stack-in-setoids-characterize}에 의해 동치
+$j : \mathcal{X} \to \mathcal{S}_F$가 존재하며, 여기서 $F$는
+$(\Sch/S)_{fppf}$ 위의 층이다. 보조정리
+\ref{lemma-map-presheaves-representable-by-algebraic-spaces}에 의해
+$\Delta_\mathcal{X}$가 대수공간으로 표현가능하다는 사실은
+$\Delta_F : F \to F \times F$가 대수공간으로 표현가능하다는 뜻이다.
+$U$를 스킴이라 하고 $x : (\Sch/U)_{fppf} \to \mathcal{X}$를 전사이고
+매끄러운 사상이라 하자. 합성
+$j \circ x : (\Sch/U)_{fppf} \to \mathcal{S}_F$는 층들의 사상
+$h_U \to F$에 대응한다. 부트스트랩, 보조정리
+\ref{bootstrap-lemma-representable-diagonal}에 의해 이 사상은
+대수공간으로 표현가능하다. 따라서 보조정리
+\ref{lemma-map-fibred-setoids-property}에 의해 $h_U \to F$는 전사이고
+매끄럽다. 특히 이는 전사이고 평탄하며 유한 표시 국소적이다. 보조정리
+\ref{lemma-representable-transformations-property-implication}와
+대수공간의 매끄러운 사상이 평탄하고 유한 표시 국소적이라는 사실을
+사용했다. 대수공간의 사상, 보조정리
+\ref{spaces-morphisms-lemma-smooth-locally-finite-presentation}과
+\ref{spaces-morphisms-lemma-smooth-flat}을 보라. 마지막으로 부트스트랩,
+정리 \ref{bootstrap-theorem-final-bootstrap}을 적용하면 $F$는
+대수공간이다.
+\end{proof}
+
+
+
+
+
+
+\section{대수 스택의 2-섬유곱}
+\label{section-2-fibre-products}
+
+\noindent
+대수 스택들의 $2$-범주는 곱과 $2$-섬유곱을 갖는다. 첫 보조정리는 사실
+보조정리 \ref{lemma-2-fibre-product}의 특수한 경우이지만 증명이 조금 더
+쉽다.
+
+\begin{lemma}
+\label{lemma-product-spaces}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고, $\mathcal{X}$,
+$\mathcal{Y}$를 $S$ 위의 대수 스택이라 하자. 그러면
+$\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$는 대수 스택이고,
+$S$ 위 대수 스택들의 $2$-범주에서 곱이다.
+\end{lemma}
+
+\begin{proof}
+$T$ 위의 $\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$의 대상은
+$x$가 $\mathcal{X}_T$의 대상이고 $y$가 $\mathcal{Y}_T$의 대상인 순서쌍
+$(x, y)$일 뿐이다. 따라서 정의에서 곧바로
+$\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$가 준군 스택임이
+따른다. $(x, y)$와 $(x', y')$가 $T$ 위의
+$\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$의 두 대상이면
+$$
+\mathit{Isom}((x, y), (x', y')) =
+\mathit{Isom}(x, x') \times \mathit{Isom}(y, y').
+$$
+이다. 따라서 보조정리 \ref{lemma-representable-diagonal}의 동치들과
+대수공간들의 범주가 곱을 갖는다는 사실에 의해
+$\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$의 대각사상은
+대수공간으로 표현가능하다. 마지막으로
+$U, V \in \Ob((\Sch/S)_{fppf})$라 하고, $x, y$를 전사이고 매끄러운
+사상
+$x : (\Sch/U)_{fppf} \to \mathcal{X}$,
+$y : (\Sch/V)_{fppf} \to \mathcal{Y}$.
+이라 하자. 다음에 유의하자.
+$$
+(\Sch/U \times_S V)_{fppf} =
+(\Sch/U)_{fppf}
+\times_{(\Sch/S)_{fppf}} (\Sch/V)_{fppf}.
+$$
+따라서 $(\Sch/U \times_S V)_{fppf}$ 위의
+$\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$의 대상
+$(\text{pr}_U^*x, \text{pr}_V^*y)$는 $1$-사상
+$$
+(\Sch/U \times_S V)_{fppf}
+\longrightarrow
+\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}
+$$
+을 정의한다. 이는 $x$와 $y$의 밑변환들의 합성이므로 전사이고
+매끄럽다. 보조정리
+\ref{lemma-base-change-representable-transformations-property}와
+\ref{lemma-composition-representable-transformations-property}를 보라.
+따라서 $\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$는 실제로
+대수 스택이다. 이것이 실제로 곱이라는 확인은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-2-fibre-product-general}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자. $\mathcal{Z}$를
+$(\Sch/S)_{fppf}$ 위의 준군 스택이며 그 대각사상이 대수공간으로
+표현가능하다고 하자. $\mathcal{X}$, $\mathcal{Y}$를 $S$ 위의 대수
+스택이라 하고, $f : \mathcal{X} \to \mathcal{Z}$,
+$g : \mathcal{Y} \to \mathcal{Z}$를 준군 스택의 $1$-사상이라 하자.
+그러면 $2$-섬유곱 $\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y}$는
+대수 스택이다.
+\end{lemma}
+
+\begin{proof}
+정의 \ref{definition-algebraic-stack}의 조건 (1), (2), (3)을 확인해야
+한다. 첫 조건은 스택, 보조정리
+\ref{stacks-lemma-2-product-stacks-in-groupoids}에서 따른다.
+
+\medskip\noindent
+확인해야 할 둘째 조건은 $\mathit{Isom}$-층들이 대수공간으로
+표현가능하다는 것이다. $T$를 $S$ 위의 스킴이라 하고, $u, v$를
+$(\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y})_T$의 대상이라
+하자. $2$-섬유곱의 구성(범주, 보조정리
+\ref{categories-lemma-2-product-categories-over-C}까지 거슬러 올라간다)에
+의해 $u = (x, y, \alpha)$, $v = (x', y', \alpha')$로 쓸 수 있다.
+여기서 $\alpha : f(x) \to g(y)$이고 $\alpha'$도 마찬가지이다. 그러면
+다음이 명백하다.
+$$
+\xymatrix{
+\mathit{Isom}(u, v) \ar[d] \ar[rr] & &
+\mathit{Isom}(y, y') \ar[d]^{\phi \mapsto g(\phi) \circ \alpha} \\
+\mathit{Isom}(x, x') \ar[rr]^-{\psi \mapsto \alpha' \circ f(\psi)} & &
+\mathit{Isom}(f(x), g(y'))
+}
+$$
+이는 $(\Sch/T)_{fppf}$ 위 층들의 데카르트 도표이다. 가정에 의해 층들
+$\mathit{Isom}(y, y')$, $\mathit{Isom}(x, x')$,
+$\mathit{Isom}(f(x), g(y'))$는 대수공간이므로(보조정리
+\ref{lemma-representable-diagonal}) $\mathit{Isom}(u, v)$도
+대수공간이다.
+
+\medskip\noindent
+$U, V \in \Ob((\Sch/S)_{fppf})$를 택하자.
+\par\noindent
+$x, y$가 각각 전사 매끄러운 사상
+$x : (\Sch/U)_{fppf} \to \mathcal{X}$,
+$y : (\Sch/V)_{fppf} \to \mathcal{Y}$
+이라고 하자. 다음 사상을 생각하자.
+$$
+(\Sch/U)_{fppf}
+\times_{f \circ x, \mathcal{Z}, g \circ y}
+(\Sch/V)_{fppf}
+\longrightarrow
+\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y}.
+$$
+$\mathcal{Z}$의 대각사상이 대수공간으로 표현가능하므로 이 화살표의
+정의역은 대수공간 $F$로 표현가능하다. 보조정리
+\ref{lemma-representable-diagonal}을 보라. 또한 이 사상은 $x$와 $y$의
+밑변환들의 합성이므로 전사이고 매끄럽다. 보조정리
+\ref{lemma-base-change-representable-transformations-property}와
+\ref{lemma-composition-representable-transformations-property}를 보라.
+스킴 $W$와 전사 \'etale 사상 $W \to F$를 택하면, 위에 표시한
+$1$-사상과 이에 대응하는 $1$-사상
+$$
+(\Sch/W)_{fppf}
+\longrightarrow
+(\Sch/U)_{fppf}
+\times_{f \circ x, \mathcal{Z}, g \circ y}
+(\Sch/V)_{fppf}
+$$
+의 합성이 전사이고 매끄러움을 알 수 있다. 이로써 마지막 조건이
+증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-2-fibre-product}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고,
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$를 $S$ 위의 대수 스택이라 하자.
+$f : \mathcal{X} \to \mathcal{Z}$, $g : \mathcal{Y} \to \mathcal{Z}$를
+대수 스택의 $1$-사상이라 하자. 그러면 $2$-섬유곱
+$\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y}$는 대수 스택이다.
+또한 이는 $(\Sch/S)_{fppf}$ 위 대수 스택들의 $2$-범주에서
+$2$-섬유곱이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y}$가 대수 스택이라는
+사실은 더 강한 보조정리 \ref{lemma-2-fibre-product-general}에서 따른다.
+$\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y}$가 $S$ 위 대수
+스택들의 $2$-범주에서 $2$-섬유곱이라는 사실은, $S$ 위 대수 스택들의
+$2$-범주가 $(\Sch/S)_{fppf}$ 위 준군 스택들의 $2$-범주의 충만 부분
+$2$-범주라는 사실에서 형식적으로 따른다.
+\end{proof}
+
+
+
+
+
+
+
+\section{대수 스택의 재정비}
+\label{section-overhaul}
+
+\noindent
+대수 스택에 관한 몇 가지 기본 결과를 제시한다.
+
+\begin{lemma}
+\label{lemma-lift-morphism-presentations}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고,
+$f : \mathcal{X} \to \mathcal{Y}$를 $S$ 위 대수 스택들의 $1$-사상이라
+하자. $V \in \Ob((\Sch/S)_{fppf})$라 하고,
+$y : (\Sch/V)_{fppf} \to \mathcal{Y}$가 전사이고 매끄럽다고 하자.
+그러면 대상 $U \in \Ob((\Sch/S)_{fppf})$와 다음 $2$-가환 도표가
+존재한다.
+$$
+\xymatrix{
+(\Sch/U)_{fppf} \ar[r]_a \ar[d]_x &
+(\Sch/V)_{fppf} \ar[d]^y \\
+\mathcal{X} \ar[r]^f & \mathcal{Y}
+}
+$$
+여기서 $x$는 전사이고 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+먼저 $W \in \Ob((\Sch/S)_{fppf})$를 택하자. 이어서 전사 매끄러운 $1$-사상
+$z : (\Sch/W)_{fppf} \to \mathcal{X}$를 택한다. $\mathcal{Y}$가
+대수 스택이므로 다음 동치를 택할 수 있다.
+$$
+j :
+\mathcal{S}_F
+\longrightarrow
+(\Sch/W)_{fppf}
+\times_{f \circ z, \mathcal{Y}, y}
+(\Sch/V)_{fppf}
+$$
+여기서 $F$는 대수공간이다. 보조정리
+\ref{lemma-base-change-representable-transformations-property}에 의해 사상
+$\mathcal{S}_F \to (\Sch/W)_{fppf}$는 $y$의 밑변환으로서 전사이고
+매끄럽다. 따라서 보조정리
+\ref{lemma-composition-representable-transformations-property}에 의해
+$\mathcal{S}_F \to \mathcal{X}$도 전사이고 매끄럽다. 대상
+$U \in \Ob((\Sch/S)_{fppf})$와 전사 \'etale 사상 $U \to F$를 택한다.
+보조정리 \ref{lemma-composition-representable-transformations-property}를
+한 번 더 적용하면 원하는 성질들을 얻는다.
+\end{proof}
+
+\noindent
+이 보조정리는 명제
+\ref{proposition-algebraic-stack-no-automorphisms}의 일반화이다.
+
+\begin{lemma}
+\label{lemma-characterize-representable-by-algebraic-spaces}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고,
+$f : \mathcal{X} \to \mathcal{Y}$를 $S$ 위 대수 스택들의 $1$-사상이라
+하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $U \in \Ob((\Sch/S)_{fppf})$에 대하여 함자
+$f : \mathcal{X}_U \to \mathcal{Y}_U$는 충실하다.
+\item 함자 $f$는 충실하다.
+\item $f$는 대수공간으로 표현가능하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)는 준군 섬유화 범주의 $1$-사상에 관한 일반 성질에 의해
+동치이다. 범주, 보조정리
+\ref{categories-lemma-equivalence-fibred-categories}를 보라. 보조정리
+\ref{lemma-criterion-map-representable-spaces-fibred-in-groupoids}에 의해
+(3)이 (2)를 함의한다. 마지막으로 (2)를 가정하자. $U$를 스킴이라 하고
+$y \in \Ob(\mathcal{Y}_U)$라 하자. 다음이 $U$ 위의 대수공간으로
+표현가능함을 증명해야 한다.
+$$
+\mathcal{W} = (\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}
+$$
+$(\Sch/U)_{fppf}$가 대수 스택이므로 보조정리
+\ref{lemma-2-fibre-product}에 의해 $\mathcal{W}$는 대수 스택이다.
+한편 $\mathcal{W}$의 대상을 삼중항
+$(V, x, \alpha : y(V) \to f(x))$로 명시적으로 기술할 수 있고 $f$가
+충실하므로, $\mathcal{W}$의 섬유범주들은 셋토이드이다. 따라서 명제
+\ref{proposition-algebraic-stack-no-automorphisms}에 의해 $\mathcal{W}$는
+대수공간으로 표현가능하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smooth-surjective-morphism-implies-algebraic}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고,
+$u : \mathcal{U} \to \mathcal{X}$를 $(\Sch/S)_{fppf}$ 위 준군 스택들의
+$1$-사상이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{U}$는 대수공간으로 표현가능하다.
+\item $u$는 대수공간으로 표현가능하고 전사이며 매끄럽다.
+\end{enumerate}
+그러면 $\mathcal X$는 $S$ 위의 대수 스택이다.
+\end{lemma}
+
+\begin{proof}
+정의 \ref{definition-algebraic-stack}에 따라 대각사상
+$\Delta : \mathcal{X} \to \mathcal{X} \times \mathcal{X}$가
+대수공간으로 표현가능함을 보여야 한다. $S$ 위의 두 스킴 $T_1$, $T_2$가
+주어졌을 때 연관된 표현가능 섬유범주를
+$\mathcal{T}_i = (\Sch/T_i)_{fppf}$로 나타내자. $1$-사상
+$f_i : \mathcal{T}_i \to \mathcal{X}$가 주어졌다고 하자. 보조정리
+\ref{lemma-representable-diagonal}에 의해 $2$-섬유곱
+$\mathcal{T}_1 \times_\mathcal{X} \mathcal{T}_2$가 대수공간으로
+표현가능함을 보이면 충분하다. 스택, 보조정리
+\ref{stacks-lemma-2-fibre-product-stacks-in-setoids-over-stack-in-groupoids}에
+의해 이는 어쨌든 셋토이드 스택이다. 따라서
+$\mathcal{T}_1 \times_\mathcal{X} \mathcal{T}_2$는
+$(\Sch/S)_{fppf}$ 위의 어떤 층 $F$에 대응한다. 스택, 보조정리
+\ref{stacks-lemma-stack-in-setoids-characterize}를 보라. $U$를
+$\mathcal{U}$를 표현하는 대수공간이라 하자. 가정에 의해
+$$
+\mathcal{T}_i' = \mathcal{U} \times_{u, \mathcal{X}, f_i} \mathcal{T}_i
+$$
+는 $S$ 위의 대수공간 $T'_i$로 표현가능하다. 따라서
+$\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2'$는 대수공간
+$T'_1 \times_U T'_2$로 표현가능하다. 다음 가환 도표를 생각하자.
+$$
+\xymatrix{
+&
+\mathcal{T}_1 \times_{\mathcal X} \mathcal{T}_2 \ar[rr]\ar'[d][dd] & &
+\mathcal{T}_1 \ar[dd] \\
+\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2' \ar[ur]\ar[rr]\ar[dd] & &
+\mathcal{T}_1' \ar[ur]\ar[dd] \\
+&
+\mathcal{T}_2 \ar'[r][rr] & &
+\mathcal X \\
+\mathcal{T}_2' \ar[rr]\ar[ur] & &
+\mathcal{U} \ar[ur] }
+$$
+이 도표에서 아래, 오른쪽, 뒤, 앞의 사각형은 $2$-섬유곱이다. 형식적
+논증에 의해
+$\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2' \to
+\mathcal{T}_1 \times_{\mathcal X} \mathcal{T}_2$는
+$\mathcal{U} \to \mathcal{X}$의 ``밑변환''이다. 더 정확히 다음 도표는
+$$
+\xymatrix{
+\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2' \ar[d] \ar[r] &
+\mathcal{U} \ar[d] \\
+\mathcal{T}_1 \times_{\mathcal X} \mathcal{T}_2 \ar[r] &
+\mathcal{X}
+}
+$$
+$2$-섬유곱 사각형이다. 따라서 $T'_1 \times_U T'_2 \to F$는 대수공간으로
+표현가능하고 매끄러우며 전사이다. 보조정리
+\ref{lemma-map-fibred-setoids-representable-algebraic-spaces},
+\ref{lemma-base-change-representable-by-spaces},
+\ref{lemma-map-fibred-setoids-property},
+\ref{lemma-base-change-representable-transformations-property}를 보라.
+그러므로 부트스트랩, 정리 \ref{bootstrap-theorem-final-bootstrap}에 의해
+$F$는 대수공간이고 증명이 끝난다.
+\end{proof}
+
+\noindent
+보조정리 \ref{lemma-smooth-surjective-morphism-implies-algebraic}의 한
+응용은 대수 스택 위의 대수공간이 대수 스택이라는 것이다. 이는
+부트스트랩, 보조정리
+\ref{bootstrap-lemma-representable-by-spaces-over-space}에 대응한다.
+사실 표현가능성의 판정법, 보조정리
+\ref{criteria-lemma-algebraic-morphism-to-algebraic}에서 보듯이 사상
+$\mathcal{X} \to \mathcal{Y}$가 ``대수적''이라고 가정하는 것만으로도
+충분하다.
+
+\begin{lemma}
+\label{lemma-representable-morphism-to-algebraic}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고,
+$\mathcal{X} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위 준군 스택들의
+사상이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{X} \to \mathcal{Y}$는 대수공간으로 표현가능하다.
+\item $\mathcal{Y}$는 $S$ 위의 대수 스택이다.
+\end{enumerate}
+그러면 $\mathcal{X}$는 $S$ 위의 대수 스택이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{V} \to \mathcal{Y}$를 표현가능한 준군 스택에서
+$\mathcal{Y}$로 가는 전사이고 매끄러운 $1$-사상이라 하자. 정의
+\ref{definition-algebraic-stack}에 의해 이러한 사상이 존재한다. 그러면
+보조정리 \ref{lemma-base-change-by-space-representable-by-space}에 의해
+$2$-섬유곱 $\mathcal{U} = \mathcal{V} \times_{\mathcal Y} \mathcal X$는
+대수공간으로 표현가능하다. $1$-사상 $\mathcal{U} \to \mathcal X$는
+대수공간으로 표현가능하고 매끄러우며 전사이다. 보조정리
+\ref{lemma-base-change-representable-by-spaces}와
+\ref{lemma-base-change-representable-transformations-property}를 보라.
+보조정리 \ref{lemma-smooth-surjective-morphism-implies-algebraic}에 의해
+$\mathcal{X}$는 대수 스택이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-open-fibred-category-is-algebraic}
+\begin{reference}
+$j$가 단사사상이라는 가정을 제거할 수 있음은 2016년 6월 15일자
+Matthew Emerton의 이메일에서 지적되었다
+\end{reference}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하고,
+$j : \mathcal X \to \mathcal Y$를 $(\Sch/S)_{fppf}$ 위에서 준군들로
+섬유화된 범주들의 $1$-사상이라 하자. $j$가 대수공간으로 표현가능하다고
+가정하자. 그러면 $\mathcal{Y}$가 준군 스택(각각 대수 스택)이면
+$\mathcal{X}$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+대수 스택에 관한 명제는 보조정리
+\ref{lemma-representable-morphism-to-algebraic}에 의해 준군 스택에 관한
+명제에서 따른다. $j$가 대수공간으로 표현가능하면 $j$는 섬유범주에서
+충실하고, 각 $U$와 각 $y \in \Ob(\mathcal{Y}_U)$에 대하여 준층
+$$
+(h : V \to U)
+\longmapsto
+\{(x, \phi) \mid x \in \Ob(\mathcal{X}_V), \phi : h^*y \to f(x)\}/\cong
+$$
+은 $U$ 위의 대수공간이다. 보조정리
+\ref{lemma-criterion-map-representable-spaces-fibred-in-groupoids}를 보라.
+특히 이 준층은 층이고, 결론은 스택, 보조정리
+\ref{stacks-lemma-relative-sheaf-over-stack-is-stack}에서 따른다.
+\end{proof}
+
+
+
+\section{대수 스택에서 제시로}
+\label{section-stack-to-presentation}
+
+\noindent
+$S$ 위의 대수 스택이 주어지면, 그 연관 몫 스택이 원래 대수 스택인
+$S$ 위 대수공간의 준군을 얻는다.
+
+\medskip\noindent
+$(U, R, s, t, c)$가 $S$ 위 대수공간의 준군이면 $[U/R]$는 이 데이터에
+연관된 몫 스택을 나타냄을 상기하자. 대수공간의 준군, 정의
+\ref{spaces-groupoids-definition-quotient-stack}를 보라. 일반적으로
+$[U/R]$는 대수 스택이 {\bf 아니다}. 특히 다음 보조정리에 나오는 스택
+$[U/R]$는 일반적으로 대수적이지 않다.
+
+\begin{lemma}
+\label{lemma-map-space-into-stack}
+$S$를 $\Sch_{fppf}$에 들어 있는 스킴이라 하자. $\mathcal{X}$를
+$S$ 위의 대수 스택이라 하고, $\mathcal{U}$를 대수공간으로 표현가능한
+$S$ 위의 대수 스택이라 하자. $f : \mathcal{U} \to \mathcal{X}$를
+1-사상이라 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item $2$-섬유곱
+$\mathcal{R} = \mathcal{U} \times_{f, \mathcal{X}, f} \mathcal{U}$
+은 대수공간으로 표현가능하다.
+\item 표준 동치
+$$
+\mathcal{U} \times_{f, \mathcal{X}, f} \mathcal{U}
+\times_{f, \mathcal{X}, f} \mathcal{U} =
+\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R},
+$$
+가 존재한다.
+\item 사영 $\text{pr}_{02}$는 (2)를 통해 $1$-사상
+$$
+\text{pr}_{02} :
+\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R}
+\longrightarrow
+\mathcal{R}
+$$
+을 유도한다.
+\item $U$, $R$를 각각 $\mathcal{U}, \mathcal{R}$를 표현하는 대수공간이라
+하고, $t, s : R \to U$와 $c : R \times_{s, U, t} R \to R$를 각각
+$1$-사상
+$\text{pr}_0, \text{pr}_1 : \mathcal{R} \to \mathcal{U}$
+과 위의
+$\text{pr}_{02} :
+\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R} \to
+\mathcal{R}$에 대응하는 사상이라 하자. 그러면 오중항
+$(U, R, s, t, c)$는 $S$ 위 대수공간의 준군이다.
+\item 사상 $f$는 $(\Sch/S)_{fppf}$ 위 준군 스택들의 표준 $1$-사상
+$f_{can} : [U/R] \to \mathcal{X}$
+을 유도한다.
+\item $1$-사상 $f_{can} : [U/R] \to \mathcal{X}$는 충실충만하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. 정의에 의해 $\Delta_\mathcal{X}$는 대수공간으로
+표현가능하므로, 보조정리 \ref{lemma-representable-diagonal}를 적용하면
+$\mathcal{U} \to \mathcal{X}$가 대수공간으로 표현가능함을 알 수 있다.
+따라서 결론은 보조정리
+\ref{lemma-base-change-by-space-representable-by-space}에서 따른다.
+
+\medskip\noindent
+$T$를 $S$ 위의 스킴이라 하자. $2$-섬유곱의 구성(범주, 보조정리
+\ref{categories-lemma-2-product-categories-over-C})에 의해 섬유범주
+$\mathcal{R}_T$의 대상은 $a, b \in \Ob(\mathcal{U}_T)$이고
+$\alpha : f(a) \to f(b)$가 섬유범주 $\mathcal{X}_T$의 사상인 삼중항
+$(a, b, \alpha)$임을 알 수 있다.
+
+\medskip\noindent
+(2)의 증명. 이 동치는 범주, 보조정리
+\ref{categories-lemma-associativity-2-fibre-product}와
+\ref{categories-lemma-2-fibre-product-erase-factor}를 거듭 적용하여 얻는다.
+$\mathcal{U} \times_\mathcal{X} \mathcal{U} \times_\mathcal{X} \mathcal{U}$
+를
+$(\mathcal{U} \times_\mathcal{X} \mathcal{U})
+\times_\mathcal{X} \mathcal{U}$.
+와 동일시하자. $T$가 $S$ 위의 스킴이면, $T$ 위의 섬유범주에서 이
+동치는 좌변의 대상 $((a, b, \alpha), c, \beta)$를 우변의 대상
+$((a, b, \alpha), (b, c, \beta))$로 보낸다.
+
+\medskip\noindent
+(3)의 증명. $1$-사상 $\text{pr}_{02}$는 범주, 보조정리
+\ref{categories-lemma-triple-2-fibre-product-pr02}의 증명에서 구성한다.
+위의 섬유범주 대상에 대한 기술로 보면
+$((a, b, \alpha), (b, c, \beta))$는
+$(a, c, \beta \circ \alpha)$로 보내진다.
+
+\medskip\noindent
+안타깝게도 이는 준군에 관한 우리의 규약과 {\it 양립하지 않는다}.
+우리는 항상 $j = (t, s) : R \to U$로 두고 $R$의 $T$-값 점 $r$를 사상
+$r : s(r) \to t(r)$로 ``생각''하기 때문이다. 그러나 준군의 반대도
+준군이므로 이는 (4)의 증명에 영향을 주지 않는다. 다만 (5)의 증명에서
+아래 표시식에 역이 나타나는 원인이 된다.
+
+\medskip\noindent
+(4)의 증명. 층 $U$는 층
+$T \mapsto \Ob(\mathcal{U}_T)/\!\cong$와 동형이고, $R$도 마찬가지임을
+상기하자. 보조정리 \ref{lemma-characterize-representable-by-space}를 보라.
+범주, 보조정리
+\ref{categories-lemma-category-fibred-setoids-presheaves-products}에 의해 이
+기술은 $2$-섬유곱과 양립하므로
+$\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R}$와
+$R \times_{s, U, t} R$ 사이에도 같은 대응이 생긴다. 사상
+$t, s : R \to U$와 $c : R \times_{s, U, t} R \to R$는 일반 등식
+(\ref{equation-morphisms-spaces})에서 얻는다. 명시적으로 이 사상들은
+$\text{pr}_0$, $\text{pr}_0$, $\text{pr}_{02}$가 섬유범주 대상의
+동형류에 작용하게 하여 얻는 함자 변환이다. 따라서 대수공간의 준군을
+얻는다는 것을 보이려면 $S$ 위의 모든 스킴 $T$에 대하여 구조
+$$
+(\Ob(\mathcal{U}_T)/\!\cong,
+\Ob(\mathcal{R}_T)/\!\cong,
+\text{pr}_1, \text{pr}_0, \text{pr}_{02})
+$$
+가 준군임을 보이면 충분하며, 이는 위의 $\mathcal{R}_T$의 대상에 대한
+기술에서 명백하다.
+
+\medskip\noindent
+(5)의 증명. 결국 대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer}를 적용하여 함자
+$[U/R] \to \mathcal{X}$를 얻을 것이다. $1$-사상
+$f : \mathcal{U} \to \mathcal{X}$를 생각하자. $\mathcal{R}$가
+$2$-섬유곱이라는 정의에 의해 $2$-화살표
+$\tau : f \circ \text{pr}_1 \to f \circ \text{pr}_0$가 있다. 구체적으로
+$T$ 위의 $\mathcal{R}$의 대상 $(a, b, \alpha)$에서 이는 사상
+$\alpha^{-1} : b \to a$이다. 다음을 주장한다.
+$$
+\tau \circ \text{id}_{\text{pr}_{02}} =
+(\tau \star \text{id}_{\text{pr}_0})
+\circ
+(\tau \star \text{id}_{\text{pr}_1}).
+$$
+이 항등식은 $T$ 위의
+$\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R}$의
+대상 $((a, b, \alpha), (b, c, \beta))$가 주어졌을 때
+$$
+\xymatrix{
+c \ar[r]^{\beta^{-1}} & b \ar[r]^{\alpha^{-1}} & a
+}
+$$
+의 합성이 화살표 $(\beta \circ \alpha)^{-1} : a \to c$와 같다는
+뜻이다. 이는 명백히 참이므로 주장이 성립한다. 이로써 구조
+$(\mathcal{U}, \mathcal{R}, \text{pr}_0, \text{pr}_1, \text{pr}_{02})$와
+$1$-사상 $f$, $2$-사상 $\tau$가 대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer}의 모든 가정을
+만족함을 알 수 있다. 다만 이 보조정리를 적용하려면 알맞은 사상들을 갖춘
+구조 $(\mathcal{S}_U, \mathcal{S}_R, s, t, c)$에 대해서도 이 사실을
+증명해야 한다.
+
+\medskip\noindent
+이 두 구조 사이에서 데이터를 옮기는 일반적인 추상적 형식론의 논증이
+있어야 하지만, 상당히 길어 보인다. 대신 다음 요령을 사용한다.
+$U(T) = \Ob(\mathcal{U}_T)/\!\!\cong$에서 나오는 표준 동치
+$j : \mathcal{U} \to \mathcal{S}_U$의 준역
+$j^{-1} : \mathcal{S}_U \to \mathcal{U}$를 택하자. 이는 모든 스킴
+$T/S$와 모든 대상 $a \in \mathcal{U}_T$에 대하여 그 동형류의 특정 원소,
+곧 $j^{-1}(j(a))$를 하나 택했다는 뜻일 뿐이다. 따라서 $j^{-1}$을
+사용하여 $\mathcal{S}_U$를 $\mathcal{U}$의 부분범주로 볼 수 있다. 이
+부분범주를 택한 뒤, $a, b$가 $(\mathcal{S}_U)_T$의 대상인
+$\mathcal{R}_T$의 대상 $(a, b, \alpha)$, 즉
+$j^{-1}(j(a)) = a$, $j^{-1}(j(b)) = b$인 대상들을 생각할 수 있다.
+이들이 $\mathcal{R}$의 부분범주를 이루고, 표준 동치
+$\mathcal{R} \to \mathcal{S}_R$를 통해 $\mathcal{S}_R$로 동형적으로
+보내짐은 명백하다. 또한 이는 $2$-섬유곱
+$\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R}$의
+형성과 명백히 양립한다. 따라서 $f$를 $\mathcal{S}_U$에 제한하고
+$\tau$를 함자 $\mathcal{S}_R \to \mathcal{X}$ 사이의 변환으로 제한하면
+된다. 그러므로 대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer}에 표시된 등식은
+성립한다. 실제로 부분범주
+$\mathcal{S}_{R \times_{s, U, t} R}$에 제한하기 전부터 함자
+$\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R}
+\to \mathcal{X}$의 변환들의 등식으로 성립하기 때문이다.
+
+\medskip\noindent
+이로써 대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer}가 적용되며, 원하는
+스택의 사상 $f_{can} : [U/R] \to \mathcal{X}$를 얻는다. 이 특수한 경우에
+$f_{can}$이 어떻게 정의되는지 간단히 명시하자. $T$ 위의
+$\mathcal{S}_U$의 대상 $a$에 대해서는 $f_{can}(a) = f(a)$로 둔다. 여기서
+위에서 택한 매장을 통해 $\mathcal{S}_U \subset \mathcal{U}$로 생각한다.
+$a, b$가 $T$ 위의 $\mathcal{S}_U$의 대상이면, $[U/R]$에서의 사상
+$\varphi : a \to b$는 정의상 $T$ 위의 $\mathcal{R}$의 대상
+$\varphi = (b, a, \alpha)$이다. (순서가 바뀜에 유의하라.) 대수공간의
+준군, 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer}의 증명에서 주어진
+규칙은
+\begin{equation}
+\label{equation-on-morphisms}
+f_{can}(\varphi) = \Big(f(a) \xrightarrow{\alpha^{-1}} f(b)\Big).
+\end{equation}
+(6)의 증명. $[U/R]$와 $\mathcal{X}$는 모두 스택이다. 따라서 스킴 $T/S$와
+$T$ 위의 $[U/R]$의 대상 $a, b$가 주어지면 $(\Sch/T)_{fppf}$ 위의 fppf
+층들의 변환
+$$
+\mathit{Isom}(a, b) \longrightarrow \mathit{Isom}(f_{can}(a), f_{can}(b))
+$$
+을 얻는다. 이것이 동형임을 보여야 한다. $T$ 위에서 fppf 국소적으로
+작업할 수 있으므로 $a, b$가 사상 $a, b : T \to U$에서 온다고 가정해도
+된다. 위의 매장 $\mathcal{S}_U \subset \mathcal{U}$에 의해 $a, b$를 $T$
+위의 $\mathcal{U}$의 대상으로 생각할 수도 있다. 대수공간의 준군,
+보조정리 \ref{spaces-groupoids-lemma-quotient-stack-morphisms}에서 왼쪽 층이
+$T$ 위의 대수공간
+$$
+R \times_{(t, s), U \times_S U, (b, a)} T
+$$
+으로 표현됨을 보았다. 한편 스택, 보조정리
+\ref{stacks-lemma-isom-as-2-fibre-product}에 의해 오른쪽은 다음 셋토이드
+스택에 결부된 층과 같다.
+$$
+\mathcal{X}
+\times_{\mathcal{X} \times \mathcal{X}, (f \circ b, f \circ a)} T =
+\mathcal{X}
+\times_{\mathcal{X} \times \mathcal{X}, (f, f)}
+(\mathcal{U} \times \mathcal{U})
+\times_{\mathcal{U} \times \mathcal{U}, (b, a)} T =
+\mathcal{R}
+\times_{(\text{pr}_0, \text{pr}_1), \mathcal{U} \times \mathcal{U}, (b, a)} T
+$$
+이는 위에 표시한 섬유곱으로 표현가능하다. 이로써 두
+$\mathit{Isom}$-층이 동형임을 보였다. 식
+(\ref{equation-on-morphisms})에 의해 우리의 $1$-사상
+$f_{can} : [U/R] \to \mathcal{X}$가 $\mathit{Isom}$-층들 위에 유도하는
+사상이 바로 이 동형이다.
+\end{proof}
+
+\noindent
+앞의 매우 추상적인 보조정리를 이용하여 제시를 만들 수 있다.
+
+\begin{lemma}
+\label{lemma-stack-presentation}
+$S$가 $\Sch_{fppf}$에 들어 있는 스킴이고, $\mathcal{X}$가 $S$ 위의 대수
+스택이라고 하자. $U$가 $S$ 위의 대수공간이고,
+$f : \mathcal{S}_U \to \mathcal{X}$가 전사 매끄러운 사상이라고 하자.
+$(U, R, s, t, c)$가 대수공간의 준군이고,
+$f_{can} : [U/R] \to \mathcal{X}$가 $U$와 $f$에 보조정리
+\ref{lemma-map-space-into-stack}를 적용하여 얻은 사상이라고 하자. 그러면
+\begin{enumerate}
+\item 사상 $s$, $t$는 매끄럽고,
+\item $1$-사상 $f_{can} : [U/R] \to \mathcal{X}$는 동치이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-property-morphism-equivalent}와
+\ref{lemma-map-presheaves-representable-by-spaces-transformation-property}에
+의해 사상 $s, t$는 매끄럽다. $1$-사상 $f$가 매끄럽고 전사이므로, 임의의
+스킴 $T$와 임의의 대상 $a \in \Ob(\mathcal{X}_T)$에 대하여 매끄럽고
+전사인 사상 $T' \to T$가 존재하여 $a|_T'$가 $[U/R]_{T'}$의 대상에서
+온다는 것은 명백하다. $f_{can} : [U/R] \to \mathcal{X}$가 충실충만이고
+양쪽 모두에서 대상의 하강 데이터가 유효하므로
+$[U/R] \to \mathcal{X}$는 본질적으로 전사이다. 스택, 보조정리
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff}를 보라.
+\end{proof}
+
+\begin{remark}
+\label{remark-flat-fp-presentation}
+보조정리 \ref{lemma-stack-presentation}의 사상
+$f : \mathcal{S}_U \to \mathcal{X}$에 전사, 평탄, 국소 유한 제시라는
+조건만 가정해도 $f_{can} : [U/R] \to \mathcal{X}$는 여전히 동치이다. 이
+경우 사상 $s$, $t$는 평탄하고 국소 유한 제시이지만, 물론 일반적으로는
+매끄럽지 않다.
+\end{remark}
+
+\noindent
+보조정리 \ref{lemma-stack-presentation}는 다음 정의들을 시사한다.
+
+\begin{definition}
+\label{definition-smooth-groupoid}
+$S$가 스킴이고 $B$가 $S$ 위의 대수공간이라고 하자.
+$(U, R, s, t, c)$가 $B$ 위의 대수공간의 준군이라고 하자. 대수공간의
+사상 $s, t : R \to U$가 매끄러우면 $(U, R, s, t, c)$를
+{\it 매끄러운 준군}\footnote{이 용어는 조금 혼동스러울 수 있다. 이것은
+$[U/R]$가 무엇 위에서든 매끄럽다는 뜻이 아니다.}이라고 한다.
+\end{definition}
+
+\begin{definition}
+\label{definition-presentation}
+$\mathcal{X}$가 $S$ 위의 대수 스택이라고 하자. $\mathcal{X}$의
+{\it 제시}란 $S$ 위의 대수공간의 매끄러운 준군 $(U, R, s, t, c)$와 동치
+$f : [U/R] \to \mathcal{X}$로 주어지는 것을 말한다.
+\end{definition}
+
+\noindent
+위에서 모든 대수 스택이 제시를 가짐을 보았다. 다음 목표는 $S$ 위의
+대수공간의 모든 매끄러운 준군이 대수 스택을 낳는다는 것을 보이는 것이다.
+
+
+\section{매끄러운 준군에 결부된 대수 스택}
+\label{section-smooth-groupoid-gives-algebraic-stack}
+
+\noindent
+이 절에서는 대수공간의 매끄러운 준군에서 출발하여, 이에 결부된 몫 스택이
+대수 스택임을 보인다.
+
+\begin{lemma}
+\label{lemma-diagonal-quotient-stack}
+$S$가 $\Sch_{fppf}$에 들어 있는 스킴이고,
+$(U, R, s, t, c)$가 $S$ 위의 대수공간의 준군이라고 하자. 그러면
+$[U/R]$의 대각사상은 대수공간으로 표현가능하다.
+\end{lemma}
+
+\begin{proof}
+$\mathit{Isom}$-층들이 대수공간임을 보이면 충분하다. 보조정리
+\ref{lemma-representable-diagonal}를 보라. 이는 부트스트랩, 보조정리
+\ref{bootstrap-lemma-quotient-stack-isom}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smooth-quotient-smooth-presentation}
+$S$가 $\Sch_{fppf}$에 들어 있는 스킴이고,
+$(U, R, s, t, c)$가 $S$ 위의 대수공간의 매끄러운 준군이라고 하자.
+그러면 사상 $\mathcal{S}_U \to [U/R]$는 매끄럽고 전사이다.
+\end{lemma}
+
+\begin{proof}
+$T$가 스킴이고 $x : (\Sch/T)_{fppf} \to [U/R]$가 $1$-사상이라고 하자.
+사영
+$$
+\mathcal{S}_U \times_{[U/R]} (\Sch/T)_{fppf}
+\longrightarrow
+(\Sch/T)_{fppf}
+$$
+이 전사이고 매끄러움을 보여야 한다. 왼쪽이 대수공간 $F$로 표현됨은 이미
+알고 있다. 보조정리 \ref{lemma-diagonal-quotient-stack}와
+\ref{lemma-representable-diagonal}를 보라. 따라서 대응하는 대수공간의
+사상 $F \to T$가 전사이고 매끄러움을 보이면 된다. 여기서 다루는
+대수공간 사상의 성질들은 fppf 위상에서 목표 위로 국소적이므로 $T$ 위에서
+fppf 국소적으로 확인할 수 있다. 구성상 $T$의 fppf 피복
+$\{T_i \to T\}$가 존재하여 $x|_{(\Sch/T_i)_{fppf}}$가 사상
+$x_i : T_i \to U$에서 온다. ($F \times_T T_i$가 $2$-섬유곱
+$\mathcal{S}_U \times_{[U/R]} (\Sch/T_i)_{fppf}$를 표현하므로 모든 것은
+$T_i \to T$에 의한 밑변환과 양립함에 유의하라.) 따라서 $x$가
+$x : T \to U$에서 온다고 가정해도 된다. 이 경우
+$$
+\mathcal{S}_U \times_{[U/R]} (\Sch/T)_{fppf}
+=
+(\mathcal{S}_U \times_{[U/R]} \mathcal{S}_U)
+\times_{\mathcal{S}_U} (\Sch/T)_{fppf}
+=
+\mathcal{S}_R \times_{\mathcal{S}_U} (\Sch/T)_{fppf}
+$$
+를 얻는다. 첫 번째 등식은 범주, 보조정리
+\ref{categories-lemma-2-fibre-product-erase-factor}에 의하고, 두 번째는
+대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-2-cartesian}에 의한다. 마지막
+$2$-섬유곱은 대수공간 $F = R \times_{s, U, x} T$로 표현됨이 명백하고,
+사영 $R \times_{s, U, x} T \to T$는 대수공간의 매끄러운 사상
+$s : R \to U$의 밑변환이므로 매끄럽다. 또한 $s$에는 절단, 즉 준군의
+항등사상 $e : U \to R$가 있으므로 이 사영은 전사이다. 이것으로
+보조정리가 증명되었다.
+\end{proof}
+
+\noindent
+다음은 이 절의 주결과이다.
+
+\begin{theorem}
+\label{theorem-smooth-groupoid-gives-algebraic-stack}
+$S$가 $\Sch_{fppf}$에 들어 있는 스킴이고,
+$(U, R, s, t, c)$가 $S$ 위의 대수공간의 매끄러운 준군이라고 하자. 그러면
+몫 스택 $[U/R]$는 $S$ 위의 대수 스택이다.
+\end{theorem}
+
+\begin{proof}
+정의 \ref{definition-algebraic-stack}의 세 조건을 확인한다. 구성상
+$[U/R]$는 준군 스택이므로 첫 번째 조건이 성립한다.
+
+\medskip\noindent
+두 번째 조건은 더 강한 보조정리 \ref{lemma-diagonal-quotient-stack}에서
+따른다.
+
+\medskip\noindent
+마지막으로 $S$ 위의 스킴 $W$와 전사 매끄러운 $1$-사상
+$(\Sch/W)_{fppf} \longrightarrow \mathcal{X}$.
+가 존재함을 보여야 한다. 먼저 $W \in \Ob((\Sch/S)_{fppf})$와 전사
+\'etale 사상 $W \to U$를 택한다. 이는 집합들로 섬유화된 범주의 전사
+\'etale 사상 $\mathcal{S}_W \to \mathcal{S}_U$를 준다. 보조정리
+\ref{lemma-map-presheaves-representable-by-spaces-transformation-property}를
+보라. 그러면 물론 $\mathcal{S}_W \to \mathcal{S}_U$는 전사이고
+매끄럽기도 하다. 보조정리
+\ref{lemma-representable-transformations-property-implication}을 보라.
+따라서 보조정리 \ref{lemma-smooth-quotient-smooth-presentation}와
+\ref{lemma-composition-representable-transformations-property}를 결합하면
+$\mathcal{S}_W \to \mathcal{S}_U \to [U/R]$는 전사이고 매끄럽다.
+\end{proof}
+
+
+
+
+
+\section{큰 자리의 변경}
+\label{section-change-big-site}
+
+\noindent
+이 절에서는 큰 자리를 바꿀 때 무슨 일이 생기는지 간단히 논의한다.
+결론은 큰 자리를 언제나 원하는 만큼 확대할 수 있다는 것이다. 따라서
+고려하려는 임의의 스킴 집합이, 우리의 대수공간을 다루는 큰 fppf 자리에
+들어 있다고 가정할 수 있다. 독자에게 이 절을 건너뛸 것을 권한다.
+
+\medskip\noindent
+스택의 당김은 스택, 절 \ref{stacks-section-inverse-image}에서 정의하였다.
+
+\begin{lemma}
+\label{lemma-change-big-site}
+큰 자리 $\Sch_{fppf}$와 $\Sch'_{fppf}$가 주어졌다고 하자.
+$\Sch_{fppf}$가 $\Sch'_{fppf}$에 들어 있다고 가정하자. 위상, 절
+\ref{topologies-section-change-alpha}를 보라. $S$가 $\Sch_{fppf}$의
+대상이라고 하자. 포함 함자
+$u : (\Sch/S)_{fppf} \to (\Sch'/S)_{fppf}$에 대응하는 자리의 사상을
+$f : (\Sch'/S)_{fppf} \to (\Sch/S)_{fppf}$라 하자. $\mathcal{X}$가
+$(\Sch/S)_{fppf}$ 위의 준군 스택이라고 하자.
+\begin{enumerate}
+\item $\mathcal{X}$가 어떤 $X \in \Ob((\Sch/S)_{fppf})$로 표현가능하면
+$f^{-1}\mathcal{X}$도 표현가능하다. 실제로 이는 이제
+$(\Sch'/S)_{fppf}$의 대상으로 보는 같은 스킴 $X$로 표현가능하다.
+\item $\mathcal{X}$가 대수공간인 $F \in \Sh((\Sch/S)_{fppf})$로
+표현가능하면 $f^{-1}\mathcal{X}$는 대수공간 $f^{-1}F$로 표현가능하다.
+\item $\mathcal{X}$가 대수 스택이면 $f^{-1}\mathcal{X}$도 대수 스택이다.
+\item $\mathcal{X}$가 Deligne--Mumford 스택이면 $f^{-1}\mathcal{X}$도
+Deligne--Mumford 스택이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3)을 증명하자. 보조정리 \ref{lemma-stack-presentation}에 의해 어떤
+대수공간의 매끄러운 준군 $(U, R, s, t, c)$에 대하여
+$\mathcal{X} = [U/R]$로 쓸 수 있다. 대수공간의 준군, 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-change-big-site}에 의해
+$f^{-1}[U/R] = [f^{-1}U/f^{-1}R]$임을 알 수 있다. 물론
+$(f^{-1}U, f^{-1}R, f^{-1}s, f^{-1}t, f^{-1}c)$도 대수공간의 매끄러운
+준군이다. 따라서 (3)이 증명되었다.
+
+\medskip\noindent
+이제 나머지 경우 (1), (2), (4)는 각각 $\mathcal{X}$가 특정한 종류의 제시
+$[U/R]$를 가진다는 뜻이므로, $f^{-1}\mathcal{X} = [f^{-1}U/f^{-1}R]$의
+같은 종류의 제시로 옮겨진다. 이것으로 보조정리가 증명되었다.
+\end{proof}
+
+\noindent
+더 큰 자리 위의 대수공간을 제한한 것이 더 작은 자리 위의 대수공간이라는
+명제는 일반적으로 참이 아니다. 이는 단순히 기수 문제 때문이다. 따라서
+이런 간단한 보조정리는 바탕 범주를 확대하는 데에만 쓸 수 있고 축소하는
+데에는 쓸 수 없다.
+
+\begin{lemma}
+\label{lemma-fully-faithful}
+$\Sch_{fppf}$가 $\Sch'_{fppf}$에 들어 있다고 하자. $S$가
+$\Sch_{fppf}$의 대상이라고 하자. $\Sch_{fppf}$를 사용하여 정의한 $S$
+위의 대수 스택의 $2$-범주를 $\textit{Algebraic-Stacks}/S$로 쓰자. 마찬가지로
+$\Sch'_{fppf}$를 사용하여 정의한 $S$ 위의 대수 스택의 $2$-범주를
+$\textit{Algebraic-Stacks}'/S$로 쓰자. 보조정리
+\ref{lemma-change-big-site}의 규칙
+$\mathcal{X} \mapsto f^{-1}\mathcal{X}$는 $2$-범주의 함자
+$$
+\textit{Algebraic-Stacks}/S \longrightarrow \textit{Algebraic-Stacks}'/S
+$$
+를 정의하며, 모든 $\textit{Algebraic-Stacks}/S$의 대상
+$\mathcal{X}, \mathcal{Y}$에 대하여 사상 범주의 동치
+$$
+\Mor_{\textit{Algebraic-Stacks}/S}(\mathcal{X}, \mathcal{Y})
+\longrightarrow
+\Mor_{\textit{Algebraic-Stacks}'/S}(f^{-1}\mathcal{X}, f^{-1}\mathcal{Y})
+$$
+를 정의한다. $\textit{Algebraic-Stacks}'/S$의 대상 $\mathcal{X}'$가 어떤
+$\textit{Algebraic-Stacks}/S$의 $\mathcal{X}$에 대한
+$f^{-1}\mathcal{X}$와 동치일 필요충분조건은, 어떤
+$U, R \in \textit{Spaces}/S$에 대하여 $U', R'$가 각각
+$f^{-1}U$, $f^{-1}R$와 동형인 제시 $\mathcal{X} = [U'/R']$를 갖는 것이다.
+\end{lemma}
+
+\begin{proof}
+사상 범주에 대한 명제는 더 일반적인 스택, 보조정리
+\ref{stacks-lemma-bigger-site}의 귀결이다. ``본질적 상''의 특징짓기는
+보조정리 \ref{lemma-change-big-site}의 증명에서 주어진 $f^{-1}$의
+기술에서 따른다.
+\end{proof}
+
+
+\section{바탕 스킴의 변경}
+\label{section-change-base-scheme}
+
+\noindent
+이 절에서는 바탕 스킴을 바꿀 때 무슨 일이 생기는지 간단히 논의한다.
+결론은 바탕 스킴의 사상 $S \to S'$가 주어지면 $S$ 위의 임의의 대수
+스택을 $S'$ 위의 대수 스택으로 볼 수 있다는 것이다.
+
+\begin{lemma}
+\label{lemma-category-of-spaces-over-smaller-base-scheme}
+$\Sch_{fppf}$가 큰 fppf 자리이고 $S \to S'$가 이 자리의 사상이라고 하자.
+스택, 절 \ref{stacks-section-localize}의 구성 A와 B는 $2$-범주의 동형
+$$
+\left\{
+\begin{matrix}
+S\text{ 위의 대수 스택 }\mathcal{X}\text{의}\\
+2\text{-범주}
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+S'\text{ 위의 대수 스택 }\mathcal{X}'\text{와 }S'\text{ 위의 대수}\\
+\text{스택의 사상 }f : \mathcal{X}' \to (\Sch/S)_{fppf}\text{로 이루어진}\\
+\text{쌍 }(\mathcal{X}', f)\text{의 }2\text{-범주}
+\end{matrix}
+\right\}
+$$
+을 준다.
+\end{lemma}
+
+\begin{proof}
+함자 $j : (\Sch/S)_{fppf} \to (\Sch/S')_{fppf}$는
+$(\Sch/S')_{fppf}$의 대상 $S/S'$에 결부된 국소화 함자이므로 이 명제는
+뜻이 있다. 스택, 보조정리 \ref{stacks-lemma-localize-stacks}에 의해 보일
+것은 구성 A와 B가 대수 스택의 부분범주를 보존한다는 것뿐이다. 예를 들어
+$\mathcal{X} = [U/R]$이면 $\mathcal{X}$에 구성 A를 적용한 결과는 단지
+$\mathcal{X}' = \mathcal{X}$이다. 역으로 $\mathcal{X}' = [U'/R']$이면
+사상 $p$는 대수공간의 사상 $U' \to S$와 $R' \to S$를 유도하고,
+$\mathcal{X} = [U'/R']$가 되는데 이제 이를 $S$ 위의 스택으로 본다. 따라서
+보조정리는 명백하다.
+\end{proof}
+
+\begin{definition}
+\label{definition-viewed-as}
+$\Sch_{fppf}$가 큰 fppf 자리이고 $S \to S'$가 이 자리의 사상이라고 하자.
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$가 $S$ 위의 대수 스택이면,
+{\it $S'$ 위의 대수 스택으로 본 $\mathcal{X}$}란 대수 스택
+$$
+\mathcal{X} \longrightarrow (\Sch/S')_{fppf}
+$$
+을 말한다. 이는 $\mathcal{X}$에 보조정리
+\ref{lemma-category-of-spaces-over-smaller-base-scheme}의 구성 A를 적용하여
+얻는다.
+\end{definition}
+
+\noindent
+역으로 $S'$ 위의 대수 스택 $\mathcal{X}'$에서 출발하여 $S$ 위의 대수
+스택을 얻고 싶다면 어떻게 해야 하는가? 이때는 $2$-섬유곱
+$$
+\mathcal{X}'_S
+=
+(\Sch/S)_{fppf} \times_{(\Sch/S')_{fppf}} \mathcal{X}'
+$$
+을 생각한다. 보조정리 \ref{lemma-2-fibre-product}에 의해 이는 $S'$ 위의
+대수 스택이다. 더구나 자연스러운 $1$-사상
+$p : \mathcal{X}'_S \to (\Sch/S)_{fppf}$를 갖추고 있으므로, 보조정리
+\ref{lemma-category-of-spaces-over-smaller-base-scheme}에 의해 표준적인
+방식으로 $S$ 위의 대수 스택에 대응한다.
+
+\begin{definition}
+\label{definition-change-of-base}
+$\Sch_{fppf}$가 큰 fppf 자리이고 $S \to S'$가 이 자리의 사상이라고 하자.
+$\mathcal{X}'$가 $S'$ 위의 대수 스택이라고 하자. {\it $\mathcal{X}'$의
+밑변환}이란 위에서 기술한 $S$ 위의 대수 스택 $\mathcal{X}'_S$를 말한다.
+\end{definition}
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}
