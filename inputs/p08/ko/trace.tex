@@ -1,0 +1,4083 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{트레이스 공식}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 글은 2009년 가을 컬럼비아 대학교에서 Johan de Jong이 강의한
+에탈 코호몰로지 강좌의 두 번째 부분에 대한 노트이다. 최초의 필기자는
+Thibaut Pugin, Zachary Maddock, Min Lee이다. 앞으로 Stacks project의
+나머지 부분에 있는 배경 자료에 대한 참고문헌을 추가하고 모든 명제에
+엄밀한 증명을 제시할 것이다.
+
+
+
+
+
+
+
+
+
+\section{트레이스 공식}
+\label{section-trace-formula}
+
+\noindent
+일반적인 에탈 코호몰로지 강좌에서는 보통 고유 및 매끄러운 기저변환
+정리, 순수성, 푸앵카레 쌍대성을 진술하고 증명한다. 이 모든 내용은
+\cite[Arcata]{SGA4.5}에서 찾을 수 있다. 여기서는 그 대신
+\cite[Rapport]{SGA4.5}에 실린 Deligne의 설명을 따라 프로베니우스의
+트레이스 공식을 연구한다. 우리는 차원 1만 다루지만, 고유 기저변환을
+사용하면 이것으로 일반적인 경우에도 충분하다. 고려하는 모든 코호몰로지
+군은 에탈 코호몰로지이므로 아래첨자 $_\etale$은 생략한다. 이제 우리가
+구하려는 공식을 설명하자. $X$를 유한체 $k$ 위의 차원 1인 유한형
+스킴이라 하고, $\ell$을 소수, $\mathcal{F}$를 구성가능하고 평탄한
+$\mathbf{Z}/\ell^n\mathbf{Z}$-층이라 하자. 그러면
+\begin{equation}
+\label{equation-trace-formula-initial}
+\sum\nolimits_{x \in X(k)}
+\text{Tr}(\text{Frob} | \mathcal{F}_{\bar x}) =
+\sum\nolimits_{i = 0}^2
+(-1)^i \text{Tr}(\pi_X^* | H^i_c(X \otimes_k \bar k, \mathcal{F}))
+\end{equation}
+가 $\mathbf{Z}/\ell^n\mathbf{Z}$의 원소로서 성립한다. 뒤에서 보겠지만,
+이 형식은 그대로는 약간 틀렸다. 그럼에도 먼저 여기에 나타나는 기호들을
+설명하자.
+
+
+
+
+
+\section{프로베니우스 사상들}
+\label{section-frobenii}
+
+\noindent
+이 절에서는 하나의 ``당혹스러운'' 정리를 증명한다.
+이 정리의 위상적 유사물은 다음과 같다.
+
+\begin{exercise}
+\label{exercise-baffling}
+$X$를 위상공간이라 하고, $g : X \to X$를 $X$의 모든 열린집합 $U$에
+대하여 $g^{-1}(U) = U$를 만족하는 연속사상이라 하자. 그러면 $g$는
+$X$의 코호몰로지 위에 항등사상을 유도한다(계수는 임의로 택할 수 있다).
+\end{exercise}
+
+\noindent
+이제 에탈 사이트에 대한 명제로 넘어가자.
+
+\begin{lemma}
+\label{lemma-baffling}
+$X$를 스킴이라 하고 $g : X \to X$를 사상이라 하자. 모든 에탈 사상
+$\varphi : U \to X$에 대하여 동형사상
+$$
+\xymatrix{
+U \ar[rd]_\varphi \ar[rr]^-\sim & & {U
+\times_{\varphi, X, g} X} \ar[ld]^{\text{pr}_2} \\
+& X
+}
+$$
+이 존재하고 $U$에 대하여 함자적이라고 가정하자. 그러면 $g$는
+코호몰로지 위에 항등사상을 유도한다(층은 임의로 택할 수 있다).
+\end{lemma}
+
+\begin{proof}
+증명은 형식적이며 어렵지 않다.
+\end{proof}
+
+\noindent
+프로베니우스 사상의 여러 변형에 대한 논의는 Varieties, Section
+\ref{varieties-section-frobenius}을 보라.
+
+\begin{theorem}[당혹스러운 정리]
+\label{theorem-baffling}
+$X$를 표수 $p > 0$인 스킴이라 하자. 그러면 절대 프로베니우스는
+(당김에 의하여) 코호몰로지 위에 자명한 사상을 유도한다. 즉, 모든 정수
+$j\geq 0$에 대하여
+$$
+F_X^* : H^j (X, \underline{\mathbf{Z}/n\mathbf{Z}}) \longrightarrow H^j (X,
+\underline{\mathbf{Z}/n\mathbf{Z}})
+$$
+는 항등사상이다.
+% P08-E144: frozen source calls the map both trivial and the identity.
+\end{theorem}
+
+\noindent
+이 정리는 순전히 형식적이다. 그렇지만 코호몰로지류의 당김을 계산하는
+방법을 복습해 두는 것이 좋다. 코호몰로지와 체흐 코호몰로지가 일치하는
+경우에는 (사이트 위의 올곱을 사용하여) 체흐 코사이클들을 당기면
+충분하다고만 해 두자. 일반적인 경우는 상당히 기술적이다.
+Hypercoverings, Theorem \ref{hypercovering-theorem-cohomology-hypercoverings}을
+보라. 정리를 증명하려면 프로베니우스가 Lemma \ref{lemma-baffling}의
+가정을 만족한다는 것만 확인하면 된다.
+
+\begin{proof}[Theorem \ref{theorem-baffling}의 증명]
+위와 같은 함자적 동형사상이 존재함을 확인해야 한다. 에탈 사상
+$\varphi : U \to X$에 대하여 다음 도식을 생각하자.
+$$
+\xymatrix{
+U \ar@{-->}[rd] \ar@/^1pc/[rrd]^{F_U}
+\ar@/_1pc/[rdd]_\varphi \\
+& {U \times_{\varphi, X, F_X} X} \ar[r]_-{\text{pr}_1}
+\ar[d]^{\text{pr}_2} & U \ar[d]^\varphi \\
+& X \ar[r]^{F_X} & X.
+}
+$$
+점선 화살표는 에탈 사상이면서 보편 위상동형이므로 동형사상이다.
+\'Etale Morphisms, Lemma \ref{etale-lemma-relative-frobenius-etale}을 보라.
+\end{proof}
+
+%10.22.09
+
+\begin{definition}
+\label{definition-geometric-frobenius}
+$k$를 원소가 $q = p^f$개인 유한체라 하고, $X$를 $k$ 위의 스킴이라
+하자. $X$의 {\it 기하학적 프로베니우스}는 $F_X^f$와 같은
+$\Spec(k)$ 위의 사상 $\pi_X : X \to X$이다.
+\end{definition}
+
+\noindent
+$\pi_X$는 $k$ 위의 사상이므로 임의의 $k$-스킴으로 기저변환할 수 있다.
+특히 대수적 폐포 $\bar k$로 기저변환하여 사상
+$\pi_X : X_{\bar k} \to X_{\bar k}$를 얻는다. 이 기저변환에도
+$\pi_X$라는 표기를 사용하는 것은 혼동을 일으키지 않는다. 실제로
+$X_{\bar k}$ 자체에는 기하학적 프로베니우스가 없기 때문이다.
+
+\begin{lemma}
+\label{lemma-sheaf-over-finite-field-has-frobenius-descent}
+$\mathcal{F}$를 $X_\etale$ 위의 층이라 하자. 그러면 표준 동형사상
+$\pi_X^{-1} \mathcal{F} \cong \mathcal{F}$와
+$\mathcal{F} \cong {\pi_X}_*\mathcal{F}$가 존재한다.
+\end{lemma}
+
+\noindent
+이는 fppf 사이트에 대해서는 거짓이다.
+
+\begin{proof}
+$\varphi : U \to X$를 에탈 사상이라 하자. 다음을 상기하라.
+${\pi_X}_* \mathcal{F} (U) = \mathcal{F} (U \times_{\varphi, X, \pi_X} X)$.
+$\pi_X = F_X^f$이므로 Theorem \ref{theorem-baffling}의 증명에서
+함자적 동형사상
+$$
+\xymatrix{
+U \ar[rd]_{\varphi} \ar[rr]_-{\gamma_U}
+& & U \times_{\varphi, X, \pi_X} X \ar[ld]^{\text{pr}_2} \\
+& X
+}
+$$
+이 존재함을 알 수 있다. 여기서 $\gamma_U = (\varphi, F_U^f)$이다.
+이제 $\gamma_U^{-1}$을 따른 $\mathcal{F}$의 제한 사상을 취하여
+동형사상
+$$
+\mathcal{F} (U) \longrightarrow {\pi_X}_* \mathcal{F} (U) =
+\mathcal{F} (U \times_{\varphi, X, \pi_X} X)
+$$
+을 정의한다. 다른 동형사상도 마찬가지이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-may-be-confusing}
+$F^f_U$와 $\pi_U$가 같을 수도 있고 같지 않을 수도 있다.
+\end{remark}
+
+\noindent
+원소가 $q = p^f$개인 유한체 $k$ 위의 스킴 $X$에서 층의
+코호몰로지에 대한 논의를 계속하자. $k$의 대수적 폐포 $\bar k$를
+고정하고, $k$의 절대 갈루아 군을
+$G_k = \text{Gal}(\bar k/k)$로 쓰자. $\mathcal{F}$를
+$X_\etale$ 위의 아벨 층이라 하자. 코호몰로지 군
+$H^j (X_{\bar k}, \mathcal{F}|_{X_{\bar k}})$ 위에 다음과 같이
+왼쪽 $G_k$-가군 구조를 정의한다. $\sigma \in G_k$이면 도식
+$$
+\xymatrix{
+X_{\bar k} \ar[rd] \ar[rr]^{\Spec(\sigma) \times \text{id}_X} & &
+X_{\bar k} \ar[ld] \\
+& X
+}
+$$
+은 가환한다. 따라서
+$\xi \in H^j (X_{\bar k}, \mathcal{F}|_{X_{\bar k}})$에 대하여
+$$
+\sigma \cdot \xi := (\Spec(\sigma) \times \text{id}_X)^*\xi \in
+H^j(X_{\bar k}, (\Spec(\sigma) \times \text{id}_X)^{-1}
+\mathcal{F}|_{X_{\bar k}})
+= H^j (X_{\bar k}, \mathcal{F}|_{X_{\bar k}}),
+$$
+로 둘 수 있다. 마지막 등식은 앞 도식의 가환성에서 따른다. 이로써
+뒤의 군에는 $G_k$-가군 구조가 주어진다.
+
+\begin{lemma}
+\label{lemma-two-actions-agree}
+위 상황에서 구조 사상을 $\alpha : X \to \Spec(k)$로 나타내자.
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-galois-action-stalks}에서와 같은 자연스러운
+갈루아 작용을 갖춘 줄기 $(R^j\alpha_*\mathcal{F})_{\Spec(\bar k)}$를
+생각하자. 그러면 \'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-higher-direct-images}의 동일시
+$$
+(R^j\alpha_*\mathcal{F})_{\Spec(\bar k)} \cong H^j (X_{\bar k},
+\mathcal{F}|_{X_{\bar k}})
+$$
+는 $G_k$-가군의 동형사상이다.
+\end{lemma}
+
+\noindent
+$(R^j\alpha_!\mathcal{F})_{\Spec(\bar k)}$와
+$H^j_c (X_{\bar k}, \mathcal{F}|_{X_{\bar k}})$를 비교하는 비슷한 결과도
+성립한다.
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{definition}
+\label{definition-arithmetic-frobenius}
+{\it 산술적 프로베니우스}는 $G_k$의 원소인 사상
+$\text{frob}_k : \bar k \to \bar k$, $x \mapsto x^q$이다.
+\end{definition}
+
+\begin{theorem}
+\label{theorem-geometric-arithmetic-inverse}
+$\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자. 그러면 모든
+$j\geq 0$에 대하여 $\text{frob}_k$는 코호몰로지 군
+$H^j(X_{\bar k}, \mathcal{F}|_{X_{\bar k}})$ 위에서 $\pi_X^*$의
+역사상으로 작용한다.
+\end{theorem}
+
+\noindent
+사상 $\pi_X^*$는 합성
+$$
+H^j(X_{\bar k}, \mathcal{F}|_{X_{\bar k}}) \xrightarrow{{\pi_X}_{\bar k}^*}
+H^j(X_{\bar k}, (\pi_X^{-1} \mathcal{F})|_{X_{\bar k}}) \cong
+H^j(X_{\bar k}, \mathcal{F}|_{X_{\bar k}}).
+$$
+으로 정의된다. 여기서 마지막 동형사상은 Lemma
+\ref{lemma-sheaf-over-finite-field-has-frobenius-descent}의 표준
+동형사상 $\pi_X^{-1} \mathcal{F} \cong \mathcal{F}$에서 온다.
+
+\begin{proof}
+합성 $X_{\bar k} \xrightarrow{\Spec(\text{frob}_k)} X_{\bar k}
+\xrightarrow{\pi_X} X_{\bar k}$는 $F_{X_{\bar k}}^f$와 같으므로,
+자명하지 않은 계수로 적절히 일반화한 당혹스러운 정리에서 결과가 따른다.
+앞의 합성은
+$F_{X_{\bar k}}^f = \pi_X \circ \Spec(\text{frob}_k) =
+\Spec(\text{frob}_k) \circ \pi_X$라는 의미에서 가환함에 유의하라.
+\end{proof}
+
+\begin{definition}
+\label{definition-geometric-frobenius-on-stalk}
+$x \in X(k)$를 유리점이라 하고, $\bar x : \Spec(\bar k) \to X$를
+$x$ 위에 놓인 기하점이라 하자. $\text{frob}_k^{-1}$의 작용을
+$\pi_x : \mathcal{F}_{\bar x} \to \mathcal{F}_{\bar x}$로 나타내고 이를
+{\it 기하학적 프로베니우스}라 부른다\footnote{이 표기는 표준적이지 않다.
+\cite{SGA4.5}에서는 이 작용소를 $F_x$로 나타낸다. 앞으로 이 표기를
+바꿀 가능성이 크다.}
+\end{definition}
+
+\noindent
+이제 트레이스 공식 (\ref{equation-trace-formula-initial})을 더 정확하게
+(하지만 여전히 거짓인 형태로) 진술할 수 있다. $X$를 유한체 $k$ 위의
+차원 1인 유한형 스킴이라 하고, $\ell$을 소수, $\mathcal{F}$를
+구성가능하고 평탄한 $\mathbf{Z}/\ell^n\mathbf{Z}$-층이라 하자. 그러면
+\begin{equation}
+\label{equation-trace-formula-second}
+\sum\nolimits_{x \in X(k)}
+\text{Tr}(\pi_x | \mathcal{F}_{\bar x})
+=
+\sum\nolimits_{i = 0}^2
+(-1)^i \text{Tr}(\pi_X^* | H^i_c(X_{\bar k}, \mathcal{F}))
+\end{equation}
+가 $\mathbf{Z}/\ell^n\mathbf{Z}$의 원소로서 성립한다. 이 등식이 틀린
+이유는 오른쪽의 트레이스가 여기서 고려하는 종류의 층에 대해서는
+정의되지 않기 때문이다. 이 문제를 다루기에 앞서 기하학적 프로베니우스가
+나타나는 이유를 설명해 보자(그 자체가 자연스러운 사상이라는 점 이외에!).
+
+\medskip\noindent
+$X = \mathbf{P}^1_k$이고
+$\mathcal{F} = \underline{\mathbf{Z}/\ell\mathbf{Z}}$인 경우를 생각하자.
+모든 점에 대하여 갈루아 가군 $\mathcal{F}_{\bar x}$는 자명하다. 따라서
+$\mathcal{F}_{\bar x}$ 위에 작용하는 임의의 사상 $\varphi$에 대하여
+왼쪽은
+$$
+\sum\nolimits_{x \in X(k)} \text{Tr}(\varphi | \mathcal{F}_{\bar x}) =
+\#\mathbf{P}^1_k(k) = q+1.
+$$
+이다. 이제 $\mathbf{P}^1_k$는 고유하므로 콤팩트 지지 코호몰로지는
+보통 코호몰로지와 같다. 따라서 사상
+$\pi : \mathbf{P}^1_k \to \mathbf{P}^1_k$에 대하여 오른쪽은
+$$
+\text{Tr}(\pi^* | H^0 (\mathbf{P}^1_{\bar k},
+\underline{\mathbf{Z}/\ell\mathbf{Z}})) + \text{Tr}(\pi^* | H^2
+(\mathbf{P}^1_{\bar k}, \underline{\mathbf{Z}/\ell\mathbf{Z}})).
+$$
+와 같다. 갈루아 가군
+$H^0 (\mathbf{P}^1_{\bar k},
+\underline{\mathbf{Z}/\ell\mathbf{Z}}) = \mathbf{Z}/\ell\mathbf{Z}$는
+자명하다. 항등사상의 당김은 항등사상이기 때문이다. 그러므로 첫 번째
+트레이스는 $\pi$와 무관하게 1이다. 두 번째 트레이스를 구하려면 사상
+$\pi : \mathbf{P}^1_{\bar k} \to \mathbf{P}^1_{\bar k}$에 대한 당김
+$\pi^* : H^2(\mathbf{P}^1_{\bar k}, \underline{\mathbf{Z}/\ell\mathbf{Z}}))$
+을 계산해야 한다.
+% P08-E148: frozen H^2 expression retains the unmatched extra closing parenthesis.
+이는 좋은 연습문제이며, 답은 $\pi$의 차수를 곱하는 사상이다(증명은
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-pullback-on-h2-curve}을 보라). 다시 말해,
+익숙한 복소 코호몰로지의 경우와 똑같이 작동한다. 특히 $\pi$가
+기하학적 프로베니우스이면
+$$
+\text{Tr}(\pi_X^* | H^2 (\mathbf{P}^1_{\bar k},
+\underline{\mathbf{Z}/\ell\mathbf{Z}})) = q
+$$
+를 얻고, $\pi$가 산술적 프로베니우스이면
+$$
+\text{Tr}(\text{frob}_k^* | H^2 (\mathbf{P}^1_{\bar k},
+\underline{\mathbf{Z}/\ell\mathbf{Z}})) = q^{-1}.
+$$
+를 얻는다. 후자는 분명히 틀린 선택이다.
+
+\begin{remark}
+\label{remark-compute-degree-lifting}
+차수의 계산은 (어떤 분명한 의미에서) 표수 0으로 올린 뒤 복소수 계수의
+상황을 살펴서 수행할 수 있다. 사영공간이 아닌 스킴은 일반적으로 올릴
+수 없으므로, 이 방법은 거의 언제나 작동하지 않는다.
+\end{remark}
+
+\noindent
+왜 콤팩트 지지 코호몰로지를 고려해야 하는가 하는 문제가 남는다.
+사실 푸앵카레 쌍대성을 고려하면 매끄러운 대수다양체에 대해서는 반드시
+필요하지 않지만, 그렇게 하면 $q$의 몇몇 거듭제곱을 추가해야 한다.
+예를 들어 $X = \mathbf{A}^1_k$이고
+$\mathcal{F} = \underline{\mathbf{Z}/\ell\mathbf{Z}}$인 경우를 생각하자.
+줄기 위의 작용은 다시 자명하므로 코호몰로지 위의 작용만 살펴보면 된다.
+그런데 $\pi_X^*$는
+$H^0(\mathbf{A}^1_{\bar k}, \underline{\mathbf{Z}/\ell\mathbf{Z}})$
+위에서 항등사상으로 작용하고,
+$H^2_c(\mathbf{A}^1_{\bar k}, \underline{\mathbf{Z}/\ell\mathbf{Z}})$
+위에서는 $q$를 곱하는 사상으로 작용한다.
+
+
+\section{트레이스}
+\label{section-traces}
+
+\noindent
+이제 비가환환 위의 가군의 자기준동형에 대한 트레이스를 취하는 방법을
+설명한다. 크기가 $p$와 서로소인 유한환 $\Lambda$를 고정하자. 보통
+$\Lambda$는 어떤 유한군 $G$에 대한 군환
+$(\mathbf{Z}/\ell^n\mathbf{Z})[G]$이다. 관례상 여기서 고려하는 모든
+$\Lambda$-가군은 왼쪽 $\Lambda$-가군이다.
+
+\medskip\noindent
+다음 표기를 도입한다. 교환자들, 즉
+$ab-ba$, $a, b \in \Lambda$ 꼴의 원소들이 생성하는 덧셈 부분군으로
+$\Lambda$를 나눈 몫을 $\Lambda^\natural$로 둔다.
+$\Lambda^\natural$은 환이 아님에 유의하라.
+
+\medskip\noindent
+예를 들어 가군 $(\mathbf{Z}/\ell^n\mathbf{Z})[G]^\natural$은
+공액류 함수들의 쌍대이므로
+$$
+(\mathbf{Z}/\ell^n\mathbf{Z})[G]^\natural
+=
+\bigoplus\nolimits_{\text{conjugacy classes of }G}
+\mathbf{Z}/\ell^n\mathbf{Z}.
+$$
+자유 $\Lambda$-가군에 대해서는
+$\text{End}_\Lambda(\Lambda^{\oplus m}) = \text{Mat}_m(\Lambda)$이다.
+가군들이 왼쪽 가군이므로 행렬에 의한 자기준동형의 표현은 오른쪽
+작용이라는 점에 유의하라. 즉,
+$a \in \text{End}(\Lambda^{\oplus m})$의 행렬이 $A$이고
+$v \in \Lambda$이면 $a(v) = v A$이다.
+% P08-E149: frozen source types v in Lambda rather than Lambda^{\oplus m}.
+
+\begin{definition}
+\label{definition-trace}
+자기준동형 $a$의 {\it 트레이스}는 이를 나타내는 행렬의 대각성분들의
+합이다. 이는 덧셈 사상
+$\text{Tr} : \text{End}_\Lambda(\Lambda^{\oplus m}) \to
+\Lambda^\natural$을 정의한다.
+\end{definition}
+
+\begin{exercise}
+\label{exercise-trace-is-trace}
+사상
+$$
+\Lambda^{\oplus m} \xrightarrow{a} \Lambda^{\oplus n}
+\quad\text{및}\quad
+\Lambda^{\oplus n} \xrightarrow{b} \Lambda^{\oplus m}
+$$
+가 주어졌을 때 $\text{Tr}(ab) = \text{Tr}(ba)$임을 보여라.
+\end{exercise}
+
+\noindent
+트레이스의 정의를 유한 사영 $\Lambda$-가군 $P$와 $P$의 자기준동형
+$\varphi$에 다음과 같이 확장한다. $P$를 자유 $\Lambda$-가군의
+직합인자로 쓰자. 즉, 다음 조건을 만족하는 사상
+$P \xrightarrow{a} \Lambda^{\oplus n} \xrightarrow{b} P$를 생각한다.
+\begin{enumerate}
+\item
+$\Lambda^{\oplus n} = \Im(a) \oplus \Ker(b)$; 그리고
+\item
+$b\circ a = \text{id}_P$.
+\end{enumerate}
+이제 $\text{Tr}(\varphi) = \text{Tr}(a\varphi b)$로 둔다. 앞의
+연습문제를 사용하면 이것이 잘 정의됨을 쉽게 확인할 수 있다.
+
+\section{왜 유도 범주인가?}
+\label{section-derived-categories-why}
+
+\noindent
+이 트레이스의 정의를 바탕으로, 이제 앞에서 진술한 공식의 또 다른
+문제를 논하자. $C$를 $k$ 위의 매끄러운 사영 곡선이라 하자. 한편으로
+$C_\etale$ 위의 줄기들이
+${(\mathbf{Z}/\ell^n\mathbf{Z})}^{\oplus m}$과 동형인 유한 국소상수 층
+$\mathcal{F}$들과, 다른 한편으로 (고정된 $\bar c$의 선택에 대한) 연속 표현
+$\rho : \pi_1 (C, \bar c) \to
+\text{GL}_m(\mathbf{Z}/\ell^n\mathbf{Z}))$들 사이에는 대응이 있다.
+% P08-E150: frozen representation target retains the unmatched extra parenthesis.
+$\rho$에 대응하는 층을 $\mathcal{F}_\rho$로 나타내자. 그러면
+$H^2 (C_{\bar k}, \mathcal{F}_\rho)$는
+${(\mathbf{Z}/\ell^n\mathbf{Z})}^{\oplus m}$ 위의
+$\rho(\pi_1 (C, \bar c))$의 작용에 대한 여불변량들의 군이고, 짧은 완전열
+$$
+0 \longrightarrow \pi_1 (C_{\bar k}, \bar c) \longrightarrow \pi_1 (C, \bar c)
+\longrightarrow G_k \longrightarrow 0.
+$$
+이 존재한다. 예를 들어 $\mathbf{Z} = \mathbf{Z} \sigma$가
+$\sigma(x) = (1+\ell) x$를 통해 $\mathbf{Z}/\ell^2\mathbf{Z}$ 위에
+작용하게 하자. 여불변량들은
+$(\mathbf{Z}/\ell^2\mathbf{Z})_{\sigma} = \mathbf{Z}/\ell\mathbf{Z}$이고,
+이는 평탄한 $\mathbf{Z}/\ell^2\mathbf{Z}$-가군이 아니다. 따라서 적어도
+앞 절의 의미로는 $H^2(C_{\bar k}, \mathcal{F}_\rho)$ 위의 어떤 작용에
+대한 트레이스를 취할 수 없다.
+
+\medskip\noindent
+사실 우리의 목표는 $\ell$-진 계수를 갖는 트레이스 공식을 고찰하는
+것이다. 그러나 $\mathbf{Q}_\ell = \mathbf{Z}_\ell[1/\ell]$이고
+$\mathbf{Z}_\ell = \lim \mathbf{Z}/\ell^n\mathbf{Z}$이며, 평탄한
+$\mathbf{Z}/\ell^n\mathbf{Z}$-층의 경우에도 개별 코호몰로지 군은
+평탄하지 않을 수 있으므로 트레이스를 계산할 수 없다. 가능한 해결책
+하나는 유도 범주 $D(\mathbf{Z}/\ell^n\mathbf{Z})$에서 전체 유도 복합체
+$R\Gamma(C_{\bar k}, \mathcal{F}_\rho)$를 생각하고 이것이 완전 대상임을
+보이는 것이다. 이는 유한 자유 가군들의 유한 복합체와 준동형이라는
+뜻이다. 그러한 복합체들에 대해서는 트레이스를 정의할 수 있지만,
+그러려면 유도 범주를 설명해야 한다.
+
+
+
+
+
+
+\section{유도 범주}
+\label{section-derived-categories}
+
+\noindent
+표기를 정하기 위하여 $\mathcal{A}$를 아벨 범주라 하자.
+$\text{Comp}(\mathcal{A})$를 $\mathcal{A}$ 안의 복합체들의 아벨 범주라
+하자. $K(\mathcal{A})$를 호모토피까지의 복합체 범주라 하자. 그 대상들은
+$\mathcal{A}$ 안의 복합체들이고, 사상들은 복합체 사상들의 호모토피류이다.
+이는 아벨 범주가 아니다. 대략 말하면, $D(A)$는
+$\text{Comp}(\mathcal{A})$에서, 또는 동치이게 $K(\mathcal{A})$에서,
+모든 준동형을 가역화하여 얻는 범주로 정의된다.
+% P08-E153: frozen source switches from mathcal A to plain A here and below.
+또한 아래로 유계인 복합체들만 사용하여
+$\text{Comp}^+(\mathcal{A}), K^+(\mathcal{A}), D^+(\mathcal{A})$를
+마찬가지로 정의할 수 있다. 위로 유계인 복합체들을 사용하여
+$\text{Comp}^-(\mathcal{A}), K^-(\mathcal{A}), D^-(\mathcal{A})$를
+정의할 수 있고, 유계 복합체들을 사용하여
+$\text{Comp}^b(\mathcal{A}), K^b(\mathcal{A}), D^b(\mathcal{A})$를
+정의할 수 있다.
+
+\begin{remark}
+\label{remarks-derived-categories}
+유도 범주에 관한 주들이다.
+\begin{enumerate}
+\item
+$\mathcal{A}$가 어느 정도 임의적이면 집합론적인 문제가 생기지만,
+우리는 기꺼이 무시하겠다.
+\item
+범주 $K(A)$와 $D(A)$에는 삼각 범주의 구조가 주어진다.
+\item
+범주 $\text{Comp}(\mathcal{A})$와 $K(\mathcal{A})$는
+$\mathcal{A}$가 가법 범주인 경우에도 정의할 수 있다.
+\end{enumerate}
+\end{remark}
+
+\noindent
+복합체를 $K^\bullet \mapsto H^i(K^\bullet)$로 보내는 호몰로지 함자
+$H^i : \text{Comp}(\mathcal{A}) \to \mathcal{A}$는 함자
+$H^i : K(\mathcal{A}) \to \mathcal{A}$와
+$H^i : D(\mathcal{A}) \to \mathcal{A}$로 확장된다.
+
+\begin{lemma}
+\label{lemma-when-in-bounded}
+$D(\mathcal{A})$의 대상 $E$가 $D^+(\mathcal{A})$에 포함될 필요충분조건은
+모든 $i \ll 0$에 대하여 $H^i(E) =0 $인 것이다. $D^-$와 $D^b$에
+대해서도 비슷한 명제가 성립한다.
+\end{lemma}
+
+\begin{proof}
+힌트: 절단 함자들을 사용하라. Derived Categories, Lemma
+\ref{derived-lemma-complex-cohomology-bounded}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-derived-categories}
+유도 범주 안의 대상들 사이의 사상에 관하여 다음이 성립한다.
+\begin{enumerate}
+\item
+$I^\bullet \in \text{Comp}^+(\mathcal{A})$이고 모든
+$n \in \mathbf{Z}$에 대하여 $I^n$이 단사라고 하자. 그러면
+$$
+\Hom_{D(\mathcal{A})}(K^\bullet, I^\bullet)
+=
+\Hom_{K(\mathcal{A})}(K^\bullet, I^\bullet).
+$$
+\item
+$P^\bullet \in \text{Comp}^-(\mathcal{A})$이고 모든
+$n \in \mathbf{Z}$에 대하여 $P^n$이 사영이라고 하자. 그러면
+$$
+\Hom_{D(\mathcal{A})}(P^\bullet, K^\bullet)
+=
+\Hom_{K(\mathcal{A})}(P^\bullet, K^\bullet).
+$$
+\item
+$\mathcal{A}$가 단사 대상을 충분히 가지며
+$\mathcal{I} \subset \mathcal{A}$가 단사 대상들의 가법 부분범주이면
+$
+D^+(\mathcal{A})\cong K^+(\mathcal{I})
+$
+이다(삼각 범주로서).
+\item
+$\mathcal{A}$가 사영 대상을 충분히 가지며
+$\mathcal{P} \subset \mathcal{A}$가 사영 대상들의 가법 부분범주이면
+$
+D^-(\mathcal{A}) \cong K^-(\mathcal{P}).
+$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{definition}
+\label{definition-derived-functor}
+$F: \mathcal{A} \to \mathcal{B}$를 왼쪽 완전 함자라 하고
+$\mathcal{A}$가 단사 대상을 충분히 갖는다고 가정하자. 다음 도식에
+들어맞는 함자 $RF: D^+(\mathcal{A}) \to D^+(\mathcal{B})$를
+{\it $F$의 전체 오른쪽 유도 함자}로 정의한다.
+$$
+\xymatrix{
+D^+(\mathcal{A}) \ar[r]^{RF} & D^+(\mathcal{B}) \\
+K^+(\mathcal I) \ar[u] \ar[r]^F & K^+(\mathcal{B}). \ar[u]
+}
+$$
+앞 보조정리에 의해 왼쪽 수직 화살표가 가역이므로 이것이 가능하다.
+마찬가지로 $G: \mathcal{A} \to \mathcal{B}$를 오른쪽 완전 함자라 하고
+$\mathcal{A}$가 사영 대상을 충분히 갖는다고 가정하자. 다음 도식에
+들어맞는 함자 $LG: D^-(\mathcal{A}) \to D^-(\mathcal{B})$를
+{\it $G$의 전체 왼쪽 유도 함자}로 정의한다.
+$$
+\xymatrix{
+D^-(\mathcal{A}) \ar[r]^{LG} & D^-(\mathcal{B}) \\
+K^-(\mathcal{P}) \ar[u] \ar[r]^G & K^-(\mathcal{B}). \ar[u]
+}
+$$
+앞 보조정리에 의해 왼쪽 수직 화살표가 가역이므로 이것이 가능하다.
+\end{definition}
+
+\begin{remark}
+\label{remark-cohomology-of-derived-functor}
+이 경우 $R^iF(K^\bullet) = H^i(RF(K^\bullet))$가 성립한다. 여기서
+왼쪽은 복합체 $F(K^\bullet)$의 $i$번째 호몰로지로 정의된다.
+\end{remark}
+
+\section{여과 유도 범주}
+\label{section-filtered-derived-category}
+
+\noindent
+결국 이 모든 일을 다시 하여 여과 유도 범주도 구성해야 한다.
+
+\begin{definition}
+\label{definition-filtered}
+$\mathcal{A}$를 아벨 범주라 하자.
+\begin{enumerate}
+\item $\text{Fil}(\mathcal{A})$를 $\mathcal{A}$의 여과 대상
+$(A, F)$들의 범주라 하자. 여기서 $F$는 다음 꼴의 여과이다.
+$$
+A \supset \ldots \supset F^n A \supset F^{n+1}A \supset \ldots
+\supset 0.
+$$
+이는 가법 범주이다.
+\item $\text{Fil}^f(\mathcal{A})$를 $\text{Fil}(\mathcal{A})$의 대상
+$(A, F)$ 중 여과가 유한한 것들로 이루어진 충만 부분범주라 하자.
+이 또한 가법 범주이다.
+\item 대상 $I \in \text{Fil}^f(\mathcal{A})$는 모든 $p$에 대하여
+$\text{gr}^p(I) = \text{gr}_F^p(I) = F^pI/F^{p+1}I$가 $\mathcal{A}$에서
+단사이면 {\it 여과 단사}라 하고, 사영이면 {\it 여과 사영}이라 한다.
+\item 복합체 범주
+$\text{Comp}(\text{Fil}^f(\mathcal{A})) \supset
+\text{Comp}^+(\text{Fil}^f(\mathcal{A}))$
+와 그 호모토피 범주
+$K(\text{Fil}^f(\mathcal{A})) \supset K^+(\text{Fil}^f(\mathcal A))$
+는 앞에서와 같이 정의한다.
+\item $\text{Comp}(\text{Fil}^f(\mathcal{A}))$ 안의 복합체 사상
+$\alpha : K^\bullet \to L^\bullet$은 모든 $p \in \mathbf{Z}$에 대하여
+$$
+\text{gr}^p(\alpha): \text{gr}^p(K^\bullet) \to \text{gr}^p(L^\bullet)
+$$
+가 준동형이면 {\it 여과 준동형}이라 한다.
+\item $K(\text{Fil}^f(\mathcal{A}))$에서 여과 준동형들을 가역화하여
+$DF(\mathcal{A})$를 정의하고, $K^+(\text{Fil}^f(\mathcal{A}))$에서
+여과 준동형들을 가역화하여 $DF^+(\mathcal{A})$를 정의한다.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{lemma-filtered-derived-category}
+$\mathcal{A}$가 단사 대상을 충분히 가지면
+$DF^+(\mathcal{A}) \cong K^+(\mathcal{I})$이다. 여기서
+$\mathcal{I}$는 여과 단사 대상들로 이루어진
+$\text{Fil}^f(\mathcal{A})$의 충만 가법 부분범주이다. 마찬가지로
+$\mathcal{A}$가 사영 대상을 충분히 가지면
+$DF^-(\mathcal{A}) \cong K^-(\mathcal{P})$이다. 여기서
+$\mathcal P$는 여과 사영 대상들로 이루어진
+$\text{Fil}^f(\mathcal{A})$의 충만 가법 부분범주이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+\section{여과 유도 함자}
+\label{section-filtered-derived-functors}
+
+\noindent
+그리고 여과 유도 함자들이 있다.
+
+\begin{definition}
+\label{definition-filtered-derived-functors}
+$T: \mathcal{A} \to \mathcal{B}$를 왼쪽 완전 함자라 하고
+$\mathcal{A}$가 단사 대상을 충분히 갖는다고 가정하자. 다음 도식에
+들어맞도록 $RT: DF^+(\mathcal{A}) \to D
+F^+(\mathcal{B})$를 정의한다.
+$$
+\xymatrix{
+DF^+(\mathcal{A}) \ar[r]^{RT} & DF^+(\mathcal{B}) \\
+K^+(\mathcal{I}) \ar[u] \ar[r]^{T \quad} & K^+(\text{Fil}^f(\mathcal{B})).
+\ar[u]}
+$$
+앞 보조정리에 의해 이는 잘 정의된다. $G: \mathcal{A} \to
+\mathcal{B}$를 오른쪽 완전 함자라 하고 $\mathcal{A}$가 사영 대상을
+충분히 갖는다고 가정하자. 다음 도식에 들어맞도록
+$LG: DF^-(\mathcal{A}) \to DF^-(\mathcal{B})$를 정의한다.
+$$
+\xymatrix{
+DF^-(\mathcal{A}) \ar[r]^{LG} & DF^-(\mathcal{B}) \\
+K^-(\mathcal{P}) \ar[u] \ar[r]^{G \quad} & K^-(\text{Fil}^f(\mathcal{B})).
+\ar[u]}
+$$
+이 또한 앞 보조정리에 의해 잘 정의된다. 함자 $RT$와 $LG$를 각각
+$T$와 $G$의 {\it 여과 유도 함자}라 부른다.
+\end{definition}
+
+\begin{proposition}
+\label{proposition-compare-filtered-graded}
+위 상황에서
+$$
+\text{gr}^p \circ RT = RT \circ \text{gr}^p
+$$
+가 성립한다. 여기서 왼쪽의 $RT$는 여과 유도 함자이고, 오른쪽 것은
+전체 유도 함자이다. 즉, 가환도식
+$$
+\xymatrix{
+DF^+(\mathcal{A}) \ar[r]^{RT} \ar[d]_{\text{gr}^p} & DF^+(\mathcal{B})
+\ar[d]^{\text{gr}^p}\\
+D^+(\mathcal{A}) \ar[r]^{RT} & D^+(\mathcal{B}).}
+$$
+이 존재한다.
+\end{proposition}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\noindent
+$K^\bullet \in DF^+(\mathcal{B})$가 주어지면 스펙트럼 열
+$$
+E_1^{p, q} = H^{p+q}(\text{gr}^p K^\bullet) \Rightarrow H^{p+q}(\text{forget
+filt}(K^\bullet)).
+$$
+을 얻는다.
+
+\section{여과 복합체의 응용}
+\label{section-applications-filtered}
+
+\noindent
+$\mathcal{A}$를 단사 대상을 충분히 갖는 아벨 범주라 하고,
+$0 \to L \to M \to N \to 0$을 $\mathcal{A}$ 안의 짧은 완전열이라 하자.
+$\widetilde M \in \text{Fil}^f(\mathcal{A})$를 다음 여과를 갖춘 $M$으로
+생각하자.
+$$
+F^1M = L, \ F^nM = M
+\text{ for }n \leq 0\text{, and }F^nM = 0\text{ for }n \geq 2.
+$$
+정의에 따라
+$$
+\text{forget filt}(\widetilde M) = M, \quad
+\text{gr}^0(\widetilde M) = N, \quad
+\text{gr}^1(\widetilde M) = L
+$$
+이고, 다른 모든 $n \neq 0, 1$에 대해서는
+$\text{gr}^n(\widetilde M) = 0$이다. $T: \mathcal{A} \to \mathcal{B}$를
+왼쪽 완전 함자라 하자. $\mathcal{A}$가 단사 대상을 충분히 갖는다고
+가정하자. 그러면 $RT(\widetilde M) \in DF^+(\mathcal{B})$는 다음을
+만족하는 여과 복합체이다.
+$$
+\text{gr}^p(RT(\widetilde M))
+\stackrel{\text{qis}}{=}
+\left\{
+\begin{matrix}
+0 & \text{if} & p \neq 0, 1, \\
+RT(N) & \text{if} & p = 0, \\
+RT(L) & \text{if} & p = 1.
+\end{matrix}
+\right.
+$$
+또한
+$\text{forget filt}(RT(\widetilde M))\stackrel{\text{qis}}{ = } RT(M)$이다.
+$RT(\widetilde M)$에 적용한 스펙트럼 열은
+$$
+E_1^{p, q} = R^{p+q}T(\text{gr}^p(\widetilde M)) \Rightarrow
+R^{p+q}T(\text{forget filt}(\widetilde M)).
+$$
+을 준다. 이 스펙트럼 열을 풀어 쓰면 긴 완전열
+$$
+\xymatrix{
+0 \ar[r] & T(L) \ar[r] & T(M) \ar[r] & T(N) \ar@(rd, ul)[rdllllr] \\
+& R^1T(L) \ar[r] & R^1T(M) \ar[r] & \ldots
+}
+$$
+을 얻는다. 이를 다음과 같이 사용할 것이다. $X/k$를 유한형 스킴이라
+하고, $\mathcal{F}$를 평탄하고 구성가능한
+$\mathbf{Z}/\ell^n \mathbf{Z}$-가군이라 하자. 그러면 트레이스
+$$
+\text{Tr}( \pi_X^\ast | R\Gamma_c(X_{\bar k}, \mathcal{F})) \in
+\mathbf{Z}/\ell^n \mathbf{Z}
+$$
+가 짧은 완전열에 대하여 가법적임을 보이고자 한다. 이를 위해서는
+$R\Gamma_c(X_{\bar k}, -) \in D^+(\mathbf{Z}/\ell^n \mathbf{Z})$만으로
+작업하는 것으로 충분하지 않으며, 여과 유도 범주를 사용해야 한다.
+
+
+
+
+
+
+
+%10.29.09
+\section{완전성}
+\label{section-perfect}
+
+\noindent
+$\Lambda$를 (비가환일 수도 있는) 환이라 하고,
+$\text{Mod}_{\Lambda}$를 왼쪽 $\Lambda$-가군들의 범주,
+$K(\Lambda) = K(\text{Mod}_\Lambda)$를 그 호모토피 범주,
+$D(\Lambda)= D(\text{Mod}_\Lambda)$를 그 유도 범주라 하자.
+
+\begin{definition}
+\label{definition-perfect}
+$K_{perf}(\Lambda)$를 유한 사영 $\Lambda$-가군들의 유계 복합체들을
+대상으로 하고, 호모토피까지의 복합체 사상들을 사상으로 하는 범주라
+하자. 함자 $K_{perf}(\Lambda)\to D(\Lambda)$는 완전충실하다
+(Derived Categories, Lemma
+\ref{derived-lemma-morphisms-from-projective-complex}). 그 본질적 상을
+$D_{perf}(\Lambda)$로 나타내자. $D(\Lambda)$의 대상이
+$D_{perf}(\Lambda)$에 속하면 {\it 완전}하다고 한다.
+\end{definition}
+
+\begin{proposition}
+\label{proposition-trace-well-defined}
+$K\in D_{perf}(\Lambda)$이고
+$f\in \text{End}_{D(\Lambda)}(K)$라 하자. 그러면 트레이스
+$\text{Tr}(f)\in \Lambda^\natural$은 잘 정의된다.
+\end{proposition}
+
+\begin{proof}
+이 증명에서는 Derived Categories, Lemma
+\ref{derived-lemma-morphisms-from-projective-complex}를 더 언급하지 않고
+사용한다. $P^\bullet$을 유한 사영 $\Lambda$-가군들의 유계 복합체라 하고,
+$\alpha : P^\bullet \to K$를 $D(\Lambda)$ 안의 동형사상이라 하자. 그러면
+$\alpha^{-1}\circ f\circ \alpha$는 호모토피까지 잘 정의되는 복합체 사상
+$f^\bullet : P^\bullet \to P^\bullet$에 대응한다. 다음과 같이 둔다.
+$$
+\text{Tr}(f) = \sum_i (-1)^i \text{Tr}(f^i : P^i \to P^i) \in \Lambda^\natural.
+$$
+$P^\bullet$과 $\alpha$가 주어지면 이는 $f^\bullet$의 선택과 무관하다.
+실제로 다른 선택은 어떤
+$h^i : P^i \to P^{i-1}(i\in \mathbf{Z})$에 대하여
+$\tilde{f}^\bullet = f^\bullet + dh +hd$ 꼴이다. 그러나
+\begin{eqnarray*}
+\text{Tr}(dh) & = & \sum_i (-1)^i \text{Tr}(P^i\xrightarrow{dh} P^i) \\
+& = & \sum_i (-1)^i \text{Tr}(P^{i-1}\xrightarrow{hd} P^{i-1}) \\
+& = & -\sum_i (-1)^{i-1}\text{Tr}(P^{i-1}\xrightarrow{hd} P^{i-1}) \\
+& = & - \text{Tr}(hd)
+\end{eqnarray*}
+이므로 $\sum_i (-1)^i \text{Tr} ((dh+hd)|_{P^i})=0$이다.
+또한 이는 $(P^\bullet , \alpha)$의 선택과도 무관하다. 다른 선택을
+$(Q^\bullet, \beta)$라 하자. 합성
+$$
+Q^\bullet \xrightarrow{\beta} K \xrightarrow{\alpha^{-1}} P^\bullet
+\quad\text{and}\quad
+P^\bullet \xrightarrow{\alpha} K \xrightarrow{\beta^{-1}} Q^\bullet
+$$
+은 각각 복합체 사상 $\gamma_1^\bullet$과 $\gamma_2^\bullet$로 나타낼 수
+있으며, $\gamma_1^\bullet \circ \gamma_2^\bullet$은 항등사상과
+호모토픽이다. 따라서 복합체 사상
+$\gamma_2^\bullet\circ f^\bullet\circ \gamma_1^\bullet : Q^\bullet\to Q^\bullet$
+은 $D(\Lambda)$ 안의 사상 $\beta^{-1}\circ f\circ\beta$를 나타낸다. 이제
+\begin{eqnarray*}
+\text{Tr}(\gamma_2^\bullet\circ f^\bullet\circ\gamma_1^\bullet|_{Q^\bullet}) &
+= & \text{Tr}(\gamma_1^\bullet \circ\gamma_2^\bullet \circ
+f^\bullet|_{P^\bullet})\\
+& = & \text{Tr}(f^\bullet|_{P^\bullet})
+\end{eqnarray*}
+이다. 이는 $\gamma_1^\bullet \circ \gamma_2^\bullet$이 항등사상과
+호모토픽이라는 사실과 위에서 본 $f^\bullet$의 선택에 대한 무관성에서
+따른다.
+\end{proof}
+
+
+
+
+\section{여과와 완전 복합체}
+\label{section-filtrations-perfect}
+
+\noindent
+이제 완전 복합체 범주의 여과된 판본을 제시한다.
+$\text{Fil}^f(\text{Mod}_\Lambda)$의 대상 $(M, F)$는 모든 $p$에 대하여
+$\text{gr}^p_F (M)$이 유한 사영이면 {\it 여과 유한 사영}이라 한다.
+이제 $\text{Fil}^f(\text{Mod}_\Lambda)$ 안의 여과 유한 사영 대상들의
+유계 복합체들의 호모토피 범주 $KF_{\text{perf}}(\Lambda)$를 생각한다.
+범주들의 도식
+$$
+\begin{matrix}
+KF(\Lambda) & \supset & KF_{\text{perf}}(\Lambda)\\
+\downarrow & & \downarrow\\
+DF(\Lambda) & \supset & DF_{\text{perf}}(\Lambda)
+\end{matrix}
+$$
+을 얻는다. 앞에서와 같이 오른쪽 수직 함자는 완전충실하고,
+$DF_{\text{perf}}(\Lambda)$는 그 본질적 상이다.
+
+\begin{lemma}[가법성]
+\label{lemma-additivity}
+$K\in DF_{\text{perf}}(\Lambda)$이고 $f\in \text{End}_{DF}(K)$라 하자.
+그러면
+$$
+\text{Tr}(f|_K) =
+\sum\nolimits_{p\in \mathbf{Z}} \text{Tr}(f|_{\text{gr}^p K}).
+$$
+\end{lemma}
+
+\begin{proof}
+Proposition \ref{proposition-trace-well-defined}에 의해
+$\text{Fil}^f(\text{Mod}_\Lambda)$의 여과 유한 사영 대상들로 이루어진
+유계 복합체 $P^\bullet$과
+$\text{Comp}(\text{Fil}^f(\text{Mod}_\Lambda))$ 안의 사상
+$f^\bullet : P^\bullet\to P^\bullet$이 주어졌다고 가정할 수 있다.
+그러므로 보조정리는 다음 결과에서 따르며, 그 증명은 독자에게 맡긴다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-additive-filtered-finite-projective}
+$P \in \text{Fil}^f(\text{Mod}_\Lambda)$를 여과 유한 사영이라 하고,
+$f : P \to P$를 $\text{Fil}^f(\text{Mod}_\Lambda)$ 안의 자기준동형이라
+하자. 그러면
+$$
+\text{Tr}(f|_P) =
+\sum\nolimits_p \text{Tr}(f|_{\text{gr}^p(P)}).
+$$
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+\section{완전 대상의 특징짓기}
+\label{section-characterizing-perfect}
+
+\noindent
+가환인 경우는 More on Algebra의 Sections
+\ref{more-algebra-section-pseudo-coherent},
+\ref{more-algebra-section-tor}, 그리고
+\ref{more-algebra-section-perfect}를 보라.
+
+\begin{definition}
+\label{definition-finite-tor-dimension}
+$\Lambda$를 (비가환일 수도 있는) 환이라 하자.
+$K\in D(\Lambda)$가 {\it 유한 $\text{Tor}$-차원}을 갖는다는 것은,
+어떤 $a, b \in \mathbf{Z}$가 존재하여 임의의 오른쪽
+$\Lambda$-가군 $N$에 대해 모든 $i \not \in [a, b]$에서
+$H^i(N \otimes_{\Lambda}^\mathbf{L} K) = 0$이라는 뜻이다.
+\end{definition}
+
+\noindent
+특히 $N = \Lambda$로 놓으면 $K \in D^b(\Lambda)$임을 알 수 있다.
+
+\begin{lemma}
+\label{lemma-characterize-perfect}
+$\Lambda$를 왼쪽 뇌터 환이라 하고 $K\in D(\Lambda)$라 하자.
+그러면 $K$가 완전일 필요충분조건은 다음 두 조건이 성립하는 것이다.
+\begin{enumerate}
+\item
+$K$가 유한 $\text{Tor}$-차원을 갖고,
+\item
+모든 $i \in \mathbf{Z}$에 대해 $H^i(K)$가 유한 $\Lambda$-가군이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+가환인 경우의 증명은 More on Algebra, Lemma
+\ref{more-algebra-lemma-perfect}를 보라.
+\end{proof}
+
+\noindent
+독자는 이 명제를 직접 증명해 보기를 강력히 권한다. 그 증명은
+유한 왼쪽 표시 환 위의 유한 가군이 평탄일 필요충분조건이
+사영이라는 사실에 의존한다.
+
+\begin{remark}
+\label{remark-variant}
+이 보조정리의 한 변형은 뇌터 스킴 $X$와, 유한 국소 자유
+$\mathcal{O}_X$-가군들의 유한 복합체에 국소적으로 준동형인
+복합체들의 범주 $D_{perf}(\mathcal{O}_X)$를 생각하는 것이다.
+$D_{perf}(\mathcal{O}_X)$의 대상 $K$는 연접 코호몰로지 층들을
+가지고 유계 Tor 차원을 갖는다는 조건으로 특징지을 수 있다.
+\end{remark}
+
+
+
+
+
+
+
+\section{좋은 복합체의 코호몰로지}
+\label{section-cohomology-ctf}
+
+\noindent
+다음은 $D_{ctf}(X, \Lambda)$의 대상들의 콤팩트 지지 코호몰로지에
+관한 더 일반적인 결과의 특수한 경우이다.
+
+\begin{proposition}
+\label{proposition-projective-curve-constructible-cohomology}
+$X$를 체 $k$ 위의 사영 곡선, $\Lambda$를 유한환이라 하고
+$K\in D_{ctf}(X, \Lambda)$라 하자. 그러면
+$R\Gamma(X_{\bar k}, K)\in D_{perf}(\Lambda)$이다.
+\end{proposition}
+
+\begin{proof}[증명 개요.]
+첫 단계는 다음을 보이는 것이다.
+\begin{enumerate}
+\item[(1)]
+{\it $R\Gamma(X_{\bar k}, K)$의 코호몰로지는 유계이다.}
+\end{enumerate}
+스펙트럼 열
+$$
+H^i(X_{\bar k}, \underline H^j(K))
+\Rightarrow
+H^{i+j} (R\Gamma(X_{\bar k}, K)).
+$$
+을 생각하자. $K$가 유계이고 $\Lambda$가 유한이므로 층
+$\underline H^j(K)$들은 꼬임 층이다. 또한 $X_{\bar k}$는 유한
+코호몰로지 차원을 가지므로 왼쪽 항은 유한 개의 $i$와 $j$에
+대해서만 영이 아니다. 따라서 오른쪽 항도 그러하다.
+\begin{enumerate}
+\item[(2)]
+{\it 코호몰로지 군 $H^{i+j} (R\Gamma(X_{\bar k}, K))$들은 유한이다.}
+\end{enumerate}
+층 $\underline H^j(K)$들이 구성 가능이므로 군
+$H^i(X_{\bar k}, \underline H^j(K))$들은 유한하다
+(\'Etale Cohomology, Section
+\ref{etale-cohomology-section-vanishing-torsion}).
+따라서 스펙트럼 열을 다시 사용하면 결론이 따른다.
+\begin{enumerate}
+\item[(3)]
+{\it $R\Gamma(X_{\bar k}, K)$는 유한 $\text{Tor}$-차원을 갖는다.}
+\end{enumerate}
+$N$을 오른쪽 $\Lambda$-가군이라 하자(사실 $\Lambda$가 유한이므로
+$N$이 유한이라고 가정해도 충분하다). 사영 공식(가군의 변경)에 의해
+$$
+N \otimes^\mathbf{L}_\Lambda R \Gamma(X_{\bar k}, K) = R\Gamma(X_{\bar k},
+N \otimes^\mathbf{L}_\Lambda K).
+$$
+따라서
+$$
+H^i (N \otimes^\mathbf{L}_\Lambda R\Gamma(X_{\bar k}, K)) = H^i(R\Gamma(X_{\bar
+k}, N \otimes_{\Lambda}^\mathbf{L} K)).
+$$
+이제 스펙트럼 열
+$$
+H^i (X_{\bar k}, \underline H^j (N \otimes_{\Lambda}^\mathbf{L} K))
+\Rightarrow
+H^{i+j}(R\Gamma(X_{\bar k}, N \otimes_{\Lambda}^\mathbf{L} K)).
+$$
+을 생각하자. $K$가 유한 $\text{Tor}$-차원을 가지므로
+$\underline H^j (N \otimes_{\Lambda}^\mathbf{L} K)$는 충분히 작은
+$j$에 대해 항상 소멸하고, 왼쪽 항은 $i < 0$일 때 소멸한다.
+그러므로 주장한 대로 $R\Gamma(X_{\bar k}, K)$는 유한
+$\text{Tor}$-차원을 갖는다. 따라서 Lemma
+\ref{lemma-characterize-perfect}에 의해 완전 복합체이다.
+\end{proof}
+
+
+
+
+
+\section{Lefschetz 수}
+\label{section-lefschetz-numbers}
+
+\noindent
+유한 Tor 차원의 구성 가능 복합체의 전체 코호몰로지가 완전
+복합체라는 사실은 코호몰로지가 잘 작동하는 핵심 기술적 이유이며,
+트레이스 공식에 나타나는 트레이스를 엄밀하게 정의할 수 있게 한다.
+
+\begin{definition}
+\label{definition-global-lefschetz-number}
+$\Lambda$를 유한환, $X$를 유한체 $k$ 위의 사영 곡선이라 하고
+$K \in D_{ctf}(X, \Lambda)$라 하자(예를 들어
+$K = \underline\Lambda$). 표준 사상
+$c_K : \pi_X^{-1}K \to K$가 있고, 그 기저변환
+$c_K|_{X_{\bar k}}$는 완전 복합체
+$R\Gamma(X_{\bar k}, K|_{X_{\bar k}})$ 위의 작용을 유도하며 이를
+$\pi_X^*$로 나타낸다. $K$의 {\it 대역 Lefschetz 수}는 그 작용의
+트레이스 $\text{Tr}(\pi_X^* |_{R\Gamma(X_{\bar k}, K)})$이다.
+이는 $\Lambda^\natural$의 원소이다.
+\end{definition}
+
+\begin{definition}
+\label{definition-local-lefschetz-number}
+$\Lambda, X, k, K$는 Definition
+\ref{definition-global-lefschetz-number}에서와 같다고 하자.
+$K\in D_{ctf}(X, \Lambda)$이므로 $X$의 임의의 기하점 $\bar x$에
+대해 복합체 $K_{\bar x}$는 완전 복합체이다
+($D_{perf}(\Lambda)$ 안에서). Section \ref{section-frobenii}에서
+보았듯이 프로베니우스 $\pi_X$는 $K_{\bar x}$에 작용한다.
+$K$의 {\it 국소 Lefschetz 수}는 합
+$$
+\sum\nolimits_{x\in X(k)} \text{Tr}(\pi_x |_{K_{\overline{x}}})
+$$
+이며, 이 또한 $\Lambda^\natural$의 원소이다.
+\end{definition}
+
+\noindent
+이제 마침내 트레이스 공식을 정확히 서술할 수 있다.
+
+\begin{theorem}[Lefschetz 트레이스 공식]
+\label{theorem-trace}
+$X$를 유한체 $k$ 위의 사영 곡선, $\Lambda$를 유한환이라 하고
+$K \in D_{ctf}(X, \Lambda)$라 하자. 그러면 $K$의 대역 Lefschetz
+수와 국소 Lefschetz 수는 같다. 즉,
+% P08-E156
+\begin{equation}
+\label{equation-trace-formula}
+\text{Tr}(\pi^*_X |_{R\Gamma(X_{\bar k}, K)})
+=
+\sum\nolimits_{x\in X(k)} \text{Tr}(\pi_X |_{K_{\bar x}})
+\end{equation}
+이 $\Lambda^\natural$ 안에서 성립한다.
+\end{theorem}
+
+\begin{proof}
+아래의 논의를 보라.
+\end{proof}
+
+%11.5.09
+\noindent
+우리는 트레이스 공식을 증명하지 않고 사용하겠다. 그럼에도
+\cite{SGA4.5}에 제시된 정리의 증명을 상당히 자세히 설명하겠다
+(충분히 설명되지 않은 몇몇 사항은 Section
+\ref{section-list-skipped}에 열거한다).
+
+\medskip\noindent
+우리는 곡선에 대해서만 공식을 서술했으며, 어떤 약한 의미에서는
+다음 결과의 귀결이다.
+
+\begin{theorem}[Weil]
+\label{theorem-weil-trace-formula}
+$C$를 대수적으로 닫힌 체 $k$ 위의 비특이 사영 곡선이라 하고,
+$\varphi : C \to C$를 항등사상과 다른 $C$의 $k$-자기준동형이라 하자.
+$V(\varphi) = \Delta_C \cdot \Gamma_\varphi$라 두자. 여기서
+$\Delta_C$는 대각선, $\Gamma_\varphi$는 $\varphi$의 그래프이며,
+교차수는 $C \times C$ 위에서 취한다.
+$J = \underline{\Picardfunctor}^0_{C/k}$를 $C$의 야코비 다양체라 하고,
+당김을 취하여 $\varphi$가 유도하는 작용을
+$\varphi^* : J \to J$로 나타내자. 그러면
+$$
+V(\varphi) = 1 - \text{Tr}_J(\varphi^*) + \deg \varphi.
+$$
+\end{theorem}
+
+\begin{proof}
+$V(\varphi)$는 $\varphi$의 고정점 수이며,
+$$
+V(\varphi) =
+\sum\nolimits_{c \in |C| : \varphi(c) = c} m_{\text{Fix}(\varphi)} (c)
+$$
+와 같다. 여기서 $m_{\text{Fix}(\varphi)} (c)$는 $\varphi$의
+고정점으로서 $c$의 중복도, 곧 국소 균일화원의 상을
+$\varphi - \text{id}_C$ 아래에서 취했을 때의 소멸 차수이다.
+이 정리의 증명은 \cite{Lang}과 \cite{Weil}에서 찾을 수 있다.
+\end{proof}
+
+\begin{example}
+\label{example-elliptic-curve}
+$C = E$를 타원 곡선이라 하고 $\varphi = [n]$을 $n$배 사상이라 하자.
+그러면 $\varphi^* = \varphi^t$는 야코비 다양체 위의 $n$배 사상이므로
+트레이스는 $2n$이고 차수는 $n^2$이다. 한편 $\varphi$의 고정점은
+$n p = p$를 만족하는 점 $p \in E$, 즉 $(n-1)$-꼬임점들이며 그
+개수는 $(n-1)^2$이다. 따라서 정리는
+$$
+(n-1)^2 = 1 - 2n + n^2.
+$$
+이라고 말한다.
+\end{example}
+
+\noindent
+{\bf 야코비 다양체.}
+이제 Weil의 증명에 쓰이는 곡선과 그 야코비 다양체 사이의 대응을
+증명 없이 논의한다. $C$를 대수적으로 닫힌 체 $k$ 위의 비특이
+사영 곡선이라 하고 기점 $c_0 \in C(k)$를 택하자.
+$A^1(C \times C)$ (또는 $\Pic(C \times C)$ 또는
+$\text{CaCl}(C \times C)$)로 $C \times C$의 여차원 1 인자들의
+아벨 군을 나타내자. 그러면
+$$
+A^1(C \times C) = \text{pr}_1^* (A^1(C)) \oplus \text{pr}_2^* (A^1(C)) \oplus R
+$$
+이며, 여기서
+$$
+R = \{ Z \in A^1(C \times C) \ |
+\ Z|_{C \times \{c_0\}} \sim_\text{rat} 0
+\text{ and }
+Z|_{\{c_0\} \times C} \sim_\text{rat} 0 \}.
+$$
+이다. 다시 말해 $R$은 어느 사영으로 당겨도 자명해지는 선다발들의
+부분군이다. 이때 아벨 군의 표준 동형
+$R \cong \text{End}(J)$가 있으며, 이는 $R$의 인자 $Z$를 자기준동형
+$$
+\begin{matrix}
+J & \to & J \\
+\left[ \mathcal{O}_C(D) \right] & \mapsto & (\text{pr}_1 |_Z)_* (\text{pr}_2
+|_Z)^* (D).
+\end{matrix}
+$$
+으로 보낸다. 앞서 말한 대응은 다음과 같다. 두 인자를 맞바꾸는
+$C \times C$의 자기동형을 $\sigma$로 나타낸다.
+$$
+\begin{matrix}
+\hline & \\
+\text{End}(J) & R \\
+& \\
+\hline & \\
+\text{합성: }\alpha, \beta &
+{\text{pr}_{13}}_* ({\text{pr}_{12}}^*(\alpha) \circ {\text{pr}_{23}}^*(\beta))
+\\
+& \\
+\text{id}_J &
+\Delta_C - \{c_0\} \times C - C \times \{c_0\} \\
+& \\
+\varphi^* &
+\Gamma_\varphi - C \times \{\varphi(c_0)\}
+- \sum_{\varphi(c) = c_0} \{c\} \times C \\
+& \\
+{
+\begin{matrix}
+\text{트레이스 형식} \\
+\alpha, \beta \mapsto \text{Tr}(\alpha \beta)
+\end{matrix}
+}
+&
+\alpha, \beta \mapsto - \int_{C \times C} \alpha . \sigma^*\beta
+\\
+& \\
+{
+\begin{matrix}
+\text{Rosati 대합} \\
+\alpha \mapsto \alpha^\dagger
+\end{matrix}
+}
+&
+\alpha \mapsto \sigma^*\alpha
+\\
+& \\
+{
+\begin{matrix}
+\text{Rosati 양의 정부호성} \\
+\text{Tr}(\alpha\alpha^\dagger) > 0
+\end{matrix}
+}
+&
+{
+\begin{matrix}
+\text{Hodge 지수 정리: }C \times C \\
+- \int_{C \times C} \alpha \sigma^*\alpha > 0.
+\end{matrix}
+}
+\\
+& \\
+\hline 
+\end{matrix}
+$$
+실제로 Kunneth 공식에 비추어 보면 부분군 $R$은
+$H^1(C)\otimes H^1(C)$의 $1, 1$형 Hodge 류들에 대응한다.
+
+\medskip\noindent
+{\bf Weil의 증명.} 이 대응을 이용하여 트레이스 공식을 증명할 수
+있다. 다음을 얻는다.
+\begin{eqnarray*}
+V(\varphi) & = & \int_{C \times C} \Gamma_\varphi.\Delta \\
+& = & \int_{C \times C} \Gamma_\varphi. \left(\Delta_C - \{c_0\} \times C - C
+\times \{c_0\}\right) + \int_{C \times C} \Gamma_\varphi. \left(\{c_0\} \times C
++ C \times \{c_0\}\right).
+\end{eqnarray*}
+한편
+$$
+\int_{C \times C} \Gamma_\varphi. \left(\{c_0\} \times C + C \times
+\{c_0\}\right)
+=
+1 + \deg \varphi
+$$
+이고, 다른 한편 $R$은 풍부한 인자
+$\{c_0\} \times C + C \times \{c_0\}$의 직교여공간이므로
+\begin{eqnarray*}
+& &
+\int_{C \times C} \Gamma_\varphi. \left(\Delta_C - \{c_0\} \times C - C \times
+\{c_0\}\right) \\
+& = &
+\int_{C \times C} \left(\Gamma_\varphi - C \times \{\varphi(c_0)\} -
+\sum_{\varphi(c) = c_0} \{c\} \times C \right). \left(\Delta_C - \{c_0\} \times
+C - C \times \{c_0\}\right) \\
+& = & - \text{Tr}_J (\varphi^* \circ \text{id}_J).
+\end{eqnarray*}
+정리하면
+$$
+V(\varphi) = 1 - \text{Tr}_J (\varphi^*) + \deg \varphi
+$$
+이며, 이것이 트레이스 공식이다.
+
+\begin{lemma}
+\label{lemma-weil-mod}
+Theorem \ref{theorem-weil-trace-formula}의 상황을 생각하고,
+$\ell$을 $k$에서 가역인 소수라 하자. 그러면
+$$
+\sum\nolimits_{i = 0}^2
+(-1)^i
+\text{Tr}(\varphi^* |_{H^i (C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}})})
+=
+V(\varphi) \mod \ell^n.
+$$
+\end{lemma}
+
+\begin{proof}[증명 개요]
+먼저 모든 $i$에 대해
+$H^i(C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}})$가 자유
+$\mathbf{Z}/\ell^n \mathbf{Z}$-가군이므로 이 주장이 의미를 갖는다는
+점을 관찰하자. 0차 코호몰로지 위의 $\varphi^*$의 트레이스는
+1이다. $k$에서 원시 $\ell^n$제곱 단위근을 택하면 기하학적
+프로베니우스의 작용과 양립하는 동형
+$$
+H^i(C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}}) \cong H^i(C, \mu_{\ell^n})
+$$
+% P08-E158
+을 얻는다. 한편 $H^1(C, \mu_{\ell^n}) = J[\ell^n]$이다. 따라서
+\begin{eqnarray*}
+\text{Tr}(\varphi^* |_{H^1 (C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}})})) & =
+& \text{Tr}_J (\varphi^*) \mod \ell^n \\
+& = & \text{Tr}_{\mathbf{Z}/\ell^n \mathbf{Z}} (\varphi^* : J[\ell^n] \to
+J[\ell^n]).
+\end{eqnarray*}
+또한 $H^2(C, \mu_{\ell^n}) = \Pic(C)/\ell^n\Pic(C) \cong
+\mathbf{Z}/\ell^n \mathbf{Z}$이고, 여기서 $\varphi^*$는
+$\deg \varphi$배 사상이다. 따라서
+$$
+\text{Tr} (\varphi^*|_{H^2 (C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}})}) =
+\deg \varphi.
+$$
+그러므로
+$$
+\sum_{i = 0}^2 (-1)^i
+\text{Tr}(\varphi^* |_{H^i (C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}})}) =
+1 - \text{Tr}_J(\varphi^*) + \deg \varphi \mod \ell^n
+$$
+이며, 결론은 Theorem \ref{theorem-weil-trace-formula}에서 따른다.
+\end{proof}
+
+\noindent
+이 결과를 증명하는 다른 방법은
+$$
+X \mapsto H^* (X, \mathbf{Q}_\ell) =
+\mathbf{Q}_\ell \otimes
+\lim_n H^*(X, \mathbf{Z}/\ell^n\mathbf{Z})
+$$
+가 $k$ 위의 매끄러운 사영 다양체들 위에 Weil 코호몰로지 이론을
+정의함을 보이는 것이다. 그러면 트레이스 공식
+$$
+V(\varphi) = \sum_{i = 0}^2 (-1)^i
+\text{Tr}(\varphi^* |_{H^i(C, \mathbf{Q}_\ell)})
+$$
+은 공리들의 형식적 귀결이다(이는 선형대수학의 연습문제이며,
+증명은 위상수학적 경우와 같다).
+
+
+
+
+%11.10.09
+\section{예비 사항과 일련의 보조정리}
+\label{section-preliminaries}
+
+\noindent
+기호:
+이 절에서 사용할 기호를 고정한다. $A$는 가환환,
+$\Lambda$는 상이 $\Lambda$의 중심에 놓이는 환 준동형
+$A\to \Lambda$가 주어진 (비가환일 수도 있는) 환으로 나타낸다.
+$G$를 유한군이라 하고, $\Gamma$를 {\it $G$의 $\mathbf{N}$에 의한
+모노이드 확장}이라 하자. 이는 완전열
+$$
+1\to G\to \tilde\Gamma\to \mathbf{Z}\to 1
+$$
+이 있고, $\Gamma$가 $\tilde\Gamma$의 원소들 중 상이 음이 아닌
+것들로 이루어진다는 뜻이다. 마지막으로 $P$를 $A[G]$-가군으로서
+유한 사영인 $A[\Gamma]$-가군, $M$을 $\Lambda$-가군으로서 유한
+사영인 $\Lambda[\Gamma]$-가군이라 하자.
+
+\medskip\noindent
+우리의 목표는 $P \otimes_A M$의 $G$-여불변량 위에서
+$1 \in \mathbf{N}$이 $\Lambda$-선형으로 작용할 때의 트레이스,
+즉 수
+$$
+\text{Tr}_{\Lambda}\left(1; \left(P \otimes_A M\right)_G\right) \in
+\Lambda^\natural.
+$$
+을 계산하는 것이다. 원소 $1\in \mathbf{N}$은 프로베니우스에
+대응할 것이다.
+
+\begin{lemma}
+\label{lemma-epsilon}
+$e\in G$를 항등원이라 하자. 사상
+$$
+\begin{matrix}
+\Lambda[G] & \longrightarrow & \Lambda^{\natural}\\
+\sum \lambda_g\cdot g & \longmapsto & \lambda_e
+\end{matrix}
+$$
+은 $\Lambda[G]^\natural$을 통해 인수분해된다. 유도된 사상을
+$\varepsilon : \Lambda[G]^\natural\to \Lambda^\natural$로 나타낸다.
+\end{lemma}
+
+\begin{proof}
+이 사상이 교환자들을 소멸시킴을 보여야 한다. 다음이 성립한다.
+$$
+\left(\sum\lambda_g g\right)\left(\sum\mu_g g\right)-\left(\sum \mu_g
+g\right)\left(\sum\lambda_g g\right)
+= \sum_g\left(\sum_{g_1g_2=g}
+\lambda_{g_1}\mu_{g_2}-\mu_{g_1}\lambda_{g_2}\right)g
+$$
+$e$의 계수는
+$$
+\sum_g\left(\lambda_g\mu_{g^{-1}}-\mu_g\lambda_{g^{-1}}\right) =
+\sum_g\left(\lambda_g\mu_{g^{-1}}-\mu_{g^{-1}}\lambda_g\right)
+$$
+이다. 이는 교환자들의 합이므로 $\Lambda^\natural$에서 영이다.
+\end{proof}
+
+\begin{definition}
+\label{definition-trace-G}
+$P$를 유한 사영 $\Lambda[G]$-가군이라 하고
+$f : P\to P$를 그 자기준동형이라 하자.
+$$
+\text{Tr}_{\Lambda}^G(f; P) := \varepsilon\left(\text{Tr}_{\Lambda[G]}(f;
+P)\right)
+$$
+을 {\it $P$ 위의 $f$의 $G$-트레이스}라 정의한다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-lambda-trace}
+$f : P\to P$를 유한 사영 $\Lambda[G]$-가군 $P$의 자기준동형이라 하자.
+그러면
+$$
+\text{Tr}_{\Lambda}(f; P) = \# G \cdot \text{Tr}_\Lambda^G(f; P).
+$$
+\end{lemma}
+
+\begin{proof}
+가법성에 의해 $P = \Lambda[G]$인 경우로 환원한다. 이 경우 $f$는
+$\Lambda[G]$의 어떤 원소 $\sum\lambda_g\cdot g$에 의한 오른쪽
+곱셈으로 주어진다. 기저 $(g)_{g \in G}$에 관하여 $f$의 행렬은
+$(g_1, g_2)$ 위치에서 계수 $\lambda_{g_2^{-1}g_1}$을 갖는다.
+특히 모든 대각 계수는 $\lambda_e$이고, 그러한 계수는 $\# G$개이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-A-module-structure}
+사상 $A\to \Lambda$는 $\Lambda^\natural$ 위에 $A$-가군 구조를
+정의한다.
+\end{lemma}
+
+\begin{proof}
+명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-diagonal-action-projective-module}
+$P$를 유한 사영 $A[G]$-가군이라 하고, $M$을 $\Lambda$-가군으로서
+유한 사영인 $\Lambda[G]$-가군이라 하자. 그러면 $G$의 대각 작용이
+유도하는 구조에 관하여 $P \otimes_A M$은 유한 사영
+$\Lambda[G]$-가군이다.
+\end{lemma}
+
+\noindent
+$M$의 구조 때문에 $P \otimes_A M$은 자연스럽게
+$\Lambda$-가군임에 유의하라. 대각 작용과 함께 이를 명시적으로
+쓰면
+$$
+\left(\sum\lambda_g g\right)\left(p \otimes m\right)
+=
+\sum g p \otimes \lambda_g g m.
+$$
+이다.
+
+\begin{proof}
+임의의 $\Lambda[G]$-가군 $N$에 대해
+$$
+\Hom_{\Lambda[G]}\left(P \otimes_A M, N\right)= \Hom_{A[G]}\left(P,
+\Hom_{\Lambda}(M, N)\right)
+$$
+이다. 여기서 $\Hom_{\Lambda}(M, N)$ 위의 $G$-작용은
+$(g\cdot \varphi)(m) = g \varphi (g^{-1} m) $로 주어진다. 이제
+오른쪽 항은 $P$와 $M$의 사영성 때문에 완전 함자들의 합성이므로
+충분하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-multiplicative-trace}
+Lemma \ref{lemma-diagonal-action-projective-module}에서와 같이 가정하고,
+$u\in \text{End}_{A[G]}(P)$ 및
+$v\in \text{End}_{\Lambda[G]}(M)$이라 하자. 그러면
+$$
+\text{Tr}_\Lambda^G \left(u \otimes v; P \otimes_A M\right) = \text{Tr}_A^G(u;
+P)\cdot \text{Tr}_\Lambda(v;M).
+$$
+\end{lemma}
+
+\begin{proof}[증명 개요]
+$P=A[G]$인 경우로 환원한다. 이 경우 $u$는 $A[G]$의 어떤 원소
+$a = \sum a_gg$에 의한 오른쪽 곱셈이며, 이를 $u = R_a$로 쓴다.
+$\Lambda[G]$-가군의 동형
+$$
+\begin{matrix}
+\varphi : & A[G]\otimes_A M & \cong & \left(A[G]\otimes_A M\right)'\\
+& g \otimes m & \longmapsto & g \otimes g^{-1}m
+\end{matrix}
+$$
+이 있다. 여기서 $\left(A[G]\otimes_A M\right)'$은 왼쪽
+$G$-작용과 $M$ 위의 $\Lambda$-선형성으로 주어진 가군 구조를 갖는다.
+이 구조의 운반은 $u \otimes v$를
+$\sum_ga_gR_g \otimes g^{-1}v$로 바꾼다. 다시 말해,
+$$
+\varphi \circ (u \otimes v) \circ \varphi^{-1}
+=
+\sum_ga_gR_g \otimes g^{-1}v.
+$$
+이다. 등식의 양변을 명시적으로 계산하면
+$$
+\text{Tr}_\Lambda^G\left(\sum_g a_gR_g \otimes g^{-1}v\right) = a_e\cdot
+\text{Tr}_\Lambda(v; M).
+$$
+임을 보여야 한다. 이는 $M=\Lambda$인 경우로 환원하여
+$$
+\text{Tr}_\Lambda^G\left(a_gR_g \otimes g^{-1}v\right) =
+\left\{
+\begin{matrix}
+0 & \text{ 만일 } g\neq e\\
+a_e\text{Tr}_\Lambda\left(v; M\right) & \text{ 만일 }g = e
+\end{matrix}
+\right.
+$$
+임을 보이면 된다.
+\end{proof}
+
+\noindent
+기호:
+모노이드 확장 $1 \to G\to \Gamma\to \mathbf{N} \to 1$과
+$\gamma\in \Gamma$를 생각하자.
+이때 $Z_\gamma = \{g\in G | g\gamma = \gamma g\}$로 쓴다.
+
+\begin{lemma}
+\label{lemma-gamma-z-gamma-trace}
+$P$를 $\Lambda[G]$-가군으로서 유한 사영인
+$\Lambda[\Gamma]$-가군이라 하고, $\gamma \in \Gamma$라 하자. 그러면
+$$
+\text{Tr}_{\Lambda}(\gamma, P) =
+\# Z_\gamma \cdot \text{Tr}_\Lambda^{Z_\gamma}\left(\gamma, P\right).
+$$
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-lambda-trace}에서 바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-weak-trace}
+$P$를 $A[G]$-가군으로서 유한 사영인 $A[\Gamma]$-가군이라 하자.
+$M$을 $\Lambda$-가군으로서 유한 사영인
+$\Lambda[\Gamma]$-가군이라 하자. 그러면
+$$
+\text{Tr}_{\Lambda}^{Z_\gamma}(\gamma, P \otimes_A M) =
+\text{Tr}_A^{Z_\gamma}(\gamma, P)\cdot \text{Tr}_\Lambda(\gamma, M).
+$$
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-multiplicative-trace}에서 곧바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-trivial-trace}
+$P$를 $\Lambda[G]$-가군으로서 유한 사영인
+$\Lambda[\Gamma]$-가군이라 하자. 그러면 여불변량
+$P_G = \Lambda \otimes_{\Lambda[G]} P$는
+$\Gamma/G = \mathbf{N}$의 작용을 갖춘 유한 사영 $\Lambda$-가군을
+이룬다. 또한
+$$
+\text{Tr}_\Lambda(1; P_G) =
+\sum\nolimits'_{\gamma \mapsto 1} \text{Tr}_\Lambda^{Z_\gamma}(\gamma, P)
+$$
+이다. 여기서 $\sum_{\gamma\mapsto 1}'$은 $\Gamma$ 안의
+$G$-공액류들에 대해 합을 취한다는 뜻이다.
+\end{lemma}
+
+\begin{proof}[증명 개요]
+먼저 양변에 $\# G$를 곱한 뒤 이 식을 증명한다.
+$$
+\# G\cdot \text{Tr}_\Lambda(1; P_G)
+= \text{Tr}_\Lambda(\sum\nolimits_{\gamma\mapsto 1} \gamma, P_G)
+= \text{Tr}_\Lambda(\sum\nolimits_{\gamma\mapsto 1} \gamma, P)
+$$
+둘째 등식은 가환 삼각형
+$$
+\xymatrix{
+P^G \ar[rd]_a & & P_G \ar[ll]^c \\
+& P \ar[ur]_b
+}
+$$
+을 생각하면 따른다. 여기서 $a$는 표준 포함, $b$는 표준 전사이고
+$c = \sum_{\gamma \mapsto 1} \gamma$이다. 그러면
+$$
+(\sum\nolimits_{\gamma \mapsto 1} \gamma) |_P = a \circ c \circ b
+\quad\text{and}\quad
+(\sum\nolimits_{\gamma \mapsto 1} \gamma) |_{P_G} = b \circ a \circ c
+$$
+이므로 두 사상의 트레이스는 같다. 이어서
+$$
+\# G\cdot \text{Tr}_\Lambda(1; P_G)
+=
+{\sum_{\gamma\mapsto 1}}'
+\frac{\# G}{\# Z_\gamma}\text{Tr}_\Lambda(\gamma, P)
+= \# G{\sum_{\gamma\mapsto 1}}' \text{Tr}_\Lambda^{Z_\gamma}(\gamma, P).
+$$
+을 얻는다. 증명을 마치려면 어떤 보편성 논증을 사용하여
+$\Lambda$가 꼬임이 없는 경우로 환원한다. 자세한 내용은
+\cite{SGA4.5}를 보라.
+\end{proof}
+
+\begin{remark}
+\label{remark-content-trivial-trace}
+Lemma \ref{lemma-weak-trace}의 공식이 담고 있는 내용을 설명해 보자.
+자명한 $\Gamma$-가군으로 본 $\Lambda$가
+$\Lambda[G]$-가군으로서 유한 사영인 어떤
+$\Lambda[\Gamma]$-가군 $P_i$들에 의한 유한 분해
+$
+0\to P_r\to \ldots \to P_1 \to P_0\to \Lambda\to 0
+$
+을 갖는다고 가정하자. 이 경우
+$$
+H_*\left(\left(P_\bullet\right)_G\right) =
+\text{Tor}_*^{\Lambda[G]}\left(\Lambda, \Lambda\right) = H_*(G, \Lambda)
+$$
+이고
+$$
+\text{Tr}_\Lambda^{Z_\gamma}\left(\gamma, P_\bullet\right) =\frac{1}{\#
+Z_\gamma}\text{Tr}_\Lambda(\gamma, P_\bullet)=\frac{1}{\#
+Z_\gamma}\text{Tr}(\gamma, \Lambda) = \frac{1}{\# Z_\gamma}.
+$$
+이다. 따라서 Lemma \ref{lemma-weak-trace}는
+$$
+\text{Tr}_\Lambda (1 , P_G)
+= \text{Tr}\left(1 |_{H_*(G, \Lambda)}\right)
+= {\sum_{\gamma\mapsto 1}}'\frac{1}{\# Z_\gamma}.
+$$
+이라고 말한다. 이는 스택 $BG$ 위의 점 개수로 해석할 수 있다.
+$\Lambda = \mathbf{F}_\ell$이고 $\ell$이 $\# G$와 서로 소이면,
+$H_*(G, \Lambda)$는 0차에서 $\mathbf{F}_\ell$이고
+(다른 차수에서는 $0$이다) 공식은
+$$
+1 =
+\sum\nolimits_{
+\frac{\sigma\text{-공액}}{\text{류}\langle\gamma\rangle}
+}
+\frac{1}{\# Z_\gamma} \mod \ell.
+$$
+이 된다. 이는 어떤 의미에서 $G$에 대한 “자명한” 트레이스 공식이다.
+뒤에서 (\ref{equation-trace-formula})가 어떤 경우에는 특정 유형의
+군에 대한 매우 비자명한 트레이스 공식으로 보일 수 있음을 알게 된다.
+Section \ref{section-abstract-trace-formula}를 보라.
+\end{remark}
+
+
+
+
+
+%11.12.09
+\section{트레이스 공식의 증명}
+\label{section-proof-trace-formula}
+
+\begin{theorem}
+\label{theorem-trace-formula-again}
+$k$를 유한체라 하고, $X$를 $k$ 위의 차원 1 이하인 유한형 분리
+스킴이라 하자. $\Lambda$를 그 크기가 $k$의 크기와 서로 소인
+유한환이라 하고, $K\in D_{ctf}(X, \Lambda)$라 하자. 그러면
+\begin{equation}
+\label{equation-trace-formula-again}
+\text{Tr}(\pi_X^* |_{R\Gamma_c(X_{\bar k}, K)})
+=
+\sum\nolimits_{x\in X(k)}
+\text{Tr}(\pi_x |_{K_{\bar x}})
+\end{equation}
+이 $\Lambda^{\natural}$ 안에서 성립한다.
+\end{theorem}
+
+\noindent
+이 명제에 관한 몇 가지 언급은 Remark
+\ref{remark-on-trace-formula-again}을 보라. 기호를 간단히 하기 위해
+(\ref{equation-trace-formula-again})의 오른쪽 항을
+$$
+T'(X, K) =
+\sum\nolimits_{x\in X(k)}
+\text{Tr}(\pi_x |_{K_{\bar x}})
+$$
+로 쓰고, 왼쪽 항을
+% P08-E160
+$$
+T''(X, K)
+=\text{Tr}(\pi_x^* |_{R\Gamma_c(X_{\bar k}, K)})
+$$
+로 쓴다.
+
+\begin{proof}[Theorem \ref{theorem-trace-formula-again}의 증명]
+증명은 여러 단계로 진행한다.
+
+\medskip\noindent
+Step 1. {\it $j : \mathcal{U}\hookrightarrow X$를 여집합이
+$Y = X - \mathcal{U}$인 열린 몰입이라 하고
+$i : Y \hookrightarrow X$라 하자. 그러면
+$T''(X, K) = T''(\mathcal{U}, j^{-1} K)+ T''(Y, i^{-1}K)$이고
+$T'(X, K) = T'(\mathcal{U}, j^{-1} K)+ T'(Y, i^{-1}K)$이다.}
+
+\medskip\noindent
+$T'$에 대해서는 명백하다. $T''$에 대해서는 완전열
+$$
+0\to j_!j^{-1} K \to K \to i_* i^{-1} K \to 0
+$$
+을 사용하여 $K$ 위의 여과를 얻는다. 이로부터
+등급 조각이 $j_!j^{-1}K$와 $i_*i^{-1}K$인 대상
+$\widetilde K \in DF(X, \Lambda)$를 얻으며, 두 등급 조각 모두
+$D_{ctf}(X, \Lambda)$에 속한다. 그러면 여과 유도 범주의 추상적
+형식론에 의해(참고문헌 삽입)
+$R\Gamma_c(X_{\bar k}, K)\in DF_{perf}(\Lambda)$이고,
+% P08-E161
+$DF_{perf}(\Lambda)$ 안에서 $\pi_x^*$를 갖춘다.
+여과 복합체 위의 트레이스에 관한 논의에 의해(참고문헌 삽입)
+% P08-E162
+\begin{eqnarray*}
+\text{Tr}(\pi_X^* |_{R\Gamma_c(X_{\bar k}, K)})
+& = & \text{Tr}(\pi_X^* |_{R\Gamma_c(X_{\bar k}, j_!j^{-1}K)}) +
+\text{Tr}(\pi_X^* |_{R\Gamma_c(X_{\bar k}, i_*i^{-1}K)}) \\
+& = & T''(U, i^{-1}K) + T''(Y, i^{-1}K).
+\end{eqnarray*}
+
+\noindent
+Step 2. {\it $\dim X\leq 0$이면 정리가 성립한다.}
+
+\medskip\noindent
+실제로 이 경우
+$$
+R\Gamma_c(X_{\bar k}, K) = R\Gamma(X_{\bar k}, K) = \Gamma(X_{\bar k}, K) =
+\bigoplus\nolimits_{\bar x \in X_{\bar k}} K_{\bar x}
+$$
+이고, 이는 자기준동형 $\pi_X^*$를 갖춘다.
+$\pi_X : X_{\bar k}\to X_{\bar k}$의 고정점은 정확히
+$k$-유리점 $x \in X(k)$ 위에 놓이는 점
+$\bar x \in X_{\bar k}$들이므로
+$$
+\text{Tr}\big(\pi_X^*|_{R\Gamma_c(X_{\bar k}, K)}\big) =
+\sum\nolimits_{x \in X(k)} \text{Tr}(\pi_x|_{K_{\bar x}}).
+$$
+을 얻으며, 이것이 원하는 결과이다.
+
+\medskip\noindent
+Step 3. {\it 다음 조건을 만족하는 경우에 등식
+$T'(\mathcal{U}, \mathcal{F}) = T''(\mathcal{U}, \mathcal{F})$를
+증명하면 충분하다.
+\begin{itemize}
+\item $\mathcal{U}$는 $k$ 위의 매끄러운 기약 아핀 곡선이고,
+\item $\mathcal{U}(k) = \emptyset$이며,
+\item $K=\mathcal{F}$는 $\mathcal{U}$ 위의 유한 국소상수
+$\Lambda$-가군 층으로서 그 줄기(들)가 유한 사영
+$\Lambda$-가군이고,
+\item $\Lambda$는 소수 $\ell$의 어떤 거듭제곱에 의해 소멸하며
+$\ell \in k^*$이다.
+\end{itemize}
+}
+
+\medskip\noindent
+실제로 Step 2에 의해 임의의 유한한 점 집합을 버릴 수 있다. 유리점은
+유한 개뿐이므로, 유리점이 없다고 가정할 수 있다\footnote{이 지점에서
+배경에 사악한 웃음소리가 들려야 한다.}. 필요하다면 기약 성분들로
+넘어가고 나쁜 점들을 버림으로써 $\mathcal{U}$가 매끄럽고 기약이며
+아핀이라고 가정할 수 있다. $\mathcal{F}$에 관한 가정은
+$D_{ctf}(X, \Lambda)$의 정의를 풀어 쓰면 나오고, $\Lambda$에 관한
+가정은 그 일차 분해를 생각하면 나온다.
+
+\medskip\noindent
+증명의 나머지에서는 다음 상황을 생각한다.
+$$
+\xymatrix{
+\mathcal{V} \ar[d]_f \ar[r] & Y \ar[d]^{\bar f} \\
+\mathcal{U} \ar[r] & X
+}
+$$
+여기서 $\mathcal{U}$는 위와 같고, $f$는 유한 에탈 갈루아 피복이며,
+$\mathcal{V}$는 연결이고 수평 화살표들은 사영 완비화이다.
+$G=\text{Aut}(\mathcal{V}|\mathcal{U})$라 쓰자. 또한
+$f^{-1}\mathcal{F} =\underline M$이 상수라고 가정할 수 있으며,
+가군 $M = \Gamma(\mathcal{V}, f^{-1}\mathcal{F})$은
+$\Lambda$ 위에서 유한 사영인 $\Lambda[G]$-가군이다. 이는 자명한
+모노이드 확장
+% P08-E165
+$$
+1\to G\to \Gamma = G \times \mathbf{N}\to \mathbf{N}\to 1.
+$$
+에 대응한다. 이 맥락에서 위의 환원들을 사용하면
+$T''(\mathcal{U}, \mathcal{F}) = 0$임을 보여야 한다.
+
+\medskip\noindent
+Step 4. {\it $f_*f^{-1}\mathcal{F}$ 위에는 $G$의 자연스러운 작용이
+있고, 트레이스 사상 $f_*f^{-1}\mathcal{F}\to \mathcal{F}$는
+동형을 정의한다.}
+$$
+(f_*f^{-1}\mathcal{F})\otimes_{\Lambda[G]} \Lambda =
+(f_*f^{-1}\mathcal{F})_G \cong \mathcal{F}.
+$$
+
+\medskip\noindent
+이를 증명하려면 기하점에서 모든 것을 풀어 쓰기만 하면 된다.
+
+\medskip\noindent
+Step 5. {\it $n\gg 0$에 대해
+$A = \mathbf{Z}/\ell^n \mathbf{Z}$라 하자. 그러면 대각 $G$-작용에
+관하여 $f_*f^{-1}\mathcal{F} \cong (f_*\underline A)
+\otimes_{\underline A} \underline M$이다.}
+
+\medskip\noindent
+Step 6. {\it 표준 동형
+$(f_*\underline A \otimes_{\underline A} \underline M)
+\otimes_{\Lambda[G]} \underline \Lambda \cong \mathcal{F}$가 있다.
+}
+
+\medskip\noindent
+실제로 $\mathcal{F}$에 대한 사영성 가정 때문에 이는 유도 텐서곱이다.
+
+\medskip\noindent
+Step 7. {\it 표준 동형
+% P08-E164
+$$
+R\Gamma_c(\mathcal{U}_{\bar k}, \mathcal{F})
+= (R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)\otimes_A^\mathbf{L}
+M)\otimes_{\Lambda[G]}^\mathbf{L} \Lambda,
+$$
+이 있으며, 이는 $\pi^*_\mathcal{U}$의 작용과 양립한다.
+}
+
+\medskip\noindent
+이는 보편계수정리, 즉 $R\Gamma_c$가
+$\otimes^\mathbf{L}$와 가환한다는 사실과 $\Lambda$-가군으로서
+$\mathcal{F}$의 평탄성에서 나온다.
+
+\medskip\noindent
+다음이 성립한다.
+\begin{eqnarray*}
+\text{Tr}(
+\pi_\mathcal{U}^* |_{R\Gamma_c(\mathcal{U}_{\bar k}, \mathcal{F})})
+& = &
+{\sum_{g \in G}}'
+\text{Tr}_{\Lambda}^{Z_g}
+\left(
+(g, \pi_\mathcal{U}^*)
+|_{R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)\otimes_A^\mathbf{L} M}
+\right) \\
+& = &
+{\sum_{g\in G}}'
+\text{Tr}_A^{Z_g}
+(
+(g, \pi_\mathcal{U}^*) |_{R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)}
+)
+\cdot
+\text{Tr}_\Lambda(g|_M)
+\end{eqnarray*}
+여기서 $\Gamma$는 $G$를 통해
+$R\Gamma_c(\mathcal{U}_{\bar k}, \mathcal{F})$에 작용하고,
+$(e, 1)$은 $\pi_\mathcal{U}^*$를 통해 작용한다. 따라서 모노이드
+확장은 $\Gamma = G \times \mathbf{N} \to \mathbf{N}$,
+$\gamma \mapsto 1$로 주어진다. 첫째 등식은 Lemma
+\ref{lemma-trivial-trace}에서, 둘째 등식은 Lemma
+\ref{lemma-weak-trace}에서 따른다.
+
+\medskip\noindent
+Step 8. {\it
+$\text{Tr}_A^{Z_g}((g, \pi_\mathcal{U}^*)
+|_{R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)}) \in A$가
+$\Lambda$에서 영으로 간다는 것을 보이면 충분하다.
+}
+
+\medskip\noindent
+다음을 상기하자.
+\begin{eqnarray*}
+\# Z_g \cdot \text{Tr}_A^{Z_g}((g, \pi_\mathcal{U}^*)
+|_{R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)})
+& = & \text{Tr}_A((g, \pi_\mathcal{U}^*)
+|_{R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)})\\
+& = &
+\text{Tr}_A((g^{-1}\pi_\mathcal{V})^* |_{R\Gamma_c(\mathcal{V}_{\bar k}, A)}).
+\end{eqnarray*}
+첫째 등식은 Lemma \ref{lemma-gamma-z-gamma-trace}이고, 둘째 등식은
+$f$의 유한성과 $A$ 위에서만 트레이스를 취한다는 사실을 사용한
+Leray 스펙트럼 열이다. 이제 $n \gg 0$에 대해
+$A=\mathbf{Z}/\ell^n\mathbf{Z}$이고 어떤 (고정된) $a$에 대해
+$\# Z_g = \ell^a$이므로 다음 결과를 보이면 충분하다.
+
+\medskip\noindent
+Step 9. {\it
+% P08-E166
+$\text{Tr}_A((g^{-1}\pi_\mathcal{V})^* |_{R\Gamma_c(\mathcal{V}, A)}) = 0$이
+$A$ 안에서 성립한다.}
+
+\medskip\noindent
+가법성에 의해 다시
+% P08-E167
+\begin{eqnarray*}
+& \text{Tr}_A((g^{-1}\pi_\mathcal{V})^* |_{R\Gamma_c(\mathcal{V}_{\bar k} A)})
++
+\text{Tr}_A((g^{-1}\pi_\mathcal{V})^*
+|_{R\Gamma_c(Y-\mathcal {V})_{\bar k}, A)}) \\
+& =
+\text{Tr}_A((g^{-1}\pi_Y)^* |_{R\Gamma(Y_{\bar k}, A)})
+\end{eqnarray*}
+을 얻는다. 뒤의 트레이스는 Weil의 트레이스 공식
+Theorem \ref{theorem-weil-trace-formula}에 의해 $Y$ 위의
+$g^{-1}\pi_Y$의 고정점 수이다. 또한 Step 2에서 이미 증명한
+0차원 경우에 의해
+$$
+\text{Tr}_A((g^{-1}\pi_\mathcal{V})^*|_{R\Gamma_c(Y-\mathcal{V})_{\bar k}, A)})
+$$
+는 $(Y-\mathcal{V})_{\bar k}$ 위의 $g^{-1}\pi_Y$의 고정점 수이다.
+따라서
+$$
+\text{Tr}_A((g^{-1}\pi_\mathcal{V})^* |_{R\Gamma_c(\mathcal{V}_{\bar k}, A)})
+$$
+는 $\mathcal{V}_{\bar k}$ 위의 $g^{-1}\pi_Y$의 고정점 수이다.
+그러나 그러한 점은 없다. 실제로
+$\bar y\in Y_{\bar k}$가 $g^{-1}\pi_Y$에 의해 고정되면
+$\bar f(\bar y) \in X_{\bar k}$는 $\pi_X$에 의해 고정된다.
+그런데 $\mathcal{U}$에는 $k$-유리점이 없으므로
+$\bar f(\bar y)\in (X-\mathcal{U})_{\bar k}$이어야 하고, 따라서
+$\bar y\notin \mathcal{V}_{\bar k}$이다. 이는 모순이다.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{remark}
+\label{remark-on-trace-formula-again}
+Theorem \ref{theorem-trace-formula-again}에 관해 몇 가지 언급을 한다.
+\begin{enumerate}
+\item
+이 공식은 모든 차원에서 성립한다. 고유 기저변환 등을 사용하는
+d\'evissage 보조정리에 의해 그 일반성에서도 현재의 명제로 환원된다.
+\item
+복합체 $R\Gamma_c(X_{\bar k}, K)$는 $k$ 위에서 사영이고 차원 1
+이하인 $\bar X$로의 열린 몰입 $j : X \hookrightarrow \bar X$를
+택하고
+$$
+R\Gamma_c(X_{\bar k}, K) := R\Gamma(\bar X_{\bar k}, j_!K).
+$$
+로 놓아 정의한다. 이는 $\bar X$의 선택과 무관하다
+(여기에 참고문헌 삽입). $H^i_c(X_{\bar k}, K)$를
+$R\Gamma_c(X_{\bar k}, K)$의 $i$차 코호몰로지 군으로 정의한다.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}
+\label{remark-stronger}
+우리가 한 일은 모두 환원이고 대부분 대수였지만, 트레이스 공식
+Theorem \ref{theorem-trace-formula-again}은 상수 계수에만 적용되는
+Weil의 기하학적 트레이스 공식(Theorem
+\ref{theorem-weil-trace-formula})보다 훨씬 강하다. 전자는 계수계
+(층)에도 적용되기 때문이다.
+\end{remark}
+
+
+%11.17.09
+\section{응용}
+\label{section-applications}
+
+\noindent
+이제 트레이스 공식의 증명을 개괄했으니, 이를 실제로 사용해 보자.
+
+
+
+
+
+\section{l-진 층에 관하여}
+\label{section-l-adic-sheaves}
+
+\begin{definition}
+\label{definition-l-adic-sheaf}
+$X$를 뇌터 스킴이라 하자. $X$ 위의 {\it
+$\mathbf{Z}_\ell$-층}, 또는 간단히 {\it $\ell$-진 층}
+$\mathcal{F}$는 다음 조건을 만족하는 역계
+$\left\{\mathcal{F}_n\right\}_{n\geq 1}$이다.
+\begin{enumerate}
+\item
+$\mathcal{F}_n$은 $X_\etale$ 위의 구성 가능
+$\mathbf{Z}/\ell^n\mathbf{Z}$-가군이고,
+\item
+전이 사상 $\mathcal{F}_{n+1}\to \mathcal{F}_n$은 동형
+$\mathcal{F}_{n+1} \otimes_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}
+\mathbf{Z}/\ell^n\mathbf{Z} \cong \mathcal{F}_n$을 유도한다.
+\end{enumerate}
+각 $\mathcal{F}_n$이 국소상수이면 $\mathcal{F}$가 {\it lisse}라고
+한다. 이와 같은 대상들의 {\it 사상}은 단지 역계의 사상이다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-eventually-constant}
+$\{\mathcal{G}_n\}_{n\geq 1}$을 구성 가능
+$\mathbf{Z}/\ell^n\mathbf{Z}$-가군들의 역계라 하자.
+모든 $k\geq 1$에 대해 사상
+$$
+\mathcal{G}_{n+1}/\ell^k \mathcal{G}_{n+1}\to \mathcal{G}_n /\ell^k
+\mathcal{G}_n
+$$
+이 모든 $n\gg 0$에서 동형이라고 가정하자(경계는 $k$에 의존할 수
+있다). 다시 말해 계
+$\{\mathcal{G}_n/\ell^k\mathcal{G}_n\}_{n\geq 1}$이 종국 상수라고
+가정하고, 이에 대응하는 층을 $\mathcal{F}_k$라 하자. 그러면 계
+$\left\{\mathcal{F}_k\right\}_{k\geq 1}$은 $X$ 위의
+$\mathbf{Z}_\ell$-층을 이룬다.
+\end{lemma}
+
+\begin{proof}
+증명은 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-l-adic-abelian}
+$X$ 위의 $\mathbf{Z}_\ell$-층들의 범주는 아벨 범주이다.
+\end{lemma}
+
+\begin{proof}
+$\mathbf{Z}_\ell$-층들의 사상
+$\Phi = \left\{\varphi_n\right\}_{n\geq 1} :
+\left\{\mathcal{F}_n\right\}
+\to
+\left\{\mathcal{G}_n\right\}$가 주어졌다고 하자.
+$$
+\Coker(\Phi) =
+\left\{
+\Coker\left(\mathcal{F}_n \xrightarrow{\varphi_n} \mathcal{G}_n\right)
+\right\}_{n\geq 1}
+$$
+로 놓고, 역계
+$$
+\left\{
+\bigcap_{m\geq n}
+\Im\left(\Ker(\varphi_m) \to \Ker(\varphi_n)\right)
+\right\}_{n \geq 1}.
+$$
+에 Lemma \ref{lemma-eventually-constant}을 적용한 결과를
+$\Ker(\Phi)$라 한다. 이것이 아벨 범주를 정의한다는 점은 독자에게
+맡긴다.
+\end{proof}
+
+\begin{example}
+\label{example-kernel}
+$X=\Spec(\mathbf{C})$라 하고
+$\Phi : \mathbf{Z}_\ell\to \mathbf{Z}_\ell$을 $\ell$배 사상이라 하자.
+더 정확히는
+$$
+\Phi = \left\{ \mathbf{Z}/\ell^n\mathbf{Z} \xrightarrow{\ell}
+\mathbf{Z}/\ell^n\mathbf{Z}\right\}_{n \geq 1}.
+$$
+이다. 핵을 계산하기 위해 역계
+$$
+\ldots\to \mathbf{Z}/\ell\mathbf{Z}\xrightarrow{0}
+\mathbf{Z}/\ell\mathbf{Z}\xrightarrow{0}\mathbf{Z}/\ell\mathbf{Z}.
+$$
+을 생각한다. 상은 언제나 영이므로 $\Ker(\Phi)$는 계로서 영이다.
+\end{example}
+
+\begin{remark}
+\label{remark-stalk-l-adic-sheaf}
+$\mathcal{F} = \left\{\mathcal{F}_n\right\}_{n\geq 1}$이 $X$ 위의
+$\mathbf{Z}_\ell$-층이고 $\bar x$가 기하점이면
+$M_n = \left\{\mathcal{F}_{n, \bar x}\right\}$은 유한
+$\mathbf{Z}/\ell^n\mathbf{Z}$-가군들의 역계이며,
+$M_{n+1}\to M_n$은 전사이고
+$M_n = M_{n+1}/\ell^n M_{n+1}$이다. 따라서
+$$
+M = \lim_n M_n = \lim \mathcal{F}_{n, \bar x}
+$$
+은 유한 $\mathbf{Z}_\ell$-가군이다. 이는 Algebra, Lemmas
+\ref{algebra-lemma-limit-complete}와
+\ref{algebra-lemma-finite-over-complete-ring}, 그리고
+$M/\ell M = M_1$이 $\mathbf{F}_\ell$ 위에서 유한이라는 사실에서
+따른다. 그러므로 어떤 $r, t\geq 0$, $e_i\geq 1$에 대해
+$M\cong \mathbf{Z}_\ell^{\oplus r} \oplus \oplus_{i = 1}^t
+\mathbf{Z}_\ell/\ell^{e_i}\mathbf{Z}_\ell$이다.
+가군 $M = \mathcal{F}_{\bar x}$를 $\bar x$에서 $\mathcal{F}$의
+{\it 줄기}라 한다.
+\end{remark}
+
+\begin{definition}
+\label{definition-torsion-l-adic-sheaf}
+어떤 $n$에 대해 $\ell^n : \mathcal{F} \to \mathcal{F}$가 영사상이면
+$\mathbf{Z}_\ell$-층 $\mathcal{F}$가 {\it 꼬임}이라고 한다.
+$X$ 위의 $\mathbf{Q}_\ell$-층들의 아벨 범주는
+$\mathbf{Z}_\ell$-층들의 아벨 범주를 꼬임 층들의 Serre 부분범주로
+나눈 몫이다. 다시 말해 그 대상들은 $X$ 위의
+$\mathbf{Z}_\ell$-층들이고, 그러한 두 대상
+$\mathcal{F}, \mathcal{G}$에 대해
+$$
+\Hom_{\mathbf{Q}_\ell} \left(\mathcal{F}, \mathcal{G} \right) =
+\Hom_{\mathbf{Z}_\ell} \left(\mathcal{F}, \mathcal{G}\right)
+\otimes_{\mathbf{Z}_\ell} \mathbf{Q}_\ell.
+$$
+이다. 몫함자(포함의 오른쪽 수반함자)를
+$\mathcal{F} \mapsto \mathcal{F} \otimes \mathbf{Q}_\ell$로 나타낸다.
+$\mathcal{F}'$가 $\mathbf{Z}_\ell$-층이고
+$\mathcal{F} = \mathcal{F}' \otimes \mathbf{Q}_\ell$이며 $\bar x$가
+기하점이면, $\bar x$에서 $\mathcal{F}$의 {\it 줄기}는
+$\mathcal{F}_{\bar x} =
+\mathcal{F}'_{\bar x} \otimes \mathbf{Q}_\ell$이다.
+\end{definition}
+
+\begin{remark}
+\label{remark-torsion-stalks}
+$\mathbf{Z}_\ell$-층은 뇌터 스킴 위에서만 정의되므로, 그것이 꼬임일
+필요충분조건은 모든 줄기가 꼬임인 것이다.
+\end{remark}
+
+\begin{definition}
+\label{definition-cohomology-l-adic}
+$X$가 대수적으로 닫힌 체 $k$ 위의 유한형 분리 스킴이고
+$\mathcal{F} = \left\{\mathcal{F}_n\right\}_{n\geq 1}$이 $X$ 위의
+$\mathbf{Z}_\ell$-층이면
+$$
+H^i(X, \mathcal{F}) := \lim_n H^i(X, \mathcal{F}_n)
+\quad\text{and}\quad
+H_c^i(X, \mathcal{F}) := \lim_n H_c^i(X, \mathcal{F}_n).
+$$
+로 정의한다. $\mathcal{F}'$가 $\mathbf{Z}_\ell$-층이고
+$\mathcal{F} = \mathcal{F}'\otimes \mathbf{Q}_\ell$이면
+$$
+H_c^i(X , \mathcal{F}) := H_c^i(X,
+\mathcal{F}')\otimes_{\mathbf{Z}_\ell}\mathbf{Q}_\ell.
+$$
+로 놓는다. 이들을 계수가 $\mathcal{F}$인 $X$의
+{\it $\ell$-진 코호몰로지}라 한다.
+\end{definition}
+
+
+
+
+
+\section{L-함수}
+\label{section-L-function}
+
+\begin{definition}
+\label{definition-L-function-finite-ring}
+$X$를 유한체 $k$ 위의 유한형 스킴이라 하자. $\Lambda$를 그 위수가
+$k$의 표수와 서로 소인 유한환이라 하고, $\mathcal{F}$를
+$X_\etale$ 위의 구성 가능 평탄 $\Lambda$-가군이라 하자. 이때
+$$
+L(X, \mathcal{F}) :=
+\prod\nolimits_{x\in |X|}
+\det(1 - \pi_x^*T^{\deg x} |_{\mathcal{F}_{\bar x}})^{-1} \in \Lambda [[ T ]]
+$$
+로 놓는다. 여기서 $|X|$는 $X$의 닫힌점들의 집합,
+$\deg x = [\kappa(x): k]$이고, $\bar x$는 $x$ 위에 놓이는 기하점이다.
+이 정의는 $\mathcal{F}$를 $K \in D_{ctf}(X, \Lambda)$로 바꾼 경우로
+명백히 일반화된다. 이를 $\mathcal{F}$의 {\it $L$-함수}라 한다.
+\end{definition}
+
+\begin{remark}
+\label{remark-T}
+직관적으로 $p^f = \# k$일 때 $T$를 $T = t^f$로 생각해야 한다.
+그러면 정의들은 바탕체의 크기와 무관해진다.
+\end{remark}
+
+\begin{definition}
+\label{definition-L-function-l-adic}
+이제 $\mathcal{F}$가 $X$ 위의 $\mathbf{Q}_\ell$-층이라고 가정하자.
+이 경우
+$$
+L(X, \mathcal{F}) :=
+\prod\nolimits_{x \in |X|}
+\det(1 - \pi_x^*T^{\deg x} |_{\mathcal{F}_{\bar x}})^{-1}
+\in \mathbf{Q}_\ell[[T]].
+$$
+로 정의한다. 주어진 차수의 점은 유한 개이므로 이 곱은 수렴함에
+유의하라. 이를 $\mathcal{F}$의 {\it $L$-함수}라 한다.
+\end{definition}
+
+
+
+
+\section{코호몰로지적 해석}
+\label{section-L-cohomological}
+
+\noindent
+Grothendieck은 다음과 같이 $L$-함수를 해석했다.
+
+\begin{theorem}[유한 계수]
+\label{theorem-A}
+$X$를 유한체 $k$ 위의 유한형 스킴이라 하자. $\Lambda$를 그 위수가
+$k$의 표수와 서로 소인 유한환이라 하고, $\mathcal{F}$를
+$X_\etale$ 위의 구성 가능 평탄 $\Lambda$-가군이라 하자. 그러면
+$$
+L(X, \mathcal{F}) =
+\det(1 - \pi_X^*\ T |_{R\Gamma_c(X_{\bar k}, \mathcal{F})})^{-1}
+\in \Lambda[[T]].
+$$
+\end{theorem}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\noindent
+지금까지는 각 코호몰로지 군
+$H^i_c(X_{\bar k}, \mathcal{F})$이 자유인지조차 알지 못한다.
+
+\begin{theorem}[아딕 층]
+\label{theorem-B}
+$X$를 유한체 $k$ 위의 유한형 스킴이라 하고, $\mathcal{F}$를
+$X$ 위의 $\mathbf{Q}_\ell$-층이라 하자. 그러면
+$$
+L(X, \mathcal{F}) =
+\prod\nolimits_i
+\det(1 - \pi_X^*T |_{H_c^i(X_{\bar k} , \mathcal{F})})^{(-1)^{i + 1}}
+\in \mathbf{Q}_\ell[[T]].
+$$
+\end{theorem}
+
+\begin{proof}
+아래에서 개요를 제시한다.
+\end{proof}
+
+\begin{remark}
+\label{remark-which-is-harder}
+우리는 트레이스에 관한 이론만 일부 전개했고 행렬식에 관한 이론은
+전개하지 않았으므로 Theorem \ref{theorem-A}는
+Theorem \ref{theorem-B}보다 증명하기 어렵다. 우리는 뒤의 정리만
+증명하겠다. 앞의 정리는 \cite{SGA4.5}를 보라. 또한
+$\ell$-꼬임이 없으므로 $\mathbf{Z}_\ell$ 계수에 대해 이보다 더
+일반적인 이 정리의 판본은 없음에 유의하라.
+\end{remark}
+
+\noindent
+Theorem \ref{theorem-B}의 증명을 트레이스 공식으로 환원한다.
+$\mathbf{Q}_\ell$의 표수가 0이므로 로그 미분을 취한 뒤의 등식을
+증명하면 충분하다. 더 정확히는 양변에
+$T\frac{d}{dT} \log$를 적용한다. 한편
+\begin{align*}
+T \frac{d}{dT} \log L(X, \mathcal{F})
+& =
+T\frac{d}{dT} \log
+\prod_{x \in |X|} \det(1 - \pi_x^* T^{\deg x} |_{\mathcal{F}_{\bar x}})^{-1} \\
+& =
+\sum_{x \in |X|} T \frac{d}{dT} \log
+( \det(1 - \pi_x^* T^{\deg x} |_{\mathcal{F}_{\bar x}})^{-1}) \\
+& =
+\sum_{x \in |X|} \deg x
+\sum_{n \geq 1} \text{Tr}((\pi_x^n)^* |_{\mathcal{F}_{\bar x}}) T^{n\deg x}
+\end{align*}
+이다. 마지막 등식은 임의의 가환환 $\Lambda$와 유한 사영
+$\Lambda$-가군 $M$의 임의의 자기준동형 $f$에 대해 성립하는 공식
+$$
+T\frac{d}{dT}\log\left(\det\left(1-fT|_M\right)^{-1}\right) = \sum_{n\geq 1}
+\text{Tr}(f^n|_M)T^n
+$$
+에서 나온다. 다른 한편, 같은 공식을 다시 사용하면
+\begin{align*}
+& T\frac{d}{dT} \log\left(
+\prod\nolimits_i
+\det(1-\pi_X^*T |_{H_c^i\left(X_{\bar k} , \mathcal{F}\right)})^{(-1)^{i+1}}
+\right) \\
+& =
+\sum\nolimits_i (-1)^i \sum\nolimits_{n \geq 1}
+\text{Tr}\left((\pi_X^n)^* |_{H_c^i(X_{\bar k},\mathcal{F})}\right) T^n
+\end{align*}
+을 얻는다. 이제 $T$의 거듭제곱들의 계수를 비교하고 뫼비우스
+반전 공식을 사용하면 Theorem \ref{theorem-B}가 등식
+% P08-E170
+$$
+\sum_{d | n} d \sum_{x \in |X| \atop \deg x = d}
+\text{Tr}((\pi_X^{n/d})^* |_{\mathcal{F}_{\bar x}}) =
+\sum_i (-1)^i \text{Tr}((\pi^n_X)^* |_{H^i_c(X_{\bar k}, \mathcal{F})}).
+$$
+의 귀결임을 알 수 있다. $k_n$을 $k$의 차수 $n$ 확장이라 쓰고,
+$X_n = X \times_{\Spec k} \Spec(k_n)$ 및
+$_n\mathcal{F} = \mathcal{F}|_{X_n}$라 쓰면, 이는
+$$
+\sum_{x \in X_n(k_n)} \text{Tr}(\pi_X^* |_{_n\mathcal{F}_{\bar x}})
+=
+\sum_i (-1)^i \text{Tr}((\pi^n_X)^* |_{H^i_c({(X_n)}_{\bar k}, _n\mathcal{F})})
+$$
+로 귀착되며, 이는 Theorem \ref{theorem-C}의 귀결이다.
+
+%11.19.09
+
+
+\begin{theorem}
+\label{theorem-D}
+$X/k$는 위와 같다고 하고, $\Lambda$를
+$\#\Lambda \in k^*$인 유한환이라 하며
+$K\in D_{ctf}(X, \Lambda)$라 하자. 그러면
+$R\Gamma_c(X_{\bar k}, K)\in D_{perf}(\Lambda)$이고
+$$
+\sum_{x\in X(k)}\text{Tr}\left(\pi_x |_{K_{\bar x}}\right) =
+\text{Tr}\left(\pi_X^* |_{R\Gamma_c(X_{\bar k}, K )}\right).
+$$
+\end{theorem}
+
+\begin{proof}
+$\dim X \leq 1$일 때는 이미 이를 증명했음(참고문헌)에 유의하라.
+일반적인 경우는 그 경우와 고유 기저변환 정리에서 쉽게 따른다.
+\end{proof}
+
+\begin{theorem}
+\label{theorem-C}
+$X$를 유한체 $k$ 위의 유한형 분리 스킴이라 하고
+$\mathcal{F}$를 $X$ 위의 $\mathbf{Q}_\ell$-층이라 하자. 그러면 모든
+$i$에 대해 $\dim_{\mathbf{Q}_\ell}H_c^i(X_{\bar k}, \mathcal{F})$는
+유한이고, $0\leq i \leq 2 \dim X$일 때에만 영이 아닐 수 있다.
+또한
+$$
+\sum_{x\in X(k)} \text{Tr}\left(\pi_x |_{\mathcal{F}_{\bar x}}\right) =
+\sum_i (-1)^i\text{Tr}\left(\pi_X^* |_{H_c^i(X_{\bar k}, \mathcal{F})}\right).
+$$
+\end{theorem}
+
+\begin{proof}
+이를 Theorem \ref{theorem-D}에서 유도하는 방법을 설명한다.
+먼저 몇 가지 에탈 코호몰로지 논증을 사용하여 증명을 대수적 명제로
+환원한 다음 그 명제를 증명한다.
+
+\medskip\noindent
+$\mathcal{F}$는 정리에서와 같다고 하자. $\mathcal{F}$를
+$\mathcal{F}'\otimes \mathbf{Q}_\ell$로 쓸 수 있다. 여기서
+$\mathcal{F}' = \left\{\mathcal{F}'_n\right\}$은 꼬임이 없는
+$\mathbf{Z}_\ell$-층, 즉 $\mathbf{Z}_\ell$-층들의 범주에서
+$\ell : \mathcal{F}'\to \mathcal{F}'$의 핵이 자명한 층이다.
+그러면 각 $\mathcal{F}_n'$은 $X_\etale$ 위의 평탄 구성 가능
+$\mathbf{Z}/\ell^n\mathbf{Z}$-가군이므로
+$\mathcal{F}'_n \in D_{ctf}(X, \mathbf{Z}/\ell^n\mathbf{Z})$이고
+$\mathcal{F}_{n+1}'
+\otimes^{\mathbf{L}}_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}
+\mathbf{Z}/\ell^n\mathbf{Z} = \mathcal{F}_n'$이다.
+$\mathcal{F}'_n$이 평탄하므로 마지막 등식은 보통의
+(비유도) 텐서곱에 대해서도 성립한다(같은 등식이다). 따라서
+\begin{enumerate}
+\item
+복합체 $K_n = R\Gamma_c\left(X_{\bar k}, \mathcal{F}_n'\right)$은
+완전이고 $D(\mathbf{Z}/\ell^n\mathbf{Z})$ 안의 자기준동형
+$\pi_n : K_n\to K_n$을 갖추며,
+\item
+$D_{perf}(\mathbf{Z}/\ell^n\mathbf{Z})$ 안에서 식별
+$$
+K_{n+1}
+\otimes^{\mathbf{L}}_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}
+\mathbf{Z}/\ell^n\mathbf{Z}
+=
+K_n
+$$
+이 있고, 이는 자기준동형 $\pi_{n+1}$ 및 $\pi_n$과 양립하며
+(\cite[Rapport 4.12]{SGA4.5}를 보라),
+\item
+등식 $\text{Tr}\left(\pi_X^* |_{K_n}\right) =
+\sum_{x\in X(k)} \text{Tr}\left(\pi_x |_{(\mathcal{F}'_n)_{\bar x}}\right)$가
+성립하고,
+\item
+각 $x\in X(k)$에 대해 원소들
+$\text{Tr}(\pi_x |_{\mathcal{F}'_{n, \bar x}}) \in \mathbf{Z}/\ell^n\mathbf{Z}$
+은 $\mathbf{Z}_\ell$의 한 원소를 이루며, 이는
+$\text{Tr}(\pi_x |_{\mathcal{F}_{\bar x}}) \in \mathbf{Q}_\ell$과 같다.
+\end{enumerate}
+따라서 다음 대수 보조정리를 증명하면 충분하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-piece-together}
+$K_n\in D_{perf}(\mathbf{Z}/\ell^n\mathbf{Z})$,
+$\pi_n : K_n\to K_n$ 및 $\pi_{n+1}$, $\pi_n$과 양립하는 동형
+$\varphi_n :
+K_{n+1} \otimes^\mathbf{L}_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}
+\mathbf{Z}/\ell^n\mathbf{Z}
+\to K_n$이 주어졌다고 하자. 그러면
+\begin{enumerate}
+\item
+원소들 $t_n = \text{Tr}(\pi_n |_{K_n})\in
+\mathbf{Z}/\ell^n\mathbf{Z}$은 $\mathbf{Z}_\ell$의 원소
+$t_\infty = \{t_n\}$를 이루고,
+\item
+% P08-E171
+$\mathbf{Z}_\ell$-가군 $H_\infty^i = \lim_n H^i(k_n)$은 유한이며
+유한 개의 $i$에 대해서만 영이 아니고,
+\item
+연산자 $H^i(\pi_n): H^i(K_n)\to H^i(K_n)$들은 양립하며,
+$$
+\sum (-1)^i \text{Tr}(
+\pi_\infty^i |_{H_\infty^i \otimes_{\mathbf{Z}_\ell}\mathbf{Q}_\ell}) =
+t_\infty.
+$$
+를 만족하는 $\pi_\infty^i : H_\infty^i\to H_\infty^i$를 정의한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathbf{Z}/\ell^n\mathbf{Z}$는 국소환이고 $K_n$은 완전이므로, 각
+$K_n$은 유한 자유 $\mathbf{Z}/\ell^n \mathbf{Z}$-가군들의 유한
+복합체 $K_n^\bullet$로 나타낼 수 있으며, 사상
+$K_n^p \to K_n^{p+1}$의 상은 $\ell K_n^{p+1}$에 포함된다. 그러한
+복합체는 동형을 제외하면 유일하다는 사실이 알려져 있다. 또한
+$\pi_n$은 복합체의 사상
+$\pi_n^\bullet : K_n^\bullet\to K_n^\bullet$로 나타낼 수 있으며
+(이는 호모토피를 제외하면 유일하다), 같은 이유로 동형
+$\varphi_n : K_{n+1} \otimes_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}^{\mathbf{L}}
+\mathbf{Z}/\ell^n\mathbf{Z}\to K_n$은 복합체의 사상
+$$
+\varphi_n^\bullet :
+K_{n+1}^\bullet
+\otimes_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}
+\mathbf{Z}/\ell^n\mathbf{Z} \to K_n^\bullet.
+$$
+으로 나타난다. 실제로 $\varphi_n^\bullet$은 복합체의 동형이므로
+다음을 알 수 있다.
+\begin{itemize}
+\item
+$n$과 무관한 $a, b\in \mathbf{Z}$가 존재하여 모든
+$i\notin[a, b]$에 대해 $K_n^i = 0$이고,
+\item
+$K_n^i$의 계수는 $n$과 무관하다.
+\end{itemize}
+따라서 가군 $K_\infty^i = \lim_n \{K_n^i, \varphi_n^i\}$은 유한
+자유 $\mathbf{Z}_\ell$-가군이고, $K_\infty^\bullet$은 유한 자유
+$\mathbf{Z}_\ell$-가군들의 유한 복합체이다. 영이 아닌 항들의
+개수에 대한 귀납법으로
+$H^i\left(K_\infty^\bullet\right) = \lim_n
+H^i\left(K_n^\bullet\right)$임을 증명할 수 있다(유계가 아닌
+복합체에 대해서는 참이 아니다). 따라서
+$H_\infty^i = H^i\left(K_\infty^\bullet\right)$은 유한
+$\mathbf{Z}_\ell$-가군이다. 이로써 {\it ii}를 증명했다.
+보조정리의 나머지를 증명하려면 도식들
+% P08-E172
+$$
+\xymatrix{
+{K_{n+1}^\bullet} \ar[d]_{\pi_{n+1}^\bullet} \ar[r]^{\varphi_n^\bullet} &
+{K_n^\bullet} \ar[d]^{\pi_n^\bullet} \\
+{K_{n+1}^\bullet} \ar[r]_{\varphi_n^\bullet} & {K_n^\bullet.}
+}
+$$
+이 가환하지 않을 가능성을 극복해야 한다. 그러나 이 도식은 유도
+범주에서 가환하므로 호모토피까지 가환한다. 귀납적으로
+% P08-E174
+$n\geq 2$에 대해 $\pi_n^\bullet$을 이 도식들이 가환하게 하는
+호모토픽한 복합체 사상들로 바꾼다. 구체적으로
+$h^i : K_{n+1}^i \to K_n^{i-1}$가 호모토피, 즉
+$$
+\pi_n^\bullet \circ \varphi_n^\bullet -
+\varphi_n^\bullet \circ \pi_{n + 1}^\bullet = dh + hd,
+$$
+라 하자. 그러면 $h^i$를 올리는
+$\tilde h^i : K_{n+1}^i\to K_{n+1}^{i-1}$를 택한다.
+$K_{n+1}^i$가 자유이고 $K_{n+1}^{i-1}\to K_n^{i-1}$가 전사이므로
+이는 가능하다. 이어서 $\pi_n^\bullet$을
+$$
+\tilde\pi_{n+1}^\bullet = \pi_{n+1}^\bullet + d\tilde h+\tilde hd.
+$$
+로 정의된 $\tilde\pi_n^\bullet$로 바꾼다. 이렇게
+$\{\pi_n^\bullet\}$를 택하면 위의 도식들은 가환하고, 사상들은
+$K_\infty^\bullet$의 자기준동형
+$\pi_\infty^\bullet = \lim_n\pi_n^\bullet$을 정의한다.
+그러면 {\it i}는 명백하다. 원소들
+$t_n = \sum(-1)^i \text{Tr}\left(\pi_n^i |_{K_n^i}\right)$은
+$\mathbf{Z}_\ell$의 원소 $t_\infty$를 이룬다. 또한
+\begin{align*}
+t_\infty
+& =
+\sum (-1)^i \text{Tr}_{\mathbf{Z}_\ell}(\pi_\infty^i |_{K_\infty^i}) \\
+& =
+\sum (-1)^i \text{Tr}_{\mathbf{Q}_\ell}(
+\pi_\infty^i |_{K_\infty^i \otimes_{\mathbf{Z}_\ell}\mathbf{Q}_\ell}) \\
+& =
+\sum (-1)^i \text{Tr}(
+\pi_\infty |_{H^i(K_\infty^\bullet \otimes \mathbf{Q}_\ell)})
+\end{align*}
+이다. 마지막 등식은 $\mathbf{Q}_\ell$이 체이므로 복합체
+$K_\infty^\bullet \otimes \mathbf{Q}_\ell$이 그 코호몰로지
+$H^i(K_\infty^\bullet \otimes \mathbf{Q}_\ell)$에 준동형이라는
+사실에서 따른다. 후자는 또한
+% P08-E175
+$H^i(K_\infty^\bullet)\otimes_{\mathbf{Z}}\mathbf{Q}_\ell = H_\infty^i \otimes
+\mathbf{Q}_\ell$과 같다. 이로써 보조정리와 Theorem
+\ref{theorem-C}의 증명이 끝난다.
+\end{proof}
+
+
+\section{위에 보충해야 할 사항 목록}
+\label{section-list-skipped}
+
+\noindent
+지금까지 강의에서 증명을 생략한 내용은 다음과 같다.
+\begin{enumerate}
+\item 곡선과 그 야코비 다양체,
+\item 고유 기저변환 정리,
+\item $R\Gamma_c$에 관한 충분하지 않은 논의,
+\item 더 일반적으로, 유한형 $f : X \to S$가 주어지고 그 원천이 분리이며
+$S$-준사영일 때 에탈 층 위의 $Rf_!$에 관한 논의,
+\item $\otimes^{\mathbf{L}}$에 관한 논의,
+\item $R\Gamma_c$가 $\otimes^{\mathbf{L}}$와 가환하는 이유에 관한 논의.
+\end{enumerate}
+
+
+
+
+
+
+%11.24.09
+\section{L-함수의 예}
+\label{section-examples-L-functions}
+
+\noindent
+곡선에 대한 Theorem \ref{theorem-B}를 사용하여 $L$-함수의 예들을 든다.
+
+
+
+
+
+\section{상수층}
+\label{section-L-function-constant-sheaf}
+
+\noindent
+$k$를 유한체, $X$를 $k$ 위의 매끄럽고 기하적으로 기약인 곡선이라 하고,
+$\mathcal{F} = \underline{\mathbf{Q}_\ell}$을 상수층이라 하자. $\bar x$가
+$X$의 기하점이면 갈루아 가군
+$\mathcal{F}_{\bar x} = \mathbf{Q}_\ell$은 자명이므로
+$$
+\det(1-\pi_x^*\ T^{\deg x} |_{\mathcal{F}_{\bar x}})^{-1} =
+\frac{1}{1-T^{\deg x}}.
+$$
+이다. Theorem \ref{theorem-B}를 적용하면
+\begin{align*}
+L(X, \mathcal{F})
+& =
+\prod_{i = 0}^2
+\det(1 - \pi_X^*T |_{H_c^i(X_{\bar k}, \mathbf{Q}_\ell)})^{(-1)^{i+1}} \\
+& =
+\frac{\det(1 - \pi_X^*T |_{H_c^1(X_{\bar k}, \mathbf{Q}_\ell)})}{
+\det(1 - \pi_X^*T |_{H_c^0(X_{\bar k}, \mathbf{Q}_\ell)})
+\cdot \det(1 - \pi_X^*T |_{H_c^2(X_{\bar k}, \mathbf{Q}_\ell)})}.
+\end{align*}
+을 얻는다. 뒤의 식을 계산하기 위해 두 경우를 구분한다.
+
+
+\medskip\noindent
+{\bf 사영적 경우.}
+$X$가 사영적이라고 하자. 그러면 $H_c^i(X_{\bar k}, \mathbf{Q}_\ell) =
+H^i(X_{\bar k}, \mathbf{Q}_\ell)$이고
+$$
+H^i(X_{\bar k}, \mathbf{Q}_\ell) =
+\left\{
+\begin{matrix}
+\mathbf{Q}_\ell & \pi_X^* = 1 & \text{조건 }i = 0, \\
+\mathbf{Q}_\ell^{2g} & \pi_X^* = ? & \text{조건 }i = 1, \\
+\mathbf{Q}_\ell & \pi_X^* = q & \text{조건 }i = 2.
+\end{matrix}
+\right.
+$$
+이다. $H^2$ 위의 $\pi_X^*$ 작용에 대한 식별은
+\'Etale Cohomology, Lemma \ref{etale-cohomology-lemma-pullback-on-h2-curve}와
+$\pi_X$의 차수가 $q = \#(k)$라는 사실에서 나온다.
+차수 1 코호몰로지 위의 $\pi_X^*$ 작용에 관해서는 알려진 바가 많지 않다.
+$\bar{\mathbf{Q}}_\ell$에서의 그 고윳값을
+$\alpha_1, \ldots, \alpha_{2g}$라 하자. 이들을 모두 합치면
+Theorem \ref{theorem-B}는 등식
+$$
+\prod\nolimits_{x \in |X|} \frac{1}{1 - T^{\deg x}} =
+\frac{\det(1- \pi_X^* T|_{H^1(X_{\bar k}, \mathbf{Q}_\ell)})}{(1-T)(1-qT)} =
+\frac{(1 - \alpha_1 T) \ldots (1 - \alpha_{2g}T)}{(1-T)(1-qT)}
+$$
+을 주며, 여기서 다음 결과를 얻는다.
+
+\begin{lemma}
+\label{lemma-count-points-projective}
+$X$를 유한체 $k$ 위의 매끄럽고 사영적이며 기하적으로 기약인 곡선이라 하자.
+그러면 다음이 성립한다.
+\begin{enumerate}
+\item $L$-함수 $L(X, \mathbf{Q}_\ell)$은 유리함수이다.
+\item $H^1(X_{\bar k}, \mathbf{Q}_\ell)$ 위의 $\pi_X^*$의 고윳값
+$\alpha_1, \ldots, \alpha_{2g}$는 $\ell$에 무관한 대수적 정수이다.
+\item $[k_n : k] = n$일 때 $k_n$ 위의 $X$의 유리점 개수는
+$$
+\# X(k_n) = 1 - \sum\nolimits_{i = 1}^{2g}\alpha_i^n + q^n,
+$$
+이다.
+\item 각 $i$에 대해 $|\alpha_i| < q$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3)은 $X \otimes k_n$ 위의 $\mathcal{F} =
+\underline{\mathbf{Q}_\ell}$에 Theorem \ref{theorem-C}를 적용한 것이다.
+(4)에는 다음 결과를 사용한다.
+\end{proof}
+
+\begin{exercise}
+\label{exercise-powers}
+$\alpha_1, \ldots, \alpha_n \in \mathbf{C}$라 하자. 양의 실수축을 포함하고
+$C_\varepsilon = \{ z \in
+\mathbf{C} \ | \ |\arg z| < \varepsilon \}$ 꼴인 임의의 원뿔 부채꼴에서
+$\varepsilon > 0$이면, $\alpha_1^k, \ldots, \alpha_n^k \in
+C_\varepsilon$가 되게 하는 정수 $k \geq 1$이 존재한다.
+\end{exercise}
+
+\noindent
+이제 모든 $i$에 대해 $|\alpha_i| \leq q$임을 증명하라. 그런 다음
+복소수에 관한 초등적 고찰을 사용하여(소수 정리의 증명에서와 같이)
+$|\alpha_i| < q$임을 증명하라. 실제로 리만 가설은 모든 $i$에 대해
+$|\alpha_i| = \sqrt{q}$라고 말한다. 이 주제로 나중에 돌아올 것이다.
+
+\medskip\noindent
+{\bf 아핀인 경우.}
+이제 $X$가 아핀이라고 하고,
+$X= \bar X-\left\{x_1, \ldots, x_n\right\}$라 쓰자. 여기서
+$j : X \hookrightarrow \bar X$는 사영 비특이 완비화이다. 그러면
+$H_c^0(X_{\bar k}, \mathbf{Q}_\ell) = 0$이고 $H_c^2(X_{\bar k},
+\mathbf{Q}_\ell) = H^2(\bar X_{\bar k}, \mathbf{Q}_\ell)$이므로
+Theorem \ref{theorem-B}는
+$$
+L(X, \mathbf{Q}_\ell) = \prod_{x \in |X|}\frac{1}{1 - T^{\deg x}} =
+\frac{\det(1-\pi_X^*T |_{H_c^1(X_{\bar k}, \mathbf{Q}_\ell)})}{1 - qT}.
+$$
+가 된다. 한편 앞의 경우는
+\begin{eqnarray*}
+L(X, \mathbf{Q}_\ell) & = & L(\bar X,
+\mathbf{Q}_\ell)\prod_{i = 1}^n\left(1-T^{\deg x_i}\right) \\
+& = & \frac{\prod_{i = 1}^n(1-T^{\deg
+x_i})\prod_{j = 1}^{2g}(1-\alpha_jT)}{(1-T)(1-qT)}.
+\end{eqnarray*}
+을 준다. 따라서
+$\dim H_c^1(X_{\bar k}, \mathbf{Q}_\ell) =
+2g+\sum_{i = 1}^n \deg(x_i)-1$이고,
+% P08-E176
+차수 1 코호몰로지에 작용하는 $\pi_{\bar X}^*$의 고윳값
+$\alpha_1, \ldots, \alpha_{2g}$는 1의 거듭제곱근임을 알 수 있다.
+더 정확히 말하면 각 $x_i$는 모든 $\deg(x_i)$차 1의 거듭제곱근을 한 벌
+주고, 그중 1 하나를 생략한다. 이를 연접층으로 직접 보기 위해
+$\bar X$ 위의 짧은 완전열
+$$
+0\to j_!\mathbf{Q}_\ell\to \mathbf{Q}_\ell\to\bigoplus_{i = 1}^n
+\mathbf{Q}_{\ell, x_i}\to 0.
+$$
+을 생각하자. 코호몰로지 긴 완전열은
+$$
+0\to \mathbf{Q}_\ell \to \bigoplus_{i = 1}^n \mathbf{Q}_\ell^{\oplus \deg x_i}
+\to H_c^1(X_{\bar k}, \mathbf{Q}_\ell) \to H_c^1(\bar X_{\bar k},
+\mathbf{Q}_\ell)\to 0
+$$
+이다. 여기서 $\bigoplus_{i = 1}^n \mathbf{Q}_\ell^{\oplus
+\deg x_i}$ 위의 프로베니우스 작용은 각 항의 순환 치환이며,
+$H_c^2(X_{\bar k}, \mathbf{Q}_\ell) = H_c^2(\bar X_{\bar k}, \mathbf{Q}_\ell)$이다.
+
+
+
+\section{르장드르 족}
+\label{section-legendre-family}
+
+\noindent
+$k$를 홀수 표수의 유한체라 하고,
+$X = \Spec(k[\lambda, \frac{1}{\lambda(\lambda - 1)}])$라 하자.
+아핀 방정식 $y^2 = x(x - 1)(x - \lambda)$을 갖는
+$\mathbf{P}^2_X$ 위의 타원곡선족 $f : E \to X$를 생각하자. 다음과 같이 놓는다.
+$\mathcal{F} = Rf_*^1\mathbf{Q}_\ell =
+\left\{R^1f_*\mathbf{Z}/\ell^n\mathbf{Z}\right\}_{n\geq 1} \otimes
+\mathbf{Q}_\ell$로 둔다. 이 상황에서는 다음이 성립한다.
+\begin{itemize}
+\item 각 $n \geq 1$에 대해 층 $R^1f_*(\mathbf{Z}/\ell^n\mathbf{Z})$은
+유한 국소 상수이다. 실제로 이는 $\mathbf{Z}/\ell^n\mathbf{Z}$ 위의
+랭크가 2인 자유 가군이다.
+\item 계 $\{R^1f_*\mathbf{Z}/\ell^n\mathbf{Z}\}_{n\geq 1}$은 lisse
+$\ell$-진 층이다.
+\item 모든 $x\in |X|$에 대해
+$\det(1 - \pi_x\ T^{\deg x} |_{\mathcal{F}_{\bar x}}) =
+(1 - \alpha_x T^{\deg x})(1 - \beta_x T^{\deg x})$이다. 여기서
+$\alpha_x, \beta_x$는 $H^1(E_{\bar x}, \mathbf{Q}_\ell)$ 위에 작용하는
+$E_x$의 기하학적 프로베니우스의 고윳값이다.
+\end{itemize}
+$E_x$는 $k$ 위가 아니라 $\kappa(x)$ 위에서만 정의됨에 유의하라.
+이 사실들의 증명에는 고유 기저변환 정리와 매끄러운 사상의 국소 비순환성을
+사용한다. 자세한 내용은 \cite{SGA4.5}를 보라. 따라서
+$$
+L(E/X) := L(X, \mathcal{F}) = \prod_{x\in |X|}
+\frac{1}{(1-\alpha_xT^{\deg x})(1-\beta_xT^{\deg x })} .
+$$
+Theorem \ref{theorem-B}를 적용하면
+$$
+L(E/X) =
+\prod_{i = 0}^2
+\det\left(1 - \pi_X^*T |_{H_c^i(X_{\bar k}, \mathcal{F})}\right)^{(-1)^{i+1}},
+$$
+을 얻으며, 특히 이것이 유리함수임을 알 수 있다. 또한
+$H_c^0(X_{\bar k}, \mathcal{F}) = H_c^2(X_{\bar
+k}, \mathcal{F}) = 0$임을 보이는 것은 비교적 쉬우므로 단지
+% P08-E177
+$$
+L(E/X) = \det(1 - \pi_X^*T |_{H_c^1(X, \mathcal{F})}).
+$$
+를 얻는다.
+이 행렬식을 명시적으로 계산하기 위해 $\mathbf{Q}_\ell$ 위의 고유 사상
+$f : E \to X$에 대한 Leray 스펙트럼 열, 즉
+$$
+H_c^i(X_{\bar k}, R^jf_*\mathbf{Q}_\ell) \Rightarrow H_c^{i+j}(E_{\bar
+k}, \mathbf{Q}_\ell)
+$$
+을 생각하자. 이 스펙트럼 열은 퇴화한다.
+$f_*\mathbf{Q}_\ell = \mathbf{Q}_\ell$이고
+$R^1f_*\mathbf{Q}_\ell = \mathcal{F}$이다. 층
+$R^2f_*\mathbf{Q}_\ell = \mathbf{Q}_\ell(-1)$은 $\mathbf{Q}_\ell$의
+{\it Tate 비틀림}이다. 즉, 이는 $\mathbf{Q}_\ell$ 층으로서
+$\bar x$에서의 줄기 위 갈루아 작용이 $\#\kappa(x)$배로 주어지는 층이다.
+따라서 모든 $n\geq 1$에 대해
+\begin{align*}
+\# E(k_n)
+& =
+\sum\nolimits_i (-1)^i
+\text{Tr}({\pi_E^n}^* |_{H_c^i(E_{\bar k}, \mathbf{Q}_\ell)}) \\
+& =
+\sum\nolimits_{i, j} (-1)^{i+j}
+\text{Tr}({\pi^n_X}^* |_{H_c^i(X_{\bar k}, R^jf_*\mathbf{Q}_\ell)}) \\
+& =
+(q^n - 2) +
+\text{Tr}({\pi_X^n}^* |_{H_c^1(X_{\bar k}, \mathcal{F})}) + q^n(q^n - 2) \\
+& =
+q^{2n} - q^n - 2 +
+\text{Tr}({\pi_X^n}^* |_{H_c^1(X_{\bar k}, \mathcal{F})})
+\end{align*}
+이다. 첫째 등식은 Theorem \ref{theorem-C}에서, 둘째 등식은
+Leray 스펙트럼 열에서, 셋째 등식은 $f$에 의한
+$\mathbf{Q}_\ell$의 고차 직상을 써 내려가는 데서 따른다. 달리 쓰면
+$$
+\# E(k_n) = \sum_{x \in X(k_n)} \# E_x(k_n)
+$$
+이고 각 곡선에 트레이스 공식을 사용할 수도 있다. 단순히 세어서도
+$k_n$-유리점의 개수를 구할 수 있다. 영단면은 $q^n -2$개의 점을
+기여하므로($\lambda = 0, 1$인 점들은 생략한다)
+$$
+\# E(k_n) =
+q^n - 2 + \# \{y^2 = x(x - 1)(x - \lambda), \lambda\neq 0, 1\}.
+$$
+이다. 이제
+$$
+\begin{matrix}
+\# \{y^2 = x(x - 1)(x - \lambda),\ \lambda\neq 0, 1\} \\
+\\
+\quad =
+\# \{y^2 = x(x - 1)(x - \lambda)\text{, 주변공간 }\mathbf{A}^3\}
+- \# \{y^2 = x^2(x - 1)\} - \# \{y^2 = x(x - 1)^2\}\\
+\\
+\quad = \# \{\lambda = \frac{-y^2}{x(x - 1)} + x,\ x\neq 0, 1\} +
+\# \{y^2 = x(x - 1)(x - \lambda), x = 0, 1\} - 2(q^n - \varepsilon_n) \\
+\\
+\quad = q^n(q^n - 2)+2q^n - 2(q^n - \varepsilon_n)\\
+\\
+\quad = q^{2n}-2q^n+2\varepsilon_n
+\end{matrix}
+$$
+이다. 여기서 $-1$이 $k_n$에서 제곱이면 $\varepsilon_n = 1$이고,
+그렇지 않으면 0이다. 즉,
+$$
+\varepsilon_n = \frac{1}{2}\left(1+\left(\frac{-1}{k_n}\right)\right) =
+\frac{1}{2}\left(1+(-1)^{\frac{q^n - 1}{2}}\right).
+$$
+따라서 $ \# E(k_n) = q^{2n} - q^n - 2+ 2\varepsilon_n$이다.
+앞의 공식과 비교하면
+$$
+\text{Tr}({\pi_X^n}^* |_{H_c^1(X_{\bar k}, \mathcal{F})}) =
+2 \varepsilon_n = 1 + (-1)^{\frac{q^n - 1}{2}},
+$$
+을 얻는다. 복소수의 초등대수에 의해 이 식은 $-1$이 $k_n^*$에서
+제곱이면 $\dim H_c^1(X_{\bar k}, \mathcal{F}) = 2$이고 고윳값들이
+$1$과 $1$임을 함의한다. 따라서 이 경우
+$$
+L(E/X) = (1 - T)^2.
+$$
+이다.
+
+
+\section{지수합}
+\label{section-exponential-sums}
+
+\noindent
+수론의 표준적인 문제 하나는 다음 꼴의 합을 계산하는 것이다.
+$$
+S_{a, b}(p) = \sum_{x\in \mathbf{F}_p - \left\{0, 1\right\}} e^{\frac{2\pi
+ix^a(x - 1)^b}{p}}.
+$$
+우리의 맥락에서 이는 다음과 같이 코호몰로지적 합으로 해석할 수 있다.
+기저 스킴 $S = \Spec(\mathbf{F}_p[x, \frac{1}{x(x - 1)}])$과
+방정식 $y^{p - 1} = x^a(x - 1)^b$로 주어지는 $S$ 위의 아핀 곡선
+$f : X \to \mathbf{P}^1-\{0, 1, \infty\}$를 생각하자. 이는 군이
+$\mathbf{F}_p^*$인 유한 에탈 갈루아 피복이며, 다음 분해가 있다.
+$$
+f_*(\bar{\mathbf{Q}}_\ell^*) =
+\bigoplus_{\chi : \mathbf{F}_p^*\to \bar{\mathbf{Q}}_\ell^*} \mathcal{F}_\chi
+$$
+여기서 $\chi$는 $\mathbf{F}_p^*$의 지표들을 돌고,
+$\mathcal{F}_\chi$는 줄기 위에서 $\mathbf{F}_p^*$가 $\chi$를 통해 작용하는
+랭크 1의 lisse $\mathbf{Q}_\ell$-층이다. 이에 대응하는 분해
+$$
+H_c^1(X_{\bar k}, \mathbf{Q}_\ell) = \bigoplus_\chi H^1(\mathbf{P}_{\bar
+k}^1-\{0, 1, \infty\}, \mathcal{F}_\chi)
+$$
+를 얻는다. 지수합의 코호몰로지적 해석은 적절한 어떤 $\chi$에 대해
+$\mathbf{P}^1 - \{0, 1, \infty\}$ 위의 $\mathcal{F}_\chi$에 트레이스
+공식을 적용하여 주어진다. 그 식은
+$$
+S_{a, b}(p) =
+-\text{Tr}(\pi_X^*
+|_{H^1(\mathbf{P}_{\bar k}^1-\{0, 1, \infty\}, \mathcal{F}_\chi)}).
+$$
+이다. Weil의 일반 원리는 이 합에 얼마간의 상쇄가 있어야 함을 시사한다.
+리만--후르비츠 공식을 대략 적용하면
+$$
+2g_X-2 \approx -2 (p-1) + 3(p-2) \approx p
+$$
+이므로 $g_X\approx p/2$이다. 이는 또한 $\chi$-성분들이 작음을 시사한다.
+
+
+
+%12.01.09
+\section{기본군으로 나타낸 트레이스 공식}
+\label{section-trace-formula-fundamental-group}
+
+\noindent
+다음 절들에서는 곡선이 우연히 $\mathbf{P}^1$인 경우를 제외하고 트레이스
+공식을 곡선의 기본군만으로 완전히 다시 서술한다.
+
+
+
+
+\section{기본군}
+\label{section-fundamental-groups}
+
+\noindent
+이 내용은 기본군 장에서 더 자세히 논의한다. Fundamental Groups,
+Section \ref{pione-section-introduction}을 보라. $X$를 연결 스킴이라 하고
+$\overline{x}\to X$를 기하점이라 하자. 다음 함자를 생각하자.
+$$
+\begin{matrix}
+F_{\overline{x}}: &
+\text{ 유한 에탈 } \atop \text{ 기저가 } X &
+\longrightarrow & \text{ 유한 집합} \\
+&
+Y/X &
+\longmapsto &
+F_{\overline{x}}(Y) =
+\left\{\text{ 기하점 }\overline y \atop \text{ 원천이 } Y
+\text{이고 상이 }\overline{x}\right\} = Y_{\overline{x}}
+\end{matrix}
+$$
+다음과 같이 놓는다.
+$$
+\pi_1(X, \overline{x})
+=
+Aut(F_{\overline{x}})
+=
+\text{ 다음 함자의 자기동형 집합: }F_{\overline{x}}
+$$
+모든 유한 에탈 $Y \to X$에 대해 작용
+$$
+\pi_1(X, \overline{x}) \times F_{\overline{x}}(Y) \to F_{\overline{x}}(Y)
+$$
+이 있음에 유의하라.
+
+\begin{definition}
+\label{definition-open}
+$\text{Stab}(\overline y\in F_{\overline{x}}(Y))\subset \pi_1(X, \overline{x})$
+꼴의 부분군을 {\it 열린 부분군}이라 한다.
+\end{definition}
+
+\begin{theorem}[Grothendieck]
+\label{theorem-fundamental-group}
+$X$를 연결 스킴이라 하자.
+\begin{enumerate}
+\item $\pi_1(X, \overline{x})$ 위에 위상을 줄 수 있으며, 열린 부분군들은
+$e\in \pi_1(X, \overline x)$의 열린 근방들의 기본계를 이룬다.
+\item (1)의 위상을 주면 군 $\pi_1(X, \overline{x})$는 profinite 군이다.
+\item 함자
+$$
+\begin{matrix}
+\text{ 유한 스킴 } \atop \text{ 에탈 사상으로 향하는 }X & \to &
+\text{ 유한 이산 연속 } \atop \pi_1(X, \overline{x})\text{-집합}\\
+Y / X& \mapsto & F_{\overline{x}}(Y) \text{ 및 그 자연스러운 작용}
+\end{matrix}
+$$
+는 범주의 동치이다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\cite{SGA1}을 보라.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-integral-normal-fundamental-group}
+$X$를 정역 정규 뇌터 스킴이라 하자. $\overline y\to X$를 일반점
+$\eta\in X$ 위에 놓이는 대수적 기하점이라 하자. 그러면
+% P08-E178
+$$
+\pi_x(X, \overline \eta) = Gal(M/\kappa(\eta))
+$$
+이다. 여기서 $\kappa(\eta)$는 $X$의 함수체이고,
+$$
+\kappa(\overline \eta)\supset M\supset \kappa(\eta) = k(X)
+$$
+는 다음 성질을 갖는 최대 부분확대이다. 모든 유한 부분확대
+$M\supset L\supset \kappa(\eta)$에 대해 $L$ 안에서의 $X$의 정규화는
+$X$ 위 유한 에탈이다.
+\end{proposition}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\noindent
+{\bf 기점 변경.} $X$의 임의의 기하점
+$\overline{x}_1, \overline{x}_2$에 대해 섬유 함자들의 동형
+$$
+\mathcal{F}_{\overline{x}_1} \cong \mathcal{F}_{\overline{x}_2}
+$$
+이 존재한다. 이는 $\overline{x}_1$에서 $\overline{x}_2$로 가는 경로이다.
+이 경로에 의한 공액은 내부 작용을 제외하고 잘 정의되는 동형
+$$
+\pi_1(X, \overline{x}_1) \cong \pi_1(X, \overline{x}_2)
+$$
+을 준다.
+
+\medskip\noindent
+{\bf 함자성.} 연결 스킴의 임의의 사상 $X_1\to X_2$와 임의의
+$\overline{x}\in X_1$에 대해 표준 사상
+$$
+\pi_1(X_1, \overline{x}) \to \pi_1(X_2, \overline{x})
+$$
+이 있다. 왜 그런가? 섬유 함자 때문이다.
+
+\medskip\noindent
+{\bf 기저체.} $X$를 체 $k$ 위의 다형체라 하자. 그러면
+% P08-E179
+$$
+\pi_1(X, \overline{x}) \to
+\pi_1(Spec(k), \overline{x}) =^{\text{prop}} Gal(k^{\text{sep}}/k)
+$$
+을 얻는다. 이 사상이 전사일 필요충분조건은 $X$가 $k$ 위에서 기하적으로
+연결인 것이다. 따라서 기하적으로 연결인 경우 profinite 군들의 짧은 완전열
+$$
+1 \to \pi_1(X_{\overline{k}}, \overline{x}) \to
+\pi_1(X, \overline{x}) \to
+Gal(k^{\text{sep}}/k) \to 1
+$$
+을 얻는다. 여기서 $\pi_1(X_{\overline{k}}, \overline{x})$는 $X$의
+기하학적 기본군이고, $\pi_1(X, \overline{x})$는 $X$의 산술적 기본군이다.
+
+\medskip\noindent
+{\bf 비교.} $X$가 $\mathbf{C}$ 위의 다형체이면
+$$
+\pi_1(X, \overline{x}) =
+\text{ 다음 군의 profinite 완비화: }
+\pi_1(X(\mathbf{C})(\text{ 보통 위상}), x)
+$$
+이다. 여기서 $x\in X(\mathbf{C})$이다.
+
+\medskip\noindent
+{\bf 프로베니우스 원소들.} $X$를 유한체 $k$ 위의 다형체라 하고
+$\# k < \infty$라 하자. 임의의 닫힌점 $x \in X$에 대해
+$$
+F_x\in \pi_1(x, \overline{x}) =
+\text{Gal}(\kappa(x)^{\text{sep}}/\kappa(x))
+$$
+를 기하학적 프로베니우스라 하자. $\overline\eta$를 대수적 기하 일반점이라
+하자. 그러면
+$$
+\pi_1(X, \overline\eta) \leftarrow^{\cong}
+\pi_1(X, \overline{x})
+{\text{함자성} \atop \leftarrow} \pi_1(x, \overline{x})
+$$
+이다.
+
+\noindent
+다음은 쉬운 사실이다.
+% P08-E180
+$$
+\begin{matrix}
+\pi_1(X, \overline \eta) & \to^{\deg} \pi_1(\Spec(k), \overline \eta) * &
+= Gal(k^{sep}/k) \\
+& & || \\
+& & \widehat{\mathbf{Z}}\cdot F_{\Spec(k)} \\
+F_x & \mapsto & \deg(x)\cdot F_{\Spec(k)}
+\end{matrix}
+$$
+$\deg(x) = [\kappa(x):k]$임을 상기하라.
+
+\medskip\noindent
+{\bf 기본군과 lisse 층.}
+$X$를 연결 스킴, $\overline{x}$를 기하점이라 하자. 다음 범주의 동치들이 있다.
+$$
+\begin{matrix}
+(\Lambda\text{ 유한환}) &
+\text{유한 국소 상수 층 } 
+\atop \Lambda\text{-가군 값인 }X_\etale & \leftrightarrow &
+\text{ 유한(이산) }\Lambda\text{-가군}
+\atop \text{ 연속 }\pi_1(X, \overline{x})\text{-작용을 갖는 것}\\
+\\
+(\ell\text{ 소수}) & \text{ lisse }\ell\text{-진} \atop \text{ 층} &
+\leftrightarrow &
+\text{유한 생성 }\mathbf{Z}_\ell
+\text{-가군 }M\text{에 연속}
+\atop \pi_1(X, \overline{x})\text{-작용이 있고 }
+\ell\text{-진 위상의 가군 }M
+\end{matrix}
+$$
+특히 lisse $\mathbf{Q}_l$-층들은 연속 준동형
+$$
+\pi_1(X, \overline{x}) \to \text{GL}_r(\mathbf{Q}_l), \quad r\geq 0
+$$
+에 대응한다.
+
+\noindent
+표기법: 작용을 갖춘 가군 $(M, \rho)$에 대응하는 층을
+$\mathcal{F}_\rho$라 쓴다.
+
+\medskip\noindent
+{\bf 트레이스 공식들.} $X$를 유한체 $k$ 위의 다형체라 하고
+$\# k < \infty$라 하자.
+\begin{enumerate}
+\item $\Lambda$를 $(\# \Lambda, \# k)=1$인 유한환이라 하고
+$$
+\rho : \pi_1(X, \overline{x})\to \text{GL}_r(\Lambda)
+$$
+를 연속이라 하자. 모든 $n\geq 1$에 대해
+% P08-E472
+$$
+\sum_{d|n}d\left(
+\sum_{x\in |X|, \atop \deg(x)=d}
+\text{Tr}(\rho(F_x^{n/d}))\right) =
+\text{Tr}\left(
+(\pi_x^n)^* |_{R\Gamma_c(X_{\overline{k}}, \mathcal{F}_\rho)}\right)
+$$
+이다.
+\item $l\neq char(k)$인 소수라 하고, $\rho : \pi_1(X, \overline{x})\to
+\text{GL}_r(\mathbf{Q}_l)$라 하자. 임의의 $n\geq 1$에 대해
+% P08-E473
+$$
+\sum_{d|n} d\left(
+\sum_{x\in |X| \atop \deg(x)=d}
+\text{Tr}
+\left(
+\rho(F_x^{n/d})
+\right)
+\right) =
+\sum_{i = 0}^{2\dim X}
+(-1)^i
+\text{Tr}\left(
+\pi_X^* |_{H_c^i(X_{\overline{k}}, \mathcal{F}_\rho)}\right)
+$$
+이다.
+\end{enumerate}
+
+\noindent
+{\bf Weil 추측.} (Deligne--Weil I, 1974) $X$를 유한체 $k$ 위의 매끄러운
+사영 다형체라 하고 $\# k = q$라 하자. 그러면
+% P08-E181
+$H^i(X_{\overline{k}}, \mathbf{Q}_l)$ 위의 $\pi_X^*$의 고윳값들은
+$|\alpha|=q^{1/2}$인 대수적 정수 $\alpha$이다.
+
+\medskip\noindent
+{\bf Deligne의 추측들.} (Lafforgue와 $\ldots$가 거의 완전히 증명했다.) $X$를
+유한체 $k$ 위의 정규 다형체라 하고
+$$
+\rho : \pi_1(X, \overline{x}) \longrightarrow \text{GL}_r(\mathbf{Q}_l)
+$$
+를 연속이라 하자. $\rho$가 기약이고 $\det(\rho)$의 위수가 유한이라고
+가정하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item 수체 $E$가 존재하여 모든 $x\in |X|$(닫힌점)에 대해
+$\rho(F_x)$의 특성다항식의 계수는 $E$에 속한다.
+\item 임의의 $x\in |X|$에 대해 $\rho(F_x)$의 고윳값
+$\alpha_{x, i}$, $i = 1, \ldots, r$의 복소 절댓값은 $1$이다.
+이들은 대수적 수이지만 반드시 대수적 정수인 것은 아니다.
+\item $E$의 모든 유한 자리 $\lambda$($p$를 나누지 않는 것)에 대해
+($E$를 약간 확대해야 할 수도 있다) 다음과 같은 표현이 존재한다.
+% P08-E182
+$$
+\rho\lambda : \pi_1(X, \overline{x}) \to \text{GL}_r(E_\lambda)
+$$
+이는 $\rho$와 양립한다. 즉, $F_x$들의 특성다항식들이 같다.
+\end{enumerate}
+
+\begin{theorem}[Deligne, Weil II]
+\label{theorem-weil-II}
+위 추측의 결론들을 만족하는 $\rho$에 대응하는 층
+$\mathcal{F}_\rho$에 대해 $H_c^i(X_{\overline{k}},
+\mathcal{F}_{\rho})$ 위의 $\pi_X^*$의 고윳값들은 절댓값이
+$$
+|\alpha|=q^{w/2}, \text{ 여기서 }w\in \mathbf{Z},\ w\leq i
+$$
+인 대수적 수 $\alpha$이다. 또한 $X$가 매끄럽고 사영적이면 $w = i$이다.
+\end{theorem}
+
+\begin{proof}
+\cite{WeilII}를 보라.
+\end{proof}
+
+
+
+
+%12.03.09
+\section{Profinite 군, 코호몰로지와 호몰로지}
+\label{section-profinite-cohomology}
+
+\noindent
+$G$를 profinite 군이라 하자.
+
+\medskip\noindent
+{\bf 코호몰로지.}
+연속 $G$-작용을 갖는 이산 가군들의 범주를 생각하자. 이 범주는 충분한
+단사 대상을 가지므로 다음과 같이 정의할 수 있다.
+$$
+H^i(G, M) = R^iH^0(G, M) = R^i(M\mapsto M^G)
+$$
+또한 유도된 판 $RH^0(G, -)$도 있다.
+
+\medskip\noindent
+{\bf 호몰로지.}
+연속 $G$-작용을 갖는 콤팩트 아벨 군들의 범주를 생각하자. 이 범주는
+충분한 사영 대상을 가지므로 다음과 같이 정의할 수 있다.
+$$
+H_i(G, M) = L_iH_0(G, M)=L_i(M\mapsto M_G)
+$$
+여기에도 유도된 판이 있다.
+
+\medskip\noindent
+{\bf 자명한 쌍대성.}
+함자 $M\mapsto M^\wedge = \Hom_{cont}(M, S^1)$는 위 두 범주를 서로
+바꾸며
+$$
+H^i(G, M)^\wedge = H_i(G, M^\wedge)
+$$
+이다. 또한 이 함자는 꼬임 이산 $G$-가군을 profinite 연속 $G$-가군으로
+보내고 그 역도 성립한다. $M$이 이산 또는 profinite 연속 $G$-가군이면
+$M^\wedge = \Hom(M, \mathbf{Q}/\mathbf{Z})$이다.
+
+\medskip\noindent
+{\bf 호몰로지에 관한 주석.}
+\begin{enumerate}
+\item 유한환 $\Lambda$ 위의 $\Lambda$-가군들을 보면
+$$
+H_i(G, M)=Tor_i^{\Lambda[[G]]}(M, \Lambda)
+$$
+로 식별할 수 있다. 여기서 $\Lambda[[G]]$는 $G$의 유한 몫들의 군대수들의
+역극한이다.
+\item $G$가 $\Gamma$의 정규 부분군이고 $\Gamma$도 profinite이면
+\begin{itemize}
+\item $H^0(G, -)$: 이산 $\Gamma$-가군$\to$ 이산 $\Gamma/G$-가군
+\item $H_0(G, -)$: 콤팩트 $\Gamma$-가군 $\to$ 콤팩트 $\Gamma/G$-가군
+\end{itemize}
+이다. 따라서 profinite 군 $\Gamma/G$는 $\Gamma$-가군에 값을 갖는
+$G$의 코호몰로지 군들에 작용한다. 다시 말해 유도함자
+$$
+RH^0(G, -) :
+D^{+}(\text{이산 }\Gamma\text{-가군})
+\longrightarrow
+D^{+}(\text{이산 }\Gamma/G\text{-가군})
+$$
+들이 있으며 $LH_0(G, -)$에 대해서도 마찬가지이다.
+\end{enumerate}
+
+
+
+
+
+
+
+
+\section{곡선의 코호몰로지를 다시 살펴보기}
+\label{section-cohomology-curves-revisited}
+
+\noindent
+$k$를 체라 하고, $X$를 $k$ 위의 기하적으로 연결인 매끄러운 곡선이라 하자.
+다음 기본 짧은 완전열이 있다.
+% P08-E476
+$$
+1 \to
+\pi_1(X_{\overline{k}}, \overline \eta) \to
+\pi_1(X, \overline\eta) \to
+\text{Gal}(k^{^{sep}}/k) \to 1
+$$
+$\Lambda$를 $\#\Lambda\in k^*$인 유한환, $M$을 유한
+$\Lambda$-가군이라 하고 연속 사상
+$$
+\rho : \pi_1(X, \overline\eta) \to \text{Aut}_{\Lambda}(M)
+$$
+가 주어졌다고 하자. 그러면 $\mathcal{F}_\rho$는 이에 결부된
+$X_\etale$ 위의 층을 나타낸다.
+
+\begin{lemma}
+\label{lemma-identify-h2c}
+$\text{Gal}(k^{^{sep}}/k)$-가군으로서의 표준 동형
+$$
+H_c^2(X_{\overline{k}}, \mathcal{F}_\rho)=(M)_{\pi_1(X_{\overline{k}},
+\overline\eta)}(-1)
+$$
+이 있다.
+\end{lemma}
+
+\noindent
+여기서 아래첨자 ${}_{\pi_1(X_{\overline{k}}, \overline\eta)}$는
+여불변량을 나타내고, $(-1)$은 Tate 비틀림을 나타낸다. 즉,
+$\sigma\in \text{Gal}(k^{^{sep}}/k)$는 우변에서
+$$
+\chi_{cycl}(\sigma)^{-1}.\sigma\text{ 우변에서}
+$$
+로 작용한다. 여기서
+$$
+\chi_{cycl} :
+\text{Gal}(k^{^{sep}}/k)
+\to
+\prod\nolimits_{l\neq char(k)}\mathbf{Z}_l^*
+$$
+는 원분 지표이다.
+
+\medskip\noindent
+다시 서술하면 다음과 같다(Deligne, Weil II, 338쪽). $X$ 위의 임의의
+유한 국소 상수 층 $\mathcal{F}$에 대해 $\mathcal{F}''/X_{\overline{k}}$가
+상수층이 되는 최대 몫 $\mathcal{F}\to \mathcal{F}''$이 존재한다. 따라서
+$$
+\mathcal{F}'' = (X\to \Spec(k))^{-1}F''
+$$
+이며, 여기서 $F''$은 $\Spec(k)$ 위의 층, 즉
+$\text{Gal}(k^{^{sep}}/k)$-가군이다. 그러면
+$$
+H_c^2(X_{\overline{k}}, \mathcal{F})\to H_c^2(X_{\overline{k}},
+\mathcal{F}'')\to F''(-1)
+$$
+은 동형이다.
+
+\begin{proof}[Lemma \ref{lemma-identify-h2c}의 증명]
+$\Ker(\rho) \subset \pi_1(X, \overline\eta)$에 대응하는 유한 에탈 갈루아
+피복을 $Y\to^{\varphi}X$라 하자. 그러면 갈루아 군은
+% P08-E474
+$$
+\text{Aut}(Y/X)=Ind(\rho)
+$$
+이다. 또한 $\varphi^*\mathcal{F}_\rho =\underline M_Y$이고 사상
+$$
+\varphi_*\varphi^*\mathcal{F}_\rho\to \mathcal{F}_\rho
+$$
+은 다음을 준다.
+\begin{align*}
+& H_c^2(X_{\overline{k}}, \varphi_*\varphi^*\mathcal{F}_\rho) \to
+H_c^2(X_{\overline{k}}, \mathcal{F}_\rho)\\
+& =H_c^2(Y_{\overline{k}}, \varphi^*\mathcal{F}_\rho)\\
+& =H_c^2(Y_{\overline{k}}, \underline M) = \oplus_{\text{기약 성분들 } 
+\atop Y_{\overline{k}}}M
+\end{align*}
+$$
+\Im(\rho) \to H_c^2(Y_{\overline{k}}, \underline M) =
+\oplus_{\text{기약 성분들 } \atop Y_{\overline{k}}}
+M \to_{\Im(\rho) \text{동치}} H_c^2(X_{\overline{k}},
+\mathcal{F}_{\rho}) \to^{\text{자명한 }
+\Im(\rho) \atop \text{작용}}
+$$
+이고, 기약 곡선 $C/\overline{k}$에 대해
+$H_c^2(C, \underline M)=M$이다.
+
+\medskip\noindent
+또한
+% P08-E475
+$$
+{\text{기약 } \atop \text{성분들의 집합 }Y_k} =
+\frac{Im(\rho)}{Im(\rho|_{\pi_1(X_{\overline{k}}, \overline \eta)})}
+$$
+이므로 $H_c^2(X_{\overline{k}}, \mathcal{F}_\rho)$는
+$M_{\pi_1(X_{\overline{k}}, \overline \eta)}$의 몫이다. 한편 전사
+$$
+\mathcal{F}_\rho\to \mathcal{F}'' = {\text{ 다음과 결부된 } 
+X\text{ 위의 층 } \atop (M)_{\pi_1(X_{\overline{k}}, \overline
+\eta)}\leftarrow\pi_1(X, \overline \eta)}
+$$
+와 전사
+$$
+H_c^2(X_{\overline{k}}, \mathcal{F}_\rho)\to
+M_{\pi_1(X_{\overline{k}}, \overline\eta)}
+$$
+가 있다. 갈루아 작용의 비틀림은
+$H_c^2(X_{\overline{k}}, \mu_n)=^{\text{표준}} \mathbf{Z}/n\mathbf{Z}$라는
+사실에서 나온다.
+\end{proof}
+
+\begin{remark}
+\label{remark-projective}
+따라서 $X$가 사영적이기도 하면 표현 $\rho$에 대해 함자적으로 다음 식별들이
+성립한다.
+$$
+H^0(X_{\overline{k}}, \mathcal{F}_\rho) =
+M^{\pi_1(X_{\overline{k}}, \overline\eta)}
+$$
+그리고
+$$
+H_c^2(X_{\overline{k}}, \mathcal{F}_\rho) =
+M_{\pi_1(X_{\overline{k}}, \overline \eta)}(-1)
+$$
+이다. 물론 $X$가 사영적이지 않으면
+$H^0_c(X_{\overline{k}}, \mathcal{F}_\rho) = 0$이다.
+\end{remark}
+
+
+\begin{proposition}
+\label{proposition-curve-kpi1}
+$X/k$는 앞에서와 같되
+$X_{\overline{k}}\neq \mathbf{P}^1_{\overline{k}}$라 하자. 함자들
+$
+(M, \rho)\mapsto H_c^{2-i}(X_{\overline{k}}, \mathcal{F}_\rho)
+$
+은 함자 $(M, \rho)\mapsto H_c^2(X_{\overline{k}}, \mathcal{F}_\rho)$의
+왼쪽 유도함자들이므로
+$$
+H_c^{2-i}(X_{\overline{k}}, \mathcal{F}_\rho) =
+H_i(\pi_1(X_{\overline{k}}, \overline \eta), M)(-1)
+$$
+이다. 또한 유도된 판은 다음과 같다.
+$$
+R\Gamma_c(X_{\overline{k}}, \mathcal{F}_\rho)
+=
+LH_0(\pi_1(X_{\overline{k}}, \overline \eta), M(-1))
+=
+M(-1)
+\otimes_{\Lambda[[\pi_1(X_{\overline{k}}, \overline \eta)]]}^\mathbf{L}
+\Lambda
+$$
+이는 $D(\Lambda[[\widehat{\mathbf{Z}}]])$ 안의 등식이다. 마찬가지로 함자들
+$(M, \rho)\mapsto H^i(X_{\overline{k}}, \mathcal{F}_\rho)$는 함자
+$(M, \rho)\mapsto M^{\pi_1(X_{\overline{k}}, \overline \eta)}$의 오른쪽
+유도함자들이므로
+$$
+H^i(X_{\overline{k}}, \mathcal{F}_\rho) =
+H^i(\pi_1(X_{\overline{k}}, \overline \eta), M)
+$$
+이다. 이 경우에도 유도된 판이 있다.
+\end{proposition}
+
+\begin{proof}
+(아이디어) 양변이 보편 $\delta$-함자임을 보인다.
+\end{proof}
+
+\begin{remark}
+\label{remark-poincare-groups}
+Proposition과 자명한 쌍대성으로부터
+$$
+H^{2-i}_c(X_{\overline{k}}, \mathcal{F}_\rho)
+\times
+H^i(X_{\overline{k}}, \mathcal{F}_\rho^\wedge(1))
+\to
+\mathbf{Q}/\mathbf{Z}
+$$
+라는 완전 쌍대화를 얻는다. $X$가 사영적이면 이것이 Poincaré 쌍대성이다.
+\end{remark}
+
+
+
+
+\section{추상적 트레이스 공식}
+\label{section-abstract-trace-formula}
+
+\noindent
+다음과 같은 profinite 군의 확장이 주어졌다고 하자.
+$$
+1 \to G \to \Gamma \xrightarrow{\deg} \widehat{\mathbf{Z}} \to 1
+$$
+다음이 존재할 때, 그리고 오직 그때 $\Gamma$가
+{\it 추상적 트레이스 공식을 가진다}고 한다.
+\begin{enumerate}
+\item 정수 $q\geq 1$, 그리고
+\item 각 $d\geq 1$에 대한 유한 집합 $S_d$와, 각 $x\in S_d$에 대한
+$\deg(F_x) = d$를 만족하는 공액류 $F_x \in \Gamma$.
+\end{enumerate}
+이들은 다음 조건들을 만족해야 한다.
+\begin{enumerate}
+\item $q$를 나누지 않는 모든 $\ell$에 대해
+$\text{cd}_\ell(G)<\infty$이고,
+\item $q\in \Lambda^*$인 모든 유한 환 $\Lambda$, 연속적인
+$\Gamma$-작용을 갖는 모든 유한 사영 $\Lambda$-가군 $M$, 그리고
+모든 $n > 0$에 대해
+$$
+\sum\nolimits_{d|n}d \left(
+\sum\nolimits_{x \in S_d}
+\text{Tr}( F_x^{n/d} |_M)
+\right)
+=
+q^n \text{Tr}(F^n|_{M \otimes_{\Lambda[[G]]}^{\mathbf{L}}\Lambda})
+$$
+가 $\Lambda^\natural$ 안에서 성립한다.
+\end{enumerate}
+여기서 $M \otimes_{\Lambda[[G]]}^{\mathbf{L}}\Lambda = LH_0(G, M)$는
+유도 호몰로지를 나타내고, $\Gamma/G = \widehat{\mathbf{Z}}$에서
+$F=1$이다.
+
+\begin{remark}
+\label{remark-abstract-trace-formula}
+이 개념에 관해 몇 가지 관찰을 적어 둔다.
+\begin{enumerate}
+\item 사영 곡선을 모델링하는 경우에는 코호몰로지를 사용할 수 있으며
+인자 $q^n$은 필요하지 않다.
+\item 내가 아는 예는 $X$가 유한체 위의 매끄럽고 기하적으로 기약인
+$K(\pi, 1)$일 때의 $\Gamma = \pi_1(X, \overline \eta)$뿐이다.
+이 경우 $q = (\# k)^{\dim X}$이다. 그 명제를 가정하면 이 강의에서
+곡선에 대해 이를 증명했다.
+\item 정수 $q$가 주어지면 집합들 $S_d$는 유일하게 정해진다.
+% P08-E183
+($q$에 정수 $m$을 곱하고 $S_d$를 $S_d$의 $m^d$개 복사본으로
+바꾸어도 공식은 변하지 않는다.)
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+\label{example-commutative}
+정수 $q\geq 1$을 고정하고
+$$
+\begin{matrix}
+1 &
+\to &
+G = \widehat{\mathbf{Z}}^{(q)} &
+\to &
+\Gamma &
+\to &
+\widehat{\mathbf{Z}} &
+\to &
+1 \\
+&
+&
+= \prod_{l\not \mid q} \mathbf{Z}_l &
+&
+F &
+\mapsto &
+1
+\end{matrix}
+$$
+를 생각하자. 여기서 $FxF^{-1} = ux$이고
+$u \in (\widehat{\mathbf{Z}}^{(q)})^*$이다.
+자명한 가군들 $\mathbf{Z}/m\mathbf{Z}$만 사용해도
+$$
+q^n - (qu)^n \equiv \sum\nolimits_{d|n} d\# S_d
+$$
+를 얻는다. 이는 모든 $(m, q)=1$에 대해 $\mathbf{Z}/m\mathbf{Z}$ 안에서
+성립하며, ($u \to u^{-1}$까지 고려하면) $qu = a\in \mathbf{Z}$이고
+$|a| < q$임을 함의한다. 특수한 경우 $a = 1$은 실제로
+$$
+\Gamma = \pi_1^t(\mathbf{G}_{m, \mathbf{F}_p}, \overline \eta),
+\quad
+\# S_1 = q - 1,
+\quad\text{and}\quad
+\# S_2 = \frac{(q^2-1)-(q-1)}{2}
+$$
+에서 나타난다.
+\end{example}
+
+
+
+%12.08.09
+\section{보형 형식과 층}
+\label{section-automorphic}
+
+\noindent
+참고문헌: 특히 Drinfeld의 놀라운 논문들
+\cite{D1}, \cite{D2}, \cite{D0}를 보라.
+
+\medskip\noindent
+{\bf 비분기 첨점 형식.}
+$k$를 표수 $p$인 유한체라 하자.
+$X$를 $k$ 위의 기하적으로 기약인 사영 매끄러운 곡선이라 하자.
+$K = k(X)$를 $X$의 함수체라 하자.
+$v$를 $K$의 자리라 하자. 이는 닫힌점 $x\in X$를 택하는 것과 같다.
+$K_v$를 $v$에서의 $K$의 완비화라 하자. 이는 $x$에서 $X$의
+국소환을 완비화한 환의 분수체와 같다.
+$O_v\subset K_v$로 정수환을 나타내자. 더 나아가
+$$
+O = \prod\nolimits_v O_v \subset \mathbf{A} = \prod_v' K_v
+$$
+로 놓고, $\Lambda$를 $p$가 $\Lambda$에서 가역인 임의의 환이라 하자.
+
+\begin{definition}
+\label{definition-unramified}
+{\it $\Lambda$에 값을 갖는 $\text{GL}_2(\mathbf{A})$ 위의 비분기
+첨점 형식}\footnote{이는 아마 표준적인 표기법은 아닐 것이다.}이란
+다음 함수
+$$
+f : \text{GL}_2(\mathbf{A}) \to \Lambda
+$$
+로서 다음 조건들을 만족하는 것이다.
+\begin{enumerate}
+\item 모든 $x\in \text{GL}_2(\mathbf{A})$와 모든
+$\gamma\in \text{GL}_2(K)$에 대해 $f(x\gamma) = f(x)$이다.
+\item 모든 $x\in \text{GL}_2(\mathbf{A})$와 모든
+$u\in \text{GL}_2(O)$에 대해 $f(ux) = f(x)$이다.
+\item 모든 $x\in \text{GL}_2(\mathbf{A})$에 대해
+$$
+\int_{\mathbf{A} \mod K} f
+\left(x
+\left(
+\begin{matrix}
+1 & z \\
+0 & 1
+\end{matrix}
+\right)
+\right) dz = 0
+$$
+이다. $p$가 가역인 일반적인 환 $\Lambda$에 대하여 이를 어떻게
+해석할 것인지에 관해서는 \cite[Section 4.1]{dJ-conjecture}를 보라.
+\end{enumerate}
+\end{definition}
+
+\noindent
+{\bf 헤케 작용소.}
+$v$를 $K$의 자리, $f$를 비분기 첨점 형식이라 하고
+$$
+T_v(f)(x) =
+\int_{g\in M_v}f(g^{-1}x)dg,
+$$
+및
+$$
+U_v(f)(x) =
+f\left(
+\left(
+\begin{matrix}
+\pi_v^{-1} & 0 \\
+0 & \pi_v^{-1}
+\end{matrix}
+\right)x\right)
+$$
+로 놓자. 여기서 사용한 표기는 다음과 같다.
+$\pi_v \in O_v$는 균일화원이고
+$$
+M_v =
+\left\{
+h\in Mat(2\times 2, O_v) | \det h = \pi_vO_v^*\right\}
+$$
+이다.
+% P08-E184
+$dg = $는 $\int_{\text{GL}_2(O_v)} dg = 1$을 만족하는
+$\text{GL}_2(K_v)$ 위의 Haar 측도이다. 구체적으로
+$$
+T_v(f)(x) =
+f\left(
+\left(
+\begin{matrix}
+\pi_v^{-1}& 0 \\
+0 & 1
+\end{matrix}
+\right)
+x\right) +
+\sum_{i = 1}^{q_v}
+f\left(\left(
+\begin{matrix}
+1 & 0 \\
+-\pi_v^{-1}\lambda_i
+& \pi_v^{-1}
+\end{matrix}
+\right) x\right)
+$$
+이다. 여기서 $\lambda_i\in O_v$는
+$O_v/(\pi_v)=\kappa_v$의 대표원들의 집합이고
+$q_v = \#\kappa_v$이다.
+
+\medskip\noindent
+{\bf 고유형식.} {\it 고유형식} $f$란 $f$의 어떤 값이 단위원이고,
+유일하게 정해지는 어떤 $t_v, u_v \in \Lambda$에 대해
+$T_vf = t_vf$와 $U_vf = u_vf$를 만족하는 비분기 첨점 형식이다.
+
+\begin{theorem}
+\label{theorem-drinfeld-make-rho}
+$\overline{\mathbf{Q}}_l$에 값을 갖고 고윳값들이
+$u_v\in \overline{\mathbf{Z}}_l^*$를 만족하는 고유형식 $f$가
+주어졌다고 하자. 그러면
+$$
+\rho : \pi_1(X)\to \text{GL}_2(E)
+$$
+라는 연속 절대 기약 표현이 존재한다. 여기서 $E$는
+$\overline{\mathbf{Q}}_l$에 포함된 $\mathbf{Q}_\ell$의 유한 확대이고,
+모든 자리 $v$에 대해 $t_v = \text{Tr}(\rho(F_v))$ 및
+$u_v = q_v^{-1}\det\left(\rho(F_v)\right)$이다.
+\end{theorem}
+
+\begin{proof}
+\cite{D0}를 보라.
+\end{proof}
+
+\begin{theorem}
+\label{theorem-drinfeld-make-f}
+$\mathbf{Q}_l \subset E$가 유한 확대이고
+$$
+\rho : \pi_1(X)\to \text{GL}_2(E)
+$$
+가 절대 기약 연속 표현이라고 하자. 그러면
+$\overline{\mathbf{Q}}_l$에 값을 갖고 그 고윳값 $t_v$, $u_v$가
+$t_v = \text{Tr}(\rho(F_v))$ 및
+$u_v = q_v^{-1}\det(\rho(F_v))$를 만족하는 고유형식 $f$가 존재한다.
+\end{theorem}
+
+\begin{proof}
+\cite{D1}을 보라.
+\end{proof}
+
+\begin{remark}
+\label{remark-lafforgue}
+Lafforgue와 많은 다른 수학자들 덕분에 이제 $\text{GL}_n$에 대해서도
+분기를 허용하면서 위의 두 정리와 같은 완전한 정리들을 알고 있다!
+다시 말해, 유한체 위 곡선의 함수체에 대해서는 $\text{GL}_n$의
+완전한 대역 Langlands 대응이 알려져 있다. 하지만 이것이 유한체 위
+곡선의 기본군에 관해 답해야 할 흥미로운 질문이 많이 남아 있지 않다는
+뜻은 아니다. 아래에서 이를 보게 될 것이다.
+\end{remark}
+
+\noindent
+{\bf 중심 지표.} $f$가 고유형식이면
+$$
+\begin{matrix}
+\chi_f : &
+O^*\backslash \mathbf{A}^*/K^* &
+\to &
+\Lambda^* \\
+&
+(1, \ldots, \pi_v, 1, \ldots, 1) &
+\mapsto &
+u_v^{-1}
+\end{matrix}
+$$
+를 {\it 중심 지표}라 한다.
+% P08-E185
+이는 위와 같은 정규화 아래에서 $\rho$의 행렬식에 대응한다. 다음과 같이 놓자.
+% P08-E477
+$$
+C(\Lambda) =
+\left\{
+{\text{비분기 첨점 형식 } f \text{ 중 계수가 }\Lambda}
+\atop {\text{ 다음을 만족하는 } U_v f = \varphi_v^{-1}f\forall v}
+\right\}
+$$
+
+\begin{proposition}
+\label{proposition-cusp-forms-finite}
+$\Lambda$가 뇌터 환이면 $C(\Lambda)$는 유한 생성
+$\Lambda$-가군이다. 또한 $\Lambda$가
+$\mathbf{F} \subset \Lambda$를 소체로 갖는 체이면
+$$
+C(\Lambda)=(C(\mathbf{F}))\otimes_{\mathbf{F}}\Lambda
+$$
+이고 이는 $T_v$의 작용과 양립한다.
+\end{proposition}
+
+\begin{proof}
+\cite[Proposition 4.7]{dJ-conjecture}를 보라.
+\end{proof}
+
+\noindent
+이 명제는 다음 보조정리를 자명하게 함의한다.
+
+\begin{lemma}
+\label{lemma-eigenvalues-algebraic}
+고윳값의 대수성.
+$\Lambda$가 체이면 $f\in C(\Lambda)$의 고윳값 $t_v$는
+소체 $\mathbf{F} \subset \Lambda$ 위에서 대수적이다.
+\end{lemma}
+
+\begin{proof}
+Proposition \ref{proposition-cusp-forms-finite}에서 따른다.
+\end{proof}
+
+\noindent
+위의 모든 결과를 결합하면 다음의 매우 유용한 기법을 쓸 수 있다.
+
+\begin{lemma}
+\label{lemma-switch-l}
+$l$의 변경. $E$를 수체라 하자.
+절대 기약 연속 표현
+$$
+\rho : \pi_1(X)\to SL_2(E_\lambda)
+$$
+에서 출발하자. 여기서 $\lambda$는 $p$ 위에 놓이지 않는 $E$의
+자리이다. 그러면 $p$ 위에 놓이지 않는 $E$의 임의의 다른 자리
+$\lambda'$에 대해 유한 확대 $E'_{\lambda'}$와 절대 기약 연속 표현
+$$
+\rho': \pi_1(X)\to SL_2(E'_{\lambda'})
+$$
+가 존재하며, 모든 프로베니우스 원의 특성다항식이 같다는 의미에서
+$\rho$와 양립한다.
+\end{lemma}
+
+\noindent
+이것이 Deligne 추측의 한 사례임에 주목하라!
+
+\begin{proof}
+자리 변경 보조정리를 증명하기 위해
+Theorem \ref{theorem-drinfeld-make-f}을 사용하여 $\rho$에 수반되는
+고유형식 $f\in C(\overline{\mathbf{Q}}_l)$를 얻는다.
+다음으로 Proposition \ref{proposition-cusp-forms-finite}을 사용하면
+$E \subset E'$가 유한인 $f\in C(E')$를 택할 수 있다.
+그다음 $E'$를 완비화하여 $E'_{\lambda'}$가
+$E_{\lambda'}$의 유한 확대인 고유형식
+$f\in C(E'_{\lambda'})$를 얻는다. 마지막으로
+Theorem \ref{theorem-drinfeld-make-rho}를 사용하고, 필요하다면
+$E'_{\lambda'}$를 다시 조금 확대하여 절대 기약 연속 표현
+$\rho': \pi_1(X) \to SL_2(E_{\lambda'}')$를 얻는다.
+\end{proof}
+
+\noindent
+추측: 어떤 (위상) 환 $\Lambda$에 대해
+$$
+\left(
+{\rho : \pi_1(X)\to SL_2(\Lambda) \atop \text{ 절대 기약}}
+\right)
+\leftrightarrow
+\text{ 다음에 속하는 고유형식 } C(\Lambda)
+$$
+라는 대응이 있다면 $\rho(F_v)$의 모든 고윳값은 대수적이다.
+% P08-E186
+($\Lambda$가 유한 환이면 이는 간단한 방식으로는 성립하지 않을 것이다.)
+Langlands 대응이 체 위에서뿐 아니라 더 일반적으로도 성립한다는
+추측에 기초하면 다음 추측에 이른다.
+
+\medskip\noindent
+{\bf 추측.}
+(\cite{dJ-conjecture}를 보라.)
+임의의 연속 표현
+$$
+\rho : \pi_1(X)\to \text{GL}_n(\mathbf{F}_l[[t]])
+$$
+에 대해 $\# \rho(\pi_1(X_{\overline{k}}))<\infty$이다.
+
+\medskip\noindent
+이를 층의 언어로 다시 쓰면 다음과 같다.
+“$\overline{\mathbf{F}_l((t))}$-가군으로 이루어진 임의의 lisse 층의
+기하학적 모노드로미는 유한하다.”
+
+\begin{theorem}
+\label{theorem-conjecture-n-2}
+$n\leq 2$이면 이 추측은 성립한다.
+\end{theorem}
+
+\begin{proof}
+\cite{dJ-conjecture}를 보라.
+\end{proof}
+
+\begin{theorem}
+\label{theorem-conjecture-l-bigger-2n}
+아직 증명되지 않은 몇몇 결과를 전제로 하면 $l > 2n$일 때
+이 추측은 성립한다.
+\end{theorem}
+
+\begin{proof}
+\cite{Gaitsgory}를 보라.
+\end{proof}
+
+\noindent
+이 추측은 실제로 유용한 곳이 있다.
+Kashiwara의 추측에 관한 Drinfeld의 연구를 보라. 그뿐 아니라 다음과
+같은 훨씬 더 구체적인 응용도 있다.
+
+\begin{theorem}
+\label{theorem-deformation-rings}
+(\cite[Theorem 3.5]{dJ-conjecture}를 보라.)
+$$
+\rho_0: \pi_1(X)\to \text{GL}_n(\mathbf{F}_l)
+$$
+가 연속 표현이고 $l\neq p$라고 하자. 다음을 가정하자.
+\begin{enumerate}
+\item 이 추측이 $X$에 대해 성립한다.
+\item $\rho_0 |_{\pi_1(X_{\overline{k}})}$는 절대 기약이다.
+\item $l$은 $n$을 나누지 않는다.
+\end{enumerate}
+그러면 $\rho_0$의 보편 변형환 $R_{\text{univ}}$는
+$\mathbf{Z}_l$ 위에서 유한 평탄이다.
+\end{theorem}
+
+\noindent
+설명: 표현 $\rho_{\text{univ}}:
+\pi_1(X)\to \text{GL}_n(R_{\text{univ}})$가 존재하고,
+$R_{\text{univ}}$는 보편 변형환인 완비 국소환이며 잉여체가
+$\mathbf{F}_l$이고
+$(R_{\text{univ}}\to
+\mathbf{F}_l)\circ\rho_{\text{univ}}\cong\rho_0$이다.
+또한 완비 국소환 $R$에 대한 임의의 $R\to \mathbf{F}_l$과
+$\rho : \pi_1(X)\to \text{GL}_n(R)$가 주어지면
+$\psi\circ\rho_{\text{univ}}\cong \rho$를 만족하는
+$\psi : R_{\text{univ}}\to R$가 존재한다. 정리는 사상
+$$
+\Spec(R_{\text{univ}})
+\longrightarrow
+\Spec(\mathbf{Z}_l)
+$$
+이 유한 평탄임을 말한다. 특히 이러한 $\rho_0$는
+$\rho : \pi_1(X) \to \text{GL}_n(\overline{\mathbf{Q}}_l)$로 올라간다.
+
+\medskip\noindent
+주:
+\begin{enumerate}
+\item 변형에 관한 정리는 쉽다.
+\item 이 추측을 향한 어떤 결과도 어려워 보인다.
+\item $\pi_1(X)$에 관해 더 많은 추측이 있다면 흥미로울 것이다!
+\end{enumerate}
+
+
+
+
+%12.10.09
+\section{점의 개수 세기}
+\label{section-counting}
+
+\noindent
+$X$를 $k$ 위의 매끄럽고 기하적으로 기약인 사영 곡선이라 하고
+$q = \# k$라 하자. 트레이스 공식에 따르면 대수적 정수
+$w_1, \ldots, w_{2g}$가 존재하여
+$$
+\# X(k_n) = q^n - \sum\nolimits_{i = 1}^{2g_X} w_i^n + 1.
+$$
+% P08-E478
+$\sigma\in \text{Aut}(X)$이면 모든 $i$에 대해
+$\sigma(w_i)=w_j$를 만족하는 $j$가 존재한다.
+
+\medskip\noindent
+% P08-E187
+{\bf 리만 가설.} 모든 $i$에 대해 $|\omega_i| = \sqrt{q}$이다.
+
+\medskip\noindent
+이는 1924년에 Emil Artin이 초타원 곡선에 대해 정식화했고,
+1940년에 Weil이 증명했다. Weil은 두 가지 증명을 제시했다.
+\begin{itemize}
+\item Hodge 지표 정리를 이용하여 $X \times X$ 위의 교차 이론을 쓰는 증명,
+\item $X$의 Jacobi 다양체를 쓰는 증명.
+\end{itemize}
+% P08-E479
+또 다른 증명은 그 최초 아이디어가 Stepanov에게서 나왔고 Bombieri가
+제시한 것으로, 함수체 $k(X)$와 그 프로베니우스 작용소를 사용한다(1969).
+출발점은 $f\in k(X)$가 주어졌을 때 $f^q - f$가 $X$의 모든
+$\mathbf{F}_q$-유리점에서 사라지는 유리함수라는 관찰이며, 이 아이디어로
+점의 개수에 대한 상계를 얻으려 할 수 있다.
+
+
+\section{Chebotarev의 정밀한 형태}
+\label{section-chebotarev}
+
+\noindent
+첫 번째 응용으로 곡선의 유한 에탈 갈루아 피복에 대한
+Chebotarev 정리의 정밀한 형태를 증명하자.
+$\varphi : Y \to X$를 군 $G$를 갖는 유한 에탈 갈루아 피복이라 하자.
+이는 준동형
+$$
+\pi_1(X) \longrightarrow G = \text{Aut}(Y/X)
+$$
+에 대응한다.
+% P08-E188
+$Y_{\overline{k}} = $가 기약이라고 가정하자.
+$C\subset G$가 공액류이면 모든 $n > 0$에 대해
+$$
+| \# \{x \in X(k_n) \mid F_x \in C\} - \frac{\# C}{\# G} \cdot \# X(k_n) |
+\leq
+(\# C)(2g - 2) \sqrt{q^n}
+$$
+이다. (경고: 사용하기 전에 우변의 계수 $\# C$를 주의 깊게 확인하라.)
+
+\begin{proof}[개요]
+다음과 같이 쓰자.
+$$
+\varphi_*(\overline{\mathbf{Q}_l}) =
+\oplus_{\pi \in \widehat{G}} \mathcal{F}_{\pi}
+$$
+여기서 $\widehat{G}$는 $\overline{\mathbf{Q}}_l$ 위에서 $G$의
+기약 표현들의 동형류 집합이다. $\pi \in \widehat{G}$에 대해
+$\chi_{\pi}: G \to \overline{\mathbf{Q}}_l$를 $\pi$의 지표라 하자.
+그러면
+$$
+H^*(Y_{\overline{k}}, \overline{\mathbf{Q}}_l) =
+\oplus_{\pi\in \widehat{G}}
+H^*(Y_{\overline{k}}, \overline{\mathbf{Q}}_l)_\pi
+=_{(\varphi\text{ 유한 }) }
+\oplus_{\pi\in \widehat{G}}
+H^*(X_{\overline{k}}, \mathcal{F}_\pi)
+$$
+이다. $\pi\neq 1$이면
+$$
+H^0(X_{\overline{k}}, \mathcal{F}_\pi) =
+H^2(X_{\overline{k}}, \mathcal{F}_\pi) = 0,\quad
+\dim H^1(X_{\overline{k}}, \mathcal{F}_\pi) = (2g_X - 2)d_\pi^2
+$$
+이다.
+% P08-E189
+(이는 ... 위의 작용에 대한 트레이스 공식에서 얻을 수 있다.) 따라서
+% P08-E480
+$$
+|\sum_{x \in X(k_n)} \chi_\pi(\mathcal{F}_x)| \leq
+(2g_X - 2) d_\pi^2\sqrt{q^n}
+$$
+임을 알 수 있다. $1_C = \sum_\pi a_\pi \chi_\pi$라 쓰자. 그러면
+$a_\pi = \langle 1_C, \chi_\pi\rangle$이고,
+$a_1 = \langle 1_C, \chi_1\rangle = \frac{\# C}{\# G}$이다. 여기서
+$$
+\langle f, h\rangle = \frac{1}{\# G}\sum_{g \in G} f(g)\overline{h(g)}
+$$
+이다. 따라서
+$$
+\frac{\# C}{\# G} = ||1_C||^2 = \sum|a_\pi|^2
+$$
+라는 관계를 얻는다. 마지막 단계는 다음과 같다.
+\begin{align*}
+\#\left\{x \in X(k_n) \mid F_x \in C\right\}
+& =
+\sum_{x \in X(k_n)} 1_C(x) \\
+& =
+\sum_{x \in X(k_n)} \sum_\pi a_\pi \chi_\pi(F_x) \\
+& =
+\underbrace{\frac{\# C}{\# G} \# X(k_n)}_{
+\text{다음에 해당하는 항 }\pi = 1}
++
+\underbrace{\sum_{\pi\neq 1}a_\pi\sum_{x\in X(k_n)}\chi_\pi(F_x)}_{
+\text{ 오차항 (다음으로 상계할 }E)}
+\end{align*}
+오차항은 다음과 같이 상계할 수 있다.
+\begin{align*}
+|E|
+& \leq
+\sum_{\pi \in \widehat{G}, \atop \pi \neq 1}
+|a_\pi| (2g - 2) d_\pi^2 \sqrt{q^n} \\
+& \leq
+\sum_{\pi \neq 1} \frac{\# C}{\# G} (2g_X - 2) d_\pi^3 \sqrt{q^n}
+\end{align*}
+Weil의 추측에 의해 $\# X(k_n)\sim q^n$이다.
+\end{proof}
+
+
+
+\section{얼마나 많은 소수가 완전 분해하는가?}
+\label{section-how-many}
+
+\noindent
+이 절에서는 유한체 위 곡선에 대한 리만 가설의 두 번째 응용을 제시한다.
+수론가라면 Ihara의 논문 “대역체의 무한 비분기 갈루아 확대에서 얼마나
+많은 소수가 완전 분해하는가?”를 살펴보는 것이 좋을 것이다.
+\cite{Ihara}를 보라. 기본 완전열
+$$
+1 \to
+\pi_1(X_{\overline{k}}) \to
+\pi_1(X) \xrightarrow{\deg}
+\widehat{\mathbf{Z}} \to 1
+$$
+을 생각하자.
+
+\begin{proposition}
+\label{proposition-finite-set-frobenii-generate-topologically}
+$X$의 닫힌점들로 이루어진 유한 집합 $x_1, \ldots, x_n$이 존재하여,
+이 점들에 대응하는 {\bf 모든} 프로베니우스 원의 집합이
+$\pi_1(X)$를 위상적으로 생성한다.
+\end{proposition}
+
+\noindent
+이를 달리 진술하면 다음과 같다.
+$x_1, \ldots, x_n\in |X|$가 존재하여, 각 $x_i$에 대한
+프로베니우스 원 $1$개를 포함하는 $\pi_1(X)$의 최소 정규 닫힌 부분군
+$\Gamma$가 $\pi_1(X)$ 전체가 된다. 즉 $\Gamma = \pi_1(X)$이다.
+
+\begin{proof}
+$N\gg 0$을 택하고
+$$
+\{x_1, \ldots, x_n\} =
+{\text{닫힌점들의 집합}
+\atop X \text{에서 차수 } \leq N\text{, 기저체 } k}
+$$
+으로 놓자. 이 점들에 대해 변형된 진술에서와 같은
+$\Gamma\subset \pi_1(X)$를 택한다.
+$\Gamma \neq \pi_1(X)$라고 가정하자. 그러면 $\Gamma$를 포함하는
+$\pi_1(X)$의 정규 열린 부분군 $U$로서 $U \neq \pi_1(X)$인 것을
+택할 수 있다. $X$에 대한 리만 가설에 의해 우리 점들의 집합에는
+차수가 $N$인 어떤 $x_{i_1}$과 차수가 $N - 1$인 어떤 $x_{i_2}$가
+있다. 이로부터 $\deg : \Gamma \to \widehat{\mathbf{Z}}$가 전사이고,
+따라서 $U$에 대해서도 마찬가지임을 알 수 있다. 이는 정확히
+$U$에 대응하는 유한 에탈 갈루아 피복 $Y \to X$에 대해
+$Y_{\overline{k}}$가 기약임을 뜻한다.
+$G = \text{Aut}(Y/X)$로 놓자. 그림으로 쓰면
+$$
+Y \to^G X,\quad G = \pi_1(X)/U
+$$
+이다. 구성에 의해 차수가 $\leq N$인 $X$의 모든 점은 $Y$에서
+완전 분해한다. 따라서 특히
+$$
+\# Y(k_N)\geq (\# G)\# X(k_N)
+$$
+이다. 양변에 리만 가설을 적용하면
+$$
+q^N+1+2g_Yq^{N/2}\geq \# G\# X(k_N)\geq \#
+G(q^N+1-2g_Xq^{N/2})
+$$
+를 얻는다. $2g_Y-2 = (\# G)(2g_X-2)$이므로 이는
+% P08-E190
+$$
+q^N + 1 + (\# G)(2g_X - 1) + 1)q^{N/2}\geq
+\# G (q^N + 1 - 2g_Xq^{N/2})
+$$
+을 뜻한다. 따라서 $N$이 충분히 크면 $G$는 자명군이어야 한다.
+\end{proof}
+
+\noindent
+{\bf 이상한 질문.}
+$W_X = \deg^{-1}(\mathbf{Z})\subset \pi_1(X)$로 놓자.
+$X$의 어떤 유한 닫힌점 집합 $x_1, \ldots, x_n$에 대해
+이 점들에 대응하는 모든 프로베니우스 원의 집합이 $W_X$를
+{\it 대수적으로} 생성하는가?
+
+\medskip\noindent
+Baire 범주 논법에 의해 이는 모든 프로베니우스 원에 대한 같은 질문으로
+옮겨진다.
+
+
+
+
+
+\section{실제로 점은 얼마나 많은가?}
+\label{section-really}
+
+\noindent
+% P08-E481
+곡선의 종수가 $q$에 비해 크면 공식
+$\# X(k) = q - \sum \omega_i + 1$의 주항은 $q$가 아니라
+두 번째 항 $\sum \omega_i$이며, 이는 (선험적으로)
+약 $2g_X\sqrt{q}$의 크기를 가질 수 있다. 논문
+\cite{Drinfeld-number}에서 Drinfeld와 Vladut은 이 최댓값이
+(앞서 Ihara가 예측했듯이) 실제로 많아야 약 $g\sqrt{q}$임을 보였다.
+
+\medskip\noindent
+$q$를 고정하고 $k$를 원소가 $k$개인 체라 하자.
+% P08-E191
+다음과 같이 놓자.
+$$
+A(q) = \limsup_{g_X \to \infty} \frac{\# X(k)}{g_X}
+$$
+여기서 $X$는 $k$ 위의 기하적으로 기약인 매끄러운 사영 곡선들을
+달린다. 이 정의에 대해 다음 결과들을 얻는다.
+\begin{itemize}
+\item RH $\Rightarrow A(q)\leq 2\sqrt{q}$
+\item Ihara $\Rightarrow A(q)\leq \sqrt{2q}$
+\item DV $\Rightarrow A(q)\leq \sqrt{q}-1$ (실제로 $q$가 제곱수이면
+이는 날카로운 상계이다.)
+\end{itemize}
+
+\begin{proof}
+$X$가 주어졌다고 하고 $w_1, \ldots, w_{2g}$ 및 $g = g_X$를
+앞에서와 같이 택하자. $\alpha_i = \frac{w_i}{\sqrt{q}}$로 놓으면
+$|\alpha_i| = 1$이다. $\alpha_i$가 나타나면
+$\overline{\alpha}_i = \alpha_i^{-1}$도 나타난다. 그러면
+% P08-E192
+$$
+N = \# X(k) \leq X(k_r) = q^r + 1 - (\sum_i \alpha_i^r) q^{r/2}
+$$
+이다. 다시 쓰면 모든 $r \geq 1$에 대해
+$$
+-\sum_i \alpha_i^r \geq Nq^{-r/2} - q^{r/2} - q^{-r/2}
+$$
+이다. 다음을 관찰하라.
+$$
+0 \leq |\alpha_i^n +\alpha_i^{n-1} +\ldots +\alpha_i +1|^2
+= (n + 1) + \sum_{j = 1}^n (n + 1 - j) (\alpha_i^j + \alpha_i^{-j})
+$$
+따라서
+\begin{align*}
+2g(n+1) & \geq - \sum_i \left(\sum_{j = 1}^n (n+1-j)(\alpha_i^j
++\alpha_i^{-j})\right)\\
+& =-\sum_{j = 1}^n (n+1-j)\left(\sum_i\alpha_i^j
++\sum_i\alpha_i^{-j}\right)
+\end{align*}
+이다. 이 식의 절반을 취하면
+\begin{align*}
+g(n+1)& \geq - \sum_{j = 1}^n (n+1-j)(\sum_i\alpha_i^j)\\
+& \geq N\sum_{j = 1}^n (n+1-j)q^{-j/2}-\sum_{j = 1}^n
+(n+1-j)(q^{j/2}+q^{-j/2})
+\end{align*}
+를 얻는다. 따라서
+$$
+\frac{N}{g}\leq \left(\sum_{j = 1}^n \frac{n+1-j}{n+1}q^{-j/2} \right)^{-1}
+\cdot
+\left(
+1 + \frac{1}{g} \sum_{j = 1}^n \frac{n + 1 - j}{n + 1}(q^{j/2} + q^{-j/2})
+\right)
+$$
+이다. $n$을 고정하고 $g\to \infty$로 보내면
+$$
+A(q)\leq \left(\sum_{j = 1}^n \frac{n+1-j}{n+1}q^{-j/2}\right)^{-1}
+$$
+이다. 그러므로
+$$
+A(q)\leq \lim_{n\to\infty}(\ldots) = \left(\sum_{j = 1}^\infty
+q^{-j/2}\right)^{-1}=\sqrt{q}-1
+$$
+이다.
+\end{proof}
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

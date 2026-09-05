@@ -1,0 +1,2912 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{상대 사이클}
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+기초 문헌은 \cite{SV}이다.
+
+\medskip\noindent
+이 장에서는 \cite{SV}에서 보편 정역 상대 사이클이라 부르는 것만을
+정의한다. 이 선택을 하면 원래 이론보다 전개가 다소 단순해지지만,
+물론 잃는 것도 있다.
+
+\medskip\noindent
+뇌터 스킴 사이의 유한형 사상 $X \to S$를 고정하자. $X/S$의
+올 위의 $r$-사이클 족 $\alpha$란 단순히
+$\alpha_s \in Z_r(X_s)$인 모음
+$\alpha = (\alpha_s)_{s \in S}$이다. 임의의 사상
+$g : S' \to S$를 따라 $\alpha$를 기저변환한 $g^*\alpha$를
+어떻게 정의할지는 즉시 분명하다. $\alpha$가 특수화와 양립할 때,
+즉 $S'$가 이산 값매김환의 스펙트럼인 임의의 사상
+$g : S' \to S$에 대하여 $g^*\alpha$의 일반 올이
+$g^*\alpha$의 닫힌 올로 특수화할 것을 요구할 때,
+$\alpha$를 {\it $X/S$ 위의 상대 $r$-사이클}이라 한다.
+Section \ref{section-families-specialization}을 보라.
+
+
+
+
+\section{규약과 표기}
+\label{section-conventions}
+
+\noindent
+고정된 뇌터 밑 위에서 국소 유한형인 스킴의 사이클에 관한
+규약과 표기는 Chow Homology and Chern Classes 장을 참조하라.
+특히 Chow Homology, Section \ref{chow-section-setup} 이하를 보라.
+
+\medskip\noindent
+특히 $X$가 체 $k$ 위에서 국소 유한형이면 $Z_r(X)$는 차원
+$r$인 사이클의 군을 뜻한다. Chow Homology, Example
+\ref{chow-example-field}와 Section \ref{chow-section-cycles}을 보라.
+$\dim(Z) = r$인 정역 폐부분스킴 $Z \subset X$에 대하여
+$[Z] \in Z_r(X)$이고, $X$가 준콤팩트이면 $Z_r(X)$는 이러한
+류들을 기저로 하는 자유 아벨 군이다.
+
+
+
+\section{체에 대한 상대 사이클}
+\label{section-relative-fields}
+
+\noindent
+$k$를 체라 하고 $X$를 $k$ 위의 국소 대수적 스킴이라 하자.
+$r \geq 0$을 정수라 하자. 이 상황에서는 $X$ 위의
+$r$-사이클 군 $Z_r(X)$가 있다. Section \ref{section-conventions}을 보라.
+
+\medskip\noindent
+{\bf 기저변환.} 임의의 체 확대 $k'/k$에 대하여 기저변환 사상
+$Z_r(X) \to Z_r(X_{k'})$가 있다. Chow Homology, Section
+\ref{chow-section-change-base}을 보라. 구체적으로 차원 $r$인
+정역 폐부분스킴 $Z \subset X$가 주어지면 $[Z] \in Z_r(X)$를
+폐부분스킴 $Z_{k'} \subset X_{k'}$에 딸린 $r$-사이클
+$[Z_{k'}]_r \in Z_r(X_{k'})$로 보낸다. 물론 일반적으로
+$Z_{k'}$는 기약도 아니고 환원도 아니다. 기저변환 사상
+$Z_r(X) \to Z_r(X_{k'})$는 항상 단사이다.
+
+\begin{lemma}
+\label{lemma-multiplicities-field-extension}
+$K/k$를 체 확대라 하고 $Z$를 $k$ 위의 정역 국소 대수적
+스킴이라 하자. 기약 성분 $Z' \subset Z_K$의 중복도
+$m_{Z', Z_K}$는 $1$이거나 $k$의 표수의 거듭제곱이다.
+\end{lemma}
+
+\begin{proof}
+$k$의 표수가 영이면 $k$는 완전체이고, Varieties, Lemma
+\ref{varieties-lemma-geometrically-reduced}에 의해 $X_K$가 환원이므로
+중복도는 항상 $1$이다. 이제 $k$의 표수가 $p > 0$이라고 하자.
+$L$을 $Z$의 함수체라 하자. $Z$는 $k$ 위에서 국소 대수적이므로
+체 확대 $L/k$는 유한 생성이다. 환 $K \otimes_k L$은 뇌터이다
+(Algebra, Lemma \ref{algebra-lemma-Noetherian-field-extension}).
+이를 대수의 말로 옮기면, 모든 극소 소 아이디얼 $\mathfrak q$에
+대하여 아르틴 국소환 $(K \otimes_k L)_\mathfrak q$의 길이가
+$p$의 거듭제곱임을 보이면 된다.
+
+\medskip\noindent
+$L'/L$을 차수가 $p^n$인 유한 순수 비분리 확대라 하자. 그러면
+$K \otimes_k L \subset K \otimes_k L'$은 차수 $p^n$인 유한 자유
+환 사상이고, 스펙트럼의 위상동형과 순수 비분리 잉여체 확대를
+유도한다. 따라서 위의 각 극소 소 아이디얼 $\mathfrak q$ 위에 놓인
+극소 소 아이디얼 $\mathfrak q' \subset K \otimes_k L'$은 유일하고,
+$$
+p^n \text{length}((K \otimes_k L)_\mathfrak q) =
+[\kappa(\mathfrak q') : \kappa(\mathfrak q)]
+\text{length}((K \otimes_k L')_{\mathfrak q'})
+$$
+이다. 이는 $M = (K \otimes_k L')_{\mathfrak q'} \cong
+(K \otimes_k L)_{\mathfrak q}^{\oplus p^n}$에 Algebra, Lemma
+\ref{algebra-lemma-pushdown-module}을 적용한 것이다.
+$[\kappa(\mathfrak q') : \kappa(\mathfrak q)]$가 $p$의 거듭제곱이므로
+$L'$과 $\mathfrak q'$에 대하여 명제를 증명하면 충분하다.
+
+\medskip\noindent
+앞 단락과 Algebra, Lemma \ref{algebra-lemma-make-separable}에 의해
+$L/k'$는 분리 확대이고 $k'/k$는 유한 순수 비분리 확대인 부분체의
+탑 $L/k'/k$가 있다고 가정해도 된다. 그러면 $K \otimes_k k'$은
+아르틴 국소환이다. 앞 단락의 논증을 $L = k$와 $L' = k'$에
+적용하면 $\text{length}(K \otimes_k k')$가 $p$의 거듭제곱임을 안다.
+$L/k'$는 매끄러운 $k'$-대수의 국소화이다
+(Algebra, Lemma \ref{algebra-lemma-localization-smooth-separable}).
+따라서 $S = (K \otimes_k L)_\mathfrak q$는 매끄러운
+$R = K \otimes_k k'$-대수를 극소 소 아이디얼에서 국소화한 것이다.
+그러므로 $R \to S$는 아르틴 국소환 사이의 평탄 국소 준동형이고
+$\mathfrak m_R S = \mathfrak m_S$이다. Algebra, Lemma
+\ref{algebra-lemma-pullback-module}에서
+$\text{length}(K \otimes_k k') = \text{length}(R) =
+\text{length}(S) = \text{length}((K \otimes_k L)_\mathfrak q)$
+를 얻으므로 증명이 끝난다.
+\end{proof}
+
+
+
+
+\begin{lemma}
+\label{lemma-how-different}
+$k$를 표수 $p > 0$인 체라 하고 그 완전 폐포를 $k^{perf}$라 하자.
+$X$를 $k$ 위의 대수적 스킴이라 하고 $r \geq 0$을 정수라 하자.
+단사 사상 $Z_r(X) \to Z_r(X_{k^{perf}})$의 여핵은
+$p$-멱 꼬임 가군이다(More on Algebra, Definition
+\ref{more-algebra-definition-f-power-torsion}).
+\end{lemma}
+
+\begin{proof}
+$X$가 준콤팩트이므로 아벨 군 $Z_r(X)$는 차원 $r$인 정역
+폐부분스킴을 기저로 하는 자유군이다. $Z_r(X_{k^{perf}})$도 마찬가지다.
+$X_{k^{perf}} \to X$가 위상동형이므로
+$Z_r(X) \to Z_r(X_{k^{perf}})$는 꼬임 여핵을 갖는 단사 사상이다.
+Lemma \ref{lemma-multiplicities-field-extension}에 의해 여핵의 모든 원소는
+$p$-멱 꼬임이다.
+\end{proof}
+
+
+
+
+\section{사이클의 특수화}
+\label{section-specialization}
+
+\noindent
+$R$을 분수체 $K$와 잉여체 $\kappa$를 갖는 이산 값매김환이라 하자.
+$X$를 $R$ 위에서 국소 유한형인 스킴이라 하고 $r \geq 0$이라 하자.
+다음과 같은 특수화 사상이 있다.
+$$
+sp_{X/R} : Z_r(X_K) \longrightarrow Z_r(X_\kappa)
+$$
+이를 다음과 같이 정의한다. 차원 $r$인 정역 폐부분스킴
+$Z \subset X_K$에 대하여 $Z \to X$의 스킴론적 상을
+$\overline{Z}$로 쓴다. 그리고 $sp_{X/R}$를
+$$
+sp_{X/R}([Z]) = [\overline{Z}_\kappa]_r
+$$
+를 만족하는 유일한 $\mathbf{Z}$-선형 사상으로 둔다. 이것이 잘
+정의되는 이유를 간단히 설명하자. 먼저 사상 $X_K \to X$가
+준콤팩트이므로 $Z \to X$도 준콤팩트이다. 따라서 Morphisms, Lemma
+\ref{morphisms-lemma-flat-base-change-scheme-theoretic-image}에 의해
+$Z \to X$의 스킴론적 상을 취하는 것은 평탄 기저변환과 가환한다.
+특히 다시 $X_K$로 기저변환하면 $Z = \overline{Z}_K$임을 안다.
+$Z$가 정역이므로 $\overline{Z}$도 정역이며, 실제로 $Z$의 일반점의
+상을 일반점으로 갖는 유일한 정역 폐부분스킴과 같다.
+% P08-E055: the frozen source writes Z_\kappa rather than \overline{Z}_\kappa.
+Varieties, Lemma
+\ref{varieties-lemma-dominate-valuation-ring-dimension-fibres}에 의해
+$Z_\kappa$는 차원 $r$인 등차원 스킴이다.
+
+\begin{lemma}
+\label{lemma-specialization-module}
+$R$을 분수체 $K$와 잉여체 $\kappa$를 갖는 이산 값매김환이라 하자.
+$X$를 $R$ 위에서 국소 유한형인 스킴이라 하고 $r \geq 0$이라 하자.
+$\mathcal{F}$를 $R$ 위에서 평탄인 연접 $\mathcal{O}_X$-가군이라 하자.
+$\dim(\text{Supp}(\mathcal{F}_K)) \leq r$라 가정하면
+$\dim(\text{Supp}(\mathcal{F}_\kappa)) \leq r$이고
+$$
+sp_{X/R}([\mathcal{F}_K]_r) = [\mathcal{F}_\kappa]_r
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+차원에 관한 명제는 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-relative-dimension-support-flat}에서 따른다.
+$x$를 차원 $r$인 정역 폐부분스킴 $Z \subset X_\kappa$의
+일반점이라 하자. 증명을 끝내기 위해 위 등식의 왼쪽 (L)과
+오른쪽 (R)에서 $[Z]$의 계수가 같음을 보이겠다.
+
+\medskip\noindent
+$A = \mathcal{O}_{X, x}$, $M = \mathcal{F}_x$라 두자.
+$M$은 $R$ 위에서 평탄인 유한 $A$-가군이다. $\pi \in R$을
+$A/\pi A = \mathcal{O}_{X_\kappa, x}$가 되게 하는 균일화 원이라 하자.
+Chow Homology, Lemma \ref{chow-lemma-additivity-divisors-restricted}에 의해
+$$
+\sum\nolimits_i \text{length}_A(A/(\pi, \mathfrak q_i))
+\text{length}_{A_{\mathfrak q_i}}(M_{\mathfrak q_i}) =
+\text{length}_A(M/\pi M)
+$$
+이다. 여기서 합은 $M$의 지지집합에 있는 극소 소 아이디얼
+$\mathfrak q_i$ 전체에 걸친다. $\pi$는 $M$ 위의 비영인자이므로
+$\pi \not \in \mathfrak q_i$이고, 따라서 이 소 아이디얼들은 선택한
+$x \in X_\kappa$로 특수화하는 $\mathcal{F}_K$의 지지집합의 일반점
+$y_i \in X_K$들과 대응한다. 그러므로 왼쪽은 (L)에서 $[Z]$의
+계수이다. 물론 $\text{length}_A(M/\pi M)$은 (R)에서 $[Z]$의
+계수이다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-specialization-closed}
+$R$을 분수체 $K$와 잉여체 $\kappa$를 갖는 이산 값매김환이라 하자.
+$X$를 $R$ 위에서 국소 유한형인 스킴이라 하고 $r \geq 0$이라 하자.
+$W \subset X$를 $R$ 위에서 평탄인 폐부분스킴이라 하자.
+$\dim(W_K) \leq r$라 가정하면 $\dim(W_\kappa) \leq r$이고
+$$
+sp_{X/R}([W_K]_r) = [W_\kappa]_r
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F} = \mathcal{O}_W$로 두면 이는
+Lemma \ref{lemma-specialization-module}의 특수한 경우이다.
+Chow Homology, Lemma \ref{chow-lemma-cycle-closed-coherent}도 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-specialization-extension}
+$R'/R$을 분수체 확대 $K'/K$와 잉여체 확대 $\kappa'/\kappa$를
+유도하는 이산 값매김환의 확대라 하자(More on Algebra, Definition
+\ref{more-algebra-definition-extension-discrete-valuation-rings}).
+$X$를 $R$ 위에서 국소 유한형이라 하고 $X' = X_{R'}$로 쓰자.
+그러면 $r \geq 0$일 때 다음 도식은 가환한다.
+$$
+\xymatrix{
+Z_r(X'_{K'}) \ar[rr]_{sp_{X'/R'}} & & Z_r(X'_{\kappa'}) \\
+Z_r(X_K) \ar[rr]^{sp_{X/R}} \ar[u] & & Z_r(X_\kappa) \ar[u]
+}
+$$
+여기서 세로 화살표는 기저변환 사상이다.
+\end{lemma}
+
+\begin{proof}
+$X'_{K'} = X_{K'} = X_K \times_{\Spec(K)} \Spec(K')$이고 닫힌 올에
+대해서도 마찬가지이므로, 세로 화살표들은 실제로 정의된다
+(Section \ref{section-relative-fields} 참조). 이제
+$Z \subset X_K$를 스킴론적 상이 $\overline{Z} \subset X$인
+정역 폐부분스킴이라 하자. 그러면 $Z_{K'} \subset X_{K'}$는
+스킴론적 상이 $\overline{Z}_{R'} \subset X_{R'}$인 폐부분스킴이다.
+정의에 따라 $[Z]$의 기저변환은
+$[Z_{K'}]_r = [\overline{Z}_{K'}]_r$이다. Lemma
+\ref{lemma-specialization-module}에 의해
+$$
+sp_{X/R}([Z]) = [\overline{Z}_\kappa]_r
+\quad\text{and}\quad
+sp_{X'/R'}([\overline{Z}_{K'}]_r) = [(\overline{Z}_{R'})_{\kappa'}]_r
+$$
+이고, $(\overline{Z}_{R'})_{\kappa'} = (\overline{Z}_\kappa)_{\kappa'}$
+이므로 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-specialization-flat-pullback}
+$R$을 분수체 $K$와 잉여체 $\kappa$를 갖는 이산 값매김환이라 하자.
+$X$를 $R$ 위에서 국소 유한형인 스킴이라 하자.
+$f : X' \to X$를 국소 유한형이고 평탄하며 상대차원이 $e$인
+사상이라 하자. 그러면 $r \geq 0$일 때 다음 도식은 가환한다.
+$$
+\xymatrix{
+Z_{r + e}(X'_K) \ar[rr]_{sp_{X'/R}} & & Z_{r + e}(X'_\kappa) \\
+Z_r(X_K) \ar[rr]^{sp_{X/R}} \ar[u] & & Z_r(X_\kappa) \ar[u]
+}
+$$
+여기서 세로 화살표는 평탄 끌어오기에 의해 주어진다.
+\end{lemma}
+
+\begin{proof}
+$Z \subset X$를 $R$을 지배하는 정역 폐부분스킴이라 하자.
+$sp_{X/R}$의 구성에 의해 $sp_{X/R}([Z_K]) = [Z_\kappa]_r$이고,
+이 성질은 특수화 사상을 특징짓는다.
+$Z' = f^{-1}(Z) = X' \times_X Z$라 두자. $R$이 값매김환이므로
+$Z$는 $R$ 위에서 평탄이다. 따라서 $Z'$도 $R$ 위에서 평탄이고,
+Lemma \ref{lemma-specialization-closed}에 의해
+$sp_{X'/R}([Z'_K]_{r + e}) = [Z'_\kappa]_{r + e}$이다.
+또 Chow Homology, Lemma \ref{chow-lemma-pullback-coherent}에 의해
+$f_K^*[Z_K] = [Z'_K]_{r + e}$ 및
+$f_\kappa^*[Z_\kappa]_r = [Z'_\kappa]_{r + e}$이므로 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-specialization-proper-pushforward}
+$R$을 분수체 $K$와 잉여체 $\kappa$를 갖는 이산 값매김환이라 하자.
+$f : X \to Y$를 $R$ 위에서 국소 유한형인 스킴들 사이의
+고유 사상이라 하자. 그러면 $r \geq 0$일 때 다음 도식은 가환한다.
+$$
+\xymatrix{
+Z_r(X_K) \ar[rr]_{sp_{X/R}} \ar[d] & & Z_r(X_\kappa) \ar[d] \\
+Z_r(Y_K) \ar[rr]^{sp_{Y/R}} & & Z_r(Y_\kappa)
+}
+$$
+여기서 세로 화살표는 고유 전진에 의해 주어진다.
+\end{lemma}
+
+\begin{proof}
+$Z \subset X$를 $R$을 지배하는 정역 폐부분스킴이라 하자.
+$sp_{X/R}$의 구성에 의해 $sp_{X/R}([Z_K]) = [Z_\kappa]_r$이고,
+이 성질은 특수화 사상을 특징짓는다. $Z' = f(Z) \subset Y$라 두자.
+그러면 $Z'$는 $R$을 지배하는 $Y$의 정역 폐부분스킴이다. 따라서
+$sp_{Y/R}([Z'_K]) = [Z'_\kappa]_r$이다.
+
+\medskip\noindent
+$[Z]$를 $Z_{r + 1}(X)$의 원소로 볼 수 있다. 정의에 따라
+$\dim(Z') < r + 1$이면 $f_*[Z] = 0$이고, $Z \to Z'$가 차수 $d$인
+일반 유한 사상이면 $f_*[Z] = d[Z']$이다. 고유 전진은
+$Y_K \to Y$에 의한 평탄 끌어오기와 가환하므로(Chow Homology,
+Lemma \ref{chow-lemma-flat-pullback-proper-pushforward}), 이에 대응하여
+$f_{K, *}[Z_K] = 0$이거나 $f_{K, *}[Z_K] = d[Z'_K]$이다.
+다음 가환 도식에 Chow Homology, Lemma
+\ref{chow-lemma-closed-in-X-gysin}을 적용하자.
+$$
+\xymatrix{
+X_\kappa \ar[d] \ar[r]_i & X \ar[d] \\
+Y_\kappa \ar[r]^j & Y
+}
+$$
+% P08-E056: the frozen source uses the undefined subscript k here.
+$i^*[Z] = [Z_k]_r$이고 $j^*[Z'] = [Z'_\kappa]_r$임이 분명하므로
+$f_{\kappa, *}[Z_\kappa]_r = 0$이거나
+$f_{\kappa, *}[Z_\kappa] = d[Z'_\kappa]_r$이다. 이들을 종합하면
+결론이 따른다.
+\end{proof}
+
+
+\section{올 위의 사이클 족}
+\label{section-cycles-fibres}
+
+\noindent
+$f : X \to S$를 국소 유한형인 스킴의 사상이라 하자.
+$r \geq 0$을 정수라 하자. {\it $X/S$의 올 위의 $r$-사이클 족
+$\alpha$}란 스킴 $S$의 점 $s$들로 첨자화된 족
+$$
+\alpha = (\alpha_s)_{s \in S}
+$$
+으로서, $\alpha_s \in Z_r(X_s)$가 $s$에서 $f$의 스킴론적 올
+$X_s$ 위의 $r$-사이클인 것을 말한다. 올 위의 $r$-사이클 족에는
+여러 구성을 적용할 수 있다.
+
+\medskip\noindent
+{\bf 기저변환.} 다음 도식을 생각하자.
+$$
+\xymatrix{
+X' \ar[r] \ar[d] & X \ar[d]^f \\
+S' \ar[r]^g & S
+}
+$$
+이는 $f$가 국소 유한형인 스킴 사상들의 데카르트 정사각형이라 하자.
+$r \geq 0$을 정수라 하자. $X/S$의 올 위의 $r$-사이클 족
+$\alpha$가 주어지면, $\alpha$의 {\it 기저변환} $g^*\alpha$를
+다음 족으로 정의한다.
+$$
+g^*\alpha = (\alpha'_{s'})_{s' \in S'}
+$$
+여기서 $s = g(s')$라 할 때 $\alpha'_{s'} \in Z_r(X'_{s'})$는
+Section \ref{section-relative-fields}에서 정의한 사이클 $\alpha_s$의
+기저변환이며, 스킴론적 올의 동일시
+$X'_{s'} = X_s \times_{\Spec(\kappa(s))} \Spec(\kappa(s'))$를 사용한다.
+
+\medskip\noindent
+{\bf 제한.} $f : X \to S$를 국소 유한형인 스킴 사상이라 하고
+$r \geq 0$을 정수라 하자. $U \subset X$, $V \subset S$를
+$f(U) \subset V$인 열린 부분스킴이라 하자. $X/S$의 올 위의
+$r$-사이클 족 $\alpha$가 주어지면, $\alpha$의 {\it 제한}
+$\alpha|_U$를 스킴론적 올에 대한 제한들의 족
+$$
+\alpha|_U = (\alpha_s|_{U_s})_{s \in V}
+$$
+으로 정의할 수 있다. 이는 $U/V$의 올 위의 $r$-사이클 족이다.
+
+\medskip\noindent
+{\bf 평탄 끌어오기.} $X \to S$를 국소 유한형인 스킴 사상이라
+하자. $r, e \geq 0$을 정수라 하자. $f : X' \to X$를 국소
+유한형이고 평탄하며 상대차원이 $e$인 사상이라 하자. $X/S$의
+올 위의 $r$-사이클 족 $\alpha$가 주어지면, $\alpha$의
+{\it 평탄 끌어오기} $f^*\alpha$를 다음 올 위의 $(r + e)$-사이클
+족으로 정의한다.
+$$
+f^*\alpha = (f_s^*\alpha_s)_{s \in S}
+$$
+여기서 $f_s^*\alpha_s \in Z_{r + e}(X'_s)$는 상대차원 $e$인 스킴론적
+올의 평탄 사상 $f_s : X'_s \to X_s$에 의해 $Z_r(X_s)$의 사이클
+$\alpha_s$를 평탄하게 끌어온 것이다.
+
+\medskip\noindent
+{\bf 고유 전진.} 다음을 $X$와 $Y$가 $S$ 위에서 국소 유한형이고
+$f$가 고유인 스킴 사상들의 가환 도식이라 하자.
+$$
+\xymatrix{
+X \ar[rr]_f \ar[rd] & & Y \ar[ld] \\
+& S
+}
+$$
+$r \geq 0$을 정수라 하자. $X/S$의 올 위의 $r$-사이클 족
+$\alpha$가 주어지면, $\alpha$의 {\it 고유 전진} $f_*\alpha$를
+$Y/S$의 올 위의 다음 $r$-사이클 족으로 정의한다.
+$$
+f_*\alpha = (f_{s, *}\alpha_s)_{s \in S}
+$$
+여기서 $f_{s, *}\alpha_s \in Z_r(Y_s)$는 스킴론적 올의 고유 사상
+$f_s : X_s \to Y_s$에 의해 $Z_r(X_s)$의 사이클 $\alpha_s$를
+고유 전진한 것이다.
+
+\begin{lemma}
+\label{lemma-compatibilities}
+위 연산들 사이에는 다음 양립성이 있다.
+(1) 기저변환은 함자적이다.
+(2) 제한은 기저변환과 평탄 끌어오기의 한 특수한 경우를 합성한 것이다.
+(3) 평탄 끌어오기는 기저변환과 가환한다.
+(4) 평탄 끌어오기는 함자적이다.
+(5) 고유 전진은 기저변환과 가환한다.
+(6) 고유 전진은 함자적이다.
+(7) 고유 전진은 평탄 끌어오기와 가환한다.
+\end{lemma}
+
+\begin{proof}
+각 양립성은 해당 스킴들의 $S$ 위 올에 Chow 호몰로지 장에서 증명한
+결과를 적용하면 바로 따른다. 정확한 명제와 상세한 증명은 생략한다.
+관련 문헌은 다음과 같다. (1)은 Chow Homology, Lemma
+\ref{chow-lemma-compose-base-change}, (2)는 자명하고, (3)은 Chow Homology,
+Lemma \ref{chow-lemma-pullback-base-change-pullback}, (4)는 Chow Homology,
+Lemma \ref{chow-lemma-compose-flat-pullback}, (5)는 Chow Homology, Lemma
+\ref{chow-lemma-pullback-base-change-pushforward}, (6)은 Chow Homology,
+Lemma \ref{chow-lemma-compose-pushforward}, (7)은 Chow Homology, Lemma
+\ref{chow-lemma-flat-pullback-proper-pushforward}이다.
+\end{proof}
+
+\begin{example}
+\label{example-family-associated-module}
+$f : X \to S$를 국소 유한형인 스킴 사상이라 하자.
+$r \geq 0$을 정수라 하고 $\mathcal{F}$를 유한형 준연접
+$\mathcal{O}_X$-가군이라 하자. $s \in S$에 대하여 $\mathcal{F}$를
+$X_s$로 끌어온 것을 $\mathcal{F}_s$로 쓴다. 모든 $s \in S$에
+대하여 $\dim(\text{Supp}(\mathcal{F}_s)) \leq r$라 가정하자.
+그러면 $\mathcal{F}$에 $X/S$의 올 위의 $r$-사이클 족
+$[\mathcal{F}/X/S]_r$를 다음 식으로 대응시킬 수 있다.
+$$
+[\mathcal{F}/X/S]_r = ([\mathcal{F}_s]_r)_{s \in S}
+$$
+여기서 $[\mathcal{F}_s]_r$는 Chow Homology, Definition
+\ref{chow-definition-cycle-associated-to-coherent-sheaf}로 주어진다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-family-associated-module}
+Example \ref{example-family-associated-module}의 구성은 기저변환,
+제한, 평탄 끌어오기와 양립한다.
+\end{lemma}
+
+\begin{proof}
+Chow Homology, Lemmas
+\ref{chow-lemma-pullback-coherent-base-change}와
+\ref{chow-lemma-pullback-coherent}를 보라.
+\end{proof}
+
+\begin{example}
+\label{example-family-associated-closed}
+$f : X \to S$를 국소 유한형인 스킴 사상이라 하자.
+$r \geq 0$을 정수라 하고 $Z \subset X$를 폐부분스킴이라 하자.
+$s \in S$에 대하여 $X_s$ 안의 $Z$의 역상을 $Z_s$라 쓴다.
+이는 동치로 $s$에서 $Z$의 스킴론적 올을 $X_s$의 폐부분스킴으로
+본 것이다. 모든 $s \in S$에 대하여 $\dim(Z_s) \leq r$라 가정하자.
+그러면 $Z$에 $X/S$의 올 위의 $r$-사이클 족 $[Z/X/S]_r$를
+다음 식으로 대응시킬 수 있다.
+$$
+[Z/X/S]_r = ([Z_s]_r)_{s \in S}
+$$
+여기서 $[Z_s]_r$는 Chow Homology, Definition
+\ref{chow-definition-cycle-associated-to-closed-subscheme}로 주어진다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-family-associated-closed}
+Example \ref{example-family-associated-closed}의 구성은 기저변환,
+제한, 평탄 끌어오기와 양립한다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F} = (Z \to X)_*\mathcal{O}_Z$로 두면 이는
+Lemma \ref{lemma-family-associated-module}의 특수한 경우이다.
+Chow Homology, Lemma \ref{chow-lemma-cycle-closed-coherent}도 보라.
+\end{proof}
+
+\begin{remark}[지지집합]
+\label{remark-supports-family}
+$f : X \to S$를 국소 유한형인 스킴 사상이라 하고 $r \geq 0$을
+정수라 하자. $\alpha$를 $X/S$의 올 위의 $r$-사이클 족이라 하자.
+$\alpha$의 {\it 지지집합}을
+$$
+\text{Supp}(\alpha) =
+\bigcup\nolimits_{s \in S} \text{Supp}(\alpha_s) \subset X
+$$
+로 정의한다. 여기서 $\text{Supp}(\alpha_s) \subset X_s$는
+사이클 $\alpha_s$의 지지집합이다. Chow Homology, Definition
+\ref{chow-definition-support-cycle}을 보라. 지지집합
+$\text{Supp}(\alpha)$가 $X$의 닫힌 부분집합인 경우는 드물다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-support-family}
+Remark \ref{remark-supports-family}에서처럼 지지집합을 취하는 것은
+기저변환, 제한, 평탄 끌어오기와 양립한다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+
+\begin{lemma}
+\label{lemma-coequalizer-dim-r}
+$f : X \to S$를 국소 유한형인 스킴 사상이라 하고 $r \geq 0$을
+정수라 하자. $g : S' \to S$를 전사 스킴 사상이라 하자.
+$S'' = S' \times_S S'$로 두고 $f' : X' \to S'$와
+$f'' : X'' \to S''$를 $f$의 기저변환이라 하자.
+$\text{trdeg}_{\kappa(f(x))}(\kappa(x)) = r$인 $x \in X$에 대하여
+다음이 성립한다.
+\begin{enumerate}
+\item $x$로 사상되고 $\text{trdeg}_{\kappa(f'(x'))}(\kappa(x')) = r$인
+$x' \in X'$가 존재한다.
+\item $x'_1, x'_2 \in X'$가 둘 다 (1)과 같다면,
+$\text{trdeg}_{\kappa(f''(x''))}(\kappa(x'')) = r$이고
+$\text{pr}_i(x'') = x'_i$인 $x'' \in X''$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 Morphisms, Lemma
+\ref{morphisms-lemma-dimension-fibre-after-base-change}이다.
+$x'_1, x'_2$를 (2)와 같이 잡자. $X'' = X' \times_X X'$이므로
+$x'_1$과 $x'_2$ 모두로 사상되는 $x'' \in X''$가 존재한다
+(예를 들어 Descent, Lemma \ref{descent-lemma-equiv-fibre-product} 참조).
+$x''$, $x'_i$, $x$의 상을 각각 $s'' \in S''$, $s'_i \in S'$,
+$s \in S$라 쓰자. $k = \kappa(s)$라 두고 $Z \subset X_k$를
+일반점이 $x$인 정역 폐부분스킴이라 하자. 그러면 $x'_i$는
+$Z_{\kappa(s'_i)}$의 한 기약 성분의 일반점이다.
+$Z'' \subset Z_{\kappa(s'')}$를 $x''$를 포함하는 기약 성분이라 하고
+그 일반점을 $\xi'' \in Z''$라 하자. $\xi'' \leadsto x''$이므로
+$\xi''$는 두 사영 아래에서 모두 $x'_i$로 사상되어야 한다. 한편
+그 점은 $Z$의 기저변환의 기약 성분의 일반점이므로
+$\text{trdeg}_{\kappa(s'')}(\kappa(\xi'')) = r$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descend-family}
+$f : X \to S$를 국소 유한형인 스킴 사상이라 하고 $r \geq 0$을
+정수라 하자. $g : S' \to S$를 스킴 사상이라 하고
+$X' = S' \times_S X$라 두자. 모든 $s \in S$에 대하여
+$g(s') = s$이고 $\kappa(s')/\kappa(s)$가 분리 체 확대인 점
+$s' \in S'$가 존재한다고 가정하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item $X/S$의 올 위의 $r$-사이클 족 $\alpha_1$, $\alpha_2$에 대하여
+$g^*\alpha_1 = g^*\alpha_2$이면 $\alpha_1 = \alpha_2$이다.
+\item $X'/S'$의 올 위의 $r$-사이클 족 $\alpha'$가 주어졌다고 하자.
+$(S' \times_S S') \times_S X / (S' \times_S S')$의 올 위의
+$r$-사이클 족으로서
+$\text{pr}_1^*\alpha' = \text{pr}_2^*\alpha'$이면,
+$g^*\alpha = \alpha'$인 $X/S$의 올 위의 $r$-사이클 족
+$\alpha$가 유일하게 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 Section \ref{section-relative-fields}에서 논의한 기저변환 사상의
+단사성에서 따른다. 이 논증은 $S' \to S$가 전사이기만 하면 성립한다.
+
+\medskip\noindent
+$\alpha'$를 (2)와 같이 두고 공통값을
+$\alpha'' = \text{pr}_1^*\alpha' = \text{pr}_2^*\alpha'$로 쓰자.
+
+\medskip\noindent
+$(X/S)^{(r)}$를 $\text{trdeg}_{\kappa(f(x))}(\kappa(x)) = r$인
+$x \in X$의 집합이라 하고, $(X'/S')^{(r)}$와 $(X''/S'')^{(r)}$도
+마찬가지로 정의하자. 계수를 취하면 $\alpha'$와 $\alpha''$를 함수
+$\alpha' : (X'/S')^{(r)} \to \mathbf{Z}$ 및
+$\alpha'' : (X''/S'')^{(r)} \to \mathbf{Z}$로 볼 수 있다.
+함수
+$$
+\varphi : (X/S)^{(r)} \to \mathbf{Z}
+$$
+가 주어지면, 기저변환 연산과 유사하게
+$g^*\varphi : (X'/S')^{(r)} \to \mathbf{Z}$를 정의한다.
+구체적으로 $x' \in (X'/S')^{(r)}$가 $x \in X$, $s' \in S'$,
+% P08-E059: the frozen source puts s in Z instead of the base S.
+$s \in Z$로 사상된다고 하자. 일반점이 각각 $x'$와 $x$인
+정역 폐부분스킴을 $Z' \subset X'_{s'}$와 $Z \subset X_s$라 하자.
+$\dim(Z') = r$임에 주의하라. $\dim(Z) < r$이면
+$(g^*\varphi)(x') = 0$으로 둔다. $\dim(Z) = r$이면 $Z'$는
+$Z_{s'}$의 기약 성분이고 따라서 중복도 $m_{Z', Z_{s'}}$를 갖는다.
+이를 $m(x', g)$라 하자. 이제
+$$
+(g^*\varphi)(x') = m(x', g) \varphi(x)
+$$
+로 정의한다. 계수 $m(x', g)$는 항상 양의 정수이다
+(예를 들어 Lemma \ref{lemma-multiplicities-field-extension} 참조).
+마찬가지로 기저변환 사상
+$$
+\text{pr}_1^*, \text{pr}_2^* :
+\text{Map}((X'/S')^{(r)}, \mathbf{Z})
+\longrightarrow
+\text{Map}((X''/S'')^{(r)}, \mathbf{Z})
+$$
+가 있다. 기저변환의 결합법칙에서
+$\text{pr}_1^* \circ g^* = \text{pr}_2^* \circ g^*$가 따른다
+(작은 세부사항은 생략한다). 집합 사상으로 명시하면 이 등식은
+$x'' \in (X''/S'')^{(r)}$에 대하여
+$$
+m(x'', \text{pr}_1) m(\text{pr}_1(x''), g) =
+m(x'', \text{pr}_2) m(\text{pr}_2(x''), g)
+$$
+임을 뜻한다. 단, 다음의 얼어 있는 대상 조건을 사용한다.
+% P08-E060: both projections land in (X'/S')^(r), not the frozen (X''/S'')^(r).
+$\text{pr}_1(x'')$와 $\text{pr}_2(x'')$는
+$(X''/S'')^{(r)}$에 속한다.
+Lemma \ref{lemma-coequalizer-dim-r}와 앞의 표시식에 대한 초등적
+논증\footnote{$x \in (X/S)^{(r)}$가 주어지면 $x$로 사상되는
+$x' \in (X'/S')^{(r)}$를 잡고
+$\alpha(x) = \alpha'(x')/m(x', g)$로 둔다. 이 식과 보조정리에 의해
+이는 잘 정의된다.}에서, 유일한 사상
+$$
+\alpha : (X/S)^{(r)} \to \mathbf{Q}
+$$
+가 존재하여 $g^*\alpha = \alpha'$임이 따른다. 증명을 끝내려면
+$\alpha$가 정숫값을 가짐을 보이면 충분하다. 여기서 생략한 작은
+세부사항은 $\alpha$가 각 올에서 국소 유한합을 정한다는 것인데,
+이는 $\alpha'$에 대한 해당 사실에서 따른다. 상이 $s \in S$인
+임의의 $x \in (X/S)^{(r)}$에 대하여
+$\kappa(s')/\kappa(s)$가 분리인 점 $s' \in S'$를 잡을 수 있다.
+이제 $s$와 $x$로 사상되는 $x' \in (X'/S')^{(r)}$를 고르면,
+이 경우 $Z_{s'}$가 환원이므로 $m(x', g) = 1$임을 안다.
+따라서 $\alpha(x) = \alpha'(x')$는 정수이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pullback-universally-bijective}
+$g : S' \to S$를 잉여체의 동형을 유도하는 전단사 스킴 사상이라 하자.
+$f : X \to S$를 국소 유한형이라 하고 $X' = S' \times_S X$라 두자.
+$r \geq 0$이라 하자. 그러면 $g$에 의한 기저변환은 $X/S$의 올
+위의 $r$-사이클 족의 군과 $X'/S'$의 올 위의 $r$-사이클 족의 군
+사이의 전단사를 정한다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+
+\section{상대 사이클}
+\label{section-families-specialization}
+
+\noindent
+이제부터 사용할 정의는 다음과 같다. \cite{SV}의 정의와의 비교는
+Section \ref{section-compare}를 보라.
+
+\begin{definition}
+\label{definition-relative-cycles}
+$S$를 국소 뇌터 스킴이라 하자. $f : X \to S$를 국소 유한형인
+스킴 사상이라 하고 $r \geq 0$을 정수라 하자. {\it $X/S$ 위의 상대
+$r$-사이클}이란 $X/S$의 올 위의 $r$-사이클 족 $\alpha$로서,
+$S'$가 이산 값매김환의 스펙트럼인 모든 사상 $g : S' \to S$에 대하여
+$$
+sp_{X'/S'}(\alpha_\eta) = \alpha_0
+$$
+인 것을 말한다. 여기서 $sp_{X'/S'}$는 Section
+\ref{section-specialization}과 같고, $\alpha_\eta$와 $\alpha_0$는 각각
+$\alpha$의 기저변환 $g^*\alpha$를 $S'$의 일반점과 닫힌점에서 취한
+값이다. $X/S$ 위의 모든 상대 $r$-사이클의 군을 $z(X/S, r)$로 쓴다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-relative-cycle-functoriality}
+Definition \ref{definition-relative-cycles}과 같은 $X/S$ 위의 상대
+$r$-사이클 $\alpha$를 잡자. 그러면 $\alpha$의 임의의 제한,
+기저변환, 평탄 끌어오기 또는 고유 전진은 상대 $r$-사이클이다.
+\end{lemma}
+
+\begin{proof}
+평탄 끌어오기에는 Lemma \ref{lemma-specialization-flat-pullback}을 쓴다.
+제한은 평탄 끌어오기의 특수한 경우이다. 기저변환에 대해서는
+기저변환의 추이성을 사용한다. 고유 전진에는
+Lemma \ref{lemma-specialization-proper-pushforward}를 쓴다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-cycles-h-descent}
+$f : X \to S$를 스킴 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라 가정하자. $r \geq 0$을 정수라 하고 $\alpha$를
+$X/S$의 올 위의 $r$-사이클 족이라 하자. $\{g_i : S_i \to S\}$를
+h-피복이라 하자(More on Flatness, Definition
+\ref{flat-definition-h-covering}). 그러면 $\alpha$가 상대 $r$-사이클일
+필요충분조건은 각 기저변환 $g_i^*\alpha$가 상대 $r$-사이클인 것이다.
+\end{lemma}
+
+\begin{proof}
+$\alpha$가 상대 $r$-사이클이면 Lemma
+\ref{lemma-relative-cycle-functoriality}에 의해 각 $g_i^*\alpha$도
+상대 $r$-사이클이다. 반대로 각 $g_i^*\alpha$가 상대 $r$-사이클이라
+가정하자. $S'$가 이산 값매김환의 스펙트럼인 사상
+$g : S' \to S$를 잡자. $S$를 $S'$로, $X$를
+$X' = X \times_S S'$로, $\alpha$를 $\alpha' = g^*\alpha$로 바꾸고,
+h-피복의 기저변환도 h-피복이라는 사실(More on Flatness, Lemma
+\ref{flat-lemma-h})을 쓰면 다음 단락의 문제로 환원된다.
+
+\medskip\noindent
+$S$가 닫힌점 $0$과 일반점 $\eta$를 갖는 이산 값매김환의
+스펙트럼이라고 하자. $sp_{X/S}(\alpha_\eta) = \alpha_0$임을 보여야
+한다. h-피복은 정의상 V-피복이므로 어떤 $i$와 $S_i$의 점들의
+특수화 $s' \leadsto s$가 존재하여 $g_i(s') = \eta$ 및
+$g_i(s) = 0$이다. Topologies, Lemma
+\ref{topologies-lemma-refine-qcqs-V}를 보라. Properties, Lemma
+\ref{properties-lemma-locally-Noetherian-specialization-dvr}에 의해
+이산 값매김환의 스펙트럼 $S'$에서 오는 사상 $h : S' \to S_i$로서,
+일반점 $\eta'$를 $s'$로 보내고 닫힌점 $0'$를 $s$로 보내는 것을
+찾을 수 있다. $\alpha' = h^*g_i^*\alpha$로 쓰자. 가정에 의해
+$sp_{X'/S'}(\alpha'_{\eta'}) = \alpha'_{0'}$이다.
+$g = g_i \circ h : S' \to S$는 이산 값매김환의 확대가 유도하는
+스킴 사상이므로, Lemma \ref{lemma-specialization-extension}에 의해
+$sp_{X/S}$와 $sp_{X'/S'}$는 올 위의 기저변환 사상과 양립한다.
+Section \ref{section-relative-fields}에서 논의했듯 기저변환 사상
+$Z_r(X_0) \to Z_r(X'_{0'})$가 단사이므로
+$sp_{X/S}(\alpha_\eta) = \alpha_0$라는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-families-specialization-fppf-descent}
+$f : X \to S$를 스킴 사상이라 하고 $S$는 국소 뇌터이며 $f$는
+국소 유한형이라 가정하자. $r, e \geq 0$을 정수라 하자.
+$\alpha$를 $X/S$의 올 위의 $r$-사이클 족이라 하자.
+$\{f_i : X_i \to X\}$를 국소 유한형이고 평탄하며 상대차원이
+$e$인 사상들의 공동 전사 족이라 하자. 그러면 $\alpha$가 상대
+$r$-사이클일 필요충분조건은 각 평탄 끌어오기 $f_i^*\alpha$가
+상대 $r$-사이클인 것이다.
+\end{lemma}
+
+\begin{proof}
+$\alpha$가 상대 $r$-사이클이면 Lemma
+\ref{lemma-relative-cycle-functoriality}에 의해 각 $f_i^*\alpha$도
+상대 $r$-사이클이다. 반대로 각 $f_i^*\alpha$가 상대 $r$-사이클이라
+가정하자. $S'$가 이산 값매김환의 스펙트럼인 사상
+$g : S' \to S$를 잡자. $S$를 $S'$로, $X$를
+$X' = X \times_S S'$로, $\alpha$를 $\alpha' = g^*\alpha$로 바꾸면
+다음 단락의 문제로 환원된다.
+
+\medskip\noindent
+$S$가 닫힌점 $0$과 일반점 $\eta$를 갖는 이산 값매김환의
+스펙트럼이라고 하자. $sp_{X/S}(\alpha_\eta) = \alpha_0$임을 보여야
+한다. $f_i$를 $S$의 닫힌점으로 기저변환한 것을
+$f_{i, 0} : X_{i, 0} \to X_0$라 하자. $f_{i, \eta}$도 마찬가지다.
+다음 등식을 관찰하라.
+$$
+f_{i, 0}^*sp_{X/S}(\alpha_\eta) =
+sp_{X_i/S}(f_{i, \eta}^*\alpha_\eta) = f_{i, 0}^*\alpha_0
+$$
+첫 등식은 Lemma \ref{lemma-specialization-flat-pullback}에서 따르고,
+둘째 등식은 가정에서 따른다. 사상들의 족
+$f_{i, 0}^* : Z_r(X_0) \to Z_r(X_{i, 0})$는 공동 단사이다.
+이는 $f_{i, 0}$가 공동 전사이기 때문이다. 따라서 원하는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-check-after-closed}
+$S$를 국소 뇌터 스킴이라 하고 $i : X \to Y$를 $S$ 위에서 국소
+유한형인 스킴들의 닫힌 몰입이라 하자. $r \geq 0$이라 하자.
+$\alpha$를 $X/S$의 올 위의 $r$-사이클 족이라 하자. 그러면
+$\alpha$가 $X/S$ 위의 상대 $r$-사이클일 필요충분조건은
+$i_*\alpha$가 $Y/S$ 위의 상대 $r$-사이클인 것이다.
+\end{lemma}
+
+\begin{proof}
+기저변환은 $i_*$와 가환하므로(Lemma \ref{lemma-compatibilities}),
+다음을 증명하면 충분하다. $S$가 일반점 $\eta$와 닫힌점 $0$을 갖는
+이산 값매김환의 스펙트럼이면
+$sp_{X/S}(\alpha_\eta) = \alpha_0$일 필요충분조건은
+$sp_{Y/S}(i_{\eta, *}\alpha_\eta) = i_{0, *}\alpha_0$인 것이다.
+이는 $i_{0, *} : Z_r(X_0) \to Z_r(Y_0)$가 단사이고,
+Lemma \ref{lemma-specialization-proper-pushforward}에 의해
+$i_{0, *}sp_{X/S}(\alpha_\eta) =
+sp_{Y/S}(i_{\eta, *}\alpha_\eta)$이기 때문이다.
+\end{proof}
+
+\noindent
+다음 보조정리는 Lemma \ref{lemma-relative-cycles-equal}에서 강화된다.
+
+\begin{lemma}
+\label{lemma-uniqueness-extension}
+$f : X \to S$를 스킴 사상이라 하고 $S$는 국소 뇌터이며 $f$는
+국소 유한형이라 가정하자. $r \geq 0$이라 하자. $\alpha$와 $\beta$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $\alpha = \beta$이다.
+\item $S$의 한 기약 성분의 임의의 일반점 $\eta \in S$에 대하여
+$\alpha_\eta = \beta_\eta$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2)는 즉시 성립한다. (2)를 가정하자. 모든
+$s \in S$에 대하여 $s$로 특수화하는 (2)와 같은 $\eta$를 찾을 수
+있다. Properties, Lemma
+\ref{properties-lemma-locally-Noetherian-specialization-dvr}에 의해
+이산 값매김환의 스펙트럼 $S'$에서 오는 사상 $g : S' \to S$로서,
+일반점 $\eta'$를 $\eta$로 보내고 닫힌점 $0$을 $s$로 보내는 것을
+찾을 수 있다. 그러면 $\alpha_s$와 $\beta_s$는 $Z_r(X_s)$의 원소이며,
+$Z_r(X_{0'})$의 같은 원소로 기저변환된다. 그 원소는
+$sp_{X_{S'}/S'}(\alpha_{\eta'})$이고, 여기서 $\alpha_{\eta'}$는
+$\alpha_\eta$의 기저변환이다. Section \ref{section-relative-fields}에서
+논의했듯 기저변환 사상 $Z_r(X_s) \to Z_r(X_{0'})$가 단사이므로
+$\alpha_s = \beta_s$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-family-associated-module-specialization}
+Example \ref{example-family-associated-module}의 상황에서 $S$가 국소
+뇌터이고 $\mathcal{F}$가 차원 $\geq r$에서 $S$ 위로 평탄이라고
+가정하자(More on Flatness, Definition
+\ref{flat-definition-flat-dimension-n}). 그러면
+$[\mathcal{F}/X/S]_r$는 $X/S$ 위의 상대 $r$-사이클이다.
+\end{lemma}
+
+\begin{proof}
+More on Flatness, Lemma \ref{flat-lemma-pre-flat-dimension-n}에 의해
+$\mathcal{F}$에 대한 가정은 임의의 기저변환으로 보존된다. 또한
+Lemma \ref{lemma-family-associated-module}에 의해
+$[\mathcal{F}/X/S]_r$의 형성은 임의의 기저변환과 양립한다.
+특수화와의 양립성은 이산 값매김환의 스펙트럼으로 기저변환한 뒤
+확인하므로, $S$가 값매김환의 스펙트럼인 경우로 환원된다. 이 경우
+$U = \{x \in X \mid \mathcal{F}\text{ flat at }x\text{ over }S\}$는
+More on Flatness, Lemma \ref{flat-lemma-finite-type-flat}에 의해
+$X$에서 열린집합이다. 가정에 의해 $X$에서 $U$의 여집합은 $S$ 위의
+올차원이 $< r$이므로, 포함 $U \subset X$를 따른 제한은 임의의
+기저변환 뒤 올 위의 $r$-사이클 군에 동형을 유도하며, 특수화 사상
+및 $\mathcal{F}$에 딸린 상대 사이클의 형성과 양립한다. 따라서
+$[\mathcal{F}|_U / U /S]_r$의 특수화 양립성을 보이면 충분하다.
+$\mathcal{F}|_U$가 $S$ 위에서 평탄이므로 이는 Lemma
+\ref{lemma-specialization-module}과 정의에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-family-associated-closed-specialization}
+Example \ref{example-family-associated-closed}의 상황에서 $S$가 국소
+뇌터이고 $Z$가 차원 $\geq r$에서 $S$ 위로 평탄이라고 가정하자.
+그러면 $[Z/X/S]_r$는 $X/S$ 위의 상대 $r$-사이클이다.
+\end{lemma}
+
+\begin{proof}
+가정은 $\mathcal{O}_Z$가 차원 $\geq r$에서 $S$ 위로 평탄이라는
+뜻이다. 그러므로 Lemma \ref{lemma-family-associated-module-specialization}을
+$\mathcal{F} = (Z \to X)_*\mathcal{O}_Z$에 적용하면 결론이 따른다.
+\end{proof}
+
+\noindent
+$S$를 국소 뇌터 스킴이라 하고 $f : X \to S$를 유한형 사상이라
+하자. $r \geq 0$이라 하자. $Hilb(X/S, r)$을 폐부분스킴
+$Z \subset X$로서 $Z \to S$가 평탄이고 상대차원이 $\leq r$인
+것들의 집합이라 하자. Lemma
+\ref{lemma-family-associated-closed-specialization}에 의해 각
+$Z \in Hilb(X/S, r)$에 대하여 $[Z/X/S]_r \in z(X/S, r)$이다.
+따라서 다음 군 준동형을 얻는다.
+\begin{equation}
+\label{equation-cycle-classes}
+\text{free abelian group on }Hilb(X/S, r) \longrightarrow z(X/S, r)
+\end{equation}
+이는 $\sum n_i[Z_i]$를 $\sum n_i[Z_i/X/S]_r$로 보낸다. 상대
+$r$-사이클의 핵심 성질은 적절한 위상에서 $X$와 $S$ 위로 국소적으로
+이 사상의 상에 놓인다는 것이다.
+
+\begin{lemma}
+\label{lemma-get-cycles}
+$f : X \to S$를 $S$가 뇌터인 스킴들의 유한형 사상이라 하자.
+$r \geq 0$이라 하고 $\alpha$를 $X/S$ 위의 상대 $r$-사이클이라 하자.
+그러면 고유이고 완전 분해된 사상(More on Morphisms, Definition
+\ref{more-morphisms-definition-cd-morphism}) $g : S' \to S$가 존재하여
+$g^*\alpha$는 (\ref{equation-cycle-classes})의 상에 놓인다.
+\end{lemma}
+
+\begin{proof}
+뇌터 귀납법에 의해, 동형이 아닌 임의의 닫힌 몰입
+$g : S' \to S$로 $\alpha$를 끌어온 것에 대해서는 결과가
+성립한다고 가정할 수 있다.
+
+\medskip\noindent
+$S_1 \subset S$를 한 기약 성분으로 잡고 정역 폐부분스킴으로 보자.
+% P08-E061: frozen S' should be S_1 in this complement and the later bijection.
+$S_2 \subset S$를 $S'$의 여집합의 폐포로 잡고 환원 폐부분스킴으로
+보자. $S_2 \not = \emptyset$이면 $S_1 \to S$와 $S_2 \to S$로
+$\alpha$를 끌어온 것에 대하여 결과가 성립한다. 대응하는 완전 분해
+고유 사상을 $g_1 : S'_1 \to S_1$과 $g_2 : S'_2 \to S_2$라 하면,
+$S' = S'_1 \amalg S'_2 \to S$는 완전 분해 고유 사상이고 $S$에
+대하여 결과가 성립한다.\footnote{구체적으로 $S'_1$ 위에서 평탄이고
+상대차원이 $\leq r$인 $S'_1 \times_S X$의 임의의 폐부분스킴을,
+$S'$ 위에서 평탄이고 상대차원이 $\leq r$인 $S' \times_S X$의
+폐부분스킴으로 볼 수 있다.} 따라서 $S' \to S$가 전단사라고
+가정할 수 있고 다음 단락의 경우로 환원된다.
+
+\medskip\noindent
+$S$가 정역이라고 하자. $\eta \in S$를 일반점이라 하고
+$K = \kappa(\eta)$를 $S$의 함수체라 하자. 그러면 $\alpha_\eta$는
+$X_K$ 위의 $r$-사이클이다. $\alpha_\eta = \sum n_i[Y_i]$로 쓰자.
+$Y_i$의 폐포를 취하면 $\eta$로 기저변환했을 때 $Y_i$가 되는
+정역 폐부분스킴 $Z_i \subset X$를 얻는다. 일반 평탄성(예를 들어
+Morphisms, Proposition \ref{morphisms-proposition-generic-flatness})에
+의해 각 $i$에 대하여 $Z_i$는 $S$의 어떤 공집합이 아닌 열린집합
+$U$ 위에서 평탄이다. More on Flatness, Lemma
+\ref{flat-lemma-flat-after-blowing-up}을 적용하면 $U$-허용 블로업
+$g : S' \to S$를 찾아서 $Z_i$의 엄밀 변환
+$Z'_i \subset X_{S'}$가 $S'$ 위에서 평탄이 되게 할 수 있다.
+그러면 $\beta = \sum n_i[Z'_i/X_{S'}/S']_r$는
+(\ref{equation-cycle-classes})의 상에 놓이고, Lemma
+\ref{lemma-uniqueness-extension}에 의해 $\beta = g^*\alpha$이다.
+
+\medskip\noindent
+그러나 $S' \to S$가 완전 분해되었다고 할 수 없으므로 이것만으로는
+증명이 끝나지 않는다. 쉽게 고칠 수 있다. $T \subset S$를 $U$의
+여집합으로 쓰고 폐부분스킴으로 보자. 뇌터 귀납법에 의해 완전 분해
+고유 사상 $T' \to T$로서 $(T' \to S)^*\alpha$가
+(\ref{equation-cycle-classes})의 상에 놓이는 것을 찾을 수 있다.
+그러면 $S' \amalg T' \to S$가 원하는 사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-get-cycles-dvr}
+$f : X \to S$를 유한형 스킴 사상이라 하고 $S$를 이산 값매김환의
+스펙트럼이라 하자. $r \geq 0$이라 하자. 그러면
+(\ref{equation-cycle-classes})는 전사이다.
+\end{lemma}
+
+\begin{proof}
+물론 이는 Lemma \ref{lemma-get-cycles}에서 따르지만 다음과 같이
+직접 볼 수도 있다. $\alpha$를 $X/S$ 위의 상대 $r$-사이클이라 하자.
+$\alpha_\eta = \sum n_i[Z_i]$로 쓰자. 이 합은 유한하다.
+Section \ref{section-specialization}에서처럼 $Z_i$의 폐포를
+$\overline{Z}_i \subset X$로 쓰자. 그러면
+% P08-E062: the frozen cycle-class expression omits its dimension subscript r.
+$\alpha = \sum n_i[\overline{Z}_i/X/S]$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-cycle-smooth}
+$f : X \to S$를 스킴 사상이라 하고 $r \geq 0$이라 하자.
+$S$는 국소 뇌터이고 $f$는 상대차원이 $r$인 매끄러운 사상이라고
+가정하자. $\alpha \in z(X/S, r)$라 하자. 그러면 $\alpha$의
+지지집합은 $X$에서 열리고 닫혀 있다. 더 정확한 결과는 증명을 보라.
+\end{lemma}
+
+\begin{proof}
+$x \in X$라 하고 그 상을 $s \in S$라 하자. $f$가 매끄러우므로
+$x$를 포함하는 $X_s$의 기약 성분 $Z(x)$는 유일하다. 이때
+$\dim(Z(x)) = r$이다. $n_x$를 사이클 $\alpha_s$에서 $Z(x)$의
+계수라 하자. 함수 $x \mapsto n_x$가 $X$에서 국소상수임을 보이겠다.
+
+\medskip\noindent
+$g : S' \to S$를 국소 뇌터 스킴의 사상이라 하자. $X'$를 $X$의
+기저변환이라 하고 $\alpha' = g^*\alpha$를 $\alpha$의 기저변환이라
+하자. $x' \in X'$가 $s' \in S'$, $x \in X$, $s \in S$로 사상된다고
+하자. $n_{x'} = n_x$라고 주장한다. 실제로 $Z(x)$가
+$\kappa(s)$ 위에서 매끄러우므로
+$Z(x) \times_{\Spec(\kappa(s))} \Spec(\kappa(s'))$는 환원이다.
+$Z(x')$가 이 스킴의 한 기약 성분이므로, Section
+\ref{section-relative-fields}의 기저변환 정의에 의해
+$\alpha'_{s'}$에서 $Z(x')$의 계수 $n_{x'}$는 $\alpha_s$에서
+$Z(x)$의 계수 $n_x$와 같다. 이로써 주장이 증명되었다.
+
+\medskip\noindent
+$X$가 국소 뇌터이므로 $x \mapsto n_x$가 국소상수임을 보이려면
+다음만 보이면 충분하다. $X$에서 $x' \leadsto x$가 특수화이면
+$n_{x'} = n_x$이다. 이산 값매김환의 스펙트럼 $S'$에서 오는 사상
+$S' \to X$로서 일반점 $\eta$를 $x'$로, 닫힌점 $0$을 $x$로 보내는
+것을 고르자. Properties, Lemma
+\ref{properties-lemma-locally-Noetherian-specialization-dvr}를 보라.
+그러면 $S' \to S$에 의한 $f$의 기저변환 $X' \to S'$에는 절단
+$\sigma : S' \to X'$가 있고, $X'$의 점들의 특수화
+$\sigma(\eta) \leadsto \sigma(0)$는 $X$의 $x' \leadsto x$로 사상된다.
+따라서 다음 단락의 주장으로 환원된다.
+
+\medskip\noindent
+$S$가 일반점 $\eta$와 닫힌점 $0$을 갖는 이산 값매김환의
+스펙트럼이고 절단 $\sigma : S  \to X$가 있다고 하자. 주장:
+$n_{\sigma(\eta)} = n_{\sigma(0)}$이다. More on Morphisms, Section
+\ref{more-morphisms-section-connected-components}, 특히 More on Morphisms,
+Lemma \ref{more-morphisms-lemma-connected-along-section-open}의 논의에
+의해 $X$를 열린 부분스킴으로 바꾼 뒤 $X \to S$의 올들이 연결이라고
+가정할 수 있다. 이 올들은 매끄러우므로 기약이다. 따라서
+$\alpha_\eta = n[X_\eta]$이며 $n = n_{\sigma(\eta)}$이고,
+$sp_{X/S}(\alpha_\eta) = \alpha_0$라는 관계에서
+$\alpha_0 = n[X_0]$, 즉 원하는 $n_{\sigma(0)} = n$이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-cycles-equal}
+$f : X \to S$를 스킴 사상이라 하고 $S$는 국소 뇌터이며 $f$는
+국소 유한형이라 가정하자. $r \geq 0$이고
+$\alpha, \beta \in z(X/S, r)$라 하자. 그러면
+$E = \{s \in S : \alpha_s = \beta_s\}$는 $S$에서 닫혀 있다.
+\end{lemma}
+
+\begin{proof}
+문제는 $S$ 위에서 국소적이므로 $S$가 아핀이라고 가정할 수 있다.
+$X = \bigcup U_i$를 아핀 열린피복이라 하자.
+$E_i = \{s \in S : \alpha_s|_{U_{i, s}} = \beta_s|_{U_{i, s}}\}$로
+두면 $E = \bigcap E_i$이다. 따라서 $U_i \to S$와 $\alpha$, $\beta$의
+$U_i$로의 제한에 대하여 보조정리를 증명하면 충분하다. 이는 다음
+단락의 경우로 환원한다.
+
+\medskip\noindent
+$X$와 $S$가 준콤팩트라고 하자. $\gamma = \alpha - \beta$로 두면
+$E = \{s \in S : \gamma_s = 0\}$이다.
+% P08-E063: the frozen source cites the wrong lemma; preserve its reference key.
+Lemma \ref{lemma-family-associated-closed-specialization}에 의해 공동
+전사인 유한 고유 사상 족 $\{g_i : S_i \to S\}$가 존재하여
+$g_i^*\gamma$가 (\ref{equation-cycle-classes})의 상에 놓인다.
+$E_i = g_i^{-1}(E)$는 $(g_i^*\gamma)_t = 0$인 점 $t \in S_i$들의
+집합임을 관찰하라. 모든 $i$에 대하여 $E_i$가 닫혀 있으면
+$E = \bigcup g_i(E_i)$도 닫혀 있다. 따라서 다음 단락의 경우로
+환원된다.
+
+\medskip\noindent
+$X$와 $S$가 준콤팩트이고, $S$ 위에서 평탄이고 상대차원이
+$\leq r$인 유한 개의 폐부분스킴 $Z_i \subset X$에 대하여
+$\gamma = \sum n_i[Z_i/X/S]_r$라고 하자. $X' = \bigcup Z_i$를
+스킴론적 합집합이라 하자. 그러면 $i : X' \to X$는 닫힌 몰입이고
+$X'$는 $S$ 위에서 상대차원 $\leq r$이다. 또한
+$\gamma' = \sum n_i[Z_i/X'/S]_r$라 두면 $\gamma = i_*\gamma'$이다.
+분명히 $E = E' = \{s \in S : \gamma'_s = 0\}$이므로 다음 단락의
+경우로 환원된다.
+
+\medskip\noindent
+$X$의 $S$ 위 상대차원이 $\leq r$이라고 하자. $s \in S$이고
+$s \not \in E$라 하자. $E \cap V$가 공집합인 $s$의 열린 근방
+$V \subset S$가 존재함을 보이겠다. $s \not \in E$라는 가정은
+차원 $r$인 정역 폐부분스킴 $Z \subset X_s$가 있어서 $\gamma_s$에서
+$[Z]$의 계수 $n$이 영이 아님을 뜻한다. $x \in Z$를 일반점이라 하자.
+$\dim(Z) = r$이므로 $x$는 $X_s$의 한 기약 성분, 즉 $Z$의 일반점이다.
+따라서 $X$를 $x$의 열린 근방으로 바꾼 뒤 $Z$가 $X_s$의 유일한
+기약 성분이라고 가정할 수 있다. 특히 $\gamma_s = n[Z]$이다.
+
+\medskip\noindent
+이제 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-local-structure-finite-type}을 적용하여 거기에
+열거된 모든 성질을 갖는 다음 도식을 얻는다.
+$$
+\xymatrix{
+X \ar[dd] & X' \ar[l]^g \ar[d]^\pi & x \ar@{|->}[dd] &
+x' \ar@{|->}[l]  \ar@{|->}[d] \\
+& Y \ar[d]^h & & y \ar@{|->}[d] \\
+S \ar@{=}[r] & S & s & s \ar@{=}[l]
+}
+$$
+$\gamma' = g^*\gamma$를 평탄 끌어오기라 하자. 이때
+$E \subset E' = \{s \in S: \gamma'_s = 0\}$이고 $s \not \in E'$이다.
+왜냐하면 $Z' \subset X'_s$를 $x'$의 폐포라 할 때 $\gamma'_s$에서
+$Z'$의 계수가 영이 아니기 때문이다. 마찬가지로
+$\gamma'' = \pi_*\gamma'$라 두자. 그러면
+$E' \subset E'' = \{s \in S: \gamma''_s = 0\}$이고 $s \not \in E''$이다.
+왜냐하면 $Z'' \subset Y_s$를 $y$의 폐포라 할 때 $\gamma''_s$에서
+$Z''$의 계수가 영이 아니기 때문이다. Lemma
+\ref{lemma-relative-cycle-smooth}와 $Y \to S$의 열림성에 의해
+$s$의 어떤 열린 근방은 $E''$와 만나지 않는다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descend-through-limit}
+$S = \lim_{i \in I} S_i$를 아핀 전이사상을 갖는 뇌터 스킴들의
+유향 역계의 극한이라 하자. $0 \in I$라 하고
+$X_0 \to S_0$를 유한형 스킴 사상이라 하자. $i \geq 0$에 대하여
+$X_i = S_i \times_{S_0} X_0$로 두고
+$X = S \times_{S_0} X_0$로 두자. $S$도 뇌터라면
+$$
+z(X/S, r) = \colim_{i \geq 0} z(X_i/S_i, r)
+$$
+이다. 여기서 전이사상은 상대 $r$-사이클의 기저변환으로 주어진다.
+\end{lemma}
+
+\begin{proof}
+$i \geq 0$이고 $\alpha_i, \beta_i \in z(X_i/S_i, r)$가
+$z(X/S, r)$의 같은 원소로 사상된다고 하자. 그러면 $S \to S_i$는
+Lemma \ref{lemma-relative-cycles-equal}의 닫힌 부분집합
+$E \subset S_i$ 안으로 사상된다. 따라서 어떤 $j \geq i$에 대하여
+$S_j \to S_i$는 $E$ 안으로 사상된다. Limits, Lemma
+\ref{limits-lemma-limit-contained-in-constructible}을 보라. 그러므로
+$\alpha_i$와 $\beta_i$를 $S_j$로 기저변환한 것은 같다. 따라서
+사상은 단사이다.
+
+\medskip\noindent
+$\alpha \in z(X/S, r)$라 하자. Lemma \ref{lemma-get-cycles}을
+적용하면, 완전 분해된 고유 사상 $g : S' \to S$로서 $g^*\alpha$가
+(\ref{equation-cycle-classes})의 상에 놓이는 것을 얻는다.
+$X' = S' \times_S X$라 두자. $S'$ 위에서 평탄이고 상대차원이
+$\leq r$인 어떤 폐부분스킴 $Z_a \subset X'$에 대하여
+$g^*\alpha = \sum n_a [Z_a/X'/S']_r$로 쓴다.
+
+\medskip\noindent
+이제 Limits, Section \ref{limits-section-descending-relative}의 하강
+기법을 적용한다. 다음이 존재하는 어떤 $i \geq 0$을 찾을 수 있다.
+\begin{enumerate}
+\item $S$로 기저변환하면 $g : S' \to S$가 되는 완전 분해 고유 사상
+$g_i : S'_i \to S_i$,
+\item $X'_i = S'_i \times_{S_i} X_i$라 둘 때, $S'_i$ 위에서 평탄이고
+상대차원이 $\leq r$인 폐부분스킴 $Z_{ai} \subset X'_i$로서
+$S'$로 기저변환하면 $Z_a$가 되는 것.
+\end{enumerate}
+이를 위해 Limits, Lemmas
+\ref{limits-lemma-descend-finite-presentation},
+\ref{limits-lemma-descend-closed-immersion-finite-presentation},
+\ref{limits-lemma-descend-flat-finite-presentation},
+\ref{limits-lemma-eventually-proper},
+\ref{limits-lemma-limit-dimension}과 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-descend-cd}를 사용한다.
+$\alpha'_i = \sum n_a [Z_{ai}/X'_i/S'_i]_r \in z(X'_i/S'_i, r)$를
+생각하자. 구성상 $z(X'/S', r)$에서 $\alpha'_i$의 상은 기저변환
+$g^*\alpha$와 같다.
+
+\medskip\noindent
+$S''_i = S'_i \times_{S_i} S'_i$, $X''_i = S''_i \times_{S_i} X_i$로
+두고, $S'' = S' \times_S S'$, $X'' = S'' \times_S X$로 두자.
+사영들을 $\text{pr}_1, \text{pr}_2 : S'' \to S'$ 및
+$\text{pr}_1, \text{pr}_2 : S''_i \to S'_i$로 쓴다.
+% P08-E066: all three frozen descent comparisons repeat pr_1 on both sides.
+두 기저변환 $\text{pr}_1^*\alpha'_i$와
+$\text{pr}_1^*\alpha'_i$는 $z(X''/S'', r)$의 같은 원소로 사상된다.
+왜냐하면 $\text{pr}_1^*g^*\alpha = \text{pr}_1^*g^*\alpha$이기 때문이다.
+따라서 $i$를 증가시킨 뒤 증명의 첫 단락에 의해
+$\text{pr}_1^*\alpha'_i = \text{pr}_1^*\alpha'_i$라고 가정할 수 있다.
+Lemma \ref{lemma-descend-family}에 의해 $X_i/S_i$의 올 위의
+$r$-사이클 족 $\alpha_i$가 유일하게 존재하여
+$g_i^*\alpha_i = \alpha'_i$이다.
+여기서는 $S'_i \to S_i$가 완전 분해되었다는 사실을 쓴다.
+Lemma \ref{lemma-relative-cycles-h-descent}에 의해
+$\alpha_i \in z(X_i/S_i, r)$이다. Lemma \ref{lemma-descend-family}의
+유일성에 의해 $z(X/S, r)$에서 $\alpha_i$의 상은 $\alpha$이다.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-thickening}
+$S$를 국소 뇌터 스킴이라 하고 $i : X \to X'$를 $S$ 위에서
+국소 유한형인 스킴들의 두껍게 하기라 하자. $r \geq 0$이라 하자.
+그러면 $i_* : z(X/S, r) \to z(X'/S, r)$는 전단사이다.
+\end{lemma}
+
+\begin{proof}
+$i_s : X_s \to X'_s$가 두껍게 하기이므로 $i_*$가 $X/S$의 올 위의
+$r$-사이클 족과 $X'/S$의 올 위의 $r$-사이클 족 사이의 전단사를
+유도함은 분명하다. 또한 $X/S$의 올 위의 $r$-사이클 족 $\alpha$에
+대하여 Lemma \ref{lemma-check-after-closed}에 의해
+$\alpha \in z(X/S, r) \Leftrightarrow i_*\alpha \in z(X'/S, r)$이다.
+따라서 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-extend-to-larger}
+$S$를 국소 뇌터 스킴이라 하고 $X$를 $S$ 위에서 국소 유한형인
+스킴이라 하자. $r \geq 0$이라 하자. $U \subset X$를 열린집합이라
+하고 $X \setminus U$의 $S$ 위 상대차원이 $< r$, 즉 모든
+$s \in S$에 대하여 $\dim(X_s \setminus U_s) < r$라 하자. 그러면
+제한은 전단사 $z(X/S, r) \to z(U/S, r)$를 정의한다.
+\end{lemma}
+
+\begin{proof}
+차원 가정에 의해 $Z_r(X_s) \to Z_r(U_s)$가 전단사이므로, 제한은
+$X/S$의 올 위의 $r$-사이클 족과 $U/S$의 올 위의 $r$-사이클 족
+사이의 전단사를 유도한다. 이 제한 사상 $Z_r(X_s) \to Z_r(U_s)$는
+기저변환 및 특수화와 양립한다. Lemma \ref{lemma-compatibilities}와
+\ref{lemma-specialization-flat-pullback}을 보라. 여기서 보조정리가
+쉽게 따른다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-seminormalize-base}
+$g : S' \to S$를 잉여체들의 동형을 유도하는 국소 뇌터 스킴의
+보편 위상동형이라 하자. $f : X \to S$를 국소 유한형이라 하고
+$X' = S' \times_S X$라 두자. $r \geq 0$이라 하자. 그러면 $g$에
+의한 기저변환은 전단사 $z(X/S, r) \to z(X'/S', r)$를 정한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-pullback-universally-bijective}에 의해 $X/S$의 올
+위의 $r$-사이클 족의 군과 $X'/S'$의 올 위의 $r$-사이클 족의 군
+사이에 전단사가 있다. $\alpha$를 $X/S$의 올 위의 $r$-사이클 족이라
+하고 $\alpha' = g^*\alpha$를 그 기저변환이라 하자. $R$이 이산
+값매김환이면 임의의 사상 $h : \Spec(R) \to S$는 어떤 유일한 사상
+$h' : \Spec(R) \to S'$에 대하여 $g \circ h'$로 분해된다. 실제로
+사상 $S' \times_S \Spec(R) \to \Spec(R)$은
+% P08-E067: frozen source says universal homomorphism, not homeomorphism.
+잉여체 위의 전단사를 유도하는 보편 준동형이고, 따라서 절단을 갖는다.
+예를 들어 $R$이 반정규환이기 때문이다. Morphisms, Section
+\ref{morphisms-section-seminormalization}을 보라. 그러므로 $\alpha$가
+특수화와 양립한다는 조건, 즉 상대 $r$-사이클이라는 조건은
+$\alpha'$가 특수화와 양립한다는 조건과 동치이다.
+\end{proof}
+
+
+
+\section{등차원 상대 사이클}
+\label{section-equidimensional}
+
+\noindent
+정의는 다음과 같다.
+
+\begin{definition}
+\label{definition-equidimensional}
+$f : X \to S$를 스킴 사상이라 하고 $S$는 국소 뇌터이며 $f$는
+국소 유한형이라 가정하자. $r \geq 0$을 정수라 하자. $X/S$ 위의
+상대 $r$-사이클 $\alpha$의 지지집합(Remark
+\ref{remark-supports-family})이 $S$ 위 상대차원이 $\leq r$인
+어떤 닫힌 부분집합 $W \subset X$에 포함될 때, $\alpha$를
+{\it 등차원}이라 한다. $X/S$ 위의 모든 등차원 상대 $r$-사이클의
+군을 $z_{equi}(X/S, r)$로 쓴다.
+\end{definition}
+
+\begin{example}
+\label{example-not-equidimensional}
+\begin{reference}
+\cite[Example 3.1.9]{SV}
+\end{reference}
+등차원이 아닌 상대 $r$-사이클이 존재한다. 구체적으로 $k$를 체라
+하고 $S = \Spec(k[x, y])$ 위의 $X = \Spec(k[x, y, t])$를 생각하자.
+$s$를 $S$의 점이라 하고 $x$와 $y$의 상을 $a, b \in \kappa(s)$로
+쓰자. $X/S$ 위의 $0$-사이클 족 $\alpha$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item $b = 0$이면 $\alpha_s = 0$이다.
+\item 그렇지 않으면 $\alpha_s = [p] - [q]$이다. 여기서 $p$와 $q$는
+각각 $t = a/b$와 $t = (a + b^2)/b$인
+$\Spec(\kappa(s)[t])$의 $\kappa(s)$-유리점이다.
+\end{enumerate}
+이것이 특수화와 양립함을 보이는 일은 독자에게 맡긴다. 그 핵심은
+$v(b) > 0$인 $\kappa(s)$의 임의의 값매김 $v$에 대하여 $a/b$와
+$(a + b^2)/b = a/b + b$가 잉여체 위의 $\mathbf{P}^1$에서 같은 점으로
+극한을 갖는다는 것이다. 반면 $\alpha$의 지지집합의 폐포는
+$(0, 0)$ 위의 올 전체를 포함한다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-equidimensional-functoriality}
+$f : X \to S$를 스킴 사상이라 하고 $S$는 국소 뇌터이며 $f$는
+국소 유한형이라 가정하자. $r \geq 0$을 정수라 하고 $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. $\alpha$가 등차원이면
+$\alpha$의 임의의 제한, 기저변환 또는 평탄 끌어오기도 등차원이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-check-equidimensional}
+$f : X \to S$를 스킴 사상이라 하고 $S$는 국소 뇌터이며 $f$는
+국소 유한형이라 가정하자. $r \geq 0$을 정수라 하고 $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. $\alpha$가 등차원인지 확인할
+때 $X$와 $S$ 위에서 Zariski 국소적으로 작업해도 된다.
+\end{lemma}
+
+\begin{proof}
+$\alpha$가 등차원이라는 조건은 $\alpha$의 지지집합의 폐포가
+$S$ 위에서 상대차원 $\leq r$이라는 뜻이다. 폐포를 취하는 것은
+열린집합으로의 제한과 가환하므로 보조정리가 따른다. 작은
+세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-equidimensional-fppf-descent}
+$f : X \to S$를 스킴 사상이라 하고 $S$는 국소 뇌터이며 $f$는
+국소 유한형이라 가정하자. $r \geq 0$을 정수라 하고 $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. $\{g_i : S_i \to S\}$를
+fppf 피복이라 하자. 그러면 $\alpha$가 등차원일 필요충분조건은
+각 기저변환 $g_i^*\alpha$가 등차원인 것이다.
+\end{lemma}
+
+\begin{proof}
+$\alpha$가 등차원이면 Lemma
+\ref{lemma-equidimensional-functoriality}에 의해 각 $g_i^*\alpha$도
+등차원이다. 반대로 각 $g_i^*\alpha$가 등차원이라고 가정하자.
+$W$를 $X$에서 $\text{Supp}(\alpha)$의 폐포라 하자.
+$g_i : S_i \to S$는 평탄이고 국소 유한 표시이므로 보편적으로
+열린 사상이고, 따라서 $f_i : X_i = S_i \times_S X \to X$도 그렇다.
+$\alpha_i = g_i^*\alpha$로 쓰자. Lemma \ref{lemma-support-family}에 의해
+$\text{Supp}(\alpha_i) = f_i^{-1}(\text{Supp}(\alpha))$이다.
+$f_i$가 열린 사상이므로 $W_i = f_i^{-1}(W)$는
+$\text{Supp}(\alpha_i)$의 폐포이다. 따라서 가정에 의해
+$W_i \to S_i$의 상대차원은 $\leq r$이다. Morphisms, Lemma
+\ref{morphisms-lemma-dimension-fibre-after-base-change}와 사상
+$S_i \to S$들이 공동 전사라는 사실에서 $W \to S$의 상대차원이
+$\leq r$임을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-equidimensional-descent-pullbacks}
+$f : X \to S$를 스킴 사상이라 하고 $S$는 국소 뇌터이며 $f$는
+국소 유한형이라 가정하자. $r, e \geq 0$을 정수라 하고 $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. $\{f_i : X_i \to X\}$를
+국소 유한형이고 평탄하며 상대차원이 $e$인 사상들의 공동 전사
+족이라 하자. 그러면 $\alpha$가 등차원일 필요충분조건은 각 평탄
+끌어오기 $f_i^*\alpha$가 등차원인 것이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: Lemma \ref{lemma-equidimensional-fppf-descent}의 증명과
+같이, $\alpha$의 지지집합의 폐포 $W$를 $f_i$로 역상 취한 것은
+$f_i^*\alpha$의 지지집합의 폐포 $W_i$임을 보인다. 그러면 모든
+$i$에 대하여 $W_i \to S$의 상대차원이 $\leq r + e$이면
+$W \to S$의 상대차원이 $\leq r$이다.
+\end{proof}
+
+
+
+\section{가중함수와 상대 영차원 사이클}
+\label{section-weightings}
+
+\noindent
+이 절에서는 준유한 사상에 대하여 상대 영차원 사이클이 More on
+Morphisms, Section \ref{more-morphisms-section-weightings}에서 정의한
+가중함수와 밀접하게 관련됨을 보인다.
+
+\medskip\noindent
+$S$를 국소 뇌터 스킴이라 하고 $f : X \to S$를 국소 준유한 스킴
+사상이라 하자. 그러면 $z(X/S, 0) = z_{equi}(X/S, 0)$이고
+$r > 0$이면 $z(X/S, r) = 0$이다. $\alpha \in z(X/S, 0)$가 주어지면
+다음 사상을 정의하자.
+$$
+w_\alpha : X \longrightarrow \mathbf{Z},\quad
+x \mapsto \alpha(x) [\kappa(x) : \kappa(s)]_i \quad\text{where }s = f(x)
+$$
+여기서 $\alpha(x)$는 올 $X_s$ 위의 $0$-사이클 $\alpha_s$에서
+$x$의 계수이고, $[K : k]_i$는 유한 체 확대의 비분리 차수를 뜻한다.
+
+\begin{lemma}
+\label{lemma-weightings-pre}
+위 상황에서 $g : S' \to S$가 국소 뇌터 스킴의 사상이면
+$w_{g^*\alpha} = w_\alpha \circ g'$이다. 여기서
+$g' : X' \to X$는 사영 $X' = S' \times_S X \to X$이다.
+\end{lemma}
+
+\begin{proof}
+$x' \in X'$라 하고 $S', S, X$에서 그 상을 각각 $s', s, x$라
+하자. 그러면 $\kappa(s')/\kappa(s)$에 의한 $[x]$의 기저변환에서
+$[x']$의 계수는 국소환
+$(\kappa(s') \otimes_{\kappa(s)} \kappa(x))_\mathfrak q$의 길이이다.
+여기서 $\mathfrak q$는 $x'$에 대응하는 소 아이디얼이다. 따라서
+다음 등식을 보이면 기저변환과의 양립성이 따른다.
+$$
+[\kappa(x) : \kappa(s)]_i =
+\text{length}((\kappa(s') \otimes_{\kappa(s)} \kappa(x))_\mathfrak q)
+[\kappa(x') : \kappa(s')]_i
+$$
+$k/\kappa(s')$를 대수적 폐포라 하자. $\mathfrak q$ 위에 놓인 소
+아이디얼 $\mathfrak p \subset k \otimes_{\kappa(s)} \kappa(x)$를
+고르자. 다음을 보일 수 있다고 하자.
+$$
+[\kappa(x) : \kappa(s)]_i =
+\text{length}((k \otimes_{\kappa(s)} \kappa(x))_\mathfrak p)
+\quad\text{and}\quad
+[\kappa(x') : \kappa(s')]_i =
+\text{length}((k \otimes_{\kappa(s')} \kappa(x'))_\mathfrak p)
+$$
+그러면
+$$
+\text{length}((\kappa(s') \otimes_{\kappa(s)} \kappa(x))_\mathfrak q)
+\text{length}((k \otimes_{\kappa(s')} \kappa(x'))_\mathfrak p)
+=
+\text{length}((k \otimes_{\kappa(s)} \kappa(x))_\mathfrak p)
+$$
+이므로 결론이 따른다. 이 등식은 Algebra, Lemma
+\ref{algebra-lemma-pullback-module}과 사상
+$\kappa(s') \otimes_{\kappa(s)} \kappa(x) \to
+k \otimes_{\kappa(s)} \kappa(x)$의 평탄성에서 따른다.
+두 등식을 보이려면 첫째 등식만 증명하면 충분하다.
+Fields, Lemma \ref{fields-lemma-separable-first}에서 구성한 부분체의 탑을
+$\kappa(x)/\kappa/\kappa(s)$라 하자. 그러면
+$$
+k \otimes_{\kappa(s)} \kappa(x) =
+\prod\nolimits_{\sigma : \kappa \to k}
+k \otimes_{\sigma, \kappa} \kappa(x)
+$$
+이고, 각 인자의 차수는
+$[\kappa(x) : \kappa] = [\kappa(x) : \kappa(s)]_i$이며 국소환이다.
+이것이 원하는 결론이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-weightings}
+$S$를 국소 뇌터 스킴이라 하고 $f : X \to S$를 국소 준유한 스킴
+사상이라 하자.
+\begin{enumerate}
+\item $\alpha \in z(X/S, 0)$에 대하여 위에서 구성한 사상
+$w_\alpha : X \to \mathbf{Z}$는 가중함수이다.
+\item $X$가 준콤팩트이면 임의의 가중함수 $w : X \to \mathbf{Z}$에
+대하여 어떤 $\alpha \in z(X/S, 0)$와 정수 $n > 0$이 존재하여
+$nw = w_\alpha$이다.
+\item $S$가 $\mathbf{F}_p$ 위의 스킴이면 (2)의 정수 $n$은 소수
+$p$의 거듭제곱으로 고를 수 있다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\alpha \in z(X/S, 0)$라 하고 More on Morphisms, Definition
+\ref{more-morphisms-definition-weighting}과 같은 도식
+$$
+\xymatrix{
+X \ar[d]_f & U \ar[l]^h \ar[d]^\pi \\
+Y & V \ar[l]_g
+}
+$$
+을 고르자. $g^*\alpha$의 제한을 $\beta \in z(U/V, 0)$로 쓰자.
+기저변환과의 양립성(Lemma \ref{lemma-weightings-pre})에 의해
+$w_\beta = w_\alpha \circ h$이므로
+$\int_\pi w_\beta$가 $V$에서 국소상수임을 보이면 충분하다.
+다음을 관찰하라.
+\begin{align*}
+\left( \int_\pi w_\beta \right)(v)
+& =
+\sum\nolimits_{u \in U, \pi(u) = v} 
+\beta(u) [\kappa(u) : \kappa(v)]_i [\kappa(u) : \kappa(v)]_s \\
+& =
+\sum\nolimits_{u \in U, \pi(u) = v} \beta(u)[\kappa(u) : \kappa(v)]
+\end{align*}
+마지막 식은 $\pi_*\beta \in z(V/V, 0)$에서 $v$의 계수이다.
+Lemma \ref{lemma-relative-cycle-smooth}에 의해 이 함수는 $V$에서
+국소상수이다.
+
+\medskip\noindent
+% P08-E070: frozen source gives the weighting the wrong codomain S twice.
+반대로 $w : X \to S$를 가중함수라 하고 $X$가 준콤팩트라고 하자.
+충분히 나누어지는 정수 $n$을 고르자. $X/S$의 올 위의 $0$-사이클
+족 $\alpha$를, $s \in S$에 대하여 $X_s$ 위의 영차원 사이클
+$$
+\alpha_s =
+\sum\nolimits_{f(x) = s} \frac{n w(x)}{[\kappa(x) : \kappa(s)]_i} [x]
+$$
+가 되도록 정의하자. $f$의 올들이 보편적으로 유계이므로(Morphisms,
+Lemma \ref{morphisms-lemma-locally-quasi-finite-qc-source-universally-bounded}),
+모든 $s \in S$에 대하여 우변이 정수가 되게 하는 $n$을 찾을 수 있다.
+$\alpha$가 상대 $0$-사이클임을 보이면 보조정리의 마지막 명제도
+따른다. 이를 위해 이산 값매김환을 따른 특수화와 $\alpha$가
+양립함을 보여야 한다. $w_\alpha$의 구성도 Lemma
+\ref{lemma-weightings-pre}의 증명도 $\alpha$가 상대 사이클임을 사용하지
+않음에 주의하라. 따라서 $w_\alpha = nw$이고 이는 기저변환 뒤에도
+참이다. 또한 가중함수의 기저변환도 가중함수이다. More on Morphisms,
+Lemma \ref{more-morphisms-lemma-weighting-base-change}를 보라. 그러므로
+다음 단락의 문제로 환원된다.
+
+\medskip\noindent
+$S$가 일반점 $\eta$와 닫힌점 $0$을 갖는 이산 값매김환의
+스펙트럼이라고 하자. $w : X \to S$를 가중함수라 하고 $X$는
+$S$ 위에서 준유한이라 하자. $\alpha$를 앞 단락에서 적절한 $n$에
+대하여 구성한 $X/S$의 올 위의 $0$-사이클 족이라 하자.
+$sp_{X/S}(\alpha_\eta) = \alpha_0$임을 보여야 한다.
+$\beta \in z(X/S, 0)$를 $\beta_\eta = \alpha_\eta$이고
+$\beta_0 = sp_{X/S}(\alpha_\eta)$인 $X/S$ 위의 상대 $0$-사이클이라
+하자. 그러면 $w' = w_\beta - nw : X \to \mathbf{Z}$는
+가중함수이고, 위의 결과를 사용하면 $X$에서 $\eta$로 사상되는
+점들에서 영이다. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weighting-specialization}에 의해 $w' = 0$이다.
+이는 $w_\beta = nw$라는 뜻이고 따라서 원하는 대로
+$\alpha = \beta$이다.
+\end{proof}
+
+\begin{example}
+\label{example-n-must-be-positive-sometimes}
+$p$를 소수라 하고 $k'/k$를 차수가 $p^f$인 순수 비분리 체 확대라
+하자. $X = \Spec(k')$, $S = \Spec(k)$로 두자. $X$의 유일한 점
+$x$를 $1$로 보내는 사상 $w : X \to \mathbf{Z}$는 $X \to S$의
+가중함수이다. 한편 군 $z(X/S, 0)$는 사이클 $\alpha = [x]$로
+자유 생성된다. 따라서 이 경우 Lemma \ref{lemma-weightings}에서
+가능한 가장 작은 정수 $n$은 $n = p^f$이다.
+\end{example}
+
+\begin{example}
+\label{example-Merkurjev}
+위 논의로 A.S.~Merkurjev의 예 \cite[Example 3.5.10]{SV}를 ``설명''할
+수 있다. $p$를 소수라 하고 $k = \mathbf{F}_p(a, b)$를 $a$, $b$에
+대한 $\mathbf{F}_p$의 순수 초월 확대라 하자. 다음과 같이 두자.
+$$
+A = k[x, y, z]/(a x^p + b y^p - z^p)
+$$
+이는 $k$ 위의 유한형 정규 정역이다. 스펙트럼 $S = \Spec(A)$는
+잉여체가 $k$인 $A$의 극대 아이디얼 $(x, y, z)$에 대응하는 유일한
+특이점 $s$를 제외하면 정칙이다. $k' = k(a^{1/p}, b^{1/p})$ 및
+$B = k'[x, y]$로 두자. 포함 $k \to k'$을 사용하고 $x$를 $x$로,
+$y$를 $y$로, $z$를 $a^{1/p}x + b^{1/p}y$로 보내는 사상
+$A \to B$를 생각하자. $X = \Spec(B)$로 두고 환 사상 $A \to B$에
+대응하는 사상 $f : X \to S$를 생각하자. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weighting-quasi-finite-Noetherian}이 만드는
+$f$의 가중함수 $w : X \to \mathbf{Z}$는 상수값 $1$을 갖는다.
+왜냐하면 $B$의 분수체가 $A$ 위의 순수 비분리 확대이기 때문이다!
+% P08-E071: U is undefined in the frozen source before this inverse image.
+$V = f^{-1}(U) \subset X$로 두자. 기적적 평탄성에 의해
+$V \to U$는 차수 $p$인 평탄 사상이다. 따라서 사이클
+$\alpha = [V/V/U]_0 \in z(V/U, 0)$는 $w_\alpha = pw|_V$를 만족한다.
+그러나 $s$ 위에 놓인 $X$의 유일한 점 $x$의 잉여체 $k'$은 $k$ 위의
+차수가 $p^2$이므로, $z(X/S, 0)$의 원소 $\beta$로서
+$\alpha$로 제한되는 것은 존재할 수 없다. 실제로 가중함수
+$pw - w_\beta$는 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weighting-specialization}에 의해 영이어야 하고,
+그러면 위 보조정리의 증명에 있는 식에 의해
+$$
+\beta_s = \frac{pw(x)}{[\kappa(x) : \kappa(s)]_i} [x] =
+\frac{1}{p}[x]
+$$
+가 $Z_0(X_s)$에서 성립해야 한다. 이는 불가능하다.\footnote{\cite{SV}에는
+$pw$에 대응하는 상대 사이클 군 $Cycl(X/S, 0)$의 원소가 존재하며,
+이 사이클은 $X_s$ 위의 정수가 아닌 계수의 사이클로 특수화된다.}
+물론 사이클 $p\alpha$는 $z(X/S, 0)$의 유일한 원소의 제한이다.
+\end{example}
+
+
+
+\section{유효 상대 사이클}
+\label{section-effective}
+
+
+\noindent
+정의는 다음과 같다.
+
+\begin{definition}
+\label{definition-effective}
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 가정하자. $r \geq 0$을 정수라 하자. $X/S$ 위의
+상대 $r$-사이클 $\alpha$에 대하여, 모든 $s \in S$에서 $\alpha_s$가
+유효 사이클(Chow Homology, Definition
+\ref{chow-definition-effective-cycle})이면 이를 {\it 유효}라고 한다.
+$X/S$ 위의 모든 유효 상대 $r$-사이클이 이루는 모노이드를
+$z^{eff}(X/S, r)$로 나타낸다.
+\end{definition}
+
+\noindent
+아래에서 유효 상대 사이클은 등차원임을 보일 것이다. Lemma
+\ref{lemma-effective-equidimensional}를 보라.
+
+\begin{lemma}
+\label{lemma-effective-functoriality}
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 가정하자. $r \geq 0$을 정수라 하고 $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. $\alpha$가 유효이면 $\alpha$의
+임의의 제한, 기저변환, 평탄 끌어오기 또는 고유 전진도 유효이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-check-effective}
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 가정하자. $r \geq 0$을 정수라 하고 $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. 그러면 $\alpha$가 유효인지
+검사할 때 $X$와 $S$ 위에서 자리스키 국소적으로 작업해도 된다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-effective-descent}
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 가정하자. $r \geq 0$을 정수라 하고 $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. $g : S' \to S$를 전사 사상이라
+하자. 그러면 $\alpha$가 유효일 필요충분조건은 기저변환 $g^*\alpha$가
+유효인 것이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-effective-descent-pullbacks}
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 가정하자. $r, e \geq 0$을 정수라 하자. $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. $\{f_i : X_i \to X\}$를 국소
+유한형이고 상대 차원이 $e$인 평탄 사상들의 공동 전사 족이라 하자.
+그러면 $\alpha$가 유효일 필요충분조건은 각 평탄 끌어오기
+$f_i^*\alpha$가 유효인 것이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-effective-support-closed}
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 가정하자. $r, e \geq 0$을 정수라 하자. $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. $\alpha$가 유효이면
+$\text{Supp}(\alpha)$는 $X$에서 닫혀 있다.
+\end{lemma}
+
+\begin{proof}
+$g : S' \to S$를 정역 닫힌 부분스킴으로 본 한 기약 성분의 포함이라
+하자. Lemmas \ref{lemma-effective-functoriality}와
+\ref{lemma-support-family}에 의해, 기저변환 $g^*\alpha$의 지지집합이
+% P08-E072: frozen source has S' \times_S S rather than S' \times_S X.
+$S' \times_S S$에서 닫혀 있음을 보이면 충분하다. 따라서 $S$가
+일반점 $\eta$를 갖는 정역 스킴이라고 가정해도 된다.
+$\text{Supp}(\alpha)$가 $\text{Supp}(\alpha_\eta)$의 폐포임을 보이겠다.
+이를 위해 임의의 $s \in S$를 택하자. $S'$이 이산 값매김환의
+스펙트럼이고 일반점 $\eta' \in S'$을 $\eta$로, 닫힌점 $0 \in S'$을
+$s$로 보내는 사상 $g : S' \to S$를 찾을 수 있다. Properties, Lemma
+\ref{properties-lemma-locally-Noetherian-specialization-dvr}를 보라.
+그러면 $g^*\alpha$의 지지집합이
+% P08-E073: frozen source has g^\alpha rather than g^*\alpha.
+$\text{Supp}((g^\alpha)_{\eta'})$의 폐포와 같음을 보이면 충분하다.
+이는 다음 단락에서 다루는 경우로 환원한다.
+
+\medskip\noindent
+여기서 $S$는 일반점 $\eta$와 닫힌점 $0$을 갖는 이산 값매김환의
+스펙트럼이다. $\text{Supp}(\alpha)$가
+$\text{Supp}(\alpha_\eta)$의 폐포임을 보여야 한다. $\alpha$가
+유효이므로 $n_i > 0$이고 $Z_i \subset X_\eta$가 차원 $r$의 정역
+닫힌 부분스킴이 되도록 $\alpha_\eta = \sum n_i[Z_i]$로 쓸 수 있다.
+$\alpha_0 = sp_{X/S}(\alpha_\eta)$이므로
+$\alpha_0 = \sum n_i [\overline{Z}_{i, 0}]_r$임을 안다. 여기서
+$\overline{Z}_i$는 $Z_i$의 폐포이다. Varieties, Lemma
+\ref{varieties-lemma-dominate-valuation-ring-dimension-fibres}에 의해
+$\overline{Z}_{i, 0}$는 차원 $r$의 등차원 스킴이다. $n_i > 0$이므로
+$\text{Supp}(\alpha_0)$는 $\overline{Z}_{i, 0}$들의 합집합과 같다.
+이는 $\bigcup \overline{Z}_i$의 $0$ 위 올이고, 다시 이것은
+$\bigcup Z_i$의 폐포이므로 원하는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-effective-equidimensional}
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 가정하자. $r, e \geq 0$을 정수라 하자. $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. $\alpha$가 유효이면 $\alpha$는
+등차원이다.
+\end{lemma}
+
+\begin{proof}
+$\alpha$가 유효라고 가정하자. Lemma
+\ref{lemma-effective-support-closed}에 의해 지지집합
+$\text{Supp}(\alpha)$는 $X$에서 닫혀 있다. 따라서
+$\text{Supp}(\alpha) \to S$의 올들은 사이클 $\alpha_s$들의
+지지집합이고 따라서 차원이 $r$이므로 $\alpha$는 등차원이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-representable}
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 하자. 반변 함자
+$$
+\begin{matrix}
+\text{스킴 }S'\text{은 국소 유한형인} \\
+\text{스킴이고 기저는 }S
+\end{matrix}
+\longrightarrow
+z^{eff}(X'/S', r)\text{ where }X' = S' \times_S X
+$$
+가 표현 가능한지 물을 수 있다. $z(X'/S', r) = z(X'_{red}/S'_{red}, r)$
+이므로 이는 참일 수 없다(구체적인 반례를 만드는 일은 독자에게
+맡긴다). 더 나은 질문은 좌변에서 이 함자가 표현 가능한 부분범주를
+찾을 수 있는가 하는 것이다. Lemma \ref{lemma-seminormalize-base}는
+적어도 $S$ 위의 반정규 스킴 범주로 제한해야 함을 시사한다.
+
+\medskip\noindent
+$S/\Spec(\mathbf{Q})$가 나가타이고 $f$가 사영 사상이면,
+$S' \mapsto z^{eff}(X'/S', r)$는 반정규 $S'$들의 범주에서 표현
+가능하다는 것이 알려져 있다. 대략 말하면 이것이
+\cite[Theorem 3.21]{KRC}의 내용이다.
+
+\medskip\noindent
+$S$에 양의 표수인 점이 있으면 반정규성을 약정규성으로 바꾸어도 더는
+성립하지 않는다. 국소 뇌터 스킴 $T$에 대하여 모든 쌍유리 보편
+위상동형 $T' \to T$가 단면을 가지면 그 스킴을 약정규라고 한다. 한 예로,
+표수가 $2$인 체 $k$ 위에서 $S = \Spec(k)$ 및
+$X = \mathbf{A}^2_k$라 하고 그 위의 차수 $2$인 $0$-사이클을
+생각하자. 즉 $W = X \times_S X$ 위에는 표준적인 상대 $0$-사이클
+$\alpha \in z^{eff}(X_W/W, 0)$가 있다. 곧
+$w = (x_1, x_2) \in W = X^2$에 대하여
+$\alpha_w = [x_1] + [x_2]$이다. 이 사이클은 두 인자를 맞바꾸는 대합
+$\sigma : W \to W$ 아래 불변이다. $W$는 매끄러우므로 정규이고 따라서
+약정규이다. 만일 $z(-/-, r)$가 $k$ 위 유한형 약정규 스킴들의
+범주에서 $M$에 의해 표현된다면 $W$에서 $M$으로 가는
+$\sigma$-불변 사상을 얻는다. 그러면 몫스킴
+$\text{Sym}^2_S(X) = W/\langle \sigma \rangle$에서 $M$으로 가는
+사상이 정의된다. $\text{Sym}^2_S(X)$가 정규이므로, $M$의 모듈라이
+성질에 의해 $X \times_S \text{Sym}^2_S(X) / \text{Sym}^2_S(X)$ 위의
+상대 $0$-사이클 $\beta$를 얻고 그 $W$로의 끌어오기는 $\alpha$가
+되어야 한다. 그러나 그러한 사이클 $\beta$는 존재하지 않는다.
+실제로 $X = \Spec(k[u, v])$라고 쓰면 스킴 $\text{Sym}^2_S(X)$는
+다음 포함에서 왼쪽 환의 스펙트럼이다.
+$$
+k[u_1 + u_2, u_1u_2, v_1 + v_2, v_1v_2, u_1v_1 + u_2v_2]
+\subset
+k[u_1, u_2, v_1, v_2]
+$$
+대각선 $u_1 = u_2, v_1 = v_2$의 $\text{Sym}^2_S(X)$ 안의 상은
+닫힌 부분스킴 $V = \Spec(k[u_1^2, v_1^2])$이다. 여기서 $k$의 표수가
+$2$임을 사용하였다. $V$의 일반점 $\eta$를 보면 $\beta_\eta$는
+$\mathbf{A}^2_{k(u_1^2, v_1^2)}$ 위의 차수 $2$인 영차원 사이클이고,
+% P08-E074: preserve the frozen field and point coordinates literally.
+$\mathbf{A}^2_{k(u_1, u_2)}$로 끌어오면
+$2[\text{좌표가 } (u_1, v_2)]$인 점의 사이클이 되어야 한다.
+이는 명백히 불가능하다.
+
+\medskip\noindent
+위 논의는 \cite[Theorem 4.13]{KRC}와 모순되지 않는다. 그 정리의
+Chow 다양체는 함자를 조대하게만 표현하기 때문이다(실제로는 서로
+다른 두 함자인데, 조금 계산해 보면 그중 하나만 사영 $X$에 대하여
+우리의 함자와 일치한다). 마찬가지로 \cite[Section 4.4]{SV}에서는
+사영 $X/S$에 대하여 준층
+$S' \mapsto z^{eff}(S' \times_S X/S', r)$의 $h$-층화가 어떤 표현
+가능 함자의 $h$-층화와 같음을 보인다.
+\end{remark}
+
+\begin{remark}
+\label{remark-equidimensional-over-geometrically-unibranch}
+$f : X \to S$를 스킴의 사상이라 하자. $r \geq 0$이라 하자.
+$Z \subset X$를 닫힌 부분스킴이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $S$는 뇌터이고 기하학적으로 단분지이다.
+\item $f$는 유한형이다.
+\item $Z \to S$의 상대 차원은 $\leq r$이다.
+\end{enumerate}
+그러면 충분히 나누어떨어지는 모든 정수 $n \geq 1$에 대하여,
+$S$의 모든 일반점 $\eta$에서 $\alpha_\eta = n[Z_\eta]_r$를 만족하는
+$X/S$ 위의 유일한 유효 상대 $r$-사이클 $\alpha$가 존재한다.
+이는 \cite[Theorem 3.4.2]{SV}를 다시 서술한 것이다. 이 결과가
+필요해지면 여기서 정확하게 명시하고 증명할 것이다.
+\end{remark}
+
+
+
+\section{고유 상대 사이클}
+\label{section-proper}
+
+\noindent
+우리의 설정에서는 다음 정의가 아마 올바른 정의일 것이다.
+
+\begin{definition}
+\label{definition-proper}
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 가정하자. $r \geq 0$을 정수라 하자. $X/S$ 위의
+상대 $r$-사이클 $\alpha$의 지지집합(Remark
+\ref{remark-supports-family})이 $S$ 위 고유인 닫힌 부분집합
+$W \subset X$에 포함되면(Cohomology of Schemes, Definition
+\ref{coherent-definition-proper-over-base}) $\alpha$를 {\it 고유 상대
+사이클}이라고 한다. $X/S$ 위의 모든 고유 상대 $r$-사이클의 군을
+$c(X/S, r)$로 나타낸다.
+\end{definition}
+
+\noindent
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-closed-closed-proper-over-base}에 의해 이는
+지지집합의 폐포가 밑 위에서 고유라는 뜻일 뿐이다. 이들이 군을
+이룸을 보이려면 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-union-closed-proper-over-base}를 사용한다.
+
+\begin{lemma}
+\label{lemma-proper-functoriality}
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 가정하자. $r \geq 0$을 정수라 하고 $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. $\alpha$가 고유이면
+$\alpha$의 임의의 기저변환도 고유이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-h-descent}
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 가정하자. $r \geq 0$을 정수라 하고 $\alpha$를
+$X/S$ 위의 상대 $r$-사이클이라 하자. $\{g_i : S_i \to S\}$를
+h-피복이라 하자. 그러면 $\alpha$가 고유일 필요충분조건은 각
+기저변환 $g_i^*\alpha$가 고유인 것이다.
+\end{lemma}
+
+\begin{proof}
+$\alpha$가 고유이면 Lemma \ref{lemma-proper-functoriality}에 의해 각
+$g_i^*\alpha$도 고유이다. 각 $g_i^*\alpha$가 고유라고 가정하자.
+$\alpha$가 고유임을 증명할 때 $S$ 위에서 아핀 국소적으로 작업하면
+충분함은 명백하다. 따라서 $S$가 아핀이라고 가정한다. 그러면 우리의
+피복 $\{S_i \to S\}$를 다음과 같은 족 $\{T_j \to S\}$로 세분할 수
+있다. 여기서 $g : T \to S$는 고유 전사 사상이고
+$T = \bigcup T_j$는 열린 피복이다. 따라서 $\beta = g^*\alpha$는
+$Y = T \times_S X$ 위에서 $T$에 대한 고유 상대 사이클이다. Lemma
+\ref{lemma-support-family}에 의해 $\beta$의 지지집합은 사상
+$f : Y \to X$에 의한 $\alpha$의 지지집합의 역상이다. 그러므로
+$f^{-1}\text{Supp}(\alpha)$의 폐포 $W \subset Y$는 $T$ 위에서
+고유이다. 사상 $T \to S$가 고유이므로 $W$는 $S$ 위에서 고유이다.
+이제 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-functoriality-closed-proper-over-base}에 의해 상
+$f(W) \subset X$는 $S$ 위에서 고유인 닫힌 부분집합이다. $f(W)$가
+$\text{Supp}(\alpha)$를 포함하므로 $\alpha$가 고유라고 결론짓는다.
+\end{proof}
+
+
+
+\section{고유 등차원 상대 사이클}
+\label{section-proper-equidimensional}
+
+\noindent
+$f : X \to S$를 스킴의 사상이라 하자. $S$는 국소 뇌터이고 $f$는
+국소 유한형이라고 가정하자. $r \geq 0$을 정수라 하자. $X/S$ 위의
+상대 $r$-사이클 $\alpha$가 등차원(Definition
+\ref{definition-equidimensional})이면서 고유(Definition
+\ref{definition-proper})이면 $\alpha$를 {\it 고유 등차원 상대 사이클}이라고
+한다. $X/S$ 위의 모든 고유 등차원 상대 $r$-사이클의 군을
+$c_{equi}(X/S, r)$로 나타낸다.
+
+\medskip\noindent
+마찬가지로 $X/S$ 위의 상대 $r$-사이클 $\alpha$가 유효(Definition
+\ref{definition-effective})이면서 고유(Definition
+\ref{definition-proper})이면 $\alpha$를 {\it 고유 유효 상대 사이클}이라고
+한다. $X/S$ 위의 모든 고유 유효 상대 $r$-사이클이 이루는 모노이드를
+$c^{eff}(X/S, r)$로 나타낸다. Lemma
+\ref{lemma-effective-equidimensional}에 의해 이들은 등차원임에
+주의하라.
+
+\medskip\noindent
+따라서 포함 사상들로 이루어진 다음 도표를 얻는다.
+$$
+\xymatrix{
+c^{eff}(X/S, r) \ar[r] \ar[d] &
+c_{equi}(X/S, r) \ar[r] \ar[d] &
+c(X/S, r) \ar[d] \\
+z^{eff}(X/S, r) \ar[r] &
+z_{equi}(X/S, r) \ar[r] &
+z(X/S, r)
+}
+$$
+
+
+
+\section{사이클에 대한 작용}
+\label{section-action}
+
+\noindent
+$S$를 차원함수 $\delta$가 주어진 국소 뇌터 보편 카테나리 스킴이라
+하자. Chow Homology, Section \ref{chow-section-setup}을 보라. $X \to Y$를
+$S$ 위의 스킴들 사이의 사상이라 하고, 두 스킴 모두 $S$ 위에서 국소
+유한형이라고 하자. $r \geq 0$이라 하자. 마지막으로 $\alpha$를 $X/Y$의
+올들 위의 $r$-사이클 족이라 하자. $e \in \mathbf{Z}$에 대하여 다음
+연산을 구성하겠다.
+$$
+\alpha \cap - : Z_e(Y) \longrightarrow Z_{r + e}(X)
+$$
+구체적으로 $\beta \in Z_e(Y)$가 주어졌을 때
+$\beta = \sum n_i[Z_i]$로 쓰자. 여기서 $Z_i \subset Y$는
+$\delta$-차원이 $e$인 정역 닫힌 부분스킴이고, 족 $Z_i$는 스킴
+$Y$에서 국소 유한이다. $y_i \in Z_i$를 일반점이라 하자.
+$\alpha_{y_i} = \sum m_{ij} [V_{ij}]$로 쓰자. 그러면
+$V_{ij} \subset X_{y_i}$는 차원 $r$의 정역 닫힌 부분스킴이고 족
+$V_{ij}$는 스킴 $X_{y_i}$에서 국소 유한이다. 이제 다음과 같이 둔다.
+$$
+\alpha \cap \beta = \sum n_i m_{ij} [\overline{V}_{ij}]
+\quad\in\quad
+Z_{r + e}(X)
+$$
+여기서 $\overline{V}_{ij} \subset X$는 사상
+$V_{ij} \to X_{y_i} \to X$의 스킴론적 상이다. 동치로,
+$\overline{V}_{ij} \subset X$는 $Z_i \subset Y$로 우세하게 사상되고
+그 일반올이 $V_{ij}$인 정역 닫힌 부분스킴이다. 곧
+$\dim_\delta(\overline{V}_{ij}) = r + e$이고, 닫힌 부분스킴들의 족
+$\overline{V}_{ij} \subset X$가 국소 유한임이 쉽게 따른다(확인은
+생략한다). 따라서 $\alpha \cap \beta$는 실제로 $Z_{r + e}(X)$의
+원소이다.
+
+\begin{lemma}
+\label{lemma-action-bilinear}
+위 구성은 쌍선형이다. 즉
+$(\alpha_1 + \alpha_2) \cap \beta = \alpha_1 \cap \beta +
+\alpha_2 \cap \beta$이고 $\alpha \cap (\beta_1 + \beta_2) =
+\alpha \cap \beta_1 + \alpha \cap \beta_2$이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-action-opens}
+$U \subset X$와 $V \subset Y$가 열린 부분집합이고 $f(U) \subset V$이면,
+$(\alpha \cap \beta)|_U$는 $\alpha|_U \cap \beta|_V$와 같다.
+\end{lemma}
+
+\begin{proof}
+위에서 제시한 $\alpha \cap \beta$의 명시적 기술에서 바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-action-base-change}
+$\alpha \cap \beta$를 만드는 연산은 평탄 기저변환 및 평탄 끌어오기와
+양립한다(설명은 증명을 보라).
+\end{lemma}
+
+\begin{proof}
+$(S, \delta)$, $(S', \delta')$, $g : S' \to S$ 및
+$c \in \mathbf{Z}$가 Chow Homology, Situation
+\ref{chow-situation-setup-base-change}에서와 같다고 하자. $X \to Y$를
+$S$ 위 국소 유한형 스킴들 사이의 사상이라 하자. $X' \to Y'$를
+$g$에 의한 $X \to Y$의 기저변환이라 하자. $\alpha$를 $X/Y$의 올들
+위의 $r$-사이클 족이라 하자. $\beta \in Z_e(Y)$라 하자. $\alpha'$를
+$Y' \to Y$에 의한 $\alpha$의 기저변환이라 하자. $\beta' = g^*\beta
+\in Z_{e + c}(Y')$를 $g$에 의한 $\beta$의 끌어오기라 하자. Chow
+Homology, Section \ref{chow-section-change-base}를 보라. 기저변환과의
+양립성이란 $\alpha' \cap \beta'$가 $\alpha \cap \beta$의
+기저변환이라는 뜻이다.
+
+\medskip\noindent
+기저변환과의 양립성을 증명하자. $X'$ 위의 사이클들의 등식을
+증명하고 있으므로 Lemma \ref{lemma-action-opens}에 의해 $Y$ 위에서
+국소적으로 작업해도 된다. 따라서 $Y$가 아핀이라고 가정해도 된다.
+특히 $\beta$는 소 사이클들의 유한 선형결합이다. $- \cap -$는 두 번째
+변수에 관하여 선형이므로(Lemma \ref{lemma-action-bilinear}), 어떤
+$\delta$-차원 $e$의 정역 닫힌 부분스킴 $Z \subset Y$에 대하여
+$\beta = [Z]$인 경우에 등식을 증명하면 충분하다.
+
+\medskip\noindent
+$y \in Z$를 일반점이라 하자. $\alpha_y = \sum m_j [V_j]$로 쓰자.
+$\overline{V}_j$를 $X$ 안의 $V_j$의 폐포라 하자. 그러면
+$$
+\alpha \cap \beta = \sum m_j[\overline{V}_j]
+$$
+% P08-E076: preserve the frozen unindexed sum literally.
+$Y' = Y \times_S S'$ 위의 사이클로서 $\beta$의 기저변환은
+$\beta' = \sum [Z \times_S S']_{e + c}$이다.
+$Z'_a \subset Z \times_S S'$를 기약 성분들이라 하고, 그 일반점들을
+$y'_a \in Z'_a$로 나타내며, $Z \times_S S'$에서 $Z'_a$의 중복도를
+$n_a$로 나타내자. 다음이 성립한다.
+% P08-E076: preserve the second frozen unindexed sum literally.
+$$
+\beta' = \sum [Z \times_S S']_{e + c} = \sum n_a[Z'_a]
+$$
+$\alpha'$가 $Y' \to Y$에 의한 $\alpha$의 기저변환이므로
+$\alpha'_{y'_a} = \sum m_j [V_{j, \kappa(y'_a)}]_r$이다.
+$V'_{jab} \subset V_{j, \kappa(y'_a)}$를 기약 성분들이라 하고,
+$V_{j, \kappa(y'_a)}$에서 $V'_{jab}$의 중복도를 $m_{jab}$로 나타내자.
+그러면
+$$
+\alpha'_{y'_a} = \sum m_j [V_{j, \kappa(y'_a)}]_r =
+\sum m_j m_{jab} [V'_{jab}]
+$$
+따라서
+$$
+\alpha' \cap \beta' = \sum n_a m_j m_{jab} [\overline{V}'_{jab}]
+$$
+이다. 여기서 $\overline{V}'_{jab}$는 $X'$ 안의 $V'_{jab}$의 폐포이다.
+따라서 원하는 등식을 증명하려면 다음 두 명제를 증명하면 충분하다.
+\begin{enumerate}
+\item $\overline{V}_j \times_S S'$의 기약 성분들은 스킴
+$\overline{V}'_{jab}$이다.
+\item $\overline{V}_j \times_S S'$에서 $\overline{V}'_{jab}$의
+중복도는 $n_a m_{jab}$와 같다.
+\end{enumerate}
+$V_j \to \overline{V}_j$는 정역 스킴들의 쌍유리 사상임에 주의하라.
+사상 $V_j \times_S S' \to V_j$ 및
+$\overline{V}_j \times_S S' \to \overline{V}_j$는 평탄하므로 기약
+성분들의 일반점들을 각각 $V_j$와 $\overline{V}_j$의 유일한 일반점으로
+보낸다. 따라서 $V_j \times_S S' \to \overline{V}_j \times_S S'$는
+쌍유리 사상이고, 이에 따라 기약 성분들 사이의 전단사를 유도하며
+그 중복도들을 동일시한다. 그러므로 $V_j \times_S S'$의 기약 성분들이
+스킴 $V'_{jab}$이고, $V_j \times_S S'$에서 $V'_{jab}$의 중복도가
+$n_a m_{jab}$와 같음을 증명하면 충분하다. 그러나 이는 도표
+$$
+\xymatrix{
+Z_r(V_j) \ar[r] & Z_{r + c}(V_j \times_S S') \\
+Z_0(\Spec(\kappa(y))) \ar[r] \ar[u] &
+Z_c(\Spec(\kappa(y)) \times_S S') \ar[u]
+}
+$$
+가 가환이라는 말일 뿐이다. 여기서 수평 화살표들은
+$\Spec(\kappa(y)) \times_S S' \to \Spec(\kappa(y))$에 의한
+기저변환이고 수직 화살표들은 평탄 끌어오기이다. 이는 Chow Homology,
+Lemma \ref{chow-lemma-pullback-base-change-pullback}에서 증명하였다.
+
+\medskip\noindent
+보조정리에서 평탄 끌어오기에 관한 명제는 다음을 뜻한다.
+$(S, \delta)$, $X \to Y$, $\alpha$, $\beta$가 위의
+$\alpha \cap \beta$ 구성에서와 같다고 하자. $Y' \to Y$를 국소
+유한형이고 상대 차원이 $c$인 평탄 사상이라 하자. 그러면 $\alpha'$를
+$Y' \to Y$에 의한 $\alpha$의 기저변환으로, $\beta'$를 $\beta$의
+평탄 끌어오기로 둘 수 있다. 평탄 끌어오기와의 양립성이란
+$\alpha' \cap \beta'$가
+% P08-E079: preserve the frozen wrong codomain Y rather than X.
+$X \times_Y Y' \to Y$에 의한 $\alpha \cap \beta$의 평탄
+끌어오기라는 뜻이다. 이는 $S = Y$ 및 $S' = Y'$로 두면 실제로 위
+논의의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-action-coherent}
+$(S, \delta)$와 $f : X \to Y$가 위에서와 같다고 하자.
+$\mathcal{F}$를 모든 $y \in Y$에 대하여
+$\dim(\text{Supp}(\mathcal{F}_y)) \leq r$인 연접
+$\mathcal{O}_X$-가군이라 하자. $\mathcal{G}$를
+$\dim_\delta(\text{Supp}(\mathcal{G})) \leq e$인 연접
+$\mathcal{O}_Y$-가군이라 하자. $\alpha = [\mathcal{F}/X/Y]_r$로
+두고(Example \ref{example-family-associated-module}),
+$\beta = [\mathcal{G}]_e$로 두자(Chow Homology, Definition
+\ref{chow-definition-cycle-associated-to-coherent-sheaf}).
+$\mathcal{F}$가 $Y$ 위에서 평탄이면
+$\alpha \cap \beta =
+[\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G}]_{r + e}$이다.
+\end{lemma}
+
+\begin{proof}
+다음에 주의하라.
+$$
+\text{Supp}(\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G}) =
+\text{Supp}(\mathcal{F}) \cap f^{-1}\text{Supp}(\mathcal{G}) =
+\bigcup\nolimits_{y \in \text{Supp}(\mathcal{G})} \text{Supp}(\mathcal{F}_y)
+$$
+따라서 이는 $\delta$-차원이 $\leq r + e$인 닫힌 부분집합이다.
+그러므로 식
+$[\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G}]_{r + e}$은
+잘 정의된다.
+
+\medskip\noindent
+$\alpha \cap \beta$의 구성에서 도입한 기호
+$\beta = \sum n_i[Z_i]$, $y_i \in Z_i$,
+$\alpha_{y_i} = \sum m_{ij} [V_{ij}]$ 및
+$\overline{V}_{ij}$를 사용하겠다. $\beta = [\mathcal{G}]_e$이므로
+$Z_i$들은 $\delta$-차원이 $e$인 $\text{Supp}(\mathcal{G})$의 기약
+성분들이다. 마찬가지로 $V_{ij}$들은 차원이 $r$인
+$\text{Supp}(\mathcal{F}_{y_i})$의 기약 성분들이다. 이 사실과 첫
+단락의 식에 의해 $\overline{V}_{ij}$들은 $\delta$-차원이
+$r + e$인
+$\text{Supp}(\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G})$의
+기약 성분들이다. 따라서 보조정리를 증명하려면 이제 다음을 보이면
+충분하다.
+$$
+\text{length}_{\mathcal{O}_{X, \xi_{ij}}}(
+(\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G})_{\xi_{ij}})
+=
+\text{length}_{\mathcal{O}_{X_{y_i}, \xi_{ij}}}((\mathcal{F}_{y_i})_{\xi_{ij}})
+\cdot
+\text{length}_{\mathcal{O}_{Y, y_i}}(\mathcal{G}_{y_i})
+$$
+증명의 첫 단락에 의해 좌변은 $B = \mathcal{O}_{X, \xi_{ij}}$-가군
+$$
+\mathcal{G}_{y_i}
+\otimes_{\mathcal{O}_{Y, y_i}}
+\mathcal{F}_{\xi_{ij}} =
+M \otimes_A N
+$$
+의 길이와 같다. 여기서 $M = \mathcal{G}_{y_i}$는 유한 길이
+$A = \mathcal{O}_{Y, y_i}$-가군이고, $N = \mathcal{F}_{\xi_{ij}}$는
+$N/\mathfrak m_AN$의 길이가 유한한 유한 $B$-가군이다.
+$\mathcal{F}$가 $Y$ 위에서 평탄하므로 가군 $N$은 $A$-평탄이다.
+식의 우변은 다음과 같다.
+$$
+\text{length}_B(N/\mathfrak m_A N) \cdot \text{length}_A(M)
+$$
+따라서 식의 우변과 좌변은 $M$에 관하여 가법적이다($A$ 위의 $N$의
+평탄성을 사용한다). 그러므로 $M = \kappa_A$가 잉여체인 경우에 식을
+증명하면 충분한데, 이 경우에는 자명하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-action-closed}
+$(S, \delta)$와 $f : X \to Y$가 위에서와 같다고 하자. $Z \subset X$를
+$Y$ 위에서 상대 차원이 $\leq r$인 닫힌 부분스킴이라 하자.
+$\alpha = [Z/X/Y]_r$로 두자(Example
+\ref{example-family-associated-closed}). $W \subset Y$를
+$\delta$-차원이 $\leq e$인 닫힌 부분스킴이라 하자.
+$\beta = [W]_e$로 두자(Chow Homology, Definition
+\ref{chow-definition-cycle-associated-to-closed-subscheme}). $Z$가 $Y$
+위에서 평탄이면 $\alpha \cap \beta = [Z \times_Y W]_{r + e}$이다.
+\end{lemma}
+
+\begin{proof}
+% P08-E080: preserve the frozen repeated F; the second module should be G.
+$\mathcal{F} = \mathcal{O}_Z$ 및 $\mathcal{F} = \mathcal{O}_W$로 두면
+이는 Lemma \ref{lemma-action-coherent}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-pullback-as-action}
+$(S, \delta)$와 $f : X \to Y$가 위에서와 같다고 하자. $f$가 상대 차원
+$e$의 평탄 사상이라고 가정하자. $\beta \in Z_r(Y)$에 대하여
+$Z_{e + r}(X)$에서 $f^*\beta = [X/X/Y]_e \cap \beta$이다.
+\end{lemma}
+
+\begin{proof}
+$X$ 위에서 국소적으로 등식을 증명하면 충분하다. 따라서 $Y$가
+아핀이라고 가정해도 된다. 이 경우 $\beta$는 소 사이클들의 유한
+정수 선형결합이다. 등식의 양변이 $\beta$에 관하여 가법적이므로,
+$W$가 $Y$의 $\delta$-차원 $r$인 정역 닫힌 부분스킴일 때
+$\beta = [W]$인 경우를 가정해도 된다. $f^{-1}(W) = W \times_Y X$를
+$X$ 안의 $W$의 스킴론적 역상이라 하자. Lemma
+\ref{lemma-action-closed}에 의해
+$[X/X/Y]_e \cap \beta = [W \times_Y X]_{r + e}$이고, Chow Homology,
+Definition \ref{chow-definition-flat-pullback}에 의해
+$f^*\beta = [f^{-1}(W)]_{r + e}$이다. 따라서 원하는 등식을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-action-push-pull}
+$(S, \delta)$가 위에서와 같다고 하자. $S$ 위 국소 유한형 스킴들의
+카르테시안 도표
+$$
+\xymatrix{
+X' \ar[r]_f \ar[d] & X \ar[d] \\
+Y' \ar[r]^g & Y
+}
+$$
+가 주어졌고 $g$가 고유라고 하자. $r, e \geq 0$이라 하자. $\alpha$를
+$X/Y$의 올들 위의 $r$-사이클 족이라 하고 $\beta' \in Z_e(Y')$라
+하자. 그러면 $f_*(g^*\alpha \cap \beta') = \alpha \cap g_*\beta'$이다.
+\end{lemma}
+
+\begin{proof}
+$X$ 위의 사이클들의 등식을 증명하고 있으므로 Lemma
+\ref{lemma-action-opens}에 의해 $Y$ 위에서 국소적으로 작업해도 된다.
+따라서 $Y$가 아핀이라고 가정해도 된다. 그러면 $Y'$은 준콤팩트이다.
+특히 $\beta'$은 소 사이클들의 유한 선형결합이다. $- \cap -$가 두 번째
+변수에 관하여 선형이므로(Lemma \ref{lemma-action-bilinear}), 어떤
+$\delta$-차원 $e$의 정역 닫힌 부분스킴 $Z' \subset Y'$에 대하여
+$\beta' = [Z']$인 경우에 등식을 증명하면 충분하다. $Z = g(Z')$로
+두자. 이는 $\delta$-차원이 $\leq e$인 $Y$의 정역 닫힌 부분스킴이다.
+간단히 하기 위해 $Z$의 $\delta$-차원이 $e$라고 가정하고, 더 쉬운
+나머지 경우는 독자에게 맡긴다. $y \in Z$와 $y' \in Z'$를 일반점들이라
+하자. $\alpha_y = \sum m_j[V_j]$로 쓰자. 여기서
+$V_j \subset X_y$는 차원 $r$의 정역 닫힌 부분스킴이다.
+
+\medskip\noindent
+먼저 $g$가 닫힌 몰입이라고 가정하자. 그러면 $g_*\beta' = [Z]$이고,
+% P08-E081: preserve the frozen undefined n_j rather than silently using m_j.
+$(g^*\alpha)_{y'} = \sum n_j[V_j]$이다. $V_j$가 $X_y$의 닫힌
+부분스킴 $X'_{y'}$에 포함되므로 이 식은 의미가 있다. 따라서 이 경우
+등식은 명백하다. 양쪽 모두 $\sum m_j[\overline{V}_j]$를 주기 때문이다.
+여기서 $\overline{V}_j$는 닫힌 부분스킴 $X' \subset X$ 안의
+$V_j$의 폐포이다.
+
+\medskip\noindent
+이제 위와 같이 $\beta' = [Z']$인 일반적인 경우로 돌아가자.
+$W = Z \times_Y X$ 및 $W' = Z' \times_{Y'} X'$로 두자. 다음
+카르테시안 정사각형들을 생각하자.
+$$
+\xymatrix{
+W \ar[r] \ar[d] & X \ar[d] \\
+Z \ar[r] & Y
+}
+\quad
+\xymatrix{
+W' \ar[r] \ar[d] & X' \ar[d] \\
+Z' \ar[r] & Y'
+}
+\quad
+\xymatrix{
+W' \ar[r] \ar[d] & W \ar[d] \\
+Z' \ar[r] & Z
+}
+$$
+앞 단락에서 첫 두 정사각형에 대한 결과를 알고 있으므로, 형식적
+논증에 의해 마지막 정사각형과 원소
+$\beta' = [Z'] \in Z_e(Z')$에 대한 결과를 증명하면 충분하다. 이는
+다음 단락에서 논의하는 경우로 환원한다.
+
+\medskip\noindent
+$Y' \to Y$가 $\delta$-차원 $e$의 정역 스킴들 사이의 일반적으로 유한인
+사상이고 $\beta' = [Y']$이라고 가정하자. 이 경우
+$f_*(g^*\alpha \cap \beta')$와 $\alpha \cap g_*\beta'$는 모두 $Y$ 위로
+우세한 소 사이클들의 합으로 쓸 수 있는 사이클이다. 따라서 등식을
+검사하기 위해 $Y$를 공집합이 아닌 열린 부분스킴으로 바꾸어도 된다.
+이와 같이 바꾼 뒤 $g$가 차수 $d \geq 1$인 유한 평탄 사상이라고
+가정해도 된다. 물론 이는 $g_*\beta' = g_*[Y'] = d[Y]$라는 뜻이다.
+또한 $\beta' = [Y'] = g^*[Y]$이다. 따라서
+$$
+f_*(g^*\alpha \cap \beta') =
+f_*(g^*\alpha \cap g^*[Y]) =
+f_*f^*(\alpha \cap [Y]) =
+d (\alpha \cap [Y]) =
+\alpha \cap g_*\beta'
+$$
+이며 이것이 원하는 등식이다. 두 번째 등식은 Lemma
+\ref{lemma-action-base-change}이고, 세 번째 등식은 Chow Homology,
+Lemma \ref{chow-lemma-finite-flat}이다.
+\end{proof}
+
+
+
+\section{Chow 군에 대한 작용}
+\label{section-action-chow}
+
+\noindent
+$\alpha$가 상대 $r$-사이클이면 Section \ref{section-action}의 연산
+$\alpha \cap -$는 유리 동치를 통하여 인수분해되고 이변량류를
+정의한다.
+
+\begin{lemma}
+\label{lemma-closed-in-X-gysin}
+$(S, \delta)$가 Section \ref{section-action}에서와 같다고 하자.
+$f : X' \to X$를 $S$ 위 국소 유한형 스킴들의 고유 사상이라 하자.
+$(\mathcal{L}, s, i : D \to X)$가 Chow Homology, Definition
+\ref{chow-definition-gysin-homomorphism}에서와 같다고 하자. Chow
+Homology, Remark \ref{chow-remark-pullback-pairs}에서와 같이 도표
+$$
+\xymatrix{
+D' \ar[d]_g \ar[r]_{i'} & X' \ar[d]^f \\
+D \ar[r]^i & X
+}
+$$
+를 만들자. $\mathcal{L}|_D \cong \mathcal{O}_D$이면 임의의
+$\alpha' \in Z_{k + 1}(X')$에 대하여 $Z_k(D)$에서
+$i^*f_*\alpha' = g_*(i')^*\alpha'$이다.
+\end{lemma}
+
+\begin{proof}
+모든 연산이 사이클 수준에서 정의되므로 명제는 의미가 있다. Gysin
+사상들에 대해서는 Chow Homology, Remark
+\ref{chow-remark-gysin-on-cycles}를 보라. 어떤 정역 닫힌 부분스킴
+% P08-E083: preserve the frozen alpha rather than alpha-prime.
+$W' \subset X'$에 대하여 $\alpha = [W']$라고 하자.
+$W = f(W') \subset X$라 하자. $W' \not \subset D'$인 경우에는
+$W \not \subset D$이고 다음이 성립한다.
+$$
+[W' \cap D']_k = \text{div}_{\mathcal{L}'|_{W'}}({s'|_{W'}})
+\quad\text{and}\quad
+[W \cap D]_k = \text{div}_{\mathcal{L}|_W}(s|_W)
+$$
+% P08-E084: preserve the frozen f_* although the cycle lies on D'.
+따라서 Chow Homology, Lemma \ref{chow-lemma-equal-c1-as-cycles}에 의해
+첫 사이클의 $f_*$는 둘째 사이클과 같다. 그러므로 등식은 사이클들의
+등식으로 성립한다. $W' \subset D'$인 경우에는 $W \subset D$이고,
+구성에 의해 양변 모두 영이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-action-gysin}
+$(S, \delta)$가 Section \ref{section-action}에서와 같다고 하자.
+$X \to Y$를 $S$ 위 국소 유한형 스킴들의 사상이라 하자.
+$r \geq 0$이라 하고 $\alpha \in z(X/Y, r)$를 $X/Y$ 위의 상대
+$r$-사이클이라 하자. $(\mathcal{L}, s, i : D \to Y)$가 Chow Homology,
+Definition \ref{chow-definition-gysin-homomorphism}에서와 같다고 하자.
+카르테시안 도표
+$$
+\xymatrix{
+E \ar[d] \ar[r]_j & X \ar[d] \\
+D \ar[r]^i & Y
+}
+$$
+를 만들자. Chow Homology, Remark \ref{chow-remark-pullback-pairs}를 보라.
+$\mathcal{L}|_D \cong \mathcal{O}_D$이면 $e \in \mathbf{Z}$에 대하여
+도표
+$$
+\xymatrix{
+Z_e(D) \ar[rr]_{i^*\alpha \cap -} & &
+Z_{e + r}(E) \\
+Z_{e + 1}(Y) \ar[u]^{i^*} \ar[rr]^{\alpha \cap -} & &
+Z_{r + e + 1}(X) \ar[u]_{j^*}
+}
+$$
+는 가환이다. 여기서 수직 화살표 $i^*$와 $j^*$는 Chow Homology,
+Remark \ref{chow-remark-gysin-on-cycles}에서와 같은 사이클 위의 Gysin
+사상이다.
+\end{lemma}
+
+\begin{proof}
+먼저 예비 관찰을 하자. $g : Y' \to Y$가 포락 사상이라고 가정하자
+(Chow Homology, Definition \ref{chow-definition-envelope}).
+$D', i', E', j', X', \alpha'$를 $g$에 의한
+$D, i, E, j, X, \alpha$의 기저변환이라 하고, $f : X' \to X$를
+사영이라 하자. 보조정리가 $D', i', E', j', X', Y', \alpha'$에
+대하여 성립한다고 가정하자. 그러면 $\beta' \in Z_{e + 1}(Y')$일 때
+다음이 성립한다.
+\begin{align*}
+i^*\alpha \cap i^*g_*\beta'
+& =
+i^*\alpha \cap f_*(i')^*\beta' \\
+& =
+f_*(f^*i^*\alpha \cap (i')^*\beta') \\
+& =
+f_*((i')^*\alpha' \cap (i')^*\beta') \\
+& =
+f_*((j')^*(\alpha' \cap \beta')) \\
+& =
+j^*(f_*(f^*\alpha \cap \beta')) \\
+& =
+j^*(\alpha \cap g_*\beta')
+\end{align*}
+여기서 첫째 등식은 Lemma \ref{lemma-closed-in-X-gysin}, 둘째 등식은
+Lemma \ref{lemma-action-push-pull}, 셋째 등식은 $\alpha'$의 정의,
+넷째 등식은 우리의 보조정리가 $D', i', E', j', X', \alpha'$에 대하여
+성립한다는 가정, 다섯째 등식은 Lemma
+\ref{lemma-closed-in-X-gysin}, 여섯째 등식은 Lemma
+\ref{lemma-action-push-pull}이다. 따라서 우리의 보조정리는
+% P08-E085: preserve the frozen dimension-dropping codomain Z_e(Y).
+$g_* : Z_{e + 1}(Y') \to Z_e(Y)$의 상에 대하여 성립한다. 그러나
+$g$가 완전 분해되므로 이 사상은 전사이고, 보조정리가
+$D, i, E, j, X, Y, \alpha$에 대하여 성립한다고 결론짓는다.
+
+\medskip\noindent
+$\beta \in Z_{e + 1}(Y)$라 하자. $E$ 위의 사이클들의 등식으로서
+$(D \to Y)^*\alpha \cap i^*\beta = j^*(\alpha \cap \beta)$임을
+보여야 한다. 이 문제는 $E$ 위에서 국소적이므로 $X$와 $Y$를 열린
+부분스킴들로 바꾸어도 된다. (여기서는 연산 $i^*$, $j^*$,
+$\alpha \cap - $ 및 $(D \to Y)^*\alpha \cap -$의 형성이 국소화와
+가환함을 사용한다. Gysin 사상들에 대해서는 자명하고, 나머지
+연산들에 대해서는 Lemma \ref{lemma-action-opens}에서 따른다.) 따라서
+$X$와 $Y$가 아핀이라고 가정해도 되고, 다음 단락에서 논의하는 경우로
+환원한다.
+
+\medskip\noindent
+$X$와 $Y$가 준콤팩트라고 가정하자. 증명의 첫 단락과 Lemma
+\ref{lemma-get-cycles}에 의해 $\alpha$가 (
+\ref{equation-cycle-classes})의 상에 속한다고 더 가정해도 된다.
+문제의 연산들이 선형이므로, $Y$ 위에서 평탄하고 상대 차원이
+$\leq r$인 어떤 닫힌 부분스킴 $Z \subset X$에 대하여
+$\alpha = [Z/X/Y]_r$이라고 가정해도 된다. 또한 $Y$가 준콤팩트이므로
+사이클 $\beta$는 소 사이클들의 유한 선형결합이다. 문제의 연산들이
+선형이므로, 어떤 $\delta$-차원 $e + 1$의 정역 닫힌 부분스킴
+$W \subset Y$에 대하여 $\beta = [W]$인 경우에 등식을 증명하면
+충분하다.
+
+\medskip\noindent
+$W \subset D$이면 한편으로 $i^*[W] = 0$이고, 다른 한편으로
+$\alpha \cap [W]$는 $E$ 위에 지지되므로
+$j^*(\alpha \cap [W]) = 0$이기도 하다. 따라서 이 경우 등식이
+성립한다.
+
+\medskip\noindent
+$W \not \subset D$라고 하자. 그러면 $i^*[W] = [D \cap W]_e$이다.
+$i$에 의한 $\alpha = [Z/X/Y]_r$의 끌어오기 $i^*\alpha$는
+$[(E \cap Z)/E/D]_r$이고,
+$(E \cap Z) = E \times_Y Z = D \times_Y Z$는 $D$ 위에서 평탄함에
+주의하라. 그러므로 Lemma \ref{lemma-action-closed}를 두 번 사용하면
+$$
+i^*\alpha \cap i^*[W] =
+[(E \cap Z) \times_D (D \cap W)]_{r + e} =
+[E \cap (Z \times_Y W)]_{r + e} =
+j^*(\alpha \cap [W])
+$$
+를 얻으며, 이것이 원하는 등식이다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-get-bivariant-class}
+$(S, \delta)$가 Section \ref{section-action}에서와 같다고 하자.
+$X \to Y$를 $S$ 위 국소 유한형 스킴들의 사상이라 하자.
+$r \geq 0$이라 하고 $\alpha \in z(X/Y, r)$를 $X/Y$ 위의 상대
+$r$-사이클이라 하자. 국소 유한형 사상 $g : Y' \to Y$와
+$e \in \mathbf{Z}$ 각각에 연산
+$$
+g^*\alpha \cap - : Z_e(Y') \to Z_{r + e}(X')
+$$
+을 대응시키는 규칙을 생각하자. 여기서 $X' = Y' \times_Y X$이다.
+이 규칙은 유리 동치를 통하여 인수분해되어 이변량류
+$c(\alpha) \in A^{-r}(X \to Y)$를 정의한다.
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{lemma-action-gysin}과 Chow Homology, Lemma
+\ref{chow-lemma-factors-through-rational-equivalence}에 의해 이 연산은
+유리 동치를 통하여 인수분해된다. 그 결과 Chow 군들 위의 연산은
+Chow Homology, Lemma \ref{chow-lemma-bivariant-weaker} 및 Lemmas
+\ref{lemma-action-push-pull}, \ref{lemma-action-base-change},
+\ref{lemma-action-gysin}에 의해 이변량류이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-characterize-relative-cycles}
+$(S, \delta)$가 Section \ref{section-action}에서와 같다고 하자.
+$X \to Y$를 $S$ 위 국소 유한형 스킴들의 사상이라 하자.
+$r \geq 0$이라 하자. 국소 유한형 사상 $g : Y' \to Y$와
+$e \in \mathbf{Z}$ 각각에 연산
+$$
+c \cap - : Z_e(Y') \to Z_{r + e}(X')
+$$
+을 대응시키고, 이 연산이 Lemma \ref{lemma-action-gysin}에서와 같이
+고유 전진, 평탄 끌어오기 및 Gysin 사상과 양립하는 규칙 $c$가
+주어졌다고 하자. 그러면 위와 같은 모든 $g$에 대하여
+% P08-E086: preserve the frozen missing placeholder after the cap operator.
+$c \cap = g^*\alpha \cap -$가 되게 하는 $X/Y$ 위의 상대
+$r$-사이클 $\alpha$가 존재한다고 주장할 수 있다. 이 결과가
+필요해지면 여기서 조심스럽게 명시하고 증명할 것이다.
+\end{remark}
+
+
+
+\section{올 위의 사이클 족들의 합성}
+\label{section-compose-families}
+
+\noindent
+$X \to Y \to S$를 모두 국소 유한형인 스킴 사상들이라 하자.
+$r, e \geq 0$이라 하자. $\alpha$를 $X/Y$의 올들 위의 $r$-사이클
+족이라 하고, $\beta$를 $Y/S$의 올들 위의 $e$-사이클 족이라 하자.
+그러면 다음과 같이 두어 $X/S$의 올들 위의 $(r + e)$-사이클 족
+$\alpha \circ \beta$를 얻는다.
+$$
+(\alpha \circ \beta)_s = (Y_s \to Y)^*\alpha \cap \beta_s
+$$
+더 정확하게 말하면 식 $(Y_s \to Y)^*\alpha$는 $Y_s \to Y$에 의한
+$\alpha$의 기저변환, 즉 $X_s/Y_s$의 올들 위의 $r$-사이클 족을
+나타내며, 연산 $- \cap -$는 Section \ref{section-action}에서 정의하고
+연구하였다.
+\footnote{정확히 말해, 우리는 $s = \Spec(\kappa(s))$를
+$\delta(s) = 0$인 밑스킴으로 사용한다.}
+
+\begin{lemma}
+\label{lemma-construction-bilinear}
+위 구성은 쌍선형이다. 즉
+% P08-E088: preserve the frozen malformed first bilinearity identity.
+$(\alpha_1 + \alpha_2) \circ \beta \alpha_1 \circ \beta +
+\alpha_1 \circ \beta$이고 $\alpha \circ (\beta_1 + \beta_2) =
+\alpha \circ \beta_1 + \alpha \circ \beta_2$이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 도움말: 각 올에서 이 구성은 Lemma
+\ref{lemma-action-bilinear}에 의해 쌍선형이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-construction-opens}
+$U \subset X$와 $V \subset Y$가 열린 부분집합이고
+% P08-E089: preserve the frozen undefined morphism symbol f.
+$f(U) \subset V$이면 $(\alpha \circ \beta)|_U$는
+$\alpha|_U \circ \beta|_V$와 같다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 도움말: 각 올에서 Lemma \ref{lemma-action-opens}를 사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-construction-base-change}
+$\alpha \circ \beta$의 형성은 기저변환과 양립한다.
+\end{lemma}
+
+\begin{proof}
+$g : S' \to S$를 스킴의 사상이라 하자. $X' \to Y'$를 $g$에 의한
+$X \to Y$의 기저변환이라 하자. $\alpha'$를 $Y' \to Y$에 대한
+$\alpha$의 기저변환이라 하자. $\beta'$를 $S' \to S$에 대한
+$\beta$의 기저변환이라 하자. 주장은 $\alpha' \circ \beta'$가
+$g : S' \to S$에 의한 $\alpha \circ \beta$의 기저변환이라는 뜻이다.
+
+\medskip\noindent
+$s' \in S'$을 상이 $s \in S$인 점이라 하자. 그러면
+$$
+(\alpha' \circ \beta')_{s'} = (Y'_{s'} \to Y')^*\alpha' \cap \beta'_{s'}
+$$
+이다. 다음을 관찰하자.
+$$
+(Y'_{s'} \to Y')^*\alpha' =
+(Y'_{s'} \to Y')^*(Y' \to Y)^*\alpha =
+(Y'_{s'} \to Y_s)^*(Y_s \to Y)^*\alpha
+$$
+또한 $\beta'_{s'}$는
+$s' = \Spec(\kappa(s')) \to \Spec(\kappa(s)) = s$에 의한
+$\beta_s$의 기저변환이다. 따라서 $(Y_s \to Y)^*\alpha$,
+$\beta_s$, $X_s \to Y_s \to s$ 및 $s' \to s$에 의한 기저변환에
+Lemma \ref{lemma-action-base-change}를 적용하면 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-construction-coherent}
+$f : X \to Y$와 $Y \to S$를 모두 국소 유한형인 스킴 사상들이라
+하자. $r, e \geq 0$이라 하자. $\mathcal{F}$를 모든 $y \in Y$에 대하여
+$\dim(\text{Supp}(\mathcal{F}_y)) \leq r$인 유한형 준연접
+$\mathcal{O}_X$-가군이라 하자. $\mathcal{G}$를 모든 $s \in S$에 대하여
+$\dim(\text{Supp}(\mathcal{G}_s)) \leq e$인 유한형 준연접
+$\mathcal{O}_Y$-가군이라 하자. $\alpha = [\mathcal{F}/X/Y]_r$ 및
+$\beta = [\mathcal{G}/Y/S]_e$라고 하고(Example
+\ref{example-family-associated-module}), $\mathcal{F}$가 $Y$ 위에서
+평탄이면
+$\alpha \circ \beta =
+[\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G}/X/S]_{r + e}$이다.
+\end{lemma}
+
+\begin{proof}
+먼저 $\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G}$가 유한형
+준연접 $\mathcal{O}_X$-가군임을 관찰하자. $s \in S$라 하자. 텐서곱의
+우완전성에 의해
+$$
+(\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G})_s =
+\mathcal{F}_s \otimes_{\mathcal{O}_{X_s}} f_s^*\mathcal{G}_s
+$$
+이다. 또한 $\mathcal{F}_s$는 평탄 가군의 기저변환이므로 $Y_s$ 위에서
+평탄이다. 따라서 등식 $(\alpha \circ \beta)_s =
+[(\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G})_s]_{r + e}$는
+Lemma \ref{lemma-action-coherent}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-construction-closed}
+$f : X \to Y$와 $Y \to S$를 모두 국소 유한형인 스킴 사상들이라
+하자. $r, e \geq 0$이라 하자. $Z \subset X$를 $Y$ 위에서 상대 차원이
+$\leq r$인 닫힌 부분스킴이라 하자. $W \subset Y$를 $S$ 위에서 상대
+차원이 $\leq e$인 닫힌 부분스킴이라 하자. $\alpha = [Z/X/Y]_r$ 및
+$\beta = [W/Y/S]_e$라고 하고(Example
+\ref{example-family-associated-closed}), $Z$가 $Y$ 위에서 평탄이면
+$\alpha \circ \beta = [Z \times_Y W/X/S]_{r + e}$이다.
+\end{lemma}
+
+\begin{proof}
+% P08-E090: preserve the frozen repeated F; the second module should be G.
+$\mathcal{F} = \mathcal{O}_Z$ 및 $\mathcal{F} = \mathcal{O}_W$로 두면
+이는 Lemma \ref{lemma-construction-coherent}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-pullback-as-composition}
+$f : X \to Y$와 $Y \to S$를 모두 국소 유한형인 스킴 사상들이라
+하자. $f$가 상대 차원 $e$의 평탄 사상이라고 가정하자. $\beta$를
+$Y/S$의 올들 위의 $r$-사이클 족이라 하자. 그러면 $X/S$의 올들 위의
+$(e + r)$-사이클 족으로서 $f^*\beta = [X/X/Y]_e \circ \beta$이다.
+\end{lemma}
+
+\begin{proof}
+정의들을 풀어 쓰고 $[X/X/Y]_e$의 형성이 기저변환과 양립함을
+사용하면(Lemma \ref{lemma-family-associated-closed}), 이는 Lemma
+\ref{lemma-flat-pullback-as-action}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-construction-push-pull}
+$S$를 스킴이라 하자. $S$ 위 국소 유한형 스킴들의 카르테시안 도표
+$$
+\xymatrix{
+X' \ar[r]_f \ar[d] & X \ar[d] \\
+Y' \ar[r]^g & Y
+}
+$$
+가 주어졌고 $g$가 고유라고 하자. $r, e \geq 0$이라 하자. $\alpha$를
+$X/Y$의 올들 위의 $r$-사이클 족이라 하자. $\beta'$을 $Y'/S$의
+올들 위의 $e$-사이클 족이라 하자. 그러면
+$f_*(g^*(\alpha) \circ \beta') = \alpha \circ g_*\beta'$이다.
+\end{lemma}
+
+\begin{proof}
+정의들을 풀어 쓰면 이는 Lemma \ref{lemma-action-push-pull}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-construction-composition}
+$(S, \delta)$가 Chow Homology, Situation
+\ref{chow-situation-setup}에서와 같다고 하자. $X \to Y \to Z$를 $S$ 위
+국소 유한형 스킴들의 사상들이라 하자. $r, s, e \geq 0$이라 하자.
+그러면
+$$
+(\alpha \circ \beta) \cap \gamma = \alpha \cap (\beta \cap \gamma)
+\quad\text{in}\quad Z_{r + s + e}(X)
+$$
+이다. 여기서 $\alpha$는 $X/Y$의 올들 위의 $r$-사이클 족이고,
+$\beta$는 $Y/Z$의 올들 위의 $s$-사이클 족이며,
+$\gamma \in Z_e(Z)$이다.
+\end{lemma}
+
+\begin{proof}
+$X$ 위의 사이클들의 등식을 증명하고 있으므로 Lemma
+\ref{lemma-action-opens}에 의해 $Z$ 위에서 국소적으로 작업해도 된다.
+따라서 $Z$가 아핀이라고 가정해도 된다. 특히 $\gamma$는 소 사이클들의
+유한 선형결합이다. $- \cap -$는 두 번째 변수에 관하여 선형이므로
+(Lemma \ref{lemma-action-bilinear}), 어떤 $\delta$-차원 $e$의 정역 닫힌
+부분스킴 $W \subset Z$에 대하여 $\gamma = [W]$인 경우에 등식을
+증명하면 충분하다.
+
+\medskip\noindent
+$z \in W$를 일반점이라 하자. $Z_s(Y_z)$에서
+$\beta_z = \sum m_j[V_j]$로 쓰자. 그러면 $\beta \cap \gamma$는
+$\sum m_j[\overline{V}_j]$와 같다. 여기서
+$\overline{V}_j \subset Y$는 $Y \to Z$에 의해 $W$ 안으로 사상되고
+일반올이 $V_j$인 정역 닫힌 부분스킴이다. $y_j \in V_j$를 일반점이라
+하자. 이를 $\overline{V}_j$의 일반점으로도 본다($W$의 $z$로 사상된다).
+$Z_r(X_{y_j})$에서 $\alpha_{y_j} = \sum n_{jk} [W_{jk}]$로 쓰자.
+그러면 $\alpha \cap (\beta \cap \gamma)$는
+$$
+\sum m_j n_{jk} [\overline{W}_{jk}]
+$$
+와 같다. 여기서 $\overline{W}_{jk} \subset X$는 $X \to Y$에 의해
+$\overline{V}_j$ 안으로 사상되고 일반올이 $W_{jk}$인 정역 닫힌
+부분스킴이다.
+
+\medskip\noindent
+한편 다음을 생각하자.
+$$
+(\alpha \circ \beta)_z = (Y_z \to Y)^*\alpha \cap \beta_z =
+(Y_z \to Y)^*\alpha \cap (\sum m_j [V_j])
+$$
+$- \cap -$의 구성에 의해 이는 $X_z$ 위의 사이클
+$$
+\sum m_j n_{jk} [(\overline{W}_{jk})_z]
+$$
+과 같다. 따라서 정의에 의해
+$$
+(\alpha \circ \beta) \cap [W] =
+\sum m_j n_{jk} [\widetilde{W}_{jk}]
+$$
+를 얻는다. 여기서 $\widetilde{W}_{jk} \subset X$는 $X \to Z$에 의해
+$W$ 안으로 사상되고 일반올이 $(\overline{W}_{jk})_z$인 정역 닫힌
+부분스킴이다. 명백히 $\widetilde{W}_{jk} = \overline{W}_{jk}$이어야
+하므로 증명이 끝난다.
+\end{proof}
+
+
+
+\section{상대 사이클들의 합성}
+\label{section-compose}
+
+\noindent
+$S$를 국소 뇌터 스킴이라 하자. $X \to Y$를 $S$ 위 국소 유한형
+스킴들의 사상이라 하자. Section \ref{section-compose-families}의 구성을
+사용하여 사상
+$$
+z(X/Y, r) \otimes_\mathbf{Z} z(Y/S, e) \longrightarrow z(X/S, r + e),\quad
+\alpha \otimes \beta \longmapsto \alpha \circ \beta
+$$
+을 정의하겠다. 이 구성이 쌍선형임은 이미 알고 있으므로(Lemma
+\ref{lemma-construction-bilinear}), 다음을 보이면 표시한 화살표를
+얻는다.
+
+\begin{lemma}
+\label{lemma-well-defined}
+$\alpha$와 $\beta$가 상대 사이클이면 $\alpha \circ \beta$도 상대
+사이클이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-construction-base-change}에 의해
+$\alpha \circ \beta$의 형성은 기저변환과 양립한다. 따라서 $S$가
+일반점 $\eta$와 닫힌점 $0$을 갖는 이산 값매김환의 스펙트럼이라고
+가정해도 되고,
+$sp_{X/S}((\alpha \circ \beta)_\eta) = (\alpha \circ \beta)_0$임을
+보여야 한다. 사이클들의 등식을 증명하려 하므로 $Y$와 $X$ 위에서
+국소적으로 작업해도 된다(여기서는 구성들이 제한과 가환함을 보기
+위해 Lemmas \ref{lemma-construction-opens}와
+\ref{lemma-specialization-flat-pullback}을 사용한다). 따라서 $X$와
+$Y$가 아핀이라고 가정해도 된다. Lemma \ref{lemma-get-cycles}에 의해
+$g^*\alpha$가 (\ref{equation-cycle-classes})의 상에 속하는 완전 분해
+고유 사상 $g : Y' \to Y$를 찾을 수 있다.
+
+\medskip\noindent
+$g_\eta : Y'_\eta \to Y_\eta$가 완전 분해되므로, Chow Homology,
+Lemma \ref{chow-lemma-envelope}에 의해
+% P08-E092: preserve the frozen unindexed sum literally.
+$\beta_\eta = \sum g_{\eta, *}\beta'_\eta$인
+$\beta'_\eta \in Z_e(Y'_\eta)$를 찾을 수 있다.
+$\beta'_0 = sp_{Y'/S}(\beta'_\eta)$로 두면
+$\beta' = (\beta'_\eta, \beta'_0)$는 $Y'/S$ 위의 상대 $e$-사이클이다.
+그러면 $g_*\beta'$와 $\beta$는 $Y/S$ 위의 상대 $e$-사이클이고(Lemma
+\ref{lemma-relative-cycle-functoriality}), $\eta$에서 같은 값을 가지므로
+서로 같다(Lemma \ref{lemma-uniqueness-extension}). 선형성(Lemma
+\ref{lemma-construction-bilinear})에 의해 $\alpha \circ g_*\beta'$가
+상대 $(r + e)$-사이클임을 보이면 충분하다.
+
+\medskip\noindent
+$X' = X \times_Y Y'$로 두고 $f : X' \to X$를 사영이라 하자. Lemma
+\ref{lemma-construction-push-pull}에 의해
+$\alpha \circ g_*\beta' = f_*(g^*\alpha \circ \beta')$이다. Lemma
+\ref{lemma-relative-cycle-functoriality}에 의해
+$g^*\alpha \circ \beta'$가 상대 $(r + e)$-사이클임을 보이면 충분하다.
+Lemma \ref{lemma-get-cycles-dvr}와 쌍선형성을 사용하면 다음 단락에서
+논의하는 경우로 환원한다.
+
+\medskip\noindent
+% P08-E093: preserve the frozen missing dimension subscript on beta.
+$\alpha = [Z/X/Y]_r$ 및 $\beta = [W/Y/S]$라고 가정하자. 여기서
+$Z \subset X$는 $Y$ 위에서 평탄하고 상대 차원이 $\leq r$인 닫힌
+부분스킴이며, $W \subset Y$는 $S$ 위에서 평탄하고 상대 차원이
+$\leq e$인 닫힌 부분스킴이다. Lemma
+\ref{lemma-construction-closed}에 의해
+% P08-E094: preserve both frozen ill-typed products over X.
+$$
+\alpha \circ \beta = [Z \times_X W/X/S]_{r + e}
+$$
+이고, $Z \times_X W \subset X$는 $S$ 위에서 평탄하고 상대 차원이
+$\leq r + e$인 닫힌 부분스킴이다. Lemma
+\ref{lemma-family-associated-closed-specialization}에 의해 이는 상대
+$(r + e)$-사이클이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-fundamental-cycles}
+$f : X \to Y$와 $g : Y \to S$를 스킴의 사상들이라 하자. $S$는 국소
+뇌터이고, $g$는 국소 유한형이며 상대 차원 $e \ge 0$의 평탄
+사상이고, $f$는 국소 유한형이며 상대 차원 $r \geq 0$의 평탄
+사상이라고 가정하자. 그러면 $z(X/S, r + e)$에서
+$[X/X/Y]_r \circ [Y/Y/S]_e = [X/X/S]_{r + e}$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-construction-closed}의 특수한 경우이다.
+\end{proof}
+
+
+
+\section{Suslin--Voevodsky와의 비교}
+\label{section-compare}
+
+\noindent
+우리는 \cite{SV}와 같은 기호를 사용하려고 하였다. 다만 사이클에
+대한 기호는 Chow Homology, Section \ref{chow-section-cycles} 이하에서
+가져왔다. 비교하면 다음과 같다.
+\begin{enumerate}
+\item \cite[Section 3.1]{SV}에는 ``상대 사이클'', ``차원 $r$의 상대
+사이클'', ``차원 $r$의 등차원 상대 사이클''이라는 개념이 있다.
+이 장에는 이에 대응하는 개념이 없다. 따라서 군
+$Cycl(X/S, r)$, $Cycl_{equi}(X/S, r)$,
+$PropCycl(X/S, r)$ 및 $PropCycl_{equi}(X/S, r)$에 대응하는 군은 이
+장에 없다.
+\item \cite[page 36]{SV}의 아래쪽에서 군
+$z(X/S, r)$, $c(X/S, r)$, $z_{equi}(X/S, r)$, $c_{equi}(X/S, r)$를
+정의한다. $S$가 분리 뇌터이고 $X \to S$가 분리 유한형이면 이들은
+우리의 개념과 일치한다.
+\item \cite{SV}에서는 기호 $z(X/S, r)$를 때때로 $S$ 위 유한형
+스킴들의 범주 위의 준층 $S' \mapsto z(S' \times_S X/S', r)$에
+사용한다. $c(X/S, r)$, $z_{equi}(X/S, r)$ 및 $c_{equi}(X/S, r)$도
+마찬가지이다.
+\item \cite{SV}에서 정의한 기저변환, 평탄 끌어오기 및 고유 전진은
+둘 다 적용될 때 우리의 정의와 일치한다.
+\item $\alpha \in z(X/S, r)$에 대하여 Section \ref{section-action}에서
+정의한 연산 $\alpha \cap - : Z_e(S) \to Z_{e + r}(X)$는 둘 다 정의될
+때 \cite[Section 3.7]{SV}의 연산 $Cor(\alpha, -)$와 일치한다.
+\item $X \to Y \to S$에 대하여 Section \ref{section-compose}에서
+정의한 합성법칙
+$z(X/Y, r) \otimes_\mathbf{Z} z(Y/S, e) \longrightarrow z(X/S, r + e)$는
+\cite[Corollary 3.7.5]{SV}의 연산 $Cor_{X/Y}(-, -)$와 일치한다.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\section{비뇌터 경우의 상대 사이클}
+\label{section-non-noetherian}
+
+\noindent
+독자는 이 절을 건너뛰기를 권한다.
+
+\medskip\noindent
+$f : X \to S$를 유한 표시 스킴 사상이라 하자. $r \geq 0$이라 하자.
+$Z \to S$가 평탄하고 유한 표시이며 상대 차원이 $\leq r$인 닫힌
+부분스킴 $Z \subset X$들의 집합을 $Hilb(X/S, r)$로 나타내자. 다음
+군 준동형을 생각한다.
+\begin{equation}
+\label{equation-cycle-classes-general}
+\begin{matrix}
+\text{자유 아벨 군} \\
+\text{생성집합 }Hilb(X/S, r)
+\end{matrix}
+\longrightarrow
+\begin{matrix}
+\text{족을 이루는 }r\text{-사이클}\\
+\text{올들이 속한 공간 }X/S
+\end{matrix}
+\end{equation}
+이 준동형은 $\sum n_i[Z_i]$를 $\sum n_i[Z_i/X/S]_r$로 보낸다.
+
+\begin{lemma}
+\label{lemma-relative-r-cycle-general}
+$S$를 준콤팩트 준분리 스킴이라 하자. $f : X \to S$를 유한 표시
+사상이라 하자. $r \geq 0$이라 하고 $\alpha$를 $X/S$의 올들 위의
+$r$-사이클 족이라 하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item 카르테시안 도표
+$$
+\xymatrix{
+X \ar[r] \ar[d] & X_0 \ar[d] \\
+S \ar[r] & S_0
+}
+$$
+가 존재한다. 여기서 $X_0 \to S_0$는 뇌터 스킴들의 유한형 사상이고,
+$\alpha_0 \in z(X_0/S_0, r)$이며, $\alpha$는 $S \to S_0$에 의한
+$\alpha_0$의 기저변환이다.
+\item $g^*\alpha$가 (\ref{equation-cycle-classes-general})의 상에
+속하도록 하는 유한 표시 완전 분해 고유 사상 $g : S' \to S$가
+존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)에서와 같은 도표와 $\alpha_0 \in z(X_0/S_0, r)$가 주어졌다고
+하자. Lemma \ref{lemma-get-cycles}에 의해
+$g_0^*\alpha_0$가 (\ref{equation-cycle-classes-general})의 상에 속하도록
+하는 완전 분해 고유 사상 $g_0 : S'_0 \to S_0$가 존재한다. 실제로
+$S'_0$가 뇌터이므로 $S'_0 \times_{S_0} X_0$의 모든 닫힌 부분스킴은
+$S'_0$ 위에서 유한 표시이다. $S' = S \times_{S_0} S'_0$로 두고
+$S' \to S'_0$에 의한 기저변환을 사용하면 (2)가 성립함을 알 수 있다.
+
+\medskip\noindent
+거꾸로 (2)가 성립한다고 가정하자. $g^*\alpha$가
+(\ref{equation-cycle-classes-general})의 상에 속하도록 하는 유한 표시
+완전 분해 고유 사상 $g : S' \to S$를 택하자.
+$X' = S' \times_S X$로 두자. $S'$ 위에서 평탄하고 유한 표시이며 상대
+차원이 $\leq r$인 어떤 닫힌 부분스킴 $Z_a \subset X'$들에 대하여
+$g^*\alpha = \sum n_a [Z_a/X'/S']_r$로 쓰자.
+
+\medskip\noindent
+$S_i$들이 $\mathbf{Z}$ 위 유한형이고 전이 사상들이 아핀인 유향
+극한으로 $S = \lim S_i$를 쓰자. Limits, Proposition
+\ref{limits-proposition-approximate}를 보라. 충분히 큰 $i$를 택하면
+다음 대상들이 존재한다.
+\begin{enumerate}
+\item $S$로의 기저변환이 $g : S' \to S$인 완전 분해 고유 사상
+$g_i : S'_i \to S_i$,
+\item $X'_i = S'_i \times_{S_i} X_i$로 둘 때, $S'_i$ 위에서 평탄하고
+상대 차원이 $\leq r$이며 $S'$로의 기저변환이 $Z_a$인 닫힌 부분스킴
+$Z_{ai} \subset X'_i$.
+\end{enumerate}
+이를 위해 Limits, Lemmas
+\ref{limits-lemma-descend-finite-presentation},
+\ref{limits-lemma-descend-closed-immersion-finite-presentation},
+\ref{limits-lemma-descend-flat-finite-presentation},
+\ref{limits-lemma-descend-surjective},
+\ref{limits-lemma-eventually-proper},
+\ref{limits-lemma-limit-dimension} 및 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-descend-cd}를 사용한다.
+% P08-E098: preserve the frozen base S_i in the bracketed family.
+$\alpha'_i = \sum n_a [Z_{ai}/X'_i/S_i]_r \in z(X'_i/S'_i, r)$를
+생각하자. 구성에 의해 $\alpha'_i$를 $X'/S'$의 올들 위의
+$r$-사이클 족으로 기저변환한 것은 $g^*\alpha$의 기저변환과 일치한다.
+
+\medskip\noindent
+$S''_i = S'_i \times_{S_i} S'_i$ 및
+$X''_i = S''_i \times_{S_i} X_i$로 두고,
+$S'' = S' \times_S S'$ 및 $X'' = S'' \times_S X$로 두자. 사영들을
+$\text{pr}_1, \text{pr}_2 : S'' \to S'$ 및
+$\text{pr}_1, \text{pr}_2 : S''_i \to S'_i$로 나타내자.
+% P08-E099: preserve every frozen repeated pr_1 descent comparison.
+$X''_i/S''_i$ 위의 상대 $r$-사이클
+$\text{pr}_1^*\alpha'_i$와 $\text{pr}_1^*\alpha'_i$는
+$\text{pr}_1^*g^*\alpha = \text{pr}_1^*g^*\alpha$이므로
+$X''/S''$의 올들 위의 같은 $r$-사이클 족으로 기저변환된다. 따라서
+사상 $S'' \to S''_i$의 상은
+$E = \{s \in S''_i : (\text{pr}_1^*\alpha'_i)_s = (\text{pr}_1^*\alpha'_i)_s\}$에
+포함된다. Lemma \ref{lemma-relative-cycles-equal}에 의해 이는 닫힌
+부분집합이다. $S'' = \lim_{i' \geq i} S''_{i'}$이므로 Limits, Lemma
+\ref{limits-lemma-limit-contained-in-constructible}에 의해 어떤
+$i' \geq i$에 대하여 사상 $S''_{i'} \to S''_i$의 상이 $E$에
+포함됨을 안다. 따라서 $i$를 $i'$으로 바꾼 뒤
+$\text{pr}_1^*\alpha'_i = \text{pr}_1^*\alpha'_i$라고 가정해도 된다.
+Lemma \ref{lemma-descend-family}에 의해 $g_i^*\alpha_i = \alpha'_i$인
+$X_i/S_i$의 올들 위의 유일한 $r$-사이클 족 $\alpha_i$를 얻는다
+(여기서는 $S'_i \to S_i$가 완전 분해된다는 사실을 사용한다). Lemma
+\ref{lemma-relative-cycles-h-descent}에 의해
+$\alpha_i \in z(X_i/S_i, r)$이다. Lemma
+\ref{lemma-descend-family}의 유일성에 의해 $\alpha_i$의 기저변환은
+$\alpha$이고, 따라서 (1)이 성립함을 알 수 있다.
+\end{proof}
+
+\noindent
+{\bf 논의.}
+$f : X \to S$, $r$, $\alpha$가 Lemma
+\ref{lemma-relative-r-cycle-general}에서와 같으면, Lemma
+\ref{lemma-relative-r-cycle-general}의 동치인 조건 (1)과 (2)가 성립할
+때 $\alpha$를 {\it $X/S$ 위의 상대
+$r$-사이클}이라고 정의할 수 있다. 이 정의는 좋은 성질을 많이 가진다.
+예를 들어 $S$가 뇌터인 경우 앞의 정의와 충돌하지 않으며, Section
+\ref{section-families-specialization}의 결과 대부분이 이 설정으로
+일반화된다.
+
+\medskip\noindent
+다음과 같이 더 일반화할 수도 있다. $S$가 임의의 스킴이고
+$f : X \to S$가 국소 유한 표시라고 가정하자. $r \geq 0$이라 하고,
+$X/S$의 올들 위의 $r$-사이클 족 $\alpha$인 $\alpha$를 생각하자.
+$U \subset X$와 $V \subset S$가 $f(U) \subset V$인 아핀 열린
+부분집합일 때마다 제한 $\alpha|_U$가 앞 단락에서 정의한 $U/V$ 위의
+상대 $r$-사이클이면 $\alpha$를 {\it $X/S$ 위의 상대 $r$-사이클}이라고
+한다. 다시 앞의 결과 가운데 많은 것이 이 설정으로 일반화된다.
+
+\medskip\noindent
+이 일반화들이 필요해지면 여기서 조심스럽게 명시하고 증명할 것이다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

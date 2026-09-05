@@ -1,0 +1,5279 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{양호한 대수공간}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 일반 대수공간, 즉 준분리일 필요가 없는 대수공간의
+``국소적'' 성질을 연구한다. 준분리 대수공간은 \cite{Kn}에서 다룬다.
+더 일반적인 대수공간에서는 본질적으로 새로운 현상, 특히 점과 점의
+특수화에 관한 현상이 나타난다. 한편 대수공간에 관한 기본 결과의
+대부분에서는 이러한 현상을 염려할 필요가 없다. 따라서 이 내용을
+이론의 표준적 전개 뒤에 별도의 장으로 두었다.
+
+
+
+\section{규약}
+\label{section-conventions}
+
+\noindent
+모든 스킴은 큰 fppf 사이트 $\Sch_{fppf}$에 들어 있다고 가정한다.
+또한 고려하는 모든 환 $A$는 $\Spec(A)$가 이 큰 사이트의 대상과
+(동형)이라는 성질을 갖는다고 가정한다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자. 이 장과
+다음 장에서는 $X$와 자기 자신의 곱($S$ 위의 대수공간의 범주에서의 곱)을
+$X \times X$ 대신 $X \times_S X$로 쓴다.
+
+
+
+\section{보편적으로 유계인 올}
+\label{section-universally-bounded}
+
+\noindent
+스킴에서 대수공간으로 가는 사상이 보편적으로 유계인 올을 갖는다는
+것의 의미를 간단히 논한다. 스킴의 사상에 대한 비슷한 정의와 결과는
+Morphisms, Section \ref{morphisms-section-universally-bounded}를 보라.
+
+\begin{definition}
+\label{definition-universally-bounded}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하고 $U$를 $S$ 위의
+스킴이라 하자. $f : U \to X$를 $S$ 위의 사상이라 하자. 모든 체 $k$와
+모든 사상 $\Spec(k) \to X$에 대하여 올곱 $\Spec(k) \times_X U$가
+$k$ 위의 유한 스킴이고 그 $k$ 위의 차수가 $\leq n$이 되게 하는 정수
+$n$이 존재하면, {it $f$의 올들은 보편적으로 유계이다}
+\footnote{이는 아마 표준적인 표기법이 아닐 것이다.}라고 한다.
+\end{definition}
+
+\noindent
+% P08-E269: frozen source's undefined Y and mismatched factors preserved; see ERRATA_CANDIDATES.jsonl.
+올곱 $\Spec(k) \times_Y X$가 스킴이므로 이 정의는 의미가 있다.
+또한 $Y$가 스킴이면 Morphisms, Definition
+\ref{morphisms-definition-universally-bounded}의 개념을 Morphisms, Lemma
+\ref{morphisms-lemma-characterize-universally-bounded}에 의해 되찾는다.
+
+\begin{lemma}
+\label{lemma-composition-universally-bounded}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$V \to U$를 $S$ 위의 스킴들의 사상이라 하고 $U \to X$를 $U$에서
+$X$로 가는 사상이라 하자. $V \to U$와 $U \to X$의 올들이
+보편적으로 유계이면 $V \to X$의 올들도 보편적으로 유계이다.
+\end{lemma}
+
+\begin{proof}
+$V \to U$에 적용되는 정수를 $n$이라 하고, Definition
+\ref{definition-universally-bounded}에서 $U \to X$에 적용되는 정수를
+$m$이라 하자. $k$를 체라 하고 $\Spec(k) \to X$를 사상이라 하자.
+사상들
+$$
+\Spec(k) \times_X V
+\longrightarrow
+\Spec(k) \times_X U
+\longrightarrow
+\Spec(k).
+$$
+을 생각하자. 가정에 의해 스킴 $\Spec(k) \times_X U$는 $k$ 위에서
+차수가 많아야 $m$인 유한 스킴이고, $n$은 첫 번째 사상의 올들의 차수를
+제한하는 정수이다. 따라서 Morphisms, Lemma
+\ref{morphisms-lemma-composition-universally-bounded}에 의해
+$\Spec(k) \times_X V$는 $k$ 위에서 차수가 많아야 $nm$인 유한 스킴이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-universally-bounded}
+$S$를 스킴이라 하자. $Y \to X$를 $S$ 위의 대수공간들의 표현가능 사상이라
+하자. $U \to X$를 스킴에서 $X$로 가는 사상이라 하자. $U \to X$의
+올들이 보편적으로 유계이면 $U \times_X Y \to Y$의 올들도 보편적으로
+유계이다.
+\end{lemma}
+
+\begin{proof}
+정의와 올곱의 성질에서 명백하다. ($Y \to X$를 표현가능하다고 가정했으므로
+$U \times_X Y$는 스킴이고, 따라서 정의를 적용할 수 있음에 유의하라.)
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descent-universally-bounded}
+$S$를 스킴이라 하자. $g : Y \to X$를 $S$ 위의 대수공간들의 표현가능
+사상이라 하고 $f : U \to X$를 스킴에서 $X$로 가는 사상이라 하자.
+$f' : U \times_X Y \to Y$를 $f$의 기저변환이라 하자. 만일
+$$
+\Im(|f| : |U| \to |X|) \subset \Im(|g| : |Y| \to |X|)
+$$
+이고 $f'$가 보편적으로 유계인 올들을 가지면, $f$도 보편적으로 유계인
+올들을 갖는다.
+\end{lemma}
+
+\begin{proof}
+사상 $f'$에 대한 Definition \ref{definition-universally-bounded}의 의미에서
+올곱 $\Spec(k) \times_Y (U \times_X Y)$의 차수들을 제한하는 정수
+$n \geq 0$을 택하자. 이 $n$이 $f$에도 적용됨을 보이자. 실제로
+$x : \Spec(k) \to X$가 체의 스펙트럼에서 오는 사상이라 하자. 그러면
+$\Spec(k) \times_X U$가 공집합이어서 보일 것이 없거나, $x$가 $|f|$의
+상에 속한다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}와 보조정리의 가정에 의해,
+이는 체의 확대 $k'/k$와 가환도식
+$$
+\xymatrix{
+\Spec(k') \ar[r] \ar[d] & Y \ar[d] \\
+\Spec(k) \ar[r] & X
+}
+$$
+가 존재함을 뜻한다. 따라서
+$$
+\Spec(k') \times_Y (U \times_X Y) =
+\Spec(k') \times_{\Spec(k)} (\Spec(k) \times_X U)
+$$
+이다. 가정에 의해 스킴 $\Spec(k') \times_Y (U \times_X Y)$는 $k'$ 위에서
+차수가 $\leq n$인 유한 스킴이므로, 원하는 대로 $\Spec(k) \times_X U$도
+$k$ 위에서 차수가 $\leq n$인 유한 스킴이다. (일부 세부사항은 생략한다.)
+\end{proof}
+
+\begin{lemma}
+\label{lemma-universally-bounded-permanence}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자. 가환도식
+$$
+\xymatrix{
+U \ar[rd]_g \ar[rr]_f & & V \ar[ld]^h \\
+& X &
+}
+$$
+을 생각하자. 여기서 $U$와 $V$는 스킴이다. $g$가 보편적으로 유계인 올들을
+갖고 $f$가 전사이고 평탄이면, $h$도 보편적으로 유계인 올들을 갖는다.
+\end{lemma}
+
+\begin{proof}
+$g$가 보편적으로 유계인 올들을 갖고 $f$가 전사이고 평탄이라고 가정하자.
+Definition \ref{definition-universally-bounded}의 의미에서 스킴들
+$\Spec(k) \times_X U$의 차수들을 제한하는 정수를 $n \geq 0$이라 하자.
+$n$이 $h$에도 적용됨을 보이자. $\Spec(k) \to X$를 체의 스펙트럼에서
+$X$로 가는 사상이라 하자. 스킴들의 사상
+% P08-E270: frozen source's reversed base-change arrow preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+\Spec(k) \times_X V \longrightarrow \Spec(k) \times_X U
+$$
+을 생각하자. 이는 평탄이고 전사이다. 가정에 의해 왼쪽 스킴은
+$\Spec(k)$ 위에서 차수가 $\leq n$인 유한 스킴이다. Morphisms, Lemma
+\ref{morphisms-lemma-universally-bounded-permanence}에 의해 오른쪽 스킴의
+차수도 원하는 대로 $n$으로 제한된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-universally-bounded-finite-fibres}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하고 $U$를 $S$ 위의
+스킴이라 하자. $\varphi : U \to X$를 $S$ 위의 사상이라 하자.
+$\varphi$의 올들이 보편적으로 유계이면, $|U| \to |X|$의 각 올이 많아야
+$n$개의 원소를 갖게 하는 정수 $n$이 존재한다.
+\end{lemma}
+
+\begin{proof}
+Definition \ref{definition-universally-bounded}의 정수 $n$이 적용된다.
+실제로 $x \in |X|$를 택하고 $x$를 사상 $x : \Spec(k) \to X$로 나타내자.
+그러면 가환도식
+$$
+\xymatrix{
+\Spec(k) \times_X U \ar[r] \ar[d] & U \ar[d] \\
+\Spec(k) \ar[r]^x & X
+}
+$$
+을 얻는다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 이 도식은 $|U|$에서
+$x$의 원상이 위쪽 수평 화살표의 상임을 보인다. $\Spec(k) \times_X U$는
+$k$ 위에서 차수가 $\leq n$인 유한 스킴이므로 많아야 $n$개의 점을 갖는다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{유한성 조건과 점}
+\label{section-points-monomorphisms}
+
+\noindent
+이 절에서는 점을 체의 스펙트럼에서 공간으로 가는 단사 사상으로
+나타낼 수 있는 때가 언제인지를 더 자세히 살펴본다.
+
+\begin{remark}
+\label{remark-recall}
+다음 보조정리를 증명하기 전에 스킴의 에탈 사상에 관한 몇 가지 사실을
+상기하자.
+\begin{enumerate}
+\item 에탈 사상은 평탄이므로 일반화는 에탈 사상을 따라 올라간다
+(Morphisms, Lemmas \ref{morphisms-lemma-etale-flat} 및
+\ref{morphisms-lemma-generalizations-lift-flat}).
+\item 에탈 사상은 비분기이고 비분기 사상은 국소 준유한이므로 올들은
+이산적이다(Morphisms, Lemmas
+\ref{morphisms-lemma-flat-unramified-etale},
+\ref{morphisms-lemma-unramified-quasi-finite}, 및
+\ref{morphisms-lemma-quasi-finite-at-point-characterize}).
+\item 준콤팩트 에탈 사상은 준유한이고, 특히 유한한 올들을 갖는다
+(Morphisms, Lemmas
+\ref{morphisms-lemma-quasi-finite-locally-quasi-compact} 및
+\ref{morphisms-lemma-quasi-finite}).
+\item 체 $k$ 위의 에탈 스킴은 $k$의 유한 분리 확대들의 스펙트럼의
+서로소 합이다(Morphisms, Lemma
+\ref{morphisms-lemma-etale-over-field}).
+\end{enumerate}
+에탈 사상에 관한 일반적인 논의는 \'Etale Morphisms, Section
+\ref{etale-section-etale-morphisms}을 보라.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-U-finite-above-x}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$x \in |X|$라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item 스킴들의 족 $U_i$와 에탈 사상들 $\varphi_i : U_i \to X$가 존재하여
+$\coprod \varphi_i : \coprod U_i \to X$가 전사이고, 각 $i$에 대하여
+$x$ 위에서 $|U_i| \to |X|$의 올이 유한하다.
+\item 모든 아핀 스킴 $U$와 에탈 사상 $\varphi : U \to X$에 대하여
+$x$ 위에서 $|U| \to |X|$의 올이 유한하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) $\Rightarrow$ (1)은 자명하다. (1)과 같은 에탈 사상들의 족
+$\varphi_i : U_i \to X$를 택하자. 아핀 스킴에서 $X$로 가는 에탈 사상
+$\varphi : U \to X$를 택하자. 올곱 도식들
+$$
+\xymatrix{
+U \times_X U_i \ar[r]_-{p_i} \ar[d]_{q_i} & U_i \ar[d]^{\varphi_i} \\
+U \ar[r]^\varphi & X
+}
+\quad \quad
+\xymatrix{
+\coprod U \times_X U_i \ar[r]_-{\coprod p_i} \ar[d]_{\coprod q_i} &
+\coprod U_i \ar[d]^{\coprod \varphi_i} \\
+U \ar[r]^\varphi & X
+}
+$$
+을 생각하자. $q_i$는 에탈이므로 열린 사상이다(Remark
+\ref{remark-recall}을 보라). 또한 사상 $\coprod q_i$는 전사이다.
+따라서 유한하게 많은 지표 $i_1, \ldots, i_n$과 $U$로 전사하는
+준콤팩트 열린집합 $W_{i_j} \subset U \times_X U_{i_j}$들이 존재한다.
+$p_i$는 에탈이므로 국소 준유한이다(위의 에탈 사상에 관한 주를 보라).
+따라서 Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-qc-source-universally-bounded}를
+적용하여
+% P08-E271: frozen source's codomain U_i is preserved; see ERRATA_CANDIDATES.jsonl.
+$p_{i_j}|_{W_{i_j}} : W_{i_j} \to U_i$의 올들이 유한함을 알 수 있다.
+그러므로 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}와 $\varphi_i$에 대한 가정에
+의해 $x$ 위에서 $\varphi$의 올은 유한하다. 즉 (2)가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-R-finite-above-x}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$x \in |X|$라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item 스킴 $U$, 에탈 사상 $\varphi : U \to X$, 그리고 $x$로 가는 점들
+$u, u' \in U$가 존재하여, $R = U \times_X U$로 둘 때
+$$
+|R| \to |U| \times_{|X|} |U|
+$$
+의 $(u, u')$ 위의 올이 유한하다.
+\item 모든 스킴 $U$, 에탈 사상 $\varphi : U \to X$, 그리고 $x$로 가는
+모든 점들 $u, u' \in U$에 대하여, $R = U \times_X U$로 둘 때
+$$
+|R| \to |U| \times_{|X|} |U|
+$$
+의 $(u, u')$ 위의 올이 유한하다.
+\item $x$의 동치류에 속하는 사상 $\Spec(k) \to X$가 존재하고 $k$는
+체이며, 사영들 $\Spec(k) \times_X \Spec(k) \to \Spec(k)$는 에탈이고
+준콤팩트이다.
+\item $x$의 동치류에 속하는 단사 사상 $\Spec(k) \to X$가 존재하고
+$k$는 체이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하자. 즉 $\varphi : U \to X$를 스킴에서 $X$로 가는 에탈 사상이라
+하고 $u, u'$을 $x$ 위에 놓이는 $U$의 점들이라 하며,
+$|R| \to |U| \times_{|X|} |U|$의 $(u, u')$ 위의 올이 유한집합이라고
+가정하자. 이 증명에서는 점 $u = \Spec(\kappa(u))$를 스킴으로 생각한다.
+$u \to U$, $u' \to U$는 단사 사상이므로(Schemes, Lemma
+\ref{schemes-lemma-injective-points-surjective-stalks}를 보라),
+$u \times_X u' \to R = U \times_X U$는 단사 사상이다. 이 언어로 말하면
+가정은 실제로 $u \times_X u'$가 바탕 위상공간에 유한하게 많은 점을
+갖는 스킴이라는 뜻이다.
+
+$\psi : W \to X$를 스킴에서 $X$로 가는 에탈 사상이라 하자.
+$w, w' \in W$를 $x$로 가는 $W$의 점들이라 하자. $w \times_X w'$가
+바탕 위상공간에 유한하게 많은 점을 갖는 스킴임을 보여야 한다.
+올곱 도식
+$$
+\xymatrix{
+W \times_X U \ar[r]_p \ar[d]_q & U \ar[d]^\varphi \\
+W \ar[r]^\psi & X
+}
+$$
+을 생각하자. $x$는 $u$와 $u'$의 상이므로 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해
+$q(\tilde w) = w$, $q(\tilde w') = w'$, $u = p(\tilde w)$ 및
+$u' = p(\tilde w')$를 만족하는 점들 $\tilde w, \tilde w'$을
+$W \times_X U$에서 택할 수 있다. $p$, $q$가 에탈이므로 Remark
+\ref{remark-recall}에 의해 체의 확대들
+$\kappa(w) \subset \kappa(\tilde w) \supset \kappa(u)$ 및
+$\kappa(w') \subset \kappa(\tilde w') \supset \kappa(u')$는 유한 분리
+확대이다. 그러면 가환도식
+% P08-E272: frozen source's lower-left X-product is preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+\xymatrix{
+w \times_X w' \ar[d] &
+\tilde w \times_X \tilde w' \ar[l] \ar[d] \ar[r] &
+u \times_X u' \ar[d] \\
+w \times_X w' &
+\tilde w \times_S \tilde w' \ar[l] \ar[r] &
+u \times_S u'
+}
+$$
+을 얻는다. 여기서 정사각형들은 올곱 정사각형이다. 아래쪽 수평 사상들은
+에탈이고 준콤팩트이다. 실제로 $\Spec(k) \times_S \Spec(k')$ 꼴의 모든
+스킴은 아핀이고, 위에서 살펴본 체의 확대에 관한 사실도 적용된다.
+따라서 위쪽 수평 화살표들은 에탈이고 준콤팩트이므로 유한한 올들을 갖는다.
+위에서 $|u \times_X u'|$가 유한함을 보았으므로 $|w \times_X w'|$도
+유한하다. 즉 (2)가 성립한다.
+
+\medskip\noindent
+(2)를 가정하자. $U \to X$를 스킴 $U$에서 오는 에탈 사상으로서 $x$가
+$|U| \to |X|$의 상에 속하는 것이라 하자. $u \in U$를 $x$로 가는
+점이라 하자. 앞 단락에서 $u = \Spec(\kappa(u)) \to X$는
+$u \times_X u$의 바탕 위상공간이 유한하다는 성질을 가짐을 보았다.
+한편 사영들 $u \times_X u \to u$는 합성
+$$
+u \times_X u \longrightarrow
+u \times_X U \longrightarrow
+u \times_X X = u,
+$$
+즉 단사 사상(단사 사상 $u \to U$의 기저변환)과 에탈 사상(에탈 사상
+$U \to X$의 기저변환)의 합성이다. 따라서 $u \times_X U$는
+$\kappa(u)$의 유한 분리 확대들의 스펙트럼의 서로소 합이다(Remark
+\ref{remark-recall}을 보라). $u \times_X u$가 유한하므로
+$u \times_X U$에서 그 상은 $\kappa(u)$의 유한 분리 확대들의 스펙트럼의
+유한 서로소 합이다. Schemes, Lemma
+\ref{schemes-lemma-mono-towards-spec-field}에 의해 $u \times_X u$도
+$\kappa(u)$의 유한 분리 확대들의 스펙트럼의 유한 서로소 합이다.
+즉 $u \times_X u \to u$는 준콤팩트이고 에탈이다. 이는 (3)이 성립한다는
+뜻이다.
+
+\medskip\noindent
+(3)이 (4)를 함의함을 보이자. $\Spec(k) \to X$를 체의 스펙트럼에서
+$X$로 가는, $x$의 동치류에 속하는 사상으로서 두 사영
+$t, s : R = \Spec(k) \times_X \Spec(k)  \to \Spec(k)$가 준콤팩트이고
+에탈인 것이라 하자. 특히 $R$은 $\Spec(k)$ 위의 에탈 동치관계이다.
+Spaces, Theorem \ref{spaces-theorem-presentation}에 의해 몫층
+$X' = \Spec(k)/R$은 대수공간이다. Groupoids, Lemma
+\ref{groupoids-lemma-quotient-groupoid-restrict}에 의해 사상 $X' \to X$는
+단사 사상이다. $s, t$가 준콤팩트이므로 $R$은 준콤팩트이고, 따라서
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-point-like-spaces}를 $X'$에 적용할 수 있다.
+그러므로 어떤 체 $k'$에 대하여 $X' = \Spec(k')$이다. 따라서 분해
+$$
+\Spec(k) \longrightarrow
+\Spec(k') \longrightarrow X
+$$
+를 얻으며, 이는 $\Spec(k') \to X$가 $x \in |X|$로 가는 단사 사상임을
+보인다. 즉 (4)가 성립한다.
+
+\medskip\noindent
+마지막으로 (4)가 (1)을 함의함을 보이자. $\Spec(k) \to X$를 $k$가
+체이고 $x$의 동치류에 속하는 단사 사상이라 하자. $U \to X$를 스킴
+$U$에서 $X$로 가는 전사 에탈 사상이라 하자. $u \in U$를 $x$ 위의
+점이라 하자. $\Spec(k) \times_X u$가 공집합이 아니고
+$\Spec(k) \times_X u \to u$가 단사 사상이므로
+$\Spec(k) \times_X u = u$이다(Schemes, Lemma
+\ref{schemes-lemma-mono-towards-spec-field}를 보라). 따라서
+$u \to U \to X$는 $\Spec(k) \to X$를 통해 인수분해된다. 그림으로 쓰면
+$$
+\xymatrix{
+u \ar[r] \ar[d] & U \ar[d] \\
+\Spec(k) \ar[r] & X
+}
+$$
+이다. 오른쪽 수직 화살표가 에탈이므로 $\kappa(u)/k$는 유한 분리 확대이다.
+따라서
+$$
+u \times_X u = u \times_{\Spec(k)} u
+$$
+는 유한 스킴이고, 이 증명의 첫 단락에서 성질 (1)의 의미를 논한 것으로부터
+원하는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-weak-UR-finite-above-x}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하고
+$x \in |X|$라 하자.
+$U$를 스킴이라 하고 $\varphi : U \to X$를 에탈 사상이라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item $x$는 $|U| \to |X|$의 상에 속하고, $R = U \times_X U$로 놓으면
+$$
+|U| \longrightarrow |X|
+\quad\text{및}\quad
+|R| \longrightarrow |X|
+$$
+의 $x$ 위의 올들이 모두 유한하다.
+\item $x$의 동치류에 속하는 단사 사상 $\Spec(k) \to X$가 존재하고
+$k$는 체이며, 올곱 $\Spec(k) \times_X U$는 $k$ 위의 공집합이 아닌
+유한 스킴이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하자. 이는 분명 Lemma \ref{lemma-R-finite-above-x}의 첫째 조건을
+함의하므로 $x$의 동치류에 속하는 단사 사상 $\Spec(k) \to X$를 얻는다.
+올곱을 취하면 $\Spec(k) \times_X U \to \Spec(k)$는 $\Spec(k)$ 위에서
+에탈이고 유한하게 많은 점을 갖는 스킴임을 알 수 있다. 따라서 이는
+$k$ 위의 공집합이 아닌 유한 스킴이다. 즉 (2)가 성립한다.
+
+\medskip\noindent
+(2)를 가정하자. 가정에 의해 $x$는 $|U| \to |X|$의 상에 속한다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 $|U| \to |X|$의
+$x$ 위의 올은 $|\Spec(k) \times_X U|$와 같으므로 유한하다.
+$|R| \to |X|$의 $x$ 위의 올도 스킴
+$$
+(\Spec(k) \times_X U) \times_{\Spec(k)} (\Spec(k) \times_X U)
+$$
+의 바탕집합과 같고, 이 스킴은 $k$ 위에서 유한하므로 그 올도 유한하다.
+따라서 (1)이 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-UR-finite-above-x}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하고
+$x \in |X|$라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item 모든 아핀 스킴 $U$와 모든 에탈 사상 $\varphi : U \to X$에 대하여
+$R = U \times_X U$로 놓으면
+$$
+|U| \longrightarrow |X|
+\quad\text{및}\quad
+|R| \longrightarrow |X|
+$$
+의 $x$ 위의 올들이 모두 유한하다.
+\item 스킴들 $U_i$와 에탈 사상들 $U_i \to X$가 존재하여
+$\coprod U_i \to X$가 전사이고, 각 $i$에 대하여
+$R_i = U_i \times_X U_i$로 놓으면
+$$
+|U_i| \longrightarrow |X|
+\quad\text{및}\quad
+|R_i| \longrightarrow |X|
+$$
+의 $x$ 위의 올들이 모두 유한하다.
+\item $x$의 동치류에 속하는 단사 사상 $\Spec(k) \to X$가 존재하고
+$k$는 체이며, 모든 아핀 스킴 $U$와 모든 에탈 사상 $U \to X$에 대하여
+올곱 $\Spec(k) \times_X U$는 $k$ 위의 유한 스킴이다.
+\item $x$의 동치류에 속하는 준콤팩트 단사 사상 $\Spec(k) \to X$가
+존재하고 $k$는 체이다.
+\item $x$의 동치류에 속하는 준콤팩트 사상 $\Spec(k) \to X$가
+존재하고 $k$는 체이다.
+\item $x$의 동치류에 속하며 $k$가 체인 모든 사상
+$\Spec(k) \to X$는 준콤팩트이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+모든 아핀 $U$에 대한 각 에탈 사상 $U \to X$에 Lemma
+\ref{lemma-weak-UR-finite-above-x}를 적용하면 (1)과 (3)의 동치가
+따라온다. (3)이 (2)를 함의함은 분명하다.
+$U_i \to X$와 $R_i$가 (2)와 같다고 가정하자. Lemma
+\ref{lemma-U-finite-above-x}에 의해 모든 아핀 스킴 $U$와 에탈 사상
+$U \to X$에 대하여 $|U| \to |X|$의 $x$ 위의 올은 유한하다.
+이 올을 $\{u_1, \ldots, u_n\}$이라 하자. $x$가
+$|U_i| \to |X|$의 상에 속하는 어떤 $i$에 대하여
+Lemma \ref{lemma-R-finite-above-x}의 (1)이 $U_i \to X$에 적용되므로,
+$|R = U \times_X U| \to |U| \times_{|X|} |U|$의
+$(u_a, u_b)$ 위의 올은 $a, b \in \{1, \ldots, n\}$에 대하여 유한하다.
+따라서 $|R| \to |X|$의 $x$ 위의 올은 유한하다.
+이로써 (1)이 성립한다. 이 시점에서 (1), (2), (3)이 서로 동치임을 안다.
+
+\medskip\noindent
+(4)가 성립하면 모든 아핀 스킴 $U$와 에탈 사상 $U \to X$에 대하여
+스킴 $\Spec(k) \times_X U$는 한편으로 $k$ 위에서 에탈이므로
+(Remark \ref{remark-recall}에 의해 $k$의 유한 분리 확대들의 스펙트럼의
+서로소 합이다), 다른 한편으로 $U$ 위에서 준콤팩트이므로 준콤팩트이다.
+따라서 (3)이 성립함을 알 수 있다.
+거꾸로 $U_i \to X$가 (2)와 같고 $\Spec(k) \to X$가 (3)과 같은
+단사 사상이라 하면,
+$$
+\coprod \Spec(k) \times_X U_i
+\longrightarrow
+\coprod U_i
+$$
+는 준콤팩트이다. 실제로 각 $U_i$ 위에서
+$\Spec(k) \times_X U_i$는 체들의 스펙트럼의 유한 서로소 합이다.
+% P08-E597: frozen source omits “of” in “finite disjoint union spectra”; see ERRATA_CANDIDATES.jsonl.
+따라서 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-local}에 의해
+$\Spec(k) \to X$는 준콤팩트이다.
+
+\medskip\noindent
+(4)가 (5)를 함의함은 즉시 알 수 있다. 거꾸로 $\Spec(k) \to X$를
+$x$의 동치류에 속하는 준콤팩트 사상이라 하자. $U \to X$를 $U$가
+아핀인 에탈 사상이라 하자. 올곱
+$$
+\xymatrix{
+F \ar[r] \ar[d] & U \ar[d] \\
+\Spec(k) \ar[r] & X
+}
+$$
+을 생각하자. 그러면 $F \to U$는 준콤팩트이므로 $F$도 준콤팩트이다.
+한편 $F \to \Spec(k)$는 에탈이므로 $F$는 $k$의 유한 분리 확대들의
+스펙트럼의 유한 서로소 합이다(Remark \ref{remark-recall}).
+$|F| \to |U|$의 상은 $|U| \to |X|$의 $x$ 위의 올이므로(Properties of
+Spaces, Lemma \ref{spaces-properties-lemma-points-cartesian}),
+$|U| \to |X|$의 $x$ 위의 올은 유한하다.
+스킴 $F \times_{\Spec(k)} F$도 $\Spec(k)$ 위에서 준콤팩트이고
+에탈이므로 체들의 스펙트럼의 유한 합이다.
+단사 사상 $F \times_X F \to F \times_{\Spec(k)} F$가 존재하므로,
+$F \times_X F$는 체들의 스펙트럼의 유한 서로소 합이다
+(Schemes, Lemma \ref{schemes-lemma-mono-towards-spec-field}).
+따라서 $F \times_X F \to U \times_X U = R$의 상은 유한하다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 이 상은
+$|R| \to |X|$의 $x$ 위의 올이므로, (1)이 성립한다.
+이 시점에서 (1)--(5)가 서로 동치임을 안다.
+
+\medskip\noindent
+(6)이 (5)를 함의함은 분명하다. 거꾸로 $\Spec(k) \to X$가 (4)와 같다고
+가정하고, $\Spec(k') \to X$를 $k'$가 체이고 $x$의 동치류에 속하는
+다른 사상이라 하자. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-equivalence-class-point-monomorphism}에 의해
+주어진 사상의 분해 $\Spec(k') \to \Spec(k) \to X$가 존재한다.
+이는 준콤팩트 사상들의 합성이므로 준콤팩트이다(Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-composition-quasi-compact}). 이것이
+원하는 결론이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-U-universally-bounded}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item 스킴들 $U_i$와 에탈 사상들 $U_i \to X$가 존재하여
+$\coprod U_i \to X$가 전사이고 각 $U_i \to X$의 올들이 보편적으로
+유계이다.
+\item 모든 아핀 스킴 $U$와 모든 에탈 사상 $\varphi : U \to X$에 대하여
+$U \to X$의 올들이 보편적으로 유계이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) $\Rightarrow$ (1)은 자명하다. (1)을 가정하자.
+$(\varphi_i : U_i \to X)_{i \in I}$를 스킴들에서 $X$로 가며 $X$를 덮는
+에탈 사상들의 모음으로서, 각 $\varphi_i$의 올들이 보편적으로 유계인
+것이라 하자. $\psi : U \to X$를 아핀 스킴에서 $X$로 가는 에탈
+사상이라 하자. 각 $i$에 대하여 올곱 도식
+$$
+\xymatrix{
+U \times_X U_i \ar[r]_{p_i} \ar[d]_{q_i} & U_i \ar[d]^{\varphi_i} \\
+U \ar[r]^\psi & X
+}
+$$
+을 생각하자. $q_i$는 에탈이므로 열린 사상이다(Remark
+\ref{remark-recall}을 보라). 또한 족 $(\varphi_i)_{i \in I}$가
+전사이므로 $U = \bigcup \Im(q_i)$이다. $U$는 아핀이므로 준콤팩트이다.
+% P08-E273: frozen source has “finite” for “find”; see ERRATA_CANDIDATES.jsonl.
+따라서 유한하게 많은 $i_1, \ldots, i_n \in I$와 준콤팩트 열린집합들
+$W_j \subset U \times_X U_{i_j}$를 택하여
+% P08-E274: frozen source's p-image formula is preserved; see ERRATA_CANDIDATES.jsonl.
+$U = \bigcup p_{i_j}(W_j)$
+가 되게 할 수 있다. 사상 $p_{i_j}$는 에탈이므로 국소 준유한이다
+(위의 에탈 사상에 관한 주의를 보라). 따라서 Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-qc-source-universally-bounded}를
+적용하면 $p_{i_j}|_{W_j} : W_j \to U_{i_j}$의 올들은 보편적으로
+유계이다. 그러므로 Lemma \ref{lemma-composition-universally-bounded}에
+의해 $W_j \to X$의 올들이 보편적으로 유계임을 안다.
+따라서 $\coprod_{j = 1, \ldots, n} W_j \to X$의 올들도 보편적으로
+유계이다. $\coprod_{j = 1, \ldots, n} W_j \to X$는 전사 에탈 사상
+$\coprod q_{i_j}|_{W_j} : \coprod_{j = 1, \ldots, n} W_j \to U$를
+통해 인수분해되므로, Lemma \ref{lemma-universally-bounded-permanence}에
+의해 $U \to X$의 올들이 보편적으로 유계임을 알 수 있다.
+즉 (2)가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-very-reasonable}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item 자리스키 덮개 $X = \bigcup X_i$가 존재하고, 각 $i$에 대하여
+스킴 $U_i$와 준콤팩트 전사 에탈 사상 $U_i \to X_i$가 존재한다.
+\item 스킴들 $U_i$와 에탈 사상들 $U_i \to X$가 존재하여 사영들
+$U_i \times_X U_i \to U_i$가 준콤팩트이고
+$\coprod U_i \to X$가 전사이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)이 성립하면 사상들 $U_i \to X_i \to X$는 에탈이다(Morphisms,
+Lemma \ref{morphisms-lemma-composition-etale}와 Spaces, Lemmas
+\ref{spaces-lemma-composition-representable-transformations-property} 및
+\ref{spaces-lemma-morphism-schemes-gives-representable-transformation-property}
+를 함께 사용한다).
+또한 $U_i \times_X U_i = U_i \times_{X_i} U_i$이므로 두 사영
+$U_i \times_X U_i \to U_i$는 모두 준콤팩트이다.
+
+\medskip\noindent
+(2)가 성립하면 열린 사상 $|U_i| \to |X|$의 상에 대응하는 열린 부분공간을
+$X_i \subset X$라 하자. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-image-open}을 보라.
+사상들 $U_i \to X_i$는 전사이다. 따라서 $U_i \to X_i$는 전사
+에탈이고, $U_i \times_{X_i} U_i = U_i \times_X U_i$이므로 사영들
+$U_i \times_{X_i} U_i \to U_i$는 준콤팩트이다.
+그러므로 Spaces, Lemma
+\ref{spaces-lemma-representable-morphisms-spaces-property}에 의해
+사상들 $U_i \to X_i$는 준콤팩트이다.
+\end{proof}
+
+\section{대수공간에 대한 조건들}
+\label{section-conditions}
+
+\noindent
+이 절에서는 앞에서 살펴본 대수공간에 대한 여러 자연스러운 조건 사이의
+관계를 논한다. 이 조건들의 의미에 대한 감을 얻으려면 Section
+\ref{section-reasonable-decent}를 읽기 바란다.
+
+\begin{lemma}
+\label{lemma-bounded-fibres}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$X$에 대한 다음 조건들을 생각하자.
+\begin{itemize}
+\item[] $(\alpha)$ 모든 $x \in |X|$에 대하여 Lemma
+\ref{lemma-U-finite-above-x}의 동치 조건들이 성립한다.
+\item[] $(\beta)$ 모든 $x \in |X|$에 대하여 Lemma
+\ref{lemma-R-finite-above-x}의 동치 조건들이 성립한다.
+\item[] $(\gamma)$ 모든 $x \in |X|$에 대하여 Lemma
+\ref{lemma-UR-finite-above-x}의 동치 조건들이 성립한다.
+\item[] $(\delta)$ Lemma \ref{lemma-U-universally-bounded}의 동치
+조건들이 성립한다.
+\item[] $(\epsilon)$ Lemma \ref{lemma-characterize-very-reasonable}의
+동치 조건들이 성립한다.
+\item[] $(\zeta)$ 공간 $X$는 자리스키 국소 준분리이다.
+\item[] $(\eta)$ 공간 $X$는 준분리이다.
+\item[] $(\theta)$ 공간 $X$는 표현가능하다. 즉 $X$는 스킴이다.
+\item[] $(\iota)$ 공간 $X$는 준분리 스킴이다.
+\end{itemize}
+다음 함의들이 성립한다.
+$$
+\xymatrix{
+& (\theta) \ar@{=>}[rd] & & & &  \\
+(\iota) \ar@{=>}[ru] \ar@{=>}[rd] & &
+(\zeta) \ar@{=>}[r] &
+(\epsilon) \ar@{=>}[r] &
+(\delta) \ar@{=>}[r] &
+(\gamma) \ar@{<=>}[r] & (\alpha) + (\beta) \\
+& (\eta) \ar@{=>}[ru] & & & &
+}
+$$
+\end{lemma}
+
+\begin{proof}
+함의 $(\gamma) \Leftrightarrow (\alpha) + (\beta)$는 즉시 알 수 있다.
+왼쪽 마름모의 함의들은 정의에서 분명하다.
+
+\medskip\noindent
+$(\zeta)$, 즉 $X$가 자리스키 국소 준분리라고 가정하자.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-separated-quasi-compact-pieces}에 의해
+$(\epsilon)$이 성립한다.
+
+\medskip\noindent
+$(\epsilon)$을 가정하자. Lemma
+\ref{lemma-characterize-very-reasonable}에 의해 자리스키 열린 덮개
+$X = \bigcup X_i$가 존재하여, 각 $i$마다 스킴 $U_i$와 준콤팩트 전사
+에탈 사상 $U_i \to X_i$가 존재한다. 하나의 $i$와 아핀 열린 부분스킴
+$W \subset U_i$를 택하자. 이 모든 사상 $W \to X$의 족이 $X$를
+덮으므로 $W \to X$의 올들이 보편적으로 유계임을 보이면 충분하다.
+이를 위해 도식
+$$
+\xymatrix{
+W \times_X U_i \ar[r]_-p \ar[d]_q & U_i \ar[d] \\
+W \ar[r] & X
+}
+$$
+을 생각하자. $W \to X$는 $X_i$를 통해 인수분해되므로
+$W \times_X U_i = W \times_{X_i} U_i$이고, 따라서 $q$는 준콤팩트이다.
+$W$가 아핀이므로 스킴 $W \times_X U_i$는 준콤팩트이다.
+따라서 Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-qc-source-universally-bounded}를
+적용하여 $p$의 올들이 보편적으로 유계임을 얻는다.
+Lemma \ref{lemma-descent-universally-bounded}로부터
+$W \to X$의 올들도 보편적으로 유계라는 결론을 얻는다.
+
+\medskip\noindent
+$(\delta)$를 가정하자. $U$를 아핀 스킴이라 하고 $U \to X$를 에탈
+사상이라 하자. 가정에 의해 사상 $U \to X$의 올들은 보편적으로
+유계이다. 그러므로 Lemma
+\ref{lemma-base-change-universally-bounded}에 의해 두 사영
+$R = U \times_X U \to U$의 올들도 보편적으로 유계이다.
+그리고 Lemma \ref{lemma-composition-universally-bounded}에 의해
+$R \to X$의 올들도 보편적으로 유계이다.
+% P08-E275: frozen source's typed point formula is preserved; see ERRATA_CANDIDATES.jsonl.
+따라서 모든 $x \in X$에 대하여 $|U| \to |X|$와 $|R| \to |X|$의
+$x$ 위의 올들은 유한하다. Lemma
+\ref{lemma-universally-bounded-finite-fibres}를 보라.
+달리 말하면 Lemma \ref{lemma-UR-finite-above-x}의 동치 조건들이
+성립한다. 이로써 $(\delta) \Rightarrow (\gamma)$를 증명했다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-properties-local}
+$S$를 스킴이라 하자. $\mathcal{P}$를 Lemma
+\ref{lemma-bounded-fibres}에 열거된 대수공간의 성질들
+$(\alpha)$, $(\beta)$, $(\gamma)$, $(\delta)$, $(\epsilon)$, $(\zeta)$,
+$(\theta)$ 가운데 하나라 하자. $X$가 $S$ 위의 대수공간이고
+$X = \bigcup X_i$가 각 $X_i$가 $\mathcal{P}$를 갖는 자리스키 열린
+덮개이면, $X$도 $\mathcal{P}$를 갖는다.
+\end{lemma}
+
+\begin{proof}
+% P08-E276: frozen source's malformed let-construction is translated grammatically; see ERRATA_CANDIDATES.jsonl.
+$X$를 $S$ 위의 대수공간이라 하고, $X = \bigcup X_i$를 각 $X_i$가
+$\mathcal{P}$를 갖는 자리스키 열린 덮개라 하자.
+
+\medskip\noindent
+$\mathcal{P} = (\alpha)$인 경우를 보자. $X_i$에 대한 조건
+$(\alpha)$는 모든 $x \in |X_i|$, 모든 아핀 스킴 $U$, 모든 에탈 사상
+$\varphi : U \to X_i$에 대하여 $\varphi : |U| \to |X_i|$의 $x$ 위의
+올이 유한하다는 뜻이다.
+% P08-E277: frozen source's typed point formula is preserved; see ERRATA_CANDIDATES.jsonl.
+$x \in X$, 아핀 스킴 $U$, 에탈 사상 $U \to X$를 생각하자.
+$X = \bigcup X_i$가 자리스키 열린 덮개이므로,
+% P08-E278: frozen source's “exits” typo is translated as existence; see ERRATA_CANDIDATES.jsonl.
+유한 아핀 열린 덮개 $U = U_1 \cup \ldots \cup U_n$가 존재하여
+각 $U_j \to X$가 어떤 $X_{i_j}$를 통해 인수분해된다.
+가정에 의해 $j = 1, \ldots, n$에 대하여
+$|U_j | \to |X_{i_j}|$의 $x$ 위의 올은 유한하다.
+이는 분명 $|U| \to |X|$의 $x$ 위의 올이 유한하다는 뜻이다.
+이로써 $(\alpha)$의 경우를 증명했다.
+
+\medskip\noindent
+$\mathcal{P} = (\beta)$인 경우를 보자. $X_i$에 대한 조건
+$(\beta)$는 모든 $x \in |X_i|$가 체의 스펙트럼에서 $X_i$로 가는
+단사 사상으로 표현된다는 뜻이다. $X_i \to X$가 단사 사상이고
+$X = \bigcup X_i$이므로 $X$에 대해서도 같은 결론이 성립한다.
+
+\medskip\noindent
+$\mathcal{P} = (\gamma)$인 경우를 보자. Lemma
+\ref{lemma-bounded-fibres}에 의해 $(\gamma) = (\alpha) + (\beta)$임에
+유의하자. 따라서 $(\gamma)$에 대한 명제는 앞에서 다룬 경우들로부터
+따라온다.
+
+\medskip\noindent
+$\mathcal{P} = (\delta)$인 경우를 보자. $X_i$에 대한 조건
+$(\delta)$는 보편적으로 유계인 올들을 갖고 $X_i$를 덮는 스킴들
+$U_{ij}$와 에탈 사상들 $U_{ij} \to X_i$가 존재한다는 뜻이다.
+이 스킴들은 전사 에탈 사상 $\coprod U_{ij} \to X$도 주며,
+$U_{ij} \to X$는 여전히 보편적으로 유계인 올들을 갖는다.
+
+\medskip\noindent
+$\mathcal{P} = (\epsilon)$인 경우를 보자. $X_i$에 대한 조건
+$(\epsilon)$은 집합 $J_i$와 사상들 $\varphi_{ij} : U_{ij} \to X_i$를
+찾을 수 있어서, 각 $\varphi_{ij}$가 에탈이고 두 사영
+$U_{ij} \times_{X_i} U_{ij} \to U_{ij}$가 준콤팩트이며
+$\coprod_{j \in J_i} U_{ij} \to X_i$가 전사라는 뜻이다.
+이 경우 합성들 $U_{ij} \to X_i \to X$는 에탈이다(Morphisms, Lemmas
+\ref{morphisms-lemma-composition-etale}와
+\ref{morphisms-lemma-open-immersion-etale}, 그리고 Spaces, Lemmas
+\ref{spaces-lemma-composition-representable-transformations-property}와
+\ref{spaces-lemma-morphism-schemes-gives-representable-transformation-property}
+를 함께 사용한다).
+$X_i \subset X$가 부분공간이므로
+$U_{ij} \times_{X_i} U_{ij} = U_{ij} \times_X U_{ij}$이고, 따라서
+올곱에 대한 조건은 보존된다. 또한
+$\coprod_{i, j} U_{ij} \to X$는 분명 전사이다.
+그러므로 $X$는 $(\epsilon)$을 만족한다.
+
+\medskip\noindent
+$\mathcal{P} = (\zeta)$인 경우를 보자. $X_i$에 대한 조건
+$(\zeta)$는 $X_i$가 자리스키 국소 준분리라는 뜻이다.
+이는 $X$가 자리스키 국소 준분리라는 뜻임을 즉시 알 수 있다.
+
+\medskip\noindent
+$(\theta)$에 대해서는 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subscheme}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-representable-properties}
+$S$를 스킴이라 하자. $\mathcal{P}$를 Lemma
+\ref{lemma-bounded-fibres}에 열거된 대수공간의 성질들
+$(\beta)$, $(\gamma)$, $(\delta)$, $(\epsilon)$, $(\theta)$ 가운데
+하나라 하자. $X$, $Y$를 $S$ 위의 대수공간이라 하고
+$X \to Y$를 표현가능 사상이라 하자.
+$Y$가 성질 $\mathcal{P}$를 가지면 $X$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+$f : X \to Y$를 대수공간들의 표현가능 사상이라 하고
+$Y$가 $\mathcal{P}$를 갖는다고 가정하자. $x \in |X|$라 하고
+$y = f(x) \in |Y|$로 놓자.
+
+\medskip\noindent
+$\mathcal{P} = (\beta)$인 경우를 보자. $Y$에 대한 조건 $(\beta)$는
+$y$를 표현하는 단사 사상 $\Spec(k) \to Y$가 존재한다는 뜻이다.
+올곱 $X_y = \Spec(k) \times_Y X$는 스킴이고, $x$는 $X_y$의 한 점,
+즉 단사 사상 $\Spec(k') \to X_y$에 대응한다.
+$X_y \to X$도 단사 사상이므로 $x$는 단사 사상
+$\Spec(k') \to X_y \to X$로 표현된다. 달리 말하면 $X$에 대하여
+$(\beta)$가 성립한다.
+
+\medskip\noindent
+$\mathcal{P} = (\gamma)$인 경우를 보자.
+$(\gamma) \Rightarrow (\beta)$이므로 앞 단락에서 $y$와 $x$를 다음
+도식과 같은 단사 사상들로 표현할 수 있음을 보았다.
+$$
+\xymatrix{
+\Spec(k') \ar[r]_-x \ar[d] & X \ar[d] \\
+\Spec(k) \ar[r]^-y & Y
+}
+$$
+또한 Lemma \ref{lemma-UR-finite-above-x}의 (2)를 통한 성질
+$(\gamma)$의 정의에 의해 스킴들 $V_i$와 에탈 사상들 $V_i \to Y$가
+존재하여 $\coprod V_i \to Y$가 전사이고, 각 $i$에 대하여
+$R_i = V_i \times_Y V_i$로 놓으면
+$$
+|V_i| \longrightarrow |Y|
+\quad\text{및}\quad
+|R_i| \longrightarrow |Y|
+$$
+의 $y$ 위의 올들이 유한하다. 이는 스킴들 $(V_i)_y$와 $(R_i)_y$가
+$y = \Spec(k)$ 위에서 유한하다는 뜻이다.
+$X \to Y$가 표현가능하므로 올곱들 $U_i = V_i \times_Y X$는 스킴이다.
+사상들 $U_i \to X$는 에탈이고 $\coprod U_i \to X$는 전사이다.
+마지막으로 각 $i$에 대하여
+$$
+(U_i)_x =
+(V_i \times_Y X)_x =
+(V_i)_y \times_{\Spec(k)} \Spec(k')
+$$
+이고
+$$
+(U_i \times_X U_i)_x =
+\left((V_i \times_Y X) \times_X (V_i \times_Y X)\right)_x =
+(R_i)_y \times_{\Spec(k)} \Spec(k')
+$$
+이므로, 이들은 유한 스킴들 $(V_i)_y$와 $(R_i)_y$의 기저변환으로서
+$k'$ 위에서 유한하다. 다시 Lemma
+\ref{lemma-UR-finite-above-x}의 둘째 조건을 사용하면 이는 $X$에
+대하여 $(\gamma)$가 성립함을 함의한다.
+
+\medskip\noindent
+$\mathcal{P} = (\delta)$인 경우를 보자. $V$를 아핀 스킴이라 하고
+$V \to Y$를 에탈 사상이라 하자. $Y$가 성질 $(\delta)$를 가지므로
+이 사상의 올들은 보편적으로 유계이다. Lemma
+\ref{lemma-base-change-universally-bounded}에 의해 기저변환
+$V \times_Y X \to X$도 보편적으로 유계인 올들을 갖는다.
+따라서 Lemma \ref{lemma-U-universally-bounded}의 첫째 부분을 적용할
+수 있고,
+% P08-E279: frozen source repeats Y although this proof must conclude X; see ERRATA_CANDIDATES.jsonl.
+$Y$도 성질 $(\delta)$를 가짐을 안다.
+
+\medskip\noindent
+$\mathcal{P} = (\epsilon)$인 경우를 보자. Spaces, Lemma
+\ref{spaces-lemma-base-change-representable-transformations-property}를
+반복하여 사용할 것이다. $V_i \to Y$를 Lemma
+\ref{lemma-characterize-very-reasonable}의 (2)와 같이 택하자.
+$U_i = X \times_Y V_i$로 놓자. 사상들 $U_i \to X$는 에탈이고
+$\coprod U_i \to X$는 전사이다.
+$U_i \times_X U_i = X \times_Y (V_i \times_Y V_i)$이므로
+% P08-E280: frozen source changes the projection domain from the X-product to the Y-product; see ERRATA_CANDIDATES.jsonl. P08-E598 is a preserved duplicate ledger observation and is excluded from handoff.
+사영들 $U_i \times_Y U_i \to U_i$는 사영들
+$V_i \times_Y V_i \to V_i$의 기저변환이므로 역시 준콤팩트이다.
+따라서 $X$는 Lemma \ref{lemma-characterize-very-reasonable}의 (2)를
+만족한다.
+
+\medskip\noindent
+$\mathcal{P} = (\theta)$인 경우에는 그 결과가 Categories, Lemma
+\ref{categories-lemma-representable-over-representable}이다.
+\end{proof}
+
+\section{합리적인 대수공간과 양호한 대수공간}
+\label{section-reasonable-decent}
+
+\noindent
+Lemma \ref{lemma-bounded-fibres}에서 아핀 스킴에서 $X$로 가는 에탈
+사상들의 거동 및 스킴들에 의한 $X$의 특별한 에탈 덮개의 존재와 관련된,
+대수공간에 대한 여러 조건을 살펴보았다. 여기서 서로 다른 유형의 조건들을
+표로 정리한다.
+$$
+\boxed{
+\begin{matrix}
+(\alpha) & \text{아핀 스킴에서 오는 에탈 사상들의 올은 유한하다} \\
+(\beta) & \text{점들은 체들의 스펙트럼에서 오는 단사 사상으로 표현된다} \\
+(\gamma) & \text{점들은 체들의 스펙트럼에서 오는 준콤팩트 단사 사상으로
+표현된다} \\
+(\delta) & \text{아핀 스킴에서 오는 에탈 사상들의 올은 보편적으로
+유계이다} \\
+(\epsilon) & \text{스킴에서 오는, 그 상 위에서 준콤팩트인 에탈
+사상들로 덮인다}
+\end{matrix}
+}
+$$
+
+\medskip\noindent
+다음 정의의 조건들은 정확히 $X$의 대각선에 대한 조건은 아니지만,
+어떤 의미에서는 $X$에 대한 분리 조건들이다.
+
+\begin{definition}
+\label{definition-very-reasonable}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+\begin{enumerate}
+% P08-E281: frozen source's typed point formula is preserved; see ERRATA_CANDIDATES.jsonl.
+\item 모든 점 $x \in X$에 대하여 Lemma
+\ref{lemma-UR-finite-above-x}의 동치 조건들, 달리 말해 Lemma
+\ref{lemma-bounded-fibres}의 성질 $(\gamma)$가 성립하면
+$X$가 {\it 양호하다}고 한다.
+\item Lemma \ref{lemma-U-universally-bounded}의 동치 조건들,
+달리 말해 Lemma \ref{lemma-bounded-fibres}의 성질 $(\delta)$가
+성립하면 $X$가 {\it 합리적이다}라고 한다.
+\item Lemma \ref{lemma-characterize-very-reasonable}의 동치 조건들,
+즉 Lemma \ref{lemma-bounded-fibres}의 성질 $(\epsilon)$이 성립하면
+$X$가 {\it 매우 합리적이다}라고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+대수공간에 대한 이 조건들 사이에는 다음 함의들이 성립한다.
+$$
+\xymatrix{
+\text{표현가능} \ar@{=>}[rd] & & & \\
+ & \text{매우 합리적} \ar@{=>}[r] &
+\text{합리적} \ar@{=>}[r] &
+\text{양호함} \\
+\text{준분리} \ar@{=>}[ru] & & &
+}
+$$
+매우 합리적인 대수공간이라는 개념은 이제 쓰이지 않는다.
+이 개념은 과거에 어떤 결과들을 증명할 때 그 가정이 필요했기 때문에
+도입되었지만, 이제 그 결과들은 양호한 공간의 부류에 대하여 증명되었다.
+양호한 공간들 $X$의 부류는 $|X|$의 위상과 $X$ 자체의 성질 사이에 좋은 관계가
+성립하는 가장 큰 공간 부류이다.
+
+\begin{example}
+\label{example-not-decent}
+Spaces, Example \ref{spaces-example-affine-line-translation}에서 구성한
+대수공간 $\mathbf{A}^1_{\mathbf{Q}}/\mathbf{Z}$는 그 “일반점”을
+체의 스펙트럼에서 오는 단사 사상으로 표현할 수 없으므로 양호하지 않다.
+\end{example}
+
+\begin{remark}
+\label{remark-reasonable}
+합리적인 대수공간은 매우 합리적인 대수공간보다 기술적으로 다루기 쉽다.
+예를 들어 $X \to Y$가 대수공간들의 준콤팩트 에탈 전사 사상이고
+$X$가 합리적이면 $Y$도 합리적이다. Lemma
+\ref{lemma-descent-conditions}를 보라. 그러나 성질 “매우 합리적”에
+대해서도 이것이 참인지는 알지 못한다. 아래에서는 합리적인 대수공간이
+갖는 또 다른 기술적 성질을 제시한다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-fun-property-reasonable}
+$S$를 스킴이라 하자. $X$를 준콤팩트이고 합리적인 대수공간이라 하자.
+그러면 준콤팩트이고 준분리인 대수공간들의 유향계 $X_i$가 존재하여
+$X = \colim_i X_i$이다(층의 범주에서의 직접극한). 더 나아가 다음
+조건들을 만족하도록 택할 수 있다.
+\begin{enumerate}
+\item $S$ 위의 모든 준콤팩트 스킴 $T$에 대하여
+$\colim X_i(T) = X(T)$이다.
+\item 이 계의 전이 사상들 $X_i \to X_{i'}$와 쌍대사영들
+$X_i \to X$는 전사이고 에탈이다.
+\item $X$가 스킴이면 대수공간들 $X_i$도 스킴이고, 전이 사상들
+$X_i \to X_{i'}$와 쌍대사영들 $X_i \to X$는 국소 동형사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+증명을 개략적으로 설명한다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}에 의해
+$U$가 아핀인 $X = U/R$을 얻는다. 이 경우 합리적이라는 것은
+$U \to X$가 보편적으로 유계라는 뜻이다. 따라서 $U \to X$의
+“올들”의 차수가 많아야 $N$이 되게 하는 정수 $N$이 존재한다.
+Definition \ref{definition-universally-bounded}를 보라.
+군체의 구조 사상들을 $s, t : R \to U$와
+$c : R \times_{s, U, t} R \to R$로 나타내자.
+
+\medskip\noindent
+주장: 모든 준콤팩트 열린집합 $A \subset R$에 대하여 다음을 만족하는
+열린집합 $R' \subset R$이 존재한다.
+\begin{enumerate}
+\item $A \subset R'$이다.
+\item $R'$은 준콤팩트이다.
+\item $(U, R', s|_{R'}, t|_{R'}, c|_{R' \times_{s, U, t} R'})$는
+군체 스킴이다.
+\end{enumerate}
+% P08-E283: frozen construction omits inverse closure; see ERRATA_CANDIDATES.jsonl.
+$e : U \to R$는 에탈 사상 $s : R \to U$의 단면이므로 열린 사상이다.
+\'Etale Morphisms, Proposition
+\ref{etale-proposition-properties-sections}를 보라. 또한 $U$는
+아핀이므로 준콤팩트이다. 따라서 $A$를 $A \cup e(U) \subset R$로
+바꾸어 $A$가 $e(U)$를 포함한다고 가정할 수 있다.
+이제 귀납적으로 $A^1 = A$로 놓고, $n \geq 2$에 대하여
+$$
+A^n = c(A^{n - 1} \times_{s, U, t} A) \subset R
+$$
+로 정의한다. 귀납적으로 논하면 모든 $n \geq 2$에 대하여 $A^n$은
+준콤팩트임을 알 수 있다. 실제로 이는 준콤팩트 올곱
+$A^{n - 1} \times_{s, U, t} A$의 상이다. $k$가 $S$ 위의 대수적으로
+닫힌 체이고 $k$-점들을 생각하면
+% P08-E282: frozen path display omits its terminal endpoint and is off by one; see ERRATA_CANDIDATES.jsonl.
+$$
+A^n(k) = \left\{(u, u') \in U(k)
+:
+\begin{matrix}
+\text{다음을 만족하는 } u = u_1, u_2, \ldots, u_n \in U(k)\text{가 존재한다:} \\
+(u_i , u_{i + 1}) \in A\text{가 다음의 모든 지표에 대해 성립한다: }i = 1, \ldots, n - 1.
+\end{matrix}
+\right\}
+$$
+이다. 그런데 $U(k) \to X(k)$의 올들의 크기는 많아야 $N$이므로
+$n > N$이면 위의 열에 중복이 생기며, 이를 줄이면 모든 $n \geq N$에
+대하여 $A^N = A^n$임을 증명할 수 있다.
+이는 $R' = A^N$가 군체 스킴
+$(U, R', s|_{R'}, t|_{R'}, c|_{R' \times_{s, U, t} R'})$을 준다는
+뜻이며, 위의 주장을 증명한다.
+
+\medskip\noindent
+$(\Sch/S)_{fppf}$ 위의 층들의 사상
+$$
+\colim_{R' \subset R} U/R' \longrightarrow U/R
+$$
+을 생각하자. 여기서 $R' \subset R$은 위와 같이 에탈 동치관계를
+이루는 $R$의 준콤팩트 열린 부분스킴들을 돈다. 각 몫 $U/R'$은
+대수공간이다(Spaces, Theorem
+\ref{spaces-theorem-presentation}을 보라). $R'$은 준콤팩트이고
+$U$는 아핀이므로 사상
+$R' \to U \times_{\Spec(\mathbf{Z})} U$는 준콤팩트이고, 따라서
+$U/R'$은 준분리이다. 마지막으로 $T$가 준콤팩트 스킴이면
+$$
+\colim_{R' \subset R} U(T)/R'(T) \longrightarrow U(T)/R(T)
+$$
+는 전단사이다. 실제로 $T$에서 $R$로 가는 모든 사상의 상은 위의
+주장에 의해 열린 부분동치관계들 $R'$ 가운데 하나에 들어간다.
+이는 층들의 직접극한 $U/R'$이 $U/R$임을 분명히 함의한다.
+달리 말하면 대수공간 $X = U/R$은 준분리 대수공간들 $U/R'$의
+직접극한이다.
+
+\medskip\noindent
+성질 (1)과 (2)는 위의 논의에서 따라온다. $X$가 스킴이면 $U$를
+$X$의 아핀 열린집합들의 유한 서로소 합으로 택하여 (3)을 얻는다.
+세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-representable-named-properties}
+$S$를 스킴이라 하고 $X$, $Y$를 $S$ 위의 대수공간이라 하자.
+$X \to Y$를 표현가능 사상이라 하자.
+$Y$가 양호하면(각각 합리적이면) $X$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-representable-properties}를 명칭으로 옮긴 것이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-etale-named-properties}
+$S$를 스킴이라 하고 $X \to Y$를 $S$ 위의 대수공간들의 에탈
+사상이라 하자. $Y$가 양호하면, 각각 합리적이면, $X$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+$U$를 아핀 스킴이라 하고 $U \to X$를 에탈 사상이라 하자.
+$R = U \times_X U$ 및 $R' = U \times_Y U$로 놓자.
+$R \to R'$이 단사 사상임에 유의하자.
+
+\medskip\noindent
+$x \in |X|$라 하자. $X$가 양호함을 보이려면 $|U| \to |X|$와
+$|R| \to |X|$의 $x$ 위의 올들이 유한함을 보여야 한다.
+그런데 $Y$가 양호하면 $|U| \to |Y|$와 $|R'| \to |Y|$의 올들은
+유한하다. 따라서 “양호함”에 대한 결과가 성립한다.
+
+\medskip\noindent
+$X$가 합리적임을 보이려면 $U \to X$의 올들이 보편적으로 유계임을
+보여야 한다. 그런데 $Y$가 합리적이면 $U \to Y$의 올들이 보편적으로
+유계이고, 이는 $U \to X$의 올들에 대해서도 같은 사실을 즉시 함의한다.
+따라서 “합리적임”에 대한 결과가 성립한다.
+\end{proof}
+
+
+\section{점과 특수화}
+\label{section-specializations}
+
+\noindent
+대수공간들의 에탈 사상 $f : X \to Y$와
+$|f| : |X| \to |Y|$의 한 올에 속하는 점들 사이의 자명하지 않은
+특수화가 존재한다. Examples, Lemma
+\ref{examples-lemma-specializations-fibre-etale}를 보라.
+사상의 원천이 스킴이면 $Y$에 조건 ($\alpha$)를 부과하여 이를 피할
+수 있다.
+
+\begin{lemma}
+\label{lemma-no-specializations-map-to-same-point}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$U \to X$를 스킴에서 $X$로 가는 에탈 사상이라 하자.
+$u, u' \in |U|$가 $|X|$의 같은 점 $x$로 사상되고
+$u' \leadsto u$라고 가정하자. 쌍 $(X, x)$가 Lemma
+\ref{lemma-U-finite-above-x}의 동치 조건들을 만족하면 $u = u'$이다.
+\end{lemma}
+
+\begin{proof}
+쌍 $(X, x)$가 Lemma \ref{lemma-U-finite-above-x}의 동치 조건들을
+만족한다고 가정하자. $U$를 스킴이라 하고 $U \to X$를 에탈이라 하며,
+$u, u' \in |U|$가 $|X|$의 $x$로 사상되고 $u' \leadsto u$라고 하자.
+$U$를 $u$의 아핀 근방으로 바꾸어도 되며 그렇게 하자.
+$t, s : R = U \times_X U \to U$를 에탈 사영들이라 하자.
+
+\medskip\noindent
+$t(r) = u$이고 $s(r) = u'$인 점 $r \in R$을 택하자.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-presentation}에 의해 이것이 가능하다.
+일반화는 에탈 사상 $t$를 따라 올라가므로(Remark
+\ref{remark-recall}), $t(r') = u'$인 특수화 $r' \leadsto r$을 찾을 수
+있다. $u'' = s(r')$로 놓자. 그러면 $u'' \leadsto u'$이다.
+따라서 이를 반복하여 $t(r'') = u''$인 $r'' \leadsto r'$을 찾을 수 있다.
+$u''' = s(r'')$로 놓하고, 계속 같은 방식으로 진행한다.
+그림으로 나타내면 다음과 같다.
+$$
+\xymatrix{
+& r'' \ar[rd]^s \ar[ld]_t \ar@{~>}[d] & \\
+u'' \ar@{~>}[d] & r' \ar[rd]^s \ar[ld]_t \ar@{~>}[d] & u''' \ar@{~>}[d] \\
+u' \ar@{~>}[d] & r \ar[rd]^s \ar[ld]_t & u'' \ar@{~>}[d] \\
+u & & u'
+}
+$$
+Remark \ref{remark-recall}에서 에탈 사상 $s$의 올에 속하는 점들 사이에는
+특수화가 없음을 보았다. 따라서 어떤 $n$에 대하여
+$u^{(n + 1)} = u^{(n)}$이면 $r^{(n)} = r^{(n - 1)}$이고, 그러면
+$t$를 취하여 $u^{(n)} = u^{(n - 1)}$도 얻는다.
+이는 전체 탑이 무너지도록 하며, 특히 $u = u'$이다.
+따라서 $u \not = u'$이면 모든 특수화가 진특수화이고
+$\{u, u', u'', \ldots\}$는 $|X|$의 점 $x$로 사상되는 $U$의
+점들의 무한집합이다. $U$를 아핀으로 택했으므로 이는 Lemma
+\ref{lemma-U-finite-above-x}의 둘째 부분에 모순이다. 이것으로
+증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-no-specializations-map-to-same-point-Noetherian}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$U \to X$를 스킴에서 $X$로 가는 에탈 사상이라 하자.
+$u, u' \in |U|$가 $|X|$의 같은 점 $x$로 사상되고
+$u' \leadsto u$라고 가정하자. $X$가 국소 뇌터이면 $u = u'$이다.
+\end{lemma}
+
+\begin{proof}
+Schemes, Section \ref{schemes-section-points}의 논의에 의해
+$\mathcal{O}_{U, u'}$는 뇌터 국소환 $\mathcal{O}_{U, u}$의
+국소화이다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pre-dimension-local-ring}에 의해
+$\dim(\mathcal{O}_{U, u}) = \dim(\mathcal{O}_{U, u'})$이다.
+뇌터 국소환의 차원이론으로부터 $u = u'$라는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-specialization}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$x, x' \in |X|$이고 $x' \leadsto x$, 즉 $x$가 $x'$의 특수화라고
+가정하자. 쌍 $(X, x')$가 Lemma
+\ref{lemma-UR-finite-above-x}의 동치 조건들을 만족한다고 하자.
+그러면 스킴 $U$에서 오는 모든 에탈 사상 $\varphi : U \to X$와
+% P08-E284: frozen source's incomplete existential clause is translated grammatically; see ERRATA_CANDIDATES.jsonl.
+$\varphi(u) = x$인 모든 $u \in U$에 대하여, $\varphi(u') = x'$이고
+$u' \leadsto u$인 점 $u'\in U$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$U$를 $u$의 아핀 열린 근방으로 바꾸어도 된다. 따라서 $U$가
+아핀이라고 가정할 수 있다. $x$가 열린 사상 $|U| \to |X|$의 상에
+속하므로 $x'$도 그 상에 속한다. 그러므로 $X$를
+$|U| \to |X|$의 상에 대응하는 자리스키 열린 부분공간으로
+바꾸어도 된다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-image-open}을 보라.
+달리 말하면 $U \to X$가 전사이고 에탈이라고 가정할 수 있다.
+$s, t : R = U \times_X U \to U$를 사영들이라 하자.
+$(X, x')$가 Lemma \ref{lemma-UR-finite-above-x}의 동치 조건들을
+만족한다는 가정에 의해 $|U| \to |X|$와 $|R| \to |X|$의
+$x'$ 위의 올들이 유한함을 안다.
+% P08-E285: frozen source types point sets inside U and R rather than their point spaces; see ERRATA_CANDIDATES.jsonl.
+$\{u'_1, \ldots, u'_n\} \subset U$와
+$\{r'_1, \ldots, r'_m\} \subset R$이 $\{x'\}$의 완전한 역상을
+이룬다고 하자. 닫힌집합들
+$$
+T = \overline{\{u'_1\}} \cup \ldots \cup \overline{\{u'_n\}} \subset |U|,
+\quad
+T' = \overline{\{r'_1\}} \cup \ldots \cup \overline{\{r'_m\}} \subset |R|.
+$$
+을 생각하자. 자명하게 $s(T') \subset T$이다.
+$R$이 동치관계이고 집합 $\{r_j'\}$가 구성상 $R$의 역에 대해
+불변이므로 $t(T') = s(T')$도 성립한다.
+$w \in T$를 임의의 점이라 하자. 그러면 어떤 $i$에 대하여
+$u'_i \leadsto w$이다. $s(r) = w$인 $r \in R$을 택하자.
+일반화는 $s : R \to U$를 따라 올라가므로(Remark
+\ref{remark-recall}을 보라), $s(r') = u_i'$인 $r' \leadsto r$을
+찾을 수 있다. 그러면 어떤 $j$에 대하여 $r' = r'_j$이고,
+$w \in s(T')$라는 결론을 얻는다. 따라서
+$T = s(T') = t(T')$는 $|U|$ 안의 $|R|$-불변 닫힌집합이다.
+Properties of Spaces, Lemmas
+\ref{spaces-properties-lemma-points-presentation} 및
+\ref{spaces-properties-lemma-topology-points}에 의해 이는 $T$가
+$|X|$의 닫힌(!) 부분집합 $T'' = \varphi(T)$의 역상이라는 뜻이다.
+따라서 $T'' = \overline{\{x'\}}$이다. $x \in T''$이므로 $T$는
+$x$로 사상되는 어떤 점 $u_1$을 포함한다. 즉 어떤 $i$에 대하여
+주어진 특수화 $x' \leadsto x$로 사상되는 특수화
+$u'_i \leadsto u_1$이 존재함을 알 수 있다.
+
+\medskip\noindent
+증명을 마치기 위해 $s(r) = u$이고 $t(r) = u_1$인 점 $r \in R$을
+택하자(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}을 사용한다).
+일반화는 $t$를 따라 올라가고 $u'_i \leadsto u_1$이므로,
+$t(r') = u'_i$인 특수화 $r' \leadsto r$을 찾을 수 있다.
+$u' = s(r')$로 놓자. 그러면 $u' \leadsto u$이고
+$\varphi(u') = x'$이다. 이것이 원하는 결론이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-generalizations-lift-flat}
+$S$를 스킴이라 하고 $f : Y \to X$를 $S$ 위의 대수공간들의 평탄
+사상이라 하자. $x, x' \in |X|$이고 $x' \leadsto x$, 즉 $x$가
+$x'$의 특수화라고 가정하자. 쌍 $(X, x')$가 Lemma
+\ref{lemma-UR-finite-above-x}의 동치 조건들을 만족한다고 가정하자
+(예를 들어 $X$가 양호하거나, $X$가 준분리이거나, $X$가
+표현가능이면 그러하다). 그러면 $f(y) = x$인 모든
+$y \in |Y|$에 대하여 $f(y') = x'$이고 $y' \leadsto y$인 점
+$y' \in |Y|$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+(괄호 속 명제는 양호한 공간의 정의와 Section
+\ref{section-reasonable-decent}에 언급된 서로 다른 분리 조건들 사이의
+함의들에서 따라온다.)
+스킴 $V$와 전사 에탈 사상 $V \to Y$를 택하자. $y$로 사상되는
+$v \in V$를 택하자. 그러면 $V \to X$에 대하여 보조정리를 증명하면
+충분함을 알 수 있다. 따라서 $Y$가 스킴이라고 가정할 수 있다.
+스킴 $U$와 전사 에탈 사상 $U \to X$를 택하자. $x$로 사상되는
+$u \in U$를 택하자. Lemma \ref{lemma-specialization}에 의해
+$x'$로 사상되는 $u' \leadsto u$를 택할 수 있다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 $y$와 $u$로
+사상되는 $z \in U \times_X Y$를 택할 수 있다.
+따라서 스킴들의 평탄 사상 $U \times_X Y \to U$의 경우로
+귀착되며, 이는 Morphisms, Lemma
+\ref{morphisms-lemma-generalizations-lift-flat}이다.
+\end{proof}
+
+
+\section{스킴들에 의한 대수공간의 층화}
+\label{section-stratifications}
+
+\noindent
+이 절에서는 준콤팩트이고 준분리인 대수공간이 국소 닫힌 부분공간들에
+의한 유한 층화를 가지며, 각 부분공간은 스킴이고 부분들의 접합은
+기본 구별 정사각형들로 이루어짐을 증명한다. 먼저 합리적인
+대수공간에 대한 약간 더 약한 결과를 증명한다.
+
+\begin{lemma}
+\label{lemma-quasi-compact-reasonable-stratification}
+$S$를 스킴이라 하자. $W \to X$를 스킴 $W$에서 대수공간 $X$로
+가는 사상으로서 평탄이고, 국소 유한 표시이고, 분리이고,
+보편적으로 유계인 올들을 갖는 국소 준유한 사상이라 하자.
+기약 닫힌 부분공간들
+$$
+\emptyset = Z_{-1} \subset Z_0 \subset Z_1 \subset Z_2 \subset
+\ldots \subset Z_n = X
+$$
+이 존재하여, $X_r = Z_r \setminus Z_{r - 1}$로 놓은 층화
+$X = \coprod_{r = 0, \ldots, n} X_r$은 다음 보편 성질로 특징지어진다.
+$g : T \to X$가 주어졌을 때, 사영 $W \times_X T \to T$가 차수
+$r$인 유한 국소 자유 사상일 필요충분조건은
+$g(|T|) \subset |X_r|$인 것이다.
+\end{lemma}
+
+\begin{proof}
+$W \to X$의 올들의 차수에 대한 상계를 주는 정수 $n$을 택하자.
+스킴 $U$와 전사 에탈 사상 $U \to X$를 택하자.
+$W \times_X U \to U$에 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-stratify-flat-fp-lqf-universally-bounded}를
+적용한다. $W \times_X U \to U$에 대하여 보조정리에 서술된 성질로
+특징지어지는 닫힌 부분집합들
+$$
+\emptyset = Y_{-1} \subset Y_0 \subset Y_1 \subset Y_2 \subset
+\ldots \subset Y_n = U
+$$
+을 얻는다. 이 닫힌 부분집합들의 형성은 기저변환과 가환함이 분명하다.
+$R = U \times_X U$로 놓고 사영들을 $s, t : R \to U$라 하면,
+$R$의 닫힌 부분집합으로서
+$$
+s^{-1}(Y_r) = t^{-1}(Y_r)
+$$
+임을 얻는다. 달리 말하면 닫힌 부분집합들 $Y_r \subset U$는
+$R$-불변이다. 이는 $|Y_r|$이 닫힌 부분집합
+$Z_r \subset |X|$의 역상이라는 뜻이다. 또한 $Z_r \subset X$로
+그 기약 유도 대수공간 구조를 나타내자. Properties of Spaces,
+Definition \ref{spaces-properties-definition-reduced-induced-space}를
+보라.
+
+\medskip\noindent
+$g : T \to X$를 대수공간들의 사상이라 하자. 스킴 $V$와 전사 에탈
+사상 $V \to T$를 택하자. 보조정리의 마지막 주장을 증명하려면 합성
+$V \to X$에 대한 주장을 증명하는 것으로 충분하다(유한 국소 자유
+사상에 대한 우리의 정의에 의한다. Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-finite-locally-free}를 보라).
+마찬가지로 스킴들의 사상 $W \times_X V \to V$가 차수 $r$인 유한
+국소 자유 사상일 필요충분조건은 스킴들의 사상
+$$
+W \times_X (U \times_X V)
+\longrightarrow
+U \times_X V
+$$
+가 차수 $r$인 유한 국소 자유 사상인 것이다(Descent, Lemma
+\ref{descent-lemma-descending-property-finite-locally-free}를 보라).
+구성에 의해 이것은 $|U \times_X V| \to |U|$가 $|Y_r|$ 안으로
+사상될 필요충분조건이며, 다시 이것은 $|V| \to |X|$가 $|Z_r|$
+안으로 사상될 필요충분조건이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-stratify-flat-fp-lqf}
+$S$를 스킴이라 하자. $W \to X$를 스킴 $W$에서 대수공간 $X$로
+가는 사상으로서 평탄이고, 국소 유한 표시이고, 분리이고,
+국소 준유한이라고 하자. 열린 부분공간들
+$$
+X = X_0 \supset X_1 \supset X_2 \supset \ldots
+$$
+이 존재하여, $k$가 체인 사상 $\Spec(k) \to X$가 $X_d$를 통해
+인수분해될 필요충분조건은 $W \times_X \Spec(k)$가 $k$ 위에서
+차수 $\geq d$를 갖는 것이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 전사 에탈 사상 $U \to X$를 택하자.
+$W \times_X U \to U$에 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-stratify-flat-fp-lqf}를 적용한다.
+$W \times_X U \to U$에 대하여 보조정리에 서술된 성질로 특징지어지는
+열린 부분스킴들
+$$
+U = U_0 \supset U_1 \supset U_2 \supset \ldots
+$$
+을 얻는다.
+% P08-E286: frozen source calls these open subschemes “closed subsets”; see ERRATA_CANDIDATES.jsonl.
+이 열린 부분스킴들의 형성은 기저변환과 가환함이 분명하다.
+$R = U \times_X U$로 놓고 사영들을 $s, t : R \to U$라 하면,
+$R$의 열린 부분스킴으로서
+$$
+s^{-1}(U_d) = t^{-1}(U_d)
+$$
+임을 얻는다. 달리 말하면 열린 부분스킴들 $U_d \subset U$는
+$R$-불변이다. 이는 $U_d$가 열린 부분공간 $X_d \subset X$의
+역상이라는 뜻이다(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subspaces-presentation}).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-filter-quasi-compact}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 준콤팩트 대수공간이라 하자.
+다음 성질들을 갖는 열린 부분공간들
+$$
+\ldots \subset U_4 \subset U_3 \subset U_2 \subset U_1 = X
+$$
+이 존재한다.
+\begin{enumerate}
+\item $T_p = U_p \setminus U_{p + 1}$로 놓고 기약 유도 부분공간
+구조를 주면, 분리 스킴 $V_p$와 전사 에탈 사상
+$f_p : V_p \to U_p$가 존재하여
+$f_p^{-1}(T_p) \to T_p$가 동형사상이다.
+\item $x \in |X|$를 체에서 오는 준콤팩트 사상
+$\Spec(k) \to X$로 표현할 수 있으면 어떤 $p$에 대하여 $x \in T_p$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}에 의해 아핀 스킴
+$U$와 전사 에탈 사상 $U \to X$를 택할 수 있다.
+% P08-E287: frozen source starts the p-fold construction at p >= 0; see ERRATA_CANDIDATES.jsonl.
+$p \geq 0$에 대하여
+$$
+W_p = U \times_X \ldots \times_X U \setminus \text{모든 대각선}
+$$
+로 놓자. 여기서 올곱은 $p$개의 인자를 갖는다. $U$가 분리이므로
+사상 $U \to X$는 분리이고 모든 올곱
+$U \times_X \ldots \times_X U$는 분리 스킴이다.
+$U \to X$가 분리이므로 대각선 $U \to U \times_X U$는 닫힌 몰입이다.
+$U \to X$가 에탈이므로 대각선 $U \to U \times_X U$는 열린 몰입이다.
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-etale-unramified} 및
+\ref{spaces-morphisms-lemma-diagonal-unramified-morphism}을 보라.
+마찬가지로 모든 대각 사상은 열린 동시에 닫힌 몰입이고,
+$W_p$는 $U \times_X \ldots \times_X U$의 열린 동시에 닫힌
+부분스킴이다. 또한 사상
+$$
+U \times_X \ldots \times_X U \longrightarrow
+U \times_{\Spec(\mathbf{Z})} \ldots \times_{\Spec(\mathbf{Z})} U
+$$
+는 국소 준유한이고 분리이며(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fibre-product-after-map}), 그 공역은
+아핀 스킴이다. 따라서 $U \times_X \ldots \times_X U$의 점들의
+모든 유한집합은 어떤 아핀 열린집합에 들어간다. More on Morphisms,
+Lemma \ref{more-morphisms-lemma-separated-locally-quasi-finite-over-affine}
+를 보라. 그러므로 $W_p$에 대해서도 같은 사실이 성립한다.
+% P08-E288: frozen source's “fix point locus” is rendered by the standard fixed-point term; see ERRATA_CANDIDATES.jsonl.
+대칭군 $S_p$는 $X$ 위에서 $W_p$에 자유롭게 작용한다
+($U \times_X \ldots \times_X U$에서 고정점 자취를 제거했기 때문이다).
+위의 사실과 Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-finite-flat-equivalence-global}에
+의해 몫 $V_p = W_p/S_p$는 스킴이다. $W_p$ 위의 $S_p$의 작용이
+$X$ 위의 작용이었으므로 사상 $V_p \to X$가 존재한다.
+$W_p \to X$가 에탈이고 $W_p \to V_p$가 전사 에탈이므로
+$V_p \to X$도 에탈이다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-local}을 보라.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quotient-separated}에 의해 $V_p$가
+분리 스킴임에 유의하자.
+
+\medskip\noindent
+$U_p \subset X$를 $V_p \to X$의 상인 열린 부분공간이라 하자.
+구성에 의해 대수적으로 닫힌 체 $k$에 대한 사상
+$\Spec(k) \to X$가 $U_p$를 통해 인수분해될 필요충분조건은
+$U \times_X \Spec(k)$가 $\geq p$개의 점을 갖는 것이다.
+통상과 같이, $U \times_X \Spec(k)$는 스킴으로서
+$\Spec(k)$의 (무한할 수도 있는) 서로소 합임에 유의하자.
+Remark \ref{remark-recall}을 보라. 이로부터 $U_p$들이 보조정리에
+서술된 대로 $X$의 여과를 이룬다는 결론을 얻는다.
+또한 사상 $\Spec(k) \to X$가 $T_p$를 통해 인수분해될
+필요충분조건은 $U \times_X \Spec(k)$가 정확히 $p$개의 점을 갖는
+것이다. 이 경우 $V_p \times_X \Spec(k)$는 정확히 한 점을 갖는다.
+$Z_p = f_p^{-1}(T_p) \subset V_p$로 놓자. 이는 $V_p$의 닫힌
+부분스킴이다. 그러면 $Z_p \to T_p$는 대수공간들의 에탈 사상이며,
+모든 대수적으로 닫힌 체 $k$에 대하여 $k$-값 점들 위에서 전단사를
+유도한다. 이는 확실히 $Z_p \to T_p$가 보편 단사임을 함의하고,
+따라서 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-universally-injective-open}에 의해
+열린 몰입이다. 그러므로 동형사상이며, (1)을 증명했다.
+
+\medskip\noindent
+$x : \Spec(k) \to X$를 $k$가 체인 준콤팩트 사상이라 하자.
+그러면 합성 $\Spec(\overline{k}) \to \Spec(k) \to X$도 준콤팩트이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-quasi-compact}).
+이 경우 스킴 $U \times_X \Spec(\overline{k})$는 준콤팩트이다.
+앞에서 본 대로 이것은 $\Spec(\overline{k})$의 서로소 합이므로
+유한하게 많은 점을 갖는다. 점들의 수가 $p$이면 실제로
+$x \in T_p$이고, 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-filter-reasonable}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 준콤팩트 합리적 대수공간이라 하자.
+정수 $n$과 열린 부분공간들
+$$
+\emptyset = U_{n + 1} \subset
+U_n \subset U_{n - 1} \subset \ldots \subset U_1 = X
+$$
+이 존재하여 다음 성질을 갖는다. $T_p = U_p \setminus U_{p + 1}$로
+놓고 기약 유도 부분공간 구조를 주면, 분리 스킴 $V_p$와 전사 에탈
+사상 $f_p : V_p \to U_p$가 존재하여
+$f_p^{-1}(T_p) \to T_p$가 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 증명은 Lemma \ref{lemma-filter-quasi-compact}의 증명과
+동일하다. $X$가 합리적이므로 존재하는 $U \to X$의 올들의 차수에 대한
+상계를 주는 정수를 $n$이라 하자. Definition
+\ref{definition-very-reasonable}을 보라. 그러면
+$U_{n + 1} = \emptyset$임을 알 수 있고, 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-stratify-reasonable}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 준콤팩트 합리적 대수공간이라 하자.
+정수 $n$과 열린 부분공간들
+$$
+\emptyset = U_{n + 1} \subset
+U_n \subset U_{n - 1} \subset \ldots \subset U_1 = X
+$$
+이 존재하여, 각 $T_p = U_p \setminus U_{p + 1}$에 기약 유도
+부분공간 구조를 주면 스킴이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-filter-reasonable}의 즉각적인 귀결이다.
+\end{proof}
+
+\noindent
+다음 결과는 \cite[Proposition 5.7.8]{GruRay}과 거의 동일하다.
+
+\begin{lemma}
+\label{lemma-filter-quasi-compact-quasi-separated}
+\begin{reference}
+이 결과는 \cite[Proposition 5.7.8]{GruRay}과 거의 동일하다.
+\end{reference}
+$X$를 $\Spec(\mathbf{Z})$ 위의 준콤팩트이고 준분리인
+대수공간이라 하자. 정수 $n$과 열린 부분공간들
+$$
+\emptyset = U_{n + 1} \subset
+U_n \subset U_{n - 1} \subset \ldots \subset U_1 = X
+$$
+이 존재하여 다음 성질을 갖는다. $T_p = U_p \setminus U_{p + 1}$로
+놓고 기약 유도 부분공간 구조를 주면, 준콤팩트 분리 스킴 $V_p$와
+전사 에탈 사상 $f_p : V_p \to U_p$가 존재하여
+$f_p^{-1}(T_p) \to T_p$가 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 증명은 Lemma \ref{lemma-filter-quasi-compact}의 증명과
+동일하다. 준분리 공간은 합리적임에 유의하자. Lemma
+\ref{lemma-bounded-fibres}와 Definition
+\ref{definition-very-reasonable}을 보라.
+따라서 Lemma \ref{lemma-filter-reasonable}에서와 같이
+$U_{n + 1} = \emptyset$임을 얻는다. 논증 끝에 $X$가 준분리이므로
+스킴들 $U \times_X \ldots \times_X U$가 모두 준콤팩트임을
+덧붙인다. 따라서 스킴들 $W_p$는 준콤팩트이다.
+그러므로 대칭군 $S_p$에 의한 몫들 $V_p = W_p/S_p$는 준콤팩트
+스킴이다.
+\end{proof}
+
+\noindent
+다음 보조정리는 아마 다른 곳에 속할 것이다.
+
+\begin{lemma}
+\label{lemma-locally-constructible}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 준분리 대수공간이라 하자.
+$E \subset |X|$를 부분집합이라 하자. 그러면 $E$가 에탈 국소
+구성가능일 필요충분조건은(Properties of Spaces, Definition
+\ref{spaces-properties-definition-locally-constructible})
+$E$가 위상공간 $|X|$의 국소 구성가능 부분집합인 것이다
+(Topology, Definition \ref{topology-definition-constructible}).
+\end{lemma}
+
+\begin{proof}
+$E \subset |X|$가 위상공간 $|X|$의 국소 구성가능 부분집합이라고
+가정하자. $f : U \to X$를 $U$가 스킴인 에탈 사상이라 하자.
+$f^{-1}(E)$가 $U$에서 국소 구성가능임을 보여야 한다.
+이 문제는 $U$와 $X$ 위에서 국소적이므로 $X$가 준콤팩트이고,
+$E \subset |X|$가 구성가능이며, $U$가 아핀이라고 가정할 수 있다.
+이 경우 $U \to X$는 준콤팩트이므로
+$f : |U| \to |X|$는 준콤팩트이다. $|X|$, 각각 $U$의 역콤팩트
+열린집합은 $|X|$, 각각 $U$의 준콤팩트 열린집합과 같은 것임에
+유의하자. Topology, Lemma
+\ref{topology-lemma-topology-quasi-separated-scheme}를 보라.
+따라서 Topology, Lemma
+\ref{topology-lemma-inverse-images-constructibles}에 의해
+$f^{-1}(E)$는 구성가능이다.
+
+\medskip\noindent
+거꾸로 $E$가 에탈 국소 구성가능이라고 가정하자.
+$E$가 위상공간 $|X|$에서 국소 구성가능임을 보이고자 한다.
+이 문제는 $X$ 위에서 국소적이므로 $X$가 준콤팩트인 동시에
+준분리라고 가정할 수 있다. 이 경우 $E$가 $|X|$에서 구성가능임을
+보이겠다. Lemma
+\ref{lemma-filter-quasi-compact-quasi-separated}와 같이 열린 부분공간들
+$$
+\emptyset = U_{n + 1} \subset
+U_n \subset U_{n - 1} \subset \ldots \subset U_1 = X
+$$
+과 전사 에탈 사상들 $f_p : V_p \to U_p$를 택하여, $V_p$가
+준콤팩트 분리 스킴이고
+$f_p^{-1}(T_p) \to T_p = U_p \setminus U_{p + 1}$가 동형사상이
+되게 하자. 정의에 의해 $E$의 역상 $E_p \subset V_p$는 $V_p$에서
+국소 구성가능이다. 그러면 Properties, Lemma
+\ref{properties-lemma-constructible-quasi-compact-quasi-separated}에
+의해 $E_p$는 $V_p$에서 구성가능이다. 따라서 Topology, Lemma
+\ref{topology-lemma-intersect-constructible-with-closed}에 의해
+$E_p \cap |f_p^{-1}(T_p)| = E \cap |T_p|$는 $|T_p|$에서
+구성가능이다($V_p \setminus f_p^{-1}(T_p)$는 준콤팩트 사상
+$f_p$에 의한 준콤팩트 공간 $U_{p + 1}$의 역상이므로 준콤팩트임에
+유의하자). 따라서
+$$
+E = (|T_n| \cap E) \cup (|T_{n - 1}| \cap E) \cup \ldots \cup
+(|T_1| \cap E)
+$$
+는 Topology, Lemma
+\ref{topology-lemma-collate-constructible-from-constructible}에 의해
+구성가능이다. 여기서는 위에서 말한 것으로부터 분명한 사실, 즉
+$|T_p|$가 $|X|$에서 구성가능이라는 사실을 사용한다.
+\end{proof}
+
+
+\section{스킴에 의한 정수적 덮개}
+\label{section-integral-cover}
+
+\noindent
+여기서는 임의의 준콤팩트이고 준분리인 대수공간 $X$에 대하여
+스킴 $Y$와 전사 정수적 사상 $Y \to X$가 존재함을 증명한다.
+대수공간의 극한에 관한 이론을 전개한 뒤에는 유한 사상으로 이를
+할 수 있음을 증명할 것이다. Limits of Spaces, Section
+\ref{spaces-limits-section-finite-cover}를 보라.
+
+\begin{lemma}
+\label{lemma-extend-integral-morphism}
+$S$를 스킴이라 하자. $j : V \to Y$를 $S$ 위의 대수공간들의
+준콤팩트 열린 몰입이라 하고 $\pi : Z \to V$를 정수적 사상이라 하자.
+그러면 정수적 사상 $\nu : Y' \to Y$가 존재하여, $Z$는 $V$ 위에서
+$Y'$ 안의 $V$의 역상과 동형이다.
+\end{lemma}
+
+\begin{proof}
+$j$와 $\pi$가 모두 준콤팩트이고 분리이므로 $j \circ \pi$도 그러하다.
+$\nu : Y' \to Y$를 $Z$ 안에서 $Y$의 정규화라 하자. Morphisms of
+Spaces, Section
+\ref{spaces-morphisms-section-normalization-X-in-Y}를 보라.
+물론 $\nu$는 정수적이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-characterize-normalization}를 보라.
+마지막 명제는 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-properties-normalization} 및
+\ref{spaces-morphisms-lemma-normalization-in-integral}에서
+형식적으로 따라온다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-there-is-a-scheme-integral-over}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 준콤팩트이고 준분리인
+대수공간이라 하자.
+\begin{enumerate}
+\item $Y$가 스킴인 전사 정수적 사상 $Y \to X$가 존재한다.
+\item 전사 에탈 사상 $U \to X$가 주어지면, 모든 $y \in Y$에 대하여
+열린 근방 $V \subset Y$가 존재하여 $V \to X$가 $U$를 통해
+인수분해되도록 $Y \to X$를 택할 수 있다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 $U = X$인 (2)의 특수한 경우이다.
+$U'$이 스킴인 전사 에탈 사상 $U' \to U$를 택하자.
+$U$를 $U'$으로 바꾸어도 됨이 분명하므로 $U$가 스킴이라고 가정할
+수 있다. $X$가 준콤팩트이므로 유한하게 많은 아핀 열린집합
+$U_i \subset U$가 존재하여 $U' = \coprod U_i \to X$가 전사이다.
+$U$를 다시 $U'$으로 바꾸면 $U$가 아핀이라고 가정할 수 있음을 안다.
+$X$가 준분리이고 따라서 합리적이므로 $U \to X$의 기하적 올들의
+차수에 대한 상계를 주는 정수 $d$가 존재한다(Lemma
+\ref{lemma-bounded-fibres}를 보라).
+$X$ 위로 전사 에탈 사상되는 모든 준콤팩트 분리 스킴 $U$에 대하여
+$d$에 관한 귀납법으로 보조정리를 증명하겠다.
+$d = 1$이면 $U = X$이고 $Y = U$로 두어 결과를 얻는다.
+$d > 1$이라고 가정하자.
+
+\medskip\noindent
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-separated-quasi-affine}를 적용하여
+분해
+$$
+\xymatrix{
+U \ar[rr]_j \ar[rd] & & Y \ar[ld]^\pi \\
+& X
+}
+$$
+를 얻는다. 여기서 $\pi$는 정수적이고 $j$는 준콤팩트 열린 몰입이다.
+$j(U)$가 $Y$에서 스킴론적으로 조밀하다고 가정해도 되며 그렇게 하자.
+그러면 $U \times_X Y$는 $U$ 위에서 정수적이므로 준콤팩트 분리
+스킴이고,
+$$
+U \times_X Y = U \amalg W
+$$
+이다. 여기서 첫째 성분은 $U \to U \times_X Y$의 상이다.
+이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-semi-diagonal}에 의해 닫혀 있고,
+$Y$ 위에서 에탈인 대수공간들 사이의 에탈 사상이므로 열려 있다.
+둘째 성분은 그 열린 동시에 닫힌 여집합이다.
+$W$의 상 $V \subset Y$는 $Y \setminus U$를 포함하는 열린
+부분공간이다.
+
+\medskip\noindent
+에탈 사상 $W \to Y$의 기하적 올들은 크기가 $< d$이다.
+$U \subset Y$의 기하적 점들에 대해서는 직접 확인하면 분명하다.
+$|U| \subset |Y|$가 조밀하므로 Lemma
+\ref{lemma-quasi-compact-reasonable-stratification}에 의해
+$Y$의 모든 기하적 점에 대해서도 성립한다(준콤팩트 에탈 사상의
+올의 차수는 특수화 아래에서 증가하지 않는다).
+따라서 $W \to V$에 귀납 가설을 적용하여 $Z$가 스킴인 전사 정수적
+사상 $Z \to V$를 얻으며, 이는 자리스키 국소적으로 $W$를 통해
+인수분해된다. $Z' \to Y$가 정수적이고 $Z \to Z'$가 열린 몰입인
+분해 $Z \to Z' \to Y$를 택하자(Lemma
+\ref{lemma-extend-integral-morphism}).
+$Z'$을 $Z'$ 안의 $Z$의 스킴론적 폐포로 바꾸어 $Z$가 $Z'$에서
+스킴론적으로 조밀하다고 가정할 수 있다. 이렇게 하면
+$Z' \times_Y V = Z$이다. 마지막으로 $T \subset Y$를
+$Y \setminus V$ 위의 유도 닫힌 부분공간 구조라 하자. 사상
+$$
+Z' \amalg T \longrightarrow X
+$$
+을 생각하자. 이는 구성에 의해 전사 정수적 사상이다.
+$T \subset U$이므로 사상 $T \to X$가 $U$를 통해 인수분해됨은
+분명하다. 한편 $z \in Z'$를 한 점이라 하자. $z \not \in Z$이면
+$z$는 $Y \setminus V \subset U$의 한 점으로 사상되며, $z$의
+어떤 근방 위에서 그 사상이 $U$를 통해 인수분해됨을 얻는다.
+$z \in Z$이면 $Z$ 안에서 $z$의 열린 근방, 따라서 $Z'$ 안에서도
+$z$의 열린 근방이 존재하여 $W \subset U \times_X Y$를 통해,
+따라서 $U$를 통해 인수분해된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-there-is-a-scheme-integral-over-refined}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 준콤팩트이고 준분리인
+대수공간으로서 $|X|$가 유한하게 많은 기약성분을 갖는 것이라 하자.
+\begin{enumerate}
+% P08-E289: frozen statement's undefined f is preserved; see ERRATA_CANDIDATES.jsonl.
+\item $Y$가 스킴인 전사 정수적 사상 $Y \to X$가 존재하여,
+$f$는 준콤팩트 조밀 열린집합 $U \subset X$ 위에서 유한 에탈이다.
+\item 전사 에탈 사상 $V \to X$가 주어지면, 모든 $y \in Y$에 대하여
+열린 근방 $W \subset Y$가 존재하여 $W \to X$가 $V$를 통해
+인수분해되도록 $Y \to X$를 택할 수 있다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+증명은 Lemma \ref{lemma-there-is-a-scheme-integral-over}의 증명과
+(대략) 동일하되, 조밀 준콤팩트 열린집합 $U$를 얻기 위한 기술적인
+언급들이 추가된다(그리고 불행히도 $U$를 추적하기 위해 표기가 바뀐다).
+
+\medskip\noindent
+(1)은 $V = X$인 (2)의 특수한 경우이다.
+
+\medskip\noindent
+(2)를 증명하자. $V'$이 스킴인 전사 에탈 사상 $V' \to V$를 택하자.
+$V$를 $V'$으로 바꾸어도 됨이 분명하므로 $V$가 스킴이라고 가정할
+수 있다. $X$가 준콤팩트이므로 유한하게 많은 아핀 열린집합
+$V_i \subset V$가 존재하여 $V' = \coprod V_i \to X$가 전사이다.
+$V$를 다시 $V'$으로 바꾸면 $V$가 아핀이라고 가정할 수 있음을 안다.
+$X$가 준분리이고 따라서 합리적이므로 $V \to X$의 기하적 올들의
+차수에 대한 상계를 주는 정수 $d$가 존재한다(Lemma
+\ref{lemma-bounded-fibres}를 보라).
+
+\medskip\noindent
+$d \geq 1$에 관한 귀납법으로 다음 귀납 가설 $(H_d)$를 증명하겠다.
+\begin{itemize}
+\item 유한하게 많은 기약성분을 갖는 임의의 준콤팩트이고 준분리인
+대수공간 $X$, 임의의 $m \geq 0$, 준콤팩트 분리 스킴들
+$V_j$ ($j = 1, \ldots, m$), 에탈 사상들
+$\varphi_j : V_j \to X$ ($j = 1, \ldots, m$)로서
+$d$가 $\varphi_j : V_j\to X$의 기하적 올들의 차수에 대한 상계를
+주고 $\varphi = \coprod \varphi_j : V = \coprod V_j \to X$가
+전사인 것들에 대하여, 보조정리의 명제는 $\varphi : V \to X$에
+대하여 성립한다.
+\end{itemize}
+$d = 1$이면 각 $\varphi_j$는 열린 몰입이다. 따라서 $X$는 스킴이고,
+% P08-E290: frozen base case Y = V is preserved; see ERRATA_CANDIDATES.jsonl.
+$Y = V$로 놓아 결과를 얻는다.
+$d > 1$이고 $(H_{d - 1})$을 가정하며, $m$과
+$\varphi : V_j \to X$ ($j = 1, \ldots, m$)가 $(H_d)$와 같다고 하자.
+
+\medskip\noindent
+$\eta_1, \ldots, \eta_n \in |X|$를 $|X|$의 기약성분들의 일반점들이라
+하자. Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}
+에 의해 $\eta_1, \ldots, \eta_n \in U$인 열린 부분스킴
+$U \subset X$가 존재한다. $U$를 줄여 $U$가 아핀이라고 가정할 수 있고,
+Morphisms, Lemma \ref{morphisms-lemma-generically-finite}에 의해
+각 $\varphi_j : V_j \to X$가 $U$ 위에서 유한 에탈이라고 가정할 수
+있다. 물론 $U$는 $X$의 준콤팩트 조밀 부분집합이고
+$\varphi_j^{-1}(U)$는 $V_j$에서 조밀하다. 특히 각 $V_j$는
+유한하게 많은 기약성분을 갖는다.
+
+\medskip\noindent
+$j \in \{1, \ldots, m\}$를 고정하자.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-separated-quasi-affine}에서와 같이
+$Y_j$를 $V_j$ 안에서 $X$의 정규화라 하자. 분해
+$$
+\xymatrix{
+V_j \ar[rr] \ar[rd]_{\varphi_j} & & Y_j \ar[ld]^{\pi_j} \\
+& X
+}
+$$
+를 얻으며, 여기서 $\pi_j$는 정수적이고 $V_j \to Y_j$는
+준콤팩트 열린 몰입이다. $Y_j$가 $V_j$ 안에서 $X$의 정규화이므로
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-properties-normalization} 및
+\ref{spaces-morphisms-lemma-normalization-in-integral}에 의해
+$\varphi_j^{-1}(U) \to \pi_j^{-1}(U)$가 동형사상임을 안다.
+따라서 $\pi_j$는 $U$ 위에서 유한 에탈이다.
+$Y_j$가 $V_j$ 안에서 $X$의 정규화이므로 $V_j$는 $Y_j$에서
+스킴론적으로 조밀함에 유의하자(이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-characterize-normalization}의 상대 정규화
+특징화에서 따라온다). $V_j$가 준콤팩트이므로
+$|V_j| \subset |Y_j|$가 조밀하다. Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-scheme-theoretic-closure}, 특히
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-immersion}을 보라.
+이로부터 $|Y_j|$가 유한하게 많은 기약성분을 가짐을 얻는다.
+% P08-E291: frozen parenthesis says finite rather than integral over V_j; see ERRATA_CANDIDATES.jsonl.
+그러면 $V_j$ 위에서 유한이므로
+$V_j \times_X Y_j$는 준콤팩트 분리 스킴이고,
+$$
+V_j \times_X Y_j = V_j \amalg W_j
+$$
+이다. 여기서 첫째 성분은 $V_j \to V_j \times_X Y_j$의 상이다.
+이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-semi-diagonal}에 의해 닫혀 있고,
+% P08-E292: frozen base Y is preserved although this construction is over Y_j; see ERRATA_CANDIDATES.jsonl.
+$Y$ 위에서 에탈인 대수공간들 사이의 에탈 사상이므로 열려 있다.
+둘째 성분은 그 열린 동시에 닫힌 여집합이다.
+
+\medskip\noindent
+에탈 사상 $W_j \to Y_j$의 기하적 올들은 크기가 $< d$이다.
+$V_j \subset Y_j$의 기하적 점들에 대해서는 직접 확인하면 분명하다.
+$|V_j| \subset |Y_j|$가 조밀하므로 Lemma
+\ref{lemma-quasi-compact-reasonable-stratification}에 의해
+$Y_j$의 모든 기하적 점에 대해서도 성립한다(준콤팩트 에탈 사상의
+올의 차수는 특수화 아래에서 증가하지 않는다).
+% P08-E294: frozen induction invocation lacks the required individual surjectivity; see ERRATA_CANDIDATES.jsonl.
+$V_j \amalg W_j \to Y_j$에 $(H_{d - 1})$을 적용하여 $Y_j'$가
+스킴인 전사 정수적 사상 $Y_j' \to Y_j$를 얻는다. 이는 자리스키
+국소적으로 $V_j \amalg W_j$를 통해 인수분해되고,
+준콤팩트 조밀 열린집합 $U_j \subset Y_j$ 위에서 유한 에탈이다.
+$U$를 줄여 $\pi_j^{-1}(U) \subset U_j$라고 가정해도 되며 그렇게
+하자(모든 $j$에 대해 같은 $U$를 택할 수 있다. 몇몇 세부사항은
+생략한다).
+
+\medskip\noindent
+다음이 우리의 문제에 대한 해라고 주장한다.
+$$
+Y = \coprod\nolimits_{j = 1, \ldots, m} Y'_j \longrightarrow X
+$$
+첫째, 각 성분 위에서 정수적 사상들의 합성
+% P08-E293: frozen intermediate Y is preserved; see ERRATA_CANDIDATES.jsonl.
+$Y'_j \to Y \to X$를 가지므로 이 사상은 정수적이다(Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-composition-integral}).
+둘째, 위에서 각 $Y'_j \to Y_j$가 자리스키 국소적으로
+$V_j \amalg W_j = V_j \times_X Y_j$를 통해 인수분해됨을 보았으므로,
+이 사상은 자리스키 국소적으로 $V = \coprod V_j$를 통해 인수분해된다.
+마지막으로 $Y'_j \to Y_j$와 $Y_j \to X$가 모두 $U$ 위에서
+유한 에탈이므로 그 합성도 그러하다. 이로써 증명이 끝난다.
+\end{proof}
+
+
+\section{스킴 자취}
+\label{section-schematic}
+
+\noindent
+이 절에서는 양호한 대수공간이 스킴인 조밀 열린 부분공간을 가짐을
+증명한다. 먼저 합리적인 대수공간에 대하여 이를 증명한다.
+
+\begin{proposition}
+\label{proposition-reasonable-open-dense-scheme}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$X$가 합리적이면, 스킴인 $X$의 조밀 열린 부분공간이 존재한다.
+\end{proposition}
+
+\begin{proof}
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subscheme}에 의해 문제는 $X$ 위에서
+국소적이다. 따라서 아핀 스킴 $U$와 전사 에탈 사상 $U \to X$가
+존재한다고 가정할 수 있다(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-cover-by-union-affines}).
+$X$가 합리적이므로 존재하는 $U \to X$의 올들의 차수에 대한 상계를
+주는 정수를 $n$이라 하자. Definition
+\ref{definition-very-reasonable}을 보라. 다음 조건들이 성립할 때
+스킴 자취가 $X$에서 조밀하다는 것을 $n$에 관한 귀납법으로 보이겠다.
+\begin{enumerate}
+\item $U \to X$는 올들의 차수가 $\leq n$인 전사 에탈 사상이다.
+\item $U$는 어떤 아핀 스킴의 국소 닫힌 부분스킴과 동형이다.
+\end{enumerate}
+
+\medskip\noindent
+$X_n \subset X$를 사상 $U \to X$를 사용하여 Lemma
+\ref{lemma-quasi-compact-reasonable-stratification}에서 구성한
+닫힌 부분공간 $Z_{n - 1} \subset X$의 여집합인 열린 부분공간이라
+하자. $U_n \subset U$를 $X_n$의 역상이라 하자. 그러면
+$U_n \to X_n$은 차수 $n$인 유한 국소 자유 사상이다.
+따라서 Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-finite-flat-equivalence-global}에
+의해 $X_n$은 스킴이다(그리고 $U_n$의 점들의 모든 유한집합은
+$U_n$의 어떤 아핀 열린집합에 들어간다. Properties, Lemma
+\ref{properties-lemma-ample-finite-set-in-affine}를 보라).
+
+\medskip\noindent
+$|X'|$이 $|X|$ 안에서 $|Z_{n - 1}|$의 내부가 되게 하는 열린
+부분공간을 $X' \subset X$라 하자(Topology, Definition
+\ref{topology-definition-nowhere-dense}을 보라).
+$U' \subset U$를 그 역상이라 하자. 그러면 $U' \to X'$은 전사
+에탈이고 그 올들의 차수는 $n - 1$로 유계이다.
+귀납법에 의해 $X'$의 스킴 자취는 열린 조밀 부분집합
+$X'' \subset X'$이다. 초등적인 위상수학으로부터
+$X'' \cup X_n \subset X$가 열리고 조밀함을 알 수 있고, 증명이 끝난다.
+\end{proof}
+
+\begin{theorem}[David Rydh]
+\label{theorem-decent-open-dense-scheme}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$X$가 양호하면, 스킴인 $X$의 조밀 열린 부분공간이 존재한다.
+\end{theorem}
+
+\begin{proof}
+정리가 거짓인 양호한 대수공간 $X$가 있다고 가정하자.
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-subscheme}에
+의해 스킴인 가장 큰 열린 부분공간 $X' \subset X$가 존재한다.
+$X'$은 $X$에서 조밀하지 않으므로
+$|X''| \cap |X'| = \emptyset$인 열린 부분공간 $X'' \subset X$가
+존재한다. $X$를 $X''$으로 바꾸면, 스킴인 열린 부분공간을
+{\it 하나도} 포함하지 않는 공집합이 아닌 양호한 대수공간 $X$를 얻는다.
+
+\medskip\noindent
+공집합이 아닌 아핀 스킴 $U$와 에탈 사상 $U \to X$를 택하자.
+% P08-E295: frozen source says open subscheme where only open subspace is known; see ERRATA_CANDIDATES.jsonl.
+$X$를 $|U| \to |X|$의 상에 대응하는 열린 부분공간으로 바꾸어도
+되며 그렇게 하자. 사상 $U \to X$에 대하여 Lemma
+\ref{lemma-stratify-flat-fp-lqf}에서 구성한 열린 부분공간들의 열
+% P08-E296: frozen displays omit relation signs before the ellipses; see ERRATA_CANDIDATES.jsonl.
+$$
+X = X_0 \supset X_1 \supset X_2 \ldots
+$$
+을 생각하자. $U \to X$가 전사이므로 $X_0 = X_1$임에 유의하자.
+$U = U_0 = U_1 \supset U_2 \ldots$를 $U$의 유도 열린
+부분스킴들의 열이라 하자.
+
+\medskip\noindent
+공집합이 아닌 아핀 열린집합 $V_1 \subset U_1$을 택하자
+(예를 들어 $V_1 = U_1$로 둔다). 귀납적으로
+$V_n \subset U_n$인 공집합이 아닌 아핀 열린집합들의 열
+$V_1 \supset V_2 \supset \ldots$을 구성하겠다.
+실제로 $V_1, \ldots, V_{n - 1}$을 구성한 뒤에는
+$V_{n - 1} \cap U_n = \emptyset$인 경우를 제외하면 언제나
+$V_n$을 택할 수 있다. 그런데
+$V_{n - 1} \cap U_n = \emptyset$이면
+$|X'| = \Im(|V_{n - 1}| \to |X|)$인 열린 부분공간
+$X' \subset X$는 $|X| \setminus |X_n|$에 포함된다.
+따라서 $V_{n - 1} \to X'$은 올들의 차수가 $n - 1$로 유계인 에탈
+사상이다. 달리 말하면 $X'$은 정의에 의해 합리적이므로 $X'$은
+Proposition \ref{proposition-reasonable-open-dense-scheme}에 의해 공집합이 아닌
+열린 부분스킴을 포함한다. 이는 모순이고, 따라서 $V_n$을 택할 수 있다.
+
+\medskip\noindent
+Limits, Lemma \ref{limits-lemma-limit-nonempty}에 의해 극한
+$V_\infty = \lim V_n$은 공집합이 아닌 스킴이다.
+사상 $\Spec(k) \to V_\infty$를 하나 택하자.
+합성 $\Spec(k) \to V_\infty \to U \to X$의 상은 구성에 의해
+모든 $X_d$에 포함된다. 달리 말하면
+% P08-E297: frozen “fibred” typo is rendered as the intended fibre; see ERRATA_CANDIDATES.jsonl.
+올 $U \times_X \Spec(k)$는 차수가 무한이고, 이는 양호한 공간의
+정의에 모순이다. 이 모순으로 정리의 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-when-quotient-scheme-at-point}
+$S$를 스킴이라 하고 $X \to Y$를 $S$ 위의 대수공간들의 전사
+유한 국소 자유 사상이라 하자. $y \in |Y|$에 대하여 다음은 동치이다.
+\begin{enumerate}
+\item $y$는 $Y$의 스킴 자취에 속한다.
+\item $y$의 역상을 포함하는 아핀 열린집합 $U \subset X$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+% P08-E298: frozen source types y in Y rather than |Y|; see ERRATA_CANDIDATES.jsonl.
+$y \in Y$가 스킴 자취에 속하면 아핀 열린 근방 $V \subset Y$를
+가지며, $X$ 안의 $V$의 역상 $U$는 $V$ 위에서 유한인 열린집합이므로
+아핀이다. 따라서 (1)은 (2)를 함의한다.
+
+\medskip\noindent
+거꾸로 (2)와 같은 $U \subset X$가 주어졌다고 가정하자.
+$R = X \times_Y X$로 놓고 사영들을 $s, t : R \to X$로 나타내자.
+% P08-E299: frozen unparenthesized set difference is preserved; see ERRATA_CANDIDATES.jsonl.
+$Z = R \setminus s^{-1}(U) \cap t^{-1}(U)$로 놓자.
+이는 $R$의 닫힌 부분집합이다. 상 $t(Z)$는 $X$의
+닫힌 부분집합이며, 대략 $X \setminus U$의 한 점과 $R$-동치인
+$X$의 점들의 집합으로 설명할 수 있다. 따라서
+$U' = X \setminus t(Z)$는 $U$에 포함되고 $X \to Y$의 $y$ 위의
+올을 포함하는 $X$의 $R$-불변 열린 부분공간이다.
+$X \to Y$가 열린 사상이므로(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open}), $U'$의 상은 열린 부분공간
+$V' \subset Y$이다. $U'$이 $R$-불변이고
+$R = X \times_Y X$이므로 $U'$은 $V'$의 역상이다(Properties of
+Spaces, Lemma \ref{spaces-properties-lemma-points-cartesian}를
+사용한다). $Y$를 $V'$으로, $X$를 $U'$으로 바꾸면
+$X$가 어떤 아핀 스킴의 열린 부분스킴과 동형인 스킴이라고 가정할
+수 있다.
+
+\medskip\noindent
+$X$가 어떤 아핀 스킴의 열린 부분스킴과 동형인 스킴이라고 가정하자.
+이 경우 fppf 몫층 $X/R$은 스킴이다. Properties of Spaces,
+Proposition
+\ref{spaces-properties-proposition-finite-flat-equivalence-global}을
+보라. $Y$가 fppf 위상의 층이므로 $X \to Y$를 통해 인수분해하는
+표준 사상 $X/R \to Y$를 얻는다. $X \to Y$는 전사 유한 국소 자유
+사상이므로 층들의 사상으로도 전사이다(Spaces, Lemma
+\ref{spaces-lemma-surjective-flat-locally-finite-presentation}).
+따라서 $X/R \to Y$는 층들의 사상으로 전사이다.
+한편 층으로서 $R = X \times_Y X$이므로 $X/R \to Y$는 층들의
+사상으로 단사이다. 그러므로 $X/R \to Y$는 동형사상이고,
+$Y$가 표현가능임을 알 수 있다.
+\end{proof}
+
+\noindent
+이 시점에서 다음 보조정리를 증명하는 여러 가지 서로 다른 방법을
+갖고 있다.
+
+\begin{lemma}
+\label{lemma-finite-etale-cover-dense-open-scheme}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$U$가 스킴인 유한 에탈 전사 사상 $U \to X$가 존재하면,
+스킴인 $X$의 조밀 열린 부분공간이 존재한다.
+\end{lemma}
+
+\begin{proof}[첫째 증명]
+사상 $U \to X$는 유한 국소 자유이다. 따라서 $X$를 열린 동시에
+닫힌 부분공간들 $X_d \subset X$로 분해할 수 있어서
+$U \times_X X_d \to X_d$는 차수 $d$인 유한 국소 자유 사상이다.
+그러므로 $U \to X$가 차수 $d$인 유한 국소 자유 사상이라고
+가정할 수 있다. 이 경우 $U_i \subset U$ ($i \in I$)를 아핀
+열린집합들의 집합이라 하자. 각 $i$에 대하여 사상 $U_i \to X$는
+에탈이고 보편적으로 유계인 올들을 갖는다(구체적으로 $d$로 유계이다).
+달리 말하면 $X$는 합리적이고, Proposition
+\ref{proposition-reasonable-open-dense-scheme}에서 결과가 따라온다.
+\end{proof}
+
+\begin{proof}[둘째 증명]
+문제는 $X$ 위에서 국소적이므로(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subscheme}), $X$가 준콤팩트라고
+가정할 수 있다. 그러면 $U$도 준콤팩트이다.
+Properties, Lemma
+\ref{properties-lemma-quasi-compact-dense-open-separated}에 의해
+분리인 조밀 열린 부분스킴 $W \subset U$가 존재한다.
+$Z = U \setminus W$로 놓자.
+$R = U \times_X U$라 하고 $s, t : R \to U$를 사영들이라 하자.
+그러면 $t^{-1}(Z)$는 $R$에서 어디에도 조밀하지 않으며(Topology,
+Lemma \ref{topology-lemma-open-inverse-image-closed-nowhere-dense}),
+따라서 $\Delta = s(t^{-1}(Z))$는 $U$의 $R$-불변 닫힌
+어디에도 조밀하지 않은 부분집합이다(Morphisms, Lemma
+\ref{morphisms-lemma-image-nowhere-dense-finite}).
+$u \in U \setminus \Delta$를 한 기약성분의 일반점이라 하자.
+이 점들은 $U \setminus \Delta$에서 조밀하고 $\Delta$는 어디에도
+조밀하지 않으므로, $u$의 상 $x \in X$가 $X$의 스킴 자취에 속함을
+보이는 것으로 충분하다.
+$t(s^{-1}(\{u\})) \subset W$는 $W$의 기약성분들의 일반점들의
+유한집합임에 유의하자(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points}와 비교하라).
+Properties, Lemma \ref{properties-lemma-maximal-points-affine}에 의해
+$t(s^{-1}(\{u\})) \subset V$인 아핀 열린집합 $V \subset W$를
+찾을 수 있다. $t(s^{-1}(\{u\}))$는 $|U| \to |X|$의 $x$ 위의
+올이므로 Lemma \ref{lemma-when-quotient-scheme-at-point}에서
+결론이 따라온다.
+\end{proof}
+
+\begin{proof}[셋째 증명]
+(이 증명은 본질적으로 둘째 증명과 같지만 더 적은 참고문헌을 사용한다.)
+$X$를 대수공간, $U$를 스킴이라 하고 $U \to X$를 유한 에탈 전사
+사상이라 하자. $R = U \times_X U$로 쓰고 통상과 같이 사영들을
+$s, t : R \to U$로 나타내자. $s, t$는 전사이고 유한이며
+에탈임에 유의하자.
+주장: $U$의 $R$-불변 아핀 열린집합들의 합집합은 $U$에서 위상적으로
+조밀하다.
+
+\medskip\noindent
+주장을 증명하자. $W \subset U$를 아핀 열린집합이라 하자.
+$W' = t(s^{-1}(W)) \subset U$로 놓자. $s^{-1}(W)$가 아핀이고
+따라서 준콤팩트이므로 $W' \subset U$는 준콤팩트 열린집합이다.
+Properties, Lemma
+\ref{properties-lemma-quasi-compact-dense-open-separated}에 의해
+분리 스킴인 조밀 열린집합 $W'' \subset W'$가 존재한다.
+% P08-E300: frozen source uses W'' as the ambient of its disjoint complement; see ERRATA_CANDIDATES.jsonl.
+$\Delta' = W' \setminus W''$로 놓자. 이는 $W''$의 어디에도 조밀하지
+않은 닫힌 부분집합이다. 제한
+$t|_{s^{-1}(W)} : s^{-1}(W) \to W'$는 에탈이므로 열린 사상이다.
+따라서 역상
+$(t|_{s^{-1}(W)})^{-1}(\Delta') \subset s^{-1}(W)$는 어디에도
+조밀하지 않은 닫힌 부분집합이다(Topology, Lemma
+\ref{topology-lemma-open-inverse-image-closed-nowhere-dense}을 보라).
+그러므로 Morphisms, Lemma
+\ref{morphisms-lemma-image-nowhere-dense-finite}에 의해
+$$
+\Delta = s\left((t|_{s^{-1}(W)})^{-1}(\Delta')\right)
+$$
+는 $W$의 어디에도 조밀하지 않은 닫힌 부분집합이다.
+$\eta \not \in \Delta$인 임의의 점 $\eta \in W$를 $W$의
+기약성분의 일반점으로 택하자(따라서 $U$의 기약성분의 일반점이기도
+하다). 위의 선택들에 의해 유한집합
+$t(s^{-1}(\{\eta\})) = \{\eta_1, \ldots, \eta_n\}$은 분리 스킴
+$W''$에 포함된다.
+% P08-E301: frozen source's duplicated verbs are rendered grammatically; see ERRATA_CANDIDATES.jsonl.
+$s$의 올들은 유한 이산공간이고, 일반화는 에탈 사상 $t$를 따라
+올라감에 유의하자. Morphisms, Lemmas
+\ref{morphisms-lemma-etale-flat} 및
+\ref{morphisms-lemma-generalizations-lift-flat}을 보라.
+이로부터 각 $\eta_i$가 $W''$의 한 기약성분의 일반점임을 알 수 있다.
+따라서 Properties, Lemma
+\ref{properties-lemma-maximal-points-affine}에 의해
+$\{\eta_1, \ldots, \eta_n\} \subset V$인 아핀 열린집합
+$V \subset W''$를 찾을 수 있다. Groupoids, Lemma
+\ref{groupoids-lemma-find-invariant-affine}에 의해 이는 $\eta$가
+$U$의 어떤 $R$-불변 아핀 열린 부분스킴에 포함됨을 함의한다.
+$W$는 $U$의 임의의 아핀 열린집합이었고
+$W \setminus \Delta$의 기약성분들의 일반점들의 집합은 $W$에서
+조밀하므로 주장이 따라온다.
+
+\medskip\noindent
+주장을 사용하여 증명을 마칠 수 있다. 실제로 $W \subset U$가
+$R$-불변 아핀 열린집합이면 $R$을 $W$로 제한한 $R_W$는
+$R_W = s^{-1}(W) = t^{-1}(W)$이다(Groupoids, Definition
+\ref{groupoids-definition-invariant-open}과 그 뒤의 논의를 보라).
+특히 사상들 $R_W \to W$도 유한 에탈이다. 특히 이로부터
+$R_W$가 아핀임을 얻는다. 따라서 Groupoids, Proposition
+\ref{groupoids-proposition-finite-flat-equivalence}에 의해
+$W/R_W$는 스킴이다. 한편 Spaces, Lemma
+\ref{spaces-lemma-finding-opens}에 의해 $W/R_W$는 $X$의 열린
+부분공간이다. 그러므로
+% P08-E302 and P08-E303: frozen English grammar is rendered by the intended pointwise and conjunctive statements; see ERRATA_CANDIDATES.jsonl.
+각각 $U$의 어떤 $R$-불변 아핀 열린집합에 포함되는 점들의 조밀한
+모음이 존재한다는 사실은 분명히 $X$의 스킴 자취(Properties of
+Spaces, Lemma \ref{spaces-properties-lemma-subscheme}를 보라)가
+$X$에서 열리고 조밀함을 함의한다.
+\end{proof}
+
+\section{잉여체와 Hensel 국소환}
+\label{section-residue-fields-henselian-local-rings}
+
+\noindent
+양호한 대수공간에 대해서는 한 점에서의 잉여체와 Hensel 국소환을
+정의할 수 있다. 예를 들어 다음 보조정리는 양호한 공간 위의 한 점의
+잉여체가 잘 정의됨을 말해 준다.
+
+\begin{lemma}
+\label{lemma-decent-points-monomorphism}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자. 사상
+$$
+\{\Spec(k) \to X \text{가 단사 사상이며 }k\text{가 체인 경우}\}
+\longrightarrow
+|X|
+$$
+을 생각하자. 이 사상은 항상 단사이다. $X$가 양호하면 이 사상은
+전단사이다.
+\end{lemma}
+
+\begin{proof}
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-monomorphism}에서 이 사상이
+일반적으로 단사임을 보았다. Lemma \ref{lemma-bounded-fibres}에 의해
+$X$가 양호하면 이는 전사이다(실제로 이것이 양호성의 정의의 일부라고
+말할 수도 있다).
+\end{proof}
+
+\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자. 점
+$x \in |X|$가 단사 사상 $\Spec(k) \to X$로 표현될 수 있으면 체 $k$는
+유일한 동형까지 유일하다. 양호한 대수공간의 경우 Lemma
+\ref{lemma-decent-points-monomorphism}에 의해 모든 점에 그러한 단사
+사상이 존재하므로 다음 정의가 의미를 갖는다.
+
+\begin{definition}
+\label{definition-residue-field}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x \in |X|$라 하자. {it $x$에서 $X$의 잉여체}는 $x$를 표현하는
+단사 사상 $\Spec(\kappa(x)) \to X$를 갖춘 유일한 체 $\kappa(x)$이다.
+\end{definition}
+
+\noindent
+$S$를 스킴이라 하고 $f : X \to Y$를 $S$ 위의 양호한 대수공간들의
+사상이라 하자. $x \in |X|$를 한 점이라 하고 $y = f(x) \in |Y|$로
+놓자. 그러면 합성 $\Spec(\kappa(x)) \to Y$는 $y$를 정의하는 동치류에
+속하므로 $\Spec(\kappa(y)) \to Y$를 통하여 분해된다. 다시 말해 다음
+가환 도식을 얻는다.
+$$
+\xymatrix{
+\Spec(\kappa(x)) \ar[r]_-x \ar[d] & X \ar[d]^f \\
+\Spec(\kappa(y)) \ar[r]^-y & Y
+}
+$$
+왼쪽 수직 사상은 체의 준동형 $\kappa(y) \to \kappa(x)$에 대응한다.
+이를 흔히 단순히 $f$가 유도하는 준동형이라고 부른다.
+
+\begin{lemma}
+\label{lemma-identifies-residue-fields}
+$S$를 스킴이라 하고 $f : X \to Y$를 $S$ 위의 양호한 대수공간들의
+사상이라 하자. $x \in |X|$를 한 점이라 하고 그 상을
+$y = f(x) \in |Y|$라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $f$는 동형 $\kappa(y) \to \kappa(x)$를 유도한다.
+\item 유도된 사상 $\Spec(\kappa(x)) \to Y$는 단사 사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의에서 바로 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리는 양호한 대수공간의 한 점에서 Hensel 국소환이 잘
+정의됨을 말해 준다.
+
+\begin{lemma}
+\label{lemma-decent-space-elementary-etale-neighbourhood}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+모든 점 $x \in |X|$에 대하여 에탈 사상
+$$
+(U, u) \longrightarrow (X, x)
+$$
+이 존재한다. 여기서 $U$는 아핀 스킴이고, $u$는 $x$ 위에 놓인
+$U$의 유일한 점이며, 유도된 준동형 $\kappa(x) \to \kappa(u)$는
+동형이다.
+\end{lemma}
+
+\begin{proof}
+$x$를 포함하는 준콤팩트 열린집합으로 $X$를 바꿈으로써 $X$가
+준콤팩트라고 가정할 수 있다. $x$는 어떤 체의 스펙트럼으로부터 오는
+준콤팩트 (단사) 사상으로 표현될 수 있음을 상기하라(양호한 공간의
+정의에 의한다).
+% P08-E305: frozen source omits “of” in “from the spectrum a field”; intended grammar translated; see ERRATA_CANDIDATES.jsonl.
+따라서 보조정리는 Lemma \ref{lemma-filter-quasi-compact}에서 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-elemenary-etale-neighbourhood}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$x \in X$를 한 점이라 하자.
+% P08-E304: frozen definition types the point as x in X rather than x in |X|; formula preserved; see ERRATA_CANDIDATES.jsonl.
+{it 초등 에탈 근방}은 에탈 사상 $(U, u) \to (X, x)$로서 $U$가
+스킴이고, $u \in U$가 $x$로 가는 점이며, 사상
+$u = \Spec(\kappa(u)) \to X$가 단사 사상인 것이다.
+{it 초등 에탈 근방들의 사상} $(U, u) \to (U', u')$은 $u$를 $u'$로
+보내는 $X$ 위의 사상 $U \to U'$로 정의한다.
+\end{definition}
+
+\noindent
+$X$가 양호하지 않으면 초등 에탈 근방들의 범주는 공집합일 수 있다.
+
+\begin{lemma}
+\label{lemma-elementary-etale-neighbourhoods}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x$를 $X$의 한 점이라 하자. $(X, x)$의 초등 에탈 근방들의 범주는
+공여과이다(Categories, Definition
+\ref{categories-definition-codirected}을 보라).
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-decent-space-elementary-etale-neighbourhood}에 의해 이
+범주는 공집합이 아니다. 두 초등 에탈 근방
+$(U_i, u_i) \to (X, x)$가 주어졌다고 하자. 그러면
+$U = U_1 \times_X U_2$를 생각하자. 사상들
+$\Spec(\kappa(u_i)) \to X$, $i = 1, 2$가 모두 $x$의 동치류에 속하는
+단사 사상이므로(Lemma \ref{lemma-identifies-residue-fields}),
+% P08-E306: frozen source places a detached comma after the closing parenthesis; intended punctuation translated; see ERRATA_CANDIDATES.jsonl.
+$$
+u = \Spec(\kappa(u_1)) \times_X \Spec(\kappa(u_2))
+$$
+는 어떤 체 $\kappa(u)$의 스펙트럼이고 유도된 사상들
+$\kappa(u_i) \to \kappa(u)$는 동형임을 알 수 있다. 그러면
+$u \to U$는 $U$의 한 점이고, $(U, u) \to (X, x)$는
+$(U_i, u_i)$를 지배하는 초등 에탈 근방이다.
+두 초등 에탈 근방 사이의 두 사상이
+$a, b : (U_1, u_1) \to (U_2, u_2)$라면 스킴
+$$
+U = U_1 \times_{(a, b), (U_2 \times_X U_2), \Delta} U_2
+$$
+를 생각한다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-permanence}를 사용하면 $U \to X$가
+에탈임을 알 수 있다. 더욱이 앞에서와 정확히 같은 방식으로 $U$가
+$(U, u) \to (X, x)$가 초등 에탈 근방이 되게 하는 점 $u$를 가짐을
+알 수 있다. 마지막으로 $U \to U_1$은 $a$와 $b$를 동일화하므로
+증명이 끝난다.
+\end{proof}
+
+\begin{definition}
+\label{definition-henselian-local-ring}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x \in |X|$라 하자. {it $x$에서 $X$의 Hensel 국소환}은
+% P08-E308: frozen source has a stray comma between the definition's subject and “is”; intended punctuation translated; see ERRATA_CANDIDATES.jsonl.
+$$
+\mathcal{O}_{X, x}^h = \colim \Gamma(U, \mathcal{O}_U)
+$$
+이다. 여기서 직접극한은 초등 에탈 근방
+$(U, u) \to (X, x)$들 위에서 취한다.
+\end{definition}
+
+\noindent
+다음은 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-describe-etale-local-ring}에 대응하는
+결과이다.
+
+\begin{lemma}
+\label{lemma-describe-henselian-local-ring}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x \in |X|$라 하자. $(U, u) \to (X, x)$를 초등 에탈 근방이라 하자.
+그러면
+$$
+\mathcal{O}_{X, x}^h = \mathcal{O}_{U, u}^h
+$$
+이다. 말로 하면, $x$에서 $X$의 Hensel 국소환은 $u$에서 $U$의
+국소환 $\mathcal{O}_{U, u}$의 Hensel화 $\mathcal{O}_{U, u}^h$와 같다.
+\end{lemma}
+
+\begin{proof}
+$(X, x)$의 초등 에탈 근방들의 범주는 공여과이므로(Lemma
+\ref{lemma-elementary-etale-neighbourhoods}), $(U, u)$의 초등 에탈
+근방들의 범주가 $(X, x)$의 초등 에탈 근방들의 범주 안에서
+시작임을 알 수 있다.
+% P08-E307: frozen proof twice uses singular “neighbourhood” for a category of neighbourhoods; intended plurals translated; see ERRATA_CANDIDATES.jsonl.
+그러면 등식은 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-describe-henselization}과 Categories, Lemma
+\ref{categories-lemma-cofinal}에서 따른다(Hensel 국소환을 정의하는
+직접극한은 초등 에탈 근방들의 범주의 반대 범주 위에서 취하므로
+시작성이 공종성으로 바뀐다).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-henselian-local-ring-strict}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$\overline{x}$를 $x \in |X|$ 위에 놓인 $X$의 기하점이라 하자.
+$\overline{x}$에서 $X$의 에탈 국소환 $\mathcal{O}_{X, \overline{x}}$
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-etale-local-rings})은 $x$에서 $X$의
+Hensel 국소환 $\mathcal{O}_{X, x}^h$의 엄밀 Hensel화이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-describe-henselian-local-ring}, Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-describe-etale-local-ring}, 그리고
+국소환 $(R, \mathfrak m, \kappa)$와 $\kappa$의 주어진 분리 대수적 폐포
+$\kappa^{sep}$에 대하여 $(R^h)^{sh} = R^{sh}$라는 사실에서 따른다.
+이 등식은 Algebra, Lemma \ref{algebra-lemma-uniqueness-henselian}에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-residue-field-henselian-local-ring}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x \in |X|$라 하자. $x$에서 $X$의 Hensel 국소환(Definition
+\ref{definition-henselian-local-ring})의 잉여체는 $x$에서 $X$의
+잉여체(Definition \ref{definition-residue-field})이다.
+\end{lemma}
+
+\begin{proof}
+초등 에탈 근방 $(U, u) \to (X, x)$를 택하자. 그러면
+$\kappa(u) = \kappa(x)$이고
+$\mathcal{O}_{X, x}^h = \mathcal{O}_{U, u}^h$이다(Lemma
+\ref{lemma-describe-henselian-local-ring}). Algebra, Lemma
+\ref{algebra-lemma-henselization}에 의해 $\mathcal{O}_{U, u}^h$의
+잉여체는 $\kappa(u)$이다(이 보조정리의 출력이 국소환의 Hensel화의
+구성/정의이다. Algebra, Definition
+\ref{algebra-definition-henselization}을 보라).
+\end{proof}
+
+\begin{remark}
+\label{remark-functoriality-henselian-local-ring}
+$S$를 스킴이라 하고 $f : X \to Y$를 $S$ 위의 양호한 대수공간들의
+사상이라 하자. $x \in |X|$라 하고 그 상을 $y \in |Y|$라 하자.
+초등 에탈 근방 $(V, v) \to (Y, y)$를 택하자(Lemma
+\ref{lemma-decent-space-elementary-etale-neighbourhood}에 의해 가능하다).
+그러면 $V \times_Y X$는 $X$ 위에서 에탈인 대수공간이고, $X$에서
+$x$로 가고 $V$에서 $v$로 가는 유일한 점 $x'$를 갖는다.
+(세부사항은 생략한다. 모든 점이 체들의 스펙트럼들로부터 오는 단사
+사상들로 표현될 수 있다는 사실을 사용하라.) 초등 에탈 근방
+$(U, u) \to (V \times_Y X, x')$를 택하자. 그러면 다음 가환 도식을
+얻는다.
+% P08-E310: frozen remark uses compatible geometric points \bar{x}, \bar{y} without introducing them; formulas preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{X, \overline{x}}) \ar[r] \ar[d] &
+\Spec(\mathcal{O}_{X, x}^h) \ar[r] \ar[d] &
+\Spec(\mathcal{O}_{U, u}) \ar[r] \ar[d] &
+U \ar[r] \ar[d] &
+X \ar[d] \\
+\Spec(\mathcal{O}_{Y, \overline{y}}) \ar[r] &
+\Spec(\mathcal{O}_{Y, y}^h) \ar[r] &
+\Spec(\mathcal{O}_{V, v}) \ar[r] &
+V \ar[r] &
+Y
+}
+$$
+이는 다음 식별들에서 나온다.
+$\mathcal{O}_{X, \overline{x}} = \mathcal{O}_{U, u}^{sh}$,
+$\mathcal{O}_{X, x}^h = \mathcal{O}_{U, u}^h$,
+$\mathcal{O}_{Y, \overline{y}} = \mathcal{O}_{V, v}^{sh}$,
+$\mathcal{O}_{Y, y}^h = \mathcal{O}_{V, v}^h$.
+Lemma \ref{lemma-describe-henselian-local-ring}, Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-describe-etale-local-ring}, 그리고
+Algebra, Sections \ref{algebra-section-ind-etale} and
+\ref{algebra-section-henselization}에서 논의한 (엄밀) Hensel화의
+함자성을 보라.
+% P08-E309: frozen source has the malformed phrase “see in Lemma”; intended grammar translated; see ERRATA_CANDIDATES.jsonl.
+\end{remark}
+
+
+
+
+
+
+\section{양호한 공간 위의 점들}
+\label{section-points}
+
+\noindent
+이 절에서는 양호한 대수공간 위의 점들의 몇 가지 성질을 증명한다.
+다음 보조정리는 양호한 대수공간에서 점들의 특수화가 잘 작동함을
+보여 준다. Spaces, Example \ref{spaces-example-infinite-product}는
+일반적으로 이것이 {\bf 성립하지 않음}을 보여 준다.
+
+\begin{lemma}
+\label{lemma-decent-no-specializations-map-to-same-point}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$U \to X$를 스킴에서 $X$로 가는 에탈 사상이라 하자.
+$u, u' \in |U|$가 $|X|$의 같은 점으로 가고 $u' \leadsto u$이면
+$u = u'$이다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{lemma-bounded-fibres}와
+\ref{lemma-no-specializations-map-to-same-point}를 함께 사용하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-decent-specialization}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x, x' \in |X|$이고 $x' \leadsto x$, 즉 $x$가 $x'$의 특수화라고
+가정하자. 그러면 스킴 $U$에서 오는 모든 에탈 사상
+$\varphi : U \to X$와 $\varphi(u) = x$인 임의의 $u \in U$에 대하여,
+$\varphi(u') = x'$이고 $u' \leadsto u$인 점 $u'\in U$가 존재한다.
+% P08-E311: frozen source omits “there” and spaces u'\in U; intended existence grammar translated while formula bytes are preserved; see ERRATA_CANDIDATES.jsonl.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{lemma-bounded-fibres}와 \ref{lemma-specialization}을 함께
+사용하라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-kolmogorov}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+그러면 $|X|$는 Kolmogorov 공간이다(Topology, Definition
+\ref{topology-definition-generic-point}을 보라).
+\end{lemma}
+
+\begin{proof}
+$x_1, x_2 \in |X|$이고 $x_1 \leadsto x_2$ 및
+$x_2 \leadsto x_1$이라고 하자. $x_1 = x_2$임을 보여야 한다.
+$x_1, x_2$가 모두 $|U| \to |X|$의 상에 속하도록 스킴 $U$와 에탈 사상
+$U \to X$를 택하자. Lemma \ref{lemma-decent-specialization}에 의해
+$x_1 \leadsto x_2$로 가는 $U$ 안의 특수화
+$u_1 \leadsto u_2$를 찾을 수 있다. 다시 Lemma
+\ref{lemma-decent-specialization}에 의해 $x_2 \leadsto x_1$로 가는
+$u_2' \leadsto u_1$을 찾을 수 있다. 이는 $u_2' \leadsto u_2$가 $X$의
+같은 점, 즉 $x_2$로 가는 $U$의 점들 사이의 특수화라는 뜻이다.
+Lemma \ref{lemma-decent-no-specializations-map-to-same-point}에 의해
+$u_2' = u_2$가 아니면 이는 불가능하다. 따라서 원하는 대로
+$u_1 = u_2$도 성립한다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-reasonable-sober}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+그러면 위상공간 $|X|$는 소버이다(Topology, Definition
+\ref{topology-definition-generic-point}을 보라).
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{lemma-kolmogorov}에서 $|X|$가 Kolmogorov 공간임을 보았다.
+따라서 모든 기약 닫힌 부분집합 $T \subset |X|$가 일반점을 가짐을
+보이면 충분하다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace}에 의해
+$|Z| = |T|$인 닫힌 부분공간 $Z \subset X$가 존재한다.
+% P08-E312: frozen source writes |Z| = |T| although T is already a subset of |X|; formula preserved; see ERRATA_CANDIDATES.jsonl.
+정의에 의해 이는 $Z \to X$가 대수공간들의 표현가능 사상이라는
+뜻이다. 따라서 Lemma \ref{lemma-representable-properties}에 의해
+$Z$는 양호한 대수공간이다. Theorem
+\ref{theorem-decent-open-dense-scheme}에 의해 스킴인 열린 조밀
+부분공간 $Z' \subset Z$가 존재한다. 이는 $|Z'| \subset T$가 열리고
+조밀하다는 뜻이다. 따라서 위상공간 $|Z'|$는 기약이고, 이는 $Z'$가
+기약 스킴이라는 뜻이다. Schemes, Lemma
+\ref{schemes-lemma-scheme-sober}에 의해 $|Z'|$는 한 점
+$\eta \in T$의 폐포이고, 따라서 $T = \overline{\{\eta\}}$이므로
+결론이 따른다.
+\end{proof}
+
+\noindent
+양호한 대수공간에서는 차원이 기대한 대로 작동한다.
+
+\begin{lemma}
+\label{lemma-dimension-decent-space}
+$S$를 스킴이라 하자. Properties of Spaces, Section
+\ref{spaces-properties-section-dimension}에서 정의한 차원은 $S$ 위의
+양호한 대수공간 $X$에서 잘 작동한다.
+\begin{enumerate}
+\item $x \in |X|$이면 $\dim_x(|X|) = \dim_x(X)$이다.
+\item $\dim(|X|) = \dim(X)$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 증명하자. 점 $u \in U$를 갖는 스킴 $U$와 $u$를 $x$로 보내는
+에탈 사상 $h : U \to X$를 택하자. 정의에 의해 $x$에서 $X$의 차원은
+$\dim_u(|U|)$이다. 따라서 $\dim_x(X) = \dim(|U|)$가 되도록 $U$를
+택할 수 있다. $d$를 정수라 하자. $\dim(U) \geq d$이면 $U$ 안에
+자명하지 않은 특수화들의 열
+$u_d \leadsto \ldots \leadsto u_0$가 존재한다. 상을 취하면 대응하는 열
+$h(u_d) \leadsto \ldots \leadsto h(u_0)$를 얻는데, Lemma
+\ref{lemma-decent-no-specializations-map-to-same-point}에 의해 각각의
+특수화는 자명하지 않다. 따라서 $|X|$ 안에서 $|U|$의 상은 차원이
+적어도 $d$임을 알 수 있다. 역으로 $x_0$가 $|U| \to |X|$의 상에
+속하고 $x_d \leadsto \ldots \leadsto x_0$가 $|X|$ 안의 특수화들의
+열이라고 하자. 그러면 Lemma \ref{lemma-decent-specialization}에 의해
+이를 $U$ 안의 특수화들의 열로 올릴 수 있다.
+
+\medskip\noindent
+(2)는 (1), Topology, Lemma
+\ref{topology-lemma-dimension-supremum-local-dimensions}, 그리고
+Properties of Spaces, Section
+\ref{spaces-properties-section-dimension}의 바로 따름정리이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-dimension-local-ring-quasi-finite}
+$S$를 스킴이라 하고 $X \to Y$를 $S$ 위의 대수공간들의 국소 준유한
+사상이라 하자. $x \in |X|$라 하고 그 상을 $y \in |Y|$라 하자.
+그러면 $y$에서 $Y$의 국소환의 차원은 $x$에서 $X$의 국소환의
+차원보다 크거나 같다($\geq$).
+% P08-E313: frozen source says “is \geq to”; intended comparison grammar translated; see ERRATA_CANDIDATES.jsonl.
+\end{lemma}
+
+\begin{proof}
+대수공간의 한 점의 국소환의 차원은 Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-local-ring}에 정의되어 있다.
+$V$가 스킴인 에탈 사상 $(V, v) \to (Y, y)$를 택하자. 에탈 사상
+$U \to V \times_Y X$와 $x \in |X|$ 및 $v \in V$로 가는 점
+$u \in U$를 택하자. 그러면 $U \to V$는 국소 준유한이고, 다음을
+증명해야 한다.
+$$
+\dim(\mathcal{O}_{V, v}) \geq \dim(\mathcal{O}_{U, u})
+$$
+이는 Algebra, Lemma
+\ref{algebra-lemma-dimension-inequality-quasi-finite}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-dimension-quasi-finite}
+$S$를 스킴이라 하고 $X \to Y$를 $S$ 위의 대수공간들의 국소 준유한
+사상이라 하자. 그러면 $\dim(X) \leq \dim(Y)$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-dimension-local-ring-quasi-finite}와 Properties of
+Spaces, Lemma \ref{spaces-properties-lemma-dimension}에서 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리는 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-point-like-spaces}보다 아주 조금 더 강하다.
+Lemma \ref{lemma-when-field}에서 이 보조정리를 개선할 것이다.
+
+\begin{lemma}
+\label{lemma-decent-point-like-spaces}
+$S$를 스킴이라 하고 $k$를 체라 하자. $X$를 $S$ 위의 대수공간이라
+하고 전사 에탈 사상 $\Spec(k) \to X$가 존재한다고 가정하자.
+$X$가 양호하면 $X \cong \Spec(k')$이고, 여기서 $k/k'$은 유한 분리
+확대이다.
+\end{lemma}
+
+\begin{proof}
+가정은 $|X| = \{x\}$가 한원소집합임을 함의한다. $X$가 양호하므로
+상이 $x$인 준콤팩트 단사 사상 $\Spec(k') \to X$를 찾을 수 있다.
+그러면 사영
+$U = \Spec(k') \times_X \Spec(k) \to \Spec(k)$는 단사 사상이므로
+$U = \Spec(k)$이다. Schemes, Lemma
+\ref{schemes-lemma-mono-towards-spec-field}을 보라. 따라서 사영
+$\Spec(k) = U \to \Spec(k')$는 에탈이고 결론이 따른다.
+\end{proof}
+
+
+
+
+\section{축약 한원소 공간}
+\label{section-singleton}
+
+\noindent
+{it 한원소} 공간은 $|X|$가 한원소집합인 대수공간 $X$이다. 이러한
+공간은 단순히 체의 스펙트럼인 것보다 더 흥미로울 수 있다. Spaces,
+Example \ref{spaces-example-Qbar}를 보라. 이들을 다루기 위한 약간의
+도구를 마련한다.
+
+\begin{lemma}
+\label{lemma-flat-cover-by-field}
+$S$를 스킴이라 하고 $Z$를 $S$ 위의 대수공간이라 하자. $k$를 체라
+하고 $\Spec(k) \to Z$가 전사이고 평탄하다고 하자. 그러면 $k'$이 체인
+임의의 사상 $\Spec(k') \to Z$는 전사이고 평탄하다.
+\end{lemma}
+
+\begin{proof}
+섬유곱 정사각형
+$$
+\xymatrix{
+T \ar[d] \ar[r] & \Spec(k) \ar[d] \\
+\Spec(k') \ar[r] & Z
+}
+$$
+을 생각하자. $T \to \Spec(k')$는 평탄이고 전사이므로 $T$는
+공집합이 아니다. 한편 $k$가 체이므로 $T \to \Spec(k)$는 평탄하다.
+따라서 $T \to Z$는 평탄이고 전사이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-permanence}에 의해
+$\Spec(k') \to Z$는 평탄하다. 가정에 의해 $|Z|$가 한원소집합이므로
+이는 전사이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-unique-point}
+$S$를 스킴이라 하고 $Z$를 $S$ 위의 대수공간이라 하자. 다음 조건들은
+동치이다.
+\begin{enumerate}
+\item $Z$는 축약이고 $|Z|$는 한원소집합이다.
+\item $k$가 체인 전사 평탄 사상 $\Spec(k) \to Z$가 존재한다.
+\item $k$가 체인 국소 유한형 전사 평탄 사상
+$\Spec(k) \to Z$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하자. $W$를 스킴이라 하고 $W \to Z$를 전사 에탈 사상이라
+하자. 그러면 $W$는 축약 스킴이다. $\eta \in W$를 $W$의 한
+기약성분의 일반점이라 하자. $W$가 축약이므로
+$\mathcal{O}_{W, \eta} = \kappa(\eta)$이다. 따라서 표준 사상
+$\eta = \Spec(\kappa(\eta)) \to W$는 평탄하다. 합성
+$\eta \to Z$가 평탄함을 알 수 있다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-flat}을 보라). $|Z|$가
+한원소집합이므로 이는 또한 전사이다. 다시 말해 (2)가 성립한다.
+
+\medskip\noindent
+(2)를 가정하자. $W$를 스킴이라 하고 $W \to Z$를 전사 에탈
+사상이라 하자. 체 $k$와 전사 평탄 사상 $\Spec(k) \to Z$를 택하자.
+그러면 $W \times_Z \Spec(k)$는 $k$ 위에서 에탈인 스킴이다. 따라서
+$W \times_Z \Spec(k)$는 체들의 스펙트럼들의 분리합이고(Remark
+\ref{remark-recall}을 보라), 특히 축약이다.
+$W \times_Z \Spec(k) \to W$가 전사이고 평탄하므로 $W$가 축약임을
+얻는다(Descent, Lemma \ref{descent-lemma-descend-reduced}). 다시 말해
+(1)이 성립한다.
+
+\medskip\noindent
+(3)이 (2)를 함의함은 명백하다. 마지막으로 (2)를 가정하자.
+공집합이 아닌 아핀 스킴 $W$와 에탈 사상 $W \to Z$를 택하자.
+닫힌점 $w \in W$를 택하고 $k = \kappa(w)$로 놓자. 합성
+$$
+\Spec(k) \xrightarrow{w} W \longrightarrow Z
+$$
+은 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-type}와
+\ref{spaces-morphisms-lemma-etale-locally-finite-type}에 의해 국소
+유한형이다. 또한 Lemma \ref{lemma-flat-cover-by-field}에 의해
+평탄이고 전사이다. 따라서 (3)이 성립한다.
+\end{proof}
+
+\noindent
+다음 보조정리는 앞의 보조정리보다 조금 더 좋은 한원소 대수공간들의
+부류를 골라낸다.
+
+\begin{lemma}
+\label{lemma-unique-point-better}
+$S$를 스킴이라 하고 $Z$를 $S$ 위의 대수공간이라 하자. 다음 조건들은
+동치이다.
+\begin{enumerate}
+\item $Z$는 축약이고 국소 뇌터이며 $|Z|$는 한원소집합이다.
+\item $k$가 체인 국소 유한 표시 전사 평탄 사상
+$\Spec(k) \to Z$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)가 성립한다고 가정하자. Lemma \ref{lemma-unique-point}에 의해
+$Z$는 축약이고 $|Z|$는 한원소집합이다. $W$를 스킴이라 하고
+$W \to Z$를 전사 에탈 사상이라 하자. 체 $k$와 국소 유한 표시 전사
+평탄 사상 $\Spec(k) \to Z$를 택하자. 그러면
+$W \times_Z \Spec(k)$는 $k$ 위에서 에탈인 스킴이고, 따라서 체들의
+스펙트럼들의 분리합이며(Remark \ref{remark-recall}을 보라), 따라서
+국소 뇌터이다. $W \times_Z \Spec(k) \to W$가 평탄이고 전사이며
+국소 유한 표시이므로 $\{W \times_Z \Spec(k) \to W\}$가 fppf
+덮개임을 알 수 있다. 따라서 $W$는 국소 뇌터이다(Descent, Lemma
+\ref{descent-lemma-Noetherian-local-fppf}). 다시 말해 (1)이 성립한다.
+
+\medskip\noindent
+(1)을 가정하자. 공집합이 아닌 아핀 스킴 $W$와 에탈 사상
+$W \to Z$를 택하자. 닫힌점 $w \in W$를 택하고
+$k = \kappa(w)$로 놓자. $W$가 국소 뇌터이므로 사상
+$w : \Spec(k) \to W$는 유한 표시이다. Morphisms, Lemma
+\ref{morphisms-lemma-closed-immersion-finite-presentation}을 보라.
+따라서 합성
+$$
+\Spec(k) \xrightarrow{w} W \longrightarrow Z
+$$
+은 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-presentation}과
+\ref{spaces-morphisms-lemma-etale-locally-finite-presentation}에 의해
+국소 유한 표시이다. 또한 Lemma \ref{lemma-flat-cover-by-field}에 의해
+평탄이고 전사이다. 따라서 (2)가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-monomorphism-into-point}
+$S$를 스킴이라 하자. $Z' \to Z$를 $S$ 위의 대수공간들의 단사 사상이라
+하자. 체 $k$와 국소 유한 표시 전사 평탄 사상
+$\Spec(k) \to Z$가 존재한다고 가정하자. 그러면 $Z'$는 공집합이거나
+$Z' = Z$이다.
+\end{lemma}
+
+\begin{proof}
+$Z'$가 공집합이 아니라고 가정할 수 있다. 이 경우 섬유곱
+$T = Z' \times_Z \Spec(k)$는 공집합이 아니다. Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-points-cartesian}을 보라. 이제 $T$는
+대수공간이고 사영 $T \to \Spec(k)$는 단사 사상이다. 따라서
+$T = \Spec(k)$이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-toward-field}을 보라.
+그러므로 $\Spec(k) \to Z$는 $Z'$를 통하여 분해된다. 그러나
+$\Spec(k) \to Z$가 전사이고 평탄하며 국소 유한 표시이므로 사상
+$\Spec(k) \to Z$는 $(\Sch/S)_{fppf}$ 위의 층들의 사상으로서
+전사이다(Spaces, Remark
+\ref{spaces-remark-warning}을 보라). 따라서 $Z' = Z$이다.
+\end{proof}
+
+\noindent
+다음 보조정리는 대수공간의 각 점에 표준적인 축약 국소 뇌터 한원소
+대수공간을 대응시킬 수 있음을 말한다.
+
+\begin{lemma}
+\label{lemma-find-singleton-from-point}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$x \in |X|$라 하자. Lemma \ref{lemma-unique-point-better}의 동치인
+조건들을 만족하는 대수공간 $Z$로부터 오는 $S$ 위의 대수공간들의
+단사 사상 $Z \to X$로서 $|Z| \to |X|$의 상이 $\{x\}$인 것이 유일하게
+존재한다.
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 전사 에탈 사상 $U \to X$를 택하자.
+$R = U \times_X U$로 놓아 $X = U/R$이 표시가 되게 하자(Spaces,
+Section \ref{spaces-section-presentations}을 보라). 다음과 같이 놓는다.
+$$
+U' = \coprod\nolimits_{u \in U\text{ 중 다음 점 위에 놓인 것: }x} \Spec(\kappa(u)).
+$$
+표준 사상 $U' \to U$는 단사 사상이다. 다음과 같이 놓는다.
+$$
+R' = U' \times_X U' = R \times_{(U \times_S U)} (U' \times_S U').
+$$
+$U' \to U$가 단사 사상이므로 사영들 $s', t' : R' \to U'$는 단사
+사상과 에탈 사상의 합성으로 분해됨을 알 수 있다. 따라서 $U'$가
+체들의 스펙트럼들의 분리합이라는 사실, Remark \ref{remark-recall},
+그리고 Schemes, Lemma
+\ref{schemes-lemma-mono-towards-spec-field}을 사용하면 $R'$이 체들의
+스펙트럼들의 분리합이고 사상들 $s', t' : R' \to U'$가 에탈임을
+얻는다. 따라서 Spaces, Theorem
+\ref{spaces-theorem-presentation}에 의해 $Z = U'/R'$은 대수공간이다.
+$R'$은 $U' \to U$에 의한 $R$의 제한이므로 Groupoids, Lemma
+\ref{groupoids-lemma-quotient-groupoid-restrict}에 의해 $Z \to X$가
+단사 사상임을 알 수 있다. $Z \to X$가 단사 사상이므로
+$|Z| \to |X|$는 단사이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-injective-points}를 보라.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 사상
+$$
+|U'| = |Z \times_X U'| \to |Z| \times_{|X|} |U'|
+$$
+은 전사이고, 이는 $U'$의 선택에 의해 $|Z| \to |X|$의 상이
+$\{x\}$임을 함의한다. 따라서 $|Z|$는 한원소집합이다. 마지막으로
+구성에 의해 $U'$는 국소 뇌터이고 축약이다. 즉 $Z$가 Lemma
+\ref{lemma-unique-point-better}의 동치인 조건들을 만족함을 알 수 있다.
+
+\medskip\noindent
+$Z \to X$의 유일성을 증명하자. $Z' \to X$가 이러한 두 번째
+대수공간의 단사 사상이라고 하자. 그러면 사영들
+$$
+Z' \longleftarrow Z' \times_X Z \longrightarrow Z
+$$
+은 단사 사상이다. 가운데 대수공간은 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 공집합이 아니다.
+따라서 Lemma \ref{lemma-monomorphism-into-point}에 의해 두 사영은
+동형이고 결론이 따른다.
+\end{proof}
+
+\noindent
+뒤에서 도입할 잉여 거브를 예고하는 다음 용어를 도입한다. Properties
+of Stacks, Definition
+\ref{stacks-properties-definition-residual-gerbe}를 보라.
+
+\begin{definition}
+\label{definition-residual-space}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$x \in |X|$라 하자. {it $x$에서 $X$의 잉여 공간}
+\footnote{이는 표준 표기가 아니다.}은 Lemma
+\ref{lemma-find-singleton-from-point}에서 구성한 단사 사상
+$Z_x \to X$이다.
+\end{definition}
+
+\noindent
+특히 $Z_x$가 국소 뇌터이고 축약인 한원소 대수공간이며, 어떤 체와
+전사 평탄 국소 유한 표시 사상
+$$
+\Spec(k) \longrightarrow Z_x.
+$$
+가 존재함을 알고 있다. 잉여 공간은 흔히 체의 스펙트럼에서 오는
+단사 사상으로 주어진다.
+
+\begin{lemma}
+\label{lemma-residual-space-monomorphism}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$x \in |X|$라 하자. $x$에서 $X$의 잉여 공간 $Z_x$가 체의
+스펙트럼과 동형일 필요충분조건은 $x$가 $k$가 체인 단사 사상
+$\Spec(k) \to X$로 표현될 수 있는 것이다. $X$가 양호하면 이는 모든
+$x \in |X|$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+$Z_x \to X$가 단사 사상이므로 어떤 체 $k$에 대하여
+$Z_x = \Spec(k)$이면 $x$는 단사 사상
+$\Spec(k) = Z_x \to X$로 표현된다. 역으로 $\Spec(k) \to X$가 $x$를
+표현하는 단사 사상이면 $Z_x \times_X \Spec(k) \to \Spec(k)$는
+단사 사상이고 그 원천은 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 공집합이 아니다.
+따라서 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-toward-field}에 의해
+$Z_x \times_X \Spec(k) = \Spec(k)$이다. 그러므로 단사 사상
+$\Spec(k) \to Z_x$를 얻는다. Lemma
+\ref{lemma-monomorphism-into-point}에 의해 이는 동형이다. 마지막
+명제는 Lemma \ref{lemma-decent-points-monomorphism}에서 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리에 의해 잉여 공간은 정칙 대수공간이다.
+
+\begin{lemma}
+\label{lemma-residual-space-regular}
+축약이고 국소 뇌터인 한원소 대수공간 $Z$는 정칙이다.
+\end{lemma}
+
+\begin{proof}
+$Z$를 스킴 $S$ 위의 축약 국소 뇌터 한원소 대수공간이라 하자.
+$W$가 스킴인 전사 에탈 사상 $W \to Z$를 택하자. 체 $k$와 전사 평탄
+국소 유한 표시 사상 $\Spec(k) \to Z$를 택하자(Lemma
+\ref{lemma-unique-point-better}를 보라). 스킴
+$T = W \times_Z \Spec(k)$는 $k$ 위에서 에탈이고, 특히 정칙이다.
+Remark \ref{remark-recall}을 보라. $T \to W$가 국소 유한 표시이고
+평탄이며 전사이므로 Descent, Lemma
+\ref{descent-lemma-descend-regular}에 의해 $W$가 정칙이다. 정의에
+의해 이는 $Z$가 정칙이라는 뜻이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-factor-through-residual-space-Noetherian}
+$S$를 스킴이라 하고 $f : Y \to X$를 $S$ 위의 대수공간들의 사상이라
+하자. $x \in |X|$를 한 점이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $|f|(|Y|)$는 $\{x\} \subset |X|$에 포함된다.
+\item $Y$는 축약이다.
+\item $X$는 국소 뇌터이다.
+\end{enumerate}
+그러면 $f$는 $x$에서 $X$의 잉여 공간 $Z_x$를 통하여 분해된다.
+\end{lemma}
+
+\begin{proof}
+먼저 주의할 점은 $Z_x \to X$가 단사 사상이므로 $Y' \to X$가
+$Z_x$를 통하여 분해되게 하는 전사 에탈 사상 $Y' \to Y$를 찾으면
+충분하다는 것이다. 여기서 $Y'$도 축약임에 주의하라.
+
+\medskip\noindent
+$U$를 아핀 스킴이라 하고 $x$가 $|U| \to |X|$의 상에 속하도록 하는
+에탈 사상 $U \to X$를 택하자. $X$가 국소 뇌터이므로 $U$는 뇌터
+아핀 스킴이다. 가정 (1)에 의해
+$Y' = U \times_X Y \to Y$는 전사이고 에탈이다. $x$로 가는 점들의
+집합을 $E \subset |U|$라 쓰자.
+% P08-E314: frozen source omits “by” in the naming construction; intended grammar translated; see ERRATA_CANDIDATES.jsonl.
+$E$의 원소들 사이에는 자명하지 않은 특수화가 없다. Lemma
+\ref{lemma-no-specializations-map-to-same-point-Noetherian}을 보라.
+사상 $Y' \to U$는 $|Y'|$를 $E$ 안으로 보낸다. Lemma
+\ref{lemma-find-singleton-from-point}의 증명에서 한 $Z_x$의 구성에 의해
+$\coprod_{u \in E} u \to X$는 $Z_x$를 통하여 분해됨을 알고 있다.
+따라서 $Y' \to U$가 $\coprod_{u \in E} u \to X$를 통하여 분해됨을
+증명하면 충분하다. $Y'$을 스킴에 의한 에탈 덮개로 바꾸면(앞의 주에
+의해 이렇게 할 수 있다), 이는 Morphisms, Lemma
+\ref{morphisms-lemma-factor-through-set-of-points}에서 따른다.
+% P08-E315: frozen source omits “to do” after “are allowed”; intended permission clause translated; see ERRATA_CANDIDATES.jsonl.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-factor-through-residual-space-decent}
+$S$를 스킴이라 하고 $f : Y \to X$를 $S$ 위의 대수공간들의 사상이라
+하자. $x \in |X|$를 한 점이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $|f|(|Y|)$는 $\{x\} \subset |X|$에 포함된다.
+\item $Y$는 축약이다.
+\item $x$는 $k$가 체인 준콤팩트 단사 사상
+$x : \Spec(k) \to X$로 표현될 수 있다(예를 들어 $X$가 양호한 경우).
+\end{enumerate}
+그러면 $f$는 $x$에서 $X$의 잉여 공간
+$Z_x = \Spec(k)$를 통하여 분해된다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-residual-space-monomorphism}에 의해
+$Z_x = \Spec(k)$이다.
+
+\medskip\noindent
+먼저 주의할 점은 $\Spec(k) \to X$가 단사 사상이므로 $Y' \to X$가
+$Z_x$를 통하여 분해되게 하는 전사 에탈 사상 $Y' \to Y$를 찾으면
+충분하다는 것이다. 여기서 $Y'$도 축약임에 주의하라.
+
+\medskip\noindent
+$x$의 준콤팩트 열린 근방으로 $X$를 바꾼 뒤 $X$가 준콤팩트라고
+가정할 수 있다.
+% P08-E316: frozen source omits the copula in “assume X quasi-compact”; intended predicate translated; see ERRATA_CANDIDATES.jsonl.
+Lemma \ref{lemma-filter-quasi-compact}에 의해 $x$는
+$T \subset U \subset X$의 점이다. 여기서 $T \to U$는 닫힌 몰입이고
+$U \to X$는 열린 몰입이며, $T$는 스킴이다. Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-factor-through-open-subspace}에 의해
+$f$는 $U$를 통하여 분해되므로 $U = X$라고 가정할 수 있다. 그러면
+$Y$가 축약이므로 $f$는 $T$를 통하여 분해된다. Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-map-into-reduction}을 보라. 따라서
+$X = T$가 스킴이라고 가정할 수 있다. 앞의 주에 의해 $Y$도 스킴이라고
+가정할 수 있다. 이로써 Morphisms, Lemma
+\ref{morphisms-lemma-factor-through-point}의 경우로 환원된다.
+\end{proof}
+
+\begin{example}
+\label{example-does-not-factor-through-residual-gerbe}
+$X$가 국소 뇌터도 아니고 양호하지도 않은 경우 Lemmas
+\ref{lemma-factor-through-residual-space-Noetherian}와
+\ref{lemma-factor-through-residual-space-decent}에 대한 반례를 들자.
+$k$를 체라 하고 $G$를 무한 프로유한군이라 하자. $Y$를 $G$를
+0차원 아핀 $k$-군 스킴으로 본 것, 즉
+$Y = \Spec(\text{국소 상수 사상 } G \to k)$라 하자. $\Gamma$를 $G$를
+이산 $k$-군 스킴으로 본 것이라 하고, 평행이동으로 $Y$에 작용하게
+하자. $X = Y/\Gamma$로 놓자. 이는 한점 대수공간이고 사영을
+$q : Y \to X$라 한다. $e \in G$를 원점이라 하고(어느 원소라도
+무방하다) 이를 $Y$의 $k$-점으로 보자. $k$-점
+$x : \Spec(k) \to X$를 얻는데, 이는 $X \to \Spec(k)$의 절단이므로
+단사 사상이다. $Y$가 아핀이고 축약이며 $|X| = \{x\}$임에도 불구하고,
+$K$가 체인 어떤 사상 $\Spec(K) \to X$를 통해서도 사상 $q$가
+분해되지 않는다고 주장한다. 그렇지 않다면 Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-equivalence-class-point-monomorphism}에
+의해 이는 $x$를 통하여 분해될 것이다. 이제 $x$에 의한 $q$의 당김은
+$\Gamma \to \Spec(k)$이고, 사영 $\Gamma \to Y$는 궤도 사상
+$g \mapsto g \cdot e$이다. 후자는 절단을 갖지 않으므로 주장이
+따른다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-residual-space-closed}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$x \in |X|$라 하고 잉여 공간을 $Z_x \subset X$라 하자. $X$가 국소
+뇌터라고 가정하자. 그러면 $x$가 $|X|$의 닫힌점일 필요충분조건은
+사상 $Z_x \to X$가 닫힌 몰입인 것이다.
+\end{lemma}
+
+\begin{proof}
+$Z_x \to X$가 닫힌 몰입이면 $x$는 $|X|$의 닫힌점이다. Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-immersion-when-closed}를 보라.
+역으로 $x$가 $|X|$의 닫힌점이라고 가정하자.
+$Z \subset X$를 $|Z| = \{x\}$인 축약 닫힌 부분공간이라 하자
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace}). 그러면
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-immersion-locally-finite-type}와
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}에 의해
+$Z$는 국소 뇌터이다. 또한 $Z$가 축약이고 $|Z| = \{x\}$이므로
+정의에 의해 $Z = Z_x$는 잉여 공간이다.
+% P08-E317: frozen source contains a stray “it” before Z = Z_x; intended conclusion translated; see ERRATA_CANDIDATES.jsonl.
+\end{proof}
+
+
+
+
+
+
+\section{양호한 공간}
+\label{section-decent}
+
+\noindent
+이 절에서는 양호한 공간들에 관한 몇 가지 유용한 사실을 모은다.
+
+\begin{lemma}
+\label{lemma-locally-Noetherian-decent-quasi-separated}
+모든 국소 뇌터 양호한 대수공간은 준분리이다.
+\end{lemma}
+
+\begin{proof}
+실제로 $X$를 어떤 밑스킴 위의(예를 들어 $\mathbf{Z}$ 위의) 양호하고
+국소 뇌터인 대수공간이라 하자. $U$와 $V$가 아핀 스킴인 에탈 사상들
+$U \to X$와 $V \to X$를 택하자. $W = U \times_X V$가 준콤팩트임을
+보여야 한다(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-characterize-quasi-separated}).
+$X$가 국소 뇌터이므로 스킴들 $U$, $V$는 뇌터이고 $W$는 국소
+뇌터이다. $X$가 양호하므로 사상 $W \to U$의 올들은 유한하다.
+실제로 임의의 $x \in |X|$를 준콤팩트 단사 사상
+$\Spec(k) \to X$로 표현할 수 있다. 그러면 $U_k$와 $V_k$는 $k$의
+유한 분리 확대들의 스펙트럼들의 유한 분리합이고(Remark
+\ref{remark-recall}),
+$W_k = U_k \times_{\Spec(k)} V_k$가 유한임을 알 수 있다. $U$의 한
+기약성분의 일반점에서 $W \to U$의 올의 차수들의 최댓값을 $n$이라
+하자. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-stratify-flat-fp-lqf}에서 $W \to U$에 대응시킨
+층화
+$$
+U = U_0 \supset U_1 \supset U_2 \supset \ldots
+$$
+를 생각하자. 위에서 $n$을 택한 방식에 의해 $U_{n + 1}$은 공집합이다.
+따라서 $W \to U$의 올들은 보편적으로 유계이다. 이제 More on
+Morphisms, Lemma
+\ref{more-morphisms-lemma-stratify-flat-fp-lqf-universally-bounded}를
+적용하여 닫힌 부분집합들에 의한 층화
+$$
+\emptyset = Z_{-1} \subset Z_0 \subset Z_1 \subset Z_2 \subset
+\ldots \subset Z_n = U
+$$
+를 찾을 수 있다. 여기서 $S_r = Z_r \setminus Z_{r - 1}$로 놓으면
+사상 $W \times_U S_r \to S_r$은 유한 국소 자유이다. $U$가
+뇌터이므로 스킴들 $S_r$은 뇌터이고, 따라서 스킴들
+$W \times_U S_r$은 뇌터이며, 따라서 원하는 대로
+$W = \coprod W \times_U S_r$은 준콤팩트이다.
+% P08-E599: frozen coproduct display omits the indexing variable r; formula preserved pending canon adjudication; see ERRATA_CANDIDATES.jsonl.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-when-field}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+\begin{enumerate}
+\item $|X|$가 한원소집합이면 $X$는 스킴이다.
+\item $|X|$가 한원소집합이고 $X$가 축약이면 어떤 체 $k$에 대하여
+$X \cong \Spec(k)$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$|X|$가 한원소집합이라고 가정하자. Theorem
+\ref{theorem-decent-open-dense-scheme}에서 $X$가 스킴임이 바로 따르지만,
+다음과 같이 직접 논증할 수도 있다. 아핀 스킴 $U$와 전사 에탈 사상
+$U \to X$를 택하자. $R = U \times_X U$로 놓자. Lemma
+\ref{lemma-UR-finite-above-x}와 양호한 공간의 정의에 의해 $U$와 $R$은
+유한개의 점을 갖는다. Lemma
+\ref{lemma-decent-no-specializations-map-to-same-point}에 의해 이 모든
+점은 $U$와 $R$에서 닫혀 있다. 따라서 $U$와 $R$은 아핀 스킴이다.
+$U$를 줄여 한원소 공간으로 만들 수 있다. 그러면 Algebra, Lemma
+\ref{algebra-lemma-local-dimension-zero-henselian}에 의해 $U$는 Hensel
+국소환의 스펙트럼이다. 사영들 $R \to U$는 에탈이고, $U$가 $0$차원
+Hensel 국소환의 스펙트럼이므로 유한 에탈이다. Algebra, Lemma
+\ref{algebra-lemma-characterize-henselian}을 보라. 따라서 Groupoids,
+Proposition \ref{groupoids-proposition-finite-flat-equivalence}에 의해
+$X$는 스킴이다.
+
+\medskip\noindent
+(2)는 (1)과 축약 한원소 스킴이 체의 스펙트럼이라는 사실에서 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-one-point-decent-scheme}
+축약이 스킴인 대수공간은 스킴임을 Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-reduction-scheme}에서 보게 될 것이다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-algebraic-residue-field-extension-closed-point}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+가환 도식
+$$
+\xymatrix{
+\Spec(k) \ar[rr] \ar[rd] & & X \ar[ld] \\
+& S
+}
+$$
+을 생각하자. $\Spec(k) \to S$의 상인 점 $s \in S$가 닫힌점이고
+$\kappa(s) \subset k$가 대수적이라고 가정하자. 그러면
+$\Spec(k) \to X$의 상 $x$는 $|X|$의 닫힌점이다.
+\end{lemma}
+
+\begin{proof}
+어떤 $x' \in |X|$에 대하여 $x \leadsto x'$라고 하자. $U$가 스킴인
+에탈 사상 $U \to X$와 $x'$로 가는 점 $u' \in U'$를 택하자.
+% P08-E600: frozen source types u' in the undefined U' although the chosen scheme is U; formula preserved pending canon adjudication; see ERRATA_CANDIDATES.jsonl.
+Lemma \ref{lemma-decent-specialization}에 의해 $X$에서 $x$로 가는
+$u$를 갖는 $U$ 안의 특수화 $u \leadsto u'$를 택하자. 그러면 $u$는
+스킴 $W = \Spec(k) \times_X U$의 한 점 $w$의 상이다. 사영
+$W \to \Spec(k)$가 에탈이므로 $\kappa(w) \supset k$는 유한이다.
+따라서 $\kappa(w) \supset \kappa(s)$는 대수적이다. 그러므로
+$\kappa(u) \supset \kappa(s)$는 대수적이다. 따라서 Morphisms, Lemma
+\ref{morphisms-lemma-algebraic-residue-field-extension-closed-point-fibre}에
+의해 $u$는 $U$의 닫힌점이다. 그러므로 $u = u'$이고, 따라서
+$x = x'$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-residue-field-extension-finite}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+가환 도식
+$$
+\xymatrix{
+\Spec(k) \ar[rr] \ar[rd] & & X \ar[ld] \\
+& S
+}
+$$
+을 생각하자. $\Spec(k) \to S$의 상인 점 $s \in S$가 닫힌점이고 체
+확대 $k/\kappa(s)$가 유한이라고 가정하자. 그러면
+$\Spec(k) \to X$는 유한 사상이다. $\kappa(s) = k$이면
+$\Spec(k) \to X$는 닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-algebraic-residue-field-extension-closed-point}에 의해
+상인 점 $x \in |X|$는 닫혀 있다. $Z \subset X$를
+$|Z| = \{x\}$인 축약 닫힌 부분공간이라 하자(Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-reduced-closed-subspace}). Lemma
+\ref{lemma-representable-named-properties}에 의해 $Z$는 양호한
+대수공간임에 주의하라. Lemma \ref{lemma-when-field}에 의해 어떤 체
+$k'$에 대하여 $Z = \Spec(k')$이다. 물론
+$k \supset k' \supset \kappa(s)$이다. 그러면 $\Spec(k) \to Z$는
+스킴들의 유한 사상이고, $Z \to X$는 닫힌 몰입이므로 유한 사상이다.
+따라서 $\Spec(k) \to X$는 유한이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-integral}). $k = \kappa(s)$이면
+$\Spec(k) = Z$이고 $\Spec(k) \to X$는 닫힌 몰입이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-decent-space-closed-point}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x \in |X|$를 닫힌점이라 하자. 그러면 $x$는 어떤 체의 스펙트럼에서
+오는 닫힌 몰입 $i : \Spec(k) \to X$로 표현될 수 있다.
+\end{lemma}
+
+\begin{proof}
+$x$가 $k$가 체인 준콤팩트 단사 사상 $i : \Spec(k) \to X$로 표현될
+수 있음을 알고 있다(Definition \ref{definition-very-reasonable}).
+$U$가 아핀 스킴인 에탈 사상 $U \to X$를 택하자. $x$가 닫혀 있고
+$X$가 양호하므로 $x$ 위에서 $|U| \to |X|$의 올 $F$는 닫힌점들로
+이루어진다(Lemma
+\ref{lemma-decent-no-specializations-map-to-same-point}). $i$가 단사
+사상이므로 $U_k = U \times_X \Spec(k) \to U$도 단사 사상이다.
+특히 사상 $|U_k| \to F$는 단사이다. $U_k$가 준콤팩트이고 한 체
+위에서 에탈이므로 $U_k$는 체들의 스펙트럼들의 유한 분리합이다
+(Remark \ref{remark-recall}).
+$U_k = \Spec(k_1) \amalg \ldots \amalg \Spec(k_r)$라고 하자.
+$\Spec(k_i) \to U$가 단사 사상이므로 그 상 $u_i$의 잉여체는
+$\kappa(u_i) = k_i$이다. $u_i \in F$가 닫힌점이므로 사상
+$\Spec(k_i) \to U$가 닫힌 몰입임을 얻는다. $u_i$들이 서로 다르므로
+$U_k \to U$는 닫힌 몰입이다. 따라서 $i$는 닫힌 몰입이다(Morphisms
+of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local}). 이로써 증명이
+끝난다.
+\end{proof}
+
+
+
+\section{국소 분리 공간}
+\label{section-locally-separated}
+
+\noindent
+국소 분리 대수공간은 양호하다는 것이 밝혀진다.
+
+\begin{lemma}
+\label{lemma-infinite-number}
+$A$를 환이라 하고 $k$를 체라 하자. $\mathfrak p_n$, $n \geq 1$을
+$A$의 서로 다른 소 아이디얼들의 열이라 하자. 또한 각 $n$에 대하여
+$k \to \kappa(\mathfrak p_n)$이 매입이라고 하자. 그러면 다음 사상의
+상의 폐포는 대각선과 만난다.
+$$
+\coprod\nolimits_{n \not = m}
+\Spec(\kappa(\mathfrak p_n) \otimes_k \kappa(\mathfrak p_m))
+\longrightarrow
+\Spec(A \otimes A)
+$$
+\end{lemma}
+
+\begin{proof}
+$k_n = \kappa(\mathfrak p_n)$으로 놓자. $A = \prod k_n$이라고 가정할
+수 있다. $A \to k_n$에 대응하는 열리고 닫힌 점을
+$x_n = \Spec(k_n)$이라 쓰자.
+% P08-E320: frozen source omits “by” in the naming construction; intended grammar translated; see ERRATA_CANDIDATES.jsonl.
+그러면 $\Spec(A) = Z \amalg \{x_n\}$이고, 여기서 $Z$는 공집합이 아닌
+닫힌 부분집합이다. 실제로 $Z = V(e_n; n \geq 1)$이고, 여기서 $e_n$은
+인자 $k_n$에 대응하는 $A$의 멱등원이다. $e_n$들이 생성하는 아이디얼은
+$A$와 같지 않으므로 $Z$는 공집합이 아니다. 상의 폐포가
+$\Delta(Z)$를 포함함을 보이겠다. 사상
+$$
+(\prod k_n) \otimes_k (\prod k_m)
+\longrightarrow
+\prod\nolimits_{n \not = m} k_n \otimes_k k_m
+$$
+의 핵은 $e_n \otimes e_n$, $n \geq 1$이 생성하는 아이디얼이다.
+따라서 스펙트럼 위 사상의 상의 폐포는
+$V(e_n \otimes e_n; n \geq 1)$이고, 이것과
+$\Delta(\Spec(A))$의 교집합은 $\Delta(Z)$이다. 그러므로 사상
+$$
+\coprod\nolimits_{n \not = m} \Spec(k_n \otimes_k k_m)
+\longrightarrow
+\Spec(\prod\nolimits_{n \not = m} k_n \otimes_k k_m)
+$$
+의 상이 조밀함을 보이면 충분하다. 이는 환 사상들의 족
+$\prod_{n \not = m} k_n \otimes_k k_m \to k_n \otimes_k k_m$이
+공동으로 단사이므로 성립한다.
+\end{proof}
+
+\begin{lemma}[David Rydh]
+\label{lemma-locally-separated-decent}
+국소 분리 대수공간은 양호하다.
+\end{lemma}
+
+\begin{proof}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 국소 분리 대수공간이라 하자.
+Properties of Spaces, Definition
+\ref{spaces-properties-definition-separated}에 의해
+$S = \Spec(\mathbf{Z})$라고 가정할 수 있다. 아무 표시가 없는
+섬유곱은 $\mathbf{Z}$ 위에서 취한다. $x \in |X|$라 하자. 스킴 $U$,
+에탈 사상 $U \to X$, 그리고 $|X|$에서 $x$로 가는 점 $u \in U$를
+택하자. 평소처럼 $u = \Spec(\kappa(u))$로 식별한다. $X$가 국소
+분리이므로 사상
+$$
+u \times_X u \to u \times u
+$$
+는 몰입이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fibre-product-after-map}). 따라서 More on
+Groupoids, Lemma
+\ref{more-groupoids-lemma-locally-closed-image-is-closed}에 의해 이는
+닫힌 몰입이다(Schemes, Lemma
+\ref{schemes-lemma-immersion-when-closed}을 사용하라).
+$u \times_X u \to u \times_X U$는 $u \to U$의 기저변환이므로 단사
+사상이고 $u \times_X U \to u$는 에탈이므로, $u \times_X u$는
+체들의 스펙트럼들의 분리합이다(Remark \ref{remark-recall}과 Schemes,
+Lemma \ref{schemes-lemma-mono-towards-spec-field}을 보라). 또한 이는
+아핀 스킴 $u \times u$ 안에서 닫혀 있으므로 $u \times_X u$가 체들의
+스펙트럼들의 유한 분리합임을 얻는다. 따라서 Lemma
+\ref{lemma-R-finite-above-x}에 의해 $x$는 $k$가 체인 단사 사상
+$\Spec(k) \to X$로 표현될 수 있다.
+
+\medskip\noindent
+다음으로 $U = \Spec(A)$를 아핀 스킴이라 하고 $U \to X$를 에탈
+사상이라 하자. 증명을 끝내려면
+$F = U \times_X \Spec(k)$가 유한임을 보이면 충분하다. 이를 $k$의
+유한 분리 확대들의 분리합
+$F = \coprod_{i \in I} \Spec(k_i)$로 쓰자. $I$가 유한임을 보여야 한다.
+$R = U \times_X U$로 놓자. $X$가 국소 분리이므로 사상
+$j : R \to U \times U$는 몰입이다. $j$가 닫힌 몰입
+$j' : R \to U'$를 통하여 분해되도록 하는 열린집합
+$U' \subset U \times U$를 택하자. $e : U \to R$을 대각사상이라 하자.
+$e$가 $U$ 위에서 에탈인 스킴들 사이의 사상이고
+$\Delta = j \circ e$가 닫힌 몰입이라는 사실을 사용하면, 어떤 열리고
+닫힌 부분스킴 $W \subset R$에 대하여
+$R = e(U) \amalg W$임을 얻는다. $j'$가 닫힌 몰입이므로
+$j'(W) \subset U'$는 닫혀 있고 $j'(e(U))$와 만나지 않는다. 따라서
+$U \times U$ 안에서
+$\overline{j(W)} \cap \Delta(U) = \emptyset$이다. 모든
+$i \not = i'$, $i, i' \in I$에 대하여 $W$가
+$\Spec(k_i \otimes_k k_{i'})$를 포함함에 주의하라. Lemma
+\ref{lemma-infinite-number}에 의해 원하는 대로 $I$가 유한임을 얻는다.
+\end{proof}
+
+
+
+
+
+
+\section{값매김 판정법}
+\label{section-valuative-criterion-universally-closed}
+
+\noindent
+양호한 공간에서 오는 준콤팩트 사상이 보편 닫힌이려면 값매김 판정법이
+필요하다.
+
+
+\begin{proposition}
+\label{proposition-characterize-universally-closed}
+$S$를 스킴이라 하고 $f : X \to Y$를 $S$ 위의 대수공간들의 사상이라
+하자. $f$가 준콤팩트이고 $X$가 양호하다고 가정하자. 그러면 $f$가
+보편 닫힌일 필요충분조건은 값매김 판정법의 존재 부분이 성립하는
+것이다.
+\end{proposition}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-existence-universally-closed}에서
+한 방향의 함의를 보았다. 다른 방향을 증명하기 위해 $f$가 보편
+닫힌이라고 가정하자. Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-valuative-criterion}에서와 같은 도식
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] & Y
+}
+$$
+이 주어졌다고 하자. $X_A = \Spec(A) \times_Y X$로 놓으면 다음 도식을
+얻는다.
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[rd] & X_A \ar[d] \\
+ & \Spec(A)
+}
+$$
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-compact}에 의해
+$X_A \to \Spec(A)$는 준콤팩트이다. $X_A \to X$가 표현가능이므로
+Lemma \ref{lemma-representable-properties}에 의해 $X_A$도 양호하다.
+더욱이 $f$가 보편 닫힌이므로 $X_A \to \Spec(A)$는 보편 닫힌이다.
+따라서 $X$를 $X_A$로, $Y$를 $\Spec(A)$로 바꾸어도 무방하며 그렇게
+하겠다.
+
+\medskip\noindent
+$x' \in |X|$를 $\Spec(K) \to X$의 동치류라 하자.
+$y \in |Y| = |\Spec(A)|$를 닫힌점이라 하자. $y' = f(x')$로 놓자.
+이는 $\Spec(A)$의 일반점이다. $f$가 보편 닫힌이므로
+$f(\overline{\{x'\}})$는 $\overline{\{y'\}}$를 포함하고, 따라서
+$y$를 포함한다. $f(x) = y$인 점 $x \in \overline{\{x'\}}$를 택하자.
+$U$를 스킴이라 하고, $\varphi(u) = x$인 $u \in U$가 존재하도록
+에탈 사상 $\varphi : U \to X$를 택하자.
+% P08-E601: frozen source says “there exists a u”; intended grammar translated; see ERRATA_CANDIDATES.jsonl.
+Lemma \ref{lemma-specialization}과 $X$가 양호하다는 가정에 의해
+$\varphi(u') = x'$인 $U$ 위의 특수화 $u' \leadsto u$가 존재한다.
+이는 다음 도식이 가환하도록 하는 공통 체 확대
+$K \subset K' \supset \kappa(u')$가 존재한다는 뜻이다.
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d] & U \ar[d] \\
+\Spec(K) \ar[r] \ar[rd] & X \ar[d] \\
+ & \Spec(A)
+}
+$$
+이는 다음 환들의 가환 도식을 준다.
+$$
+\xymatrix{
+K' & \mathcal{O}_{U, u} \ar[l] \\
+K \ar[u] & \\
+ & A \ar[lu] \ar[uu]
+}
+$$
+Algebra, Lemma \ref{algebra-lemma-dominate}에 의해 $K'$ 안에서
+$\mathcal{O}_{U, u}$의 상을 지배하는 값매김환 $A' \subset K'$을
+찾을 수 있다. 구성에 의해 $\mathcal{O}_{U, u}$가 $A$를 지배하므로
+$A'$도 $A$를 지배한다. 따라서 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-valuative-criterion}의 두 번째 도식과
+닮은 도식을 얻으며, 명제가 증명된다.
+\end{proof}
+
+\section{상대적 조건}
+\label{section-relative-conditions}
+
+\noindent
+이 절은 점과 관련된 대수공간의 조건들을 다루는 (또 하나의) 기술적인
+절이다. 아마 이 절을 건너뛰는 편이 좋을 것이다.
+
+\begin{definition}
+\label{definition-relative-conditions}
+$S$를 스킴이라 하자. $S$ 위의 대수공간 $X$가 Lemma
+\ref{lemma-bounded-fibres}의 대응하는 성질을 가지면 $X$가
+{\it 성질 $(\beta)$를 가진다}고 한다.
+$f : X \to Y$를 $S$ 위의 대수공간들의 사상이라 하자.
+\begin{enumerate}
+\item 임의의 스킴 $T$와 사상 $T \to Y$에 대하여 올곱
+$T \times_Y X$가 성질 $(\beta)$를 가지면 $f$가
+{\it 성질 $(\beta)$를 가진다}고 한다.
+\item 임의의 스킴 $T$와 사상 $T \to Y$에 대하여 올곱
+$T \times_Y X$가 양호한 대수공간이면 $f$가 {\it 양호하다}고 한다.
+\item 임의의 스킴 $T$와 사상 $T \to Y$에 대하여 올곱
+$T \times_Y X$가 합리적인 대수공간이면 $f$가 {\it 합리적이다}라고 한다.
+\item 임의의 스킴 $T$와 사상 $T \to Y$에 대하여 올곱
+$T \times_Y X$가 매우 합리적인 대수공간이면 $f$가
+{\it 매우 합리적이다}라고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+비형식적인 논의는 Remark \ref{remark-very-reasonable}을 참조하라.
+매우 합리적인 사상의 부류는 그다지 유용하지 않지만, 양호한 사상과
+합리적인 사상의 부류는 유용함이 드러날 것이다.
+
+\begin{lemma}
+\label{lemma-properties-trivial-implications}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 대수공간들의 사상이라 하자.
+$f$에 대한 조건들 사이에는 다음 함의들이 성립한다.
+$$
+\xymatrix{
+\text{표현가능} \ar@{=>}[rd] & & & & \\
+& \text{매우 합리적} \ar@{=>}[r] & \text{합리적} \ar@{=>}[r] &
+\text{양호함} \ar@{=>}[r] & (\beta) \\
+\text{준분리} \ar@{=>}[ru] & & & &
+}
+$$
+\end{lemma}
+
+\begin{proof}
+이는 정의들, Lemma \ref{lemma-bounded-fibres}, 그리고 Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-separated-local}에서 명백하다.
+\end{proof}
+
+\noindent
+다음은 또 하나의 건전성 점검이다.
+
+\begin{lemma}
+\label{lemma-property-for-morphism-out-of-property}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $X$가 양호하면(각각 합리적이면, 각각 Lemma
+\ref{lemma-bounded-fibres}의 성질 $(\beta)$를 가지면), $f$는
+양호하다(각각 합리적이다, 각각 성질 $(\beta)$를 가진다).
+\end{lemma}
+
+\begin{proof}
+$T$를 스킴이라 하고 $T \to Y$를 사상이라 하자. 그러면 $T \to Y$는
+표현가능하므로 기저변환 $T \times_Y X \to X$도 표현가능하다.
+따라서 $X$가 양호하면(또는 합리적이면) $T \times_Y X$도 그러하다.
+Lemma \ref{lemma-representable-named-properties}를 보라. 성질 $(\beta)$에
+대해서도 마찬가지이며, Lemma \ref{lemma-representable-properties}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-relative-conditions}
+성질 $(\beta)$를 가지는 것, 양호한 것, 또는 합리적인 것은 임의의
+기저변환으로 보존된다.
+\end{lemma}
+
+\begin{proof}
+이는 정의에서 바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-property-over-property}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 대수공간들의 사상이라 하자.
+$\omega \in \{\beta, decent, reasonable\}$라 하자.
+$Y$가 성질 $(\omega)$를 가지고 $f : X \to Y$도 $(\omega)$를
+가진다고 가정하자. 그러면 $X$는 $(\omega)$를 가진다.
+\end{lemma}
+
+\begin{proof}
+먼저 $\omega = \beta$인 경우에 보조정리를 증명하자. 이 경우에는
+임의의 $x \in |X|$가 어떤 체의 스펙트럼에서 $X$로 가는 단사 사상으로
+표현됨을 보여야 한다. $y = f(x) \in |Y|$라 하자. 가정에 의해 어떤 체
+$k$와 $y$를 표현하는 단사 사상 $\Spec(k) \to Y$가 존재한다.
+그러면 $x$는 $\Spec(k) \times_Y X$의 점 $x'$에 대응한다.
+가정에 의해 $x'$는 단사 사상
+$\Spec(k') \to \Spec(k) \times_Y X$로 표현된다. 합성
+$\Spec(k') \to X$는 분명 $x$를 표현하는 단사 사상이다.
+
+\medskip\noindent
+이제 $\omega = decent$인 경우에 보조정리를 증명하자.
+$x \in |X|$라 하고 $y = f(x) \in |Y|$라 하자. 앞 문단의 결과에 의해
+다음 도식을 택할 수 있다.
+$$
+\xymatrix{
+\Spec(k') \ar[r]_x \ar[d] & X \ar[d]^f \\
+\Spec(k) \ar[r]^y & Y
+}
+$$
+% P08-E321: frozen source omits the copula in “whose horizontal arrows are monomorphisms”; see ERRATA_CANDIDATES.jsonl.
+여기서 수평 화살표들은 단사 사상이다. $Y$가 양호하므로 사상 $y$는
+준콤팩트이다. $f$가 양호하므로 대수공간 $\Spec(k) \times_Y X$는
+양호하다. 따라서 단사 사상
+$\Spec(k') \to \Spec(k) \times_Y X$는 준콤팩트이다.
+그러면 단사 사상 $x : \Spec(k') \to X$는 준콤팩트 사상들의 합성이므로
+준콤팩트이다(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-quasi-compact}와
+\ref{spaces-morphisms-lemma-composition-quasi-compact}을 사용하라).
+점 $x$는 임의적이었으므로 $X$는 양호하다.
+
+\medskip\noindent
+이제 $\omega = reasonable$인 경우에 보조정리를 증명하자.
+$V$가 아핀 스킴인 에탈 사상 $V \to Y$를 택한다.
+$U$가 아핀 스킴인 에탈 사상 $U \to V \times_Y X$를 택한다.
+가정에 의해 $V \to Y$는 보편적으로 유계인 올들을 가진다. Lemma
+\ref{lemma-base-change-universally-bounded}에 의해 사상
+$V \times_Y X \to X$도 보편적으로 유계인 올들을 가진다.
+$f$에 대한 가정으로부터 $U \to V \times_Y X$도 보편적으로 유계인
+올들을 가짐을 안다. Lemma \ref{lemma-composition-universally-bounded}에
+의해 합성 $U \to X$는 보편적으로 유계인 올들을 가진다.
+% P08-E322: frozen source has singular “there exists” with plural “morphisms”; see ERRATA_CANDIDATES.jsonl.
+따라서 보편적으로 유계인 올들을 갖는, 스킴들에서 오는 에탈 사상
+$U \to X$가 충분히 많이 존재하며, $X$가 합리적이라고 결론 내린다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-relative-conditions}
+성질 $(\beta)$를 가지는 것, 양호한 것, 또는 합리적인 것은 합성으로
+보존된다.
+\end{lemma}
+
+\begin{proof}
+$\omega \in \{\beta, decent, reasonable\}$라 하자.
+$f : X \to Y$와 $g : Y \to Z$를 스킴 $S$ 위의 대수공간들의 사상이라
+하자. $f$와 $g$가 모두 성질 $(\omega)$를 가진다고 가정하자. 그러면
+임의의 스킴 $T$와 사상 $T \to Z$에 대하여 공간 $T \times_Z X$가
+$(\omega)$를 가짐을 보여야 한다. Lemma
+\ref{lemma-base-change-relative-conditions}에 의해 이는 다음 명제로
+환원된다. $Y$가 성질 $(\omega)$를 갖는 대수공간이고
+$f : X \to Y$가 $(\omega)$를 갖는 사상이면 $X$가 $(\omega)$를
+가진다. 이는 Lemma \ref{lemma-property-over-property}의 내용이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fibre-product-conditions}
+$S$를 스킴이라 하자. $f : X \to Y$, $g : Z \to Y$를 $S$ 위의
+대수공간들의 사상이라 하자. $X$와 $Z$가 양호하면(각각 합리적이면,
+각각 Lemma \ref{lemma-bounded-fibres}의 성질 $(\beta)$를 가지면),
+$X \times_Y Z$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+실제로 Lemma \ref{lemma-property-for-morphism-out-of-property}에 의해
+사상 $X \to Y$는 그 성질을 가진다. 그러면 Lemma
+\ref{lemma-base-change-relative-conditions}에 의해 기저변환
+$X \times_Y Z \to Z$도 그 성질을 가진다. 마지막으로 Lemma
+\ref{lemma-property-over-property}에 의해 $X \times_Y Z$가 그 성질을
+가진다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descent-conditions}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 대수공간들의 사상이라 하자.
+$\mathcal{P} \in \{(\beta), decent, reasonable\}$라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $f$는 준콤팩트이다.
+\item $f$는 에탈이다.
+\item $|f| : |X| \to |Y|$는 전사이다.
+\item 대수공간 $X$는 성질 $\mathcal{P}$를 가진다.
+\end{enumerate}
+그러면 $Y$는 성질 $\mathcal{P}$를 가진다.
+\end{lemma}
+
+\begin{proof}
+먼저 $\mathcal{P} = (\beta)$인 경우를 증명하자. $y \in |Y|$를
+점이라 하자. $y$가 어떤 체의 스펙트럼에서 오는 단사 사상으로 표현될
+수 있음을 보여야 한다. $f(x) = y$인 점 $x \in |X|$를 택한다.
+가정에 의해 $k$가 체인 단사 사상 $\Spec(k) \to X$로 $x$를 표현할 수
+있다. Lemma \ref{lemma-R-finite-above-x}에 의해 사영들
+$\Spec(k) \times_Y \Spec(k) \to \Spec(k)$가 에탈이고 준콤팩트임을
+보이면 충분하다. 첫 번째 사영을 다음과 같이 분해할 수 있다.
+$$
+\Spec(k) \times_Y \Spec(k)
+\longrightarrow
+\Spec(k) \times_Y X
+\longrightarrow
+\Spec(k)
+$$
+첫 번째 사상은 단사 사상이고 두 번째 사상은 에탈이고 준콤팩트이다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-over-field-scheme}에 의해
+$\Spec(k) \times_Y X$가 스킴임을 안다. 따라서 이는 $k$의 유한
+분리 체 확대들의 스펙트럼들의 유한 분리합이다. Schemes, Lemma
+\ref{schemes-lemma-mono-towards-spec-field}에 의해 첫 번째 화살표는
+$\Spec(k) \times_Y \Spec(k)$를 $k$의 유한 분리 체 확대들의
+스펙트럼들의 유한 분리합과 동일시한다. 따라서 사영 사상은 에탈이고
+준콤팩트이다.
+
+\medskip\noindent
+이제 $\mathcal{P} = decent$인 경우를 증명하자. 증명의 첫 문단에서
+모든 $y \in |Y|$가 단사 사상 $y : \Spec(k) \to Y$로 표현될 수
+있음을 이미 보았다. 그러한 $y$를 택한다. $U$가 아핀 스킴이고
+$|U| \to |Y|$의 상이 $y$를 포함하는 에탈 사상 $U \to X$를 택한다.
+Lemma \ref{lemma-UR-finite-above-x}에 의해 $U_y$가 $k$ 위의 유한
+스킴임을 보이면 충분하다. 올곱 $X_y = \Spec(k) \times_Y X$는 $k$
+위의 준콤팩트 에탈 대수공간이다. 따라서 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-over-field-scheme}에 의해 이는
+스킴이다. 그러므로 이는 $k$의 유한 분리 확대들의 스펙트럼들의 유한
+분리합이다. $X_y = \{x_1, \ldots, x_n\}$라 쓰자. 여기서 $x_i$는
+$[k_i : k] < \infty$인 $x_i : \Spec(k_i) \to X$로 주어진다.
+가정에 의해 $X$는 양호하므로 스킴들
+$U_{x_i} = \Spec(k_i) \times_X U$는 $k_i$ 위에서 유한하다.
+마지막으로 스킴으로서 $U_y = \coprod U_{x_i}$임을 관찰하면,
+원하는 대로 $U_y$가 $k$ 위에서 유한하다고 결론 내린다.
+
+\medskip\noindent
+이제 $\mathcal{P} = reasonable$인 경우를 증명하자.
+$V$가 아핀 스킴인 에탈 사상 $V \to Y$를 택한다.
+% P08-E323: frozen source has “the show” where “to show” is intended; see ERRATA_CANDIDATES.jsonl.
+$V \to Y$의 올들이 보편적으로 유계임을 보여야 한다.
+대수공간 $V \times_Y X$는 준콤팩트이다. 따라서 Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-quasi-compact-affine-cover}에 의해
+아핀 스킴 $W$와 전사 에탈 사상 $W \to V \times_Y X$를 찾을 수 있다.
+다음은 그 그림이다(실선 도식).
+$$
+\xymatrix{
+W \ar[r]  \ar[rd] &
+V \times_Y X \ar[r] \ar[d] &
+X \ar[d]_f & \Spec(k) \ar@{..>}[l]^x \ar@{..>}[ld]^y \\
+ & V \ar[r] & Y
+}
+$$
+공간 $X$가 합리적이라는 가정에 의해 사상 $W \to X$는 보편적으로
+유계인 올들을 가진다. $n$을 $W \to X$의 올들의 차수를 유계하는
+정수라 하자. 같은 정수가 $V \to Y$의 올들을 유계한다고 주장한다.
+실제로 $y \in |Y|$를 점이라 하자.
+% P08-E324: frozen source has the malformed article phrase “there exists a x”; see ERRATA_CANDIDATES.jsonl.
+그러면 $f(x) = y$인 $x \in |X|$가 존재한다(위를 보라).
+이는 위 도식의 점선 화살표들로 주어진 체 $k$와 사상들 $x, y$를 찾을
+수 있음을 뜻한다. 특히 전사 에탈 사상
+$$
+\Spec(k) \times_{x, X} W
+\to
+\Spec(k) \times_{x, X} (V \times_Y X) = \Spec(k) \times_{y, Y} V
+$$
+를 얻는다. 따라서 $k$ 위의 $\Spec(k) \times_{y, Y} V$의 차수는
+$k$ 위의 $\Spec(k) \times_{x, X} W$의 차수 이하, 즉 $\leq n$이며,
+결론을 얻는다. (논증의 이 마지막 부분은 Lemma
+\ref{lemma-descent-universally-bounded}의 증명에 있는 논증과 같다.
+유감스럽게도 그 보조정리는 표현가능 사상들에만 적용되므로 여기서 쓸
+만큼 일반적이지 않다.)
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-conditions-local}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 대수공간들의 사상이라 하자.
+$\mathcal{P} \in \{(\beta), decent, reasonable, very\ reasonable\}$라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item $f$는 $\mathcal{P}$이다.
+\item 모든 아핀 스킴 $Z$와 모든 사상 $Z \to Y$에 대하여 $f$의
+기저변환 $Z \times_Y X \to Z$는 $\mathcal{P}$이다.
+\item 모든 아핀 스킴 $Z$와 모든 사상 $Z \to Y$에 대하여 대수공간
+$Z \times_Y X$는 $\mathcal{P}$이다.
+\item 각 사상 $f^{-1}(Y_i) \to Y_i$가 $\mathcal{P}$를 가지는
+Zariski 덮개 $Y = \bigcup Y_i$가 존재한다.
+\end{enumerate}
+$\mathcal{P} \in \{(\beta), decent, reasonable\}$이면 이는 다음과도
+동치이다.
+\begin{enumerate}
+\item[(5)] 스킴 $V$와 전사 에탈 사상 $V \to Y$가 존재하여 기저변환
+$V \times_Y X \to V$가 $\mathcal{P}$를 가진다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+함의 (1) $\Rightarrow$ (2) $\Rightarrow$ (3) $\Rightarrow$ (4)는
+자명하다. 함의 (3) $\Rightarrow$ (1)은 다음과 같이 볼 수 있다.
+그 원천이 $S$ 위의 스킴인 사상 $Z \to Y$를 택한다. 대수공간
+$Z \times_Y X$를 생각하자. (3)을 가정하면 임의의 아핀 열린집합
+$W \subset Z$에 대하여 $Z \times_Y X$의 열린 부분공간
+$W \times_Y X$는 성질 $\mathcal{P}$를 가진다. 따라서 Lemma
+\ref{lemma-properties-local}에 의해 공간 $Z \times_Y X$가 성질
+$\mathcal{P}$를 가지며, 즉 (1)이 성립한다. 비슷한 논증(생략함)은
+(4)가 (1)을 함의함을 보인다.
+
+\medskip\noindent
+함의 (1) $\Rightarrow$ (5)는 자명하다. (5)와 같은, 스킴에서 오는
+에탈 사상 $V \to Y$를 택한다. $Z$를 아핀 스킴이라 하고
+$Z \to Y$를 사상이라 하자. 다음 도식을 생각하자.
+$$
+\xymatrix{
+Z \times_Y V \ar[r]_q \ar[d]_p & V \ar[d] \\
+Z \ar[r] & Y
+}
+$$
+$p$는 에탈이고 따라서 열린 사상이므로, $Z = \bigcup p(W_i)$가 되도록
+유한 개의 아핀 열린 부분스킴 $W_i \subset Z \times_Y V$를 택할 수
+있다. 다음 가환 도식을 생각하자.
+$$
+\xymatrix{
+V \times_Y X \ar[d] &
+(\coprod W_i) \times_Y X \ar[l] \ar[d] \ar[r] &
+Z \times_Y X \ar[d] \\
+V &
+\coprod W_i \ar[l] \ar[r] &
+Z
+}
+$$
+$V \times_Y X$가 성질 $\mathcal{P}$를 가짐을 알고 있다. Lemma
+\ref{lemma-representable-properties}에 의해
+$(\coprod W_i) \times_Y X$도 성질 $\mathcal{P}$를 가짐을 안다.
+사상 $(\coprod W_i) \times_Y X \to Z \times_Y X$는
+$\coprod W_i \to Z$의 기저변환이므로 에탈이고 준콤팩트임에 주의하라.
+따라서 Lemma \ref{lemma-descent-conditions}에 의해 $Z \times_Y X$가
+성질 $\mathcal{P}$를 가진다고 결론 내린다.
+\end{proof}
+
+\begin{remark}
+\label{remark-very-reasonable}
+성질 $(\beta)$, 양호함, 합리적임, 매우 합리적임에 대한 비형식적인
+설명은 Section \ref{section-reasonable-decent}에서 제시하였다.
+대략적으로 말하면 사상의 올들이 대응하는 성질들을 가질 때 그 사상은
+이 성질들 가운데 하나를 가진다. 양호함은 $|X|$ 위의 점들의 특수화에
+관한 명제들을 증명하는 데 유용하다. 합리적임은 조금 더 강한 조건이며
+기술적으로 다루기가 상당히 쉽다.
+\end{remark}
+
+\noindent
+다음은 앞서 약속한, 양호한 사상들을 사용하는 보조정리이다.
+
+\begin{lemma}
+\label{lemma-re-characterize-universally-closed}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 대수공간들의 사상이라 하자.
+$f$가 준콤팩트이고 양호하다고 가정하자.
+(예를 들어 $f$가 표현가능하거나 준분리이면 그러하다. Lemma
+\ref{lemma-properties-trivial-implications}를 보라.)
+그러면 $f$가 보편 닫힌 것과 값매김 판정법의 존재 부분이 성립하는 것은
+동치이다.
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-existence-universally-closed}에서
+값매김 판정법의 존재 부분을 만족하는 모든 준콤팩트 사상이 보편
+닫혔음을 증명하였다. 역을 증명하기 위해 $f$가 보편 닫혔다고 가정하자.
+Proposition \ref{proposition-characterize-universally-closed}의 증명에서,
+임의의 값매김환 $A$와 임의의 사상 $\Spec(A) \to Y$에 대하여 기저변환
+$f_A : X_A \to \Spec(A)$가 값매김 판정법의 존재 부분을 만족함을
+보이면 충분함을 보았다. 정의에 의해 대수공간 $X_A$는 성질 $(\gamma)$를
+가지므로 Proposition \ref{proposition-characterize-universally-closed}을
+사상 $f_A$에 적용할 수 있고, 결론을 얻는다.
+\end{proof}
+
+\section{올의 점들}
+\label{section-points-fibres}
+
+\noindent
+$S$를 스킴이라 하자. $S$ 위의 대수공간들의 Cartesian 도식
+\begin{equation}
+\label{equation-points-fibres}
+\xymatrix{
+W \ar[r]_q \ar[d]_p & Z \ar[d]^g \\
+X \ar[r]^f & Y
+}
+\end{equation}
+을 생각하자. $x \in |X|$와 $z \in |Z|$를 같은 점 $y \in |Y|$로
+가는 점들이라 하자. 다음을 물을 수 있다. 집합
+\begin{equation}
+\label{equation-fibre}
+F_{x, z} = \{ w \in |W| \text{ 중 }p(w) = x\text{이고 }q(w) = z\}
+\end{equation}
+은 언제 유한한가?
+
+\begin{example}
+\label{example-schemes}
+% P08-E325: frozen source equates the point set with a spectrum rather than its underlying set; see ERRATA_CANDIDATES.jsonl.
+$X, Y, Z$가 스킴이면 집합 $F_{x, z}$는
+$\kappa(x) \otimes_{\kappa(y)} \kappa(z)$의 스펙트럼과 같다
+(Schemes, Lemma \ref{schemes-lemma-points-fibre-product}). 따라서
+$\kappa(y) \subset \kappa(x)$가 유한하거나
+$\kappa(y) \subset \kappa(z)$가 유한하면 유한 집합을 얻는다.
+특히 $g$가 $z$에서 준유한이면 항상 그러하다(Morphisms, Lemma
+\ref{morphisms-lemma-residue-field-quasi-finite}).
+\end{example}
+
+\begin{example}
+\label{example-not-finite}
+$K$를 무한 위수의 자기동형 $\sigma$가 주어진 표수 $0$인 체라 하자.
+$Y = \Spec(K)/\mathbf{Z}$ 및 $X = \mathbf{A}^1_K/\mathbf{Z}$라 두자.
+여기서 $\mathbf{Z}$는 $\sigma$를 통해 $K$에 작용하고,
+$t \mapsto t + 1$을 통해 $\mathbf{A}^1_K = \Spec(K[t])$에 작용한다.
+$Z = \Spec(K)$라 하자. 그러면 $W = \mathbf{A}^1_K$이다. 그림은
+다음과 같다.
+$$
+\xymatrix{
+\mathbf{A}^1_K \ar[r]_q \ar[d]_p & \Spec(K) \ar[d]^g \\
+\mathbf{A}^1_K/\mathbf{Z} \ar[r]^f & \Spec(K)/\mathbf{Z}
+}
+$$
+$t = 0$에 대응하는 $x$와 $\Spec(K)$의 유일한 점 $z$를 택하자.
+그러면 집합으로서 $F_{x, z} = \mathbf{Z}$임을 안다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-surjective-on-fibres}
+(\ref{equation-points-fibres})의 상황에서 $Z' \to Z$가 사상이고
+$z' \in |Z'|$가 $z$로 가면, 유도된 사상
+$F_{x, z'} \to F_{x, z}$는 전사이다.
+\end{lemma}
+
+\begin{proof}
+$W' = X \times_Y Z' = W \times_Z Z'$라 두자. Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-points-cartesian}에 의해
+$|W'| \to |W| \times_{|Z|} |Z'|$는 전사이다.
+% P08-E326: frozen source closes with a verbless sentence fragment; see ERRATA_CANDIDATES.jsonl.
+따라서 $F_{x, z'} \to F_{x, z}$는 전사이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-qf-and-qc-finite-fibre}
+도식 (\ref{equation-points-fibres})에서 $f$가 유한형이고 $f$가 $x$에서
+준유한이면 집합 (\ref{equation-fibre})는 유한하다.
+\end{lemma}
+
+\begin{proof}
+모든 $w \in F_{x, z}$에서 사상 $q$는 준유한이다. Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-quasi-finite-locus}를 보라.
+따라서 보조정리는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-at-a-finite-number-of-points}에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-decent-finite-fibre}
+도식 (\ref{equation-points-fibres})에서 $y$가 어떤 체 $k$에 대한 단사
+사상 $\Spec(k) \to Y$로 표현될 수 있고 $g$가 $z$에서 준유한이면
+집합 (\ref{equation-fibre})는 유한하다.
+(특별한 경우로, $Y$가 양호하고 $g$가 에탈이면 그러하다.)
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-surjective-on-fibres}를 두 번 적용하면 $Z$를
+$Z_k = \Spec(k) \times_Y Z$로, $X$를
+$X_k = \Spec(k) \times_Y X$로 바꾸어도 된다. $Y$도
+$\Spec(k)$로 바꾸며, 그렇게 하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-finite-locus}에 의해
+$Z_k \to \Spec(k)$가 $z$에서 준유한임에 주의하라.
+스킴 $V$, 점 $v \in V$, 그리고 $v$를 $z$로 보내는 에탈 사상
+$V \to Z_k$를 택한다. 스킴 $U$, 점 $u \in U$, 그리고 $u$를 $x$로
+보내는 에탈 사상 $U \to X_k$를 택한다. 다시 Lemma
+\ref{lemma-surjective-on-fibres}에 의해 다음 도식에 대한 $F_{u, v}$의
+유한성을 보이면 충분하다.
+$$
+\xymatrix{
+U \times_{\Spec(k)} V \ar[r] \ar[d] & V \ar[d] \\
+U \ar[r] & \Spec(k)
+}
+$$
+사상 $V \to \Spec(k)$는 $v$에서 준유한이다(Morphisms of Spaces,
+Section \ref{spaces-morphisms-section-local-source-target}의 일반적인
+논의와 한 점에서 준유한이라는 것의 정의에서 따른다).
+이제 유한성은 Example \ref{example-schemes}에서 따른다.
+보조정리의 명제에 있는 괄호 속 설명은, 양호한 공간에서는 점들이
+체들에서 오는 단사 사상들로 표현된다는 사실과 대수공간들의 에탈
+사상이 국소 준유한이라는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-topology-fibre}
+\begin{slogan}
+대수공간의 체값 점들의 올은 예상되는 Zariski 위상을 가진다.
+\end{slogan}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $y \in |Y|$라 하고 $y$가 준콤팩트 단사 사상
+$\Spec(k) \to Y$로 표현된다고 가정하자. 그러면
+$|X_k| \to |X|$는 유도 위상을 갖는
+$f^{-1}(\{y\}) \subset |X|$ 위의 위상동형사상이다.
+\end{lemma}
+
+\begin{proof}
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-etale-open}과
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-injective-points}를 더 이상
+언급하지 않고 사용하겠다. $V$가 아핀이고 $y$로 가는
+$v \in V$가 존재하는 에탈 사상 $V \to Y$를 택한다.
+$\Spec(k) \to Y$가 준콤팩트이므로 $y$로 가는 $V$의 점은 유한 개이다
+(Lemma \ref{lemma-UR-finite-above-x}). $V$를 축소하여 $v$만이
+그러한 점이라고 가정할 수 있다. 스킴 $U$와 전사 에탈 사상
+$U \to X$를 택한다. 다음 가환 도식을 생각하자.
+$$
+\xymatrix{
+U \ar[d] & U_V \ar[l] \ar[d] & U_v \ar[l] \ar[d] \\
+X \ar[d] & X_V \ar[l] \ar[d] & X_v \ar[l] \ar[d] \\
+Y & V \ar[l] & v \ar[l]
+}
+$$
+$U_v \to U_V$는 $U_v$를 유도 위상을 갖는 $U_V$의 부분집합과
+동일시하고(Schemes, Lemma \ref{schemes-lemma-fibre-topological}),
+$|U_V| \to |X_V|$와 $|U_v| \to |X_v|$는 전사이고 열린 사상이므로,
+$|X_v| \to |X_V|$는 그 상 위의 위상동형사상이다(상에는 유도 위상을
+준다). 한편 열린 사상 $|X_V| \to |X|$에 의한
+$f^{-1}(\{y\})$의 역상은 $|X_v|$와 같다. 따라서
+$|X_v| \to f^{-1}(\{y\})$는 열린 사상이다.
+사상 $X_v \to X$는 $X_k$를 통해 분해되고, Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-points-cartesian}에 의해
+$|X_k| \to |X|$는 단사이며 그 상은 $f^{-1}(\{y\})$이다.
+$X_v \to X_k$가 전사이므로
+$|X_v| \to |X_k| \to f^{-1}(\{y\})$를 사용하면 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-conditions-on-point-on-space-over-field}
+$X$를 체 $k$ 위의 국소 유한형 대수공간이라 하자. $x \in |X|$라
+하자. 다음 조건들을 생각하자.
+\begin{enumerate}
+\item $\dim_x(|X|) = 0$,
+\item $x$는 $|X|$에서 닫혀 있고, $|X|$에서 $x' \leadsto x$이면
+$x' = x$,
+\item $x$는 $|X|$의 고립점이다.
+\item $\dim_x(X) = 0$,
+\item $X \to \Spec(k)$는 $x$에서 준유한이다.
+\end{enumerate}
+그러면 (2), (3), (4), (5)는 동치이다.
+$X$가 양호하면 (1)도 나머지 조건들과 동치이다.
+\end{lemma}
+
+\begin{proof}
+예를 들어 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-locally-finite-type-quasi-finite-part}와
+\ref{spaces-morphisms-lemma-quasi-finite-at-point}에 의해 (4)와 (5)는
+동치이다.
+
+\medskip\noindent
+$U$가 아핀 스킴인 에탈 사상 $U \to X$를 택하고, $x$로 가는 점
+$u \in U$를 택한다. 더 나아가 (2)나 (3)의 경우처럼 $x$가 닫힌
+점이면 $u$도 닫힌 점이라고 가정할 수 있으며, 그렇게 하자.
+정의에 의해 $\dim_u(U) = \dim_x(X)$이고, $u$가 닫힌 점이면 이는
+$\dim(\mathcal{O}_{U, u})$와 같음에 주의하라. Algebra, Lemma
+\ref{algebra-lemma-dimension-closed-point-finite-type-field}를 보라.
+
+\medskip\noindent
+$\dim_x(X) > 0$이고 $u$가 닫혀 있으면 위의 논증들에 의해 $U$에서
+자명하지 않은 특수화 $u' \leadsto u$를 택할 수 있다. 그러면 $k$ 위의
+$\kappa(u')$의 초월차수는 $k$ 위의 $\kappa(u)$의 초월차수보다 크다.
+따라서 $X$에서의 상들 $x$와 $x'$는 서로 다르다. $x/k$와 $x'/k$의
+초월차수가 잘 정의되기 때문이다. Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre}을 보라.
+이는 특히 (2)와 (3)의 경우에 적용되므로, (2)와 (3)이 (4)를 함의한다고
+결론 내린다.
+
+\medskip\noindent
+반대로 $X \to \Spec(k)$가 $x$에서 국소 준유한이면
+$U \to \Spec(k)$는 $u$에서 국소 준유한이고, 따라서 $u$는 $U$의
+고립점이다(Morphisms, Lemma
+\ref{morphisms-lemma-quasi-finite-at-point-characterize}).
+$|U| \to |X|$는 연속이고 열린 사상이므로 (5)가 (2)와 (3)을
+함의한다.
+
+\medskip\noindent
+$X$가 양호하고 (1)이 성립한다고 가정하자. Lemma
+\ref{lemma-dimension-decent-space}에 의해
+$\dim_x(X) = \dim_x(|X|)$이며, 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-conditions-on-space-over-field}
+$X$를 체 $k$ 위의 국소 유한형 대수공간이라 하자.
+다음 조건들을 생각하자.
+\begin{enumerate}
+\item $|X|$는 유한 집합이다.
+\item $|X|$는 이산 공간이다.
+\item $\dim(|X|) = 0$이다.
+\item $\dim(X) = 0$이다.
+\item $X \to \Spec(k)$는 국소 준유한이다.
+\end{enumerate}
+그러면 (2), (3), (4), (5)는 동치이다.
+$X$가 양호하면 (1)은 나머지 조건들을 함의한다.
+\end{lemma}
+
+\begin{proof}
+예를 들어 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-quasi-finite-part}에
+의해 (4)와 (5)는 동치이다.
+
+\medskip\noindent
+$U$가 스킴인 전사 에탈 사상 $U \to X$를 택한다.
+
+\medskip\noindent
+$\dim(U) > 0$이면 $U$에서 자명하지 않은 특수화
+$u \leadsto u'$를 택한다. $k$ 위의 $\kappa(u)$의 초월차수는 $k$ 위의
+$\kappa(u')$의 초월차수보다 크다. 따라서 $X$에서의 상들 $x$와 $x'$는
+서로 다르다. $x/k$와 $x'/k$의 초월차수가 잘 정의되기 때문이다.
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre}을 보라.
+따라서 (2)와 (3)이 (4)를 함의한다고 결론 내린다.
+
+\medskip\noindent
+반대로 $X \to \Spec(k)$가 국소 준유한이면 $U$는 국소 뇌터이고
+(Morphisms, Lemma \ref{morphisms-lemma-finite-type-noetherian})
+차원이 $0$이므로
+(Morphisms, Lemma \ref{morphisms-lemma-locally-quasi-finite-rel-dimension-0})
+Artin 국소환들의 스펙트럼들의 분리합이다
+(Properties, Lemma \ref{properties-lemma-locally-Noetherian-dimension-0}).
+따라서 $U$는 이산 위상공간이고, $|U| \to |X|$는 연속이고 열린
+사상이므로 $|X|$도 그러하다. 달리 말해 (4)는 (2)와 (3)을 함의한다.
+
+\medskip\noindent
+$X$가 양호하고 (1)이 성립한다고 가정하자. 위의 $U$를 아핀으로
+택할 수 있다. $|U| \to |X|$의 올들은 유한하다(이는 양호한 공간의
+정의 성질의 일부이다). 따라서 $U$는 점이 유한 개인 $k$ 위의
+유한형 스킴이다. 그러므로 $U$는 $k$ 위에서 준유한이다
+(Morphisms, Lemma \ref{morphisms-lemma-finite-fibre}).
+이는 정의에 의해 $X \to \Spec(k)$가 국소 준유한이라는 뜻이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-conditions-on-point-in-fibre-and-qf}
+$S$를 스킴이라 하자. $f : X \to Y$를 국소 유한형인 $S$ 위의
+대수공간들의 사상이라 하자. $x \in |X|$라 하고 그 상을
+$y \in |Y|$라 하자. $F = f^{-1}(\{y\})$에 $|X|$에서 유도된 위상을
+준다. $k$를 체라 하고 $\Spec(k) \to Y$가 $y$를 정의하는 동치류에
+속한다고 하자. $X_k = \Spec(k) \times_Y X$라 두자.
+$x \in |X|$로 가는 $\tilde x \in |X_k|$를 택한다.
+다음 조건들을 생각하자.
+\begin{enumerate}
+\item
+\label{item-fibre-at-x-dim-0}
+$\dim_x(F) = 0$,
+\item
+\label{item-isolated-in-fibre}
+$x$는 $F$에서 고립되어 있다.
+\item
+\label{item-no-specializations-in-fibre}
+$x$는 $F$에서 닫혀 있고, $F$에서 $x' \leadsto x$이면 $x = x'$,
+\item
+\label{item-dimension-top-k-fibre}
+$\dim_{\tilde x}(|X_k|) = 0$,
+\item
+\label{item-isolated-in-k-fibre}
+$\tilde x$는 $|X_k|$에서 고립되어 있다.
+\item
+\label{item-no-specializations-in-k-fibre}
+$\tilde x$는 $|X_k|$에서 닫혀 있고, $|X_k|$에서
+$\tilde x' \leadsto \tilde x$이면 $\tilde x = \tilde x'$,
+\item
+\label{item-k-fibre-at-x-dim-0}
+$\dim_{\tilde x}(X_k) = 0$,
+\item
+\label{item-quasi-finite-at-x}
+$f$는 $x$에서 준유한이다.
+\end{enumerate}
+그러면 다음이 성립한다.
+$$
+\xymatrix{
+(\ref{item-dimension-top-k-fibre}) \ar@{=>}[r]_{f\text{ 양호함}} &
+(\ref{item-isolated-in-k-fibre}) \ar@{<=>}[r] &
+(\ref{item-no-specializations-in-k-fibre}) \ar@{<=>}[r] &
+(\ref{item-k-fibre-at-x-dim-0}) \ar@{<=>}[r] &
+(\ref{item-quasi-finite-at-x})
+}
+$$
+$Y$가 양호하면 조건 (\ref{item-isolated-in-fibre})와
+(\ref{item-no-specializations-in-fibre})는 서로 동치이고, 다음
+조건들과도 동치이다.
+(\ref{item-isolated-in-k-fibre}),
+(\ref{item-no-specializations-in-k-fibre}),
+(\ref{item-k-fibre-at-x-dim-0}), 그리고
+(\ref{item-quasi-finite-at-x}).
+$Y$와 $X$가 양호하면 모든 조건이 동치이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-conditions-on-point-on-space-over-field}에 의해 조건들
+(\ref{item-isolated-in-k-fibre}),
+(\ref{item-no-specializations-in-k-fibre}), 그리고
+(\ref{item-k-fibre-at-x-dim-0})은 서로 동치이고,
+$X_k \to \Spec(k)$가 $\tilde x$에서 준유한이라는 조건과도 동치이다.
+따라서 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-finite-locus}에 의해
+이들은 (\ref{item-quasi-finite-at-x})와도 동치이다.
+$f$가 양호하면 $X_k$는 양호한 대수공간이고, Lemma
+\ref{lemma-conditions-on-point-on-space-over-field}에 의해
+(\ref{item-dimension-top-k-fibre})는
+(\ref{item-isolated-in-k-fibre})를 함의한다.
+
+\medskip\noindent
+$Y$가 양호하면 $y$의 동치류 안에서 준콤팩트 단사 사상
+$\Spec(k') \to Y$를 택할 수 있다. 이 경우 Lemma
+\ref{lemma-topology-fibre}에 의해 $|X_{k'}| \to F$는
+위상동형사상이다. 이를 위의 논증들과 결합하면 보조정리의 나머지
+명제들이 따른다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-conditions-on-fibre-and-qf}
+$S$를 스킴이라 하자. $f : X \to Y$를 국소 유한형인 $S$ 위의
+대수공간들의 사상이라 하자. $y \in |Y|$라 하자. $k$를 체라 하고
+$\Spec(k) \to Y$가 $y$를 정의하는 동치류에 속한다고 하자.
+$X_k = \Spec(k) \times_Y X$라 두고, $F = f^{-1}(\{y\})$에 $|X|$에서
+유도된 위상을 준다. 다음 조건들을 생각하자.
+\begin{enumerate}
+\item
+\label{item-fibre-finite}
+$F$는 유한하다.
+\item
+\label{item-fibre-discrete}
+$F$는 이산 위상공간이다.
+\item
+\label{item-fibre-no-specializations}
+$\dim(F) = 0$,
+\item
+\label{item-k-fibre-finite}
+$|X_k|$는 유한 집합이다.
+\item
+\label{item-k-fibre-discrete}
+$|X_k|$는 이산 공간이다.
+\item
+\label{item-k-fibre-no-specializations}
+$\dim(|X_k|) = 0$,
+\item
+\label{item-k-fibre-dim-0}
+$\dim(X_k) = 0$,
+\item
+\label{item-quasi-finite-at-points-fibre}
+$f$는 $y$ 위에 놓이는 $|X|$의 모든 점에서 준유한이다.
+\end{enumerate}
+그러면 다음이 성립한다.
+$$
+\xymatrix{
+(\ref{item-fibre-finite}) &
+(\ref{item-k-fibre-finite}) \ar@{=>}[l] \ar@{=>}[r]_{f\text{ 양호함}} &
+(\ref{item-k-fibre-discrete}) \ar@{<=>}[r] &
+(\ref{item-k-fibre-no-specializations}) \ar@{<=>}[r] &
+(\ref{item-k-fibre-dim-0}) \ar@{<=>}[r] &
+(\ref{item-quasi-finite-at-points-fibre})
+}
+$$
+$Y$가 양호하면 조건들 (\ref{item-fibre-discrete})와
+(\ref{item-fibre-no-specializations})는 서로 동치이고, 조건들
+(\ref{item-k-fibre-discrete}), (\ref{item-k-fibre-no-specializations}),
+(\ref{item-k-fibre-dim-0}), 그리고
+(\ref{item-quasi-finite-at-points-fibre})와도 동치이다.
+$Y$와 $X$가 양호하면 (\ref{item-fibre-finite})는 다른 모든 조건을
+함의한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-conditions-on-space-over-field}에 의해 조건들
+(\ref{item-k-fibre-discrete}),
+(\ref{item-k-fibre-no-specializations}), 그리고
+(\ref{item-k-fibre-dim-0})은 서로 동치이고
+$X_k \to \Spec(k)$가 국소 준유한이라는 조건과도 동치이다.
+따라서 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-finite-locus}에 의해
+이들은 (\ref{item-quasi-finite-at-points-fibre})와도 동치이다.
+$f$가 양호하면 $X_k$는 양호한 대수공간이고, Lemma
+\ref{lemma-conditions-on-space-over-field}에 의해
+(\ref{item-k-fibre-finite})는 (\ref{item-k-fibre-discrete})를
+함의한다.
+
+\medskip\noindent
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 사상
+$|X_k| \to F$는 전사이므로
+(\ref{item-k-fibre-finite}) $\Rightarrow$ (\ref{item-fibre-finite})임을
+안다.
+
+\medskip\noindent
+$Y$가 양호하면 $y$의 동치류 안에서 준콤팩트 단사 사상
+$\Spec(k') \to Y$를 택할 수 있다. 이 경우 Lemma
+\ref{lemma-topology-fibre}에 의해 $|X_{k'}| \to F$는
+위상동형사상이다. 이를 위의 논증들과 결합하면 보조정리의 나머지
+명제들이 따른다. 세부사항은 생략한다.
+\end{proof}
+
+\section{단사 사상}
+\label{section-monomorphisms}
+
+\noindent
+다음은 단사 사상이 표현가능한 또 하나의 경우이다. 더 자세한 내용은
+More on Morphisms of Spaces, Section
+\ref{spaces-more-morphisms-section-monomorphisms}를 보라.
+
+\begin{lemma}
+\label{lemma-monomorphism-toward-disjoint-union-dim-0-rings}
+$S$를 스킴이라 하자. $Y$를 $S$ 위의 영차원 국소환들의
+스펙트럼들의 분리합이라 하자.
+$f : X \to Y$를 $S$ 위의 대수공간들의 단사 사상이라 하자.
+그러면 $f$는 표현가능하다. 즉, $X$는 스킴이다.
+\end{lemma}
+
+\begin{proof}
+이는 곧 $A$가 영차원 국소환인 $Y = \Spec(A)$의 경우로 환원된다.
+즉, $\Spec(A) = \{\mathfrak m_A\}$는 한원소 공간이다.
+$X = \emptyset$이면 증명할 것이 없다. 그렇지 않으면 공집합이 아닌
+아핀 스킴 $U = \Spec(B)$와 에탈 사상 $U \to X$를 택한다.
+$|X|$는 $|Y|$의 부분집합으로서 한원소 공간이므로(Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-monomorphism-injective-points}를 보라)
+$U \to X$는 전사이다. 다음에 주의하라.
+$U \times_X U = U \times_Y U = \Spec(B \otimes_A B)$.
+따라서 환 사상들 $B \to B \otimes_A B$가 에탈임을 안다.
+또한
+$$
+(B \otimes_A B)/\mathfrak m_A(B \otimes_A B)
+=
+(B/\mathfrak m_AB) \otimes_{A/\mathfrak m_A} (B/\mathfrak m_AB)
+$$
+이므로
+$B/\mathfrak m_AB \to (B \otimes_A B)/\mathfrak m_A(B \otimes_A B)$는
+평탄하고, 실제로 그 계수는 $A/\mathfrak m_A$-벡터공간으로서
+% P08-E602: frozen source uses the malformed article phrase “as a A/...-vector space”; see ERRATA_CANDIDATES.jsonl.
+$B/\mathfrak m_AB$의 차원과 같은 자유 가군이다.
+$B \to B \otimes_A B$가 에탈이므로 이 차원은 유한할 수밖에 없다
+(예를 들어 Morphisms, Lemmas
+\ref{morphisms-lemma-etale-universally-bounded}와
+\ref{morphisms-lemma-locally-quasi-finite-qc-source-universally-bounded}를
+보라). $B$의 모든 소 아이디얼은 $\mathfrak m_A$ 위에 놓인다
+($A$의 유일한 소 아이디얼이다). 따라서 위상공간으로서
+$\Spec(B) = \Spec(B/\mathfrak m_A)$이고, $B/\mathfrak m_A B$는
+Artin 환이므로 이 공간은 유한 이산 집합이다. Algebra, Lemmas
+\ref{algebra-lemma-finite-dimensional-algebra}와
+\ref{algebra-lemma-artinian-finite-length}를 보라.
+따라서 $B$의 모든 소 아이디얼은 극대이고,
+$B = B_1 \times \ldots \times B_n$은 유한 개의 영차원 국소환들의
+곱이다. Algebra, Lemma \ref{algebra-lemma-product-local}을 보라.
+모든 국소환 $B_i$는 Algebra, Lemma
+\ref{algebra-lemma-local-dimension-zero-henselian}에 의해 Hensel
+국소환이므로 $B \to B \otimes_A B$는 유한 에탈이다.
+따라서 Groupoids, Proposition
+\ref{groupoids-proposition-finite-flat-equivalence}에 의해 $X$는
+아핀 스킴이다.
+\end{proof}
+
+\section{일반점}
+\label{section-generic-points}
+
+\noindent
+이 절은 Properties of Spaces, Section
+\ref{spaces-properties-section-generic-points}의 연속이다.
+
+\begin{lemma}
+\label{lemma-decent-generic-points}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x \in |X|$라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $x$는 $|X|$의 어떤 기약성분의 일반점이다.
+\item 점을 가진 대수공간들의 임의의 에탈 사상
+$(Y, y) \to (X, x)$에 대하여 $y$는 $|Y|$의 어떤 기약성분의
+일반점이다.
+\item 점을 가진 대수공간들의 어떤 에탈 사상
+$(Y, y) \to (X, x)$에 대하여 $y$는 $|Y|$의 어떤 기약성분의
+일반점이다.
+\item $x$에서 $X$의 국소환의 차원은 영이다.
+\item $x$는 $X$ 위의 공차원 $0$인 점이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+정의에 의해 임의의 대수공간에 대하여 조건 (4)와 (5)는 동치이다.
+Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-local-ring}을 보라.
+Lemma \ref{lemma-etale-named-properties}에 의해 (2)와 (3)에 나오는
+모든 $Y$가 양호함에 주의하라. 따라서 (1)과 (4)의 동치만 증명하면
+충분하다. 그러면 $y$에서 $Y$의 국소환의 차원이 $x$에서 $X$의
+국소환의 차원과 같으므로 (2), (3)과의 동치도 따른다.
+$f : U \to X$를 아핀 스킴에서 오는 에탈 사상이라 하고,
+$u \in U$를 $x$로 가는 점이라 하자.
+
+\medskip\noindent
+(1)을 가정하자. $U$에서 $u' \leadsto u$를 특수화라 하자.
+그러면 $f(u') = f(u) = x$이다. Lemma
+\ref{lemma-decent-no-specializations-map-to-same-point}에 의해
+$u' = u$임을 안다. 따라서 $u$는 $U$의 어떤 기약성분의 일반점이다.
+그러므로 $\dim(\mathcal{O}_{U, u}) = 0$이고 (4)가 성립한다.
+
+\medskip\noindent
+(4)를 가정하자. 점 $x$는 어떤 기약성분 $T \subset |X|$에 포함된다.
+$|X|$가 소버이므로(Proposition \ref{proposition-reasonable-sober})
+% P08-E327: frozen source contains the malformed phrase “we T has”; see ERRATA_CANDIDATES.jsonl.
+$T$는 일반점 $x'$를 가진다. 물론 $x' \leadsto x$이다.
+그러면 이 특수화를 $U$의 $u' \leadsto u$로 올릴 수 있다
+(Lemma \ref{lemma-decent-specialization}). $u' = u$, 즉 $x' = x$가
+아니면 이는 $\dim(\mathcal{O}_{U, u}) = 0$이라는 가정에 모순이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-codimension-local-ring}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$T \subset |X|$를 기약 닫힌 부분집합이라 하자. $\xi \in T$를
+일반점이라 하자(Proposition \ref{proposition-reasonable-sober}).
+그러면 $\text{codim}(T, |X|)$
+(Topology, Definition \ref{topology-definition-codimension})은
+$\xi$에서 $X$의 국소환의 차원이다(Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-local-ring}).
+\end{lemma}
+
+\begin{proof}
+스킴 $U$, 점 $u \in U$, 그리고 $u$를 $\xi$로 보내는 에탈 사상
+$U \to X$를 택한다. 그러면 Lemma \ref{lemma-decent-specialization}에
+의해 자명하지 않은 특수화들의 임의의 열
+$\xi_e \leadsto \ldots \leadsto \xi_0 = \xi$를 $U$의 열
+$u_e \leadsto \ldots \leadsto u_0 = u$로 올릴 수 있다.
+반대로 Lemma \ref{lemma-decent-no-specializations-map-to-same-point}에
+의해 $U$에서 자명하지 않은 특수화들의 임의의 열
+$u_e \leadsto \ldots \leadsto u_0 = u$는 자명하지 않은 특수화들의 열
+$\xi_e \leadsto \ldots \leadsto \xi_0 = \xi$로 간다.
+$|X|$와 $U$가 소버 위상공간이므로 $|X|$에서 $T$의 공차원과
+$U$에서 $\overline{\{u\}}$의 공차원이 같다고 결론 내린다.
+이 방법으로 보조정리는 스킴의 경우인 Properties, Lemma
+\ref{properties-lemma-codimension-local-ring}으로 환원된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-get-reasonable}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자. 다음을
+가정한다.
+\begin{enumerate}
+\item $X$ 위에서 에탈인 모든 준콤팩트 스킴은 유한 개의 기약성분을
+가진다.
+\item $X$ 위의 공차원 $0$인 모든 $x \in |X|$는 단사 사상
+$\Spec(k) \to X$로 표현될 수 있다.
+\end{enumerate}
+그러면 $X$는 합리적인 대수공간이다.
+\end{lemma}
+
+\begin{proof}
+$U$를 아핀 스킴이라 하고 $a : U \to X$를 에탈 사상이라 하자.
+$a$의 올들이 보편적으로 유계임을 보여야 한다. 가정 (1)에 의해 스킴
+$U$는 유한 개의 기약성분을 가진다. $u_1, \ldots, u_n \in U$를
+이 기약성분들의 일반점들이라 하자.
+$\{x_1, \ldots, x_m\} \subset |X|$를
+$\{u_1, \ldots, u_n\}$의 상이라 하자. 각 $x_j$는 공차원 $0$인
+점이다. 가정 (2)에 의해 $x_j$를 표현하는 단사 사상
+$\Spec(k_j) \to X$를 택할 수 있다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points}에 의해
+$$
+U \times_X \Spec(k_j) = \coprod\nolimits_{a(u_i) = x_j} \Spec(\kappa(u_i))
+$$
+이다. 이는 차수가
+$d_j = \sum_{a(u_i) = x_j} [\kappa(u_i) : k_j]$인
+$\Spec(k_j)$ 위의 유한 스킴이다. $n = \max d_j$라 두자.
+
+\medskip\noindent
+$a$는 분리이다(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-separated-cover}).
+Lemma \ref{lemma-stratify-flat-fp-lqf}에서 $U \to X$에 결부된 층화
+$$
+X = X_0 \supset X_1 \supset X_2 \supset \ldots
+$$
+를 생각하자. 위에서 $n$을 택한 방식에 의해 $X_{n + 1}$은 공집합이라고
+결론 내린다. 실제로 그렇지 않다면 $a^{-1}(X_{n + 1})$은 $U$의
+공집합이 아닌 열린집합이고, 따라서
+% P08-E328/P08-E328-C1: preserve frozen x_i literally; the correct U-point would be u_i. See ERRATA_CANDIDATES.jsonl.
+$x_i$ 중 하나를 포함할 것이다. 이는 $X_{n + 1}$이
+$x_j = a(u_i)$를 포함한다는 뜻인데, 불가능하다.
+따라서 $U \to X$의 올들은 보편적으로 유계임을 안다(실제로 정수
+$n$으로 유계이다).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finitely-many-irreducible-components}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item $X$는 양호하고 $|X|$는 유한 개의 기약성분을 가진다.
+\item $X$ 위에서 에탈인 모든 준콤팩트 스킴은 유한 개의 기약성분을
+가지고, $X$ 위의 공차원 $0$인 $x \in |X|$는 유한 개이며, 이들 각각은
+단사 사상 $\Spec(k) \to X$로 표현될 수 있다.
+\item 스킴인 조밀 열린집합 $X' \subset X$가 존재하고, $X'$는
+일반점들이 $\{x'_1, \ldots, x'_m\}$인 유한 개의 기약성분을 가지며,
+$j = 1, \ldots, m$에 대하여 사상 $x'_j \to X$는 준콤팩트이다.
+\end{enumerate}
+더 나아가 이 조건들이 성립하면 $X$는 합리적이고, 점들
+$x'_j \in |X|$는 $|X|$의 기약성분들의 일반점이다.
+\end{lemma}
+
+\begin{proof}
+증명에서는 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points}를 더 이상
+언급하지 않고 사용한다.
+(1)을 가정하자. Theorem \ref{theorem-decent-open-dense-scheme}에 의해
+$X$는 조밀 열린 부분스킴 $X'$를 가진다. $|X'|$의 기약성분의 폐포는
+$|X|$의 기약성분이므로 $|X'|$는 유한 개의 기약성분을 가진다.
+따라서 (3)이 성립한다.
+
+\medskip\noindent
+$X' \subset X$가 (3)과 같다고 가정하자.
+$\{x'_1, \ldots, x'_m\}$를 $X'$의 기약성분들의 일반점들이라 하자.
+$a : U \to X$를 $U$가 준콤팩트 스킴인 에탈 사상이라 하자.
+(2)를 증명하려면 $U$가 일반점들이
+$\{x'_1, \ldots, x'_m\}$ 위에 놓이는 유한 개의 기약성분을 가짐을
+보이면 충분하다. $U$의 유한 아핀 열린 덮개의 원소들에 대하여 이를
+증명하면 충분하므로 $U$가 아핀이라고 가정하며, 그렇게 하자.
+$U' = a^{-1}(X') \subset U$는 조밀 열린집합임에 주의하라.
+$U' \to X'$는 스킴들의 에탈 사상이므로 $U'$의 기약성분들의 일반점들은
+$\{x'_1, \ldots, x'_m\}$ 위에 놓이는 점들이다.
+$x'_j \to X$가 준콤팩트이므로 $x'_j$ 위에 놓이는 $U$의 점은 유한
+개이다(Lemma \ref{lemma-UR-finite-above-x}). 따라서 $U'$는 유한 개의
+기약성분을 가지며, 이 기약성분들의 폐포들이 $U$의 기약성분들임을
+함의한다. 따라서 (2)가 성립한다.
+
+\medskip\noindent
+(2)를 가정하자. Lemma \ref{lemma-get-reasonable}에 의해 이는 (1)과
+마지막 명제를 함의한다.
+(합리적인 대수공간은 양호하다는 사실도 사용한다. Definition
+\ref{definition-very-reasonable} 뒤의 논의를 보라.)
+\end{proof}
+
+\section{일반적으로 유한한 사상}
+\label{section-generically-finite}
+
+\noindent
+이 절에서는 스킴의 사상들에 대하여 Morphisms, Section
+\ref{morphisms-section-generically-finite}와 Varieties, Section
+\ref{varieties-section-generically-finite}에서 논의한 내용을 대수공간의
+사상들에 대하여 논의한다.
+
+\begin{lemma}
+\label{lemma-generically-finite}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $f$가 준분리인 유한형 사상이라고 가정하자.
+$y \in |Y|$를 $Y$ 위의 공차원 $0$인 점이라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item $\Spec(k) \to Y$가 $y$를 표현할 때 공간 $|X_k|$는 유한하다.
+\item $X \to Y$는 $y$ 위에 놓이는 $|X|$의 모든 점에서 준유한이다.
+\item $y \in |Y'|$인 열린 부분공간 $Y' \subset Y$가 존재하여
+$Y' \times_Y X \to Y'$는 유한하다.
+\end{enumerate}
+$Y$가 양호하면 이들은 다음과도 동치이다.
+\begin{enumerate}
+\item[(4)] 집합 $f^{-1}(\{y\})$는 유한하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)의 동치는 Lemma \ref{lemma-conditions-on-fibre-and-qf}에서
+따른다(그리고 Lemma \ref{lemma-properties-trivial-implications}에
+의해 준분리 사상은 양호하다).
+
+\medskip\noindent
+(1)과 (2)의 동치 조건들을 가정하자. 아핀 스킴 $V$와
+$v \in V$를 $y$로 보내는 에탈 사상 $V \to Y$를 택한다.
+그러면 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points}에 의해 $v$는
+$V$의 어떤 기약성분의 일반점이다.
+아핀 스킴 $U$와 전사 에탈 사상 $U \to V \times_Y X$를 택한다.
+그러면 $U \to V$는 유한형이다. (2)에 의해 $U \to V$는 $v$ 위에
+놓이는 모든 점에서 준유한이다. 따라서 $v$ 위의 $U \to V$의 올은
+유한하다(Morphisms, Lemma
+\ref{morphisms-lemma-quasi-finite-at-a-finite-number-of-points}).
+Morphisms, Lemma \ref{morphisms-lemma-generically-finite}에 의해
+$V$를 축소한 뒤 $U \to V$가 유한하다고 가정할 수 있다. 다음과 두자.
+$$
+R = U \times_{V \times_Y X} U
+$$
+$f$가 준분리이므로 $V \times_Y X$는 준분리이고, 따라서 $R$은
+준콤팩트 스킴이다. 더 나아가
+% P08-E329: frozen source has plural “morphisms” with singular “is”; see ERRATA_CANDIDATES.jsonl.
+사상 $R \to V$는 에탈 사상 $R \to U$와 유한 사상 $U \to V$의
+합성이므로 준유한이다. 따라서 Morphisms, Lemma
+\ref{morphisms-lemma-generically-finite}를 한 번 더 적용할 수 있고,
+$V$를 축소한 뒤 $R \to V$도 유한하다고 가정할 수 있다.
+% P08-E330: frozen source gives the two groupoid projections target V rather than U; see ERRATA_CANDIDATES.jsonl.
+이는 물론 두 사영 $R \to V$가 유한 에탈임을 함의한다. 따라서
+% P08-E603: frozen source writes V/R although R is the relation on U; see ERRATA_CANDIDATES.jsonl.
+$V/R = V \times_Y X$는 아핀 스킴이다. Groupoids, Proposition
+\ref{groupoids-proposition-finite-flat-equivalence}를 보라.
+Morphisms, Lemma \ref{morphisms-lemma-image-proper-is-proper}에 의해
+$V \times_Y X \to V$는 proper이고, Morphisms, Lemma
+\ref{morphisms-lemma-finite-proper}에 의해
+$V \times_Y X \to V$는 유한하다고 결론 내린다.
+마지막으로 $Y' \subset Y$를 $|V| \to |Y|$의 상에 대응하는 $Y$의
+열린 부분공간이라 하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-local}에 의해
+$V$로의 기저변환이 유한하고 $V \to Y'$가 전사 에탈 사상이므로
+$Y' \times_Y X \to Y'$가 유한하다고 결론 내린다.
+
+\medskip\noindent
+$Y$가 양호하고 $f$가 준분리이면 $X$도 양호함을 안다. Lemmas
+\ref{lemma-properties-trivial-implications}와
+\ref{lemma-property-over-property}를 사용하라.
+따라서 Lemma \ref{lemma-conditions-on-fibre-and-qf}를 적용하면 (4)가
+(1)과 (2)를 함의한다. 한편 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-at-a-finite-number-of-points}에
+의해 (2)가 (4)를 함의함을 안다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-generically-finite-reprise}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $f$가 준분리이고 국소 유한형이며 $Y$가 준분리라고
+가정하자. $y \in |Y|$를 $Y$ 위의 공차원 $0$인 점이라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item 집합 $f^{-1}(\{y\})$는 유한하다.
+\item $\Spec(k) \to Y$가 $y$를 표현할 때 공간 $|X_k|$는 유한하다.
+\item $f(X') \subset Y'$, $y \in |Y'|$,
+$f^{-1}(\{y\}) \subset |X'|$이고
+$f|_{X'} : X' \to Y'$가 유한인 열린 부분공간들
+$X' \subset X$와 $Y' \subset Y$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+준분리 대수공간들은 양호하므로 (1)과 (2)의 동치는 Lemma
+\ref{lemma-conditions-on-fibre-and-qf}에서 따른다.
+(1)과 (2)가 (3)을 함의함을 증명하기 위해 $Y$를 $y$를 포함하는
+준콤팩트 열린집합으로 바꾸며, 그렇게 하자.
+$f^{-1}(\{y\})$가 유한하므로
+% P08-E331: frozen source has malformed “open subspace of X' subset X”; see ERRATA_CANDIDATES.jsonl.
+그 올을 포함하는 준콤팩트 열린 부분공간 $X' \subset X$를 찾을 수
+있다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-quasi-separated-permanence}에
+의해 제한 $f|_{X'} : X' \to Y$는 준콤팩트이고 준분리이다
+(여기서 $Y$가 준분리라는 것을 사용한다).
+Lemma \ref{lemma-generically-finite}를
+$f|_{X'} : X' \to Y$에 적용하면 (3)이 성립함을 안다.
+(3)이 (2)를 함의한다는 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quasi-finiteness-over-generic-point}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $f$가 국소 유한형이라고 가정하자.
+$X^0 \subset |X|$, 각각 $Y^0 \subset |Y|$를 $X$, 각각 $Y$의
+공차원 $0$인 점들의 집합이라 하자. $y \in Y^0$라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item $f^{-1}(\{y\}) \subset X^0$,
+\item $f$는 $y$ 위에 놓이는 모든 점에서 준유한이다.
+\item $f$는 $y$ 위에 놓이는 모든 $x \in X^0$에서 준유한이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$V$를 스킴이라 하고 $V \to Y$를 전사 에탈 사상이라 하자.
+$U$를 스킴이라 하고 $U \to V \times_Y X$를 전사 에탈 사상이라
+하자. 그러면 $f$가 점 $u \in U$의 상 $x$에서 준유한인 것과
+$U \to V$가 $u$에서 준유한인 것은 동치이다. 더 나아가
+$x \in X^0$인 것과 $u$가 $U$의 어떤 기약성분의 일반점인 것은
+동치이다(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points}).
+따라서 보조정리는 사상 $U \to V$의 경우, 즉 Morphisms, Lemma
+\ref{morphisms-lemma-quasi-finiteness-over-generic-point}로 환원된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-over-dense-open}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $f$가 국소 유한형이라고 가정하자.
+$X^0 \subset |X|$, 각각 $Y^0 \subset |Y|$를 $X$, 각각 $Y$의
+공차원 $0$인 점들의 집합이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $Y$는 양호하다.
+\item $X^0$와 $Y^0$는 유한하고 $f^{-1}(Y^0) = X^0$이다.
+\item $f$가 준콤팩트이거나 $f$가 분리이다.
+\end{enumerate}
+그러면 조밀 열린집합 $V \subset Y$가 존재하여
+$f^{-1}(V) \to V$는 유한하다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{lemma-finitely-many-irreducible-components}와
+\ref{lemma-decent-generic-points}에 의해 $Y$가 유한 개의 기약성분을
+갖는 스킴이라고 가정할 수 있다. 더 축소하여 $Y$가 일반점 $y$를
+갖는 기약 아핀 스킴이라고 가정할 수 있다. 그러면 $y$ 위의 $f$의
+올은 유한하다.
+
+\medskip\noindent
+$f$가 준콤팩트이고 $Y$가 아핀 기약이라고 가정하자. 그러면 $X$는
+준콤팩트이고, 아핀 스킴 $U$와 전사 에탈 사상 $U \to X$를 택할 수
+있다. 그러면 $U \to Y$는 유한형이고, $y$ 위의 $U \to Y$의 올은
+$U$의 기약성분들의 일반점들의 집합 $U^0$이다(Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-codimension-0-points}).
+따라서 $U^0$는 유한하고(Morphisms, Lemma
+\ref{morphisms-lemma-quasi-finite-at-a-finite-number-of-points}),
+$Y$를 축소한 뒤 $U \to Y$가 유한하다고 가정할 수 있다
+(Morphisms, Lemma \ref{morphisms-lemma-generically-finite}).
+다음으로 $R = U \times_X U$를 생각하자. 사영 $s : R \to U$가
+에탈이므로 $R^0 = s^{-1}(U^0)$가 $y$ 위에 놓임을 안다.
+$R \to U \times_Y U$는 단사 사상이므로 $U \times_Y U \to Y$가
+유한하다는 사실로부터 $R^0$가 유한하다고 결론 내린다.
+그리고 $R$은 분리이다(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-separated-cover}). 따라서 $Y$를 한 번
+더 축소하여 $R$이 $Y$ 위에서 유한한 상황에 이를 수 있다
+(Morphisms, Lemma \ref{morphisms-lemma-finite-over-dense-open}).
+이 경우 $X = U/R$은 $Y$ 위에서 유한하다는 것이 Lemma
+\ref{lemma-generically-finite}의 증명에 주어진 것과 정확히 같은
+논증으로부터 따른다(또는 $X$도 준분리임이 바로 따르므로 그 보조정리를
+그대로 적용할 수 있다).
+
+\medskip\noindent
+$f$가 분리이고 $Y$가 아핀 기약이라고 가정하자. Lemma
+\ref{lemma-generically-finite-reprise}와 같은 $V \subset Y$와
+$U \subset X$를 택한다. $f|_U : U \to V$가 유한하므로
+$U \subset f^{-1}(V)$는 닫힌 동시에 열려 있다
+(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-universally-closed-permanence}와
+\ref{spaces-morphisms-lemma-finite-proper}).
+따라서 $X$의 어떤 열린 부분공간 $W$에 대하여
+$f^{-1}(V) = U \amalg W$이다. 그러나 $U$는 $X$의 공차원 $0$인
+모든 점을 포함하므로 원하는 대로 $W = \emptyset$이라고 결론 내린다
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points-dense}).
+\end{proof}
+
+\section{쌍유리 사상}
+\label{section-birational}
+
+\noindent
+다음 대수공간의 쌍유리 사상의 정의는 스킴의 쌍유리 사상에 대한
+우리의 정의(Morphisms, Definition
+\ref{morphisms-definition-birational})에 가장 가까운 것으로 보인다.
+
+\begin{definition}
+\label{definition-birational}
+$S$를 스킴이라 하자.
+% P08-E332: frozen source omits “be” in “Let X and Y be algebraic spaces”; see ERRATA_CANDIDATES.jsonl.
+$X$와 $Y$를 $S$ 위의 대수공간이라 하자.
+$X$와 $Y$가 양호하고 $|X|$와 $|Y|$가 유한 개의 기약성분을 가진다고
+가정하자. 사상 $f : X \to Y$가 다음을 만족하면 이를
+{\it 쌍유리}라고 한다.
+\begin{enumerate}
+\item $|f|$는 $|X|$의 기약성분들의 일반점들의 집합과 $|Y|$의
+기약성분들의 일반점들의 집합 사이에 전단사를 유도한다.
+\item 기약성분의 모든 일반점 $x \in |X|$에 대하여 국소환 사상
+$\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$는 동형사상이다
+(아래의 설명을 보라).
+\end{enumerate}
+\end{definition}
+
+\noindent
+설명: $X$와 $Y$가 양호하므로 위상공간 $|X|$와 $|Y|$는 소버이다
+(Proposition \ref{proposition-reasonable-sober}). 따라서 조건 (1)은
+뜻이 있다. 더 나아가 $|X|$와 $|Y|$가 유한 개의 기약성분을 가진다고
+가정했으므로 일반점들 $x_1, \ldots, x_n \in |X|$, 각각
+$y_1, \ldots, y_n \in |Y|$는 $|X|$, 각각 $|Y|$의 모든 조밀
+열린집합에 포함됨을 안다. 특히 Theorem
+\ref{theorem-decent-open-dense-scheme}에 의해 이들은 $X$, 각각
+$Y$의 스킴 자리에 포함된다. 따라서 $\mathcal{O}_{X, x_i}$, 각각
+$\mathcal{O}_{Y, y_i}$를 이 스킴의 $x_i$, 각각 $y_i$에서의
+국소환으로 정의할 수 있다.
+
+\medskip\noindent
+사상 $f : X \to Y$가 쌍유리이면 다음을 만족하는 조밀 열린
+부분공간들 $X' \subset X$와 $Y' \subset Y$가 존재한다고 결론 내린다.
+\begin{enumerate}
+\item $f(X') \subset Y'$이다.
+\item $X'$와 $Y'$는 표현가능하다.
+\item $f|_{X'} : X' \to Y'$는 Morphisms, Definition
+\ref{morphisms-definition-birational}의 의미에서 쌍유리이다.
+\end{enumerate}
+그러나 우리는 $X$와 $Y$가 유한 개의 기약성분을 갖는 양호한
+공간이어야 한다고 요구한다. 유한 개의 기약성분을 갖는 양호한
+대수공간을 특징짓는 다른 방법들은 Lemma
+\ref{lemma-finitely-many-irreducible-components}에 주어져 있다.
+대부분의 경우 쌍유리 사상은 조밀 열린집합 위에서 동형사상이다.
+
+\begin{lemma}
+\label{lemma-birational-dominant}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 대수공간들의 사상이라 하고, 이 공간들이
+양호하며 유한 개의 기약성분을 가진다고 하자. $f$가 쌍유리이면
+$f$는 지배적이다.
+\end{lemma}
+
+\begin{proof}
+정의들에서 바로 따른다. Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dominant}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-birational-generic-fibres}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 양호하고 유한 개의
+기약성분을 갖는 대수공간들의 쌍유리 사상이라 하자.
+% P08-E333: frozen source types the topological point as y in Y rather than y in |Y|; see ERRATA_CANDIDATES.jsonl.
+$y \in Y$가 어떤 기약성분의 일반점이면 기저변환
+$X \times_Y \Spec(\mathcal{O}_{Y, y}) \to \Spec(\mathcal{O}_{Y, y})$는
+동형사상이다.
+\end{lemma}
+
+\begin{proof}
+$X' \subset X$와 $Y' \subset Y$를 표현가능한 극대 열린
+부분공간들이라 하자. Lemma
+\ref{lemma-finitely-many-irreducible-components}를 보라.
+Lemma \ref{lemma-quasi-finiteness-over-generic-point}에 의해
+% P08-E334: frozen source has the doubled predicate “is consists”; see ERRATA_CANDIDATES.jsonl.
+$y$ 위의 $f$의 올은 $X$의 공차원 $0$인 점들로 이루어지며, 따라서
+$X'$에 포함된다. 그러므로
+$X \times_Y \Spec(\mathcal{O}_{Y, y}) =
+X' \times_{Y'} \Spec(\mathcal{O}_{Y', y})$이고, 결과는 Morphisms,
+Lemma \ref{morphisms-lemma-birational-generic-fibres}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-birational-birational}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 양호하고 유한 개의
+기약성분을 갖는 대수공간들의 쌍유리 사상이라 하자.
+다음 조건 가운데 하나가 성립한다고 가정하자.
+\begin{enumerate}
+% P08-E335: frozen source incorrectly equates reduced with integral; see ERRATA_CANDIDATES.jsonl.
+\item $f$는 국소 유한형이고 $Y$는 축약이다(즉, 정역적이다).
+\item $f$는 국소 유한 표시이다.
+\end{enumerate}
+그러면 $f(U) \subset V$이고 $f|_U : U \to V$가 동형사상인 조밀
+열린집합들 $U \subset X$와 $V \subset Y$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-finitely-many-irreducible-components}에 의해 $X$와
+$Y$가 스킴이라고 가정할 수 있다. 이 경우 결과는 Morphisms, Lemma
+\ref{morphisms-lemma-birational-birational}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-birational-isomorphism-over-dense-open}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 양호하고 유한 개의
+기약성분을 갖는 대수공간들의 쌍유리 사상이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $f$가 준콤팩트이거나 $f$가 분리이다.
+\item $f$가 국소 유한형이고 $Y$가 축약이거나, $f$가 국소 유한
+표시이다.
+\end{enumerate}
+그러면 조밀 열린집합 $V \subset Y$가 존재하여
+$f^{-1}(V) \to V$는 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-finitely-many-irreducible-components}에 의해 $Y$가
+스킴이라고 가정할 수 있다. Lemma \ref{lemma-finite-over-dense-open}에
+의해 $f$가 유한하다고 가정할 수 있다. 그러면 $X$도 스킴이고, 결과는
+Morphisms, Lemma
+\ref{morphisms-lemma-birational-isomorphism-over-dense-open}에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-birational-etale-localization}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 양호하고 유한 개의
+기약성분을 갖는 대수공간들의 사상이라 하자. $f$가 쌍유리이고
+$V$가 아핀인 에탈 사상 $V \to Y$가 주어지면
+$X \times_Y V$는 유한 개의 기약성분을 갖는 양호한 공간이고,
+$X \times_Y V \to V$는 쌍유리이다.
+\end{lemma}
+
+\begin{proof}
+대수공간 $U = X \times_Y V$는 양호하다
+(Lemma \ref{lemma-etale-named-properties}).
+$V$와 $U$의 일반점들은 $|Y|$와 $|X|$의 일반점들 위에 놓이는
+$|V|$와 $|U|$의 원소들이다
+(Lemma \ref{lemma-decent-generic-points}).
+$Y$가 양호하므로 $V$ 위의 일반점은 유한 개라고 결론 내린다.
+$\xi \in |X|$를 어떤 기약성분의 일반점이라 하자.
+Definition \ref{definition-birational} 뒤의 논의에 의해 다음 Cartesian
+정사각형을 가진다.
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{X, \xi}) \ar[d] \ar[r] & X \ar[d] \\
+\Spec(\mathcal{O}_{Y, f(\xi)}) \ar[r] & Y
+}
+$$
+여기서 수평 사상들은 국소환들을 동일시하는 단사 사상들이고 왼쪽
+수직 화살표는 동형사상이다. 따라서 다음 도식에서
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{X, \xi}) \times_X U \ar[d] \ar[r] & U \ar[d] \\
+\Spec(\mathcal{O}_{Y, f(\xi)}) \times_Y V \ar[r] & V
+}
+$$
+왼쪽 수직 화살표는 동형사상이다. 수평 화살표들의 상은 $U$와 $V$의
+스킴 자리에 포함되고 국소환들을 동일시한다(일부 세부사항은 생략한다).
+% P08-E336: frozen source has singular “image” with plural “are”; see ERRATA_CANDIDATES.jsonl.
+수평 화살표들의 상들은 $\xi$, 각각 $f(\xi)$ 위에 놓이는
+$|U|$, 각각 $|V|$의 점들이므로 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-birational-induced-morphism-normalizations}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 양호하고 유한 개의
+기약성분을 갖는 대수공간들 사이의 쌍유리 사상이라 하자.
+그러면 정규화 $X^\nu \to X$와 $Y^\nu \to Y$가 존재하고,
+$S$ 위의 대수공간들의 가환 도식
+$$
+\xymatrix{
+X^\nu \ar[r] \ar[d] &  Y^\nu \ar[d] \\
+X \ar[r] & Y
+}
+$$
+이 존재한다. 사상 $X^\nu \to Y^\nu$는 쌍유리이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-finitely-many-irreducible-components}에 의해 $X$와
+$Y$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}의 동치 조건들을
+만족하므로 정규화들이 정의된다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-normalization-normal}에 의해 대수공간
+$X^\nu$는 정규이고 공차원 $0$인 점들을 공차원 $0$인 점들로 보낸다.
+$f$도 공차원 $0$인 점들을 공차원 $0$인 점들로 보내므로(양호한
+공간에서는 Lemma \ref{lemma-decent-generic-points}에 의해 이것이
+일반점과 같다는 사실을 사용한다), Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-normalization-normal}로부터 합성
+$X^\nu \to X \to Y$가 $Y^\nu$를 통해 분해됨을 얻는다.
+
+\medskip\noindent
+예를 들어 Lemma \ref{lemma-representable-named-properties}에 의해
+$X^\nu$와 $Y^\nu$가 양호함에 주의하라. 더 나아가 사상들
+$X^\nu \to X$와 $Y^\nu \to Y$는 기약성분들 위의 전단사를 유도하므로
+(위의 참고문헌들을 보라) $X^\nu$와 $Y^\nu$는 모두 유한 개의
+기약성분을 가지고, 사상 $X^\nu \to Y^\nu$는 이들의 일반점들 사이에
+전단사를 유도한다.
+$X^\nu \to Y^\nu$가 쌍유리임을 증명하려면 이 점들에서 국소환의
+동형사상을 유도함을 보이면 충분하다. 이를 위해 $X$와 $Y$를 그
+일반점들의 열린 근방들로 바꿀 수 있고, 따라서 $X$와 $Y$가 일반점
+$x$와 $y$를 갖는 아핀 기약 스킴들이라고 가정할 수 있다.
+% P08-E337: frozen source reverses the natural local-ring direction; both displayed directions below remain literal. See ERRATA_CANDIDATES.jsonl.
+$f$가 쌍유리이므로 사상
+$\mathcal{O}_{X, x} \to \mathcal{O}_{Y, y}$는 동형사상이다.
+$x$와 $y$ 위에 놓이는 점들을 $x^\nu \in X^\nu$와
+$y^\nu \in Y^\nu$라 하자. 정규화의 구성에 의해
+$\mathcal{O}_{X^\nu, x^\nu} = \mathcal{O}_{X, x}/\mathfrak m_x$이고
+$Y$에서도 마찬가지이다. 따라서 사상
+$\mathcal{O}_{X^\nu, x^\nu} \to \mathcal{O}_{Y^\nu, y^\nu}$도
+동형사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-birational-over-normal}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $X$와 $Y$는 양호하고 유한 개의 기약성분을 가진다.
+\item $f$는 정수적이고 쌍유리이다.
+\item $Y$는 정규이다.
+\item $X$는 축약이다.
+\end{enumerate}
+그러면 $f$는 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+$V$가 아핀인 에탈 사상 $V \to Y$를 택한다.
+$U = X \times_Y V \to V$가 동형사상임을 보이면 충분하다.
+Lemma \ref{lemma-birational-etale-localization}과 그 증명에 의해
+$U$와 $V$는 양호하고 유한 개의 기약성분을 가지며
+$U \to V$는 쌍유리임을 안다. Properties, Lemma
+\ref{properties-lemma-normal-locally-finite-nr-irreducibles}에 의해
+$V$는 유한 개의 정역 스킴들의 분리합이다. 따라서 $V$가 정역이라고
+가정할 수 있다. $f$가 쌍유리이므로 $U$는 기약이고 축약, 즉
+정역임을 안다($f$가 정수적이고 따라서 표현가능하므로 $U$가 스킴임에
+주의하라). 따라서 $X$와 $Y$가 정역 스킴이라고 가정할 수 있고,
+결과는 스킴의 경우인 Morphisms, Lemma
+\ref{morphisms-lemma-finite-birational-over-normal}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-normalization-normal}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 양호하고 유한 개의
+기약성분을 갖는 대수공간들의 정수적 쌍유리 사상이라 하자.
+그러면 분해 $Y^\nu \to X \to Y$가 존재하고,
+$Y^\nu \to X$는 $X$의 정규화이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-birational-induced-morphism-normalizations}의 사상
+$X^\nu \to Y^\nu$를 생각하자. 이 사상은 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-permanence}에 의해 정수적이다.
+따라서 Lemma \ref{lemma-finite-birational-over-normal}에 의해
+동형사상이다.
+\end{proof}
+
+\section{Jacobson 공간}
+\label{section-jacobson}
+
+\noindent
+대수공간의 Jacobson 성질은 Properties of Spaces, Remark
+\ref{spaces-properties-remark-list-properties-local-etale-topology}에서
+정의하였다. 표현가능한 대수공간에 대해서는 Properties, Section
+\ref{properties-section-jacobson}에서 논의한 성질과 일치한다.
+% P08-E338: frozen source appends an unbound |X| after “general algebraic spaces”; see ERRATA_CANDIDATES.jsonl.
+Jacobson 성질과 위상공간 $|X|$의 거동 사이의 관계는 일반 대수공간들
+$|X|$에 대해서는 명백하지 않다. 그러나 양호한(예를 들어 준분리이거나
+국소 분리인) 대수공간 $X$가 Jacobson인 것과 $|X|$가 Jacobson인 것은
+동치이다(Lemma \ref{lemma-decent-Jacobson}를 보라).
+
+\begin{lemma}
+\label{lemma-Jacobson-universally-Jacobson}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Jacobson 대수공간이라 하자.
+$X$ 위의 모든 국소 유한형 대수공간은 Jacobson이다.
+\end{lemma}
+
+\begin{proof}
+$U$가 스킴인 전사 에탈 사상 $U \to X$를 택한다.
+그러면 $U$는 (정의에 의해) Jacobson이고, 국소 유한형인 스킴의 사상
+$V \to U$에 대하여 스킴에 대한 대응 결과(Morphisms, Lemma
+\ref{morphisms-lemma-Jacobson-universally-Jacobson})에 의해 $V$는
+Jacobson이다. 따라서 $Y \to X$가 국소 유한형인 대수공간들의 사상이면
+$V = U \times_X Y$라 둘 때 정의에 의해 $Y$가 Jacobson임을 안다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-Jacobson-ft-points-lift-to-closed}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 Jacobson 대수공간이라 하자.
+$x \in X_{\text{ft-pts}}$이고 $g : W \to X$가 $W$가 스킴인 국소
+유한형 사상일 때, $x \in \Im(|g|)$이면 $x$로 가는 $W$의 닫힌 점이
+존재한다.
+\end{lemma}
+
+\begin{proof}
+$U$가 스킴이고 $u \in U$가 $x$로 가는 닫힌 점인 에탈 사상
+$U \to X$를 택한다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-identify-finite-type-points}를 보라.
+Lemma \ref{lemma-Jacobson-universally-Jacobson}에 의해 $W$,
+$W \times_X U$, $U$는 Jacobson 스킴임에 주의하라. 따라서 이
+스킴들 위에서는 Morphisms, Lemma
+\ref{morphisms-lemma-jacobson-finite-type-points}에 의해 유한형 점과
+닫힌 점이 같다. $u$의 역상 $T \subset W \times_X U$는
+% P08-E339: frozen source omits “is” in the parenthetical image clause; see ERRATA_CANDIDATES.jsonl.
+공집합이 아닌($x$가 $W \to X$의 상에 있으므로) 닫힌 부분집합이다.
+Morphisms, Lemma \ref{morphisms-lemma-enough-finite-type-points}에 의해
+$u$로 가는 $W \times_X U$의 닫힌 점 $t$가 존재한다.
+$W \times_X U \to W$가 국소 유한형이므로 Morphisms, Lemma
+\ref{morphisms-lemma-jacobson-finite-type-points}에 의해 $W$에서
+$t$의 상은 닫혀 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-decent-Jacobson-ft-pts}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호한 Jacobson 대수공간이라
+하자. 그러면 $X_{\text{ft-pts}} \subset |X|$는 닫힌 점들의 집합이다.
+\end{lemma}
+
+\begin{proof}
+$x \in |X|$가 닫혀 있으면 $x$를 닫힌 몰입
+$\Spec(k) \to X$로 표현할 수 있다. Lemma
+\ref{lemma-decent-space-closed-point}를 보라. 따라서 $x$는 분명
+유한형 점이다.
+
+\medskip\noindent
+반대로 $x \in |X|$를 유한형 점이라 하자. $k$가 체인 준콤팩트 단사
+사상 $\Spec(k) \to X$로 $x$를 표현할 수 있음을 안다
+(Definition \ref{definition-very-reasonable}). 한편 정의에 의해
+$x$를 표현하는 국소 유한형 사상 $\Spec(k') \to X$가 존재한다
+(Morphisms, Definition \ref{morphisms-definition-finite-type-point}).
+분해 $\Spec(k') \to \Spec(k) \to X$를 얻는다.
+$U$가 아핀인 임의의 에탈 사상 $U \to X$를 택하고 사상들
+$$
+\Spec(k') \times_X U \to \Spec(k) \times_X U \to U
+$$
+을 생각하자. 준콤팩트 스킴 $\Spec(k) \times_X U$는
+$\Spec(k)$ 위에서 에탈이므로 체들의 스펙트럼들의 유한 분리합이다
+(Remark \ref{remark-recall}). 더 나아가 첫 번째 사상은 전사이고
+국소 유한형이므로(Morphisms, Lemma
+\ref{morphisms-lemma-permanence-finite-type}) 유한형 점들 위에서
+전사이며(Morphisms, Lemma
+\ref{morphisms-lemma-finite-type-points-surjective-morphism}),
+합성은 국소 유한형이고 $U$가 Jacobson이므로 유한형 점들을 닫힌
+점들로 보낸다(Morphisms, Lemma
+\ref{morphisms-lemma-jacobson-finite-type-points}).
+따라서 $\Spec(k) \times_X U \to U$의 상은 닫힌 점들의 유한 집합이고,
+그러므로 닫혀 있다. 이는 모든 아핀 $U$와 에탈 사상 $U \to X$에
+대하여 참이므로 $x \in |X|$가 닫혀 있다고 결론 내린다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-decent-Jacobson}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호한 대수공간이라 하자.
+그러면 $X$가 Jacobson인 것과 $|X|$가 Jacobson인 것은 동치이다.
+\end{lemma}
+
+\begin{proof}
+$X$가 Jacobson이고 $T \subset |X|$가 닫힌 부분집합이라고 가정하자.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-enough-finite-type-points}에 의해
+$T \cap X_{\text{ft-pts}}$는 $T$에서 조밀함을 안다.
+Lemma \ref{lemma-decent-Jacobson-ft-pts}에 의해
+$X_{\text{ft-pts}}$는 $|X|$의 닫힌 점들이다. 따라서 $|X|$는 실제로
+Jacobson이다.
+
+\medskip\noindent
+$|X|$가 Jacobson이라고 가정하자. $f : U \to X$를 $U$가 아핀
+스킴인 에탈 사상이라 하자. $U$가 Jacobson임을 보여야 한다.
+$x \in |X|$가 닫혀 있으면 올 $F = f^{-1}(\{x\})$는 $U$의
+유한한(양호함의 정의에 의해) 닫힌($|X|$ 위상의 구성에 의해)
+부분집합이다. $F$의 점들 사이에는 특수화가 없으므로
+(Lemma \ref{lemma-decent-no-specializations-map-to-same-point})
+$F$의 모든 점은 $U$에서 닫혀 있다고 결론 내린다.
+$U$가 Jacobson이 아니면 $\{u\}$가 국소 닫힌인 닫히지 않은 점
+$u \in U$가 존재한다(Topology, Lemma
+\ref{topology-lemma-non-jacobson-Noetherian-characterize}).
+$f(u) \in |X|$가 닫혀 있음을 보이겠다. 그러면 위에 의해 $u$가
+$U$에서 닫혀 있어 모순이고, 증명이 끝난다. 이를 증명하기 위해
+$U$를 $u$의 아핀 열린 근방으로 바꾸어도 된다. 따라서
+$\{u\}$가 $U$에서 닫혀 있다고 가정할 수 있다.
+$R = U \times_X U$라 두고 사영들을 $s, t : R \to U$라 하자.
+그러면 $s^{-1}(\{u\}) = \{r_1, \ldots, r_m\}$은 유한하다
+(양호한 공간의 정의에 의해). $U$를 $u$의 더 작은 아핀 열린
+근방으로 바꾼 뒤 $j = 1, \ldots, m$에 대하여 $t(r_j) = u$라고
+가정할 수 있다. 따라서 $\{u\}$는 $U$의 $R$-불변 닫힌
+부분집합이다. 그러므로 $\{f(u)\}$는 $|X|$의 열린집합
+$|f|(|U|)$에서 닫혀 있으므로 $X$의 국소 닫힌 부분집합이다.
+$|X|$가 Jacobson이므로 원하는 대로 $f(u)$가 $|X|$에서 닫혀 있다고
+결론 내린다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-punctured-spec}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호한 국소 뇌터 대수공간이라
+하자. $x \in |X|$라 하자. 그러면
+$$
+W = \{x' \in |X| : x' \leadsto x,\ x' \not = x\}
+$$
+는 뇌터, 스펙트럴, 소버, Jacobson 위상공간이다.
+\end{lemma}
+
+\begin{proof}
+주어진 공간을 $x$를 포함하는 임의의 열린 부분공간으로 바꾸어도 된다.
+따라서 $X$가 준콤팩트이라고 가정할 수 있다. 그러면 $|X|$는 뇌터
+위상공간이다(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-topology}). 따라서 $W$는
+뇌터 위상공간이다(Topology, Lemma \ref{topology-lemma-Noetherian}).
+
+\medskip\noindent
+Lemma \ref{lemma-locally-Noetherian-decent-quasi-separated}와
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-quasi-separated-spectral}을
+결합하면 $|X|$가 스펙트럴 위상공간임을 안다. Topology, Lemma
+\ref{topology-lemma-make-spectral-space}에 의해
+$W \cup \{x\}$가 스펙트럴 위상공간임을 안다. 이제 $W$는
+$W \cup \{x\}$의 준콤팩트 열린집합이므로 Topology, Lemma
+\ref{topology-lemma-spectral-sub}에 의해 $W$는 스펙트럴이다.
+
+\medskip\noindent
+$E \subset W$를 기약 닫힌 부분집합이라 하자. $Z \subset |X|$가
+$E$의 폐포이면 $x \in Z$임을 안다. Proposition
+\ref{proposition-reasonable-sober}에 의해 유일한 일반점
+$\eta \in Z$가 존재한다. 물론 $\eta \in W$이고 따라서
+$\eta \in E$이다. $E$가 유일한 일반점을 가지며, 즉 $W$가
+소버라고 결론 내린다.
+
+\medskip\noindent
+$x' \in W$를 $\{x'\}$가 $W$에서 국소 닫힌인 점이라 하자.
+증명을 끝내려면 $x'$가 $W$의 닫힌 점임을 보이면 된다.
+그렇지 않으면 $W$에서 자명하지 않은 특수화 $x' \leadsto x'_1$이
+존재한다. $U$를 아핀 스킴, $u \in U$를 점이라 하고,
+$U \to X$를 $u$를 $x$로 보내는 에탈 사상이라 하자.
+Lemma \ref{lemma-decent-specialization}에 의해
+$x' \leadsto x'_1 \leadsto x$로 가는 특수화들
+$u' \leadsto u'_1 \leadsto u$를 택할 수 있다.
+$\mathfrak p' \subset \mathcal{O}_{U, u}$를 $u'$에 대응하는 소
+아이디얼이라 하자. 이 특수화들의 존재는
+$\dim(\mathcal{O}_{U, u}/\mathfrak p') \geq 2$임을 함의한다.
+따라서 Algebra, Lemma
+\ref{algebra-lemma-Noetherian-local-domain-dim-2-infinite-opens}에 의해
+$\Spec(\mathcal{O}_{U, u}/\mathfrak p')$의 모든 공집합이 아닌
+열린집합은 무한하다. Lemma
+\ref{lemma-decent-no-specializations-map-to-same-point}에 의해 연속사상
+$$
+\Spec(\mathcal{O}_{U, u}/\mathfrak p')
+\setminus \{\mathfrak m_u/\mathfrak p'\}
+\longrightarrow
+W
+$$
+를 얻는다. 좌변의 일반점이 $x'$로 가므로 그 상은
+$\overline{\{x'\}}$에 포함된다. 표시된 화살표에 의한 $\{x'\}$의
+역상은 공집합이 아닌 열린집합이고, 따라서 무한하다고 결론 내린다.
+그러나 $X$가 양호하므로 $U \to X$의 올들은 유한하고,
+% P08-E340: frozen source concludes the singleton {x'} itself is infinite rather than its inverse image; see ERRATA_CANDIDATES.jsonl.
+$\{x'\}$가 무한하다고 결론 내린다. 이 모순으로 증명이 끝난다.
+\end{proof}
+
+\section{국소 기약성}
+\label{section-irreducible-local-ring}
+
+\noindent
+대수공간의 한 점에서의 기하학적 가지 수는 이미 Properties of Spaces,
+Section \ref{spaces-properties-section-irreducible-local-ring}에서
+정의하였다. 대수공간의 한 점에서의 가지 수는 양호한 대수공간에
+대해서만 정의할 수 있다.
+
+\begin{lemma}
+\label{lemma-irreducible-local-ring}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x \in |X|$를 점이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item 임의의 초등 에탈 근방 $(U, u) \to (X, x)$에 대하여 국소환
+$\mathcal{O}_{U, u}$는 유일한 극소 소 아이디얼을 가진다.
+\item 임의의 초등 에탈 근방 $(U, u) \to (X, x)$에 대하여 $u$를
+지나는 $U$의 기약성분은 유일하다.
+\item 임의의 초등 에탈 근방 $(U, u) \to (X, x)$에 대하여 국소환
+$\mathcal{O}_{U, u}$는 단일가지이다.
+\item Hensel 국소환 $\mathcal{O}_{X, x}^h$는 유일한 극소 소
+아이디얼을 가진다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)의 동치는 $u$를 지나는 $U$의 기약성분들과 $u$에서 $U$의
+국소환의 극소 소 아이디얼들이 $1$-$1$ 대응한다는 사실에서 따른다.
+환 $\mathcal{O}_{X, x}^h$는 $\mathcal{O}_{U, u}$의 Hensel화이다.
+Definition \ref{definition-henselian-local-ring} 뒤의 논의를 보라.
+특히 More on Algebra, Lemma
+\ref{more-algebra-lemma-unibranch}에 의해 (3)과 (4)는 동치이다.
+(2)와 (3)의 동치는 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-nr-branches}에서 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-unibranch}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x \in |X|$라 하자. Lemma \ref{lemma-irreducible-local-ring}의
+동치 조건들이 성립하면 $X$가 {\it $x$에서 단일가지이다}라고 한다.
+모든 $x \in |X|$에서 $X$가 단일가지이면 $X$가
+{\it 단일가지이다}라고 한다.
+\end{definition}
+
+\noindent
+이는 스킴에 대한 정의(Properties, Definition
+\ref{properties-definition-unibranch})와 일치한다.
+
+\begin{lemma}
+\label{lemma-nr-branches-local-ring}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x \in |X|$를 점이라 하자. $n \in \{1, 2, \ldots\}$를 정수라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item 임의의 초등 에탈 근방 $(U, u) \to (X, x)$에 대하여 국소환
+$\mathcal{O}_{U, u}$의 극소 소 아이디얼 수는 $\leq n$이고,
+적어도 하나의 $(U, u)$의 선택에 대해서는 $n$이다.
+\item 임의의 초등 에탈 근방 $(U, u) \to (X, x)$에 대하여
+% P08-E341: frozen source omits “of” in “the number of irreducible components”; see ERRATA_CANDIDATES.jsonl.
+$u$를 지나는 $U$의 기약성분 수는 $\leq n$이고, 적어도 하나의
+$(U, u)$의 선택에 대해서는 $n$이다.
+\item 임의의 초등 에탈 근방 $(U, u) \to (X, x)$에 대하여 $u$에서
+$U$의 가지 수는 $\leq n$이고, 적어도 하나의 $(U, u)$의 선택에
+대해서는 $n$이다.
+\item $\mathcal{O}_{X, x}^h$의 극소 소 아이디얼 수는 $n$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)의 동치는 $u$를 지나는 $U$의 기약성분들과 $u$에서 $U$의
+국소환의 극소 소 아이디얼들이 $1$-$1$ 대응한다는 사실에서 따른다.
+% P08-E342: frozen source omits the henselization superscript h from O_{X,x}; see ERRATA_CANDIDATES.jsonl.
+환 $\mathcal{O}_{X, x}$는 $\mathcal{O}_{U, u}$의 Hensel화이다.
+Definition \ref{definition-henselian-local-ring} 뒤의 논의를 보라.
+특히 More on Algebra, Lemma
+\ref{more-algebra-lemma-unibranch}에 의해 (3)과 (4)는 동치이다.
+(2)와 (3)의 동치는 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-nr-branches}에서 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-number-of-branches}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$x \in |X|$라 하자. {\it $x$에서 $X$의 가지 수}는 Lemma
+\ref{lemma-nr-branches-local-ring}의 동치 조건들이 성립하면
+$n \in \mathbf{N}$이고, 그렇지 않으면 $\infty$이다.
+\end{definition}
+
+\section{카테나리 대수공간}
+\label{section-catenary}
+
+\noindent
+이 절은 Properties, Section \ref{properties-section-catenary}와
+Morphisms, Section \ref{morphisms-section-universally-catenary}의 내용을
+대수공간으로 확장한다.
+
+\begin{definition}
+\label{definition-catenary}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호한 대수공간이라 하자.
+$|X|$가 카테나리이면(Topology, Definition
+\ref{topology-definition-catenary}) $X$가 {\it 카테나리}라고 한다.
+\end{definition}
+
+\noindent
+$X$가 표현가능하면 이는 $X$를 표현하는 스킴에 대한 대응 개념과
+동치이다.
+
+\begin{lemma}
+\label{lemma-scheme-with-dimension-function}
+$S$를 국소 뇌터이고 보편 카테나리인 스킴이라 하자.
+$\delta : S \to \mathbf{Z}$를 차원 함수라 하자.
+$X$를 $S$ 위의 양호한 대수공간이라 하고 구조 사상
+$X \to S$가 국소 유한형이라고 하자.
+% P08-E343/P08-E427: frozen source uses f(x) without naming the structure morphism f; P08-E427 duplicates controlling P08-E343. See ERRATA_CANDIDATES.jsonl.
+$\delta_X : |X| \to \mathbf{Z}$를 $x$를 $\delta(f(x))$와
+$x/f(x)$의 초월차수의 합으로 보내는 사상이라 하자.
+그러면 $\delta_X$는 $|X|$ 위의 차원 함수이다.
+\end{lemma}
+
+\begin{proof}
+$\varphi : U \to X$를 $U$가 스킴인 전사 에탈 사상이라 하자.
+그러면 같은 방식으로 정의된 함수 $\delta_U$는 Morphisms, Lemma
+\ref{morphisms-lemma-dimension-function-propagates}에 의해 $U$ 위의
+차원 함수이다. 한편 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre}의 상대 초월차수의
+정의에 의해 $\delta_U(u) = \delta_X(\varphi(u))$임을 안다.
+
+\medskip\noindent
+$x \leadsto x'$를 $|X|$의 점들의 특수화라 하자.
+% P08-E344: frozen source begins this sentence with lowercase “by”; see ERRATA_CANDIDATES.jsonl.
+Lemma \ref{lemma-decent-specialization}에 의해
+$\varphi(u) = x$이고 $\varphi(u') = x'$인 $U$의 점들의 특수화
+$u \leadsto u'$를 찾을 수 있다. 더 나아가
+$x = x'$인 것과 $u = u'$인 것은 동치임을 안다. Lemma
+\ref{lemma-decent-no-specializations-map-to-same-point}를 보라.
+따라서 $\delta_U$가 차원 함수라는 사실은 $\delta_X$가 차원
+함수임을 함의한다. Topology, Definition
+\ref{topology-definition-dimension-function}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-universally-catenary-scheme}
+$S$를 국소 뇌터이고 보편 카테나리인 스킴이라 하자.
+$X$를 $S$ 위의 대수공간이라 하고, $X$가 양호하며 구조 사상
+$X \to S$가 국소 유한형이라고 하자. 그러면 $X$는 카테나리이다.
+\end{lemma}
+
+\begin{proof}
+문제는 $S$ 위에서 국소적이다(Topology, Lemma
+\ref{topology-lemma-catenary}를 사용하라). 따라서 $S$가 차원
+함수를 가진다고 가정할 수 있다. Topology, Lemma
+\ref{topology-lemma-locally-dimension-function}을 보라.
+그러면 Lemma \ref{lemma-scheme-with-dimension-function}에 의해
+$|X|$가 차원 함수를 가진다고 결론 내린다.
+$|X|$가 소버이므로(Proposition \ref{proposition-reasonable-sober})
+Topology, Lemma \ref{topology-lemma-dimension-function-catenary}에
+의해 $|X|$가 카테나리이라고 결론 내린다.
+\end{proof}
+
+\noindent
+Lemma \ref{lemma-universally-catenary-scheme}에 의해 다음 정의는
+표현가능한 대수공간에 대하여 이미 존재하는 개념과 양립한다.
+
+\begin{definition}
+\label{definition-universally-catenary}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호하고 국소 뇌터인
+대수공간이라 하자. 양호한 $Y$를 갖는 모든 국소 유한형 대수공간
+사상 $Y \to X$에 대하여 대수공간 $Y$가 카테나리이면 $X$가
+{\it 보편 카테나리}라고 한다.
+\end{definition}
+
+\noindent
+$X$가 대수공간이면 “$X$가 양호하고 국소 뇌터이다”라는 조건은
+“$X$가 준분리이고 국소 뇌터이다”라는 조건과 동치이다.
+이는 Lemma \ref{lemma-locally-Noetherian-decent-quasi-separated}이다.
+따라서 위 정의를 이해하는 또 하나의 방법은, 준분리이고 국소 유한형인
+모든 사상 $Y \to X$에 대하여 $Y$가 카테나리인 것과 $X$가 보편
+카테나리인 것이 동치라는 것이다.
+
+\begin{lemma}
+\label{lemma-universally-catenary}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 양호하고 국소 뇌터이며 보편
+카테나리인 대수공간이라 하자. 그러면 $X$ 위의 모든 국소 유한형
+양호한 대수공간은 보편 카테나리이다.
+\end{lemma}
+
+\begin{proof}
+이는 정의들과 국소 유한형 사상들의 합성이 국소 유한형이라는 사실에서
+형식적으로 따른다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-finite-type}).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-check-dimension-function-finite-cover}
+$S$를 스킴이라 하자. $f : Y \to X$를 양호하고 국소 뇌터인
+대수공간들의 전사 유한 사상이라 하자.
+$\delta : |X| \to \mathbf{Z}$를 함수라 하자.
+$\delta \circ |f|$가 차원 함수이면 $\delta$는 차원 함수이다.
+\end{lemma}
+
+\begin{proof}
+% P08-E345: frozen source uses mapsto rather than leadsto for this specialization; see ERRATA_CANDIDATES.jsonl.
+$x \mapsto x'$, $x \not = x'$를 $|X|$의 특수화라 하자.
+$|f|(y) = x$인 $y \in |Y|$를 택한다. $|f|$가 닫힌 사상이므로
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-finite-proper})
+$|f|(y') = x'$인 특수화 $y \leadsto y'$를 찾는다.
+따라서
+$\delta(x) = \delta(|f|(y)) > \delta(|f|(y')) = \delta(x')$
+라고 결론 내린다(Topology, Definition
+\ref{topology-definition-dimension-function}을 보라).
+$x \leadsto x'$가 바로 이웃한 특수화이면
+$y \leadsto y'$도 바로 이웃한 특수화이다. 실제로
+$y \leadsto y'' \leadsto y'$이면 $|f|(y'')$는 $x$ 또는 $x'$이어야
+하고, Lemma \ref{lemma-conditions-on-fibre-and-qf}에 의해 $|f|$의
+올들의 점들 사이에는 자명하지 않은 특수화가 없다.
+\end{proof}
+
+\noindent
+논의는 More on Morphisms of Spaces, Section
+\ref{spaces-more-morphisms-section-catenary}에서 계속된다.
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

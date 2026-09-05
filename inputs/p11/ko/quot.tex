@@ -1,0 +1,5397 @@
+\input{ko_preamble}
+
+% ko-KR translation of frozen quot.tex at
+% upstream commit a04446e57ec1fbc252a871afcec7752fb2807b14.
+\begin{document}
+
+\title{Quot 공간과 Hilbert 공간}
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장을 처음 구상했을 때의 목적은 Quot 함자와 Hilbert 함자를 논하고,
+몇 가지 기술적 조건이 성립하면 이들이 대수공간임을 증명하는 것이었다.
+스킴의 경우 이 내용은 Grothendieck의 Bourbaki 세미나 강의에서 다룬다.
+% P11-E0340: frozen source misspells the French word "séminaire".
+다음을 보라:
+\cite{Gr-I},
+\cite{Gr-II},
+\cite{Gr-III},
+\cite{Gr-IV},
+\cite{Gr-V}, 그리고
+\cite{Gr-VI}. 사영 스킴의 경우 Quot 스킴과 Hilbert 스킴은 적절한
+매우 풍부한 가역층의 절단공간에 대한 Grassmann 다양체 안에 놓이며,
+이는 이 스킴들을 구성하는 한 방법을 제공한다. 여기서는 다른 방법을
+택하여 Artin의 공리로 Quot와 Hilb가 대수공간임을 증명한다.
+
+\medskip\noindent
+더 살펴보니 Stacks project의 이론을 전개할 때에는
+\cite{lieblich_remarks}에서 도입한, 기저 위에서 고유한 지지를 갖는
+연접층의 스택 $\Cohstack_{X/B}$부터 논의를 시작하는 편이 더 편리했다.
+여기서 $f : X \to B$는 적절한 기술적 조건을 만족하는 대수공간의
+사상이지만, 이 설정은 일반화할 수 있다(아래를 보라).
+$X$ 위의 가군 $\mathcal{F}$와 $\mathcal{G}$가 주어졌다고 하자.
+적절한 가정 아래 함자
+% P11-E0341: frozen source says "under suitably hypotheses".
+$T/B \mapsto \Hom_{X_T}(\mathcal{F}_T, \mathcal{G}_T)$
+는 $B$ 위의 대수공간 $\mathit{Hom}(\mathcal{F}, \mathcal{G})$이다.
+절 \ref{section-hom}을 보라. 동형사상으로 이루어진 부분함자
+$\mathit{Isom}(\mathcal{F}, \mathcal{G})$가 대수공간임은
+절 \ref{section-isom}에서 보인다. 이어지는 절들에서는 이를 사용하여
+스택 $\Cohstack_{X/B}$의 대각사상이 표현 가능함을 보인다.
+$X \to B$가 평탄한 경우에는 절 \ref{section-stack-coherent-sheaves}에서,
+일반적인 경우에는 절 \ref{section-not-flat}에서
+$\Cohstack_{X/B}$가 대수 스택임을 증명한다.
+관련 문헌에 대해서는 해당 절의 서론을 보라.
+
+\medskip\noindent
+이를 증명하고 나면
+$\Quotfunctor_{\mathcal{F}/X/B}$, $\Hilbfunctor_{X/B}$, 그리고
+$\Picardfunctor_{X/B}$가 대수공간이고
+$\Picardstack_{X/B}$가 대수 스택임을 보이는 것은 비교적 직접적이다.
+절 \ref{section-quot}, \ref{section-hilb},
+\ref{section-picard-functor}, \ref{section-picard-stack}을 보라.
+
+\medskip\noindent
+통상적인 방식으로 절 \ref{section-relative-morphisms}에서는
+상대 사상의 함자 $\mathit{Mor}_B(Z, X)$가 적절한 가정 아래
+대수공간임을 도출한다.
+
+\medskip\noindent
+절 \ref{section-stack-of-spaces}에서는 고유 대수공간의 평탄한 족을
+모수화하는 준군 스택
+$$
+\Spacesstack'_{fp, flat, proper}
+$$
+이 형식적 유효성을 제외한 Artin의 모든 공리(versal성의 개방성을
+포함한다)를 만족함을 증명한다. 이 스택의 성질을 사용할 때에는
+주의해야 하므로 일부러 매우 불편한 표기를 택했다.
+
+\medskip\noindent
+절 \ref{section-polarized}에서는 극화된 고유 대수공간의 평탄한 족을
+모수화하는 스택
+$\Polarizedstack$
+이 대수 스택임을 증명한다. 고유 대수공간의 평탄한 족에 관해 이미
+얻은 결과에 따라, 이는 극화된 스킴에 대한 형식적 유효성을 증명하는
+문제로 귀착된다. 이 결과는 흔히 Grothendieck의 대수화 정리로 알려져 있다.
+
+\medskip\noindent
+절 \ref{section-curves}에서는 곡선의 족을 모수화하는 스택
+$\Curvesstack$가 대수적임을 증명한다.
+
+\medskip\noindent
+절 \ref{section-moduli-complexes}에서는 고유 사상 위의 복합체의
+모듈라이를 연구하고 대수 스택 $\Complexesstack_{X/B}$를 얻는다.
+명제와 증명의 착상은 \cite{lieblich-complexes}에서 가져왔다.
+
+\medskip\noindent
+이 장에서 다루지 않는 것은 무엇인가? 얻어진 모듈라이 공간과 모듈라이
+스택이 갖는 성질은 대수성을 제외하면 거의 논의하지 않는다.
+% P11-E0342: frozen source omits the relative marker in this sentence.
+이에 관해서는 『모듈라이 스택』의 절
+\ref{moduli-section-introduction}을 보라. 여기서 논의한 결과의 대부분은
+대수공간의 사상 $X \to B$ 대신 대수 스택의 사상
+$\mathcal{X} \to \mathcal{B}$를 고려하여 그 구성을 일반화할 수 있다.
+% P11-E0343: frozen source has the singular phrase "of algebraic space".
+이는 나중에 논의한다(여기에 향후 참조를 삽입).
+% P11-E0344: frozen source retains an unresolved future-reference placeholder.
+Hilbert 공간의 경우에는 더 일반적인 ``Hilbert 스택''이라는 개념도 있으며,
+별도의 장에서 이를 논의할 것이다. 다음을 보라:
+(여기에 향후 참조를 삽입).
+% P11-E0345: frozen source retains a second unresolved future-reference placeholder.
+
+
+
+
+\section{규약}
+\label{section-conventions}
+
+\noindent
+이 장과 『스택의 예』, 『대수적 스택 위의 층』,
+『표현 가능성의 판정 조건』, 『Artin의 공리』를 대수 스택의
+일반 이론을 전개하기 전에 일부러 배치하였다. 그 이유는 다음 장부터
+(『대수적 스택의 성질』의 절
+\ref{stacks-properties-section-conventions}을 보라)
+스킴과 그 스킴이 정의하는 대수 스택을 더 이상 구별하지 않을 것이기
+때문이다. 그 결과 표현은 더 유연하고 사람이 읽기 쉬워지지만,
+정밀성은 떨어진다. 첫 장 『대수적 스택』을 포함한 이 처음 몇 장은
+대수 스택을 생각하는 여러 방식 사이의 매우 기술적인 차이 몇 가지를
+나중에는 무시할 수 있도록 토대를 마련한다.
+% P11-E0346: frozen source has subject agreement "groundwork that later allow us".
+그러나 특히 『Artin의 공리』와 『표현 가능성의 판정 조건』에서는
+정확히 어떤 대상을 다루는지 매우 정밀하게 밝혀야 한다. 어떤 구성이
+대수 스택 또는 대수공간을 낳는다는 것을 증명하려 하기 때문이다.
+% P11-E0347: frozen source calls the latter chapter "Criteria of Representability".
+
+\medskip\noindent
+유감스럽게도 이 때문에 일부 표기, 규약 및 용어는 불편하고,
+경험 많은 독자에게는 방향이 거꾸로인 듯 보일 수도 있다.
+독자께서 양해해 주기 바란다!
+
+\medskip\noindent
+항상 모든 스킴이 큰 fppf 사이트 $\Sch_{fppf}$에 들어 있다고
+가정한다. 또한 고려하는 모든 환 $A$는 $\Spec(A)$가 이 큰 사이트의
+어떤 대상과 동형이라는 성질을 갖는다고 가정한다.
+
+\medskip\noindent
+스킴 $S$와 $S$ 위의 대수공간 $X$를 잡자. 이 장과 다음 장에서는
+$S$ 위의 대수공간의 범주에서 $X$와 자기 자신의 곱을
+$X \times X$ 대신 $X \times_S X$로 쓴다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Hom 함자}
+\label{section-hom}
+
+\noindent
+이 절에서는 아래에서 정의하는 준동형의 함자를 연구한다.
+
+\begin{situation}
+\label{situation-hom}
+스킴 $S$를 잡자. $f : X \to B$를 $S$ 위의 대수공간들의 사상이라
+하고, $\mathcal{F}$와 $\mathcal{G}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. $B$ 위의 임의의 스킴 $T$에 대하여
+$\mathcal{F}$와 $\mathcal{G}$를 $T$로 밑변환한 것, 즉 투영사상
+$X_T = X \times_B T \to X$에 의한 당김을 각각
+$\mathcal{F}_T$와 $\mathcal{G}_T$로 나타낸다.
+% P11-E0348: frozen source has an incomplete "denote" construction.
+다음 함자를 생각한다.
+\begin{equation}
+\label{equation-hom}
+\mathit{Hom}(\mathcal{F}, \mathcal{G}) :
+(\Sch/B)^{opp}
+\longrightarrow
+\textit{Sets},\quad
+T
+\longrightarrow
+\Hom_{\mathcal{O}_{X_T}}(\mathcal{F}_T, \mathcal{G}_T)
+\end{equation}
+\end{situation}
+
+\noindent
+상황 \ref{situation-hom}에서
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$를 때로는 사상
+$\mathit{Hom}(\mathcal{F}, \mathcal{G}) \to B$가 주어진 함자
+$(\Sch/S)^{opp} \to \textit{Sets}$
+로 생각한다. 구체적으로 $T$가 $S$ 위의 스킴이면
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})(T)$의 원소는 쌍
+$(h, u)$로 이루어진다. 여기서 $h$는 사상 $h : T \to B$이고,
+$u : \mathcal{F}_T \to \mathcal{G}_T$는
+$\mathcal{O}_{X_T}$-가군의 사상이며,
+$X_T = T \times_{h, B} X$이고 $\mathcal{F}_T$와
+$\mathcal{G}_T$는 $X_T$로의 당김이다. 특히
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$가 대수공간이라고 말할 때에는
+대응하는 함자 $(\Sch/S)^{opp} \to \textit{Sets}$가
+대수공간이라는 뜻이다.
+
+\begin{lemma}
+\label{lemma-hom-sheaf}
+상황 \ref{situation-hom}에서 함자
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$ 
+는 fpqc 위상에 대한 층 조건을 만족한다.
+\end{lemma}
+
+\begin{proof}
+ $\{T_i \to T\}_{i \in I}$를 $B$ 위 스킴들의 fpqc 덮개라 하자.
+% P11-E0349: frozen source uses the S-fibre product instead of B here.
+% P11-E0350: frozen source assigns the undefined u_{T_i} to F_i.
+$X_i = X_{T_i} = X \times_S T_i$, $\mathcal{F}_i = u_{T_i}$,
+$\mathcal{G}_i = \mathcal{G}_{T_i}$라 놓는다.
+$\{X_i \to X_T\}_{i \in I}$는 $X_T$의 fpqc 덮개이다.
+『대수공간의 위상』의 보조정리
+\ref{spaces-topologies-lemma-fpqc}를 보라. 따라서
+$X_{T_i \times_T T_j}$ 위로 제한했을 때 각 $u_i$와 $u_j$가
+같은 사상이 되는 사상들의 족
+$u_i : \mathcal{F}_i \to \mathcal{G}_i$는 하강에 의해 유일한 사상
+$u : \mathcal{F}_T \to \mathcal{G}_T$에서 온다
+(『대수공간 위의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}).
+\end{proof}
+
+\noindent
+확인해 둘 점은 $\mathit{Hom}$ 층이 $S$ 위의 대수공간들 사이에서도
+같은 역할을 한다는 것이다.
+
+\begin{lemma}
+\label{lemma-extend-hom-to-spaces}
+상황 \ref{situation-hom}에서 $T$를 $S$ 위의 대수공간이라 하자.
+% P11-E0351: frozen source punctuates the situation qualifier as a fragment.
+그러면
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T, \mathit{Hom}(\mathcal{F}, \mathcal{G})) =
+\{(h, u) \mid h : T \to B, u : \mathcal{F}_T \to \mathcal{G}_T\}
+$$
+이다. 여기서 $\mathcal{F}_T, \mathcal{G}_T$는
+$\mathcal{F}$와 $\mathcal{G}$를 대수공간
+$X \times_{B, h} T$로 당긴 것이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 전사 에탈 사상 $p : U \to T$를 택한다.
+$R = U \times_T U$라 놓고 그 투영들을 $t, s : R \to U$라 하자.
+
+\medskip\noindent
+자연변환 $v : T \to \mathit{Hom}(\mathcal{F}, \mathcal{G})$를
+잡자. 그러면 $v(p)$는 $U$ 위의 쌍 $(h_U, u_U)$에 대응한다.
+$v$가 함자의 변환이므로 $(h_U, u_U)$를 $s$와 $t$로 당긴 것들은 같다.
+$T = U/R$이므로(『대수공간』의 보조정리
+\ref{spaces-lemma-space-presentation}), $h_U = h \circ p$를 만족하는
+사상 $h : T \to B$를 얻는다. 이때 $\mathcal{F}_U$는
+$\mathcal{F}_T$를 $X_U$로 당긴 것이고 $\mathcal{G}_U$도 마찬가지이다.
+따라서 『대수공간 위의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}에 의해
+$u_U$는 $\mathcal{O}_{X_T}$-가군의 사상
+$u : \mathcal{F}_T \to \mathcal{G}_T$로 하강한다.
+
+\medskip\noindent
+반대로 $T$ 위의 쌍 $(h, u)$를 잡자. 스킴 $T'$에서 오는 사상
+$a : T' \to T$를 $(h \circ a, a^*u)$로 보내면 자연변환
+$v : T \to \mathit{Hom}(\mathcal{F}, \mathcal{G})$를 얻는다.
+이 구성과 앞 문단의 구성이 서로 역이라는 확인은 생략한다.
+\end{proof}
+
+\begin{remark}
+\label{remark-hom-base-change}
+상황 \ref{situation-hom}에서 $B' \to B$를 $S$ 위의 대수공간들의
+사상이라 하자. $X' = X \times_B B'$라 놓고
+$\mathcal{F}'$와 $\mathcal{G}'$를 각각
+$\mathcal{F}$와 $\mathcal{G}$의 $X'$로의 당김이라 하자.
+% P11-E0352: frozen source has an incomplete "denote" construction.
+그러면 밑변환 $f' : X' \to B'$에 결부된 함자
+$\mathit{Hom}(\mathcal{F}', \mathcal{G}') : (\Sch/B')^{opp} \to \textit{Sets}$
+를 얻는다. $B'$ 위의 스킴 $T$에 대하여 분명히
+$$
+\mathit{Hom}(\mathcal{F}', \mathcal{G}')(T) =
+\mathit{Hom}(\mathcal{F}, \mathcal{G})(T)
+$$
+이다. 우변에서는 합성 $T \to B' \to B$를 통하여 $T$를 $B$ 위의
+스킴으로 본다. 이 자명한 주의는 기저 대수공간을 바꿀 때 가끔 유용하다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-hom-sheaf-in-X}
+상황 \ref{situation-hom}에서 $\{X_i \to X\}_{i \in I}$를 fppf
+덮개라 하고, 각 $i, j \in I$에 대하여
+$\{X_{ijk} \to X_i \times_X X_j\}$를 fppf 덮개라 하자.
+$\mathcal{F}$를 $X_i$와 $X_{ijk}$로 당긴 것을 각각
+$\mathcal{F}_i$와 $\mathcal{F}_{ijk}$로 나타낸다.
+% P11-E0353: frozen source has an incomplete "denote" construction.
+$\mathcal{G}_i$와 $\mathcal{G}_{ijk}$도 같은 방식으로 정의한다.
+$B$ 위의 모든 스킴 $T$에 대하여 도표
+$$
+\xymatrix{
+\mathit{Hom}(\mathcal{F}, \mathcal{G})(T) \ar[r] &
+\prod\nolimits_i
+\mathit{Hom}(\mathcal{F}_i, \mathcal{G}_i)(T)
+\ar@<1ex>[r]^-{\text{pr}_0^*} \ar@<-1ex>[r]_-{\text{pr}_1^*}
+&
+\prod\nolimits_{i, j, k}
+\mathit{Hom}(\mathcal{F}_{ijk}, \mathcal{G}_{ijk})(T)
+}
+$$
+에서 첫째 화살표는 나머지 두 화살표의 등화자이다.
+\end{lemma}
+
+\begin{proof}
+ $u_i : \mathcal{F}_{i, T} \to \mathcal{G}_{i, T}$를
+$\text{pr}_0^*$와 $\text{pr}_1^*$의 등화자의 원소라 하자.
+fppf 덮개의 밑변환은 fppf 덮개이므로(『대수공간의 위상』의 보조정리
+\ref{spaces-topologies-lemma-fppf}),
+$\{X_{i, T} \to X_T\}_{i \in I}$와
+$\{X_{ijk, T} \to X_{i, T} \times_{X_T} X_{j, T}\}$는 fppf 덮개이다.
+『대수공간 위의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+를 먼저 적용하면 $u_i$와 $u_j$가
+$X_{i, T} \times_{X_T} X_{j, T}$ 위에서 같은 사상으로 제한됨을 얻는다.
+이를 한 번 더 적용하면 각 $i$에 대하여 $u_i$로 제한되는 유일한 사상
+$u : \mathcal{F}_T \to \mathcal{G}_T$가 존재함을 얻는다.
+이것으로 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-hom-limits}
+상황 \ref{situation-hom}에서 $\mathcal{F}$가 유한 표시이고
+$f$가 준콤팩트이며 준분리이면
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$는 극한을 보존한다.
+\end{lemma}
+
+\begin{proof}
+$T = \lim_{i \in I} T_i$를 아핀 $B$-스킴들의 유향 극한이라 하자.
+다음을 보여야 한다.
+$$
+\mathit{Hom}(\mathcal{F}, \mathcal{G})(T) =
+\colim \mathit{Hom}(\mathcal{F}, \mathcal{G})(T_i)
+$$
+$0 \in I$를 택한다. $B$를 $T_0$로, $X$를 $X_{T_0}$로,
+$\mathcal{F}$를 $\mathcal{F}_{T_0}$로, $\mathcal{G}$를
+$\mathcal{G}_{T_0}$로, $I$를 $\{i \in I \mid i \geq 0\}$로
+바꾸어도 된다. 주의 \ref{remark-hom-base-change}을 보라.
+따라서 $B = \Spec(R)$가 아핀이라고 가정해도 된다.
+
+\medskip\noindent
+$B$가 아핀이면 $X$는 준콤팩트이고 준분리이다.
+$U$가 아핀 스킴인 전사 에탈 사상 $U \to X$를 택한다
+(『대수 공간의 성질』의 보조정리
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}).
+$X$가 준분리이므로 스킴 $U \times_X U$는 준콤팩트이고,
+$V$가 아핀 스킴인 전사 에탈 사상 $V \to U \times_X U$를
+택할 수 있다. 보조정리 \ref{lemma-hom-sheaf-in-X}을 적용하면
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$는 다음 두 함자 사이의
+두 사상의 등화자이다.
+$$
+\mathit{Hom}(\mathcal{F}|_U, \mathcal{G}|_U)
+\quad\text{and}\quad
+\mathit{Hom}(\mathcal{F}|_V, \mathcal{G}|_V)
+$$
+따라서 $X$가 아핀인 경우로 환원된다.
+
+\medskip\noindent
+아핀인 경우 보조정리의 명제는 다음 문제로 환원된다.
+환 사상 $R \to A$, 두 $A$-가군 $M$, $N$, 그리고
+$R$-대수의 유향계 $C = \colim C_i$가 주어졌다고 하자.
+언제 사상
+$$
+\colim \Hom_{A \otimes_R C_i}(M \otimes_R C_i, N \otimes_R C_i)
+\longrightarrow
+\Hom_{A \otimes_R C}(M \otimes_R C, N \otimes_R C)
+$$
+이 전단사인가? 『대수』의 보조정리
+\ref{algebra-lemma-module-map-property-in-colimit}에 의해
+$M \otimes_R C$가 $A \otimes_R C$ 위 유한 표시일 때,
+즉 $M$이 $A$ 위 유한 표시일 때 그러하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-hom-closed}
+스킴 $S$와 $S$ 위의 대수공간 $B$를 잡자.
+$i : X' \to X$를 $B$ 위의 대수공간들의 닫힌 몰입이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하고
+$\mathcal{G}'$를 준연접 $\mathcal{O}_{X'}$-가군이라 하자. 그러면
+$$
+\mathit{Hom}(\mathcal{F}, i_*\mathcal{G}') =
+\mathit{Hom}(i^*\mathcal{F}, \mathcal{G}')
+$$
+가 $(\Sch/B)$ 위의 함자로서 성립한다.
+\end{lemma}
+
+\begin{proof}
+$T$가 스킴인 사상 $g : T \to B$를 잡자.
+$i_T : X'_T \to X_T$를 $i$의 밑변환이라 하고,
+$h : X_T \to X$와 $h' : X'_T \to X'$를 투영이라 하자.
+% P11-E0354: frozen source has an incomplete "denote" construction for i_T.
+% P11-E0355: frozen source has the same defect for h and h'.
+$(h')^*i^*\mathcal{F} = i_T^*h^*\mathcal{F}$임에 유의하자.
+닫힌 몰입은 아핀이므로(『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-closed-immersion-affine})
+『대수공간의 코호몰로지』의 보조정리
+\ref{spaces-cohomology-lemma-affine-base-change}에 의해
+$h^*i_*\mathcal{G} = i_{T, *}(h')^*\mathcal{G}$이다.
+% P11-E0356: frozen source switches from G' to an undefined G below;
+% the formula tokens remain unchanged here.
+따라서
+\begin{align*}
+\mathit{Hom}(\mathcal{F}, i_*\mathcal{G}')(T)
+& =
+\Hom_{\mathcal{O}_{X_T}}(h^*\mathcal{F}, h^*i_*\mathcal{G}') \\
+& =
+\Hom_{\mathcal{O}_{X_T}}(h^*\mathcal{F}, i_{T, *}(h')^*\mathcal{G}) \\
+& =
+\Hom_{\mathcal{O}_{X'_T}}(i_T^*h^*\mathcal{F}, (h')^*\mathcal{G}) \\
+& =
+\Hom_{\mathcal{O}_{X'_T}}((h')^*i^*\mathcal{F}, (h')^*\mathcal{G}) \\
+& =
+\mathit{Hom}(i^*\mathcal{F}, \mathcal{G}')(T)
+\end{align*}
+를 얻는다. 가운데 등식은 함자 $i_{T, *}$와 $i_T^*$의 수반성에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cohomology-perfect-complex}
+스킴 $S$와 $S$ 위의 대수공간 $B$를 잡자.
+$K$를 $D(\mathcal{O}_B)$의 유사결맞 대상이라 하자.
+\begin{enumerate}
+\item $(\Sch/B)$의 모든 $g : T \to B$에 대하여 코호몰로지 층
+$H^{-1}(Lg^*K)$가 영이면, 함자
+$$
+(\Sch/B)^{opp} \longrightarrow \textit{Sets},\quad
+(g : T \to B) \longmapsto H^0(T, H^0(Lg^*K))
+$$
+는 $B$ 위에서 아핀이고 유한 표시인 대수공간이다.
+\item $(\Sch/B)$의 모든 $g : T \to B$에 대하여 코호몰로지 층
+$H^i(Lg^*K)$가 $i < 0$일 때 영이면, $K$는 완전하고
+$K$는 국소적으로 $[0, b]$에 놓이는 Tor-진폭을 가지며, 함자
+$$
+(\Sch/B)^{opp} \longrightarrow \textit{Sets},\quad
+(g : T \to B) \longmapsto H^0(T, Lg^*K)
+$$
+는 $B$ 위에서 아핀이고 유한 표시인 대수공간이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)의 가정 아래
+$H^0(T, Lg^*K) = H^0(T, H^0(Lg^*K))$이다.
+규칙 $T \mapsto H^0(T, H^0(Lg^*K))$가 fppf 위상에 대한 층 조건을
+만족함을 증명하자. 이를 위해 $B$ 위의 스킴 $g : T \to B$의
+fppf 덮개 $\{h_i : T_i \to T\}$가 주어졌다고 하자.
+$g_i = g \circ h_i$라 놓는다. $h_i$가 평탄하므로
+$Lh_i^* = h_i^*$이고 $h_i^*$는 코호몰로지를 취하는 것과 가환한다.
+따라서
+$$
+H^0(T_i, H^0(Lg_i^*K)) =
+H^0(T_i, H^0(h_i^*Lg^*K)) =
+H^0(T, h_i^*H^0(Lg^*K))
+$$
+이다.
+% P11-E0357: the frozen third term takes sections over T, although the
+% pulled-back sheaf is on T_i; the displayed formula remains unchanged.
+$T_i \times_T T_j$로 당긴 것에도 같은 논의가 적용된다.
+$Lg^*K$는 $T$ 위의 유사결맞 복합체이고
+(『사이트 위의 코호몰로지』의 보조정리
+\ref{sites-cohomology-lemma-pseudo-coherent-pullback})
+코호몰로지 층 $\mathcal{F} = H^0(Lg^*K)$는 준연접이다
+(『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-pseudo-coherent}).
+따라서 『대수공간 위의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+에 의해
+$$
+H^0(T, \mathcal{F}) = \Ker(
+\prod H^0(T_i, h_i^*\mathcal{F}) \to
+\prod H^0(T_i \times_T T_j, (T_i \times_T T_j \to T)^*\mathcal{F}))
+$$
+임을 안다. 이로써 (1)과 (2)의 규칙들이 fppf 덮개에 대한
+층 조건을 만족함을 알 수 있다. 그러므로 『부트스트랩』의 보조정리
+\ref{bootstrap-lemma-locally-algebraic-space-finite-type}를 적용하면
+표현 가능성을 $B$ 위 에탈 국소적으로 증명하면 충분하다.
+또한 최종 결과가 아핀이고 유한 표시인지도 $B$ 위 에탈 국소적으로
+확인할 수 있다. 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-affine-local}과
+\ref{spaces-morphisms-lemma-finite-presentation-local}을 보라.
+따라서 $B$가 아핀 스킴이라고 가정해도 된다.
+
+\medskip\noindent
+$B = \Spec(A)$가 아핀 스킴이라고 가정하자.
+『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-pseudo-coherent},
+\ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site}, 그리고
+\ref{spaces-perfect-lemma-descend-pseudo-coherent}
+에 의해 증명의 나머지에서는 $K$를 Zariski 위상에서 $B$ 위 가군
+복합체의 유도 범주의 완전 대상으로 생각해도 된다.
+『스킴의 유도 범주』의 보조정리
+\ref{perfect-lemma-pseudo-coherent},
+\ref{perfect-lemma-affine-compare-bounded}, 그리고
+\ref{perfect-lemma-pseudo-coherent-affine}에 의해, $K$가
+$D(\mathcal{O}_B)$에서 대응하는 대상이 되도록 하는
+$A$-가군의 유사결맞 복합체 $M^\bullet$를 찾을 수 있다.
+당김에 대한 가정에 의해 모든 소 아이디얼 $\mathfrak p \subset A$에
+대하여 $M^\bullet \otimes^\mathbf{L}_A \kappa(\mathfrak p)$의
+$H^{-1}$은 영이다. 『대수학 심화』의 보조정리
+\ref{more-algebra-lemma-cut-complex-in-two}에 의해
+$$
+M^\bullet =
+\tau_{\geq 0}M^\bullet \oplus \tau_{\leq - 1}M^\bullet
+$$
+로 쓸 수 있다. 여기서 어떤 $b \geq 0$에 대하여
+$\tau_{\geq 0}M^\bullet$는 완전하고 Tor-진폭이 $[0, b]$에 놓인다
+(여기서는 『대수학 심화』의 보조정리
+\ref{more-algebra-lemma-glue-perfect}과
+\ref{more-algebra-lemma-glue-tor-amplitude}도 사용했다).
+(2)의 경우에는 $D(A)$에서 $\tau_{\leq - 1}M^\bullet = 0$임도 알 수
+있으므로, $M^\bullet$와 $K$는 완전하고 Tor-진폭이 $[0, b]$에 놓인다.
+임의의 $B$-스킴 $g : T \to B$에 대하여
+$$
+H^0(T, H^0(Lg^*K)) = H^0(T, H^0(Lg^*\tau_{\geq 0}K))
+$$
+이다(『유도 범주』의 보조정리
+\ref{derived-lemma-negative-vanishing})
+의 쌍대에 의함). 따라서 $K$를 $\tau_{\geq 0}K$로 바꾸고,
+이에 맞추어 $M^\bullet$를 $\tau_{\geq 0}M^\bullet$로 바꾸어도 된다.
+다시 말해 $M^\bullet$의 Tor-진폭이 $[0, b]$에 놓인다고 가정해도 된다.
+
+\medskip\noindent
+$M^\bullet$의 Tor-진폭이 $[0, b]$에 놓인다고 가정하자.
+$M^\bullet$가 유한 자유 $A$-가군의 위로 유계인 복합체라고 가정해도
+된다(유사결맞 복합체의 정의와 『대수학 심화』의 정의
+\ref{more-algebra-definition-pseudo-coherent} 뒤의 논의를 보라).
+『대수학 심화』의 보조정리
+\ref{more-algebra-lemma-last-one-flat}에 의해
+$M = \Coker(M^{- 1} \to M^0)$은 평탄하다.
+『대수』의 보조정리 \ref{algebra-lemma-finite-projective}에 의해
+$M$은 유한 국소 자유이다. 따라서 $M^\bullet$는 다음과 유사동형이다.
+$$
+M \to M^1 \to M^2 \to \ldots \to M^d \to 0 \ldots
+$$
+이는 K-평탄 복합체임에 유의하자
+(『코호몰로지』의 보조정리
+\ref{cohomology-lemma-bounded-flat-K-flat}).
+따라서 사상 $T \to B$에 의한 $K$의 유도 당김은 복합체
+$$
+g^*\widetilde{M} \to g^*\widetilde{M^1} \to \ldots
+$$
+로 계산된다. 그러므로 함자
+$$
+(g : T \to B) \longmapsto
+\Ker(
+\Gamma(T,g^*\widetilde{M})
+\to
+\Gamma(T, g^*(\widetilde{M^1})
+)
+$$
+가 $B$ 위 유한 표시인 아핀 스킴으로 표현가능함을 보이면 충분하다.
+
+\medskip\noindent
+마지막 명제를 증명하기 위해 $B$를 아핀 열린 덮개의 원소들로
+바꾸어도 된다. 따라서 $M$이 유한 자유라고 가정해도 된다
+($M^1$은 애초부터 유한 자유임을 상기하라).
+$M = A^{\oplus n}$, $M^1 = A^{\oplus m}$로 쓰자.
+사상 $M \to M^1$이 $A$에 계수를 갖는 $m \times n$ 행렬
+$(a_{ij})$로 주어진다고 하자. 그러면
+$\widetilde{M} = \mathcal{O}_B^{\oplus n}$이고
+$\widetilde{M^1} = \mathcal{O}_B^{\oplus m}$이다.
+따라서 위의 함자는 다음 함자와 같다.
+$$
+(g : T \to B) \longmapsto
+\{(f_1, \ldots, f_n) \in \Gamma(T, \mathcal{O}_T) \mid
+\sum g^\sharp(a_{ij})f_i = 0,\ j = 1, \ldots, m\}
+$$
+이는 분명 아핀 스킴
+$$
+\Spec\left(A[x_1, \ldots, x_n]/(\sum a_{ij}x_i; j = 1, \ldots, m)\right)
+$$
+으로 표현가능하다. 보조정리가 증명되었다.
+\end{proof}
+
+\noindent
+함자 $\mathit{Hom}(\mathcal{F}, \mathcal{G})$는 여러 상황에서
+표현가능하다. 우리의 모든 결과는 다음 기본적인 경우에 바탕을 둔다.
+아래에 제시하는 이 보조정리의 증명은 어떤 의미에서
+\cite[III, Cor 7.7.8]{EGA}의 증명을 자연스럽게 일반화한 것이다.
+% P11-E0358: frozen source says "generalization to the proof" rather than "of".
+
+\begin{lemma}
+\label{lemma-noetherian-hom}
+상황 \ref{situation-hom}에서 다음을 가정하자.
+\begin{enumerate}
+\item $B$는 Noether 대수공간이다.
+\item $f$는 국소 유한형이고 준분리이다.
+\item $\mathcal{F}$는 유한형 $\mathcal{O}_X$-가군이다.
+\item $\mathcal{G}$는 유한형 $\mathcal{O}_X$-가군이고 $B$ 위에서
+평탄하며, 그 지지는 $B$ 위에서 고유하다.
+\end{enumerate}
+그러면 함자 $\mathit{Hom}(\mathcal{F}, \mathcal{G})$는
+$B$ 위에서 아핀이고 유한 표시인 대수공간이다.
+\end{lemma}
+
+\begin{proof}
+$X$를 $\mathcal{G}$의 지지의 준콤팩트 열린 근방으로 바꿀 수 있으므로
+$X$가 Noether라고 가정해도 된다. 이 경우 $X$와 $f$는 준콤팩트이고
+준분리이다. 삼중항 $(X, \mathcal{F}, -1)$에 대하여 완전 복합체
+$P$에 의한 근사 $P \to \mathcal{F}$를 택한다.
+『대수공간의 유도 범주』의 정의
+\ref{spaces-perfect-definition-approximation-holds}와 정리
+\ref{spaces-perfect-theorem-approximation}을 보라.
+% P11-E0359: frozen source ends the reference with an unmatched parenthesis.
+그러면 유도된 사상
+$$
+\Hom_{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})
+\longrightarrow
+\Hom_{D(\mathcal{O}_X)}(P, \mathcal{G})
+$$
+은 동형사상이다. 실제로 $P \to \mathcal{F}$는 동형사상
+$H^0(P) \to \mathcal{F}$를 유도하고 $i > 0$에 대하여
+$H^i(P) = 0$이다. 또한 임의의 사상 $g : T \to B$에 대하여
+$h : X_T = T \times_B X \to X$를 투영이라 하고
+$P_T = Lh^*P$라 놓자.
+% P11-E0360: frozen source has an incomplete "denote" construction for h.
+그러면 마찬가지로
+$$
+\Hom_{\mathcal{O}_{X_T}}(\mathcal{F}_T, \mathcal{G}_T)
+\longrightarrow
+\Hom_{D(\mathcal{O}_{X_T})}(P_T, \mathcal{G}_T)
+$$
+은 동형사상이다. 이는
+$P_T = Lh^*P \to Lh^*\mathcal{F} \to \mathcal{F}_T$가 동형사상
+$H^0(P_T) \to \mathcal{F}_T$를 유도하기 때문이다
+($h^*$는 오른쪽 완전하고 $i > 0$에 대하여 $H^i(P) = 0$이다).
+따라서 다음 함자에 대하여 결과를 증명하면 충분하다.
+$$
+T \longmapsto \Hom_{D(\mathcal{O}_{X_T})}(P_T, \mathcal{G}_T).
+$$
+Leray 스펙트럴 열에 의해(『사이트 위의 코호몰로지』의 주의
+\ref{sites-cohomology-remark-before-Leray}을 보라)
+$$
+\Hom_{D(\mathcal{O}_{X_T})}(P_T, \mathcal{G}_T) =
+H^0(X_T, R\SheafHom(P_T, \mathcal{G}_T)) =
+H^0(T, Rf_{T, *}R\SheafHom(P_T, \mathcal{G}_T))
+$$
+이다. 여기서 $f_T : X_T \to T$는 $f$의 밑변환이다.
+『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-base-change-RHom}
+에 의해
+$$
+Rf_{T, *}R\SheafHom(P_T, \mathcal{G}_T) = Lg^*Rf_*R\SheafHom(P, \mathcal{G}).
+$$
+이다. 『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-ext-perfect}
+에 의해 $D(\mathcal{O}_B)$의 대상
+$K = Rf_*R\SheafHom(P, \mathcal{G})$는 완전하다.
+따라서 위와 같은 모든 $g : T \to B$와 모든 $i < 0$에 대하여
+코호몰로지 층 $H^i(Lg^*K)$가 $0$임을 증명하면
+보조정리 \ref{lemma-cohomology-perfect-complex}을 적용할 수 있다.
+마지막 표시식에서 이는 분명하다.
+$P_T$는 완전하고 양의 차수 코호몰로지 층이 영이므로
+$R\SheafHom(P_T, \mathcal{G}_T)$의 음의 차수 코호몰로지 층이 영이고,
+따라서 $Rf_{T, *}R\SheafHom(P_T, \mathcal{G}_T)$의 음의 차수
+코호몰로지 층도 영이다.
+\end{proof}
+
+\noindent
+다음은 보조정리 \ref{lemma-noetherian-hom}의 간단한 귀결이다.
+
+\begin{proposition}
+\label{proposition-hom}
+상황 \ref{situation-hom}에서 다음을 가정하자.
+\begin{enumerate}
+\item $f$는 유한 표시이다.
+\item $\mathcal{G}$는 유한 표시 $\mathcal{O}_X$-가군이고,
+$B$ 위에서 평탄하며 그 지지는 $B$ 위에서 고유하다.
+\end{enumerate}
+그러면 함자 $\mathit{Hom}(\mathcal{F}, \mathcal{G})$는
+$B$ 위의 아핀 대수공간이다. $\mathcal{F}$가 유한 표시이면
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$는 $B$ 위에서 유한 표시이다.
+\end{proposition}
+
+\begin{proof}
+보조정리 \ref{lemma-hom-sheaf}에 의해 함자
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$는 fppf 덮개에 대한
+층 조건을 만족한다. 따라서\footnote{인용한 보조정리의 집합론적 조건
+(3)에 대한 확인은 생략한다.} 『부트스트랩』의 보조정리
+\ref{bootstrap-lemma-locally-algebraic-space}를 적용하여 표현 가능성을
+$B$ 위 에탈 국소적으로 확인할 수 있다.
+% P11-E0361: frozen source says "This mean we may".
+% P11-E0362: frozen source has the open compound "set theoretical".
+또한 최종 결과가 아핀인지 또는 유한 표시인지도 $B$ 위 에탈 국소적으로
+확인할 수 있다. 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-affine-local}과
+\ref{spaces-morphisms-lemma-finite-presentation-local}을 보라.
+따라서 $B$가 아핀 스킴이라고 가정해도 된다.
+
+\medskip\noindent
+$B$가 아핀 스킴이라고 가정하자. $f$가 유한 표시이므로
+$X$는 준콤팩트이고 준분리이다.
+% P11-E0363: frozen source omits "that" in this consequence.
+따라서 $\mathcal{F} = \colim \mathcal{F}_i$를 유한 표시
+$\mathcal{O}_X$-가군들의 여과 쌍대극한으로 쓸 수 있다
+(『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-colimit-finitely-presented}). 분명히
+$$
+\mathit{Hom}(\mathcal{F}, \mathcal{G}) =
+\lim \mathit{Hom}(\mathcal{F}_i, \mathcal{G})
+$$
+이다. 각 $\mathit{Hom}(\mathcal{F}_i, \mathcal{G})$가 아핀 스킴으로
+표현가능함을 보이면 $\mathit{Hom}(\mathcal{F}, \mathcal{G})$에도
+같은 결과가 성립한다. 『극한』의 절 \ref{limits-section-limits}과
+『대수공간의 극한』의 절 \ref{spaces-limits-section-limits}의 내용을
+사용하라. 따라서 $\mathcal{F}$가 유한 표시라고 가정해도 된다.
+
+\medskip\noindent
+$B = \Spec(R)$라 하자. 각 $R_i$가 유한형 $\mathbf{Z}$-대수가 되도록
+$R = \colim R_i$로 쓰고 $B_i = \Spec(R_i)$라 놓는다.
+『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-finite-presentation}과
+\ref{spaces-limits-lemma-descend-modules-finite-presentation}
+에 의해 다음을 찾을 수 있다. 어떤 $i$, 대수공간들의 사상
+$X_i \to B_i$, 그리고 유한 표시 $\mathcal{O}_{X_i}$-가군
+$\mathcal{F}_i$와 $\mathcal{G}_i$가 존재하여
+$(X_i, \mathcal{F}_i, \mathcal{G}_i)$를 $B$로 밑변환하면
+$(X, \mathcal{F}, \mathcal{G})$를 얻는다.
+『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-flat}에 의해 $i$를 키운 뒤
+$\mathcal{G}_i$가 $B_i$ 위에서 평탄하다고 가정해도 된다.
+마찬가지로 『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-eventually-proper-support}에 의해
+$\mathcal{G}_i$의 스킴 이론적 지지가 $B_i$ 위에서 고유하다고
+가정해도 된다. 이제 보조정리 \ref{lemma-noetherian-hom}을 적용하면
+$H_i = \mathit{Hom}(\mathcal{F}_i, \mathcal{G}_i)$가
+$B_i$ 위에서 아핀이고 유한 표시인 대수공간임을 안다.
+이를 $B$로 당기면(주의 \ref{remark-hom-base-change}을 사용)
+$H_i \times_{B_i} B = \mathit{Hom}(\mathcal{F}, \mathcal{G})$이므로
+결론을 얻는다.
+\end{proof}
+
+
+
+
+
+
+\section{Isom 함자}
+\label{section-isom}
+
+\noindent
+상황 \ref{situation-hom}에서 부분함자
+$$
+\mathit{Isom}(\mathcal{F}, \mathcal{G}) \subset
+\mathit{Hom}(\mathcal{F}, \mathcal{G})
+$$
+를 생각할 수 있다. 이 함자의 $B$ 위 스킴 $T$에서의 값은
+{\it 가역인} $\mathcal{O}_{X_T}$-준동형
+$u : \mathcal{F}_T \to \mathcal{G}_T$들의 집합이다.
+
+\medskip\noindent
+때로는 $\mathit{Isom}(\mathcal{F}, \mathcal{G})$를 사상
+$\mathit{Isom}(\mathcal{F}, \mathcal{G}) \to B$가 주어진 함자
+$(\Sch/S)^{opp} \to \textit{Sets}$
+로 생각한다. 구체적으로 $T$가 $S$ 위의 스킴이면
+$\mathit{Isom}(\mathcal{F}, \mathcal{G})(T)$의 원소는 쌍
+$(h, u)$로 이루어진다. 여기서 $h$는 사상 $h : T \to B$이고,
+$u : \mathcal{F}_T \to \mathcal{G}_T$는
+$\mathcal{O}_{X_T}$-가군의 동형사상이며,
+$X_T = T \times_{h, B} X$이고 $\mathcal{F}_T$와
+$\mathcal{G}_T$는 $X_T$로의 당김이다. 특히
+$\mathit{Isom}(\mathcal{F}, \mathcal{G})$가 대수공간이라고 말할 때에는
+대응하는 함자 $(\Sch/S)^{opp} \to \textit{Sets}$가
+대수공간이라는 뜻이다.
+
+\begin{lemma}
+\label{lemma-isom-sheaf}
+상황 \ref{situation-hom}에서 함자
+$\mathit{Isom}(\mathcal{F}, \mathcal{G})$ 
+는 fpqc 위상에 대한 층 조건을 만족한다.
+\end{lemma}
+
+\begin{proof}
+ $\mathit{Hom}(\mathcal{F}, \mathcal{G})$가 층 조건을 만족함은
+이미 보았다. 따라서 다음을 보이면 충분하다. $B$ 위 스킴들의 fpqc 덮개
+$\{T_i \to T\}_{i \in I}$와 $\mathcal{O}_{X_T}$-선형 사상
+$u : \mathcal{F}_T \to \mathcal{G}_T$가 주어지고, 모든 $i$에
+대하여 $u_{T_i}$가 동형사상이면 $u$도 동형사상이다.
+$\{X_i \to X_T\}_{i \in I}$는 $X_T$의 fpqc 덮개이므로
+(『대수공간의 위상』의 보조정리
+\ref{spaces-topologies-lemma-fpqc}),
+이는 『대수공간 위의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+에서 따른다.
+\end{proof}
+
+\noindent
+확인해 둘 점은 $\mathit{Isom}$ 층이 $S$ 위의 대수공간들 사이에서도
+같은 역할을 한다는 것이다.
+
+\begin{lemma}
+\label{lemma-extend-isom-to-spaces}
+상황 \ref{situation-hom}에서 $T$를 $S$ 위의 대수공간이라 하자.
+% P11-E0364: frozen source punctuates the situation qualifier as a fragment.
+그러면
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T, \mathit{Isom}(\mathcal{F}, \mathcal{G})) =
+\{(h, u) \mid
+h : T \to B, u : \mathcal{F}_T \to \mathcal{G}_T\text{ isomorphism}\}
+$$
+이다. 여기서 $\mathcal{F}_T, \mathcal{G}_T$는
+$\mathcal{F}$와 $\mathcal{G}$를 대수공간
+$X \times_{B, h} T$로 당긴 것이다.
+\end{lemma}
+
+\begin{proof}
+이 등식의 좌변과 우변은 각각 보조정리
+\ref{lemma-extend-hom-to-spaces}의 등식의 좌변과 우변의 부분집합이다.
+% P11-E0365: frozen source uses singular "hand side" for both pairs.
+그 보조정리의 증명에서 주어진 식별 아래 이 부분집합들이 서로
+대응한다는 확인은 생략한다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-isom}
+상황 \ref{situation-hom}에서 다음을 가정하자.
+\begin{enumerate}
+\item $f$는 유한 표시이다.
+\item $\mathcal{F}$와 $\mathcal{G}$는 유한 표시
+$\mathcal{O}_X$-가군이고 $B$ 위에서 평탄하며, 그 지지는
+$B$ 위에서 고유하다.
+\end{enumerate}
+그러면 함자 $\mathit{Isom}(\mathcal{F}, \mathcal{G})$는
+$B$ 위에서 아핀이고 유한 표시인 대수공간이다.
+\end{proposition}
+
+\begin{proof}
+다음 약자를 사용하자.
+$H = \mathit{Hom}(\mathcal{F}, \mathcal{G})$,
+$I = \mathit{Hom}(\mathcal{F}, \mathcal{F})$,
+$H' = \mathit{Hom}(\mathcal{G}, \mathcal{F})$, 그리고
+$I' = \mathit{Hom}(\mathcal{G}, \mathcal{G})$.
+명제 \ref{proposition-hom}에 의해 함자
+$H$, $I$, $H'$, $I'$는 대수공간이고 사상
+$H \to B$, $I \to B$, $H' \to B$, 그리고 $I' \to B$는
+아핀이고 유한 표시이다. 사상들의 합성은 $B$ 위 대수공간들의 사상
+$$
+c : H' \times_B H \longrightarrow I \times_B I',\quad
+(u', u) \longmapsto (u \circ u', u' \circ u)
+$$
+을 준다.
+% P11-E0366: the frozen composite pair is reversed relative to I x I';
+% the displayed formula remains unchanged.
+$I \times_B I' \to B$가 분리이므로
+$(\text{id}_\mathcal{F}, \text{id}_\mathcal{G})$
+에 대응하는 절단 $\sigma : B \to I \times_B I'$는 닫힌 몰입이다
+(『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-section-immersion}).
+더욱이 $\sigma$는 유한 표시이다
+(『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-finite-presentation-permanence}).
+따라서
+$$
+\mathit{Isom}(\mathcal{F}, \mathcal{G}) =
+(H' \times_B H) \times_{c, I \times_B I', \sigma} B
+$$
+도 $B$ 위에서 아핀이고 유한 표시인 대수공간이다.
+몇 가지 세부사항은 생략한다.
+\end{proof}
+
+
+
+
+
+
+\section{연접층의 스택}
+\label{section-stack-coherent-sheaves}
+
+\noindent
+이 절에서는 적절한 가정 아래 $X/B$ 위의 연접층의 스택이
+대수적임을 증명한다. 이는 기저 위의 Artin 스택에 놓인
+연접층의 스택을 다루는 \cite[Theorem 2.1.1]{lieblich_remarks}의
+특별한 경우이다.
+
+\begin{situation}
+\label{situation-coherent}
+스킴 $S$를 잡자. $f : X \to B$를 $S$ 위의 대수공간들의
+사상이라 하고 $f$가 유한 표시라고 가정하자.
+$\Cohstack_{X/B}$를 다음 삼중항 $(T, g, \mathcal{F})$들을
+대상으로 하는 범주라 하자.
+\begin{enumerate}
+\item $T$는 $S$ 위의 스킴이다.
+\item $g : T \to B$는 $S$ 위의 사상이고, 다음과 같이 놓는다.
+$X_T = T \times_{g, B} X$
+\item $\mathcal{F}$는 유한 표시 준연접 $\mathcal{O}_{X_T}$-가군이고
+$T$ 위에서 평탄하며, 그 지지는 $T$ 위에서 고유하다.
+\end{enumerate}
+사상 $(T, g, \mathcal{F}) \to (T', g', \mathcal{F}')$는 다음을
+만족하는 쌍 $(h, \varphi)$로 주어진다.
+\begin{enumerate}
+\item $h : T \to T'$는 $B$ 위 스킴들의 사상이다
+(즉 $g' \circ h = g$이다).
+\item $\varphi : (h')^*\mathcal{F}' \to \mathcal{F}$는
+$\mathcal{O}_{X_T}$-가군의 동형사상이다. 여기서
+$h' : X_T \to X_{T'}$는 $h$의 밑변환이다.
+\end{enumerate}
+\end{situation}
+
+\noindent
+따라서 $\Cohstack_{X/B}$는 범주이고, 규칙
+$$
+p : \Cohstack_{X/B} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(T, g, \mathcal{F}) \longmapsto T
+$$
+는 함자이다. $S$ 위의 스킴 $T$에 대하여 $T$ 위의 $p$의
+섬유범주를 $\Cohstack_{X/B, T}$로 나타낸다. 이 섬유범주들은 준군이다.
+
+\begin{lemma}
+\label{lemma-coherent-fibred-in-groupoids}
+상황 \ref{situation-coherent}에서 함자
+$p : \Cohstack_{X/B} \longrightarrow (\Sch/S)_{fppf}$
+는 준군 섬유화 범주이다.
+\end{lemma}
+
+\begin{proof}
+$p$가 준군 섬유화 범주임을 『범주』의 정의
+\ref{categories-definition-fibred-groupoids}의 조건 (1)과 (2)를
+확인하여 보이자. $\Cohstack_{X/B}$의 대상
+$(T', g', \mathcal{F}')$와 $S$ 위 스킴들의 사상
+$h : T \to T'$가 주어졌다고 하자. $g = h \circ g'$,
+$\mathcal{F} = (h')^*\mathcal{F}'$로 놓을 수 있다. 여기서
+$h' : X_T \to X_{T'}$는 $h$의 밑변환이다.
+% P11-E0367: frozen source reverses the ill-typed composition defining g;
+% the inline mathematical token remains unchanged.
+그러면 $h$ 위에 놓이는 $\Cohstack_{X/B}$의 사상
+$(T, g, \mathcal{F}) \to (T', g', \mathcal{F}')$를 얻음은 분명하다.
+이것이 (1)을 증명한다. (2)에 대하여 $\Cohstack_{X/B}$의 사상
+$$
+(h_1, \varphi_1) : (T_1, g_1, \mathcal{F}_1) \to (T, g, \mathcal{F})
+\quad\text{and}\quad
+(h_2, \varphi_2) : (T_2, g_2, \mathcal{F}_2) \to (T, g, \mathcal{F})
+$$
+과 $h_2 \circ h = h_1$을 만족하는 사상 $h : T_1 \to T_2$가
+주어졌다고 하자. $\varphi$를 다음 합성이라 하자.
+$$
+(h')^*\mathcal{F}_2
+\xrightarrow{(h')^*\varphi_2^{-1}}
+(h')^*(h_2)^*\mathcal{F} = (h_1)^*\mathcal{F}
+\xrightarrow{\varphi_1}
+\mathcal{F}_1
+$$
+그러면 조건 (2)가 성립함을 보이는 사상
+$(h, \varphi) : (T_1, g_1, \mathcal{F}_1) \to (T_2, g_2, \mathcal{F}_2)$
+를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-coherent-diagonal}
+상황 \ref{situation-coherent}에서
+$\mathcal{X} = \Cohstack_{X/B}$라 놓자.
+% P11-E0368: frozen source punctuates the situation qualifier as a fragment.
+그러면 $\Delta : \mathcal{X} \to \mathcal{X} \times \mathcal{X}$는
+대수공간으로 표현가능하다.
+\end{lemma}
+
+\begin{proof}
+스킴 $T$ 위의 $\mathcal{X}$의 두 대상
+$x = (T, g, \mathcal{F})$와 $y = (T, h, \mathcal{G})$를 생각하자.
+$\mathit{Isom}_\mathcal{X}(x, y)$가 $T$ 위의 대수공간임을 보여야 한다.
+『대수 스택』의 보조정리
+\ref{algebraic-lemma-representable-diagonal}을 보라.
+$a : T' \to T$에 대하여 제한 $x|_{T'}$와 $y|_{T'}$가 섬유범주
+$\mathcal{X}_{T'}$에서 동형이면 $g \circ a = h \circ a$이다.
+따라서 프리시프들의 변환
+$$
+\mathit{Isom}_\mathcal{X}(x, y) \longrightarrow \text{Equalizer}(g, h)
+$$
+이 존재한다. $B$의 대각사상이 스킴으로 표현가능하므로 이 등화자는
+스킴이다. 따라서 $T$를 이 등화자로 바꾸고 층 $\mathcal{F}$와
+$\mathcal{G}$를 각각 그 당김으로 바꾸어도 된다. 그러므로
+$g = h$라고 가정해도 된다. 이 경우
+$\mathit{Isom}_\mathcal{X}(x, y) = \mathit{Isom}(\mathcal{F}, \mathcal{G})$
+이고, 결과는 명제 \ref{proposition-isom}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-coherent-stack}
+상황 \ref{situation-coherent}에서 함자
+$p : \Cohstack_{X/B} \longrightarrow (\Sch/S)_{fppf}$
+는 준군 스택이다.
+\end{lemma}
+
+\begin{proof}
+$\Cohstack_{X/B}$가 준군 스택임을 증명하려면 프리시프
+$\mathit{Isom}$들이 층이고 하강 데이터들이 유효함을 보여야 한다.
+$\mathit{Isom}$에 관한 명제는 보조정리
+\ref{lemma-coherent-diagonal}에서 따른다. 『대수 스택』의 보조정리
+\ref{algebraic-lemma-representable-diagonal}을 보라.
+하강 데이터에 관한 명제를 증명하자.
+$\{a_i : T_i \to T\}$를 $S$ 위 스킴들의 fppf 덮개라 하고,
+$(\xi_i, \varphi_{ij})$를 $\Cohstack_{X/B}$에 값을 갖는
+$\{T_i \to T\}$의 하강 데이터라 하자. 각 $i$에 대하여
+$\xi_i = (T_i, g_i, \mathcal{F}_i)$로 쓸 수 있다.
+$\text{pr}_0 : T_i \times_T T_j \to T_i$와
+$\text{pr}_1 : T_i \times_T T_j \to T_j$를 투영이라 하자.
+조건 $\xi_i|_{T_i \times_T T_j} = \xi_j|_{T_i \times_T T_j}$는 특히
+$g_i \circ \text{pr}_0 = g_j \circ \text{pr}_1$을 뜻한다.
+따라서 각 지표에 대하여 $g_i = g \circ a_i$를 만족하는 유일한 사상
+$g : T \to B$가 존재한다. 『대수공간 위의 하강』의 보조정리
+\ref{spaces-descent-lemma-fpqc-universal-effective-epimorphisms}
+을 보라. $X_T = T \times_{g, B} X$라 놓는다. 또한
+$X_i = X_{T_i} = T_i \times_{g_i, B} X = T_i \times_{a_i, T} X_T$
+라 놓고
+$$
+X_{ij} = X_{T_i} \times_{X_T} X_{T_j} = X_i \times_{X_T} X_j
+$$
+의 $X_i$와 $X_j$로의 투영을 각각 $\text{pr}_i$와
+$\text{pr}_j$라 하자. $(T_i, g_i, \mathcal{F}_i)$를
+$\text{pr}_0 : T_i \times_T T_j \to T_i$로 당긴 것은
+$(T_i \times_T T_j, g_i \circ \text{pr}_0, \text{pr}_i^*\mathcal{F}_i)$.
+로 주어진다. 따라서 $\Cohstack_{X/B}$에서 $\{T_i \to T\}$에
+대한 하강 데이터는 대상 $(T_i, g \circ a_i, \mathcal{F}_i)$들과
+각 쌍 $i, j$에 대한 $\mathcal{O}_{X_{ij}}$-가군의 동형사상
+$$
+\varphi_{ij} :
+\text{pr}_i^*\mathcal{F}_i \longrightarrow \text{pr}_j^*\mathcal{F}_j
+$$
+으로 주어진다. 이 동형사상들은 $T_i \times_T T_j \times_T T_k$로
+$X$를 당긴 것 위에서 코사이클 조건을 만족한다.
+이제 $\{X_i \to X_T\}$가 fppf 덮개라는 사실을 사용하면
+$(\mathcal{F}_i, \varphi_{ij})$를 이 덮개의 하강 데이터로 볼 수 있다.
+『대수공간 위의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+에 의해 이 하강 데이터는 유효하고, 각 $X_i$에서
+$\mathcal{F}_i$로 제한되는 $X_T$ 위의 준연접층 $\mathcal{F}$를 얻는다.
+『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-flat-permanence}에 의해
+$\mathcal{F}$는 $T$ 위에서 평탄하고, 『대수공간 위의 하강』의 보조정리
+\ref{spaces-descent-lemma-finite-presentation-descends}
+에 의해 $\mathcal{F}$는 $\mathcal{O}_{X_T}$-가군으로서 유한 표시이다.
+마지막으로 『대수공간 위의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-proper}에 의해
+$\mathcal{F}$의 스킴 이론적 지지는 $T$ 위에서 고유하다.
+실제로 $\mathcal{F}_i$의 스킴 이론적 지지는 $T_i$ 위에서 고유하다고
+가정했고, 스킴 이론적 지지를 취하는 것은 평탄 밑변환과 가환한다
+(『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-flat-pullback-support}).
+이로써 원하는 $T$ 위의 대상을 얻는다.
+\end{proof}
+
+\begin{remark}
+\label{remark-coherent-base-change}
+상황 \ref{situation-coherent}에서 규칙
+$(T, g, \mathcal{F}) \mapsto (T, g)$는 준군 스택들의 $1$-사상
+$$
+\Cohstack_{X/B} \longrightarrow \mathcal{S}_B
+$$
+을 정의한다(보조정리 \ref{lemma-coherent-stack},
+『대수 스택』의 절 \ref{algebraic-section-split}, 그리고
+『스택의 예』의 절
+\ref{examples-stacks-section-stack-associated-to-sheaf}을 보라).
+$B' \to B$를 $S$ 위의 대수공간들의 사상이라 하고,
+$\mathcal{S}_{B'} \to \mathcal{S}_B$를 이에 결부된 집합들의
+섬유화 스택들의 $1$-사상이라 하자. $X' = X \times_B B'$라 놓는다.
+밑변환 $f' : X' \to B'$에 결부된 준군 스택
+$\Cohstack_{X'/B'} \to (\Sch/S)_{fppf}$를 얻는다.
+이 상황에서 도표
+$$
+\vcenter{
+\xymatrix{
+\Cohstack_{X'/B'} \ar[r] \ar[d] & \Cohstack_{X/B} \ar[d] \\
+\mathcal{S}_{B'} \ar[r] & \mathcal{S}_B
+}
+}
+\quad
+\begin{matrix}
+\text{or in} \\
+\text{another} \\
+\text{notation}
+\end{matrix}
+\quad
+\vcenter{
+\xymatrix{
+\Cohstack_{X'/B'} \ar[r] \ar[d] & \Cohstack_{X/B} \ar[d] \\
+\Sch/B' \ar[r] & \Sch/B
+}
+}
+$$
+는 $2$-섬유곱 정사각형이다.
+% P11-E0369: frozen source omits an article before "2-fibre product square".
+이 자명한 주의는 기저 대수공간을 바꿀 때 가끔 유용하다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-coherent-limits}
+상황 \ref{situation-coherent}에서 $B \to S$가 국소 유한 표시라고
+가정하자. 그러면 $p : \Cohstack_{X/B} \to (\Sch/S)_{fppf}$는
+극한을 보존한다(『Artin의 공리』의 정의
+\ref{artin-definition-limit-preserving}).
+\end{lemma}
+
+\begin{proof}
+$S$-사상 $T \to B$들을 대상으로 하는 이산 범주를 $B(T)$로 쓰자.
+$T = \lim T_i$를 $S$ 위 아핀 스킴들의 여과 극한이라 하자.
+$\Cohstack_{X/B, T}$의 대상 $(T, h, \mathcal{F})$에
+$B(T)$의 대상 $h$를 대응시키면 다음 섬유범주들의 가환도표를 얻는다.
+$$
+\xymatrix{
+\colim \Cohstack_{X/B, T_i} \ar[r] \ar[d] &
+\Cohstack_{X/B, T} \ar[d] \\
+\colim B(T_i) \ar[r] & B(T)
+}
+$$
+위쪽 수평 화살표가 동치임을 보여야 한다. $B$가 $S$ 위에서
+국소 유한 표시라고 가정했으므로 『대수공간의 극한』의 주의
+\ref{spaces-limits-remark-limit-preserving}에 의해 아래쪽 수평
+화살표는 동치이다. 따라서 $T = \lim T_i$가 $B$ 위 아핀 스킴들의
+여과 극한이라고 가정해도 된다. 대응하는 사상들을
+$g_i : T_i \to B$와 $g : T \to B$라 하자.
+$X_i = T_i \times_{g_i, B} X$, $X_T = T \times_{g, B} X$라 놓는다.
+$X_T = \colim X_i$이고 대수공간 $X_i$와 $X_T$가 준분리이며
+준콤팩트임에 유의하자. 실제로 이들은 각각 아핀 $T_i$와 $T$ 위에서
+유한 표시이다.
+% P11-E0370: frozen source writes colim for this inverse-limit presentation;
+% the displayed inline token remains unchanged.
+『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-modules-finite-presentation}
+에 의해
+$$
+\colim \textit{FP}(X_i) = \textit{FP}(X_T).
+$$
+이다. 여기서 $\textit{FP}(W)$는 유한 표시 $\mathcal{O}_W$-가군들의
+범주를 줄여 쓴 것이다. 『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-flat}과
+\ref{spaces-limits-lemma-eventually-proper-support}
+에 의해 $\textit{FP}(X_i)$와 $\textit{FP}(X_T)$를 각각
+$T_i$와 $T$ 위에서 평탄하고 스킴 이론적 지지가 각각
+$T_i$와 $T$ 위에서 고유한 대상들의 충만한 부분범주로 바꾸어도
+같은 명제가 성립한다. 이것으로 보조정리가 증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-coherent-RS-star}
+상황 \ref{situation-coherent}에서
+$$
+\xymatrix{
+Z \ar[r] \ar[d] & Z' \ar[d] \\
+Y \ar[r] & Y'
+}
+$$
+가 $S$ 위 스킴의 범주에서 밂이라 하자. 여기서
+$Z \to Z'$는 두꺼워짐이고 $Z \to Y$는 아핀이다.
+『사상 심화』의 보조정리
+\ref{more-morphisms-lemma-pushout-along-thickening}을 보라.
+그러면 섬유범주들의 함자
+$$
+\Cohstack_{X/B, Y'}
+\longrightarrow
+\Cohstack_{X/B, Y} \times_{\Cohstack_{X/B, Z}} \Cohstack_{X/B, Z'}
+$$
+는 동치이다.
+\end{lemma}
+
+\begin{proof}
+대응하는 사상
+$$
+B(Y') \longrightarrow B(Y) \times_{B(Z)} B(Z')
+$$
+은 전단사이다. 『대수공간의 밂』의 보조정리
+\ref{spaces-pushouts-lemma-pushout-along-thickening-schemes}를 보라.
+따라서 가환도표
+$$
+\xymatrix{
+\Cohstack_{X/B, Y'} \ar[r] \ar[d] &
+\Cohstack_{X/B, Y} \times_{\Cohstack_{X/B, Z}} \Cohstack_{X/B, Z'}
+\ar[d] \\
+B(Y') \ar[r] & B(Y) \times_{B(Z)} B(Z')
+}
+$$
+를 사용하면 $Y'$가 $B'$ 위의 스킴이라고 가정해도 됨을 알 수 있다.
+% P11-E0371: B' is undefined in the frozen source; the token is preserved.
+주의 \ref{remark-coherent-base-change}에 의해 $B$를 $Y'$로,
+$X$를 $X \times_B Y'$로 바꾸어도 된다. 따라서 $B = Y'$라고
+가정해도 된다. 이 경우 명제는 『대수공간의 밂』의 보조정리
+\ref{spaces-pushouts-lemma-space-over-pushout-flat-modules}
+에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-coherent-over-first-order-thickening}
+대수공간들의 Cartesian 정사각형
+$$
+\xymatrix{
+X \ar[d] \ar[r]_i & X' \ar[d] \\
+T \ar[r] & T'
+}
+$$
+에서 $T \to T'$가 1차 두꺼워짐이라고 하자.
+$\mathcal{F}'$를 $T'$ 위에서 평탄한 $\mathcal{O}_{X'}$-가군이라
+하고 $\mathcal{F} = i^*\mathcal{F}'$라 놓자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $\mathcal{F}'$는 유한 표시 준연접 $\mathcal{O}_{X'}$-가군이다.
+\item $\mathcal{F}'$는 유한 표시 $\mathcal{O}_{X'}$-가군이다.
+\item $\mathcal{F}$는 유한 표시 준연접 $\mathcal{O}_X$-가군이다.
+\item $\mathcal{F}$는 유한 표시 $\mathcal{O}_X$-가군이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+유한 표시 가군은 준연접임을 상기하면 (1)과 (2), 그리고 (3)과 (4)의
+동치가 따른다. (2)와 (4)의 동치는 『변형 이론』의 보조정리
+\ref{defos-lemma-deform-fp-module-ringed-topoi}
+의 특별한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-coherent-tangent-space}
+상황 \ref{situation-coherent}에서 $S$가 국소 Noether 스킴이고
+$B \to S$가 국소 유한 표시라고 가정하자.
+$k$를 $S$ 위의 유한형 체라 하고
+$x_0 = (\Spec(k), g_0, \mathcal{G}_0)$
+를 $k$ 위의 $\mathcal{X} = \Cohstack_{X/B}$의 대상이라 하자.
+그러면 공간 $T\mathcal{F}_{\mathcal{X}, k, x_0}$와
+$\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x_0})$
+는 유한 차원이다(『Artin의 공리』의 절
+\ref{artin-section-tangent-spaces}).
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-coherent-RS-star}에 의해 우리의 준군 스택
+$\mathcal{X}$는 『Artin의 공리』의 절 \ref{artin-section-inf}에서
+정의한 성질 (RS*)를 만족한다. 특히 $\mathcal{X}$는 (RS)를 만족한다.
+따라서 결부된 모든 전변형 범주는 변형 범주이고
+(『Artin의 공리』의 보조정리 \ref{artin-lemma-deformation-category}),
+위 명제는 의미가 있다.
+
+\medskip\noindent
+이 문단에서는 $B = \Spec(k)$인 경우로 환원할 수 있음을 보인다.
+$X_0 = \Spec(k) \times_{g_0, B} X$라 놓고
+$\mathcal{X}_0 = \Cohstack_{X_0/k}$라 하자.
+주의 \ref{remark-coherent-base-change}에서 $(\Sch/S)_{fppf}$ 위의
+준군 섬유화 범주로서 $\mathcal{X}_0$가 $\mathcal{X}$와
+$\Spec(k)$의 $B$ 위 $2$-섬유곱임을 보았다.
+따라서 『Artin의 공리』의 보조정리
+\ref{artin-lemma-fibre-product-tangent-spaces}에 의해
+$B$, $\Spec(k)$, $\mathcal{X}_0$의 접공간과 무한소 자기동형공간이
+유한 차원임을 증명하는 문제로 환원된다. 『Artin의 공리』의 보조정리
+\ref{artin-lemma-finite-dimension}에 의해 $B$와 $\Spec(k)$의
+접공간은 유한 차원이고, 물론 이들의 $\text{Inf}$는 영이다.
+따라서 $\mathcal{X}_0$만 다루면 충분하다.
+
+\medskip\noindent
+$k[\epsilon]$을 $k$ 위의 쌍대수라 하자.
+$\Spec(k[\epsilon]) \to B$를 $g_0 : \Spec(k) \to B$와 포함
+$k \to k[\epsilon]$에서 오는 사상
+$\Spec(k[\epsilon]) \to \Spec(k)$의 합성이라 하자.
+$X_0 = \Spec(k) \times_B X$,
+$X_\epsilon = \Spec(k[\epsilon]) \times_B X$라 놓는다.
+$X_\epsilon$은 $X_0$의 1차 두꺼워짐이고, 1차 두꺼워짐
+$\Spec(k) \to \Spec(k[\epsilon])$ 위에서 평탄하다.
+정의를 풀고 보조정리
+\ref{lemma-coherent-over-first-order-thickening}을 사용하면
+$T\mathcal{F}_{\mathcal{X}_0, k, x_0}$는 $\mathcal{G}_0$를
+$X_\epsilon$ 위의 평탄 가군으로 올리는 방법들의 집합이다.
+『변형 이론』의 보조정리 \ref{defos-lemma-flat-ringed-topoi}에 의해
+$$
+T\mathcal{F}_{\mathcal{X}_0, k, x_0} =
+\Ext^1_{\mathcal{O}_{X_0}}(\mathcal{G}_0, \mathcal{G}_0)
+$$
+이다. 여기서는 $k[\epsilon]$-가군의 식별
+$\epsilon k[\epsilon] \cong k$를 사용했다.
+『변형 이론』의 보조정리 \ref{defos-lemma-flat-ringed-topoi}를
+한 번 더 사용하면
+$$
+\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x_0}) =
+\Ext^0_{\mathcal{O}_{X_0}}(\mathcal{G}_0, \mathcal{G}_0)
+$$
+임을 알 수 있다.
+% P11-E0372: frozen source reverts from X_0 to X in the Inf subscript;
+% the displayed formula remains unchanged.
+$\mathcal{G}_0$의 지지가 $\Spec(k)$ 위에서 고유하므로 이 공간들은
+$k$ 위에서 유한 차원이다. 실제로 $X_0$는 $\Spec(k)$ 위 유한
+표시이므로 Noether이다. $\mathcal{G}_0$가 유한 표시이므로 이는
+연접 $\mathcal{O}_{X_0}$-가군이다. 따라서
+『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-ext-finite}
+를 적용하여 원하는 유한성을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-coherent-existence}
+상황 \ref{situation-coherent}에서 $S$가 국소 Noether 스킴이고
+$f : X \to B$가 분리라고 가정하자.
+$\mathcal{X} = \Cohstack_{X/B}$라 놓는다. 그러면
+『Artin의 공리』의 식 (\ref{artin-equation-approximation})의 함자는
+동치이다.
+\end{lemma}
+
+\begin{proof}
+$A$를 완비 Noether 국소환인 $S$-대수라 하자. 그 극대 아이디얼을
+$\mathfrak m$이라 하고, 잉여체 $k$가 $S$ 위 유한형이라고 하자.
+$A$ 위 대상들의 범주가 $A$ 위 형식적 대상들의 범주와 동치임을
+보여야 한다. 『Artin의 공리』의 보조정리
+\ref{artin-lemma-effective}에 의해 이는 $B$에 결부된 집합들의
+섬유화 범주 $\mathcal{S}_B$에 대해서는 성립함을 알고 있으므로,
+주어진 사상 $\Spec(A) \to B$ 위에 놓이는 대상들에 대해서만
+증명하면 충분하다.
+
+\medskip\noindent
+$X_A = \Spec(A) \times_B X$,
+$X_n = \Spec(A/\mathfrak m^n) \times_B X$라 놓는다.
+Grothendieck 존재정리에 의해(『대수공간의 사상 심화』의 정리
+\ref{spaces-more-morphisms-theorem-grothendieck-existence})
+$X_A$ 위의 연접 가군 $\mathcal{F}$ 가운데 지지가
+$\Spec(A)$ 위에서 고유한 것들의 범주는, $X_n$ 위의 연접 가군
+$\mathcal{F}_n$ 가운데 지지가 $\Spec(A/\mathfrak m^n)$ 위에서
+고유한 것들의 계 $(\mathcal{F}_n)$의 범주와 동치이다.
+이 동치는 $\mathcal{F}$를 계
+$(\mathcal{F} \otimes_A A/\mathfrak m^n)$으로 보낸다.
+『대수공간의 사상 심화』의 주의
+\ref{spaces-more-morphisms-remark-reformulate-existence-theorem}
+의 논의를 보라. 보조정리의 증명을 마치려면
+$\mathcal{F}$가 $A$ 위에서 평탄할 필요충분조건이 모든
+$\mathcal{F} \otimes_A A/\mathfrak m^n$이
+$A/\mathfrak m^n$ 위에서 평탄한 것임을 보이면 충분하다.
+이는 『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-flatness-over-Noetherian-ring}
+에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-coherent-defo-thy}
+상황 \ref{situation-coherent}에서 $S$가 국소 Noether 스킴이고,
+$S = B$이며, $f : X \to B$가 평탄하다고 가정하자.
+$\mathcal{X} = \Cohstack_{X/B}$라 두면 $\mathcal{X}$에 대하여
+versal성의 개방성이 성립한다(『Artin의 공리』의 정의
+\ref{artin-definition-openness-versality} 참조).
+\end{lemma}
+
+\begin{proof}[첫 번째 증명]
+이 증명은 『Artin의 공리』의 보조정리
+\ref{artin-lemma-dual-openness}의 판정조건에 기초한다.
+$U \to S$를 유한형 스킴 사상, $x$를 $U$ 위의
+$\mathcal{X}$의 대상, $u_0 \in U$를 $x$가 $u_0$에서 versal이 되는
+유한형 점이라 하자. $U$를 축소하여 $u_0$가 닫힌점이라고
+가정할 수 있다(『사상』의 보조정리 \ref{morphisms-lemma-point-finite-type}).
+또한 $U = \Spec(A)$이고 $U \to S$의 상이 $S$의 아핀 열린집합
+$\Spec(\Lambda)$에 포함된다고 가정할 수 있다.
+주어진 대상 $x$에 대응하는, $A$ 위에서 평탄한
+$X_A = \Spec(A) \times_S X$ 위의 연접 가군을 $\mathcal{F}$라 하자.
+
+\medskip\noindent
+『변형 이론』의 보조정리 \ref{defos-lemma-flat-ringed-topoi}에 의해
+다음 함자 동형이 성립한다.
+$$
+T_x(M) = \Ext^1_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)
+$$
+또한 제곱이 영인 핵 $I$를 갖는 임의의 $\Lambda$-대수 전사
+$A' \to A$가 주어지면 장애류
+$$
+\xi_{A'} \in \Ext^2_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A I)
+$$
+를 얻는다. 여기서는 위와 같은 임의의 $A' \to A$에 대하여 밑변환
+$X_{A'} = \Spec(A') \times_B X$가 $A'$ 위에서 평탄하다는 사실을 쓴다.
+더 나아가 『변형 이론』의 보조정리
+\ref{defos-lemma-functorial-ringed-topoi}에 의해, $A$를 고정하면
+장애류의 구성은 전사 $A' \to A$에 대하여 함자적이다.
+『공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-compute-ext}
+를 Ext 군
+$\Ext^i_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)$
+의 $m = 2$ 및 $i \leq m$인 경우의 계산에 적용하자. 그러면
+완전 대상 $K \in D(A)$와 함자적 동형
+$$
+H^i(K \otimes_A^\mathbf{L} M)
+\longrightarrow
+\Ext^i_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)
+$$
+을 얻으며, 이는 $i \leq m$에 대하여 경계 사상과 양립한다.
+이 대상 $K$와 위에 표시한 동일시들은 『Artin의 공리』의 상황
+\ref{artin-situation-dual}에 나오는 데이터를 준다.
+마지막으로 『Artin의 공리』의 보조정리
+\ref{artin-lemma-dual-obstruction}의 조건 (iv)는 『변형 이론』의 보조정리
+\ref{defos-lemma-verify-iv-ringed-topoi}에 의해 성립한다.
+따라서 『Artin의 공리』의 보조정리
+\ref{artin-lemma-dual-openness}를 실제로 적용할 수 있고, 보조정리가 증명된다.
+\end{proof}
+
+\begin{proof}[두 번째 증명]
+이 증명은 『Artin의 공리』의 보조정리
+\ref{artin-lemma-get-openness-obstruction-theory}에 기초한다.
+그 보조정리의 조건 (1), (2), (3)은 각각 보조정리
+\ref{lemma-coherent-diagonal},
+\ref{lemma-coherent-RS-star},
+\ref{lemma-coherent-limits}에 대응한다.
+
+\medskip\noindent
+변형 이론을 다룬 장에서 우리는 장애 이론을 구성했다.
+구체적으로, $S$-대수 $A$와 $X_A$ 위의 $\mathcal{F}$로 주어지는
+$\Spec(A)$ 위의 $\Cohstack_{X/B}$의 대상 $x$에 대하여
+$\mathcal{O}_x(M) = \Ext^2_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)$
+로 놓는다. 그리고 $A' \to A$가 핵 $I$를 갖는 전사이면 장애 원소로
+$$
+o_x(A') = o(\mathcal{F}, \mathcal{F} \otimes_A I, 1) \in
+\mathcal{O}_x(I) = \Ext^2_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A I)
+$$
+를 택한다. 이는 『변형 이론』의 보조정리
+\ref{defos-lemma-flat-ringed-topoi}의 원소이다.
+『Artin의 공리』의 정의 \ref{artin-definition-obstruction-theory}에서
+정의한 장애 이론의 성질 가운데, 그 정의의 조건 (ii)에 서술된
+장애류의 함자성을 제외한 모든 성질이 이 보조정리에서 따른다.
+그러나 『Artin의 공리』의 보조정리
+\ref{artin-lemma-get-openness-obstruction-theory}의 가정 (4)에 붙은
+각주에서 말했듯이, 고정된 $A$에 대하여 장애류의 함자성을 확인하면 충분하다.
+이는 『변형 이론』의 보조정리
+\ref{defos-lemma-functorial-ringed-topoi}에서 따른다.
+『변형 이론』의 보조정리 \ref{defos-lemma-flat-ringed-topoi}는 또한
+$T_x(M) = \Ext^1_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)$
+임을 모든 $A$-가군 $M$에 대하여 말해 준다.
+
+\medskip\noindent
+증명을 마치려면 다음 두 등식을 보이면 충분하다.
+$T_x(\prod M_n) = \prod T_x(M_n)$이고
+%% P11-E0373: 오른쪽 곱에서 첨자 n이 빠진 동결 원문을 그대로 보존한다.
+$\mathcal{O}_x(\prod M_n) = \prod \mathcal{O}_x(M)$.
+『공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-compute-ext}
+를 Ext 군
+$\Ext^i_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)$
+의 $m = 2$ 및 $i \leq m$인 경우의 계산에 적용하자. 그러면
+완전 대상 $K \in D(A)$와 함자적 동형
+$$
+H^i(K \otimes_A^\mathbf{L} M)
+\longrightarrow
+\Ext^i_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)
+$$
+을 $i = 1, 2$에 대하여 얻는다. 직접적인 논증으로
+$$
+H^i(K \otimes_A^\mathbf{L} \prod M_n) =
+\prod H^i(K \otimes_A^\mathbf{L} M_n)
+$$
+임을 $K$가 $D(A)$의 유사결맞 대상일 때마다 알 수 있다.
+사실 이 성질은 모든 $i$에 대하여 유사결맞 복합체를 특징짓는다.
+『대수학 심화』의 보조정리
+\ref{more-algebra-lemma-pseudo-coherent-tensor}를 보라.
+\end{proof}
+
+\begin{theorem}[연접층 스택의 대수성: 평탄한 경우]
+\label{theorem-coherent-algebraic}
+$S$를 스킴이라 하고, $f : X \to B$를 $S$ 위의 대수공간의 사상이라 하자.
+$f$가 유한 표시이고 분리이며 평탄하다고 가정하자\footnote{이 가정은
+필요하지 않다. 절 \ref{section-not-flat}을 보라.}.
+그러면 $\Cohstack_{X/B}$는 $S$ 위의 대수 스택이다.
+\end{theorem}
+
+\begin{proof}
+$\mathcal{X} = \Cohstack_{X/B}$라 두자. $\mathcal{X}$는
+$(\Sch/S)_{fppf}$ 위의 준군 스택이고 그 대각선은 대수공간으로
+표현 가능함을 이미 보였다(보조정리 \ref{lemma-coherent-stack}과
+\ref{lemma-coherent-diagonal}). 따라서 스킴 $W$와 전사 매끄러운 사상
+$W \to \mathcal{X}$를 찾으면 충분하다.
+
+\medskip\noindent
+$B'$을 스킴이라 하고, $B' \to B$를 전사 \'etale 사상이라 하자.
+$X' = B' \times_B X$라 두고, 사영을 $f' : X' \to B'$라 쓰자.
+그러면 $\mathcal{X}' = \Cohstack_{X'/B'}$는 $B$에 결부된 집합 섬유화 범주
+위에서 $\mathcal{X}$와 $B'$에 결부된 집합 섬유화 범주의 $2$-섬유곱과
+같다(주의 \ref{remark-coherent-base-change}). 『대수 스택』의 절
+\ref{algebraic-section-representable-properties}의 내용에 의해 사상
+$\mathcal{X}' \to \mathcal{X}$는 전사이고 \'etale이다.
+따라서 $\mathcal{X}'$에 대하여 결과를 증명하면 충분하다.
+다시 말해 $B$가 스킴이라고 가정할 수 있다.
+
+\medskip\noindent
+$B$가 스킴이라고 가정하자. 이 경우 $S$를 $B$로 바꿀 수 있다.
+『대수 스택』의 절 \ref{algebraic-section-change-base-scheme}을 보라.
+따라서 $S = B$라고 가정할 수 있다.
+
+\medskip\noindent
+$S = B$라고 가정하자. 아핀 열린 덮개 $S = \bigcup U_i$를 택하자.
+$(\Sch/U_i)_{fppf}$에 대한 $\mathcal{X}$의 제한을 $\mathcal{X}_i$라 쓰자.
+$U_i$ 위의 스킴 $W_i$와 전사 매끄러운 사상
+$W_i \to \mathcal{X}_i$를 찾을 수 있다면 $W = \coprod W_i$로 놓아
+전사 매끄러운 사상 $W \to \mathcal{X}$를 얻는다.
+따라서 $S = B$가 아핀이라고 가정할 수 있다.
+
+\medskip\noindent
+$S = B$가 아핀이라고 하고 $S = \Spec(\Lambda)$라 쓰자.
+$\Lambda = \colim \Lambda_i$를 여과 쌍극한으로 나타내되, 각 $\Lambda_i$는
+$\mathbf{Z}$ 위의 유한형 대수라 하자. 어떤 $i$에 대해서는 유한 표시이고
+분리이며 평탄하고, $\Lambda$로의 밑변환이 $X$인 대수공간의 사상
+$X_i \to \Spec(\Lambda_i)$를 찾을 수 있다. 『공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-finite-presentation},
+\ref{spaces-limits-lemma-descend-separated-morphism},
+\ref{spaces-limits-lemma-descend-flat}
+를 보라. $\Cohstack_{X_i/\Spec(\Lambda_i)}$가 대수 스택임을 보이면
+밑변환에 의해(주의 \ref{remark-coherent-base-change}와 『대수 스택』의 절
+\ref{algebraic-section-change-base-scheme}) $\mathcal{X}$가 대수 스택임이
+따른다. 따라서 $\Lambda$가 유한형 $\mathbf{Z}$-대수라고 가정할 수 있다.
+
+\medskip\noindent
+$S = B = \Spec(\Lambda)$가 $\mathbf{Z}$ 위의 유한형 아핀 스킴이라고
+가정하자. 이 경우 『Artin의 공리』의 보조정리
+\ref{artin-lemma-diagonal-representable}의 조건 (1), (2), (3), (4), (5)를
+확인하여 $\mathcal{X}$가 대수 스택임을 보이겠다.
+$\Lambda$가 G-환임에 유의하라. 『대수학 심화』의 명제
+\ref{more-algebra-proposition-ubiquity-G-ring}을 보라.
+따라서 $S$의 모든 국소환은 G-환이고, 조건 (5)가 성립한다.
+보조정리 \ref{lemma-coherent-defo-thy}에 의해 $\mathcal{X}$는
+versal성의 개방성을 만족하므로 조건 (4)가 성립한다.
+조건 (2)를 확인하려면 『Artin의 공리』의 절
+\ref{artin-section-axioms}의 공리 [-1], [0], [1], [2], [3]을 확인해야 한다.
+공리 [-1]의 확인은 생략한다. 공리 [0], [1], [2], [3]은 각각 보조정리
+\ref{lemma-coherent-stack},
+\ref{lemma-coherent-limits},
+\ref{lemma-coherent-RS-star},
+\ref{lemma-coherent-tangent-space}에 대응한다.
+조건 (3)은 보조정리 \ref{lemma-coherent-existence}에서 따른다.
+마지막으로 조건 (1)은 보조정리 \ref{lemma-coherent-diagonal}이다.
+이로써 정리의 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{비평탄한 경우의 연접층 스택}
+\label{section-not-flat}
+
+\noindent
+정리 \ref{theorem-coherent-algebraic}에서 $f : X \to B$가 평탄하다는
+가정은 필요하지 않다. 이 절에서는 『공간 위의 평탄성』의 절
+\ref{spaces-flat-section-existence}과 『Artin의 공리』의 절
+\ref{artin-section-strong-formal-effectiveness}의 결과를 이용하여,
+평탄성 가정과 versal성의 개방성 확인을 피하는 다른 증명을 제시한다.
+
+\medskip\noindent
+이 문제에 대한 다른 접근법으로는 \cite{ArtinI}를 참고하고, 논문
+\cite{olsson-starr}, \cite{lieblich_remarks}, \cite{olsson_proper},
+\cite{Hall-Rydh}, \cite{Hall-Rydh-Hilbert}, \cite{rydh_representability}에서
+논의한 방법을 따를 수 있다. 이 논문들 가운데 일부는 대수 스택 위의
+대수 스택에 놓인 연접층의 스택이라는 더 일반적인 경우를 다루고,
+다른 일부는 Hilbert 스택이나 Quot 함자의 경우에 생기는 비슷한 문제를
+다룬다. 우리의 전략은 연접층 스택의 대수성에서 Hilbert 스택과 Quot 함자의
+몇몇 경우의 대수성을 도출하는 것이다.
+
+\begin{theorem}[연접층 스택의 대수성: 일반적인 경우]
+\label{theorem-coherent-algebraic-general}
+$S$를 스킴이라 하고, $f : X \to B$를 $S$ 위의 대수공간의 사상이라 하자.
+%% P11-E0374: 영문 원문의 누락된 부정관사 후보는 형식 내용에 영향을 주지 않는다.
+$f$가 유한 표시이고 분리라고 가정하자. 그러면
+$\Cohstack_{X/B}$는 $S$ 위의 대수 스택이다.
+\end{theorem}
+
+\begin{proof}
+증명의 마지막 단계만 평탄한 경우의 증명과 다르지만, 모든 것이
+제대로 작동함을 보장하기 위해 여기서 논증 전체를 되풀이한다.
+
+\medskip\noindent
+$\mathcal{X} = \Cohstack_{X/B}$라 두자. $\mathcal{X}$는
+$(\Sch/S)_{fppf}$ 위의 준군 스택이고 그 대각선은 대수공간으로
+표현 가능함을 이미 보였다(보조정리 \ref{lemma-coherent-stack}과
+\ref{lemma-coherent-diagonal}). 따라서 스킴 $W$와 전사 매끄러운 사상
+$W \to \mathcal{X}$를 찾으면 충분하다.
+
+\medskip\noindent
+$B'$을 스킴이라 하고, $B' \to B$를 전사 \'etale 사상이라 하자.
+$X' = B' \times_B X$라 두고, 사영을 $f' : X' \to B'$라 쓰자.
+그러면 $\mathcal{X}' = \Cohstack_{X'/B'}$는 $B$에 결부된 집합 섬유화 범주
+위에서 $\mathcal{X}$와 $B'$에 결부된 집합 섬유화 범주의 $2$-섬유곱과
+같다(주의 \ref{remark-coherent-base-change}). 『대수 스택』의 절
+\ref{algebraic-section-representable-properties}의 내용에 의해 사상
+$\mathcal{X}' \to \mathcal{X}$는 전사이고 \'etale이다.
+따라서 $\mathcal{X}'$에 대하여 결과를 증명하면 충분하다.
+다시 말해 $B$가 스킴이라고 가정할 수 있다.
+
+\medskip\noindent
+$B$가 스킴이라고 가정하자. 이 경우 $S$를 $B$로 바꿀 수 있다.
+『대수 스택』의 절 \ref{algebraic-section-change-base-scheme}을 보라.
+따라서 $S = B$라고 가정할 수 있다.
+
+\medskip\noindent
+$S = B$라고 가정하자. 아핀 열린 덮개 $S = \bigcup U_i$를 택하자.
+$(\Sch/U_i)_{fppf}$에 대한 $\mathcal{X}$의 제한을 $\mathcal{X}_i$라 쓰자.
+$U_i$ 위의 스킴 $W_i$와 전사 매끄러운 사상
+$W_i \to \mathcal{X}_i$를 찾을 수 있다면 $W = \coprod W_i$로 놓아
+전사 매끄러운 사상 $W \to \mathcal{X}$를 얻는다.
+따라서 $S = B$가 아핀이라고 가정할 수 있다.
+
+\medskip\noindent
+$S = B$가 아핀이라고 하고 $S = \Spec(\Lambda)$라 쓰자.
+$\Lambda = \colim \Lambda_i$를 여과 쌍극한으로 나타내되, 각 $\Lambda_i$는
+$\mathbf{Z}$ 위의 유한형 대수라 하자. 어떤 $i$에 대해서는 분리이고
+유한 표시이며, $\Lambda$로의 밑변환이 $X$인 대수공간의 사상
+$X_i \to \Spec(\Lambda_i)$를 찾을 수 있다. 『공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-finite-presentation}와
+\ref{spaces-limits-lemma-descend-separated-morphism}
+를 보라. $\Cohstack_{X_i/\Spec(\Lambda_i)}$가 대수 스택임을 보이면
+밑변환에 의해(주의 \ref{remark-coherent-base-change}와 『대수 스택』의 절
+\ref{algebraic-section-change-base-scheme}) $\mathcal{X}$가 대수 스택임이
+따른다. 따라서 $\Lambda$가 유한형 $\mathbf{Z}$-대수라고 가정할 수 있다.
+
+\medskip\noindent
+$S = B = \Spec(\Lambda)$가 $\mathbf{Z}$ 위의 유한형 아핀 스킴이라고
+가정하자. 이 경우 『Artin의 공리』의 보조정리
+\ref{artin-lemma-diagonal-representable}의 조건 (1), (2), (3), (4), (5)를
+확인하여 $\mathcal{X}$가 대수 스택임을 보이겠다.
+$\Lambda$가 G-환임에 유의하라. 『대수학 심화』의 명제
+\ref{more-algebra-proposition-ubiquity-G-ring}을 보라.
+따라서 $S$의 모든 국소환은 G-환이고, 조건 (5)가 성립한다.
+조건 (2)를 확인하려면 『Artin의 공리』의 절
+\ref{artin-section-axioms}의 공리 [-1], [0], [1], [2], [3]을 확인해야 한다.
+공리 [-1]의 확인은 생략한다. 공리 [0], [1], [2], [3]은 각각 보조정리
+\ref{lemma-coherent-stack},
+\ref{lemma-coherent-limits},
+\ref{lemma-coherent-RS-star},
+\ref{lemma-coherent-tangent-space}에 대응한다.
+조건 (3)은 보조정리 \ref{lemma-coherent-existence}이고,
+조건 (1)은 보조정리 \ref{lemma-coherent-diagonal}이다.
+
+\medskip\noindent
+이제 versal성의 개방성인 조건 (4)를 보이면 된다. 이를 위해
+『Artin의 공리』의 보조정리
+\ref{artin-lemma-SGE-implies-openness-versality}를 사용하겠다.
+$\mathcal{X}$의 대각선이 대수공간으로 표현 가능하고, 또한
+(RS*)를 만족하며 극한을 보존한다는 사실은 이미 보였다
+(위에서 사용한 보조정리들을 보라).
+따라서 『Artin의 공리』의 보조정리
+\ref{artin-lemma-SGE-implies-openness-versality}에 서술된 강한 형식적
+유효성을 $\mathcal{X}$가 만족함만 보이면 된다. 이는 『공간 위의 평탄성』의
+정리 \ref{spaces-flat-theorem-existence}이고, 이로써 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{몫 함자}
+\label{section-functor-quotients}
+
+\noindent
+이 절에서는 아래에서 정의할 함자 $Q_{\mathcal{F}/X/B}$에 관한
+몇 가지 일반론을 논한다. 표기 $\Quotfunctor_{\mathcal{F}/X/B}$는
+$\text{Q}_{\mathcal{F}/X/B}$의 한 부분함자를 위해 남겨 둔다.
+처음 읽을 때에는 이 절을 건너뛰기를 권한다.
+
+\begin{situation}
+\label{situation-q}
+$S$를 스킴, $f : X \to B$를 $S$ 위의 대수공간의 사상,
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$B$ 위의 임의의 스킴 $T$에 대하여, $T$로의 $X$의 밑변환을 $X_T$라 하고
+사영 $X_T = X \times_B T \to X$에 의한 $\mathcal{F}$의 당김을
+$\mathcal{F}_T$라 쓰겠다. 이와 같은 $T$에 대하여 다음과 같이 둔다.
+$$
+\text{Q}_{\mathcal{F}/X/B}(T) =
+\left\{
+\begin{matrix}
+\text{quotients }\mathcal{F}_T \to \mathcal{Q}\text{ where }
+\mathcal{Q}\text{ is a}\\
+\text{quasi-coherent }
+\mathcal{O}_{X_T}\text{-module flat over }T
+\end{matrix}
+\right\}
+$$
+두 몫의 핵이 같으면 그 둘을 동일시한다. $T' \to T$를 $B$ 위의
+스킴의 사상이라 하고, $\mathcal{F}_T \to \mathcal{Q}$를
+$\text{Q}_{\mathcal{F}/X/B}(T)$의 원소라 하자. 그러면 『공간의 사상』의
+보조정리
+\ref{spaces-morphisms-lemma-base-change-module-flat}
+에 의해 당김 $\mathcal{Q}' = (X_{T'} \to X_T)^*\mathcal{Q}$는
+$T'$ 위에서 평탄한 준연접 $\mathcal{O}_{X_{T'}}$-가군이다.
+따라서 함자
+\begin{equation}
+\label{equation-q}
+\text{Q}_{\mathcal{F}/X/B} : (\Sch/B)^{opp} \longrightarrow \textit{Sets}
+\end{equation}
+를 얻는다. 이를 {\it $\mathcal{F}/X/B$의 몫 함자}라 한다.
+부분함자
+\begin{equation}
+\label{equation-q-fp}
+\text{Q}^{fp}_{\mathcal{F}/X/B} : (\Sch/B)^{opp} \longrightarrow \textit{Sets}
+\end{equation}
+를 다음과 같이 정의한다. 이는 $T$를 $\text{Q}_{\mathcal{F}/X/B}(T)$의
+부분집합 중에서, $\mathcal{Q}$가 $\mathcal{O}_{X_T}$-가군으로 유한 표시인
+몫 $\mathcal{F}_T \to \mathcal{Q}$들로 이루어진 부분집합에 보낸다.
+『공간의 성질』의 절
+\ref{spaces-properties-section-properties-modules}
+에 의해 이는 부분함자이다.
+\end{situation}
+
+\noindent
+상황 \ref{situation-q}에서 때로는 $\text{Q}_{\mathcal{F}/X/B}$를 사상
+%% P11-E0375: 분모가 B에서 S로 바뀌는 동결 원문 표기를 그대로 보존한다.
+$\text{Q}_{\mathcal{F}/X/S} \to B$가 갖추어진 함자
+$(\Sch/S)^{opp} \to \textit{Sets}$로 생각한다.
+구체적으로, $T$가 $S$ 위의 스킴이면 $\text{Q}_{\mathcal{F}/X/B}(T)$의
+원소는 쌍 $(h, \mathcal{Q})$이다. 여기서 $h$는 사상 $h : T \to B$이고,
+%% P11-E0376 및 P11-E0377: 일반 Q의 유한 표시 조건과 원문 술어 누락 후보를 기록한다.
+$\mathcal{Q}$는 $X_T = X \times_{B, h} T$ 위에서 유한 표시인,
+$T$-평탄 몫 $\mathcal{F}_T \to \mathcal{Q}$이다. 특히
+$\text{Q}_{\mathcal{F}/X/S}$가 대수공간이라고 말할 때에는 대응하는 함자
+$(\Sch/S)^{opp} \to \textit{Sets}$가 대수공간이라는 뜻이다.
+$\text{Q}^{fp}_{\mathcal{F}/X/B}$에도 비슷한 주의가 적용된다.
+
+\begin{remark}
+\label{remark-q-base-change}
+상황 \ref{situation-q}에서 $B' \to B$를 $S$ 위의 대수공간의 사상이라 하자.
+$X' = X \times_B B'$라 두고, $\mathcal{F}$의 $X'$로의 당김을
+$\mathcal{F}'$라 쓰자. 이로써 $B'$ 위의 스킴의 범주에 함자
+$Q_{\mathcal{F}'/X'/B'}$가 주어진다. $B'$ 위의 스킴 $T$에 대하여 명백히
+$$
+Q_{\mathcal{F}'/X'/B'}(T) = Q_{\mathcal{F}/X/B}(T)
+$$
+가 성립한다. 오른쪽에서는 합성 $T \to B' \to B$를 통해 $T$를
+$B$ 위의 스킴으로 생각한다. $\text{Q}^{fp}_{\mathcal{F}/X/B}$에도
+비슷한 주의가 적용된다. 이 자명한 주의는 밑 대수공간을 바꿀 때
+이따금 유용할 것이다.
+\end{remark}
+
+\begin{remark}
+\label{remark-q-sheaf}
+$S$를 스킴, $X$를 $S$ 위의 대수공간, $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. 다음이 주어졌다고 가정하자.
+$\{f_i : X_i \to X\}_{i \in I}$
+는 fpqc 덮개이고, 각 $i, j \in I$에 대하여 fpqc 덮개
+$\{X_{ijk} \to X_i \times_X X_j\}$가 주어진다. 이 상황에서 다음 전단사가 있다.
+$$
+\left\{
+\begin{matrix}
+\text{quotients }\mathcal{F} \to \mathcal{Q}\text{ where } \\
+\mathcal{Q}\text{ is a quasi-coherent }\\
+\end{matrix}
+\right\}
+\longrightarrow
+\left\{
+\begin{matrix}
+\text{families of quotients }f_i^*\mathcal{F} \to \mathcal{Q}_i
+\text{ where } \\
+\mathcal{Q}_i\text{ is quasi-coherent and }
+\mathcal{Q}_i\text{ and }\mathcal{Q}_j\\
+\text{ restrict to the same quotient on }X_{ijk}
+\end{matrix}
+\right\}
+$$
+구체적으로, $(f_i^*\mathcal{F} \to \mathcal{Q}_i)_{i \in I}$를
+오른쪽의 원소라 하자. $\{X_{ijk} \to X_i \times_X X_j\}$가 fpqc 덮개이므로
+$\mathcal{Q}_i$와 $\mathcal{Q}_j$의 당김들은 $X_i \times_X X_j$로 당긴
+$\mathcal{F}$의 같은 몫으로 제한된다. 이는 『공간의 하강』의 명제
+%% P11-E0378: 원문의 fully faithfulness 문법 후보를 충실충만성으로 해석한다.
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent})에서 말하는
+충실충만성에서 따른다. 따라서 $\{X_i \to X\}_{i \in I}$에 관한
+준연접 가군의 하강 데이터를 얻는다. 『공간의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+에 의해, $X_i$로 제한하면 주어진 사상
+$f_i^*\mathcal{F} \to \mathcal{Q}_i$를 복원하는 준연접
+$\mathcal{O}_X$-가군의 사상 $\mathcal{F} \to \mathcal{Q}$를 얻는다.
+사상족 $\{X_i \to X\}$가 공동 전사이고 평탄하므로, 모든 점
+$x \in |X|$에 대하여 $x$로 가는 어떤 $i$와 점 $x_i \in |X_i|$가 존재한다.
+유도된 국소환의 사상
+$\mathcal{O}_{X, \overline{x}} \to \mathcal{O}_{X_i, \overline{x_i}}$
+은 충실평탄하다. 『공간의 사상』의 절
+\ref{spaces-morphisms-section-flat}을 보라.
+따라서 $\mathcal{F} \to \mathcal{Q}$는 전사이다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-q-sheaf}
+%% P11-E0379: 원문의 문장 파편을 자연스러운 한 문장으로 잇는다.
+상황 \ref{situation-q}에서 함자
+$\text{Q}_{\mathcal{F}/X/B}$와
+$\text{Q}^{fp}_{\mathcal{F}/X/B}$
+는 fpqc 위상에 대한 층 성질을 만족한다.
+\end{lemma}
+
+\begin{proof}
+$\{T_i \to T\}_{i \in I}$를 $S$ 위의 스킴의 fpqc 덮개라 하자.
+%% P11-E0380: B 대신 S를 쓰는 동결 원문의 밑변환 표기를 그대로 보존한다.
+$X_i = X_{T_i} = X \times_S T_i$ 및 $\mathcal{F}_i = \mathcal{F}_{T_i}$로 두자.
+$\{X_i \to X_T\}_{i \in I}$는 $X_T$의 fpqc 덮개이고
+(『공간 위의 위상』의 보조정리 \ref{spaces-topologies-lemma-fpqc}),
+$X_{T_i \times_T T_{i'}} = X_i \times_{X_T} X_{i'}$이다.
+$\mathcal{F}_i \to \mathcal{Q}_i$가 $\text{Q}_{\mathcal{F}/X/B}(T_i)$의
+원소들의 모음이고, $\mathcal{Q}_i$와 $\mathcal{Q}_{i'}$가
+$\text{Q}_{\mathcal{F}/X/B}(T_i \times_T T_{i'})$의 같은 원소로
+제한된다고 가정하자. 주의 \ref{remark-q-sheaf}에 의해 준연접
+$\mathcal{O}_{X_T}$-가군의 전사 $\mathcal{F}_T \to \mathcal{Q}$를 얻으며,
+이를 $X_i$로 제한하면 주어진 몫을 복원한다.
+『공간의 사상』의 보조정리 \ref{spaces-morphisms-lemma-flat-permanence}에 의해
+$\mathcal{Q}$는 $T$ 위에서 평탄하다. 마지막으로
+$\text{Q}^{fp}_{\mathcal{F}/X/B}$의 경우, 즉 $\mathcal{Q}_i$들이
+유한 표시이면 『공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-finite-presentation-descends}
+에 의해 $\mathcal{Q}$는 $\mathcal{O}_{X_T}$-가군으로 유한 표시이다.
+\end{proof}
+
+\noindent
+문맥 확인: $\text{Q}_{\mathcal{F}/X/B}$와
+$\text{Q}^{fp}_{\mathcal{F}/X/B}$
+는 $S$ 위의 대수공간들 사이에서도 같은 역할을 한다.
+
+\begin{lemma}
+\label{lemma-extend-q-to-spaces}
+%% P11-E0381: 원문의 문장 파편을 자연스러운 한 문장으로 잇는다.
+상황 \ref{situation-q}에서 $T$를 $S$ 위의 대수공간이라 하자. 다음이 성립한다.
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T,  \text{Q}_{\mathcal{F}/X/B}) =
+\left\{
+\begin{matrix}
+(h, \mathcal{F}_T \to \mathcal{Q}) \text{ where }
+h : T \to B \text{ and}\\
+\mathcal{Q}\text{ is quasi-coherent and flat over }T
+\end{matrix}
+\right\}
+$$
+여기서 $\mathcal{F}_T$는 대수공간 $X \times_{B, h} T$로의
+$\mathcal{F}$의 당김을 뜻한다. 마찬가지로 다음이 성립한다.
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T,  \text{Q}^{fp}_{\mathcal{F}/X/B}) =
+\left\{
+\begin{matrix}
+(h, \mathcal{F}_T \to \mathcal{Q}) \text{ where }
+h : T \to B \text{ and}\\
+\mathcal{Q}\text{ is of finite presentation and flat over }T
+\end{matrix}
+\right\}
+$$
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 전사 \'etale 사상 $p : U \to T$를 택하자.
+$R = U \times_T U$라 하고, 두 사영을 $t, s : R \to U$라 하자.
+
+\medskip\noindent
+$v : T \to \text{Q}_{\mathcal{F}/X/B}$를 자연변환이라 하자.
+그러면 $v(p)$는 $U$ 위의 쌍
+$(h_U, \mathcal{F}_U \to \mathcal{Q}_U)$에 대응한다.
+$v$가 함자의 변환이므로 $(h_U, \mathcal{F}_U \to \mathcal{Q}_U)$을
+$s$와 $t$로 당긴 것들은 일치한다.
+$T = U/R$이므로(『공간』의 보조정리 \ref{spaces-lemma-space-presentation}),
+$h_U = h \circ p$를 만족하는 사상 $h : T \to B$를 얻는다.
+『공간의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+에 의해 몫 $\mathcal{Q}_U$는 $X_T$ 위의 몫
+$\mathcal{F}_T \to \mathcal{Q}$로 하강한다.
+$U \to T$가 전사이고 평탄하므로, 『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-flat-permanence}에 의해
+$\mathcal{Q}$는 $T$ 위에서 평탄하다.
+
+\medskip\noindent
+거꾸로, $(h, \mathcal{F}_T \to \mathcal{Q})$를 $T$ 위의 쌍이라 하자.
+스킴 $T'$에서 오는 사상 $a : T' \to T$를
+$(h \circ a, \mathcal{F}_{T'} \to a^*\mathcal{Q})$로 보내면 자연변환
+$v : T \to \text{Q}_{\mathcal{F}/X/B}$를 얻는다.
+이 구성과 앞 단락의 구성이 서로 역이라는 확인은 생략한다.
+
+\medskip\noindent
+$\text{Q}^{fp}_{\mathcal{F}/X/B}$의 경우에는 다음을 덧붙인다.
+사상 $h : T \to B$가 주어졌을 때, $X_T$ 위의 준연접층이
+$\mathcal{O}_{X_T}$-가군으로 유한 표시일 필요충분조건은 $X_U$로의 당김이
+$\mathcal{O}_{X_U}$-가군으로 유한 표시인 것이다. 이는
+$X_U \to X_T$가 전사이고 \'etale이라는 사실과 『공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-finite-presentation-descends}
+에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-q-sheaf-in-X}
+상황 \ref{situation-q}에서 $\{X_i \to X\}_{i \in I}$를 fpqc 덮개라 하고,
+각 $i, j \in I$에 대하여 $\{X_{ijk} \to X_i \times_X X_j\}$를 fpqc 덮개라
+하자. $X_i$로의 $\mathcal{F}$의 당김을 $\mathcal{F}_i$라 하고,
+$X_{ijk}$로의 당김을 $\mathcal{F}_{ijk}$라 하자. $B$ 위의 모든 스킴
+$T$에 대하여 도식
+$$
+\xymatrix{
+Q_{\mathcal{F}/X/B}(T) \ar[r] &
+\prod\nolimits_i
+Q_{\mathcal{F}_i/X_i/B}(T)
+\ar@<1ex>[r]^-{\text{pr}_0^*} \ar@<-1ex>[r]_-{\text{pr}_1^*}
+&
+\prod\nolimits_{i, j, k}
+Q_{\mathcal{F}_{ijk}/X_{ijk}/B}(T)
+}
+$$
+은 첫 번째 화살표를 나머지 두 화살표의 등화자로 나타낸다.
+함자 $\text{Q}^{fp}_{\mathcal{F}/X/B}$에 대해서도 마찬가지이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}_{i, T} \to \mathcal{Q}_i$를 $\text{pr}_0^*$와
+$\text{pr}_1^*$의 등화자의 원소라 하자. 주의 \ref{remark-q-sheaf}에 의해,
+$X_{i, T}$로 제한하면 $\mathcal{F}_i \to \mathcal{Q}_i$를 복원하는
+준연접 $\mathcal{O}_{X_T}$-가군의 전사
+$\mathcal{F}_T \to \mathcal{Q}$를 얻는다. 『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-flat-permanence}에 의해 $\mathcal{Q}$는 원하는 대로
+$T$ 위에서 평탄하다. 함자 $\text{Q}^{fp}_{\mathcal{F}/X/B}$의 경우,
+즉 $\mathcal{Q}_i$가 유한 표시이면 『공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-finite-presentation-descends}
+에 의해 $\mathcal{Q}$도 유한 표시이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-q-limit-preserving}
+상황 \ref{situation-q}에서 다음을 더 가정하자.
+(a) $f$는 준콤팩트이고 준분리이다.
+(b) $\mathcal{F}$는 유한 표시이다.
+그러면 함자 $\text{Q}^{fp}_{\mathcal{F}/X/B}$는 다음 의미에서
+극한을 보존한다. $T = \lim T_i$가 $B$ 위의 아핀 스킴의 유향 극한이면
+$\text{Q}^{fp}_{\mathcal{F}/X/B}(T) =
+\colim \text{Q}^{fp}_{\mathcal{F}/X/B}(T_i)$.
+\end{lemma}
+
+\begin{proof}
+보조정리의 명제와 같은 $T = \lim T_i$를 택하자.
+$i_0 \in I$를 택하고 $I$를 $\{i \in I \mid i \geq i_0\}$로 바꾸자.
+%% P11-E0382: i_0와 달리 정의되지 않은 T_0 및 X_{T_0}를 쓰는 동결 원문을 보존한다.
+$B = S = T_{i_0}$로 두고, $X$를 $X_{T_0}$로, $\mathcal{F}$를
+$X_{T_0}$로의 당김으로 바꿀 수 있다. 그러면
+$X_T = \lim X_{T_i}$이다. 『공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-directed-inverse-system-has-limit}
+를 보라. $\mathcal{F}_T \to \mathcal{Q}$를
+$\text{Q}^{fp}_{\mathcal{F}/X/B}(T)$의 원소라 하자.
+『공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-modules-finite-presentation}
+에 의해 어떤 $i$와 유한 표시 $\mathcal{O}_{X_{T_i}}$-가군의 사상
+$\mathcal{F}_{T_i} \to \mathcal{Q}_i$가 존재하여, 이를 $X_T$로 당기면
+주어진 몫 사상이 된다.
+
+\medskip\noindent
+이제 필요하면 $i$를 크게 한 뒤, 사상
+$\mathcal{F}_{T_i} \to \mathcal{Q}_i$가 전사이고 $\mathcal{Q}_i$가
+$T_i$ 위에서 평탄함을 확인해야 한다. 이를 위해 아핀 스킴 $U$와
+전사 \'etale 사상 $U \to X$를 택하자(『공간의 성질』의 보조정리
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} 참조).
+전사성과 $T_i$ 위의 평탄성은 \'etale 덮개
+$U_{T_i} \to X_{T_i}$로 당긴 뒤 확인해도 된다(정의에 의해).
+따라서 $X = \Spec(B_0)$가 $B = S = T_0 = \Spec(A_0)$ 위의 유한 표시
+아핀 스킴인 경우로 환원된다. $T_i = \Spec(A_i)$라 쓰면
+$T = \Spec(A)$이고 $A = \colim A_i$이다. 이로써 다음 대수 문제에
+이른다. $M_i \to N_i$를 유한 표시
+$B_0 \otimes_{A_0} A_i$-가군의 사상이라 하고,
+$M_i \otimes_{A_i} A \to N_i \otimes_{A_i} A$가 전사이며
+$N_i \otimes_{A_i} A$가 $A$ 위에서 평탄하다고 하자. 어떤 $i' \geq i$에
+대하여 $M_i \otimes_{A_i} A_{i'} \to N_i \otimes_{A_i} A_{i'}$가 전사이고
+%% P11-E0383: 마지막 평탄성의 밑을 A로 쓰는 동결 원문을 그대로 보존한다.
+$N_i \otimes_{A_i} A_{i'}$가 $A$ 위에서 평탄함을 보여야 한다.
+첫 번째는 『대수학』의 보조정리
+\ref{algebra-lemma-module-map-property-in-colimit}에서, 두 번째는
+『대수학』의 보조정리
+\ref{algebra-lemma-flat-finite-presentation-limit-flat}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-q-RS-star}
+%% P11-E0384: 원문의 문장 파편을 자연스러운 한 문장으로 잇는다.
+상황 \ref{situation-q}에서 다음을 생각하자.
+$$
+\xymatrix{
+Z \ar[r] \ar[d] & Z' \ar[d] \\
+Y \ar[r] & Y'
+}
+$$
+이는 $B$ 위의 스킴의 범주에서의 밂이고, 여기서 $Z \to Z'$는 두꺼워짐이며
+$Z \to Y$는 아핀 사상이다. 『사상 심화』의 보조정리
+\ref{more-morphisms-lemma-pushout-along-thickening}을 보라.
+그러면 자연스러운 사상
+$$
+Q_{\mathcal{F}/X/B}(Y') \longrightarrow
+Q_{\mathcal{F}/X/B}(Y) \times_{Q_{\mathcal{F}/X/B}(Z)} Q_{\mathcal{F}/X/B}(Z')
+$$
+은 전단사이다. $X \to B$가 국소 유한 표시이면
+$Q^{fp}_{\mathcal{F}/X/B}$에 대해서도 같은 명제가 성립한다.
+\end{lemma}
+
+\begin{proof}
+역사상을 구성하자. 구체적으로 다음이 주어졌다고 가정하자.
+$\mathcal{F}_Y \to \mathcal{A}$,
+$\mathcal{F}_{Z'} \to \mathcal{B}'$, 그리고 동형
+$\mathcal{A}|_{X_Z} \to \mathcal{B}'|_{X_Z}$
+이 주어진 전사들과 양립한다. 『공간의 밂』의 보조정리
+\ref{spaces-pushouts-lemma-space-over-pushout-flat-modules}
+를 적용하여 $Y'$ 위에서 평탄한 $X_{Y'}$ 위의 준연접 가군
+$\mathcal{A}'$를 얻는다. 이 층은 섬유곱으로 구성되므로(인용한 보조정리의
+증명 참조), 표준 사상 $\mathcal{F}_{Y'} \to \mathcal{A}'$가 있다.
+이 사상이 전사임은 다음과 같이 분해된다는 사실에서 알 수 있다.
+$$
+\begin{matrix}
+\mathcal{F}_{Y'} \\
+\downarrow \\
+(X_Y \to X_{Y'})_*\mathcal{F}_Y
+\times_{(X_Z \to X_{Y'})_*\mathcal{F}_Z}
+(X_{Z'} \to X_{Y'})_*\mathcal{F}_{Z'} \\
+\downarrow \\
+\mathcal{A}' =
+(X_Y \to X_{Y'})_*\mathcal{A}
+\times_{(X_Z \to X_{Y'})_*\mathcal{A}|_{X_Z}}
+(X_{Z'} \to X_{Y'})_*\mathcal{B}'
+\end{matrix}
+$$
+첫 번째 화살표는 『대수학 심화』의 보조정리
+\ref{more-algebra-lemma-module-over-fibre-product-bis}에 의해 전사이고,
+두 번째 화살표는 『대수학 심화』의 보조정리
+\ref{more-algebra-lemma-surjection-module-over-fibre-product}
+에 의해 전사이다.
+
+\medskip\noindent
+$Q^{fp}_{\mathcal{F}/X/B}$의 경우에는 위의 구성이 유한 표시 가군을
+만든다는 것만 보이면 된다. 이는 가환대수의 맥락에서 『대수학 심화』의 주의
+\ref{more-algebra-remark-relative-modules-over-fibre-product}
+에 설명되어 있다. 대수공간 위의 가군에 대한 현재의 경우는
+\'etale 국소화를 통해 이로부터 따른다.
+\end{proof}
+
+\begin{remark}[몫의 장애]
+\label{remark-q-obs}
+상황 \ref{situation-q}에서 $\mathcal{F}$가 $B$ 위에서 평탄하다고
+{\bf 가정}하자. $T \subset T'$를 아이디얼 층 $\mathcal{J}$를 갖는
+$B$ 위 스킴의 1차 두꺼워짐이라 하자.
+%% P11-E0385: 원문의 잘못된 부정관사는 한국어 의미에 영향을 주지 않는다.
+그러면 $X_T \subset X_{T'}$는 대수공간의 1차 두꺼워짐이고,
+그 아이디얼 층 $\mathcal{I}$는 $f_T^*\mathcal{J}$의 몫이다.
+『대수공간의 사상 심화』의 절
+\ref{spaces-more-morphisms-section-thickenings}
+에 서술된 기본 동치를 이용하여 $X_{T'}$ 위의 층과 $T'$ 위의 층을
+각각 $X_T$ 위의 층과 $T$ 위의 층으로 생각하겠다. 다음이
+$$
+0 \to \mathcal{K} \to \mathcal{F}_T \to \mathcal{Q} \to 0
+$$
+$Q_{\mathcal{F}/X/B}(T)$의 원소 $x$를 정의한다고 하자.
+$\mathcal{F}_{T'}$가 $T'$ 위에서 평탄하므로 짧은 완전열
+$$
+0 \to f_T^*\mathcal{J} \otimes_{\mathcal{O}_{X_T}} \mathcal{F}_T
+\xrightarrow{i} \mathcal{F}_{T'} \xrightarrow{\pi} \mathcal{F}_T \to 0
+$$
+을 얻고, 다음이 성립한다.
+$f_T^*\mathcal{J} \otimes_{\mathcal{O}_{X_T}} \mathcal{F}_T =
+\mathcal{I} \otimes_{\mathcal{O}_{X_T}} \mathcal{F}_T$.
+『변형 이론』의 보조정리 \ref{defos-lemma-deform-module-ringed-topoi}를 보라.
+$\mathcal{O}_{X_T}$-가군 $\mathcal{G}$에 대하여 약어
+$
+f_T^*\mathcal{J} \otimes_{\mathcal{O}_{X_T}} \mathcal{G} =
+\mathcal{G} \otimes_{\mathcal{O}_T} \mathcal{J}
+$
+를 쓰자. $\mathcal{Q}$가 $T$ 위에서 평탄하므로 짧은 완전열
+%% P11-E0386: 끝부분에 화살표가 중복된 동결 원문 표시식을 그대로 보존한다.
+$$
+0 \to
+\mathcal{K} \otimes_{\mathcal{O}_T} \mathcal{J} \to
+\mathcal{F}_T \otimes_{\mathcal{O}_T} \mathcal{J} \to
+\mathcal{Q} \otimes_{\mathcal{O}_T} \mathcal{J} \to
+\to 0
+$$
+위의 사실들을 결합하면 표준 확대
+%% P11-E0387: 원문의 잘못된 부정관사는 한국어 의미에 영향을 주지 않는다.
+$$
+0 \to \mathcal{Q} \otimes_{\mathcal{O}_T} \mathcal{J} \to
+\pi^{-1}(\mathcal{K})/i(\mathcal{K} \otimes_{\mathcal{O}_T} \mathcal{J}) \to
+\mathcal{K} \to 0
+$$
+인 $\mathcal{O}_{X_T}$-가군의 완전열을 얻는다. 이는 표준류
+$$
+o_x(T') \in
+\Ext^1_{\mathcal{O}_{X_T}}(\mathcal{K},
+\mathcal{Q} \otimes_{\mathcal{O}_T} \mathcal{J})
+$$
+를 정의한다.
+$o_x(T')$가 영이면 이를 정의하는 짧은 완전열의 분할을 얻는다.
+다시 말해 짧은 완전열
+$0 \to \mathcal{K} \otimes_{\mathcal{O}_T} \mathcal{J} \to
+\mathcal{K}' \to \mathcal{K} \to 0$
+에 들어가는 $\mathcal{O}_{X_{T'}}$-부분가군
+$\mathcal{K}' \subset \pi^{-1}(\mathcal{K})$를 얻는다.
+%% P11-E0388: 원문의 어색한 lemma reference를 위에서 참조한 보조정리로 해석한다.
+그러면 위에서 참조한 보조정리로부터
+$\mathcal{Q}' = \mathcal{F}_{T'}/\mathcal{K}'$
+가 $x$를 $Q_{\mathcal{F}/X/B}(T')$의 원소로 올린 것임이 따른다.
+거꾸로 올림이 존재하면 $o_x(T')$가 영임을 쉽게 알 수 있다.
+더 나아가 $x \in Q_{\mathcal{F}/X/B}^{fp}(T)$이면 『변형 이론』의 보조정리
+\ref{defos-lemma-deform-fp-module-ringed-topoi}에 의해 자동으로
+$x' \in Q_{\mathcal{F}/X/B}^{fp}(T')$이다. 이 주의가 필요해지면 이를
+보조정리로 바꾸고, 결과를 정확히 서술하여 상세한 증명을 제시하겠다
+(사실 위의 모든 것은 임의의 환 달린 토포스의 맥락에서 성립한다).
+\end{remark}
+
+\begin{remark}[몫의 변형]
+\label{remark-q-defos}
+상황 \ref{situation-q}에서 $\mathcal{F}$가 $B$ 위에서 평탄하다고
+{\bf 가정}하자. 주의 \ref{remark-q-obs}의 논의를 계속한다.
+$o_x(T') = 0$이라고 가정하자. 그러면 올림들의 집합
+$x' \in Q_{\mathcal{F}/X/B}(T')$는 군
+$$
+\Hom_{\mathcal{O}_{X_T}}(\mathcal{K},
+\mathcal{Q} \otimes_{\mathcal{O}_T} \mathcal{J})
+$$
+아래의 주동차공간이라고 주장한다. 실제로 몫 $\mathcal{Q}$를 올리고
+$T'$ 위에서 평탄한 임의의 $\mathcal{F}_{T'} \to \mathcal{Q}'$가 주어지면,
+행과 열이 완전열인 가환 도식
+$$
+\xymatrix{
+& 0 \ar[d] & 0 \ar[d] & 0 \ar[d] \\
+0 \ar[r] &
+\mathcal{K} \otimes \mathcal{J} \ar[r] \ar[d] &
+\mathcal{F}_T \otimes \mathcal{J} \ar[r] \ar[d] &
+\mathcal{Q} \otimes \mathcal{J} \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+\mathcal{K}' \ar[r] \ar[d] &
+\mathcal{F}_{T'} \ar[r] \ar[d] &
+\mathcal{Q}' \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+\mathcal{K} \ar[d] \ar[r] &
+\mathcal{F}_T \ar[d] \ar[r] &
+\mathcal{Q} \ar[d] \ar[r] &
+0 \\
+& 0 & 0 & 0
+}
+$$
+을 얻는다(이를 보려면 앞 주의의 관찰을 사용하라).
+사상 $\varphi : \mathcal{K} \to \mathcal{Q} \otimes \mathcal{J}$가 주어지면
+다음 국소 절단 $s$들로 이루어진 부분층
+$\mathcal{K}'_\varphi \subset \mathcal{F}_{T'}$를 생각할 수 있다.
+$\mathcal{F}_T$에서의 상은 $\mathcal{K}$의 국소 절단 $k$이고,
+$\mathcal{Q}'$에서의 상은 $\mathcal{Q} \otimes \mathcal{J}$의 국소 절단
+$\varphi(k)$이다. 이제
+$\mathcal{Q}'_\varphi = \mathcal{F}_{T'}/\mathcal{K}'_\varphi$로 둔다.
+거꾸로 $x$의 임의의 두 번째 올림은 이 방식으로 구성한 몫 가운데 하나에
+대응한다. %% P11-E0389: qotients 철자 오류는 의도된 몫의 의미로 번역한다.
+이 주의가 필요해지면 이를 보조정리로 바꾸고, 결과를 정확히 서술하여
+상세한 증명을 제시하겠다(사실 위의 모든 것은 임의의 환 달린 토포스의
+맥락에서 성립한다).
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+\section{Quot 함자}
+\label{section-quot}
+
+\noindent
+이 절에서는 Quot 함자가 대수공간임을 증명한다.
+
+\begin{situation}
+\label{situation-quot}
+$S$를 스킴, $f : X \to B$를 $S$ 위의 대수공간의 사상이라 하자.
+$f$가 유한 표시라고 가정하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. $B$ 위의 임의의 스킴 $T$에 대하여
+$T$로의 $X$의 밑변환을 $X_T$라 하고, 사영
+%% P11-E0390: B 위의 T에 S-섬유곱을 쓰는 동결 원문 공식을 그대로 보존한다.
+$X_T = X \times_S T \to X$에 의한 $\mathcal{F}$의 당김을
+$\mathcal{F}_T$라 쓰겠다. 이와 같은 $T$에 대하여 다음과 같이 둔다.
+$$
+\Quotfunctor_{\mathcal{F}/X/B}(T) =
+\left\{
+\begin{matrix}
+\text{quotients }\mathcal{F}_T \to \mathcal{Q}\text{ where }
+\mathcal{Q}\text{ is a quasi-coherent }\\
+\mathcal{O}_{X_T}\text{-module of finite presentation, flat over }T\\
+\text{with support proper over }T
+\end{matrix}
+\right\}
+$$
+『공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-base-change-module-support-proper-over-base}
+에 의해 이는 절 \ref{section-functor-quotients}에서 논한 함자
+$Q^{fp}_{\mathcal{F}/X/B}$의 부분함자이다. 따라서 함자
+\begin{equation}
+\label{equation-quot}
+\Quotfunctor_{\mathcal{F}/X/B} : (\Sch/B)^{opp} \longrightarrow \textit{Sets}
+\end{equation}
+를 얻는다. 이를 $\mathcal{F}/X/B$에 결부된 {\it Quot 함자}라 한다.
+\end{situation}
+
+\noindent
+상황 \ref{situation-quot}에서 때로는 $\Quotfunctor_{\mathcal{F}/X/B}$를
+사상 $\Quotfunctor_{\mathcal{F}/X/B} \to B$가 갖추어진 함자
+$(\Sch/S)^{opp} \to \textit{Sets}$로 생각한다. 구체적으로 $T$가
+$S$ 위의 스킴이면 $\Quotfunctor_{\mathcal{F}/X/B}(T)$의 원소는 쌍
+$(h, \mathcal{Q})$이다. 여기서 $h$는 사상 $h : T \to B$이고,
+%% P11-E0391: 도입한 \mathcal{Q} 대신 Q를 쓰는 원문 기호 후보를 기록한다.
+$Q$는 $X_T = X \times_{B, h} T$ 위의 유한 표시이고 $T$-평탄한 몫
+$\mathcal{F}_T \to \mathcal{Q}$이며, 그 지지는 $T$ 위에서 고유하다.
+특히 $\Quotfunctor_{\mathcal{F}/X/B}$가 대수공간이라고 말할 때에는
+대응하는 함자 $(\Sch/S)^{opp} \to \textit{Sets}$가 대수공간이라는 뜻이다.
+
+\begin{lemma}
+\label{lemma-quot-sheaf}
+상황 \ref{situation-quot}에서 함자 $\Quotfunctor_{\mathcal{F}/X/B}$는
+fpqc 위상에 대한 층 성질을 만족한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-q-sheaf}에서 함자
+$\text{Q}^{fp}_{\mathcal{F}/X/S}$가 층임을 보았다. $S$ 위의 스킴
+$T$에 대하여 부분집합
+$\Quotfunctor_{\mathcal{F}/X/S}(T) \subset \text{Q}_{\mathcal{F}/X/S}(T)$
+은 지지가 $T$ 위에서 고유한 몫들을 골라낸다는 것을 상기하자.
+『공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-proper}와, 스킴 이론적 지지를
+취하는 것이 평탄 밑변환과 가환함을 보이는 『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-flat-pullback-support}를 결합하면
+이것이 부분층을 정의함을 알 수 있다.
+\end{proof}
+
+\noindent
+문맥 확인: $\Quotfunctor_{\mathcal{F}/X/B}$는
+$S$ 위의 대수공간들 사이에서도 같은 역할을 한다.
+
+\begin{lemma}
+\label{lemma-extend-quot-to-spaces}
+상황 \ref{situation-quot}에서 $T$를 $S$ 위의 대수공간이라 하자.
+다음이 성립한다.
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T,  \Quotfunctor_{\mathcal{F}/X/B}) =
+\left\{
+\begin{matrix}
+(h, \mathcal{F}_T \to \mathcal{Q}) \text{ where }
+h : T \to B \text{ and}\\
+\mathcal{Q}\text{ is of finite presentation and}\\
+\text{flat over }T\text{ with support proper over }T
+\end{matrix}
+\right\}
+$$
+여기서 $\mathcal{F}_T$는 대수공간 $X \times_{B, h} T$로의
+$\mathcal{F}$의 당김을 뜻한다.
+\end{lemma}
+
+\begin{proof}
+%% P11-E0392: 두 변을 가리키는 원문의 단수 hand side를 자연스럽게 해석한다.
+이 등식의 양변은 보조정리 \ref{lemma-extend-q-to-spaces}에 있는
+두 번째 등식의 각 변의 부분집합이다. 그 보조정리의 증명에서 주어진
+동일시 아래 이 부분집합들이 서로 대응함을 보이려면, $h : T \to B$와
+전사 \'etale 사상 $U \to T$, 유한형 준연접
+$\mathcal{O}_{X_T}$-가군 $\mathcal{Q}$가 주어졌을 때 다음 두 조건이
+동치임을 보이면 충분하다.
+\begin{enumerate}
+\item $\mathcal{Q}$의 스킴 이론적 지지는 $T$ 위에서 고유하다.
+\item $(X_U \to X_T)^*\mathcal{Q}$의 스킴 이론적 지지는
+$U$ 위에서 고유하다.
+\end{enumerate}
+이는 『공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-proper}와, 스킴 이론적 지지를
+취하는 것이 평탄 밑변환과 가환함을 보이는 『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-flat-pullback-support}를 결합하면 따른다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-quot}
+$S$를 스킴, $f : X \to B$를 $S$ 위의 대수공간의 사상이라 하고,
+$\mathcal{F}$를 $X$ 위의 준연접층이라 하자. $f$가 유한 표시이고 분리이면
+$\Quotfunctor_{\mathcal{F}/X/B}$
+는 대수공간이다. $\mathcal{F}$가 유한 표시이면
+$\Quotfunctor_{\mathcal{F}/X/B} \to B$는 국소 유한 표시이다.
+\end{proposition}
+
+\begin{proof}
+보조정리 \ref{lemma-quot-sheaf}에 의해
+$\Quotfunctor_{\mathcal{F}/X/B}$는 fppf 위상에서 층이다.
+%% P11-E0393: Quot 스택의 분모 B와 대응 함자의 분모 S가 다른 동결 표기를 보존한다.
+$\textit{Quot}_{\mathcal{F}/X/B}$를 $\Quotfunctor_{\mathcal{F}/X/S}$에
+대응하는 준군 스택이라 하자. 『대수 스택』의 절
+\ref{algebraic-section-split}을 보라. 『대수 스택』의 명제
+\ref{algebraic-proposition-algebraic-stack-no-automorphisms}
+에 의해 $\textit{Quot}_{\mathcal{F}/X/B}$가 대수 스택임을 보이면 충분하다.
+준군 스택의 $1$-사상
+$$
+\textit{Quot}_{\mathcal{F}/X/S}
+\longrightarrow
+\Cohstack_{X/B}
+$$
+을 $(\Sch/S)_{fppf}$ 위에서 생각하자. 이는 몫
+$\mathcal{F}_T \to \mathcal{Q}$에 가군 $\mathcal{Q}$를 결부시킨다.
+정리 \ref{theorem-coherent-algebraic-general}에 의해
+$\Cohstack_{X/B}$가 대수 스택임을 안다. 『대수 스택』의 보조정리
+\ref{algebraic-lemma-representable-morphism-to-algebraic}
+에 의해 이 $1$-사상이 대수공간으로 표현 가능함을 보이면 충분하다.
+
+\medskip\noindent
+$T$를 $S$ 위의 스킴이라 하고, $T$ 위의 $\Cohstack_{X/B}$의 대상
+$(h, \mathcal{G})$가 $1$-사상
+$\xi : (\Sch/T)_{fppf} \to \Cohstack_{X/B}$에 대응한다고 하자.
+$2$-섬유곱
+$$
+\mathcal{Z} =
+(\Sch/T)_{fppf}
+\times_{\xi, \Cohstack_{X/B}}
+\textit{Quot}_{\mathcal{F}/X/S}
+$$
+은 셋토이드 스택이다. 『스택』의 보조정리
+\ref{stacks-lemma-2-fibre-product-gives-stack-in-setoids}를 보라.
+대응하는 집합의 층(즉 함자; 『스택』의 보조정리
+\ref{stacks-lemma-2-fibre-product-gives-stack-in-setoids}와
+\ref{stacks-lemma-when-stack-in-sets} 참조)은 스킴 $T'/T$에
+$X_{T'}$ 위의 준연접 가군의 전사
+$u : \mathcal{F}_{T'} \to \mathcal{G}_{T'}$들의 집합을 결부시킨다.
+따라서 『공간 위의 평탄성』의 보조정리
+\ref{spaces-flat-lemma-F-surj-open}에 의해 $\mathcal{Z}$는
+명제 \ref{proposition-hom}의 대수공간
+$\mathit{Hom}(\mathcal{F}_T, \mathcal{G})$의 열린 부분공간으로 표현 가능하다.
+\end{proof}
+
+\begin{remark}[Artin의 공리에 의한 Quot]
+\label{remark-quot-via-artins-axioms}
+$S$를 모든 국소환이 G-환인 Noether 스킴이라 하자. $X$를 $S$ 위의
+대수공간이라 하고, 그 구조 사상 $f : X \to S$가 유한 표시이고
+분리라고 하자. $\mathcal{F}$를 $S$ 위에서 평탄한 $X$ 위의 유한 표시
+준연접층이라 하자. 이 주의에서는 명제 \ref{proposition-quot}의 증명처럼
+연접층 스택의 대수성을 사용하지 않고 Artin의 공리를 이용하여
+$\Quotfunctor_{\mathcal{F}/X/S}$가 $S$ 위에서 국소 유한 표시인
+대수공간임을 증명하는 방법을 개략적으로 설명한다.
+
+\medskip\noindent
+『Artin의 공리』의 명제
+\ref{artin-proposition-spaces-diagonal-representable}
+에 나열된 조건들을 확인하자. $\Quotfunctor_{\mathcal{F}/X/S}$의 대각선이
+표현 가능함은 다음과 같이 알 수 있다. 두 몫
+$\mathcal{F}_T \to \mathcal{Q}_i$, $i = 1, 2$가 주어졌다고 하자.
+%% P11-E0394: 원문의 Denote 구문 누락은 첫 몫의 핵이라는 의도로 번역한다.
+첫 번째 것의 핵을 $\mathcal{K}_1$이라 쓰자. 그러면
+$u : \mathcal{K}_1 \to \mathcal{Q}_2$가 영이 되는 $T$의 자취가
+표현 가능함을 보여야 한다. 이는 예를 들어 『공간 위의 평탄성』의 보조정리
+\ref{spaces-flat-lemma-F-zero-closed-proper}
+나 이 장 앞부분의 $\mathit{Hom}$ 층에 관한 논의에서 따른다.
+공리 [0](층), [1](극한), [2](Rim--Schlessinger)는 보조정리
+\ref{lemma-quot-sheaf}, \ref{lemma-q-limit-preserving},
+\ref{lemma-q-RS-star}에서 따른다(고유성 조건을 다루는 추가 작업은 필요하다).
+공리 [3](접공간의 유한 차원성)은 주의 \ref{remark-q-defos}의 무한소 변형에
+대한 서술과, 체 위의 고유 대수공간에 놓인 연접층의 코호몰로지 유한성
+(『공간의 코호몰로지』의 보조정리
+\ref{spaces-cohomology-lemma-proper-pushforward-coherent})에서 따른다.
+공리 [4](형식적 대상의 유효성)는 Grothendieck 존재정리
+(『대수공간의 사상 심화』의 정리
+\ref{spaces-more-morphisms-theorem-grothendieck-existence})에서 따른다.
+언제나 그렇듯 확인하기 가장 까다로운 것은 공리 [5](versal성의 개방성)이다.
+예를 들어 주의 \ref{remark-q-obs}에 서술된 장애 이론과 주의
+\ref{remark-q-defos}의 변형에 대한 서술을 이용하고, 『Artin의 공리』의
+보조정리 \ref{artin-lemma-get-openness-obstruction-theory}의 판정조건을
+적용할 수 있다. 보조정리 \ref{lemma-coherent-defo-thy}의 두 번째 증명과
+비교하라.
+\end{remark}
+
+
+
+
+
+
+
+
+
+\section{Hilbert 함자}
+\label{section-hilb}
+
+\noindent
+이 절에서는 Hilbert 함자가 대수공간임을 증명한다.
+
+\begin{situation}
+\label{situation-hilb}
+$S$를 스킴, $f : X \to B$를 $S$ 위의 대수공간의 사상이라 하자.
+$f$가 유한 표시라고 가정하자. $B$ 위의 임의의 스킴 $T$에 대하여
+$T$로의 $X$의 밑변환을 $X_T$라 쓰겠다. 이와 같은 $T$에 대하여
+다음과 같이 둔다.
+$$
+\Hilbfunctor_{X/B}(T) =
+\left\{
+\begin{matrix}
+\text{closed subspaces }Z \subset X_T\text{ such that }Z \to T\\
+\text{is of finite presentation, flat, and proper}
+\end{matrix}
+\right\}
+$$
+밑변환은 필요한 성질들을 보존하므로(『공간』의 보조정리
+\ref{spaces-lemma-base-change-immersions}과 『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-finite-presentation},
+\ref{spaces-morphisms-lemma-base-change-flat} 및
+\ref{spaces-morphisms-lemma-base-change-proper})
+함자
+\begin{equation}
+\label{equation-hilb}
+\Hilbfunctor_{X/B} : (\Sch/B)^{opp} \longrightarrow \textit{Sets}
+\end{equation}
+를 얻는다. 이를 $X/B$에 결부된 {\it Hilbert 함자}라 한다.
+\end{situation}
+
+\noindent
+상황 \ref{situation-hilb}에서 때로는 $\Hilbfunctor_{X/B}$를 사상
+$\Hilbfunctor_{X/S} \to B$가 갖추어진 함자
+$(\Sch/S)^{opp} \to \textit{Sets}$로 생각한다. 구체적으로 $T$가
+$S$ 위의 스킴이면 $\Hilbfunctor_{X/B}(T)$의 원소는 쌍 $(h, Z)$이다.
+여기서 $h$는 사상 $h : T \to B$이고,
+$Z \subset X_T = X \times_{B, h} T$는 $T$ 위에서 평탄하고 고유하며
+유한 표시인 닫힌 부분스킴이다. 특히 $\Hilbfunctor_{X/B}$가 대수공간이라고
+말할 때에는 대응하는 함자
+$(\Sch/S)^{opp} \to \textit{Sets}$가 대수공간이라는 뜻이다.
+
+\medskip\noindent
+물론 Hilbert 함자는 Quot 함자의 특수한 경우일 뿐이다.
+
+\begin{lemma}
+\label{lemma-hilb-is-quot}
+상황 \ref{situation-hilb}에서 다음 등식이 성립한다.
+$\Hilbfunctor_{X/B} = \Quotfunctor_{\mathcal{O}_X/X/B}$.
+\end{lemma}
+
+\begin{proof}
+$T$를 $B$ 위의 스킴이라 하자. 원소
+$Z \in \Hilbfunctor_{X/B}(T)$가 주어지면, 포함 사상
+$i : Z \to X_T$에 대하여 몫
+$\mathcal{O}_{X_T} \to i_*\mathcal{O}_Z$를 생각할 수 있다.
+$i_*\mathcal{O}_Z$는 준연접이다. $Z \to T$와 $X_T \to T$가 유한
+표시이므로 $i$도 유한 표시이고(『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-finite-presentation-permanence}), 따라서
+$i_*\mathcal{O}_Z$는 유한 표시 $\mathcal{O}_{X_T}$-가군이다
+(『공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-finite-finitely-presented-module}).
+$Z \to T$가 고유하므로 $i_*\mathcal{O}_Z$의 지지는 $T$ 위에서 고유하다
+(『공간의 유도 범주』의 절
+\ref{spaces-perfect-section-proper-over-base}에서 정의한 의미에서).
+$\mathcal{O}_Z$가 $T$ 위에서 평탄하고 $i$가 아핀이므로,
+$i_*\mathcal{O}_Z$는 $T$ 위에서 평탄하다(짧은 논증은 생략한다). 따라서
+$\mathcal{O}_{X_T} \to i_*\mathcal{O}_Z$
+는 $\Quotfunctor_{\mathcal{O}_X/X/B}(T)$의 원소이다.
+
+\medskip\noindent
+거꾸로 $\Quotfunctor_{\mathcal{O}_X/X/B}(T)$의 원소
+$\mathcal{O}_{X_T} \to \mathcal{Q}$가 주어지면, 준연접 아이디얼 층
+$\mathcal{I} = \Ker(\mathcal{O}_{X_T} \to \mathcal{Q})$
+에 대응하는 닫힌 몰입 $i : Z \to X_T$를 생각할 수 있다
+(『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-closed-immersion-ideals}).
+$Z$의 구성에 의해 $\mathcal{Q} = i_*\mathcal{O}_Z$이다.
+이제 위의 논증을 거꾸로 읽으면 $Z$가 $\Hilbfunctor_{X/B}(T)$의
+원소를 정의함을 알 수 있다. 예를 들어 $\mathcal{I}$는 유한형 준연접층이고
+(『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-kernel-surjection-finite-onto-finite-presentation}),
+따라서 $i : Z \to X_T$는 유한 표시이며(『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-closed-immersion-finite-presentation}),
+그러므로 $Z \to T$도 유한 표시이다(『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-composition-finite-presentation}).
+$Z \to T$의 고유성은 『공간의 유도 범주』의 절
+\ref{spaces-perfect-section-proper-over-base}
+의 논의에서 따른다. $Z \to T$의 평탄성은 $\mathcal{Q}$가
+$T$ 위에서 평탄하다는 사실에서 따른다.
+
+\medskip\noindent
+위의 두 구성이 서로 역이라는 즉각적인 확인은 생략한다.
+\end{proof}
+
+\noindent
+%% P11-E0395: 원문의 article/possessive 누락은 Hilbert 함자층이라는 뜻으로 번역한다.
+문맥 확인: 층 $\Hilbfunctor_{X/B}$는 $S$ 위의 대수공간들 사이에서도
+같은 역할을 한다.
+
+\begin{lemma}
+\label{lemma-extend-hilb-to-spaces}
+상황 \ref{situation-hilb}에서 $T$를 $S$ 위의 대수공간이라 하자.
+다음이 성립한다.
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T, \Hilbfunctor_{X/B}) =
+\left\{
+\begin{matrix}
+(h, Z)\text{ where }h : T \to B,\ Z \subset X_T \\
+\text{finite presentation, flat, proper over }T
+\end{matrix}
+\right\}
+$$
+여기서 $X_T = X \times_{B, h} T$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-hilb-is-quot}에 의해
+$\Hilbfunctor_{X/B} = \Quotfunctor_{\mathcal{O}_X/X/B}$이다.
+따라서 보조정리 \ref{lemma-extend-quot-to-spaces}를 적용하면 왼쪽은
+유한 표시이고 $T$ 위에서 평탄하며 지지가 $T$ 위에서 고유한 전사
+$\mathcal{O}_{X_T} \to \mathcal{Q}$들의 집합과 전단사임을 알 수 있다.
+보조정리 \ref{lemma-hilb-is-quot}의 증명과 정확히 같은 논증으로,
+이런 몫들은 $Z \to T$가 고유하고 평탄하며 유한 표시인 닫힌 몰입
+$Z \to X_T$와 정확히 대응함을 알 수 있다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-hilb}
+$S$를 스킴, $f : X \to B$를 $S$ 위의 대수공간의 사상이라 하자.
+$f$가 유한 표시이고 분리이면 $\Hilbfunctor_{X/B}$는
+$B$ 위에서 국소 유한 표시인 대수공간이다.
+\end{proposition}
+
+\begin{proof}
+보조정리 \ref{lemma-hilb-is-quot}와 명제 \ref{proposition-quot}의
+즉각적인 따름정리이다.
+\end{proof}
+
+
+
+
+
+
+\section{Picard 스택}
+\label{section-picard-stack}
+
+\noindent
+대수공간의 사상에 대한 Picard 스택은 『스택의 예』의 절
+\ref{examples-stacks-section-picard-stack}에서 도입했다.
+다음 보조정리로부터, 좋은 경우에는 이것이 연접층 스택의 열린
+부분스택임을 도출하겠다.
+
+\begin{lemma}
+\label{lemma-picard-stack-open-in-coh}
+$S$를 스킴이라 하고, $f : X \to B$를 평탄하고 유한 표시이며 고유한
+$S$ 위의 대수공간의 사상이라 하자. 자연스러운 사상
+$$
+\Picardstack_{X/B} \longrightarrow \Cohstack_{X/B}
+$$
+은 열린 몰입으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+이 사상은 『스택의 예』의 절
+\ref{examples-stacks-section-picard-stack}에 나오는 삼중항
+$(T, g, \mathcal{L})$을 같은 삼중항 $(T, g, \mathcal{L})$로 보내되,
+이제는 이를 상황 \ref{situation-coherent}에서 서술한 종류의 삼중항으로
+본다는 데 유의하라. 이는 다음 이유로 가능하다. 가역
+$\mathcal{O}_{X_T}$-가군 $\mathcal{L}$은 물론 유한 표시
+$\mathcal{O}_{X_T}$-가군이고, $X_T \to T$가 평탄하므로 $T$ 위에서
+평탄하며, $X_T \to T$가 고유하므로 지지가 $T$ 위에서 고유하다
+(『공간의 사상』의 보조정리 \ref{spaces-morphisms-lemma-base-change-flat}과
+\ref{spaces-morphisms-lemma-base-change-proper}). 따라서 명제는 의미가 있다.
+
+\medskip\noindent
+이제 보조정리의 내용은 명백히 다음과 같다. $\Cohstack_{X/B}$의 대상
+$(T, g, \mathcal{F})$가 주어지면 열린 부분스킴 $U \subset T$가 존재하여,
+스킴의 사상 $T' \to T$에 대하여 다음 조건들이 동치이다.
+\begin{enumerate}
+\item[(a)] $T' \to T$는 $U$를 통해 분해된다.
+\item[(b)] $X_{T'} \to X_T$에 의한 $\mathcal{F}$의 당김
+$\mathcal{F}_{T'}$는 가역이다.
+\end{enumerate}
+$W \subset |X_T|$를 $\mathcal{F}$가 $x$의 근방에서 국소 자유가 되는
+점 $x \in |X_T|$들의 집합이라 하자. 『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-finite-free-open}
+에 의해 $W$는 열려 있고, $W$의 구성은 임의의 밑변환과 가환한다.
+$T' \to T$가 (b)를 만족하면 $|X_{T'}| \to |X_T|$의 상이 $W$에
+포함됨은 명백하다. 따라서 $U$를 구성하기 위해 $T$를 열린집합
+$T \setminus f_T(|X_T| \setminus W)$로 바꿀 수 있다. 그러고 나면
+$\mathcal{F}$가 유한 국소 자유인 상황에 이른다. 이 경우 서로소 합 분해
+$X_T = X_0 \amalg X_1 \amalg X_2 \amalg \ldots$
+를 얻는데, 각 성분은 열린 동시에 닫힌 부분공간이고 $\mathcal{F}$의
+$X_i$로의 제한은 계수 $i$인 국소 자유이다. 이제 명백히
+$$
+U = T \setminus f_T(|X_0| \cup |X_2| \cup |X_3| \cup \ldots )
+$$
+로 두면 된다. %% P11-E0396: 원문의 hence 앞 문장부호 누락은 자연스럽게 분리한다.
+(실제로 $T$가 준콤팩트라고 가정하면 $X_T$도 준콤팩트이다.
+따라서 공집합이 아닌 $X_i$는 유한 개뿐이고 $U$는 실제로 열려 있다.)
+\end{proof}
+
+\begin{proposition}
+\label{proposition-pic}
+$S$를 스킴, $f : X \to B$를 $S$ 위의 대수공간의 사상이라 하자.
+$f$가 평탄하고 유한 표시이며 고유이면 $\Picardstack_{X/B}$는
+대수 스택이다.
+\end{proposition}
+
+\begin{proof}
+보조정리 \ref{lemma-picard-stack-open-in-coh}, 『대수 스택』의 보조정리
+\ref{algebraic-lemma-representable-morphism-to-algebraic}
+및 정리 \ref{theorem-coherent-algebraic} 또는 정리
+%% P11-E0397: 원문의 빠진 종결 문장부호를 자연스럽게 보충한다.
+\ref{theorem-coherent-algebraic-general}의 즉각적인 따름정리이다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{Picard 함자}
+\label{section-picard-functor}
+
+\noindent
+이 절에서는 『곡선의 Picard 스킴』의 절
+\ref{pic-section-picard-functor}에서 논한 Picard 함자를 다시 살펴본다.
+Picard 스택을 다룬 절에서와 같이 대수공간 사상의 Picard 함자를 연구하려
+하므로 논의는 더 일반적이다. 절 \ref{section-picard-stack}을 보라.
+
+\medskip\noindent
+$S$를 스킴, $X$를 $S$ 위의 대수공간이라 하자. $X$ 위의 가역층은
+$X_\etale$ 위의 가역 $\mathcal{O}_X$-가군이다. 『사이트 위의 가군』의 정의
+\ref{sites-modules-definition-invertible-sheaf}를 보라. 가역 가군의
+동형류들의 군은 $\Pic(X)$로 쓴다. 『사이트 위의 가군』의 정의
+\ref{sites-modules-definition-pic}을 보라. $S$ 위의 대수공간의 사상
+$f : X \to Y$가 주어지면 당김은 군 준동형
+$\Pic(Y) \to \Pic(X)$를 정의한다. 대응 $X \leadsto \Pic(X)$는
+스킴의 범주에서 아벨 군의 범주로 가는 반변 함자이다. 이 함자는
+표현 가능하지 않지만, 이 구성의 상대적 변형은 때때로 표현 가능하다.
+
+\begin{situation}
+\label{situation-pic}
+$S$를 스킴, $f : X \to B$를 $S$ 위의 대수공간의 사상이라 하자.
+다음 함자를 정의한다.
+$$
+\Picardfunctor_{X/B} : (\Sch/B)^{opp} \longrightarrow \textit{Sets}
+$$
+이는 $B$ 위의 스킴 $T$에 군 $\Pic(X_T)$를 결부시키는 함자의
+fppf 층화이다.
+\end{situation}
+
+\noindent
+상황 \ref{situation-pic}에서 때로는 $\Picardfunctor_{X/B}$를 사상
+$\Picardfunctor_{X/B} \to B$가 갖추어진 함자
+$(\Sch/S)^{opp} \to \textit{Sets}$로 생각한다. 이 관점에서
+$\Picardfunctor_{X/B}$는 다음 함자의 fppf 층화로 정의한다.
+$$
+T/S \longmapsto \{(h, \mathcal{L}) \mid
+h : T \to B,\ \mathcal{L} \in \Pic(X \times_{B, h} T)\}
+$$
+특히 $\Picardfunctor_{X/B}$가 대수공간이라고 말할 때에는 대응하는 함자
+$(\Sch/S)^{opp} \to \textit{Sets}$가 대수공간이라는 뜻이다.
+
+\medskip\noindent
+자주 쓰는 관찰은 $T$가 $B$ 위의 스킴이면 $\Picardfunctor_{X_T/T}$가
+$\Picardfunctor_{X/B}$의 $(\Sch/T)_{fppf}$로의 제한이라는 것이다.
+
+\begin{lemma}
+\label{lemma-pic-over-pic}
+상황 \ref{situation-pic}에서 함자 $\Picardfunctor_{X/B}$는 함자
+$T \mapsto \Ob(\Picardstack_{X/B, T})/\cong$의 층화이다.
+\end{lemma}
+
+\begin{proof}
+Picard 스택 $\Picardstack_{X/B}$의 $T$ 위 섬유범주
+$\Picardstack_{X/B, T}$는 $X_T$ 위의 가역층의 범주이므로
+(절 \ref{section-picard-stack}과 『스택의 예』의 절
+\ref{examples-stacks-section-picard-stack} 참조), 이는 정의에서 즉시 따른다.
+\end{proof}
+
+\noindent
+$B$ 위의 스킴 $T$에서 $\Picardfunctor_{X/B}$의 값이 무엇인지 알아내는
+일은 자명하지 않다. 다음 보조정리가 이에 도움을 준다.
+
+\begin{lemma}
+\label{lemma-flat-geometrically-connected-fibres}
+상황 \ref{situation-pic}에서 모든 $B$ 위의 스킴 $T$에 대하여
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$가 동형이면
+$$
+0 \to \Pic(T) \to \Pic(X_T) \to \Picardfunctor_{X/B}(T)
+$$
+은 모든 $T$에 대하여 완전열이다.
+\end{lemma}
+
+\begin{proof}
+표기를 단순화하기 위해 $B$를 $T$로, $X$를 $X_T$로 바꾸고
+$B = T$라고 가정할 수 있다. $\mathcal{N}$을 가역
+$\mathcal{O}_B$-가군이라 하자. $f^*\mathcal{N} \cong \mathcal{O}_X$이면
+가정에 의해 $f_*f^*\mathcal{N} \cong f_*\mathcal{O}_X \cong \mathcal{O}_B$이다.
+$\mathcal{N}$이 국소 자명이므로 표준 사상
+$\mathcal{N} \to f_*f^*\mathcal{N}$은 국소적으로 동형이다
+(가정에 의해 $\mathcal{O}_B \to f_*f^*\mathcal{O}_B$가 동형이기 때문이다).
+따라서 $\mathcal{N} \to f_*f^*\mathcal{N} \to \mathcal{O}_B$가 동형이고,
+$\mathcal{N}$은 자명하다. 이로써 첫 번째 화살표가 단사임을 보였다.
+
+\medskip\noindent
+$\mathcal{L}$을 $\Pic(X) \to \Picardfunctor_{X/B}(B)$의 핵에 속하는
+가역 $\mathcal{O}_X$-가군이라 하자. 그러면 fppf 덮개
+$\{B_i \to B\}$가 존재하여 $\mathcal{L}$의 $X_{B_i}$로의 당김은
+자명한 가역층이다. 자명화 절단 $s_i$를 택하자. 그러면
+$\text{pr}_0^*s_i$와 $\text{pr}_1^*s_j$는 모두
+$X_{B_i \times_B B_j}$ 위의 $\mathcal{L}$의 자명화 절단이므로
+어떤 곱셈 가역원만큼 차이가 난다.
+%% P11-E0398: 정의되지 않은 S_i와 N이 들어간 동결 원문 표시식을 그대로 보존한다.
+$$
+f_{ij} \in
+\Gamma(X_{S_i \times_B B_j}, \mathcal{O}_{X_{B_i \times_B B_j}}^*) =
+\Gamma(B_i \times_B B_j, \mathcal{O}_{B_i \times_N B_j}^*)
+$$
+(이 등식은 구조층의 전방상에 관한 가정에서 따른다).
+물론 이 원소들은 $B_i \times_B B_j \times_B B_k$ 위에서 코사이클 조건을
+만족하므로, fppf 덮개 $\{B_i \to B\}$에 대한 가역층의 하강 데이터를
+정의한다. 『하강』의 명제
+\ref{descent-proposition-fpqc-descent-quasi-coherent}에 의해 $B_i$ 위에서의
+자명화가 있고 결부된 하강 데이터가 $\{f_{ij}\}$인 가역
+$\mathcal{O}_B$-가군 $\mathcal{N}$이 존재한다. (증명 시작에서의
+치환에 의해 $B$가 스킴이므로 이 명제를 적용할 수 있다.)
+%% P11-E0399: 원문의 불완전한 as 절을 충실충만성에 의한 귀결로 해석한다.
+하강 데이터에서 가군으로 가는 함자가 충실충만하므로
+$f^*\mathcal{N} \cong \mathcal{L}$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-geometrically-connected-fibres-with-section}
+상황 \ref{situation-pic}에서 $\sigma : B \to X$를 절단이라 하자.
+모든 $B$ 위의 $T$에 대하여
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$가 동형이라고 가정하자.
+그러면
+$$
+0 \to \Pic(T) \to \Pic(X_T) \to \Picardfunctor_{X/B}(T) \to 0
+$$
+은 분할 완전열이며, 분할은
+$\sigma_T^* : \Pic(X_T) \to \Pic(T)$로 주어진다.
+\end{lemma}
+
+\begin{proof}
+$K(T) = \Ker(\sigma_T^* : \Pic(X_T) \to \Pic(T))$라 쓰자.
+$\sigma$가 $f$의 절단이므로 $\Pic(X_T)$는 $\Pic(T)$와 $K(T)$의 직합이다.
+따라서 보조정리 \ref{lemma-flat-geometrically-connected-fibres}에 의해
+모든 $T$에 대하여 $K(T) \subset \Picardfunctor_{X/B}(T)$이다.
+더 나아가 구성으로부터 $\Picardfunctor_{X/B}$가 준층 $K$의 층화임이
+명백하다. 증명을 마치려면 $K$가 fppf 덮개에 대한 층 조건을 만족함을
+보이면 충분하며, 다음 단락에서 이를 보인다.
+
+\medskip\noindent
+$\{T_i \to T\}$를 fppf 덮개라 하자. $\mathcal{L}_i$를 $K(T_i)$의
+원소라 하되, 모든 $i$와 $j$에 대하여 이들이
+$K(T_i \times_T T_j)$의 같은 원소로 간다고 하자. 모든 $i$에 대하여 동형
+$\alpha_i : \mathcal{O}_{T_i} \to \sigma_{T_i}^*\mathcal{L}_i$
+를 택하고, 동형
+$$
+\varphi_{ij} :
+\mathcal{L}_i|_{X_{T_i \times_T T_j}}
+\longrightarrow
+\mathcal{L}_j|_{X_{T_i \times_T T_j}}
+$$
+을 택하자. 사상
+$$
+\alpha_j|_{T_i \times_T T_j} \circ
+\sigma_{T_i \times_T T_j}^*\varphi_{ij} \circ
+\alpha_i|_{T_i \times_T T_j} :
+\mathcal{O}_{T_i \times_T T_j} \to \mathcal{O}_{T_i \times_T T_j}
+$$
+이 $1$의 곱셈이 아니라 어떤 $u_{ij}$의 곱셈이면,
+$\varphi_{ij}$에 $u_{ij}^{-1}$을 곱하여 바로잡을 수 있다.
+그렇게 한 뒤 자기 사상
+$$
+\varphi_{ki}|_{X_{T_i \times_T T_j \times_T T_k}} \circ
+\varphi_{jk}|_{X_{T_i \times_T T_j \times_T T_k}} \circ
+\varphi_{ij}|_{X_{T_i \times_T T_j \times_T T_k}}
+\quad\text{on}\quad
+\mathcal{L}_i|_{X_{T_i \times_T T_j \times_T T_k}}
+$$
+을 생각하자. 이는 $X_{T_i \times_T T_j \times_T T_k}$의 구조층의 어떤 절단
+$f_{ijk}$의 곱셈으로 주어진다. $\varphi_{ij}$의 선택에 의해 이 사상을
+$\sigma$로 당긴 것은 $1$의 곱셈이다. $X$ 위의 함수에 관한 가정에 의해
+$f_{ijk} = 1$이다. 따라서 fppf 덮개 $\{X_{T_i} \to X\}$에 대한
+하강 데이터를 얻는다. 『공간의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+에 의해 가역 $\mathcal{O}_{X_T}$-가군 $\mathcal{L}$과 동형
+$\alpha : \mathcal{O}_T \to \sigma_T^*\mathcal{L}$이 존재하여, 이를
+$X_{T_i}$로 당기면 $(\mathcal{L}_i, \alpha_i)$를 복원한다
+(작은 세부사항은 생략한다). 따라서 $\mathcal{L}$은 원하는 대로
+$K(T)$의 대상을 정의한다.
+\end{proof}
+
+\noindent
+상황 \ref{situation-pic}에서 $\sigma : B \to X$를 절단이라 하자.
+$\Picardstack_{X/B, \sigma}$는 다음과 같이 정의한 범주를 뜻한다.
+\begin{enumerate}
+\item 대상은 사중항 $(T, h, \mathcal{L}, \alpha)$이다. 여기서
+$(T, h, \mathcal{L})$은 $T$ 위의 $\Picardstack_{X/B}$의 대상이고
+$\alpha : \mathcal{O}_T \to \sigma_T^*\mathcal{L}$
+는 동형이다.
+\item 사상 $(g, \varphi) : (T, h, \mathcal{L}, \alpha)
+\to (T', h', \mathcal{L}', \alpha')$
+은 $h = h' \circ g$를 만족하는 스킴의 사상 $g : T \to T'$와
+$\sigma_T^*\varphi \circ g^*\alpha' = \alpha$를 만족하는 동형
+$\varphi : (g')^*\mathcal{L}' \to \mathcal{L}$로 주어진다.
+여기서 $g' : X_{T'} \to X_T$는 $g$의 밑변환이다.
+\end{enumerate}
+자연스러운 충실 망각함자
+$$
+\Picardstack_{X/B, \sigma} \longrightarrow
+\Picardstack_{X/B}
+$$
+가 있다. 이로써 $\Picardstack_{X/B, \sigma}$를
+$(\Sch/S)_{fppf}$ 위의 범주로 본다.
+
+\begin{lemma}
+\label{lemma-pic-with-section-stack}
+상황 \ref{situation-pic}에서 $\sigma : B \to X$를 절단이라 하자.
+그러면 위에서 정의한 $\Picardstack_{X/B, \sigma}$는
+$(\Sch/S)_{fppf}$ 위의 준군 스택이다.
+\end{lemma}
+
+\begin{proof}
+『스택의 예』의 보조정리 \ref{examples-stacks-lemma-picard-stack}에 의해
+$\Picardstack_{X/B}$가 $(\Sch/S)_{fppf}$ 위의 준군 스택임을 이미 안다.
+$\Picardstack_{X/B, \sigma}$의 대상에 대한 하강을 보이자.
+$\{T_i \to T\}$를 fppf 덮개라 하고,
+$\xi_i = (T_i, h_i, \mathcal{L}_i, \alpha_i)$를 $T_i$ 위에 놓인
+$\Picardstack_{X/B, \sigma}$의 대상, 그리고
+$\varphi_{ij} : \text{pr}_0^*\xi_i \to \text{pr}_1^*\xi_j$를
+하강 데이터라 하자. $\Picardstack_{X/B}$에 대한 결과를 적용하면,
+모든 $i$에 대하여 당김이 $\xi_i$가 되는 $T$ 위의
+$\Picardstack_{X/B}$의 대상 $(T, h, \mathcal{L})$이 있다고 가정할 수 있다.
+그러면
+$$
+\alpha_i : \mathcal{O}_{T_i} \to \sigma_{T_i}^*\mathcal{L}_i =
+(T_i \to T)^*\sigma_T^*\mathcal{L}
+$$
+을 얻는다. 사상 $\varphi_{ij}$가 $\alpha_i$들과 양립하므로
+$\alpha_i$와 $\alpha_j$는 $T_i \times_T T_j$ 위에서 같은 사상으로 당겨진다.
+%% P11-E0400: 원문의 닫히지 않은 인용 괄호를 자연스럽게 닫는다.
+준연접층의 하강에 의해(『하강』의 명제
+\ref{descent-proposition-fpqc-descent-quasi-coherent}), $\alpha_i$들은
+원하는 하나의 사상 $\alpha : \mathcal{O}_T \to \sigma_T^*\mathcal{L}$의
+제한들이다. 사상에 대한 하강의 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare-pic-with-section}
+상황 \ref{situation-pic}에서 $\sigma : B \to X$를 절단이라 하자.
+사상 $\Picardstack_{X/B, \sigma} \to \Picardstack_{X/B}$는
+표현 가능하고 전사이며 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+$T$를 스킴이라 하고, $(\Sch/T)_{fppf} \to \Picardstack_{X/B}$가
+$T$ 위의 $\Picardstack_{X/B}$의 대상
+$\xi = (T, h, \mathcal{L})$로 주어진다고 하자. 다음이
+$$
+(\Sch/T)_{fppf} \times_{\xi, \Picardstack_{X/B}} \Picardstack_{X/B, \sigma}
+$$
+스킴 $V$로 표현 가능하고, 대응하는 사상 $V \to T$가 전사이고
+매끄러움을 보여야 한다. 『대수 스택』의 절
+\ref{algebraic-section-representable-morphism},
+\ref{algebraic-section-morphisms-representable-by-algebraic-spaces},
+\ref{algebraic-section-representable-properties}
+을 보라. 망각함자
+$\Picardstack_{X/B, \sigma} \to \Picardstack_{X/B}$는 섬유범주에서
+충실하고, $T'/T$에 대한 동형류들의 집합은 동형
+$$
+\alpha' : \mathcal{O}_{T'} \longrightarrow (T' \to T)^*\sigma_T^*\mathcal{L}
+$$
+들의 집합이다. 『대수 스택』의 보조정리
+\ref{algebraic-lemma-criterion-map-representable-spaces-fibred-in-groupoids}
+을 보라. 명제 \ref{proposition-isom}를
+$\text{id} : T \to T$, $\mathcal{O}_T$, $\sigma^*\mathcal{L}$에 적용하면,
+이 함자는 $T$ 위의 유한 표시 아핀 스킴 $U$로 표현 가능하다.
+$T$ 위에서 Zariski 국소적으로 작업하여
+$\sigma_T^*\mathcal{L}$이 $\mathcal{O}_T$와 동형이라고 가정할 수 있다.
+그러면 이 함자는 $T$ 위의 $\mathbf{G}_m \times T$로 표현 가능하다.
+따라서 $U \to T$는 $T$ 위에서 Zariski 국소적으로 사영
+$\mathbf{G}_m \times T \to T$와 같고, 이는 실제로 매끄럽고 전사이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-geometrically-connected-fibres-with-section-functor-stack}
+상황 \ref{situation-pic}에서 $\sigma : B \to X$를 절단이라 하자.
+모든 $B$ 위의 $T$에 대하여
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$가 동형이면
+$\Picardstack_{X/B, \sigma} \to (\Sch/S)_{fppf}$
+는 셋토이드들로 섬유화되어 있고, $T$ 위의 동형류들의 집합은
+$$
+\coprod\nolimits_{h : T \to B}
+\Ker(\sigma_T^* : \Pic(X \times_{B, h} T) \to \Pic(T))
+$$
+\end{lemma}
+
+\begin{proof}
+$\xi = (T, h, \mathcal{L}, \alpha)$가 $T$ 위의
+$\Picardstack_{X/B, \sigma}$의 대상이면, $\xi$의 자기동형 $\varphi$는
+$\sigma_T^*u = 1$을 더 만족하는 $X_T$의 구조층의 가역 전역 절단
+$u$의 곱셈으로 주어진다. $\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$가
+동형이라는 가정에 의해 $u = 1$이다. 따라서
+$\Picardstack_{X/B, \sigma}$는 $(\Sch/S)_{fppf}$ 위에서 셋토이드들로
+섬유화되어 있다. $T$와 $h : T \to B$가 주어졌을 때, 쌍
+$(\mathcal{L}, \alpha)$의 동형류들의 집합은
+$\sigma_T^*\mathcal{L} \cong \mathcal{O}_T$인 $\mathcal{L}$의 동형류들의
+집합과 같다(동형 자체는 지정하지 않는다). 실제로 $\alpha$의 임의의 두
+선택은 $T$ 위의 전역 가역원만큼 차이가 나며, 이는 $X_T$ 위의
+전역 가역원과 같은 것이므로 명백하다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-pic-functor}
+$S$를 스킴, $f : X \to B$를 $S$ 위의 대수공간의 사상이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 평탄하고 유한 표시이며 고유하다.
+\item 모든 $B$ 위의 스킴 $T$에 대하여
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$는 동형이다.
+\end{enumerate}
+그러면 $\Picardfunctor_{X/B}$는 대수공간이다.
+\end{proposition}
+
+\noindent
+이 명제의 상황에서 대수 스택 $\Picardstack_{X/B}$는 대수공간
+$\Picardfunctor_{X/B}$ 위의 gerbe이다. gerbe의 일반 이론을 전개한 뒤에는
+이를 이용해 이 명제를 더 짧게 증명할 수 있다(다만 더 일반적인 이론을 쓴다).
+
+\begin{proof}
+$B'$ 위의 밑변환 $X' = X \times_B B'$이 절단을 갖도록 하는, 대수공간의
+전사 평탄 유한 표시 사상 $B' \to B$가 존재한다. 실제로 $B' = X$로
+택할 수 있다. $\Picardfunctor_{X'/B'} = B' \times_B \Picardfunctor_{X/B}$임에
+유의하라. 따라서 $\Picardfunctor_{X'/B'} \to \Picardfunctor_{X/B}$는
+대수공간으로 표현 가능하고 전사이며 평탄하고 유한 표시이다.
+그러므로 $\Picardfunctor_{X'/B'}$가 대수공간임을 보일 수 있다면,
+『부트스트랩』의 정리
+\ref{bootstrap-theorem-final-bootstrap}
+에 의해 $\Picardfunctor_{X/B}$도 대수공간이다. 이로써 다음 단락에서
+서술하는 경우로 환원된다.
+
+\medskip\noindent
+명제의 가정에 더하여 절단 $\sigma : B \to X$가 있다고 가정하자.
+명제 \ref{proposition-pic}에 의해 $\Picardstack_{X/B}$는 대수 스택이다.
+보조정리 \ref{lemma-compare-pic-with-section}과 『대수 스택』의 보조정리
+\ref{algebraic-lemma-representable-morphism-to-algebraic}
+에 의해 $\Picardstack_{X/B, \sigma}$도 대수 스택이다. 보조정리
+\ref{lemma-flat-geometrically-connected-fibres-with-section-functor-stack}
+과 『대수 스택』의 보조정리
+\ref{algebraic-lemma-characterize-representable-by-space}
+에 의해 $T \mapsto \Ker(\sigma_T^* : \Pic(X_T) \to \Pic(T))$가
+대수공간임을 안다. 보조정리
+\ref{lemma-flat-geometrically-connected-fibres-with-section}에 의해
+이 함자는 $\Picardfunctor_{X/B}$와 같다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-diagonal-pic}
+%% P11-E0403: 원문의 분리된 문장 파편을 하나의 자연스러운 가정절로 잇는다.
+명제 \ref{proposition-pic-functor}와 같은 가정과 표기를 사용하자. 그러면 대각선
+$\Picardfunctor_{X/B} \to \Picardfunctor_{X/B} \times_B \Picardfunctor_{X/B}$
+은 몰입으로 표현 가능하다. 다시 말해
+$\Picardfunctor_{X/B} \to B$는 국소 분리이다.
+\end{lemma}
+
+\begin{proof}
+$T$를 $B$ 위의 스킴이라 하고 $s, t \in \Picardfunctor_{X/B}(T)$라 하자.
+$s|_Z = t|_Z$를 만족하고, 사상 $T' \to T$가 $Z$를 통해 분해될
+필요충분조건이 $s|_{T'} = t|_{T'}$인 국소 닫힌 부분스킴
+$Z \subset T$가 존재함을 보이고자 한다.
+
+\medskip\noindent
+먼저 일반 문제를 $s$와 $t$가 $X_T$ 위의 가역 가군에서 오는 경우로
+환원한다. 이 단계는 건너뛰어도 좋다. 모든 $i$에 대하여
+$s|_{T_i}$와 $t|_{T_i}$가 $\Pic(X_{T_i})$에서 오도록 하는 fppf 덮개
+$\{T_i \to T\}_{i \in I}$를 택하자. 모든 쌍
+$s|_{T_i}, t|_{T_i}$에 대하여 결과를 보일 수 있다고 가정하자.
+그러면 원하는 보편 성질을 갖는 국소 닫힌 부분스킴
+$Z_i \subset T_i$를 얻는다. 따라서 $Z_i$와 $Z_j$는
+$T_i \times_T T_j$에서 같은 스킴 이론적 역상을 갖는다.
+%% P11-E0401: 원문의 descend datum을 표준 용어 descent datum으로 해석한다.
+이는 $Z_i/T_i$ 위의 하강 데이터를 정한다. $Z_i \to T_i$가
+국소 준유한이므로 『사상 심화』의 보조정리
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-morphisms-fppf-descend}
+에 의해 국소 준유한 사상 $Z \to T$를 얻으며, 이를 밑변환하면
+$Z_i \to T_i$를 복원한다. 그러면 『하강』의 보조정리
+\ref{descent-lemma-descending-fppf-property-immersion}에 의해
+$Z \to T$는 몰입이다. 마지막으로 $\Picardfunctor_{X/B}$가 fppf 층이므로
+$s|_Z = t|_Z$이고 $Z$가 위에서 말한 보편 성질을 만족한다고 결론짓는다.
+
+\medskip\noindent
+$s$와 $t$가 $X_T$ 위의 가역 가군 $\mathcal{V}$, $\mathcal{W}$에서
+온다고 가정하자. %% P11-E0402: 원문의 빠진 종결 문장부호를 자연스럽게 보충한다.
+$\mathcal{L} = \mathcal{V} \otimes \mathcal{W}^{\otimes -1}$로 두자.
+사상 $T' \to T$가 $Z$를 통해 분해될 필요충분조건이
+$\mathcal{L}_{X_{T'}}$가 $T'$ 위의 가역층의 당김인 것인, $T$의 국소 닫힌
+부분스킴 $Z$를 찾고 있다. 보조정리
+\ref{lemma-flat-geometrically-connected-fibres}를 보라.
+따라서 $Z$의 존재는 『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-diagonal-picard-flat-proper}
+에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{상대 사상}
+\label{section-relative-morphisms}
+
+\noindent
+『표현 가능성의 판정 조건』의 절
+\ref{criteria-section-relative-morphisms}의 논의를 계속한다.
+그 절에서는 스킴 $S$와 $S$ 위의 대수공간의 사상
+$Z \to B$, $X \to B$에서 출발하여 함자
+$$
+\mathit{Mor}_B(Z, X) : (\Sch/B)^{opp} \longrightarrow \textit{Sets}, \quad
+T \longmapsto \{f : Z_T \to X_T\}
+$$
+를 구성했다. 때로는 $\mathit{Mor}_B(Z, X)$를 사상
+$\mathit{Mor}_B(Z, X) \to B$가 갖추어진 함자
+$(\Sch/S)^{opp} \to \textit{Sets}$로 생각한다. 구체적으로 $T$가
+$S$ 위의 스킴이면 $\mathit{Mor}_B(Z, X)(T)$의 원소는 쌍 $(f, h)$이다.
+여기서 $h$는 사상 $h : T \to B$이고,
+$f : Z \times_{B, h} T \to X \times_{B, h} T$는
+$T$ 위의 대수공간의 사상이다. 특히 $\mathit{Mor}_B(Z, X)$가
+대수공간이라고 말할 때에는 대응하는 함자
+$(\Sch/S)^{opp} \to \textit{Sets}$가 대수공간이라는 뜻이다.
+
+\begin{lemma}
+\label{lemma-Mor-into-Hilb}
+$S$를 스킴이라 하고 $S$ 위의 대수공간의 사상
+$Z \to B$와 $X \to B$를 생각하자. $X \to B$가 분리이고
+$Z \to B$가 유한 표시이고 평탄하며 고유이면 자연스러운 단사 함자변환
+$$
+\mathit{Mor}_B(Z, X) \longrightarrow \Hilbfunctor_{Z \times_B X/B}
+$$
+이 존재하며, 사상 $f : Z_T \to X_T$를 그 그래프로 보낸다.
+\end{lemma}
+
+\begin{proof}
+$B$ 위의 스킴 $T$와 $T$ 위의 사상 $f_T : Z_T \to X_T$가 주어졌다고 하자.
+$f$의 그래프는 사상
+$\Gamma_f = (\text{id}, f) : Z_T \to Z_T \times_T X_T = (Z \times_B X)_T$
+이다. 분리, 평탄, 고유, 유한 표시는 밑변환 아래 안정적인 대수공간의
+사상의 성질임을 상기하자(『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-base-change-separated},
+\ref{spaces-morphisms-lemma-base-change-flat},
+\ref{spaces-morphisms-lemma-base-change-proper} 및
+\ref{spaces-morphisms-lemma-base-change-finite-presentation}).
+따라서 『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-semi-diagonal}에 의해 $\Gamma_f$는 닫힌 몰입이다.
+더 나아가 $\Gamma_f(Z_T)$는 $T$ 위에서 평탄하고 고유하며 유한 표시이다.
+따라서 $\Gamma_f(Z_T)$는 $\Hilbfunctor_{Z \times_B X/B}(T)$의 원소를
+정의한다. 이 변환이 단사임을 보이려면 같은 그래프를 갖는 두 사상이
+같음을 보이면 충분하다. 실제로 $Y \subset (Z \times_B X)_T$가 사상
+$f$의 그래프이면 $\text{pr}_1|_Y : Y \to Z_T$의 역과
+$\text{pr}_2|_Y$를 합성하여 $f$를 복원할 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-Mor-into-Hilb-open}
+%% P11-E0404: 원문의 단수 Assumption을 앞 보조정리의 가정들로 해석한다.
+보조정리 \ref{lemma-Mor-into-Hilb}와 같은 가정과 표기를 사용하자. 변환
+$\mathit{Mor}_B(Z, X) \longrightarrow \Hilbfunctor_{Z \times_B X/B}$
+은 열린 몰입으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+$T$를 $B$ 위의 스킴이라 하고, $Y \subset (Z \times_B X)_T$를
+$\Hilbfunctor_{Z \times_B X/B}(T)$의 원소라 하자. 그러면 $Y$가
+$T$ 위의 사상 $Z_T \to X_T$의 그래프일 필요충분조건은
+$k = \text{pr}_1|_Y : Y \to Z_T$가 동형인 것이다.
+『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-where-isomorphism}
+에 의해 열린 부분스킴 $V \subset T$가 존재하여, 임의의 스킴의 사상
+$T' \to T$에 대하여 $k_{T'} : Y_{T'} \to Z_{T'}$가 동형일 필요충분조건은
+$T' \to T$가 $V$를 통해 분해되는 것이다. 이로써 보조정리가 증명된다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-Mor}
+$S$를 스킴이라 하고 $Z \to B$와 $X \to B$를 $S$ 위의 대수공간의
+사상이라 하자. $X \to B$가 유한 표시이고 분리이며,
+$Z \to B$가 유한 표시이고 평탄하며 고유하다고 가정하자.
+그러면 $\mathit{Mor}_B(Z, X)$는 $B$ 위에서 국소 유한 표시인 대수공간이다.
+\end{proposition}
+
+\begin{proof}
+보조정리 \ref{lemma-Mor-into-Hilb-open}과 명제
+\ref{proposition-hilb}의 즉각적인 따름정리이다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{대수공간의 스택}
+\label{section-stack-of-spaces}
+
+\noindent
+%% P11-E0405: frozen source has "continuous" where "continues" is intended.
+이 절에서는 『스택의 예』의 절
+\ref{examples-stacks-section-stack-of-spaces},
+\ref{examples-stacks-section-stack-of-finite-type-spaces}, 그리고
+\ref{examples-stacks-section-stack-in-groupoids-of-finite-type-spaces}에서
+시작한 논의를 이어 간다. $\mathbf{Z}$ 위에서 생각하면, 그곳의 논의로부터
+준군 스택
+$$
+p'_{ft} : \Spacesstack'_{ft} \longrightarrow \Sch_{fppf}
+$$
+가 있으며, 이것이 (비평탄일 수 있는) 유한형 대수공간의 족을 매개화함을
+알 수 있다. 더 정확히 말해, $\Spacesstack'_{ft}$의 대상\footnote{우리는 항상
+『스택의 예』의 보조정리 \ref{examples-stacks-lemma-stack-ft-spaces}에서처럼
+대체를 시행한다.}은 대수공간 $X$에서 스킴 $S$로 가는 유한형 사상
+$X \to S$이다. 사상 $(X' \to S') \to (X \to S)$은 대수공간의 사상
+$f : X' \to X$와 스킴의 사상 $g : S' \to S$의 쌍 $(f, g)$으로 주어지며,
+이들은 가환 그림
+$$
+\xymatrix{
+X' \ar[d] \ar[r]_f & X \ar[d] \\
+S' \ar[r]^g & S
+}
+$$
+에 들어맞고 동형사상 $X' \to S' \times_S X$를 유도한다. 다시 말해 이
+그림은 대수공간의 범주에서 Cartesian이다. 함자 $p'_{ft}$는
+$(X \to S)$를 $S$로, $(f, g)$를 $g$로 보낸다. 이제 충만한 부분범주
+$$
+\Spacesstack'_{fp, flat, proper} \subset
+\Spacesstack'_{ft}
+$$
+를 $X \to S$가 유한 표시이고 평탄하며 고유한 $\Spacesstack'_{ft}$의
+대상 $X \to S$들로 이루어진 범주로 정의한다. 표시
+$$
+p'_{fp, flat, proper} :
+\Spacesstack'_{fp, flat, proper}
+\longrightarrow
+\Sch_{fppf}
+$$
+는 함자 $p'_{ft}$를 이 부분범주에 제한한 것을 뜻한다. 먼저 위에 열거한
+문헌에서 이미 얻은 결과를 복습한 다음, 결과를 더 보태기 시작한다.
+
+\begin{lemma}
+\label{lemma-spaces-fibred-in-groupoids}
+범주 $\Spacesstack'_{ft}$는 $\Sch_{fppf}$ 위의 준군 섬유화 범주이다.
+$\Spacesstack'_{fp, flat, proper}$도 마찬가지이다.
+\end{lemma}
+
+\begin{proof}
+이는 $\Spacesstack'_{ft}$의 경우 『스택의 예』의 절
+\ref{examples-stacks-section-stack-in-groupoids-of-finite-type-spaces}
+에서 보았고, 이로부터 다른 경우의 결과도 쉽게 따른다. 하지만
+『범주』의 정의 \ref{categories-definition-fibred-groupoids}에 나오는
+조건 (1)과 (2)를 확인하여 이를 직접 증명해 보자.
+
+\medskip\noindent
+조건 (1). $X \to S$를 $\Spacesstack'_{ft}$의 대상이라 하고 $S' \to S$를
+스킴의 사상이라 하자. $X' = S' \times_S X$로 둔다. 『공간의 사상』의
+보조정리
+%% P11-E0610: frozen source starts a new sentence with the fragment "to obtain".
+\ref{spaces-morphisms-lemma-base-change-finite-type}에 의해
+$X' \to S'$는 유한형임에 유의하자. 이로써 $S' \to S$ 위에 놓이는
+사상 $(X' \to S') \to (X \to S)$를 얻는다. 다른 경우에는 『공간의 사상』의
+보조정리
+\ref{spaces-morphisms-lemma-base-change-finite-presentation},
+\ref{spaces-morphisms-lemma-base-change-flat}, 그리고
+\ref{spaces-morphisms-lemma-base-change-proper}을 사용하여 똑같이 논증한다.
+
+\medskip\noindent
+조건 (2). $\Spacesstack'_{ft}$의 사상
+$(f, g) : (X' \to S') \to (X \to S)$와 $(a, b) : (Y \to T) \to (X \to S)$
+을 생각하자. $g \circ h = b$인 사상 $h : T \to S'$가 주어졌을 때,
+$(f, g) \circ (k, h) = (a, b)$를 만족하는 $\Spacesstack'_{ft}$의 사상
+$(k, h) : (Y \to T) \to (X' \to S')$이 유일하게 존재함을 보여야 한다.
+이는 $X' = S' \times_S X$라는 사실에서 명백하다. 따라서 (1)을 만족하는
+$\Spacesstack'_{ft}$의 임의의 충만한 부분범주에도 같은 논증이 통한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-spaces-diagonal}
+대각사상
+$$
+\Delta : \Spacesstack'_{fp, flat, proper} \longrightarrow
+\Spacesstack'_{fp, flat, proper} \times \Spacesstack'_{fp, flat, proper}
+$$
+은 대수공간으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+『대수 스택』의 보조정리 \ref{algebraic-lemma-representable-diagonal}의
+판정 조건 (2)를 사용한다. $S$를 스킴이라 하고, $X$와 $Y$를 $S$ 위에서
+유한 표시이고, $S$ 위에서 평탄하며, $S$ 위에서 고유한 대수공간이라 하자. 함자
+$$
+\mathit{Isom}_S(X, Y) : (\Sch/S)_{fppf} \longrightarrow \textit{Sets}, \quad
+T \longmapsto \{f : X_T \to Y_T \text{ isomorphism}\}
+$$
+가 대수공간임을 보여야 한다. 초등적인 논증으로
+$\mathit{Isom}_S(X, Y)$가 섬유곱 그림
+$$
+\xymatrix{
+\mathit{Isom}_S(X, Y) \ar[r] \ar[d] & S \ar[d]_{(\text{id}, \text{id})} \\
+\mathit{Mor}_S(X, Y) \times \mathit{Mor}_S(Y, X) \ar[r] &
+\mathit{Mor}_S(X, X) \times \mathit{Mor}_S(Y, Y)
+}
+$$
+에 놓임을 알 수 있다. 아래쪽 화살표는 $(\varphi, \psi)$를
+$(\psi \circ \varphi, \varphi \circ \psi)$로 보낸다. 명제
+\ref{proposition-Mor}에 의해 아래 행의 함자들은 $S$ 위의 대수공간이다.
+따라서 $S$ 위의 대수공간 범주에 섬유곱이 있다는 사실로부터 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-spaces-stack}
+범주 $\Spacesstack'_{ft}$는 $\Sch_{fppf}$ 위의 준군 스택이다.
+$\Spacesstack'_{fp, flat, proper}$도 마찬가지이다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리가 성립하는 이유는 ``대수공간에 대한 모든 fppf 하강 데이터는
+유효하다''라는 표어로 요약된다. 『부트스트랩』의 절
+\ref{bootstrap-section-applications}을 보라. 더 정확히 말해,
+$\Spacesstack'_{ft}$에 대한 보조정리는 『스택의 예』의 보조정리
+\ref{examples-stacks-lemma-stack-of-finite-type-spaces}
+에서 따르며, 이는 『스택의 예』의 절
+\ref{examples-stacks-section-stack-in-groupoids-of-finite-type-spaces}에서 보았다.
+하지만 증명을 복습해 보자. 『스택』의 정의
+\ref{stacks-definition-stack-in-groupoids}에 나오는 조건 (1), (2), (3)을
+확인해야 한다.
+
+\medskip\noindent
+성질 (1)은 보조정리 \ref{lemma-spaces-fibred-in-groupoids}에서 보았다.
+
+\medskip\noindent
+성질 (2)는 $\Spacesstack'_{fp, flat, proper}$의 경우 보조정리
+\ref{lemma-spaces-diagonal}에서 따른다. $\Spacesstack'_{ft}$의 경우에는
+『스택의 예』의 보조정리
+\ref{examples-stacks-lemma-pre-stack-of-spaces}
+에서 따른다(그리고 이것이 실제로 ``올바른'' 인용이다).
+
+\medskip\noindent
+다음과 같이 $\Spacesstack'_{ft}$에 대한 조건 (3)을 확인한다. 다음이 주어졌다고 하자.
+\begin{enumerate}
+\item $\Sch_{fppf}$ 안의 fppf 덮개 $\{U_i \to U\}_{i \in I}$,
+\item 각 $i \in I$에 대해 $U_i$ 위의 유한형 대수공간 $X_i$, 그리고
+\item 각 $i, j \in I$에 대해 $U_i \times_U U_j$ 위에서
+$U_i \times_U U_j \times_U U_k$ 위의 코사이클 조건을 만족하는 대수공간의 동형사상
+$\varphi_{ij} : X_i \times_U U_j \to U_i \times_U X_j$.
+\end{enumerate}
+동형사상 $\varphi_{ij}$를 복원하는 $U_i$ 위의 동형사상
+$X_{U_i} \cong X_i$와 $U$ 위의 유한형 대수공간 $X$가 존재함을 보여야 한다.
+이는 『부트스트랩』의 보조정리
+\ref{bootstrap-lemma-descend-algebraic-space}의 (2)에서 따른다.
+『공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-finite-type}
+에 의해 $X \to U$가 유한형임을 알 수 있다.
+$\Spacesstack'_{fp, flat, proper}$의 경우에는 마지막 단계에서 『공간의 하강』의
+보조정리
+\ref{spaces-descent-lemma-descending-property-finite-presentation},
+\ref{spaces-descent-lemma-descending-property-flat}, 그리고
+\ref{spaces-descent-lemma-descending-property-proper}
+도 사용한다.
+\end{proof}
+
+\noindent
+건전성 점검: 스택 $\Spacesstack'_{ft}$와
+$\Spacesstack'_{fp, flat, proper}$
+는 대수공간들 사이에서 같은 역할을 한다.
+
+\begin{lemma}
+\label{lemma-extend-spaces-to-spaces}
+$T$를 $\mathbf{Z}$ 위의 대수공간이라 하자. $\mathcal{S}_T$가 이에 대응하는
+대수 스택을 나타낸다고 하자(『대수 스택』의 절
+\ref{algebraic-section-split},
+\ref{algebraic-section-representable-by-algebraic-spaces}, 그리고
+\ref{algebraic-section-stacks-spaces}).
+다음 범주의 동치가 있다.
+$$
+\left\{
+\begin{matrix}
+\text{morphisms of algebraic spaces }\\
+X \to T\text{ of finite type}
+\end{matrix}
+\right\}
+\longrightarrow
+\Mor_{\textit{Cat}/\Sch_{fppf}}(\mathcal{S}_T, \Spacesstack'_{ft})
+$$
+또한 다음 범주의 동치가 있다.
+$$
+\left\{
+\begin{matrix}
+\text{morphisms of algebraic spaces }X \to T\\
+\text{of finite presentation, flat, and proper}
+\end{matrix}
+\right\}
+\longrightarrow
+\Mor_{\textit{Cat}/\Sch_{fppf}}(\mathcal{S}_T,
+\Spacesstack'_{fp, flat, proper})
+$$
+\end{lemma}
+
+\begin{proof}
+%% P11-E0406: frozen source misspells "algebraic" as "algerbaic".
+이 보조정리는 스킴에 대해 성립한다는 사실(본질적으로 스택의 구성에 의함)과
+대수공간 위 대수공간의 fppf 하강 데이터가 유효하다는 사실로부터 도출한다.
+독자에게 이 증명을 건너뛸 것을 강력히 권한다.
+
+\medskip\noindent
+각 화살표에서 왼쪽에서 오른쪽으로 가는 구성은 직접적이다. 유한형인
+$X \to T$가 주어지면 함자 $\mathcal{S}_T \to  \Spacesstack'_{ft}$는
+$U/T$에 밑변환 $X_U \to U$를 대응시킨다. 준역함자의 구성을 설명하겠다.
+
+\medskip\noindent
+$T$가 스킴이면 $2$-Yoneda 보조정리에 의해 준역함자가 존재한다.
+『범주』의 보조정리 \ref{categories-lemma-yoneda-2category}를 보라.
+$U$가 스킴인 전사 에탈 사상 $p : U \to T$를 택하자. 사영을
+$s, t : R \to U$라 쓰면서 $R = U \times_T U$로 둔다. 다음 사상들을
+얻음에 유의하자.
+$$
+\xymatrix{
+\mathcal{S}_{U \times_T U \times_T U} \ar@<2ex>[r] \ar[r] \ar@<-2ex>[r] &
+\mathcal{S}_R \ar@<1ex>[r] \ar@<-1ex>[r] &
+\mathcal{S}_U \ar[r] &
+\mathcal{S}_T
+}
+$$
+이 사상들은 여러 양립 조건을 (엄밀한 등식으로) 만족한다.
+
+\medskip\noindent
+$G : \mathcal{S}_T \to \Spacesstack'_{ft}$를 $\Sch_{fppf}$ 위의 함자라 하자.
+위에 표시한 사상을 통해 $G$를 $\mathcal{S}_U$에 제한한 것은 $2$-Yoneda
+보조정리에 의해 대수공간의 유한형 사상 $X_U \to U$에 대응한다.
+$p \circ s = p \circ t$이므로 $R \times_{s, U} X_U$와
+$R \times_{t, U} X_U$는 모두 $G$를 $\mathcal{S}_R$에 제한한 것에 대응한다.
+따라서 $R$ 위의 표준 동형사상
+$\varphi : X_U \times_{U, t} R \to R \times_{s, U} X_U$를 얻는다.
+이 동형사상은 위 그림의 여러 양립 조건에 의해 코사이클 조건을 만족한다.
+%% P11-E0407: frozen source has the fragment "Thus a descent datum which is ...".
+따라서 이는 『부트스트랩』의 보조정리
+\ref{bootstrap-lemma-descend-algebraic-space}의 (2)에 의해 유효한 하강 데이터이다.
+%% P11-E0611: frozen source says "right hand side category" although the constructed
+%% algebraic-space morphism belongs to the displayed left-hand category.
+다시 말해 오른쪽 범주의 대상 $X \to T$를 얻는다. 구성
+$G \leadsto X$가 함자적이며 다른 구성의 준역임을 확인하는 일은 생략한다.
+$\Spacesstack'_{fp, flat, proper}$의 경우에는 마지막 단계에서 『공간의 하강』의
+보조정리
+\ref{spaces-descent-lemma-descending-property-finite-presentation},
+\ref{spaces-descent-lemma-descending-property-flat}, 그리고
+\ref{spaces-descent-lemma-descending-property-proper}
+도 사용하여 $X \to T$가 유한 표시이고 평탄하며 고유함을 알 수 있다.
+\end{proof}
+
+\begin{remark}
+\label{remark-spaces-base-change}
+$B$를 $\Spec(\mathbf{Z})$ 위의 대수공간이라 하자.
+$B\textit{-Spaces}'_{ft}$를 다음 쌍들로 이루어진 범주라 하자.
+$(X \to S, h : S \to B)$에서 $X \to S$는
+$\Spacesstack'_{ft}$의 대상이고 $h : S \to B$는 사상이다.
+$B\textit{-Spaces}'_{ft}$에서의 사상
+$(X' \to S', h') \to (X \to S, h)$은 $h \circ g = h'$를 만족하는
+$\Spacesstack'_{ft}$의 사상 $(f, g)$이다. 이 상황에서 그림
+$$
+\xymatrix{
+B\textit{-Spaces}'_{ft} \ar[r] \ar[d] & \Spacesstack'_{ft} \ar[d] \\
+(\Sch/B)_{fppf} \ar[r] & \Sch_{fppf}
+}
+$$
+은 $2$-섬유곱 정사각형이다. 이 자명한 주의는 절대적인 경우
+$\Spacesstack'_{ft}$에서 주어진 바탕 대수공간 위의 족을 다루는 경우로
+결과를 옮겨 올 때 때때로 유용하다. 물론
+$B\textit{-Spaces}'_{fp, flat, proper}$
+에도 같은 구성이 통한다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-spaces-limits}
+스택
+$p'_{fp, flat, proper} :
+\Spacesstack'_{fp, flat, proper} \to \Sch_{fppf}$는 극한을 보존한다
+(『Artin의 공리』의 정의 \ref{artin-definition-limit-preserving}).
+\end{lemma}
+
+\begin{proof}
+$T = \lim T_i$를 아핀 스킴의 유향 역계의 극한이라 하자.
+『공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-finite-presentation}
+에 의해 $T$ 위의 유한 표시 대수공간의 범주는 $T_i$ 위의 유한 표시
+대수공간 범주들의 쌍대극한이다. 증명을 마치려면 평탄성과 고유성이 극한을
+통해 하강한다는 사실을 사용한다. 『공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-flat}와
+\ref{spaces-limits-lemma-eventually-proper}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-spaces-RS-star}
+다음 그림이
+$$
+\xymatrix{
+T \ar[r] \ar[d] & T' \ar[d] \\
+S \ar[r] & S'
+}
+$$
+스킴의 범주에서 밂이라고 하자. 여기서 $T \to T'$는 두꺼워짐이고
+$T \to S$는 아핀이다. 『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-pushout-along-thickening}을 보라. 그러면 섬유범주
+사이의 함자
+$$
+\begin{matrix}
+\Spacesstack'_{fp, flat, proper, S'} \\
+\downarrow \\
+\Spacesstack'_{fp, flat, proper, S}
+\times_{\Spacesstack'_{fp, flat, proper, T}}
+\Spacesstack'_{fp, flat, proper, T'}
+\end{matrix}
+$$
+는 동치이다.
+\end{lemma}
+
+\begin{proof}
+조건 목록에서 ``고유''를 빼고 ``유한 표시''를 ``국소 유한 표시''로 바꾸면
+이 함자가 동치이다. 『공간의 밂』의 보조정리
+\ref{spaces-pushouts-lemma-equivalence-categories-spaces-pushout-flat}을 보라.
+따라서 평탄하고 국소 유한 표시인 대수공간에서 $S'$로 가는 사상
+$X' \to S'$가 주어졌을 때, $X' \to S'$가 고유일 필요충분조건이
+$S \times_{S'} X' \to S$와 $T' \times_{S'} X' \to T'$가 고유임을 보이면
+충분하다. 한 방향은 고유성이 밑변환 아래 보존된다는 사실
+(『공간의 사상』의 보조정리 \ref{spaces-morphisms-lemma-base-change-proper})에서
+따른다. 다른 방향은 $S \times_{S'} X' \to S$의 고유성이
+『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-thicken-property-morphisms-cartesian}에 의해
+$X' \to S'$의 고유성을 함의한다는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-spaces-tangent-space}
+$k$를 체라 하고, $x = (X \to \Spec(k))$를 $\Spec(k)$ 위의
+$\mathcal{X} = \Spacesstack'_{fp, flat, proper}$의 대상이라 하자.
+\begin{enumerate}
+\item $k$가 $\mathbf{Z}$ 위의 유한형이면 벡터공간
+$T\mathcal{F}_{\mathcal{X}, k, x}$와
+$\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x})$
+(『Artin의 공리』의 절 \ref{artin-section-tangent-spaces} 참조)는 유한차원이다.
+\item 일반적으로 벡터공간 $T_x(k)$와 $\text{Inf}_x(k)$
+(『Artin의 공리』의 절 \ref{artin-section-inf} 참조)는 유한차원이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+『Artin의 공리』의 절 \ref{artin-section-tangent-spaces}에 나오는 논의는
+바탕 스킴 $\Spec(\mathbf{Z})$ 위의 유한형 체에만 적용된다. 보조정리
+\ref{lemma-spaces-RS-star}에 의해 우리 스택은 (RS*)를 만족하므로,
+『Artin의 공리』의 보조정리 \ref{artin-lemma-properties-lift-RS-star}를
+적용하여 (2)에 언급된 벡터공간 $T_x(k)$와 $\text{Inf}_x(k)$를 얻는다.
+더 나아가 유한형인 경우 이 공간들은 『Artin의 공리』의 주의
+\ref{artin-remark-compare-deformation-spaces}에 의해 (1)에 언급된 공간들과
+일치한다. 이제 증명을 시작할 수 있다. 1차 두꺼워짐
+%% P11-E0408: frozen source has \Spec(k[k]) in the displayed equality.
+$\Spec(k) \to \Spec(k[\epsilon]) = \Spec(k[k])$
+의 코노멀 가군이 $k$임에 유의하자. 따라서 $X$의 무한소 변형과 $X$의
+무한소 자기동형을 서술하는 『변형 이론』의 보조정리
+\ref{defos-lemma-deform-spaces}의 공식은 다음과 같이 된다.
+$$
+T_x(k) = \Ext^1_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)
+\quad\text{and}\quad
+\text{Inf}_x(k) = \Ext^0_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)
+$$
+『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-netherlander-fp}
+와 $X$가 Noetherian이라는 사실로부터 $\NL_{X/k}$의 연접 코호몰로지층은
+차수 $0$과 $-1$ 이외에서는 영임을 알 수 있다. 『대수공간의 유도 범주』의
+보조정리 \ref{spaces-perfect-lemma-ext-finite}에 의해 위의 $\Ext$-군들은
+유한차원 $k$-벡터공간이며, 이로써 증명이 끝난다.
+\end{proof}
+
+\noindent
+우리 스택은 형식적 유효성을 만족하지 않으므로, 다음 보조정리에서 증명하는
+versal성의 개방성은 다소 기묘하다는 점에 주의하자. 『예』의 절
+\ref{examples-section-proper-spaces-not-algebraic}을 보라. 나중에 형식적
+유효성을 만족하는 $\Spacesstack'_{fp, flat, proper}$의 적절한 부분스택에
+versal성의 개방성을 적용하여, 이 스택들이 대수적이라고 결론 내릴 것이다.
+
+\begin{lemma}
+\label{lemma-spaces-defo-thy}
+준군 스택 $\mathcal{X} = \Spacesstack'_{fp, flat, proper}$는
+$\Spec(\mathbf{Z})$ 위에서 versal성의 개방성을 만족한다. 마찬가지로
+밑변환한 뒤에는(주의 \ref{remark-spaces-base-change}) 임의의 Noetherian
+바탕 스킴 $S$ 위에서 versal성의 개방성이 성립한다.
+\end{lemma}
+
+\begin{proof}
+이 사실의 ``통상적인'' 증명은 이 증명 다음의 주의에 나오는 논의를 보라.
+여기서는 『Artin의 공리』의 보조정리
+\ref{artin-lemma-SGE-implies-openness-versality}를 사용하여 증명한다.
+이미 $\mathcal{X}$의 대각사상이 대수공간으로 표현 가능하고, 이 스택이
+(RS*)를 만족하며 극한을 보존함을 보았다. 보조정리
+\ref{lemma-spaces-diagonal}, \ref{lemma-spaces-RS-star}, 그리고
+\ref{lemma-spaces-limits}를 보라. 따라서 $\mathcal{X}$가 『Artin의 공리』의
+보조정리 \ref{artin-lemma-SGE-implies-openness-versality}에 서술된 강한 형식적
+유효성을 만족함만 확인하면 된다.
+
+\medskip\noindent
+$(R_n)$을 모든 $n \geq m$에 대해 $R_n \to R_m$이 제곱영 핵을 갖는
+전사인 환의 역계라 하자. $X_n$이 대수공간인 유한 표시 평탄 고유 사상
+$X_n \to \Spec(R_n)$을 택하고, 동형사상
+$X_n = X_{n + 1} \times_{\Spec(R_{n + 1})} \Spec(R_n)$을 유도하는
+$\Spec(R_{n + 1})$ 위의 사상 $X_{n + 1} \to X_n$을 택하자. 모든 $n$에 대해
+$X_n$이 $X$의 밑변환이 되도록 정의역이 대수공간인 유한 표시 평탄 고유 사상
+$X \to \Spec(\lim R_n)$을 찾아야 한다.
+
+\medskip\noindent
+$I_n = \Ker(R_n \to R_1)$로 두자.
+$(X_1 \subset X_n) \to (\Spec(R_1) \subset \Spec(R_n))$
+을 1차 두꺼워짐의 사상으로 생각할 수 있다. (계속하기 전에 『대수공간의
+사상 심화』의 절
+\ref{spaces-more-morphisms-section-thickenings}
+에 나오는 대수공간의 두꺼워짐에 관한 내용을 어느 정도 읽어 두기 바란다.)
+$X_n$의 구조층은
+$$
+0 \to \mathcal{O}_{X_1} \otimes_{R_1} I_n \to
+\mathcal{O}_{X_n} \to \mathcal{O}_{X_1} \to 0
+$$
+위의 $0 \to I_n \to R_n \to R_1$의 확대이다. 『대수공간의 사상 심화』의
+보조정리
+\ref{spaces-more-morphisms-lemma-deform}
+를 보라. 이제 확대
+$$
+0 \to \lim \mathcal{O}_{X_1} \otimes_{R_1} I_n \to
+\lim \mathcal{O}_{X_n} \to \mathcal{O}_{X_1} \to 0
+$$
+를 $0 \to \lim I_n \to \lim R_n \to R_1 \to 0$ 위에서 생각하자.
+『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-Rlim-quasi-coherent}에 의해 핵들의 계의
+$R^1\lim$이 영이므로, 표시된 열은 완전하다. 사상
+$$
+\mathcal{O}_{X_1} \otimes_{R_1} \lim I_n \longrightarrow
+\lim \mathcal{O}_{X_1} \otimes_{R_1} I_n
+$$
+에 함자 $DQ_X$를 적용하면 동형사상이 유도됨에 유의하자. 『대수공간의
+유도 범주』의 보조정리 \ref{spaces-perfect-lemma-pullback-and-limits}를 보라.
+그러므로 유일한 확대
+$$
+0 \to \mathcal{O}_{X_1} \otimes_{R_1} \lim I_n \to
+\mathcal{O}' \to \mathcal{O}_{X_1} \to 0
+$$
+를 $0 \to \lim I_n \to \lim R_n \to R_1 \to 0$ 위에서 얻는다. 이는
+『변형 이론』의 보조정리
+\ref{defos-lemma-thickening-over-thickening-space-quasi-coherent}에 나오는
+범주의 동치에 의한다. 층 $\mathcal{O}'$는 『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-first-order-thickening}에 의해
+$\Spec(R_1) \subset \Spec(\lim R_n)$ 위 대수공간의 1차 두꺼워짐
+$X_1 \subset X$를 결정한다. 앞서 사용한 『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-deform}에 의해 $X \to \Spec(\lim R_n)$가
+평탄함에 유의하자. 『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-deform-property}
+에 의해 $X \to \Spec(\lim R_n)$가 고유이고 유한 표시임을 알 수 있다.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{remark}
+\label{remark-spaces-defo-thy}
+보조정리 \ref{lemma-spaces-defo-thy}는 『Artin의 공리』의 보조정리
+\ref{artin-lemma-dual-openness}를 사용하여(보조정리
+\ref{lemma-coherent-defo-thy}의 첫 번째 증명에서처럼), 또는 『Artin의 공리』의
+보조정리 \ref{artin-lemma-get-openness-obstruction-theory}에서처럼 장애 이론을
+사용하여(보조정리 \ref{lemma-coherent-defo-thy}의 두 번째 증명에서처럼)
+보일 수도 있다. 두 경우 모두 『여접』의 절
+\ref{cotangent-section-deformations-ringed-topoi}에서 전개한 변형 및 장애 이론을
+사용하여, 변형과 장애에 필요한 성질들을 『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-compute-ext}를 적용할 수 있는 $\Ext$-군의 성질로
+옮긴다. 두 번째 방법(장애 이론을 사용하고 따라서 완전한 여접 복합체를 사용하는
+방법)이 아마도 대부분의 문헌에서 쓰는 ``표준적인'' 방법일 것이다.
+\end{remark}
+
+
+
+
+
+\section{극화된 고유 스킴의 스택}
+\label{section-polarized}
+
+\noindent
+극화된 고유 스킴의 스택을 연구할 때는 $\mathbf{Z}$ 위에서 다루는 것으로
+충분하다. 나중에 원하는 임의의 스킴이나 대수공간으로 당길 수 있기 때문이다
+(주의 \ref{remark-polarized-base-change} 참조).
+
+\begin{situation}
+\label{situation-polarized}
+범주 $\Polarizedstack$를 다음과 같이 정의한다. 대상은 다음 조건을 만족하는
+쌍 $(X \to S, \mathcal{L})$이다.
+\begin{enumerate}
+\item $X \to S$는 고유이고 평탄하며 유한 표시인 스킴의 사상이다.
+\item $\mathcal{L}$은 $X/S$ 위에서 상대적으로 풍부한 가역
+$\mathcal{O}_X$-가군이다(『사상』의 정의
+\ref{morphisms-definition-relatively-ample}).
+\end{enumerate}
+대상 사이의 사상
+$(X' \to S', \mathcal{L}') \to (X \to S, \mathcal{L})$은 삼중항
+$(f, g, \varphi)$로 주어진다. 여기서 $f : X' \to X$와 $g : S' \to S$는
+가환 그림
+$$
+\xymatrix{
+X' \ar[d] \ar[r]_f & X \ar[d] \\
+S' \ar[r]^g & S
+}
+$$
+에 들어맞고 동형사상 $X' \to S' \times_S X$를 유도하는 스킴의 사상들이다.
+다시 말해 이 그림은 Cartesian이며,
+$\varphi : f^*\mathcal{L} \to \mathcal{L}'$는 동형사상이다. 합성은 명백한
+방식으로 정의한다(『스택의 예』의 절
+\ref{examples-stacks-section-stack-of-spaces}과
+\ref{examples-stacks-section-stack-of-quasi-coherent-sheaves}).
+망각함자
+$$
+p : \Polarizedstack \longrightarrow \Sch_{fppf},\quad
+(X \to S, \mathcal{L}) \longmapsto S
+$$
+를 통해 $\Polarizedstack$를 $\Sch_{fppf}$ 위의 범주로 본다(표기법은 절
+\ref{section-conventions} 참조).
+\end{situation}
+
+\noindent
+앞 절에서 유한 표시 평탄 고유 대수공간의 스택
+$\Spacesstack'_{fp, flat, proper}$
+에 관해 상당한 작업을 했다. 이 내용을 사용하기 위해 망각함자
+\begin{equation}
+\label{equation-over-proper-spaces}
+\Polarizedstack \longrightarrow
+\Spacesstack'_{fp, flat, proper},\quad
+(X \to S, \mathcal{L}) \longmapsto (X \to S)
+\end{equation}
+를 생각한다. 이 함자는 다음 논의에서 유용한 도구가 될 것이다.
+$(X \to S)$가 (\ref{equation-over-proper-spaces})의 본질적 상에 속하면
+$X$와 $S$는 스킴임에 유의하자.
+
+\begin{lemma}
+\label{lemma-polarized-fibred-in-groupoids}
+범주 $\Polarizedstack$는 $\Spacesstack'_{fp, flat, proper}$ 위의 준군 섬유화
+범주이다. 범주 $\Polarizedstack$는 $\Sch_{fppf}$ 위의 준군 섬유화 범주이다.
+\end{lemma}
+
+\begin{proof}
+『범주』의 정의 \ref{categories-definition-fibred-groupoids}의 조건 (1)과
+(2)를 확인한다.
+
+\medskip\noindent
+조건 (1). $(X \to S, \mathcal{L})$를 $\Polarizedstack$의 대상이라 하고,
+$(X' \to S') \to (X \to S)$를 $\Spacesstack'_{fp, flat, proper}$의 사상이라
+하자. $\mathcal{L}'$을 $\mathcal{L}$의 $X'$로의 당김이라 하자.
+$X, S, S'$가 스킴이므로 $X'$도 (스킴의 섬유곱으로서) 스킴임에 유의하자.
+그러면 『사상』의 보조정리 \ref{morphisms-lemma-ample-base-change}에 의해
+$\mathcal{L}'$은 $X'/S'$ 위에서 풍부하다. 이로써
+$(X' \to S', \mathcal{L}') \to (X \to S, \mathcal{L})$
+를 얻는데, 이는 $(X' \to S') \to (X \to S)$ 위에 놓이는 사상이다.
+
+\medskip\noindent
+조건 (2). $\Polarizedstack$의 사상
+$(f, g, \varphi) : (X' \to S', \mathcal{L}') \to (X \to S, \mathcal{L})$와
+$(a, b, \psi) : (Y \to T, \mathcal{N}) \to (X \to S, \mathcal{L})$
+을 생각하자. $(f, g) \circ (k, h) = (a, b)$를 만족하는
+$\Spacesstack'_{fp, flat, proper}$의 사상
+$(k, h) : (Y \to T) \to (X' \to S')$가 주어졌을 때,
+$\Polarizedstack$의 유일한 사상
+$(k, h, \chi) : (Y \to T, \mathcal{N}) \to (X' \to S', \mathcal{L}')$
+이 $(f, g, \varphi) \circ (k, h, \chi) = (a, b, \psi)$를 만족함을 보여야 한다.
+그저 다음과 같이 두면 된다.
+$$
+\chi = \psi \circ (k^*\varphi)^{-1}
+$$
+이로써 조건 (2)가 증명된다. 섬유화 범주를 정의하는 함자들의 합성은
+섬유화 범주를 정의한다. 『범주』의 보조정리
+\ref{categories-lemma-fibred-over-fibred}를 보라.
+%% P11-E0409: frozen source has "This we see" where "Thus we see" is intended.
+따라서 $\Polarizedstack$는 $\Sch_{fppf}$ 위의 준군 섬유화 범주이다
+(엄밀히 말하면 섬유범주들이 준군임을 확인하고 『범주』의 보조정리
+\ref{categories-lemma-fibred-groupoids}를 적용해야 한다).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-polarized-stack}
+범주 $\Polarizedstack$는 $\Spacesstack'_{fp, flat, proper}$ 위의 준군 스택이다
+(유도된 위상을 부여한다. 『스택』의 정의
+\ref{stacks-definition-topology-inherited} 참조). 범주 $\Polarizedstack$는
+$\Sch_{fppf}$ 위의 준군 스택이다.
+\end{lemma}
+
+\begin{proof}
+『스택』의 정의 \ref{stacks-definition-stack-in-groupoids}의 조건 (1), (2),
+(3)을 확인하여 $\Polarizedstack$가 $\Spacesstack'_{fp, flat, proper}$ 위의
+준군 스택임을 증명한다. (1)은 이미 보조정리
+\ref{lemma-polarized-fibred-in-groupoids}에서 보았다.
+
+\medskip\noindent
+다음과 같은 방식으로 $\Spacesstack'_{fp, flat, proper}$의 덮개가 생긴다.
+$X \to S$를 $\Spacesstack'_{fp, flat, proper}$의 대상이라 하자.
+$\{S_i \to S\}_{i \in I}$가 $\Sch_{fppf}$의 덮개라고 하자.
+$X_i = S_i \times_S X$로 두면
+$\{(X_i \to S_i) \to (X \to S)\}_{i \in I}$는
+$\Spacesstack'_{fp, flat, proper}$의 덮개이고,
+$\Spacesstack'_{fp, flat, proper}$의 모든 덮개는 이들 가운데
+하나와 동형이다. $S_{ij} = S_i \times_S S_j$ 및
+$X_{ij} = S_{ij} \times_S X$로 두어 $(X_{ij} \to S_{ij}) =
+(X_i \to S_i) \times_{(X \to S)} (X_j \to S_j)$가 되게 하자.
+다음으로 $\mathcal{L}, \mathcal{N}$이 $X/S$ 위의 풍부한 가역층이고,
+$(X \to S, \mathcal{L})$과 $(X \to S, \mathcal{N})$이 대상
+$(X \to S)$ 위에 놓이는 $\Polarizedstack$의 두 대상이라고 하자.
+사상에 대한 하강을 확인하기 위해 다음 사상들이 주어졌다고 하자.
+$(\text{id}, \text{id}, \varphi_i)$은
+$(X_i \to S_i, \mathcal{L}|_{X_i})$에서
+$(X_i \to S_i, \mathcal{N}|_{X_i})$로 가는 사상이다.
+이들의 밑변환은 다음 대상 사이의 사상이며,
+$(X_{ij} \to S_{ij}, \mathcal{L}|_{X_{ij}})$에서
+$(X_{ij} \to S_{ij}, \mathcal{N}|_{X_{ij}})$로 가고,
+서로 일치한다고 하자. 그러면
+$\varphi_i : \mathcal{L}|_{X_i} \to \mathcal{N}|_{X_i}$
+는 $X_i$ 위 가역가군의 동형사상이며, $\varphi_i$와 $\varphi_j$는
+$X_{ij}$ 위에서 같은 동형사상으로 제한된다. 준연접층의 하강
+(『공간의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent})
+에 의해 $X_i$로의 제한이 $\varphi_i$를 복원하는 유일한 동형사상
+$\varphi : \mathcal{L} \to \mathcal{N}$을 얻는다.
+
+\medskip\noindent
+%% P11-E0410: frozen source has "Decent" where "Descent" is intended.
+대상에 대한 하강도 정확히 같은 방식으로 증명한다. 즉,
+$\{(X_i \to S_i) \to (X \to S)\}_{i \in I}$
+가 위와 같은 $\Spacesstack'_{fp, flat, proper}$의 덮개라고 하자.
+$(X_i \to S_i)$ 위에 놓이는 $\Polarizedstack$의 대상
+$(X_i \to S_i, \mathcal{L}_i)$들과 하강 데이터
+$$
+(\text{id}, \text{id}, \varphi_{ij}) :
+(X_{ij} \to S_{ij}, \mathcal{L}_i|_{X_{ij}})
+\to
+(X_{ij} \to S_{ij}, \mathcal{L}_j|_{X_{ij}})
+$$
+가 주어졌고, 이것이 모든 첨자 삼중항에 대해 $(X_{ijk} \to S_{ijk})$ 위의
+명백한 코사이클 조건을 만족한다고 하자. 그러면 준연접층의 하강
+(『공간의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent})
+에 의해 유일한 가역 $\mathcal{O}_X$-가군 $\mathcal{L}$과 하강 데이터
+$\varphi_{ij}$를 복원하는 동형사상 $\mathcal{L}|_{X_i} \to \mathcal{L}_i$를
+얻는다.
+$(X \to S, \mathcal{L})$가 $\Polarizedstack$의 대상임을 보이려면
+$\mathcal{L}$이 풍부함을 증명해야 한다.
+이는 『공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-ample}에서 따른다.
+
+\medskip\noindent
+$\Spacesstack'_{fp, flat, proper}$가 $\Sch_{fppf}$ 위의 준군 스택임을 이미
+보았으므로(보조정리 \ref{lemma-spaces-stack}), 이제 $\Polarizedstack$가
+$\Sch_{fppf}$ 위의 준군 스택이라는 사실이 형식적으로 따른다. 『스택』의
+보조정리 \ref{stacks-lemma-stack-over-stack}을 보라.
+\end{proof}
+
+\noindent
+건전성 점검: 스택 $\Polarizedstack$는 대수공간들 사이에서 같은 역할을 한다.
+
+\begin{lemma}
+\label{lemma-extend-polarized-to-spaces}
+$T$를 $\mathbf{Z}$ 위의 대수공간이라 하자. $\mathcal{S}_T$가 이에 대응하는
+대수 스택을 나타낸다고 하자(『대수 스택』의 절
+\ref{algebraic-section-split},
+\ref{algebraic-section-representable-by-algebraic-spaces}, 그리고
+\ref{algebraic-section-stacks-spaces}).
+다음 범주의 동치가 있다.
+$$
+\left\{
+\begin{matrix}
+(X \to T, \mathcal{L})\text{ where }X \to T\text{ is a morphism}\\
+\text{of algebraic spaces, is proper, flat, and of}\\
+\text{finite presentation and }\mathcal{L}\text{ ample on }X/T
+\end{matrix}
+\right\}
+\longrightarrow
+\Mor_{\textit{Cat}/\Sch_{fppf}}(\mathcal{S}_T, \Polarizedstack)
+$$
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 보조정리 \ref{lemma-extend-spaces-to-spaces}의 증명과 정확히
+같이 논증하고, 준역함자를 구성할 때 가역층을 하강시키기 위해
+%% P11-E0411: frozen source has the verb "descent" where "descend" is intended.
+『공간의 하강』의 명제
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+를 사용하라. 상대적 풍부성은 『공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-descending-property-ample}
+에 의해 하강한다.
+\end{proof}
+
+\begin{remark}
+\label{remark-polarized-base-change}
+$B$를 $\Spec(\mathbf{Z})$ 위의 대수공간이라 하자.
+$B\textit{-Polarized}$를 다음 삼중항들로 이루어진 범주라 하자.
+$(X \to S, \mathcal{L}, h : S \to B)$에서 $(X \to S, \mathcal{L})$은
+$\Polarizedstack$의 대상이고 $h : S \to B$는 사상이다.
+$B\textit{-Polarized}$에서의 사상
+$(X' \to S', \mathcal{L}', h') \to (X \to S, \mathcal{L}, h)$은
+$h \circ g = h'$를 만족하는 $\Polarizedstack$의 사상 $(f, g, \varphi)$이다.
+이 상황에서 그림
+$$
+\xymatrix{
+B\textit{-Polarized} \ar[r] \ar[d] & \Polarizedstack \ar[d] \\
+(\Sch/B)_{fppf} \ar[r] & \Sch_{fppf}
+}
+$$
+은 $2$-섬유곱 정사각형이다. 이 자명한 주의는 절대적인 경우
+$\Polarizedstack$에서 주어진 바탕 대수공간 위의 족을 다루는 경우로
+결과를 옮겨 올 때 때때로 유용하다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-polarized-to-spaces-algebraic}
+함자 (\ref{equation-over-proper-spaces})는 $\Sch_{fppf}$ 위의 준군 스택 사이의
+$1$-사상
+$$
+\Polarizedstack \to \Spacesstack'_{fp, flat, proper}
+$$
+을 정의하며, 이 사상은 『표현 가능성의 판정 조건』의 정의
+\ref{criteria-definition-algebraic}
+의 의미에서 대수적이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-spaces-stack}과 \ref{lemma-polarized-stack}에 의해 이 명제는
+의미가 있다. 이를 증명하기 위해 스킴 $S$와 $S$ 위의
+$\Spacesstack'_{fp, flat, proper}$의 대상 $\xi = (X \to S)$를 택한다.
+다음을 보여야 한다.
+$$
+\mathcal{X} = (\Sch/S)_{fppf} \times_{\xi, \Spacesstack'_{fp, flat, proper}}
+\Polarizedstack
+$$
+이는 $S$ 위의 대수 스택이어야 한다. $\mathcal{X}$의 대상은 쌍
+$(T/S, \mathcal{L})$로 주어짐에 유의하자. 여기서 $T$는 $S$ 위의 스킴이고,
+$\mathcal{L}$은 $X_T/T$ 위에서 풍부한 가역 $\mathcal{O}_{X_T}$-가군이다.
+사상은 명백한 방식으로 정의한다. 특히 범주들의 포함
+$$
+\mathcal{X} \subset \Picardstack_{X/S}
+$$
+이 $(\Sch/S)_{fppf}$ 위에 있으며 사상 집합들에 등식을 유도함을 곧바로
+알 수 있다. 명제 \ref{proposition-pic}에 의해 $\Picardstack_{X/S}$는
+대수 스택이므로, 위 포함이 열린 몰입으로 표현 가능함을 보이면 충분하다.
+이것이 바로 『공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-ample-in-neighbourhood}
+의 내용이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-polarized-diagonal}
+대각사상
+$$
+\Delta : \Polarizedstack \longrightarrow
+\Polarizedstack \times \Polarizedstack
+$$
+은 대수공간으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{lemma-polarized-to-spaces-algebraic}와
+\ref{lemma-spaces-diagonal}의 형식적 귀결이다. 『표현 가능성의 판정 조건』의
+보조정리 \ref{criteria-lemma-diagonals-and-algebraic-morphisms}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-polarized-limits}
+준군 스택 $\Polarizedstack$는 극한을 보존한다(『Artin의 공리』의 정의
+\ref{artin-definition-limit-preserving}).
+\end{lemma}
+
+\begin{proof}
+$I$를 유향집합이라 하고 $(A_i, \varphi_{ii'})$를 $I$ 위의 환의 계라 하자.
+$S = \Spec(A)$ 및 $S_i = \Spec(A_i)$로 둔다. 섬유범주에 대해 다음 등식을
+보여야 한다.
+$$
+\Polarizedstack_S = \colim \Polarizedstack_{S_i}
+$$
+$S$ 위의 유한 표시 스킴의 범주가 $S_i$ 위의 유한 표시 스킴 범주들의
+쌍대극한임을 알고 있다. 『극한』의 보조정리
+\ref{limits-lemma-descend-finite-presentation}를 보라. 더 나아가 유한 표시인
+$X_i \to S_i$가 주어지고 그 극한이 $X \to S$이면, 가역
+$\mathcal{O}_X$-가군 $\mathcal{L}$의 범주는 가역 $\mathcal{O}_{X_i}$-가군
+$\mathcal{L}_i$ 범주들의 쌍대극한이다. 『극한』의 보조정리
+\ref{limits-lemma-descend-modules-finite-presentation}와
+\ref{limits-lemma-descend-invertible-modules}
+를 보라. $X \to S$가 고유이고 평탄하면 충분히 큰 $i$에 대해 사상
+$X_i \to S_i$도 고유이고 평탄하다. 『극한』의 보조정리
+\ref{limits-lemma-eventually-proper}와
+\ref{limits-lemma-descend-flat-finite-presentation}
+를 보라. 끝으로 $\mathcal{L}$이 $X$ 위에서 풍부하면 충분히 큰 $i$에 대해
+$\mathcal{L}_i$가 $X_i$ 위에서 풍부하다. 『극한』의 보조정리
+\ref{limits-lemma-limit-ample}를 보라. 이 모든 것을 합치면 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-polarized-RS-star}
+%% P11-E0612: frozen source points to situation-coherent in the polarized-stack section.
+상황 \ref{situation-coherent}에서 다음 그림이
+$$
+\xymatrix{
+T \ar[r] \ar[d] & T' \ar[d] \\
+S \ar[r] & S'
+}
+$$
+스킴의 범주에서 밂이라고 하자. 여기서 $T \to T'$는 두꺼워짐이고
+$T \to S$는 아핀이다. 『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-pushout-along-thickening}을 보라. 그러면 섬유범주
+사이의 함자
+$$
+\Polarizedstack_{S'}
+\longrightarrow
+\Polarizedstack_S \times_{\Polarizedstack_T} \Polarizedstack_{T'}
+$$
+는 동치이다.
+\end{lemma}
+
+\begin{proof}
+『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout-flat}
+에 의해 다음 동치가 있다.
+$$
+\textit{flat-lfp}_{S'}
+\longrightarrow
+\textit{flat-lfp}_S \times_{\textit{flat-lfp}_T} \textit{flat-lfp}_{T'}
+$$
+여기서 $\textit{flat-lfp}_S$는 $S$ 위에서 평탄하고 국소 유한 표시인 스킴의
+범주를 뜻한다. 왼쪽의 $X'/S'$가 오른쪽의 삼중항
+$(X/S, Y'/T', \varphi)$에 대응한다고 하자. $Y = T \times_{T'} Y'$로 두자.
+이는 $\varphi$를 통해 $T \times_S X$와 동형이다. 그러면 『사상의 심화』의
+보조정리
+\ref{more-morphisms-lemma-scheme-over-pushout-flat-modules}
+에 의해 다음 동치가 있다.
+$$
+\textit{QCoh-flat}_{X'/S'}
+\longrightarrow
+\textit{QCoh-flat}_{X/S}
+\times_{\textit{QCoh-flat}_{Y/T}} \textit{QCoh-flat}_{Y'/T'}
+$$
+여기서 $\textit{QCoh-flat}_{X/S}$는 $S$ 위에서 평탄한 준연접
+$\mathcal{O}_X$-가군의 범주를 뜻한다. $X \to S$, $Y \to T$, $X' \to S'$,
+$Y' \to T'$가 평탄하므로, 이는 특히 가역가군에 적용되어 범주의 동치
+$$
+\textit{Pic}(X')
+\longrightarrow
+\textit{Pic}(X) \times_{\textit{Pic}(Y)} \textit{Pic}(Y')
+$$
+를 준다. 여기서 $\textit{Pic}(X)$는 가역 $\mathcal{O}_X$-가군의 범주를
+뜻한다. 여기에는 한 가지 작은 논점이 있다. $\textit{QCoh-flat}_{X'/S'}$의
+대상 $\mathcal{F}'$을 $X$와 $Y'$로 당긴 것이 가역가군이면,
+$\mathcal{F}'$이 가역 $\mathcal{O}_{X'}$-가군임을 보여야 한다. 인용한
+보조정리에 의해 $\mathcal{F}'$은 유한 표시 $\mathcal{O}_{X'}$-가군이다.
+『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-flat-and-free-at-point-fibre}
+에 의해 $\mathcal{F}'$을 $X' \to S'$의 섬유에 제한한 것이 가역임을 확인하면
+충분하다. 그런데 $X' \to S'$의 섬유들은 $X \to S$의 섬유들과 같으므로
+이 제한들은 가역이다.
+
+\medskip\noindent
+위에서 말한 바에 따라, $S$ 위 대상의 범주에 대해 $X \to S$가 고유라는
+가정과 $\mathcal{L}$이 풍부하다는 가정을 빼면 범주의 동치를 얻는다.
+이제 $X' \to S'$가 고유이면 $X \to S$와 $Y' \to T'$가 고유임이 명백하다
+(『사상』의 보조정리
+\ref{morphisms-lemma-base-change-proper}).
+반대로 $X \to S$와 $Y' \to T'$가 고유이면 『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-thicken-property-morphisms-cartesian}
+에 의해 $X' \to S'$가 고유이다. 마찬가지로 $\mathcal{L}'$이 $X'/S'$ 위에서
+풍부하면 $\mathcal{L}'|_X$는 $X/S$ 위에서 풍부하고
+$\mathcal{L}'|_{Y'}$는 $Y'/T'$ 위에서 풍부하다(『사상』의 보조정리
+\ref{morphisms-lemma-ample-base-change}). 끝으로 $\mathcal{L}'|_X$가 $X/S$
+위에서 풍부하고 $\mathcal{L}'|_{Y'}$가 $Y'/T'$ 위에서 풍부하면,
+『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-thicken-property-relatively-ample}
+에 의해 $\mathcal{L}'$이 $X'/S'$ 위에서 풍부하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-polarized-tangent-space}
+$k$를 체라 하고, $x = (X \to \Spec(k), \mathcal{L})$를 $\Spec(k)$ 위의
+$\mathcal{X} = \Polarizedstack$의 대상이라 하자.
+\begin{enumerate}
+\item $k$가 $\mathbf{Z}$ 위의 유한형이면 벡터공간
+$T\mathcal{F}_{\mathcal{X}, k, x}$와
+$\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x})$
+(『Artin의 공리』의 절 \ref{artin-section-tangent-spaces} 참조)는 유한차원이다.
+\item 일반적으로 벡터공간 $T_x(k)$와 $\text{Inf}_x(k)$
+(『Artin의 공리』의 절 \ref{artin-section-inf} 참조)는 유한차원이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+『Artin의 공리』의 절 \ref{artin-section-tangent-spaces}에 나오는 논의는
+바탕 스킴 $\Spec(\mathbf{Z})$ 위의 유한형 체에만 적용된다. 보조정리
+\ref{lemma-polarized-RS-star}에 의해 우리 스택은 (RS*)를 만족하므로,
+『Artin의 공리』의 보조정리 \ref{artin-lemma-properties-lift-RS-star}를 적용하여
+(2)에 언급된 벡터공간 $T_x(k)$와 $\text{Inf}_x(k)$를 얻는다. 더 나아가
+유한형인 경우 이 공간들은 『Artin의 공리』의 주의
+\ref{artin-remark-compare-deformation-spaces}에 의해 (1)에 언급된 공간들과
+일치한다. 이제 증명을 시작할 수 있다.
+
+\medskip\noindent
+한 가지 증명은 보조정리 \ref{lemma-spaces-tangent-space}의 증명과 같은 논증을
+사용하는 것이다. 그러려면 스킴과 준연접가군의 쌍에 대한 변형 이론을 전개해야
+한다. 또 다른 증명에서는 보조정리 \ref{lemma-spaces-tangent-space}의 결과,
+%% P11-E0412: frozen source has "would be the use the result".
+$\Polarizedstack \to \Spacesstack'_{fp, flat, proper}$의 대수성, 그리고
+가역가군의 변형공간 계산을 사용할 수 있다. 하지만 여기서는 문제를 등급
+$k$-대수에 관한 변형 문제로 옮겨서 결과를 도출하겠다.
+
+\medskip\noindent
+$\mathcal{C}_k$를 잉여체가 $k$인 Artin 국소 $k$-대수 $A$들의 범주라 하자.
+$k$ 위의 $\mathcal{X}$의 대상 $x$로부터 전변형 범주
+$p : \mathcal{F} \to \mathcal{C}_k$를 얻는다. 『Artin의 공리』의 절
+\ref{artin-section-predeformation-categories}를 보라. 따라서
+$\mathcal{F}(A)$는 삼중항 $(X_A, \mathcal{L}_A, \alpha)$들의 범주이다.
+여기서 $(X_A, \mathcal{L}_A)$는 $A$ 위의 $\Polarizedstack$의 대상이고,
+$\alpha$는 동형사상
+$(X_A, \mathcal{L}_A) \times_{\Spec(A)} \Spec(k) \cong (X, \mathcal{L})$이다.
+한편, $q : \mathcal{G} \to \mathcal{C}_k$를 『변형 문제』의 예
+\ref{examples-defos-example-graded-algebras}에서 정의한 준군들로 공섬유화된
+범주라 하자. $d_0 \gg 0$을 택하자(얼마나 커야 하는지는 아래에서 본다).
+$P$를 등급 $k$-대수
+$$
+P = k \oplus \bigoplus\nolimits_{d \geq d_0} H^0(X, \mathcal{L}^{\otimes d})
+$$
+라 하자. 그러면 $y = (k, P)$는 $\mathcal{G}(k)$의 대상이다.
+$\mathcal{G}_y$를 『형식 변형 이론』의 주의
+\ref{formal-defos-remark-localize-cofibered-groupoid}의 전변형 범주라 하자.
+%% P11-E0428: frozen source switches from \mathcal{L}_A to \mathcal{F}_A here
+%% and in the displayed functor, while Q is constructed from \mathcal{L}_A.
+위와 같은 $(X_A, \mathcal{F}_A, \alpha)$가 주어지면 다음과 같이 둔다.
+$$
+Q = A \oplus \bigoplus\nolimits_{d \geq d_0} H^0(X_A, \mathcal{L}_A^{\otimes d})
+$$
+동형사상 $\alpha$는 사상 $\beta : Q \to P$를 유도한다. 사영 스킴의 변형 이론
+(『사상의 심화』의 보조정리 \ref{more-morphisms-lemma-deform-projective})에 의해
+$1$-사상
+$$
+\mathcal{F} \longrightarrow \mathcal{G}_y,\quad
+(X_A, \mathcal{F}_A, \alpha) \longmapsto (Q, \beta : Q \to P)
+$$
+을 $\mathcal{C}_k$ 위에서 준군들로 공섬유화된 범주 사이에 얻는다.
+실제로 이 함자는 동치이고 준역함자는
+$Q \mapsto \underline{\text{Proj}}_A(Q)$로 주어진다. 즉, 『인자』의 보조정리
+\ref{divisors-lemma-relative-proj-flat}에 의해 스킴
+$X_A = \underline{\text{Proj}}_A(Q)$는 $A$ 위에서 평탄하다.
+$\mathcal{L}_A = \mathcal{O}_{X_A}(1)$로 두자. 같은 보조정리에 의해 이것은
+$A$ 위에서 평탄하다. $\beta$로부터 동형사상
+$(X_A, \mathcal{L}_A) \times_{\Spec(A)} \Spec(k) = (X, \mathcal{L})$
+을 얻는다. 그러면 『사상의 심화』의 절
+\ref{more-morphisms-section-morphisms-thickenings}과
+\ref{more-morphisms-section-deform}
+의 기법을 사용하여 $(X, \mathcal{L})$의 대응하는 성질들로부터 쌍
+$(X_A, \mathcal{L}_A)$의 원하는 모든 성질을 도출할 수 있다. 세부사항 일부는
+생략한다.
+
+\medskip\noindent
+결론적으로 $T\mathcal{F} = T\mathcal{G}_y = T_y\mathcal{G}$이고
+$\text{Inf}(\mathcal{F}) = \text{Inf}_y(\mathcal{G})$임을 알 수 있다.
+『변형 문제』의 보조정리 \ref{examples-defos-lemma-graded-algebras-TI}에 의해
+이 벡터공간들은 유한차원이며, 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}[극화된 스킴에 대한 강한 형식적 유효성]
+\label{lemma-polarized-strong-effectiveness}
+\begin{slogan}
+평탄성과 유한 표시를 가정하면 Grothendieck의 대수화 정리는
+비-Noetherian 상황에서도 계속 성립한다.
+\end{slogan}
+$(R_n)$을 핵이 국소 멱영인 전사 전이사상을 갖는 환의 역계라 하자.
+$R = \lim R_n$으로 두고, $S_n = \Spec(R_n)$ 및 $S = \Spec(R)$로 두자.
+다음 가환 그림을 생각하자.
+$$
+\xymatrix{
+X_1 \ar[r]_{i_1} \ar[d] & X_2 \ar[r]_{i_2} \ar[d] & X_3 \ar[r] \ar[d] &
+\ldots \\
+S_1 \ar[r] & S_2 \ar[r] & S_3 \ar[r] & \ldots
+}
+$$
+이는 모든 정사각형이 Cartesian인 스킴들의 그림이다. 각 $\mathcal{L}_n$이
+$X_n$ 위의 가역층이고
+$\varphi_n : i_n^*\mathcal{L}_{n + 1} \to \mathcal{L}_n$이 동형사상인
+$(\mathcal{L}_n, \varphi_n)$이 주어졌다고 하자. 만일
+\begin{enumerate}
+\item $X_n \to S_n$이 고유이고 평탄하며 유한 표시이고,
+\item $\mathcal{L}_1$이 $X_1$ 위에서 풍부하다면,
+\end{enumerate}
+고유이고 평탄하며 유한 표시인 스킴의 사상 $X \to S$, 풍부한 가역
+$\mathcal{O}_X$-가군 $\mathcal{L}$, 그리고 사상 $i_n$ 및 $\varphi_n$과 양립하는
+동형사상 $X_n \cong X \times_S S_n$ 및
+$\mathcal{L}_n \cong \mathcal{L}|_{X_n}$이 존재한다.
+\end{lemma}
+
+\begin{proof}
+$X_1 \to S_1$과 $\mathcal{L}_1$에 대하여 『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-deform-projective}에서와 같이 $d_0$를 택한다.
+임의의 $n \geq 1$에 대해 다음과 같이 둔다.
+$$
+A_n = R_n \oplus
+\bigoplus\nolimits_{d \geq d_0} H^0(X_n, \mathcal{L}_n^{\otimes d})
+$$
+그 보조정리에 의해 각 $A_n$은 유한 표시 등급 $R_n$-대수이고 그 동차 성분
+$(A_n)_d$는 유한 사영 $R_n$-가군이며, 다음 등식들이 성립한다.
+$X_n = \text{Proj}(A_n)$ 및
+$\mathcal{L}_n = \mathcal{O}_{\text{Proj}(A_n)}(1)$. 또한 그 보조정리는 사상
+$$
+A_1 \leftarrow A_2 \leftarrow A_3 \leftarrow \ldots
+$$
+이 $n \leq m$에 대해 동형사상
+$A_n = A_m \otimes_{R_m} R_n$을 유도함을 보장한다. 다음과 같이 둔다.
+$$
+B = \bigoplus\nolimits_{d \geq 0} B_d
+\quad\text{with}\quad
+B_d = \lim_n (A_n)_d
+$$
+『대수학 심화』의 보조정리
+\ref{more-algebra-lemma-lim-finite-projective-gives-finite-projective}
+에 의해 $B_d$가 유한 사영 $R$-가군이고
+$B \otimes_R R_n = A_n$임을 알 수 있다. 따라서 스킴과 가군
+$$
+X = \text{Proj}(B)
+\quad\text{and}\quad
+\mathcal{L} = \mathcal{O}_X(1)
+$$
+에서 그 스킴은 $S$ 위에서 평탄하고 $\mathcal{L}$은 $S$ 위에서 평탄한 준연접
+$\mathcal{O}_X$-가군이다. 『인자』의 보조정리
+\ref{divisors-lemma-relative-proj-flat}를 보라. Proj의 형성은 밑변환과
+가환하므로(『구성』의 보조정리
+\ref{constructions-lemma-base-change-map-proj}), 표준 동형사상
+$$
+X \times_S S_n = X_n
+\quad\text{and}\quad
+\mathcal{L}|_{X_n} \cong \mathcal{L}_n
+$$
+을 얻으며, 이들은 계의 전이사상과 양립한다. 따라서 $X_1 \subset X$를
+닫힌 부분스킴으로 생각할 수 있다. 아래에서 $B$가 $R$ 위에서 유한 표시임을
+보이겠다.
+『인자』의 보조정리 \ref{divisors-lemma-relative-proj-proper}와
+\ref{divisors-lemma-relative-proj-finite-presentation}
+에 의해 이로부터 $X \to S$가 유한 표시이고 고유이며,
+$\mathcal{L} = \mathcal{O}_X(1)$이 유한 표시 $\mathcal{O}_X$-가군임이 따른다.
+$\mathcal{L}$을 밑변환 $X_1 \to S_1$에 제한한 것이 가역이므로,
+『사상의 심화』의 보조정리 \ref{more-morphisms-lemma-finite-free-open}에 의해
+$\mathcal{L}$은 $X$ 안의 $X_1$의 어떤 열린 근방에서 가역이다.
+$X \to S$가 닫힌 사상이고 $\Ker(R \to R_1)$이 Jacobson 근기에 포함되므로
+(『대수학 심화』의 보조정리 \ref{more-algebra-lemma-limit-henselian}), $X$ 안의
+$X_1$의 모든 열린 근방은 $X$와 같다. 따라서 $\mathcal{L}$은 가역이다.
+끝으로 $\mathcal{L}$이 섬유 위에서 풍부한 $S$의 점들의 집합은 $S$에서
+열려 있고(『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-ample-in-neighbourhood}), $S_1$을 포함하므로 $S$와
+같다. 따라서 $X \to S$와 $\mathcal{L}$은 보조정리의 명제에서 요구한 모든
+성질을 가진다.
+
+\medskip\noindent
+위 주장을 증명하자. 표시
+$A_1 = R_1[X_1, \ldots, X_s]/(F_1, \ldots, F_t)$를 택하자. 여기서
+$X_i$는 차수가 $d_i$인 변수이고 $F_j$는 $X_i$에 대한 차수 $e_j$의
+동차다항식이다. 그러면 사상
+$$
+\Psi : R[X_1, \ldots, X_s] \longrightarrow B
+$$
+를 택하여 사상 $R_1[X_1, \ldots, X_s] \to A_1$을 올릴 수 있다. 각 $B_d$가
+$R$ 위의 유한 사영가군이므로 Nakayama 보조정리(『대수학』의 보조정리
+\ref{algebra-lemma-NAK}; 여기에서도 $\Ker(R \to R_1)$이 $R$의 Jacobson 근기에
+포함된다는 사실을 사용한다)로부터 $\Psi$가 전사임을 안다.
+$- \otimes_R R_1$이 오른쪽 완전이므로 $R_1[X_1, \ldots, X_s]$에서
+$F_1, \ldots, F_t$로 가는 $G_1, \ldots, G_t \in \Ker(\Psi)$를 찾을 수 있다.
+모든 $d \geq 0$에 대해 $\Ker(\Psi)_d$는 유한 사영 $R$-가군의 전사
+$R[X_1, \ldots, X_s]_d \to B_d$의 핵이므로 유한 사영 $R$-가군임에
+유의하자. Nakayama 보조정리를 다시 한 번 적용하면 $\Ker(\Psi)$는
+$G_1, \ldots, G_t$로 생성됨을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-polarized-existence}
+바탕 스킴 $\Spec(\mathbf{Z})$ 위의 스택 $\Polarizedstack$를 생각하자.
+그러면 모든 형식적 대상은 유효하다.
+\end{lemma}
+
+\begin{proof}
+보조정리에 나오는 개념의 정의는 『Artin의 공리』의 절
+\ref{artin-section-formal-objects}을 보라. 정의에 의해 이 보조정리는 더 일반적인
+보조정리 \ref{lemma-polarized-strong-effectiveness}에서 곧바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-polarized-defo-thy}
+준군 스택 $\Polarizedstack$는 $\Spec(\mathbf{Z})$ 위에서 versal성의 개방성을
+만족한다. 마찬가지로 밑변환한 뒤에는(주의
+\ref{remark-polarized-base-change}) 임의의 Noetherian 바탕 스킴 $S$ 위에서
+versal성의 개방성이 성립한다.
+\end{lemma}
+
+\begin{proof}
+이는 『Artin의 공리』의 보조정리
+\ref{artin-lemma-SGE-implies-openness-versality}와 보조정리
+\ref{lemma-polarized-diagonal},
+\ref{lemma-polarized-RS-star},
+\ref{lemma-polarized-limits}, 그리고
+\ref{lemma-polarized-strong-effectiveness}
+에서 따른다. 이 사실의 ``통상적인'' 증명은 이 증명 다음의 주의에 나오는
+논의를 보라.
+\end{proof}
+
+\begin{remark}
+\label{remark-polarized-defo-thy}
+보조정리 \ref{lemma-polarized-defo-thy}는 『Artin의 공리』의 보조정리
+\ref{artin-lemma-get-openness-obstruction-theory}에서처럼 장애 이론을 사용하여
+보일 수도 있다(보조정리 \ref{lemma-coherent-defo-thy}의 두 번째 증명에서처럼).
+그러려면 『여접』의 절 \ref{cotangent-section-deformations-ringed-topoi}에서
+전개한 변형 및 장애 이론을 대수공간과 준연접가군의 쌍을 다루는 경우로
+일반화해야 한다. 다른 방법은 $1$-사상
+$\Polarizedstack \to \Spacesstack'_{fp, flat, proper}$
+이 대수적이라는 사실(보조정리 \ref{lemma-polarized-to-spaces-algebraic})과
+그 공역에 대해 versal성의 개방성을 안다는 사실(보조정리
+\ref{lemma-spaces-defo-thy}와 주의 \ref{remark-spaces-defo-thy})을 사용하는 것이다.
+\end{remark}
+
+\begin{theorem}[극화된 스킴의 스택의 대수성]
+\label{theorem-polarized-algebraic}
+스택 $\Polarizedstack$(상황 \ref{situation-polarized})는 대수적이다. 실제로
+임의의 대수공간 $B$에 대해 스택 $B\textit{-Polarized}$(주의
+\ref{remark-polarized-base-change})는 대수적이다.
+\end{theorem}
+
+\begin{proof}
+절대적인 경우는 『Artin의 공리』의 보조정리
+\ref{artin-lemma-diagonal-representable}와 보조정리
+\ref{lemma-polarized-diagonal},
+\ref{lemma-polarized-RS-star},
+\ref{lemma-polarized-limits},
+\ref{lemma-polarized-existence}, 그리고
+\ref{lemma-polarized-defo-thy}
+에서 따른다. $B$ 위의 경우는 이 사실, 주의
+\ref{remark-polarized-base-change}에서 $B\textit{-Polarized}$를 $2$-섬유곱으로
+서술한 것, 그리고 대수 스택에 $2$-섬유곱이 있다는 사실에서 따른다.
+『대수 스택』의 보조정리 \ref{algebraic-lemma-2-fibre-product}를 보라.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{곡선의 스택}
+\label{section-curves}
+
+\noindent
+이 절에서는 곡선의 스택이 대수적임을 증명한다. 곡선의 모듈라이에 관한 더
+자세한 논의는 『곡선의 모듈라이』의 절
+\ref{moduli-curves-section-introduction}을 보라.
+
+\medskip\noindent
+Stacks 프로젝트에서 곡선은 차원 $1$인 대수다양체이다. 하지만 곡선의 족을
+말할 때에는 흔히 섬유가 가약이거나 비축약인 것을 허용한다. 이 절에서 곡선의
+스택은 ``차원이 $\leq 1$인 고유 스킴을 매개화''할 것이다. 다만 올바른 족의
+개념을 얻으려면 족의 전체공간이 대수공간인 것도 허용해야 함을 알게 된다.
+이로부터 다음 정의를 얻는다.
+
+\begin{situation}
+\label{situation-curves}
+범주 $\Curvesstack$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item 대상은 {\it 곡선의 족}이다. 더 정확히 말해, 대상은 사상
+$f : X \to S$이며, 여기서 바탕 $S$는 스킴이고 {\it 전체공간} $X$는
+대수공간이며, $f$는 평탄하고 고유하며 유한 표시이고 상대차원이
+$\leq 1$이다(『공간의 사상』의 정의
+\ref{spaces-morphisms-definition-relative-dimension}).
+\item 대상 사이의 사상 $(X' \to S') \to (X \to S)$은 쌍 $(f, g)$으로
+주어진다. 여기서 $f : X' \to X$는 대수공간의 사상이고 $g : S' \to S$는
+가환 그림
+$$
+\xymatrix{
+X' \ar[d] \ar[r]_f & X \ar[d] \\
+S' \ar[r]^g & S
+}
+$$
+에 들어맞고 동형사상 $X' \to S' \times_S X$를 유도하는 스킴의 사상이다.
+다시 말해 이 그림은 Cartesian이다.
+\end{enumerate}
+망각함자
+$$
+p : \Curvesstack \longrightarrow \Sch_{fppf},\quad
+(X \to S) \longmapsto S
+$$
+를 통해 $\Curvesstack$를 $\Sch_{fppf}$ 위의 범주로 본다(표기법은 절
+\ref{section-conventions} 참조).
+\end{situation}
+
+\noindent
+『체 위의 공간』의 보조정리
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus}
+와, 더 일반적으로, 『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-projective-over-complete}
+에서 다음이 따른다. $S$가 체의 스펙트럼, Artin 국소환의 스펙트럼, 또는
+Noetherian 완비 국소환의 스펙트럼이면 임의의 곡선의 족 $X \to S$의
+전체공간 $X$는 스킴이다. 한편 전체공간이 스킴이 아닌
+$\mathbf{A}^1_k$ 위의 곡선의 족도 있다. 『예』의 절
+\ref{examples-section-family-of-curves}를 보라.
+
+\medskip\noindent
+다음 포함과
+\begin{equation}
+\label{equation-curves-over-proper-spaces}
+\Curvesstack \subset \Spacesstack'_{fp, flat, proper}
+\end{equation}
+$\Spacesstack'_{fp, flat, proper}$의 대상 $X \to S$가 $\Curvesstack$에 속할
+필요충분조건이 $X \to S$의 상대차원이 $\leq 1$이라는 사실은 명백하다.
+이를 사용하여 $\Curvesstack$에 대한 Artin의 공리를 확인할 것이다.
+
+\begin{lemma}
+\label{lemma-curves-fibred-in-groupoids}
+범주 $\Curvesstack$는 $\Sch_{fppf}$ 위의 준군 섬유화 범주이다.
+\end{lemma}
+
+\begin{proof}
+포함 (\ref{equation-curves-over-proper-spaces}), 그 상에 대한 서술, 그리고
+$\Spacesstack'_{fp, flat, proper}$에 대한 대응하는 사실(보조정리
+\ref{lemma-spaces-fibred-in-groupoids})을 사용하면 다음 명제로 환원된다.
+사상
+$$
+\xymatrix{
+X' \ar[r] \ar[d] & X \ar[d] \\
+S' \ar[r] & S
+}
+$$
+이 $\Spacesstack'_{fp, flat, proper}$에 주어졌다고 하자(특히 이는 그림이
+Cartesian임을 함의한다). $X \to S$의 상대차원이 $\leq 1$이면
+$X' \to S'$의 상대차원도 $\leq 1$이다. 이는 『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-curves-stack}
+범주 $\Curvesstack$는 $\Sch_{fppf}$ 위의 준군 스택이다.
+\end{lemma}
+
+\begin{proof}
+포함 (\ref{equation-curves-over-proper-spaces}), 그 상에 대한 서술, 그리고
+$\Spacesstack'_{fp, flat, proper}$에 대한 대응하는 사실(보조정리
+\ref{lemma-spaces-stack})을 사용하면 다음 명제로 환원된다.
+$\Spacesstack'_{fp, flat, proper}$의 대상 $X \to S$와 fppf 덮개
+$\{S_i \to S\}_{i \in I}$가 주어졌을 때 다음은 동치이다.
+\begin{enumerate}
+\item $X \to S$의 상대차원은 $\leq 1$이다.
+\item 각 $i$에 대해 밑변환 $X_i \to S_i$의 상대차원은 $\leq 1$이다.
+\end{enumerate}
+이는 『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change}
+에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-curves-diagonal}
+대각사상
+$$
+\Delta : \Curvesstack \longrightarrow \Curvesstack \times \Curvesstack
+$$
+은 대수공간으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+이는 완전충실한 포함 (\ref{equation-curves-over-proper-spaces})과
+$\Spacesstack'_{fp, flat, proper}$에 대한 대응하는 사실(보조정리
+\ref{lemma-spaces-diagonal})에서 곧바로 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-curves-base-change}
+$B$를 $\Spec(\mathbf{Z})$ 위의 대수공간이라 하자.
+$B\text{-}\Curvesstack$를 다음 쌍들로 이루어진 범주라 하자.
+$(X \to S, h : S \to B)$에서 $X \to S$는 $\Curvesstack$의 대상이고
+$h : S \to B$는 사상이다. $B\text{-}\Curvesstack$에서의 사상
+$(X' \to S', h') \to (X \to S, h)$은 $h \circ g = h'$를 만족하는
+$\Curvesstack$의 사상 $(f, g)$이다. 이 상황에서 그림
+$$
+\xymatrix{
+B\text{-}\Curvesstack \ar[r] \ar[d] & \Curvesstack \ar[d] \\
+(\Sch/B)_{fppf} \ar[r] & \Sch_{fppf}
+}
+$$
+은 $2$-섬유곱 정사각형이다. 이 자명한 주의는 절대적인 경우
+$\Curvesstack$에서 주어진 바탕 대수공간 위의 곡선의 족을 다루는 경우로
+결과를 옮겨 올 때 때때로 유용하다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-curves-limits}
+스택 $\Curvesstack \to \Sch_{fppf}$는 극한을 보존한다(『Artin의 공리』의
+정의 \ref{artin-definition-limit-preserving}).
+\end{lemma}
+
+\begin{proof}
+포함 (\ref{equation-curves-over-proper-spaces}), 그 상에 대한 서술, 그리고
+$\Spacesstack'_{fp, flat, proper}$에 대한 대응하는 사실(보조정리
+\ref{lemma-spaces-limits})을 사용하면 다음 명제로 환원된다. $T = \lim T_i$를
+아핀 스킴의 유향 역계의 극한이라 하자. $i \in I$라 하고,
+$X_i \to T_i$를 $T_i$ 위의 $\Spacesstack'_{fp, flat, proper}$의 대상이라 하자.
+$T \times_{T_i} X_i \to T$의 상대차원이 $\leq 1$이라고 가정하자. 그러면
+어떤 $i' \geq i$에 대해 사상
+%% P11-E0613: frozen source targets T_i here although the descended base is T_{i'}.
+$T_{i'} \times_{T_i} X_i \to T_i$의 상대차원이 $\leq 1$이다. 이는
+『공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-eventually-relative-dimension}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-curves-RS-star}
+다음 그림이
+$$
+\xymatrix{
+T \ar[r] \ar[d] & T' \ar[d] \\
+S \ar[r] & S'
+}
+$$
+스킴의 범주에서 밂이라고 하자. 여기서 $T \to T'$는 두꺼워짐이고
+$T \to S$는 아핀이다. 『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-pushout-along-thickening}을 보라. 그러면 섬유범주
+사이의 함자
+$$
+\Curvesstack_{S'}
+\longrightarrow
+\Curvesstack_S
+\times_{\Curvesstack_T}
+\Curvesstack_{T'}
+$$
+는 동치이다.
+\end{lemma}
+
+\begin{proof}
+포함 (\ref{equation-curves-over-proper-spaces}), 그 상에 대한 서술, 그리고
+$\Spacesstack'_{fp, flat, proper}$에 대한 대응하는 사실(보조정리
+\ref{lemma-spaces-RS-star})을 사용하면 다음 명제로 환원된다. 유한 표시이고
+평탄하며 고유한, 대수공간에서 $S'$로 가는 사상 $X' \to S'$가 주어졌다고 하자.
+$X' \to S'$의 상대차원이 $\leq 1$일 필요충분조건은
+$S \times_{S'} X' \to S$와 $T' \times_{S'} X' \to T'$의 상대차원이
+$\leq 1$인 것이다. 한 방향은 상대차원이 $\leq 1$인 성질이 밑변환 아래
+보존된다는 사실(『공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change})에서 따른다.
+다른 방향은 상대차원이 $\leq 1$인 성질을 섬유에서 확인할 수 있다는 사실과,
+『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-pushout-along-thickening}에 의해 $S \to S'$가
+두꺼워짐이므로 $X' \to S'$의 섬유들(스킴 $S'$의 점 위의 섬유들)이
+$S \times_{S'} X' \to S$의 섬유들과 같다는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-curves-tangent-space}
+$k$를 체라 하고, $x = (X \to \Spec(k))$를 $\Spec(k)$ 위의
+$\mathcal{X} = \Curvesstack$의 대상이라 하자.
+\begin{enumerate}
+\item $k$가 $\mathbf{Z}$ 위의 유한형이면 벡터공간
+$T\mathcal{F}_{\mathcal{X}, k, x}$와
+$\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x})$
+(『Artin의 공리』의 절 \ref{artin-section-tangent-spaces} 참조)는 유한차원이다.
+\item 일반적으로 벡터공간 $T_x(k)$와 $\text{Inf}_x(k)$
+(『Artin의 공리』의 절 \ref{artin-section-inf} 참조)는 유한차원이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이는 완전충실한 포함 (\ref{equation-curves-over-proper-spaces})과
+$\Spacesstack'_{fp, flat, proper}$에 대한 대응하는 사실(보조정리
+\ref{lemma-spaces-tangent-space})에서 곧바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-curves-existence}
+바탕 스킴 $\Spec(\mathbf{Z})$ 위의 스택 $\Curvesstack$를 생각하자.
+그러면 모든 형식적 대상은 유효하다.
+\end{lemma}
+
+\begin{proof}
+보조정리에 나오는 개념의 정의는 『Artin의 공리』의 절
+\ref{artin-section-formal-objects}을 보라. $(A, \mathfrak m, \kappa)$를
+Noetherian 완비 국소환이라 하자. $(X_n \to \Spec(A/\mathfrak m^n))$을
+$A$ 위의 $\Curvesstack$의 형식적 대상이라 하자. 『대수공간의 사상 심화』의
+보조정리
+\ref{spaces-more-morphisms-lemma-formal-algebraic-space-proper-reldim-1}
+에 의해 사영 사상 $X \to \Spec(A)$와 양립하는 동형사상의 계
+%% P11-E0416: frozen source misspells "isomorphisms" as "ismomorphisms".
+$X \times_{\Spec(A)} \Spec(A/\mathfrak m^n) \cong X_n$이 존재한다.
+『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-check-flatness-on-infinitesimal-nbhds}
+에 의해 $X \to \Spec(A)$가 평탄함을 알 수 있다. 『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-dimension-fibres-proper-flat}
+에 의해 $X \to \Spec(A)$의 상대차원이 $\leq 1$임을 알 수 있다.
+이로써 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-curves-defo-thy}
+준군 스택 $\mathcal{X} = \Curvesstack$는 $\Spec(\mathbf{Z})$ 위에서 versal성의
+개방성을 만족한다. 마찬가지로 밑변환한 뒤에는(주의
+\ref{remark-curves-base-change}) 임의의 Noetherian 바탕 스킴 $S$ 위에서
+versal성의 개방성이 성립한다.
+\end{lemma}
+
+\begin{proof}
+이는 완전충실한 포함 (\ref{equation-curves-over-proper-spaces})과
+$\Spacesstack'_{fp, flat, proper}$에 대한 대응하는 사실(보조정리
+\ref{lemma-spaces-defo-thy})에서 곧바로 따른다.
+\end{proof}
+
+\begin{theorem}[곡선의 스택의 대수성]
+\label{theorem-curves-algebraic}
+\begin{reference}
+\cite[Proposition 3.3, page 8]{dJHS} 및
+\cite[Appendix B by Jack Hall, Theorem B.1]{Smyth}.
+\end{reference}
+스택 $\Curvesstack$(상황 \ref{situation-curves})는 대수적이다. 실제로 임의의
+대수공간 $B$에 대해 스택 $B\text{-}\Curvesstack$(주의
+\ref{remark-curves-base-change})는 대수적이다.
+\end{theorem}
+
+\begin{proof}
+절대적인 경우는 『Artin의 공리』의 보조정리
+\ref{artin-lemma-diagonal-representable}와 보조정리
+\ref{lemma-curves-diagonal},
+\ref{lemma-curves-RS-star},
+\ref{lemma-curves-limits},
+\ref{lemma-curves-existence}, 그리고
+\ref{lemma-curves-defo-thy}
+에서 따른다. $B$ 위의 경우는 이 사실, 주의
+\ref{remark-curves-base-change}에서 $B\text{-}\Curvesstack$를 $2$-섬유곱으로
+서술한 것, 그리고 대수 스택에 $2$-섬유곱이 있다는 사실에서 따른다.
+『대수 스택』의 보조정리 \ref{algebraic-lemma-2-fibre-product}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-curves-open-and-closed-in-spaces}
+$1$-사상 (\ref{equation-curves-over-proper-spaces})
+$$
+\Curvesstack \longrightarrow \Spacesstack'_{fp, flat, proper}
+$$
+은 열린닫힌 몰입으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+함자 (\ref{equation-curves-over-proper-spaces})는 범주의 완전충실한 포함이므로
+다음을 보이면 충분하다. $\Spacesstack'_{fp, flat, proper}$의 대상
+$X \to S$가 주어지면 열린닫힌 부분스킴 $U \subset S$가 존재하여, 사상
+$S' \to S$가 $U$를 통해 분해될 필요충분조건은 $X \to S$의 밑변환
+$X' \to S'$의 상대차원이 $\leq 1$인 것이다. 이는 『대수공간의 사상 심화』의
+보조정리
+\ref{spaces-more-morphisms-lemma-dimension-fibres-proper-flat}
+에서 곧바로 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-alternative-approach-curves}
+다음 $2$-섬유곱을 생각하자.
+$$
+\xymatrix{
+\Curvesstack \times_{\Spacesstack'_{fp, flat, proper}}
+\Polarizedstack \ar[r] \ar[d] &
+\Polarizedstack \ar[d] \\
+\Curvesstack \ar[r] &
+\Spacesstack'_{fp, flat, proper}
+}
+$$
+%% P11-E0417: frozen source has past-tense "parametrized" where "parametrizes" is intended.
+이 섬유곱은 극화된 곡선, 즉 상대적으로 풍부한 가역층이 주어진 곡선의 족을
+매개화한다. 왼쪽 세로 화살표
+$$
+\textit{PolarizedCurves} \longrightarrow \Curvesstack
+$$
+는 대수적이고 매끄러우며 전사임을 알 수 있다. 실제로 이 $1$-사상은
+대수적이고(보조정리 \ref{lemma-polarized-to-spaces-algebraic}의 화살표를
+밑변환한 것이므로), 모든 점이 그 상에 속하며, 곡선 위 가역층을 변형하는 데에는
+장애가 없다(보조정리 \ref{lemma-curves-existence}의 증명 참조). 이 사실은
+$\Curvesstack$의 대수성에 대한 또 다른 접근법을 준다. 즉, 보조정리
+\ref{lemma-curves-open-and-closed-in-spaces}에 의해
+$\textit{PolarizedCurves}$는 대수 스택 $\Polarizedstack$의 열린닫힌
+부분스택이고, 대수 스택에서 오는 매끄러운 대수적 사상의 공역인 모든 준군
+스택은 대수 스택이다.
+\end{remark}
+
+
+
+
+
+
+
+
+
+\section{고유 사상 위 복합체의 모듈라이}
+\label{section-moduli-complexes}
+
+\noindent
+이 절의 제목과 내용은 \cite{lieblich-complexes}에서 가져왔다. $S$를 스킴이라
+하고 $f : X \to B$를 고유이고 평탄하며 유한 표시인 대수공간의 사상이라 하자.
+대수 스택
+$$
+\Complexesstack_{X/B}
+$$
+가 존재하여, 음의 자기 Ext가 사라지는 섬유들의 $D^b_{\textit{Coh}}$의
+대상으로 이루어진 ``족''을 매개화함을 증명할 것이다. 더 정확히 말해 족은
+전체공간의 유도범주의 상대 완전 대상으로 주어진다. 이 다소 기술적인 개념은
+『대수공간의 사상 심화』의 절
+\ref{spaces-more-morphisms-section-relatively-perfect}
+에서 연구한다.
+
+\medskip\noindent
+이미 $X$가 체 $k$ 위의 고유 대수공간인 경우에도 매우 흥미로운 대수 스택을
+얻는다. 실제로 포함
+$$
+\Cohstack_{X/k} \longrightarrow \Complexesstack_{X/k}
+$$
+이 있다. 임의의 (임의의 환 달린 토포스 위의) $\mathcal{O}$-가군
+$\mathcal{F}$에 대해 $i < 0$이면
+$\Ext^i_\mathcal{O}(\mathcal{F}, \mathcal{F}) = 0$이기 때문이다. 이것으로 우리
+스택이 공집합이 아님은 확실히 알 수 있지만, $\Complexesstack_{X/k}$를 연구하는
+진정한 동기는 음의 자기 Ext가 사라지면서 둘 이상의 차수에서 코호몰로지층이
+영이 아닌 유도범주 $D^b_{\textit{Coh}}(\mathcal{O}_X)$의 대상이 흔히
+존재한다는 데 있다. 예를 들어 $X$가 $k$ 위의 다른 고유 대수공간 $Y$와
+유도 동치일 수 있다. 즉, $k$-선형 동치
+$$
+F : D^b_{\textit{Coh}}(\mathcal{O}_Y)
+\longrightarrow
+D^b_{\textit{Coh}}(\mathcal{O}_X)
+$$
+가 있다. 이러한 일이 일어나지만 $F$가 $X$와 $Y$ 사이의 동형사상으로
+주어지지 않는 경우도 있다. 예를 들어 Abel 다양체와 그 쌍대가 그렇다.
+이 상황에서 $F$는 대수 스택의 동형사상
+$$
+\Complexesstack_{Y/k}
+\longrightarrow
+\Complexesstack_{X/k}
+$$
+을 유도한다.
+%% P11-E0418: frozen source contains the editorial placeholder
+%% "(insert future reference here)" instead of a reference.
+(여기에 추후 참조를 삽입) 특히 $Y$ 위 연접층의 스택은 $X$ 위 복합체의
+스택으로 사상된다. 관점을 뒤집어 $\Complexesstack_{X/k}$의 기하를 충분히
+잘 이해할 수 있다면, 이를 사용하여 가능한 모든 유도 동치 $Y$를 연구해 볼 수 있다.
+
+\begin{lemma}
+\label{lemma-complexes-open-neg-exts-vanishing}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라 하고,
+$f$가 고유이고 평탄하며 유한 표시라고 가정하자.
+$K, E \in D(\mathcal{O}_X)$라 하자. $K$가 유사결맞이고 $E$가
+$Y$-완전이라고 가정하자(『대수공간의 사상 심화』의 정의
+\ref{spaces-more-morphisms-definition-relatively-perfect}).
+체 $k$와 사상 $y : \Spec(k) \to Y$에 대해 $K_y$, $E_y$가 섬유 $X_y$로의
+당김을 나타내게 하자.
+\begin{enumerate}
+\item 다음 성질로 특징지어지는 열린집합 $W \subset Y$가 존재한다.
+$$
+y \in |W|
+\Leftrightarrow
+\Ext^i_{\mathcal{O}_{X_y}}(K_y, E_y) = 0
+\text{ for }i < 0.
+$$
+\item $W$를 통해 분해되는 임의의 사상 $V \to Y$에 대해 다음이 성립한다.
+$$
+\Ext^i_{\mathcal{O}_{X_V}}(K_V, E_V) = 0
+\quad\text{for}\quad i < 0
+$$
+여기서 $X_V$는 $X$의 밑변환이고, $K_V$와 $E_V$는 $K$와 $E$를 $X_V$로
+유도당긴 것이다.
+\item 함자 $V \mapsto \Hom_{\mathcal{O}_{X_V}}(K_V, E_V)$는
+$(\textit{Spaces}/W)_{fppf}$ 위의 층이며, $W$ 위에서 아핀이고 유한 표시인
+대수공간으로 표현 가능하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+임의의 사상 $V \to Y$에 대해 복합체 $K_V$는 유사결맞이고(『사이트의
+코호몰로지』의 보조정리
+\ref{sites-cohomology-lemma-pseudo-coherent-pullback})
+$E_V$는 $V$-완전이다(『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-base-change-relatively-perfect}).
+또 한 가지 관찰은 다음과 같다. $y : \Spec(k) \to Y$가 주어지고, 체 확대
+$k'/k$와 이에 유도되는 사상 $y' : \Spec(k') \to Y$가 주어지면
+$$
+\Ext^i_{\mathcal{O}_{X_{y'}}}(K_{y'}, E_{y'}) =
+\Ext^i_{\mathcal{O}_{X_y}}(K_y, E_y) \otimes_k k'
+$$
+이다. 이는 『스킴의 유도 범주』의 보조정리
+\ref{perfect-lemma-affine-morphism-and-hom-out-of-perfect}
+에 의한다. 따라서 (1)의 소멸은 실제로 유도된 점 $y \in |Y|$의 성질이다.
+증명에서는 이 두 관찰을 더 언급하지 않고 사용하겠다.
+
+\medskip\noindent
+먼저 $Y$가 아핀 스킴이라고 가정하자. 그러면 『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-compute-ext-rel-perfect}
+를 적용하여 그 보조정리에 서술된 의미에서 $Rf_*R\SheafHom(K, E)$를
+``보편적으로 계산하는'' 유사결맞 대상 $L \in D(\mathcal{O}_Y)$을 찾을 수
+있다. 정의를 풀어 쓰면 점 $y \in Y$에 대해 등식
+$$
+\Ext^i_{\kappa(y)}(L \otimes_{\mathcal{O}_Y}^\mathbf{L} \kappa(y),
+\kappa(y)) = \Ext^i_{\mathcal{O}_{X_y}}(K_y, E_y)
+$$
+을 얻는다. 따라서
+$$
+H^i(L \otimes_{\mathcal{O}_Y}^\mathbf{L} \kappa(y)) = 0
+\text{ for } i > 0 \Leftrightarrow
+\Ext^i_{\mathcal{O}_{X_y}}(K_y, E_y) = 0 \text{ for }i < 0.
+$$
+『스킴의 유도 범주』의 보조정리 \ref{perfect-lemma-jump-loci}에 의해 이 일이
+성립하는 $y \in Y$들의 집합 $W$는 $Y$의 열린집합을 정의한다. $L$의
+``보편성''에 의해 이 열린집합 $W$는 체의 스펙트럼에서 오는 모든 사상에 대해
+(1)의 조건을 만족한다.
+
+\medskip\noindent
+이제 $Y$가 일반적인 대수공간인 경우로 돌아가자. 아핀 스킴 $V_i$들로 이루어진
+에탈 덮개 $\{V_i \to Y\}$를 택한다. 그러면 부분집합 $W \subset |Y|$를
+당긴 것은 $X_{V_i}$, $K_{V_i}$, $E_{V_i}$에 대응하는 부분집합
+$W_i \subset |V_i|$임을 알 수 있다. 앞 단락에 의해 $W_i$는 열려 있으므로
+$W$도 열려 있다. 이로써 일반적으로 (1)이 증명된다. 또한 (2)와 (3)은 전적으로
+범주 $\textit{Spaces}/W$와 제한 $X_W$, $K_W$, $E_W$를 사용하여 서술된다.
+따라서 $W = Y$인 경우로 환원된다.
+
+\medskip\noindent
+$W = Y$라고 가정하자. $Y$ 위의 임의의 대수공간 $V$에 대해
+%% P11-E0614: frozen source has the duplicated construction "we have ... has".
+$Rf_{V, *}R\SheafHom(K_V, E_V)$의 코호몰로지층이 차수 $< 0$에서 사라진다고
+주장한다. 이로부터 (2)가 증명된다. 실제로
+$$
+\Ext^i_{\mathcal{O}_{X_V}}(K_V, E_V) =
+H^i(X_V, R\SheafHom(K_V, E_V)) = 
+H^i(V, Rf_{V, *}R\SheafHom(K_V, E_V))
+$$
+는 『사이트의 코호몰로지』의 보조정리
+\ref{sites-cohomology-lemma-section-RHom-over-U}와
+\ref{sites-cohomology-lemma-Leray-unbounded}
+에 의해 성립하고, 코호몰로지층의 소멸은 『유도 범주』의 보조정리
+\ref{derived-lemma-negative-vanishing}에 의해 $i < 0$일 때 코호몰로지군
+$H^i$가 영임을 함의한다.
+
+\medskip\noindent
+주장을 증명할 때 $V$ 위 에탈 국소적으로 작업해도 된다. 특히 $Y$가 아핀이고
+$W = Y$라고 가정해도 된다. $L \in D(\mathcal{O}_Y)$을 증명의 두 번째 단락에서와
+같이 택하자. $Y$ 위의 대수공간 $V$에 대해 $L_V$가 $L$의 $V$로의 유도당김을
+나타내게 하자. (사용할 중요한 특징은 $L$이 아핀 $V$뿐만 아니라 $Y$ 위의
+모든 대수공간 $V$에 대해 ``작동한다''는 것이다.) $W = Y$이므로
+$i > 0$에 대해 $H^i(L) = 0$이다(섬유에서 줄기로 옮겨 가려면 『대수학 심화』의
+보조정리
+\ref{more-algebra-lemma-lift-pseudo-coherent-from-residue-field}
+를 사용하라). 따라서 $i > 0$에 대해 $H^i(L_V) = 0$이다. $L$을 정의하는
+성질은 다음 등식이다.
+$$
+Rf_{V, *}R\SheafHom(K_V, E_V) = R\SheafHom(L_V, \mathcal{O}_V)
+$$
+$L_V$는 차수 $\leq 0$에 놓이므로
+$R\SheafHom(L_V, \mathcal{O}_V)$는 차수 $\geq 0$에 놓인다고 결론 내릴 수 있다.
+이로써 주장이 증명되고, (2)의 증명이 끝난다.
+
+\medskip\noindent
+$W = Y$라고 가정하되 대수공간 $Y$에는 아무 가정도 하지 말자. (2)가
+성립하므로 『단체적 대수공간』의 보조정리
+\ref{spaces-simplicial-lemma-fppf-neg-ext-zero-hom}에 의해
+$F(V) = \Hom_{\mathcal{O}_{X_V}}(K_V, E_V)$로 주어지는 함자 $F$는
+$(\textit{Spaces}/Y)_{fppf}$ 위의 층이다.\footnote{덮개
+$\{V_i \to V\}_{i \in I}$에 대한 층 성질을 확인하려면 먼저
+$V_n = \coprod_{i_0 \ldots i_n} V_{i_0} \times_V \ldots \times_V V_{i_n}$인
+{\v C}ech fppf 초덮개 $a : V_\bullet \to V$를 생각하고,
+$U_\bullet = V_\bullet \times_{a, V} X_V$로 둔다. 그러면
+$U_\bullet \to X_V$는 『단체적 대수공간』의 보조정리
+\ref{spaces-simplicial-lemma-fppf-neg-ext-zero-hom}를 적용할 수 있는 fppf
+초덮개이다.} 따라서 $F$가 대수공간이고 $F \to Y$가 아핀이며 유한 표시임을
+증명할 때 $Y$ 위 에탈 국소적으로 작업해도 된다. 『부트스트랩』의 보조정리
+\ref{bootstrap-lemma-locally-algebraic-space-finite-type}와 『공간의 사상』의
+보조정리 \ref{spaces-morphisms-lemma-affine-local} 및
+\ref{spaces-morphisms-lemma-finite-presentation-local}을 보라. 따라서 $Y$가
+아핀 스킴일 때 $F$가 $Y$ 위에서 아핀이고 유한 표시인 대수공간임을 보이면
+충분하다. 이 경우 유사결맞 복합체 $L \in D(\mathcal{O}_Y)$로 돌아간다.
+$i > 0$에 대해 $H^i(L) = 0$이므로 $L$을 다음 형태의 복합체로 나타낼 수 있다.
+$$
+\ldots \to \mathcal{O}_Y^{\oplus m_1} \to \mathcal{O}_Y^{\oplus m_0}
+\to 0 \to \ldots
+$$
+마지막 항은 차수 $0$에 놓인다. 『대수학 심화』의 보조정리
+\ref{more-algebra-lemma-pseudo-coherent}를 보라. 증명의 앞부분에 나온 두
+표시식을 합치면
+$$
+F(V) =
+\Ker(
+\Hom_V(\mathcal{O}_V^{\oplus m_0}, \mathcal{O}_V)
+\to 
+\Hom_V(\mathcal{O}_V^{\oplus m_1}, \mathcal{O}_V)
+)
+$$
+을 얻는다. 다시 말해 섬유곱 그림
+$$
+\xymatrix{
+F \ar[d] \ar[r] & Y \ar[d]^0 \\
+\mathbf{A}_Y^{m_0} \ar[r] & \mathbf{A}_Y^{m_1}
+}
+$$
+이 있으며, 이것으로 원하는 바가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-complexes}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라 하고,
+$f$가 고유이고 평탄하며 유한 표시라고 가정하자.
+$E \in D(\mathcal{O}_X)$라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $E$는 $S$-완전이다(『대수공간의 사상 심화』의 정의
+\ref{spaces-more-morphisms-definition-relatively-perfect}).
+\item 모든 점 $s \in S$에 대해 다음이 성립한다.
+$$
+\Ext^i_{\mathcal{O}_{X_s}}(E_s, E_s) = 0
+\quad\text{for}\quad i < 0
+$$
+여기서 $E_s$는 섬유 $X_s$로의 당김이다.
+\end{enumerate}
+그러면
+\begin{enumerate}
+\item[(a)] (1)과 (2)는 임의의 밑변환 $V \to Y$ 아래 보존된다.
+\item[(b)] $Y$ 위의 모든 $V$와 $i < 0$에 대해
+$\Ext^i_{\mathcal{O}_{X_V}}(E_V, E_V) = 0$이다.
+\item[(c)] $V \mapsto \Hom_{\mathcal{O}_{X_V}}(E_V, E_V)$는 $Y$ 위에서
+아핀이고 유한 표시인 대수공간으로 표현 가능하다.
+\end{enumerate}
+여기서 $X_V$는 $X$의 밑변환이고 $E_V$는 $E$의 $X_V$로의 유도당김이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-complexes-open-neg-exts-vanishing}의 직접적인 귀결이다.
+\end{proof}
+
+\begin{situation}
+\label{situation-complexes}
+$S$를 스킴이라 하자. $f : X \to B$를 $S$ 위 대수공간의 사상이라 하고,
+$f$가 고유이고 평탄하며 유한 표시라고 가정하자.
+$\Complexesstack_{X/B}$로 다음 삼중항 $(T, g, E)$들을 대상으로 갖는 범주를
+나타낸다.
+\begin{enumerate}
+\item $T$는 $S$ 위의 스킴이다.
+\item $g : T \to B$는 $S$ 위의 사상이며, 다음과 같이 둔다.
+$X_T = T \times_{g, B} X$
+\item $E$는 보조정리 \ref{lemma-complexes}의 조건 (1)과 (2)를 만족하는
+$D(\mathcal{O}_{X_T})$의 대상이다.
+\end{enumerate}
+사상 $(T, g, E) \to (T', g', E')$은 다음 조건을 만족하는 쌍
+$(h, \varphi)$로 주어진다.
+\begin{enumerate}
+\item $h : T \to T'$는 $B$ 위의 스킴의 사상이다(즉, $g' \circ h = g$이다).
+\item $\varphi : L(h')^*E' \to E$는 $D(\mathcal{O}_{X_T})$의 동형사상이다.
+여기서 $h' : X_T \to X_{T'}$는 $h$의 밑변환이다.
+\end{enumerate}
+\end{situation}
+
+\noindent
+따라서 $\Complexesstack_{X/B}$는 범주이고 대응
+$$
+p : \Complexesstack_{X/B} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(T, g, E) \longmapsto T
+$$
+은 함자이다. $S$ 위의 스킴 $T$에 대해 $p$의 $T$ 위 섬유범주를
+$\Complexesstack_{X/B, T}$로 나타낸다. 이 섬유범주들은 준군이다.
+
+\begin{lemma}
+\label{lemma-complexes-fibred-in-groupoids}
+상황 \ref{situation-complexes}에서 함자
+$p : \Complexesstack_{X/B} \longrightarrow (\Sch/S)_{fppf}$
+는 준군 섬유화이다.
+\end{lemma}
+
+\begin{proof}
+『범주』의 정의 \ref{categories-definition-fibred-groupoids}의 조건 (1)과 (2)를
+확인하여 $p$가 준군 섬유화임을 보인다. $\Complexesstack_{X/B}$의 대상
+$(T', g', E')$과 $S$ 위 스킴의 사상 $h : T \to T'$가 주어졌다고 하자.
+%% P11-E0615: frozen source composes h and g' in the ill-typed order h \circ g'.
+$g = h \circ g'$로 두고, $h' : X_T \to X_{T'}$가 $h$의 밑변환일 때
+$E = L(h')^*E'$로 둘 수 있다. 그러면 $h$ 위에 놓이는
+$\Complexesstack_{X/B}$의 사상 $(T, g, E) \to (T', g', E')$을 얻음이 명백하다.
+이로써 (1)이 증명된다. (2)를 위해 사상
+$$
+(h_1, \varphi_1) : (T_1, g_1, E_1) \to (T, g, E)
+\quad\text{and}\quad
+(h_2, \varphi_2) : (T_2, g_2, E_2) \to (T, g, E)
+$$
+이 $\Complexesstack_{X/B}$에 주어지고 $h_2 \circ h = h_1$인 사상
+$h : T_1 \to T_2$가 주어졌다고 하자. $\varphi$를 합성
+$$
+L(h')^*E_2
+\xrightarrow{L(h')^*\varphi_2^{-1}}
+L(h')^*L(h_2)^*E = L(h_1)^*E
+\xrightarrow{\varphi_1}
+E_1
+$$
+으로 두면 조건 (2)의 참임을 입증하는 사상
+$(h, \varphi) : (T_1, g_1, E_1) \to (T_2, g_2, E_2)$
+을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-complexes-diagonal}
+상황 \ref{situation-complexes}에서 $\mathcal{X} = \Complexesstack_{X/B}$로
+나타내자. 그러면 $\Delta : \mathcal{X} \to \mathcal{X} \times \mathcal{X}$는
+대수공간으로 표현 가능하다.
+\end{lemma}
+
+\begin{proof}
+스킴 $T$ 위의 $\mathcal{X}$의 두 대상 $x = (T, g, E)$와
+$y = (T, g', E')$를 생각하자. $\mathit{Isom}_\mathcal{X}(x, y)$가 $T$ 위의
+대수공간임을 보여야 한다. 『대수 스택』의 보조정리
+\ref{algebraic-lemma-representable-diagonal}를 보라. $h : T' \to T$에 대해 제한
+$x|_{T'}$와 $y|_{T'}$가 섬유범주 $\mathcal{X}_{T'}$에서 동형이면
+$g \circ h = g' \circ h$이다. 따라서 전층의 변환
+$$
+\mathit{Isom}_\mathcal{X}(x, y) \longrightarrow \text{Equalizer}(g, g')
+$$
+이 있다. $B$의 대각사상이 (스킴으로) 표현 가능하므로 이 등화자는 스킴이다.
+따라서 $T$를 이 등화자로 대체하고 $E$와 $E'$을 각 당김으로 대체해도 된다.
+그러므로 $g = g'$라고 가정해도 된다.
+
+\medskip\noindent
+$g = g'$라고 가정하자. $B$를 $T$로, $X$를 $X_T$로 대체하면 다음 문제에
+이른다. 보조정리 \ref{lemma-complexes}의 조건 (1), (2)를 만족하는
+$E, E' \in D(\mathcal{O}_X)$가 주어졌을 때 $\mathit{Isom}(E, E')$가
+대수공간임을 보여야 한다. 여기서 $\mathit{Isom}(E, E')$는 함자
+$$
+(\Sch/B)^{opp} \to \textit{Sets},\quad
+T \mapsto \{\varphi : E_T \to E'_T
+\text{ isomorphism in }D(\mathcal{O}_{X_T})\}
+$$
+이다. 여기서 $E_T$와 $E'_T$는 $E$와 $E'$의 $X_T$로의 유도당김이다.
+이제 $W \subset B$, 각각 $W' \subset B$를 보조정리
+\ref{lemma-complexes-open-neg-exts-vanishing}에 의해 각각 $E, E'$ 및 $E', E$에
+대응하는 $B$의 열린 부분공간이라 하자. $\mathit{Isom}(E, E')$의 정의에 나오는
+동형사상 $E_T \to E'_T$가 존재하면 $T \to B$가 $W$와 $W'$ 모두를 통해
+%% P11-E0616: frozen source opens but does not close the explanatory parenthesis.
+분해됨은 명백하다($E$와 $E'$에 대해 조건 (1)이 성립하고, 분명히
+$E_t \cong E'_t$이므로 $i > 0$일 때 섬유 $X_t$ 위에 영이 아닌 사상
+$E_t[i] \to E_t$ 또는 $E'_t[i] \to E_t$가 없기 때문이다. 따라서 $B$를
+열린집합 $W \cap W'$으로 대체해도 된다. 이 경우 함자
+$H = \SheafHom(E, E')$
+$$
+(\Sch/B)^{opp} \to \textit{Sets},\quad T \mapsto
+\Hom_{\mathcal{O}_{X_T}}(E_T, E'_T)
+$$
+는 보조정리 \ref{lemma-complexes-open-neg-exts-vanishing}에 의해 $B$ 위에서
+아핀이고 유한 표시인 대수공간이다. 다음도 마찬가지이다.
+$H' = \SheafHom(E', E)$,
+$I = \SheafHom(E, E)$, 그리고
+$I' = \SheafHom(E', E')$.
+그러므로 명제 \ref{proposition-isom}의 증명의 논증을 반복하면 어떤 사상
+$c$와 $\sigma$에 대해
+$$
+\mathit{Isom}(E, E') = (H' \times_B H) \times_{c, I \times_B I', \sigma} B
+$$
+임을 알 수 있다. 따라서 $\mathit{Isom}(E, E')$는 대수공간이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-complexes-stack}
+상황 \ref{situation-complexes}에서 함자
+$p : \Complexesstack_{X/B} \longrightarrow (\Sch/S)_{fppf}$
+는 준군 스택이다.
+\end{lemma}
+
+\begin{proof}
+$\Complexesstack_{X/B}$가 준군 스택임을 증명하려면 전층 $\mathit{Isom}$들이
+층이고 하강 데이터가 유효함을 보여야 한다. $\mathit{Isom}$에 관한 명제는
+보조정리 \ref{lemma-complexes-diagonal}에서 따른다. 『대수 스택』의 보조정리
+\ref{algebraic-lemma-representable-diagonal}를 보라. 하강 데이터에 관한 명제를
+증명하자.
+
+\medskip\noindent
+$\{a_i : T_i \to T\}$가 $S$ 위 스킴의 fppf 덮개라고 하자.
+$(\xi_i, \varphi_{ij})$를 $\Complexesstack_{X/B}$에 값을 갖는
+$\{T_i \to T\}$에 대한 하강 데이터라 하자. 각 $i$에 대해
+$\xi_i = (T_i, g_i, E_i)$로 쓸 수 있다. 사영을
+$\text{pr}_0 : T_i \times_T T_j \to T_i$와
+$\text{pr}_1 : T_i \times_T T_j \to T_j$로 나타내자. 조건
+$\xi_i|_{T_i \times_T T_j} \cong \xi_j|_{T_i \times_T T_j}$는 특히
+$g_i \circ \text{pr}_0 = g_j \circ \text{pr}_1$을 함의한다. 따라서
+$g_i = g \circ a_i$를 만족하는 유일한 사상 $g : T \to B$가 존재한다.
+『공간의 하강』의 보조정리
+\ref{spaces-descent-lemma-fpqc-universal-effective-epimorphisms}
+를 보라. $X_T = T \times_{g, B} X$로 나타내고
+$X_i = X_{T_i} = T_i \times_{g_i, B} X = T_i \times_{a_i, T} X_T$
+로 두며, 다음과 같이 둔다.
+$$
+X_{ij} = X_{T_i} \times_{X_T} X_{T_j} = X_i \times_{X_T} X_j
+$$
+여기서 $X_i$와 $X_j$로의 사영을 각각 $\text{pr}_i$와 $\text{pr}_j$로
+나타낸다. $(T_i, g_i, E_i)$를 $\text{pr}_0 : T_i \times_T T_j \to T_i$로
+당긴 것은 $(T_i \times_T T_j, g_i \circ \text{pr}_0, L\text{pr}_i^*E_i)$로
+주어짐에 유의하자. 따라서 $\Complexesstack_{X/B}$에서
+$\{T_i \to T\}$에 대한 하강 데이터는 대상 $(T_i, g \circ a_i, E_i)$들과,
+각 쌍 $i, j$에 대해 다음 $D\mathcal{O}_{X_{ij}})$ 안의 동형사상으로 주어진다.
+%% P11-E0617: frozen source has D\mathcal{O}_{X_{ij}}) with a missing opening parenthesis.
+$$
+\varphi_{ij} :
+L\text{pr}_i^*E_i \longrightarrow L\text{pr}_j^*E_j
+$$
+이 동형사상은 $X$를 $T_i \times_T T_j \times_T T_k$로 당긴 것 위에서
+코사이클 조건을 만족한다. 보조정리 \ref{lemma-complexes}의 (b)가 주는 음의
+Ext의 소멸을 사용하면 『단체적 대수공간』의 보조정리
+\ref{spaces-simplicial-lemma-fppf-glue-neg-ext-zero}를 적용하여 이 복합체들을
+하강시킬 수 있다.\footnote{이를 확인하려면 먼저
+$T_n = \coprod_{i_0 \ldots i_n} T_{i_0} \times_T \ldots \times_T T_{i_n}$인
+{\v C}ech fppf 초덮개 $a : T_\bullet \to T$를 생각하고,
+$U_\bullet = T_\bullet \times_{a, T} X_T$로 둔다. 그러면
+$U_\bullet \to X_T$는 『단체적 대수공간』의 보조정리
+\ref{spaces-simplicial-lemma-fppf-glue-neg-ext-zero}를 적용할 수 있는 fppf
+초덮개이다.} 다시 말해 $X_{T_i}$ 위에서 $E_i$로 제한되고
+$\varphi_{ij}$와 양립하는 $D_\QCoh(\mathcal{O}_{X_T})$의 대상 $E$가 존재한다.
+$T$-완전이라는 것은 유사결맞이고 $f^{-1}\mathcal{O}_T$ 위에서 국소 유한
+Tor-차원을 갖는다는 뜻임을 상기하자. 따라서 『대수공간의 사상 심화』의
+보조정리
+\ref{spaces-more-morphisms-lemma-pseudo-coherent-descends-fpqc}와
+\ref{spaces-more-morphisms-lemma-tor-amplitude-descends-fppf}
+를 적용하면 $E$는 $T$-완전이다. 끝으로 $E$에 대해 보조정리
+\ref{lemma-complexes}의 조건 (2)를 확인해야 한다. 이는 보조정리
+\ref{lemma-complexes-open-neg-exts-vanishing}의 열린집합 $W$에 대한 서술과,
+(2)가 $X_{T_i}/T_i$ 위의 $E_i$에 대해 성립한다는 사실에서 곧바로 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-complexes-base-change}
+상황 \ref{situation-complexes}에서 대응 $(T, g, E) \mapsto (T, g)$는
+$1$-사상
+$$
+\Complexesstack_{X/B} \longrightarrow \mathcal{S}_B
+$$
+을 준군 스택 사이에 정의한다(보조정리 \ref{lemma-complexes-stack},
+『대수 스택』의 절 \ref{algebraic-section-split}, 그리고 『스택의 예』의 절
+\ref{examples-stacks-section-stack-associated-to-sheaf}).
+$B' \to B$를 $S$ 위 대수공간의 사상이라 하자. 이에 대응하는 집합 섬유화
+스택의 $1$-사상을 $\mathcal{S}_{B'} \to \mathcal{S}_B$라 하자.
+$X' = X \times_B B'$로 둔다. 밑변환 $f' : X' \to B'$에 대응하는 준군 스택
+$\Complexesstack_{X'/B'} \to (\Sch/S)_{fppf}$
+를 얻는다. 이 상황에서 그림
+$$
+\vcenter{
+\xymatrix{
+\Complexesstack_{X'/B'} \ar[r] \ar[d] &
+\Complexesstack_{X/B} \ar[d] \\
+\mathcal{S}_{B'} \ar[r] & \mathcal{S}_B
+}
+}
+\quad
+\begin{matrix}
+\text{or in} \\
+\text{another} \\
+\text{notation}
+\end{matrix}
+\quad
+\vcenter{
+\xymatrix{
+\Complexesstack_{X'/B'} \ar[r] \ar[d] &
+\Complexesstack_{X/B} \ar[d] \\
+\Sch/B' \ar[r] & \Sch/B
+}
+}
+$$
+은 $2$-섬유곱 정사각형이다. 이 자명한 주의는 바탕 대수공간을 바꿀 때
+때때로 유용하다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-complexes-limits}
+상황 \ref{situation-complexes}에서 $B \to S$가 국소 유한 표시라고 가정하자.
+그러면 $p : \Complexesstack_{X/B} \to (\Sch/S)_{fppf}$는 극한을 보존한다
+(『Artin의 공리』의 정의 \ref{artin-definition-limit-preserving}).
+\end{lemma}
+
+\begin{proof}
+$B(T)$로 $S$-사상 $T \to B$들을 대상으로 갖는 이산범주를 나타내자.
+$T = \lim T_i$를 $S$ 위 아핀 스킴의 여과극한이라 하자.
+$\Complexesstack_{X/B, T}$의 대상 $(T, h, E)$에 $B(T)$의 대상 $h$를 대응시키면
+다음 섬유범주의 가환 그림을 얻는다.
+$$
+\xymatrix{
+\colim \Complexesstack_{X/B, T_i} \ar[r] \ar[d] &
+\Complexesstack_{X/B, T} \ar[d] \\
+\colim B(T_i) \ar[r] & B(T)
+}
+$$
+위쪽 가로 화살표가 동치임을 보여야 한다.
+%% P11-E0421: frozen source has "we have assume" where "we have assumed" is intended.
+$B$가 $S$ 위에서 국소 유한 표시라고 가정했으므로 『공간의 극한』의 주의
+\ref{spaces-limits-remark-limit-preserving}에 의해 아래쪽 가로 화살표는 동치이다.
+이는 $T = \lim T_i$가 $B$ 위 아핀 스킴의 여과극한이라고 가정해도 됨을 뜻한다.
+대응하는 사상을 $g_i : T_i \to B$와 $g : T \to B$로 나타내자.
+$X_i = T_i \times_{g_i, B} X$ 및 $X_T = T \times_{g, B} X$로 둔다.
+$X_T = \colim X_i$임에 유의하자. 『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-descend-relatively-perfect}
+에 의해 $D(\mathcal{O}_{X_T})$의 $T$-완전 대상의 범주는
+$D(\mathcal{O}_{X_{T_i}})$의 $T_i$-완전 대상 범주들의 쌍대극한이다.
+따라서 다음만 증명하면 된다.
+%% P11-E0618: frozen source has the article error "an T_i-perfect object".
+$D(\mathcal{O}_{X_{T_i}})$의 $T_i$-완전 대상 $E_i$가 주어지고, $E_i$의
+$X_T$로의 유도당김 $E$가 보조정리 \ref{lemma-complexes}의 조건 (2)를
+만족한다면, $i$를 증가시킨 뒤 $E_i$도 보조정리 \ref{lemma-complexes}의
+조건 (2)를 만족한다. 보조정리
+\ref{lemma-complexes-open-neg-exts-vanishing}에서 $E_i$와 $E_i$에 대해 구성한
+열린집합을 $W \subset |T_i|$라 하자. $E$에 대한 가정에 의해
+%% P11-E0423: frozen source says T -> T_i factors through T; the open W is intended.
+$T \to T_i$가 $T$를 통해 분해됨을 안다. 따라서 어떤 $i' \geq i$에 대해
+$T_{i'} \to T_i$가 $W$를 통해 분해된다. 『극한』의 보조정리
+%% P11-E0619: frozen source omits terminal punctuation after this reference.
+\ref{limits-lemma-limit-contained-in-constructible}를 보라. $W$의 구성에 의해
+$i'$가 원하는 성질을 가진다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-complexes-RS-star}
+상황 \ref{situation-complexes}에서 다음 그림이
+$$
+\xymatrix{
+Z \ar[r] \ar[d] & Z' \ar[d] \\
+Y \ar[r] & Y'
+}
+$$
+$S$ 위 스킴의 범주에서 밂이라고 하자. 여기서 $Z \to Z'$는 유한차 두꺼워짐이고
+$Z \to Y$는 아핀이다. 『사상의 심화』의 보조정리
+\ref{more-morphisms-lemma-pushout-along-thickening}을 보라. 그러면 섬유범주
+사이의 함자
+$$
+\Complexesstack_{X/B, Y'}
+\longrightarrow
+\Complexesstack_{X/B, Y}
+\times_{\Complexesstack_{X/B, Z}}
+\Complexesstack_{X/B, Z'}
+$$
+는 동치이다.
+\end{lemma}
+
+\begin{proof}
+대응하는 사상
+$$
+B(Y') \longrightarrow B(Y) \times_{B(Z)} B(Z')
+$$
+은 전단사임에 유의하자. 『공간의 밂』의 보조정리
+\ref{spaces-pushouts-lemma-pushout-along-thickening-schemes}를 보라. 따라서 가환 그림
+$$
+\xymatrix{
+\Complexesstack_{X/B, Y'} \ar[r] \ar[d] &
+\Complexesstack_{X/B, Y}
+\times_{\Complexesstack_{X/B, Z}}
+\Complexesstack_{X/B, Z'}
+\ar[d] \\
+B(Y') \ar[r] & B(Y) \times_{B(Z)} B(Z')
+}
+$$
+을 사용하면 다음과 같이 가정해도 됨을 알 수 있다.
+%% P11-E0620: frozen source says Y' is over undefined B'; the context has B.
+$Y'$는 $B'$ 위의 스킴이다. 주의 \ref{remark-complexes-base-change}에 의해
+$B$를 $Y'$로, $X$를 $X \times_B Y'$로 대체해도 된다. 따라서
+$B = Y'$라고 가정해도 된다.
+
+\medskip\noindent
+$B = Y'$라고 가정하자. 먼저 우리 함자의 완전충실성을 증명한다. 이를 위해
+$\xi_1, \xi_2$를 $Y'$ 위의 $\Complexesstack_{X/B}$의 두 대상이라 하자.
+다음을 보여야 한다.
+$$
+\mathit{Isom}(\xi_1, \xi_2)(Y') \longrightarrow
+\mathit{Isom}(\xi_1, \xi_2)(Y)
+\times_{\mathit{Isom}(\xi_1, \xi_2)(Z)}
+\mathit{Isom}(\xi_1, \xi_2)(Z')
+$$
+이는 전단사이다. 실제로 $\mathit{Isom}(\xi_1, \xi_2)$가 $B = Y'$ 위의
+대수공간임을 이미 알고 있다. 따라서 이 전단사성은 『Artin의 공리』의 보조정리
+\ref{artin-lemma-pushout}(또는 앞서 말한 『공간의 밂』의 보조정리
+\ref{spaces-pushouts-lemma-pushout-along-thickening-schemes}).
+에서 따른다.
+
+\medskip\noindent
+본질적 전사성. 삼중항 $(E_Y, E_{Z'}, \alpha)$을 택하자. 여기서
+$E_Y \in D(\mathcal{O}_Y)$와 $E_{Z'} \in D(\mathcal{O}_{X_{Z'}})$는 다음과 같은
+대상들이다. $(Y, Y \to B, E_Y)$는 $Y$ 위의 $\Complexesstack_{X/B}$의 대상이고,
+$(Z', Z' \to B, E_{Z'})$는 $Z'$ 위의 $\Complexesstack_{X/B}$의 대상이며,
+%% P11-E0621: frozen source places alpha in D(O_{Z'}), although both pullbacks live on X_Z.
+$\alpha : L(X_Z \to X_Y)^*E_Y \to L(X_Z \to X_{Z'})^*E_{Z'}$는
+$D(\mathcal{O}_{Z'})$ 안의 동형사상이다. 다시 말해
+$$
+((Y, Y \to B, E_Y), (Z', Z' \to B, E_{Z'}), \alpha)
+$$
+은 우리 보조정리의 화살표의 공역에 속하는 대상이다. 그림
+$$
+\xymatrix{
+X_Z \ar[r] \ar[d] & X_{Z'} \ar[d] \\
+X_Y \ar[r] & X_{Y'}
+}
+$$
+은 $X_Z \to X_Y$가 아핀이고 $X_Z \to X_{Z'}$가 두꺼워짐인 밂이다
+(『공간의 밂』의 보조정리
+\ref{spaces-pushouts-lemma-equivalence-categories-spaces-pushout-flat}).
+따라서 『공간의 밂』의 보조정리
+\ref{spaces-pushouts-lemma-pushout-along-thickening-derived}
+에 의해 대상 $E_{Y'} \in D(\mathcal{O}_{X_{Y'}})$와 동형사상
+$L(X_Y \to X_{Y'})^*E_{Y'} \to E_Y$ 및
+%% P11-E0424: frozen source targets undefined E_Z; the given datum is E_{Z'}.
+$L(X_{Z'} \to X_{Y'})^*E_{Y'} \to E_Z$
+를 얻으며, 이들은 $\alpha$와 양립한다. $E_{Y'}$가 $Y'$-완전임을 보이면
+증명이 끝남은 명백하다. 보조정리 \ref{lemma-complexes}의 성질 (2)는 점 위의
+성질이고 $Y$와 $Y'$는 같은 점들을 갖기 때문이다. 이는 『대수공간의 사상
+심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-thickening-relatively-perfect}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-complexes-tangent-space}
+상황 \ref{situation-complexes}에서 $S$가 국소 Noetherian 스킴이고 $B \to S$가
+국소 유한 표시라고 가정하자. $k$를 $S$ 위의 유한형 체라 하고
+$x_0 = (\Spec(k), g_0, E_0)$
+$k$ 위의 $\mathcal{X} = \Complexesstack_{X/B}$의 대상이라 하자. 그러면 공간
+$T\mathcal{F}_{\mathcal{X}, k, x_0}$와
+$\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x_0})$
+(『Artin의 공리』의 절 \ref{artin-section-tangent-spaces})는 유한차원이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{lemma-complexes-RS-star}에 의해 우리 준군 스택 $\mathcal{X}$는
+『Artin의 공리』의 절 \ref{artin-section-RS-star}에서 정의한 성질 (RS*)를
+만족함에 유의하자. 특히 $\mathcal{X}$는 (RS)를 만족한다. 따라서 이에 딸린
+모든 전변형 범주는 변형 범주이고(『Artin의 공리』의 보조정리
+\ref{artin-lemma-deformation-category}), 명제는 의미가 있다.
+
+\medskip\noindent
+이 단락에서는 $B = \Spec(k)$인 경우로 환원할 수 있음을 보인다.
+$X_0 = \Spec(k) \times_{g_0, B} X$로 두고
+$\mathcal{X}_0 = \Complexesstack_{X_0/k}$로 나타내자. 주의
+\ref{remark-complexes-base-change}에서 $\mathcal{X}_0$는 $(\Sch/S)_{fppf}$ 위의
+준군 섬유화 범주로서 $B$ 위에서 $\mathcal{X}$와 $\Spec(k)$의 $2$-섬유곱임을
+보았다. 따라서 『Artin의 공리』의 보조정리
+\ref{artin-lemma-fibre-product-tangent-spaces}에 의해 $B$, $\Spec(k)$,
+$\mathcal{X}_0$의 접공간과 무한소 자기동형 공간이 유한차원임을 증명하는 것으로
+환원된다. 『Artin의 공리』의 보조정리 \ref{artin-lemma-finite-dimension}에 의해
+$B$와 $\Spec(k)$의 접공간은 유한차원이고, 물론 이들의 $\text{Inf}$는 영이다.
+따라서 $\mathcal{X}_0$만 다루면 충분하다.
+
+\medskip\noindent
+$k[\epsilon]$을 $k$ 위의 쌍대수라 하자. $\Spec(k[\epsilon]) \to B$를
+$g_0 : \Spec(k) \to B$와 포함 $k \to k[\epsilon]$에서 오는 사상
+$\Spec(k[\epsilon]) \to \Spec(k)$의 합성이라 하자.
+$X_0 = \Spec(k) \times_B X$ 및
+$X_\epsilon = \Spec(k[\epsilon]) \times_B X$로 둔다. $X_\epsilon$은 1차
+두꺼워짐 $\Spec(k) \to \Spec(k[\epsilon])$ 위에서 평탄한 $X_0$의 1차
+두꺼워짐임에 유의하자. $X_0$와 $X_\epsilon$은 표준적으로 동치인 작은 에탈
+토포스를 낳는다. 『대수공간의 사상 심화』의 절
+\ref{spaces-more-morphisms-section-thickenings}
+를 보라. 『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-thickening-relatively-perfect}
+에 의해 $T\mathcal{F}_{\mathcal{X}_0, k, x_0}$는 『변형 이론』의 보조정리
+\ref{defos-lemma-first-order-defos-complex}의 의미에서 $E_0$를
+$X_\epsilon$으로 올린 것의 동형류 집합임을 알 수 있다. 따라서
+$$
+T\mathcal{F}_{\mathcal{X}_0, k, x_0} =
+\Ext^1_{\mathcal{O}_{X_0}}(E_0, E_0)
+$$
+이다. 여기서 $k[\epsilon]$-가군의 동일시 $\epsilon k[\epsilon] \cong k$를
+사용했다. 『변형 이론』의 보조정리
+\ref{defos-lemma-first-order-defos-complex}를 다시 사용하면 전사
+$$
+%% P11-E0622: frozen source uses \mathcal{X} rather than the reduced \mathcal{X}_0 here.
+\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x_0})
+\leftarrow
+\Ext^0_{\mathcal{O}_{X_0}}(E_0, E_0)
+$$
+가 $k$-벡터공간 사이에 있음을 알 수 있다. $E_0$는 유사결맞이므로
+『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-identify-pseudo-coherent-noetherian}
+에 의해 $D^-_{\textit{Coh}}(\mathcal{O}_{X_0})$에 속한다. $E_0$는 국소적으로
+유한 Tor-차원을 갖고 $X_0$는 준콤팩트이므로
+$E_0 \in D^b_{\textit{Coh}}(\mathcal{O}_{X_0})$임을 알 수 있다. 따라서
+『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-ext-finite}
+에 의해 위의 $\Ext$들은 유한차원 $k$-벡터공간이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-complexes-strong-effectiveness}
+상황 \ref{situation-complexes}에서 $B = S$가 국소 Noetherian이라고 가정하자.
+그러면 『Artin의 공리』의 주의 \ref{artin-remark-strong-effectiveness}의 의미에서
+$p : \Complexesstack_{X/S} \to (\Sch/S)_{fppf}$에 대해 강한 형식적 유효성이
+성립한다.
+\end{lemma}
+
+\begin{proof}
+$(R_n)$을 핵이 국소 멱영인 전사 전이사상을 갖는 $S$-대수의 역계라 하자.
+$R = \lim R_n$으로 둔다. $(\xi_n)$을 $(\Spec(R_n))$ 위에 놓이는
+$\Complexesstack_{X/B}$의 대상의 계라 하자. $(\xi_n)$이 유효함, 즉
+$\Spec(R)$ 위에 놓이는 $\Complexesstack_{X/B}$의 대상 $\xi$가 존재함을
+보여야 한다.
+
+\medskip\noindent
+$X_R = \Spec(R) \times_S X$ 및 $X_n = \Spec(R_n) \times_S X$로 쓰자. 물론
+$X_n$은 $R \to R_n$에 의한 $X_R$의 밑변환이다. $S = B$이므로 $\xi_n$은
+보조정리 \ref{lemma-complexes}의 조건 (2)를 만족하는 $R_n$-완전 대상
+$E_n \in D(\mathcal{O}_{X_n})$에 단순히 대응한다. 특히 $E_n$은 유사결맞이다.
+동형사상 $\xi_{n + 1}|_{\Spec(R_n)} \cong \xi_n$은 동형사상
+$L(X_n \to X_{n + 1})^*E_{n + 1} \to E_n$에 대응한다. 따라서
+『대수공간 위의 평탄성』의 정리 \ref{spaces-flat-theorem-existence-derived}에
+의해 $D(\mathcal{O}_{X_R})$의 유사결맞 대상 $E$를 얻으며, 모든 $n$에 대해
+$E_n$은 $E$의 유도당김이고 이들은 전이 동형사상과 양립한다.
+
+\medskip\noindent
+$(R, \Ker(R \to R_1))$이 Hensel 쌍임에 유의하자. 『대수학 심화』의 보조정리
+\ref{more-algebra-lemma-limit-henselian}를 보라. 특히 $\Ker(R \to R_1)$은
+$R$의 Jacobson 근기에 포함된다. 이제 『대수공간의 사상 심화』의 보조정리
+\ref{spaces-more-morphisms-lemma-henselian-relatively-perfect}
+를 적용하면 $E$가 $R$-완전임을 알 수 있다.
+
+\medskip\noindent
+끝으로 보조정리 \ref{lemma-complexes}의 조건 (2)를 확인해야 한다. 보조정리
+\ref{lemma-complexes-open-neg-exts-vanishing}에 의해 $E_t$의 음의 자기 Ext가
+사라지는 $\Spec(R)$의 점 $t$들의 집합은 열린집합이다. 이 조건은
+$V(\Ker(R \to R_1))$에서 성립하고 $\Ker(R \to R_1)$은 $R$의 Jacobson
+근기에 포함되므로, 모든 점에서 성립한다고 결론 내릴 수 있다.
+\end{proof}
+
+\begin{theorem}[고유 사상 위 복합체 모듈라이의 대수성]
+\label{theorem-complexes-algebraic}
+\begin{reference}
+\cite{lieblich-complexes}
+\end{reference}
+$S$를 스킴이라 하자.
+%% P11-E0425: frozen source omits the article in "be morphism".
+$f : X \to B$를 $S$ 위 대수공간의 사상이라 하고, $f$가 고유이고 평탄하며
+유한 표시라고 가정하자. 그러면 $\Complexesstack_{X/B}$는 $S$ 위의 대수
+스택이다.
+\end{theorem}
+
+\begin{proof}
+$\mathcal{X} = \Complexesstack_{X/B}$로 두자. $\mathcal{X}$가
+$(\Sch/S)_{fppf}$ 위의 준군 스택이고 그 대각사상이 대수공간으로 표현
+가능함을 보았다(보조정리 \ref{lemma-complexes-stack}과
+\ref{lemma-complexes-diagonal}). 따라서 스킴 $W$와 전사 매끄러운 사상
+$W \to \mathcal{X}$를 찾으면 충분하다.
+
+\medskip\noindent
+$B'$을 스킴이라 하고 $B' \to B$를 전사 에탈 사상이라 하자.
+$X' = B' \times_B X$로 두고 사영을 $f' : X' \to B'$로 나타내자. 그러면
+$\mathcal{X}' = \Complexesstack_{X'/B'}$는 $B$에 딸린 집합 섬유화 범주 위에서
+$\mathcal{X}$와 $B'$에 딸린 집합 섬유화 범주의 $2$-섬유곱과 같다(주의
+\ref{remark-complexes-base-change}). 『대수 스택』의 절
+\ref{algebraic-section-representable-properties}의 내용에 의해 사상
+$\mathcal{X}' \to \mathcal{X}$는 전사이고 에탈이다. 따라서
+$\mathcal{X}'$에 대해 결과를 증명하면 충분하다. 다시 말해 $B$가 스킴이라고
+가정해도 된다.
+
+\medskip\noindent
+$B$가 스킴이라고 가정하자. 이 경우 $S$를 $B$로 대체해도 된다.
+『대수 스택』의 절 \ref{algebraic-section-change-base-scheme}을 보라.
+따라서 $S = B$라고 가정해도 된다.
+
+\medskip\noindent
+$S = B$라고 가정하자. 아핀 열린 덮개 $S = \bigcup U_i$를 택한다.
+$\mathcal{X}_i$로 $\mathcal{X}$의 $(\Sch/U_i)_{fppf}$로의 제한을 나타내자.
+$U_i$ 위의 스킴 $W_i$와 전사 매끄러운 사상 $W_i \to \mathcal{X}_i$를 찾을 수
+있다면, $W = \coprod W_i$로 두어 전사 매끄러운 사상 $W \to \mathcal{X}$를
+얻는다. 따라서 $S = B$가 아핀이라고 가정해도 된다.
+
+\medskip\noindent
+$S = B$가 아핀이라고 가정하고 $S = \Spec(\Lambda)$라 쓰자.
+$\Lambda = \colim \Lambda_i$를 여과 쌍대극한으로 쓰되 각 $\Lambda_i$가
+$\mathbf{Z}$ 위의 유한형이 되게 하자. 어떤 $i$에 대해 고유이고 평탄하며
+유한 표시이고 $\Lambda$로의 밑변환이 $X$인 대수공간의 사상
+$X_i \to \Spec(\Lambda_i)$를 찾을 수 있다. 『공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-finite-presentation},
+\ref{spaces-limits-lemma-descend-flat}, 그리고
+\ref{spaces-limits-lemma-eventually-proper}
+를 보라. $\Complexesstack_{X_i/\Spec(\Lambda_i)}$가 대수 스택임을 보이면,
+밑변환에 의해(주의 \ref{remark-complexes-base-change}와 『대수 스택』의 절
+\ref{algebraic-section-change-base-scheme}) $\mathcal{X}$도 대수 스택이다.
+따라서 $\Lambda$가 유한형 $\mathbf{Z}$-대수라고 가정해도 된다.
+
+\medskip\noindent
+$S = B = \Spec(\Lambda)$가 $\mathbf{Z}$ 위 유한형인 아핀이라고 가정하자.
+이 경우 『Artin의 공리』의 보조정리 \ref{artin-lemma-diagonal-representable}의
+조건 (1), (2), (3), (4), (5)를 확인하여 $\mathcal{X}$가 대수 스택이라고
+결론 내리겠다. $\Lambda$는 G-환이다. 『대수학 심화』의 명제
+\ref{more-algebra-proposition-ubiquity-G-ring}을 보라. 따라서 $S$의 모든
+국소환은 G-환이고, (5)가 성립한다. (2)를 확인하려면 『Artin의 공리』의 절
+\ref{artin-section-axioms}의 공리 [-1], [0], [1], [2], [3]을 확인해야 한다.
+[-1]의 확인은 생략한다. 공리 [0], [1], [2], [3]은 각각 보조정리
+\ref{lemma-complexes-stack},
+\ref{lemma-complexes-limits},
+\ref{lemma-complexes-RS-star},
+\ref{lemma-complexes-tangent-space}
+에 해당한다. 조건 (3)은 보조정리
+\ref{lemma-complexes-strong-effectiveness}에서 따르고, 조건 (1)은 보조정리
+\ref{lemma-complexes-diagonal}이다.
+
+\medskip\noindent
+이제 versal성의 개방성인 조건 (4)만 보이면 된다. 이를 위해 『Artin의 공리』의
+보조정리 \ref{artin-lemma-SGE-implies-openness-versality}를 사용한다. 이미
+$\mathcal{X}$의 대각사상이 대수공간으로 표현 가능하고, 이 스택이 (RS*)를
+만족하며 극한을 보존함을 보았다(위에서 사용한 보조정리들을 보라). 따라서
+$\mathcal{X}$가 『Artin의 공리』의 보조정리
+\ref{artin-lemma-SGE-implies-openness-versality}에 서술된 강한 형식적 유효성을
+만족함만 확인하면 된다. 이는 보조정리
+\ref{lemma-complexes-strong-effectiveness}에서 따르며, 이로써 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

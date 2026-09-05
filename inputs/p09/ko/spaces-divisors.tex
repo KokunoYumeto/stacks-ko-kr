@@ -1,0 +1,4098 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{대수공간 위의 제수}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장에서는 대수공간 위의 제수와 관련 주제들을 연구한다.
+대수공간에 대한 기본 참고문헌은 \cite{Kn}이다.
+
+
+
+
+
+
+
+
+\section{연관점과 약연관점}
+\label{section-associated}
+
+\noindent
+스킴의 경우에는 서로 경쟁하는 두 가지 연관점 개념을 도입했다.
+즉 통상적인 연관점(Divisors, Section
+\ref{divisors-section-associated})과 약연관점(Divisors, Section
+\ref{divisors-section-weakly-associated})이다.
+일반적인 대수공간에서는 연관점이라는 개념이 사실상 쓸모가 없으므로
+아예 도입하지 않는다. 대수공간이 국소 Noether이면 Noether 스킴에서는
+두 개념이 같기 때문에(Divisors, Lemma
+\ref{divisors-lemma-ass-weakly-ass}), ``약연관점'' 대신 ``연관점''이라는
+표현을 사용하기도 한다. 정의에 앞서 보조정리가 하나 필요하다.
+
+\begin{lemma}
+\label{lemma-associated}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하고, $x \in |X|$라 하자.
+다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item 어떤 \'etale 사상 $f : U \to X$에 대해 $U$가 스킴이고
+$u \in U$가 $x$로 가며, 점 $u$가 $f^*\mathcal{F}$에 약하게 연관된다.
+\item 모든 \'etale 사상 $f : U \to X$에 대해 $U$가 스킴이고
+$u \in U$가 $x$로 가며, 점 $u$가 $f^*\mathcal{F}$에 약하게 연관된다.
+\item $\mathcal{O}_{X, \overline{x}}$의 극대 아이디얼은
+줄기 $\mathcal{F}_{\overline{x}}$의 약연관 소아이디얼이다.
+\end{enumerate}
+$X$가 국소 Noether이면 위 조건들은 다음 조건들과도 동치이다.
+\begin{enumerate}
+\item[(4)] 어떤 \'etale 사상 $f : U \to X$에 대해 $U$가 스킴이고
+$u \in U$가 $x$로 가며, 점 $u$가 $f^*\mathcal{F}$에 연관된다.
+\item[(5)] 모든 \'etale 사상 $f : U \to X$에 대해 $U$가 스킴이고
+$u \in U$가 $x$로 가며, 점 $u$가 $f^*\mathcal{F}$에 연관된다.
+\item[(6)] $\mathcal{O}_{X, \overline{x}}$의 극대 아이디얼은
+줄기 $\mathcal{F}_{\overline{x}}$의 연관 소아이디얼이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+스킴 $U$, 점 $u$, 그리고 \'etale 사상 $f : U \to X$를 택하되,
+이 사상이 $u$를 $x$로 보내게 하자. $\overline{x}$를 $U$의,
+$u$ 위 기하점으로 올리자. 다음 등식을 상기하자.
+$\mathcal{O}_{X, \overline{x}} = \mathcal{O}_{U, u}^{sh}$.
+여기서 강 Hensel화는 우리가 택한 $\overline{x}$의 올림에 관하여 취한다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-describe-etale-local-ring}을 보라.
+마지막으로 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-stalk-quasi-coherent}에 의해
+$$
+\mathcal{F}_{\overline{x}} =
+(f^*\mathcal{F})_u \otimes_{\mathcal{O}_{U, u}}
+\mathcal{O}_{X, \overline{x}} =
+(f^*\mathcal{F})_u \otimes_{\mathcal{O}_{U, u}}
+\mathcal{O}_{U, u}^{sh}
+$$
+이다. 따라서 (1), (2), (3)의 동치는 More on Flatness, Lemma
+\ref{flat-lemma-weakly-associated-henselization}에서 따른다.
+$X$가 국소 Noether이면 위와 같은 모든 $U$도 국소 Noether이므로,
+Divisors, Lemma \ref{divisors-lemma-ass-weakly-ass}에 의해
+(1), (2)는 각각 (4), (5)와 동치이다. 한편 국소 Noether인 경우
+국소환 $\mathcal{O}_{X, \overline{x}}$도 Noether이다
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-local-ring-Noetherian}).
+따라서 같은 보조정리(또는 Algebra, Lemma
+\ref{algebra-lemma-ass-weakly-ass})에 의해 (3)과 (6)이 동치이다.
+% P09-ERR-0147: frozen source's missing finite verb is normalized in Korean.
+\end{proof}
+
+\begin{definition}
+\label{definition-weakly-associated}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 $X$ 위의 준연접층이라 하고, $x \in |X|$라 하자.
+\begin{enumerate}
+\item Lemma \ref{lemma-associated}의 동치 조건 (1), (2), (3)이
+성립하면 $x$가 $\mathcal{F}$에 {\it 약하게 연관된다}고 한다.
+\item $\text{WeakAss}(\mathcal{F})$로 $\mathcal{F}$의
+약연관점들의 집합을 나타낸다.
+% P09-ERR-0148: frozen source's missing “by” is normalized in Korean.
+\item {\it $X$의 약연관점}은 $\mathcal{O}_X$의 약연관점이다.
+\end{enumerate}
+$X$가 국소 Noether이면, $x$가 $\mathcal{F}$에 약하게 연관될 필요충분조건으로
+{\it $x$가 $\mathcal{F}$에 연관된다}고 말하고
+$\text{Ass}(\mathcal{F}) = \text{WeakAss}(\mathcal{F})$로 둔다.
+마지막으로 여전히 $X$가 국소 Noether이라고 가정할 때,
+$x$가 $X$의 약연관점일 필요충분조건으로
+{\it $x$가 $X$의 연관점이다}라고 한다.
+\end{definition}
+
+\noindent
+이제 필요한 표준 보조정리들을 증명할 수 있다.
+
+\begin{lemma}
+\label{lemma-weakly-ass-support}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자. 그러면
+$\text{WeakAss}(\mathcal{F}) \subset \text{Supp}(\mathcal{F})$이다.
+\end{lemma}
+
+\begin{proof}
+정의에서 바로 따른다. $X$ 위의 아벨 층의 지지집합은
+Properties of Spaces, Definition
+\ref{spaces-properties-definition-support}에서 정의한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-ses-weakly-ass}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$을
+$X$ 위 준연접층들의 짧은 완전열이라 하자. 그러면
+$\text{WeakAss}(\mathcal{F}_2) \subset
+\text{WeakAss}(\mathcal{F}_1) \cup \text{WeakAss}(\mathcal{F}_3)$이고
+$\text{WeakAss}(\mathcal{F}_1) \subset \text{WeakAss}(\mathcal{F}_2)$이다.
+\end{lemma}
+
+\begin{proof}
+모든 기하점 $\overline{x} \in X$에 대해 줄기들의 열
+$0 \to \mathcal{F}_{1, \overline{x}} \to
+\mathcal{F}_{2, \overline{x}} \to
+\mathcal{F}_{3, \overline{x}} \to 0$은
+$\mathcal{O}_{X, \overline{x}}$-가군들의 짧은 완전열이다.
+따라서 보조정리는 Algebra, Lemma
+\ref{algebra-lemma-weakly-ass}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-weakly-ass-zero}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자. 그러면
+$$
+\mathcal{F} = (0) \Leftrightarrow \text{WeakAss}(\mathcal{F}) = \emptyset
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 전사 \'etale 사상 $f : U \to X$를 택하자.
+$\mathcal{F}$가 영일 필요충분조건은 $f^*\mathcal{F}$가 영인 것이다.
+따라서 정의와 스킴에 대한 경우, 즉 Divisors, Lemma
+\ref{divisors-lemma-weakly-ass-zero}에서 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-minimal-support-in-weakly-ass}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하고, $x \in |X|$라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $x \in \text{Supp}(\mathcal{F})$이다.
+\item $x$는 공차원 $0$인 $X$의 점이다
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-local-ring}).
+\end{enumerate}
+그러면 $x \in \text{WeakAss}(\mathcal{F})$이다.
+$\mathcal{F}$가 유한형 $\mathcal{O}_X$-가군이고 스킴론적 지지집합이 $Z$이며
+(Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-support}),
+$x$가 공차원 $0$인 $Z$의 점이면
+$x \in \text{WeakAss}(\mathcal{F})$이다.
+\end{lemma}
+
+\begin{proof}
+$x \in \text{Supp}(\mathcal{F})$이므로 줄기
+$\mathcal{F}_{\overline{x}}$는 영이 아니다. 따라서 Algebra, Lemma
+\ref{algebra-lemma-weakly-ass-zero}에 의해
+$\text{WeakAss}(\mathcal{F}_{\overline{x}})$는 공집합이 아니다.
+한편 $\mathcal{O}_{X, \overline{x}}$의 스펙트럼은 한원소 집합이다.
+따라서 정의에 의해 $x$는 $\mathcal{F}$의 약연관점이다.
+마지막 명제는 다음 사실들에서 따른다.
+$\mathcal{O}_{X, \overline{x}} \to \mathcal{O}_{Z, \overline{z}}$는
+전사이고, $\mathcal{O}_{Z, \overline{z}}$의 스펙트럼은 한원소 집합이며,
+% P09-ERR-0149: frozen source's undefined \overline{z} is preserved literally.
+$\mathcal{F}_{\overline{x}}$는 영이 아닌
+$\mathcal{O}_{Z, \overline{z}}$-가군이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-minimal-support-in-weakly-ass-decent}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하고, $x \in |X|$라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $X$는 decent이다(예를 들어 준분리이거나 국소 분리이다).
+\item $x \in \text{Supp}(\mathcal{F})$이다.
+\item $x$는 $\text{Supp}(\mathcal{F})$의 다른 점의 특수화가 아니다.
+\end{enumerate}
+그러면 $x \in \text{WeakAss}(\mathcal{F})$이다.
+\end{lemma}
+
+\begin{proof}
+(준분리 대수공간은 decent이다. Decent Spaces, Section
+\ref{decent-spaces-section-reasonable-decent}를 보라.
+국소 분리 대수공간은 decent이다. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-locally-separated-decent}를 보라.)
+스킴 $U$, 점 $u \in U$, 그리고 \'etale 사상
+$f : U \to X$를 택하되, 이 사상이 $u$를 $x$로 보내게 하자.
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point}에 의해,
+$u' \leadsto u$가 자명하지 않은 특수화이면 $f(u') \not = x$이다.
+따라서 $u \in \text{Supp}(f^*\mathcal{F})$는
+$\text{Supp}(f^*\mathcal{F})$의 다른 점의 특수화가 아니다.
+그러므로 Divisors, Lemma
+\ref{lemma-minimal-support-in-weakly-ass}에 의해
+% P09-ERR-0150: frozen source's circular unprefixed reference is preserved.
+$u \in \text{WeakAss}(f^*\mathcal{F})$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-ass}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 국소 Noether 대수공간이라 하자.
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자. 그러면
+$\text{Ass}(\mathcal{F}) \cap W$는 모든 준콤팩트 열린집합
+$W \subset |X|$에 대해 유한집합이다.
+\end{lemma}
+
+\begin{proof}
+준콤팩트 스킴 $U$와 \'etale 사상 $U \to X$를 택하여
+$W$가 $|U| \to |X|$의 상이 되게 하자. 그러면 $U$는 Noether 스킴이므로
+Divisors, Lemma \ref{divisors-lemma-finite-ass}를 적용하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-restriction-injective-open-contains-weakly-ass}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$U \to X$가 \'etale 사상이고
+$\text{WeakAss}(\mathcal{F}) \subset \Im(|U| \to |X|)$이면,
+$\Gamma(X, \mathcal{F}) \to \Gamma(U, \mathcal{F})$는 단사이다.
+\end{lemma}
+
+\begin{proof}
+$s \in \Gamma(X, \mathcal{F})$를 $U$ 위에서 영으로 제한되는 절이라 하자.
+$\mathcal{F}' \subset \mathcal{F}$를 사상
+$\mathcal{O}_X \to \mathcal{F}$의 상이라 하자. 이 사상은 $s$로 정의된다. 그러면
+$\mathcal{F}'|_U = 0$이다. 이는
+$\text{WeakAss}(\mathcal{F}') \cap \Im(|U| \to |X|) = \emptyset$임을 뜻한다
+(약연관점의 정의에 의한다). 한편 Lemma
+\ref{lemma-ses-weakly-ass}에 의해
+$\text{WeakAss}(\mathcal{F}') \subset \text{WeakAss}(\mathcal{F})$이다.
+따라서 $\text{WeakAss}(\mathcal{F}') = \emptyset$이고, Lemma
+\ref{lemma-weakly-ass-zero}에 의해 $\mathcal{F}' = 0$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-weakass-pushforward}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의
+준콤팩트 준분리 사상이라 하고, $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. $y \in |Y|$가 $|f|$의 상에 속하지 않는
+점이면, $y$는 $f_*\mathcal{F}$에 약하게 연관되지 않는다.
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-pushforward}에 의해
+$\mathcal{O}_Y$-가군 $f_*\mathcal{F}$는 준연접이므로 보조정리의 진술은
+의미가 있다. 아핀 스킴 $V$, 점 $v \in V$, 그리고 \'etale 사상
+$V \to Y$를 택하되, 이 사상이 $v$를 $y$로 보내게 하자.
+$f : X \to Y$, $\mathcal{F}$, $y$를 각각
+$X \times_Y V \to V$, $\mathcal{F}|_{X \times_Y V}$, $v$로 바꾸어도 된다.
+따라서 $Y$가 아핀 스킴이라고 가정해도 된다. 이 경우 $X$는 준콤팩트이므로
+아핀 스킴 $U$와 전사 \'etale 사상 $U \to X$를 택할 수 있다.
+합성 사상을 $g : U \to Y$로 나타내자.
+% P09-ERR-0151: frozen source's missing “by” is normalized in Korean.
+그러면 $f_*\mathcal{F} \subset g_*(\mathcal{F}|_U)$이다.
+Lemma \ref{lemma-ses-weakly-ass}에 의해 스킴의 경우로 환원되며,
+이는 Divisors, Lemma \ref{divisors-lemma-weakass-pushforward}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-check-injective-on-weakass}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\varphi : \mathcal{F} \to \mathcal{G}$를 준연접
+$\mathcal{O}_X$-가군들의 사상이라 하자. 모든 $x \in |X|$에 대해
+다음 중 적어도 하나가 성립한다고 가정하자.
+\begin{enumerate}
+\item $\mathcal{F}_{\overline{x}} \to \mathcal{G}_{\overline{x}}$는
+단사이다.
+\item $x \not \in \text{WeakAss}(\mathcal{F})$이다.
+\end{enumerate}
+그러면 $\varphi$는 단사이다.
+\end{lemma}
+
+\begin{proof}
+가정에 의해 $\text{WeakAss}(\Ker(\varphi)) = \emptyset$이고,
+따라서 Lemma \ref{lemma-weakly-ass-zero}에 의해 $\Ker(\varphi) = 0$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-weakass-reduced}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 기약 대수공간이라 하자.
+그러면 $X$의 약연관점들은 정확히 공차원 $0$인 $X$의 점들이다.
+% P09-ERR-0152: frozen source's singular/plural mismatch is normalized in Korean.
+\end{lemma}
+
+\begin{proof}
+\'Etale 국소적으로 작업하면 이는 Divisors, Lemma
+\ref{divisors-lemma-weakass-reduced}와 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points}에서 따른다.
+\end{proof}
+
+
+\section{사상과 약연관점}
+\label{section-morphisms-weakly-associated}
+
+\begin{lemma}
+\label{lemma-weakly-ass-reverse-functorial}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 아핀 사상이라
+하고, $\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자. 그러면
+$$
+\text{WeakAss}_S(f_*\mathcal{F}) \subset f(\text{WeakAss}_X(\mathcal{F}))
+$$
+이다.
+% P09-ERR-0153: frozen source's subscript S is preserved literally.
+\end{lemma}
+
+\begin{proof}
+스킴 $V$와 전사 \'etale 사상 $V \to Y$를 택하자.
+$U = X \times_Y V$로 두자. 그러면 $U \to V$는 스킴들의 아핀 사상이다.
+약연관점의 정의에 의해 문제는 스킴들의 사상 $U \to V$에 대한 문제로
+환원된다. 이 경우는 Divisors, Lemma
+\ref{divisors-lemma-weakly-ass-reverse-functorial}에서 다룬다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-ass-functorial-equal}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 아핀 사상이라
+하고, $\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$X$가 국소 Noether이면
+$$
+\text{WeakAss}_Y(f_*\mathcal{F}) =
+f(\text{WeakAss}_X(\mathcal{F}))
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $V$와 전사 \'etale 사상 $V \to Y$를 택하자.
+$U = X \times_Y V$로 두자. 그러면 $U \to V$는 스킴들의 아핀 사상이고
+$U$는 국소 Noether이다. 약연관점의 정의에 의해 문제는 스킴들의 사상
+$U \to V$에 대한 문제로 환원된다. 이 경우는 Divisors, Lemma
+\ref{divisors-lemma-ass-functorial-equal}에서 다룬다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-weakly-associated-finite}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 유한 사상이라
+하고, $\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자. 그러면
+$\text{WeakAss}(f_*\mathcal{F}) = f(\text{WeakAss}(\mathcal{F}))$이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $V$와 전사 \'etale 사상 $V \to Y$를 택하자.
+$U = X \times_Y V$로 두자. 그러면 $U \to V$는 스킴들의 유한 사상이다.
+약연관점의 정의에 의해 문제는 스킴들의 사상 $U \to V$에 대한 문제로
+환원된다. 이 경우는 Divisors, Lemma
+\ref{divisors-lemma-weakly-associated-finite}에서 다룬다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-weakly-ass-pullback}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하고,
+$\mathcal{G}$를 준연접 $\mathcal{O}_Y$-가군이라 하자.
+$x \in |X|$이고 $y = f(x) \in |Y|$라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $y \in \text{WeakAss}_S(\mathcal{G})$이다.
+% P09-ERR-0154: frozen source's subscript S is preserved literally.
+\item $f$는 $x$에서 평탄하다.
+\item $f$의 $x$에서의 섬유의 국소환 차원이 영이다
+(Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre}).
+\end{enumerate}
+그러면 $x \in \text{WeakAss}(f^*\mathcal{G})$이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $V$, 점 $v \in V$, 그리고 \'etale 사상 $V \to Y$를 택하되,
+이 사상이 $v$를 $y$로 보내게 하자. 스킴 $U$, 점 $u \in U$, 그리고
+\'etale 사상 $U \to V \times_Y X$를 택하되, 이 사상이 $v$를
+% P09-ERR-0155: frozen source's wrong domain point v is preserved literally.
+$v$와 $x$ 위에 놓인 점으로 보내게 하자. 이는
+$t \in |V \times_Y X|$가 존재하여 $(v, y)$로 가기 때문에 가능하다.
+% P09-ERR-0156: frozen source's ill-typed pair (v,y) is preserved literally.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}을 보라.
+정의에 의해 $\mathcal{O}_{U_v, u}$의 차원은 영이다.
+따라서 $u$는 섬유 $U_v$의 일반점이다. 약연관점의 정의에 의해
+문제는 스킴들의 사상 $U \to V$에 대한 문제로 환원된다.
+이 경우는 Divisors, Lemma
+\ref{divisors-lemma-weakly-ass-pullback}에서 다룬다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-weakly-ass-change-fields}
+$K/k$를 체의 확대라 하고, $X$를 $k$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$y \in X_K$의 상이 $x \in X$라 하자. $y$가 당김
+$\mathcal{F}_K$의 약연관점이면 $x$는 $\mathcal{F}$의 약연관점이다.
+\end{lemma}
+
+\begin{proof}
+이는 Divisors, Lemma
+\ref{divisors-lemma-weakly-ass-change-fields}를 대수공간의 언어로
+옮긴 것이다. 옮기는 과정의 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-flat-weak-assassin-up-down}
+$S$를 스킴이라 하자. $f : X \to Y$를 대수공간들의 유한 평탄 사상이라 하고,
+$\mathcal{G}$를 준연접 $\mathcal{O}_Y$-가군이라 하자.
+$x \in |X|$의 상이 $y \in |Y|$라 하자. 그러면
+$$
+x \in \text{WeakAss}(g^*\mathcal{G})
+\Leftrightarrow
+y \in \text{WeakAss}(\mathcal{G})
+$$
+이다.
+% P09-ERR-0157: frozen source's undefined g is preserved literally.
+\end{lemma}
+
+\begin{proof}
+스킴의 경우(More on Flatness, Lemma
+\ref{flat-lemma-finite-flat-weak-assassin-up-down})에서 \'etale 국소화로
+즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-etale-weak-assassin-up-down}
+$S$를 스킴이라 하자. $f : X \to Y$를 대수공간들의 \'etale 사상이라 하고,
+$\mathcal{G}$를 준연접 $\mathcal{O}_Y$-가군이라 하자.
+$x \in |X|$의 상이 $y \in |Y|$라 하자. 그러면
+$$
+x \in \text{WeakAss}(f^*\mathcal{G})
+\Leftrightarrow
+y \in \text{WeakAss}(\mathcal{G})
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+이는 약연관점의 정의에서 바로 따른다. 실제로 스킴의 경우에 대한
+대응하는 보조정리(More on Flatness, Lemma
+\ref{flat-lemma-etale-weak-assassin-up-down})가 우리 정의의 바탕이다.
+\end{proof}
+
+
+
+
+
+
+
+\section{상대 약연관점 집합}
+\label{section-relative-weak-assassin}
+
+\noindent
+이 대상을 정의하려면 몇 가지 보조정리가 필요하다.
+
+\begin{lemma}
+\label{lemma-locally-noetherian-fibre}
+$S$를 스킴이라 하고, $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$y \in |Y|$라 하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item 어떤 스킴 $V$, 점 $v \in V$, \'etale 사상 $V \to Y$가 있어
+$v$를 $y$로 보내고 대수공간 $X_v$가 국소 Noether이다.
+\item 모든 스킴 $V$, 점 $v \in V$, \'etale 사상 $V \to Y$에 대해
+$v$가 $y$로 가면 대수공간 $X_v$가 국소 Noether이다.
+\item 체 $k$와 사상 $\Spec(k) \to Y$가 존재하고, 이 사상이 $y$를
+나타내며 $X_k$가 국소 Noether이다.
+\end{enumerate}
+체 $k_0$와 단사상 $\Spec(k_0) \to Y$가 존재하여 $y$를 나타내면,
+이 조건들은 다음 조건과도 동치이다.
+\begin{enumerate}
+\item[(4)] 대수공간 $X_{k_0}$는 국소 Noether이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X_v = v \times_Y X = \Spec(\kappa(v)) \times_Y X$임을 주목하자.
+따라서 함의 (2) $\Rightarrow$ (1) $\Rightarrow$ (3)은 명백하다.
+$\Spec(k) \to Y$가 체의 스펙트럼에서 오는 사상이고
+$X_k$가 국소 Noether이라고 가정하자. \'Etale 사상
+$V \to Y$를 택하되 $V$가 스킴이게 하자. 점 $v \in V$를 택하여
+$y$로 가게 하자.
+% P09-ERR-0158: frozen source's missing finite verb is normalized in Korean.
+그러면 스킴 $v \times_Y \Spec(k)$는 공집합이 아니다.
+점 $w \in v \times_Y \Spec(k)$를 택하고 사상들을 생각하자.
+$$
+X_v \longleftarrow X_w \longrightarrow X_k
+$$
+$V \to Y$가 \'etale이고 $w$를 $V \times_Y \Spec(k)$의 점으로 볼 수
+있으므로, $\kappa(w)/k$는 체의 유한 분리 확대이다
+(Morphisms, Lemma \ref{morphisms-lemma-etale-over-field}).
+따라서 $X_w \to X_k$는 $w \to \Spec(k)$의 밑변환으로서 유한 \'etale
+사상이다. 그러므로 $X_w$는 국소 Noether이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}).
+사상 $X_w \to X_v$는 전사 아핀 평탄 사상 $w \to v$의 밑변환으로서
+전사이고 아핀이며 평탄하다. 따라서 $X_w$가 국소 Noether이라는 사실은
+$X_v$가 국소 Noether임을 뜻한다. 이는 전사 \'etale 사상 $U \to X$를
+택한 뒤 $U_w \to U_v$가 전사이고 아핀이며 평탄하다는 사실을 사용하면
+알 수 있다. 스킴 $U_v$ 위에서 아핀 국소적으로 작업하면 Algebra, Lemma
+\ref{algebra-lemma-descent-Noetherian}에 의해 $U_w$가 국소 Noether이라고
+결론짓는다.
+% P09-ERR-0159: frozen source's repeated U_w conclusion is preserved literally.
+
+\medskip\noindent
+마지막으로 단사상 $\Spec(k_0) \to Y$가 있고 이것이 $y$의 류에 속할 때
+(3)이 (4)를 함의함을 보이면 충분하다. 이때 $\Spec(k) \to Y$는
+$\Spec(k) \to \Spec(k_0) \to Y$로 인수분해된다. 위의 논증에 의해
+$X_k$가 국소 Noether이면 $X_{k_0}$도 국소 Noether이다.
+% P09-ERR-0160: frozen source's typo “impies” is normalized in Korean.
+\end{proof}
+
+\begin{definition}
+\label{definition-locally-Noetherian-fibre}
+$S$를 스킴이라 하고, $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$y \in |Y|$라 하자. Lemma \ref{lemma-locally-noetherian-fibre}의 동치 조건
+(1), (2), (3)이 성립하면 {\it $f$의 $y$ 위 섬유가 국소 Noether이다}라고
+한다. {\it $f$의 섬유들이 국소 Noether이다}라고 하는 것은 이것이
+모든 $y \in |Y|$에 대해 성립한다는 뜻이다.
+\end{definition}
+
+\noindent
+물론 국소 Noether 섬유를 보장하는 통상적인 방법은 사상이 국소 유한형이라고
+가정하는 것이다.
+
+\begin{lemma}
+\label{lemma-locally-finite-type-locally-Noetherian-fibres}
+$S$를 스킴이라 하고, $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$f$가 국소 유한형이면 $f$의 섬유들은 국소 Noether이다.
+\end{lemma}
+
+\begin{proof}
+이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}와
+체의 스펙트럼이 Noether이라는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-assassin}
+$S$를 스킴이라 하고, $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$x \in |X|$이고 $y = f(x) \in |Y|$라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. 다음 가환 그림들을 생각하자.
+$$
+\xymatrix{
+X \ar[d] & X \times_Y V \ar[d] \ar[l] & X_v \ar[d] \ar[l] \\
+Y & V \ar[l] & v \ar[l]
+}
+\quad
+\xymatrix{
+X \ar[d] & U \ar[d] \ar[l] & U_v \ar[d] \ar[l] \\
+Y & V \ar[l] & v \ar[l]
+}
+\quad
+\xymatrix{
+x \ar@{|->}[d] &
+x' \ar@{|->}[d] \ar@{|->}[l] &
+u \ar@{|->}[ld] \ar@{|->}[l] \\
+y &
+v \ar@{|->}[l]
+}
+$$
+여기서 $V$와 $U$는 스킴이고, $V \to Y$와
+$U \to X \times_Y V$는 \'etale이며, $v \in V$, $x' \in |X_v|$,
+$u \in U$는 마지막 그림과 같이 연관된 점들이다.
+$\mathcal{F}|_{X_v}$와 $\mathcal{F}|_{U_v}$로 $\mathcal{F}$의 당김들을
+나타내자.
+% P09-ERR-0161: frozen source's missing “by” is normalized in Korean.
+다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item 위와 같은 어떤 $V, v, x'$에 대해 $x'$는
+$\mathcal{F}|_{X_v}$의 약연관점이다.
+\item 위와 같은 모든 $V \to Y, v, x'$에 대해 $x'$는
+$\mathcal{F}|_{X_v}$의 약연관점이다.
+\item 위와 같은 어떤 $U, V, u, v$에 대해 $u$는
+$\mathcal{F}|_{U_v}$의 약연관점이다.
+\item 위와 같은 모든 $U, V, u, v$에 대해 $u$는
+$\mathcal{F}|_{U_v}$의 약연관점이다.
+\item 어떤 체 $k$와 사상 $\Spec(k) \to Y$가 있어 $y$를 나타내고,
+어떤 $t \in |X_k|$가 있어서 $x$로 가며 점 $t$가
+$\mathcal{F}|_{X_k}$의 약연관점이다.
+\end{enumerate}
+체 $k_0$와 단사상 $\Spec(k_0) \to Y$가 존재하여 $y$를 나타내면,
+이 조건들은 다음 조건과도 동치이다.
+\begin{enumerate}
+\item[(6)] $x_0$는 $\mathcal{F}|_{X_{k_0}}$의 약연관점이며,
+여기서 $x_0 \in |X_{k_0}|$는 $x$로 가는 유일한 점이다.
+\end{enumerate}
+$f$의 $y$ 위 섬유가 국소 Noether이면 조건 (1), (2), (3), (4), (6)에서
+``약연관''을 ``연관''으로 바꾸어도 된다.
+\end{lemma}
+
+\begin{proof}
+보조정리에서와 같은 $V, v, x'$가 주어지면
+$U \to X \times_Y V$와 $u \in U$를 찾을 수 있고, 이 점은 $x'$로 가며,
+그때 사상 $U_v \to X_v$는 \'etale이다. 따라서 (1)과 (3), 그리고
+(2)와 (4)가 각각 동치임이 분명하다. 이 조건들은 각각 (5)를 함의한다.
+(5)가 (2)를 함의함을 보이겠다. $V, v, x'$와 함께
+$\Spec(k) \to X$와 $t \in |X_k|$가 주어져서 점 $t$가
+% P09-ERR-0162: frozen source's codomain X is preserved literally.
+$\mathcal{F}|_{X_k}$의 약연관점이라고 하자.
+점 $w \in v \times_Y \Spec(k)$를 택할 수 있다. 그러면 사상들을 얻는다.
+$$
+X_v \longleftarrow X_w \longrightarrow X_k
+$$
+$V \to Y$가 \'etale이고 $w$를 $V \times_Y \Spec(k)$의 점으로 볼 수
+있으므로, $\kappa(w)/k$는 체의 유한 분리 확대이다
+(Morphisms, Lemma \ref{morphisms-lemma-etale-over-field}).
+따라서 $X_w \to X_k$는 $w \to \Spec(k)$의 밑변환으로서 유한 \'etale
+사상이다. 그러므로 임의의 점 $x''$가 $X_w$의 점이고 $t$ 위에 놓이면 Lemma
+\ref{lemma-etale-weak-assassin-up-down}에 의해
+$\mathcal{F}|_{X_w}$의 약연관점이다. $x''$를 택하여 $x'$로 가게 할 수 있다
+(Properties of Spaces, Lemma \ref{spaces-properties-lemma-points-cartesian}).
+그러면 Lemma \ref{lemma-weakly-ass-change-fields}에 의해 $x'$는
+$\mathcal{F}|_{X_v}$의 약연관점이다.
+
+\medskip\noindent
+증명을 끝내려면, (6)에서와 같은 $\Spec(k_0) \to Y$가 주어질 때
+동치 조건 (1)--(5)가 (6)을 함의함을 보이면 충분하다. 이 경우 (5)의 사상
+$\Spec(k) \to Y$는 유일하게 $\Spec(k) \to \Spec(k_0) \to Y$로
+인수분해된다. 그러면 $x_0$는 $t$의 상이며, 여기서 쓰는 사상은
+$X_k \to X_{k_0}$이다.
+따라서 위와 같은 보조정리에 의해 (6)이 성립한다.
+\end{proof}
+
+\begin{definition}
+\label{definition-relative-weak-assassin}
+$S$를 스킴이라 하고, $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+{\it $\mathcal{F}$의, $X$ 안에서 $Y$에 대한 상대 약연관점 집합}은
+집합 $\text{WeakAss}_{X/Y}(\mathcal{F}) \subset |X|$이다. 이 집합은
+$x \in |X|$ 중 Lemma \ref{lemma-relative-assassin}의 동치 조건들을
+만족하는 것들로 이루어진다.
+$f$의 섬유들이 국소 Noether이면(Definition
+\ref{definition-locally-Noetherian-fibre})
+$\text{Ass}_{X/Y}(\mathcal{F})$라는 표기를 사용한다.
+\end{definition}
+
+\noindent
+이 표기를 사용하면 스킴에 대해 이미 증명한 몇몇 결과를 표현할 수 있다.
+
+\begin{lemma}
+\label{lemma-bourbaki}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하고,
+$\mathcal{G}$를 준연접 $\mathcal{O}_Y$-가군이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{F}$는 $Y$ 위에서 평탄하다.
+\item $X$와 $Y$는 국소 Noether이다.
+\item $f$의 섬유들은 국소 Noether이다.
+\end{enumerate}
+그러면
+$$
+\text{Ass}_X(\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G}) =
+\{x \in \text{Ass}_{X/Y}(\mathcal{F})\text{이고 }
+f(x) \in \text{Ass}_Y(\mathcal{G})\}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+\'Etale 국소화를 하면 스킴에 대한 결과, 즉 Divisors, Lemma
+\ref{divisors-lemma-bourbaki}에서 곧바로 따른다. 우리가 Noether가 아닌
+대수공간에 대해 연관점을 정의하지 않았다는 이유만으로 스킴에 대한 결과가
+더 일반적이다. 따라서 이 결과를 진술할 수 있으려면 $X$와
+$X \to Y$의 섬유들이 국소 Noether이라고 가정해야 한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-relative-assassin}
+$S$를 스킴이라 하고,
+$$
+\xymatrix{
+X' \ar[d]_{f'} \ar[r]_{g'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+를 $S$ 위 대수공간들의 올곱 그림이라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하고 $\mathcal{F}' = (g')^*\mathcal{F}$로 두자.
+$f$가 국소 유한형이면 다음이 성립한다.
+\begin{enumerate}
+\item $x' \in \text{Ass}_{X'/Y'}(\mathcal{F}')
+\Rightarrow g'(x') \in \text{Ass}_{X/Y}(\mathcal{F})$이다.
+\item $x \in \text{Ass}_{X/Y}(\mathcal{F})$이면,
+$y' \in |Y'|$가 주어지고 $f(x) = g(y')$를 만족할 때
+$x' \in \text{Ass}_{X'/Y'}(\mathcal{F}')$인 것이 존재하여
+$g'(x') = x$ 및 $f'(x') = y'$를 만족한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이는 \'etale 국소화를 통해 스킴의 경우에서 따른다. 세부사항을 모두 적겠다.
+스킴 $V$와 전사 \'etale 사상 $V \to Y$를 택하자. 스킴 $U$와 전사
+\'etale 사상 $U \to V \times_Y X$를 택하자. 스킴 $V'$와 전사
+\'etale 사상 $V' \to V \times_Y Y'$를 택하자. 그러면
+$U' = V' \times_V U$는 스킴이고 사상 $U' \to X'$는 전사 \'etale이다.
+
+\medskip\noindent
+(1)의 증명. $u' \in U'$를 택하여 $x'$로 가게 하자.
+$v' \in V'$로 $u'$의 상을 나타내자.
+% P09-ERR-0163: frozen source's missing “by” is normalized in Korean.
+정의에 의해 $x' \in \text{Ass}_{X'/Y'}(\mathcal{F}')$일 필요충분조건은
+$u' \in \text{Ass}(\mathcal{F}|_{U'_{v'}})$인 것이다
+($\text{Ass}$를 $\text{WeakAss}$ 대신 써도 되며, 이는 $U'_{v'}$가
+국소 Noether이므로 의미가 있다). Divisors, Lemma
+\ref{divisors-lemma-base-change-relative-assassin}를 적용하면
+$u \in U$는 $u'$의 상이며 $\text{Ass}(\mathcal{F}|_{U_v})$에 속함을 알 수
+있다. 여기서 $v \in V$는 $u$의 상이다. 이는 다시
+$g'(x') \in \text{Ass}_{X/Y}(\mathcal{F})$임을 뜻한다.
+
+\medskip\noindent
+(2)의 증명. $u \in U$를 택하여 $x$로 가게 하자.
+$v \in V$로 $u$의 상을 나타내자.
+% P09-ERR-0164: frozen source's missing “by” is normalized in Korean.
+정의에 의해 $x \in \text{Ass}_{X/Y}(\mathcal{F})$일 필요충분조건은
+$u \in \text{Ass}(\mathcal{F}|_{U_v})$인 것이다. 점
+$v' \in V'$를 택하여 $y' \in |Y'|$와 $v \in V$로 가게 하자
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 가능하다).
+$t \in \Spec(\kappa(v') \otimes_{\kappa(v)} \kappa(u))$를 한 기약 성분의
+일반점이라 하자. $u' \in U'$를 $t$의 상이라 하자. Divisors, Lemma
+\ref{divisors-lemma-base-change-relative-assassin}를 적용하면
+$u' \in \text{Ass}(\mathcal{F}'|_{U'_{v'}})$임을 알 수 있다.
+이는 다시 $x' \in \text{Ass}_{X'/Y'}(\mathcal{F}')$임을 뜻하며,
+여기서 $x' \in |X'|$는 $u'$의 상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-relative-assassin-quasi-finite}
+표기와 가정은 위의 Lemma
+\ref{lemma-base-change-relative-assassin}에서와 같다.
+$g$가 국소 준유한이거나, 더 일반적으로 모든 $y' \in |Y'|$에 대해
+$y'/g(y')$의 초월차수가 $0$이라고 가정하자. 그러면
+$\text{Ass}_{X'/Y'}(\mathcal{F}')$는
+$\text{Ass}_{X/Y}(\mathcal{F})$의 역상이다.
+\end{lemma}
+
+\begin{proof}
+점이 그 상 위에서 갖는 초월차수는 Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre}에서 정의한다.
+$x' \in |X'|$의 상이 $x \in |X|$라 하자. 스킴 $V$와 전사 \'etale 사상
+$V \to Y$를 택하자. 스킴 $U$와 전사 \'etale 사상
+$U \to V \times_Y X$를 택하자. 스킴 $V'$와 전사 \'etale 사상
+$V' \to V \times_Y Y'$를 택하자. 그러면
+$U' = V' \times_V U$는 스킴이고 사상 $U' \to X'$는 전사 \'etale이다.
+$u \in U$를 택하여 $x$로 가게 하자. $v \in V$로 $u$의 상을 나타내자.
+% P09-ERR-0165: frozen source's missing “by” is normalized in Korean.
+정의에 의해 $x \in \text{Ass}_{X/Y}(\mathcal{F})$일 필요충분조건은
+$u \in \text{Ass}(\mathcal{F}|_{U_v})$인 것이다. 점 $u' \in U'$를
+택하여 $x' \in |X'|$와 $u \in U$로 가게 하자(Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-points-cartesian}에 의해 가능하다).
+$v' \in V'$를 $u'$의 상이라 하자. 그러면 정의에 의해
+$x' \in \text{Ass}_{X'/Y'}(\mathcal{F}')$일 필요충분조건은
+$u' \in \text{Ass}(\mathcal{F}'|_{U'_{v'}})$인 것이다.
+이제 $u' \in \Spec(\kappa(v') \otimes_{\kappa(v)} \kappa(u))$에
+Divisors, Remark
+\ref{divisors-remark-base-change-relative-assassin}의 논의를 적용하면
+보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-weak-assassin-finite}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하고,
+$i : Z \to X$를 유한 사상이라 하자. $\mathcal{G}$를 준연접
+$\mathcal{O}_Z$-가군이라 하자. 그러면
+$\text{WeakAss}_{X/Y}(i_*\mathcal{G}) =
+i(\text{WeakAss}_{Z/Y}(\mathcal{G}))$이다.
+\end{lemma}
+
+\begin{proof}
+스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-relative-weak-assassin-finite})에서 \'etale 국소화로
+따른다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-assassin-constructible}
+$Y$를 스킴이라 하고, $X$를 $Y$ 위의 유한 표시 대수공간이라 하자.
+$\mathcal{F}$를 유한 표시 준연접 $\mathcal{O}_X$-가군이라 하자.
+$U \subset X$를 열린 부분공간이라 하고 $U \to Y$가 준콤팩트라고 하자.
+그러면 집합
+$$
+E = \{y \in Y \mid \text{Ass}_{X_y}(\mathcal{F}_y) \subset |U_y|\}
+$$
+은 $Y$에서 국소 구성가능하다.
+\end{lemma}
+
+\begin{proof}
+$Y$가 스킴이므로 섬유
+$X_y = \Spec(\kappa(y)) \times_Y X$를 취하는 것이 의미가 있음을 주목하자.
+(또한 우리 정의에 따르면 집합 $\text{Ass}_{X_y}(\mathcal{F}_y)$는 정확히
+$\text{Ass}_{X/Y}(\mathcal{F}) \to Y$의 $y$ 위 섬유이지만, 이를 쓰지는
+않는다.) 문제는 $Y$ 위에서 국소적이다. 실제로 $E$가 구성가능함을 보이기
+위해 $Y$가 아핀인 경우만 다루면 된다. 이 경우 $X$는 준콤팩트이다. 아핀
+스킴 $W$와 전사 \'etale 사상 $\varphi : W \to X$를 택하자. 그러면
+$\text{Ass}_{X_y}(\mathcal{F}_y)$는
+$\text{Ass}_{W_y}(\varphi^*\mathcal{F}_y)$의 상이며, 이는 모든 $y \in Y$에
+대해 성립한다. 따라서 보조정리는
+열린집합 $\varphi^{-1}(U) \subset W$와 사상 $W \to Y$에 대한 스킴의
+경우에서 따른다. 스킴의 경우는 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-relative-assassin-constructible}이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{Fitting 아이디얼}
+\label{section-fitting-ideals}
+
+\noindent
+이 절은 Divisors, Section
+\ref{divisors-section-fitting-ideals}의 논의를 이어간다.
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_X$-가군이라 하자.
+이 상황에서 다음 Fitting 아이디얼들을 구성할 수 있다.
+$$
+0 = \text{Fit}_{-1}(\mathcal{F}) \subset \text{Fit}_0(\mathcal{F}) \subset
+\text{Fit}_1(\mathcal{F}) \subset \ldots \subset \mathcal{O}_X
+$$
+% P09-ERR-0166: malformed frozen-source phrase is normalized in Korean prose.
+이들은 다음 성질로 특징지어지는 준연접 아이디얼 층들의 열이다. 임의의
+아핀 $U = \Spec(A)$가 $X$ 위에서 \'etale일 때 $\mathcal{F}|_U$가
+$A$-가군 $M$에 대응한다면, $\text{Fit}_i(\mathcal{F})|_U$는
+아이디얼 $\text{Fit}_i(M) \subset A$에 대응한다. 이는 잘 정의되며 준연접
+아이디얼 층이다. 실제로 $A \to B$가 \'etale 환 사상이면 $i$번째 Fitting
+아이디얼, 즉 $M \otimes_A B$의 $B$ 위 Fitting 아이디얼은 More on Algebra, Lemma
+\ref{more-algebra-lemma-fitting-ideal-basics}의 (3)에 의해
+$\text{Fit}_i(M) B$와 같다.
+% P09-ERR-0167: frozen source's Fit_0(O_X) formula is preserved verbatim.
+더 정확히 말하면(아마도), 아이디얼의 준연접 층
+$\text{Fit}_0(\mathcal{O}_X)$의 존재는 예컨대 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-characterize-quasi-coherent-small-etale}에 주어진
+준연접 층의 기술과 Divisors, Lemma
+\ref{divisors-lemma-base-change-fitting-ideal}에 주어진 당김 성질에서 따른다.
+
+\medskip\noindent
+Fitting 아이디얼들을 이 방식으로 구성하는 장점은 그 구성이 \'etale
+국소화와 가환함을 즉시 알 수 있다는 것이다. 따라서 Fitting 아이디얼들의
+많은 성질은 곧바로 스킴의 경우에 해당하는 성질로 환원된다. 흔히 스킴과
+대수공간 위의 준연접 층의 성질을 서로 옮기기 위해 Properties of Spaces,
+Section \ref{spaces-properties-section-properties-modules}의 논의를 사용할 것이다.
+
+\begin{lemma}
+\label{lemma-base-change-fitting-ideal}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_Y$-가군이라 하자. 그러면
+$f^{-1}\text{Fit}_i(\mathcal{F}) \cdot \mathcal{O}_X =
+\text{Fit}_i(f^*\mathcal{F})$이다.
+\end{lemma}
+
+\begin{proof}
+\'Etale 국소화에 의해 Divisors, Lemma
+\ref{divisors-lemma-base-change-fitting-ideal}로 환원된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fitting-ideal-of-finitely-presented}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 유한 표시 $\mathcal{O}_X$-가군이라 하자. 그러면
+$\text{Fit}_r(\mathcal{F})$는 유한형 준연접 아이디얼이다.
+\end{lemma}
+
+\begin{proof}
+\'Etale 국소화에 의해 Divisors, Lemma
+\ref{divisors-lemma-fitting-ideal-of-finitely-presented}로 환원된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-on-subscheme-cut-out-by-Fit-0}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_X$-가군이라 하자.
+$Z_0 \subset X$를 $\text{Fit}_0(\mathcal{F})$로 잘라 얻는 닫힌 부분공간이라
+하고, $Z \subset X$를 $\mathcal{F}$의 스킴론적 지지집합이라 하자. 그러면
+\begin{enumerate}
+\item 닫힌 부분공간으로서 $Z \subset Z_0 \subset X$이고,
+\item $|Z| = |Z_0| = \text{Supp}(\mathcal{F})$이고, 이들은 $|X|$의
+닫힌 부분집합들이며,
+\item 다음을 만족하는 유한형 준연접 $\mathcal{O}_{Z_0}$-가군
+$\mathcal{G}_0$가 존재한다.
+$$
+(Z_0 \to X)_*\mathcal{G}_0 = \mathcal{F}.
+$$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$Z$의 형성은 \'etale 국소화와 가환함을 상기하자. Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-scheme-theoretic-support}를 보라
+(이 정의는 $Z$를 정의하기 위해 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-scheme-theoretic-support}를 사용한다). 따라서
+(1)과 (2)는 스킴의 경우, 즉 Divisors, Lemma
+\ref{divisors-lemma-on-subscheme-cut-out-by-Fit-0}에서 따른다. (3)의
+$\mathcal{G}_0$를 얻기 위해 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-scheme-theoretic-support}에서와 같은
+$\mathcal{G}$가 $Z$ 위에 있음을 사용하고
+$\mathcal{G}_0 = (Z \to Z_0)_*\mathcal{G}$로 둘 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fitting-ideal-generate-locally}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_X$-가군이라 하고
+$x \in |X|$라 하자. $\mathcal{F}$가 $r$개의 원소로 $x$의 한 \'etale
+근방에서 생성될 필요충분조건은
+$\text{Fit}_r(\mathcal{F})_{\overline{x}} = \mathcal{O}_{X, \overline{x}}$이다.
+\end{lemma}
+
+\begin{proof}
+\'Etale 국소화에 의해 Divisors, Lemma
+\ref{divisors-lemma-fitting-ideal-generate-locally}로 환원된다. 여기서는
+Properties of Spaces, Section
+\ref{spaces-properties-section-stalks-structure-sheaf}의 국소환에 대한 기술과,
+국소환의 강 Hensel화가 충실 평탄이므로 강 Hensel화 위의 등식과 국소환
+위의 등식이 동치라는 사실도 사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-fitting-ideal-finite-locally-free}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_X$-가군이라 하고
+$r \geq 0$이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $\mathcal{F}$는 계수 $r$인 유한 국소 자유 가군이다.
+\item $\text{Fit}_{r - 1}(\mathcal{F}) = 0$이고
+$\text{Fit}_r(\mathcal{F}) = \mathcal{O}_X$이다.
+\item $\text{Fit}_k(\mathcal{F}) = 0$ ($k < r$)이고,
+$\text{Fit}_k(\mathcal{F}) = \mathcal{O}_X$ ($k \geq r$)이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\'Etale 국소화에 의해 Divisors, Lemma
+\ref{divisors-lemma-fitting-ideal-finite-locally-free}로 환원된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-locally-free-rank-r-pullback}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_X$-가군이라 하자.
+% P09-ERR-0168: malformed frozen-source chain is preserved verbatim.
+닫힌 부분공간
+$$
+X = Z_{-1} \supset Z_0 \supset Z_1 \supset Z_2 \ldots
+$$
+은 $\mathcal{F}$의 Fitting 아이디얼들로 정의되며 다음 성질들을 가진다.
+\begin{enumerate}
+\item 교집합 $\bigcap Z_r$는 공집합이다.
+\item 함자 $(\Sch/X)^{opp} \to \textit{Sets}$를 다음 규칙으로 정의하자.
+$$
+T \longmapsto
+\left\{
+\begin{matrix}
+\{*\} & \text{if }\mathcal{F}_T\text{ is locally generated by }
+\leq r\text{ sections} \\
+\emptyset & \text{otherwise}
+\end{matrix}
+\right.
+$$
+이 함자는 열린 부분공간 $X \setminus Z_r$로 표현된다.
+\item 함자 $F_r : (\Sch/X)^{opp} \to \textit{Sets}$를 다음 규칙으로 정의하자.
+% P09-ERR-0169: malformed frozen-source text is normalized only in Korean prose outside the invariant display.
+$$
+T \longmapsto
+\left\{
+\begin{matrix}
+\{*\} & \text{if }\mathcal{F}_T\text{ locally free rank }r\\
+\emptyset & \text{otherwise}
+\end{matrix}
+\right.
+$$
+이 함자는 국소 닫힌 부분공간 $Z_{r - 1} \setminus Z_r$로 표현되며, 이는
+$X$의 부분공간이다.
+\end{enumerate}
+$\mathcal{F}$가 유한 표시이면 $Z_r \to X$, $X \setminus Z_r \to X$,
+$Z_{r - 1} \setminus Z_r \to X$는 유한 표시이다.
+\end{lemma}
+
+\begin{proof}
+\'Etale 국소화에 의해 Divisors, Lemma
+\ref{divisors-lemma-locally-free-rank-r-pullback}로 환원된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-presentation-module}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 유한 표시 $\mathcal{O}_X$-가군이라 하자.
+% P09-ERR-0170: wrong-direction frozen-source chain is preserved verbatim.
+Lemma \ref{lemma-locally-free-rank-r-pullback}에서와 같이
+$X = Z_{-1} \subset Z_0 \subset Z_1 \subset \ldots$라 하고
+$X_r = Z_{r - 1} \setminus Z_r$로 두자. 그러면
+$X' = \coprod_{r \geq 0} X_r$는 함자
+% P09-ERR-0171: frozen source's non-op domain is preserved verbatim.
+$$
+F_{flat} : \Sch/X \longrightarrow \textit{Sets},\quad\quad
+T \longmapsto
+\left\{
+\begin{matrix}
+% P09-ERR-0172: malformed frozen-source text is preserved in the invariant display.
+\{*\} & \text{if }\mathcal{F}_T\text{ flat over }T\\
+\emptyset & \text{otherwise}
+\end{matrix}
+\right.
+$$
+를 표현한다. 또한 $\mathcal{F}|_{X_r}$는 계수 $r$인 국소 자유 가군이고,
+사상 $X_r \to X$와 $X' \to X$는 유한 표시이다.
+\end{lemma}
+
+\begin{proof}
+\'Etale 국소화에 의해 Divisors, Lemma
+\ref{divisors-lemma-finite-presentation-module}로 환원된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{유효 Cartier 제수}
+\label{section-effective-Cartier-divisors}
+
+\noindent
+% P09-ERR-0173: frozen source's agreement error is normalized in Korean.
+어떤 이유에서인지 다른 모든 것보다 먼저 유효 Cartier 제수의 개념을
+정의하는 것이 편리하다. Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-closed-immersions}에서 닫힌 부분공간과 준연접
+아이디얼 층 사이의 대응을 논의했음을 주목하자. 또한 Properties of Spaces,
+Section \ref{spaces-properties-section-properties-modules}에서 준연접 가군의
+성질, 특히 ``$1$개의 원소로 국소적으로 생성됨''을 논의했다. 이 참고문헌들은
+다음 정의가 스킴에 대한 정의와 양립함을 보여 준다.
+
+\begin{definition}
+\label{definition-effective-Cartier-divisor}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+\begin{enumerate}
+\item $X$의 {\it 국소 주 닫힌 부분공간}이란 그 아이디얼 층이 $1$개의
+원소로 국소적으로 생성되는 닫힌 부분공간이다.
+\item $X$ 위의 {\it 유효 Cartier 제수}란 닫힌 부분공간 $D \subset X$ 중에서
+아이디얼 층 $\mathcal{I}_D \subset \mathcal{O}_X$가 가역
+$\mathcal{O}_X$-가군인 것이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+따라서 유효 Cartier 제수는 국소 주 닫힌 부분공간이지만, 그 역은 언제나
+참인 것은 아니다. 유효 Cartier 제수는 가능한 가장 강한 의미에서 순수
+공차원 $1$인 닫힌 부분공간이다. 즉, 이들은 영인자가 아닌 하나의 원소로
+국소적으로 잘린다. 특히 어디에서도 조밀하지 않다.
+
+\begin{lemma}
+\label{lemma-characterize-effective-Cartier-divisor}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$D \subset X$를 닫힌 부분공간이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item 부분공간 $D$는 $X$ 위의 유효 Cartier 제수이다.
+\item 어떤 스킴 $U$와 전사 \'etale 사상 $U \to X$에 대해 역상
+$D \times_X U$는 $U$ 위의 유효 Cartier 제수이다.
+\item 모든 스킴 $U$와 모든 \'etale 사상 $U \to X$에 대해 역상
+$D \times_X U$는 $U$ 위의 유효 Cartier 제수이다.
+\item 모든 $x \in |D|$에 대해 점이 지정된 대수공간들의 \'etale 사상
+$(U, u) \to (X, x)$가 존재하여 $U = \Spec(A)$이고
+$D \times_X U = \Spec(A/(f))$이며, $f \in A$는 영인자가 아니다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)--(3)의 동치는 Definition
+\ref{definition-effective-Cartier-divisor}와 그 앞의 참고문헌들에서 따른다.
+(1)을 가정하고 $x \in |D|$라 하자. 스킴 $W$와 전사 \'etale 사상
+$W \to X$를 택하자. $w \in D \times_X W$를 택하여 $x$로 가게 하자.
+(3)에 의해 $D \times_X W$는 $W$ 위의 유효 Cartier 제수이다. 따라서
+% P09-ERR-0174: frozen source's missing article is normalized in Korean.
+아핀 \'etale 근방 $U$를 찾을 수 있다. 이는 $w$의 $W$ 안의 아핀 열린
+근방을 택하는 것으로, Divisors, Lemma
+\ref{divisors-lemma-characterize-effective-Cartier-divisor}에서와 같다.
+
+\medskip\noindent
+(4)를 가정하자. 그러면 Divisors, Lemma
+\ref{divisors-lemma-characterize-effective-Cartier-divisor}에 의해
+$\mathcal{I}_D|_U$가 가역임을 알 수 있다. $X$의 \'etale 덮개를 이러한
+모든 $U$와 $X \setminus D$의 모음으로 찾을 수 있으므로,
+$\mathcal{I}_D$는 가역 $\mathcal{O}_X$-가군이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-complement-locally-principal-closed-subscheme}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$Z \subset X$를 국소 주 닫힌 부분공간이라 하고 $U = X \setminus Z$로
+두자. 그러면 $U \to X$는 아핀 사상이다.
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-0175: the frozen, potentially inapplicable citation is preserved.
+문제는 $X$ 위에서 \'etale 국소적이다. Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-affine-local}와 Lemma
+\ref{lemma-characterize-effective-Cartier-divisor}를 보라. 따라서 스킴의 경우,
+즉 Divisors, Lemma
+\ref{divisors-lemma-complement-locally-principal-closed-subscheme}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-complement-effective-Cartier-divisor}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$D \subset X$를 유효 Cartier 제수라 하고 $U = X \setminus D$로 두자.
+그러면 $U \to X$는 아핀 사상이고 $U$는 $X$에서 스킴론적으로 조밀하다.
+\end{lemma}
+
+\begin{proof}
+아핀성은 Lemma
+\ref{lemma-complement-locally-principal-closed-subscheme}이다. 조밀성 문제는
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretically-dense}에 의해 $X$ 위에서
+\'etale 국소적이다. 따라서 스킴의 경우, 즉 Divisors, Lemma
+\ref{divisors-lemma-complement-effective-Cartier-divisor}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-effective-Cartier-makes-dimension-drop}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$D \subset X$를 유효 Cartier 제수라 하고 $x \in |D|$라 하자.
+$\dim_x(X) < \infty$이면 $\dim_x(D) < \dim_x(X)$이다.
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-0176: frozen source's defective parallel construction is normalized in Korean.
+유효 Cartier 제수의 정의와 한 점에서 대수공간의 차원에 대한 정의
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-at-point})는 모두 \'etale
+국소적이다. 따라서 이 보조정리는 스킴의 경우, 즉 Divisors, Lemma
+\ref{divisors-lemma-effective-Cartier-makes-dimension-drop}에서 따른다.
+\end{proof}
+
+\begin{definition}
+\label{definition-sum-effective-Cartier-divisors}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자. 유효 Cartier 제수
+$D_1$, $D_2$가 $X$ 위에 주어졌을 때, $D = D_1 + D_2$를 $X$의 닫힌
+부분공간으로 두는데, 이는 준연접 아이디얼 층
+% P09-ERR-0177: frozen source's O_S ambient sheaf is preserved verbatim.
+$\mathcal{I}_{D_1}\mathcal{I}_{D_2} \subset \mathcal{O}_S$에 대응한다. 이를
+{\it 유효 Cartier 제수 $D_1$과 $D_2$의 합}이라
+부른다.
+\end{definition}
+
+\noindent
+합 $\sum n_iD_i$는 유한 개의 유효 Cartier 제수 $D_i$가 $X$ 위에 주어지고
+$n_i$가 음이 아닌 정수일 때 정의할 수 있음이 명백하다.
+
+\begin{lemma}
+\label{lemma-sum-effective-Cartier-divisors}
+두 유효 Cartier 제수의 합은 유효 Cartier 제수이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. \'Etale 국소적으로 다음의 간단한 대수 사실로 환원된다.
+$f_1, f_2 \in A$가 환 $A$의 영인자가 아닌 원소들이면
+$f_1f_2 \in A$도 영인자가 아니다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-sum-closed-subschemes-effective-Cartier}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$Z, Y$를 $X$의 두 닫힌 부분공간이라 하고, 각각의 아이디얼 층을
+$\mathcal{I}$와 $\mathcal{J}$라 하자. $\mathcal{I}\mathcal{J}$가 유효
+Cartier 제수 $D \subset X$를 정의하면, $Z$와 $Y$는 유효 Cartier 제수이고
+$D = Z + Y$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-characterize-effective-Cartier-divisor}에 의해 스킴의 경우,
+즉 Divisors, Lemma
+\ref{divisors-lemma-sum-closed-subschemes-effective-Cartier}로 환원된다.
+\end{proof}
+
+\noindent
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-inverse-image-closed-subspace}에서 대수공간들의
+임의의 사상에 따른 닫힌 부분공간의 역상을 정의했음을 상기하자.
+
+\begin{lemma}
+\label{lemma-pullback-locally-principal}
+$S$를 스킴이라 하자. $f : X' \to X$를 $S$ 위 대수공간들의 사상이라 하고,
+$Z \subset X$를 국소 주 닫힌 부분공간이라 하자. 그러면 역상
+$f^{-1}(Z)$는 $X'$의 국소 주 닫힌 부분공간이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+
+
+
+\begin{definition}
+\label{definition-pullback-effective-Cartier-divisor}
+$S$를 스킴이라 하자. $f : X' \to X$를 $S$ 위 대수공간들의 사상이라 하고,
+$D \subset X$를 유효 Cartier 제수라 하자. {\it $D$의 $f$에 의한 당김이
+정의된다}고 하는 것은 닫힌 부분공간 $f^{-1}(D) \subset X'$가 유효 Cartier
+제수라는 뜻이다. 이 경우 이를 $f^*D$ 또는 $f^{-1}(D)$로 나타내고
+{\it 유효 Cartier 제수의 당김}이라 부른다.
+\end{definition}
+
+\noindent
+$f^{-1}(D)$가 유효 Cartier 제수라는 조건은 실제로 흔히 만족된다.
+
+\begin{lemma}
+\label{lemma-pullback-effective-Cartier-defined}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하고,
+$D \subset Y$를 유효 Cartier 제수라 하자. 다음 각 경우에 $D$의
+$f$에 의한 당김이 정의된다.
+\begin{enumerate}
+\item $f(x) \not \in |D|$가 모든 약연관점 $x$, 즉 $X$의 약연관점에 대해
+성립한다.
+\item $f$는 평탄하다.
+% P09-ERR-0178: frozen source's editorial placeholder is translated literally.
+\item 필요에 따라 여기에 더 추가한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\'Etale 국소적으로 작업하면 이 보조정리는 스킴의 경우로 환원된다.
+Divisors, Lemma
+\ref{divisors-lemma-pullback-effective-Cartier-defined}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pullback-effective-Cartier-divisors-additive}
+$S$를 스킴이라 하자. $f : X' \to X$를 $S$ 위 대수공간들의 사상이라 하고,
+$D_1$, $D_2$를 $X$ 위의 유효 Cartier 제수라 하자. $D_1$과 $D_2$의
+당김들이 정의되면 $D = D_1 + D_2$의 당김도 정의되며
+$f^*D = f^*D_1 + f^*D_2$이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\section{유효 Cartier 제수와 가역 층}
+\label{section-effective-Cartier-invertible}
+
+\noindent
+유효 Cartier 제수는 가역 아이디얼 층을 가지므로(Definition
+\ref{definition-effective-Cartier-divisor}), 다음 정의는 의미가 있다.
+
+\begin{definition}
+\label{definition-invertible-sheaf-effective-Cartier-divisor}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하고
+$D \subset X$를 아이디얼 층 $\mathcal{I}_D$를 갖는 유효 Cartier 제수라 하자.
+\begin{enumerate}
+\item {\it 가역 층 $\mathcal{O}_X(D)$}는 $D$에 연관되며 다음과 같이 정의한다.
+$$
+\mathcal{O}_X(D) =
+\SheafHom_{\mathcal{O}_X}(\mathcal{I}_D, \mathcal{O}_X) =
+\mathcal{I}_D^{\otimes -1}.
+$$
+\item 보통 $1$ 또는 $1_D$로 나타내는 표준 단면은 $\mathcal{O}_X(D)$의
+대역 단면이며, 포함 사상 $\mathcal{I}_D \to \mathcal{O}_X$에 대응한다.
+\item 다음과 같이 쓴다.
+$\mathcal{O}_X(-D) = \mathcal{O}_X(D)^{\otimes -1} = \mathcal{I}_D$.
+\item 두 번째 유효 Cartier 제수 $D' \subset X$가 주어지면 다음과 같이
+정의한다.
+$\mathcal{O}_X(D - D') =
+\mathcal{O}_X(D) \otimes_{\mathcal{O}_X} \mathcal{O}_X(-D')$.
+\end{enumerate}
+\end{definition}
+
+\noindent
+몇 가지 주석을 덧붙이자. 아래에서 대응
+$D \mapsto \mathcal{O}_X(D)$가 유효 Cartier 제수의 덧셈(Definition
+\ref{definition-sum-effective-Cartier-divisors})을 $X$의 Picard 군의
+덧셈(Lemma
+\ref{lemma-invertible-sheaf-sum-effective-Cartier-divisors})으로 보냄을 볼
+것이다. 그러나 위 정의의 표현 $D - D'$는 기하학적 의미를 갖지 않는다.
+더 정확히 말하면, $X$ 위 유효 Cartier 제수들의 집합을 공집합인 유효
+Cartier 제수를 영원소로 갖는 가환 모노이드 $\text{EffCart}(X)$로 생각할
+수 있다. 그러면 대응
+$(D, D') \mapsto \mathcal{O}_X(D - D')$는 군 준동형
+$$
+\text{EffCart}(X)^{gp} \longrightarrow \Pic(X)
+$$
+을 정의하며, 여기서 왼쪽은 $\text{EffCart}(X)$의 군 완성이다. 다시 말해
+$\mathcal{O}_X(D - D')$라고 쓸 때 $D - D'$를
+$\text{EffCart}(X)^{gp}$의 원소로 생각할 수 있다.
+
+\begin{lemma}
+\label{lemma-conormal-effective-Cartier-divisor}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$D \subset X$를 유효 Cartier 제수라 하자. 그러면 여법선 층에 대해
+% P09-ERR-0179: frozen source's malformed first restriction is preserved verbatim.
+$\mathcal{C}_{D/X} = \mathcal{I}_D|D =
+\mathcal{O}_X(D)^{\otimes -1}|_D$이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-invertible-sheaf-sum-effective-Cartier-divisors}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$D_1$, $D_2$를 $X$ 위의 유효 Cartier 제수라 하고
+$D = D_1 + D_2$로 두자. 그러면 유일한 동형사상
+$$
+\mathcal{O}_X(D_1) \otimes_{\mathcal{O}_X} \mathcal{O}_X(D_2)
+\longrightarrow
+\mathcal{O}_X(D)
+$$
+이 존재하여 $1_{D_1} \otimes 1_{D_2}$를 $1_D$로 보낸다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{definition}
+\label{definition-regular-section}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{L}$을 $X$ 위의 가역 층이라 하자. 대역 단면
+$s \in \Gamma(X, \mathcal{L})$에 대해 사상
+$\mathcal{O}_X \to \mathcal{L}$, $f \mapsto fs$가 단사이면 이를
+{\it 정칙 단면}이라 한다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-regular-section-structure-sheaf}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$f \in \Gamma(X, \mathcal{O}_X)$라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $f$는 정칙 단면이다.
+\item 임의의 $x \in X$에 대해 상 $f \in \mathcal{O}_{X, \overline{x}}$는
+영인자가 아니다.
+\item 임의의 아핀 $U = \Spec(A)$가 $X$ 위에서 \'etale이면 제한
+$f|_U$는 $A$의 영인자가 아닌 원소이다.
+\item 스킴 $U$와 전사 \'etale 사상 $U \to X$가 존재하여 $f|_U$는
+$\mathcal{O}_U$의 정칙 단면이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\noindent
+$s$가 가역 $\mathcal{O}_X$-가군 $\mathcal{L}$의 대역 단면이면, 이를
+$\mathcal{O}_X$-가군 사상 $s : \mathcal{O}_X \to \mathcal{L}$로 볼 수
+있음을 주목하자. 따라서 그 쌍대는 사상
+$s : \mathcal{L}^{\otimes -1} \to \mathcal{O}_X$이다.
+(쌍대 가역 층에 대해서는 Modules on Sites, Lemma
+\ref{sites-modules-lemma-constructions-invertible}를 보라.)
+
+\begin{definition}
+\label{definition-zero-scheme-s}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{L}$을 가역 층이라 하고 $s \in \Gamma(X, \mathcal{L})$라 하자.
+$s$의 {\it 영점 스킴}은 닫힌 부분공간 $Z(s) \subset X$로서, 준연접
+아이디얼 층 $\mathcal{I} \subset \mathcal{O}_X$로 정의되며 이 층은 사상
+$s : \mathcal{L}^{\otimes -1} \to \mathcal{O}_X$의 상이다.
+\end{definition}
+
+\begin{lemma}
+\label{lemma-zero-scheme}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하고
+$s \in \Gamma(X, \mathcal{L})$라 하자.
+\begin{enumerate}
+\item 닫힌 몰입 $i : Z \to X$ 중에서
+% P09-ERR-0180: frozen source's unmatched closing parenthesis is preserved verbatim.
+$i^*s \in \Gamma(Z, i^*\mathcal{L}))$가 영이 되는 것들을 포함관계로
+순서화하여 생각하자. 영점 스킴 $Z(s)$는
+이 순서집합의 최대원소이다.
+\item 임의의 사상 $f : Y \to X$가 $S$ 위 대수공간들의 사상이면
+$f^*s = 0$가 $\Gamma(Y, f^*\mathcal{L})$ 안에서 성립할 필요충분조건은 $f$가
+$Z(s)$를 통해 인수분해되는 것이다.
+\item 영점 스킴 $Z(s)$는 $X$의 국소 주 닫힌 부분공간이다.
+\item 영점 스킴 $Z(s)$가 $X$ 위의 유효 Cartier 제수일 필요충분조건은
+$s$가 $\mathcal{L}$의 정칙 단면인 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-OD}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+\begin{enumerate}
+\item $D \subset X$가 유효 Cartier 제수이면 표준 단면 $1_D$, 즉
+$\mathcal{O}_X(D)$의 표준 단면은 정칙이다.
+\item 역으로 $s$가 가역 층 $\mathcal{L}$의 정칙 단면이면, 유일한 유효
+Cartier 제수 $D = Z(s) \subset X$와 유일한 동형사상
+$\mathcal{O}_X(D) \to \mathcal{L}$이 존재하고, 이 사상은 $1_D$를 $s$로
+보낸다.
+\end{enumerate}
+구성
+$D \mapsto (\mathcal{O}_X(D), 1_D)$와 $(\mathcal{L}, s) \mapsto Z(s)$는
+서로 역인 사상
+$$
+\left\{
+\begin{matrix}
+\text{effective Cartier divisors on }X
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+\text{pairs }(\mathcal{L}, s)\text{ consisting of an invertible}\\
+\mathcal{O}_X\text{-module and a regular global section}
+\end{matrix}
+\right\}
+$$
+을 준다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+
+
+
+\section{Noether 대수공간 위의 유효 Cartier 제수}
+\label{section-Noetherian-effective-Cartier}
+
+\noindent
+국소 Noether 상황에서는 유효 Cartier 제수와 정칙 단면에 관한 논의의
+대부분이 다소 단순해진다.
+
+\begin{lemma}
+\label{lemma-effective-Cartier-divisor-Sk}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 국소 Noether 대수공간이라 하자.
+$D \subset X$를 유효 Cartier 제수라 하자. $X$가 $(S_k)$이면 $D$는
+$(S_{k - 1})$이다.
+\end{lemma}
+
+\begin{proof}
+대수공간에 대한 성질 $(S_k)$의 정의(Properties of Spaces, Section
+\ref{spaces-properties-section-types-properties})와 Lemma
+\ref{lemma-characterize-effective-Cartier-divisor}에 의해 스킴의 경우
+(Divisors, Lemma \ref{divisors-lemma-effective-Cartier-divisor-Sk})에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-normal-effective-Cartier-divisor-S1}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 국소 Noether 정규 대수공간이라 하자.
+$D \subset X$를 유효 Cartier 제수라 하자. 그러면 $D$는 $(S_1)$이다.
+\end{lemma}
+
+\begin{proof}
+대수공간에 대한 정규성의 정의(Properties of Spaces, Section
+\ref{spaces-properties-section-types-properties})와 Lemma
+\ref{lemma-characterize-effective-Cartier-divisor}에 의해 스킴의 경우
+(Divisors, Lemma
+\ref{divisors-lemma-normal-effective-Cartier-divisor-S1})에서 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리는 때때로 유효 Cartier 제수를 만드는 데 사용할 수 있다.
+
+\begin{lemma}
+\label{lemma-complement-open-affine-effective-cartier-divisor}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 정칙 Noether 분리 대수공간이라 하자.
+$U \subset X$를 조밀한 아핀 열린집합이라 하자. 그러면 유효 Cartier 제수
+$D \subset X$가 존재하여 $U = X \setminus D$이다.
+\end{lemma}
+
+\begin{proof}
+$D$를 $X \setminus U$ 위의 축약 유도 대수공간 구조라 하자(Properties of Spaces,
+Definition \ref{spaces-properties-definition-reduced-induced-space})가 원하는
+유효 Cartier 제수라고 주장한다. $D$의 구성은 \'etale 국소화와 가환한다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace}의 증명을 보라.
+전사 \'etale 사상 $X' \to X$를 택하되 $X'$가 아핀이 되게 하자.
+$X$가 분리이므로 $U' = X' \times_X U$가 아핀임을 알 수 있다.
+$|X'| \to |X|$가 열린 사상이므로 $U'$는 $X'$에서 조밀하다.
+$D' = X' \times_X D$가 $X' \setminus U'$ 위의 축약 유도 스킴 구조이므로,
+Divisors, Lemma
+\ref{divisors-lemma-complement-open-affine-effective-cartier-divisor}와 그
+증명에 의해 $D'$는 유효 Cartier 제수이다. 이것이 보일 것이었다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-Noetherian-regular-separated-pic-effective-Cartier}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 정칙 Noether 분리 대수공간이라 하자.
+그러면 모든 가역 $\mathcal{O}_X$-가군은 다음 층과 동형이다.
+$$
+\mathcal{O}_X(D - D') =
+\mathcal{O}_X(D) \otimes_{\mathcal{O}_X} \mathcal{O}_X(D')^{\otimes -1}
+$$
+여기서 $D, D'$는 $X$ 안의 어떤 유효 Cartier 제수들이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자. 조밀한 아핀 열린집합
+$U \subset X$를 택하여 $\mathcal{L}|_U$가 자명하게 하자.
+$X$는 스킴인 조밀한 열린 부분공간을 가지므로 이것이 가능하다.
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}를
+보라.
+% P09-ERR-0181: frozen source's missing preposition is normalized in Korean.
+자명화를 $s : \mathcal{O}_U \to \mathcal{L}|_U$로 나타내자.
+$U$의 여집합은 유효 Cartier 제수 $D$이다. 어떤 $n > 0$에 대해 사상
+$s$가 유일하게 다음 사상으로 연장된다고 주장한다.
+$$
+s : \mathcal{O}_X(-nD) \longrightarrow \mathcal{L}
+$$
+이 주장은 $\mathcal{L} \otimes_{\mathcal{O}_X} \mathcal{O}_X(nD)$가 정칙
+대역 단면을 가져 $\mathcal{O}_X(D')$와 동형임을 보인다. 여기서 $D'$는
+Lemma \ref{lemma-characterize-OD}에서 주어진 어떤 유효 Cartier 제수이다.
+따라서 이 주장은 보조정리를 함의한다. 주장을 증명하기 위해 \'etale
+국소적으로 작업할 수 있다. 따라서 $X$가 아핀 Noether 스킴이라고 가정할 수
+있다. $\mathcal{O}_X(-nD) = \mathcal{I}^n$이고, 여기서
+$\mathcal{I} = \mathcal{O}_X(-D)$는 $D$의 $X$ 안의 아이디얼 층이므로,
+이 경우는 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-homs-over-open}에서 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리는 사실 다른 절에 속한다.
+
+\begin{lemma}
+\label{lemma-smooth-over-valuation-ring-effective-Cartier}
+$R$을 분수체 $K$를 갖는 값매김환이라 하자. $X$를 $R$ 위의 대수공간이라
+하고 $X \to \Spec(R)$가 매끄럽다고 하자. 모든 유효 Cartier 제수
+$D \subset X_K$에 대해 유효 Cartier 제수 $D' \subset X$가 존재하여
+$D'_K = D$이다.
+\end{lemma}
+
+\begin{proof}
+$D' \subset X$를 $D \to X_K \to X$의 스킴론적 상이라 하자. 이 사상은
+준콤팩트이므로 $D'$의 형성은 평탄한 밑변환과 가환한다. Morphisms of Spaces,
+Lemma
+\ref{spaces-morphisms-lemma-flat-base-change-scheme-theoretic-image}를 보라.
+특히 $D'_K = D$임을 얻는다. 따라서 $X$가 아핀이라고 가정할 수 있다.
+$X = \Spec(A)$라 쓰자. 그러면 $X_K = \Spec(A \otimes_R K)$이고 $D$는
+아이디얼 $I \subset A \otimes_R K$에 대응한다. $J = I \cap A$가 $X$에서
+유효 Cartier 제수를 잘라 냄을 보여야 한다. 먼저 $A/J$가 $R$ 위에서
+평탄함을 관찰하자($R$-가군으로서 꼬임이 없기 때문이다. More on Algebra,
+Lemma \ref{more-algebra-lemma-valuation-ring-torsion-free-flat}를 보라).
+따라서 More on Algebra, Lemma
+\ref{more-algebra-lemma-flat-finite-type-valuation-ring-finite-presentation}와
+Algebra, Lemma \ref{algebra-lemma-extension}에 의해 $J$는 유한 생성이다.
+그러므로 $J_\mathfrak q \subset A_\mathfrak q$가 한 원소로 생성됨을 각
+소아이디얼 $\mathfrak q \subset A$에 대해 보이면 충분하다.
+$\mathfrak p = R \cap \mathfrak q$로 두자. 그러면 $R_\mathfrak p$는
+값매김환이다(Algebra, Lemma
+\ref{algebra-lemma-make-valuation-rings}). 또한
+$A_\mathfrak q/\mathfrak p A_\mathfrak q$는 Algebra, Lemma
+\ref{algebra-lemma-characterize-smooth-over-field}에 의해 정칙환임을
+관찰하자. 따라서 More on Algebra, Lemma
+\ref{more-algebra-lemma-picard-group-generic-fibre-regular}를 적용하면
+$I(A_\mathfrak q \otimes_R K)$가 한 원소
+$f \in A_\mathfrak p \otimes_R K$로 생성됨을 알 수 있다. 분모를 제거하여
+$f \in A_\mathfrak q$라고 가정할 수 있다. $\mathfrak c \subset R_\mathfrak p$를
+$f$의 내용 아이디얼이라 하자(More on Algebra, Definition
+\ref{more-algebra-definition-content-ideal} 및 More on Flatness, Lemma
+\ref{flat-lemma-flat-finite-type-local-valuation-ring-has-content}를 보라).
+$R_\mathfrak p$는 값매김환이고 $\mathfrak c$는 유한 생성이므로(More on
+Algebra, Lemma \ref{more-algebra-lemma-content-finitely-generated}),
+$\mathfrak c = (\pi)$이고 여기서 $\pi \in R_\mathfrak p$이다(Algebra,
+Lemma \ref{algebra-lemma-characterize-valuation-ring}).
+% P09-ERR-0182: frozen source's typo “relacing” is normalized in Korean.
+$f$를 $\pi^{-1}f$로 바꾸면 $f \in A_\mathfrak q$이고
+$f \not \in \mathfrak pA_\mathfrak q$임을 알 수 있다.
+% P09-ERR-0183: frozen source's concluding I_q occurrences are preserved verbatim.
+주장: $I_\mathfrak q = (f)$이며, 이로써 증명이 끝난다. 주장을 보이기 위해
+$f \in I_\mathfrak q$임을 관찰하자. 따라서 전사
+$A_\mathfrak q/(f) \to A_\mathfrak q/I_\mathfrak q$가 있고, 이는 $R$ 위에서
+$K$와 텐서한 뒤 동형사상이 된다. 그러므로 $A_\mathfrak q/(f)$가
+$R_\mathfrak p$-평탄이면 끝난다. 이는 Algebra, Lemma
+\ref{algebra-lemma-grothendieck-general}과 $f$의 선택에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{상대 유효 Cartier 제수}
+\label{section-effective-Cartier-morphisms}
+
+\noindent
+다음 보조정리는 밑공간 위에서 평탄한 유효 Cartier 제수가 실제로 밑공간
+위의 “유효 Cartier 제수들의 족”임을 보여 준다. 예를 들어 임의의 섬유에
+대한 제한은 유효 Cartier 제수이다.
+
+\begin{lemma}
+\label{lemma-relative-Cartier}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하고
+$D \subset X$를 닫힌 부분공간이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $D$는 유효 Cartier 제수이다.
+\item $D \to Y$는 평탄 사상이다.
+\end{enumerate}
+% P09-ERR-0184: frozen source's category phrase “morphism of schemes” is preserved.
+그러면 스킴들의 모든 사상 $g : Y' \to Y$에 대해 당김
+$(g')^{-1}D$는 $X' = Y' \times_Y X$ 위의 유효 Cartier 제수이다. 여기서
+$g' : X' \to X$는 사영이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-characterize-effective-Cartier-divisor}를 사용하면 유효
+Cartier 제수라는 성질은 \'etale 국소적이다.
+% P09-ERR-0185: frozen source's typo “lemmma” is normalized in Korean.
+따라서 이 보조정리는 즉시 스킴의 경우, 즉 Divisors, Lemma
+\ref{divisors-lemma-relative-Cartier}로 환원된다.
+\end{proof}
+
+\noindent
+이 보조정리가 다음 정의의 동기이다.
+
+\begin{definition}
+\label{definition-relative-effective-Cartier-divisor}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$X/Y$ 위의 {\it 상대 유효 Cartier 제수}란 유효 Cartier 제수
+$D \subset X$ 중에서 $D \to Y$가 대수공간들의 평탄 사상인 것이다.
+\end{definition}
+
+
+
+
+
+
+
+
+
+\section{유리형 함수와 단면}
+\label{section-meromorphic-functions}
+
+\noindent
+이 절은 Divisors, Section
+\ref{divisors-section-meromorphic-functions}에 대응한다.
+% P09-ERR-0186: frozen source's singular count phrase is normalized in Korean.
+주의하라. 이 내용에서는 스킴의 경우보다 대수공간의 경우에 실수하기가
+훨씬 더 쉽다!
+
+\medskip\noindent
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자. 임의의 스킴
+$U$가 $X$ 위에서 \'etale이면, 집합
+$\mathcal{S}(U) \subset \mathcal{O}_X(U)$를 $\mathcal{O}_X$의 $U$ 위 정칙
+단면들의 집합으로 Definition
+\ref{definition-regular-section}에서 정의했다. 정칙 단면을 \'etale
+$V/U$에 제한해도 정칙이다. 따라서
+$\mathcal{S} : U \mapsto \mathcal{S}(U)$는 $\mathcal{O}_X$의
+(집합의) 부분층이다. 때때로 $\mathcal{S} = \mathcal{S}_X$라고 써서
+$X$에 대한 의존성을 나타낸다. 또한 $\mathcal{S}(U)$는 환
+$\mathcal{O}_X(U)$의 곱셈적 부분집합이고, 이는 각 $U$에 대해 성립한다.
+따라서 환의 앞층
+$$
+U \longmapsto \mathcal{S}(U)^{-1} \mathcal{O}_X(U),
+$$
+을 $X_\etale$ 위에서 생각하고 그 층화를 취할 수 있다. Modules on Sites, Section
+\ref{sites-modules-section-localizing-sheaves-rings}를 보라.
+
+\begin{definition}
+\label{definition-sheaf-meromorphic-functions}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$X$ 위의 {\it 유리형 함수의 층}은 위에 표시한 앞층에 연관된 층
+{\it $\mathcal{K}_X$}이며, 이는 $X_\etale$ 위의 층이다. $X$ 위의
+{\it 유리형 함수}란 $\mathcal{K}_X$의 대역 단면이다.
+\end{definition}
+
+\noindent
+각 $\mathcal{S}(U)$의 각 원소는 $\mathcal{O}_X(U)$에서 영인자가 아니므로
+환의 층의 자연스러운 사상 $\mathcal{O}_X \to \mathcal{K}_X$가 단사임을
+알 수 있다. 또한 층화와 줄기를 취하는 일이 양립하므로
+$$
+\mathcal{K}_{X, \overline{x}} =
+\mathcal{S}_{\overline{x}}^{-1}\mathcal{O}_{X, \overline{x}}
+$$
+임을 임의의 기하적 점 $\overline{x}$, 즉 $X$의 기하적 점에 대해 알 수 있다. 집합
+$\mathcal{S}_{\overline{x}}$는
+$\mathcal{O}_{X, \overline{x}}$의 영인자가 아닌 원소들의 집합에
+포함되지만, 일반적으로 두 집합은 같지 않다.
+
+\begin{lemma}
+\label{lemma-describe-S}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자. $U$가 아핀이고
+$X$ 위에서 \'etale이면 집합 $\mathcal{S}_X(U)$는
+$\mathcal{O}_X(U)$의 영인자가 아닌 원소들의 집합이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-regular-section-structure-sheaf}에서 따른다.
+\end{proof}
+
+\noindent
+다음으로 $\mathcal{F}$를 $\mathcal{O}_X$-가군의 층이라 하고, 이 층이
+$X_\etale$ 위에 있다고 하자.
+앞층 $U \mapsto \mathcal{S}(U)^{-1}\mathcal{F}(U)$를 생각하자. 그 층화는
+층 $\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{K}_X$이다. Modules on
+Sites, Lemma \ref{sites-modules-lemma-simple-invert-module}을 보라.
+
+\begin{definition}
+\label{definition-meromorphic-section}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 $\mathcal{O}_X$-가군의 층이라 하고, 이 층이 $X_\etale$
+위에 있다고 하자.
+\begin{enumerate}
+% P09-ERR-0187: frozen source's missing preposition is normalized in Korean.
+\item $\mathcal{K}_X(\mathcal{F})$로 $\mathcal{K}_X$-가군의 층을
+나타내며, 이 층은 앞층
+$U \mapsto \mathcal{S}(U)^{-1}\mathcal{F}(U)$의 층화이다. 동치로
+$\mathcal{K}_X(\mathcal{F}) =
+\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{K}_X$이다(위를 보라).
+\item $\mathcal{F}$의 {\it 유리형 단면}이란
+$\mathcal{K}_X(\mathcal{F})$의 대역 단면이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+특히
+$$
+\mathcal{K}_X(\mathcal{F})_{\overline{x}}
+=
+\mathcal{F}_{\overline{x}}
+\otimes_{\mathcal{O}_{X, \overline{x}}} \mathcal{K}_{X, \overline{x}}
+=
+\mathcal{S}_{\overline{x}}^{-1}\mathcal{F}_{\overline{x}}
+$$
+이고, 이는 임의의 기하적 점 $\overline{x}$, 즉 $X$의 기하적 점에 대해
+성립한다. 그러나
+위에서 지적했듯이 $\mathcal{S}_{\overline{x}}$가 \'etale 국소환
+$\mathcal{O}_{X, \overline{x}}$의 영인자가 아닌 원소들의 집합이 아닐 수
+있으므로 주의해야 한다. 유리형 단면의 층들은 일반적으로 준연접 가군이
+아니지만, 준연접 가군과 몇몇 성질을 공유한다.
+
+\begin{lemma}
+\label{lemma-meromorphic-quasi-coherent}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item[(a)] $X$의 모든 약연관점은 공차원 $0$인 점이다.
+\item[(b)] $X$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}의 동치 조건들을 만족한다.
+\end{enumerate}
+그러면
+\begin{enumerate}
+\item $\mathcal{K}_X$는 준연접 $\mathcal{O}_X$-대수 층이다.
+\item 아핀 $U \in X_\etale$에 대해 $\mathcal{K}_X(U)$는
+$\mathcal{O}_X(U)$의 전분수환이다.
+% P09-ERR-0188: frozen source's missing copula is supplied in Korean.
+\item 기하적 점 $\overline{x}$에 대해 집합 $\mathcal{S}_{\overline{x}}$는
+$\mathcal{O}_{X, \overline{x}}$의 영인자가 아닌 원소들의 집합이다.
+\item 기하적 점 $\overline{x}$에 대해 환
+$\mathcal{K}_{X, \overline{x}}$는 $\mathcal{O}_{X, \overline{x}}$의
+전분수환이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-regular-section-structure-sheaf}에 의해
+% P09-ERR-0189: frozen source's missing “for” is supplied in Korean.
+아핀 $U \in X_\etale$에 대해
+$\mathcal{S}_X(U) \subset \mathcal{O}_X(U)$는
+$\mathcal{O}_X(U)$의 영인자가 아닌 원소들의 집합이다. 따라서 앞층
+$\mathcal{S}^{-1}\mathcal{O}_X$는
+$$
+U \longmapsto Q(\mathcal{O}_X(U))
+$$
+와 같고, 이는 $X_{affine, \etale}$ 위에서의 등식이다. 표기는 Algebra, Example
+\ref{algebra-example-localize-at-prime}에서와 같다. 공차원 $0$인 $X$의
+점들은 $U$의 일반점들에 대응함을 관찰하자. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points}를 보라. 따라서
+$U = \Spec(A)$이면 $A$는 유한 개의 극소 소아이디얼을 가지며, $A$의
+모든 약연관 소아이디얼은 극소이다. $A$의 임의의 \'etale 확대에 대해서도
+같은 사실이 성립한다(그 스펙트럼은 $X$ 위에서 \'etale인 아핀 스킴이므로
+앞 문장에서 $A$의 역할을 할 수 있다). 우리 앞층이 층이고 준연접임을
+보이려면,
+$$
+Q(A) \otimes_A B \longrightarrow Q(B)
+$$
+가 동형사상임을 보이면 충분하며, 여기서 $A \to B$는 \'etale 환
+사상이다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-characterize-quasi-coherent-small-etale}를
+보라. (표시한 화살표를 정의하려면 $A \to B$가 평탄이어서 영인자가 아닌
+원소들을 영인자가 아닌 원소들로 보냄을 관찰하라.)
+% P09-ERR-0190: frozen source's broken “By ... we have” punctuation is normalized.
+Algebra, Lemmas
+\ref{algebra-lemma-total-ring-fractions-no-embedded-points}와
+\ref{algebra-lemma-weakly-ass-zero-divisors}에 의해
+$$
+Q(A) = \prod\nolimits_{\mathfrak p \subset A\text{ minimal}} A_\mathfrak p
+\quad\text{and}\quad
+Q(B) = \prod\nolimits_{\mathfrak q \subset B\text{ minimal}} B_\mathfrak q
+$$
+이다. $A \to B$가 \'etale이므로 $B$의 극소 소아이디얼들은 정확히
+$B$의 소아이디얼들 중 $A$의 극소 소아이디얼 위에 놓이는 것들이다(예컨대 More on
+Algebra, Lemma \ref{more-algebra-lemma-dimension-etale-extension}에 의해).
+Algebra, Lemmas \ref{algebra-lemma-local-dimension-zero-henselian},
+\ref{algebra-lemma-characterize-henselian}의 (13), 그리고
+\ref{algebra-lemma-mop-up}에 의해
+$A_\mathfrak p \otimes_A B$는 $A_\mathfrak p$ 위의 유한 \'etale 국소환들의
+유한 곱이다. 이는 명백히
+$A_\mathfrak p \otimes_A B =
+\prod_{\mathfrak q\text{ lies over }\mathfrak p} B_\mathfrak q$를
+함의하며, 이것이 원한 바이다.
+
+\medskip\noindent
+이제 (1)과 (2)가 성립함을 안다. (3)을 증명하자.
+$s \in \mathcal{O}_{X, \overline{x}}$를 영인자가 아닌 원소라 하자. 그러면
+\'etale 근방 $(U, \overline{u}) \to (X, \overline{x})$와
+$f \in \mathcal{O}_X(U)$를 찾아 $s$로 가게 할 수 있다. $u \in U$를
+$\overline{u}$가 정하는 점이라 하자. $\mathcal{O}_{U, u} \to
+\mathcal{O}_{X, \overline{x}}$는 강 Hensel화로서 충실 평탄이므로, $f$는
+$\mathcal{O}_{U, u}$의 영인자가 아닌 원소로 감을 알 수 있다. Divisors,
+Lemma \ref{divisors-lemma-meromorphic-weakass-finite}에 의해 $U$를
+줄이고 나면 $f$가 영인자가 아닌 원소이며 따라서
+$\mathcal{S}_X(U)$의 단면임을 얻는다. (4)는 줄기를 계산하여 (3)에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-meromorphic-quasi-coherent-agree}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item[(a)] $X$의 모든 약연관점은 공차원 $0$인 점이다.
+\item[(b)] $X$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}의 동치 조건들을 만족한다.
+\item[(c)] $X$는 스킴 $X_0$로 표현된다(어색하지만 임시로 쓰는 표기이다).
+\end{enumerate}
+그러면 유리형 함수의 층 $\mathcal{K}_X$는 준연접
+$\mathcal{O}_X$-대수 층이며, 유리형 함수의 준연접 층
+$\mathcal{K}_{X_0}$에 연관된다.
+\end{lemma}
+
+\begin{proof}
+$\QCoh(\mathcal{O}_X)$와 $\QCoh(\mathcal{O}_{X_0})$ 사이의 동치에 대해서는
+Properties of Spaces, Section
+\ref{spaces-properties-section-quasi-coherent}을 보라. 이 보조정리가 참인
+이유는 $\mathcal{K}_X$와 $\mathcal{K}_{X_0}$가 준연접이고, Lemma
+\ref{lemma-meromorphic-quasi-coherent}와 Divisors, Lemma
+\ref{divisors-lemma-meromorphic-weakass-finite}에 의해 $X$와 $X_0$의
+서로 대응하는 아핀 열린집합에서 같은 값을 갖기 때문이다.
+\end{proof}
+
+\begin{definition}
+\label{definition-pullback-meromorphic-sections}
+$S$를 스킴이라 하고, $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+{\it $f$에 대해 유리형 함수의 당김이 정의된다}고 하는 것은 다음 임의의
+가환 그림
+$$
+\xymatrix{
+U \ar[r] \ar[d] & X \ar[d] \\
+V \ar[r] & Y
+}
+$$
+과 $U \in X_\etale$, $V \in Y_\etale$, 그리고 임의의 단면
+$s \in \mathcal{S}_Y(V)$에 대해 당김
+$f^\sharp(s) \in \mathcal{O}_X(U)$가 $\mathcal{S}_X(U)$의 원소라는 뜻이다.
+\end{definition}
+
+\noindent
+이 경우 유도 사상
+$f^\sharp : f_{small}^{-1}\mathcal{K}_Y \to \mathcal{K}_X$가 있다.
+다시 말해 환 달린 토포스들의 사상으로 이루어진 가환 그림
+$$
+\xymatrix{
+(\Sh(X_\etale), \mathcal{K}_X) \ar[r] \ar[d]^{f_{small}} &
+(\Sh(X_\etale), \mathcal{O}_X) \ar[d]^{f_{small}} \\
+(\Sh(Y_\etale), \mathcal{K}_Y) \ar[r] &
+(\Sh(Y_\etale), \mathcal{O}_Y)
+}
+$$
+을 얻는다. 때때로 $f^*(s) = f^\sharp(s)$라고 쓰며, 여기서
+$s \in \Gamma(Y, \mathcal{K}_Y)$는 단면이다.
+
+\begin{lemma}
+\label{lemma-pullback-meromorphic-sections-defined}
+$S$를 스킴이라 하고, $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+% P09-ERR-0191: frozen source's “meromorphic sections” wording is preserved.
+다음 각 경우에 유리형 단면의 당김이 정의된다.
+\begin{enumerate}
+\item $X$의 약연관점들은 공차원 $0$인 $Y$의 점들로 보내진다.
+\item $f$는 평탄하다.
+% P09-ERR-0192: frozen source's editorial placeholder is translated literally.
+\item 필요에 따라 여기에 더 추가한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\'Etale 국소적으로 작업하면 스킴의 경우로 옮겨진다. Divisors, Lemma
+\ref{divisors-lemma-pullback-meromorphic-sections-defined}를 보라. 이 번역에는
+Lemma \ref{lemma-regular-section-structure-sheaf}(정칙 단면의 기술),
+Definition \ref{definition-weakly-associated}(약연관점의 정의), 그리고
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points}(공차원 $0$인 점의 기술)을
+사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compute-meromorphic}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item[(a)] $X$의 모든 약연관점은 공차원 $0$인 점이다.
+\item[(b)] $X$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}의 동치 조건들을 만족한다.
+\item[(c)] 공차원 $0$인 $X$의 모든 점은 단사사상
+$\Spec(k) \to X$로 표현될 수 있다.
+\end{enumerate}
+$X^0 \subset |X|$를 공차원 $0$인 $X$의 점들의 집합이라 하자. 그러면
+$$
+\mathcal{K}_X =
+\bigoplus\nolimits_{\eta \in X^0} j_{\eta, *}\mathcal{O}_{X, \eta} =
+\prod\nolimits_{\eta \in X^0} j_{\eta, *}\mathcal{O}_{X, \eta}
+$$
+이다. 여기서 $j_\eta : \Spec(\mathcal{O}_{X, \eta}) \to X$는 Schemes,
+Section \ref{schemes-section-points}의 표준 사상이다. 이는 $X^0$가 $X$의
+스킴적 자리에 포함되므로 의미가 있다. 마찬가지로 모든 준연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$에 대해
+$$
+\mathcal{K}_X(\mathcal{F}) =
+\bigoplus\nolimits_{\eta \in X^0} j_{\eta, *}\mathcal{F}_\eta =
+\prod\nolimits_{\eta \in X^0} j_{\eta, *}\mathcal{F}_\eta
+$$
+를 $\mathcal{F}$의 유리형 단면의 층에 대해 얻는다. 마지막으로 $X$의
+유리함수환은 $X$ 위의 유리형 함수들의 환이며, 식으로 쓰면
+$R(X) = \Gamma(X, \mathcal{K}_X)$이다.
+\end{lemma}
+
+\begin{proof}
+Decent Spaces, Lemma \ref{decent-spaces-lemma-get-reasonable}와 Section
+\ref{decent-spaces-section-reasonable-decent}에 의해 $X$가 decent임을 알 수
+있다\footnote{역으로 $X$가 decent이면 조건 (c)는 자동으로 성립한다.}.
+따라서 $X^0 \subset |X|$는 기약 성분들의 일반점들의 집합이고(Decent
+Spaces, Lemma \ref{decent-spaces-lemma-decent-generic-points}), (b)에 의해
+$X^0$는 $|X|$에서 국소 유한이다. 따라서 $X^0$는 $|X|$의 모든 조밀한 열린
+부분집합에 포함된다. 특히 $X^0$는 스킴적 자리에 포함된다(Decent Spaces,
+Theorem \ref{decent-spaces-theorem-decent-open-dense-scheme}). 그러므로
+국소환 $\mathcal{O}_{X, \eta}$와 사상 $j_\eta$가 정의된다.
+
+\medskip\noindent
+가군 층들의 국소 유한 직합은 곱과 같음을 관찰하자. 이 사실과 $X^0$가
+$|X|$에서 국소 유한이라는 사실이 명제의 직합과 곱 사이의 등식들을
+설명한다. 이제
+$\mathcal{K}_X(\mathcal{F}) =
+\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{K}_X$이므로 두 번째 등식은
+첫 번째 등식에서 따른다.
+
+\medskip\noindent
+다음과 같이 두자.
+$$
+j : Y = \coprod\nolimits_{\eta \in X^0} \Spec(\mathcal{O}_{X, \eta}) \to X
+$$
+% P09-ERR-0193: frozen source's word “product” is translated literally.
+이는 사상들 $j_\eta$의 곱이다. $\mathcal{K}_X = j_*\mathcal{O}_Y$임을
+보여야 한다. $\mathcal{K}_Y = \mathcal{O}_Y$임을 관찰하자. 실제로 $Y$는
+차원 $0$인 국소환들의 스펙트럼들의 서로소 합이고, 차원 영인 국소환에서는
+영인자가 아닌 모든 원소가 단위원이다. 다음으로 Lemma
+\ref{lemma-pullback-meromorphic-sections-defined}에 의해 $j$에 대한 유리형
+함수의 당김이 정의됨을 주목하자. 이로부터 사상
+$$
+\mathcal{K}_X \longrightarrow j_*\mathcal{O}_Y.
+$$
+을 얻는다. 아핀 $U \in X_\etale$를 택하자. Lemma
+\ref{lemma-meromorphic-quasi-coherent}에 의해
+% P09-ERR-0194: frozen source's missing article is normalized in Korean.
+왼쪽 항을 계산하면 $\mathcal{O}_X(U)$의 전분수환을 얻는다. 다른 한편,
+오른쪽 항은 $U$의 공차원 $0$인 점들, 즉 $U$의 일반점들에서의 국소환들의
+곱과 같다. 이 두 환은 이미 Lemma
+\ref{lemma-meromorphic-quasi-coherent}의 증명에서 보았듯이 Algebra, Lemmas
+\ref{algebra-lemma-total-ring-fractions-no-embedded-points}와
+\ref{algebra-lemma-weakly-ass-zero-divisors}에 의해 같다.
+따라서 우리 사상은 동형사상이다.
+
+\medskip\noindent
+마지막으로 $R(X) = \Gamma(X, \mathcal{K}_X)$임을 보여야 한다. 이는 스킴적
+자리 $X' \subset X$에 스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-meromorphic-weakass-finite})를 적용하면 따른다.
+실제로 $X$의 유리함수환은 정의에 의해 $X'$ 위의 유리함수환과 같다.
+이 부분공간이 $X$의 조밀한 열린 부분공간이기 때문이다(위를 보라). 물론
+$R(X')$는 $X'$를 스킴으로 볼 때의 유리함수환과 일치한다. 다른 한편 위의
+$\mathcal{K}_X$에 대한 기술과 위에서 본 사실, 즉 $X^0 \subset |X'|$가
+임의의 조밀한 열린집합에 포함된다는 사실로부터
+$\Gamma(X, \mathcal{K}_X) = \Gamma(X', \mathcal{K}_{X'})$임을 알 수 있다.
+마지막으로 Lemma \ref{lemma-meromorphic-quasi-coherent-agree}에 기록된
+양립성을 사용한다.
+\end{proof}
+
+\begin{definition}
+\label{definition-regular-meromorphic-section}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자. 유리형 단면 $s$가
+$\mathcal{L}$의 단면일 때, 유도 사상
+$\mathcal{K}_X \to \mathcal{K}_X(\mathcal{L})$가 단사이면 이를
+{\it 정칙}이라고 한다.
+\end{definition}
+
+\noindent
+(정칙) 유리형 단면을 언제 당길 수 있는지 자세히 적어 보자.
+
+\begin{lemma}
+\label{lemma-meromorphic-sections-pullback}
+$S$를 스킴이라 하고, $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$f$에 대해 유리형 함수의 당김이 정의된다고 가정하자(Definition
+\ref{definition-pullback-meromorphic-sections}을 보라).
+\begin{enumerate}
+\item $\mathcal{F}$를 $\mathcal{O}_Y$-가군의 층이라 하자. 다음 표준 당김
+사상이 있다.
+$$
+f^* : \Gamma(Y, \mathcal{K}_Y(\mathcal{F})) \to
+\Gamma(X, \mathcal{K}_X(f^*\mathcal{F}))
+$$
+이는 $\mathcal{F}$의 유리형 단면에 대한 당김 사상이다.
+% P09-ERR-0195: frozen source's O_X subscript is preserved verbatim.
+\item $\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자. 정칙 유리형
+단면 $s$가 $\mathcal{L}$의 단면이면, 그 당김 $f^*s$는
+$f^*\mathcal{L}$의 정칙 유리형 단면이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-regular-meromorphic-section-exists}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간으로서 Lemma
+\ref{lemma-compute-meromorphic}의 (a), (b), (c)를 만족한다고 하자.
+그러면 모든 가역 $\mathcal{O}_X$-가군 $\mathcal{L}$은 정칙 유리형 단면을
+갖는다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-compute-meromorphic}의 표기를 쓰자.
+% P09-ERR-0196: frozen source's omitted point after “at” is supplied in Korean.
+$\mathcal{L}_\eta$, 즉 $\mathcal{L}$의 $\eta \in X^0$에서의 줄기는
+정의되며, 계수 $1$인 자유
+$\mathcal{O}_{X, \eta}$-가군이다. 생성원
+$s_\eta \in \mathcal{L}_\eta$를 모든 $\eta \in X^0$에 대해 택하자. Lemma
+\ref{lemma-compute-meromorphic}의 $\mathcal{K}_X$와
+$\mathcal{K}_X(\mathcal{L})$에 대한 기술에서
+$s = \prod s_\eta$가 $\mathcal{L}$의 정칙 유리형 단면임이 즉시 따른다.
+\end{proof}
+
+\section{상대 Proj}
+\label{section-relative-proj}
+
+\noindent
+이 절에서는 대수공간의 맥락에서 상대 Proj의 구성을 다시 살펴본다.
+이 절의 내용은 스킴의 경우에 관한 Constructions, Section
+\ref{constructions-section-relative-proj}과 Divisors, Section
+\ref{divisors-section-relative-proj}의 내용에 대응한다.
+
+\begin{situation}
+\label{situation-relative-proj}
+여기서 $S$는 스킴이고, $X$는 $S$ 위의 대수공간이며,
+$\mathcal{A}$는 준연접 등급 $\mathcal{O}_X$-대수이다.
+\end{situation}
+
+\noindent
+Situation \ref{situation-relative-proj}에서 대수공간이 될 함자
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를 정의하려 한다.
+필요한 변경을 가하여 Constructions, Section
+\ref{constructions-section-relative-proj}의 절차를 따르겠다.
+먼저 스킴 $T$가 $S$ 위에서 주어졌을 때, {\it $T$ 위의 사중쌍}을 다음
+자료의 계
+$(d, f : T \to X, \mathcal{L}, \psi)$로 정의한다.
+\begin{enumerate}
+\item $d \geq 1$은 정수이고,
+\item $f : T \to X$는 $S$ 위의 사상이며,
+\item $\mathcal{L}$은 가역 $\mathcal{O}_T$-가군이고,
+\item
+$\psi : f^*\mathcal{A}^{(d)} \to \bigoplus_{n \geq 0}\mathcal{L}^{\otimes n}$
+는 등급 $\mathcal{O}_T$-대수의 준동형으로서
+$f^*\mathcal{A}_d \to \mathcal{L}$가 전사이다.
+\end{enumerate}
+두 사중쌍 $(d, f, \mathcal{L}, \psi)$와
+$(d', f', \mathcal{L}', \psi')$가 {\it 동치}라는 것은\footnote{이 정의는
+Constructions, Lemma \ref{constructions-lemma-equivalent-relative}에서
+동기를 얻었다. 이 정의를 택하면 동치관계를 정의한다는 것이 분명하다는
+장점이 있다.} 다음을 뜻한다. 즉, $f = f'$이고 어떤 양의 정수
+$m = ad = a'd'$에 대해 동형사상
+$\beta : \mathcal{L}^{\otimes a} \to (\mathcal{L}')^{\otimes a'}$가
+존재하여 $\beta \circ \psi|_{f^*\mathcal{A}^{(m)}}$와
+$\psi'|_{f^*\mathcal{A}^{(m)}}$가 다음 등급환 사상으로서 일치한다.
+% P09-ERR-0197
+$f^*\mathcal{A}^{(m)} \to \bigoplus_{n \geq 0} (\mathcal{L}')^{\otimes mn}$.
+사중쌍 $(d, f, \mathcal{L}, \psi)$와 사상 $h : T' \to T$가 주어지면
+당김 $(d, f \circ h, h^*\mathcal{L}, h^*\psi)$가 있다. 당김은
+동치관계를 보존한다. 마지막으로 스킴 $T$가 $S$ 위에서
+{\it 준콤팩트}일 때
+$$
+F(T) = \text{사중쌍의 동치류들의 집합, 그 밑은 }T
+$$
+로 두고, 스킴 $T$가 $S$ 위에서 임의로 주어졌을 때는
+$$
+F(T)
+=
+\lim_{V \subset T\text{ 준콤팩트 열린집합}} F(V).
+$$
+로 둔다. 다시 말해 원소 $\xi$가 $F(T)$에 속하는 것은 원소
+$\xi_V \in F(V)$들의 양립하는 선택계에 대응한다. 여기서 $V$는
+$T$의 준콤팩트 열린집합들을 달린다. 이로써 다음 함자를 정의하였다.
+\begin{equation}
+\label{equation-proj}
+% P09-ERR-0198
+F : \Sch^{opp} \longrightarrow \textit{Sets}
+\end{equation}
+함자의 사상 $F \to X$가 있으며, 이는 사중쌍
+$(d, f, \mathcal{L}, \psi)$를 $f$로 보낸다.
+
+\begin{lemma}
+\label{lemma-relative-proj}
+% P09-ERR-0199
+Situation \ref{situation-relative-proj}에서 위 함자 $F$는 대수공간이다.
+임의의 사상 $g : Z \to X$에서 $Z$가 스킴이면, 더 이상의 밑변환과
+양립하는 표준 동형사상
+$\underline{\text{Proj}}_Z(g^*\mathcal{A}) = Z \times_X F$가 있다.
+\end{lemma}
+
+\begin{proof}
+두 번째 주장을 증명하면 충분하다. Spaces, Lemma
+\ref{spaces-lemma-representable-over-space}를 보라.
+사상 $g : Z \to X$를 택하되 $Z$는 스킴이라 하자. $F'$를 등급 준연접
+$\mathcal{O}_Z$-대수 $g^*\mathcal{A}$에 연관된 사중쌍의 함자라 하자.
+그러면 표준 동형사상 $F' = Z \times_X F$가 있으며, 이는 사중쌍
+$(d, f : T \to Z, \mathcal{L}, \psi)$로서 $F'$에 속하는 것을
+$(d, g \circ f, \mathcal{L}, \psi)$로 보낸다. 세부사항은 생략하며,
+Constructions, Lemma \ref{constructions-lemma-proj-base-change}의 증명을
+보라. Constructions, Lemmas
+\ref{constructions-lemma-equivalent-relative},
+\ref{constructions-lemma-relative-proj},
+\ref{constructions-lemma-glueing-gives-functor-proj}와
+% P09-ERR-0200
+Definition \ref{constructions-definition-relative-proj}에 의해 $F'$는
+$\underline{\text{Proj}}_Z(g^*\mathcal{A})$로 표현된다.
+\end{proof}
+
+\noindent
+위 보조정리에 의해 다음 정의가 의미를 갖는다.
+
+\begin{definition}
+\label{definition-relative-proj}
+$S$를 스킴이라 하고, $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{A}$를 등급 $\mathcal{O}_X$-대수의 준연접 층이라 하자.
+$\mathcal{A}$의 $X$ 위 {\it 상대 동차 스펙트럼}, 또는
+$\mathcal{A}$의 $X$ 위 {\it 동차 스펙트럼}, 또는
+$\mathcal{A}$의 $X$ 위 {\it 상대 Proj}는 Lemma
+\ref{lemma-relative-proj}의 대수공간 $F$, 즉 $X$ 위의 대수공간이다. 이를
+$\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$로 나타낸다.
+\end{definition}
+
+\noindent
+특히 상대 Proj의 구조 사상은 구성에 의해 표현 가능하다. 상대 Proj를
+붙이기를 통해 생각할 수도 있다. $\varphi : U \to X$를 전사
+\'etale 사상이라 하되 $U$는 스킴이라 하자.
+$R = U \times_X U$로 두고 그 사영 사상들을 $s, t : R  \to U$라 하자.
+Lemma \ref{lemma-relative-proj}에 의해 표준 동형사상
+$$
+\gamma : 
+\underline{\text{Proj}}_U(\varphi^*\mathcal{A})
+\longrightarrow
+\underline{\text{Proj}}_X(\mathcal{A}) \times_X U
+$$
+이 존재하며 이는 $U$ 위에 있다.
+$\alpha : t^*\varphi^*\mathcal{A} \to
+s^*\varphi^*\mathcal{A}$를 Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-quasi-coherent}의 표준 동형사상이라
+하자. 그러면 그림
+$$
+\xymatrix{
+&
+\underline{\text{Proj}}_U(\varphi^*\mathcal{A}) \times_{U, s} R
+\ar@{=}[r] &
+\underline{\text{Proj}}_R(s^*\varphi^*\mathcal{A})
+\ar[dd]_{\text{다음에 의해 유도됨 }\alpha} \\
+\underline{\text{Proj}}_X(\mathcal{A}) \times_X R
+\ar[ru]_{s^*\gamma} \ar[rd]^{t^*\gamma} \\
+&
+\underline{\text{Proj}}_U(\varphi^*\mathcal{A}) \times_{U, t} R
+\ar@{=}[r] &
+\underline{\text{Proj}}_R(t^*\varphi^*\mathcal{A})
+}
+$$
+은 가환이다. 등호들은 Constructions, Lemma
+\ref{constructions-lemma-relative-proj-base-change}에서 나온다.
+% P09-ERR-0201
+$\mathcal{A}_U$, $\mathcal{A}_R$로 $\mathcal{A}$의 $U$, $R$로의
+당김을 나타내면, $P = \underline{\text{Proj}}_X(\mathcal{A})$는 스킴
+$P_U = \underline{\text{Proj}}_U(\mathcal{A}_U)$에 의한 \'etale 덮개를
+가지며, $P_U \times_P P_U$는
+$P_R = \underline{\text{Proj}}_R(\mathcal{A}_R)$와 같다. 이 설명을
+이용하면 통상적인 방식대로 \'etale 국소화를 써서 상대 Proj에 관한 결과를
+스킴의 경우에서 대수공간의 경우로 옮길 수 있다.
+
+\begin{lemma}
+\label{lemma-twists-of-structure-sheaf}
+Situation \ref{situation-relative-proj}에서 상대 Proj에는 준연접
+$\mathbf{Z}$-등급 대수의 층
+$\bigoplus_{n \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_X(\mathcal{A})}(n)$과 등급 대수의
+표준 준동형
+$$
+\psi :
+\pi^*\mathcal{A}
+\longrightarrow
+\bigoplus\nolimits_{n \geq 0}
+\mathcal{O}_{\underline{\text{Proj}}_X(\mathcal{A})}(n)
+$$
+이 주어지며, $X$ 위의 임의의 스킴으로 밑변환하면 Constructions, Lemma
+\ref{constructions-lemma-glue-relative-proj-twists}와 일치한다.
+\end{lemma}
+
+\begin{proof}
+Definition \ref{definition-relative-proj} 뒤의 논의에서처럼 스킴 $U$와
+전사 \'etale 사상 $U \to X$를 택하고,
+$R = U \times_X U$로 두되 그 사영들을 $s, t : R \to U$라 하며,
+$\mathcal{A}_U = \mathcal{A}|_U$, $\mathcal{A}_R = \mathcal{A}|_R$,
+$\pi : P = \underline{\text{Proj}}_X(\mathcal{A}) \to X$,
+$\pi_U : P_U = \underline{\text{Proj}}_U(\mathcal{A}_U)$ 및
+% P09-ERR-0202
+$\pi_R : P_R = \underline{\text{Proj}}_U(\mathcal{A}_R)$로 두자.
+% P09-ERR-0203
+Constructions, Lemma
+\ref{constructions-lemma-glue-relative-proj-twists}에 의해 준연접
+$\mathbf{Z}$-등급 $\mathcal{O}_{P_U}$-대수의 층
+$\bigoplus_{n \in \mathbf{Z}} \mathcal{O}_{P_U}(n)$과 표준 사상
+$\psi_U : \pi_U^*\mathcal{A}_U \to \bigoplus_{n \geq 0} \mathcal{O}_{P_U}(n)$
+이 있고, $P_R$에 대해서도 마찬가지이다. Constructions, Lemma
+\ref{constructions-lemma-relative-proj-base-change}에 의해
+$\mathcal{O}_{P_U}(n)$과 $\psi_U$를 어느 사영 $P_R \to P_U$로
+당겨도 각각 $\mathcal{O}_{P_R}(n)$과 $\psi_R$가 된다.
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-quasi-coherent}에 의해
+$\mathcal{O}_{P}(n)$과 $\psi$를 얻는다. $X$ 위의 임의의 스킴으로의
+당김과 양립한다는 검증은 생략한다.
+\end{proof}
+
+\noindent
+상대 Proj를 구성했으므로 이제 몇 가지 기본 성질을 살펴보자.
+
+\begin{lemma}
+\label{lemma-relative-proj-base-change}
+$S$를 스킴이라 하자. $g : X' \to X$를 $S$ 위 대수공간들의 사상이라
+하고, $\mathcal{A}$를 등급 $\mathcal{O}_X$-대수의 준연접 층이라 하자.
+그러면 표준 동형사상
+$$
+r :
+\underline{\text{Proj}}_{X'}(g^*\mathcal{A})
+\longrightarrow
+X' \times_X \underline{\text{Proj}}_X(\mathcal{A})
+$$
+과 이에 대응하는 동형사상
+$$
+\theta :
+r^*\text{pr}_2^*\left(\bigoplus\nolimits_{d \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_X(\mathcal{A})}(d)\right)
+\longrightarrow
+\bigoplus\nolimits_{d \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_{X'}(g^*\mathcal{A})}(d)
+$$
+이 있으며, 후자는 $\mathbf{Z}$-등급
+$\mathcal{O}_{\underline{\text{Proj}}_{X'}(g^*\mathcal{A})}$-대수의
+동형사상이다.
+\end{lemma}
+
+\begin{proof}
+$F$를 함자 (\ref{equation-proj})라 하고, $F'$를
+$g^*\mathcal{A}$를 써서 $X'$ 위에 정의한 대응하는 함자라 하자. 함자의 표준
+동형사상 $r : F' \to X' \times_X F$가 있다고 주장한다. 물론 $r$은
+보조정리의 동형사상이다. 전단사
+$r : F'(T) \to X'(T) \times_{X(T)} F(T)$를 스킴 $T$가 $S$ 위에서
+준콤팩트인 경우에 구성하면 충분하다.
+먼저 $\xi = (d', f', \mathcal{L}', \psi')$가 $T$ 위의 사중쌍으로서
+$F'$에 속하면
+$r(\xi) = (f', (d', g \circ f', \mathcal{L}', \psi'))$로 둘 수 있다.
+이는 다음 등식 때문에 의미가 있다.
+% P09-ERR-0204
+$(g \circ f')^*\mathcal{A}^{(d)} = (f')^*(g^*\mathcal{A})^{(d)}$.
+역사상은 쌍 $(f', (d, f, \mathcal{L}, \psi))$를 사중쌍
+$(d, f', \mathcal{L}, \psi)$로 보낸다. 마지막 주장의 증명은 생략한다.
+힌트는 \'etale 국소화로 스킴의 경우로 환원한 뒤 Constructions, Lemma
+\ref{constructions-lemma-relative-proj-base-change}를 적용하는 것이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-proj-separated}
+Situation \ref{situation-relative-proj}에서 사상
+$\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$는 분리이다.
+\end{lemma}
+
+\begin{proof}
+이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-separated-local}과 상대 Proj의 구성에 의해
+스킴의 경우에서 따른다. 그 경우는 Constructions, Lemma
+\ref{constructions-lemma-relative-proj-separated}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-proj-quasi-compact}
+Situation \ref{situation-relative-proj}에서 다음 중 하나가 성립한다고 하자.
+\begin{enumerate}
+\item $\mathcal{A}$가 $\mathcal{A}_0$-대수의 층으로서 유한형이다.
+\item $\mathcal{A}$가 $\mathcal{A}_1$에 의해 $\mathcal{A}_0$-대수로
+생성되고, $\mathcal{A}_1$은 유한형 $\mathcal{A}_0$-가군이다.
+\item 유한형 준연접 $\mathcal{A}_0$-부분가군
+$\mathcal{F} \subset \mathcal{A}_{+}$가 존재하여
+$\mathcal{A}_{+}/\mathcal{F}\mathcal{A}$가
+$\mathcal{A}/\mathcal{F}\mathcal{A}$의 국소 멱영 아이디얼 층이다.
+\end{enumerate}
+그러면 $\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$는
+준콤팩트이다.
+\end{lemma}
+
+\begin{proof}
+이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-local}과 상대 Proj의 구성에
+의해 스킴의 경우에서 따른다. 그 경우는 Divisors, Lemma
+\ref{divisors-lemma-relative-proj-quasi-compact}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-proj-finite-type}
+Situation \ref{situation-relative-proj}에서 $\mathcal{A}$가
+$\mathcal{O}_X$-대수의 층으로서 유한형이면
+$\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$는 유한형이다.
+\end{lemma}
+
+\begin{proof}
+이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-type-local}과 상대 Proj의 구성에 의해
+스킴의 경우에서 따른다. 그 경우는 Divisors, Lemma
+\ref{divisors-lemma-relative-proj-finite-type}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-proj-universally-closed}
+Situation \ref{situation-relative-proj}에서 대수 사상
+$\mathcal{O}_X \to \mathcal{A}_0$가 정수적이고\footnote{다시 말해
+$\mathcal{O}_X$의 $\mathcal{A}_0$ 안에서의 정수적 폐포는 Morphisms of
+Spaces, Definition \ref{spaces-morphisms-definition-integral-closure}에서
+보듯이 $\mathcal{A}_0$와 같다.}, $\mathcal{A}$가
+$\mathcal{A}_0$-대수로서 유한형이라고 하자. 그러면
+$\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$는 보편적으로
+닫힌 사상이다.
+\end{lemma}
+
+\begin{proof}
+이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local}과 상대 Proj의
+구성에 의해 스킴의 경우에서 따른다. 그 경우는 Divisors, Lemma
+\ref{divisors-lemma-relative-proj-universally-closed}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-proj-proper}
+Situation \ref{situation-relative-proj}에서 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $\mathcal{A}_0$는 유한형 $\mathcal{O}_X$-가군이고
+$\mathcal{A}$는 $\mathcal{A}_0$-대수로서 유한형이다.
+\item $\mathcal{A}_0$는 유한형 $\mathcal{O}_X$-가군이고
+$\mathcal{A}$는 $\mathcal{O}_X$-대수로서 유한형이다.
+\end{enumerate}
+이 조건들이 성립하면
+$\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$는 고유이다.
+\end{lemma}
+
+\begin{proof}
+이는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-proper-local}과 상대 Proj의 구성에 의해
+스킴의 경우에서 따른다. 그 경우는
+% P09-ERR-0205
+Divisors, Lemma \ref{divisors-lemma-relative-proj-universally-closed}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-proj-generated-in-degree-1}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+% P09-ERR-0206
+$\mathcal{A}$를 등급 $\mathcal{O}_X$-가군의 준연접 층으로서
+$\mathcal{A}_0$-대수로서 $\mathcal{A}_1$에 의해 생성되는 것이라 하자.
+$P = \underline{\text{Proj}}_X(\mathcal{A})$로 두면 다음이 성립한다.
+\begin{enumerate}
+\item $P$는 다음 함자 $F_1$을 표현한다. 이 함자는 $T$가 $S$ 위에 있을 때
+삼중쌍 $(f, \mathcal{L}, \psi)$의 동형류들의 집합을 대응시키는데, 여기서
+$f : T \to X$는 $S$ 위의 사상이고, $\mathcal{L}$은 가역
+$\mathcal{O}_T$-가군이며,
+$\psi : f^*\mathcal{A} \to \bigoplus_{n \geq 0} \mathcal{L}^{\otimes n}$
+는 등급 $\mathcal{O}_T$-대수의 사상으로서 전사
+$f^*\mathcal{A}_1 \to \mathcal{L}$를 유도한다.
+\item 표준 사상 $\pi^*\mathcal{A}_1 \to \mathcal{O}_P(1)$은 전사이다.
+\item 각 $\mathcal{O}_P(n)$은 가역이고, 곱셈 사상들은 동형사상
+$\mathcal{O}_P(n) \otimes_{\mathcal{O}_P} \mathcal{O}_P(m) =
+\mathcal{O}_P(n + m)$을 유도한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 스킴의 경우는 Constructions, Lemma
+\ref{constructions-lemma-apply-relative}를 보라.
+\end{proof}
+
+\section{상대 Proj의 함자성}
+\label{section-functoriality-relative-proj}
+
+\noindent
+이 절은 Constructions, Section
+\ref{constructions-section-functoriality-relative-proj}에 대응한다.
+
+\begin{lemma}
+\label{lemma-morphism-relative-proj}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$\psi : \mathcal{A} \to \mathcal{B}$를 준연접 등급
+$\mathcal{O}_X$-대수의 사상이라 하자.
+$P = \underline{\text{Proj}}_X(\mathcal{A}) \to X$ 및
+$Q = \underline{\text{Proj}}_X(\mathcal{B}) \to X$로 두자.
+표준 열린 부분공간 $U(\psi) \subset Q$와 대수공간들의 표준 사상
+$$
+r_\psi :
+U(\psi)
+\longrightarrow
+P
+$$
+이 있으며, 후자는 $X$ 위에 있다. 또한 $\mathbf{Z}$-등급
+$\mathcal{O}_{U(\psi)}$-대수의 사상
+$$
+\theta = \theta_\psi :
+r_\psi^*\left(
+\bigoplus\nolimits_{d \in \mathbf{Z}} \mathcal{O}_P(d)
+\right)
+\longrightarrow
+\bigoplus\nolimits_{d \in \mathbf{Z}} \mathcal{O}_{U(\psi)}(d).
+$$
+이 있다. 삼중쌍 $(U(\psi), r_\psi, \theta)$은 다음 성질로 특징지어진다.
+임의의 스킴 $W$가 $X$ 위에서 \'etale이면 삼중쌍
+$$
+(U(\psi) \times_X W,\quad
+r_\psi|_{U(\psi) \times_X W} : U(\psi) \times_X W \to  P \times_X W,\quad
+\theta|_{U(\psi) \times_X W})
+$$
+은 Constructions, Lemma
+\ref{constructions-lemma-morphism-relative-proj}의
+$\psi : \mathcal{A}|_W \to \mathcal{B}|_W$에 연관된 삼중쌍과 같다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 \'etale 국소화와 스킴의 경우에서 따른다. Definition
+\ref{definition-relative-proj} 뒤의 논의를 보라. 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-morphism-relative-proj-transitive}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{A}$, $\mathcal{B}$, $\mathcal{C}$를 준연접 등급
+$\mathcal{O}_X$-대수라 하자.
+$P = \underline{\text{Proj}}_X(\mathcal{A})$,
+$Q = \underline{\text{Proj}}_X(\mathcal{B})$ 및
+$R = \underline{\text{Proj}}_X(\mathcal{C})$로 두자.
+$\varphi : \mathcal{A} \to \mathcal{B}$,
+$\psi : \mathcal{B} \to \mathcal{C}$를 등급
+$\mathcal{O}_X$-대수의 사상이라 하자. 그러면
+% P09-ERR-0207
+$$
+U(\psi \circ \varphi) = r_\varphi^{-1}(U(\psi))
+\quad
+\text{and}
+\quad
+r_{\psi \circ \varphi}
+=
+r_\varphi \circ r_\psi|_{U(\psi \circ \varphi)}.
+$$
+이다. 또한 자명한 표기 아래
+$$
+\theta_\psi \circ r_\psi^*\theta_\varphi
+=
+\theta_{\psi \circ \varphi}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-surjective-graded-rings-map-relative-proj}
+% P09-ERR-0209
+위 Lemma \ref{lemma-morphism-relative-proj}의 가정과 표기를 사용하자.
+$\mathcal{A}_d \to \mathcal{B}_d$가 $d \gg 0$에 대해 전사라고 가정하자.
+그러면
+\begin{enumerate}
+\item $U(\psi) = Q$이다.
+% P09-ERR-0208
+\item $r_\psi : Q \to R$은 닫힌 몰입이다.
+\item 사상들 $\theta : r_\psi^*\mathcal{O}_P(n) \to \mathcal{O}_Q(n)$은
+전사이지만 일반적으로 동형사상은 아니다. 이는
+$\mathcal{A} \to \mathcal{B}$가 전사인 경우에도 마찬가지이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이는 \'etale 국소화에 의해 스킴의 경우, 즉 Constructions, Lemma
+\ref{constructions-lemma-surjective-graded-rings-map-relative-proj}에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-eventual-iso-graded-rings-map-relative-proj}
+% P09-ERR-0209
+위 Lemma \ref{lemma-morphism-relative-proj}의 가정과 표기를 사용하자.
+$\mathcal{A}_d \to \mathcal{B}_d$가 모든 $d \gg 0$에 대해
+동형사상이라고 가정하자. 그러면
+\begin{enumerate}
+\item $U(\psi) = Q$이다.
+\item $r_\psi : Q \to P$는 동형사상이다.
+\item 사상들 $\theta : r_\psi^*\mathcal{O}_P(n) \to \mathcal{O}_Q(n)$은
+동형사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이는 \'etale 국소화에 의해 스킴의 경우, 즉 Constructions, Lemma
+\ref{constructions-lemma-eventual-iso-graded-rings-map-relative-proj}에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-surjective-generated-degree-1-map-relative-proj}
+% P09-ERR-0209
+위 Lemma \ref{lemma-morphism-relative-proj}의 가정과 표기를 사용하자.
+$\mathcal{A}_d \to \mathcal{B}_d$가 $d \gg 0$에 대해 전사이고,
+$\mathcal{A}$가 $\mathcal{A}_1$에 의해 $\mathcal{A}_0$ 위에서
+생성된다고 가정하자. 그러면
+\begin{enumerate}
+\item $U(\psi) = Q$이다.
+\item $r_\psi : Q \to P$는 닫힌 몰입이다.
+\item 사상들 $\theta : r_\psi^*\mathcal{O}_P(n) \to \mathcal{O}_Q(n)$은
+동형사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이는 \'etale 국소화에 의해 스킴의 경우, 즉 Constructions, Lemma
+\ref{constructions-lemma-surjective-generated-degree-1-map-relative-proj}에서
+따른다.
+\end{proof}
+
+\section{가역 층과 상대 Proj로 가는 사상}
+\label{section-invertible-relative-proj}
+
+\noindent
+다음 보조정리가 어딘가에서 필요할 듯하다. 상황은 다음과 같다.
+\begin{enumerate}
+\item $S$를 스킴이라 하고 $Y$를 $S$ 위의 대수공간이라 하자.
+\item $\mathcal{A}$를 준연접 등급 $\mathcal{O}_Y$-대수라 하자.
+\item $\pi : \underline{\text{Proj}}_Y(\mathcal{A}) \to Y$로
+$\mathcal{A}$의 $Y$ 위 상대 Proj를 나타내자.
+\item $f : X \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+\item $\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+\item
+$\psi : f^*\mathcal{A} \to \bigoplus_{d \geq 0} \mathcal{L}^{\otimes d}$를
+등급 $\mathcal{O}_X$-대수의 준동형이라 하자.
+\end{enumerate}
+이 자료가 주어졌을 때 $U(\psi) \subset X$를 다음 식을 만족하는 열린
+부분공간이라 하자.
+$$
+|U(\psi)| = \bigcup\nolimits_{d \geq 1}
+\{\text{사상 }f^*\mathcal{A}_d \to \mathcal{L}^{\otimes d}
+\text{가 전사인 자리}\}
+$$
+$U(\psi) \subset X$의 형성은 임의의 사상 $X' \to X$에 의한 당김과
+가환한다.
+
+\begin{lemma}
+\label{lemma-invertible-map-into-relative-proj}
+% P09-ERR-0210
+위 가정과 표기를 사용하자. 사상 $\psi$는 $Y$ 위 대수공간들의 표준 사상
+$$
+r_{\mathcal{L}, \psi} :
+U(\psi) \longrightarrow \underline{\text{Proj}}_Y(\mathcal{A})
+$$
+과 등급 $\mathcal{O}_{U(\psi)}$-대수의 사상
+$$
+\theta :
+r_{\mathcal{L}, \psi}^*\left(
+\bigoplus\nolimits_{d \geq 0}
+\mathcal{O}_{\underline{\text{Proj}}_Y(\mathcal{A})}(d)
+\right)
+\longrightarrow
+\bigoplus\nolimits_{d \geq 0} \mathcal{L}^{\otimes d}|_{U(\psi)}
+$$
+을 유도한다. 이들은 다음 성질로 특징지어진다.
+\begin{enumerate}
+\item $V \to Y$가 \'etale이고 $d \geq 0$일 때 그림
+% P09-ERR-0211
+$$
+\xymatrix{
+\mathcal{A}_d(V) \ar[d]_{\psi} \ar[r]_{\psi} &
+\Gamma(V \times_Y X, \mathcal{L}^{\otimes d}) \ar[d]^{restrict} \\
+\Gamma(V \times_Y \underline{\text{Proj}}_Y(\mathcal{A}),
+\mathcal{O}_{\underline{\text{Proj}}_Y(\mathcal{A})}(d)) \ar[r]^-\theta &
+\Gamma(V \times_Y U(\psi), \mathcal{L}^{\otimes d})
+}
+$$
+은 가환이다.
+\item 임의의 $d \geq 1$과 임의의 사상 $W \to X$에서 $W$가 스킴이고
+$\psi|_W : f^*\mathcal{A}_d|_W \to \mathcal{L}^{\otimes d}|_W$가
+전사이면, (a) $W \to X$는 $U(\psi)$를 통해 인수분해되고,
+(b) $W \to U(\psi)$와 $r_{\mathcal{L}, \psi}$의 합성은 사상
+$W \to \underline{\text{Proj}}_Y(\mathcal{A})$와 일치한다. 마지막 사상은
+$\underline{\text{Proj}}_Y(\mathcal{A})$의 구성에 의해 존재한다.
+Definition \ref{definition-relative-proj}을 보라.
+\item 다음 가환 그림을 생각하자.
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+$X'$와 $Y'$가 스킴이라고 하고, $\mathcal{A}' = g^*\mathcal{A}$ 및
+$\mathcal{L}' = (g')^*\mathcal{L}$로 두며,
+% P09-ERR-0212
+$\psi' : (f')^*\mathcal{A} \to \bigoplus_{d \geq 0} (\mathcal{L}')^{\otimes d}$로
+$\psi$의 당김을 나타내자.
+% P09-ERR-0213
+$U(\psi')$, $r_{\psi', \mathcal{L}'}$, $\theta'$를
+% P09-ERR-0214
+Constructions, Lemma \ref{lemma-invertible-map-into-relative-proj}에서
+구성한 열린 부분공간, 사상, 준동형이라 하자. 그러면
+$U(\psi') = (g')^{-1}(U(\psi))$이고, $r_{\psi', \mathcal{L}'}$는
+$r_{\psi, \mathcal{L}}$의 밑변환과 일치한다. 여기서는 Lemma
+\ref{lemma-relative-proj-base-change}의 동형사상
+$\underline{\text{Proj}}_{Y'}(\mathcal{A}') =
+Y' \times_Y \underline{\text{Proj}}_Y(\mathcal{A})$를 사용한다.
+더 나아가 $\theta'$는 $\theta$의 당김이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 다음은 힌트이다. 먼저 준콤팩트 스킴 $W$가 $X$ 위에 있을 때
+다음 두 조건이 동치임을 관찰하자.
+\begin{enumerate}
+\item $W \to X$가 $U(\psi)$를 통해 인수분해된다.
+% P09-ERR-0215
+\item 어떤 $d$가 존재하여
+$\psi|_W : f^*\mathcal{A}_d|_W \to \mathcal{L}^{\otimes d}|_W$가
+전사이다.
+\end{enumerate}
+이는 $U(\psi)$를 $X$의 부분함자로서 우리의 밑 범주
+$(\Sch/S)_{fppf}$ 위에서 기술한다. 그러한 $W$와 $d$에 대해 사중쌍
+$(d, W \to Y, \mathcal{L}|_W, \psi^{(d)}|_W)$를 생각하자.
+$\underline{\text{Proj}}_Y(\mathcal{A})$의 정의에 의해 사상
+$W \to \underline{\text{Proj}}_Y(\mathcal{A})$를 얻는다.
+사중쌍들의 동치에 관한 우리의 정의로부터 이 사상이 $d$의 선택과
+무관함을 알 수 있다. 이는 분명히 함자의 변환
+% P09-ERR-0213
+$r_{\psi, \mathcal{L}} : U(\psi) \to \underline{\text{Proj}}_Y(\mathcal{A})$,
+즉 대수공간들의 사상을 정의한다. 구성에 의해 이 사상은 (2)를 만족한다.
+Constructions, Lemma
+\ref{constructions-lemma-invertible-map-into-relative-proj}에서 구성된
+사상이 같은 성질을 만족하므로 (3)이 성립함을 알 수 있다.
+
+\medskip\noindent
+$\theta$를 구성하고 보조정리의 양립성 (1)을 확인하려면, Definition
+\ref{definition-relative-proj} 뒤의 논의에서처럼 논증하면서
+$Y$와 $X$ 위에서 \'etale 국소적으로 작업한다.
+\end{proof}
+
+\section{상대적으로 풍부한 층}
+\label{section-relatively-ample}
+
+\noindent
+이 절은 대수공간에 대한 Morphisms, Section
+\ref{morphisms-section-relatively-ample}의 대응물이다. 상대적으로 풍부한
+가역 층을 다음과 같이 정의한다.
+
+\begin{definition}
+\label{definition-relatively-ample}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라
+하자. $\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{L}$이 {\it 상대적으로 풍부하다}, 또는
+{\it $f$-상대적으로 풍부하다}, 또는 {\it $X/Y$ 위에서 풍부하다}, 또는
+{\it $f$-풍부하다}라는 것은 다음을 뜻한다. 사상 $f : X \to Y$가 표현
+가능하고, 모든 사상 $Z \to Y$에서 $Z$가 스킴이면 당김
+$\mathcal{L}_Z$, 즉 $\mathcal{L}$을 $X_Z = Z \times_Y X$로 당긴 것이
+Morphisms, Definition
+\ref{morphisms-definition-relatively-ample}의 의미에서 $X_Z/Z$ 위에서
+풍부하다.
+\end{definition}
+
+\noindent
+상대적으로 풍부한 가역 층에 관한 문제는 거의 언제나 스킴의 경우로
+환원할 것이다. 따라서 이 절에는 주로 건전성 검사가 들어 있다.
+
+\begin{lemma}
+\label{lemma-relatively-ample-sanity-check}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라
+하자. $\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$Y$가 스킴이라고 가정하자. 다음은 동치이다.
+\begin{enumerate}
+\item $\mathcal{L}$은 Definition \ref{definition-relatively-ample}의
+의미에서 $X/Y$ 위에서 풍부하다.
+\item $X$는 스킴이고 $\mathcal{L}$은 Morphisms, Definition
+\ref{morphisms-definition-relatively-ample}의 의미에서 $X/Y$ 위에서
+풍부하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이는 정의들과 Morphisms, Lemma
+\ref{morphisms-lemma-ample-base-change}에서 따른다. 이 보조정리는
+스킴에 대한 상대적 풍부성이 밑변환으로 보존된다고 말한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-ample-base-change}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라
+하자. $\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$Y' \to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$f' : X' \to Y'$를 $f$의 밑변환이라 하고, $\mathcal{L}'$로
+$\mathcal{L}$의 $X'$로의 당김을 나타내자. $\mathcal{L}$이 $f$-풍부하면
+$\mathcal{L}'$은 $f'$-풍부하다.
+\end{lemma}
+
+\begin{proof}
+이는 정의에서 즉시 따른다! 힌트는 밑변환의 추이성이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relatively-ample-properties}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라
+하자. $f$-풍부한 가역 층이 존재하면 $f$는 표현 가능하고,
+준콤팩트이며, 분리이다.
+\end{lemma}
+
+\begin{proof}
+이는 정의들과 Morphisms, Lemma
+\ref{morphisms-lemma-relatively-ample-separated}에서 분명하다.
+의심스러우면 Algebraic Spaces, Lemma
+\ref{spaces-lemma-representable-transformations-property-implication}의
+원리를 살펴보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-descend-relatively-ample}
+$V \to U$를 아핀 스킴들의 전사 \'etale 사상이라 하자.
+$X$를 $U$ 위의 대수공간이라 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$Y = V \times_U X$로 두고, $\mathcal{N}$을 $\mathcal{L}$의 $Y$로의
+당김이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $\mathcal{L}$은 $X/U$ 위에서 풍부하다.
+\item $\mathcal{N}$은 $Y/V$ 위에서 풍부하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2)는 Lemma \ref{lemma-ample-base-change}에서 따른다.
+(2)를 가정하자. 이는 $Y \to V$가 준콤팩트이고 분리이며(Lemma
+\ref{lemma-relatively-ample-properties}), $Y$가 스킴임을 뜻한다.
+따라서 사상 $f : X \to U$는 준콤팩트이고 분리이다(Morphisms of Spaces,
+Lemmas \ref{spaces-morphisms-lemma-quasi-compact-local}과
+\ref{spaces-morphisms-lemma-separated-local}).
+$\mathcal{A} = \bigoplus_{d \geq 0} f_*\mathcal{L}^{\otimes d}$로 두자.
+이는 등급 $\mathcal{O}_U$-대수의 준연접 층이다(Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-pushforward}). 수반성으로부터 사상
+$\psi : f^*\mathcal{A} \to \bigoplus_{d \geq 0} \mathcal{L}^{\otimes d}$를
+얻는다. Lemma \ref{lemma-invertible-map-into-relative-proj}를 적용하면
+열린 부분공간 $U(\psi) \subset X$와 사상
+$$
+r_{\mathcal{L}, \psi} : U(\psi) \to \underline{\text{Proj}}_U(\mathcal{A})
+$$
+을 얻는다.
+% P09-ERR-0216
+$h : V \to U$가 \'etale이므로
+$\mathcal{A}|_V = (Y \to V)_*(\bigoplus_{d \geq 0} \mathcal{N}^{\otimes d})$이다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}를 보라.
+따라서 $\psi'$, 즉 $\psi$의 $Y$로의 당김은 Morphisms, Lemma
+\ref{morphisms-lemma-characterize-relatively-ample}의 (5)에 나오는 상황
+$(Y \to V, \mathcal{N})$의 수반 사상이다. $\mathcal{N}$은 $Y/V$ 위에서
+풍부하므로, 방금 인용한 보조정리에 의해 $U(\psi') = Y$이고
+$r_{\mathcal{N}, \psi'}$가 열린 몰입임을 알 수 있다. Lemma
+\ref{lemma-invertible-map-into-relative-proj}에 의하면
+$r_{\mathcal{L}, \psi}$의 형성은 밑변환과 가환한다. 따라서
+$U(\psi) = X$이고 다음 가환 그림이 있다.
+$$
+\xymatrix{
+Y \ar[r]_-{r'} \ar[d] &
+\underline{\text{Proj}}_V(\mathcal{A}|_V) \ar[d] \ar[r] &
+V \ar[d] \\
+X \ar[r]^-r &
+\underline{\text{Proj}}_U(\mathcal{A}) \ar[r] &
+U
+}
+$$
+두 정사각형은 섬유곱이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local}에 의해 $r$이 열린
+몰입이라고 결론내린다. 따라서 $X$는 스킴이다. 이제 Morphisms, Lemma
+\ref{morphisms-lemma-characterize-relatively-ample}의 (5)를 적용하여
+$\mathcal{L}$이 $X/U$ 위에서 풍부함을 결론낼 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relatively-ample-local}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라
+하자. $\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item $\mathcal{L}$은 $X/Y$ 위에서 풍부하다.
+\item 모든 스킴 $Z$와 모든 사상 $Z \to Y$에 대해 대수공간
+$X_Z = Z \times_Y X$는 스킴이고, 당김 $\mathcal{L}_Z$는 $X_Z/Z$
+위에서 풍부하다.
+\item 모든 아핀 스킴 $Z$와 모든 사상 $Z \to Y$에 대해 대수공간
+$X_Z = Z \times_Y X$는 스킴이고, 당김 $\mathcal{L}_Z$는 $X_Z/Z$
+위에서 풍부하다.
+\item 스킴 $V$와 전사 \'etale 사상 $V \to Y$가 존재하여 대수공간
+$X_V = V \times_Y X$가 스킴이고, 당김 $\mathcal{L}_V$가 $X_V/V$
+위에서 풍부하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)는 정의에 의해 동치이다. (2) $\Rightarrow$ (3)은 즉시 따른다.
+(3)이 성립하고 $Z \to Y$가 (2)에서와 같다고 하자. 그러면
+% P09-ERR-0217
+$X_Z \to Z$가 $Z$ 위에서 아핀 국소적으로 표현 가능함을 알 수 있다.
+따라서 예를 들어 Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subscheme}에 의해 $X_Z$는 스킴이다.
+그러면 $\mathcal{L}_Z$가 $X_Z/Z$ 위에서 풍부하다는 것은 $Z$ 위에서
+국소적으로 성립하고 Morphisms, Lemma
+\ref{morphisms-lemma-characterize-relatively-ample}를 쓸 수 있으므로
+이를 얻는다. 따라서 (1), (2), (3)은
+동치이다. 이 조건들이 (4)를 함의하는 것은 분명하다.
+
+\medskip\noindent
+(4)를 가정하자. 사상 $Z \to Y$를 택하되 $Z$가 아핀이라 하자. 그러면
+$U = V \times_Y Z \to Z$는 전사 \'etale 사상이고,
+$\mathcal{L}_Z$를 $X_U \to X_Z$로 당긴 것은 $X_U/U$ 위에서
+상대적으로 풍부하다.
+% P09-ERR-0218
+물론 $U$를 아핀 열린집합으로 바꾸어도 된다. Lemma
+\ref{lemma-descend-relatively-ample}에 의해 $\mathcal{L}_Z$는 $X_Z/Z$
+위에서 풍부하다. 따라서 (4) $\Rightarrow$ (3)이고 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quasi-affine-O-ample}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간들의 사상이라
+하자. 그러면 $f$가 준아핀이기 위한 필요충분조건은
+$\mathcal{O}_X$가 $f$-상대적으로 풍부한 것이다.
+\end{lemma}
+
+\begin{proof}
+이는 스킴의 경우에서 따른다. Morphisms, Lemma
+\ref{morphisms-lemma-quasi-affine-O-ample}를 보라.
+\end{proof}
+
+\section{상대적 풍부성과 코호몰로지}
+\label{section-ample-and-proper}
+
+\noindent
+이 절에는 Cohomology of Schemes, Sections
+\ref{coherent-section-applications-formal-functions}와
+\ref{coherent-section-ample-cohomology}의 결과들에 관련된 몇 가지 결과가
+들어 있다.
+
+\medskip\noindent
+다음 보조정리는 우리가 할 수 있는 일의 한 예일 뿐이다.
+
+\begin{lemma}
+% P09-ERR-0219
+\label{lemma-vanshing-gives-ample}
+$R$을 Noether 환이라 하자. $X$를 $R$ 위의 대수공간이라 하되 구조 사상
+$f : X \to \Spec(R)$이 고유라고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $\mathcal{L}$은 $X/R$ 위에서 풍부하다(Definition
+\ref{definition-relatively-ample}).
+\item 모든 연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해
+$n_0 \geq 0$이 존재하여
+$H^p(X, \mathcal{F} \otimes \mathcal{L}^{\otimes n}) = 0$이다.
+이는 모든 $n \geq n_0$와 $p > 0$에 대해 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2)는 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-coherent-proper-ample}에서 따른다. 가정 (1)에 의해
+$X$가 스킴이기 때문이다. (2) $\Rightarrow$ (1)은 Cohomology of Spaces,
+Lemma \ref{spaces-cohomology-lemma-Noetherian-h1-zero-invertible}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-ample-on-fibre}
+$Y$를 Noether 스킴이라 하자. $X$를 $Y$ 위의 대수공간이라 하되 구조
+사상 $f : X \to Y$가 고유라고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+$y \in Y$를 $X_y$가 스킴이고 $\mathcal{L}_y$가 $X_y$ 위에서 풍부한
+점이라 하자. 그러면 $d_0$가 존재하여 모든 $d \geq d_0$에 대해
+$$
+R^pf_*(\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d})_y = 0
+\text{이고 }p > 0
+$$
+이며, 사상
+$$
+f_*(\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d})_y
+\longrightarrow
+H^0(X_y, \mathcal{F}_y \otimes_{\mathcal{O}_{X_y}} \mathcal{L}_y^{\otimes d})
+$$
+은 전사이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{O}_{Y, y}$는 Noether 국소환임을 주목하자. 표준 사상
+$c : \Spec(\mathcal{O}_{Y, y}) \to Y$를 생각하자. Schemes, Equation
+(\ref{schemes-equation-canonical-morphism})을 보라. 이는 국소환들을
+동일시하므로 평탄 사상이다. 잠시 $f' : X' \to
+\Spec(\mathcal{O}_{Y, y})$로 $f$를 이 국소환으로 밑변환한 것을 나타내자.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology}에 의해
+$c^*R^pf_*\mathcal{F} = R^pf'_*\mathcal{F}'$임을 알 수 있다.
+더 나아가 섬유 $X_y$와 $X'_y$가 동일시된다. 따라서 $Y = \Spec(A)$가
+Noether 국소환 $(A, \mathfrak m, \kappa)$의 스펙트럼이고 $y \in Y$가
+$\mathfrak m$에 대응한다고 가정해도 된다. 이 경우
+$R^pf_*(\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d})_y =
+H^p(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d})$이며,
+이는 모든 $p \geq 0$에 대해 성립한다.
+$f_y : X_y \to \Spec(\kappa)$를 사영이라 하자.
+
+\medskip\noindent
+$B = \text{Gr}_\mathfrak m(A) =
+\bigoplus_{n \geq 0} \mathfrak m^n/\mathfrak m^{n + 1}$로 두자.
+층 $\mathcal{B} = f_y^*\widetilde{B}$를 생각하자. 이는 준연접 등급
+$\mathcal{O}_{X_y}$-대수의 층이다. Cohomology of Spaces,
+Section \ref{spaces-cohomology-section-theorem-formal-functions}의 표기를
+$I$ 대신 $\mathfrak m$을 써서 사용하겠다.
+$X_y$는 $X$의 닫힌 부분공간으로서 $\mathfrak m\mathcal{O}_X$로
+잘라낸 것이므로
+$\mathfrak m^n\mathcal{F}/\mathfrak m^{n + 1}\mathcal{F}$를 연접
+$\mathcal{O}_{X_y}$-가군으로 볼 수 있다. Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-i-star-equivalence}를 보라. 그러면
+$\bigoplus_{n \geq 0} \mathfrak m^n\mathcal{F}/\mathfrak m^{n + 1}\mathcal{F}$는
+유한형 준연접 등급 $\mathcal{B}$-가군이다. 실제로 이는
+$\mathcal{B}$ 위에서 0차 부분으로 생성되고,
+% P09-ERR-0220
+그 0차 부분 $\mathcal{F}_y = \mathcal{F}/\mathfrak m \mathcal{F}$가
+연접 $\mathcal{O}_{X_y}$-가군이기 때문이다. 따라서 Cohomology of
+Schemes, Lemma \ref{coherent-lemma-graded-finiteness}의 (2)에 의해
+$d_0$가 존재하여
+$$
+H^p(X_y, \mathfrak m^n \mathcal{F}/ \mathfrak m^{n + 1}\mathcal{F}
+\otimes_{\mathcal{O}_{X_y}} \mathcal{L}_y^{\otimes d}) = 0
+$$
+이다. 이는 모든 $p > 0$, $d \geq d_0$, $n \geq 0$에 대해 성립한다.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-relative-affine-cohomology}에 의해 이는
+$
+H^p(X, \mathfrak m^n \mathcal{F}/ \mathfrak m^{n + 1}\mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) = 0
+$
+이 모든 $p > 0$, $d \geq d_0$, $n \geq 0$에 대해 성립한다는 것과 같다.
+
+\medskip\noindent
+다음 짧은 완전열
+$$
+0 \to \mathfrak m^n\mathcal{F}/\mathfrak m^{n + 1} \mathcal{F}
+\to \mathcal{F}/\mathfrak m^{n + 1} \mathcal{F}
+\to \mathcal{F}/\mathfrak m^n \mathcal{F} \to 0
+$$
+을 생각하자. 이는 연접 $\mathcal{O}_X$-가군들의 완전열이다.
+$\mathcal{L}^{\otimes d}$와의 텐서곱은 완전 함자이므로
+짧은 완전열
+$$
+0 \to
+\mathfrak m^n\mathcal{F}/\mathfrak m^{n + 1} \mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}
+\to \mathcal{F}/\mathfrak m^{n + 1} \mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}
+\to \mathcal{F}/\mathfrak m^n \mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d} \to 0
+$$
+을 얻는다. 긴 코호몰로지 완전열과 위의 소멸을 쓰고 귀납하면 다음을
+얻는다.
+\begin{enumerate}
+\item $H^p(X, \mathcal{F}/\mathfrak m^n \mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) = 0$은 모든
+$p > 0$, $d \geq d_0$, $n \geq 0$에 대해 성립한다.
+\item 사상
+$H^0(X, \mathcal{F}/\mathfrak m^n \mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) \to
+H^0(X_y, \mathcal{F}_y \otimes_{\mathcal{O}_{X_y}} \mathcal{L}_y^{\otimes d})$는
+모든 $d \geq d_0$와 $n \geq 1$에 대해 전사이다.
+\end{enumerate}
+형식 함수 정리(Cohomology of Spaces, Theorem
+\ref{spaces-cohomology-theorem-formal-functions})에 의해
+$\mathfrak m$-진 완비화로서
+$H^p(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d})$의
+완비화는 모든 $d \geq d_0$와 $p > 0$에 대해 0이다.
+$H^p(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d})$는
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-proper-over-affine-cohomology-finite}에 의해
+유한 $A$-가군이므로, Nakayama의 보조정리(Algebra, Lemma
+\ref{algebra-lemma-NAK})에서
+$H^p(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d})$가
+모든 $d \geq d_0$와 $p > 0$에 대해 0임이 따른다.
+$p = 0$인 경우에는 Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-ML-cohomology-powers-ideal}의 (3)에서
+$H^0(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) \to
+H^0(X_y, \mathcal{F}_y \otimes_{\mathcal{O}_{X_y}} \mathcal{L}_y^{\otimes d})$
+가 전사임을 얻는다. 이것이 보조정리의 마지막 명제를 준다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-ample-in-neighbourhood}
+더 일반적인 판본은 Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-ample-in-neighbourhood}를 보라.
+$Y$를 Noether 스킴이라 하자. $X$를 $Y$ 위의 대수공간이라 하되 구조
+사상 $f : X \to Y$가 고유라고 하자.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$y \in Y$를 $X_y$가 스킴이고 $\mathcal{L}_y$가 $X_y$ 위에서 풍부한
+점이라 하자. 그러면 열린 근방 $V \subset Y$가 존재하며 이는 $y$의
+근방이고,
+$\mathcal{L}|_{f^{-1}(V)}$가 $f^{-1}(V)/V$ 위에서 풍부하다(Definition
+\ref{definition-relatively-ample}의 의미).
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-ample-on-fibre}에서 $d_0$를 택하되
+$\mathcal{F} = \mathcal{O}_X$인 경우에 택하자.
+$d \geq d_0$를 택하여 어떤 $r \geq 0$과 단면들
+$s_{y, 0}, \ldots, s_{y, r} \in H^0(X_y, \mathcal{L}_y^{\otimes d})$을
+찾을 수 있게 하자. 이 단면들은 닫힌 몰입
+$$
+\varphi_y =
+\varphi_{\mathcal{L}_y^{\otimes d}, (s_{y, 0}, \ldots, s_{y, r})} :
+X_y \to \mathbf{P}^r_{\kappa(y)}.
+$$
+을 정의한다. 이는 Morphisms, Lemma
+\ref{morphisms-lemma-finite-type-over-affine-ample-very-ample}에 의해
+가능하지만, $\varphi_y$가 닫힌 몰입임을 보이기 위해 Morphisms, Lemma
+\ref{morphisms-lemma-image-proper-scheme-closed}도 사용하고, 가역 층과
+단면들을 통한 사영공간으로 가는 사상의 기술을 위해 Constructions,
+Section \ref{constructions-section-projective-space}도 사용한다.
+$d_0$의 선택에 의해 $Y$를 $y$의 열린 근방으로 바꾼 뒤
+$s_0, \ldots, s_r \in H^0(X, \mathcal{L}^{\otimes d})$을 택하여
+$s_{y, 0}, \ldots, s_{y, r}$로 보내지게 할 수 있다.
+$X_{s_i} \subset X$를 $s_i$가 $\mathcal{L}^{\otimes d}$의 생성원인
+열린 부분공간이라 하자. $s_{y, i}$들이 $\mathcal{L}_y^{\otimes d}$를
+생성하므로 $|X_y| \subset U = \bigcup |X_{s_i}|$임을 알 수 있다.
+$X \to Y$가 닫힌 사상이므로, 열린 근방 $y \in V \subset Y$가
+존재하여 $|f|^{-1}(V) \subset U$이다. $Y$를 $V$로 바꾼 뒤
+$s_i$들이 $\mathcal{L}^{\otimes d}$를 생성한다고 가정해도 된다.
+따라서 사상
+$$
+\varphi = \varphi_{\mathcal{L}^{\otimes d}, (s_0, \ldots, s_r)} :
+X \longrightarrow \mathbf{P}^r_Y
+$$
+을 얻으며, $\mathcal{L}^{\otimes d} \cong
+\varphi^*\mathcal{O}_{\mathbf{P}^r_Y}(1)$이고, 이를 $y$로 밑변환하면
+$\varphi_y$를 얻는다. 엄밀히 말하면 Constructions, Section
+\ref{constructions-section-projective-space}에 주어진 사영공간으로 가는
+사상의 구성이 대수공간에서 사영공간으로 가는 사상도 기술함을 적어
+증명해야 하지만, 세부사항은 생략한다.
+
+\medskip\noindent
+약간의 기교로 증명을 끝내겠다. “올바른” 증명은 $\varphi$가 $y$의
+열린 근방으로 밑변환한 뒤 닫힌 몰입임을 직접 보이는 것이다. 즉
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-proper-finite-fibre-finite-in-neighbourhood}에
+의해
+% P09-ERR-0221
+$\varphi$는 섬유 $\mathbf{P}^r_{\kappa(y)}$의 열린 근방 위에서
+유한이다. 이 섬유는 $\mathbf{P}^r_Y \to Y$의 $y$ 위 섬유이다.
+$\mathbf{P}^r_Y \to Y$가 닫힌 사상임을 써서 $Y$를 축소한 뒤
+$\varphi$가 유한이라고 가정해도 된다. 특히 $X$는 스킴이다. 그러면
+$\mathcal{L}^{\otimes d} \cong
+\varphi^*\mathcal{O}_{\mathbf{P}^r_Y}(1)$은 매우 일반적인 Morphisms,
+Lemma \ref{morphisms-lemma-pullback-ample-tensor-relatively-ample}에 의해
+풍부하다.
+\end{proof}
+
+\section{상대 Proj의 닫힌 부분공간}
+\label{section-closed-in-relative-proj}
+
+\noindent
+상대 Proj의 닫힌 부분공간에 관한 몇 가지 보조정리를 제시한다.
+이 절은 Divisors, Section
+\ref{divisors-section-closed-in-relative-proj}에 대응한다.
+
+\begin{lemma}
+\label{lemma-closed-subscheme-proj}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{A}$를 준연접 등급 $\mathcal{O}_X$-대수라 하자.
+$\pi : P = \underline{\text{Proj}}_X(\mathcal{A}) \to X$를
+$\mathcal{A}$의 상대 Proj라 하자. $i : Z \to P$를 닫힌 부분공간이라
+하자. $\mathcal{I} \subset \mathcal{A}$로 표준 사상
+$$
+\mathcal{A}
+\longrightarrow
+\bigoplus\nolimits_{d \geq 0} \pi_*\left((i_*\mathcal{O}_Z)(d)\right)
+$$
+의 핵을 나타내자.
+$\pi$가 준콤팩트이면 동형사상
+$Z = \underline{\text{Proj}}_X(\mathcal{A}/\mathcal{I})$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+사상 $\pi$는 Lemma \ref{lemma-relative-proj-separated}에 의해 분리이다.
+$\pi$가 준콤팩트이므로 $\pi_*$는 준연접 가군을 준연접 가군으로 보낸다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward}를 보라. 따라서 $\mathcal{I}$는
+준연접 $\mathcal{O}_X$-가군이다. 특히
+$\mathcal{B} = \mathcal{A}/\mathcal{I}$는 준연접 등급
+$\mathcal{O}_X$-대수이다. 함자성 사상
+$Z' = \underline{\text{Proj}}_X(\mathcal{B}) \to
+\underline{\text{Proj}}_X(\mathcal{A})$은 모든 곳에서 정의되고 닫힌
+몰입이다. Lemma
+\ref{lemma-surjective-graded-rings-map-relative-proj}를 보라. 따라서
+$Z = Z'$임을 $P$의 닫힌 부분공간으로서 보이면 충분하다.
+
+\medskip\noindent
+이제 문제는 밑에서 \'etale 국소적이므로 \'etale 국소화를 통해
+스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-closed-subscheme-proj})로 환원한다.
+\end{proof}
+
+\noindent
+닫힌 부분공간이 국소적으로 유한 개의 방정식으로 잘려 나오는 경우에는
+$\mathcal{A}$의 유한형 아이디얼 층으로 이를 정의할 수 있다.
+
+\begin{lemma}
+\label{lemma-closed-subscheme-proj-finite}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라
+하자. $\mathcal{A}$를 준연접 등급 $\mathcal{O}_X$-대수라 하자.
+$\pi : P = \underline{\text{Proj}}_X(\mathcal{A}) \to X$를
+$\mathcal{A}$의 상대 Proj라 하자. $i : Z \to P$를 닫힌 부분스킴이라
+하자. $\pi$가 준콤팩트이고
+% P09-ERR-0222
+$i$가 유한 표시이면, $d > 0$과 유한형 준연접
+$\mathcal{O}_X$-부분가군 $\mathcal{F} \subset \mathcal{A}_d$가 존재하여
+$Z = \underline{\text{Proj}}_X(\mathcal{A}/\mathcal{F}\mathcal{A})$이다.
+\end{lemma}
+
+\begin{proof}
+독자는 스킴의 경우에 사용한 논증을 다시 수행할 수 있다. 그러나 여기서는
+한 가지 기교로 보조정리가 스킴의 경우에서 따름을 보이겠다. Lemma
+\ref{lemma-closed-subscheme-proj}의 준연접 등급 아이디얼
+$\mathcal{I} \subset \mathcal{A}$를 택하자. 이는 $Z$를 잘라낸다.
+아핀 스킴 $U$와 전사
+\'etale 사상 $U \to X$를 택하자. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}를 보라.
+스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-closed-subscheme-proj-finite})에 의해
+$d > 0$과 유한형 준연접 $\mathcal{O}_U$-부분가군
+$\mathcal{F}' \subset \mathcal{I}_d|_U \subset \mathcal{A}_d|_U$가
+존재하여 $Z \times_X U$는
+$\underline{\text{Proj}}_U(\mathcal{A}|_U/\mathcal{F}'\mathcal{A}|_U)$와
+같다. Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-directed-colimit-finite-type}에 의해
+유한형 준연접 부분가군 $\mathcal{F} \subset \mathcal{I}_d$를 찾되
+$\mathcal{F}' \subset \mathcal{F}|_U$이게 할 수 있다.
+$Z' = \underline{\text{Proj}}_X(\mathcal{A}/\mathcal{F}\mathcal{A})$로
+두자. 그러면
+% P09-ERR-0223
+$Z' \to P$는 닫힌 몰입이고(Lemma
+\ref{lemma-surjective-generated-degree-1-map-relative-proj}),
+$Z \subset Z'$인데 이는 $\mathcal{F}\mathcal{A} \subset \mathcal{I}$이기
+때문이다. 다른 한편 $Z' \times_X U \subset Z \times_X U$이며, 이는
+$\mathcal{F}$의 선택에 의한 것이다. 따라서 바라던 대로
+$Z = Z'$이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-closed-subscheme-proj-finite-type}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라
+하자. $\mathcal{A}$를 준연접 등급 $\mathcal{O}_X$-대수라 하자.
+$\pi : P = \underline{\text{Proj}}_X(\mathcal{A}) \to X$를
+$\mathcal{A}$의 상대 Proj라 하자.
+% P09-ERR-0224
+$i : Z \to X$를 닫힌 부분공간이라 하자. $U \subset X$를 열린집합이라
+하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\pi$는 준콤팩트이다.
+% P09-ERR-0222
+\item $i$는 유한 표시이다.
+\item $|U| \cap |\pi|(|i|(|Z|)) = \emptyset$이다.
+\item $U$는 준콤팩트이다.
+\item $\mathcal{A}_n$은 유한형 $\mathcal{O}_X$-가군이며, 이는 모든
+$n$에 대해 성립한다.
+\end{enumerate}
+그러면 $d > 0$과 유한형 준연접 $\mathcal{O}_X$-부분가군
+$\mathcal{F} \subset \mathcal{A}_d$가 존재하여 (a)
+$Z = \underline{\text{Proj}}_X(\mathcal{A}/\mathcal{F}\mathcal{A})$이고,
+(b) $\mathcal{A}_d/\mathcal{F}$의 지지집합은 $U$와 서로소이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-closed-subscheme-proj-finite}의 증명에서와 같은 기교로
+스킴의 경우로 환원한다. Lemma \ref{lemma-closed-subscheme-proj}의
+준연접 등급 아이디얼 $\mathcal{I} \subset \mathcal{A}$를 택하자.
+이는 $Z$를 잘라낸다. 아핀 스킴 $W$와 전사
+\'etale 사상 $W \to X$를 택하자. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}를 보라.
+스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-closed-subscheme-proj-finite-type})에 의해
+$d > 0$과 유한형 준연접 $\mathcal{O}_W$-부분가군
+$\mathcal{F}' \subset \mathcal{I}_d|_W \subset \mathcal{A}_d|_W$가
+존재하여 (a) $Z \times_X W$는
+$\underline{\text{Proj}}_W(\mathcal{A}|_W/\mathcal{F}'\mathcal{A}|_W)$와
+같고, (b) $\mathcal{A}_d|_W/\mathcal{F}'$의 지지집합은
+$U \times_X W$와 서로소이다. Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-directed-colimit-finite-type}에 의해
+유한형 준연접 부분가군 $\mathcal{F} \subset \mathcal{I}_d$를 찾되
+$\mathcal{F}' \subset \mathcal{F}|_W$이게 할 수 있다.
+$Z' = \underline{\text{Proj}}_X(\mathcal{A}/\mathcal{F}\mathcal{A})$로
+두자. 그러면
+% P09-ERR-0223
+$Z' \to P$는 닫힌 몰입이고(Lemma
+\ref{lemma-surjective-generated-degree-1-map-relative-proj}),
+$Z \subset Z'$인데 이는 $\mathcal{F}\mathcal{A} \subset \mathcal{I}$이기
+때문이다. 다른 한편 $Z' \times_X W \subset Z \times_X W$이며, 이는
+$\mathcal{F}$의 선택에 의한 것이다. 따라서 $Z = Z'$이다.
+마지막으로 $\mathcal{A}_d/\mathcal{F}$는 $X \setminus U$ 위에
+지지된다. 실제로 $\mathcal{A}_d|_W/\mathcal{F}|_W$는
+$\mathcal{A}_d|_W/\mathcal{F}'$의 몫이며 후자는
+% P09-ERR-0225
+$W \setminus U \times_X W$ 위에 지지된다. 이로써 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-conormal-sheaf-section-projective-bundle}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{E}$를 준연접 $\mathcal{O}_X$-가군이라 하자. 다음 전단사가
+있다.
+$$
+\left\{
+\begin{matrix}
+\text{다음 사상의 단면들 }\sigma\text{ } \\
+\text{사상 }\mathbf{P}(\mathcal{E}) \to X
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+\text{전사 }\mathcal{E} \to \mathcal{L}\text{들로서} \\
+\mathcal{L}\text{은 가역 }\mathcal{O}_X\text{-가군}
+\end{matrix}
+\right\}
+$$
+이 경우 $\sigma$는 닫힌 몰입이고 표준 동형사상
+$$
+\Ker(\mathcal{E} \to \mathcal{L})
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes -1}
+\longrightarrow
+\mathcal{C}_{\sigma(X)/\mathbf{P}(\mathcal{E})}
+$$
+이 있다. 전단사와 동형사상은 모두 밑변환과 양립한다.
+\end{lemma}
+
+\begin{proof}
+구성들이 밑변환과 양립하므로 $X$ 위에서 \'etale 국소적으로 명제를
+확인하면 충분하다. 따라서 $X$가 스킴이라고 가정해도 되며, 결과는
+Divisors, Lemma
+\ref{divisors-lemma-conormal-sheaf-section-projective-bundle}이다.
+\end{proof}
+
+\section{블로업}
+\label{section-blowing-up}
+
+\noindent
+블로업은 대수기하학에서 중요한 도구이다.
+
+\begin{definition}
+\label{definition-blow-up}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{I} \subset \mathcal{O}_X$를 준연접 아이디얼 층이라 하고,
+$Z \subset X$를 $\mathcal{I}$에 대응하는 닫힌 부분공간이라 하자
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-ideals}).
+{\it $X$의 $Z$를 따른 블로업}, 또는
+{\it $X$의 아이디얼 층 $\mathcal{I}$에서의 블로업}은 사상
+$$
+b :
+\underline{\text{Proj}}_X
+\left(\bigoplus\nolimits_{n \geq 0} \mathcal{I}^n\right)
+\longrightarrow
+X
+$$
+이다. 블로업의 {\it 예외 제수}는 역상 $b^{-1}(Z)$이다. 때로는 $Z$를
+블로업의 {\it 중심}이라고 한다.
+\end{definition}
+
+\noindent
+예외 제수가 유효 Cartier 제수임을 뒤에서 볼 것이다. 더 나아가 블로업은
+$X$ 위의 “가장 작은” 대수공간으로서, 그 안에서 $Z$의 역상이 유효 Cartier 제수인
+특징지어진다.
+
+\medskip\noindent
+$b : X' \to X$가 $X$의 $Z$에서의 블로업이면, 구조 층의 꼬임들을 흔히
+$\mathcal{O}_{X'}(n)$으로 나타낸다. 이들은 가역
+$\mathcal{O}_{X'}$-가군이고
+$\mathcal{O}_{X'}(n) = \mathcal{O}_{X'}(1)^{\otimes n}$임을 주목하자.
+실제로 $X'$는 준연접 등급 $\mathcal{O}_X$-대수의 상대 Proj이고,
+그 대수는 차수 $1$에서 생성된다. Lemma
+\ref{lemma-relative-proj-generated-in-degree-1}을 보라.
+
+\begin{lemma}
+\label{lemma-blowing-up-affine}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{I} \subset \mathcal{O}_X$를 준연접 아이디얼 층이라 하자.
+$U = \Spec(A)$를 $X$ 위에서 \'etale인 아핀 스킴이라 하고,
+$I \subset A$를 $\mathcal{I}|_U$에 대응하는 아이디얼이라 하자.
+$X' \to X$가 $X$의 $\mathcal{I}$에서의 블로업이면, 표준 동형사상
+$$
+U \times_X X' = \text{Proj}(\bigoplus\nolimits_{d \geq 0} I^d)
+$$
+이 존재하며 이는 $U$ 위의 스킴들의 동형사상이다. 우변은 $I$의 $A$ 안에서의
+Rees 대수의 동차 스펙트럼이다.
+더 나아가 $U \times_X X'$는 아핀 블로업 대수들
+$A[\frac{I}{a}]$의 스펙트럼들로 이루어진 아핀 열린 덮개를 갖는다.
+\end{lemma}
+
+\begin{proof}
+제한 $\mathcal{I}|_U$는 $\mathcal{I}$의 당김과 같으며, 이 당김은 사상
+$U \to X$에 의한 것임을 주목하자. Properties of Spaces, Section
+\ref{spaces-properties-section-modules}를 보라. 따라서 보조정리는 Lemma
+\ref{lemma-relative-proj}과 Divisors, Lemma
+\ref{divisors-lemma-blowing-up-affine}를 결합하면 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-flat-base-change-blowing-up}
+$S$를 스킴이라 하자. $X_1 \to X_2$를 $S$ 위 대수공간들의 평탄
+사상이라 하자. $Z_2 \subset X_2$를 닫힌 부분공간이라 하자.
+$Z_1$을 $Z_2$의 역상이라 하되 $X_1$에서 취하자.
+$X'_i$를 $Z_i$의 $X_i$에서의 블로업이라 하자. 그러면 Cartesian 그림
+$$
+\xymatrix{
+X_1' \ar[r] \ar[d] & X_2' \ar[d] \\
+X_1 \ar[r] & X_2
+}
+$$
+이 존재하며 이는 $S$ 위의 대수공간들의 그림이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I}_2$를 $Z_2$의 $X_2$ 안에서의 아이디얼 층이라 하자. 주어진
+사상을 $g : X_1 \to X_2$로 나타내자. 그러면 $\mathcal{I}_1$, 즉
+$Z_1$의 아이디얼 층은
+$g^*\mathcal{I}_2 \to \mathcal{O}_{X_1}$의 상이다(Morphisms of Spaces,
+Definition
+\ref{spaces-morphisms-definition-inverse-image-closed-subspace}과 그 정의
+뒤의 논의를 보라). Lemma \ref{lemma-relative-proj-base-change}에 의해
+$X_1 \times_{X_2} X_2'$가
+$\bigoplus_{n \geq 0} g^*\mathcal{I}_2^n$의 상대 Proj임을 알 수 있다.
+$g$가 평탄하므로 사상
+$g^*\mathcal{I}_2^n \to \mathcal{O}_{X_1}$은 단사이고 그 상은
+$\mathcal{I}_1^n$이다. 따라서
+$X_1 \times_{X_2} X_2' = X_1'$임을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-blowing-up-gives-effective-Cartier-divisor}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$Z \subset X$를 닫힌 부분공간이라 하자. 블로업
+$b : X' \to X$, 즉 $Z$의 $X$에서의 블로업은 다음 성질들을 갖는다.
+\begin{enumerate}
+\item $b|_{b^{-1}(X \setminus Z)} : b^{-1}(X \setminus Z) \to X \setminus Z$
+는 동형사상이다.
+\item 예외 제수 $E = b^{-1}(Z)$는 $X'$ 위의 유효 Cartier 제수이다.
+\item 표준 동형사상
+$\mathcal{O}_{X'}(-1) = \mathcal{O}_{X'}(E)$이 있다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U$를 스킴이라 하고 $U \to X$를 전사 \'etale 사상이라 하자.
+블로업은 평탄 밑변환과 가환하므로(Lemma
+\ref{lemma-flat-base-change-blowing-up}), 이 명제들을 $U$로
+밑변환한 뒤 증명할 수 있다. 이로써 스킴의 경우로 환원된다. 그 경우의
+결과는 Divisors, Lemma
+\ref{divisors-lemma-blowing-up-gives-effective-Cartier-divisor}이다.
+\end{proof}
+
+% P09-ERR-0226
+\begin{lemma}[블로업의 보편 성질]
+\label{lemma-universal-property-blowing-up}
+\begin{slogan}
+닫힌 부분집합을 블로업하여 Cartier로 만들라.
+\end{slogan}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$Z \subset X$를 닫힌 부분공간이라 하자.
+$\mathcal{C}$를 $(\textit{Spaces}/X)$의 충만한 부분범주로서, 사상
+$Y \to X$들로 이루어진 것이라 하자. 각 사상에 대해 $Z$의 역상이
+$Y$ 위의 유효 Cartier 제수라고 가정한다. 그러면 블로업
+$b : X' \to X$, 즉 $Z$의 $X$에서의 블로업은
+$\mathcal{C}$의 종대상이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-blowing-up-gives-effective-Cartier-divisor}에 의해
+$b : X' \to X$는 $\mathcal{C}$의 대상이다.
+$f : Y \to X$를 $\mathcal{C}$의 대상이라 하자. 사상 $Y \to X'$가
+$X$ 위에서 유일하게 존재함을 보여야 한다. $D = f^{-1}(Z)$로 두자.
+$\mathcal{I} \subset \mathcal{O}_X$를 $Z$의 아이디얼 층이라 하고,
+$\mathcal{I}_D$를 $D$의 아이디얼 층이라 하자. 그러면
+$f^*\mathcal{I} \to \mathcal{I}_D$는 가역 $\mathcal{O}_Y$-가군으로의
+전사이다. 이는 사상
+$\psi : \bigoplus f^*\mathcal{I}^d \to \bigoplus \mathcal{I}_D^d$로
+확장되며, 후자는 등급 $\mathcal{O}_Y$-대수의 사상이다.
+$\mathcal{I}_D^d = \mathcal{I}_D^{\otimes d}$임을 관찰한다. 이는
+$D$가 유효 Cartier 제수이기 때문이다.
+% P09-ERR-0227
+Lemma \ref{lemma-relative-proj-generated-in-degree-1}에 의해 삼중쌍
+$(f : Y \to X, \mathcal{I}_D, \psi)$은 사상 $Y \to X'$를 정의하며,
+이는 $X$ 위의 사상이다. 제한
+$$
+Y \setminus D \longrightarrow X' \setminus b^{-1}(Z) = X \setminus Z
+$$
+은 유일하다. Lemma \ref{lemma-complement-effective-Cartier-divisor}에
+의해 열린집합 $Y \setminus D$는 $Y$에서 스킴론적으로 조밀하다.
+따라서 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-equality-of-morphisms}에 의해 사상
+$Y \to X'$는 유일하다. 또한 Lemma
+\ref{lemma-relative-proj-separated}에 의해 $b$는 분리이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-blow-up-effective-Cartier-divisor}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$Z \subset X$를 유효 Cartier 제수라 하자. $X$의 $Z$에서의 블로업은
+$X$의 항등사상이다.
+\end{lemma}
+
+\begin{proof}
+블로업의 보편 성질(Lemma
+\ref{lemma-universal-property-blowing-up})에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-blow-up-reduced-space}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{I} \subset \mathcal{O}_X$를 준연접 아이디얼 층이라 하자.
+$X$가 축약이면 블로업 $X'$도 축약이다. 여기서 이는 $X$의
+$\mathcal{I}$에서의 블로업이다.
+\end{lemma}
+
+\begin{proof}
+$U$를 스킴이라 하고 $U \to X$를 전사 \'etale 사상이라 하자.
+블로업은 평탄 밑변환과 가환하므로(Lemma
+\ref{lemma-flat-base-change-blowing-up}), 이 명제들을 $U$로
+밑변환한 뒤 증명할 수 있다. 이로써 스킴의 경우로 환원된다. 그 경우의
+결과는 Divisors, Lemma
+\ref{divisors-lemma-blow-up-reduced-scheme}이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-blowup-finite-nr-irreducibles}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$b : X' \to X$를 닫힌 부분공간에서 한 $X$의 블로업이라 하자.
+$X$가 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}의 동치 조건들을
+만족하면 $X'$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+이는 명제에서 인용한 보조정리, Lemma
+\ref{lemma-blowing-up-affine}의 블로업에 대한 \'etale 국소적 기술,
+그리고 Divisors, Lemma
+\ref{divisors-lemma-blow-up-and-irreducible-components}에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-blow-up-pullback-effective-Cartier}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$b : X' \to X$를 닫힌 부분공간에서 한 $X$의 블로업이라 하자.
+임의의 유효 Cartier 제수 $D$가 $X$ 위에 있으면 당김 $b^{-1}D$가
+정의된다(Definition
+\ref{definition-pullback-effective-Cartier-divisor}을 보라).
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{lemma-blowing-up-affine}와
+\ref{lemma-characterize-effective-Cartier-divisor}에 의해 다음 대수
+사실로 환원된다. $A$를 환이라 하고, $I \subset A$를 아이디얼,
+$a \in I$, $x \in A$를 영인자가 아닌 원소라 하자. 그러면
+$x$의 $A[\frac{I}{a}]$에서의 상은 영인자가 아니다. 실제로
+$x (y/a^n) = 0$이라고 하되 이는 $A[\frac{I}{a}]$에서의 등식이라 하자.
+그러면 $a^mxy = 0$가 $A$에서 어떤 $m$에 대해 성립한다. 따라서
+$a^my = 0$인데, 이는 $x$가 영인자가 아니기 때문이다. 그러므로
+$y/a^n$은 $A[\frac{I}{a}]$에서 0이며, 이는 바라던 바이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-blowing-up-two-ideals}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+% P09-ERR-0228
+$\mathcal{I} \subset \mathcal{O}_X$와 $\mathcal{J}$를 준연접 아이디얼
+층이라 하자. $b : X' \to X$를 $X$의 $\mathcal{I}$에서의 블로업이라
+하자. $b' : X'' \to X'$를 $X'$의
+$b^{-1}\mathcal{J} \mathcal{O}_{X'}$에서의 블로업이라 하자.
+그러면 $X'' \to X$는 $X$의 $\mathcal{I}\mathcal{J}$에서의 블로업과
+표준적으로 동형이다.
+\end{lemma}
+
+\begin{proof}
+$E \subset X'$를 $b$의 예외 제수라 하자. Lemma
+\ref{lemma-blowing-up-gives-effective-Cartier-divisor}에 의해 이는
+유효 Cartier 제수이다. 그러면 Lemma
+\ref{lemma-blow-up-pullback-effective-Cartier}에 의해
+$(b')^{-1}E$는 $X''$ 위의 유효 Cartier 제수이다.
+$E' \subset X''$를 $b'$의 예외 제수라 하자. 이 역시 유효 Cartier
+제수이다. 유효 Cartier 제수
+$E'' = E' + (b')^{-1}E$를 생각하자. 구성에 의해 $E''$의 아이디얼은
+$(b \circ b')^{-1}\mathcal{I} (b \circ b')^{-1}\mathcal{J}
+\mathcal{O}_{X''}$이다. 따라서 Lemma
+\ref{lemma-universal-property-blowing-up}에 의해 $X''$에서 블로업
+$c : Y \to X$, 즉 $X$의 $\mathcal{I}\mathcal{J}$에서의 블로업으로 가는
+표준 사상이 존재한다. 역으로 $\mathcal{I}\mathcal{J}$가 가역
+아이디얼로 당겨지므로
+$c^{-1}\mathcal{I}\mathcal{O}_Y$는 유효 Cartier 제수를 정의한다.
+Lemma \ref{lemma-sum-closed-subschemes-effective-Cartier}를 보라.
+% P09-ERR-0229
+따라서 Lemma \ref{lemma-universal-property-blowing-up}에 의해 사상
+$c' : Y \to X'$가 존재하며 이는 $X$ 위의 사상이다. 그러면
+$(c')^{-1}b^{-1}\mathcal{J}\mathcal{O}_Y =
+c^{-1}\mathcal{J}\mathcal{O}_Y$도 유효 Cartier 제수를 정의한다.
+% P09-ERR-0229
+따라서 사상 $c'' : Y \to X''$가 존재하며 이는 $X'$ 위의 사상이다.
+이 사상이 앞에서
+구성한 사상 $X'' \to Y$의 역임을 확인하는 일은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-blowing-up-projective}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{I} \subset \mathcal{O}_X$를 준연접 아이디얼 층이라 하자.
+$b : X' \to X$를 $X$의 아이디얼 층 $\mathcal{I}$에서의 블로업이라 하자.
+$\mathcal{I}$가 유한형이면 $b : X' \to X$는 고유 사상이다.
+\end{lemma}
+
+\begin{proof}
+$U$를 스킴이라 하고 $U \to X$를 전사 \'etale 사상이라 하자.
+블로업은 평탄 밑변환과 가환하므로(Lemma
+\ref{lemma-flat-base-change-blowing-up}), $U$로 밑변환한 뒤 각 명제를
+증명할 수 있다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-proper-local}을 보라).
+이로써 스킴의 경우로 환원된다. 이 경우 사상 $b$는 Divisors, Lemma
+\ref{divisors-lemma-blowing-up-projective}에 의해 사영적이므로
+Morphisms, Lemma \ref{morphisms-lemma-locally-projective-proper}에 의해
+고유하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-composition-finite-type-blowups}
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+$X$가 준콤팩트하고 준분리라고 가정하자.
+$Z \subset X$를 유한 표시인 닫힌 부분공간이라 하자.
+$b : X' \to X$를 중심이 $Z$인 블로업이라 하자.
+$Z' \subset X'$를 유한 표시인 닫힌 부분공간이라 하자.
+$X'' \to X'$를 중심이 $Z'$인 블로업이라 하자.
+다음을 만족하는 유한 표시인 닫힌 부분공간 $Y \subset X$가 존재한다.
+\begin{enumerate}
+\item $|Y| = |Z| \cup |b|(|Z'|)$이고,
+\item 합성 $X'' \to X$는 $X$의 $Y$에서의 블로업과 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$Z \to X$가 유한 표시라는 조건은 $Z$가 유한형 준연접 아이디얼 층
+$\mathcal{I} \subset \mathcal{O}_X$에 의해 잘려 나온다는 뜻이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-finite-presentation}을 보라.
+$\mathcal{A} = \bigoplus_{n \geq 0} \mathcal{I}^n$으로 써서
+$X' = \underline{\text{Proj}}(\mathcal{A})$라 하자.
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-quasi-coherent-finite-type-ideals}에 의해
+$X \setminus Z$는 $X$의 준콤팩트 열린 부분공간이다.
+$b^{-1}(X \setminus Z) \to X \setminus Z$가 동형사상이므로
+(Lemma \ref{lemma-blowing-up-gives-effective-Cartier-divisor}), 같은 결과에서
+$b^{-1}(X \setminus Z) \setminus Z'$가 $X'$의 준콤팩트 열린 부분공간임을
+알 수 있다. 따라서 $U = X \setminus (Z \cup b(Z'))$는 $X$의 준콤팩트
+열린 부분공간이다. Lemma \ref{lemma-closed-subscheme-proj-finite-type}에
+의해 어떤 $d > 0$과 유한형 $\mathcal{O}_X$-부분가군
+$\mathcal{F} \subset \mathcal{I}^d$가 존재하여
+$Z' = \underline{\text{Proj}}(\mathcal{A}/\mathcal{F}\mathcal{A})$이고
+$\mathcal{I}^d/\mathcal{F}$의 지지는 $X \setminus U$에 포함된다.
+
+\medskip\noindent
+$\mathcal{F} \subset \mathcal{I}^d$는 $\mathcal{O}_X$-부분가군이므로
+$\mathcal{F} \subset \mathcal{I}^d \subset \mathcal{O}_X$를 $X$ 위의
+유한형 준연접 아이디얼 층으로 생각할 수 있다. 혼동을 피하려 이를
+$\mathcal{J} \subset \mathcal{O}_X$로 나타내자.
+$\mathcal{I}^d / \mathcal{J}$와 $\mathcal{O}/\mathcal{I}^d$의 지지는
+$|X| \setminus |U|$에 포함되므로 $|V(\mathcal{J})|$는
+$|X| \setminus |U|$에 포함된다. 역으로
+$\mathcal{J} \subset \mathcal{I}^d$이므로
+$|Z| \subset |V(\mathcal{J})|$이다.
+$X \setminus Z \cong X' \setminus b^{-1}(Z)$ 위에서 아이디얼 층
+$\mathcal{J}$는 $Z'$를 잘라 낸다(아래 표시식을 보라). 따라서
+$|V(\mathcal{J})|$는 $|Z| \cup |b|(|Z'|)$와 같다. 그러므로 또한
+$|V(\mathcal{I}\mathcal{J})| = |Z| \cup |b|(|Z'|)$이다.
+더 나아가 $\mathcal{I}\mathcal{J}$는 두 유한형 아이디얼의 곱이므로
+유한형 아이디얼이다. $X'' \to X$가 $X$의
+$\mathcal{I}\mathcal{J}$에서의 블로업과 동형이라고 주장한다. 그러면
+$Y = V(\mathcal{I}\mathcal{J})$로 두어 보조정리의 증명이 끝난다.
+
+\medskip\noindent
+먼저 $X$의 $\mathcal{I}\mathcal{J}$에서의 블로업은
+$X'$의 $b^{-1}\mathcal{J} \mathcal{O}_{X'}$에서의 블로업과 같음을
+상기하자. Lemma \ref{lemma-blowing-up-two-ideals}을 보라.
+따라서 $X'$의 $b^{-1}\mathcal{J} \mathcal{O}_{X'}$에서의 블로업이
+$X'$의 $Z'$에서의 블로업과 일치함을 보이면 충분하다. 다음을 보이겠다.
+% P09-ERR-0230
+$$
+b^{-1}\mathcal{J} \mathcal{O}_{X'} = \mathcal{I}_E^d \mathcal{I}_{Z'}
+$$
+이는 $X''$ 위의 아이디얼 층들의 등식이다. 이로써 원하는 바가 따른다.
+$\mathcal{I}_E^d$가 유효 Cartier 제수 $dE$를 잘라 내므로 Lemmas
+\ref{lemma-blow-up-effective-Cartier-divisor}와
+\ref{lemma-blowing-up-two-ideals}을 적용할 수 있기 때문이다.
+
+\medskip\noindent
+표시된 아이디얼들의 등식을 보이기 위해 국소적으로 작업해도 된다.
+% P09-ERR-0231
+Lemma \ref{lemma-blowing-up-affine}의 표기 $A$, $I$, $a \in I$를 쓰면,
+$\mathcal{F}$는 $R$-부분가군 $M \subset I^d$에 대응하며, 이 부분가군은
+아이디얼 $J \subset R$로 동형사상된다.
+$Z' = \underline{\text{Proj}}(\mathcal{A}/\mathcal{F}\mathcal{A})$라는
+조건은 $Z' \cap \Spec(A[\frac{I}{a}])$가 원소
+$m/a^d$, $m \in M$들로 생성된 아이디얼에 의해 잘려 나온다는 뜻이다.
+원소 $m \in M$이 함수 $f \in J$에 대응한다고 하자. 그러면 아핀 블로업
+대수 $A' = A[\frac{I}{a}]$에서
+$f = (a^dm)/a^d = a^d (m/a^d)$임을 알 수 있다. 따라서 등식이 성립한다.
+\end{proof}
+
+\section{진변환}
+\label{section-strict-transform}
+
+\noindent
+이 절은 Divisors, Section \ref{divisors-section-strict-transform}에 대응한다.
+$S$를 스킴, $B$를 $S$ 위의 대수공간이라 하고
+$Z \subset B$를 닫힌 부분공간이라 하자.
+% P09-ERR-0232
+$b : B' \to B$를 $B$의 $Z$에서의 블로업이라 하고, $E \subset B'$를
+예외 제수 $E = b^{-1}Z$로 나타내자. 다음에서는 흔히 대수공간 $X$를
+생각하되, 이는 $B$ 위의 대수공간이며 Cartesian 그림
+$$
+\xymatrix{
+\text{pr}_{B'}^{-1}E \ar[r] \ar[d] &
+X \times_B B' \ar[r]_-{\text{pr}_X} \ar[d]_{\text{pr}_{B'}} &
+X \ar[d]^f \\
+E \ar[r] & B' \ar[r] & B
+}
+$$
+을 만든다. $E$는 유효 Cartier 제수이므로
+(Lemma \ref{lemma-blowing-up-gives-effective-Cartier-divisor})
+$\text{pr}_{B'}^{-1}E \subset X \times_B B'$는 국소 주아이디얼이다
+(Lemma \ref{lemma-pullback-locally-principal}).
+따라서 $\text{pr}_{B'}^{-1}E$의 $X \times_B B'$ 안에서의 여집합을 넣는
+포함 사상은 아핀이며, 특히 준콤팩트하다
+(Lemma \ref{lemma-complement-locally-principal-closed-subscheme}).
+그러므로 준연접 $\mathcal{O}_{X \times_B B'}$-가군 $\mathcal{G}$에 대해
+$|\text{pr}_{B'}^{-1}E|$ 위에 지지되는 단면들의 부분층은 준연접
+부분가군이다. Limits of Spaces, Definition
+\ref{spaces-limits-definition-subsheaf-sections-supported-on-closed}을 보라.
+$\mathcal{G}$가 준연접 대수 층이면, 예를 들어
+$\mathcal{G} = \mathcal{O}_{X \times_B B'}$이면, 이 부분층은
+$\mathcal{G}$의 아이디얼이다.
+
+\begin{definition}
+\label{definition-strict-transform}
+% P09-ERR-0233
+위와 같이 $Z \subset B$와 $f : X \to B$가 주어졌다고 하자.
+\begin{enumerate}
+\item 준연접 $\mathcal{O}_X$-가군 $\mathcal{F}$가 주어졌을 때,
+$\mathcal{F}$의 {\it 진변환}, 즉 $B$의 $Z$에서의 블로업에 관한 진변환은
+몫 $\mathcal{F}'$이다. 이는 $\text{pr}_X^*\mathcal{F}$를
+$|\text{pr}_{B'}^{-1}E|$ 위에 지지되는 단면들의 부분가군으로 나눈 것이다.
+\item $X$의 {\it 진변환}은
+$X' \subset X \times_B B'$인 닫힌 부분공간으로서,
+$\mathcal{O}_{X \times_B B'}$의 단면들 가운데
+$|\text{pr}_{B'}^{-1}E|$ 위에 지지되는 것들로 이루어진 준연접 아이디얼에
+의해 잘려 나오는 것이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+블로업에 따른 진변환을 취하는 것은 블로업에 사용한 닫힌 부분공간에
+의존한다는 점에 주의하자(사상 $B' \to B$에만 의존하지 않는다).
+
+\begin{lemma}[\'Etale 국소화와 진변환]
+\label{lemma-strict-transform-local}
+Definition \ref{definition-strict-transform}의 상황을 가정하자. 그림
+$$
+\xymatrix{
+U \ar[r] \ar[d] & X \ar[d] \\
+V \ar[r] & B
+}
+$$
+이 가환하고 $U$와 $V$가 스킴이며 수평 화살표들이 \'etale이라고 하자.
+$V' \to V$를 $V$의 $Z \times_B V$에서의 블로업이라 하자. 그러면
+\begin{enumerate}
+\item $V' = V \times_B B'$이고, 사상들
+$V' \to B'$와 $U \times_V V' \to X \times_B B'$는 \'etale이다.
+\item 진변환 $U'$, 즉 $U$의 $V' \to V$에 관한 진변환은
+$X' \times_X U$와 같다. 여기서 $X'$는 $X$의 진변환이며,
+$B' \to B$에 관해 취한 것이다.
+\item 준연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해 진변환
+$\mathcal{F}'$을 $U \times_V V'$에 제한한 것은 $\mathcal{F}|_U$의
+진변환이고, 이는 $V' \to V$에 관해 취한 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 블로업이 평탄 밑변환과 가환한다는 사실
+(Lemma \ref{lemma-flat-base-change-blowing-up}), \'etale 사상이
+평탄하다는 사실, 그리고 \'etale 사상의 밑변환도 \'etale이라는 사실에서
+따른다. 그러면 (3)은 닫힌 부분집합 위에 지지되는 단면들의 층을 취하는
+% P09-ERR-0234
+연산이 \'etale 사상에 의한 당김과 가환한다는 사실에서 따른다.
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-sections-supported-on-closed-subset}을 보라.
+(2)는 (3)을 $\mathcal{F} = \mathcal{O}_X$에 적용하면 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-strict-transform}
+Definition \ref{definition-strict-transform}의 상황을 가정하자.
+\begin{enumerate}
+\item 진변환 $X'$, 즉 $X$의 진변환은 $X$의 닫힌 부분공간
+$f^{-1}Z$에서의 $X$의 블로업이다.
+\item 준연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해 진변환
+$\mathcal{F}'$은 $X' \to X \times_B B'$에 따른 전상과 표준적으로
+동형이다. 여기서 전상할 대상은 $\mathcal{F}$의 진변환이고, 이는 블로업
+$X' \to X$에 관해 취한 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X'' \to X$를 $X$의 $f^{-1}Z$에서의 블로업이라 하자. 블로업의 보편
+성질(Lemma \ref{lemma-universal-property-blowing-up})에 의해 가환 그림
+$$
+\xymatrix{
+X'' \ar[r] \ar[d] & X \ar[d] \\
+B' \ar[r] & B
+}
+$$
+이 존재하고, 따라서 사상 $i : X'' \to X \times_B B'$가 존재한다.
+보조정리의 첫 번째 주장은 $i$가 상이 $X'$인 닫힌 몰입이라는 것이다.
+두 번째 주장은 $\mathcal{F}' = i_*\mathcal{F}''$이라는 것이다. 여기서
+$\mathcal{F}''$은 $\mathcal{F}$의 진변환이며, 블로업 $X'' \to X$에
+관해 취한 것이다. 이 주장들은 $X$ 위에서 \'etale 국소적으로 확인할 수 있으므로
+스킴의 경우로 환원된다(Divisors, Lemma
+\ref{divisors-lemma-strict-transform}). 세부 사항 일부는 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-strict-transform-flat}
+Definition \ref{definition-strict-transform}의 상황을 가정하자.
+\begin{enumerate}
+\item $X$가 $B$ 위에서 평탄하되 $Z$ 위의 모든 점에서 그러하면, $X$의 진변환은
+밑변환 $X \times_B B'$와 같다.
+\item $\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{F}$가 $B$ 위에서 평탄하되 $Z$ 위의 모든 점에서 그러하면,
+진변환 $\mathcal{F}'$, 즉 $\mathcal{F}$의 진변환은 당김
+$\text{pr}_X^*\mathcal{F}$와 같다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-strict-transform-flat})에서 \'etale 국소화
+(Lemma \ref{lemma-strict-transform-local})로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-strict-transform-affine}
+$S$를 스킴이라 하자. $B$를 $S$ 위의 대수공간이라 하자.
+$Z \subset B$를 닫힌 부분공간이라 하자.
+$b : B' \to B$를 $Z$의 $B$에서의 블로업이라 하자.
+$g : X \to Y$를 $B$ 위의 공간들의 아핀 사상이라 하자.
+$\mathcal{F}$를 $X$ 위의 준연접 층이라 하자.
+$g' : X \times_B B' \to Y \times_B B'$를 $g$의 밑변환이라 하자.
+$\mathcal{F}'$을 $\mathcal{F}$의 진변환이라 하되 $b$에 관해 취하자.
+그러면 $g'_*\mathcal{F}'$은 $g_*\mathcal{F}$의 진변환이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-strict-transform-affine})에서 \'etale 국소화
+(Lemma \ref{lemma-strict-transform-local})로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-strict-transform-different-centers}
+$S$를 스킴이라 하자. $B$를 $S$ 위의 대수공간이라 하자.
+$Z \subset B$를 닫힌 부분공간이라 하자.
+$D \subset B$를 유효 Cartier 제수라 하자.
+$Z' \subset B$를 $Z$와 $D$의 아이디얼 층들의 곱으로 잘라 낸
+닫힌 부분공간이라 하자. $B' \to B$를 $B$의 $Z$에서의 블로업이라 하자.
+\begin{enumerate}
+\item $B$의 $Z'$에서의 블로업은 $B' \to B$와 동형이다.
+\item $f : X \to B$를 대수공간들의 사상이라 하고 $\mathcal{F}$를
+준연접 $\mathcal{O}_X$-가군이라 하자. $\mathcal{F}$의 단면들로 이루어진
+부분층 가운데 $|f^{-1}D|$ 위에 지지되는 것이 영이면,
+$\mathcal{F}$의 $Z$에서의 블로업에 관한 진변환은 $\mathcal{F}$의
+$B$의 $Z'$에서의 블로업에 관한 진변환과 일치한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-strict-transform-different-centers})에서 \'etale
+국소화(Lemma \ref{lemma-strict-transform-local})로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-strict-transform-composition-blowups}
+$S$를 스킴이라 하자. $B$를 $S$ 위의 대수공간이라 하자.
+$Z \subset B$를 닫힌 부분공간이라 하자.
+$b : B' \to B$를 중심이 $Z$인 블로업이라 하자.
+$Z' \subset B'$를 닫힌 부분공간이라 하자.
+$B'' \to B'$를 중심이 $Z'$인 블로업이라 하자.
+% P09-ERR-0235
+$Y \subset B$를 닫힌 부분스킴이라 하되
+$|Y| = |Z| \cup |b|(|Z'|)$이고 합성 $B'' \to B$는 $B$의 $Y$에서의
+블로업과 동형이라고 하자. 이 상황에서 임의의 스킴 $X$가 $B$ 위에 있고
+$\mathcal{F} \in \QCoh(\mathcal{O}_X)$가 주어지면 다음이 성립한다.
+\begin{enumerate}
+% P09-ERR-0236
+\item $\mathcal{F}$의 $B$의 $Y$에서의 블로업에 관한 진변환은,
+$B'' \to B'$라는 $Z'$에서의 블로업에 관해 다시 진변환한 것과 같다.
+여기서 먼저 진변환할 것은 $\mathcal{F}$이며, 이는
+$B' \to B$라는 $B$의 $Z$에서의 블로업에 관해 취한다.
+\item $X$의 $B$의 $Y$에서의 블로업에 관한 진변환은,
+$B'' \to B'$라는 $Z'$에서의 블로업에 관해 다시 진변환한 것과 같다.
+여기서 먼저 진변환할 것은 $X$이며, 이는
+$B' \to B$라는 $B$의 $Z$에서의 블로업에 관해 취한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-strict-transform-composition-blowups})에서 \'etale
+국소화(Lemma \ref{lemma-strict-transform-local})로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-strict-transform-universally-injective}
+Definition \ref{definition-strict-transform}의 상황을 가정하자. 완전열
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0
+$$
+이 $X$ 위의 준연접 층들로 이루어지고 임의의 밑변환 $T \to B$ 뒤에도
+완전하다고 하자. 그러면 진변환 $\mathcal{F}_i'$들, 즉 임의의 블로업
+$B' \to B$에 관한 진변환들도 짧은 완전열
+$0 \to \mathcal{F}'_1 \to \mathcal{F}'_2 \to \mathcal{F}'_3 \to 0$을
+이룬다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-strict-transform-universally-injective})에서 \'etale
+국소화(Lemma \ref{lemma-strict-transform-local})로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-strict-transform-blowup-fitting-ideal}
+$S$를 스킴이라 하자. $B$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_B$-가군이라 하자.
+% P09-ERR-0237
+$Z_k \subset S$를 $\text{Fit}_k(\mathcal{F})$로 잘라 낸 닫힌
+부분스킴이라 하자. Section \ref{section-fitting-ideals}을 보라.
+$B' \to B$를 $B$의 $Z_k$에서의 블로업이라 하고
+$\mathcal{F}'$을 $\mathcal{F}$의 진변환이라 하자.
+그러면 $\mathcal{F}'$은 국소적으로 $\leq k$개의 단면으로 생성된다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-strict-transform-blowup-fitting-ideal})에서 \'etale
+국소화(Lemma \ref{lemma-strict-transform-local})로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-strict-transform-blowup-fitting-ideal-locally-free}
+$S$를 스킴이라 하자. $B$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_B$-가군이라 하자.
+% P09-ERR-0237
+$Z_k \subset S$를 $\text{Fit}_k(\mathcal{F})$로 잘라 낸 닫힌
+부분스킴이라 하자. Section \ref{section-fitting-ideals}을 보라.
+$\mathcal{F}$가 계수 $k$인 국소 자유 가군이되 $B \setminus Z_k$ 위에서 그러하다고
+가정하자. $B' \to B$를 $B$의 $Z_k$에서의 블로업이라 하고
+$\mathcal{F}'$을 $\mathcal{F}$의 진변환이라 하자.
+그러면 $\mathcal{F}'$은 계수 $k$인 국소 자유 가군이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 스킴의 경우(Divisors, Lemma
+\ref{divisors-lemma-strict-transform-blowup-fitting-ideal-locally-free})에서
+\'etale 국소화(Lemma \ref{lemma-strict-transform-local})로 따른다.
+\end{proof}
+
+\section{허용 블로업}
+\label{section-admissible-blowups}
+
+\noindent
+블로업을 조금 더 잘 제어하기 위해 다음 표준 용어를 도입한다.
+
+\begin{definition}
+\label{definition-admissible-blowup}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$U \subset X$를 열린 부분공간이라 하자. 사상 $X' \to X$를
+{\it $U$-허용 블로업}이라 하는 것은, 유한 표시 닫힌 몰입
+$Z \to X$가 존재하고 $Z$는 $U$와 서로소이며
+$X'$가 $X$의 $Z$에서의 블로업과 동형인 경우이다.
+\end{definition}
+
+\noindent
+$Z \to X$가 유한 표시일 필요충분조건은 아이디얼 층
+$\mathcal{I}_Z \subset \mathcal{O}_X$가 유한형인 것이다. Morphisms of
+Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-finite-presentation}을 보라.
+특히 $U$-허용 블로업은 고유 사상이다. Lemma
+\ref{lemma-blowing-up-projective}를 보라.
+같은 사상을 낳는 중심이 여러 개일 수 있음에 주의하자. 따라서 요구하는
+것은 $U$와 서로소이며 $X'$를 만들어 내는 어떤 중심이 존재한다는 것뿐이다.
+끝으로 사상 $b : X' \to X$는 $U$ 위에서 동형사상이므로(Lemma
+\ref{lemma-blowing-up-gives-effective-Cartier-divisor}을 보라), 흔히
+표기를 남용하여 $U$를 $X'$의 열린 부분공간으로도 생각한다.
+
+\begin{lemma}
+\label{lemma-composition-admissible-blowups}
+$S$를 스킴이라 하자.
+$X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+$U \subset X$를 준콤팩트 열린 부분공간이라 하자.
+$b : X' \to X$를 $U$-허용 블로업이라 하자.
+$X'' \to X'$를 $U$-허용 블로업이라 하자.
+그러면 합성 $X'' \to X$는 $U$-허용 블로업이다.
+\end{lemma}
+
+\begin{proof}
+더 정밀한 Lemma \ref{lemma-composition-finite-type-blowups}에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-extend-admissible-blowups}
+$S$를 스킴이라 하자.
+% P09-ERR-0238
+$X$를 준콤팩트 준분리 대수공간이라 하자.
+$U, V \subset X$를 준콤팩트 열린 부분공간이라 하자.
+$b : V' \to V$를 $U \cap V$-허용 블로업이라 하자.
+그러면 $U$-허용 블로업 $X' \to X$가 존재하고, 이를 $V$로 제한하면
+$V'$이 된다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I} \subset \mathcal{O}_V$를 유한형 준연접 아이디얼 층이라 하되,
+$V(\mathcal{I})$가 $U \cap V$와 서로소이고 $V'$이 $V$의
+$\mathcal{I}$에서의 블로업과 동형이도록 하자.
+$\mathcal{I}' \subset \mathcal{O}_{U \cup V}$를 준연접 아이디얼 층이라
+하되, $U$로의 제한은 $\mathcal{O}_U$이고 $V$로의 제한은
+$\mathcal{I}$이도록 하자. Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-extend}에 의해 유한형 준연접 아이디얼 층
+$\mathcal{J} \subset \mathcal{O}_X$가 존재하고, 이를 $U \cup V$로
+제한하면 $\mathcal{I}'$이 된다. 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-dominate-admissible-blowups}
+$S$를 스킴이라 하자.
+$X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+$U \subset X$를 준콤팩트 열린 부분공간이라 하자.
+% P09-ERR-0239
+$b_i : X_i \to X$, $i = 1, \ldots, n$을 $U$-허용 블로업들이라 하자.
+다음을 만족하는 $U$-허용 블로업 $b : X' \to X$가 존재한다.
+(a) $b$는 $X' \to X_i \to X$로 분해되며 이는 각
+$i = 1, \ldots, n$에 대해 성립하고,
+(b) 각 사상 $X' \to X_i$는 $U$-허용 블로업이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I}_i \subset \mathcal{O}_X$를 유한형 준연접 아이디얼 층이라 하되,
+$V(\mathcal{I}_i)$가 $U$와 서로소이고 $X_i$가 $X$의
+$\mathcal{I}_i$에서의 블로업과 동형이도록 하자.
+$\mathcal{I} = \mathcal{I}_1 \cdot \ldots \cdot \mathcal{I}_n$으로 두고
+$X'$을 $X$의 $\mathcal{I}$에서의 블로업이라 하자. 그러면
+$X' \to X$는 Lemma \ref{lemma-blowing-up-two-ideals}에 의해 $b_i$를
+통해 분해된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-separate-disjoint-opens-by-blowing-up}
+$S$를 스킴이라 하자.
+$X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+$U, V$를 $X$의 서로소인 준콤팩트 열린 부분공간들이라 하자.
+그러면 $U \cup V$-허용 블로업 $b : X' \to X$가 존재하여
+$X'$가 열린 부분공간들의 서로소 합
+$X' = X'_1 \amalg X'_2$이고 $b^{-1}(U) \subset X'_1$이며
+$b^{-1}(V) \subset X'_2$이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I}$와, 각각 $\mathcal{J}$인 유한형 준연접 아이디얼 층들을
+$X \setminus U = V(\mathcal{I})$와, 각각
+$X \setminus V = V(\mathcal{J})$가 되도록 택하자. Limits of Spaces,
+Lemma \ref{spaces-limits-lemma-quasi-coherent-finite-type-ideals}을 보라.
+그러면 $|V(\mathcal{I}\mathcal{J})| = |X|$이다. 따라서
+$\mathcal{I}\mathcal{J}$는 국소 멱영 아이디얼 층이다.
+$\mathcal{I}$와 $\mathcal{J}$가 유한형이고 $X$가 준콤팩트이므로 어떤
+$n > 0$에 대해 $\mathcal{I}^n \mathcal{J}^n = 0$이다.
+$\mathcal{I}$를 $\mathcal{I}^n$으로, $\mathcal{J}$를
+$\mathcal{J}^n$으로 바꾸어도 되고 그렇게 하자. 그러면
+$\mathcal{I} \mathcal{J} = 0$이다. $b : X' \to X$를
+$\mathcal{I} + \mathcal{J}$에서의 블로업이라 하자. 이는
+$U \cup V$-허용이다. 왜냐하면
+% P09-ERR-0240
+$|V(\mathcal{I} + \mathcal{J})| = |X| \setminus |U| \cup |V|$이기 때문이다.
+$X'$가 보조정리의 명제와 같이 열린 부분공간들의 서로소 합
+$X' = X'_1 \amalg X'_2$임을 보이겠다.
+
+\medskip\noindent
+$|V(\mathcal{I} + \mathcal{J})|$는 $|U \cup V|$의 여집합이므로
+$V \cup U$는 $X'$에서 스킴론적으로 조밀하다. Lemmas
+\ref{lemma-blowing-up-gives-effective-Cartier-divisor}와
+\ref{lemma-complement-effective-Cartier-divisor}을 보라.
+따라서 열린닫힌 부분공간들로의 분해
+$X' = X'_1 \amalg X'_2$가 존재한다면, $X'_1$은 $U$의 스킴론적
+폐포이고 이는 $X'$ 안에서 취한다. 마찬가지로 $X'_2$는 $V$의 스킴론적
+폐포이고 이는 $X'$ 안에서 취한다. $U \to X'$와 $V \to X'$가
+준콤팩트이므로 스킴론적 폐포를
+취하는 것은 \'etale 국소화와 가환한다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-scheme-theoretic-image}).
+그러므로 $X'_1$과 $X'_2$의 존재를 확인하려면 $X$ 위에서 \'etale
+국소적으로 작업해도 된다. 이로써 스킴의 경우로 환원되며, 이는 Divisors,
+Lemma \ref{divisors-lemma-separate-disjoint-opens-by-blowing-up}의 증명에서
+다루어진다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

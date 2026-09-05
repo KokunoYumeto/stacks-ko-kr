@@ -1,0 +1,5558 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{크리스탈린 코호몰로지}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장은 2012년 컬럼비아 대학교에서 열린 요한 더용의 연속 강연을 바탕으로 한다.
+이 장의 목적은 크리스탈린 코호몰로지를 빠르게 소개하는 것이다.
+참고문헌으로는 \cite{Berthelot}가 있다.
+
+\medskip\noindent
+분할멱(divided power) 환에 관한 더 초등적이고 순수 대수적인 논의는 가환대수에서
+Tate 분해를 논할 때에도 유용하므로 예비 장으로 옮겼다.
+Divided Power Algebra, Section \ref{dpa-section-introduction}을 보라.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{분할멱 포락}
+\label{section-divided-power-envelope}
+
+\noindent
+다음 보조정리의 구성을 분할멱 포락이라 부르겠다.
+이 구성은 뒤에서 중요한 역할을 한다.
+
+\begin{lemma}
+\label{lemma-divided-power-envelope}
+$(A, I, \gamma)$를 분할멱환이라 하자.
+$A \to B$를 환 준동형이라 하자. $J \subset B$를 $IB \subset J$인
+아이디얼이라 하자. 다음을 만족하는 분할멱환의 준동형
+$$
+(A, I, \gamma) \longrightarrow (D, \bar J, \bar \gamma)
+$$
+이 존재한다.
+$$
+\Hom_{(A, I, \gamma)}((D, \bar J, \bar \gamma), (C, K, \delta)) =
+\Hom_{(A, I)}((B, J), (C, K))
+$$
+이 등식은 $(A, I, \gamma)$ 위의 분할멱대수 $(C, K, \delta)$에 관해
+함자적이다. 여기서 좌변은 $(A, I, \gamma)$ 위의 분할멱환 준동형들의
+집합이고, 우변은 $(A, I)$ 위의 (환, 아이디얼) 쌍의 준동형들의 집합이다.
+\end{lemma}
+
+\begin{proof}
+분할멱환 $(C, K, \delta)$들의 범주를 $\mathcal{C}$라 쓰자.
+다음으로 정의되는 함자 $F : \mathcal{C} \longrightarrow \textit{Sets}$를 생각하자.
+$$
+F(C, K, \delta) =
+\left\{
+(\varphi, \psi)
+\middle|
+\begin{matrix}
+\varphi : (A, I, \gamma) \to (C, K, \delta)
+\text{ 는 분할멱환 준동형} \\
+\psi : (B, J) \to (C, K)\text{ 는 } 
+A\text{-대수 준동형이며 }\psi(J) \subset K
+\end{matrix}
+\right\}
+$$
+Divided Power Algebra, Lemma \ref{dpa-lemma-a-version-of-brown}을
+이 함자에 적용할 수 있음을 보이면 보조정리가 증명된다.
+$(\varphi, \psi) \in F(C, K, \delta)$라 하자.
+$C' \subset C$를 $\varphi(A)$, $\psi(B)$ 및 모든 $f \in J$에 대한
+$\delta_n(\psi(f))$로 생성되는 부분환이라 하자.
+$K' \subset K \cap C'$를 $\varphi(I)$ 및 $f \in J$에 대한
+$\delta_n(\psi(f))$로 생성되는 $C'$의 아이디얼이라 하자.
+그러면 $(C', K', \delta|_{K'})$는 분할멱환이고,
+$C'$의 기수는 기수 $\kappa = |A| \otimes |B|^{\aleph_0}$로 제한된다.
+또한 $\varphi$는 $A \to C' \to C$로 인수분해되고,
+$\psi$는 $B \to C' \to C$로 인수분해된다. 이로써
+Divided Power Algebra, Lemma \ref{dpa-lemma-a-version-of-brown}의
+가정 (1)이 성립함을 보였다. 가정 (2)는 명백하다.
+실제로 분할멱환 범주에서의 극한은 망각 함자
+$(C, K, \delta) \mapsto (C, K)$와 교환한다. Divided Power Algebra,
+Lemma \ref{dpa-lemma-limits} 및 그 증명을 보라.
+\end{proof}
+
+\begin{definition}
+\label{definition-divided-power-envelope}
+$(A, I, \gamma)$를 분할멱환이라 하자.
+$A \to B$를 환 준동형이라 하자. $J \subset B$를 $IB \subset J$인
+아이디얼이라 하자. Lemma \ref{lemma-divided-power-envelope}에서 구성한
+분할멱대수 $(D, \bar J, \bar\gamma)$를
+{\it $(A, I, \gamma)$에 대한 $B$ 안의 $J$의 분할멱 포락}이라 부르고,
+$D_B(J)$ 또는 $D_{B, \gamma}(J)$로 나타낸다.
+\end{definition}
+
+\noindent
+$(A, I, \gamma) \to (C, K, \delta)$를 분할멱환의 준동형이라 하자.
+$D_{B, \gamma}(J) = (D, \bar J, \bar \gamma)$의 보편 성질은
+$$
+\begin{matrix}
+\text{환 준동형 }B \to C \\
+\text{ 가운데 }J\text{의 상이 들어가는 }K
+\end{matrix}
+\longleftrightarrow
+\begin{matrix}
+\text{분할멱 준동형} \\
+(D, \bar J, \bar \gamma) \to (C, K, \delta)
+\end{matrix}
+$$
+이며, 이 대응은 $\text{id}_D$에 대응하는 사상 $B \to D$를 앞에 합성하여
+주어진다. 보편 성질에서 곧바로 따르는
+$(D, \bar J, \bar \gamma)$의 몇 가지 성질을 적어 보자.
+다음 $A$-대수 준동형들이 있다.
+\begin{equation}
+\label{equation-divided-power-envelope}
+B \longrightarrow D \longrightarrow B/J
+\end{equation}
+첫째 화살표는 $J$를 $\bar J$ 안으로 보내며, $\bar J$는 둘째 화살표의
+핵이다. $n > 0$이고 $x$가 $J \to D$의 상에 속할 때의 원소
+$\bar\gamma_n(x)$들은 $D$의 아이디얼로서 $\bar J$를 생성하고,
+$B$-대수로서 $D$를 생성한다.
+
+\begin{lemma}
+\label{lemma-divided-power-envelop-quotient}
+$(A, I, \gamma)$를 분할멱환이라 하자.
+$\varphi : B' \to B$를 핵이 $K$인 $A$-대수의 전사라 하자.
+$IB \subset J \subset B$를 아이디얼이라 하자. $J' \subset B'$를
+$J$의 역상이라 하자.
+$D_{B', \gamma}(J') = (D', \bar J', \bar\gamma)$라 쓰자.
+그러면 $D_{B, \gamma}(J) = (D'/K', \bar J'/K', \bar\gamma)$이다.
+여기서 $K'$은 $n \geq 1$, $k \in K$에 대한 원소
+$\bar\gamma_n(k)$들로 생성되는 아이디얼이다.
+\end{lemma}
+
+\begin{proof}
+$D_{B, \gamma}(J) = (D, \bar J, \bar \gamma)$라 쓰자.
+$D'$의 보편 성질은 분할멱대수의 준동형 $D' \to D$를 준다.
+$B' \to B$와 $J' \to J$가 전사이므로 $D' \to D$도 전사이다
+(위의 설명을 보라). $n \geq 1$, $k \in K$에 대해
+$\bar\gamma_n(k)$가 핵에 속함은 명백하다. 즉, 준동형
+$D'/K' \to D$를 얻는다. 역으로, $\bar J'/K' \subset D'/K'$ 위에는
+분할멱 구조가 존재한다. Divided Power Algebra, Lemma
+\ref{dpa-lemma-kernel}을 보라.
+따라서 $D$의 보편 성질은 역준동형 $D \to D'/K'$을 주며, 원하는 바를 얻는다.
+\end{proof}
+
+\noindent
+Definition \ref{definition-divided-power-envelope}의 상황에서 $A$ 위의
+다항식대수 $P$와 전사 $P \to B$를 택하고, $J' \subset P$를 $J$의
+역상으로 둘 수 있다. 앞의 보조정리는 $D_{B, \gamma}(J)$를
+$D_{P, \gamma}(J')$로 기술한다. Divided Power Algebra, Lemma
+\ref{dpa-lemma-gamma-extends}에 의해 $\gamma$는 $IP$ 위의 분할멱 구조
+$\gamma'$으로 확장됨에 유의하라. 따라서
+$D_{P, \gamma}(J') = D_{P, \gamma'}(J')$는 다음 보조정리에서 기술할
+분할멱 포락의 특수한 경우에 해당한다.
+
+\begin{lemma}
+\label{lemma-describe-divided-power-envelope}
+$(B, I, \gamma)$를 분할멱대수라 하자. $I \subset J \subset B$를
+아이디얼이라 하자. $(D, \bar J, \bar \gamma)$를 $\gamma$에 대한
+$J$의 분할멱 포락이라 하자. $J = I + (f_t)$가 되도록
+$f_t \in J$, $t \in T$를 택하자. 그러면 $x_t$를 $D$에서의 $f_t$의
+상으로 보내는 분할멱환의 전사
+$$
+\Psi :
+(B\langle x_t \rangle, IB\langle x_t \rangle + B\langle x_t \rangle_+, \delta)
+\longrightarrow
+(D, \bar J, \bar \gamma)
+$$
+가 존재한다. $\Psi$의 핵은 원소 $x_t - f_t$들과, 어떤
+$r_t \in B$, $r_0 \in I$에 대해 $B$에서 $\sum r_t f_t = r_0$일 때마다
+생기는 모든 원소
+$$
+\delta_n\left(\sum r_t x_t - r_0\right)
+$$
+로 생성된다.
+\end{lemma}
+
+\begin{proof}
+보조정리의 명제에서 $B\langle x_t \rangle$를 아이디얼
+$J' = IB\langle x_t \rangle + B\langle x_t \rangle_{+}$을 갖는
+분할멱환으로 본다. Divided Power Algebra, Remark
+\ref{dpa-remark-divided-power-polynomial-algebra}를 보라.
+$\Psi$의 존재는 분할멱 다항식환의 보편 성질에서 따른다.
+$\Psi$의 상은 $D$의 분할멱 부분환이므로 $D$의 보편 성질에 의해
+$D$ 전체와 같고, 따라서 이 준동형은 전사이다.
+$x_t - f_t$가 핵에 속함은 명백하다. 다음과 같이 두자.
+$$
+\mathcal{R} = \{(r_0, r_t) \in I \oplus \bigoplus\nolimits_{t \in T} B
+\mid \sum r_t f_t = r_0 \text{ 안에서 }B\}
+$$
+$(r_0, r_t) \in \mathcal{R}$이면 $\sum r_t x_t - r_0$가 핵에 속함은
+명백하다. $\Psi$는 분할멱환의 준동형이고
+$\sum r_tx_t - r_0 \in J'$이므로
+$\delta_n(\sum r_t x_t - r_0)$도 핵에 속한다.
+$K \subset B\langle x_t \rangle$를 $x_t - f_t$와
+$(r_0, r_t) \in \mathcal{R}$에 대한 원소
+$\delta_n(\sum r_t x_t - r_0)$들로 생성되는 아이디얼이라 하자.
+$K = \Ker(\Psi)$임을 보이려면 $\delta$가
+$B\langle x_t \rangle/K$로 확장됨을 보이면 충분하다.
+실제로 그러한 확장이 있으면 $D$의 보편 성질이 $\Psi$의 역인 사상
+$D \to B\langle x_t \rangle/K$를 준다. 따라서
+Divided Power Algebra, Lemma \ref{dpa-lemma-kernel}에 의해
+$K \cap J'$가 $\delta_n$에 의해 보존됨을 보이면 된다.
+$K' \subset B\langle x_t \rangle$를 다음 원소들로 생성되는
+아이디얼이라 하자.
+\begin{enumerate}
+\item $m > 0$, $(r_0, r_t) \in \mathcal{R}$에 대한
+$\delta_m(\sum r_t x_t - r_0)$,
+\item $m > 0$, $t', t \in I$에 대한 $x_{t'}^{[m]}(x_t - f_t)$.
+\end{enumerate}
+$K' = K \cap J'$라고 주장한다. 이 주장이 성립하면
+Divided Power Algebra, Lemma \ref{dpa-lemma-kernel} (2)(c)의 판정법과
+열거된 원소들에 대한 $\delta_n$의 계산에 의해 $K \cap J'$가
+$n > 0$인 $\delta_n$에 의해 보존됨이 따른다. 그 계산은 독자에게 맡긴다.
+주장을 증명하기 위해 먼저 $K' \subset K \cap J'$임에 유의하라.
+반대로 $h \in K \cap J'$이면 $K'$을 법으로 하여 어떤 $r_t \in B$에 대해
+$$
+h = \sum r_t (x_t - f_t)
+$$
+로 쓸 수 있다. $h \in K \cap J' \subset J'$이므로
+$r_0 = \sum r_t f_t \in I$이다. 따라서
+$(r_0, r_t) \in \mathcal{R}$이고,
+$$
+h = \sum r_t x_t - r_0
+$$
+는 원하는 대로 $K'$에 속한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-divided-power-envelope-add-variables}
+$(A, I, \gamma)$를 분할멱환이라 하자.
+$B$를 $A$-대수라 하고, $IB \subset J \subset B$를 아이디얼이라 하자.
+$x_i$를 변수들의 집합이라 하자. 그러면
+$$
+D_{B[x_i], \gamma}(JB[x_i] + (x_i)) = D_{B, \gamma}(J) \langle x_i \rangle
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$B[x_i]$에서 $x_i$들 사이의 모든 관계가 자명하므로,
+Lemma \ref{lemma-describe-divided-power-envelope}에서 이를 도출하는 것이
+한 가지 증명이다. 다른 한편으로 이 보조정리는 분할멱 다항식대수의
+보편 성질과 분할멱 포락의 보편 성질에서도 따른다.
+\end{proof}
+
+\noindent
+$B \to B'$가 $V(IB') \subset \Spec(B')$의 모든 소수 아이디얼에서
+평탄하면 다음 보조정리의 조건 (1)과 (2)가 성립한다. 이 조건들은
+그 평탄성 조건과 매우 밀접하게 관련된다. Algebra, Lemma
+\ref{algebra-lemma-what-does-it-mean}을 보라.
+특히 이 보조정리는 분할멱 포락을 취하는 연산이 국소화와 교환함을 말한다.
+
+\begin{lemma}
+\label{lemma-flat-base-change-divided-power-envelope}
+$(A, I, \gamma)$를 분할멱환이라 하자.
+$B \to B'$를 $A$-대수의 준동형이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $B/IB \to B'/IB'$가 평탄하고,
+\item $\text{Tor}_1^B(B', B/IB) = 0$이다.
+\end{enumerate}
+그러면 임의의 아이디얼 $IB \subset J \subset B$에 대해 표준 사상
+$$
+D_B(J) \otimes_B B' \longrightarrow D_{B'}(JB')
+$$
+은 동형이다.
+\end{lemma}
+
+\begin{proof}
+$D = D_B(J)$라 두고, $\bar J \subset D$를 분할멱 구조
+$\bar\gamma$를 갖는 분할멱 아이디얼이라 쓰자. $D$의 보편 성질은
+$B$-대수 준동형 $D \to D_{B'}(JB')$를 주고, 따라서 보조정리에 나타난
+사상을 준다. $\bar\gamma$가 $D \otimes_B B'$로 확장됨을 보이면 충분하다.
+실제로 그러면 $D_{B'}(JB')$의 보편 성질이 보조정리의 사상에 역인 사상
+$D_{B'}(JB') \to D \otimes_B B'$를 준다.
+
+\medskip\noindent
+$P$가 $B$ 위의 다항식대수가 되도록 전사 $P \to B'$를 택하자.
+특히 $B \to P$는 평탄하므로 Algebra, Lemma
+\ref{algebra-lemma-flat-base-change}에 의해
+$D \to D \otimes_B P$도 평탄하다.
+그러면 Divided Power Algebra, Lemma \ref{dpa-lemma-gamma-extends}에 의해
+$\bar\gamma$는 $D \otimes_B P$로 확장된다. 이 확장도
+$\bar\gamma$라 쓰겠다. $\mathfrak a = \Ker(P \to B')$라 두면
+짧은 완전열
+$$
+0 \to \mathfrak a \to P \to B' \to 0
+$$
+을 얻는다. 따라서 $\text{Tor}_1^B(B', B/IB) = 0$이면
+$\mathfrak a \cap IP = I\mathfrak a$이다.
+이제 다음 가환 그림을 얻는다.
+$$
+\xymatrix{
+B/J \otimes_B \mathfrak a \ar[r]_\beta &
+B/J \otimes_B P \ar[r] &
+B/J \otimes_B B' \\
+D \otimes_B \mathfrak a \ar[r]^\alpha \ar[u] &
+D \otimes_B P \ar[r] \ar[u] &
+D \otimes_B B' \ar[u] \\
+\bar J \otimes_B \mathfrak a \ar[r] \ar[u] &
+\bar J \otimes_B P \ar[r] \ar[u] &
+\bar J \otimes_B B' \ar[u]
+}
+$$
+이 그림의 위쪽과 오른쪽에 $0$들을 덧붙여도 완전하다.
+Divided Power Algebra, Lemma \ref{dpa-lemma-kernel}에 의해
+아이디얼 $\bar J \otimes_B P$ 위의 분할멱들이 아이디얼
+$\Im(\alpha) \cap \bar J \otimes_B P$를 보존함을 보여야 한다.
+완전열
+$$
+0 \to \mathfrak a/I\mathfrak a \to P/IP \to B'/IB' \to 0
+$$
+을 생각하자. 여기서는 위에서 본 $\mathfrak a \cap IP = I\mathfrak a$를
+사용하였다. $B'/IB'$는 $B/IB$ 위에서 평탄하므로 이 열에
+$B/J \otimes_{B/IB} -$를 적용해도 완전하다. Algebra, Lemma
+\ref{algebra-lemma-flat-tor-zero}를 보라. 따라서
+$$
+\Ker(B/J \otimes_{B/IB} \mathfrak a/I\mathfrak a \to
+B/J \otimes_{B/IB} P/IP) =
+\Ker(\mathfrak a/J\mathfrak a \to P/JP)
+$$
+은 영이다. 그러므로 $\beta$는 단사이다. 따라서
+$\Im(\alpha) \cap \bar J \otimes_B P$는
+$\bar J \otimes \mathfrak a$의 상이다. 이제
+$f \in \bar J$, $a \in \mathfrak a$이면
+$\bar\gamma_n(f \otimes a) = \bar\gamma_n(f) \otimes a^n$이므로
+결론은 명백하다.
+\end{proof}
+
+\noindent
+다음 보조정리는 \cite[Proposition 2.1.7]{dJ-crystalline}의 특수한 경우이고,
+그 명제는 다시 \cite[Proposition 2.8.2]{Berthelot}의 일반화이다.
+
+\begin{lemma}
+\label{lemma-flat-extension-divided-power-envelope}
+$(B, I, \gamma) \to (B', I', \gamma')$을 분할멱환의 준동형이라 하자.
+$I \subset J \subset B$와 $I' \subset J' \subset B'$를 아이디얼이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $B/I \to B'/I'$가 평탄하고,
+\item $J' = JB' + I'$이다.
+\end{enumerate}
+그러면 표준 사상
+$$
+D_{B, \gamma}(J) \otimes_B B' \longrightarrow D_{B', \gamma'}(J')
+$$
+은 동형이다.
+\end{lemma}
+
+\begin{proof}
+$D = D_{B, \gamma}(J)$라 두자. $J/I$를 생성하는 원소 $f_t \in J$를 택하자.
+Lemma \ref{lemma-describe-divided-power-envelope}의 증명에서와 같이
+$
+\mathcal{R} = \{(r_0, r_t) \in I \oplus \bigoplus\nolimits_{t \in T} B
+\mid \sum r_t f_t = r_0 \text{ 안에서 }B\}
+$
+라 두자. 그 보조정리에 따르면
+$$
+D = B\langle x_t \rangle/ K
+$$
+이다. 여기서 $K$는 원소 $x_t - f_t$와
+$(r_0, r_t) \in \mathcal{R}$에 대한
+$\delta_n(\sum r_t x_t - r_0)$로 생성된다. 따라서
+\begin{equation}
+\label{equation-base-change}
+D \otimes_B B' = B'\langle x_t \rangle/K'
+\end{equation}
+임을 알 수 있다. 여기서 $K'$은 위에 열거한 $K$의 생성원들을
+$B'\langle x_t \rangle$로 보낸 상들로 생성된다.
+$f'_t \in B'$를 $f_t$의 상이라 하자. 가정 (1)에 의해 원소
+$f'_t \in J'$들은 $J'/I'$을 생성하고, $x_t - f'_t \in K'$이다.
+다음과 같이 두자.
+$$
+\mathcal{R}' =
+\{(r'_0, r'_t) \in I' \oplus \bigoplus\nolimits_{t \in T} B'
+\mid \sum r'_t f'_t = r'_0 \text{ 안에서 }B'\}
+$$
+증명을 마치려면 $(r'_0, r'_t) \in \mathcal{R}'$에 대해
+$\delta'_n(\sum r'_t x_t - r'_0) \in K'$임을 보이면 된다.
+그러면 (\ref{equation-base-change})에 주어진 $D \otimes_B B'$의 표시가
+생성원 $f'_t$로부터 Lemma \ref{lemma-describe-divided-power-envelope}에서
+얻는 $D_{B', \gamma'}(J')$의 표시와 같아지기 때문이다.
+$(r'_0, r'_t) \in \mathcal{R}'$라 하자. 그러면
+$B'/I'$에서 $\sum r'_t f'_t = 0$이다. 가정 (1)에 의해
+$B/I \to B'/I'$가 평탄하므로, 평탄성의 방정식 판정법
+(Algebra, Lemma \ref{algebra-lemma-flat-eq})을 적용할 수 있다.
+따라서 어떤 $m > 0$과 $j = 1, \ldots, m$에 대한
+$r_{jt} \in B$, $c_j \in B'$가 존재하여
+$$
+r_{j0} = \sum\nolimits_t r_{jt} f_t  \in I \text{ 이다. 여기서 } j = 1, \ldots, m
+$$
+이고
+$$
+i'_t  = r'_t - \sum\nolimits_j c_j r_{jt} \in I' \text{ 이며, 모든 }t
+$$
+에 대해 성립한다. 이는 또한 다음을 함의한다.
+% P08-E428: frozen source lines 430, 438, 442, and 446 revert from the defined image f'_t to f_t in B'; formulas preserved; see ERRATA_CANDIDATES.jsonl.
+$r'_0 = \sum_t i'_t f_t + \sum_j c_j r_{j0}$.
+따라서
+\begin{align*}
+\delta'_n(\sum\nolimits_t r'_t x_t  - r'_0)
+& =
+\delta'_n(
+\sum\nolimits_t i'_t x_t +
+\sum\nolimits_{t, j} c_j r_{jt} x_t -
+\sum\nolimits_t i'_t f_t -
+\sum\nolimits_j c_j r_{j0}) \\
+& =
+\delta'_n(
+\sum\nolimits_t i'_t(x_t - f_t) +
+\sum\nolimits_j c_j (\sum\nolimits_t r_{jt} x_t  - r_{j0}))
+\end{align*}
+$\delta_n(a + b) = \sum_{m = 0, \ldots, n} \delta_m(a) \delta_{n - m}(b)$이고,
+$m > 0$에 대해 $\delta_m(\sum i'_t(x_t - f_t))$는
+$x_t - f_t \in K'$로 생성되는 아이디얼에 속한다. 따라서
+$\delta_n(\sum c_j (\sum r_{jt} x_t  - r_{j0}))$가 $K'$에 속함만
+증명하면 충분하다. 이를 위해 다음을 사용한다.
+$$
+\delta_n(\sum\nolimits_j c_j (\sum\nolimits_t r_{jt} x_t  - r_{j0}))
+=
+\sum c_1^{n_1} \ldots c_m^{n_m}
+\delta_{n_1}(\sum r_{1t} x_t  - r_{10}) \ldots
+\delta_{n_m}(\sum r_{mt} x_t  - r_{m0})
+$$
+여기서 합은 $n_1 + \ldots + n_m = n$인 경우들을 돈다.
+이로써 원하는 바가 증명되었다.
+\end{proof}
+
+
+
+
+
+\section{몇 가지 명시적 분할멱 두꺼워짐}
+\label{section-explicit-thickenings}
+
+\noindent
+이 절의 구성들은 크리스탈린 사이트 위의 가군 값 크리스털에 접속을
+정의하는 데 쓰일 것이다.
+
+\begin{lemma}
+\label{lemma-divided-power-first-order-thickening}
+$(A, I, \gamma)$를 분할멱환이라 하고, $M$을 $A$-가군이라 하자.
+$B = A \oplus M$을 $M$이 제곱 영 아이디얼인 $A$-대수로 두고
+$J = I \oplus M$이라 하자. $x \in I$, $z \in M$에 대해
+$$
+\delta_n(x + z) = \gamma_n(x) + \gamma_{n - 1}(x)z
+$$
+로 두자. 그러면 $\delta$는 분할멱 구조이고,
+$A \to B$는 $(A, I, \gamma)$에서 $(B, J, \delta)$로 가는
+분할멱환의 준동형이다.
+\end{lemma}
+
+\begin{proof}
+Divided Power Algebra, Definition \ref{dpa-definition-divided-powers}의
+조건 (1)--(5)를 확인해야 한다. 여기서는 이 경우를 직접 증명하겠지만,
+계산을 피하는 방법은 다음 보조정리의 증명을 보라.
+조건 (1)과 (3)은 명백하다. 조건 (2)는 다음에서 따른다.
+\begin{align*}
+\delta_n(x + z)\delta_m(x + z)
+& =
+(\gamma_n(x) + \gamma_{n - 1}(x)z)(\gamma_m(x) + \gamma_{m - 1}(x)z) \\
+& = \gamma_n(x)\gamma_m(x) + \gamma_n(x)\gamma_{m - 1}(x)z +
+\gamma_{n - 1}(x)\gamma_m(x)z \\
+& =
+\frac{(n + m)!}{n!m!} \gamma_{n + m}(x) +
+\left(\frac{(n + m - 1)!}{n!(m - 1)!} +
+\frac{(n + m - 1)!}{(n - 1)!m!}\right)
+\gamma_{n + m - 1}(x) z \\
+& =
+\frac{(n + m)!}{n!m!}\delta_{n + m}(x + z)
+\end{align*}
+조건 (5)는 다음에서 따른다.
+\begin{align*}
+\delta_n(\delta_m(x + z))
+& =
+\delta_n(\gamma_m(x) + \gamma_{m - 1}(x)z) \\
+& =
+\gamma_n(\gamma_m(x)) + \gamma_{n - 1}(\gamma_m(x))\gamma_{m - 1}(x)z \\
+& =
+\frac{(nm)!}{n! (m!)^n} \gamma_{nm}(x) +
+\frac{((n - 1)m)!}{(n - 1)! (m!)^{n - 1}}
+\gamma_{(n - 1)m}(x) \gamma_{m - 1}(x) z \\
+& = \frac{(nm)!}{n! (m!)^n}(\gamma_{nm}(x) + \gamma_{nm - 1}(x) z)
+\end{align*}
+이며, 여기에는 초등 정수론을 썼다. (4)를 증명하려면
+$$
+\delta_n(x + x' + z + z')
+=
+\gamma_n(x + x') + \gamma_{n - 1}(x + x')(z + z')
+$$
+가
+$$
+\sum\nolimits_{i = 0}^n
+(\gamma_i(x) + \gamma_{i - 1}(x)z)
+(\gamma_{n - i}(x') + \gamma_{n - i - 1}(x')z')
+$$
+와 같음을 보이면 된다. 이는 $1$, $z$, $z'$의 계수를 모으고
+$\gamma$에 대한 조건 (4)를 적용하면 쉽게 따른다.
+\end{proof}
+
+
+\begin{lemma}
+\label{lemma-divided-power-second-order-thickening}
+$(A, I, \gamma)$를 분할멱환이라 하자. $M$, $N$을 $A$-가군이라 하자.
+$q : M \times M \to N$을 $A$-쌍선형 사상이라 하자.
+$B = A \oplus M \oplus N$을 곱셈이
+$$
+(x, z, w)\cdot (x', z', w') = (xx', xz' + x'z, xw' + x'w + q(z, z') + q(z', z))
+$$
+로 주어진 $A$-대수로 두고 $J = I \oplus M \oplus N$이라 하자.
+$(x, z, w) \in J$에 대해
+$$
+\delta_n(x, z, w) = (\gamma_n(x), \gamma_{n - 1}(x)z,
+\gamma_{n - 1}(x)w + \gamma_{n - 2}(x)q(z, z))
+$$
+로 두자. 그러면 $\delta$는 분할멱 구조이고,
+$A \to B$는 $(A, I, \gamma)$에서 $(B, J, \delta)$로 가는
+분할멱환의 준동형이다.
+\end{lemma}
+
+\begin{proof}
+Divided Power Algebra, Definition \ref{dpa-definition-divided-powers}의
+조건 (4)가 성립함을 증명하려 한다고 하자. $J$의 원소
+$(x, z, w)$와 $(x', z', w')$를 택하자. 분할멱 다항식환의
+보편 성질에 의해 가능한 사상
+$$
+A_0 = \mathbf{Z}\langle s, s'\rangle \longrightarrow A,\quad
+s \longmapsto x,
+s' \longmapsto x'
+$$
+을 택하자. $M_0 = A_0 \oplus A_0$ 및
+$N_0 = A_0 \oplus A_0 \oplus M_0 \otimes_{A_0} M_0$로 두고,
+$q_0 : M_0 \times M_0 \to N_0$을 자명한 사상이라 하자.
+$M_0$의 두 기저벡터를 각각 $z$와 $z'$로 보내는
+$A_0$-선형 사상으로 $M_0 \to M$을 정의한다.
+$N_0$의 첫 두 기저벡터를 각각 $w$와 $w'$로 보내고 마지막
+직합인자에서는
+$M_0 \otimes_{A_0} M_0 \to M \otimes_A M \xrightarrow{q} N$
+을 사용하는 $A_0$-선형 사상으로 $N_0 \to N$을 정의한다.
+그러면 상황 $(A_0, M_0, N_0, q_0)$에 대해 항등식 (4)를
+증명하는 것으로 충분함을 알 수 있다. 다른 항등식들도 마찬가지이다.
+이로써 $\mathbf{Z}$-꼬임이 없는 환 $A$와 $A$-꼬임이 없는
+가군들의 경우로 환원된다. 이 경우에는
+$$
+n! \delta_n(x, z, w) = (x, z, w)^n
+$$
+이 환 $A$에서 성립함만 보이면 된다. Divided Power Algebra,
+Lemma \ref{dpa-lemma-silly}를 보라. 이를 확인하기 위해
+$$
+(x, z, w)^2 = (x^2, 2xz, 2xw + 2q(z, z))
+$$
+임에 유의하자. 귀납법으로
+$$
+(x, z, w)^n = (x^n, nx^{n - 1}z, nx^{n - 1}w + n(n - 1)x^{n - 2}q(z, z))
+$$
+을 얻는다. 한편
+$$
+n! \delta_n(x, z, w) = (n!\gamma_n(x), n!\gamma_{n - 1}(x)z,
+n!\gamma_{n - 1}(x)w + n!\gamma_{n - 2}(x) q(z, z))
+$$
+이며 이는 위 식과 일치한다. 이로써 증명이 끝난다.
+\end{proof}
+
+
+
+
+\section{양립성}
+\label{section-compatibility}
+
+\noindent
+이 절은 필수적으로 읽을 부분은 아니다. 여기서는 우리의 논의가
+\cite{Berthelot}의 논의와 어떻게 맞물리는지 설명한다.
+다음 기술적 개념을 생각하자.
+
+\begin{definition}
+\label{definition-compatible}
+$(A, I, \gamma)$와 $(B, J, \delta)$를 분할멱환이라 하고,
+$A \to B$를 환 사상이라 하자. 다음을 만족하는 $J + IB$ 위의
+분할멱 구조 $\bar\gamma$가 존재할 때
+{\it $\delta$는 $\gamma$와 양립한다}고 한다.
+$$
+(A, I, \gamma) \to (B, J + IB, \bar \gamma)\quad\text{그리고}\quad
+(B, J, \delta) \to (B, J + IB, \bar \gamma)
+$$
+는 분할멱환의 준동형이다.
+\end{definition}
+
+\noindent
+$p$를 소수라 하자. $(A, I, \gamma)$를 분할멱환이라 하고,
+$A \to C$를 $C$에서 $p$가 멱영인 환 사상이라 하자.
+$\gamma$가 $IC$로 확장된다고 가정하자(Divided Power Algebra,
+Lemma \ref{dpa-lemma-gamma-extends}를 보라).
+이 상황에서 \cite{Berthelot}에 정의된
+$\Spec(C)$의 $\Spec(A)$ 위 큰 아핀 크리스탈린 사이트는
+다음 데이터들의 범주의 반대 범주이다.
+$$
+(B, J, \delta, A \to B, C \to B/J)
+$$
+여기서
+\begin{enumerate}
+\item $(B, J, \delta)$는 $B$에서 $p$가 멱영인 분할멱환이고,
+\item $\delta$는 $\gamma$와 양립하며,
+\item 도식
+$$
+\xymatrix{
+B \ar[r] & B/J \\
+A \ar[u] \ar[r] & C \ar[u]
+}
+$$
+은 가환이다.
+\end{enumerate}
+\cite{Berthelot}에서는 ``$\gamma$가 $C$로 확장되고 $\delta$가
+$\gamma$와 양립한다''는 조건을 사용하여 $\Spec(C)$의
+크리스탈린 코호몰로지가 $\Spec(C/IC)$의 크리스탈린 코호몰로지와
+같음을 보장한다. 우리는 오직 $IC = 0$인 $C$만 다룸으로써
+이 문제를 피할 것이다\footnote{물론 대가가 따른다.}.
+이 경우 위와 같은 데이터 $(B, J, \delta, A \to B, C \to B/J)$에 대해
+위에 표시한 도식의 가환성은 $IB \subset J$를 함의하며,
+양립성은 $(A, I, \gamma) \to (B, J, \delta)$가 분할멱환의
+준동형이라는 조건과 동치이다.
+
+
+
+
+\section{아핀 크리스탈린 사이트}
+\label{section-affine-site}
+
+\noindent
+이 절에서는 크리스탈린 사이트의 대수적 변형을 논한다.
+이 내용을 논할 기본 상황은 다음과 같다.
+
+\begin{situation}
+\label{situation-affine}
+여기서 $p$는 소수이고, $(A, I, \gamma)$는 $A$가
+$\mathbf{Z}_{(p)}$-대수인 분할멱환이며, $A \to C$는
+$IC = 0$이고 $C$에서 $p$가 멱영인 환 사상이다.
+\end{situation}
+
+\noindent
+대개 소수 $p$는 분할멱 아이디얼 $I$에 속한다.
+
+\begin{definition}
+\label{definition-affine-thickening}
+Situation \ref{situation-affine}에서 다음을 정의한다.
+\begin{enumerate}
+\item $(A, I, \gamma)$ 위에서 $C$의 {\it 분할멱 두꺼워짐}이란,
+$B$에서 $p$가 멱영인 분할멱 대수의 준동형
+$(A, I, \gamma) \to (B, J, \delta)$와, 도식
+$$
+\xymatrix{
+B \ar[r] & B/J \\
+& C \ar[u] \\
+A \ar[uu] \ar[r] & A/I \ar[u]
+}
+$$
+이 가환이 되게 하는 환 사상 $C \to B/J$을 말한다.
+\item {\it 분할멱 두꺼워짐의 준동형}
+$$
+(B, J, \delta, C \to B/J) \longrightarrow (B', J', \delta', C \to B'/J')
+$$
+이란, $C \to B/J \to B'/J'$가 주어진 사상 $C \to B'/J'$가
+되게 하는 분할멱 $A$-대수의 준동형 $\varphi : B \to B'$이다.
+\item $(A, I, \gamma)$ 위에서 $C$의 분할멱 두꺼워짐들의 범주를
+$\text{CRIS}(C/A, I, \gamma)$ 또는 간단히 $\text{CRIS}(C/A)$로 쓴다.
+\item $C \to B/J$가 동형사상인 $(B, J, \delta, C \to B/J)$들로
+이루어진 충만 부분범주를 $\text{Cris}(C/A, I, \gamma)$ 또는
+간단히 $\text{Cris}(C/A)$로 쓴다. 흔히 이러한 대상을
+$J = \Ker(B \to C)$로 이해하고 $(B \to C, \delta)$로 쓴다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+위와 같은 분할멱 두꺼워짐 $(B, J, \delta)$에서 아이디얼 $J$는
+국소 멱영임에 유의하자. Divided Power Algebra,
+Lemma \ref{dpa-lemma-nil}을 보라. 표준 함자
+\begin{equation}
+\label{equation-forget-affine}
+\text{CRIS}(C/A) \longrightarrow C\text{-대수},\quad
+(B, J, \delta) \longmapsto B/J
+\end{equation}
+가 존재한다. 일반적으로 이 범주에는 등화자나 섬유곱이 없다.
+또한 일반적으로 시작 대상($=$ 공집합 쌍대극한)도 없다.
+
+\begin{lemma}
+\label{lemma-affine-thickenings-colimits}
+Situation \ref{situation-affine}에서 다음이 성립한다.
+\begin{enumerate}
+\item $\text{CRIS}(C/A)$에는 유한 곱이 있다(무한 곱은 없을 수 있다).
+\item $\text{CRIS}(C/A)$에는 공집합이 아닌 모든 유한 쌍대극한이 있고,
+(\ref{equation-forget-affine})은 이들과 가환한다.
+\item $\text{Cris}(C/A)$에는 공집합이 아닌 모든 유한 쌍대극한이 있고,
+$\text{Cris}(C/A) \to \text{CRIS}(C/A)$는 이들과 가환한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+빈 곱, 즉 $(A, I, \gamma)$ 위에서 $C$의 분할멱 두꺼워짐들의
+범주에서 끝 대상은, 영 아이디얼과 그 위의 유일한 분할멱 구조를
+갖추고 마지막으로 $C$에서 영환으로 가는 유일한 준동형을 갖춘
+$A$-대수로 본 영환이다. $(B_t, J_t, \delta_t)_{t \in T}$가
+$\text{CRIS}(C/A)$의 대상들의 족이면 Divided Power Algebra,
+Lemma \ref{dpa-lemma-limits}에서와 같이 곱
+$(\prod_t B_t, \prod_t J_t, \prod_t \delta_t)$를 만들 수 있다.
+사상 $C \to \prod B_t/\prod J_t = \prod B_t/J_t$는 명백하다.
+그러나 $T$가 유한일 때에만 $\prod_t B_t$에서 $p$가 멱영임이 보장된다.
+
+\medskip\noindent
+% P08-E429: frozen source line 751 names CRIS objects with gamma/gamma' although the surrounding data and diagram use delta/delta'; formulas preserved; see ERRATA_CANDIDATES.jsonl.
+$\text{CRIS}(C/A)$의 두 대상 $(B, J, \gamma)$와
+$(B', J', \gamma')$가 주어졌다고 하자. 분할멱환의 범주에서
+쌍대 데카르트 도식
+$$
+\xymatrix{
+(B, J, \delta) \ar[r] & (B'', J'', \delta'') \\
+(A, I, \gamma) \ar[r] \ar[u] & (B', J', \delta') \ar[u]
+}
+$$
+을 만들 수 있다. 그러면
+$$
+B''/J'' = B/J \otimes_{A/I} B'/J' \longleftarrow C \otimes_{A/I} C
+$$
+를 얻는다. Divided Power Algebra,
+Remark \ref{dpa-remark-pushout}을 보라. 도식
+$$
+\xymatrix{
+B''/J'' \ar[r] & B''/K \\
+C \otimes_{A/I} C \ar[r] \ar[u] & C \ar[u]
+}
+$$
+이 밀어내기, 즉 $B''/K \cong B/J \otimes_C B'/J'$가 되게 하는
+아이디얼 $J'' \subset K \subset B''$를 취하자.
+$(B'', J'', \delta'')$에 상대적인 $B''$ 안의 $K$의 분할멱 포락을
+$D_{B''}(K) = (D, \bar K, \bar \delta)$라 하자.
+그러면 $(D, \bar K, \bar \delta)$가 $\text{CRIS}(C/A)$에서
+$(B, J, \delta)$와 $(B', J', \delta')$의 쌍대곱임을 쉽게 확인한다.
+
+\medskip\noindent
+이제 쌍대등화자를 다룬다. $\alpha, \beta : (B, J, \delta) \to
+(B', J', \delta')$를 $\text{CRIS}(C/A)$의 사상이라 하자.
+$B'' = B'/ (\alpha(b) - \beta(b))$를 생각하고,
+$J'' \subset B''$를 $J'$의 상이라 하자. $(B', J', \delta')$에
+상대적인 $B''$ 안의 $J''$의 분할멱 포락을
+$D_{B''}(J'') = (D, \bar J, \bar\delta)$라 하자.
+그러면 $(D, \bar J, \bar \delta)$가 $\text{CRIS}(C/A)$에서
+$(B, J, \delta)$와 $(B', J', \delta')$의 쌍대등화자임을 쉽게 확인한다.
+
+\medskip\noindent
+Categories, Lemma \ref{categories-lemma-almost-finite-colimits-exist}에 의해
+$\text{CRIS}(C/A)$에는 공집합이 아닌 모든 유한 쌍대극한이 있다.
+위 구성들은 (\ref{equation-forget-affine})이 이들과 가환함을 보인다.
+$\text{Cris}(C/A)$가 $C$ 위에서 (\ref{equation-forget-affine})의
+섬유 범주이므로, 이로부터 형식적으로 (3)이 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-completed-affine-site}
+Situation \ref{situation-affine}에서 다음 조건을 만족하는 쌍
+$(B \to C, \delta)$들을 대상으로 하는 범주를
+$\text{Cris}^\wedge(C/A)$로 쓴다.
+\begin{enumerate}
+\item $B$는 $p$-진 완비 $A$-대수이다.
+\item $B \to C$는 $A$-대수의 전사이다.
+\item $\delta$는 $\Ker(B \to C)$ 위의 분할멱 구조이다.
+\item $A \to B$는 분할멱환의 준동형이다.
+\end{enumerate}
+사상은 Definition \ref{definition-affine-thickening}에서와 같이 정의한다.
+그러면 $\text{Cris}(C/A) \subset \text{Cris}^\wedge(C/A)$는
+$p$가 $B$에서 멱영인 그러한 $B$들로 이루어진 충만 부분범주이다.
+거꾸로 $\text{Cris}^\wedge(C/A)$의 임의의 대상
+$(B \to C, \delta)$는 극한
+$$
+(B \to C, \delta) = \lim_e (B/p^eB \to C, \delta)
+$$
+과 같다. 여기서 $e \gg 0$이면 $(B/p^eB \to C, \delta)$는
+$\text{Cris}(C/A)$의 대상이다. Divided Power Algebra,
+Lemma \ref{dpa-lemma-extend-to-completion}을 보라.
+특히 $\text{Cris}^\wedge(C/A)$가 $\text{Cris}(C/A)$의
+프로대상 범주의 충만 부분범주임을 알 수 있다. Categories,
+Remark \ref{categories-remark-pro-category}를 보라.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-list-properties}
+Situation \ref{situation-affine}에서, 핵이 $J$인 $A$-대수의 전사
+$P \to C$가 주어졌다고 하자.
+$D_{P, \gamma}(J) = (D, \bar J, \bar\gamma)$로 쓰고,
+% P08-E430: frozen source line 829 drops the bar from J^wedge while the completed ideal is denoted \bar J^wedge below; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$(D^\wedge, J^\wedge, \bar\gamma^\wedge)$를 $D$의 $p$-진 완비화라 하자.
+Divided Power Algebra, Lemma \ref{dpa-lemma-extend-to-completion}을 보라.
+모든 $e \geq 1$에 대해 $P_e = P/p^eP$라 하고,
+$J_e \subset P_e$를 $J$의 상이라 하며,
+$D_{P_e, \gamma}(J_e) = (D_e, \bar J_e, \bar\gamma)$로 쓰자.
+그러면 충분히 큰 모든 $e$에 대해 다음이 성립한다.
+\begin{enumerate}
+\item $p^eD \subset \bar J$와 $p^eD^\wedge \subset \bar J^\wedge$는
+분할멱 연산에 의해 보존된다.
+\item 분할멱환으로서 $D^\wedge/p^eD^\wedge = D/p^eD = D_e$이다.
+\item $(D_e, \bar J_e, \bar\gamma)$는 $\text{Cris}(C/A)$의 대상이다.
+\item $(D^\wedge, \bar J^\wedge, \bar\gamma^\wedge)$는
+$\lim_e (D_e, \bar J_e, \bar\gamma)$와 같다.
+\item $(D^\wedge, \bar J^\wedge, \bar\gamma^\wedge)$는
+$\text{Cris}^\wedge(C/A)$의 대상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 Divided Power Algebra,
+Lemma \ref{dpa-lemma-extend-to-completion}에서 따른다.
+$p$-진 완비화의 일반적 성질로
+$D/p^eD = D^\wedge/p^eD^\wedge$이다.
+$D/p^eD$는 분할멱환이고 $P \to D/p^eD$는 $P_e$를 거치므로,
+$D_e$의 보편 성질은 사상 $D_e \to D/p^eD$를 준다.
+거꾸로 $D$의 보편 성질은 사상 $D \to D_e$를 주며, 이는
+$D/p^eD$를 거친다. 이 사상들이 서로 역임을 확인하는 일은 생략한다.
+이로써 (2)가 증명되었다. $e$가 충분히 크면 $p^eC = 0$이므로
+(3)을 얻는다. (4)는 Divided Power Algebra,
+Lemma \ref{dpa-lemma-extend-to-completion}에서 따른다.
+(5)는 정의로부터 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-set-generators}
+Situation \ref{situation-affine}에서, $P$를 $A$ 위의 다항식 대수라 하고
+핵이 $J$인 $A$-대수의 전사 $P \to C$가 주어졌다고 하자.
+Lemma \ref{lemma-list-properties}에서와 같은
+$(D_e, \bar J_e, \bar\gamma)$에 대해 다음이 성립한다.
+$\text{CRIS}(C/A)$의 모든 대상 $(B, J_B, \delta)$에 대해 어떤 $e$와
+$\text{CRIS}(C/A)$의 사상 $D_e \to B$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+사상 $C \to B/J_B$를 올리는 $A$-대수 준동형 $P \to B$를
+찾을 수 있다. $\text{CRIS}(C/A)$의 정의에 의해 어떤 $e$에 대해
+$p^eB = 0$이므로 $P \to B$는 $P \to P_e \to B$로 분해된다.
+분할멱 포락의 보편 성질에 의해 $P_e \to B$는 $D_e$를 거친다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-generator-completion}
+Situation \ref{situation-affine}에서, $P$를 $A$ 위의 다항식 대수라 하고
+핵이 $J$인 $A$-대수의 전사 $P \to C$가 주어졌다고 하자.
+$(D, \bar J, \bar\gamma)$를 $D_{P, \gamma}(J)$의 $p$-진 완비화라 하자.
+$\text{Cris}^\wedge(C/A)$의 모든 대상 $(B \to C, \delta)$에 대해
+$\text{Cris}^\wedge(C/A)$의 사상 $D \to B$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$C$로 가는 사상들과 양립하는 $A$-대수 준동형 $P \to B$를
+찾을 수 있다. $\text{Cris}^\wedge(C/A)$의 정의에 의해
+$P \to B$는 $P \to D_{P, \gamma}(J) \to B$로 분해된다.
+$B$가 $p$-진 완비이므로 이 사상을 $D$를 거쳐 분해할 수 있다.
+\end{proof}
+
+
+
+
+\section{미분 가군}
+\label{section-differentials}
+
+\noindent
+이 절에서는 분할멱환에 대한 미분 가군 이론을 전개한다.
+
+\begin{definition}
+\label{definition-derivation}
+$A$를 환이라 하고, $(B, J, \delta)$를 분할멱환이라 하자.
+$A \to B$를 환 사상이라 하고 $M$을 $B$-가군이라 하자.
+$M$으로 가는 {\it 분할멱 $A$-미분}이란, 가법적이고 $A$의 원소들을
+영으로 보내며 라이프니츠 법칙
+$\theta(bb') = b\theta(b') + b'\theta(b)$을 만족하고, 모든
+$n \geq 1$과 $x \in J$에 대해
+$$
+\theta(\delta_n(x)) = \delta_{n - 1}(x)\theta(x)
+$$
+을 만족하는 사상 $\theta : B \to M$이다.
+\end{definition}
+
+\noindent
+정의의 상황에서 보통의 미분과 마찬가지로
+{\it 보편 분할멱 $A$-미분}
+$$
+\text{d}_{B/A, \delta} : B \to \Omega_{B/A, \delta}
+$$
+이 존재하여, 모든 분할멱 $A$-미분 $\theta : B \to M$은 유일한
+$B$-선형 사상 $\xi : \Omega_{B/A, \delta} \to M$에 대해
+% P08-E431: frozen source line 931 switches from \text{d}_{B/A,delta} to italic d_{B/A,delta}; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$\theta = \xi \circ d_{B/A, \delta}$와 같다.
+$(A, I, \gamma) \to (B, J, \delta)$가 분할멱환의 준동형이면,
+$A$ 위의 분할멱 구조를 잊고 $A$ 위에서 $B$의 분할멱 미분들을
+생각할 수 있다. 다음은 보편 (분할멱) 미분 가군의 몇 가지
+기본 성질이다.
+
+\begin{lemma}
+\label{lemma-omega}
+$A$를 환이라 하고, $(B, J, \delta)$를 분할멱환이라 하며,
+$A \to B$를 환 사상이라 하자.
+\begin{enumerate}
+\item $\delta'$가 $\delta$의 $B[x]$로의 확장인 분할멱 아이디얼
+$(JB[x], \delta')$을 갖춘 $B[x]$를 생각하자. 그러면
+$$
+\Omega_{B[x]/A, \delta'} =
+\Omega_{B/A, \delta} \otimes_B B[x] \oplus B[x]\text{d}x.
+$$
+\item 분할멱 아이디얼
+$(JB\langle x \rangle + B\langle x \rangle_{+}, \delta')$을 갖춘
+$B\langle x \rangle$을 생각하자. 그러면
+$$
+\Omega_{B\langle x\rangle/A, \delta'} =
+\Omega_{B/A, \delta} \otimes_B B\langle x \rangle \oplus
+B\langle x\rangle \text{d}x.
+$$
+\item $K \subset J$를 모든 $n > 0$에 대해 $\delta_n$에 의해
+보존되는 아이디얼이라 하자. $B' = B/K$로 두고 $J/K$ 위에
+유도된 분할멱을 $\delta'$라 쓰자. 그러면
+$\Omega_{B'/A, \delta'}$는 $k \in K$에 대한 $\text{d}k$들로
+생성되는 $B'$-부분가군으로 $\Omega_{B/A, \delta} \otimes_B B'$를
+나눈 몫이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Omega_{B/A, \delta}$를 원소 $\text{d}b$들 위의 자유 $B$-가군에
+다음 관계들을 가한 몫으로 구성하는 데서 직접 증명된다.
+\begin{enumerate}
+\item $\text{d}(b + b') = \text{d}b + \text{d}b'$, $b, b' \in B$,
+\item $\text{d}a = 0$, $a \in A$,
+\item $\text{d}(bb') = b \text{d}b' + b' \text{d}b$, $b, b' \in B$,
+\item $\text{d}\delta_n(f) = \delta_{n - 1}(f)\text{d}f$, $f \in J$, $n > 1$.
+\end{enumerate}
+마지막 관계는 분할멱 다항식 대수와 보통 다항식 대수에 대해
+왜 ``같은'' 답을 얻는지를 설명한다. 첫 경우에는 $x$가 분할멱
+아이디얼의 원소이므로 $\text{d}x^{[n]} = x^{[n - 1]}\text{d}x$이다.
+\end{proof}
+
+\noindent
+$(A, I, \gamma)$를 분할멱환이라 하자. 이 상황에서 $I$의
+거듭제곱에 해당하는 올바른 것은 다음 분할멱들이다.
+$$
+I^{[n]} = \text{다음 원소들로 생성되는 아이디얼 }
+\gamma_{e_1}(x_1) \ldots \gamma_{e_t}(x_t)
+\text{ 여기서 }\sum e_j \geq n\text{ 이고 }x_j \in I.
+$$
+물론 $I^n \subset I^{[n]}$이고, $I^{[1]} = I$임에 유의하자.
+때로는 $I^{[0]} = A$로도 둔다.
+
+\begin{lemma}
+\label{lemma-diagonal-and-differentials}
+$(A, I, \gamma) \to (B, J, \delta)$를 분할멱환의 준동형이라 하자.
+$(B(1), J(1), \delta(1))$을 $(A, I, \gamma)$ 위에서
+$(B, J, \delta)$와 자기 자신의 쌍대곱, 즉 도식
+$$
+\xymatrix{
+(B, J, \delta) \ar[r] & (B(1), J(1), \delta(1)) \\
+(A, I, \gamma) \ar[r] \ar[u] & (B, J, \delta) \ar[u]
+}
+$$
+이 쌍대 데카르트가 되게 하는 것으로 두자.
+$K = \Ker(B(1) \to B)$라 쓰자. 그러면
+$K \cap J(1) \subset J(1)$은 분할멱 구조에 의해 보존되고,
+표준적으로
+$$
+\Omega_{B/A, \delta} = K/ \left(K^2 + (K \cap J(1))^{[2]}\right)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$K \cap J(1) \subset J(1)$이 분할멱 구조에 의해 보존됨은
+$B(1) \to B$가 분할멱환의 준동형이라는 사실에서 따른다.
+
+\medskip\noindent
+$K/K^2$에는 표준 $B$-가군 구조가 있음을 상기하자.
+두 쌍대곱 사상을 $s_0, s_1 : B \to B(1)$로 쓰고,
+$b \mapsto s_1(b) - s_0(b)$로 주어지는 사상
+$\text{d} : B \to K/(K^2 +(K \cap J(1))^{[2]})$을 생각하자.
+$\text{d}$가 가법적이고 $A$를 영으로 보내며 라이프니츠 법칙을
+만족함은 명백하다. $\text{d}$가 분할멱 $A$-미분이라고 주장한다.
+$x \in J$라 하고 $y = s_1(x)$ 및 $z = s_0(x)$로 두자.
+$J(1)$ 위의 분할멱 구조 $\delta(1)$을 간단히 $\delta$로 쓰겠다.
+$n \geq 1$에 대해 $K^2 +(K \cap J(1))^{[2]}$을 법으로
+$\delta_n(y) - \delta_n(z) = \delta_{n - 1}(y)(y - z)$임을 보여야 한다.
+$n = 1$이면 등식은 성립한다. $n > 1$이라 가정하자.
+$i > 1$이면 $\delta_i(y - z)$는 $(K \cap J(1))^{[2]}$에 속한다.
+$K^2 + (K \cap J(1))^{[2]}$을 법으로 계산하면
+$$
+\delta_n(z) = \delta_n(z - y + y) =
+\sum\nolimits_{i = 0}^n \delta_i(z - y)\delta_{n - i}(y) =
+\delta_{n - 1}(y) \delta_1(z - y) + \delta_n(y)
+$$
+이다. 이로써 원하는 등식이 증명되었다.
+
+\medskip\noindent
+$M$을 $B$-가군이라 하고 $\theta : B \to M$을 분할멱
+$A$-미분이라 하자. $M$이 제곱 영 아이디얼이 되도록
+$D = B \oplus M$으로 두자. $n > 1$에 대해
+$\delta_n(x + m) = \delta_n(x) + \delta_{n - 1}(x)m$으로 둠으로써
+$J \oplus M \subset D$ 위에 분할멱 구조를 정의한다.
+Lemma \ref{lemma-divided-power-first-order-thickening}을 보라.
+$B \to D$인 분할멱 대수의 준동형이 둘 있다. 첫째는 포함사상이고,
+둘째는 $b \mapsto b + \theta(b)$로 주어진다. 따라서
+$(A, I, \gamma)$ 위의 분할멱 대수의 표준 준동형 $B(1) \to D$를 얻는다.
+이는 $K^2$을 영으로 보내는 사상 $K \to M$을 유도하는데
+($M$이 제곱 영 아이디얼이므로), $M^{[2]} = 0$이므로
+$(K \cap J(1))^{[2]}$도 영으로 보낸다. 구성상 합성
+% P08-E432: frozen source line 1051 omits quotient grouping around K^2+(K cap J(1))^[2]; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$B \to K/K^2 + (K \cap J(1))^{[2]} \to M$은 $\theta$와 같다.
+따라서 $\text{d}$는 보편 분할멱 $A$-미분이고 결론을 얻는다.
+\end{proof}
+
+\begin{remark}
+\label{remark-filtration-differentials}
+$A \to B$를 환 사상이라 하고 $(J, \delta)$를 $B$ 위의 분할멱
+구조라 하자. 보편 가군 $\Omega_{B/A, \delta}$에는 약간의
+추가 구조, 즉 $\text{d}_{B/A, \delta}(J)$로 생성되는
+$\Omega_{B/A, \delta}$의 $B$-부분가군 $N$이 있다.
+Lemma \ref{lemma-diagonal-and-differentials}에 주어진 동형사상으로 보면,
+이는 $\Omega_{B/A, \delta}$ 안에서 $K \cap J(1)$의 상에 해당한다.
+아이디얼 $\bar J = J \oplus N$과 보조정리의 증명에서와 같은
+분할멱 $\bar \delta$를 갖춘 $A$-대수
+$D = B \oplus \Omega^1_{B/A, \delta}$를 생각하자.
+그러면 $(D, \bar J, \bar \delta)$는 분할멱환이고,
+$b \mapsto b$ 및 $b \mapsto b + \text{d}_{B/A, \delta}(b)$로
+주어지는 두 사상 $B \to D$는 $A$ 위의 분할멱환의 준동형이다.
+또한 $N$은 이 성질이 성립하게 하는 $\Omega_{B/A, \delta}$의
+가장 작은 부분가군이다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-diagonal-and-differentials-affine-site}
+Situation \ref{situation-affine}에서, $(B, J, \delta)$를
+$\text{CRIS}(C/A)$의 대상이라 하자. $(B(1), J(1), \delta(1))$을
+$\text{CRIS}(C/A)$에서 $(B, J, \delta)$와 자기 자신의 쌍대곱이라 하고,
+$K = \Ker(B(1) \to B)$라 쓰자. 그러면
+$K \cap J(1) \subset J(1)$은 분할멱 구조에 의해 보존되고,
+표준적으로
+$$
+\Omega_{B/A, \delta} = K/ \left(K^2 + (K \cap J(1))^{[2]}\right)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-diagonal-and-differentials}의 증명과 글자 그대로 같다.
+확인해야 할 유일한 점은 분할멱환 $D = B \oplus M$이
+$\text{CRIS}(C/A)$의 대상이고 두 사상 $B \to D$가
+$\text{CRIS}(C/A)$의 사상이라는 것이다.
+$D/(J \oplus M) = B/J$이므로 $C \to B/J$를 사용하여 $D$를
+$\text{CRIS}(C/A)$의 대상으로 볼 수 있고, 사상에 관한 명제는
+구성에서 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-module-differentials-divided-power-envelope}
+$(A, I, \gamma)$를 분할멱환이라 하자. $A \to B$를 환 사상이라 하고
+$IB \subset J \subset B$를 아이디얼이라 하자. 분할멱 포락을
+$D_{B, \gamma}(J) = (D, \bar J, \bar \gamma)$라 하자. 그러면
+$$
+\Omega_{D/A, \bar\gamma} = \Omega_{B/A} \otimes_B D
+$$
+이다.
+\end{lemma}
+
+\begin{proof}[첫째 증명]
+$M$을 $D$-가군이라 하자. $A$-미분 $\vartheta : B \to M$을 주는 것과
+분할멱 $A$-미분 $\theta : D \to M$을 주는 것이 같다고 주장한다.
+이 주장에서 요네다 보조정리에 의해 명제가 따른다.
+
+\medskip\noindent
+$D$의 제곱 영 두꺼워짐 $D \oplus M$을 생각하자. $M$ 위의 고차
+분할멱 연산들을 영으로 두면 $\bar J \oplus M$ 위에 분할멱 구조
+$\delta$가 존재한다. 다시 말해 모든 $x \in \bar J$와 $m \in M$에 대해
+$\delta_n(x + m) = \bar\gamma_n(x) + \bar\gamma_{n - 1}(x)m$으로 둔다.
+Lemma \ref{lemma-divided-power-first-order-thickening}을 보라.
+첫째 성분은 사상 $B \to D$이고 둘째 성분은 $\vartheta$인
+$A$-대수 사상 $B \to D \oplus M$을 생각하자. 보편 성질에 의해
+이에 대응하는 분할멱 대수의 준동형 $D \to D \oplus M$을 얻으며,
+그 둘째 성분은 $\vartheta$에 대응하는 분할멱 $A$-미분 $\theta$이다.
+\end{proof}
+
+\begin{proof}[둘째 증명]
+먼저 $B$가 $A$ 위에서 평탄한 경우를 증명하자. 이 경우
+$\gamma$는 $IB$ 위의 분할멱 구조 $\gamma'$로 확장된다.
+Divided Power Algebra, Lemma \ref{dpa-lemma-gamma-extends}를 보라.
+따라서 $D = D_{B, \gamma'}(J)$는 $D' =  B\langle x_t \rangle$이고
+$J' = IB\langle x_t \rangle + B\langle x_t \rangle_{+}$인 분할멱환
+$(D', J', \delta)$를 원소 $x_t - f_t$와
+$\delta_n(\sum r_t x_t - r_0)$로 나눈 몫과 같다.
+표기와 설명은 Lemma \ref{lemma-describe-divided-power-envelope}를 보라.
+보편 미분을 $\text{d} : D' \to \Omega_{D'/A, \delta}$로 쓰자.
+Lemma \ref{lemma-omega}에 의해
+$$
+\Omega_{D'/A, \delta} =
+\Omega_{B/A} \otimes_B D' \oplus \bigoplus D' \text{d}x_t,
+$$
+이다. 다시 Lemma \ref{lemma-omega}를 적용하면
+$\Omega_{D/A, \bar\gamma}$는 위에 나열한 $D' \to D$의 핵의
+생성원들에 $\text{d}$를 적용한 원소들로 생성되는 부분가군으로
+$\Omega_{D'/A, \delta} \otimes_{D'} D$를 나눈 몫이다.
+$\text{d}(x_t - f_t) = - \text{d}f_t + \text{d}x_t$이므로
+이 몫에서 $\text{d}x_t = \text{d}f_t$이다. 특히
+% P08-E433: frozen source line 1154 drops the bar from \bar\gamma in the target differential module; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$\Omega_{B/A} \otimes_B D \to \Omega_{D/A, \gamma}$가 전사이고,
+그 핵은 $\delta_n(\sum r_t x_t - r_0)$에 $\text{d}$를 적용한
+원소들의 상으로 주어진다. 그러나 $r_t \in B$, $r_0 \in IB$이고
+$B$에서 $\sum r_tf_t - r_0 = 0$인 관계가 주어지면
+\begin{align*}
+\text{d}\delta_n(\sum r_t x_t - r_0)
+& =
+\delta_{n - 1}(\sum r_t x_t - r_0)\text{d}(\sum r_t x_t - r_0)
+\\
+& =
+\delta_{n - 1}(\sum r_t x_t - r_0)
+\left(
+\sum r_t\text{d}(x_t - f_t) + \sum (x_t - f_t)\text{d}r_t
+\right)
+\end{align*}
+이다. 이는 $B$에서 $\sum r_tf_t - r_0 = 0$이기 때문이다. 따라서
+% P08-E434: frozen source line 1171 tensors over A although the established module and asserted result tensor over B; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$\Omega_{B/A} \otimes_A D$에서 이미 영이고, $B$가 $A$ 위에서
+평탄한 경우의 결론을 얻는다.
+
+\medskip\noindent
+일반적인 경우에는 $B$를 다항식환의 몫 $P \to B$로 쓰고,
+$J' \subset P$를 $J$의 역상이라 하자.
+Lemma \ref{lemma-divided-power-envelop-quotient}의 표기로
+$D = D'/K'$이다. 증명의 첫 문단에서 다룬 경우에 의해
+$\Omega_{D'/A, \bar\gamma'} = \Omega_{P/A} \otimes_P D'$이다.
+그러면 $\Omega_{D/A, \bar \gamma}$는 $P \to B$의 핵에 속하는
+$k$들에 대한 $\text{d}\bar\gamma_n'(k)$로 생성되는 부분가군으로
+$\Omega_{P/A} \otimes_P D$를 나눈 몫이다. Lemma \ref{lemma-omega}와
+Lemma \ref{lemma-divided-power-envelop-quotient}의 $K'$에 대한 설명을 보라.
+$\text{d}\bar\gamma_n'(k) = \bar\gamma'_{n - 1}(k)\text{d}k$이므로,
+$k \in \Ker(P \to B)$에 대한 $\text{d}k$들로 생성되는 부분가군으로
+나누면 충분하다. 또한
+% P08-E435: frozen source line 1188 tensors Omega_{P/A} with B over A instead of over P; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$\Omega_{B/A}$는 이 원소들로 $\Omega_{P/A} \otimes_A B$를 나눈 몫이므로
+(Algebra, Lemma \ref{algebra-lemma-differential-seq}) 결론을 얻는다.
+\end{proof}
+
+\begin{remark}
+\label{remark-divided-powers-de-rham-complex}
+$A \to B$를 환 사상이라 하고 $(J, \delta)$를 $B$ 위의 분할멱
+구조라 하자. $\Omega_{B/A, \delta}$가 보편 분할멱 $A$-미분
+$\text{d} = \text{d}_{B/A} : B \to \Omega_{B/A, \delta}$의
+공역일 때
+$\Omega_{B/A, \delta}^i = \wedge^i_B \Omega_{B/A, \delta}$로 두자.
+$\Omega_{B/A, \delta}$는 $x \in J$에 대한 원소
+$\text{d}\delta_n(x) - \delta_{n - 1}(x)\text{d}x$들로 생성되는
+$B$-부분가군으로 $\Omega_{B/A}$를 나눈 몫임에 유의하자.
+Algebra, Lemma \ref{algebra-lemma-de-rham-complex}를 적용할 수 있다고
+주장한다. 이를 보이려면 $\Omega_B$의 원소
+$\text{d}\delta_n(x) - \delta_{n - 1}(x)\text{d}x$가
+$\Omega^2_{B/A, \delta}$에서 영으로 보내짐을 확인하면 충분하다.
+실제로 원하는 대로 $\Omega^2_{B/A, \delta}$에서
+$$
+\text{d}(\delta_{n - 1}(x)) \wedge \text{d}x
+= \delta_{n - 2}(x) \text{d}x \wedge \text{d}x = 0
+$$
+이다. 따라서 이후에 중요한 역할을 할 {\it 분할멱 드람 복합체}
+$$
+\Omega^0_{B/A, \delta} \to \Omega^1_{B/A, \delta} \to
+\Omega^2_{B/A, \delta} \to \ldots
+$$
+를 얻는다.
+\end{remark}
+
+\begin{remark}
+\label{remark-connection}
+$A \to B$를 환 사상이라 하고, $\Omega_{B/A} \to \Omega$를
+Algebra, Lemma \ref{algebra-lemma-de-rham-complex}의 가정을 만족하는
+몫이라 하자. $M$을 $B$-가군이라 하자. {\it 접속}이란
+$$
+\nabla : M \longrightarrow M \otimes_B \Omega
+$$
+인 가법적 사상으로서, 모든 $b \in B$와 $m \in M$에 대해
+$\nabla(bm) = b \nabla(m) + m \otimes \text{d}b$를 만족하는 것이다.
+이 상황에서 규칙 $\nabla(m \otimes \omega) = \nabla(m) \wedge \omega +
+m \otimes \text{d}\omega$로 사상
+$$
+\nabla : M \otimes_B \Omega^i \longrightarrow M \otimes_B \Omega^{i + 1}
+$$
+을 정의할 수 있다. 실제로 $b \in B$이면
+\begin{align*}
+\nabla(bm \otimes \omega) - \nabla(m \otimes b\omega)
+& =
+\nabla(bm) \wedge \omega + bm \otimes \text{d}\omega
+- \nabla(m) \wedge b\omega - m \otimes \text{d}(b\omega) \\
+& =
+b\nabla(m) \wedge \omega + m \otimes \text{d}b \wedge \omega
++ bm \otimes \text{d}\omega \\
+& \ \ \ \ \ \ - b\nabla(m) \wedge \omega - bm \otimes \text{d}(\omega)
+- m \otimes \text{d}b \wedge \omega = 0
+\end{align*}
+이기 때문이다. 관례대로 합성
+$$
+M \xrightarrow{\nabla} M \otimes_B \Omega^1
+\xrightarrow{\nabla} M \otimes_B \Omega^2
+$$
+이 영일 필요충분조건으로 접속이 {\it 적분 가능하다}고 한다.
+이 경우 접속의 드람 복합체라 불리는 복합체
+$$
+M \xrightarrow{\nabla} M \otimes_B \Omega^1
+\xrightarrow{\nabla} M \otimes_B \Omega^2
+\xrightarrow{\nabla} M \otimes_B \Omega^3
+\xrightarrow{\nabla} M \otimes_B \Omega^4 \to \ldots
+$$
+를 얻는다.
+\end{remark}
+
+\begin{remark}
+\label{remark-base-change-connection}
+환들의 가환 도식
+$$
+\xymatrix{
+B \ar[r]_\varphi & B' \\
+A \ar[u] \ar[r] & A' \ar[u]
+}
+$$
+을 생각하자. $\Omega_{B/A} \to \Omega$와
+$\Omega_{B'/A'} \to \Omega'$을 Algebra,
+Lemma \ref{algebra-lemma-de-rham-complex}의 가정을 만족하는 몫들이라 하자.
+다음 도식에 들어맞는 사상 $\varphi : \Omega \to \Omega'$가
+있다고 가정하자.
+$$
+\xymatrix{
+\Omega_{B/A} \ar[r] \ar[d] &
+\Omega_{B'/A'} \ar[d] \\
+\Omega \ar[r]^{\varphi} &
+\Omega'
+}
+$$
+여기서 위쪽 가로 화살표는 $\varphi : B \to B'$가 유도하는 표준 사상
+$\Omega_{B/A} \to \Omega_{B'/A'}$이다. 이 상황에서 $M$이
+$B$-가군이고 $\nabla : M \to M \otimes_B \Omega$가 접속인 임의의 쌍
+$(M, \nabla)$가 주어지면 {\it 기저변환} $(M \otimes_B B', \nabla')$을
+얻는다. 여기서
+$$
+\nabla' :
+M \otimes_B B'
+\longrightarrow
+(M \otimes_B B') \otimes_{B'} \Omega' = M \otimes_B \Omega'
+$$
+은 $\nabla(m) = \sum m_i \otimes \text{d}b_i$일 때 규칙
+$$
+\nabla'(m \otimes b') =
+\sum m_i \otimes b'\text{d}\varphi(b_i) + m \otimes \text{d}b' 
+$$
+으로 정의한다. $\nabla$가 적분 가능하면 $\nabla'$도 적분 가능하며,
+이 경우 드람 복합체의 표준 사상(Remark \ref{remark-connection})
+\begin{equation}
+\label{equation-base-change-map-complexes}
+M \otimes_B \Omega^\bullet
+\longrightarrow
+(M \otimes_B B') \otimes_{B'} (\Omega')^\bullet =
+M \otimes_B (\Omega')^\bullet
+\end{equation}
+이 존재하고, 이는 $m \otimes \eta$를 $m \otimes \varphi(\eta)$로 보낸다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-differentials-completion}
+$A \to B$를 환 사상이라 하고 $(J, \delta)$를 $B$ 위의 분할멱
+구조라 하자. $p$를 소수라 하자. $A$가 $\mathbf{Z}_{(p)}$-대수이고
+$B/J$에서 $p$가 멱영이라고 가정하자. 그러면
+$$
+\lim_e \Omega_{B_e/A, \bar\delta} =
+\lim_e \Omega_{B/A, \delta}/p^e\Omega_{B/A, \delta} =
+\lim_e \Omega_{B^\wedge/A, \delta^\wedge}/p^e \Omega_{B^\wedge/A, \delta^\wedge}
+$$
+이다. 표기와 설명은 증명을 보라.
+\end{lemma}
+
+\begin{proof}
+Divided Power Algebra, Lemma \ref{dpa-lemma-extend-to-completion}에 의해
+충분히 큰 모든 $e$에 대해 $\delta$가 $B_e = B/p^eB$로 확장된다.
+따라서 첫 극한은 의미가 있다. 같은 보조정리는 완비화
+$B^\wedge = \lim_e B_e$ 위의 분할멱 구조 $\delta^\wedge$도 주므로
+마지막 극한도 의미가 있다. Lemma \ref{lemma-omega}와
+$\text{d}p^e = 0$이라는 사실(항상 성립한다)에 의해 전사
+$\Omega_{B/A, \delta} \to \Omega_{B_e/A, \bar\delta}$의 핵은
+$p^e\Omega_{B/A, \delta}$이다. 마찬가지로
+$\Omega_{B^\wedge/A, \delta^\wedge} \to
+\Omega_{B_e/A, \bar\delta}$의 핵도 그러하다. 따라서 명백하다.
+\end{proof}
+
+
+
+\section{분할멱 스킴}
+\label{section-divided-power-schemes}
+
+\noindent
+앞의 개념들을 대역화하는 방법에 관한 몇 가지 언급이다.
+
+\begin{definition}
+\label{definition-divided-power-structure}
+$\mathcal{C}$를 사이트라 하자. $\mathcal{O}$를 $\mathcal{C}$ 위의
+환의 층이라 하고 $\mathcal{I} \subset \mathcal{O}$를 아이디얼의
+층이라 하자. $\mathcal{I}$ 위의 {\it 분할멱 구조 $\gamma$}란,
+$\mathcal{C}$의 모든 대상 $U$에 대해 삼중항
+$$
+(\mathcal{O}(U), \mathcal{I}(U), \gamma)
+$$
+이 분할멱환이 되게 하는 사상들의 열
+$\gamma_n : \mathcal{I} \to \mathcal{I}$, $n \geq 1$이다.
+\end{definition}
+
+\noindent
+물론 이는 특히 위상공간 위의 환의 층에 적용된다. 그러나
+크리스탈린 사이트의 구조층은 바로 사이트 위에 있으므로 조금 더
+일반적으로 두는 것이 좋다! 이 장에서는 위 정의와 같은 삼중항
+$(\mathcal{C}, \mathcal{I}, \gamma)$를 때로 {\it 분할멱 토포스}라 한다.
+둘째 삼중항 $(\mathcal{C}', \mathcal{I}', \gamma')$과 환 달린
+토포스의 사상
+$(f, f^\sharp) : (\Sh(\mathcal{C}), \mathcal{O}) \to
+(\Sh(\mathcal{C}'), \mathcal{O}')$이 주어졌다고 하자.
+$f^\sharp(f^{-1}\mathcal{I}') \subset \mathcal{I}$이고 모든
+$n \geq 1$에 대해 도식
+$$
+\xymatrix{
+f^{-1}\mathcal{I}' \ar[d]_{f^{-1}\gamma'_n} \ar[r]_{f^\sharp} &
+\mathcal{I} \ar[d]^{\gamma_n} \\
+f^{-1}\mathcal{I}' \ar[r]^{f^\sharp} & \mathcal{I}
+}
+$$
+이 가환이면 $(f, f^\sharp)$가 {\it 분할멱 토포스의 사상}을
+유도한다고 한다. $f$가 함자 $u : \mathcal{C}' \to \mathcal{C}$가
+유도하는 사이트의 사상에서 오면, 이는 단지 모든
+$U' \in \Ob(\mathcal{C}')$에 대해
+$$
+(\mathcal{O}'(U'), \mathcal{I}'(U'), \gamma')
+\longrightarrow
+(\mathcal{O}(u(U')), \mathcal{I}(u(U')), \gamma)
+$$
+이 분할멱환의 준동형이라는 뜻이다.
+
+\medskip\noindent
+스킴의 경우에는 분할멱 아이디얼이 {\bf 준연접}이라고 요구한다.
+이를 제외하면 정의는 토포스의 경우와 정확히 같다. 다음과 같다.
+
+\begin{definition}
+\label{definition-divided-power-scheme}
+{\it 분할멱 스킴}이란 $S$가 스킴이고 $\mathcal{I}$가 준연접
+아이디얼의 층이며 $\gamma$가 $\mathcal{I}$ 위의 분할멱 구조인
+삼중항 $(S, \mathcal{I}, \gamma)$이다.
+{\it 분할멱 스킴의 사상}
+$(S, \mathcal{I}, \gamma) \to (S', \mathcal{I}', \gamma')$이란,
+$f^{-1}\mathcal{I}'\mathcal{O}_S \subset \mathcal{I}$이고 모든 열린집합
+$U' \subset S'$에 대해
+$$
+(\mathcal{O}_{S'}(U'), \mathcal{I}'(U'), \gamma')
+\longrightarrow
+(\mathcal{O}_S(f^{-1}U'), \mathcal{I}(f^{-1}U'), \gamma)
+$$
+이 분할멱환의 준동형이 되게 하는 스킴의 사상 $f : S \to S'$이다.
+\end{definition}
+
+\noindent
+준연접 아이디얼의 층과 닫힌 몰입 사이에는 일대일 대응이 있음을
+상기하자. Morphisms, Section \ref{morphisms-section-closed-immersions}를
+보라. 따라서 분할멱 스킴 $(T, \mathcal{J}, \gamma)$가 주어지면
+$\mathcal{J}$가 정의하는 표준 닫힌 몰입 $U \to T$를 얻는다.
+거꾸로 닫힌 몰입 $U \to T$와 $U \to T$에 대응하는 아이디얼의 층
+$\mathcal{J}$ 위의 분할멱 구조 $\gamma$가 주어지면 분할멱 스킴
+$(T, \mathcal{J}, \gamma)$를 얻는다. 많은 상황에서 사상 $U \to T$가
+두꺼워짐일 때에만 이러한 삼중항 $(U, T, \gamma)$를 생각하고 싶다.
+More on Morphisms, Definition \ref{more-morphisms-definition-thickening}을 보라.
+
+\begin{definition}
+\label{definition-divided-power-thickening}
+위와 같은 삼중항 $(U, T, \gamma)$에서 $U \to T$가 두꺼워짐이면
+이를 {\it 분할멱 두꺼워짐}이라 한다.
+\end{definition}
+
+\noindent
+세 분할멱 스킴 가운데 하나가 분할멱 두꺼워짐이면 섬유곱이
+존재한다. 다음은 형식적인 진술이다.
+
+\begin{lemma}
+\label{lemma-fibre-product}
+$f : (T, \mathcal{J}, \delta) \to (S, \mathcal{I}, \gamma)$와
+$f' : (T', \mathcal{J}', \delta') \to (S, \mathcal{I}, \gamma)$를
+분할멱 스킴의 사상이라 하자. 분할멱 스킴
+$(T'', \mathcal{J}'', \delta'')$과 분할멱 스킴의 범주에서의
+데카르트 도식
+$$
+\xymatrix{
+T \ar[d]_f & T'' \ar[d] \ar[l] \\
+S & T' \ar[l]_{f'}
+}
+$$
+이 존재한다. 사상 $T'' \to T \times_S T'$는 닫힌 몰입이고,
+사상 $T''_0 \to T_0 \times_{S_0} T'_0$는 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+개요만 적는다. $\Spec(-)$를 통해 보면 마지막 두 명제는
+Divided Power Algebra, Remark \ref{dpa-remark-pushout}에서 본
+분할멱 대수의 밀어내기에 관한 내용과 양립한다.
+따라서 다음과 같이 $T''$을 $T \times_S T'$의 닫힌 부분스킴으로
+구성한다. $f(V), f'(V') \subset U$인 임의의 아핀 열린집합
+$U \subset S$, $V \subset T$, $V' \subset T'$에 대해
+Divided Power Algebra, Remark \ref{dpa-remark-pushout}의 구성이 정하는
+$V \times_U V'$의 닫힌 부분스킴을 생각한다. 스킴
+$V \times_U V'$들은 $T \times_S T'$의 열린 덮개의 원소들이므로
+다음과 같이 진행할 수 있다. (1) 이 닫힌 부분스킴들이 이어붙음을 보이고,
+(2) 그 위의 분할멱 구조들이 이어붙음을 보이며, (3) 이어붙인 결과가
+분할멱 스킴의 범주에서 섬유곱임을 보인다. (1)을 보이는 것은
+분할멱환의 범주에서 밀어내기 구성이 국소화와 가환함(적절히
+정식화하여)을 보이는 것과 같다. 이는 평탄성에 의해 분할멱이
+국소화로 확장됨을 함의하는 Divided Power Algebra,
+Lemma \ref{dpa-lemma-gamma-extends}에서 따른다.
+\end{proof}
+
+\noindent
+다음을 관찰하자. $(U, T, \gamma)$가 분할멱 스킴이고,
+$T$가 $\mathbf{Z}_{(p)}$ 위의 스킴이며 $U$에서 $p$가 국소 멱영이라고
+가정하자. 그러면
+\begin{enumerate}
+\item $p$가 국소 멱영인 것은 $T \Leftrightarrow U \to T$가
+두꺼워짐이라는 것과 동치이다(Divided Power Algebra,
+Lemma \ref{dpa-lemma-nil}을 보라).
+\item $e \gg 0$이면 $p^e\mathcal{O}_T$는 $T$ 위에서 국소적으로
+$\gamma$에 의해 보존된다(Divided Power Algebra,
+Lemma \ref{dpa-lemma-extend-to-completion}을 보라).
+\end{enumerate}
+이는 다음 가정 아래에서 분할멱 두꺼워짐에 관한 좋은 결과를
+얻을 수 있음을 시사한다.
+
+\begin{situation}
+\label{situation-global}
+여기서 $p$는 소수이고 $(S, \mathcal{I}, \gamma)$는
+$\mathbf{Z}_{(p)}$ 위의 분할멱 스킴이다.
+$S_0 = V(\mathcal{I}) \subset S$로 둔다. 마지막으로
+$X \to S_0$는 $X$에서 $p$가 국소 멱영인 스킴의 사상이다.
+\end{situation}
+
+\noindent
+이 상황에서 큰 크리스탈린 사이트와 작은 크리스탈린 사이트를
+정의할 것이다.
+
+
+
+
+
+
+
+
+
+\section{큰 크리스탈린 사이트}
+\label{section-big-site}
+
+\noindent
+먼저 큰 사이트를 정의한다. 분할멱 스킴
+$(S, \mathcal{I}, \gamma)$가 주어졌을 때, $T$에 분할멱 스킴의
+사상 $T \to S$가 갖추어져 있으면 $(T, \mathcal{J}, \delta)$를
+$(S, \mathcal{I}, \gamma)$ 위의 분할멱 스킴이라 한다.
+마찬가지로 분할멱 두꺼워짐 $(U, T, \delta)$에서 $T$에
+분할멱 스킴의 사상 $T \to S$가 갖추어져 있으면 이를
+$(S, \mathcal{I}, \gamma)$ 위의 분할멱 두꺼워짐이라 한다.
+
+\begin{definition}
+\label{definition-divided-power-thickening-X}
+Situation \ref{situation-global}에서 다음을 정의한다.
+\begin{enumerate}
+\item {\it $(S, \mathcal{I}, \gamma)$에 상대적인 $X$의 분할멱 두꺼워짐}은
+$(S, \mathcal{I}, \gamma)$ 위의 분할멱 두꺼워짐
+$(U, T, \delta)$과 $S$-사상 $U \to X$로 주어진다.
+\item {\it $(S, \mathcal{I}, \gamma)$에 상대적인 $X$의 분할멱
+두꺼워짐들의 사상}은 자명한 방식으로 정의한다.
+\end{enumerate}
+$(S, \mathcal{I}, \gamma)$에 상대적인 $X$의 분할멱 두꺼워짐들의
+범주를 $\text{CRIS}(X/S, \mathcal{I}, \gamma)$ 또는 간단히
+$\text{CRIS}(X/S)$로 쓴다.
+\end{definition}
+
+\noindent
+$\text{CRIS}(X/S)$의 모든 $(U, T, \delta)$에 대해 $T$에서 $p$가
+국소 멱영이다. Situation \ref{situation-global} 앞의 논의를 보라.
+$(U, T, \delta)$에 연관된 모든 데이터를 나타내는 좋은 방법은
+가환 도식
+$$
+\xymatrix{
+T \ar[dd] & U \ar[l] \ar[d] \\
+& X \ar[d] \\
+S & S_0 \ar[l]
+}
+$$
+이다. 여기서 $S_0 = V(\mathcal{I}) \subset S$이다.
+$\text{CRIS}(X/S)$의 사상들도 마찬가지로 거대한 가환 도식으로
+나타낼 수 있다. 특히 표준 망각 함자
+\begin{equation}
+\label{equation-forget}
+\text{CRIS}(X/S) \longrightarrow \Sch/X,\quad
+(U, T, \delta) \longmapsto U
+\end{equation}
+와 때로 유용한 그 한쪽 역함자(이자 왼쪽 수반)
+\begin{equation}
+\label{equation-endow-trivial}
+\Sch/X \longrightarrow \text{CRIS}(X/S),\quad
+U \longmapsto (U, U, \emptyset)
+\end{equation}
+가 있다.
+
+\begin{lemma}
+\label{lemma-divided-power-thickening-fibre-products}
+Situation \ref{situation-global}에서 범주 $\text{CRIS}(X/S)$에는
+공집합이 아닌 모든 유한 극한, 특히 두 대상의 곱과 섬유곱이 있다.
+함자 (\ref{equation-forget})는 극한과 가환한다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 아핀의 경우에는
+Lemma \ref{lemma-affine-thickenings-colimits}를 보라. 또한
+Divided Power Algebra, Remark \ref{dpa-remark-pushout}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-divided-power-thickening-base-change-flat}
+Situation \ref{situation-global}에서
+$$
+\xymatrix{
+(U_3, T_3, \delta_3) \ar[d] \ar[r] & (U_2, T_2, \delta_2) \ar[d] \\
+(U_1, T_1, \delta_1) \ar[r] & (U, T, \delta)
+}
+$$
+를 $(S, \mathcal{I}, \gamma)$에 상대적인 $X$의 분할멱 두꺼워짐들의
+범주에서 섬유 정사각형이라 하자. $T_2 \to T$가 평탄하고
+$U_2 = T_2 \times_T U$이면 스킴으로서
+$T_3 = T_1 \times_T T_2$이다.
+\end{lemma}
+
+\begin{proof}
+분할멱 구조는 평탄한 환 사상을 따라 유일하게 확장되므로 참이다.
+Divided Power Algebra, Lemma \ref{dpa-lemma-gamma-extends}를 보라.
+\end{proof}
+
+\noindent
+위 보조정리는 분할멱 두꺼워짐들의 평탄한 사상의 기저변환도
+평탄한 사상이며, 실제로 그 사상의 ``보통'' 기저변환이라는 뜻이다.
+따라서 다음 정의가 의미가 있다.
+
+\begin{definition}
+\label{definition-big-crystalline-site}
+Situation \ref{situation-global}에서 다음을 정의한다.
+\begin{enumerate}
+\item $X/S$의 분할멱 두꺼워짐들의 사상들의 족
+$\{(U_i, T_i, \delta_i) \to (U, T, \delta)\}$이
+{\it 자리스키, 에탈, 매끄러운, 신토믹 또는 fppf 덮개}라는 것은
+다음과 동치이다.
+\begin{enumerate}
+\item 모든 $i$에 대해 $U_i = U \times_T T_i$이다.
+\item $\{T_i \to T\}$는 자리스키, 에탈, 매끄러운, 신토믹 또는
+fppf 덮개이다.
+\end{enumerate}
+\item $(S, \mathcal{I}, \gamma)$ 위에서 $X$의
+{\it 큰 크리스탈린 사이트}란 자리스키 위상을 갖춘 범주
+$\text{CRIS}(X/S)$이다.
+\item $\text{CRIS}(X/S)$ 위의 층들의 토포스를
+$(X/S)_{\text{CRIS}}$ 또는 때로
+$(X/S, \mathcal{I}, \gamma)_{\text{CRIS}}$로 쓴다\footnote{이는
+사이트 $\mathcal{C}$에 연관된 토포스를 $\Sh(\mathcal{C})$로 쓰는
+우리의 관례와 충돌한다.}.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 토포스들에 관한 몇 가지 명백한 함자성이 있다.
+
+\begin{remark}[함자성]
+\label{remark-functoriality-big-cris}
+$p$를 소수라 하자.
+$(S, \mathcal{I}, \gamma) \to (S', \mathcal{I}', \gamma')$를
+$\mathbf{Z}_{(p)}$ 위의 분할멱 스킴의 사상이라 하자.
+$S_0 = V(\mathcal{I})$ 및 $S'_0 = V(\mathcal{I}')$로 두자.
+$$
+\xymatrix{
+X \ar[r]_f \ar[d] & Y \ar[d] \\
+S_0 \ar[r] & S'_0
+}
+$$
+를 스킴의 사상들의 가환 도식이라 하고 $X$와 $Y$에서 $p$가
+국소 멱영이라고 가정하자. $(U, T, \delta)$를, $U$에서 $Y$로 가는
+$S'$-사상이 $U \to X \to Y$인 $(U, T, \delta)$에 대응시킴으로써
+연속적이고 쌍대연속적인 함자
+$$
+\text{CRIS}(X/S) \longrightarrow \text{CRIS}(Y/S')
+$$
+를 얻는다. 따라서 토포스의 사상
+$$
+f_{\text{CRIS}} : (X/S)_{\text{CRIS}} \longrightarrow (Y/S')_{\text{CRIS}}
+$$
+을 얻는다. Sites, Section \ref{sites-section-cocontinuous-morphism-topoi}를
+보라.
+\end{remark}
+
+\begin{remark}[자리스키 사이트와의 비교]
+\label{remark-compare-big-zariski}
+Situation \ref{situation-global}에서 함자 (\ref{equation-forget})는
+쌍대연속적이고(세부사항은 생략한다) 곱 및 섬유곱과 가환한다
+(Lemma \ref{lemma-divided-power-thickening-fibre-products}).
+따라서 $X/S$의 큰 크리스탈린 토포스에서 $X$의 큰 자리스키
+토포스로 가는 토포스의 사상
+$$
+U_{X/S} : (X/S)_{\text{CRIS}} \longrightarrow \Sh((\Sch/X)_{Zar})
+$$
+을 얻는다. Sites, Section \ref{sites-section-cocontinuous-morphism-topoi}를
+보라.
+\end{remark}
+
+\begin{remark}[구조 사상]
+\label{remark-big-structure-morphism}
+Situation \ref{situation-global}에서 닫힌 부분스킴
+$S_0 = V(\mathcal{I}) \subset S$를 생각하자. $S_0$에서 $p$가
+국소 멱영이라고 가정하면(실제로는 항상 그러하다), $X$ 대신
+$S_0$를 써서 Definition \ref{definition-divided-power-thickening-X}과
+같은 상황을 얻는다. 따라서 사이트 $\text{CRIS}(S_0/S)$를 얻는다.
+$f : X \to S_0$가 $S$ 위에서 $X$의 구조 사상이면,
+Remark \ref{remark-functoriality-big-cris}에 의해 환 달린 토포스의
+사상들의 가환 도식
+$$
+\xymatrix{
+(X/S)_{\text{CRIS}}
+\ar[r]_{f_{\text{CRIS}}} \ar[d]_{U_{X/S}} &
+(S_0/S)_{\text{CRIS}} \ar[d]^{U_{S_0/S}} \\
+\Sh((\Sch/X)_{Zar}) \ar[r]^{f_{big}} & \Sh((\Sch/S_0)_{Zar}) \ar[rd] \\
+& & \Sh((\Sch/S)_{Zar})
+}
+$$
+을 얻는다. 합성 $(X/S)_{\text{CRIS}} \to \Sh((\Sch/S)_{Zar})$을
+큰 크리스탈린 사이트의 구조 사상으로 생각한다. $S_0$에서 $p$가
+국소 멱영이 아니더라도, 위 도식의 아래 경로를 택할 수 있으므로
+구조 사상
+$$
+(X/S)_{\text{CRIS}} \longrightarrow \Sh((\Sch/S)_{Zar})
+$$
+은 정의된다. 즉 이는 규칙 $(U, T, \delta)/S \mapsto U/S$로 주어지는
+쌍대연속 함자 $\text{CRIS}(X/S) \to (\Sch/S)_{Zar}$에 대응하는
+토포스의 사상이다. Sites,
+Section \ref{sites-section-cocontinuous-morphism-topoi}를 보라.
+\end{remark}
+
+\begin{remark}[양립성]
+\label{remark-compatibilities-big-cris}
+위에서 정의한 사상들은 수많은 양립성을 만족한다. 예를 들어
+Remark \ref{remark-functoriality-big-cris}의 상황에서 환 달린
+토포스의 가환 도식
+$$
+\xymatrix{
+(X/S)_{\text{CRIS}} \ar[d] \ar[r] & (Y/S')_{\text{CRIS}} \ar[d] \\
+\Sh((\Sch/S)_{Zar}) \ar[r] & \Sh((\Sch/S')_{Zar})
+}
+$$
+을 얻는다. 여기서 세로 화살표들은 구조 사상이다.
+\end{remark}
+
+
+
+\section{크리스탈린 사이트}
+\label{section-site}
+
+\noindent
+(\ref{equation-forget})이 곱과 섬유곱과 가환하므로, $U \to X$가
+열린 몰입인 $(U, T, \delta)$들만 보는 것은 섬유곱 아래에서
+(더 일반적으로 공집합이 아닌 유한 극한 아래에서) 보존되는
+충만 부분범주를 정의한다. 따라서 다음 정의는 의미가 있다.
+
+\begin{definition}
+\label{definition-crystalline-site}
+Situation \ref{situation-global}에서 다음을 정의한다.
+\begin{enumerate}
+\item $(S, \mathcal{I}, \gamma)$ 위에서 $X$의 (작은)
+{\it 크리스탈린 사이트}는 $\text{Cris}(X/S, \mathcal{I}, \gamma)$
+또는 간단히 $\text{Cris}(X/S)$로 쓰며, $U \to X$가 열린 몰입인
+$\text{CRIS}(X/S)$의 대상 $(U, T, \delta)$들로 이루어진
+$\text{CRIS}(X/S)$의 충만 부분범주이다. 이 범주에는 자리스키
+위상이 주어진다.
+\item $\text{Cris}(X/S)$ 위의 층들의 토포스를
+$(X/S)_{\text{cris}}$ 또는 때로
+$(X/S, \mathcal{I}, \gamma)_{\text{cris}}$로 쓴다\footnote{이는
+사이트 $\mathcal{C}$에 연관된 토포스를 $\Sh(\mathcal{C})$로 쓰는
+우리의 관례와 충돌한다.}.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$\text{Cris}(X/S)$의 모든 $(U, T, \delta)$에 대해 사상 $U \to X$는
+$X$의 작은 자리스키 사이트 $X_{Zar}$의 대상을 정의한다.
+따라서 표준 망각 함자
+\begin{equation}
+\label{equation-forget-small}
+\text{Cris}(X/S) \longrightarrow X_{Zar},\quad
+(U, T, \delta) \longmapsto U
+\end{equation}
+와 때로 유용한 왼쪽 수반
+\begin{equation}
+\label{equation-endow-trivial-small}
+X_{Zar} \longrightarrow \text{Cris}(X/S),\quad
+U \longmapsto (U, U, \emptyset)
+\end{equation}
+가 있다.
+
+\medskip\noindent
+스킴의 작은 자리스키 사이트와 큰 자리스키 사이트를 비교할 수
+있듯이 작은 크리스탈린 사이트와 큰 크리스탈린 사이트를 비교할 수 있다.
+Topologies, Lemma \ref{topologies-lemma-at-the-bottom}을 보라.
+
+\begin{lemma}
+\label{lemma-compare-big-small}
+가정은 Definition \ref{definition-divided-power-thickening-X}과 같다.
+포함 함자
+$$
+\text{Cris}(X/S) \to \text{CRIS}(X/S)
+$$
+는 공집합이 아닌 유한 극한과 가환하고, 충만충실하며, 연속적이고,
+쌍대연속적이다. 합성이 항등사상인 토포스의 사상
+$$
+(X/S)_{\text{cris}} \xrightarrow{i} (X/S)_{\text{CRIS}}
+\xrightarrow{\pi} (X/S)_{\text{cris}}
+$$
+이 존재하고, 그중 첫째 것은 포함 함자에 의해 유도된다.
+또한 $\pi_* = i^{-1}$이다.
+\end{lemma}
+
+\begin{proof}
+첫째 명제는 Lemma \ref{lemma-divided-power-thickening-fibre-products}를
+보라. 이로부터 토포스의 사상
+$i : (X/S)_{\text{cris}} \to (X/S)_{\text{CRIS}}$와
+$i^{-1}i_! = i^{-1}i_* = \text{id}$를 만족하는 왼쪽 수반 $i_!$을
+얻는다. Sites, Lemmas \ref{sites-lemma-when-shriek},
+\ref{sites-lemma-preserve-equalizers}, 그리고
+\ref{sites-lemma-back-and-forth}를 보라.
+$i_!$이 완전하다고 주장한다. 이것이 참이면
+$\pi^{-1} = i_!$ 및 $\pi_* = i^{-1}$이라는 규칙으로 $\pi$를
+정의할 수 있고 모든 것이 명백하다. 이 주장을 증명하기 위해
+$i_!$이 오른쪽 완전이고 섬유곱을 보존함을 이미 알고 있음에 유의하자
+(위의 참고문헌을 보라). 따라서 $*$가 집합의 층들의 범주에서
+끝 대상을 나타낼 때 $i_! * = *$임을 보이면 충분하다.
+이를 보이려면 $\text{Cris}(X/S)$의 대상들의 집합
+$(U_i, T_i, \delta_i)$, $i \in I$로서
+$$
+\coprod\nolimits_{i \in I} h_{(U_i, T_i, \delta_i)} \to *
+$$
+가 $(X/S)_{\text{CRIS}}$에서 전사가 되는 것을 만들면 충분하다
+(세부사항은 생략한다. 힌트: $\text{Cris}(X/S)$에 곱이 있고 함자
+$\text{Cris}(X/S) \to \text{CRIS}(X/S)$가 곱과 가환함을 사용하라).
+아핀의 경우에는 Lemma \ref{lemma-set-generators}에서 따른다.
+일반적인 경우의 증명은 생략한다.
+\end{proof}
+
+\begin{remark}[함자성]
+\label{remark-functoriality-cris}
+$p$를 소수라 하자.
+$(S, \mathcal{I}, \gamma) \to (S', \mathcal{I}', \gamma')$를
+$\mathbf{Z}_{(p)}$ 위의 분할멱 스킴의 사상이라 하자.
+$$
+\xymatrix{
+X \ar[r]_f \ar[d] & Y \ar[d] \\
+S_0 \ar[r] & S'_0
+}
+$$
+를 스킴의 사상들의 가환 도식이라 하고 $X$와 $Y$에서 $p$가
+국소 멱영이라고 가정하자. Topologies,
+Lemma \ref{topologies-lemma-morphism-big-small}과 유사하게
+$$
+f_{\text{cris}} : (X/S)_{\text{cris}} \longrightarrow (Y/S')_{\text{cris}}
+$$
+을 식 $f_{\text{cris}} = \pi_Y \circ f_{\text{CRIS}} \circ i_X$로
+정의한다. 여기서 $i_X$와 $\pi_Y$는 $X$와 $Y$에 대해
+Lemma \ref{lemma-compare-big-small}에서 정의한 것이고,
+$f_{\text{CRIS}}$는 Remark \ref{remark-functoriality-big-cris}에서
+정의한 것이다.
+\end{remark}
+
+\begin{remark}[자리스키 사이트와의 비교]
+\label{remark-compare-zariski}
+Situation \ref{situation-global}에서 함자
+(\ref{equation-forget-small})은 연속적이고 쌍대연속적이며 곱과
+섬유곱과 가환한다. 따라서 $X/S$의 작은 크리스탈린 토포스와
+$X$의 작은 자리스키 토포스를 연결하는 토포스의 사상
+$$
+u_{X/S} : (X/S)_{\text{cris}} \longrightarrow \Sh(X_{Zar})
+$$
+을 얻는다. Sites, Section \ref{sites-section-cocontinuous-morphism-topoi}를
+보라.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-localize}
+Situation \ref{situation-global}에서 $X' \subset X$와 $S' \subset S$를
+$X'$의 상이 $S'$에 속하는 열린 부분스킴이라 하자. 그러면
+충만충실 함자 $\text{Cris}(X'/S') \to \text{Cris}(X/S)$가 존재하고,
+이는 가환 도식
+$$
+\xymatrix{
+(X'/S')_{\text{cris}} \ar[r] \ar[d]_{u_{X'/S'}} &
+(X/S)_{\text{cris}} \ar[d]^{u_{X/S}} \\
+\Sh(X'_{Zar}) \ar[r] & \Sh(X_{Zar})
+}
+$$
+에 들어맞는 토포스의 사상을 유도한다. 또한 이 도식은 Sites,
+Lemma \ref{sites-lemma-localize-morphism-topoi}에서와 같은 토포스의
+사상들의 국소화의 예이다.
+\end{lemma}
+
+\begin{proof}
+충만충실 함자는 $\text{Cris}(X'/S')$의 대상을 $U \to X$가
+$X' \subset X$를 거치는 $X$의 분할멱 두꺼워짐
+$(U, T, \delta)$로 보는 데서 온다(그러면 자동으로 $T \to S$가
+$S'$를 거친다). 이 함자는 명백히 쌍대연속적이므로 표시한
+토포스의 사상을 얻는다. $h_{X'} \in \Sh(X_{Zar})$를
+$X_{Zar}$의 대상으로 본 $X'$에 연관된 표현 가능 층이라 하자.
+$\Sh(X'_{Zar})$는 국소화 $\Sh(X_{Zar})/h_{X'}$임이 명백하다.
+한편 범주 $\text{Cris}(X/S)/u_{X/S}^{-1}h_{X'}$는 위 함자에 의해
+$\text{Cris}(X'/S')$와 표준적으로 동일시된다
+(Sites, Lemma \ref{sites-lemma-localize-topos-site}를 보라).
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{remark}[구조 사상]
+\label{remark-structure-morphism}
+Situation \ref{situation-global}에서 닫힌 부분스킴
+$S_0 = V(\mathcal{I}) \subset S$를 생각하자. $S_0$에서 $p$가
+국소 멱영이라고 가정하면(실제로는 항상 그러하다), $X$ 대신
+$S_0$를 써서 Definition \ref{definition-divided-power-thickening-X}과
+같은 상황을 얻는다. 따라서 사이트 $\text{Cris}(S_0/S)$를 얻는다.
+$f : X \to S_0$가 $S$ 위에서 $X$의 구조 사상이면 토포스의
+가환 도식
+$$
+\xymatrix{
+(X/S)_{\text{cris}}
+\ar[r]_{f_{\text{cris}}} \ar[d]_{u_{X/S}} &
+(S_0/S)_{\text{cris}} \ar[d]^{u_{S_0/S}} \\
+\Sh(X_{Zar}) \ar[r]^{f_{small}} & \Sh(S_{0, Zar}) \ar[rd] \\
+& & \Sh(S_{Zar})
+}
+$$
+을 얻는다. Remark \ref{remark-functoriality-cris}를 보라.
+합성 $(X/S)_{\text{cris}} \to \Sh(S_{Zar})$을 크리스탈린 사이트의
+구조 사상으로 생각한다. $S_0$에서 $p$가 국소 멱영이 아니더라도
+위 도식의 아래 경로를 택할 수 있으므로 구조 사상
+$$
+\tau_{X/S} : (X/S)_{\text{cris}} \longrightarrow \Sh(S_{Zar})
+$$
+은 정의된다.
+\end{remark}
+
+\begin{remark}[양립성]
+\label{remark-compatibilities}
+위에서 정의한 사상들은 수많은 양립성을 만족한다. 예를 들어
+Remark \ref{remark-functoriality-cris}의 상황에서 환 달린 토포스의
+가환 도식
+% P08-E439: frozen source lines 1933-1934 use big Zariski topoi in the small-crystalline compatibility square, unlike the structure maps just defined; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+\xymatrix{
+(X/S)_{\text{cris}} \ar[d] \ar[r] & (Y/S')_{\text{cris}} \ar[d] \\
+\Sh((\Sch/S)_{Zar}) \ar[r] & \Sh((\Sch/S')_{Zar})
+}
+$$
+을 얻는다. 여기서 세로 화살표들은 구조 사상이다.
+\end{remark}
+
+
+
+\section{크리스탈린 사이트 위의 층}
+\label{section-sheaves}
+
+\noindent
+표기와 가정은 Situation \ref{situation-global}과 같다.
+이 절에서 $X/S$의 작은 크리스탈린 사이트와 큰 크리스탈린 사이트를
+동시에 논하기 위해
+$$
+\mathcal{C} = \text{CRIS}(X/S)
+\quad\text{또는}\quad
+\mathcal{C} = \text{Cris}(X/S).
+$$
+로 둔다. $\mathcal{C}$ 위의 층 $\mathcal{F}$는 $\mathcal{C}$의
+모든 대상 $(U, T, \delta)$에 대해 {\it 제한} $\mathcal{F}_T$를 준다.
+구체적으로 $\mathcal{F}_T$는 모든 열린집합 $W \subset T$에 대해
+규칙
+$$
+\mathcal{F}_T(W) = \mathcal{F}(U \cap W, W, \delta|_W)
+$$
+로 정의되는 스킴 $T$ 위의 자리스키 층이다. 또한
+$f : T \to T'$가 $\mathcal{C}$의 대상 $(U, T, \delta)$와
+$(U', T', \delta')$ 사이의 사상이면 표준 {\it 비교} 사상
+\begin{equation}
+\label{equation-comparison}
+c_f : f^{-1}\mathcal{F}_{T'} \longrightarrow \mathcal{F}_T.
+\end{equation}
+이 있다. 실제로 $W' \subset T'$이 열리면 $f$는 $\mathcal{C}$의 사상
+$$
+f|_{f^{-1}W'} :
+(U \cap f^{-1}(W'), f^{-1}W', \delta|_{f^{-1}W'})
+\longrightarrow
+(U' \cap W', W', \delta|_{W'})
+$$
+을 유도한다. 따라서 $\mathcal{F}$의 제한 사상
+$(f|_{f^{-1}W'})^*$을 사용하여 사상
+$\mathcal{F}_{T'}(W') \to \mathcal{F}_T(f^{-1}W')$을 정의할 수 있다.
+이 사상들은 더 작은 열린집합으로의 제한과 명백히 양립하므로
+$\mathcal{F}_{T'}$에서 $\mathcal{F}_T$로 가는 $f$-사상을 정의한다
+(Sheaves, Section \ref{sheaves-section-presheaves-functorial}, 특히
+Sheaves, Definition \ref{sheaves-definition-f-map}을 보라).
+이로써 (\ref{equation-comparison})과 같은 사상 $c_f$를 얻는다.
+$f$가 열린 몰입이면 $\mathcal{F}_T$는 단지
+$\mathcal{F}_{T'}$를 $T$에 제한한 것이므로 $c_f$는 동형사상이다.
+
+\medskip\noindent
+거꾸로 $\mathcal{C}$의 모든 대상 $(U, T, \delta)$에 대해 자리스키
+층 $\mathcal{F}_T$가 주어지고, 위와 같은 비교 사상 $c_f$들이
+(a) 열린 몰입에 대해서는 동형사상이고 (b) 적절한 코사이클 조건을
+만족하면 $\mathcal{C}$ 위의 층을 얻는다. 이는 Topologies,
+Lemma \ref{topologies-lemma-characterize-sheaf-big}에서와 정확히
+같이 증명된다.
+
+\medskip\noindent
+$\mathcal{C}$ 위의 {\it 구조층}은 규칙
+$$
+\mathcal{O}_{X/S} :
+(U, T, \delta)
+\longmapsto
+\Gamma(T, \mathcal{O}_T)
+$$
+로 정의되는 층 $\mathcal{O}_{X/S}$이다. $\mathcal{C}$의 덮개 정의에
+의해 이는 층이다. $\mathcal{F}$가 $\mathcal{O}_{X/S}$-가군들의
+층이라고 하자. 이 경우 비교 사상들 (\ref{equation-comparison})은
+$\mathcal{O}_T$-가군의 비교 사상
+\begin{equation}
+\label{equation-comparison-modules}
+c_f : f^*\mathcal{F}_{T'} \longrightarrow \mathcal{F}_T
+\end{equation}
+을 정의한다.
+
+\medskip\noindent
+다른 종류의 예는 $\mathcal{C} = \text{CRIS}(X/S)$인지
+$\mathcal{C} = \text{Cris}(X/S)$인지에 따라 $(\Sch/X)_{Zar}$ 또는
+$X_{Zar}$ 위의 층 $\mathcal{G}$에서 시작하여 얻는다.
+규칙
+$$
+\underline{\mathcal{G}} :
+(U, T, \delta)
+\longmapsto
+\mathcal{G}(U)
+$$
+로 정의되는 $\underline{\mathcal{G}}$는 $\mathcal{C}$ 위의 층이다.
+특히 $\mathcal{G} = \mathbf{G}_a = \mathcal{O}_X$로 두면
+$$
+\underline{\mathbf{G}_a} :
+(U, T, \delta)
+\longmapsto
+\Gamma(U, \mathcal{O}_U)
+$$
+를 얻는다. 각 대상 $(U, T, \delta)$에 대한 표준 사상
+$\Gamma(T, \mathcal{O}_T) \to \Gamma(U, \mathcal{O}_U)$로 정의되는
+층의 전사 $\mathcal{O}_{X/S} \to \underline{\mathbf{G}_a}$가 있다.
+이 사상의 핵을 $\mathcal{J}_{X/S}$로 쓰므로 짧은 완전열
+$$
+0 \to
+\mathcal{J}_{X/S} \to
+\mathcal{O}_{X/S} \to
+\underline{\mathbf{G}_a} \to 0
+$$
+을 얻는다. $\mathcal{J}_{X/S}$에는 표준 분할멱 구조가 갖추어져
+있음에 유의하자. 실제로 모든 대상 $(U, T, \delta)$에서 셋째 성분
+$\delta$는 $\mathcal{O}_T \to \mathcal{O}_U$의 핵 위의 분할멱
+구조이다. 따라서 (큰) 크리스탈린 토포스는 분할멱 토포스이다.
+
+
+
+
+\section{가군 값 크리스털}
+\label{section-crystals}
+
+\noindent
+크리스털은 매우 일반적인 도구임이 드러날 것이다. 그러나 정의를
+읽기가 다소 어려울 수 있으므로 먼저 크리스탈린 사이트 위의
+가군인 경우에 정의한다.
+
+\begin{definition}
+\label{definition-modules}
+Situation \ref{situation-global}에서
+$\mathcal{C} = \text{CRIS}(X/S)$ 또는
+$\mathcal{C} = \text{Cris}(X/S)$로 두자.
+$\mathcal{F}$를 $\mathcal{C}$ 위의 $\mathcal{O}_{X/S}$-가군들의
+층이라 하자.
+\begin{enumerate}
+\item $\mathcal{C}$의 모든 대상 $(U, T, \delta)$에 대해 제한
+$\mathcal{F}_T$가 준연접 $\mathcal{O}_T$-가군이면
+$\mathcal{F}$가 {\it 국소 준연접}이라고 한다.
+\item Modules on Sites,
+Definition \ref{sites-modules-definition-site-local}의 의미에서
+준연접이면 $\mathcal{F}$가 {\it 준연접}이라고 한다.
+\item 모든 비교 사상 (\ref{equation-comparison-modules})이
+동형사상이면 $\mathcal{F}$가
+{\it $\mathcal{O}_{X/S}$-가군 값 크리스털}이라고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 개념들은 다음과 같이 서로 관련된다.
+
+\begin{lemma}
+\label{lemma-crystal-quasi-coherent-modules}
+표기 $X/S, \mathcal{I}, \gamma, \mathcal{C}, \mathcal{F}$는
+Definition \ref{definition-modules}과 같다. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $\mathcal{F}$는 준연접이다.
+\item $\mathcal{F}$는 국소 준연접이고
+$\mathcal{O}_{X/S}$-가군 값 크리스털이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하자.
+% P08-E440: frozen source line 2096 calls f an object of C although the displayed datum is a morphism; prose translated by intended role; see ERRATA_CANDIDATES.jsonl.
+$f : (U', T', \delta') \to (U, T, \delta)$를 $\mathcal{C}$의 대상이라 하자.
+(a) $\mathcal{F}_T$가 준연접 $\mathcal{O}_T$-가군이고
+(b) $c_f : f^*\mathcal{F}_T \to \mathcal{F}_{T'}$가 동형사상임을
+증명해야 한다. 가정은 덮개
+% P08-E441: frozen source lines 2100 and 2103 reverse every object from the established (U,T,delta) order to (T,U,delta); formulas preserved; see ERRATA_CANDIDATES.jsonl.
+$\{(T_i, U_i, \delta_i) \to (T, U, \delta)\}$를 찾을 수 있고,
+각 $i$에 대해 $\mathcal{F}$를
+$\mathcal{C}/(T_i, U_i, \delta_i)$에 제한한 것이 대역 표시를
+가진다는 뜻이다. (a)와 (b)를 자리스키 국소적으로 증명하면 충분하므로
+$f : (T', U', \delta') \to (T, U, \delta)$를
+$(T_i, U_i, \delta_i)$로의 기저변환으로 바꾸고,
+$\mathcal{F}$를 $\mathcal{C}/(T, U, \delta)$에 제한한 것이 대역 표시
+$$
+\bigoplus\nolimits_{j \in J}
+\mathcal{O}_{X/S}|_{\mathcal{C}/(U, T, \delta)} \longrightarrow
+\bigoplus\nolimits_{i \in I}
+\mathcal{O}_{X/S}|_{\mathcal{C}/(U, T, \delta)} \longrightarrow
+\mathcal{F}|_{\mathcal{C}/(U, T, \delta)}
+\longrightarrow 0
+$$
+를 가진다고 가정할 수 있다. 이것이 표시
+$$
+\bigoplus\nolimits_{j \in J} \mathcal{O}_T \longrightarrow
+\bigoplus\nolimits_{i \in I} \mathcal{O}_T \longrightarrow
+\mathcal{F}_T
+\longrightarrow 0
+$$
+를 줌은 명백하므로 (a)가 성립한다. 또한 이 표시는 $T'$에 제한되어
+$\mathcal{F}_{T'}$의 비슷한 표시를 주므로 (b)가 성립한다.
+
+\medskip\noindent
+(2)를 가정하자. $(U, T, \delta)$를 $\mathcal{C}$의 대상이라 하자.
+덮개의 각 원소에서 $\mathcal{C}$를 국소화한 것에 제한할 때
+$\mathcal{F}$가 대역 표시를 가지도록 하는 $(U, T, \delta)$의
+덮개를 찾아야 한다. 따라서 $T$가 아핀이라고 가정할 수 있다.
+이 경우 $\mathcal{F}_T$가 준연접 $\mathcal{O}_T$-가군이라고
+가정했으므로 표시
+$$
+\bigoplus\nolimits_{j \in J} \mathcal{O}_T \longrightarrow
+\bigoplus\nolimits_{i \in I} \mathcal{O}_T \longrightarrow
+\mathcal{F}_T
+\longrightarrow 0
+$$
+를 택할 수 있다. $\mathcal{F}$의 크리스털 성질에 의해 이는
+$\mathcal{C}$의 임의의 사상
+$f : (U', T', \delta') \to (U, T, \delta)$에 대해
+$\mathcal{F}_{T'}$의 표시로 당겨진다. 이것이 원하는
+$\mathcal{F}|_{\mathcal{C}/(U, T, \delta)}$의 표시이다.
+\end{proof}
+
+\begin{definition}
+\label{definition-crystal-quasi-coherent-modules}
+$\mathcal{F}$가 Lemma \ref{lemma-crystal-quasi-coherent-modules}의
+동치 조건들을 만족하면 $\mathcal{F}$를
+{\it 준연접 가군 값 크리스털}이라 한다. 또한 $\mathcal{F}$를
+{\it 유한 국소 자유 가군 값 크리스털}이라 하는 것은 추가로
+$\mathcal{F}$가 유한 국소 자유일 때이다.
+\end{definition}
+
+\noindent
+물론 Lemma \ref{lemma-crystal-quasi-coherent-modules}가 보이듯이
+준연접 가군은 항상 크리스털이므로 이 용어는 다소 길다.
+그러나 문헌의 표준 용어이다.
+
+\begin{remark}
+\label{remark-crystal}
+크리스털의 일반적 개념을 정식화하기 위해 스택과 강한 데카르트
+사상의 언어를 사용한다. Stacks, Definition \ref{stacks-definition-stack}과
+Categories, Definition \ref{categories-definition-cartesian-over-C}를 보라.
+Situation \ref{situation-global}에서
+$p : \mathcal{C} \to \text{Cris}(X/S)$를 스택이라 하자.
+{\it $S$에 상대적인 $X$ 위의 $\mathcal{C}$의 대상 값 크리스털}이란
+{\it 데카르트 단면} $\sigma : \text{Cris}(X/S) \to \mathcal{C}$,
+즉 $p \circ \sigma = \text{id}$이고 $\text{Cris}(X/S)$의 모든 사상
+$f$에 대해 $\sigma(f)$가 강한 데카르트 사상이 되는 함자 $\sigma$이다.
+큰 크리스탈린 사이트에 대해서도 마찬가지이다.
+\end{remark}
+
+
+
+
+
+\section{미분 가군의 층}
+\label{section-differentials-sheaf}
+
+\noindent
+이 절에서는 더 자연스러워 보이는 (작은) 크리스탈린 사이트만을
+사용한다. 다음과 같이 Definition \ref{definition-derivation}을
+전역화한다.
+
+\begin{definition}
+\label{definition-global-derivation}
+Situation \ref{situation-global}에서
+$\mathcal{F}$를 $\text{Cris}(X/S)$ 위의
+$\mathcal{O}_{X/S}$-가군의 층이라 하자.
+{\it $S$-미분 $D : \mathcal{O}_{X/S} \to \mathcal{F}$}이란
+층의 사상으로서, $\text{Cris}(X/S)$의 모든 대상
+$(U, T, \delta)$에 대해 사상
+$$
+D : \Gamma(T, \mathcal{O}_T) \longrightarrow \Gamma(T, \mathcal{F})
+$$
+이 분할멱 $\Gamma(V, \mathcal{O}_V)$-미분이 되는 것을 말한다.
+여기서 $V \subset S$는 $T \to S$가 $V$를 통해 분해되는 임의의
+열린집합이다.
+\end{definition}
+
+\noindent
+이는 $D$가 가법적이고, 라이프니츠 법칙을 만족하며, S에서 오는
+함수들을 영으로 보내고, 분할멱 아이디얼 $\mathcal{J}_{X/S}$의
+국소 단면 $f$에 대해 $D(f^{[n]}) = f^{[n - 1]}D(f)$를 만족한다는
+뜻이다. 이는 이제 설명할 매우 일반적인 개념의 특수한 경우이다.
+
+\medskip\noindent
+다음 논의를 Modules on Sites, Section
+\ref{sites-modules-section-differentials}와 비교하라.
+$\mathcal{C}$를 사이트, $\mathcal{A} \to \mathcal{B}$를
+$\mathcal{C}$ 위의 환의 층들의 사상,
+$\mathcal{J} \subset \mathcal{B}$를 아이디얼의 층,
+$\delta$를 $\mathcal{J}$ 위의 분할멱 구조, $\mathcal{F}$를
+$\mathcal{B}$-가군의 층이라 하자. 그러면
+{\it 분할멱 $\mathcal{A}$-미분}
+$D : \mathcal{B} \to \mathcal{F}$이라는 개념이 있다.
+이는 $D$가 $\mathcal{A}$-선형이고, 라이프니츠 법칙을 만족하며,
+$\mathcal{J}$의 국소 단면 $x$에 대해
+$D(\delta_n(x)) = \delta_{n - 1}(x)D(x)$를 만족한다는 뜻이다.
+이 상황에는 {\it 보편 분할멱 $\mathcal{A}$-미분}
+$$
+\text{d}_{\mathcal{B}/\mathcal{A}, \delta} :
+\mathcal{B}
+\longrightarrow
+\Omega_{\mathcal{B}/\mathcal{A}, \delta}
+$$
+이 존재한다. 더욱이 $\text{d}_{\mathcal{B}/\mathcal{A}, \delta}$는
+합성
+$$
+\mathcal{B}
+\longrightarrow
+\Omega_{\mathcal{B}/\mathcal{A}}
+\longrightarrow
+\Omega_{\mathcal{B}/\mathcal{A}, \delta}
+$$
+이다. 여기서 첫째 사상은 Modules on Sites, Lemma
+\ref{sites-modules-lemma-universal-module}의 증명에서 구성한 보편
+미분이고, 둘째 화살표는 국소 단면들
+$\text{d}_{\mathcal{B}/\mathcal{A}}(\delta_n(x)) -
+\delta_{n - 1}(x)\text{d}_{\mathcal{B}/\mathcal{A}}(x)$가 생성하는
+부분가군에 의한 몫이다.
+
+\medskip\noindent
+이를 다음과 같이 상대적 개념으로 옮긴다. 환 달린 토포스의 사상
+$(f, f^\sharp) : (\Sh(\mathcal{C}), \mathcal{O}) \to
+(\Sh(\mathcal{C}'), \mathcal{O}')$,
+아이디얼의 층 $\mathcal{J} \subset \mathcal{O}$,
+$\mathcal{J}$ 위의 분할멱 구조 $\delta$, 그리고
+$\mathcal{O}$-가군의 층 $\mathcal{F}$가 주어졌다고 하자.
+이 상황에서 $D : \mathcal{O} \to \mathcal{F}$가 분할멱
+$\mathcal{O}'$-미분이라는 것은 $D$가 위에서 정의한 분할멱
+$f^{-1}\mathcal{O}'$-미분이라는 뜻이다. 또한
+$$
+\Omega_{\mathcal{O}/\mathcal{O}', \delta} =
+\Omega_{\mathcal{O}/f^{-1}\mathcal{O}', \delta}
+$$
+라고 쓰며, 이는 보편 분할멱 $\mathcal{O}'$-미분이 값을 갖는
+가군이다.
+
+\medskip\noindent
+이를 구조 사상
+% P08-E442: frozen source retains an uppercase site subscript here.
+$$
+(X/S)_{\text{Cris}} \longrightarrow \Sh(S_{Zar})
+$$
+(Remark \ref{remark-structure-morphism}을 보라)에 적용하면 위의
+Definition \ref{definition-global-derivation}의 개념을 되찾는다.
+특히 보편 분할멱 미분
+% P08-E443: frozen source switches from upright universal-differential notation.
+$$
+d_{X/S} : \mathcal{O}_{X/S} \to \Omega_{X/S}
+$$
+이 존재한다. 분할멱과 양립하는 미분 가군임을 나타내는 장식은
+표기에서 생략한다. (크리스탈린 사이트 위 구조층의 보통 미분
+가군을 고려할 사람은 없을 듯하다.)
+
+\begin{lemma}
+\label{lemma-module-differentials-divided-power-scheme}
+$(T, \mathcal{J}, \delta)$를 분할멱 스킴이라 하자.
+$T \to S$를 스킴의 사상이라 하자. 위에서 설명한 몫
+$\Omega_{T/S} \to \Omega_{T/S, \delta}$는 준연접
+$\mathcal{O}_T$-가군이다. $S$의 아핀 열린집합 $V \subset S$로
+가는 아핀 열린집합 $W \subset T$에 대해
+$$
+\Gamma(W, \Omega_{T/S, \delta}) =
+\Omega_{\Gamma(W, \mathcal{O}_W)/\Gamma(V, \mathcal{O}_V), \delta}
+$$
+이다. 여기서 우변은 Section \ref{section-differentials}에서
+구성한 것이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-module-of-differentials}
+Situation \ref{situation-global}에서 다음이 성립한다.
+$\text{Cris}(X/S)$의 $(U, T, \delta)$에 대해 $T$로의 제한
+$(\Omega_{X/S})_T$는 $\Omega_{T/S, \delta}$이고, 제한
+$\text{d}_{X/S}|_T$는 $\text{d}_{T/S, \delta}$와 같다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-module-of-differentials-on-affine}
+Situation \ref{situation-global}에서 다음이 성립한다.
+$\text{Cris}(X/S)$의 임의의 아핀 대상 $(U, T, \delta)$가
+아핀 열린집합 $V \subset S$로 갈 때
+$$
+\Gamma((U, T, \delta), \Omega_{X/S}) =
+\Omega_{\Gamma(T, \mathcal{O}_T)/\Gamma(V, \mathcal{O}_V), \delta}
+$$
+이다. 여기서 우변은 Section \ref{section-differentials}에서
+구성한 것이다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{lemma-module-differentials-divided-power-scheme} and
+\ref{lemma-module-of-differentials}를 결합하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-describe-omega-small}
+Situation \ref{situation-global}에서 다음이 성립한다.
+$(U, T, \delta)$를 $\text{Cris}(X/S)$의 대상이라 하자.
+$\text{Cris}(X/S)$에서
+$$
+(U(1), T(1), \delta(1)) = (U, T, \delta) \times (U, T, \delta)
+$$
+라 하자. $\mathcal{K} \subset \mathcal{O}_{T(1)}$를 닫힌 몰입
+$\Delta : T \to T(1)$에 대응하는 아이디얼의 준연접 층이라 하자.
+그러면
+% P08-E444: frozen English omits "power" in "divided power structure".
+$\mathcal{K} \subset \mathcal{J}_{T(1)}$는 $\mathcal{J}_{T(1)}$ 위의
+분할멱 구조에 의해 보존되고
+$$
+(\Omega_{X/S})_T = \mathcal{K}/\mathcal{K}^{[2]}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$U \to X$가 열린 몰입이고 (\ref{equation-forget-small})이 곱과
+가환하므로 $U = U(1)$임에 주의하라. 따라서
+$\mathcal{K} \subset \mathcal{J}_{T(1)}$임을 알 수 있다.
+이 사실로부터 $T$ 위에서 아핀 국소적으로 작업하고 Lemmas
+\ref{lemma-module-of-differentials-on-affine} and
+\ref{lemma-diagonal-and-differentials-affine-site}를 사용하면
+보조정리를 얻는다.
+\end{proof}
+
+\noindent
+$\Omega_{X/S}$는 준연접 $\mathcal{O}_{X/S}$-가군 값 크리스털이
+아니다. 그러나 밀접하게 관련된 다음 두 성질을 만족한다
+(Lemma \ref{lemma-crystal-quasi-coherent-modules}와 비교하라).
+
+\begin{lemma}
+\label{lemma-omega-locally-quasi-coherent}
+Situation \ref{situation-global}에서 다음이 성립한다.
+미분 가군의 층 $\Omega_{X/S}$는 다음 두 성질을 가진다.
+\begin{enumerate}
+\item $\Omega_{X/S}$는 국소 준연접이다.
+\item $\text{Cris}(X/S)$의 임의의 사상
+$(U, T, \delta) \to (U', T', \delta')$에서
+$f : T \to T'$가 닫힌 몰입이면 사상
+$c_f : f^*(\Omega_{X/S})_{T'} \to (\Omega_{X/S})_T$는 전사이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 Lemmas \ref{lemma-module-differentials-divided-power-scheme} and
+\ref{lemma-module-of-differentials}를 결합하면 따른다.
+(2)는 $(\Omega_{X/S})_T = \Omega_{T/S, \delta}$가
+$\Omega_{T/S}$의 몫이고
+$f^*\Omega_{T'/S} \to \Omega_{T/S}$가 전사라는 사실에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+\section{두 보편 두꺼워짐}
+\label{section-universal-thickenings}
+
+\noindent
+이 절의 구성들은 크리스탈린 사이트 위의 가군 값 크리스털에
+접속을 정의하는 데 쓰인다. 어떤 의미에서 여기의 구성들은
+Section \ref{section-explicit-thickenings}의 구성들을
+``층화하고 보편화한'' 판이다.
+
+\begin{remark}
+\label{remark-first-order-thickening}
+Situation \ref{situation-global}에서 다음을 생각하자.
+$(U, T, \delta)$를 $\text{Cris}(X/S)$의 대상이라 하자.
+Lemma \ref{lemma-module-of-differentials}에서처럼
+$\Omega_{T/S, \delta} = (\Omega_{X/S})_T$라고 쓰자.
+$T$의 일차 두꺼워짐 $T'$을 명시적으로 서술한다. 즉
+$$
+\mathcal{O}_{T'} = \mathcal{O}_T \oplus \Omega_{T/S, \delta}
+$$
+로 놓고, $\Omega_{T/S, \delta}$가 제곱 영 아이디얼이 되도록
+대수 구조를 준다. $\mathcal{J} \subset \mathcal{O}_T$를 닫힌 몰입
+$U \to T$의 아이디얼 층이라 하고
+$\mathcal{J}' = \mathcal{J} \oplus \Omega_{T/S, \delta}$로 놓자.
+다음 식으로 $\mathcal{J}'$ 위의 분할멱 구조를 정의한다.
+$$
+\delta_n'(f, \omega) = (\delta_n(f), \delta_{n - 1}(f)\omega),
+$$
+Lemma \ref{lemma-divided-power-first-order-thickening}을 보라.
+두 환 사상
+$$
+p_0, p_1 : \mathcal{O}_T \to \mathcal{O}_{T'}
+$$
+이 있다. 첫째 것은 $f \mapsto (f, 0)$으로, 둘째 것은
+$f \mapsto (f, \text{d}_{T/S, \delta}f)$로 주어진다.
+둘 다 $\mathcal{J}$와 $\mathcal{J}'$ 위의 분할멱 구조와 양립하고,
+몫사상 $\mathcal{O}_{T'} \to \mathcal{O}_T$도 그러하다.
+따라서 $\text{Cris}(X/S)$의 대상 $(U, T', \delta')$과 가환 도식
+$$
+\xymatrix{
+& T \ar[ld]_{\text{id}} \ar[d]^i \ar[rd]^{\text{id}} \\
+T & T' \ar[l]_{p_0} \ar[r]^{p_1} & T
+}
+$$
+을 얻는다. 이는 $\text{Cris}(X/S)$의 도식이다. 여기서 $i$는 아이디얼 층이
+$\Omega_{T/S, \delta}$와 동일시되는 일차 두꺼워짐이고,
+$p_1 - p_0 : \mathcal{O}_T \to \mathcal{O}_{T'}$는 보편 미분
+$\text{d}_{T/S, \delta}$와 포함
+$\Omega_{T/S, \delta} \to \mathcal{O}_{T'}$의 합성으로 동일시된다.
+\end{remark}
+
+\begin{remark}
+\label{remark-second-order-thickening}
+Situation \ref{situation-global}에서 다음을 생각하자.
+$(U, T, \delta)$를 $\text{Cris}(X/S)$의 대상이라 하자.
+Lemma \ref{lemma-module-of-differentials}에서처럼
+$\Omega_{T/S, \delta} = (\Omega_{X/S})_T$라고 쓰자.
+그 둘째 외멱을 $\Omega^2_{T/S, \delta}$로도 쓴다.
+$T$의 이차 두꺼워짐 $T''$을 명시적으로 서술한다. 즉
+$$
+\mathcal{O}_{T''} =
+\mathcal{O}_T \oplus \Omega_{T/S, \delta} \oplus \Omega_{T/S, \delta}
+\oplus \Omega^2_{T/S, \delta}
+$$
+로 놓고, 곱을 다음과 같이 정의하여 대수 구조를 준다.
+$$
+(f, \omega_1, \omega_2, \eta) \cdot
+(f', \omega_1', \omega_2', \eta') =
+(ff', f\omega_1' + f'\omega_1, f\omega_2' + f'\omega_2,
+f\eta' + f'\eta + \omega_1 \wedge \omega_2' + \omega_1' \wedge \omega_2).
+$$
+$\mathcal{J} \subset \mathcal{O}_T$를 닫힌 몰입 $U \to T$의
+아이디얼 층이라 하자. $\mathcal{J}''$을 사영
+$\mathcal{O}_{T''} \to \mathcal{O}_T$에 의한 $\mathcal{J}$의
+역상이라 하자. 다음 식으로 $\mathcal{J}''$ 위의 분할멱 구조를
+정의한다.
+$$
+\delta_n''(f, \omega_1, \omega_2, \eta) =
+(\delta_n(f), \delta_{n - 1}(f)\omega_1, \delta_{n - 1}(f)\omega_2,
+\delta_{n - 1}(f)\eta + \delta_{n - 2}(f)\omega_1 \wedge \omega_2)
+$$
+Lemma \ref{lemma-divided-power-second-order-thickening}을 보라.
+다음과 같이 주어지는 세 환 사상
+$q_0, q_1, q_2 : \mathcal{O}_T \to \mathcal{O}_{T''}$이 있다.
+\begin{align*}
+q_0(f) & = (f, 0, 0, 0), \\
+q_1(f) & = (f, \text{d}f, 0, 0), \\
+q_2(f) & = (f, \text{d}f, \text{d}f, 0)
+\end{align*}
+여기서 $\text{d} = \text{d}_{T/S, \delta}$이다.
+셋 모두 $\mathcal{J}$와 $\mathcal{J}''$ 위의 분할멱 구조와
+양립함에 주의하라. 또한 세 환 사상
+$q_{01}, q_{12}, q_{02} : \mathcal{O}_{T'} \to \mathcal{O}_{T''}$이
+있는데, $\mathcal{O}_{T'}$은 Remark
+\ref{remark-first-order-thickening}에서와 같다. 구체적으로
+\begin{align*}
+q_{01}(f, \omega) & = (f, \omega, 0, 0), \\
+q_{12}(f, \omega) & =
+(f, \text{d}f, \omega, \text{d}\omega), \\
+q_{02}(f, \omega) & = (f, \omega, \omega, 0)
+\end{align*}
+로 놓는다. 이들도 주어진 분할멱 구조와 양립한다.
+$q_{12}$에 대한 검산을 해 보자. 다음 식에 의해 $q_{12}$는
+환 준동형이다.
+\begin{align*}
+q_{12}(f, \omega)q_{12}(g, \eta) & =
+(f, \text{d}f, \omega, \text{d}\omega)(g, \text{d}g, \eta, \text{d}\eta) \\
+& =
+(fg, f\text{d}g + g \text{d}f, f\eta + g\omega,
+f\text{d}\eta + g\text{d}\omega + \text{d}f \wedge \eta +
+\text{d}g \wedge \omega) \\
+& = q_{12}(fg, f\eta + g\omega) = q_{12}((f, \omega)(g, \eta))
+\end{align*}
+또한 다음 식에 의해 $q_{12}$는 분할멱과 양립한다.
+\begin{align*}
+\delta_n''(q_{12}(f, \omega)) & =
+\delta_n''((f, \text{d}f, \omega, \text{d}\omega)) \\
+& =
+(\delta_n(f), \delta_{n - 1}(f)\text{d}f, \delta_{n - 1}(f)\omega,
+\delta_{n - 1}(f)\text{d}\omega + \delta_{n - 2}(f)\text{d}(f) \wedge \omega)
+\\
+& = q_{12}((\delta_n(f), \delta_{n - 1}(f)\omega)) =
+q_{12}(\delta'_n(f, \omega))
+\end{align*}
+$q_{01}$과 $q_{02}$에 대한 검산은 더 쉽다.
+$q_0 = q_{01} \circ p_0$, $q_1 = q_{01} \circ p_1$,
+$q_1 = q_{12} \circ p_0$, $q_2 = q_{12} \circ p_1$,
+$q_0 = q_{02} \circ p_0$, $q_2 = q_{02} \circ p_1$임에 주의하라.
+따라서 $(U, T'', \delta'')$은 $\text{Cris}(X/S)$의 대상이고,
+위에서 서술한 관계들을 만족하는 $\text{Cris}(X/S)$의 사상들
+$$
+\xymatrix{
+T''
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+T'
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+&
+T
+}
+$$
+을 얻는다. 응용에서는 $q_i : T'' \to T$와
+$q_{ij} : T'' \to T'$로 위에서 서술한 환 사상들에 대응하는
+사상들을 나타낸다.
+\end{remark}
+
+
+
+
+
+
+\section{드람 복합체}
+\label{section-de-Rham}
+
+\noindent
+Situation \ref{situation-global}에서 다음을 생각하자.
+(작은) 크리스탈린 사이트에서 작업하면서 $i \geq 0$에 대해
+$\Omega^i_{X/S} = \wedge^i_{\mathcal{O}_{X/S}} \Omega_{X/S}$로
+정의한다. 보편 $S$-미분 $\text{d}_{X/S}$는
+$\text{Cris}(X/S)$ 위의 {it 드람 복합체}
+$$
+\mathcal{O}_{X/S} \to \Omega^1_{X/S} \to \Omega^2_{X/S} \to \ldots
+$$
+를 준다. Lemma \ref{lemma-module-of-differentials-on-affine} and
+Remark \ref{remark-divided-powers-de-rham-complex}을 보라.
+
+
+\section{접속}
+\label{section-connections}
+
+\noindent
+Situation \ref{situation-global}에서 다음을 생각하자.
+$\text{Cris}(X/S)$ 위의 $\mathcal{O}_{X/S}$-가군
+$\mathcal{F}$가 주어졌을 때 {it 접속}이란 아벨 층의 사상
+$$
+\nabla :
+\mathcal{F}
+\longrightarrow
+\mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega_{X/S}
+$$
+으로서, $\mathcal{F}$와 $\mathcal{O}_{X/S}$의 국소 단면 $s, f$에
+대해 $\nabla(f s) = f\nabla(s) + s \otimes \text{d}f$를 만족하는
+것이다. 접속이 주어지면 Remark \ref{remark-connection}에서처럼
+규칙 $\nabla(s \otimes \omega) =
+\nabla(s) \wedge \omega + s \otimes \text{d}\omega$로 정의되는
+표준 사상들
+$
+\nabla :
+\mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega^i_{X/S}
+\longrightarrow
+\mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega^{i + 1}_{X/S}
+$
+이 있다. $\nabla \circ \nabla = 0$이면 접속이
+{it 적분 가능}하다고 한다. $\nabla$가 적분 가능하면
+$\text{Cris}(X/S)$ 위의 {it 드람 복합체}
+$$
+\mathcal{F} \to
+\mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega^1_{X/S} \to
+\mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega^2_{X/S} \to \ldots
+$$
+를 얻는다. 모든 $\mathcal{O}_{X/S}$-가군 값 크리스털에는 표준
+적분 가능 접속이 갖추어져 있다.
+
+\begin{lemma}
+\label{lemma-automatic-connection}
+Situation \ref{situation-global}에서 다음이 성립한다.
+$\mathcal{F}$를 $\text{Cris}(X/S)$ 위의
+$\mathcal{O}_{X/S}$-가군 값 크리스털이라 하자. 그러면
+$\mathcal{F}$에는 표준 적분 가능 접속이 갖추어진다.
+\end{lemma}
+
+\begin{proof}
+$(U, T, \delta)$가 $\text{Cris}(X/S)$의 대상이라고 하자.
+Remark \ref{remark-first-order-thickening}에서 구성한,
+$(\Omega_{X/S})_T = \Omega_{T/S, \delta}$에 의한 $T$의
+무한소 두꺼워짐을 $(U, T', \delta')$라 하자. 여기에는 사영
+$p_0, p_1 : T' \to T$와 대각 사상 $i : T \to T'$이 있다.
+가정에 의해 $\mathcal{O}_{T'}$-가군의 동형들
+$$
+p_0^*\mathcal{F}_T \xrightarrow{c_0}
+\mathcal{F}_{T'} \xleftarrow{c_1}
+p_1^*\mathcal{F}_T
+$$
+을 얻는다. $c = c_1^{-1} \circ c_0$을 $i$로 $T$에 당겨오면
+$\mathcal{F}_T$의 항등사상을 얻는다. 따라서
+$s \in \Gamma(T, \mathcal{F}_T)$이면
+$\nabla(s) = p_1^*s - c(p_0^*s)$는 $p_1^*\mathcal{F}_T$의
+단면이고 $i$로 당겨오면 영이 된다. 그러므로 $\nabla(s)$는
+$$
+\mathcal{F}_T
+\otimes_{\mathcal{O}_T}
+\Omega_{T/S, \delta}
+$$
+의 단면이다. 실제로 구성에 의해
+$\mathcal{O}_{T'} = \mathcal{O}_T \oplus \Omega_{T/S, \delta}$이므로
+이 가군은 $p_1^*\mathcal{F}_T \to \mathcal{F}_T$의 핵이다.
+Remark \ref{remark-first-order-thickening}의 $\text{d}$에 대한
+서술을 사용하면 $\nabla(fs) =
+f\nabla(s) + s \otimes \text{d}(f)$임을 쉽게 확인할 수 있다.
+
+\medskip\noindent
+이렇게 얻은 사상들의 모음
+$$
+\nabla : \Gamma(T, \mathcal{F}_T) \to
+\Gamma(T, \mathcal{F}_T \otimes_{\mathcal{O}_T} \Omega_{T/S, \delta})
+$$
+은 $T'$의 구성이 $T$에 대해 함자적이므로 $T$에 대해 함자적이다.
+따라서 접속을 얻는다.
+
+\medskip\noindent
+접속이 적분 가능함을 보이기 위해 Remark
+\ref{remark-second-order-thickening}에서 구성한 대상
+$(U, T'', \delta'')$을 생각한다. $\mathcal{F}$가 층이므로
+$$
+\xymatrix{
+q_0^*\mathcal{F}_T \ar[rr]_{q_{01}^*c} \ar[rd]_{q_{02}^*c} & &
+q_1^*\mathcal{F}_T \ar[ld]^{q_{12}^*c} \\
+& q_2^*\mathcal{F}_T
+}
+$$
+은 $\mathcal{O}_{T''}$-가군의 가환 도식이다.
+$s \in \Gamma(T, \mathcal{F}_T)$에 대해
+$c(p_0^*s) = p_1^*s - \nabla(s)$이다.
+$\nabla(s) = \sum p_1^*s_i \cdot \omega_i$라 쓰자. 여기서 $s_i$는
+$\mathcal{F}_T$의 국소 단면이고 $\omega_i$는
+$\Omega_{T/S, \delta}$의 국소 단면이다. $\omega_i$를
+$\mathcal{O}_{T'}$의 구조층의 국소 단면으로 생각하므로 텐서곱
+대신 곱을 쓴다. 한편으로
+\begin{align*}
+q_{12}^*c \circ q_{01}^*c(q_0^*s) & =
+q_{12}^*c(q_1^*s - \sum q_1^*s_i \cdot q_{01}^*\omega_i) \\
+& =
+q_2^*s - \sum q_2^*s_i \cdot q_{12}^*\omega_i -
+\sum q_2^*s_i \cdot q_{01}^*\omega_i +
+\sum q_{12}^*\nabla(s_i) \cdot q_{01}^*\omega_i
+\end{align*}
+이고, 다른 한편으로
+$$
+q_{02}^*c(q_0^*s) = q_2^*s - \sum q_2^*s_i \cdot q_{02}^*\omega_i.
+$$
+Remark \ref{remark-second-order-thickening}의 공식들로부터
+$q_{01}^*\omega_i + q_{12}^*\omega_i - q_{02}^*\omega_i = \text{d}\omega_i$임을
+알 수 있다. 따라서 위 두 식의 차는
+$$
+\sum q_2^*s_i \cdot \text{d}\omega_i -
+\sum q_{12}^*\nabla(s_i) \cdot q_{01}^*\omega_i
+$$
+이다. $\mathcal{O}_{T''}$ 위의 곱의 정의에 의해
+$q_{12}^*\omega \cdot q_{01}^*\omega' = \omega' \wedge \omega =
+- \omega \wedge \omega'$임에 주의하라. 따라서 위 식은
+$q_2^*\mathcal{F}$의 부분층
+$\mathcal{F}_T \otimes \Omega^2_{T/S, \delta}$의 단면으로 본
+$\nabla^2(s)$이다. 그러므로 적분 가능성 조건을 얻는다.
+\end{proof}
+
+
+
+
+
+\section{쌍대단체 대수}
+\label{section-cosimplicial}
+
+\noindent
+이 절은 다른 곳으로 옮겨야 한다. {it 쌍대단체 환}이란 환의
+범주에서의 쌍대단체 대상이다. 환 $R$이 주어졌을 때
+{it 쌍대단체 $R$-대수}란 $R$-대수의 범주에서의 쌍대단체 대상이다.
+쌍대단체 환 $A_*$ 안의 {it 쌍대단체 아이디얼}은 모든 $n$에 대해
+아이디얼 $I_n \subset A_n$을 주되, $\Delta$의 모든
+$f : [n] \to [m]$에 대해 $A(f)(I_n) \subset I_m$이 되게 한 것이다.
+
+\medskip\noindent
+$A_*$를 쌍대단체 환이라 하자. $\mathcal{C}$를 다음과 같은 쌍
+$(A, M)$들의 범주라 하자. 여기서 $A$는 환이고 $M$은 $A$ 위의
+가군이다. 사상 $(A, M) \to (A', M')$은 환 사상 $A \to A'$과
+$A$-가군 사상 $M \to M'$로 이루어진다. 이때 $M'$은
+$A \to A'$과 $M'$ 위의 $A'$-가군 구조를 통해 $A$-가군으로 본다.
+이제 {it $A_*$ 위의 쌍대단체 가군 $M_*$}을 첫째 성분이
+$A_*$와 같은 $\mathcal{C}$의 쌍대단체 대상 $(A_*, M_*)$로
+정의할 수 있다. {it $A_*$ 위의 쌍대단체 가군의 준동형
+$\varphi_* : M_* \to N_*$}이란 첫째 성분이 $1_{A_*}$인
+$\mathcal{C}$의 쌍대단체 대상의 사상
+$(A_*, M_*) \to (A_*, N_*)$이다.
+
+\medskip\noindent
+$A_*$ 위의 쌍대단체 가군의 준동형
+$\varphi_*, \psi_* : M_* \to N_*$ 사이의 {it 호모토피}란
+대응하는 사상 $(A_*, M_*) \to (A_*, N_*)$ 사이의 호모토피로서
+첫째 성분이 자명한 호모토피인 것이다(Simplicial, Example
+\ref{simplicial-example-trivial-homotopy}의 쌍대).
+이를 구체적으로 적어 보자. 그러한 호모토피는 쌍대단체 아벨 군의
+준동형으로서 $\varphi_*$와 $\psi_*$ 사이의 호모토피
+$$
+h : M_* \longrightarrow \Hom(\Delta[1], N_*)
+$$
+로서, 각 $n$에 대해 사상
+$h_n : M_n \to \prod_{\alpha \in \Delta[1]_n} N_n$이
+$A_n$-선형인 것이다. 다음 보조정리는 Simplicial, Lemma
+\ref{simplicial-lemma-functorial-homotopy}의 쌍대단체 가군 판이다.
+
+\begin{lemma}
+\label{lemma-homotopy-tensor}
+$A_*$를 쌍대단체 환이라 하자.
+$\varphi_*, \psi_* : K_* \to M_*$를 쌍대단체 $A_*$-가군의
+준동형들이라 하자.
+\begin{enumerate}
+\item
+\label{item-tensor}
+$\varphi_*$와 $\psi_*$가 호모토픽이면, 임의의 쌍대단체
+$A_*$-가군 $L_*$에 대해
+$$
+\varphi_* \otimes 1, \psi_* \otimes 1 :
+K_* \otimes_{A_*} L_* \longrightarrow M_* \otimes_{A_*} L_*
+$$
+는 호모토픽이다.
+\item
+\label{item-wedge}
+$\varphi_*$와 $\psi_*$가 호모토픽이면
+$$
+\wedge^i(\varphi_*), \wedge^i(\psi_*) :
+\wedge^i(K_*) \longrightarrow \wedge^i(M_*)
+$$
+는 호모토픽이다.
+\item
+\label{item-base-change}
+$\varphi_*$와 $\psi_*$가 호모토픽이고 $A_* \to B_*$가 쌍대단체
+환의 준동형이면
+$$
+\varphi_* \otimes 1, \psi_* \otimes 1 :
+K_* \otimes_{A_*} B_* \longrightarrow M_* \otimes_{A_*} B_*
+$$
+는 쌍대단체 $B_*$-가군의 준동형으로서 호모토픽이다.
+\item
+\label{item-completion}
+$I_* \subset A_*$가 쌍대단체 아이디얼이면 완비화 사이의 유도 사상
+$$
+\varphi^\wedge_*, \psi^\wedge_* :
+K_*^\wedge \longrightarrow M_*^\wedge
+$$
+은 호모토픽이다.
+\item 필요하면 여기에 예컨대 대칭멱 등을 더하라.
+\end{enumerate}
+\end{lemma}
+
+% P08-E445: frozen proof changes the lemma's K,M variables to M,N and then
+% maps K_n to a product of K_n; every suspect formula below is preserved.
+\begin{proof}
+주어진 호모토피를
+$h : M_* \longrightarrow \Hom(\Delta[1], N_*)$라 하자.
+차수 $n$에서
+$$
+h_n = (h_{n, \alpha}) :
+K_n \longrightarrow
+\prod\nolimits_{\alpha \in \Delta[1]_n} K_n
+$$
+이다. Simplicial, Section
+\ref{simplicial-section-homotopy-cosimplicial}을 보라.
+$h_{n, \alpha}$들의 모음이 호모토피를 이루기 위한 필요충분조건은
+모든 $f : [n] \to [m]$에 대해
+$$
+h_{m, \alpha} \circ M_*(f) = N_*(f) \circ h_{n, \alpha \circ f}
+$$
+가 성립하는 것이다. Simplicial, Equation
+(\ref{simplicial-equation-property-homotopy-cosimplicial})을 보라.
+또한 $\psi_n = h_{n, 0 : [n] \to [1]}$이고
+$\varphi_n = h_{n, 1 : [n] \to [1]}$이어야 한다.
+
+\medskip\noindent
+보조정리의 각 경우에 대응하는 사상들을 만들 수 있다.
+경우 (\ref{item-tensor}). 차수 $n$에서
+$$
+(h \otimes 1)_{n, \alpha} = h_{n, \alpha} \otimes 1_{L_n} :
+K_n \otimes_{A_n} L_n
+\longrightarrow
+M_n \otimes_{A_n} L_n.
+$$
+로 정의한 호모토피 $h \otimes 1$을 쓰면 된다.
+경우 (\ref{item-wedge}). 차수 $n$에서
+% P08-E446: frozen source omits the exterior-power exponent on the domain.
+$$
+\wedge^i(h)_{n, \alpha} = \wedge^i(h_{n, \alpha}) :
+\wedge_{A_n}(K_n)
+\longrightarrow
+\wedge^i_{A_n}(M_n).
+$$
+로 정의한 호모토피 $\wedge^ih$를 쓰면 된다.
+경우 (\ref{item-base-change}). 차수 $n$에서
+$$
+(h \otimes 1)_{n, \alpha} = h_{n, \alpha} \otimes 1 :
+K_n \otimes_{A_n} B_n
+\longrightarrow
+M_n \otimes_{A_n} B_n.
+$$
+로 정의한 호모토피 $h \otimes 1$을 쓰면 된다.
+경우 (\ref{item-completion}). 차수 $n$에서
+$$
+(h^\wedge)_{n, \alpha} = h_{n, \alpha}^\wedge :
+K_n^\wedge
+\longrightarrow
+M_n^\wedge.
+$$
+로 정의한 호모토피 $h^\wedge$를 쓰면 된다. 각
+$h_{n, \alpha}$가 $A_n$-선형이므로 이것이 성립한다.
+\end{proof}
+
+
+
+
+
+
+\section{준연접 가군 값 크리스털}
+\label{section-quasi-coherent-crystals}
+
+\noindent
+Situation \ref{situation-affine}에서 다음을 생각하자.
+$X = \Spec(C)$와 $S = \Spec(A)$로 놓는다.
+$\text{Cris}(X/S)$ 위의 준연접 가군 값 크리스털들을 분류할 것이다.
+그 전에 몇 가지 표기를 고정한다.
+
+\medskip\noindent
+$A$ 위의 다항식환 $P = A[x_i]$와 핵이
+$J = \Ker(P \to C)$인 $A$-대수의 전사 $P \to C$를 택한다.
+$p$-진 완비화된 분할멱 포락을
+\begin{equation}
+\label{equation-D}
+D = \lim_e D_{P, \gamma}(J) / p^eD_{P, \gamma}(J)
+\end{equation}
+로 놓는다. 이 환에는 분할멱 아이디얼 $\bar J$와 분할멱 구조
+$\bar \gamma$가 주어진다. Lemma \ref{lemma-list-properties}를 보라.
+$D_e = D/p^eD$로 놓고 $D_e$에서 $\bar J$의 상을 $\bar J_e$로 쓴다.
+분할멱 미분 가군의 $p$-진 완비화를 나타내는 축약 표기로
+\begin{equation}
+\label{equation-omega-D}
+\Omega_D = \lim_e \Omega_{D_e/A, \bar\gamma} =
+\lim_e \Omega_{D/A, \bar\gamma}/p^e\Omega_{D/A, \bar\gamma}
+\end{equation}
+를 사용할 것이다. Lemma \ref{lemma-differentials-completion}을 보라.
+이는 $\Omega_{D_{P, \gamma}(J)/A, \bar\gamma}$의 $p$-진
+완비화이기도 하며, Lemma
+\ref{lemma-module-differentials-divided-power-envelope}에 의해
+$\text{d}x_i$들을 기저로 하는 자유 가군이다. 따라서
+$\Omega_D$의 모든 원소는 $\sum f_i\text{d}x_i$ 꼴로 유일하게
+쓸 수 있고, 모든 $e$에 대해 $p^eD$에 속하지 않는 $f_i$는
+유한 개뿐이다. 더욱이 사상들
+$\text{d}_{D_e/A, \bar\gamma} : D_e \to \Omega_{D_e/A, \bar\gamma}$는
+서로 맞물려 $p$-진 완비화 위의 분할멱 $A$-미분
+\begin{equation}
+\label{equation-derivation-D}
+\text{d} : D \longrightarrow \Omega_D
+\end{equation}
+을 정의한다.
+
+\medskip\noindent
+``$\Spec(D)$의 곱 $\Spec(D(n))$''들도 필요하다. 설명은 Proposition
+\ref{proposition-compute-cohomology}과 그 증명을 보라. 형식적으로는
+다음과 같이 정의한다. $n \geq 0$에 대해
+$J(n) = \Ker(P \otimes_A \ldots \otimes_A P \to C)$라 하자.
+여기서 텐서곱은 $n + 1$개의 인자를 가진다. $p$-진 완비화된
+분할멱 포락을
+\begin{equation}
+\label{equation-Dn}
+D(n) = \lim_e
+D_{P \otimes_A \ldots \otimes_A P, \gamma}(J(n))/
+p^eD_{P \otimes_A \ldots \otimes_A P, \gamma}(J(n))
+\end{equation}
+로 놓는다. 그 분할멱 아이디얼을 $\bar J(n)$, 그 분할멱들을
+$\bar \gamma(n)$으로 쓴다. 또한 $D(n)_e = D(n)/p^eD(n)$과
+$p$-진 완비화된 미분 가군
+% P08-E447: frozen formulas use bar-gamma rather than the defined bar-gamma(n).
+\begin{equation}
+\label{equation-omega-Dn}
+\Omega_{D(n)} = \lim_e \Omega_{D(n)_e/A, \bar\gamma} =
+\lim_e \Omega_{D(n)/A, \bar\gamma}/p^e\Omega_{D(n)/A, \bar\gamma}
+\end{equation}
+및 미분
+\begin{equation}
+\label{equation-derivation-Dn}
+\text{d} : D(n) \longrightarrow \Omega_{D(n)}
+\end{equation}
+을 도입한다. 물론 $D = D(0)$이다. 환들
+$D(0), D(1), D(2), \ldots$는 분할멱환의 범주에서 쌍대단체 대상을
+이룸에 주의하라.
+
+\begin{lemma}
+\label{lemma-structure-Dn}
+$D$와 $D(n)$을 (\ref{equation-D})와 (\ref{equation-Dn})에서와 같이
+잡자. 쌍대곱의 표준 사상
+$P \to P \otimes_A \ldots \otimes_A P$,
+$f \mapsto f \otimes 1 \otimes \ldots \otimes 1$은 다음과 같은
+$D$ 위의 대수의 동형을 유도한다.
+\begin{equation}
+\label{equation-structure-Dn}
+D(n) = \lim_e D\langle \xi_i(j) \rangle/p^eD\langle \xi_i(j) \rangle
+\end{equation}
+여기서 $j = 1, \ldots, n$에 대해
+$$
+\xi_i(j) = x_i \otimes 1 \otimes \ldots \otimes 1 -
+1 \otimes \ldots \otimes 1 \otimes x_i \otimes 1 \otimes \ldots \otimes 1
+$$
+이고, 둘째 $x_i$는 $j + 1$번째 자리에 놓인다. $D(n)$은 $A$ 위의
+$P$의 $n + 1$중 텐서곱에서 출발하여 구성함을 상기하라.
+\end{lemma}
+
+\begin{proof}
+다음이 성립한다.
+$$
+P \otimes_A \ldots \otimes_A P = P[\xi_i(j)]
+$$
+또한 $J(n)$은 $J$와 원소들 $\xi_i(j)$로 생성된다. 따라서
+Lemma \ref{lemma-divided-power-envelope-add-variables}로부터
+보조정리를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-property-Dn}
+$D$와 $D(n)$을 (\ref{equation-D})와 (\ref{equation-Dn})에서와 같이
+잡자. 그러면 $(D, \bar J, \bar\gamma)$와
+$(D(n), \bar J(n), \bar\gamma(n))$은
+$\text{Cris}^\wedge(C/A)$의 대상이고(Remark
+\ref{remark-completed-affine-site}을 보라),
+$$
+D(n) = \coprod\nolimits_{j = 0, \ldots, n} D
+$$
+는 $\text{Cris}^\wedge(C/A)$에서의 쌍대곱이다.
+\end{lemma}
+
+\begin{proof}
+첫째 주장은 명백하다. 둘째 주장을 위해
+$(B \to C, \delta)$를 $\text{Cris}^\wedge(C/A)$의 대상이라 하면
+$$
+\Mor_{\text{Cris}^\wedge(C/A)}(D, B) =
+\Hom_A((P, J), (B, \Ker(B \to C)))
+$$
+이고, $D(n)$에 대해서도 $(P, J)$를
+$(P \otimes_A \ldots \otimes_A P, J(n))$으로 바꾼 같은 식이
+성립한다. $P \otimes_A \ldots \otimes_A P$가 쌍대곱이므로
+쌍대곱에 관한 성질이 따른다.
+\end{proof}
+
+\noindent
+아래 보조정리에서는 다음 조건들을 만족하는 쌍 $(M, \nabla)$를
+생각한다.
+\begin{enumerate}
+\item
+\label{item-complete}
+$M$은 $p$-진 완비 $D$-가군이다.
+\item
+\label{item-connection}
+$\nabla : M \to M \otimes^\wedge_D \Omega_D$는 접속이다. 즉
+$\nabla(fm) = m \otimes \text{d}f + f\nabla(m)$이다.
+\item
+\label{item-integrable}
+$\nabla$는 적분 가능하다(Remark \ref{remark-connection}을 보라).
+\item
+\label{item-topologically-quasi-nilpotent}
+$\nabla$는 {it 위상적 준멱영}이다. 즉 어떤 작용소
+$\theta_i : M \to M$들에 대해
+$\nabla(m) = \sum \theta_i(m)\text{d}x_i$로 쓰면, 임의의
+$m \in M$에 대해 $\theta_i^k(m) \not \in pM$인 쌍 $(i, k)$은
+유한 개뿐이다.
+\end{enumerate}
+문헌에서는 작용소 $\theta_i$를 $\nabla_{\partial/\partial x_i}$로
+쓰기도 한다. 다음 보조정리에서는 $\text{Cris}(X/S)$ 위의 준연접
+가군 값 크리스털들에서 그러한 쌍들의 범주로 가는 함자를 구성한다.
+Proposition \ref{proposition-crystals-on-affine}에서 이 함자가 동치임을
+보일 것이다.
+
+\begin{lemma}
+\label{lemma-crystals-on-affine}
+위 상황에는 함자
+$$
+\begin{matrix}
+\text{준연접 가군 값 크리스털} \\
+\mathcal{O}_{X/S}\text{-가군 값, 사이트 }\text{Cris}(X/S)
+\end{matrix}
+\longrightarrow
+\begin{matrix}
+\text{쌍 }(M, \nabla)\text{ 중 다음을 만족하는 것} \\
+\text{(\ref{item-complete}), (\ref{item-connection}),
+(\ref{item-integrable}), and (\ref{item-topologically-quasi-nilpotent})}
+\end{matrix}
+$$
+가 있다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$를 $X/S$ 위의 준연접 가군 값 크리스털이라 하자.
+$T_e = \Spec(D_e)$로 놓으면 $e \gg 0$에 대해
+$(X, T_e, \bar\gamma)$는 $\text{Cris}(X/S)$의 대상이다. 닫힌 몰입인
+사상들
+$$
+(X, T_e, \bar\gamma) \to (X, T_{e + 1}, \bar\gamma) \to \ldots
+$$
+이 있다. 다음과 같이 놓는다.
+$$
+M =
+\lim_e \Gamma((X, T_e, \bar\gamma), \mathcal{F}) =
+\lim_e \Gamma(T_e, \mathcal{F}_{T_e}) = \lim_e M_e
+$$
+$\mathcal{F}$가 국소 준연접이므로
+$\mathcal{F}_{T_e} = \widetilde{M_e}$임에 주의하라.
+$\mathcal{F}$가 크리스털이므로
+$M_e = M_{e + 1}/p^eM_{e + 1}$이다. 따라서 $M_e = M/p^eM$이고
+$M$이 $p$-진 완비임을 알 수 있다. Algebra, Lemma
+\ref{algebra-lemma-limit-complete}를 보라.
+
+\medskip\noindent
+Lemma \ref{lemma-automatic-connection}에 의해 $\mathcal{F}$에는
+표준 적분 가능 접속
+$\nabla : \mathcal{F} \to \mathcal{F} \otimes \Omega_{X/S}$가
+주어진다. 이 접속을 위에서 구성한 대상들 $T_e$에서 계산하면
+표준 적분 가능 접속
+$$
+\nabla : M \longrightarrow M \otimes^\wedge_D \Omega_D
+$$
+을 얻는다. 이것이 위상적 멱영임을 보기 위해 그 뜻을 계산해 보자.
+% P08-E448: frozen prose drops "quasi" from the defined condition here.
+
+\medskip\noindent
+이제 환들 $D(n)$에 같은 절차를 적용할 수 있다. 이로부터 $p$-진
+완비 $D(n)$-가군 $M(n)$을 얻는다. 다시 $\mathcal{F}$의 크리스털
+성질을 사용하면 동형들
+$$
+M \otimes^\wedge_{D, p_0} D(1) \rightarrow M(1)
+\leftarrow M \otimes^\wedge_{D, p_1} D(1)
+$$
+을 얻는다. Lemma \ref{lemma-automatic-connection}의 증명과 비교하라.
+왼쪽에서 오른쪽으로 가는 합성을 $c$라 쓰자. $m \in M$을 택하고
+$\xi_i = x_i \otimes 1 - 1 \otimes x_i$라 쓰자.
+(\ref{equation-structure-Dn})을 사용하면
+$$
+c(m \otimes 1) = \sum\nolimits_K \theta_K(m) \otimes \prod \xi_i^{[k_i]}
+$$
+로 유일하게 쓸 수 있다. 여기서 $\theta_K(m) \in M$이고, 합은
+$k_i \geq 0$ 및 $\sum k_i < \infty$를 만족하는 다중지표
+$K = (k_i)$들에 대한 것이다. $i$번째 성분이 $1$이고 나머지가
+영인 $K$에 대해 $\theta_i = \theta_K$로 놓는다. 그러면
+$$
+\nabla(m) = \sum \theta_i(m) \text{d}x_i.
+$$
+이며, 이는 $\nabla$의 정의와 비교하면 알 수 있다. 즉 Lemma
+\ref{lemma-automatic-connection}에서 정의식은
+% P08-E449: frozen equation has the opposite rearrangement sign from that lemma.
+$p_1^*m = \nabla(m) - c(p_0^*m)$이지만 부호가 맞는 이유는
+Stacks project에서 대각 아이디얼의 제곱을 법으로 하여 일관되게
+$\text{d}f = p_1(f) - p_0(f)$를 사용하고, 따라서
+$\xi_i = x_i \otimes 1 - 1 \otimes x_i$가 대각 아이디얼의 제곱을
+법으로 하여 $-\text{d}x_i$로 가기 때문이다.
+
+\medskip\noindent
+지표 $i, j$에 대응하는 쌍대곱의 표준 사상들을
+$q_i : D \to D(2)$와 $q_{ij} : D(1) \to D(2)$로 쓰자.
+Lemma \ref{lemma-automatic-connection}의 증명 마지막 문단에서와 같이
+$$
+q_{02}^*c = q_{12}^*c \circ q_{01}^*c.
+$$
+임을 알 수 있다. 이는
+$$
+\sum\nolimits_{K''} \theta_{K''}(m) \otimes \prod {\zeta''_i}^{[k''_i]}
+=
+\sum\nolimits_{K', K} \theta_{K'}(\theta_K(m))
+\otimes \prod {\zeta'_i}^{[k'_i]} \prod \zeta_i^{[k_i]}
+$$
+가 $M \otimes^\wedge_{D, q_2} D(2)$에서 성립한다는 뜻이다. 여기서
+\begin{align*}
+\zeta_i & = x_i \otimes 1 \otimes 1 - 1 \otimes x_i \otimes 1,\\
+\zeta'_i & = 1 \otimes x_i \otimes 1 - 1 \otimes 1 \otimes x_i,\\
+\zeta''_i & = x_i \otimes 1 \otimes 1 - 1 \otimes 1 \otimes x_i.
+\end{align*}
+특히 $\zeta''_i = \zeta_i + \zeta'_i$이고, Lemma
+\ref{lemma-structure-Dn}에 의해 $D(2)$는 $q_2(D)$ 위의 변수
+$\zeta_i, \zeta'_i$에 대한 분할멱 다항식환의 $p$-진 완비화이다.
+위 식에서 계수를 비교하면 즉시
+$\theta_i \circ \theta_j = \theta_j \circ \theta_i$임을 얻는다
+(이는 $\nabla$의 적분 가능성에 대한 다른 증명을 준다). 또한
+$$
+\theta_K(m) = (\prod \theta_i^{k_i})(m).
+$$
+이다. 특히 위에서 $c(m \otimes 1)$을 나타내는 합은 $p$-진으로
+수렴해야 하므로, 각 $i$와 각 $m \in M$에 대해
+$p$를 법으로 영이 아닌 $\theta_i^k(m)$은 유한 개뿐이다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-crystals-on-affine}
+다음 함자
+$$
+\begin{matrix}
+\text{준연접 가군 값 크리스털} \\
+\mathcal{O}_{X/S}\text{-가군 값, 사이트 }\text{Cris}(X/S)
+\end{matrix}
+\longrightarrow
+\begin{matrix}
+\text{쌍 }(M, \nabla)\text{ 중 다음을 만족하는 것} \\
+\text{(\ref{item-complete}), (\ref{item-connection}),
+(\ref{item-integrable}), and (\ref{item-topologically-quasi-nilpotent})}
+\end{matrix}
+$$
+즉 Lemma \ref{lemma-crystals-on-affine}의 함자는 범주의 동치이다.
+\end{proposition}
+
+\begin{proof}
+$(M, \nabla)$가 주어졌다고 하자. 준연접 가군 값 크리스털
+$\mathcal{F}$를 구성할 것이다.
+$\nabla(m) = \sum \theta_i(m)\text{d}x_i$라 쓰자.
+그러면 $\theta_i \circ \theta_j = \theta_j \circ \theta_i$이고,
+$k_i \geq 0$ 및 $\sum k_i < \infty$인 임의의 다중지표
+$K = (k_i)$에 대해 $\theta_K(m) = (\prod \theta_i^{k_i})(m)$로
+놓을 수 있다.
+
+\medskip\noindent
+$(U, T, \delta)$를 $T$가 아핀인 $\text{Cris}(X/S)$의 임의의
+대상이라 하자. $T = \Spec(B)$라 하고 $U \to T$의 아이디얼을
+$J_B \subset B$라 하자. Lemma \ref{lemma-set-generators}에 의해
+어떤 정수 $e$와 사상
+$$
+f : (U, T, \delta) \longrightarrow (X, T_e, \bar\gamma)
+$$
+가 존재한다. 여기서 $T_e = \Spec(D_e)$는 Lemma
+\ref{lemma-crystals-on-affine}의 증명에서와 같다. 그러한 $e$와
+$f$를 택하고, 대응하는 분할멱 $A$-대수 사상도
+$f : D \to B$로 쓰자. $\mathcal{F}_T$를 $B$-가군
+$$
+M \otimes_{D, f} B.
+$$
+에 대응하는 준연접 $\mathcal{O}_T$-가군의 층으로 놓을 것이다.
+그러나 이것이 $f$의 선택과 무관함을 보여야 한다.
+$g : D \to B$가 그러한 둘째 사상이라고 하자. $f$와 $g$는
+$\text{Cris}(X/S)$의 사상이므로 $f - g : D \to B$의 상은
+분할멱 아이디얼 $J_B$에 들어간다.
+$\xi_i = f(x_i) - g(x_i) \in J_B$라 쓰자. Lemma
+\ref{lemma-crystals-on-affine}의 증명과 비슷하게 동형
+$$
+c_{f, g} : M \otimes_{D, f} B \longrightarrow M \otimes_{D, g} B
+$$
+를 다음 공식으로 정의한다.
+$$
+m \otimes 1 \longmapsto
+\sum\nolimits_K \theta_K(m) \otimes \prod \xi_i^{[k_i]}
+$$
+위의 논의와 $\nabla$가 위상적 준멱영이라는 사실 때문에 이 식은
+의미가 있다(따라서 합은 유한하다!). 계산하면 셋째 사상
+$h : (U, T, \delta) \longrightarrow (X, T_e, \bar\gamma)$가
+주어졌을 때
+$$
+c_{g, h} \circ c_{f, g} = c_{f, h}
+$$
+임을 알 수 있다. 또한 $c_{f, f} = 1$이다. 따라서 이 사상들은
+모두 동형이고, 가군 $\mathcal{F}_T$가 $f$의 선택과 무관함을
+알 수 있다.
+
+\medskip\noindent
+$a : (U', T', \delta') \to (U, T, \delta)$가
+$\text{Cris}(X/S)$의 아핀 대상들 사이의 사상이면
+$f' = f \circ a$를 택함으로써 표준 동형
+$a^*\mathcal{F}_T \to \mathcal{F}_{T'}$이 존재함은 명백하다.
+이 사상이 $f$의 선택과 무관하다는 검산은 생략한다. 이 사상들을
+제한 사상으로 사용하면 아핀 대상들로 이루어진
+$\text{Cris}(X/S)$의 충만한 부분범주 위에서 준연접 가군 값
+크리스털을 얻음은 명백하다. 이것이 $\text{Cris}(X/S)$ 전체 위의
+크리스털로 확장된다는 증명도 생략한다. 또한 이 절차가 함자이고
+Lemma \ref{lemma-crystals-on-affine}에서 구성한 함자의 준역이라는
+증명도 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-crystals-on-affine-smooth}
+Situation \ref{situation-affine}에서 다음을 생각하자.
+$A \to P' \to C$가 환 사상들이고, $A \to P'$은 매끄러우며
+$P' \to C$는 핵이 $J'$인 전사라고 하자. $D'$을
+$D_{P', \gamma}(J')$의 $p$-진 완비화라 하자. 그러면 위와 같은
+데이터 $A \to P \to C$를 택할 수 있고, 사상들 $D \to C$와
+$D' \to C$와 양립하는 분할멱 $A$-대수의 준동형
+$$
+a : D \longrightarrow D',\quad b : D' \longrightarrow D
+$$
+으로서 $a \circ b = \text{id}_{D'}$을 만족하는 것들이 있다.
+이 사상들은 $D$ 위에서 (\ref{item-complete}),
+(\ref{item-connection}), (\ref{item-integrable}), and
+(\ref{item-topologically-quasi-nilpotent})를 만족하는 쌍 $(M, \nabla)$의
+범주와 $D'$ 위에서 (\ref{item-complete}), (\ref{item-connection}),
+(\ref{item-integrable}), and
+(\ref{item-topologically-quasi-nilpotent})\footnote{이 조건은 $D'$ 위의
+$(M', \nabla')$에 대해 정식화하기가 까다롭다. 증명을 보라.}를
+만족하는 쌍 $(M', \nabla')$의 범주 사이의 동치를 유도한다.
+특히 Proposition \ref{proposition-crystals-on-affine}의 범주의 동치는
+$D'$ 위의 쌍들로 가는 대응 함자에 대해서도 성립한다.
+\end{lemma}
+
+\begin{proof}
+$A$ 위의 다항식대수 $P = A[y_1, \ldots, y_m]$와 전사
+$P \to P'$을 택한다. 합성 $P \to P' \to C$로 $P \to C$를
+정의한다. 분할멱 포락과 완비화의 함자성에 의해 전사
+$a : D \to D'$을 얻는다. $D_e$가 $A$ 위의 $C$의 분할멱
+두꺼워짐이 되도록 충분히 큰 $e$를 택한다. 그러면
+$D_e \to C$는 핵이 국소 멱영인 전사이다. Divided Power Algebra,
+Lemma \ref{dpa-lemma-nil}을 보라. $D'_e = D'/p^eD'$로 놓으면
+$D_e \to D'_e$의 핵이 국소 멱영임을 알 수 있다. 따라서 Algebra,
+Lemma \ref{algebra-lemma-smooth-strong-lift}에 의해 $P' \to D'_e$의
+사상을 올리는 사상 $\beta_e : P' \to D_e$를 찾을 수 있다.
+모든 $i \geq 0$에 대해
+$D_{e + i + 1} \to D_{e + i} \times_{D'_{e + i}} D'_{e + i + 1}$은
+제곱 영 핵을 가진 전사임에 주의하라. 실제로
+$p^{e + i}D \to p^{e + i}D'$이 전사이기 때문이다. 통상적인
+올림 성질(Algebra, Proposition
+\ref{algebra-proposition-smooth-formally-smooth})을 도식들
+$$
+\xymatrix{
+P' \ar[r] & D_{e + i} \times_{D'_{e + i}} D'_{e + i + 1} \\
+A \ar[u] \ar[r] & D_{e + i + 1} \ar[u]
+}
+$$
+에 차례로 적용하면, $a$와의 합성이 주어진 사상
+$P' \to D'$인 $A$-대수 사상 $\beta : P' \to D$를 찾을 수 있다.
+분할멱 포락의 보편 성질에 의해 사상
+$D_{P', \gamma}(J') \to D$을 얻는다. $D$가 $p$-진 완비이므로
+$a \circ b = \text{id}_{D'}$을 만족하는 $b : D' \to D$을 얻는다.
+
+\medskip\noindent
+(\ref{item-complete}), (\ref{item-connection}), and
+(\ref{item-integrable})를 만족하는 접속 달린 가군들 위의
+기저변환 함자들
+$$
+F : (M, \nabla) \longmapsto
+(M \otimes^\wedge_{D, a} D', \nabla')
+\quad\text{and}\quad
+G : (M', \nabla') \longmapsto
+(M' \otimes^\wedge_{D', b} D, \nabla)
+$$
+을 생각하자. Remark \ref{remark-base-change-connection}을 보라.
+$a \circ b = \text{id}_{D'}$이므로 $F \circ G$는 항등함자이다.
+$G(M', \nabla')$에 대해 성질 (\ref{item-topologically-quasi-nilpotent})가
+성립하면 $(M', \nabla')$가 이 성질을 가진다고 하자. 이제 형식적인
+논증에 의해, 네 조건 (\ref{item-complete}), (\ref{item-connection}),
+(\ref{item-integrable}), and (\ref{item-topologically-quasi-nilpotent})를
+모두 만족하는 $(M, \nabla)$에 대해 $G(F(M, \nabla))$가
+$(M, \nabla)$와 동형임을 보이면 증명이 끝난다. 이를 위해
+Proposition \ref{proposition-crystals-on-affine}의 증명에 나온 함자적 동형
+$$
+c_{\text{id}_D, b \circ a} :
+M \otimes_{D, \text{id}_D} D
+\longrightarrow
+M \otimes_{D, b \circ a} D
+$$
+을 사용한다. (이를 위해서는 우리가 가정한 $\nabla$의 위상적
+준멱영성이 필요하다.) 이제 이 사상이 수평적, 즉 접속과 양립함을
+보이기만 하면 되는데, 이는 생략한다.
+
+\medskip\noindent
+증명의 마지막 주장이 이제 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-equivalence-more-general}
+Proposition \ref{proposition-crystals-on-affine}의 동치는 $P/A$가
+Algebra, Lemma \ref{algebra-lemma-smooth-strong-lift}의 강한 올림
+성질을 만족하는 전사 $P \to C$로 출발해도 성립한다. 이를 증명하려면
+Lemma \ref{lemma-crystals-on-affine-smooth}의 증명에서와 같이 논증하면
+된다. (이것이 필요해지면 여기에 세부사항을 덧붙일 것이다.)
+아마 이 결과에는 직접적인 증명도 있을 것이다. 그러나 다항식환을
+사용하면 환들 $D(n)$이 분할멱 다항식환들의 $p$-진 완비화가 되어
+대수가 단순해진다는 장점이 있다.
+\end{remark}
+
+
+
+
+\section{코호몰로지에 관한 일반적 언급}
+\label{section-cohomology-lqc}
+
+\noindent
+% P08-E450: frozen source misspells "crystalline" as "cristalline" here.
+이 절에서는 아핀 스킴의 크리스탈린 사이트 위 가군의 코호몰로지를
+대수적 문제로 옮기기 위해 약간의 작업을 한다.
+
+\begin{lemma}
+\label{lemma-vanishing-lqc}
+Situation \ref{situation-global}에서 다음이 성립한다.
+$\mathcal{F}$를 $\text{Cris}(X/S)$ 위의 국소 준연접
+$\mathcal{O}_{X/S}$-가군이라 하자. 그러면 $T$ 또는 $U$가 아핀인
+모든 $(U, T, \delta)$와 모든 $p > 0$에 대해
+$$
+H^p((U, T, \delta), \mathcal{F}) = 0
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$U \to T$가 두꺼워짐이므로 $U$가 아핀일 필요충분조건은 $T$가
+아핀인 것이다. Limits, Lemma \ref{limits-lemma-affine}를 보라.
+이제 아핀 대상들 $(U, T, \delta)$의 모음 $\mathcal{B}$와 아핀 열린
+덮개들 $\mathcal{U} = \{(U_i, T_i, \delta_i) \to
+(U, T, \delta)\}$의 모음 $\text{Cov}$에 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cech-vanish-collection}을 적용하자.
+그러한 덮개에 대한 체흐 복합체
+${\check C}^*(\mathcal{U}, \mathcal{F})$는 단순히 아핀 스킴 $T$의
+아핀 열린 덮개 $\{T_i \to T\}$에 대한 준연접
+$\mathcal{O}_T$-가군 $\mathcal{F}_T$의 체흐 복합체이다
+(여기서 $\mathcal{F}$가 국소 준연접이라는 가정을 사용했다).
+따라서 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-cech-cohomology-quasi-coherent} and
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}에 의해
+체흐 코호몰로지는 영이다. 그러므로 Cohomology on Sites, Lemma
+% P08-E451: frozen English mixes singular "hypothesis" with plural "are".
+\ref{sites-cohomology-lemma-cech-vanish-collection}의 가정들이
+만족되고 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compare}
+Situation \ref{situation-global}에서 다음이 성립한다.
+더 나아가 $X$와 $S$가 아핀 스킴이라고 가정하자. 혼돈 위상을 준
+분할멱 두꺼워짐 $(X, T, \delta)$들로 이루어진 충만한 부분범주
+$\mathcal{C} \subset \text{Cris}(X/S)$를 생각하자(Sites, Example
+\ref{sites-example-indiscrete}를 보라). 임의의 국소 준연접
+$\mathcal{O}_{X/S}$-가군 $\mathcal{F}$에 대해
+$$
+R\Gamma(\mathcal{C}, \mathcal{F}|_\mathcal{C}) =
+R\Gamma(\text{Cris}(X/S), \mathcal{F})
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+% P08-E452: frozen English says "fully subcategory" rather than "full subcategory".
+$U$와 $T$가 아핀인 대상 $(U, T, \delta)$들로 이루어진
+$\text{Cris}(X/S)$의 충만한 부분범주를
+$\text{AffineCris}(X/S)$로 쓰자. $\text{AffineCris}(X/S)$의 사상족
+$\{(U_i, T_i, \delta_i) \to (U, T, \delta)\}_{i \in I}$이
+$\text{Cris}(X/S)$의 덮개일 필요충분조건으로 그것을 덮개라 하여
+이 범주를 사이트로 만든다. 이 정의 아래 포함 함자
+$$
+\text{AffineCris}(X/S) \longrightarrow \text{Cris}(X/S)
+$$
+는 Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor}에서 정의한 특별
+쌍대연속 함자이다. 그 증명은 Topologies, Lemma
+\ref{topologies-lemma-affine-big-site-Zariski}의 증명과 정확히 같다.
+따라서 표시한 포함 함자에 의한 제한을 통해
+$\text{Cris}(X/S)$ 위 층의 토포스와
+$\text{AffineCris}(X/S)$ 위 층의 토포스가 같음을 알 수 있다.
+그러므로 포함 $\mathcal{C} \subset \text{AffineCris}(X/S)$에 대한
+대응 명제를 증명하면 된다.
+
+\medskip\noindent
+$\mathcal{C}$와 $\text{AffineCris}(X/S)$에는 곱과 섬유곱이 있음을
+앞으로 말없이 사용할 것이다(세부사항은 생략하며 Lemma
+\ref{lemma-divided-power-thickening-fibre-products}를 보라).
+포함 함자 $u : \mathcal{C} \to \text{AffineCris}(X/S)$는
+충실충만하고 연속이며 곱과 섬유곱과 가환한다. 이 함자가 환 달린
+사이트의 사상
+$$
+f :
+(\text{AffineCris}(X/S), \mathcal{O}_{X/S})
+\longrightarrow
+(\Sh(\mathcal{C}), \mathcal{O}_{X/S}|_\mathcal{C})
+$$
+을 정의한다고 주장한다. 이를 보기 위해 Sites, Lemma
+\ref{sites-lemma-directed-morphism}을 사용할 것이다.
+$\mathcal{C}$에는 섬유곱이 있고 $u$가 그것과 가환하므로 범주들
+$\mathcal{I}^u_{(U, T, \delta)}$는 유향 범주들의 서로소 합이다
+(Sites, Lemma \ref{sites-lemma-almost-directed} and Categories, Lemma
+\ref{categories-lemma-split-into-directed}에 의해). 따라서
+$\mathcal{I}^u_{(U, T, \delta)}$가 연결임을 보이면 충분하다.
+공집합이 아님은 Lemma \ref{lemma-set-generators}에서 따른다.
+실제로 $U$와 $T$가 아핀이므로 그 보조정리에 의해
+$\mathcal{C}$의 대상 $(X, T', \delta')$과 분할멱 두꺼워짐의 사상
+$(U, T, \delta) \to (X, T', \delta')$이 적어도 하나 존재한다.
+연결성은 $\mathcal{C}$에 곱이 있고 $u$가 그것과 가환한다는
+사실에서 따른다(Sites, Lemma \ref{sites-lemma-directed}의 증명과
+비교하라).
+
+\medskip\noindent
+$f_*\mathcal{F} = \mathcal{F}|_\mathcal{C}$임에 주의하라. 따라서
+$p > 0$에 대해 $R^pf_*\mathcal{F} = 0$이면 보조정리가 따른다.
+Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-apply-Leray}를
+보라. Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-higher-direct-images}에 의해 모든
+$(X, T, \delta)$에 대해
+$H^p(\text{AffineCris}(X/S)/(X, T, \delta), \mathcal{F}) = 0$임을
+보이면 충분하다. 이는 사이트
+$\text{AffineCris}(X/S)/(X, T, \delta)$의 토포스가 보조정리에서
+사용한 사이트 $\text{Cris}(X/S)/(X, T, \delta)$의 토포스와
+동치이므로 Lemma \ref{lemma-vanishing-lqc}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-complete}
+Situation \ref{situation-affine}에서 다음이 성립한다.
+$\mathcal{C} = (\text{Cris}(C/A))^{opp}$와
+$\mathcal{C}^\wedge = (\text{Cris}^\wedge(C/A))^{opp}$에 혼돈 위상을
+주자. 표기는 Remark \ref{remark-completed-affine-site}을 보라.
+다음을 만족하는 토포스의 사상
+$$
+g : \Sh(\mathcal{C}) \longrightarrow \Sh(\mathcal{C}^\wedge)
+$$
+이 있다. $\mathcal{F}$가 $\mathcal{C}$ 위의 아벨 군의 층이면
+$$
+R^pg_*\mathcal{F}(B \to C, \delta) =
+\left\{
+\begin{matrix}
+\lim_e \mathcal{F}(B_e \to C, \delta) & \text{if }p = 0 \\
+R^1\lim_e \mathcal{F}(B_e \to C, \delta) & \text{if }p = 1 \\
+0 & \text{else}
+\end{matrix}
+\right.
+$$
+% } Mechanical delimiter brace balance.
+이다. 여기서 $e \gg 0$에 대해 $B_e = B/p^eB$이다.
+\end{lemma}
+
+\begin{proof}
+범주 사이의 모든 함자는 같은 방향의 혼돈 토포스 사이의 사상을
+정의한다. 예컨대 그러한 함자는 사이트 사이의 쌍대연속 함자로
+볼 수 있기 때문이다. Sites, Section
+\ref{sites-section-cocontinuous-morphism-topoi}를 보라.
+$g_*\mathcal{F}$에 대한 서술의 증명은 생략한다. 명제에서
+% P08-E453: frozen English has the malformed phrase "we take ... is an object".
+$(B_e \to C, \delta)$가 충분히 큰 $e$에 대해서만
+$\text{Cris}(C/A)$의 대상임에 주의하라.
+$\mathcal{I}$를 $\mathcal{C}$ 위의 단사 아벨 층이라 하자. 그러면
+전이 사상들
+$$
+\mathcal{I}(B_e \to C, \delta) \leftarrow
+\mathcal{I}(B_{e + 1} \to C, \delta)
+$$
+은 전사이다. 실제로 사상들
+$$
+(B_e \to C, \delta)
+\longrightarrow
+(B_{e + 1} \to C, \delta)
+$$
+은 범주 $\mathcal{C}$에서 단사사상이기 때문이다. 따라서 단사
+아벨 층에 대해서는 보조정리에 표시한 공식의 양변이 일치한다.
+$\mathcal{F}$의 단사 분해를 취하면 결과를 쉽게 얻는다(층은
+프리층이므로 완전성은 대상 위 단면군들의 수준에서 측정된다).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-category-with-covering}
+$\mathcal{C}$를 혼돈 위상을 준 범주라 하자. 대상 $X$를
+$\mathcal{C}$에서 택하되, $\mathcal{C}$의 모든 대상에서 $X$로
+향하는 사상이 존재한다고 하자.
+$\mathcal{C}$에 대상 쌍들의 곱이 있다고 가정하자. 그러면
+$\mathcal{C}$ 위의 모든 아벨 층 $\mathcal{F}$에 대해 전체
+코호몰로지 $R\Gamma(\mathcal{C}, \mathcal{F})$는 쌍대단체 아벨 군
+% P08-E454: frozen indexing says [n] maps to F(X^n), but the displayed
+% complex starts with F(X), so the standard nerve term is F(X^{n+1}).
+$[n] \mapsto \mathcal{F}(X^n)$에 결부된 복합체
+$$
+\mathcal{F}(X) \to \mathcal{F}(X \times X) \to
+\mathcal{F}(X \times X \times X) \to \ldots
+$$
+로 표현된다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}$ 위의 모든 프리층이 층이므로 모든 $q > 0$에 대해
+$H^q(X^p, \mathcal{F}) = 0$임에 주의하라. $X$에 대한 가정은
+$h_X \to *$가 전사라는 것이다. $H^q(X, \mathcal{F}) =
+H^q(h_X, \mathcal{F})$ 및 $H^q(\mathcal{C}, \mathcal{F}) =
+H^q(*, \mathcal{F})$를 사용하면 우리의 명제가 Cohomology on Sites,
+Lemma \ref{sites-cohomology-lemma-cech-to-cohomology-sheaf-sets}의
+특수한 경우임을 알 수 있다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{쌍대단체 준비}
+\label{section-cohomology}
+
+\noindent
+이 절에서는 크리스탈린 코호몰로지와 드람 코호몰로지를 비교한다.
+\cite{Bhatt}를 따른다.
+
+\begin{example}
+\label{example-cosimplicial-module}
+$A_*$가 임의의 쌍대단체 환이라고 하자. 다음 규칙으로 정의되는
+쌍대단체 가군 $M_*$를 생각하자.
+$$
+M_n = \bigoplus\nolimits_{i = 0, ..., n} A_n e_i
+$$
+사상 $f : [n] \to [m]$에 대해 $M_*(f) : M_n \to M_m$을
+$e_i$를 $e_{f(i)}$로 보내는 유일한 $A_*(f)$-선형 사상으로
+정의한다. $M_*$ 위의 항등사상이 $0$과 호모토픽이라고 주장한다.
+실제로 호모토피는 쌍대단체 가군의 사상
+$$
+h : M_* \longrightarrow \Hom(\Delta[1], M_*)
+$$
+으로 주어진다. Section \ref{section-cosimplicial}을 보라.
+$j \in \{0, \ldots, n + 1\}$에 대해
+$\alpha^n_j : [n] \to [1]$을
+$\alpha^n_j(i) = 0 \Leftrightarrow i < j$로 정의한다. 그러면
+$\Delta[1]_n = \{\alpha^n_0, \ldots, \alpha^n_{n + 1}\}$이고,
+이에 따라
+$\Hom(\Delta[1], M_*)_n = \prod_{j = 0, \ldots, n + 1} M_n$이다.
+Simplicial, Sections \ref{simplicial-section-homotopy} and
+\ref{simplicial-section-homotopy-cosimplicial}을 보라. 이 곱 표현을
+사용하는 대신 $\Hom(\Delta[1], M_*)_n$의 원소를 함수
+$\Delta[1]_n \to M_n$으로 생각한다. 이 표기를 사용하여 차수
+$n$에서 다음 규칙으로 $h$를 정의한다.
+$$
+h_n(e_i)(\alpha^n_j) =
+\left\{
+\begin{matrix}
+e_{i} & \text{if} & i < j \\
+0 & \text{else}
+\end{matrix}
+\right.
+$$
+% } Mechanical delimiter brace balance.
+먼저 $h$가 쌍대단체 가군의 사상임을 확인한다. 즉
+$f : [n] \to [m]$에 대해
+\begin{equation}
+\label{equation-cosimplicial-morphism}
+h_m \circ M_*(f) = \Hom(\Delta[1], M_*)(f) \circ h_n
+\end{equation}
+임을 보일 것이다. (\ref{equation-cosimplicial-morphism})의 좌변을
+$e_i$에서 계산하고 이어서 $\alpha^m_j$에서 계산하면
+$$
+h_m(e_{f(i)})(\alpha^m_j) =
+\left\{
+\begin{matrix}
+e_{f(i)} & \text{if} & f(i) < j \\
+0 & \text{else}
+\end{matrix}
+\right.
+$$
+% } Mechanical delimiter brace balance.
+$\alpha^m_j \circ f = \alpha^n_{j'}$임에 주의하라. 여기서
+$0 \leq j' \leq n + 1$은 $f(i) < j$일 필요충분조건이
+$i < j'$인 유일한 지표이다. 따라서
+(\ref{equation-cosimplicial-morphism})의 우변을 $e_i$에서 계산하고
+이어 $\alpha^m_j$에서 계산하면
+% P08-E455: frozen display is missing one closing parenthesis before the first equals sign.
+$$
+M_*(f)(h_n(e_i)(\alpha^m_j \circ f) =
+M_*(f)(h_n(e_i)(\alpha^n_{j'})) =
+\left\{
+\begin{matrix}
+e_{f(i)} & \text{if} & i < j' \\
+0 & \text{else}
+\end{matrix}
+\right.
+$$
+% } Mechanical delimiter brace balance.
+$j'$의 서술로부터 두 답이 같음이 따른다. 따라서 $h$는 쌍대단체
+가군의 사상이다. 명백한 사상들을
+$0 : \Delta[0] \to \Delta[1]$ 및
+$1 : \Delta[0] \to \Delta[1]$이라 하고, 대응하는 계산 사상들을
+$ev_0, ev_1 : \Hom(\Delta[1], M_*) \to M_*$로 쓰자. 독자는 합성들
+$$
+ev_0 \circ h, ev_1 \circ h : M_* \longrightarrow M_*
+$$
+이 각각 $1$과 $0$임을 쉽게 확인할 수 있다. 따라서 $h$는
+$1$과 $0$ 사이의 원하는 호모토피이다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-vanishing-omega-1}
+(\ref{equation-omega-Dn})의 표기 아래 복합체
+$$
+\Omega_{D(0)} \to \Omega_{D(1)} \to \Omega_{D(2)} \to \ldots
+$$
+는 $D(*)$-쌍대단체 가군으로서 영과 호모토픽이다.
+\end{lemma}
+
+\begin{proof}
+Simplicial, Lemma \ref{simplicial-lemma-functorial-homotopy}의 원리,
+더 구체적으로는 (쌍대)단체 대상 사이의 호모토픽인 사상들을 임의의
+함자가 호모토픽인 사상들로 보낸다는 Lemma
+\ref{lemma-homotopy-tensor}를 사용할 것이다. 보조정리의 복합체는
+쌍대단체 환 사상 $P\otimes_A \ldots \otimes_A P \to D(n)$에 의한
+쌍대단체 가군
+$$
+M_* = \left(
+\Omega_{P/A} \to
+\Omega_{P \otimes_A P/A} \to
+\Omega_{P \otimes_A P \otimes_A P/A} \to \ldots
+\right)
+$$
+의 기저변환을 $p$-진 완비화한 것과 같다. 이는 Lemma
+\ref{lemma-module-differentials-divided-power-envelope}에서 따르며,
+(\ref{equation-omega-D}) 뒤의 설명을 보라. 따라서 쌍대단체 가군
+$M_*$가 영과 호모토픽임을 보이면 충분하다(기저변환과 $p$-진
+완비화를 사용한다). $\mathbf{Z} \to A$로 기저변환할 수 있으므로
+$A = \mathbf{Z}$ 및 $P = \mathbf{Z}[\{x_i\}_{i \in I}]$라고
+가정해도 된다. 이 경우 $P^{\otimes n + 1}$은 원소들
+$$
+x_i(e) = 1 \otimes \ldots \otimes x_i \otimes \ldots \otimes 1
+$$
+에 대한 다항식대수이며, $x_i$는 $e$번째 자리에 있다. 복합체의
+가군들은 생성원 $\text{d}x_i(e)$들 위에서 자유이다.
+$f : [n] \to [m]$이 사상이면
+$$
+M_*(f)(\text{d}x_i(e)) = \text{d}x_i(f(e))
+$$
+임에 주의하라. 따라서 $M_*$는 Example
+\ref{example-cosimplicial-module}에서 연구한 가군의 복사본들을
+$I$에 걸쳐 직합한 것이고, 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-vanishing}
+(\ref{equation-Dn}) 및 (\ref{equation-omega-Dn})의 표기 아래
+$D(*)$ 위의 임의의 쌍대단체 가군 $M_*$와 $i > 0$이 주어지면
+쌍대단체 가군
+$$
+M_0 \otimes^\wedge_{D(0)} \Omega^i_{D(0)} \to
+M_1 \otimes^\wedge_{D(1)} \Omega^i_{D(1)} \to
+M_2 \otimes^\wedge_{D(2)} \Omega^i_{D(2)} \to \ldots
+$$
+는 영과 호모토픽이다. 여기서 $\Omega^i_{D(n)}$은
+$\Omega_{D(n)}$의 $i$번째 외멱을 $p$-진 완비화한 것이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-vanishing-omega-1}에 의해 $\Omega_{D(*)}$의
+자기준동형 $0$과 $1$은 호모토픽이다. 함자 $\wedge^i$를 적용하면
+쌍대단체 가군 $\wedge^i\Omega_{D(*)}$에 대해서도 같은 명제가
+성립한다. Lemma \ref{lemma-homotopy-tensor}를 보라. 같은 보조정리를
+다시 적용하면 $p$-진 완비화 $\Omega^i_{D(*)}$가 영과 호모토피
+동치임을 알 수 있다. $M_*$와 텐서곱하여
+$M_* \otimes_{D(*)} \Omega^i_{D(*)}$가 영과 호모토픽임을 얻는다.
+다시 Lemma \ref{lemma-homotopy-tensor}를 보라. 마지막으로 $p$-진
+완비화 함자를 적용하면 증명이 끝난다.
+\end{proof}
+
+
+
+
+\section{분할멱 푸앵카레 보조정리}
+\label{section-poincare}
+
+\noindent
+가능한 가장 단순한 판만 다룬다.
+
+\begin{lemma}
+\label{lemma-poincare}
+$A$를 환이라 하자. $P = A\langle x_i \rangle$를 $A$ 위의 분할멱
+다항식환이라 하자. 임의의 $A$-가군 $M$에 대해 복합체
+$$
+0 \to M \to
+M \otimes_A P \to
+M \otimes_A \Omega^1_{P/A, \delta} \to
+M \otimes_A \Omega^2_{P/A, \delta} \to \ldots
+$$
+는 완전하다. $D$를 $P$의 $p$-진 완비화라 하자.
+$\Omega^i_D$를 $\Omega_{D/A, \delta}$의 $i$번째 외멱의 $p$-진
+완비화라 하자. 임의의 $p$-진 완비 $A$-가군 $M$에 대해 복합체
+$$
+0 \to M \to
+M \otimes^\wedge_A D \to
+M \otimes^\wedge_A \Omega^1_D \to
+M \otimes^\wedge_A \Omega^2_D \to \ldots
+$$
+는 완전하다.
+\end{lemma}
+
+\begin{proof}
+$A$-가군의 복합체로서 복합체
+$$
+E :
+(0 \to A \to P \to \Omega^1_{P/A, \delta} \to
+\Omega^2_{P/A, \delta} \to \ldots)
+$$
+가 영과 호모토피 동치임을 보이면 충분하다. 모든 다중지표
+$K = (k_i)$에 대해, 차수 $j$에서 다음으로 이루어진 부분복합체
+$E(K)$를 생각할 수 있다.
+$$
+\bigoplus\nolimits_{I = \{i_1, \ldots, i_j\} \subset \text{Supp}(K)}
+A
+\prod\nolimits_{i \not \in I} x_i^{[k_i]}
+\prod\nolimits_{i \in I} x_i^{[k_i - 1]}
+\text{d}x_{i_1} \wedge \ldots \wedge \text{d}x_{i_j}
+$$
+$E = \bigoplus E(K)$이므로 각 복합체 $E(K)$가 영과 호모토픽임을
+증명하면 충분하다. $K = 0$이면 $E(K) : (A \to A)$는 영과
+호모토픽이다. $K$의 지지집합 $S$가 공집합이 아닌 유한집합이면
+복합체 $E(K)$는 복합체
+$$
+0 \to A \to
+\bigoplus\nolimits_{s \in S} A \to
+\wedge^2(\bigoplus\nolimits_{s \in S} A) \to
+\ldots \to \wedge^{\# S}(\bigoplus\nolimits_{s \in S} A) \to 0
+$$
+와 동형이고, 이는 영과 호모토픽이다. 예를 들어 More on Algebra,
+Lemma \ref{more-algebra-lemma-homotopy-koszul-abstract}를 보라.
+\end{proof}
+
+\noindent
+다음 보조정리에 대한 다른 (더 직접적인) 접근법은 Example
+\ref{example-integrate}에서 설명한다.
+
+\begin{lemma}
+\label{lemma-relative-poincare}
+$A$를 환이라 하자. $(B, I, \delta)$를 $B$가 $A$-대수인 분할멱환이라
+하자. $P = B\langle x_i \rangle$를 평소와 같이 분할멱 아이디얼
+$J = IP + B\langle x_i \rangle_{+}$를 가진 $B$ 위의 분할멱
+다항식환이라 하자. $M$을 적분 가능 접속
+$\nabla : M \to M \otimes_B \Omega^1_{B/A, \delta}$가 주어진
+$B$-가군이라 하자. 그러면 드람 복합체의 사상
+$$
+M \otimes_B \Omega^*_{B/A, \delta}
+\longrightarrow
+M \otimes_P \Omega^*_{P/A, \delta}
+$$
+은 준동형이다. $D$와 $D'$을 각각 $B$와 $P$의 $p$-진 완비화라
+하고, $\Omega^i_D$와 $\Omega^i_{D'}$을 각각
+$\Omega^i_{B/A, \delta}$와 $\Omega^i_{P/A, \delta}$의 $p$-진
+완비화라 하자. $M$을
+% P08-E456: frozen English says "integral connection" instead of "integrable".
+적분 가능 접속 $\nabla : M \to M \otimes^\wedge_D \Omega^1_D$가
+주어진 $p$-진 완비 $D$-가군이라 하자. 그러면 드람 복합체의 사상
+$$
+M \otimes^\wedge_D \Omega^*_D
+\longrightarrow
+M \otimes^\wedge_D \Omega^*_{D'}
+$$
+은 준동형이다.
+\end{lemma}
+
+\begin{proof}
+부분복합체들
+$F^i(\Omega^*_{B/A, \delta}) = \sigma_{\geq i}\Omega^*_{B/A, \delta}$로
+주어지는 $\Omega^*_{B/A, \delta}$ 위의 감소 필터 $F^*$를 생각하자.
+Homology, Section \ref{homology-section-truncations}를 보라. 다음과
+같이 놓으면 이는 $\Omega^*_{P/A, \delta}$ 위의 감소 필터 $F^*$를
+유도한다.
+$$
+F^i(\Omega^*_{P/A, \delta}) =
+F^i(\Omega^*_{B/A, \delta}) \wedge \Omega^*_{P/A, \delta}.
+$$
+분할 완전열
+$$
+0 \to \Omega^1_{B/A, \delta} \otimes_B P \to
+\Omega^1_{P/A, \delta} \to
+\Omega^1_{P/B, \delta} \to 0
+$$
+이 있고, 마지막 가군은 $\text{d}x_i$들 위에서 자유이다. 이로부터
+$F^i(\Omega^*_{P/A, \delta}) \to \Omega^*_{P/A, \delta}$가 항별로
+분할되는 단사사상이고, 복합체로서
+$$
+\text{gr}^i_F(\Omega^*_{P/A, \delta}) =
+\Omega^i_{B/A, \delta} \otimes_B \Omega^*_{P/B, \delta}
+$$
+임이 따른다. 따라서
+% P08-E457: frozen prose names the B/A complex, while the defining formula
+% immediately below filters the P/A complex.
+$M \otimes_B \Omega^*_{B/A, \delta}$ 위의 필터 $F^*$를 다음과 같이
+정의할 수 있다.
+$$
+F^i(M \otimes_B \Omega^*_{P/A, \delta}) =
+M \otimes_B F^i(\Omega^*_{P/A, \delta})
+$$
+또한 복합체로서
+$$
+\text{gr}^i_F(M \otimes_B \Omega^*_{P/A, \delta}) =
+M \otimes_B \Omega^i_{B/A, \delta} \otimes_B \Omega^*_{P/B, \delta}
+$$
+이다. Lemma \ref{lemma-poincare}에 의해 이 복합체들은 각각 차수
+$0$에 놓인 $M \otimes_B \Omega^i_{B/A, \delta}$와 준동형이다.
+따라서 보조정리의 첫 번째 표시 사상은 등급 조각들 위에서
+준동형을 유도하는 필터 복합체의 사상이다. 이로부터 그 사상이
+준동형임이 따른다. 예를 들어 필터 복합체에 결부된 스펙트럼 열을
+사용하라. Homology, Section \ref{homology-section-filtered-complex}를
+보라.
+
+\medskip\noindent
+둘째 준동형의 증명은 정확히 같다.
+\end{proof}
+
+
+
+\section{아핀 경우의 코호몰로지}
+\label{section-cohomology-affine}
+
+\noindent
+Section \ref{section-quasi-coherent-crystals}에서 연구한 상황으로
+돌아가자. $(A, I, \gamma)$ 및 $A/I \to C$에서 출발하여
+$X = \Spec(C)$ 및 $S = \Spec(A)$로 놓는다. 이어 $A$ 위의 다항식환
+$P$와 핵이 $J$인 전사 $P \to C$를 택한다. 그러면
+(\ref{equation-D}) 및 (\ref{equation-Dn})의 $D$와 $D(n)$을 얻는다.
+$T(n)_e = \Spec(D(n)/p^eD(n))$로 놓아
+$(X, T(n)_e, \delta(n))$이 $\text{Cris}(X/S)$의 대상이 되게 하자.
+$\mathcal{F}$를 $\mathcal{O}_{X/S}$-가군의 층이라 하고
+$n = 0, 1, 2, 3, \ldots$에 대해
+$$
+M(n) = \lim_e \Gamma((X, T(n)_e, \delta(n)), \mathcal{F})
+$$
+로 놓는다. 이들은 쌍대단체 환 $D(0), D(1), D(2), \ldots$ 위의
+쌍대단체 가군을 이룬다.
+
+\begin{proposition}
+\label{proposition-compute-cohomology}
+위의 표기 아래 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{F}$는 국소 준연접이다.
+\item $\text{Cris}(X/S)$의 임의의 사상
+$(U, T, \delta) \to (U', T', \delta')$에서
+$f : T \to T'$가 닫힌 몰입이면 사상
+$c_f : f^*\mathcal{F}_{T'} \to \mathcal{F}_T$는 전사이다.
+\end{enumerate}
+그러면 복합체
+$$
+M(0) \to M(1) \to M(2) \to \ldots
+$$
+는 $R\Gamma(\text{Cris}(X/S), \mathcal{F})$를 계산한다.
+\end{proposition}
+
+\begin{proof}
+가정 (1)과 Lemma \ref{lemma-compare}을 사용하면
+$R\Gamma(\text{Cris}(X/S), \mathcal{F})$가
+$R\Gamma(\mathcal{C}, \mathcal{F})$와 동형임을 알 수 있다.
+Lemmas \ref{lemma-compare} and \ref{lemma-complete}에서 사용한 범주
+$\mathcal{C}$들은 일치함에 주의하라. $f : T \to T'$을 (2)에서와
+같은 닫힌 몰입이라 하자. $c_f : f^*\mathcal{F}_{T'} \to
+\mathcal{F}_T$의 전사성은 $\mathcal{F}_{T'} \to
+f_*\mathcal{F}_T$의 전사성과 동치이다. 따라서 $\mathcal{F}$가
+(1)과 (2)를 만족하면 $T'$ 위의 준연접 $\mathcal{O}_{T'}$-가군의
+짧은 완전열
+$$
+0 \to \mathcal{K} \to \mathcal{F}_{T'} \to f_*\mathcal{F}_T \to 0
+$$
+을 얻는다. Schemes, Section \ref{schemes-section-quasi-coherent}, 특히
+Lemma \ref{schemes-lemma-push-forward-quasi-coherent}를 보라.
+따라서 $T'$이 아핀이면 $H^1(T', \mathcal{K})$의 소멸로부터 제한 사상
+$\mathcal{F}(U', T', \delta') \to \mathcal{F}(U, T, \delta)$가
+전사임을 얻는다. Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}를 보라.
+그러므로 Lemma \ref{lemma-complete}의 역계들의 전이 사상들은
+전사이다. 여기서 $g$를 Lemma \ref{lemma-complete}에서와 같이 잡으면
+모든 $p \geq 1$에 대해
+$R^pg_*(\mathcal{F}|_\mathcal{C}) = 0$임을 얻는다.
+범주 $\mathcal{C}^\wedge$의 대상 $D$는 Lemma
+\ref{lemma-category-with-covering}의 가정을 만족한다. 이는 Lemma
+\ref{lemma-generator-completion}에서 따른다. 실제로
+$$
+D \times \ldots \times D = D(n)
+$$
+가 $\mathcal{C}$에서 성립한다. Lemma \ref{lemma-property-Dn}에 의해
+$D(n)$은 $\text{Cris}^\wedge(C/A)$에서 $D$의 $n + 1$중
+쌍대곱이기 때문이다. 결론을 얻었다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cohomology-is-zero}
+Proposition \ref{proposition-compute-cohomology}의 가정과 표기를
+사용하자. 그러면 모든 $i > 0$과 모든 $j \geq 0$에 대해
+$$
+H^j(\text{Cris}(X/S), \mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega^i_{X/S})
+= 0
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-omega-locally-quasi-coherent}을 사용하면
+$\mathcal{H} = \mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega^i_{X/S}$도
+Proposition \ref{proposition-compute-cohomology}의 가정 (1)과 (2)를
+만족함이 따른다. $M(n) = \lim_e M(n)_e$가 되도록
+$M(n)_e = \Gamma((X, T(n)_e, \delta(n)), \mathcal{F})$라 쓰자. 그러면
+% P08-E461: frozen formulas drop the exterior-power exponent i from Omega.
+\begin{align*}
+\lim_e \Gamma((X, T(n)_e, \delta(n)), \mathcal{H}) & =
+\lim_e M(n)_e \otimes_{D(n)_e} \Omega_{D(n)}/p^e\Omega_{D(n)} \\
+& = \lim_e M(n)_e \otimes_{D(n)} \Omega_{D(n)}
+\end{align*}
+이다. Lemma \ref{lemma-vanishing}에 의해 쌍대단체 가군들
+$$
+M(0)_e \otimes_{D(0)} \Omega^i_{D(0)} \to
+M(1)_e \otimes_{D(1)} \Omega^i_{D(1)} \to
+M(2)_e \otimes_{D(2)} \Omega^i_{D(2)} \to \ldots
+$$
+은 영과 호모토픽이다. 전이 사상들
+$M(n)_{e + 1} \to M(n)_e$가 전사이므로 결부된 복합체들의
+역극한은 비순환임을 알 수 있다\footnote{실제로 호모토피들이 서로
+맞물리므로 영과 호모토픽이기까지 하지만, 이것은 필요하지 않다.
+이렇게 우회하여 논증하는 이유는 보조정리의 가정만으로는
+$M(n)_e = M(n)_{e + 1}/p^eM(n)_{e + 1}$임을 알 수 없으므로
+극한 $\lim_e M(n)_e \otimes_{D(n)} \Omega^i_{D(n)}$이
+$M(n) \otimes_{D(n)} \Omega^i_{D(n)}$의 $p$-진 완비화가 아니기
+때문이다. $\mathcal{F}$가 크리스털이면 이 등식은 성립한다.}.
+따라서 Proposition \ref{proposition-compute-cohomology}에 의해
+% P08-E458: frozen English omits the finite verb in its concluding sentence.
+$\mathcal{H}$의 코호몰로지가 소멸한다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-compute-cohomology-crystal}
+Proposition \ref{proposition-compute-cohomology}의 가정 아래 이제
+$\mathcal{F}$가 준연접 가군 값 크리스털이라고 가정하자.
+Proposition \ref{proposition-crystals-on-affine}을 따라 $(M, \nabla)$를
+$D$ 위에서 대응하는 접속 달린 가군이라 하자. 그러면 복합체
+$$
+M \otimes^\wedge_D \Omega^*_D
+$$
+는 $R\Gamma(\text{Cris}(X/S), \mathcal{F})$를 계산한다.
+\end{proposition}
+
+\begin{proof}
+항들이
+$$
+K^{a, b} = M \otimes_D^\wedge \Omega^a_{D(b)}
+$$
+인 이중복합체 $K^{*, *}$에 결부된 두 스펙트럼 열을 사용하여
+증명할 것이다. 지금까지 무엇을 아는가? Lemma
+\ref{lemma-vanishing}에 의해 각 열 $K^{a, *}$, $a > 0$은
+비순환이다. Proposition \ref{proposition-compute-cohomology}에 의해
+첫째 열 $K^{0, *}$은
+$R\Gamma(\text{Cris}(X/S), \mathcal{F})$와 준동형이다. 따라서
+이중복합체에 결부된 첫째 스펙트럼 열은
+$R\Gamma(\text{Cris}(X/S), \mathcal{F})$와
+$\text{Tot}(K^{*, *})$ 사이에 표준 준동형이 있음을 보인다.
+
+\medskip\noindent
+다음으로 행들 $K^{*, b}$를 생각하자. Lemma
+\ref{lemma-structure-Dn}에 의해 $b + 1$개의 각 사상
+$D \to D(b)$은 $D(b)$를 $D$ 위의 분할멱 다항식대수의 $p$-진
+완비화로 표시한다. 따라서 Lemma \ref{lemma-relative-poincare}에
+의해 사상
+$$
+M \otimes^\wedge_D\Omega^*_D
+\longrightarrow
+M \otimes^\wedge_{D(b)} \Omega^*_{D(b)} = K^{*, b}
+$$
+은 준동형이다. 이 사상들은 각각 코호몰로지 위에서 {it 같은}
+사상을 정의함에 주의하라(더 나아가 유도 범주에서도 같은
+사상을 정의한다). 실제로 역은 곱셈 사상
+$P \otimes_A \ldots \otimes_A P \to P$에 대응하는 쌍대대각 사상
+$D(b) \to D$로 주어진다. 따라서 둘째 스펙트럼 열의 $E_1$ 쪽은
+$$
+E_1^{a, b} = H^a(M \otimes^\wedge_D\Omega^*_D)
+$$
+이고 그 미분들은
+$$
+E_1^{a, 0} \xrightarrow{0}
+E_1^{a, 1} \xrightarrow{1}
+E_1^{a, 2} \xrightarrow{0}
+E_1^{a, 3} \xrightarrow{1} \ldots
+$$
+이다. 실제로 각 미분은 주어진 동일시
+$H^a(M \otimes^\wedge_D\Omega^*_D) = E_1^{a, 0} = E_1^{a, 1} = \ldots$의
+교대합이다. 따라서 $E_2$ 쪽은 첫째 행에서
+% P08-E459: frozen English omits "to" in "is equal to".
+$H^a(M \otimes^\wedge_D\Omega^*_D)$와 같고 다른 곳에서는 영이다.
+그러므로 $M \otimes^\wedge_D\Omega^*_D$와 첫째 행의 동일시는
+$M \otimes^\wedge_D\Omega^*_D$와 $\text{Tot}(K^{*, *})$ 사이의
+준동형을 유도한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compute-cohomology-crystal-smooth}
+Proposition \ref{proposition-compute-cohomology-crystal}의 가정을
+사용하자. $A \to P' \to C$가 환 사상들이고 $A \to P'$은
+매끄러우며 $P' \to C$는 핵이 $J'$인 전사라고 하자. $D'$을
+$D_{P', \gamma}(J')$의 $p$-진 완비화라 하자. $(M', \nabla')$를
+Lemma \ref{lemma-crystals-on-affine-smooth}을 따라 $D'$ 위에서
+$\mathcal{F}$에 대응하는 쌍이라 하자. 그러면 복합체
+$$
+M' \otimes^\wedge_{D'} \Omega^*_{D'}
+$$
+는 $R\Gamma(\text{Cris}(X/S), \mathcal{F})$를 계산한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-crystals-on-affine-smooth}에서와 같이
+$a : D \to D'$과 $b : D' \to D$을 택한다. 접속 $\nabla$와 함께
+기저변환 $M = M' \otimes_{D', b} D$이 $\mathcal{F}$에 대응함에
+주의하라. 따라서 Proposition
+\ref{proposition-compute-cohomology-crystal}에 의해
+$M \otimes^\wedge_D \Omega_D^*$가 $\mathcal{F}$의 크리스탈린
+코호몰로지를 계산함을 안다. 그러므로 $a$와 $b$가 유도하는
+기저변환 사상들
+$$
+M' \otimes^\wedge_{D'} \Omega^*_{D'}
+\longrightarrow
+M \otimes^\wedge_D \Omega^*_D
+\quad\text{and}\quad
+M \otimes^\wedge_D \Omega^*_D
+\longrightarrow
+M' \otimes^\wedge_{D'} \Omega^*_{D'}
+$$
+이 준동형임을 보이면 충분하다. $a \circ b = \text{id}_{D'}$이므로
+한 방향의 합성은 복합체
+$M' \otimes^\wedge_{D'} \Omega^*_{D'}$의 항등사상이다. 따라서
+$b \circ a : D \to D$가 유도하는 사상
+$$
+M \otimes^\wedge_D \Omega^*_D
+\longrightarrow
+M \otimes^\wedge_D \Omega^*_D
+$$
+이 준동형임을 보이면 충분하다. (양변의 복합체가 같은 이유는
+$M = M' \otimes^\wedge_{D', b} D$이고, 따라서
+$M \otimes^\wedge_{D, b \circ a} D =
+M' \otimes^\wedge_{D', b \circ a \circ b} D =
+M' \otimes^\wedge_{D', b} D = M$이기 때문이다.) 사실 $C$로의
+첨가와 양립하는 임의의 분할멱 $A$-대수 준동형
+$\rho : D \to D$에 대해 유도 사상
+$M \otimes^\wedge_D \Omega^*_D \to
+M \otimes^\wedge_{D, \rho} \Omega^*_D$이 준동형이라고 주장한다.
+
+\medskip\noindent
+$\rho(x_i) = x_i + z_i$라 쓰자. $\rho$가 $C$로의 첨가와
+양립하므로 원소들 $z_i$는 $D$의 분할멱 아이디얼에 속한다.
+따라서 사상 $\rho$를 합성
+$$
+D \xrightarrow{\sigma} D\langle \xi_i \rangle^\wedge \xrightarrow{\tau} D
+$$
+으로 분해할 수 있다. 여기서 첫째 사상은
+$x_i \mapsto x_i + \xi_i$로 주어지고, 둘째 사상은 $\xi_i$를
+$z_i$로 보내는 분할멱 $D$-대수 사상이다. (이는 다항식대수,
+분할멱 다항식대수, 분할멱 포락 및 $p$-진 완비화의 보편 성질을
+사용한다.) $\alpha(x_i) = x_i - \xi_i$ 및
+$\alpha(\xi_i) = \xi_i$인 $D\langle \xi_i \rangle^\wedge$의
+{it 자기동형} $\alpha$가 존재함에 주의하라. Lemma
+\ref{lemma-relative-poincare}을 $\alpha \circ \sigma$에 적용하고
+(이는 $x_i$를 $x_i$로 보낸다) $\alpha$가 동형임을 사용하면
+$\sigma$가 $M \otimes^\wedge_D \Omega^*_D$와
+% P08-E460: frozen formulas switch the factorization ring from xi_i to x_i.
+$M \otimes^\wedge_{D, \sigma} \Omega^*_{D\langle x_i \rangle^\wedge}$
+사이의 준동형을 유도함을 얻는다. 다른 한편으로 $\tau$의 왼쪽
+역은 사상 $D \to D\langle x_i \rangle^\wedge$,
+$x_i \mapsto x_i$이다. Lemma \ref{lemma-relative-poincare}을 다시
+사용하면 $\tau$가
+$M \otimes^\wedge_{D, \sigma} \Omega^*_{D\langle x_i \rangle^\wedge}$와
+$M \otimes^\wedge_{D, \tau \circ \sigma} \Omega^*_D$ 사이의
+준동형을 유도함을 얻는다. 이 두 준동형을 합성하면 원하는 대로
+$\rho$가 준동형
+$M \otimes^\wedge_D \Omega^*_D \to
+M \otimes^\wedge_{D, \rho} \Omega^*_D$을 유도함을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{두 반례}
+\label{section-examples}
+
+\noindent
+크리스탈린 코호몰로지의 몇 가지 성공으로 넘어가기 전에, 문제의
+스킴이 밑 위에서 고유하지 않거나 특이할 때 크리스탈린
+코호몰로지가 잘 작동하지 않는 이유를 설명하는 두 예를 들자.
+첫째 예는 \cite{BO}에 있다.
+
+\begin{example}
+\label{example-torsion}
+$A = \mathbf{Z}_p$라 하고, 분할멱 아이디얼 $(p)$에 그 유일한
+분할멱들 $\gamma$를 주자.
+$C = \mathbf{F}_p[x, y]/(x^2, xy, y^2)$라 하자. 표시
+$$
+C = P/J = \mathbf{Z}_p[x, y]/(x^2, xy, y^2, p)
+$$
+를 택한다. Section \ref{section-quasi-coherent-crystals}에서처럼
+$D = D_{P, \gamma}(J)^\wedge$라 하고, 그 분할멱 아이디얼을
+$(\bar J, \bar \gamma)$라 하자. $x, y$의 $D$에서의 상을 각각
+$x$와 $y$로도 쓸 것이다. 원소
+$$
+\tau = \bar\gamma_p(x^2)\bar\gamma_p(y^2) - \bar\gamma_p(xy)^2 \in D
+$$
+를 생각하자. $D$에서
+$$
+p! \bar\gamma_p(x^2) \bar\gamma_p(y^2) =
+x^{2p} \bar\gamma_p(y^2) = \bar\gamma_p(x^2y^2) =
+x^py^p \bar\gamma_p(xy) = p! \bar\gamma_p(xy)^2
+$$
+이므로 $p\tau = 0$임에 주의하라. 또한 $\Omega_D$에서
+$\text{d}\tau = 0$이다. 실제로
+\begin{align*}
+\text{d}(\bar\gamma_p(x^2) \bar\gamma_p(y^2))
+& =
+\bar\gamma_{p - 1}(x^2)\bar\gamma_p(y^2)\text{d}x^2 +
+\bar\gamma_p(x^2)\bar\gamma_{p - 1}(y^2)\text{d}y^2 \\
+& =
+2 x \bar\gamma_{p - 1}(x^2)\bar\gamma_p(y^2)\text{d}x +
+2 y \bar\gamma_p(x^2)\bar\gamma_{p - 1}(y^2)\text{d}y \\
+& =
+2/(p - 1)!( x^{2p - 1} \bar\gamma_p(y^2)\text{d}x +
+y^{2p - 1} \bar\gamma_p(x^2)\text{d}y ) \\
+& =
+2/(p - 1)!
+(x^{p - 1} \bar\gamma_p(xy^2)\text{d}x +
+y^{p - 1} \bar\gamma_p(x^2y)\text{d}y) \\
+& =
+2/(p - 1)!
+(x^{p - 1}y^p \bar\gamma_p(xy)\text{d}x +
+x^py^{p - 1} \bar\gamma_p(xy)\text{d}y) \\
+& =
+2 \bar\gamma_{p - 1}(xy) \bar\gamma_p(xy)(y\text{d}x + x \text{d}y) \\
+& =
+\text{d}(\bar\gamma_p(xy)^2)
+\end{align*}
+이다. 마지막으로 $D$에서 $\tau \not = 0$이라고 주장한다. 이를
+보이려면 $\tau$가 $B$에서 영으로 가지 않는
+$\text{Cris}(C/S)$의 대상
+$(B \to \mathbf{F}_p[x, y]/(x^2, xy, y^2), \delta)$를 만들면
+충분하다. 이를 위해
+$$
+B = \mathbf{F}_p[x, y, u, v]/(x^3, x^2y, xy^2, y^3, xu, yu, xv, yv, u^2, v^2)
+$$
+를 취하고 $C$로의 명백한 전사를 사용한다.
+$K = \Ker(B \to C)$라 하고 사상
+$$
+\delta_p : K \longrightarrow K,\quad
+ax^2 + bxy + cy^2 + du + ev + fuv \longmapsto a^pu + c^pv
+$$
+을 생각하자. 이것이 Divided Power Algebra, Lemma
+\ref{dpa-lemma-need-only-gamma-p}의 가정 (1), (2), (3)을
+만족함을 확인할 수 있으므로 분할멱 구조를 정의한다. 더욱이
+$\tau$는 $B$에서 영이 아닌 $uv$로 감을 알 수 있다.
+$X = \Spec(C)$ 및 $S = \Spec(A)$로 놓자. 다음 결론을 얻는다.
+\begin{enumerate}
+\item $H^0(\text{Cris}(X/S), \mathcal{O}_{X/S})$에는 $p$-꼬임이 있다.
+\item 프로베니우스에 의한 당김
+$F^* : H^0(\text{Cris}(X/S), \mathcal{O}_{X/S})
+\to H^0(\text{Cris}(X/S), \mathcal{O}_{X/S})$은 단사가 아니다.
+\end{enumerate}
+실제로 Proposition \ref{proposition-compute-cohomology-crystal}에 의해
+$\tau$는 $H^0(\text{Cris}(X/S), \mathcal{O}_{X/S})$의 영이 아닌
+꼬임 원소를 정의한다. 마찬가지로 $F^*(\tau) = \sigma(\tau)$이다.
+여기서 $\sigma : D \to D$는 $P$ 위 프로베니우스의 임의의 올림이
+유도하는 사상이다. $\sigma(x) = x^p$와 $\sigma(y) = y^p$를 택하면
+간단한 계산으로 $F^*(\tau) = 0$임을 얻는다.
+\end{example}
+
+\noindent
+다음 예는 아핀 $n$-공간에 대해서조차 크리스탈린 코호몰로지가
+올바른 것을 주지 않음을 보인다.
+
+\begin{example}
+\label{example-affine-n-space}
+$A = \mathbf{Z}_p$라 하고, 분할멱 아이디얼 $(p)$에 그 유일한
+분할멱들 $\gamma$를 주자. $C = \mathbf{F}_p[x_1, \ldots, x_r]$라
+하자. 표시
+$$
+C = P/J = P/pP\quad\text{with}\quad P = \mathbf{Z}_p[x_1, \ldots, x_r]
+$$
+를 택한다. Divided Power Algebra, Lemma
+\ref{dpa-lemma-gamma-extends}에 의해 $pP$에는 분할멱들이 있음에
+주의하라. 따라서 $D = P^\wedge$로 놓고 분할멱 아이디얼 $(p)$을
+취하면 Section \ref{section-quasi-coherent-crystals}의 상황을 얻는다.
+Proposition \ref{proposition-compute-cohomology-crystal}에 의해
+$R\Gamma(\text{Cris}(X/S), \mathcal{O}_{X/S})$는 복합체
+$$
+D \to \Omega^1_D \to \Omega^2_D \to \ldots \to \Omega^r_D
+$$
+로 표현된다. $r > 0$이라 가정하면 다음을 얻는다.
+\begin{enumerate}
+% P08-E462: frozen item misspells "crystalline" twice as "cristalline".
+\item $S = \Spec(\mathbf{Z}_p)$ 위의
+$X = \mathbf{A}^r_{\mathbf{F}_p}$의 크리스탈린 구조층의 크리스탈린
+코호몰로지는 차수 $0, \ldots, r$을 제외하면 영이다.
+\item $H^0(\text{Cris}(X/S), \mathcal{O}_{X/S}) = \mathbf{Z}_p$이다.
+\item 코호몰로지군 $H^r(\text{Cris}(X/S), \mathcal{O}_{X/S})$은
+무한이고 꼬임 아벨 군이 아니다.
+\item 코호몰로지군 $H^r(\text{Cris}(X/S), \mathcal{O}_{X/S})$은
+$p$-진 위상에 대해 분리되지 않는다.
+\end{enumerate}
+앞의 두 명제는 합리적이지만 (3)과 (4)는 당혹스럽다! 이 명제들은
+위에 표시한 복합체의 모양을 계산하면 즉시 따른다. 만약을 위해
+$r = 1$인 경우만 계산해 보자. 그러면 단지 $p$-진 완비 가군들의
+두 항 복합체
+$$
+\text{d} :
+D = \left(
+\bigoplus\nolimits_{n \geq 0} \mathbf{Z}_p x^n
+\right)^\wedge
+\longrightarrow
+\Omega^1_D = \left(
+\bigoplus\nolimits_{n \geq 1} \mathbf{Z}_p x^{n - 1}\text{d}x
+\right)^\wedge
+$$
+를 보고 있다. 사상은 $\text{diag}(0, 1, 2, 3, 4, \ldots)$로
+주어지되, 우변에는 첫째 직합 인자가 없다. 이제
+$\bigoplus_{n > 0} \mathbf{Z}_p/n\mathbf{Z}_p$가 여핵의 부분군임이
+명백하므로 여핵은 무한이다. 실제로 원소
+$$
+\omega = \sum\nolimits_{e > 0} p^e x^{p^{2e} - 1}\text{d}x
+$$
+는 분명 여핵의 꼬임 원소가 아니다. 그러나 상황은 더 나빠진다.
+원소
+$$
+\eta = \sum\nolimits_{e > 0} p^e x^{p^e - 1}\text{d}x
+$$
+를 생각하자. 모든 $t > 0$에 대해 $\eta$는 $\text{d}$의 상을
+법으로 $\sum_{e > t} p^e x^{p^e - 1}\text{d}x$와 합동이고,
+후자는 $p^t$로 나누어진다. 따라서 $H^1(\text{Cris}(X/S),
+\mathcal{O}_{X/S})$에서 $\eta$의 코호몰로지류는
+$\bigcap p^tH^1(\text{Cris}(X/S), \mathcal{O}_{X/S})$에 들어간다.
+그러나 $\eta$는 $\text{d}$의 상에 속하지 않는다. 속한다면 어떤
+$a \in \mathbf{Z}_p$에 대해 $a + \sum_{e > 0} x^{p^e}$의 상이어야
+하지만, 이것은 좌변의 원소가 아니기 때문이다. 그러므로 $\eta$의
+코호몰로지류는 영이 아니고 (4)가 참임을 알 수 있다. (사실
+$\eta$의 코호몰로지류는 비꼬임이다.) 긍정적인 면으로,
+코호몰로지군들 $H^i(\text{Cris}(X/S), \mathcal{O}_{X/S})$은
+$p$-진 완비 가군들의 복합체의 코호몰로지이므로 유도 완비
+$\mathbf{Z}_p$-가군이다. More on Algebra, Section
+\ref{more-algebra-section-derived-completion}을 보라.
+\end{example}
+
+
+
+
+
+
+
+
+\section{응용}
+\label{section-applications}
+
+\noindent
+이 절에서는 앞 절들에서 얻은 내용의 몇 가지 응용을 모은다.
+
+\begin{proposition}
+\label{proposition-compare-with-de-Rham}
+Situation \ref{situation-global}에서 다음이 성립한다.
+$\mathcal{F}$를 $\text{Cris}(X/S)$ 위의 준연접 가군 값
+크리스털이라 하자. 복합체의 절단 사상
+$$
+(\mathcal{F} \to
+\mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega^1_{X/S} \to
+\mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega^2_{X/S} \to \ldots)
+\longrightarrow \mathcal{F}[0],
+$$
+은 준동형이 아니지만 $Ru_{X/S, *}$를 적용한 뒤에는 준동형이 된다.
+실제로 임의의 $i > 0$에 대해
+$$
+Ru_{X/S, *}(\mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega^i_{X/S}) = 0.
+$$
+이다.
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{lemma-automatic-connection}에 의해 명제에 표시한 드람
+% P08-E463: frozen proof calls the preceding proposition "the lemma".
+복합체를 얻는다. $\mathcal{H} = \mathcal{F} \otimes \Omega^i_{X/S}$로
+줄여 쓰자. $X' \subset X$를 아핀 열린 부분스킴
+$S' \subset S$로 가는 아핀 열린 부분스킴이라 하자. 그러면
+$$
+(Ru_{X/S, *}\mathcal{H})|_{X'_{Zar}} =
+Ru_{X'/S', *}(\mathcal{H}|_{\text{Cris}(X'/S')}),
+$$
+이다. Lemma \ref{lemma-localize}를 보라. 따라서 Lemma
+\ref{lemma-cohomology-is-zero}에 의해 $Ru_{X/S, *}\mathcal{H}$는
+$X_{Zar}$ 위 층의 복합체이고, 그 코호몰로지는 임의의 아핀
+열린집합 위에서 자명하다. $X$의 위상은 아핀 열린집합들로 이루어진
+기저를 가지므로 $Ru_{X/S, *}\mathcal{H}$가 영과 준동형임이 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-vanishing}
+Proposition \ref{proposition-compare-with-de-Rham}의 증명은 $i > 0$에
+대한 결론
+$$
+Ru_{X/S, *}(\mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega^i_{X/S}) = 0
+$$
+이 Proposition \ref{proposition-compute-cohomology}의 조건 (1)과
+(2)를 만족하는 임의의 $\mathcal{O}_{X/S}$-가군 $\mathcal{F}$에
+대해 참임을 보인다. 이는 다음과 같은 크리스털이 아닌 층들에
+적용된다. 모든 $i$에 대한 $\Omega^i_{X/S}$, 그리고
+$\mathcal{F}$가 준연접 $\mathcal{O}_X$-가군인
+$\underline{\mathcal{F}}$ 꼴의 임의의 층이다. 특히
+$\underline{\mathcal{O}_X} = \underline{\mathbf{G}_a}$에 적용된다.
+그러나 드람 복합체를 만들려면 Lemma
+\ref{lemma-automatic-connection}과 같은 것이 필요하고, 이를 위해
+$\mathcal{F}$가 크리스털이어야 함에 주의하라. 따라서 (현재로서는)
+Proposition \ref{proposition-compare-with-de-Rham}의 전체 명제가
+성립하는 가군의 층들의 모음은 정확히 준연접 가군 값 크리스털의
+범주이다.
+\end{remark}
+
+\noindent
+Situation \ref{situation-global}에서 다음을 생각하자.
+$\mathcal{F}$를 $\text{Cris}(X/S)$ 위의 준연접 가군 값 크리스털이라
+하고, $(U, T, \delta)$를 $\text{Cris}(X/S)$의 대상이라 하자.
+Proposition \ref{proposition-compare-with-de-Rham}을 사용하면 표준 사상
+\begin{equation}
+\label{equation-restriction}
+R\Gamma(\text{Cris}(X/S), \mathcal{F})
+\longrightarrow
+R\Gamma(T, \mathcal{F}_T \otimes_{\mathcal{O}_T} \Omega^*_{T/S, \delta})
+\end{equation}
+을 구성할 수 있다. 실제로
+$R\Gamma(\text{Cris}(X/S), \mathcal{F}) =
+R\Gamma(\text{Cris}(X/S), \mathcal{F} \otimes \Omega^*_{X/S})$이고,
+전역 코호몰로지류들을 $T$에 제한할 수 있으며, Lemma
+\ref{lemma-module-of-differentials}에 의해 $\Omega_{X/S}$는
+$\Omega_{T/S, \delta}$로 제한된다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{몇 가지 추가 결과}
+\label{section-missing}
+
+\noindent
+이 절에서는 증명이 빠져 있는 몇 가지 결과를 언급한다. 이들을
+일련의 언급으로 정식화하고, 자세한 증명을 추가할 때에만 실제
+보조정리와 명제로 바꿀 것이다.
+
+\begin{remark}[고차 직상]
+\label{remark-compute-direct-image}
+$p$를 소수라 하자.
+$(S, \mathcal{I}, \gamma) \to (S', \mathcal{I}', \gamma')$를
+$\mathbf{Z}_{(p)}$ 위의 분할멱 스킴의 사상이라 하자. 스킴 사상의
+가환 도식
+$$
+\xymatrix{
+X \ar[r]_f \ar[d] & X' \ar[d] \\
+S_0 \ar[r] & S'_0
+}
+$$
+이 주어졌다고 하고, $X$와 $X'$ 위에서 $p$가 국소 멱영이라고
+가정하자. $\mathcal{F}$를 $\text{Cris}(X/S)$ 위의
+$\mathcal{O}_{X/S}$-가군이라 하자. 그러면
+$Rf_{\text{cris}, *}\mathcal{F}$를 다음과 같이 계산할 수 있다.
+
+\medskip\noindent
+$\text{Cris}(X'/S')$의 대상 $(U', T', \delta')$이 주어지면
+$U = X \times_{X'} U' = f^{-1}(U')$로 놓자(이는 $X$의 열린
+부분스킴이다). 분할멱 스킴의 범주에서 도식
+$$
+\xymatrix{
+T \ar[r] \ar[d] & T' \ar[d] \\
+S \ar[r] & S'
+}
+$$
+이 카르테시안이 되게 하는 $S$ 위의 분할멱 스킴을
+$(T_0, T, \delta)$로 쓰자. Lemma \ref{lemma-fibre-product}를 보라.
+유도 사상 $U \to T_0$이 있고, Remark
+\ref{remark-functoriality-cris}에 따라 사상
+$(U/T)_{\text{cris}} \to (X/S)_{\text{cris}}$를 얻는다.
+$\mathcal{F}_U$를 $\mathcal{F}$의 당김이라 하자. 구조 사상을
+$\tau_{U/T} : (U/T)_{\text{cris}} \to T_{Zar}$로 쓰자. 그러면
+\begin{equation}
+\label{equation-identify-pushforward}
+\left(Rf_{\text{cris}, *}\mathcal{F}\right)_{T'} =
+R(T \to T')_*\left(R\tau_{U/T, *} \mathcal{F}_U \right)
+\end{equation}
+이다. 여기서 좌변은 제한이다(Section \ref{section-sheaves}를 보라).
+
+\medskip\noindent
+힌트: 먼저 $\text{Cris}(U/T)$가 집합의 층
+$f_{\text{cris}}^{-1}h_{(U', T', \delta')}$에서
+$\text{Cris}(X/S)$를 국소화한 것임을 보이라(Sites, Lemma
+\ref{sites-lemma-localize-topos-site}의 의미에서). 다음으로 단사
+가군 $\mathcal{F}$의 경우와 가군의 직상으로 명제를 환원하라.
+이때 단사 $\mathcal{O}_{X/S}$-가군의 당김이
+$\text{Cris}(U/T)$ 위의 단사 $\mathcal{O}_{U/T}$-가군임을 사용한다.
+마지막으로 보통의 직상에 대해 결과가 성립함을 확인하라.
+\end{remark}
+
+\begin{remark}[마이어--비에토리스]
+\label{remark-mayer-vietoris}
+Remark \ref{remark-compute-direct-image}의 상황에서 열린 덮개
+$X = X' \cup X''$가 주어졌다고 하자. $X''' = X' \cap X''$라 쓰자.
+% P08-E464: frozen prose names the third restriction f'' instead of f'''.
+$f'$, $f''$, and $f''$을 각각 $f$의 $X'$, $X''$, and $X'''$로의
+제한이라 하자. 또한 $\mathcal{F}'$, $\mathcal{F}''$, and
+$\mathcal{F}'''$을 각각 $\mathcal{F}$의 $X'$, $X''$, and $X'''$의
+크리스탈린 사이트로의 제한이라 하자. 그러면
+$D(\mathcal{O}_{X'/S'})$ 안에 특별 삼각형
+$$
+Rf_{\text{cris}, *}\mathcal{F}
+\longrightarrow
+Rf'_{\text{cris}, *}\mathcal{F}' \oplus Rf''_{\text{cris}, *}\mathcal{F}''
+\longrightarrow
+Rf'''_{\text{cris}, *}\mathcal{F}'''
+\longrightarrow
+Rf_{\text{cris}, *}\mathcal{F}[1]
+$$
+이 존재한다.
+
+\medskip\noindent
+힌트: 이는 부분범주들 $\text{Cris}(X'/S)$,
+$\text{Cris}(X''/S)$, $\text{Cris}(X'''/S)$가
+$\text{Cris}(X/S)$ 위의 끝 층의 열린 부분대상들에 대응하고,
+마지막 것이 앞 두 것의 교집합이라는 사실의 형식적 귀결이다.
+\end{remark}
+
+\begin{remark}[체흐 복합체]
+\label{remark-cech-complex}
+$p$를 소수라 하자. $(A, I, \gamma)$를 $A$가
+$\mathbf{Z}_{(p)}$-대수인 분할멱환이라 하자. $S = \Spec(A)$ 및
+$S_0 = \Spec(A/I)$로 놓는다. $X$를 $S_0$ 위의
+분리 스킴이라 하자\footnote{이 가정은 엄밀히 필요하지 않다.
+초덮개를 사용하면 이 언급의 구성을 일반적인 경우로 확장할 수
+있기 때문이다.}. $X$ 위에서 $p$가 국소 멱영이라고 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_{X/S}$-가군
+값 크리스털이라 하자.
+
+\medskip\noindent
+$X$의 아핀 열린 덮개
+$X = \bigcup_{\lambda \in \Lambda} U_\lambda$를 택한다.
+$U_\lambda = \Spec(C_\lambda)$라 쓰자. $A$ 위의 다항식대수
+$P_\lambda$와 전사 $P_\lambda \to C_\lambda$를 택한다. 이 선택들을
+고정하면 $R\Gamma(\text{Cris}(X/S), \mathcal{F})$를 계산하는
+체흐 복합체를 구성할 수 있다.
+
+\medskip\noindent
+$n \geq 0$ 및 $\lambda_0, \ldots, \lambda_n \in \Lambda$가 주어지면
+$U_{\lambda_0 \ldots \lambda_n} = U_{\lambda_0} \cap \ldots
+\cap U_{\lambda_n}$이라 쓰자. 이는 가정에 의해 아핀 스킴이다.
+$U_{\lambda_0 \ldots \lambda_n} =
+\Spec(C_{\lambda_0 \ldots \lambda_n})$이라 쓰자. 다음과 같이 놓는다.
+$$
+P_{\lambda_0 \ldots \lambda_n} =
+P_{\lambda_0} \otimes_A \ldots \otimes_A P_{\lambda_n}
+$$
+이 대수에는 $C_{\lambda_0 \ldots \lambda_n}$으로의 표준 전사가
+주어진다. 그 핵을 $J_{\lambda_0 \ldots \lambda_n}$이라 쓰고,
+$D_{\lambda_0 \ldots \lambda_n}$을 $\gamma$에 상대적인
+$P_{\lambda_0 \ldots \lambda_n}$ 안의
+$J_{\lambda_0 \ldots \lambda_n}$의 $p$-진 완비화된 분할멱 포락으로
+놓는다. $M_{\lambda_0 \ldots \lambda_n}$을 Proposition
+% P08-E465: frozen prose calls this a P-module, whereas the cited affine
+% classification attaches the value module to the completed envelope D.
+\ref{proposition-crystals-on-affine}을 통해 $\mathcal{F}$의
+$\text{Cris}(U_{\lambda_0 \ldots \lambda_n}/S)$로의 제한에 대응하는
+$P_{\lambda_0 \ldots \lambda_n}$-가군이라 하자. 구성에 의해 차수
+$n$에서 환
+$$
+D(n) =
+\prod\nolimits_{\lambda_0 \ldots \lambda_n}
+D_{\lambda_0 \ldots \lambda_n}
+$$
+을 갖는 쌍대단체 분할멱환 $D(*)$를 얻는다(분할멱 포락의 함자성과
+같은 방식으로 정의한 환 $P(*)$ 위의 자명한 쌍대단체 구조를
+사용하라). $M_{\lambda_0 \ldots \lambda_n}$은 대상
+$\Spec(D_{\lambda_0 \ldots \lambda_n})$ 위에서 $\mathcal{F}$의
+``값''이므로 규칙
+$$
+M(n) = \prod\nolimits_{\lambda_0 \ldots \lambda_n}
+M_{\lambda_0 \ldots \lambda_n}
+$$
+으로 정의한 $M(*)$이 쌍대단체 $D(*)$-가군을 이룸을 알 수 있다.
+이제 다음이 성립한다고 주장한다.
+$$
+R\Gamma(\text{Cris}(X/S), \mathcal{F}) = s(M(*))
+$$
+여기서 $s(-)$는 쌍대단체 가군에 결부된 공사슬 복합체를 나타낸다
+(Simplicial, Section
+\ref{simplicial-section-dold-kan-cosimplicial}을 보라).
+
+\medskip\noindent
+힌트: 그 증명은 Proposition \ref{proposition-compute-cohomology}의
+증명과 비슷하다(특히 그 명제의 가정들을 만족하는 임의의 가군에
+대해 이 결과가 성립한다).
+\end{remark}
+
+\begin{remark}[교대 체흐 복합체]
+\label{remark-alternating-cech-complex}
+$p$를 소수라 하자. $(A, I, \gamma)$를 $A$가
+$\mathbf{Z}_{(p)}$-대수인 분할멱환이라 하자. $S = \Spec(A)$ 및
+$S_0 = \Spec(A/I)$로 놓는다. $X$를 $S_0$ 위의
+분리 준콤팩트 스킴이라 하자. $X$ 위에서 $p$가 국소 멱영이라고
+하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_{X/S}$-가군 값 크리스털이라 하자.
+
+\medskip\noindent
+$X$의 유한 아핀 열린 덮개
+$X = \bigcup_{\lambda \in \Lambda} U_\lambda$와 $\Lambda$ 위의
+전순서를 택한다. $U_\lambda = \Spec(C_\lambda)$라 쓰자.
+$A$ 위의 다항식대수 $P_\lambda$와 전사
+$P_\lambda \to C_\lambda$를 택한다. 이 선택들을 고정하면
+$R\Gamma(\text{Cris}(X/S), \mathcal{F})$를 계산하는 교대 체흐
+복합체를 구성할 수 있다.
+
+\medskip\noindent
+Remark \ref{remark-cech-complex}에서 도입한 표기를 사용할 것이다.
+$\Omega_{\lambda_0 \ldots \lambda_n}$을 분할멱 구조와 양립하는,
+$A$ 위의 $D_{\lambda_0 \ldots \lambda_n}$의 미분 가군의 $p$-진
+완비화로 쓰자. $\nabla$를 Proposition
+\ref{proposition-crystals-on-affine}에서 오는
+$M_{\lambda_0 \ldots \lambda_n}$ 위의 적분 가능 접속이라 하자.
+항들이
+$$
+M^{n, m} =
+\bigoplus\nolimits_{\lambda_0 < \ldots < \lambda_n}
+M_{\lambda_0 \ldots \lambda_n}
+\otimes^\wedge_{D_{\lambda_0 \ldots \lambda_n}}
+\Omega^m_{D_{\lambda_0 \ldots \lambda_n}}.
+$$
+인 이중복합체 $M^{\bullet, \bullet}$를 생각하자. $n$을 증가시키는
+미분 $d_1$으로 보통의 체흐 미분을 사용하고, 미분 $d_2$로 접속,
+즉 드람 복합체의 미분을 사용한다. 다음이 성립한다고 주장한다.
+$$
+R\Gamma(\text{Cris}(X/S), \mathcal{F}) = \text{Tot}(M^{\bullet, \bullet})
+$$
+여기서 $\text{Tot}(-)$는 이중복합체에 결부된 전체 복합체를
+나타낸다. Homology, Definition
+\ref{homology-definition-associated-simple-complex}를 보라.
+
+\medskip\noindent
+힌트: Proposition \ref{proposition-compare-with-de-Rham}에 의해
+$$
+R\Gamma(\text{Cris}(X/S), \mathcal{F}) = R\Gamma(\text{Cris}(X/S),
+\mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega_{X/S}^\bullet)
+$$
+이다. 공식의 우변은 덮개
+$X = \bigcup_{\lambda \in \Lambda} U_\lambda$와 복합체
+$\mathcal{F} \otimes_{\mathcal{O}_{X/S}} \Omega_{X/S}^\bullet$에 대한
+교대 체흐 복합체일 뿐이다(이 덮개는 $\text{Cris}(X/S)$의 끝 층의
+열린 덮개를 유도한다). Proposition
+\ref{proposition-compute-cohomology-crystal}을 보라. 이제 조각들
+각각에서 올바른 답을 주면 교대 체흐 복합체가 코호몰로지를
+계산한다는 사이트 코호몰로지의 일반적 결과로부터 결론이 따른다
+(향후 참고문헌을 여기에 넣을 것).
+\end{remark}
+
+\begin{remark}[준연접성]
+\label{remark-quasi-coherent}
+Remark \ref{remark-compute-direct-image}의 상황에서 $S \to S'$가
+준콤팩트이고 준분리이며 $X \to S_0$가 준콤팩트이고 준분리라고
+가정하자. 그러면 준연접 $\mathcal{O}_{X/S}$-가군 값 크리스털
+$\mathcal{F}$에 대해 층들 $R^if_{\text{cris}, *}\mathcal{F}$는
+국소 준연접이다.
+
+\medskip\noindent
+힌트: $(U', T', \delta')$가 $\text{Cris}(X'/S')$의 임의의 대상일
+때 $T'$로의 제한들이 준연접 $\mathcal{O}_{T'}$-가군임을 보여야
+한다. $T'$이 아핀일 때 이를 보이면 충분하다. 공식
+(\ref{equation-identify-pushforward}), $T \to T'$이 준콤팩트이고
+준분리라는 사실($T$가 $S \to S'$에 의한 $T'$의 기저변환 위에서
+아핀이기 때문이다), 그리고 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherence-higher-direct-images}를 사용하면
+층들 $R^i\tau_{U/T, *}\mathcal{F}_U$가 준연접임을 보이는 것으로
+충분하다. $U \to T_0$도 준콤팩트이고 준분리임에 주의하라.
+Schemes, Lemmas \ref{schemes-lemma-quasi-compact-permanence} and
+\ref{schemes-lemma-quasi-compact-permanence}를 보라.
+
+\medskip\noindent
+이로써 $S$ 위에서 $p$가 국소 멱영인 경우
+$R^i\tau_{X/S, *}\mathcal{F}$가 $S$ 위에서 준연접임을 증명하는
+것으로 환원된다. 여기서 $\tau_{X/S}$는 구조 사상이다. Remark
+% P08-E466: frozen English omits "is" in "p is locally nilpotent".
+\ref{remark-structure-morphism}을 보라. $S$ 위에서 국소적으로
+작업할 수 있으므로 $S$가 아핀이라고 가정해도 된다(Lemma
+\ref{lemma-localize}를 보라). $X$를 덮는 아핀의 수에 대한 귀납법과
+마이어--비에토리스(Remark \ref{remark-mayer-vietoris})를 사용하면
+문제는 $X$도 아핀인 경우로 환원된다(Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherence-higher-direct-images}의 증명에서와
+같다). $X = \Spec(C)$와 $S = \Spec(A)$라 하여 $(A, I, \gamma)$와
+$A \to C$가 Situation \ref{situation-affine}에서와 같게 하자.
+Section \ref{section-quasi-coherent-crystals}에서와 같이 $A$ 위의
+다항식대수 $P$와 전사 $P \to C$를 택한다. $(M, \nabla)$를
+Proposition \ref{proposition-crystals-on-affine}에 따라 $\mathcal{F}$에
+대응하는 가군이라 하자. Proposition
+\ref{proposition-compute-cohomology-crystal}을 적용하면
+$R\Gamma(\text{Cris}(X/S), \mathcal{F})$가
+$M \otimes_D \Omega_D^*$로 표현됨을 알 수 있다. $A$에서 $p$가
+멱영이므로 완비화가 필요하지 않음에 주의하라! 이것이
+$S = \Spec(A)$에서 주 열린집합을 취하는 것과 양립함을 보여야 한다.
+$g \in A$라 하자. 그러면 마찬가지로
+$R\Gamma(\text{Cris}(X_g/S_g), \mathcal{F})$는
+$M_g \otimes_{D_g} \Omega_{D_g}^*$로 계산된다(여기서도 $p$-진
+완비화가 필요하지 않음을 사용한다). 국소화는 $A$-가군 위에서
+완전함자이므로 결론을 얻는다.
+\end{remark}
+
+\begin{remark}[유계성]
+\label{remark-bounded-cohomology}
+Remark \ref{remark-compute-direct-image}의 상황에서 $S \to S'$가
+준콤팩트이고 준분리이며 $X \to S_0$가 유한형이고 준분리라고
+가정하자. 그러면 임의의 준연접 $\mathcal{O}_{X/S}$-가군 값
+크리스털 $\mathcal{F}$에 대해 모든 $i > i_0$에서
+$R^if_{\text{cris}, *}\mathcal{F} = 0$이 되는 정수 $i_0$가 존재한다.
+
+\medskip\noindent
+힌트: Remark \ref{remark-quasi-coherent}에서와 같이 논증하면
+(Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherence-higher-direct-images}를 사용하여)
+$C$가 $A$ 위의 유한형 대수일 때 Proposition
+\ref{proposition-compute-cohomology-crystal}의 상황에서
+$i \gg 0$에 대해 $H^i(\text{Cris}(X/S), \mathcal{F}) = 0$임을
+증명하는 것으로 환원된다. 유한 다항식대수를 택할 수 있고
+$i \gg 0$에 대해 $\Omega^i_D = 0$임을 알 수 있으므로 이는 명백하다.
+\end{remark}
+
+\begin{remark}[구체적 유계성]
+\label{remark-bounded-cohomology-over-point}
+Situation \ref{situation-global}에서 $\mathcal{F}$를 준연접
+$\mathcal{O}_{X/S}$-가군 값 크리스털이라 하자. $S_0$가 유일한 점을
+가지고 $X \to S_0$가 유한 표시라고 가정하자.
+\begin{enumerate}
+\item $\dim X = d$이고 $X/S_0$의 매장 차원이 $e$이면
+$i > d + e$에 대해 $H^i(\text{Cris}(X/S), \mathcal{F}) = 0$이다.
+\item $X$가 분리이고 $q$개의 아핀으로 덮이며 $X/S_0$의 매장
+차원이 $e$이면 $i > q + e$에 대해
+$H^i(\text{Cris}(X/S), \mathcal{F}) = 0$이다.
+\end{enumerate}
+힌트: (1)의 경우
+$$
+H^i(\text{Cris}(X/S), \mathcal{F}) = H^i(X_{Zar}, Ru_{X/S, *}\mathcal{F})
+$$
+이고, $Ru_{X/S, *}\mathcal{F}$가 $S$ 위의 차원 $e$인 매끄러운
+스킴 안으로의 $X$의 매장을 사용하여 구성한 드람 복합체로
+국소적으로 계산된다는 사실을 사용할 수 있다(Lemma
+\ref{lemma-compute-cohomology-crystal-smooth}를 보라). 이 드람
+복합체들은 모든 차수 $> e$에서 영이다. 따라서 Cohomology,
+Proposition \ref{cohomology-proposition-vanishing-Noetherian}으로부터
+(1)이 따른다. (2)의 경우 교대 체흐 복합체(Remark
+\ref{remark-alternating-cech-complex}을 보라)를 사용하여 $X$가
+아핀인 경우로 환원한다. 아핀 경우에는 $S$ 위의 차원 $e$인
+매끄러운 스킴 안으로의 $X$의 매장에 결부된 드람 복합체를
+사용하여 결과를 증명한다(그러한 것을 구성하려면 약간의 작업이
+필요하다).
+\end{remark}
+
+\begin{remark}[기저변환 사상]
+\label{remark-base-change}
+Remark \ref{remark-compute-direct-image}의 상황에서
+$S = \Spec(A)$와 $S' = \Spec(A')$가 아핀이라고 가정하자.
+$\mathcal{F}'$을 $\mathcal{O}_{X'/S'}$-가군이라 하고
+$\mathcal{F}$를 $\mathcal{F}'$의 당김이라 하자. 그러면 표준
+기저변환 사상
+$$
+L(S' \to S)^*R\tau_{X'/S', *}\mathcal{F}'
+\longrightarrow
+R\tau_{X/S, *}\mathcal{F}
+$$
+이 있다. 여기서 $\tau_{X/S}$와 $\tau_{X'/S'}$는 구조 사상이다.
+Remark \ref{remark-structure-morphism}을 보라. 전역 단면 위에서는
+이것이 $D(A)$ 안의 기저변환 사상
+\begin{equation}
+\label{equation-base-change-map}
+R\Gamma(\text{Cris}(X'/S'), \mathcal{F}') \otimes^\mathbf{L}_{A'} A
+\longrightarrow
+R\Gamma(\text{Cris}(X/S), \mathcal{F})
+\end{equation}
+을 준다.
+
+\medskip\noindent
+힌트: Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-base-change}의 매우 일반적인 기저변환
+사상과 표준 사상 $Lf_{\text{cris}}^*\mathcal{F}' \to
+f_{\text{cris}}^*\mathcal{F}' = \mathcal{F}$를 합성하라.
+\end{remark}
+
+\begin{remark}[기저변환 동형]
+\label{remark-base-change-isomorphism}
+다음 조건들을 모두 만족하면 사상 (\ref{equation-base-change-map})은
+동형이다.
+\begin{enumerate}
+\item $A'$에서 $p$는 멱영이다.
+\item $\mathcal{F}'$은 준연접 $\mathcal{O}_{X'/S'}$-가군 값
+크리스털이다.
+\item $X' \to S'_0$는 준콤팩트 준분리 사상이다.
+\item $X = X' \times_{S'_0} S_0$이다.
+\item $\mathcal{F}'$은 평탄 $\mathcal{O}_{X'/S'}$-가군이다.
+\item $X' \to S'_0$는 국소 완전교차 사상이다(More on Morphisms,
+Definition \ref{more-morphisms-definition-lci}를 보라. 예컨대
+$X' \to S'_0$가 신토믹이거나 매끄러우면 이 조건이 성립한다).
+\item $X'$와 $S_0$는 $S'_0$ 위에서 Tor 독립이다(More on Algebra,
+Definition \ref{more-algebra-definition-tor-independent}를 보라. 예컨대
+$S_0 \to S'_0$ 또는 $X' \to S'_0$ 중 하나가 평탄이면 이 조건이
+성립한다).
+\end{enumerate}
+힌트: 조건 (1)은 아래 논증에서 $p$-진 완비화가 아무 일도 하지
+않으므로 무시할 수 있다는 뜻이다. 조건 (3)과 마이어--비에토리스
+(Remark \ref{remark-mayer-vietoris}를 보라)를 사용하면 $X'$가
+아핀인 경우로 환원된다. 실제로 조건 (6)에 의해 더 줄인 뒤
+$X' = \Spec(C')$이고 표시
+$C' = A'/I'[x_1, \ldots, x_n]/(\bar f'_1, \ldots, \bar f'_c)$가
+주어졌다고 가정할 수 있다. 여기서
+$\bar f'_1, \ldots, \bar f'_c$는 $A'/I'$ 안의 코쥘 정칙열이다.
+(이는 매끄러운 국소적으로 $\bar f'_1, \ldots, \bar f'_c$가
+정칙열을 이룬다는 뜻이다. More on Algebra, Lemma
+\ref{more-algebra-lemma-Koszul-regular-flat-locally-regular}를 보라.)
+$\bar f'_i$의 올림 $f'_i \in A'[x_1, \ldots, x_n]$을 택한다.
+(4)에 의해 $X = \Spec(C)$이고
+$C = A/I[x_1, \ldots, x_n]/(\bar f_1, \ldots, \bar f_c)$임을
+알 수 있다. 여기서 $f_i \in A[x_1, \ldots, x_n]$는 $f'_i$의
+상이다. 성질 (7)에 의해 $\bar f_1, \ldots, \bar f_c$는
+$A/I[x_1, \ldots, x_n]$ 안의 코쥘 정칙열이다.
+$\gamma'$에 상대적인 $A'[x_1, \ldots, x_n]$ 안의
+$I'A'[x_1, \ldots, x_n] + (f'_1, \ldots, f'_c)$의 분할멱 포락은
+$$
+D' = A'[x_1, \ldots, x_n]\langle \xi_1, \ldots, \xi_c \rangle/(\xi_i - f'_i)
+$$
+이다. Lemma \ref{lemma-describe-divided-power-envelope}을 보라.
+% P08-E467: frozen source uses n rather than c in both regular sequences.
+그러면 $\xi_1 - f'_1, \ldots, \xi_n - f'_n$이 환
+$A'[x_1, \ldots, x_n]\langle \xi_1, \ldots, \xi_c\rangle$ 안의
+코쥘 정칙열임을 확인할 수 있다. 마찬가지로 $\gamma$에 상대적인
+$A[x_1, \ldots, x_n]$ 안의
+$IA[x_1, \ldots, x_n] + (f_1, \ldots, f_c)$의 분할멱 포락은
+$$
+D = A[x_1, \ldots, x_n]\langle \xi_1, \ldots, \xi_c\rangle/(\xi_i - f_i)
+$$
+이고, $\xi_1 - f_1, \ldots, \xi_n - f_n$은 환
+$A[x_1, \ldots, x_n]\langle \xi_1, \ldots, \xi_c\rangle$ 안의
+코쥘 정칙열이다. 따라서 $D' \otimes_{A'}^\mathbf{L} A = D$이다.
+조건 (2)에 의해 $\mathcal{F}'$은 접속 달린 $D'$-가군으로 이루어진
+쌍 $(M', \nabla)$에 대응한다. Proposition
+\ref{proposition-crystals-on-affine}을 보라. 그러면
+$M = M' \otimes_{D'} D$는 당김 $\mathcal{F}$에 대응한다. 가정 (5)에
+의해 $M'$은 평탄 $D'$-가군이므로
+$$
+M = M' \otimes_{D'} D = M' \otimes_{D'} D' \otimes_{A'}^\mathbf{L} A
+= M' \otimes_{A'}^\mathbf{L} A
+$$
+이다. Section \ref{section-quasi-coherent-crystals}에서 정의한 미분
+가군 $\Omega_{D'}$와 $\Omega_D$는 같은 생성원들 위의 자유
+$D'$-가군이므로
+$$
+M \otimes_D \Omega^\bullet_D =
+M' \otimes_{D'} \Omega^\bullet_{D'} \otimes_{D'} D =
+M' \otimes_{D'} \Omega^\bullet_{D'} \otimes_{A'}^\mathbf{L} A
+$$
+임을 알 수 있다. Proposition
+\ref{proposition-compute-cohomology-crystal}에 의해 이것이 원하는
+바를 증명한다.
+\end{remark}
+
+\begin{remark}[Rlim]
+\label{remark-rlim}
+$p$를 소수라 하자. $(A, I, \gamma)$를 $A/I$에서 $p$가 멱영인
+$\mathbf{Z}_{(p)}$ 위의 대수 $A$를 갖는 분할멱환이라 하자.
+$S = \Spec(A)$ 및 $S_0 = \Spec(A/I)$로 놓는다. $X$를 $S_0$ 위의
+스킴이라 하고 $X$ 위에서 $p$가 국소 멱영이라고 하자. $\mathcal{F}$를 임의의
+$\mathcal{O}_{X/S}$-가군이라 하자. $e \gg 0$에 대해
+$(p^e) \subset I$는 $\gamma$에 의해 보존된다. Divided Power
+Algebra, Lemma \ref{dpa-lemma-extend-to-completion}을 보라.
+$e \gg 0$에 대해 $S_e = \Spec(A/p^eA)$로 놓는다. 그러면
+$\text{Cris}(X/S_e)$는 $\text{Cris}(X/S)$의 충만한 부분범주이고,
+$\mathcal{F}$의 $\text{Cris}(X/S_e)$로의 제한을 $\mathcal{F}_e$로
+쓴다. 그러면
+$$
+R\Gamma(\text{Cris}(X/S), \mathcal{F}) =
+R\lim_e R\Gamma(\text{Cris}(X/S_e), \mathcal{F}_e)
+$$
+이다.
+
+\medskip\noindent
+힌트: $\mathcal{F}$가 단사일 때 이를 증명하면 충분하다. 이 경우
+층들 $\mathcal{F}_e$도 단사 가군이고, 전이 사상들
+$\Gamma(\mathcal{F}_{e + 1}) \to \Gamma(\mathcal{F}_e)$는
+전사이며, $\Gamma(\mathcal{F}) = \lim_e \Gamma(\mathcal{F}_e)$이다.
+마지막 등식은 $\text{Cris}(X/S)$의 임의의 대상이 국소적으로 범주들
+$\text{Cris}(X/S_e)$ 중 하나의 대상인 것이 $\text{Cris}(X/S)$의
+정의이기 때문이다.
+\end{remark}
+
+\begin{remark}[비교]
+\label{remark-comparison}
+$p$를 소수라 하자. $(A, I, \gamma)$를 $A$에서 $p$가 멱영인
+분할멱환이라 하자. $S = \Spec(A)$ 및 $S_0 = \Spec(A/I)$로 놓는다.
+$Y$를 $S$ 위의 매끄러운 스킴이라 하고 $X = Y \times_S S_0$로
+놓는다. $\mathcal{F}$를 준연접 $\mathcal{O}_{X/S}$-가군 값
+크리스털이라 하자. 그러면
+\begin{enumerate}
+\item $\gamma$는 $Y$ 안의 $X$의 아이디얼 위의 분할멱 구조로
+확장되어 $(X, Y, \gamma)$가 $\text{Cris}(X/S)$의 대상이 된다.
+\item 제한 $\mathcal{F}_Y$에는(Section \ref{section-sheaves}를 보라)
+표준 적분 가능 접속
+$\nabla : \mathcal{F}_Y \to
+\mathcal{F}_Y \otimes_{\mathcal{O}_Y} \Omega_{Y/S}$가 주어진다.
+\item $D(A)$ 안에서
+$$
+R\Gamma(\text{Cris}(X/S), \mathcal{F}) =
+R\Gamma(Y, \mathcal{F}_Y \otimes_{\mathcal{O}_Y} \Omega^\bullet_{Y/S})
+$$
+이다.
+\end{enumerate}
+힌트: (1)은 Divided Power Algebra, Lemma
+\ref{dpa-lemma-gamma-extends}를 보라. (2)는 Lemma
+\ref{lemma-automatic-connection}을 보라. (3)에 대해서는
+(\ref{equation-restriction})의 사상이 있음에 주의하라. 이 사상은
+$X$가 아핀이면 동형이다. Lemma
+\ref{lemma-compute-cohomology-crystal-smooth}를 보라. 이로부터
+$Ru_{X/S, *}\mathcal{F}$와
+$\mathcal{F}_Y \otimes \Omega^\bullet_{Y/S}$가
+$Y_{Zar} = X_{Zar}$ 위의 복합체로서 준동형임을 알 수 있다.
+$R\Gamma(\text{Cris}(X/S), \mathcal{F}) =
+R\Gamma(X_{Zar}, Ru_{X/S, *}\mathcal{F})$이므로 결과가 따른다.
+\end{remark}
+
+\begin{remark}[완전성]
+\label{remark-perfect}
+$p$를 소수라 하자. $(A, I, \gamma)$를 $A$에서 $p$가 멱영인
+분할멱환이라 하자. $S = \Spec(A)$ 및 $S_0 = \Spec(A/I)$로 놓는다.
+$X$를 $S_0$ 위의 고유 매끄러운 스킴이라 하자. $\mathcal{F}$를
+유한 국소 자유 준연접 $\mathcal{O}_{X/S}$-가군 값 크리스털이라
+하자. 그러면 $R\Gamma(\text{Cris}(X/S), \mathcal{F})$는
+$D(A)$의 완전 대상이다.
+
+\medskip\noindent
+힌트: Remark \ref{remark-base-change-isomorphism}에 의해
+$$
+R\Gamma(\text{Cris}(X/S), \mathcal{F}) \otimes_A^\mathbf{L} A/I
+\cong
+R\Gamma(\text{Cris}(X/S_0), \mathcal{F}|_{\text{Cris}(X/S_0)})
+$$
+이다. Remark \ref{remark-comparison}에 의해
+$$
+R\Gamma(\text{Cris}(X/S_0), \mathcal{F}|_{\text{Cris}(X/S_0)}) =
+R\Gamma(X, \mathcal{F}_X \otimes \Omega^\bullet_{X/S_0})
+$$
+이다. 드람 복합체 위의 순진한 필터를 사용하면 마지막 표시
+복합체가 $D(A/I)$ 안에서 완전이 되려면 복합체들
+$$
+R\Gamma(X, \mathcal{F}_X \otimes \Omega^q_{X/S_0})
+$$
+이 $D(A/I)$ 안의 완전 복합체이면 충분함을 알 수 있다. More on
+Algebra, Lemma \ref{more-algebra-lemma-two-out-of-three-perfect}를 보라.
+$\mathcal{F}_X \otimes \Omega^q_{X/S_0}$가 유한 국소 자유 층이고
+$X \to S_0$가 고유 평탄임을 사용하는 연접 코호몰로지의 표준
+논증에 의해 이는 참이다(향후 참고문헌을 여기에 넣을 것). More on
+Algebra, Lemma \ref{more-algebra-lemma-perfect-modulo-nilpotent-ideal}을
+적용하면 모든 $n$에 대해
+$$
+R\Gamma(\text{Cris}(X/S), \mathcal{F}) \otimes_A^\mathbf{L} A/I^n
+$$
+이 $D(A/I^n)$의 완전 대상임을 알 수 있다. $A$가 뇌터가 아니면
+이것만으로는 충분하지 않다. 실제로 $p$가 멱영이라는 가정 때문에
+$I$가 국소 멱영이기는 하지만(Divided Power Algebra, Lemma
+\ref{dpa-lemma-nil}을 보라), 어떤 $n$에 대해 $I^n = 0$이라고
+결론지을 수는 없다. 반례는 $\mathbf{F}_p\langle x \rangle$이다.
+$\mathcal{F} = \mathcal{O}_{X/S}$일 때 일반적으로 이를 증명하려면
+\url{https://math.columbia.edu/~dejong/wordpress/?p=2227}의 논증이
+작동한다. 계수 $\mathcal{F}$가 자명하지 않을 때
+\cite{Faltings-very}의 논증은 다음과 같은 듯하다. More on Algebra,
+Lemma \ref{more-algebra-lemma-perfect-modulo-nilpotent-ideal}에 의해
+$pA = 0$인 경우로 환원한다. 이 경우 프로베니우스 사상
+$A \to A$, $a \mapsto a^p$는
+$A \to A/I \xrightarrow{\varphi} A$로 분해된다
+($x \in I$에 대해 $x^p = 0$이므로). 다음과 같이 놓는다.
+$X^{(1)} = X \otimes_{A/I, \varphi} A$. $X$의 절대 프로베니우스
+사상은 사상 $F_X : X \to X^{(1)}$을 통해 분해된다(일종의 상대
+프로베니우스). 아핀 국소적으로 $X = \Spec(C)$이면
+$X^{(1)} = \Spec( C \otimes_{A/I, \varphi} A)$이고, $F_X$는
+$C \otimes_{A/I, \varphi} A \to C$,
+$c \otimes a \mapsto c^pa$에 대응한다. 이는 환 달린 토포스의 사상들
+$$
+(X/S)_{\text{cris}}
+\xrightarrow{(F_X)_{\text{cris}}}
+(X^{(1)}/S)_{\text{cris}}
+\xrightarrow{u_{X^{(1)}/S}}
+\Sh(X^{(1)}_{Zar})
+$$
+을 정의하며, 그 합성을 $\text{Frob}_X$로 쓴다. 이어 국소 계산으로
+$R\text{Frob}_{X, *}\mathcal{F}$가 완전
+$\mathcal{O}_{X^{(1)}}$-가군 복합체로 표현됨을 보인다(!).
+\end{remark}
+
+\begin{remark}[완비 상황의 완전성]
+\label{remark-complete-perfect}
+$p$를 소수라 하자. $(A, I, \gamma)$를 $A$가 $p$-진 완비환이고
+$A/I$에서 $p$가 멱영인 분할멱환이라 하자. $S = \Spec(A)$ 및
+$S_0 = \Spec(A/I)$로 놓는다. $X$를 $S_0$ 위의 고유 매끄러운
+스킴이라 하자. $\mathcal{F}$를 유한 국소 자유 준연접
+$\mathcal{O}_{X/S}$-가군 값 크리스털이라 하자. 그러면
+$R\Gamma(\text{Cris}(X/S), \mathcal{F})$는 $D(A)$의 완전 대상이다.
+
+\medskip\noindent
+힌트: $K = R\Gamma(\text{Cris}(X/S), \mathcal{F})$가
+$A/p^eA$ 위의 코호몰로지들의 유도극한 $K = R\lim K_e$임을 알고 있다.
+Remark \ref{remark-rlim}을 보라. 각 $K_e$는 Remark
+\ref{remark-perfect}에 의해 $D(A/p^eA)$의 완전 복합체이다. $A$가
+$p$-진 완비이므로 More on Algebra, Lemma
+\ref{more-algebra-lemma-Rlim-perfect-gives-complete}에서 결과가 따른다.
+\end{remark}
+
+\begin{remark}[완비 상황의 비교]
+\label{remark-complete-comparison}
+$p$를 소수라 하자. $(A, I, \gamma)$를 $A$가 뇌터 $p$-진 완비환이고
+$A/I$에서 $p$가 멱영인 분할멱환이라 하자. $S = \Spec(A)$ 및
+$S_0 = \Spec(A/I)$로 놓는다. $Y$를 $S$ 위의 고유 매끄러운 스킴이라
+하고 $X = Y \times_S S_0$로 놓는다. $\mathcal{F}$를 유한형 준연접
+$\mathcal{O}_{X/S}$-가군 값 크리스털이라 하자. 그러면
+\begin{enumerate}
+\item 적분 가능 접속
+$$
+\nabla :
+\mathcal{F}_Y
+\longrightarrow
+\mathcal{F}_Y \otimes_{\mathcal{O}_Y} \Omega_{Y/S}
+$$
+이 주어진 연접 $\mathcal{O}_Y$-가군 $\mathcal{F}_Y$가 존재하여,
+$\mathcal{F}_Y/p^e\mathcal{F}_Y$는 Remark \ref{remark-comparison}에서
+얻은 $A/p^eA$ 위의 접속 달린 가군이고,
+\item $D(A)$ 안에서
+$$
+R\Gamma(\text{Cris}(X/S), \mathcal{F}) =
+R\Gamma(Y, \mathcal{F}_Y \otimes_{\mathcal{O}_Y} \Omega^\bullet_{Y/S})
+$$
+이다.
+\end{enumerate}
+힌트: $\mathcal{F}_Y$의 존재는 그로텐디크 존재 정리이다(향후 참고문헌을
+여기에 넣을 것). 양변 모두 법 $p^e$ 버전들의 $R\lim$으로 계산되므로
+코호몰로지 동형이 따른다(좌변은 Remark \ref{remark-rlim}을 보고,
+우변은 형식함수 정리인 Cohomology of Schemes, Theorem
+\ref{coherent-theorem-formal-functions}을 사용하라). 각 법 $p^e$ 버전은
+Remark \ref{remark-comparison}에 의해 서로 동형이다.
+\end{remark}
+
+
+
+
+\section{순수 비분리 사상을 따른 당김}
+\label{section-pull-back-along-pth-root}
+
+\noindent
+{\it $\alpha_p$-피복}이란
+$$
+X' = \Spec(C[z]/(z^p - c)) \longrightarrow \Spec(C) = X
+$$
+꼴의 사상을 뜻한다. 여기서 $C$는 $\mathbf{F}_p$-대수이고 $c \in C$이다.
+동등하게, $X'$은 $X$ 위의 $\alpha_p$-토서이다. {\it 반복
+$\alpha_p$-피복}\footnote{이는 표준 표기법이 아니다.}은 표적 위에서
+국소적으로 유한 개의 $\alpha_p$-피복의 합성인 표수 $p$ 스킴들의
+사상이다. 이 절에서는 이러한 사상을 따른 당김이 소수 $p$를 가역화한
+뒤 크리스탈린 코호몰로지 위에서 준동형을 유도함을 증명한다. 실제로는
+이 결과의 정밀한 판을 증명한다. 먼저 진술에 약간의 표기가 필요한
+예비 보조정리로 시작한다.
+
+\medskip\noindent
+환 준동형 $B \to B'$과 Remark \ref{remark-base-change-connection}의
+가정들을 만족하는 몫 $\Omega_B \to \Omega$ 및
+$\Omega_{B'} \to \Omega'$이 주어졌다고 하자. 따라서
+(\ref{equation-base-change-map-complexes})는 적분 가능 접속
+$\nabla : M \to M \otimes_B \Omega_B$이 주어진 모든 $B$-가군 $M$에
+대해 복합체의 표준 사상
+$$
+c_M^\bullet :
+M \otimes_B \Omega^\bullet
+\longrightarrow
+M \otimes_B (\Omega')^\bullet
+$$
+을 준다.
+
+\medskip\noindent
+$a \in B$, $z \in B'$ 및 사상 $\theta : B' \to B'$이 주어져 다음
+가정들을 만족한다고 하자.
+\begin{enumerate}
+\item
+\label{item-d-a-zero}
+$\text{d}(a) = 0$,
+\item
+\label{item-direct-sum}
+$\Omega' = B' \otimes_B \Omega \oplus B'\text{d}z$이다. 모든
+$f \in B'$에 대해 $\text{d}_1(f) \in B' \otimes \Omega$ 및
+$\partial_z(f) \in B'$로
+$\text{d}(f) = \text{d}_1(f) + \partial_z(f) \text{d}z$라고 쓴다.
+\item
+\label{item-theta-linear}
+$\theta : B' \to B'$은 $B$-선형이다.
+\item
+\label{item-integrate}
+$\partial_z \circ \theta = a$,
+\item
+\label{item-injective}
+$B \to B'$은 보편적 단사이다(따라서 $\Omega \to \Omega'$도
+단사이다).
+\item
+\label{item-factor}
+모든 $f \in B'$에 대해 $af - \theta(\partial_z(f)) \in B$이다.
+\item
+\label{item-horizontal}
+모든 $f \in B'$에 대해
+$(\theta \otimes 1)(\text{d}_1(f)) - \text{d}_1(\theta(f)) \in \Omega$이다.
+여기서 $\theta \otimes 1 : B' \otimes \Omega \to B' \otimes \Omega$이다.
+\end{enumerate}
+이 조건들은 논리적으로 독립이 아니다. 예를 들어 가정
+(\ref{item-integrate})는
+$\partial_z(af - \theta(\partial_z(f))) = 0$을 함의한다. 따라서
+$B \to B'$의 상이 $\partial_z$에 의해 소멸하는 원소들의 모임이면
+(\ref{item-factor})가 따른다. 조건 (\ref{item-horizontal})에도 비슷한
+논증을 적용할 수 있다.
+
+\begin{lemma}
+\label{lemma-find-homotopy}
+위 상황에서 복합체의 사상
+$$
+e_M^\bullet :
+M \otimes_B (\Omega')^\bullet
+\longrightarrow
+M \otimes_B \Omega^\bullet
+$$
+이 존재하여, $c_M^\bullet \circ e_M^\bullet$ 및
+$e_M^\bullet \circ c_M^\bullet$은 $a$에 의한 곱셈과 호모토픽이다.
+\end{lemma}
+
+\begin{proof}
+이 증명에서 모든 텐서곱은 $B$ 위에서 취한다. 가정
+(\ref{item-direct-sum})에 의해 모든 $i \geq 0$에 대해
+$$
+M \otimes (\Omega')^i =
+(B' \otimes M \otimes \Omega^i)
+\oplus
+(B' \text{d}z \otimes M \otimes \Omega^{i - 1})
+$$
+이다. $M \otimes (\Omega')^i$의 덧셈적 생성원들의 모임은
+$f \omega$ 꼴의 원소와 $f \text{d}z \wedge \eta$ 꼴의 원소들로
+이루어진다. 여기서 $f \in B'$, $\omega \in M \otimes \Omega^i$ 및
+$\eta \in M \otimes \Omega^{i - 1}$이다.
+
+\medskip\noindent
+$f \in B'$에 대해
+$$
+\epsilon(f) = af - \theta(\partial_z(f))
+\quad\text{및}\quad
+\epsilon'(f) = (\theta \otimes 1)(\text{d}_1(f)) - \text{d}_1(\theta(f))
+$$
+로 쓴다. 가정 (\ref{item-factor})와 (\ref{item-horizontal})에 의해
+$\epsilon(f) \in B$ 및 $\epsilon'(f) \in \Omega$이다. 규칙
+$e^i_M(f\omega) = \epsilon(f) \omega$ 및
+$e^i_M(f \text{d}z \wedge \eta) = \epsilon'(f) \wedge \eta$로
+$e_M^\bullet$을 정의한다. 아래에서 사상들의 모임 $e^i_M$이 복합체의
+사상임을 보일 것이다.
+
+\medskip\noindent
+규칙 $h^i(f \omega) = 0$ 및
+$h^i(f \text{d}z \wedge \eta) = \theta(f) \eta$로
+$$
+h^i : M \otimes_B (\Omega')^i \longrightarrow M \otimes_B (\Omega')^{i - 1}
+$$
+을 정의한다. 여기서 원소들은 위와 같다. 다음을 주장한다.
+$$
+\text{d} \circ h + h \circ \text{d} = a - c_M^\bullet \circ e_M^\bullet
+$$
+(\ref{item-d-a-zero})에 의해 $a$에 의한 곱셈은 복합체의 사상임에
+주의하라. 따라서 $c_M^\bullet$이 가정 (\ref{item-injective})에 의해
+복합체의 단사 사상이므로 $e_M^\bullet$이 복합체의 사상이라고
+결론짓는다. 주장을 증명하기 위해 다음을 계산한다.
+\begin{align*}
+(\text{d} \circ h + h \circ \text{d})(f \omega)
+& =
+h\left(\text{d}(f) \wedge \omega + f \nabla(\omega)\right)
+\\
+& =
+\theta(\partial_z(f)) \omega
+\\
+& =
+a f\omega - \epsilon(f)\omega 
+\\
+& =
+a f \omega - c^i_M(e^i_M(f\omega))
+\end{align*}
+두 번째 등식은 $\nabla(\omega)$에 $\text{d}z$가 나타나지 않기
+때문이고, 세 번째 등식은 가정 (6)에 의한다. 마찬가지로
+\begin{align*}
+(\text{d} \circ h + h \circ \text{d})(f \text{d}z \wedge \eta)
+& =
+\text{d}(\theta(f) \eta) +
+h\left(\text{d}(f) \wedge \text{d}z \wedge \eta -
+f \text{d}z \wedge \nabla(\eta)\right)
+\\
+& =
+\text{d}(\theta(f)) \wedge \eta + \theta(f) \nabla(\eta)
+- (\theta \otimes 1)(\text{d}_1(f)) \wedge \eta
+- \theta(f) \nabla(\eta)
+\\
+& =
+\text{d}_1(\theta(f)) \wedge \eta +
+\partial_z(\theta(f)) \text{d}z \wedge \eta -
+(\theta \otimes 1)(\text{d}_1(f)) \wedge \eta
+\\
+& =
+a f \text{d}z \wedge \eta - \epsilon'(f) \wedge \eta \\
+& = a f \text{d}z \wedge \eta - c^i_M(e^i_M(f \text{d}z \wedge \eta))
+\end{align*}
+두 번째 등식은
+$\text{d}(f) \wedge \text{d}z \wedge \eta =
+- \text{d}z \wedge \text{d}_1(f) \wedge \eta$이기 때문이다.
+네 번째 등식은 가정 (\ref{item-integrate})에 의한다. 한편 정의에서
+곧바로 $e^i_M(c^i_M(\omega)) = \epsilon(1) \omega = a \omega$임을
+알 수 있다. 이로써 보조정리가 증명되었다.
+\end{proof}
+
+\begin{example}
+\label{example-integrate}
+위 상황의 표준 예는 $(B, J, \delta)$가 분할멱환이고
+$B' = B\langle z \rangle$가 그 위의 분할멱 다항식환이며
+$J' = B'_{+} + JB' \subset B'$ 위에 분할멱 $\delta'$이 주어진 경우이다.
+즉 $\Omega = \Omega_{B, \delta}$ 및
+$\Omega' = \Omega_{B', \delta'}$로 둔다. 이 경우 $a = 1$로 두고
+$$
+\theta( \sum b_m z^{[m]} ) = \sum b_m z^{[m + 1]}
+$$
+로 택할 수 있다. 다음이 상수항과 같음에 주의하라.
+$$
+f - \theta(\partial_z(f)) = f(0)
+$$
+따라서 이 경우 Lemma \ref{lemma-find-homotopy}는 크리스탈린
+푸앵카레 보조정리(Lemma \ref{lemma-relative-poincare})를 되찾는다.
+\end{example}
+
+\begin{lemma}
+\label{lemma-computation}
+Situation \ref{situation-affine}에서 $D$와 $\Omega_D$가
+(\ref{equation-D}) 및 (\ref{equation-omega-D})와 같다고 하자.
+$\lambda \in D$라 하자. $D'$을
+$$
+D[z]\langle \xi \rangle/(\xi - (z^p - \lambda))
+$$
+의 $p$-진 완비화라 하고, $\Omega_{D'}$을 $A$ 위에서 $D'$의
+분할멱 미분 가군의 $p$-진 완비화라 하자. (\ref{item-complete}),
+(\ref{item-connection}), (\ref{item-integrable}) 및
+(\ref{item-topologically-quasi-nilpotent})를 만족하는 $D$ 위의 임의의
+쌍 $(M, \nabla)$에 대해 복합체의 표준 사상
+(\ref{equation-base-change-map-complexes})
+$$
+c_M^\bullet : M \otimes_D^\wedge \Omega^\bullet_D
+\longrightarrow
+M \otimes_D^\wedge \Omega^\bullet_{D'}
+$$
+은 다음 성질을 갖는다. 반대 방향의 사상 $e_M^\bullet$이 존재하여
+$c_M^\bullet \circ e_M^\bullet$ 및 $e_M^\bullet \circ c_M^\bullet$은
+모두 $p$에 의한 곱셈과 호모토픽이다.
+\end{lemma}
+
+\begin{proof}
+이를 $a = p$인 Lemma \ref{lemma-find-homotopy}를 사용하여 증명할
+것이다. 따라서 $\theta : D' \to D'$을 찾고
+(\ref{item-d-a-zero}), (\ref{item-direct-sum}),
+(\ref{item-theta-linear}), (\ref{item-integrate}),
+(\ref{item-injective}), (\ref{item-factor}),
+(\ref{item-horizontal})을 증명해야 한다. 먼저 환 $D$, $D'$과 가군
+$\Omega_D$, $\Omega_{D'}$에 관한 정보를 모은다.
+
+\medskip\noindent
+다음과 같이 쓰면
+$$
+D[z]\langle \xi \rangle/(\xi - (z^p - \lambda))
+=
+D\langle \xi \rangle[z]/(z^p - \xi - \lambda)
+$$
+$D'$이 자유 $D$-가군
+$$
+\bigoplus\nolimits_{i = 0, \ldots, p - 1}
+\bigoplus\nolimits_{n \geq 0}
+z^i \xi^{[n]} D
+$$
+의 $p$-진 완비화임을 알 수 있다. 여기서 $\xi^{[0]} = 1$이다.
+따라서 $D \to D'$에는 연속 $D$-선형 단면이 있다. 특히
+$D \to D'$은 보편적 단사, 즉 (\ref{item-injective})가 성립한다.
+$D'$을 분할멱 아이디얼
+$\overline{J}' = \overline{J}D' + (\xi)$을 갖는 $A$ 위의 분할멱대수로
+생각한다. 그러면 $D'$은 $D$ 안에서 $z^p - \lambda$로 생성되는
+아이디얼의 분할멱 포락의 $p$-진 완비화이기도 하다. Lemma
+\ref{lemma-describe-divided-power-envelope}을 보라. 따라서 Lemma
+\ref{lemma-module-differentials-divided-power-envelope}에 의해
+$$
+\Omega_{D'} = \Omega_D \otimes_D^\wedge D' \oplus D'\text{d}z
+$$
+이다. 이는 (\ref{item-direct-sum})을 증명한다.
+(\ref{item-d-a-zero})는 명백함에 주의하라.
+
+\medskip\noindent
+이제 $\theta$를 구성한다. (Stacks project의 scripts 하위 디렉터리에
+있는 theta.gp라는 PARI/gp 스크립트를 작성하여 이 증명의 몇몇 공식을
+검증하였다.) 구성에 앞서 원소 $z^i \xi^{[n]}$의 미분을 계산한다.
+$\text{d}z^i = i z^{i - 1} \text{d}z$이다. $n \geq 1$에 대해
+$$
+\text{d}\xi^{[n]} =
+\xi^{[n - 1]} \text{d}\xi =
+- \xi^{[n - 1]}\text{d}\lambda + p z^{p - 1} \xi^{[n - 1]}\text{d}z
+$$
+이다. 이는 $\xi = z^p - \lambda$이기 때문이다. $0 < i < p$ 및
+$n \geq 1$에 대해
+\begin{align*}
+\text{d}(z^i\xi^{[n]})
+& =
+iz^{i - 1}\xi^{[n]}\text{d}z + z^i\xi^{[n - 1]}\text{d}\xi \\
+& =
+iz^{i - 1}\xi^{[n]}\text{d}z + z^i\xi^{[n - 1]}\text{d}(z^p - \lambda) \\
+& =
+- z^i\xi^{[n - 1]}\text{d}\lambda +
+(iz^{i - 1}\xi^{[n]} + pz^{i + p - 1}\xi^{[n - 1]})\text{d}z \\
+& =
+- z^i\xi^{[n - 1]}\text{d}\lambda +
+(iz^{i - 1}\xi^{[n]} + pz^{i - 1}(\xi + \lambda)\xi^{[n - 1]})\text{d}z \\
+& =
+- z^i\xi^{[n - 1]}\text{d}\lambda +
+((i + pn)z^{i - 1}\xi^{[n]} + p\lambda z^{i - 1}\xi^{[n - 1]})\text{d}z
+\end{align*}
+이다. 마지막 등식은 $\xi \xi^{[n - 1]} = n\xi^{[n]}$이기 때문이다.
+따라서
+\begin{align*}
+\partial_z(z^i) & = i z^{i - 1} \\
+\partial_z(\xi^{[n]}) & = p z^{p - 1} \xi^{[n - 1]} \\
+\partial_z(z^i\xi^{[n]}) & =
+(i + pn) z^{i - 1} \xi^{[n]} + p \lambda z^{i - 1}\xi^{[n - 1]}
+\end{align*}
+임을 알 수 있다. 이 공식들에 착안하여 다음 규칙으로 $\theta$를 정의한다.
+$$
+\begin{matrix}
+\theta(z^j)
+& = & p\frac{z^{j + 1}}{j + 1}
+& j = 0, \ldots p - 1, \\
+\theta(z^{p - 1}\xi^{[m]})
+& = & \xi^{[m + 1]}
+& m \geq 1, \\
+\theta(z^j \xi^{[m]})
+& = &
+\frac{p z^{j + 1} \xi^{[m]} - \theta(p\lambda z^j \xi^{[m - 1]})}{(j + 1 + pm)}
+& 0 \leq j < p - 1, m \geq 1
+\end{matrix}
+$$
+마지막 줄에서는 $m$에 대한 귀납법을 사용하여 $\theta$의 선택을
+정의한다. 이를 전개하면($0 \leq j < p - 1$ 및 $1 \leq m$에 대해)
+$$
+\theta(z^j \xi^{[m]}) =
+\textstyle{\frac{p z^{j + 1} \xi^{[m]}}{(j + 1 + pm)} -
+\frac{p^2 \lambda z^{j + 1} \xi^{[m - 1]}}{(j + 1 + pm)(j + 1 + p(m - 1))} +
+\ldots +
+\frac{(-1)^m p^{m + 1} \lambda^m z^{j + 1}}
+{(j + 1 + pm) \ldots (j + 1)}}
+$$
+을 얻지만, 아래에서는 이 식을 사용하지 않는다. $\theta$가 유일하게
+$D'$ 위의 $p$-진 연속 $D$-선형 사상으로 확장됨은 명백하다. 구성에
+의해 (\ref{item-theta-linear})와 (\ref{item-integrate})가 성립한다.
+(\ref{item-factor})와 (\ref{item-horizontal})을 증명하는 일만 남았다.
+
+\medskip\noindent
+(\ref{item-factor})와 (\ref{item-horizontal})의 증명.
+$\theta$가 $D$-선형이고 연속이므로 $z^i\xi^{[n]}$에 대입했을 때
+$p - \theta \circ \partial_z$가 $D$의 원소를 주고, 각각
+$(\theta \otimes 1) \circ \text{d}_1 - \text{d}_1 \circ \theta$가
+$\Omega_D$의 원소를 줌을 보이면 충분하다.\footnote{이는 직접 계산할
+수 있다. $z^i\xi^{[n]}$에 대입한 $p - \theta \circ \partial_z$는
+$p$로 보내지는 $1$과 $-p\lambda$로 보내지는 $\xi$를 제외하면 영이다.
+$z^i\xi^{[n]}$에 대입한
+$(\theta \otimes 1) \circ \text{d}_1 - \text{d}_1 \circ \theta$는
+$-\lambda$로 보내지는 $z^{p - 1}\xi$를 제외하면 영이다.}
+$D_0 = \mathbf{Z}_{(p)}[\lambda]$ 및
+$D_0' = \mathbf{Z}_{(p)}[z, \lambda]\langle \xi \rangle/(\xi - z^p + \lambda)$로
+놓는다. 위 각 식은 $D_0'$ 또는 $\Omega_{D_0'}$의 원소임을 관찰하라.
+따라서 $D_0 \to D_0'$의 경우에 결과를 증명하면 충분하다. $D_0$와
+$D_0'$은 비틀림 없는 환이고,
+$D_0 \otimes \mathbf{Q} = \mathbf{Q}[\lambda]$ 및
+$D'_0 \otimes \mathbf{Q} = \mathbf{Q}[z, \lambda]$임에 주의하라.
+따라서 $D_0 \subset D'_0$은 $\partial_z$에 의해 소멸하는 원소들의
+부분환이고, (\ref{item-factor})는 (\ref{item-integrate})에서 따른다.
+Lemma \ref{lemma-find-homotopy} 바로 앞의 논의를 보라. 마찬가지로
+$\text{d}_1(f) = \partial_\lambda(f)\text{d}\lambda$이므로
+$$
+\left((\theta \otimes 1) \circ \text{d}_1 - \text{d}_1 \circ \theta\right)(f)
+=
+\left(\theta(\partial_\lambda(f)) - \partial_\lambda(\theta(f))\right)
+\text{d}\lambda
+$$
+이다. 계수에 $\partial_z$를 적용하면
+\begin{align*}
+\partial_z\left(
+\theta(\partial_\lambda(f)) - \partial_\lambda(\theta(f))
+\right)
+& =
+p \partial_\lambda(f) - \partial_z(\partial_\lambda(\theta(f))) \\
+& =
+p \partial_\lambda(f) - \partial_\lambda(\partial_z(\theta(f))) \\
+& =
+p \partial_\lambda(f) - \partial_\lambda(p f) = 0
+\end{align*}
+을 얻는다. 따라서 원하는 대로 계수는 $z$에 의존하지 않는다.
+이로써 보조정리의 증명이 끝난다.
+\end{proof}
+
+\noindent
+이 절의 도입부에서 정의한 반복 $\alpha_p$-피복 $X' \to X$은 유한
+국소 자유임에 주의하라. 따라서 $X$가 연결이면 $X' \to X$의 차수는
+상수이고 $p$의 거듭제곱이다.
+
+\begin{lemma}
+\label{lemma-pullback-along-p-power-cover}
+$p$를 소수라 하자. $(S, \mathcal{I}, \gamma)$를 $p \in \mathcal{I}$인
+$\mathbf{Z}_{(p)}$ 위의 분할멱 스킴이라 하자.
+$S_0 = V(\mathcal{I}) \subset S$로 놓는다. $f : X' \to X$를 차수가
+상수 $q$인 $S_0$ 위의 스킴들의 반복 $\alpha_p$-피복이라 하자.
+$\mathcal{F}$를 $X$ 위의 임의의 준연접 층 값 크리스털이라 하고
+$\mathcal{F}' = f_{\text{cris}}^*\mathcal{F}$로 놓는다. 특별 삼각형
+$$
+Ru_{X/S, *}\mathcal{F}
+\longrightarrow
+f_*Ru_{X'/S, *}\mathcal{F}'
+\longrightarrow
+E
+\longrightarrow
+Ru_{X/S, *}\mathcal{F}[1]
+$$
+에서 대상 $E$의 코호몰로지 층들은 $q$에 의해 소멸한다.
+\end{lemma}
+
+\begin{proof}
+$X' \to X$는 위상동형이므로 $X$와 $X'$의 기저 위상공간을 동일시할
+수 있다. 문제는 명백히 $X$ 위에서 국소적이므로 $X$, $X'$, $S$가
+아핀이고 $X' \to X$가 합성
+$$
+X' = X_n \to X_{n - 1} \to X_{n - 2} \to \ldots \to X_0 = X
+$$
+으로 주어진다고 가정할 수 있다. 여기서 각 사상
+$X_{i + 1} \to X_i$는 $\alpha_p$-피복이다. $\mathcal{F}_i$로
+$\mathcal{F}$의 $X_i$로의 당김을 나타내자. 각 사상
+$$
+R\Gamma(\text{Cris}(X_i/S), \mathcal{F}_i)
+\longrightarrow
+R\Gamma(\text{Cris}(X_{i + 1}/S), \mathcal{F}_{i + 1})
+$$
+이 세 번째 항의 코호몰로지 군들이 $p$에 의해 소멸하는 삼각형에
+들어감을 증명하면 충분하다. (여기서는 삼각범주 $D(X)$의 공리 TR4를
+사용한다. 세부사항은 생략한다.)
+
+\medskip\noindent
+따라서 $S = \Spec(A)$, $X = \Spec(C)$, $X' = \Spec(C')$이고 어떤
+$c \in C$에 대해 $C' = C[z]/(z^p - c)$라고 가정할 수 있다. $A$ 위의
+다항식대수 $P$와 전사 $P \to C$를 택한다. (\ref{equation-D})에서처럼
+$P$ 안의 $\Ker(P \to C)$의 $p$-진 완비 분할멱 포락을 $D$라 하자.
+% P08-E468: frozen source has the noun typo "divided power envelop".
+$P' = P[z]$로 놓고, $z$를 $C'$ 안의 $z$의 동치류로 보내는 전사
+$P' \to C'$을 취한다. $c \in C$의 올림 $\lambda \in D$을 택한다.
+그러면 $P'$ 안의 $\Ker(P' \to C')$의 $p$-진 완비 분할멱 포락 $D'$은
+$D[z]\langle \xi \rangle/(\xi - (z^p - \lambda))$의 $p$-진 완비화와
+동형임을 알 수 있다. Lemma
+\ref{lemma-computation}과 그 증명을 보라. 이제 준연접 가군 값
+크리스털의 코호몰로지를 계산하는 Proposition
+\ref{proposition-compute-cohomology-crystal}와 이 보조정리에서 결과가
+따른다.
+\end{proof}
+
+\noindent
+다음 보조정리의 경계는 아마 최적이 아닐 것이다.
+
+\begin{lemma}
+\label{lemma-pullback-along-p-power-cover-cohomology}
+Lemma \ref{lemma-pullback-along-p-power-cover}와 같은 표기 및 가정 아래
+사상
+$$
+f^* :
+H^i(\text{Cris}(X/S), \mathcal{F})
+\longrightarrow
+H^i(\text{Cris}(X'/S), \mathcal{F}')
+$$
+의 핵과 여핵은 $q^{i + 1}$에 의해 소멸한다.
+\end{lemma}
+
+\begin{proof}
+$E$는 차수 $-1$ 이상에서만 영이 아닌 코호몰로지 층을 가지므로
+스펙트럼 열 $H^a(\mathcal{H}^b(E)) \Rightarrow H^{a + b}(E)$이
+수렴한다. 이를 특별 삼각형에 결부된 긴 완전 코호몰로지 열과
+결합하면 이 경계를 얻는다.
+\end{proof}
+
+\noindent
+Situation \ref{situation-global}에서 $p \in \mathcal{I}$라고 가정하자.
+다음과 같이 놓는다.
+$$
+X^{(1)} = X \times_{S_0, F_{S_0}} S_0.
+$$
+$F_{X/S_0} : X \to X^{(1)}$로 상대 프로베니우스 사상을 나타내자.
+
+\begin{lemma}
+\label{lemma-pullback-relative-frobenius}
+위 상황에서 $X \to S_0$가 상대차원 $d$인 매끄러운 사상이라고
+가정하자. 그러면 $F_{X/S_0}$은 차수 $p^d$인 반복
+$\alpha_p$-피복이다. 따라서 Lemma
+\ref{lemma-pullback-along-p-power-cover}와
+\ref{lemma-pullback-along-p-power-cover-cohomology}를 이 상황에
+적용할 수 있다. 특히 $\text{Cris}(X^{(1)}/S)$ 위의 임의의 준연접
+가군 값 크리스털 $\mathcal{G}$에 대해 사상
+$$
+F_{X/S_0}^* : H^i(\text{Cris}(X^{(1)}/S), \mathcal{G})
+\longrightarrow
+H^i(\text{Cris}(X/S), F_{X/S_0, \text{cris}}^*\mathcal{G})
+$$
+의 핵과 여핵은 $p^{d(i + 1)}$에 의해 소멸한다.
+\end{lemma}
+
+\begin{proof}
+첫 번째 명제를 증명하면 충분하다. 이를 위해 Morphisms, Lemma
+\ref{morphisms-lemma-smooth-etale-over-affine-space}에 의해 $X$가
+$\mathbf{A}^d_{S_0}$ 위에서 에탈이라고 가정할 수 있다. 이 에탈
+사상을 $\varphi : X \to \mathbf{A}^d_{S_0}$로 나타내자. 이 경우
+$X/S_0$의 상대 프로베니우스는 도식
+$$
+\xymatrix{
+X \ar[d] \ar[r] & X^{(1)} \ar[d] \\
+\mathbf{A}^d_{S_0} \ar[r] & \mathbf{A}^d_{S_0}
+}
+$$
+에 들어간다. 아래 가로 화살표는 $S_0$ 위에서
+$\mathbf{A}^d_{S_0}$의 상대 프로베니우스 사상이다. 이는 모든 좌표를
+$p$제곱하는 사상이므로 반복 $\alpha_p$-피복이다. 이 도식이 섬유곱
+도식임을 관찰하면 증명이 끝난다. \'Etale Morphisms, Lemma
+\ref{etale-lemma-relative-frobenius-etale}를 보라.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{크리스탈린 코호몰로지 위의 프로베니우스 작용}
+\label{section-frobenius}
+
+\noindent
+이 절에서는 소수 $p$를 가역화한 뒤 프로베니우스 당김이 크리스탈린
+코호몰로지 위의 준동형을 유도함을 증명한다. 그러나 이를 진술하기
+위해서도 특별한 상황에서 작업해야 한다.
+
+\begin{situation}
+\label{situation-F-crystal}
+Situation \ref{situation-global}에서 다음을 가정한다.
+\begin{enumerate}
+\item $p \in I$인 어떤 분할멱환 $(A, I, \gamma)$에 대해
+$S = \Spec(A)$이다.
+\item 모든 $x \in A$에 대해 $\sigma(x) = x^p \bmod pA$인 분할멱환의
+준동형 $\sigma : A \to A$가 주어져 있다.
+\end{enumerate}
+\end{situation}
+
+\noindent
+Situation \ref{situation-F-crystal}에서 사상
+$\Spec(\sigma) : S \to S$는 절대 프로베니우스
+$F_{S_0} : S_0 \to S_0$의 올림이다. 또한 도식
+% P08-E469: frozen source sentence has a dangling "and since" construction.
+$$
+\xymatrix{
+X \ar[d] \ar[r]_{F_X} & X \ar[d] \\
+S_0 \ar[r]^{F_{S_0}} & S_0
+}
+$$
+은 가환이다. 여기서 $F_X : X \to X$는 $X$의 절대 프로베니우스
+사상이다. 따라서 크리스탈린 토포스의 사상
+$$
+(F_X)_{\text{cris}} :
+(X/S)_{\text{cris}}
+\longrightarrow
+(X/S)_{\text{cris}}
+$$
+을 얻는다. Remark \ref{remark-functoriality-cris}를 보라. 다음은
+Saavedra의 표기법을 따르는 $F$-크리스털에 관한 용어법이다.
+\cite{Saavedra}를 보라.
+
+\begin{definition}
+\label{definition-F-crystal}
+Situation \ref{situation-F-crystal}에서 {\it $X/S$ 위의
+($\sigma$에 상대적인) $F$-크리스털}은 유한 국소 자유
+$\mathcal{O}_{X/S}$-가군 값 크리스털 $\mathcal{E}$과 사상
+$$
+F_\mathcal{E} : (F_X)_{\text{cris}}^*\mathcal{E} \longrightarrow \mathcal{E}
+$$
+으로 이루어진 쌍 $(\mathcal{E}, F_\mathcal{E})$이다. $F$-크리스털은
+정수 $i \geq 0$과 사상
+% P08-E470: frozen source omits a conjunction before the map V.
+$V : \mathcal{E} \to (F_X)_{\text{cris}}^*\mathcal{E}$가 존재하여
+$V \circ F_{\mathcal{E}} = p^i \text{id}$이면 {\it 비퇴화}라고 한다.
+\end{definition}
+
+\begin{remark}
+\label{remark-F-crystal-variants}
+$(\mathcal{E}, F)$를 Definition \ref{definition-F-crystal}과 같은
+$F$-크리스털이라 하자. 문헌에서는 흔히 비퇴화 조건을
+$F$-크리스털의 정의에 포함한다. 또한 흔히
+$F \circ V = p^n\text{id}$라고도 가정한다. 아래 결과에 필요한 것은
+어떤 정수 $j \geq 0$가 존재하여 $\Ker(F)$와 $\Coker(F)$가
+$p^j$에 의해 소멸하는 것이다. $\mathcal{E}$의 계수가 유계이면(예를
+들어 $X$가 준콤팩트이면), 이 두 조건 모두 정의에 진술된 비퇴화
+조건에서 따른다. 실제로 $R$을 환, $r \geq 1$을 정수라 하고
+$K, L \in \text{Mat}(r \times r, R)$을
+$K L = p^i 1_{r \times r}$인 행렬들이라 하자. 그러면
+$\det(K)\det(L) = p^{ri}$이다. $L'$을 $L$의 수반행렬, 즉
+$L' L = L L' = \det(L)$이라 하자. $K' = p^{ri} K$ 및
+$j = ri + i$로 놓는다. 그러면 $K L = p^i$이므로
+$K' L = p^j 1_{r \times r}$이고,
+% P08-E471: frozen source matrix argument defines K' inconsistently and uses undefined M.
+$$
+L K' = L K \det(L) \det(M) = L K L L' \det(M) = L p^i L' \det(M) =
+p^j 1_{r \times r}
+$$
+이다. 따라서 Definition \ref{definition-F-crystal}과 같은 $V$가 있으면
+$N > i \cdot \text{rank}(\mathcal{E})$인 경우
+$V' = p^N V$로 놓음으로써
+$V' \circ F = p^{N + i}$ 및 $F \circ V' = p^{N + i}$를 얻는다.
+\end{remark}
+
+\begin{theorem}
+\label{theorem-cohomology-F-crystal}
+Situation \ref{situation-F-crystal}에서
+$(\mathcal{E}, F_\mathcal{E})$를 비퇴화 $F$-크리스털이라 하자.
+$A$가 $p$-진 완비 뇌터환이고 $X \to S_0$가 고유 매끄럽다고
+가정하자. 그러면 표준 사상
+$$
+F_\mathcal{E} \circ (F_X)_{\text{cris}}^* :
+R\Gamma(\text{Cris}(X/S), \mathcal{E}) \otimes^\mathbf{L}_{A, \sigma} A
+\longrightarrow
+R\Gamma(\text{Cris}(X/S), \mathcal{E})
+$$
+은 $p$를 가역화한 뒤 동형이 된다.
+\end{theorem}
+
+\begin{proof}
+먼저 이 화살표를 세 화살표의 합성으로 쓴다. 즉
+$$
+X^{(1)} = X \times_{S_0, F_{S_0}} S_0
+$$
+로 놓고, $F_{X/S_0} : X \to X^{(1)}$로 상대 프로베니우스 사상을
+나타낸다. $\mathcal{E}^{(1)}$로 $\mathcal{E}$의
+$\Spec(\sigma)$에 의한 기저변환을 나타내자. 다시 말해 이는 가환 도식
+$$
+\xymatrix{
+X^{(1)} \ar[r] \ar[d] & X \ar[d] \\
+S \ar[r]^{\Spec(\sigma)} & S
+}
+$$
+에 결부된 크리스탈린 토포스의 사상에 의한 $\mathcal{E}$의
+$\text{Cris}(X^{(1)}/S)$로의 당김이다. 그러면 기저변환 사상
+\begin{equation}
+\label{equation-base-change-sigma}
+R\Gamma(\text{Cris}(X/S), \mathcal{E}) \otimes^\mathbf{L}_{A, \sigma} A
+\longrightarrow
+R\Gamma(\text{Cris}(X^{(1)}/S), \mathcal{E}^{(1)})
+\end{equation}
+을 얻는다. Remark \ref{remark-base-change}를 보라.
+$F_{X/S_0} : X \to X^{(1)}$과 사영 $X^{(1)} \to X$의 합성은
+절대 프로베니우스 사상 $F_X$임에 주의하라. 따라서
+$F_{X/S_0}^*\mathcal{E}^{(1)} = (F_X)_{\text{cris}}^*\mathcal{E}$임을
+알 수 있다. 그러므로 $F_{X/S_0}$에 의한 당김은 사상
+\begin{equation}
+\label{equation-to-prove}
+F_{X/S_0}^* :
+R\Gamma(\text{Cris}(X^{(1)}/S), \mathcal{E}^{(1)})
+\longrightarrow
+R\Gamma(\text{Cris}(X/S), (F_X)^*_{\text{cris}}\mathcal{E})
+\end{equation}
+이다. 마지막으로 $F_\mathcal{E}$를 사용하여 사상
+\begin{equation}
+\label{equation-F-E}
+R\Gamma(\text{Cris}(X/S), (F_X)^*_{\text{cris}}\mathcal{E})
+\longrightarrow
+R\Gamma(\text{Cris}(X/S), \mathcal{E})
+\end{equation}
+을 얻는다. 정리의 사상은 위 세 사상
+(\ref{equation-base-change-sigma}), (\ref{equation-to-prove}) 및
+(\ref{equation-F-E})의 합성이다. 첫 번째 사상은 Remark
+\ref{remark-base-change-isomorphism}에 의해 $p$의 모든 거듭제곱을
+법으로 한 준동형이다. 관련 복합체들이 $D(A)$ 안에서 완전이므로 이는
+준동형이다. Remark \ref{remark-complete-perfect}를 보라. 세 번째
+사상은 $F_\mathcal{E}$가 $p$의 거듭제곱을 무시하면 역을 가지므로
+$p$를 가역화한 뒤 준동형이다. Remark
+\ref{remark-F-crystal-variants}를 보라. 마지막으로 두 번째 사상은
+Lemma \ref{lemma-pullback-relative-frobenius}에 의해 $p$를 가역화한 뒤
+동형이다.
+\end{proof}
+
+
+
+
+
+
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}

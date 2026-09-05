@@ -1,0 +1,4804 @@
+\input{preamble}
+
+% OK, start here.
+%
+\begin{document}
+
+\title{에탈 코호몰로지 심화}
+
+
+\maketitle
+
+\phantomsection
+\label{section-phantom}
+
+\tableofcontents
+
+
+\section{서론}
+\label{section-introduction}
+
+\noindent
+이 장은 스킴의 에탈 코호몰로지를 다루는 일련의 장 가운데 둘째이다.
+첫째 장은 \'Etale Cohomology, Section
+\ref{etale-cohomology-section-introduction}을 보라.
+
+\medskip\noindent
+앞 장과의 구분을 대략 말하면, ``슈리크 함자''(콤팩트 지지 코호몰로지와
+그 오른쪽 수반)에 관한 내용과 이 도구를 사용하는 모든 내용을 이 장에서
+다룬다.
+
+
+
+
+
+
+\section{단면의 연장}
+\label{section-growing}
+
+\noindent
+이 절에서는 다음과 같은 유형의 결과를 논한다.
+
+\begin{lemma}
+\label{lemma-section-support-in-locally-closed-pre}
+$X$를 스킴이라 하자. $\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자.
+$\varphi : U' \to U$를 $X_\etale$의 사상이라 하자. $Z' \subset U'$를
+닫힌 부분스킴이라 하고, $Z' \to U' \to U$가 상 $Z \subset U$를 갖는
+닫힌 몰입이라고 하자. 그러면 표준 전단사
+$$
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset Z\} =
+\{s' \in \mathcal{F}(U') \mid \text{Supp}(s') \subset Z'\}
+$$
+가 존재한다. $\varphi^{-1}(Z) = Z'$이면 이 전단사는 제한으로 주어진다.
+\end{lemma}
+
+\begin{proof}
+$U'$의 닫힌 부분스킴 $Z'' = \varphi^{-1}(Z)$를 생각하자.
+$Z'$가 $U'$에서 닫혀 있으므로 $Z' \subset Z''$는 닫혀 있다.
+한편 $Z' \to Z''$는 ($Z$ 위에서 에탈인 스킴들 사이의 사상으로서)
+에탈 사상이고, 따라서 열린 사상이다. 그러므로 어떤 닫힌 부분집합 $T$에
+대하여 $Z'' = Z' \amalg T$이다. 열린 덮개
+$U' = (U' \setminus T) \cup (U' \setminus Z')$로부터
+$$
+\{s' \in \mathcal{F}(U') \mid \text{Supp}(s') \subset Z'\} =
+\{s' \in \mathcal{F}(U' \setminus T) \mid \text{Supp}(s') \subset Z'\}
+$$
+를 얻고, 에탈 덮개
+$\{U' \setminus T \to U, U \setminus Z \to U\}$로부터
+$$
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset Z\} =
+\{s' \in \mathcal{F}(U' \setminus T) \mid \text{Supp}(s') \subset Z'\}
+$$
+를 얻는다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-section-support-in-locally-closed}
+$X$를 스킴이라 하고 $Z \subset X$를 국소 닫힌 부분스킴이라 하자.
+$\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자. $Z$를 닫힌 부분스킴으로
+포함하는 열린 부분스킴 $U, U' \subset X$가 주어지면 표준 전단사
+$$
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset Z\} =
+\{s \in \mathcal{F}(U') \mid \text{Supp}(s) \subset Z\}
+$$
+가 존재한다. $U' \subset U$이면 이 전단사는 제한으로 주어진다.
+\end{lemma}
+
+\begin{proof}
+$Z$는 $U \cap U'$의 닫힌 부분스킴이므로 $U' \subset U$인 경우만
+증명하면 충분하다. 이 경우는 Lemma
+\ref{lemma-section-support-in-locally-closed-pre}의 특수한 경우이다.
+\end{proof}
+
+\noindent
+뒤에서 유용하게 쓰일 약간 비표준적인 표기를 도입하자. 위의 Lemma
+\ref{lemma-section-support-in-locally-closed}의 상황에서
+$$
+H_Z(\mathcal{F}) = \{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset Z\}
+$$
+로 쓰자. 여기서 $U \subset X$는 $Z$를 닫힌 부분스킴으로 포함하는
+임의의 열린 부분스킴이다. 이 표기의 부정확성이 마음에 걸리는 독자는
+$\partial Z = \overline{Z}\setminus Z$를 $X$ 안에서 $Z$의 ``경계''라 하고
+$U = X \setminus \partial Z$를 택해도 된다. 그러나 아래의 여러 논증에서는
+서로 다른 열린 부분스킴을 유연하게 고르는 것이 중요하다. 이 구성은 다음
+성질들을 갖는다.
+\begin{enumerate}
+\item
+\label{item-inclusion}
+$Z \subset Z'$가 $X$의 국소 닫힌 부분스킴들이고 $Z$가 $Z'$에서 닫혀
+있으면 자연스러운 단사
+$$
+H_Z(\mathcal{F}) \to H_{Z'}(\mathcal{F}).
+$$
+가 존재한다.
+\item
+\label{item-pullback}
+$f : Y \to X$가 스킴의 사상이고 $Z \subset X$가 국소 닫힌 부분스킴이면
+자연스러운 당김사상
+$f^* : H_Z(\mathcal{F}) \to H_{f^{-1}Z}(f^{-1}\mathcal{F})$가 존재한다.
+\end{enumerate}
+다음 상황으로도 이 표기를 확장해 두면 편리하다. $W \in X_\etale$이고
+$Z \subset W$가 국소 닫힌 부분스킴이라고 하자. 그러면
+$$
+H_Z(\mathcal{F}) =
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset Z\} =
+H_Z(\mathcal{F}|_{W_\etale})
+$$
+로 쓴다. 여기서 $U \subset W$는 위와 똑같이 $Z$를 닫힌 부분스킴으로
+포함하는 임의의 열린 부분스킴이다\footnote{실제로 Lemma
+\ref{lemma-section-support-in-locally-closed-pre}는 $X$ 위의 $Z$가
+$X_\etale$의 어떤 대상 $W$의 국소 닫힌 부분스킴과 동형이면 $W$의 선택이
+무관함을 보인다.}.
+
+
+
+
+
+
+
+
+\section{콤팩트 지지 단면}
+\label{section-compact-support}
+
+\noindent
+이 절의 참고문헌은 \cite[Exposee XVII, Section 6]{SGA4}이다.
+$f : X \to Y$를 분리이고 국소 유한형인 스킴의 사상이라 하자. 이 절에서는
+$f_!\mathcal{F} \subset f_*\mathcal{F}$를 $Y$에 대해 고유인 지지집합을 갖는
+단면들로 이루어진 부분층(적절한 의미에서 정의한다)으로 두어 함자
+$f_! : \textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$를 정의한다.
+
+\medskip\noindent
+경고: 함자 $f_!$는 유도 범주 위의 어떤 함자 $Rf_!$의 0차 코호몰로지
+층이지만(향후 참고문헌을 삽입할 것), $Rf_!$는 $f_!$의 유도 함자가 아니다.
+
+\begin{lemma}
+\label{lemma-f-shriek-separated}
+$f : X \to Y$를 국소 유한형인 스킴의 사상이라 하자.
+$\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자. 규칙
+$$
+Y_\etale \longrightarrow \textit{Ab},\quad
+V \longmapsto \{s \in f_*\mathcal{F}(V) = \mathcal{F}(X_V) \mid
+\text{Supp}(s) \subset X_V \text{ is proper over }V\}
+$$
+은 $f_*\mathcal{F}$의 아벨 부분층이다.
+\end{lemma}
+
+\noindent
+경고: $f$가 분리 사상이 아니면 이 층은 “올바른 층”이 아니다.
+
+\begin{proof}
+단면의 지지집합은 닫혀 있음을 상기하라
+(\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-support-section-closed}). 따라서
+Cohomology of Schemes, Section
+\ref{coherent-section-proper-over-base}의 내용을 적용할 수 있다.
+위 보조정리와 Cohomology of Schemes, Lemma
+\ref{coherent-lemma-union-closed-proper-over-base}에 의해
+$f_*\mathcal{F}(V)$의 위 부분집합은 부분군이다.
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-base-change-closed-proper-over-base}에 의해 이 규칙은
+부분 준층을 정의한다. 마지막으로 $s \in f_*\mathcal{F}(V)$이고,
+$s|_{V_i}$의 지지집합이 $V_i$ 위에서 고유가 되게 하는 에탈 덮개
+$\{V_i \to V\}$가 있다고 하자. $s|_{V_i}$의 지지집합은 $s|_V$의
+지지집합의 역상임을 관찰하라(줄기로 지지집합을 특징짓고
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-stalk-pullback}를 사용하라).
+그러므로 Descent, Lemma
+\ref{descent-lemma-descending-property-proper-over-base}에 의해
+$s$의 지지집합은 $V$ 위에서 고유이다. 따라서 이 규칙은 층 조건을
+만족한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-separated-etale-shriek}
+$j : U \to X$를 분리 에탈 사상이라 하자. $\mathcal{F}$를
+$U_\etale$ 위의 아벨 층이라 하자. \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-shriek-into-star-separated-etale}의 단사
+$j_!\mathcal{F} \to j_*\mathcal{F}$의 상은 Lemma
+\ref{lemma-f-shriek-separated}의 부분층이다.
+\end{lemma}
+
+\noindent
+다른 방법은 이 보조정리를 뒤로 옮기고 두 층의 줄기 묘사를 이용하여
+증명하는 것이다.
+
+\begin{proof}
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-shriek-into-star-separated-etale}의 증명에서
+$j_!\mathcal{F} \to j_*\mathcal{F}$는 준층 사상
+$j_{p!}\mathcal{F} \to j_*\mathcal{F}$를 구성하여 얻으며, 그 상은
+명백히 Lemma \ref{lemma-f-shriek-separated}의 부분층에 들어간다.
+$j_!\mathcal{F}$는 $j_{p!}\mathcal{F}$의 층화이므로
+$j_!\mathcal{F} \to j_*\mathcal{F}$의 상은 이 부분층에 들어간다.
+역으로 $s \in j_*\mathcal{F}(V)$의 지지집합 $Z$가 $V$ 위에서
+고유라고 하자. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-characterize-finite}에 의해 $Z \to V$는
+닫힌 상 $Z' \subset V$를 갖는 유한 사상이다. $s$를
+$V \setminus Z'$에 제한하면 영이고, 영 단면은
+$j_!\mathcal{F} \to j_*\mathcal{F}$의 상에 들어간다.
+한편 $v \in Z'$이면, 열린 동시에 닫힌 부분스킴들로의 분해
+$U_{V'} = W \amalg U'_1 \amalg \ldots \amalg U'_n$가 존재하고
+각 $U'_i \to V'$가 동형이며
+$T_{V'} \subset U'_1 \amalg \ldots \amalg U'_n$이 되게 하는
+에탈 근방 $(V',v') \to (V,v)$를 택할 수 있다. \'Etale Morphisms,
+Lemma \ref{etale-lemma-etale-etale-local-technical}을 보라.
+동형사상 $U'_i \to V'$의 역을 취하면 $n$개의 사상
+$\varphi'_i : V' \to U$와, $s$를 당겨 얻는 $V'$ 위의 단면
+$s'_i$를 얻는다. 그러면 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-shriek-into-star-separated-etale}의 증명에
+나오는 $j_{p!}\mathcal{F}(V')$의 공식에서
+$V'$ 위의 $j_{p!}\mathcal{F}$의 단면
+$\sum (\varphi'_i,s'_i)$는 구성상 $s$의
+$V'$로의 제한으로 사상된다. 따라서 $s$는 에탈 국소적으로
+$j_!\mathcal{F} \to j_*\mathcal{F}$의 상에 들어가며, 증명이 끝난다.
+\end{proof}
+
+\begin{definition}
+\label{definition-f-shriek-separated}
+$f : X \to Y$를 분리 (!)이고 국소 유한형인 스킴의 사상이라 하고
+$\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자. Lemma
+\ref{lemma-f-shriek-separated}에서 구성한 부분층
+$f_!\mathcal{F} \subset f_*\mathcal{F}$를
+{\it 콤팩트 지지를 갖는 직상}이라 한다.
+\end{definition}
+
+\noindent
+두 정의를 모두 적용할 수 있을 때 서로 일치하므로 Lemma
+\ref{lemma-separated-etale-shriek}에 의해 이는 \'Etale Cohomology,
+Definition \ref{etale-cohomology-definition-extension-zero}와 충돌하지
+않는다. 다음은 간단한 확인이다.
+
+\begin{lemma}
+\label{lemma-proper-f-shriek}
+$f : X \to Y$를 스킴의 고유 사상이라 하자. 그러면 $f_! = f_*$이다.
+\end{lemma}
+
+\begin{proof}
+$f_!$의 구성에서 즉시 따른다.
+\end{proof}
+
+\noindent
+다음 관찰은 매우 유용하다.
+
+\begin{remark}[열린 몰입에 대한 공변성]
+\label{remark-covariance-f-shriek-separated}
+$f : X \to Y$를 분리이고 국소 유한형인 스킴의 사상이라 하고
+$\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자.
+$X' \subset X$를 열린 부분스킴이라 하자. $f$의 제한을
+$f' : X' \to Y$로 나타내자. 표준 단사
+$$
+f'_!(\mathcal{F}|_{X'}) \longrightarrow f_!\mathcal{F}
+$$
+가 존재한다. 실제로 $V \in Y_\etale$라 하고, 지지집합 $Z'$가
+$V$ 위에서 고유인 단면
+$s' \in f'_*(\mathcal{F}|_{X'})(V) = \mathcal{F}(X' \times_Y V)$를
+생각하자. Cohomology of Schemes, Lemma
+\ref{coherent-lemma-functoriality-closed-proper-over-base}에 의해 $Z'$는
+$X \times_Y V$에서도 닫혀 있다. 그러므로 $X' \times_Y V$로의 제한이
+$s'$이고 $X \times_Y V \setminus Z'$로의 제한이 영인 유일한 단면
+$s \in \mathcal{F}(X \times_Y V) = f_*\mathcal{F}(V)$가 존재한다.
+Lemma \ref{lemma-section-support-in-locally-closed}를 보라. 이 구성은
+제한 사상과 양립하므로 원하는 층 사상
+$f'_!(\mathcal{F}|_{X'}) \to f_!\mathcal{F}$를 유도하며, 이 사상은
+명백히 단사이다. 구성에 의해 $\mathcal{F}$에 대해 함자적인 가환도표
+$$
+\xymatrix{
+f'_!(\mathcal{F}|_{X'}) \ar[r] \ar[d] &
+f_!\mathcal{F} \ar[d] \\
+f'_*(\mathcal{F}|_{X'}) &
+f_*\mathcal{F} \ar[l]
+}
+$$
+를 얻는다. $X'' \subset X'$가 열리고
+$f'' = f|_{X''} : X'' \to Y$이면, 방금 구성한 표준 사상들의 합성
+$f''_!\mathcal{F}|_{X''} \to f'_!\mathcal{F}|_{X'} \to
+f_!\mathcal{F}$는 표준 사상
+$f''_!\mathcal{F}|_{X''} \to f_!\mathcal{F}$와 같다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-compactify-f-shriek-separated}
+$Y$를 스킴이라 하자. $j : X \to \overline{X}$를 $Y$ 위의 스킴들의
+열린 몰입이라 하고 $\overline{X}$가 $Y$ 위에서 고유라고 하자.
+구조 사상들을 $f : X \to Y$와
+$\overline{f} : \overline{X} \to Y$로 나타내자.
+$\mathcal{F} \in \textit{Ab}(X_\etale)$에 대해 표준 동형사상
+(증명을 보라)
+$$
+f_!\mathcal{F} \longrightarrow \overline{f}_!j_!\mathcal{F}
+$$
+이 존재한다. Lemma \ref{lemma-proper-f-shriek}에 의해
+$\overline{f}_! = \overline{f}_*$이므로 함자
+$\textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$로서
+$\overline{f}_* \circ j_! = f_!$를 얻는다.
+\end{lemma}
+
+\begin{proof}
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-jshriek-open}에 의해
+$(j_!\mathcal{F})|_X = \mathcal{F}$이다. 따라서 표시한 화살표는
+$\mathcal{G} = j_!\mathcal{F}$에 대해 Remark
+\ref{remark-covariance-f-shriek-separated}에서 주어진 단사
+$f_!(\mathcal{G}|_X) \to \overline{f}_!\mathcal{G}$이다.
+이 사상의 명시적 구성에 의해 이제 다음만 보이면 충분하다.
+$V \in Y_\etale$이고
+$s \in \overline{f}_!\mathcal{G}(V) =
+\overline{f}_*\mathcal{G}(V) = \mathcal{G}(\overline{X}_V)$가
+단면이면, $s$의 지지집합은 열린 부분스킴
+$X_V \subset \overline{X}_V$에 들어간다. 이는
+$\overline{X} \setminus X$의 기하학적 점들에서 $\mathcal{G}$의 줄기가
+영이라는 사실에서 즉시 따른다.
+\end{proof}
+
+\noindent
+$f_!\mathcal{F}$의 줄기와 올의 콤팩트 지지 단면들을 관련시키고자 한다.
+이를 진술하려면 정의가 하나 필요하다.
+
+\begin{definition}
+\label{definition-compact-support}
+$X$를 체 $k$ 위의 분리이고 국소 유한형인 스킴이라 하자.
+$\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자.
+$H^0_c(X,\mathcal{F}) \subset H^0(X,\mathcal{F})$를 지지집합이
+$k$ 위에서 고유인 단면들의 집합으로 둔다.
+$H^0_c(X,\mathcal{F})$의 원소를 {\it 콤팩트 지지 단면}이라 한다.
+\end{definition}
+
+\noindent
+경고: $X$가 $k$ 위에서 분리 스킴이 아니면 이 정의는 “올바른 정의”가
+아니다.
+
+\begin{lemma}
+\label{lemma-proper-compact-support}
+$X$를 체 $k$ 위의 고유 스킴이라 하자. 그러면
+$H^0_c(X, \mathcal{F}) = H^0(X, \mathcal{F})$이다.
+\end{lemma}
+
+\begin{proof}
+$H^0_c$의 구성에서 즉시 따른다.
+\end{proof}
+
+\begin{remark}[열린 몰입과 콤팩트 지지 단면]
+\label{remark-covariance-compact-support}
+$X$를 체 $k$ 위의 분리이고 국소 유한형인 스킴이라 하고,
+$\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자.
+Remark \ref{remark-covariance-f-shriek-separated}에서와 똑같이,
+열린 부분스킴 $X' \subset X$에 대해 단사
+$$
+H^0_c(X', \mathcal{F}|_{X'}) \longrightarrow H^0_c(X, \mathcal{F})
+$$
+가 존재하며, 이 사상들에 의해 $H^0_c$는 $X$의 자리스키 사이트 위의
+“쌍대층”이 된다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-compactify-compact-support}
+$k$를 체라 하자. $j : X \to \overline{X}$를 $k$ 위의 스킴들의
+열린 몰입이라 하고 $\overline{X}$가 $k$ 위에서 고유라고 하자.
+$\mathcal{F} \in \textit{Ab}(X_\etale)$에 대해 표준 동형사상
+(증명을 보라)
+$$
+H^0_c(X, \mathcal{F}) \longrightarrow
+H^0_c(\overline{X}, j_!\mathcal{F}) =
+H^0(\overline{X}, j_!\mathcal{F})
+$$
+이 존재한다. 오른쪽 등식은 Lemma
+\ref{lemma-proper-compact-support}에서 따른다.
+\end{lemma}
+
+\begin{proof}
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-jshriek-open}에 의해
+$(j_!\mathcal{F})|_X = \mathcal{F}$이다. 따라서 표시한 화살표는
+$\mathcal{G} = j_!\mathcal{F}$에 대해 Remark
+\ref{remark-covariance-compact-support}에서 주어진 단사
+$H^0_c(X,\mathcal{G}|_X) \to
+H^0_c(\overline{X},\mathcal{G})$이다.
+이 사상의 명시적 구성에 의해 이제 다음만 보이면 충분하다.
+$s \in H^0(\overline{X},\mathcal{G})$가 단면이면 $s$의 지지집합은
+열린 부분스킴 $X$에 들어간다. 이는
+$\overline{X}\setminus X$의 기하학적 점들에서 $\mathcal{G}$의 줄기가
+영이라는 사실에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-stalk-f-shriek-separated}
+$f : X \to Y$를 분리이고 국소 유한형인 스킴의 사상이라 하고
+$\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자. 그러면 모든
+기하학적 점 $\overline{y} : \Spec(k) \to Y$에 대해 표준 동형사상
+$$
+(f_!\mathcal{F})_{\overline{y}}
+\longrightarrow
+H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+$(f_*\mathcal{F})_{\overline{y}} = \colim f_*\mathcal{F}(V)$임을
+상기하라. 여기서 직접극한은 $\overline{y}$의 에탈 근방
+$(V,\overline{v})$들에 걸친다.
+$s \in f_*\mathcal{F}(V) = \mathcal{F}(X_V)$이면 $s$를 당겨
+$(X_V)_{\overline{v}} = X_{\overline{y}}$ 위의 $\mathcal{F}$의 단면을
+얻을 수 있다. 따라서 표준 사상
+$$
+c_{\overline{y}} :
+(f_*\mathcal{F})_{\overline{y}}
+\longrightarrow 
+H^0(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})
+$$
+을 얻는다. 이 사상이 부분군
+$(f_!\mathcal{F})_{\overline{y}}$와
+$H^0_c(X_{\overline{y}},\mathcal{F}|_{X_{\overline{y}}})$ 사이의
+전단사를 유도한다고 주장한다. 이 주장은 보조정리를 함의하며,
+보조정리의 식별이 $\mathcal{F}$의 단면들을 $f$의 기하학적 올로
+당겨서 주어진다는 더 정밀한 설명도 제공한다.
+
+\medskip\noindent
+임의의 원소
+$s \in (f_!\mathcal{F})_{\overline{y}} \subset
+(f_*\mathcal{F})_{\overline{y}}$는 $c_{\overline{y}}$에 의해
+$H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}}) \subset
+H^0(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})$의 원소로
+사상된다. 이는 단면의 지지집합을 취하는 것이 당김과
+가환하고 고유성이 기저변환으로 보존되기 때문이다. 이로써 적어도
+보조정리의 사상을 얻는다. 이 사상이 동형임을 보이기 위해 $Y$ 위에서
+자리스키 국소적으로 작업할 수 있으므로, $Y$가 아핀이라고 가정한다.
+
+\medskip\noindent
+아래에서 사용할 관찰은 다음과 같다. 열린 부분스킴 $X' \subset X$가
+주어지고 $f' = f|_{X'}$이면 가환도표
+$$
+\xymatrix{
+(f'_!(\mathcal{F}|_{X'}))_{\overline{y}} \ar[r] \ar[d] &
+H^0_c(X'_{\overline{y}}, \mathcal{F}|_{X'_{\overline{y}}}) \ar[d] \\
+(f_!\mathcal{F})_{\overline{y}} \ar[r] &
+H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})
+}
+$$
+를 얻는다. 여기서 수평 화살표들은 위에서 구성한 사상들이고 수직
+화살표들은 Remarks \ref{remark-covariance-f-shriek-separated}와
+\ref{remark-covariance-compact-support}에서 주어진다. 그 이유는
+다음과 같다. $\overline{y}$의 에탈 근방
+$(V,\overline{v})$와 단면
+$s \in f_*\mathcal{F}(V) = \mathcal{F}(X_V)$가 주어지고, 그 지지집합
+$Z$가 $X'_V$에 들어가며 $V$ 위에서 고유라고 하자. 그러면 $s$는
+도표의 수직 화살표로 대응하는
+$(f'_!(\mathcal{F}|_{X'}))_{\overline{y}}$와
+$(f_!\mathcal{F})_{\overline{y}}$의 원소들을 정의한다. 수평 화살표들은
+이 원소들을 $s$의 $X_{\overline{y}}$로의 당김
+$s|_{X_{\overline{y}}}$에 보낸다. 그 지지집합
+$Z_{\overline{y}}$는 $X'_{\overline{y}}$에 들어가므로 이 제한은
+$H^0_c(X'_{\overline{y}},\mathcal{F}|_{X'_{\overline{y}}})$와
+$H^0_c(X_{\overline{y}},\mathcal{F}|_{X_{\overline{y}}})$의 양립하는
+원소 쌍을 정의한다.
+
+\medskip\noindent
+$s \in (f_!\mathcal{F})_{\overline{y}}$가
+$H^0_c(X_{\overline{y}},\mathcal{F}|_{X_{\overline{y}}})$의 영원소로
+사상된다고 하자. $s$가 $V$ 위에서 고유인 지지집합 $Z$를 갖는
+$s \in f_*\mathcal{F}(V) = \mathcal{F}(X_V)$에 대응한다고 하자.
+$V$가 아핀이라고 가정할 수 있으며, 그러면 $Z$는 준콤팩트이다.
+따라서 $Z$의 상을 포함하는 준콤팩트 열린 부분스킴
+$X' \subset X$를 택할 수 있다. 그러면 $Z$는 $X'_V$에 들어가므로
+$s$는 앞 문단에서처럼 $f' = f|_{X'}$일 때 어떤 원소
+$s' \in f'_!(\mathcal{F}|_{X'})(V)$의 상이다.
+그러면 $s'$는
+$H^0_c(X'_{\overline{y}},\mathcal{F}|_{X'_{\overline{y}}})$의
+영원소로 사상된다. 따라서 단사성을 증명하기 위해 $X$를 $X'$로
+바꾸어도 되며, 즉 $X$가 준콤팩트라고 가정할 수 있다. 이 경우는
+아래에서 증명한다.
+
+\medskip\noindent
+$t \in H^0_c(X_{\overline{y}},
+\mathcal{F}|_{X_{\overline{y}}})$라고 하자. $t$의 지지집합은 어떤
+준콤팩트 열린 부분스킴 $W \subset X_{\overline{y}}$에 들어간다.
+따라서 $X'_{\overline{y}}$가 $W$를 포함하도록 준콤팩트 열린 부분스킴
+$X' \subset X$를 찾을 수 있다. 그러면 $t$는 단사
+$H^0_c(X'_{\overline{y}}, \mathcal{F}|_{X'_{\overline{y}}}) \to
+H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})$의 상에
+들어간다. 따라서 전사성을 보이기 위해 $X$를 $X'$로
+바꾸어도 되며, 즉 $X$가 준콤팩트라고 가정할 수 있다. 이 경우는
+아래에서 증명한다.
+
+\medskip\noindent
+증명의 마지막 문단에서는 $X$가 준콤팩트이고 $Y$가 아핀인 경우를
+증명한다. More on Flatness, Theorem \ref{flat-theorem-nagata}에 의해
+$Y$ 위의 콤팩트화 $j : X \to \overline{X}$가 존재한다.
+$\mathcal{G} = j_!\mathcal{F}$로 두자. 그러면 \'Etale Cohomology,
+Lemma \ref{etale-cohomology-lemma-jshriek-open}에 의해
+$\mathcal{F} = \mathcal{G}|_X$이다. 위 논의로부터 가환도표
+$$
+\xymatrix{
+(f_!\mathcal{F})_{\overline{y}} \ar[r] \ar[d] &
+H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}}) \ar[d] \\
+(\overline{f}_!\mathcal{G})_{\overline{y}} \ar[r] &
+H^0_c(\overline{X}_{\overline{y}}, \mathcal{G}|_{\overline{X}_{\overline{y}}})
+}
+$$
+를 얻는다. Lemmas \ref{lemma-compactify-f-shriek-separated}와
+\ref{lemma-compactify-compact-support}에 의해 수직 화살표들은
+동형사상이다. 따라서 고유 사상 $\overline{X} \to Y$의 경우로
+환원된다. 고유 사상에 대해서는 Lemmas
+\ref{lemma-proper-f-shriek}과 \ref{lemma-proper-compact-support},
+그리고 직상의 고유 기저변환, 즉 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-pushforward-stalk}에 의해 우리의
+사상은 동형사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-f-shriek-separated}
+다음 데카르트 도표를 생각하자.
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+여기서 $f$는 분리이고 국소 유한형이라고 하자. $X_\etale$ 위의 임의의
+아벨 층 $\mathcal{F}$에 대해
+$f'_!(g')^{-1}\mathcal{F} = g^{-1}f_!\mathcal{F}$이다.
+\end{lemma}
+
+\begin{proof}
+매우 일반적인 상황에서 당김사상
+$g^{-1}f_*\mathcal{F} \to f'_*(g')^{-1}\mathcal{F}$가 존재한다.
+Sites, Section \ref{sites-section-pullback}을 보라. 이 사상이
+$g^{-1}f_!\mathcal{F}$를 부분층 $f'_!(g')^{-1}\mathcal{F}$ 안으로
+보내고 보조정리의 동형사상을 유도한다고 주장한다.
+
+\medskip\noindent
+기하학적 점 $\overline{y}' : \Spec(k) \to Y'$를 택하고 $Y$에서의 상을
+$\overline{y} = g \circ \overline{y}'$로 나타내자. 가환도표
+$$
+\xymatrix{
+(f_*\mathcal{F})_{\overline{y}} \ar[r] \ar[d] &
+H^0(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}}) \ar[d] \\
+(f'_*(g')^{-1}\mathcal{F})_{\overline{y}'} \ar[r] &
+H^0(X'_{\overline{y}'}, (g')^{-1}\mathcal{F}|_{X'_{\overline{y}'}})
+}
+$$
+가 존재한다. 여기서 수평 사상들은 Lemma
+\ref{lemma-stalk-f-shriek-separated}의 증명에서 사용한 사상들이고,
+수직 사상들은 위의 당김사상들이다. 네 사상 모두 스킴의 사상을 따라
+국소 단면을 당겨서 주어지고, 그 밑의 스킴 사상 도표가 가환하므로 이
+도표는 가환한다. 보조정리의 도표가 데카르트이므로
+$X'_{\overline{y}'} = X_{\overline{y}}$이다. 따라서 Lemma
+\ref{lemma-stalk-f-shriek-separated}와 그 증명으로부터 가환도표
+$$
+\xymatrix{
+(f_*\mathcal{F})_{\overline{y}} \ar[rrr] \ar[ddd] & & &
+H^0(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}}) \ar[ddd] \\
+& (f_!\mathcal{F})_{\overline{y}} \ar[r] \ar@{..>}[d] \ar[lu] &
+H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}}) \ar[d] \ar[ru] \\
+& (f'_!(g')^{-1}\mathcal{F})_{\overline{y}'} \ar[r] \ar[ld] &
+H^0_c(X'_{\overline{y}'}, (g')^{-1}\mathcal{F}|_{X'_{\overline{y}'}}) \ar[rd]\\
+(f'_*(g')^{-1}\mathcal{F})_{\overline{y}'} \ar[rrr] & & &
+H^0(X'_{\overline{y}'}, (g')^{-1}\mathcal{F}|_{X'_{\overline{y}'}})
+}
+$$
+를 얻는다. 안쪽 정사각형의 수평 화살표들은 동형사상이고 오른쪽의 두
+수직 화살표는 등식이다. 또한 남동, 남서, 북동, 북서 화살표들은
+단사이다. 따라서 이 도표에 들어맞는 유일한 전단사 점선 화살표가
+존재한다. 이 사실이 줄기마다 성립하므로
+$g^{-1}f_!\mathcal{F} \subset g^{-1}f_*\mathcal{F}
+\to f'_*(g')^{-1}\mathcal{F}$에서 전자는 부분층
+$f'_!(g')^{-1}\mathcal{F} \subset f'_*(g')^{-1}\mathcal{F}$ 안으로
+사상된다. \'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks}을 보라.
+같은 정리에 의해 유도된 사상은 동형사상이며, 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-f-shriek-composition}
+$f : X \to Y$와 $g : Y \to Z$를 합성 가능한 분리이고 국소 유한형인
+스킴의 사상들이라 하자. $\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라
+하자. 그러면 $(g \circ f)_*\mathcal{F}$의 부분층으로서
+$g_!f_!\mathcal{F} = (g \circ f)_!\mathcal{F}$이다.
+\end{lemma}
+
+\begin{proof}
+독자에게 이 명제를 직접 증명해 보기를 강력히 권한다.
+$W \in Z_\etale$이고
+$s \in (g \circ f)_*\mathcal{F}(W) = \mathcal{F}(X_W)$라 하자.
+$s$의 지지집합을 $T \subset X_W$로 나타내자. 이는 닫힌 부분집합이다.
+$s$가 $(g \circ f)_!\mathcal{F}$의 단면일 필요충분조건은 $T$가
+$W$ 위에서 고유인 것이다.
+$f_!\mathcal{F} \subset f_*\mathcal{F}$이므로
+$g_!f_!\mathcal{F} \subset g_!f_*\mathcal{F} \subset
+g_*f_*\mathcal{F}$이다. 한편 $s$가 $g_!f_!\mathcal{F}$의 단면일
+필요충분조건은 (a) $T$가 $Y_W$ 위에서 고유이고, (b) $s$를
+$f_!\mathcal{F}$의 단면으로 볼 때 그 지지집합 $T'$가 $W$ 위에서
+고유인 것이다. (a)가 성립하면 $T$의 $Y_W$에서의 상은 닫혀 있고,
+$f_!\mathcal{F} \subset f_*\mathcal{F}$이므로
+$T' \subset Y_W$는 $T$의 상이다(세부사항은 줄기를 보라).
+
+\medskip\noindent
+따라서 닫힌 부분집합 $T \subset X_W$가 $W$ 위에서 고유일
+필요충분조건이 $T$가 $Y_W$ 위에서 고유이고 $T$의 $Y_W$에서의 상이
+$W$ 위에서 고유인 것임을 보이면 된다. $T$에 축약 유도 닫힌
+부분스킴 구조를 주자. $T$가 $W$ 위에서 고유이면 Morphisms, Lemma
+\ref{morphisms-lemma-image-proper-scheme-closed}에 의해
+$T \to Y_W$가 고유이고, Cohomology of Schemes, Lemma
+\ref{coherent-lemma-functoriality-closed-proper-over-base}에 의해
+$T$의 $Y_W$에서의 상이 $W$ 위에서 고유이다. 역으로 $T$가
+$Y_W$ 위에서 고유이고 $T$의 $Y_W$에서의 상이 $W$ 위에서
+고유이면, 사상
+$T \to W$는 고유 사상들의 합성으로서 고유이다(여기서는 문제를
+스킴 사상에 관한 것으로 바꾸기 위해 $Y_W$에서 $T$의 닫힌 상에
+축약 유도 스킴 구조를 준다). Morphisms, Lemma
+\ref{morphisms-lemma-composition-proper}를 보라.
+\end{proof}
+
+\begin{remark}
+\label{remark-f-shriek-base-change-composition}
+위에서 구성한 함자들 사이의 동형사상들은 다음 두 성질을 만족한다.
+\begin{enumerate}
+\item $f : X \to Y$, $g : Y \to Z$, $h : Z \to T$를 합성 가능한
+분리이고 국소 유한형인 스킴의 사상들이라 하자. 그러면 도표
+$$
+\xymatrix{
+(h \circ g \circ f)_! \ar[r] \ar[d] &
+(h \circ g)_! \circ f_! \ar[d] \\
+h_! \circ (g \circ f)_! \ar[r] &
+h_! \circ g_! \circ f_!
+}
+$$
+는 가환한다. 여기서 화살표들은 Lemma
+\ref{lemma-f-shriek-composition}의 화살표들이다.
+\item 다음 스킴 도표가 주어졌다고 하자.
+$$
+\xymatrix{
+X' \ar[d]_{f'} \ar[r]_c & X \ar[d]^f \\
+Y' \ar[d]_{g'} \ar[r]_b & Y \ar[d]^g \\
+Z' \ar[r]^a & Z
+}
+$$
+두 정사각형이 모두 데카르트이고 $f$와 $g$가 분리이고 국소
+유한형이라고 하자. 그러면 도표
+$$
+\xymatrix{
+a^{-1} \circ (g \circ f)_! \ar[d] \ar[rr] & &
+(g' \circ f')_! \circ c^{-1} \ar[d] \\
+a^{-1} \circ g_! \circ f_! \ar[r] &
+g'_! \circ b^{-1} \circ f_! \ar[r] &
+g'_! \circ f'_! \circ c^{-1}
+}
+$$
+% P08-E101: frozen source omits the direction/name of the second arrow family.
+는 가환한다. 여기서 수평 화살표들은 Lemma
+\ref{lemma-base-change-f-shriek-separated}의 화살표들이고
+화살표들은 Lemma \ref{lemma-f-shriek-composition}의 화살표들이다.
+\end{enumerate}
+(1)은 직상에 대한 비슷한 가환도표가 있으므로 성립한다. (2)는
+직상의 기저변환 사상들의 매우 일반적인 양립성(Sites, Remark
+\ref{sites-remark-compose-base-change})과 Lemmas
+\ref{lemma-base-change-f-shriek-separated} 및
+\ref{lemma-f-shriek-composition}의 동형사상들이 대응하는 직상
+사상들로 구성된다는 사실에서 성립한다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-colim-f-shriek-separated}
+$f : X \to Y$를 분리이고 국소 유한형인 스킴의 사상이라 하자.
+$X = \bigcup_{i \in I}X_i$를 열린 덮개라 하고, 모든 $i,j \in I$에
+대해 $X_i \cup X_j \subset X_k$가 되는 $k$가 존재한다고 하자.
+$f$의 제한을 $f_i : X_i \to Y$로 나타내자. 그러면
+$$
+f_!\mathcal{F} = \colim_{i \in I} f_{i, !}(\mathcal{F}|_{X_i})
+$$
+이다. 이는 $\mathcal{F} \in \textit{Ab}(X_\etale)$에 대해 함자적이며,
+전이 사상들은 Remark \ref{remark-covariance-f-shriek-separated}에서
+구성한 사상들이다.
+\end{lemma}
+
+\begin{proof}
+$Y_\etale$의 준콤팩트 대상 $V$에서 평가했을 때 오른쪽에서 왼쪽으로
+가는 표준 사상이 전단사임을 보이면 충분하다. 오른쪽의 직접극한은
+유향이고 전이 사상들은 단사이다. 따라서 직접극한을 평가하기 위해
+Sites, Lemma \ref{sites-lemma-directed-colimits-sections}를 사용할 수
+있다. 이제 명제는 $V$ 위에서 고유인 닫힌 부분집합
+$Z \subset X_V$가 준콤팩트이고, 따라서 어떤 $i$에 대해
+$X_{i,V}$에 들어간다는 관찰로 환원된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-f-shriek-separated-direct-sums}
+$f : X \to Y$를 분리이고 국소 유한형인 스킴의 사상이라 하자.
+그러면 함자 $f_!$는 직합과 가환한다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F} = \bigoplus \mathcal{F}_i$로 두자. 사상
+$\bigoplus f_!\mathcal{F}_i \to f_!\mathcal{F}$가 동형임을 보이려면
+이 층들이 $Y_\etale$의 준콤팩트 대상 $V$ 위에서 같은 단면을 가짐을
+보이면 충분하다. $Y$를 $V$로 바꾸어
+$H^0(Y,f_!\mathcal{F}) \subset H^0(X,\mathcal{F})$가
+$\bigoplus H^0(Y, f_!\mathcal{F}_i)
+\subset \bigoplus H^0(X, \mathcal{F}_i)
+\subset H^0(X, \bigoplus \mathcal{F}_i)$와 같음을 보이면 충분하다.
+이 경우 $X$를 준콤팩트 열린집합들의
+합집합으로 쓰고 Lemma \ref{lemma-colim-f-shriek-separated}를 사용하면
+$X$도 준콤팩트인 경우로 환원된다. 그러면 \'Etale Cohomology,
+Theorem \ref{etale-cohomology-theorem-colimit}에 의해
+$H^0(X,\mathcal{F}) = \bigoplus H^0(X,\mathcal{F}_i)$이다.
+단면들의 지지집합을 살펴보면 쉽게 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-lqf-f-shriek-separated-colimits}
+$f : X \to Y$를 분리이고 국소 준유한인 스킴의 사상이라 하자.
+그러면 다음이 성립한다.
+\begin{enumerate}
+\item $\textit{Ab}(X_\etale)$의 $\mathcal{F}$와 기하학적 점
+$\overline{y} : \Spec(k) \to Y$에 대해
+$$
+(f_!\mathcal{F})_{\overline{y}} =
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+$$
+이며 이는 $\mathcal{F}$에 대해 함자적이다.
+\item 함자 $f_!$는 완전하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+함자 $f_!$는 구성상 왼쪽 완전하다. 오른쪽 완전성은 줄기에서 확인할 수
+있다(\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks}). 따라서 (1)만
+증명하면 충분하다.
+
+\medskip\noindent
+$\overline{y} : \Spec(k) \to Y$를 기하학적 점이라 하자.
+스킴 $X_{\overline{y}}$의 밑 위상공간은 이산적이고
+(Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-fibres}), 모든 점에서의
+잉여체는 ($k$의 유한 확대인 동시에) $k$와 같다. 따라서
+$\{\overline{x} : \Spec(k) \to X :
+f(\overline{x}) = \overline{y}\}$는 $X_{\overline{y}}$의 점 집합과
+같다. 그러므로 줄기의 계산은 더 일반적인 Lemma
+\ref{lemma-stalk-f-shriek-separated}에서 따른다.
+\end{proof}
+
+
+\section{유한 지지 단면}
+\label{section-finite-support}
+
+\noindent
+이 절에서는 Section \ref{section-compact-support}의 구성을
+분리일 필요가 없는 국소 준유한 사상으로 확장한다.
+
+\medskip\noindent
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하자.
+$\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자. $Y_\etale$의
+$V$가 주어졌을 때 기저변환을 $X_V = X \times_Y V$로 나타내자.
+우리는 유한 형식합들의 군
+\begin{equation}
+\label{equation-formal-sum}
+s = \sum\nolimits_{i = 1, \ldots, n} (Z_i, s_i)
+\end{equation}
+을 생각할 것이다. 여기서 $Z_i \subset X_V$는 사상
+$Z_i \to V$가 유한인 국소 닫힌 부분스킴이고\footnote{$f$가 국소
+준유한이므로, 사상 $Z_i \to V$가 유한이라는 것은 고유라는 것과
+동치이다.} $s_i \in H_{Z_i}(\mathcal{F})$이다. 여기서
+Section \ref{section-growing}에서와 같이
+$$
+H_{Z_i}(\mathcal{F}) =
+\{s_i \in \mathcal{F}(U_i) \mid \text{Supp}(s_i) \subset Z_i\}
+$$
+로 둔다. 이때 $U_i \subset X_V$는 $Z_i$를 닫힌 부분스킴으로
+포함하는 열린 부분스킴이다. 우리는 이 형식합들을 다음 관계들로
+나눈 것을 생각할 것이다.
+\begin{enumerate}
+\item
+\label{item-sum}
+$(Z, s) + (Z, s') = (Z, s + s')$,
+\item
+\label{item-sub}
+$Z \subset Z'$이면 $(Z, s) = (Z', s)$이다.
+\end{enumerate}
+두 번째 관계가 의미를 가짐에 유의하자. $Z \to V$가 유한이고
+$Z' \to V$가 분리이므로 포함사상 $Z \to Z'$는 닫힌 사상이고,
+따라서 (\ref{item-inclusion})에서 논한 사상을 사용할 수 있다.
+
+\medskip\noindent
+형식합 (\ref{equation-formal-sum})의 아벨 군을 이 관계들로 나눈
+몫을 $f_{p!}\mathcal{F}(V)$로 나타내자. 첫 번째 관계에 따르면
+$f_{p!}\mathcal{F}(V)$는 $V$ 위에서 유한인 모든 국소 닫힌 부분스킴
+$Z \subset X_V$에 대한 아벨 군 $H_Z(\mathcal{F})$들의 직합의
+몫이다. 두 번째 관계에 따르면 실제로 우리는 쌍극한
+\begin{equation}
+\label{equation-colimit-definition}
+f_{p!}\mathcal{F}(V) = \colim_Z H_Z(\mathcal{F})
+\end{equation}
+을 취하고 있다. 이 공식은 우리의 구성을 추상적으로 이해하는 데
+편리할 것이다.
+
+\medskip\noindent
+다음으로 이 구성을 $Y_\etale$ 위의 아벨 군의 준층
+$f_{p!}\mathcal{F}$로 만드는 자연스러운 방법이 있음을 관찰하자.
+실제로 $Y_\etale$의 $V' \to V$가 주어지면 기저변환 사상
+$X_{V'} \to X_V$를 얻는다. $Z \subset X_V$가 $V$ 위에서 유한인
+국소 닫힌 부분스킴이면, 스킴론적 역상 $Z' \subset X_{V'}$는
+$V'$ 위에서 유한이다. 또한 $U \subset X_V$가 $Z$가 $U$에서
+닫혀 있는 열린 부분스킴이면, 역상 $U' \subset X_{V'}$는 $Z'$가
+$U'$에서 닫혀 있는 열린 부분스킴이다. 따라서 $\mathcal{F}$의
+제한 사상 $\mathcal{F}(U) \to \mathcal{F}(U')$은
+$H_Z(\mathcal{F})$를 $H_{Z'}(\mathcal{F})$ 안으로 보낸다. 이는
+위의 (\ref{item-pullback})에서 논한 함자성의 특수한 경우이다.
+이 사상들은 그러한 $X_V$의 국소 닫힌 부분스킴들의 포함
+$Z_1 \subset Z_2$와 분명히 양립하므로 사상
+$$
+f_{p!}\mathcal{F}(V) = \colim_Z H_Z(\mathcal{F})
+\longrightarrow
+\colim_{Z'} H_{Z'}(\mathcal{F}) =
+f_{p!}\mathcal{F}(V')
+$$
+을 얻는다. 이 사상들은 실제로 $f_{p!}\mathcal{F}$를
+$Y_\etale$ 위의 아벨 군의 준층으로 만든다. 세부사항은 생략한다.
+
+\medskip\noindent
+마지막으로 $f_{p!}\mathcal{F}$의 구성이
+$\textit{Ab}(X_\etale)$의 $\mathcal{F}$에 대해 함자적임을 관찰하자.
+따라서 국소 준유한 사상 $f : X \to Y$가 주어지면 우리는
+함자
+$$
+f_{p!} :
+\textit{Ab}(X_\etale)
+\longrightarrow
+\textit{PAb}(Y_\etale)
+$$
+를 구성하였다. 이는 $X_\etale$ 위의 아벨 층의 범주에서
+$Y_\etale$ 위의 아벨 준층의 범주로 가는 함자이다. $f_!$를
+이 함자의 층화로 정의하기 전에, 둘 다 적용되는 경우 이 구성이
+Section \ref{section-compact-support}의 구성 및
+\'Etale Cohomology, Section \ref{etale-cohomology-section-extension-by-zero}
+의 구성과 일치함을 확인하자.
+
+\begin{lemma}
+\label{lemma-finite-support-f-shriek-separated}
+$f : X \to Y$를 스킴의 분리이고 국소 준유한인 사상이라 하자.
+$\mathcal{F} \in \textit{Ab}(X_\etale)$에 대해 함자적으로 아벨 준층의
+표준 동형(!)
+$$
+f_{p!}\mathcal{F} \longrightarrow f_!\mathcal{F}
+$$
+이 존재하며, 이는 Definition \ref{definition-f-shriek-separated}의 층
+$f_!\mathcal{F}$를 위에서 구성한 준층 $f_{p!}\mathcal{F}$와 동일시한다.
+\end{lemma}
+
+\begin{proof}
+$V$를 $Y_\etale$의 대상이라 하자. $Z \subset X_V$가 국소 닫힌이고
+$V$ 위에서 유한이면, $f$가 분리이므로 사상 $Z \to X_V$가
+닫힌 몰입임을 알 수 있다. 또한 $Z_i$, $i = 1, \ldots, n$이
+$V$ 위에서 유한인 $X_V$의 닫힌 부분스킴들이면
+$Z_1 \cup \ldots \cup Z_n$ (스킴론적 합집합)은 $V$ 위에서 유한인
+닫힌 부분스킴이다. 따라서 이 경우 $f_{p!}\mathcal{F}(V)$를 정의하는
+쌍극한 (\ref{equation-colimit-definition})은 유향이고,
+% P08-E102: frozen source has transposed subscript f_{!p}; preserved literally.
+$f_{!p}\mathcal{F}(V)$는 지지집합이 $V$ 위에서 유한인
+$\mathcal{F}(X_V)$의 단면들의 집합과 단순히 같음을 얻는다.
+$V$ 위에서 고유인 $X_V$의 모든 닫힌 부분집합은 실제로 $V$ 위에서
+유한이므로($f$가 국소 준유한이기 때문이다), 바로 그 정의에 의해
+이는 $f_!\mathcal{F}(V)$와 같다고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-support-stalk}
+$f : X \to Y$를 국소 준유한인 스킴의 사상이라 하자.
+$\overline{y} : \Spec(k) \to Y$를 기하학적 점이라 하자.
+$\textit{Ab}(X_\etale)$의 $\mathcal{F}$에 대해 함자적으로
+$$
+(f_{p!}\mathcal{F})_{\overline{y}} =
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+한 준층의 $\overline{y}$에서의 줄기는 $\overline{y}$의 에탈 근방
+$(V, \overline{v})$들에 대한 통상적인 쌍극한으로 정의됨을 상기하자.
+\'Etale Cohomology, Definition
+\ref{etale-cohomology-definition-stalk}을 보라. 따라서
+$(V, \overline{v})$가 $\overline{y}$의 에탈 근방일 때
+(\ref{equation-formal-sum})과 같은
+$s = \sum_{i = 1, \ldots, n} (Z_i, s_i)$가
+$f_{p!}\mathcal{F}(V)$의 원소라고 하자. 그러면
+$$
+X_{\overline{y}} = (X_V)_{\overline{v}} \supset Z_{i, \overline{v}}
+$$
+이고 $s_i$는 $X_V$에서 $Z_i$의 한 열린 근방 위의 $\mathcal{F}$의
+단면이므로, $s$를
+$$
+\sum\nolimits_{i = 1, \ldots, n} 
+\sum\nolimits_{\overline{x} \in Z_{i, \overline{v}}}
+\left(\text{class of }s_i\text{ in }\mathcal{F}_{\overline{x}}\right)
+\quad\in\quad
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+$$
+로 보낼 수 있다. 이것이 제한 사상들과 양립한다는 것과 관계
+(\ref{item-sum}) $(Z, s) + (Z, s') - (Z, s + s')$ 및
+$Z \subset Z'$일 때의 (\ref{item-sub}) $(Z, s) - (Z', s)$가
+영으로 보내진다는 확인은 생략한다. 따라서 사상
+$$
+(f_{p!}\mathcal{F})_{\overline{y}}
+\longrightarrow
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+$$
+을 얻는다.
+
+\medskip\noindent
+이 화살표가 전사임을 증명하자. 이를 위해서는
+$f(\overline{x}) = \overline{y}$인 $\overline{x}$를 하나 택하고
+직화항 $\mathcal{F}_{\overline{x}}$의 원소 $s$가 상에 속함을 보이면
+충분하다. $s$가 $(U, \overline{u})$가 $\overline{x}$의 에탈 근방일 때
+원소 $s \in \mathcal{F}(U)$에 대응한다고 하자. $f$가 국소
+준유한이므로 사상 $U \to Y$도 국소 준유한이다. More on Morphisms,
+Lemma
+\ref{more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points-var}
+에 의해 $\overline{y}$의 에탈 근방 $(V, \overline{v})$, 열린 부분스킴
+$$
+W \subset U \times_Y V,
+$$
+그리고 $\overline{u}$와 $\overline{v}$로 가는 그 열린 부분스킴의 기하학적 점
+$\overline{w}$를 찾을 수 있으며, 이때 $W \to V$는 유한이고
+$\overline{w}$는 $\overline{v}$로 가는 $W$의 유일한 기하학적 점이다.
+(현재 사용하는 기하학적 점의 언어와 그 보조정리의 명제에서 사용하는
+점 및 잉여체 확대의 언어 사이의 번역은 생략한다.)
+$W \to X_V = X \times_Y V$가 에탈임을 관찰하자.
+$\overline{w}$의 상 $\overline{w}'$의 아핀 열린 근방
+$W' \subset X_V$를 택하자. $\overline{w}$가 $\overline{v}$ 위의
+$W$의 유일한 점이고 $W \to V$가 닫힌 사상이므로, $V$를
+$\overline{v}$의 한 열린 근방으로 바꾼 뒤 $W \to X_V$의 상이
+$W'$에 들어간다고 가정할 수 있다. 그러면 $W \to W'$는 유한
+에탈이고 대상 쪽의 $\overline{w}'$ 위에 놓이는 $W$의 기하학적 점은
+$\overline{w}$ 하나뿐이다. 따라서 $W'$에서 $\overline{w}'$의
+어떤 열린 근방 위에서 $W \to W'$는 열린 몰입이다.
+\'Etale Morphisms, Lemma
+\ref{etale-lemma-finite-etale-one-point}을 보라. $V$와 $W'$를
+줄여서 $W \to W'$가 동형이라고 가정할 수 있다. 따라서 $s$를
+$V$ 위에서 유한인 열린 부분스킴 $W' \subset X_V$ 위의
+$\mathcal{F}$의 단면 $s'$로 볼 수 있다.
+% P08-E103: frozen source uses undefined j_{p!} in this general-f proof; preserved literally.
+그러므로 정의에 의해 $(W', s')$는 $j_{p!}\mathcal{F}(V)$의 원소를
+정의하며, 이는 원하는 대로 $s$로 간다.
+
+\medskip\noindent
+이제 화살표가 단사임을 증명하자. 이를 위해 $(V, \overline{v})$가
+$\overline{y}$의 에탈 근방일 때 (\ref{equation-formal-sum})과 같은
+$s = \sum_{i = 1, \ldots, n} (Z_i, s_i)$를
+$f_{p!}\mathcal{F}(V)$의 원소라 하고, $s$가 위에서 구성한 사상 아래
+영으로 간다고 가정하자. 먼저 $(V, \overline{v})$를 그 자체의 한
+에탈 근방으로 바꾼 뒤, 각각의 $Z_{i, j}$가 $\overline{v}$ 위에서
+정확히 하나의 기하학적 점을 갖도록 하는 열린닫힌 부분스킴으로의 분해
+$Z_i = Z_{i, 1} \amalg \ldots \amalg Z_{i, m_i}$가 존재한다고
+가정할 수 있다. 자명한 직합 분해
+$$
+H_{Z_i}(\mathcal{F}) = \bigoplus H_{Z_{i, j}}(\mathcal{F})
+$$
+아래 원소 $s_i$가 $\sum s_{i, j}$에 대응한다고 하자. 관계
+(\ref{item-sum})과 (\ref{item-sub})를 사용하여 $s$를
+$\sum_{i = 1, \ldots, n} \sum_{j = 1, \ldots, m_i} (Z_{i, j}, s_{i, j})$
+로 바꿀 수 있다. 다시 말해 $Z_i$가 $\overline{v}$ 위에 놓이는
+유일한 기하학적 점을 갖는다고 가정할 수 있다.
+$\overline{x}_1, \ldots, \overline{x}_m$을 우리의 $Z_i$들의
+$\overline{v}$ 위의 기하학적 점들에 대응하는
+$\overline{y}$ 위의 $X$의 기하학적 점들이라 하자. 하나의
+$j \in \{1, \ldots, m\}$에 대해 $\overline{x}_j$가 $Z_i$의
+점에 대응하는 지표 $i$가 여러 개일 수 있음에 유의하자.
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points-var}
+를 $X_V \to V$에 적용하면, $(V, \overline{v})$를 그 자체의 한 에탈
+근방으로 바꾼 뒤 열린 부분스킴들
+$$
+W_j \subset X \times_Y V,\quad j = 1, \ldots, m
+$$
+및 $\overline{x}_j$와 $\overline{v}$로 가는 $W_j$의 기하학적 점
+$\overline{w}_j$가 존재한다고 가정할 수 있다. 이때 $W_j \to V$는
+유한이고 $\overline{w}_j$는 $\overline{v}$로 가는 $W_j$의 유일한
+기하학적 점이다. $V$를 줄인 뒤 어떤 $j$에 대해
+$Z_i \subset W_j$라고 가정할 수 있고 사상
+$H_{Z_i}(\mathcal{F}) \to H_{W_j}(\mathcal{F})$를 얻는다.
+따라서 관계 (\ref{item-sub})에 의해 우리의 원소는 어떤
+$t_j \in H_{W_j}(\mathcal{F})$들에 대한 꼴
+$$
+\sum\nolimits_{j = 1, \ldots, m} (W_j, t_j)
+$$
+의 원소와 동치이다. 이 원소는 직화항
+$\mathcal{F}_{\overline{x}_j}$에서의 $t_j$의 류로 단순히 보내진다.
+$s$가 영으로 가므로 $t_j$는 $\mathcal{F}_{\overline{x}_j}$에서
+영으로 간다. 이는 $t_j$가 $W_j$에서 $\overline{w}_j$의 한 열린
+근방에 제한될 때 영임을 뜻한다. \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-zero-over-image}를 보라. $V$를 한 번 더
+줄이면 원하는 대로 모든 $j$에 대해 $t_j = 0$을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finite-support-etale-shriek}
+$f = j : U \to X$를 스킴의 에탈 사상이라 하자. \'Etale Cohomology,
+Equation (\ref{etale-cohomology-equation-j-p-shriek})의 구성을
+$j_{p!}$로 나타내고, 위의 구성을 $f_{p!}$로 나타내자.
+% P08-E104: frozen source places F in Ab(X_etale) although j has source U; preserved literally.
+$\mathcal{F} \in \textit{Ab}(X_\etale)$에 대해 함자적으로 아벨 준층의
+표준 사상
+$$
+j_{p!}\mathcal{F} \longrightarrow f_{p!}\mathcal{F}
+$$
+이 존재하며, 이는 \'Etale Cohomology, Definition
+\ref{etale-cohomology-definition-extension-zero}의 층
+$j_!\mathcal{F} = (j_{p!}\mathcal{F})^\#$를
+$(f_{p!}\mathcal{F})^\#$와 동일시한다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 증명을 읽기 전에 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-shriek-into-star-separated-etale}의
+증명을 읽기 바란다. $V$를 $X_\etale$의 대상이라 하자. 다음을
+상기하자.
+$$
+j_{p!}\mathcal{F}(V) =
+\bigoplus\nolimits_{\varphi : V \to U} \mathcal{F}(V \xrightarrow{\varphi} U)
+$$
+$\varphi$가 주어지면 $\varphi$의 그래프의 상인 열린 부분스킴
+$Z_\varphi \subset U_V = U \times_X V$를 얻는다. $\varphi$를 통해
+$U$ 위의 동형 $V \to Z_\varphi$를 얻고, 원소
+$$
+s_\varphi \in \mathcal{F}(V \xrightarrow{\varphi} U) =
+\mathcal{F}(Z_\varphi) = H_{Z_\varphi}(\mathcal{F})
+$$
+를 $Z_{\varphi}$ 위의 $\mathcal{F}$의 단면으로 생각할 수 있다.
+$Z_\varphi \subset U_V$가 열려 있으므로 실제로
+$H_{Z_\varphi}(\mathcal{F}) = \mathcal{F}(Z_\varphi)$이고,
+$s_\varphi$를 $H_{Z_\varphi}(\mathcal{F})$의 원소로 생각할 수 있다.
+이제 사상 $j_{p!}\mathcal{F} \to f_{p!}\mathcal{F}$를 규칙
+$$
+\sum\nolimits_{i = 1, \ldots, n} s_{\varphi_i}
+\longmapsto
+\sum\nolimits_{i = 1, \ldots, n} (Z_{\varphi_i}, s_{\varphi_i})
+$$
+로 정의한다. 여기서 우변은 (\ref{equation-formal-sum})과 같은 합이다.
+이것이 제한 사상들과 양립하고 $\mathcal{F}$에 대해 함자적이라는
+확인은 생략한다.
+
+\medskip\noindent
+증명을 끝내기 위해, 기하학적 점
+% P08-E105: frozen source names a point of Y although Y is undefined in this lemma; preserved literally.
+$\overline{y} : \Spec(k) \to Y$가 주어지면 가환 그림
+$$
+\xymatrix{
+(j_{p!}\mathcal{F})_{\overline{y}} \ar[r] \ar[d] &
+\bigoplus_{j(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+\ar@{=}[d] \\
+(f_{p!}\mathcal{F})_{\overline{y}} \ar[r] &
+\bigoplus_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+}
+$$
+이 존재한다고 주장한다. 여기서 위쪽 수평 화살표는
+\'Etale Cohomology, Proposition
+\ref{etale-cohomology-proposition-describe-jshriek}의 증명에서
+구성한 것이고, 아래쪽 수평 화살표는 Lemma
+\ref{lemma-finite-support-stalk}의 증명에서 구성한 것이며, 오른쪽
+수직 화살표는 자명한 등식이고, 왼쪽 수직 화살표는 앞 문단에서
+정의한 사상의 줄기 위 사상이다. 이 주장은 여기와 인용한 곳에
+나오는 모든 화살표의 명시적 기술로부터 곧바로 따른다.
+수평 화살표들이 동형이므로 왼쪽 수직 화살표도 동형이라고 결론짓는다.
+따라서 \'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks}에 의해 우리의 사상은
+층화 위에서 동형을 유도한다.
+\end{proof}
+
+\begin{definition}
+\label{definition-f-shriek-lqf}
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하자. {\it 콤팩트
+지지를 갖는 직상}을 공식 $f_!\mathcal{F} = (f_{p!}\mathcal{F})^\#$로
+정의되는 함자
+$$
+f_! : \textit{Ab}(X_\etale) \longrightarrow \textit{Ab}(Y_\etale)
+$$
+로 정의한다. 즉, $f_!\mathcal{F}$는 위에서 구성한 준층
+$f_{p!}\mathcal{F}$의 층화이다.
+\end{definition}
+
+\noindent
+Lemma \ref{lemma-finite-support-f-shriek-separated}에 의해 이는
+둘 다 적용될 때 Definition \ref{definition-f-shriek-separated}과
+충돌하지 않으며, Lemma \ref{lemma-finite-support-etale-shriek}에 의해
+둘 다 적용될 때 \'Etale Cohomology, Definition
+\ref{etale-cohomology-definition-extension-zero}과 충돌하지 않는다.
+
+\begin{lemma}
+\label{lemma-lqf-f-shriek-stalk}
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하자. 그러면 다음이
+성립한다.
+\begin{enumerate}
+\item $\textit{Ab}(X_\etale)$의 $\mathcal{F}$와 기하학적 점
+$\overline{y} : \Spec(k) \to Y$에 대해 $\mathcal{F}$에 함자적으로
+$$
+(f_!\mathcal{F})_{\overline{y}} =
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+$$
+이고,
+\item 함자 $f_! : \textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$는
+완전하며 직합과 가환한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+줄기에 대한 공식은 Lemma \ref{lemma-finite-support-stalk}에서 즉시
+따르며, 사실 그 보조정리와 동치이다. 함자의 완전성은 이 사실과
+완전성을 줄기에서 확인할 수 있다는 사실로부터 즉시 따른다.
+\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks}을 보라.
+\end{proof}
+
+\begin{remark}[열린 몰입에 대한 공변성]
+\label{remark-covariance-lqf-f-shriek}
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하자.
+$\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자.
+$X' \subset X$를 열린 부분스킴이라 하고 $f' : X' \to Y$로
+$f$의 제한을 나타내자. 표준 사상
+$$
+f'_!(\mathcal{F}|_{X'}) \longrightarrow f_!\mathcal{F}
+$$
+이 존재한다고 주장한다. 실제로 이 사상은 다음과 같이 구성되는
+표준 사상
+$$
+f'_{p!}(\mathcal{F}|_{X'}) \to f_{p!}\mathcal{F}
+$$
+의 층화이다. $V \in Y_\etale$이라 하고
+(\ref{equation-formal-sum})과 같은 단면
+$s' = \sum_{i = 1, \ldots, n} (Z'_i, s'_i)$가
+$f'_{p!}(\mathcal{F}|_{X'})(V)$의 원소를 정의한다고 하자.
+그러면 $Z'_i \subset X'_V$를 $X_V$의 국소 닫힌 부분스킴으로도
+볼 수 있고 $H_{Z'_i}(\mathcal{F}|_{X'}) = H_{Z'_i}(\mathcal{F})$이다.
+$s'$를 정확히 같은 합
+$s = \sum_{i = 1, \ldots, n} (Z'_i, s'_i)$로 보내되, 이제 이를
+$f_{p!}\mathcal{F}(V)$의 원소로 본다. 이 구성이 제한 사상들과
+양립하고 $\mathcal{F}$에 대해 함자적이라는 확인은 생략한다.
+이 구성은 다음 성질들을 갖는다.
+\begin{enumerate}
+% P08-E106: frozen source uses undefined F' in four formulas below; preserved literally.
+\item 사상들 $f'_{p!}\mathcal{F}' \to f_{p!}\mathcal{F}$와
+$f'_!\mathcal{F}' \to f_!\mathcal{F}$는 Lemmas
+\ref{lemma-finite-support-stalk}과 \ref{lemma-lqf-f-shriek-stalk}에서
+주어진 줄기의 기술과 양립한다.
+\item $f$가 분리이면 사상
+$f'_{p!}\mathcal{F}' \to f_{p!}\mathcal{F}$는 Remark
+\ref{remark-covariance-f-shriek-separated}에서 구성한 사상과 같으며,
+이때 Lemma \ref{lemma-finite-support-f-shriek-separated}의 동형을
+사용한다.
+\item $X'' \subset X'$가 또 다른 열린 부분스킴이면 합성
+$f''_{p!}(\mathcal{F}|_{X''}) \to f'_{p!}(\mathcal{F}|_{X'}) \to
+f_{p!}\mathcal{F}$는 포함 $X'' \subset X$에 대한 사상
+$f''_{p!}(\mathcal{F}|_{X''}) \to f_{p!}\mathcal{F}$이다. 층화하면
+$f''_!(\mathcal{F}|_{X''}) \to f'_!(\mathcal{F}|_{X'}) \to f_!\mathcal{F}$
+에 대해서도 같은 명제가 성립함을 얻는다.
+\item 사상 $f'_!\mathcal{F}' \to f_!\mathcal{F}$는 줄기에서 확인할
+수 있으므로 단사이다.
+\end{enumerate}
+이 명제들은 모두 원소를 위와 같은 유한합으로 나타내고 그 원소들에
+무슨 일이 일어나는지 살펴보면 쉽게 증명된다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-lqf-colimit-f-shriek}
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하자.
+$X = \bigcup_{i \in I} X_i$를 열린 덮개라 하자. 그러면 완전 복합체
+$$
+\ldots \to
+\bigoplus\nolimits_{i_0, i_1, i_2} f_{i_0i_1i_2, !}
+\mathcal{F}|_{X_{i_0i_1i_2}} \to
+\bigoplus\nolimits_{i_0, i_1} f_{i_0i_1, !} \mathcal{F}|_{X_{i_0i_1}} \to
+\bigoplus\nolimits_{i_0} f_{i_0, !} \mathcal{F}|_{X_{i_0}}
+\to f_!\mathcal{F} \to 0
+$$
+가 존재하며, 이는 $\mathcal{F} \in \textit{Ab}(X_\etale)$에 대해
+함자적이다. 세부사항은 증명을 보라.
+\end{lemma}
+
+\begin{proof}
+통상적으로 $X_{i_0 \ldots i_p} = X_{i_0} \cap \ldots \cap X_{i_p}$로
+두고, $X_{i_0 \ldots i_p}$로의 $f$의 제한을
+$f_{i_0 \ldots i_p}$로 나타낸다. 복합체의 사상들은
+Remark \ref{remark-covariance-lqf-f-shriek}에서 구성한 사상들에
+체흐 복합체에서와 같은 부호 규칙을 준 것이다. 완전성은 Lemma
+\ref{lemma-lqf-f-shriek-stalk}의 줄기 기술로부터 쉽게 따른다.
+세부사항은 생략한다.
+\end{proof}
+
+\begin{remark}[대안적 구성]
+\label{remark-alternative-lqf-f-shriek}
+Lemma \ref{lemma-lqf-colimit-f-shriek}는 국소 준유한 사상 $f$에 대한
+함자 $f_!$의 대안적 구성을 준다. 실제로 스킴의 국소 준유한 사상
+$f : X \to Y$가 주어지면 각각의 $f_i : X_i \to Y$가 분리이도록
+하는 열린 덮개 $X = \bigcup_{i \in I} X_i$를 택할 수 있다.
+예를 들어 $X$의 아핀 열린 덮개를 택하면 된다. 그러면
+$f_!\mathcal{F}$를 그 보조정리의 복합체에서 끝에서 두 번째
+사상의 여핵, 즉
+$$
+f_!\mathcal{F} = \Coker\left(
+\bigoplus\nolimits_{i_0, i_1} f_{i_0i_1, !} \mathcal{F}|_{X_{i_0i_1}} \to
+\bigoplus\nolimits_{i_0} f_{i_0, !} \mathcal{F}|_{X_{i_0}}
+\right)
+$$
+으로 정의할 수 있다. 사상 $f_{i_0}$와 $f_{i_0 i_1}$이 분리이므로
+여기서 Section \ref{section-compact-support}의 $f_{i_0, !}$ 및
+$f_{i_0i_1, !}$의 구성을 사용할 수 있다. 이어서 분리인 경우,
+즉 Lemma \ref{lemma-lqf-f-shriek-separated-colimits}를 사용하여
+$f_!$의 줄기를 계산하고 Lemma \ref{lemma-lqf-f-shriek-stalk}의
+결과를 얻을 수 있다. 이렇게 한 뒤에는 이 절의 다른 모든 결과도
+여기서 도출할 수 있다.
+\end{remark}
+
+\begin{remark}
+\label{remark-construct-map-presheaves-downstairs}
+$g : Y' \to Y$를 스킴의 사상이라 하자. $Y'_\etale$ 위의 아벨 준층
+$\mathcal{G}'$에 대해 준층 $V \mapsto \mathcal{G}'(Y' \times_Y V)$를
+$g_*\mathcal{G}'$로 나타내자. $\alpha : \mathcal{G} \to g_*\mathcal{G}'$가
+$Y_\etale$ 위의 아벨 준층의 사상이면, 그림
+$$
+\xymatrix{
+\mathcal{G} \ar[d] \ar[r]_\alpha & g_*\mathcal{G}' \ar[d] \\
+\mathcal{G}^\# \ar[r]^-{\alpha^\#} & g_*((\mathcal{G}')^\#)
+}
+$$
+이 가환하도록 하는 $Y_\etale$ 위의 아벨 층의 유일한 사상
+$\alpha^\# : \mathcal{G}^\# \to g_*((\mathcal{G}')^\#)$가 존재한다.
+여기서 수직 사상들은 표준 사상들
+$\mathcal{G} \to \mathcal{G}^\#$ 및
+$\mathcal{G}' \to (\mathcal{G}')^\#$에서 온다.
+$\alpha' : g^{-1}\mathcal{G}^\# \to (\mathcal{G}')^\#$가
+$\alpha^\#$에 수반된 사상이고, $Y$에서의 상이
+$\overline{y} = g \circ \overline{y}'$인 기하학적 점
+$\overline{y}' : \Spec(k) \to Y'$가 주어졌다고 하자. 그러면 사상
+$$
+\alpha'_{\overline{y}'} :
+\mathcal{G}_{\overline{y}} =
+(\mathcal{G}^\#)_{\overline{y}} =
+(g^{-1}\mathcal{G}^\#)_{\overline{y}'}
+\longrightarrow
+(\mathcal{G}')^\#_{\overline{y}'} =
+\mathcal{G}'_{\overline{y}'}
+$$
+은 다음과 같이 주어진다. 에탈 근방 $(V, \overline{v})$ 위의
+$\mathcal{G}$의 단면 $s$의 줄기에서의 류를
+$g_*\mathcal{G}'(V) = \mathcal{G}'(Y' \times_Y V)$의 단면
+$\alpha(s)$의 에탈 근방
+$(Y' \times_Y V, (\overline{y}', \overline{v}))$ 위의 류, 즉
+$\overline{y}'$에서의 $\mathcal{G}'$의 줄기 안의 류로 보낸다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-lqf-base-change-f-shriek}
+$f$가 국소 준유한인 스킴의 카르테시안 정사각형
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+을 생각하자. $\textit{Ab}(X_\etale)$의 $\mathcal{F}$에 대해 함자적인
+동형 $g^{-1}f_!\mathcal{F} \to f'_!(g')^{-1}\mathcal{F}$가 존재하며,
+이는 Lemma \ref{lemma-lqf-f-shriek-stalk}에서 주어진 줄기의 기술과
+양립한다. 정확한 명제는 증명을 보라.
+\end{lemma}
+
+\begin{proof}
+Remark \ref{remark-construct-map-presheaves-downstairs}의 규약을 사용하여
+$Y_\etale$ 위의 아벨 준층의 사상
+$$
+c : f_{p!}\mathcal{F} \longrightarrow g_*f'_{p!}(g')^{-1}\mathcal{F}
+$$
+을 명시적으로 구성할 것이다. Remark
+\ref{remark-construct-map-presheaves-downstairs}의 논의에 의해 이는
+표준 사상 $g^{-1}f_!\mathcal{F} \to f'_!(g')^{-1}\mathcal{F}$를
+결정한다. 마지막으로 이 사상이 줄기에서 동형을 유도함을 보이고
+\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks}으로 결론을 얻을 것이다.
+
+\medskip\noindent
+사상 $c$의 구성. $V \in Y_\etale$이라 하고,
+(\ref{equation-formal-sum})과 같은 단면
+$s = \sum_{i = 1, \ldots, n} (Z_i, s_i)$가
+$f_{p!}\mathcal{F}(V)$의 원소를 정의한다고 하자.
+$V' = V \times_Y Y'$일 때 $V$에서의
+$g_*f'_{p!}(g')^{-1}\mathcal{F}$의 값은
+$f'_{p!}(g')^{-1}\mathcal{F}(V')$이다.
+$Z_i$를 $V'$로 기저변환한 것을 $Z'_i \subset X'_{V'}$로 나타내자.
+(\ref{item-pullback})에 의해 당김사상
+$H_{Z_i}(\mathcal{F}) \to H_{Z'_i}((g')^{-1}\mathcal{F})$이 존재한다.
+당김 아래 $s_i$의 상을
+$s'_i \in H_{Z'_i}((g')^{-1}\mathcal{F})$로 나타내고,
+(\ref{equation-formal-sum})에서와 같이
+$c(s) = \sum_{i = 1, \ldots, n} (Z'_i, s'_i)$로 둔다. 이는
+$f'_{p!}(g')^{-1}\mathcal{F}(V')$의 원소를 정의한다. 이 구성이 관계
+(\ref{item-sum}) 및 (\ref{item-sub})와 양립하고 제한 사상들과
+양립한다는 확인은 생략한다. 이 구성은 분명히 $\mathcal{F}$에 대해
+함자적이다.
+
+\medskip\noindent
+$\overline{y}' : \Spec(k) \to Y'$를 $Y$에서의 상이
+$\overline{y} = g \circ \overline{y}'$인 기하학적 점이라 하자.
+올곱의 추이성에 의해 $X'_{\overline{y}'} = X_{\overline{y}}$임을
+관찰하자. 따라서 $g'$는 전단사
+$\{f'(\overline{x}') = \overline{y}'\} \to
+\{f(\overline{x}) = \overline{y}\}$를 주며,
+$\overline{x}'$가 $\overline{x}$로 가면 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-stalk-pullback}에 의해
+$((g')^{-1}\mathcal{F})_{\overline{x}'} = \mathcal{F}_{\overline{x}}$이다.
+이제 그림
+$$
+\xymatrix{
+(g^{-1}f_!\mathcal{F})_{\overline{y}'} \ar@{=}[r] \ar[d] &
+(f_!\mathcal{F})_{\overline{y}} \ar[r] \ar[ld] &
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}}
+\mathcal{F}_{\overline{x}} \ar[d]
+\\
+(f'_!(g')^{-1}\mathcal{F})_{\overline{y}'} \ar[rr] & &
+\bigoplus\nolimits_{f'(\overline{x}') = \overline{y}'}
+(g')^{-1}\mathcal{F}_{\overline{x}'}
+}
+$$
+이 가환한다고 주장한다. 여기서 수평 화살표들은 Lemma
+\ref{lemma-finite-support-stalk}의 증명에서 주어진 것이고, 오른쪽
+수직 화살표는 방금 위에서 말한 바에 의해 등식이다. 남서쪽 화살표는
+Remark \ref{remark-construct-map-presheaves-downstairs}에서 당김사상으로
+기술되며, 즉 위의 구성 $c$로 단순히 주어진다. 그러면 Lemma
+\ref{lemma-finite-support-stalk}의 증명에서 주어진, 합
+$\sum (Z_i, z_i)$의 $\overline{x}$에서의 줄기 안 상의 간단한 기술은
+그림이 가환함을 즉시 보인다. 이것으로 보조정리의 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-lqf-separated-shriek-composition}
+$f' : X \to Y'$와 $g : Y' \to Y$를 합성 가능한 스킴의 사상이라 하자.
+$f'$ 및 $f = g \circ f'$가 국소 준유한이고, $g$가 분리이며 국소
+유한형이라고 가정하자. 그러면 함자의 표준 동형
+$g_! \circ f'_! = f_!$가 존재한다. 이 동형은 다음과 양립한다.
+\begin{enumerate}
+\item[(a)] Remarks \ref{remark-covariance-f-shriek-separated}와
+\ref{remark-covariance-lqf-f-shriek}에서와 같은 열린 몰입에 대한 공변성,
+\item[(b)] Lemmas \ref{lemma-lqf-base-change-f-shriek}와
+\ref{lemma-base-change-f-shriek-separated}의 기저변환 동형, 그리고
+\item[(c)] $f'$가 분리인 경우 Lemma
+\ref{lemma-f-shriek-composition}의 동형과 일치하며, 이때 Lemma
+\ref{lemma-finite-support-f-shriek-separated}의 동일시를 사용한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$를 $X_\etale$ 위의 아벨 층이라 하자. Remark
+\ref{remark-construct-map-presheaves-downstairs}의 규약을 사용하여
+$Y_\etale$ 위의 아벨 준층의 사상
+$$
+c : f_{p!}\mathcal{F} \longrightarrow g_*f'_{p!}\mathcal{F}
+$$
+을 명시적으로 구성할 것이다. Remark
+\ref{remark-construct-map-presheaves-downstairs}의 논의에 의해 이는
+표준 사상 $c^\# : f_!\mathcal{F} \to g_*f'_!\mathcal{F}$를 결정한다.
+$c^\#$의 상이 부분층 $g_!f'_!\mathcal{F}$에 포함됨을 보여 사상
+$c' : f_!\mathcal{F} \to g_!f'_!\mathcal{F}$를 얻을 것이다.
+다음으로 (a), (b), (c)를 증명한다. 마지막으로 (b)를 이용하여
+$c'$가 동형임을 보일 것이다.
+
+\medskip\noindent
+사상 $c$의 구성. $V \in Y_\etale$이라 하고,
+(\ref{equation-formal-sum})과 같은 합 $s = \sum (Z_i, s_i)$가
+$f_{p!}\mathcal{F}(V)$의 원소를 정의한다고 하자.
+$Z_i \subset X_V = X \times_Y V$는 $V$ 위에서 유한인 국소 닫힌
+부분스킴임을 상기하자. $V' = Y' \times_Y V$로 두면
+$X_{V'} = X \times_{Y'} V' = X_V$를 얻는다. 따라서
+$Z_i \subset X_{V'}$는 국소 닫힌이고, $g$가 분리이므로
+$Z_i$는 $V'$ 위에서 유한이다(Morphisms, Lemma
+\ref{morphisms-lemma-finite-permanence}). 그러므로
+$c(s) = \sum (Z_i, s_i)$로 둘 수 있는데, 이제 이를
+$f'_{p!}\mathcal{F}(V') = (g_*f'_{p!}\mathcal{F})(V)$의 원소로 본다.
+이 구성은 관계 (\ref{item-sum}) 및 (\ref{item-sub})와 분명히
+양립하고 제한 사상들과 양립하므로 사상 $c$를 얻는다.
+
+\medskip\noindent
+위의 논의에서 $V'$ 위의 $f'_!\mathcal{F}$의 단면
+$c(s) = \sum (Z_i, s_i)$는
+$V' \setminus \Im(\coprod Z_i \to V')$에 제한될 때 영임을 관찰하자.
+$\Im(\coprod Z_i \to V')$가 $V$ 위에서 고유이므로(예를 들어
+Morphisms, Lemma
+\ref{morphisms-lemma-scheme-theoretic-image-is-proper}에 의해),
+$c(s)$는 $V$ 위의 $g_!f'_!\mathcal{F} \subset g_*f'_!\mathcal{F}$의
+단면을 정의한다고 결론짓는다. $f_!\mathcal{F}$의 모든 국소 단면은
+국소적으로 $f_{p!}\mathcal{F}$의 국소 단면에서 오므로,
+$c^\#$의 상은 $g_!f'_!\mathcal{F}$에 포함된다. 이로써 증명의 첫
+문단에서 예고한 대로 $c^\#$를 인수분해하는 유도 사상
+$c' : f_!\mathcal{F} \to g_!f'_!\mathcal{F}$를 얻는다.
+
+\medskip\noindent
+(a)의 증명. $Y'_1 \subset Y'$를 열린 부분스킴이라 하고
+% P08-E108: frozen source uses undefined W' in the inverse-image formula; preserved literally.
+$X_1 = (f')^{-1}(W')$로 두자. 그림
+$$
+\xymatrix{
+X_1 \ar[d]_{f'_1} \ar[r]_a \ar@/_2em/[dd]_{f_1} &
+X \ar[d]^{f'} \ar@/^2em/[dd]^f \\
+Y'_1 \ar[d]_{g_1} \ar[r]_{b'} &
+Y' \ar[d]^g \\
+Y \ar@{=}[r] &
+Y
+}
+$$
+을 얻는데, 수평 화살표들은 열린 몰입이다. 그러면 우리의 주장은 그림
+$$
+\xymatrix{
+f_{1, !}\mathcal{F}|_{X_1} \ar[r]_{c'_1} \ar[dd] &
+g_{1, !}f'_{1, !}\mathcal{F}|_{X_1} \ar@{=}[d] \\
+& g_{1, !}(f'_!\mathcal{F})|_{Y'_1} \ar[d] \\
+f_!\mathcal{F} \ar[r]^{c'} &
+g_!f'_!\mathcal{F} \ar[r] & g_*f'_!\mathcal{F}
+}
+$$
+이 가환한다는 것이다. 여기서 왼쪽 수직 화살표는 Remark
+\ref{remark-covariance-lqf-f-shriek}의 것이고, 오른쪽 수직 화살표는
+Remark \ref{remark-covariance-f-shriek-separated}의 것이다.
+그림의 등호는 $f'_1$이 $f'$의 $Y'_1$로의 제한이고 우리의
+$f'_!$의 구성이 기저 위에서 국소적이기 때문에 생긴다.
+마지막으로 가환성을 증명하기 위해 $Y_\etale$의 대상 $V$와
+(\ref{equation-formal-sum})과 같은 형식합
+$s_1 = \sum (Z_{1, i}, s_{1, i})$를 택하여
+$f_{1, p!}\mathcal{F}|_{X_1}(V)$의 원소를 정의하자. 이는
+$Z_{1, i} \subset X_1 \times_Y V$가 $V$ 위에서 유한인 국소 닫힌
+부분스킴이고 $s_{1, i} \in H_{Z_{1, i}}(\mathcal{F})$라는 뜻임을
+상기하자. 이제 관련 사상들을 따라 이 단면을 추적하되, 양쪽 길을
+따라 $g_*f'_!\mathcal{F}(V) = f'_!\mathcal{F}(Y' \times_Y V)$의
+같은 원소에 이른다는 것만 보이면 된다. 그림의 양쪽을 따라가면
+결국 원소 $\sum (Z_{1, i}, s_{1, i})$를 얻음을 독자는 즉시 알 수 있다.
+여기서는 이제 $Z_{1, i}$를
+$X \times_{Y'} (Y' \times_Y V) = X \times_Y V$의
+$Y' \times_Y V$ 위에서 유한인 국소 닫힌 부분스킴으로 본다.
+
+\medskip\noindent
+(b)의 증명. $b : Y_1 \to Y$를 스킴의 사상이라 하자. 카르테시안
+정사각형들로 이루어진 가환 그림
+$$
+\xymatrix{
+X_1 \ar[d]_{f'_1} \ar[r]_a \ar@/_2em/[dd]_{f_1} &
+X \ar[d]^{f'} \ar@/^2em/[dd]^f \\
+Y'_1 \ar[d]_{g_1} \ar[r]_{b'} &
+Y' \ar[d]^g \\
+Y_1 \ar[r]^b &
+Y
+}
+$$
+을 만들자. 우리의 구성이 Lemmas
+\ref{lemma-lqf-base-change-f-shriek}와
+\ref{lemma-base-change-f-shriek-separated}의 기저변환 사상들과
+양립한다고 주장한다. 즉, 그림
+$$
+\xymatrix{
+b^{-1}f_!\mathcal{F} \ar[rr] \ar[d]_{b^{-1}c'} & &
+f_{1, !}a^{-1}\mathcal{F} \ar[d]^{c_1'} \\
+b^{-1}g_!f'_!\mathcal{F} \ar[r] \ar[d] &
+g_{1, !}(b')^{-1}f'_!\mathcal{F} \ar[r] \ar[d] &
+g_{1, !}f'_{1, !}a^{-1}\mathcal{F} \ar[d] \\
+b^{-1}g_*f'_!\mathcal{F} \ar[r] &
+g_{1, *}(b')^{-1}f'_!\mathcal{F} \ar[r] &
+g_{1, *}f'_{1, !}a^{-1}\mathcal{F}
+}
+$$
+의 위쪽 직사각형이 가환한다고 주장한다. 이에 대한 확인은 완전히
+일상적이므로 독자에게 건너뛰기를 권한다. 가운데 행에서 아래 행으로
+가는 화살표들은 단사이므로 바깥 그림이 가환함을 보이면 충분하다.
+이를 위해서는 $b^{-1}f_!\mathcal{F}$의 한 국소 단면을 택하고 어느
+길로 가든 $g_{1, *}f'_{1, !}a^{-1}\mathcal{F}$의 같은 국소 단면에
+이름을 보이면 충분하다. 사실 위와 같은
+$f_{p!}\mathcal{F}(V)$의 단면 $s = \sum (Z_i, s_i)$를 $b$로 당긴
+국소 단면들에 대해서만 확인하면 충분하다. 그러한 당김들이 아벨 층
+$b^{-1}f_!\mathcal{F}$를 생성하기 때문이다. $V$,
+$V' = Y' \times_Y V$, $Z_i$를 $Y_1 \to Y$로 기저변환한 것을 각각
+$V_1$, $V'_1$, $Z_{1, i}$로 나타내자.
+$Z_i$가 $X_V = X_{V'}$의 국소 닫힌 부분스킴이므로
+$Z_{1, i}$는 $(X_1)_{V_1} = (X_1)_{V'_1}$의 국소 닫힌
+부분스킴임을 상기하자. 그러면
+% P08-E109: frozen source omits '=' after c(s); preserved literally.
+$b^{-1}c'$는 $s$의 당김을 국소 단면 $c(s) \sum (Z_i, s_i)$의
+당김으로 보내는데, 이를
+$f'_{p!}\mathcal{F}(V') = (g_*f'_{p!}\mathcal{F})(V)$의 원소로 본다.
+아래쪽 두 기저변환 사상의 합성은 이를 단순히
+% P08-E110: frozen source transposes defined Z_{1,i} to undefined Z_{i,1}; preserved literally twice.
+$\sum (Z_{i, 1}, s_{1, i})$로 보내며, 이를
+$f'_{1, p!}a^{-1}\mathcal{F}(V'_1) =
+g_{1, *}f'_{1, p!}a^{-1}\mathcal{F}(V_1)$의 원소로 본다.
+다른 한편, 그림 위쪽의 기저변환 사상은 $s$의 당김을
+$\sum (Z_{1, i}, s_{1, i})$로 보내며, 이를
+$f_{1, !}a^{-1}\mathcal{F}(V_1)$의 원소로 본다. 마지막으로
+$c'_1$은 그 구성에 의해 이를 정말로
+$\sum (Z_{i, 1}, s_{1, i})$로 보내며, 이를
+$f'_{1, p!}a^{-1}\mathcal{F}(V'_1) =
+g_{1, *}f'_{1, p!}a^{-1}\mathcal{F}(V_1)$의 원소로 본다.
+이로써 가환성을 확인하였다.
+
+\medskip\noindent
+(c)의 증명. 두 사상의 정의를 비교하면 따른다. 세부사항은 생략한다.
+
+\medskip\noindent
+증명을 끝내기 위해서는 임의의 기하학적 점
+$\overline{y} : \Spec(k) \to Y$를 통한 $c'$의 당김이 동형임을 보이면
+충분하다. 실제로 $\overline{y}$로 당기는 것은 $\overline{y}$에서의
+줄기를 취하는 것과 같다(\'Etale Cohomology, Remark
+\ref{etale-cohomology-remark-stalk-pullback}). 따라서
+\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks}을 적용할 수 있다.
+방금 보인 양립성 (b)에 의해 $Y$가 $k$의 스펙트럼이라고 가정하고
+$c'$가 동형임을 보이면 된다고 결론짓는다. 이를 위해서는 유도 사상
+$$
+\bigoplus\nolimits_{x \in X} \mathcal{F}_x = H^0(Y, f_!\mathcal{F})
+\longrightarrow
+H^0(Y, g_!f'_!\mathcal{F}) = H^0_c(Y', f'_!\mathcal{F})
+$$
+이 동형임을 보이면 충분하다. 등식들은 Lemmas
+\ref{lemma-lqf-f-shriek-stalk}과
+\ref{lemma-stalk-f-shriek-separated}에 의해 성립한다.
+$X$가 잉여체 $k$를 갖는 아르틴 국소환들의 스펙트럼들의 분리합임을
+상기하자. Varieties, Lemma
+\ref{varieties-lemma-algebraic-scheme-dim-0}을 보라. 좌변과 우변은
+직합과 가환하므로(세부사항은 생략한다), 어떤 $x \in X$에 지지된
+마천루 층 $x_*A$가 $\mathcal{F}$인 경우를 가정할 수 있다.
+% P08-E111: frozen source says y' is the image of x in Y, not Y'; preserved literally.
+그러면 Lemma \ref{lemma-lqf-f-shriek-stalk}에 의해
+$f'_!\mathcal{F}$는 $Y$에서 $x$의 상 $y'$에 놓인 마천루 층이다.
+이 경우 우리의 구성이 원하는 대로 항등사상
+$A \to H^0_c(Y', y'_*A) = A$를 준다는 것은 자명하다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-lqf-shriek-composition}
+$f : X \to Y$와 $g : Y \to Z$를 합성 가능한 스킴의 국소 준유한
+사상들이라 하자. 그러면 함자의 표준 동형
+$$
+(g \circ f)_! \longrightarrow g_! \circ f_!
+$$
+이 존재한다. 이 동형들은 다음 성질들을 만족한다.
+\begin{enumerate}
+\item $f$와 $g$가 분리이면 이 동형은 Lemma
+\ref{lemma-f-shriek-composition}의 동형과 일치한다.
+\item $g$가 분리이면 이 동형은 Lemma
+\ref{lemma-lqf-separated-shriek-composition}의 동형과 일치한다.
+\item 기하학적 점 $\overline{z} : \Spec(k) \to Z$에 대해 그림
+$$
+\xymatrix{
+((g \circ f)_!\mathcal{F})_{\overline{z}} \ar[d] \ar[rr] & &
+\bigoplus\nolimits_{g(f(\overline{x})) = \overline{z}}
+\mathcal{F}_{\overline{x}} \ar@{=}[d] \\
+(g_!f_!\mathcal{F})_{\overline{z}} \ar[r] &
+\bigoplus\nolimits_{g(\overline{y}) = \overline{z}}
+(f_!\mathcal{F})_{\overline{y}} \ar[r] &
+\bigoplus\nolimits_{g(f(\overline{x})) = \overline{z}}
+\mathcal{F}_{\overline{x}}
+}
+$$
+이 가환한다. 여기서 수평 화살표들은 Lemma
+\ref{lemma-lqf-f-shriek-stalk}에 의해 주어진다.
+\item $h : Z \to T$를 세 번째 국소 준유한 스킴 사상이라 하자.
+그러면 그림
+$$
+\xymatrix{
+(h \circ g \circ f)_! \ar[r] \ar[d] &
+(h \circ g)_! \circ f_! \ar[d] \\
+h_! \circ (g \circ f)_! \ar[r] &
+h_! \circ g_! \circ f_!
+}
+$$
+이 가환한다.
+\item 두 정사각형이 모두 카르테시안이고 $f$와 $g$가 국소 준유한인
+스킴의 그림
+$$
+\xymatrix{
+X' \ar[d]_{f'} \ar[r]_c & X \ar[d]^f \\
+Y' \ar[d]_{g'} \ar[r]_b & Y \ar[d]^g \\
+Z' \ar[r]^a & Z
+}
+$$
+이 주어졌다고 하자. 그러면 그림
+$$
+\xymatrix{
+a^{-1} \circ (g \circ f)_! \ar[d] \ar[rr] & &
+(g' \circ f')_! \circ c^{-1} \ar[d] \\
+a^{-1} \circ g_! \circ f_! \ar[r] &
+g'_! \circ b^{-1} \circ f_! \ar[r] &
+g'_! \circ f'_! \circ c^{-1}
+}
+$$
+이 가환한다. 여기서 수평 화살표들은 Lemma
+\ref{lemma-lqf-base-change-f-shriek}의 것들이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f$와 $g$가 분리이면 이는 Lemma
+\ref{lemma-f-shriek-composition}의 특수한 경우이다. $g$가 분리이면
+이는 Lemma \ref{lemma-lqf-separated-shriek-composition}의 특수한
+경우이며, 더욱이 $f$와 $g$가 분리인 경우와 일치한다.
+
+\medskip\noindent
+일반적인 경우의 구성. 각각의 $g$의 제한
+$g_i : Y_i \to Z$가 분리이도록 하는 열린 덮개
+$Y = \bigcup Y_i$를 택하자. $X_i = f^{-1}(Y_i)$로 두고,
+$f$의 제한을 $f_i : X_i \to Y_i$로 나타내자. 또한
+$h = g \circ f$로 나타내고, $h$의 제한을 $h_i : X_i \to Z$로
+나타내자. 다음 그림을 생각하자.
+$$
+\xymatrix{
+\bigoplus\nolimits_{i_0, i_1}
+h_{i_0i_1, !}\mathcal{F}|_{X_{i_0i_1}} \ar[r] \ar[d] &
+\bigoplus\nolimits_{i_0} h_{i_0, !}\mathcal{F}|_{X_{i_0}} \ar[r] \ar[d] &
+h_!\mathcal{F} \ar[r] \ar@{..>}[dd] &
+0 \\
+\bigoplus\nolimits_{i_0, i_1}
+g_{i_0i_1, !} f_{i_0i_1, !}\mathcal{F}|_{X_{i_0i_1}} \ar[r] \ar[d] &
+\bigoplus\nolimits_{i_0}
+g_{i_0, !} f_{i_0, !}\mathcal{F}|_{X_{i_0}} \ar[d] \\
+\bigoplus\nolimits_{i_0, i_1}
+g_{i_0i_1, !} (f_!\mathcal{F})|_{Y_{i_0i_1}} \ar[r] &
+\bigoplus\nolimits_{i_0}
+g_{i_0, !} (f_!\mathcal{F})|_{Y_{i_0}} \ar[r] &
+g_!f_!\mathcal{F} \ar[r] &
+0
+}
+$$
+Lemma \ref{lemma-lqf-colimit-f-shriek}에 의해 그림의 위쪽과 아래쪽
+행은 완전하다. Lemma
+\ref{lemma-lqf-separated-shriek-composition}에 의해 왼쪽 위
+정사각형은 가환한다. 왼쪽 아래 정사각형의 수직 화살표들은
+$f_!$의 구성이 기저 위에서 국소적이므로 성립하는 등식
+$(f_!\mathcal{F})|_{Y_{i_0i_1}} =
+f_{i_0i_1, !}\mathcal{F}|_{X_{i_0i_1}}$ 및
+$(f_!\mathcal{F})|_{Y_{i_0}} = f_{i_0, !}\mathcal{F}|_{X_{i_0}}$
+에서 온다. 또한 이 등식들은 동일시
+$((f_!\mathcal{F})|_{Y_{i_0}})|_{Y_{i_0i_1}} =
+(f_!\mathcal{F})|_{Y_{i_0i_1}}$ 및
+$(f_{i_0, !}\mathcal{F}|_{X_{i_0}})|_{Y_{i_0i_1}} =
+f_{i_0i_1, !}\mathcal{F}|_{X_{i_0i_1}}$와 물론 양립한다.
+이 동일시들은 $Y_{i_0i_1} \subset Y_{i_0}$에 대한 열린 몰입의
+공변성과 함께 왼쪽 아래 정사각형의 수평 사상들을 정의하는 데
+사용된다. 따라서 이 정사각형도 가환한다. 이로써 그림에 표시된
+유일한 점선 화살표가 존재하고, 더욱이 이 화살표가 동형이라고
+결론짓는다.
+
+\medskip\noindent
+성질 (1)--(5)의 증명. 열린 덮개 $Y = \bigcup Y_i$를 고정하자.
+$Y \to Z$가 우연히 분리인 경우에는 Lemma
+\ref{lemma-lqf-separated-shriek-composition}의 사상을 사용하여 위의
+큰 그림에 들어맞는 점선 화살표를 얻음을 관찰하자(바로 그 보조정리의
+성질들에 의해). 이는 (2)를 증명하고, 따라서 Lemma
+\ref{lemma-lqf-separated-shriek-composition}과 Lemma
+\ref{lemma-f-shriek-composition}의 사상들의 양립성에 의해 (1)도
+증명한다. 다음으로 $Z$ 위의 임의의 스킴 $Z'$에 대해, 열린 덮개
+$Y' = \bigcup b^{-1}(Y_i)$를 사용하여 구성한 사상
+$(g' \circ f')_! \to g'_! \circ f'_!$에 대해 (5)의 양립성을 얻는다.
+이는 Lemma \ref{lemma-lqf-separated-shriek-composition}에서 구성한
+사상들의 대응하는 양립성으로부터 분명하다. 특히 기하학적 점
+$\overline{z} : \Spec(k) \to Z$를 생각할 수 있다.
+$X_{\overline{z}} \to Y_{\overline{z}} \to \Spec(k)$가 분리 사상들이므로
+$\overline{z}$에 의한
+$(g \circ f)_!\mathcal{F} \to g_! f_! \mathcal{F}$의 기저변환은
+Lemma \ref{lemma-f-shriek-composition}의 사상과 같다. 그러면 독자는
+성질 (3)을 얻음을 즉시 알 수 있다. 물론 성질 (3)은 열린 덮개
+$Y = \bigcup Y_i$를 사용하여 구성한 함자의 변환
+$(g \circ f)_! \to g_! \circ f_!$가 이 열린 덮개의 선택에 의존하지
+않음을 보장한다. 마지막으로 이미 증명한 성질 (3)을 사용하여 줄기에서
+무슨 일이 일어나는지 살펴보면 성질 (4)가 따른다.
+\end{proof}
+
+\section{국소 준유한 사상의 가중함수와 트레이스 사상}
+\label{section-weightings}
+
+\noindent
+이 절의 참고문헌은 \cite[Exposee XVII, Proposition 6.2.5]{SGA4}이다.
+
+\medskip\noindent
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하자.
+$w : X \to \mathbf{Z}$를 $f$의 가중함수라 하자. More on Morphisms,
+Definition \ref{more-morphisms-definition-weighting}을 보라.
+$\mathcal{F}$를 $Y_\etale$ 위의 아벨 층이라 하자. 이 절에서는
+$Y_\etale$ 위의 아벨 층의 사상
+$$
+\text{Tr}_{f, w, \mathcal{F}} :
+f_!f^{-1}\mathcal{F}
+\longrightarrow
+\mathcal{F}
+$$
+이 존재하며 다음 성질로 특징지어짐을 보일 것이다. $Y$의 기하학적 점
+$\overline{y}$에서 줄기를 취하면 사상
+$$
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} w(\overline{x}) :
+(f_!f^{-1}\mathcal{F})_{\overline{y}} =
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}}
+\mathcal{F}_{\overline{y}}
+\longrightarrow
+\mathcal{F}_{\overline{y}}
+$$
+을 얻는다. 표시된 바와 같이 이 화살표는 $\overline{x}$에 대응하는
+직화항 위에서 정수 $w(\overline{x})$를 곱하는 것으로 주어진다.
+화살표 왼쪽의 등식은 Lemma \ref{lemma-lqf-f-shriek-stalk}과
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-stalk-pullback}을 결합하면 따른다.
+
+\medskip\noindent
+사상 $f : X \to Y$가 평탄하고 국소 준유한이며 국소 유한 표시이면
+표준 가중함수가 존재하고, 그 구성은 기저변환과 양립하는 표준 트레이스
+사상을 얻는다. Example \ref{example-trace-for-flat-quasi-finite}을 보라.
+$Y$가 국소 뇌터 단분지 스킴이고 $f : X \to Y$가 국소 준유한이면
+$f$에 대한 (자연스러운) 가중함수도 정의할 수 있으므로 이 경우에도
+트레이스 사상이 존재한다. Example
+\ref{example-trace-for-quasi-finite-over-normal}을 보라.
+
+\begin{lemma}
+\label{lemma-f-shriek-projection}
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하자.
+$\Lambda$를 환이라 하자. $\mathcal{F}$를 $X_\etale$ 위의
+$\Lambda$-가군의 층이라 하고,
+% P08-E112: frozen source misspells modules as modues; Korean renders the intended module-sheaf meaning.
+$\mathcal{G}$를 $Y_\etale$ 위의 $\Lambda$-가군의 층이라 하자.
+그러면 $Y_\etale$ 위의 $\Lambda$-가군의 층의 표준 동형
+$$
+can :
+f_!\mathcal{F} \otimes_\Lambda \mathcal{G}
+\longrightarrow
+f_!(\mathcal{F} \otimes_\Lambda f^{-1}\mathcal{G})
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+Definition \ref{definition-f-shriek-lqf}에 의해
+$f_!\mathcal{F} = (f_{p!}\mathcal{F})^\#$임을 상기하자. 여기서
+$f_{p!}\mathcal{F}$는 Section \ref{section-finite-support}에서 구성한
+준층이다. 따라서 화살표를 구성하기 위해서는 $Y_\etale$ 위의 준층의
+사상
+$$
+f_{p!}\mathcal{F} \otimes_{p, \Lambda} \mathcal{G}
+\longrightarrow
+f_{p!}(\mathcal{F} \otimes_\Lambda f^{-1}\mathcal{G})
+$$
+을 구성하면 충분하다. 여기서 기호 $\otimes_{p, \Lambda}$는 준층의
+텐서곱을 나타낸다. Modules on Sites, Section
+\ref{sites-modules-section-tensor-product}을 보라.
+$V$를 $Y_\etale$의 대상이라 하자. 다음을 상기하자.
+$$
+f_{p!}\mathcal{F}(V) = \colim_Z H_Z(\mathcal{F})
+\quad\text{and}\quad
+f_{p!}(\mathcal{F} \otimes_\Lambda f^{-1}\mathcal{G})(V) =
+\colim_Z H_Z(\mathcal{F} \otimes_\Lambda f^{-1}\mathcal{G})
+$$
+Section \ref{section-finite-support}을 보라. 우리의 사상은 순수 텐서에
+대해 규칙
+$$
+(Z, s) \otimes t \longmapsto (Z, s \otimes f^{-1}t)
+$$
+로 정의하고(표기는 아래를 보라), 선형으로 확장하여
+$(f_{p!}\mathcal{F} \otimes_{p, \Lambda} \mathcal{G})(V) =
+f_{p!}\mathcal{F}(V) \otimes_\Lambda \mathcal{G}(V)$ 전체에 정의한다.
+여기서 사용한 표기는 다음과 같다.
+\begin{enumerate}
+\item $Z \subset X_V$는 $V$ 위에서 유한인 국소 닫힌 부분스킴이고,
+\item $s \in H_Z(\mathcal{F})$이다. 이는 $Z \subset U$가 닫힌인 어떤
+열린 부분스킴 $U \subset X_V$에 대해 $s \in \mathcal{F}(U)$이고
+$\text{Supp}(s) \subset Z$라는 뜻이며,
+\item $t \in \mathcal{G}(V)$이고 그 상은
+$f^{-1}t \in f^{-1}\mathcal{G}(U)$이다.
+\end{enumerate}
+$s \in \mathcal{F}(U)$의 지지집합이 $Z$에 포함되므로
+$s \otimes f^{-1}t$의 지지집합도 $Z$에 포함됨은 분명하다.
+따라서 쌍 $(Z, s \otimes f^{-1}t)$를 생각하는 것은 의미가 있다.
+이 구성이 쌍극한 $\colim_Z H_Z(\mathcal{F})$의 전이 사상들과 가환하고
+제한 사상들과 양립함은 즉시 알 수 있다. 마지막으로 이 구성이
+Lemma \ref{lemma-lqf-f-shriek-stalk}의 $f_!$의 줄기 동일시와
+양립함도 마찬가지로 분명하다. 다시 말해, 우리가 구성한 사상 $can$은
+기하학적 점 $\overline{y}$에서의 줄기 위에서 가환 그림
+$$
+\xymatrix{
+(f_!\mathcal{F} \otimes_\Lambda \mathcal{G})_{\overline{y}}
+\ar[r]_-{can_{\overline{y}}} \ar[d] &
+f_!(\mathcal{F} \otimes_\Lambda f^{-1}\mathcal{G})_{\overline{y}} \ar[d] \\
+(\bigoplus \mathcal{F}_{\overline{x}})
+\otimes_\Lambda \mathcal{G}_{\overline{y}} \ar[r] &
+\bigoplus
+(\mathcal{F}_{\overline{x}} \otimes_\Lambda \mathcal{G}_{\overline{y}})
+}
+$$
+에 들어맞는다. 여기서 직합들은 $\overline{y}$ 위에 놓이는 기하학적 점
+$\overline{x}$들에 대한 것이고, 수직 화살표들은 Lemma
+\ref{lemma-lqf-f-shriek-stalk}의 동일시이며, 아래쪽 수평 화살표는
+자명한 동형이다. 원하는 대로 $can$이 동형이라고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-trace-map-exists}
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하자.
+$w : X \to \mathbf{Z}$를 $f$의 가중함수라 하자. $Y$ 위의 임의의
+아벨 층 $\mathcal{F}$에 대해 줄기에서 정해진 거동을 갖는 유일한
+트레이스 사상
+$\text{Tr}_{f, w, \mathcal{F}} : f_!f^{-1}\mathcal{F} \to \mathcal{F}$
+가 존재한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-f-shriek-projection}에 의해 이러한 층들의 기하학적
+점에서의 줄기 기술과 양립하는 동일시
+$f_!f^{-1}\mathcal{F} = f_!\underline{\mathbf{Z}} \otimes \mathcal{F}$
+가 존재한다. 따라서 줄기에서 정해진 거동을 갖는 사상
+$$
+\text{Tr}_{f, w, \underline{\mathbf{Z}}} :
+f_!\underline{\mathbf{Z}}
+\longrightarrow
+\underline{\mathbf{Z}}
+$$
+을 만들면 충분하다. Definition \ref{definition-f-shriek-lqf}에 의해
+$f_!\underline{\mathbf{Z}} = (f_{p!}\underline{\mathbf{Z}})^\#$이고,
+여기서 $f_{p!}\underline{\mathbf{Z}}$는 Section
+\ref{section-finite-support}에서 구성한 준층이다. 따라서
+$Y_\etale$ 위의 준층의 사상
+$$
+f_{p!}\underline{\mathbf{Z}} \longrightarrow \underline{\mathbf{Z}}
+$$
+을 구성하면 충분하다. $V$를 $Y_\etale$의 대상이라 하자.
+Section \ref{section-finite-support}에서 다음을 상기하자.
+$$
+f_{p!}\underline{\mathbf{Z}}(V) = \colim_Z H_Z(\underline{\mathbf{Z}})
+$$
+여기서 쌍극한은 $V$ 위에서 유한인 국소 닫힌 부분스킴
+$Z \subset X_V$들의 (부분순서가 주어진) 모임에 대한 것이다.
+그러한 각각의 $Z$에 대해 쌍극한을 정의하는 사상들과 양립하는 사상
+$$
+H_Z(\underline{\mathbf{Z}}) \longrightarrow \underline{\mathbf{Z}}(V)
+$$
+을 정의할 것이다.
+
+\medskip\noindent
+$Z \subset X_V$가 국소 닫힌이고 $V$ 위에서 유한이라고 하자.
+$Z$를 닫힌 부분집합으로 포함하는 열린 부분스킴 $U \subset X_V$를
+택하자. $H_Z(\underline{\mathbf{Z}})$의 원소 $s$는 지지집합이 $Z$에
+포함되는 단면 $s \in \underline{\mathbf{Z}}(U)$이다.
+$U_n \subset U$를 $s$의 값이 $n \in \mathbf{Z}$인 열린닫힌
+부분집합이라 하자. 지지 조건에 의해 $n \not = 0$이면
+$Z \cap U_n = U_n$임을 알 수 있다. 따라서 $n \not = 0$이면 열린
+부분집합 $U_n$은 (다른 모든 것들의 여집합으로서) $Z$에서도 닫혀 있고,
+$Z$가 $V$ 위에서 유한이므로 $U_n \to V$가 유한이라고 결론짓는다.
+가중함수의 바로 그 정의에 의해 이는 함수
+$\int_{U_n \to V} w|_{U_n}$가 $V$ 위에서 국소상수임을 뜻하므로,
+이를 $\underline{\mathbf{Z}}(V)$의 원소로 볼 수 있다. 우리의 구성은
+$(Z, s)$를 원소
+$$
+\sum\nolimits_{n \in \mathbf{Z},\ n \not = 0}
+n \left(\int_{U_n \to V} w|_{U_n}\right)
+\quad \in \quad \underline{\mathbf{Z}}(V)
+$$
+로 보낸다. 이 합은 $V$ 위에서 국소 유한이므로 의미가 있다.
+세부사항은 생략한다(전체 논의에서 독자는 먼저 아핀 열린 부분집합들을
+택하고 논증에 나타나는 모든 스킴이 준콤팩트임을 확인하여 합이 유한이
+되게 할 수 있다). 이 구성이 쌍극한의 사상들과
+$f_{p!}\underline{\mathbf{Z}}$를 정의하는 제한 사상들과 양립한다는
+확인은 생략한다.
+
+\medskip\noindent
+$\overline{y}$를 점 $y \in Y$ 위에 놓이는 $Y$의 기하학적 점이라 하자.
+$\overline{y}$에서 줄기를 취하면 위의 구성은 사상
+$$
+(f_!\underline{\mathbf{Z}})_{\overline{y}}
+= \bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathbf{Z}
+\longrightarrow
+\mathbf{Z} = \underline{\mathbf{Z}}_{\overline{y}}
+$$
+을 결정한다. 증명을 끝내기 위해 이 사상이 $\overline{x}$에 대응하는
+직화항 위에서 $w(\overline{x})$를 곱하는 것으로 주어짐을 보일 것이다.
+실제로 $\overline{y}$ 위에 놓이는 $\overline{x}$를 택하자.
+$X_V$가 $V$ 위에서 유한인 열린 부분스킴 $U$를 포함하고,
+$X$에서 $\overline{y}$를 올리는 다른 기하학적 점들은 들어 있지 않고
+기하학적 점 $\overline{x}$만 $U$에 들어 있도록 하는 에탈 근방
+$(V, \overline{v}) \to (Y, \overline{y})$를 찾을 수 있다.
+이는 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points-var}
+에서 따른다. 일부 세부사항은 생략한다. 그러면 $(U, 1)$은 $V$ 위의
+$f_!\underline{\mathbf{Z}}$의 단면을 정의하며, 이는
+$\overline{x}$에 대응하는 직화항에서는 $1$로, 다른 직화항들에서는
+영으로 간다(Lemma \ref{lemma-finite-support-stalk}의 증명을 보라).
+그리고 위의 구성은 $(U, 1)$을 $\int_{U \to V} w|_U$로 보내는데,
+이는 원하는 대로 $\overline{v}$의 한 근방에서 상수값
+$w(\overline{x})$를 갖는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-properties-trace-map}
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하자.
+$w : X \to \mathbf{Z}$를 $f$의 가중함수라 하자. 위에서 구성한
+트레이스 사상들은 다음 성질들을 갖는다.
+\begin{enumerate}
+\item $\text{Tr}_{f, w, \mathcal{F}}$는 $\mathcal{F}$에 대해 함자적이다.
+\item $\text{Tr}_{f, w, \mathcal{F}}$는 임의의 기저변환과 양립한다.
+\item 환 $\Lambda$와 $D(Y_\etale, \Lambda)$의 $K$가 주어지면
+$K$에 대해 함자적이고 임의의 기저변환과 양립하는
+$\text{Tr}_{f, w, K} : f_!f^{-1}K \to K$를 얻는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 Lemma \ref{lemma-trace-map-exists}의 증명에 나오는 트레이스
+사상의 구성에서 따르며, 더 간단히는 사상의 특징짓기가 모든 줄기에서
+이를 강제하기 때문에 따른다. 스킴의 카르테시안 그림
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+을 생각하자. 그러면 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weighting-base-change}에 의해 함수
+$w' = w \circ g' : X' \to \mathbf{Z}$는 $f'$의 가중함수이다.
+명제 (2)는 그림
+$$
+\xymatrix{
+g^{-1}f_!f^{-1}\mathcal{F}
+\ar[rr]_-{g^{-1}\text{Tr}_{f, w, \mathcal{F}}} \ar@{=}[d] & &
+g^{-1}\mathcal{F} \ar@{=}[d] \\
+f'_!(f')^{-1}g^{-1}\mathcal{F}
+\ar[rr]^-{\text{Tr}_{f', w', g^{-1}\mathcal{F}}} & &
+g^{-1}\mathcal{F}
+}
+$$
+이 가환한다는 뜻이다. 여기서 왼쪽 수직 등식은
+$$
+g^{-1}f_!f^{-1}\mathcal{F} =
+f'_!(g')^{-1}f^{-1}\mathcal{F} =
+f'_!(f')^{-1}g^{-1}\mathcal{F}
+$$
+로 주어지고, 첫 번째 등호는 Lemma
+\ref{lemma-lqf-base-change-f-shriek}(아래쪽 슈리크의 기저변환)에서
+주어진다. 이 그림의 가환성은 줄기 위에서의 트레이스 사상의 작용에
+대한 특징짓기와 Lemma \ref{lemma-lqf-base-change-f-shriek}의
+기저변환 사상이 줄기의 기술을 보존한다는 사실로부터 따른다.
+
+\medskip\noindent
+(1)과 (2)가 주어졌으므로 (3)이 따른다. 실제로 함자
+$f^{-1} : D(Y_\etale, \Lambda) \to D(X_\etale, \Lambda)$와
+$f_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$는 해당 대상들을
+나타내는 임의의 가군 복합체에 $f^{-1}$과 $f_!$를 적용하여 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-trace-composition}
+$f : X \to Y$와 $g : Y \to Z$를 국소 준유한 사상이라 하자.
+$w_f : X \to \mathbf{Z}$를 $f$의 가중함수라 하고,
+$w_g : Y \to \mathbf{Z}$를 $g$의 가중함수라 하자.
+$K \in D(Z_\etale, \Lambda)$에 대해 합성
+$$
+(g \circ f)_!(g \circ f)^{-1}K =
+g_! f_! f^{-1} g^{-1}K
+\xrightarrow{g_! \text{Tr}_{f, w_f, g^{-1}K}}
+g_!g^{-1}K
+\xrightarrow{\text{Tr}_{g, w_g, K}}
+K
+$$
+은 $\text{Tr}_{g \circ f, w_{g \circ f}, K}$와 같다. 여기서
+$w_{g \circ f}(x) = w_f(x) w_g(f(x))$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-lqf-shriek-composition}에 의해
+$(g \circ f)_! = g_! \circ f_!$이다. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weighting-composition}에서
+$w_{g \circ f}$가 $g \circ f$의 가중함수임을 보았으므로 명제는
+의미가 있다. 등식을 확인하려면 줄기에서 계산하면 된다.
+세부사항은 생략한다.
+\end{proof}
+
+\begin{example}[평탄 준유한 사상에 대한 트레이스]
+\label{example-trace-for-flat-quasi-finite}
+$f : X \to Y$를 평탄하고 국소 준유한이며 국소 유한 표시인 스킴의
+사상이라 하자. 그러면 다음과 같이 두어 표준 양의 가중함수
+$w : X \to \mathbf{Z}$를 얻는다.
+$$
+w(x) = \text{length}_{\mathcal{O}_{X, x}}
+(\mathcal{O}_{X, x}/\mathfrak m_{f(x)} \mathcal{O}_{X, x})
+[\kappa(x) : \kappa(f(x))]_i
+$$
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weighting-flat-quasi-finite}을 보라.
+따라서 Lemmas \ref{lemma-trace-map-exists}와
+\ref{lemma-properties-trace-map}에 의해 $f$에 대해 트레이스 사상
+$$
+\text{Tr}_{f, K} : f_!f^{-1}K \longrightarrow K
+$$
+을 얻는다. 이는 $D(Y_\etale, \Lambda)$의 $K$에 대해 함자적이고
+임의의 기저변환과 양립한다. $f$의 임의의 기저변환
+$f' : X' \to Y'$도 같은 성질들을 만족하며 $w$는 $f'$에 대한
+표준 가중함수로 제한됨에 유의하자.
+\end{example}
+
+\begin{remark}
+\label{remark-trace-etale-counit}
+$j : U \to X$를 스킴의 에탈 사상이라 하자. 그러면 Example
+\ref{example-trace-for-flat-quasi-finite}의 트레이스 사상
+$\text{Tr} : j_!j^{-1}K \to K$는 $j_!$와 $j^{-1}$ 사이의 수반의
+여단위와 같다. 우리는 이미 \'Etale Cohomology, Section
+\ref{etale-cohomology-section-trace-method}에서 이 여단위에 대해
+``트레이스''라는 용어를 사용하였다.
+\end{remark}
+
+\begin{example}[정규인 것 위의 준유한 사상에 대한 트레이스]
+\label{example-trace-for-quasi-finite-over-normal}
+$Y$를 기하학적으로 단분지이고 국소 뇌터인 스킴이라 하자. 예를 들어
+$Y$는 정규 다형체일 수 있다. $f : X \to Y$를 스킴의 국소 준유한
+사상이라 하자. 그러면 $f$에 대한 양의 가중함수
+$w : X \to \mathbf{Z}$가 존재하며, 이는 대략 $x$를
+$\mathcal{O}_{Y, f(x)}^{sh}$ 위의 $\mathcal{O}_{X, x}^{sh}$의
+``일반 분리 차수''로 보내는 것으로 정의된다. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weighting-quasi-finite-Noetherian}을 보라.
+따라서 Lemmas \ref{lemma-trace-map-exists}와
+\ref{lemma-properties-trace-map}에 의해 $f$와 $w$에 대해 트레이스 사상
+$$
+\text{Tr}_{f, w, K} : f_!f^{-1}K \longrightarrow K
+$$
+을 얻는다. 이는 $D(Y_\etale, \Lambda)$의 $K$에 대해 함자적이고
+임의의 기저변환과 양립한다. 그러나 이 경우 $f$의 기저변환
+$f' : X' \to Y'$가 주어졌을 때 $w$의 $X'$로의 제한은 일반적으로
+사상 $f'$의 관점에서 ``자연스러운'' 해석을 갖지 않는다.
+\end{example}
+
+\section{국소 준유한 사상에 대한 위쪽 슈리크}
+\label{section-duality-locally-quasi-finite}
+
+\noindent
+스킴의 국소 준유한 사상 $f : X \to Y$에 대해 함자
+$f_! : \textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$는 직합과
+가환하고 완전하다. Lemma \ref{lemma-lqf-f-shriek-stalk}을 보라.
+이는 이 함자가 오른쪽 수반을 가지며, 이를 $f^!$로 나타낼 것임을
+시사한다.
+
+\medskip\noindent
+경고: 이 함자는 비유도판이다!
+
+\begin{lemma}
+\label{lemma-lqf-f-upper-shriek}
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하자.
+\begin{enumerate}
+\item 함자 $f_! : \textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$는
+오른쪽 수반
+$f^! : \textit{Ab}(Y_\etale) \to \textit{Ab}(X_\etale)$를 갖는다.
+\item 다음이 성립한다.
+$f^!(\overline{y}_*A) = \prod_{f(\overline{x}) = \overline{y}} \overline{x}_*A$.
+\item $\Lambda$가 환이면 함자
+$f_! : \textit{Mod}(X_\etale, \Lambda) \to
+\textit{Mod}(Y_\etale, \Lambda)$는 오른쪽 수반
+$f^! : \textit{Mod}(Y_\etale, \Lambda) \to
+\textit{Mod}(X_\etale, \Lambda)$를 가지며, 이는 바탕 아벨 층 위에서
+$f^!$와 일치한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. $E \subset \Ob(\textit{Ab}(Y_\etale))$를 마천루 층들의
+곱들로 이루어진 모임이라 하자. 다음을 주장한다.
+\begin{enumerate}
+\item[(a)] $\textit{Ab}(Y_\etale)$의 모든 $\mathcal{G}$는 $E$의 한
+원소의 부분층이고,
+\item[(b)] 모든 $\mathcal{G} \in E$에 대해
+$\textit{Ab}(X_\etale)$의 대상 $\mathcal{H}$가 존재하여
+$\mathcal{F}$에 대해 함자적으로
+$\Hom(f_!\mathcal{F}, \mathcal{G}) = \Hom(\mathcal{F}, \mathcal{H})$
+이다.
+\end{enumerate}
+이 주장을 확인하면 Homology, Lemma
+\ref{homology-lemma-partially-defined-adjoint}의 쌍대가 수반함자
+$f^!$를 준다.
+
+\medskip\noindent
+(a)는 $\mathcal{G}$를 층
+$\prod \overline{y}_*\mathcal{G}_{\overline{y}}$로 보낼 수 있기 때문에
+참이다. 여기서 곱은 $Y$의 모든 기하학적 점에 대한 것이다.
+\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks}에 의해 이는 단사이다.
+(위상공간 위의 아벨 층의 맥락에서 시행하면 이는 고드망 분해의 첫
+단계이다.)
+
+\medskip\noindent
+(b)와 보조정리의 (2)는 다음과 같이 볼 수 있다. 어떤 아벨 군들
+$A_{\overline{y}}$에 대해
+$\mathcal{G} = \prod \overline{y}_*A_{\overline{y}}$라고 하자. 그러면
+$$
+\Hom(f_!\mathcal{F}, \mathcal{G}) =
+\prod \Hom(f_!\mathcal{F}, \overline{y}_*A_{\overline{y}})
+$$
+이다. 따라서 함자
+$\mathcal{F} \mapsto \Hom(f_!\mathcal{F}, \overline{y}_*A_{\overline{y}})$
+들을 표현하는 $X_\etale$ 위의 아벨 층
+$\mathcal{H}_{\overline{y}}$들을 찾고
+$\mathcal{H} = \prod \mathcal{H}_{\overline{y}}$로 두면 충분하다.
+% P08-E113: frozen source reduces to H=y_*A although the fixed input is G; preserved literally.
+이로써 어떤 고정된 기하학적 점
+$\overline{y} : \Spec(k) \to Y$와 어떤 고정된 아벨 군 $A$에 대해
+$\mathcal{H} = \overline{y}_*A$인 경우로 환원된다. 이 경우
+$\mathcal{H} = \prod_{f(\overline{x}) = \overline{y}} \overline{x}_*A$가
+잘 작동한다고 주장한다. 이것으로 보조정리의 (1)과 (2)의 증명이
+끝날 것이다. 실제로 Lemma \ref{lemma-lqf-f-shriek-stalk}의 줄기
+기술에 의해 한편으로
+$$
+\Hom(f_!\mathcal{F}, \overline{y}_*A) =
+\Hom_{\textit{Ab}}((f_!\mathcal{F})_{\overline{y}}, A) =
+\Hom_{\textit{Ab}}(\bigoplus\nolimits_{f(\overline{x}) = \overline{y}}
+\mathcal{F}_{\overline{x}}, A)
+$$
+이고, 다른 한편으로
+$$
+\Hom(\mathcal{F}, \mathcal{H}) =
+\prod\nolimits_{f(\overline{x}) = \overline{y}}
+\Hom(\mathcal{F}, \overline{x}_*A) =
+\prod\nolimits_{f(\overline{x}) = \overline{y}}
+\Hom_{\textit{Ab}}(\mathcal{F}_{\overline{x}}, A)
+$$
+이다. 이것들을 $\mathcal{F}$의 함자로 동일시하는 일은 독자에게 맡긴다.
+
+\medskip\noindent
+(3)의 증명. $\textit{Mod}(X_\etale, \Lambda)$의 대상은
+$\textit{Ab}(X_\etale)$의 대상 $\mathcal{F}$와 사상
+$\Lambda \to \text{End}(\mathcal{F})$를 함께 준 것과 같음을 관찰하자.
+따라서 (1)의 함자 $f_!$와 $f^!$는 (3)에서와 같은 함자 $f_!$와
+$f^!$를 정의한다. 직접 계산하면 이들이 수반임을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-etale-upper-shriek}
+$j : U \to X$를 에탈 사상이라 하자. 그러면 $j^! = j^{-1}$이다.
+\end{lemma}
+
+\begin{proof}
+Section \ref{section-finite-support}에서 정의한 $j_!$는
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-extension-by-zero}에서 정의한 $j_!$와
+일치하기 때문에 참이다. Lemma
+\ref{lemma-finite-support-etale-shriek}을 보라. 마지막으로
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-extension-by-zero}에서 함자 $j_!$는
+$j^{-1}$의 왼쪽 수반으로 정의되므로, 수반함자의 유일성으로 결론을
+얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-upper-shriek-restriction}
+$f : X \to Y$와 $g : Y \to Z$를 분리이고 국소 준유한인 사상이라
+하자. 표준 동형 $(g \circ f)^! \to f^! \circ g^!$가 존재한다.
+세 번째 국소 준유한 사상 $h : Z \to T$가 주어지면 그림
+$$
+\xymatrix{
+(h \circ g \circ f)^! \ar[r] \ar[d] &
+f^! \circ (h \circ g)^! \ar[d] \\
+(g \circ f)^! \circ h^! \ar[r] & f^! \circ g^! \circ h^!
+}
+$$
+이 가환한다.
+\end{lemma}
+
+\begin{proof}
+수반함자의 유일성에 의해 이는 함자 $f_!$에 대한 대응하는 (쌍대)
+명제로 즉시 옮겨진다. Lemma
+\ref{lemma-lqf-shriek-composition}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-upper-shriek-restriction-etale}
+$j : U \to X$와 $j' : V \to U$를 에탈 사상이라 하자. 동형
+$(j \circ j')^{-1} = (j')^{-1} \circ j^{-1}$과 Lemma
+\ref{lemma-upper-shriek-restriction}의 동형
+$(j \circ j')^! = (j')^! \circ j^!$는 Lemma
+\ref{lemma-etale-upper-shriek}의 동형을 통해 일치한다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-lqf-base-change-upper-shriek}
+$f$가 국소 준유한인 스킴의 카르테시안 정사각형
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+을 생각하자. $Y'_\etale$ 위의 임의의 아벨 층 $\mathcal{F}$에 대해
+$(g')_*(f')^!\mathcal{F} = f^!g_*\mathcal{F}$이다.
+\end{lemma}
+
+\begin{proof}
+수반함자의 유일성에 의해 이는 함자 $f_!$에 대한 대응하는 (쌍대)
+명제에서 따른다. Lemma
+\ref{lemma-lqf-base-change-f-shriek}을 보라.
+\end{proof}
+
+\begin{remark}
+\label{remark-pointed-sets}
+이 절의 내용을 기점 있는 집합의 층으로 일반화할 수 있다. 실제로
+사이트 $\mathcal{C}$에 대해 기점 있는 집합의 층의 범주를
+$\Sh^*(\mathcal{C})$로 나타내자. 이 절과 앞 절의 구성들은 필요한
+변경을 가하면 기점 있는 집합의 층에 적용된다. 따라서 스킴의 국소
+준유한 사상 $f : X \to Y$가 주어지면 수반함자의 쌍
+$$
+f_! : \Sh^*(X_\etale) \longrightarrow \Sh^*(Y_\etale)
+\quad\text{and}\quad
+f^! : \Sh^*(Y_\etale) \longrightarrow \Sh^*(X_\etale)
+$$
+을 얻는다. 이들은 $Y$의 모든 기하학적 점 $\overline{y}$에 대해
+$\mathcal{F} \in \Sh^*(X_\etale)$에 함자적인 동형
+$$
+(f_!\mathcal{F})_{\overline{y}} =
+\coprod\nolimits_{f(\overline{x}) = \overline{y}}
+\mathcal{F}_{\overline{x}}
+$$
+을 갖고(쌍대곱은 기점 있는 집합의 범주에서 취한다), 기점 있는 집합
+$S$에 함자적인 동형
+$$
+f^!(\overline{y}_*S) =
+\prod\nolimits_{f(\overline{x}) = \overline{y}}
+\overline{x}_*S
+$$
+을 갖는다. 망각함자들을
+$F : \textit{Ab}(X_\etale) \to \Sh^*(X_\etale)$ 및
+$F : \textit{Ab}(Y_\etale) \to \Sh^*(Y_\etale)$로 나타내면, 구성들
+사이의 양립성은 $\mathcal{F} \in \textit{Ab}(X_\etale)$에 함자적인
+표준 사상
+$$
+f_!F(\mathcal{F}) \longrightarrow F(f_!\mathcal{F})
+$$
+과 $\mathcal{G} \in \textit{Ab}(Y_\etale)$에 함자적인 표준 사상
+$$
+F(f^!\mathcal{G}) \longrightarrow f^!F(\mathcal{G})
+$$
+의 존재를 보장한다. 이 사상들은 각각 줄기와 마천루 층 위에서 자명한
+사상들을 준다. 실제로 변환 $F \circ f^! \to f^! \circ F$는
+동형이다($f^!$가 곱과 가환하기 때문이다).
+\end{remark}
+
+
+
+
+
+
+
+\section{국소 준유한 사상에 대한 유도 위쪽 슈리크}
+\label{section-derived-duality-locally-quasi-finite}
+
+\noindent
+Section \ref{section-duality-locally-quasi-finite}의 함자들의 유도판을
+취하여 다음을 얻을 수 있다.
+
+\begin{lemma}
+\label{lemma-lqf-shriek-derived}
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하자.
+$\Lambda$를 환이라 하자. Definition \ref{definition-f-shriek-lqf}과
+Lemma \ref{lemma-lqf-f-upper-shriek}의 함자 $f_!$와 $f^!$는 유도범주
+위의 수반함자
+$f_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$ 및
+$Rf^! : D(Y_\etale, \Lambda) \to D(X_\etale, \Lambda)$를 유도한다.
+\end{lemma}
+
+\noindent
+분리인 경우 함자 $f_!$는 Section \ref{section-compact-support}에서
+정의된다.
+
+\begin{proof}
+이는 Derived Categories, Lemma
+\ref{derived-lemma-derived-adjoint-functors}, $f_!$가 완전이라는 사실
+(Lemma \ref{lemma-lqf-f-shriek-stalk})과 따라서 $Lf_! = f_!$라는
+사실, 그리고 $Rf^!$가 정의되도록 하는 $Y_\etale$ 위의
+$\Lambda$-가군의 K-단사 복합체가 충분히 많다는 사실에서 즉시 따른다.
+\end{proof}
+
+\begin{remark}
+\label{remark-lqf-shriek-derived-torsion}
+$f : X \to Y$를 스킴의 국소 준유한 사상이라 하고 $\Lambda$를 환이라
+하자. Lemma \ref{lemma-lqf-shriek-derived}의 함자
+$f_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$는 꼬임
+코호몰로지 층을 갖는 복합체를 꼬임 코호몰로지 층을 갖는 복합체로
+보낸다. 이는 $f_!$의 줄기 기술에서 즉시 따른다. Lemma
+\ref{lemma-lqf-f-shriek-stalk}을 보라.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-mayer-vietoris-shriek}
+$X$를 스킴이라 하자. $X = U \cup V$이고 $U$와 $V$가 열려 있다고
+하자. $\Lambda$를 환이라 하고 $K \in D(X_\etale, \Lambda)$라 하자.
+$D(X_\etale, \Lambda)$ 안에 자명한 표기를 사용한 특별 삼각형
+$$
+j_{U \cap V!}K|_{U \cap V} \to
+j_{U!}K|_U \oplus j_{V!}K|_V \to K \to 
+j_{U \cap V!}K|_{U \cap V}[1]
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+우리가 사용하는 제한함자와 아래쪽 슈리크 함자는 완전하므로,
+$X_\etale$ 위의 임의의 아벨 층 $\mathcal{F}$에 대해 열
+$$
+0 \to j_{U \cap V!}\mathcal{F}|_{U \cap V} \to
+j_{U!}\mathcal{F}|_U \oplus j_{V!}\mathcal{F}|_V \to \mathcal{F} \to 0
+$$
+이 완전임을 보이면 충분하다. 이는 줄기를 살펴보면 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-triangle-associated-to-open}
+$X$를 스킴이라 하자. $Z \subset X$를 닫힌 부분스킴이라 하고
+$U \subset X$를 그 여집합이라 하자. 포함사상들을
+$i : Z \to X$와 $j : U \to X$로 나타내자. $\Lambda$를 환이라 하고
+$K \in D(X_\etale, \Lambda)$라 하자. $D(X_\etale, \Lambda)$ 안에
+특별 삼각형
+$$
+j_!j^{-1}K \to K \to i_*i^{-1}K \to j_!j^{-1}K[1]
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-ses-associated-to-open}과 함자들
+$j_!$, $j^{-1}$, $i_*$, $i^{-1}$가 완전하여 그 유도판을 계산하려면
+$K$를 나타내는 임의의 층 복합체에 이 함자들을 적용하면 된다는
+사실에서 즉시 따른다.
+\end{proof}
+
+\section{콤팩트화를 통한 유도 아래쪽 슈리크의 준비}
+\label{section-prelim}
+
+\noindent
+이 절에서는 고유 기저변환에서 즉시 따르는 함자의 몇 가지 자연스러운
+동형의 존재에 관한 보조정리들을 증명한다.
+
+\begin{lemma}
+\label{lemma-shriek-proper-and-open}
+$f$와 $f'$가 고유이고 $g$와 $g'$가 분리이며 국소 준유한인 스킴의
+가환 그림
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+을 생각하자. $\Lambda$를 환이라 하자. $K \in D(X'_\etale, \Lambda)$에
+대해 함자적으로 $D(Y_\etale, \Lambda)$ 안의 표준 사상
+$$
+g_!Rf'_*K \longrightarrow Rf_*(g'_!K)
+$$
+이 존재한다. (a) $K$가 아래로 유계이고 꼬임 코호몰로지 층을 갖거나,
+(b) $\Lambda$가 꼬임 환이면 이 사상은 동형이다.
+\end{lemma}
+
+\begin{proof}
+$K$를 $X'_\etale$ 위의 $\Lambda$-가군의 K-단사 복합체
+$\mathcal{J}^\bullet$로 나타내자. $X_\etale$ 위의 $\Lambda$-가군의
+K-단사 복합체 $\mathcal{I}^\bullet$로 가는 준동형
+$g'_!\mathcal{J}^\bullet \to \mathcal{I}^\bullet$을 택하자. 그러면 사상
+$$
+g_!f'_*\mathcal{J}^\bullet =
+g_!f'_!\mathcal{J}^\bullet =
+f_!g'_!\mathcal{J}^\bullet =
+f_*g'_!\mathcal{J}^\bullet \to
+f_*\mathcal{I}^\bullet
+$$
+을 생각할 수 있다. 여기서 첫 번째와 세 번째 등식은 Lemma
+\ref{lemma-proper-f-shriek}에서 오고, 두 번째 등식은 Lemma
+\ref{lemma-f-shriek-composition}에서 온다. 후자는
+$g_! \circ f'_!$와 $f_! \circ g'_!$가 모두
+$(g \circ f')_! = (f \circ g')_!$와 같다고 말하며, 이들은
+$(g \circ f')_* = (f \circ g')_*$의 부분층이다.
+
+\medskip\noindent
+$\Lambda$가 꼬임이라고, 즉 (b)의 경우라고 가정하자. 위의 표기를
+사용하면 $f_*g'_!\mathcal{J}^\bullet \to f_*\mathcal{I}^\bullet$이
+준동형임을 보이면 충분하다. 문제는 $Y$ 위에서 국소적이다. 따라서
+$f$의 올들의 차원이 유계라고 가정할 수 있다. Morphisms, Lemma
+\ref{morphisms-lemma-morphism-finite-type-bounded-dimension}을 보라.
+그러면 $Rf_*$가 유한 코호몰로지 차원을 가짐을 알 수 있다.
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomological-dimension-proper}을 보라.
+따라서 Derived Categories, Lemma
+\ref{derived-lemma-unbounded-right-derived}에 의해, $X'_\etale$ 위의
+임의의 단사 $\Lambda$-가군 층 $\mathcal{J}$와 $q > 0$에 대해
+$R^qf_*(g'_!\mathcal{J}) = 0$임을 보이면 결과가 따른다.
+
+\medskip\noindent
+기하학적 점 $\overline{y}$에서 $R^qf_*(g'_!\mathcal{J})$의 줄기는
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change-stalk}에 의해
+$H^q(X_{\overline{y}}, (g'_!\mathcal{J})|_{X_{\overline{y}}})$와 같다.
+$g'_!$의 구성이 기저변환과 가환하므로(Lemma
+\ref{lemma-base-change-f-shriek-separated}) 이는
+$$
+H^q(X_{\overline{y}}, g'_{\overline{y}, !}(\mathcal{J}|_{X'_{\overline{y}}}))
+$$
+와 같다. 여기서
+$g'_{\overline{y}} : X'_{\overline{y}} \to X_{\overline{y}}$는
+기하학적 올 사이의 유도 사상이다. $Y' \to Y$가 국소 준유한이므로
+$X'_{\overline{y}}$는 $\overline{y}$ 위에 놓이는 $Y'$의 기하학적 점
+$\overline{y}'$들에서의 올 $X'_{\overline{y}'}$들의 분리합임을 알 수
+있다. $g'_{\overline{y}}$의 $X'_{\overline{y}'}$로의 제한을
+$g'_{\overline{y}'} : X'_{\overline{y}'} \to X_{\overline{y}}$로
+나타내자. 따라서 앞의 코호몰로지 군은
+$$
+H^q(X_{\overline{y}},
+\bigoplus\nolimits_{\overline{y}'/\overline{y}}
+g'_{\overline{y}', !}(\mathcal{J}|_{X'_{\overline{y}'}}))
+$$
+와 같다. 예를 들어 Lemma \ref{lemma-colim-f-shriek-separated}에 의해
+그렇다(그러나 Section \ref{section-compact-support}의
+$g'_{\overline{y}, !}$의 정의에서도 자명하다). $X_{\overline{y}}$ 위의
+에탈 코호몰로지를 취하는 것은 직합과 가환하므로(\'Etale Cohomology,
+Theorem \ref{etale-cohomology-theorem-colimit}), 다음이 영임을 보이면
+충분하다고 결론짓는다.
+$$
+H^q(X_{\overline{y}}, g'_{\overline{y}', !}(\mathcal{J}|_{X'_{\overline{y}'}}))
+$$
+% P08-E114: frozen source drops the prime from g'_{y'} in the next two inline formulas; preserved literally.
+$g_{\overline{y}'} : X'_{\overline{y}'} \to X_{\overline{y}}$가
+$\overline{y}$ 위의 고유 스킴들 사이의 사상이므로 그 자체도
+고유임을 관찰하자. 또한 국소 준유한이므로
+$g_{\overline{y}'}$는 유한이라고 결론짓는다. 따라서
+$g'_{\overline{y}', !} = g'_{\overline{y}', *} =
+Rg'_{\overline{y}', *}$임을 알 수 있다. 르레에 의해 다음이 영임을
+보이면 된다고 결론짓는다.
+$$
+H^q(X'_{\overline{y}'}, \mathcal{J}|_{X'_{\overline{y}'}})
+$$
+$\Lambda$가 꼬임이므로 이는 고유 기저변환(\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change-stalk})에서 따른다.
+$f'$에 의한 $\mathcal{J}$의 고차 직상들이 영이기 때문이다.
+
+\medskip\noindent
+(a)의 증명. 표준적인 논증으로 (b)에서 도출할 것이다. 모든
+$p \in \mathbf{Z}$에 대해 유도 사상
+$g_! R^pf'_* K \to R^pf_*(g'_!K)$가 동형임을 보일 것이다.
+정수 $p_0 \in \mathbf{Z}$를 고정하자. $j < a$이면 $H^j(K) = 0$이
+되도록 하는 정수 $a$를 택하자. $a$에 관한 하강 귀납법으로
+$p \leq p_0$에 대해 $g_! R^pf'_* K \to R^pf_*(g'_!K)$가 동형임을
+증명할 것이다. $a > p_0$이면 자명한 소멸에 의해 $p \leq p_0$에
+대해 사상의 좌변과 우변은 영이다. Derived Categories, Lemma
+\ref{derived-lemma-negative-vanishing}을 보라(그리고 $g_!$와 $g'_!$가
+완전함자라는 사실을 사용하라). $a \leq p_0$라고 가정하자.
+특별 삼각형
+$$
+H^a(K)[-a] \to K \to \tau_{\geq a + 1}K
+$$
+을 생각하자. 귀납가정에 의해 $\tau_{\geq a + 1}K$에 대한 결과가
+성립한다. 다음 문단에서 $H^a(K)[-a]$에 대한 결과를 증명할 것이다.
+그러면 특별 삼각형의 사상
+% P08-E116: frozen source has malformed |geq in the bottom-right truncation; preserved literally.
+$$
+\xymatrix{
+g_! Rf'_*(H^a(K)[-a]) \ar[d] \ar[r] &
+g_! Rf'_* K \ar[r] \ar[d] &
+g_! Rf'_* \tau_{\geq a + 1} K \ar[d] \\
+Rf_*(g'_!(H^a(K)[-a])) \ar[r] &
+Rf_*(g'_!K) \ar[r] &
+Rf_*(g'_!\tau_{|geq a + 1}K)
+}
+$$
+에 결부된 코호몰로지 층의 긴 완전열들 사이의 사상에 오항 보조정리를
+적용하면 $K$에 대한 결과를 얻는다. 일부 세부사항은 생략한다.
+
+\medskip\noindent
+$\mathcal{F}$를 $X'_\etale$ 위의 꼬임 아벨 층이라 하자. 증명을
+끝내기 위해 모든 $p$에 대해
+% P08-E117: frozen source omits superscript p from the left Rf'_*; preserved literally.
+$g_! Rf'_*\mathcal{F} \to R^pf_*(g'_!\mathcal{F})$가 동형임을 보인다.
+$\mathcal{F}[n] = \Ker(n : \mathcal{F} \to \mathcal{F})$일 때
+$\mathcal{F} = \bigcup \mathcal{F}[n]$으로 쓸 수 있다.
+(b)에 의해 $\mathcal{F}[n]$에 대한 동형이 성립한다. 함자들
+$g_!$, $g'_!$, $R^pf_*$, $R^pf'_*$가 여과 쌍극한과 가환하므로
+(Lemma \ref{lemma-lqf-f-shriek-separated-colimits}과
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-relative-colimit-general}에서 따른다)
+증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-shriek-proper-and-open-compose}
+$f$, $f'$, $g$, $g'$가 고유이고 $k$, $l$, $m$이 분리이며 국소
+준유한인 스킴의 가환 그림
+$$
+\xymatrix{
+X' \ar[r]_k \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]_l \ar[d]_{g'} & Y \ar[d]^g \\
+Z' \ar[r]^m & Z
+}
+$$
+을 생각하자. 두 정사각형에 대한 Lemma
+\ref{lemma-shriek-proper-and-open}의 동형들을 합성하면 바깥
+직사각형에 대한 동형이 된다(정확한 명제는 증명을 보라).
+\end{lemma}
+
+\begin{proof}
+이 명제의 뜻은
+$R(g \circ f)_* = Rg_* \circ Rf_*$ 및
+$R(g' \circ f')_* = Rg'_* \circ Rf'_*$로 쓸 때 바깥 직사각형의 동형
+$m_! \circ Rg'_* \circ Rf'_* \to Rg_* \circ Rf_* \circ k_!$가
+그림의 두 정사각형의 사상들의 합성
+$$
+m_! \circ Rg'_* \circ Rf'_* \to
+Rg_* \circ l_! \circ Rf'_* \to
+Rg_* \circ Rf_* \circ k_!
+$$
+과 같다는 것이다. 이를 증명하기 위해 $X'_\etale$ 위의
+$\Lambda$-가군의 K-단사 복합체 $\mathcal{J}^\bullet$과
+$X_\etale$ 위의 $\Lambda$-가군의 K-단사 복합체
+$\mathcal{I}^\bullet$로 가는 준동형
+$k_!\mathcal{J}^\bullet \to \mathcal{I}^\bullet$을 택하자.
+Lemma \ref{lemma-shriek-proper-and-open}의 증명은 표준 사상
+$$
+a : l_!f'_*\mathcal{J}^\bullet \to f_*\mathcal{I}^\bullet
+$$
+이 준동형임을 보이며, 이 준동형에 $Rg_*$를 적용하면 두 번째
+화살표를 얻는다. Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-K-injective-flat}에 의해 복합체
+$f_*\mathcal{I}^\bullet$와 각각 $f'_*\mathcal{J}^\bullet$은
+$Y_\etale$와 각각 $Y'_\etale$ 위의 $\Lambda$-가군의 K-단사
+복합체이다. (이를 사용하는 것은 편법이며 피할 수도 있다.) 특히 같은
+논증은 표준 사상
+$$
+b : m_!g'_*f'_*\mathcal{J}^\bullet \to g_*f_*\mathcal{I}^\bullet
+$$
+이 준동형임을 보이며, 이 준동형은 첫 번째 화살표를 나타낸다.
+% P08-E118: source has a subject-verb agreement typo; Korean states the intended inference.
+마지막으로 Lemma \ref{lemma-shriek-proper-and-open}의 증명은
+$f'_*\mathcal{J}^\bullet$가 K-단사이므로
+$g_*l_!f'_!\mathcal{J}^\bullet$가
+$Rg_*(l_!f'_*\mathcal{J}^\bullet)$를 나타냄을 보인다. 따라서
+$Rg_*(a) = g_*(a)$이고, 합성 $g_*(a) \circ b$는 그 직사각형에 대한
+Lemma \ref{lemma-shriek-proper-and-open}의 화살표이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-shriek-proper-and-open-compose-horizontal}
+$f$, $f'$, $f''$가 고유이고 $g$, $g'$, $h$, $h'$가 분리이며 국소
+준유한인 스킴의 가환 그림
+$$
+\xymatrix{
+X'' \ar[r]_{g'} \ar[d]_{f''} &
+X' \ar[r]_g \ar[d]_{f'} &
+X \ar[d]^f \\
+Y'' \ar[r]^{h'} &
+Y' \ar[r]^h &
+Y
+}
+$$
+을 생각하자. 두 정사각형에 대한 Lemma
+\ref{lemma-shriek-proper-and-open}의 동형들을 합성하면 바깥
+직사각형에 대한 동형이 된다(정확한 명제는 증명을 보라).
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-f-shriek-composition}의 등식들을 사용하여
+$(h \circ h')_! = h_! \circ h'_!$ 및
+$(g \circ g')_! = g_! \circ g'_!$로 쓸 때, 이 명제의 뜻은 바깥
+직사각형의 동형
+$h_! \circ h'_! \circ Rf''_* \to Rf_* \circ g_! \circ g'_!$가
+그림의 두 정사각형의 사상들의 합성
+$$
+h_! \circ h'_! \circ Rf''_* \to
+h_! \circ Rf'_* \circ g'_! \to
+Rf_* \circ g_! \circ g'_!
+$$
+과 같다는 것이다. 이를 증명하기 위해 $X''_\etale$ 위의
+$\Lambda$-가군의 K-단사 복합체 $\mathcal{I}^\bullet$과
+$X'_\etale$ 위의 $\Lambda$-가군의 K-단사 복합체
+$\mathcal{J}^\bullet$로 가는 준동형
+$g'_!\mathcal{I}^\bullet \to \mathcal{J}^\bullet$을 택하자.
+다음으로 $X_\etale$ 위의 $\Lambda$-가군의 K-단사 복합체
+$\mathcal{K}^\bullet$로 가는 준동형
+$g_!\mathcal{J}^\bullet \to \mathcal{K}^\bullet$을 택하자.
+Lemma \ref{lemma-shriek-proper-and-open}의 증명은 표준 사상들
+$$
+h'_!f''_*\mathcal{I}^\bullet \to f'_*\mathcal{J}^\bullet
+\quad\text{and}\quad
+h_!f'_*\mathcal{J}^\bullet \to f_*\mathcal{K}^\bullet
+$$
+이 준동형임을 보이며, 이 준동형들은 위의 첫 번째와 두 번째 화살표를
+정의한다. $g_!$가 완전함자이므로(Lemma
+\ref{lemma-lqf-f-shriek-separated-colimits}),
+% P08-E119: source misspells quasi-isomorphism; Korean uses the standard term.
+$g_!g'_!\mathcal{I}^\bullet \to \mathcal{K}^\bullet$가 준동형임을
+얻는다. 따라서 표준 사상
+$$
+h_!h'_!f''_*\mathcal{I}^\bullet \to f_*\mathcal{K}^\bullet
+$$
+은 준동형이며 유도범주에서 바깥 직사각형의 사상을 나타낸다.
+이 사상이 다른 두 사상의 합성임은 분명하므로 증명이 끝난다.
+\end{proof}
+
+\begin{remark}
+\label{remark-going-around}
+수직 화살표들이 고유이고 수평 화살표들이 분리이며 국소 준유한인
+스킴의 가환 그림
+$$
+\xymatrix{
+X'' \ar[r]_{k'} \ar[d]_{f''} & X' \ar[r]_k \ar[d]_{f'} & X \ar[d]^f \\
+Y'' \ar[r]^{l'} \ar[d]_{g''} & Y' \ar[r]^l \ar[d]_{g'} & Y \ar[d]^g \\
+Z'' \ar[r]^{m'} & Z' \ar[r]^m & Z
+}
+$$
+을 생각하자. 그림의 정사각형들에 다음과 같이 $A$, $B$, $C$, $D$라는
+이름을 붙이자.
+$$
+\begin{matrix}
+A & B \\
+C & D
+\end{matrix}
+$$
+정사각형들에 대한 Lemma \ref{lemma-shriek-proper-and-open}의 사상들은
+다음과 같다(여기서 $Rf_* = f_*$ 등을 사용한다).
+$$
+\begin{matrix}
+\gamma_A : l'_! \circ f''_* \to f'_* \circ k'_! &
+\gamma_B : l_! \circ f'_* \to f_* \circ k_! \\
+\gamma_C : m'_! \circ g''_* \to g'_* \circ l'_! &
+\gamma_D : m_! \circ g'_* \to g_* \circ l_!
+\end{matrix}
+$$
+$2 \times 1$ 및 $1 \times 2$ 직사각형들에 대해서는 네 사상을 더
+얻는다.
+% P08-E120: frozen source ends gamma_{A+B} with (k circ k')_* rather than lower shriek; preserved literally.
+$$
+\begin{matrix}
+\gamma_{A + B} :
+(l \circ l')_! \circ f''_* \to f_* \circ (k \circ k')_*  \\
+\gamma_{C + D} :
+(m \circ m')_! \circ g''_* \to g_* \circ (l \circ l')_! \\
+\gamma_{A + C} :
+m'_! \circ (g'' \circ f'')_* \to (g' \circ f')_* \circ k'_! \\
+\gamma_{B + D} :
+m_! \circ (g' \circ f')_* \to (g \circ f)_* \circ k_!
+\end{matrix}
+$$
+Lemma \ref{lemma-shriek-proper-and-open-compose-horizontal}에 의해
+$$
+\gamma_{A + B} = \gamma_B \circ \gamma_A, \quad
+\gamma_{C + D} = \gamma_D \circ \gamma_C
+$$
+이고, Lemma \ref{lemma-shriek-proper-and-open-compose}에 의해
+$$
+\gamma_{A + C} = \gamma_A \circ \gamma_C, \quad
+\gamma_{B + D} = \gamma_B \circ \gamma_D
+$$
+이다. 더 정확하게는 Categories, Section
+\ref{categories-section-formal-cat-cat}의 표기를 사용하여
+$\gamma_{A + B} = (\gamma_B \star \text{id}_{k'_!}) \circ
+(\text{id}_{l_!} \star \gamma_A)$라고 써야 하며, 나머지도 마찬가지이다.
+이 모든 것을 종합하면 선험적으로 두 변환
+$$
+m_! \circ m'_! \circ g''_* \circ f''_*
+\longrightarrow
+g_* \circ f_* \circ k_! \circ k'_!
+$$
+을 얻는다. 즉,
+$$
+\gamma_B \circ \gamma_D \circ \gamma_A \circ \gamma_C =
+\gamma_{B + D} \circ \gamma_{A + C}
+$$
+및
+$$
+\gamma_B \circ \gamma_A \circ \gamma_D \circ \gamma_C =
+\gamma_{A + B} \circ \gamma_{C + D}
+$$
+이다. 이 주석의 요점은 이 변환들이 서로 같다는 점을 지적하는 것이다.
+실제로 이를 보기 위해서는 그림
+$$
+\xymatrix{
+m_! \circ g'_* \circ l'_! \circ f''_* \ar[r]_{\gamma_D} \ar[d]_{\gamma_A} &
+g_* \circ l_! \circ l'_! \circ f''_* \ar[d]^{\gamma_A} \\
+m_! \circ g'_* \circ f'_* \circ k'_! \ar[r]^{\gamma_D} &
+g_* \circ l_! \circ f'_* \circ k'_!
+}
+$$
+이 가환함을 보이면 충분하다. 이는 정사각형 $A$와 $D$가 단 하나의
+점에서만 만나기 때문에 참이다. 더 정확하게는 Categories, Lemma
+\ref{categories-lemma-properties-2-cat-cats}, 또는 더 간단히
+Categories, Definition
+\ref{categories-definition-horizontal-composition} 앞의 논의에 의해
+참이다.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-shriek-proper-and-open-base-change}
+$b : Y_1 \to Y$를 스킴의 사상이라 하자. 스킴의 가환 그림
+$$
+\vcenter{
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+}
+\quad\text{and let}\quad
+\vcenter{
+\xymatrix{
+X'_1 \ar[r]_{g'_1} \ar[d]_{f'_1} & X_1 \ar[d]^{f_1} \\
+Y'_1 \ar[r]^{g_1} & Y_1
+}
+}
+$$
+을 생각하고, 두 번째 그림이 첫 번째 그림을 $b$로 기저변환한 것이라
+하자. $f$와 $f'$가 고유이고 $g$와 $g'$가 분리이며 국소 준유한이라고
+가정하자. 환 $\Lambda$와 $D(X'_\etale, \Lambda)$의 $K$에 대해
+$D(Y_{1, \etale}, \Lambda)$ 안에 가환 그림
+$$
+\xymatrix{
+b^{-1}g_!Rf'_*K \ar[d] \ar[r] &
+g_{1, !}(b')^{-1}Rf'_*K \ar[r] &
+g_{1, !}Rf'_{1, *}(a')^{-1}K \ar[d] \\
+b^{-1}Rf_*g'_!K \ar[r] &
+Rf_{1, *}a^{-1}g'_!K \ar[r] &
+Rf_{1, *}g'_{1, !}(a')^{-1}K
+}
+$$
+이 존재한다. 여기서 $a : X_1 \to X$, $a' : X'_1 \to X'$,
+$b' : Y'_1 \to Y'$는 사영이고, 수직 사상들은 Lemma
+\ref{lemma-shriek-proper-and-open}의 화살표들이며, 수평 화살표들은
+기저변환 사상(\'Etale Cohomology, Section
+\ref{etale-cohomology-section-base-change-preliminaries}에서 온 것)과
+Lemma \ref{lemma-base-change-f-shriek-separated}의 기저변환 사상이다.
+\end{lemma}
+
+\begin{proof}
+$K$를 $X'_\etale$ 위의 $\Lambda$-가군의 K-단사 복합체
+$\mathcal{J}^\bullet$로 나타내자. $X_\etale$ 위의 $\Lambda$-가군의
+K-단사 복합체 $\mathcal{I}^\bullet$로 가는 준동형
+$g'_!\mathcal{J}^\bullet \to \mathcal{I}^\bullet$을 택하자.
+Lemma \ref{lemma-shriek-proper-and-open}의 증명은 사상
+$g_!Rf'_*K \to Rf_*g'_!K$를
+$$
+g_!f'_*\mathcal{J}^\bullet =
+g_!f'_!\mathcal{J}^\bullet =
+f_!g'_!\mathcal{J}^\bullet =
+f_*g'_!\mathcal{J}^\bullet \to
+f_*\mathcal{I}^\bullet
+$$
+로 구성한다. $X'_{1, \etale}$ 위의 $\Lambda$-가군의 K-단사
+복합체 $\mathcal{J}_1^\bullet$로 가는 준동형
+$(a')^{-1}\mathcal{J}^\bullet \to \mathcal{J}_1^\bullet$을 택하자.
+그러면 복합체의 그림
+$$
+\xymatrix{
+g'_{1, !}\mathcal{J}_1^\bullet \ar[rr] & &
+\mathcal{I}_1^\bullet \\
+g'_{1, !}(a')^{-1}\mathcal{J}^\bullet \ar[u] \ar@{=}[r] &
+a^{-1}g'_!\mathcal{J}^\bullet \ar[r] &
+a^{-1}\mathcal{I}^\bullet \ar[u]
+}
+$$
+을 택할 수 있다. 이 그림은 호모토피까지 가환하고 모든 화살표는
+준동형이며, 등식은 Lemma \ref{lemma-proper-f-shriek}에서 오고,
+$\mathcal{I}_1^\bullet$은 $X_{1, \etale}$ 위의 $\Lambda$-가군 층의
+K-단사 복합체이다. 사상
+$g_{1, !}Rf'_{1, *}(a')^{-1}K \to
+Rf_{1, *}g'_{1, !}(a')^{-1}K$는
+$$
+g_{1, !}f'_{1, *}\mathcal{J}_1^\bullet =
+g_{1, !}f'_{1, !}\mathcal{J}_1^\bullet =
+f_{1, !}g'_{1, !}\mathcal{J}_1^\bullet =
+f_{1, *}g'_{1, !}\mathcal{J}_1^\bullet \to
+f_{1, *}\mathcal{I}_1^\bullet
+$$
+로 주어진다. 두 화살표에서 $3$개의 등호에 걸친 동일시들은 당김사상과
+양립한다. 즉, 아벨 층의 복합체의 그림
+$$
+\xymatrix{
+b^{-1}g_!f'_*\mathcal{J}^\bullet \ar@{=}[d] \ar[r] &
+g_{1, !}(b')^{-1}f'_*\mathcal{J}^\bullet \ar[r] &
+g_{1, !}f'_{1, *}(a')^{-1}\mathcal{J}^\bullet \ar@{=}[d] \\
+b^{-1}f_*g'_!\mathcal{J}^\bullet \ar[r] &
+f_{1, *}a^{-1}g'_!\mathcal{J}^\bullet \ar[r] &
+f_{1, *}g'_{1, !}(a')^{-1}\mathcal{J}^\bullet
+}
+$$
+은 가환한다. 이를 보이기 위해서는 $g_!, g_{1, !}, g'_!, g'_{1, !}$를
+$g_*, g_{1, *}, g'_*, g'_{1, *}$로 바꾼 그림이
+가환함을 보이면 충분하다(슈리크 함자들은 $*$ 함자들의 부분함자로
+정의되고 기저변환 사상들은 이와 양립하도록 정의되기 때문이다.
+Lemma \ref{lemma-base-change-f-shriek-separated}의 증명을 보라).
+이 새로운 그림의 가환성은 당김사상이 그림의 수평 및 수직 적층과
+양립함에서 따른다. Sites, Remarks
+\ref{sites-remark-compose-base-change}와
+\ref{sites-remark-compose-base-change-horizontal}을 보라. 따라서 그림의
+어느 방향으로 돌아가도 $f \circ g' = g \circ f'$를 $b$로
+기저변환한 것에 대한 당김사상을 얻는다. 물론 그림
+$$
+\xymatrix{
+g_{1, !}f'_{1, *}(a')^{-1}\mathcal{J}^\bullet \ar@{=}[d] \ar[r] &
+g_{1, !}f'_{1, *}\mathcal{J}_1^\bullet \ar@{=}[d] \\
+f_{1, *}g'_{1, !}(a')^{-1}\mathcal{J}^\bullet \ar[r] &
+f_{1, *}g'_{1, !}\mathcal{J}_1^\bullet 
+}
+$$
+은 가환한다. 그러므로 증명을 끝내기 위해서는 그림
+$$
+\xymatrix{
+b^{-1}f_*g'_!\mathcal{J}^\bullet \ar[r] \ar[d] &
+f_{1, *}a^{-1}g'_!\mathcal{J}^\bullet \ar[r] \ar[d] &
+f_{1, *}g'_{1, !}(a')^{-1}\mathcal{J}^\bullet \ar[r] &
+f_{1, *}g'_{1, !}\mathcal{J}_1^\bullet \ar[d] \\
+b^{-1}f_*\mathcal{I}^\bullet \ar[r] &
+f_{1, *}a^{-1}\mathcal{I}^\bullet \ar[rr] & &
+f_{1, *}\mathcal{I}_1^\bullet
+}
+$$
+이 유도범주에서 가환함을 보이면 충분하며, 이는 앞에서 택한 사상들에
+의해 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-shriek-lqf-and-proper}
+$f$와 $g$가 국소 준유한이고 $h$가 고유인 스킴의 가환 그림
+$$
+\xymatrix{
+X \ar[r]_f \ar[rd]_g & Y \ar[d]^h \\
+& Z
+}
+$$
+을 생각하자. $\Lambda$를 환이라 하자.
+% P08-E121: source misspells Functorially; Korean states the intended functorial dependence.
+$K \in D(X_\etale, \Lambda)$에 대해 함자적으로
+$D(Z_\etale, \Lambda)$ 안의 표준 사상
+$$
+g_!K \longrightarrow Rh_*(f_!K)
+$$
+이 존재한다. (a) $K$가 아래로 유계이고 꼬임 코호몰로지 층을 갖거나,
+(b) $\Lambda$가 꼬임 환이면 이 사상은 동형이다.
+\end{lemma}
+
+\begin{proof}
+$f$와 $g$가 분리이면 이는 Lemma
+\ref{lemma-shriek-proper-and-open}의 특수한 경우이다. 우리는 주로
+$f$와 $g$가 분리인 경우를 사용할 것이므로 독자에게 일반적인 경우의
+증명을 건너뛰기를 권한다.
+
+\medskip\noindent
+$K$를 $X_\etale$ 위의 $\Lambda$-가군 층의 복합체
+$\mathcal{K}^\bullet$로 나타내자. $Y_\etale$ 위의 $\Lambda$-가군 층의
+K-단사 복합체 $\mathcal{I}^\bullet$ 안으로 가는 준동형
+$f_!\mathcal{K}^\bullet \to \mathcal{I}^\bullet$을 택하자. 사상
+$$
+g_!\mathcal{K}^\bullet =
+h_!f_!\mathcal{K}^\bullet =
+h_*f_!\mathcal{K}^\bullet
+\longrightarrow
+h_*\mathcal{I}^\bullet
+$$
+을 생각하자. 여기서 등식들은 Lemmas
+\ref{lemma-lqf-separated-shriek-composition}와
+\ref{lemma-proper-f-shriek}이다. 이 복합체의 사상은 보조정리의 명제에
+나오는 사상 $g_!K \to Rh_*(f_!K)$를 결정한다.
+
+\medskip\noindent
+$\Lambda$가 꼬임이라고, 즉 (b)의 경우라고 가정하자. 이 사상이
+동형인지 확인하기 위해 $Z$ 위에서 국소적으로 작업할 수 있다. 따라서
+$h$의 올들의 차원이 유계라고 가정할 수 있다. Morphisms, Lemma
+\ref{morphisms-lemma-morphism-finite-type-bounded-dimension}을 보라.
+그러면 $Rh_*$가 유한 코호몰로지 차원을 가짐을 알 수 있다.
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomological-dimension-proper}을 보라.
+따라서 Derived Categories, Lemma
+\ref{derived-lemma-unbounded-right-derived}에 의해, $X_\etale$ 위의
+임의의 $\Lambda$-가군 층 $\mathcal{F}$와 $q > 0$에 대해
+$R^qh_*(f_!\mathcal{F}) = 0$임을 보이면
+$h_*f_!\mathcal{K}^\bullet \to h_*\mathcal{I}^\bullet$이 준동형이다.
+
+\medskip\noindent
+$\mathcal{G} = f_!\mathcal{F}$는 $Y$ 위의 $\Lambda$-가군 층이며,
+그 줄기들은 $\kappa(y)/\kappa(h(y))$가 유한 확대인 점 $y \in Y$에서만
+영이 아님을 관찰하자. 이는 Lemma
+\ref{lemma-lqf-f-shriek-stalk}의 $f_!\mathcal{F}$의 줄기 기술과
+$f$와 $g$가 모두 국소 준유한이라는 사실에서 따른다. 따라서 고유
+기저변환 정리(\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change-stalk})에 의해
+$H^q(Y_{\overline{z}}, \mathcal{H}) = 0$임을 보이면 충분하다.
+여기서 $\mathcal{H}$는 $\kappa(\overline{z})$ 위의 고유 스킴
+$Y_{\overline{z}}$ 위의 층이고, 그 지지집합은 닫힌 점들의 집합에
+포함된다.
+% P08-E122: source conclusion omits its predicate; Korean supplies the necessary inference.
+따라서 필요한 소멸은 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-supported-in-closed-points}에서 따른다.
+
+\medskip\noindent
+(a)는 Lemma \ref{lemma-shriek-proper-and-open}의 증명에서 사용한 것과
+정확히 같은 논증으로 (b)에서 따른다(Lemma
+\ref{lemma-lqf-f-shriek-stalk}을 사용하며, 이는 Lemma
+\ref{lemma-lqf-f-shriek-separated-colimits}을 대신한다).
+\end{proof}
+
+
+\section{콤팩트화를 통한 유도 아래쪽 슈리크}
+\label{section-derived-lower-shriek-compactification}
+
+\noindent
+$Y$가 준콤팩트이고 준분리라고 하고,
+$f : X \to Y$를 유한형 분리 스킴 사상이라 하자.
+$Y$ 위의 콤팩트화 $j : X \to \overline{X}$를 택하자.
+More on Flatness, Theorem \ref{flat-theorem-nagata}를 보라.
+$\Lambda$를 환이라 하자. $D(X_\etale, \Lambda)$에서
+대상 $K$가 아래로 유계이고 그 코호몰로지 층들이 꼬임인 것들로 이루어진
+엄밀 충만 포화 삼각 부분범주를
+$D^+_{tors}(X_\etale, \Lambda)$로 나타내자. 우리는 함자
+$$
+Rf_! = R\overline{f}_* \circ j_! :
+D^+_{tors}(X_\etale, \Lambda)
+\longrightarrow
+D^+_{tors}(Y_\etale, \Lambda)
+$$
+를 고찰할 것이다. 여기서
+$\overline{f} : \overline{X} \to Y$는 구조 사상이다.
+이 정의는 타당하다. 실제로 Remark
+\ref{remark-lqf-shriek-derived-torsion}에 의해 함자 $j_!$는
+$D^+_{tors}(X_\etale, \Lambda)$를
+$D^+_{tors}(\overline{X}_\etale, \Lambda)$ 안으로 보내고,
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-torsion-direct-image}에 의해
+$R\overline{f}_*$는
+$D^+_{tors}(\overline{X}_\etale, \Lambda)$를
+$D^+_{tors}(Y_\etale, \Lambda)$ 안으로 보낸다.
+$\Lambda$가 꼬임 환이면 다음과 같이 정의한다.
+$$
+Rf_! = R\overline{f}_* \circ j_! :
+D(X_\etale, \Lambda)
+\longrightarrow
+D(Y_\etale, \Lambda)
+$$
+필요한 보조정리는 다음과 같다.
+
+\begin{lemma}
+\label{lemma-shriek-well-defined}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들 사이의 유한형 분리
+사상이라 하자. 위에서 구성한 함자 $Rf_!$는 표준 동형을 제외하면
+콤팩트화의 선택과 무관하다.
+\end{lemma}
+
+\begin{proof}
+$\Lambda$가 꼬임 환일 때의 함자
+$Rf_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$에 대하여
+이를 증명하겠다. 함자
+$Rf_! : D^+_{tors}(X_\etale, \Lambda) \to D^+_{tors}(Y_\etale, \Lambda)$의
+경우도 정확히 같은 방식으로 증명된다.
+
+\medskip\noindent
+$Y$ 위에서 $X$를 콤팩트화하는 범주를 고찰하자. More on Flatness,
+Theorem \ref{flat-theorem-nagata}와 Lemmas
+\ref{flat-lemma-compactifications-cofiltered},
+\ref{flat-lemma-compactifyable}에 의해 이 범주는 공여과이다.
+콤팩트화
+$$
+j : X \to \overline{X},\quad \overline{f} : \overline{X} \to Y
+$$
+를 하나 택할 때마다 위의 구성은 함자
+$R\overline{f}_* \circ j_! :
+D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$를 대응시킨다.
+이를 조금 더 명시적으로 쓰자. $X_\etale$ 위의 $\Lambda$-가군 층들의
+복합체 $\mathcal{K}^\bullet$이 주어졌을 때,
+$\overline{X}_\etale$ 위의 $\Lambda$-가군 층들의 K-단사 복합체로 가는
+준동형
+$j_!\mathcal{K}^\bullet \to \mathcal{I}^\bullet$을 택한다.
+그러면 우리의 함자는 $\mathcal{K}^\bullet$을
+$\overline{f}_*\mathcal{I}^\bullet$로 보낸다.
+
+\medskip\noindent
+$Y$ 위의 콤팩트화 $j_i : X \to \overline{X}_i$들 사이의 사상
+$g : \overline{X}_1 \to \overline{X}_2$가 주어졌다고 하자.
+그러면 첫 번째 등식에서 Lemma
+\ref{lemma-shriek-lqf-and-proper}을 사용하여 다음 동형을 얻는다.
+$$
+R\overline{f}_{2, *} \circ j_{2, !} =
+R\overline{f}_{2, *} \circ Rg_* \circ j_{1, !} =
+R\overline{f}_{1, *} \circ j_{1, !}
+$$
+
+\medskip\noindent
+증명을 끝내자. $Y$ 위에서 $X$를 콤팩트화하는 범주는 공여과이므로,
+$Y$ 위의 $X$의 콤팩트화 사상들의 합성이 함자 동형들의 합성으로
+옮겨짐을 보이면 충분하다.\footnote{즉, $\alpha, \beta : F \to G$가
+함자들의 사상이고 $\gamma : G \to H$가
+$\gamma \circ \alpha = \gamma \circ \beta$를 만족하는 함자들의
+동형이면 $\alpha = \beta$라고 결론 내릴 수 있다.}
+이를 위해 $j_3 : X \to \overline{X}_3$가 세 번째 콤팩트화이고
+$h : \overline{X}_2 \to \overline{X}_3$가 콤팩트화들의 사상이라고 하자.
+그러면 합성
+$$
+R\overline{f}_{3, *} \circ j_{3, !} =
+R\overline{f}_{3, *} \circ Rh_* \circ j_{2, !} =
+R\overline{f}_{2, *} \circ j_{2, !} =
+R\overline{f}_{2, *} \circ Rg_* \circ j_{1, !} =
+R\overline{f}_{1, *} \circ j_{1, !}
+$$
+이 단지 $j_3$, $g \circ h$, $j_1$을 사용하여 구성한 함자들의 동형과
+같음을 보여야 한다.
+% P08-E123: frozen source writes g \circ h here although the typed composite below is h \circ g.
+계산하면 Lemma \ref{lemma-shriek-lqf-and-proper}의 사상들의 합성
+$$
+j_{3, !} \to Rh_* \circ j_{2, !} \to Rh_* \circ Rg_* \circ j_{1, !}
+$$
+이 식별 $R(h \circ g)_* = Rh_* \circ Rg_*$ 아래에서 대응하는 사상
+$j_{3, !} \to R(h \circ g)_* \circ j_{1, !}$과 일치함을 보이는 것으로
+충분하다. Lemma \ref{lemma-shriek-lqf-and-proper}의 사상은
+$j_1$과 $j_2$가 분리이므로 Lemma
+\ref{lemma-shriek-proper-and-open}의 사상의 특수한 경우이다.
+따라서 이는 Lemma
+\ref{lemma-shriek-proper-and-open-compose}에서 곧바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-shriek-composition}
+$f : X \to Y$와 $g : Y \to Z$를 준콤팩트이고 준분리인 스킴들 사이의
+유한형 분리 사상이라 하자. 그러면 표준 동형
+$Rg_! \circ Rf_! \to R(g \circ f)_!$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$Z$ 위의 $Y$의 콤팩트화 $i : Y \to \overline{Y}$를 택하자.
+$\overline{Y}$ 위의 $X$의 콤팩트화 $X \to \overline{X}$를 택하자.
+여기에는 More on Flatness, Theorem \ref{flat-theorem-nagata}와
+Lemma \ref{flat-lemma-compactifyable}를 각각 두 번 사용한다.
+$U$를 $\overline{X}$ 안에서 $Y$의 역상이라 하자. 그러면 다음 가환
+그림을 얻는다.
+$$
+\xymatrix{
+X \ar[r]_j \ar[d]_f &
+U \ar[dl]^{f'} \ar[r]_{j'} &
+\overline{X} \ar[dl]^{\overline{f}} \\
+Y \ar[r]_i \ar[d]_g &
+\overline{Y} \ar[dl]^{\overline{g}} \\
+Z
+}
+$$
+이제
+\begin{align*}
+R(g \circ f)_!
+& =
+R(\overline{g} \circ \overline{f})_* \circ (j' \circ j)_! \\
+& =
+R\overline{g}_* \circ R\overline{f}_* \circ j'_! \circ j_! \\
+& =
+R\overline{g}_* \circ i_! \circ Rf'_* \circ j_! \\
+& =
+Rg_! \circ Rf_!
+\end{align*}
+이다. 첫 번째 등식은 $R(g \circ f)_!$의 정의이다.
+두 번째 등식에는 식별
+$R(\overline{g} \circ \overline{f})_* = R\overline{g}_* \circ R\overline{f}_*$와
+Lemma \ref{lemma-f-shriek-composition}의
+$(j' \circ j)_! = j'_! \circ j_!$를 사용한다.
+세 번째 등식에 사용한 식별
+$i_! \circ Rf'_* \to R\overline{f}_* \circ j_!$는 Lemma
+\ref{lemma-shriek-proper-and-open}이다.
+마지막 네 번째 등식은 $Rg_!$와 $Rf_!$의 정의이다.
+증명을 끝내기 위해 이 동형이 택한 선택들과 무관함을 보이겠다.
+
+
+\medskip\noindent
+두 그림
+$$
+\vcenter{
+\xymatrix{
+X \ar[r]_{j_1} \ar[d] &
+U_1 \ar[dl]^{f_1} \ar[r]_{j'_1} &
+\overline{X}_1 \ar[dl]^{\overline{f}_1} \\
+Y \ar[r]_{i_1} \ar[d] &
+\overline{Y}_1 \ar[dl]^{\overline{g}_1} \\
+Z
+}
+}
+\quad\text{그리고}\quad
+\vcenter{
+\xymatrix{
+X \ar[r]_{j_2} \ar[d] &
+U_2 \ar[dl]^{f_2} \ar[r]_{j'_2} &
+\overline{X}_2 \ar[dl]^{\overline{f}_2} \\
+Y \ar[r]_{i_2} \ar[d] &
+\overline{Y}_2 \ar[dl]^{\overline{g}_2} \\
+Z
+}
+}
+$$
+가 주어졌다고 하자. 먼저 $Z$ 위의 $Y$의 콤팩트화 가운데
+$\overline{Y}_1$과 $\overline{Y}_2$를 모두 지배하는
+$i : Y \to \overline{Y}$를 택할 수 있다. More on Flatness, Lemma
+\ref{flat-lemma-compactifications-cofiltered}를 보라.
+More on Flatness, Lemma
+\ref{flat-lemma-right-multiplicative-system}과 Categories, Lemmas
+\ref{categories-lemma-morphisms-right-localization},
+\ref{categories-lemma-equality-morphisms-right-localization}에 의해
+$\overline{Y}$ 위의 $X$의 콤팩트화 $X \to \overline{X}$를 다음과
+같이 택할 수 있다. 사상
+$\overline{X} \to \overline{X}_1$과
+$\overline{X} \to \overline{X}_2$가 존재하고, 합성
+$\overline{X} \to \overline{Y} \to \overline{Y}_1$은 합성
+$\overline{X} \to \overline{X}_1 \to \overline{Y}_1$과 같으며,
+합성 $\overline{X} \to \overline{Y} \to \overline{Y}_2$는 합성
+$\overline{X} \to \overline{X}_2 \to \overline{Y}_2$와 같다.
+따라서 다음과 같은 가환 그림이 있을 때 우리의 그림들이 정하는
+사상들을 비교하면 충분함을 알 수 있다.
+$$
+\xymatrix{
+X \ar[rr]_{j_1} \ar@{=}[d] & &
+U_1 \ar[d]^{h'} \ar[ddll] \ar[rr]_{j'_1} & &
+\overline{X}_1 \ar[d]^h \ar[ddll] \\
+X \ar'[r][rr]^-{j_2} \ar[d] & &
+U_2 \ar'[dl][ddll] \ar'[r][rr]^-{j'_2} & &
+\overline{X}_2 \ar[ddll] \\
+Y \ar[rr]^{i_1} \ar@{=}[d] & & \overline{Y}_1 \ar[d]^k \\
+Y \ar[rr]^{i_2} \ar[d] & & \overline{Y}_2 \ar[dll] \\
+Z
+}
+$$
+% P08-E124: frozen square E and gamma_E use ill-typed j_2 instead of the composite.
+각 정사각형
+$$
+\xymatrix{
+X \ar[r]_{j_1} \ar[d]_{\text{id}} \ar@{}[dr]|A &
+U_1 \ar[d]^{h'} \\
+X \ar[r]^{j_2} &
+U_2
+}
+\quad
+\xymatrix{
+U_2 \ar[r]_{j_2'} \ar[d]_{f_2} \ar@{}[dr]|B &
+\overline{X}_2 \ar[d]^{\overline{f}_2} \\
+Y \ar[r]^{i_2} &
+\overline{Y}_2
+}
+\quad
+\xymatrix{
+U_1 \ar[r]_{j_1'} \ar[d]_{f_1} \ar@{}[dr]|C &
+\overline{X}_1 \ar[d]^{\overline{f}_1} \\
+Y \ar[r]^{i_1} &
+\overline{Y}_1
+}
+\quad
+\xymatrix{
+Y \ar[r]_{i_1} \ar[d]_{\text{id}} \ar@{}[dr]|D &
+\overline{Y}_1 \ar[d]^k \\
+Y \ar[r]^{i_2} &
+\overline{Y}_2
+}
+\quad
+\xymatrix{
+X \ar[r]_{j_1' \circ j_1} \ar[d]_{\text{id}} \ar@{}[dr]|E &
+\overline{X}_1 \ar[d]^h \\
+X \ar[r]^{j_2} &
+\overline{X}_2
+}
+$$
+은 Lemma \ref{lemma-shriek-proper-and-open}의 사상을 적용하여
+(왼쪽 세로 화살표가 항등사상일 때에는 Lemma
+\ref{lemma-shriek-lqf-and-proper}의 사상과 같다)
+각각 다음 동형을 준다.
+\begin{align*}
+\gamma_A & :
+j_{2, !} \to Rh'_* \circ j_{1, !}  \\
+\gamma_B & :
+i_{2, !} \circ Rf_{2, *} \to R\overline{f}_{2, *} \circ j'_{2, !} \\
+\gamma_C & :
+i_{1, !} \circ Rf_{1, *} \to R\overline{f}_{1, *} \circ j'_{1, !} \\
+\gamma_D & :
+i_{2, !} \to Rk_* \circ i_{1, !} \\
+\gamma_E & :
+j_{2, !} \to Rh_* \circ (j'_1 \circ j_1)_!
+\end{align*}
+다음과 같이 쓰자.
+\begin{align*}
+F_1 & = Rf_{1, *} \circ j_{1, !} \\
+F_2 & = Rf_{2, *} \circ j_{2, !} \\
+G_1 & = R\overline{g}_{1, *} \circ i_{1, !} \\
+G_2 & = R\overline{g}_{2, *} \circ i_{2, !} \\
+C_1 & = R(\overline{g}_1 \circ \overline{f}_1)_* \circ (j'_1 \circ j_1)_! \\
+C_2 & = R(\overline{g}_2 \circ \overline{f}_2)_* \circ (j'_2 \circ j_2)_!
+\end{align*}
+증명의 첫 문단과 Lemma \ref{lemma-shriek-well-defined}에 주어진 구성은
+다음을 사용한다.
+\begin{enumerate}
+\item $G_1 \circ F_1 \to C_1$에는 $\gamma_C$,
+\item $G_2 \circ F_2 \to C_2 $에는 $\gamma_B$,
+\item $F_2 \to F_1$에는 $\gamma_A$,
+\item $G_2 \to G_1$에는 $\gamma_D$, 그리고
+\item $C_2 \to C_1$에는 $\gamma_E$.
+\end{enumerate}
+따라서 그림
+$$
+\xymatrix{
+C_2 \ar[rr]_{\gamma_E} & &
+C_1 \\
+G_2 \circ F_2 \ar[rr]^{\gamma_D \circ \gamma_A} \ar[u]^{\gamma_B} & &
+G_1 \circ F_1 \ar[u]_{\gamma_C}
+}
+$$
+이 가환임을 보여야 한다.
+Lemmas \ref{lemma-shriek-proper-and-open-compose},
+\ref{lemma-shriek-proper-and-open-compose-horizontal}을 사용하되,
+Remark \ref{remark-going-around}에서와 같은 표기법의 남용을
+사용하겠다(특히 항등 변환과의 $\star$ 곱은 표기에서 생략한다).
+다음 정사각형에 대하여 $\gamma_E = \gamma_F \circ \gamma_A$로
+쓸 수 있다.
+$$
+\xymatrix{
+U_1 \ar[r]_{j'_1} \ar[d]_{h'} \ar@{}[rd]|F &
+\overline{X}_1 \ar[d]^h \\
+U_2 \ar[r]^{j'_2} &
+\overline{X}_2
+}
+$$
+따라서
+$$
+\gamma_E \circ \gamma_B = \gamma_F \circ \gamma_A  \circ \gamma_B
+= \gamma_F \circ \gamma_B \circ \gamma_A
+$$
+이다. 마지막 등식은 두 정사각형 $A$와 $B$가 한 점에서만 만나기
+때문이다(Remark \ref{remark-going-around}의 마지막 논증과 비슷하다).
+따라서 $\gamma_C \circ \gamma_D = \gamma_F \circ \gamma_B$임을
+증명하면 충분하다. 이 둘은 모두 정사각형
+$$
+\xymatrix{
+U_1 \ar[r] \ar[d] & \overline{X}_1 \ar[d] \\
+Y \ar[r] & \overline{Y}_2
+}
+$$
+에 대한 사상과 같으므로 결론이 따른다.
+\end{proof}
+
+
+\begin{lemma}
+\label{lemma-pseudo-functor}
+$f : X \to Y$, $g : Y \to Z$, $h : Z \to T$를 준콤팩트이고
+준분리인 스킴들 사이의 유한형 분리 사상들이라 하자.
+그러면 Lemma \ref{lemma-shriek-composition}의 동형들로 이루어진 그림
+$$
+\xymatrix{
+Rh_! \circ Rg_! \circ Rf_! \ar[r]_{\gamma_C} \ar[d]^{\gamma_A} &
+R(h \circ g)_! \circ Rf_! \ar[d]_{\gamma_{A + B}} \\
+Rh_! \circ R(g \circ f)_! \ar[r]^{\gamma_{B + C}} &
+R(h \circ g \circ f)_!
+}
+$$
+은 가환이다($\gamma$들의 뜻은 증명을 보라).
+\end{lemma}
+
+\begin{proof}
+이를 위해 먼저 $T$ 위의 $Z$의 콤팩트화 $\overline{Z}$를 택하고,
+그다음 $\overline{Z}$ 위의 $Y$의 콤팩트화 $\overline{Y}$를 택한 뒤,
+$\overline{Y}$ 위의 $X$의 콤팩트화 $\overline{X}$를 택한다.
+여기에는 More on Flatness, Theorem \ref{flat-theorem-nagata}와
+Lemma \ref{flat-lemma-compactifyable}를 사용한다.
+$W \subset \overline{Y}$를
+$\overline{Y} \to \overline{Z}$에 의한 $Z$의 역상이라 하고,
+$U \subset V \subset \overline{X}$를
+$\overline{X} \to \overline{Y}$에 의한 $Y \subset W$의 역상들이라
+하자. 그러면 다음 그림을 얻는다.
+$$
+\xymatrix{
+X \ar[d]_f \ar[r] & U \ar[r] \ar[d] \ar@{}[dr]|A &
+V \ar[d] \ar[r] \ar@{}[rd]|B & \overline{X} \ar[d] \\
+Y \ar[d]_g \ar[r] & Y \ar[r] \ar[d] & W \ar[r] \ar[d] \ar@{}[rd]|C &
+\overline{Y} \ar[d] \\
+Z \ar[d]_h \ar[r] & Z \ar[d] \ar[r] & Z \ar[d] \ar[r] & \overline{Z} \ar[d] \\
+T \ar[r] & T \ar[r] & T \ar[r] & T
+}
+$$
+많은 표기법을 새로 도입하지 않고 Lemma
+\ref{lemma-shriek-composition}의 증명에서와 정확히 같이 논증하면,
+첫 번째 표시 그림의 사상들이 그 보조정리의 진술에 있는 그림에
+표시된 대로 직사각형 $A + B$, $B + C$, $A$, $C$에 대한 Lemma
+\ref{lemma-shriek-proper-and-open}의 사상들을 사용함을 알 수 있다.
+Lemmas \ref{lemma-shriek-proper-and-open-compose},
+\ref{lemma-shriek-proper-and-open-compose-horizontal}에 의해
+$\gamma_{A + B} = \gamma_B \circ \gamma_A$이고
+$\gamma_{B + C} = \gamma_B \circ \gamma_C$이므로,
+$\gamma_A \circ \gamma_C = \gamma_C \circ \gamma_A$이면 원하는
+등식이 성립한다. 이는 두 정사각형 $A$와 $C$가 한 점에서만 만나기
+때문에 참이다(Remark \ref{remark-going-around}의 마지막 논증과
+비슷하다).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-shriek}
+$f$가 유한형 분리인 준콤팩트 준분리 스킴들의 카르테시안 정사각형
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+을 고찰하자. 그러면 표준 동형
+$$
+g^{-1} \circ Rf_! \to Rf'_! \circ (g')^{-1}
+$$
+이 존재한다. 더욱이 이 동형들은 Lemma
+\ref{lemma-shriek-composition}의 동형들과 양립한다.
+\end{lemma}
+
+\begin{proof}
+$Y$ 위의 콤팩트화 $j : X \to \overline{X}$를 택하고,
+구조 사상을 $\overline{f} : \overline{X} \to Y$로 나타내자.
+$j$와 $\overline{f}$의 기저변환을 각각
+$j' : X' \to \overline{X}'$와
+$\overline{f}' : \overline{X}' \to Y'$로 나타내자.
+$Rf_! = R\overline{f}_* \circ j_!$이고
+$Rf'_! = R\overline{f}'_* \circ j'_!$이므로, 다음을 통해 동형을
+구성할 수 있다.
+$$
+g^{-1} \circ R\overline{f}_* \circ j_! \to
+R\overline{f}'_* \circ (\overline{g}')^{-1} \circ j_! \to
+R\overline{f}'_* \circ j'_! \circ (g')^{-1} 
+$$
+여기서 첫 번째 화살표는 고유 기저변환 정리가 주는 동형이다
+(아래로 유계인 꼬임의 경우에는 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change}, $\Lambda$가 꼬임인
+경우에는 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change-mod-n}).
+두 번째 화살표는 Lemma
+\ref{lemma-base-change-f-shriek-separated}의 동형이다.
+
+\medskip\noindent
+증명을 끝내기 위해 두 가지를 보여야 한다. 먼저 이렇게 얻은 함자들의
+동형이 콤팩트화의 선택과 무관함을 보여야 하고, 다음으로 보조정리에서와
+같은 두 기저변환 그림을 세로로 쌓을 때 이 기저변환 동형들이 Lemma
+\ref{lemma-shriek-composition}의 동형들과 양립함을 보여야 한다.
+생략하는 직접적인 논증에 의하면 다음 동형들이 기저변환과 양립함을
+보이면 이 두 주장 모두 따른다.
+\begin{enumerate}
+\item 고유인 $f : X \to Y$와 $g : Y \to Z$에 대한
+$Rg_* \circ Rf_* = R(g \circ f)_*$,
+\item 분리이고 준유한인 $f : X \to Y$와 $g : Y \to Z$에 대한
+$g_! \circ f_! = (g \circ f)_!$, 그리고
+\item 고유인 $f : X \to Y$와 $f' : X' \to Y'$, 그리고
+$f \circ g' = g \circ f'$를 만족하며 분리이고 준유한인
+$g : Y' \to Y$와 $g' : X' \to X$에 대한
+$g_! \circ Rf'_* = Rf_* \circ g'_!$.
+\end{enumerate}
+(1)은 Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-compose-base-change}에 의해,
+(2)는 Remark \ref{remark-f-shriek-base-change-composition}에 의해,
+(3)은 Lemma \ref{lemma-shriek-proper-and-open-base-change}에 의해
+성립한다.
+\end{proof}
+
+\begin{remark}
+\label{remark-shriek-to-star}
+$f : X \to Y$를 $Y$가 준콤팩트이고 준분리인 유한형 분리 스킴
+사상이라 하자. 아래에서
+$$
+Rf_!K \longrightarrow Rf_*K
+$$
+를 구성하겠다. 이 사상은
+$D^+_{tors}(X_\etale, \Lambda)$의 $K$에 대하여 함자적이며,
+$\Lambda$가 꼬임이면 $D(X_\etale, \Lambda)$의 대상들까지 함자적으로
+확장된다. 두 경우 모두 이 함자 변환은 다음과 양립한다.
+\begin{enumerate}
+\item Lemma \ref{lemma-shriek-composition}의 동형
+$Rg_! \circ Rf_! \to R(g \circ f)_!$와 Cohomology on Sites,
+Lemma \ref{sites-cohomology-lemma-derived-pushforward-composition}의
+동형 $Rg_* \circ Rf_* \to R(g \circ f)_*$,
+\item Lemma \ref{lemma-base-change-shriek}의 동형
+$g^{-1} \circ Rf_! \to Rf'_! \circ (g')^{-1}$와
+Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-base-change}의 기저변환 사상.
+\end{enumerate}
+$Y$ 위의 콤팩트화 $j : X \to \overline{X}$를 택하고,
+구조 사상을 $\overline{f} : \overline{X} \to Y$로 나타내자.
+$Rf_! = R\overline{f}_* \circ j_!$이고
+$Rf_* = R\overline{f}_* \circ Rj_*$이므로 함자 변환
+$j_! \to Rj_*$를 구성하면 충분하다. 이를 위해 \'Etale Cohomology,
+Lemma \ref{etale-cohomology-lemma-shriek-into-star-separated-etale}의
+표준 변환 $j_! \to j_*$를 사용한다. 이렇게 얻은 변환이 콤팩트화의
+선택과 무관하다는 증명과 양립성 (1), (2)의 증명은 생략한다.
+\end{remark}
+
+
+\section{유도 아래쪽 슈리크의 성질}
+\label{section-derived-lower-shriek-properties}
+
+\noindent
+유도 아래쪽 슈리크의 몇 가지 성질을 제시한다.
+
+\begin{lemma}
+\label{lemma-derived-lower-shriek-commute-direct-sums}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들 사이의 유한형 분리
+사상이라 하자. $\Lambda$를 환이라 하자.
+\begin{enumerate}
+\item $K_i \in D^+_{tors}(X_\etale, \Lambda)$, $i \in I$를 대상들의
+족이라 하자. 모든 $n < a$와 $i \in I$에 대하여
+$H^n(K_i) = 0$인 $a \in \mathbf{Z}$가 주어졌다고 하자.
+그러면 $Rf_!(\bigoplus_i K_i) =
+\bigoplus_i Rf_!K_i$이다.
+\item $\Lambda$가 꼬임이면 함자
+$Rf_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$는
+직합과 가환한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+구성에 의해 $f$가 열린 몰입인 경우와 $f$가 고유 사상인 경우를
+증명하면 충분하다. 스킴의 임의의 열린 몰입 $j : U \to X$에 대하여
+함자 $j_! : D(U_\etale) \to D(X_\etale)$는 당김
+$j^{-1} : D(X_\etale) \to D(U_\etale)$의 왼쪽 수반이므로 직합과
+가환한다. Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-adjoint-lower-shriek-restrict}를 보라.
+고유인 경우에는 $Rf_! = Rf_*$이고, 아래로 유계인 경우에는
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-direct-sum-bounded-below-pushforward}에서,
+계수환 $\Lambda$가 꼬임 환인 경우에는 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-mod-n-direct-sums}에서 결과를 얻는다.
+% P08-E125: source misspells “bounded below”; Korean uses the standard term.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-derived-lower-shriek-bounded}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들 사이의 유한형 분리
+사상이라 하자. $\Lambda$를 환이라 하자. Section
+\ref{section-derived-lower-shriek-compactification}에서 구성한 함자
+$Rf_!$는 다음 의미에서 유계이다. 어떤 정수 $N$이 존재하여,
+$E \in D^+_{tors}(X_\etale, \Lambda)$에 대하여, 또는
+$\Lambda$가 꼬임일 때 $E \in D(X_\etale, \Lambda)$에 대하여
+다음이 성립한다.
+\begin{enumerate}
+% P08-E126: frozen source omits the closing parenthesis in the first H^i term.
+\item $i \leq a$이면
+$H^i(Rf_!(\tau_{\leq a}E) \to H^i(Rf_!(E))$는 동형이다.
+\item $i \geq b$이면
+$H^i(Rf_!(E)) \to H^i(Rf_!(\tau_{\geq b - N}E))$는 동형이다.
+\item 어떤 $-\infty \leq a \leq b \leq \infty$에 대하여
+$i \not \in [a, b]$이면 $H^i(E) = 0$이라고 하자.
+그러면 $i \not \in [a, b + N]$이면 $H^i(Rf_!(E)) = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Lambda$가 꼬임이라고 가정하고 함자
+$Rf_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$를
+고찰하자. 구성에 의해 $f$가 열린 몰입인 경우와 $f$가 고유 사상인
+경우를 증명하면 충분하다. 스킴의 임의의 열린 몰입
+$j : U \to X$에 대하여 함자
+$j_! : D(U_\etale) \to D(X_\etale)$는 완전하므로 이 경우에는
+$N = 0$으로 진술이 성립한다.
+$f$가 고유이면 $Rf_! = Rf_*$, 즉 오른쪽 유도 함자이다.
+% P08-E127: source sentence omits the predicate; Korean supplies the inference.
+따라서 왼쪽 유계성은 Derived Categories, Lemma
+\ref{derived-lemma-negative-vanishing}에서 따른다.
+더욱이 이 경우
+$f_* : \textit{Mod}(X_\etale, \Lambda)
+\to \textit{Mod}(Y_\etale, \Lambda)$는 Morphisms, Lemma
+\ref{morphisms-lemma-morphism-finite-type-bounded-dimension}과
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomological-dimension-proper}에 의해
+유계 코호몰로지 차원을 갖는다. 따라서 Derived Categories, Lemma
+\ref{derived-lemma-unbounded-right-derived}에서 결론이 따른다.
+
+\medskip\noindent
+이제 $\Lambda$가 임의라고 하고 함자
+$Rf_! : D^+_{tors}(X_\etale, \Lambda) \to D^+_{tors}(Y_\etale, \Lambda)$를
+고찰하자. 다시 $f$가 고유이고 $Rf_! = Rf_*$인 경우로 즉시 환원된다.
+다시 (1)은 곧바로 성립한다. (3)을 보이기 위해 $b - a$에 대한 귀납법,
+절단의 특별 삼각형, 그리고 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomological-dimension-proper}을
+사용할 수 있다.
+% P08-E128: source misspells “truncations”; Korean uses the standard term.
+(2)는 (3)에서 따른다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-Rf-shriek-for-quasi-finite}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 준유한 분리 사상이라
+하자. 그러면 Section
+\ref{section-derived-lower-shriek-compactification}에서 구성한
+함자 $Rf_!$들은 Section
+\ref{section-derived-duality-locally-quasi-finite}에서 구성한 함자
+$f_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$를 두 함자의
+공통 정의역에 제한한 것과 일치한다.
+\end{lemma}
+
+\begin{proof}
+자리스키 주정리(More on Morphisms, Lemma
+\ref{more-morphisms-lemma-quasi-finite-separated-pass-through-finite})에
+의해 $f = \overline{f} \circ j$를 만족하는 열린 몰입
+$j : X \to \overline{X}$와 유한 사상
+$\overline{f} : \overline{X} \to Y$를 찾을 수 있다.
+구성에 의해 $Rf_! = R\overline{f}_* \circ j_!$이다.
+$\overline{f}$가 유한이므로 \'Etale Cohomology, Proposition
+\ref{etale-cohomology-proposition-finite-higher-direct-image-zero}에
+의해 $R\overline{f}_* = \overline{f}_*$이다.
+예를 들어 Lemma \ref{lemma-compactify-f-shriek-separated}에 의해
+$\overline{f}_* \circ j_! = f_!$이므로 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-mayer-vietoris}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. $U$와 $V$를 $X = U \cup V$를 만족하는 $X$의 준콤팩트 열린집합들이라
+하자. $f$의 제한들을 $a : U \to Y$, $b : V \to Y$,
+$c : U \cap V \to Y$로 나타내자. $\Lambda$를 환이라 하자.
+$K$가 $D^+_{tors}(X_\etale, \Lambda)$에 속하거나,
+$\Lambda$가 꼬임일 때 $K \in D(X_\etale, \Lambda)$이면
+$D(Y_\etale, \Lambda)$ 안에 특별 삼각형
+$$
+Rc_!(K|_{U \cap V}) \to
+Ra_!(K|_U) \oplus Rb_!(K|_V) \to
+Rf_!K \to 
+Rc_!(K|_{U \cap V})[1]
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-mayer-vietoris-shriek},
+Lemma \ref{lemma-shriek-composition}에 의한
+$Rf_! \circ Rj_{U!} = Ra_!$, 그리고 Lemma
+\ref{lemma-Rf-shriek-for-quasi-finite}에 의한
+$Rj_{U!} = j_{U!}$에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-triangle-associated-to-open}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. $U$를 $X$의 준콤팩트 열린집합이라 하고 그 여집합을
+$Z \subset X$라 하자. $f$의 제한들을 $g : U \to Y$와
+$h : Z \to Y$로 나타내자. $\Lambda$를 환이라 하자.
+$K$가 $D^+_{tors}(X_\etale, \Lambda)$에 속하거나,
+$\Lambda$가 꼬임일 때 $K \in D(X_\etale, \Lambda)$이면
+$D(Y_\etale, \Lambda)$ 안에 특별 삼각형
+$$
+Rg_!(K|_U) \to
+Rf_!K \to
+Rh_!(K|_Z) \to
+Rg_!(K|_U)[1]
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{lemma-triangle-associated-to-open},
+Lemma \ref{lemma-shriek-composition}에 의한
+$Rf_! \circ Rj_! = Rg_!$ 및 $Rf_! \circ Ri_!$,
+그리고 Lemma \ref{lemma-Rf-shriek-for-quasi-finite}에 의한
+$Rj_! = j_!$ 및 $Ri_! = i_! = i_*$에서 따른다.
+% P08-E129: frozen source omits “= Rh_!” after the second composition.
+\end{proof}
+
+
+\begin{lemma}
+\label{lemma-shriek-and-thickening}
+$f' : X' \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. $i : X \to X'$를 두껍게 하기라 하고
+$f = f' \circ i$로 나타내자. $\Lambda$를 환이라 하자.
+$K'$가 $D^+_{tors}(X'_\etale, \Lambda)$에 속하거나,
+$\Lambda$가 꼬임일 때 $K' \in D(X'_\etale, \Lambda)$이면
+$Rf_!i^{-1}K' = Rf'_!K'$이다.
+\end{lemma}
+
+\begin{proof}
+작은 에탈 토포스의 위상적 불변성(\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-topological-invariance})에 의해
+$i^{-1}$과 $i_* = i_!$는 범주들의 서로 역인 동치이고,
+Lemma \ref{lemma-shriek-composition}을 적용할 수 있으므로 참이다.
+% P08-E130: source omits the copula before “inverse equivalences”.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-projection-formula-Rf-lower-shriek}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. $\Lambda$를 꼬임 환이라 하자.
+$E \in D(X_\etale, \Lambda)$이고 $K \in D(Y_\etale, \Lambda)$라 하자.
+그러면 $D(Y_\etale, \Lambda)$ 안에서
+$$
+Rf_!E \otimes_\Lambda^\mathbf{L} K =
+Rf_!(E \otimes_\Lambda^\mathbf{L} f^{-1}K)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$Rf_!$의 구성에서와 같이 $j : X \to \overline{X}$와
+$\overline{f} : \overline{X} \to Y$를 택하자.
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-j-shriek-and-tensor}에 의해
+$j_!E \otimes_\Lambda^\mathbf{L} \overline{f}^{-1}K =
+j_!(E \otimes_\Lambda^\mathbf{L} f^{-1}K)$이다.
+이제 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-projection-formula-proper-mod-n}을
+적용하고 $f^{-1} = j^{-1} \circ \overline{f}^{-1}$ 및
+$Rf_! = R\overline{f}_*j_!$를 사용하면 결과를 얻는다.
+\end{proof}
+
+\begin{remark}
+\label{remark-Rf-lower-shriek-change-of-rings}
+$\Lambda_1 \to \Lambda_2$를 꼬임 환들의 준동형이라 하자.
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. 그림
+$$
+\xymatrix{
+D(X_\etale, \Lambda_2) \ar[r]_{res} \ar[d]_{Rf_!} &
+D(X_\etale, \Lambda_1) \ar[d]^{Rf_!} \\
+D(Y_\etale, \Lambda_2) \ar[r]^{res} &
+D(Y_\etale, \Lambda_1)
+}
+$$
+은 가환이다. 여기서 $res$는 주어진 환 사상을 사용하여
+$\Lambda_2$-가군을 $\Lambda_1$-가군으로 바꾸는 ‘제한’ 함자이다.
+Section \ref{section-derived-lower-shriek-compactification}에서와 같은
+분해 $f = \overline{f} \circ j$에 대하여
+$Rf_! = R\overline{f}_* \circ j_!$로 쓰면,
+$j_!$에 대해서는 직접 확인하여 결과가 성립하고
+$R\overline{f}_*$에 대해서는 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-modules-abelian-unbounded}에 의해
+성립함을 알 수 있다. 한편 그림
+$$
+\xymatrix{
+D(X_\etale, \Lambda_1)
+\ar[r]_{- \otimes_{\Lambda_1}^\mathbf{L} \Lambda_2} \ar[d]_{Rf_!} &
+D(X_\etale, \Lambda_2) \ar[d]^{Rf_!} \\
+D(Y_\etale, \Lambda_1)
+\ar[r]^{- \otimes_{\Lambda_1}^\mathbf{L} \Lambda_2} &
+D(Y_\etale, \Lambda_2)
+}
+$$
+도 Lemma \ref{lemma-projection-formula-Rf-lower-shriek}에서 따라
+가환이다.
+\end{remark}
+
+\begin{remark}
+\label{remark-projection-formula-for-internal-hom}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. $\Lambda$를 꼬임 계수환이라 하고, $K$와 $L$을
+$D(X_\etale, \Lambda)$의 대상들이라 하자.
+$K$와 $L$에 대하여 함자적인 표준 사상
+$$
+\alpha :
+Rf_*R\SheafHom_\Lambda(K, L)
+\longrightarrow
+R\SheafHom_\Lambda(Rf_!K, Rf_!L)
+$$
+이 존재한다고 주장한다. $Rf_!$의 구성에서와 같이
+$j : X \to \overline{X}$와
+$\overline{f} : \overline{X} \to Y$를 택하자.
+먼저 사상
+$$
+\beta :
+Rj_*R\SheafHom_\Lambda(K, L)
+\longrightarrow
+R\SheafHom_\Lambda(j_!K, j_!L)
+$$
+을 정의한다. 유도 범주에서 내부 Hom을 구성하는 방식에 의하면 이는
+사상
+$$
+\beta' :
+Rj_*R\SheafHom_\Lambda(K, L) \otimes_\Lambda^\mathbf{L} j_!K
+\longrightarrow
+j_!L
+$$
+을 정의하는 것과 같다. Cohomology on Sites, Section
+\ref{sites-cohomology-section-internal-hom}을 보라.
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-j-shriek-and-tensor}에 의해
+$\beta'$의 원천은
+$$
+j_!\left(R\SheafHom_\Lambda(K, L) \otimes_\Lambda^\mathbf{L} K\right)
+$$
+와 같다. 따라서 $\beta' = j_!\beta''$로 놓을 수 있다.
+여기서
+$\beta'' : R\SheafHom_\Lambda(K, L) \otimes_\Lambda^\mathbf{L} K \to L$은
+위에서 언급한 내부 Hom의 보편 성질을 통해
+$R\SheafHom_\Lambda(K, L)$ 위의 항등사상에 대응한다.
+Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-projection-formula-for-internal-hom}에 의해
+표준 사상
+$$
+\gamma :
+R\overline{f}_*R\SheafHom_\Lambda(j_!K, j_!L)
+\longrightarrow
+R\SheafHom_\Lambda(R\overline{f}_*j_!K, R\overline{f}_*j_!L)
+$$
+이 존재한다. $Rf_! = R\overline{f}_*j_!$이고 (르레에 의해)
+$Rf_* = R\overline{f}_* Rj_*$이므로 원하는 사상
+$\alpha = \gamma \circ R\overline{f}_*\beta$를 얻는다.
+\end{remark}
+
+
+\section{유도 위쪽 슈리크}
+\label{section-derived-upper-shriek}
+
+\noindent
+브라운 표현 정리를 사용하여 $Rf^!$를 얻는다.
+
+\begin{lemma}
+\label{lemma-upper-shriek-derived}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. $\Lambda$를 꼬임 계수환이라 하자. 함자
+$Rf_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$는 오른쪽 수반
+$Rf^! : D(Y_\etale, \Lambda) \to D(X_\etale, \Lambda)$를 갖는다.
+\end{lemma}
+
+\begin{proof}
+이는 Injectives, Proposition \ref{injectives-proposition-brown}과
+위의 Lemma \ref{lemma-derived-lower-shriek-commute-direct-sums}에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-Rf-upper-shriek-for-quasi-finite}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 준유한 분리 사상이라
+하자. $\Lambda$를 꼬임 계수환이라 하자. Lemma
+\ref{lemma-upper-shriek-derived}의 함자
+$Rf^! : D(Y_\etale, \Lambda) \to D(X_\etale, \Lambda)$는
+Lemma \ref{lemma-lqf-shriek-derived}의 함자 $Rf^!$와 같다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-Rf-shriek-for-quasi-finite}에 의해 $Rf_! = f_!$이므로
+수반의 유일성에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-Rf-upper-shriek-for-etale}
+$j : U \to X$를 준콤팩트이고 준분리인 스킴들의 분리 에탈 사상이라
+하자. $\Lambda$를 꼬임 계수환이라 하자. 함자
+$Rj^! : D(X_\etale, \Lambda) \to D(U_\etale, \Lambda)$는
+$j^{-1}$과 같다.
+\end{lemma}
+
+\begin{proof}
+$Rj^!$와 $j^{-1}$은 둘 다 $Rj_! = j_!$의 오른쪽 수반이므로 참이다.
+예를 들어 Lemmas \ref{lemma-Rf-upper-shriek-for-quasi-finite},
+\ref{lemma-etale-upper-shriek}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-twisted-inverse-image-bounded-below}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. $\Lambda$를 꼬임 환이라 하자. 함자 $Rf^!$는
+$D^+(Y_\etale, \Lambda)$를 $D^+(X_\etale, \Lambda)$ 안으로 보낸다.
+더 정확히 말하면 어떤 정수 $N \geq 0$이 존재하여,
+$K \in D(Y_\etale, \Lambda)$가 $i < a$에 대하여
+$H^i(K) = 0$을 만족하면 $i < a - N$에 대하여
+$H^i(Rf^!K) = 0$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-derived-lower-shriek-bounded}에서 찾은 정수를 $N$이라
+하자. 구성에 의해 $K \in D(Y_\etale, \Lambda)$와
+$L \in \in D(X_\etale, \Lambda)$에 대하여
+$\Hom_X(L, Rf^!K) = \Hom_Y(Rf_!L, K)$이다.
+% P08-E131: frozen source duplicates the membership symbol in L \in \in D(...).
+$i < a$에 대하여 $H^i(K) = 0$이라고 가정하자.
+$L = \tau_{\leq a - N - 1}Rf^!K$로 놓는다.
+Lemma \ref{lemma-derived-lower-shriek-bounded}에 의해 복합체 $Rf_!L$의
+코호몰로지 층들은 차수 $\leq a - 1$에서 소멸한다.
+따라서 Derived Categories, Lemma
+\ref{derived-lemma-negative-exts}에 의해
+$\Hom_Y(Rf_!L, K) = 0$이다.
+그러므로 표준 사상
+$\tau_{\leq a - N - 1}Rf^!K \to Rf^!K$는 영사상이고,
+따라서 $i \leq a - N - 1$에 대하여 $H^i(Rf^!K) = 0$이다.
+\end{proof}
+
+\noindent
+$f : X \to Y$를 준분리이고 준콤팩트한 스킴들의 유한형 분리 사상이라
+하자. $\Lambda$를 꼬임 계수환이라 하자. 모든
+$K \in D(Y_\etale, \Lambda)$와 $L \in D(X_\etale, \Lambda)$에 대하여
+표준 사상
+\begin{equation}
+\label{equation-sheafy-trace}
+Rf_*R\SheafHom_\Lambda(L, Rf^!K) \longrightarrow R\SheafHom_\Lambda(Rf_!L, K)
+\end{equation}
+을 얻는다. 즉, 이 사상은 합성
+$$
+Rf_*R\SheafHom_\Lambda(L, Rf^!K) \to
+R\SheafHom_\Lambda(Rf_!L, Rf_!Rf^!K) \to
+R\SheafHom_\Lambda(Rf_!L, K)
+$$
+으로 구성한다. 여기서 첫 번째 화살표는 Remark
+\ref{remark-projection-formula-for-internal-hom}의 사상이고,
+두 번째 화살표는 수반의 여단위 $Rf_!Rf^!K \to K$이다.
+
+\begin{lemma}
+\label{lemma-iso-on-RSheafHom}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. $\Lambda$를 꼬임 환이라 하자. 모든
+$K \in D(Y_\etale, \Lambda)$와 $L \in D(X_\etale, \Lambda)$에 대하여
+사상 (\ref{equation-sheafy-trace})
+$$
+Rf_*R\SheafHom_\Lambda(L, Rf^!K) \longrightarrow R\SheafHom_\Lambda(Rf_!L, K)
+$$
+은 동형이다.
+\end{lemma}
+
+\begin{proof}
+보조정리를 증명하려면 임의의 $M \in D(Y_\etale, \Lambda)$에 대하여
+사상 (\ref{equation-sheafy-trace})이 전단사
+$$
+\Hom_Y(M, Rf_*R\SheafHom_\Lambda(L, Rf^!K))
+\longrightarrow
+\Hom_Y(M, R\SheafHom_\Lambda(Rf_!L, K))
+$$
+를 유도함을 보여야 한다.
+% P08-E132: source uses the wrong English article; Korean is unaffected.
+이를 보기 위해 다음 등식들의 열을 사용한다.
+\begin{align*}
+\Hom_Y(M, Rf_*R\SheafHom_\Lambda(L, Rf^!K))
+& =
+\Hom_X(f^{-1}M, R\SheafHom_\Lambda(L, Rf^!K)) \\
+& =
+\Hom_X(f^{-1}M \otimes_\Lambda^\mathbf{L} L, Rf^!K) \\
+& =
+\Hom_Y(Rf_!(f^{-1}M \otimes_\Lambda^\mathbf{L} L), K) \\
+& =
+\Hom_Y(M \otimes_\Lambda^\mathbf{L} Rf_!L, K) \\
+& =
+\Hom_Y(M, R\SheafHom_\Lambda(Rf_!L, K))
+\end{align*}
+첫 번째 등식은 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-adjoint}에 의해 성립한다.
+두 번째 등식은 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-internal-hom}에 의해 성립한다.
+세 번째 등식은 $Rf^!$의 구성에 의해 성립한다.
+네 번째 등식은 Lemma
+\ref{lemma-projection-formula-Rf-lower-shriek}에 의해 성립한다
+(이것이 중요한 단계이다).
+다섯 번째 등식은 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-internal-hom}에 의해 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-iso-global-hom}
+$f : X \to Y$를 준분리이고 준콤팩트한 스킴들의 유한형 분리 사상이라
+하자. $\Lambda$를 꼬임 환이라 하자. 모든
+$K \in D(Y_\etale, \Lambda)$와 $L \in D(X_\etale, \Lambda)$에 대하여
+사상 (\ref{equation-sheafy-trace})은 대역적 유도 Hom들의 동형
+$$
+R\Hom_X(L, Rf^!K) \longrightarrow R\Hom_Y(Rf_!L, K)
+$$
+을 유도한다.
+\end{lemma}
+
+\begin{proof}
+Cohomology on Sites, Section
+\ref{sites-cohomology-section-global-RHom}의 구성에 의해
+$$
+R\Hom_X(L, Rf^!K) =
+R\Gamma(X, R\SheafHom_\Lambda(L, Rf^!K)) =
+R\Gamma(Y, Rf_*R\SheafHom_\Lambda(L, Rf^!K))
+$$
+이고(두 번째 등식은 르레에 의한다),
+$$
+R\Hom_Y(Rf_!L, K) = R\Gamma(Y, R\SheafHom_\Lambda(Rf_!L, K))
+$$
+이다. 따라서 보조정리는 Lemma
+\ref{lemma-iso-on-RSheafHom}의 귀결이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-cartesian-square-Rf-upper-shriek}
+$f$가 유한형 분리인 준콤팩트 준분리 스킴들의 카르테시안 정사각형
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+을 고찰하자. 그러면 $Rf^! \circ Rg_* = Rg'_* \circ R(f')^!$이다.
+\end{lemma}
+
+\begin{proof}
+수반 함자들의 유일성과 유도 아래쪽 슈리크에 대한 기저변환에서
+따른다. 실제로 Lemma \ref{lemma-base-change-shriek}에 의해
+$g^{-1} \circ Rf_! = Rf'_! \circ (g')^{-1}$이다.
+\end{proof}
+
+\begin{remark}
+\label{remark-Rf-upper-shriek-change-of-rings}
+$\Lambda_1 \to \Lambda_2$를 꼬임 환들의 준동형이라 하자.
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. 그림
+$$
+\xymatrix{
+D(X_\etale, \Lambda_2) \ar[r]_{res} &
+D(X_\etale, \Lambda_1) \\
+D(Y_\etale, \Lambda_2) \ar[r]^{res} \ar[u]^{Rf^!} &
+D(Y_\etale, \Lambda_1) \ar[u]_{Rf^!}
+}
+$$
+은 가환이다. 여기서 $res$는 주어진 환 사상을 사용하여
+$\Lambda_2$-가군을 $\Lambda_1$-가군으로 바꾸는 ‘제한’ 함자이다.
+이는 수반의 유일성, Remark
+\ref{remark-Rf-lower-shriek-change-of-rings}의 두 번째 가환 그림,
+그리고 등식
+$$
+\Hom_{\Lambda_2}(K_1 \otimes_{\Lambda_1}^\mathbf{L} \Lambda_2, K_2) =
+\Hom_{\Lambda_1}(K_1, res(K_2))
+$$
+에서 따른다.
+% P08-E133: source misspells “uniqueness”; Korean uses the intended term.
+$X_\etale$ 위나 $Y_\etale$ 위의 대상들에 대한 이 등식은
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-adjoint}의 매우 특수한 경우이다.
+\end{remark}
+
+
+\section{콤팩트 지지 코호몰로지}
+\label{section-compactly-supported-cohomology}
+
+\noindent
+$k$를 체라 하고 $\Lambda$를 환이라 하자.
+$X$를 $k$ 위의 유한형 분리 스킴이라 하고 그 구조 사상을
+$f : X \to \Spec(k)$라 하자. Section
+\ref{section-derived-lower-shriek-compactification}에서 함자
+$Rf_! : D^+_{tors}(X_\etale, \Lambda) \to D^+_{tors}(\Spec(k), \Lambda)$를
+정의했고, $\Lambda$가 꼬임 환일 때 함자
+$Rf_! : D(X_\etale, \Lambda) \to D(\Spec(k), \Lambda)$를 정의했다.
+이를 $\Spec(k)$ 위의 대역 단면 함자와 합성하여 우리가
+콤팩트 지지 코호몰로지라 부를 것을 얻는다.
+
+\begin{definition}
+\label{definition-cohomology-compact-support}
+$X$를 체 $k$ 위의 유한형 분리 스킴이라 하자.
+$\Lambda$를 환이라 하자. $K$를
+$D^+_{tors}(X_\etale, \Lambda)$의 대상이라 하거나,
+$\Lambda$가 꼬임인 경우에는 $D(X_\etale, \Lambda)$의 대상이라 하자.
+$K$의 {\it 콤팩트 지지 코호몰로지}, 또는
+{\it 콤팩트 지지를 갖는 $K$의 코호몰로지}는
+$$
+R\Gamma_c(X, K) = R\Gamma(\Spec(k), Rf_!K)
+$$
+이다. 여기서 $f : X \to \Spec(k)$는 구조 사상이다.
+$H^i_c(X, K) = H^i(R\Gamma_c(X, K))$로 쓰겠다.
+\end{definition}
+
+\noindent
+이 정의가 Definition \ref{definition-compact-support}과 충돌하지
+않는다는 것은 Lemma \ref{lemma-compact-support-h0}에서 확인할 것이다.
+이 정의의 유용성은 다음 결과에 있다.
+
+\begin{lemma}
+\label{lemma-stalk-R-f-shriek}
+$f : X \to Y$를 $Y$가 준콤팩트이고 준분리인 유한형 분리 스킴
+사상이라 하자. $K$를 $D^+_{tors}(X_\etale, \Lambda)$의 대상이라
+하거나, $\Lambda$가 꼬임인 경우에는 $D(X_\etale, \Lambda)$의
+대상이라 하자. 그러면 임의의 기하점
+$\overline{y} : \Spec(k) \to Y$에 대하여 $D(\Lambda)$ 안의 표준 동형
+$$
+(Rf_!K)_{\overline{y}}
+\longrightarrow
+R\Gamma_c(X_{\overline{y}}, K|_{X_{\overline{y}}})
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{lemma-base-change-shriek}과 정의들에서 곧바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-compact-support-h0}
+$X$를 체 $k$ 위의 유한형 분리 스킴이라 하자.
+$\mathcal{F}$가 꼬임 아벨 층이면, Definition
+\ref{definition-compact-support}에서 정의한 아벨 군
+$H^0_c(X, \mathcal{F})$는 Definition
+\ref{definition-cohomology-compact-support}에서 정의한 아벨 군
+$H^0_c(X, \mathcal{F})$와 일치한다.
+\end{lemma}
+
+\begin{proof}
+$k$ 위의 콤팩트화 $j : X \to \overline{X}$를 택하자.
+두 경우 모두 군은 $H^0(\overline{X}, j_!\mathcal{F})$로 정의된다.
+첫 번째 정의에 대해서는 Lemma
+\ref{lemma-compactify-compact-support}에 의해 그렇고,
+두 번째 정의에 대해서는 구성에 의해 그렇다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-finiteness-curves}
+$k$를 대수적으로 닫힌 체라 하자. $X$를 차원이 $\leq 1$인
+$k$ 위의 유한형 유한형 분리 스킴이라 하자.
+% P08-E134: frozen source duplicates “type”; Korean retains both occurrences.
+$\Lambda$를 뇌터 환이라 하자.
+$\mathcal{F}$를 $X$ 위의 꼬임인 구성 가능 $\Lambda$-가군 층이라 하자.
+그러면 $H^q_c(X, \mathcal{F})$는 유한 $\Lambda$-가군이다.
+\end{lemma}
+
+\begin{proof}
+이는 \'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-vanishing-affine-curves-coefficients}의
+귀결이다. 즉, 콤팩트화 $j : X \to \overline{X}$를 택하자.
+$\overline{X}$를 $X$의 스킴론적 폐포로 바꾸면
+$\dim(\overline{X}) \leq 1$이라고 가정할 수 있다. 이제
+$H^q_c(X, \mathcal{F}) = H^q(\overline{X}, j_!\mathcal{F})$이고
+정리를 적용할 수 있다.
+\end{proof}
+
+\begin{remark}[콤팩트 지지 코호몰로지의 공변성]
+\label{remark-covariance-compactly-supported}
+$k$를 체라 하자. $f : X \to Y$를 $k$ 위의 유한형 분리 스킴들의
+사상이라 하자. $X$, $Y$, $f$가 다음 조건 가운데 하나를 만족한다고
+하자.
+% P08-E135: source has singular agreement after the compound subject.
+\begin{enumerate}
+\item $f$가 에탈이거나,
+\item $f$가 평탄하고 준유한이거나,
+\item $f$가 준유한이고 $Y$가 기하적으로 단가지이거나,
+\item $f$가 준유한이고 $f$의 가중함수
+$w : X \to \mathbf{Z}$가 존재한다.
+\end{enumerate}
+그러면 콤팩트 지지 코호몰로지는 $f$에 대하여 공변이다.
+더 정확히 말하자. $\Lambda$를 환이라 하자. $K$를
+$D^+_{tors}(Y_\etale, \Lambda)$의 대상이라 하거나,
+$\Lambda$가 꼬임인 경우에는 $D(Y_\etale, \Lambda)$의 대상이라 하자.
+가정 (1)--(4) 가운데 하나 아래에서 표준 사상
+$$
+\text{Tr}_{f, w, K} : f_!f^{-1}K \longrightarrow K
+$$
+가 존재한다. 트레이스 사상의 존재는 Section
+\ref{section-weightings}을 보고, (2)와 (3)의 경우는 Examples
+\ref{example-trace-for-flat-quasi-finite},
+\ref{example-trace-for-quasi-finite-over-normal}을 보라.
+$p : X \to \Spec(k)$와 $q : Y \to \Spec(k)$가 구조 사상들이면,
+Lemma \ref{lemma-shriek-composition}에 의해
+$Rq_! \circ f_! = Rp_!$이고, 준유한 분리 사상 $f$에 대해서는
+Lemma \ref{lemma-Rf-shriek-for-quasi-finite}에 의해
+$Rf_! = f_!$이다. 따라서 사상
+\begin{align*}
+R\Gamma_c(X, f^{-1}K)
+& =
+R\Gamma(\Spec(k), Rp_!f^{-1}K) \\
+& =
+R\Gamma(\Spec(k), Rq_!f_!f^{-1}K) \\
+& \xrightarrow{Rq_!\text{Tr}_{f, w, K}}
+R\Gamma(\Spec(k), Rq_!K) \\
+& =
+R\Gamma_c(Y, K)
+\end{align*}
+을 고찰할 수 있다. 특히 $\Lambda$가 꼬임 환이면 화살표
+$$
+\text{Tr}_f : R\Gamma_c(X, \Lambda) \longrightarrow R\Gamma_c(Y, \Lambda)
+$$
+를 얻는다. 이 사상은 여러 추가 성질을 가지며, 예를 들어 기초체의
+확대와 양립한다.
+\end{remark}
+
+
+\section{구성 가능성 결과}
+\label{section-family-smooth-curves-cohomology}
+
+\noindent
+상수 계수를 갖는 곡선들의 매끄러운 사영 족의 코호몰로지를
+‘계산’한다.
+
+\begin{lemma}
+\label{lemma-frobenius-linear-on-vb}
+$p$를 소수라 하고 $S$를 $\mathbf{F}_p$ 위의 스킴이라 하자.
+$\mathcal{E}$를 $S_\etale$ 위의 $\mathcal{O}_S$-가군으로 보는
+유한 국소 자유 $\mathcal{O}_S$-가군이라 하자.
+$F : \mathcal{E} \to \mathcal{E}$를 $S_\etale$ 위의 아벨 층들의
+준동형이라 하고, $S_\etale$ 위의 $\mathcal{O}_S$, $\mathcal{E}$의
+국소 단면 $a$, $e$에 대하여 $F(a e) = a^pF(e)$라고 하자.
+그러면
+$$
+\Coker(F - 1 : \mathcal{E} \to \mathcal{E})
+$$
+은 영이고,
+$$
+\Ker(F - 1 : \mathcal{E} \to \mathcal{E})
+$$
+은 $S_\etale$ 위의 구성 가능 아벨 층이다.
+\end{lemma}
+
+\noindent
+이 보조정리는 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-F-1}의 일반화이다.
+
+\begin{proof}
+$S = \Spec(A)$이고 $A$가 $\mathbf{F}_p$-대수이며,
+$\mathcal{E}$가 자유 $A$-가군
+$Ae_1 \oplus \ldots \oplus Ae_n$에 대응하는 준연접 가군이라고
+가정할 수 있다. $F(e_i) = \sum a_{ij} e_j$로 쓰자.
+
+\medskip\noindent
+$F - 1$의 전사성. $A$를 충실 평탄 에탈 확대체로 바꾼 뒤에는 임의의
+원소 $\sum a_i e_i$, $a_i \in A$가 $F - 1$의 상에 속함을 보이면
+충분하다. 다음을 관찰하라.
+$$
+F(\sum x_ie_i) - \sum x_i e_i = \sum x_i^p a_{ij} e_j - \sum x_i e_i
+$$
+$A$-대수
+$$
+A' = A[x_1, \ldots, x_n]/(a_i + x_i - \sum\nolimits_j a_{ji} x_j^p)
+$$
+를 고찰하자. 계산하면 $\text{d}x_i$가 $\Omega_{A'/A}$에서 영이므로
+$\Omega_{A'/A} = 0$이다. $A'$는 $A$ 위의 유한형이므로
+$\Spec(A') \to \Spec(A)$는 비분기이고, 따라서 준유한이다.
+$A'$는 $n$개의 원소로 생성되고 $n$개의 방정식으로 잘려 나오므로
+$A'$는 $A$ 위의 대역 상대 완전교차라고 결론 내린다.
+따라서 $A'$는 $A$ 위에서 평탄하고,
+$A \to A'$가 (평탄하고 비분기인 환 사상으로서) 에탈임을 얻는다.
+마지막으로 독자는
+$\Spec(A') \to \Spec(A)$의 모든 기하적 올이 공집합이 아님을 직접
+확인하여 $A \to A'$가 충실 평탄임을 보일 수 있다. 그러나 이는
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-F-1}에서도 따른다.
+마지막으로 원소
+$\sum x_i e_i \in A'e_1 \oplus \ldots \oplus A'e_n$는 $F - 1$에 의해
+$\sum a_i e_i$로 간다.
+
+\medskip\noindent
+핵의 구성 가능성. 위 계산은 $\Ker(F - 1)$이 $S = \Spec(A)$ 위의 스킴
+$$
+\Spec(A[x_1, \ldots, x_n]/(x_i - \sum\nolimits_j a_{ji} x_j^p))
+$$
+으로 표현됨을 보인다. 이는 $S$ 위의 아핀 에탈 스킴이므로
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-jshriek-constructible}에서 결과를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-smooth-family-curves}
+$f : X \to S$를 차원 $1$의 기하적으로 연결인 올들을 갖는 스킴들의
+고유 매끄러운 사상이라 하자. $\ell$을 소수라 하자. 그러면
+$R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}}$는 구성 가능이다.
+% P08-E136: frozen source omits the noun “sheaf” after “constructible”.
+\end{lemma}
+
+\begin{proof}
+$S$가 아핀이라고 가정할 수 있다. $S = \Spec(A)$라고 하자.
+이 환을 그 유한형 $\mathbf{Z}$-부분대수들의 합집합
+$A = \bigcup A_i$로 쓰면, 어떤 $i$와 유한형 사상
+$f_i : X_i \to S_i = \Spec(A_i)$를 찾을 수 있고, 이를 $S$로
+기저변환하면 $f : X \to S$가 된다. Limits, Lemma
+\ref{limits-lemma-descend-finite-presentation}을 보라.
+$i$를 증가시키면 $f_i : X_i \to S_i$가 매끄럽고 고유이며
+상대차원 $1$이라고 가정할 수 있다. Limits, Lemmas
+\ref{limits-lemma-eventually-proper}
+\ref{limits-lemma-descend-smooth},
+\ref{limits-lemma-descend-dimension-d}를 보라.
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-proper-flat-geom-red}에 의해
+$U_i$ 위의 $f_i : X_i \to S_i$의 올들이 기하적으로 연결인 열린
+부분스킴 $U_i \subset S_i$를 얻는다. 그러면 $S \to S_i$의 상은
+$U_i$ 안에 놓인다. $X \to S$를
+$f_i : f_i^{-1}(U_i) \to U_i$로 바꾸어 다음 문단에서 다루는 경우로
+환원할 수 있다.
+
+\medskip\noindent
+$S$가 뇌터라고 가정하자. $U$를 $\ell$의 비소멸로 정의되는 열린
+부분스킴이라 하고 $Z = V(\ell) \subset S$라 하여 $S = U \cup Z$로
+쓸 수 있다. $R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}}$의 형성은
+임의의 기저변환과 가환하므로(\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-proper-base-change}),
+$U$ 위와 $Z$ 위에서 결과를 증명하면 충분하다. 따라서 다음 두 경우로
+환원된다. (a) $\ell$이 $S$ 위에서 가역인 경우와
+(b) $\ell$이 $S$ 위에서 영인 경우이다.
+
+\medskip\noindent
+경우 (a). 이 경우 층들
+$R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}}$가 $S$ 위의 유한 국소상수
+층이라고 주장한다. 먼저 고유 기저변환(\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change-stalk}의 형태)과
+유한성(\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-vanishing-affine-curves})에 의해
+$R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}}$의 줄기들은 유한이다.
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-sp-isom-proper-loc-cst-torsion}에 의해
+모든 특수화 사상은 동형이다. 따라서 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-characterize-locally-constant-module}에
+의해 주장이 성립한다.
+
+\medskip\noindent
+경우 (b). 여기서 $\ell = p$는 소수이고 $S$는
+$\Spec(\mathbf{F}_p)$ 위의 스킴이다. 위와 같은 참고문헌에 의해 이미
+$R^qf_*\underline{\mathbf{Z}/p\mathbf{Z}}$의 줄기들이 유한이고
+$q \geq 2$이면 영임을 안다. \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-sections-upstairs}에서
+$f_*\underline{\mathbf{Z}/p\mathbf{Z}} =
+\underline{\mathbf{Z}/p\mathbf{Z}}$가 따른다.
+$R^1f_*\underline{\mathbf{Z}/p\mathbf{Z}}$가 구성 가능임을 보이는 일만
+남았다. 아르틴--슈라이어 완전열
+$$
+0 \to \underline{\mathbf{Z}/p\mathbf{Z}} \to \mathcal{O}_X
+\xrightarrow{F - 1} \mathcal{O}_X
+\to 0
+$$
+을 고찰하자. \'Etale Cohomology, Section
+\ref{etale-cohomology-section-artin-schreier}를 보라.
+$f_*\mathcal{O}_X = \mathcal{O}_S$이고
+$R^1f_*\mathcal{O}_X$는 그 계수가 $X \to S$의 올들의 종수와 같은
+유한 국소 자유 $\mathcal{O}_S$-가군임을 상기하자. Algebraic Curves,
+Lemma \ref{curves-lemma-genus-in-nodal-family-of-curves}를 보라.
+따라서 짧은 완전열
+$$
+0 \to
+\Coker(F - 1 : \mathcal{O}_S \to \mathcal{O}_S)
+\to R^1f_*\underline{\mathbf{Z}/p\mathbf{Z}} \to
+\Ker(F - 1 : R^1f_*\mathcal{O}_X \to R^1f_*\mathcal{O}_X)
+\to 0
+$$
+을 얻는다. Lemma \ref{lemma-frobenius-linear-on-vb}를 적용하면
+결론을 얻는다.
+\end{proof}
+
+
+\begin{lemma}
+\label{lemma-proper-smooth-family-curves-modules}
+$f : X \to S$를 차원 $1$의 기하적으로 연결인 올들을 갖는 스킴들의
+고유 매끄러운 사상이라 하자. $\Lambda$를 뇌터 환이라 하자.
+$M$을 어떤 정수 $n > 0$에 의해 소멸되는 유한 $\Lambda$-가군이라
+하자. 그러면 $R^qf_*\underline{M}$은 $S$ 위의 구성 가능
+$\Lambda$-가군 층이다.
+\end{lemma}
+
+\begin{proof}
+어떤 소수 $\ell$에 대하여 $n = \ell n'$이면, 유한 $\Lambda$-가군들의
+짧은 완전열 $0 \to M[\ell] \to M \to M' \to 0$을 얻고
+$M'$은 $n'$에 의해 소멸된다. 이에 대응하는 상수층들의 짧은 완전열을
+얻으며, 이 열은 다시 완전열
+$$
+R^{q - 1}f_*\underline{M'} \to
+R^qf_*\underline{M[n]} \to
+R^qf_*\underline{M} \to
+R^qf_*\underline{M'} \to
+R^{q + 1}f_*\underline{M[n]}
+$$
+을 준다.
+% P08-E137: frozen long exact sequence uses M[n] instead of the preceding M[\ell].
+따라서 $M$이 소수에 의해 소멸되는 경우에 결과를 보일 수 있다면
+$n$에 대한 귀납법과 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-constructible-abelian}에 의해 결론을
+얻는다.
+
+\medskip\noindent
+$\ell$을 소수라 하고, $\ell$이 $M$을 소멸시킨다고 하자. 그러면 $\Lambda$를
+$\mathbf{F}_\ell$-대수 $\Lambda/\ell \Lambda$로 바꿀 수 있다.
+즉, $\underline{M}$을 $\Lambda$-가군 층으로 볼 때의 층
+$R^qf_*\underline{M}$은 $\underline{M}$을
+$\Lambda/\ell \Lambda$-가군 층으로 보아 계산한 층
+$R^qf_*\underline{M}$과 같다. Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-modules-abelian-unbounded}를 보라.
+
+\medskip\noindent
+$\ell$이 소수이고 $\ell$이 $M$과 $\Lambda$를 소멸시킨다고 가정하자.
+% P08-E138: source uses the ungrammatical “Assume ell be”; Korean is idiomatic.
+$M$이 유한 자유 $\Lambda$-가군인 경우로 환원하자.
+즉, 분해
+$$
+\ldots \to
+\Lambda^{\oplus m_2} \to
+\Lambda^{\oplus m_1} \to
+\Lambda^{\oplus m_0} \to
+M \to 0
+$$
+를 택하자. $f_*$가 $\Lambda$-가군 층들 위에서 유한 코호몰로지 차원을
+가짐을 상기하자. \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomological-dimension-proper}과
+Derived Categories, Lemma
+\ref{derived-lemma-unbounded-right-derived}를 보라.
+따라서 충분히 큰 어떤 정수 $a$에 대하여
+$R^qf_*\underline{M}$은 $D(S_\etale, \Lambda)$의 대상
+$$
+Rf_*(\underline{\Lambda^{\oplus m_a}} \to \ldots \to
+\underline{\Lambda^{\oplus m_0}})
+$$
+의 $q$번째 코호몰로지 층임을 알 수 있다.
+Derived Categories, Lemma
+\ref{derived-lemma-two-ss-complex-functor}의 첫 번째 스펙트럴 열을
+사용하면(또는 절단을 이용한 논증을 사용하면)
+$R^qf_*\underline{\Lambda})$가 구성 가능임을 보이는 것으로 충분하다고
+결론 내린다.
+% P08-E139: frozen formula carries a stray closing parenthesis.
+
+\medskip\noindent
+이제 마침내 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-projection-formula-proper-mod-n}에 의한 등식
+$$
+(Rf_*\underline{\mathbf{Z}/\ell\mathbf{Z}})
+\otimes_{\mathbf{Z}/\ell\mathbf{Z}}^\mathbf{L} \underline{\Lambda} =
+Rf_*\underline{\Lambda}
+$$
+을 사용할 수 있다. 체 $\mathbf{Z}/\ell\mathbf{Z}$ 위의 모든 가군은
+평탄하므로
+$$
+(R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}})
+\otimes_{\mathbf{Z}/\ell\mathbf{Z}} \underline{\Lambda} =
+R^qf_*\underline{\Lambda}
+$$
+를 얻는다. 따라서 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-tensor-constructible}에 의해
+$R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}}$에 대한 결과를 증명하면
+충분하다. 이 경우는 Lemma
+\ref{lemma-proper-smooth-family-curves}이다.
+\end{proof}
+
+
+\section{구성 가능 코호몰로지를 갖는 복합체}
+\label{section-Dc}
+
+\noindent
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-Dc}에서 시작한 논의를 계속한다.
+특히 스킴 $X$와 뇌터 환 $\Lambda$에 대하여,
+코호몰로지 층들이 구성 가능 $\Lambda$-가군 층인 대상들로 이루어진
+$D(X_\etale, \Lambda)$의 엄밀 충만 포화 삼각 부분범주를
+$D_c(X_\etale, \Lambda)$로 나타낸다.
+
+\begin{lemma}
+\label{lemma-qf-f-shriek-constructible}
+$f : X \to Y$를 국소 준유한이고 유한 표시인 스킴의 사상이라 하자.
+Lemma \ref{lemma-lqf-shriek-derived}의 함자
+$f_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$는
+$D_c(X_\etale, \Lambda)$를 $D_c(Y_\etale, \Lambda)$ 안으로 보낸다.
+\end{lemma}
+
+\begin{proof}
+함자 $f_!$는 완전하므로, $X_\etale$ 위의 임의의 구성 가능
+$\Lambda$-가군 층 $\mathcal{F}$에 대하여
+$f_!\mathcal{F}$가 구성 가능임을 보이면 충분하다.
+문제는 $Y$ 위에서 국소적이므로 $Y$가 아핀이라고 가정할 수 있고
+그렇게 하겠다. 그러면 Morphisms, Definition
+\ref{morphisms-definition-finite-presentation}에 의해
+$X$는 준콤팩트이고 준분리이다.
+$X = \bigcup_{i = 1, \ldots, n} X_i$를 유한 아핀 열린 덮개라 하자.
+Lemma \ref{lemma-lqf-colimit-f-shriek}에 의해
+$f_i : X_i \to Y$와 $f_{ii'} : X_i \cap X_{i'} \to Y$가 $f$의
+제한일 때 $f_{i, !}\mathcal{F}|_{X_i}$와
+$f_{ii', !}\mathcal{F}|_{X_i \cap X_{i'}}$가 구성 가능임을 보이면
+충분하다. $X_i$와 $X_i \cap X_{i'}$는 준콤팩트이고 분리이므로
+$f$가 분리라고 가정할 수 있다는 뜻이다.
+자리스키 주정리(More on Morphisms, Lemma
+\ref{more-morphisms-lemma-quasi-finite-separated-pass-through-finite-addendum})에
+의해 $j : X \to X'$가 열린 몰입이고
+$g : X' \to Y$가 유한 표시인 유한 사상이 되는 분해
+$f = g \circ j$를 택할 수 있다.
+Lemma \ref{lemma-f-shriek-composition}에 의해
+$f_! = g_! \circ j_!$이다. \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-jshriek-constructible}에 의해
+$j_!\mathcal{F}$는 $X'$ 위에서 구성 가능이다.
+사상 $g$는 유한이므로 Lemma \ref{lemma-proper-f-shriek}에 의해
+$g_! = g_*$이다. 따라서 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-finite-pushforward-constructible}에 의해
+$f_!\mathcal{F} = g_!j_!\mathcal{F} = g_*j_!\mathcal{F}$는
+구성 가능이다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-constant-shriek-rel-dim-1}
+$S$를 유한 차원의 뇌터 아핀 스킴이라 하자.
+$f : X \to S$를 상대차원 $1$인 분리 아핀 매끄러운 사상이라 하자.
+$\Lambda$를 꼬임인 뇌터 환이라 하자.
+$M$을 유한 $\Lambda$-가군이라 하자.
+그러면 $Rf_!\underline{M}$은 구성 가능 코호몰로지 층들을 갖는다.
+\end{lemma}
+
+\begin{proof}
+$d = \dim(S)$에 대한 귀납법으로 결과를 증명하겠다.
+
+\medskip\noindent
+기초 경우. $d = 0$이면 $R^qf_!\underline{M}$의 줄기들이 유한
+$\Lambda$-가군임을 보이는 일만 남는다.
+$\overline{s}$가 $S$의 기하점이면 Lemma
+\ref{lemma-stalk-R-f-shriek}에 의해
+$(R^qf_!\underline{M})_{\overline{s}} = H^q_c(X_{\overline{s}}, \underline{M})$이다.
+이는 Lemma \ref{lemma-finiteness-curves}에 의해 유한
+$\Lambda$-가군이다.
+
+\medskip\noindent
+귀납 단계. $Rf_!\underline{M}|_U$가 구성 가능 코호몰로지 층들을 갖는
+조밀한 열린집합 $U \subset S$를 찾으면 충분하다.
+실제로 여집합 $S \setminus U$에 대한
+$Rf_!\underline{M}$의 제한은 귀납 가정과 $Rf_!\underline{M}$의 형성이
+모든 기저변환과 가환한다는 사실(Lemma
+\ref{lemma-base-change-shriek})에 의해 구성 가능 코호몰로지 층들을
+갖는다. 사실 $\eta \in S$가 $S$의 한 기약 성분의 일반점이면,
+$\eta$의 열린 근방 $U$를 찾아 $Rf_!\underline{M}$의 $U$로의 제한이
+구성 가능임을 보이는 것으로 충분하다. 다음 문단에서 이를 하겠다.
+
+\medskip\noindent
+일반점 $\eta \in S$가 주어졌을 때 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-make-good-curves}에서와 같은 그림
+% P08-E140: frozen diagram has the malformed arrow label \ar[r]_-\nu.
+$$
+\xymatrix{
+\overline{Y}_1 \amalg \ldots \amalg \overline{Y}_n \ar[rd] &
+Y_1 \amalg \ldots \amalg Y_n \ar[r]_-\nu \ar[d] \ar[l]^j &
+X_V \ar[r] \ar[d] &
+X_U \ar[r] \ar[d] &
+X \ar[d]^f \\
+& T_1 \amalg \ldots \amalg T_n \ar[r] &
+V \ar[r] &
+U \ar[r] &
+S
+}
+$$
+을 택한다. $Rf_!\underline{M}|_U$가 구성 가능임을 보이겠다.
+먼저 $V \to U$가 유한 전사이므로 $V$로의 당김이 구성 가능임을
+보이면 충분하다. \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-check-constructible}를 보라.
+$Rf_!$의 형성은 기저변환과 가환하므로
+$R(X_V \to V)_!\underline{M}$이 구성 가능임을 보이면 충분하다.
+$W \subset X_V$를 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-make-good-curves}의 (4)가 주는 열린
+부분스킴이라 하자. $Z \subset X_V$를 $X_V$ 안에서 $W$의 여집합에
+주어진 축약 유도 스킴 구조라 하자. $W$는 올들 안에서 조밀하므로
+$Z \to V$의 올들은 차원 $0$이고, 따라서 $Z \to V$는 준유한이다.
+Lemma \ref{lemma-relative-triangle-associated-to-open}의 특별 삼각형
+$$
+R(W \to V)_!\underline{M} \to
+R(X_V \to V)_!\underline{M} \to
+R(Z \to V)_!\underline{M} \to
+\ldots
+$$
+과 Lemma \ref{lemma-qf-f-shriek-constructible}에서
+$R(W \to V)_!\underline{M}$이 구성 가능 코호몰로지 층들을 가짐을
+보이면 충분하다고 결론 내린다.
+다음으로
+$$
+R(W \to V)_!\underline{M} = R(\nu^{-1}(W) \to V)_!\underline{M}
+$$
+이다. 사상 $\nu : \nu^{-1}(W) \to W$가 두껍게 하기이고
+Lemma \ref{lemma-shriek-and-thickening}을 적용할 수 있기 때문이다.
+이제 $Z' \subset \coprod \overline{Y}_i$를 열린집합
+$j(\nu^{-1}(W))$의 여집합이라 하자. 다시 $Z' \to V$는 준유한이다.
+다시 특별 삼각형
+$$
+R(\nu^{-1}(W) \to V)_!\underline{M} \to
+R(\coprod \overline{Y}_i \to V)_!\underline{M} \to
+R(Z' \to V)_!\underline{M} \to
+\ldots
+$$
+을 사용하면
+$$
+R(\coprod \overline{Y}_i \to V)_!\underline{M} =
+\bigoplus\nolimits_i R(\overline{Y}_i \to V)_!\underline{M} =
+\bigoplus\nolimits_i R(T_i \to V)_!R(\overline{Y}_i \to T_i)_!\underline{M}
+$$
+이 구성 가능 코호몰로지 층들을 가짐을 증명하면 충분하다
+(두 번째 등식은 Lemma \ref{lemma-shriek-composition}에 의한다).
+$R(\overline{Y}_i \to T_i)_!\underline{M}$에 대한 결과는 Lemma
+\ref{lemma-proper-smooth-family-curves-modules}이고,
+$T_i \to V$가 유한 에탈이어서 Lemma
+\ref{lemma-qf-f-shriek-constructible}을 적용할 수 있으므로 결론을
+얻는다.
+\end{proof}
+
+
+\begin{lemma}
+\label{lemma-loc-constant-shriek-rel-dim-1}
+$Y$를 유한 차원의 뇌터 아핀 스킴이라 하자.
+$\Lambda$를 꼬임인 뇌터 환이라 하자.
+$\mathcal{F}$를 열린 부분스킴
+$U \subset \mathbf{A}^1_Y$ 위의 유한형 국소상수
+$\Lambda$-가군 층이라 하자. 그러면 구조 사상
+$f : U \to Y$에 대하여 $Rf_!\mathcal{F}$는 구성 가능 코호몰로지
+층들을 갖는다.
+\end{lemma}
+
+\begin{proof}
+$\Lambda$를 곱
+$\Lambda = \Lambda_1 \times \ldots \times \Lambda_r$로 분해할 수
+있다. 여기서 어떤 소수 $\ell_i$에 대하여 $\Lambda_i$는
+$\ell_i$-일차이다. 따라서 어떤 소수 $\ell$과 정수 $n > 0$이 존재하여
+$\ell^n$이 $\Lambda$를 (따라서 $\mathcal{F}$도) 소멸시킨다고
+가정할 수 있다.
+
+\medskip\noindent
+$U$는 뇌터이므로 $U$가 유한 개의 연결 성분을 갖는다. 따라서 $U$가
+연결이라고 가정할 수 있다.
+$g : U' \to U$를 \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-pullback-filtered-modules}에서 구성한 유한
+에탈 덮개라 하자. \'Etale Cohomology, Section
+\ref{etale-cohomology-section-trace-method}의 논의는 합성이 동형인 사상
+$$
+\mathcal{F} \to g_*g^{-1}\mathcal{F} \to \mathcal{F}
+$$
+을 준다. 따라서 $g_*g^{-1}\mathcal{F}$에 대하여 결과를 증명하면
+충분하다. 한편 Lemma \ref{lemma-shriek-composition}에 의해
+$Rf_!g_*g^{-1}\mathcal{F} = R(f \circ g)_!g^{-1}\mathcal{F}$이다.
+$g$의 선택에 의해 $g^{-1}\mathcal{F}$는 어떤 유한
+$\Lambda$-가군 $M$에 대한 꼴 $\underline{M}$의 상수
+$\Lambda$-가군 층들로 이루어진 유한 여과를 갖는다.
+따라서 Lemma \ref{lemma-constant-shriek-rel-dim-1}에서 증명한 경우로
+환원된다.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-constructible-shriek-rel-dim-1}
+$Y$를 아핀 스킴이라 하자. $\Lambda$를 뇌터 환이라 하자.
+$\mathcal{F}$를 $\mathbf{A}^1_Y$ 위의 꼬임인 구성 가능
+$\Lambda$-가군 층이라 하자. 그러면 구조 사상
+$f : \mathbf{A}^1_Y \to Y$에 대하여 $Rf_!\mathcal{F}$는
+구성 가능 코호몰로지 층들을 갖는다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$가 $n > 0$에 의해 소멸된다고 하자.
+그러면 $Rf_!\mathcal{F}$를 바꾸지 않고 $\Lambda$를
+$\Lambda/n\Lambda$로 바꿀 수 있다. 따라서 $\Lambda$가 꼬임 환이라고
+가정할 수 있고 그렇게 하겠다.
+
+\medskip\noindent
+$Y = \Spec(R)$이라고 하자. 이 환을 그 유한형
+$\mathbf{Z}$-부분대수들의 합집합 $R = \bigcup R_i$로 쓰면,
+$\mathcal{F}$가 $\mathbf{A}^1_{R_i}$ 위의 구성 가능
+$\Lambda$-가군 층의 당김이 되는 어떤 $i$를 찾을 수 있다.
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-category-is-colimit}를 보라.
+따라서 $Y$가 유한 차원의 뇌터 스킴이라고 가정할 수 있다.
+
+\medskip\noindent
+$Y$가 차원 $d = \dim(Y)$인 유한 차원의 뇌터 스킴이고
+$\Lambda$가 꼬임이라고 가정하자. $d$에 대한 귀납법으로 결과를
+증명하겠다.
+
+\medskip\noindent
+기초 경우. $d = 0$이면 $R^qf_!\mathcal{F}$의 줄기들이 유한
+$\Lambda$-가군임을 보이는 일만 남는다.
+$\overline{y}$가 $Y$의 기하점이면 Lemma
+\ref{lemma-stalk-R-f-shriek}에 의해
+$(R^qf_!\mathcal{F})_{\overline{y}} = H^q_c(X_{\overline{y}}, \mathcal{F})$이다.
+이는 Lemma \ref{lemma-finiteness-curves}에 의해 유한
+$\Lambda$-가군이다.
+
+\medskip\noindent
+귀납 단계. $Rf_!\mathcal{F}|_V$가 구성 가능 코호몰로지 층들을 갖는
+조밀한 열린집합 $V \subset Y$를 찾으면 충분하다. 실제로 여집합
+$Y \setminus V$에 대한 $Rf_!\mathcal{F}$의 제한은 귀납 가정과
+$Rf_!\mathcal{F}$의 형성이 모든 기저변환과 가환한다는 사실
+(Lemma \ref{lemma-base-change-shriek})에 의해 구성 가능 코호몰로지
+층들을 갖는다.
+구성 가능 $\Lambda$-가군 층의 정의에 의해 조밀한 열린 부분스킴
+$U \subset \mathbf{A}^1_Y$가 존재하여 $\mathcal{F}|_U$는 유한형
+국소상수 $\Lambda$-가군 층이다.
+$Z \subset \mathbf{A}^1_Y$를 그 여집합이라 하자(축약 닫힌
+부분스킴으로 본다). $U$는 $Y$의 기약 성분들의 일반점
+$\xi_1, \ldots, \xi_n$ 위의 $\mathbf{A}^1_Y \to Y$의 올들의 모든
+일반점을 포함함에 주의하라. 따라서 $Z \to Y$는
+$\xi_1, \ldots, \xi_n$ 위에서 유한 올들을 갖는다.
+$Y$를 조밀한 열린집합으로 바꾸면(이는 허용된다)
+$Z \to Y$가 유한이라고 가정할 수 있다. Morphisms, Lemma
+\ref{morphisms-lemma-generically-finite}를 보라.
+Lemma \ref{lemma-relative-triangle-associated-to-open}의 특별 삼각형과
+$Z \to Y$에 대한 결과(Lemma
+\ref{lemma-qf-f-shriek-constructible})에 의해
+$R(U \to Y)_!\mathcal{F}$가 구성 가능 코호몰로지 층들을 가짐을
+보이는 것으로 환원된다. 이는 Lemma
+\ref{lemma-loc-constant-shriek-rel-dim-1}이다.
+\end{proof}
+
+
+\begin{theorem}
+\label{theorem-constructible-shriek}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한 표시 분리
+사상이라 하자. $\Lambda$를 뇌터 환이라 하자. $K$를
+$D^+_{tors, c}(X_\etale, \Lambda)$의 대상이라 하거나,
+$\Lambda$가 꼬임인 경우에는 $D_c(X_\etale, \Lambda)$의 대상이라 하자.
+그러면 $Rf_!K$는 구성 가능 코호몰로지 층들을 갖는다. 즉,
+$Rf_!K$는 $D^+_{tors, c}(Y_\etale, \Lambda)$에 속하거나,
+$\Lambda$가 꼬임인 경우에는 $D_c(Y_\etale, \Lambda)$에 속한다.
+\end{theorem}
+
+\begin{proof}
+문제는 $Y$ 위에서 국소적이므로 $Y$가 아핀이라고 가정할 수 있고
+그렇게 하겠다. 귀납 원리와 Lemma
+\ref{lemma-relative-mayer-vietoris}에 의해 $X$도 아핀인 경우로
+환원된다.
+
+\medskip\noindent
+$X$와 $Y$가 아핀이라고 가정하자. $X$는 유한 표시이므로 유한 표시인
+닫힌 몰입 $i : X \to \mathbf{A}^n_Y$를 택할 수 있다.
+$p : \mathbf{A}^n_Y \to Y$가 구조 사상이면 Lemma
+\ref{lemma-shriek-composition}에 의해
+$Rf_! = Rp_! \circ Ri_!$임을 알 수 있다. Lemma
+\ref{lemma-qf-f-shriek-constructible}에 의해 $Ri_! = i_!$에 대해서는
+결과를 안다. 따라서 $f$가 사영 사상
+$\mathbf{A}^n_Y \to Y$라고 가정할 수 있다.
+$f$를 합성
+$$
+X = \mathbf{A}^n_Y \to \mathbf{A}^{n - 1}_Y \to
+\mathbf{A}^{n - 2}_S \to \ldots \to
+\mathbf{A}^1_Y \to Y
+$$
+으로 볼 수 있으므로 $n = 1$이라고 가정할 수 있다.
+% P08-E141: frozen factorization unexpectedly uses base S in its third term.
+
+\medskip\noindent
+$Y$가 아핀이고 $X = \mathbf{A}^1_Y$라고 가정하자.
+$Rf_!$는 유한 코호몰로지 차원을 가지므로(Lemma
+\ref{lemma-derived-lower-shriek-bounded}) $K$가 아래로 유계라고
+가정할 수 있다. Derived Categories, Lemma
+\ref{derived-lemma-two-ss-complex-functor}의 첫 번째 스펙트럴 열을
+사용하면(또는 절단을 이용한 논증을 사용하면) Lemma
+\ref{lemma-constructible-shriek-rel-dim-1}의 결과를 보이는 것으로
+환원된다.
+\end{proof}
+
+
+\section{응용}
+\label{section-applications}
+
+\noindent
+이 절에서는 Theorem \ref{theorem-constructible-shriek}의 몇 가지
+응용을 제시한다.
+
+\begin{lemma}
+\label{lemma-finiteness-compactly-supported}
+$k$를 대수적으로 닫힌 체라 하자.
+$X$를 $k$ 위의 유한형 분리 스킴이라 하자.
+$\Lambda$를 뇌터 환이라 하자. $K$를
+$D^+_{tors, c}(X_\etale, \Lambda)$의 대상이라 하거나,
+$\Lambda$가 꼬임인 경우에는 $D_c(X_\etale, \Lambda)$의 대상이라 하자.
+그러면 모든 $i \in \mathbf{Z}$에 대하여 $H^i_c(X, K)$는 유한
+$\Lambda$-가군이다.
+\end{lemma}
+
+\begin{proof}
+Theorem \ref{theorem-constructible-shriek}과 Section
+\ref{section-compactly-supported-cohomology}의 콤팩트 지지
+코호몰로지의 정의에서 곧바로 따른다.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-loc-cst-torsion}
+$f : X \to S$를 스킴들의 매끄러운 고유 사상이라 하자.
+$\Lambda$를 뇌터 환이라 하자. $\mathcal{F}$를 $X_\etale$ 위의 유한형
+국소상수 $\Lambda$-가군 층이라 하고, $X$의 모든 기하점
+$\overline{x}$에 대하여 줄기 $\mathcal{F}_{\overline{x}}$가
+$\overline{x}$의 잉여 표수와 서로소인 어떤 정수 $n > 0$에 의해
+소멸된다고 하자. 그러면 모든 $i \in \mathbf{Z}$에 대하여
+$R^if_*\mathcal{F}$는 $S_\etale$ 위의 유한형 국소상수
+$\Lambda$-가군 층이다.
+\end{proposition}
+
+\begin{proof}
+문제는 $S$ 위에서 국소적이므로 $S$가 아핀이라고 가정할 수 있다.
+$X$의 점 $x$에 대하여, $x$ 위에 놓이는 $X$의 어떤(동치로 임의의)
+기하점 $\overline{x}$에 대한 $\mathcal{F}_{\overline{x}}$를
+소멸시키는 가장 작은 정수를 $n_x \geq 1$로 나타내자.
+$X$는 아핀 위에서 고유이므로 준콤팩트이고, 따라서
+$\mathcal{F}|_{U_j}$가 상수인 유한 에탈 덮개
+$\{U_j \to X\}_{j = 1, \ldots, m}$가 존재한다.
+$U_j \to X$가 열려 있으므로 함수 $x \mapsto n_x$는 국소상수이고
+유한 개의 값만 취한다고 결론 내린다. 따라서 열린닫힌 부분스킴들로
+이루어진 유한 분해
+$X = X_1 \amalg \ldots \amalg X_N$을 얻으며,
+$n_x = n$인 것과 $x \in X_n$인 것은 동치이다.
+그러면 유도된 사상 $X_n \to S$와 $\mathcal{F}$의 $X_n$으로의
+제한에 대하여 보조정리를 증명하면 충분하다.
+% P08-E142: frozen proof says “lemma” although it is inside a proposition.
+따라서 어떤 정수 $n > 0$이 존재하여 $\mathcal{F}$가 $n$에 의해
+소멸되고 $n$이 $X$의 모든 잉여체의 잉여 표수와 서로소라고 가정할
+수 있고 그렇게 하겠다.
+
+\medskip\noindent
+$f$가 매끄럽고 고유이므로 상 $f(X) \subset S$는 열린닫힌집합이다.
+따라서 $S$를 $f(X)$로 바꾸어 $f(X) = S$라고 가정할 수 있다.
+특히 아핀 스킴 $S$를 정의하는 환에서 $n$이 가역이라고 가정할 수
+있음을 알 수 있다.
+
+\medskip\noindent
+이 문단에서는 $S$가 뇌터인 경우로 환원한다.
+어떤 $\mathbf{Z}[1/n]$-대수 $A$에 대하여
+$S = \Spec(A)$로 쓰자.
+$A = \bigcup A_i$를 그 유한형 $\mathbf{Z}[1/n]$-부분대수들의
+합집합으로 쓰자. 어떤 $i$와 유한형 사상
+$f_i : X_i \to S_i = \Spec(A_i)$를 찾을 수 있고, 이를 $S$로
+기저변환하면 $f : X \to S$가 된다. Limits, Lemma
+\ref{limits-lemma-descend-finite-presentation}을 보라.
+$i$를 증가시키면 $f_i : X_i \to S_i$가 매끄럽고 고유이라고
+가정할 수 있다. Limits, Lemmas
+\ref{limits-lemma-eventually-proper}
+\ref{limits-lemma-descend-smooth},
+\ref{limits-lemma-descend-dimension-d}를 보라.
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-category-loc-cst-is-colimit}에 의해
+그 당김이 $X$ 위에서 $\mathcal{F}$와 동형인 유한형 국소상수
+$\Lambda$-가군 층 $\mathcal{F}_i$와 어떤 $i$가 존재함을 알 수 있다.
+$\mathcal{F}$는 $n$에 의해 소멸되므로 $\mathcal{F}_i$를
+$\Ker(n : \mathcal{F}_i \to \mathcal{F}_i)$로 바꾸어
+$\mathcal{F}_i$에도 같은 사실이 성립한다고 가정할 수 있다.
+그러면 다음 문단에서 다루는 경우로 환원된다.
+
+\medskip\noindent
+정수 $n \geq 1$이 있고, 밑 스킴 $S$가 뇌터이며
+$\mathbf{Z}[1/n]$ 위에 놓이고, $\mathcal{F}$가 $n$-꼬임이라고
+가정하자. Theorem \ref{theorem-constructible-shriek}에 의해
+층들 $R^if_*\mathcal{F}$는 구성 가능 $\Lambda$-가군 층이다.
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-sp-isom-proper-torsion-loc-ac}에 의해
+$R^if_*\mathcal{F}$의 특수화 사상들은 언제나 동형이다.
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-characterize-locally-constant-module}에
+의해 결론을 얻는다.
+\end{proof}
+
+
+\section{유도 위쪽 슈리크에 관하여 더 알아보기}
+\label{section-more-derived-upper-shriek}
+
+\noindent
+$\Lambda$를 꼬임 환이라 하자. $g$와 $g'$가 유한형 분리이고
+$j$가 에탈인 준콤팩트 준분리 스킴들의 가환 그림
+$$
+\xymatrix{
+U \ar[rr]_j \ar[rd]_g & & U' \ar[ld]^{g'} \\
+& Y
+}
+$$
+을 고찰하자. 이는 $D(Y_\etale, \Lambda)$ 안의 표준 사상
+$$
+Rg_!\Lambda \longrightarrow Rg'_!\Lambda
+$$
+을 유도한다. 실제로 Lemmas \ref{lemma-shriek-composition},
+\ref{lemma-Rf-shriek-for-quasi-finite}에 의해
+$Rg_! = Rg'_! \circ j_!$이다. 한편 $j_!$는 $j^{-1}$의 왼쪽 수반이므로
+여단위 $\text{Tr}_j : j_!\Lambda = j_!j^{-1}\Lambda \to \Lambda$가
+존재한다. 이를 $j$에 대한 트레이스 사상이라고도 부른다. Remark
+\ref{remark-trace-etale-counit}을 보라.
+위 사상은 합성
+$$
+Rg_!\Lambda = Rg'_!j_!\Lambda
+\xrightarrow{Rg'_! \text{Tr}_j}
+Rg'_!\Lambda
+$$
+으로 구성된다.
+어떤 유한형 분리 $g'' : U'' \to Y$에 대한 두 번째 에탈 사상
+$j' : U' \to U''$가 주어졌을 때, $j$와 $j'$에 대한 사상들의 합성
+$$
+Rg_!\Lambda \longrightarrow Rg'_!\Lambda \longrightarrow Rg''_!\Lambda
+$$
+은 $j' \circ j$에 대하여 구성한 사상
+$Rg_!\Lambda \longrightarrow Rg''_!\Lambda$와 같다.
+이는 트레이스 사상에 대한 대응하는 진술에서 따른다.
+더 일반적인 경우는 Lemma \ref{lemma-trace-composition}을 보라.
+
+\medskip\noindent
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. 그러면 함자
+$$
+X_{affine, \etale}
+\longrightarrow
+\left\{
+\begin{matrix}
+\text{유한형 분리 스킴들, 밑은 }Y\\
+\text{및 그 사이의 에탈 사상들}
+\end{matrix}
+\right\}
+$$
+를 얻는다. 따라서 위 구성은 $U$를
+$R(U \to Y)_!\Lambda$로 보내는 함자
+$X_{affine, \etale}^{opp} \to D(Y_\etale, \Lambda)$를 정한다.
+
+\begin{lemma}
+\label{lemma-describe-Rf-upper-shriek}
+$f : X \to Y$를 준콤팩트이고 준분리인 스킴들의 유한형 분리 사상이라
+하자. $\Lambda$를 꼬임 환이라 하자.
+$K \in D(Y_\etale, \Lambda)$라 하자. $n \in \mathbf{Z}$에 대하여
+$H^n(Rf^!K)$를 $X_{affine, \etale}$에 제한한 층은 준층
+$$
+U \longmapsto \Hom_Y(R(U \to Y)_!\Lambda, K[n])
+$$
+에 연관된 층이다. $R(U \to Y)_!\Lambda$의 함자성은 위의 논의를 보라.
+\end{lemma}
+
+\begin{proof}
+$j : U \to X$를 $X_{affine, \etale}$의 대상이라 하고
+$g = f \circ j$로 놓자. 임의의
+$D(X_\etale, \Lambda)$의 $M$에 대하여
+$\Hom_X(j_!\Lambda, M[n]) = H^n(U, M)$임을 상기하자.
+그러면 $H^n(Rf^!K)$는 준층
+$$
+U \mapsto H^n(U, Rf^!K) = \Hom_X(j_!\Lambda, Rf^!K[n]) =
+\Hom_Y(Rf_!j_!\Lambda, K[n] = \Hom_Y(Rg_!\Lambda, K[n])
+$$
+에 연관된 층이다.
+% P08-E143: frozen first Hom expression lacks its closing parenthesis.
+전이 사상들이 위에서 구성한 대상들
+$Rg_!\Lambda = R(U \to Y)_!\Lambda$ 사이의 전이 사상들로 주어진다는
+확인은 생략한다.
+\end{proof}
+
+\input{chapters}
+
+\bibliography{my}
+\bibliographystyle{amsalpha}
+
+\end{document}
