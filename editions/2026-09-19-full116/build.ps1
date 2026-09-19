@@ -37,7 +37,7 @@ try{
  try{$held=$mutex.WaitOne([TimeSpan]::FromSeconds($MutexTimeoutSeconds))}catch [Threading.AbandonedMutexException]{$held=$true;$receipt.mutex.abandoned=$true}
  $receipt.mutex.acquired=$held;Save
  if(-not $held){throw 'Mutex timeout; no TeX launched'}
- New-Item -ItemType Directory -Path $out -ErrorAction Stop | Out-Null
+ New-Item -ItemType Directory -Path $out -Force -ErrorAction Stop | Out-Null
  $envs=@{SOURCE_DATE_EPOCH='1789776000';FORCE_SOURCE_DATE='1';TZ='UTC';TEXINPUTS=($src+';');BIBINPUTS=($src+';')}
  foreach($k in $envs.Keys){$saved[$k]=[Environment]::GetEnvironmentVariable($k,'Process');[Environment]::SetEnvironmentVariable($k,$envs[$k],'Process')}
  $engine=(Get-Command xelatex -CommandType Application).Source;$bib=(Get-Command bibtex -CommandType Application).Source
@@ -47,7 +47,7 @@ try{
   Execute ('pass-'+$n) $engine $args $src
   $log=Get-Content -Raw -LiteralPath (Join-Path $out ($job+'.log'))
   Copy-Item -LiteralPath (Join-Path $out ($job+'.log')) -Destination (Join-Path $run ('pass-'+$n+'.tex.log'))
-  if($log -match '(?m)^!|Undefined control sequence|Emergency stop|Missing character:'){throw 'Fatal or missing-glyph TeX diagnostic'}
+  if($log -match '(?m)^! (?=[A-Za-z])|Undefined control sequence|Emergency stop|Missing character:'){throw 'Fatal or missing-glyph TeX diagnostic'}
   Preserve
   if($n -eq 1){Execute 'bibtex' $bib $job $out;continue}
   $current=@{};foreach($ext in @('pdf','aux','out','toc','bbl')){$current[$ext]=(Record (Join-Path $out ($job+'.'+$ext))).sha256}

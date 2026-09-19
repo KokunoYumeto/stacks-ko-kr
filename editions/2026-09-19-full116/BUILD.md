@@ -22,6 +22,6 @@ then repeat `xelatex reader.tex` until references and auxiliary files stabilize.
 To compile the direct cumulative source instead, copy it beside the `.cls`
 and `my.bib` in `src/` and use its basename in the same commands.
 
-At this source publication checkpoint, the cumulative PDF is still undergoing
-build/layout validation. The source corpus itself is complete; no previously
-published PDF is replaced by an unverified new PDF.
+The 7,211-page cumulative PDF passed repeated-byte build convergence,
+all-page mechanical checks and the targeted visual checks documented in
+RELEASE_VALIDATION.json. This is not a claim of individual visual inspection of every page.

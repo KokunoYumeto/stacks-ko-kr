@@ -10,7 +10,8 @@ translation, not an endorsed or independently certified edition.
 - [Chapter coverage and exact source hashes](ASSEMBLY.json)
 - [Build instructions](BUILD.md)
 
-Source coverage is complete. The newly assembled cumulative PDF is undergoing
-final build/layout checks and will be added with the same source package.
+Source coverage is complete. The 7,211-page cumulative reader is available
+in the GitHub release alongside the exact direct LaTeX and source ZIP. See
+RELEASE_VALIDATION.json for mechanical, visual and editorial qualifications.
 The GNU Free Documentation License 1.2-or-later applies, with no invariant
 sections or cover texts; its complete English text is retained in `src/fdl-body.tex`.
