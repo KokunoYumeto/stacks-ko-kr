@@ -1,6 +1,15 @@
 <!-- FULL116-20260919 -->
 # Stacks Project — Korean translation
 
+<!-- TRANSLATION-CHOICE-REVIEW -->
+## Translation evidence and expert review
+
+This is an **AI-produced translation**, not an official Stacks Project edition, and it has **not received comprehensive expert human review**. Expert review and corrections by mathematicians working in this language are warmly welcome.
+
+The [human-readable translation-choice log](review/translation-choices/README.md) links exact source and translated passages to terminology evidence, reasons, alternatives, and uncertainties. It distinguishes direct attestation from indirect support and provisional model-informed choices. Its currently published coverage is explicitly bounded; a complete translated corpus is not a claim that every wording choice has been audited.
+
+<!-- /TRANSLATION-CHOICE-REVIEW -->
+
 **All 116 chapters are now available as editable LaTeX.** This is the complete
 translated corpus corresponding to pinned upstream `a04446e57ec1fbc252a871afcec7752fb2807b14`.
 
