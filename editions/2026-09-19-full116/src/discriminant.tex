@@ -1,0 +1,3294 @@
+% Generated mechanically from frozen input p06/ko/discriminant.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{48}
+\chapter{판별식과\  different}
+
+
+
+\phantomsection
+\label{discriminant-section-phantom}
+
+
+\section{서론}
+\label{discriminant-section-introduction}
+
+\noindent
+이 장에서는 스킴의 국소 준유한 사상에 대한\   different와 판별식을 연구한다.
+이 내용의 일부에 관해서는\   \cite{Kunz}가 좋은 참고문헌이다.
+
+\medskip\noindent
+Noether 스킴의 준유한 사상\   $f : Y \to X$가 주어지면
+상대 쌍대화 가군\   $\omega_{Y/X}$가 존재한다.
+Section \ref{discriminant-section-quasi-finite-dualizing}에서는\   Zariski 주정리와
+\'etale 국소화 방법을 사용하여 이 가군을 처음부터 구성한다.
+핵심 성질은 다음과 같다. 도식
+$$
+\xymatrix{
+Y' \ar[d]_{f'} \ar[r]_{g'} & Y \ar[d]^f \\
+X' \ar[r]^g & X
+}
+$$
+이 주어지고, $g : X' \to X$가 평탄하며, $Y' \subset X' \times_X Y$가
+열린 부분집합이고, $f' : Y' \to X'$가 유한이면,
+$f'_*\mathcal{O}_{Y'}$-가군의 층으로서 표준 동형
+$$
+f'_*(g')^*\omega_{Y/X} =
+\SheafHom_{\mathcal{O}_{X'}}(f'_*\mathcal{O}_{Y'}, \mathcal{O}_{X'})
+$$
+이 존재한다. Section \ref{discriminant-section-quasi-finite-traces}에서는\   $f$가
+평탄이면 표준 대역 절단\   $\tau_{Y/X} \in H^0(Y, \omega_{Y/X})$가
+존재하여, 위와 같은 모든 가환도식에 대해\   $(g')^*\tau_{Y/X}$가
+유한 국소 자유 사상\   $f'$에 대한\   Section \ref{discriminant-section-discriminant}의
+대각합 사상으로 보내짐을 증명한다.
+Section \ref{discriminant-section-different}에서는\   Noether 스킴의 평탄한 준유한
+사상에 대한\   different를 
+$\tau_{Y/X} : \mathcal{O}_X \to \omega_{Y/X}$의 여핵의
+소멸자로 정의한다.
+
+\medskip\noindent
+이 장의 주된 목표는 준유한\   syntomic\footnote{즉 평탄하고\  lci이다.}
+사상\   $f$에 대해\   different가\   K\"ahler different와 일치함을
+증명하는 것이다. K\"ahler different는\   $\Omega_{Y/X}$의\   0차 
+Fitting 아이디얼이다. Section \ref{discriminant-section-kahler-different}를 보라.
+이 일치는 자명하지 않으며, Section \ref{discriminant-section-formula-different}에서
+보듯이\   Tate의 세련된 논증을 사용한다. 그 과정에서\   Noether
+different와\   Dedekind different도 논한다.
+
+\medskip\noindent
+스킴의 쌍대성에 관한 더 고급 내용과의 연결은 이 장의 끝,
+Sections \ref{discriminant-section-comparison}과\   \ref{discriminant-section-gorenstein-lci}에서야
+비로소 이루어진다.
+
+
+
+
+
+
+
+\section{준유한 환 사상의 쌍대화 가군}
+\label{discriminant-section-quasi-finite-dualizing}
+
+\noindent
+$A \to B$를\   Noether 환의 준유한 준동형이라 하자.
+Zariski 주정리
+(Algebra, Lemma \ref{algebra-lemma-quasi-finite-open-integral-closure})에
+의해, $A \to B'$가 유한이고\   $B' \to B$가 스펙트럼의 열린 몰입을
+유도하는 분해\   $A \to B' \to B$가 존재한다. 이때
+\begin{equation}
+\label{discriminant-equation-dualizing}
+\omega_{B/A} = \Hom_A(B', A) \otimes_{B'} B
+\end{equation}
+로 놓는다. 독자는 이를 일종의 상대 쌍대화 가군으로 생각할 수 있다.
+Lemmas \ref{discriminant-lemma-compare-dualizing}와 
+\ref{discriminant-lemma-compare-dualizing-algebraic}을 보라.
+이 절에서는 초등적인 가환대수 방법을 써서\   $\omega_{B/A}$가
+분해의 선택과 무관하며, $\omega_{B/A}$의 형성이 평탄 기저변환과
+가환함을 보인다. 분해의 선택과 무관함을 증명하기 위해 먼저 주어진
+두 분해를 비교한다.
+
+\begin{lemma}
+\label{discriminant-lemma-dominate-factorizations}
+$A \to B$를 준유한 환 사상이라 하자. 두 분해\ 
+$A \to B' \to B$와\   $A \to B'' \to B$가 주어지고,
+$A \to B'$와\   $A \to B''$는 유한이며,
+$\Spec(B) \to \Spec(B')$와\   $\Spec(B) \to \Spec(B'')$는
+열린 몰입이라고 하자. 그러면\   $A$ 위 유한인\   $A$-부분대수\ 
+$B''' \subset B$가 존재하여, $\Spec(B) \to \Spec(B''')$는 열린
+몰입이고\   $B' \to B$와\   $B'' \to B$는 모두\   $B'''$을 거친다.
+\end{lemma}
+
+\begin{proof}
+$B''' \subset B$를\   $B' \to B$와\   $B'' \to B$의 상들이 생성하는\ 
+$A$-부분대수라 하자. $B'$와\   $B''$는 각각\   $A$ 위 정인 유한 개의
+원소로 생성되므로, $B'''$도\   $A$ 위 정인 유한 개의 원소로 생성된다.
+따라서\   $B'''$은\   $A$ 위 유한이다
+(Algebra, Lemma \ref{algebra-lemma-characterize-finite-in-terms-of-integral}).
+사상들을 생각하자.
+$$
+B = B' \otimes_{B'} B \to B''' \otimes_{B'} B \to B \otimes_{B'} B = B
+$$
+마지막 등식은\   $\Spec(B) \to \Spec(B')$가 열린 몰입이고, 따라서
+단사상이라는 사실에서 따른다. $B' \to B$가 평탄하므로 두 번째
+화살표는 단사이다. 따라서 두 화살표 모두 동형이다. 이는
+$$
+\xymatrix{
+\Spec(B''') \ar[d] & \Spec(B) \ar[d] \ar[l] \\
+\Spec(B') & \Spec(B) \ar[l]
+}
+$$
+가 카르테시안임을 뜻한다. 열린 몰입의 기저변환은 열린 몰입이므로
+결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-well-defined}
+가군  (\ref{discriminant-equation-dualizing})은 잘 정의된다. 즉 분해의 선택과 무관하다.
+\end{lemma}
+
+\begin{proof}
+$B', B'', B'''$을\   Lemma \ref{discriminant-lemma-dominate-factorizations}에서와 같이
+택한다. 표준 사상
+$$
+\omega''' = \Hom_A(B''', A) \otimes_{B'''} B \longrightarrow
+\Hom_A(B', A) \otimes_{B'} B = \omega'
+$$
+과\   $B''$를 포함하는 유사한 사상을 얻는다. 이 사상들이 동형임을
+보이면 보조정리가 증명된다. $B'_g \to B_g$가 동형이고, 따라서\ 
+$B'_g \to (B''')_g \to B_g$가 모두 동형이 되게 하는 원소\ 
+$g \in B'$을 택한다. $(\omega''')_g \to \omega'_g$가 동형임을
+보이는 것으로 충분하다. 환 사상\   $B' \to B'''$의 핵과 여핵은
+유한\   $A$-가군이며\   $g$-멱 꼬임이다. 따라서 이들은\   $g$의 어떤
+거듭제곱에 의해 소멸한다. 이로부터 결론이 쉽게 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-localize-dualizing}
+$A \to B$를\   Noether 환의 준유한 사상이라 하자.
+\begin{enumerate}
+\item 어떤\   $f \in A$에 대해\   $A \to B$가\   $A \to A_f \to B$로
+분해되면, $\omega_{B/A} = \omega_{B/A_f}$이다.
+\item $g \in B$이면, $(\omega_{B/A})_g = \omega_{B_g/A}$이다.
+\item $f \in A$이면, $\omega_{B_f/A_f} = (\omega_{B/A})_f$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$A \to B'$는 유한이고\   $\Spec(B) \to \Spec(B')$는 열린 몰입인
+분해\   $A \to B' \to B$가 있다고 하자. (1)의 경우에는 분해\ 
+$A_f \to B'_f \to B$를 사용하여\   $\omega_{B/A_f}$를 계산하고,
+Algebra, Lemma \ref{algebra-lemma-hom-from-finitely-presented}를 사용하면 된다.
+(2)의 경우에는 분해\   $A \to B' \to B_g$를 사용하면 결론을 얻는다.
+(3)은  (1)과  (2)를 결합하면 따른다.
+\end{proof}
+\noindent
+$A \to B$를\   Noether 환의 준유한 환 사상이라 하고,
+$A \to A_1$을\   Noether 환의 임의의 환 사상이라 하며,
+$B_1 = B \otimes_A A_1$로 놓자. 쌍대 카르테시안 도식
+$$
+\xymatrix{
+B \ar[r] & B_1 \\
+A \ar[u] \ar[r] & A_1 \ar[u]
+}
+$$
+을 얻는다. $A_1 \to B_1$도 준유한임을 관찰하자
+(Algebra, Lemma \ref{algebra-lemma-quasi-finite-base-change}).
+이 상황에서 표준적인\   $B$-선형 기저변환 사상
+\begin{equation}
+\label{discriminant-equation-bc-dualizing}
+\omega_{B/A} \longrightarrow \omega_{B_1/A_1}
+\end{equation}
+을 정의한다. 구체적으로, $\omega_{B/A}$의 구성에서와 같은 분해\ 
+$A \to B' \to B$를 택한다. 그러면\   $B'_1 = B' \otimes_A A_1$은\ 
+$A_1$ 위 유한이며, $\omega_{B_1/A_1}$의 구성에서 분해\ 
+$A_1 \to B'_1 \to B_1$을 사용할 수 있다. 따라서 사상
+$$
+\Hom_A(B', A) \otimes_{B'} B
+\longrightarrow
+\Hom_{A_1}(B' \otimes_A A_1, A_1) \otimes_{B'_1} B_1
+$$
+을 구성해야 한다. 그러므로\   $\varphi \mapsto \varphi_1$로 나타낼\ 
+$B'$-선형 사상\ 
+$\Hom_A(B', A) \to \Hom_{A_1}(B' \otimes_A A_1, A_1)$을
+구성하는 것으로 충분하다. 즉\   $A$-선형 사상\   $\varphi : B' \to A$가
+주어지면, $\varphi_1(b' \otimes a_1) = \varphi(b')a_1$을 만족하는
+사상을\   $\varphi_1$로 둔다. 이는 명백히\   $A_1$-선형이며 구성이 끝난다.
+
+\begin{lemma}
+\label{discriminant-lemma-bc-map-dualizing}
+기저변환 사상  (\ref{discriminant-equation-bc-dualizing})은 분해\ 
+$A \to B' \to B$의 선택과 무관하다. 환 사상\   $A \to A_1 \to A_2$가
+주어지면, $A \to A_1$과\   $A_1 \to A_2$에 대한 기저변환 사상의
+합성은\   $A \to A_2$에 대한 기저변환 사상이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: Lemma \ref{discriminant-lemma-dualizing-well-defined}의 증명과
+정확히 같은 방식으로\   Lemma \ref{discriminant-lemma-dominate-factorizations}를
+사용하여 논증하라.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-flat-base-change}
+$A \to A_1$이 평탄이면 기저변환 사상  (\ref{discriminant-equation-bc-dualizing})은
+동형\   $\omega_{B/A} \otimes_B B_1 \to \omega_{B_1/A_1}$을 유도한다.
+\end{lemma}
+
+\begin{proof}
+$A \to A_1$이 평탄하다고 하자. $\omega_{B/A}$의 구성에 의해\ 
+$A \to B$가 유한이라고 가정해도 된다. 그러면\ 
+$\omega_{B/A} = \Hom_A(B, A)$이고\ 
+$\omega_{B_1/A_1} = \Hom_{A_1}(B_1, A_1)$이다.
+$B_1 = B \otimes_A A_1$이므로, 결론은\   More on Algebra, Lemma
+\ref{more-algebra-lemma-pseudo-coherence-and-base-change-ext}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-composition}
+$A \to B \to C$를\   Noether 환의 준유한 준동형이라 하자.
+표준 사상\   $\omega_{B/A} \otimes_B \omega_{C/B} \to \omega_{C/A}$가
+존재한다.
+\end{lemma}
+
+\begin{proof}
+$A \to B'$는 유한이고\   $\Spec(B) \to \Spec(B')$는 열린 몰입이 되도록\ 
+$A \to B' \to B$를 택한다. 그러면\   $B' \to C$도 준유한이다.
+$B' \to C'$는 유한이고\   $\Spec(C) \to \Spec(C')$는 열린 몰입이 되도록\ 
+$B' \to C' \to C$를 택한다. 이때 화살표의 정의역은
+$$
+\Hom_A(B', A) \otimes_{B'} B \otimes_B
+\Hom_B(B \otimes_{B'} C', B) \otimes_{B \otimes_{B'} C'} C
+$$
+이고, 이는
+$$
+\Hom_A(B', A) \otimes_{B'}
+\Hom_{B'}(C', B) \otimes_{C'} C
+$$
+와 같다. 여기에 합성\ 
+$\Hom_A(B', A) \times \Hom_{B'}(C', B) \to \Hom_A(C', A)$에서 오는\ 
+$\Hom_A(C', A) \otimes_{C'} C = \omega_{C/A}$로의 표준 사상이 있다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-product}
+$A \to B$와\   $A \to C$를\   Noether 환의 준유한 사상이라 하자.
+그러면\   $B \times C$ 위의 가군으로서\ 
+$\omega_{B \times C/A} = \omega_{B/A} \times \omega_{C/A}$이다.
+\end{lemma}
+
+\begin{proof}
+$A \to B'$와\   $A \to C'$가 유한이고,
+$\Spec(B) \to \Spec(B')$와\   $\Spec(C) \to \Spec(C')$가
+열린 몰입이 되도록 분해\   $A \to B' \to B$와 
+$A \to C' \to C$를 택한다. 그러면\ 
+$A \to B' \times C' \to B \times C$도 같은 종류의 분해이다.
+이 분해로\   $\omega_{B \times C/A}$를 계산하면 보조정리를 얻는다.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-dualizing-associated-primes}
+$A \to B$를\   Noether 환의 준유한 준동형이라 하자. 그러면\ 
+$\text{Ass}_B(\omega_{B/A})$는\   $A$의 수반 소아이디얼 위에 놓이는\ 
+$B$의 소아이디얼들의 집합이다.
+\end{lemma}
+
+\begin{proof}
+$A \to B'$는 유한이고\   $B' \to B$는 스펙트럼 위의 열린 몰입을
+유도하는 분해\   $A \to B' \to B$를 택한다.
+$\omega_{B/A} = \omega_{B'/A} \otimes_{B'} B$이므로\ 
+$\omega_{B'/A}$에 대해 명제를 증명하면 충분하다. 따라서\ 
+$A \to B$가 유한이라고 가정해도 된다.
+
+\medskip\noindent
+$\mathfrak p \in \text{Ass}(A)$라고 하고, $\mathfrak q$를 
+$\mathfrak p$ 위에 놓이는\   $B$의 소아이디얼이라 하자. 소멸자가\ 
+$\mathfrak p$인 원소\   $x \in A$를 택한다. 영이 아닌\ 
+$\kappa(\mathfrak p)$-선형 사상\ 
+$\lambda : \kappa(\mathfrak q) \to \kappa(\mathfrak p)$를 택한다.
+$A/\mathfrak p \subset B/\mathfrak q$가 환의 유한 확대이므로,
+$f \not \in \mathfrak p$인\   $f \in A$가 존재하여\   $f\lambda$는\ 
+$B/\mathfrak q$를\   $A/\mathfrak p$ 안으로 보낸다. 따라서 영이 아닌\ 
+$A$-선형 사상
+$$
+B \to B/\mathfrak q \to A/\mathfrak p \to A,\quad
+b \mapsto f\lambda(b)x
+$$
+을 얻는다. 간단한 계산으로\   $\omega_{B/A}$의 이 원소의 소멸자가\ 
+$\mathfrak q$임을 알 수 있고, 따라서\ 
+$\mathfrak q \in \text{Ass}(\omega_{B/A})$이다.
+
+\medskip\noindent
+역으로, $\mathfrak q \subset B$가\   $A$의 수반 소아이디얼이 아닌
+소아이디얼\   $\mathfrak p \subset A$ 위에 놓인다고 하자.
+$\mathfrak q \not \in \text{Ass}_B(\omega_{B/A})$임을 보여야 한다.
+$A$를\   $A_\mathfrak p$로, $B$를\   $B_\mathfrak p$로 바꾸면\ 
+$\mathfrak p$가\   $A$의 극대 아이디얼이라고 가정할 수 있다.
+이는\   Lemma \ref{discriminant-lemma-dualizing-flat-base-change}와\   Algebra, Lemma
+\ref{algebra-lemma-localize-ass}에 의해 허용된다. 그러면\   $A$ 위의
+영인자가 아닌 원소\   $f \in \mathfrak m$이 존재한다.
+이때\   $f$는\   $\omega_{B/A}$ 위에서도 영인자가 아닌 원소이므로,
+$\mathfrak q$는 이 가군의 수반 소아이디얼이 아니다.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-dualizing-base-flat-flat}
+$A \to B$를\  Noether 환의 평탄한 준유한 준동형이라 하자.
+그러면\  $\omega_{B/A}$는 평탄한\  $A$-가군이다.
+\end{lemma}
+
+\begin{proof}
+$\mathfrak q \subset B$를\  $\mathfrak p \subset A$ 위에 놓이는
+소아이디얼이라 하자. 국소화\  $\omega_{B/A, \mathfrak q}$가\ 
+$A_\mathfrak p$ 위에서 평탄함을 보이겠다.
+Algebra, Lemma \ref{algebra-lemma-flat-localization}에 의해 이것으로 충분하다.
+Algebra, Lemma
+\ref{algebra-lemma-etale-makes-quasi-finite-finite-one-prime}에 의해,
+\'etale 환 사상\  $A \to A'$과\  $\mathfrak p$ 위에 놓이는 소아이디얼\ 
+$\mathfrak p' \subset A'$을 택하여\ 
+$\kappa(\mathfrak p') = \kappa(\mathfrak p)$이고
+$$
+B' = B \otimes_A A' = C \times D
+$$
+이며\  $A' \to C$는 유한이 되게 할 수 있다. 또한\ 
+$B \otimes_A A'$에서\  $\mathfrak q$와\  $\mathfrak p'$ 위에 놓이는
+유일한 소아이디얼\  $\mathfrak q'$은\  $C$의 한 소아이디얼에 대응한다.
+Lemma \ref{discriminant-lemma-dualizing-flat-base-change}와\  Algebra, Lemma
+\ref{algebra-lemma-base-change-flat-up-down}에 의해,
+$\omega_{B'/A', \mathfrak q'}$가\  $A'_{\mathfrak p'}$ 위에서
+평탄함을 보이면 충분하다. Lemma \ref{discriminant-lemma-dualizing-product}에 의해\ 
+$\omega_{B'/A'} = \omega_{C/A'} \times \omega_{D/A'}$이므로,
+$B$가\  $A$ 위에서 유한 평탄인 경우로 환원된다.
+이 경우\  $B$는 유한 국소 자유\  $A$-가군이고,
+$\omega_{B/A} = \Hom_A(B, A)$는 그 쌍대 유한 국소 자유\  $A$-가군이다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-base-change-of-flat}
+$A \to B$가 평탄이면, 기저변환 사상 (\ref{discriminant-equation-bc-dualizing})은
+동형\  $\omega_{B/A} \otimes_B B_1 \to \omega_{B_1/A_1}$을 유도한다.
+\end{lemma}
+
+\begin{proof}
+$A \to B$가 유한 평탄이면\  $B$는 유한 국소 자유\  $A$-가군이다.
+이 경우\  $\omega_{B/A} = \Hom_A(B, A)$는 그 쌍대 유한 국소 자유\ 
+$A$-가군이고, 이 가군의 형성은 임의의 기저변환과 가환한다.
+따라서 이 경우에는 보조정리가 성립한다. 다음 문단에서는 일반적인
+준유한 평탄의 경우를 방금 논한 유한 평탄의 경우로 환원한다.
+
+\medskip\noindent
+$\mathfrak q_1 \subset B_1$을 소아이디얼이라 하자. 주어진 사상을\ 
+$\mathfrak q_1$에서 국소화한 것이 동형임을 보이겠다. Algebra, Lemma
+\ref{algebra-lemma-characterize-zero-local}에 의해 이것으로 충분하다.
+$\mathfrak q \subset B$와\  $\mathfrak p \subset A$를\ 
+$\mathfrak q_1$ 아래에 놓이는 소아이디얼이라 하자.
+Algebra, Lemma
+\ref{algebra-lemma-etale-makes-quasi-finite-finite-one-prime}에 의해,
+\'etale 환 사상\  $A \to A'$과\  $\mathfrak p$ 위에 놓이는 소아이디얼\ 
+$\mathfrak p' \subset A'$을 택하여\ 
+$\kappa(\mathfrak p') = \kappa(\mathfrak p)$이고
+$$
+B' = B \otimes_A A' = C \times D
+$$
+이며\  $A' \to C$는 유한이 되게 할 수 있다. 또한\ 
+$B \otimes_A A'$에서\  $\mathfrak q$와\  $\mathfrak p'$ 위에 놓이는
+유일한 소아이디얼\  $\mathfrak q'$은\  $C$의 한 소아이디얼에 대응한다.
+$A'_1 = A' \otimes_A A_1$로 놓고, 다음 도식에서처럼 환 사상\ 
+$A \to A' \to A'_1$과\  $A \to A_1 \to A'_1$에 대한
+기저변환 사상 (\ref{discriminant-equation-bc-dualizing})을 생각하자.
+$$
+\xymatrix{
+\omega_{B'/A'} \otimes_{B'} B'_1 \ar[r] & \omega_{B'_1/A'_1} \\
+\omega_{B/A} \otimes_B B'_1 \ar[r] \ar[u] &
+\omega_{B_1/A_1} \otimes_{B_1} B'_1 \ar[u]
+}
+$$
+여기서\  $B' = B \otimes_A A'$, $B_1 = B \otimes_A A_1$이고,
+$B_1' = B \otimes_A (A' \otimes_A A_1)$이다.
+Lemma \ref{discriminant-lemma-bc-map-dualizing}에 의해 이 도식은 가환한다.
+Lemma \ref{discriminant-lemma-dualizing-flat-base-change}에 의해 수직 화살표들은
+동형이다. $B_1 \to B'_1$은 \'etale이고 따라서 평탄하므로,
+$\mathfrak q$ 위에 놓이는\  $B'_1$의 소아이디얼\  $\mathfrak q'_1$에서
+국소화한 뒤 위쪽 수평 화살표가 동형임을 보이면 충분하다
+(그러한 소아이디얼이 존재하며\  Algebra, Lemma
+\ref{algebra-lemma-local-flat-ff}를 사용한다).
+따라서\  $B = C \times D$이고\  $A \to C$는 유한이며\ 
+$\mathfrak q$은\  $C$의 한 소아이디얼에 대응한다고 가정해도 된다.
+이 경우 쌍대화 가군\  $\omega_{B/A}$도 같은 방식으로 분해되므로
+(Lemma \ref{discriminant-lemma-dualizing-product}), 문제는 위에서 다룬
+유한 평탄의 경우\  $A \to C$로 환원된다.
+\end{proof}
+
+\begin{remark}
+\label{discriminant-remark-relative-dualizing-for-quasi-finite}
+$f : Y \to X$를 국소\  Noether 스킴의 국소 준유한 사상이라 하자.
+Lemma \ref{discriminant-lemma-localize-dualizing}에서, $Y$ 위에 유일한 연접\ 
+$\mathcal{O}_Y$-가군\  $\omega_{Y/X}$가 존재하여 다음을 만족함이
+분명하다. $f(V) \subset U$를 만족하는 임의의 아핀 열린집합 쌍\ 
+$\Spec(B) = V \subset Y$, $\Spec(A) = U \subset X$마다
+표준 동형
+$$
+H^0(V, \omega_{Y/X}) = \omega_{B/A}
+$$
+이 존재하며, 이 동형들은 제한 사상과 양립한다.
+\end{remark}
+
+\begin{lemma}
+\label{discriminant-lemma-compare-dualizing-algebraic}
+$A \to B$를\  Noether 환의 준유한 준동형이라 하자.
+$\omega_{B/A}^\bullet \in D(B)$를\  Dualizing Complexes, Section
+\ref{dualizing-section-relative-dualizing-complexes-Noetherian}에서
+논한 대수적 상대 쌍대화 복합체라 하자. 그러면 비유일한 동형\ 
+$\omega_{B/A} = H^0(\omega_{B/A}^\bullet)$이 존재한다.
+\end{lemma}
+
+\begin{proof}
+$A \to B'$가 유한이고\  $\Spec(B') \to \Spec(B)$가 열린 몰입인
+분해\  $A \to B' \to B$를 택한다. 그러면\  Dualizing Complexes,
+Lemmas \ref{dualizing-lemma-composition-shriek-algebraic}와\ 
+\ref{dualizing-lemma-upper-shriek-localize}, 그리고\ 
+$\omega_{B/A}^\bullet$의 정의에 의해\ 
+$\omega_{B/A}^\bullet = \omega_{B'/A}^\bullet \otimes_B^\mathbf{L} B'$이다.
+따라서\  $A \to B$가 유한인 경우에 동형이 존재함을 보이면 충분하다.
+이 경우\  Dualizing Complexes, Lemma
+\ref{dualizing-lemma-upper-shriek-finite}를 사용하면\ 
+$\omega_{B/A}^\bullet = R\Hom(B, A)$이고, 따라서 원하는 대로\ 
+$H^0(\omega^\bullet_{B/A}) = \Hom_A(B, A)$이다.
+\end{proof}
+
+
+
+
+
+\section{유한 국소 자유 사상의 판별식}
+\label{discriminant-section-discriminant}
+
+\noindent
+$X$를 스킴이라 하고\  $\mathcal{F}$를 유한 국소 자유\ 
+$\mathcal{O}_X$-가군이라 하자. 그러면 표준 {\it 대각합} 사상
+$$
+\text{Trace} :
+\SheafHom_{\mathcal{O}_X}(\mathcal{F}, \mathcal{F})
+\longrightarrow
+\mathcal{O}_X
+$$
+이 존재한다. Exercises, Exercise \ref{exercises-exercise-trace-det}를 보라.
+이 사상은\  $\text{Trace}(\text{id})$가\  $\mathcal{F}$의 계수에 대응하는\ 
+$\mathcal{O}_X$ 위의 국소 상수 함수라는 성질을 갖는다.
+
+\medskip\noindent
+$\pi : X \to Y$를 유한 국소 자유인 스킴 사상이라 하자. 그러면 표준적인
+{\it $\pi$의 대각합}이 존재한다. 이는\  $\mathcal{O}_Y$-선형 사상
+$$
+\text{Trace}_\pi : \pi_*\mathcal{O}_X \longrightarrow \mathcal{O}_Y
+$$
+이며, $\pi_*\mathcal{O}_X$의 국소 절단\  $f$를\ 
+$\pi_*\mathcal{O}_X$ 위의\  $f$에 의한 곱셈의 대각합으로 보낸다.
+아핀 열린집합 위에서는\  Exercises, Exercise
+\ref{exercises-exercise-trace-det-rings}의 구성을 얻는다.
+합성
+$$
+\mathcal{O}_Y \xrightarrow{\pi^\sharp} \pi_*\mathcal{O}_X
+\xrightarrow{\text{Trace}_\pi} \mathcal{O}_Y
+$$
+은\  $\pi$의 차수에 의한 곱셈과 같다. 이 차수는\  $Y$ 위의 국소 상수
+함수이다. Fields, Section \ref{fields-section-trace-pairing}과
+유사하게, 규칙\  $(f, g) \mapsto \text{Trace}_\pi(fg)$로 대각합 쌍
+$$
+Q_\pi :
+\pi_*\mathcal{O}_X \times \pi_*\mathcal{O}_X
+\longrightarrow
+\mathcal{O}_Y
+$$
+을 정의할 수 있다. $Q_\pi$를 계수가 같은 국소 자유 가군 사이의 선형 사상\ 
+$\pi_*\mathcal{O}_X \to
+\SheafHom_{\mathcal{O}_Y}(\pi_*\mathcal{O}_X, \mathcal{O}_Y)$
+으로 생각하면 행렬식
+$$
+\det(Q_\pi) :
+\wedge^{top}(\pi_*\mathcal{O}_X)
+\longrightarrow
+\wedge^{top}(\pi_*\mathcal{O}_X)^{\otimes -1}
+$$
+을 얻고, 다시 말해 대역 절단
+$$
+\det(Q_\pi) \in \Gamma(Y, \wedge^{top}(\pi_*\mathcal{O}_X)^{\otimes -2})
+$$
+을 얻는다. {\it $\pi$의 판별식}은 정의상 이 대역 절단이 잘라내는
+닫힌 부분스킴\  $D_\pi \subset Y$이다. 분명히\  $D_\pi$는\  $Y$의
+국소 주 닫힌 부분스킴이다.
+
+\begin{lemma}
+\label{discriminant-lemma-discriminant}
+$\pi : X \to Y$를 유한 국소 자유인 스킴 사상이라 하자.
+그러면\  $\pi$가 \'etale일 필요충분조건은 그 판별식이 공집합인 것이다.
+\end{lemma}
+
+\begin{proof}
+Morphisms, Lemma \ref{morphisms-lemma-etale-flat-etale-fibres}에 의해\ 
+$\pi$의 올들이 \'etale인지 확인하면 충분하다. 대각합 쌍의 구성은
+기저변환과 가환하므로 다음 문제로 환원된다. $k$를 체라 하고\ 
+$A$를 유한차원\  $k$-대수라 하자. $A$가\  $k$ 위에서 \'etale일
+필요충분조건이 대각합 쌍\ 
+$Q_{A/k} : A \times A \to k$, $(a, b) \mapsto \text{Trace}_{A/k}(ab)$
+이 비퇴화인 것임을 보여라.
+
+\medskip\noindent
+$Q_{A/k}$가 비퇴화라고 하자. $a \in A$가 멱영원이면 모든\ 
+$b \in A$에 대해\  $ab$도 멱영원이므로\  $Q_{A/k}(a, -)$가 항등적으로
+영임을 얻는다. 따라서\  $A$는 기약이다. 그러면 각\  $K_i$가 체인 곱으로\ 
+$A = K_1 \times \ldots \times K_n$이라고 쓸 수 있다
+(Algebra, Lemmas \ref{algebra-lemma-finite-dimensional-algebra},
+\ref{algebra-lemma-artinian-finite-length}, and
+\ref{algebra-lemma-minimal-prime-reduced-ring}를 보라).
+이 경우 이차공간\  $(A, Q_{A/k})$는 공간들\  $(K_i, Q_{K_i/k})$의
+직교 직합이다. Fields, Lemma
+\ref{fields-lemma-separable-trace-pairing}에 의해 각\  $K_i$는\ 
+$k$ 위에서 분리가능하다. Algebra, Lemma
+\ref{algebra-lemma-etale-over-field}에 의해 이는\  $A$가\  $k$ 위에서
+\'etale임을 뜻한다. 역은 논증을 거꾸로 읽으면 증명된다.
+\end{proof}
+
+
+
+
+\section{평탄한 준유한 환 사상의 대각합}
+\label{discriminant-section-quasi-finite-traces}
+
+\noindent
+이 절의 제목에서 말하는 대각합은\  Duality for Schemes, Section
+\ref{duality-section-trace}에서 논한 대각합과 전혀 다른 성격을 갖는다.
+즉\  Fields, Section \ref{fields-section-trace-pairing}에서 논하고\ 
+Exercises, Exercises \ref{exercises-exercise-trace-det}와\ 
+\ref{exercises-exercise-trace-det-rings}에서 일반화한 대각합이다.
+
+\medskip\noindent
+$A \to B$를\  Noether 환의 유한 평탄 사상이라 하자. 그러면\  $B$는
+유한 평탄\  $A$-가군이고, 따라서 유한 국소 자유이다
+(Algebra, Lemma \ref{algebra-lemma-finite-projective}).
+$b \in B$가 주어지면, $B$ 위의\  $b$에 의한 곱셈으로 주어지는\ 
+$A$-선형 사상\  $B \to B$의 {\it 대각합}
+$\text{Trace}_{B/A}(b)$를 생각할 수 있다. 위의 참고문헌들에 의해
+이는\  $A$-선형 사상\  $\text{Trace}_{B/A} : B \to A$를 정의한다.
+$A \to B$가 유한이므로\  $\omega_{B/A} = \Hom_A(B, A)$이고,
+따라서\  $\text{Trace}_{B/A} \in \omega_{B/A}$이다.
+
+\medskip\noindent
+일반적인 평탄 준유한 환 사상에 대해서는 대각합을 다음과 같이 정의한다.
+
+\begin{definition}
+\label{discriminant-definition-trace-element}
+$A \to B$를\  Noether 환의 평탄한 준유한 사상이라 하자.
+{\it 대각합 원소}란 다음 성질을 갖는 유일한\footnote{유일성과 존재성은\ 
+Lemmas \ref{discriminant-lemma-trace-unique}와\  \ref{discriminant-lemma-dualizing-tau}에서 정당화한다.}
+원소\  $\tau_{B/A} \in \omega_{B/A}$이다. 임의의\  Noether
+$A$-대수\  $A_1$에 대해, $B_1 = B \otimes_A A_1$이\ 
+$B_1 = C \times D$라는 곱 분해를 가지며\  $A_1 \to C$가 유한이면,
+$\omega_{C/A_1}$에서의\  $\tau_{B/A}$의 상은\ 
+$\text{Trace}_{C/A_1}$이다. 여기서는 기저변환 사상
+(\ref{discriminant-equation-bc-dualizing})과\  Lemma \ref{discriminant-lemma-dualizing-product}를
+사용하여\  $\omega_{B/A} \to \omega_{B_1/A_1} \to \omega_{C/A_1}$을 얻는다.
+\end{definition}
+
+\noindent
+먼저 대각합 원소의 유일성을 증명한 다음 그 존재성을 증명한다.
+
+\begin{lemma}
+\label{discriminant-lemma-trace-unique}
+$A \to B$를\  Noether 환의 평탄한 준유한 사상이라 하자.
+그러면\  $\omega_{B/A}$에는 대각합 원소가 많아야 하나 존재한다.
+\end{lemma}
+
+\begin{proof}
+$\mathfrak q \subset B$를 소아이디얼\  $\mathfrak p \subset A$ 위에
+놓이는 소아이디얼이라 하자. Algebra, Lemma
+\ref{algebra-lemma-etale-makes-quasi-finite-finite-one-prime}에 의해,
+\'etale 환 사상\  $A \to A_1$과\  $\mathfrak p$ 위에 놓이는 소아이디얼\ 
+$\mathfrak p_1 \subset A_1$을 택하여\ 
+$\kappa(\mathfrak p_1) = \kappa(\mathfrak p)$이고
+$$
+B_1 = B \otimes_A A_1 = C \times D
+$$
+이며\  $A_1 \to C$는 유한이 되게 할 수 있다. 또한\ 
+$B \otimes_A A_1$에서\  $\mathfrak q$와\  $\mathfrak p_1$ 위에 놓이는
+유일한 소아이디얼\  $\mathfrak q_1$은\  $C$의 한 소아이디얼에 대응한다.
+Lemmas \ref{discriminant-lemma-dualizing-flat-base-change}와\ 
+\ref{discriminant-lemma-dualizing-product}를 결합하면\ 
+$\omega_{C/A_1} = \omega_{B/A} \otimes_B C$이다.
+이 방식으로 얻는 환 사상들\  $B \to C$의 모음은 평탄 사상들의
+공동 단사 족이고, $\omega_{C/A_1}$에서\  $\tau_{B/A}$의 상이
+지정되어 있으므로 유일성이 따른다.
+\end{proof}
+
+\noindent
+다음은 건전성 점검이다.
+
+\begin{lemma}
+\label{discriminant-lemma-finite-flat-trace}
+$A \to B$를\  Noether 환의 유한 평탄 사상이라 하자.
+그러면\  $\text{Trace}_{B/A} \in \omega_{B/A}$는 대각합 원소이다.
+\end{lemma}
+
+\begin{proof}
+$A_1$이\  Noether인\  $A \to A_1$과, $A_1 \to C$가 유한인 곱 분해\ 
+$B \otimes_A A_1 = C \times D$가 주어졌다고 하자. 물론 이 경우\ 
+$A_1 \to D$도 유한이다. $B_1 = B \otimes_A A_1$로 놓자.
+대각합의 구성은 기저변환과 가환하므로\ 
+$\text{Trace}_{B/A}$가\  $\text{Trace}_{B_1/A_1}$로 보내짐을 알 수 있다.
+이제\  Lemma \ref{discriminant-lemma-dualizing-product}의 동형\ 
+$\omega_{B_1/A_1} = \omega_{C/A_1} \times \omega_{D/A_1}$ 아래에서\ 
+$\text{Trace}_{B_1/A_1} = (\text{Trace}_{C/A_1}, \text{Trace}_{D/A_1})$임을
+관찰하면
+증명이 끝난다.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-trace-base-change}
+$A \to B$를\  Noether 환의 평탄한 준유한 사상이라 하자.
+$\tau \in \omega_{B/A}$를 대각합 원소라 하자.
+\begin{enumerate}
+\item $A_1$이\  Noether인 사상\  $A \to A_1$이 주어지면,
+$B_1 = A_1 \otimes_A B$에 대해\  $\omega_{B_1/A_1}$에서의\ 
+$\tau$의 상은 대각합 원소이다.
+\item 어떤 환\  $R$과\  $f \in R$에 대해\  $A = R_f$이면,
+$\tau$는\  $\omega_{B/R}$의 대각합 원소이다.
+\item $g \in B$이면, $\omega_{B_g/A}$에서의\  $\tau$의 상은
+대각합 원소이다.
+\item $B = B_1 \times B_2$이면, $\tau$는\  $\omega_{B_1/A}$와\ 
+$\omega_{B_2/A}$ 모두의 대각합 원소로 보내진다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 정의의 형식적 귀결이다.
+
+\medskip\noindent
+Lemma \ref{discriminant-lemma-localize-dualizing}에 의해\ 
+$\omega_{B/R} = \omega_{B/A}$이므로 (2)는 의미가 있다.
+$\tau$를\  $\omega_{B/R}$의 원소로 보았을 때 이를\  $\tau'$이라 쓰자.
+(2)를 보이기 위해, $R_1$이\  Noether인\  $R \to R_1$과\ 
+$R_1 \to C$가 유한인 곱 분해\ 
+$B \otimes_R R_1 = C \times D$가 주어졌다고 하자.
+그러면\  $A_1 = (R_1)_f$로 놓았을 때\ 
+$B \otimes_A A_1 = C \times D$이다.
+$R_1 \to C$가 유한이므로 더구나\  $A_1 \to C$도 유한이다.
+따라서\  $\tau$의 정의 성질을 사용하여\  $\tau'$의 대응하는 성질을 얻는다.
+
+\medskip\noindent
+Lemma \ref{discriminant-lemma-localize-dualizing}에 의해\ 
+$\omega_{B_g/A} = (\omega_{B/A})_g$이므로 (3)은 의미가 있다.
+증명은 (2)의 증명과 비슷하다. $A_1$이\  Noether인\ 
+$A \to A_1$과, $A_1 \to C$가 유한인 곱 분해\ 
+$B_g \otimes_A A_1 = C \times D$가 주어졌다고 하자.
+$B_1 = B \otimes_A A_1$로 놓자. $B_g \otimes_A A_1 = (B_1)_g$이므로\ 
+$\Spec(C) \to \Spec(B_1)$는 열린 몰입이고, $B_1 \to C$가
+유한이므로 닫힌 몰입이기도 하다. 여기서\  $A_1 \to C$가 유한임을 썼다.
+따라서\  $B_1 = C \times D_1$이고\  $D = (D_1)_g$임을 알 수 있다.
+이제\  $\tau$의 정의 성질을 사용하여\  $\omega_{B_g/A}$에서\ 
+$\tau$의 상에 대한 대응하는 성질을 얻는다.
+
+\medskip\noindent
+Lemma \ref{discriminant-lemma-dualizing-product}에 의해\ 
+$\omega_{B/A} = \omega_{B_1/A} \times \omega_{B_2/A}$이므로
+(4)는 의미가 있다. $A'$이\  Noether인\  $A \to A'$과,
+$A' \to C$가 유한인 곱 분해\ 
+$B \otimes_A A' = C \times D$가 주어졌다고 하자.
+이 곱 분해를\ 
+$B \otimes_A A' = C_1 \times C_2 \times D_1 \times D_2$
+로 세분할 수 있음은 분명하다. 여기서\  $A' \to C_i$는 유한이고\ 
+$B_i \otimes_A A' = C_i \times D_i$이다.
+이제\  $\tau$의 정의 성질을 사용하여\  $\omega_{B_i/A}$에서의\ 
+$\tau$의 상에 대한 대응하는 성질을 얻는다. 이때 분해\ 
+$\omega_{C/A'} = \omega_{C_1/A'} \times \omega_{C_2/A'}$ 아래의
+자명한 사실\ 
+$\text{Trace}_{C/A'} = (\text{Trace}_{C_1/A'}, \text{Trace}_{C_2/A'})$
+을 사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-glue-trace}
+$A \to B$를\  Noether 환의 평탄한 준유한 사상이라 하자.
+$g_1, \ldots, g_m \in B$를 단위 아이디얼을 생성하는 원소들이라 하자.
+$\tau \in \omega_{B/A}$를, $\omega_{B_{g_i}/A}$에서의 상이\ 
+$A \to B_{g_i}$에 대한 대각합 원소인 원소라 하자.
+그러면\  $\tau$는 대각합 원소이다.
+\end{lemma}
+
+\begin{proof}
+$A_1$이\  Noether인\  $A \to A_1$과, $A_1 \to C$가 유한인 곱 분해\ 
+$B \otimes_A A_1 = C \times D$가 주어졌다고 하자.
+$\omega_{C/A_1}$에서\  $\tau$의 상이\ 
+$\text{Trace}_{C/A_1}$임을 보여야 한다. $g_1, \ldots, g_m$은\ 
+$B_1 = B \otimes_A A_1$의 단위 아이디얼을 생성하고,
+Lemma \ref{discriminant-lemma-trace-base-change}에 의해\  $\tau$는\ 
+$\omega_{(B_1)_{g_i}/A_1}$의 대각합 원소로 보내진다.
+따라서\  $A$를\  $A_1$로, $B$를\  $B_1$로 바꾸어 다음 문단에서
+서술하는 상황에 이를 수 있다.
+
+\medskip\noindent
+여기서는\  $B = C \times D$이고\  $A \to C$가 유한이라고 가정한다.
+$\tau_C$를\  $\omega_{C/A}$에서의\  $\tau$의 상이라 하자.
+$\omega_{C/A}$에서\ 
+$\tau_C = \text{Trace}_{C/A}$임을 증명해야 한다.
+대각합 원소가 곱과 양립함에 의해
+(Lemma \ref{discriminant-lemma-trace-base-change}),
+$\tau_C$는\  $\omega_{C_{g_i}/A}$의 대각합 원소로 보내진다.
+따라서\  $B$를\  $C$로 바꾸어\  $A \to B$가 유한 평탄이라고 가정해도 된다.
+
+\medskip\noindent
+$A \to B$가 유한 평탄이라고 하자. Lemma
+\ref{discriminant-lemma-finite-flat-trace}에 의해 이 경우\ 
+$\text{Trace}_{B/A}$는 대각합 원소이다. 그러므로\  Lemma
+\ref{discriminant-lemma-trace-base-change}에 의해\  $\text{Trace}_{B/A}$는\ 
+$\omega_{B_{g_i}/A}$의 대각합 원소로 보내진다.
+대각합 원소는 유일하므로 (Lemma \ref{discriminant-lemma-trace-unique}),
+$\text{Trace}_{B/A}$와\  $\tau$는\ 
+$\omega_{B_{g_i}/A} = (\omega_{B/A})_{g_i}$에서 같은 원소로 보내진다.
+$g_1, \ldots, g_m$이\  $B$의 단위 아이디얼을 생성하므로 사상\ 
+$\omega_{B/A} \to \prod \omega_{B_{g_i}/A}$는 단사이고,
+따라서 원하는 대로\  $\tau_C = \text{Trace}_{B/A}$이다.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-dualizing-tau}
+$A \to B$를\  Noether 환의 평탄한 준유한 사상이라 하자.
+대각합 원소\  $\tau \in \omega_{B/A}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$A \to B'$가 유한이고\  $\Spec(B) \to \Spec(B')$가 열린 몰입인
+분해\  $A \to B' \to B$를 택한다. $\Spec(B')$의 열린집합으로서\ 
+$\Spec(B) = \bigcup D(g_i)$가 되게 하는 원소\ 
+$g_1, \ldots, g_n \in B'$을 택한다. 준유한 평탄 환 사상\ 
+$A \to B_{g_i}$에 대한 대각합 원소\  $\tau_i$의 존재를
+증명할 수 있다고 하자. 그러면 모든\  $i, j$에 대해\  Lemma
+\ref{discriminant-lemma-trace-base-change}에 의해\  $\tau_i$와\  $\tau_j$는\ 
+$\omega_{B_{g_ig_j}/A}$의 대각합 원소로 보내진다.
+대각합 원소의 유일성에 의해 (Lemma \ref{discriminant-lemma-trace-unique})
+이들은 같은 원소로 보내진다. 따라서\  $\omega_{B/A}$에 연관된
+준연접 가군에 대한 층 조건은 (Algebra, Lemma
+\ref{algebra-lemma-cover-module}를 보라)
+원소\  $\tau \in \omega_{B/A}$를 준다. Lemma
+\ref{discriminant-lemma-glue-trace}에 의해\  $\tau$는 대각합 원소이다.
+이렇게 하여 다음 문단에서 다루는 경우로 환원된다.
+
+\medskip\noindent
+$A \to B'$가 유한이고\  $g \in B'$이며\  $B = B'_g$가\ 
+$A$ 위에서 평탄이라고 하자. 우리의 과제는\ 
+$\omega_{B/A} = \Hom_A(B', A) \otimes_{B'} B$에서
+대각합 원소를 구성하는 것이다. $B'$의 유한 자유\  $A$-가군\ 
+$F_0$, $F_1$에 의한 해소\ 
+$F_1 \to F_0 \to B' \to 0$을 택한다. 그러면 완전열
+$$
+0 \to \Hom_A(B', A) \to F_0^\vee \to F_1^\vee
+$$
+을 얻는다. 여기서\  $F_i^\vee = \Hom_A(F_i, A)$는 쌍대 유한 자유
+가군이다. 마찬가지로 완전열
+$$
+0 \to \Hom_A(B', B') \to F_0^\vee \otimes_A B' \to F_1^\vee \otimes_A B'
+$$
+을 얻는다. $\tau$의 구성은 도식
+$$
+B' \xrightarrow{\mu} \Hom_A(B', B')
+\leftarrow \Hom_A(B', A) \otimes_A B'
+\xrightarrow{ev} A
+$$
+을 사용하는 것이 그 착상이다. 첫 번째 화살표는\  $b' \in B'$을\ 
+$b'$에 의한 곱셈으로 주어지는\  $A$-선형 연산자로 보내고,
+마지막 화살표는 값매김 사상이다. 문제는\ 
+$\lambda' \otimes b'$을 사상\ 
+$b'' \mapsto \lambda'(b'')b'$으로 보내는 가운데 화살표가
+동형이 아니라는 데 있다. $B'$가\  $A$ 위에서 평탄이면 위의
+완전열들로부터 이 화살표가 동형임을 알 수 있고, 왼쪽에서 오른쪽으로의
+합성은 통상적인 대각합\  $\text{Trace}_{B'/A}$이다.
+일반적인 경우에는 도식
+$$
+\xymatrix{
+& \Hom_A(B', A) \otimes_A B' \ar[r] \ar[d] &
+\Hom_A(B', A) \otimes_A B'_g \ar[d] \\
+B' \ar[r]_-\mu \ar@{..>}[rru] \ar@{..>}[ru]^\psi &
+\Hom_A(B', B') \ar[r] &
+\Ker(F_0^\vee \otimes_A B'_g \to F_1^\vee \otimes_A B'_g)
+}
+$$
+을 생각한다. $A \to B'_g$의 평탄성에 의해 오른쪽 수직 화살표는
+동형이다. 따라서 장식 없는 점선 화살표를 얻는다.
+$B'_g = \colim \frac{1}{g^n}B'$이고, 여극한은 텐서곱과 가환하며,
+$B'$는 유한 표시\  $A$-가군이므로, 어떤\  $n \geq 0$과
+(오른쪽\  $B'$-가군 구조에 대해) $B'$-선형인 사상\ 
+$\psi : B' \to \Hom_A(B', A) \otimes_A B'$을 택하여,
+그 사상과 왼쪽 수직 화살표의 합성이\  $g^n\mu$가 되게 할 수 있다.
+$ev$와 합성하여 원소\ 
+$ev \circ \psi \in \Hom_A(B', A)$를 얻는다. 이제
+$$
+\tau = (ev \circ \psi) \otimes g^{-n} \in
+\Hom_A(B', A) \otimes_{B'} B'_g = \omega_{B'_g/A} = \omega_{B/A}
+$$
+로 놓는다. 이 원소가 위의\  $n$과\  $\psi$의 선택에 의존하지 않는다는
+간단한 확인은 생략한다.
+
+\medskip\noindent
+앞 문단에서 구성한\  $\tau$가 한 특수한 경우에 원하는 성질을
+가짐을 증명하자. 즉\  $B' = C' \times D'$이고\  $g = (f, h)$이며,
+$A \to C'$는 평탄하고, $D'_h$는 평탄하며, $f$는\  $C'$의
+단원이라고 하자. 보여야 할 것은\  $\tau$가\  $\omega_{C'/A}$에서\ 
+$\text{Trace}_{C'/A}$로 보내진다는 것이다.
+이 경우 먼저 쌍\  $(D', h)$에 대해 위와 같은\  $n_D$와\ 
+$\psi_D : D' \to \Hom_A(D', A) \otimes_A D'$를 택한다.
+그리고\  $\psi_C : C' \to \Hom_A(C', A) \otimes_A C' = \Hom_A(C', C')$를\ 
+$c' \in C'$을\  $c'$에 의한 곱셈으로 보내는 사상으로 둘 수 있다.
+그다음\  $n = n_D$와\  $\psi = (f^{n_D} \psi_C, \psi_D)$를 택한다.
+위에서 언급했듯이\ 
+$\text{Trace}_{C'/A} = ev \circ \psi_C$이므로 원하는 양립성은 분명하다.
+
+\medskip\noindent
+일반적으로 원하는 성질을 증명하기 위해, $A_1$이\  Noether인\ 
+$A \to A_1$과\  $A_1 \to C$가 유한인 곱 분해\ 
+$B'_g \otimes_A A_1 = C \times D$가 주어졌다고 하자.
+$B'_1 = B' \otimes_A A_1$로 놓는다. 이때\ 
+$B'_g \otimes_A A_1 = (B'_1)_g$이므로\ 
+$\Spec(C) \to \Spec(B'_1)$는 열린 몰입이고,
+$A_1 \to C$가 유한이어서\  $B'_1 \to C$가 유한이므로 그 상은
+닫혀 있다. 따라서\  $B'_1 = C \times D'$이고\  $D'_g = D$이다.
+$B'_1 = C \times D'$와\  $A_1$ 위의\  $g$가 앞 문단의 상황에
+놓인다는 결론을 얻는다. 위에 표시한 도식의 형성은 기저변환과
+가환하므로, $\tau$의 형성도 기저변환\  $A \to A_1$과 가환한다
+(세부사항은 생략한다. 이를 보려면 해소\ 
+$F_1 \otimes_A A_1 \to F_0 \otimes_A A_1 \to B'_1 \to 0$을 사용하라).
+따라서 원하는 양립성은 앞 문단의 결과에서 따른다.
+\end{proof}
+
+\begin{remark}
+\label{discriminant-remark-relative-dualizing-for-flat-quasi-finite}
+$f : Y \to X$를 국소\  Noether 스킴의 평탄하고 국소 준유한인
+사상이라 하자. $\omega_{Y/X}$를\  Remark
+\ref{discriminant-remark-relative-dualizing-for-quasi-finite}에서와 같이 두자.
+대각합 원소의 유일성, 존재성, 국소화와의 양립성
+(Lemmas \ref{discriminant-lemma-trace-unique}, \ref{discriminant-lemma-dualizing-tau}, and
+\ref{discriminant-lemma-trace-base-change})에서, 대역 절단
+$$
+\tau_{Y/X} \in \Gamma(Y, \omega_{Y/X})
+$$
+이 존재하여 다음을 만족함이 분명하다. $f(V) \subset U$인
+임의의 아핀 열린집합 쌍\ 
+$\Spec(B) = V \subset Y$, $\Spec(A) = U \subset X$에 대해\ 
+$\tau_{Y/X}$는 표준 동형\ 
+$H^0(V, \omega_{Y/X}) = \omega_{B/A}$ 아래에서\ 
+$\tau_{B/A}$로 보내진다.
+\end{remark}
+
+\begin{lemma}
+\label{discriminant-lemma-tau-nonzero}
+$k$를 체라 하고\  $A$를 유한\  $k$-대수라 하자. $A$는 국소환이고
+잉여체가\  $k'$이라고 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $\text{Trace}_{A/k}$는 영이 아니다,
+\item $\tau_{A/k} \in \omega_{A/k}$는 영이 아니다, 그리고
+\item $k'/k$는 분리가능하고\  $\text{length}_A(A)$는\ 
+$k$의 표수와 서로소이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{discriminant-lemma-finite-flat-trace}에 의해 조건 (1)과 (2)는 동치이다.
+$\mathfrak m \subset A$라 하자. $\dim_k(A) < \infty$이므로\ 
+$A$가\  $A$ 위에서 유한 길이를 가짐은 분명하다.
+아이디얼들에 의한 여과
+$$
+A = I_0 \supset \mathfrak m = I_1 \supset I_2 \supset \ldots I_n = 0
+$$
+를 택하여, $A$-가군으로서\  $I_i/I_{i + 1} \cong k'$이 되게 하자.
+Algebra, Lemma \ref{algebra-lemma-simple-pieces}를 보라.
+이 보조정리는\  $n = \text{length}_A(A)$도 보여 준다.
+$a \in \mathfrak m$이면\  $aI_i \subset I_{i + 1}$이고,
+$\text{Trace}_{A/k}(a) = 0$임이 즉시 따른다.
+$a \not \in \mathfrak m$이고 그 상이\  $\lambda \in k'$이면,
+다음을 얻는다.
+$$
+\text{Trace}_{A/k}(a) =
+\sum\nolimits_{i = 0, \ldots, n - 1}
+\text{Trace}_k(a : I_i/I_{i - 1} \to I_i/I_{i - 1}) =
+n \text{Trace}_{k'/k}(\lambda)
+$$
+Fields, Lemma \ref{fields-lemma-separable-trace-pairing}를 적용하면
+보조정리의 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+\section{유한 사상}
+\label{discriminant-section-finite-morphisms}
+
+\noindent
+이 절에서는 앞 절들의 구성을 유한 사상에 적용할 때의 몇 가지
+관찰을 모은다. $f : Y \to X$를 국소\  Noether 스킴의 유한 사상이라
+하자. $\omega_{Y/X}$를\  Remark
+\ref{discriminant-remark-relative-dualizing-for-quasi-finite}에서와 같이 두자.
+
+\medskip\noindent
+첫 번째 관찰은\  $f_*\mathcal{O}_Y$-가군의 층으로서
+$$
+f_*\omega_{Y/X} = \SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X)
+$$
+라는 것이다. $f$는 아핀이므로 이 공식은\  $\omega_{Y/X}$를 유일하게
+특징짓는다. Morphisms, Lemma
+\ref{morphisms-lemma-affine-equivalence-modules}를 보라.
+이 공식이 성립하는 이유는 다음과 같다. $\Spec(A) = U \subset X$가
+아핀 열린집합이면 역상\  $V = f^{-1}(U)$는 유한\  $A$-대수\  $B$의
+스펙트럼이고, 따라서 구성에 의해
+$$
+H^0(U, f_*\omega_{Y/X}) =
+H^0(V, \omega_{Y/X}) =
+\omega_{B/A} =
+\Hom_A(B, A) =
+H^0(U, \SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X))
+$$
+이다. 특히 표준 값매김 사상
+$$
+f_*\omega_{Y/X} \longrightarrow \mathcal{O}_X
+$$
+을 얻는다. $f_*\omega_{Y/X}$를 층\ 
+$\SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X)$로
+생각하면 이 사상은\  $1$에서의 값매김으로 주어진다.
+
+\medskip\noindent
+두 번째 관찰은 값매김 사상을 사용하면\  $Y$ 위의 준연접 가군\ 
+$\mathcal{F}$와\  $X$ 위의 유한 국소 자유 가군\  $\mathcal{G}$에 대해
+함자적인 표준 식별
+$$
+\Hom_Y(\mathcal{F}, f^*\mathcal{G} \otimes_{\mathcal{O}_Y} \omega_{Y/X})
+=
+\Hom_X(f_*\mathcal{F}, \mathcal{G})
+$$
+을 얻는다는 것이다. $\mathcal{G} = \mathcal{O}_X$이면 위의 사실과\ 
+Algebra, Lemma \ref{algebra-lemma-adjoint-hom-restrict}에서 즉시 따른다.
+일반적인\  $\mathcal{G}$에 대해서는 같은 보조정리와\ 
+$f_*\mathcal{O}_Y$-가군들의 동형
+$$
+f_*(f^*\mathcal{G} \otimes_{\mathcal{O}_Y} \omega_{Y/X}) =
+\mathcal{G} \otimes_{\mathcal{O}_X}
+\SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X) =
+\SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{G})
+$$
+을 사용할 수 있다. 여기서 첫 번째 등식은 사영 공식이다
+(Cohomology, Lemma \ref{cohomology-lemma-projection-formula}).
+다른 방법은 아핀 국소적으로 직접 계산하여 공식을 증명하는 것이다.
+
+\medskip\noindent
+세 번째 관찰은\  $f$가 더 나아가 평탄이면 합성
+$$
+f_*\mathcal{O}_Y \xrightarrow{f_*\tau_{Y/X}} f_*\omega_{Y/X}
+\longrightarrow \mathcal{O}_X
+$$
+이\  Section \ref{discriminant-section-discriminant}에서 논한 대각합 사상\ 
+$\text{Trace}_f$와 같다는 것이다. 이는 아핀 열린집합 위에서 보면
+즉시 따른다.
+
+\medskip\noindent
+네 번째 관찰은\  $f$가 평탄하고\  $X$가\  Noether이면,
+$D_\QCoh(\mathcal{O}_Y)$의 임의의\  $K$와\ 
+$D_\QCoh(\mathcal{O}_X)$의 임의의\  $M$에 대해
+$$
+\Hom_Y(K, Lf^*M \otimes_{\mathcal{O}_Y} \omega_{Y/X})
+=
+\Hom_X(Rf_*K, M)
+$$
+을 얻는다는 것이다. 이는\  Duality for Schemes, Section
+\ref{duality-section-proper-flat}의 내용에서 따르지만, 이 경우에는
+다음과 같이 직접 증명할 수 있다. 먼저\  $X$가 아핀이면\ 
+Dualizing Complexes, Lemmas \ref{dualizing-lemma-right-adjoint}와\ 
+\ref{dualizing-lemma-RHom-is-tensor-special}\footnote{우리의 경우에는
+이 보조정리에 대한 더 간단한 증명이 있다.}, 그리고\ 
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-affine-compare-bounded}에 의해 성립한다.
+이제 귀납 원리
+(Cohomology of Schemes, Lemma
+\ref{coherent-lemma-induction-principle})와\  Mayer--Vietoris
+(Cohomology, Lemma \ref{cohomology-lemma-mayer-vietoris-hom}의 형태)를
+사용하여 증명을 마친다.
+
+
+
+
+
+
+\section{Noether different}
+\label{discriminant-section-noether-different}
+
+\noindent
+문헌에는 서로 다른 여러\  different가 있다. 이 절과 다음 절들에서
+그 가운데 일부를 열거한다. 더 자세한 내용은\  \cite{Kunz}를 참조하라.
+
+\medskip\noindent
+$A \to B$를 환 사상이라 하자. 곱셈 사상을
+$$
+\mu : B \otimes_A B \longrightarrow B,\quad
+b \otimes b' \longmapsto bb'
+$$
+로 나타내자. $I = \Ker(\mu)$라 하자. $I$가\  $b \in B$에 대한 원소\ 
+$b \otimes 1 - 1 \otimes b$들로 생성됨은 분명하다.
+따라서\  $I$의 소멸자\  $J \subset B \otimes_A B$에는 표준적으로\ 
+$B$-가군 구조가 주어진다. $A$ 위의\  $B$의 {\it Noether different}는
+사상\  $\mu : B \otimes_A B \to B$ 아래의\  $J$의 상이다.
+동치로, Noether different는 사상
+$$
+J = \Hom_{B \otimes_A B}(B, B \otimes_A B) \longrightarrow B,\quad
+\varphi \longmapsto \mu(\varphi(1))
+$$
+의 상이다. 먼저 몇 가지 필수적인 보조정리를 제시한다.
+
+\begin{lemma}
+\label{discriminant-lemma-noether-different-product}
+$A \to B_i$, $i = 1, 2$를 환 사상들이라 하고\ 
+$B = B_1 \times B_2$로 놓자.
+\begin{enumerate}
+\item $\Ker(B \otimes_A B \to B)$의 소멸자\  $J$는\ 
+$J_1 \times J_2$이다. 여기서\  $J_i$는\ 
+$\Ker(B_i \otimes_A B_i \to B_i)$의 소멸자이다.
+\item $A$ 위의\  $B$의\  Noether different $\mathfrak{D}$는\ 
+$\mathfrak{D}_1 \times \mathfrak{D}_2$이다. 여기서\ 
+$\mathfrak{D}_i$는\  $A$ 위의\  $B_i$의\  Noether different이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-noether-different-base-change}
+$A \to B$를 유한형 환 사상이라 하자. $A \to A'$을 평탄한
+환 사상이라 하고\  $B' = B \otimes_A A'$로 놓자.
+\begin{enumerate}
+\item $\Ker(B' \otimes_{A'} B' \to B')$의 소멸자\  $J'$은\ 
+$J \otimes_A A'$이다. 여기서\  $J$는\ 
+$\Ker(B \otimes_A B \to B)$의 소멸자이다.
+\item $A'$ 위의\  $B'$의\  Noether different $\mathfrak{D}'$은\ 
+$\mathfrak{D}B'$이다. 여기서\  $\mathfrak{D}$는\ 
+$A$ 위의\  $B$의\  Noether different이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$B$를\  $A$-대수로서 생성하는 원소\  $b_1, \ldots, b_n$을 택한다.
+그러면
+$$
+J = \Ker(B \otimes_A B \xrightarrow{b_i \otimes 1 - 1 \otimes b_i}
+(B \otimes_A B)^{\oplus n})
+$$
+이다. 따라서\  $J$의 형성이 평탄 기저변환과 가환함을 알 수 있다.
+Noether different에 관한 결과는 여기서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-noether-different-localization}
+$A \to B' \to B$를 환 사상들이라 하고, $A \to B'$는 유한형이며\ 
+$B' \to B$는 스펙트럼의 열린 몰입을 유도한다고 하자.
+\begin{enumerate}
+\item $\Ker(B \otimes_A B \to B)$의 소멸자\  $J$는\ 
+$J' \otimes_{B'} B$이다. 여기서\  $J'$은\ 
+$\Ker(B' \otimes_A B' \to B')$의 소멸자이다.
+\item $A$ 위의\  $B$의\  Noether different $\mathfrak{D}$는\ 
+$\mathfrak{D}'B$이다. 여기서\  $\mathfrak{D}'$은\ 
+$A$ 위의\  $B'$의\  Noether different이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$I = \Ker(B \otimes_A B \to B)$와\ 
+$I' = \Ker(B' \otimes_A B' \to B')$로 쓰자.
+$\Spec(B) \to \Spec(B')$가 열린 몰입이므로\ 
+$B = (B \otimes_A B) \otimes_{B' \otimes_A B'} B'$임이 따른다.
+따라서\  $I = I'(B \otimes_A B)$임을 알 수 있다.
+$I'$은 유한 생성이고\  $B' \otimes_A B' \to B \otimes_A B$는
+평탄하므로\  $J = J'(B \otimes_A B)$이다. Algebra, Lemma
+\ref{algebra-lemma-annihilator-flat-base-change}를 보라.
+$J'$의\  $B' \otimes_A B'$-가군 구조는\ 
+$B' \otimes_A B' \to B'$을 거쳐 인수분해되므로 (1)이 성립한다.
+(2)는 (1)의 귀결이다.
+\end{proof}
+
+\begin{remark}
+\label{discriminant-remark-construction-pairing}
+$A \to B$를\  Noether 환의 준유한 준동형이라 하고,
+$J$를\  $\Ker(B \otimes_A B \to B)$의 소멸자라 하자.
+표준적인\  $B$-쌍선형 쌍
+\begin{equation}
+\label{discriminant-equation-pairing-noether}
+\omega_{B/A} \times J \longrightarrow B
+\end{equation}
+이 존재하며 다음과 같이 정의된다. $A \to B'$가 유한이고\ 
+$B' \to B$가 스펙트럼의 열린 몰입을 유도하는 분해\ 
+$A \to B' \to B$를 택한다. $J'$을\ 
+$\Ker(B' \otimes_A B' \to B')$의 소멸자라 하자.
+먼저
+$$
+\Hom_A(B', A) \times J' \longrightarrow B',\quad
+(\lambda, \sum b_i \otimes c_i) \longmapsto \sum \lambda(b_i)c_i
+$$
+를 정의한다. $\xi \in J'$와\  $b \in B'$에 대해\ 
+$(b \otimes 1)\xi = (1 \otimes b)\xi$이므로, 이것은 정확히\ 
+$B'$-쌍선형이다. Lemma
+\ref{discriminant-lemma-noether-different-localization}과\ 
+$\omega_{B/A} = \Hom_A(B', A) \otimes_{B'} B$라는 사실에 의해
+이를 위에 표시한\  $B$-쌍선형 쌍으로 확장할 수 있다.
+\end{remark}
+
+\begin{lemma}
+\label{discriminant-lemma-noether-pairing-compatibilities}
+$A \to B$를\  Noether 환의 준유한 준동형이라 하자.
+\begin{enumerate}
+\item $A \to A'$이\  Noether 환의 평탄한 사상이면
+$$
+\xymatrix{
+\omega_{B/A} \times J \ar[r] \ar[d] & B \ar[d]  \\
+\omega_{B'/A'} \times J' \ar[r] & B'
+}
+$$
+는 가환한다. 여기서 표기는\  Lemma
+\ref{discriminant-lemma-noether-different-base-change}에서와 같고,
+수평 화살표들은 (\ref{discriminant-equation-pairing-noether})으로 주어진다.
+\item $B = B_1 \times B_2$이면
+$$
+\xymatrix{
+\omega_{B/A} \times J \ar[r] \ar[d] & B \ar[d]  \\
+\omega_{B_i/A} \times J_i \ar[r] & B_i
+}
+$$
+는\  $i = 1, 2$에 대해 가환한다. 여기서 표기는\  Lemma
+\ref{discriminant-lemma-noether-different-product}에서와 같고,
+수평 화살표들은 (\ref{discriminant-equation-pairing-noether})으로 주어진다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Remark \ref{discriminant-remark-construction-pairing}의 쌍의 구성에 의해
+(1)과 (2)는 모두\  $A \to B$가 유한인 경우로 환원된다.
+그러면 (1)은 축약 사상\ 
+$\Hom_A(M, A) \otimes_A M \otimes_A M \to M$,
+$\lambda \otimes m \otimes m' \mapsto \lambda(m)m'$
+이 기저변환과 가환한다는 사실에서 따른다. (2)를 보이려면\ 
+$J = J_1 \times J_2$가\  $B \otimes_A B$의 직합 성분\ 
+$B_1 \otimes_A B_1$과\  $B_2 \otimes_A B_2$ 안에 들어 있음을 사용하라.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-noether-pairing-flat-quasi-finite}
+$A \to B$를\  Noether 환의 평탄한 준유한 준동형이라 하자.
+Remark \ref{discriminant-remark-construction-pairing}의 쌍은 동형\ 
+$J \to \Hom_B(\omega_{B/A}, B)$를 유도한다.
+\end{lemma}
+
+\begin{proof}
+먼저\  $A \to B$가 유한 평탄일 때 이를 증명한다. 이 경우\ 
+$A$에서 국소화하여\  $B$가 자유 유한\  $A$-가군이라고 가정할 수 있다.
+$b_1, \ldots, b_n$을\  $A$-가군\  $B$의 기저라 하고,
+$b_1^\vee, \ldots, b_n^\vee$를\  $\omega_{B/A}$의 쌍대 기저라 하자.
+$\sum b_i \otimes c_i \in J$는\  $b_i^\vee$를\  $c_i$로 보내는\ 
+$\Hom_B(\omega_{B/A}, B)$의 원소로 보내짐을 주목하자.
+$\varphi : \omega_{B/A} \to B$가\  $B$-선형이라고 하자.
+그러면\  $\xi = \sum b_i \otimes \varphi(b_i^\vee)$가\  $J$의
+원소라고 주장한다. 실제로\  $\varphi$의\  $B$-선형성은 정확히
+모든\  $b \in B$에 대해\ 
+$(b \otimes 1)\xi = (1 \otimes b)\xi$임을 뜻한다.
+따라서 우리의 사상은 역을 가지며 동형이다.
+
+\medskip\noindent
+$\mathfrak q \subset B$를\  $\mathfrak p \subset A$ 위에 놓이는
+소아이디얼이라 하자. 국소화
+$$
+J_\mathfrak q
+\longrightarrow
+\Hom_B(\omega_B/A, B)_\mathfrak q
+$$
+가 동형임을 보이겠다. Algebra, Lemma
+\ref{algebra-lemma-characterize-zero-local}에 의해 이것으로 충분하다.
+Algebra, Lemma
+\ref{algebra-lemma-etale-makes-quasi-finite-finite-one-prime}에 의해,
+\'etale 환 사상\  $A \to A'$과\  $\mathfrak p$ 위에 놓이는 소아이디얼\ 
+$\mathfrak p' \subset A'$을 택하여\ 
+$\kappa(\mathfrak p') = \kappa(\mathfrak p)$이고
+$$
+B' = B \otimes_A A' = C \times D
+$$
+이며\  $A' \to C$는 유한이 되게 할 수 있다. 또한\ 
+$B \otimes_A A'$에서\  $\mathfrak q$와\  $\mathfrak p'$ 위에 놓이는
+유일한 소아이디얼\  $\mathfrak q'$은\  $C$의 한 소아이디얼에 대응한다.
+$J'$을\  $\Ker(B' \otimes_{A'} B' \to B')$의 소멸자라 하자.
+Lemmas \ref{discriminant-lemma-dualizing-flat-base-change},
+\ref{discriminant-lemma-noether-different-base-change}, and
+\ref{discriminant-lemma-noether-pairing-compatibilities}에 의해 사상\ 
+$J' \to \Hom_{B'}(\omega_{B'/A'}, B')$은\ 
+$J \to \Hom_B(\omega_{B/A}, B)$에 함자\  $- \otimes_B B'$을
+적용하여 얻어진다. $B_\mathfrak q \to B'_{\mathfrak q'}$은
+충실 평탄이므로\  $(A' \to B', \mathfrak q')$에 대해 결과를
+증명하면 충분하다. Lemmas \ref{discriminant-lemma-dualizing-product},
+\ref{discriminant-lemma-noether-different-product}, and
+\ref{discriminant-lemma-noether-pairing-compatibilities}에 의해 이는 증명의
+첫 문단에서 증명한 경우로 환원된다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-noether-different-flat-quasi-finite}
+$A \to B$를\  Noether 환의 평탄한 준유한 준동형이라 하자.
+도식
+$$
+\xymatrix{
+J \ar[rr] \ar[rd]_\mu & &
+\Hom_B(\omega_{B/A}, B) \ar[ld]^{\varphi \mapsto \varphi(\tau_{B/A})} \\
+& B
+}
+$$
+는 가환한다. 여기서 수평 화살표는\  Lemma
+\ref{discriminant-lemma-noether-pairing-flat-quasi-finite}의 동형이다.
+따라서\  $A$ 위의\  $B$의\  Noether different는 사상\ 
+$\Hom_B(\omega_{B/A}, B) \to B$의 상이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{discriminant-lemma-noether-pairing-flat-quasi-finite}의 증명과
+똑같이, 이는 유한 자유 사상\  $A \to B$의 경우로 환원된다.
+이 경우\  $\tau_{B/A} = \text{Trace}_{B/A}$이다.
+$b_1, \ldots, b_n$을\  $A$-가군\  $B$의 기저라 하자.
+$\xi = \sum b_i \otimes c_i \in J$라 하자. 그러면\ 
+$\mu(\xi) = \sum b_i c_i$이다. 한편\ 
+$\Hom_B(\omega_{B/A}, B)$에서\  $\xi$의 상은\ 
+$\text{Trace}_{B/A}$를\ 
+$\sum \text{Trace}_{B/A}(b_i)c_i$로 보낸다. 따라서\ 
+$\xi = \sum b_i \otimes c_i \in J$일 때
+$$
+\sum b_ic_i = \sum \text{Trace}_{B/A}(b_i)c_i
+$$
+임을 보여야 한다. 어떤\  $a_{ij}^k \in A$에 대해\ 
+$b_i b_j = \sum_k a_{ij}^k b_k$라고 쓰자. 그러면 우변은\ 
+$\sum_{i, j} a_{ij}^j c_i$이다. 한편\  $\xi \in J$이면
+$$
+(b_j \otimes 1)(\sum\nolimits_i b_i \otimes c_i) =
+(1 \otimes b_j)(\sum\nolimits_i b_i \otimes c_i)
+$$
+이고, 따라서\  $b_j c_i = \sum_k a_{jk}^i c_k$이다.
+그러므로 좌변은\  $\sum_{i, j} a_{ij}^i c_j$이다.
+$a_{ij}^k = a_{ji}^k$이므로 등식이 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-noether-different}
+$A \to B$를 유한형 환 사상이라 하고,
+$\mathfrak{D} \subset B$를\  Noether different라 하자.
+그러면\  $V(\mathfrak{D})$는\  $A \to B$가\ 
+$\mathfrak q$에서 비분기가 아닌 소아이디얼\ 
+$\mathfrak q \subset B$들의 집합이다.
+\end{lemma}
+
+\begin{proof}
+$A \to B$가\  $\mathfrak q$에서 비분기라고 하자.
+어떤\  $g \in B$, $g \not \in \mathfrak q$에 대해\  $B$를\  $B_g$로
+바꾸어\  $A \to B$가 비분기라고 가정할 수 있다
+(Algebra, Definition \ref{algebra-definition-unramified}과\ 
+Lemma \ref{discriminant-lemma-noether-different-localization}).
+이 경우\  $\Omega_{B/A} = 0$이다. 따라서\ 
+$I = \Ker(B \otimes_A B \to B)$이면\  Algebra, Lemma
+\ref{algebra-lemma-differentials-diagonal}에 의해\  $I/I^2 = 0$이다.
+$A \to B$가 유한형이므로\  $I$는 유한 생성이다.
+따라서\  Nakayama 보조정리에 의해
+(Algebra, Lemma \ref{algebra-lemma-NAK}),
+$I$를 소멸시키는\  $1 + i$ 꼴의 원소가 존재한다.
+그러므로\  $\mathfrak{D} = B$이다.
+
+\medskip\noindent
+역으로\  $\mathfrak{D} \not \subset \mathfrak q$라고 하자.
+위와 같이\  $B$를 주 국소화로 바꾸어\  $\mathfrak{D} = B$라고
+가정할 수 있다. 이는\  $I$의 소멸자에\  $1 + i$ 꼴의 원소가
+존재함을 뜻한다. 역으로 이로부터\ 
+$I/I^2 = \Omega_{B/A}$가 영임이 따르고, 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+
+\section{K\"ahler different}
+\label{discriminant-section-kahler-different}
+
+\noindent
+$A \to B$를 유한형 환 사상이라 하자. {\it K\"ahler different}는\ 
+$B$-가군\  $\Omega_{B/A}$의\  0차\  Fitting 아이디얼이다.
+이 정의를 다음과 같이 대역화한다.
+
+\begin{definition}
+\label{discriminant-definition-kahler-different}
+$f : Y \to X$를 국소적으로 유한형인 스킴 사상이라 하자.
+{\it K\"ahler different}는\  $\Omega_{Y/X}$의\  $0$차\  Fitting 아이디얼이다.
+\end{definition}
+
+\noindent
+K\"ahler different는\  $Y$ 위의 준연접 아이디얼 층이다.
+
+\begin{lemma}
+\label{discriminant-lemma-base-change-kahler-different}
+스킴의 카르테시안 도식
+$$
+\xymatrix{
+Y' \ar[d]_{f'} \ar[r] & Y \ar[d]^f \\
+X' \ar[r]^g & X
+}
+$$
+을 생각하자. 여기서\  $f$는 국소적으로 유한형이다.
+$R \subset Y$, 각각\ $R' \subset Y'$을\  $f$, 각각\ $f'$의\ 
+K\"ahler different가 잘라내는 닫힌 부분스킴이라 하자.
+그러면\  $Y' \to Y$는 동형\  $R' \to R \times_Y Y'$을 유도한다.
+\end{lemma}
+
+\begin{proof}
+$\Omega_{Y'/X'}$가\  $\Omega_{Y/X}$의 당김이기 때문이다
+(Morphisms, Lemma \ref{morphisms-lemma-base-change-differentials}).
+이제\  More on Algebra, Lemma
+\ref{more-algebra-lemma-fitting-ideal-basics}를 적용하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-kahler-different}
+$f : Y \to X$를 국소적으로 유한형인 스킴 사상이라 하자.
+$R \subset Y$를\  K\"ahler different가 정의하는 닫힌 부분스킴이라 하자.
+그러면\  $R \subset Y$는 정확히\  $f$가 비분기가 아닌 점들의 집합이다.
+\end{lemma}
+
+\begin{proof}
+Divisors, Lemma
+\ref{divisors-lemma-zero-fitting-ideal-omega-unramified}의 사본이다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-kahler-different-complete-intersection}
+$A$를 환이라 하자. $n \geq 1$이고\ 
+$f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$이라 하자.
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$으로 놓는다.
+$A$ 위의\  $B$의\  K\"ahler different는\ 
+$\det(\partial f_i/\partial x_j)$가 생성하는\  $B$의 아이디얼이다.
+\end{lemma}
+
+\begin{proof}
+Algebra, Lemma \ref{algebra-lemma-differential-seq}에 의해\ 
+$\Omega_{B/A}$가 표시
+$$
+\bigoplus\nolimits_{i = 1, \ldots, n} B f_i
+\xrightarrow{\text{d}}
+\bigoplus\nolimits_{j = 1, \ldots, n} B \text{d}x_j
+\rightarrow \Omega_{B/A} \rightarrow 0
+$$
+를 갖기 때문이다.
+\end{proof}
+
+
+\section{Dedekind different}
+\label{discriminant-section-dedekind-different}
+
+\noindent
+$A \to B$를 환 사상이라 하자. 다음 조건들이 성립할 때
+{\it Dedekind different가 정의된다}고 한다. $A$는\  Noether 환이고,
+$A \to B$는 유한이며, $A$ 위의 모든 영인자가 아닌 원소는\ 
+$B$ 위에서도 영인자가 아닌 원소이고, $K = Q(A)$와\ 
+$L = B \otimes_A K$에 대해\  $K \to L$은 \'etale이다.
+그러면\  $K \subset L$은 유한 \'etale이고,
+$$
+\mathcal{L}_{B/A} = \{x \in L \mid \text{Trace}_{L/K}(bx) \in A
+\text{ for all }b \in B\}
+$$
+는\  Dedekind 여가군이다. 이 상황에서 {\it Dedekind different}는
+$$
+\mathfrak{D}_{B/A} = \{x \in L \mid x\mathcal{L}_{B/A} \subset B\}
+$$
+이며, 이를\  $L$의\  $B$-부분가군으로 본다.
+Lemma \ref{discriminant-lemma-dedekind-different-ideal}에 의해\  $A$가 정규이거나\ 
+$B$가\  $A$ 위에서 평탄이면\  Dedekind different는\  $B$의 아이디얼이다.
+
+\begin{lemma}
+\label{discriminant-lemma-dedekind-different-ideal}
+$A \to B$의\  Dedekind different가 정의된다고 하자.
+다음 명제들을 생각하자.
+\begin{enumerate}
+\item $A \to B$는 평탄이다.
+\item $A$는 정규환이다.
+\item $\text{Trace}_{L/K}(B) \subset A$이다.
+\item $1 \in \mathcal{L}_{B/A}$이다.
+\item Dedekind different $\mathfrak{D}_{B/A}$는\  $B$의 아이디얼이다.
+\end{enumerate}
+그러면 (1) $\Rightarrow$ (3), (2) $\Rightarrow$ (3),
+(3) $\Leftrightarrow$ (4), (4) $\Rightarrow$ (5)가 성립한다.
+\end{lemma}
+
+\begin{proof}
+(3)과 (4)의 동치 및 함의 (4) $\Rightarrow$ (5)는 즉시 성립한다.
+
+\medskip\noindent
+$A \to B$가 평탄이면\  $\text{Trace}_{B/A} : B \to A$가 정의되고\ 
+$\text{Trace}_{L/K}$가 그 기저변환임을 알 수 있다. 따라서 (3)이 성립한다.
+
+\medskip\noindent
+$A$가 정규이면\  $A$는 정규 정역들의 유한 곱이므로,
+정규 정역인 경우로 환원된다. 그러면\  $K$는\  $A$의 분수체이고,
+$L = \prod L_i$는\  $K$의 유한 분리가능 체 확대들의 유한 곱이다.
+따라서\ 
+$\text{Trace}_{L/K}(b) = \sum \text{Trace}_{L_i/K}(b_i)$이다.
+여기서\  $b_i \in L_i$는\  $b$의 상이다. $B$가\  $A$ 위에서 유한이므로\ 
+$b$는\  $A$ 위 정이고, 따라서 이 대각합들은\  $A$에 속한다.
+실제로\  $K$ 위의\  $b_i$의 최소다항식은\  $A$에 계수를 갖고
+(Algebra, Lemma \ref{algebra-lemma-minimal-polynomial-normal-domain}),
+$\text{Trace}_{L_i/K}(b_i)$는 이 계수들 가운데 하나의 정수배이기
+때문이다 (Fields, Lemma
+\ref{fields-lemma-trace-and-norm-from-minimal-polynomial}).
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dedekind-complementary-module}
+$A \to B$의\  Dedekind different가 정의되면 표준 동형\ 
+$\mathcal{L}_{B/A} \to \omega_{B/A}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$A \to B$가 유한이므로\ 
+$\omega_{B/A} = \Hom_A(B, A)$임을 상기하자.
+$x \in \mathcal{L}_{B/A}$를 사상\ 
+$b \mapsto \text{Trace}_{L/K}(bx)$로 보낸다.
+역으로\  $A$-선형 사상\  $\varphi : B \to A$가 주어지면\ 
+$K$-선형 사상\  $\varphi_K : L \to K$를 얻는다.
+$K \to L$은 유한 \'etale이므로 대각합 쌍은 비퇴화이다
+(Lemma \ref{discriminant-lemma-discriminant}). 따라서 모든\  $y \in L$에 대해\ 
+$\varphi_K(y) = \text{Trace}_{L/K}(xy)$가 되게 하는\ 
+$x \in L$이 존재한다. 그러면\  $x \in \mathcal{L}_{B/A}$는\ 
+$\omega_{B/A}$에서\  $\varphi$로 보내진다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-flat-dedekind-complementary-module-trace}
+$A \to B$의\  Dedekind different가 정의되고\  $A \to B$가 평탄이면,
+\begin{enumerate}
+\item 표준 동형\  $\mathcal{L}_{B/A} \to \omega_{B/A}$는\ 
+$1 \in \mathcal{L}_{B/A}$을 대각합 원소\ 
+$\tau_{B/A} \in \omega_{B/A}$로 보내고,
+\item Dedekind different는\ 
+$\mathfrak{D}_{B/A} = \{b \in B \mid b\omega_{B/A} \subset B\tau_{B/A}\}$
+이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+첫째 명제는\  Lemma \ref{discriminant-lemma-dedekind-different-ideal}의 증명과\ 
+Lemma \ref{discriminant-lemma-finite-flat-trace}에서 따른다.
+둘째 명제는 첫째 명제와 정의들에서 즉시 따른다.
+\end{proof}
+
+
+\section{Different}
+\label{discriminant-section-different}
+
+\noindent
+다음 정의의 동기는 아래에서 보듯이 유한 평탄의 경우에\ 
+Dedekind different를 복원한다는 데 있다.
+
+\begin{definition}
+\label{discriminant-definition-different}
+$f : Y \to X$를 국소\  Noether 스킴의 평탄하고 국소 준유한인
+사상이라 하자. $\omega_{Y/X}$를 상대 쌍대화 가군이라 하고,
+$\tau_{Y/X} \in \Gamma(Y, \omega_{Y/X})$를 대각합 원소라 하자
+(Remarks \ref{discriminant-remark-relative-dualizing-for-quasi-finite}와\ 
+\ref{discriminant-remark-relative-dualizing-for-flat-quasi-finite}).
+$$
+\Coker(\mathcal{O}_Y \xrightarrow{\tau_{Y/X}} \omega_{Y/X})
+$$
+의 소멸자를\  $Y/X$의 {\it different}라 한다. 이는 연접 아이디얼\ 
+$\mathfrak{D}_f \subset \mathcal{O}_Y$이다.
+\end{definition}
+
+\noindent
+아래의\  Remark \ref{discriminant-remark-different-generalization}에서 이를 일반화한다.
+$\omega_{Y/X}$가 가역\  $\mathcal{O}_Y$-가군이면\ 
+$\mathfrak{D}_f$는 국소적으로 한 원소로 생성됨을 관찰하자.
+먼저\  Dedekind different와의 일치를 진술한다.
+
+\begin{lemma}
+\label{discriminant-lemma-flat-agree-dedekind}
+$f : Y \to X$를\  Noether 스킴의 평탄한 준유한 사상이라 하자.
+$V = \Spec(B) \subset Y$, $U = \Spec(A) \subset X$를\ 
+$f(V) \subset U$인 아핀 열린 부분스킴이라 하자.
+$A \to B$의\  Dedekind different가 정의되면
+$$
+\mathfrak{D}_f|_V = \widetilde{\mathfrak{D}_{B/A}}
+$$
+가\  $V$ 위의 연접 아이디얼 층으로서 성립한다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{discriminant-lemma-dedekind-different-ideal}과\ 
+\ref{discriminant-lemma-flat-dedekind-complementary-module-trace}에서 분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-flat-gorenstein-agree-noether}
+$f : Y \to X$를\  Noether 스킴의 평탄한 준유한 사상이라 하자.
+$V = \Spec(B) \subset Y$, $U = \Spec(A) \subset X$를\ 
+$f(V) \subset U$인 아핀 열린 부분스킴이라 하자.
+$\omega_{Y/X}|_V$가 가역, 즉\  $\omega_{B/A}$가 가역\  $B$-가군이면
+$$
+\mathfrak{D}_f|_V = \widetilde{\mathfrak{D}}
+$$
+가\  $V$ 위의 연접 아이디얼 층으로서 성립한다. 여기서\ 
+$\mathfrak{D} \subset B$는\  $A$ 위의\  $B$의\  Noether different이다.
+\end{lemma}
+
+\begin{proof}
+사상
+$$
+\SheafHom_{\mathcal{O}_Y}(\omega_{Y/X}, \mathcal{O}_Y)
+\longrightarrow
+\mathcal{O}_Y,\quad
+\varphi \longmapsto \varphi(\tau_{Y/X})
+$$
+을 생각하자. 이 사상의 상은 아핀 열린집합 위에서\ 
+Noether different에 대응한다. Lemma
+\ref{discriminant-lemma-noether-different-flat-quasi-finite}를 보라.
+따라서 결과는 다음 초등적 사실에서 따른다. 가역 가군\  $\omega$와
+대역 절단\  $\tau$가 주어지면\ 
+$\tau : \SheafHom(\omega, \mathcal{O}) = \omega^{\otimes -1} \to \mathcal{O}$
+의 상은\  $\Coker(\tau : \mathcal{O} \to \omega)$의 소멸자와 같다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-base-change-different}
+Noether 스킴의 카르테시안 도식
+$$
+\xymatrix{
+Y' \ar[d]_{f'} \ar[r] & Y \ar[d]^f \\
+X' \ar[r]^g & X
+}
+$$
+을 생각하자. 여기서\  $f$는 평탄하고 준유한이다.
+$R \subset Y$, 각각\ $R' \subset Y'$을\  different
+$\mathfrak{D}_f$, 각각\ $\mathfrak{D}_{f'}$가 잘라내는
+닫힌 부분스킴이라 하자. 그러면\  $Y' \to Y$는 전단사 닫힌 몰입\ 
+$R' \to R \times_Y Y'$을 유도한다. $g$가 평탄하거나\ 
+$\omega_{Y/X}$가 가역이면\  $R' = R \times_Y Y'$이다.
+\end{lemma}
+
+\begin{proof}
+$X$, $X'$, $Y$, $Y'$이 아핀인 경우로 즉시 환원된다.
+다시 말해\  Noether 환의 쌍대 카르테시안 도식
+$$
+\xymatrix{
+B' & B \ar[l] \\
+A' \ar[u] & A \ar[l] \ar[u]
+}
+$$
+을 얻으며, $A \to B$는 평탄하고 준유한이다. 기저변환 사상\ 
+$\omega_{B/A} \otimes_B B' \to \omega_{B'/A'}$은 동형이고
+(Lemma \ref{discriminant-lemma-dualizing-base-change-of-flat}),
+대각합 원소\  $\tau_{B/A}$를 대각합 원소\  $\tau_{B'/A'}$로 보낸다
+(Lemma \ref{discriminant-lemma-trace-base-change}). 따라서 유한\  $B$-가군\ 
+$Q = \Coker(\tau_{B/A} : B \to \omega_{B/A})$는\ 
+$Q \otimes_B B' = \Coker(\tau_{B'/A'} : B' \to \omega_{B'/A'})$을 만족한다.
+그러므로\  $\mathfrak{D}_{B/A}B' \subset \mathfrak{D}_{B'/A'}$이고,
+이는 닫힌 몰입\  $R' \to R \times_Y Y'$을 얻는다는 뜻이다.
+$R = \text{Supp}(Q)$이고\ 
+$R' = \text{Supp}(Q \otimes_B B')$이므로
+(Algebra, Lemma \ref{algebra-lemma-support-closed}),
+Algebra, Lemma \ref{algebra-lemma-support-base-change}에 의해\ 
+$R' \to R \times_Y Y'$은 전단사이다.
+$B \to B'$가 평탄이면, 예를 들어\  $A \to A'$이 평탄이면\ 
+$\mathfrak{D}_{B/A}B' = \mathfrak{D}_{B'/A'}$이다.
+Algebra, Lemma \ref{algebra-lemma-annihilator-flat-base-change}를 보라.
+마지막으로\  $\omega_{B/A}$가 가역이면 국소화하여\ 
+$\omega_{B/A} = B \lambda$라고 가정할 수 있다.
+$\tau_{B/A} = b\lambda$라고 쓰면\ 
+$Q = B/bB$이고\  $\mathfrak{D}_{B/A} = bB$임을 알 수 있다.
+$B'$ 위에서 같은 논증을 하면\ 
+$\mathfrak{D}_{B'/A'} = bB'$을 얻고 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-norm-different-in-discriminant}
+$f : Y \to X$를\  Noether 스킴의 유한 평탄 사상이라 하자.
+그러면\  $\text{Norm}_f : f_*\mathcal{O}_Y \to \mathcal{O}_X$는\ 
+$f_*\mathfrak{D}_f$를 판별식\  $D_f$의 아이디얼 층 안으로 보낸다.
+\end{lemma}
+
+\begin{proof}
+노름 사상은\  Divisors, Lemma
+\ref{divisors-lemma-finite-locally-free-has-norm}에서,
+$f$의 판별식은\  Section \ref{discriminant-section-discriminant}에서 구성했다.
+문제는 아핀 국소적이므로\  $X = \Spec(A)$, $Y = \Spec(B)$이고\ 
+$f$가 유한 국소 자유 환 사상\  $A \to B$로 주어진다고 가정할 수 있다.
+더 국소화하여\  $B$가 유한 자유\  $A$-가군이라고 가정할 수 있다.
+$b_1, \ldots, b_n \in B$를\  $A$-가군\  $B$의 기저로 택하고,
+$b_1^\vee, \ldots, b_n^\vee$를\ 
+$A$-가군\  $\omega_{B/A} = \Hom_A(B, A)$의 쌍대 기저라 하자.
+$b$의 노름은\  $A$-선형 사상\  $b : B \to B$의 행렬식이므로\ 
+$\text{Norm}_{B/A}(b) = \det(b_i^\vee(bb_j))$이다.
+판별식은\  $\det(\text{Trace}_{B/A}(b_ib_j))$가 정의하는\ 
+$\Spec(A)$의 주 닫힌 부분스킴이다.
+$b \in \mathfrak{D}_{B/A}$이면\  $c_i \in B$가 존재하여\ 
+$b \cdot b_i^\vee = c_i \cdot \text{Trace}_{B/A}$이다.
+여기서 점은\  $\omega_{B/A}$의\  $B$-가군 구조를 나타낸다.
+$c_i = \sum a_{il} b_l$이라고 쓰자. 그러면
+\begin{align*}
+\text{Norm}_{B/A}(b)
+& =
+\det(b_i^\vee(bb_j)) \\
+& =
+\det( (b \cdot b_i^\vee)(b_j)) \\
+& =
+\det((c_i \cdot \text{Trace}_{B/A})(b_j)) \\
+& =
+\det(\text{Trace}_{B/A}(c_ib_j)) \\
+& =
+\det(a_{il}) \det(\text{Trace}_{B/A}(b_l b_j))
+\end{align*}
+이며, 이는 보조정리를 증명한다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-different-ramification}
+$f : Y \to X$를\  Noether 스킴의 평탄한 준유한 사상이라 하자.
+Different $\mathfrak{D}_f$가 정의하는 닫힌 부분스킴\ 
+$R \subset Y$는 정확히\  $f$가 \'etale이 아닌
+(동치로 비분기가 아닌) 점들의 집합이다.
+\end{lemma}
+
+\begin{proof}
+$f$는 유한 표시이고 평탄하므로, 한 점에서 \'etale일 필요충분조건은
+그 점에서 비분기인 것이다. 더욱이 분기점 자취의 형성은
+기저변환과 가환한다. Morphisms, Section
+\ref{morphisms-section-etale}, 특히\  Morphisms, Lemma
+\ref{morphisms-lemma-set-points-where-fibres-etale}를 보라.
+Lemma \ref{discriminant-lemma-base-change-different}에 의해\  $R$의 형성은
+집합론적으로 기저변환과 가환한다. 따라서\  $X$가 체의 스펙트럼인
+경우에 보조정리를 증명하면 충분하다. 한편\ 
+$(\omega_{Y/X}, \tau_{Y/X})$의 구성은\  $Y$ 위에서 국소적이다.
+$Y$는 체 위에서 준유한이므로 유한 이산공간이다.
+따라서\  $Y$가 유일한 점을 갖는다고 가정할 수 있다.
+
+\medskip\noindent
+$X = \Spec(k)$이고\  $Y = \Spec(B)$라 하자. 여기서\  $k$는 체이고\ 
+$B$는 유한 국소\  $k$-대수이다. $Y \to X$가 \'etale이면\ 
+$B$는\  $k$의 유한 분리가능 확대이고, Fields, Lemma
+\ref{fields-lemma-separable-trace-pairing}에 의해 대각합 원소\ 
+$\text{Trace}_{B/k}$는\  $\omega_{B/k}$의 기저 원소이다.
+따라서 이 경우\  $\mathfrak{D}_{B/k} = B$이다.
+역으로\  $\mathfrak{D}_{B/k} = B$이면\  Lemma
+\ref{discriminant-lemma-norm-different-in-discriminant}와\  $1$의 노름이\  $1$이라는
+사실에서 판별식이 공집합임을 알 수 있다. 따라서\  Lemma
+\ref{discriminant-lemma-discriminant}에 의해\  $Y \to X$는 \'etale이다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-norm-different-is-discriminant}
+$f : Y \to X$를\  Noether 스킴의 평탄한 준유한 사상이라 하고,
+$R \subset Y$를\  $\mathfrak{D}_f$가 정의하는 닫힌 부분스킴이라 하자.
+\begin{enumerate}
+\item $\omega_{Y/X}$가 가역이면\  $R$은\  $Y$의 국소 주 닫힌 부분스킴이다.
+\item $\omega_{Y/X}$가 가역이고\  $f$가 유한이면\ 
+$R$의 노름은\  $f$의 판별식\  $D_f$이다.
+\item $\omega_{Y/X}$가 가역이고\  $f$가\  $Y$의 수반점들에서
+\'etale이면, $R$은 유효\  Cartier 인자이고
+동형\  $\mathcal{O}_Y(R) = \omega_{Y/X}$이 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. $Y$ 위에서 국소적으로 작업할 수 있으므로\ 
+$\omega_{Y/X}$가 계수\  $1$인 자유 가군이라고 가정할 수 있다.
+$\omega_{Y/X} = \mathcal{O}_Y\lambda$라 하자.
+그러면\  $\tau_{Y/X} = h \lambda$라고 쓸 수 있고,
+$R$이\  $h$에 의해 정의됨을, 즉\  $R$이 국소 주임을 알 수 있다.
+
+\medskip\noindent
+(2)의 증명. $Y \to X$가 유한 자유 환 사상\  $A \to B$로 주어지고\ 
+$\omega_{B/A}$가 계수\  $1$인 자유\  $B$-가군이라고 가정할 수 있다.
+$\lambda$를\  $\omega_{B/A}$의\  $B$-기저 원소로 택하고,
+어떤\  $b \in B$에 대해\ 
+$\text{Trace}_{B/A} = b \cdot \lambda$라고 쓰자.
+그러면\  $\mathfrak{D}_{B/A} = (b)$이고, $D_f$는\ 
+$A$-가군\  $B$의 기저\  $b_1, \ldots, b_n$에 대해\ 
+$\det(\text{Trace}_{B/A}(b_ib_j))$가 잘라낸다.
+$b_1^\vee, \ldots, b_n^\vee$를 쌍대 기저라 하자.
+$b_i^\vee = c_i \cdot \lambda$라고 쓰면\ 
+$c_1, \ldots, c_n$도\  $B$의 기저이다. 따라서\ 
+$c_i = \sum a_{il}b_l$일 때\  $\det(a_{il})$은\  $A$의 단원이다.
+분명히\  $b \cdot b_i^\vee = c_i \cdot \text{Trace}_{B/A}$이므로,
+Lemma \ref{discriminant-lemma-norm-different-in-discriminant}의 증명에 있는
+계산으로부터\  $\text{Norm}_{B/A}(b)$가\ 
+$\det(\text{Trace}_{B/A}(b_ib_j))$의 단원배임을 얻는다.
+
+\medskip\noindent
+(3)의 증명. 위의 표기에서\  Lemma
+\ref{discriminant-lemma-different-ramification}과 가정에 의해\ 
+$h$가\  $Y$의 수반점들에서 영이 아님을 알 수 있고,
+따라서\  $h$는 영인자가 아닌 원소이다. 표준 동형은\  $1$을\ 
+$\tau_{Y/X}$로 보낸다. Divisors, Lemma
+\ref{divisors-lemma-characterize-OD}를 보라.
+\end{proof}
+
+
+
+
+
+
+\section{준유한\  syntomic 사상}
+\label{discriminant-section-quasi-finite-syntomic}
+
+\noindent
+이 절에서는 준유한\  syntomic 사상이 가역 상대 쌍대화 가군을
+갖는다는 사실을 논한다.
+
+\begin{lemma}
+\label{discriminant-lemma-syntomic-quasi-finite}
+$f : Y \to X$를 스킴 사상이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $f$는 국소적으로 준유한이고\  syntomic이다.
+\item $f$는 국소적으로 준유한이고 평탄하며 국소 완전 교차 사상이다.
+\item $f$는 국소적으로 준유한이고 평탄하며 국소 유한 표시이고,
+$f$의 올들은 국소 완전 교차이다.
+\item $f$는 국소적으로 준유한이고, 모든\  $y \in Y$에 대해 아핀 열린집합\ 
+$y \in V = \Spec(B) \subset Y$, $U = \Spec(A) \subset X$와\ 
+$f(V) \subset U$를 만족하는 정수\  $n$ 및\ 
+$h, f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$이 존재하여\ 
+$B = A[x_1, \ldots, x_n, 1/h]/(f_1, \ldots, f_n)$이다.
+\item 모든\  $y \in Y$에 대해 아핀 열린집합\ 
+$y \in V = \Spec(B) \subset Y$, $U = \Spec(A) \subset X$가\ 
+$f(V) \subset U$를 만족하고, $A \to B$는\ 
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$ 꼴의
+상대 대역 완전 교차이다.
+\item $f$는 국소적으로 준유한이고 평탄하며 국소 유한 표시이고,
+$\NL_{Y/X}$는\  $[-1, 0]$ 안의\  tor-진폭을 갖는다.
+\item $f$는 평탄하고 국소 유한 표시이며,
+$\NL_{Y/X}$는 계수\  $0$의 완전 복합체이고\  $[-1, 0]$ 안의\ 
+tor-진폭을 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)의 동치는\  More on Morphisms, Lemma
+\ref{more-morphisms-lemma-flat-lci}이다.
+(1)과 (3)의 동치는\  Morphisms, Lemma
+\ref{morphisms-lemma-syntomic-flat-fibres}이다.
+
+\medskip\noindent
+$A \to B$가 (4)에서와 같으면\ 
+$B = A[x, x_1, \ldots, x_n]/(xh - 1, f_1, \ldots, f_n)$은\ 
+Algebra, Definition
+\ref{algebra-definition-relative-global-complete-intersection}에 의해
+상대 대역 완전 교차이다. 따라서 (4)는 (5)를 함의한다.
+(5)가 (4)를 함의함은 분명하다.
+
+\medskip\noindent
+조건 (5)는 (1)을 함의한다. Algebra, Lemma
+\ref{algebra-lemma-relative-global-complete-intersection}에 의해
+상대 대역 완전 교차는\  syntomic이고, 상대 대역 완전 교차의 정의는\ 
+$n$개의 변수와\  $n$개의 방정식을 갖는 상대 대역 완전 교차가
+준유한임을 보장한다. Algebra, Definition
+\ref{algebra-definition-relative-global-complete-intersection}과\ 
+Lemma \ref{algebra-lemma-isolated-point-fibre}를 보라.
+
+\medskip\noindent
+Algebra, Lemma \ref{algebra-lemma-syntomic} 또는\ 
+Morphisms, Lemma
+\ref{morphisms-lemma-syntomic-locally-standard-syntomic}은
+(1)이 (5)를 함의함을 보여 준다.
+
+\medskip\noindent
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-flat-fp-NL-lci}는
+(6)이 (1)과 동치임을 보여 준다. 동치인 조건 (1) -- (6)이 성립하면,
+아핀 국소적으로\  $Y \to X$는 변수 수와 방정식 수가 같은
+상대 대역 완전 교차\ 
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$로 주어진다.
+이 표시를 사용하면
+$$
+\NL_{B/A} =\left(
+(f_1, \ldots, f_n)/(f_1, \ldots, f_n)^2
+\longrightarrow
+\bigoplus\nolimits_{i = 1, \ldots, n} B \text{d} x_i\right)
+$$
+임을 알 수 있다. Algebra, Lemma
+\ref{algebra-lemma-relative-global-complete-intersection-conormal}에 의해
+가군\  $(f_1, \ldots, f_n)/(f_1, \ldots, f_n)^2$는 원소\ 
+$f_1, \ldots, f_n$의 합동류들을 생성원으로 하는 자유 가군이다.
+따라서\  $\NL_{B/A}$의 계수는\  $0$이고\  $\NL_{Y/X}$도 그러하다.
+이로써 (1) -- (6)이 (7)을 함의함을 알 수 있다.
+
+\medskip\noindent
+마지막으로 (7)을 가정하자. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-flat-fp-NL-lci}에 의해\ 
+$f$는\  syntomic이다. 따라서 적당한 아핀 열린집합 위에서\ 
+$f$는 상대 대역 완전 교차\ 
+$A \to B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$로 주어진다.
+Morphisms, Lemma
+\ref{morphisms-lemma-syntomic-locally-standard-syntomic}을 보라.
+위와 정확히 같은 방식으로\  $\NL_{B/A}$가 계수\  $n - m$의
+완전 복합체임을 알 수 있다. 따라서\  $n = m$이고 (5)가 성립한다.
+이것으로 증명이 끝난다.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-characterize-invertible}
+상대 쌍대화 가군의 가역성.
+\begin{enumerate}
+\item $A \to B$가\  Noether 환의 준유한 평탄 준동형이면,
+$\omega_{B/A}$가 가역\  $B$-가군일 필요충분조건은 모든 소아이디얼\ 
+$\mathfrak p \subset A$에 대해\ 
+$\omega_{B \otimes_A \kappa(\mathfrak p)/\kappa(\mathfrak p)}$가
+가역\  $B \otimes_A \kappa(\mathfrak p)$-가군인 것이다.
+\item $Y \to X$가\  Noether 스킴의 준유한 평탄 사상이면,
+$\omega_{Y/X}$가 가역일 필요충분조건은 모든\  $x \in X$에 대해\ 
+$\omega_{Y_x/x}$가 가역인 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. $A \to B$가 평탄이므로 가군\  $\omega_{B/A}$는\ 
+$A$-평탄이다. Lemma \ref{discriminant-lemma-dualizing-base-flat-flat}을 보라.
+따라서\  $\omega_{B/A}$가 가역\  $B$-가군일 필요충분조건은
+모든 소아이디얼\  $\mathfrak p \subset A$에 대해\ 
+$\omega_{B/A} \otimes_A \kappa(\mathfrak p)$가
+가역\  $B \otimes_A \kappa(\mathfrak p)$-가군인 것이다.
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-flat-and-free-at-point-fibre}를 보라.
+여전히\  $A \to B$의 평탄성을 사용하면\  $\omega_{B/A}$의 형성이
+기저변환과 가환한다. Lemma
+\ref{discriminant-lemma-dualizing-base-change-of-flat}을 보라.
+따라서 평탄성이 있을 때 상대 쌍대화 가군의 가역성은
+사상\  $\kappa(\mathfrak p) \to B \otimes_A \kappa(\mathfrak p)$들의
+상대 쌍대화 가군의
+가역성과 동치임을 알 수 있다.
+
+\medskip\noindent
+(2)는 (1)과, 아핀 국소적으로 쌍대화 가군들이 그 대수적 대응물로
+주어진다는 사실에서 따른다. Remark
+\ref{discriminant-remark-relative-dualizing-for-quasi-finite}를 보라.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-dim-zero-global-complete-intersection-over-field}
+$k$를 체라 하자.
+$B = k[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$을\ 
+$k$ 위의 차원\  $0$인 대역 완전 교차라 하자.
+그러면\  $\omega_{B/k}$는 가역이다.
+\end{lemma}
+
+\begin{proof}
+Noether 정규화에 의해, Algebra, Lemma
+\ref{algebra-lemma-Noether-normalization}를 보면,
+유한 단사\  $k \to B$, 즉\  $\dim_k(B) < \infty$가 존재함을 알 수 있다.
+따라서\  $B$-가군으로서\  $\omega_{B/k} = \Hom_k(B, k)$이다.
+Dualizing Complexes, Lemma
+\ref{dualizing-lemma-dualizing-finite}에 의해\  $R\Hom(B, k)$는\ 
+$B$의 쌍대화 복합체이고, Dualizing Complexes, Lemma
+\ref{dualizing-lemma-RHom-ext}에 의해\  $R\Hom(B, k)$는
+차수\  $0$에 놓인\  $\omega_{B/k}$와 같다.
+따라서\  $B$가\  Gorenstein임을 보이면 충분하다
+(Dualizing Complexes, Lemma
+\ref{dualizing-lemma-gorenstein}).
+이는\  Dualizing Complexes, Lemma
+\ref{dualizing-lemma-gorenstein-lci}에 의해 참이다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-syntomic-quasi-finite}
+$f : Y \to X$를 국소\  Noether 스킴의 사상이라 하자.
+$f$가\  Lemma \ref{discriminant-lemma-syntomic-quasi-finite}의 동치 조건들을
+만족하면\  $\omega_{Y/X}$는 가역\  $\mathcal{O}_Y$-가군이다.
+\end{lemma}
+
+\begin{proof}
+$A \to B$가\ 
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$ 꼴의
+상대 대역 완전 교차라고 가정할 수 있으며,
+$\omega_{B/A}$가 가역임을 보여야 한다.
+이는\  Lemmas \ref{discriminant-lemma-characterize-invertible}와\ 
+\ref{discriminant-lemma-dim-zero-global-complete-intersection-over-field}를
+결합하면 따른다.
+\end{proof}
+\begin{example}
+\label{discriminant-example-universal-quasi-finite-syntomic}
+$n \geq 1$과\  $d \geq 1$을 정수라 하자.
+$e_i \geq 0$이고\  $\sum e_i \leq d$인 다중지표\ 
+$E = (e_1, \ldots, e_n)$들의 집합을\  $T$라 하자. 환
+$$
+A = \mathbf{Z}[a_{i, E} ; 1 \leq i \leq n, E \in T]
+$$
+를 생각하자. $A[x_1, \ldots, x_n]$에서 원소\ 
+$f_i = \sum_{E \in T} a_{i, E} x^E$를 생각하자.
+여기서 관례대로\  $x^E = x_1^{e_1} \ldots x_n^{e_n}$이다.
+$A$-대수
+$$
+B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)
+$$
+를 생각하자. $X_{n, d} = \Spec(A)$라 쓰고,
+$Y_{n, d} \subset \Spec(B)$를 사상\ 
+$\Spec(B) \to \Spec(A) = X_{n, d}$의 제한이 준유한인
+최대 열린 부분스킴이라 하자. Algebra, Lemma
+\ref{algebra-lemma-quasi-finite-open}를 보라.
+\end{example}
+
+\begin{lemma}
+\label{discriminant-lemma-universal-quasi-finite-syntomic-etale}
+Example \ref{discriminant-example-universal-quasi-finite-syntomic}의 표기에서
+스킴\  $X_{n, d}$와\  $Y_{n, d}$는 정칙이고 기약이며,
+사상\  $Y_{n, d} \to X_{n, d}$는 국소적으로 준유한이고\  syntomic이다.
+또한\  $Y_{n, d} \to X_{n, d}$의 제한이 \'etale 사상\ 
+$V \to X_{n, d}$가 되게 하는 조밀 열린 부분스킴\ 
+$V \subset Y_{n, d}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+스킴\  $X_{n, d}$는 다항식환\  $A$의 스펙트럼이다.
+따라서\  $X_{n, d}$는 정칙이고 기약이다. 식
+$$
+f_i = a_{i, (0, \ldots, 0)} +
+\sum\nolimits_{E \in T, E \not = (0, \ldots, 0)} a_{i, E} x^E
+$$
+로 쓸 수 있으므로, 환\  $B$는\  $x_1, \ldots, x_n$ 및\ 
+$E \not = (0, \ldots, 0)$인 원소\  $a_{i, E}$들에 관한
+다항식환과 동형이다. 따라서\  $\Spec(B)$는 기약 정칙 스킴이고,
+열린집합\  $Y_{n, d}$도 그러하다. Lemma
+\ref{discriminant-lemma-syntomic-quasi-finite}에 의해 사상\ 
+$Y_{n, d} \to X_{n, d}$는 국소적으로 준유한이고\  syntomic이다.
+$V$를 찾으려면\  $Y_{n, d} \to X_{n, d}$가 \'etale인 점 하나를
+찾으면 충분하다(\'etale인 점들의 자취는 정의에 의해 열려 있다).
+따라서\  $Y_{n, d} \to X_{n, d}$의 올이 공집합이 아니고 \'etale인\ 
+$X_{n, d}$의 한 점을 찾으면 충분하다. Morphisms, Lemma
+\ref{morphisms-lemma-etale-at-point}를 보라.
+$f_i$를\  $x_i^d - 1$로 보내는 환 사상\ 
+$\chi : A \to \mathbf{Q}$에 대응하는 점을 택한다. 그러면
+$$
+B \otimes_{A, \chi} \mathbf{Q} =
+\mathbf{Q}[x_1, \ldots, x_n]/(x_1^d - 1, \ldots, x_n^d - 1)
+$$
+이며, 이는\  $\mathbf{Q}$ 위의 영이 아닌 \'etale 대수이다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-locally-comes-from-universal}
+$f : Y \to X$를 스킴 사상이라 하자. $f$가\  Lemma
+\ref{discriminant-lemma-syntomic-quasi-finite}의 동치 조건들을 만족하면,
+모든\  $y \in Y$에 대해\  $n, d$와 가환도식
+$$
+\xymatrix{
+Y \ar[d] &
+V \ar[d] \ar[l] \ar[r] &
+Y_{n, d} \ar[d] \\
+X & U \ar[l] \ar[r] &
+X_{n, d}
+}
+$$
+가 존재한다. 여기서\  $U \subset X$와\  $V \subset Y$는\ 
+$y \in V$를 만족하는 열린집합이고,
+$Y_{n, d} \to X_{n, d}$는\  Example
+\ref{discriminant-example-universal-quasi-finite-syntomic}에서와 같으며,
+오른쪽 정사각형은 카르테시안이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{discriminant-lemma-syntomic-quasi-finite}에 의해\ 
+$U = \Spec(R)$이고\  $V = \Spec(S)$이며\ 
+$S = R[y_1, \ldots, y_n]/(g_1, \ldots, g_n)$이 되도록
+아핀\  $U$와\  $V$를 택할 수 있다. Example
+\ref{discriminant-example-universal-quasi-finite-syntomic}의 표기에서\ 
+$d$를 충분히 크게 택하면 각\  $g_i$를\ 
+$g_i = \sum_{E \in T} g_{i, E}y^E$,
+$g_{i, E} \in R$로 쓸 수 있다.
+$a_{i, E}$를\  $g_{i, E}$로 보내는 사상\  $A \to R$과\ 
+$x_i \to y_i$로 보내는 사상\  $B \to S$는 환의 쌍대 카르테시안 도식
+$$
+\xymatrix{
+S & B \ar[l] \\
+R \ar[u] & A \ar[l] \ar[u]
+}
+$$
+을 주며, 이로써 보조정리가 증명된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{유한\  syntomic 사상}
+\label{discriminant-section-finite-syntomic}
+
+\noindent
+이 절은 유한\  syntomic 사상에 대한\  Section
+\ref{discriminant-section-quasi-finite-syntomic}의 유사판이다.
+
+\begin{lemma}
+\label{discriminant-lemma-syntomic-finite}
+$f : Y \to X$를 스킴 사상이라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $f$는 유한이고\  syntomic이다.
+\item $f$는 유한이고 평탄하며 국소 완전 교차 사상이다.
+\item $f$는 유한이고 평탄하며 국소 유한 표시이고,
+$f$의 올들은 국소 완전 교차이다.
+\item $f$는 유한이고, 모든\  $x \in X$에 대해 아핀 열린집합\ 
+$x \in U = \Spec(A) \subset X$, 정수\  $n$ 및\ 
+$f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$이 존재하여\ 
+$f^{-1}(U)$는\ 
+$A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$의 스펙트럼과 동형이다.
+\item $f$는 유한이고 평탄하며 국소 유한 표시이고,
+$\NL_{X/Y}$는\  $[-1, 0]$ 안의\  tor-진폭을 갖는다.
+\item $f$는 유한이고 평탄하며 국소 유한 표시이고,
+$\NL_{X/Y}$는 계수\  $0$의 완전 복합체이며\  $[-1, 0]$ 안의\ 
+tor-진폭을 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1), (2), (3), (5), (6)의 동치와 함의
+(4) $\Rightarrow$ (1)은\  Lemma
+\ref{discriminant-lemma-syntomic-quasi-finite}에서 즉시 따른다.
+동치인 조건 (1), (2), (3), (5), (6)이 성립한다고 가정하자.
+$x \in X$를 택하고, $X$ 안에서\  $x$의 아핀 열린집합\ 
+$U = \Spec(A)$를 택하여\  $x$가 소아이디얼\ 
+$\mathfrak p \subset A$에 대응한다고 하자.
+$f^{-1}(U) = \Spec(B)$라 쓰고\  $B = A[x_1, \ldots, x_n]/I$라 쓰자.
+(6)에 의해\  $\NL_{B/A}$는\  $[-1, 0]$ 안의\  tor-진폭을 갖는
+완전 복합체이므로, $I/I^2$은 계수\  $n$의 유한 국소 자유\ 
+$B$-가군이다. $B_\mathfrak p$는 반국소이므로\ 
+$(I/I^2)_\mathfrak p$는 계수\  $n$의 자유 가군이다.
+Algebra, Lemma
+\ref{algebra-lemma-locally-free-semi-local-free}를 보라.
+따라서\  $\mathfrak p$에 속하지 않는 한 원소에 의한 주 국소화로\ 
+$A$를 바꾼 뒤에는\  $I/I^2$이 계수\  $n$의 자유\  $B$-가군이라고
+가정할 수 있다. 그러면\  Algebra, Lemma
+\ref{algebra-lemma-huber}에 의해 변수 수와 방정식 수가 같은\ 
+$A$ 위의\  $B$의 표시를 찾을 수 있다. 다시 말해\ 
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$이라고 가정할 수 있다.
+이는 (4)를 증명한다.
+\end{proof}
+\begin{example}
+\label{discriminant-example-universal-finite-syntomic}
+$d \geq 1$을 정수라 하자. $1 \leq i, j, l \leq d$에 대한
+변수\  $a_{ij}^l$을 생각하고
+$$
+A_d = \mathbf{Z}[a_{ij}^k]/J
+$$
+라 쓰자. 여기서\  $J$는 원소들
+$$
+\left\{
+\begin{matrix}
+\sum_l a_{ij}^la_{lk}^m - \sum_l a_{il}^ma_{jk}^l & \forall i, j, k, m \\
+a_{ij}^k - a_{ji}^k & \forall i, j, k \\
+a_{i1}^j - \delta_{ij} & \forall i, j
+\end{matrix}
+\right.
+$$
+이 생성하는 아이디얼이고, $\delta_{ij}$는\  Kronecker 델타 함수를
+나타낸다. 다음과 같이\  $A_d$-대수\  $B_d$를 정의한다.
+$A_d$-가군으로서는
+$$
+B_d = A_d e_1 \oplus \ldots \oplus A_d e_d
+$$
+로 놓는다. 대수 구조는\  $1$을\  $e_1$로 보내는\ 
+$A_d \to B_d$로 주어진다. $B_d$ 위의 곱셈은\  $A_d$-쌍선형 사상
+$$
+m : B_d \times B_d \longrightarrow B_d, \quad
+m(e_i, e_j) = \sum a_{ij}^k e_k
+$$
+으로 주어진다. 위의 관계들이 이것을 정확히\  $A_d$-대수 구조로
+만든다는 것은 곧바로 확인할 수 있다. 사상
+$$
+\pi_d : Y_d = \Spec(B_d) \longrightarrow \Spec(A_d) = X_d
+$$
+은 계수\  $d$의 ‘보편’ 유한 자유 사상이다.
+\end{example}
+
+\begin{lemma}
+\label{discriminant-lemma-universal-finite-syntomic}
+Example \ref{discriminant-example-universal-finite-syntomic}의 표기에서 다음 성질을
+갖는 열린 부분스킴\  $U_d \subset X_d$가 존재한다.
+스킴 사상\  $X \to X_d$가\  $U_d$를 통해 인수분해될 필요충분조건은\ 
+$Y_d \times_{X_d} X \to X$가\  syntomic인 것이다.
+\end{lemma}
+
+\begin{proof}
+syntomic이라는 것은 평탄한 국소 완전 교차 사상이라는 것과 같다.
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-flat-lci}를 보라.
+$\pi_d$가\  Koszul인 점들의 집합\  $W_d \subset Y_d$는\  $Y_d$에서 열려
+있고, 그 형성은 임의의 기저변환과 가환한다. More on Morphisms,
+Lemma \ref{more-morphisms-lemma-base-change-lci-fibres}를 보라.
+$\pi_d$는 유한이므로 닫힌 사상이고, 따라서\ 
+$Z = \pi_d(Y_d \setminus W_d)$는 닫혀 있다.
+분명히\  $U_d = X_d \setminus Z$이고 그 형성은 기저변환과
+가환하므로 보조정리가 참이다.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-universal-finite-syntomic-smooth}
+Example \ref{discriminant-example-universal-finite-syntomic}의 표기와\ 
+Lemma \ref{discriminant-lemma-universal-finite-syntomic}의\  $U_d$에 대해,
+$U_d$는\  $\Spec(\mathbf{Z})$ 위에서 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-lifting-along-artinian-at-point}를 사용하여\ 
+$U_d \to \Spec(\mathbf{Z})$가 매끄러움을 보이자.
+실제로\  $\Spec(A) \to U_d$가 사상이고\  $A' \to A$가 작은 확대라고 하자.
+그러면\  $B = A \otimes_{A_d} B_d$는\  $A$ 위에서\  syntomic인
+유한 자유\  $A$-대수이다($U_d$의 구성에 의한다).
+Smoothing Ring Maps, Proposition
+\ref{smoothing-proposition-lift-smooth}에 의해\ 
+$B \cong B' \otimes_{A'} A$가 되게 하는\  syntomic 환 사상\ 
+$A' \to B'$가 존재한다. $e'_1 = 1 \in B'$로 놓는다.
+$1 < i \leq d$에 대해\ 
+$1 \otimes e_i \in A \otimes_{A_d} B_d = B$의 올림\ 
+$e'_i \in B'$를 택한다. 그러면\ 
+$e'_1, \ldots, e'_d$는\  $A'$ 위의\  $B'$의 기저이다.
+예를 들어\  Algebra, Lemma
+\ref{algebra-lemma-local-artinian-basis-when-flat}를 보라.
+따라서 유일한 원소\  $\alpha_{ij}^l \in A'$에 대해\ 
+$e'_i e'_j = \sum \alpha_{ij}^l e'_l$로 쓸 수 있고, 이들은\  $A'$에서\ 
+$\sum_l \alpha_{ij}^l \alpha_{lk}^m = \sum_l \alpha_{il}^m \alpha _{jk}^l$,
+$\alpha_{ij}^k = \alpha_{ji}^k$, $\alpha_{i1}^j = \delta_{ij}$를
+만족한다. 이는\  $a_{ij}^l \in A_d$를\  $\alpha_{ij}^l \in A'$로
+보내는 사상\  $\Spec(A') \to X_d$를 정한다.
+이 사상은 주어진 사상\  $\Spec(A) \to U_d$와 일치한다.
+$\Spec(A')$와\  $\Spec(A)$는 같은 기저 위상공간을 가지므로,
+원하는 올림\  $\Spec(A') \to U_d$를 얻고\ 
+$U_d$가\  $\mathbf{Z}$ 위에서 매끄럽다는 결론을 얻는다.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-universal-finite-syntomic-etale}
+Example \ref{discriminant-example-universal-finite-syntomic}의 표기에서\ 
+$\pi_d$가 \'etale인 열린 부분스킴\  $U'_d \subset X_d$를 생각하자.
+그러면\  $U'_d$는\  Lemma
+\ref{discriminant-lemma-universal-finite-syntomic}의 열린집합\  $U_d$에서 조밀하다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{discriminant-lemma-universal-finite-syntomic}의 증명과 정확히 같은 논증에\ 
+Morphisms, Lemma
+\ref{morphisms-lemma-set-points-where-fibres-etale}를 사용하면,
+$\pi_d$가 \'etale인 최대 열린집합\  $U'_d \subset X_d$가 존재한다.
+또한 \'etale 사상은\  syntomic이므로\  $U'_d \subset U_d$이다.
+증명을 마치려면\  $U'_d \subset U_d$가 조밀함을 보여야 한다.
+$k$가 체이고\  $u : \Spec(k) \to U_d$가 사상이라 하자.
+Lemma \ref{discriminant-lemma-universal-finite-syntomic-smooth}의 증명에서처럼\ 
+$B = k \otimes_{A_d} B_d$라 하자.
+잉여체가\  $k$인 국소 정역\  $A'$과 유한\  syntomic $A'$-대수\  $B'$가\ 
+$B = k \otimes_{A'} B'$를 만족하고 그 일반올이 \'etale임을 보이겠다.
+바로 앞 문단과 정확히 같은 방식으로 이는 일반점을\  $U'_d$ 안으로,
+닫힌점을\  $u$로 보내는 사상\  $\Spec(A') \to U_d$를 정하므로
+증명이 끝난다.
+
+\medskip\noindent
+Lemma \ref{discriminant-lemma-syntomic-finite}의 (4)에 의해 표시\ 
+$B = k[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$를 택할 수 있다.
+$d'$를 다항식\  $f_1, \ldots, f_n$의 전체 차수들의 최댓값이라 하자.
+Example \ref{discriminant-example-universal-quasi-finite-syntomic}에서와 같은\ 
+$Y_{n, d'} \to X_{n, d'}$를 택하자. 구성에 의해
+$$
+\Spec(B) \cong Y_{n, d'} \times_{X_{n, d'}, u'} \Spec(k)
+$$
+가 되게 하는 사상\  $u' : \Spec(k) \to X_{n, d'}$가 존재한다.
+$A = \mathcal{O}_{X_{n, d'}, u'}^h$를\  $u'$의 상에서\ 
+$X_{n, d'}$의 국소환의\  Hensel화라 하자. 그러면
+$$
+Y_{n, d'} \times_{X_{n, d'}} \Spec(A) = Z \amalg W
+$$
+로 쓸 수 있다. 여기서\  $Z \to \Spec(A)$는 유한이고\ 
+$W \to \Spec(A)$는 빈 닫힌올을 갖는다.
+Algebra, Lemma
+\ref{algebra-lemma-characterize-henselian}의 (13) 또는\ 
+More on Morphisms, Section
+\ref{more-morphisms-section-etale-localization}의 논의를 보라.
+Lemma \ref{discriminant-lemma-universal-quasi-finite-syntomic-etale}에 의해
+국소환\  $A$는 정칙이고(여기서\  More on Algebra, Lemma
+\ref{more-algebra-lemma-henselization-regular}도 사용한다),
+사상\  $Z \to \Spec(A)$는\  $\Spec(A)$의 일반점 위에서 \'etale이다
+($X_{d, n'}$의 일반점으로 보내지기 때문이다).
+구성에 의해\  $Z \times_{\Spec(A)} \Spec(k) \cong \Spec(B)$이다.
+이는\  $A$의 잉여체에서\  $k$로 가는 사상이 동형이 아닐 수도 있다는
+점을 제외하면 원하는 바를 증명한다. Algebra, Lemma
+\ref{algebra-lemma-flat-local-given-residue-field}에 의해\ 
+$A'$의 잉여체가\  $k$가 되게 하는 평탄 국소 환 사상\ 
+$A \to A'$이 존재한다. $A'$이 정역이 아니면
+최소 소아이디얼\  $\mathfrak p \subset A'$를 택하고
+(평탄성에 의해 이는\  $A$의 유일한 최소 소아이디얼 위에 놓인다)
+$A'$을\  $A'/\mathfrak p$로 바꾼다.
+$Z \times_{\Spec(A)} \Spec(A') = \Spec(B')$가 되게 하는
+유일한\  $A'$-대수를\  $B'$라 놓는다. 이것으로 증명이 끝난다.
+\end{proof}
+\begin{remark}
+\label{discriminant-remark-universal-finite-syntomic-smooth-top}
+$\pi_d : Y_d \to X_d$를\  Example
+\ref{discriminant-example-universal-finite-syntomic}에서와 같이 하자.
+$U_d \subset X_d$를\  Lemma
+\ref{discriminant-lemma-universal-finite-syntomic}에서처럼\ 
+$V_d = \pi_d^{-1}(U_d)$가 유한\  syntomic이 되는 최대 열린집합이라 하자.
+그러면\  $V_d$도\  $\mathbf{Z}$ 위에서 매끄럽다.
+(물론\  $d \geq 2$이면 사상\  $V_d \to U_d$는 매끄럽지 않다.)
+Lemma \ref{discriminant-lemma-universal-finite-syntomic-smooth}의 증명에서처럼
+논증하면 이는 다음 변형 문제에 대응한다. 작은 확대\ 
+$C' \to C$와 절단\  $B \to C$를 갖는 유한\  syntomic $C$-대수\  $B$가
+주어졌을 때, $C$와의 텐서곱이\  $B \to C$를 복원하는
+유한\  syntomic $C'$-대수\  $B'$ 및 절단\  $B' \to C'$를 찾아라.
+Lemma \ref{discriminant-lemma-syntomic-finite}에 의해 상대 대역 완전 교차로서\ 
+$B = C[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$로 쓸 수 있다.
+좌표변환 뒤에는\  $x_1, \ldots, x_n$이\  $B \to C$의 핵에
+속한다고 가정할 수 있다. 그러면 다항식\  $f_i$들의 상수항은 영이다.
+상수항이 영인\  $f_i$의 임의의 올림\ 
+$f'_i \in C'[x_1, \ldots, x_n]$를 택하자. 그러면\ 
+$B' = C'[x_1, \ldots, x_n]/(f'_1, \ldots, f'_n)$과\ 
+$x_i$를 영으로 보내는 절단\  $B' \to C'$가 원하는 조건을 만족한다.
+\end{remark}
+
+\begin{lemma}
+\label{discriminant-lemma-locally-comes-from-universal-finite}
+$f : Y \to X$를 스킴 사상이라 하자.
+$f$가\  Lemma \ref{discriminant-lemma-syntomic-finite}의 동치 조건들을 만족하면,
+모든\  $x \in X$에 대해\  $d$와 가환도식
+$$
+\xymatrix{
+Y \ar[d] &
+V \ar[d] \ar[l] \ar[r] &
+V_d \ar[d] \ar[r] &
+Y_d \ar[d]^{\pi_d}\\
+X &
+U \ar[l] \ar[r] &
+U_d \ar[r] &
+X_d
+}
+$$
+가 존재하며 다음 성질들을 만족한다.
+\begin{enumerate}
+\item $U \subset X$는 열린집합이고, $x \in U$이며,
+$V = f^{-1}(U)$이다.
+\item $\pi_d : Y_d \to X_d$는\  Example
+\ref{discriminant-example-universal-finite-syntomic}에서와 같다.
+\item $U_d \subset X_d$는\  Lemma
+\ref{discriminant-lemma-universal-finite-syntomic}에서와 같고\ 
+$V_d = \pi_d^{-1}(U_d) \subset Y_d$이다.
+\item 가운데 정사각형은 카르테시안이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$x$의 아핀 열린 근방\  $U = \Spec(A) \subset X$를 택하고\ 
+$V = f^{-1}(U) = \Spec(B)$라 쓰자.
+그러면\  $B$는 유한 국소 자유\  $A$-가군이고 포함\ 
+$A \subset B$는 국소적으로 직합인자이다.
+따라서\  $U$를 축소한 뒤\  $A$-가군\  $B$의 기저\ 
+$1 = e_1, e_2, \ldots, e_d$를 택할 수 있다.
+유일한 원소\  $\alpha_{ij}^l \in A$에 대해\ 
+$e_i e_j = \sum \alpha_{ij}^l e_l$로 쓰자. 이들은\  $A$에서 관계식\ 
+$\sum_l \alpha_{ij}^l \alpha_{lk}^m = \sum_l \alpha_{il}^m \alpha _{jk}^l$,
+$\alpha_{ij}^k = \alpha_{ji}^k$, $\alpha_{i1}^j = \delta_{ij}$를
+만족한다. 이는\  $a_{ij}^l \in A_d$를\  $\alpha_{ij}^l \in A$로
+보내는 사상\  $\Spec(A) \to X_d$를 정한다.
+구성에 의해\  $V \cong \Spec(A) \times_{X_d} Y_d$이다.
+$U_d$의 정의에 의해\  $\Spec(A) \to X_d$는\  $U_d$를 통해
+인수분해된다. 이것으로 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{Different의 공식}
+\label{discriminant-section-formula-different}
+
+\noindent
+이 절에서는\  Tate에 의한\  \cite[Appendix A]{Mazur-Roberts}의 내용을
+논한다. 우리의 언어로 이는 평탄하고 준유한인 국소 완전 교차
+사상의 경우\  different가\  K\"ahler different와 같음을 보여 준다.
+먼저 특별한 경우에\  Noether different를 계산한다.
+
+\begin{lemma}
+\label{discriminant-lemma-tate}
+\begin{reference}
+\cite[Appendix]{Mazur-Roberts}
+\end{reference}
+$A \to P$를 환 사상이라 하자.
+$f_1, \ldots, f_n \in P$를\  Koszul 정칙열이라 하고,
+$B = P/(f_1, \ldots, f_n)$이\  $A$ 위에서 평탄하다고 가정하자.
+$g_1, \ldots, g_n \in P \otimes_A B$를 곱셈 사상\ 
+$P \otimes_A B \to B$의 핵을 생성하는\  Koszul 정칙열이라 하자.
+$f_i \otimes 1 = \sum g_{ij} g_j$라 쓰자.
+그러면\  $\Ker(B \otimes_A B \to B)$의 소멸자는\ 
+$\det(g_{ij})$의 상이 생성하는 주 아이디얼이다.
+\end{lemma}
+
+\begin{proof}
+Koszul 복합체\  $K_\bullet = K(P, f_1, \ldots, f_n)$는
+유한 자유\  $P$-가군들에 의한\  $B$의 분해이다.
+Koszul 복합체\ 
+$M_\bullet = K(P \otimes_A B, g_1, \ldots, g_n)$는
+유한 자유\  $P \otimes_A B$-가군들에 의한\  $B$의 분해이다.
+복합체 사상
+$$
+K_\bullet \longrightarrow M_\bullet
+$$
+가 존재하며, 차수\  $1$에서는 행렬\  $(g_{ij})$로, 차수\  $n$에서는\ 
+$\det(g_{ij})$로 주어진다. More on Algebra, Lemma
+\ref{more-algebra-lemma-functorial}을 보라.
+$B$는 평탄\  $A$-가군이므로\  $M_\bullet$을
+($P \to P \otimes_A B$, $p \mapsto p \otimes 1$을 통해)
+평탄\  $P$-가군들의 복합체로 볼 수 있다.
+따라서 두 복합체를 모두 사용하여\  $\text{Tor}_*^P(B, B)$를 계산할
+수 있고, 표시된 사상은\  $B$와 텐서곱한 뒤 준동형을 정의한다.
+$H_n(K_\bullet \otimes_P B) = B$임은 분명하다.
+한편\  $H_n(M_\bullet \otimes_P B)$는 사상
+$$
+B \otimes_A B \xrightarrow{g_1, \ldots, g_n} (B \otimes_A B)^{\oplus n}
+$$
+의 핵이다. $g_1, \ldots, g_n$은\  $B \otimes_A B \to B$의
+핵을 생성하므로 보조정리가 증명된다.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-quasi-finite-complete-intersection}
+$A$를 환이라 하자. $n \geq 1$이고\ 
+$h, f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$이라 하자.
+$B = A[x_1, \ldots, x_n, 1/h]/(f_1, \ldots, f_n)$로 놓고,
+$B$가\  $A$ 위에서 준유한이라고 가정하자. 그러면
+\begin{enumerate}
+\item $B$는\  $A$ 위에서 평탄이고\  $A \to B$는 상대 국소 완전 교차이다.
+\item $I = \Ker(B \otimes_A B \to B)$의 소멸자\  $J$는\ 
+$B$ 위에서 계수\  $1$의 자유 가군이다.
+\item $A$ 위의\  $B$의\  Noether different는\ 
+$B$ 안의\  $\det(\partial f_i/\partial x_j)$가 생성한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$B = A[x, x_1, \ldots, x_n]/(xh - 1, f_1, \ldots, f_n)$은\ 
+$A$ 위의 상대 대역 완전 교차이다. Algebra, Definition
+\ref{algebra-definition-relative-global-complete-intersection}을 보라.
+Algebra, Lemma
+\ref{algebra-lemma-relative-global-complete-intersection}에 의해\ 
+$B$는\  $A$ 위에서 평탄이다.
+
+\medskip\noindent
+$P' = A[x, x_1, \ldots, x_n]$,
+$P = P'/(xh - 1) = A[x_1, \ldots, x_n, 1/h]$라 쓰자.
+그러면\  $P' \to P \to B$가 있다. More on Algebra, Lemma
+\ref{more-algebra-lemma-relative-global-complete-intersection-koszul}에
+의해\  $xh - 1, f_1, \ldots, f_n$은\  $P'$ 안의\  Koszul 정칙열이다.
+$xh - 1$은\  $P'$ 안의 길이\  1인\  Koszul 정칙열이므로
+(예를 들어 같은 보조정리에 의해), More on Algebra, Lemma
+\ref{more-algebra-lemma-truncate-koszul-regular}에 의해\ 
+$f_1, \ldots, f_n$은\  $P$ 안의\  Koszul 정칙열이다.
+
+\medskip\noindent
+$g_i \in P \otimes_A B$를\ 
+$x_i \otimes 1 - 1 \otimes x_i$의 상이라 하자.
+$A[x_1, \ldots, x_n] \otimes_A A[x_1, \ldots, x_n]$에서
+간단히\  $y_i = x_i \otimes 1$, $z_i = 1 \otimes x_i$라 쓰면,
+$g_i$는\  $y_i - z_i$의 상이다.
+다항식\  $f \in A[x_1, \ldots, x_n]$에 대해 위 텐서곱에서\ 
+$f(y) = f \otimes 1$, $f(z) = 1 \otimes f$라 쓰자. 그러면
+$$
+P \otimes_A B/(g_1, \ldots, g_n) =
+\frac{A[y_1, \ldots, y_n, z_1, \ldots, z_n, \frac{1}{h(y)h(z)}]}
+{(f_1(z), \ldots, f_n(z), y_1 - z_1, \ldots, y_n - z_n)}
+$$
+이고, 이는 분명히\  $B$와 동형이다. 따라서 위와 같은 논증으로\ 
+$f_1(z), \ldots, f_n(z), y_1 - z_1, \ldots, y_n - z_n$이\ 
+$A[y_1, \ldots, y_n, z_1, \ldots, z_n, \frac{1}{h(y)h(z)}]$
+안의\  Koszul 정칙열임을 알 수 있다.
+열\  $f_1(z), \ldots, f_n(z)$은 평탄 사상
+$$
+P \longrightarrow A[y_1, \ldots, y_n, z_1, \ldots, z_n,
+\textstyle{\frac{1}{h(y)h(z)}}],\quad x_i \longmapsto z_i
+$$
+와\  More on Algebra, Lemma
+\ref{more-algebra-lemma-koszul-regular-flat-base-change}에 의해\ 
+$A[y_1, \ldots, y_n, z_1, \ldots, z_n, \frac{1}{h(y)h(z)}]$
+안의\  Koszul 정칙열이다. More on Algebra, Lemma
+\ref{more-algebra-lemma-truncate-koszul-regular}에 의해\ 
+$g_1, \ldots, g_n$은\  $P \otimes_A B$ 안의 정칙열이다.
+
+\medskip\noindent
+이제 위의\  $P$, $f_1, \ldots, f_n$ 및\ 
+$g_i \in P \otimes_A B$에 대해\  Lemma \ref{discriminant-lemma-tate}의 모든
+가정을 확인했다. 특히\  $I$의 소멸자\  $J$는 한 원소\  $\delta$에 의해\ 
+$B$ 위에서 자유롭게 생성된다.
+$f_{ij} = \partial f_i/\partial x_j \in A[x_1, \ldots, x_n]$로 놓자.
+초등적 계산으로 어떤\ 
+$F_{ijj'} \in A[y_1, \ldots, y_n, z_1, \ldots, z_n]$에 대해
+$$
+f_i(y) =
+f_i(z_1 + g_1, \ldots, z_n + g_n) =
+f_i(z) + \sum\nolimits_j f_{ij}(z) g_j +
+\sum\nolimits_{j, j'} F_{ijj'}g_jg_{j'}
+$$
+로 쓸 수 있다. $P \otimes_A B$ 안의 상을 취하면\ 
+$f_i(z)$ 항들은 영으로 가고
+$$
+f_i \otimes 1 = \sum\nolimits_j
+\left(1 \otimes f_{ij} + \sum\nolimits_{j'} F_{ijj'}g_{j'}\right)g_j
+$$
+를 얻는다. 따라서\  Lemma \ref{discriminant-lemma-tate}로부터\ 
+$\delta = \det(g_{ij})$이고\ 
+$g_{ij} = 1 \otimes f_{ij} + \sum_{j'} F_{ijj'}g_{j'}$임을 얻는다.
+$g_{j'}$는\  $B$ 안에서 영으로 가므로,
+$B$ 안의\  $\det(\partial f_i/\partial x_j)$의 상이\ 
+$A$ 위의\  $B$의\  Noether different를 생성한다.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-different-syntomic-quasi-finite}
+$f : Y \to X$를\  Noether 스킴의 사상이라 하자.
+$f$가\  Lemma \ref{discriminant-lemma-syntomic-quasi-finite}의 동치 조건들을
+만족하면, $f$의\  different $\mathfrak{D}_f$는\ 
+$f$의\  K\"ahler different이다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{discriminant-lemma-flat-gorenstein-agree-noether}와\ 
+\ref{discriminant-lemma-dualizing-syntomic-quasi-finite}에 의해\ 
+$f$의\  different는 아핀 국소적으로\  Noether different와 같다.
+그러면 보조정리는\  Lemmas
+\ref{discriminant-lemma-kahler-different-complete-intersection}과\ 
+\ref{discriminant-lemma-quasi-finite-complete-intersection}에서 수행한
+표준 아핀 조각 위의\  Noether different와\  K\"ahler different의
+계산에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-different-quasi-finite-complete-intersection}
+$A$를 환이라 하자. $n \geq 1$이고\ 
+$h, f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$이라 하자.
+$B = A[x_1, \ldots, x_n, 1/h]/(f_1, \ldots, f_n)$로 놓고\ 
+$B$가\  $A$ 위에서 준유한이라고 가정하자.
+그러면\  $\det(\partial f_i/\partial x_j)$를\  $\tau_{B/A}$로 보내는
+동형\  $B \to \omega_{B/A}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$J$를\  $\Ker(B \otimes_A B \to B)$의 소멸자라 하자.
+Lemma \ref{discriminant-lemma-quasi-finite-complete-intersection}에 의해\ 
+$A \to B$는 평탄이고, $J$는\  $B$ 안에서\ 
+$\det(\partial f_i/\partial x_j)$로 가는 생성원\  $\xi$를 갖는
+자유\  $B$-가군이다. 따라서 보조정리는\  Lemma
+\ref{discriminant-lemma-noether-different-flat-quasi-finite}와\ 
+$\omega_{B/A}$가 가역\  $B$-가군이라는 사실
+(Lemma \ref{discriminant-lemma-dualizing-syntomic-quasi-finite})에서 따른다.
+(주의: $\Hom_B(M, B) \cong B$를 만족하는 유한\  $B$-가군\  $M$이
+자유일 필요는 없으므로\  $\omega_{B/A}$가 가역임을 증명해야 한다.)
+\end{proof}
+
+\begin{example}
+\label{discriminant-example-different-for-monogenic}
+$A$를\  Noether 환이라 하자. $f, h \in A[x]$이고
+$$
+B = (A[x]/(f))_h = A[x, 1/h]/(f)
+$$
+가\  $A$ 위에서 준유한이라고 하자.
+$f' \in A[x]$를\  $x$에 관한\  $f$의 도함수라 하자.
+아이디얼\  $\mathfrak{D} = (f') \subset B$는\  $A$ 위의\  $B$의\ 
+Noether different이고, $A$ 위의\  $B$의\  K\"ahler different이며,
+그에 딸린 준연접 아이디얼 층이\  $\Spec(A)$ 위의\  $\Spec(B)$의\ 
+different가 되는 아이디얼이다.
+\end{example}
+\begin{lemma}
+\label{discriminant-lemma-discriminant-quasi-finite-morphism-smooth}
+$S$를\  Noether 스킴이라 하고, $X$, $Y$를\  $S$ 위의 상대 차원\  $n$인
+매끄러운 스킴이라 하자. $f : Y \to X$를\  $S$ 위의 국소 준유한
+사상이라 하자. 그러면\  $f$는 평탄이고, $f$의\  different가 잘라내는
+닫힌 부분스킴\  $R \subset Y$는
+$$
+\wedge^n(\text{d}f) \in
+\Gamma(Y,
+(f^*\Omega^n_{X/S})^{\otimes -1} \otimes_{\mathcal{O}_Y} \Omega^n_{Y/S})
+$$
+가 잘라내는 국소 주 닫힌 부분스킴이다.
+$f$가\  $Y$의 수반점들에서 \'etale이면\  $R$은 유효\  Cartier 인자이고\ 
+$Y$ 위의 가역층으로서
+$$
+f^*\Omega^n_{X/S} \otimes_{\mathcal{O}_Y} \mathcal{O}(R) =
+\Omega^n_{Y/S}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$f$가 평탄임을 증명하려면 모든\  $s \in S$에 대해\ 
+$Y_s \to X_s$가 평탄임을 증명하면 충분하다
+(More on Morphisms, Lemma
+\ref{more-morphisms-lemma-morphism-between-flat-Noetherian}).
+$Y_s \to X_s$의 평탄성은\  Algebra, Lemma
+\ref{algebra-lemma-CM-over-regular-flat}에서 따른다.
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-lci-permanence}에 의해\ 
+$f$는 국소 완전 교차 사상이다. 따라서\  different에 관한 명제는\ 
+Lemma \ref{discriminant-lemma-different-syntomic-quasi-finite}에 의해\ 
+K\"ahler different에 관한 대응 명제에서 따른다.
+마지막으로\  Morphisms, Lemma
+\ref{morphisms-lemma-triangle-differentials}에 의해 완전열
+$$
+f^*\Omega_{X/S} \xrightarrow{\text{d}f} \Omega_{Y/S} \to \Omega_{Y/X} \to 0
+$$
+이 있고, $\Omega_{X/S}$와\  $\Omega_{Y/S}$는 계수\  $n$의 유한 국소
+자유 가군이므로(Morphisms, Lemma
+\ref{morphisms-lemma-smooth-omega-finite-locally-free}),
+K\"ahler different에 관한 명제는 제0 피팅 아이디얼의 정의에서
+분명하다. $f$가\  $Y$의 수반점들에서 \'etale이면\ 
+$\wedge^n\text{d}f$는\  $Y$의 수반점들에서 영이 아니고,
+따라서\  $R$의 국소 방정식은 영인자가 아니다.
+그러므로\  $R$은 유효\  Cartier 인자이다.
+표준 동형은\  $1$을\  $\wedge^n\text{d}f$로 보낸다.
+Divisors, Lemma \ref{divisors-lemma-characterize-OD}를 보라.
+\end{proof}
+
+
+
+
+
+\section{Tate 사상}
+\label{discriminant-section-tate-map}
+
+\noindent
+이 절에서는 국소\  Noether 스킴의 국소 준유한\  syntomic 사상에 대해
+상대 여접복합체의 행렬식과 상대 쌍대화 가군 사이의 동형을 만든다.
+\cite[1.4.4]{Garel}을 따라 이 동형을\  Tate 사상이라 부른다.
+우리의 접근법은 가능한 한 국소 계산을 피하는 것이다.
+
+\medskip\noindent
+$Y \to X$를 스킴의 국소 준유한\  syntomic 사상이라 하자.
+이 절에서는 더 언급하지 않고\  Lemma
+\ref{discriminant-lemma-syntomic-quasi-finite}에 주어진 이 개념의 모든 동치 조건을
+사용한다. 특히\  $\NL_{Y/X}$는\  $[-1, 0]$ 안의\  tor-진폭을 갖는\ 
+$D(\mathcal{O}_Y)$의 완전 대상이다. 따라서\  $Y$ 위에 표준 가역 가군\ 
+$\det(\NL_{Y/X})$와 대역 절단
+$$
+\delta(\NL_{Y/X}) \in \Gamma(Y, \det(\NL_{Y/X}))
+$$
+이 있다. Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-determinant-two-term-complexes}를 보라.
+스킴의 가환도식
+$$
+\xymatrix{
+Y' \ar[r]_b \ar[d] & Y \ar[d] \\
+X' \ar[r] & X
+}
+$$
+이 주어졌고, 수직 화살표들이 국소 준유한\  syntomic이며\ 
+$Y'$과\  $X' \times_X Y$의 한 열린집합 사이의 동형을 유도한다고 하자.
+그러면 표준 사상
+$$
+Lb^*\NL_{Y/X} \longrightarrow \NL_{Y'/X'}
+$$
+은\  More on Morphisms, Lemma
+\ref{more-morphisms-lemma-base-change-NL-flat}에 의해 준동형이다.
+따라서 표준 동형\ 
+$b^*\det(\NL_{Y/X}) \to \det(\NL_{Y'/X'})$를 얻으며, 이는
+표준 절단\  $\delta(\NL_{Y/X})$를\  $\delta(\NL_{Y'/ X'})$로 보낸다.
+Derived Categories of Schemes, Remark
+\ref{perfect-remark-functorial-det}를 보라.
+
+\begin{remark}
+\label{discriminant-remark-local-description-delta}
+$Y \to X$를 스킴의 국소 준유한\  syntomic 사상이라 하자.\par\noindent
+쌍\  $(\det(\NL_{Y/X}), \delta(\NL_{Y/X}))$은 국소적으로 어떤 모습인가?
+아핀 열린집합\  $V = \Spec(B) \subset Y$,
+$U = \Spec(A) \subset X$와\  $f(V) \subset U$를 만족하는 정수\  $n$ 및\ 
+$f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$을 택하여\ 
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$이라 하자. 그러면
+$$
+\NL_{B/A} = \left(
+(f_1, \ldots, f_n)/(f_1, \ldots, f_n)^2
+\longrightarrow
+\bigoplus\nolimits_{i = 1, \ldots, n} B \text{d} x_i\right)
+$$
+이고\  $(f_1, \ldots, f_n)/(f_1, \ldots, f_n)^2$은
+합동류\  $\overline{f}_i$들을 생성원으로 하는 자유 가군이다.
+Lemma \ref{discriminant-lemma-syntomic-quasi-finite}의 증명을 보라.
+따라서\  $\det(L_{B/A})$는 생성원
+$$
+\text{d}x_1 \wedge \ldots \wedge \text{d}x_n
+\otimes
+(\overline{f}_1 \wedge \ldots \wedge \overline{f}_n)^{\otimes -1}
+$$
+위에서 자유이고, 정의에 의해 절단\  $\delta(\NL_{B/A})$는 원소
+$$
+\delta(\NL_{B/A}) =
+\det(\partial f_j/ \partial x_i) \cdot
+\text{d}x_1 \wedge \ldots \wedge \text{d}x_n
+\otimes
+(\overline{f}_1 \wedge \ldots \wedge \overline{f}_n)^{\otimes -1}
+$$
+이다.
+\end{remark}
+\noindent
+$Y \to X$를 국소\  Noether 스킴의 국소 준유한\  syntomic 사상이라 하자.
+Remarks \ref{discriminant-remark-relative-dualizing-for-quasi-finite}와\ 
+\ref{discriminant-remark-relative-dualizing-for-flat-quasi-finite}에 의해
+연접\  $\mathcal{O}_Y$-가군\  $\omega_{Y/X}$와 표준 대역 절단
+$$
+\tau_{Y/X} \in \Gamma(Y, \omega_{Y/X})
+$$
+이 있으며, 아핀 국소적으로 쌍\  $\omega_{B/A}, \tau_{B/A}$를 복원한다.
+Lemma \ref{discriminant-lemma-dualizing-syntomic-quasi-finite}에 의해
+가군\  $\omega_{Y/X}$는 가역이다. 국소\  Noether 스킴의 가환도식
+$$
+\xymatrix{
+Y' \ar[r]_b \ar[d] & Y \ar[d] \\
+X' \ar[r] & X
+}
+$$
+이 주어졌고, 수직 화살표들이 국소 준유한\  syntomic이며\ 
+$Y'$과\  $X' \times_X Y$의 한 열린집합 사이의 동형을 유도한다고 하자.
+그러면 표준 기저변환 사상
+$$
+b^*\omega_{Y/X} \longrightarrow \omega_{Y'/X'}
+$$
+이 있으며, 이는\  $\tau_{Y/X}$를\  $\tau_{Y'/X'}$로 보내는 동형이다.
+실제로 아핀 경우의 기저변환 사상은 (\ref{discriminant-equation-bc-dualizing})이고,
+Lemma \ref{discriminant-lemma-dualizing-base-change-of-flat}에 의해 동형이며,
+Lemma \ref{discriminant-lemma-trace-base-change}의 (1)에 의해\ 
+$\tau_{Y/X}$를\  $\tau_{Y'/X'}$로 보낸다.
+
+\begin{proposition}
+\label{discriminant-proposition-tate-map}
+국소\  Noether 스킴의 모든 국소 준유한\  syntomic 사상\  $Y \to X$에
+다음 두 성질을 만족하는 동형
+$$
+c_{Y/X} : \det(\NL_{Y/X}) \longrightarrow \omega_{Y/X}
+$$
+을 대응시키는 유일한 규칙이 존재한다.
+\begin{enumerate}
+\item 절단\  $\delta(\NL_{Y/X})$는\  $\tau_{Y/X}$로 보내진다.
+\item 이 규칙은 열린집합으로의 제한 및 기저변환과 양립한다.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+명제를 다시 표현하자. 대상들을 국소\  Noether 스킴의 국소 준유한\ 
+syntomic 사상\  $Y \to X$로 하고 이를\  $Y/X$라 쓰며, 사상\ 
+$b/a : Y'/X' \to Y/X$을 가환도식
+$$
+\xymatrix{
+Y' \ar[d] \ar[r]_b & Y \ar[d] \\
+X' \ar[r]^a & X
+}
+$$
+으로 하되 이 도식이\  $Y'$과\  $X' \times_X Y$의 한 열린 부분스킴
+사이의 동형을 유도하게 하는 범주\  $\mathcal{C}$를 생각하자.
+명제의 뜻은\  $\mathcal{C}$의 모든 대상\  $Y/X$에 대해\ 
+$c_{Y/X}(\delta(\NL_{Y/X})) = \tau_{Y/X}$를 만족하는 동형\ 
+$c_{Y/X} : \det(\NL_{Y/X}) \to \omega_{Y/X}$가 있고,
+$\mathcal{C}$의 모든 사상\  $b/a : Y'/X' \to Y/X$에 대해
+위에서 설명한 동일시\ 
+$b^*\det(\NL_{Y/X}) = \det(\NL_{Y'/X'})$와\ 
+$b^*\omega_{Y/X} = \omega_{Y'/X'}$ 아래\ 
+$b^*c_{Y/X} = c_{Y'/X'}$가 성립한다는 것이다.
+
+\medskip\noindent
+$\mathcal{C}$ 안의\  $Y/X$와\  $y \in Y$가 주어졌다고 하자.
+$f(V) \subset U$이고\  $y \in V$인 아핀 열린집합\ 
+$V \subset Y$, $U \subset X$를 찾아, 어떤 동형
+$$
+\det(\NL_{Y/X})|_V \longrightarrow \omega_{Y/X}|_V
+$$
+이\  $\delta(\NL_{Y/X})|_V$를\  $\tau_{Y/X}|_V$로 보내게 할 수 있다.
+이는\  Lemma \ref{discriminant-lemma-syntomic-quasi-finite}의 (5)에서와 같은
+아핀 열린집합을 택하고, Remark
+\ref{discriminant-remark-local-description-delta}의\  $\delta(\NL_{Y/X})$에 대한
+아핀 국소 기술과\  Lemma
+\ref{discriminant-lemma-different-quasi-finite-complete-intersection}를 사용하면
+따른다. 절단\  $\tau_{Y/X}$의 소멸자가 영이면 이 국소 사상들은
+유일하며 자동으로 붙는다. 따라서\  $\tau_{Y/X}$의 소멸자가 영이면\ 
+$c_{Y/X}(\delta(\NL_{Y/X})) = \tau_{Y/X}$를 만족하는 유일한 동형\ 
+$c_{Y/X} : \det(\NL_{Y/X}) \to \omega_{Y/X}$가 존재한다.
+$b/a : Y'/X' \to Y/X$가\  $\mathcal{C}$의 사상이고\ 
+$\tau_{Y'/X'}$의 소멸자도 영이면, $b^*c_{Y/X}$는\ 
+$c_{Y'/X'}(\delta(\NL_{Y'/X'})) = \tau_{Y'/X'}$를 만족하는
+유일한 동형\ 
+$c_{Y'/X'} : \det(\NL_{Y'/X'}) \to \omega_{Y'/X'}$이다.
+이는\ 
+$b^*\delta(\NL_{Y/X}) = \delta(\NL_{Y'/X'})$와\ 
+$b^*\tau_{Y/X} = \tau_{Y'/X'}$라는 사실에서 형식적으로 따른다.
+
+\medskip\noindent
+앞 문단의 결과를 다음과 같이 요약할 수 있다.
+$\mathcal{C}_{nice} \subset \mathcal{C}$를\ 
+$\tau_{Y/X}$의 소멸자가 영인\  $Y/X$들로 이루어진 충만 부분범주라
+하자. 그러면\  $\mathcal{C}_{nice}$ 위에서는 문제를 해결했다.
+$\mathcal{C}_{nice}$ 안의\  $Y/X$에 대해 방금 찾은 해를 계속\ 
+$c_{Y/X}$라 쓰겠다.
+
+\medskip\noindent
+$\mathcal{C}$ 안의 사상
+$$
+Y_1/X_1 \xleftarrow{b_1/a_1} Y/X \xrightarrow{b_2/a_2} Y_2/X_2
+$$
+를 생각하자. 여기서\  $Y_1/X_1$과\  $Y_2/X_2$는\ 
+$\mathcal{C}_{nice}$의 대상이다. {\bf 주장.}
+$b_1^*c_{Y_1/X_1} = b_2^*c_{Y_2/X_2}$이다.
+먼저 이 주장이 명제를 함의함을 보인 뒤 주장을 증명하겠다.
+
+\medskip\noindent
+$d, n \geq 1$이라 하고\  Example
+\ref{discriminant-example-universal-quasi-finite-syntomic}에서 구성한 국소 준유한\ 
+syntomic 사상\  $Y_{n, d} \to X_{n, d}$를 생각하자.
+$Y_{n, d}$는 기약 정칙 스킴이고\ 
+$Y_{n, d} \to X_{n, d}$는 국소 준유한\  syntomic이며 조밀 열린집합
+위에서 \'etale이다. Lemma
+\ref{discriminant-lemma-universal-quasi-finite-syntomic-etale}를 보라.
+따라서 예를 들어\  Lemma \ref{discriminant-lemma-different-ramification}에 의해\ 
+$\tau_{Y_{n, d}/X_{n, d}}$는 영이 아니다.
+기약 정칙 스킴 위의 가역 가군의 영이 아닌 절단은 소멸자가 영이다.
+따라서\  $Y_{n, d}/X_{n, d}$는\  $\mathcal{C}_{nice}$의 대상이다.
+\medskip\noindent
+$Y/X$를\  $\mathcal{C}$의 임의의 대상이라 하고\  $y \in Y$라 하자.
+Lemma \ref{discriminant-lemma-locally-comes-from-universal}에 의해\ 
+$n, d \geq 1$과\  $\mathcal{C}$ 안의 사상
+$$
+Y/X \leftarrow V/U \xrightarrow{b/a} Y_{n, d}/X_{n, d}
+$$
+을 찾을 수 있다. 여기서\  $V \subset Y$와\  $U \subset X$는 열려 있다.
+따라서 위에서 구성한 표준 사상\  $c_{Y_{n, d}/X_{n, d}}$를\ 
+$b$로\  $V$에 당길 수 있다. 주장은 이 국소 동형들이 붙음을 보장한다.
+따라서\ 
+$c_{Y/X}(\delta(\NL_{Y/X})) = \tau_{Y/X}$를 만족하는 잘 정의된
+대역 동형\  $c_{Y/X} : \det(\NL_{Y/X}) \to \omega_{Y/X}$를 얻는다.
+$b/a : Y'/X' \to Y/X$가\  $\mathcal{C}$의 사상이면, 주장은 같은
+방식으로 구성한 사상\  $c_{Y'/X'}$가 국소적으로 구성한 사상\ 
+$c_{Y/X}$의\  $b$에 의한 당김임도 함의한다.
+그러므로 주장을 증명하는 일만 남는다.
+
+\medskip\noindent
+증명의 나머지에서는 주장을 증명한다. $y \in Y$를 택하고\ 
+$y$의 한 열린 근방에서 두 사상이 일치함을 증명할 수 있다.
+따라서\  $Y_1$, $Y_2$를\  $Y_1$, $Y_2$ 안의\  $y$의 상의 열린 근방으로
+바꿀 수 있다. 그러므로\ 
+$Y, X, Y_1, X_1, Y_2, X_2$가 아핀이고 각각 환\ 
+$B, A, B_1, A_1, B_2, A_2$의 스펙트럼이라고 가정할 수 있다.
+도식은
+$$
+\xymatrix{
+B_1 \ar[r] & B & B_2 \ar[l] \\
+A_1 \ar[u] \ar[r] & A \ar[u] & A_2 \ar[l] \ar[u]
+}
+$$
+이다. 가정에 의해\  $B$의 스펙트럼은\ 
+$A \otimes_{A_1} B_1$의 스펙트럼과\ 
+$A \otimes_{A_2} B_2$의 스펙트럼 양쪽의 아핀 열린집합이다.
+더 축소하면 사상들이 동형\ 
+$(A \otimes_{A_i} B_i)_{g_i} = B$를 주도록 하는 원소\ 
+$g_i \in A \otimes_{A_i} B_i$가 존재한다고 가정할 수 있다.
+Properties, Lemma
+\ref{properties-lemma-standard-open-two-affines}를 보라.
+충분히 큰 변수 모음\  $x_\alpha$, $y_\beta$를 택하여\ 
+$A_1$-대수와\  $A_2$-대수의 전사
+$$
+A'_1 = A_1[x_\alpha] \to A
+\quad\text{and}\quad
+A'_2 = A_2[y_\beta] \to A
+$$
+를 택할 수 있게 하자. 그러면\ 
+$g_i \in A \otimes_{A_i} B_i$의 올림\ 
+$h_i \in A'_i \otimes_{A_i} B_i$를 택할 수 있고, 도식
+$$
+\xymatrix{
+(A'_1 \otimes_{A_1} B_1)_{h_1} \ar[r] & B &
+(A'_2 \otimes_{A_1} B_2)_{h_2} \ar[l] \\
+A'_1 \ar[u] \ar[r] & A \ar[u] & A'_2 \ar[l] \ar[u]
+}
+$$
+을 생각한다. 구성에 의해 두 정사각형은 쌍대 카르테시안이다.
+다음 환 사상
+$$
+A' = A'_1 \times_A A'_2 \longrightarrow
+B' =
+(A'_1 \otimes_{A_1} B_1)_{h_1} \times_B
+(A'_2 \otimes_{A_1} B_2)_{h_2}
+$$
+을 생각하자. More on Algebra, Lemma
+\ref{more-algebra-lemma-module-over-fibre-product}에 의해\ 
+$A'_1 \otimes_{A'} B' = (A'_1 \otimes_{A_1} B_1)_{h_1}$이고\ 
+$A'_2 \otimes_{A'} B' = (A'_2 \otimes_{A_2} B_2)_{h_2}$이다.
+특히 사상\  $Y' = \Spec(B') \to \Spec(A') = X'$의 올들은
+사상\  $Y_i \to X_i$의 올들의 기저변환의 열린 부분스킴이므로
+유한 국소 완전 교차이다
+(Lemma \ref{discriminant-lemma-syntomic-quasi-finite}를 보라).
+More on Algebra, Lemma
+\ref{more-algebra-lemma-properties-algebras-over-fibre-product}에 의해
+환 사상\  $A' \to B'$는 평탄이고 유한 표시이다.
+따라서\  Lemma \ref{discriminant-lemma-syntomic-quasi-finite}의 (3)에 의해\ 
+$Y' \to X'$는 국소적으로 준유한이고\  syntomic이다.
+그러므로 가환도식
+$$
+\xymatrix{
+& & Y/X \ar[ld] \ar@/_2pc/[lldd]_{b_1/a_1} \ar[rd] \ar@/^2pc/[rrdd]^{b_2/a_2} \\
+& Y'_1/X'_1 \ar[rd] \ar[ld] & & Y'_2/X'_2 \ar[ld] \ar[rd] \\
+Y_1/X_1 & & Y'/X' & & Y_2/X_2
+}
+$$
+를 얻는다. 여기서\  $Y'_i/X'_i$는\ 
+$A'_i \to (A'_i \otimes_{A_i} B_i)_{h_i}$에 대응한다.
+
+\medskip\noindent
+이 문단에서는 극한 논증으로\  $A'$과\  $A'_i$가\  Noether가 아닐 수
+있다는 문제를 해결한다. 독자는 이 문단을 건너뛰어도 좋다.
+유한 생성\  $\mathbf{Z}$-부분대수\  $A'' \subset A'$과 준유한\ 
+syntomic 환 사상\  $A'' \to B''$을 찾아\ 
+$B' = A' \otimes_{A''} B''$이 되게 할 수 있다.
+이는\  Limits, Lemmas
+\ref{limits-lemma-descend-finite-presentation},
+\ref{limits-lemma-descend-syntomic}, 및\ 
+\ref{limits-lemma-descend-quasi-finite}에서 따른다.
+그러면 환 사상\  $A'' \to A'_1 = A_1[x_\alpha]$은 유한 다항식 부분대수\ 
+$A_i[x_1, \ldots, x_n$을 통해 인수분해되고, 환 사상\ 
+$A'' \to A'_2 = A_2[y_\beta]$는\  $A_2[y_1, \ldots, y_m]$을 통해
+인수분해된다. 변수 집합들을 늘려\ 
+$h_1 \in A_1[x_1, \ldots, x_n] \otimes_{A_1} B_1$과\ 
+$h_2 \in A_2[y_1, \ldots, y_m] \otimes_{A_2} B_2$도 가정할 수 있다.
+변수 집합들을 한 번 더 늘리면 사상\ 
+$B'' \to (A'_i \otimes_{A_i} B_i)_{h_i}$가\ 
+$(A_1[x_1, \ldots, x_n] \otimes_{A_1} B_1)_{h_1}$과\ 
+$(A_2[y_1, \ldots, y_m] \otimes_{A_2} B_2)_{h_2}$를 통해
+인수분해된다고 가정할 수 있다.
+$Y'$, $X'$, $Y'_1$, $X'_1$, $Y'_2$, $X'_2$를 각각\ 
+$B''$, $A''$,
+$(A_1[x_1, \ldots, x_n] \otimes_{A_1} B_1)_{h_1}$,
+$A_1[x_1, \ldots, x_n]$,
+$(A_2[y_1, \ldots, y_m] \otimes_{A_2} B_2)_{h_2}$,
+$A_2[y_1, \ldots, y_m]$의 스펙트럼으로 바꾸면
+모든 스킴이\  Noether인 위와 같은 도식을 얻는다.
+
+\medskip\noindent
+$Y'_i/X'_i$는 아핀공간과\  $Y_i/X_i$의 곱의 열린 부분스킴을 취하여
+얻으므로\  $\mathcal{C}_{nice}$의 대상이다.
+특히\  $(b_i/a_i)$를 통한\  $c_{Y_i/X_i}$의 당김은\ 
+$Y/X \to Y'_i/X'_i$를 통한\  $c_{Y'_i/X'_i}$의 당김과 같다.
+$Y'/X'$가\  $\mathcal{C}_{nice}$의 대상이면 증명이 끝난다
+(그러나 일반적으로 그렇지 않을 것이다).
+실제로 그러면 정사각형의 두 변을 따라\  $c_{Y'/X'}$를 당겨
+원하는 결론을 얻는다. $Y'/X'$가\  $\mathcal{C}_{nice}$에 속하지
+않는 문제를 피하기 위해, 위의 논증이 필요하면 모든 스킴\ 
+$X, Y, X'_1, Y'_1, X'_2, Y'_2, X', Y'$을 축소한 뒤
+어떤\  $n, d \geq 1$을 찾아 도식을 다음과 같이 확장할 수 있음을
+관찰한다.
+$$
+\xymatrix{
+& Y/X \ar[ld] \ar[rd] \\
+Y'_1/X'_1 \ar[rd] & & Y'_2/X'_2 \ar[ld] \\
+& Y'/X' \ar[d] \\
+& Y_{n, d}/X_{n, d}
+}
+$$
+그런 다음\  $c_{Y_{n, d}/X_{n, d}}$에서 당기는 이미 주어진 논증을
+사용할 수 있다. 이것으로 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Different의 일반화}
+\label{discriminant-section-different-generalization}
+
+\noindent
+이 절에서는\  Dedekind different가 정의되고\ 
+$1 \in \mathcal{L}_{B/A}$인 모든 환 사상\  $A \to B$의 경우를
+포함하도록\  Definition \ref{discriminant-definition-different}를 일반화한다.
+먼저 ‘$A \to B$가 영인자가 아닌 원소를 영인자가 아닌 원소로
+보내고 평탄 사상\  $Q(A) \to Q(A) \otimes_A B$를 유도한다’는
+조건을 설명한다.
+
+\begin{lemma}
+\label{discriminant-lemma-explain-condition}
+$A \to B$를\  Noether 환의 사상이라 하자. 다음 조건들을 생각하자.
+\begin{enumerate}
+\item $A$의 영인자가 아닌 원소들은\  $B$의 영인자가 아닌 원소로 간다.
+\item (1)이 성립하고\  $Q(A) \to Q(A) \otimes_A B$는 평탄이다.
+\item 모든\  $\mathfrak q \in \text{Ass}(B)$에 대해\ 
+$A \to B_\mathfrak q$는 평탄이다.
+\item (3)이 성립하고, $\text{Ass}(A)$의 한 원소 위에 놓이는 모든\ 
+$\mathfrak q$에 대해\  $A \to B_\mathfrak q$는 평탄이다.
+\end{enumerate}
+그러면 다음 함의들이 성립한다.
+$$
+\xymatrix{
+(1) & (2) \ar@{=>}[l] \ar@{=>}[d] \\
+(3) \ar@{=>}[u] & (4) \ar@{=>}[l]
+}
+$$
+$A \to B$에 대해 상승정리가 성립하면 (2)와 (4)는 동치이다.
+\end{lemma}
+
+\begin{proof}
+도식의 수평 함의들은 자명하다.
+$S \subset A$를 영인자가 아닌 원소들의 집합이라 하면\ 
+$Q(A) = S^{-1}A$이고\  $Q(A) \otimes_A B = S^{-1}B$이다.
+Algebra, Lemma \ref{algebra-lemma-ass-zero-divisors}에 의해\ 
+$S = A \setminus \bigcup_{\mathfrak p \in \text{Ass}(A)} \mathfrak p$
+임을 상기하자. $\mathfrak q \subset B$를\ 
+$\mathfrak p \subset A$ 위에 놓이는 소아이디얼이라 하자.
+
+\medskip\noindent
+(2)를 가정하자. $\mathfrak q \in \text{Ass}(B)$이면\ 
+$\mathfrak q$는 영인자들로 이루어지므로, (1)에 의해\ 
+$\mathfrak p$도 그러하다. 따라서\  $\mathfrak p$는\ 
+$S^{-1}A$의 한 소아이디얼에 대응한다. 그러므로 가정 (2)에 의해\ 
+$A \to B_\mathfrak q$는 평탄이다.
+$\mathfrak q$가\  $A$의 수반 소아이디얼\  $\mathfrak p$ 위에
+놓이면 분명히\  $\mathfrak p \in \Spec(S^{-1}A)$이고 같은 논증이
+성립한다.
+
+\medskip\noindent
+(3)을 가정하자. $f \in A$를 영인자가 아닌 원소라 하자.
+$f$가\  $B$ 위에서 영인자이면\  $f$는\  $B$의 한 수반 소아이디얼\ 
+$\mathfrak q$에 속한다. 가정에 의해\  $A \to B_\mathfrak q$가
+평탄이므로\  Algebra, Lemma \ref{algebra-lemma-bourbaki}에 의해\ 
+$\mathfrak p$는\  $A$의 수반 소아이디얼이라는 결론을 얻는다.
+이는\  $f$가\  $A$ 위에서 영인자임을 뜻하여 모순이다.
+
+\medskip\noindent
+(4)와\  $A \to B$에 대한 상승정리를 가정하자.
+이미 (1)이 성립함을 안다.
+$\mathfrak q$가\  $S^{-1}B$의 한 소아이디얼에 대응하면\ 
+$\mathfrak p$는\  $A$의 한 수반 소아이디얼\  $\mathfrak p'$에
+포함된다. 상승정리에 의해\  $\mathfrak q$를 포함하고\ 
+$\mathfrak p$ 위에 놓이는 소아이디얼\  $\mathfrak q'$가 존재한다.
+그러면 (4)에 의해\  $A \to B_{\mathfrak q'}$는 평탄이다.
+따라서 그 국소화\  $A \to B_{\mathfrak q}$도 평탄이다.
+그러므로\  $A \to S^{-1}B$와\  $S^{-1}A \to S^{-1}B$는 평탄이다.
+Algebra, Lemma \ref{algebra-lemma-flat-localization}을 보라.
+\end{proof}
+
+\begin{remark}
+\label{discriminant-remark-different-generalization}
+Definition \ref{discriminant-definition-different}를 일반화할 수 있다.
+$f : Y \to X$가 다음 성질을 갖는\  Noether 스킴의 준유한 사상이라
+하자.
+\begin{enumerate}
+\item $f$가 평탄인 열린집합\  $V \subset Y$는\ 
+$\text{Ass}(\mathcal{O}_Y)$와\ 
+$f^{-1}(\text{Ass}(\mathcal{O}_X))$를 포함한다.
+\item 대각합 원소\  $\tau_{V/X}$는 절단\ 
+$\tau \in \Gamma(Y, \omega_{Y/X})$에서 온다.
+\end{enumerate}
+조건 (1)은\  Lemma \ref{discriminant-lemma-dualizing-associated-primes}에 의해\ 
+$V$가\  $\omega_{Y/X}$의 수반점들을 포함함을 함의한다.
+특히\  $\tau$가 존재하면 유일하다
+(Divisors, Lemma
+\ref{divisors-lemma-restriction-injective-open-contains-ass}).
+$\tau$가 주어지면\  $\Coker(\tau : \mathcal{O}_Y \to \omega_{Y/X})$의
+소멸자로\  different $\mathfrak{D}_f$를 정의할 수 있다.
+이는 여러 경우에\  Dedekind different와 일치한다
+(Lemma \ref{discriminant-lemma-agree-dedekind}).
+그러나 비정규환들 사이의 비평탄 사상에 대해서는 이 일반화가
+더 이상 사상의 분기를 측정하지 않는다.
+Example \ref{discriminant-example-no-different}를 보라.
+\end{remark}
+\begin{lemma}
+\label{discriminant-lemma-agree-dedekind}
+$A \to B$의\  Dedekind different가 정의된다고 가정하자.
+$X = \Spec(A)$, $Y = \Spec(B)$로 놓자.
+Remark \ref{discriminant-remark-different-generalization}의 일반화가 사상\ 
+$f : Y \to X$에 적용될 필요충분조건은\ 
+$1 \in \mathcal{L}_{B/A}$인 것이다
+(예를 들어\  $A$가 정규이면 그러하다. Lemma
+\ref{discriminant-lemma-dedekind-different-ideal}을 보라).
+이 경우\  $\mathfrak{D}_{B/A}$는\  $B$의 아이디얼이고,
+$Y$ 위의 연접 아이디얼 층으로서
+$$
+\mathfrak{D}_f = \widetilde{\mathfrak{D}_{B/A}}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$A \to B$의\  Dedekind different가 정의되므로\  Lemma
+\ref{discriminant-lemma-explain-condition}을 적용하면\  $Y \to X$가\ 
+Remark \ref{discriminant-remark-different-generalization}의 조건 (1)을
+만족함을 알 수 있다. Lemma
+\ref{discriminant-lemma-dedekind-complementary-module}에 의해 표준 동형\ 
+$c : \mathcal{L}_{B/A} \to \omega_{B/A}$가 있음을 상기하자.
+위와 같이\  $K = Q(A)$, $L = K \otimes_A B$라 하자.
+구성에 의해 사상\  $c$는 가환도식
+$$
+\xymatrix{
+\mathcal{L}_{B/A} \ar[r] \ar[d]_c & L \ar[d] \\
+\omega_{B/A} \ar[r] & \Hom_K(L, K)
+}
+$$
+에 들어간다. 여기서 오른쪽 수직 화살표는\  $x \in L$을
+사상\  $y \mapsto \text{Trace}_{L/K}(xy)$로 보내고,
+아래 수평 화살표는\  $\omega_{B/A}$에 대한 기저변환 사상
+(\ref{discriminant-equation-bc-dualizing})이다. 아래 수평 사상을
+$$
+\omega_{B/A} = \Gamma(Y, \omega_{Y/X})
+\to \Gamma(V, \omega_{V/X}) \to \Hom_K(L, K)
+$$
+로 인수분해할 수 있다. $\omega_{V/X}$의 모든 수반점은\ 
+$A$의 수반 소아이디얼로 가므로
+(Lemma \ref{discriminant-lemma-dualizing-associated-primes})
+둘째 사상은 단사이다. 대각합 원소의 정의
+(Definition \ref{discriminant-definition-trace-element})에 의해\ 
+$\tau_{V/X}$는\  $\Hom_K(L, K)$ 안의\  $\text{Trace}_{L/K}$로 간다.
+따라서\  Remark \ref{discriminant-remark-different-generalization}의 조건 (2)의\ 
+$\tau$가 존재할 필요충분조건은\  $1 \in \mathcal{L}_{B/A}$이고,
+이때\  $\tau = c(1)$이다. 이 경우\  Lemma
+\ref{discriminant-lemma-dedekind-different-ideal}에 의해\ 
+$\mathfrak{D}_{B/A} \subset B$임을 안다.
+마지막으로\  $\mathfrak{D}_f$와\  $\mathfrak{D}_{B/A}$의 일치는
+정의와 방금 본\  $\tau = c(1)$에서 즉시 따른다.
+\end{proof}
+
+\begin{example}
+\label{discriminant-example-no-different}
+$k$를 체라 하자. $A = k[x, y]/(xy)$, $B = k[u, v]/(uv)$라 하고,
+$n, m \in \mathbf{N}$가\  $k$의 표수와 서로소일 때\ 
+$x \mapsto u^n$, $y \mapsto v^m$으로\  $A \to B$를 정의하자.
+그러면\  $A_{x + y} \to B_{x + y}$는 (유한) \'etale이므로\ 
+Dedekind different가 정의되는 상황이다. 계산하면
+$$
+\text{Trace}_{L/K}(1) = (nx + my)/(x + y),\quad
+\text{Trace}_{L/K}(u^i) = 0,\quad \text{Trace}_{L/K}(v^j) = 0
+$$
+이고, 여기서\  $1 \leq i < n$, $1 \leq j < m$이다.
+따라서\  $1 \in \mathcal{L}_{B/A}$일 필요충분조건은\  $n = m$이다.
+또 계산에 의해\  $n = m$이면\  $\mathcal{L}_{B/A} = B$이고\ 
+Dedekind different도\  $B$이다.
+다시 말해\  Remark \ref{discriminant-remark-different-generalization}의\  different가\ 
+$\Spec(B) \to \Spec(A)$에 대해 정의될 필요충분조건은\  $n = m$이고,
+이 경우\  different는 단위 아이디얼이다.
+따라서 비평탄인 경우\  different의 비소멸은 사상이 \'etale 또는
+비분기임을 보장하지 않는다.
+\end{example}
+
+
+
+
+
+
+\section{쌍대성이론과의 비교}
+\label{discriminant-section-comparison}
+
+\noindent
+이 절에서는 위의 초등 대수적 구성들을 스킴의 쌍대성이론 장의
+구성들과 비교한다.
+
+\begin{lemma}
+\label{discriminant-lemma-compare-dualizing}
+$f : Y \to X$를\  Noether 스킴의 준유한 분리 사상이라 하자.
+$f(V) \subset U$를 만족하는 모든 아핀 열린집합 쌍\ 
+$\Spec(B) = V \subset Y$, $\Spec(A) = U \subset X$에 대해 동형
+$$
+H^0(V, f^!\mathcal{O}_X) = \omega_{B/A}
+$$
+이 존재한다. 여기서\  $f^!$는\  Duality for Schemes, Section
+\ref{duality-section-upper-shriek}에서와 같다.
+이 동형들은 제한 사상들과 양립하며 표준 동형\ 
+$H^0(f^!\mathcal{O}_X) = \omega_{Y/X}$를 정의한다.
+여기서\  $\omega_{Y/X}$는\  Remark
+\ref{discriminant-remark-relative-dualizing-for-quasi-finite}에서와 같다.
+마찬가지로\  $f : Y \to X$가 쌍대화 복합체\ 
+$\omega_S^\bullet$을 갖는\  Noether 기저\  $S$ 위의 유한형 스킴들의
+준유한 사상이면\ 
+$H^0(f_{new}^!\mathcal{O}_X) = \omega_{Y/X}$이다.
+\end{lemma}
+
+\begin{proof}
+Zariski 주정리에 의해\  $j : Y \to Y'$이 열린 몰입이고\ 
+$f' : Y' \to X$가 유한 사상이 되도록 인수분해\ 
+$f = f' \circ j$를 택할 수 있다. More on Morphisms, Lemma
+\ref{more-morphisms-lemma-quasi-finite-separated-pass-through-finite}를
+보라. Duality for Schemes, Lemma
+\ref{duality-lemma-shriek-well-defined}의 구성에 의해\ 
+$f^! = j^* \circ a'$이고, 여기서\ 
+$a' : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_{Y'})$는\ 
+Duality for Schemes, Lemma
+\ref{duality-lemma-twisted-inverse-image}의\  $Rf'_*$의 오른쪽
+수반함자이다. Duality for Schemes, Lemma
+\ref{duality-lemma-finite-twisted}에 의해\ 
+$D_\QCoh^+(f'_*\mathcal{O}_{Y'})$에서\ 
+$\Phi(a'(\mathcal{O}_X)) = R\SheafHom(f'_*\mathcal{O}_{Y'}, \mathcal{O}_X)$
+이다. 특히\  $a'(\mathcal{O}_X)$의 차수\  $< 0$인 코호몰로지 층들은
+영이다. 0차 코호몰로지 층은\  Morphisms, Lemma
+\ref{morphisms-lemma-affine-equivalence-modules}의 동치를 통해\ 
+$f'_*\mathcal{O}_{Y'}$-가군의 동형
+$$
+f'_*H^0(a'(\mathcal{O}_X)) =
+\SheafHom_{\mathcal{O}_X}(f'_*\mathcal{O}_{Y'}, \mathcal{O}_X)
+$$
+으로 결정된다. $(f')^{-1}U = V' = \Spec(B')$라 쓰면
+$$
+H^0(V', a'(\mathcal{O}_X)) = \Hom_A(B', A).
+$$
+를 얻는다. $a'(\mathcal{O}_X)$의\  0차 코호몰로지 층은 준연접
+가군이므로, $V$로의 제한은 원하는 대로\ 
+$\omega_{B/A} = \Hom_A(B', A) \otimes_{B'} B$로 주어진다.
+
+\medskip\noindent
+제한 사상에 관한 명제의 뜻은 위의 동형들을 통해
+준연접\  $\mathcal{O}_{Y'}$-가군\  $H^0(a'(\mathcal{O}_X))$의\ 
+$Y'$ 안의 열린집합들에 대한 제한 사상들이\  Lemma
+\ref{discriminant-lemma-localize-dualizing}에서 가군\  $\omega_{B/A}$에 대해
+정의한 사상들과 일치한다는 것이다. 이는 분명하다.
+
+\medskip\noindent
+$f : Y \to X$를 쌍대화 복합체\  $\omega_S^\bullet$을 갖는\ 
+Noether 기저\  $S$ 위의 유한형 스킴들의 준유한 사상이라 하자.
+$f(V) \subset U$이고\  $V$, $U$가\  $S$ 위에서 분리인 열린집합\ 
+$V \subset Y$, $U \subset X$를 생각하자.
+$f$의 제한을\  $f|_V : V \to U$라 쓰자.
+위의 논의와\  Duality for Schemes, Lemma
+\ref{duality-lemma-duality-bootstrap}에 의해 표준 동형들
+$$
+H^0(f_{new}^!\mathcal{O}_X)|_V = H^0((f|_V)^!\mathcal{O}_U) = \omega_{V/U} =
+\omega_{Y/X}|_V
+$$
+이 있다. 이 동형들이 붙어 대역 동형\ 
+$H^0(f_{new}^!\mathcal{O}_X) \to \omega_{Y/X}$를 이룬다는 확인은
+생략한다.
+\end{proof}
+\begin{lemma}
+\label{discriminant-lemma-compare-trace}
+$f : Y \to X$를\  Noether 스킴의 유한 평탄 사상이라 하자.
+Section \ref{discriminant-section-discriminant}의 사상
+$$
+\text{Trace}_f : f_*\mathcal{O}_Y \longrightarrow \mathcal{O}_X
+$$
+은 사상\  $\mathcal{O}_Y \to f^!\mathcal{O}_X$에 대응한다
+(증명을 보라). $1$의 상을\ 
+$\tau_{Y/X} \in H^0(Y, f^!\mathcal{O}_X)$라 쓰자.
+Lemma \ref{discriminant-lemma-compare-dualizing}의 동형\ 
+$H^0(f^!\mathcal{O}_X) = \omega_{X/Y}$를 통하면 이는\ 
+Remark \ref{discriminant-remark-relative-dualizing-for-flat-quasi-finite}의
+구성과 일치한다.
+\end{lemma}
+
+\begin{proof}
+함자\  $f^!$는\  Duality for Schemes, Section
+\ref{duality-section-upper-shriek}에서 정의된다.
+$f$는 유한이고 따라서 고유이므로, $f^!$는\  $f$에 대한 직상함자의
+오른쪽 수반함자로 주어진다. Duality for Schemes, Section
+\ref{duality-section-duality-finite}에서 이 수반함자를 명시했다.
+특히 대상\  $f^!\mathcal{O}_X$는 차수\  $0$에 놓인 하나의
+코호몰로지 층으로 이루어지고, 이 층에 대해
+$$
+f_*f^!\mathcal{O}_X =
+\SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X)
+$$
+이다. 이를 보기 위해\  $f$가\  Noether 스킴의 유한 평탄 사상이므로\ 
+$f_*\mathcal{O}_Y$가 유한 국소 자유이고 모든 고차\  Ext 층이
+영이라는 사실도 사용한다. 일부 세부사항은 생략한다. 따라서
+$$
+\text{Trace}_f \in
+\Hom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X) =
+\Gamma(X, f_*f^!\mathcal{O}_X) =
+\Gamma(Y, f^!\mathcal{O}_X)
+$$
+이다. 한편\  Lemma \ref{discriminant-lemma-compare-dualizing}의 동일시에 의해\ 
+$f^!\mathcal{O}_X = \omega_{Y/X}$이다. 따라서 이제
+$$
+\Gamma(Y, f^!\mathcal{O}_X) = \Gamma(Y, \omega_{Y/X})
+$$
+안에\  $\text{Trace}_f$와\  Remark
+\ref{discriminant-remark-relative-dualizing-for-flat-quasi-finite}의\ 
+$\tau_{Y/X}$라는 두 원소가 있고, 보조정리는 이들이 같다는 것이다.
+
+\medskip\noindent
+$U = \Spec(A) \subset X$를 역상\ 
+$V = \Spec(B) \subset Y$를 갖는 아핀 열린집합이라 하자.
+$f$가 유한이므로\  $A \to B$는 유한이고, 따라서 구성에 의해\ 
+$\omega_{Y/X}(V) = \Hom_A(B,A)$이다. 이 동형은 위에서 논한\ 
+$f_*f^!\mathcal{O}_Y$와\ 
+$\SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X)$의
+동일시와 일치한다. 그러므로\  $\text{Trace}_f$와\  $\tau_{Y/X}$의
+일치는\  Lemma \ref{discriminant-lemma-finite-flat-trace}에 의한\ 
+$\tau_{B/A} = \text{Trace}_{B/A}$에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+\section{준유한\  Gorenstein 사상}
+\label{discriminant-section-gorenstein-lci}
+
+\noindent
+이 절에서는 준유한\  Gorenstein 사상을 논한다.
+
+\begin{lemma}
+\label{discriminant-lemma-gorenstein-quasi-finite}
+$f : Y \to X$를\  Noether 스킴의 준유한 사상이라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item $f$는\  Gorenstein이다.
+\item $f$는 평탄이고\  $f$의 올들은\  Gorenstein이다.
+\item $f$는 평탄이고\  $\omega_{Y/X}$는 가역이다
+(Remark \ref{discriminant-remark-relative-dualizing-for-quasi-finite}).
+\item 모든\  $y \in Y$에 대해 아핀 열린집합\ 
+$y \in V = \Spec(B) \subset Y$, $U = \Spec(A) \subset X$가\ 
+$f(V) \subset U$를 만족하고, $A \to B$가 평탄이며\ 
+$\omega_{B/A}$가 가역\  $B$-가군이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)는 정의에 의해 동치이다. (3)과 (4)는\  Remark
+\ref{discriminant-remark-relative-dualizing-for-quasi-finite}의\ 
+$\omega_{Y/X}$의 구성에 의해 동치이다.
+따라서 (1)-(2)와 (3)-(4)가 동치임을 보여야 한다.
+
+\medskip\noindent
+첫째 증명. 아핀 국소적으로 작업하여\  $f$가 분리 사상이라고
+가정하고\  Lemma \ref{discriminant-lemma-compare-dualizing}를 적용하면,
+$\omega_{Y/X}$는\  $f^!\mathcal{O}_X$의\  0차 코호몰로지 층이다.
+어느 가정 아래서도\  $f$는 평탄이고 준유한이므로\ 
+$f^!\mathcal{O}_X$는\  $\omega_{Y/X}[0]$과 동형이다.
+Duality for Schemes, Lemma
+\ref{duality-lemma-flat-quasi-finite-shriek}를 보라.
+따라서 동치는\  Duality for Schemes, Lemma
+\ref{duality-lemma-affine-flat-Noetherian-gorenstein}에서 따른다.
+
+\medskip\noindent
+둘째 증명. Lemma \ref{discriminant-lemma-characterize-invertible}에 의해\ 
+$X$가 체\  $k$의 스펙트럼인 경우에 (2)와 (3)의 동치를 증명하면
+충분하다. 그러면\  $Y = \Spec(B)$이고\  $B$는 유한\  $k$-대수이다.
+이 경우 차수\  $0$에 놓인\ 
+$\omega_{B/A} = \omega_{B/k} = \Hom_k(B, k)$는\  $B$의 쌍대화
+복합체이다. Dualizing Complexes, Lemma
+\ref{dualizing-lemma-dualizing-finite}를 보라.
+따라서 동치는\  Dualizing Complexes, Lemma
+\ref{dualizing-lemma-gorenstein}에서 따른다.
+\end{proof}
+
+\begin{remark}
+\label{discriminant-remark-collect-results-qf-gorenstein}
+$f : Y \to X$를\  Noether 스킴의 준유한\  Gorenstein 사상이라 하자.
+$\mathfrak D_f \subset \mathcal{O}_Y$를\  different라 하고,
+$R \subset Y$를\  $\mathfrak D_f$가 잘라내는 닫힌 부분스킴이라 하자.
+그러면
+\begin{enumerate}
+\item $\mathfrak D_f$는 국소 주 아이디얼이다.
+\item $R$은 국소 주 닫힌 부분스킴이다.
+\item $\mathfrak D_f$는 아핀 국소적으로\  Noether different와 같다.
+\item $R$의 형성은 기저변환과 가환한다.
+\item $f$가 유한이면\  $R$의 노름은\  $f$의 판별식이다.
+\item $f$가\  $Y$의 수반점들에서 \'etale이면\  $R$은 유효\  Cartier
+인자이고\  $\omega_{Y/X} = \mathcal{O}_Y(R)$이다.
+\end{enumerate}
+이는\  Lemmas \ref{discriminant-lemma-flat-gorenstein-agree-noether},
+\ref{discriminant-lemma-base-change-different}, 및\ 
+\ref{discriminant-lemma-norm-different-is-discriminant}에서 따른다.
+\end{remark}
+
+\begin{remark}
+\label{discriminant-remark-collect-results-qf-gorenstein-two}
+$S$를 쌍대화 복합체\  $\omega_S^\bullet$을 갖는\  Noether 스킴이라
+하자. $f : Y \to X$를\  $S$ 위의 컴팩트화 가능한 스킴들의
+준유한\  Gorenstein 사상이라 하자. 또한\  $Y$와\  $X$가\  Cohen--Macaulay이고\ 
+$f$가\  $Y$의 일반점들에서 \'etale이라고 가정하자.
+그러면\  Duality for Schemes, Remark
+\ref{duality-remark-CM-morphism-compare-dualizing}과\  Remark
+\ref{discriminant-remark-collect-results-qf-gorenstein}을 결합하여\ 
+$\mathcal{O}_Y$-가군의 표준 동형
+$$
+\omega_Y = f^*\omega_X \otimes_{\mathcal{O}_Y} \omega_{Y/X} =
+f^*\omega_X \otimes_{\mathcal{O}_Y} \mathcal{O}_Y(R)
+$$
+을 얻는다. 더 나아가\  $f$가 유한이면 동형\ 
+$\mathcal{O}_Y(R) = \omega_{Y/X}$는 대역 절단\ 
+$\tau_{Y/X} \in H^0(Y, \omega_{Y/X})$에서 온다.
+이는 쌍대성을 통해 사상\ 
+$\text{Trace}_f : f_*\mathcal{O}_Y \to \mathcal{O}_X$에 대응한다.
+Lemma \ref{discriminant-lemma-compare-trace}를 보라.
+\end{remark}

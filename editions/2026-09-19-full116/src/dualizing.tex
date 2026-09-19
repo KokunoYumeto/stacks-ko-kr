@@ -1,0 +1,5429 @@
+% Generated mechanically from frozen input p06/ko/dualizing.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{46}
+\chapter{쌍대화 복합체}
+
+
+
+\phantomsection
+\label{dualizing-section-phantom}
+
+
+\section{서론}
+\label{dualizing-section-introduction}
+
+\noindent
+이 장에서는 가환대수에서의 쌍대화 복합체를 논한다.
+참고문헌으로는\  \cite{RD}가 있다.
+
+\medskip\noindent
+먼저 본질적 전사와 본질적 단사,
+사영 피복,
+단사 포락,
+Artin 환에 대한 쌍대성, 그리고
+잉여체의 단사 포락을 논하며,
+이는 곧\  Matlis 쌍대성의 증명으로 이어진다.
+Sections \ref{dualizing-section-essential},
+\ref{dualizing-section-injective-modules},
+\ref{dualizing-section-projective-cover},
+\ref{dualizing-section-injective-hull},
+\ref{dualizing-section-artinian},
+\ref{dualizing-section-hull-residue-field}와\ 
+Proposition \ref{dualizing-proposition-matlis}를 보라.
+
+\medskip\noindent
+그다음 세 절에서는 매우 일반적인 형태의 국소 코호몰로지를 논한다.
+Sections \ref{dualizing-section-bad-local-cohomology},
+\ref{dualizing-section-local-cohomology}, \ref{dualizing-section-local-cohomology-noetherian}을 보라.
+그 가운데 일부를\  Section \ref{dualizing-section-depth}에서 깊이를 논하는 데 적용한다.
+또 다른 응용으로, 환\  $A$의 유한 생성 아이디얼\  $I$가 주어졌을 때\ 
+$A$의 유도 범주에서 ``$I$-완비'' 대상과 ``$I$-꼬임'' 대상이
+서로 동치임을 보인다. Section \ref{dualizing-section-torsion-and-complete}를 보라.
+국소 코호몰로지에 관해 더 알고 싶다면, 예를 들어 국소 쌍대성에
+의존하는 유한성 정리에 관해서는 아래를 참조하라.
+Local Cohomology, Section \ref{local-cohomology-section-introduction}.
+
+\medskip\noindent
+이 장의 대부분은 환 사상에 대한 쌍대성과 쌍대화 복합체에 할애한다.
+다음을 보라.
+Sections \ref{dualizing-section-trivial},
+\ref{dualizing-section-base-change-trivial-duality},
+\ref{dualizing-section-dualizing},
+\ref{dualizing-section-dualizing-local},
+\ref{dualizing-section-dimension-function},
+\ref{dualizing-section-local-duality},
+\ref{dualizing-section-dualizing-module},
+\ref{dualizing-section-CM},
+\ref{dualizing-section-gorenstein},
+\ref{dualizing-section-ubiquity-dualizing},
+\ref{dualizing-section-formal-fibres}.
+핵심 정의는 다음과 같다. Noether 환\  $A$ 위의 쌍대화 복합체\ 
+$\omega_A^\bullet$는\  $\omega_A^\bullet \in D^{+}(A)$인 대상으로서,
+그 코호몰로지 가군\  $H^i(\omega_A^\bullet)$들이 유한\  $A$-가군이고,
+유한 단사 차원을 가지며, 사상
+$$
+A \longrightarrow R\Hom_A(\omega_A^\bullet, \omega_A^\bullet)
+$$
+이 준동형인 것이다. 쌍대화 복합체의 몇 가지 기본 성질을 확립한 뒤,
+쌍대화 복합체가 차원 함수를 유도함을 보인다. 이어서\  Grothendieck의
+국소 쌍대성 정리를 증명한다. 쌍대화 가군과\  Cohen--Macaulay 환을
+간단히 논한 뒤\  Gorenstein 환을 도입하고, 익숙한 많은\  Noether 환이
+쌍대화 복합체를 가짐을 보인다. 마지막 절에서는 이 내용을 적용하여
+형식적 올들이\  Gorenstein이거나 국소 완전교차인\  Noether 국소환에
+대한 좋은 이론이 존재함을 보인다.
+
+\medskip\noindent
+마지막 몇 절에서는 대수기하학에서, 예를 들어 책\  \cite{RD}에서
+사용되는 ``위 느낌표 함자''의 대수적 구성을 서술한다.
+이 주제는 스킴의 쌍대성에 관한 장에서 이어진다. 다음을 보라.
+Duality for Schemes, Section \ref{duality-section-introduction}.
+
+
+
+
+
+
+\section{본질적 전사와 단사}
+\label{dualizing-section-essential}
+
+\noindent
+대부분 가군의 범주에서 작업하겠지만, 정의 자체는 일반적으로 해도 좋다.
+
+\begin{definition}
+\label{dualizing-definition-essential}
+$\mathcal{A}$를 아벨 범주라 하자.
+\begin{enumerate}
+\item $\mathcal{A}$의 단사\  $A \subset B$가 {\it 본질적}이라는 것은,
+또는\  $B$가\  $A$의 {\it 본질적 확대}라는 것은, 모든 영이 아닌 부분대상\ 
+$B' \subset B$가\  $A$와 영이 아닌 교집합을 갖는다는 뜻이다.
+\item $\mathcal{A}$의 전사\  $f : A \to B$가 {\it 본질적}이라는 것은
+모든 진부분대상\  $A' \subset A$에 대해\  $f(A') \not = B$라는 뜻이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 개념에 관한 몇 가지 보조정리를 기록한다.
+
+\begin{lemma}
+\label{dualizing-lemma-essential}
+$\mathcal{A}$를 아벨 범주라 하자.
+\begin{enumerate}
+\item $A \subset B$와\  $B \subset C$가 본질적 확대이면,
+$A \subset C$도 본질적 확대이다.
+\item $A \subset B$가 본질적 확대이고\  $C \subset B$가
+부분대상이면, $A \cap C \subset C$는 본질적 확대이다.
+\item $A \to B$와\  $B \to C$가 본질적 전사이면,
+$A \to C$도 본질적 전사이다.
+\item 본질적 전사\  $f : A \to B$와 핵이\  $K$인 전사\ 
+$A \to C$가 주어지면, 사상\  $C \to B/f(K)$는 본질적 전사이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-union-essential-extensions}
+$R$을 환이라 하고\  $M$을\  $R$-가군이라 하자. $E = \colim E_i$를\ 
+$R$-가군들의 여과 여극한이라 하자. $R$-가군의 본질적 단사들로 이루어진
+호환되는 계\  $M \to E_i$가 주어졌다고 하자. 그러면\  $M \to E$는
+본질적 단사이다.
+\end{lemma}
+
+\begin{proof}
+정의와 여과 여극한이 완전하다는 사실에서 즉시 따른다
+(Algebra, Lemma \ref{algebra-lemma-directed-colimit-exact}).
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-essential-extension}
+$R$을 환이라 하고\  $M \subset N$을\  $R$-가군이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $M \subset N$은 본질적 확대이다.
+\item 모든 영이 아닌\  $x \in N$에 대해\  $fx \in M$이고\ 
+$fx \not = 0$이 되게 하는\  $f \in R$이 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하고\  $x \in N$을 영이 아닌 원소라 하자. (1)에 의해\ 
+$Rx \cap M \not = 0$이다. 따라서 (2)가 성립한다.
+
+\medskip\noindent
+(2)를 가정하자. $N' \subset N$을 영이 아닌 부분가군이라 하고,
+영이 아닌\  $x \in N'$을 택하자. (2)에 의해\  $fx \in M$이고\ 
+$fx \not = 0$인\  $f \in R$을 찾을 수 있다. 그러므로\ 
+$N' \cap M \not = 0$이다.
+\end{proof}
+
+
+
+\section{단사 가군}
+\label{dualizing-section-injective-modules}
+
+\noindent
+환 위의 단사 가군에 관한 몇 가지 결과를 기록한다.
+
+\begin{lemma}
+\label{dualizing-lemma-product-injectives}
+$R$을 환이라 하자. 단사\  $R$-가군들의 임의의 곱은 단사이다.
+\end{lemma}
+
+\begin{proof}
+Homology, Lemma \ref{homology-lemma-product-injectives}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-flat}
+$R \to S$를 평탄한 환 사상이라 하자. $E$가 단사\  $S$-가군이면,
+$E$는\  $R$-가군으로서 단사이다.
+\end{lemma}
+
+\begin{proof}
+Algebra, Lemma \ref{algebra-lemma-adjoint-tensor-restrict}에 의해\ 
+$\Hom_R(M, E) = \Hom_S(M \otimes_R S, E)$이고, $S$와의 텐서곱을
+취하는 것이 완전하기 때문에 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-epimorphism}
+$R \to S$를 환의 전사라 하고\  $E$를\  $S$-가군이라 하자.
+$E$가\  $R$-가군으로서 단사이면, $E$는 단사\  $S$-가군이다.
+\end{lemma}
+
+\begin{proof}
+임의의\  $S$-가군\  $N$에 대해\  $\Hom_R(N, E) = \Hom_S(N, E)$이기
+때문이다. Algebra, Lemma \ref{algebra-lemma-epimorphism-modules}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-hom-injective}
+$R \to S$를 환 사상이라 하자. $E$가 단사\  $R$-가군이면,
+$\Hom_R(S, E)$는 단사\  $S$-가군이다.
+\end{lemma}
+
+\begin{proof}
+Algebra, Lemma \ref{algebra-lemma-adjoint-hom-restrict}에 의해\ 
+$\Hom_S(N, \Hom_R(S, E)) = \Hom_R(N, E)$이기 때문에 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-essential-extensions-in-injective}
+$R$을 환이라 하고\  $I$를 단사\  $R$-가군이라 하자. $E \subset I$를
+부분가군이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $E$는 단사이다.
+\item $E \subset E' \subset I$이고\  $E \subset E'$가 본질적 확대인
+모든 경우에\  $E = E'$이다.
+\end{enumerate}
+특히\  $R$-가군이 단사일 필요충분조건은 모든 본질적 확대가 자명한 것이다.
+\end{lemma}
+
+\begin{proof}
+마지막 주장은 첫 번째 주장과\  $R$-가군의 범주에 충분히 많은 단사대상이
+있다는 사실에서 따른다
+(More on Algebra, Section \ref{more-algebra-section-injectives-modules}).
+
+\medskip\noindent
+(1)을 가정하고 (2)와 같은\  $E \subset E' \subset I$를 택하자.
+그러면 사상\  $\text{id}_E : E \to E$를 사상\  $\alpha : E' \to E$로
+확장할 수 있다. $\alpha$의 핵은\  $E$와 자명하게 만나고\  $E'$가
+본질적 확대이므로 영이어야 한다. 따라서\  $E = E'$이다.
+
+\medskip\noindent
+(2)를 가정하자. $M \subset N$을\  $R$-가군이라 하고\ 
+$\varphi : M \to E$를\  $R$-가군 사상이라 하자. (1)을 보이려면\ 
+$\varphi$가 사상\  $N \to E$로 확장됨을 보여야 한다. $M \subset M' \subset N$이고\ 
+$\varphi' : M' \to E$가\  $M$ 위에서\  $\varphi$와 일치하는\  $R$-가군
+사상인 쌍\  $(M', \varphi')$들의 집합\  $\mathcal{S}$를 생각하자.
+$M' \subset M''$이고\  $\varphi''|_{M'} = \varphi'$일 필요충분조건으로\ 
+$(M', \varphi') \leq (M'', \varphi'')$라 정하여\  $\mathcal{S}$에
+순서를 준다. $\mathcal{S}$의 전순서 부분집합에는 상계를 취할 수 있음이
+명백하다. 따라서\  Zorn의 보조정리에 의해\  $(M, \varphi)$가 극대원소라고
+가정해도 된다.
+
+\medskip\noindent
+포함사상\  $E \to I$와\  $\varphi$의 합성의 확장\ 
+$\psi : N \to I$를 택하자. $I$가 단사이므로 가능하다.
+$\psi(N) \subset E$이면\  $\psi$가 원하는 확장이다.
+$\psi(N)$가\  $E$에 포함되지 않으면, (2)에 의해 포함사상\ 
+$E \subset E + \psi(N)$은 본질적이지 않다. 따라서\  $E$와\  $0$에서
+만나는 영이 아닌 부분가군\  $K \subset E + \psi(N)$을 찾을 수 있다.
+이는\  $M' = \psi^{-1}(E + K)$가\  $M$을 진정하게 포함한다는 뜻이다.
+그러므로
+$$
+M' \xrightarrow{\psi|_{M'}} E + K \to (E + K)/K = E
+$$
+를 사용하여\  $\varphi$를\  $M'$로 확장할 수 있다.
+이는\  $(M, \varphi)$의 극대성과 모순이다.
+\end{proof}
+
+\begin{example}
+\label{dualizing-example-reduced-ring-injective}
+$R$을 기약 환이라 하자. $\mathfrak p \subset R$을 극소 소아이디얼이라 하여\ 
+$K = R_\mathfrak p$가 체라고 하자
+(Algebra, Lemma \ref{algebra-lemma-minimal-prime-reduced-ring}).
+그러면\  $K$는 단사\  $R$-가군이다. 실제로 임의의\  $R$-가군\  $M$에 대해\ 
+$\Hom_R(M, K) = \Hom_K(M_\mathfrak p, K)$이다. 국소화는 완전 함자이고\ 
+$K$-벡터공간에서 쌍대를 취하는 것도 완전 함자이므로\ 
+$\Hom_R(-, K)$가 완전 함자라는 결론을 얻는다. 즉\  $K$는 단사\ 
+$R$-가군이다.
+\end{example}
+
+\begin{lemma}
+\label{dualizing-lemma-sum-injective-modules}
+$R$을\  Noether 환이라 하자. 단사 가군들의 직합은 단사이다.
+\end{lemma}
+
+\begin{proof}
+$E_i$를 집합\  $I$로 매개화된 단사 가군들의 족이라 하자.
+$E = \bigoplus E_i$로 놓는다. $E$가 단사임을 보이기 위해\ 
+Injectives, Lemma \ref{injectives-lemma-criterion-baer}를 사용한다.
+따라서\  $R$의 아이디얼에서\  $E$로 가는 가군 사상\ 
+$\varphi : J \to E$를 택하자. $J$는 유한\  $R$-가군이므로
+($R$이\  Noether이기 때문이다), $\varphi$의 상이\ 
+$\bigoplus_{j = 1, \ldots, r} E_{i_j}$에 포함되게 하는 유한개의 원소\ 
+$i_1, \ldots, i_r \in I$를 찾을 수 있다. 그러면 가군들\  $E_{i_j}$의
+단사성을 사용하여\  $\varphi$를\  $\bigoplus_{j = 1, \ldots, r} E_{i_j}$로
+확장할 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-localization-injective-modules}
+$R$을\  Noether 환이라 하고\  $S \subset R$을 곱셈적 부분집합이라 하자.
+$E$가 단사\  $R$-가군이면, $S^{-1}E$는 단사\  $S^{-1}R$-가군이다.
+\end{lemma}
+
+\begin{proof}
+$R \to S^{-1}R$은 환의 전사이므로, Lemma
+\ref{dualizing-lemma-injective-epimorphism}에 의해\  $S^{-1}E$가\  $R$-가군으로서
+단사임을 보이면 충분하다. 이를 보이기 위해\  Injectives, Lemma
+\ref{injectives-lemma-criterion-baer}를 사용한다. $I \subset R$을
+아이디얼이라 하고\  $\varphi : I \to S^{-1} E$를\  $R$-가군 사상이라 하자.
+$I$는 유한 표시\  $R$-가군이므로 ($R$이\  Noether이기 때문이다),
+$f\varphi$가 합성사상\  $I \to E \to S^{-1}E$가 되게 하는\ 
+$f \in S$와\  $R$-가군 사상\  $I \to E$를 찾을 수 있다
+(Algebra, Lemma \ref{algebra-lemma-hom-from-finitely-presented}).
+이제\  $I \to E$를 준동형\  $R \to E$로 확장할 수 있다. 그러면 합성사상
+$$
+R \to E \to S^{-1}E \xrightarrow{f^{-1}} S^{-1}E
+$$
+은\  $\varphi$의 원하는\  $R$로의 확장이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-module-divide}
+$R$을\  Noether 환이라 하고\  $I$를 단사\  $R$-가군이라 하자.
+\begin{enumerate}
+\item $f \in R$이라 하자. 그러면\  $E = \bigcup I[f^n] = I[f^\infty]$는\ 
+$I$의 단사 부분가군이다.
+\item $J \subset R$을 아이디얼이라 하자. 그러면\  $J$-멱 꼬임 부분가군\ 
+$I[J^\infty]$는\  $I$의 단사 부분가군이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 보이기 위해\  Lemma \ref{dualizing-lemma-essential-extensions-in-injective}를
+사용한다. $E \subset E' \subset I$이고\  $E'$가\  $E$의 본질적 확대라고
+하자. $E' = E$임을 보이겠다. 그렇지 않으면\  $x \in E'$이고\ 
+$x \not \in E$인 원소를 찾을 수 있다.
+$J = \{ a \in R \mid ax \in E\}$라 하자. $R$이\  Noether이므로 어떤\ 
+$g_i \in R$에 대해\  $J = (g_1, \ldots, g_t)$라 쓸 수 있다.
+정의상\  $E$는\  $f$의 거듭제곱들에 의해 소멸하는\  $I$의 원소들의 집합이므로,
+$f^{n_i}g_ix = 0$이 되게 하는 정수\  $n_i$를 택할 수 있다.
+$n = \mathrm{max}\{ n_i \}$라 하자. 그러면\  $x' = f^n x$는\  $E'$에는
+속하지만\  $E$에는 속하지 않고, $J$에 의해 소멸한다.
+$J' = \{ a \in R \mid ax' \in E \}$라 하면\  $J \subset J'$이다.
+역으로\  $a \in J'$일 필요충분조건은\  $ax' \in E$인 것이고, 이는 어떤\ 
+$m \geq 0$에 대해\  $f^m a x' = 0$인 것과 동치이다. 그런데\ 
+$f^m a x' = f^{m + n} a x$이므로\  $ax \in E$, 즉\  $a \in J$이다.
+따라서\  $J = J'$이다. 그러므로\  $J = J' = \text{Ann}(x')$이고,
+$Rx' \cap E  = 0$이다. 이는\  $E'$가\  $E$의 본질적 확대가 아니라는
+뜻이므로 모순이다.
+
+\medskip\noindent
+(2)를 보이기 위해\  $J = (f_1, \ldots, f_t)$라 쓰자. 그러면\ 
+$I[J^\infty]$는
+$$
+(\ldots((I[f_1^\infty])[f_2^\infty])\ldots)[f_t^\infty]
+$$
+와 같고, 결과는 (1)과 귀납법에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-dimension-over-polynomial-ring}
+$A$를\  Noether 환이라 하고\  $E$를 단사\  $A$-가군이라 하자.
+그러면\  $E \otimes_A A[x]$는\  $D(A[x])$의 대상으로서 단사 진폭\ 
+$[0, 1]$을 갖는다. 특히\  $E \otimes_A A[x]$는\  $A[x]$-가군으로서
+유한 단사 차원을 갖는다.
+\end{lemma}
+
+\begin{proof}
+$E[x] = E \otimes_A A[x]$라 쓰자. $A[x]$-가군의 짧은 완전열
+$$
+0 \to E[x] \to \Hom_A(A[x], E[x]) \to \Hom_A(A[x], E[x]) \to 0
+$$
+을 생각하자. 첫 번째 사상은\  $p \in E[x]$를\  $f \mapsto fp$로 보내고,
+두 번째 사상은\  $\varphi$를\  $f \mapsto \varphi(xf) - x\varphi(f)$로 보낸다.
+아벨 군으로서\  $\Hom_A(A[x], E[x]) = \prod_{n \geq 0} E[x]$이고,
+이 사상이\  $(e_n)$을\  $(e_{n + 1} - xe_n)$으로 보내는데 이는 전사이므로,
+두 번째 사상은 전사이다. $A$-가군으로서\ 
+$E[x] \cong \bigoplus_{n \geq 0} E$이고, 이는\  Lemma
+\ref{dualizing-lemma-sum-injective-modules}에 의해 단사이다. 따라서\ 
+$A[x]$-가군\  $\Hom_A(A[x], E[x])$는\  Lemma
+\ref{dualizing-lemma-hom-injective}에 의해 단사이고 증명이 끝난다.
+\end{proof}
+
+
+\section{사영 피복}
+\label{dualizing-section-projective-cover}
+
+\noindent
+이 절에서는 사영 피복을 간단히 논한다.
+
+\begin{definition}
+\label{dualizing-definition-projective-cover}
+$R$을 환이라 하자. $R$-가군의 전사\  $P \to M$에서\  $P$가 사영\ 
+$R$-가군이고\  $P \to M$이 본질적 전사이면, 이를 {\it 사영 피복},
+때로는 {\it 사영 포락}이라 한다.
+\end{definition}
+
+\noindent
+사영 피복은 항상 존재하는 것은 아니다. 예를 들어\  $k$가 체이고\ 
+$R = k[x]$가\  $k$ 위의 다항식환이면, 가군\  $M = R/(x)$는 사영 피복을
+갖지 않는다. 실제로\  $P$가\  $R$ 위에서 사영일 때 임의의 전사\ 
+$f : P \to M$에 대해 진부분가군\  $(x - 1)P$가\  $M$으로 전사한다.
+따라서\  $f$는 본질적이지 않다.
+
+\begin{lemma}
+\label{dualizing-lemma-projective-cover-unique}
+$R$을 환이라 하고\  $M$을\  $R$-가군이라 하자. $M$의 사영 피복이
+존재하면 동형사상 아래에서 유일하다.
+\end{lemma}
+
+\begin{proof}
+$P \to M$과\  $P' \to M$을 사영 피복이라 하자. $P$는 사영\ 
+$R$-가군이고\  $P' \to M$은 전사이므로, $M$으로 가는 사상들과
+호환되는\  $R$-가군 사상\  $\alpha : P \to P'$를 찾을 수 있다.
+$P' \to M$이 본질적이므로\  $\alpha$는 전사이다. $P'$가 사영\ 
+$R$-가군이므로 직합 분해\  $P = \Ker(\alpha) \oplus P'$를 택할 수 있다.
+$P' \to M$은 전사이고\  $P \to M$은 본질적이므로, 원하는 대로\ 
+$\Ker(\alpha)$는 영이다.
+\end{proof}
+
+\noindent
+다음은 사영 피복이 존재하는 한 예이다.
+
+\begin{lemma}
+\label{dualizing-lemma-projective-covers-local}
+$(R, \mathfrak m, \kappa)$를 국소환이라 하자. 모든 유한\  $R$-가군은
+사영 피복을 갖는다.
+\end{lemma}
+
+\begin{proof}
+$M$을 유한\  $R$-가군이라 하고\  $r = \dim_\kappa(M/\mathfrak m M)$라 하자.
+$M/\mathfrak m M$의 기저로 보내지는\  $x_1, \ldots, x_r \in M$을 택한다.
+사상\  $f : R^{\oplus r} \to M$을 생각하자. Nakayama의 보조정리에 의해
+이는 전사이다(Algebra, Lemma \ref{algebra-lemma-NAK}).
+$N \subset R^{\oplus r}$이 진부분가군이면, 다시\  Nakayama의 보조정리에 의해\ 
+$N/\mathfrak m N \to \kappa^{\oplus r}$은 전사가 아니며, 따라서\ 
+$N/\mathfrak m N \to M/\mathfrak m M$도 전사가 아니다. 그러므로\ 
+$f$는 본질적 전사이다.
+\end{proof}
+
+
+
+
+
+
+\section{단사 포락}
+\label{dualizing-section-injective-hull}
+
+\noindent
+이 절에서는 단사 포락을 간단히 논한다.
+
+\begin{definition}
+\label{dualizing-definition-injective-hull}
+$R$을 환이라 하자. $R$-가군의 단사\  $M \to I$에서\  $I$가 단사\ 
+$R$-가군이고\  $M \to I$가 본질적 단사이면 이를 {\it 단사 포락}이라 한다.
+\end{definition}
+
+\noindent
+단사 포락은 항상 존재한다.
+
+\begin{lemma}
+\label{dualizing-lemma-injective-hull}
+$R$을 환이라 하자. 모든\  $R$-가군은 단사 포락을 갖는다.
+\end{lemma}
+
+\begin{proof}
+$M$을\  $R$-가군이라 하자. More on Algebra, Section
+\ref{more-algebra-section-injectives-modules}에 의해\  $R$-가군의 범주에는
+충분히 많은 단사대상이 있다. $I$가 단사\  $R$-가군인 단사\ 
+$M \to I$를 택하자. $M \subset E \subset I$이고\  $E$가\  $M$의
+본질적 확대인 부분가군들로 이루어진 집합\  $\mathcal{S}$를 생각하자.
+$\mathcal{S}$에 포함관계로 순서를 준다. $\{E_\alpha\}$가\ 
+$\mathcal{S}$의 전순서 부분집합이면\  $\bigcup E_\alpha$도\  $M$의
+본질적 확대이다(Lemma \ref{dualizing-lemma-union-essential-extensions}).
+따라서\  Zorn의 보조정리를 적용하여 극대원소\  $E \in \mathcal{S}$를
+찾을 수 있다. $M \subset E$가 단사 포락, 즉\  $E$가 단사\ 
+$R$-가군이라고 주장한다. 이는\  Lemma
+\ref{dualizing-lemma-essential-extensions-in-injective}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-hull-unique}
+$R$을 환이라 하자. $M$, $N$을\  $R$-가군이라 하고\  $M \to E$와\ 
+$N \to E'$를 단사 포락이라 하자. 그러면
+\begin{enumerate}
+\item 임의의\  $R$-가군 사상\  $\varphi : M \to N$에 대해 다음 도식을
+가환하게 하는\  $R$-가군 사상\  $\psi : E \to E'$가 존재한다.
+$$
+\xymatrix{
+M \ar[r] \ar[d]_\varphi & E \ar[d]^\psi \\
+N \ar[r] & E'
+}
+$$
+\item $\varphi$가 단사이면\  $\psi$도 단사이다.
+\item $\varphi$가 본질적 단사이면\  $\psi$는 동형사상이다.
+\item $\varphi$가 동형사상이면\  $\psi$는 동형사상이다.
+\item $M \to I$가\  $M$을 단사\  $R$-가군에 매장하는 사상이면,
+$M$의 매장과 호환되는 동형사상\  $I \cong E \oplus I'$가 존재한다.
+\end{enumerate}
+특히\  $M$의 단사 포락\  $E$는 동형사상 아래에서 유일하다.
+\end{lemma}
+
+\begin{proof}
+(1)은\  $E'$가 단사\  $R$-가군이라는 사실에서 따른다.
+(2)는\  $\Ker(\psi) \cap M = 0$이고\  $E$가\  $M$의 본질적 확대라는
+사실에서 따른다. $\varphi$가 본질적 단사라고 하자. 그러면 (2)에 의해\ 
+$E \cong \psi(E) \subset E'$이고, $E$가 단사이므로 이는\ 
+$E' = \psi(E) \oplus E''$을 함의한다. $E'$는\  $M$의 본질적 확대이므로
+(Lemma \ref{dualizing-lemma-essential}) $E'' = 0$을 얻는다. (4)는 (3)의
+특수한 경우이다. (5)와 같은\  $M \to I$를 가정하자. 사상\  $M \to I$를
+확장하는 사상\  $\alpha : E \to I$를 택한다. 앞에서와 같은 논증으로\ 
+$\alpha$가 단사임을 알 수 있다. 따라서 앞에서와 같이\  $\alpha(E)$는\ 
+$I$의 직합인자로 떨어져 나온다. 이로써 (5)가 증명된다.
+\end{proof}
+
+\begin{example}
+\label{dualizing-example-injective-hull-domain}
+$R$을 분수체가\  $K$인 정역이라 하자. 그러면\  $R \subset K$는\  $R$의
+단사 포락이다. 실제로\  Example \ref{dualizing-example-reduced-ring-injective}에 의해\ 
+$K$는 단사\  $R$-가군이고, Lemma \ref{dualizing-lemma-essential-extension}에 의해\ 
+$R \subset K$는 본질적 확대이다.
+\end{example}
+
+\begin{definition}
+\label{dualizing-definition-indecomposable}
+가법 범주의 대상\  $X$가 영이 아니고, $X = Y \oplus Z$이면\ 
+$Y = 0$ 또는\  $Z = 0$일 때 이를 {\it 분해불가능}이라 한다.
+\end{definition}
+
+\begin{lemma}
+\label{dualizing-lemma-indecomposable-injective}
+$R$을 환이라 하고\  $E$를 분해불가능 단사\  $R$-가군이라 하자. 그러면
+\begin{enumerate}
+\item $E$는\  $E$의 임의의 영이 아닌 부분가군의 단사 포락이다.
+\item $E$의 임의의 두 영이 아닌 부분가군의 교집합은 영이 아니다.
+\item $\text{End}_R(E)$는 핵이 영이 아닌\  $\varphi : E \to E$들을
+극대 아이디얼로 갖는 비가환 국소환이다.
+\item $E$ 위의 영인자들의 집합은\  $R$의 소아이디얼\  $\mathfrak p$이고,
+$E$는 단사\  $R_\mathfrak p$-가군이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은\  Lemma \ref{dualizing-lemma-injective-hull-unique}에서 따른다.
+(2)는 (1)과 단사 포락의 정의에서 따른다.
+
+\medskip\noindent
+(3)의 증명. $A = \text{End}_R(E)$와\ 
+$I = \{\varphi \in A \mid \Ker(\varphi) \not = 0\}$로 놓자.
+주장은\  $I$가 양쪽 아이디얼이고, $\varphi \in A$이면서\ 
+$\varphi \not \in I$인 모든 원소가 가역이라는 뜻이다.
+$\varphi$와\  $\psi$가 단사가 아니라고 하자. 그러면 (2)에 의해\ 
+$\Ker(\varphi) \cap \Ker(\psi)$는 영이 아니다. 따라서\ 
+$\varphi + \psi \in I$이다. 이로부터\  $I$가 양쪽 아이디얼임이 따른다.
+$\varphi \in A$, $\varphi \not \in I$이면\ 
+$E \cong \varphi(E) \subset E$는 단사 부분가군이고, $E$가
+분해불가능이므로\  $E = \varphi(E)$이다.
+
+\medskip\noindent
+(4)의 증명. 환 사상\  $R \to A$를 생각하고, $\mathfrak p \subset R$을
+극대 아이디얼\  $I$의 역상이라 하자. 그러면\  $\mathfrak p$가 소아이디얼이고\ 
+$R \to A$가\  $R_\mathfrak p \to A$로 확장됨은 명백하다. 따라서\  $E$는\ 
+$R_\mathfrak p$-가군이다. Lemma \ref{dualizing-lemma-injective-epimorphism}에 의해\ 
+$E$는\  $R_\mathfrak p$-가군으로서 단사이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-hull-indecomposable}
+$\mathfrak p \subset R$을 환\  $R$의 소아이디얼이라 하고, $E$를\ 
+$R/\mathfrak p$의 단사 포락이라 하자. 그러면
+\begin{enumerate}
+\item $E$는 분해불가능이다.
+\item $E$는\  $\kappa(\mathfrak p)$의 단사 포락이다.
+\item $E$는 환\  $R_\mathfrak p$ 위에서\  $\kappa(\mathfrak p)$의
+단사 포락이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-essential-extension}에 의해 포함사상\ 
+$R/\mathfrak p \subset \kappa(\mathfrak p)$은 본질적 확대이다.
+그러면\  Lemma \ref{dualizing-lemma-injective-hull-unique}에 의해 (2)가 성립한다.
+$f \in R$, $f \not \in \mathfrak p$에 대해 사상\ 
+$f : \kappa(\mathfrak p) \to \kappa(\mathfrak p)$은 동형사상이므로
+사상\  $f : E \to E$도 동형사상이다. Lemma
+\ref{dualizing-lemma-injective-hull-unique}를 보라. 따라서\  $E$는\ 
+$R_\mathfrak p$-가군이다. Lemma \ref{dualizing-lemma-injective-epimorphism}에 의해
+이는\  $R_\mathfrak p$-가군으로서 단사이다. 끝으로\  $E' \subset E$를
+영이 아닌 단사\  $R$-부분가군이라 하자. 그러면\ 
+$J = (R/\mathfrak p) \cap E'$는 영이 아니다. $E'$를 줄여서\  $E'$가\ 
+$J$의 단사 포락이라고 가정해도 된다(예를 들어\  Lemma
+\ref{dualizing-lemma-injective-hull-unique}를 보라). $R/\mathfrak p$가\  $J$의
+본질적 확대임을 관찰하자. 이는 예를 들어\  Lemma
+\ref{dualizing-lemma-essential-extension}에서 따른다. 따라서\  Lemma
+\ref{dualizing-lemma-injective-hull-unique}의 (3)에 의해\  $E' \to E$는
+동형사상이다. 그러므로\  $E$는 분해불가능이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-indecomposable-injective-noetherian}
+$R$을\  Noether 환이라 하고\  $E$를 분해불가능 단사\  $R$-가군이라 하자.
+그러면\  $E$가\  $\kappa(\mathfrak p)$의 단사 포락이 되게 하는\  $R$의
+소아이디얼\  $\mathfrak p$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$\mathfrak p$를\  Lemma \ref{dualizing-lemma-indecomposable-injective}에서 얻은
+소아이디얼이라 하자. $\mathfrak p = (f_1, \ldots, f_r)$라 쓰자.
+Lemma \ref{dualizing-lemma-indecomposable-injective}에 의해 영이 아닌 원소\ 
+$x \in \bigcap \Ker(f_i : E \to E)$를 택할 수 있다. 그러면\ 
+$(R_\mathfrak p)x$는\  $E$ 안에서\  $\kappa(\mathfrak p)$와 동형인
+가군이다. Lemma \ref{dualizing-lemma-indecomposable-injective}에 의해 결론을 얻는다.
+\end{proof}
+
+\begin{proposition}[Noether 환 위 단사 가군의 구조]
+\label{dualizing-proposition-structure-injectives-noetherian}
+$R$을\  Noether 환이라 하자. 모든 단사 가군은 분해불가능 단사 가군들의
+직합이다. 모든 분해불가능 단사 가군은 어떤 소아이디얼에서 잉여체의
+단사 포락이다.
+\end{proposition}
+
+\begin{proof}
+두 번째 주장은\  Lemma \ref{dualizing-lemma-indecomposable-injective-noetherian}이다.
+첫 번째 주장을 위해\  $I$를 단사\  $R$-가군이라 하자. 초한 귀납법을 사용하여
+각 순서수\  $\alpha$에 대해, $\beta < \alpha$인 분해불가능 단사\ 
+$R$-가군들\  $E_{\beta + 1}$의 직합인\  $I_\alpha \subset I$를 구성한다.
+$\alpha = 0$이면\  $I_0 = 0$으로 놓는다. $I_\alpha$가 구성된 순서수\ 
+$\alpha$가 주어졌다고 하자. 그러면\  Lemma
+\ref{dualizing-lemma-sum-injective-modules}에 의해\  $I_\alpha$는 단사\  $R$-가군이다.
+따라서\  $I \cong I_\alpha \oplus I'$이다. $I' = 0$이면 끝난다.
+그렇지 않으면\  Algebra, Lemma \ref{algebra-lemma-ass-zero}에 의해\ 
+$I'$는 연관 소아이디얼을 갖는다. 따라서 어떤 소아이디얼\  $\mathfrak p$에
+대해\  $I'$는\  $R/\mathfrak p$의 한 복사본을 포함한다. 그러므로\  Lemmas
+\ref{dualizing-lemma-injective-hull-unique}와\ 
+\ref{dualizing-lemma-injective-hull-indecomposable}에 의해\  $I'$는 분해불가능
+부분가군\  $E$를 포함한다. 다음과 같이 놓는다.
+$I_{\alpha + 1} = I_\alpha \oplus E_\alpha$.
+$\alpha$가 극한 순서수이고 모든\  $\beta < \alpha$에 대해\  $I_\beta$가
+구성되었다면\  $I_\alpha = \bigcup_{\beta < \alpha} I_\beta$로 놓는다.
+$I_\alpha = \bigoplus_{\beta < \alpha} E_{\beta + 1}$임을 관찰하자.
+이로써 증명이 끝난다.
+\end{proof}
+
+
+
+\section{Artin 국소환 위의 쌍대성}
+\label{dualizing-section-artinian}
+
+\noindent
+$(R, \mathfrak m, \kappa)$를\  Artin 국소환이라 하자. 이때\  $R$은\ 
+Noether 환이고\  $R$은\  $R$-가군으로서 유한 길이를 가짐을 상기하자.
+또한\  $R$-가군이 유한일 필요충분조건은 유한 길이를 갖는 것이다.
+이 절에서는 이 사실들을 더 언급하지 않고 사용한다. 자세한 내용은\ 
+Algebra, Sections \ref{algebra-section-length}와\ 
+\ref{algebra-section-artinian}, 그리고\ 
+Algebra, Proposition \ref{algebra-proposition-dimension-zero-ring}을 보라.
+
+\begin{lemma}
+\label{dualizing-lemma-finite}
+$(R, \mathfrak m, \kappa)$를\  Artin 국소환이라 하고\  $E$를\  $\kappa$의
+단사 포락이라 하자. 모든 유한\  $R$-가군\  $M$에 대해
+$$
+\text{length}_R(M) = \text{length}_R(\Hom_R(M, E))
+$$
+이다. 특히\  $\kappa$의 단사 포락\  $E$는 유한\  $R$-가군이다.
+\end{lemma}
+
+\begin{proof}
+$E$가\  $\kappa$의 본질적 확대이므로\  $\kappa = E[\mathfrak m]$이다.
+여기서\  $E[\mathfrak m]$은\  $E$의\  $\mathfrak m$-꼬임이다
+(표기는\  More on Algebra, Section
+\ref{more-algebra-section-torsion}과 같다). 따라서\ 
+$\Hom_R(\kappa, E) \cong \kappa$이고\  $M = \kappa$일 때 길이의
+등식이 성립한다. $M$의 길이에 대한 귀납법으로 보조정리의 표시된
+등식을 증명하자. $M$이 영이 아니면 핵이\  $M'$인 전사\ 
+$M \to \kappa$가 존재한다. 함자\  $M \mapsto \Hom_R(M, E)$가
+완전하므로 짧은 완전열
+$$
+0 \to \Hom_R(\kappa, E) \to \Hom_R(M, E) \to \Hom_R(M', E) \to 0.
+$$
+을 얻는다. 이 완전열과\  $0 \to M' \to M \to \kappa \to 0$에서의
+길이의 가법성, 그리고\  $M'$에 대한 등식(귀납 가정)과\  $\kappa$에 대한
+등식으로부터\  $M$에 대한 등식이 따른다. 보조정리의 마지막 주장은\ 
+$E = \Hom_R(R, E)$에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-evaluate}
+$(R, \mathfrak m, \kappa)$를\  Artin 국소환이라 하고\  $E$를\  $\kappa$의
+단사 포락이라 하자. 임의의 유한\  $R$-가군\  $M$에 대해 평가 사상
+$$
+M \longrightarrow \Hom_R(\Hom_R(M, E), E)
+$$
+은 동형사상이다. 특히\  $R = \Hom_R(E, E)$이다.
+\end{lemma}
+
+\begin{proof}
+표시된 화살표가 단사임을 관찰하자. 실제로\  $x \in M$이 영이 아닌
+원소이면, 그 원소에서 영이 아닌 사상\  $Rx \to \kappa$가 존재하고 이를\ 
+$x$에서 영이 되지 않는 사상\  $\varphi : M \to E$로 확장할 수 있다.
+Lemma \ref{dualizing-lemma-finite}에 의해 화살표의 정의역과 공역의 길이가 같으므로
+이는 동형사상이다. 마지막 주장은\  $M = R$로 놓으면 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리를 진술하기 위해, 환\  $R$ 위의 유한\  $R$-가군의 범주를\ 
+$\text{Mod}^{fg}_R$로 나타내자.
+
+\begin{lemma}
+\label{dualizing-lemma-duality}
+$(R, \mathfrak m, \kappa)$를\  Artin 국소환이라 하고\  $E$를\  $\kappa$의
+단사 포락이라 하자. 함자\  $D(-) = \Hom_R(-, E)$는 완전 반동치\ 
+$\text{Mod}^{fg}_R \to \text{Mod}^{fg}_R$를 유도하며\ 
+$D \circ D \cong \text{id}$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-evaluate}에서\  $\text{Mod}^{fg}_R$ 위에서\ 
+$D \circ D = \text{id}$임을 보았다. 따라서\  $D$가 반동치임은 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-duality-torsion-cotorsion}
+가정과 표기는\  Lemma \ref{dualizing-lemma-duality}와 같다고 하자.
+$I \subset R$을 아이디얼이라 하고\  $M$을 유한\  $R$-가군이라 하자. 그러면
+$$
+D(M[I]) = D(M)/ID(M) \quad\text{and}\quad D(M/IM) = D(M)[I]
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$I = (f_1, \ldots, f_t)$라 하자. 여핵이\  $M/IM$인 사상
+$$
+M^{\oplus t} \xrightarrow{f_1, \ldots, f_t} M
+$$
+을 생각하자. 완전 함자\  $D$를 적용하면\  $D(M/IM)$이\  $D(M)[I]$임을
+얻는다. 다른 경우도 같은 방식으로 증명된다.
+\end{proof}
+
+
+
+\section{잉여체의 단사 포락}
+\label{dualizing-section-hull-residue-field}
+
+\noindent
+이 절의 결과 대부분은\  Noether 국소환에 관한 것이다.
+
+\begin{lemma}
+\label{dualizing-lemma-quotient}
+핵이\  $I$인 국소환의 전사 준동형\  $R \to S$가 주어졌다고 하자.
+$E$를\  $R$ 위에서 본\  $R$의 잉여체의 단사 포락이라 하자.
+그러면\  $E[I]$는\  $S$ 위에서 본\  $S$의 잉여체의 단사 포락이다.
+\end{lemma}
+
+\begin{proof}
+$S = R/I$이므로\  $E[I] = \Hom_R(S, E)$임에 유의하자. 따라서\ 
+Lemma \ref{dualizing-lemma-hom-injective}에 의해\  $E[I]$는 단사\  $S$-가군이다.
+$E$는\  $\kappa = R/\mathfrak m_R$의 본질적 확대이므로\ 
+$E[I]$ 역시\  $\kappa$의 본질적 확대이다. 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-torsion-submodule-sum-injective-hulls}
+$(R, \mathfrak m, \kappa)$를 국소환이라 하자.
+$E$를\  $\kappa$의 단사 포락이라 하자.
+$M$을\  $n = \dim_\kappa(M[\mathfrak m]) < \infty$인\ 
+$\mathfrak m$-멱 영\  $R$-가군이라 하자.
+그러면\  $M$은\  $E^{\oplus n}$의 한 부분가군과 동형이다.
+\end{lemma}
+
+\begin{proof}
+$E^{\oplus n}$은\  $\kappa^{\oplus n} = M[\mathfrak m]$의 단사 포락이다.
+따라서\  $M[\mathfrak m]$ 위에서 단사인\  $R$-가군 사상\ 
+$M \to E^{\oplus n}$이 존재한다.
+$M$이\  $\mathfrak m$-멱 영이고 포함\ 
+$M[\mathfrak m] \subset M$이 본질적 확대이므로
+(예를 들어\  Lemma \ref{dualizing-lemma-essential-extension}),
+$M \to E^{\oplus n}$의 핵은 영이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-union-artinian}
+$(R, \mathfrak m, \kappa)$를\  Noether 국소환이라 하자.
+$E$를\  $R$ 위에서 본\  $\kappa$의 단사 포락이라 하자.
+$E_n$을\  $R/\mathfrak m^n$ 위에서 본\  $\kappa$의 단사 포락이라 하자.
+그러면\  $E = \bigcup E_n$이고\  $E_n = E[\mathfrak m^n]$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-quotient}에 의해\  $E_n = E[\mathfrak m^n]$이다.
+또한\  $\bigcup E_n = E[\mathfrak m^\infty]$는\  $\kappa$를 포함하는
+단사\  $R$-부분가군이므로\  $E = \bigcup E_n$이다.
+Lemma \ref{dualizing-lemma-injective-module-divide}를 보라.
+\end{proof}
+
+\noindent
+다음 보조정리는\  Noether 국소환의 잉여체의 단사 포락이
+오직 그 완비화에만 의존함을 말해 준다.
+
+\begin{lemma}
+\label{dualizing-lemma-compare}
+$R/\mathfrak m_R \cong S/\mathfrak m_R S$를 만족하는\  Noether 국소환의
+평탄 국소 준동형\  $R \to S$가 주어졌다고 하자.
+그러면\  $R$의 잉여체의 단사 포락은\  $S$의 잉여체의 단사 포락이다.
+\end{lemma}
+
+\begin{proof}
+전자로 나눈 몫이 체이므로\  $\mathfrak m_RS = \mathfrak m_S$임에 유의하자.
+$\kappa = R/\mathfrak m_R = S/\mathfrak m_S$라 놓자.
+$E_R$을\  $R$ 위에서 본\  $\kappa$의 단사 포락이라 하고,
+$E_S$를\  $S$ 위에서 본\  $\kappa$의 단사 포락이라 하자.
+Lemma \ref{dualizing-lemma-injective-flat}에 의해\  $E_S$는 단사\  $R$-가군이다.
+잉여체의 동일시를 연장하는 사상\  $E_R \to E_S$를 택하자.
+모든\  $n$에 대해\  $R \to S$가 동형\ 
+$R/\mathfrak m_R^n \to S/\mathfrak m_S^n$을 유도하므로,
+Lemma \ref{dualizing-lemma-union-artinian}에 의해 이 사상은 동형이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-endos}
+$(R, \mathfrak m, \kappa)$를\  Noether 국소환이라 하자.
+$E$를\  $R$ 위에서 본\  $\kappa$의 단사 포락이라 하자. 그러면\ 
+$\Hom_R(E, E)$는\  $R$의 완비화와 표준적으로 동형이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-union-artinian}에서처럼\ 
+$E_n = E[\mathfrak m^n]$인\  $E = \bigcup E_n$으로 쓰자.
+$E$의 임의의 자기준동형은 이 여과를 보존한다. 따라서
+$$
+\Hom_R(E, E) = \lim \Hom_R(E_n, E_n)
+$$
+이다. Lemma \ref{dualizing-lemma-evaluate}에 의해\ 
+$\Hom_R(E_n, E_n) = \Hom_{R/\mathfrak m^n}(E_n, E_n) = R/\mathfrak m^n$
+이므로 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-hull-has-dcc}
+$(R, \mathfrak m, \kappa)$를\  Noether 국소환이라 하자.
+$E$를\  $R$ 위에서 본\  $\kappa$의 단사 포락이라 하자. 그러면\ 
+$E$는 내림 사슬 조건을 만족한다.
+\end{lemma}
+
+\begin{proof}
+$E \supset M_1 \supset M_2 \supset \ldots$가 부분가군들의 열이라면
+$$
+\Hom_R(E, E) \to \Hom_R(M_1, E) \to \Hom_R(M_2, E) \to \ldots
+$$
+는 전사들의 열이다. Lemma \ref{dualizing-lemma-endos}에 의해 이들 각각은
+완비화\  $R^\wedge = \Hom_R(E, E)$ 위의 가군이다.
+$R^\wedge$는\  Noether이므로
+(Algebra, Lemma \ref{algebra-lemma-completion-Noetherian-Noetherian}),
+이 열은 안정된다:
+$\Hom_R(M_n, E) = \Hom_R(M_{n + 1}, E) = \ldots$.
+$E$가 단사이므로 이는 오직\  $\Hom_R(M_n/M_{n + 1}, E)$가 영일 때만 가능하다.
+그러나\  $M_n/M_{n + 1}$이 영이 아니라면, Lemma
+\ref{dualizing-lemma-union-artinian}에 의해\  $E$가\  $\mathfrak m$-멱 영이므로
+그 안에는\  $\mathfrak m$에 의해 소멸되는 영이 아닌 원소가 존재한다.
+이 경우\  $M_n/M_{n + 1}$에서\  $E$로 가는 영이 아닌 사상이 존재하여,
+가정한 소멸과 모순이다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-describe-categories}
+$(R, \mathfrak m, \kappa)$를\  Noether 국소환이라 하자.
+$E$를\  $\kappa$의 단사 포락이라 하자.
+\begin{enumerate}
+\item $R$-가군\  $M$에 대하여 다음은 동치이다:
+\begin{enumerate}
+\item $M$은 오름 사슬 조건을 만족한다,
+\item $M$은 유한\  $R$-가군이다, 그리고
+\item 어떤\  $n, m$과 완전열\ 
+$R^{\oplus m} \to R^{\oplus n} \to M \to 0$이 존재한다.
+\end{enumerate}
+\item $R$-가군\  $M$에 대하여 다음은 동치이다:
+\begin{enumerate}
+\item $M$은 내림 사슬 조건을 만족한다,
+\item $M$은\  $\mathfrak m$-멱 영이고\ 
+$\dim_\kappa(M[\mathfrak m]) < \infty$이다, 그리고
+\item 어떤\  $n, m$과 완전열\ 
+$0 \to M \to E^{\oplus n} \to E^{\oplus m}$이 존재한다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명은 생략한다.
+
+\medskip\noindent
+$M$을 내림 사슬 조건을 만족하는\  $R$-가군이라 하자. $x \in M$이라 하자.
+그러면\  $\mathfrak m^n x$는 부분가군들의 내림 사슬이므로 안정된다.
+따라서 어떤\  $n$에 대해\  $\mathfrak m^nx = \mathfrak m^{n + 1}x$이다.
+Nakayama 보조정리
+(Algebra, Lemma \ref{algebra-lemma-NAK})에 의해 이는\  $\mathfrak m^n x = 0$,
+즉\  $x$가\  $\mathfrak m$-멱 영임을 뜻한다.
+$M[\mathfrak m]$은\  $\kappa$ 위의 벡터 공간이므로,
+내림 사슬 조건을 가지려면 유한 차원이어야 한다.
+
+\medskip\noindent
+$M$이\  $\mathfrak m$-멱 영이고\  $\mathfrak m$-꼬임 부분가군\ 
+$M[\mathfrak m]$이 유한 차원이라고 하자.
+Lemma \ref{dualizing-lemma-torsion-submodule-sum-injective-hulls}에 의해
+어떤\  $n$에 대해\  $M$은\  $E^{\oplus n}$의 부분가군이다.
+몫\  $N = E^{\oplus n}/M$을 생각하자.
+Lemma \ref{dualizing-lemma-injective-hull-has-dcc}에 의해\  $E$는 내림 사슬 조건을
+만족하므로\  $E^{\oplus n}$과\  $N$도 그러하다.
+따라서\  $N$은 (2)(a)를 만족하고, 이는 증명의 둘째 문단에 의해\ 
+$N$이 (2)(b)를 만족함을 뜻한다.
+그러므로 다시\  Lemma \ref{dualizing-lemma-torsion-submodule-sum-injective-hulls}에 의해
+어떤\  $m$에 대해\  $N$은\  $E^{\oplus m}$의 부분가군이다.
+따라서 짧은 완전열\ 
+$0 \to M \to E^{\oplus n} \to E^{\oplus m}$
+을 얻는다.
+
+\medskip\noindent
+짧은 완전열\ 
+$0 \to M \to E^{\oplus n} \to E^{\oplus m}$
+이 주어졌다고 하자.
+Lemma \ref{dualizing-lemma-injective-hull-has-dcc}에 의해\  $E$가 내림 사슬 조건을
+만족하므로\  $M$도 그러하다.
+\end{proof}
+
+\begin{proposition}[Matlis 쌍대성]
+\label{dualizing-proposition-matlis}
+$(R, \mathfrak m, \kappa)$를 완비\  Noether 국소환이라 하자.
+$E$를\  $R$ 위에서 본\  $\kappa$의 단사 포락이라 하자. 함자\ 
+$D(-) = \Hom_R(-, E)$는 반동치
+$$
+\left\{
+\begin{matrix}
+R\text{-modules with the} \\
+\text{descending chain condition}
+\end{matrix}
+\right\}
+\longleftrightarrow
+\left\{
+\begin{matrix}
+R\text{-modules with the} \\
+\text{ascending chain condition}
+\end{matrix}
+\right\}
+$$
+를 유도하며, 이 동치의 양쪽에서\  $D \circ D = \text{id}$이다.
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-endos}에 의해\  $R = \Hom_R(E, E) = D(E)$이다.
+물론\  $E = \Hom_R(R, E) = D(R)$이다. $E$가 단사이므로 함자\  $D$는 완전하다.
+이제\  Lemma \ref{dualizing-lemma-describe-categories}의 범주 기술에서 결과가 즉시 따른다.
+\end{proof}
+
+\begin{remark}
+\label{dualizing-remark-matlis}
+$(R, \mathfrak m, \kappa)$를\  Noether 국소환이라 하자.
+$E$를\  $R$ 위에서 본\  $\kappa$의 단사 포락이라 하자.
+다음은\  Matlis 쌍대성의 보충이다. $N$이\  $\mathfrak m$-멱 영 가군이고\ 
+$M = \Hom_R(N, E)$이\  $R$의 완비화 위의 유한 가군이면,
+$N$은 내림 사슬 조건을 만족한다.
+실제로\  $N'' \subset N' \subset N$이고\  $N'' \not = N'$인 임의의 부분가군들에
+대하여 매장을\  $\kappa \subset N''/N'$ 찾을 수 있고, 따라서\  $N''$을 소멸시키는
+영이 아닌 사상\  $N' \to E$를 찾을 수 있으며, 이를\  $N''$을 소멸시키는
+사상\  $N \to E$로 연장할 수 있다.
+그러므로\  $N \supset N' \mapsto M' = \Hom_R(N/N', E) \subset M$은\ 
+$N$의 부분가군에서\  $M$의 부분가군으로 가는 포함 보존 사상이며,
+결론이 따른다.
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{꼬임 함자의 유도}
+\label{dualizing-section-bad-local-cohomology}
+
+\noindent
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자
+($I$가 유한 생성이 아니라면 아마 다른 정의를 사용해야 할 것이다).
+$Z = V(I) \subset \Spec(A)$라 하자.
+$I$-멱 영 가군의 범주\  $I^\infty\text{-torsion}$은 닫힌 부분집합\ 
+$Z$에만 의존하고\  $Z = V(I)$를 만족하는 유한 생성 아이디얼\  $I$의
+선택에는 의존하지 않음을 상기하자. More on Algebra, Lemma
+\ref{more-algebra-lemma-local-cohomology-closed}를 보라.
+이 절에서는 함자
+$$
+H^0_{I} : \text{Mod}_A \longrightarrow I^\infty\text{-torsion},\quad
+M \longmapsto M[I^\infty] = \bigcup M[I^n]
+$$
+를 생각한다. 이 함자는\  $M$을 그\  $I$-멱 영 부분가군으로 보낸다.
+
+\medskip\noindent
+$A$를 환이라 하고\  $I$를 유한 생성 아이디얼이라 하자.
+$I^\infty\text{-torsion}$은\  Grothendieck 아벨 범주이다
+(직합이 존재하고, 여과 쌍극한이 완전하며,
+More on Algebra, Lemma \ref{more-algebra-lemma-I-power-torsion-presentation}에
+의해\  $\bigoplus A/I^n$이 생성자이다).
+따라서 유도 범주\  $D(I^\infty\text{-torsion})$이 존재한다.
+Injectives, Remark \ref{injectives-remark-existence-D}를 보라.
+우리의 함자\  $H^0_I$는 왼쪽 완전이며, 다음과 같이 나타낼 유도 연장을 가진다:
+$$
+R\Gamma_I : D(A) \longrightarrow D(I^\infty\text{-torsion}).
+$$
+{\bf 주의:} 환\  $A$가\  Noether이 아니면 이 함자는 국소 코호몰로지라는
+이름을 가질 만하지 않다.
+함자들\  $H^0_I$, $R\Gamma_I$와 위성 함자\  $H^p_I$는
+닫힌 부분집합\  $Z \subset \Spec(A)$에만 의존하고,
+$V(I) = Z$를 만족하는 유한 생성 아이디얼\  $I$의 선택에는 의존하지 않는다.
+그러나 위의 함자들에는 계속 아래첨자\  $I$를 사용한다.
+표기\  $R\Gamma_Z$는 (\ref{dualizing-equation-local-cohomology})에서 보듯
+다른 함자에 사용할 것이기 때문이다. 이 다른 함자는\ 
+$A$가\  Noether인 경우에만 (우리가 아는 한)
+$R\Gamma_I$와 일치한다
+(Lemma \ref{dualizing-lemma-local-cohomology-noetherian}를 보라).
+
+\begin{lemma}
+\label{dualizing-lemma-adjoint}
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+함자\  $R\Gamma_I$는 함자\ 
+$D(I^\infty\text{-torsion}) \to D(A)$의 오른쪽 수반이다.
+\end{lemma}
+
+\begin{proof}
+이는\  $I$-멱 영 부분가군을 취하는 함자가 포함 함자\ 
+$I^\infty\text{-torsion} \to \text{Mod}_A$의 오른쪽 수반이라는 사실에서 따른다.
+Derived Categories, Lemma \ref{derived-lemma-derived-adjoint-functors}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-ext}
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+$D(A)$의 임의의 대상\  $K$에 대하여
+$$
+R\Gamma_I(K) = \text{hocolim}\ R\Hom_A(A/I^n, K)
+$$
+가\  $D(A)$에서 성립하고, 모든\  $q \in \mathbf{Z}$에 대하여 가군으로서
+$$
+R^q\Gamma_I(K) = \colim_n \Ext_A^q(A/I^n, K)
+$$
+가 성립한다.
+\end{lemma}
+
+\begin{proof}
+$J^\bullet$을\  $K$를 나타내는\  K-단사 복합체라 하자. 그러면
+$$
+R\Gamma_I(K) = J^\bullet[I^\infty] = \colim J^\bullet[I^n] =
+\colim \Hom_A(A/I^n, J^\bullet)
+$$
+이다. 여기서 첫째 등식은\  $R\Gamma_I(K)$의 정의이다.
+Derived Categories, Lemma \ref{derived-lemma-colim-hocolim}에 의해
+보조정리의 첫째 표시 등식을 얻는다.
+둘째 표시 등식은\ 
+$H^q(\Hom_A(A/I^n, J^\bullet)) = \Ext^q_A(A/I^n, K)$이고
+아벨군의 범주에서 여과 쌍극한이 완전이므로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-bad-local-cohomology-vanishes}
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+$K^\bullet$을\  $A$-가군의 복합체라 하고, 어떤\  $f \in I$에 대해\ 
+$f : K^\bullet \to K^\bullet$가 동형이라고 하자.
+즉\  $K^\bullet$은\  $A_f$-가군의 복합체이다. 그러면\ 
+$R\Gamma_I(K^\bullet) = 0$이다.
+\end{lemma}
+
+\begin{proof}
+실제로 이 경우\  $R\Gamma_I(K^\bullet)$의 코호몰로지 가군들은
+모두\  $f$-멱 영인 동시에\  $f$가 자기동형으로 작용한다.
+따라서 코호몰로지 가군들이 영이고, 그러므로 대상도 영이다.
+\end{proof}
+
+\noindent
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+More on Algebra, Lemma \ref{more-algebra-lemma-I-power-torsion}에 의해\ 
+$I$-멱 영 가군의 범주는 모든\  $A$-가군의 범주의\  Serre 부분범주이다.
+따라서 함자
+\begin{equation}
+\label{dualizing-equation-compare-torsion}
+D(I^\infty\text{-torsion}) \longrightarrow D_{I^\infty\text{-torsion}}(A)
+\end{equation}
+가 존재한다. 여기서 오른쪽은 코호몰로지들이\  $I$-멱 영 가군인\ 
+$D(A)$의 충만 부분범주이다.
+이 함자와 범주는 모두\  Derived Categories, Section
+\ref{derived-section-triangulated-sub}에서 논한다.
+
+\begin{lemma}
+\label{dualizing-lemma-not-equal}
+$A$를 환이라 하고\  $I$를 유한 생성 아이디얼이라 하자.
+$M$과\  $N$을\  $I$-멱 영 가군이라 하자.
+\begin{enumerate}
+\item $\Hom_{D(A)}(M, N) = \Hom_{D({I^\infty\text{-torsion}})}(M, N)$,
+\item $\Ext^1_{D(A)}(M, N) =
+\Ext^1_{D({I^\infty\text{-torsion}})}(M, N)$,
+\item $\Ext^2_{D({I^\infty\text{-torsion}})}(M, N) \to
+\Ext^2_{D(A)}(M, N)$는 일반적으로 전사가 아니다,
+\item (\ref{dualizing-equation-compare-torsion})은 일반적으로 동치가 아니다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)는\  $I$-멱 영 가군들이\  $\text{Mod}_A$의\  Serre 부분범주를
+이룬다는 사실에서 즉시 따른다. (4)는 (3)에서 따른다.
+
+\medskip\noindent
+(3)을 위해\  $A$가 다음 성질을 만족하는 원소\  $f \in A$를 가진 환이라고 하자.
+$A[f]$에는\  $f$에 의해 소멸되는 영이 아닌 원소\  $x$가 있고,
+$A$에는\  $f^nx_n = x$인 원소들\  $x_n$이 있다.
+그러한 환\  $A$는 다음과 같이 취할 수 있으므로 존재한다:
+$$
+A = \mathbf{Z}[f, x, x_n]/(fx, f^nx_n - x)
+$$
+$A$가 주어졌을 때\  $I = (f)$라 놓자. 그러면 완전열
+$$
+0 \to A[f] \to A \xrightarrow{f} A \to A/fA \to 0
+$$
+은\  $\Ext^2_A(A/fA, A[f])$의 원소를 정의한다. 이 원소는\ 
+$\Ext^2_{D(f^\infty\text{-torsion})}(A/fA, A[f])$의 원소에서
+오지 않는다고 주장한다.
+실제로 그렇지 않다면 완전열
+$$
+0 \to A[f] \to M \to N \to A/fA \to 0
+$$
+이 존재하며, 여기서\  $M$과\  $N$은 같은\  $2$-확장류를 정의하는\ 
+$f$-멱 영 가군이다. $A \to A$는 자유 가군의 복합체이고
+두\  $2$-확장류가 같으므로 사상
+$$
+\xymatrix{
+0 \ar[r] &
+A[f] \ar[r] \ar[d] &
+A \ar[r] \ar[d]_\varphi &
+A \ar[r] \ar[d]_\psi &
+A/fA \ar[r] \ar[d] & 0 \\
+0 \ar[r] &
+A[f] \ar[r] &
+M \ar[r] &
+N \ar[r] &
+A/fA \ar[r] & 0
+}
+$$
+을 찾을 수 있다
+(일부 세부사항은 생략한다). 그러면\  $M$을\  $\varphi$의 상으로,
+$N$을\  $\psi$의 상으로 대체할 수 있다. 그때\  $M$은 순환 가군이므로
+어떤\  $n$에 대해\  $f^n M = 0$이다. $\varphi(x_{n + 1})$를 생각하면,
+$A[f]$에서 영이 아닌\  $f^{n + 1}x_n = x$라는 사실과 모순을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{국소 코호몰로지}
+\label{dualizing-section-local-cohomology}
+
+\noindent
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+$Z = V(I) \subset \Spec(A)$라 놓자. 포함 함자의 오른쪽 수반인 함자
+\begin{equation}
+\label{dualizing-equation-local-cohomology}
+R\Gamma_Z : D(A) \longrightarrow D_{I^\infty\text{-torsion}}(A).
+\end{equation}
+를 구성하겠다. 표기는\  Section \ref{dualizing-section-bad-local-cohomology}를 보라.
+$R\Gamma_Z(K)$의 코호몰로지 가군들은
+{\it $Z$에 관한\  $K$의 국소 코호몰로지 군}이다.
+Lemma \ref{dualizing-lemma-not-equal}에 의해 이 함자는\  $D(A)$로 가는 함자로
+보더라도 일반적으로\  $R\Gamma_I( - )$와 {\bf 같지} 않다.
+Section \ref{dualizing-section-local-cohomology-noetherian}에서\  $A$가\  Noether이면
+두 함자가 일치함을 보일 것이다.
+
+\medskip\noindent
+국소 코호몰로지에 관한 논의는 국소 코호몰로지 장에서 계속한다.
+Local Cohomology, Section \ref{local-cohomology-section-introduction}을 보라.
+예를 들어 그곳에서\  $R\Gamma_Z$가\  $\Spec(A)$ 위의 연관 준연접 올 복합체에
+대하여\  $Z$에 지지된 코호몰로지를 계산함을 보일 것이다.
+Local Cohomology, Lemma
+\ref{local-cohomology-lemma-local-cohomology-is-local-cohomology}를 보라.
+
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-adjoint}
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+포함 함자\  $D_{I^\infty\text{-torsion}}(A) \to D(A)$의 오른쪽 수반\ 
+$R\Gamma_Z$ (\ref{dualizing-equation-local-cohomology})가 존재한다.
+실제로\  $I$가\  $f_1, \ldots, f_r \in A$로 생성되면, 함자적으로\ 
+$K \in D(A)$에 대하여
+$$
+R\Gamma_Z(K) =
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}}
+\to \ldots \to A_{f_1\ldots f_r}) \otimes_A^\mathbf{L} K
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$I = (f_1, \ldots, f_r)$가 아이디얼이라고 하자.
+$K^\bullet$을\  $A$-가군의 복합체라 하자.
+확장된 {\v C}ech 복합체에서\  $A$로 가는 표준 복합체 사상
+$$
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r}) \longrightarrow A.
+$$
+이 존재한다. $K^\bullet$과 텐서곱하고 연관 전체 복합체를 취하면,
+$D(A)$에서 사상
+$$
+\text{Tot}\left(
+K^\bullet \otimes_A
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r})\right)
+\longrightarrow
+K^\bullet
+$$
+을 얻는다. 왼쪽 복합체의 코호몰로지 가군들이\  $I$-멱 영이라고 주장한다.
+즉 좌변은\  $D_{I^\infty\text{-torsion}}(A)$의 대상이다. 실제로\ 
+More on Algebra, Lemma
+\ref{more-algebra-lemma-extended-alternating-Cech-is-colimit-koszul}에 의해
+$$
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r}) = \colim K(A, f_1^n, \ldots, f_r^n)
+$$
+이다. 또한\  More on Algebra, Lemma
+\ref{more-algebra-lemma-homotopy-koszul}에 의해 복합체\ 
+$K(A, f_1^n, \ldots, f_r^n)$ 위에서\  $f_i^n$을 곱하는 사상은
+영 사상과 호모토픽이다. 다음 등식으로부터 주장을 얻는다:
+$$
+H^q\left( LHS \right) =
+\colim H^q(\text{Tot}(K^\bullet \otimes_A K(A, f_1^n, \ldots, f_r^n)))
+$$
+한편\  $K^\bullet$이\  $D_{I^\infty\text{-torsion}}(A)$의 대상이면
+복합체\  $K^\bullet \otimes_A A_{f_{i_0} \ldots f_{i_p}}$의
+코호몰로지는 소멸한다. 따라서 이 경우 사상\  $LHS \to K^\bullet$은\ 
+$D(A)$에서 동형이다. 구성
+$$
+R\Gamma_Z(K^\bullet) =
+\text{Tot}\left(
+K^\bullet \otimes_A
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r})\right)
+$$
+은\  $K^\bullet$에 대해 함자적이며 삼각 범주 사이의 완전 함자\ 
+$D(A) \to D_{I^\infty\text{-torsion}}(A)$를 정의한다.
+위에서 주어진 자연변환\  $R\Gamma_Z \to \text{id}$가 존재하고,
+부분범주의\  $K^\bullet$ 위에서는 이 자연변환이 동형으로 평가된다는
+사실에서\  $R\Gamma_Z$가 원하는 오른쪽 수반임이 형식적으로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-and-restriction}
+$A \to B$를 환 준동형이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+$J = IB$라 놓고, $Z = V(I)$ 및\  $Y = V(J)$라 놓자. 그러면
+$$
+R\Gamma_Z(M_A) = R\Gamma_Y(M)_A
+$$
+가\  $M \in D(B)$에 대해 함자적으로 성립한다.
+여기서\  $(-)_A$는 제한 함자\  $D(B) \to D(A)$와\ 
+$D_{J^\infty\text{-torsion}}(B) \to D_{I^\infty\text{-torsion}}(A)$를 나타낸다.
+\end{lemma}
+
+\begin{proof}
+이는 수반 함자의 유일성에서 따른다. 실제로\ 
+$R\Gamma_Z((-)_A)$와\  $R\Gamma_Y(-)_A$는 모두 함자\ 
+$D_{I^\infty\text{-torsion}}(A) \to D(B)$,
+$K \mapsto K \otimes_A^\mathbf{L} B$의 오른쪽 수반이다.
+또는\  Lemma \ref{dualizing-lemma-local-cohomology-adjoint}와
+교대 {\v C}ech 복합체를 통한\  $R\Gamma_Z$ 및\  $R\Gamma_Y$의 기술을
+사용할 수 있다.
+실제로\  $I = (f_1, \ldots, f_r)$이면\  $J$는\  $f_1, \ldots, f_r$의
+상들\  $g_1, \ldots, g_r \in B$로 생성된다.
+그러면 보조정리의 명제는 임의의\  $B$-가군\  $M$에 대한 표준 동형
+\begin{align*}
+& M_A \otimes_A (A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}}
+\to \ldots \to A_{f_1\ldots f_r}) \\
+& = 
+M \otimes_B (B \to \prod\nolimits_{i_0} B_{g_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} B_{g_{i_0}g_{i_1}}
+\to \ldots \to B_{g_1\ldots g_r})
+\end{align*}
+의 존재에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-torsion-change-rings}
+$A \to B$를 환 준동형이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+$J = IB$라 놓자. $Z = V(I)$ 및\  $Y = V(J)$라 하자. 그러면
+$$
+R\Gamma_Z(K) \otimes_A^\mathbf{L} B = R\Gamma_Y(K \otimes_A^\mathbf{L} B)
+$$
+가\  $K \in D(A)$에 대해 함자적으로 성립한다.
+\end{lemma}
+
+\begin{proof}
+$I = (f_1, \ldots, f_r)$로 쓰자. 그러면\  $J$는\  $f_1, \ldots, f_r$의
+상들\  $g_1, \ldots, g_r \in B$로 생성된다. 이때\  $B$-가군의 복합체로서
+$$
+(A \to \prod A_{f_{i_0}} \to \ldots \to A_{f_1\ldots f_r}) \otimes_A B =
+(B \to \prod B_{g_{i_0}} \to \ldots \to B_{g_1\ldots g_r})
+$$
+이다. $K$를\  $A$-가군의\  K-평탄 복합체\  $K^\bullet$로 나타내자.
+다음에 연관된 전체 복합체
+$$
+K^\bullet \otimes_A
+(A \to \prod A_{f_{i_0}} \to \ldots \to A_{f_1\ldots f_r}) \otimes_A B
+$$
+와
+$$
+K^\bullet \otimes_A B \otimes_B
+(B \to \prod B_{g_{i_0}} \to \ldots \to B_{g_1\ldots g_r})
+$$
+는 보조정리의 표시 공식의 좌변과 우변을 각각 나타내므로
+(Lemma \ref{dualizing-lemma-local-cohomology-adjoint}를 보라), 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-vanishes}
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+$K^\bullet$을\  $A$-가군의 복합체라 하고, 어떤\  $f \in I$에 대해\ 
+$f : K^\bullet \to K^\bullet$가 동형이라고 하자.
+즉\  $K^\bullet$은\  $A_f$-가군의 복합체이다. 그러면\ 
+$R\Gamma_Z(K^\bullet) = 0$이다.
+\end{lemma}
+
+\begin{proof}
+실제로 이 경우\  $R\Gamma_Z(K^\bullet)$의 코호몰로지 가군들은
+모두\  $f$-멱 영인 동시에\  $f$가 자기동형으로 작용한다.
+따라서 코호몰로지 가군들이 영이고, 그러므로 대상도 영이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-torsion-tensor-product}
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+$K, L \in D(A)$에 대하여
+$$
+R\Gamma_Z(K \otimes_A^\mathbf{L} L) =
+K \otimes_A^\mathbf{L} R\Gamma_Z(L) =
+R\Gamma_Z(K) \otimes_A^\mathbf{L} L =
+R\Gamma_Z(K) \otimes_A^\mathbf{L} R\Gamma_Z(L)
+$$
+이다. $K$ 또는\  $L$이\  $D_{I^\infty\text{-torsion}}(A)$에 속하면\ 
+$K \otimes_A^\mathbf{L} L$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-local-cohomology-adjoint}에 의해 어떤\  $C \in D(A)$에 대해\ 
+$R\Gamma_Z$가\  $C \otimes^\mathbf{L} -$로 주어짐을 안다.
+따라서 일반적인\  $K, L \in D(A)$에 대하여
+$$
+R\Gamma_Z(K \otimes_A^\mathbf{L} L) =
+K \otimes^\mathbf{L} L \otimes_A^\mathbf{L} C =
+K \otimes_A^\mathbf{L} R\Gamma_Z(L)
+$$
+이다. 다른 등식들은 이 등식에서 형식적으로 따른다.
+이는 보조정리의 마지막 명제도 함의한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-ss}
+$A$를 환이라 하고\  $I, J \subset A$를 유한 생성 아이디얼이라 하자.
+$Z = V(I)$ 및\  $Y = V(J)$라 놓자. 그러면\  $Z \cap Y = V(I + J)$이고,
+함자로서\  $R\Gamma_Y \circ R\Gamma_Z = R\Gamma_{Y \cap Z}$이다:
+$D(A) \to D_{(I + J)^\infty\text{-torsion}}(A)$.
+$K \in D^+(A)$에 대해서는\  Derived Categories, Lemma
+\ref{derived-lemma-grothendieck-spectral-sequence}에서와 같은 스펙트럼 열
+$$
+E_2^{p, q} = H^p_Y(H^q_Z(K)) \Rightarrow H^{p + q}_{Y \cap Z}(K)
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+엄밀히 말하면\  $R\Gamma_Y$와\  $R\Gamma_Z$를 합성할 수 없으므로
+보조정리에는 약간의 표기 남용이 있다.
+명제의 뜻은 단순히\  $R\Gamma_Z$를 포함\ 
+$D_{I^\infty\text{-torsion}}(A) \to D(A)$과 합성한 다음\ 
+$R\Gamma_Y$와 합성한다는 것이다. 이때 등식\ 
+$R\Gamma_Y \circ R\Gamma_Z = R\Gamma_{Y \cap Z}$는 합성
+$$
+D_{I^\infty\text{-torsion}}(A) \to D(A) \xrightarrow{R\Gamma_Y}
+D_{(I + J)^\infty\text{-torsion}}(A)
+$$
+이 포함\ 
+$D_{(I + J)^\infty\text{-torsion}}(A) \to D_{I^\infty\text{-torsion}}(A)$의
+오른쪽 수반이라는 사실에서 따른다.
+또는\  Lemma \ref{dualizing-lemma-local-cohomology-adjoint}와,
+$f_1, \ldots, f_r$ 및\  $g_1, \ldots, g_m$에 대한
+확장된 {\v C}ech 복합체들의 텐서곱이\ 
+$f_1, \ldots, f_n. g_1, \ldots, g_m$에 대한 확장된
+{\v C}ech 복합체라는 사실을 사용하여 공식을 증명할 수 있다.
+마지막 명제는 이 사실과 인용한 보조정리에서 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리는 꼬임 코호몰로지를 갖는 복합체에 대한\ 
+More on Algebra, Lemma
+\ref{more-algebra-lemma-restriction-derived-complete-equivalence}의 유사이다.
+
+\begin{lemma}
+\label{dualizing-lemma-torsion-flat-change-rings}
+$A \to B$를 평탄 환 사상이라 하고\  $I \subset A$를\ 
+$A/I = B/IB$인 유한 생성 아이디얼이라 하자.
+그러면 밑변환과 제한은 준역 동치\ 
+$D_{I^\infty\text{-torsion}}(A) = D_{(IB)^\infty\text{-torsion}}(B)$를 유도한다.
+\end{lemma}
+
+\begin{proof}
+구체적으로 두 함자는\  $D_{I^\infty\text{-torsion}}(A)$의\  $K$에 대한\ 
+$K \mapsto K \otimes_A^\mathbf{L} B$와,
+$D_{(IB)^\infty\text{-torsion}}(B)$의\  $M$에 대한\  $M \mapsto M_A$이다.
+이것이 성립하는 이유는\ 
+$H^i(K \otimes_A^\mathbf{L} B) = H^i(K) \otimes_A B = H^i(K)$이기 때문이다.
+첫째 등식은\  $A \to B$가 평탄이므로 성립하고, 둘째 등식은\ 
+More on Algebra, Lemma \ref{more-algebra-lemma-neighbourhood-isomorphism}에 의해 성립한다.
+\end{proof}
+
+\noindent
+다음 보조정리는\  More on Algebra, Lemmas
+\ref{more-algebra-lemma-neighbourhood-equivalence}와\ 
+\ref{more-algebra-lemma-neighbourhood-extensions}에서 가군의\ 
+$\Hom$ 및\  $\Ext^1$에 대해 증명되었다.
+
+\begin{lemma}
+\label{dualizing-lemma-neighbourhood-extensions}
+$A \to B$를 평탄 환 사상이라 하고\  $I \subset A$를\ 
+$A/I \to B/IB$가 동형인 유한 생성 아이디얼이라 하자.
+$K \in D_{I^\infty\text{-torsion}}(A)$ 및\  $L \in D(A)$에 대하여 사상
+$$
+R\Hom_A(K, L) \longrightarrow R\Hom_B(K \otimes_A B, L \otimes_A B)
+$$
+은 준동형이다. 특히\  $M$, $N$이\  $A$-가군이고\  $M$이\  $I$-멱 영이면
+표준 사상
+$$
+\Ext^i_A(M, N)
+\longrightarrow
+\Ext^i_B(M \otimes_A B, N \otimes_A B)
+$$
+은 모든\  $i$에 대해 동형이다.
+\end{lemma}
+
+\begin{proof}
+$Z = V(I) \subset \Spec(A)$ 및\  $Y = V(IB) \subset \Spec(B)$라 하자.
+$K$의 코호몰로지 가군들이\  $I$-멱 영이므로 표준 사상\ 
+$R\Gamma_Z(L) \to L$은\  $D(A)$에서 동형
+$$
+R\Hom_A(K, R\Gamma_Z(L)) \to R\Hom_A(K, L)
+$$
+을 유도한다. 마찬가지로\  $K \otimes_A B$의 코호몰로지 가군들은\ 
+$IB$-멱 영이며, $D(B)$에서 동형
+$$
+R\Hom_B(K \otimes_A B, R\Gamma_Y(L \otimes_A B)) \to 
+R\Hom_B(K \otimes_A B, L \otimes_A B)
+$$
+을 얻는다.
+Lemma \ref{dualizing-lemma-torsion-change-rings}에 의해\ 
+$R\Gamma_Z(L) \otimes_A B = R\Gamma_Y(L \otimes_A B)$이다.
+따라서 사상
+$$
+R\Hom_A(K, R\Gamma_Z(L)) \to R\Hom_B(K \otimes_A B, R\Gamma_Z(L) \otimes_A B)
+$$
+이 준동형임을 보이면 충분하다. 이는\ 
+Lemma \ref{dualizing-lemma-torsion-flat-change-rings}에서 따른다.
+\end{proof}
+
+
+
+
+\section{Noether 환의 국소 코호몰로지}
+\label{dualizing-section-local-cohomology-noetherian}
+
+\noindent
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+$Z = V(I) \subset \Spec(A)$라 놓자.
+(\ref{dualizing-equation-compare-torsion})이 함자
+$$
+D(I^\infty\text{-torsion}) \to D_{I^\infty\text{-torsion}}(A)
+$$
+임을 상기하자. 실제로 함자들의 자연변환
+\begin{equation}
+\label{dualizing-equation-compare-torsion-functors}
+(\ref{dualizing-equation-compare-torsion}) \circ R\Gamma_I(-)
+\longrightarrow
+R\Gamma_Z(-)
+\end{equation}
+이 존재한다. 실제로\  $A$-가군의 복합체\  $K^\bullet$이 주어졌을 때\ 
+$D(A)$에서의 표준 사상\  $R\Gamma_I(K^\bullet) \to K^\bullet$은\ 
+$R\Gamma_I(K^\bullet)$의 코호몰로지 가군들이\  $I$-멱 영이므로\ 
+$R\Gamma_Z(K^\bullet)$을 통해 유일하게 분해된다
+(Lemma \ref{dualizing-lemma-adjoint}를 보라).
+일반적으로 이 사상은 동형이 아니다
+(Lemma \ref{dualizing-lemma-not-equal}에서 이를 보았다).
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-noetherian}
+$A$를\  Noether 환이라 하고\  $I \subset A$를 아이디얼이라 하자.
+\begin{enumerate}
+\item $K \in D_{I^\infty\text{-torsion}}(A)$에 대해
+수반 사상\  $R\Gamma_I(K) \to K$는 동형이다,
+\item 함자
+(\ref{dualizing-equation-compare-torsion})
+$D(I^\infty\text{-torsion}) \to D_{I^\infty\text{-torsion}}(A)$
+는 동치이다,
+\item 함자들의 변환
+(\ref{dualizing-equation-compare-torsion-functors})은 동형이다.
+달리 말하면\  $K \in D(A)$에 대해\  $R\Gamma_I(K) = R\Gamma_Z(K)$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략하는 형식적 논증에 의해 (1)만 증명하면 충분하다.
+
+\medskip\noindent
+$M$을\  $I$-멱 영\  $A$-가군이라 하자.
+단사\  $A$-가군으로의 매장\  $M \to J$를 택하자.
+그러면\  Lemma \ref{dualizing-lemma-injective-module-divide}에 의해\ 
+$J[I^\infty]$는 단사\  $A$-가군이고, 매장\  $M \to J[I^\infty]$를 얻는다.
+따라서 모든\  $I$-멱 영 가군은 각\  $J^n$ 역시\  $I$-멱 영인 단사 분해\ 
+$M \to J^\bullet$을 갖는다.
+그러므로\  $R\Gamma_I(M) = M$이다
+(이는 자명하지 않으며, $A$가\  Noether이 아닐 때에는 일반적으로 참이 아니다).
+다음으로\  $K \in D_{I^\infty\text{-torsion}}^+(A)$라 하자.
+그러면 스펙트럼 열
+$$
+R^q\Gamma_I(H^p(K)) \Rightarrow R^{p + q}\Gamma_I(K)
+$$
+(Derived Categories, Lemma \ref{derived-lemma-two-ss-complex-functor})이
+수렴하고, 위에서\  $q = 0$인 항들만 영이 아님을 보았다.
+따라서\  $R\Gamma_I(K) \to K$가 동형임을 알 수 있다.
+
+\medskip\noindent
+$K$가\  $D_{I^\infty\text{-torsion}}(A)$의 임의의 대상이라고 하자.
+Lemma \ref{dualizing-lemma-local-cohomology-ext}에 의해
+$$
+R^q\Gamma_I(K) = \colim \Ext^q_A(A/I^n, K)
+$$
+이다. $I$를 생성하는\  $f_1, \ldots, f_r \in A$를 택하자.
+$K_n^\bullet = K(A, f_1^n, \ldots, f_r^n)$을 차수\ 
+$-r, \ldots, 0$에 항을 갖는\  Koszul 복합체라 하자.
+More on Algebra, Lemma \ref{more-algebra-lemma-sequence-Koszul-complexes}에 의해\ 
+$D(A)$에서 프로대상들\  $\{A/I^n\}$과\  $\{K_n^\bullet\}$이 같으므로
+$$
+R^q\Gamma_I(K) = \colim \Ext^q_A(K_n^\bullet, K)
+$$
+이다. $K$를 나타내는 임의의\  $A$-가군 복합체\  $K^\bullet$을 택하자.
+$K_n^\bullet$은 유한 자유 가군의 유한 복합체이므로
+$$
+\Ext^q_A(K_n, K) =
+H^q(\text{Tot}((K_n^\bullet)^\vee \otimes_A K^\bullet))
+$$
+이다. 여기서\  $(K_n^\bullet)^\vee$는 복합체\  $K_n^\bullet$의 쌍대이다.
+More on Algebra, Lemma \ref{more-algebra-lemma-RHom-out-of-projective}를 보라.
+$(K_n^\bullet)^\vee$는 차수\  $0, \ldots, r$에 놓인 유한 자유\ 
+$A$-가군의 복합체이므로, 복합체\ 
+$\text{Tot}((K_n^\bullet)^\vee \otimes_A K^\bullet)$와\ 
+$\text{Tot}((K_n^\bullet)^\vee \otimes_A \tau_{\geq q - r - 2} K^\bullet)$의
+차수\  $q - 1$ 이상인 항들은 같다. 따라서 모든\  $n$에 대해
+$$
+\Ext^q_A(K_n, K) = \text{Ext}^q_A(K_n, \tau_{\geq q - r - 2}K)
+$$
+이다. 그러므로
+$$
+R^q\Gamma_I(K) = R^q\Gamma_I(\tau_{\geq q - r - 2}K) =
+H^q(\tau_{\geq q - r - 2}K) = H^q(K)
+$$
+이다. 따라서 사상\  $R\Gamma_I(K) \to K$는 동형이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-compute-local-cohomology-noetherian}
+$A$를\  Noether 환이라 하고\  $I = (f_1, \ldots, f_r)$을\  $A$의 아이디얼이라 하자.
+$Z = V(I) \subset \Spec(A)$라 놓자. $D(A)$에서 표준 동형들
+$$
+R\Gamma_I(A) \to
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r}) \to R\Gamma_Z(A)
+$$
+이 존재한다. $M$이\  $A$-가군이면 마찬가지로\  $D(A)$에서
+$$
+R\Gamma_I(M) \cong
+(M \to \prod\nolimits_{i_0} M_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} M_{f_{i_0}f_{i_1}} \to
+\ldots \to M_{f_1\ldots f_r}) \cong R\Gamma_Z(M)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+이는\  Lemma \ref{dualizing-lemma-local-cohomology-noetherian}과\ 
+Lemma \ref{dualizing-lemma-local-cohomology-adjoint}의 함자\  $R\Gamma_Z$ 계산에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-change-rings}
+$A \to B$가\  Noether 환들의 준동형이고\  $I \subset A$가 아이디얼이면,
+$D(B)$에서
+$$
+R\Gamma_I(A) \otimes_A^\mathbf{L} B =
+R\Gamma_Z(A) \otimes_A^\mathbf{L} B =
+R\Gamma_Y(B) = R\Gamma_{IB}(B)
+$$
+이다. 여기서\  $Y = V(IB) \subset \Spec(B)$이다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{dualizing-lemma-compute-local-cohomology-noetherian}와\ 
+\ref{dualizing-lemma-torsion-change-rings}를 결합하라.
+\end{proof}
+
+
+
+
+
+\section{깊이}
+\label{dualizing-section-depth}
+
+\noindent
+이 절에서는\  Algebra, Section \ref{algebra-section-depth}에서 도입한
+깊이의 개념을 다시 살펴본다.
+
+\begin{lemma}
+\label{dualizing-lemma-depth}
+$A$를\  Noether 환, $I \subset A$를 아이디얼이라 하고,
+$M$을\  $IM \not = M$인 유한\  $A$-가군이라 하자. 그러면 다음 정수들은 같다:
+\begin{enumerate}
+\item $\text{depth}_I(M)$,
+\item $\Ext_A^i(A/I, M)$이 영이 아닌 최소 정수\  $i$, 그리고
+\item $H^i_I(M)$이 영이 아닌 최소 정수\  $i$.
+\end{enumerate}
+또한\  $I$의 어떤 멱에 의해 소멸되는 임의의 유한\  $A$-가군\  $N$에 대하여\ 
+$i < \text{depth}_I(M)$이면\  $\Ext^i_A(N, M) = 0$이다.
+\end{lemma}
+
+\begin{proof}
+Algebra, Lemma \ref{algebra-lemma-depth-finite-noetherian}에 의해 허용되는\ 
+$\text{depth}_I(M)$에 관한 귀납법으로 (1)과 (2)의 등식을 증명한다.
+
+\medskip\noindent
+기초 단계. $\text{depth}_I(M) = 0$이면\  $I$는\  $M$의 연관 소아이디얼들의
+합집합에 포함된다
+(Algebra, Lemma \ref{algebra-lemma-ass-zero-divisors}).
+소아이디얼 회피
+(Algebra, Lemma \ref{algebra-lemma-silly})에 의해
+어떤 연관 소아이디얼\  $\mathfrak p$에 대해\  $I \subset \mathfrak p$이다.
+따라서\  $\Hom_A(A/I, M)$은 영이 아니다. 그러므로 이 경우 등식이 성립한다.
+
+\medskip\noindent
+$\text{depth}_I(M) > 0$이라고 하자.
+$M$ 위의 영인자가 아니고\ 
+$\text{depth}_I(M/fM) = \text{depth}_I(M) - 1$인\  $f \in I$를 택하자.
+짧은 완전열
+$$
+0 \to M \to M \to M/fM \to 0
+$$
+과\  $\Ext^*_A(A/I, -)$에 대한 연관 긴 완전열을 생각하자.
+$\Ext^i_A(A/I, M)$은 유한\  $A/I$-가군임에 유의하자
+(Algebra, Lemmas \ref{algebra-lemma-ext-noetherian}와\ 
+\ref{algebra-lemma-annihilate-ext}). 따라서
+$$
+\Hom_A(A/I, M/fM) = \Ext^1_A(A/I, M)
+$$
+과 짧은 완전열들
+$$
+0 \to \Ext^i_A(A/I, M) \to \text{Ext}^i_A(A/I, M/fM) \to
+\Ext^{i + 1}_A(A/I, M) \to 0
+$$
+을 얻는다. 이로부터 귀납적으로 (1)과 (2)의 등식이 따른다.
+
+\medskip\noindent
+예를 들어\  Algebra, Lemma \ref{algebra-lemma-regular-sequence-powers}에 의해
+모든\  $n \geq 1$에 대해\ 
+$\text{depth}_I(M) = \text{depth}_{I^n}(M)$임에 유의하자.
+따라서 (1)과 (2)의 등식에 의해 모든\  $n$ 및\ 
+$i < \text{depth}_I(M)$에 대해\  $\Ext^i_A(A/I^n, M) = 0$이다.
+$N$을\  $I$의 어떤 멱에 의해 소멸되는 유한\  $A$-가군이라 하자.
+그러면 어떤\  $n, m \geq 0$에 대하여 짧은 완전열
+$$
+0 \to N' \to (A/I^n)^{\oplus m} \to N \to 0
+$$
+을 택할 수 있다. 이때\ 
+$\Hom_A(N, M) \subset \Hom_A((A/I^n)^{\oplus m}, M)$
+이고\  $i < \text{depth}_I(M)$에 대하여\ 
+$\Ext^i_A(N, M) \subset \text{Ext}^{i - 1}_A(N', M)$
+이다. 따라서 간단한 귀납 논증으로 보조정리의 마지막 명제가 성립한다.
+
+\medskip\noindent
+끝으로 (3)이 (1), (2)와 동치임을 보이자.
+Lemma \ref{dualizing-lemma-local-cohomology-ext}에 의해\ 
+$H^p_I(M) = \colim \Ext^p_A(A/I^n, M)$이다.
+따라서\  $i < \text{depth}_I(M)$이면\  $H^i_I(M) = 0$이다.
+$i = \text{depth}_I(M)$일 때\ 
+$\Ext_A^{i - 1}(I/I^n, M)$의 소멸을 사용하면 사상\ 
+$\Ext_A^i(A/I, M) \to H_I^i(M)$이 단사임을 알 수 있고,
+이는 올바른 차수에서의 비소멸을 증명한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-depth-in-ses}
+$A$를\  Noether 환이라 하자. 유한\  $A$-가군의 짧은 완전열\ 
+$0 \to N' \to N \to N'' \to 0$이 주어졌다고 하자.
+$I \subset A$를 아이디얼이라 하자.
+\begin{enumerate}
+\item
+$\text{depth}_I(N) \geq \min\{\text{depth}_I(N'), \text{depth}_I(N'')\}$
+\item
+$\text{depth}_I(N'') \geq \min\{\text{depth}_I(N), \text{depth}_I(N') - 1\}$
+\item
+$\text{depth}_I(N') \geq \min\{\text{depth}_I(N), \text{depth}_I(N'') + 1\}$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$IN \not = N$, $IN' \not = N'$, $IN'' \not = N''$이라고 하자.
+그러면\  Lemma \ref{dualizing-lemma-depth}에서 보듯\ 
+$\Ext^i(A/I, N)$ 군을 이용한 깊이의 특성화를 사용할 수 있고,
+Algebra, Lemma \ref{algebra-lemma-long-exact-seq-ext}의 긴 코호몰로지 완전열
+$$
+\begin{matrix}
+0
+\to \Hom_A(A/I, N')
+\to \Hom_A(A/I, N)
+\to \Hom_A(A/I, N'')
+\\
+\phantom{0\ }
+\to \Ext^1_A(A/I, N')
+\to \Ext^1_A(A/I, N)
+\to \Ext^1_A(A/I, N'')
+\to \ldots
+\end{matrix}
+$$
+을 사용할 수 있다.
+$IN = N$인 경우에는 모든\  $i$에 대해\  $\Ext^i_A(A/I, N) = 0$이므로
+이 논증이 역시 성립한다.
+$IN' \not = N'$ 및/또는\  $IN'' \not = N''$인 경우도 마찬가지이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-depth-drops-by-one}
+$A$를\  Noether 환, $I \subset A$를 아이디얼이라 하고,
+$M$을\  $IM \not = M$인 유한\  $A$-가군이라 하자.
+\begin{enumerate}
+\item $x \in I$가\  $M$ 위의 영인자가 아니면,
+$\text{depth}_I(M/xM) = \text{depth}_I(M) - 1$이다.
+\item $I$ 안의 임의의\  $M$-정칙열\  $x_1, \ldots, x_r$은
+길이가\  $\text{depth}_I(M)$인\  $I$ 안의\  $M$-정칙열로 연장될 수 있다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)는 (1)의 형식적 귀결이다. $x \in I$가 (1)과 같다고 하자.
+짧은 완전열\  $0 \to M \to M \to M/xM \to 0$과\ 
+Lemma \ref{dualizing-lemma-depth-in-ses}에 의해\ 
+$\text{depth}_I(M/xM) \geq \text{depth}_I(M) - 1$이다.
+한편\  $x_1, \ldots, x_r \in I$가\  $M/xM$에 대한 정칙열이면,
+$x, x_1, \ldots, x_r$은\  $M$에 대한 정칙열이다. 따라서 (1)이 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-depth-CM}
+$R$을\  Noether 국소환이라 하자. $M$이 유한\  Cohen--Macaulay
+$R$-가군이고\  $I \subset R$이 자명하지 않은 아이디얼이면
+$$
+\text{depth}_I(M) = \dim(\text{Supp}(M)) - \dim(\text{Supp}(M/IM)).
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+이를\  $\text{depth}_I(M)$에 관한 귀납법으로 증명한다.
+
+\medskip\noindent
+$\text{depth}_I(M) = 0$이면\  $I$는\  $M$의 연관 소아이디얼\ 
+$\mathfrak p$ 중 하나에 포함된다
+(Algebra, Lemma \ref{algebra-lemma-ideal-nonzerodivisor}).
+그러면\  $\mathfrak p \in \text{Supp}(M/IM)$이므로\ 
+$\dim(\text{Supp}(M/IM)) \geq \dim(R/\mathfrak p) = \dim(\text{Supp}(M))$
+이다. 여기서 등식은\ 
+Algebra, Lemma \ref{algebra-lemma-CM-ass-minimal-support}에 의해 성립한다.
+따라서 이 경우 보조정리가 성립한다.
+
+\medskip\noindent
+$\text{depth}_I(M) > 0$이면\  $M$ 위의 영인자가 아닌\  $x \in I$를 택한다.
+$(M/xM)/I(M/xM) = M/IM$임에 유의하자.
+한편\  Lemma \ref{dualizing-lemma-depth-drops-by-one}에 의해\ 
+$\text{depth}_I(M/xM) = \text{depth}_I(M) - 1$이고,
+Algebra, Lemma \ref{algebra-lemma-one-equation-module}에 의해\ 
+$\dim(\text{Supp}(M/xM)) = \dim(\text{Supp}(M)) -  1$이다.
+따라서 귀납가정으로 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-depth-flat-CM}
+$R \to S$를\  Noether 국소환의 평탄 국소환 준동형이라 하자.
+$\mathfrak m \subset R$로 극대 아이디얼을 나타내자.
+$I \subset S$를 아이디얼이라 하자.
+$S/\mathfrak mS$가\  Cohen--Macaulay이면
+$$
+\text{depth}_I(S) \geq \dim(S/\mathfrak mS) - \dim(S/\mathfrak mS + I)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+Algebra, Lemma \ref{algebra-lemma-grothendieck-regular-sequence}에 의해\ 
+$S/\mathfrak mS$에서 정칙열로 가는\  $S$의 임의의 열은\  $S$에서 정칙열이다.
+따라서\  $R$이 체인 경우만 증명하면 충분하다.
+이는\  Lemma \ref{dualizing-lemma-depth-CM}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-divide-by-torsion}
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+$M$을\  $A$-가군이라 하고\  $Z = V(I)$라 하자.
+그러면\  $H^0_I(M) = H^0_Z(M)$이다. $N$을 이 공통값이라 하고\ 
+$M' = M/N$이라 놓자. 그러면
+\begin{enumerate}
+\item 모든\  $p > 0$에 대해\ 
+$H^0_I(M') = 0$이고\  $H^p_I(M) = H^p_I(M')$이며\  $H^p_I(N) = 0$이다,
+\item 모든\  $p > 0$에 대해\ 
+$H^0_Z(M') = 0$이고\  $H^p_Z(M) = H^p_Z(M')$이며\  $H^p_Z(N) = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+정의에 의해\  $H^0_I(M) = M[I^\infty]$은\  $I$-멱 영이다.
+$I = (f_1, \ldots, f_r)$이면\ 
+Lemma \ref{dualizing-lemma-local-cohomology-adjoint}에 의해
+$$
+H^0_Z(M) = \Ker(M \longrightarrow M_{f_1} \times \ldots \times M_{f_r})
+$$
+임을 알 수 있다. 따라서\  $H^0_I(M) \subset H^0_Z(M)$이다.
+역으로\  $x \in H^0_Z(M)$이면 어떤\  $e_i \geq 1$에 대해
+그 원소는\  $f_i^{e_i}$에 의해 소멸되므로\  $I$의 어떤 멱에 의해 소멸된다.
+이는 첫째 등식을 증명하며, 또한\  $N$이\  $I$-멱 영임을 보인다.
+Lemma \ref{dualizing-lemma-adjoint}에 의해\  $R\Gamma_I(N) = N$이고,
+Lemma \ref{dualizing-lemma-local-cohomology-adjoint}에 의해\  $R\Gamma_Z(N) = N$이다.
+이는 (1)과 (2)에서\  $H^p_I(N)$과\  $H^p_Z(N)$의 고차 소멸을 증명한다.
+앞의 논의와\  More on Algebra, Lemma
+\ref{more-algebra-lemma-divide-by-torsion}에 의해\ 
+$M'$이\  $I$-멱 영 원소를 갖지 않는다는 사실에서\ 
+$H^0_I(M')$과\  $H^0_Z(M')$의 소멸이 따른다.
+$M$과\  $M'$의 고차 코호몰로지가 같다는 것은 긴 코호몰로지 완전열에서 즉시 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{꼬임 가군과 완비 가군}
+\label{dualizing-section-torsion-and-complete}
+
+\noindent
+$A$를 환이라 하고\  $I$를 유한 생성 아이디얼이라 하자.
+이 경우\ 
+$D_{I^\infty\text{-torsion}}(A)$, 즉\ 
+$I$-멱 꼬임 코호몰로지 가군을 갖는 복합체들의 유도 범주
+(Section \ref{dualizing-section-local-cohomology})와
+유도 완비 복합체들의 유도 범주\ 
+$D_{comp}(A, I)$
+(More on Algebra, Section \ref{more-algebra-section-derived-completion})를
+생각할 수 있다. 이 절에서는 이 범주들이 동치임을 보인다.
+더 일반적인 명제는\  \cite{Dwyer-Greenlees}에서 찾을 수 있다.
+
+\begin{lemma}
+\label{dualizing-lemma-complete-and-local}
+\begin{slogan}
+이러한 성격의 결과를 때때로\  Greenlees--May 쌍대성이라 부른다.
+\end{slogan}
+$A$를 환이라 하고\  $I$를 유한 생성 아이디얼이라 하자.
+$R\Gamma_Z$를\  Lemma \ref{dualizing-lemma-local-cohomology-adjoint}에서와 같이 두자.
+${\ }^\wedge$로\  More on Algebra, Lemma
+\ref{more-algebra-lemma-derived-completion}에서와 같은 유도 완비화를 나타내자.
+$D(A)$의 대상\  $K$에 대하여
+$$
+R\Gamma_Z(K^\wedge) = R\Gamma_Z(K)
+\quad\text{and}\quad
+(R\Gamma_Z(K))^\wedge = K^\wedge
+$$
+가\  $D(A)$에서 성립한다.
+\end{lemma}
+
+\begin{proof}
+$I$를 생성하는\  $f_1, \ldots, f_r \in A$를 택하자.
+More on Algebra, Lemma \ref{more-algebra-lemma-derived-completion}에 의해
+$$
+K^\wedge = R\Hom_A\left((A \to \prod A_{f_{i_0}}
+\to \prod A_{f_{i_0i_1}} \to \ldots \to A_{f_1 \ldots f_r}), K\right)
+$$
+임을 상기하자. 따라서 원뿔\  $C = \text{Cone}(K \to K^\wedge)$는
+$$
+R\Hom_A\left((\prod A_{f_{i_0}}
+\to \prod A_{f_{i_0i_1}} \to \ldots \to A_{f_1 \ldots f_r}), K\right)
+$$
+로 주어진다. 이는 연속 몫이
+$$
+R\Hom_A(A_{f_{i_0} \ldots f_{i_p}}, K), \quad p > 0
+$$
+과 동형인 유한 여과가 주어진 복합체로 표현될 수 있다.
+이 복합체들은\  $R\Gamma_Z$를 적용하면 영이 된다.
+Lemma \ref{dualizing-lemma-local-cohomology-vanishes}를 보라.
+구별 삼각형\  $K \to K^\wedge \to C \to K[1]$에\  $R\Gamma_Z$를
+적용하면 보조정리의 첫째 공식이 성립함을 알 수 있다.
+
+\medskip\noindent
+Lemma \ref{dualizing-lemma-local-cohomology-adjoint}에 의해
+$$
+R\Gamma_Z(K) =
+K \otimes^\mathbf{L} (A \to \prod A_{f_{i_0}}
+\to \prod A_{f_{i_0i_1}} \to \ldots \to A_{f_1 \ldots f_r})
+$$
+임을 상기하자. 따라서 원뿔\  $C = \text{Cone}(R\Gamma_Z(K) \to K)$는
+연속 몫이
+$$
+K \otimes_A A_{f_{i_0} \ldots f_{i_p}}, \quad p > 0
+$$
+과 동형인 유한 여과가 주어진 복합체로 표현될 수 있다.
+이 복합체들은\  ${\ }^\wedge$를 적용하면 영이 된다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-derived-completion-vanishes}를 보라.
+구별 삼각형\ 
+$R\Gamma_Z(K) \to K \to C \to R\Gamma_Z(K)[1]$에
+유도 완비화를 적용하면 보조정리의 둘째 공식이 성립함을 알 수 있다.
+\end{proof}
+
+\noindent
+다음 결과는 삼각 범주의 허용 부분범주에 관한 매우 일반적인 현상의 특수한 경우이다.
+
+\begin{proposition}
+\label{dualizing-proposition-torsion-complete}
+\begin{reference}
+이는\  \cite[Theorem 1.1]{Porta-Liran-Yekutieli}의 특수한 경우이다.
+\end{reference}
+$A$를 환이라 하고\  $I \subset A$를 유한 생성 아이디얼이라 하자.
+함자\  $R\Gamma_Z$와\  ${\ }^\wedge$는 서로 준역인 범주의 동치
+$$
+D_{I^\infty\text{-torsion}}(A) \leftrightarrow D_{comp}(A, I)
+$$
+를 정의한다.
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-complete-and-local}에서 즉시 따른다.
+\end{proof}
+
+\noindent
+위 명제의 다음 부가 결과는 사상에 대한 대응을 더 정밀하게 만든다.
+
+\begin{lemma}
+\label{dualizing-lemma-compare-RHom}
+Lemma \ref{dualizing-lemma-complete-and-local}의 표기를 사용하자.
+$D(A)$의 대상\  $K, L$에 대하여\  $D(A)$ 안의 표준적 동형
+$$
+R\Hom_A(K^\wedge, L^\wedge) \longrightarrow R\Hom_A(R\Gamma_Z(K), R\Gamma_Z(L))
+$$
+이 있다.
+\end{lemma}
+
+\begin{proof}
+$I = (f_1, \ldots, f_r)$라고 하자.
+$C = (A \to \prod A_{f_i} \to \ldots \to A_{f_1 \ldots f_r})$로
+교대\  {\v C}ech 복합체를 나타내자.
+그러면 유도 완비화는\  $R\Hom_A(C, -)$로 주어지고
+(More on Algebra, Lemma \ref{more-algebra-lemma-derived-completion}),
+국소 코호몰로지는\  $C \otimes^\mathbf{L} -$로 주어진다
+(Lemma \ref{dualizing-lemma-local-cohomology-adjoint}).
+동형
+$$
+R\Hom_A(K \otimes^\mathbf{L} C, L \otimes^\mathbf{L} C) =
+R\Hom_A(K, R\Hom_A(C,  L \otimes^\mathbf{L} C))
+$$
+(More on Algebra, Lemma \ref{more-algebra-lemma-internal-hom})과 사상
+$$
+L \to R\Hom_A(C,  L \otimes^\mathbf{L} C)
+$$
+(More on Algebra, Lemma \ref{more-algebra-lemma-internal-hom-diagonal})을
+결합하여 사상
+$$
+\gamma :
+R\Hom_A(K, L)
+\longrightarrow
+R\Hom_A(K \otimes^\mathbf{L} C, L \otimes^\mathbf{L} C)
+$$
+을 얻는다. 한편 우변은
+$$
+R\Hom_A(C, R\Hom_A(K, L \otimes^\mathbf{L} C)).
+$$
+와 같으므로 유도 완비이다.
+따라서 유도 완비화의 보편 성질에 의해\  $\gamma$는\ 
+$R\Hom_A(K, L)$의 유도 완비화를 통하여 분해된다.
+그러나\  More on Algebra, Lemma
+\ref{more-algebra-lemma-completion-RHom}에 의해
+유도 완비화는\  $R\Hom_A$의 안으로 들어가므로 원하는 사상을 얻는다.
+
+\medskip\noindent
+보조정리의 사상이 동형임을 보이기 위해\ 
+$K$와\  $L$이 유도 완비라고, 즉\ 
+$K = K^\wedge$이고\  $L = L^\wedge$라고 가정해도 된다.
+이 경우 살펴보는 사상은
+$$
+\gamma : R\Hom_A(K, L) \longrightarrow R\Hom_A(R\Gamma_Z(K), R\Gamma_Z(L))
+$$
+이다. Proposition \ref{dualizing-proposition-torsion-complete}에 의해
+좌변과 우변의 코호몰로지 군들이 일치함을 안다.
+다시 말해 사상\  $\gamma$가\  $D(A)$의 사상\ 
+$\alpha : K \to L$을 사상\ 
+$R\Gamma_Z(\alpha) : R\Gamma_Z(K) \to R\Gamma_Z(L)$로
+보냄을 확인하면 된다.
+그 확인은 생략한다(힌트: $R\Gamma_Z(\alpha)$는 바로 사상\ 
+$\alpha \otimes \text{id}_C :
+K \otimes^\mathbf{L} C
+\to
+L \otimes^\mathbf{L} C$이며, 이는\  More on Algebra, Lemma
+\ref{more-algebra-lemma-internal-hom-diagonal}에서의 사상 구성과 거의 같다).
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-completion-local}
+$A$를\  Noether 환이라 하고\  $I$와\  $J$를 그 아이디얼이라 하자.
+$M$을 유한\  $A$-가군이라 하고\  $Z =V(J)$라 놓자.
+국소 코호몰로지의 유도\  $I$-진 완비화\  $R\Gamma_Z(M)^\wedge$를
+생각하자. 그러면
+\begin{enumerate}
+\item $R\Gamma_Z(M)^\wedge = R\lim R\Gamma_Z(M/I^nM)$이고,
+\item 짧은 완전열
+$$
+0 \to R^1\lim H^{i - 1}_Z(M/I^nM) \to H^i(R\Gamma_Z(M)^\wedge) \to
+\lim H^i_Z(M/I^nM) \to 0
+$$
+들이 있다.
+\end{enumerate}
+특히\  $R\Gamma_Z(M)^\wedge$의 음의 차수 코호몰로지는 영이다.
+\end{lemma}
+
+\begin{proof}
+$J = (g_1, \ldots, g_m)$이라고 하자.
+Lemma \ref{dualizing-lemma-local-cohomology-adjoint}에 의해\  $R\Gamma_Z(M)$은 복합체
+$$
+M \to \prod M_{g_{j_0}} \to \prod M_{g_{j_0}g_{j_1}} \to
+\ldots \to M_{g_1g_2\ldots g_m}
+$$
+로 계산된다. More on Algebra, Lemma
+\ref{more-algebra-lemma-when-derived-completion-is-completion}에 의해
+이 복합체의 유도\  $I$-진 완비화는 통상적 완비화들의 복합체
+$$
+\lim M/I^nM \to \prod \lim (M/I^nM)_{g_{j_0}} \to
+\ldots \to \lim (M/I^nM)_{g_1g_2\ldots g_m}
+$$
+로 주어진다. 한편\  $R\Gamma_Z(M/I^nM)$은 복합체\ 
+$ M/I^nM \to \prod (M/I^nM)_{g_{j_0}} \to
+\ldots \to (M/I^nM)_{g_1g_2\ldots g_m}$로 계산되고,
+이 복합체들 사이의 전이 사상들은 전사이다.
+따라서\  More on Algebra, Lemma
+\ref{more-algebra-lemma-compute-Rlim-modules}에 의해 (1)이 성립한다.
+이제 (2)는\  More on Algebra, Lemma
+\ref{more-algebra-lemma-break-long-exact-sequence-modules}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-completion-local-H0}
+Lemma \ref{dualizing-lemma-completion-local}의 표기와 가정을 사용하고,
+$A$가\  $I$-진 완비라고 하자. 그러면
+$$
+H^0(R\Gamma_Z(M)^\wedge) = \colim H^0_{V(J')}(M)
+$$
+이다. 여기서 여과 쌍극한은\ 
+$V(J') \cap V(I) = V(J) \cap V(I)$를 만족하는\  $J' \subset J$에 걸쳐 취한다.
+\end{lemma}
+
+\begin{proof}
+$M$은 유한\  $A$-가군이므로 그 가군\  $M$은\  $I$-진 완비이다.
+Lemma \ref{dualizing-lemma-completion-local}의 증명에서
+$$
+H^0(R\Gamma_Z(M)^\wedge) =
+\Ker(M^\wedge \to \prod M_{g_j}^\wedge) =
+\Ker(M \to \prod M_{g_j}^\wedge)
+$$
+임을 알 수 있다. 여기서 우변에는 통상적\  $I$-진 완비화를 사용한다.
+$M_{g_j} \to M_{g_j}^\wedge$의 핵\  $K_j$는\  $\bigcap I^n M_{g_j}$이다.
+Algebra, Lemma \ref{algebra-lemma-intersection-powers-ideal-module}에 의해
+모든\  $\mathfrak p \in V(IA_{g_j})$에 대하여\  $f \in A_{g_j}$,
+$f \not \in \mathfrak p$이며\  $(K_j)_f = 0$인 것을 찾을 수 있다.
+
+\medskip\noindent
+$s \in H^0(R\Gamma_Z(M)^\wedge)$라 하자.
+위 논의에 따라\  $s$를\  $M$의 원소로 생각할 수 있다.
+$s$의 지지집합\  $Z'$와\  $D(g_j)$의 교집합은 위 논의에 의해\ 
+$D(g_j) \cap V(I)$와 서로소이다.
+따라서\  $Z'$는\  $\Spec(A)$의 닫힌 부분집합이고\ 
+$Z' \cap V(I) \subset V(J)$이다.
+그러면 어떤 아이디얼\  $J' \subset J$에 대해\ 
+$Z' \cup V(J) = V(J')$이고\ 
+$V(J') \cap V(I) \subset V(J)$이며\ 
+$s \in H^0_{V(J')}(M)$이다.
+역으로\  $J' \subset J$이고\ 
+$V(J') \cap V(I) \subset V(J)$인 경우, 모든\  $j$에 대해
+임의의\  $s \in H^0_{V(J')}(M)$는\  $M_{g_j}^\wedge$에서 영으로 간다.
+이로써 보조정리가 증명된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{환 사상에 대한 자명한 쌍대성}
+\label{dualizing-section-trivial}
+
+\noindent
+$A \to B$를 환 준동형이라 하자. 함자
+$$
+\Hom_A(B, -) : \text{Mod}_A \longrightarrow \text{Mod}_B,\quad
+M \longmapsto \Hom_A(B, M)
+$$
+를 생각하자. 이 함자는 왼쪽 완전이고 유도 확장\ 
+$R\Hom(B, -) : D(A) \to D(B)$를 갖는다.
+
+\begin{lemma}
+\label{dualizing-lemma-right-adjoint}
+$A \to B$를 환 준동형이라 하자. 위에서 구성한 함자\ 
+$R\Hom(B, -)$는 제한 함자\ 
+$D(B) \to D(A)$의 오른쪽 수반이다.
+\end{lemma}
+
+\begin{proof}
+Algebra, Lemma \ref{algebra-lemma-adjoint-hom-restrict}에 의해
+제한과\  $\Hom_A(B, -)$가 수반 함자라는 사실에서 따른다.
+Derived Categories, Lemma \ref{derived-lemma-derived-adjoint-functors}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-composition-right-adjoints}
+$A \to B \to C$를 환 사상들이라 하자. 그러면\ 
+$R\Hom(C, -) \circ R\Hom(B, -) : D(A) \to D(C)$는 함자\ 
+$R\Hom(C, -) : D(A) \to D(C)$이다.
+\end{lemma}
+
+\begin{proof}
+오른쪽 수반의 유일성과\  Lemma \ref{dualizing-lemma-right-adjoint}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-RHom-ext}
+$\varphi : A \to B$를 환 준동형이라 하자. $D(A)$의\  $K$에 대하여
+$$
+\varphi_*R\Hom(B, K) = R\Hom_A(B, K)
+$$
+이다. 여기서\  $\varphi_* : D(B) \to D(A)$는 제한이다. 특히\ 
+$R^q\Hom(B, K) = \Ext_A^q(B, K)$이다.
+\end{lemma}
+
+\begin{proof}
+$K$를 나타내는\  K-단사 복합체\  $I^\bullet$을 택하자.
+그러면\  $R\Hom(B, K)$는\  $B$-가군의 복합체\ 
+$\Hom_A(B, I^\bullet)$로 나타난다.
+이 복합체는\  $A$-가군의 복합체로서\  $R\Hom_A(B, K)$를 나타내므로
+보조정리가 성립한다.
+\end{proof}
+
+\noindent
+$A$를\  Noether 환이라 하자. 코호몰로지 가군이 모두 유한\  $A$-가군인\ 
+$D(A)$의 대상\  $K$들로 이루어진 충만 부분범주를
+$$
+D_{\textit{Coh}}(A) \subset D(A)
+$$
+로 나타내기로 한다. $A$가\  Noether 환이면 유한\  $A$-가군의 부분범주가\ 
+$\text{Mod}_A$의\  Serre 부분범주이므로 이는\ 
+Derived Categories, Section \ref{derived-section-triangulated-sub}에 의해 잘 정의된다.
+
+\begin{lemma}
+\label{dualizing-lemma-exact-support-coherent}
+위의 표기를 사용하고\  $A \to B$가\  Noether 환들의 유한 환 사상이라고 하자.
+그러면\  $R\Hom(B, -)$는\ 
+$D^+_{\textit{Coh}}(A)$를\  $D^+_{\textit{Coh}}(B)$ 안으로 보낸다.
+\end{lemma}
+
+\begin{proof}
+$K \in D^+(A)$가 유한 코호몰로지 가군들을 가지면
+복합체\  $R\Hom(B, K)$도 유한 코호몰로지 가군들을 가짐을 보여야 한다.
+Ext 가군\  $\Ext^i_A(B, K)$들이 유한\  $A$-가군임을 보일 수 있다면,
+이는 예를 들어\  Lemma \ref{dualizing-lemma-RHom-ext}에서 따른다.
+$K$가 아래로 유계이므로 수렴하는 스펙트럼 열
+$$
+\Ext^p_A(B, H^q(K)) \Rightarrow \text{Ext}^{p + q}_A(B, K)
+$$
+이 있다. Algebra, Lemma \ref{algebra-lemma-ext-noetherian}에 의해
+가군\  $\Ext^p_A(B, H^q(K))$들이 유한이므로 증명이 끝난다.
+\end{proof}
+
+\begin{remark}
+\label{dualizing-remark-exact-support}
+$A$를 환이라 하고\  $I \subset A$를 아이디얼이라 하자.
+$B = A/I$로 놓자. 이 경우 함자\  $\Hom_A(B, -)$는 함자
+$$
+\text{Mod}_A \longrightarrow \text{Mod}_B,\quad M \longmapsto M[I]
+$$
+와 같다. 이 함자는\  $M$을\  $I$-꼬임 부분가군으로 보낸다.
+\end{remark}
+
+\begin{situation}
+\label{dualizing-situation-resolution}
+$R \to A$를 환 사상이라 하자.
+이 장의 뒤에서 유용하게 쓰일\  $R\Hom(A, -)$의 다른 구성을 제시하겠다.
+구체적으로\  $R$ 위의 미분 등급 대수\  $(E, d)$와 준동형\ 
+$E \to A$가 주어졌다고 하자. 여기서\  $A$는 미분이 영인\ 
+$R$ 위의 미분 등급 대수로 본다. 그러면 가환 그림
+$$
+\vcenter{
+\xymatrix{
+D(E, \text{d}) \ar[rd] & &  D(A) \ar[ll] \ar[ld] \\
+& D(R)
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+D(E, \text{d}) \ar[rr]_{- \otimes_E^\mathbf{L} A} & &  D(A) \\
+& D(R) \ar[lu]^{- \otimes_R^\mathbf{L} E} \ar[ru]_{- \otimes_R^\mathbf{L} A}
+}
+}
+$$
+들이 있다. 여기서 수평 화살표들은 범주의 동치이다
+(Differential Graded Algebra, Lemma \ref{dga-lemma-qis-equivalence}).
+첫째 그림이 가환함은 자명하다.
+둘째 그림은 첫째 그림이 가환하고 우리 함자들이 그 왼쪽 수반이므로
+가환한다
+(Differential Graded Algebra, Example \ref{dga-example-map-hom-tensor}).
+또는\  $E \otimes^\mathbf{L}_E A = E \otimes_E A$와\ 
+Differential Graded Algebra, Lemma
+\ref{dga-lemma-compose-tensor-functors-general}을 사용해도 된다.
+\end{situation}
+
+\begin{lemma}
+\label{dualizing-lemma-RHom-dga}
+Situation \ref{dualizing-situation-resolution}에서 함자\  $R\Hom(A, -)$는\ 
+$R\Hom(E, -) : D(R) \to D(E, \text{d})$와 동치\ 
+$- \otimes^\mathbf{L}_E A : D(E, \text{d}) \to D(A)$의 합성과 같다.
+\end{lemma}
+
+\begin{proof}
+$R\Hom(E, -)$가\  $- \otimes^\mathbf{L}_R E$의 오른쪽 수반이기 때문이다.
+Differential Graded Algebra, Lemma \ref{dga-lemma-tensor-hom-adjoint}를 보라.
+따라서 이 함자는 사상\  $R \to A$에 대한 함자\  $R\Hom(A, -)$와
+같은 역할을 한다(Lemma \ref{dualizing-lemma-right-adjoint}).
+그러므로 이 함자들은 동치\ 
+$- \otimes^\mathbf{L}_E A : D(E, \text{d}) \to D(A)$를 통하여 대응해야 한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-RHom-is-tensor}
+Situation \ref{dualizing-situation-resolution}에서 다음을 가정하자.
+\begin{enumerate}
+\item $D(R)$의 대상으로 본\  $E$는 콤팩트이고,
+\item $N = \Hom^\bullet_R(E^\bullet, R)$은\  $R\Hom(E, R)$을 계산한다.
+\end{enumerate}
+그러면\  $R\Hom(E, -) : D(R) \to D(E)$는\ 
+$K \mapsto K \otimes_R^\mathbf{L} N$과 동형이다.
+\end{lemma}
+
+\begin{proof}
+Differential Graded Algebra, Lemma
+\ref{dga-lemma-RHom-is-tensor}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-RHom-is-tensor-special}
+Situation \ref{dualizing-situation-resolution}에서\  $A$가 완전\  $R$-가군이라고 하자.
+그러면
+$$
+R\Hom(A, -) : D(R) \to D(A)
+$$
+는\  $K \mapsto K \otimes_R^\mathbf{L} M$으로 주어진다.
+여기서\  $M = R\Hom(A, R) \in D(A)$이다.
+\end{lemma}
+
+\begin{proof}
+Divided Power Algebra, Lemma
+\ref{dpa-lemma-tate-resoluton-pseudo-coherent-ring-map}을 적용하여\ 
+$R$ 위의\  $A$의\  Tate 해소\  $(E, \text{d})$를 택한다.
+$E^i = 0$이고 이는\  $i > 0$일 때이며,
+$E^0 = R[x_1, \ldots, x_n]$은 다항식 대수이다. 또한\ 
+$i < 0$에 대해\  $E^i$는 유한 자유\  $E^0$-가군임에 유의하자.
+따라서\  $R$-가군의 복합체로 본\  $E$는 자유\  $R$-가군의 위로 유계인 복합체이다.
+Lemma \ref{dualizing-lemma-RHom-is-tensor}의 가정들을 확인하자.
+첫째 가정은\  $A$가 완전이므로 성립하고
+(따라서\  More on Algebra, Proposition
+\ref{more-algebra-proposition-perfect-is-compact}에 의해 콤팩트이다),
+둘째 가정은\  More on Algebra, Lemma
+\ref{more-algebra-lemma-RHom-out-of-projective}에 의해 성립한다.
+이 보조정리에서 어떤 미분 등급\  $E$-가군\  $N$에 대하여\ 
+$K \mapsto R\Hom(E, K)$가\  $K \mapsto K \otimes_R^\mathbf{L} N$과
+동형이라고 결론 내린다. $D(A)$에서
+$$
+(R \otimes_R E) \otimes_E^\mathbf{L} A = R \otimes_E E \otimes_E A
+$$
+임을 관찰하자. 따라서\  Differential Graded Algebra, Lemma
+\ref{dga-lemma-compose-tensor-functors-general-algebra}에 의해\ 
+$- \otimes_R^\mathbf{L} N$과\  $- \otimes_R^\mathbf{L} A$의 합성은
+어떤\  $M \in D(A)$에 대하여\  $- \otimes_R M$ 꼴이라고 결론 내린다.
+증명을 끝내기 위해\  Lemma \ref{dualizing-lemma-RHom-dga}를 적용한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-compute-for-effective-Cartier-algebraic}
+$R \to A$를 핵\  $I$가 가역\  $R$-가군인 전사 환 사상이라 하자.
+함자\  $R\Hom(A, -) : D(R) \to D(A)$는\ 
+$K \mapsto K \otimes_R^\mathbf{L} N[-1]$과 동형이다.
+여기서\  $N$은 가역\  $A$-가군\  $I \otimes_R A$의 역이다.
+\end{lemma}
+
+\begin{proof}
+$A$는 유한 사영 해소
+$$
+0 \to I \to R \to A \to 0
+$$
+를 가지므로\  $A$는 완전\  $R$-가군이다.
+Lemma \ref{dualizing-lemma-RHom-is-tensor-special}에 의해\ 
+$R\Hom(A, R)$이\  $D(A)$에서\  $N[-1]$로 나타남을 보이면 충분하다.
+이는\  $R\Hom(A, R)$이 유일한 영이 아닌 코호몰로지 가군,
+즉 차수\  $1$의\  $N$을 가짐을 뜻한다.
+$\text{Mod}_A \to \text{Mod}_R$가 충실충만이므로 제한 함자\ 
+$i_* : D(A) \to D(R)$를 적용한 뒤 이를 증명하면 충분하다.
+Lemma \ref{dualizing-lemma-RHom-ext}에 의해
+$$
+i_*R\Hom(A, R) = R\Hom_R(A, R)
+$$
+이다. 위의 유한 사영 해소를 사용하면 뒤의 대상은
+차수\  $0$에\  $R$을 둔 복합체\  $R \to I^{\otimes -1}$로 나타난다.
+사상\  $R \to I^{\otimes -1}$는 단사이고 그 여핵은\  $N$이다.
+\end{proof}
+
+
+
+
+
+\section{자명한 쌍대성의 밑변환}
+\label{dualizing-section-base-change-trivial-duality}
+
+\noindent
+이 절에서는 환들의 코카르테시안 정사각형
+$$
+\xymatrix{
+A \ar[r]_\alpha & A' \\
+R \ar[u]^\varphi \ar[r]^\rho & R' \ar[u]_{\varphi'}
+}
+$$
+을 생각한다. 다시 말해\  $A' = A \otimes_R R'$이다.
+$A$와\  $R'$이\  $R$ 위에서 {\bf Tor 독립}이면 표준적인 밑변환 사상
+\begin{equation}
+\label{dualizing-equation-base-change}
+R\Hom(A, K) \otimes_A^\mathbf{L} A'
+\longrightarrow
+R\Hom(A', K \otimes_R^\mathbf{L} R')
+\end{equation}
+이 있다. 이는\  $D(R)$의\  $K$에 함자적이며\  $D(A')$ 안의 사상이다.
+실제로\  Lemma \ref{dualizing-lemma-right-adjoint}의 수반성에 의해 이러한 화살표를 주는 것은
+$$
+\varphi'_*\left(R\Hom(A, K) \otimes_A^\mathbf{L} A'\right)
+\longrightarrow
+K \otimes_R^\mathbf{L} R'
+$$
+이라는\  $D(R')$ 안의 사상을 주는 것과 같다.
+여기서\  $\varphi'_* : D(A') \to D(R')$는 제한 함자이다.
+좌변에\  More on Algebra, Lemma
+\ref{more-algebra-lemma-base-change-comparison}을 적용하면 이는
+$$
+\varphi_*(R\Hom(A, K)) \otimes_R^\mathbf{L} R'
+\longrightarrow
+K \otimes_R^\mathbf{L} R'
+$$
+이라는\  $D(R')$ 안의 사상을 주는 것과 같다.
+여기서\  $\varphi_* : D(A) \to D(R)$는 제한 함자이다.
+이 사상으로\  $can \otimes^\mathbf{L} \text{id}_{R'}$를 택할 수 있다.
+여기서\  $can : \varphi_*(R\Hom(A, K)) \to K$은\ 
+$R\Hom(A, -)$와\  $\varphi_*$ 사이 수반의 여단위원이다.
+
+\begin{lemma}
+\label{dualizing-lemma-check-base-change-is-iso}
+위 상황에서 사상 (\ref{dualizing-equation-base-change})이 동형일 필요충분조건은\ 
+More on Algebra, Lemma
+\ref{more-algebra-lemma-internal-hom-diagonal-better}의 사상
+$$
+R\Hom_R(A, K) \otimes_R^\mathbf{L} R'
+\longrightarrow
+R\Hom_R(A, K \otimes_R^\mathbf{L} R')
+$$
+이 동형인 것이다.
+\end{lemma}
+
+\begin{proof}
+그 사상이 동형임을 보이려면\  $\varphi'_*$를 적용한 뒤 동형임을 보이면 충분하다.
+(\ref{dualizing-equation-base-change})에 함자\  $\varphi'_*$를 적용하고\ 
+$A' = A \otimes_R^\mathbf{L} R'$임을 사용하면\ 
+More on Algebra, Equation
+(\ref{more-algebra-equation-base-change-RHom})의 유도\  Hom에 대한 밑변환 사상\ 
+$R\Hom_R(A, K) \otimes_R^\mathbf{L} R' \to
+R\Hom_{R'}(A \otimes_R^\mathbf{L} R', K \otimes_R^\mathbf{L} R')$
+을 얻는다. More on Algebra, Lemma
+\ref{more-algebra-lemma-base-change-RHom}의 증명에서와 똑같이
+좌변과 우변을 풀어 쓰고, 특히\  More on Algebra, Lemma
+\ref{more-algebra-lemma-upgrade-adjoint-tensor-RHom}을 사용하면
+원하는 결과를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-flat-bc-surjection}
+$R \to A$와\  $R \to R'$를 환 사상들이라 하고\ 
+$A' = A \otimes_R R'$라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $A$는\  $R$-가군으로서 준코히런트이다.
+\item $R'$은\  $R$-가군으로서 유한\  Tor 차원을 갖는다
+(예를 들어\  $R \to R'$가 평탄이다).
+\item $A$와\  $R'$은\  $R$ 위에서\  Tor 독립이다.
+\end{enumerate}
+그러면 모든\  $K \in D^+(R)$에 대하여
+(\ref{dualizing-equation-base-change})는 동형이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-check-base-change-is-iso}와\  More on Algebra, Lemma
+\ref{more-algebra-lemma-internal-hom-evaluate-tensor-isomorphism}의 (4)에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-bc-surjection}
+$R \to A$와\  $R \to R'$를 환 사상들이라 하고\ 
+$A' = A \otimes_R R'$라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $A$는\  $R$-가군으로서 완전이다.
+\item $A$와\  $R'$은\  $R$ 위에서\  Tor 독립이다.
+\end{enumerate}
+그러면 모든\  $K \in D(R)$에 대하여
+(\ref{dualizing-equation-base-change})는 동형이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-check-base-change-is-iso}와\  More on Algebra, Lemma
+\ref{more-algebra-lemma-internal-hom-evaluate-tensor-isomorphism}의 (1)에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+\section{쌍대화 복합체}
+\label{dualizing-section-dualizing}
+
+\noindent
+이 절에서는\  Noether 환의 쌍대화 복합체를 정의한다.
+
+\begin{definition}
+\label{dualizing-definition-dualizing}
+$A$를\  Noether 환이라 하자. {\it 쌍대화 복합체}란 다음을 만족하는\ 
+$A$-가군의 복합체\  $\omega_A^\bullet$이다.
+\begin{enumerate}
+\item $\omega_A^\bullet$은 유한 단사 차원을 갖는다.
+\item 모든\  $i$에 대하여\  $H^i(\omega_A^\bullet)$는 유한\  $A$-가군이다.
+\item $A \to R\Hom_A(\omega_A^\bullet, \omega_A^\bullet)$는 준동형이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 정의에 익숙해지는 데에는 시간이 걸린다.
+아래 보조정리들 가운데 일부는 증명을 읽지 않고 직접 증명해 보는 것이 좋을 수 있다.
+
+\begin{lemma}
+\label{dualizing-lemma-finite-ext-into-bounded-injective}
+$A$를\  Noether 환이라 하자. $K, L \in D_{\textit{Coh}}(A)$라 하고\ 
+$L$이 유한 단사 차원을 갖는다고 하자.
+그러면\  $R\Hom_A(K, L)$은\  $D_{\textit{Coh}}(A)$에 속한다.
+\end{lemma}
+
+\begin{proof}
+정수\  $n$을 택하고 구별 삼각형
+$$
+\tau_{\leq n}K \to K \to \tau_{\geq n + 1}K \to \tau_{\leq n}K[1]
+$$
+을 생각하자. Derived Categories, Remark
+\ref{derived-remark-truncation-distinguished-triangle}를 보라.
+$L$이 유한 단사 차원을 가지므로 어떤 상수\  $c$에 대해\ 
+$R\Hom_A(\tau_{\geq n + 1}K, L)$의\  $\geq c - n$ 차수 코호몰로지는 영이다.
+따라서\  $i$가 주어졌을 때 어떤\  $n \gg - i$에 대하여\ 
+$\Ext^i_A(K, L) \to \Ext^i_A(\tau_{\leq n}K, L)$은 동형이다.
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-coherent-internal-hom}을\  $\tau_{\leq n}K$와\  $L$에
+적용하면 모든\  $i$에 대해\  $\Ext^i_A(K, L)$이 유한\  $A$-가군이라고
+결론 내린다. 따라서\  $R\Hom_A(K, L)$은 실제로\ 
+$D_{\textit{Coh}}(A)$의 대상이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing}
+$A$를\  Noether 환이라 하자. $\omega_A^\bullet$이 쌍대화 복합체이면 함자
+$$
+D : K \longmapsto R\Hom_A(K, \omega_A^\bullet)
+$$
+는\  $D_{\textit{Coh}}(A) \to D_{\textit{Coh}}(A)$인 반동치이고,
+$D^+_{\textit{Coh}}(A)$와\  $D^-_{\textit{Coh}}(A)$를 서로 바꾸며,
+반동치\  $D^b_{\textit{Coh}}(A) \to D^b_{\textit{Coh}}(A)$를 유도한다.
+더욱이\  $D \circ D$는 항등 함자와 동형이다.
+\end{lemma}
+
+\begin{proof}
+$K$를\  $D_{\textit{Coh}}(A)$의 대상이라 하자.
+Lemma \ref{dualizing-lemma-finite-ext-into-bounded-injective}에 의해\ 
+$R\Hom_A(K, \omega_A^\bullet)$은\  $D_{\textit{Coh}}(A)$의 대상이다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-internal-hom-evaluate-isomorphism-technical}과
+쌍대화 복합체에 대한 가정에 의해 표준적 동형
+$$
+K = R\Hom_A(\omega_A^\bullet, \omega_A^\bullet) \otimes_A^\mathbf{L} K
+\longrightarrow
+R\Hom_A(R\Hom_A(K, \omega_A^\bullet), \omega_A^\bullet)
+$$
+을 얻는다. 따라서 우리 함자는 준역을 가지며 증명이 끝난다.
+\end{proof}
+
+\noindent
+$R$을 환이라 하자. $D(R)$의 대상\  $L$이 유도 텐서곱으로 주어지는\ 
+$D(R)$의 대칭 모노이드 구조에 대한 가역 대상이면 이를 {\it 가역}이라
+함을 상기하자. More on Algebra, Lemma
+\ref{more-algebra-lemma-invertible-derived}에서 이는 다음을 뜻함을 보았다:
+$L$은 완전이고, $L = \bigoplus H^n(L)[-n]$이며, 이 합은 유한이고,
+각\  $H^n(L)$은 유한 사영이며, 어떤 정수\  $n_i$에 대해\ 
+$L \otimes_R R_{f_i} \cong R_{f_i}[-n_i]$가 성립하는 열린 덮개\ 
+$\Spec(R) = \bigcup D(f_i)$가 있다.
+
+\begin{lemma}
+\label{dualizing-lemma-equivalence-comes-from-invertible}
+$A$를\  Noether 환이라 하자.
+$F : D^b_{\textit{Coh}}(A) \to D^b_{\textit{Coh}}(A)$를 범주의\ 
+$A$-선형 동치라 하자. 그러면\  $F(A)$는\  $D(A)$의 가역 대상이다.
+\end{lemma}
+
+\begin{proof}
+$\mathfrak m \subset A$를 극대 아이디얼이라 하고 그 잉여체를\  $\kappa$라 하자.
+대상\  $F(\kappa)$를 생각하자.
+$\kappa = \Hom_{D(A)}(\kappa, \kappa)$이므로\ 
+$F(\kappa)$의 모든 코호몰로지 군은\  $\mathfrak m$에 의해 소멸된다.
+또한
+$$
+\Ext^i_A(\kappa, \kappa) = \text{Ext}^i_A(F(\kappa), F(\kappa))
+= \Hom_{D(A)}(F(\kappa), F(\kappa)[i])
+$$
+가\  $i < 0$일 때 영임을 알 수 있다.
+$H^a(F(\kappa)) \not = 0$이고\  $H^b(F(\kappa)) \not = 0$이라고 하자.
+여기서\  $a$는 최소이고\  $b$는 최대이다
+(특히\  $a \leq b$이다). 그러면\  $D(A)$ 안에 영이 아닌 사상
+$$
+F(\kappa) \to H^b(F(\kappa))[-b] \to H^a(F(\kappa))[-b]
+\to F(\kappa)[a - b]
+$$
+이 있다(코호몰로지 위에 영이 아닌 사상을 유도하므로 영이 아니다).
+이는\  $b = a$임을 증명한다. 따라서\  $F(\kappa) = \kappa[-a]$이다.
+
+\medskip\noindent
+$G$를 우리 함자\  $F$의 준역이라 하자.
+위와 같이 논증하면\  $G(\kappa) = \kappa[-b]$인 정수\  $b$가 있다.
+합성하면\  $a + b = 0$을 얻는다.
+$\mathfrak m$의 어떤 멱에 의해 소멸되는 유한\  $A$-가군\  $E$를 택하자.
+$E$의 길이에 대한 귀납법으로 논증하면,
+$\mathfrak m$의 어떤 멱에 의해 소멸되는 어떤 유한\  $A$-가군\  $E'$에
+대해\  $G(E) = E'[-b]$임을 얻는다. 그러면\  $E[-a] = F(E')$이다.
+이제 군
+$$
+\Ext^i_A(A, E') = \text{Ext}^i_A(F(A), F(E')) =
+\Hom_{D(A)}(F(A), E[-a + i])
+$$
+을 생각하자. 좌변이 영이 아닐 필요충분조건은\  $i = 0$이고,
+그때 좌변은\  $E'$이다. 이를\  $E = E' = \kappa$에 적용하고\ 
+Nakayama 보조정리를 사용하면,
+$H^j(F(A))_\mathfrak m$은\  $j > a$일 때 영이고\ 
+$j = a$일 때\  $1$개의 원소로 생성됨을 알 수 있다.
+한편 어떤\  $j < a$에 대해\  $H^j(F(A))_\mathfrak m$이 영이 아니면,
+어떤\  $i < 0$과 어떤\  $E$에 대해 사상\ 
+$F(A) \to E[-a + i]$가 존재한다
+(More on Algebra, Lemma \ref{more-algebra-lemma-detect-cohomology}).
+이는 모순이다. 따라서 어떤\  $1$개의 원소로 생성된\ 
+$A_\mathfrak m$-가군\  $M$에 대해\ 
+$F(A)_\mathfrak m = M[-a]$이다.
+그러나
+$$
+A_\mathfrak m = \Hom_{D(A)}(A, A)_\mathfrak m =
+\Hom_{D(A)}(F(A), F(A))_\mathfrak m = \Hom_{A_\mathfrak m}(M, M)
+$$
+이므로\  $M \cong A_\mathfrak m$이다.
+따라서 어떤\  $f \in A$, $f \not \in \mathfrak m$에 대해\ 
+$F(A)_f$는\  $A_f[-a]$와 동형이다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-unique}
+$A$를\  Noether 환이라 하자. $\omega_A^\bullet$과\ 
+$(\omega'_A)^\bullet$이 쌍대화 복합체이면,
+어떤\  $D(A)$의 가역 대상\  $L$에 대하여\ 
+$(\omega'_A)^\bullet$은\ 
+$\omega_A^\bullet \otimes_A^\mathbf{L} L$과 준동형이다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{dualizing-lemma-dualizing}와\ 
+\ref{dualizing-lemma-equivalence-comes-from-invertible}에 의해 함자\ 
+$K \mapsto R\Hom_A(R\Hom_A(K, \omega_A^\bullet), (\omega_A')^\bullet)$는\ 
+$A$를 가역 대상\  $L$로 보낸다. 다시 말해 동형
+$$
+L \longrightarrow R\Hom_A(\omega_A^\bullet, (\omega_A')^\bullet)
+$$
+이 있다. $L$이 유한\  Tor 차원을 가지므로\  More on Algebra, Lemma
+\ref{more-algebra-lemma-internal-hom-evaluate-isomorphism-technical}을 적용하여
+$$
+R\Hom_A(\omega_A^\bullet, (\omega'_A)^\bullet) \otimes_A^\mathbf{L} K
+\longrightarrow
+R\Hom_A(R\Hom_A(K, \omega_A^\bullet), (\omega_A')^\bullet)
+$$
+가\  $D^b_{\textit{Coh}}(A)$의\  $K$에 대해 동형임을 알 수 있다.
+특히\  $K = \omega_A^\bullet$로 두면 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-localize}
+$A$를\  Noether 환이라 하고\  $B = S^{-1}A$를 국소화라 하자.
+$\omega_A^\bullet$이 쌍대화 복합체이면\ 
+$\omega_A^\bullet \otimes_A B$는\  $B$의 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$\omega_A^\bullet \to I^\bullet$을 준동형이라 하자.
+여기서\  $I^\bullet$은 단사들의 유계 복합체이다.
+그러면\  $S^{-1}I^\bullet$은\  $B = S^{-1}A$-가군인 단사들의 유계 복합체이고
+(Lemma \ref{dualizing-lemma-localization-injective-modules}),
+$\omega_A^\bullet \otimes_A B$를 나타낸다.
+따라서\  $\omega_A^\bullet \otimes_A B$는 유한 단사 차원을 갖는다.
+$A \to B$의 평탄성에 의해\ 
+$H^i(\omega_A^\bullet \otimes_A B) = H^i(\omega_A^\bullet) \otimes_A B$이므로\ 
+$\omega_A^\bullet \otimes_A B$는 유한 코호몰로지 가군들을 갖는다.
+마지막으로 사상
+$$
+B \longrightarrow
+R\Hom_A(\omega_A^\bullet \otimes_A B, \omega_A^\bullet \otimes_A B)
+$$
+은 준동형이다. 이 경우 내부\  Hom의 형성이 평탄 밑변환과 가환하기 때문이다.
+More on Algebra, Lemma \ref{more-algebra-lemma-base-change-RHom}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-glue}
+$A$를\  Noether 환이라 하자.
+$f_1, \ldots, f_n \in A$가 단위 아이디얼을 생성한다고 하자.
+$\omega_A^\bullet$을\  $A$-가군의 복합체라 하고,
+모든\  $i$에 대해\  $(\omega_A^\bullet)_{f_i}$가\ 
+$A_{f_i}$의 쌍대화 복합체라고 하자.
+그러면\  $\omega_A^\bullet$은\  $A$의 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+이중 복합체
+$$
+\prod\nolimits_{i_0} (\omega_A^\bullet)_{f_{i_0}}
+\to
+\prod\nolimits_{i_0 < i_1} (\omega_A^\bullet)_{f_{i_0}f_{i_1}}
+\to \ldots
+$$
+를 생각하자. 이에 연관된 전복합체는\  $\omega_A^\bullet$과 준동형이다.
+이는 예를 들어\  Descent, Remark
+\ref{descent-remark-standard-covering}이나\ 
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-alternating-cech-complex-complex-computes-cohomology}에서 따른다.
+가정에 의해 복합체\  $(\omega_A^\bullet)_{f_i}$는\ 
+$A_{f_i}$-가군의 복합체로서 유한 단사 차원을 갖는다.
+이는 모든\  $p > 0$에 대해 각 복합체\ 
+$(\omega_A^\bullet)_{f_{i_0} \ldots f_{i_p}}$가\ 
+$A_{f_{i_0} \ldots f_{i_p}}$ 위에서 유한 단사 차원을 가짐을 뜻한다.
+Lemma \ref{dualizing-lemma-localization-injective-modules}를 보라.
+다시 이는 모든\  $p > 0$에 대해 각 복합체\ 
+$(\omega_A^\bullet)_{f_{i_0} \ldots f_{i_p}}$가\  $A$ 위에서
+유한 단사 차원을 가짐을 뜻한다.
+Lemma \ref{dualizing-lemma-injective-flat}을 보라.
+따라서\  $\omega_A^\bullet$은\  $A$-가군의 복합체로서
+유한 단사 차원을 갖는다
+(유한 단사 차원을 갖는 등급 조각들로 된 유한 여과가 주어진 복합체로
+나타낼 수 있기 때문이다).
+각\  $i$에 대해\  $H^n(\omega_A^\bullet)_{f_i}$가 유한\ 
+$A_{f_i}$ 가군이므로\  $H^i(\omega_A^\bullet)$는 유한\  $A$-가군이다.
+Algebra, Lemma \ref{algebra-lemma-cover}를 보라.
+마지막으로 사상\  $A \to R\Hom_A(\omega_A^\bullet, \omega_A^\bullet)$을\ 
+$A_{f_i}$로 (유도) 밑변환한 것은\  More on Algebra, Lemma
+\ref{more-algebra-lemma-base-change-RHom}에 의해 사상\ 
+$A_{f_i} \to R\Hom_A((\omega_A^\bullet)_{f_i}, (\omega_A^\bullet)_{f_i})$이다.
+따라서\  $A \to R\Hom_A(\omega_A^\bullet, \omega_A^\bullet)$가
+동형임을 얻으며 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-finite}
+$A \to B$를\  Noether 환들의 유한 환 사상이라 하자.
+$\omega_A^\bullet$을 쌍대화 복합체라 하자.
+그러면\  $R\Hom(B, \omega_A^\bullet)$은\  $B$의 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$\omega_A^\bullet \to I^\bullet$을 준동형이라 하자.
+여기서\  $I^\bullet$은 단사들의 유계 복합체이다.
+그러면\  $\Hom_A(B, I^\bullet)$은\  $B$-가군인 단사들의 유계 복합체이고
+(Lemma \ref{dualizing-lemma-hom-injective}),
+$R\Hom(B, \omega_A^\bullet)$을 나타낸다.
+따라서\  $R\Hom(B, \omega_A^\bullet)$은 유한 단사 차원을 갖는다.
+Lemma \ref{dualizing-lemma-exact-support-coherent}에 의해 이는\ 
+$D_{\textit{Coh}}(B)$의 대상이다. 마지막으로 다음과 같이 계산한다.
+$$
+\Hom_{D(B)}(R\Hom(B, \omega_A^\bullet), R\Hom(B, \omega_A^\bullet)) =
+\Hom_{D(A)}(R\Hom(B, \omega_A^\bullet), \omega_A^\bullet) = B
+$$
+그리고\  $n \not = 0$에 대해 다음과 같이 계산한다.
+$$
+\Hom_{D(B)}(R\Hom(B, \omega_A^\bullet), R\Hom(B, \omega_A^\bullet)[n]) =
+\Hom_{D(A)}(R\Hom(B, \omega_A^\bullet), \omega_A^\bullet[n]) = 0
+$$
+이는 쌍대화 복합체의 마지막 성질을 증명한다.
+표시된 식들에서 첫째 등식은\  Lemma \ref{dualizing-lemma-right-adjoint}에 의해,
+둘째 등식은\  Lemma \ref{dualizing-lemma-dualizing}에 의해 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-quotient}
+$A \to B$를\  Noether 환들의 전사 준동형이라 하자.
+$\omega_A^\bullet$을 쌍대화 복합체라 하자.
+그러면\  $R\Hom(B, \omega_A^\bullet)$은\  $B$의 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-dualizing-finite}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-polynomial-ring}
+$A$를\  Noether 환이라 하자. $\omega_A^\bullet$이 쌍대화 복합체이면\ 
+$\omega_A^\bullet \otimes_A A[x]$는\  $A[x]$의 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$B = A[x]$와\  $\omega_B^\bullet = \omega_A^\bullet \otimes_A B$로 놓자.
+Lemma \ref{dualizing-lemma-injective-dimension-over-polynomial-ring}과\ 
+More on Algebra, Lemma
+\ref{more-algebra-lemma-finite-injective-dimension}에 의해\ 
+$\omega_B^\bullet$은 유한 단사 차원을 갖는다.
+$A \to B$의 평탄성에 의해\ 
+$H^i(\omega_B^\bullet) = H^i(\omega_A^\bullet) \otimes_A B$이므로\ 
+$\omega_A^\bullet \otimes_A B$는 유한 코호몰로지 가군들을 갖는다.
+마지막으로 사상
+$$
+B \longrightarrow R\Hom_B(\omega_B^\bullet, \omega_B^\bullet)
+$$
+은 준동형이다. 이 경우 내부\  Hom의 형성이 평탄 밑변환과 가환하기 때문이다.
+More on Algebra, Lemma \ref{more-algebra-lemma-base-change-RHom}를 보라.
+\end{proof}
+
+\begin{proposition}
+\label{dualizing-proposition-dualizing-essentially-finite-type}
+쌍대화 복합체를 갖는\  Noether 환\  $A$를 택하자.
+그러면\  $A$ 위에서 본질적으로 유한형인 임의의\  $A$-대수는
+쌍대화 복합체를 갖는다.
+\end{proposition}
+
+\begin{proof}
+Lemmas \ref{dualizing-lemma-dualizing-localize},
+\ref{dualizing-lemma-dualizing-quotient}, \ref{dualizing-lemma-dualizing-polynomial-ring}을
+결합하면 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-find-function}
+$A$를\  Noether 환이라 하고\  $\omega_A^\bullet$을 쌍대화 복합체라 하자.
+$\mathfrak m \subset A$를 극대 아이디얼이라 하고\ 
+$\kappa = A/\mathfrak m$로 놓자. 그러면 어떤\ 
+$n \in \mathbf{Z}$에 대해\ 
+$R\Hom_A(\kappa, \omega_A^\bullet) \cong \kappa[n]$이다.
+\end{lemma}
+
+\begin{proof}
+$R\Hom_A(\kappa, \omega_A^\bullet)$은\  $\kappa$ 위의 쌍대화 복합체이고
+(Lemma \ref{dualizing-lemma-dualizing-quotient}),
+$\kappa$ 위의 쌍대화 복합체들은 이동까지 유일하며
+(Lemma \ref{dualizing-lemma-dualizing-unique}),
+$\kappa$ 자체가\  $\kappa$ 위의 쌍대화 복합체이기 때문이다.
+\end{proof}
+
+
+
+
+\section{국소환 위의 쌍대화 복합체}
+\label{dualizing-section-dualizing-local}
+
+\noindent
+이 절에서\  $(A, \mathfrak m, \kappa)$는 쌍대화 복합체\ 
+$\omega_A^\bullet$을 갖는\  Noether 국소환이고,
+Lemma \ref{dualizing-lemma-find-function}의 정수\  $n$은 영이라고 하자.
+더 정확히는\  $R\Hom_A(\kappa, \omega_A^\bullet) = \kappa[0]$이라고 가정한다.
+이 경우 쌍대화 복합체가 {\it 정규화되었다}고 한다.
+정규화된 쌍대화 복합체는 동형까지 유일하고,
+$A$의 다른 모든 쌍대화 복합체는 정규화된 복합체의 이동과 동형임에 유의하자
+(Lemma \ref{dualizing-lemma-dualizing-unique}).
+
+\begin{lemma}
+\label{dualizing-lemma-normalized-finite}
+$(A, \mathfrak m, \kappa) \to (B, \mathfrak m', \kappa')$를\ 
+Noether 국소환들의 유한 국소 사상이라 하자.
+$\omega_A^\bullet$을 정규화된 쌍대화 복합체라 하자. 그러면\ 
+$\omega_B^\bullet = R\Hom(B, \omega_A^\bullet)$은\ 
+$B$의 정규화된 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-dualizing-finite}에 의해 복합체\ 
+$\omega_B^\bullet$은\  $B$의 쌍대화 복합체이다.
+Lemma \ref{dualizing-lemma-right-adjoint}에 의해
+$$
+R\Hom_B(\kappa', \omega_B^\bullet) =
+R\Hom_B(\kappa', R\Hom(B, \omega_A^\bullet)) =
+R\Hom_A(\kappa', \omega_A^\bullet)
+$$
+이다. $\kappa'$은\  $A$-가군으로서\  $\kappa$의 유한 직합과 동형이고\ 
+$\omega_A^\bullet$은 정규화되어 있으므로,
+이 복합체의 코호몰로지는 차수\  $0$에만 놓인다.
+따라서\  $\omega_B^\bullet$도 정규화된 쌍대화 복합체이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-normalized-quotient}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체\ 
+$\omega_A^\bullet$을 갖는\  Noether 국소환이라 하자.
+$A \to B$가 전사라고 하자. 그러면\ 
+$\omega_B^\bullet = R\Hom_A(B, \omega_A^\bullet)$은\ 
+$B$의 정규화된 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-normalized-finite}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-equivalence-finite-length}
+$(A, \mathfrak m, \kappa)$를\  Noether 국소환이라 하자.
+$F$를 유한 길이\  $A$-가군의 범주의\  $A$-선형 자기동치라 하자.
+그러면\  $F$는 항등 함자와 동형이다.
+\end{lemma}
+
+\begin{proof}
+$\kappa$가 이 범주의 유일한 단순 대상이므로\  $F(\kappa) \cong \kappa$이다.
+우리 범주는 아벨 범주이므로\  $F$는 완전이다.
+따라서 모든 유한 길이 가군\  $E$에 대해\  $F(E)$는\  $E$와 같은 길이를 갖는다.
+$\Hom(E, \kappa) = \Hom(F(E), F(\kappa)) \cong \Hom(F(E), \kappa)$이므로\ 
+Nakayama 보조정리에 의해\  $E$와\  $F(E)$는 같은 수의 생성원을 갖는다.
+따라서\  $F(A/\mathfrak m^n)$은 순환\  $A$-가군이다.
+생성원\  $e \in F(A/\mathfrak m^n)$를 택하자.
+$F$가\  $A$-선형이므로\  $\mathfrak m^n e = 0$이다.
+길이들이 같으므로 사상\  $A/\mathfrak m^n \to F(A/\mathfrak m^n)$은
+동형이어야 한다. 모든\  $n$에 대해 생성원으로 가는 원소
+$$
+e \in \lim F(A/\mathfrak m^n)
+$$
+를 택하자(짧은 논증은 생략한다).
+그러면 모든\  $A$-가군 사상\ 
+$A/\mathfrak m^n \to A/\mathfrak m^{n'}$과 양립하는 동형들의 체계\ 
+$A/\mathfrak m^n \to F(A/\mathfrak m^n)$을 얻는다
+(다시\  $F$의\  $A$-선형성에 의한다).
+모든 유한 길이 가군은 순환 가군들의 직합 사이 사상의 여핵이므로
+보조정리의 동형을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-finite-length}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체\ 
+$\omega_A^\bullet$을 갖는\  Noether 국소환이라 하자.
+$E$를\  $\kappa$의 단사 포락이라 하자.
+유한 길이\  $A$-가군들을 달리는\  $N$에 대해 함자적 동형
+$$
+R\Hom_A(N, \omega_A^\bullet) = \Hom_A(N, E)[0]
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+$N$의 길이에 대한 귀납법으로\  $R\Hom_A(N, \omega_A^\bullet)$이
+차수\  $0$에 놓인 유한 길이 가군임을 알 수 있다.
+따라서\  $R\Hom_A(-, \omega_A^\bullet)$은 유한 길이 가군의 범주 위에
+반동치를 유도한다. Proposition \ref{dualizing-proposition-matlis}에 의해\ 
+$\Hom_A(-, E)$에 대해서도 마찬가지이므로
+$$
+N \longmapsto \Hom_A(R\Hom_A(N, \omega_A^\bullet), E)
+$$
+는\  Lemma \ref{dualizing-lemma-equivalence-finite-length}에서와 같은 동치이다.
+따라서 항등 함자와 동형이다.
+$\Hom_A(-, E)$를 두 번 적용한 것이 항등이므로
+(Proposition \ref{dualizing-proposition-matlis}) 보조정리의 명제를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-sitting-in-degrees}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체\ 
+$\omega_A^\bullet$을 갖는\  Noether 국소환이라 하자.
+$M$을 유한\  $A$-가군이라 하고\  $d = \dim(\text{Supp}(M))$라 하자.
+그러면 다음이 성립한다.
+\begin{enumerate}
+\item $\Ext^i_A(M, \omega_A^\bullet)$이 영이 아니면\ 
+$i \in \{-d, \ldots, 0\}$이다.
+\item $\Ext^i_A(M, \omega_A^\bullet)$의 지지집합의 차원은\ 
+$-i$ 이하이다.
+\item $\text{depth}(M)$은\ 
+$\Ext^{-\delta}_A(M, \omega_A^\bullet) \not = 0$인
+최소 정수\  $\delta \geq 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$d$에 대한 귀납법으로 증명한다. $d = 0$이면\ 
+Lemma \ref{dualizing-lemma-dualizing-finite-length}와\  Matlis 쌍대성
+(Proposition \ref{dualizing-proposition-matlis})에서 따른다.
+실제로 뒤의 결과는\  $M$이 영이 아니면\  $\Hom_A(M, E)$가 영이 아님을 보장한다.
+
+\medskip\noindent
+지지집합의 차원이\  $< d$인 가군들에 대해 결과가 성립하고,
+$M$의 깊이가\  $> 0$이라고 하자.
+$M$ 위의 영인자가 아닌\  $f \in \mathfrak m$을 택하고
+짧은 완전열
+$$
+0 \to M \to M \to M/fM \to 0
+$$
+을 생각하자.
+$\dim(\text{Supp}(M/fM)) = d - 1$이므로
+(Algebra, Lemma \ref{algebra-lemma-one-equation-module})
+귀납가정을 적용할 수 있다.
+$E^i = \Ext^i_A(M, \omega_A^\bullet)$와\ 
+$F^i = \Ext^i_A(M/fM, \omega_A^\bullet)$로 놓으면 긴 완전열
+$$
+\ldots \to F^i \to E^i \xrightarrow{f} E^i \to F^{i + 1} \to \ldots
+$$
+을 얻는다. 귀납가정에 의해\ 
+$i + 1 \not \in \{-\dim(\text{Supp}(M/fM)), \ldots, -\text{depth}(M/fM)\}$
+이면\  $E^i/fE^i = 0$이다.
+Nakayama 보조정리
+(Algebra, Lemma \ref{algebra-lemma-NAK})와\ 
+Algebra, Lemma \ref{algebra-lemma-depth-drops-by-one}에 의해\ 
+$i \not \in \{-\dim(\text{Supp}(M)), \ldots, -\text{depth}(M)\}$이면\ 
+$E^i = 0$이라고 결론 내린다.
+또한 경계의 경우\  $i = - \text{depth}(M)$에는
+귀납가정에 의해\  $F^{i + 1}$이 영이 아니므로\  $E^i$도 영이 아니다.
+$E^i/fE^i \subset F^{i + 1}$이므로
+$$
+\dim(\text{Supp}(F^{i + 1})) \geq \dim(\text{Supp}(E^i/fE^i))
+\geq \dim(\text{Supp}(E^i)) - 1
+$$
+이고(위에서 사용한 보조정리를 보라), 차원 추정 (2)도 얻는다.
+
+\medskip\noindent
+$M$의 깊이가\  $0$이고\  $d > 0$이면\ 
+$N = M[\mathfrak m^\infty]$로 놓고\  $M' = M/N$으로 놓는다
+(Lemma \ref{dualizing-lemma-divide-by-torsion}와 비교하라).
+그러면\  $M'$의 깊이는\  $> 0$이고\  $\dim(\text{Supp}(M')) = d$이다.
+따라서\  $M'$에 대한 결과를 알고 있으며,
+$R\Hom_A(N, \omega_A^\bullet) = \Hom_A(N, E)$이므로
+(Lemma \ref{dualizing-lemma-dualizing-finite-length})
+$\Ext$들의 긴 코호몰로지 완전열에서\  $M$에 대한 결과가 따른다.
+\end{proof}
+
+\begin{remark}
+\label{dualizing-remark-vanishing-for-arbitrary-modules}
+$(A, \mathfrak m)$와\  $\omega_A^\bullet$을\ 
+Lemma \ref{dualizing-lemma-sitting-in-degrees}에서와 같이 두자.
+More on Algebra, Lemma \ref{more-algebra-lemma-injective-amplitude}에 의해\ 
+$\omega_A^\bullet$은\  $[-d, 0]$ 안에 단사 진폭을 갖는다.
+그 보조정리의 (3)을 적용할 수 있기 때문이다.
+특히 임의의\  $A$-가군\  $M$에 대해(유한일 필요는 없다)
+$i \not \in \{-d, \ldots, 0\}$이면\ 
+$\Ext^i_A(M, \omega_A^\bullet) = 0$이다.
+\end{remark}
+
+\begin{lemma}
+\label{dualizing-lemma-local-CM}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체\ 
+$\omega_A^\bullet$을 갖는\  Noether 국소환이라 하고,
+$M$을 유한\  $A$-가군이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $M$은\  Cohen--Macaulay이다.
+\item $\Ext^i_A(M, \omega_A^\bullet)$은 많아야 하나의\  $i$에 대해 영이 아니다.
+\item $i \not = \dim(\text{Supp}(M))$이면\ 
+$\Ext^{-i}_A(M, \omega_A^\bullet)$은 영이다.
+\end{enumerate}
+깊이가\  $d$인 유한\  Cohen--Macaulay $A$-가군의 범주를\  $CM_d$라 하자.
+그러면\  $M \mapsto \Ext^{-d}_A(M, \omega_A^\bullet)$은\ 
+$CM_d$의 반자기동치를 정의한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-sitting-in-degrees}의 결과를 더 이상 언급하지 않고 사용하겠다.
+유한 가군\  $M$을 고정하자.
+$M$이\  Cohen--Macaulay이면\ 
+$\Ext^{-d}_A(M, \omega_A^\bullet)$만 영이 아닐 수 있으므로
+(1) $\Rightarrow$ (3)이다.
+(3) $\Rightarrow$ (2)는 즉시 성립한다.
+(2)를 가정하고\  $\delta = \text{depth}(M)$일 때 영이 아닌\  $\Ext$를\ 
+$N = \Ext^{-\delta}_A(M, \omega_A^\bullet)$이라 하자. 그러면
+$$
+M[0] = R\Hom_A(R\Hom_A(M, \omega_A^\bullet), \omega_A^\bullet) =
+R\Hom_A(N[\delta], \omega_A^\bullet)
+$$
+이므로(Lemma \ref{dualizing-lemma-dualizing})
+$M = \Ext_A^{-\delta}(N, \omega_A^\bullet)$이라고 결론 내린다.
+따라서\  $\delta \geq \dim(\text{Supp}(M))$이다.
+그러나\  $\delta \leq \dim(\text{Supp}(M))$도 알고 있으므로
+(Algebra, Lemma \ref{algebra-lemma-bound-depth})
+$M$은\  Cohen--Macaulay라고 결론 내린다.
+
+\medskip\noindent
+마지막 명제를 증명하려면\  $CM_d$의\  $M$에 대해\ 
+$N = \Ext^{-d}_A(M, \omega_A^\bullet)$이\  $CM_d$에 속함을 보이면 충분하다.
+위에서\  $M[0] = R\Hom_A(N[d], \omega_A^\bullet)$임을 보았고,
+(1)과 (3)의 동치에 의해 원하는 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-artinian}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체\ 
+$\omega_A^\bullet$을 갖는\  Noether 국소환이라 하자.
+$\dim(A) = 0$이면\  $\omega_A^\bullet \cong E[0]$이다.
+여기서\  $E$는 잉여체의 단사 포락이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-dualizing-finite-length}에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-divide-by-finite-length-ideal}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체를 갖는\ 
+Noether 국소환이라 하자. $I \subset \mathfrak m$를 유한 길이 아이디얼이라 하고\ 
+$B = A/I$로 놓자. 그러면\  $D(A)$ 안에 구별 삼각형
+$$
+\omega_B^\bullet \to \omega_A^\bullet \to \Hom_A(I, E)[0] \to
+\omega_B^\bullet[1]
+$$
+이 있다. 여기서\  $E$는\  $\kappa$의 단사 포락이고\ 
+$\omega_B^\bullet$은\  $B$의 정규화된 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+짧은 완전열\  $0 \to I \to A \to B \to 0$과\ 
+Lemmas \ref{dualizing-lemma-dualizing-finite-length},
+\ref{dualizing-lemma-normalized-quotient}을 사용하라.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-divide-by-nonzerodivisor}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체\ 
+$\omega_A^\bullet$을 갖는\  Noether 국소환이라 하자.
+$f \in \mathfrak m$를 영인자가 아닌 원소라 하고\ 
+$B = A/(f)$로 놓자. 그러면\  $D(A)$ 안에 구별 삼각형
+$$
+\omega_B^\bullet \to \omega_A^\bullet \to \omega_A^\bullet \to
+\omega_B^\bullet[1]
+$$
+이 있다. 여기서\  $\omega_B^\bullet$은\  $B$의 정규화된 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+짧은 완전열\  $0 \to A \to A \to B \to 0$과\ 
+Lemma \ref{dualizing-lemma-normalized-quotient}을 사용하라.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-nonvanishing-generically-local}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체\ 
+$\omega_A^\bullet$을 갖는\  Noether 국소환이라 하자.
+$\mathfrak p$를\  $A$의 극소 소아이디얼이라 하고\ 
+$\dim(A/\mathfrak p) = e$라 하자. 그러면\ 
+$H^i(\omega_A^\bullet)_\mathfrak p$가 영이 아닐 필요충분조건은\ 
+$i = -e$이다.
+\end{lemma}
+
+\begin{proof}
+$A_\mathfrak p$의 차원이 영이므로\ 
+$\mathfrak p^nA_\mathfrak p$가 영이 되는 정수\  $n > 0$이 존재한다.
+$B = A/\mathfrak p^n$과\ 
+$\omega_B^\bullet = R\Hom_A(B, \omega_A^\bullet)$로 놓자.
+$B_\mathfrak p = A_\mathfrak p$이므로
+$$
+(\omega_B^\bullet)_\mathfrak p =
+R\Hom_A(B, \omega_A^\bullet) \otimes_A^\mathbf{L} A_\mathfrak p =
+R\Hom_{A_\mathfrak p}(B_\mathfrak p, (\omega_A^\bullet)_\mathfrak p) =
+(\omega_A^\bullet)_\mathfrak p
+$$
+이다. 둘째 등식은\  More on Algebra, Lemma
+\ref{more-algebra-lemma-base-change-RHom}에 의해 성립한다.
+Lemma \ref{dualizing-lemma-normalized-quotient}에 의해\  $A$를\  $B$로 바꾸어도 된다.
+그렇게 바꾸면\  $\dim(A) = e$이다. 그러면\  Lemma
+\ref{dualizing-lemma-sitting-in-degrees}의 (1), (2)에 의해\ 
+$H^i(\omega_A^\bullet)_\mathfrak p$는\  $i = -e$일 때만 영이 아닐 수 있다.
+한편\  $(\omega_A^\bullet)_\mathfrak p$는 영이 아닌 환\ 
+$A_\mathfrak p$의 쌍대화 복합체이므로
+(Lemma \ref{dualizing-lemma-dualizing-localize})
+남은 가군은 영이 아니어야 한다.
+\end{proof}
+
+
+
+
+
+\section{쌍대화 복합체와 차원 함수}
+\label{dualizing-section-dimension-function}
+
+\noindent
+국소적 상황에서 얻은 결과는 다음 귀결을 준다.
+쌍대화 복합체를 갖는\  Noether 환은 유한 차원의
+보편적\  catenary 환이다.
+
+\begin{lemma}
+\label{dualizing-lemma-nonvanishing-generically}
+$A$를\  Noether 환이라 하자. $\mathfrak p$를\  $A$의 극소 소아이디얼이라 하자.
+그러면\  $H^i(\omega_A^\bullet)_\mathfrak p$는 정확히 하나의\  $i$에 대해
+영이 아니다.
+\end{lemma}
+
+\begin{proof}
+복합체\  $\omega_A^\bullet \otimes_A A_\mathfrak p$는\ 
+$A_\mathfrak p$의 쌍대화 복합체이다
+(Lemma \ref{dualizing-lemma-dualizing-localize}).
+$\mathfrak p$가 극소이므로\  $A_\mathfrak p$의 차원은 영이다.
+따라서 결과는\  Lemma \ref{dualizing-lemma-dualizing-artinian}에서 따른다.
+\end{proof}
+
+\noindent
+$A$를\  Noether 환이라 하고\  $\omega_A^\bullet$을 쌍대화 복합체라 하자.
+Lemma \ref{dualizing-lemma-find-function}에 의해 함수
+$$
+\delta = \delta_{\omega_A^\bullet} : \Spec(A) \longrightarrow \mathbf{Z}
+$$
+를 다음과 같이 정의할 수 있다. 각\  $\mathfrak p$를,
+Lemma \ref{dualizing-lemma-find-function}에서\ 
+$A_\mathfrak p$ 위의 쌍대화 복합체\ 
+$(\omega_A^\bullet)_\mathfrak p$
+(Lemma \ref{dualizing-lemma-dualizing-localize})와 잉여체\  $\kappa(\mathfrak p)$에 대해\ 
+주어지는 정수로 보낸다.
+정확히 말하면\  $\delta(\mathfrak p)$를
+$$
+(\omega_A^\bullet)_\mathfrak p[-\delta(\mathfrak p)]
+$$
+가\  Noether 국소환\  $A_\mathfrak p$ 위의 정규화된 쌍대화 복합체가 되게 하는
+유일한 정수로 정의한다.
+
+\begin{lemma}
+\label{dualizing-lemma-quotient-function}
+$A$를\  Noether 환이라 하고\  $\omega_A^\bullet$을 쌍대화 복합체라 하자.
+$A \to B$를 전사 환 사상이라 하고,
+$\omega_B^\bullet = R\Hom(B, \omega_A^\bullet)$을\ 
+Lemma \ref{dualizing-lemma-dualizing-quotient}의\  $B$에 대한 쌍대화 복합체라 하자.
+그러면
+$$
+\delta_{\omega_B^\bullet} = \delta_{\omega_A^\bullet}|_{\Spec(B)}
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+함수들의 정의와\  Lemma \ref{dualizing-lemma-normalized-quotient}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dimension-function}
+$A$를\  Noether 환이라 하고\  $\omega_A^\bullet$을 쌍대화 복합체라 하자.
+위에서 정의한 함수\  $\delta = \delta_{\omega_A^\bullet}$는 차원 함수이다
+(Topology, Definition \ref{topology-definition-dimension-function}).
+\end{lemma}
+
+\begin{proof}
+$\mathfrak p \subset \mathfrak q$를 즉시 특수화라 하자.
+$\delta(\mathfrak p) = \delta(\mathfrak q) + 1$임을 보여야 한다.
+$A$를\  $A/\mathfrak p$로, 복합체\  $\omega_A^\bullet$을\ 
+$\omega_{A/\mathfrak p}^\bullet = R\Hom(A/\mathfrak p, \omega_A^\bullet)$로,
+소아이디얼\  $\mathfrak p$를\  $(0)$으로, 소아이디얼\  $\mathfrak q$를\ 
+$\mathfrak q/\mathfrak p$로 바꾸어도 된다.
+Lemma \ref{dualizing-lemma-quotient-function}을 보라. 따라서\  $A$가 정역이고,
+$\mathfrak p = (0)$이며, $\mathfrak q$가 높이\  $1$인 소아이디얼이라고
+가정해도 된다.
+
+\medskip\noindent
+그러면\  Lemma \ref{dualizing-lemma-nonvanishing-generically}에 의해\ 
+$H^i(\omega_A^\bullet)_{(0)}$은 정확히 하나의\  $i$, 이를\  $i_0$라 하자,
+에 대해 영이 아니다. 실제로\ 
+$(\omega_A^\bullet)_{(0)}[-\delta((0))]$이 체\  $A_{(0)}$ 위의
+정규화된 쌍대화 복합체이므로\  $i_0 = -\delta((0))$이다.
+
+\medskip\noindent
+한편\  $(\omega_A^\bullet)_\mathfrak q[-\delta(\mathfrak q)]$는\ 
+$A_\mathfrak q$의 정규화된 쌍대화 복합체이다. Lemma
+\ref{dualizing-lemma-nonvanishing-generically-local}에 의해
+$$
+H^e((\omega_A^\bullet)_\mathfrak q[-\delta(\mathfrak q)])_{(0)} =
+H^{e - \delta(\mathfrak q)}(\omega_A^\bullet)_{(0)}
+$$
+은\  $e = -\dim(A_\mathfrak q) = -1$일 때만 영이 아님을 안다.
+따라서 원하는 대로
+$$
+-\delta((0)) = -1 - \delta(\mathfrak q)
+$$
+을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-universally-catenary}
+$A$를 쌍대화 복합체를 갖는\  Noether 환이라 하자. 그러면\  $A$는
+유한 차원의 보편적\  catenary 환이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-dimension-function}에 의해\  $\Spec(A)$는 차원 함수를 가지므로\ 
+catenary이다. Topology, Lemma
+\ref{topology-lemma-dimension-function-catenary}를 보라.
+따라서\  $A$는\  catenary이다. Algebra, Lemma
+\ref{algebra-lemma-catenary}를 보라.
+Proposition \ref{dualizing-proposition-dualizing-essentially-finite-type}에 의해\ 
+$A$는 보편적\  catenary이다.
+
+\medskip\noindent
+임의의 쌍대화 복합체\  $\omega_A^\bullet$은\ 
+$D^b_{\textit{Coh}}(A)$에 속하므로, Lemma
+\ref{dualizing-lemma-nonvanishing-generically}에 의해 극소 소아이디얼에서 함수\ 
+$\delta_{\omega_A^\bullet}$의 값들은 유계이다.
+한편 잉여체가\  $\kappa$인 극대 아이디얼\  $\mathfrak m$에 대해\ 
+$i = -\delta(\mathfrak m)$는\ 
+$\Ext_A^i(\kappa, \omega_A^\bullet)$이 영이 아니게 하는 유일한 정수이다
+(Lemma \ref{dualizing-lemma-find-function}).
+$\omega_A^\bullet$은 유한 단사 차원을 가지므로 이 값들도 유계이다.
+$A$의 차원은, $\mathfrak p \subset \mathfrak m$이 각각 극소 소아이디얼과
+극대 아이디얼로 이루어진 쌍을 달릴 때\ 
+$\delta(\mathfrak p) - \delta(\mathfrak m)$의 최댓값이므로,
+$\Spec(A)$의 차원이 유계임을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-depth-dualizing-module}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체\ 
+$\omega_A^\bullet$을 갖는\  Noether 국소환이라 하자.
+$d = \dim(A)$ 및\  $\omega_A = H^{-d}(\omega_A^\bullet)$로 놓자. 그러면
+\begin{enumerate}
+\item $\omega_A$의 지지집합은\  $\Spec(A)$의 차원\  $d$인 불가약 성분들의
+합집합이다.
+\item $\omega_A$는\  $(S_2)$를 만족한다. Algebra, Definition
+\ref{algebra-definition-conditions}를 보라.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이하에서는\  Lemma \ref{dualizing-lemma-sitting-in-degrees}를 따로 언급하지 않고 사용한다.
+Lemma \ref{dualizing-lemma-nonvanishing-generically-local}에 의해\ 
+$\omega_A$의 지지집합은 차원\  $d$인 불가약 성분들을 포함한다.
+$\mathfrak p \subset A$를 소아이디얼이라 하자. Lemma
+\ref{dualizing-lemma-dimension-function}에 의해 복합체\ 
+$(\omega_A^\bullet)_{\mathfrak p}[-\dim(A/\mathfrak p)]$는\ 
+$A_\mathfrak p$의 정규화된 쌍대화 복합체이다. 따라서\ 
+$\dim(A/\mathfrak p) + \dim(A_\mathfrak p) < d$이면\ 
+$(\omega_A)_\mathfrak p = 0$이다.
+이로부터\  $\omega_A$의 지지집합이 차원\  $d$인 불가약 성분들의 합집합임을 얻는다.
+실제로\  $A$가\  catenary이므로 이 합집합의 여집합은 정확히\ 
+$\dim(A/\mathfrak p) + \dim(A_\mathfrak p) < d$를 만족하는\ 
+$A$의 소아이디얼\  $\mathfrak p$들이다
+(Lemma \ref{dualizing-lemma-universally-catenary}).
+한편\  $\dim(A/\mathfrak p) + \dim(A_\mathfrak p) = d$이면
+$$
+(\omega_A)_\mathfrak p =
+H^{-\dim(A_\mathfrak p)}\left(
+(\omega_A^\bullet)_{\mathfrak p}[-\dim(A/\mathfrak p)] \right)
+$$
+이다. 따라서\  $\omega_A$가\  $(S_2)$를 가짐을 증명하려면\ 
+$\omega_A$의 깊이가 적어도\  $\min(\dim(A), 2)$임을 보이면 충분하다.
+$\dim(A)$에 대한 귀납법으로 이를 증명한다. $\dim(A) = 0$인 경우는 자명하다.
+
+\medskip\noindent
+$\text{depth}(A) > 0$이라고 하자. 영인자가 아닌 원소\ 
+$f \in \mathfrak m$를 택하고\  $B = A/fA$로 놓자.
+그러면\  $\dim(B) = \dim(A) - 1$이므로\  $B$에 귀납가정을 적용할 수 있다.
+Lemma \ref{dualizing-lemma-divide-by-nonzerodivisor}에 의해\ 
+$f$에 의한 곱셈은\  $\omega_A$ 위에서 단사이고\ 
+$\omega_A/f\omega_A \subset \omega_B$를 얻는다.
+이는\  $\omega_A$의 깊이가 적어도\  $1$임을 보인다.
+$\dim(A) > 1$이면\  $\dim(B) > 0$이고\  $\omega_B$의 깊이는\  $ > 0$이다.
+따라서\  $\omega_A$의 깊이는\  $> 1$이며, 이 경우 결론을 얻는다.
+
+\medskip\noindent
+$\dim(A) > 0$이고\  $\text{depth}(A) = 0$이라고 하자.
+$I = A[\mathfrak m^\infty]$ 및\  $B = A/I$로 놓자.
+그러면\  $B$의 깊이는\  $\geq 1$이고, Lemma
+\ref{dualizing-lemma-divide-by-finite-length-ideal}에 의해\  $\omega_A = \omega_B$이다.
+위에서\  $\omega_B$에 대한 결과를 증명했으므로 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+\section{국소 쌍대성 정리}
+\label{dualizing-section-local-duality}
+
+\noindent
+이 절의 주된 결과는\  Grothendieck에 의한 것이다.
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-of-dualizing}
+$(A, \mathfrak m, \kappa)$를\  Noether 국소환이라 하자.
+$\omega_A^\bullet$을 정규화된 쌍대화 복합체라 하자.
+$Z = V(\mathfrak m) \subset \Spec(A)$로 놓자.
+그러면\  $E = R^0\Gamma_Z(\omega_A^\bullet)$는\ 
+$\kappa$의 단사 포락이고\  $R\Gamma_Z(\omega_A^\bullet) = E[0]$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-local-cohomology-noetherian}에 의해\ 
+$R\Gamma_{\mathfrak m} = R\Gamma_Z$이다. 따라서\  Lemma
+\ref{dualizing-lemma-local-cohomology-ext}에 의해
+$$
+R\Gamma_Z(\omega_A^\bullet) =
+R\Gamma_{\mathfrak m}(\omega_A^\bullet) =
+\text{hocolim}\ R\Hom_A(A/\mathfrak m^n, \omega_A^\bullet)
+$$
+이다. $E'$을 잉여체의 단사 포락이라 하자.
+Lemma \ref{dualizing-lemma-dualizing-finite-length}에 의해 전이 사상들과 양립하는 동형
+$$
+R\Hom_A(A/\mathfrak m^n, \omega_A^\bullet) \cong \Hom_A(A/\mathfrak m^n, E')[0]
+$$
+을 찾을 수 있다. Lemma \ref{dualizing-lemma-union-artinian}에 의해\ 
+$E' = \bigcup E'[\mathfrak m^n] = \colim \Hom_A(A/\mathfrak m^n, E')$이므로\ 
+$E \cong E'$이고 복합체\  $R\Gamma_Z(\omega_A^\bullet)$의 다른 모든
+코호몰로지 가군은 영이라고 결론 내린다.
+\end{proof}
+
+\begin{remark}
+\label{dualizing-remark-specific-injective-hull}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체\ 
+$\omega_A^\bullet$을 갖는\  Noether 국소환이라 하자.
+위의\  Lemma \ref{dualizing-lemma-local-cohomology-of-dualizing}에 의해\ 
+$R\Gamma_Z(\omega_A^\bullet)$는 차수\  $0$에 놓인 잉여체의 단사 포락이다.
+실제로 이는 단사 포락의 ``구성'' 또는 ``실현''을 주는데,
+그저 임의의 단사 포락을 택하는 것보다 조금 더 표준적이다.
+즉 정규화된 쌍대화 복합체는 동형까지 유일하고 그 자기동형군은\ 
+$A$의 가역원군인 반면, $\kappa$의 단사 포락은 동형까지 유일하고
+그 자기동형군은\  $\mathfrak m$에 대한\  $A$의 완비화\  $A^\wedge$의
+가역원군이다.
+\end{remark}
+
+\noindent
+다음은 이 절의 주된 결과이다.
+
+\begin{theorem}
+\label{dualizing-theorem-local-duality}
+$(A, \mathfrak m, \kappa)$를\  Noether 국소환이라 하자.
+$\omega_A^\bullet$을 정규화된 쌍대화 복합체라 하자.
+$E$를 잉여체의 단사 포락이라 하자.
+$Z = V(\mathfrak m) \subset \Spec(A)$로 놓자.
+${}^\wedge$로\  $\mathfrak m$에 대한 유도 완비화를 나타내자.
+그러면\  $D(A)$의\  $K$에 대해
+$$
+R\Hom_A(K, \omega_A^\bullet)^\wedge \cong R\Hom_A(R\Gamma_Z(K), E[0])
+$$
+이다.
+\end{theorem}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-local-cohomology-of-dualizing}에 의해\ 
+$E[0] \cong R\Gamma_Z(\omega_A^\bullet)$임에 유의하자.
+More on Algebra, Lemma \ref{more-algebra-lemma-completion-RHom}에 의해
+좌변의 완비화를 안으로 옮길 수 있다. 따라서
+$$
+R\Hom_A(K^\wedge, (\omega_A^\bullet)^\wedge)
+=
+R\Hom_A(R\Gamma_Z(K), R\Gamma_Z(\omega_A^\bullet))
+$$
+을 증명하면 된다. 이는\  Proposition \ref{dualizing-proposition-torsion-complete}에서 주어진\ 
+$D_{comp}(A, \mathfrak m)$와\ 
+$D_{\mathfrak m^\infty\text{-torsion}}(A)$ 사이의 동치에서 따른다.
+더 정확히는\  Lemma \ref{dualizing-lemma-compare-RHom}의 특수한 경우이다.
+\end{proof}
+
+\noindent
+다음은 위 정리의 특수한 경우이다.
+
+\begin{lemma}
+\label{dualizing-lemma-special-case-local-duality}
+$(A, \mathfrak m, \kappa)$를\  Noether 국소환이라 하자.
+$\omega_A^\bullet$을 정규화된 쌍대화 복합체라 하자.
+$E$를 잉여체의 단사 포락이라 하자.
+$K \in D_{\textit{Coh}}(A)$라 하자. 그러면
+$$
+\Ext^{-i}_A(K, \omega_A^\bullet)^\wedge =
+\Hom_A(H^i_{\mathfrak m}(K), E)
+$$
+이다. 여기서\  ${}^\wedge$는\  $\mathfrak m$-진 완비화를 나타낸다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-dualizing}에 의해\ 
+$R\Hom_A(K, \omega_A^\bullet)$은\  $D_{\textit{Coh}}(A)$의 대상이다.
+따라서\  More on Algebra, Lemma
+\ref{more-algebra-lemma-derived-completion-pseudo-coherent}에 의해\ 
+$R\Hom_A(K, \omega_A^\bullet)$의 유도 완비화의 코호몰로지 가군들은
+통상적인 완비화\  $\Ext^i_A(K, \omega_A^\bullet)^\wedge$와 같다.
+한편\  Lemma \ref{dualizing-lemma-local-cohomology-noetherian}에 의해\ 
+$Z = V(\mathfrak m)$에 대해\  $R\Gamma_{\mathfrak m} = R\Gamma_Z$이다.
+또한 함자\  $\Hom_A(-, E)$는 완전이므로 코호몰로지를 통해 분해된다.
+따라서 보조정리는\  Theorem \ref{dualizing-theorem-local-duality}의 귀결이다.
+\end{proof}
+
+
+
+
+
+\section{쌍대화 가군}
+\label{dualizing-section-dualizing-module}
+
+\noindent
+$(A, \mathfrak m, \kappa)$가\  Noether 국소환이고\ 
+$\omega_A^\bullet$이 정규화된 쌍대화 복합체이면,
+Lemma \ref{dualizing-lemma-depth-dualizing-module}에서 설명한 가군\ 
+$\omega_A = H^{-\dim(A)}(\omega_A^\bullet)$을\ 
+$A$의 {\it 쌍대화 가군}이라 한다. 이 가군은\  $A$의 정준 가군이다.
+일반적으로\  Noether 국소환\  $(A, \mathfrak m, \kappa)$의
+{\it 정준 가군}은 다음을 만족하는 유한\  $A$-가군\  $K$로 정의하는 데
+의견이 일치하는 듯하다.
+$$
+\Hom_A(K, E) \cong H^{\dim(A)}_\mathfrak m(A)
+$$
+여기서\  $E$는 잉여체의 단사 포락이다. 쌍대화 가군이 정준인 것은\ 
+Lemma \ref{dualizing-lemma-special-case-local-duality}에 의해
+$$
+\Hom_A(H^{\dim(A)}_\mathfrak m(A), E) = (\omega_A)^\wedge
+$$
+이고, 따라서\  $\Hom_A(-, E)$를 적용하면
+\begin{align*}
+\Hom_A(\omega_A, E)
+& =
+\Hom_A((\omega_A)^\wedge, E) \\
+& =
+\Hom_A(\Hom_A(H^{\dim(A)}_\mathfrak m(A), E), E) \\
+& = H^{\dim(A)}_\mathfrak m(A)
+\end{align*}
+을 얻기 때문이다. 첫째 등식은\  $E$가\  $\mathfrak m$-멱 영이기 때문이고,
+둘째 등식은 위의 결과에 의하며, 셋째 등식은\  Matlis 쌍대성
+(Proposition \ref{dualizing-proposition-matlis})에 의한다.
+위에서 준 정준 가군의 정의가 유용한 까닭은\  $A$가 쌍대화 복합체를
+갖지 않는 경우에도 뜻이 통한다는 데 있다.
+
+
+
+
+\section{Cohen--Macaulay 환}
+\label{dualizing-section-CM}
+
+\noindent
+Cohen--Macaulay 가군과 환은\  Algebra, Sections
+\ref{algebra-section-CM} 및\  \ref{algebra-section-CM-ring}에서 연구하였다.
+
+\begin{lemma}
+\label{dualizing-lemma-depth-in-terms-dualizing-complex}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체\ 
+$\omega_A^\bullet$을 갖는\  Noether 국소환이라 하자.
+그러면\  $\text{depth}(A)$는\ 
+$H^{-\delta}(\omega_A^\bullet) \not = 0$이 되게 하는 최소 정수\ 
+$\delta \geq 0$과 같다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-sitting-in-degrees}에서 즉시 따른다.
+참임을 확인하는 두 가지 다른 방법은 다음과 같다.
+
+\medskip\noindent
+첫째 방법. Nakayama 보조정리에 의해\  $\delta$는\ 
+$\Hom_A(H^{-\delta}(\omega_A^\bullet), \kappa) \not = 0$이 되게 하는
+최소 정수이다. 다시 말해\ 
+$\Ext_A^{-\delta}(\omega_A^\bullet, \kappa)$가 영이 아니게 하는
+최소 정수이다. Lemma \ref{dualizing-lemma-dualizing}과\ 
+$\omega_A^\bullet$이 정규화되었다는 사실을 사용하면, 이는\ 
+$\Ext_A^\delta(\kappa, A)$가 영이 아니게 하는 최소 정수와 같다.
+Algebra, Lemma \ref{algebra-lemma-depth-ext}에 의해 이는\  $A$의 깊이와 같다.
+
+\medskip\noindent
+둘째 방법. 국소 쌍대성 정리
+(Lemma \ref{dualizing-lemma-special-case-local-duality}의 형태)에 의해\ 
+$\delta$는\  $H^\delta_\mathfrak m(A)$가 영이 아니게 하는 최소 정수이다.
+Lemma \ref{dualizing-lemma-depth}에 의해 이는\  $A$의 깊이와 같다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-apply-CM}
+$(A, \mathfrak m, \kappa)$를 정규화된 쌍대화 복합체\ 
+$\omega_A^\bullet$과 쌍대화 가군\ 
+$\omega_A = H^{-\dim(A)}(\omega_A^\bullet)$을 갖는\ 
+Noether 국소환이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $A$는\  Cohen--Macaulay이다.
+\item $\omega_A^\bullet$은 하나의 차수에 집중되어 있다.
+\item $\omega_A^\bullet = \omega_A[\dim(A)]$이다.
+\end{enumerate}
+이 경우\  $\omega_A$는 극대\  Cohen--Macaulay 가군이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-local-CM}에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-has-dualizing-module-CM}
+$A$를\  Noether 환이라 하자. $\omega_A[0]$이 쌍대화 복합체가 되게 하는
+유한\  $A$-가군\  $\omega_A$가 존재하면\  $A$는\  Cohen--Macaulay이다.
+\end{lemma}
+
+\begin{proof}
+$A$를 한 소아이디얼에서의 국소화로 바꾸어도 된다
+(Lemma \ref{dualizing-lemma-dualizing-localize} 및\ 
+Algebra, Definition \ref{algebra-definition-ring-CM}).
+이 경우 결과는\  Lemma \ref{dualizing-lemma-apply-CM}에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-CM-open}
+$A$를 쌍대화 복합체\  $\omega_A^\bullet$을 갖는\  Noether 환이라 하자.
+$M$을 유한\  $A$-가군이라 하자. 그러면
+$$
+U = \{\mathfrak p \in \Spec(A) \mid M_\mathfrak p\text{ is Cohen-Macaulay}\}
+$$
+는\  $\Spec(A)$의 열린 부분집합이고, $\text{Supp}(M)$과의 교집합은 조밀하다.
+\end{lemma}
+
+\begin{proof}
+$\mathfrak p$가\  $\text{Supp}(M)$의 일반점이면\ 
+$\text{depth}(M_\mathfrak p) = \dim(M_\mathfrak p) = 0$이고,
+따라서\  $\mathfrak p \in U$이다. 이는 조밀성을 증명한다.
+$\mathfrak p \in U$이면\  Lemma \ref{dualizing-lemma-local-CM}에 의해
+$$
+R\Hom_A(M, \omega_A^\bullet)_\mathfrak p =
+R\Hom_{A_\mathfrak p}(M_\mathfrak p, (\omega_A^\bullet)_\mathfrak p)
+$$
+는 영이 아닌 코호몰로지 가군을 정확히 하나 가지며, 그 차수를\  $i_0$라 하자.
+$R\Hom_A(M, \omega_A^\bullet)$은 영이 아닌 코호몰로지 가군\  $H^i$를
+유한 개만 가지고 각각은 유한\  $A$-가군이므로,
+$f \in A$, $f \not \in \mathfrak p$이고\ 
+$i \not = i_0$에 대해\  $(H^i)_f = 0$이 되는 원소를 찾을 수 있다.
+그러면\  $R\Hom_A(M, \omega_A^\bullet)_f$는 영이 아닌 코호몰로지 가군을
+정확히 하나 가지며, 방금 논증을 거꾸로 적용하여\  $D(f) \subset U$를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-CM}
+$A$를\  Noether 환이라 하자. $A$가 쌍대화 복합체\ 
+$\omega_A^\bullet$을 가지면\ 
+$\{\mathfrak p \in \Spec(A) \mid A_\mathfrak p\text{ is Cohen-Macaulay}\}$
+는\  $\Spec(A)$의 조밀한 열린 부분집합이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-CM-open}과 정의들에서 즉시 따른다.
+\end{proof}
+
+
+
+
+
+
+\section{Gorenstein 환}
+\label{dualizing-section-gorenstein}
+
+\noindent
+지금까지 본 명시적인 쌍대화 복합체는 체\  $\kappa$에 대해\  $\kappa$ 위의\  $\kappa$뿐이다.
+Lemma \ref{dualizing-lemma-find-function}의 증명을 보라.
+Proposition \ref{dualizing-proposition-dualizing-essentially-finite-type}에 의해
+이는 체 위의 임의의 유한형 대수가 쌍대화 복합체를 가짐을 뜻한다.
+그러나 쌍대화 복합체를 갖지 않는\  Noether (국소)환도 존재한다.
+실제로 쌍대화 복합체를 갖는 환은 보편적\  catenary임을 보았지만
+(Lemma \ref{dualizing-lemma-universally-catenary}), catenary가 아닌\  Noether 국소환의
+예들도 존재한다. Examples, Section
+\ref{examples-section-non-catenary-Noetherian-local}을 보라.
+
+\medskip\noindent
+그럼에도 대수기하학에 등장하는 많은 환은\  Gorenstein 환의 몫이라는 이유만으로
+쌍대화 복합체를 갖는다. 이 조건은 사실 필요충분하다. 즉\  Noether 환이
+쌍대화 복합체를 가질 필요충분조건은 유한 차원\  Gorenstein 환의 몫인 것이다.
+이는\  Sharp의 추측(\cite{Sharp})이며, 문헌에서는\ 
+\cite[Corollary 1.4]{Kawasaki}로 찾을 수 있다.
+현재 주제로 돌아와\  Gorenstein 환을 정의하자.
+
+\begin{definition}
+\label{dualizing-definition-gorenstein}
+Gorenstein 환.
+\begin{enumerate}
+\item $A$를\  Noether 국소환이라 하자. $A[0]$이\  $A$의 쌍대화 복합체이면\ 
+$A$를 {\it Gorenstein}이라 한다.
+\item $A$를\  Noether 환이라 하자. $A$의 모든 소아이디얼\  $\mathfrak p$에 대해\ 
+$A_\mathfrak p$가\  Gorenstein이면\  $A$를 {\it Gorenstein}이라 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 정의는 타당하다. 실제로\  $A[0]$이\  $A$의 쌍대화 복합체이면\ 
+Lemma \ref{dualizing-lemma-dualizing-localize}에 의해\ 
+$S^{-1}A[0]$은\  $S^{-1}A$의 쌍대화 복합체이다.
+유한 차원\  Noether 환이\  Gorenstein일 필요충분조건은 자기 자신 위의 가군으로서
+유한 단사 차원을 갖는 것이다. Lemma \ref{dualizing-lemma-characterize-gorenstein}을 보라.
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein-CM}
+Gorenstein 환은\  Cohen--Macaulay이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-apply-CM}에서 따른다.
+\end{proof}
+
+\noindent
+정칙환은\  Gorenstein 환의 한 예이다.
+
+\begin{lemma}
+\label{dualizing-lemma-regular-gorenstein}
+정칙 국소환은\  Gorenstein이다.
+정칙환은\  Gorenstein이다.
+\end{lemma}
+
+\begin{proof}
+$A$를 차원\  $d$인 정칙환이라 하자. 그러면\  $A$의 대역 차원은\  $d$이다.
+Algebra, Lemma \ref{algebra-lemma-finite-gl-dim-finite-dim-regular}을 보라.
+따라서 모든\  $A$-가군\  $M$에 대해\  $\Ext^{d + 1}_A(M, A) = 0$이다.
+Algebra, Lemma \ref{algebra-lemma-projective-dimension-ext}를 보라.
+그러므로\  More on Algebra, Lemma
+\ref{more-algebra-lemma-injective-amplitude}에 의해\ 
+$A$는\  $A$-가군으로서 유한 단사 차원을 갖는다.
+따라서\  $A[0]$은 쌍대화 복합체이고, 정의 뒤의 주석에 의해\ 
+$A$는\  Gorenstein이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein}
+$A$를\  Noether 환이라 하자.
+\begin{enumerate}
+\item $A$가 쌍대화 복합체\  $\omega_A^\bullet$을 가지면 다음이 성립한다.
+\begin{enumerate}
+\item $A$가\  Gorenstein이다\  $\Leftrightarrow$
+$\omega_A^\bullet$은\  $D(A)$의 가역 대상이다.
+\item $A_\mathfrak p$가\  Gorenstein이다\  $\Leftrightarrow$
+$(\omega_A^\bullet)_\mathfrak p$는\  $D(A_\mathfrak p)$의 가역 대상이다.
+\item $\{\mathfrak p \in \Spec(A) \mid A_\mathfrak p\text{ is Gorenstein}\}$은
+열린 부분집합이다.
+\end{enumerate}
+\item $A$가\  Gorenstein이면, $A$가 쌍대화 복합체를 가질 필요충분조건은\ 
+$A[0]$이 쌍대화 복합체인 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$D(A)$의 가역 대상에 대해서는\  More on Algebra, Lemma
+\ref{more-algebra-lemma-invertible-derived}와\ 
+Section \ref{dualizing-section-dualizing}의 논의를 보라.
+
+\medskip\noindent
+Lemma \ref{dualizing-lemma-dualizing-localize}에 의해 모든\  $\mathfrak p$에 대해
+복합체\  $(\omega_A^\bullet)_\mathfrak p$는\  $A_\mathfrak p$ 위의
+쌍대화 복합체이다. 쌍대화 복합체의 정의와 유일성
+(Lemma \ref{dualizing-lemma-dualizing-unique})에 의해 (1)(b)를 얻는다.
+
+\medskip\noindent
+(1)(c)를 보이기 위해\  $A_\mathfrak p$가\  Gorenstein이라고 하자.
+$H^{n_{x}}((\omega_A^\bullet)_\mathfrak p)$가 영이 아니고\ 
+$A_\mathfrak p$와 동형이 되게 하는 유일한 정수를\  $n_x$라 하자.
+$\omega_A^\bullet$은\  $D^b_{\textit{Coh}}(A)$에 속하므로
+영이 아닌 유한\  $A$-가군\  $H^i(\omega_A^\bullet)$은 유한 개이다.
+따라서\  $f \in A$, $f \not \in \mathfrak p$이고,
+$H^{n_x}((\omega_A^\bullet)_f)$만 영이 아니며\  $A_f$ 위에서\ 
+$1$개의 원소로 생성되게 하는 원소가 존재한다.
+쌍대화 복합체는 충실하므로(정의에 의해)
+$A_f \cong H^{n_x}((\omega_A^\bullet)_f)$라고 결론 내린다.
+이로부터 모든\  $\mathfrak q \in D(f)$에 대해\ 
+$A_\mathfrak q$가\  Gorenstein임을 알 수 있다. 이는 (1)(c)의 집합이
+열려 있음을 증명한다.
+
+\medskip\noindent
+(1)(a)의 증명. 함의\  $\Leftarrow$는 (1)(b)에서 따른다.
+함의\  $\Rightarrow$는 앞 단락의 논의에서 따른다. 그곳에서\ 
+$A_\mathfrak p$가\  Gorenstein이면 어떤\  $f \in A$,
+$f \not \in \mathfrak p$에 대해 복합체\  $(\omega_A^\bullet)_f$가
+영이 아닌 코호몰로지 가군을 정확히 하나 가지며 그 가군이 가역임을 보였다.
+
+\medskip\noindent
+$A[0]$이 쌍대화 복합체이면 (1)에 의해\  $A$는\  Gorenstein이다.
+반대로 (1)에 의해\  $\omega_A^\bullet$은 국소적으로\  $A$의 이동과 동형이다.
+쌍대화 복합체인 것은 국소적 성질이므로
+(Lemma \ref{dualizing-lemma-dualizing-glue}) 결과는 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein-ext}
+$(A, \mathfrak m, \kappa)$를\  Noether 국소환이라 하자.
+그러면\  $A$가\  Gorenstein일 필요충분조건은\ 
+$i \gg 0$에 대해\  $\Ext^i_A(\kappa, A)$가 영인 것이다.
+\end{lemma}
+
+\begin{proof}
+$A[0]$이\  $A$의 쌍대화 복합체일 필요충분조건은\  $A$가\  $A$-가군으로서
+유한 단사 차원을 갖는 것임에 유의하자
+(Definition \ref{dualizing-definition-dualizing}에서 즉시 따른다).
+따라서 보조정리는\  More on Algebra, Lemma
+\ref{more-algebra-lemma-finite-injective-dimension-Noetherian-local}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-characterize-gorenstein}
+$A$를\  Noether 환이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $A$는 자기 자신 위의 가군으로서 유한 단사 차원을 갖는다.
+\item $A$는\  Gorenstein이고 유한 차원이다.
+\end{enumerate}
+이 경우\  $A[0]$은 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$A$가\  $A$ 위의 가군으로서 유한 단사 차원을 가지면\  $A[0]$은\ 
+$A$ 위의 쌍대화 복합체이다(Definition \ref{dualizing-definition-dualizing}을 보라).
+Lemma \ref{dualizing-lemma-universally-catenary}에 의해\  $A$가 유한 차원이고,
+Lemma \ref{dualizing-lemma-gorenstein}에 의해\  Gorenstein이라고 결론 내린다.
+$A$가\  Gorenstein이고\  $\dim(A) \leq d < \infty$라고 하자.
+$I \subset A$를 임의의 아이디얼이라 하자. $i > d$에 대해\ 
+$\Ext^i_A(A/I, A) = 0$이라고 주장한다. More on Algebra, Lemma
+\ref{more-algebra-lemma-injective-amplitude}에 의해 이는\  $A$가 자기 자신 위의
+가군으로서 유한 단사 차원을 가짐을 증명한다.
+$\Ext$ 군을 만드는 것은 국소화와 가환한다. 예를 들어\  More on Algebra, Lemma
+\ref{more-algebra-lemma-base-change-RHom}을 보라.
+따라서 소멸을 증명하기 위해\  $A$가 차원\  $e < d$인 국소환이라고 가정해도 된다.
+$A$가\  Gorenstein이므로\  $\omega_A^\bullet = A[e]$는 정규화된
+쌍대화 복합체이다. 이제 주장한 소멸은 예를 들어\ 
+Lemma \ref{dualizing-lemma-sitting-in-degrees}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein-divide-by-nonzerodivisor}
+$(A, \mathfrak m, \kappa)$를\  Noether 국소환이라 하자.
+$f \in \mathfrak m$를 영인자가 아닌 원소라 하고\  $B = A/(f)$로 놓자.
+그러면\  $A$가\  Gorenstein일 필요충분조건은\  $B$가\  Gorenstein인 것이다.
+\end{lemma}
+
+\begin{proof}
+$A$가\  Gorenstein이면\  Lemma \ref{dualizing-lemma-divide-by-nonzerodivisor}에 의해\ 
+$B$도\  Gorenstein이다. 반대로\  $B$가\  Gorenstein이라고 하자.
+그러면\  $i \gg 0$에 대해\  $\Ext^i_B(\kappa, B)$는 영이다
+(Lemma \ref{dualizing-lemma-gorenstein-ext}).
+$R\Hom(B, -) : D(A) \to D(B)$가 제한의 오른쪽 수반임을 상기하자
+(Lemma \ref{dualizing-lemma-right-adjoint}). 따라서
+$$
+R\Hom_A(\kappa, A) = R\Hom_B(\kappa, R\Hom(B, A)) =
+R\Hom_B(\kappa, B[1])
+$$
+이다. 마지막 등식은 직접 계산하거나\  Lemma
+\ref{dualizing-lemma-compute-for-effective-Cartier-algebraic}을 적용하여 얻는다.
+따라서\  $i \gg 0$에 대해\  $\Ext^i_A(\kappa, A)$가 영이고,
+$A$는\  Gorenstein이다(Lemma \ref{dualizing-lemma-gorenstein-ext}).
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein-lci}
+$A \to B$가 환들의 국소 완전교차 준동형이고\  $A$가\  Noether Gorenstein 환이면\ 
+$B$는\  Gorenstein 환이다.
+\end{lemma}
+
+\begin{proof}
+More on Algebra, Definition
+\ref{more-algebra-definition-local-complete-intersection}에 의해\ 
+$B = A[x_1, \ldots, x_n]/I$로 쓸 수 있다. 여기서\  $I$는\ 
+Koszul-정칙 아이디얼이다. Gorenstein 환\  $A$ 위의 다항식환은\  Gorenstein이다.
+실제로\  $A$가 국소라고 환원한 뒤\  Lemmas
+\ref{dualizing-lemma-dualizing-polynomial-ring} 및\  \ref{dualizing-lemma-gorenstein}을 사용한다.
+Koszul-정칙 아이디얼은 정의에 의해 국소적으로\  Koszul-정칙열로 생성된다.
+More on Algebra, Section \ref{more-algebra-section-ideals}를 보라.
+$A[x_1, \ldots, x_n]$의 국소환들을 살펴보면 다음을 보이면 충분하다.
+$R$이\  Noether 국소\  Gorenstein 환이고\ 
+$f_1, \ldots, f_c \in \mathfrak m_R$가\  Koszul 정칙열이면\ 
+$R/(f_1, \ldots, f_c)$는\  Gorenstein이다.
+이는\  Lemma \ref{dualizing-lemma-gorenstein-divide-by-nonzerodivisor}와,
+$R$의\  Koszul 정칙열은 바로 정칙열이라는 사실에서 따른다
+(More on Algebra, Lemma
+\ref{more-algebra-lemma-noetherian-finite-all-equivalent}).
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-flat-under-gorenstein}
+$A \to B$를\  Noether 국소환들의 평탄 국소 준동형이라 하자.
+다음은 서로 동치이다.
+\begin{enumerate}
+\item $B$는\  Gorenstein이다.
+\item $A$와\  $B/\mathfrak m_A B$는\  Gorenstein이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이하에서는 국소\  Gorenstein 환이 유한 단사 차원을 갖는다는 사실과\ 
+Lemma \ref{dualizing-lemma-gorenstein-ext}를 따로 언급하지 않고 사용한다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-pseudo-coherence-and-base-change-ext}에 의해
+모든\  $i$에 대해
+$$
+\Ext^i_A(\kappa_A, A) \otimes_A B =
+\Ext^i_B(B/\mathfrak m_A B, B)
+$$
+이다.
+
+\medskip\noindent
+(2)를 가정하자. $R\Hom(B/\mathfrak m_A B, -) : D(B) \to D(B/\mathfrak m_A B)$가
+제한의 오른쪽 수반이라는 사실
+(Lemma \ref{dualizing-lemma-right-adjoint})을 사용하면
+$$
+R\Hom_B(\kappa_B, B) =
+R\Hom_{B/\mathfrak m_A B}(\kappa_B, R\Hom(B/\mathfrak m_A B, B))
+$$
+을 얻는다. $R\Hom(B/\mathfrak m_A B, B)$의 코호몰로지 가군은\ 
+$\Ext^i_B(B/\mathfrak m_A B, B) =
+\Ext^i_A(\kappa_A, A) \otimes_A B$이다.
+$A$가\  Gorenstein이므로 이들 가운데 유한 개만 영이 아니고,
+각각은\  $B/\mathfrak m_A B$의 복사본들의 직합과 동형이다.
+$B/\mathfrak m_A B$가\  Gorenstein이므로\ 
+$R\Hom_B(B/\mathfrak m_B, B)$는 영이 아닌 코호몰로지 가군을
+유한 개만 갖는다고 결론 내린다. 따라서\  $B$는\  Gorenstein이다.
+
+\medskip\noindent
+(1)을 가정하자. $B$는 유한 단사 차원을 가지므로\  $i \gg 0$에 대해\ 
+$\Ext^i_B(B/\mathfrak m_A B, B)$는\  $0$이다.
+$A \to B$가 충실 평탄이므로\  $i \gg 0$에 대해\ 
+$\Ext^i_A(\kappa_A, A)$가\  $0$이라고 결론 내린다.
+따라서\  $A$는\  Gorenstein이다. 이는\ 
+$\Ext^i_A(\kappa_A, A)$가 정확히 하나의\  $i$, 즉\  $i = \dim(A)$에 대해서만
+영이 아니고\  $\Ext^{\dim(A)}_A(\kappa_A, A) \cong \kappa_A$임을 뜻한다
+(Lemmas \ref{dualizing-lemma-normalized-finite}, \ref{dualizing-lemma-apply-CM}, 및\ 
+\ref{dualizing-lemma-gorenstein-CM}을 보라).
+따라서\  $\Ext^i_B(B/\mathfrak m_A B, B)$도 하나의\  $i$를 제외하면 영이고,
+그 정수는\  $i = \dim(A)$이며\ 
+$\Ext^{\dim(A)}_B(B/\mathfrak m_A B, B) \cong B/\mathfrak m_A B$이다.
+그러므로\  Lemma \ref{dualizing-lemma-normalized-finite}에 의해\ 
+$B/\mathfrak m_A B$는\  Gorenstein이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-tor-injective-hull}
+$(A, \mathfrak m, \kappa)$를 차원\  $d$인\  Noether 국소\  Gorenstein 환이라 하자.
+$E$를\  $\kappa$의 단사 포락이라 하자. 그러면\  $i \not = d$에 대해\ 
+$\text{Tor}_i^A(E, \kappa)$는 영이고\ 
+$\text{Tor}_d^A(E, \kappa) = \kappa$이다.
+\end{lemma}
+
+\begin{proof}
+$A$가\  Gorenstein이므로\  $\omega_A^\bullet = A[d]$는\  $A$의 정규화된
+쌍대화 복합체이다. 또한\  $E$는\ 
+$R\Gamma_\mathfrak m(\omega_A^\bullet)$의 유일한 영이 아닌 코호몰로지
+가군이고 차수\  $0$에 놓인다. Lemma
+\ref{dualizing-lemma-local-cohomology-of-dualizing}을 보라.
+Lemma \ref{dualizing-lemma-torsion-tensor-product}에 의해
+$$
+E \otimes_A^\mathbf{L} \kappa =
+R\Gamma_\mathfrak m(\omega_A^\bullet) \otimes_A^\mathbf{L} \kappa =
+R\Gamma_\mathfrak m(\omega_A^\bullet \otimes_A^\mathbf{L} \kappa) =
+R\Gamma_\mathfrak m(\kappa[d]) = \kappa[d]
+$$
+이고, 보조정리가 따른다.
+\end{proof}
+
+
+
+
+\section{쌍대화 복합체의 편재성}
+\label{dualizing-section-ubiquity-dualizing}
+
+\noindent
+많은\  Noether 환은 쌍대화 복합체를 갖는다.
+
+\begin{lemma}
+\label{dualizing-lemma-flat-unramified}
+$A \to B$를\  Noether 국소환들의 국소 준동형이라 하자.
+$\omega_A^\bullet$을 정규화된 쌍대화 복합체라 하자.
+$A \to B$가 평탄하고\  $\mathfrak m_A B = \mathfrak m_B$이면,
+$\omega_A^\bullet \otimes_A B$는\  $B$의 정규화된 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$\omega_A^\bullet \otimes_A B$가\  $D^b_{\textit{Coh}}(B)$에 속함은 명백하다.
+$\kappa_A$와\  $\kappa_B$를 각각\  $A$와\  $B$의 잉여체라 하자.
+More on Algebra, Lemma \ref{more-algebra-lemma-base-change-RHom}에 의해
+다음을 얻는다.
+$$
+R\Hom_B(\kappa_B, \omega_A^\bullet \otimes_A B) =
+R\Hom_A(\kappa_A, \omega_A^\bullet) \otimes_A B =
+\kappa_A[0] \otimes_A B = \kappa_B[0]
+$$
+따라서\  More on Algebra, Lemma
+\ref{more-algebra-lemma-finite-injective-dimension-Noetherian-local}에 의해\ 
+$\omega_A^\bullet \otimes_A B$는 유한 단사 차원을 갖는다.
+마지막으로 같은 논증을 사용하면
+$$
+R\Hom_B(\omega_A^\bullet \otimes_A B, \omega_A^\bullet \otimes_A B) =
+R\Hom_A(\omega_A^\bullet, \omega_A^\bullet) \otimes_A B = A \otimes_A B = B
+$$
+를 얻으며, 이는 원하는 결론이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-flat-iso-mod-I}
+$A \to B$를\  Noether 환들의 평탄 사상이라 하자. $I \subset A$를\ 
+$A/I = B/IB$이고\  $IB$가\  $B$의\  Jacobson 근기에 포함되는 아이디얼이라 하자.
+$\omega_A^\bullet$을 쌍대화 복합체라 하자.
+그러면\  $\omega_A^\bullet \otimes_A B$는\  $B$의 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$\omega_A^\bullet \otimes_A B$가\  $D^b_{\textit{Coh}}(B)$에 속함은 명백하다.
+More on Algebra, Lemma \ref{more-algebra-lemma-base-change-RHom}에 의해
+임의의\  $K \in D^b_{\textit{Coh}}(A)$에 대해
+$$
+R\Hom_B(K \otimes_A B, \omega_A^\bullet \otimes_A B) =
+R\Hom_A(K, \omega_A^\bullet) \otimes_A B
+$$
+이다. 임의의 아이디얼\  $IB \subset J \subset B$에 대해\ 
+$A/J' \otimes_A B = B/J$가 되게 하는 유일한 아이디얼\ 
+$I \subset J' \subset A$가 존재한다. 따라서\  More on Algebra, Lemma
+\ref{more-algebra-lemma-finite-injective-dimension-Noetherian-radical}에 의해\ 
+$\omega_A^\bullet \otimes_A B$는 유한 단사 차원을 갖는다.
+마지막으로 다음도 성립한다.
+$$
+R\Hom_B(\omega_A^\bullet \otimes_A B, \omega_A^\bullet \otimes_A B) =
+R\Hom_A(\omega_A^\bullet, \omega_A^\bullet) \otimes_A B = A \otimes_A B = B
+$$
+따라서 원하는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-completion-henselization-dualizing}
+$A$를\  Noether 환이라 하고\  $I \subset A$를 아이디얼이라 하자.
+$\omega_A^\bullet$을 쌍대화 복합체라 하자.
+\begin{enumerate}
+\item $\omega_A^\bullet \otimes_A A^h$는\  Hensel화\  $(A^h, I^h)$,
+즉 쌍\  $(A, I)$의\  Hensel화 위의 쌍대화 복합체이다.
+\item $\omega_A^\bullet \otimes_A A^\wedge$는\ 
+$I$-진 완비화\  $A^\wedge$ 위의 쌍대화 복합체이다.
+\item $A$가 국소환이면\  $\omega_A^\bullet \otimes_A A^h$,
+resp.\ $\omega_A^\bullet \otimes_A A^{sh}$는\  $A$의\  Hensel화,
+resp.\ 엄밀\  Hensel화 위의 쌍대화 복합체이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{dualizing-lemma-flat-unramified} 및\ 
+\ref{dualizing-lemma-flat-iso-mod-I}에서 즉시 따른다.
+완비화와\  Hensel화에 대해서는\  More on Algebra, Sections
+\ref{more-algebra-section-henselian-pairs},
+\ref{more-algebra-section-permanence-completion}, 및\ 
+\ref{more-algebra-section-permanence-henselization}과\ 
+Algebra, Sections \ref{algebra-section-completion} 및\ 
+\ref{algebra-section-completion-noetherian}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-ubiquity-dualizing}
+다음 종류의 환은 쌍대화 복합체를 갖는다.
+\begin{enumerate}
+\item 체,
+\item Noether 완비 국소환,
+\item $\mathbf{Z}$,
+\item Dedekind 정역,
+\item 위 환들 가운데 하나에서 본질적 유한형 대수를 취하거나,
+아이디얼 진 완비화를 취하거나, Hensel화를 취하거나,
+엄밀\  Hensel화를 취하여 얻는 임의의 환.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(5)는\  Proposition
+\ref{dualizing-proposition-dualizing-essentially-finite-type}과\ 
+Lemma \ref{dualizing-lemma-completion-henselization-dualizing}에서 따른다.
+Lemma \ref{dualizing-lemma-regular-gorenstein}에 의해 정칙 국소환은 쌍대화 복합체를 갖는다.
+완비\  Noether 국소환은\  Cohen 구조 정리에 의해 정칙 국소환의 몫이다
+(Algebra, Theorem \ref{algebra-theorem-cohen-structure-theorem}).
+$A$를\  Dedekind 정역이라 하자. 그러면 모든 아이디얼\  $I$는 유한 사영\ 
+$A$-가군이다(Algebra, Lemma \ref{algebra-lemma-finite-projective}와\ 
+$A$의 국소환들이 이산 값매김환이며 따라서\  PID라는 사실에서 따른다).
+따라서\  More on Algebra, Lemma \ref{more-algebra-lemma-injective-amplitude}에 의해
+모든\  $A$-가군은 유한 단사 차원을 가지며 그 차원은 최대\  $1$이다.
+이로부터\  $A[0]$이 쌍대화 복합체임이 쉽게 따른다.
+\end{proof}
+
+
+
+
+
+\section{형식적 올}
+\label{dualizing-section-formal-fibres}
+
+\noindent
+이 절은\  More on Algebra, Section
+\ref{more-algebra-section-properties-formal-fibres}의 계속이다.
+그곳에서 국소환들이\  Cohen--Macaulay 형식적 올을 갖는\  Noether 환\  $A$에
+대해 상당히 좋은 이론이 있음을 보았다. 즉 다음을 증명했다.
+(1) 극대 아이디얼에서의 국소화들의 형식적 올이\  Cohen--Macaulay인지
+확인하는 것으로 충분하고,
+(2) 이 성질은\  $A$ 위의 유한형 환에 유전되며,
+(3) $A$의 임의의 완비화\  $A^\wedge$에 대해\  $A \to A^\wedge$의 올들이\ 
+Cohen--Macaulay이고,
+(4) 이 성질은\  $A$의\  Hensel화들에 유전된다. More on Algebra, Lemma
+\ref{more-algebra-lemma-check-P-ring-maximal-ideals},
+Proposition \ref{more-algebra-proposition-finite-type-over-P-ring},
+Lemma \ref{more-algebra-lemma-map-P-ring-to-completion-P}, 및\ 
+Lemma \ref{more-algebra-lemma-henselization-pair-P-ring}을 보라.
+국소환들의 형식적 올들이 기하적으로 축약이거나, 기하적으로 정규이거나,
+$(S_n)$이거나, 기하적으로\  $(R_n)$인\  Noether 환들에 대해서도 마찬가지이다.
+이 절에서는 국소환들의 형식적 올들이\  Gorenstein이거나 국소 완전교차인\ 
+Noether 환들에 대해서도 같은 사실이 성립함을 보인다.
+쌍대화 복합체를 갖는\  Noether 환이 그 예이므로 이는 이 장과 관련된다.
+
+\begin{lemma}
+\label{dualizing-lemma-formal-fibres-gorenstein}
+More on Algebra, Section \ref{more-algebra-section-properties-formal-fibres}의
+성질 (A), (B), (C), (D), (E)는\ 
+$P(k \to R) =$``$R$은\  Gorenstein 환이다''에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+Gorenstein 대신\  Cohen--Macaulay에 대해서는 이미 결과가 성립함을 아니까,
+각 단계에서 주어진 환이\  Cohen--Macaulay라고 가정해도 된다.
+이는 증명에 특별히 도움이 되지는 않지만 심리적으로는 유용할 수 있다.
+
+\medskip\noindent
+(A). $K/k$를 유한 생성 체 확대라 하자.
+$R$을\  Gorenstein $k$-대수라 하자.
+$K$가\  $A$의 분수체와 동형이 되게 하는\  $k$ 위의 대역 완전교차\ 
+$A = k[x_1, \ldots, x_n]/(f_1, \ldots, f_c)$를 찾을 수 있다.
+Algebra, Lemma \ref{algebra-lemma-colimit-syntomic}을 보라.
+그러면\  $R \to R \otimes_k A$는 상대 대역 완전교차이다.
+따라서\  Lemma \ref{dualizing-lemma-gorenstein-lci}에 의해\  $R \otimes_k A$는\  Gorenstein이다.
+그러므로 그 국소화인\  $R \otimes_k K$도\  Gorenstein이다.
+
+\medskip\noindent
+(B)의 증명. 환이\  Gorenstein일 필요충분조건은 그 모든 국소환이\ 
+Gorenstein인 것이므로 이는 명백하다.
+
+\medskip\noindent
+(C). $A \to B \to C$를\  Noether 환들의 평탄 사상이라 하자.
+$A \to B$의 올들이\  Gorenstein이고\  $B \to C$가 정칙이라고 가정하자.
+$A \to C$의 올들이\  Gorenstein임을 보여야 한다.
+명백히\  $A = k$가 체라고 가정할 수 있다. 이어서\  $B \to C$가\ 
+Noether 국소환들의 정칙 국소 준동형이라고 가정할 수 있다.
+그러면\  $B$는\  Gorenstein이고\  $C/\mathfrak m_B C$는 정칙이며,
+특히\  Gorenstein이다(Lemma \ref{dualizing-lemma-regular-gorenstein}).
+따라서\  Lemma \ref{dualizing-lemma-flat-under-gorenstein}에 의해\  $C$는\  Gorenstein이다.
+
+\medskip\noindent
+(D). 이는\  Lemma \ref{dualizing-lemma-flat-under-gorenstein}에서 따른다.
+(E)는 조건이 바탕체를 언급하지 않으므로 즉시 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-gorenstein-formal-fibres}
+$A$를\  Noether 국소환이라 하자. $A$가 쌍대화 복합체를 가지면\ 
+$A$의 형식적 올들은\  Gorenstein이다.
+\end{lemma}
+
+\begin{proof}
+$\mathfrak p$를\  $A$의 소아이디얼이라 하자. $A$의\  $\mathfrak p$에서의 형식적 올은\ 
+$A/\mathfrak p$의\  $(0)$에서의 형식적 올과 동형이다.
+몫\  $A/\mathfrak p$는 쌍대화 복합체를 갖는다
+(Lemma \ref{dualizing-lemma-dualizing-quotient}).
+따라서\  $A$가 국소 정역이고\  $\mathfrak p = (0)$인 경우를 확인하면 충분하다.
+$\omega_A^\bullet$을\  $A$의 쌍대화 복합체라 하자. 그러면\ 
+$\omega_A^\bullet \otimes_A A^\wedge$는 완비화\  $A^\wedge$의
+쌍대화 복합체이다(Lemma \ref{dualizing-lemma-flat-unramified}).
+또한\  $\omega_A^\bullet \otimes_A K$는\  $A$의 분수체\  $K$의
+쌍대화 복합체이다(Lemma \ref{dualizing-lemma-dualizing-localize}).
+따라서 어떤\  $n \in \mathbf{Z}$에 대해\  $\omega_A^\bullet \otimes_A K$는\ 
+$K[n]$과 동형이다. 마찬가지로 형식적 올\  $A^\wedge \otimes_A K$의
+쌍대화 복합체는 다음과 같다고 결론 내린다.
+$$
+\omega_A^\bullet \otimes_A A^\wedge \otimes_{A^\wedge} (A^\wedge \otimes_A K) =
+(\omega_A^\bullet \otimes_A K) \otimes_K (A^\wedge \otimes_A K) \cong
+(A^\wedge \otimes_A K)[n]
+$$
+이는 원하는 결론이다.
+\end{proof}
+
+\noindent
+Divided Power Algebra, Remark \ref{dpa-remark-no-good-ci-map}에서 약속한
+검증은 다음과 같다.
+
+\begin{lemma}
+\label{dualizing-lemma-formal-fibres-lci}
+More on Algebra, Section \ref{more-algebra-section-properties-formal-fibres}의
+성질 (A), (B), (C), (D), (E)는\ 
+$P(k \to R) =$``$R$은 국소 완전교차이다''에 대해 성립한다.
+Divided Power Algebra, Definition \ref{dpa-definition-lci}를 보라.
+\end{lemma}
+
+\begin{proof}
+(A). $K/k$를 유한 생성 체 확대라 하자.
+$R$을 국소 완전교차인\  $k$-대수라 하자.
+$K$가\  $A$의 분수체와 동형이 되게 하는\  $k$ 위의 대역 완전교차\ 
+$A = k[x_1, \ldots, x_n]/(f_1, \ldots, f_c)$를 찾을 수 있다.
+Algebra, Lemma \ref{algebra-lemma-colimit-syntomic}을 보라.
+그러면\  $R \to R \otimes_k A$는 상대 대역 완전교차이다.
+Divided Power Algebra, Lemma \ref{dpa-lemma-avramov}에 의해\ 
+$R \otimes_k A$는 국소 완전교차이다.
+
+\medskip\noindent
+(B)의 증명. 환이 국소 완전교차일 필요충분조건은 그 모든 국소환이
+완전교차인 것이므로 이는 명백하다.
+
+\medskip\noindent
+(C). $A \to B \to C$를\  Noether 환들의 평탄 사상이라 하자.
+$A \to B$의 올들이 국소 완전교차이고\  $B \to C$가 정칙이라고 가정하자.
+$A \to C$의 올들이 국소 완전교차임을 보여야 한다.
+명백히\  $A = k$가 체라고 가정할 수 있다. 이어서\  $B \to C$가\ 
+Noether 국소환들의 정칙 국소 준동형이라고 가정할 수 있다.
+그러면\  $B$는 완전교차이고\  $C/\mathfrak m_B C$는 정칙이며,
+특히 정의에 의해 완전교차이다. 따라서\  Divided Power Algebra, Lemma
+\ref{dpa-lemma-avramov}에 의해\  $C$는 완전교차이다.
+
+\medskip\noindent
+(D). 이는 (C)와 같은 논증을\  Divided Power Algebra, Lemma
+\ref{dpa-lemma-avramov}의 반대 방향에 적용하면 따른다.
+(E)는 조건이 바탕체를 언급하지 않으므로 즉시 성립한다.
+\end{proof}
+
+
+
+
+
+
+\section{위 느낌표 함자의 대수적 구성}
+\label{dualizing-section-relative-dualizing-complex-algebraic}
+
+\noindent
+Noether 환들의 유한형 준동형\  $R \to A$에 대해
+비유일 동형을 제외하고 잘 정의되는 함자\  $\varphi^! : D(R) \to D(A)$를
+구성할 것이다. Duality for Schemes, Remark
+\ref{duality-remark-local-calculation-shriek}에서 보겠지만,
+이는 스킴의 쌍대성 이론에서 만나는 위 느낌표 함자들과 동형을 제외하고 일치한다.
+구성의 동기를 설명하기 위해 두 가지 성질을 더 언급하자.
+\begin{enumerate}
+\item $\varphi^!$는\  $R$의 쌍대화 복합체가 존재하면 이를\ 
+$A$의 쌍대화 복합체로 보내고,
+\item $\omega_{A/R}^\bullet = \varphi^!(R)$는 일종의 상대 쌍대화 복합체이다.
+즉\  $D^b_{\textit{Coh}}(A)$에 속하며, $R \to A$가 평탄하면
+올들 위로 제한했을 때 쌍대화 복합체가 된다.
+\end{enumerate}
+이 명제들은\  Lemmas \ref{dualizing-lemma-shriek-dualizing-algebraic} 및\ 
+\ref{dualizing-lemma-relative-dualizing-algebraic}이다.
+
+\medskip\noindent
+$\varphi : R \to A$를\  Noether 환들의 유한형 준동형이라 하자.
+함자\  $\varphi^! : D(R) \to D(A)$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item $\varphi : R \to A$가 전사이면\ 
+$\varphi^!(K) = R\Hom(A, K)$로 놓는다. 여기서는\  Section
+\ref{dualizing-section-trivial}의 함자\  $R\Hom(A, -) : D(R) \to D(A)$를 사용한다.
+\item 일반적으로\  $P = R[x_1, \ldots, x_n]$인 전사\ 
+$\psi : P \to A$를 택하고\ 
+$\varphi^!(K) = \psi^!(K \otimes_R^\mathbf{L} P)[n]$로 놓는다.
+여기서는\  More on Algebra, Section
+\ref{more-algebra-section-derived-base-change}의 함자\ 
+$- \otimes_R^\mathbf{L} P : D(R) \to D(P)$를 사용한다.
+\end{enumerate}
+다항식환의 변수 개수만큼 이동한\  $[n]$에 유의하자.
+이 구성은 {\bf 정준적이지 않으며}, 함자\  $\varphi^!$는
+함자들의 비유일 동형을 제외하고만 잘 정의된다\footnote{구성을 정준적으로
+만드는 것은 가능하다. 구성에서\  $P[n]$ 대신\  $\Omega^n_{P/R}[n]$을 사용하고\ 
+Lemma \ref{dualizing-lemma-well-defined}에서도 이를 사용하면 된다.
+이렇게 하려면 이 절의 내용이 훨씬 더 복잡해진다.}.
+
+\begin{lemma}
+\label{dualizing-lemma-well-defined}
+$\varphi : R \to A$를\  Noether 환들의 유한형 준동형이라 하자.
+함자\  $\varphi^!$는 동형을 제외하고 잘 정의된다.
+\end{lemma}
+
+\begin{proof}
+$\psi_1 : P_1 = R[x_1, \ldots, x_n] \to A$와\ 
+$\psi_2 : P_2 = R[y_1, \ldots, y_m] \to A$가 다항식환에서\ 
+$A$로 가는 두 전사라고 하자. 그러면 다음 가환 그림을 얻는다.
+$$
+\xymatrix{
+R[x_1, \ldots, x_n, y_1, \ldots, y_m]
+\ar[d]^{x_i \mapsto g_i} \ar[rr]_-{y_j \mapsto f_j} & &
+R[x_1, \ldots, x_n] \ar[d] \\
+R[y_1, \ldots, y_m] \ar[rr] & & A
+}
+$$
+여기서\  $f_j$와\  $g_i$는\  $\psi_1(f_j) = \psi_2(y_j)$ 및\ 
+$\psi_2(g_i) = \psi_1(x_i)$를 만족하도록 택한다.
+대칭성에 의해\  $P \to A$와\  $P[y_1, \ldots, y_m] \to A$를 사용하여
+정의한 두 함자가 동형임을 증명하면 충분하다.
+귀납법에 의해\  $m = 1$이라고 가정할 수 있다.
+그러면 다음 단락에서 논하는 경우로 환원된다.
+
+\medskip\noindent
+이제\  $\psi : P \to A$가 주어지고\  $\chi : P[y] \to A$는\ 
+$P$ 위에서\  $\psi$를 유도한다고 하자. $Q = P[y]$로 쓰자.
+$\psi(g) = \chi(y)$인\  $g \in P$를 택한다.
+$\pi(y) = g$인\  $P$-대수 사상을\  $\pi : Q \to P$라 하자.
+그러면\  $\chi = \psi \circ \pi$이고, Section \ref{dualizing-section-trivial}의 내용에 의해
+둘 다 제한 함자\  $D(A) \to D(Q)$의 수반이므로\ 
+$\chi^! = \psi^! \circ \pi^!$이다. 따라서
+$$
+\chi^!\left(K \otimes_R^\mathbf{L} Q\right)[n + 1] =
+\psi^!\left(\pi^!\left(K \otimes_R^\mathbf{L} Q\right)[1]\right)[n]
+$$
+이다. 그러므로 다음을 보이면 충분하다.
+$\pi^!(K \otimes_R^\mathbf{L} Q[1]) = K \otimes_R^\mathbf{L} P$
+따라서 함자\  $\pi^!(-) : D(Q) \to D(P)$가\ 
+$K \mapsto K \otimes_Q^\mathbf{L} P[-1]$과 동형임을 보이면 충분하다.
+이는\  Lemma \ref{dualizing-lemma-compute-for-effective-Cartier-algebraic}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-shriek-boundedness}
+$\varphi : R \to A$를\  Noether 환들의 유한형 준동형이라 하자.
+\begin{enumerate}
+\item $\varphi^!$는\  $D^+(R)$을\  $D^+(A)$ 안으로 보내고\ 
+$D^+_{\textit{Coh}}(R)$을\  $D^+_{\textit{Coh}}(A)$ 안으로 보낸다.
+\item $\varphi$가 완전이면\  $\varphi^!$는\ 
+$D^-(R)$을\  $D^-(A)$ 안으로,
+$D^-_{\textit{Coh}}(R)$을\  $D^-_{\textit{Coh}}(A)$ 안으로, 그리고\ 
+$D^b_{\textit{Coh}}(R)$을\  $D^b_{\textit{Coh}}(A)$ 안으로 보낸다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\varphi^!$의 정의에서처럼 분해\  $R \to P \to A$를 택한다.
+함자\  $- \otimes_R^\mathbf{L} : D(R) \to D(P)$는 부분범주\ 
+$D^+, D^+_{\textit{Coh}}, D^-, D^-_{\textit{Coh}}, D^b_{\textit{Coh}}$를 보존한다.
+함자\  $R\Hom(A, -) : D(P) \to D(A)$는\  Lemma
+\ref{dualizing-lemma-exact-support-coherent}에 의해\  $D^+$와\ 
+$D^+_{\textit{Coh}}$를 보존한다. $R \to A$가 완전이면\  $A$는\ 
+$P$-가군으로서 완전이다. More on Algebra, Lemma
+\ref{more-algebra-lemma-perfect-ring-map}을 보라.
+$R\Hom(A, K)$를\  $D(P)$에 제한한 것이\  $R\Hom_P(A, K)$임을 상기하자.
+More on Algebra, Lemma \ref{more-algebra-lemma-dual-perfect-complex}에 의해
+어떤 완전 대상\  $E \in D(P)$에 대해\ 
+$R\Hom_P(A, K) = E \otimes_P^\mathbf{L} K$이다.
+$E$를 유한 사영\  $P$-가군들의 유한 복합체로 나타낼 수 있으므로,
+$K$가\  $D^-(P), D^-_{\textit{Coh}}(P), D^b_{\textit{Coh}}(P)$에 속하면\ 
+$R\Hom_P(A, K)$도 각각 그 부분범주에 속함이 명백하다.
+제한 함자\  $D(A) \to D(P)$가 이 부분범주들을 반영하므로 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-shriek-dualizing-algebraic}
+$\varphi$를\  Noether 환들의 유한형 준동형이라 하자.
+$\omega_R^\bullet$이\  $R$의 쌍대화 복합체이면\ 
+$\varphi^!(\omega_R^\bullet)$은\  $A$의 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{dualizing-lemma-dualizing-polynomial-ring} 및\ 
+\ref{dualizing-lemma-dualizing-quotient}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-flat-bc}
+$R \to R'$를\  Noether 환들의 평탄 준동형이라 하자.
+$\varphi : R \to A$를 유한형 환 사상이라 하자.
+$\varphi$가 유도하는 사상을\  $\varphi' : R' \to A' = A \otimes_R R'$라 하자.
+그러면 함자적 사상
+$$
+\varphi^!(K) \otimes_A^\mathbf{L} A' \longrightarrow
+(\varphi')^!(K \otimes_R^\mathbf{L} R')
+$$
+들이 존재하며, $D(R)$에 속하는\  $K$에 대해 정의되고\ 
+$K \in D^+(R)$이면 동형이다.
+\end{lemma}
+
+\begin{proof}
+$P$가\  $R$ 위의 다항식환인 분해\  $R \to P \to A$를 택한다.
+밑변환으로 대응하는 분해\  $R' \to P' \to A'$를 얻는다.
+More on Algebra, Lemma \ref{more-algebra-lemma-double-base-change}에 의해\ 
+$(K \otimes_R^\mathbf{L} P) \otimes_P^\mathbf{L} P' =
+(K \otimes_R^\mathbf{L} R') \otimes_{R'}^\mathbf{L} P'$이므로,
+$K$에 함자적인 사상
+$$
+R\Hom(A, K \otimes_R^\mathbf{L} P[n]) \otimes_A^\mathbf{L} A'
+\longrightarrow
+R\Hom(A', (K \otimes_R^\mathbf{L} P[n]) \otimes_P^\mathbf{L} P')
+$$
+을 구성하면 충분하다. 이를 위해 사상 (\ref{dualizing-equation-base-change})을 사용한다.
+이 사상은\  Section \ref{dualizing-section-base-change-trivial-duality}에서\ 
+$P, A, P', A'$에 대해 구성되었다.
+Lemma \ref{dualizing-lemma-flat-bc-surjection}에 의해 이 사상은\ 
+$K \in D^+(R)$이면 동형이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-bc}
+$R \to R'$를\  Noether 환들의 준동형이라 하자.
+$\varphi : R \to A$를 완전 환 사상이라 하고
+(More on Algebra, Definition
+\ref{more-algebra-definition-pseudo-coherent-perfect}),
+$R'$와\  $A$가\  $R$ 위에서\  Tor 독립이라고 하자.
+$\varphi$가 유도하는 사상을\  $\varphi' : R' \to A' = A \otimes_R R'$라 하자.
+그러면\  $D(R)$에 속하는\  $K$에 대해 함자적 동형
+$$
+\varphi^!(K) \otimes_A^\mathbf{L} A' =
+(\varphi')^!(K \otimes_R^\mathbf{L} R')
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+$P$가\  $R$ 위의 다항식환이고\  $A$가 완전\  $P$-가군이 되는 분해\ 
+$R \to P \to A$를 택할 수 있다. More on Algebra, Lemma
+\ref{more-algebra-lemma-perfect-ring-map}을 보라.
+밑변환으로 대응하는 분해\  $R' \to P' \to A'$를 얻는다.
+More on Algebra, Lemma \ref{more-algebra-lemma-double-base-change}에 의해\ 
+$(K \otimes_R^\mathbf{L} P) \otimes_P^\mathbf{L} P' =
+(K \otimes_R^\mathbf{L} R') \otimes_{R'}^\mathbf{L} P'$이므로,
+$K$에 함자적인 사상
+$$
+R\Hom(A, K \otimes_R^\mathbf{L} P[n]) \otimes_A^\mathbf{L} A'
+\longrightarrow
+R\Hom(A', (K \otimes_R^\mathbf{L} P[n]) \otimes_P^\mathbf{L} P')
+$$
+을 구성하면 충분하다. 다음이 성립한다.
+$$
+A \otimes_P^\mathbf{L} P' = A \otimes_R^\mathbf{L} R' = A'
+$$
+첫 번째 등식은\  More on Algebra, Lemma
+\ref{more-algebra-lemma-base-change-comparison}을\  $R, R', P, P'$에
+적용하여 얻는다. 두 번째 등식은\  $A$와\  $R'$가\  $R$ 위에서\  Tor 독립이기 때문이다.
+따라서\  $A$와\  $P'$는\  $P$ 위에서\  Tor 독립이고,
+사상 (\ref{dualizing-equation-base-change})을 사용하여 원하는 화살을 얻는다.
+이 사상은\  Section \ref{dualizing-section-base-change-trivial-duality}에서\ 
+$P, A, P', A'$에 대해 구성되었다.
+Lemma \ref{dualizing-lemma-bc-surjection}에 의해 증명을 끝내려면\  $A$가 완전\ 
+$P$-가군임을 보이면 충분한데, 이는 위에서 보았다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-bc-flat}
+$R \to R'$를\  Noether 환들의 준동형이라 하자.
+$\varphi : R \to A$가 평탄하고 유한형이라고 하자.
+$\varphi$가 유도하는 사상을\  $\varphi' : R' \to A' = A \otimes_R R'$라 하자.
+그러면\  $D(R)$에 속하는\  $K$에 대해 함자적 동형
+$$
+\varphi^!(K) \otimes_A^\mathbf{L} A' =
+(\varphi')^!(K \otimes_R^\mathbf{L} R')
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-bc}의 특수한 경우이다. 이는\  More on Algebra, Lemma
+\ref{more-algebra-lemma-flat-finite-presentation-perfect}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-composition-shriek-algebraic}
+$A \xrightarrow{a} B \xrightarrow{b} C$를\  Noether 환들의 유한형 준동형이라 하자.
+그러면 함자들의 변환\  $b^! \circ a^! \to (b \circ a)^!$가 존재하며,
+$D^+(A)$ 위에서 동형이다.
+\end{lemma}
+
+\begin{proof}
+$A$ 위의 다항식환\  $P = A[x_1, \ldots, x_n]$과 전사\  $P \to B$를 택한다.
+$C$를\  $B$ 위에서 생성하는 원소\  $c_1, \ldots, c_m \in C$를 택한다.
+$Q = P[y_1, \ldots, y_m]$으로 놓고\ 
+$Q' = Q \otimes_P B = B[y_1, \ldots, y_m]$라 쓰자.
+$\chi : Q' \to C$를\  $y_j$를\  $c_j$로 보내는 전사라 하자. 그림은 다음과 같다.
+$$
+\xymatrix{
+& Q \ar[r]_{\psi'} & Q' \ar[r]_\chi & C \\
+A \ar[r] & P \ar[r]^\psi \ar[u] & B \ar[u]
+}
+$$
+Lemma \ref{dualizing-lemma-flat-bc-surjection}에 의해\  $M \in D(P)$에 대해 화살\ 
+$\psi^!(M) \otimes_B^\mathbf{L} Q' \to (\psi')^!(M \otimes_P^\mathbf{L} Q)$가
+존재하며, $M$이 아래 유계이면 항상 동형이다. 또한\  Section
+\ref{dualizing-section-trivial}에 의해 두 함자 모두 제한 함자\  $D(C) \to D(Q)$의
+수반이므로\  $\chi^! \circ (\psi')^! = (\chi \circ \psi')^!$이다.
+따라서 다음을 얻는다.
+\begin{align*}
+b^!(a^!(K))
+& =
+\chi^!(\psi^!(K \otimes_A^\mathbf{L} P)[n] \otimes_B^\mathbf{L} Q)[m] \\
+& \to
+\chi^!((\psi')^!(K \otimes_A^\mathbf{L} P \otimes_P^\mathbf{L} Q))[n + m] \\
+& =
+(\chi \circ \psi')^!(K\otimes_A^\mathbf{L} Q)[n + m] \\
+& =
+(b \circ a)^!(K)
+\end{align*}
+여기서는 위의 내용뿐 아니라\  More on Algebra, Lemma
+\ref{more-algebra-lemma-double-base-change}도 사용했다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-upper-shriek-finite}
+$\varphi : R \to A$를\  Noether 환들의 유한 사상이라 하자.
+그러면\  $\varphi^!$는\  Section \ref{dualizing-section-trivial}의 함자\ 
+$R\Hom(A, -) : D(R) \to D(A)$와 동형이다.
+\end{lemma}
+
+\begin{proof}
+$A$가\  $R$ 위에서\  $n > 1$개의 원소로 생성된다고 하자.
+그러면\  $R \to A$를 두 유한 환 사상의 합성으로 분해할 수 있고,
+각 단계의 생성원 수는 모두\  $< n$이다.
+Lemma \ref{dualizing-lemma-composition-shriek-algebraic}과\ 
+Lemma \ref{dualizing-lemma-composition-right-adjoints}가 있으므로,
+$A$가\  $R$ 위에서 한 원소로 생성되는 경우에 보조정리를 증명하면 충분하다.
+$A$가\  $R$ 위에서 유한이므로, $A$는\  $x$에 관한\  monic 다항식\  $f$에 대해\ 
+$B = R[x]/(f)$의 몫이다
+(Algebra, Lemma \ref{algebra-lemma-finite-is-integral}).
+다시 합성에 관한 보조정리들과 전사에 대해서는 정의상 일치한다는 사실을 사용하면,
+$R \to B = R[x]/(f)$에 대해 보조정리를 증명하면 충분하다.
+이 경우 함자\  $\varphi^!$는\  $K \mapsto K \otimes_R^\mathbf{L} B$와 동형이다.
+이는 사상\  $R[x] \to B$에\  Lemma
+\ref{dualizing-lemma-compute-for-effective-Cartier-algebraic}을 적용하여 증명한다
+($\varphi^!$의 정의와 이 보조정리의 이동량을 더하면 영임에 유의하자).
+함자\  $R\Hom(B, -) : D(R) \to D(B)$에 대해서는\  Lemma
+\ref{dualizing-lemma-RHom-is-tensor-special}을 사용하면\  $B$-가군으로서\ 
+$\Hom_R(B, R) \cong B$임을 보이는 것으로 충분하다.
+$f$의 차수를\  $d$라 하자. 그러면\  $B$의\  $R$-기저는\ 
+$1, x, \ldots, x^{d - 1}$로 주어진다.
+$\delta_i : B \to R$, $i = 0, \ldots, d - 1$을 이 기저에 관해\ 
+$x^i$의 계수를 뽑아내는\  $R$-선형 사상이라 하자.
+그러면\  $\delta_0, \ldots, \delta_{d - 1}$은\  $\Hom_R(B, R)$의 기저이다.
+마지막으로\  $0 \leq i \leq d - 1$에 대해 계산하면
+$$
+x^i \delta_{d - 1} =
+\delta_{d - 1 - i} + b_1 \delta_{d - i} + \ldots + b_i \delta_{d - 1}
+$$
+이고, 여기서 어떤\  $c_1, \ldots, c_d \in R$가 존재한다\footnote{
+$f = x^d + a_1 x^{d - 1} + \ldots + a_d$이면\ 
+$c_1 = -a_1$, $c_2 = a_1^2 - a_2$, $c_3 = -a_1^3 + 2a_1a_2 -a_3$ 등이다.}.
+따라서\  $\Hom_R(B, R)$은\  $\delta_{d - 1}$로 생성되는 주\  $B$-가군이다.
+계수를 비교하면 이는 랭크\  $1$인 자유\  $B$-가군이라고 결론 내린다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-upper-shriek-localize}
+$R$을\  Noether 환이라 하고\  $f \in R$이라 하자.
+$\varphi$가 사상\  $R \to R_f$를 나타내면\  $\varphi^!$는\ 
+$- \otimes_R^\mathbf{L} R_f$와 동형이다.
+더 일반적으로\  $\varphi : R \to R'$가\ 
+$\Spec(R') \to \Spec(R)$가 열린 몰입이 되게 하는 사상이면,
+$\varphi^!$는\  $- \otimes_R^\mathbf{L} R'$와 동형이다.
+\end{lemma}
+
+\begin{proof}
+표현\  $R \to R[x] \to R[x]/(fx - 1) = R_f$를 택하고\ 
+$fx - 1$이\  $R[x]$에서 영인자가 아닌 원소임을 관찰하자.
+그러면\  Lemma \ref{dualizing-lemma-compute-for-effective-Cartier-algebraic}을 사용하여
+함자\  $\varphi^!$를 계산할 수 있다. 세부사항은 생략한다.
+$\varphi^!$의 정의와 이 보조정리의 이동량을 더하면 영임에 유의하자.
+
+\medskip\noindent
+일반적인 경우에는\  $R' \otimes_R R' = R'$임에 유의하자.
+따라서 위의 밑변환 결과에서 결론이 따른다.
+Lemma \ref{dualizing-lemma-flat-bc} 또는\  Lemma \ref{dualizing-lemma-bc} 가운데 어느 것이든 충분하다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-upper-shriek-is-tensor-functor}
+$\varphi : R \to A$를\  Noether 환들의 완전 준동형이라 하자
+(예를 들어\  $\varphi$가 평탄 유한형이라고 하자).
+그러면\  $K \in D(R)$에 대해\ 
+$\varphi^!(K) = K \otimes_R^\mathbf{L} \varphi^!(R)$이다.
+\end{lemma}
+
+\begin{proof}
+(괄호 안의 명제는\  More on Algebra, Lemma
+\ref{more-algebra-lemma-flat-finite-presentation-perfect}에서 따른다.)
+$P$가\  $R$ 위의\  $n$변수 다항식환이고\  $A$가 완전\  $P$-가군이 되는
+분해\  $R \to P \to A$를 택할 수 있다. More on Algebra, Lemma
+\ref{more-algebra-lemma-perfect-ring-map}을 보라.
+$\varphi^!(K) = R\Hom(A, K \otimes_R^\mathbf{L} P[n])$임을 상기하자.
+따라서\  Lemma \ref{dualizing-lemma-RHom-is-tensor-special}과\ 
+More on Algebra, Lemma \ref{more-algebra-lemma-double-base-change}에서 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-if-have-omega}
+$\varphi : A \to B$를\  Noether 환들의 유한형 준동형이라 하자.
+$\omega_A^\bullet$을\  $A$의 쌍대화 복합체라 하자.
+$\omega_B^\bullet = \varphi^!(\omega_A^\bullet)$로 놓자.
+$K \in D_{\textit{Coh}}(A)$에 대해\ 
+$D_A(K) = R\Hom_A(K, \omega_A^\bullet)$라 쓰고,
+$L \in D_{\textit{Coh}}(B)$에 대해\ 
+$D_B(L) = R\Hom_B(L, \omega_B^\bullet)$라 쓰자.
+그러면\  $K \in D_{\textit{Coh}}(A)$에 대해 함자적 동형
+$$
+\varphi^!(K) = D_B(D_A(K) \otimes_A^\mathbf{L} B)
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-shriek-dualizing-algebraic}에 의해\ 
+$\omega_B^\bullet$은\  $B$의 쌍대화 복합체임을 관찰하자.
+$A \to B \to C$를\  Noether 환들의 유한형 준동형이라 하자.
+보조정리가\  $A \to B$와\  $B \to C$에 대해 성립하면\  $A \to C$에 대해서도 성립한다.
+이는\  Lemma \ref{dualizing-lemma-composition-shriek-algebraic}과\ 
+Lemma \ref{dualizing-lemma-dualizing}에 의한\  $D_B \circ D_B \cong \text{id}$에서 따른다.
+따라서\  $A \to B$가 전사인 경우와\  $B$가\  $A$ 위의 다항식환인 경우에
+보조정리를 증명하면 충분하다.
+
+\medskip\noindent
+$B = A[x_1, \ldots, x_n]$이라고 하자.
+$D_A \circ D_A \cong \text{id}$이므로\  $D_{\textit{Coh}}(A)$에 속하는\  $K$에 대해\ 
+$D_B(K \otimes_A B) \cong D_A(K) \otimes_A B[n]$을 증명하면 충분하다.
+$\omega_A^\bullet$을 나타내는 단사 대상들의 유계 복합체\  $I^\bullet$을 택한다.
+$I^\bullet \otimes_A B \to J^\bullet$인 준동형을 택하되,
+$J^\bullet$은\  $B$-가군들의 유계 복합체라 하자.
+$A$-가군들의 복합체\  $K^\bullet$이 주어졌을 때 다음의 명백한 복합체 사상을 생각하자.
+$$
+\Hom^\bullet(K^\bullet, I^\bullet) \otimes_A B[n]
+\longrightarrow
+\Hom^\bullet(K^\bullet \otimes_A B, J^\bullet[n])
+$$
+왼쪽은\  $D_A(K) \otimes_A B[n]$을 나타내고 오른쪽은\ 
+$D_B(K \otimes_A B)$를 나타낸다. 따라서\  $K^\bullet$의 코호몰로지 가군들이
+유한\  $A$-가군일 때 이 사상이 준동형임을 증명하면 충분하다.
+양쪽 어느 쪽이든 차수\  $r$의 복합체 코호몰로지는 유한 개의\  $K^i$에만 의존한다.
+따라서\  $K^\bullet$을 절단으로 바꾸어도 된다. 즉\  $K^\bullet$이\ 
+$D^-_{\textit{Coh}}(A)$의 대상을 나타낸다고 가정할 수 있다.
+그러면\  $K^\bullet$은 유한 자유\  $A$-가군들의 위로 유계인 복합체와 준동형이다.
+따라서\  $K^\bullet$ 자체가 유한 자유\  $A$-가군들의 위로 유계인 복합체라고 가정할 수 있다.
+이 경우 위에 표시한 사상이 복합체의 동형임은 쉽게 알 수 있고,
+이 경우의 증명이 끝난다.
+
+\medskip\noindent
+$A \to B$가 전사라고 하자. 제한 함자를\  $i_* : D(B) \to D(A)$라 쓰고,
+$\varphi^!(-) = R\Hom(A, -)$가\  $i_*$의 오른쪽 수반임을 상기하자
+(Lemma \ref{dualizing-lemma-right-adjoint}). $F \in D(B)$에 대해
+\begin{align*}
+\Hom_B(F, D_B(D_A(K) \otimes_A^\mathbf{L} B))
+& =
+\Hom_B((D_A(K) \otimes_A^\mathbf{L} B) \otimes_B^\mathbf{L} F,
+\omega_B^\bullet) \\
+& =
+\Hom_A(D_A(K) \otimes_A^\mathbf{L} i_*F, \omega_A^\bullet) \\
+& =
+\Hom_A(i_*F, D_A(D_A(K))) \\
+& =
+\Hom_A(i_*F, K) \\
+& =
+\Hom_B(F, \varphi^!(K))
+\end{align*}
+첫 번째 등식은\  More on Algebra, Lemma
+\ref{more-algebra-lemma-internal-hom}과\  $D_B$의 정의에서 따른다.
+두 번째 등식은 위에서 언급한 수반성과 등식\ 
+$i_*((D_A(K) \otimes_A^\mathbf{L} B) \otimes_B^\mathbf{L} F) =
+D_A(K) \otimes_A^\mathbf{L} i_*F$
+(More on Algebra, Lemma \ref{more-algebra-lemma-derived-base-change})에서 따른다.
+세 번째 등식은\  More on Algebra, Lemma
+\ref{more-algebra-lemma-internal-hom}에서 따른다.
+네 번째 등식은\  $D_A \circ D_A = \text{id}$이기 때문이다.
+마지막 등식은 다시 수반성에서 따른다.
+따라서\  Yoneda 보조정리에 의해 결과가 성립한다.
+\end{proof}
+
+
+
+
+
+
+\section{Noether 경우의 상대 쌍대화 복합체}
+\label{dualizing-section-relative-dualizing-complexes-Noetherian}
+
+\noindent
+$\varphi : R \to A$를\  Noether 환들의 유한형 준동형이라 하자.
+그러면 {\it $A$의\  $R$에 대한 상대 쌍대화 복합체}를
+$$
+\omega_{A/R}^\bullet = \varphi^!(R)
+$$
+로 정의하며, 이는\  $D(A)$의 대상이다. 여기서\  $\varphi^!$는\ 
+Section \ref{dualizing-section-relative-dualizing-complex-algebraic}에서 정의한 것이다.
+그 절의 내용으로부터\  $\omega_{A/R}^\bullet$이 비유일 동형을 제외하고
+잘 정의됨을 알 수 있다.
+
+\begin{lemma}
+\label{dualizing-lemma-base-change-relative-algebraic}
+$R \to R'$를\  Noether 환들의 준동형이라 하자.
+$R \to A$가 유한형이라고 하자. $A' = A \otimes_R R'$로 놓자. 다음 중 하나가 성립한다고 하자.
+\begin{enumerate}
+\item $R \to R'$가 평탄하다.
+\item $R \to A$가 평탄하다.
+\item $R \to A$가 완전이고\ 
+$R'$와\  $A$가\  $R$ 위에서\  Tor 독립이다.
+\end{enumerate}
+그러면 동형\ 
+$\omega_{A/R}^\bullet \otimes_A^\mathbf{L} A' \to \omega^\bullet_{A'/R'}$
+이\  $D(A')$ 안에 존재한다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{dualizing-lemma-flat-bc}, \ref{dualizing-lemma-bc-flat}, \ref{dualizing-lemma-bc}와
+정의에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-algebraic}
+$\varphi : R \to A$를\  Noether 환들의 유한형 사상이라 하자.
+\begin{enumerate}
+\item $\varphi$가 완전이면 다음이 성립한다.
+\begin{enumerate}
+\item $\omega_{A/R}^\bullet$은\  $D^b_{\textit{Coh}}(A)$에 속한다.
+\item $\omega_{A/R}^\bullet$은\  $R$ 위에서 유한\  Tor 차원을 갖는다.
+\item $A \to R\Hom_A(\omega_{A/R}^\bullet, \omega_{A/R}^\bullet)$는
+동형이다.
+\end{enumerate}
+\item $\varphi$가 평탄이면 (1)(a), (1)(b), (1)(c)가 성립하고
+다음도 성립한다.
+\begin{enumerate}
+\item $\omega_{A/R}^\bullet$은\  $R$-완전이다
+(More on Algebra,
+Definition \ref{more-algebra-definition-relatively-perfect}).
+\item 체로 가는 모든 사상\  $R \to k$에 대해 밑변환\ 
+$\omega_{A/R}^\bullet \otimes_A^\mathbf{L} (A \otimes_R k)$는\ 
+$A \otimes_R k$의 쌍대화 복합체이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$R \to A$가 완전이라고 가정하자. $\varphi^!$의 정의에서와 같이\ 
+$R \to P \to A$를 택한다. 그러면\  $A$는 완전\  $P$-가군이다
+(More on Algebra, Lemma \ref{more-algebra-lemma-perfect-ring-map}).
+Lemma \ref{dualizing-lemma-shriek-boundedness}에 의해\ 
+$\omega_{A/R}^\bullet$은\  $D^b_{\textit{Coh}}(A)$에 속한다.
+이로써 (1)(a)가 증명된다. $\omega_{A/R}^\bullet$이\  $R$-가군의
+복합체로서 유한\  Tor 차원을 가짐을 보이기 위해\ 
+$\omega_{A/R}^\bullet = \varphi^!(R) = R\Hom(A, P)[n]$이\ 
+$D(P)$ 안에서\  $R\Hom_P(A, P)[n]$으로 사상됨을 관찰하자.
+후자는\  $D(P)$ 안에서 완전이다
+(More on Algebra, Lemma \ref{more-algebra-lemma-dual-perfect-complex}).
+또한\  $R \to P$가 평탄이므로\  $D(R)$ 안에서 유한\  Tor 차원을 갖는다.
+이로써 (1)(b)가 증명된다. $D(A)$의 대상\ 
+$R\Hom_A(\omega_{A/R}^\bullet, \omega_{A/R}^\bullet)$은\ 
+$D(P)$ 안에서 다음 대상으로 사상된다.
+\begin{align*}
+R\Hom_P(\omega_{A/R}^\bullet, R\Hom(A, P)[n])
+& =
+R\Hom_P(R\Hom_P(A, P)[n], P)[n] \\
+& =
+R\Hom_P(R\Hom_P(A, P), P)
+\end{align*}
+이미 사용한\  More on Algebra, Lemma
+\ref{more-algebra-lemma-dual-perfect-complex}에 의해 이는\  $A$와 같다.
+이로써 (1)(c)가 증명된다.
+
+\medskip\noindent
+$\varphi$가 평탄이라고 가정하자. 그러면\  $R \to A$는 완전 환 사상이다
+(More on Algebra, Lemma
+\ref{more-algebra-lemma-flat-finite-presentation-perfect}).
+따라서 (1)(a), (1)(b), (1)(c)가 성립한다.
+그러면 (1)(a), (1)(b)와 정의에 의해\ 
+$\omega_{A/R}^\bullet$은 물론\  $R$-완전이다.
+$R \to k$가 (2)(b)에서와 같다고 하자.
+Lemma \ref{dualizing-lemma-base-change-relative-algebraic}에 의해 동형
+$$
+\omega_{A/R}^\bullet \otimes_A^\mathbf{L} (A \otimes_R k) \cong
+\omega^\bullet_{A \otimes_R k/k}
+$$
+이 존재하고, 오른쪽은\  Lemma
+\ref{dualizing-lemma-shriek-dualizing-algebraic}에 의해 쌍대화 복합체이다.
+이로써 증명이 끝난다.
+\end{proof}
+\begin{lemma}
+\label{dualizing-lemma-base-change-dualizing-over-field}
+$K/k$를 체의 확대라 하자. $A$를 유한형\ 
+$k$-대수라 하자. $A_K = A \otimes_k K$로 놓자.
+$\omega_A^\bullet$이\  $A$의 쌍대화 복합체이면\ 
+$\omega_A^\bullet \otimes_A A_K$는\  $A_K$의 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+쌍대화 복합체의 유일성에 의해\  $A$에 대해 어느 쌍대화 복합체를
+택하는지는 중요하지 않다. 자세한 증명은 생략한다.
+대수 구조를\  $\varphi : k \to A$로 나타내자.
+Lemma \ref{dualizing-lemma-shriek-dualizing-algebraic}에 의해\ 
+$\omega_A^\bullet = \varphi^!(k[0])$로 택할 수 있다.
+Lemma \ref{dualizing-lemma-relative-dualizing-algebraic}에 의해 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-lci-shriek}
+$\varphi : R \to A$를\  Noether 환들의 국소 완전교차 준동형이라 하자.
+그러면\  $\omega_{A/R}^\bullet$은\  $D(A)$의 가역 대상이고,
+모든\  $K \in D(R)$에 대해\ 
+$\varphi^!(K) = K \otimes_R^\mathbf{L} \omega_{A/R}^\bullet$이다.
+\end{lemma}
+
+\begin{proof}
+국소 완전교차 준동형은\  More on Algebra, Lemma
+\ref{more-algebra-lemma-lci-perfect}에 의해 완전 환 사상임을 상기하자.
+따라서 마지막 명제는\  Lemma
+\ref{dualizing-lemma-upper-shriek-is-tensor-functor}에서 따른다.
+More on Algebra, Definition
+\ref{more-algebra-definition-local-complete-intersection}에 의해\ 
+$I$가\  Koszul 정칙 아이디얼인\ 
+$A = R[x_1, \ldots, x_n]/I$로 쓸 수 있다.
+Section \ref{dualizing-section-relative-dualizing-complex-algebraic}의\ 
+$\varphi^!$ 구성에 따르면\ 
+$I \subset R$가\  Koszul 정칙 아이디얼인\  $A = R/I$의 경우에
+보조정리를 보이면 충분하다.
+$\omega_{A/R}^\bullet$이\  $D(A)$에서 가역인지 확인하는 것은\ 
+More on Algebra, Lemma \ref{more-algebra-lemma-invertible-derived}에 의해\ 
+$\Spec(A)$ 위의 국소 문제이다.
+또한\  $\omega_{A/R}^\bullet$의 구성은\  Lemma \ref{dualizing-lemma-flat-bc}에 의해\ 
+$R$의 국소화와 가환한다.
+More on Algebra, Definition \ref{more-algebra-definition-regular-ideal},
+Lemma \ref{more-algebra-lemma-noetherian-finite-all-equivalent}, 그리고\ 
+Algebra, Lemma \ref{algebra-lemma-regular-sequence-in-neighbourhood}를
+결합하면\  $A$ 안에서 단위 아이디얼을 생성하고\ 
+$I_{g_j} \subset R_{g_j}$가 정칙열로 생성되게 하는\ 
+$g_1, \ldots, g_r \in R$를 찾을 수 있다.
+따라서\  $f_1, \ldots, f_c$가\  $R$의 정칙열인\ 
+$A = R/(f_1, \ldots, f_c)$라고 가정해도 된다.
+이제 환 사상들
+$$
+R \to R/(f_1) \to R/(f_1, f_2) \to \ldots \to R/(f_1, \ldots, f_c) = A
+$$
+을 생각하고\  Lemma \ref{dualizing-lemma-composition-shriek-algebraic}
+(그리고 이미 증명한 마지막 명제)를 사용하면
+각 단계에 대해 보조정리를 증명하는 것으로 충분함을 알 수 있다.
+마지막으로 어떤 영인자가 아닌 원소\  $f$에 대해\  $A = R/(f)$인 경우에는\ 
+Lemma \ref{dualizing-lemma-compute-for-effective-Cartier-algebraic}에 의해\ 
+$\varphi^!(R) = R\Hom(A, R)$가 가역이므로 보조정리가 참이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein-shriek}
+$\varphi : R \to A$를\  Noether 환들의 평탄 유한형 준동형이라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item 모든 소아이디얼\  $\mathfrak p \subset R$에 대해 올\ 
+$A \otimes_R \kappa(\mathfrak p)$가\  Gorenstein이다.
+\item $\omega_{A/R}^\bullet$은\  $D(A)$의 가역 대상이다. More on Algebra,
+Lemma \ref{more-algebra-lemma-invertible-derived}를 보라.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)가 성립하면 올 환\  $A \otimes_R \kappa(\mathfrak p)$들은
+가역 쌍대화 복합체를 가지므로\  Gorenstein이다.
+Lemmas \ref{dualizing-lemma-relative-dualizing-algebraic} 및\ 
+\ref{dualizing-lemma-gorenstein}을 보라.
+
+\medskip\noindent
+역으로 (1)을 가정하자.
+Lemma \ref{dualizing-lemma-shriek-boundedness}에 의해\ 
+$\omega_{A/R}^\bullet$은\  $D^b_{\textit{Coh}}(A)$에 속한다
+(Noether 환들의 평탄 유한형 준동형은 완전이기 때문이다. More on Algebra,
+Lemma
+\ref{more-algebra-lemma-flat-finite-presentation-perfect}를 보라).
+$\mathfrak p \subset R$ 위에 놓인 소아이디얼\  $\mathfrak q \subset A$를 택하자.
+그러면
+$$
+\omega_{A/R}^\bullet \otimes_A^\mathbf{L} \kappa(\mathfrak q) =
+\omega_{A/R}^\bullet \otimes_A^\mathbf{L}
+(A \otimes_R \kappa(\mathfrak p))
+\otimes_{(A \otimes_R \kappa(\mathfrak p))}^\mathbf{L}
+\kappa(\mathfrak q)
+$$
+이다. Lemmas \ref{dualizing-lemma-relative-dualizing-algebraic} 및\ 
+\ref{dualizing-lemma-gorenstein}과 가정 (1)을 적용하면 이 복합체는 영이 아닌
+코호몰로지 가군을\  $1$개 가지며, 그것은\  $1$차원\ 
+$\kappa(\mathfrak q)$-벡터공간이다. More on Algebra, Lemma
+\ref{more-algebra-lemma-lift-bounded-pseudo-coherent-to-perfect}에 의해
+어떤\  $f \in A$, $f \not \in \mathfrak q$에 대해\ 
+$(\omega_{A/R}^\bullet)_f$가\  $D(A_f)$의 가역 대상이라고 결론 내린다.
+이로써 (2)가 증명된다.
+\end{proof}
+\noindent
+다음 보조정리는\  Noether 환 위의 유한형 대수로 넘어갈 때
+차원 함수가 어떻게 변하는지 알아보는 데 유용하다.
+
+\begin{lemma}
+\label{dualizing-lemma-shriek-normalized}
+$\varphi : R \to A$를\  Noether 환들의 유한형 준동형이라 하자.
+$R$이 국소라고 가정하고, $R$의 극대 아이디얼 위에 놓이는
+극대 아이디얼\  $\mathfrak m \subset A$를 택하자.
+$\omega_R^\bullet$이\  $R$의 정규화된 쌍대화 복합체이면\ 
+$\varphi^!(\omega_R^\bullet)_\mathfrak m$은\ 
+$A_\mathfrak m$의 정규화된 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$\varphi^!(\omega_R^\bullet)$이\  $A$의 쌍대화 복합체임은 이미 알고 있다.
+Lemma \ref{dualizing-lemma-shriek-dualizing-algebraic}을 보라.
+$\varphi^!$의 구성에서와 같이\  $P = R[x_1, \ldots, x_n]$인 분해\ 
+$R \to P \to A$를 택한다. $R \to P$와\ 
+$\mathfrak m$에 대응하는\  $P$의 극대 아이디얼\  $\mathfrak m'$에 대해
+보조정리를 증명할 수 있다면,
+Lemma \ref{dualizing-lemma-normalized-quotient}을\ 
+$P_{\mathfrak m'} \to A_\mathfrak m$에 적용하거나\ 
+Lemma \ref{dualizing-lemma-quotient-function}을\  $P \to A$에 적용하여\ 
+$R \to A$에 대한 결과를 얻는다.
+$A = R[x_1, \ldots, x_n]$인 경우에는 예를 들어\ 
+Algebra, Lemma \ref{algebra-lemma-dimension-base-fibre-equals-total}과
+(올의 차원을 계산하기 위한) Algebra, Lemma
+\ref{algebra-lemma-dim-affine-space}를 결합하면\ 
+$\dim(A_\mathfrak m) = \dim(R) + n$임을 알 수 있다.
+$\omega_R^\bullet$이 정규화되었다는 것은\ 
+$i = -\dim(R)$가\  $H^i(\omega_R^\bullet)$이 영이 아닌 최소 지수라는 뜻이다
+(Lemmas \ref{dualizing-lemma-sitting-in-degrees} 및\ 
+\ref{dualizing-lemma-nonvanishing-generically-local}에서 따른다).
+그러면\  $\varphi^!(\omega_R^\bullet)_\mathfrak m =
+\omega_R^\bullet \otimes_R A_\mathfrak m[n]$의 첫 번째 영이 아닌
+코호몰로지 가군은 차수\  $-\dim(R) - n$에 있고, 따라서 이는\ 
+$A_\mathfrak m$의 정규화된 쌍대화 복합체이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-trivial-vanishing}
+$R \to A$를\  Noether 환들의 유한형 준동형이라 하자.
+$\mathfrak q \subset A$를\  $\mathfrak p \subset R$ 위에 놓이는
+소아이디얼이라 하자. 그러면
+$$
+H^i(\omega_{A/R}^\bullet)_\mathfrak q \not = 0
+\Rightarrow - d \leq i
+$$
+이다. 여기서\  $d$는\  $\Spec(A) \to \Spec(R)$의\ 
+$\mathfrak p$ 위의 올이 점\  $\mathfrak q$에서 갖는 차원이다.
+\end{lemma}
+
+\begin{proof}
+Section \ref{dualizing-section-relative-dualizing-complex-algebraic}에서와 같이\ 
+$P = R[x_1, \ldots, x_n]$이고\ 
+$\omega_{A/R}^\bullet = R\Hom(A, P)[n]$이 되도록
+분해\  $R \to P \to A$를 택한다.
+$R\Hom(A, P)_\mathfrak q$가 차수\  $< n - d$에서 영인
+코호몰로지를 가짐을 보여야 한다.
+Lemma \ref{dualizing-lemma-RHom-ext}에 의해 이는\  $i < n - d$에 대해\ 
+$\Ext_P^i(P/I, P)_{\mathfrak r} = 0$임을 보여야 한다는 뜻이다.
+여기서\  $\mathfrak r \subset P$는\  $\mathfrak q$에 대응하는 소아이디얼이고,
+$I$는\  $P \to A$의 핵이다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-pseudo-coherence-and-base-change-ext}에 의해
+이를\  $\Ext_{P_\mathfrak r}^i(P_\mathfrak r/IP_\mathfrak r, P_\mathfrak r)$로
+다시 쓸 수 있다. 따라서\  Lemma \ref{dualizing-lemma-depth}에 의해
+$$
+\text{depth}_{IP_\mathfrak r}(P_\mathfrak r) \geq n - d
+$$
+를 보여야 한다. Lemma \ref{dualizing-lemma-depth-flat-CM}에 의해
+$$
+\text{depth}_{IP_\mathfrak r}(P_\mathfrak r) \geq
+\dim((P \otimes_R \kappa(\mathfrak p))_\mathfrak r) -
+\dim((P/I \otimes_R \kappa(\mathfrak p))_\mathfrak r)
+$$
+이다. 오른쪽의 두 식은\  Algebra, Lemma
+\ref{algebra-lemma-codimension}에 의해 일치한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-flat-vanishing}
+$R \to A$를\  Noether 환들의 평탄 유한형 준동형이라 하자.
+$\mathfrak q \subset A$를\  $\mathfrak p \subset R$ 위에 놓이는
+소아이디얼이라 하자. 그러면
+$$
+H^i(\omega_{A/R}^\bullet)_\mathfrak q \not = 0
+\Rightarrow - d \leq i \leq 0
+$$
+이다. 여기서\  $d$는\  $\Spec(A) \to \Spec(R)$의\ 
+$\mathfrak p$ 위의 올이 점\  $\mathfrak q$에서 갖는 차원이다.
+$\Spec(A) \to \Spec(R)$의 모든 올의 차원이\  $\leq d$이면\ 
+$\omega_{A/R}^\bullet$은\  $R$-가군의 복합체로서\ 
+$[-d, 0]$ 안에\  Tor 진폭을 갖는다.
+\end{lemma}
+
+\begin{proof}
+하한은\  Lemma \ref{dualizing-lemma-relative-dualizing-trivial-vanishing}에서 증명했다.
+Section \ref{dualizing-section-relative-dualizing-complex-algebraic}에서와 같이\ 
+$P = R[x_1, \ldots, x_n]$이고\ 
+$\omega_{A/R}^\bullet = R\Hom(A, P)[n]$이 되도록
+분해\  $R \to P \to A$를 택한다.
+상한은\  $i > n$에 대해\  $\Ext^i_P(A, P)$가 영이라는 뜻이다.
+이는\  More on Algebra, Lemma
+\ref{more-algebra-lemma-perfect-over-polynomial-ring}에서 따른다.
+그 보조정리는\  $A$가\  Tor 진폭\  $[-n, 0]$을 갖는 완전\  $P$-가군임을 보인다.
+
+\medskip\noindent
+마지막 명제의 증명이다. $R \to R'$를\  Noether 환들의 준동형이라 하자.
+$A' = A \otimes_R R'$로 놓자. 그러면
+$$
+\omega_{A'/R'}^\bullet =
+\omega_{A/R}^\bullet \otimes_A^\mathbf{L} A' =
+\omega_{A/R}^\bullet \otimes_R^\mathbf{L} R'
+$$
+이다. 첫 번째 동형은\  Lemma \ref{dualizing-lemma-base-change-relative-algebraic}에 의해,
+$D(R')$ 안에서 성립하는 두 번째 동형은\  More on Algebra, Lemma
+\ref{more-algebra-lemma-base-change-comparison}에 의해 얻는다.
+증명의 첫 부분에 의해
+($\Spec(A') \to \Spec(R')$의 올들의 차원이\  $\leq d$임에 유의하라)
+$\omega_{A/R}^\bullet \otimes_R^\mathbf{L} R'$는\ 
+$[-d, 0]$의 차수에서만 코호몰로지를 갖는다.
+유한\  $R$-가군\  $M$에 의한\  $R$의 제곱영 두껍게 하기\ 
+$R' = R \oplus M$으로 택하면, 모든 유한\  $R$-가군\  $M$에 대해\ 
+$R\Hom(A, P) \otimes_R^\mathbf{L} M$은
+구간\  $[-d, 0]$에서만 코호몰로지를 가짐을 알 수 있다.
+모든\  $R$-가군은 유한\  $R$-가군들의 여과 여극한이고
+텐서곱은 여극한과 가환하므로 결론이 따른다.
+\end{proof}
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-CM-vanishing}
+$R \to A$를\  Noether 환들의 유한형 준동형이라 하자.
+$\mathfrak p \subset R$를 소아이디얼이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $R_\mathfrak p$는\  Cohen--Macaulay이다.
+\item 모든 극소 소아이디얼\  $\mathfrak q \subset A$에 대해\ 
+$\text{trdeg}_{\kappa(R \cap \mathfrak q)} \kappa(\mathfrak q) \leq r$이다.
+\end{enumerate}
+그러면
+$$
+H^i(\omega_{A/R}^\bullet)_\mathfrak p \not = 0 \Rightarrow - r \leq i
+$$
+이고, $H^{-r}(\omega_{A/R}^\bullet)_\mathfrak p$는\ 
+$A_\mathfrak p$-가군으로서\  $(S_2)$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-base-change-relative-algebraic}에 의해\ 
+$R$을\  $R_\mathfrak p$로 바꾸어도 된다.
+따라서\  $R$이\  Cohen--Macaulay 국소환이라고 가정할 수 있고,
+$A$-가군\  $H^i(\omega_{A/R}^\bullet)$에 대해 보조정리의 명제들을
+증명해야 한다.
+
+\medskip\noindent
+$R^\wedge$를\  $R$의 완비화라 하자.
+사상\  $R \to R^\wedge$는 평탄이고\  $R^\wedge$는\  Cohen--Macaulay이다
+(More on Algebra, Lemma \ref{more-algebra-lemma-completion-CM}).
+$A \to A \otimes_R R^\wedge$의 평탄성과 평탄 사상에 대한 내려가기
+(Algebra, Lemma \ref{algebra-lemma-flat-going-down}를 보라)에 의해\ 
+$A \otimes_R R^\wedge$의 극소 소아이디얼들은\  $A$의 극소 소아이디얼들
+위에 놓임을 관찰하자. 따라서\  Morphisms, Lemma
+\ref{morphisms-lemma-dimension-fibre-after-base-change}에 의해
+조건 (2)는 유한형 환 사상\  $R^\wedge \to A \otimes_R R^\wedge$에 대해 성립한다.
+다시\  Lemma \ref{dualizing-lemma-base-change-relative-algebraic}에 호소하면\ 
+$R^\wedge \to A \otimes_R R^\wedge$에 대해 보조정리를 증명하는 것으로 충분하다.
+이와 같이\  Lemma \ref{dualizing-lemma-ubiquity-dualizing}을 사용하여,
+$R$이 쌍대화 복합체\  $\omega_R^\bullet$을 갖는\  Noether 국소\ 
+Cohen--Macaulay 환이라고 가정할 수 있다.
+
+\medskip\noindent
+$\mathfrak m \subset A$를 극대 아이디얼이라 하자.
+$H^i(\omega_{A/R}^\bullet)_\mathfrak m$에 대해 보조정리의 명제들이
+성립함을 보이면 충분하다.
+$\mathfrak m$이\  $R$의 극대 아이디얼 위에 놓이지 않으면,
+$R$을 국소화로 바꾸어 이 경우로 환원한다
+(작은 세부사항은 생략한다).
+
+\medskip\noindent
+$\omega_R^\bullet$이 정규화되었다고 가정해도 된다.
+$d = \dim(R)$로 놓으면 어떤\  $R$-가군\  $\omega_R$에 대해\ 
+$\omega_R^\bullet = \omega_R[d]$이다. Lemma
+\ref{dualizing-lemma-apply-CM}을 보라. $\omega_A^\bullet = \varphi^!(\omega_R^\bullet)$로 놓자.
+Lemma \ref{dualizing-lemma-relative-dualizing-if-have-omega}에 의해
+$$
+\omega_{A/R}^\bullet =
+R\Hom_A(\omega_R[d] \otimes_R^\mathbf{L} A, \omega_A^\bullet)
+$$
+이다. 차원 공식에 의해\  $\dim(A_\mathfrak m) \leq d + r$이다.
+Morphisms, Lemma \ref{morphisms-lemma-dimension-formula-general}을 보고,
+Hilbert 영점정리에 의해\  $\kappa(\mathfrak m)$이\  $R$의 잉여체 위에서
+유한임을 사용하라.
+Lemma \ref{dualizing-lemma-shriek-normalized}에 의해\ 
+$(\omega_A^\bullet)_\mathfrak m$은\  $A_\mathfrak m$의
+정규화된 쌍대화 복합체이다.
+따라서\  Lemma \ref{dualizing-lemma-sitting-in-degrees}에 의해\ 
+$H^i((\omega_A^\bullet)_\mathfrak m)$은\ 
+$-d - r \leq i \leq 0$일 때만 영이 아닐 수 있다.
+$\omega_R[d] \otimes_R^\mathbf{L} A$는 차수\  $\leq -d$에 놓이므로
+소멸 명제가 따른다. 마지막으로 다음도 알 수 있다.
+$$
+H^{-r}(\omega_{A/R}^\bullet)_\mathfrak m =
+\Hom_A(\omega_R \otimes_R A, H^{-d - r}(\omega_A^\bullet))_\mathfrak m
+$$
+Lemma \ref{dualizing-lemma-depth-dualizing-module}에 의해\ 
+$H^{-d - r}(\omega_A^\bullet)_\mathfrak m$은\  $(S_2)$이므로,
+More on Algebra, Lemma \ref{more-algebra-lemma-hom-into-S2}에 의해
+마지막 명제가 참임을 알 수 있다.
+\end{proof}
+
+
+\section{쌍대화 복합체에 관한 추가 결과}
+\label{dualizing-section-more-dualizing}
+
+\noindent
+다른 곳에 잘 들어맞지 않는 몇 가지 보조정리를 모아 둔다.
+
+\begin{lemma}
+\label{dualizing-lemma-descent}
+$A \to B$를\  Noether 환들의 충실 평탄 사상이라 하자.
+$K \in D(A)$이고\  $K \otimes_A^\mathbf{L} B$가\ 
+$B$의 쌍대화 복합체이면, $K$는\  $A$의 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$A \to B$가 평탄이므로\ 
+$H^i(K) \otimes_A B = H^i(K \otimes_A^\mathbf{L} B)$이다.
+$K \otimes_A^\mathbf{L} B$가\  $D^b_{\textit{Coh}}(B)$에 속하므로
+먼저\  $K$가\  $D^b(A)$에 속함을 얻고, 이어서\ 
+Algebra, Lemma \ref{algebra-lemma-descend-properties-modules}에 의해\ 
+$H^i(K)$가 유한\  $A$-가군임을 알 수 있다.
+$M$을 유한\  $A$-가군이라 하자. 그러면
+$$
+R\Hom_A(M, K) \otimes_A B = R\Hom_B(M \otimes_A B, K \otimes_A^\mathbf{L} B)
+$$
+이다. 이는\  More on Algebra, Lemma
+\ref{more-algebra-lemma-base-change-RHom}에서 따른다.
+$K \otimes_A^\mathbf{L} B$는 유한 단사 차원을 가지므로,
+그 단사 진폭이\  $[a, b]$ 안에 있다고 하자.
+그러면 오른쪽은 차수\  $> b$에서 영인 코호몰로지를 갖는다.
+$A \to B$가 충실 평탄이므로\ 
+$R\Hom_A(M, K)$도 차수\  $> b$에서 영인 코호몰로지를 갖는다.
+따라서\  More on Algebra, Lemma
+\ref{more-algebra-lemma-injective-amplitude}에 의해\  $K$는 유한 단사 차원을 갖는다.
+증명을 끝내려면 사상\  $A \to R\Hom_A(K, K)$가 동형임을 보여야 한다.
+이를 위해 다시\  More on Algebra, Lemma
+\ref{more-algebra-lemma-base-change-RHom}과\ 
+$B \to R\Hom_B(K \otimes_A^\mathbf{L} B, K \otimes_A^\mathbf{L} B)$가
+동형이라는 사실을 사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-descent-ascent}
+$\varphi : A \to B$를\  Noether 환들의 준동형이라 하자. 다음 중 하나를 가정하자.
+\begin{enumerate}
+\item $A \to B$는\  syntomic이고 스펙트럼 위에서 전사인 사상을 유도한다.
+\item $A \to B$는 충실 평탄 국소 완전교차이다.
+\item $A \to B$는\  Gorenstein 올들을 갖는 충실 평탄 유한형 사상이다.
+\end{enumerate}
+그러면\  $K \in D(A)$가\  $A$의 쌍대화 복합체일 필요충분조건은\ 
+$K \otimes_A^\mathbf{L} B$가\  $B$의 쌍대화 복합체인 것이다.
+\end{lemma}
+
+\begin{proof}
+More on Algebra, Lemma \ref{more-algebra-lemma-syntomic-lci}에 의해\ 
+$A \to B$가 (1)을 만족할 필요충분조건은\  $A \to B$가 (2)를 만족하는 것이다.
+(2)와 (3) 모두에서 상대 쌍대화 복합체\ 
+$\varphi^!(A) = \omega_{B/A}^\bullet$은\  $D(B)$의 가역 대상임을 관찰하자.
+Lemmas \ref{dualizing-lemma-lci-shriek} 및\  \ref{dualizing-lemma-gorenstein-shriek}을 보라.
+또한 두 경우 모두\ 
+$\varphi^!(K) = K \otimes_A^\mathbf{L} \omega_{B/A}^\bullet$이다.
+(3)의 경우에는\  Lemma \ref{dualizing-lemma-upper-shriek-is-tensor-functor}를 보라.
+따라서\  $\varphi^!(K)$는\  $D(B)$의 가역 대상과 텐서하는 것을 제외하면\ 
+$K \otimes_A^\mathbf{L} B$와 같다.
+그러므로\  $\varphi^!(K)$가\  $B$의 쌍대화 복합체일 필요충분조건은\ 
+$K \otimes_A^\mathbf{L} B$가 그러한 것이다
+(쌍대화 복합체라는 성질은 국소적이고 이동 아래 불변이기 때문이다).
+따라서\  $K$가\  $A$의 쌍대화 복합체이면\ 
+Lemma \ref{dualizing-lemma-shriek-dualizing-algebraic}에 의해\ 
+$K \otimes_A^\mathbf{L} B$는\  $B$의 쌍대화 복합체임을 알 수 있다.
+이 성질을 내려보내는 것은\  Lemma \ref{dualizing-lemma-descent}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-hull-goes-up}
+$(A, \mathfrak m, \kappa) \to (B, \mathfrak n, l)$을\ 
+$\mathfrak n = \mathfrak m B$인\  Noether 환들의 평탄 국소 준동형이라 하자.
+$E$가\  $\kappa$의 단사 포락이면\ 
+$E \otimes_A B$는\  $l$의 단사 포락이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-union-artinian}에서처럼\  $E = \bigcup E_n$으로 쓰자.
+$E_n \otimes_{A/\mathfrak m^n} B/\mathfrak n^n$이\ 
+$B/\mathfrak n$ 위의\  $l$의 단사 포락임을 보이면 충분하다.
+이로써\  $A$와\  $B$가\  Artin 국소환인 경우로 환원된다.
+Algebra, Lemma \ref{algebra-lemma-pullback-module}에 의해\ 
+$\text{length}_A(A) = \text{length}_B(B)$이고\ 
+$\text{length}_A(E) = \text{length}_B(E \otimes_A B)$임을 관찰하자.
+Lemma \ref{dualizing-lemma-finite}에 의해\ 
+$\text{length}_A(E) = \text{length}_A(A)$이고\ 
+$\text{length}_B(E') = \text{length}_B(B)$이다.
+여기서\  $E'$는\  $B$ 위의\  $l$의 단사 포락이다.
+따라서\  $\text{length}_B(E') = \text{length}_B(E \otimes_A B)$이다.
+또한
+$$
+\dim_l((E \otimes_A B)[\mathfrak n]) =
+\dim_l(E[\mathfrak m] \otimes_A B) =
+\dim_\kappa(E[\mathfrak m]) = 1
+$$
+이다. 여기서는\  $A \to B$의 평탄성과\  $\mathfrak n = \mathfrak mB$를 사용했다.
+따라서\  Lemma \ref{dualizing-lemma-torsion-submodule-sum-injective-hulls}에 의해
+단사인\  $B$-가군 사상\  $E \otimes_A B \to E'$가 존재한다.
+위에서 보인 길이의 등식에 의해 이는 동형이다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-goes-up}
+$\varphi : A \to B$를 다음 성질을 갖는\  Noether 환들의 평탄 준동형이라 하자.
+모든 소아이디얼\  $\mathfrak q \subset B$에 대해\ 
+$\mathfrak p = \varphi^{-1}(\mathfrak q)$라 쓰면\ 
+$\mathfrak p B_\mathfrak q = \mathfrak qB_\mathfrak q$이다.
+예를 들어\  $\varphi$가 \'etale이면 이 성질이 성립한다.
+$I$가 단사\  $A$-가군이면\  $I \otimes_A B$는 단사\  $B$-가군이다.
+\end{lemma}
+
+\begin{proof}
+\'Etale 사상들은\  Algebra, Lemma \ref{algebra-lemma-etale-at-prime}에 의해
+가정을 만족한다.
+Lemma \ref{dualizing-lemma-sum-injective-modules}와\ 
+Proposition \ref{dualizing-proposition-structure-injectives-noetherian}에 의해\ 
+$I$가 어떤 소아이디얼\  $\mathfrak p \subset A$에 대한\ 
+$\kappa(\mathfrak p)$의 단사 포락이라고 가정해도 된다.
+그러면\  $I$는\  $A_\mathfrak p$ 위의 가군이다.
+Lemma \ref{dualizing-lemma-injective-flat}에 의해\ 
+$I \otimes_A B = I \otimes_{A_\mathfrak p} B_\mathfrak p$가\ 
+$B_\mathfrak p$-가군으로서 단사임을 보이면 충분하다.
+따라서\  $(A, \mathfrak m, \kappa)$가\  Noether 국소환이고\ 
+$I = E$가 잉여체\  $\kappa$의 단사 포락이라고 가정해도 된다.
+우리의 가정은\  Noether 환\  $B/\mathfrak m B$가 체들의 곱임을 함의한다
+(세부사항은 생략한다).
+따라서\  $B$에는\  $\mathfrak m$ 위에 놓이는 유한 개의 소아이디얼\ 
+$\mathfrak m_1, \ldots, \mathfrak m_n$이 있고, 이들은 모두 극대 아이디얼이다.
+Lemma \ref{dualizing-lemma-union-artinian}에서처럼\  $E = \bigcup E_n$으로 쓰자.
+그러면\  $E \otimes_A B = \bigcup E_n \otimes_A B$이고\ 
+$E_n \otimes_A B$는 지지가\ 
+$\{\mathfrak m_1, \ldots, \mathfrak m_n\}$인 유한\  $B$-가군이므로,
+$\mathfrak m_i$들에서의 국소화들의 곱으로 분해된다.
+따라서\  $E \otimes_A B = \prod (E \otimes_A B)_{\mathfrak m_i}$이다.
+Lemma \ref{dualizing-lemma-injective-hull-goes-up}에 의해\ 
+$(E \otimes_A B)_{\mathfrak m_i} = E \otimes_A B_{\mathfrak m_i}$는\ 
+$\mathfrak m_i$의 잉여체의 단사 포락이므로 결론이 따른다.
+\end{proof}
+
+
+
+
+
+\section{상대 쌍대화 복합체}
+\label{dualizing-section-relative-dualizing-complexes}
+
+\noindent
+Noether 환들의 유한형 환 사상\  $\varphi : R \to A$에 대해서는\ 
+Section \ref{dualizing-section-relative-dualizing-complexes-Noetherian}에서
+상대 쌍대화 복합체\  $\omega_{A/R}^\bullet = \varphi^!(R)$을 생각했다.
+$R$이\  Noether가 아니면 비슷하게 구성한 복합체는 일반적으로
+좋은 성질을 갖지 않는다. 이 절에서는 비-Noether 환들의
+평탄 유한 표시 환 사상\  $R \to A$에 대한 상대 쌍대화 복합체를 정의한다.
+이 정의는 스킴들의 평탄 유한 표시 사상으로 대역화되도록 택했다.
+Duality for Schemes, Section
+\ref{duality-section-relative-dualizing-complexes}를 보라.
+정의가 적용될 때 상대 쌍대화 복합체가 존재하고,
+비정준 동형을 제외하고 유일하며, Noether 경우에는\ 
+Section \ref{dualizing-section-relative-dualizing-complexes-Noetherian}의 복합체를
+되찾음을 보일 것이다.
+
+\medskip\noindent
+Noether 환만 다루는 독자는 이 절을 건너뛰어도 안전하다!
+
+\begin{definition}
+\label{dualizing-definition-relative-dualizing-complex}
+$R \to A$를 평탄 유한 표시 환 사상이라 하자.
+{\it 상대 쌍대화 복합체}란 다음을 만족하는 대상\  $K \in D(A)$이다.
+\begin{enumerate}
+\item $K$는\  $R$-완전이다(More on Algebra, Definition
+\ref{more-algebra-definition-relatively-perfect}).
+\item $R\Hom_{A \otimes_R A}(A, K \otimes_A^\mathbf{L} (A \otimes_R A))$는\ 
+$A$와 동형이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이 정의를 이해하려면 다음 보조정리들 가운데 일부를 읽고 이해해야 할 수도 있다.
+Lemmas \ref{dualizing-lemma-relative-dualizing-noetherian} 및\ 
+\ref{dualizing-lemma-uniqueness-relative-dualizing}은 이 정의가\ 
+Section \ref{dualizing-section-relative-dualizing-complexes-Noetherian}의 정의와
+충돌하지 않음을 보인다.
+
+\begin{lemma}
+\label{dualizing-lemma-uniqueness-relative-dualizing}
+$R \to A$를 평탄 유한 표시 환 사상이라 하자.
+$R \to A$에 대한 임의의 두 상대 쌍대화 복합체는 서로 동형이다.
+\end{lemma}
+
+\begin{proof}
+$K$와\  $L$을\  $R \to A$에 대한 두 상대 쌍대화 복합체라 하자.
+$K_1 = K \otimes_A^\mathbf{L} (A \otimes_R A)$ 및\ 
+$L_2 = (A \otimes_R A) \otimes_A^\mathbf{L} L$을
+첫 번째와 두 번째 여사영\  $A \to A \otimes_R A$에 의한 유도 밑변환이라 하자.
+대칭성에 의해\  $L_2$에 관한 가정은\ 
+$R\Hom_{A \otimes_R A}(A, L_2)$가\  $A$와 동형임을 함의한다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-internal-hom-evaluate-tensor-isomorphism}의 (3)을
+두 번 적용하면
+$$
+A \otimes_{A \otimes_R A}^\mathbf{L} L_2 \cong
+R\Hom_{A \otimes_R A}(A, K_1 \otimes_{A \otimes_R A}^\mathbf{L} L_2) \cong
+A \otimes_{A \otimes_R A}^\mathbf{L} K_1
+$$
+이다. 어느 여사영에 대해서든 제한 함자\ 
+$D(A \otimes_R A) \to D(A)$를 적용하면 원하는 결과를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-noetherian}
+$\varphi : R \to A$를\  Noether 환들의 평탄 유한형 환 사상이라 하자.
+그러면\  Section \ref{dualizing-section-relative-dualizing-complexes-Noetherian}의
+상대 쌍대화 복합체\  $\omega_{A/R}^\bullet = \varphi^!(R)$은\ 
+Definition \ref{dualizing-definition-relative-dualizing-complex}의 의미에서
+상대 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dualizing-lemma-relative-dualizing-algebraic}에 의해\ 
+$\varphi^!(R)$은\  $R$-완전이다.
+$\delta : A \otimes_R A \to A$를 곱셈 사상이라 하고\ 
+$p_1, p_2 : A \to A \otimes_R A$를 여사영들이라 하자.
+그러면\  Lemma \ref{dualizing-lemma-flat-bc}에 의해
+$$
+\varphi^!(R) \otimes_A^\mathbf{L} (A \otimes_R A) =
+\varphi^!(R) \otimes_{A, p_1}^\mathbf{L} (A \otimes_R A) =
+p_2^!(A)
+$$
+이다. 대상\ 
+$
+R\Hom_{A \otimes_R A}(A, \varphi^!(R) \otimes_A^\mathbf{L} (A \otimes_R A))
+$
+은\  $\delta^!(\varphi^!(R) \otimes_A^\mathbf{L} (A \otimes_R A))$의
+제한 함자\  $\delta_* : D(A) \to D(A \otimes_R A)$에 의한 상임을 상기하자.
+Section \ref{dualizing-section-relative-dualizing-complex-algebraic}의\ 
+$\delta^!$ 정의와\  Lemma \ref{dualizing-lemma-RHom-ext}를 사용하라.
+Lemma \ref{dualizing-lemma-composition-shriek-algebraic}에 의해\ 
+$\delta^!(p_2^!(A)) \cong A$이므로 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-base-change-relative-dualizing}
+$R \to A$를 평탄 유한 표시 환 사상이라 하자. 그러면
+\begin{enumerate}
+\item $D(A)$ 안에 상대 쌍대화 복합체\  $K$가 존재한다.
+\item 임의의 환 사상\  $R \to R'$에 대해\  $A' = A \otimes_R R'$ 및\ 
+$K' = K \otimes_A^\mathbf{L} A'$로 놓으면, $K'$는\ 
+$R' \to A'$에 대한 상대 쌍대화 복합체이다.
+\end{enumerate}
+더욱이
+$$
+\xi : A \longrightarrow K \otimes_A^\mathbf{L} (A \otimes_R A)
+$$
+가 순환 가군\ 
+$\Hom_{D(A \otimes_R A)}(A, K \otimes_A^\mathbf{L} (A \otimes_R A))$의
+생성원이면, (2)에서\  $A \otimes_R A \to A' \otimes_{R'} A'$에 의한\ 
+$\xi$의 유도 밑변환은 순환 가군\ 
+$\Hom_{D(A' \otimes_{R'} A')}(A',
+K' \otimes_{A'}^\mathbf{L} (A' \otimes_{R'} A'))$의 생성원이다.
+\end{lemma}
+
+\begin{proof}
+먼저\  Noether 경우로 환원한다. Algebra, Lemma
+\ref{algebra-lemma-flat-finite-presentation-limit-flat}에 의해
+유한형\  $\mathbf{Z}$-부분대수\  $R_0 \subset R$와\ 
+$A = A_0 \otimes_{R_0} R$이 되게 하는 평탄 유한형 환 사상\ 
+$R_0 \to A_0$가 존재한다.
+Lemma \ref{dualizing-lemma-relative-dualizing-noetherian}에 의해
+상대 쌍대화 복합체\  $K_0 \in D(A_0)$가 존재한다.
+따라서\  $K_0$에 대해 (2)를 보이면\ 
+$K_0 \otimes_{A_0}^\mathbf{L} A$가\  $R \to A$에 대한 쌍대화 복합체이고
+유도 밑변환의 추이성에 의해 (2)도 만족함을 알 수 있다.
+그러면 상대 쌍대화 복합체의 유일성
+(Lemma \ref{dualizing-lemma-uniqueness-relative-dualizing})에 의해
+이는 모든 상대 쌍대화 복합체에 대해 성립한다.
+
+\medskip\noindent
+$R$이\  Noether라고 가정하고, $K$를\  $R \to A$에 대한
+상대 쌍대화 복합체라 하자. 환 사상\  $R \to R'$가 주어졌을 때\ 
+$A' = A \otimes_R R'$ 및\  $K' = K \otimes_A^\mathbf{L} A'$로 놓자.
+증명을 끝내려면\  $K'$가\  $R' \to A'$에 대한 상대 쌍대화 복합체임을 보여야 한다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-base-change-relatively-perfect}에 의해
+모든 경우에\  $K'$는\  $R'$-완전이다.
+Lemmas \ref{dualizing-lemma-base-change-relative-algebraic} 및\ 
+\ref{dualizing-lemma-relative-dualizing-noetherian}에 의해\ 
+$R'$가\  Noether이면\  $K'$는 두 의미 모두에서\ 
+$R' \to A'$에 대한 상대 쌍대화 복합체이다.
+유도 텐서곱의 추이성에 의해\ 
+$K \otimes_A^\mathbf{L} (A \otimes_R A)
+\otimes_{A \otimes_R A}^\mathbf{L} (A' \otimes_{R'} A') =
+K' \otimes_{A'}^\mathbf{L} (A' \otimes_{R'} A')$이다.
+$R \to A$의 평탄성에 의해\ 
+$A \otimes_{A \otimes_R A}^\mathbf{L} (A' \otimes_{R'} A') = A'$이다.
+실제로\  $A \otimes_R A$와\  $R'$는\  $R$ 위에서\  Tor 독립이므로\ 
+More on Algebra, Lemma
+\ref{more-algebra-lemma-base-change-comparison}을 적용할 수 있다.
+마지막으로\  More on Algebra, Lemma
+\ref{more-algebra-lemma-more-relative-pseudo-coherent-is-moot}에 의해\ 
+$A$는\  $A \otimes_R A$-가군으로서 준코히런트이다.
+따라서\  More on Algebra, Lemma
+\ref{more-algebra-lemma-compute-RHom-relatively-perfect}의 가정들을
+모두 확인했다.
+$R$-평탄이고 유한 표시인\  $A \otimes_R A$-가군들로 이루어진
+아래 유계 복합체\  $E^\bullet$이 존재하여,
+$E^\bullet \otimes_R R'$가\ 
+$R\Hom_{A' \otimes_{R'} A'}(A',
+K' \otimes_{A'}^\mathbf{L} (A' \otimes_{R'} A'))$를 나타내고,
+이 식별들은 유도 밑변환과 호환된다.
+$n \in \mathbf{Z}$이고\  $n \not = 0$이라 하자.
+완전열
+$$
+E^{n - 1} \to E^n \to Q^n \to 0
+$$
+로\  $Q^n$을 정의하자. $\kappa(\mathfrak p)$는\  Noether 환이므로
+위의 논의에 따라\  $H^n(E^\bullet \otimes_R \kappa(\mathfrak p)) = 0$이다.
+도식을 추적하면 이는
+$$
+Q^n \otimes_R \kappa(\mathfrak p) \to E^{n + 1} \otimes_R \kappa(\mathfrak p)
+$$
+가 단사라는 뜻이다. 따라서\  $A \otimes_R A$의 소아이디얼\ 
+$\mathfrak q$가\  $\mathfrak p$ 위에 놓이면\ 
+$Q^n_\mathfrak q$는\  $R_\mathfrak p$-평탄이고,
+$Q^n_\mathfrak p \to E^{n + 1}_\mathfrak q$는\ 
+$R_\mathfrak p$-보편 단사이다. Algebra, Lemma
+\ref{algebra-lemma-mod-injective}를 보라.
+이것이 모든 소아이디얼에 대해 성립하므로\ 
+$Q^n$은\  $R$-평탄이고\  $Q^n \to E^{n + 1}$은\  $R$-보편 단사이다.
+특히 모든 환 사상\  $R \to R'$에 대해\ 
+$H^n(E^\bullet \otimes_R R') = 0$이다.
+$Z^0 = \Ker(E^0 \to E^1)$로 놓자.
+완전열\  $0 \to Z^0 \to E^0 \to E^1 \to Q^1 \to 0$이 있으므로\ 
+$Z^0$은\  $R$-평탄이고, 모든\  $R \to R'$에 대해\ 
+$Z^0 \otimes_R R' = \Ker(E^0 \otimes_R R' \to E^1 \otimes_R R')$이다.
+그러면 짧은 완전열\ 
+$0 \to Q^{-1} \to Z^0 \to H^0(E^\bullet) \to 0$에 의해
+$$
+H^0(E^\bullet \otimes_R R') = H^0(E^\bullet) \otimes_R R'
+= A \otimes_R R' = A'
+$$
+임을 알 수 있고, 이는 원하는 바이다.
+더욱이 이 등식은 보조정리의 마지막 명제도 준다.
+\end{proof}
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-RHom}
+$R \to A$를 평탄 유한 표시 환 사상이라 하자.
+$K$를 상대 쌍대화 복합체라 하자.
+그러면\  $A \to R\Hom_A(K, K)$는 동형이다.
+\end{lemma}
+
+\begin{proof}
+Algebra, Lemma \ref{algebra-lemma-flat-finite-presentation-limit-flat}에 의해
+유한형\  $\mathbf{Z}$-부분대수\  $R_0 \subset R$와\ 
+$A = A_0 \otimes_{R_0} R$이 되게 하는 평탄 유한형 환 사상\ 
+$R_0 \to A_0$가 존재한다.
+Lemmas \ref{dualizing-lemma-uniqueness-relative-dualizing},
+\ref{dualizing-lemma-relative-dualizing-noetherian}, 및\ 
+\ref{dualizing-lemma-base-change-relative-dualizing}에 의해
+상대 쌍대화 복합체\  $K_0 \in D(A_0)$가 존재하고
+그 유도 밑변환은\  $K$이다.
+이로써 다음 단락에서 다루는 상황으로 환원된다.
+
+\medskip\noindent
+$R$이\  Noether라고 가정하고\  $K$를\  $R \to A$에 대한
+상대 쌍대화 복합체라 하자.
+환 사상\  $R \to R'$가 주어지면\  $A' = A \otimes_R R'$ 및\ 
+$K' = K \otimes_A^\mathbf{L} A'$로 놓자.
+증명을 끝내기 위해\  $R\Hom_{A'}(K', K') = A'$임을 보인다.
+Lemma \ref{dualizing-lemma-relative-dualizing-algebraic}에 의해\ 
+$R'$가\  Noether일 때마다 이것이 참임을 알고 있다.
+일반적인\  $R'$는\  Noether $R$-대수들의 여과 여극한이므로,
+More on Algebra, Lemma
+\ref{more-algebra-lemma-colimit-relatively-perfect}에 의해 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-composition}
+$R \to A \to B$를 평탄 유한 표시 환 사상들이라 하자.
+$K_{A/R}$와\  $K_{B/A}$를 각각\  $R \to A$와\ 
+$A \to B$에 대한 상대 쌍대화 복합체라 하자.
+그러면\  $K = K_{A/R} \otimes_A^\mathbf{L} K_{B/A}$는\ 
+$R \to B$에 대한 상대 쌍대화 복합체이다.
+\end{lemma}
+
+\begin{proof}
+Noether 경우로의 환원을 사용하겠다.
+실제로\  Algebra, Lemma
+\ref{algebra-lemma-flat-finite-presentation-limit-flat}에 의해
+유한형\  $\mathbf{Z}$-부분대수\  $R_0 \subset R$와\ 
+$A = A_0 \otimes_{R_0} R$이 되게 하는 평탄 유한형 환 사상\ 
+$R_0 \to A_0$가 존재한다.
+$R_0$를 키우고 그에 맞추어\  $A_0$를 바꾸면\ 
+$B = B_0 \otimes_{R_0} R$이 되게 하는 평탄 유한형 환 사상\ 
+$A_0 \to B_0$가 존재한다고 가정해도 된다(같은 보조정리를 사용하라).
+$R_0 \to A_0 \to B_0$에 대해 보조정리를 증명하면,
+Lemmas \ref{dualizing-lemma-uniqueness-relative-dualizing},
+\ref{dualizing-lemma-relative-dualizing-noetherian}, 및\ 
+\ref{dualizing-lemma-base-change-relative-dualizing}에 의해 원래 보조정리가 따른다.
+이로써 다음 단락에서 다루는 상황으로 환원된다.
+
+\medskip\noindent
+$R$이\  Noether라고 가정하고, 주어진 환 사상들을\ 
+$\varphi : R \to A$ 및\  $\psi : A \to B$로 나타내자.
+위에서 제시한 참고문헌에 의해\ 
+$K_{A/R} \cong \varphi^!(R)$ 및\  $K_{B/A} \cong \psi^!(A)$이다.
+그러면
+$$
+K = K_{A/R} \otimes_A^\mathbf{L} K_{B/A} \cong
+\varphi^!(R) \otimes_A^\mathbf{L} \psi^!(A) \cong
+\psi^!(\varphi^!(R)) \cong (\psi \circ \varphi)^!(R)
+$$
+이다. 이는\  Lemmas \ref{dualizing-lemma-upper-shriek-is-tensor-functor} 및\ 
+\ref{dualizing-lemma-composition-shriek-algebraic}에서 따른다.
+따라서\  $K$는\  $R \to B$에 대한 상대 쌍대화 복합체이다.
+\end{proof}

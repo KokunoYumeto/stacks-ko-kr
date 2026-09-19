@@ -1,0 +1,2769 @@
+% Generated mechanically from frozen input canon/ko-kr/integration-20260908-r10-p03-register/inputs/p03/ko/hypercovering.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{24}
+\chapter{초덮개}
+
+
+
+\phantomsection
+\label{hypercovering-section-phantom}
+
+
+\section{서론}
+\label{hypercovering-section-introduction}
+
+\noindent
+$\mathcal{C}$를 사이트라 하자. Sites, 정의 \ref{sites-definition-site}를 보라.
+$X$를 $\mathcal{C}$의 대상이라 하자.
+$\mathcal{C}$ 위의 아벨 층 $\mathcal{F}$가 주어졌을 때,
+그 코호몰로지 군
+$$
+H^i(X, \mathcal{F}).
+$$
+을 계산하고자 한다. 일반적인 정의(Cohomology on Sites, 절
+\ref{sites-cohomology-section-cohomology-sheaves})에 따르면,
+단사 분해
+$
+0 \to \mathcal{F} \to \mathcal{I}^0 \to \mathcal{I}^1 \to \ldots
+$
+를 택하고
+$$
+H^i(X, \mathcal{F})
+=
+H^i(
+\Gamma(X, \mathcal{I}^0) \to
+\Gamma(X, \mathcal{I}^1) \to
+\Gamma(X, \mathcal{I}^2)\to \ldots)
+$$
+로 놓아서 이 코호몰로지 군을 계산한다. 이 장의 목표는
+$\mathcal{C}$가 섬유곱을 가질 때에는 단사 분해를 택하지 않고도
+이 코호몰로지 군들을 계산할 수 있음을 보이는 것이다.
+이를 위해 초덮개를 사용한다.
+
+\medskip\noindent
+사이트에서 초덮개는 덮개의 일반화이다. \cite[Expos\'e V, Sec. 7]{SGA4}을
+보라. 대상 $X$의 초덮개 $K$가 주어지면, $X$ 위의 아벨 층
+$\mathcal{F}$의 코호몰로지를 $K$의 성분 $K_n$ 위에서 그 층이 갖는
+코호몰로지로 나타내는 체흐-코호몰로지 스펙트럼 열이 있다.
+항상 충분히 많은 초덮개가 존재함이 드러난다. 따라서 모든 초덮개에
+걸쳐 여극한을 취하면 스펙트럼 열이 퇴화하고, $X$ 위에서
+$\mathcal{F}$의 코호몰로지는 체흐 코호몰로지 군들의 여극한으로 계산된다.
+
+\medskip\noindent
+더 일반적으로는 코호몰로지 강하를 갖는 단체적 확대를 고려할 수 있다.
+\cite[Expos\'e Vbis]{SGA4}을 보라. 코호몰로지 강하를 다룬 좋은 원고로
+Brian Conrad의 글이 있다. 다음을 보라.
+\url{https://math.stanford.edu/~conrad/papers/hypercover.pdf}.
+단체적 공간을 다루는 장에서 이 문제들로 돌아와, 예를 들어
+``국소 콤팩트'' 위상공간의 고유 초덮개가 코호몰로지 강하를 이룸을
+보일 것이다(Simplicial Spaces, 절
+\ref{spaces-simplicial-section-proper-hypercovering}).
+증명 전략은 이 명제를 이 장에서 구성하는 체흐-코호몰로지
+스펙트럼 열로 귀착시키는 것이다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{반표현 가능 대상}
+\label{hypercovering-section-semi-representable}
+
+\noindent
+먼저 다음 정의를 둔다.
+문자 ``SR''은 Semi-Representable의 머리글자이다.
+
+\begin{definition}
+\label{hypercovering-definition-SR}
+$\mathcal{C}$를 범주라 하자. 다음과 같이 정의되는
+{\it 반표현 가능 대상}의 범주를 $\text{SR}(\mathcal{C})$로 나타낸다.
+\begin{enumerate}
+\item 대상은 대상들의 족 $\{U_i\}_{i \in I}$이고,
+\item 사상 $\{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$는 사상
+$\alpha : I \to J$와 각 $i \in I$에 대한 $\mathcal{C}$의 사상
+$f_i : U_i \to V_{\alpha(i)}$로 주어진다.
+\end{enumerate}
+$X \in \Ob(\mathcal{C})$를 $\mathcal{C}$의 대상이라 하자.
+{\it $X$ 위의 반표현 가능 대상}의 범주는
+$\text{SR}(\mathcal{C}, X) = \text{SR}(\mathcal{C}/X)$.
+\end{definition}
+
+\noindent
+이 정의는 본질적으로
+\cite[Expos\'e V, Subsection 7.3.0]{SGA4}의 정의와 동치이다.
+이는 ``큰'' 범주임에 유의하자. 나중에 $X$의 초덮개에 필요한
+첨자 집합 $I$의 크기를 ``제한''한다. 그러면
+$\text{SR}(\mathcal{C}, X)$가 범주가 되도록 다시 정의할 수 있다.
+$\text{SR}(\mathcal{C}, X)$의 대상과 사상을 명시하면 다음과 같다.
+\begin{enumerate}
+\item 대상은 사상들의 족 $\{U_i \to X\}_{i \in I}$이고,
+\item 사상 $\{U_i \to X\}_{i \in I} \to
+\{V_j \to X\}_{j \in J}$는 사상 $\alpha : I \to J$와
+각 $i \in I$에 대한 $X$ 위의 사상
+$f_i : U_i \to V_{\alpha(i)}$로 주어진다.
+\end{enumerate}
+망각 함자
+$\text{SR}(\mathcal{C}, X) \to \text{SR}(\mathcal{C})$가 있다.
+
+\begin{definition}
+\label{hypercovering-definition-SR-F}
+$\mathcal{C}$를 범주라 하자.
+{\it 반표현 가능 대상에 준층을 대응시키는 함자}를 $F$로 나타낸다.
+식으로 쓰면
+\begin{eqnarray*}
+F : \text{SR}(\mathcal{C}) & \longrightarrow & \textit{PSh}(\mathcal{C}) \\
+\{U_i\}_{i \in I} & \longmapsto & \amalg_{i\in I} h_{U_i}
+\end{eqnarray*}
+이며, 여기서 $h_U$는 대상 $U$에 대응하는 표현 가능 준층을 나타낸다.
+\end{definition}
+
+\noindent
+사상 $U \to X$가 주어지면 표현 가능 준층의 사상 $h_U \to h_X$를 얻는다.
+따라서 흔히 $\text{SR}(\mathcal{C}, X)$ 위의 $F$를 $h_X$ 위의
+집합 값 준층의 범주, 즉 $\textit{PSh}(\mathcal{C})/h_X$로 가는
+함자로 생각한다. 다음은 그 도표이다.
+$$
+\xymatrix{
+\text{SR}(\mathcal{C}, X) \ar[r]_F \ar[d] &
+\textit{PSh}(\mathcal{C})/h_X \ar[d] \\
+\text{SR}(\mathcal{C}) \ar[r]^F &
+\textit{PSh}(\mathcal{C})
+}
+$$
+이제 반표현 가능 대상의 범주에서 극한의 존재를 논한다.
+
+\begin{lemma}
+\label{hypercovering-lemma-coprod-prod-SR}
+$\mathcal{C}$를 범주라 하자.
+\begin{enumerate}
+\item 범주 $\text{SR}(\mathcal{C})$는 쌍대곱을 가지며
+$F$는 쌍대곱과 가환한다.
+\item 함자 $F : \text{SR}(\mathcal{C}) \to \textit{PSh}(\mathcal{C})$는
+극한과 가환한다.
+\item $\mathcal{C}$가 섬유곱을 가지면 $\text{SR}(\mathcal{C})$도
+섬유곱을 가진다.
+\item $\mathcal{C}$가 이항곱을 가지면
+$\text{SR}(\mathcal{C})$도 이항곱을 가진다.
+\item $\mathcal{C}$가 등화자를 가지면 $\text{SR}(\mathcal{C})$도
+등화자를 가진다.
+\item $\mathcal{C}$가 끝 대상을 가지면 $\text{SR}(\mathcal{C})$도
+끝 대상을 가진다.
+\end{enumerate}
+$X \in \Ob(\mathcal{C})$라 하자.
+\begin{enumerate}
+\item 범주 $\text{SR}(\mathcal{C}, X)$는 쌍대곱을 가지며
+$F$는 쌍대곱과 가환한다.
+\item $\mathcal{C}$가 섬유곱을 가지면 $\text{SR}(\mathcal{C}, X)$는
+유한 극한을 가지며
+$F : \text{SR}(\mathcal{C}, X) \to \textit{PSh}(\mathcal{C})/h_X$
+는 이들과 가환한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\text{SR}(\mathcal{C})$에 관한 결과부터 증명한다.
+(1)의 증명. $\{U_i\}_{i \in I}$와 $\{V_j\}_{j \in J}$의 쌍대곱은
+$\{U_i\}_{i \in I} \amalg \{V_j\}_{j \in J}$이다. 다시 말해, 첨자 집합이
+$I \amalg J$이고 원소 $k \in I \amalg J$에 대해 $k = i \in I$이면
+$U_i$를, $k = j \in J$이면 $V_j$를 주는 대상들의 족이다.
+대상들의 족으로 이루어진 족의 쌍대곱도 마찬가지이다.
+$F$가 이들과 가환함은 명백하다.
+
+\medskip\noindent
+(2)의 증명. $U$가 $\Ob(\mathcal{C})$에 속할 때,
+$\text{SR}(\mathcal{C})$의 대상 $\{U\}$를 생각하자. 분명히
+$\Mor_{\text{SR}(\mathcal{C})}(\{U\}, K)) = F(K)(U)$
+가 $K \in \Ob(\text{SR}(\mathcal{C}))$에 대해 성립한다.
+준층의 극한은 단면 수준에서 계산되므로(Sites, 절
+\ref{sites-section-limits-colimits-PSh}), $F$는 극한과 가환한다.
+
+\medskip\noindent
+(3)의 증명. 사상
+$(\alpha, f_i) : \{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$
+와 사상
+$(\beta, g_k) : \{W_k\}_{k \in K} \to \{V_j\}_{j \in J}$
+가 주어졌다고 하자. 이 사상들의 섬유곱은
+$$
+\{ U_i \times_{f_i, V_j, g_k} W_k\}_{(i, j, k) \in I \times J \times K
+\text{ such that } j = \alpha(i) = \beta(k)}
+$$
+로 주어진다. $\mathcal{C}$가 섬유곱을 가지면 이 섬유곱들이 존재한다.
+
+\medskip\noindent
+(4)의 증명. $\{U_i\}_{i \in I}$와 $\{V_j\}_{j \in J}$의 곱은
+$\{U_i \times V_j\}_{i \in I, j \in J}$이다. $\mathcal{C}$가 곱을 가지면
+이 곱들이 존재한다.
+
+\medskip\noindent
+(5)의 증명. 두 사상
+$(\alpha, f_i), (\alpha', f'_i) : \{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$
+의 등화자는
+$$
+\{
+\text{Eq}(f_i, f'_i : U_i \to V_{\alpha(i)})
+\}_{i \in I,\ \alpha(i) = \alpha'(i)}
+$$
+$\mathcal{C}$가 등화자를 가지면 이 등화자들이 존재한다.
+
+\medskip\noindent
+(6)의 증명. $X$가 $\mathcal{C}$의 끝 대상이면 $\{X\}$는
+$\text{SR}(\mathcal{C})$의 끝 대상이다.
+
+\medskip\noindent
+이제 $\text{SR}(\mathcal{C}, X)$에 관한 명제들을 증명한다.
+위의 결과를 범주 $\mathcal{C}/X$에 적용하고
+$\text{SR}(\mathcal{C}/X) = \text{SR}(\mathcal{C}, X)$ 및
+$\textit{PSh}(\mathcal{C}/X) = \textit{PSh}(\mathcal{C})/h_X$
+(혼돈 위상을 갖춘 $\mathcal{C}$에 Sites, 보조정리
+\ref{sites-lemma-essential-image-j-shriek}를 적용한다)를 사용하면 따른다.
+그러나 다음과 같이 직접 논증할 수도 있다. 분명히
+$\{U_i \to X\}_{i \in I}$와 $\{V_j \to X\}_{j \in J}$
+의 쌍대곱은
+$\{U_i \to X\}_{i \in I} \amalg \{V_j \to X\}_{j \in J}$이고,
+공역이 $X$인 사상들의 족으로 이루어진 족의 쌍대곱도 마찬가지이다.
+대상 $\{X \to X\}$는 $\text{SR}(\mathcal{C}, X)$의 끝 대상이다.
+사상
+$(\alpha, f_i) : \{U_i \to X\}_{i \in I} \to \{V_j \to X\}_{j \in J}$
+와 사상
+$(\beta, g_k) : \{W_k \to X\}_{k \in K} \to \{V_j \to X\}_{j \in J}$
+가 주어졌다고 하자. 이 사상들의 섬유곱은
+$$
+\{ U_i \times_{f_i, V_j, g_k} W_k \to X \}_{(i, j, k) \in I \times J \times K
+\text{ such that } j = \alpha(i) = \beta(k)}
+$$
+로 주어진다. $\mathcal{C}$가 섬유곱을 가진다는 가정에 의해 이 섬유곱들이
+존재한다. 따라서 $\text{SR}(\mathcal{C}, X)$는 유한 극한을 가진다.
+Categories, 보조정리 \ref{categories-lemma-finite-limits-exist}를 보라.
+이 경우 함자 $F$에 관한 명제의 확인은 생략한다.
+\end{proof}
+
+
+
+
+
+\section{초덮개}
+\label{hypercovering-section-hypercoverings}
+
+\noindent
+우리 범주가 사이트라고 가정하면 다음 정의를 둘 수 있다.
+
+\begin{definition}
+\label{hypercovering-definition-covering-SR}
+사이트 $\mathcal{C}$를 생각하자.
+$f = (\alpha, f_i) : \{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$
+를 범주 $\text{SR}(\mathcal{C})$의 사상이라 하자.
+모든 $j \in J$에 대해 사상의 족
+$\{U_i \to V_j\}_{i \in I, \alpha(i) = j}$가 사이트
+$\mathcal{C}$의 덮개이면 $f$를 {\it 덮개}라고 한다.
+$X$를 $\mathcal{C}$의 대상이라 하자.
+$\text{SR}(\mathcal{C}, X)$의 사상 $K \to L$의
+$\text{SR}(\mathcal{C})$에서의 상이 덮개이면 이 사상을
+{\it 덮개}라고 한다.
+\end{definition}
+
+\begin{lemma}
+\label{hypercovering-lemma-covering-permanence}
+사이트 $\mathcal{C}$를 생각하자.
+\begin{enumerate}
+\item $\text{SR}(\mathcal{C})$에서 덮개들의 합성은 덮개이다.
+\item $K \to L$이 $\text{SR}(\mathcal{C})$의 덮개이고
+$L' \to L$이 사상이면 $L' \times_L K$가 존재하며,
+$L' \times_L K \to L'$은 덮개이다.
+\item $\mathcal{C}$가 두 대상의 곱을 가지고
+$A \to B$와 $K \to L$이 $\text{SR}(\mathcal{C})$의 덮개이면,
+$A \times K \to B \times L$은 덮개이다.
+\end{enumerate}
+$X \in \Ob(\mathcal{C})$라 하자. 그러면 (1)과 (2)는
+$\text{SR}(\mathcal{C}, X)$에 대해 성립하고, $\mathcal{C}$가
+섬유곱을 가지면 (3)도 성립한다.
+\end{lemma}
+
+\begin{proof}
+(1)은 사이트의 공리에서 곧바로 따른다.
+(2)는 보조정리 \ref{hypercovering-lemma-coprod-prod-SR}의 증명에서 주어진
+$\text{SR}(\mathcal{C})$의 섬유곱 구성과, $\mathcal{C}$의 덮개를
+이루는 사상들이 표현 가능해야 한다는 조건에서 따른다.
+$A \times K \to B \times L$을 합성
+$A \times K \to B \times K \to B \times L$로 보면
+덮개들의 밑변환을 합성한 것이므로 (3)이 따른다.
+마지막 명제는 $\text{SR}(\mathcal{C}, X) =
+\text{SR}(\mathcal{C}/X)$이기 때문에 성립한다.
+\end{proof}
+
+\noindent
+보조정리 \ref{hypercovering-lemma-coprod-prod-SR}와
+Simplicial, 보조정리 \ref{simplicial-lemma-existence-cosk}에 의해
+$\mathcal{C}$가 섬유곱을 가지면 $\text{SR}(\mathcal{C}, X)$의
+절단 단체적 대상의 여골격이 존재한다. 따라서 다음 정의는 의미를 가진다.
+
+\begin{definition}
+\label{hypercovering-definition-hypercovering}
+$\mathcal{C}$를 사이트라 하자. $\mathcal{C}$가 섬유곱을 가진다고 가정하자.
+$X \in \Ob(\mathcal{C})$를 $\mathcal{C}$의 대상이라 하자.
+{\it $X$의 초덮개}란 다음을 만족하는
+$\text{SR}(\mathcal{C}, X)$의 단체적 대상 $K$를 말한다.
+\begin{enumerate}
+\item 대상 $K_0$은 사이트 $\mathcal{C}$에서 $X$의 덮개이다.
+\item 모든 $n \geq 0$에 대해 표준 사상
+$$
+K_{n + 1} \longrightarrow (\text{cosk}_n \text{sk}_n K)_{n + 1}
+$$
+은 위에서 정의한 의미의 덮개이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$\text{SR}(\mathcal{C}, X)$의 각 대상은 결국 공역이 $X$인
+사상들의 족이므로 조건 (1)은 의미를 가진다. 이 조건은 $K_0$에서
+$\text{SR}(\mathcal{C}, X)$의 끝 대상으로 가는 사상이
+덮개라고 표현할 수도 있다.
+
+\begin{example}[체흐 초덮개]
+\label{hypercovering-example-cech}
+섬유곱을 갖는 사이트 $\mathcal{C}$를 생각하자.
+$\{U_i \to X\}_{i \in I}$를 $\mathcal{C}$의 덮개라 하고
+$K_0 = \{U_i \to X\}_{i \in I}$로 두자. 그러면 $K_0$은
+$\text{SR}(\mathcal{C}, X)$의 $0$-절단 단체적 대상이므로
+$$
+K = \text{cosk}_0 K_0.
+$$
+를 만들 수 있다. $K$가 정의 \ref{hypercovering-definition-hypercovering}의 조건 (1)을
+만족함은 분명하다. Simplicial, 보조정리
+\ref{simplicial-lemma-cosk-up}에 의해 모든 사상
+$K_{n + 1} \to (\text{cosk}_n \text{sk}_n K)_{n + 1}$이 동형이므로
+조건 (2)도 만족한다. 각 항 $K_n$은 통상적인
+$$
+K_n = \{
+U_{i_0} \times_X U_{i_1} \times_X \ldots \times_X U_{i_n} \to X
+\}_{(i_0, i_1, \ldots, i_n) \in I^{n + 1}}
+$$
+임에 유의하자. 이 형태의 $X$의 초덮개를
+$X$의 {\it 체흐 초덮개}라고 한다.
+\end{example}
+
+\begin{example}[사이트의 단체적 대상에 의한 초덮개]
+\label{hypercovering-example-hypercovering-in-C}
+섬유곱을 갖는 사이트 $\mathcal{C}$를 생각하자.
+$X \in \Ob(\mathcal{C})$라 하자. $U$를 $\mathcal{C}$의 단체적 대상이라 하고,
+통상적으로 $U_n = U([n])$라 쓰자. 마지막으로 증대
+$$
+a : U \to X
+$$
+가 주어졌다고 가정하자. 이 상황에서는 각 항이
+$K_n = \{U_n \to X\}$인 $\text{SR}(\mathcal{C}, X)$의
+단체적 대상 $K$를 생각할 수 있다. $K$가 정의
+\ref{hypercovering-definition-hypercovering}의 의미에서 $X$의 초덮개일 필요충분조건은
+다음 세 조건\footnote{$\mathcal{C}$가 섬유곱을 가지므로 범주
+$\mathcal{C}/X$는 모든 유한 극한을 가진다. 따라서 Simplicial, 보조정리
+\ref{simplicial-lemma-existence-cosk}에 의해 필요한 여골격들이 존재한다.}
+이 성립하는 것이다.
+\begin{enumerate}
+\item $\{U_0 \to X\}$는 $\mathcal{C}$의 덮개이다.
+\item $\{U_1 \to U_0 \times_X U_0\}$는 $\mathcal{C}$의 덮개이다.
+\item $\{U_{n + 1} \to (\text{cosk}_n\text{sk}_n U)_{n + 1}\}$
+는 $n \geq 1$에 대해 $\mathcal{C}$의 덮개이다.
+\end{enumerate}
+직접적인 확인은 생략한다.
+\end{example}
+
+\begin{example}[덮개 사상에 결부된 체흐 초덮개]
+\label{hypercovering-example-cech-cover}
+섬유곱을 갖는 사이트 $\mathcal{C}$를 생각하자. $U \to X$를
+$\{U \to X\}$가 $\mathcal{C}$의 덮개가 되는 $\mathcal{C}$의 사상이라
+하자\footnote{이 성질을 갖는 $\mathcal{C}$의 사상을 때로
+``덮개 사상''이라고 한다.}. 각 항이
+$$
+K_n = \{U \times_X U \times_X \ldots \times_X U \to X\}
+\quad (n + 1 \text{ factors})
+$$
+인 $\text{SR}(\mathcal{C}, X)$의 단체적 대상 $K$를 생각하자.
+그러면 $K$는 $X$의 초덮개이다. 이 예는
+예 \ref{hypercovering-example-cech}와 예 \ref{hypercovering-example-hypercovering-in-C} 모두의
+특수한 경우이다.
+\end{example}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercoverings-set}
+섬유곱을 갖는 사이트 $\mathcal{C}$를 생각하자.
+$X \in \Ob(\mathcal{C})$를 $\mathcal{C}$의 대상이라 하자.
+$X$의 모든 초덮개로 이루어진 모임은 집합을 이룬다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}$가 사이트이므로 $X$의 모든 덮개로 이루어진 모임은
+집합을 이룬다. 따라서 가능한 $K_0$들의 모임은 집합이다.
+가능한 모든 $K_0, \ldots, K_n$의 모임이 집합임을 보였다고 하자.
+그러면 $K_0, \ldots, K_n$이 주어졌을 때 가능한 모든
+$K_{n + 1}$의 모임이 집합임을 보이면 충분하다. 이는 분명하다.
+실제로 $K_{n + 1}$은
+$(\text{cosk}_n \text{sk}_n K)_{n + 1}$의 가능한 모든 덮개 중에서
+택해야 한다.
+\end{proof}
+
+\begin{remark}
+\label{hypercovering-remark-hypercoverings-really-set}
+이 보조정리는 집합을 이루는 초덮개들의 선택으로 된 공종계가
+존재한다고만 말하는 것이 아니라, 초덮개들 자체가 실제로
+집합을 이룬다고 말한다.
+\end{remark}
+
+\noindent
+$\mathcal{C}$ 위의 준층 범주는 유한 극한과 쌍대극한을 가진다.
+따라서 집합 값 준층에 대해 함자 $\text{cosk}_n$이 존재한다.
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-F}
+섬유곱을 갖는 사이트 $\mathcal{C}$를 생각하자.
+$X \in \Ob(\mathcal{C})$를 $\mathcal{C}$의 대상이라 하고,
+$K$를 $X$의 초덮개라 하자. 상수 단체적 준층 $h_X$로 가는
+증대가 주어진 $\textit{PSh}(\mathcal{C})$의 단체적 대상
+$F(K)$를 생각하자.
+\begin{enumerate}
+\item 준층의 사상 $F(K)_0 \to h_X$는 층화하면 전사가 된다.
+\item 사상
+$$
+(d^1_0, d^1_1) :
+F(K)_1
+\longrightarrow
+F(K)_0 \times_{h_X} F(K)_0
+$$
+은 층화하면 전사가 된다.
+\item 모든 $n \geq 1$에 대해 사상
+$$
+F(K)_{n + 1} \longrightarrow (\text{cosk}_n \text{sk}_n F(K))_{n + 1}
+$$
+은 층화하면 전사가 된다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+다음 사실을 사용한다. $\{U_i \to U\}_{i \in I}$가 사이트
+$\mathcal{C}$의 덮개이면 사상
+$$
+\amalg_{i \in I} h_{U_i} \to h_U
+$$
+은 층화하면 전사가 된다. Sites, 보조정리
+\ref{sites-lemma-covering-surjective-after-sheafification}를 보라.
+따라서 첫 번째 명제는 곧바로 따른다.
+
+\medskip\noindent
+두 번째 명제에 대해서는 Simplicial, 예
+\ref{simplicial-example-cosk0}에 따라 단체적 대상
+$\text{cosk}_0 \text{sk}_0 K$의 각 항이
+$K_0 \times \ldots \times K_0$임에 유의하자. 따라서 초덮개의 정의에 의해
+$(d^1_0, d^1_1) : K_1 \to K_0 \times K_0$은 덮개이다.
+위의 명제와 $F$가 곱을 $h_X$ 위의 섬유곱으로 보낸다는 사실에서
+(2)가 따른다.
+
+\medskip\noindent
+세 번째 명제에 대해서는
+$\text{cosk}_n \text{sk}_n F(K) =
+F(\text{cosk}_n \text{sk}_n K)$가 $n \geq 1$에 대해 성립한다고
+주장한다. 이를 증명하기 위해 함자
+$\text{SR}(\mathcal{C}, X) \to \textit{PSh}(\mathcal{C})/h_X$를
+잠시 $F'$로 나타내자. 보조정리 \ref{hypercovering-lemma-coprod-prod-SR}에 의해
+함자 $F'$는 유한 극한과 가환한다. Simplicial, 절
+\ref{simplicial-section-skeleton}에서 함자 $\text{cosk}_n$을
+서술한 방식에 따라 $\text{cosk}_n \text{sk}_n F'(K) =
+F'(\text{cosk}_n \text{sk}_n K)$임을 알 수 있다.
+Simplicial, 보조정리 \ref{simplicial-lemma-existence-cosk}에서
+$(\text{cosk}_n U)_m$을 서술할 때 쓰인 범주는
+$(\Delta/[m])^{opp}_{\leq n}$임을 상기하자.
+$n \geq 1$이면 $(\Delta/[m])_{\leq n}$이 연결 범주임을 보이는 것은
+재미있는 연습이다(Categories, 정의
+\ref{categories-definition-category-connected}를 보라).
+따라서 Categories, 보조정리
+\ref{categories-lemma-connected-limit-over-X}에 의해
+$\text{cosk}_n \text{sk}_n F'(K) =
+\text{cosk}_n \text{sk}_n F(K)$이고, 주장이 따른다.
+이제 (2)의 사상은 정의 \ref{hypercovering-definition-covering-SR}에서 말하는
+덮개에 함자 $F$를 적용하여 얻은 것이므로, 이로부터 성질 (2)가 따르고
+결론은 이 증명의 첫머리에서 언급한 첫 번째 사실로부터 따른다.
+\end{proof}
+
+
+
+\section{비순환성}
+\label{hypercovering-section-acyclicity}
+
+\noindent
+$\mathcal{C}$를 사이트라 하자. 집합의 준층 $\mathcal{F}$에 대해
+다음 규칙으로 정의되는 아벨 군의 준층을
+$\mathbf{Z}_\mathcal{F}$로 나타낸다.
+$$
+\mathbf{Z}_\mathcal{F}(U) = \text{free abelian group on }\mathcal{F}(U).
+$$
+이를 때로 {\it $\mathcal{F}$ 위의 자유 아벨 준층}이라고 한다.
+물론 구성 $\mathcal{F} \mapsto \mathbf{Z}_\mathcal{F}$는 함자이며
+망각 함자
+$\textit{PAb}(\mathcal{C}) \to \textit{PSh}(\mathcal{C})$의
+왼쪽 수반이다. 층화 $\mathbf{Z}_\mathcal{F}^\#$는 아벨 군의 층이고,
+함자 $\mathcal{F} \mapsto \mathbf{Z}_\mathcal{F}^\#$ 역시 왼쪽 수반이다.
+$\mathbf{Z}_\mathcal{F}^\#$를 때로
+{\it $\mathcal{F}$ 위의 자유 아벨 층}이라고 한다.
+
+\medskip\noindent
+사이트 $\mathcal{C}$의 대상 $X$에 대해 $h_X$ 위의 자유 아벨 준층을
+$\mathbf{Z}_X$로 나타내고, 그 층화를 $\mathbf{Z}_X^\#$로 나타낸다.
+
+\begin{definition}
+\label{hypercovering-definition-homology}
+$\mathcal{C}$를 사이트라 하고, $K$를
+$\textit{PSh}(\mathcal{C})$의 단체적 대상이라 하자.
+위의 구성으로 $\textit{Ab}(\mathcal{C})$의 단체적 대상
+$\mathbf{Z}_K^\#$를 얻는다. 이에 결부된 아벨 준층의 복합체
+$s(\mathbf{Z}_K^\#)$를 취할 수 있다. Simplicial, 절
+\ref{simplicial-section-complexes}를 보라. {\it $K$의 호몰로지}란
+아벨 층의 복합체 $s(\mathbf{Z}_K^\#)$의 호몰로지이다.
+\end{definition}
+
+\noindent
+다시 말해, {\it $K$의 $i$차 호몰로지 $H_i(K)$}란 아벨 군의 층
+$H_i(K) = H_i(s(\mathbf{Z}_K^\#))$이다. 이 절에서는 $K$가
+$\mathcal{C}$의 대상 $X$의 초덮개인 경우의 호몰로지를 다룬다.
+
+\begin{lemma}
+\label{hypercovering-lemma-compare-cosk0}
+$\mathcal{C}$를 사이트라 하고, $\mathcal{F} \to \mathcal{G}$를
+집합의 준층 사이의 사상이라 하자. $K$를
+$\textit{PSh}(\mathcal{C})$의 단체적 대상 중에서 그 $n$차 항이
+$\mathcal{F}$의 $\mathcal{G}$ 위 $(n + 1)$중 섬유곱인 것으로 나타내자.
+Simplicial, 예 \ref{simplicial-example-fibre-products-simplicial-object}를
+보라. $\mathcal{F} \to \mathcal{G}$가 층화하면 전사가 된다면
+$$
+H_i(K) =
+\left\{
+\begin{matrix}
+0 & \text{if} & i > 0\\
+\mathbf{Z}_\mathcal{G}^\# & \text{if} & i = 0
+\end{matrix}
+\right.
+$$
+이다. 차수 $0$에서의 동형은 사상
+$H_0(K) \to \mathbf{Z}_\mathcal{G}^\#$로 주어지며, 이 사상은
+사상 $(\mathbf{Z}_K^\#)_0 =
+\mathbf{Z}_\mathcal{F}^\# \to \mathbf{Z}_\mathcal{G}^\#$에서 유도된다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{G}' \subset \mathcal{G}$를 사상
+$\mathcal{F} \to \mathcal{G}$의 상이라 하자.
+$U \in \Ob(\mathcal{C})$를 택하고
+$A = \mathcal{F}(U)$와 $B = \mathcal{G}'(U)$로 두자.
+그러면 단체 집합 $K(U)$는 $n$-단체가
+$$
+A \times_B A \times_B \ldots \times_B A\ (n + 1 \text{ factors)}.
+$$
+로 주어지는 단체 집합과 같다. Simplicial, 보조정리
+\ref{simplicial-lemma-cosk-minus-one-equivalence}에 의해
+사상 $K(U) \to B$는 자명한 Kan 파이브레이션이다. 따라서 호모토피 동치이다
+(Simplicial, 보조정리 \ref{simplicial-lemma-trivial-kan-homotopy}).
+여기에 ``자유 아벨 군'' 함자를 적용하면
+$$
+\mathbf{Z}_K(U) \longrightarrow \mathbf{Z}_B
+$$
+도 호모토피 동치임을 얻는다. $s(\mathbf{Z}_B)$는 복합체
+$$
+\ldots \to
+\bigoplus\nolimits_{b \in B}\mathbf{Z} \xrightarrow{0}
+\bigoplus\nolimits_{b \in B}\mathbf{Z} \xrightarrow{1}
+\bigoplus\nolimits_{b \in B}\mathbf{Z} \xrightarrow{0}
+\bigoplus\nolimits_{b \in B}\mathbf{Z} \to 0
+$$
+임에 유의하자. Simplicial, 보조정리
+\ref{simplicial-lemma-homology-eilenberg-maclane}를 보라.
+따라서 $i > 0$에 대해 $H_i(s(\mathbf{Z}_K(U))) = 0$이고,
+$H_0(s(\mathbf{Z}_K(U))) = \bigoplus_{b \in B}\mathbf{Z}
+= \bigoplus_{s \in \mathcal{G}'(U)} \mathbf{Z}$.
+이 식별들은 제한 사상과 호환된다.
+
+\medskip\noindent
+$i > 0$에 대해 $H_i(s(\mathbf{Z}_K)) = 0$이고
+$H_0(s(\mathbf{Z}_K)) = \mathbf{Z}_{\mathcal{G}'}$라고 결론짓는다.
+여기서는 $\textit{PAb}(\mathcal{C})$ 안에서 호몰로지군을 계산한다.
+층화가 완전 함자이므로 보조정리의 결과가 따른다. 구체적으로 완전성은
+$H_0(s(\mathbf{Z}_K))^\# = H_0(s(\mathbf{Z}_K^\#))$를 함의하며,
+다른 지표도 마찬가지이다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-acyclicity}
+$\mathcal{C}$를 사이트라 하자. $f : L \to K$를
+$\textit{PSh}(\mathcal{C})$의 단체적 대상 사이의 사상이라 하고,
+$n \geq 0$을 정수라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $i < n$에 대해 사상 $L_i \to K_i$는 동형이다.
+\item 사상 $L_n \to K_n$은 층화하면 전사가 된다.
+\item 표준 사상 $L \to \text{cosk}_n \text{sk}_n L$은 동형이다.
+\item 표준 사상 $K \to \text{cosk}_n \text{sk}_n K$은 동형이다.
+\end{enumerate}
+그러면 $H_i(f) : H_i(L) \to H_i(K)$는 동형이다.
+\end{lemma}
+
+\begin{proof}
+이 증명은 위의 보조정리 \ref{hypercovering-lemma-compare-cosk0}의 증명과 완전히 같다.
+먼저 $K_n' \subset K_n$을 사상 $L_n \to K_n$의 상인 부분 준층이라 하자.
+가정 (2)는 $K_n'$의 층화가 $K_n$의 층화와 같다는 뜻이다.
+또한 모든 $i < n$에 대해 $L_i = K_i$이므로
+$U_0 = L_0 = K_0, \ldots, U_{n - 1} = L_{n - 1} = K_{n - 1}, U_n = K'_n$.
+로 취하여 $n$-절단 단체적 준층 $U$를 얻는다.
+단체적 준층 $K' = \text{cosk}_n U$로 두자. $K'_m$을 유한 극한으로
+구성할 수 있고 층화는 완전하므로 $(K'_m)^\# = K_m$임을 알 수 있다.
+다시 말해 $(K')^\# = K^\#$이다. 층화의 완전성으로 다시 한번
+$H_i(K) = H_i(K')$라고 결론짓는다. 따라서 사상 $L \to K'$에 대해
+보조정리를 증명하면 충분하다. 즉, $L_n \to K_n$이
+{\it 준층}의 전사라고 가정해도 된다!
+
+\medskip\noindent
+이 경우 $\mathcal{C}$의 임의의 대상 $U$에 대해 단체 집합의 사상
+$$
+L(U) \longrightarrow K(U)
+$$
+은 Simplicial, 보조정리 \ref{simplicial-lemma-section}의
+모든 가정을 만족한다. 따라서 자명한 Kan 파이브레이션이고, 특히
+호모토피 동치이다(Simplicial, 보조정리
+\ref{simplicial-lemma-trivial-kan-homotopy}). 그러므로
+$$
+\mathbf{Z}_L(U) \longrightarrow \mathbf{Z}_K(U)
+$$
+도 호모토피 동치이다. 이는 모든 $U$에 대해 성립하므로 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-acyclic-hypercover-sheaves}
+$\mathcal{C}$를 사이트라 하고, $K$를 단체적 준층,
+$\mathcal{G}$를 준층이라 하자. $K \to \mathcal{G}$를
+$K$에서 $\mathcal{G}$로 가는 증대라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item 준층의 사상 $K_0 \to \mathcal{G}$는 층화하면 전사가 된다.
+\item 사상
+$$
+(d^1_0, d^1_1) :
+K_1
+\longrightarrow
+K_0 \times_\mathcal{G} K_0
+$$
+은 층화하면 전사가 된다.
+\item 모든 $n \geq 1$에 대해 사상
+$$
+K_{n + 1} \longrightarrow (\text{cosk}_n \text{sk}_n K)_{n + 1}
+$$
+은 층화하면 전사가 된다.
+\end{enumerate}
+그러면 $i > 0$에 대해 $H_i(K) = 0$이고
+$H_0(K) = \mathbf{Z}_\mathcal{G}^\#$이다.
+\end{lemma}
+
+\begin{proof}
+$n \geq 1$에 대해 $K^n = \text{cosk}_n \text{sk}_n K$로 나타내자.
+$K^0$을 각 항 $(K^0)_n$이 $(n + 1)$중 섬유곱
+$K_0 \times_\mathcal{G} \ldots \times_\mathcal{G} K_0$과 같은
+단체적 대상으로 정의하자. Simplicial, 예
+\ref{simplicial-example-fibre-products-simplicial-object}를 보라.
+다음 사상들이 있다.
+$$
+K \longrightarrow \ldots \to K^n \to K^{n - 1} \to \ldots \to K^1 \to K^0.
+$$
+사상 $K \to K^i$와 $j \geq i \geq 1$일 때의 $K^j \to K^i$는
+함자 $\text{cosk}_n$들의 보편 성질에서 유도된다.
+사상 $K^1 \to K^0$은 Simplicial, 주석
+\ref{simplicial-remark-augmentation}의 표준 사상이다.
+또한 $K^0 \to \text{cosk}_1 \text{sk}_1 K^0$이 동형임을 상기하자.
+Simplicial, 보조정리 \ref{simplicial-lemma-cosk-minus-one}를 보라.
+
+\medskip\noindent
+보조정리 \ref{hypercovering-lemma-compare-cosk0}에 의해 $i > 0$에 대해
+$H_i(K^0) = 0$이고 $H_0(K^0) = \mathbf{Z}_\mathcal{G}^\#$임을 알 수 있다.
+
+\medskip\noindent
+$n \geq 1$을 택하고 사상 $K^n \to K^{n - 1}$을 생각하자.
+이는 차수 $< n$인 항들에서 동형이다. 사상
+$K^n \to \text{cosk}_n \text{sk}_n K^n$과
+$K^{n - 1} \to \text{cosk}_n \text{sk}_n K^{n - 1}$
+은 동형이다. 또한 $(K^n)_n = K_n$이고
+$(K^{n - 1})_n = (\text{cosk}_{n - 1} \text{sk}_{n - 1} K)_n$이다.
+따라서 가정에 의해 $(K^n)_n \to (K^{n - 1})_n$은
+층화하면 전사가 되는 준층의 사상이다. 보조정리
+\ref{hypercovering-lemma-acyclicity}에 의해
+$H_i(K^n) = H_i(K^{n - 1})$라고 결론짓는다.
+이를 위의 결과와 결합하면 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-acyclic}
+섬유곱을 갖는 사이트 $\mathcal{C}$를 생각하자.
+$X$를 $\mathcal{C}$의 대상이라 하고, $K$를 $X$의 초덮개라 하자.
+단체적 준층 $F(K)$의 호몰로지는 차수 $> 0$에서 $0$이고
+차수 $0$에서는 $\mathbf{Z}_X^\#$과 같다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{hypercovering-lemma-acyclic-hypercover-sheaves}와
+\ref{hypercovering-lemma-hypercovering-F}를 결합하면 된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{{\v C}ech 코호몰로지와 초덮개}
+\label{hypercovering-section-hyper-cech}
+
+\noindent
+$\mathcal{C}$를 사이트라 하자. 사이트 $\mathcal{C}$ 위의 아벨 군 준층
+$\mathcal{F}$를 생각하자. 이는 다음 함자를 정의한다.
+\begin{eqnarray*}
+\mathcal{F} : \text{SR}(\mathcal{C})^{opp}
+& \longrightarrow &
+\textit{Ab} \\
+\{U_i\}_{i \in I} &
+\longmapsto &
+\prod\nolimits_{i \in I} \mathcal{F}(U_i)
+\end{eqnarray*}
+따라서 $\text{SR}(\mathcal{C})$의 단체적 대상 $K$는
+$\textit{Ab}$의 코심플렉셜 대상 $\mathcal{F}(K)$로 옮겨진다.
+$\mathcal{F}(K)$에 결부된 코체인 복합체 $s(\mathcal{F}(K))$를
+(Simplicial, 절
+\ref{simplicial-section-dold-kan-cosimplicial}) 단체적 대상 $K$에 관한
+$\mathcal{F}$의 {\v C}ech 복합체라 한다. 다음과 같이 놓는다.
+$$
+\check{H}^i(K, \mathcal{F})
+=
+H^i(s(\mathcal{F}(K))).
+$$
+이를 $K$에 관한 $\mathcal{F}$의 $i$차 {\v C}ech 코호몰로지군이라 한다.
+이 절에서는 Cohomology, 절 \ref{cohomology-section-cech},
+\ref{cohomology-section-cech-functor},
+\ref{cohomology-section-cech-cohomology-cohomology}에서 증명한 열린 덮개의
+{\v C}ech 코호몰로지에 관한 몇몇 결과의 유사물을 증명한다.
+
+\begin{lemma}
+\label{hypercovering-lemma-h0-cech}
+$\mathcal{C}$를 섬유곱을 갖는 사이트라 하자.
+$X$를 $\mathcal{C}$의 대상이라 하자.
+$K$를 $X$의 초덮개라 하자.
+$\mathcal{F}$를 $\mathcal{C}$ 위의 아벨 군층이라 하자.
+그러면 $\check{H}^0(K, \mathcal{F}) = \mathcal{F}(X)$이다.
+\end{lemma}
+
+\begin{proof}
+다음이 성립한다.
+$$
+\check{H}^0(K, \mathcal{F})
+=
+\Ker(\mathcal{F}(K_0) \longrightarrow \mathcal{F}(K_1))
+$$
+$K_0 = \{U_i \to X\}$로 쓰자. 이는 사이트 $\mathcal{C}$의 덮개이다.
+또한 $K_1 \to K_0 \times K_0$은
+$\text{SR}(\mathcal{C}, X)$의 덮개이다. 따라서
+$K_1 = \amalg_{i_0, i_1 \in I} \{V_{i_0i_1j} \to X\}$로 쓸 수 있고,
+사상 $K_1 \to K_0 \times K_0$은 사이트 $\mathcal{C}$의 덮개들
+$\{V_{i_0i_1j} \to U_{i_0} \times_X U_{i_1}\}$로 주어진다.
+그러므로 다시 다음과 같이 식별할 수 있다.
+$$
+\check{H}^0(K, \mathcal{F})
+=
+\Ker(
+\prod\nolimits_i \mathcal{F}(U_i)
+\longrightarrow
+\prod\nolimits_{i_0i_1 j} \mathcal{F}(V_{i_0i_1j})
+)
+$$
+여기서 사상은 명백하다. $\mathcal{F}$의 층 조건은
+$\check{H}^0(K, \mathcal{F}) = H^0(X, \mathcal{F})$를 함의한다.
+\end{proof}
+
+\noindent
+실제로 이 성질은 물론 $\mathcal{C}$ 위의 모든 아벨 준층 가운데
+아벨 층을 특징짓는다. 이 경우 Cohomology, 보조정리
+\ref{hypercovering-lemma-injective-trivial-cech}의 유사물은 다음과 같다.
+
+\begin{lemma}
+\label{hypercovering-lemma-injective-trivial-cech}
+$\mathcal{C}$를 섬유곱을 갖는 사이트라 하자.
+$X$를 $\mathcal{C}$의 대상이라 하자.
+$K$를 $X$의 초덮개라 하자.
+$\mathcal{I}$를 $\mathcal{C}$ 위의 단사 아벨 군층이라 하자. 그러면
+$$
+\check{H}^p(K, \mathcal{I}) =
+\left\{
+\begin{matrix}
+\mathcal{I}(X) & \text{if} & p = 0 \\
+0 & \text{if} & p > 0
+\end{matrix}
+\right.
+$$
+\end{lemma}
+
+\begin{proof}
+$\text{SR}(\mathcal{C}, X)$의 임의의 대상 $Z = \{U_i \to X\}$와
+$\mathcal{C}$ 위의 임의의 아벨 층 $\mathcal{F}$에 대해 다음이
+성립함에 유의하자.
+\begin{eqnarray*}
+\mathcal{F}(Z)
+& = &
+\prod \mathcal{F}(U_i) \\
+& = &
+\prod \Mor_{\textit{PSh}(\mathcal{C})}(h_{U_i}, \mathcal{F})\\
+& = &
+\Mor_{\textit{PSh}(\mathcal{C})}(F(Z), \mathcal{F})\\
+& = &
+\Mor_{\textit{PAb}(\mathcal{C})}(\mathbf{Z}_{F(Z)}, \mathcal{F}) \\
+& = &
+\Mor_{\textit{Ab}(\mathcal{C})}(\mathbf{Z}_{F(Z)}^\#, \mathcal{F})
+\end{eqnarray*}
+따라서 $\text{SR}(\mathcal{C}, X)$의 임의의 단체적 대상 $K$에 대해
+다음이 성립한다.
+\begin{equation}
+\label{hypercovering-equation-identify-cech}
+s(\mathcal{F}(K))
+=
+\Hom_{\textit{Ab}(\mathcal{C})}(s(\mathbf{Z}_{F(K)}^\#), \mathcal{F})
+\end{equation}
+기호는 정의 \ref{hypercovering-definition-homology}을 보라.
+$K$가 초덮개이면 층의 복합체 $s(\mathbf{Z}_{F(K)}^\#)$는
+$\mathbf{Z}_X^\#$와 유사동형이다. 보조정리
+\ref{hypercovering-lemma-hypercovering-acyclic}을 보라. 따라서 $\mathcal{I}$가 단사
+아벨 층이고 $K$가 초덮개이면, 복합체 $s(\mathcal{I}(K))$는 차수 $0$을
+제외하고 비순환이다. 다시 말해 다음이 성립한다.
+$$
+\check{H}^i(K, \mathcal{I}) = 0
+$$
+$i > 0$에 대해 그러하다. 이를 보조정리 \ref{hypercovering-lemma-h0-cech}와 결합하면
+보조정리가 증명된다.
+\end{proof}
+
+\noindent
+다음으로 Cohomology on Sites, 보조정리
+\ref{sites-cohomology-lemma-cech-spectral-sequence}의 유사물을 다룬다.
+$\mathcal{C}$를 사이트라 하자.
+$\mathcal{F}$를 $\mathcal{C}$ 위의 아벨 군층이라 하자.
+$\underline{H}^i(\mathcal{F})$는 규칙
+$\underline{H}^i(\mathcal{F}) : U \longmapsto H^i(U, \mathcal{F})$로
+정의되는 $\mathcal{C}$ 위의 아벨 군 준층을 나타냄을 상기하자.
+이 절의 도입부에서와 같이 이를 $\text{SR}(\mathcal{C})$로 확장한다.
+
+\begin{lemma}
+\label{hypercovering-lemma-cech-spectral-sequence}
+$\mathcal{C}$를 섬유곱을 갖는 사이트라 하자.
+$X$를 $\mathcal{C}$의 대상이라 하자.
+$K$를 $X$의 초덮개라 하자.
+$\mathcal{F}$를 $\mathcal{C}$ 위의 아벨 군층이라 하자.
+$D^{+}(\textit{Ab})$ 안에는 $\mathcal{F}$에 대해 함자적인 사상
+$$
+s(\mathcal{F}(K))
+\longrightarrow
+R\Gamma(X, \mathcal{F})
+$$
+이 있으며, 이는 함자 $\textit{Ab}(\mathcal{C}) \to \textit{Ab}$ 사이의
+자연 변환
+$$
+\check{H}^i(K, -) \longrightarrow H^i(X, -)
+$$
+을 유도한다. 또한 다음을 만족하는 스펙트럼 열
+$(E_r, d_r)_{r \geq 0}$이 존재한다.
+$$
+E_2^{p, q} = \check{H}^p(K, \underline{H}^q(\mathcal{F}))
+$$
+이는 $H^{p + q}(X, \mathcal{F})$로 수렴한다.
+이 스펙트럼 열은 $\mathcal{F}$와 초덮개 $K$에 대해 함자적이다.
+\end{lemma}
+
+\begin{proof}
+코호몰로지 장의 대응하는 보조정리에서 쓴 것과 같은 방법으로 증명할 수도
+있다. 여기서는 대신 이중 복합체 논증으로 증명하자.
+
+\medskip\noindent
+$\mathcal{C}$ 위 아벨 층의 범주에서 단사 분해
+$\mathcal{F} \to \mathcal{I}^\bullet$을 택하자. 항들이
+$$
+A^{p, q} = \mathcal{I}^q(K_p)
+$$
+인 이중 복합체 $A^{\bullet, \bullet}$를 생각하자. 여기서 미분
+$d_1^{p, q} : A^{p, q} \to A^{p + 1, q}$는 코심플렉셜 아벨 군
+$\mathcal{I}^p(K)$에 결부된 복합체 $s(\mathcal{I}^q(K))$의 미분에서 오고,
+미분 $d_2^{p, q} : A^{p, q} \to A^{p, q + 1}$는 미분
+$\mathcal{I}^q \to \mathcal{I}^{q + 1}$에서 온다.
+$\text{Tot}(A^{\bullet, \bullet})$로 이중 복합체
+$A^{\bullet, \bullet}$에 결부된 전체 복합체를 나타내자. Homology, 절
+\ref{homology-section-double-complexes}을 보라. 이 이중 복합체에 결부된
+두 스펙트럼 열 $({}'E_r, {}'d_r)$과 $({}''E_r, {}''d_r)$을 사용할 것이다.
+Homology, 절 \ref{homology-section-double-complex}을 보라.
+
+\medskip\noindent
+보조정리 \ref{hypercovering-lemma-injective-trivial-cech}에 의해 복합체
+$s(\mathcal{I}^q(K))$는 양의 차수에서 비순환이고, 그 $H^0$는
+$\mathcal{I}^q(X)$와 같다. 따라서 Homology, 보조정리
+\ref{homology-lemma-double-complex-gives-resolution}에 의해 자연 사상
+$$
+\mathcal{I}^\bullet(X) \longrightarrow \text{Tot}(A^{\bullet, \bullet})
+$$
+은 아벨 군 복합체의 유사동형이다. 특히
+$H^n(\text{Tot}(A^{\bullet, \bullet})) = H^n(X, \mathcal{F})$임을 얻는다.
+
+\medskip\noindent
+보조정리의 사상 $s(\mathcal{F}(K)) \longrightarrow R\Gamma(X, \mathcal{F})$는
+사상 $s(\mathcal{F}(K)) \to \text{Tot}(A^{\bullet, \bullet})$에 이어서
+위에 표시한 유사동형의 역을 합성한 것이다. 이는
+$\mathcal{I}^\bullet(X)$가 $R\Gamma(X, \mathcal{F})$의 대표이기 때문이다.
+
+\medskip\noindent
+스펙트럼 열 $({}'E_r, {}'d_r)_{r \geq 0}$을 생각하자. Homology,
+보조정리 \ref{homology-lemma-ss-double-complex}에 의해 다음이 성립한다.
+$$
+{}'E_2^{p, q} = H^p_I(H^q_{II}(A^{\bullet, \bullet}))
+$$
+다시 말해 먼저 $d_2$에 관해 코호몰로지를 취하면 군
+${}'E_1^{p, q} = \underline{H}^q(\mathcal{F})(K_p)$를 얻는다.
+따라서 미분 ${}'d_1$의 서술에 의해 실제로
+${}'E_2^{p, q} = \check{H}^p(K, \underline{H}^q(\mathcal{F}))$이다.
+위의 결과와 Homology, 보조정리
+\ref{homology-lemma-first-quadrant-ss}에 의해 이는 원하는 대로
+$H^n(X, \mathcal{F})$로 수렴한다.
+
+\medskip\noindent
+위 구성들이 아벨 층 $\mathcal{F}$와 초덮개 $K$에 대해 함자적이라는
+명제의 증명은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{베르디에식 초덮개}
+\label{hypercovering-section-hypercoverings-verdier}
+
+\noindent
+통찰력 있는 독자라면 대상 $X$의 초덮개에 대한 체흐-코호몰로지에서
+코호몰로지로 가는 스펙트럼 열을 얻는 데 필요한 것은 보조정리
+\ref{hypercovering-lemma-hypercovering-F}의 결론뿐임을 알아차렸을 것이다.
+따라서 다음 정의는 의미가 있다.
+
+\begin{definition}
+\label{hypercovering-definition-hypercovering-variant}
+$\mathcal{C}$를 사이트라 하자. $\mathcal{C}$가 등화자와 섬유곱을
+갖는다고 가정하자. $\mathcal{G}$를 집합의 준층이라 하자.
+{\it $\mathcal{G}$의 초덮개}란 다음 조건을 만족하는 증대
+$F(K) \to \mathcal{G}$가 주어진 $\text{SR}(\mathcal{C})$의 단체적 대상
+$K$를 말한다.
+\begin{enumerate}
+\item $F(K_0) \to \mathcal{G}$는 층화한 뒤 전사가 된다.
+\item $F(K_1) \to F(K_0) \times_\mathcal{G} F(K_0)$
+는 층화한 뒤 전사가 된다.
+\item $F(K_{n + 1}) \longrightarrow F((\text{cosk}_n \text{sk}_n K)_{n + 1})$
+는 $n \geq 1$에 대해 층화한 뒤 전사가 된다.
+\end{enumerate}
+$\text{SR}(\mathcal{C})$의 단체적 대상 $K$가
+$\textit{PSh}(\mathcal{C})$의 끝대상 $*$의 초덮개이면 $K$를
+{\it 초덮개}라 한다.
+\end{definition}
+
+\noindent
+$\mathcal{C}$가 섬유곱과 등화자를 갖는다는 가정은
+$\text{SR}(\mathcal{C})$도 섬유곱과 등화자를 가지며 $F$가 이들과
+가환함을 보장한다(보조정리 \ref{hypercovering-lemma-coprod-prod-SR}). 이는 사용하는
+여골격 함자들을 정의하기에 충분하다(Simplicial, 주석
+\ref{simplicial-remark-existence-cosk}과 Categories, 보조정리
+\ref{categories-lemma-fibre-products-equalizers-exist}을 보라).
+$\mathcal{C}$가 일반적인 경우에는 조건 (3)을 다음 조건으로 바꾸어도
+이 절의 결과들이 그대로 성립한다.
+$F(K_{n + 1}) \longrightarrow ((\text{cosk}_n \text{sk}_n F(K))_{n + 1})$
+는 $n \geq 1$에 대해 층화한 뒤 전사가 된다.
+
+\medskip\noindent
+$\mathcal{F}$를 $\mathcal{C}$ 위의 아벨 층이라 하자.
+앞 절에서 $\text{SR}(\mathcal{C})$의 단체적 대상 $K$에 관한
+$\mathcal{F}$의 {\v C}ech 복합체를 정의했다. 이제 준층 $\mathcal{G}$가
+주어졌을 때 다음과 같이 놓는다.
+$$
+H^0(\mathcal{G}, \mathcal{F}) =
+\Mor_{\textit{PSh}(\mathcal{C})}(\mathcal{G}, \mathcal{F}) =
+\Mor_{\Sh(\mathcal{C})}(\mathcal{G}^\#, \mathcal{F}) =
+H^0(\mathcal{G}^\#, \mathcal{F})
+$$
+기호는 Cohomology on Sites, 절
+\ref{sites-cohomology-section-limp}에서와 같다. 이는 왼쪽 완전 함자이고,
+그 고차 유도 함자들(Cohomology on Sites, 절
+\ref{sites-cohomology-section-limp}에서 간단히 연구했다)은
+$H^i(\mathcal{G}, \mathcal{F})$로 나타낸다. $\mathcal{G}$의 초덮개 $K$가
+주어지면 코호몰로지 $H^i(\mathcal{G}, \mathcal{F})$로 수렴하는
+체흐-코호몰로지에서 코호몰로지로 가는 스펙트럼 열이 있음을 보일 것이다.
+$\mathcal{G} = *$이면
+$H^i(*, \mathcal{F}) = H^i(\mathcal{C}, \mathcal{F})$가 사이트
+$\mathcal{C}$ 위에서 $\mathcal{F}$의 코호몰로지를 되찾음에 유의하자.
+
+\begin{lemma}
+\label{hypercovering-lemma-h0-cech-variant}
+$\mathcal{C}$를 등화자와 섬유곱을 갖는 사이트라 하자.
+$\mathcal{G}$를 $\mathcal{C}$ 위의 준층이라 하자.
+$K$를 $\mathcal{G}$의 초덮개라 하자.
+$\mathcal{F}$를 $\mathcal{C}$ 위의 아벨 군층이라 하자.
+그러면 $\check{H}^0(K, \mathcal{F}) = H^0(\mathcal{G}, \mathcal{F})$이다.
+\end{lemma}
+
+\begin{proof}
+$H^0(\mathcal{G}, \mathcal{F})$의 정의와 다음 도식이 층화한 뒤
+쌍대등화자 도식이 된다는 사실에서 따른다.
+$$
+\xymatrix{
+F(K_1) \ar@<1ex>[r] \ar@<-1ex>[r] &
+F(K_0) \ar[r] & \mathcal{G}
+}
+$$
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-injective-trivial-cech-variant}
+$\mathcal{C}$를 등화자와 섬유곱을 갖는 사이트라 하자.
+$\mathcal{G}$를 $\mathcal{C}$ 위의 준층이라 하자.
+$K$를 $\mathcal{G}$의 초덮개라 하자.
+$\mathcal{I}$를 $\mathcal{C}$ 위의 단사 아벨 군층이라 하자. 그러면
+$$
+\check{H}^p(K, \mathcal{I}) =
+\left\{
+\begin{matrix}
+H^0(\mathcal{G}, \mathcal{I}) & \text{if} & p = 0 \\
+0 & \text{if} & p > 0
+\end{matrix}
+\right.
+$$
+\end{lemma}
+
+\begin{proof}
+(\ref{hypercovering-equation-identify-cech})에 의해 다음이 성립한다.
+$$
+s(\mathcal{F}(K))
+=
+\Hom_{\textit{Ab}(\mathcal{C})}(s(\mathbf{Z}_{F(K)}^\#), \mathcal{F})
+$$
+복합체 $s(\mathbf{Z}_{F(K)}^\#)$는 $\mathbf{Z}_\mathcal{G}^\#$와
+유사동형이다. 보조정리 \ref{hypercovering-lemma-acyclic-hypercover-sheaves}를 보라.
+따라서 $\mathcal{I}$가 단사 아벨 층이면 복합체 $s(\mathcal{I}(K))$는
+차수 $0$을 제외하고 비순환이다. 다시 말해 $i > 0$에 대해
+$\check{H}^i(K, \mathcal{I}) = 0$이다. 이를 보조정리
+\ref{hypercovering-lemma-h0-cech-variant}와 결합하면 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-cech-spectral-sequence-variant}
+$\mathcal{C}$를 등화자와 섬유곱을 갖는 사이트라 하자.
+$\mathcal{G}$를 $\mathcal{C}$ 위의 준층이라 하자.
+$K$를 $\mathcal{G}$의 초덮개라 하자.
+$\mathcal{F}$를 $\mathcal{C}$ 위의 아벨 군층이라 하자.
+$D^{+}(\textit{Ab})$ 안에는 $\mathcal{F}$에 대해 함자적인 사상
+$$
+s(\mathcal{F}(K)) \longrightarrow R\Gamma(\mathcal{G}, \mathcal{F})
+$$
+이 있으며, 이는 함자 $\textit{Ab}(\mathcal{C}) \to \textit{Ab}$ 사이의
+자연 변환
+$$
+\check{H}^i(K, -) \longrightarrow H^i(\mathcal{G}, -)
+$$
+을 유도한다. 또한 다음을 만족하는 스펙트럼 열
+$(E_r, d_r)_{r \geq 0}$이 존재한다.
+$$
+E_2^{p, q} = \check{H}^p(K, \underline{H}^q(\mathcal{F}))
+$$
+이는 $H^{p + q}(\mathcal{G}, \mathcal{F})$로 수렴한다.
+이 스펙트럼 열은 $\mathcal{F}$와 초덮개 $K$에 대해 함자적이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}$ 위 아벨 층의 범주에서 단사 분해
+$\mathcal{F} \to \mathcal{I}^\bullet$을 택하자. 항들이
+$$
+A^{p, q} = \mathcal{I}^q(K_p)
+$$
+인 이중 복합체 $A^{\bullet, \bullet}$를 생각하자. 여기서 미분
+$d_1^{p, q} : A^{p, q} \to A^{p + 1, q}$는 미분
+$\mathcal{I}^p \to \mathcal{I}^{p + 1}$에서 오고, 미분
+$d_2^{p, q} : A^{p, q} \to A^{p, q + 1}$는 위에서 설명했듯이
+코심플렉셜 아벨 군 $\mathcal{I}^p(K)$에 결부된 복합체
+$s(\mathcal{I}^p(K))$의 미분에서 온다. 이 이중 복합체에 결부된
+두 스펙트럼 열 $({}'E_r, {}'d_r)$과 $({}''E_r, {}''d_r)$을 사용할 것이다.
+Homology, 절 \ref{homology-section-double-complex}을 보라.
+
+\medskip\noindent
+보조정리 \ref{hypercovering-lemma-injective-trivial-cech-variant}에 의해 복합체
+$s(\mathcal{I}^p(K))$는 양의 차수에서 비순환이고, 그 $H^0$는
+$H^0(\mathcal{G}, \mathcal{I}^p)$와 같다. 따라서 Homology, 보조정리
+\ref{homology-lemma-double-complex-gives-resolution}와 그 증명에 의해
+스펙트럼 열 $({}'E_r, {}'d_r)$은 퇴화하며, 자연 사상
+$$
+H^0(\mathcal{G}, \mathcal{I}^\bullet) \longrightarrow
+\text{Tot}(A^{\bullet, \bullet})
+$$
+은 아벨 군 복합체의 유사동형이다. 보조정리의 사상
+$s(\mathcal{F}(K)) \longrightarrow R\Gamma(\mathcal{G}, \mathcal{F})$는
+자연 사상 $s(\mathcal{F}(K)) \to \text{Tot}(A^{\bullet, \bullet})$에
+이어서 위에 표시한 유사동형의 역을 합성한 것이다. 이는
+$H^0(\mathcal{G}, \mathcal{I}^\bullet)$이
+$R\Gamma(\mathcal{G}, \mathcal{F})$의 대표이기 때문이다.
+
+\medskip\noindent
+스펙트럼 열 $({}''E_r, {}''d_r)_{r \geq 0}$을 생각하자. Homology,
+보조정리 \ref{homology-lemma-ss-double-complex}에 의해 다음이 성립한다.
+$$
+{}''E_2^{p, q} = H^p_{II}(H^q_I(A^{\bullet, \bullet}))
+$$
+다시 말해 먼저 $d_1$에 관해 코호몰로지를 취하면 군
+${}''E_1^{p, q} = \underline{H}^p(\mathcal{F})(K_q)$를 얻는다.
+따라서 미분 ${}''d_1$의 서술에 의해 실제로
+${}''E_2^{p, q} = \check{H}^p(K, \underline{H}^q(\mathcal{F}))$이다.
+이 스펙트럼 열은 $\text{Tot}(A^{\bullet, \bullet})$의 코호몰로지로
+수렴하므로 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-cech-spectral-sequence-verdier}
+$\mathcal{C}$를 등화자와 섬유곱을 갖는 사이트라 하자.
+$K$를 초덮개라 하자.
+$\mathcal{F}$를 아벨 층이라 하자. 다음을 만족하는 스펙트럼 열
+$(E_r, d_r)_{r \geq 0}$이 존재한다.
+$$
+E_2^{p, q} = \check{H}^p(K, \underline{H}^q(\mathcal{F}))
+$$
+이는 대역 코호몰로지군 $H^{p + q}(\mathcal{F})$로 수렴한다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{hypercovering-lemma-cech-spectral-sequence-variant}의 특수한 경우이다.
+\end{proof}
+
+
+
+
+
+
+
+\section{덮개에 의한 초덮개의 세분}
+\label{hypercovering-section-covering}
+
+\noindent
+초덮개를 구성하는 몇 가지 방법을 제시한다. 범주
+$\text{SR}(\mathcal{C}, X)$가 섬유곱을 가지므로
+$\text{SR}(\mathcal{C}, X)$의 단체적 대상들의 범주도
+섬유곱을 가진다는 점에 유의하자. Simplicial, 보조정리
+\ref{simplicial-lemma-fibre-product}을 보라.
+
+\begin{lemma}
+\label{hypercovering-lemma-funny-gamma}
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$X$를 $\mathcal{C}$의 대상이라 하자.
+$K, L, M$을 $\text{SR}(\mathcal{C}, X)$의 단체적 대상들이라 하고,
+$a : K \to L$, $b : M \to L$을 사상들이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $K$는 $X$의 초덮개이다.
+\item 사상 $M_0 \to L_0$은 덮개이다.
+\item 모든 $n \geq 0$에 대해 다음 도식에서
+$$
+\xymatrix{
+M_{n + 1} \ar[dd] \ar[rr] \ar[rd]^\gamma &
+&
+(\text{cosk}_n \text{sk}_n M)_{n + 1} \ar[dd] \\
+&
+L_{n + 1}
+\times_{(\text{cosk}_n \text{sk}_n L)_{n + 1}}
+(\text{cosk}_n \text{sk}_n M)_{n + 1}
+\ar[ld] \ar[ru]
+& \\
+L_{n + 1} \ar[rr] & & (\text{cosk}_n \text{sk}_n L)_{n + 1}
+}
+$$
+화살표 $\gamma$는 덮개이다.
+\end{enumerate}
+그러면 섬유곱 $K \times_L M$은 $X$의 초덮개이다.
+\end{lemma}
+
+\begin{proof}
+(2)에 의해 사상 $(K \times_L M)_0 = K_0 \times_{L_0} M_0 \to K_0$은
+덮개의 밑변환이므로 덮개이다. 보조정리
+\ref{hypercovering-lemma-covering-permanence}을 보라. 또한 (1)에 의해
+$K_0 \to \{X \to X\}$는 덮개이다. 따라서 보조정리
+\ref{hypercovering-lemma-covering-permanence}에 의해
+$(K \times_L M)_0 \to \{X \to X\}$는 덮개이다. 그러므로
+$K \times_L M$은 정의 \ref{hypercovering-definition-hypercovering}의 첫 번째 조건을
+만족한다.
+
+\medskip\noindent
+이제 모든 $n \geq 0$에 대해
+$$
+K_{n + 1} \times_{L_{n + 1}} M_{n + 1} = (K \times_L M)_{n + 1}
+\longrightarrow
+(\text{cosk}_n \text{sk}_n (K \times_L M))_{n + 1}
+$$
+가 덮개임을 확인해야 한다. 다음과 같이 줄여 쓰자.
+$A = (\text{cosk}_n \text{sk}_n K)_{n + 1}$,
+$B = (\text{cosk}_n \text{sk}_n L)_{n + 1}$, 그리고
+$C = (\text{cosk}_n \text{sk}_n M)_{n + 1}$.
+함자 $\text{cosk}_n \text{sk}_n$은 섬유곱과 가환한다.
+Simplicial, 보조정리 \ref{simplicial-lemma-cosk-fibre-product}을 보라.
+따라서 위의 오른쪽 항은 $A \times_B C$와 같다. 다음 가환 도식을
+생각하자.
+$$
+\xymatrix{
+K_{n + 1} \times_{L_{n + 1}} M_{n + 1} \ar[r] \ar[d] &
+M_{n + 1} \ar[d] \ar[rd]_\gamma \ar[rrd] &
+& \\
+K_{n + 1} \ar[r] \ar[rd] &
+L_{n + 1} \ar[rrd] &
+L_{n + 1} \times_B C \ar[l] \ar[r] &
+C \ar[d] \\
+&
+A \ar[rr] &
+&
+B
+}
+$$
+이 도식은
+$$
+K_{n + 1} \times_{L_{n + 1}} M_{n + 1}
+=
+(K_{n + 1} \times_B C)
+\times_{(L_{n + 1} \times_B C), \gamma}
+M_{n + 1}
+$$
+임을 보여 준다. 이제 $K_{n + 1} \times_B C \to A \times_B C$는
+덮개 $K_{n + 1} \to A$의 사상 $A \times_B C \to A$에 의한
+밑변환이므로 덮개이다. 가정 (3)에 의해 사상 $\gamma$는 덮개이다.
+따라서 사상
+$$
+(K_{n + 1} \times_B C)
+\times_{(L_{n + 1} \times_B C), \gamma}
+M_{n + 1}
+\longrightarrow
+K_{n + 1} \times_B C
+$$
+은 덮개의 밑변환이므로 덮개이다. 덮개들의 합성은 덮개이므로
+보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-product-hypercoverings}
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$X$를 $\mathcal{C}$의 대상이라 하자. $K, L$이 $X$의 초덮개들이면
+$K \times L$은 $X$의 초덮개이다.
+\end{lemma}
+
+\begin{proof}
+직접 확인해도 되고, 위의 보조정리 \ref{hypercovering-lemma-funny-gamma}를 사용하여
+$L \to \{X \to X\}$가 성질 (3)을 가짐을 확인해도 된다.
+\end{proof}
+
+
+\noindent
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$X$를 $\mathcal{C}$의 대상이라 하자. 범주
+$\text{SR}(\mathcal{C}, X)$가 쌍대곱과 유한 극한을 가지므로,
+어떤 단체 집합 $U$(예를 들어 비퇴화 단체를 유한 개만 가지는 것)와
+$\text{SR}(\mathcal{C}, X)$의 임의의 단체적 대상 $K$에 대해 대상
+$U \times K$와 $\Hom(U, K)$을 말할 수 있다. Simplicial, 절
+\ref{simplicial-section-product-with-simplicial-sets}와
+\ref{simplicial-section-hom-from-simplicial-sets}을 보라.
+
+\begin{lemma}
+\label{hypercovering-lemma-covering}
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$X$를 $\mathcal{C}$의 대상이라 하자. $K$를 $X$의 초덮개라 하고,
+$k \geq 0$을 정수라 하자. $u : Z \to K_k$를
+$\text{SR}(\mathcal{C}, X)$의 덮개라 하자. 그러면
+$L_k \to K_k$가 $u$를 거쳐 인수분해되는 초덮개들의 사상
+$f: L \to K$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$Y = K_k$로 나타내자. $C[k]$를 Simplicial, 예
+\ref{simplicial-example-simplex-cosimplicial-set}에서 정의한
+코심플렉셜 집합이라 하자. Simplicial, 보조정리
+\ref{simplicial-lemma-morphism-into-product}에 주어진
+$\Hom(C[k], Y)$와 $\Hom(C[k], Z)$의 기술을 사용하겠다.
+$\text{id} : K_k = Y \to Y$에 대응하는 정준 사상
+$K \to \Hom(C[k], Y)$가 있다. 사상
+$\Hom(C[k], Z) \to \Hom(C[k], Y)$을 생각하자. 그 $n$차 항에서의 사상은
+$$
+\prod\nolimits_{\alpha : [k] \to [n]} Z
+\longrightarrow
+\prod\nolimits_{\alpha : [k] \to [n]} Y
+$$
+이며, 각 인자에서 주어진 사상 $Z \to Y$를 사용한다. 다음과 같이 두자.
+$$
+L = K \times_{\Hom(C[k], Y)} \Hom(C[k], Z).
+$$
+사상 $L_k \to K_k$는 다음 가환 도식에 놓인다.
+$$
+\xymatrix{
+L_k \ar[r] \ar[d] &
+\prod_{\alpha : [k] \to [k]} Z \ar[r]^-{\text{pr}_{\text{id}_{[k]}}} \ar[d] &
+Z \ar[d] \\
+K_k \ar[r] &
+\prod_{\alpha : [k] \to [k]} Y \ar[r]^-{\text{pr}_{\text{id}_{[k]}}} &
+Y
+}
+$$
+아래쪽 두 화살표의 합성이 항등사상이므로, 원하는 인수분해를 얻는다.
+
+\medskip\noindent
+이제 $L$이 $X$의 초덮개임을 보여야 한다. 이를 위해 보조정리
+\ref{hypercovering-lemma-funny-gamma}를 사용하겠다. 조건 (1)은 가정에 의해 만족된다.
+(2)에 대해서는 사상
+$$
+\Hom(C[k], Z)_0 \to \Hom(C[k], Y)_0
+$$
+이 덮개이다. 실제로 사상 $[k] \to [0]$은 하나뿐이므로 이는
+$Z \to Y$와 동형이다.
+
+\medskip\noindent
+이제 $n = 0$에 대한 조건 (3)을 생각하자. 이때
+$(\text{cosk}_0 T)_1 = T \times T$
+(Simplicial, 예 \ref{simplicial-example-cosk0})이고
+$\Hom(C[k], Z)_1 = \prod_{\alpha : [k] \to [1]} Z$이므로 다음 도식을 얻는다.
+$$
+\xymatrix{
+\prod\nolimits_{\alpha : [k] \to [1]} Z \ar[r] \ar[d] &
+Z \times Z \ar[d] \\
+\prod\nolimits_{\alpha : [k] \to [1]} Y \ar[r] &
+Y \times Y
+}
+$$
+여기서 가로 화살표들은 두 비전사 $\alpha$에 대응하는 인자들로의
+사영에 대응한다. 따라서 화살표 $\gamma$는 사상
+$$
+\prod\nolimits_{\alpha : [k] \to [1]} Z
+\longrightarrow
+\prod\nolimits_{\alpha : [k] \to [1]\text{ not onto}} Z
+\times
+\prod\nolimits_{\alpha : [k] \to [1]\text{ onto}} Y
+$$
+이며, 이는 덮개들의 곱이므로 보조정리
+\ref{hypercovering-lemma-covering-permanence}에 의해 덮개이다.
+
+\medskip\noindent
+이제 $n > 0$에 대한 조건 (3)을 생각하자. 유한 집합들의 단사 사상
+$\tau : S' \to S$로서, $\text{SR}(\mathcal{C}, X)$의 임의의 대상
+$T$에 대해 사상
+\begin{equation}
+\label{hypercovering-equation-map}
+\Hom(C[k], T)_{n + 1} \to
+(\text{cosk}_n \text{sk}_n \Hom(C[k], T))_{n + 1}
+\end{equation}
+이 $T$에 대해 함자적으로 사영
+$\prod_{s \in S} T \to \prod_{s' \in S'} T$와 동형이 되게 하는 것이
+존재한다고 주장한다. 이것이 참이면 앞 문단과 같은 논증으로 화살표
+$\gamma$가 사상
+$$
+\prod\nolimits_{s \in S} Z
+\longrightarrow
+\prod\nolimits_{s \in S'} Z
+\times
+\prod\nolimits_{s \not\in \tau(S')} Y
+$$
+임을 알 수 있다. 이는 덮개들의 곱이므로 보조정리
+\ref{hypercovering-lemma-covering-permanence}에 의해 덮개이다. 구성에 의해
+$\Hom(C[k], T)_{n + 1} = \prod_{\alpha : [k] \to [n + 1]} T$
+(Simplicial, 보조정리 \ref{simplicial-lemma-morphism-into-product}을 보라).
+따라서 $S = \text{Map}([k], [n + 1])$로 취한다. 한편 Simplicial,
+보조정리 \ref{simplicial-lemma-formula-limit}은
+$(\text{cosk}_n \text{sk}_n \Hom(C[k], T))_{n + 1}$
+의 점들을 $\Hom(C[k], T)_n$의 점들의 열
+$(f_0, \ldots, f_{n + 1})$로 기술한다. 여기서
+$0 \leq i < j \leq n + 1$에 대해
+$d^n_{j - 1} f_i = d^n_i f_j$이다. $f_i = (f_{i, \alpha})$로 쓸 수 있는데,
+여기서 $f_{i, \alpha}$는 $T$의 점이고
+$\alpha \in \text{Map}([k], [n])$이다. 이 조건들은
+$$
+f_{i, \delta^n_{j - 1} \circ \beta} = f_{j, \delta_i^n \circ \beta}
+$$
+가 임의의 $0 \leq i < j \leq n + 1$과
+$\beta : [k] \to [n - 1]$에 대해 성립한다는 조건으로 바뀐다. 따라서
+$$
+S' = \{0, \ldots, n + 1\} \times \text{Map}([k], [n]) / \sim
+$$
+이며, 여기서 동치 관계는 다음 동치들로 생성된다.
+$$
+(i, \delta^n_{j - 1} \circ \beta) \sim (j, \delta_i^n \circ \beta)
+$$
+여기서 $0 \leq i < j \leq n + 1$이고 $\beta : [k] \to [n - 1]$이다.
+계산(생략됨)에 의하면 사상 (\ref{hypercovering-equation-map})은 $(i, \alpha)$를
+$\delta^{n + 1}_i \circ \alpha \in S$로 보내는 사상 $S' \to S$에
+대응한다. (Simplicial, 보조정리
+\ref{simplicial-lemma-relations-face-degeneracy}의 (1)에 의해 이 사상이
+잘 정의됨을 확인할 수 있으므로 독자는 안심할 수 있을 것이다.)
+증명을 끝내기 위해서는
+$\alpha, \alpha' : [k] \to [n]$와 $0 \leq i < j \leq n + 1$
+가
+$$
+\delta^{n + 1}_i \circ \alpha = \delta^{n + 1}_j \circ \alpha'
+$$
+을 만족하면 어떤 $\beta : [k] \to [n - 1]$에 대해
+$\alpha = \delta^n_{j - 1} \circ \beta$이고
+$\alpha' = \delta_i^n \circ \beta$임을 보이면 충분하다.
+이는 쉽게 확인할 수 있으므로 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-covering-sheaf}
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$X$를 $\mathcal{C}$의 대상이라 하자. $K$를 $X$의 초덮개라 하고,
+$n \geq 0$을 정수라 하자. $u : \mathcal{F} \to F(K_n)$를
+층화하면 전사가 되는 준층들의 사상이라 하자. 그러면
+$F(f_n) : F(L_n) \to F(K_n)$이 $u$를 거쳐 인수분해되는
+초덮개들의 사상 $f: L \to K$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$K_n = \{U_i \to X\}_{i \in I}$로 쓰자. 그러면 사상 $u$는
+집합의 준층들의 사상 $u : \mathcal{F} \to \amalg h_{u_i}$이다.
+$u$에 관한 가정은 모든 $i \in I$에 대해 사이트 $\mathcal{C}$의 덮개
+$\{U_{ij} \to U_i\}_{j \in I_i}$와 준층들의 사상
+$t_{ij} : h_{U_{ij}} \to \mathcal{F}$가 존재하여,
+$u \circ t_{ij}$가 사상 $U_{ij} \to U_i$에서 오는 사상
+$h_{U_{ij}} \to h_{U_i}$가 된다는 뜻이다.
+$J = \amalg_{i \in I} I_i$로 두고, $\alpha : J \to I$를 자명한
+사상이라 하자. $j \in J$에 대해 $V_j = U_{\alpha(j)j}$로 나타내고,
+$Z = \{V_j \to X\}_{j \in J}$로 두자. 마지막으로
+$\alpha : J \to I$와 위의 사상들
+$V_j = U_{\alpha(j)j} \to U_{\alpha(j)}$로 주어지는 사상
+$u' : Z \to K_n$을 생각하자. 이것은 분명 범주
+$\text{SR}(\mathcal{C}, X)$의 덮개이고, 구성에 의해
+$F(u') : F(Z) \to F(K_n)$은 $u$를 거쳐 인수분해된다.
+따라서 결과는 위의 보조정리 \ref{hypercovering-lemma-covering}에서 따른다.
+\end{proof}
+
+
+\section{단체의 첨가}
+\label{hypercovering-section-adding-simplices}
+
+\noindent
+이 절에서는 뒤에 필요할 몇 가지 기술적인 보조정리를 증명한다.
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$X$를 $\mathcal{C}$의 대상이라 하자. 위의 절
+\ref{hypercovering-section-covering}에서 지적했듯이, 어떤 단체 집합 $U$와
+$\text{SR}(\mathcal{C}, X)$의 임의의 단체적 대상 $K$에 대해 대상
+$U \times K$와 $\Hom(U, K)$가 정의된다. Simplicial, 절
+\ref{simplicial-section-product-with-simplicial-sets}와
+\ref{simplicial-section-hom-from-simplicial-sets}을 보라.
+
+\begin{lemma}
+\label{hypercovering-lemma-one-more-simplex}
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$X$를 $\mathcal{C}$의 대상이라 하자. $K$를 $X$의 초덮개라 하자.
+$U \subset V$를 단체 집합들이라 하고, 모든 $n$에 대해
+$U_n, V_n$이 유한하고 공집합이 아니라고 하자.
+$U$가 비퇴화 단체를 유한 개만 가진다고 가정하자.
+$n \geq 0$, $x \in V_n$, $x \not \in U_n$이 다음을 만족한다고 하자.
+\begin{enumerate}
+\item $i < n$에 대해 $V_i = U_i$이다.
+\item $V_n = U_n \cup \{x\}$이다.
+\item $j > n$이고 $z \in V_j$, $z \not \in U_j$이면 그 원소는 퇴화되어 있다.
+\end{enumerate}
+그러면 $\text{SR}(\mathcal{C}, X)$의 사상
+$$
+\Hom(V, K)_0
+\longrightarrow
+\Hom(U, K)_0
+$$
+은 덮개이다.
+\end{lemma}
+
+\begin{proof}
+$n = 0$이면 $V = U \amalg \Delta[0]$임이 쉽게 따른다(아래를 보라).
+이 경우 $\Hom(V, K)_0 =
+\Hom(U, K)_0 \times K_0$이다. 따라서 이 경우의 결과는 보조정리
+\ref{hypercovering-lemma-covering-permanence}에서 따른다.
+
+\medskip\noindent
+$a : \Delta[n] \to V$를 Simplicial, 보조정리
+\ref{simplicial-lemma-simplex-map}에서와 같이 $x$에 결부된 사상이라 하자.
+$\partial \Delta[n] = i_{(n-1)!} \text{sk}_{n - 1} \Delta[n]$로 쓰고,
+이를 $\Delta[n]$의 $(n - 1)$-골격이라 하자.
+$b : \partial \Delta[n] \to U$를 $a$의 $\Delta[n]$의
+$(n - 1)$-골격으로의 제한이라 하자. Simplicial, 보조정리
+\ref{simplicial-lemma-glue-simplex}에 의해
+$V = U \amalg_{\partial \Delta[n]} \Delta[n]$이다. Simplicial,
+보조정리 \ref{simplicial-lemma-hom-from-coprod}에 의해
+$$
+\xymatrix{
+\Hom(V, K)_0 \ar[r] \ar[d] &
+\Hom(U, K)_0 \ar[d] \\
+\Hom(\Delta[n], K)_0 \ar[r] &
+\Hom(\partial \Delta[n], K)_0
+}
+$$
+은 섬유곱 정사각형이다. 따라서 아래쪽 가로 화살표가 덮개임을
+보이면 충분하다. Simplicial, 보조정리
+\ref{simplicial-lemma-cosk-shriek}에 의해 이 화살표는
+$$
+K_n \to (\text{cosk}_{n - 1} \text{sk}_{n - 1} K)_n
+$$
+와 동일시되므로, 초덮개의 정의에 의해 덮개이다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-add-simplices}
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$X$를 $\mathcal{C}$의 대상이라 하자. $K$를 $X$의 초덮개라 하자.
+$U \subset V$를 단체 집합들이라 하고, 모든 $n$에 대해
+$U_n, V_n$이 유한하고 공집합이 아니라고 하자.
+$U$와 $V$가 비퇴화 단체를 유한 개만 가진다고 가정하자.
+그러면 $\text{SR}(\mathcal{C}, X)$의 사상
+$$
+\Hom(V, K)_0
+\longrightarrow
+\Hom(U, K)_0
+$$
+은 덮개이다.
+\end{lemma}
+
+\begin{proof}
+위의 보조정리 \ref{hypercovering-lemma-one-more-simplex}에 의해, 이 보조정리에서와
+같은 단체 집합들의 포함 $U \subset V$에 관한 간단한 보조정리를
+증명하면 충분하다. 이것은 바로 Simplicial, 보조정리
+\ref{simplicial-lemma-add-simplices}의 결과이다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-degeneracy-maps-coverings}
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고, $X$를
+$\mathcal{C}$의 대상이라 하자. $K$를 $X$의 초덮개라 하자. 그러면
+\begin{enumerate}
+\item 각 $n \geq 0$에 대해 $K_n$은 $X$의 덮개이다.
+\item 모든 $n \geq 1$과 $0 \leq i \leq n$에 대해
+$d^n_i : K_n \to K_{n - 1}$은 덮개이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$K_0$은 정의 \ref{hypercovering-definition-hypercovering}에 의해 $X$의 덮개임을
+상기하자. 이는 $K_0 \to \{X \to X\}$가 정의
+\ref{hypercovering-definition-covering-SR}의 의미에서 덮개라는 것과 동치이다.
+따라서 (1)은 (2)에서 따른다. 실제로 (2)는 합성
+$K_n \to K_{n - 1} \to \ldots \to K_0 \to \{X \to X\}$
+이 보조정리 \ref{hypercovering-lemma-covering-permanence}에 의해 덮개임을 보인다.
+
+\medskip\noindent
+(2)의 증명. Simplicial, 보조정리
+\ref{simplicial-lemma-exists-hom-from-simplicial-set-finite}에 의해
+$\Mor(\Delta[n], K)_0 = K_n$임에 유의하자. 따라서 보조정리
+\ref{hypercovering-lemma-add-simplices}를 $n + 1$개의 서로 다른 포함
+$\Delta[n - 1] \to \Delta[n]$에 적용하면 (2)가 따른다.
+\end{proof}
+
+\begin{remark}
+\label{hypercovering-remark-P-covering}
+보조정리 \ref{hypercovering-lemma-add-simplices}와
+\ref{hypercovering-lemma-degeneracy-maps-coverings}의 유용한 특수한 경우는 다음과 같다.
+$\mathcal{C}$를 섬유곱을 가지는 범주라 하자.
+$P \subset \text{Arrows}(\mathcal{C})$를 밑변환과 합성에 대해
+안정적이고 모든 동형사상을 포함하는 부분집합이라 하자. 이때
+{\it $P$-초덮개}란 $\mathcal{C}$의 단체적 대상에서 오는 증대
+$a : U \to X$로서 다음을 만족하는 것을 말한다.
+\begin{enumerate}
+\item $U_0 \to X$는 $P$에 속한다.
+\item $U_1 \to U_0 \times_X U_0$은 $P$에 속한다.
+\item $U_{n + 1} \to (\text{cosk}_n\text{sk}_n U)_{n + 1}$
+은 $n \geq 1$에 대해 $P$에 속한다.
+\end{enumerate}
+범주 $\mathcal{C}/X$는 모든 유한 극한을 가지므로 위의 정식화에서
+사용한 여골격들이 존재한다(Categories, 보조정리
+\ref{categories-lemma-finite-limits-exist}을 보라).
+이제 사상들 $U_n \to X$와 $d^n_i : U_n \to U_{n - 1}$이 $P$에
+속한다고 주장한다. $\mathcal{C}$를 $f \in P$인
+$\{f : V \to U\}$들을 덮개로 가지는 사이트로 만들고,
+$K_n = \{U_n \to X\}$로 주어지는 $K$를 취하면, 이 주장은 앞서 말한
+보조정리들에서 따른다.
+\end{remark}
+
+
+\section{호모토피}
+\label{hypercovering-section-homotopies}
+
+\noindent
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$X$를 $\mathcal{C}$의 대상이라 하자. $L$을
+$\text{SR}(\mathcal{C}, X)$의 단체적 대상이라 하자.
+Simplicial, 보조정리
+\ref{simplicial-lemma-exists-hom-from-simplicial-set-finite}에 의해 함자
+$$
+T
+\longmapsto
+\Mor_{\text{Simp}(\text{SR}(\mathcal{C}, X))}(\Delta[1] \times T, L)
+$$
+를 표현하는 대상 $\Hom(\Delta[1], L)$이 범주
+$\text{Simp}(\text{SR}(\mathcal{C}, X))$에 존재한다.
+$e_i : \Delta[0] \to \Delta[1]$와 동일시
+$\Hom(\Delta[0], L) = L$에서 오는 정준 사상
+$$
+\Hom(\Delta[1], L) \to L \times L
+$$
+이 있다.
+
+\begin{lemma}
+\label{hypercovering-lemma-hom-hypercovering}
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$X$를 $\mathcal{C}$의 대상이라 하자. $L$을
+$\text{SR}(\mathcal{C}, X)$의 단체적 대상이라 하고,
+$n \geq 0$이라 하자. 위에서 정의한 사상으로부터 오는 가환 도식
+\begin{equation}
+\label{hypercovering-equation-diagram}
+\xymatrix{
+\Hom(\Delta[1], L)_{n + 1} \ar[r] \ar[d] &
+(\text{cosk}_n \text{sk}_n \Hom(\Delta[1], L))_{n + 1} \ar[d] \\
+(L \times L)_{n + 1} \ar[r] &
+(\text{cosk}_n \text{sk}_n (L \times L))_{n + 1}
+}
+\end{equation}
+을 생각하자. 이 도식의 항들은 다음과 같이 동일시할 수 있다. 여기서
+$\partial \Delta[n + 1] = i_{n!}\text{sk}_n \Delta[n + 1]$
+은 $(n + 1)$-단체의 $n$-골격이다.
+\begin{eqnarray*}
+\Hom(\Delta[1], L)_{n + 1}
+& = &
+\Hom(\Delta[1] \times \Delta[n + 1], L)_0 \\
+(\text{cosk}_n \text{sk}_n \Hom(\Delta[1], L))_{n + 1}
+& = &
+\Hom(\Delta[1] \times \partial \Delta[n + 1], L)_0 \\
+(L \times L)_{n + 1}
+& = &
+\Hom(
+(\Delta[n + 1] \amalg \Delta[n + 1], L)_0 \\
+(\text{cosk}_n \text{sk}_n (L \times L))_{n + 1}
+& = &
+\Hom(
+\partial \Delta[n + 1]
+\amalg
+\partial \Delta[n + 1], L)_0
+\end{eqnarray*}
+또한 $\text{SR}(\mathcal{C}, X)$의 이 대상들 사이의 사상들은
+단체 집합들의 가환 도식
+\begin{equation}
+\label{hypercovering-equation-dual-diagram}
+\xymatrix{
+\Delta[1] \times \Delta[n + 1] &
+\Delta[1] \times \partial\Delta[n + 1] \ar[l] \\
+\Delta[n + 1] \amalg \Delta[n + 1] \ar[u] &
+\partial\Delta[n + 1] \amalg \partial\Delta[n + 1]
+\ar[l] \ar[u]
+}
+\end{equation}
+에서 온다. 더욱이 도식 (\ref{hypercovering-equation-diagram})의 아래쪽 화살표와
+오른쪽 화살표의 섬유곱은
+$$
+\Hom(U, L)_0
+$$
+와 같다. 여기서 $U \subset \Delta[1] \times \Delta[n + 1]$는
+$\Delta[n + 1] \amalg \Delta[n + 1]$와
+$\Delta[1] \times \partial\Delta[n + 1]$가 모두 그 안으로 사상되는
+가장 작은 단체적 부분집합이다.
+\end{lemma}
+
+\begin{proof}
+첫 번째와 세 번째 등식은 Simplicial, 보조정리
+\ref{simplicial-lemma-exists-hom-from-simplicial-set-finite}이다.
+두 번째와 네 번째 등식은 인용한 보조정리와 Simplicial, 보조정리
+\ref{simplicial-lemma-cosk-shriek}를 함께 적용하면 따른다.
+마지막 주장은 $U$가 도식 (\ref{hypercovering-equation-dual-diagram})의 아래쪽
+화살표와 오른쪽 화살표의 밀어내기라는 사실에서 Simplicial, 보조정리
+\ref{simplicial-lemma-hom-from-coprod}를 통해 따른다. $U$가 이
+밀어내기와 같음을 보이려면,
+$\Delta[n + 1] \amalg \Delta[n + 1]$와
+$\Delta[1] \times \partial\Delta[n + 1]$
+의 $\Delta[1] \times \Delta[n + 1]$ 안에서의 교집합이
+$\partial\Delta[n + 1] \amalg \partial\Delta[n + 1]$.
+와 같음을 보면 충분하다. 이는 독자에게 맡긴다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-homotopy}
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$X$를 $\mathcal{C}$의 대상이라 하자. $K, L$을 $X$의 초덮개들이라 하고,
+$a, b : K \to L$을 초덮개들의 사상들이라 하자. 그러면
+$a \circ c$가 $b \circ c$와 호모토픽이 되게 하는 초덮개들의 사상
+$c : K' \to K$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+다음 가환 도식을 생각하자.
+$$
+\xymatrix{
+K' \ar@{=}[r]^-{def} \ar[rd]_c &
+K \times_{(L \times L)} \Hom(\Delta[1], L)
+\ar[r] \ar[d] & \Hom(\Delta[1], L) \ar[d] \\
+& K \ar[r]^{(a, b)} & L \times L
+}
+$$
+$\Hom(\Delta[1], L)$의 함자성에 의해 가로 사상들의 합성은 사상
+$K' \times \Delta[1] \to L$에 대응하며, 이 사상은
+$c \circ a$와 $c \circ b$ 사이의 호모토피를 정의한다. 따라서
+$K'$이 $X$의 초덮개임을 보이면 보조정리를 얻는다.
+이를 위해 보조정리 \ref{hypercovering-lemma-funny-gamma}를 사상들의 쌍
+$K \to L \times L$와 $\Hom(\Delta[1], L) \to L \times L$에 적용하겠다.
+보조정리 \ref{hypercovering-lemma-funny-gamma}의 조건 (1)은 만족된다.
+보조정리 \ref{hypercovering-lemma-funny-gamma}의 조건 (2)도 참이다. 실제로
+$\Hom(\Delta[1], L)_0 = L_1$이고, $L$이
+초덮개라는 가정에 의해 사상
+$(d^1_0, d^1_1) : L_1 \to L_0 \times L_0$
+은 $\text{SR}(\mathcal{C}, X)$의 덮개이기 때문이다.
+보조정리 \ref{hypercovering-lemma-funny-gamma}의 조건 (3)을 증명하기 위해 위의
+보조정리 \ref{hypercovering-lemma-hom-hypercovering}을 사용한다. 이 보조정리에 따르면,
+보조정리 \ref{hypercovering-lemma-funny-gamma}의 조건 (3)에 나오는 사상 $\gamma$는
+$$
+\Hom(\Delta[1] \times \Delta[n + 1], L)_0
+\longrightarrow
+\Hom(U, L)_0
+$$
+이다. 여기서 $U \subset \Delta[1] \times \Delta[n + 1]$이다.
+보조정리 \ref{hypercovering-lemma-add-simplices}에 의해 이는 덮개이므로 주장이
+증명되었다.
+\end{proof}
+
+\begin{remark}
+\label{hypercovering-remark-contractible-category}
+증명의 핵심은 보조정리 \ref{hypercovering-lemma-add-simplices}를 사용하는 데
+있음에 유의하자. 이 보조정리는 완전히 일반적이며, 단체 집합들이
+비퇴화 단체를 유한 개만 가지는 한 그 정확한 모양과 무관하다.
+따라서 다음과 같은 결과를 기대하는 것은 매우 합리적이다.
+$K$와 $L$이 초덮개일 때 임의의 사상
+$a : K \times \partial \Delta[k] \to L$이 주어졌다고 하자.
+그러면 초덮개들의 사상 $c : K' \to K$와 사상
+$g : K' \times \Delta[k] \to L$가 존재하고, 다음 등식이 성립한다.
+$g|_{K' \times \partial \Delta[k]} =
+a \circ (c \times \text{id}_{\partial \Delta[k]})$.
+다시 말해 초덮개들의 범주는 적절한 의미에서 축약 가능하다.
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{코호몰로지와 초덮개}
+\label{hypercovering-section-cohomology}
+
+\noindent
+$\mathcal{C}$를 섬유곱을 갖는 사이트라 하자.
+$X$를 $\mathcal{C}$의 대상이라 하고,
+$\mathcal{F}$를 $\mathcal{C}$ 위의 아벨 군의 층이라 하자.
+$K, L$을 $X$의 초덮개라 하자.
+$a, b : K \to L$이 호모토픽 사상이면,
+$\mathcal{F}(a), \mathcal{F}(b) : \mathcal{F}(K) \to \mathcal{F}(L)$도
+호모토픽 사상이다. Simplicial, Lemma
+\ref{simplicial-lemma-functorial-homotopy}를 보라.
+따라서 결부된 코체인 복합체들의 코호몰로지 군에 같은 작용을 한다.
+Simplicial, Lemma \ref{simplicial-lemma-homotopy-s-Q}를 보라.
+이를 사용하여 모든 초덮개에 걸친 여극한을 정의할 것이다.
+
+\medskip\noindent
+$X$의 초덮개들을 대상으로 하고, $X$의 초덮개 사이의 사상들을
+호모토피로 나눈 것을 사상으로 하는 범주를 잠시
+$\text{HC}(\mathcal{C}, X)$라 쓰자. 이것이 범주이며 ``큰'' 범주가
+아님을 이미 보았다. Lemma \ref{hypercovering-lemma-hypercoverings-set}를 보라.
+$\text{HC}(\mathcal{C}, X)$의 반대 범주를 다음 도식의 첨자 범주로
+사용한다. 용어에 대해서는 Categories, Section
+\ref{categories-section-limits}를 보라. 도식
+$$
+\check{H}^i(-, \mathcal{F}) :
+\text{HC}(\mathcal{C}, X)^{opp}
+\longrightarrow
+\textit{Ab}.
+$$
+을 생각하자. Lemmas \ref{hypercovering-lemma-product-hypercoverings}와
+\ref{hypercovering-lemma-homotopy}, 그리고 위의 호모토피에 관한 설명에 의해
+이 도식은 유향이다. Categories, Definition
+\ref{categories-definition-directed}를 보라. 따라서 여극한
+$$
+\check{H}^i_{\text{HC}}(X, \mathcal{F}) =
+\colim_{K \in \text{HC}(\mathcal{C}, X)} \check{H}^i(K, \mathcal{F})
+$$
+은 특히 간단히 기술된다(인용된 곳을 보라).
+
+\begin{theorem}
+\label{hypercovering-theorem-cohomology-hypercoverings}
+$\mathcal{C}$를 섬유곱을 갖는 사이트라 하자.
+$X$를 $\mathcal{C}$의 대상이라 하고 $i \geq 0$이라 하자. 함자들
+\begin{eqnarray*}
+\textit{Ab}(\mathcal{C}) & \longrightarrow & \textit{Ab} \\
+\mathcal{F} & \longmapsto & H^i(X, \mathcal{F}) \\
+\mathcal{F} & \longmapsto & \check{H}^i_{\text{HC}}(X, \mathcal{F})
+\end{eqnarray*}
+은 표준 동형이다.
+\end{theorem}
+
+\begin{proof}[스펙트럼 열을 사용하는 증명]
+어떤 $p \geq 0$에 대해 $\xi \in H^p(X, \mathcal{F})$라 하자.
+$X$의 어떤 초덮개 $K$에 대해 $\xi$가 Lemma
+\ref{hypercovering-lemma-cech-spectral-sequence}의 사상
+$\check{H}^p(X, \mathcal{F}) \to H^p(X, \mathcal{F})$의 상에
+속함을 보이자.
+
+\medskip\noindent
+$p = 0$이면 Lemma \ref{hypercovering-lemma-h0-cech}에 의해 성립한다.
+$p = 1$이면 $\xi|_{U_i} = 0$을 만족하는 사이트 $\mathcal{C}$의 덮개
+$K_0 = \{U_i \to X\}$에서 시작하여 Example \ref{hypercovering-example-cech}에서와
+같은 $X$의 {\v C}ech 초덮개 $K$를 택한다. Cohomology on Sites,
+Lemma \ref{sites-cohomology-lemma-kill-cohomology-class-on-covering}를 보라.
+이 경우 Lemma \ref{hypercovering-lemma-cech-spectral-sequence}의 스펙트럼 열에서
+$\xi$가 $\check{H}^1(K, \mathcal{F})$의 한 원소에서 온다는 것이 곧바로
+따른다. 일반적으로는 $\xi$가
+$\underline{H}^p(\mathcal{F})(K_0)$에서 0으로 가도록 하는 $X$의
+임의의 초덮개 $K$를 택한다(여기서도 Example \ref{hypercovering-example-cech}와
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-kill-cohomology-class-on-covering}를 사용한다).
+Lemma \ref{hypercovering-lemma-cech-spectral-sequence}의 스펙트럼 열에 따르면,
+$\xi$가 $\check{H}^p(K, \mathcal{F})$의 한 원소에서 오는 데 대한
+장애물은 다음을 만족하는 원소들의 열
+$\xi_1, \ldots, \xi_{p - 1}$이다.
+$\xi_q \in \check{H}^{p - q}(K, \underline{H}^q(\mathcal{F}))$
+(더 정확히는 이 군들의 어떤 부분몫에서 $\xi_q$의 상들이다.)
+
+\medskip\noindent
+초덮개 $K$를 세분들로 귀납적으로 바꾸어 장애물
+$\xi_1, \ldots, \xi_{p - 1}$의 제한이 0이 되게 할 수 있다
+(부분몫에서의 상들만 0이 되는 것이 아니므로 여기에는 미묘한 점이 없다).
+실제로 이미 $\xi_{q + 1}, \ldots, \xi_{p - 1}$이 0인 상황에
+도달했다고 하자. $\xi_q \in
+\check{H}^{p - q}(K, \underline{H}^q(\mathcal{F}))$는 어떤 원소
+$$
+\tilde \xi_q \in
+\underline{H}^q(\mathcal{F})(K_{p - q}) =
+\prod H^q(U_i, \mathcal{F})
+$$
+의 류임에 유의하자. 여기서
+$K_{p - q} = \{U_i \to X\}_{i \in I}$이다. $\xi_{q, i}$를
+$\tilde \xi_q$의 $H^q(U_i, \mathcal{F})$에서의 성분이라 하자.
+$q \geq 1$이므로 다시 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-kill-cohomology-class-on-covering}를 사용하여,
+각 제한 $\xi_{q, i}|_{U_{i, j}} = 0$이 되도록 하는 사이트의 덮개들
+$\{U_{i, j} \to U_i\}$를 택할 수 있다. 범주
+$\text{SR}(\mathcal{C}, X)$의 대상 $Z = \{U_{i, j} \to X\}$와 그 명백한 사상
+$u : Z \to K_{p - q}$를 생각하자. Definition
+\ref{hypercovering-definition-covering-SR}에 의해 $u$는 분명히 덮개이다. Lemma
+\ref{hypercovering-lemma-covering}에 의해 $L_{p - q} \to K_{p - q}$가 $u$를 거쳐
+인수분해되는 $X$의 초덮개 사상 $L \to K$가 존재한다. 그러면
+$\xi_q$의 $\underline{H}^q(\mathcal{F})(L_{p - q})$에서의 상은
+분명히 0이다. Lemma \ref{hypercovering-lemma-cech-spectral-sequence}의 스펙트럼 열은
+함자적이므로, $K$를 $L$로 바꾼 뒤에는
+$\xi_q, \ldots, \xi_{p - 1}$이 모두 0인 상황에 도달한다.
+이 과정을 계속하면 마침내 이들이 모두 0인 초덮개를 얻고, 따라서
+$\xi$는 사상 $\check{H}^p(X, \mathcal{F}) \to H^p(X, \mathcal{F})$의
+상에 속한다.
+
+\medskip\noindent
+$K$가 $X$의 초덮개이고 $\xi \in \check{H}^p(K, \mathcal{F})$이며,
+Lemma \ref{hypercovering-lemma-cech-spectral-sequence}의 사상
+$\check{H}^p(X, \mathcal{F}) \to H^p(X, \mathcal{F})$ 아래에서
+$\xi$의 상이 0이라고 하자. 정리의 증명을 마치려면
+$\xi$의 $\check{H}^p(L, \mathcal{F})$로의 제한이 0이 되게 하는
+초덮개의 사상 $L \to K$가 존재함을 보여야 한다. Lemma
+\ref{hypercovering-lemma-cech-spectral-sequence}의 스펙트럼 열에 따르면,
+$\xi$의 $H^p(X, \mathcal{F})$에서의 상이 소멸한다는 것은 다음을
+만족하는 원소들 $\xi_1, \ldots, \xi_{p - 2}$가 존재한다는 뜻이다.
+$\xi_q \in \check{H}^{p - 1 - q}(K, \underline{H}^q(\mathcal{F}))$
+(더 정확히는 이들의 어떤 부분몫에서의 상들)이고, 스펙트럼 열에서
+상들 $d_{q + 1}^{p - 1 - q, q}\xi_q$의 합이 $\xi$이다. 따라서 위와
+완전히 같은 방법으로, 원소들 $\xi_q$, $q = 1, \ldots, p - 2$의
+$\check{H}^{p - 1 - q}(L, \underline{H}^q(\mathcal{F}))$에서의 제한이
+0이 되게 하는 초덮개의 사상 $L \to K$를 찾을 수 있다. Lemma
+\ref{hypercovering-lemma-cech-spectral-sequence}에 따라 사상 $L \to K$가
+스펙트럼 열의 사상을 유도하므로, 이제 $\xi$는 0이다.
+\end{proof}
+
+\begin{proof}[스펙트럼 열을 사용하지 않는 증명]
+$i = 0$인 경우의 결과는 이미 보았다. Lemma \ref{hypercovering-lemma-h0-cech}를 보라.
+함자들 $H^i(X, -)$가 보편 $\delta$-함자를 이룬다는 것을 알고 있다.
+Derived Categories, Lemma \ref{derived-lemma-higher-derived-functors}를 보라.
+정리를 증명하려면 함자들의 열 $\check{H}^i_{HC}(X, -)$가
+$\delta$-함자를 이룬다는 것을 보이면 충분하다. 실제로 {\v C}ech
+코호몰로지가 단사층에서 0임을 알고 있으므로(Lemma
+\ref{hypercovering-lemma-injective-trivial-cech}), Homology, Lemma
+\ref{homology-lemma-efface-implies-universal}를 적용할 수 있다.
+
+\medskip\noindent
+다음을 $\mathcal{C}$ 위의 아벨 층들의 짧은 완전열이라 하자.
+$$
+0 \to \mathcal{F} \to \mathcal{G} \to \mathcal{H} \to 0
+$$
+$\xi \in \check{H}^p_{HC}(X, \mathcal{H})$라 하자. $X$의 초덮개
+$K$와 코호몰로지에서 $\xi$를 나타내는 원소
+$\sigma \in \mathcal{H}(K_p)$를 택하자. 이에 대응하는 복합체의 완전열
+$$
+0 \to s(\mathcal{F}(K)) \to s(\mathcal{G}(K)) \to s(\mathcal{H}(K))
+$$
+이 있지만, 오른쪽에도 0이 있다고 보장되지는 않는다. 이것만이 뱀
+보조정리를 단순히 적용하여 $\delta(\xi)$를 정의하는 일을 막는다.
+$K_p = \{U_i \to X\}$이면
+$$
+\mathcal{H}(K_p) = \prod \mathcal{H}(U_i)
+$$
+임을 상기하자. $\sigma =\prod \sigma_i$라 쓰자. 여기서
+$\sigma_i \in \mathcal{H}(U_i)$이다. $\mathcal{G} \to \mathcal{H}$가
+층의 전사이므로, $\sigma_i|_{U_{i, j}}$가 어떤 원소
+$\tau_{i, j} \in \mathcal{G}(U_{i, j})$의 상이 되게 하는 덮개들
+$\{U_{i, j} \to U_i\}$가 존재한다. 범주
+$\text{SR}(\mathcal{C}, X)$의 대상 $Z = \{U_{i, j} \to X\}$와 그 명백한 사상
+$u : Z \to K_p$를 생각하자. Definition
+\ref{hypercovering-definition-covering-SR}에 의해 $u$는 분명히 덮개이다. Lemma
+\ref{hypercovering-lemma-covering}에 의해 $L_p \to K_p$가 $u$를 거쳐 인수분해되는
+$X$의 초덮개 사상 $L \to K$가 존재한다. 따라서 $K$를 $L$로 바꾼 뒤에는
+$\sigma$가 어떤 원소 $\tau \in \mathcal{G}(K_p)$의 상이라고 가정해도 된다.
+$d(\sigma) = 0$이지만 반드시 $d(\tau) = 0$인 것은 아님에 유의하자.
+따라서 $d(\tau) \in \mathcal{F}(K_{p + 1})$는 코사이클이다.
+이 상황에서 $\delta(\xi)$를 코사이클 $d(\tau)$의
+$\check{H}^{p + 1}_{HC}(X, \mathcal{F})$에서의 류로 정의한다.
+
+\medskip\noindent
+이제 몇 가지를 확인해야 한다. (a) $\delta(\xi)$가 $\tau$의 선택에
+의존하지 않는다는 것, (b) $\delta(\xi)$가 $\sigma$를 들어 올릴 수 있게 하는
+초덮개 사상 $L \to K$의 선택에 의존하지 않는다는 것, 그리고
+(c) $\delta(\xi)$가 $\xi$를 나타내기 위해 처음 택한 초덮개와
+$\sigma$에 의존하지 않는다는 것이다. (a), (b), (c)의 확인은 생략한다.
+초덮개의 선택과 무관하다는 것은 실제로 Lemmas
+\ref{hypercovering-lemma-product-hypercoverings}와 \ref{hypercovering-lemma-homotopy}로 귀착된다.
+또한 $\mathcal{C}$ 위의 아벨 층들의 짧은 완전열 사이의 사상에 관해
+$\delta$가 함자적이라는 확인도 생략한다.
+
+\medskip\noindent
+끝으로 이 $\delta$의 정의를 사용하면 위의 아벨 층들의 짧은 완전열이
+{\v C}ech 코호몰로지 군들의 긴 완전열을 낳는다는 것을 확인해야 한다.
+먼저 $\delta(\xi) = 0$이면(여기서 $\xi$는 위와 같다) $\xi$가 어떤 원소
+$\xi' \in \check{H}^p_{HC}(X, \mathcal{G})$의 상임을 보이자.
+실제로 $\delta(\xi) = 0$이면, 위의 표기 아래 $d(\tau)$의 류는
+$\check{H}^{p + 1}_{HC}(X, \mathcal{F})$에서 0이다. 따라서
+$d(\tau)$를 $\mathcal{F}(L_{p + 1})$의 원소로 제한한 것이 어떤
+$\upsilon \in \mathcal{F}(L_p)$에 대한 $d(\upsilon)$과 같아지게 하는
+초덮개의 사상 $L \to K$가 존재한다. 이는
+$\tau|_{L_p} + \upsilon$이 코사이클을 이루고, 원하는 대로 $\xi$로 가는
+류 $\xi' \in \check{H}^p(L, \mathcal{G})$를 정한다는 뜻이다.
+
+\medskip\noindent
+$\xi' \in \check{H}^{p + 1}_{HC}(X, \mathcal{F})$가
+$\check{H}^{p + 1}_{HC}(X, \mathcal{G})$에서 0으로 가면, 어떤
+$\xi \in \check{H}^p_{HC}(X, \mathcal{H})$에 대해
+그 원소가 $\delta(\xi)$와 같다는 것의 증명은 생략한다.
+\end{proof}
+
+\noindent
+다음으로 약간의 기교를 써서 Theorem
+\ref{hypercovering-theorem-cohomology-hypercoverings}의 Verdier 경우를 도출한다.
+
+\begin{proposition}
+\label{hypercovering-proposition-cohomology-hypercoverings}
+$\mathcal{C}$를 섬유곱과 두 대상의 곱을 갖는 사이트라 하자.
+$\mathcal{F}$를 $\mathcal{C}$ 위의 아벨 층이라 하고
+$i \geq 0$이라 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item 모든 $\xi \in H^i(\mathcal{F})$에 대해, $\xi$가 표준 사상
+$\check{H}^i(K, \mathcal{F}) \to H^i(\mathcal{F})$의 상에 속하게 하는
+초덮개 $K$가 존재한다.
+\item $K, L$이 초덮개이고 $\xi_K \in \check{H}^i(K, \mathcal{F})$,
+$\xi_L \in \check{H}^i(L, \mathcal{F})$가 $H^i(\mathcal{F})$의 같은
+원소로 가면, 초덮개 $M$과 사상들 $M \to K$, $M \to L$이 존재하여
+$\xi_K$와 $\xi_L$이 $\check{H}^i(M, \mathcal{F})$의 같은 원소로 간다.
+\end{enumerate}
+다시 말해 집합론적 문제를 제외하면, $\mathcal{C}$ 위에서
+$\mathcal{F}$의 코호몰로지 군들은 모든 초덮개에 걸친
+$\mathcal{F}$의 {\v C}ech 코호몰로지 군들의 여극한이다.
+\end{proposition}
+
+\begin{proof}
+이 결과는 Theorem \ref{hypercovering-theorem-cohomology-hypercoverings}의 자명한
+귀결이다. 실제로 $\mathcal{C}$를 인위적으로 조금 더 큰 사이트
+$\mathcal{C}'$로 바꿀 수 있는데, 이때 (I) $\mathcal{C}'$는 끝 대상
+$X$를 갖고, (II) $\mathcal{C}$의 초덮개는 대체로
+$\mathcal{C}'$에서 $X$의 초덮개와 같은 것이다. 그러나 사정의 성질상
+상당한 정리 작업이 필요하다.
+
+\medskip\noindent
+$\mathcal{C}$에서 공통 끝점을 갖는 사상족 $\{U_i \to U\}$를, 사상
+$\coprod_{i \in I} h_{U_i} \to h_U$가 층화 뒤 전사가 될 때
+{\it 약한 덮개}라 하자. 새 사이트 $\mathcal{C}'$를 다음과 같이 구성한다.
+\begin{enumerate}
+\item 범주로서 $\Ob(\mathcal{C}') = \Ob(\mathcal{C}) \amalg \{X\}$로
+두고, $\mathcal{C}'$의 각 대상에서 $X$로 가는 유일한 사상을 덧붙인다.
+\item $\mathcal{C}$에 섬유곱과 두 대상의 곱이 존재하므로
+$\mathcal{C}'$는 섬유곱을 갖는다.
+\item $\mathcal{C}'$의 덮개는 $\mathcal{C}$의 약한 덮개들과 다음 조건을
+만족하는 $\{U_i \to X\}_{i \in I}$들이다. 어떤 $i$에 대해
+$U_i = X$이거나, 모든 $i$에 대해 $U_i \not = X$이고 $\mathcal{C}$ 위의
+전층 사상 $\coprod h_{U_i} \to *$가 $\mathcal{C}$ 위에서 층화한 뒤
+전사가 된다.
+\item Sets, Lemma \ref{sets-lemma-coverings-site}를 적용하여 덮개들을
+제한하고 사이트 $\mathcal{C}'$를 얻는다.
+\end{enumerate}
+포함 함자 $\mathcal{C} \to \mathcal{C}'$는 특수 쌍대연속 함자이므로
+$\Sh(\mathcal{C}') = \Sh(\mathcal{C})$이다(Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor}를 보라).
+직접적인 확인은 생략한다.
+
+\medskip\noindent
+모든 $i$에 대해 $U_i$가 $\mathcal{C}$의 대상이 되는
+$\mathcal{C}'$의 덮개 $\{U_i \to X\}$를 택하자
+($\mathcal{C} \to \mathcal{C}'$가 특수 쌍대연속이므로 가능하다).
+그러면 $K_0 = \{U_i \to X\}$는 위에서 구성한 사이트
+$\mathcal{C}'$의 덮개이다. $K_0$를 $\text{SR}(\mathcal{C}', X)$의
+대상으로 보고 $K_{init} = \text{cosk}_0(K_0)$로 둔다. Example
+\ref{hypercovering-example-cech}에 의해 $K_{init}$는 $X$의 초덮개이다. 모든
+$K_{init, n}$은 $W_j \in \Ob(\mathcal{C})$인
+$\{W_j \to X\}$ 꼴임에 유의하자.
+
+\medskip\noindent
+(1)의 증명. $\xi \in H^i(\mathcal{F}) = H^i(X, \mathcal{F}')$를 택하자.
+여기서 $\mathcal{F}'$는 $\mathcal{C}$ 위의 $\mathcal{F}$에 대응하는
+$\mathcal{C}'$ 위의 아벨 층이다. Theorem
+\ref{hypercovering-theorem-cohomology-hypercoverings}에 의해, $\xi$가
+$\check{H}^i(K', \mathcal{F})$의 한 원소에서 오게 하는
+$\mathcal{C}'$에서 $X$의 초덮개 사상 $K' \to K_{init}$가 존재한다.
+$K'_n = \{U_{n, j} \to X\}$라 쓰자. 이제 $K'_n$이 $K_{init, n}$으로
+가므로 $U_{n, j}$는 $\mathcal{C}$의 대상이다. 따라서
+$K_n = \{U_{n, j}\}$로 두어 $\text{SR}(\mathcal{C})$의 단체적 대상
+$K$를 정의할 수 있다. $\mathcal{C}$의 사상족들로 이루어진
+$\mathcal{C}'$의 덮개는 약한 덮개이므로, $K$는 Definition
+\ref{hypercovering-definition-hypercovering-variant}의 의미에서 초덮개이다.
+끝으로 $\mathcal{F}'$는 $\mathcal{C}'$ 위에서 그 $\mathcal{C}$로의
+제한이 $\mathcal{F}$와 같은 유일한 층이므로, {\v C}ech 복합체들
+$s(\mathcal{F}(K))$와 $s(\mathcal{F}'(K'))$는 동일하다. 따라서 (1)이
+따른다. (코호몰로지 군으로 가는 사상과의 양립성은 생략한다.)
+
+\medskip\noindent
+(2)의 증명. $K$와 $L$을 $\mathcal{C}$의 초덮개라 하자.
+$K'$와 $L'$을 함자
+$\text{SR}(\mathcal{C}) \to \text{SR}(\mathcal{C}', X)$,
+$\{U_i\} \mapsto \{U_i \to X\}$로 $K$와 $L$에서 얻는
+$\text{SR}(\mathcal{C}', X)$의 단체적 대상들이라 하자. 위와 같이
+{\v C}ech 복합체들이 같으므로, $\mathcal{C}'$ 위에서
+$\mathcal{F}'$의 같은 코호몰로지 류로 가는 $\xi_{K'}$와
+$\xi_{L'}$를 얻는다. 집합론적 문제 때문에 필요하다면
+$\mathcal{C}'$에서 선택한 덮개들을 늘린 뒤, $K'$와 $L'$이
+$\mathcal{C}'$에서 $X$의 초덮개라고 가정해도 된다. 이는 Definition
+\ref{hypercovering-definition-hypercovering-variant}의 초덮개 정의와
+$\mathcal{C}$의 약한 덮개가 $\mathcal{C}'$의 덮개를 준다는 사실에
+의해 성립한다. Theorem \ref{hypercovering-theorem-cohomology-hypercoverings}에 의해
+$\mathcal{C}'$에서 $X$의 초덮개 $M'$과 사상들
+$M' \to K'$, $M' \to L'$, $M' \to K_{init}$가 존재하여,
+$\xi_{K'}$와 $\xi_{L'}$가 $\check{H}^i(M', \mathcal{F})$의 같은
+원소로 제한된다. 이 명제를 위와 같이 풀어 쓰면 (2)가 성립함을 얻는다.
+\end{proof}
+
+
+
+
+
+\section{공간의 초덮개}
+\label{hypercovering-section-hypercoverings-spaces}
+
+\noindent
+위의 이론은 위상공간의 경우에도 어느 정도 흥미롭다. 이 경우에는
+초덮개가 무엇인지 구체적으로 풀어 쓰고 그 결과가 실제로 무엇을
+말하는지 볼 수 있다.
+
+\medskip\noindent
+$X$를 위상공간이라 하자. Sites, Example
+\ref{sites-example-site-topological}의 사이트 $X_{Zar}$를 생각하자.
+$X_{Zar}$의 대상은 단순히 $X$의 열린집합이고, $X_{Zar}$의 사상은
+단순히 포함에 대응함을 상기하자. 그렇다면 사이트 $X_{Zar}$에서
+$X$의 초덮개란 무엇인가?
+
+\medskip\noindent
+먼저 Definition \ref{hypercovering-definition-SR}을 풀어 쓰자.
+$\text{SR}(X_{Zar}, X)$의 대상은 단순히 집합 $I$와 각
+$i \in I$에 대한 열린집합 $U_i \subset X$로 주어진다.
+사상 $U_i \to X$에 혼동의 여지가 없으므로 이를
+$\{U_i\}_{i \in I}$로 쓰자. 이러한 두 대상 사이의 사상
+$\{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$는 모든 $i \in I$에 대해
+$U_i \subset V_{\alpha(i)}$를 만족하는 집합의 사상
+$\alpha : I \to J$로 주어진다. 이러한 사상이 덮개인 것은 언제인가?
+모든 $j \in J$에 대해
+$V_j = \bigcup_{i\in I, \ \alpha(i) = j} U_i$일 때 그리고 그때에만
+그러하다(또한 이는 사이트 $X_{Zar}$의 덮개이다).
+
+\medskip\noindent
+위의 내용을 사용하면 사이트 $X_{Zar}$의 초덮개를 다음과 같이
+기술할 수 있다. $X_{Zar}$에서 $X$의 초덮개는 다음 자료로 주어진다.
+\begin{enumerate}
+\item 단체 집합 $I$(Simplicial, Section
+\ref{simplicial-section-simplicial-set}를 보라),
+\item 각 $n \geq 0$과 모든 $i \in I_n$에 대한 열린집합 $U_i \subset X$.
+\end{enumerate}
+이러한 자료의 모음을 $(I, \{U_i\})$로 나타내자. 이것이 $X$의
+초덮개가 되려면 다음 성질들을 요구한다.
+\begin{itemize}
+\item $i \in I_n$이고 $0 \leq a \leq n$이면
+$U_i \subset U_{d^n_a(i)}$이다.
+\item $i \in I_n$이고 $0 \leq a \leq n$이면 $U_i = U_{s^n_a(i)}$이다.
+\item 다음이 성립한다.
+\begin{equation}
+\label{hypercovering-equation-covering-X}
+X = \bigcup\nolimits_{i \in I_0} U_i,
+\end{equation}
+\item 모든 $i_0, i_1 \in I_0$에 대해 다음이 성립한다.
+\begin{equation}
+\label{hypercovering-equation-covering-two}
+U_{i_0} \cap U_{i_1} =
+\bigcup\nolimits_{i \in I_1, \ d^1_0(i) = i_0, \ d^1_1(i) = i_1} U_i,
+\end{equation}
+\item 모든 $n \geq 1$과, 모든 $0\leq a < b\leq n + 1$에 대해
+$d^n_{b - 1}(i_a) = d^n_a(i_b)$를 만족하는 모든
+$(i_0, \ldots, i_{n + 1}) \in (I_n)^{n + 2}$에 대해 다음이 성립한다.
+\begin{equation}
+\label{hypercovering-equation-covering-general}
+U_{i_0} \cap \ldots \cap U_{i_{n + 1}} =
+\bigcup\nolimits_{i \in I_{n + 1},
+\ d^{n + 1}_a(i) = i_a, \ a = 0, \ldots, n + 1} U_i,
+\end{equation}
+\item 열린 덮개들 (\ref{hypercovering-equation-covering-X}),
+(\ref{hypercovering-equation-covering-two}), (\ref{hypercovering-equation-covering-general})은 각각
+$\text{Cov}(X_{Zar})$의 원소이다(이는 덮개의 첨자집합 크기에 상계를
+주는 집합론적 조건이다).
+\end{itemize}
+예를 들어 조건들 (\ref{hypercovering-equation-covering-X})와
+(\ref{hypercovering-equation-covering-two})는 공간 위의 층을 다룬 장에서 익숙할 것이고,
+조건 (\ref{hypercovering-equation-covering-general})은 그 자연스러운 일반화이다.
+
+\begin{remark}
+\label{hypercovering-remark-not-covering-set}
+이 기술의 한 특징은 다중 교집합들
+$U_{i_0} \cap \ldots \cap U_{i_{n + 1}}$ 가운데 하나가 공집합이면
+오른쪽의 덮개가 빈 덮개일 수 있다는 점이다. 따라서 사상들
+$I_{n + 1} \to (\text{cosk}_n\text{sk}_n I)_{n + 1}$이 자동으로
+전사가 되는 것은 아니다. 이는 $I$의 기하학적 실현이 흥미로운
+(축약 가능하지 않은) 공간일 수 있음을 뜻한다.
+
+\medskip\noindent
+실제로 $I'_n \subset I_n$을 $U_i \not = \emptyset$을 만족하는 단체
+$i \in I_n$들로 이루어진 부분집합이라 하자. $I' \subset I$가 단체적
+부분집합이고 $(I', \{U_i\})$가 초덮개임은 쉽게 알 수 있다. 따라서
+어떤 초덮개도 모든 열린집합 $U_i$가 공집합이 아닌 초덮개로 세분할 수 있다.
+\end{remark}
+
+\begin{remark}
+\label{hypercovering-remark-repackage-into-simplicial-space}
+이 정보를 다시 다른 방식으로 묶어 보자. $(I, \{U_i\})$가 위상공간
+$X$의 초덮개라고 하자. 이 자료가 주어지면
+$$
+U_n = \coprod\nolimits_{i \in I_n} U_i,
+$$
+로 두어 단체적 위상공간 $U_\bullet$을 구성할 수 있다. 또한 주어진
+$\varphi : [n] \to [m]$에 대해 사상 $U(\varphi) : U_n \to U_m$을
+각 $i \in I_n$에 대한 포함 $U_i \subset U_{\varphi(i)}$에서 오는
+사상으로 둔다. 이 단체적 위상공간에는 증대
+$\epsilon : U_\bullet \to X$가 딸려 있다. 이 사상에 의해 단체적 공간
+$U_\bullet$은 $X$의 초덮개가 되고, 이를 따라 \cite[Expos\'e Vbis]{SGA4}의
+의미에서 코호몰로지 강하가 성립한다. 다시 말해
+$H^n(U_\bullet, \epsilon^*\mathcal{F}) = H^n(X, \mathcal{F})$이다.
+(단체적 공간 위의 코호몰로지와 그 용어로 정식화된 코호몰로지 강하에
+관한 참고문헌을 나중에 여기에 삽입할 것.)
+$\mathcal{F}$를 $X$ 위의 아벨 층이라 하자. 이 경우 Lemma
+\ref{hypercovering-lemma-cech-spectral-sequence}의 스펙트럼 열은 다음 $E_1$-항을
+갖는 스펙트럼 열이 된다.
+$$
+E_1^{p, q} = H^q(U_p, \epsilon_q^*\mathcal{F})
+\Rightarrow
+H^{p + q}(U_\bullet, \epsilon^*\mathcal{F}) = H^{p + q}(X, \mathcal{F})
+$$
+이는 $\epsilon^*\mathcal{F}$의 전체 코호몰로지를 $U_\bullet$의 각 조각
+위에서 $\mathcal{F}$의 코호몰로지 군들과 비교한다. (이 스펙트럼 열에
+관한 참고문헌을 나중에 여기에 삽입할 것.)
+\end{remark}
+
+\noindent
+위상수학에서는 모든 $U_i$가 $X$의 위상의 주어진 기저에서 나오고,
+모든 덮개 (\ref{hypercovering-equation-covering-two})와
+(\ref{hypercovering-equation-covering-general})이 덮개들의 주어진 공종 모음에서
+나온다는 성질을 갖는 $X$의 초덮개를 찾고 싶을 때가 많다.
+다음은 두 가지 예시 보조정리이다.
+
+\begin{lemma}
+\label{hypercovering-lemma-basis-hypercovering}
+$X$를 위상공간이라 하자. $\mathcal{B}$를 $X$의 위상의 기저라 하자.
+각 $U_i$가 $\mathcal{B}$의 원소가 되는 $X$의 초덮개
+$(I, \{U_i\})$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$n \geq 0$이라 하자. $X$의 {\it $n$-절단 초덮개}란 $n$-절단
+단체 집합 $I$와, 각 $i \in I_a$, $0 \leq a \leq n$에 대한 $X$의
+열린집합 $U_i$로 주어지며, 초덮개를 정의하는 조건들이 의미가 있을
+때마다 성립하는 것이라 하자. 다시 말해 그 안에 나타나는 모든 단체가
+$a \leq n$인 $a$-단체일 때에만 포함 관계와 덮개 조건을 요구한다.
+모든 $U_i \in \mathcal{B}$인 $n$-절단 초덮개 $(I, \{U_i\})$가
+주어졌을 때, $a \leq n$인 $a$-단체를 하나도 더하지 않고 이를
+$(n + 1)$-절단 초덮개로 확장할 수 있음을 보이면 보조정리가 따른다.
+이는 다음과 같이 한다. 먼저 다음으로 정의되는 $(n + 1)$-절단
+단체 집합 $I'$을 생각하자.
+$I' = \text{sk}_{n + 1}(\text{cosk}_n I)$.
+다음을 상기하자.
+$$
+I'_{n + 1} =
+\left\{
+\begin{matrix}
+(i_0, \ldots, i_{n + 1}) \in (I_n)^{n + 2} \text{ such that}\\
+d^n_{b - 1}(i_a) = d^n_a(i_b) \text{ for all }0\leq a < b\leq n + 1
+\end{matrix}
+\right\}
+$$
+$i' \in I'_{n + 1}$이 퇴화되어 있고 이를테면
+$i' = s^n_a(i)$이면 $U_{i'} = U_i$로 둔다(어차피 두 번째 조건이
+이를 강제한다). 이 경우 $J_{i'} = \{i'\}$로도 둔다.
+$i' \in I'_{n + 1}$이 비퇴화이고 이를테면
+$i' = (i_0, \ldots, i_{n + 1})$이면 집합 $J_{i'}$와 열린 덮개
+\begin{equation}
+\label{hypercovering-equation-choose-covering}
+U_{i_0} \cap \ldots \cap U_{i_{n + 1}} =
+\bigcup\nolimits_{i \in J_{i'}} U_i,
+\end{equation}
+를 택하되, 각 $i \in J_{i'}$에 대해 $U_i \in \mathcal{B}$가 되게 한다.
+다음과 같이 두자.
+$$
+I_{n + 1} = \coprod\nolimits_{i' \in I'_{n + 1}} J_{i'}
+$$
+표준 사상 $\pi : I_{n + 1} \to I'_{n + 1}$이 있으며, 구성에 의해
+$I'_{n + 1}$의 퇴화 단체들의 집합 위에서 전단사이다.
+$i \in I_{n + 1}$에 대해 $d^{n + 1}_a(i) = d^{n + 1}_a(\pi(i))$로 정의한다.
+$i \in I_n$에 대해 $s^n_a(i) \in I_{n + 1}$을 퇴화 단체
+$s^n_a(i) \in I'_{n + 1}$ 위에 놓인 유일한 단체로 정의한다.
+이것이 $X$의 $(n + 1)$-절단 초덮개를 정의한다는 확인은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-quasi-separated-quasi-compact-hypercovering}
+$X$를 위상공간이라 하자. $\mathcal{B}$를 $X$의 위상의 기저라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $X$는 준콤팩트이다.
+\item 각 $U \in \mathcal{B}$는 준콤팩트 열린집합이다.
+\item $X$의 임의의 두 준콤팩트 열린집합의 교집합은 준콤팩트이다.
+\end{enumerate}
+그러면 다음 성질들을 갖는 $X$의 초덮개 $(I, \{U_i\})$가 존재한다.
+\begin{enumerate}
+\item 각 $U_i$는 기저 $\mathcal{B}$의 원소이다.
+\item 각 $I_n$은 유한집합이고, 특히
+\item 덮개들 (\ref{hypercovering-equation-covering-X}),
+(\ref{hypercovering-equation-covering-two}), (\ref{hypercovering-equation-covering-general})은
+각각 유한하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{hypercovering-lemma-basis-hypercovering}의 증명에 나온 구성에서
+(\ref{hypercovering-equation-choose-covering})의 덮개를 $\mathcal{B}$의 원소들로
+이루어진 유한 덮개로 택하면 곧바로 따른다. 세부 사항은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+\section{초덮개의 구성}
+\label{hypercovering-section-hypercovering-sites}
+
+\noindent
+$\mathcal{C}$를 사이트라 하자. 이 절에서는
+$\text{SR}(\mathcal{C})$의 단체적 대상을 다음과 같이 생각한다.
+평소처럼 $K_n = K([n])$으로 놓고, $\varphi : [m] \to [n]$에 결부된
+사상을 $K(\varphi) : K_n \to K_m$으로 나타낸다.
+$K_n = \{U_{n, i}\}_{i \in I_n}$으로 쓸 수 있다.
+$\varphi : [m] \to [n]$에 대해 사상 $K(\varphi) : K_n \to K_m$은
+사상 $\alpha(\varphi) : I_n \to I_m$과, $i \in I_n$마다 주어진 사상
+$f_{\varphi, i} : U_{n, i} \to U_{m, \alpha(\varphi)(i)}$로 정해진다.
+$K$가 $\text{SR}(\mathcal{C})$의 단체적 대상이라는 사실로부터
+$(I_n, \alpha(\varphi))$이 단체 집합이고, $\psi : [l] \to [m]$일 때
+$f_{\psi, \alpha(\varphi)(i)} \circ f_{\varphi, i} =
+f_{\varphi \circ \psi, i}$임을 알 수 있다.
+
+\begin{lemma}
+\label{hypercovering-lemma-split}
+$\mathcal{C}$를 사이트라 하고, $K$를 $\text{SR}(\mathcal{C})$의
+$r$-절단 단체적 대상이라 하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $K$는 분할되어 있다(Simplicial, Definition
+\ref{simplicial-definition-split}).
+\item $f_{\varphi, i} : U_{n, i} \to U_{m, \alpha(\varphi)(i)}$
+는 $r \geq n \geq 0$, 전사 $\varphi : [m] \to [n]$, $i \in I_n$에
+대해 동형사상이다.
+\item $f_{\sigma^n_j, i} : U_{n, i} \to U_{n + 1, \alpha(\sigma^n_j)(i)}$
+는 $0 \leq j \leq n < r$, $i \in I_n$에 대해 동형사상이다.
+\end{enumerate}
+단체적 대상의 경우에도 같은 명제가 성립하며, 이때에는 (2)와 (3)에서
+$r = \infty$로 놓으면 된다.
+\end{lemma}
+
+\begin{proof}
+단체 집합의 분할은 유일하며 각 차수 $n$에서 비퇴화 첨자
+$N(I_n)$으로 주어진다. Simplicial, Lemma
+\ref{simplicial-lemma-splitting-simplicial-sets}를 보라.
+$\text{SR}(\mathcal{C})$의 두 대상 $\{U_i\}_{i \in I}$와
+$\{U_j\}_{j \in J}$의 쌍대곱은 명백한 표기법 아래
+$\{U_l\}_{l \in I \amalg J}$로 주어진다. 따라서 $K$의 분할은
+$N(K_n) = \{U_i\}_{i \in N(I_n)}$으로 주어져야 한다.
+이제 정의를 풀어 쓰면 (1)과 (2)의 동치가 따른다. (2)와 (3)의 동치는
+임의의 전사 $\varphi : [m] \to [n]$이
+$k = n, n + 1, \ldots, m - 1$에 대한 사상 $\sigma^k_j$들의
+합성이라는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-object}
+$\mathcal{C}$를 섬유곱을 가지는 사이트라 하고,
+$\mathcal{B} \subset \Ob(\mathcal{C})$를 부분집합이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{C}$의 임의의 대상 $U$에는 $U_j \in \mathcal{B}$인
+덮개 $\{U_j \to U\}_{j \in J}$가 있다.
+\item $\{U_j \to U\}_{j \in J}$가 $U_j \in \mathcal{B}$인 덮개이고
+$\{U' \to U\}$가 $U' \in \mathcal{B}$인 사상이면,
+$\{U_j \to U\}_{j \in J} \amalg \{U' \to U\}$는 덮개이다.
+\end{enumerate}
+그러면 $\mathcal{C}$의 임의의 $X$에 대해 $X$의 초덮개 $K$가 존재하여,
+$K_n = \{U_{n, i}\}_{i \in I_n}$이고 모든 $i \in I_n$에 대해
+$U_{n, i} \in \mathcal{B}$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{hypercovering-lemma-basis-hypercovering}의 증명은 이 증명의 준비 연습이므로,
+독자에게 먼저 그 증명을 읽기를 권한다.
+
+\medskip\noindent
+먼저 $\mathcal{C}$를 사이트 $\mathcal{C}/X$로 바꾼다.
+그러면 $X$가 $\mathcal{C}$의 끝 대상이고 $\mathcal{C}$가 모든 유한 극한을
+가진다고 가정할 수 있다(Categories, Lemma
+\ref{categories-lemma-finite-limits-exist}).
+
+\medskip\noindent
+$n \geq 0$이라 하자. {\it $X$의 $n$-절단 $\mathcal{B}$-초덮개}란
+$\text{SR}(\mathcal{C})$의 $n$-절단 단체적 대상 $K$로서,
+$i \in I_a$, $0 \leq a \leq n$에 대해 $U_{a, i} \in \mathcal{B}$이고,
+$K_0$가 $X$의 덮개이며,
+$K_{a + 1} \to (\text{cosk}_a \text{sk}_a K)_{a + 1}$
+이 $a = 0, \ldots, n - 1$에 대해 Definition
+\ref{hypercovering-definition-covering-SR}의 의미에서 덮개인 것을 말한다.
+
+\medskip\noindent
+가정에 의해 $X$는 $U_i \in \mathcal{B}$인 덮개
+$\{U_{0, i} \to X\}_{i \in I_0}$를 가지므로, $X$의 $0$-절단
+$\mathcal{B}$-초덮개를 얻는다. $X$의 임의의 $0$-절단
+$\mathcal{B}$-초덮개는 분할되어 있음에 유의하자. Lemma
+\ref{hypercovering-lemma-split}를 보라.
+
+\medskip\noindent
+$n \geq 0$에 대해 $X$의 분할된 $n$-절단 $\mathcal{B}$-초덮개 $K$가
+주어지면 이를 $X$의 분할된 $(n + 1)$-절단 $\mathcal{B}$-초덮개로
+확장할 수 있음을 보이면 보조정리가 따른다.
+
+\medskip\noindent
+이 확장을 구성하자. $\text{SR}(\mathcal{C})$의 $(n + 1)$-절단
+단체적 대상 $K' = \text{sk}_{n + 1}(\text{cosk}_n K)$를 생각하고 다음과 같이 쓰자.
+$$
+K'_{n + 1} = \{U'_{n + 1, i}\}_{i \in I'_{n + 1}}
+$$
+$K = \text{sk}_n K'$이므로 $0 \leq a \leq n$에 대해 $K_a = K'_a$이다.
+모든 $i' \in I'_{n + 1}$에 대해 덮개
+\begin{equation}
+\label{hypercovering-equation-choose-covering-B}
+\{g_{n + 1, j} : U_{n + 1, j} \to U'_{n + 1, i'}\}_{j \in J_{i'}}
+\end{equation}
+를 $j \in J_{i'}$에 대해 $U_{n + 1, j} \in \mathcal{B}$가 되도록 택한다.
+이는 보조정리의 $\mathcal{B}$에 관한 가정으로 가능하다.
+$0 \leq m \leq n$에 대해 비퇴화 첨자들의 부분집합을
+$N_m \subset I_m$으로 나타내고 다음과 같이 놓는다.
+$$
+I_{n + 1} =
+\coprod\nolimits_{\varphi : [n + 1] \to [m]\text{ surjective, }0\leq m \leq n}
+N_m \amalg
+\coprod\nolimits_{i' \in I'_{n + 1}} J_{i'}
+$$
+$j \in I_{n + 1}$에 대해 다음과 같이 놓는다.
+$$
+U_{n + 1, j} =
+\left\{
+\begin{matrix}
+U_{m, i} & \text{이면} &
+j = (\varphi, i) & \text{여기서} & \varphi : [n + 1] \to [m], i \in N_m \\
+U_{n + 1, j} & \text{이면} &
+j \in J_{i'} & \text{여기서} & i' \in I'_{n + 1}
+\end{matrix}
+\right.
+$$
+으로 놓으며 표기법은 명백하다.
+$K_{n + 1} = \{U_{n + 1, j}\}_{j \in I_{n + 1}}$으로 놓자.
+구성에 의해 모든 $j \in I_{n + 1}$에 대해 $U_{n + 1, j}$는
+$\mathcal{B}$의 원소이다. 서로 양립하는 사상
+$$
+I_{n + 1} \to I'_{n + 1}
+\quad\text{and}\quad
+K_{n + 1} \to K'_{n + 1}
+$$
+을 정의하자. 구체적으로 첫 번째 사상은
+$(\varphi, i) \mapsto \alpha'(\varphi)(i)$와
+$(j \in J_{i'}) \mapsto i'$로 주어진다.
+두 번째 사상에는 다음 사상들을 사용한다.
+$$
+f'_{\varphi, i} : U_{m, i} \to U'_{n + 1, \alpha'(\varphi)(i)}
+\quad\text{and}\quad
+g_{n + 1, j} : U_{n + 1, j} \to U'_{n + 1, i'}
+$$
+사상
+$$
+K_{n + 1} \to K'_{n + 1} =
+(\text{cosk}_n \text{sk}_n K')_{n + 1} =
+(\text{cosk}_n K)_{n + 1}
+$$
+은 Definition \ref{hypercovering-definition-covering-SR}의 의미에서 덮개라고 주장한다.
+실제로 $i' \in I'_{n + 1}$이라 하자. $i'$이 비퇴화이면
+$I_{n + 1}$에서 $i'$의 역상은 $J_{i'}$와 같고, 선택
+(\ref{hypercovering-equation-choose-covering-B})에 의해 $U'_{n + 1, i'}$의 덮개를 얻는다.
+반면 $i'$이 퇴화이면 유일한 쌍 $(\varphi, i)$에 대해
+$I_{n + 1}$에서 $i'$의 역상은
+$J_{i'} \amalg \{(\varphi, i)\}$이며, 선택
+(\ref{hypercovering-equation-choose-covering-B})과 보조정리의 가정 (2)에 의해 덮개를 얻는다.
+
+\medskip\noindent
+증명을 마치려면 사상 $\varphi : [m] \to [n + 1]$,
+$0 \leq m \leq n$에 대응하는 사상 $K(\varphi) : K_{n + 1} \to K_m$과,
+사상 $\varphi : [n + 1] \to [m]$, $0 \leq m \leq n$에 대응하는 사상
+$K(\varphi) : K_m \to K_{n + 1}$을 적절한 합성 관계를 만족하도록
+정의해야 한다. 첫 번째 종류에는 합성
+$$
+K_{n + 1} \to K'_{n + 1} \xrightarrow{K'(\varphi)} K'_m = K_m
+$$
+을 사용하여 $K(\varphi) : K_{n + 1} \to K_m$을 정의한다.
+두 번째 종류에 대해 $\varphi : [n + 1] \to [m]$,
+$0 \leq m \leq n$이 주어졌다고 하자. 이에 대응하는 사상
+$K(\varphi) : K_m \to K_{n + 1}$을 다음과 같이 정의한다.
+\begin{enumerate}
+\item $i \in I_m$에 대해 $\alpha(\psi)(i_0) = i$를 만족하는
+유일한 전사 $\psi : [m] \to [m_0]$과 유일한 비퇴화 원소
+$i_0 \in I_{m_0}$가 존재한다\footnote{예를 들어 $i$가 비퇴화이면
+$m = m_0$이고 $\psi = \text{id}_{[m]}$이다.}.
+\item $\varphi_0 = \psi_0 \circ \varphi : [n + 1] \to [m_0]$으로 놓고
+$i \in I_m$을 $(\varphi_0, i_0) \in I_{n + 1}$로 보낸다. 다시 말해
+$\alpha(\varphi)(i) = (\varphi_0, i_0)$으로 놓는다.
+\item 사상
+$f_{\varphi, i} : U_{m, i} \to U_{n + 1, \alpha(\varphi)(i)} = U_{m_0, i_0}$
+은 동형사상 $f_{\psi, i_0} : U_{m_0, i_0} \to U_{m, i}$의 역이다
+(Lemma \ref{hypercovering-lemma-split}를 보라).
+\end{enumerate}
+이것이 주어진 $n$-절단 초덮개를 확장하는 $X$의 분할된
+$(n + 1)$-절단 $\mathcal{B}$-초덮개를 정의한다는 직접적이지만
+번거로운 확인은 생략한다. 실제로 모든 $0 \leq a, b \leq n + 1$과
+$\varphi : [a] \to [b]$에 대해 사상 $K(\varphi)$들이 올바르게
+합성된다는 확인을 제외하면 위 구성에서 모든 것이 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-site}
+$\mathcal{C}$를 등화자와 섬유곱을 가지는 사이트라 하고,
+$\mathcal{B} \subset \Ob(\mathcal{C})$를 부분집합이라 하자.
+$\mathcal{C}$의 임의의 대상이 그 구성원들이 $\mathcal{B}$의 원소인
+덮개를 가진다고 가정하자. 그러면 모든 $i \in I_n$에 대해
+$U_i \in \mathcal{B}$인 $K_n = \{U_i\}_{i \in I_n}$을 만족하는
+초덮개 $K$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+이 증명은 Lemma \ref{hypercovering-lemma-hypercovering-object}의 증명과 거의 같다.
+차이점만 설명하겠다.
+
+\medskip\noindent
+$n \geq 1$이라 하자. {\it $n$-절단 $\mathcal{B}$-초덮개}란
+$\text{SR}(\mathcal{C})$의 $n$-절단 단체적 대상 $K$로서,
+$i \in I_a$, $0 \leq a \leq n$에 대해 $U_{a, i} \in \mathcal{B}$이고
+다음을 만족하는 것을 말한다.
+\begin{enumerate}
+\item $F(K_0)^\# \to *$는 전사이다.
+\item $F(K_1)^\# \to F(K_0)^\# \times F(K_0)^\#$는 전사이다.
+\item $F(K_{a + 1})^\# \to F((\text{cosk}_a \text{sk}_a K)_{a + 1})^\#$
+은 $a = 1, \ldots, n - 1$에 대해 전사이다.
+\end{enumerate}
+먼저 분할된 $1$-절단 $\mathcal{B}$-초덮개를 명시적으로 구성한다.
+
+\medskip\noindent
+$I_0 = \mathcal{B}$와 $K_0 = \{U\}_{U \in \mathcal{B}}$로 놓자.
+$\mathcal{B}$에 관한 가정으로 (1)이 성립한다. 다음과 같이 놓는다.
+$$
+\Omega =
+\{(U, V, W, a, b) \mid U, V, W \in \mathcal{B}, a : U \to V, b : U \to W\}
+$$
+이제 $I_1 = I_0 \amalg \Omega$로 놓는다. $i \in I_1$에 대해
+$i \in I_0$이면 $U_{1, i} = U_{0, i}$로 놓고,
+$i = (U, V, W, a, b) \in \Omega$이면 $U_{1, i} = U$로 놓는다.
+사상 $K(\sigma^0_0) : K_0 \to K_1$은 포함
+$\alpha(\sigma^0_0) : I_0 \to I_1$과 대상들 위의 항등사상
+$f_{\sigma^0_0, i} : U_{0, i} \to U_{1, i}$에 대응한다.
+사상 $K(\delta^1_0), K(\delta^1_1) : K_1 \to K_0$은
+$I_0 \subset I_1$ 위에서 항등이고
+$(U, V, W, a, b) \in \Omega \subset I_1$을 각각 $V$, $W$로 보내는
+두 사상 $I_1 \to I_0$에 대응한다. 이에 대응하는 사상
+$f_{\delta^1_0, i}, f_{\delta^1_1, i} : U_{1, i} \to U_{0, i}$는
+$i \in I_0$이면 항등사상이고,
+$i = (U, V, W, a, b) \in \Omega$이면 각각 $a,b$이다.
+(2)가 성립하는 이유는 다음과 같다. $\mathcal{C}$의 대상 $U$ 위에서
+$F(K_0)^\# \times F(K_0)^\#$의 임의의 단면은 $U$를 어떤 덮개의
+구성원들로 바꾸고 나면 사상 $U \to F(K_0) \times F(K_0)$에서 온다.
+이는 다시 $V, W \in \mathcal{B}$와 두 사상 $U \to V$, $U \to W$가
+있음을 뜻한다. $U$를 다시 어떤 덮개의 구성원들로 바꾸면 원하는 대로
+$U \in \mathcal{B}$라고 가정할 수 있다.
+
+\medskip\noindent
+$n \geq 1$에 대해 분할된 $n$-절단 $\mathcal{B}$-초덮개 $K$가
+주어지면 이를 분할된 $(n + 1)$-절단 $\mathcal{B}$-초덮개로
+확장할 수 있음을 보이면 보조정리가 따른다. 여기서 논증은
+Lemma \ref{hypercovering-lemma-hypercovering-object}의 증명과 정확히 같은 방식으로
+진행된다. 다음 설명을 제외한 정확한 세부 사항은 생략한다.
+첫째, 사상 $K_{n + 1} \to (\text{cosk}_n K)_{n + 1}$ 자체가
+덮개일 필요가 없으므로 현재 보조정리의 증명에서는 가정 (2)가
+필요하지 않다. 이 사상이 상응하는 집합의 층들 위에서 전사를
+유도하기만 하면 충분하며, 이는 Sites, Lemma
+\ref{sites-lemma-covering-surjective-after-sheafification}에서 따른다.
+둘째, $\mathcal{C}$가 섬유곱과 등화자를 가진다는 가정은
+$\text{SR}(\mathcal{C})$도 섬유곱과 등화자를 가지며 $F$가 이들과
+가환함을 보장한다(Lemma \ref{hypercovering-lemma-coprod-prod-SR}). 이는 사용한
+여골격 함자들이 존재함을 보장하기에 충분하다(Simplicial, Remark
+\ref{simplicial-remark-existence-cosk}와 Categories, Lemma
+\ref{categories-lemma-fibre-products-equalizers-exist}를 보라).
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-morphism-sites}
+$f : \mathcal{C} \to \mathcal{D}$를 함자
+$u : \mathcal{D} \to \mathcal{C}$로 주어지는 사이트의 사상이라 하자.
+$\mathcal{D}$와 $\mathcal{C}$가 등화자와 섬유곱을 가지며 $u$가 이들과
+가환한다고 가정하자. $\text{SR}(\mathcal{D})$의 단체적 대상 $K$가
+초덮개이면 $u(K)$도 초덮개이다.
+\end{lemma}
+
+\begin{proof}
+이 절의 도입부에서와 같이 $K_n = \{U_{n, i}\}_{i \in I_n}$으로 쓰면,
+$u(K)$는 $u(K_n) = \{u(U_i)\}_{i \in I_n}$으로 주어지는
+$\text{SR}(\mathcal{C})$의 대상이다. Sites, Lemma
+\ref{sites-lemma-pullback-representable-sheaf}에 의해
+$U \in \Ob(\mathcal{D})$에 대해 $f^{-1}h_U^\# = h_{u(U)}^\#$이다.
+이는 모든 $n$에 대해 $f^{-1}F(K_n)^\# = F(u(K_n))^\#$임을 뜻한다.
+$u(K)$가 초덮개가 되기 위한 Definition
+\ref{hypercovering-definition-hypercovering-variant}의 조건 (1), (2), (3)을 확인하자.
+$f^{-1}$가 완전 함자이므로
+$$
+F(u(K_0))^\# = f^{-1}F(K_0)^\# \to f^{-1}* = *
+$$
+는 전사인 사상의 당김이므로 전사이고, (1)을 얻는다. 마찬가지로
+$$
+F(u(K_1))^\# = f^{-1}F(K_1)^\# \to
+f^{-1} (F(K_0) \times F(K_0))^\# = F(u(K_0))^\# \times F(u(K_0))^\#
+$$
+는 당김이므로 전사이고, (2)를 얻는다. 조건 (3)에 대해 같은 방법으로
+결론을 얻으려면 다음이 성립하면 충분하다.
+$$
+F((\text{cosk}_n \text{sk}_n u(K))_{n + 1})^\# =
+f^{-1}F((\text{cosk}_n \text{sk}_n K)_{n + 1})^\#
+$$
+위 논의는 $f^{-1}F(-) = F(u(-))$임을 보인다. 따라서 $n \geq 1$에 대해
+$u$가 $(\text{cosk}_n \text{sk}_n K)_{n + 1}$을 정의할 때 쓰이는
+극한들과 가환함을 보이면 충분하다. Simplicial, Remark
+\ref{simplicial-remark-existence-cosk}에 의해 이 극한들은 유한 연결
+극한들이며, 가정에 의해 $u$는 이들과 가환한다.
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-continuous-functor}
+$\mathcal{C}$와 $\mathcal{D}$를 사이트라 하고
+$u : \mathcal{D} \to \mathcal{C}$를 연속 함자라 하자.
+$\mathcal{D}$와 $\mathcal{C}$가 섬유곱을 가지며 $u$가 이들과
+가환한다고 가정하자. $Y \in \mathcal{D}$라 하고
+$K \in \text{SR}(\mathcal{D}, Y)$를 $Y$의 초덮개라 하자.
+그러면 $u(K)$는 $u(Y)$의 초덮개이다.
+\end{lemma}
+
+\begin{proof}
+대상의 초덮개라는 개념이 더 강하므로 이는 Lemma
+\ref{hypercovering-lemma-hypercovering-morphism-sites}의 증명보다 쉽다. Definitions
+\ref{hypercovering-definition-hypercovering}과 \ref{hypercovering-definition-covering-SR}을 보라.
+실제로 사이트의 사상의 정의에 의해 $u$는 덮개를 덮개로 보낸다.
+$n \geq 1$에 대해 $(\text{cosk}_n \text{sk}_n K)_{n + 1}$을 정의할 때
+쓰이는 극한들과 $u$가 가환함을 확인하면 충분하다. 유도된 함자
+$\mathcal{D}/Y \to \mathcal{C}/X$가 모든 유한 극한과 가환하므로 이는
+명백하다(그리고 Categories, Lemma
+\ref{categories-lemma-finite-limits-exist}에 의해 정의역과 공역은
+모든 유한 극한을 가진다).
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-w-contractible}
+$\mathcal{C}$를 사이트라 하고, $\mathcal{B} \subset \Ob(\mathcal{C})$를
+부분집합이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{C}$는 섬유곱을 가진다.
+\item 모든 $X \in \Ob(\mathcal{C})$에 대해 $U_i \in \mathcal{B}$인
+유한 덮개 $\{U_i \to X\}_{i \in I}$가 존재한다.
+\item $\{U_i \to X\}_{i \in I}$가 $U_i \in \mathcal{B}$인 유한 덮개이고
+$U \to X$가 $U \in \mathcal{B}$인 사상이면,
+$\{U_i \to X\}_{i \in I} \amalg \{U \to X\}$는 덮개이다.
+\end{enumerate}
+그러면 모든 $X$에 대해 $X$의 초덮개 $K$가 존재하여, 각
+$K_n = \{U_{n, i} \to X\}_{i \in I_n}$에서 $I_n$은 유한하고
+$U_{n, i} \in \mathcal{B}$이다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 사이트에 대한 Lemma
+\ref{hypercovering-lemma-quasi-separated-quasi-compact-hypercovering}의 유사 명제이다.
+다음 두 가지에 유의하면서 Lemma
+\ref{hypercovering-lemma-hypercovering-object}의 증명을 그대로 따르면 된다.
+\begin{enumerate}
+\item[(a)] 처음 덮개 $\{U_{0, i} \to X\}_{i \in I_0}$를
+$U_{0, i} \in \mathcal{B}$이고 첨자 집합 $I_0$가 유한하도록 택한다.
+\item[(b)] 덮개 (\ref{hypercovering-equation-choose-covering-B})를 택할 때
+$J_{i'}$를 유한하게 택한다.
+\end{enumerate}
+이렇게 바꾸면 모든 $n$에 대해 유한 첨자 집합 $I_n$을 얻게 됨은
+쉽게 알 수 있다.
+\end{proof}
+
+\begin{remark}
+\label{hypercovering-remark-taking-disjoint-unions}
+$\mathcal{C}$를 사이트라 하고, $K$와 $L$을
+$\text{SR}(\mathcal{C})$의 대상이라 하자.
+$K = \{U_i\}_{i \in I}$와 $L = \{V_j\}_{j \in J}$로 쓰자.
+$U = \coprod_{i \in I} U_i$와 $V = \coprod_{j \in J} V_j$가
+존재한다고 가정하자. 그러면 다음을 얻는다.
+$$
+\Mor_{\text{SR}(\mathcal{C})}(K, L) \longrightarrow \Mor_\mathcal{C}(U, V)
+$$
+구성은 다음과 같다. $\alpha : I \to J$와
+$f_i : U_i \to V_{\alpha(i)}$로 주어진 $f : K \to L$에 대해 함자들의 변환
+$$
+\Mor_\mathcal{C}(V, -) =
+\prod\nolimits_{j \in J} \Mor_\mathcal{C}(V_j, -)
+\to
+\prod\nolimits_{i \in I} \Mor_\mathcal{C}(U_i, -) =
+\Mor_\mathcal{C}(U, -)
+$$
+을 얻는데, 이는 $(g_j)_{j \in J}$를
+$(g_{\alpha(i)} \circ f_i)_{i \in I}$로 보낸다. 따라서 요네다 보조정리는
+이에 대응하는 사상 $U \to V$를 준다. 물론 $U \to V$는 사상 $f_i$를 통해
+쌍대곱 성분 $U_i$를 쌍대곱 성분 $V_{\alpha(i)}$로 보낸다.
+\end{remark}
+
+\begin{remark}
+\label{hypercovering-remark-take-unions-hypercovering}
+$\mathcal{C}$를 사이트라 하자. $\mathcal{C}$가 섬유곱과 등화자를
+가진다고 가정하고 $K$를 초덮개라 하자.
+$K_n = \{U_{n, i}\}_{i \in I_n}$으로 쓰자. 다음을 가정하자.
+\begin{enumerate}
+\item[(a)] $U_n = \coprod_{i \in I_n} U_{n, i}$가 존재한다.
+\item[(b)] $\coprod_{i \in I_n} h_{U_{n, i}} \to h_{U_n}$는
+층화한 뒤 동형사상을 유도한다.
+\end{enumerate}
+그러면 $L_n = \{U_n\}$인 $\text{SR}(\mathcal{C})$의 또 다른 단체적 대상
+$L$을 얻는다. Remark \ref{hypercovering-remark-taking-disjoint-unions}를 보라.
+이제 $L$이 초덮개라고 주장한다. 이를 위해 Definition
+\ref{hypercovering-definition-hypercovering-variant}의 조건 (1), (2), (3)을 확인한다.
+조건 (1)은 (b)와 $K$에 대한 (1)에서 따르고, 조건 (2)도 정확히 같은
+방식으로 따른다. 조건 (3)은 다음 등식에서 따른다.
+\begin{align*}
+F((\text{cosk}_n \text{sk}_n L)_{n + 1})^\#
+& =
+((\text{cosk}_n \text{sk}_n F(L)^\#)_{n + 1}) \\
+& =
+((\text{cosk}_n \text{sk}_n F(K)^\#)_{n + 1}) \\
+& =
+F((\text{cosk}_n \text{sk}_n K)_{n + 1})^\#
+\end{align*}
+여기서 $n \geq 1$이다. 따라서 (1)과 (2)에서와 정확히 같은 방식으로
+$K$에 대한 조건이 $L$에 대한 조건을 함의한다.
+$F$가 연결 극한과 가환하고 층화가 완전하다는 사실이 첫 번째와 마지막
+등식을 보인다. 가운데 등식은 (b)에 의해 $F(K)^\# = F(L)^\#$인 데서 따른다.
+\end{remark}
+
+\begin{remark}
+\label{hypercovering-remark-take-unions-hypercovering-X}
+$\mathcal{C}$를 사이트라 하고 $X \in \Ob(\mathcal{C})$라 하자.
+$\mathcal{C}$가 섬유곱을 가진다고 가정하고 $K$를 $X$의 초덮개라 하자.
+$K_n = \{U_{n, i}\}_{i \in I_n}$으로 쓰자. 다음을 가정하자.
+\begin{enumerate}
+\item[(a)] $U_n = \coprod_{i \in I_n} U_{n, i}$가 존재한다.
+\item[(b)] $\text{SR}(\mathcal{C})$의 사상
+$(\alpha, f_i) : \{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$과
+$(\beta, g_k) : \{W_k\}_{k \in K} \to \{V_j\}_{j \in J}$
+가 주어지고 $U = \coprod U_i$, $V = \coprod V_j$, $W = \coprod W_j$가
+존재하면 $U \times_V W =
+\coprod_{(i, j, k), \alpha(i) = j = \beta(k)} U_i \times_{V_j} W_k$이다.
+\item[(c)] $(\alpha, f_i) : \{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$
+가 Definition \ref{hypercovering-definition-covering-SR}의 의미에서 덮개이고,
+$U = \coprod U_i$와 $V = \coprod V_j$가 존재하면 Remark
+\ref{hypercovering-remark-taking-disjoint-unions}의 이에 대응하는 사상 $U \to V$는
+$\mathcal{C}$의 덮개이다.
+\end{enumerate}
+그러면 $L_n = \{U_n\}$인 $\text{SR}(\mathcal{C})$의 또 다른 단체적 대상
+$L$을 얻는다. Remark \ref{hypercovering-remark-taking-disjoint-unions}를 보라.
+이제 $L$이 $X$의 초덮개라고 주장한다. 이를 위해 Definition
+\ref{hypercovering-definition-hypercovering}의 조건 (1), (2)를 확인한다.
+조건 (1)은 (c)와 $K$에 대한 (1)에서 따른다. 실제로 $K$에 대한 (1)은
+$K_0 = \{U_{0, i}\}_{i \in I_0}$가 Definition
+\ref{hypercovering-definition-covering-SR}의 의미에서 $\{X\}$의 덮개라고 말한다.
+조건 (2)가 따르는 이유는 $\mathcal{C}/X$가 모든 유한 극한을 가지므로
+$\text{SR}(\mathcal{C}/X)$도 모든 유한 극한을 가지며, 조건 (b)가
+``서로소 합을 취하는'' 구성이 이 유한 극한들과 가환한다고 말하기 때문이다.
+따라서 사상
+$$
+L_{n + 1} \longrightarrow (\text{cosk}_n \text{sk}_n L)_{n + 1}
+$$
+은 ``서로소 합을 취하는'' 함자를 사상
+$$
+K_{n + 1} \longrightarrow (\text{cosk}_n \text{sk}_n K)_{n + 1}
+$$
+에 적용한 결과이므로 덮개이다. 뒤의 사상은 $K$에 대한 (2)에 의해
+Definition \ref{hypercovering-definition-covering-SR}의 의미에서 덮개라고 가정되어 있다.
+이는 의미가 있다. 실제로 성질 (b)는 특히 서로소 합을 취할 수 있는
+$X$ 위의 반표현 가능 대상들로 이루어진 유한 도식에서 시작하면,
+그 도식의 $\text{SR}(\mathcal{C}/X)$에서의 극한도 여전히 서로소 합을
+취할 수 있는 $X$ 위의 반표현 가능 대상임을 보장한다.
+\end{remark}

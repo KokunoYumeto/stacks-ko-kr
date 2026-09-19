@@ -1,0 +1,6288 @@
+% Generated mechanically from frozen input p07/ko/models.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{54}
+\chapter{반안정 축약}
+
+
+
+\phantomsection
+\label{models-section-phantom}
+
+
+\section{서론}
+\label{models-section-introduction}
+
+\noindent
+이 장에서는 곡선에 대한 반안정 축약 정리를 증명한다.
+Artin과 Winters가 논문 \cite{Artin-Winters}에서 제시한 방법을
+사용할 것이다.
+
+\medskip\noindent
+실제로 비특이화에 관한 어떤 결과도 사용하지 않고 곡선의 반안정 축약 정리를
+증명할 수 있다. 즉 Mumford가 발전시킨 기하적 불변식론(GIT)을 사용하여
+반안정 곡선 모듈라이의 존재성과 사영성을 확립하는 방법이 있다
+(\cite{GIT} 참조). 이 방법을 적극적으로 발전시킨 Gieseker는 강의록
+\cite{Gieseker}\footnote{Gieseker의 강의록은 대수적으로 닫힌 체 위에서
+쓰였지만, 같은 방법은 $\mathbf{Z}$ 위에서도 작동한다.}에서 완전한 결과를
+증명하였다. 이는 상당히 놀라운 성과이다. 양의 차원 기저 위의 곡선족을
+실제로 연구하지 않고도 이런 결과를 증명할 수 있다는 점은 다소 직관에
+어긋나 보이기 때문이다.
+
+\medskip\noindent
+역사적으로 곡선에 대한 반안정 축약 정리의 최초 증명은 Deligne과 Mumford의
+논문 \cite{DM}에서 찾을 수 있다. 이 증명은 문제를 아벨 다양체의 경우로
+환원하는데, 그 경우는 Grothendieck 등의 연구 덕분에 당시 이미 알려져
+있었다(\cite{SGA7-I}, \cite{SGA7-II} 참조). 아벨 다양체의 반안정 축약
+정리는 N\'eron 모형 이론을 사용하는데, 이 이론은 다시 기저 위의 쌍유리
+군 법칙에 대한 연구에 의존한다.
+
+\medskip\noindent
+Artin과 Winters 논문의 방법은 곡면 특이점의 비특이화를 이용하여 정칙
+모형을 얻는다. 정칙 모형의 존재가 주어지면, 증명은 특수 올의 가능한
+형태를 분석한 뒤 체 위의 $1$차원 스킴의 Picard 군에서 꼬임에 관한
+부등식을 사용하여 결론을 내리는 것으로 이루어진다. 비슷한 논증은
+Saito의 논문 \cite{Saito}에서도 볼 수 있다. 그는 에탈 코호몰로지를
+직접 사용하며, 관성군이 $\ell$-진 에탈 코호몰로지에 작용하는 방식으로
+반안정 축약을 특징지을 수 있다는 더 강한 결과를 얻는다.
+
+\medskip\noindent
+이 정리를 증명하는 또 다른 접근은 강직 해석기하의 기법을 사용하는 것이다.
+이에 관해서는 \cite{vanderPut} 및 \cite{Arzdorf-Wewers}를 참조하라.
+
+\medskip\noindent
+Temkin의 논문 \cite{Temkin}은 값매김 이론의 기법을 사용하며 그 밖에도
+훨씬 많은 내용을 증명한다. 또한 이 논문의 부록 A에는 여러 증명과
+$2$차원 스킴의 비특이화 사이의 관계가 잘 정리되어 있다.
+
+\medskip\noindent
+독자가 참고할 만한 또 다른 개관 논문으로 Ahmed Abbes의
+\cite{Abbes-ssr}가 있다.
+
+
+
+
+
+
+\section{선형대수}
+\label{models-section-linear-algebra}
+
+\noindent
+뒤에서 사용할 몇 가지 보조정리를 제시한다.
+
+\begin{lemma}
+\label{models-lemma-recurring}
+\begin{reference}
+\cite[정리 I]{Taussky}
+\end{reference}
+$A = (a_{ij})$를 복소 $n \times n$ 행렬이라 하자.
+\begin{enumerate}
+\item 모든 $i$에 대해 $|a_{ii}| > \sum_{j \not = i} |a_{ij}|$이면
+$\det(A)$는 영이 아니다.
+\item $m_i > 0$이고 모든 $i$에 대해
+$|a_{ii} m_i| > \sum_{j \not = i} |a_{ij}m_j|$를 만족하는 실벡터
+$m = (m_1, \ldots, m_n)$가 존재하면 $\det(A)$는 영이 아니다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$A$가 (1)의 조건을 만족하고 $\det(A) = 0$이라 하자. 그러면 $Az=0$인
+영이 아닌 벡터 $z$가 존재한다. $|z_r|$가 최대가 되도록 $r$을 택하면
+$$
+|a_{rr} z_r| = |\sum\nolimits_{k \not = r} a_{rk}z_k| \leq
+\sum\nolimits_{k \not = r} |a_{rk}||z_k| \leq
+|z_r| \sum\nolimits_{k \not = r} |a_{rk}| < |a_{rr}||z_r|
+$$
+이고 이는 모순이다. (2)를 증명하려면 행렬식이
+$m_1 \ldots m_n \det(A)$인 행렬 $(a_{ij}m_j)$에 (1)을 적용하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-recurring-real}
+$A = (a_{ij})$를 $i \not = j$일 때 $a_{ij} \geq 0$인 실
+$n \times n$ 행렬이라 하고, $m_i>0$인 실벡터
+$m = (m_1, \ldots, m_n)$를 택하자. $I \subset \{1, \ldots, n\}$에 대해
+$x_I \in \mathbf{R}^n$를 $i \in I$이면 $i$번째 좌표가 $m_i$이고
+그렇지 않으면 $0$인 벡터라 하자. 만일
+\begin{equation}
+\label{models-equation-ineq}
+-a_{ii}m_i \geq \sum\nolimits_{j \not = i} a_{ij}m_j
+\end{equation}
+가 모든 $i$에 대해 성립하면, $\Ker(A)$는 다음 조건을 만족하는 벡터
+$x_I$들이 생성하는 벡터공간이다.
+\begin{enumerate}
+\item $i \in I$, $j \not \in I$이면 $a_{ij}=0$이고,
+\item $i \in I$이면 (\ref{models-equation-ineq})에서 등호가 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$a_{ij}$를 $a_{ij}m_j$로 바꾸어 모든 $i$에 대해 $m_i=1$이라 가정해도
+된다. (1), (2)를 만족하는 $I \subset \{1, \ldots, n\}$에 대해서는
+간단한 계산으로 $x_I$가 $A$의 핵에 속함을 알 수 있다. 반대로
+$x = (x_1, \ldots, x_n) \in \mathbf{R}^n$를 $A$의 핵에 속하는 영이 아닌
+벡터라 하자. $x$의 영이 아닌 좌표 수에 대한 귀납법으로 $x$가 (1),
+(2)를 만족하는 $x_I$들의 생성공간에 속함을 보이겠다.
+$I \subset \{1, \ldots, n\}$를 $|x_r|$가 최대인 지표 $r$들의 집합이라
+하자. $r \in I$에 대해
+$$
+|a_{rr} x_r| = |\sum\nolimits_{k \not = r} a_{rk}x_k| \leq
+\sum\nolimits_{k \not = r} a_{rk}|x_k| \leq
+|x_r| \sum\nolimits_{k \not = r} a_{rk} \leq |a_{rr}||x_r|
+$$
+이다. 따라서 모든 곳에서 등호가 성립한다. 특히 $r \in I$이고
+$k \not \in I$이면 $a_{rk}=0$이며, $r \in I$에 대해
+(\ref{models-equation-ineq})에서 등호가 성립한다. 이제 $x$에서 $x_I$의
+적절한 배수를 빼면 영이 아닌 좌표의 수를 줄일 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-recurring-symmetric-real}
+$A = (a_{ij})$를 $i \not = j$일 때 $a_{ij}\geq0$인 대칭 실
+$n\times n$ 행렬이라 하자. $m_i>0$인 실벡터
+$m=(m_1,\ldots,m_n)$를 택하고 다음을 가정하자.
+\begin{enumerate}
+\item $Am = 0$,
+\item $i \in I$, $j \not \in I$이면 $a_{ij}=0$이 되는 공집합이 아닌
+진부분집합 $I \subset \{1, \ldots, n\}$는 존재하지 않는다.
+\end{enumerate}
+그러면 $x^tAx\leq0$이고, 등호가 성립할 필요충분조건은 어떤
+$q \in \mathbf{R}$에 대해 $x=qm$인 것이다.
+\end{lemma}
+
+\begin{proof}[첫째 증명]
+$a_{ij}$를 $a_{ij}m_im_j$로 바꾸어 모든 $i$에 대해 $m_i=1$이라
+가정해도 된다. 조건 (1)은 모든 $i$에 대해
+$-a_{ii}=\sum_{j\not=i}a_{ij}$라는 뜻이다.
+$x^tAx=\sum_{i,j}x_ia_{ij}x_j$임을 상기하면
+\begin{align*}
+\sum\nolimits_{i \not = j} -a_{ij}(x_j - x_i)^2 & =
+\sum\nolimits_{i \not = j} -a_{ij}x_j^2 + 2a_{ij}x_ix_i - a_{ij}x_i^2 \\
+& =
+\sum\nolimits_j a_{jj} x_j^2 +
+\sum\nolimits_{i \not = j} 2a_{ij}x_ix_i +
+\sum\nolimits_j a_{jj} x_i^2 \\
+& = 2x^tAx
+\end{align*}
+이고, 이는 분명 $\leq0$이다. 등호가 성립한다고 하자. $I$를
+% P07-KO55-ERR-001: frozen source appears to require I empty here, but says I is the full set; translated canonically without silent repair.
+$x_i \not = x_1$인 지표 $i$들의 집합이라 하면 $i \in I$,
+$j \not \in I$일 때 $a_{ij}=0$이다. 따라서 조건 (2)에 의해
+$I = \{1, \ldots, n\}$이어야 하므로
+$x$는 $m=(1,\ldots,1)$의 배수이다.
+\end{proof}
+
+\begin{proof}[둘째 증명]
+스펙트럼 정리에 의해 행렬 $A$의 고윳값은 실수이다. 모든 고윳값이
+$\leq0$임을 보이자. 조건 (1)은 모든 $i$에 대해
+$-a_{ii}m_i=\sum_{j\not=i}a_{ij}m_j$라는 뜻이므로, $\lambda>0$일 때
+행렬 $A'=A-\lambda I$는 모든 $i$에 대해
+$|a'_{ii}m_i|>\sum a'_{ij}m_j=\sum|a'_{ij}m_j|$를 만족한다.
+따라서 보조정리 \ref{models-lemma-recurring}에 의해 $A'$는 가역이다.
+그러므로 대칭 쌍선형 형식 $x^tAy$는 반음의 정부호, 즉 모든 $x$에 대해
+$x^tAx\leq0$이다. 이에 따라 $A$의 핵은 $x^tAx=0$인 벡터 $x$들의
+집합과 같다. 보조정리 \ref{models-lemma-recurring-real}의 핵에 대한 기술로
+마지막 주장을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-orthogonal-direct-sum}
+정수값 대칭 쌍선형 양의 정부호 형식
+$\langle\ ,\ \rangle:L\times L\to\mathbf Z$가 주어진 유한 자유
+$\mathbf Z$-가군 $L$을 생각하자. $L/A$가 꼬임 없는 부분가군
+$A\subset L$을 택하고
+$B = \{b \in L \mid \langle a, b\rangle = 0,\ \forall a \in A\}$.
+라 두자. 그러면 단사 사상
+$$
+A^\#/A \leftarrow L/(A \oplus B) \rightarrow B^\#/B
+$$
+이 있고, 그 여핵들은 $L^\#/L$의 몫이다. 여기서
+$A^\# = \{a' \in A \otimes \mathbf{Q} \mid
+\langle a, a'\rangle \in \mathbf{Z},\ \forall a \in A\}$
+이며 $B$와 $L$에 대해서도 마찬가지로 정의한다.
+\end{lemma}
+
+\begin{proof}
+$A$ 위에서 형식이 비퇴화이므로(양의 정부호성에 의해)
+$L \otimes \mathbf{Q} = A \otimes \mathbf{Q} \oplus B \otimes \mathbf{Q}$
+이다. 사영을 $\pi_B:L\otimes\mathbf Q\to B\otimes\mathbf Q$라 쓰자.
+형식이 정수값이므로 $x\in L$에 대해 $\pi_B(x)\in B^\#$이다.
+따라서 완전열
+$$
+0 \to A \to L \xrightarrow{\pi_B} B^\# \to Q \to 0
+$$
+을 얻는다. 여기서 $Q$는 $L\to B^\#$의 여핵이다. 사상
+$L^\#\to B^\#$는 $\mathbf Z$-가군 사상으로 분할되는 $B\to L$의
+$\mathbf Z$-선형 쌍대이므로 전사이다. 따라서 $Q$는 $L^\#/L$의 몫이다.
+$A\oplus B$로 나누면 짧은 완전열
+$$
+0 \to L/(A \oplus B) \to B^\#/B \to Q \to 0
+$$
+을 얻으며, 이것으로 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-coker}
+정수값 대칭 쌍선형 양의 정부호 형식
+$\langle\ ,\ \rangle:L_i\times L_i\to\mathbf Z$가 주어진 유한 자유
+$\mathbf Z$-가군 $L_0$, $L_1$을 생각하자. $\langle\ ,\ \rangle$에 관해
+서로 수반인 사상
+$\text d:L_0\to L_1$, $\text d^*:L_1\to L_0$이 주어졌다고 하자.
+$L_0$ 위의 형식이 유니모듈러이면 동형
+$$
+\Phi :
+\Coker(\text{d}^*\text{d})_{torsion}
+\longrightarrow
+\Im(\text{d})^\#/\Im(\text{d})
+$$
+이 존재한다. 표기는 보조정리 \ref{models-lemma-orthogonal-direct-sum}와 같다.
+\end{lemma}
+
+\begin{proof}
+$x\in L_0$가 $\Coker(\text d^*\text d)$의 꼬임류를 나타내는 원소라
+하자. 어떤 $a>0$에 대해 $ax=\text d^*\text d(y)$로 쓸 수 있다.
+$z=\text d(y')$인 임의의 $z\in\Im(\text d)$에 대해
+$$
+\langle (1/a)\text{d}(y), z \rangle =
+\langle (1/a)\text{d}(y), \text{d}(y') \rangle =
+\langle x, y' \rangle \in \mathbf{Z}
+$$
+이다. 따라서 $(1/a)\text d(y)\in\Im(\text d)^\#$이다.
+$\Phi(x)=(1/a)\text d(y)\bmod\Im(\text d)$로 정의한다.
+$\Phi$가 잘 정의되고 가법적이며 단사라는 증명은 생략한다.
+
+\medskip\noindent
+$\Phi$의 전사성을 보이기 위해 $z\in\Im(\text d)^\#$를 택하자.
+$z$는 $x\mapsto\langle z,\text d(x)\rangle$에 의해 선형 사상
+$L_0\to\mathbf Z$를 정의한다. 가정에 의해 $L_0$의 짝이
+유니모듈러이므로, 모든 $x\in L_0$에 대해
+$\langle x',x\rangle=\langle z,\text d(x)\rangle$인 $x'\in L_0$를
+찾을 수 있다. 특히 $x'$는 $\Ker(\text d)$와의 짝이 영이다.
+$\Im(\text d^*\text d)\otimes\mathbf Q$가
+$\Ker(\text d)\otimes\mathbf Q$의 직교여공간이므로, $x'$는
+$\Coker(\text d^*\text d)$의 꼬임류를 정의한다. $\Phi(x')=z$임을
+보이자. 어떤 $y\in L_0$, $a>0$에 대해
+$ax'=\text d^*\text d(y)$로 쓰면, 임의의 $x\in L_0$에 대해
+$$
+\langle z, \text{d}(x)\rangle =
+\langle x', x \rangle =
+\langle (1/a)\text{d}^*\text{d}(y), x \rangle =
+\langle (1/a)\text{d}(y),\text{d}(x) \rangle
+$$
+이다. 따라서 $z=\Phi(x')$이고 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-recurring-symmetric-integer}
+$A=(a_{ij})$를 $i\ne j$일 때 $a_{ij}\geq0$인 대칭 정수
+$n\times n$ 행렬이라 하자. $m_i>0$인 정수벡터
+$m=(m_1,\ldots,m_n)$를 택하고 다음을 가정하자.
+\begin{enumerate}
+\item $Am = 0$,
+\item $i\in I$, $j\notin I$이면 $a_{ij}=0$이 되는 공집합이 아닌
+진부분집합 $I \subset \{1, \ldots, n\}$는 없다.
+\end{enumerate}
+$e$를 $i<j$이고 $a_{ij}>0$인 순서쌍 $(i,j)$의 수라 하자.
+모든 $a_{ij}$ 및 $m_i$와 서로소인 소수 $\ell$에 대해
+$$
+\dim_{\mathbf{F}_\ell}(\Coker(A)[\ell]) \leq 1 - n + e
+$$
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{models-lemma-recurring-symmetric-real}에 의해 $A$의 계수는
+$n-1$이다. 합성
+$$
+\mathbf{Z}^{\oplus n} \xrightarrow{\text{diag}(m_1, \ldots, m_n)}
+\mathbf{Z}^{\oplus n} \xrightarrow{(a_{ij})}
+\mathbf{Z}^{\oplus n} \xrightarrow{\text{diag}(m_1, \ldots, m_n)}
+\mathbf{Z}^{\oplus n}
+$$
+의 행렬은 $a_{ij}m_im_j$이다. $\ell$에 대한 가정에 의해 첫째와 마지막
+사상의 여핵은 그 위수가 $\ell$과 서로소인 꼬임군이므로, 성분이
+$a_{ij}m_im_j$인 행렬에 대해 보조정리를 증명하면 충분하다. 따라서
+$m=(1,\ldots,1)$이라 가정해도 된다.
+
+\medskip\noindent
+$m=(1,\ldots,1)$이라 가정하자. $V=\{1,\ldots,n\}$ 및
+$E=\{(i,j)\mid i<j\text{이고 }a_{ij}>0\}$라 두자.
+$e=(i,j)\in E$에 대해 $a_e=a_{ij}$라 하고,
+$s(i,j)=i$, $t(i,j)=j$로 사상 $s,t:E\to V$를 정의한다. 또한
+$\mathbf{Z}(V) = \bigoplus_{i \in V} \mathbf{Z}i$이고
+$\mathbf{Z}(E) = \bigoplus_{e \in E} \mathbf{Z}e$.
+$\mathbf Z(V)$와 $\mathbf Z(E)$ 위의 대칭 양의 정부호 정수값 짝을
+$$
+\langle i, i \rangle = 1\text{ (모든 }i \in V\text{에 대해)}, \quad
+\langle e, e \rangle = a_e\text{ (모든 }e \in E\text{에 대해)}
+$$
+로 정하고, 나머지 모든 짝은 영으로 둔다. 사상
+$$
+\text{d} : \mathbf{Z}(V) \to \mathbf{Z}(E), \quad
+i \longmapsto
+\sum\nolimits_{e \in E,\ s(e) = i} e - \sum\nolimits_{e \in E,\ t(e) = i} e
+$$
+및
+$$
+\text{d}^*(e) = a_e(s(e) - t(e))
+$$
+을 생각하자. 계산하면
+$$
+\langle d(x), y\rangle = \langle x, \text{d}^*(y) \rangle
+$$
+이다. 즉 $\text d$와 $\text d^*$는 서로 수반이다. 다음으로 계산하면
+\begin{align*}
+\text{d}^*\text{d}(i)
+& = 
+\text{d}^*(
+\sum\nolimits_{e \in E,\ s(e) = i} e - \sum\nolimits_{e \in E,\ t(e) = i} e) \\
+& =
+\sum\nolimits_{e \in E,\ s(e) = i} a_e(s(e) - t(e)) -
+\sum\nolimits_{e \in E,\ t(e) = i} a_e(s(e) - t(e))
+\end{align*}
+$\text d^*\text d(i)$에서 $i$의 계수는
+$$
+\sum\nolimits_{e \in E,\ s(e) = i} a_e +
+\sum\nolimits_{e \in E,\ t(e) = i} a_e = - a_{ii}
+$$
+이다. 이는 $\sum_j a_{ij}=0$이기 때문이고,
+$\text d^*\text d(i)$에서 $j\ne i$의 계수는 $-a_{ij}$이다.
+따라서 $\Coker(A)=\Coker(\text d^*\text d)$이다.
+
+\medskip\noindent
+포함
+$$
+\Im(\text{d}) \oplus \Ker(\text{d}^*) \subset \mathbf{Z}(E)
+$$
+을 생각하자. 왼쪽은 직교 직합이다.
+$\mathbf Z(E)/\Ker(\text d^*)$는 분명 꼬임이 없다.
+$\mathbf Z(E)/\Im(\text d)$도 꼬임이 없음을 보이자.
+$x=\sum x_e e\in\mathbf Z(E)$와 $a>1$이 있어 어떤
+$y=\sum y_i i\in\mathbf Z(V)$에 대해 $ax=\text d y$라 하자.
+그러면 $ax_e=y_{s(e)}-y_{t(e)}$이다. 조건 (2)에 의해 모든 $y_i$는
+법 $a$에서 같은 합동류를 갖는다. 따라서
+$y=ay'+(y_1,y_1,\ldots,y_1)$로 쓸 수 있다.
+$\text d(y_1,y_1,\ldots,y_1)=0$이므로 $x=\text d(y')$이고, 이것이
+보일 바였다.
+
+\medskip\noindent
+따라서 보조정리 \ref{models-lemma-orthogonal-direct-sum}을 적용하여 단사 사상
+$$
+\Im(\text{d})^\#/\Im(\text{d}) \leftarrow
+\mathbf{Z}(E)/(\Im(\text{d}) \oplus \Ker(\text{d}^*)) \rightarrow
+\Ker(\text{d}^*)^\#/\Ker(\text{d}^*)
+$$
+을 얻는다. 그 여핵들은 $a_e$들의 곱에 의해 소멸하며, 이 곱은
+$\ell$과 서로소이다. $\Ker(\text d^*)$는 계수 $1-n+e$인 격자이므로
+동형
+$$
+\Phi : M_{torsion} \longrightarrow \Im(\text{d})^\#/\Im(\text{d})
+$$
+의 존재만 보이면 증명이 끝난다. 이는 보조정리 \ref{models-lemma-coker}에서
+증명하였다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{수치형}
+\label{models-section-numerical-types}
+
+\noindent
+논증의 일부에서는 다음 자료구조의 조합론을 사용한다.
+
+\begin{definition}
+\label{models-definition-type}
+{\it 수치형} $T$는 자료
+$$
+n, m_i, a_{ij}, w_i, g_i
+$$
+로 주어진다. 여기서 $n \geq 1$은 정수이고 $1 \leq i, j \leq n$에 대한
+$m_i$, $a_{ij}$, $w_i$, $g_i$는 다음 조건을 만족하는 정수이다.
+\begin{enumerate}
+\item $m_i > 0$, $w_i > 0$, $g_i \geq 0$,
+\item 행렬 $A = (a_{ij})$는 대칭이고 $i \not = j$이면 $a_{ij} \geq 0$이다.
+\item $i \in I$, $j \not \in I$이면 $a_{ij} = 0$이 되는 진부분집합
+$I \subset \{1, \ldots, n\}$는 존재하지 않는다.
+\item 각 $i$에 대해 $\sum_j a_{ij}m_j = 0$이고,
+\item $w_i | a_{ij}$.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이는 다루기 다소 번거로운 구조임이 분명하지만, 매끄럽고 기하적으로 연결된
+곡선의 고유 정칙 모형의 특수 올에서 정확히 이런 구조가 나타난다. 물론
+지표의 순서를 바꾸는 것까지 동일시하여 이 형들을 다룬다.
+
+\begin{definition}
+\label{models-definition-type-equivalent}
+두 수치형 $n, m_i, a_{ij}, w_i, g_i$와
+$n', m'_i, a'_{ij}, w'_i, g'_i$에 대해 $\{1, \ldots, n\}$의 순열
+$\sigma$가 존재하여 $m_i = m'_{\sigma(i)}$,
+$a_{ij} = a'_{\sigma(i)\sigma(j)}$, $w_i = w'_{\sigma(i)}$,
+$g_i = g'_{\sigma(i)}$이면 두 형이 {\it 동치}라고 한다.
+\end{definition}
+
+\noindent
+수치형에는 종수가 있다.
+
+\begin{lemma}
+\label{models-lemma-genus}
+$n, m_i, a_{ij}, w_i, g_i$를 수치형이라 하자. 그러면 식
+$$
+g = 1 + \sum m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})
+$$
+은 정수이다.
+\end{lemma}
+
+\begin{proof}
+$g$가 정수임을 보이려면 $\sum a_{ii}m_i$가 짝수임을 보이면 된다.
+이는 다음과 같이 법 $2$로 계산하면 알 수 있다.
+\begin{align*}
+\sum\nolimits_i a_{ii} m_i 
+& \equiv
+\sum\nolimits_{i,\ m_i\text{가 홀수}} a_{ii}m_i \\
+& \equiv
+\sum\nolimits_{i,\ m_i\text{가 홀수}} \sum\nolimits_{j \not = i} a_{ij}m_j \\
+& \equiv
+\sum\nolimits_{i,\ m_i\text{가 홀수}}
+\sum\nolimits_{j \not = i,\ m_j\text{가 홀수}} a_{ij}m_j \\
+& \equiv
+\sum\nolimits_{i < j,\ m_i\text{와 }m_j\text{가 홀수}} a_{ij}(m_i + m_j) \\
+& \equiv
+0
+\end{align*}
+여기서는 $a_{ij} = a_{ji}$라는 사실과 모든 $i$에 대해
+$\sum_j a_{ij}m_j = 0$이라는 사실을 사용하였다.
+\end{proof}
+
+\begin{definition}
+\label{models-definition-genus}
+$g = 1 + \sum m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})$가 보조정리
+\ref{models-lemma-genus}의 정수이면 $n, m_i, a_{ij}, w_i, g_i$를
+{\it 종수 $g$인 수치형}이라 한다.
+\end{definition}
+
+\noindent
+아래 보조정리 \ref{models-lemma-genus-nonnegative}에서 종수가 거의 항상
+$\geq 0$임을 증명할 것이다. 그러나 음의 종수를 갖는 수치형도 존재한다.
+
+\begin{lemma}
+\label{models-lemma-irreducible}
+$n, m_i, a_{ij}, w_i, g_i$를 종수 $g$인 수치형이라 하자.
+$n = 1$이면 $a_{11} = 0$이고 $g = 1 + m_1w_1(g_1 - 1)$이다.
+또한 이런 모든 수치형은 다음과 같이 분류된다.
+\begin{enumerate}
+\item $g < 0$이면 $g_1 = 0$이고, $m_1w_1 = 1 - g$의 인수분해에
+대응하는 $n = 1$, 종수 $g$인 수치형은 유한 개뿐이다.
+\item $g = 0$이면 보조정리 \ref{models-lemma-genus-zero}에서처럼
+$m_1 = 1$, $w_1 = 1$, $g_1 = 0$이다.
+\item $g = 1$이면 $g_1 = 1$이지만 $m_1, w_1$은 임의의 양의 정수일 수
+있다. 이는 보조정리 \ref{models-lemma-genus-one}의 경우 (\ref{models-item-one})이다.
+\item $g > 1$이면 $g_1 > 1$이고, $m_1w_1(g_1 - 1) = g - 1$의
+인수분해에 대응하는 $n = 1$, 종수 $g$인 수치형은 유한 개뿐이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+주장에서 바로 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-diagonal-negative}
+$n, m_i, a_{ij}, w_i, g_i$를 종수 $g$인 수치형이라 하자.
+$n > 1$이면 모든 $i$에 대해 $a_{ii} < 0$이다.
+\end{lemma}
+
+\begin{proof}
+행렬 $A$에 보조정리 \ref{models-lemma-recurring-symmetric-real}을 적용하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-minus-one}
+$n, m_i, a_{ij}, w_i, g_i$를 종수 $g$인 수치형이라 하고
+$n > 1$이라 가정하자. 지표 $i$가 종수 $g$에 기여하는 항
+$m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})$가 $< 0$이면
+$g_i = 0$이고 $a_{ii} = -w_i$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{models-lemma-diagonal-negative}과 $w_i > 0$, $g_i \geq 0$,
+$w_i | a_{ii}$에서 즉시 따른다.
+\end{proof}
+
+\begin{definition}
+\label{models-definition-type-minus-one}
+$n, m_i, a_{ij}, w_i, g_i$를 수치형이라 하자. $g_i = 0$이고
+$a_{ii} = -w_i$이면 $i$를 {\it $(-1)$-지표}라 한다.
+\end{definition}
+
+\noindent
+$(-1)$-지표를 ``수축''할 수 있다.
+
+\begin{lemma}
+\label{models-lemma-contract}
+$n, m_i, a_{ij}, w_i, g_i$를 수치형 $T$라 하자. $n$이
+$(-1)$-지표라고 가정하자. 그러면 $n', m'_i, a'_{ij}, w'_i, g'_i$로
+주어지는 수치형 $T'$가 존재하여 다음을 만족한다.
+\begin{enumerate}
+\item $n' = n - 1$,
+\item $m'_i = m_i$,
+\item $a'_{ij} = a_{ij} - a_{in}a_{jn}/a_{nn}$,
+\item $a_{in}/w_n$이 짝수이고 $a_{in}/w_i$가 홀수이면
+$w'_i = w_i/2$이고, 그렇지 않으면 $w'_i = w_i$이다.
+\item $g'_i =
+\frac{w_i}{w'_i}(g_i - 1) + 1 + \frac{a_{in}^2 - w_na_{in}}{2w'_iw_n}$.
+\end{enumerate}
+더욱이 $g = g'$이다.
+\end{lemma}
+
+\begin{proof}
+예를 들어 보조정리 \ref{models-lemma-irreducible}에 의해 $n > 1$이고 따라서
+$n' \geq 1$이다. $n', m'_i, a'_{ij}, w'_i, g'_i$에 대해 정의
+\ref{models-definition-type}의 조건 (1)--(5)를 확인하자.
+
+\medskip\noindent
+조건 (1)은 자명하다.
+
+\medskip\noindent
+조건 (2). $A' = (a'_{ij})$의 대칭성은 자명하다. 보조정리
+\ref{models-lemma-diagonal-negative}에 의해 $a_{nn} < 0$이므로
+$i \not = j$이면 $a'_{ij} \geq a_{ij} \geq 0$이다.
+
+\medskip\noindent
+조건 (3). $i \in I$이고 $i' \in \{1, \ldots, n - 1\} \setminus I$이면
+$a'_{ii'} = 0$이 되는 $I \subset \{1, \ldots, n - 1\}$가 있다고 하자.
+그러면 각 $i \in I$, $i' \in I'$에 대해 $a_{in}a_{i'n} = 0$이다.
+따라서 모든 $i \in I$에 대해 $a_{in} = 0$이어서
+$I \subset \{1, \ldots, n\}$가 $T$의 조건 (3)에 모순되거나, 모든
+$i' \in \{1, \ldots, n - 1\} \setminus I$에 대해 $a_{i'n} = 0$이어서
+$I \cup \{n\} \subset \{1, \ldots, n\}$가 $T$의 조건 (3)에
+모순된다. 따라서 $T'$에 대해 (3)이 성립한다.
+
+\medskip\noindent
+조건 (4). 계산하면
+$$
+\sum\nolimits_{j = 1}^{n - 1} a'_{ij}m_j =
+\sum\nolimits_{j = 1}^{n - 1}
+(a_{ij}m_j - \frac{a_{in}a_{jn}m_j}{a_{nn}}) =
+- a_{in}m_n - \frac{a_{in}}{a_{nn}}(-a_{nn}m_n) = 0
+$$
+이며 원하는 결과이다.
+
+\medskip\noindent
+조건 (5). $w'_i$가 $a_{in}a_{jn}/a_{nn}$을 나눔을 보이면 된다.
+$a_{nn} = -w_n$, $w_n | a_{jn}$, $w_i | a_{in}$이므로 이는 분명하다.
+
+\medskip\noindent
+$g = g'$임을 보이기 위해 먼저
+\begin{align*}
+g
+& =
+1 + \sum\nolimits_{i = 1}^n m_i(w_i(g_i - 1) - \frac{1}{2}a_{ii}) \\
+& =
+1 + \sum\nolimits_{i = 1}^{n - 1} m_i(w_i(g_i - 1) - \frac{1}{2}a_{ii})
+-\frac{1}{2}m_nw_n \\
+& =
+1 +  \sum\nolimits_{i = 1}^{n - 1}
+m_i(w_i(g_i - 1) - \frac{1}{2}a_{ii} - \frac{1}{2}a_{in})
+\end{align*}
+$g'$의 식과 비교하면
+$$
+w'_i(g'_i - 1) - \frac{1}{2}a'_{ii} =
+w_i(g_i - 1) - \frac{1}{2}a_{in} - \frac{1}{2}a_{ii}
+$$
+가 $i \leq n - 1$에 대해 성립하면 충분하다. 다시 말해
+$$
+g'_i = \frac{2w_i(g_i - 1) - a_{in} - a_{ii} + a'_{ii} + 2w'_i}{2w'_i} =
+\frac{w_i}{w'_i}(g_i - 1) + 1 + \frac{a_{in}^2 - w_na_{in}}{2w'_iw_n}
+$$
+(4)처럼 $w'_i$를 택하면 이것이 정수 $\geq 0$임은 초등적으로 확인된다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-top-genus}
+$n, m_i, a_{ij}, w_i, g_i$를 수치형이라 하자. $e$를 $i < j$이고
+$a_{ij} > 0$인 순서쌍 $(i, j)$의 수라 하자. 그러면
+$g_{top} = 1 - n + e$는 $\geq 0$이다.
+\end{lemma}
+
+\begin{proof}
+그렇지 않으면 $e < n - 1$이고, 이는 모든 $j \not = i$에 대해
+$a_{ij} = 0$인 $i$가 존재한다는 뜻이다. 이는 정의
+\ref{models-definition-type}의 가정 (3)에 모순된다.
+\end{proof}
+
+\begin{definition}
+\label{models-definition-top-genus}
+$n, m_i, a_{ij}, w_i, g_i$를 수치형 $T$라 하자. $T$의
+{\it 위상적 종수}는 보조정리 \ref{models-lemma-top-genus}의 음이 아닌 정수
+$g_{top} = 1 - n + e$이다.
+\end{definition}
+
+\noindent
+종수를 위상적 종수로 한정하고자 한다. 그러나 보조정리
+\ref{models-lemma-irreducible}의 $n = 1$인 수치형처럼 이것이 항상 가능한 것은
+아니다. 다음과 같이 정의되는 극소 수치형에 대해서는 가능하다.
+
+\begin{definition}
+\label{models-definition-type-minimal}
+종수 $g$인 수치형 $n, m_i, a_{ij}, w_i, g_i$에 $g_i = 0$이고
+$a_{ii} = -w_i$인 $i$가 존재하지 않으면, 즉 $(-1)$-지표가 존재하지
+않으면 이 수치형을 {\it 극소}라 한다.
+\end{definition}
+
+\noindent
+$n > 1$인 극소형의 종수 $g$가 $\max(1, g_{top})$ 이상임을 증명할 것이다.
+
+\begin{lemma}
+\label{models-lemma-non-irreducible-minimal-type-genus-at-least-one}
+$n, m_i, a_{ij}, w_i, g_i$가 $n > 1$인 극소 수치형이면 $g \geq 1$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{models-lemma-minus-one}과 극소형의 정의에 의해
+$\Phi_i = m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})$가 음이 아니므로
+$g = 1 + \sum \Phi_i$이다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-genus-nonnegative}
+$n, m_i, a_{ij}, w_i, g_i$가 $n > 1$인 극소 수치형이면
+$g \geq g_{top}$이다.
+\end{lemma}
+
+\begin{proof}
+고유 정칙 모형에 결부된 수치형의 경우에만 관심 있는 독자는 이 증명을
+건너뛰어도 된다. 뒤에서 기하적 상황에 대해 다시 증명할 것이다. 다음과
+같이 쓸 수 있다.
+$$
+g_{top} = 1 - n + \frac{1}{2}\sum\nolimits_{a_{ij} > 0} 1 =
+1 + \sum\nolimits_i (-1 +
+\frac{1}{2}\sum\nolimits_{j \not = i,\ a_{ij} > 0} 1) 
+$$
+한편
+\begin{align*}
+g & =
+1 + \sum m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii}) \\
+& =
+1 + \sum m_iw_ig_i - \sum m_iw_i +
+\frac{1}{2} \sum\nolimits_{i \not = j} a_{ij}m_j \\
+& =
+1 + \sum\nolimits_i
+m_iw_i(-1 + g_i + \frac{1}{2} \sum\nolimits_{j \not = i} \frac{a_{ij}}{w_i})
+\end{align*}
+첫째 등식은 정의이고, 둘째 등식에는 $\sum a_{ij}m_j = 0$을 사용했으며,
+마지막 등식에는 $a_{ij} = a_{ji}$와 합의 순서 교환을 사용했다.
+$g_{top}$의 식과 비교하면
+$$
+\Psi_i =
+m_iw_i(-1 + g_i + \frac{1}{2} \sum\nolimits_{j \not = i} \frac{a_{ij}}{w_i})
+- (-1 + \frac{1}{2}\sum\nolimits_{j \not = i,\ a_{ij} > 0} 1)
+$$
+가 각 $i$에 대해 $\geq 0$이면 보조정리가 성립한다. 그러나 이것이 항상
+성립하지는 않는다. 어떤 지표에 대해 $\Psi_i < 0$이 가능한지 분석하자.
+먼저
+$$
+(-1 + g_i + \frac{1}{2}\sum\nolimits_{j \not = i} \frac{a_{ij}}{w_i}) \geq
+(-1 + \frac{1}{2}\sum\nolimits_{j \not = i,\ a_{ij} > 0} 1)
+$$
+이다. 이는 $a_{ij}/w_i$가 음이 아닌 정수이기 때문이다. $m_iw_i$가
+양의 정수이므로, $m_iw_i = 1$이거나 위 부등식의 왼쪽이 $\geq 0$이면
+$\Psi_i \geq 0$이다. 후자는 $g_i > 0$이거나 적어도 두 지표 $j$에 대해
+$a_{ij} > 0$이거나 $a_{ij} > w_i$인 $j$가 있을 때 성립한다. 따라서
+$$
+P = \{i : \Psi_i < 0\}
+$$
+는 $m_iw_i > 1$, $g_i = 0$이고, 유일한 $j$에 대해 $a_{ij} > 0$이며
+그 $j$에 대해 $a_{ij} = w_i$인 지표 $i$들의 집합이다. 더욱이
+$$
+i \in P \Rightarrow \Psi_i = \frac{1}{2}(-m_iw_i + 1)
+$$
+증명의 전략은 $i \in P$가 주어졌을 때 $i$의 이웃, 즉 $a_{ij} > 0$인
+$j$의 $\Psi_j$에서 조금을 빌릴 수 있음을 보이는 것이다. 다만
+$\Psi_j = 0$인 지표 $j$일 수도 있어 이 전략이 그대로 작동하지는 않는다.
+
+\medskip\noindent
+집합
+$$
+Z = \{j : g_j = 0\text{이고 }
+j\text{는 정확히 두 이웃 }i, k\text{를 가지며 }
+a_{ij} = w_j = a_{jk}\}
+$$
+을 생각하자. $j \in Z$에 대해 $\Psi_j = 0$이다. $s \geq 0$,
+$i \in P$, $j_1, \ldots, j_s \in Z$이고
+$a_{ij_1} > 0, a_{j_1j_2} > 0, \ldots, a_{j_{s - 1}j_s} > 0$인 수열
+$M = (i, j_1, \ldots, j_s)$을 생각한다. 수치형이 $P$에 속한 두 지표로만
+이루어지거나, 더 일반적으로 $P$에 속한 두 지표와 $Z$에 속한 나머지 모든
+지표로 이루어지면 $g_{top} = 0$이고 보조정리
+\ref{models-lemma-non-irreducible-minimal-type-genus-at-least-one}로 결론을 얻는다.
+따라서 이런 경우는 제외해도 되고 실제로 제외한다.
+
+\medskip\noindent
+극대 수열 $M = (i, j_1, \ldots, j_s)$을 택하고 $k$를 $j_s$의 둘째
+이웃이라 하자. ($s = 0$이면 $k$는 $i$의 유일한 이웃이다.) 극대성에
+의해 $k \not \in Z$이고, 방금 논의에 의해 $k \not \in P$이다. 또한
+$w_i = a_{ij_1} = w_{j_1} = a_{j_1j_2} = \ldots = w_{j_s} =
+a_{j_sk}$이다. 수치형의 정의를 보면
+\begin{align*}
+m_ia_{ii} + m_{j_1}w_i & = 0,\\
+m_iw_i + m_{j_1}a_{j_1j_1} + m_{j_2}w_i & = 0,\\
+\ldots & \ldots \\
+m_{j_{s - 1}}w_i + m_{j_s}a_{j_sj_s} + m_kw_i & = 0
+\end{align*}
+첫째 등식과 수치형의 극소성으로부터 $m_{j_1} \geq 2m_i$를 얻는다.
+이어서 둘째 등식으로부터 $m_{j_2} \geq 3m_i$를 얻으며 같은 방식으로
+계속한다. 어느 경우든 ($s = 0$인 경우도 포함하여) $m_k \geq 2m_i$이다.
+
+\medskip\noindent
+$t > 0$과 위와 같은 서로 다른 극대 수열 $M_1, \ldots, M_t$가 있어,
+$M_b = (i_b, j_{b, 1}, \ldots, j_{b, s_b})$이고 각
+$b = 1, \ldots, t$에 대해 $k$가 $j_{b, s_b}$의 이웃이 되는 지표 $k$를
+택하자. $\Phi_j + \sum_{b = 1, \ldots, t} \Phi_{i_b} \geq 0$임을 보이겠다.
+그러면 앞의 논의로 보조정리의 증명이 끝난다. $M$을
+$b = 1, \ldots, t$에 대해 $M_b$에 나타나는 지표들의 합집합이라 하자.
+다음과 같이 쓴다.
+$$
+\Psi_k =
+-\sum\nolimits_{b = 1, \ldots, t} \Psi_{i_b} + \Psi_k'
+$$
+여기서
+\begin{align*}
+\Psi_k' & =
+m_kw_k\left(-1 + g_k +
+\frac{1}{2} \sum\nolimits_{b = 1, \ldots t}
+(\frac{a_{kj_{b, s_b}}}{w_k} - \frac{m_{i_b}w_{i_b}}{m_kw_k}) +
+\frac{1}{2} \sum\nolimits_{l \not = k,\ l \not \in M}
+\frac{a_{kl}}{w_k}
+\right) \\
+&
+-\left(
+-1 + \frac{1}{2}\sum\nolimits_{l \not = k,\ l \not \in M,\ a_{kl} > 0} 1
+\right)
+\end{align*}
+모순을 얻기 위해 $\Psi_k' < 0$이라 가정하자. 집합
+$\{l : l \not = k,\ l \not \in M,\ a_{kl} > 0\}$이 비어 있으면
+$\{1, \ldots, n\} = M \cup \{k\}$이고, 이 경우 $e = n - 1$이므로
+$g_{top} = 0$이다. 따라서 보조정리
+\ref{models-lemma-non-irreducible-minimal-type-genus-at-least-one}로 결과가
+따른다. 그러므로 이런 $l$이 적어도 하나 있으며, 첫째 괄호 안의 합에
+$(1/2)a_{kl}/w_k \geq 1/2$를 기여한다고 가정해도 된다. 각
+$b = 1, \ldots, t$에 대해
+$$
+\frac{a_{kj_{b, s_b}}}{w_k} - \frac{m_{i_b}w_{i_b}}{m_kw_k} =
+\frac{w_{i_b}}{w_k}(1 - \frac{m_{i_b}}{m_k})
+$$
+이다. 앞 문단의 $m_k \geq 2m_{i_b}$ 때문에 이 식은
+$\geq \frac{1}{2}$이고, $w_k < w_{i_b}$이면 $\geq 1$이다. 따라서
+$\Psi_k' < 0$이면 $g_k = 0$이다. $t \geq 2$이거나 $t = 1$이고
+$w_k < w_{i_1}$이면, 위에서 보인 $l$의 존재를 사용하여
+$\Psi_k' \geq 0$을 얻는데 이 역시 모순이다. 따라서 $t = 1$이고
+$w_k = w_{i_1}$이다. $l$에 대한 합에 영이 아닌 항이 적어도 두 개 있거나
+그런 $k$가 하나이고 $a_{kl} > w_k$이면 역시 $\Psi_k' \geq 0$이다.
+남은 가능성은 $t = 1$이고 $a_{kl} = w_k$인 $l$이 하나뿐인 경우이다.
+그러나 이는 $k \in Z$를 뜻하여 $M_1$의 극대성과 모순되므로 허용되지 않는다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-minus-two}
+$n, m_i, a_{ij}, w_i, g_i$를 종수 $g$인 수치형이라 하고
+$n > 1$이라 가정하자. 지표 $i$가 종수 $g$에 기여하는 항
+$m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})$가 $0$이면
+$g_i = 0$이고 $a_{ii} = -2w_i$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{models-lemma-diagonal-negative}과 $w_i > 0$, $g_i \geq 0$,
+$w_i | a_{ii}$에서 즉시 따른다.
+\end{proof}
+
+\noindent
+이 관계를 만족하는 지표는 극소 수치형의 구조에서 중요한 역할을 한다.
+따라서 이들에게 이름을 붙인다.
+
+\begin{definition}
+\label{models-definition-type-minus-two}
+$n, m_i, a_{ij}, w_i, g_i$를 종수 $g$인 수치형이라 하자.
+$g_i = 0$이고 $a_{ii} = -2w_i$이면 $i$를 {\it $(-2)$-지표}라 한다.
+\end{definition}
+
+\noindent
+종수 $g$인 극소 수치형이 주어졌을 때 $(-2)$-지표는 정확히 식
+$$
+g = 1 + \sum m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})
+$$
+에서 종수에 양수를 기여하지 않는 지표들이다. 따라서 뒤에서 보듯이
+$(-2)$-지표에 결부된 양들을 한정하는 일은 다소 까다롭다.
+
+\begin{remark}
+\label{models-remark-genus-equality}
+$n, m_i, a_{ij}, w_i, g_i$를 $n > 1$인 극소 수치형이라 하자.
+보조정리 \ref{models-lemma-genus-nonnegative}에서 등식 $g = g_{top}$이 성립할
+수 있다. 예를 들어 모든 $i$에 대해 $m_i = w_i = 1$, $g_i = 0$이고
+$i < j$에 대해 $a_{ij} \in \{0, 1\}$인 경우가 그렇다.
+\end{remark}
+
+
+\section{수치형의 Picard 군}
+\label{models-section-picard-group}
+
+\noindent
+정의는 다음과 같다.
+
+\begin{definition}
+\label{models-definition-picard-group}
+$n, m_i, a_{ij}, w_i, g_i$를 수치형 $T$라 하자. $T$의
+{\it Picard 군}은 행렬 $(a_{ij}/w_i)$의 여핵, 더 정확히는
+$$
+\Pic(T) =
+\Coker\left(
+\mathbf{Z}^{\oplus n} \to \mathbf{Z}^{\oplus n},\quad
+e_i
+\mapsto
+\sum \frac{a_{ij}}{w_j}e_j
+\right)
+$$
+이다. 여기서 $e_i$는 $\mathbf{Z}^{\oplus n}$의 $i$번째 표준기저 벡터이다.
+\end{definition}
+
+\begin{lemma}
+\label{models-lemma-picard-rank-1}
+$n, m_i, a_{ij}, w_i, g_i$를 수치형 $T$라 하자. $T$의 Picard 군은
+계수 $1$인 유한 생성 아벨군이다.
+\end{lemma}
+
+\begin{proof}
+$n = 1$이면 $A = (a_{ij})$는 영행렬이므로 결과는 분명하다.
+$n > 1$이면 보조정리 \ref{models-lemma-recurring-real} 또는 보조정리
+\ref{models-lemma-recurring-symmetric-real}에 의해 행렬 $A$의 계수는 $n - 1$이다.
+행들을 $1/w_i$배 하여도 계수는 변하지 않는다. 이것으로 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-picard-T-and-A}
+$n, m_i, a_{ij}, w_i, g_i$를 수치형 $T$라 하자. $A = (a_{ij})$라 하면
+$\Pic(T) \subset \Coker(A)$이다.
+\end{lemma}
+
+\begin{proof}
+$\Pic(T)$가 $(a_{ij}/w_i)$의 여핵이므로 가환 그림
+$$
+\xymatrix{
+0 \ar[r] &
+\mathbf{Z}^{\oplus n} \ar[rr]_A & &
+\mathbf{Z}^{\oplus n} \ar[rr] & &
+\Coker(A) \ar[r] & 0 \\
+0 \ar[r] &
+\mathbf{Z}^{\oplus n} \ar[rr]^{(a_{ij}/w_i)} \ar[u]_{\text{id}} & &
+\mathbf{Z}^{\oplus n} \ar[rr] \ar[u]_{\text{diag}(w_1, \ldots, w_n)} & &
+\Pic(T) \ar[r] \ar[u] & 0
+}
+$$
+이 있고 각 행은 완전하다. 뱀 보조정리에 의해
+$\Pic(T) \subset \Coker(A)$이다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-contract-picard-group}
+$n, m_i, a_{ij}, w_i, g_i$를 수치형 $T$라 하고 $n$이 $(-1)$-지표라고
+가정하자. $T'$을 보조정리 \ref{models-lemma-contract}에서 구성한 수치형이라
+하자. 단사 사상
+$$
+\Pic(T) \to \Pic(T')
+$$
+이 존재하고, 그 여핵은 초등 아벨 $2$-군이다.
+\end{lemma}
+
+\begin{proof}
+$n' = n - 1$임을 상기하자. $e_i$와 $e'_i$를 각각
+$\mathbf{Z}^{\oplus n}$과 $\mathbf{Z}^{\oplus n - 1}$의 $i$번째 기저
+벡터라 하자. 먼저
+$$
+q : \mathbf{Z}^{\oplus n} \to \mathbf{Z}^{\oplus n - 1},
+\quad e_n \mapsto 0\text{이고 }e_i \mapsto e'_i\text{ (}i \leq n - 1\text{)}
+$$
+라 쓰고
+$$
+p : \mathbf{Z}^{\oplus n} \to \mathbf{Z}^{\oplus n - 1},\quad
+e_n \mapsto \sum\nolimits_{j = 1}^{n - 1} \frac{a_{nj}}{w'_j} e'_j
+\text{이고 }
+e_i \mapsto \frac{w_i}{w'_i} e'_i\text{ (}i \leq n - 1\text{)}
+$$
+라 둔다. 생략하는 계산으로부터 가환 그림
+$$
+\xymatrix{
+\mathbf{Z}^{\oplus n} \ar[rr]_{(a_{ij}/w_i)} \ar[d]_q & &
+\mathbf{Z}^{\oplus n} \ar[d]^p \\
+\mathbf{Z}^{\oplus n'} \ar[rr]^{(a'_{ij}/w'_i)} & &
+\mathbf{Z}^{\oplus n'}
+}
+$$
+이 있음을 알 수 있다. 위 화살표의 여핵이 $\Pic(T)$이고 아래 화살표의
+여핵이 $\Pic(T')$이므로 원하는 Picard 군 준동형을 얻는다.
+$\frac{w_i}{w'_i} \in \{1, 2\}$이므로 $\Pic(T) \to \Pic(T')$의 여핵은
+$2$에 의해 소멸한다. 실제로 모든 $i \leq n - 1$에 대해 $2e'_i$는
+$p$의 상에 속한다. 마지막으로 $\Pic(T) \to \Pic(T')$가 단사임을 보이자.
+$L = (l_1, \ldots, l_n)$을 $\Pic(T')$에서 영으로 가는 $\Pic(T)$ 원소의
+대표라 하자. $q$가 전사이므로 그림 추적으로 $L$이 $p$의 핵에 속한다고
+가정할 수 있다. 이는 $l_na_{ni}/w'_i + l_iw_i/w'_i = 0$, 즉
+$l_i = - a_{ni}/w_i l_n$이라는 뜻이다. 따라서 $L$은 사상
+$(a_{ij}/w_j)$ 아래에서 $-l_ne_n$의 상이고 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-picard-group-genus-nonpositive}
+$n, m_i, a_{ij}, w_i, g_i$를 수치형 $T$라 하자. $T$의 종수 $g$가
+$\leq 0$이면 $\Pic(T) = \mathbf{Z}$이다.
+\end{lemma}
+
+\begin{proof}
+$n$에 대한 귀납법을 쓴다. $n = 1$이면 주장은 분명하다. $n > 1$이면
+보조정리 \ref{models-lemma-non-irreducible-minimal-type-genus-at-least-one}에
+의해 $T$는 극소가 아니다. $T$를 동치인 형으로 바꾸어 $n$이
+$(-1)$-지표라고 가정할 수 있다. 보조정리
+\ref{models-lemma-contract-picard-group}에 의해 $\Pic(T) \subset \Pic(T')$이다.
+보조정리 \ref{models-lemma-contract}에 의해 $T'$의 종수는 $T$의 종수와 같으므로
+귀납가정으로 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{진부분그래프의 분류}
+\label{models-section-classify-proper-subgraphs}
+
+\noindent
+이 절에서는 종수 $g$인 수치형 $n, m_i, a_{ij}, w_i, g_i$가 주어졌다고
+가정한다. $(-2)$-지표(정의 \ref{models-definition-type-minus-two})들로만 이루어진
+가능한 ``부분그래프''의 완전한 목록을 찾는 동시에 종수 $1$인 모든 극소
+수치형을 분류한다. 다시 말해 이 절에서는 명제
+\ref{models-proposition-classify-subgraphs}와 보조정리 \ref{models-lemma-genus-one}을
+증명한다.
+
+\medskip\noindent
+전략은 다음과 같다. 종수 $g$인 수치형 $n, m_i, a_{ij}, w_i, g_i$를
+택하자. $I \subset \{1, \ldots, n\}$를 $(-2)$-지표들로 이루어진
+부분집합으로서, $j \in J$, $j' \in I \setminus J$일 때
+$a_{jj'} = 0$이 되는 공집합이 아닌 진부분집합 $J \subset I$가 없다고 하자.
+$I$의 크기 $|I|$에 대해 귀납한다. $I = \{i\}$가 $1$개의 지표로 이루어진
+경우 $m_i$, $a_{ii}$, $w_i$에 대한 제약은 정의
+\ref{models-definition-type}의 $w_i | a_{ii}$와 보조정리
+\ref{models-lemma-diagonal-negative}의 $a_{ii} < 0$뿐이며, 이를 시작 경우로
+삼는다. 귀납 단계에서는 먼저 $|I'| < |I|$인 부분집합 $I' \subset I$에
+귀납가정을 적용한다. 이로부터 $i, j \in I$에 대한 가능한
+$m_i, a_{ij}, w_i$에 제약이 생긴다. 특히 $|I'| < |I| \leq n$이므로
+$\sum a_{ij}m_j = 0$과 보조정리 \ref{models-lemma-recurring-symmetric-real}에서
+부분행렬 $(a_{ij})_{i, j \in I'}$가 음의 정부호이고 그 행렬식의 부호가
+$(-1)^m$임이 따른다. 남은 각 가능성에 대해 $(a_{ij})_{i, j \in I}$의
+행렬식을 계산한다. 그 부호가 $-(-1)^{|I|}$이면 Sylvester 정리에 의해
+$(a_{ij})_{i, j \in I}$가 반음의 정부호가 아니므로 이 경우를 버릴 수
+있다. 행렬식의 부호가 $(-1)^{|I|}$이면 $|I| < n$이고, 이 경우가 가능한
+진부분그래프로 나타날 수 있다고 잠정적으로 결론내려 이 절의 보조정리 중
+하나에 기록한다. 행렬식이 $0$이면 보조정리
+\ref{models-lemma-recurring-symmetric-real}에 의해 $|I| = n$이어야 하고
+$g = 0$이다. 이 경우에는 $i, j \in I$에 대한 가능한 모든
+$m_i, a_{ij}, w_i$를 실제로 찾아 보조정리 \ref{models-lemma-genus-one}에
+열거한다. 논증을 마치면 $n > 1$이고 종수 $1$인 모든 극소 수치형을
+얻는다. 종수 공식과 앞 절의 논의에 의해 각각이 반드시 $(-2)$-지표로만
+이루어져 귀납 과정에 나타나기 때문이다. 마지막으로 보조정리
+\ref{models-lemma-genus-one}의 가능성 목록을 살펴보면 이 절에서 가능하다고
+열거한 진부분그래프의 모든 배치가 실제로 종수 $1$인 수치형에서 이미
+나타남을 확인할 수 있다.
+
+\medskip\noindent
+$i$와 $j$가 $a_{ij} > 0$인 $(-2)$-지표라고 하자. 보조정리
+\ref{models-lemma-recurring-symmetric-real}에 의해 행렬 $A = (a_{ij})$가
+반음의 정부호이므로 행렬
+$$
+\left(
+\begin{matrix}
+-2w_i & a_{ij} \\
+a_{ij} & -2w_j
+\end{matrix}
+\right)
+$$
+는 $n = 2$가 아닌 한 음의 정부호이다. $n = 2$인 경우도 가능하며, 이때
+행렬식 $4w_1w_2 - a_{12}^2$는 영이다. $\text{lcm}(w_1, w_2)$이
+$a_{12}$를 나눈다는 사실을 사용하면 가능한 경우가
+$$
+(w_1, w_2, a_{12}) = (w, w, 2w), (w, 4w, 4w), \text{ 또는 }(4w, w, 4w)
+$$
+뿐임을 쉽게 알 수 있다. $(4w, w, 4w)$인 경우는 $(w, 4w, 4w)$인
+경우에서 지표 $i, j$를 서로 바꾸어 얻는다. 이 경우들에는 $g = 1$이고,
+보조정리 \ref{models-lemma-genus-one}의 경우 (\ref{models-item-two-cycle})와
+(\ref{models-item-up4})를 얻는다. $n > 2$라 가정하면 표시된 행렬의 행렬식
+$4w_iw_j - a_{ij}^2$가 $> 0$이므로 $a_{ij}^2/w_iw_j < 4$이다. 한편
+$\text{lcm}(w_i, w_j) | a_{ij}$임을 알고 있으므로
+$a_{ij}^2/w_iw_j$는 정수이다. 따라서 $a_{ij}^2/w_iw_j \in \{1, 2, 3\}$이고
+$w_i | w_j$이거나 그 반대이다. 이에 따라 가능한 경우는
+$$
+(w_1, w_2, a_{12}) = (w, w, w), (w, 2w, 2w), (w, 3w, 3w),
+(2w, w, 2w), \text{ 또는 }(3w, w, 3w)
+$$
+이다. $(2w, w, 2w)$인 경우는 $(w, 2w, 2w)$인 경우에서 지표 $i,j$를
+바꾸어 얻으며, $(3w, w, 3w)$와 $(w, 3w, 3w)$도 마찬가지이다.
+처음 세 해는 보조정리 \ref{models-lemma-two-by-two}의 경우 (\ref{models-item-A2}),
+(\ref{models-item-B2}), (\ref{models-item-G2})를 준다. 이 보조정리에서는 각 $k$에
+대한 $\sum_l a_{kl}m_l = 0$이 특히 $k = i$에 대해
+$a_{ii}m_i + a_{ij}m_j \leq 0$, $k = j$에 대해
+$a_{ij}m_i + a_{jj}m_j \leq 0$을 함의한다는 사실로부터 정수
+$m_i$와 $m_j$에 대한 결과도 명시하였다.
+
+\begin{lemma}
+\label{models-lemma-two-by-two}
+다음 형태의 진부분그래프를 분류한다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet
+}
+$$
+$n > 2$이고 $a_{ij} > 0$인 $(-2)$-지표의 쌍 $i,j$가 주어지면,
+순서를 바꾸는 것까지 동일시하여 $m$들, $a$들, $w$들은 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-A2}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w \\
+w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w
+\end{matrix}
+\right)
+$$
+$w$는 임의이며 $2m_1 \geq m_2$이고 $2m_2 \geq m_1$이다. 또는
+\item
+\label{models-item-B2}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w \\
+2w & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w
+\end{matrix}
+\right)
+$$
+$w$는 임의이며 $m_1 \geq m_2$이고 $2m_2 \geq m_1$이다. 또는
+\item
+\label{models-item-G2}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 3w \\
+3w & -6w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+3w
+\end{matrix}
+\right)
+$$
+$w$는 임의이며 $2m_1 \geq 3m_2$이고 $2m_2 \geq m_1$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$i$, $j$, $k$가 $a_{ij} > 0$, $a_{jk} > 0$인 세 $(-2)$-지표라고 하자.
+다시 말해 지표 $i$는 $j$와 ``만나고'' $j$는 $k$와 ``만난다''.
+각 쌍 $(i, j)$, $(i, k)$, $(j, k)$가 보조정리 \ref{models-lemma-two-by-two}의
+목록 중 하나라는 사실을 이후 별도 언급 없이 사용한다. 보조정리
+\ref{models-lemma-recurring-symmetric-real}에 의해 행렬 $A = (a_{ij})$가
+반음의 정부호이므로 행렬
+$$
+\left(
+\begin{matrix}
+-2w_i & a_{ij} & a_{ik} \\
+a_{ij} & -2w_j & a_{jk} \\
+a_{ik} & a_{jk} & -2w_k
+\end{matrix}
+\right)
+$$
+은 $n = 3$이 아닌 한 음의 정부호이다. $n = 3$인 경우도 가능하다.
+이때 행렬식\footnote{그 값은
+$-8w_iw_jw_k + 2a_{ij}^2w_k + 2a_{jk}^2w_i + 2a_{ik}^2w_j +
+2a_{ij}a_{jk}a_{ik}$이다.}은 영이고 방정식
+$$
+4 = \frac{a_{ij}^2}{w_iw_j} +
+\frac{a_{jk}^2}{w_jw_k} +
+\frac{a_{ik}^2}{w_iw_k} +
+\frac{a_{ij}a_{ik}a_{jk}}{w_iw_jw_k}
+$$
+을 얻는다. 이 방정식 오른쪽의 마지막 항은 다음 등식 때문에 나머지
+항들에 의해 결정된다.
+$$
+\left(\frac{a_{ij}a_{ik}a_{jk}}{w_iw_jw_k}\right)^2 =
+\frac{a_{ij}^2}{w_iw_j} \frac{a_{jk}^2}{w_jw_k} \frac{a_{ik}^2}{w_iw_k}
+$$
+위에서
+$\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}$는
+$\{1, 2, 3\}$에 속하고 $\frac{a_{ik}^2}{w_iw_k}$는
+$\{0, 1, 2, 3\}$에 속함을 보았으므로 가능한 경우는
+$$
+(\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}, \frac{a_{ik}^2}{w_iw_k}) =
+(1, 1, 1), (1, 3, 0), (2, 2, 0),\text{ 또는 } (3, 1, 0)
+$$
+뿐이다. $(3, 1, 0)$인 경우는 $(1, 3, 0)$인 경우에서 지표 $i,j,k$의
+순서를 뒤집어 얻는다. 각 경우에 $g = 1$이며, 보조정리
+\ref{models-lemma-genus-one}의 경우 (\ref{models-item-three-cycle}),
+(\ref{models-item-equal-up3}), (\ref{models-item-equal-down3}), (\ref{models-item-up-up}),
+(\ref{models-item-up-down}), (\ref{models-item-down-up})에서 찾을 수 있다. 이 가운데
+하나는 $(1, 1, 1)$에, 둘은 $(1, 3, 0)$에, 셋은 $(2, 2, 0)$에 대응한다.
+$n > 3$이라 가정하면 부등식
+$$
+4 > \frac{a_{ij}^2}{w_iw_j} + \frac{a_{ik}^2}{w_iw_k} +
+\frac{a_{jk}^2}{w_jw_k} + \frac{a_{ij}a_{ik}a_{jk}}{w_iw_jw_k}
+$$
+을 얻는다. 위에서 얻은 수들에 대한 제약을 사용하면 가능한 경우는
+$$
+(\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}, \frac{a_{ik}^2}{w_iw_k}) =
+(1, 1, 0), (1, 2, 0),\text{ 또는 }(2, 1, 0)
+$$
+뿐이고, 특히 $a_{ik} = 0$이다. 여기서 $a_{ij} > 0$ 및 $a_{jk} > 0$을
+가정했음을 상기하라. $(2, 1, 0)$인 경우는 $(1, 2, 0)$인 경우에서 지표
+$i,j,k$의 순서를 뒤집어 얻는다. 처음 두 해는 보조정리
+\ref{models-lemma-three-by-three}의 경우 (\ref{models-item-A3}), (\ref{models-item-C3}),
+(\ref{models-item-B3})를 준다. 이 보조정리에서는 정수 $m_i$, $m_j$, $m_k$에 대한
+결과도 명시하였다.
+
+\begin{lemma}
+\label{models-lemma-three-by-three}
+다음 형태의 진부분그래프를 분류한다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet
+}
+$$
+$n > 3$이고 $(-2)$-지표의 삼중항 $i,j,k$가 주어져
+$a_{ij}, a_{ik}, a_{jk}$ 중 적어도 둘이 영이 아니면, 순서를 바꾸는 것까지
+동일시하여 $m$들, $a$들, $w$들은 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-A3}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 \\
+w & -2w & w \\
+0 & w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $2m_3 \geq m_2$이다. 또는
+\item
+\label{models-item-C3}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 \\
+w & -2w & 2w \\
+0 & 2w & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+2w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + 2m_3$, $2m_3 \geq m_2$이다. 또는
+\item
+\label{models-item-B3}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 \\
+2w & -4w & 2w \\
+0 & 2w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+2w \\
+w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $m_3 \geq m_2$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$i$, $j$, $k$, $l$이 $a_{ij} > 0$, $a_{jk} > 0$, $a_{kl} > 0$인 네
+$(-2)$-지표라고 하자. 즉 지표 $i$는 $j$와, $j$는 $k$와, $k$는 $l$과
+``만난다''. 보조정리 \ref{models-lemma-three-by-three}에서
+$a_{ik} = a_{jl} = 0$임을 알 수 있다. 행렬 $A = (a_{ij})$가 반음의
+정부호이므로 행렬
+$$
+\left(
+\begin{matrix}
+-2w_i & a_{ij} & 0 & a_{il} \\
+a_{ij} & -2w_j & a_{jk} & 0 \\
+0 & a_{jk} & -2w_k & a_{kl} \\
+a_{il} & 0 & a_{kl} & -2w_l
+\end{matrix}
+\right)
+$$
+은 $n = 4$가 아닌 한 음의 정부호이다. $n = 4$인 경우도 가능하며,
+이때 행렬식\footnote{그 값은
+$16w_iw_jw_kw_l - 4a_{ij}^2w_kw_l - 4a_{jk}^2w_iw_l - 4a_{kl}^2w_iw_j -
+4a_{il}^2w_jw_k + a_{ij}^2a_{kl}^2 + a_{jk}^2a_{il}^2 -
+2a_{ij}a_{il}a_{jk}a_{kl}$이다.}은 영이어서 방정식
+$$
+16 +
+\frac{a_{ij}^2}{w_iw_j}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{jk}^2}{w_jw_k}\frac{a_{il}^2}{w_iw_l} =
+4\frac{a_{ij}^2}{w_iw_j} + 4\frac{a_{jk}^2}{w_jw_k} + 4\frac{a_{kl}^2}{w_kw_l}
++ 4\frac{a_{il}^2}{w_iw_l} + 2\frac{a_{ij}a_{il}a_{jk}a_{kl}}{w_iw_jw_kw_l}
+$$
+을 얻는다. 이 방정식 오른쪽의 마지막 항은 다음 등식 때문에 나머지 항들에
+의해 결정된다.
+$$
+\left(\frac{a_{ij}a_{il}a_{jk}a_{kl}}{w_iw_jw_kw_l}\right)^2 =
+\frac{a_{ij}^2}{w_iw_j} \frac{a_{jk}^2}{w_jw_k}
+\frac{a_{kl}^2}{w_kw_l} \frac{a_{il}^2}{w_iw_l}
+$$
+위에서
+$\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}, \frac{a_{kl}^2}{w_kw_l}$은
+$\{1, 2\}$에 속하고 $\frac{a_{il}^2}{w_iw_l}$은
+$\{0, 1, 2\}$에 속함을 보았으므로 가능한 해는
+$$
+(\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}, \frac{a_{kl}^2}{w_kw_l},
+\frac{a_{il}^2}{w_iw_l}) =
+(1, 1, 1, 1) \text{ 또는 } (2, 1, 2, 0)
+$$
+뿐이고 $g = 1$인 경우이다. 독자는 이를 보조정리 \ref{models-lemma-genus-one}의
+경우 (\ref{models-item-four-cycle}), (\ref{models-item-up-equal-up}),
+(\ref{models-item-up-equal-down}), (\ref{models-item-down-equal-up})에서 찾을 수 있다.
+$n > 4$라 가정하면 부등식
+$$
+16 +
+\frac{a_{ij}^2}{w_iw_j}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{jk}^2}{w_jw_k}\frac{a_{il}^2}{w_iw_l} >
+4\frac{a_{ij}^2}{w_iw_j} + 4\frac{a_{jk}^2}{w_jw_k} + 4\frac{a_{kl}^2}{w_kw_l}
++ 4\frac{a_{il}^2}{w_iw_l} + 2\frac{a_{ij}a_{il}a_{jk}a_{kl}}{w_iw_jw_kw_l}
+$$
+을 얻는다. 위 수들에 대한 제약을 사용하면 가능한 경우는
+$$
+(\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}, \frac{a_{kl}^2}{w_kw_l},
+\frac{a_{il}^2}{w_iw_l}) =
+(1, 1, 1, 0), (1, 1, 2, 0), (1, 2, 1, 0), \text{ 또는 }(2, 1, 1, 0)
+$$
+뿐이고, 특히 $a_{il} = 0$이다. 나머지 셋은 영이 아니라고 가정했음을
+상기하라. $(2, 1, 1, 0)$은 $(1, 1, 2, 0)$에서 지표 $i,j,k,l$의 순서를
+뒤집어 얻는다. 처음 세 해는 보조정리 \ref{models-lemma-four-by-four}의 경우
+(\ref{models-item-A4}), (\ref{models-item-C4}), (\ref{models-item-B4}), (\ref{models-item-F4})를
+준다. 이 보조정리에서는 정수 $m_i$, $m_j$, $m_k$, $m_l$에 대한 결과도 명시하였다.
+
+\begin{lemma}
+\label{models-lemma-four-by-four}
+다음 형태의 진부분그래프를 분류한다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet
+}
+$$
+$n > 4$이고 $a_{ij}, a_{jk}, a_{kl}$이 영이 아닌 네 $(-2)$-지표
+$i,j,k,l$이 주어지면, 순서를 바꾸는 것까지 동일시하여 $m$들, $a$들,
+$w$들은 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-A4}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 \\
+w & -2w & w & 0 \\
+0 & w & -2w & w \\
+0 & 0 & w & -2w 
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $2m_3 \geq m_2 + m_4$이고
+$2m_4 \geq m_3$이다. 또는
+\item
+\label{models-item-C4}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 \\
+w & -2w & w & 0 \\
+0 & w & -2w & 2w \\
+0 & 0 & 2w & -4w 
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+2w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $2m_3 \geq m_2 + 2m_4$이고
+$2m_4 \geq m_3$이다. 또는
+\item
+\label{models-item-B4}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 \\
+2w & -4w & 2w & 0 \\
+0 & 2w & -4w & 2w \\
+0 & 0 & 2w & -2w 
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+2w \\
+2w \\
+w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $2m_3 \geq m_2 + m_4$이고
+$m_4 \geq m_3$이다. 또는
+\item
+\label{models-item-F4}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 \\
+w & -2w & 2w & 0 \\
+0 & 2w & -4w & 2w \\
+0 & 0 & 2w & -4w 
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+2w \\
+2w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + 2m_3$, $2m_3 \geq m_2 + m_4$이고
+$2m_4 \geq m_3$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$i$, $j$, $k$, $l$이 $a_{ij} > 0$, $a_{ij} > 0$, $a_{il} > 0$인 네
+$(-2)$-지표라고 하자. 즉 지표 $i$는 지표 $j$, $k$, $l$과 ``만난다''.
+보조정리 \ref{models-lemma-three-by-three}에서
+$a_{jk} = a_{jl} = a_{kl} = 0$임을 알 수 있다. 행렬 $A = (a_{ij})$가
+반음의 정부호이므로 행렬
+$$
+\left(
+\begin{matrix}
+-2w_i & a_{ij} & a_{ik} & a_{il} \\
+a_{ij} & -2w_j & 0 & 0 \\
+a_{ik} & 0 & -2w_k & 0 \\
+a_{il} & 0 & 0 & -2w_l
+\end{matrix}
+\right)
+$$
+은 $n = 4$가 아닌 한 음의 정부호이다. $n = 4$인 경우도 가능하며,
+이때 행렬식\footnote{그 값은
+$16w_iw_jw_kw_l - 4a_{ij}^2w_kw_l - 4a_{ik}^2w_jw_l - 4a_{il}^2w_jw_k$.}
+은 영이어서 방정식
+$$
+4 = \frac{a_{ij}^2}{w_iw_j} + \frac{a_{ik}^2}{w_iw_k} + \frac{a_{il}^2}{w_jw_l}
+$$
+을 얻는다. 위에서
+$\frac{a_{ij}^2}{w_iw_j}, \frac{a_{ik}^2}{w_iw_k}, \frac{a_{il}^2}{w_iw_l}$
+가 $\{1, 2\}$에 속함을 보았으므로, 순서를 바꾸는 것까지 동일시하여
+유일한 가능성은 $4 = 1 + 1 + 2$이다. 각 경우에 $g = 1$이고, 보조정리
+\ref{models-lemma-genus-one}의 경우 (\ref{models-item-triple-with-up}) 및
+(\ref{models-item-triple-with-down})에서 찾을 수 있다. $n > 4$라 가정하면 부등식
+$$
+4 > \frac{a_{ij}^2}{w_iw_j} + \frac{a_{ik}^2}{w_iw_k} + \frac{a_{il}^2}{w_jw_l}
+$$
+을 얻는다. 이는 $\frac{a_{ij}^2}{w_iw_j} =
+\frac{a_{ik}^2}{w_iw_k} = \frac{a_{il}^2}{w_jw_l} = 1$ 및
+$w_i = w_j = w_k = w_l$을 함의한다. 이에 따라 보조정리
+\ref{models-lemma-D4}의 경우 (\ref{models-item-D4})를 얻는다. 그 보조정리에서는 정수
+$m_i$, $m_j$, $m_k$, $m_l$에 대한 결과도 명시하였다.
+
+\begin{lemma}
+\label{models-lemma-D4}
+다음 형태의 진부분그래프를 분류한다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] & \bullet \\
+& \bullet
+}
+$$
+$n > 4$이고 $a_{ij}, a_{ik}, a_{il}$이 영이 아닌 네 $(-2)$-지표
+$i,j,k,l$이 주어지면, 순서를 바꾸는 것까지 동일시하여 $m$들, $a$들,
+$w$들은 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-D4}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & w & w \\
+w & -2w & 0 & 0 \\
+w & 0 & -2w & 0 \\
+w & 0 & 0 & -2w 
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2 + m_3 + m_4$, $2m_2 \geq m_1$, $2m_3 \geq m_1$,
+$2m_4 \geq m_1$이다. 이것이 $m_1 \geq \max(m_2, m_3, m_4)$를
+함의함에 유의하라.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$h$, $i$, $j$, $k$, $l$이 $a_{hi} > 0$, $a_{ij} > 0$, $a_{jk} > 0$,
+$a_{kl} > 0$인 다섯 $(-2)$-지표라고 하자. 즉 $h$는 $i$와, $i$는
+$j$와, $j$는 $k$와, $k$는 $l$과 ``만난다''. 보조정리
+\ref{models-lemma-three-by-three}과 \ref{models-lemma-four-by-four}를 적용하면
+$a_{hj} = a_{hk} = a_{ik} = a_{il} = a_{jl} = 0$
+이고, 분수
+$\frac{a_{hi}^2}{w_hw_i}, \frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k},
+\frac{a_{kl}^2}{w_kw_l}$는 $\{1, 2\}$에 속하고 분수
+$\frac{a_{hl}^2}{w_hw_l} \in \{0, 1, 2\}$.
+임을 알 수 있다. 행렬 $A = (a_{ij})$가 반음의 정부호이므로 행렬
+$$
+\left(
+\begin{matrix}
+-2w_h & a_{hi} & 0 & 0 & a_{hl} \\
+a_{hi} & -2w_i & a_{ij} & 0 & 0 \\
+0 & a_{ij} & -2w_j & a_{jk} & 0 \\
+0 & 0 & a_{jk} & -2w_k & a_{kl} \\
+a_{hl} & 0 & 0 & a_{kl} & -2w_l
+\end{matrix}
+\right)
+$$
+은 $n = 5$가 아닌 한 음의 정부호이다. $n = 5$인 경우도 가능하며,
+이때 행렬식\footnote{그 값은
+$-32w_hw_iw_jw_kw_l +
+8a_{hi}^2w_jw_kw_l +
+8a_{ij}^2w_hw_kw_l +
+8a_{jk}^2w_hw_iw_l +
+8a_{kl}^2w_hw_iw_j +
+8a_{hl}^2w_iw_jw_k -
+2a_{hi}^2a_{jk}^2w_l -
+2a_{hi}^2a_{kl}^2w_j -
+2a_{ij}^2a_{kl}^2w_h -
+2a_{hl}^2a_{ij}^2w_k -
+2a_{hl}^2a_{jk}^2w_i +
+2a_{hi}a_{ij}a_{jk}a_{kl}a_{hl}
+$
+.}
+행렬의 행렬식은 영이어서 방정식
+\begin{align*}
+16 + 
+\frac{a_{hi}^2}{w_hw_i}\frac{a_{jk}^2}{w_jw_k} +
+\frac{a_{hi}^2}{w_hw_i}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{ij}^2}{w_iw_j}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{hl}^2}{w_hw_l}\frac{a_{ij}^2}{w_iw_j} +
+\frac{a_{hl}^2}{w_hw_l}\frac{a_{jk}^2}{w_jw_k} \\
+= 4\frac{a_{hi}^2}{w_hw_i} +
+4\frac{a_{ij}^2}{w_iw_j} +
+4\frac{a_{jk}^2}{w_jw_k} +
+4\frac{a_{kl}^2}{w_kw_l} +
+4\frac{a_{hl}^2}{w_hw_l} +
+\frac{a_{hi}a_{ij}a_{jk}a_{kl}a_{hl}}{w_hw_iw_jw_kw_l}
+\end{align*}
+을 얻는다. 이 방정식 오른쪽의 마지막 항은 다음 등식 때문에 나머지 항들에
+의해 결정된다.
+$$
+\left(\frac{a_{hi}a_{ij}a_{jk}a_{kl}a_{hl}}{w_hw_iw_jw_kw_l} \right)^2 =
+\frac{a_{hi}^2}{w_hw_i} \frac{a_{ij}^2}{w_iw_j}
+\frac{a_{jk}^2}{w_jw_k} \frac{a_{kl}^2}{w_kw_l} \frac{a_{hl}^2}{w_hw_l}
+$$
+따라서 가능한 해는
+$$
+(\frac{a_{hi}^2}{w_hw_i}, \frac{a_{ij}^2}{w_iw_j},
+\frac{a_{jk}^2}{w_jw_k}, \frac{a_{kl}^2}{w_kw_l}, \frac{a_{hl}^2}{w_hw_l}) =
+(1, 1, 1, 1, 1), (1, 1, 2, 1, 0), (1, 2, 1, 1, 0), \text{ 또는 }(2, 1, 1, 2, 0)
+$$
+$(1, 2, 1, 1, 0)$은 $(1, 1, 2, 1, 0)$에서 지표 $h,i,j,k,l$의 순서를
+뒤집어 얻는다. 이 경우들에는 $g = 1$이고, 보조정리 \ref{models-lemma-genus-one}의
+경우 (\ref{models-item-five-cycle}), (\ref{models-item-equal-equal-up-equal}),
+(\ref{models-item-equal-equal-down-equal}), (\ref{models-item-up-equal-equal-up}),
+(\ref{models-item-up-equal-equal-down}), (\ref{models-item-down-equal-equal-up})에서
+찾을 수 있다. 이 가운데 하나는 $(1, 1, 1, 1, 1)$에, 둘은
+$(1, 1, 2, 1, 0)$에, 셋은 $(2, 1, 1, 2, 0)$에 대응한다.
+$n > 5$라 가정하면 부등식
+\begin{align*}
+16 + 
+\frac{a_{hi}^2}{w_hw_i}\frac{a_{jk}^2}{w_jw_k} +
+\frac{a_{hi}^2}{w_hw_i}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{ij}^2}{w_iw_j}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{hl}^2}{w_hw_l}\frac{a_{ij}^2}{w_iw_j} +
+\frac{a_{hl}^2}{w_hw_l}\frac{a_{jk}^2}{w_jw_k} \\
+> 4\frac{a_{hi}^2}{w_hw_i} +
+4\frac{a_{ij}^2}{w_iw_j} +
+4\frac{a_{jk}^2}{w_jw_k} +
+4\frac{a_{kl}^2}{w_kw_l} +
+4\frac{a_{hl}^2}{w_hw_l} +
+\frac{a_{hi}a_{ij}a_{jk}a_{kl}a_{hl}}{w_hw_iw_jw_kw_l}
+\end{align*}
+을 얻는다. 위 수들에 대한 제약을 사용하면 가능한 경우는
+$$
+(\frac{a_{hi}^2}{w_hw_i}, \frac{a_{ij}^2}{w_iw_j},
+\frac{a_{jk}^2}{w_jw_k}, \frac{a_{kl}^2}{w_kw_l}, \frac{a_{hl}^2}{w_hw_l}) =
+(1, 1, 1, 1, 0), (1, 1, 1, 2, 0), \text{ 또는 } (2, 1, 1, 1, 0)
+$$
+뿐이고, 특히 $a_{hl} = 0$이다. 나머지 넷은 영이 아니라고 가정했음을
+상기하라. $(1, 1, 1, 2, 0)$은 $(2, 1, 1, 1, 0)$에서 지표
+$h,i,j,k,l$의 순서를 뒤집어 얻는다. 처음 두 해는 보조정리
+\ref{models-lemma-five-by-five}의 경우 (\ref{models-item-A5}), (\ref{models-item-C5}),
+(\ref{models-item-B5})를 준다. 그 보조정리에서는 정수 $m_h$, $m_i$, $m_j$, $m_k$, $m_l$에
+대한 결과도 명시하였다.
+
+\begin{lemma}
+\label{models-lemma-five-by-five}
+다음 형태의 진부분그래프를 분류한다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet
+}
+$$
+$n > 5$이고 $a_{hi}, a_{ij}, a_{jk}, a_{kl}$이 영이 아닌 다섯
+$(-2)$-지표 $h,i,j,k,l$이 주어지면, 순서를 바꾸는 것까지 동일시하여
+$m$들, $a$들, $w$들은 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-A5}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & 0 \\
+0 & 0 & w & -2w & w \\
+0 & 0 & 0 & w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $2m_3 \geq m_2 + m_4$,
+$2m_4 \geq m_3 + m_5$, $2m_5 \geq m_4$이다. 또는
+\item
+\label{models-item-C5}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & 0 \\
+0 & 0 & w & -2w & 2w \\
+0 & 0 & 0 & 2w & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+2w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $2m_3 \geq m_2 + 2m_4$,
+$2m_4 \geq m_3 + m_5$, $2m_5 \geq m_4$이다. 또는
+\item
+\label{models-item-B5}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 & 0 \\
+2w & -4w & 2w & 0 & 0 \\
+0 & 2w & -4w & 2w & 0 \\
+0 & 0 & 2w & -4w & 2w \\
+0 & 0 & 0 & 2w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+2w \\
+2w \\
+2w \\
+w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $2m_3 \geq m_2 + m_4$,
+$2m_4 \geq m_3 + m_5$, $m_4 \geq m_3$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$h$, $i$, $j$, $k$, $l$이 $a_{hi} > 0$, $a_{hj} > 0$, $a_{hk} > 0$,
+$a_{hl} > 0$인 다섯 $(-2)$-지표라고 하자. 즉 지표 $h$는
+$i$, $j$, $k$, $l$과 ``만난다''. 보조정리 \ref{models-lemma-three-by-three}에서
+$a_{ij} = a_{ik} = a_{il} = a_{jk} = a_{jl} = a_{kl} = 0$이고,
+보조정리 \ref{models-lemma-D4}에서
+$w_h = w_i = w_j = w_k = w_l = w$인 어떤 정수 $w > 0$가 있으며
+$a_{hi} = a_{hj} = a_{hk} = a_{hl} = -2w$.
+임을 안다. 이에 대응하는 행렬
+$$
+\left(
+\begin{matrix}
+-2w & w & w & w & w \\
+w & -2w & 0 & 0 & 0 \\
+w & 0 & -2w & 0 & 0 \\
+w & 0 & 0 & -2w & 0 \\
+w & 0 & 0 & 0 & -2w
+\end{matrix}
+\right)
+$$
+는 특이하다. 따라서 이는 $n = 5$이고 $g = 1$일 때만 가능하다.
+보조정리 \ref{models-lemma-genus-one}의 경우 (\ref{models-item-quadruple})에서
+찾을 수 있다.
+
+\begin{lemma}
+\label{models-lemma-fourfold}
+다음 형태의 진부분그래프는 존재하지 않는다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[ld] \ar@{-}[r] \ar@{-}[d] & \bullet \\
+\bullet & \bullet
+}
+$$
+$n > 5$이면 $a_{hi} > 0$, $a_{hj} > 0$, $a_{hk} > 0$,
+$a_{hl} > 0$인 다섯 $(-2)$-지표 $h$, $i$, $j$, $k$는 {\bf 존재하지 않는다}.
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$h$, $i$, $j$, $k$, $l$이 $a_{hi} > 0$, $a_{ij} > 0$, $a_{jk} > 0$,
+$a_{jl} > 0$인 다섯 $(-2)$-지표라고 하자. 즉 $h$는 $i$와 만나고
+$j$는 $i$, $k$, $l$과 만난다. 보조정리 \ref{models-lemma-D4}에 의해
+$a_{ik} = a_{il} = a_{kl} = 0$, $w_i = w_j = w_k = w_l = w$이고,
+어떤 정수 $w$에 대해 $a_{ij} = a_{jk} = a_{jl} = w$이다.
+네 원소열 $h, i, j, k$와 $h, i, j, l$에 보조정리
+\ref{models-lemma-four-by-four}를 적용하면 $a_{hj} = a_{hk} = a_{hl} = 0$이고,
+$w_h = \frac{1}{2}w$, $w$, 또는 $2w$이며 이에 따라
+$a_{hi} = w$, $w$, 또는 $2w$이다. $A$가 반음의 정부호이므로 행렬
+$$
+\left(
+\begin{matrix}
+-2w_h & a_{hi} & 0 & 0 & 0 \\
+a_{hi} & -2w & w & 0 & 0 \\
+0 & w & -2w & w & w \\
+0 & 0 & w & -2w & 0 \\
+0 & 0 & w & 0 & -2w
+\end{matrix}
+\right)
+$$
+은 $n = 5$가 아닌 한 음의 정부호이다. $w_h = \frac{1}{2}w$ 또는
+$2w$일 때 이 행렬의 행렬식이 $0$임을 계산할 수 있다. 이에 따라
+보조정리 \ref{models-lemma-genus-one}의 경우 (\ref{models-item-triple-extended-up})과
+(\ref{models-item-triple-extended-down})를 얻는다. $w_h = w$이면 보조정리
+\ref{models-lemma-D5}의 경우 (\ref{models-item-D5})를 얻는다.
+
+\begin{lemma}
+\label{models-lemma-D5}
+다음 형태의 진부분그래프를 분류한다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] \ar@{-}[d] & \bullet \\
+& & \bullet
+}
+$$
+$n > 5$이고 $a_{hi}, a_{ij}, a_{jk}, a_{jl}$이 영이 아닌 다섯
+$(-2)$-지표 $h,i,j,k,l$이 주어지면, 순서를 바꾸는 것까지 동일시하여
+$m$들, $a$들, $w$들은 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-D5}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & w \\
+0 & 0 & w & -2w & 0 \\
+0 & 0 & w & 0 & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $2m_3 \geq m_2 + m_4 + m_5$,
+$2m_4 \geq m_3$, $2m_5 \geq m_3$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$t > 5$이고 $i_1, \ldots, i_t$가 서로 다른 $t$개의 $(-2)$-지표이며
+$j = 1, \ldots, t - 1$에 대해 $a_{i_ji_{j + 1}}$가 영이 아니라고 하자.
+$t$에 대한 귀납법으로 $n = t$이면 보조정리 \ref{models-lemma-genus-one}의
+경우 (\ref{models-item-n-cycle}), (\ref{models-item-up-chain-equal-up}),
+(\ref{models-item-up-chain-equal-down}), (\ref{models-item-down-chain-equal-up})를,
+$n > t$이면 보조정리 \ref{models-lemma-long}의 경우 (\ref{models-item-An}),
+(\ref{models-item-Cn}), (\ref{models-item-Bn})를 얻음을 증명한다. 먼저
+$a_{i_1i_t}$가 영이 아니면 보조정리 \ref{models-lemma-five-by-five}에서
+$w_{i_1} = \ldots = w_{i_t} = w$이고 $j = 1, \ldots, t - 1$에 대해
+$a_{i_ji_{j + 1}} = w$, 또 $a_{i_1i_t} = w$임이 분명하다. 그러면 벡터
+$(1, \ldots, 1)$은 대응하는 $t \times t$ 행렬의 핵에 속한다. 따라서
+$n = t$이어야 하고, 종수는 $1$이며 보조정리 \ref{models-lemma-genus-one}의
+경우 (\ref{models-item-n-cycle})이다. 그러므로 $a_{i_1i_t} = 0$이라 가정할 수
+있다. 귀납가정에 의해($t = 6$이면 보조정리
+\ref{models-lemma-five-by-five}에 의해) $k > j + 1$이면
+$a_{i_ji_k} = 0$이다. 더욱이 어떤 정수 $w$에 대해
+$w_{i_1} = \ldots = w_{i_{t - 1}} = w$이고
+$w_{i_1}, w_{i_t} \in \{\frac{1}{2}w, w, 2w\}$이다. 또한 $w_{i_1}$과
+$w_{i_t}$의 값이 각각 $\frac{1}{2}w$, $w$, $2w$인 데 따라
+$a_{i_1i_2}$와 $a_{i_{t - 1}i_t}$의 값은 각각 $w$, $w$, $2w$이다.
+따라서 $9$가지 가능성이 있고, 각 경우에 어떤 일이 일어나는지 쉽게 판정된다.
+\begin{enumerate}
+\item $(w_{i_1}, w_{i_t}) = (\frac{1}{2}w, \frac{1}{2}w)$이면 보조정리
+\ref{models-lemma-genus-one}의 경우 (\ref{models-item-up-chain-equal-down})이다.
+\item $(w_{i_1}, w_{i_t}) = (\frac{1}{2}w, w)$ 또는
+$(w, \frac{1}{2}w)$이면 보조정리 \ref{models-lemma-long}의 경우
+(\ref{models-item-Bn})이다.
+\item $(w_{i_1}, w_{i_t}) = (\frac{1}{2}w, 2w)$ 또는
+$(2w, \frac{1}{2}w)$이면 보조정리 \ref{models-lemma-genus-one}의 경우
+(\ref{models-item-up-chain-equal-up})이다.
+\item $(w_{i_1}, w_{i_t}) = (w, w)$이면 보조정리 \ref{models-lemma-long}의
+경우 (\ref{models-item-An})이다.
+\item $(w_{i_1}, w_{i_t}) = (w, 2w)$ 또는 $(2w, w)$이면 보조정리
+\ref{models-lemma-long}의 경우 (\ref{models-item-Cn})이다.
+\item $(w_{i_1}, w_{i_t}) = (2w, 2w)$이면 보조정리
+\ref{models-lemma-genus-one}의 경우 (\ref{models-item-down-chain-equal-up})이다.
+\end{enumerate}
+
+\begin{lemma}
+\label{models-lemma-long}
+다음 형태의 진부분그래프를 분류한다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{..}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet
+}
+$$
+$t > 5$이고 $n > t$라 하자. $j = 1, \ldots, t - 1$에 대해
+$a_{i_ji_{j + 1}}$가 영이 아닌 서로 다른 $t$개의 $(-2)$-지표
+$i_1, \ldots, i_t$가 주어지면, 이 지표들의 순서를 뒤집는 것까지
+동일시하여 $a$들과 $w$들은 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-An}
+$w_{i_1} = w_{i_2} = \ldots = w_{i_t} = w$,
+$a_{i_ji_{j + 1}} = w$이고 $k > j + 1$이면 $a_{i_ji_k} = 0$이다. 또는
+\item
+\label{models-item-Cn}
+$w_{i_1} = w_{i_2} = \ldots = w_{i_{t - 1}} = w$, $w_{j_t} = 2w$이고,
+$j < t - 1$에 대해 $a_{i_ji_{j + 1}} = w$, $a_{i_{t - 1}i_t} = 2w$이며
+$k > j + 1$이면 $a_{i_ji_k} = 0$이다. 또는
+\item
+\label{models-item-Bn}
+$w_{i_1} = w_{i_2} = \ldots = w_{i_{t - 1}} = 2w$, $w_{j_t} = w$,
+$a_{i_ji_{j + 1}} = 2w$, $a_{i_{t - 1}i_t} = 2w$이고
+$k > j + 1$이면 $a_{i_ji_k} = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$t > 4$이고 $i_1, \ldots, i_{t + 1}$이 서로 다른 $t + 1$개의
+$(-2)$-지표이며, $j = 1, \ldots, t - 1$에 대해
+$a_{i_ji_{j + 1}} > 0$이고 $a_{j_{t - 1}j_{t + 1}} > 0$이라 하자.
+보조정리 \ref{models-lemma-Dn}의 그림을 참조하라. $t$에 대한 귀납법으로
+$n = t + 1$이면 보조정리 \ref{models-lemma-genus-one}의 경우
+(\ref{models-item-Dn-extended-up}), (\ref{models-item-Dn-extended-down})를,
+$n > t + 1$이면 보조정리 \ref{models-lemma-Dn}의 경우 (\ref{models-item-Dn})를
+얻음을 증명한다. 귀납가정에 의해($t = 5$이면 보조정리
+\ref{models-lemma-D5}에 의해) $j, k \geq 2$에 대해 요구된 영 아닌 항을
+제외한 $a_{i_ji_k}$는 모두 영이다. 또한 어떤 정수 $w$에 대해
+$w_2 = \ldots = w_{t + 1} = w$이고, $j, k \geq 2$에 대해 영이 아닌
+$a_{i_ji_k}$는 $w$와 같다. 수열 $i_1, \ldots, i_t$와
+$i_1, \ldots, i_{t - 1}, i_{t + 1}$에 보조정리 \ref{models-lemma-long}을
+적용하면($t = 5$이면 보조정리 \ref{models-lemma-five-by-five}를 적용하면),
+$j \geq 3$에 대해 $a_{i_1 i_j} = 0$이고 $w_1$은
+$\frac{1}{2}w$, $w$, 또는 $2w$이며 이에 따라 $a_{i_1i_2}$는
+$w, w, 2w$이다. 따라서 $3$가지 가능성이 있고 각 경우는 쉽게 판정된다.
+\begin{enumerate}
+\item $w_1 = \frac{1}{2}w$이면 보조정리 \ref{models-lemma-genus-one}의 경우
+(\ref{models-item-Dn-extended-down})이다.
+\item $w_1 = w$이면 보조정리 \ref{models-lemma-Dn}의 경우
+(\ref{models-item-Dn})이다.
+\item $w_1 = 2w$이면 보조정리 \ref{models-lemma-genus-one}의 경우
+(\ref{models-item-Dn-extended-up})이다.
+\end{enumerate}
+
+\begin{lemma}
+\label{models-lemma-Dn}
+다음 형태의 진부분그래프를 분류한다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{..}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] \ar@{-}[d] & \bullet \\
+& & & \bullet
+}
+$$
+$t > 4$이고 $n > t + 1$이라 하자. $j = 1, \ldots, t - 1$에 대해
+$a_{i_ji_{j + 1}}$가 영이 아니고 $a_{i_{t - 1}i_{t + 1}}$도 영이 아닌,
+서로 다른 $t + 1$개의 $(-2)$-지표 $i_1, \ldots, i_{t + 1}$이 주어지면
+$a$들과 $w$들은 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-Dn}
+$w_{i_1} = w_{i_2} = \ldots = w_{i_{t + 1}} = w$이고,
+$j = 1, \ldots, t - 1$에 대해 $a_{i_ji_{j + 1}} = w$이며,
+$a_{i_{t - 1}i_{t + 1}} = w$이고 $j > k$인 나머지 쌍 $(j, k)$에 대해
+$a_{i_ji_k} = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$a_{gh}, a_{hi}, a_{ij}, a_{jk}, a_{il}$이 영이 아닌 서로 다른 $6$개의
+$(-2)$-지표 $g,h,i,j,k,l$이 주어졌다고 하자. 보조정리
+\ref{models-lemma-E6}의 그림을 참조하라. 보조정리 \ref{models-lemma-D5}를 적용하면
+보조정리 \ref{models-lemma-E6}의 상황이어야 한다. 행렬식이 $3w^6 > 0$이므로
+이 경우에는 결코 $n = 6$일 수 없다.
+
+\begin{lemma}
+\label{models-lemma-E6}
+다음 형태의 진부분그래프를 분류한다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & \bullet
+}
+$$
+$n > 6$이라 하자. $a_{12}, a_{23}, a_{34}, a_{45}, a_{36}$이 영이 아닌
+서로 다른 $6$개의 $(-2)$-지표 $i_1, \ldots, i_6$이 주어지면 $m$들,
+$a$들, $w$들은 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-E6}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5 \\
+m_6
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 \\
+0 & w & -2w & w & 0 & w \\
+0 & 0 & w & -2w & w & 0 \\
+0 & 0 & 0 & w & -2w & 0 \\
+0 & 0 & w & 0 & 0 & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $2m_3 \geq m_2 + m_4 + m_6$,
+$2m_4 \geq m_3 + m_5$, $2m_5 \geq m_3$, $2m_6 \geq m_3$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$t \geq 4$이고 $i_0, \ldots, i_{t + 1}$이 서로 다른 $t + 2$개의
+$(-2)$-지표이며, $j = 1, \ldots, t - 1$에 대해
+$a_{i_ji_{j + 1}} > 0$이고 $a_{i_0i_2} > 0$ 및
+$a_{i_{t - 1}i_{t + 1}} > 0$이라 하자. 보조정리
+\ref{models-lemma-double-triple}의 그림을 참조하라. 보조정리 \ref{models-lemma-D5}와
+\ref{models-lemma-Dn}을 적용하면 $j < k$인 나머지 $a_{i_ji_k}$는 모두 영이고,
+어떤 정수 $w$에 대해 $w_{i_0} = \ldots = w_{i_{t + 1}} = w$이며,
+$A$에서 요구된 영 아닌 비대각 성분은 $w$와 같다. 계산하면 대응하는
+행렬의 행렬식은 영이다. 따라서 $n = t + 2$이고 보조정리
+\ref{models-lemma-genus-one}의 경우 (\ref{models-item-double-triple})이다.
+
+\begin{lemma}
+\label{models-lemma-double-triple}
+다음 형태의 진부분그래프는 존재하지 않는다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{..}[r] \ar@{-}[d] &
+\bullet \ar@{-}[d] \ar@{-}[r] & \bullet \\
+& \bullet & \bullet
+}
+$$
+$t \geq 4$이고 $n > t + 2$라 가정하자. $j = 1, \ldots, t - 1$에 대해
+$a_{i_ji_{j + 1}} > 0$이고 $a_{i_0i_2} > 0$ 및
+$a_{i_{t - 1}i_{t + 1}} > 0$인 서로 다른 $t + 2$개의 $(-2)$-지표
+$i_0, \ldots, i_{t + 1}$은 {\bf 존재하지 않는다}.
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$a_{fg}, a_{gh}, a_{ij}, a_{jh}, a_{kl}, a_{lh}$이 영이 아닌 서로 다른
+$7$개의 $(-2)$-지표 $f,g,h,i,j,k,l$이 주어졌다고 하자. 보조정리
+\ref{models-lemma-E6-completed}의 그림을 참조하라. 보조정리 \ref{models-lemma-D5}를
+적용하면 대응하는 행렬은
+$$
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & w & -2w & 0 & w & 0 & w \\
+0 & 0 & 0 & -2w & w & 0 & 0 \\
+0 & 0 & w & w & -2w & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & -2w & w \\
+0 & 0 & w & 0 & 0 & w & -2w
+\end{matrix}
+\right)
+$$
+이다. 행렬식이 $0$이므로 $n = 7$이고 $g = 1$이어야 하며, 보조정리
+\ref{models-lemma-genus-one}의 경우 (\ref{models-item-E6-completed})를 얻는다.
+
+\begin{lemma}
+\label{models-lemma-E6-completed}
+다음 형태의 진부분그래프는 존재하지 않는다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & \bullet \ar@{-}[d] \\
+& & \bullet
+}
+$$
+$n > 7$이라 가정하자. $a_{fg}, a_{gh}, a_{ij}, a_{jh}, a_{kl}, a_{lh}$이
+영이 아닌 서로 다른 $7$개의 $(-2)$-지표 $f,g,h,i,j,k,l$은
+{\bf 존재하지 않는다}.
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+$a_{fg}, a_{gh}, a_{hi}, a_{ij}, a_{jk}, a_{il}$이 영이 아닌 서로 다른
+$7$개의 $(-2)$-지표 $f,g,h,i,j,k,l$이 주어졌다고 하자. 보조정리
+\ref{models-lemma-E7}의 그림을 참조하라. 보조정리 \ref{models-lemma-D5}와
+\ref{models-lemma-Dn}을 적용하면 보조정리 \ref{models-lemma-E7}의 상황이어야 한다.
+행렬식이 $-8w^7 > 0$이므로 이 경우에는 결코 $n = 7$일 수 없다.
+
+\begin{lemma}
+\label{models-lemma-E7}
+다음 형태의 진부분그래프를 분류한다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] \ar@{-}[d] & \bullet \ar@{-}[r] & \bullet \\
+& & & \bullet
+}
+$$
+$n > 7$이라 하자. $a_{12}, a_{23}, a_{34}, a_{45}, a_{56}, a_{47}$이
+영이 아닌 서로 다른 $7$개의 $(-2)$-지표 $i_1, \ldots, i_7$이 주어지면
+$m$들, $a$들, $w$들은 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-E7}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5 \\
+m_6 \\
+m_7
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & w & -2w & w & 0 & 0 & 0 \\
+0 & 0 & w & -2w & w & 0 & w \\
+0 & 0 & 0 & w & -2w & w & 0 \\
+0 & 0 & 0 & 0 & w & -2w & 0 \\
+0 & 0 & 0 & w & 0 & 0 & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $2m_3 \geq m_2 + m_4$,
+$2m_4 \geq m_3 + m_5 + m_7$, $2m_5 \geq m_4 + m_6$,
+$2m_6 \geq m_5$, $2m_7 \geq m_4$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+행렬 $A$의 영이 아닌 성분 $a_{ij}$의 무늬가
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & & & \bullet
+}
+$$
+또는
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] \ar@{-}[d] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \\
+& & & \bullet
+}
+$$
+와 같은 서로 다른 $8$개의 $(-2)$-지표가 주어졌다고 하자. 보조정리
+\ref{models-lemma-E7}의 증명과 똑같이 논증하면 첫째 무늬는 보조정리
+\ref{models-lemma-E8}의 경우 (\ref{models-item-E8})를 주지만 보조정리
+\ref{models-lemma-genus-one}에는 새 경우를 주지 않는다. 보조정리
+\ref{models-lemma-E6-completed}의 증명과 똑같이 논증하면 둘째 무늬는
+$n > 8$일 때 나타나지 않지만 $n = 8$일 때 보조정리
+\ref{models-lemma-genus-one}의 경우 (\ref{models-item-E7-completed})를 준다.
+
+\begin{lemma}
+\label{models-lemma-E8}
+다음 형태의 진부분그래프를 분류한다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & & & \bullet
+}
+$$
+$n > 8$이라 하자. $a_{12}, a_{23}, a_{34}, a_{45}, a_{56}, a_{65}, a_{57}$이
+영이 아닌 서로 다른 $8$개의 $(-2)$-지표 $i_1, \ldots, i_8$이 주어지면
+$m$들, $a$들, $w$들은 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-E8}
+다음으로 주어지고,
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5 \\
+m_6 \\
+m_7 \\
+m_8
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 & 0 \\
+0 & w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & 0 & w & -2w & w & 0 & 0 & 0 \\
+0 & 0 & 0 & w & -2w & w & 0 & w \\
+0 & 0 & 0 & 0 & w & -2w & w & 0 \\
+0 & 0 & 0 & 0 & 0 & w & -2w & 0 \\
+0 & 0 & 0 & 0 & w & 0 & 0 & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+$2m_1 \geq m_2$, $2m_2 \geq m_1 + m_3$, $2m_3 \geq m_2 + m_4$,
+$2m_4 \geq m_3 + m_5$, $2m_5 \geq m_4 + m_6 + m_8$,
+$2m_6 \geq m_5 + m_7$, $2m_7 \geq m_6$, $2m_8 \geq m_5$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-E7-completed}
+다음 형태의 진부분그래프는 존재하지 않는다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \\
+& & & \bullet
+}
+$$
+$n > 8$이라 가정하자. $a_{ef}, a_{fg}, a_{gh}, a_{hi}, a_{ij}, a_{jk}, a_{lh}$이
+영이 아닌 서로 다른 $8$개의 $(-2)$-지표 $e,f,g,h,i,j,k,l$은
+{\bf 존재하지 않는다}.
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+행렬 $A$의 영이 아닌 성분 $a_{ij}$의 무늬가
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & & & & \bullet
+}
+$$
+와 같은 서로 다른 $9$개의 $(-2)$-지표가 주어졌다고 하자. 보조정리
+\ref{models-lemma-E6-completed}의 증명과 똑같이 논증하면 이 무늬는
+$n > 9$일 때 나타나지 않지만 $n = 9$일 때 보조정리
+\ref{models-lemma-genus-one}의 경우 (\ref{models-item-E8-completed})를 준다.
+
+\begin{lemma}
+\label{models-lemma-E8-completed}
+다음 형태의 진부분그래프는 존재하지 않는다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & & & & \bullet
+}
+$$
+$n > 9$이라 가정하자. $a_{de}, a_{ef}, a_{fg}, a_{gh}, a_{hi}, a_{ij}, a_{jk}, a_{lh}$이
+영이 아닌 서로 다른 $9$개의 $(-2)$-지표 $d,e,f,g,h,i,j,k,l$은
+{\bf 존재하지 않는다}.
+\end{lemma}
+
+\begin{proof}
+위의 논의를 참조하라.
+\end{proof}
+
+\noindent
+이 정보를 모두 모으면 다음을 얻는다.
+
+\begin{proposition}
+\label{models-proposition-classify-subgraphs}
+$n, m_i, a_{ij}, w_i, g_i$를 종수 $g$인 수치형이라 하자.
+$I \subset \{1, \ldots, n\}$를 크기가 $\geq 2$이고 $(-2)$-지표들로
+이루어진 진부분집합으로서, $i' \in I$, $i \in I \setminus I'$일 때
+$a_{i'i} = 0$이 되는 공집합이 아닌 진부분집합 $I' \subset I$가 없다고
+하자. 그러면 순서를 바꾸는 것까지 동일시하여 $i, j \in I$에 대한
+$m_i$들, $a_{ij}$들, $w_i$들은 보조정리 \ref{models-lemma-two-by-two},
+\ref{models-lemma-three-by-three},
+\ref{models-lemma-four-by-four},
+\ref{models-lemma-D4},
+\ref{models-lemma-five-by-five},
+\ref{models-lemma-D5},
+\ref{models-lemma-long},
+\ref{models-lemma-Dn},
+\ref{models-lemma-E6},
+\ref{models-lemma-E7}, 또는
+\ref{models-lemma-E8}.
+\end{proposition}
+
+\begin{proof}
+이는 위의 논의에서 따른다. 절 \ref{models-section-classify-proper-subgraphs}의
+첫머리 논의를 참조하라.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{종수 0과 1인 극소형의 분류}
+\label{models-section-classification-genus-one}
+
+\noindent
+절 제목이 내용을 모두 말해 준다.
+
+\begin{lemma}[종수 0]
+\label{models-lemma-genus-zero}
+종수 0인 극소 수치형은 오직
+$n = 1$, $m_1 = 1$, $a_{11} = 0$, $w_1 = 1$, $g_1 = 0$뿐이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{models-lemma-non-irreducible-minimal-type-genus-at-least-one}과
+\ref{models-lemma-irreducible}에서 따른다.
+\end{proof}
+
+\begin{lemma}[종수 1]
+\label{models-lemma-genus-one}
+종수 1인 극소 수치형은 동치까지 다음과 같다.
+\begin{enumerate}
+\item
+\label{models-item-one}
+$n = 1$, $a_{11} = 0$, $g_1 = 1$이고 $m_1, w_1 \geq 1$은 임의이다.
+\item
+\label{models-item-two-cycle}
+$n = 2$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w \\
+2w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-up4}
+$n = 2$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 4w \\
+4w & -8w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-three-cycle}
+$n = 3$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & w \\
+w & -2w & w \\
+w & w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-equal-up3}
+$n = 3$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 \\
+w & -2w & 3w \\
+0 & 3w & -6w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+3w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-equal-down3}
+$n = 3$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-6w & 3w & 0 \\
+3w & -6w & 3w \\
+0 & 3w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+3w \\
+3w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-up-up}
+$n = 3$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+2m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 \\
+2w & -4w & 4w \\
+0 & 4w & -8w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-up-down}
+$n = 3$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 \\
+2w & -4w & 2w \\
+0 & 2w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-down-up}
+$n = 3$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 \\
+2w & -2w & 2w \\
+0 & 2w & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-four-cycle}
+$n = 4$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & w \\
+w & -2w & w & 0 \\
+0 & w & -2w & w \\
+w & 0 & w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-up-equal-up}
+$n = 4$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+2m \\
+2m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 & 0 \\
+2w & -4w & 2w & 0 \\
+0 & 2w & -4w & 4w \\
+0 & 0 & 4w & -8w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+2w \\
+4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-up-equal-down}
+$n = 4$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 & 0 \\
+2w & -4w & 2w & 0 \\
+0 & 2w & -4w & 2w \\
+0 & 0 & 2w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+2w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-down-equal-up}
+$n = 4$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 \\
+2w & -2w & w & 0 \\
+0 & w & -2w & 2w \\
+0 & 0 & 2w & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+w \\
+w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-triple-with-up}
+$n = 4$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+2m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & w & 2w \\
+w & -2w & 0 & 0 \\
+w & 0 & -2w & 0 \\
+2w & 0 & 0 & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-triple-with-down}
+$n = 4$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+2m \\
+m \\
+m \\
+2m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 2w & 2w \\
+2w & -4w & 0 & 0 \\
+2w & 0 & -4w & 0 \\
+2w & 0 & 0 & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+2w \\
+2w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-five-cycle}
+$n = 5$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & w \\
+w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & 0 \\
+0 & 0 & w & -2w & w \\
+w & 0 & 0 & w & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-equal-equal-up-equal}
+$n = 5$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 \\
+0 & w & -2w & 2w & 0 \\
+0 & 0 & 2w & -4w & 2w \\
+0 & 0 & 0 & 2w & -4w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+2w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-equal-equal-down-equal}
+$n = 5$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m \\
+4m \\
+2m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 & 0 \\
+2w & -4w & 2w & 0 & 0 \\
+0 & 2w & -4w & 2w & 0 \\
+0 & 0 & 2w & -2w & w \\
+0 & 0 & 0 & w & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+2w \\
+2w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-up-equal-equal-up}
+$n = 5$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+2m \\
+2m \\
+2m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 & 0 & 0 \\
+2w & -4w & 2w & 0 & 0 \\
+0 & 2w & -4w & 2w & 0 \\
+0 & 0 & 2w & -4w & 4w \\
+0 & 0 & 0 & 4w & -8w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+2w \\
+2w \\
+4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-up-equal-equal-down}
+$n = 5$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 & 0 & 0 \\
+2w & -4w & 2w & 0 & 0 \\
+0 & 2w & -4w & 2w & 0 \\
+0 & 0 & 2w & -4w & 2w \\
+0 & 0 & 0 & 2w & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+2w \\
+2w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-down-equal-equal-up}
+$n = 5$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+2m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 & 0 \\
+2w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & 0 \\
+0 & 0 & w & -2w & 2w \\
+0 & 0 & 0 & 2w & -4w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+w \\
+w \\
+w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-quadruple}
+$n = 5$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+2m \\
+m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & w & w & w \\
+w & -2w & 0 & 0 & 0 \\
+w & 0 & -2w & 0 & 0 \\
+w & 0 & 0 & -2w & 0 \\
+w & 0 & 0 & 0 & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-triple-extended-up}
+$n = 5$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+2m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 & 0 \\
+2w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & w \\
+0 & 0 & w & -2w & 0 \\
+0 & 0 & w & 0 & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-triple-extended-down}
+$n = 5$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+2m \\
+2m \\
+2m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 & 0 & 0 \\
+2w & -4w & 2w & 0 & 0 \\
+0 & 2w & -4w & 2w & 2w \\
+0 & 0 & 2w & -4w & 0 \\
+0 & 0 & 2w & 0 & -4w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+2w \\
+2w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-n-cycle}
+$n \geq 6$이고 (\ref{models-item-five-cycle})를 일반화하는 $n$-순환이 있다.
+\begin{enumerate}
+\item $m_1 = \ldots = m_n = m$,
+\item $a_{12} = \ldots = a_{(n - 1) n} = w$, $a_{1n} = w$,
+$i < j$인 나머지 경우에는 $a_{ij} = 0$이고,
+\item $w_1 = \ldots = w_n = w$
+\end{enumerate}
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-up-chain-equal-up}
+$n \geq 6$이고 (\ref{models-item-up-equal-equal-up})을 일반화하는 사슬이 있다.
+\begin{enumerate}
+\item $m_1 = \ldots = m_{n - 1} = 2m$, $m_n = m$,
+\item $a_{12} = \ldots = a_{(n - 2) (n - 1)} = 2w$, $a_{(n - 1) n} = 4w$,
+$i < j$인 나머지 경우에는 $a_{ij} = 0$이고,
+\item $w_1 = w$, $w_2 = \ldots = w_{n - 1} = 2w$, $w_n = 4w$
+\end{enumerate}
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-up-chain-equal-down}
+$n \geq 6$이고 (\ref{models-item-up-equal-equal-down})을 일반화하는 사슬이 있다.
+\begin{enumerate}
+\item $m_1 = \ldots = m_n = m$,
+\item $a_{12} = \ldots = a_{(n - 1) n} = w$,
+$i < j$인 나머지 경우에는 $a_{ij} = 0$이고,
+\item $w_1 = w$, $w_2 = \ldots = w_{n - 1} = 2w$, $w_n = w$
+\end{enumerate}
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-down-chain-equal-up}
+$n \geq 6$이고 (\ref{models-item-down-equal-equal-up})을 일반화하는 사슬이 있다.
+\begin{enumerate}
+\item $m_1 = w$, $w_2 = \ldots = m_{n - 1} = 2m$, $m_n = m$,
+\item $a_{12} = 2w$, $a_{23} = \ldots = a_{(n - 2) (n - 1)} = w$,
+$a_{(n - 1) n} = 2w$이고, $i < j$인 나머지 경우에는 $a_{ij} = 0$이며,
+\item $w_1 = 2w$, $w_2 = \ldots = w_{n - 1} = w$, $w_n = 2w$
+\end{enumerate}
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-Dn-extended-up}
+$n \geq 6$이고 (\ref{models-item-triple-extended-up})을 일반화하는 형이 있다.
+\begin{enumerate}
+\item $m_1 = m$, $m_2 = \ldots = m_{n - 3} = 2m$, $m_{n - 1} = m_n = m$,
+\item $a_{12} = 2w$, $a_{23} = \ldots = a_{(n - 2) (n - 1)} = w$,
+$a_{(n - 2) n} = w$이고, $i < j$인 나머지 경우에는 $a_{ij} = 0$이며,
+\item $w_1 = 2w$, $w_2 = \ldots = w_n = w$
+\end{enumerate}
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-Dn-extended-down}
+$n \geq 6$이고 (\ref{models-item-triple-extended-down})을 일반화하는 형이 있다.
+\begin{enumerate}
+\item $m_1 = \ldots = m_{n - 3} = 2m$, $m_{n - 1} = m_n = m$,
+\item $a_{12} = \ldots = a_{(n - 2) (n - 1)} = 2w$,
+$a_{(n - 2) n} = 2w$이고, $i < j$인 나머지 경우에는 $a_{ij} = 0$이며,
+\item $w_1 = w$, $w_2 = \ldots = w_n = 2w$
+\end{enumerate}
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-double-triple}
+$n \geq 6$이고 (\ref{models-item-quadruple})을 일반화하는 형이 있다.
+\begin{enumerate}
+\item $m_1 = m_2 = m$, $m_3 = \ldots = m_{n - 2} = 2m$, $m_{n - 1} = m_n = m$,
+\item $a_{13} = w$, $a_{23} = \ldots = a_{(n - 2) (n - 1)} = w$,
+$a_{(n - 2) n} = w$이고, $i < j$인 나머지 경우에는 $a_{ij} = 0$이며,
+\item $w_1 = \ldots = w_n = w$,
+\end{enumerate}
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-E6-completed}
+$n = 7$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m \\
+m \\
+2m \\
+m \\
+2m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & w & -2w & 0 & w & 0 & w \\
+0 & 0 & 0 & -2w & w & 0 & 0 \\
+0 & 0 & w & w & -2w & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & -2w & w \\
+0 & 0 & w & 0 & 0 & w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-E7-completed}
+$n = 8$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m \\
+4m \\
+3m \\
+2m \\
+m \\
+2m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 & 0 \\
+0 & w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & 0 & w & -2w & w & 0 & 0 & w \\
+0 & 0 & 0 & w & -2w & w & 0 & 0 \\
+0 & 0 & 0 & 0 & w & -2w & w & 0 \\
+0 & 0 & 0 & 0 & 0 & w & -2w & 0 \\
+0 & 0 & 0 & w & 0 & 0 & 0 & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\item
+\label{models-item-E8-completed}
+$n = 9$이고 $m_i, a_{ij}, w_i, g_i$는 다음과 같이 주어진다.
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m \\
+4m \\
+5m \\
+6m \\
+4m \\
+2m \\
+3m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & w & -2w & w & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & w & -2w & w & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & w & -2w & w & 0 & w \\
+0 & 0 & 0 & 0 & 0 & w & -2w & w & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & w & -2w & 0 \\
+0 & 0 & 0 & 0 & 0 & w & 0 & 0 & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+$w$와 $m$은 임의이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이는 절 \ref{models-section-classify-proper-subgraphs}에서 증명하였다. 절
+\ref{models-section-classify-proper-subgraphs}의 첫머리 논의를 참조하라.
+\end{proof}
+
+
+
+
+
+
+\section{수치형 불변량의 한계}
+\label{models-section-towards-classification}
+
+\noindent
+곡선의 반안정 축약을 증명할 때 종수 $g$인 수치형의 Picard 군에 대한
+한계를 사용할 것이며, 이 절에서 그 한계를 증명한다.
+
+\begin{lemma}
+\label{models-lemma-bound-neighbours}
+$n, m_i, a_{ij}, w_i, g_i$를 종수 $g$인 수치형이라 하자.
+$a_{ij} > 0$인 $i, j$에 대해
+$m_ia_{ij} \leq m_j|a_{jj}|$이고 $m_iw_i \leq m_j|a_{jj}|$이다.
+\end{lemma}
+
+\begin{proof}
+모든 지표 $j$에 대해 $m_j a_{jj} + \sum_{i \not = j} m_ia_{ij} = 0$이다.
+따라서 $|a_{jj}|$와 $m_j$의 상계가 있으면, 영이 아닌(따라서 양의)
+$a_{ij}$ 및 $m_i$의 상계도 얻는다. $w_i$가 $a_{ij}$를 나눈다는 사실을
+상기하면 보조정리를 쉽게 확인할 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-bound-heart}
+$g \geq 2$를 고정하자. $n > 1$이고 종수 $g$인 모든 극소 수치형
+$n, m_i, a_{ij}, w_i, g_i$에 대해 다음이 성립한다.
+\begin{enumerate}
+\item $(-2)$-지표가 아닌 지표들의 집합 $J \subset \{1, \ldots, n\}$의
+원소 수는 $2g - 2$ 이하이다.
+\item $j \in J$에 대해 $g_j < g$이다.
+\item $j \in J$에 대해 $m_j|a_{jj}| \leq 6g - 6$이다.
+\item $j \in J$, $i \in \{1, \ldots, n\}$에 대해
+$m_ia_{ij} \leq 6g - 6$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$g = 1 + \sum m_j(w_j(g_j - 1) - \frac{1}{2} a_{jj})$임을 상기하자.
+$j \in J$가 종수 $g$에 기여하는 항
+$m_j(w_j(g_j - 1) - \frac{1}{2} a_{jj})$는 $> 0$이고 따라서
+$\geq 1/2$이다. 여기서는 보조정리 \ref{models-lemma-minus-one}, 정의
+\ref{models-definition-type-minus-one}, 정의 \ref{models-definition-type-minimal},
+보조정리 \ref{models-lemma-minus-two}, 정의 \ref{models-definition-type-minus-two}를
+사용하였다. 아래에서는 이 결과들을 별도 언급 없이 사용한다. 따라서 $J$의
+원소 수는 $2(g - 1)$ 이하이다. 이것으로 (1)이 증명된다.
+
+\medskip\noindent
+보조정리 \ref{models-lemma-diagonal-negative}에 의해 모든 $i$에 대해
+$-a_{ii} > 0$임을 상기하자. 따라서 $j \in J$가 종수 $g$에 기여하는
+$m_j(w_j(g_j - 1) - \frac{1}{2} a_{jj})$는
+$> m_jw_j(g_j - 1)$이다. 그러므로
+$$
+g - 1 > m_jw_j(g_j - 1) \Rightarrow g_j < (g - 1)/m_jw_j + 1
+$$
+이고, 이는 실제로 $g_j < g$를 함의하여 (2)를 증명한다.
+
+\medskip\noindent
+$j \in J$에 대해 $g_j > 0$이면 종수 $g$에 기여하는 항
+$m_j(w_j(g_j - 1) - \frac{1}{2} a_{jj})$는
+$\geq -\frac{1}{2}m_ja_{jj}$이므로 즉시
+$m_j|a_{jj}| \leq 2(g - 1)$을 얻는다. 그렇지 않으면 $j \in J$이므로
+어떤 정수 $k \geq 3$에 대해 $a_{jj} = -kw_j$이고
+$$
+m_jw_j(-1 + \frac{k}{2}) \leq g - 1
+\Rightarrow
+m_jw_j \leq \frac{2(g - 1)}{k - 2}
+$$
+이를 $a_{jj} = -km_jw_j$에 다시 대입하면
+$$
+m_j|a_{jj}| \leq 2(g - 1) \frac{k}{k - 2} \leq 6(g - 1)
+$$
+을 얻는다. 이것으로 (3)이 증명된다.
+
+\medskip\noindent
+(4)는 보조정리 \ref{models-lemma-bound-neighbours}과 (3)에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-bound-wm}
+$g \geq 2$를 고정하자. 종수 $g$인 모든 극소 수치형
+$n, m_i, a_{ij}, w_i, g_i$에 대해 $m_i|a_{ij}| \leq 768g$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{models-lemma-bound-neighbours}에 의해 모든 $i$에 대해
+$m_i|a_{ii}| \leq 768g$임을 보이면 충분하다. $J \subset \{1, \ldots, n\}$를
+보조정리 \ref{models-lemma-bound-heart}에서와 같이 $(-2)$-지표가 아닌 지표들의
+집합이라 하자. $g \geq 2$이므로 $J$는 공집합이 아니다. 또한 그
+보조정리에 의해 $j \in J$에 대해 $m_j|a_{jj}| \leq 6g$이다.
+
+\medskip\noindent
+$j \in J$와 $(-2)$-지표의 수열 $i_1, \ldots, i_7$이 있어
+$a_{ji_1}$과 $a_{i_1i_2}$, $a_{i_2i_3}$, $a_{i_3i_4}$,
+$a_{i_4i_5}$, $a_{i_5i_6}$, $a_{i_6i_7}$이 영이 아니라고 하자.
+보조정리 \ref{models-lemma-bound-neighbours}에 의해
+$m_{i_1}w_{i_1} \leq 6g$이고 $m_{i_1}a_{ji_1} \leq 6g$이다.
+$i_1$이 $(-2)$-지표이므로 $a_{i_1i_1} = -2w_{i_1}$이고 따라서
+$m_{i_1}|a_{i_1i_1}| \leq 12g$이다. 논증을 반복하면
+$m_{i_2}w_{i_2} \leq 12g$이고 $m_{i_2}a_{i_1i_2} \leq 12g$이며,
+따라서 $m_{i_2}|a_{i_2i_2}| \leq 24g$인 식으로 계속된다. 마침내
+$k = 1, \ldots, 7$에 대해
+$m_{i_k}|a_{i_ki_k}| \leq 2^k(6g) \leq 768g$를 얻는다.
+
+\medskip\noindent
+$I \subset \{1, \ldots, n\} \setminus J$를 극대 연결 부분집합이라 하자.
+즉 $i' \in I'$, $i \in I \setminus I'$일 때 $a_{i'i} = 0$이 되는
+공집합이 아닌 진부분집합 $I' \subset I$가 없고, $I$는 이 성질에 관해
+극대이다. 특히 수치형은 정의상 연결되어 있으므로 $a_{ij} > 0$인
+$j \in J$와 $i \in I$가 존재한다. 명제
+\ref{models-proposition-classify-subgraphs}의 이런 $I$에 대한 분류와 앞 문단의
+결과를 사용하면, $I$가 보조정리 \ref{models-lemma-long} 또는 보조정리
+\ref{models-lemma-Dn}에 기술된 경우가 아닌 한 모든 $i \in I$에 대해
+$w_i|a_{ii}| \leq 768g$이다. 따라서 $i, i' \in I$에 대한 $a_{ii'}$의
+영 아닌 무늬가 다음 형태
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{..}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet
+}
+$$
+(보조정리 \ref{models-lemma-long}에 상세히 적은 세 하위 경우가 있다)이거나
+다음 형태라고 가정할 수 있다.
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{..}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \\
+& & & & \bullet
+}
+$$
+보조정리 \ref{models-lemma-long}의 첫째 하위 경우에 한계가 성립함을 증명하고,
+나머지 경우는 독자에게 맡긴다. 그 경우들의 논증도 거의 완전히 같다.
+
+\medskip\noindent
+번호를 다시 붙여 $I = \{1, \ldots, t\} \subset \{1, \ldots, n\}$라
+가정할 수 있고, 어떤 정수 $w$가 있어
+$$
+w = w_1 = \ldots = w_t =
+a_{12} = \ldots = a_{(t - 1) t} =
+-\frac{1}{2} a_{i_1i_2} = \ldots = -\frac{1}{2} a_{(t - 1) t}
+$$
+이다. 등식 $a_{ii}m_i + \sum_{j \not = i} a_{ij}m_j = 0$은
+$$
+2m_2 \geq m_1 + m_3, \ldots, 2m_{t - 1} \geq m_{t - 2} + m_t
+$$
+을 함의한다. $2m_i \geq m_{i - 1} + m_{i + 1}$에서 등호가 성립할
+필요충분조건은 $i$가 $i - 1$과 $i + 1$ 이외의 지표와 ``만나지'' 않는
+것이다. $i$가 다른 지표와 만나면 $I$의 극대성에 의해 그 지표는 $J$에
+속한다. 특히 사상 $\{1, \ldots, t\} \to \mathbf{Z}$,
+$i \mapsto m_i$는 오목하다.
+
+\medskip\noindent
+$m = \max(m_i, i \in \{1, \ldots, t\})$라 하자. 그러면 $i \leq t$에
+대해 $m_i|a_{ii}| \leq 2mw$이고, 목표는 $2mw \leq 768g$를 보이는 것이다.
+$\{1, \ldots, t\}$에서 $m_s = m = m_{s'}$인 가장 작은 지표와 가장 큰
+지표를 각각 $s$, $s'$라 하자. 오목성에 의해 $s \leq i \leq s'$이면
+$m_i = m$이다. $s > 1$이면 $2m_s \geq m_{s - 1} + m_{s + 1}$에서
+등호가 성립하지 않으므로 $s$는 $J$의 지표 하나와 만난다. 이 경우 증명의
+둘째 문단 결과에 의해 $2mw \leq 12g$이다. 마찬가지로 $s' < t$이면
+$s'$가 $J$의 지표와 만나고 역시 $2mw \leq 12g$이다. 한편 $s = 1$이고
+$s' = t$이면 모든 $j \in J$와 $i \in \{2, \ldots, t - 1\}$에 대해
+$a_{ij} = 0$이다. 그러나 $a_{ij} > 0$인 쌍 $(i, j) \in I \times J$가
+반드시 있음을 보았으므로, 이는 $i = 1$ 또는 $i = t$일 때 일어난다.
+이 경우 $m_1 = m = m_t$이므로 앞과 같은 방식으로 $2mw \leq 12g$를 얻는다.
+\end{proof}
+
+\begin{proposition}
+\label{models-proposition-bound-picard-group}
+$g \geq 2$라 하자. 종수 $g$인 모든 수치형 $T$와 소수
+$\ell > 768g$에 대해
+$$
+\dim_{\mathbf{F}_\ell} \Pic(T)[\ell] \leq g
+$$
+이다. 여기서 $\Pic(T)$는 정의 \ref{models-definition-picard-group}와 같다.
+$T$가 극소이면 더 나아가
+$$
+\dim_{\mathbf{F}_\ell} \Pic(T)[\ell] \leq g_{top} \leq g
+$$
+이다. 여기서 $g_{top}$은 정의 \ref{models-definition-top-genus}와 같다.
+\end{proposition}
+
+\begin{proof}
+$T$가 $n, m_i, a_{ij}, w_i, g_i$로 주어졌다고 하자. $T$가 극소가
+아니면 $(-1)$-지표가 존재한다. $T$를 동치인 형으로 바꾸어 $n$이
+$(-1)$-지표라고 가정할 수 있다. 보조정리
+\ref{models-lemma-contract-picard-group}을 적용하면 $\Pic(T) \subset \Pic(T')$이고,
+$T'$은 $n - 1$개의 지표를 갖는 종수 $g$의 수치형이다(보조정리
+\ref{models-lemma-contract}). 따라서 극소 수치형에 대해 보조정리를 증명하면
+$n$에 대한 귀납법으로 결론을 얻는다.
+
+\medskip\noindent
+$T$가 종수 $\geq 2$인 극소 수치형이라고 가정하자. 보조정리
+\ref{models-lemma-genus-nonnegative}에 의해 $g_{top} \leq g$이다.
+$A = (a_{ij})$라 하면 보조정리 \ref{models-lemma-picard-T-and-A}에 의해
+$\Pic(T) \subset \Coker(A)$이므로 $\Coker(A)$에 대해 증명하면 충분하다.
+보조정리 \ref{models-lemma-bound-wm}에 의해 모든 $i, j$에 대해
+$m_i|a_{ij}| \leq 768g$이다. 이제 보조정리
+\ref{models-lemma-recurring-symmetric-integer}에서 결과가 따른다.
+\end{proof}
+
+
+
+
+
+
+
+\section{모형}
+\label{models-section-models}
+
+\noindent
+이 장에서 $R$은 이산 값매김환이고 $K$는 그 분수체이다. 필요하면
+균등화 원소를 $\pi \in R$, 잉여체를 $k = R/(\pi)$로 나타낸다.
+
+\medskip\noindent
+$V$를 대수적 $K$-스킴이라 하자(Varieties, 정의
+\ref{varieties-definition-algebraic-scheme}). $V$의 {\it 모형}이란 동형
+$V \to X_K = X \times_{\Spec(R)} \Spec(K)$이 주어진 평탄 유한형
+사상\footnote{때로는 $R$ 위에서 국소 유한형인 모형을 허용하는 것이
+유용하지만, 필요해질 때 다룬다.} $X \to \Spec(R)$을 뜻한다. 흔히 $V$를
+$X$의 일반 올 $X_K$와 동일시하여 단순히 $V = X_K$라 쓴다. 특수 올은
+$X_k = X \times_{\Spec(R)} \Spec(k)$이다. $V$의 {\it 모형의 사상
+$X \to X'$}이란 $V$ 위에 항등사상을 유도하는 $R$ 위 스킴의 사상
+$X \to X'$이다.
+
+\medskip\noindent
+$X$가 $V$의 모형이고 구조 사상 $X \to \Spec(R)$이 고유이면
+{\it $X$는 $V$의 고유 모형}이라고 한다. 분리 모형, 매끄러운 모형 등도
+마찬가지이다. $X$가 $V$의 모형이고 $X$가 정칙 스킴이면
+{\it $X$는 $V$의 정칙 모형}이라고 한다. 정규 모형, 기약 모형 등도
+마찬가지이다.
+
+\medskip\noindent
+$R \subset R'$을 이산 값매김환의 확대라 하자(More on Algebra, 정의
+\ref{more-algebra-definition-extension-discrete-valuation-rings}). 이는
+분수체의 확대 $K'/K$를 유도한다. $K$ 위의 대수적 스킴 $V$가 주어졌을 때
+밑변환 $V \times_{\Spec(K)} \Spec(K')$을 $V'$라 쓰자. 그러면 함자
+$$
+V\text{의 }R\text{ 위 모형}
+\longrightarrow
+V'\text{의 }R'\text{ 위 모형}
+$$
+가 있으며 $X$를 $X \times_{\Spec(R)} \Spec(R')$로 보낸다.
+
+\begin{lemma}
+\label{models-lemma-closure-is-model}
+$V_1 \to V_2$를 $K$ 위 대수적 스킴의 닫힌 몰입이라 하자. $X_2$가
+$V_2$의 모형이면 $V_1 \to X_2$의 스킴론적 상은 $V_1$의 모형이다.
+\end{lemma}
+
+\begin{proof}
+Morphisms, 보조정리
+\ref{morphisms-lemma-quasi-compact-scheme-theoretic-image}와 예
+\ref{morphisms-example-scheme-theoretic-image}을 사용하면 다음 대수 명제로
+귀착된다. $A_1$을 $R$ 위에 평탄한 유한형 $R$-대수라 하고
+$A_1 \otimes_R K \to B_2$를 전사라 하자. 그러면
+$A_2 = A_1 / \Ker(A_1 \to B_2)$는 $R$ 위에 평탄한 유한형 $R$-대수이고
+$B_2 = A_2 \otimes_R K$이다. 자세한 증명은 생략한다. $A_2$의 평탄성에는
+More on Algebra, 보조정리
+\ref{more-algebra-lemma-dedekind-torsion-free-flat}을 사용하라.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-normalization}
+$X$를 $K$ 위의 기하적으로 정규인 다양체 $V$의 모형이라 하자. 그러면
+정규화 $\nu : X^\nu \to X$는 유한하고, $X^\nu$를 완비화 $R^\wedge$로
+밑변환한 것은 $X$의 밑변환의 정규화이다. 더욱이 각 $x \in X^\nu$에 대해
+$\mathcal{O}_{X^\nu, x}$의 완비화는 정규이다.
+\end{lemma}
+
+\begin{proof}
+$R^\wedge$는 이산 값매김환이다(More on Algebra, 보조정리
+\ref{more-algebra-lemma-completion-dvr}).
+$Y = X \times_{\Spec(R)} \Spec(R^\wedge)$라 두자. $R^\wedge$가 이산
+값매김환이므로
+$$
+Y \setminus Y_k =
+Y \times_{\Spec(R^\wedge)} \Spec(K^\wedge) =
+V \times_{\Spec(K)} \Spec(K^\wedge)
+$$
+이다. 여기서 $K^\wedge$는 $R^\wedge$의 분수체이다. $V$가 기하적으로
+정규이므로 이는 정규 스킴이다. 따라서 보조정리의 첫째 부분은 Resolution
+of Surfaces, 보조정리 \ref{resolve-lemma-normalization-completion}에서 따른다.
+
+\medskip\noindent
+둘째 부분을 증명할 때 첫째 부분에 의해 $X$와 $Y$가 정규라고 가정할 수
+있다. $x$가 일반 올에 있으면 $\mathcal{O}_{X, x} = \mathcal{O}_{V, x}$는
+체 위의 본질적 유한형 정규 국소환이다. 이런 환은 우수하다(More on
+Algebra, 명제 \ref{more-algebra-proposition-ubiquity-excellent}).
+$x$가 특수 올의 점이고 그 상이 $y \in Y$이면 Resolution of Surfaces,
+보조정리 \ref{resolve-lemma-iso-completions}에 의해
+$\mathcal{O}_{X, x}^\wedge = \mathcal{O}_{Y, y}^\wedge$이다. 이 경우
+$R^\wedge$가 우수하므로 앞과 같은 문헌에 의해 $\mathcal{O}_{Y, y}$는
+우수한 정규 국소 정역이다. $B$가 우수한 국소 정규 정역이면 완비화
+$B^\wedge$는 정규이다. 실제로 $B \to B^\wedge$가 정칙이고 More on
+Algebra, 보조정리 \ref{more-algebra-lemma-normal-goes-up}을 적용할 수 있다.
+이것으로 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-regular}
+$X$를 $K$ 위 매끄러운 곡선 $C$의 모형이라 하자. 그러면 $X$의 특이점
+해소가 존재하며, 모든 해소는 $C$의 모형이다.
+\end{lemma}
+
+\begin{proof}
+Lipman 정리(Resolution of Surfaces, 정리 \ref{resolve-theorem-resolve})의
+조건 (4)를 확인한다. $X^\nu$의 특이점이 유한 개라는 주장 외에는
+보조정리 \ref{models-lemma-normalization}에서 분명하다. More on Algebra, 명제
+\ref{more-algebra-proposition-ubiquity-J-2}에 의해 $R$이 J-2이므로
+비특이 자취는 $X^\nu$에서 열린집합이다. $X^\nu$가 차원 $\leq 2$인
+정규 스킴이므로 특이점들은 닫힌점이고, 특이 자취가 닫혔다는 사실과 $X$의
+준콤팩트성으로부터 그 수가 유한함이 따른다. $X$의 모든 해소는 $X$의
+변형이다(Resolution of Surfaces, 정의 \ref{resolve-definition-resolution}).
+Varieties, 보조정리
+\ref{varieties-lemma-modification-normal-iso-over-codimension-1}에 의해 이는
+$X$의 정규 자취 위에서 동형이다. 정규점들의 집합이 $C = X_K$를
+포함하므로 모든 해소는 $C$의 모형이다.
+\end{proof}
+
+\begin{definition}
+\label{models-definition-minimal-model}
+$C$를 $H^0(C, \mathcal{O}_C) = K$인 $K$ 위 매끄러운 사영곡선이라 하자.
+{\it 극소 모형}이란 $C$의 정칙 고유 모형 $X$로서 $X$가 제1종 예외곡선을
+포함하지 않는 것을 말한다(Resolution of Surfaces, 절
+\ref{resolve-section-minus-one}).
+\end{definition}
+
+\noindent
+엄밀히는 이를 극소 정칙 고유 모형, 또는 상대적 극소 정칙 사영 모형이라
+불러야 한다. 그러나 이 장에서처럼 이산 값매김환 위의 모형만 다루는 한
+혼동은 생기지 않을 것이다.
+
+\medskip\noindent
+극소 모형은 항상 존재하고(명제 \ref{models-proposition-exists-minimal-model}),
+종수가 $> 0$이면 유일하다(보조정리 \ref{models-lemma-minimal-model-unique}).
+
+\begin{lemma}
+\label{models-lemma-pre-exists-minimal-model}
+\begin{slogan}
+곡선의 정칙 고유 모형은 극소 모형에서 연속적인 부풀리기로 얻어진다.
+\end{slogan}
+$C$를 $H^0(C, \mathcal{O}_C) = K$인 $K$ 위 매끄러운 사영곡선이라 하자.
+$X$가 $C$의 정칙 고유 모형이면 사상들의 수열
+$$
+X = X_m \to X_{m - 1} \to \ldots \to X_1 \to X_0
+$$
+이 존재한다. 여기서 각 항은 $C$의 정칙 고유 모형이고, 각 사상은 제1종
+예외곡선의 수축이며, $X_0$은 극소 모형이다.
+\end{lemma}
+
+\begin{proof}
+Resolution of Surfaces, 보조정리
+\ref{resolve-lemma-regular-dim-2-projective}에 의해 $X$는 $R$ 위에서
+사영이다. 따라서 More on Morphisms, 보조정리
+\ref{more-morphisms-lemma-projective}에 의해 $X$에는 풍부한 가역층이 있다.
+이 사실은 아래에서 사용한다. $E \subset X$를 제1종 예외곡선이라 하자.
+Resolution of Surfaces, 절 \ref{resolve-section-minus-one}을 참조하라.
+Resolution of Surfaces, 보조정리 \ref{resolve-lemma-contract-ample}에 의해
+$X'$가 정칙이고 $R$ 위에서 사영이 되도록 하는 사상 $X \to X'$로 $E$를
+수축할 수 있다. $X'_k$의 기약 성분 수는 분명 $X_k$의 기약 성분 수보다
+정확히 하나 작다. 따라서 극소 모형을 얻을 때까지 이런 수축을 유한 번만
+수행할 수 있다.
+\end{proof}
+
+\begin{proposition}
+\label{models-proposition-exists-minimal-model}
+$C$를 $H^0(C, \mathcal{O}_C) = K$인 $K$ 위 매끄러운 사영곡선이라 하자.
+극소 모형이 존재한다.
+\end{proposition}
+
+\begin{proof}
+닫힌 몰입 $C \to \mathbf{P}^n_K$를 택하고 $X$를
+$C \to \mathbf{P}^n_R$의 스킴론적 상이라 하자. 보조정리
+\ref{models-lemma-closure-is-model}에 의해 $X \to \Spec(R)$은 $C$의 사영 모형이다.
+보조정리 \ref{models-lemma-regular}에 의해 특이점 해소 $X' \to X$가 존재하고
+$X'$은 $C$의 모형이다. $X' \to \Spec(R)$은 고유 사상의 합성이므로
+고유하다. 이제 보조정리 \ref{models-lemma-pre-exists-minimal-model}을 적용하여
+극소 모형을 얻는다.
+\end{proof}
+
+
+
+
+
+\section{정칙 모형의 기하}
+\label{models-section-special-fibre}
+
+\noindent
+이 절에서는 $H^0(C, \mathcal{O}_C) = K$인 $K$ 위 매끄러운 사영곡선
+$C$의 정칙 고유 모형 $X$의 기하를 기술한다.
+
+\begin{lemma}
+\label{models-lemma-divisor-special-fiber}
+$X$를 $K$ 위 매끄러운 곡선 $C$의 정칙 모형이라 하자.
+\begin{enumerate}
+\item 특수 올 $X_k$는 $X$ 위의 유효 Cartier 인자이다.
+\item $X_k$의 각 기약 성분 $C_i$는 $X$ 위의 유효 Cartier 인자이다.
+\item $X_k = \sum m_i C_i$이고(유효 Cartier 인자의 합), 여기서 $m_i$는
+$X_k$에서 $C_i$의 중복도이다.
+\item $\mathcal{O}_X(X_k) \cong \mathcal{O}_X$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$R$은 균등화 원소가 $\pi$이고 잉여체가 $k = R/(\pi)$인 이산 값매김환이다.
+$X \to \Spec(R)$이 평탄하므로 원소 $\pi$는 $X$ 위에서 아핀 국소적으로
+영인자가 아니다(More on Algebra, 보조정리
+\ref{more-algebra-lemma-dedekind-torsion-free-flat} 참조). 따라서
+$U = \Spec(A) \subset X$가 아핀 열린집합이면
+$$
+X_k \cap U = U_k = \Spec(A \otimes_R k) = \Spec(A/\pi A)
+$$
+이고 $\pi$는 $A$에서 영인자가 아니다. 따라서 Divisors, 보조정리
+\ref{divisors-lemma-characterize-effective-Cartier-divisor}에 의해
+$X_k = V(\pi)$는 유효 Cartier 인자이다. 그러므로 (1)이 성립한다.
+
+\medskip\noindent
+위 논의에서 쌍 $(\mathcal{O}_X(X_k), 1)$은 $(\mathcal{O}_X, \pi)$와
+동형이며, 이것으로 (4)가 증명된다.
+
+\medskip\noindent
+Divisors, 보조정리
+\ref{divisors-lemma-effective-Cartier-divisor-is-a-sum}에 의해 서로 다른
+정수적 유효 Cartier 인자 $D_i \subset X$와 정수 $a_i \geq 0$가 존재하여
+$X_k = \sum a_i D_i$이다. $a_i = 0$인 인자 $D_i$는 버릴 수 있다.
+그러면 유효 Cartier 인자의 합의 정의에서 집합론적으로
+$X_k = \bigcup D_i$임이 분명하다. 따라서 $C_i = D_i$는 $X_k$의 기약
+성분이며 (2)가 증명된다. $\xi_i$를 $C_i$의 일반점이라 하자. 그러면
+$\mathcal{O}_{X, \xi_i}$는 이산 값매김환이다(Divisors, 보조정리
+\ref{divisors-lemma-integral-effective-Cartier-divisor-dvr}). 균등화 원소
+$\pi_i \in \mathcal{O}_{X, \xi_i}$는 $C_i$의 국소방정식이고 $\pi$의 상은
+$X_k$의 국소방정식이다. $X_k = \sum a_i C_i$이므로 $\pi$와
+$\pi_i^{a_i}$는 $\mathcal{O}_{X, \xi_i}$에서 같은 아이디얼을 생성한다.
+한편 $X_k$에서 $C_i$의 중복도는
+$$
+m_i = \text{length}_{\mathcal{O}_{C_i, \xi_i}} \mathcal{O}_{X_k, \xi_i} =
+\text{length}_{\mathcal{O}_{C_i, \xi_i}} \mathcal{O}_{X, \xi_i}/(\pi) =
+\text{length}_{\mathcal{O}_{C_i, \xi_i}} \mathcal{O}_{X, \xi_i}/(\pi_i^{a_i}) =
+a_i
+$$
+이다. Chow Homology, 정의
+\ref{chow-definition-cycle-associated-to-closed-subscheme}를 참조하라.
+따라서 $a_i = m_i$이고 (3)이 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-gorenstein}
+$X$를 $K$ 위 매끄러운 곡선 $C$의 정칙 모형이라 하자. 그러면
+\begin{enumerate}
+\item $X \to \Spec(R)$은 상대차원 $1$의 Gorenstein 사상이고,
+\item $X_k$의 각 기약 성분 $C_i$는 Gorenstein이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X \to \Spec(R)$이 평탄하므로 (1)을 증명하려면 올들이 Gorenstein임을
+보이면 충분하다(Duality for Schemes, 보조정리
+\ref{duality-lemma-gorenstein-morphism}). 일반 올은 매끄러운 곡선이므로
+정칙이고 따라서 Gorenstein이다(Duality for Schemes, 보조정리
+\ref{duality-lemma-regular-gorenstein}). 특수 올 $X_k$는 정칙인, 따라서
+Gorenstein인 스킴 위의 유효 Cartier 인자이므로 Gorenstein이다. 예를 들어
+Dualizing Complexes, 보조정리
+\ref{dualizing-lemma-gorenstein-divide-by-nonzerodivisor}를 사용한다.
+같은 논증으로 곡선 $C_i$들도 Gorenstein이다.
+\end{proof}
+
+\begin{situation}
+\label{models-situation-regular-model}
+$R$을 분수체가 $K$, 잉여체가 $k$, 균등화 원소가 $\pi$인 이산 값매김환이라
+하자. $C$를 $H^0(C, \mathcal{O}_C) = K$인 $K$ 위 매끄러운 사영곡선이라
+하고, $X$를 $C$의 정칙 고유 모형이라 하자. $C_1, \ldots, C_n$을 특수 올
+$X_k$의 기약 성분이라 하자. 보조정리 \ref{models-lemma-divisor-special-fiber}처럼
+$X_k = \sum m_i C_i$로 쓰자.
+\end{situation}
+
+\begin{lemma}
+\label{models-lemma-regular-model-connected}
+상황 \ref{models-situation-regular-model}에서 특수 올 $X_k$는 연결이다.
+\end{lemma}
+
+\begin{proof}
+More on Morphisms, 보조정리
+\ref{more-morphisms-lemma-geometrically-connected-fibres-towards-normal}의
+귀결이다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-regular-model-pic}
+상황 \ref{models-situation-regular-model}에서 완전열
+$$
+0 \to \mathbf{Z} \to \mathbf{Z}^{\oplus n} \to
+\Pic(X) \to \Pic(C) \to 0
+$$
+이 있다. 첫째 사상은 $1$을 $(m_1, \ldots, m_n)$으로 보내고, 둘째 사상은
+$i$번째 기저 벡터를 $\mathcal{O}_X(C_i)$로 보낸다.
+\end{lemma}
+
+\begin{proof}
+$C \subset X$는 열린 부분스킴이다. 제한 사상 $\Pic(X) \to \Pic(C)$은
+Divisors, 보조정리 \ref{divisors-lemma-extend-invertible-module}에 의해
+전사이다. 동형 $s : \mathcal{O}_C \to \mathcal{L}|_C$가 존재하는 가역
+$\mathcal{O}_X$-가군 $\mathcal{L}$을 택하자. 그러면 $s$는 $\mathcal{L}$의
+정칙 유리형 단면이고, 어떤 $a_i \in \mathbf{Z}$에 대해
+$\text{div}_\mathcal{L}(s) = \sum a_i C_i$이다(Divisors, 정의
+\ref{divisors-definition-divisor-invertible-sheaf}). Divisors, 보조정리
+\ref{divisors-lemma-normal-c1-injective}과 $X$의 정규성에 의해
+$\mathcal{L} = \mathcal{O}_X(\sum a_iC_i)$이다. 마지막으로
+$\mathcal{O}_X(\sum a_i C_i) \cong \mathcal{O}_X$라고 하자. 그러면 $X$의
+함수체에 $\text{div}_X(g) = \sum a_i C_i$인 원소 $g$가 존재한다. 특히
+유리함수 $g$는 $X$의 일반 올 $C$에서 영점도 극도 갖지 않는다. $C$가
+정규 스킴이므로 $g \in H^0(C, \mathcal{O}_C) = K$이다. 따라서 어떤
+$a \in \mathbf{Z}$와 $u \in R^*$에 대해 $g = \pi^a u$이다. 그러므로
+$\text{div}_X(g) = a \sum m_i C_i$이고 증명이 끝난다.
+\end{proof}
+
+\noindent
+상황 \ref{models-situation-regular-model}에서 모든 가역 $\mathcal{O}_X$-가군
+$\mathcal{L}$과 모든 $i$에 대해 정수
+$$
+\deg(\mathcal{L}|_{C_i}) =
+\chi(C_i, \mathcal{L}|_{C_i}) - \chi(C_i, \mathcal{O}_{C_i})
+$$
+를 얻는다. 이는 Varieties, 절 \ref{varieties-section-divisors-curves}에서처럼
+$\mathcal{L}$을 $C_i$에 제한한 것의 바탕체 $k$에 대한 차수이다.\footnote{체
+$\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$가 $k$보다 진정으로 클 수 있다.
+이 경우 $C_i$ 위의 모든 가역 가군은 위에서 정의한 차수가
+$[\kappa_i : k]$로 나누어진다.}
+
+\begin{lemma}
+\label{models-lemma-intersection-pairing}
+상황 \ref{models-situation-regular-model}에서 가역 $\mathcal{O}_X$-가군
+$\mathcal{L}$과 $a = (a_1, \ldots, a_n) \in \mathbf{Z}^{\oplus n}$에 대해
+$$
+\langle a, \mathcal{L} \rangle = \sum a_i\deg(\mathcal{L}|_{C_i})
+$$
+로 정의한다. 그러면 $\langle , \rangle$는 쌍선형이고
+$b = (b_1, \ldots, b_n) \in \mathbf{Z}^{\oplus n}$에 대해
+$$
+\left\langle a, \mathcal{O}_X(\sum b_i C_i) \right\rangle =
+\left\langle b, \mathcal{O}_X(\sum a_i C_i) \right\rangle
+$$
+\end{lemma}
+
+\begin{proof}
+쌍선형성은 정의와 Varieties, 보조정리
+\ref{varieties-lemma-degree-tensor-product}에서 즉시 따른다. 대칭성을
+증명하려면 $a$와 $b$가 $\mathbf{Z}^{\oplus n}$의 표준기저 벡터라고
+가정해도 충분하다. 따라서 모든 $1 \leq i, j \leq n$에 대해
+$$
+\deg(\mathcal{O}_X(C_j)|_{C_i}) = \deg(\mathcal{O}_X(C_i)|_{C_j})
+$$
+임을 보이면 된다. $i = j$이면 증명할 것이 없다. $i \not = j$이면
+$\mathcal{O}_X(C_j)$의 표준 단면 $1$은 $\mathcal{O}_X(C_j)|_{C_i}$의
+영이 아닌, 따라서 정칙인 단면으로 제한되고, 그 영점 스킴은 정확히
+$C_i \cap C_j$이다(스킴론적 교차). 다시 말해 $C_i \cap C_j$는 $C_i$
+위의 유효 Cartier 인자이고
+$$
+\deg(\mathcal{O}_X(C_j)|_{C_i}) = \deg(C_i \cap C_j)
+$$
+이다(Varieties, 보조정리
+\ref{varieties-lemma-degree-effective-Cartier-divisor}). 대칭성으로 반대쪽에
+대해서도 같은 식을 얻으며 증명이 끝난다.
+\end{proof}
+
+\noindent
+상황 \ref{models-situation-regular-model}에서 $\mathbf{Z}^{\oplus n}$을 집합
+$\{C_1, \ldots, C_n\}$ 위의 자유 아벨군으로 생각하면 편리할 때가 많다.
+이 군의 원소를 $\sum a_i C_i$로 나타낸다. 이를 형식적 합으로 생각하지만,
+동치이게 $X_k$ 위에 지지되는 $X$의 Weil 인자로 생각해도 되고 실제로
+그렇게 할 때도 있다. 이제 보조정리 \ref{models-lemma-intersection-pairing}에 의해
+이 자유 아벨군 위의 대칭 쌍선형 형식 $(\ \cdot\ )$을 다음 규칙으로 정의한다.
+\begin{equation}
+\label{models-equation-form}
+\left(\sum a_i C_i \cdot \sum b_j C_j\right) =
+\left\langle a, \mathcal{O}_X(\sum b_j C_j) \right\rangle =
+\left\langle b, \mathcal{O}_X(\sum a_i C_i) \right\rangle
+\end{equation}
+이 쌍선형 형식의 몇 가지 성질을 증명한다.
+
+\begin{lemma}
+\label{models-lemma-properties-form}
+상황 \ref{models-situation-regular-model}에서 대칭 쌍선형 형식
+(\ref{models-equation-form})은 다음 성질을 갖는다.
+\begin{enumerate}
+\item $i \not = j$이면 $(C_i \cdot C_j) \geq 0$이고, 등호가 성립할
+필요충분조건은 $C_i \cap C_j = \emptyset$이다.
+\item $(\sum m_i C_i \cdot C_j) = 0$,
+\item $i \in I$, $j \not \in I$일 때 $(C_i \cdot C_j) = 0$이 되는
+공집합이 아닌 진부분집합 $I \subset \{1, \ldots, n\}$는 존재하지 않는다.
+\item $(\sum a_i C_i \cdot \sum a_i C_i) \leq 0$이고, 등호가 성립할
+필요충분조건은 $i = 1, \ldots, n$에 대해 $a_i = qm_i$인
+$q \in \mathbf{Q}$가 존재하는 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{models-lemma-intersection-pairing}의 증명에서 $i \not = j$이면
+$(C_i \cdot C_j) = \deg(C_i \cap C_j)$임을 보았다. 이는 $\geq 0$이고,
+$> 0 $일 필요충분조건은 $C_i \cap C_j \not = \emptyset$이다. 이로써
+(1)이 증명된다.
+
+\medskip\noindent
+(2)의 증명. 보조정리 \ref{models-lemma-divisor-special-fiber}에 의해
+$\sum m_i C_i$에 결부된 가역층은 자명하고, 자명한 층의 차수는 영이다.
+
+\medskip\noindent
+(3)의 증명. 이는 (1)의 증명에서 얻은 교차곱의 기술을 통해 $X_k$가
+연결이라는 사실(보조정리 \ref{models-lemma-regular-model-connected})을 나타낸다.
+
+\medskip\noindent
+(4)는 (1), (2), (3)과 보조정리 \ref{models-lemma-recurring-symmetric-real}에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-multiple-fibre-normal-bundle}
+상황 \ref{models-situation-regular-model}에서 $d = \gcd(m_1, \ldots, m_n)$라 두고
+$D = \sum (m_i/d)C_i$를 유효 Cartier 인자로 보자. 그러면
+$\mathcal{O}_X(D)$는 $\Pic(X)$에서 위수가 $d$의 약수이고,
+$\mathcal{C}_{D/X}$는 $\Pic(D)$에서 위수가 $d$의 약수인 가역
+$\mathcal{O}_D$-가군이다.
+\end{lemma}
+
+\begin{proof}
+다음이 성립한다.
+$$
+\mathcal{O}_X(D)^{\otimes d} = \mathcal{O}_X(dD) =
+\mathcal{O}_X(X_k) = \mathcal{O}_X
+$$
+이다(보조정리 \ref{models-lemma-divisor-special-fiber}). $\mathcal{C}_{D/X}$는
+$\mathcal{O}_X(-D)$의 당김이므로 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-regular-model-field}
+\begin{reference}
+\cite[보조정리 2.6]{Artin-Winters}
+\end{reference}
+상황 \ref{models-situation-regular-model}에서 $d = \gcd(m_1, \ldots, m_n)$라 하고
+$D = \sum (m_i/d) C_i$를 유효 Cartier 인자로 보자. 그러면 유효 Cartier
+인자들의 수열
+$$
+(X_k)_{red} = Z_0 \subset Z_1 \subset \ldots \subset Z_m = D
+$$
+이 존재한다. $j = 1, \ldots, m$에 대해 어떤
+$i_j \in \{1, \ldots, n\}$가 있어 $Z_j = Z_{j - 1} + C_{i_j}$이고,
+$j = 0, \ldots m$에 대해 $H^0(Z_j, \mathcal{O}_{Z_j})$는 $k$의 유한
+확대체이다.
+\end{lemma}
+
+\begin{proof}
+기약화 $D_{red} = (X_k)_{red} = \sum C_i$는 연결이고(보조정리
+\ref{models-lemma-regular-model-connected}) $k$ 위에서 고유하다. 따라서
+Varieties, 보조정리
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections}에 의해
+$H^0(D_{red}, \mathcal{O})$는 $k$의 유한 확대체이다. 그러므로
+$Z_0 = D_{red} = (X_k)_{red}$에 대한 결과가 성립한다. 이미
+$$
+(X_k)_{red} = Z_0 \subset Z_1 \subset \ldots \subset Z_t \subset D
+$$
+를 구성했다고 하자. 여기서 $j = 1, \ldots, t$에 대해 어떤
+$i_j \in \{1, \ldots, n\}$가 있어 $Z_j = Z_{j - 1} + C_{i_j}$이고,
+$j = 0, \ldots, t$에 대해 $H^0(Z_j, \mathcal{O}_{Z_j})$는 $k$의 유한
+확대체이다. $1 \leq a_i \leq m_i/d$가 되도록
+$Z_t = \sum a_i C_i$로 쓰자. 모든 $i$에 대해 $a_i = m_i/d$이면
+$Z_t = D$이고 증명이 끝난다. 그렇지 않으면 어떤 $i$에 대해
+$a_i < m_i/d$이고, 보조정리 \ref{models-lemma-properties-form}에 의해
+$(Z_t \cdot Z_t) < 0$이다. 또한 그 보조정리에 의해 $(D \cdot Z_t) = 0$이므로
+$(D - Z_t \cdot Z_t) > 0$이다. 따라서 $a_i < m_i/d$이고
+$(C_i \cdot Z_t) > 0$인 $i$를 찾을 수 있다.
+$Z_{t + 1} = Z_t + C_i$, $i_{t + 1} = i$라 두고 짧은 완전열
+$$
+0 \to \mathcal{O}_X(-Z_t)|_{C_i} \to \mathcal{O}_{Z_{t + 1}} \to
+\mathcal{O}_{Z_t} \to 0
+$$
+을 생각하자(Divisors, 보조정리 \ref{divisors-lemma-ses-add-divisor}).
+$i$의 선택에 의해 $\mathcal{O}_X(-Z_t)|_{C_i}$는 고유 곡선 $C_i$ 위의
+음의 차수인 가역층이므로 영이 아닌 대역 단면을 갖지 않는다(Varieties,
+보조정리 \ref{varieties-lemma-check-invertible-sheaf-trivial}). 따라서
+$H^0(\mathcal{O}_{Z_{t + 1}}) \subset H^0(\mathcal{O}_{Z_t})$는 체이며
+(이는 분명하지만 Algebra, 보조정리 \ref{algebra-lemma-integral-under-field}에서도
+따른다) $k$의 유한 확대이다. 이로써 수열을 연장했다. 예를 들어
+$t \leq \sum (m_i/d - 1)$이므로 과정은 반드시 끝나고 증명도 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-regular-model-genus}
+\begin{reference}
+\cite[보조정리 2.6]{Artin-Winters}
+\end{reference}
+상황 \ref{models-situation-regular-model}에서 $d = \gcd(m_1, \ldots, m_n)$라 하고
+$D = \sum (m_i/d) C_i$를 $X$ 위의 유효 Cartier 인자로 보자. 그러면
+$$
+1 - g_C = d [\kappa : k] (1 - g_D)
+$$
+이다. 여기서 $g_C$는 $C$의 종수, $g_D$는 $D$의 종수이고
+$\kappa = H^0(D, \mathcal{O}_D)$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{models-lemma-regular-model-field}에 의해 $\kappa$는 $k$의 유한
+확대체이다. 또한 $H^0(C, \mathcal{O}_C) = K$이므로 $C$와 $D$의 종수가
+정의되며(Algebraic Curves, 정의 \ref{curves-definition-genus} 참조),
+$g_C = \dim_K H^1(C, \mathcal{O}_C)$ 및
+$g_D = \dim_\kappa H^1(D, \mathcal{O}_D)$이다. Derived Categories of
+Schemes, 보조정리 \ref{perfect-lemma-chi-locally-constant-geometric}에 의해
+$$
+1 - g_C = \chi(C, \mathcal{O}_C) =
+\chi(X_k, \mathcal{O}_{X_k}) = \dim_k H^0(X_k, \mathcal{O}_{X_k})
+- \dim_k H^1(X_k, \mathcal{O}_{X_k})
+$$
+라고 주장한다.
+$$
+\chi(X_k, \mathcal{O}_{X_k}) = d \chi(D, \mathcal{O}_D)
+$$
+이는 다음 등식 때문에 보조정리를 증명한다.
+$$
+\chi(D, \mathcal{O}_D) =
+\dim_k H^0(D, \mathcal{O}_D) - \dim_k H^1(D, \mathcal{O}_D) =
+[\kappa : k](1 - g_D)
+$$
+$X_k = dD$는 유효 Cartier 인자의 등식이다. 주장을 증명하기 위해
+$1 \leq r \leq d$에 대한 귀납법으로
+$\chi(rD, \mathcal{O}_{rD}) = r \chi(D, \mathcal{O}_D)$임을 보인다.
+$r = 1$인 경우는 자명하다. $1 \leq r < d$이면 짧은 완전열
+$$
+0 \to \mathcal{O}_X(rD)|_D \to \mathcal{O}_{(r + 1)D} \to
+\mathcal{O}_{rD} \to 0
+$$
+을 생각한다(Divisors, 보조정리 \ref{divisors-lemma-ses-add-divisor}).
+Euler 지표의 가법성(Varieties, 보조정리
+\ref{varieties-lemma-euler-characteristic-additive})에 의해
+$\chi(D, \mathcal{O}_X(rD)|_D) = \chi(D, \mathcal{O}_D)$임을 보이면
+충분하다. $\mathcal{O}_X(rD)|_D$는 $\Pic(D)$의 꼬임 원소이고(보조정리
+\ref{models-lemma-multiple-fibre-normal-bundle}), 선다발의 차수는 가법적이어서
+(Varieties, 보조정리 \ref{varieties-lemma-degree-tensor-product}) 꼬임
+가역층에서는 영이므로 이 등식이 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-exceptional-curves-dont-meet}
+상황 \ref{models-situation-regular-model}에서 $C_i$와 $C_j$가 제1종 예외곡선이고
+$C_i \cap C_j \not = \emptyset$인 지표의 쌍 $i, j$가 주어지면
+$n = 2$, $m_1 = m_2 = 1$, $C_1 \cong \mathbf{P}^1_k$,
+$C_2 \cong \mathbf{P}^1_k$이며, $C_1$과 $C_2$는 $k$-유리점에서 만나고
+$C$의 종수는 $0$이다.
+\end{lemma}
+
+\begin{proof}
+동형 $C_i = \mathbf{P}^1_{\kappa_i}$와
+$C_j = \mathbf{P}^1_{\kappa_j}$를 택하자. 스킴 $C_i \cap C_j$는 $C_i$와
+$C_j$ 모두에서 공집합이 아닌 유효 Cartier 인자이다. 따라서
+$$
+(C_i \cdot C_j) = \deg(C_i \cap C_j) \geq \max([\kappa_i: k], [\kappa_j : k])
+$$
+이다. 첫째 등식은 보조정리 \ref{models-lemma-intersection-pairing}의 증명에서
+보였다. 한편 자기교차 $(C_i \cdot C_i)$는 $C_i$ 위에서
+$\mathcal{O}_X(C_i)$의 차수와 같고, $C_i$가 제1종 예외곡선이므로 이는
+$-[\kappa_i : k]$이다. $C_j$에 대해서도 마찬가지이다. 보조정리
+\ref{models-lemma-properties-form}에 의해
+$$
+0 \geq (C_i + C_j)^2 = -[\kappa_i : k] + 2(C_i \cdot C_j) - [\kappa_j : k]
+$$
+이다. 이는 $[\kappa_i : k] = \deg(C_i \cap C_j) = [\kappa_j : k]$이고
+$(C_i + C_j)^2 = 0$임을 함의한다. 보조정리를 다시 보면 $n = 2$,
+$\{1, 2\} = \{i, j\}$, $m_1 = m_2$임을 얻는다. 더욱이 스킴론적 교차
+$C_i \cap C_j$는 잉여체가 $\kappa$인 한 점 $p$로 이루어지고
+$\kappa_i \to \kappa \leftarrow \kappa_j$는 동형이다.
+$D = C_1 + C_2$를 $X$ 위의 유효 Cartier 인자로 보자. $D$는 $C_1$과
+$C_2$의 스킴론적 합집합이므로(Divisors, 보조정리
+\ref{divisors-lemma-sum-effective-Cartier-divisors-union}) 짧은 완전열
+$$
+0 \to \mathcal{O}_D \to \mathcal{O}_{C_1} \oplus \mathcal{O}_{C_2} \to
+\mathcal{O}_p \to 0
+$$
+이 있다(Morphisms, 보조정리
+\ref{morphisms-lemma-scheme-theoretic-union}).
+$C_i \cong \mathbf{P}^1_\kappa$의 코호몰로지를 알고 있으므로(Cohomology of
+Schemes, 보조정리 \ref{coherent-lemma-cohomology-projective-space-over-ring}),
+긴 완전 코호몰로지 열에서 $H^0(D, \mathcal{O}_D) = \kappa$이고
+$H^1(D, \mathcal{O}_D) = 0$임을 얻는다. 보조정리
+\ref{models-lemma-regular-model-genus}에 의해
+$$
+1 - g_C = d[\kappa : k](1 - 0)
+$$
+이다. 여기서 $d = m_1 = m_2$이다. 따라서 $g_C = 0$,
+$d = m_1 = m_2 = 1$, $\kappa = k$이다.
+\end{proof}
+
+
+
+
+
+\section{극소 모형의 유일성}
+\label{models-section-uniqueness}
+
+\noindent
+일반 올의 종수가 양수이면 극소 모형은 유일하고(보조정리
+\ref{models-lemma-minimal-model-unique}), 따라서 적절한 사상 성질을 갖는다
+(보조정리 \ref{models-lemma-minimal-model-mapping-property}).
+
+\begin{lemma}
+\label{models-lemma-minimal-model-unique}
+$C$를 $H^0(C, \mathcal{O}_C) = K$이고 종수가 $> 0$인 $K$ 위 매끄러운
+사영곡선이라 하자. $C$의 극소 모형은 유일하다.
+\end{lemma}
+
+\begin{proof}
+극소 모형의 존재라는 보조정리의 어려운 부분은 이미 증명하였다. 그 증명은
+곡면 특이점의 해소에 의존한다. 명제 \ref{models-proposition-exists-minimal-model}을
+참조하라. 유일성을 증명하기 위해 $X$와 $Y$가 두 극소 모형이라고 하자.
+Resolution of Surfaces, 보조정리
+\ref{resolve-lemma-birational-regular-surfaces}에 의해 $S$-사상의 그림
+$$
+X = X_0 \leftarrow X_1 \leftarrow \ldots \leftarrow X_n = Y_m
+\to \ldots \to Y_1 \to Y_0 = Y
+$$
+이 존재하고 각 사상은 닫힌점에서의 부풀리기이다. 사상
+$X_n \to X_{n - 1}$의 예외 올은 제1종 예외곡선 $E$이다. 사상
+$X_n = Y_m \to Y$ 아래에서 $E$가 한 점으로 수축된다고 주장한다. 이것이
+참이면 Resolution of Surfaces, 보조정리
+\ref{resolve-lemma-factor-through-contraction}에 의해 $X_n \to Y$는
+$X_{n - 1}$을 통해 인수분해된다. 이 경우 Resolution of Surfaces, 보조정리
+\ref{resolve-lemma-proper-birational-regular-surfaces}에 의해
+$X_{n - 1} \to Y$도 여전히 예외곡선 수축의 수열이다. 따라서 $n$에 대한
+귀납법으로 결론을 얻는다. (시작 경우 $n = 0$은 $Y$에서 끝나는 수축의 수열
+$X = Y_m \to \ldots \to Y_1 \to Y_0 = Y$
+이 있다는 뜻이다. 그러나 $X$는 극소 모형이므로 제1종 예외곡선을 포함하지
+않고, 따라서 $m = 0$이고 $X = Y$이다.)
+
+\medskip\noindent
+주장의 증명. $m$에 대한 귀납법으로 임의의 제1종 예외곡선
+$E \subset Y_m$이 사상 $Y_m \to Y$에 의해 한 점으로 간다는 것을 보인다.
+$m = 0$이면 $Y$가 극소 모형이므로 분명하다. $m > 0$이면
+$Y_m \to Y_{m - 1}$가 $E$를 수축하여 끝나거나, $Y_m \to Y_{m - 1}$의
+예외 올 $E' \subset Y_m$이 또 다른 제1종 예외곡선이다. $E$와 $E'$는
+모두 특수 올의 기약 성분이고 가정에 의해 $g_C > 0$이므로 보조정리
+\ref{models-lemma-exceptional-curves-dont-meet}에 의해 $E \cap E' = \emptyset$이다.
+그러면 $Y_{m - 1}$에서 $E$의 상은 제1종 예외곡선이다. 실제로
+$Y_m \to Y_{m - 1}$은 $E$의 근방에서 동형이다. 귀납가정에 의해
+$Y_{m - 1} \to Y$가 이 곡선을 수축하므로 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-minimal-model-mapping-property}
+$C$를 $H^0(C, \mathcal{O}_C) = K$이고 종수가 $> 0$인 $K$ 위 매끄러운
+사영곡선이라 하자. $X$를 $C$의 극소 모형이라 하고(보조정리
+\ref{models-lemma-minimal-model-unique}), $Y$를 $C$의 정칙 고유 모형이라 하자.
+그러면 모형의 사상 $Y \to X$가 유일하게 존재하며, 이는 제1종 예외곡선
+수축의 수열이다.
+\end{lemma}
+
+\begin{proof}
+사상 $X \to Y$의 존재와 성질은 보조정리
+\ref{models-lemma-pre-exists-minimal-model}과 극소 모형의 유일성에서 즉시 따른다.
+$C \subset Y$가 스킴론적으로 조밀하고 $X$가 분리이므로 사상
+$Y \to X$는 유일하다(Morphisms, 보조정리
+\ref{morphisms-lemma-equality-of-morphisms} 참조).
+\end{proof}
+
+\begin{example}
+\label{models-example-nonunique-in-genus-zero}
+$C$의 종수가 $0$이면 극소 모형은 실제로 유일하지 않다. 닫힌 부분스킴
+$$
+X \subset \mathbf{P}^2_R
+$$
+을 생각하자. 이는 $T_1T_2 - \pi T_0^2 = 0$으로 정의된다. 더 정확히
+$X$는 $\text{Proj}(R[T_0, T_1, T_2]/(T_1T_2 - \pi T_0^2))$로 정의된다.
+그러면 특수 올 $X_k$는 둘 다 $\mathbf{P}^1_k$와 동형인 두 예외곡선
+$C_1$, $C_2$의 합집합이다(보조정리
+\ref{models-lemma-exceptional-curves-dont-meet}와 정확히 같은 상황이다).
+$(0 : 1 : 0)$에서의 사영은 $C_2$를 수축하고 $C_1$을
+$\mathbf{P}^1_R$의 특수 올과 동형으로 보내는 사상
+$X \to \mathbf{P}^1_R$을 정의한다. $(0 : 0 : 1)$에서의 사영은 $C_1$을
+수축하고 $C_2$를 $\mathbf{P}^1_R$의 특수 올과 동형으로 보내는 사상
+$X \to \mathbf{P}^1_R$을 정의한다. 더 정확히 이 사상들은 등급
+$R$-대수 사상
+$$
+R[T_0, T_1] \longrightarrow
+R[T_0, T_1, T_2]/(T_1T_2 - \pi T_0^2) \longleftarrow
+R[T_0, T_2]
+$$
+에 대응한다. 보조정리 \ref{models-lemma-nonuniqueness}에서 이 현상을 연구한다.
+\end{example}
+
+
+
+
+
+
+
+
+\section{종수에 대한 공식}
+\label{models-section-genus-formula}
+
+\noindent
+고유 정칙 모형에서 유도되는 조합적 구조에는 제약이 하나 더 있다.
+
+\begin{lemma}
+\label{models-lemma-add-component}
+상황 \ref{models-situation-regular-model}에서 유효 Cartier 인자
+$D, D' \subset X$가 주어지고, 어떤 $i \in \{1, \ldots, n\}$에 대하여
+$D' = D + C_i$이며 $D' \subset X_k$라고 하자. 그러면
+$$
+\chi(X_k, \mathcal{O}_{D'}) - \chi(X_k, \mathcal{O}_D) =
+\chi(X_k, \mathcal{O}_X(-D)|_{C_i}) =
+-(D \cdot C_i) + \chi(C_i, \mathcal{O}_{C_i})
+$$
+\end{lemma}
+
+\begin{proof}
+두 번째 등식은 (\ref{models-equation-form})의 쌍선형 형식
+$(\ \cdot\ )$의 정의와 보조정리 \ref{models-lemma-intersection-pairing}에서 따른다.
+첫 번째 등식을 보이기 위해 두 경우를 나눈다.
+먼저 $C_i \not \subset D$이면 $D'$는 $D$와 $C_i$의 스킴론적 합집합이다
+(Divisors, 보조정리
+\ref{divisors-lemma-sum-effective-Cartier-divisors-union}). 따라서 짧은 완전열
+$$
+0 \to \mathcal{O}_{D'} \to
+\mathcal{O}_D \times \mathcal{O}_{C_i} \to
+\mathcal{O}_{D \cap C_i} \to 0
+$$
+을 얻는다(Morphisms, 보조정리
+\ref{morphisms-lemma-scheme-theoretic-union}). 또한 완전열
+$$
+0 \to \mathcal{O}_X(-D)|_{C_i} \to
+\mathcal{O}_{C_i} \to \mathcal{O}_{D \cap C_i} \to 0
+$$
+도 성립하므로(Divisors, 주석 \ref{divisors-remark-ses-regular-section}),
+Euler 지표의 가법성에 의해 주장이 성립한다
+(Varieties, 보조정리 \ref{varieties-lemma-euler-characteristic-additive}).
+한편 $C_i \subset D$이면 Divisors, 보조정리
+\ref{divisors-lemma-ses-add-divisor}에 의해 완전열
+$$
+0 \to \mathcal{O}_X(-D)|_{C_i} \to \mathcal{O}_{D'} \to \mathcal{O}_D \to 0
+$$
+을 얻으며, 이로부터 보조정리가 곧바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-genus-formula}
+상황 \ref{models-situation-regular-model}에서
+$$
+g_C = 1 + \sum\nolimits_{i = 1, \ldots, n}
+m_i\left([\kappa_i : k] (g_i - 1) - \frac{1}{2}(C_i \cdot C_i)\right)
+$$
+이다. 여기서 $\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$이고,
+$g_i$는 $C_i$의 종수이며 $g_C$는 $C$의 종수이다.
+\end{lemma}
+
+\begin{proof}
+기본적으로 사용할 도구는 다음을 주는 Derived Categories of Schemes,
+보조정리 \ref{perfect-lemma-chi-locally-constant-geometric}이다.
+$$
+1 - g_C = \chi(C, \mathcal{O}_C) =
+\chi(X_k, \mathcal{O}_{X_k})
+$$
+유효 Cartier 인자들의 열
+$$
+X_k = D_m \supset D_{m - 1} \supset \ldots \supset D_1 \supset D_0 = \emptyset
+$$
+을 각 $j$에 대해 $D_{j + 1} = D_j + C_{i_j}$가 되도록 택한다.
+(매 단계마다 $D_{j+1}$의 0이 아닌 중복도 하나를 1씩 줄이면 이러한 열을
+택할 수 있음은 분명하다.) $\chi(\mathcal{O}_{D_0}) = 0$에서 시작하여
+보조정리 \ref{models-lemma-add-component}를 적용하면
+\begin{align*}
+1 - g_C
+& =
+\chi(X_k, \mathcal{O}_{X_k}) \\
+& =
+\sum\nolimits_j
+\left(-(D_j \cdot C_{i_j}) +  \chi(C_{i_j}, \mathcal{O}_{C_{i_j}})\right) \\
+& =
+- \sum\nolimits_j
+(C_{i_1} + C_{i_2} + \ldots + C_{i_{j - 1}} \cdot C_{i_j}) +
+\sum\nolimits_j \chi(C_{i_j}, \mathcal{O}_{C_{i_j}}) \\
+& =
+-\frac{1}{2}\sum\nolimits_{j \not = j'} (C_{i_{j'}} \cdot C_{i_j}) +
+\sum m_i \chi(C_i, \mathcal{O}_{C_i}) \\
+& =
+\frac{1}{2} \sum m_i(C_i \cdot C_i) + \sum m_i \chi(C_i, \mathcal{O}_{C_i})
+\end{align*}
+마지막 등식은 설명이 필요할 수 있다. 실제로
+$\sum_j C_{i_j} = \sum m_i C_i$이므로 보조정리
+\ref{models-lemma-properties-form}에 의해
+$(\sum_j C_{i_j} \cdot \sum_j C_{i_j}) = 0$이다. 따라서
+$$
+0 = \sum\nolimits_{j \not = j'} (C_{i_{j'}} \cdot C_{i_j}) +
+\sum m_i(C_i \cdot C_i)
+$$
+이는 이 곱을 ``비대각'' 항과 ``대각'' 항으로 나누어 얻는다.
+$\kappa_i$는 Varieties, 보조정리
+\ref{varieties-lemma-regular-functions-proper-variety}에 의해
+$k$의 유한 확대체이다. 따라서 $C_i$의 종수가 정의되며
+$\chi(C_i, \mathcal{O}_{C_i}) = [\kappa_i : k](1 - g_i)$이다.
+이들을 모두 합치고 항을 정리하면
+$$
+g_C = - \frac{1}{2}\sum m_i(C_i \cdot C_i) +
+\sum m_i[\kappa_i : k](g_i - 1) + 1
+$$
+을 얻으며, 이는 바로 보조정리의 주장이다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-numerical-type-of-model}
+상황 \ref{models-situation-regular-model}에서
+$\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$라 하고 $g_i$를 $C_i$의 종수라 하자.
+그러면 자료
+$$
+n, m_i, (C_i \cdot C_j), [\kappa_i : k], g_i
+$$
+는 종수가 $C$의 종수와 같은 수치형이다.
+\end{lemma}
+
+\begin{proof}
+(보조정리 \ref{models-lemma-genus-formula}의 증명에서 이 보조정리의 명제에
+쓰인 양들이 잘 정의됨을 이미 보였다.) 정의 \ref{models-definition-type}의
+조건 (1)--(5)를 확인해야 한다.
+
+\medskip\noindent
+조건 (1)은 자명하다.
+
+\medskip\noindent
+조건 (2). 행렬 $(C_i \cdot C_j)$의 대칭성은 식 (\ref{models-equation-form})과
+보조정리 \ref{models-lemma-intersection-pairing}에서 따른다.
+$i \not = j$일 때 $(C_i \cdot C_j)$의 비음성은
+보조정리 \ref{models-lemma-properties-form}의 (1)이다.
+
+\medskip\noindent
+조건 (3)은 보조정리 \ref{models-lemma-properties-form}의 (3)이다.
+
+\medskip\noindent
+조건 (4)는 보조정리 \ref{models-lemma-properties-form}의 (2)이다.
+
+\medskip\noindent
+조건 (5)는 $(C_i \cdot C_j)$가 $C_i$ 위의 가역 가군의 차수이고
+$[\kappa_i : k]$로 나누어떨어진다는 사실에서 따른다. Varieties,
+보조정리 \ref{varieties-lemma-divisible}를 보라.
+
+\medskip\noindent
+보조정리 \ref{models-lemma-genus-formula}에서 증명한 종수 공식은 이 수치형의
+종수가 명시한 값임을 보여 준다. 정의 \ref{models-definition-genus}를 보라.
+\end{proof}
+
+\begin{definition}
+\label{models-definition-numerical-type-model}
+상황 \ref{models-situation-regular-model}에서 {\it $X$에 결부된 수치형}이란
+보조정리 \ref{models-lemma-numerical-type-of-model}에서 설명한 수치형을 말한다.
+\end{definition}
+
+\noindent
+이제 모형의 극소성과 수치형의 극소성을 대응시킨다.
+
+\begin{lemma}
+\label{models-lemma-numerical-type-minimal-model}
+상황 \ref{models-situation-regular-model}에서 다음은 서로 동치이다.
+\begin{enumerate}
+\item $X$는 극소 모형이다.
+\item $X$에 결부된 수치형은 극소이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+수치형이 극소이면 $g_i = 0$이고
+$(C_i \cdot C_i) = -[\kappa_i: k]$인 $i$는 존재하지 않는다.
+정의 \ref{models-definition-type-minimal}을 보라. 따라서 어떤 곡선 $C_i$도
+제1종 예외곡선이 아님은 분명하다.
+
+\medskip\noindent
+역으로 수치형이 극소가 아니라고 하자. 그러면
+$g_i = 0$이고 $(C_i \cdot C_i) = -[\kappa_i: k]$인 $i$가 존재한다.
+이는 $C_i$가 제1종 예외곡선임을 함의한다고 주장한다. 실제로 가역층
+$\mathcal{O}_X(-C_i)|_{C_i}$는 $C_i$를 $k$ 위의 고유곡선으로 보면 차수가
+$-(C_i \cdot C_i) = [\kappa_i : k]$이고, 따라서 $C_i$를 $\kappa_i$ 위의
+고유곡선으로 보면 차수가 $1$이다. Algebraic Curves, 명제
+\ref{curves-proposition-projective-line}을 적용하면 $\kappa_i$ 위의 스킴으로서
+$C_i \cong \mathbf{P}^1_{\kappa_i}$임을 얻는다. 체 위의 $\mathbf{P}^1$의
+Picard 군은 $\mathbf{Z}$이므로, $X$ 안에서 $C_i$의 법선층은
+$\mathcal{O}_{\mathbf{P}_{\kappa_i}}(-1)$과 동형이다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{remark}
+\label{models-remark-numerical-type-not-from-model}
+종수가 음수인 수치형이 존재한다는 단순한 이유만으로도 모든 수치형이
+모형에서 나오는 것은 아니다. 또한 양의 종수를 가진 극소 수치형 중에서도
+(어떤 이산 값매김환의 분수체 위의) 매끄럽고 사영적이며 기하적으로
+기약인 곡선의 (그 이산 값매김환 위의) 모형에 결부된 수치형이 아닌 것이
+존재한다. 간단한 예는
+$n = 1$, $m_1 = 1$, $a_{11} = 0$, $w_1 = 6$, $g_1 = 1$.
+이다. 실제로 이 경우 특수 올 $X_k$는 $k$의 차수 $6$인 확대체 $\kappa$
+위에 놓이므로 기하적으로 연결일 수 없다. 이는 일반 올이 기하적으로
+연결이라는 사실과 모순이다(More on Morphisms, 보조정리
+\ref{more-morphisms-lemma-geometrically-connected-fibres-towards-normal}).
+마찬가지 이유로 $n = 2$, $m_1 = m_2 = 1$,
+$-a_{11} = -a_{22} = a_{12} = a_{21} = 6$,
+$w_1 = w_2 = 6$, $g_1 = g_2 = 1$도 한 예가 된다(세부사항은 생략한다).
+그러나 $w_i$들의 최대공약수가 $1$인 예는 알려져 있지 않다.
+\end{remark}
+
+\begin{lemma}
+\label{models-lemma-numerical-type-rational-point}
+상황 \ref{models-situation-regular-model}에서 $C$가 $K$-유리점을 가진다고 하자.
+그러면
+\begin{enumerate}
+\item $X_k$는 $k$ 위에서 $X_k$의 매끄러운 점인 $k$-유리점 $x$를 가진다.
+\item $x \in C_i$이면 $H^0(C_i, \mathcal{O}_{C_i}) = k$이고 $m_i = 1$이다.
+\item $H^0(X_k, \mathcal{O}_{X_k}) = k$이고, $X_k$의 종수는 $C$의 종수와 같다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+사상 $X \to \Spec(R)$가 고유이므로, 고유성의 값매김 판정법에 의해
+$K$-유리점은 사상 $a : \Spec(R) \to X$로 연장된다
+(Morphisms, 보조정리 \ref{morphisms-lemma-characterize-proper}).
+$x \in X$를 $\Spec(R)$의 닫힌점의 $a$에 의한 상이라 하자.
+그러면 $a$는 $R$-대수 준동형
+$\psi : \mathcal{O}_{X, x} \to R$
+에 대응한다(Schemes, 절 \ref{schemes-section-points}).
+$R$에서 $\pi$의 상은 $\mathfrak m_R^2$에 속하지 않으므로
+$\pi \not \in \mathfrak m_x^2$이다. 따라서
+$\mathcal{O}_{X_k, x} = \mathcal{O}_{X, x}/\pi \mathcal{O}_{X, x}$는
+정칙이다(Algebra, 보조정리 \ref{algebra-lemma-regular-ring-CM}).
+그러므로 Algebra, 보조정리 \ref{algebra-lemma-separable-smooth}에 의해
+$X_k \to \Spec(k)$는 $x$에서 매끄럽다. 이에 따라 $x$는 $X_k$의 유일한
+기약성분 $C_i$에 속하고, $\mathcal{O}_{C_i, x} = \mathcal{O}_{X_k, x}$이며
+$m_i = 1$이다. $C_i$가 $k$-유리점을 가진다는 사실은 체
+$\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$
+(Varieties, 보조정리
+\ref{varieties-lemma-regular-functions-proper-variety})가 $k$와 같음을
+함의한다. 이로써 (1)을 증명했다. 또한
+$H^0(X_k, \mathcal{O}_{X_k}) = k$
+이다. 왜냐하면 $H^0(X_k, \mathcal{O}_{X_k})$는 $k$의 확대체이고
+(보조정리 \ref{models-lemma-regular-model-field}), 이것이
+$H^0(C_i, \mathcal{O}_{C_i}) = k$로 사상되기 때문이다.
+종수의 등식은 보조정리 \ref{models-lemma-regular-model-genus}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-genus-reduction-smaller}
+상황 \ref{models-situation-regular-model}에서 $X$가 극소 모형이고,
+$\gcd(m_1, \ldots, m_n) = 1$이며
+$H^0((X_k)_{red}, \mathcal{O}) = k$라고 하자. 그러면 사상
+$$
+H^1(X_k, \mathcal{O}_{X_k}) \to H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}})
+$$
+은 전사이며, $(X_k)_{red} \not = X_k$이면 그 핵은 자명하지 않다.
+\end{lemma}
+
+\begin{proof}
+$X_k$ 위에서 차수 $\geq 2$인 코호몰로지가 소멸하므로
+(Cohomology, 명제 \ref{cohomology-proposition-vanishing-Noetherian}),
+$X_k$ 위의 아벨 층의 모든 전사는 $H^1$ 위의 전사를 유도한다.
+보조정리 \ref{models-lemma-regular-model-field}의 열
+$$
+(X_k)_{red} = Z_0 \subset Z_1 \subset \ldots \subset Z_m = X_k
+$$
+을 생각하자. 체의 사상
+$H^0(Z_j, \mathcal{O}_{Z_j}) \to
+H^0((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) = k$
+들이 단사이므로 $j = 0, \ldots, m$에 대하여
+$H^0(Z_j, \mathcal{O}_{Z_j}) = k$임을 얻는다. 따라서
+$H^0(X_k, \mathcal{O}_{X_k}) \to H^0(Z_{m - 1}, \mathcal{O}_{Z_{m - 1}})$
+는 전사이다. $C = C_{i_m}$라 하자. 그러면 $X_k = Z_{m - 1} + C$이다.
+$\mathcal{L} = \mathcal{O}_X(-Z_{m - 1})|_C$라 하면,
+$\mathcal{L}$은 가역 $\mathcal{O}_C$-가군이다.
+보조정리 \ref{models-lemma-regular-model-field}의 증명에서와 같이 완전열
+$$
+0 \to \mathcal{L} \to \mathcal{O}_{X_k} \to \mathcal{O}_{Z_{m - 1}} \to 0
+$$
+이 $X_k$ 위의 연접층의 완전열이다. 따라서 짧은 완전열
+$$
+0 \to
+H^1(C, \mathcal{L}) \to H^1(X_k, \mathcal{O}_{X_k}) \to
+H^1(Z_{m - 1}, \mathcal{O}_{Z_{m - 1}}) \to 0
+$$
+$k$ 위의 $C$에서 $\mathcal{L}$의 차수는
+$$
+(C \cdot -Z_{m - 1}) = (C \cdot C - X_k) = (C \cdot C)
+$$
+$\kappa = H^0(C, \mathcal{O}_C)$, $w = [\kappa : k]$라 하자.
+가역층의 차수 정의에 의해
+$$
+\chi(C, \mathcal{L}) =
+\chi(C, \mathcal{O}_C) + (C \cdot C) =
+w(1 - g_C) + (C \cdot C)
+$$
+이다. 여기서 $g_C$는 $C$의 종수이다. $X$가 극소이므로 $C$는 제1종
+예외곡선이 아니며(보조정리 \ref{models-lemma-numerical-type-minimal-model}의
+증명을 보라), 따라서 이 식은 $<0$이다. 그러므로
+$\dim_k H^1(C, \mathcal{L}) > 0$이고 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-genus-reduction-bigger-than}
+상황 \ref{models-situation-regular-model}에서 $X_k$가 $X_k \to \Spec(k)$의
+매끄러운 점인 $k$-유리점 $x$를 가진다고 하자. 그러면
+$$
+\dim_k H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) \geq
+g_{top} + g_{geom}(X_k/k)
+$$
+이다. 여기서 $g_{geom}$은 Algebraic Curves, 절
+\ref{curves-section-genus-geometric-genus}에서 정의한 것이고,
+$g_{top}$은 $X_k$에 결부된 수치형
+(정의 \ref{models-definition-numerical-type-model})의 위상적 종수
+(정의 \ref{models-definition-top-genus})이다.
+\end{lemma}
+
+\begin{proof}
+연결이고 축소된 모든 유효 Cartier 인자
+$D \subset (X_k)_{red}$ 중 $x$를 포함하는 것에 대하여, $D$의 기약성분
+개수에 대한 귀납법으로 부등식
+$$
+\dim_k H^1(D, \mathcal{O}_D) \geq g_{top}(D) + g_{geom}(D/k)
+$$
+을 증명하겠다. 여기서 $g_{top}(D) = 1 - m + e$이고, $m$은 $D$의
+기약성분의 개수이며 $e$는 서로 만나는 $D$의 성분들의 순서 없는 쌍의
+개수이다.
+
+\medskip\noindent
+기초 단계: $D$가 하나의 기약성분을 가진다고 하자. 그러면 $D = C_i$는
+$x$를 포함하는 유일한 기약성분이다. 이 경우
+$\dim_k H^1(D, \mathcal{O}_D) = g_i$이고 $g_{top}(D) = 0$이다.
+$C_i$는 $k$-유리 매끄러운 점을 가지므로 기하적으로 정역이다
+(Varieties, 보조정리
+\ref{varieties-lemma-variety-with-smooth-rational-point}).
+따라서 $g_i$는 $C_{i, \overline{k}}$의 종수이다
+(Algebraic Curves, 보조정리 \ref{curves-lemma-genus-base-change}).
+또한 $g_{geom}(D/k)$는 $C_{i, \overline{k}}$의 정규화
+$C_{i, \overline{k}}^\nu$의 종수이다. 정규화 사상
+$C_{i, \overline{k}}^\nu \to C_{i, \overline{k}}$에 Algebraic Curves,
+보조정리 \ref{curves-lemma-genus-normalization}을 적용하면
+\begin{equation}
+\label{models-equation-genus-change-special-component}
+\text{종수 } C_{i, \overline{k}} \geq
+\text{종수 } C_{i, \overline{k}}^\nu
+\end{equation}
+위 사실들을 합치면 이 경우
+$\dim_k H^1(D, \mathcal{O}_D) \geq g_{top}(D) + g_{geom}(D/k)$임을 얻는다.
+
+\medskip\noindent
+귀납 단계. $D$가 $1$개보다 많은 기약성분을 가진다고 하자. 그러면
+$x \in D'$이고 $D'$도 연결인 채로 $D = C_i + D'$로 쓸 수 있다.
+이는 독자에게 맡기는 그래프 이론의 연습문제이다(힌트: $C_i$를 $D$의
+성분 중 $x$에서 가장 먼 것으로 택하라). 불변량들이 어떻게 변하는지
+계산하자. $x \in D'$이므로
+$H^0(D, \mathcal{O}_D) = H^0(D', \mathcal{O}_{D'}) = k$이다.
+층의 짧은 완전열
+$$
+0 \to \mathcal{O}_D \to \mathcal{O}_{C_i} \oplus \mathcal{O}_{D'}
+\to \mathcal{O}_{C_i \cap D'} \to 0
+$$
+을 살펴보고(Morphisms, 보조정리
+\ref{morphisms-lemma-scheme-theoretic-union}) Euler 지표의 가법성을
+사용하면
+\begin{align*}
+\dim_k H^1(D, \mathcal{O}_D) - \dim_k H^1(D', \mathcal{O}_{D'})
+& =
+-\chi(\mathcal{O}_{C_i}) + \chi(\mathcal{O}_{C_i \cap D'}) \\
+& =
+w_i(g_i - 1) + \sum\nolimits_{C_j \subset D'} a_{ij}
+\end{align*}
+을 얻는다. 보조정리 \ref{models-lemma-numerical-type-of-model}에서와 같이
+$w_i = [\kappa_i : k]$, $\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$라 하고,
+$g_i$를 $C_i$의 종수, $a_{ij} = (C_i \cdot C_j)$라 하였다. 또한
+$$
+g_{top}(D) - g_{top}(D') = -1 +
+\sum\nolimits_{C_j \subset D'\text{이고 }C_i\text{와 만나는}} 1
+$$
+이고
+$$
+g_{geom}(D/k) - g_{geom}(D'/k) = g_{geom}(C_i/k)
+$$
+이다(Algebraic Curves, 보조정리
+\ref{curves-lemma-bound-geometric-genus}). 이를 귀납가정과 합치면
+$$
+w_i g_i - g_{geom}(C_i/k) +
+\sum\nolimits_{C_j \subset D'\text{이고 } C_i\text{와 만나는}} (a_{ij} - 1) - (w_i - 1)
+$$
+가 비음임을 보이면 충분하다. 실제로
+\begin{equation}
+\label{models-equation-genus-change}
+w_i g_i \geq [\kappa_i : k]_s g_i \geq g_{geom}(C_i/k)
+\end{equation}
+이며, 두 번째 부등식은 Algebraic Curves, 보조정리
+\ref{curves-lemma-bound-geometric-genus-curve}에서 따른다.
+한편 $w_i$가 $a_{ij}$를 나누므로
+(Varieties, 보조정리 \ref{varieties-lemma-divisible}),
+\begin{equation}
+\label{models-equation-change-intersections}
+\sum\nolimits_{C_j \subset D'\text{이고 } C_i\text{와 만나는}} (a_{ij} - 1) - (w_i - 1)
+\geq 0
+\end{equation}
+이다. 실제로 $C_i$와 만나는 $C_j \subset D'$가 적어도 하나 존재한다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-equality-genus-reduction-bigger-than}
+보조정리 \ref{models-lemma-genus-reduction-bigger-than}에서 등호가 성립하면
+\begin{enumerate}
+\item $x$를 포함하는 $X_k$의 유일한 기약성분은 $k$ 위에서 매끄럽고
+사영적이며 기하적으로 기약인 곡선이다.
+\item $C \subset X_k$가 다른 기약성분이면
+$\kappa = H^0(C, \mathcal{O}_C)$는 $k$의 유한 분리 확대체이고,
+$C$는 $\kappa$-유리점을 가지며 $C$는 $\kappa$ 위에서 매끄럽다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{models-lemma-genus-reduction-bigger-than}의 증명을 살펴보면,
+등호가 성립하기 위해서는 부등식
+(\ref{models-equation-genus-change-special-component}),
+(\ref{models-equation-genus-change}),
+(\ref{models-equation-change-intersections})
+모두에서 등호가 성립해야 함을 알 수 있다.
+
+\medskip\noindent
+$C_i$를 $x$를 포함하는 기약성분이라 하자.
+(\ref{models-equation-genus-change-special-component})의 등호와
+Algebraic Curves, 보조정리 \ref{curves-lemma-genus-normalization}에 의해
+$C_{i, \overline{k}}^\nu \to C_{i, \overline{k}}$는 동형이다.
+따라서 $C_{i, \overline{k}}$는 매끄럽고 (1)이 성립한다.
+
+\medskip\noindent
+다음으로 $C_i \subset X_k$가 다른 기약성분이라고 하자. 보조정리
+\ref{models-lemma-genus-reduction-bigger-than}의 증명에서 귀납 단계와 같이
+$D = D' + C_i$라고 해도 된다. (\ref{models-equation-genus-change})의 등호는
+$\kappa_i/k$가 유한 분리 확대임을 곧바로 함의한다.
+(\ref{models-equation-change-intersections})의 등호는 어떤 $j$에 대해
+$a_{ij} = 1$이거나, $C_i$와 만나는 유일한 $C_j \subset D'$가 존재하고
+$a_{ij} = w_i$임을 함의한다. 어느 경우든 $C_i$는 $\kappa_i$-유리점
+$c$를 가지며, 스킴론적으로 $c = C_i \cap C_j$이다.
+$\mathcal{O}_{X, c}$가 정칙 국소환이므로, 이는 $C_i$와 $C_j$의 국소
+방정식들이 국소환 $\mathcal{O}_{X, c}$의 정칙 매개변수계를 이룸을
+뜻한다. 따라서 $\mathcal{O}_{C_i, c}$는 정칙이다
+(Algebra, 보조정리 \ref{algebra-lemma-regular-ring-CM}).
+그러므로 $C_i \to \Spec(\kappa_i)$는 $c$에서 매끄럽다
+(Algebra, 보조정리 \ref{algebra-lemma-separable-smooth}).
+이에 따라 $C_i$는 $\kappa_i$ 위에서 기하적으로 정역이다
+(Varieties, 보조정리
+\ref{varieties-lemma-variety-with-smooth-rational-point}).
+끝으로 $C_i$가 $\kappa_i$ 위에서 매끄러움을 보여야 한다. 다음을 관찰하자.
+$$
+C_{i, \overline{k}} = C_i \times_{\Spec(k)} \Spec(\overline{k})
+= \coprod\nolimits_{\kappa_i \to \overline{k}}
+C_i \times_{\Spec(\kappa_i)} \Spec(\overline{k})
+$$
+여기에는 $[\kappa_i : k]$개의 성분이 있다. 따라서 $C_i$가 $\kappa_i$
+위에서 매끄럽지 않다면 이 곡선들은 각각 매끄럽지 않고, 따라서 정규가
+아니어서 정규화 사상이 종수를 낮춘다
+(Algebraic Curves, 보조정리 \ref{curves-lemma-genus-normalization}).
+그러면 $C_i/k$의 기하적 종수도 낮아져
+$[\kappa_i : k] g_i = g_{geom}(C_i/k)$와 모순이므로, 이런 일은 불가능하다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{예외곡선의 수축}
+\label{models-section-contract}
+
+\noindent
+다음 보조정리는 고유 정칙 모형에서 제1종 예외곡선을 수축할 때 교차수가
+어떻게 변하는지 설명한다. 주된 목적은 이를 보조정리 \ref{models-lemma-contract}에서
+도입한 수치적 수축과 비교하는 데 있다. 기하적 수축과 수치적 수축은
+주석 \ref{models-remark-compare-contractions}에서 비교한다.
+
+\begin{lemma}
+\label{models-lemma-blowdown-regular-model}
+상황 \ref{models-situation-regular-model}에서 $C_n$이 제1종 예외곡선이라고 하자.
+$f : X \to X'$를 $C_n$의 수축이라 하고 $C'_i = f(C_i)$라 하자.
+$X'_k = \sum m'_i C'_i$로 쓰자. 그러면 $X'$, $C'_i$,
+$i = 1, \ldots, n' = n - 1$, $m'_i = m_i$는 상황
+\ref{models-situation-regular-model}과 같으며, 다음이 성립한다.
+\begin{enumerate}
+\item $i, j < n$에 대하여
+$(C'_i \cdot C'_j) =
+(C_i \cdot C_j) - (C_i \cdot C_n) (C_j \cdot C_n) /(C_n \cdot C_n)$,
+\item $i < n$이고 $C_i \cap C_n \not = \emptyset$이면 사상
+$\kappa_i \leftarrow \kappa'_i \rightarrow \kappa_n$이 존재한다.
+\end{enumerate}
+여기서 $\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$이고
+$\kappa'_i = H^0(C'_i, \mathcal{O}_{C'_i})$이다.
+\end{lemma}
+
+\begin{proof}
+Resolution of Surfaces, 보조정리 \ref{resolve-lemma-contract-ample}에 의해
+$X'$가 정칙이고 $R$ 위에서 사영이 되도록 하는 사상
+$f : X \to X'$로 $C_n$을 수축할 수 있다. 따라서 $X'$는 상황
+\ref{models-situation-regular-model}과 같다. $x \in X'$를 $C_n$의 상이라 하자.
+$f$는 동형 $X \setminus C_n \to X' \setminus \{x\}$를 정의하므로
+$i < n$에 대해 $m'_i = m_i$임은 분명하다.
+
+\medskip\noindent
+보조정리의 (2)는 사상 $C_i \to C'_i$와 $C_n \to x \to C'_i$가
+존재한다는 사실에서 곧바로 따른다.
+
+\medskip\noindent
+Divisors, 보조정리
+\ref{divisors-lemma-blow-up-pullback-effective-Cartier}에 의해 역상
+$f^{-1}C'_i$가 정의된다. Divisors, 보조정리
+\ref{divisors-lemma-effective-Cartier-divisor-is-a-sum}에 의해 어떤
+$e_i \geq 0$에 대하여 $f^{-1}C'_i = C_i + e_i C_n$이다.
+$\mathcal{O}_X(C_i + e_i C_n) = \mathcal{O}_X(f^{-1}C'_i) =
+f^*\mathcal{O}_{X'}(C'_i)$
+이고(Divisors, 보조정리
+\ref{divisors-lemma-pullback-effective-Cartier-divisors}), 가역층의
+당김은 $C_n$에 제한하면 자명한 가역층이 되므로
+$$
+0 = \deg_{C_n}(\mathcal{O}_X(C_i + e_i C_n)) =
+(C_i + e_i C_n \cdot C_n) = (C_i \cdot C_n) + e_i(C_n \cdot C_n)
+$$
+$f_j = f|_{C_j} : C_j \to C_j$는 $k$ 위의 고유곡선 사이의 고유
+쌍유리 사상이므로,
+$\deg_{C'_j}(\mathcal{O}_{X'}(C'_i)|_{C'_j})$는
+$\deg_{C_j}(f_j^*\mathcal{O}_{X'}(C'_i)|_{C'_j})$와 같다
+(Varieties, 보조정리 \ref{varieties-lemma-degree-birational-pullback}).
+가환 그림
+$$
+\xymatrix{
+C_j \ar[r] \ar[d]_{f_j} & X \ar[d]^f \\
+C'_j \ar[r] & X'
+}
+$$
+을 살펴보고 Divisors, 보조정리
+\ref{divisors-lemma-pullback-effective-Cartier-divisors}를 사용하면
+$$
+(C'_i \cdot C'_j) = \deg_{C'_j}(\mathcal{O}_{X'}(C'_i)|_{C'_j}) =
+\deg_{C_j}(\mathcal{O}_X(C_i + e_i C_n)) = (C_i + e_i C_n \cdot C_j)
+$$
+앞에서 구한 $e_i$의 공식을 대입하면 (1)이 성립한다.
+\end{proof}
+
+\begin{remark}
+\label{models-remark-genus-change}
+보조정리 \ref{models-lemma-blowdown-regular-model}의 상황에서는 $C_i$의 종수
+$g_i$와 $C'_i$의 종수 $g'_i$ 사이의 관계도 정확히 기술할 수 있다.
+그 공식은
+$$
+g'_i = \frac{w_i}{w'_i}(g_i - 1) + 1 +
+\frac{(C_i \cdot C_n)^2 - w_n(C_i \cdot C_n)}{2w'_iw_n}
+$$
+이다. 여기서 $w_i = [\kappa_i : k]$, $w_n = [\kappa_n : k]$,
+$w'_i = [\kappa'_i : k]$이다. 이를 증명하기 위해 짧은 완전열
+$$
+0 \to \mathcal{O}_{X'}(-C'_i) \to \mathcal{O}_{X'} \to
+\mathcal{O}_{C'_i} \to 0
+$$
+과 그 $X$로의 당김
+$$
+0 \to \mathcal{O}_X(-C'_i - e_iC_n) \to \mathcal{O}_X \to
+\mathcal{O}_{C_i + e_i C_n} \to 0
+$$
+을 생각하자. 여기서 $e_i$는 보조정리
+\ref{models-lemma-blowdown-regular-model}의 증명에서와 같다.
+$X'$ 위의 모든 가역 가군 $\mathcal{L}$에 대해
+$Rf_*f^*\mathcal{L} = \mathcal{L}$이므로(세부사항은 생략한다),
+$$
+Rf_*\mathcal{O}_{C_i + e_i C_n} = \mathcal{O}_{C'_i}
+$$
+임을 얻는다. 이는 $X'_k$ 위의 연접층의 복합체로서의 등식이다.
+따라서 양변의 Euler 지표는 같고, 이는 $X_k$ 위의
+$\mathcal{O}_{C_i + e_i C_n}$의 Euler 지표와 일치한다. 완전열
+$$
+0 \to \mathcal{O}_{C_i + e_i C_n} \to
+\mathcal{O}_{C_i} \oplus \mathcal{O}_{e_iC_n} \to
+\mathcal{O}_{C_i \cap e_iC_n} \to 0
+$$
+을 사용하고 $\mathcal{O}_{e_iC_n}$을 다시 여과하면(세부사항은 생략한다)
+$$
+\chi(\mathcal{O}_{C'_i}) =
+\chi(\mathcal{O}_{C_i}) - {e_i + 1 \choose 2}(C_n \cdot C_n)
+- e_i(C_i \cdot C_n)
+$$
+$e_i = -(C_i \cdot C_n)/(C_n \cdot C_n)$이고
+$(C_n \cdot C_n) = -w_n$이므로, 이는 이 주석의 첫머리에 제시한
+공식을 준다. 이 결과가 필요해지면 이를 보조정리로 정식화하고
+상세한 증명을 제시할 것이다.
+\end{remark}
+
+\begin{remark}
+\label{models-remark-compare-contractions}
+$f : X \to X'$가 보조정리 \ref{models-lemma-blowdown-regular-model}에서와
+같다고 하자. $n, m_i, a_{ij}, w_i, g_i$를 $X$에 결부된 수치형이라 하고,
+$n', m'_i, a'_{ij}, w'_i, g'_i$를 $X'$에 결부된 수치형이라 하자.
+보조정리 \ref{models-lemma-blowdown-regular-model}과 주석
+\ref{models-remark-genus-change}에 의해, 이는 $w'_i$의 값을 제외하면
+보조정리 \ref{models-lemma-contract}의 수치형 수축과 일치한다.
+기하적 상황에서 $w'_i$는 $w_i$와 $w_n$을 모두 나누는 어떤 양의
+정수이다. 수치적 경우에는 $w_i$를 나누면서 공식으로 주어지는 $g'_i$가
+정수가 되게 하는 가장 큰 정수로 $w'_i$를 택했다. 이 선택은 수치적
+상황에서 수치형의 Picard 군을 비교하는 데 유용하다. 보조정리
+\ref{models-lemma-contract-picard-group}을 보라. 다만 이후에는 단사성만
+사용하며, 이 단사성은 더 작은 $w'_i$에 대해서도 성립한다.
+\end{remark}
+
+\begin{lemma}
+\label{models-lemma-nonuniqueness}
+$C$를 $H^0(C, \mathcal{O}_C) = K$이고 종수가 $0$인 $K$ 위의 매끄러운
+사영곡선이라 하자. $C$의 극소 모형이 둘 이상이면, 모든 극소 모형의
+특수 올은 $\mathbf{P}^1_k$와 동형이다.
+\end{lemma}
+
+\noindent
+이 보조정리는 서로 동형이 아닌 두 극소 모형 사이의 쌍유리 변환을
+예 \ref{models-example-nonunique-in-genus-zero}에서와 같은 초등 변환들의 열로
+분해할 수 있다는 명제로 강화할 수 있다. 이 결과가 필요해지면 여기에서
+정확히 정식화하고 증명할 것이다.
+
+\begin{proof}
+$X$를 $C$의 한 극소 모형이라 하자. $X$에 결부된 수치형은 종수가
+$0$이고 극소이다(정의 \ref{models-definition-numerical-type-model} 및 보조정리
+\ref{models-lemma-numerical-type-minimal-model}). 따라서 보조정리
+\ref{models-lemma-genus-zero}에 의해 $X_k$는 축소되고 기약이며,
+$H^0(X_k, \mathcal{O}_{X_k}) = k$이고 종수가 $0$이다.
+$Y$를 $X$와 동형이 아닌 $C$의 두 번째 극소 모형이라 하자.
+Resolution of Surfaces, 보조정리
+\ref{resolve-lemma-birational-regular-surfaces}에 의해 $S$-사상들의 그림
+$$
+X = X_0 \leftarrow X_1 \leftarrow \ldots \leftarrow X_n = Y_m
+\to \ldots \to Y_1 \to Y_0 = Y
+$$
+이 존재하며, 각 사상은 닫힌점에서의 부풀리기이다. $m$에 대한 귀납법으로
+보조정리를 증명하자. 기초 단계는 $m = 0$이다. $Y$가 극소라고 가정했으므로
+이 경우에는 $n = 0$이어야 하지만, $X$와 $Y$는 동형이 아니어서 이러한
+경우는 일어나지 않는다. 따라서 확인할 것이 없다.
+
+\medskip\noindent
+계속하기 전에, $X_k$와 $Y_k$가 모두 기약이므로 $n + 1 = m + 1$은
+$X_n = Y_m$의 특수 올의 기약성분 개수와 같다는 점에 유의하자.
+또 아래에서 사용할 관찰은 다음과 같다. $X' \to X''$가 $C$의 고유 정칙
+모형 사이의 사상이면, $X' \to X''$는 $X''$의 어떤 열린집합 위에서
+동형이고 그 여집합은 $X''$의 특수 올의 닫힌점들로 이루어진 유한집합이다.
+Varieties, 보조정리
+\ref{varieties-lemma-modification-normal-iso-over-codimension-1}을 보라.
+실제로 이러한 $X' \to X''$는 닫힌점들에서의 부풀리기들의 합성이고
+(Resolution of Surfaces, 보조정리
+\ref{resolve-lemma-proper-birational-regular-surfaces}), 부풀리기의 개수는
+$X'$와 $X''$의 특수 올의 기약성분 개수의 차이이다.
+
+\medskip\noindent
+$E_i \subset Y_i$ ($m \geq i \geq 1$)를 사상 $Y_i \to Y_{i - 1}$에
+의해 수축되는 곡선이라 하자. $E_i$가 $Y_i$의 특수 올에서 중복도 $>1$을
+가지는 가장 큰 첨자 $i$를 택하자. 그러면 그 이후의 부풀리기
+$Y_m \to \ldots \to Y_{i + 1} \to Y_i$는 $E_i$ 위에서 동형이다.
+그렇지 않으면 어떤 $j > i$에 대해 $E_j$의 중복도가 $>1$이기 때문이다.
+$E \subset Y_m$을 $E_i$의 역상이라 하자. 방금 말한 바에 의해
+$E \subset Y_m$은 제1종 예외곡선이다. $Y_m \to Y'$를 $E$의 수축이라
+하자. 이는 Resolution of Surfaces, 보조정리
+\ref{resolve-lemma-contract-when-quasi-projective}에 의해 존재한다.
+$X_k$가 축소되어 있으므로 사상 $Y_m \to X$는 $E$를 수축해야 한다.
+따라서 Resolution of Surfaces, 보조정리
+\ref{resolve-lemma-factor-through-contraction}에 의해 사상 $Y' \to Y$와
+$Y' \to X$가 존재하며, 이들은 많아야 $n - 1 = m - 1$개의 예외곡선
+수축의 합성이다(위 논의를 보라). 이제 $m$에 대한 귀납가정을 적용한다.
+결론적으로 모든 $X_i$와 $Y_i$의 특수 올이 축소되어 있다고 가정해도 된다.
+
+\medskip\noindent
+$X_i$와 $Y_i$의 올이 축소되어 있으므로 부풀리기
+$X_i \to X_{i - 1}$와 $Y_i \to Y_{i - 1}$는 특수 올의 정칙점인
+닫힌점에서 일어나야 한다. 실제로 $X''$가 $C$의 정칙 모형이고
+$x \in X''$가 특수 올의 닫힌점이며 $\pi \in \mathfrak m_x^2$이면,
+$x$에서의 부풀리기 $X' \to X''$의 예외 올 $E$는 $X'$의 특수 올에서
+적어도 $2$의 중복도를 가진다(국소 계산은 생략한다). 따라서 주장한 대로
+$\mathcal{O}_{X''_k, x} = \mathcal{O}_{X'', x}/\pi$는 정칙이다
+(Algebra, 보조정리 \ref{algebra-lemma-regular-ring-CM}).
+특히 $x$는 자신을 포함하는 $X''_k$의 유일한 기약성분 $Z'$ 위의
+Cartier 인자이다(Varieties, 보조정리
+\ref{varieties-lemma-regular-point-on-curve}). 따라서 $Z'$의 고유변환
+$Z \subset X'$는 $Z'$에 동형으로 사상된다(Divisors, 보조정리
+\ref{divisors-lemma-strict-transform} 및
+\ref{divisors-lemma-blow-up-effective-Cartier-divisor}를 사용하라).
+달리 말하면 $X_i$의 기약성분 $Z$가 사상 $X_i \to X_j$ ($i > j$)에서
+수축되지 않으면 그 상에 동형으로 사상된다.
+
+\medskip\noindent
+이제 보조정리를 증명할 준비가 되었다. $E \subset Y_m$을 사상
+$Y_m \to Y_{m - 1}$에 의해 수축되는 제1종 예외곡선이라 하자.
+$E$가 사상 $Y_m = X_n \to X$에 의해 수축되면
+$Y_{m - 1} \to X$로의 분해가 존재한다(Resolution of Surfaces,
+보조정리 \ref{resolve-lemma-factor-through-contraction}).
+더욱이 $Y_{m - 1} \to X$는 닫힌점들에서의 부풀리기들의 합성이다
+(Resolution of Surfaces, 보조정리
+\ref{resolve-lemma-proper-birational-regular-surfaces}).
+이 경우 $m$을 줄이고 귀납가정을 적용한다. 끝으로 $E$가 사상
+$Y_m \to X$에 의해 수축되지 않는다고 하자. $X_k$가 기약이므로
+$E \to X_k$는 전사이고, 위에서 본 바에 의해 이는 동형이다.
+따라서 원하는 대로 $X_k$는 사영직선과 동형이다.
+\end{proof}
+
+
+
+
+
+\section{모형의 Picard 군}
+\label{models-section-picard-groups-models}
+
+\noindent
+$R, K, k, \pi, C, X, n, C_1, \ldots, C_n, m_1, \ldots, m_n$이
+상황 \ref{models-situation-regular-model}에서와 같다고 하자.
+보조정리 \ref{models-lemma-regular-model-pic}에서 완전열
+$$
+0 \to \mathbf{Z} \to \mathbf{Z}^{\oplus n} \to
+\Pic(X) \to \Pic(C) \to 0
+$$
+을 얻었다. 이 열을 사용하여 적절한 소수 $\ell$에 대한 Picard 군의
+$\ell$-꼬임을 연구하고자 한다.
+
+\begin{lemma}
+\label{models-lemma-characterize-trivial}
+상황 \ref{models-situation-regular-model}에서
+$d = \gcd(m_1, \ldots, m_n)$라 하자. 가역 $\mathcal{O}_X$-가군
+$\mathcal{L}$이 다음을 만족한다고 하자.
+\begin{enumerate}
+\item $C$에 제한하면 자명한 가역 가군이다.
+\item 각 $C_i$ 위에서 차수가 $0$이다.
+\end{enumerate}
+그러면 $\mathcal{L}^{\otimes d} \cong \mathcal{O}_X$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{models-lemma-regular-model-pic}에 의해 어떤
+$a_i \in \mathbf{Z}$에 대하여
+$\mathcal{L} \cong \mathcal{O}_X(\sum a_i C_i)$이다.
+$\mathcal{L}|_{C_j}$의 차수는 $\sum_j a_j(C_i \cdot C_j)$이다. 특히
+$(\sum a_i C_i \cdot \sum a_i C_i) = 0$.
+따라서 보조정리 \ref{models-lemma-properties-form}에 의해 어떤
+$q \in \mathbf{Q}$에 대하여
+$(a_1, \ldots, a_n) = q(m_1, \ldots, m_n)$이다.
+그러므로 어떤 $l \in \mathbf{Z}$에 대하여
+$\mathcal{L} = \mathcal{O}_X(lD)$이며, 여기서
+$D = \sum (m_i/d) C_i$는 보조정리
+\ref{models-lemma-multiple-fibre-normal-bundle}에서와 같다. 이제 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-canonical-map-of-pic}
+상황 \ref{models-situation-regular-model}에서 $T$를 $X$에 결부된 수치형이라 하자.
+표준 사상
+$$
+\Pic(C) \to \Pic(T)
+$$
+이 존재한다. 그 핵은 정확히 다음과 같은 $C$ 위의 가역 가군들로
+이루어진다. 즉, $i = 1, \ldots, n$에 대해
+$\deg_{C_i}(\mathcal{L}|_{C_i}) = 0$인 $X$ 위의 가역 가군
+$\mathcal{L}$의 제한으로 얻어지는 것들이다.
+\end{lemma}
+
+\begin{proof}
+$\kappa_i = H^0(C_i, \mathcal{O}_{C_i)})$일 때
+$w_i = [\kappa_i : k]$임을 상기하자. 또한 $C_i$ 위의 모든 가역 가군의
+차수는 $w_i$로 나누어떨어진다(Varieties, 보조정리
+\ref{varieties-lemma-divisible}). 따라서 사상
+$$
+\frac{\deg}{w} : \Pic(X) \to \mathbf{Z}^{\oplus n}, \quad
+\mathcal{L} \mapsto
+(\frac{\deg(\mathcal{L}|_{C_1})}{w_1}, \ldots,
+\frac{\deg(\mathcal{L}|_{C_n})}{w_n})
+$$
+을 생각할 수 있다. 이 사상에 의한 $\mathcal{O}_X(C_j)$의 상은
+$$
+((C_j \cdot C_1)/w_1, \ldots, (C_j \cdot C_n)/w_n) =
+(a_{1j}/w_1, \ldots, a_{nj}/w_n)
+$$
+이다. 이는 $T$의 Picard 군을 정의하는 사상
+$(a_{ij}/w_i) : \mathbf{Z}^{\oplus n} \to \mathbf{Z}^{\oplus n}$에
+의한 $j$번째 기저벡터의 상과 정확히 같다. 정의
+\ref{models-definition-picard-group}을 보라. 따라서 보조정리의 표준 사상은
+가환 그림
+$$
+\xymatrix{
+\mathbf{Z}^{\oplus n} \ar[r] \ar[d]_{\text{id}} &
+\Pic(X) \ar[r] \ar[d]^{\frac{\deg}{w}} &
+\Pic(C) \ar[r] \ar[d] & 0 \\
+\mathbf{Z}^{\oplus n} \ar[r]^{(a_{ij}/w_i)} &
+\mathbf{Z}^{\oplus n} \ar[r] &
+\Pic(T) \ar[r] & 0
+}
+$$
+에서 나온다. 두 행은 완전하다(위 행은 보조정리
+\ref{models-lemma-regular-model-pic}에 의함). 핵에 대한 기술은 분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-sequence-torsion}
+상황 \ref{models-situation-regular-model}에서
+$d = \gcd(m_1, \ldots, m_n)$라 하고, $T$를 $X$에 결부된 수치형이라 하자.
+$h \geq 1$을 $d$와 서로소인 정수라 하면 완전열
+$$
+0 \to \Pic(X)[h] \to \Pic(C)[h] \to \Pic(T)[h]
+$$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{models-lemma-regular-model-pic}의 완전열에서 $h$-꼬임을 취하면,
+$h$와 $d$가 서로소이므로
+$0 \to \Pic(X)[h] \to \Pic(C)[h]$의 완전성을 얻는다.
+보조정리 \ref{models-lemma-canonical-map-of-pic}의 사상을 사용하면
+$\Pic(X)[h]$의 원소들을 소멸시키는 사상
+$\Pic(C)[h] \to \Pic(T)[h]$를 얻는다.
+역으로 $\xi \in \Pic(C)[h]$의 $\Pic(T)[h]$에서의 상이 0이면,
+모든 $i$에 대해 $\deg(\mathcal{L}|_{C_i}) = 0$이고 $C$로의 제한이
+$\xi$인 가역 $\mathcal{O}_X$-가군 $\mathcal{L}$을 찾을 수 있다.
+보조정리 \ref{models-lemma-characterize-trivial}에 의해
+$\mathcal{L}^{\otimes h}$는 $d$-꼬임이다.
+$dd' \equiv 1 \bmod h$를 만족하는 정수 $d'$를 택하자. $h$와 $d$가
+서로소이므로 이러한 정수가 존재한다. 그러면
+$\mathcal{L}^{\otimes dd'}$는 $X$ 위의 $h$-꼬임 가역층이고,
+$C$로의 제한은 $\xi$이다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-torsion-embeds}
+상황 \ref{models-situation-regular-model}에서 $h$를 $k$의 표수와 서로소인
+정수라 하자. 그러면 사상
+$$
+\Pic(X)[h] \longrightarrow \Pic((X_k)_{red})[h]
+$$
+은 단사이다.
+\end{lemma}
+
+\begin{proof}
+$X \times_{\Spec(R)} \Spec(R/\pi^n)$은 $(X_k)_{red}$의 유한 차수
+두꺼워짐임을 관찰하자. 이는 예컨대 Cohomology of Schemes, 보조정리
+\ref{coherent-lemma-power-ideal-kills-sheaf}에서 따른다. 따라서 표준 사상
+$\Pic(X \times_{\Spec(R)} \Spec(R/\pi^n)) \to \Pic((X_k)_{red})$
+은 More on Morphisms, 보조정리
+\ref{more-morphisms-lemma-torsion-pic-thickening}과 $h$에 대한 가정에
+의해 $h$-꼬임을 동형으로 대응시킨다. 그러므로 $\mathcal{L}$이 $X$ 위의
+$h$-꼬임 가역층이고 $(X_k)_{red}$에 제한하면 자명한 층이면,
+모든 $n$에 대해 $\mathcal{L}$을
+$X \times_{\Spec(R)} \Spec(R/\pi^n)$에 제한한 것도 자명하다. 따라서
+\begin{align*}
+H^0(X, \mathcal{L})^\wedge
+& =
+\lim H^0(X \times_{\Spec(R)} \Spec(R/\pi^n),
+\mathcal{L}|_{X \times_{\Spec(R)} \Spec(R/\pi^n)}) \\
+& \cong
+\lim H^0(X \times_{\Spec(R)} \Spec(R/\pi^n),
+\mathcal{O}_{X \times_{\Spec(R)} \Spec(R/\pi^n)}) \\
+& =
+R^\wedge
+\end{align*}
+을 얻는다. 첫 번째와 마지막 등식에는 형식 함수 정리
+(Cohomology of Schemes, 정리 \ref{coherent-theorem-formal-functions})를,
+가운데 동형에는 예컨대 More on Algebra, 보조정리
+\ref{more-algebra-lemma-isomorphic-completions}를 사용하였다.
+$H^0(X, \mathcal{L})$은 유한 $R$-가군이고 $R$은 이산 값매김환이므로,
+$H^0(X, \mathcal{L})$은 계수 $1$인 자유 $R$-가군이다.
+$s \in H^0(X, \mathcal{L})$를 한 기저원소라 하자. 위의 동형들을 거슬러
+추적하면 모든 $n$에 대해
+$s|_{X \times_{\Spec(R)} \Spec(R/\pi^n)}$이 자명화를 준다.
+$s$의 소멸 자취는 $X$에서 닫혀 있고 $X \to \Spec(R)$는 고유이므로,
+원하는 대로 $s$의 소멸 자취는 공집합이다.
+\end{proof}
+
+
+
+
+
+
+\section{반안정 축약}
+\label{models-section-semistable-reduction}
+
+\noindent
+이 절에서는 반안정 축약의 의미를 엄밀히 정의한다.
+
+\begin{example}
+\label{models-example-blowup}
+$R$을 균등화 원소 $\pi$를 갖는 이산 값매김환이라 하자.
+$n \geq 0$이 주어졌을 때 환 준동형
+$$
+R \longrightarrow A = R[x, y]/(xy - \pi^n)
+$$
+을 생각하자. $X = \Spec(A)$, $S = \Spec(R)$라 하자.
+$n = 0$이면 $X \to S$는 매끄럽다. 모든 $n$에 대하여 사상
+$X \to S$는 Algebraic Curves, 절
+\ref{curves-section-families-nodal}에서 정의한 상대차원 $1$의
+마디 이하 특이성을 갖는다. $n = 1$이면 $X$는 정칙이지만,
+$n > 1$이면 $(x, y)$가 극대 아이디얼
+$\mathfrak m = (\pi, x, y)$을 더 이상 생성하지 않으므로 $X$는
+정칙이 아니다. $n > 1$인 경우를 개선하기 위해 $\mathfrak m$에서의
+$X$의 부풀리기 $b : X' \to X$를 생각하자. Divisors, 절
+\ref{divisors-section-blowing-up}을 보라. 구성상 $X'$는 부풀리기 대수
+$A[\frac{\mathfrak m}{\pi}]$, $A[\frac{\mathfrak m}{x}]$,
+$A[\frac{\mathfrak m}{y}]$에 대응하는 세 아핀 조각으로 덮인다.
+
+\medskip\noindent
+대수 $A[\frac{\mathfrak m}{\pi}]$는 생성원 $x' = x/\pi$와
+$y' = y/\pi$를 가지며 $x'y' = \pi^{n - 2}$이다.
+따라서 $X'$의 이 부분은 $R[x', y'](x'y' - \pi^{n - 2})$의 스펙트럼이다.
+
+\medskip\noindent
+대수 $A[\frac{\mathfrak m}{x}]$는 관계식 $xu - \pi$를 만족하는
+생성원 $x$, $u = \pi/x$를 가진다. 이 환은
+$y/x = \pi^n/x^2 = u^2\pi^{n - 2}$를 포함한다. 따라서 $X'$의 이 부분은
+정칙이다.
+
+\medskip\noindent
+대칭성에 의해 대수 $A[\frac{\mathfrak m}{y}]$의 경우도
+$A[\frac{\mathfrak m}{x}]$의 경우와 같다.
+
+\medskip\noindent
+따라서 $X' \to S$는 상대차원 $1$의 마디 이하 특이성을 가지며,
+$X'$는 한 점을 제외하면 정칙이다. 이 한 점은 위와 정확히 같은 아핀
+열린 근방을 가지되 $n$이 $n - 2$로 바뀐다. $n$에 대한 귀납법을 쓰면
+닫힌점들에서의 부풀리기들의 열
+$$
+X_{\lfloor n/2 \rfloor} \to \ldots \to X_1 \to X_0 = X
+$$
+이 존재하여 $X_{\lfloor n/2 \rfloor} \to S$는 상대차원 $1$의
+마디 이하 특이성을 가지고 $X_{\lfloor n/2 \rfloor}$은 정칙이다.
+\end{example}
+
+\begin{lemma}
+\label{models-lemma-etale-local-at-worst-nodal}
+$R$을 이산 값매김환이라 하고, $X$를 $R$ 위에서 상대차원 $1$의
+마디 이하 특이성을 갖는 스킴이라 하자. $x \in X$를 $R$ 위의 $X$의
+특수 올의 한 점이라 하자. 그러면 가환 그림
+$$
+\xymatrix{
+X \ar[d] &
+U \ar[r] \ar[d] \ar[l] &
+\Spec(A) \ar[dl] \\
+\Spec(R) &
+\Spec(R') \ar[l]
+}
+$$
+이 존재한다. 여기서 $R \subset R'$은 이산 값매김환의 \'etale 확대이고,
+사상 $U \to X$와 $U \to \Spec(A)$는 \'etale이며, $x$로 사상되는
+점 $x' \in U$가 존재하고,
+$$
+A = R'[u, v]/(uv)
+\quad\text{또는}\quad
+A = R'[u, v]/(uv - \pi^n)
+$$
+이다. 여기서 $n \geq 0$이고 $\pi \in R'$은 균등화 원소이다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 훨씬 더 일반적인 형태로 이미 증명했다. Algebraic Curves,
+보조정리 \ref{curves-lemma-etale-local-structure-nodal-family}를 보라.
+여기서는 그곳의 명제를 위의 형태로 옮기기만 하면 된다.
+
+\medskip\noindent
+먼저 사상 $X \to \Spec(R)$가 $x$에서 매끄러우면, $x$의 어떤 아핀
+열린 근방 $U \subset X$에 대하여 \'etale 사상
+$U \to \mathbf{A}^1_R = \Spec(R[u])$를 찾을 수 있다. 이는 Morphisms,
+보조정리 \ref{morphisms-lemma-smooth-etale-over-affine-space}이다.
+필요하면 좌표 $u$를 $u + 1$로 바꾸어, $x$가 표준 열린집합
+$D(u) \subset \mathbf{A}^1_R$의 한 점으로 사상된다고 가정할 수 있다.
+그러면 $A = R[u, v]/(uv - 1)$에 대하여 $D(u) = \Spec(A)$이므로
+이 경우 결과가 성립한다.
+
+\medskip\noindent
+다음으로 $x$가 올의 특이점이라고 하자. Algebraic Curves, 보조정리
+\ref{curves-lemma-etale-local-structure-nodal-family}을 적용하면 그림
+$$
+\xymatrix{
+X \ar[d] &
+U \ar[rr] \ar[l] \ar[rd] & &
+W \ar[r] \ar[ld] &
+\Spec(\mathbf{Z}[u, v, a]/(uv - a)) \ar[d] \\
+\Spec(R) & &
+V \ar[ll] \ar[rr] & & \Spec(\mathbf{Z}[a])
+}
+$$
+을 얻으며, 이는 인용한 보조정리의 명제에 언급된 모든 성질을 가진다.
+$x' \in U$를 그 보조정리가 보장하는, $x$로 사상되는 점이라 하자.
+먼저 $V$를 $x'$의 상의 아핀 근방으로 줄인다. $V = \Spec(R')$라 하자.
+그러면 $R \to R'$은 \'etale이다. $R$이 이산 값매김환이므로 $R'$은
+준국소 Dedekind 정역들의 유한 곱이다(More on Algebra, 보조정리
+\ref{more-algebra-lemma-Dedekind-etale-extension}을 사용하라).
+따라서 예컨대 소 아이디얼 회피를 사용하면, $x'$의 상을 포함하고
+$R'_f$가 이산 값매김환이 되는 표준 열린집합
+$D(f) \subset V = \Spec(R')$를 찾을 수 있다. $R'$을 $R'_f$로 바꾸면
+$V = \Spec(R')$이고 $R \subset R'$이 이산 값매김환의 \'etale 확대인
+상황에 이른다. 이산 값매김환의 확대는 More on Algebra, 정의
+\ref{more-algebra-definition-extension-discrete-valuation-rings}에서
+정의하였다.
+
+\medskip\noindent
+사상 $V \to \Spec(\mathbf{Z}[a])$는 $R'$에서 $a$의 상 $h$로 결정된다.
+그러면 $W = \Spec(R'[u, v]/(uv - h))$이다. 따라서
+$A = R'[u, v]/(uv - h)$로 두면 보조정리가 성립한다.
+$h = 0$이면 보조정리에 언급된 첫 번째 경우를 얻음은 분명하다.
+$h \not = 0$이면 $R'$의 어떤 단원 $\epsilon$과 $n \geq 0$에 대하여
+$h = \epsilon \pi^n$으로 쓸 수 있다. 좌표를
+$u_{new} = \epsilon u$, $v_{new} = v$로 바꾸면 보조정리에 열거된
+$A$의 두 번째 동형형을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-blowup-at-worst-nodal}
+$R$을 이산 값매김환이라 하자. $X$를 $R$ 위에서 상대차원 $1$의
+마디 이하 특이성을 가지며 일반 올이 매끄러운 준콤팩트 스킴이라 하자.
+그러면 $m \geq 0$과 열
+$$
+X_m \to \ldots \to X_1 \to X_0 = X
+$$
+이 존재하여 다음을 만족한다.
+\begin{enumerate}
+\item $X_{i + 1} \to X_i$는 $X_i$의 특이한 닫힌점 $x_i$에서의 부풀리기이다.
+\item $X_i \to \Spec(R)$는 상대차원 $1$의 마디 이하 특이성을 가진다.
+\item $X_m$은 정칙이다.
+\end{enumerate}
+\end{lemma}
+
+\noindent
+조금 더 강한 참인 명제는 다음과 같다. 특이점들을 어떤 순서로
+부풀리더라도 결국 특이점 해소에 이르며, 중간의 모든 부풀리기는
+$R$ 위에서 상대차원 $1$의 마디 이하 특이성을 가진다.
+
+\begin{proof}
+$X$가 준콤팩트이므로 특수 올 $X_k$도 준콤팩트이다. $X_k$의 특이점들은
+마디 이하이므로 $X_k$는 유한 개의 마디를 가지며 그 밖에서는 $k$ 위에서
+매끄럽다. $X \to \Spec(R)$가 평탄하고 일반 올이 매끄러우므로,
+$X$는 $X_k$의 유한 개 마디를 제외하면 $R$ 위에서 매끄럽다
+(Morphisms, 보조정리 \ref{morphisms-lemma-smooth-at-point}을 사용하라).
+따라서 $X$는 특수 올의 마디들을 제외한 모든 점에서 정칙이다
+(Algebra, 보조정리 \ref{algebra-lemma-regular-goes-up}을 보라).
+$x \in X$를 그러한 마디라 하고, 보조정리
+\ref{models-lemma-etale-local-at-worst-nodal}에서와 같은 그림
+$$
+\xymatrix{
+X \ar[d] &
+U \ar[r] \ar[d] \ar[l] &
+\Spec(A) \ar[dl] \\
+\Spec(R) &
+\Spec(R') \ar[l]
+}
+$$
+을 택하자. $A = R'[u, v]/(uv)$인 경우는 일어날 수 없다. 이는 $X/R$의
+일반 올이 특이하다는 뜻이 되기 때문이다(사소한 세부사항은 생략한다).
+따라서 어떤 $n \geq 0$에 대하여 $A = R'[u, v]/(uv - \pi^n)$이다.
+$x$가 특이점이므로 $n \geq 2$이다. 예 \ref{models-example-blowup}의 논의를 보라.
+
+\medskip\noindent
+$U$를 줄인 뒤에는 $x$로 사상되는 유일한 점 $u \in U$가 있다고 가정할
+수 있다. $w \in \Spec(A)$를 $u$의 상이라 하자. 또한 $u$가 $w$로
+사상되는 $U$의 유일한 점이라고 가정할 수 있다. 두 수평 화살표가
+\'etale이므로, $U$의 닫힌 부분스킴으로 본 $u$는 $x \in X$의 스킴론적
+역상이면서 $w \in \Spec(A)$의 스킴론적 역상이다. 부풀리기는 평탄한
+밑변환과 가환하므로(Divisors, 보조정리
+\ref{divisors-lemma-flat-base-change-blowing-up}), 가환 그림
+$$
+\xymatrix{
+X' \ar[d] &
+U' \ar[l] \ar[d] \ar[r] &
+W' \ar[d] \\
+X & U \ar[l] \ar[r] & \Spec(A)
+}
+$$
+을 얻는다. 두 정사각형은 카르테시안이고, 수직 화살표들은 각각
+$X, U, \Spec(A)$에서 $x,u,w$의 부풀리기이다. 스킴 $W'$는 예
+\ref{models-example-blowup}에서 기술하였다. 그곳에서 $W'$가 $R'$ 위에서
+상대차원 $1$의 마디 이하 특이성을 가짐을 보였다. 따라서 $W'$는 $R$
+위에서도 상대차원 $1$의 마디 이하 특이성을 가진다
+(Algebraic Curves, 보조정리
+\ref{curves-lemma-nodal-family-postcompose-etale}). 그러므로 $U'$도
+$R$ 위에서 상대차원 $1$의 마디 이하 특이성을 가진다
+(Algebraic Curves, 보조정리
+\ref{curves-lemma-nodal-family-etale-local-source}를 보라).
+$X' \to X$가 $x$의 여집합 위에서 동형이므로, 보조정리
+\ref{curves-lemma-nodal-family-etale-local-source}를 다시 적용하면
+$X'/R$도 그러함을 얻는다.
+
+\medskip\noindent
+끝으로 이 부풀리기를 유한 번 수행하면 정칙 모형 $X_m$에 이른다는 것을
+보여야 한다. 위에서 기술한 부풀리기 아래에서 ``불변량'' $n$이 $2$씩
+감소하므로 이는 상당히 분명하다. 예 \ref{models-example-blowup}의 계산을 보라.
+그러나 이 불변량을 엄밀히 정의하고 성질을 확립하는 일을 피하기 위해
+다음과 같이 논증한다. $n = 2$이면 $W'$는 정칙이고, 따라서 $X'$는
+$x$ 위에 놓인 모든 점에서 정칙이어서 $X$의 특이점 개수가 $1$ 줄었다.
+$n > 2$이면 $w$ 위에 놓인 $W'$의 유일한 특이점 $w'$는
+$\kappa(w) = \kappa(w')$를 만족한다. 따라서 $U'$에는 $u$ 위에 놓인
+유일한 특이점 $u'$가 있고 $\kappa(u) = \kappa(u')$이다.
+이는 $X'$에 $x$ 위에 놓인 유일한 특이점 $x'$가 있음을 뜻하며,
+그 점은 바로 $u'$의 상이다. 그러므로 위와 정확히 같은 논증으로 가환 그림
+$$
+\xymatrix{
+X'' \ar[d] &
+U'' \ar[l] \ar[d] \ar[r] &
+W'' \ar[d] \\
+X' & U' \ar[l] \ar[r] & W'
+}
+$$
+을 얻는다. 두 정사각형은 카르테시안이고, 수직 화살표들은 각각
+$X',U',W'$에서 $x',u',w'$의 부풀리기이다. 이를 계속하면
+$\lfloor n/2 \rfloor$단계 후에 끝나는 서로 양립하는 부풀리기들의 열을
+얻는다. 이 과정이 끝나면 스킴 $X^{(\lfloor n/2 \rfloor)}$은 $X$보다
+특이점이 하나 적다. 특이점의 개수에 대한 귀납법으로 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-blowdown-at-worst-nodal}
+$R$을 분수체 $K$와 잉여체 $k$를 갖는 이산 값매김환이라 하자.
+$X \to \Spec(R)$가 $R$ 위에서 상대차원 $1$의 마디 이하 특이성을
+가진다고 하자. $X \to X'$가 제1종 예외곡선 $E \subset X$의
+수축이라 하자. 그러면 $X'$는 $R$ 위에서 상대차원 $1$의 마디 이하
+특이성을 가진다.
+\end{lemma}
+
+\begin{proof}
+$x' \in X'$를 $E$의 상이라 하자. 확인할 것은
+$X' \to \Spec(R)$가 $x'$의 근방에서 상대차원 $1$의 마디 이하
+특이성을 가진다는 것뿐이다. $X \to \Spec(R)$의 닫힌 올은 축소되어
+있으므로 $\pi \in R$은 $E$ 위에서 차수 $1$로 소멸한다. 이는 곧
+$\pi$가 $\mathfrak m_{x'} \subset \mathcal{O}_{X', x'}$의 원소이지만
+$\mathfrak m_{x'}^2$에는 속하지 않음을 뜻한다.
+$\mathcal{O}_{X', x'}$는 차원 $2$의 정칙환이므로(Resolution of Surfaces,
+절 \ref{resolve-section-minus-one}의 수축 정의에 의해),
+$\mathcal{O}_{X'_k, x'}$는 차원 $1$의 정칙환이다
+(Algebra, 보조정리 \ref{algebra-lemma-regular-ring-CM}).
+한편 곡선 $E$는 닫힌 올 $X_k$의 다른 성분 하나 이상과 만나야 한다.
+그 성분을 $C$라 하고 $x \in E \cap C$라 하자. 그러면 $x$는 특수 올
+$X_k$의 마디이고, 따라서 $\kappa(x)/k$는 유한 분리 확대이다
+(Algebraic Curves, 보조정리 \ref{curves-lemma-nodal}).
+$x \mapsto x'$이므로 $\kappa(x')/k$도 유한 분리 확대이다.
+Algebra, 보조정리 \ref{algebra-lemma-separable-smooth}에 의해
+$X'_k \to \Spec(k)$는 $x'$의 어떤 열린 근방에서 매끄럽다.
+평탄성과 합치면 $X' \to \Spec(R)$도 $x'$의 근방에서 매끄럽다
+(Morphisms, 보조정리 \ref{morphisms-lemma-smooth-at-point}).
+상대차원 $1$의 매끄러운 사상은 상대차원 $1$의 마디 이하 특이성을
+가지므로 증명이 끝난다(Algebraic Curves, 보조정리
+\ref{curves-lemma-smooth-relative-dimension-1}).
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-semistable}
+$R$을 분수체 $K$를 갖는 이산 값매김환이라 하고,
+$C$를 $H^0(C, \mathcal{O}_C) = K$인 $K$ 위의 매끄러운 사영곡선이라 하자.
+다음은 서로 동치이다.
+\begin{enumerate}
+\item $R$ 위에서 상대차원 $1$의 마디 이하 특이성을 갖는 $C$의
+고유 모형이 존재한다.
+\item $R$ 위에서 상대차원 $1$의 마디 이하 특이성을 갖는 $C$의
+극소 모형이 존재한다.
+\item $C$의 모든 극소 모형은 $R$ 위에서 상대차원 $1$의 마디 이하
+특이성을 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이 명제를 이해하기 위해 다음을 상기하자. 극소 모형은 제1종 예외곡선을
+갖지 않는 고유 정칙 모형으로 정의되고(정의
+\ref{models-definition-minimal-model}), 극소 모형은 존재하며(명제
+\ref{models-proposition-exists-minimal-model}), $C$의 종수가 $>0$이면
+극소 모형은 유일하다(보조정리 \ref{models-lemma-minimal-model-unique}).
+이를 염두에 두면 (2) $\Rightarrow$ (1)과 (3) $\Rightarrow$ (2)는
+분명하다.
+
+\medskip\noindent
+(1)을 가정하자. $X$를 $R$ 위에서 상대차원 $1$의 마디 이하 특이성을
+갖는 $C$의 고유 모형이라 하자. 보조정리
+\ref{models-lemma-blowup-at-worst-nodal}을 적용하면 $X$가 정칙이라고도
+가정할 수 있다. 보조정리 \ref{models-lemma-pre-exists-minimal-model}에서와 같이
+$$
+X = X_m \to X_{m - 1} \to \ldots \to X_1 \to X_0
+$$
+라 하자. 보조정리 \ref{models-lemma-blowdown-at-worst-nodal}과 귀납법에 의해
+$X_0$는 $R$ 위에서 상대차원 $1$의 마디 이하 특이성을 가진다.
+
+\medskip\noindent
+증명을 끝내려면 (2)가 (3)을 함의함을 보여야 한다. $C$의 종수가
+$>0$이면 극소 모형이 유일하므로 이는 분명하다(위 논의를 보라).
+한편 극소 모형이 유일하지 않으면, 보조정리 \ref{models-lemma-nonuniqueness}에
+의해 모든 극소 모형의 특수 올은 $\mathbf{P}^1_k$와 동형이다.
+따라서 모든 극소 모형에 대해 사상 $X \to \Spec(R)$는 매끄럽다.
+\end{proof}
+
+\begin{definition}
+\label{models-definition-semistable}
+$R$을 분수체 $K$를 갖는 이산 값매김환이라 하고,
+$C$를 $H^0(C, \mathcal{O}_C) = K$인 $K$ 위의 매끄러운 사영곡선이라 하자.
+보조정리 \ref{models-lemma-semistable}의 동치 조건들이 성립할 때
+$C$가 {\it 반안정 축약을 가진다}고 한다.
+\end{definition}
+
+\begin{lemma}
+\label{models-lemma-good}
+$R$을 분수체 $K$를 갖는 이산 값매김환이라 하고,
+$C$를 $H^0(C, \mathcal{O}_C) = K$인 $K$ 위의 매끄러운 사영곡선이라 하자.
+다음은 서로 동치이다.
+\begin{enumerate}
+\item $C$의 매끄러운 고유 모형이 존재한다.
+\item $R$ 위에서 매끄러운 $C$의 극소 모형이 존재한다.
+\item 모든 극소 모형은 $R$ 위에서 매끄럽다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X$가 매끄러운 고유 모형이면 특수 올은 연결이고
+(보조정리 \ref{models-lemma-regular-model-connected}) 매끄러우므로 기약이다.
+이는 곧 그 모형이 극소임을 뜻한다. 따라서 (1)은 (2)를 함의한다.
+증명을 끝내려면 (2)가 (3)을 함의함을 보여야 한다.
+$C$의 종수가 $>0$이면 극소 모형이 유일하므로 이는 분명하다
+(보조정리 \ref{models-lemma-minimal-model-unique}). 한편 극소 모형이 유일하지
+않으면 보조정리 \ref{models-lemma-nonuniqueness}에 의해 특수 올이
+$\mathbf{P}^1_k$와 동형이므로, 모든 극소 모형에 대해
+$X \to \Spec(R)$는 매끄럽다.
+\end{proof}
+
+\begin{definition}
+\label{models-definition-good}
+$R$을 분수체 $K$를 갖는 이산 값매김환이라 하고,
+$C$를 $H^0(C, \mathcal{O}_C) = K$인 $K$ 위의 매끄러운 사영곡선이라 하자.
+보조정리 \ref{models-lemma-good}의 동치 조건들이 성립할 때
+$C$가 {\it 양호한 축약을 가진다}고 한다.
+\end{definition}
+
+
+
+
+
+
+
+
+\section{종수 0에서의 반안정 축약}
+\label{models-section-semistable-reduction-genus-zero}
+
+\noindent
+이 절에서는 종수 0인 곡선에 대한 반안정 축약 정리
+(정리 \ref{models-theorem-semistable-reduction})를 증명한다.
+
+\medskip\noindent
+$R$을 분수체 $K$를 갖는 이산 값매김환이라 하고,
+$C$를 $H^0(C, \mathcal{O}_C) = K$인 $K$ 위의 매끄러운 사영곡선이라 하자.
+$C$의 종수가 $0$이면 $C$는 이차곡선과 동형이다
+(Algebraic Curves, 보조정리 \ref{curves-lemma-genus-zero}).
+따라서 $C(K') \not = \emptyset$이 되는 차수 $2$ 이하의 유한 분리 확대
+$K'/K$가 존재한다. Algebraic Curves, 보조정리
+\ref{curves-lemma-smooth-plane-curve-point-over-separable}를 보라.
+$R' \subset K'$을 $R$의 정수적 폐포라 하자. More on Algebra, 주석
+\ref{more-algebra-remark-finite-separable-extension}의 논의를 보라.
+$R'$의 각 극대 아이디얼 $\mathfrak m$에 대해 $C_{K'}$가
+$R'_{\mathfrak m}$ 위에서 반안정 축약을 가짐을 보이겠다
+(물론 현재의 경우 그러한 아이디얼은 많아야 두 개이다).
+$R$을 $R'_{\mathfrak m}$으로, $C$를 $C_{K'}$로 바꾸면 다음 문단에서
+논의할 경우로 환원된다.
+
+\medskip\noindent
+이 문단에서 $R$은 분수체 $K$를 갖는 이산 값매김환이고,
+$C$는 $H^0(C, \mathcal{O}_C) = K$이며 종수가 $0$인 $K$ 위의 매끄러운
+사영곡선이고, $C$는 $K$-유리점을 가진다. 이 경우 Algebraic Curves,
+명제 \ref{curves-proposition-projective-line}에 의해
+$C \cong \mathbf{P}^1_K$이다. 따라서 $\mathbf{P}^1_R$을 모형으로 쓸 수
+있고, $C$는 양호한 축약과 반안정 축약을 모두 가진다.
+
+\begin{example}
+\label{models-example-extension-necessary-genus-zero}
+$R = \mathbf{R}[[\pi]]$라 하고 스킴
+$$
+X = V(T_1^2 + T_2^2 - \pi T_0^2) \subset \mathbf{P}^2_R
+$$
+을 생각하자. $\mathbf{C}$ 위에서
+$T_1^2 + T_2^2 = (T_1 + iT_2)(T_1 - iT_2)$라는 분해가 있으므로,
+$X$를 $\mathbf{C}[[\pi]]$로 밑변환한 것은 예
+\ref{models-example-nonunique-in-genus-zero}에서 정의한 스킴과 동형이다.
+따라서 $X$는 정칙이고 그 특수 올은 기약이지만 특이하다.
+그러므로 $X$는 그 일반 올의 유일한 극소 모형이다
+(보조정리 \ref{models-lemma-nonuniqueness}을 사용하라).
+따라서 종수 $0$에서도 확대가 필요하다.
+\end{example}
+
+
+
+\section{종수 1에서의 반안정 축약}
+\label{models-section-semistable-reduction-genus-one}
+
+\noindent
+이 절에서는 종수 1인 곡선에 대한 반안정 축약 정리
+(정리 \ref{models-theorem-semistable-reduction})를 증명한다.
+독자는 먼저 종수 $\geq 2$인 경우의 증명
+(절 \ref{models-section-semistable-reduction-genus-at-least-two})을 읽는 것이 좋다.
+보조정리 \ref{models-lemma-genus-one}에서 주어진 종수 $1$의 극소 수치형의
+분류를 최대한 활용할 것이다.
+
+\medskip\noindent
+분수체가 $K$인 이산 값매김환 $R$과,
+$H^0(C, \mathcal{O}_C) = K$인 $K$ 위의 매끄러운 사영곡선 $C$를 택하자.
+$C$의 종수가 $1$이라고 가정하자. $k$의 표수와 다른 소수
+$\ell \geq 7$을 택한다. $C(K') \not = \emptyset$이고 다음을 만족하는
+유한 분리 확대 $K'/K$를 택한다.
+$\Pic(C_{K'})[\ell] \cong (\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2}$.
+Algebraic Curves, 보조정리
+\ref{curves-lemma-torsion-picard-becomes-visible}를 보라.
+$R' \subset K'$을 $R$의 정수적 폐포라 하자. More on Algebra, 주석
+\ref{more-algebra-remark-finite-separable-extension}의 논의를 보라.
+$R$을 $R'$의 어떤 극대 아이디얼 $\mathfrak m$에 대한
+$R'_{\mathfrak m}$으로, $C$를 $C_{K'}$로 바꿀 수 있다.
+이로써 다음 문단에서 다룰 경우로 환원된다.
+
+\medskip\noindent
+이 절의 나머지 부분에서 $R$은 분수체 $K$를 갖는 이산 값매김환이고,
+$C$는 $H^0(C, \mathcal{O}_C) = K$이며 종수가 $1$인 $K$ 위의 매끄러운
+사영곡선으로서 $K$-유리점을 가지고,
+$\Pic(C)[\ell] \cong (\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2}$
+을 만족한다고 하자. 여기서 $\ell \geq 7$은 $k$의 표수와 다른 소수이다.
+$C$가 반안정 축약을 가짐을 증명하겠다.
+
+\medskip\noindent
+$X$를 $C$의 극소 모형이라 하자. 명제
+\ref{models-proposition-exists-minimal-model}을 보라.
+$T = (n, m_i, (a_{ij}), w_i, g_i)$를 $X$에 결부된 수치형이라 하자
+(정의 \ref{models-definition-numerical-type-model}). 그러면 $T$는 극소
+수치형이다(보조정리 \ref{models-lemma-numerical-type-minimal-model}).
+$C$가 유리점을 가지므로 보조정리
+\ref{models-lemma-numerical-type-rational-point}에 의해
+$m_i = w_i = 1$인 $i$가 존재한다. 보조정리 \ref{models-lemma-genus-one}의
+종수 $1$인 극소 수치형의 분류를 살펴보면 $m = w = 1$이고, 경우
+(\ref{models-item-up4}),
+(\ref{models-item-equal-down3}),
+(\ref{models-item-up-up}),
+(\ref{models-item-down-up}),
+(\ref{models-item-up-equal-up}),
+(\ref{models-item-down-equal-up}),
+(\ref{models-item-triple-with-down}),
+(\ref{models-item-equal-equal-down-equal}),
+(\ref{models-item-up-equal-equal-up}),
+(\ref{models-item-down-equal-equal-up}),
+(\ref{models-item-triple-extended-down}),
+(\ref{models-item-up-chain-equal-up}),
+(\ref{models-item-down-chain-equal-up}),
+(\ref{models-item-Dn-extended-down})는 불가능하다. 그 경우에는
+$w_i$와 $m_i$가 모두 $1$인 첨자가 없기 때문이다.
+$e$를 $i < j$이고 $a_{ij} > 0$인 쌍 $(i,j)$의 개수라 하자.
+나머지 경우에는 다음이 성립한다.
+\begin{enumerate}
+\item[(A)] 다음 경우에는 $e = n - 1$이다.
+(\ref{models-item-one}),
+(\ref{models-item-two-cycle}),
+(\ref{models-item-equal-up3}),
+(\ref{models-item-up-down}),
+(\ref{models-item-up-equal-down}),
+(\ref{models-item-triple-with-up}),
+(\ref{models-item-equal-equal-up-equal}),
+(\ref{models-item-up-equal-equal-down}),
+(\ref{models-item-quadruple}),
+(\ref{models-item-triple-extended-up}),
+(\ref{models-item-up-chain-equal-down}),
+(\ref{models-item-Dn-extended-up}),
+(\ref{models-item-double-triple}),
+(\ref{models-item-E6-completed}),
+(\ref{models-item-E7-completed}),
+(\ref{models-item-E8-completed}).
+\item[(B)] 다음 경우에는 $e = n$이다.
+(\ref{models-item-three-cycle}),
+(\ref{models-item-four-cycle}),
+(\ref{models-item-five-cycle}),
+(\ref{models-item-n-cycle}).
+\end{enumerate}
+이 두 경우를 따로 논증한다.
+
+\medskip\noindent
+경우 (A). 이 경우 $\Pic(T)[\ell]$은 자명하다. 수치형의 Picard 군은
+절 \ref{models-section-picard-group}에서 정의하였다.
+$\Pic(T) \subset \Coker(A)$이고(보조정리 \ref{models-lemma-picard-T-and-A}),
+$\ell$을 $a_{ij}$ 및 $m_i$와 서로소로 택했으므로 보조정리
+\ref{models-lemma-recurring-symmetric-integer}에 의해 $\Coker(A)[\ell] = 0$이다.
+따라서 위의 소멸이 성립한다. 보조정리 \ref{models-lemma-sequence-torsion}과
+\ref{models-lemma-torsion-embeds}에 의해 매장이 존재한다.
+$$
+(\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2} \subset \Pic((X_k)_{red})[\ell].
+$$
+Algebraic Curves, 보조정리
+\ref{curves-lemma-bound-torsion-simple}에 의해
+$$
+2 \leq \dim_k H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) +
+g_{geom}((X_k)_{red}/k)
+$$
+을 얻는다. Algebraic Curves, 보조정리
+\ref{curves-lemma-bound-geometric-genus}과
+\ref{curves-lemma-bound-geometric-genus-curve}에 의해
+$g_{geom}((X_k)_{red}/k) \leq \sum w_ig_i$이다.
+보조정리 \ref{models-lemma-numerical-type-rational-point}에 의해 보조정리
+\ref{models-lemma-genus-reduction-smaller}의 가정이 성립하므로
+$\dim_k H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) \leq g = 1$이다.
+이들을 합치면
+$$
+2 \leq 1 + \sum w_i g_i
+$$
+이다. 목록을 살펴보면 수치형은
+$n = 1$, $w_1 = m_1 = g_1 = 1$로 주어짐을 얻는다.
+모든 곳에서 등호가 성립하므로 $g_{geom}(C_1/k) = 1$이다.
+한편 $C_1$은 $C_1 \to \Spec(k)$가 $x$에서 매끄럽게 되는
+$k$-유리점 $x$를 가진다. 따라서 $C_1$은 기하적으로 정역이다
+(Varieties, 보조정리
+\ref{varieties-lemma-variety-with-smooth-rational-point}).
+그러므로 $g_{geom}(C_1/k) = 1$은 $C_{1,\overline{k}}$의 정규화의
+종수와 $C_{1,\overline{k}}$의 종수 모두와 같다. 따라서 정규화 사상
+$C_{1, \overline{k}}^\nu \to C_{1, \overline{k}}$는 동형이다
+(Algebraic Curves, 보조정리 \ref{curves-lemma-genus-normalization}).
+원하는 대로 $C_1$은 $k$ 위에서 매끄럽다.
+
+\medskip\noindent
+경우 (B). 여기서는 매장
+$$
+\mathbf{Z}/\ell \mathbf{Z} \subset \Pic(X_k)[\ell]
+$$
+만을 얻는다. 수치형의 분류에서 각 $i$에 대하여
+$m_i = w_i = 1$이고 $g_i = 0$임을 알 수 있다. 따라서 각 $C_i$는
+$k$ 위의 종수 0인 곡선이다. 더욱이 각 $i$에 대해
+$C_i \cap C_j$가 $k$-유리점이 되는 $j$가 존재한다. 따라서
+Algebraic Curves, 명제 \ref{curves-proposition-projective-line}에 의해
+$C_i \cong \mathbf{P}^1_k$이다. 특히 $X_k$는 $C_i$들의 스킴론적
+합집합이므로, $X_{\overline{k}}$는 $C_{i,\overline{k}}$들의 스킴론적
+합집합이다. 따라서 $X_{\overline{k}}$는 $\overline{k}$ 위의 차원 $1$인
+축소되고 연결된 고유 스킴이며
+$\dim_{\overline{k}} H^1(X_{\overline{k}},
+\mathcal{O}_{X_{\overline{k}}}) = 1$이다. 또한 Varieties, 보조정리
+\ref{varieties-lemma-change-fields-pic}와 위 사실에 의해 여전히
+% P07-KO55-ERR-002: frozen source omits [\ell]) in this dimension expression; target preserves canonical bytes pending canon adjudication.
+$$
+\dim_{\mathbf{F}_\ell}(\Pic(X_{\overline{k}}) \geq 1
+$$
+이다. Algebraic Curves, 명제
+\ref{curves-proposition-torsion-picard-reduced-proper}에 의해
+$X_{\overline{k}}$는 다중교차 특이점 이하만 가진다. 그런데 $X_k$는
+Gorenstein이므로(보조정리 \ref{models-lemma-gorenstein}),
+$X_{\overline{k}}$도 Gorenstein이다(Duality for Schemes, 보조정리
+\ref{duality-lemma-gorenstein-base-change}). 따라서 Algebraic Curves,
+보조정리 \ref{curves-lemma-multicross-gorenstein-is-nodal}에 의해
+$X_{\overline{k}}$는 마디 이하 특이성을 가진다. 이로써 경우 (B)의
+증명이 끝난다.
+
+\begin{example}
+\label{models-example-extension-necessary-genus-one}
+$k$를 대수적으로 닫힌 체라 하고, $Z$를 $k$ 위의 양의 종수 $g$인
+매끄러운 사영곡선이라 하자. $n \geq 1$을 $k$의 표수와 서로소인
+정수라 하자. $\mathcal{L}$을 위수가 $n$인 가역
+$\mathcal{O}_Z$-가군이라 하자. Algebraic Curves, 보조정리
+\ref{curves-lemma-torsion-picard-smooth-projective}를 보라.
+동형 $\varphi : \mathcal{L}^{\otimes n} \to \mathcal{O}_Z$를 택하자.
+$R = k[[\pi]]$라 하고 그 분수체를 $K = k((\pi))$라 하자.
+$Z_R$로 $Z$의 $R$로의 밑변환을 나타내고, $\mathcal{L}_R$을
+$\mathcal{L}$의 $Z_R$로의 당김이라 하자. 유한 평탄 사상
+$$
+p : X \longrightarrow Z_R
+$$
+중 다음을 만족하는 것을 생각하자.
+$$
+p_*\mathcal{O}_X =
+\text{Sym}^*_{\mathcal{O}_{Z_R}}(\mathcal{L}_R)/(\varphi - \pi) =
+\mathcal{O}_{Z_R} \oplus \mathcal{L}_R \oplus
+\mathcal{L}_R^{\otimes 2} \oplus \ldots \oplus \mathcal{L}_R^{\otimes n - 1}
+$$
+더 정확히 말해 $U = \Spec(A) \subset Z$가 아핀 열린집합이고,
+$\varphi(s^{\otimes n}) = f$인 절단 $s$가 $\mathcal{L}|_U$를
+자명화한다고 하자. 여기서 $f$는 단원이다. 그러면
+$$
+p^{-1}(U_R) = \Spec\left(
+(A \otimes_R R[[\pi]])[x]/(x^n - \pi f)
+\right)
+$$
+독자는 일반 올 사이의 사상 $X_K \to Z_K$가 유한 \'etale임을 확인할
+수 있다. 구조층의 기술에서 $H^0(X, \mathcal{O}_X) = R$이고
+$H^0(X_K, \mathcal{O}_{X_K}) = K$임을 알 수 있다.
+Riemann--Hurwitz 공식(Algebraic Curves, 보조정리
+\ref{curves-lemma-rhe})에 의해 $X_K$의 종수는 $n(g - 1) + 1$이다.
+특히 $Z$의 종수가 $1$이면 $X_K$의 종수도 $1$이다.
+한편 위의 국소 방정식에 의해 스킴 $X$는 정칙이고, 유효 Cartier
+인자로서 특수 올 $X_k$는 그 축소 특수 올의 $n$배이다.
+따라서 $X_K$가 반안정 축약을 갖게 되는 모든 유한 확대 $K'/K$는
+분기지수 적어도 $n$으로 분기해야 한다(일부 세부사항은 생략한다).
+그러므로 종수 $1$인 곡선이 반안정 축약을 갖게 되는 확대의 차수에는
+보편적인 상계가 존재하지 않는다.
+\end{example}
+
+
+
+
+
+
+\section{종수 2 이상에서의 반안정 축약}
+\label{models-section-semistable-reduction-genus-at-least-two}
+
+\noindent
+이 절에서는 종수 $\geq 2$인 곡선에 대한 반안정 축약 정리
+(정리 \ref{models-theorem-semistable-reduction})를 증명한다.
+$g \geq 2$를 고정하자.
+
+\medskip\noindent
+분수체가 $K$인 이산 값매김환 $R$과,
+$H^0(C, \mathcal{O}_C) = K$인 $K$ 위의 매끄러운 사영곡선 $C$를 택하자.
+$C$의 종수가 $g$라고 가정하자. $k$의 표수와 다른 소수
+$\ell > 768g$를 택한다. $C(K') \not = \emptyset$이고 다음을 만족하는
+유한 분리 확대 $K'/K$를 택한다.
+$\Pic(C_{K'})[\ell] \cong (\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2g}$.
+Algebraic Curves, 보조정리
+\ref{curves-lemma-torsion-picard-becomes-visible}를 보라.
+$R' \subset K'$을 $R$의 정수적 폐포라 하자. More on Algebra, 주석
+\ref{more-algebra-remark-finite-separable-extension}의 논의를 보라.
+$R$을 $R'$의 어떤 극대 아이디얼 $\mathfrak m$에 대한
+$R'_{\mathfrak m}$으로, $C$를 $C_{K'}$로 바꿀 수 있다.
+이로써 다음 문단에서 다룰 경우로 환원된다.
+
+\medskip\noindent
+이 절의 나머지 부분에서 $R$은 분수체 $K$를 갖는 이산 값매김환이고,
+$C$는 $H^0(C, \mathcal{O}_C) = K$이며 종수가 $g$인 $K$ 위의 매끄러운
+사영곡선으로서 $K$-유리점을 가지고,
+$\Pic(C)[\ell] \cong (\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2g}$
+을 만족한다고 하자. 여기서 $\ell \geq 768g$는 $k$의 표수와 다른
+소수이다. $C$가 반안정 축약을 가짐을 증명하겠다.
+
+\medskip\noindent
+이 절의 나머지에서는 보조정리
+\ref{models-lemma-numerical-type-rational-point}의 결론들을 별도의 언급 없이
+사용한다.
+
+\medskip\noindent
+$X$를 $C$의 극소 모형이라 하자. 명제
+\ref{models-proposition-exists-minimal-model}을 보라.
+$T = (n, m_i, (a_{ij}), w_i, g_i)$를 $X$에 결부된 수치형이라 하자
+(정의 \ref{models-definition-numerical-type-model}). 그러면 $T$는 종수 $g$의
+극소 수치형이다(보조정리 \ref{models-lemma-numerical-type-minimal-model}).
+명제 \ref{models-proposition-bound-picard-group}에 의해
+$$
+\dim_{\mathbf{F}_\ell} \Pic(T)[\ell] \leq g_{top}
+$$
+이다. 보조정리 \ref{models-lemma-sequence-torsion}과
+\ref{models-lemma-torsion-embeds}에 의해 매장
+$$
+(\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2g - g_{top}}
+\subset \Pic((X_k)_{red})[\ell].
+$$
+이 존재한다. Algebraic Curves, 보조정리
+\ref{curves-lemma-bound-torsion-simple}에 의해
+$$
+2g - g_{top} \leq
+\dim_k H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) + g_{geom}(X_k/k)
+$$
+을 얻는다. 보조정리 \ref{models-lemma-genus-reduction-smaller}와
+\ref{models-lemma-genus-reduction-bigger-than}에 의해
+$$
+g \geq \dim_k H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) \geq
+g_{top} + g_{geom}(X_k/k)
+$$
+이다. 초등 정수론에 따르면 이 $3$개의 부등식이 동시에 성립할 수 있는
+유일한 경우는 모두 등식인 경우이다. 보조정리
+\ref{models-lemma-genus-reduction-smaller}를 살펴보면 모든 $i$에 대해
+$m_i = 1$임을 얻는다. 보조정리
+\ref{models-lemma-equality-genus-reduction-bigger-than}을 살펴보면 $X_k$의
+모든 기약성분이 $k$ 위에서 매끄러움을 얻는다.
+
+\medskip\noindent
+특히 $X_k$는 그 기약성분 $C_i$들의 스킴론적 합집합이므로,
+$X_{\overline{k}}$는 $C_{i,\overline{k}}$들의 스킴론적 합집합이다.
+따라서 $X_{\overline{k}}$는 $\overline{k}$ 위의 차원 $1$인 축소되고
+연결된 고유 스킴이며
+$\dim_{\overline{k}}H^1(X_{\overline{k}},
+\mathcal{O}_{X_{\overline{k}}}) = g$이다.
+또한 Varieties, 보조정리 \ref{varieties-lemma-change-fields-pic}와
+위 사실에 의해 여전히
+$$
+\dim_{\mathbf{F}_\ell}(\Pic(X_{\overline{k}})[\ell])
+\geq 2g - g_{top} =
+\dim_{\overline{k}} H^1(X_{\overline{k}}, \mathcal{O}_{X_{\overline{k}}})
++ g_{geom}(X_{\overline{k}})
+$$
+이다. Algebraic Curves, 명제
+\ref{curves-proposition-torsion-picard-reduced-proper}에 의해
+$X_{\overline{k}}$는 다중교차 특이점 이하만 가진다. 그런데 $X_k$는
+Gorenstein이므로(보조정리 \ref{models-lemma-gorenstein}),
+$X_{\overline{k}}$도 Gorenstein이다(Duality for Schemes, 보조정리
+\ref{duality-lemma-gorenstein-base-change}). 따라서 Algebraic Curves,
+보조정리 \ref{curves-lemma-multicross-gorenstein-is-nodal}에 의해
+$X_{\overline{k}}$는 마디 이하 특이성을 가진다. 이로써 증명이 끝난다.
+
+
+
+
+
+
+
+
+
+
+\section{곡선의 반안정 축약}
+\label{models-section-semistable-reduction-theorem}
+
+\noindent
+이 절에서는 정리의 증명을 마무리한다. $g \geq 2$에 대하여
+$768g < \ell' < \ell$을 $> 768g$인 처음 두 소수라 하고
+\begin{equation}
+\label{models-equation-bound}
+B_g = (2g - 2)(\ell^{2g})!
+\end{equation}
+라 하자. $B_g$의 정확한 형태는 중요하지 않다. 핵심은 그것이 오직
+$g$에만 의존한다는 것이다.
+
+\begin{theorem}
+\label{models-theorem-semistable-reduction}
+\begin{reference}
+\cite[따름정리 2.7]{DM}
+\end{reference}
+$R$을 분수체 $K$를 갖는 이산 값매김환이라 하고, $C$를
+$H^0(C, \mathcal{O}_C) = K$인 $K$ 위의 매끄러운 사영곡선이라 하자.
+그러면 분수체의 유한 분리 확대 $K'/K$를 유도하는 이산 값매김환의 확대
+$R \subset R'$이 존재하여 $C_{K'}$는 반안정 축약을 가진다.
+더 정확히는 다음이 성립한다.
+\begin{enumerate}
+\item $C$의 종수가 0이면, $C_{K'} \cong \mathbf{P}^1_{K'}$이 되는
+차수 $2$의 분리 확대 $K'/K$가 존재한다. 따라서 $C_{K'}$는 $K'$ 안에서
+$R$의 정수적 폐포 $R'$ 위의 매끄러운 사영 스킴
+$\mathbf{P}^1_{R'}$의 일반 올과 동형이다.
+\item $C$의 종수가 1이면, 유한 분리 확대 $K'/K$가 존재하여
+$K'$ 안에서 $R$의 정수적 폐포 $R'$의 모든 극대 아이디얼
+$\mathfrak m$에 대해 $C_{K'}$는 $R'_\mathfrak m$ 위에서 반안정
+축약을 가진다. 더욱이 $R'_\mathfrak m$ 위에서 $C_{K'}$의
+(유일한) 극소 모형의 특수 올은 종수 1의 매끄러운 곡선이거나
+유리곡선들의 순환이다.
+\item $C$의 종수 $g$가 1보다 크면, 차수가 많아야
+$B_g$인 유한 분리 확대 $K'/K$가 존재하여
+(\ref{models-equation-bound}), $K'$ 안에서 $R$의 정수적 폐포 $R'$의
+모든 극대 아이디얼 $\mathfrak m$에 대해 $C_{K'}$는
+$R'_\mathfrak m$ 위에서 반안정 축약을 가진다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+종수 0인 경우는 절 \ref{models-section-semistable-reduction-genus-zero}을,
+종수 1인 경우는 절 \ref{models-section-semistable-reduction-genus-one}을,
+종수 1보다 큰 경우는 절
+\ref{models-section-semistable-reduction-genus-at-least-two}을 보라.
+차수 $[K' : K]$의 상계를 얻기 위해서는 모든 $\ell$-꼬임 또는
+$\ell'$-꼬임이 드러나게 하는 데 필요한 확대의 차수에 대한 상계를
+사용할 수 있다. 이는 Algebraic Curves, 보조정리
+\ref{curves-lemma-torsion-picard-becomes-visible}에서 증명하였다.
+($\ell$과 $\ell'$을 모두 사용하는 이유는 잉여체 $k$의 표수를
+피해야 하기 때문이다.)
+\end{proof}
+
+\begin{remark}[상계의 개선]
+\label{models-remark-improving-bound}
+문헌의 결과들은 정리 \ref{models-theorem-semistable-reduction}의 명제에 제시된
+상계를 개선할 수 있음을 시사한다. 예를 들어 \cite{DM}에서는 잉여체가
+완전체이면 $C$의 반안정 축약과 그 Jacobian의 반안정 축약이 동치임을
+보였으며, 이는 일반 잉여체에 대해서도 성립할 것으로 보인다.
+아벨 다양체의 경우, 잉여표수와 다른 임의의 $\ell \geq 3$에 대해
+$\ell$-꼬임 위의 Galois 작용이 자명이면 반안정 축약을 가진다.
+따라서 $B_g$의 공식 (\ref{models-equation-bound})에서 $\ell = 5$를 택할 수
+있을 것으로 보인다. 다만 증명에는 훨씬 더 많은 작업이 필요하다.
+이 결과가 필요해지면 정확한 명제를 세우고 여기에서 증명할 것이다.
+\end{remark}

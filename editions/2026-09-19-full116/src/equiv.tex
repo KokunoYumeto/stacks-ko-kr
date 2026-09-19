@@ -1,0 +1,4093 @@
+% Generated mechanically from frozen input p07/ko/equiv.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{56}
+\chapter{다양체의 유도 범주}
+
+
+
+\phantomsection
+\label{equiv-section-phantom}
+
+
+\section{서론}
+\label{equiv-section-introduction}
+
+\noindent
+이 장에서는 스킴의 유도 범주의 절
+\ref{perfect-section-introduction}에서 시작한 논의를 계속한다.
+Mukai가 \cite{Mukai}에서 처음 연구한 Fourier--Mukai 변환을 다루고,
+유도 동치에 관한 Orlov의 정리(\cite{Orlov-K3})를 증명한다.
+또한 Anel과 To\"en이 \cite{AT}에서 증명한 유도 동치류의 가산성을
+논의한다.
+
+\medskip\noindent
+이 주제에 대한 좋은 입문서로 Daniel Huybrechts의 책
+\cite{Huybrechts}가 있다. 이 주제를 널리 알리는 데 기여한 다른 논문으로는
+\begin{enumerate}
+\item Bondal과 Kapranov의 논문 \cite{Bondal-Kapranov},
+\item Bondal과 Orlov의 논문 \cite{Bondal-Orlov},
+\item Bondal과 Van den Bergh의 논문 \cite{BvdB},
+\item Beilinson의 논문
+\cite{Beilinson} 및 \cite{Beilinson-derived},
+\item Orlov의 논문 \cite{Orlov-AV},
+\item Orlov의 논문 \cite{Orlov-motives},
+\item Rouquier의 논문 \cite{Rouquier-dimensions}
+\item 이 밖에도 여기서 언급할 수 있는 논문이 매우 많다.
+\end{enumerate}
+
+
+
+
+\section{규약과 표기}
+\label{equiv-section-conventions}
+
+\noindent
+$k$를 체라 하자. {\it $k$-선형 삼각 범주} $\mathcal{T}$란
+삼각 범주(유도 범주의 절
+\ref{derived-section-triangulated-definitions})로서 $k$-선형 구조
+(미분 등급 대수의 절 \ref{dga-section-linear})가 주어지고, 평행이동 함자
+$[n] : \mathcal{T} \to \mathcal{T}$가 $k$-선형이고 이는 모든
+$n \in \mathbf{Z}$에 대해 성립하는 것을 말한다.
+
+\medskip\noindent
+$k$를 체라 하자. $k$-벡터공간의 범주를 $\text{Vect}_k$로 나타낸다.
+$k$-벡터공간 $V$에 대해 $V^\vee$로 $V$의 $k$-선형 쌍대, 즉
+$V^\vee = \Hom_k(V, k)$를 나타낸다.
+
+\medskip\noindent
+$X$를 스킴이라 하자. 완전 복합체들로 이루어진
+$D(\mathcal{O}_X)$의 충만한 부분범주를
+$D_{perf}(\mathcal{O}_X)$로 나타낸다(코호몰로지의 절
+\ref{cohomology-section-perfect}). $X$가 뇌터이면
+$D_{perf}(\mathcal{O}_X) \subset D^b_{\textit{Coh}}(\mathcal{O}_X)$이다.
+스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-perfect-on-noetherian}를 보라. $X$가 뇌터이고
+정칙이면
+$D_{perf}(\mathcal{O}_X) = D^b_{\textit{Coh}}(\mathcal{O}_X)$이다.
+스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-perfect-on-regular}를 보라.
+
+\medskip\noindent
+$k$를 체라 하고 $X$, $Y$를 $k$ 위 스킴이라 하자. 이 경우
+$X \times_{\Spec(k)} Y$ 대신 $X \times Y$라고 쓴다.
+
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$, $Y$를 $S$ 위 스킴이라 하자.
+$\mathcal{F}$를 $\mathcal{O}_X$-가군, $\mathcal{G}$를
+$\mathcal{O}_Y$-가군이라 하자. $\mathcal{O}_{X \times_S Y}$-가군으로
+$$
+\mathcal{F} \boxtimes \mathcal{G} =
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times_S Y}}
+\text{pr}_2^*\mathcal{G}
+$$
+로 놓는다. $K \in D(\mathcal{O}_X)$이고
+$M \in D(\mathcal{O}_Y)$이면 $D(\mathcal{O}_{X \times_S Y})$의 대상으로
+$$
+K \boxtimes M =
+L\text{pr}_1^*K \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} L\text{pr}_2^*M
+$$
+로 놓는다. 따라서 이 표기는 잠재적으로 모호하지만, 문맥으로 어느 쪽을
+뜻하는지 분명해질 것이다.
+
+
+
+
+
+\section{Serre 함자}
+\label{equiv-section-Serre-functors}
+
+\noindent
+이 절의 내용은 \cite{Bondal-Kapranov}에서 가져왔다.
+
+\begin{lemma}
+\label{equiv-lemma-Serre-functor-exists}
+$k$를 체라 하자. 모든 $X, Y \in \Ob(\mathcal{T})$에 대해
+$\dim_k \Hom_\mathcal{T}(X, Y) < \infty$인 $k$-선형 삼각 범주
+$\mathcal{T}$를 잡자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $k$-선형 동치 $S : \mathcal{T} \to \mathcal{T}$와
+$X, Y \in \Ob(\mathcal{T})$에 대해 함자적인 $k$-선형 동형사상
+$c_{X, Y} : \Hom_\mathcal{T}(X, Y) \to \Hom_\mathcal{T}(Y, S(X))^\vee$
+가 존재한다.
+\item 모든 $X \in \Ob(\mathcal{T})$에 대해 함자
+$Y \mapsto \Hom_\mathcal{T}(X, Y)^\vee$는 표현 가능하고, 함자
+$Y \mapsto \Hom_\mathcal{T}(Y, X)^\vee$는 쌍대 표현 가능하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$(S, c)$와 $X \in \Ob(\mathcal{T})$가 주어졌을 때 대상 $S(X)$가 함자
+$Y \mapsto \Hom_\mathcal{T}(X, Y)^\vee$를 표현하고 대상 $S^{-1}(X)$가
+함자 $Y \mapsto \Hom_\mathcal{T}(Y, X)^\vee$를 쌍대 표현하므로,
+조건 (1)은 (2)를 함의한다.
+
+\medskip\noindent
+(2)를 가정하자. 범주의 보조정리
+\ref{categories-lemma-yoneda}인 Yoneda 보조정리를 반복해서 사용한다.
+모든 $X$에 대해 함자 $Y \mapsto \Hom_\mathcal{T}(X, Y)^\vee$를 표현하는
+대상을 $S(X)$로 나타내자. $\varphi : X \to X'$가 주어지면 대응하는
+함자 변환
+$\Hom_\mathcal{T}(X, -)^\vee \to \Hom_\mathcal{T}(X', -)^\vee$에 의해
+유일하게 정해지는 화살표 $S(\varphi) : S(X) \to S(X')$를 얻는다.
+따라서 $S$는 함자이고, 구성에 의해 동형사상 $c_{X, Y}$를 얻는다.
+$S$가 동치임을 보이는 일만 남았다. 모든 $X$에 대해 함자
+$Y \mapsto \Hom_\mathcal{T}(Y, X)^\vee$를 쌍대 표현하는 대상을
+$S'(X)$로 나타내자. 위와 같은 논증으로 $S'$가 함자임을 알 수 있다.
+$S'$가 $S$의 준역함자임을 보이겠다. 실제로
+$$
+\Hom_\mathcal{T}(X, Y) = \Hom_\mathcal{T}(Y, S(X))^\vee =
+\Hom_\mathcal{T}(S'(S(X)), Y)
+$$
+가 이변수 함자적으로 성립하므로
+$S' \circ S \cong \text{id}_\mathcal{T}$이다. 마찬가지로
+$$
+\Hom_\mathcal{T}(Y, X) = \Hom_\mathcal{T}(S'(X), Y)^\vee =
+\Hom_\mathcal{T}(Y, S(S'(X)))
+$$
+이고 $S \circ S' \cong \text{id}_\mathcal{T}$를 얻는다.
+\end{proof}
+
+\begin{definition}
+\label{equiv-definition-Serre-functor}
+$k$를 체라 하자. 모든 $X, Y \in \Ob(\mathcal{T})$에 대해
+$\dim_k \Hom_\mathcal{T}(X, Y) < \infty$인 $k$-선형 삼각 범주
+$\mathcal{T}$를 잡자. 보조정리 \ref{equiv-lemma-Serre-functor-exists}의 동치인
+조건들이 성립하면 {\it Serre 함자가 존재한다}고 한다. 이 경우
+{\it Serre 함자}란 $X, Y \in \Ob(\mathcal{T})$에 대해 함자적인
+$k$-선형 동형사상
+$c_{X, Y} : \Hom_\mathcal{T}(X, Y) \to \Hom_\mathcal{T}(Y, S(X))^\vee$
+가 주어진 $k$-선형 동치 $S : \mathcal{T} \to \mathcal{T}$를 말한다.
+\end{definition}
+
+\begin{remark}
+\label{equiv-remark-matress}
+삼각 범주에서 $X^0 \to X^1 \to X^2 \to X^0[1]$과
+$Y^0 \to Y^1 \to Y^2 \to Y^0[1]$을 구별 삼각형이라 하자.
+$p \in \mathbf{Z}$에 대해 $i \in \{0, 1, 2\}$가 되도록
+$p = 3n + i$로 쓰고 $X^p = X^i[n]$로 놓는다. $Y^q$도 마찬가지로
+정의한다. 항이
+$$
+K^{p, q} = \Hom(X^{-p}, Y^q)
+$$
+인 이중 복합체를 생각하자. 미분
+$d_1 : K^{p, q} \to K^{p + 1, q}$는 사상
+$X^{-p - 1} \to X^{-p}$로 주어지며, 이는 평행이동을 제외하면 첫 번째
+구별 삼각형의 대응하는 사상과 같다. 마찬가지로 미분
+$d_2 : K^{p, q} \to K^{p, q + 1}$은 사상
+$Y^q \to Y^{q + 1}$로 주어진다. 유도 범주의 보조정리
+\ref{derived-lemma-representable-homological}에 의해 이 이중 복합체의
+행과 열은 완전하다. 또한 $K^{p, q} = K^{p + 3, q - 3}$이고 이 등식들은
+미분과 양립한다. 끝으로 공리 TR3은 다음 한 가지 성질을 더 함의한다.
+$d_2 \alpha = d_1 \beta$인 $\alpha \in K^{p, q}$와
+$\beta \in K^{p - 1, q + 1}$가 주어지면
+$\gamma \in K^{p - 2, q + 2}$가 존재하여
+$d_1 \gamma = d_2 \beta $가 $K^{p - 1, q + 2}$에서 성립하고
+$d_2 \gamma = d_1 \alpha $가 $K^{p - 2, q + 3} = K^{p + 1, q}$에서
+가 성립한다. (힌트: $p = q = 0$일 때 이는 정확히 TR3의 명제이고,
+다른 지표에 대해서는 평행이동하여 증명한다.) 이러한 성질을 갖는 이중
+복합체를 {\it matress}라 한다(\cite{Bondal-Kapranov}를 보라).
+\end{remark}
+
+\begin{remark}
+\label{equiv-remark-dual-matress}
+$k$를 체라 하고 $K^{\bullet, \bullet}$를 유한 차원 $k$-벡터공간들로
+이루어진 이중 복합체로서 주석 \ref{equiv-remark-matress}에서처럼 matress이기도
+하다고 하자. 쌍대 이중 복합체
+$L^{p, q} = \Hom_k(K^{-q, -p}, k)$도 matress임을 보이겠다. 행과 열의
+완전성 및 3-주기성은 즉시 따른다. 나머지 조건을 확인하기 위해 선형 사상
+$$
+\partial :
+K^{p, q} \oplus K^{p - 1, q + 1} \oplus K^{p - 2, q + 2}
+\longrightarrow
+K^{p, q + 1} \oplus K^{p - 1, q + 2} \oplus K^{p - 2, q + 3}
+$$
+을 생각하자. 이 사상은 주석 \ref{equiv-remark-matress}와 같은 동일시 아래
+$(\alpha, \beta, \gamma)$를
+$(d_2 \alpha - d_1 \beta, d_2 \gamma - d_1 \alpha, d_1 \gamma - d_2 \beta)$
+로 보낸다. matress가 되는 조건은
+$$
+\Im(\partial) \cap
+\left( 0 \oplus K^{p - 1, q + 2} \oplus K^{p - 2, q + 3} \right)
+=
+\Im(\partial|_{0 \oplus 0 \oplus K^{p - 2, q + 2}})
+$$
+벡터공간 또는 사상의 쌍대를 ${}^\wedge$로 나타내면 쌍대를 취하여
+$$
+\Ker(\partial^\wedge) +
+\left(L^{-p, -q - 1} \oplus 0 \oplus 0 \right)
+=
+\Ker(\text{pr}_{L^{-p + 2, -q - 2}} \circ \partial^\wedge)
+$$
+를 얻는다. 여기서 $\text{pr}$ 항은 사영을 나타낸다. 이는
+$\Im(\partial^\wedge) \cap (L^{-p, -q} \oplus L^{-p + 1, -q - 1} \oplus 0)$
+가 $\Im(\partial^\wedge|_{L^{-p, -q - 1} \oplus 0 \oplus 0})$와 같음을
+함의하며, 이는 $L^{\bullet, \bullet}$에 대한 matress 조건으로 옮겨진다.
+일부 세부사항은 생략한다.
+\end{remark}
+
+\begin{lemma}
+\label{equiv-lemma-Serre-functor}
+정의 \ref{equiv-definition-Serre-functor}의 상황을 생각하자. Serre 함자가
+존재하면 유일한 동형사상을 제외하고 유일하며, 삼각 범주의 완전 함자이다.
+\end{lemma}
+
+\begin{proof}
+Serre 함자 $S$가 주어지면 대상 $S(X)$는 함자
+$Y \mapsto \Hom_\mathcal{T}(X, Y)^\vee$를 표현한다. 따라서 대상 $S(X)$와
+함자적 동일시
+$\Hom_\mathcal{T}(X, Y)^\vee = \Hom_\mathcal{T}(Y, S(X))$는 Yoneda
+보조정리(범주의 보조정리 \ref{categories-lemma-yoneda})에 의해 유일한
+동형사상을 제외하고 유일하게 정해진다. 또한 $\varphi : X \to X'$에 대해
+화살표 $S(\varphi) : S(X) \to S(X')$는 대응하는 함자 변환
+$\Hom_\mathcal{T}(X, -)^\vee \to \Hom_\mathcal{T}(X', -)^\vee$에 의해
+유일하게 정해진다.
+
+\medskip\noindent
+$\mathcal{T}$의 대상 $X, Y$에 대해
+\begin{align*}
+\Hom(Y, S(X)[1])^\vee
+& =
+\Hom(Y[-1], S(X))^\vee \\
+& =
+\Hom(X, Y[-1]) \\
+& =
+\Hom(X[1], Y) \\
+& =
+\Hom(Y, S(X[1]))^\vee
+\end{align*}
+이다. Yoneda 보조정리에 의해 왼쪽 위에서 오른쪽 아래로의 동형사상을
+유도하는 유일한 동형사상 $S(X[1]) \to S(X)[1]$이 존재한다. 위의 각
+동형사상이 $X$와 $Y$ 모두에 대해 함자적이므로, 이것은 함자 동형사상
+$S \circ [1] \to [1] \circ S$를 정의한다.
+
+\medskip\noindent
+$(A, B, C, f, g, h)$를 $\mathcal{T}$의 구별 삼각형이라 하자.
+삼각형 $(S(A), S(B), S(C), S(f), S(g), S(h))$이 구별 삼각형임을
+보여야 한다. 여기서는 위에서 구성한 표준 동형사상
+$S(A[1]) \to S(A)[1]$을 사용하여 $S(h)$의 공역 $S(A[1])$을
+$S(A)[1]$과 동일시한다. 먼저 $\mathcal{T}$의 임의의 $X$에 대해
+삼각형 $(S(A), S(B), S(C), S(f), S(g), S(h))$이 유한 차원
+$k$-벡터공간의 긴 완전열
+$$
+\ldots \to
+\Hom(X, S(A)) \to
+\Hom(X, S(B)) \to
+\Hom(X, S(C)) \to
+\Hom(X, S(A)[1]) \to \ldots
+$$
+을 유도함을 관찰하자. 실제로 이 열은 열
+$$
+\ldots \leftarrow
+\Hom(A, X) \leftarrow
+\Hom(B, X) \leftarrow
+\Hom(C, X) \leftarrow
+\Hom(A[1], X) \leftarrow
+\ldots
+$$
+의 $k$-선형 쌍대이고, 이 열은 유도 범주의 보조정리
+\ref{derived-lemma-representable-homological}에 의해 완전하다.
+다음으로 공리 TR1과 TR2에 의해 가능한 구별 삼각형
+$(S(A), E, S(C), i, p, S(h))$을 택한다. 다음 도식을 가환하게 하는
+점선 화살표를 구성하고자 한다.
+$$
+\xymatrix{
+S(C)[-1] \ar[r]_-{S(h[-1])} &
+S(A) \ar[r]_{S(f)} &
+S(B) \ar[r]_{S(g)} &
+S(C) \ar[r]_{S(h)} &
+S(A)[1] \\
+S(C)[-1] \ar[r]^-{S(h[-1])} \ar@{=}[u] &
+S(A) \ar[r]^i \ar@{=}[u] &
+E \ar[r]^p \ar@{..>}[u]^\varphi &
+S(C) \ar[r]^{S(h)} \ar@{=}[u] &
+S(A)[1] \ar@{=}[u]
+}
+$$
+실제로 $\varphi$가 있으면 임의의 $X$에 대해 그로부터 생기는 사상
+$\Hom(X, E) \to \Hom(X, S(B))$가 $k$-벡터공간의 동형사상임을
+보이겠다. 즉 가환 도식
+$$
+\xymatrix{
+\Hom(X, S(C)[-1]) \ar[r] &
+\Hom(X, S(A)) \ar[r] &
+\Hom(X, S(B)) \ar[r] &
+\Hom(X, S(C)) \ar[r] &
+\Hom(X, S(A)[1]) \\
+\Hom(X, S(C)[-1]) \ar[r] \ar@{=}[u] &
+\Hom(X, S(A)) \ar[r] \ar@{=}[u] &
+\Hom(X, E) \ar[r] \ar[u]^\varphi &
+\Hom(X, S(C)) \ar[r] \ar@{=}[u] &
+\Hom(X, S(A)[1]) \ar@{=}[u]
+}
+$$
+을 얻으며, 그 두 행은 완전하다(위의 논의를 보라). 5-보조정리
+(호몰로지의 보조정리 \ref{homology-lemma-five-lemma})를 적용하면 가운데
+화살표가 동형사상임을 알 수 있다. Yoneda 보조정리에 의해 $\varphi$가
+동형사상이라고 결론 내린다.
+
+\medskip\noindent
+$\varphi$를 찾기 위해 구별 삼각형
+$A \to B \to C \to A[1]$과 $S(A) \to E \to S(C) \to S(A)[1]$에서
+주석 \ref{equiv-remark-matress}의 matress를 만들자. 주석
+\ref{equiv-remark-dual-matress}에 의해 그 $k$-선형 쌍대도 matress이다.
+$S$가 Serre 함자라는 사실을 사용하면 위와 같이 이 쌍대 matress가 삼각형
+$S(A) \to E \to S(C) \to S(A)[1]$과
+$S(A) \to S(B) \to S(C) \to S(A)[1]$에서 만들어진 이중 복합체임을
+알 수 있다. 여기서 두 번째 삼각형이 구별 삼각형인지는 아직 모른다.
+그러나 matress 조건은 정확히 사상 $S(A) \to S(A)$와
+$S(C) \to S(C)$가 삼각형의 사상으로 확장됨을 말한다. 즉 위의 도식을
+가환하게 하는 $\varphi$가 존재한다.
+\end{proof}
+
+
+
+
+
+
+\section{Serre 함자의 예}
+\label{equiv-section-examples-Serre-functors}
+
+\noindent
+다음 보조정리는 표준적인 예이다.
+
+\begin{lemma}
+\label{equiv-lemma-Serre-functor-Gorenstein-proper}
+$k$를 체라 하고 $X$를 $k$ 위의 Gorenstein 고유 스킴이라 하자.
+스킴의 쌍대성의 보조정리
+\ref{duality-lemma-duality-proper-over-field}의 복합체
+$\omega_X^\bullet$를 생각하자. 그러면 함자
+$$
+S : D_{perf}(\mathcal{O}_X) \longrightarrow D_{perf}(\mathcal{O}_X),\quad
+K \longmapsto S(K) = \omega_X^\bullet \otimes_{\mathcal{O}_X}^\mathbf{L} K
+$$
+는 Serre 함자이다.
+\end{lemma}
+
+\begin{proof}
+스킴의 유도 범주의 보조정리 \ref{perfect-lemma-ext-finite}에 의해
+$K, L \in D_{perf}(\mathcal{O}_X)$에 대해
+$\dim \Hom_X(K, L) < \infty$이므로 명제는 의미가 있다.
+$X$가 Gorenstein이므로 쌍대화 복합체 $\omega_X^\bullet$는
+$D(\mathcal{O}_X)$의 가역 대상이다. 스킴의 쌍대성의 보조정리
+\ref{duality-lemma-gorenstein}를 보라. 특히 $X$ 위 국소적으로 복합체
+$\omega_X^\bullet$는 가역 가군인 하나의 영이 아닌 코호몰로지층만을
+갖는다. 코호몰로지의 보조정리
+\ref{cohomology-lemma-invertible-derived}를 보라. 따라서 $S(K)$는
+$D_{perf}(\mathcal{O}_X)$에 속한다. 한편 $\omega_X^\bullet$의 가역성은
+$S$가 $D_{perf}(\mathcal{O}_X)$의 자기동치임을 분명히 함의한다.
+끝으로 $K, L$에 대해 이변수 함자적인 동형사상
+$$
+c_{K, L} : \Hom_X(K, L) \longrightarrow
+\Hom_X(L, \omega_X^\bullet \otimes_{\mathcal{O}_X}^\mathbf{L} K)^\vee
+$$
+을 찾아야 한다. 이를 위해 코호몰로지의 보조정리
+\ref{cohomology-lemma-dual-perfect-complex}에 주어진 표준 동형사상
+$$
+\Hom_X(K, L) = H^0(X, L \otimes_{\mathcal{O}_X}^\mathbf{L} K^\vee)
+$$
+및
+$$
+\Hom_X(L, \omega_X^\bullet \otimes_{\mathcal{O}_X}^\mathbf{L} K) =
+H^0(X, 
+\omega_X^\bullet \otimes_{\mathcal{O}_X}^\mathbf{L} K
+\otimes_{\mathcal{O}_X}^\mathbf{L} L^\vee)
+$$
+을 사용한다. 등식 $(L \otimes_{\mathcal{O}_X}^\mathbf{L} K^\vee)^\vee =
+(K^\vee)^\vee \otimes_{\mathcal{O}_X}^\mathbf{L} L^\vee$
+과 표준 동형사상 $K \to (K^\vee)^\vee$이 있으므로, 스킴의 쌍대성의
+보조정리 \ref{duality-lemma-duality-proper-over-field-perfect}에 의해
+이 $k$-벡터공간들이 표준적으로 서로 쌍대임을 알 수 있다. 이로써
+동형사상 $c_{K, L}$를 얻는다. 이 동형사상들이 함자적이라는 증명은
+생략한다.
+\end{proof}
+
+
+
+
+
+\section{연접 가군의 특징짓기}
+\label{equiv-section-coherent}
+
+\noindent
+이 절은 어떤 의미에서 스킴의 유도 범주의 절
+\ref{perfect-section-pseudo-coherent}와 사상에 대한 추가 내용의 절
+\ref{more-morphisms-section-characterize-pseudo-coherent}의 논의를
+이어간다.
+
+\medskip\noindent
+결과를 진술하기 전에 몇 가지 표기가 필요하다. $k$를 체라 하고
+$n \geq 0$을 정수라 하자. $S = k[X_0, \ldots, X_n]$로 놓는다.
+정수 $e$에 대해 차수 $e$인 동차다항식들의 집합을
+$S_e \subset S$로 나타낸다. 다음 (비가환) $k$-대수를 생각하자.
+$$
+R =
+\left(
+\begin{matrix}
+S_0 & S_1 & S_2 & \ldots & \ldots \\
+0 & S_0 & S_1 & \ldots & \ldots\\
+0 & 0 & S_0 & \ldots & \ldots \\
+\ldots & \ldots & \ldots & \ldots & \ldots \\
+0 & \ldots & \ldots & \ldots & S_0
+\end{matrix}
+\right)
+$$
+여기에는 $n + 1$개의 행과 열이 있으며 곱셈과 덧셈은 자명하게 정의한다.
+
+\begin{lemma}
+\label{equiv-lemma-perfect-for-R}
+위와 같은 $k$, $n$, $R$에 대해 $D(R)$의 대상 $K$에 관한 다음 조건들은
+동치이다.
+\begin{enumerate}
+\item $\sum_{i \in \mathbf{Z}} \dim_k H^i(K) < \infty$이다.
+\item $K$는 콤팩트 대상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$K$가 콤팩트 대상이면 등급 $R$-가군으로서 유한 사영인 복합체
+$M^\bullet$로 $K$를 나타낼 수 있다. 미분 등급 대수의 보조정리
+\ref{dga-lemma-compact}를 보라. $\dim_k R < \infty$이므로
+$\sum \dim_k M^i < \infty$이고, 더욱이
+$\sum \dim_k H^i(M^\bullet) < \infty$이다. (더 쉬운 미분 등급 대수의
+명제 \ref{dga-proposition-compact}에서도 이 함의를 쉽게 이끌어낼 수 있다.)
+
+\medskip\noindent
+$K$가 (1)을 만족한다고 가정하자. 절단의 구별 삼각형
+$\tau_{\leq m}K \to K \to \tau_{\geq m + 1}K$를 생각하자. 유도 범주의
+주석 \ref{derived-remark-truncation-distinguished-triangle}를 보라.
+$\tau_{\leq m}K$와 $\tau_{\geq m + 1} K$가 모두 (1)을 만족함은 분명하다.
+둘 다 콤팩트임을 보이면 $K$도 콤팩트이다. 유도 범주의 보조정리
+\ref{derived-lemma-compact-objects-subcategory}를 보라. 따라서 $K$의
+영이 아닌 코호몰로지 가군의 개수에 관해 논증하면 $H^i(K)$가 오직 하나의
+$i$에 대해서만 영이 아니라고 가정해도 된다. 평행이동하여 $K$가 차수
+$0$에 놓인 하나의 유한 차원 $R$-가군 $M$으로 이루어진 복합체라고
+가정할 수 있다.
+
+\medskip\noindent
+$\dim_k(M) < \infty$이므로 $M$은 $R$-가군으로서 Artin이다. 따라서 모든
+단순 $R$-가군이 $D(R)$의 콤팩트 대상을 나타냄을 보이면 충분하다.
+$$
+I =
+\left(
+\begin{matrix}
+0 & S_1 & S_2 & \ldots & \ldots \\
+0 & 0 & S_1 & \ldots & \ldots\\
+0 & 0 & 0 & \ldots & \ldots \\
+\ldots & \ldots & \ldots & \ldots & \ldots \\
+0 & \ldots & \ldots & \ldots & 0
+\end{matrix}
+\right)
+$$
+가 $R$의 멱영 양쪽 아이디얼이고 $R/I$가 $k$의 $n + 1$개 복사본의
+곱과 동형인 가환 $k$-대수임을 관찰하자. 이 복사본들은 행렬의 대각선에
+놓이며, 다시 말해 $R/I$는 $R$의 $k$-부분대수로 올릴 수 있다. 따라서
+$R$은 정확히 $n + 1$개의 단순 가군 동형류 $M_0, \ldots, M_n$을 가지며,
+이들은 대각선에 놓인다. 다음 행벡터들로 이루어진 오른쪽 $R$-가군
+$P_i$를 생각하자.
+$$
+P_i =
+\left(
+\begin{matrix}
+0 &
+\ldots &
+0 &
+S_0 &
+\ldots &
+S_{i - 1} &
+S_i
+\end{matrix}
+\right)
+$$
+곱셈 $P_i \times R \to P_i$는 자명하게 정의한다. 오른쪽 $R$-가군으로
+$R \cong P_0 \oplus \ldots \oplus P_n$이다. $R$은 분명히 $D(R)$의
+콤팩트 대상이므로 각 $P_i$도 $D(R)$의 콤팩트 대상이다. (물론 각
+$P_i$가 $R$-가군으로서 사영임도 알 수 있지만, 이 증명에서 보여야 하는
+것은 아니다.) 분명히 $P_0 = M_0$은 첫 번째 단순 $R$-가군이다.
+$P_1$에는 짧은 완전열
+$$
+0 \to P_0^{\oplus n + 1} \to P_1 \to M_1 \to 0
+$$
+이 있다. 따라서 $M_1$은 나머지 항들이 콤팩트 대상인 구별 삼각형에
+들어가며, 그러므로 $M_1$은 $D(R)$의 콤팩트 대상이다. 더 일반적으로
+짧은 완전열
+$$
+0 \to C_i \to P_i \to M_i \to 0
+$$
+이 존재한다. 여기서 $C_i$는 그 단순 구성인자들이 $j < i$인 $M_j$와
+동형인 유한 차원 $R$-가군이다. 귀납법으로 먼저 $C_i$가 $D(R)$의
+콤팩트 대상을 정함을 얻고, 이어서 원하는 대로 $M_i$도 그러함을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-coherent-on-projective-space}
+$k$를 체라 하고 $n \geq 0$이라 하자.
+$K \in D_\QCoh(\mathcal{O}_{\mathbf{P}^n_k})$에 관한 다음 조건들은
+동치이다.
+\begin{enumerate}
+\item $K$는 $D^b_{\textit{Coh}}(\mathcal{O}_{\mathbf{P}^n_k})$에 속한다.
+\item $\sum_{i \in \mathbf{Z}}
+\dim_k H^i(\mathbf{P}^n_k, E \otimes^\mathbf{L} K) < \infty$
+가 $D(\mathcal{O}_{\mathbf{P}^n_k})$의 각 완전 대상 $E$에 대해 성립한다.
+\item $\sum_{i \in \mathbf{Z}}
+\dim_k \Ext^i_{\mathbf{P}^n_k}(E, K) < \infty$
+가 $D(\mathcal{O}_{\mathbf{P}^n_k})$의 각 완전 대상 $E$에 대해 성립한다.
+\item $\sum_{i \in \mathbf{Z}} \dim_k H^i(\mathbf{P}^n_k,
+K \otimes^\mathbf{L} \mathcal{O}_{\mathbf{P}^n_k}(d)) < \infty$
+가 $d = 0, 1, \ldots, n$에 대해 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+코호몰로지의 보조정리 \ref{cohomology-lemma-dual-perfect-complex}에 의해
+(2)와 (3)은 동치이다. (1)이 성립하면 완전 대상 $E$에 대해 유도 텐서곱
+$E \otimes^\mathbf{L} K$는
+$D^b_{\textit{Coh}}(\mathcal{O}_{\mathbf{P}^n_k})$에 속하고, 스킴의
+유도 범주의 보조정리 \ref{perfect-lemma-direct-image-coherent}에 의해
+(2)가 성립한다. $\mathcal{O}_{\mathbf{P}^n_k}(d)$를
+$\mathbf{P}^n_k$의 유도 범주의 완전 대상으로 볼 수 있으므로 (2)가
+(4)를 함의함은 분명하다. 따라서 (4)가 (1)을 함의함을 보이면 충분하다.
+
+\medskip\noindent
+(4)를 가정하자. $R$을 보조정리 \ref{equiv-lemma-perfect-for-R}와 같이 놓고
+$P = \bigoplus_{d = 0, \ldots, n} \mathcal{O}_{\mathbf{P}^n_k}(-d)$로
+놓는다. $R = \text{End}_{\mathbf{P}^n_k}(P)$이고 $P$의 다른 모든
+자기 Ext는 영이며, 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-Pn-module-category}에 의해 $P$가 동치
+$- \otimes^\mathbf{L} P : D(R) \to D_\QCoh(\mathcal{O}_{\mathbf{P}^n_k})$
+를 정함을 상기하자. $K$가 $D(R)$의 $L$에 대응한다고 하자. 그러면
+\begin{align*}
+H^i(L)
+& =
+\Ext^i_{D(R)}(R, L) \\
+& =
+\Ext^i_{\mathbf{P}^n_k}(P, K) \\
+& =
+H^i(\mathbf{P}^n_k, K \otimes P^\vee) \\
+& =
+\bigoplus\nolimits_{d = 0, \ldots, n}
+H^i(\mathbf{P}^n_k, K \otimes \mathcal{O}(d))
+\end{align*}
+이다. 이는 미분 등급 대수의 보조정리
+\ref{dga-lemma-upgrade-tensor-with-complex-derived},
+$- \otimes^\mathbf{L} P$가 동치라는 사실, 그리고 코호몰로지의 보조정리
+\ref{cohomology-lemma-dual-perfect-complex}에서 따른다. 따라서 가정
+(4)에 의해 $L$은 보조정리 \ref{equiv-lemma-perfect-for-R}의 조건 (2)를
+만족하고 $D(R)$의 콤팩트 대상이다. 그러므로 $K$는
+$D_\QCoh(\mathcal{O}_{\mathbf{P}^n_k})$의 콤팩트 대상이다. 따라서
+$K$는 스킴의 유도 범주의 명제
+\ref{perfect-proposition-compact-is-perfect}에 의해 완전하다. 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-perfect-on-regular}에 의해
+$D_{perf}(\mathcal{O}_{\mathbf{P}^n_k}) =
+D^b_{\textit{Coh}}(\mathcal{O}_{\mathbf{P}^n_k})$
+이므로 (1)이 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-finiteness}
+$X$를 체 $k$ 위의 고유 스킴이라 하자.
+$K \in D^b_{\textit{Coh}}(\mathcal{O}_X)$이고 $D(\mathcal{O}_X)$의
+$E$가 완전하다고 하자. 그러면
+$\sum_{i \in \mathbf{Z}} \dim_k \Ext^i_X(E, K) < \infty$.
+\end{lemma}
+
+\begin{proof}
+예를 들어 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-ext-finite}와
+\ref{perfect-lemma-ext-from-perfect-into-bounded-QCoh}를 결합하면
+따른다. 다른 증명으로는 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-perfect-on-noetherian}와
+\ref{perfect-lemma-direct-image-coherent}를 결합한다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-characterize-dbcoh-projective}
+\begin{reference}
+사영적인 경우 이는 \cite[보조정리 7.46]{Rouquier-dimensions}이고
+\cite[정리 A.1]{BvdB}에 암묵적으로 들어 있다.
+\end{reference}
+$X$를 체 $k$ 위의 고유 스킴이라 하고
+$K \in \Ob(D_\QCoh(\mathcal{O}_X))$라 하자. 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $K \in D^b_{\textit{Coh}}(\mathcal{O}_X)$이다.
+\item $\sum_{i \in \mathbf{Z}} \dim_k \Ext^i_X(E, K) < \infty$
+가 $D(\mathcal{O}_X)$의 모든 완전 대상 $E$에 대해 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2)는 보조정리 \ref{equiv-lemma-finiteness}에서 따른다.
+(2) $\Rightarrow$ (1)은 사상에 대한 추가 내용의 보조정리
+\ref{more-morphisms-lemma-characterize-relatively-perfect}에서 따른다.
+체 위의 상대적 완전 대상의 의미는 스킴의 유도 범주의 예
+\ref{perfect-example-relatively-perfect-field}를 보라. 사영적인 경우의
+더 쉬운 증명은 다음 문단에 있다.
+
+\medskip\noindent
+(2)를 가정하고 $X$가 $k$ 위에서 사영적이라고 하자. 닫힌 몰입
+$i : X \to \mathbf{P}^n_k$를 택하자. $X$ 위의 준연접 가군
+$\mathcal{F}$가 연접인 것, 각각 영인 것과 $i_*\mathcal{F}$가 연접인 것,
+각각 영인 것은 동치이므로,
+$Ri_*K$가 $D^b_{\textit{Coh}}(\mathbf{P}^n_k)$의 대상임을 보이면 충분하다.
+$D(\mathcal{O}_{\mathbf{P}^n_k})$의 완전 대상 $E$에 대해 $Li^*E$는
+$D(\mathcal{O}_X)$의 완전 대상이고
+$$
+\Ext^q_{\mathbf{P}^n_k}(E, Ri_*K) = \Ext^q_X(Li^*E, K)
+$$
+이다. 따라서 가정에 의해
+$\sum_{q \in \mathbf{Z}} \dim_k \Ext^q_{\mathbf{P}^n_k}(E, Ri_*K) < \infty$
+이다. 보조정리 \ref{equiv-lemma-coherent-on-projective-space}를 적용하여
+결론을 얻는다.
+\end{proof}
+
+
+
+
+
+\section{표현 가능성 정리}
+\label{equiv-section-bondal-van-den-bergh}
+
+\noindent
+이 절의 내용은 \cite{BvdB}에서 가져왔다.
+
+\medskip\noindent
+$\mathcal{T}$를 $k$-선형 삼각 범주라 하자. 이 절에서는
+$\mathcal{T}$에서 $k$-벡터공간의 범주로 가는 $k$-선형 코호몰로지
+함자 $H$를 생각한다. 이는 $H$가 $k$-선형 함자
+$$
+H : \mathcal{T}^{opp} \longrightarrow \text{Vect}_k
+$$
+이고, $\mathcal{T}$의 임의의 구별 삼각형 $X \to Y \to Z$에 대해
+$H(Z) \to H(Y) \to H(X)$가 $k$-벡터공간의 완전열이라는 뜻이다.
+유도 범주의 정의 \ref{derived-definition-homological}와 미분 등급 대수의
+절 \ref{dga-section-linear}을 보라.
+
+\begin{lemma}
+\label{equiv-lemma-maps-from-compact-filtered}
+$\mathcal{D}$를 삼각 범주, $\mathcal{D}' \subset \mathcal{D}$를 충만한
+삼각 부분범주, $X \in \Ob(\mathcal{D})$라 하자.
+$E \in \Ob(\mathcal{D}')$인 화살표 $E \to X$들의 범주는 여과 범주이다.
+\end{lemma}
+
+\begin{proof}
+범주의 정의 \ref{categories-definition-directed}의 조건들을 확인한다.
+이 범주는 $0 \to X$를 포함하므로 공집합이 아니다. $E_i \to X$,
+$i = 1, 2$가 대상이면 $E_1 \oplus E_2 \to X$도 대상이고 사상
+$(E_i \to X) \to (E_1 \oplus E_2 \to X)$들이 있다. 끝으로
+$a, b : (E \to X) \to (E' \to X)$가 사상이라고 하자.
+$\mathcal{D}'$에서 구별 삼각형
+$E \xrightarrow{a - b} E' \to E''$을 택한다. 공리 TR3에 의해 삼각형의
+사상
+$$
+\xymatrix{
+E \ar[r]_{a - b} \ar[d] &
+E' \ar[d] \ar[r] & E'' \ar[d] \\
+0 \ar[r] &
+X \ar[r] &
+X
+}
+$$
+을 얻고, 그로부터 생기는 화살표 $(E' \to X) \to (E'' \to X)$가
+$a$와 $b$를 같게 함을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-van-den-bergh}
+\begin{reference}
+\cite[보조정리 2.14]{CKN}
+\end{reference}
+$k$를 체라 하자. $\mathcal{D}$를 직합을 가지며 콤팩트 생성되는
+$k$-선형 삼각 범주라 하자. 콤팩트 대상들의 충만한 부분범주를
+$\mathcal{D}_c$로 나타내자. $H : \mathcal{D}_c^{opp} \to \text{Vect}_k$를
+모든 $X \in \Ob(\mathcal{D}_c)$에 대해 $\dim_k H(X) < \infty$인
+$k$-선형 코호몰로지 함자라 하자. 그러면 어떤
+$Y \in \Ob(\mathcal{D})$에 대해 $H$는 함자
+$X \mapsto \Hom(X, Y)$와 동형이다.
+\end{lemma}
+
+\begin{proof}
+이후 별도 언급 없이 유도 범주의 보조정리
+\ref{derived-lemma-compact-objects-subcategory}를 사용한다.
+$X$를 $H(X)^\vee$로 보내는 $k$-선형 호몰로지 함자를
+$G : \mathcal{D}_c \to \text{Vect}_k$로 나타내자.
+$\mathcal{D}$의 임의의 대상 $Y$에 대해
+$$
+G'(Y) = \colim_{X \to Y, X \in \Ob(\mathcal{D}_c)} G(X)
+$$
+로 놓는다. 이 여극한은 보조정리
+\ref{equiv-lemma-maps-from-compact-filtered}에 의해 여과되어 있다.
+$G'$는 $k$-선형 호몰로지 함자이고, $\mathcal{D}_c$에 대한 $G'$의
+제한은 $G$이며, $G'$는 직합을 직합으로 보낸다고 주장한다.
+
+\medskip\noindent
+$Y_1 \to Y_2 \to Y_3$이 구별 삼각형이라고 하자.
+$\xi \in G'(Y_2)$가 $G'(Y_3)$에서 영으로 간다고 하자. 여극한이
+여과되어 있으므로 $\xi$는 어떤 $X \in \Ob(\mathcal{D}_c)$에 대한
+$X \to Y_2$와 $g \in G(X)$로 표현된다. $\xi$가 $G'(Y_3)$에서 영으로
+간다는 것은 합성 $X \to Y_2 \to Y_3$이 어떤
+$X' \in \mathcal{D}_c$에 대해 $X \to X' \to Y_3$으로 분해되고,
+$g$가 $G(X')$에서 영으로 간다는 뜻이다. 구별 삼각형
+$X'' \to X \to X'$을 택하면 $X'' \in \Ob(\mathcal{D}_c)$이다.
+$G$가 호몰로지 함자이므로 $g$는 어떤 $g'' \in G'(X'')$의 상이다.
+공리 TR3에 의해 사상 $X \to Y_2$와 $X' \to Y_3$은 구별 삼각형의 사상
+$(X'' \to X \to X') \to (Y_1 \to Y_2 \to Y_3)$으로 확장된다.
+따라서 실제로 $\xi$는 $X'' \to Y_1$과 $g'' \in G(X'')$로 표현되는
+$G'(Y_1)$의 원소의 상이다.
+
+\medskip\noindent
+$Y \in \Ob(\mathcal{D}_c)$이면 $\text{id} : Y \to Y$는
+$X \in \Ob(\mathcal{D}_c)$인 화살표 $X \to Y$들의 범주의 끝 대상이다.
+따라서 이 경우 $G'(Y) = G(Y)$이고 제한에 관한 명제가 성립한다.
+$Y = \bigoplus_{i \in I} Y_i$를 직합이라 하자.
+$X \in \Ob(\mathcal{D}_c)$인 $a : X \to Y$와 $g \in G(X)$가
+$G'(Y)$의 원소 $\xi$를 표현한다고 하자. $X$가 $\mathcal{D}$의 콤팩트
+대상이므로 사상 $a : X \to Y$는 거의 모두 영인 사상
+$a_i : X \to Y_i$들의 합으로 유일하게 쓸 수 있다.
+$I' = \{i \in I \mid a_i \not = 0\}$로 놓으면 $a$는 합성
+$$
+X \xrightarrow{(1, \ldots, 1)}
+\bigoplus\nolimits_{i \in I'} X
+\xrightarrow{\bigoplus_{i \in I'} a_i}
+\bigoplus\nolimits_{i \in I} Y_i = Y
+$$
+으로 분해된다. 따라서 $\xi = \sum_{i \in I'} \xi_i$는
+$a_i : X \to Y_i$와 $g \in G(X)$에 대응하는 원소
+$\xi_i \in G'(Y_i)$들의 상의 합이다. 그러므로
+$\bigoplus G'(Y_i) \to G'(Y)$는 전사이다. 단사라는 자명한 확인은
+생략한다.
+
+\medskip\noindent
+따라서 함자 $Y \mapsto G'(Y)^\vee$는 코호몰로지 함자이고 직합을
+직적으로 보낸다. 그러므로 Brown 표현 가능성, 즉 유도 범주의 명제
+\ref{derived-proposition-brown}에 의해 어떤
+$Y \in \Ob(\mathcal{D})$가 존재하고 $Z$에 대해 함자적인 동형사상
+$G'(Z)^\vee = \Hom(Z, Y)$가 있다. $X \in \Ob(\mathcal{D}_c)$에 대해
+$G'(X)^\vee = G(X)^\vee = (H(X)^\vee)^\vee = H(X)$
+이다. 이는 $\dim_k H(X) < \infty$이기 때문이며, 증명이 끝났다.
+\end{proof}
+
+\begin{theorem}
+\label{equiv-theorem-bondal-van-den-bergh}
+\begin{reference}
+사영적인 경우 이는 \cite[정리 A.1]{BvdB}이다.
+\end{reference}
+$X$를 체 $k$ 위의 고유 스킴이라 하자.
+$F : D_{perf}(\mathcal{O}_X)^{opp} \to \text{Vect}_k$를 모든
+$E \in D_{perf}(\mathcal{O}_X)$에 대해
+$$
+\sum\nolimits_{n \in \mathbf{Z}} \dim_k F(E[n]) < \infty
+$$
+를 만족하는 $k$-선형 코호몰로지 함자라 하자. 그러면 어떤 $K$가
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$에 속하고, 이에 대해 $F$는
+$E \mapsto \Hom_X(E, K)$ 꼴의 함자와 동형이다.
+\end{theorem}
+
+\begin{proof}
+유도 범주 $D_\QCoh(\mathcal{O}_X)$는 직합을 가지며 콤팩트 생성되고,
+$D_{perf}(\mathcal{O}_X)$는 콤팩트 대상들의 충만한 부분범주이다.
+스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-quasi-coherence-direct-sums}, 정리
+\ref{perfect-theorem-bondal-van-den-Bergh}, 명제
+\ref{perfect-proposition-compact-is-perfect}를 보라. 보조정리
+\ref{equiv-lemma-van-den-bergh}에 의해 어떤
+$K \in \Ob(D_\QCoh(\mathcal{O}_X))$에 대해
+$F(E) = \Hom_X(E, K)$라고 가정할 수 있다. 그러면 보조정리
+\ref{equiv-lemma-characterize-dbcoh-projective}에 의해
+$K \in D^b_{\textit{Coh}}(\mathcal{O}_X)$이다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-homological-representable}
+$X$를 체 $k$ 위의 정칙 고유 스킴이라 하자.
+$G : D_{perf}(\mathcal{O}_X) \to \text{Vect}_k$를 모든
+$E \in D_{perf}(\mathcal{O}_X)$에 대해
+$$
+\sum\nolimits_{n \in \mathbf{Z}} \dim_k G(E[n]) < \infty
+$$
+를 만족하는 $k$-선형 호몰로지 함자라 하자. 그러면 어떤
+$K \in D_{perf}(\mathcal{O}_X)$에 대해 $G$는
+$E \mapsto \Hom_X(K, E)$ 꼴의 함자와 동형이다.
+\end{lemma}
+
+\begin{proof}
+$D_{perf}(\mathcal{O}_X)$ 위의 반변함자 $E \mapsto E^\vee$를 생각하자.
+코호몰로지의 보조정리 \ref{cohomology-lemma-dual-perfect-complex}를 보라.
+이 함자는 $D_{perf}(\mathcal{O}_X)$의 완전 반자기동치이다. 따라서 함자
+$F(E) = G(E^\vee)$에 정리 \ref{equiv-theorem-bondal-van-den-bergh}를 적용하여
+$G(E^\vee) = \Hom_X(E, K)$를 만족하는
+$K \in D_{perf}(\mathcal{O}_X)$를 얻는다. 그러면
+$G(E) = \Hom_X(E^\vee, K) = \Hom_X(K^\vee, E)$이므로 $K^\vee$를
+택하면 된다.
+\end{proof}
+
+
+
+
+
+
+\section{수반함자의 존재}
+\label{equiv-section-adjoints}
+
+\noindent
+Bondal과 van den Bergh의 논문에 나오는 결과의 따름정리로 다음과 같은
+수반함자의 자동적 존재성을 얻는다.
+
+\begin{lemma}
+\label{equiv-lemma-always-right-adjoints}
+$k$를 체라 하고 $X$, $Y$를 $k$ 위의 고유 스킴이라 하자. $X$가
+정칙이면 임의의 $k$-선형 완전 함자
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$는 완전 오른쪽
+수반함자와 완전 왼쪽 수반함자를 갖는다.
+\end{lemma}
+
+\begin{proof}
+수반함자가 존재하면 매우 일반적인 유도 범주의 보조정리
+\ref{derived-lemma-adjoint-is-exact}에 의해 완전 함자이다.
+
+\medskip\noindent
+오른쪽 수반함자의 존재를 증명하자. 이를 위해서는
+$M \in D_{perf}(\mathcal{O}_Y)$에 대해 반변함자
+$K \mapsto \Hom_Y(F(K), M)$가 표현 가능함을 보이면 충분하다.
+이 함자는 반변이고 $k$-선형이며 코호몰로지 함자이다. 따라서 정리
+\ref{equiv-theorem-bondal-van-den-bergh}에 의해
+$$
+\sum\nolimits_{i \in \mathbf{Z}} \dim_k \Ext^i_Y(F(K), M) < \infty
+$$
+임을 보이면 충분하며, 이는 보조정리 \ref{equiv-lemma-finiteness}에서 따른다.
+
+\medskip\noindent
+왼쪽 수반함자의 존재는 보조정리
+\ref{equiv-lemma-homological-representable}를 사용하여 논증한다. 이는 정리
+\ref{equiv-theorem-bondal-van-den-bergh}를 사용한 위의 논증과 같은 방식이다.
+\end{proof}
+
+
+
+
+
+
+\section{Fourier--Mukai 함자}
+\label{equiv-section-fourier-mukai}
+
+\noindent
+이 함자들은 \cite{Mukai}에서 처음 도입되었다.
+
+\begin{definition}
+\label{equiv-definition-fourier-mukai-functor}
+$S$를 스킴, $X$, $Y$를 $S$ 위 스킴이라 하고
+$K \in D(\mathcal{O}_{X \times_S Y})$라 하자. 삼각 범주의 완전 함자
+$$
+\Phi_K : D(\mathcal{O}_X) \longrightarrow D(\mathcal{O}_Y),\quad
+M \longmapsto R\text{pr}_{2, *}(
+L\text{pr}_1^*M \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K)
+$$
+를 {\it Fourier--Mukai 함자}라 하고 $K$를 이 함자의
+{\it Fourier--Mukai 핵}이라 한다. 또한
+\begin{enumerate}
+\item $\Phi_K$가 $D_\QCoh(\mathcal{O}_X)$를 $D_\QCoh(\mathcal{O}_Y)$로
+보내면 그로부터 생기는 완전 함자
+$\Phi_K : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$
+를 Fourier--Mukai 함자라 한다.
+\item $\Phi_K$가 $D_{perf}(\mathcal{O}_X)$를
+$D_{perf}(\mathcal{O}_Y)$로 보내면 그로부터 생기는 완전 함자
+$\Phi_K : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+를 Fourier--Mukai 함자라 한다.
+\item $X$와 $Y$가 뇌터이고 $\Phi_K$가
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$를 $D^b_{\textit{Coh}}(\mathcal{O}_Y)$로
+보내면 그로부터 생기는 완전 함자
+$\Phi_K : D^b_{\textit{Coh}}(\mathcal{O}_X) \to
+D^b_{\textit{Coh}}(\mathcal{O}_Y)$
+를 Fourier--Mukai 함자라 한다. $D_{\textit{Coh}}$,
+$D^+_{\textit{Coh}}$, $D^-_{\textit{Coh}}$에 대해서도 마찬가지이다.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-Mukai-QCoh}
+$S$를 스킴, $X$, $Y$를 $S$ 위 스킴이라 하고
+$K \in D(\mathcal{O}_{X \times_S Y})$라 하자.
+$K$가 $D_\QCoh(\mathcal{O}_{X \times_S Y})$에 속하고 $X \to S$가 준콤팩트이며
+준분리이면, 대응하는 Fourier--Mukai 함자 $\Phi_K$는
+$D_\QCoh(\mathcal{O}_X)$를 $D_\QCoh(\mathcal{O}_Y)$로 보낸다.
+\end{lemma}
+
+\begin{proof}
+다음 사실들에서 따른다. 유도 당김은 $D_\QCoh$를 보존한다(스킴의 유도
+범주의 보조정리 \ref{perfect-lemma-quasi-coherence-pullback}). 유도
+텐서곱은 $D_\QCoh$를 보존한다(스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-quasi-coherence-tensor-product}). 사영
+$\text{pr}_2 : X \times_S Y \to Y$는 준콤팩트이고 준분리이다(스킴의
+보조정리 \ref{schemes-lemma-quasi-compact-preserved-base-change}와
+\ref{schemes-lemma-separated-permanence}). 준분리 준콤팩트 사상에 따른
+전체 직접상은 $D_\QCoh$를 보존한다(스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-quasi-coherence-direct-image}).
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-compose-fourier-mukai}
+$S$를 스킴, $X, Y, Z$를 $S$ 위 스킴이라 하자. $X \to S$, $Y \to S$,
+$Z \to S$가 준콤팩트이고 준분리라고 가정하자.
+$K \in D_\QCoh(\mathcal{O}_{X \times_S Y})$와
+$K' \in D_\QCoh(\mathcal{O}_{Y \times_S Z})$를 잡고 Fourier--Mukai 함자
+$\Phi_K : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$
+와 $\Phi_{K'} : D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_Z)$를
+생각하자. $X$와 $Z$가 $S$ 위에서 Tor-독립이고 $Y \to S$가 평탄이면
+$$
+\Phi_{K'} \circ \Phi_K = \Phi_{K''} :
+D_\QCoh(\mathcal{O}_X)
+\longrightarrow
+D_\QCoh(\mathcal{O}_Z)
+$$
+이다. 여기서 $D_\QCoh(\mathcal{O}_{X \times_S Z})$에서
+$$
+K'' = R\text{pr}_{13, *}(
+L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S Z}}^\mathbf{L}
+L\text{pr}_{23}^*K')
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-fourier-Mukai-QCoh}에 의해 명제는 의미가 있다.
+이후 별도 언급 없이 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-quasi-coherence-pullback},
+\ref{perfect-lemma-quasi-coherence-tensor-product},
+\ref{perfect-lemma-quasi-coherence-direct-image}
+와 스킴의 보조정리
+\ref{schemes-lemma-quasi-compact-preserved-base-change} 및
+\ref{schemes-lemma-separated-permanence}
+를 사용한다. 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-flat-base-change-tor-independent}에 의해
+$X \times_S Y$와 $Y \times_S Z$는 $Y$ 위에서 Tor-독립이다. 따라서
+준연접 코호몰로지층을 갖는 복합체에 대해 다음 데카르트 도식의
+기저변환이 성립한다.
+$$
+\xymatrix{
+X \times_S Y \times_S Z \ar[d] \ar[r] &
+Y \times_S Z \ar[d]^{p^{YZ}_Y} \\
+X \times_S Y \ar[r]^{p^{XY}_Y} & Y
+}
+$$
+스킴의 유도 범주의 보조정리 \ref{perfect-lemma-compare-base-change}를
+보라. $p^* = Lp^*$, $p_* = Rp_*$, $\otimes = \otimes^\mathbf{L}$로
+줄여 쓰면 $M \in D_\QCoh(\mathcal{O}_X)$에 대해 다음 등식열을 얻는다.
+\begin{align*}
+\Phi_{K'}(\Phi_K(M))
+& =
+p^{YZ}_{Z, *}(p^{YZ, *}_Y p^{XY}_{Y, *}(p^{XY, *}_X M \otimes K) \otimes K') \\
+& =
+p^{YZ}_{Z, *}(\text{pr}_{23, *} \text{pr}_{12}^*(p^{XY, *}_X M \otimes K)
+\otimes K') \\
+& =
+p^{YZ}_{Z, *}(\text{pr}_{23, *}(\text{pr}_1^*M \otimes \text{pr}_{12}^*K)
+\otimes K') \\
+& =
+p^{YZ}_{Z, *}(\text{pr}_{23, *}(\text{pr}_1^*M \otimes \text{pr}_{12}^*K
+\otimes \text{pr}_{23}^*K')) \\
+& =
+\text{pr}_{3, *}(\text{pr}_1^*M \otimes \text{pr}_{12}^*K
+\otimes \text{pr}_{23}^*K') \\
+& =
+p^{XZ}_{Z, *}\text{pr}_{13, *}(\text{pr}_1^*M \otimes \text{pr}_{12}^*K
+\otimes \text{pr}_{23}^*K') \\
+& =
+p^{XZ}_{Z, *} (p^{XZ, *}_X M \otimes \text{pr}_{13, *}(\text{pr}_{12}^*K
+\otimes \text{pr}_{23}^*K'))
+\end{align*}
+이는 원하는 바이다. 여기서 두 번째 등식에는 위의 기저변환에 관한
+설명을 사용했고, $4$번째와 마지막 등식에는 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-cohomology-base-change}를 사용했다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-mukai}
+$S$를 스킴, $X$, $Y$를 $S$ 위 스킴이라 하고
+$K \in D(\mathcal{O}_{X \times_S Y})$라 하자. 다음 조건 가운데 하나
+이상이 성립하면 대응하는 Fourier--Mukai 함자 $\Phi_K$는
+$D_{perf}(\mathcal{O}_X)$를 $D_{perf}(\mathcal{O}_Y)$로 보낸다.
+\begin{enumerate}
+\item $S$는 뇌터이고 $X \to S$와 $Y \to S$는 유한형이며,
+$K \in D^b_{\textit{Coh}}(\mathcal{O}_{X \times_S Y})$이고, 모든 $i$에 대해
+$H^i(K)$의 지지는 $Y$ 위에서 고유이며, $K$는
+$D(\text{pr}_2^{-1}\mathcal{O}_Y)$의 대상으로서 유한 Tor 차원을 갖는다.
+\item $X \to S$는 유한 표시이고, $K$는 $Y$ 위에서 평탄하며 $Y$ 위에서
+고유인 지지를 갖는 유한 표시 $\mathcal{O}_{X \times_S Y}$-가군들의
+유계 복합체 $\mathcal{K}^\bullet$로 나타낼 수 있다.
+\item $X \to S$는 유한 표시인 고유 평탄 사상이고 $K$는 완전하다.
+\item $S$는 뇌터이고 $X \to S$는 평탄하고 고유이며 $K$는 완전하다.
+\item $X \to S$는 유한 표시인 고유 평탄 사상이고 $K$는 $Y$-완전하다.
+\item $S$는 뇌터이고 $X \to S$는 평탄하고 고유이며 $K$는
+$Y$-완전하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$M$이 $X$ 위에서 완전하면 $L\text{pr}_1^*M$은 $X \times_S Y$ 위에서
+완전하다. 코호몰로지의 보조정리 \ref{cohomology-lemma-perfect-pullback}를
+보라. 아래에서는 이를 별도 언급 없이 사용한다. 또한 $X \to S$가
+유한형, 고유, 평탄 또는 유한 표시이면 기저변환
+$\text{pr}_2 : X \times_S Y \to Y$도 각각 같은 성질을 가짐을 사용한다.
+사상의 보조정리
+\ref{morphisms-lemma-base-change-finite-type},
+\ref{morphisms-lemma-base-change-proper},
+\ref{morphisms-lemma-base-change-flat} 및
+\ref{morphisms-lemma-base-change-finite-presentation}.
+
+\medskip\noindent
+(1)은 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-perfect-direct-image}와
+\ref{perfect-lemma-perfect-on-noetherian}를 결합하면 따른다.
+
+\medskip\noindent
+(2)는 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-base-change-tensor-perfect}에서 따른다.
+
+\medskip\noindent
+(3)은 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-flat-proper-perfect-direct-image-general}에서 따른다.
+
+\medskip\noindent
+(4)는 (3)과, 뇌터 스킴 사이의 유한형 사상이 유한 표시라는 사상의
+보조정리 \ref{morphisms-lemma-noetherian-finite-type-finite-presentation}에서
+따른다.
+
+\medskip\noindent
+(5)는 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-derived-pushforward-rel-perfect}와
+\ref{perfect-lemma-perfect-relatively-perfect}를 결합하면 따른다.
+
+\medskip\noindent
+(6)은 (4)가 (3)에서 따르는 것과 같은 방식으로 (5)에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-mukai-Coh}
+$S$를 뇌터 스킴, $X$, $Y$를 $S$ 위의 유한형 스킴이라 하고
+$K \in D^b_{\textit{Coh}}(\mathcal{O}_{X \times_S Y})$라 하자. 다음 조건
+가운데 하나 이상이 성립하면 대응하는 Fourier--Mukai 함자 $\Phi_K$는
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$를
+$D^b_{\textit{Coh}}(\mathcal{O}_Y)$로 보낸다.
+\begin{enumerate}
+\item 모든 $i$에 대해 $H^i(K)$의 지지는 $Y$ 위에서 고유이고, $K$는
+$D(\text{pr}_1^{-1}\mathcal{O}_X)$의 대상으로서 유한 Tor 차원을 갖는다.
+\item $K$는 $X$ 위에서 평탄하고 $Y$ 위에서 고유인 지지를 갖는 연접
+$\mathcal{O}_{X \times_S Y}$-가군들의 유계 복합체
+$\mathcal{K}^\bullet$로 나타낼 수 있다.
+\item 모든 $i$에 대해 $H^i(K)$의 지지는 $Y$ 위에서 고유이고 $X$는
+정칙 스킴이다.
+\item $K$는 완전하고, 모든 $i$에 대해 $H^i(K)$의 지지는 $Y$ 위에서
+고유이며, $Y \to S$는 평탄하다.
+\end{enumerate}
+더욱이 각 경우에 $X \to S$가 고유이면 지지 조건은 자동으로 성립한다.
+\end{lemma}
+
+\begin{proof}
+$M$을 $D^b_{\textit{Coh}}(\mathcal{O}_X)$의 대상이라 하자. 각 경우에
+스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-direct-image-coherent}를 사용하여
+$$
+\Phi_K(M) = R\text{pr}_{2, *}(
+L\text{pr}_1^*M
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L}
+K)
+$$
+가 $D^b_{\textit{Coh}}(\mathcal{O}_Y)$에 속함을 보인다. 유도 텐서곱
+$L\text{pr}_1^*M \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K$
+은 $D(\mathcal{O}_{X \times_S Y})$의 준연접 대상이다. 이는
+코호몰로지의 보조정리 \ref{cohomology-lemma-pseudo-coherent-pullback},
+스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-identify-pseudo-coherent-noetherian} 및 코호몰로지의 보조정리
+\ref{cohomology-lemma-tensor-pseudo-coherent}에서 따른다. 따라서 다시
+스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-identify-pseudo-coherent-noetherian}에 의해 연접
+코호몰로지층을 갖는다. 각 경우에 코호몰로지층
+$H^i(L\text{pr}_1^*M \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K)$
+의 지지는 $H^i(K)$들의 지지의 합집합에 포함되므로 $Y$ 위에서 고유이다.
+따라서 각 경우에 이 텐서곱이 아래로 유계임을 증명하면 충분하다.
+
+\medskip\noindent
+경우 (1). 코호몰로지의 보조정리
+\ref{cohomology-lemma-variant-derived-pullback}에 의해
+$$
+L\text{pr}_1^*M
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L}
+K
+\cong
+\text{pr}_1^{-1}M
+\otimes_{\text{pr}_1^{-1}\mathcal{O}_X}^\mathbf{L}
+K
+$$
+이다. 표기는 자명하다. 따라서 Tor 차원에 관한 가정과 $M$이 유한 개의
+영이 아닌 코호몰로지층만을 갖는다는 사실이 원하는 유계를 함의한다.
+
+\medskip\noindent
+경우 (2)에서는 가정에 의해 $K$가
+$D(\text{pr}_1^{-1}\mathcal{O}_X)$의 대상으로서 유한 Tor 차원을
+가지므로 앞 문단의 논증을 적용할 수 있다.
+
+\medskip\noindent
+경우 (3)에서도 $K$는 $D(\text{pr}_1^{-1}\mathcal{O}_X)$의 대상으로서
+유한 Tor 차원을 갖는다. 실제로 $X$와 $Y$의 아핀 열린집합
+$U = \Spec(A)$와 $V = \Spec(B)$가 $S$의 아핀 열린집합
+$W = \Spec(R)$로 간다고 하자. 그러면 $K|_{U \times V}$는 유한 생성
+$A \otimes_R B$-가군들의 유계 복합체 $M^\bullet$로 주어진다. $A$가
+유한 차원 정칙환이므로 각 $M^i$는 $A$-가군으로서 유한 사영 차원을 갖고
+(대수의 보조정리 \ref{algebra-lemma-finite-gl-dim-finite-dim-regular}),
+따라서 $A$-가군으로서 유한 Tor 차원을 갖는다. 그러므로 $M^\bullet$은
+$A$-가군 복합체로서 유한 Tor 차원을 갖는다(대수에 대한 추가 내용의
+보조정리 \ref{more-algebra-lemma-complex-finite-tor-dimension-modules}).
+$X \times Y$가 준콤팩트이므로 어떤 $[a, b]$가 존재하여 모든 점
+$z \in X \times Y$에서 줄기 $K_z$는
+$\mathcal{O}_{X, \text{pr}_1(z)}$ 위의 $[a, b]$ 안에 Tor 진폭을 갖는다.
+이는 $K$가 $D(\text{pr}_1^{-1}\mathcal{O}_X)$의 대상으로서 유계
+Tor 차원을 가짐을 함의한다. 코호몰로지의 보조정리
+\ref{cohomology-lemma-tor-amplitude-stalk}를 보라. 앞의 두 문단과 같이
+결론을 얻는다.
+
+\medskip\noindent
+경우 (4). 위의 표기에서 환 사상 $R \to B$는 평탄하다. 따라서 환 사상
+$A \to A \otimes_R B$는 평탄하다. 그러므로 임의의 사영
+$A \otimes_R B$-가군은 $A$-평탄이다. 따라서
+$A \otimes_R B$-가군의 임의의 완전 복합체는 $A$-가군 복합체로서 유한
+Tor 차원을 가지며, 앞과 같이 결론을 얻는다.
+\end{proof}
+
+\begin{example}
+\label{equiv-example-diagonal-fourier-mukai}
+$X \to S$를 스킴의 분리 사상이라 하자. 그러면 대각사상
+$\Delta : X \to X \times_S X$는 닫힌 몰입이고, 따라서
+$\mathcal{O}_\Delta = \Delta_*\mathcal{O}_X = R\Delta_*\mathcal{O}_X$는
+어느 사영에 대해서도 $X$ 위에서 평탄한 유한형 준연접
+$\mathcal{O}_{X \times_S X}$-가군이다. 이 경우 Fourier--Mukai 함자
+$\Phi_{\mathcal{O}_\Delta}$는 항등함자와 같다. 실제로 임의의
+$M \in D(\mathcal{O}_X)$에 대해
+\begin{align*}
+L\text{pr}_1^*M \otimes_{\mathcal{O}_{X \times_S X}}^\mathbf{L}
+\mathcal{O}_\Delta
+& =
+L\text{pr}_1^*M \otimes_{\mathcal{O}_{X \times_S X}}^\mathbf{L}
+R\Delta_*\mathcal{O}_X \\
+& =
+R\Delta_*(
+L\Delta^*L\text{pr}_1^*M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_X) \\
+& =
+R\Delta_*(M)
+\end{align*}
+이다. 첫 번째 등식은 위에서 논의했다. 두 번째 등식은 코호몰로지의
+보조정리 \ref{cohomology-lemma-projection-formula-closed-immersion}이다.
+세 번째 등식은 $\text{pr}_1 \circ \Delta = \text{id}_X$와 코호몰로지의
+보조정리 \ref{cohomology-lemma-derived-pullback-composition}에서 따른다.
+이를 $R\text{pr}_{2, *}$를 사용하여 $X$로 밀면 코호몰로지의 보조정리
+\ref{cohomology-lemma-derived-pushforward-composition}와
+$\text{pr}_2 \circ \Delta = \text{id}_X$에 의해 $M$을 얻는다.
+\end{example}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-mukai-right-adjoint}
+\begin{reference}
+\cite{Rizzardo}의 논의와 비교하라.
+\end{reference}
+$X \to S$와 $Y \to S$를 준콤팩트 준분리 스킴 사이의 사상이라 하자.
+$\Phi : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$를 준연접 핵
+$K \in D_\QCoh(\mathcal{O}_{X \times_S Y})$를 갖는 Fourier--Mukai
+함자라 하자. $R\text{pr}_{2, *}$의 오른쪽 수반함자를
+$a : D_\QCoh(\mathcal{O}_Y) \to  D_\QCoh(\mathcal{O}_{X \times_S Y})$라
+하자. 스킴의 쌍대성의 보조정리
+\ref{duality-lemma-twisted-inverse-image}를 보라. 다음과 같이 나타내자.
+$$
+K' = (Y \times_S X \to X \times_S Y)^*
+R\SheafHom_{\mathcal{O}_{X \times_S Y}}(K, a(\mathcal{O}_Y)) \in
+D_\QCoh(\mathcal{O}_{Y \times_S X})
+$$
+대응하는 Fourier--Mukai 변환을
+$\Phi' : D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_X)$라 하자.
+표준 사상
+$$
+\Hom_X(M, \Phi'(N)) \longrightarrow \Hom_Y(\Phi(M), N)
+$$
+이 있으며, 이는 $M$이 $D_\QCoh(\mathcal{O}_X)$의 대상이고
+$N$이 $D_\QCoh(\mathcal{O}_Y)$의 대상일 때 함자적이며 다음 경우에는
+동형사상이다.
+\begin{enumerate}
+\item $N$이 완전하다.
+\item $K$가 완전하고 $X \to S$가 유한 표시인 고유 평탄 사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-fourier-Mukai-QCoh}에 의해 명제와 같은 함자 $\Phi$를
+얻는다. 스킴의 쌍대성의 보조정리
+\ref{duality-lemma-twisted-inverse-image-bounded-below}에 의해
+$a(\mathcal{O}_Y)$가 $D^+_\QCoh(\mathcal{O}_{X \times_S Y})$의
+대상임을 관찰하자.
+따라서 $K$가 준연접이면 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-quasi-coherence-internal-hom}에 의해
+$K' \in D_\QCoh(\mathcal{O}_{Y \times_S X})$이고, 표시한 $\Phi'$를 얻는다.
+
+\medskip\noindent
+다음과 같이 줄여 쓴다.
+$\otimes^\mathbf{L} = \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L}$
+및
+$\SheafHom = R\SheafHom_{\mathcal{O}_{X \times_S Y}}$.
+$M$이 $D_\QCoh(\mathcal{O}_X)$의 대상이고,
+$N$이 $D_\QCoh(\mathcal{O}_Y)$의 대상이라 하자. 그러면
+\begin{align*}
+\Hom_Y(\Phi(M), N)
+& =
+\Hom_Y(R\text{pr}_{2, *}(L\text{pr}_1^*M \otimes^\mathbf{L} K), N) \\
+& =
+\Hom_{X \times_S Y}(L\text{pr}_1^*M \otimes^\mathbf{L} K, a(N)) \\
+& =
+\Hom_{X \times_S Y}(L\text{pr}_1^*M,
+R\SheafHom(K, a(N))) \\
+& =
+\Hom_X(M, R\text{pr}_{1, *}R\SheafHom(K, a(N)))
+\end{align*}
+이다. 여기서는 코호몰로지의 보조정리
+\ref{cohomology-lemma-internal-hom}과 \ref{cohomology-lemma-adjoint}를
+사용했다. 표준 사상
+$$
+L\text{pr}_2^*N \otimes^\mathbf{L} R\SheafHom(K, a(\mathcal{O}_Y))
+\xrightarrow{\alpha}
+R\SheafHom(K, L\text{pr}_2^*N \otimes^\mathbf{L} a(\mathcal{O}_Y))
+\xrightarrow{\beta}
+R\SheafHom(K, a(N))
+$$
+이 있다. 여기서 $\alpha$는 코호몰로지의 보조정리
+\ref{cohomology-lemma-internal-hom-diagonal-better}이고 $\beta$는 스킴의
+쌍대성의 식 (\ref{duality-equation-compare-with-pullback})이다. 이 화살표들을
+모두 결합하면 보조정리의 명제에 표시한 함자적 화살표를 얻는다.
+
+\medskip\noindent
+$K$ 또는 $N$이 완전이면 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-internal-hom-evaluate-tensor-isomorphism}에 의해
+$\alpha$는 동형사상이다. $N$이 완전이면 스킴의 쌍대성의 보조정리
+\ref{duality-lemma-compare-with-pullback-perfect}에 의해 $\beta$는
+동형사상이고, 일반적으로 $X \to S$가 유한 표시인 평탄 고유 사상이면
+스킴의 쌍대성의 보조정리
+\ref{duality-lemma-compare-with-pullback-flat-proper}에 의해 동형사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-mukai-left-adjoint}
+\begin{reference}
+\cite{Rizzardo}의 논의와 비교하라.
+\end{reference}
+$S$를 뇌터 스킴이라 하자. $Y \to S$를 평탄 고유 Gorenstein 사상,
+$X \to S$를 유한형 사상이라 하자. $S$ 위의 $Y$의 상대 쌍대화 복합체를
+$\omega^\bullet_{Y/S}$로 나타내자.
+$\Phi : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$를 완전 핵
+$K \in D_\QCoh(\mathcal{O}_{X \times_S Y})$를 갖는 Fourier--Mukai
+함자라 하자. 다음과 같이 나타내자.
+$$
+K' = (Y \times_S X \to X \times_S Y)^*(K^\vee
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L}
+L\text{pr}_2^*\omega^\bullet_{Y/S})
+\in
+D_\QCoh(\mathcal{O}_{Y \times_S X})
+$$
+대응하는 Fourier--Mukai 변환을
+$\Phi' : D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_X)$라 하자.
+표준 동형사상
+$$
+\Hom_Y(N, \Phi(M)) \longrightarrow \Hom_X(\Phi'(N), M)
+$$
+이 있으며, 이는 $D_\QCoh(\mathcal{O}_X)$의 $M$과
+$D_\QCoh(\mathcal{O}_Y)$의 $N$에 대해 함자적이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-fourier-Mukai-QCoh}에 의해 명제와 같은 함자 $\Phi$를
+얻는다.
+
+\medskip\noindent
+우리 상황에서는 상대 쌍대화 복합체의 형성이 기저변환과 가환한다.
+스킴의 쌍대성의 주석 \ref{duality-remark-relative-dualizing-complex}를
+보라. 따라서
+$L\text{pr}_2^*\omega^\bullet_{Y/S} = \omega^\bullet_{X \times_S Y/X}$이다.
+또한 $\omega^\bullet_{Y/S}$는 유도 범주의 가역 대상이고, 특히
+완전하다. 스킴의 쌍대성의 보조정리
+\ref{duality-lemma-affine-flat-Noetherian-gorenstein}를 보라.
+
+\medskip\noindent
+보조정리를 실제로 증명할 때는 한 가지 편법을 쓰겠다. 즉 $X$와 $Y$의
+역할 및 $K$와 $K'$의 역할을 서로 바꾸면 보조정리
+\ref{equiv-lemma-fourier-mukai-right-adjoint}의 상황이 되어 결과를 얻는다는
+것을 보인다. $K'$는 완전 대상들의 텐서곱이므로 완전하며, 따라서
+보조정리 \ref{equiv-lemma-fourier-mukai-right-adjoint}의 논의를 적용할 수 있다.
+$Y \times_S X$ 위의 $K'$에 보조정리
+\ref{equiv-lemma-fourier-mukai-right-adjoint}의 절차를 적용하여 $K$와 동형인
+복합체가 나옴을 보이려면 다음 등식을 보이면 충분하다(세부사항은
+생략한다).
+$$
+R\SheafHom(R\SheafHom(K, \omega^\bullet_{X \times_S Y/X}),
+\omega^\bullet_{X \times_S Y/X}) = K
+$$
+$K$가 완전하고 $\omega^\bullet_{X \times_S Y/X}$가 가역이므로 이는
+분명하다. 세부사항은 생략한다. 따라서 보조정리
+\ref{equiv-lemma-fourier-mukai-right-adjoint}는 사상
+$$
+\Hom_Y(N, \Phi(M)) \longrightarrow \Hom_X(\Phi'(N), M)
+$$
+을 주며, 이는 $D_\QCoh(\mathcal{O}_X)$의 $M$과
+$D_\QCoh(\mathcal{O}_Y)$의 $N$에 대해 함자적이고 $K'$가 완전하므로
+동형사상이다. 증명이 끝났다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-mukai-flat-proper-over-noetherian}
+$S$를 뇌터 스킴이라 하자.
+\begin{enumerate}
+\item $X$, $Y$가 $S$ 위에서 고유하고 평탄하며 $K$가
+$D_{perf}(\mathcal{O}_{X \times_S Y})$에 속하면 Fourier--Mukai 함자
+$\Phi_K : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$를 얻는다.
+\item $X$, $Y$, $Z$가 $S$ 위에서 고유하고 평탄하며 $K \in
+D_{perf}(\mathcal{O}_{X \times_S Y})$, $K' \in
+D_{perf}(\mathcal{O}_{Y \times_S Z})$이면 합성
+$\Phi_{K'} \circ \Phi_K : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Z)$
+은 보조정리 \ref{equiv-lemma-compose-fourier-mukai}와 같이 계산한
+$K'' \in D_{perf}(\mathcal{O}_{X \times_S Z})$에 대한 $\Phi_{K''}$와 같다.
+\item (1)과 같은 $X$, $Y$, $K$, $\Phi_K$에 대해 $X \to S$가
+Gorenstein이면
+$\Phi_{K'} : D_{perf}(\mathcal{O}_Y) \to D_{perf}(\mathcal{O}_X)$는
+$\Phi_K$의 오른쪽 수반함자이다. 여기서
+$K' \in D_{perf}(\mathcal{O}_{Y \times_S X})$는
+$L\text{pr}_1^*\omega_{X/S}^\bullet
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K^\vee$를
+$Y \times_S X \to X \times_S Y$로 당긴 것이다.
+\item (1)과 같은 $X$, $Y$, $K$, $\Phi_K$에 대해 $Y \to S$가
+Gorenstein이면
+$\Phi_{K''} : D_{perf}(\mathcal{O}_Y) \to D_{perf}(\mathcal{O}_X)$는
+$\Phi_K$의 왼쪽 수반함자이다. 여기서
+$K'' \in D_{perf}(\mathcal{O}_{Y \times_S X})$는
+$L\text{pr}_2^*\omega_{Y/S}^\bullet
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K^\vee$를
+$Y \times_S X \to X \times_S Y$로 당긴 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 보조정리 \ref{equiv-lemma-fourier-mukai}의 (4)에서 즉시 따른다.
+
+\medskip\noindent
+(2)는 보조정리 \ref{equiv-lemma-compose-fourier-mukai}와
+$K'' = R\text{pr}_{13, *}(
+L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S Z}}^\mathbf{L}
+L\text{pr}_{23}^*K')$가 완전하다는 사실에서 따른다. 예를 들어 후자는
+스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-flat-proper-perfect-direct-image}에 의해 성립한다.
+
+\medskip\noindent
+(3)에서 준연접 코호몰로지층을 갖는 모든 복합체에 대한 수반성은
+보조정리 \ref{equiv-lemma-fourier-mukai-right-adjoint}에서 따른다. 여기서
+$K'$는
+$R\SheafHom_{\mathcal{O}_{X \times_S Y}}(K, a(\mathcal{O}_Y))$
+을 $Y \times_S X \to X \times_S Y$로 당긴 것이고, $a$는
+$R\text{pr}_{2, *} : D_\QCoh(\mathcal{O}_{X \times_S Y}) \to
+D_\QCoh(\mathcal{O}_Y)$의 오른쪽 수반함자이다. $X$의 구조사상을
+$f : X \to S$라 하자. $f$가 고유이므로 함자
+$f^! : D_\QCoh^+(\mathcal{O}_S) \to D_\QCoh^+(\mathcal{O}_X)$
+는 $Rf_* : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_S)$의 오른쪽
+수반함자를 $D_\QCoh^+(\mathcal{O}_S)$에 제한한 것이다. 스킴의 쌍대성의
+절 \ref{duality-section-upper-shriek}을 보라. 따라서 스킴의 쌍대성의
+주석 \ref{duality-remark-relative-dualizing-complex}에서 정의한 상대
+쌍대화 복합체 $\omega_{X/S}^\bullet$는
+$\omega_{X/S}^\bullet = f^!\mathcal{O}_S$이다.
+상대 쌍대화 복합체의 형성이 기저변환과 가환하므로(스킴의 쌍대성의 주석
+\ref{duality-remark-relative-dualizing-complex}을 보라)
+$a(\mathcal{O}_Y) = L\text{pr}_1^*\omega_{X/S}^\bullet$이다. 따라서
+$$
+R\SheafHom_{\mathcal{O}_{X \times_S Y}}(K, a(\mathcal{O}_Y))
+\cong
+L\text{pr}_1^*\omega_{X/S}^\bullet
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K^\vee
+$$
+이다. 이는 코호몰로지의 보조정리
+\ref{cohomology-lemma-dual-perfect-complex}에서 따른다. 끝으로
+$X \to S$가 Gorenstein이라고 가정했으므로 상대 쌍대화 복합체는
+가역이다. 이는 스킴의 쌍대성의 보조정리
+\ref{duality-lemma-affine-flat-Noetherian-gorenstein}에서 따른다.
+따라서 $\omega_{X/S}^\bullet$는 완전하고(코호몰로지의 보조정리
+\ref{cohomology-lemma-invertible-derived}), 그러므로 $K'$도 완전하다.
+따라서 $\Phi_{K'}$는 실제로 $D_{perf}(\mathcal{O}_Y)$를
+$D_{perf}(\mathcal{O}_X)$로 보내며, (3)의 증명이 끝났다.
+
+\medskip\noindent
+(4)의 증명은 보조정리 \ref{equiv-lemma-fourier-mukai-left-adjoint}를 사용하는
+것을 제외하면, 보조정리 \ref{equiv-lemma-fourier-mukai-right-adjoint}를 사용한
+(3)의 증명과 같다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{분해와 유계}
+\label{equiv-section-tricks-smooth}
+
+\noindent
+매끄러운 고유 스킴의 대각선에는 좋은 분해가 있다.
+
+\begin{lemma}
+\label{equiv-lemma-on-product}
+$R$을 뇌터 환이라 하자. $X$, $Y$를 분해 성질을 갖는 $R$ 위의 유한형
+스킴이라 하자. 임의의 연접 $\mathcal{O}_{X \times_R Y}$-가군
+$\mathcal{F}$에 대해 전사
+$\mathcal{E} \boxtimes \mathcal{G} \to \mathcal{F}$가 존재한다. 여기서
+$\mathcal{E}$는 유한 국소 자유 $\mathcal{O}_X$-가군이고
+$\mathcal{G}$는 유한 국소 자유 $\mathcal{O}_Y$-가군이다.
+\end{lemma}
+
+\begin{proof}
+$U \subset X$와 $V \subset Y$를 아핀 열린 부분스킴이라 하자.
+$\mathcal{I} \subset \mathcal{O}_X$를 $X \setminus U$ 위에 유도된 축약
+닫힌 부분스킴 구조의 아이디얼층이라 하자. 마찬가지로
+$\mathcal{I}' \subset \mathcal{O}_Y$를 $Y \setminus V$ 위에 유도된 축약
+닫힌 부분스킴 구조의 아이디얼층이라 하자. 그러면 아이디얼층
+$$
+\mathcal{J} = \Im(\text{pr}_1^*\mathcal{I} \otimes_{\mathcal{O}_{X \times_R Y}}
+\text{pr}_2^*\mathcal{I}' \to \mathcal{O}_{X \times_R Y})
+$$
+는 $V(\mathcal{J}) = X \times_R Y \setminus U \times_R V$를 만족한다.
+임의의 절 $s \in \mathcal{F}(U \times_R V)$에 대해 정수 $n > 0$과,
+$U \times_R V$에 제한하면 $s$를 주는 사상
+$\mathcal{J}^n \to \mathcal{F}$를 찾을 수 있다. 스킴의 코호몰로지의
+보조정리 \ref{coherent-lemma-homs-over-open}을 보라. 가정에 의해 전사
+$\mathcal{E} \to \mathcal{I}$와 $\mathcal{G} \to \mathcal{I}'$을
+택할 수 있으며, 이들은 대응하는 전사
+$$
+\mathcal{E} \boxtimes \mathcal{G} \to \mathcal{J}
+\quad\text{및}\quad
+\mathcal{E}^{\otimes n} \boxtimes \mathcal{G}^{\otimes n} \to \mathcal{J}^n
+$$
+를 낳는다. 따라서 상이 $U \times_R V$ 위의 절 $s$를 포함하는 사상
+$\mathcal{E}^{\otimes n} \boxtimes \mathcal{G}^{\otimes n} \to \mathcal{F}$를
+얻는다. $X \times_R Y$를 $U \times_R V$ 꼴의 유한 개 아핀 열린집합으로
+덮을 수 있고 $\mathcal{F}|_{U \times_R V}$가 유한 개 절로 생성되므로
+(성질의 보조정리 \ref{properties-lemma-finite-type-module}), 전사
+$$
+\bigoplus\nolimits_{j = 1, \ldots, N}
+\mathcal{E}_j^{\otimes n_j} \boxtimes \mathcal{G}_j^{\otimes n_j}
+\to \mathcal{F}
+$$
+가 존재한다. 여기서 $\mathcal{E}_j$는 $X$ 위에서 유한 국소 자유이고
+$\mathcal{G}_j$는 $Y$ 위에서 유한 국소 자유이다.
+$\mathcal{E} = \bigoplus \mathcal{E}_j^{\otimes n_j}$와
+$\mathcal{G} = \bigoplus \mathcal{G}_j^{\otimes n_j}$로 놓으면 보조정리가
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-on-product-general}
+$R$을 환이라 하자. $X$, $Y$를 분해 성질을 갖는 준콤팩트 준분리
+$R$-스킴이라 하자. 임의의 유한형 준연접
+$\mathcal{O}_{X \times_R Y}$-가군 $\mathcal{F}$에 대해 전사
+$\mathcal{E} \boxtimes \mathcal{G} \to \mathcal{F}$가 존재한다. 여기서
+$\mathcal{E}$는 유한 국소 자유 $\mathcal{O}_X$-가군이고
+$\mathcal{G}$는 유한 국소 자유 $\mathcal{O}_Y$-가군이다.
+\end{lemma}
+
+\begin{proof}
+극한 논증으로 보조정리 \ref{equiv-lemma-on-product}에서 따른다. 독자에게 이
+증명을 건너뛰기를 권한다. $X \times_R Y$는
+$X \times_\mathbf{Z} Y$의 닫힌 부분스킴이므로 $R$을 $\mathbf{Z}$로
+바꾸어도 무방하다. 성질의 보조정리
+\ref{properties-lemma-finite-directed-colimit-surjective-maps}에 의해
+$\mathcal{F}$를 유한 표시 $\mathcal{O}_{X \times_R Y}$-가군의 몫으로
+쓸 수 있다. 따라서 $\mathcal{F}$가 유한 표시라고 가정해도 된다.
+다음으로 $X_i$들이 $\mathbf{Z}$ 위에서 유한 표시가 되도록
+$X = \lim X_i$로 쓸 수 있고, $Y = \lim Y_j$도 마찬가지이다. 극한의
+명제 \ref{limits-proposition-approximate}를 보라. 그러면 $\mathcal{F}$는
+어떤 $X_i \times_R Y_j$ 위의 $\mathcal{F}_{ij}$로 내려가고(극한의
+보조정리 \ref{limits-lemma-descend-modules-finite-presentation}), 분해
+성질도 내려간다(스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-resolution-property-descends}). 이제
+$\mathcal{F}_{ij}$에 보조정리 \ref{equiv-lemma-on-product}를 적용하고 당긴다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-diagonal-resolution}
+$R$을 뇌터 환이라 하자. $X$를 분해 성질을 갖는 분리 유한형
+$R$-스킴이라 하자. $\Delta : X \to X \times_R X$를 $X/k$의 대각사상이라
+하고 $\mathcal{O}_\Delta = \Delta_*(\mathcal{O}_X)$로 놓자. 분해
+$$
+\ldots \to
+\mathcal{E}_2 \boxtimes \mathcal{G}_2 \to
+\mathcal{E}_1 \boxtimes \mathcal{G}_1 \to
+\mathcal{E}_0 \boxtimes \mathcal{G}_0 \to
+\mathcal{O}_\Delta \to 0
+$$
+가 존재하며 각 $\mathcal{E}_i$와 $\mathcal{G}_i$는 유한 국소 자유
+$\mathcal{O}_X$-가군이다.
+\end{lemma}
+
+\begin{proof}
+$X$가 분리이므로 대각사상 $\Delta$는 닫힌 몰입이고, 따라서
+$\mathcal{O}_\Delta$는 연접 $\mathcal{O}_{X \times_R X}$-가군이다(스킴의
+코호몰로지의 보조정리 \ref{coherent-lemma-i-star-equivalence}). 그러므로
+보조정리 \ref{equiv-lemma-on-product}에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-Ext-0-regular}
+$X$를 차원 $d < \infty$인 정칙 뇌터 스킴이라 하자. 그러면
+\begin{enumerate}
+\item 연접 $\mathcal{O}_X$-가군 $\mathcal{F}$, $\mathcal{G}$와 $n > d$에
+대해 $\Ext^n_X(\mathcal{F}, \mathcal{G}) = 0$이다.
+\item $K, L \in D^b_{\textit{Coh}}(\mathcal{O}_X)$와
+$a \in \mathbf{Z}$에 대해, $i < a + d$이면 $H^i(K) = 0$이고
+$i \geq a$이면 $H^i(L) = 0$일 때 $\Hom_X(K, L) = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 증명하기 위해 코호몰로지의 절 \ref{cohomology-section-ext}의
+스펙트럼 열
+$$
+H^p(X, \SheafExt^q(\mathcal{F}, \mathcal{G})) \Rightarrow
+\Ext^{p + q}_X(\mathcal{F}, \mathcal{G})
+$$
+을 사용한다. $x \in X$라 하자. 그러면
+$$
+\SheafExt^q(\mathcal{F}, \mathcal{G})_x =
+\SheafExt^q_{\mathcal{O}_{X, x}}(\mathcal{F}_x, \mathcal{G}_x)
+$$
+이다. 코호몰로지의 보조정리
+\ref{cohomology-lemma-stalk-internal-hom}을 보라. 여기서는 스킴의 유도
+범주의 보조정리 \ref{perfect-lemma-identify-pseudo-coherent-noetherian}에
+의해 $\mathcal{F}$가 준연접이라는 사실도 사용한다.
+$d_x = \dim(\mathcal{O}_{X, x})$로 놓자. $\mathcal{O}_{X, x}$가
+정칙이므로 환 $\mathcal{O}_{X, x}$는 대역 차원 $d_x$를 갖는다. 대수의
+명제 \ref{algebra-proposition-regular-finite-gl-dim}을 보라. 따라서
+$q > d_x$이면
+$\SheafExt^q_{\mathcal{O}_{X, x}}(\mathcal{F}_x, \mathcal{G}_x)$는 영이다.
+그러므로 가군 $\SheafExt^q(\mathcal{F}, \mathcal{G})$의 지지는 차원
+$d - q$ 이하이다. 따라서 코호몰로지의 명제
+\ref{cohomology-proposition-vanishing-Noetherian}에 의해 $p > d - q$이면
+$H^p(X, \SheafExt^q(\mathcal{F}, \mathcal{G})) = 0$이다. 이로써 (1)을
+증명했다.
+
+\medskip\noindent
+(2)를 증명하자. $K$와 $L$의 영이 아닌 코호몰로지층의 개수에 대해
+귀납법을 쓸 수 있다. 이 개수가 $0, 1$인 경우는 (1)에서 따른다.
+$K$의 영이 아닌 코호몰로지층의 개수가 $> 1$이면
+$H^i(K)$가 영이 아닌 최소의 $i \in \mathbf{Z}$를 택한다. 구별 삼각형
+$$
+H^i(K)[-i] \to K \to \tau_{\geq i + 1}K
+$$
+을 얻는다(유도 범주의 주석
+\ref{derived-remark-truncation-distinguished-triangle}). 유도 범주의
+보조정리 \ref{derived-lemma-representable-homological}에 의해
+$\Hom(H^i(K)[-i], L)$와 $\Hom(\tau_{\geq i + 1}K, L)$의 소멸에서
+$\Hom(K, L)$의 소멸이 따른다. $L$이 둘 이상의 영이 아닌 코호몰로지층을
+갖는 경우도 마찬가지이다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-split-complex-regular}
+$X$를 차원 $d < \infty$인 정칙 뇌터 스킴이라 하자.
+$K \in D^b_{\textit{Coh}}(\mathcal{O}_X)$, $a \in \mathbf{Z}$라 하자.
+$a < i < a + d$이면 $H^i(K) = 0$일 때
+$K = \tau_{\leq a}K \oplus \tau_{\geq a + d}K$.
+\end{lemma}
+
+\begin{proof}
+가정한 코호몰로지층의 소멸에 의해
+$\tau_{\leq a}K = \tau_{\leq a + d - 1}K$이다. 유도 범주의 주석
+\ref{derived-remark-truncation-distinguished-triangle}에 의해 구별 삼각형
+$$
+\tau_{\leq a}K \to K \to \tau_{\geq a + d}K \xrightarrow{\delta}
+(\tau_{\leq a}K)[1]
+$$
+이 있다. 유도 범주의 보조정리 \ref{derived-lemma-split}에 의해 사상
+$\delta$가 영임을 보이면 충분하다. 이는 보조정리
+\ref{equiv-lemma-Ext-0-regular}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-diagonal-trick}
+$k$를 체라 하고 $X$를 $k$ 위의 준콤팩트 분리 매끄러운 스킴이라 하자.
+유한 국소 자유 $\mathcal{O}_X$-가군 $\mathcal{E}$와 $\mathcal{G}$가
+존재하여
+$$
+\mathcal{O}_\Delta \in \langle \mathcal{E} \boxtimes \mathcal{G} \rangle
+$$
+가 $D(\mathcal{O}_{X \times X})$에서 성립한다. 표기는 유도 범주의 절
+\ref{derived-section-generators}와 같다.
+\end{lemma}
+
+\begin{proof}
+다양체의 보조정리 \ref{varieties-lemma-smooth-regular}에 의해 $X$는
+정칙임을 상기하자. 따라서 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-regular-resolution-property}에 의해 $X$는 분해 성질을
+갖는다. 그러므로 보조정리 \ref{equiv-lemma-diagonal-resolution}과 같은 분해를
+택할 수 있다. $\dim(X) = d$라 하자. $X \times X$는 $k$ 위에서
+매끄러우므로 정칙이다. 따라서 $X \times X$는
+$\dim(X \times X) = 2d$인 정칙 뇌터
+스킴이다. 대상
+$$
+K = (\mathcal{E}_{2d} \boxtimes \mathcal{G}_{2d} \to
+\ldots \to
+\mathcal{E}_0 \boxtimes \mathcal{G}_0)
+$$
+은 $D_{perf}(\mathcal{O}_{X \times X})$에서 차수 $0$에 코호몰로지층
+$\mathcal{O}_\Delta$, 차수 $-2d$에
+$\Ker(\mathcal{E}_{2d} \boxtimes \mathcal{G}_{2d} \to
+\mathcal{E}_{2d-1} \boxtimes \mathcal{G}_{2d-1})$를 가지며 다른 모든
+차수에서는 영이다. 따라서 보조정리
+\ref{equiv-lemma-split-complex-regular}에 의해 $\mathcal{O}_\Delta$는
+$D_{perf}(\mathcal{O}_{X \times X})$에서 $K$의 직합인자이다. 분명히
+$K$는
+$$
+\left\langle
+\bigoplus\nolimits_{i = 0, \ldots, 2d} \mathcal{E}_i \boxtimes \mathcal{G}_i
+\right\rangle
+\subset
+\left\langle
+\left(\bigoplus\nolimits_{i = 0, \ldots, 2d} \mathcal{E}_i\right)
+\boxtimes
+\left(\bigoplus\nolimits_{i = 0, \ldots, 2d} \mathcal{G}_i\right)
+\right\rangle
+$$
+에 속하며, 이로써 증명이 끝난다. (우리 대상이 이 범주에 속함을
+확인하려면 유도 범주의 보조정리
+\ref{derived-lemma-generated-by-E-explicit}과
+\ref{derived-lemma-in-cone-n}을 참고할 수 있다.)
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-smooth-proper-strong-generator}
+$k$를 체라 하고 $X$를 $k$ 위에서 고유하고 매끄러운 스킴이라 하자.
+그러면 $D_{perf}(\mathcal{O}_X)$는 강생성자를 갖는다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-diagonal-trick}을 사용하여
+$D(\mathcal{O}_{X \times X})$에서
+$\mathcal{O}_\Delta \in \langle \mathcal{E} \boxtimes \mathcal{G} \rangle$인
+유한 국소 자유 $\mathcal{O}_X$-가군 $\mathcal{E}$와 $\mathcal{G}$를
+택한다. $\mathcal{G}$가 $D_{perf}(\mathcal{O}_X)$의 강생성자라고
+주장한다. 유도 범주의 절 \ref{derived-section-operate-on-full}과 같은
+표기로 다음을 만족하는 $m, n \geq 1$을 택하자.
+$$
+\mathcal{O}_\Delta \in
+smd(add(\mathcal{E} \boxtimes \mathcal{G}[-m, m])^{\star n})
+$$
+이는 유도 범주의 보조정리
+\ref{derived-lemma-find-smallest-containing-E}에 의해 가능하다.
+$K$를 $D_{perf}(\mathcal{O}_X)$의 대상이라 하자. 함자
+$L\text{pr}_1^*K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L} -$가
+완전하고
+$$
+L\text{pr}_1^*K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L}
+(\mathcal{E} \boxtimes \mathcal{G}) =
+(K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{E}) \boxtimes \mathcal{G}
+$$
+이므로 유도 범주의 주석 \ref{derived-remark-operations-functor}에서
+$$
+L\text{pr}_1^*K
+\otimes_{\mathcal{O}_{X \times X}}^\mathbf{L}
+\mathcal{O}_\Delta
+\in
+smd(add(
+(K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{E})
+\boxtimes \mathcal{G}[-m, m])^{\star n})
+$$
+를 얻는다. 완전 함자 $R\text{pr}_{2, *}$를 적용하고 스킴의 유도 범주의
+보조정리 \ref{perfect-lemma-cohomology-base-change}에 의해
+$$
+R\text{pr}_{2, *}
+\left((K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{E}) \boxtimes
+\mathcal{G}\right) =
+R\Gamma(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{E})
+\otimes_k \mathcal{G}
+$$
+임을 관찰하면
+$$
+K = R\text{pr}_{2, *}(L\text{pr}_1^*K
+\otimes_{\mathcal{O}_{X \times X}}^\mathbf{L} \mathcal{O}_\Delta)
+\in
+smd(add(R\Gamma(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{E})
+\otimes_k \mathcal{G}[-m, m])^{\star n})
+$$
+를 얻는다. 등식은 예 \ref{equiv-example-diagonal-fourier-mukai}의 논의에서
+따른다. $K$가 완전이므로 $H^i(X, K)$가 $i \in [a, b]$에 대해서만 영이
+아닌 어떤 $a \leq b$가 존재한다. $X$가 고유이므로 각 $H^i(X, K)$는
+유한 차원이다. 따라서 오른쪽은
+$smd(add(\mathcal{G}[-m + a, m + b])^{\star n})$에 포함되고, 이는 위의
+참조 가운데 하나에 의해 $\langle \mathcal{G} \rangle_n$에 포함된다.
+증명이 끝났다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-diagonal-trick-proper}
+$k$를 체라 하고 $X$를 $k$ 위의 고유 매끄러운 스킴이라 하자. 정수
+$m, n \geq 1$과 유한 국소 자유 $\mathcal{O}_X$-가군 $\mathcal{G}$가
+존재하여 모든 연접 $\mathcal{O}_X$-가군이
+$smd(add(\mathcal{G}[-m, m])^{\star n})$에 포함된다. 표기는 유도 범주의
+절 \ref{derived-section-operate-on-full}과 같다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-smooth-proper-strong-generator}의 증명에서 어떤
+$m', n \geq 1$이 존재하여 임의의 연접 $\mathcal{O}_X$-가군
+$\mathcal{F}$에 대해
+$$
+\mathcal{F} \in smd(add(\mathcal{G}[-m' + a, m' + b])^{\star n})
+$$
+임을 보였다. 여기서 $a \leq b$는 $H^i(X, \mathcal{F})$가
+$i \in [a, b]$에 대해서만 영이 아니게 하는 임의의 정수이다. 따라서
+$a = 0$, $b = \dim(X)$로 택할 수 있다.
+$m = \max(m', m' + b)$로 놓으면 증명이 끝난다.
+\end{proof}
+
+\noindent
+다음 보조정리는 이 절의 제목에서 언급한 유계성 결과이다.
+
+\begin{lemma}
+\label{equiv-lemma-boundedness}
+$k$를 체라 하고 $X$를 $k$ 위의 매끄러운 고유 스킴이라 하자.
+$\mathcal{A}$를 아벨 범주라 하자.
+$H : D_{perf}(\mathcal{O}_X) \to \mathcal{A}$를 호몰로지 함자(유도 범주의
+정의 \ref{derived-definition-homological})라 하고, 모든
+$K$가 $D_{perf}(\mathcal{O}_X)$의 대상일 때 $H^i(K)$가 유한 개의
+$i \in \mathbf{Z}$에 대해서만 영이 아니라고 하자. 그러면 정수
+$m \geq 1$이 존재하여 임의의 연접 $\mathcal{O}_X$-가군 $\mathcal{F}$와
+$i \not \in [-m, m]$에 대해 $H^i(\mathcal{F}) = 0$이다. 코호몰로지
+함자에 대해서도 마찬가지이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-diagonal-trick-proper}과 유도 범주의 보조정리
+\ref{derived-lemma-forward-cone-n}을 결합한다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-bounded-fibres}
+$k$를 체라 하고 $X$, $Y$를 $k$ 위의 유한형 스킴이라 하자.
+$K_0 \to K_1 \to K_2 \to \ldots$를
+$D_{perf}(\mathcal{O}_{X \times Y})$의 대상들로 이루어진 계라 하고,
+$m \geq 0$을 다음 조건을 만족하는 정수라 하자.
+\begin{enumerate}
+\item $H^q(K_i)$는 $q \leq m$에 대해서만 영이 아니다.
+\item $\dim(\text{Supp}(\mathcal{F})) = 0$인 모든 연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$에 대해 대상
+$$
+R\text{pr}_{2, *}(
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}}^\mathbf{L}
+K_n)
+$$
+은 $[-m, m] \cup [-m - n, m - n]$ 밖의 차수에서 코호몰로지층이
+소멸하고, $n > 2m$이면 전이사상은 $[-m, m]$ 안의 차수에서
+코호몰로지층의 동형사상을 유도한다.
+\end{enumerate}
+그러면 $K_n$은 $[-m, m] \cup [-m - n, m - n]$ 밖의 차수에서
+코호몰로지층이 소멸하고, $n > 2m$이면 전이사상은 $[-m, m]$ 안의
+차수에서 코호몰로지층의 동형사상을 유도한다. 더욱이 $X$와 $Y$가
+$k$ 위에서 매끄러우면 충분히 큰 $n$에 대해
+$D_{perf}(\mathcal{O}_{X \times Y})$에서 $K_n = K \oplus C_n$이다.
+여기서 $K$는 $[-m, m]$ 안의 차수에서만 코호몰로지를 갖고 $C_n$은
+$[-m - n, m - n]$ 안의 차수에서만 코호몰로지를 가지며, 전이사상들은
+$K$의 여러 복사본 사이의 동형사상을 정의한다.
+\end{lemma}
+
+\begin{proof}
+$Z$를 (2)와 같은 $\mathcal{F}$의 스킴론적 지지라 하자. 그러면
+$Z \to \Spec(k)$는 유한이고, 따라서 $Z \times Y \to Y$는 유한이다.
+그러므로 코호몰로지층이 $Z \times Y$ 위에 지지되는
+$D_\QCoh(\mathcal{O}_{X \times Y})$의 대상 $M$에 대해
+$H^i(R\text{pr}_{2, *}(M)) = \text{pr}_{2, *}H^i(M)$이고, 함자
+$\text{pr}_{2, *}$는 $Z \times Y$ 위에 지지되는 준연접 가군들에 대해
+충실하다. 세부사항은 생략한다. 따라서
+$$
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}}^\mathbf{L} K_n
+$$
+가 $D_{perf}(\mathcal{O}_{X \times Y})$에서
+$[-m, m] \cup [-m - n, m - n]$ 밖의 차수에 코호몰로지층을 갖지 않고,
+$n > 2m$이면 전이사상들이 $[-m, m]$ 안의 차수에서 코호몰로지층의
+동형사상을 유도함을 안다. $z \in X \times Y$를 닫힌점
+$x \in X$로 가는 닫힌점이라 하자. 그러면
+$$
+K_{n, z} \otimes_{\mathcal{O}_{X \times Y, z}}^\mathbf{L}
+\mathcal{O}_{X \times Y, z}/\mathfrak m_x^t\mathcal{O}_{X \times Y, z}
+$$
+은 $[-m, m] \cup [-m - n, m - n]$ 안의 차수에서만 영이 아닌
+코호몰로지를 갖는다. 대수에 대한 추가 내용의 보조정리
+\ref{more-algebra-lemma-kollar-kovacs-pseudo-coherent}에 의해 $K_{n, z}$도
+$[-m, m] \cup [-m - n, m - n]$ 안의 차수에서만 영이 아닌 코호몰로지를
+갖는다. 이것이 $X \times Y$의 모든 닫힌점에서 성립하므로 $K_n$은
+$[-m, m] \cup [-m - n, m - n]$ 안의 차수에서만 영이 아닌
+코호몰로지층을 갖는다. 정확히 같은 방식으로
+$n > 2m$이면 사상 $K_n \to K_{n + 1}$이 $[-m, m]$ 안의 차수에서
+코호몰로지층의 동형사상임을 알 수 있다.
+
+\medskip\noindent
+$X$와 $Y$가 $k$ 위에서 매끄러우면 $X \times Y$도 $k$ 위에서 매끄럽고,
+따라서 다양체의 보조정리 \ref{varieties-lemma-smooth-regular}에 의해
+정칙이다. 그러므로 $n > 2m + \dim(X \times Y)$이면 보조정리
+\ref{equiv-lemma-split-complex-regular}에 의해 $K_n$의 직합분해를 얻는다.
+마지막 명제는 이로부터 분명하다.
+\end{proof}
+
+
+
+
+
+\section{형제 함자}
+\label{equiv-section-sibling}
+
+\noindent
+이 절에서는 다음 개념에 관한 몇 가지 범주론적 결과를 증명한다.
+
+\begin{definition}
+\label{equiv-definition-siblings}
+$\mathcal{A}$를 아벨 범주, $\mathcal{D}$를 삼각 범주라 하자. 삼각 범주의
+두 완전 함자
+$$
+F, F' : D^b(\mathcal{A}) \longrightarrow \mathcal{D}
+$$
+가 다음 두 조건을 만족하면 이들을 {
+\it 형제}라 하거나 $F'$를 $F$의 {
+\it 형제}라 한다.
+\begin{enumerate}
+\item 포함함자 $i : \mathcal{A} \to D^b(\mathcal{A})$에 대해 함자
+$F \circ i$와 $F' \circ i$가 동형이다.
+\item $D^b(\mathcal{A})$의 임의의 $K$에 대해 $F(K) \cong F'(K)$이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+때로는 두 번째 조건이 첫 번째 조건에서 따른다.
+
+\begin{lemma}
+\label{equiv-lemma-sibling-fully-faithful}
+$\mathcal{A}$를 아벨 범주, $\mathcal{D}$를 삼각 범주라 하고
+$F, F' : D^b(\mathcal{A}) \longrightarrow \mathcal{D}$
+를 삼각 범주의 완전 함자라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item 포함함자 $i : \mathcal{A} \to D^b(\mathcal{A})$에 대해 함자
+$F \circ i$와 $F' \circ i$가 동형이다.
+\item 모든 $X, Y \in \Ob(\mathcal{A})$와 $q < 0$에 대해
+$\Ext^q_\mathcal{D}(F(X), F(Y)) = 0$이다. 예를 들어 $F$가 완전충실이면
+이 조건이 성립한다.
+\end{enumerate}
+그러면 $F$와 $F'$는 형제이다.
+\end{lemma}
+
+\begin{proof}
+$K \in D^b(\mathcal{A})$라 하자. $F(K)$가 $F'(K)$와 동형임을 보이겠다.
+$K$를 $\mathcal{A}$의 대상들로 이루어진 유계 복합체 $A^\bullet$로
+나타낼 수 있다. $K$를 평행이동으로 바꾸어 $i > 0$이면 $A^i = 0$이라고
+가정할 수 있다. $i > n$이면 $A^{-i} = 0$인 $n \geq 0$을 택하자. 대상
+$$
+M_i = (A^{-i} \to \ldots \to A^0)[-i],\quad i = 0, \ldots, n
+$$
+들은 $D^b(\mathcal{A})$에서 복합체
+$A^\bullet = A^{-n} \to \ldots \to A^0$의
+$D^b(\mathcal{A})$에서의 Postnikov 계를 이룬다.
+유도 범주의 예 \ref{derived-example-key-postnikov}를 보라. $F$와 $F'$가
+모두 삼각 범주의 완전 함자이므로
+$$
+F(M_i)
+\quad\text{및}\quad
+F'(M_i)
+$$
+는 모두 $\mathcal{D}$에서 복합체
+$$
+F(A^{-n}) \to \ldots \to F(A^0) =
+F'(A^{-n}) \to \ldots \to F'(A^0)
+$$
+의 Postnikov 계를 이룬다. 가정에 의해 이 대상들 사이의 음의
+$\Ext$들이 모두 소멸하므로 Postnikov 계의 유일성(유도 범주의 보조정리
+\ref{derived-lemma-existence-postnikov-system})에 의해
+$F(K) = F(M_n[n]) \cong F'(M_n[n]) = F'(K)$이다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-sibling-faithful}
+$F$, $F'$를 정의 \ref{equiv-definition-siblings}과 같은 형제라 하자. 그러면
+\begin{enumerate}
+\item $F$가 본질적으로 전사이면 $F'$도 본질적으로 전사이다.
+\item $F$가 완전충실이면 $F'$도 완전충실이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 형제의 성질 (2)에서 즉시 따른다.
+
+\medskip\noindent
+$F$가 완전충실이라고 가정하자. $F$의 본질적 상을
+$\mathcal{D}' \subset \mathcal{D}$로 나타내면
+$F : D^b(\mathcal{A}) \to \mathcal{D}'$는 동치이다. 형제의 성질 (2)에
+의해 함자 $F'$가 $\mathcal{D}'$을 통해 분해되므로 함자
+$H = F^{-1} \circ F' : D^b(\mathcal{A}) \to D^b(\mathcal{A})$를 생각할
+수 있다. $H$는 항등함자의 형제이다. $H$가 완전충실임을 증명하면
+충분하므로 다음 문단에서 논의하는 문제로 환원된다.
+
+\medskip\noindent
+$\mathcal{D} = D^b(\mathcal{A})$로 놓자. 항등함자의 형제
+$F : \mathcal{D} \to \mathcal{D}$가 완전충실임을 보여야 한다. 정의
+\ref{equiv-definition-siblings}에서 주어진 $X \in \Ob(\mathcal{A})$에 대한
+함자적 동형사상을 $a_X : X \to F(X)$로 나타내자. 임의의 $K$가
+$\mathcal{D}$의 대상이고 구별 삼각형 $K_1 \to K_2 \to K_3$도
+$\mathcal{D}$에 속한다고 하자. 사상
+$$
+F : \Hom(K, K_i[n]) \to \Hom(F(K), F(K_i[n]))
+$$
+이 모든 $n \in \mathbf{Z}$와 $i = 1, 3$에 대해 동형사상이면
+$i = 2$와 모든 $n \in \mathbf{Z}$에 대해서도 그러하다. 여기서는
+$5$-보조정리인 호몰로지의 보조정리 \ref{homology-lemma-five-lemma}와
+유도 범주의 보조정리 \ref{derived-lemma-representable-homological}를
+사용한다. 세부사항은 생략한다. 마찬가지로 사상
+$$
+F : \Hom(K_i[n], K) \to \Hom(F(K_i[n]), F(K))
+$$
+이 모든 $n \in \mathbf{Z}$와 $i = 1, 3$에 대해 동형사상이면
+$i = 2$와 모든 $n \in \mathbf{Z}$에 대해서도 그러하다. 표준 절단과
+영이 아닌 코호몰로지 대상의 개수에 대한 귀납법을 사용하면
+$$
+F : \Ext^q(X, Y) \to \Ext^q(F(X), F(Y))
+$$
+가 모든 $X, Y \in \Ob(\mathcal{A})$와 모든 $q \in \mathbf{Z}$에 대해
+전단사임을 보이면 충분하다. $F$가 $\text{id}$의 형제이므로
+$F(X) \cong X$, $F(Y) \cong Y$이고, 따라서 $q < 0$이면 오른쪽은
+영이다. $q = 0$인 경우는 $F$가 항등함자의 형제라는 가정에서 따른다.
+$q > 0$인 경우를 증명하는 일만 남았다.
+
+\medskip\noindent
+$q = 1$인 경우: 단사성. $\Ext^1(X, Y)$의 원소 $\xi$는 구별 삼각형
+$$
+Y \to E \to X \xrightarrow{\xi} Y[1]
+$$
+을 낳는다. $E \in \Ob(\mathcal{A})$임을 관찰하자. $F$가 항등함자의
+형제이므로 가환 도식
+$$
+\xymatrix{
+E \ar[d] \ar[r] & X \ar[d] \\
+F(E) \ar[r] & F(X)
+}
+$$
+을 얻으며, 세로 화살표들은 동형사상 $a_E$와 $a_X$이다. TR3에 의해
+처음의 $\xi$에 대응하는 구별 삼각형은 구별 삼각형
+$$
+F(Y) \to F(E) \to F(X) \xrightarrow{F(\xi)} F(Y[1]) = F(Y)[1]
+$$
+과 동형이다. 따라서 $\xi = 0$인 것과 $F(\xi)$가 영인 것은 동치이다.
+즉 $F : \Ext^1(X, Y) \to \Ext^1(F(X), F(Y))$는 단사이다.
+
+\medskip\noindent
+$q = 1$인 경우: 전사성. $\theta$를 $\Ext^1(F(X), F(Y))$의 원소라
+하자. 이는 $\mathcal{A}$에서 $F(Y)$에 의한 $F(X)$의 확대를 정의한다.
+$F$가 항등함자의 형제이므로 그 가운데 항을 $F(E)$로 쓸 수 있다.
+따라서 어떤 사상 $\alpha : Y \to E$와 $\beta : E \to X$에 대해
+구별 삼각형
+$$
+F(Y) \xrightarrow{F(\alpha)} F(E)
+\xrightarrow{F(\beta)} F(X)
+\xrightarrow{\theta} F(Y[1]) = F(Y)[1]
+$$
+을 얻는다. $F$가 항등함자의 형제이므로 열
+$0 \to Y \to E \to X \to 0$은 $\mathcal{A}$의 짧은 완전열이다.
+따라서 어떤 사상 $\delta : X \to Y[1]$에 대해 구별 삼각형
+$$
+Y \xrightarrow{\alpha} E \xrightarrow{\beta} X \xrightarrow{\delta} Y[1]
+$$
+을 얻는다. 완전 함자 $F$를 적용하면 구별 삼각형
+$$
+F(Y) \xrightarrow{F(\alpha)} F(E) \xrightarrow{F(\beta)} F(X)
+\xrightarrow{F(\delta)} F(Y)[1]
+$$
+을 얻는다. 위와 같이 논증하면 이 삼각형들이 동형임을 알 수 있다.
+따라서 가환 도식
+$$
+\xymatrix{
+F(X) \ar[d]^\gamma \ar[r]_{F(\delta)} & F(Y[1]) \ar[d]_\epsilon \\
+F(X) \ar[r]^\theta & F(Y[1])
+}
+$$
+이 어떤 동형사상 $\gamma$, $\epsilon$에 대해 존재한다. 더 말할 수 있지만
+그 이상의 정보는 필요하지 않다. $\gamma = F(\gamma')$와
+$\epsilon = F(\epsilon')$로 쓸 수 있다. 그러면
+$\theta = F(\epsilon' \circ \delta \circ (\gamma')^{-1})$이므로 전사성이
+성립한다.
+
+\medskip\noindent
+$q > 1$인 경우: 전사성. Yoneda 확대를 사용하면(유도 범주의 절
+\ref{derived-section-ext}을 보라) $\Ext^q(F(X), F(Y))$의 임의의 원소
+$\xi$에 대해
+$F(X) = B_0, B_1, \ldots, B_{q - 1}, B_q = F(Y) \in \Ob(\mathcal{A})$와
+원소
+$$
+\xi_i \in \Ext^1(B_{i - 1}, B_i)
+$$
+를 찾아 $\xi$를 합성 $\xi_q \circ \ldots \circ \xi_1$로 쓸 수 있다.
+$B_i = F(A_i)$로 쓰자. 물론 $A_i = B_i$이지만 이를 사용할 필요는 없다.
+$q = 1$에서의 전사성에 의해
+$$
+\xi_i = F(\eta_i) \in \Ext^1(F(A_{i - 1}), F(A_i))
+\quad\text{이고}\quad
+\eta_i \in \Ext^1(A_{i - 1}, A_i)
+$$
+이다. 그러면 $\eta = \eta_q \circ \ldots \circ \eta_1$는
+$F(\eta) = \xi$인 $\Ext^q(X, Y)$의 원소이다.
+
+\medskip\noindent
+$q > 1$인 경우: 단사성. $\Ext^q(X, Y)$의 원소 $\xi$는 구별 삼각형
+$$
+Y[q - 1] \to E \to X \xrightarrow{\xi} Y[q]
+$$
+을 낳는다. $F$를 적용하면 구별 삼각형
+$$
+F(Y)[q - 1] \to F(E) \to F(X) \xrightarrow{F(\xi)} F(Y)[q]
+$$
+을 얻는다. $F(\xi) = 0$이면 $\mathcal{D}$에서
+$F(E) \cong F(Y)[q - 1] \oplus F(X)$이다. 유도 범주의 보조정리
+\ref{derived-lemma-split}을 보라. $F$가 항등함자의 형제이므로
+$E \cong F(E)$이고, 따라서
+$$
+E \cong F(E) \cong F(Y)[q - 1] \oplus F(X) \cong Y[q - 1] \oplus X
+$$
+이다. 다시 말해 $E$는 그 코호몰로지 대상들의 직합과 동형이다. 이는
+처음의 구별 삼각형이 분할됨을 함의한다. 즉 $\xi = 0$이다.
+\end{proof}
+
+\noindent
+비표준적인 정의를 하나 하자. $\mathcal{A}$를 아벨 범주라 하자. 임의의
+$X \in \Ob(\mathcal{A})$에 대해 다음을 만족하는 대상 $N$이 존재하면
+$\mathcal{A}$가 {\it 충분한 음의 대상을 갖는다}고 하자.
+\begin{enumerate}
+\item 전사 $N \to X$가 존재한다.
+\item $\Hom(X, N) = 0$.
+\end{enumerate}
+명제 \ref{equiv-proposition-siblings-isomorphic}의 증명에 사용하기 위해 이
+개념에 관한 두 보조정리를 증명하자.
+
+\begin{lemma}
+\label{equiv-lemma-good-map}
+$\mathcal{A}$를 충분한 음의 대상을 갖는 아벨 범주라 하자.
+$X \in D^b(\mathcal{A})$이고 $i > b$이면 $H^i(X) = 0$인
+$b \in \mathbf{Z}$라 하자. 그러면 유도된 사상 $N \to H^b(X)$가
+전사이고 $\Hom(H^b(X), N) = 0$인 사상 $N[-b] \to X$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+절단 함자를 사용하면 $X$를 $\mathcal{A}$의 대상들로 이루어진 복합체
+$A^a \to A^{a + 1} \to \ldots \to A^b$로 나타낼 수 있다. 전사
+$t : N \to A^b$가 존재하고 $\Hom(A^b, N) = 0$인
+$N$이 $\mathcal{A}$의 대상이 되도록 택하자. 그러면 전사 $t$가 원하는 사상
+$N[-b] \to X$를 정의한다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-good-map-zero}
+$\mathcal{A}$를 충분한 음의 대상을 갖는 아벨 범주라 하고
+$f : X \to X'$를 $D^b(\mathcal{A})$의 사상이라 하자. $i > b$이면
+$H^i(X) = 0$이고 $i \geq b$이면 $H^i(X') = 0$인
+$b \in \mathbf{Z}$라 하자. 그러면 유도된 사상 $N \to H^b(X)$가
+전사이고, $\Hom(H^b(X), N) = 0$이며, 합성 $N[-b] \to X \to X'$가
+영인 사상 $N[-b] \to X$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$f$를 $\mathcal{A}$의 대상들로 이루어진 유계 복합체 사이의 사상
+$f^\bullet : A^\bullet \to B^\bullet$로 나타낼 수 있다. 예를 들어 유도
+범주의 보조정리 \ref{derived-lemma-bounded-derived}를 보라. $\mathcal{A}$의
+대상
+$$
+C = \Ker(A^b \to A^{b + 1}) \times_{\Ker(B^b \to B^{b + 1})} B^{b - 1}
+$$
+을 생각하자. $H^b(B^\bullet) = 0$이므로
+$C \to H^b(A^\bullet)$는 전사이다. 한편 사상 $C \to A^b \to B^b$는
+사상 $C \to B^{b - 1} \to B^b$와 같으므로 합성
+$C[-b] \to X \to X'$는 영이다. $\mathcal{A}$가 충분한 음의 대상을
+가지므로 전사 $N \to C \oplus H^b(X)$가 존재하고
+$\Hom(C \oplus H^b(X), N) = 0$인 대상 $N$을 찾을 수 있다. 그러면
+$N$과 사상 $N[-b] \to X$가 보조정리의 문제를 해결한다.
+\end{proof}
+
+\noindent
+다음 명제의 증명에 들어가는 훌륭한 아이디어를 보려면 독자에게 원문
+\cite[명제 2.16]{Orlov-K3}을 읽어 보기를 권한다.
+
+\begin{proposition}
+\label{equiv-proposition-siblings-isomorphic}
+\begin{reference}
+\cite[명제 2.16]{Orlov-K3}; 위의 음의 대상 정의에서 $q > 0$에
+대한 $\Ext^q(N, X)$의 소멸을 가정할 필요가 없다는 사실은
+\cite{Canonaco-Stellari}에서 왔다.
+\end{reference}
+$F$, $F'$를 정의 \ref{equiv-definition-siblings}과 같은 형제라 하자. $F$가
+완전충실이고 $\mathcal{A}$가 충분한 음의 대상을 갖는다고 가정하자.
+그러면 $F$와 $F'$는 동형인 함자이다.
+\end{proposition}
+
+\begin{proof}
+정의 \ref{equiv-definition-siblings}의 (2)에 의해 함자 $F'$의 상은 함자
+$F$의 본질적 상에 포함된다. 따라서 함자 $H = F^{-1} \circ F'$는
+항등함자의 형제이다. 이로써 다음 문단의 경우로 환원된다.
+
+\medskip\noindent
+$\mathcal{D} = D^b(\mathcal{A})$로 놓자. 항등함자의 형제
+$F : \mathcal{D} \to \mathcal{D}$가 항등함자와 동형임을 보여야 한다.
+$\mathcal{D}$의 대상 $X$를 잡자. $X$가 {\it 폭} $w = w(X)$를 갖는다는 것은,
+$i \not \in [a, a + w - 1]$이면 $H^i(X) = 0$인 정수
+$a \in \mathbf{Z}$가 존재하게 하는 최소의 $w \geq 0$이라는 뜻으로 하자.
+$F$가 항등함자의 형제이고 $F \circ [n] = [n] \circ F$이므로,
+평행이동과 양립하는 동형사상
+$$
+c_X : X \to F(X)
+$$
+이 $w(X) \leq 1$에 대해 이미 주어져 있다. 또한 어떤
+$A, A' \in \Ob(\mathcal{A})$에 대해 $X = A[-a]$,
+$X' = A'[-a]$이면 임의의 사상 $f : X \to X'$에 대해 도식
+\begin{equation}
+\label{equiv-equation-to-show}
+\vcenter{
+\xymatrix{
+X \ar[d]_{c_X} \ar[r]_f &
+X' \ar[d]^{c_{X'}} \\
+F(X) \ar[r]^{F(f)} &
+F(X')
+}
+}
+\end{equation}
+은 가환한다.
+
+\medskip\noindent
+다음으로 $w(X), w(X') \leq 1$인 임의의 사상 $f : X \to X'$에 대해
+도식 (\ref{equiv-equation-to-show})이 가환함을 보이자. $X$ 또는 $X'$가 영이면
+분명하다. 그렇지 않으면 유일한 $A, A'$가 $\mathcal{A}$에 속하고
+$a, a' \in \mathbf{Z}$에 대해 $X = A[-a]$, $X' = A'[-a']$로 쓸 수 있다.
+$a = a'$인 경우는 위에서 논의했다. $a' > a$이면 $f = 0$이고(유도
+범주의 보조정리 \ref{derived-lemma-negative-exts}), 결과는 분명하다.
+$a' < a$이면 $f$는 $q = a - a'$인 원소
+$\xi \in \Ext^q(A, A')$에 대응한다. Yoneda 확대를 사용하면(유도 범주의
+절 \ref{derived-section-ext}을 보라)
+$A = A_0, A_1, \ldots, A_{q - 1}, A_q = A' \in \Ob(\mathcal{A})$와
+원소
+$$
+\xi_i \in \Ext^1(A_{i - 1}, A_i)
+$$
+를 찾아 $\xi$를 합성 $\xi_q \circ \ldots \circ \xi_1$로 쓸 수 있다. 다시 말해
+$X_i = A_i[-a + i]$로 놓으면 사상들
+$$
+X = X_0 \xrightarrow{f_1} X_1 \to \ldots \to X_{q - 1}
+\xrightarrow{f_q} X_q = X'
+$$
+을 얻고 그 합성은 $f$이다. $f_1, \ldots, f_q$에 대한 도식
+(\ref{equiv-equation-to-show})의 가환성이 $f$에 대한 가환성을 함의하므로
+$q = 1$인 경우로 환원된다. 이 경우 평행이동하여 구별 삼각형
+$$
+A' \to E \to A \xrightarrow{f} A'[1]
+$$
+이 있다고 가정할 수 있다. $E$는 $\mathcal{A}$의 대상임을 관찰하자.
+다음 도식을 생각하자.
+$$
+\xymatrix{
+E \ar[d]_{c_E} \ar[r] &
+A \ar[d]_{c_A} \ar[r]_f &
+A'[1] \ar[d]^{c_{A'}[1]}
+\ar@{..>}@<-1ex>[d]_\gamma \ar@{..>}[ld]^\epsilon \ar[r] &
+E[1] \ar[d]^{c_E[1]} \\
+F(E) \ar[r] &
+F(A) \ar[r]^{F(f)} &
+F(A')[1] \ar[r] &
+F(E)[1]
+}
+$$
+그 두 행은 구별 삼각형이다. 오른쪽 사각형은 이미 가환하지만 가운데
+사각형이 가환하는지는 아직 모른다. 삼각 범주의 공리에 의해 도식 전체를
+가환하게 하는 사상 $\gamma$를 찾을 수 있다. 그러면
+$\gamma - c_{A'}[1]$과 $F(A')[1] \to F(E)[1]$의 합성은 영이므로
+$\gamma - c_{A'}[1] = F(f) \circ \epsilon$인 사상
+$\epsilon : A'[1] \to F(A)$를 찾을 수 있다. 그러나 임의의 화살표
+$A'[1] \to F(A)$는 $\mathcal{A}$의 대상들 사이의 음의 Ext 류이므로
+영이다. 따라서 $\gamma = c_{A'}[1]$이고, 원하는 대로 가운데 사각형도
+가환한다.
+
+\medskip\noindent
+증명을 끝내기 위해 $w$에 대한 귀납법으로, $w(X) \leq w$인 모든
+$X$에 대해 그러한 대상들 사이의 모든 사상과 양립하는 동형사상
+$c_X : X \to F(X)$가 존재함을 보이겠다. 기초 단계 $w = 1$은 위에서
+증명했다. 어떤 $w \geq 1$에 대해 결과를 안다고 가정하자.
+
+\medskip\noindent
+$w(X) = w + 1$인 대상 $X$를 잡자. $i \not \in [a, a + w]$이면
+$H^i(X) = 0$인 $a \in \mathbf{Z}$를 택한다. $b = a + w$로 놓으면
+$H^b(X)$는 영이 아니다. 보조정리 \ref{equiv-lemma-good-map}과 같은
+$N[-b] \to X$를 택하고 구별 삼각형
+$$
+N[-b] \to X \to Y \to N[-b + 1]
+$$
+을 택한다. 긴 완전 코호몰로지 열을 계산하면 $w(Y) \leq w$임을 알 수
+있다. 따라서 귀납가정에 의해 다음 도식의 실선 화살표들을 얻는다.
+$$
+\xymatrix{
+N[-b] \ar[r] \ar[d]_{c_N[-b]} &
+X \ar[r] \ar@{..>}[d]_{c_{N[-b] \to X}} &
+Y \ar[r] \ar[d]^{c_Y} &
+N[-b + 1] \ar[d]^{c_N[-b + 1]} \\
+F(N)[-b] \ar[r] &
+F(X) \ar[r] &
+F(Y) \ar[r] &
+F(N)[-b + 1]
+}
+$$
+점선 화살표 $c_{N[-b] \to X}$를 얻는다. $N$의 선택에 의해
+$\Hom(X, F(N)[-b]) \cong \Hom(X, N[-b]) = 0$이므로 유도 범주의
+보조정리 \ref{derived-lemma-uniqueness-third-arrow}에 의해 점선 화살표는
+유일하다. 실제로 $c_{N[-b] \to X}$는 꼭짓점이 $X, Y, F(X), F(Y)$인
+사각형을 가환하게 하는 유일한 점선 화살표이다.
+
+\medskip\noindent
+$N'[-b] \to X$를 보조정리 \ref{equiv-lemma-good-map}과 같은 또 다른 사상이라
+하고 $c_{N[-b] \to X} = c_{N'[-b] \to X}$임을 증명하자. 사상
+$(N \oplus N')[-b] \to X$도 보조정리 \ref{equiv-lemma-good-map}의 조건을
+만족한다. 따라서 어떤 사상 $N' \to N$에 대해 $N'[-b] \to X$가
+$N'[-b] \to N[-b] \to X$로 분해된다고 가정해도 된다. 구별 삼각형
+$N[-b] \to X \to Y \to N[-b + 1]$과
+$N'[-b] \to X \to Y' \to N'[-b + 1]$을 택한다. 공리 TR3에 의해
+$\text{id}_X$ 및 $N' \to N$과 함께 삼각형의 사상을 이루는 사상
+$g : Y' \to Y$를 찾을 수 있다. $g$에 대해
+(\ref{equiv-equation-to-show})가 성립하므로
+$$
+(F(X) \to F(Y)) \circ c_{N'[-b] \to X} = (F(X) \to F(Y)) \circ c_{N[-b] \to X}
+$$
+이다. 위 구성에서 지적한 $c_{N[-b] \to X}$의 유일성에 의해 이제
+$c_{N'[-b] \to X} = c_{N[-b] \to X}$이다.
+
+\medskip\noindent
+따라서 이제 폭이 $w + 1$인 $X$에 대해 동형사상
+$c_X : X \to F(X)$를, 보조정리 \ref{equiv-lemma-good-map}과 같은
+$N[-b] \to X$에 대한 사상 $c_{N[-b] \to X}$들의 공통값으로 정의할 수
+있다. 증명을 끝내기 위해 $w(X) \leq w + 1$, $w(X') \leq w + 1$인 대상
+사이의 모든 사상 $f : X \to X'$에 대해 도식 (\ref{equiv-equation-to-show})이
+가환함을 보여야 한다. $i \not \in [a, b]$이면 $H^i(X) = 0$인
+$a \leq b \leq a + w$와, $i \not \in [a', b']$이면 $H^i(X') = 0$인
+$a' \leq b' \leq a' + w$를 택한다. $(b' - a') + (b - a)$에 대한
+귀납법으로 주장을 보이겠다. 기초 단계는 이 수가 영인 경우이며,
+$w \geq 1$이므로 이미 성립한다. 두 경우로 나눈다.
+
+\medskip\noindent
+경우 I: $b' < b$. 보조정리 \ref{equiv-lemma-good-map-zero}에 의해 합성
+$N[-b] \to X \to X'$가 영이 되도록 보조정리
+\ref{equiv-lemma-good-map}과 같은 $N[-b] \to X$를 택할 수 있다. 구별 삼각형
+$N[-b] \to X \to Y \to N[-b + 1]$을 택하자. $N[-b] \to X'$가
+영이므로 $f$는 $X \to Y \to X'$로 분해된다. $H^i(Y)$는
+$i \in [a, b - 1]$에 대해서만 영이 아니므로 귀납가정에 의해
+$Y \to X'$에 대해 (\ref{equiv-equation-to-show})이 가환한다. $X \to Y$에
+대해서는 $w(X) = w + 1$이면 구성에 의해, $w(X) \leq w$이면 첫 번째
+귀납가정에 의해 도식 (\ref{equiv-equation-to-show})이 가환한다. 따라서 $f$에
+대해서도 도식 (\ref{equiv-equation-to-show})이 가환한다.
+
+\medskip\noindent
+경우 II: $b' \geq b$. 이 경우 보조정리 \ref{equiv-lemma-good-map}과 같은
+$N'[-b'] \to X'$를 택한다. 또한
+$\Hom(H^{b'}(X), N') = 0$이라고 가정할 수 있다. 이는 $b' = b$일 때만
+관련된다. 예를 들어 $N' \oplus H^{b'}(X)$로의 전사를 가지며
+$\Hom(N' \oplus H^{b'}(X), N'') = 0$인 대상 $N''$로 $N'$를 바꿀 수
+있다. 구별 삼각형 $N'[-b'] \to X' \to Y' \to N'[-b' + 1]$을 택한다.
+$N'$의 선택에 의해 $\Hom(X, X') \to \Hom(X, Y')$가 단사이므로
+(세부사항은 생략한다) $\Hom(X, F(X')) \to \Hom(X, F(Y'))$도
+단사이다. 따라서 이 경우에는 사상 $X \to X' \to Y'$의 합성
+$X \to Y'$에 대해 (\ref{equiv-equation-to-show})이 가환함을 확인하면 충분하다.
+$H^i(Y')$가 $i \in [a', b' - 1]$에 대해서만 영이 아니므로 귀납가정으로
+결론을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{완전충실성의 도출}
+\label{equiv-section-get-fully-faithful}
+
+\noindent
+함자가 언제 완전충실인지 아는 것이 유용하므로
+\cite[보조정리 2.15]{Orlov-K3}의 다음 변형을 제시한다.
+
+\begin{lemma}
+\label{equiv-lemma-get-fully-faithful}
+\begin{reference}
+\cite[보조정리 2.15]{Orlov-K3}의 변형
+\end{reference}
+$F : \mathcal{D} \to \mathcal{D}'$를 삼각 범주의 완전 함자라 하고
+$S \subset \Ob(\mathcal{D})$를 대상들의 집합이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $F$는 오른쪽 및 왼쪽 수반함자를 모두 갖는다.
+\item $K \in \mathcal{D}$에 대해 모든 $E \in S$와
+$i \in \mathbf{Z}$에 대해 $\Hom(E, K[i]) = 0$이면 $K = 0$이다.
+\item $K \in \mathcal{D}$에 대해 모든 $E \in S$와
+$i \in \mathbf{Z}$에 대해 $\Hom(K, E[i]) = 0$이면 $K = 0$이다.
+\item 모든 $E, E' \in S$와 $i \in \mathbf{Z}$에 대해 $F$가 유도하는
+사상 $\Hom(E, E'[i]) \to \Hom(F(E), F(E')[i])$은 전단사이다.
+\end{enumerate}
+그러면 $F$는 완전충실이다.
+\end{lemma}
+
+\begin{proof}
+$F$의 오른쪽 및 왼쪽 수반함자를 각각 $F_r$, $F_l$로 나타내자.
+$E \in S$에 대해 구별 삼각형
+$$
+E \to F_r(F(E)) \to C \to E[1]
+$$
+을 택한다. 첫 화살표는 수반의 단위원이다. $E' \in S$에 대해
+$$
+\Hom(E', F_r(F(E))[i]) = \Hom(F(E'), F(E)[i]) = \Hom(E', E[i])
+$$
+이다. 마지막 등식은 가정 (4)에 의해 성립한다. 따라서 위의 구별
+삼각형에 호몰로지 함자 $\Hom(E', -)$를 적용하면(유도 범주의 보조정리
+\ref{derived-lemma-representable-homological}) 모든
+$i \in \mathbf{Z}$와 $E' \in S$에 대해 $\Hom(E', C[i]) = 0$을 얻는다.
+가정 (2)에 의해 $C = 0$이고 $E = F_r(F(E))$이다.
+
+\medskip\noindent
+$K \in \Ob(\mathcal{D})$에 대해 구별 삼각형
+$$
+F_l(F(K)) \to K \to C \to F_l(F(K))[1]
+$$
+을 택한다. 첫 화살표는 수반의 여단위원이다. $E \in S$에 대해
+$$
+\Hom(F_l(F(K)), E[i]) = \Hom(F(K), F(E)[i]) =
+\Hom(K, F_r(F(E))[i]) = \Hom(K, E[i])
+$$
+이며, 마지막 등식은 첫 문단의 결과에 의해 성립한다. 따라서 앞과 같이
+모든 $E \in S$와 $i \in \mathbf{Z}$에 대해 $\Hom(C, E[i]) = 0$이다.
+가정 (3)에 의해 $C = 0$이다. 그러므로 범주의 보조정리
+\ref{categories-lemma-adjoint-fully-faithful}에 의해 $F$는 완전충실이다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-duality-at-point}
+$k$를 체라 하고 $X$를 $k$ 위의 정칙 유한형 스킴이라 하자.
+$x \in X$를 닫힌점이라 하자. $x$에 지지되는 연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$에 대해, $\mathcal{F}_x$와
+$\mathcal{F}'_x$가 Matlis 쌍대가 되도록 $x$에 지지되는 연접
+$\mathcal{O}_X$-가군 $\mathcal{F}'$을 택하자. 그러면 동형사상
+$$
+\Hom_X(\mathcal{F}, M) =
+H^0(X, M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{F}'[-d_x])
+$$
+이 있으며, 여기서 $d_x = \dim(\mathcal{O}_{X, x})$이고 동형사상은
+$D_{perf}(\mathcal{O}_X)$의 $M$에 대해 함자적이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$가 $x$에 지지되므로
+$$
+\Hom_X(\mathcal{F}, M) =
+\Hom_{\mathcal{O}_{X, x}}(\mathcal{F}_x, M_x)
+$$
+이고, 마찬가지로
+$$
+H^0(X, M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{F}'[-d_x]) =
+\text{Tor}^{\mathcal{O}_{X, x}}_{d_x}(M_x, \mathcal{F}'_x)
+$$
+이다. 따라서 차원 $d$인 뇌터 정칙 국소환 $A$와 유한 길이 $A$-가군
+$N$이 주어지고 $N'$이 $N$의 Matlis 쌍대이면 함자적 동형사상
+$$
+\Hom_A(N, K) = \text{Tor}^A_d(K, N')
+$$
+이 $D_{perf}(A)$의 $K$에 대해 존재함을 보이면 충분하다. 대수에 대한
+추가 내용의 보조정리 \ref{more-algebra-lemma-dual-perfect-complex}와
+$N$이 $D(A)$의 완전 대상을 정한다는 사실에 의해 왼쪽을
+$H^0(R\Hom_A(N, A) \otimes_A^\mathbf{L} K)$로 쓸 수 있다. 식
+$$
+R\Hom_A(N, A) = R\Hom_A(N, A[d])[-d] = N'[-d]
+$$
+은 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-dualizing-finite-length}와 $A[d]$가 $A$ 위의 정규화된
+쌍대화 복합체라는 사실에서 따른다. 여기서 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-regular-gorenstein}에 의해 $A$는 Gorenstein이다.
+따라서 원하는 공식이 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-orthogonal-point-sheaf}
+$k$를 체라 하고 $X$를 $k$ 위의 정칙 유한형 스킴이라 하자.
+$x \in X$를 닫힌점이라 하고, $x$에서 값 $\kappa(x)$를 갖는 마천루층을
+$\mathcal{O}_x$로 나타내자. $K$가 $D_{perf}(\mathcal{O}_X)$의 대상이라 하자.
+\begin{enumerate}
+\item $\Ext^i_X(\mathcal{O}_x, K) = 0$이면 $x$의 열린 근방 $U$가
+존재하여 $H^{i - d_x}(K)|_U = 0$이다. 여기서
+$d_x = \dim(\mathcal{O}_{X, x})$이다.
+\item 모든 $i \in \mathbf{Z}$에 대해 $\Hom_X(\mathcal{O}_x, K[i]) = 0$
+이면 $K$는 $x$의 어떤 열린 근방에서 영이다.
+\item $\Ext^i_X(K, \mathcal{O}_x) = 0$이면 $x$의 열린 근방 $U$가
+존재하여 $H^i(K^\vee)|_U = 0$이다.
+\item 모든 $i \in \mathbf{Z}$에 대해 $\Hom_X(K, \mathcal{O}_x[i]) = 0$
+이면 $K$는 $x$의 어떤 열린 근방에서 영이다.
+\item $H^i(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_x) = 0$이면
+$x$의 열린 근방 $U$가 존재하여 $H^i(K)|_U = 0$이다.
+\item $H^i(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_x) = 0$이
+모든 $i \in \mathbf{Z}$에 대해 성립하면 $K$는 $x$의 어떤 열린
+근방에서 영이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$H^i(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_x)$가
+$K_x  \otimes_{\mathcal{O}_{X, x}}^\mathbf{L} \kappa(x)$와 같음을 관찰하자.
+따라서 (5)는 대수에 대한 추가 내용의 보조정리
+\ref{more-algebra-lemma-cut-complex-in-two}에서 따르고, (6)은 (5)에서
+따른다. (1)은 (5), 보조정리 \ref{equiv-lemma-duality-at-point}, 그리고
+$\kappa(x)$의 Matlis 쌍대가 $\kappa(x)$라는 사실에서 따른다. (2)는
+(1)에서 따른다. (3)은 (5)와
+$\Ext^i(K, \mathcal{O}_x) =
+H^i(X, K^\vee \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_x)$라는
+사실에서 따른다. 이 사실은 코호몰로지의 보조정리
+\ref{cohomology-lemma-dual-perfect-complex}에 의한다. (4)는 (3)과 같은
+보조정리에 의한 $K \cong (K^\vee)^\vee$에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-hom-into-point-sheaf}
+$X$를 뇌터 스킴, $x \in X$를 닫힌점이라 하고 $x$에서 값
+$\kappa(x)$를 갖는 마천루층을 $\mathcal{O}_x$로 나타내자.
+$K$가 $D^b_{\textit{Coh}}(\mathcal{O}_X)$의 대상이고
+$b \in \mathbf{Z}$라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item 모든 $i > b$에 대해 $H^i(K)_x = 0$이다.
+\item 모든 $i > b$에 대해 $\Hom_X(K, \mathcal{O}_x[-i]) = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$D^b_{\textit{Coh}}(\mathcal{O}_{X, x})$의 복합체 $K_x$를 생각하자.
+정수 $b_x \in \mathbf{Z}$가 존재하여 $K_x$는 위로 유계인 복합체
+$$
+\ldots \to
+\mathcal{O}_{X, x}^{\oplus n_{b_x - 2}} \to
+\mathcal{O}_{X, x}^{\oplus n_{b_x - 1}} \to
+\mathcal{O}_{X, x}^{\oplus n_{b_x}} \to 0 \to \ldots
+$$
+로 나타낼 수 있다. 여기서 $\mathcal{O}_{X, x}^{\oplus n_i}$는 차수
+$i$에 놓이고 모든 전이사상은 계수가 $\mathfrak m_x$에 속하는 행렬로
+주어진다. 대수에 대한 추가 내용의 보조정리
+\ref{more-algebra-lemma-lift-pseudo-coherent-from-residue-field}를 보라.
+결과는 이로부터 쉽게 따르며, 두 동치 조건은 정확히 $b \geq b_x$일 때
+성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-get-fully-faithful-geometric}
+$k$를 체라 하고 $X$, $Y$를 $k$ 위의 고유 스킴이라 하자. $X$가
+정칙이라고 가정하자. 그러면 $k$-선형 완전 함자
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+가 완전충실일 필요충분조건은 임의의 닫힌점 $x, x' \in X$에 대해 사상
+$$
+F : \Ext^i_X(\mathcal{O}_x, \mathcal{O}_{x'})
+\longrightarrow
+\Ext^i_Y(F(\mathcal{O}_x), F(\mathcal{O}_{x'}))
+$$
+이 모든 $i \in \mathbf{Z}$에 대해 동형사상인 것이다. 여기서
+$\mathcal{O}_x$는 $x$에서 값 $\kappa(x)$를 갖는 마천루층이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-always-right-adjoints}에 의해 함자 $F$는 왼쪽 및
+오른쪽 수반함자를 모두 갖는다. 또한 보조정리
+\ref{equiv-lemma-get-fully-faithful}의 가정 (2), (3)은 보조정리
+\ref{equiv-lemma-orthogonal-point-sheaf}에서 따르므로 전자의 판정법을 적용할
+수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-noah-pre}
+\begin{reference}
+2020년 6월 9일 Noah Olander의 전자우편
+\end{reference}
+$k$를 체라 하고 $X$를 $k$ 위의 정칙 고유 스킴이라 하자.
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_X)$를 $k$-선형
+완전 함자라 하자. $\dim(\text{Supp}(\mathcal{F})) = 0$인 모든 연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$에 대해 동형사상
+$\mathcal{F} \cong F(\mathcal{F})$가 존재한다고 가정하자. 그러면
+$F$는 완전충실이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-get-fully-faithful-geometric}에 의해 사상
+$$
+F : \Ext^i_X(\mathcal{O}_x, \mathcal{O}_{x'})
+\longrightarrow
+\Ext^i_X(F(\mathcal{O}_x), F(\mathcal{O}_{x'}))
+$$
+이 모든 $i \in \mathbf{Z}$와 모든 닫힌점 $x, x' \in X$에 대해
+동형사상임을 보이면 충분하다. 가정에 의해 정의역과 공역은 동형이다.
+$x \not = x'$이면 양변 모두 영이므로 결과가 성립한다. $x = x'$이면
+사상이 단사 또는 전사임을 보이면 충분하다. $i < 0$이면 양변 모두
+영이므로 성립한다. $i = 0$이면 영이 아닌 임의의
+$\mathcal{O}_X$-가군 사상 $\alpha : \mathcal{O}_x \to \mathcal{O}_x$는
+동형사상이다. 따라서 $F(\alpha)$도 동형사상이고 특히
+$F(\alpha)$는 영이 아니다.
+이로써 $i = 0$인 경우가 성립한다. $i = 1$이면
+$\Ext^1(\mathcal{O}_x, \mathcal{O}_x)$의 영이 아닌 원소 $\xi$는 분할되지
+않는 짧은 완전열
+$$
+0 \to \mathcal{O}_x \to \mathcal{F} \to \mathcal{O}_x \to 0
+$$
+에 대응한다. $F(\mathcal{F}) \cong \mathcal{F}$이므로
+$F(\mathcal{F})$도 $\mathcal{O}_x$에 의한 $\mathcal{O}_x$의 분할되지
+않는 확대이다. $\mathcal{O}_x \cong F(\mathcal{O}_x)$는 단순
+$\mathcal{O}_X$-가군이고 $\mathcal{F} \cong F(\mathcal{F})$의 길이는
+$2$이므로 구별 삼각형
+$$
+F(\mathcal{O}_x) \to F(\mathcal{F}) \to F(\mathcal{O}_x)
+\xrightarrow{F(\xi)} F(\mathcal{O}_x)[1]
+$$
+에서 첫 두 화살표는 짧은 완전열을 이루어야 하고, 이 열은 위의 짧은
+완전열과 동형이므로 분할되지 않는다. 따라서 $F(\xi)$는 영이 아니고
+$i = 1$인 경우가 성립한다. $i > 1$이면 Ext 류의 합성이 전사
+$$
+\Ext^1(F(\mathcal{O}_x), F(\mathcal{O}_x)) \otimes \ldots \otimes
+\Ext^1(F(\mathcal{O}_x), F(\mathcal{O}_x))
+\longrightarrow
+\Ext^i(F(\mathcal{O}_x), F(\mathcal{O}_x))
+$$
+를 정의한다. 스킴의 쌍대성의 보조정리
+\ref{duality-lemma-regular-ideal-ext}를 보라. 따라서 차수 $1$에서의
+전사성은 $i > 0$에서의 전사성을 함의한다. 증명이 끝났다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{특수한 함자}
+\label{equiv-section-special-functors}
+
+\noindent
+이 절에서는 이 장의 뒤에서 사용할 특수한 유형의 함자에 관한 몇 가지
+결과를 증명한다.
+
+\begin{definition}
+\label{equiv-definition-siblings-geometric}
+$k$를 체라 하고 $X$, $Y$를 $k$ 위의 유한형 스킴이라 하자. 스킴의
+유도 범주의 명제 \ref{perfect-proposition-DCoh}에 의해
+$D^b_{\textit{Coh}}(\mathcal{O}_X) = D^b(\textit{Coh}(\mathcal{O}_X))$
+임을 상기하자. 두 $k$-선형 완전 함자
+$$
+F, F' :
+D^b_{\textit{Coh}}(\mathcal{O}_X) = D^b(\textit{Coh}(\mathcal{O}_X))
+\longrightarrow
+D^b_{\textit{Coh}}(\mathcal{O}_Y)
+$$
+가 아벨 범주를 $\textit{Coh}(\mathcal{O}_X)$로 두었을 때 정의
+\ref{equiv-definition-siblings}의 의미에서 형제이면, 이들을 {\it 형제}라 하거나
+$F'$를 $F$의 {\it 형제}라 한다. 이는 $F$와 $F'$가 바로 그 의미에서
+형제일 때이다. $X$가 정칙이면 스킴의 유도 범주의
+보조정리 \ref{perfect-lemma-perfect-on-noetherian}에 의해
+$D_{perf}(\mathcal{O}_X) = D^b_{\textit{Coh}}(\mathcal{O}_X)$이고,
+$k$-선형 완전 함자
+$F, F' : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$에도 같은
+용어를 사용한다.
+\end{definition}
+
+\begin{lemma}
+\label{equiv-lemma-exact-functor-preserving-Coh}
+$k$를 체라 하고 $X$, $Y$를 $k$ 위의 유한형 스킴으로서 $X$는
+분리라고 하자.
+$F : D^b_{\textit{Coh}}(\mathcal{O}_X) \to D^b_{\textit{Coh}}(\mathcal{O}_Y)$
+를 $k$-선형 완전 함자로서
+$\textit{Coh}(\mathcal{O}_X) \subset D^b_{\textit{Coh}}(\mathcal{O}_X)$
+를
+$\textit{Coh}(\mathcal{O}_Y) \subset D^b_{\textit{Coh}}(\mathcal{O}_Y)$로
+보낸다고 하자. 그러면 Fourier--Mukai 함자
+$F' : D^b_{\textit{Coh}}(\mathcal{O}_X) \to D^b_{\textit{Coh}}(\mathcal{O}_Y)$
+가 존재하여 $F$의 형제이고, 그 핵은 $X$ 위에서 평탄하며 $Y$ 위에서
+유한인 지지를 갖는 연접 $\mathcal{O}_{X \times Y}$-가군
+$\mathcal{K}$이다.
+\end{lemma}
+
+\begin{proof}
+$F$의 제한을
+$H : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_Y)$로
+나타내자. $F$가 삼각 범주의 완전 함자이므로 $H$는 아벨 범주의 완전
+함자이고, $F$가 $k$-선형이므로 물론 $H$도 그러하다. 함자와 사상의
+보조정리 \ref{functors-lemma-functor-coherent-over-field}에 의해 $X$ 위에서
+평탄하며 $Y$ 위에서 유한인 지지를 갖는 연접
+$\mathcal{O}_{X \times Y}$-가군 $\mathcal{K}$를 얻는다.
+$\mathcal{K}$를 사용하여 Fourier--Mukai 함자 $F'$를 정의하자. 그러면
+$F'$를 $\textit{Coh}(\mathcal{O}_X)$에 제한한 함자는 $H$이다. 보조정리
+\ref{equiv-lemma-fourier-mukai-Coh}에 의해 $F'$는
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$를
+$D^b_{\textit{Coh}}(\mathcal{O}_Y)$로 보낸다. $F$와 $F'$는 보조정리
+\ref{equiv-lemma-sibling-fully-faithful}의 첫째와 둘째 조건을 만족하므로 형제이다.
+\end{proof}
+
+\begin{remark}
+\label{equiv-remark-difficult}
+$F, F' : D^b_{\textit{Coh}}(\mathcal{O}_X) \to \mathcal{D}$가 형제이고
+$F$가 완전충실이며 $X$가 $k$ 위의 축약 사영 스킴이면
+$F \cong F'$이다. 이는 명제 \ref{equiv-proposition-siblings-isomorphic}에서
+따르며, 그 증명은 정리 \ref{equiv-theorem-fully-faithful}의 증명에 주어진
+논증을 따른다.
+그러나 일반적으로는 형제들이 동형인지 모른다. 보조정리
+\ref{equiv-lemma-exact-functor-preserving-Coh}의 상황에서도 형제 $F$, $F'$가
+동형인 함자임을 증명하기는 어려워 보인다. $X$가 $k$ 위에서 매끄럽고
+고유하며 $F$가 완전충실이면 \cite{Noah}에서 보인 것처럼
+$F \cong F'$이다. 더 일반적인 상황에서 증명이나 반례가 있다면
+\href{mailto:stacks.project@gmail.com}{stacks.project@gmail.com}으로 전자우편을
+보내 주기 바란다.
+\end{remark}
+
+\begin{lemma}
+\label{equiv-lemma-two-functors-pre}
+$k$를 체라 하고 $X$, $Y$를 $k$ 위의 고유 스킴으로서 $X$는 정칙이라고
+하자.
+$F, G : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+를 다음을 만족하는 $k$-선형 완전 함자라 하자.
+\begin{enumerate}
+\item $\dim(\text{Supp}(\mathcal{F})) = 0$인 임의의 연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$에 대해
+$F(\mathcal{F}) \cong G(\mathcal{F})$이다.
+\item $F$는 완전충실이다.
+\end{enumerate}
+그러면 $G$의 본질적 상은 $F$의 본질적 상에 포함된다.
+\end{lemma}
+
+\begin{proof}
+$F$와 $G$가 두 수반함자를 모두 가짐을 상기하자. 보조정리
+\ref{equiv-lemma-always-right-adjoints}를 보라. 특히 $F$의 본질적 상
+$\mathcal{A} \subset D_{perf}(\mathcal{O}_Y)$는 유도 범주의 보조정리
+\ref{derived-lemma-right-adjoint}의 동치 조건들을 만족한다. $G$가
+$\mathcal{A}$를 통해 분해됨을 보이겠다. 같은 보조정리에 의해
+$\mathcal{A} = {}^\perp(\mathcal{A}^\perp)$이므로(유도 범주의 보조정리
+\ref{derived-lemma-right-adjoint}) 모든 $M$이
+$D_{perf}(\mathcal{O}_X)$의 대상이고 $N \in \mathcal{A}^\perp$일 때
+$\Hom_Y(G(M), N) = 0$임을 보이면 충분하다. 다음 등식이 성립한다.
+$$
+\Hom_Y(G(M), N) = \Hom_X(M, G_r(N))
+$$
+여기서 $G_r$은 $G$의 오른쪽 수반함자이다. 따라서 $G_r(N) = 0$임을
+증명하면 충분하다. (1)과 같은 $\mathcal{F}$에 대해
+$G(\mathcal{F}) \cong F(\mathcal{F})$이므로
+$$
+\Hom_X(\mathcal{F}, G_r(N)) =
+\Hom_Y(G(\mathcal{F}), N) =
+\Hom_Y(F(\mathcal{F}), N) = 0
+$$
+이다. 이는 $N$이 $F$의 본질적 상 $\mathcal{A}$의 오른쪽 직교에 속하기
+때문이다. 물론 임의의 $i \in \mathbf{Z}$에 대해
+$\Hom_X(\mathcal{F}, G_r(N)[i])$에도 같은 소멸이 성립한다. 따라서
+보조정리 \ref{equiv-lemma-orthogonal-point-sheaf}에 의해 $G_r(N) = 0$이고,
+원하는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-noah}
+\begin{reference}
+2020년 6월 8일 Noah Olander의 전자우편
+\end{reference}
+$k$를 체라 하고 $X$를 $k$ 위의 정칙 고유 스킴이라 하자.
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_X)$를 $k$-선형
+완전 함자라 하자. $\dim(\text{Supp}(\mathcal{F})) = 0$인 모든 연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$에 대해 동형사상
+$\mathcal{F} \cong F(\mathcal{F})$가 존재한다고 가정하자. 그러면 바탕
+위상공간에 항등사상을 유도하는\footnote{이는 흔히 $f$가 항등사상이도록
+강제한다. 다양체의 보조정리 \ref{varieties-lemma-automorphism}을 보라.}
+$k$ 위의 자기동형사상 $f : X \to X$와 가역 $\mathcal{O}_X$-가군
+$\mathcal{L}$이 존재하여 $F$와
+$F'(M) = f^*M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{L}$은 형제이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-noah-pre}에 의해 함자 $F$는 완전충실이다. 보조정리
+\ref{equiv-lemma-two-functors-pre}에 의해 항등함자의 본질적 상은 $F$의 본질적
+상에 포함된다. 즉 $F$는 본질적으로 전사이다. 따라서 $F$는 동치이다.
+준역함자 $F^{-1}$도 $F$와 같은 가정을 만족함을 관찰하자.
+
+\medskip\noindent
+$M \in D_{perf}(\mathcal{O}_X)$이고 $i > b$이면 $H^i(M) = 0$이라고 하자.
+$F$가 완전충실이므로
+$$
+\Hom_X(M, \mathcal{O}_x[-i]) =
+\Hom_X(F(M), F(\mathcal{O}_x)[-i]) \cong
+\Hom_X(F(M), \mathcal{O}_x[-i])
+$$
+가 모든 $i \in \mathbf{Z}$와 $X$의 모든 닫힌점 $x$에 대해 성립한다. 따라서
+보조정리 \ref{equiv-lemma-hom-into-point-sheaf}에 의해 $F(M)$의 코호몰로지층은
+차수 $> b$에서 소멸한다.
+
+\medskip\noindent
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자. 위의 결과에 의해
+$F(\mathcal{F})$는 차수 $\leq 0$에서만 영이 아닌 코호몰로지층을 갖는다.
+$\mathcal{G} = H^0(F(\mathcal{F}))$로 놓고 구별 삼각형
+$$
+K \to F(\mathcal{F}) \to \mathcal{G} \to K[1]
+$$
+을 택하자. 그러면 $K$는 차수 $\leq -1$에서만 영이 아닌 코호몰로지층을
+갖는다. $F^{-1}$을 적용하면 구별 삼각형
+$$
+F^{-1}(K) \to \mathcal{F} \to F^{-1}(\mathcal{G}) \to F^{-1}(K')[1]
+$$
+을 얻는다. $F^{-1}$에 앞 문단을 적용하면 $F^{-1}(K)$는 차수
+$\leq -1$에서만 영이 아닌 코호몰로지층을 가지므로 화살표
+$F^{-1}(K) \to \mathcal{F}$는 영이다(유도 범주의 보조정리
+\ref{derived-lemma-negative-exts}). 따라서 $K \to F(\mathcal{F})$는
+영이고, 처음 구별 삼각형의 선택에 의해
+$F(\mathcal{F}) = \mathcal{G}$이다.
+
+\medskip\noindent
+앞 문단에서 $F$가 $\textit{Coh}(\mathcal{O}_X)$를 보존하고 실제로 동치
+$H : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_X)$를
+정의함을 얻는다. 함자와 사상의 보조정리
+\ref{functors-lemma-equivalence-coherent-over-field}에 의해 $k$ 위의
+자기동형사상 $f : X \to X$와 가역 $\mathcal{O}_X$-가군
+$\mathcal{L}$을 얻어
+$H(\mathcal{F}) = f^*\mathcal{F} \otimes \mathcal{L}$이 된다.
+$F'(M) = f^*M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{L}$로 놓자.
+보조정리 \ref{equiv-lemma-sibling-fully-faithful}에 의해 $F$와 $F'$는 형제이다.
+$F(\mathcal{O}_x) \cong \mathcal{O}_x$이고 $\mathcal{O}_x$의 지지가
+$\{x\}$라는 사실에서 $f$가 $X$의 바탕 위상공간에 항등사상을 유도함을
+알 수 있다. 증명이 끝났다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-two-functors}
+$k$를 체라 하고 $X$, $Y$를 $k$ 위의 고유 스킴으로서 $X$는 정칙이라고
+하자.
+$F, G : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+를 다음을 만족하는 $k$-선형 완전 함자라 하자.
+\begin{enumerate}
+\item $\dim(\text{Supp}(\mathcal{F})) = 0$인 임의의 연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$에 대해
+$F(\mathcal{F}) \cong G(\mathcal{F})$이다.
+\item $F$는 완전충실이다.
+\item $G$는 그 핵이 $D_{perf}(\mathcal{O}_{X \times Y})$에 속하는
+Fourier--Mukai 함자이다.
+\end{enumerate}
+그러면 Fourier--Mukai 함자
+$F' : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+가 존재하여 그 핵은 $D_{perf}(\mathcal{O}_{X \times Y})$에 속하고,
+$F$와 $F'$는 형제이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-two-functors-pre}에 의해 $G$의 본질적 상은 $F$의
+본질적 상에 포함된다. $F$가 완전충실이므로 의미가 있는 함자
+$H = F^{-1} \circ G$를 생각하자. 보조정리 \ref{equiv-lemma-noah}에 의해
+자기동형사상 $f : X \to X$와 가역 $\mathcal{O}_X$-가군
+$\mathcal{L}$을 얻어 함자 $H' : K \mapsto f^*K \otimes \mathcal{L}$이
+$H$의 형제가 된다. 특히 보조정리 \ref{equiv-lemma-sibling-faithful}에 의해
+$H$는 자기동치이고, 그 형제 함자 $H'$가 그러하므로 $H$는
+$\textit{Coh}(\mathcal{O}_X)$의 자기동치를 유도한다. 따라서 준역함자
+$H^{-1}$과 $(H')^{-1}$이 존재하고 형제이며(작은 세부사항은 생략한다),
+$(H')^{-1}$은 $M$을
+$(f^{-1})^*(M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{L}^{\otimes -1})$
+로 보낸다. 이는 Fourier--Mukai 함자이다(세부사항은 생략한다). 물론
+$F = G \circ H^{-1}$은 $G \circ (H')^{-1}$의 형제이다. 보조정리
+\ref{equiv-lemma-compose-fourier-mukai}에 의해 Fourier--Mukai 함자들의 합성은
+Fourier--Mukai 함자이므로 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+\section{완전충실 함자}
+\label{equiv-section-fully-faithful}
+
+\noindent
+우리의 목표는 \cite{Orlov-K3}와 \cite{Ballard}를 따라 유도 범주 사이의
+완전충실 함자가 Fourier--Mukai 함자의 형제임을 증명하는 것이다.
+
+\begin{situation}
+\label{equiv-situation-fully-faithful}
+여기서 $k$는 체이고, $X$, $Y$는 $k$ 위의 고유 매끄러운 스킴이며,
+$k$-선형 완전충실 완전 함자
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$를 고정한다.
+\end{situation}
+
+\noindent
+계속 읽기 전에 유도 범주의 절 \ref{derived-section-postnikov}을 적어도
+일부 읽어 두는 것이 좋다.
+
+\medskip\noindent
+$X$가 정칙이고 따라서 분해 성질을 가짐을 상기하자(다양체의 보조정리
+\ref{varieties-lemma-smooth-regular}와 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-regular-resolution-property}). 따라서 $X \times X$ 위에서
+분해
+$$
+\ldots \to
+\mathcal{E}_2 \boxtimes \mathcal{G}_2 \to
+\mathcal{E}_1 \boxtimes \mathcal{G}_1 \to
+\mathcal{E}_0 \boxtimes \mathcal{G}_0 \to
+\mathcal{O}_\Delta \to 0
+$$
+를 택할 수 있다. 여기서 각 $\mathcal{E}_i$와 $\mathcal{G}_i$는 유한
+국소 자유 $\mathcal{O}_X$-가군이다. 보조정리
+\ref{equiv-lemma-diagonal-resolution}을 보라. 복합체
+\begin{equation}
+\label{equiv-equation-original-complex}
+\ldots \to
+\mathcal{E}_2 \boxtimes \mathcal{G}_2 \to
+\mathcal{E}_1 \boxtimes \mathcal{G}_1 \to
+\mathcal{E}_0 \boxtimes \mathcal{G}_0
+\end{equation}
+를 $D_{perf}(\mathcal{O}_{X \times X})$에서 사용하자. 유도 범주의 예
+\ref{derived-example-key-postnikov}와 같이
+각 $n$에 대해
+$$
+M_n = (\mathcal{E}_n \boxtimes \mathcal{G}_n \to \ldots \to
+\mathcal{E}_0 \boxtimes \mathcal{G}_0)[-n]
+$$
+로 나타내면 복합체 (\ref{equiv-equation-original-complex})의 무한 Postnikov 계를
+얻는다. 이는 사상 $M_0 \to M_1[1] \to M_2[2] \to \ldots$,
+$M_n \to \mathcal{E}_n \boxtimes \mathcal{G}_n$,
+$\mathcal{E}_n \boxtimes \mathcal{G}_n \to M_{n - 1}$이 유도 범주의 정의
+\ref{derived-definition-postnikov-system}에 기록된 조건들을 만족한다는
+뜻이다. 다음과 같이 놓자.
+$$
+\mathcal{F}_n = \Ker(\mathcal{E}_n \boxtimes \mathcal{G}_n \to
+\mathcal{E}_{n - 1} \boxtimes \mathcal{G}_{n - 1})
+$$
+$\mathcal{O}_\Delta$가 $\text{pr}_1$을 통해 $X$ 위에서 평탄하므로 모든
+$n$에 대해 $\mathcal{F}_n$도 그러하다. 이는 편리하지만 본질적이지는
+않은 관찰이다. 다음이 성립한다.
+$$
+H^q(M_n[n]) = \left\{
+\begin{matrix}
+\mathcal{O}_\Delta & \text{인 경우} & q = 0 \\
+\mathcal{F}_n & \text{인 경우} & q = -n \\
+0 & \text{인 경우} & q \not = 0, -n
+\end{matrix}
+\right.
+$$
+따라서 $n \geq \dim(X \times X)$이면
+$$
+M_n[n] \cong \mathcal{O}_\Delta \oplus \mathcal{F}_n[n]
+$$
+가 보조정리 \ref{equiv-lemma-split-complex-regular}에 의해
+$D_{perf}(\mathcal{O}_{X \times X})$에서 성립한다.
+
+\medskip\noindent
+우리는 복합체
+\begin{equation}
+\label{equiv-equation-complex}
+\ldots \to
+\mathcal{E}_2 \boxtimes F(\mathcal{G}_2) \to
+\mathcal{E}_1 \boxtimes F(\mathcal{G}_1) \to
+\mathcal{E}_0 \boxtimes F(\mathcal{G}_0)
+\end{equation}
+에 $D_{perf}(\mathcal{O}_{X \times Y})$에서 관심이 있다. 이 복합체의
+``전체화''가 우리가 구성하려는
+Fourier--Mukai 함자의 핵을 주어야 하기 때문이다. 모든 $i, j \geq 0$에
+대해
+\begin{align*}
+\Ext^q_{X \times Y}(\mathcal{E}_i \boxtimes F(\mathcal{G}_i),
+\mathcal{E}_j \boxtimes F(\mathcal{G}_j))
+& =
+\bigoplus\nolimits_p
+\Ext^{q + p}_X(\mathcal{E}_i, \mathcal{E}_j) \otimes_k
+\Ext^{-p}_Y(F(\mathcal{G}_i), F(\mathcal{G}_j)) \\
+& =
+\bigoplus\nolimits_p
+\Ext^{q + p}_X(\mathcal{E}_i, \mathcal{E}_j) \otimes_k
+\Ext^{-p}_X(\mathcal{G}_i, \mathcal{G}_j)
+\end{align*}
+이다. 두 번째 등식은 $F$가 완전충실이기 때문이고, 첫 번째 등식은
+스킴의 유도 범주의 보조정리 \ref{perfect-lemma-kunneth-Ext}에 의한다.
+$q < 0$이면 이 $\Ext^q$들이 영임을 얻는다. 따라서 유도 범주의 보조정리
+\ref{derived-lemma-existence-postnikov-system}에 의해 복합체
+(\ref{equiv-equation-complex})의 무한 Postnikov 계
+$K_0, K_1, K_2, \ldots$를 $D_{perf}(\mathcal{O}_{X \times Y})$에서
+구성할 수 있다. $M_0, M_1, M_2, \ldots$의 경우와 평행하게, 이는 사상
+$K_0 \to K_1[1] \to K_2[2] \to \ldots$,
+$K_n \to \mathcal{E}_n \boxtimes F(\mathcal{G}_n)$ 및
+$\mathcal{E}_n \boxtimes F(\mathcal{G}_n) \to K_{n - 1}$
+을 $D_{perf}(\mathcal{O}_{X \times Y})$에서 얻고 이들이 유도 범주의 정의
+\ref{derived-definition-postnikov-system}에 기록된 조건들을 만족한다는
+뜻이다.
+
+\medskip\noindent
+$\mathcal{F}$를 지지가 유한 개의 점을 갖는 연접
+$\mathcal{O}_X$-가군, 즉 $\dim(\text{Supp}(\mathcal{F})) = 0$인 가군이라
+하자. 삼각 범주의 완전 함자
+$$
+D_{perf}(\mathcal{O}_{X \times Y})
+\longrightarrow
+D_{perf}(\mathcal{O}_Y),\quad
+N \longmapsto R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times Y}} N)
+$$
+를 생각하자. 그러면 대상
+$R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times Y}} K_i)$들은
+$D_{perf}(\mathcal{O}_Y)$에서 항이
+$$
+R\text{pr}_{2, *}(
+(\mathcal{F} \otimes \mathcal{E}_i) \boxtimes F(\mathcal{G}_i)) =
+\Gamma(X, \mathcal{F} \otimes \mathcal{E}_i) \otimes_k F(\mathcal{G}_i) =
+F(\Gamma(X, \mathcal{F} \otimes \mathcal{E}_i) \otimes_k \mathcal{G}_i)
+$$
+인 복합체의 Postnikov 계를 이룬다. 여기서는
+$\mathcal{F} \otimes \mathcal{E}_i$의 지지 차원이 $0$이므로 고차
+코호몰로지가 소멸한다는 사실을 사용했다. 한편 완전 함자
+$$
+D_{perf}(\mathcal{O}_{X \times X})
+\longrightarrow
+D_{perf}(\mathcal{O}_Y),\quad
+N \longmapsto F(R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times X}} N))
+$$
+를 적용하면 대상
+$F(R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times X}} M_n))$
+들이 $D_{perf}(\mathcal{O}_Y)$에서 항이
+$$
+F(R\text{pr}_{2, *}(
+(\mathcal{F} \otimes \mathcal{E}_i) \boxtimes \mathcal{G}_i)) =
+F(\Gamma(X, \mathcal{F} \otimes \mathcal{E}_i) \otimes_k \mathcal{G}_i)
+$$
+인 복합체의 두 번째 무한 Postnikov 계를 이룸을 얻는다. 이는 앞의
+복합체와 같다. $F$가 완전충실이어서
+$$
+\Ext^q_Y(
+F(\Gamma(X, \mathcal{F} \otimes \mathcal{E}_i) \otimes_k \mathcal{G}_i),
+F(\Gamma(X, \mathcal{F} \otimes \mathcal{E}_j) \otimes_k \mathcal{G}_j)) = 0,
+\quad q < 0
+$$
+이고, 따라서 적용할 수 있는 Postnikov 계의 유일성(유도 범주의 보조정리
+\ref{derived-lemma-existence-postnikov-system})에 의해 동형사상들의 계
+$$
+F(R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times X}} M_n[n]))
+\cong
+R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times Y}} K_n[n])
+$$
+를 $D_{perf}(\mathcal{O}_Y)$에서 얻는다. 이는 다음 Postnikov 계의 구조
+일부인 사상들이 $D_{perf}(\mathcal{O}_Y)$에서 유도하는 사상들과
+양립한다.
+$$
+M_{n - 1}[n - 1] \to M_n[n]
+\quad\text{및}\quad
+K_{n - 1}[n - 1] \to K_n[n]
+$$
+$$
+M_n \to \mathcal{E}_n \boxtimes \mathcal{G}_n
+\quad\text{및}\quad
+K_n \to \mathcal{E}_n \boxtimes F(\mathcal{G}_n)
+$$
+$$
+\mathcal{E}_n \boxtimes \mathcal{G}_n \to M_{n - 1}
+\quad\text{및}\quad
+\mathcal{E}_n \boxtimes F(\mathcal{G}_n) \to K_{n - 1}
+$$
+충분히 큰 $n$에 대해 직합분해
+$$
+F(R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times X}} M_n[n]))
+=
+F(\mathcal{F}) \oplus
+F(R\text{pr}_{2, *}(
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}} \mathcal{F}_n
+))[n]
+$$
+를 얻으며, 이는 위에서 구성한 $M_n$의 직합분해에 대응한다. 위의 식에
+통상적 텐서곱을 쓰기 위해 $\mathcal{F}_n$이 $\text{pr}_1$을 통해
+$X$ 위에서 평탄하다는 사실을 사용했지만 논증에는 본질적이지 않다.
+보조정리 \ref{equiv-lemma-boundedness}에 의해 정수 $m \geq 0$이 존재하여 이
+직합분해의 첫 직합인자는 $[-m, m]$ 안에서만 영이 아닌 코호몰로지층을
+갖고, 두 번째 직합인자는 $[-m - n, m + \dim(X) - n]$ 안에서만 영이
+아닌 코호몰로지층을 갖는다. 따라서 필요하면 $m$을 더 큰 정수로
+바꾼 뒤 $D_{perf}(\mathcal{O}_{X \times Y})$의 계
+$K_0 \to K_1[1] \to K_2[2] \to \ldots$가 보조정리
+\ref{equiv-lemma-bounded-fibres}의 가정을 만족한다. 따라서
+$$
+K_n[n] = K \oplus C_n
+$$
+로 쓸 수 있다. 이는 $n \gg 0$에서 전이사상과 양립하며, $C_n$은
+$[-m - n, m - n]$ 안에서만 영이 아닌 코호몰로지층을 갖는다.
+$K$에 대응하는 Fourier--Mukai 함자를 $G$로 나타내자. 모든 것을 합치면
+$$
+\begin{matrix}
+G(\mathcal{F}) \oplus
+R\text{pr}_{2, *}(
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}}^\mathbf{L} C_n)
+\cong \\
+R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times Y}} K_n[n]) \cong \\
+F(R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times X}} M_n[n]))
+\cong \\
+F(\mathcal{F}) \oplus
+F(R\text{pr}_{2, *}(
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}} \mathcal{F}_n
+))[n]
+\end{matrix}
+$$
+를 얻는다. 대상들이 놓이는 차수를 살펴보면 $n \gg m$일 때 동형사상
+$$
+F(\mathcal{F}) \cong G(\mathcal{F})
+$$
+을 얻는다. 더욱이 이는 지지 차원이 $0$인 $X$ 위의 모든 연접
+$\mathcal{F}$에 대해 성립함을 상기하자.
+
+\begin{lemma}
+\label{equiv-lemma-fully-faithful}
+$k$를 체라 하고, $X$와 $Y$를 $k$ 위의 매끄럽고 고유한 스킴이라 하자.
+$k$-선형 완전충실 완전 함자
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+가 주어지면, 그 핵이 $D_{perf}(\mathcal{O}_{X \times Y})$에 속하고
+$F$의 형제인 Fourier--Mukai 함자
+$F' : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$F$와 위에서 구성한 함자 $G$에 보조정리 \ref{equiv-lemma-two-functors}를 적용한다.
+\end{proof}
+
+\noindent
+다음 정리는 $X$가 사영적이라는 가정 없이도 참이다. \cite{Noah}를 보라.
+
+\begin{theorem}[Orlov]
+\label{equiv-theorem-fully-faithful}
+\begin{reference}
+\cite[정리 2.2]{Orlov-K3}; $X$가 사영적이라는 가정이 없는 경우는
+\cite{Noah}에서 증명되었다
+\end{reference}
+$k$를 체라 하자. $X$와 $Y$를 $k$ 위의 매끄럽고 고유한 스킴이라 하고,
+$X$는 $k$ 위에서 사영적이라 하자. 임의의 $k$-선형 완전충실 완전 함자
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$는
+$D_{perf}(\mathcal{O}_{X \times Y})$에 속하는 어떤 핵에 대한
+Fourier--Mukai 함자이다.
+\end{theorem}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-fully-faithful}에서처럼 $F$의 형제인 Fourier--Mukai 함자를
+$F'$이라 하자. $\textit{Coh}(\mathcal{O}_X)$가 충분한 음의 대상을 가짐을
+보일 수 있다면 명제 \ref{equiv-proposition-siblings-isomorphic}에 의해
+$F \cong F'$이다. 그러나 예를 들어 $X = \Spec(k)$이면 이는 참이 아니다.
+따라서 먼저 $X = \coprod X_i$를 연결(따라서 기약인) 성분들로 분해하고,
+각 (완전충실) 합성함자
+$$
+F_i :
+D_{perf}(\mathcal{O}_{X_i}) \to
+D_{perf}(\mathcal{O}_X) \to
+D_{perf}(\mathcal{O}_Y)
+$$
+에 대해 결과를 증명하면 충분함을 논증한다. 세부사항은 생략한다. 그러므로
+$X$가 기약이라고 가정할 수 있다.
+
+\medskip\noindent
+$\dim(X) = 0$인 경우. 이때 $X$는 유한 (분리) 확대 $k'/k$의 스펙트럼이고,
+따라서 $D_{perf}(\mathcal{O}_X)$는 $\mathcal{O}_X$가 차수 $0$의 자명한
+$1$차원 벡터공간에 대응하는 등급 $k'$-벡터공간들의 범주와 동치이다.
+임의의 두 형제
+$F, F' : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$가
+동형임은 쉽게 알 수 있다. 실제로 $k$-대수
+$k' = \text{End}_{D_{perf}(\mathcal{O}_X)}(\mathcal{O}_X)$의 작용과 양립하는
+동형사상
+$F(\mathcal{O}_X) \cong F'(\mathcal{O}_X)$
+가 주어지며, 이는 임의의 등급 $k'$-벡터공간 위의 동형사상으로 표준적으로
+확장된다.
+
+\medskip\noindent
+$\dim(X) > 0$인 경우. 이때 $X$는 차원 $> 1$인 사영 매끄러운 다양체이다.
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자. 다음을 만족하는 연접 가군
+$\mathcal{N}$이 존재함을 보여야 한다.
+\begin{enumerate}
+\item 전사사상 $\mathcal{N} \to \mathcal{F}$가 존재하고,
+\item $\Hom(\mathcal{F}, \mathcal{N}) = 0$.
+\end{enumerate}
+풍부한 가역 $\mathcal{O}_X$-가군 $\mathcal{L}$을 택하자. $n \ll 0$이고
+$r$이 충분히 크면 $\mathcal{N} = (\mathcal{L}^{\otimes n})^{\oplus r}$로
+둘 수 있다고 주장한다. 조건 (1)은 성질, 명제
+\ref{properties-proposition-characterize-ample}에서 따른다. 마지막으로
+$$
+\Hom(\mathcal{F}, \mathcal{L}^{\otimes n}) =
+H^0(X, \SheafHom(\mathcal{F}, \mathcal{L}^{\otimes n})) =
+H^0(X, \SheafHom(\mathcal{F}, \mathcal{O}_X) \otimes \mathcal{L}^{\otimes n})
+$$
+이다. 쌍대 $\SheafHom(\mathcal{F}, \mathcal{O}_X)$는 꼬임이 없으므로,
+다양체, 보조정리 \ref{varieties-lemma-vanishin-h0-negative}에 의해 이는
+$n \ll 0$에서 영이다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{proposition}
+\label{equiv-proposition-equivalence}
+$k$를 체라 하고, $X$와 $Y$를 $k$ 위의 매끄럽고 고유한 스킴이라 하자.
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$가 삼각 범주들의
+$k$-선형 완전 동치이면, 그 핵이 $D_{perf}(\mathcal{O}_{X \times Y})$에
+속하고 $F$의 형제인 동치 Fourier--Mukai 함자
+$F' : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$가 존재한다.
+\end{proposition}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-fully-faithful}의 함자 $F'$은 보조정리
+\ref{equiv-lemma-sibling-faithful}에 의해 동치이다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-uniqueness}
+$k$를 체라 하고, $X$를 $k$ 위의 매끄럽고 고유한 스킴이라 하자.
+$K \in D_{perf}(\mathcal{O}_{X \times X})$라 하자. Fourier--Mukai 함자
+$\Phi_K : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_X)$가 항등함자와
+동형이면, $_{perf}(\mathcal{O}_{X \times X})$에서
+$K \cong \Delta_*\mathcal{O}_X$이다.
+\end{lemma}
+
+\begin{proof}
+코호몰로지층 $H^i(K)$가 영이 아니게 되는 최소 정수를 $i$라 하자.
+$\mathcal{E}$와 $\mathcal{G}$를 유한 국소자유 $\mathcal{O}_X$-가군이라 하자.
+그러면
+\begin{align*}
+H^i(X \times X, K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L}
+(\mathcal{E} \boxtimes \mathcal{G}))
+& =
+H^i(X, R\text{pr}_{2, *}(K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L}
+(\mathcal{E} \boxtimes \mathcal{G}))) \\
+& =
+H^i(X, \Phi_K(\mathcal{E}) \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{G}) \\
+& \cong
+H^i(X, \mathcal{E} \otimes \mathcal{G})
+\end{align*}
+이고, 이는 $i < 0$이면 영이다. 한편 보조정리 \ref{equiv-lemma-on-product}에 의해
+전사사상 $\mathcal{E}^\vee \boxtimes \mathcal{G}^\vee \to H^i(K)$가
+존재하도록 $\mathcal{E}$와 $\mathcal{G}$를 택할 수 있다. 이 경우 위
+등식들의 좌변은 영이 아니다. 따라서 $i < 0$이면 $H^i(K) = 0$이다.
+
+\medskip\noindent
+$H^i(K)$가 영이 아니게 되는 최대 정수를 $i$라 하자. 지지 차원이 $0$인
+$\mathcal{E}$와 $\mathcal{G}$에 같은 논증을 적용하면 $i \leq 0$임을 알 수
+있다. 따라서 $K$는 차수 $0$에 놓인 하나의 연접
+$\mathcal{O}_{X \times X}$-가군 $\mathcal{K}$로 주어진다.
+
+\medskip\noindent
+$R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})$가
+$\mathcal{F}$이므로, 닫힌 점들에 지지되는 $\mathcal{F}$를 취하면
+$\mathcal{K}$의 지지가 $\text{pr}_2$를 통해 $X$ 위에서 유한임을 알 수 있다.
+$R\text{pr}_{2, *}(\mathcal{K}) \cong \mathcal{O}_X$이므로 함자와 사상,
+보조정리
+\ref{functors-lemma-pushforward-invertible-pre}
+에 의해 둘째 사영의 어떤 단면 $s : X \to X \times X$에 대해
+$\mathcal{K} = s_*\mathcal{O}_X$이다. 그러면 $f = \text{pr}_1 \circ s$라 할 때
+$\Phi_K(M) = f^*M$이고, 이는 $s$가 대각사상일 때에만 가능하다. 이것이
+원하는 결론이다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{Fourier--Mukai 핵들의 범주}
+\label{equiv-section-category-Fourier-Mukai-kernels}
+
+\noindent
+$S$를 스킴이라 하자. 다음과 같은 범주가 존재한다고 주장한다.
+\begin{enumerate}
+\item 대상은 $S$ 위의 고유하고 매끄러운 스킴이다.
+\item $X$에서 $Y$로 가는 사상은
+$D_{perf}(\mathcal{O}_{X \times_S Y})$의 대상들의 동형류이다.
+\item $K \in D_{perf}(\mathcal{O}_{X \times_S Y})$의 동형류와
+$D_{perf}(\mathcal{O}_{Y \times_S Z})$에 속하는 $K'$의 동형류의 합성은
+다음 대상의 동형류이다.
+$$
+R\text{pr}_{13, *}(
+L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S Z}}^\mathbf{L}
+L\text{pr}_{23}^*K')
+$$
+이는 스킴의 유도 범주, 보조정리
+\ref{perfect-lemma-flat-proper-perfect-direct-image-general}에 의해
+$D_{perf}(\mathcal{O}_{X \times_S Z})$에 속한다.
+\item $X$에서 $X$로 가는 항등사상은
+$\Delta_{X/S, *}\mathcal{O}_X$의 동형류이다. 이는 사상에 대한 보충,
+보조정리
+\ref{more-morphisms-lemma-perfect-closed-immersion-perfect-direct-image}
+와 나눗수, 보조정리
+\ref{divisors-lemma-immersion-smooth-into-smooth-regular-immersion} 및
+사상에 대한 보충, 보조정리
+\ref{more-morphisms-lemma-regular-immersion-perfect}에 의해 $\Delta_{X/S}$가
+완전 사상이라는 사실로부터 $D_{perf}(\mathcal{O}_{X \times_S X})$에 속한다.
+\end{enumerate}
+사상 합성의 결합법칙이 성립함을 확인하자. 항등사상들이 실제로 항등원임을
+확인하는 일은 생략한다. 이를 위해 $X, Y, Z, W$와
+$c \in D_{perf}(\mathcal{O}_{X \times_S Y})$,
+$c' \in D_{perf}(\mathcal{O}_{Y \times_S Z})$ 및
+$c'' \in D_{perf}(\mathcal{O}_{Z \times_S W})$가 주어졌다고 하자. 그러면
+\begin{align*}
+c'' \circ (c' \circ c)
+& \cong
+\text{pr}^{134}_{14, *}(
+\text{pr}^{134, *}_{13}
+\text{pr}^{123}_{13, *}(\text{pr}^{123, *}_{12}c \otimes
+\text{pr}^{123, *}_{23}c')
+\otimes \text{pr}^{134, *}_{34}c'') \\
+& \cong
+\text{pr}^{134}_{14, *}(
+\text{pr}^{1234}_{134, *}
+\text{pr}^{1234, *}_{123}(\text{pr}^{123, *}_{12}c \otimes
+\text{pr}^{123, *}_{23}c')
+\otimes \text{pr}^{134, *}_{34}c'') \\
+& \cong
+\text{pr}^{134}_{14, *}(
+\text{pr}^{1234}_{134, *}
+(\text{pr}^{1234, *}_{12}c \otimes
+\text{pr}^{1234, *}_{23}c')
+\otimes \text{pr}^{134, *}_{34}c'') \\
+& \cong
+\text{pr}^{134}_{14, *}
+\text{pr}^{1234}_{134, *}
+((\text{pr}^{1234, *}_{12}c \otimes
+\text{pr}^{1234, *}_{23}c')
+\otimes \text{pr}^{1234, *}_{34}c'') \\
+& \cong
+\text{pr}^{1234}_{14, *}(
+(\text{pr}^{1234, *}_{12}c \otimes
+\text{pr}^{1234, *}_{23}c') \otimes
+\text{pr}^{1234, *}_{34}c'')
+\end{align*}
+여기서 사영들을 다음과 같이 표기하며, 다른 첨자들에 대해서도 마찬가지로
+표기한다.
+$$
+p^{1234}_{134} : X \times_S Y \times_S Z \times_S W
+\to X \times_S Z \times_S W
+\quad\text{및}\quad
+p^{134}_{14} : X \times_S Z \times_S W \to X \times_S W
+$$
+또한 $R\text{pr}_*$ 대신 $\text{pr}_*$를, $L\text{pr}^*$ 대신
+$\text{pr}^*$를 쓰고, $\otimes$의 모든 위첨자와 아래첨자를 생략한다.
+첫째 등식은 합성의 정의이다. 둘째 등식은 밑변환에 의해
+$\text{pr}^{134, *}_{13} \text{pr}^{123}_{13, *} =
+\text{pr}^{1234}_{134, *} \text{pr}^{1234, *}_{123}$
+이기 때문에 성립한다(스킴의 유도 범주, 보조정리
+\ref{perfect-lemma-compare-base-change}). 셋째 등식은 당김들이 올바르게
+합성되고 텐서곱을 통과하기 때문에 성립한다. 코호몰로지, 보조정리
+\ref{cohomology-lemma-derived-pullback-composition}와
+\ref{cohomology-lemma-pullback-tensor-product}를 보라. 넷째 등식은
+$p^{1234}_{134}$에 대한 ``사영 공식''에서 따른다. 스킴의 유도 범주,
+보조정리 \ref{perfect-lemma-cohomology-base-change}를 보라. 다섯째 등식은
+고유한 밂이 합성과 양립한다는 내용이다. 코호몰로지, 보조정리
+\ref{cohomology-lemma-derived-pushforward-composition}를 보라. 텐서곱은
+결합적이므로 이로써 합성의 결합법칙에 대한 증명이 끝난다.
+
+\begin{lemma}
+\label{equiv-lemma-base-change-is-functor}
+$S' \to S$를 스킴의 사상이라 하자. 다음 대응은 $S$에 대해 정의된
+범주에서 $S'$에 대해 정의된 범주로 가는 함자이다.
+\begin{enumerate}
+\item $S$ 위의 매끄럽고 고유한 스킴 $X$를 $X' =  S' \times_S X$로 보내고,
+\item $D_{perf}(\mathcal{O}_{X \times_S Y})$의 대상 $K$의 동형류를
+$D_{perf}(\mathcal{O}_{X' \times_{S'} Y'})$에 속하는
+$L(X' \times_{S'} Y' \to X \times_S Y)^*K$
+의 동형류로 보낸다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이를 보기 위해 $X, Y, Z$와
+$K \in D_{perf}(\mathcal{O}_{X \times_S Y})$ 및
+$M \in D_{perf}(\mathcal{O}_{Y \times_S Z})$가 주어졌다고 하자.
+보조정리의 명제에서와 같은 이들의 당김을 각각
+$K' \in D_{perf}(\mathcal{O}_{X' \times_{S'} Y'})$와
+$M' \in D_{perf}(\mathcal{O}_{Y' \times_{S'} Z'})$
+로 나타내자. 도식
+$$
+\xymatrix{
+X' \times_{S'} Y' \times_{S'} Z' \ar[r] \ar[d]_{\text{pr}'_{13}} &
+X \times_S Y \times_S Z \ar[d]^{\text{pr}_{13}} \\
+X' \times_{S'} Z' \ar[r] &
+X \times_S Z
+}
+$$
+은 데카르트 도식이고 $\text{pr}_{13}$은 고유하고 매끄럽다. 스킴의 유도
+범주, 보조정리
+\ref{perfect-lemma-flat-proper-perfect-direct-image-general}
+에 의해 아래쪽 수평 화살표에 의한 다음 합성의 유도 당김은
+$$
+R\text{pr}_{13, *}(
+L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S Z}}^\mathbf{L}
+L\text{pr}_{23}^*M)
+$$
+실제로 다음 대상과 (표준적으로) 동형이다.
+$$
+R\text{pr}'_{13, *}(
+L(\text{pr}'_{12})^*K'
+\otimes_{\mathcal{O}_{X' \times_{S'} Y' \times_{S'} Z'}}^\mathbf{L}
+L(\text{pr}'_{23})^*M')
+$$
+이는 원하는 바이다. 일부 세부사항은 생략한다.
+\end{proof}
+
+
+
+
+
+\section{상대 동치}
+\label{equiv-section-relative-equivalences}
+
+\noindent
+이 절에서는 다음 개념에 관한 몇 가지 보조정리를 증명한다.
+
+\begin{definition}
+\label{equiv-definition-relative-equivalence-kernel}
+$S$를 스킴이라 하고, $X \to S$와 $Y \to S$를 매끄럽고 고유한 사상이라
+하자. 다음을 만족하는 대상
+$K' \in D_{perf}(\mathcal{O}_{X \times_S Y})$가 존재하면, 대상
+$K \in D_{perf}(\mathcal{O}_{X \times_S Y})$를
+{\it $S$ 위에서 $X$로부터 $Y$로 가는 상대 동치의 Fourier--Mukai 핵}이라 한다.
+$$
+\Delta_{X/S, *}\mathcal{O}_X \cong
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S X}}^\mathbf{L}
+L\text{pr}_{23}^*K')
+$$
+$D(\mathcal{O}_{X \times_S X})$에서 이 동형이 성립하고,
+$$
+\Delta_{Y/S, *}\mathcal{O}_Y \cong
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K'
+\otimes_{\mathcal{O}_{Y \times_S X \times_S Y}}^\mathbf{L}
+L\text{pr}_{23}^*K)
+$$
+$D(\mathcal{O}_{Y \times_S Y})$에서 이 동형이 성립한다. 다시 말해 $K$의
+동형류는 절 \ref{equiv-section-category-Fourier-Mukai-kernels}에서 정의한 범주의
+가역 화살표를 정의한다.
+\end{definition}
+
+\noindent
+이 용어는 의도적으로 번거롭게 만들었다.
+
+\begin{lemma}
+\label{equiv-lemma-equivalences-rek}
+정의 \ref{equiv-definition-relative-equivalence-kernel}의 표기를 쓰자. $K$를
+$S$ 위에서 $X$로부터 $Y$로 가는 상대 동치의 Fourier--Mukai 핵이라 하자.
+그러면 이에 대응하는 Fourier--Mukai 함자
+$\Phi_K : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$
+(보조정리 \ref{equiv-lemma-fourier-Mukai-QCoh})와
+$\Phi_K : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+(보조정리 \ref{equiv-lemma-fourier-mukai})는 동치이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{equiv-lemma-compose-fourier-mukai}와 예
+\ref{equiv-example-diagonal-fourier-mukai}에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-base-change-rek}
+정의 \ref{equiv-definition-relative-equivalence-kernel}의 표기를 쓰자. $K$를
+$S$ 위에서 $X$로부터 $Y$로 가는 상대 동치의 Fourier--Mukai 핵이라 하자.
+$S_1 \to S$를 스킴의 사상이라 하고, $X_1 = S_1 \times_S X$ 및
+$Y_1 = S_1 \times_S Y$라 하자. 그러면 당김
+$K_1 = L(X_1 \times_{S_1} Y_1 \to X \times_S Y)^*K$는 $S_1$ 위에서
+$X_1$으로부터 $Y_1$으로 가는 상대 동치의 Fourier--Mukai 핵이다.
+\end{lemma}
+
+\begin{proof}
+정의 \ref{equiv-definition-relative-equivalence-kernel}에서 존재한다고 가정한 대상을
+$K' \in D_{perf}(\mathcal{O}_{Y \times_S X})$라 하자.
+$Y_1 \times_{S_1} X_1 \to Y \times_S X$에 의한 $K'$의 당김을 $K'_1$이라
+나타내자. 그러면 다음 동형과 다른 조건에 대한 같은 동형을 증명하면 충분하다.
+$$
+\Delta_{X_1/S_1, *}\mathcal{O}_X \cong
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K_1
+\otimes_{\mathcal{O}_{X_1 \times_{S_1} Y_1 \times_{S_1} X_1}}^\mathbf{L}
+L\text{pr}_{23}^*K_1')
+$$
+$D(\mathcal{O}_{X_1 \times_{S_1} X_1})$에서,
+$$
+\xymatrix{
+X_1 \times_{S_1} Y_1 \times_{S_1} X_1 \ar[r] \ar[d]_{\text{pr}_{13}} &
+X \times_S Y \times_S X \ar[d]^{\text{pr}_{13}} \\
+X_1 \times_{S_1} X_1 \ar[r] &
+X \times_S X
+}
+$$
+이 데카르트 도식이므로, 스킴의 유도 범주, 보조정리
+\ref{perfect-lemma-flat-proper-perfect-direct-image-general}
+에 의해 다음을 증명하면 충분하다.
+$$
+\Delta_{X_1/S_1, *}\mathcal{O}_{X_1}
+\cong
+L(X_1 \times_{S_1} X_1 \to X \times_S X)^*\Delta_{X/S, *}\mathcal{O}_X 
+$$
+이는 다시 $X$와 $X_1 \times_{S_1} X_1$이 $X \times_S X$ 위에서
+Tor-독립이면 참이다. 스킴의 유도 범주, 보조정리
+\ref{perfect-lemma-compare-base-change}를 보라. 이 Tor-독립성은 직접 확인할
+수도 있지만, 꼭짓점이 $X, X, X, S$인 정사각형과 이를 $S_1 \to S$로
+밑변환한 정사각형에 더 일반적인 사상에 대한 보충, 보조정리
+\ref{more-morphisms-lemma-case-of-tor-independence}를 적용해도 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-descend-rek}
+$S = \lim_{i \in I} S_i$를 아핀 전이사상
+$g_{i'i} : S_{i'} \to S_i$를 갖는 스킴들의 유향계의 극한이라 하자.
+모든 $i \in I$에 대해 $S_i$가 준콤팩트이고 준분리라고 가정한다.
+$0 \in I$라 하자. $X_0 \to S_0$와 $Y_0 \to S_0$를 매끄럽고 고유한
+사상이라 하자. $i \geq 0$에 대해 $X_i = S_i \times_{S_0} X_0$라 두고
+$X = S \times_{S_0} X_0$라 두며, $Y_0$에 대해서도 마찬가지로 둔다.
+$K$가 $S$ 위에서 $X$로부터 $Y$로 가는 상대 동치의 Fourier--Mukai 핵이면,
+어떤 $i \geq 0$에 대해 $S_i$ 위에서 $X_i$로부터 $Y_i$로 가는 상대 동치의
+Fourier--Mukai 핵이 존재한다.
+\end{lemma}
+
+\begin{proof}
+정의 \ref{equiv-definition-relative-equivalence-kernel}에서 존재한다고 가정한 대상을
+$K' \in D_{perf}(\mathcal{O}_{Y \times_S X})$라 하자.
+$X \times_S Y = \lim X_i \times_{S_i} Y_i$이므로, 어떤 $i$와
+$D_{perf}(\mathcal{O}_{Y_i \times_{S_i} X_i})$의 대상 $K_i$, $K'_i$가
+존재하여 $Y \times_S X$로의 당김이 $K$, $K'$을 준다. 스킴의 유도 범주,
+보조정리 \ref{perfect-lemma-descend-perfect}를 보라. 스킴의 유도 범주,
+보조정리
+\ref{perfect-lemma-flat-proper-perfect-direct-image-general}
+에 의해 대상
+$$
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K_i
+\otimes_{\mathcal{O}_{X_i \times_{S_i} Y_i \times_{S_i} X_i}}^\mathbf{L}
+L\text{pr}_{23}^*K_i')
+$$
+은 완전하고, 이를 $X \times_S X$로 당기면 다음과 같다.
+$$
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S X}}^\mathbf{L}
+L\text{pr}_{23}^*K') \cong \Delta_{X/S, *}\mathcal{O}_X
+$$
+보조정리 \ref{equiv-lemma-base-change-rek}의 증명을 보라. 한편 $X_i \to S$는
+매끄럽고 분리이므로 대상
+$$
+\Delta_{i, *}\mathcal{O}_{X_i}
+$$
+$D(\mathcal{O}_{X_i \times_{S_i} X_i})$도 완전하다(사상에 대한 보충,
+보조정리
+\ref{more-morphisms-lemma-smooth-diagonal-perfect} 및
+\ref{more-morphisms-lemma-perfect-proper-perfect-direct-image}에 의해).
+그리고 이를 $X \times_S X$로 당기면 다음과 같다.
+$$
+\Delta_{X/S, *}\mathcal{O}_X
+$$
+보조정리 \ref{equiv-lemma-base-change-rek}의 증명을 보라. 따라서 스킴의 유도 범주,
+보조정리 \ref{perfect-lemma-descend-perfect}에 의해 $i$를 증가시킨 뒤에는
+다음을 가정할 수 있다.
+$$
+\Delta_{i, *}\mathcal{O}_{X_i} \cong
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K_i
+\otimes_{\mathcal{O}_{X_i \times_{S_i} Y_i \times_{S_i} X_i}}^\mathbf{L}
+L\text{pr}_{23}^*K_i')
+$$
+이는 원하는 바이다. $K$와 $K'$의 역할을 뒤바꾸어도 같은 논증이 성립한다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{변형 없음}
+\label{equiv-section-no-deformations}
+
+\noindent
+이 절의 제목은 보조정리 \ref{equiv-lemma-no-deformations}를 가리킨다.
+
+\begin{lemma}
+\label{equiv-lemma-deform-koszul}
+$(R, \mathfrak m, \kappa) \to (A, \mathfrak n, \lambda)$를 본질적으로
+유한 표시인 국소환들의 평탄한 국소환 준동형이라 하자.
+$\overline{f}_1, \ldots, \overline{f}_r \in \mathfrak n/\mathfrak m A
+\subset A/\mathfrak m A$를 정칙열이라 하고 $K \in D(A)$라 하자. 다음을
+가정한다.
+\begin{enumerate}
+\item $K$는 완전하고,
+\item $K \otimes_A^\mathbf{L} A/\mathfrak m A$는 $D(A/\mathfrak m A)$에서
+$\overline{f}_1, \ldots, \overline{f}_r$에 대한 Koszul 복합체와 동형이다.
+\end{enumerate}
+그러면 $K$는 $D(A)$에서 주어진 원소
+$\overline{f}_1, \ldots, \overline{f}_r$을 올리는 정칙열
+$f_1, \ldots, f_r \in A$에 대한 Koszul 복합체와 동형이다. 더욱이
+$A/(f_1, \ldots, f_r)$은 $R$ 위에서 평탄하다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 증명에서는 사슬 복합체를 사용하자. Koszul 복합체
+$K_\bullet(\overline{f}_1, \ldots, \overline{f}_r)$는 대수학에 대한 보충,
+정의 \ref{more-algebra-definition-koszul-complex}에서 정의된다. 대수학에
+대한 보충, 보조정리 \ref{more-algebra-lemma-lift-complex-stably-frees}에 의해
+$K$를 다음 복합체로 나타낼 수 있다.
+$$
+K_\bullet :
+A \to A^{\oplus r} \to \ldots \to A^{\oplus r} \to A
+$$
+이를 $A/\mathfrak mA$와 텐서곱하면
+$K_\bullet(\overline{f}_1, \ldots, \overline{f}_r)$와 (동형인 것이 아니라)
+같다(!). 화살표 $A^{\oplus r} \to A$의 성분들을
+$f_1, \ldots, f_r \in A$라 나타내자. 이 $f_i$들은 $\overline{f}_i$의
+올림이다. 대수학, 보조정리
+\ref{algebra-lemma-grothendieck-regular-sequence-general}
+에 의해 $f_1, \ldots, f_r$은 $A$에서 정칙열을 이루고
+$A/(f_1, \ldots, f_r)$은 $R$ 위에서 평탄하다.
+$J = (f_1, \ldots, f_r) \subset A$라 하자. 도식
+$$
+\xymatrix{
+K_\bullet \ar[rd] \ar@{..>}[rr]_{\varphi_\bullet} & &
+K_\bullet(f_1, \ldots, f_r) \ar[ld] \\
+& A/J
+}
+$$
+$f_1, \ldots, f_r$은 정칙열이므로 남서쪽 화살표는 준동형사상이다(대수학에
+대한 보충, 보조정리 \ref{more-algebra-lemma-regular-koszul-regular}를 보라).
+따라서 예를 들어 대수학, 보조정리
+\ref{algebra-lemma-compare-resolutions}에 의해 도식을 가환하게 하는 점선
+화살표를 찾을 수 있다. $\mathfrak m$으로 나누어 가환 도식
+$$
+\xymatrix{
+K_\bullet(\overline{f}_1, \ldots, \overline{f}_r)
+\ar[rd] \ar[rr]_{\overline{\varphi}_\bullet} & &
+K_\bullet(\overline{f}_1, \ldots, \overline{f}_r) \ar[ld] \\
+& (A/\mathfrak m A)/(\overline{f}_1, \ldots, \overline{f}_r)
+}
+$$
+을 얻는데, 이는 $K_\bullet$의 선택에 따른 것이다. 따라서
+$\overline{\varphi}$는 유도 범주 $D(A/\mathfrak m A)$에서 동형사상이다.
+그러므로 $\overline{\varphi} \otimes_{A/\mathfrak m A}^\mathbf{L} \lambda$도
+동형사상이다. $\overline{f}_i \in \mathfrak n / \mathfrak m A$이므로
+$$
+\text{Tor}_i^{A/\mathfrak m A}(
+K_\bullet(\overline{f}_1, \ldots, \overline{f}_r), \lambda)
+=
+K_i(\overline{f}_1, \ldots, \overline{f}_r) \otimes_{A/\mathfrak m A} \lambda
+$$
+이다. 따라서 $\varphi_i \bmod \mathfrak n$은 가역이다. $A$가 국소환이므로
+이는 $\varphi_i$가 동형사상이라는 뜻이며, 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-limit-arguments}
+$R \to S$를 뇌터 환들의 유한형 평탄 환 사상이라 하자.
+$\mathfrak q \subset S$를 $\mathfrak p \subset R$ 위에 놓이는 소아이디얼이라
+하고, $K \in D(S)$를 완전 대상이라 하자.
+$f_1, \ldots, f_r \in \mathfrak q S_\mathfrak q$를 정칙열이라 하자.
+$S_\mathfrak q/(f_1, \ldots, f_r)$은 $R$ 위에서 평탄하고,
+$K \otimes_S^\mathbf{L} S_\mathfrak q$는 $f_1, \ldots, f_r$에 대한 Koszul
+복합체와 동형이라고 가정한다. 그러면 다음을 만족하는
+$g \in S$, $g \not \in \mathfrak q$가 존재한다.
+\begin{enumerate}
+\item $f_1, \ldots, f_r$은 $f'_1, \ldots, f'_r \in S_g$의 상이고,
+\item $f'_1, \ldots, f'_r$은 $S_g$에서 정칙열을 이루며,
+\item $S_g/(f'_1, \ldots, f'_r)$은 $R$ 위에서 평탄하고,
+\item $K \otimes_S^\mathbf{L} S_g$는 $f_1, \ldots, f_r$에 대한 Koszul
+복합체와 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+국소화의 정의에 의해 조건 (1)을 만족하는
+$g \in S$, $g \not \in \mathfrak q$를 찾을 수 있다. 어떤
+$g' \in S$, $g' \not \in \mathfrak q$에 대해 $g$를 $gg'$로 바꾼 뒤에는
+(2)가 성립한다고 가정할 수 있다. 대수학, 보조정리
+\ref{algebra-lemma-regular-sequence-in-neighbourhood}를 보라. 대수학, 정리
+\ref{algebra-theorem-openness-flatness}에 의해
+$S_g/(f'_1, \ldots, f'_r)$은 $\mathfrak q$의 한 열린 근방에서 $R$ 위에
+평탄하다. 따라서 다시 어떤 $g' \in S$, $g' \not \in \mathfrak q$에 대해
+$g$를 $gg'$로 바꾼 뒤에는 (3)도 성립한다고 가정할 수 있다. 마지막으로
+대수학에 대한 보충, 보조정리
+\ref{more-algebra-lemma-colimit-perfect-complexes}에 의해 한 번 더 바꾸면
+(4)를 얻는다.
+\end{proof}
+
+\noindent
+다음 보조정리의 일반화는 공간의 사상에 대한 보충, 보조정리
+\ref{spaces-more-morphisms-lemma-where-isomorphism}.
+를 보라.
+
+\begin{lemma}
+\label{equiv-lemma-isomorphism-in-neighbourhood}
+$S$를 뇌터 스킴이라 하고 $s \in S$라 하자.
+$p : X \to Y$를 $S$ 위의 스킴 사상이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $Y \to S$와 $X \to S$는 고유하고,
+\item $X$는 $S$ 위에서 평탄하며,
+\item $X_s \to Y_s$는 동형사상이다.
+\end{enumerate}
+그러면 $s$의 열린 근방 $U \subset S$가 존재하여 밑변환
+$X_U \to Y_U$가 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+$p$는 사상, 보조정리
+\ref{morphisms-lemma-closed-immersion-proper}.
+에 의해 고유하다. 스킴의 코호몰로지, 보조정리
+\ref{coherent-lemma-proper-finite-fibre-finite-in-neighbourhood}
+에 의해 열린 부분 $Y_s \subset V \subset Y$가 존재하여
+$p|_{p^{-1}(V)} : p^{-1}(V) \to V$는 유한이다. 사상에 대한 보충, 정리
+\ref{more-morphisms-theorem-criterion-flatness-fibre-Noetherian}
+에 의해 열린 부분 $X_s \subset U \subset X$가 존재하여
+$p|_U : U \to Y$는 평탄하다. $X \setminus U$와 $Y \setminus V$의 상들
+(이들은 $s$를 포함하지 않는 닫힌 부분집합이다)을 제거하면 $p$가 평탄하고
+유한이라고 가정할 수 있다. 그러면 $p$는 열린 사상이고(사상, 보조정리
+\ref{morphisms-lemma-fppf-open}), $Y_s \subset p(X) \subset Y$이므로 $S$를
+축소한 뒤 $p$가 전사라고 가정할 수 있다. $p_s : X_s \to Y_s$가
+동형사상이므로 연접 $\mathcal{O}_Y$-가군의 사상
+$$
+p^\sharp : \mathcal{O}_Y \longrightarrow p_*\mathcal{O}_X
+$$
+($p$는 유한이다)은 $i : Y_s \to Y$로 당기면 동형사상이 된다(예를 들어
+스킴의 코호몰로지, 보조정리 \ref{coherent-lemma-affine-base-change}에 의해).
+Nakayama 보조정리에 의해 모든 $y \in Y_s$에 대해
+$\mathcal{O}_{Y, y} \to (p_*\mathcal{O}_X)_y$는 전사이다. 따라서 열린 부분
+$Y_s \subset V \subset Y$가 존재하여 $p^\sharp|_V$는 전사이다(가군,
+보조정리 \ref{modules-lemma-finite-type-surjective-on-stalk}). 그러므로 $S$를
+한 번 더 축소한 뒤에는 $p^\sharp$가 전사라고 가정할 수 있고, 이는 $p$가
+닫힌 몰입이라는 뜻이다($p$는 이미 유한이다). 이제 $p$는 뇌터 스킴들의
+전사 평탄 닫힌 몰입이므로 동형사상이다. 사상, 절
+\ref{morphisms-section-flat-closed-immersions}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-no-deformations}
+$k$를 체라 하고, $S$를 $k$-유리점 $s$를 갖는 $k$ 위의 유한형 스킴이라
+하자. $Y \to S$를 매끄럽고 고유한 사상이라 하자.
+$X = Y_s \times S \to S$를 올이 $Y_s$인 상수족이라 하자. $K$를 $S$ 위에서
+$X$로부터 $Y$로 가는 상대 동치의 Fourier--Mukai 핵이라 하자. 제한
+$$
+L(Y_s \times_S Y_s \to X \times_S Y)^*K \cong 
+\Delta_{Y_s/k, *} \mathcal{O}_{Y_s}
+$$
+이 $D(\mathcal{O}_{Y_s \times Y_s})$에서 성립한다고 가정하자. 그러면
+$s \in U \subset S$인 열린 근방이 존재하여 $Y|_U$는 $U$ 위에서
+$Y_s \times U$와 동형이다.
+\end{lemma}
+
+\begin{proof}
+자연스러운 닫힌 몰입
+$i : Y_s \times Y_s = X_s \times Y_s \to X \times_S Y$로 나타내자.
+(이제부터 $s$ 위의 $X$의 올을 $X_s$가 아니라 $Y_s$로 쓰겠다.)
+$z \in Y_s \times Y_s = (X \times_S Y)_s \subset X \times_S Y$를 닫힌
+점이라 하자. 이미 암시했듯이 $z$를 $Y_s \times Y_s$의 닫힌 점인 동시에
+$X \times_S Y$의 닫힌 점으로 생각한다.
+
+\medskip\noindent
+경우 I: $z \not \in \Delta_{Y_s/k}(Y_s)$. $z$에 지지되고 값이
+$\kappa(z)$인 연접 $\mathcal{O}_{Y_s \times Y_s}$-가군을
+$\mathcal{O}_z$라 나타내자. 그러면 $i_*\mathcal{O}_z$는 $z$에 지지되고
+값이 $\kappa(z)$인 연접 $\mathcal{O}_{X \times_S Y}$-가군이다. 우리의
+가정은 다음을 뜻한다.
+$$
+K \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} i_*\mathcal{O}_z =
+Li^*K \otimes_{\mathcal{O}_{Y_s \times Y_s}}^\mathbf{L} \mathcal{O}_z = 0
+$$
+따라서 보조정리 \ref{equiv-lemma-orthogonal-point-sheaf}에 의해 $z$의 열린 근방
+$U(z) \subset X \times_S Y$를 찾아 $K|_{U(z)} = 0$이 되게 할 수 있다.
+이 경우 $U(z)$의 닫힌 부분스킴으로 $Z(z) = \emptyset$라 둔다.
+
+\medskip\noindent
+경우 II: $z \in \Delta_{Y_s/k}(Y_s)$. $Y_s$는 $k$ 위에서 매끄러우므로
+$\Delta_{Y_s/k} : Y_s \to Y_s \times Y_s$가 정칙 몰입임을 안다. 사상에
+대한 보충, 보조정리
+\ref{more-morphisms-lemma-smooth-diagonal-perfect}.
+를 보라. $\Delta_{Y_s/k}(Y_s)$의 아이디얼층을 잘라내는 정칙열
+$\overline{f}_1, \ldots, \overline{f}_r \in
+\mathcal{O}_{Y_s \times Y_s, z}$을 택하자. 정칙열은 Koszul-정칙이므로
+(대수학에 대한 보충, 보조정리
+\ref{more-algebra-lemma-regular-koszul-regular}), 우리의 가정은
+$$
+K_z \otimes_{\mathcal{O}_{X \times_S Y, z}}^\mathbf{L}
+\mathcal{O}_{Y_s \times Y_s, z}
+\in D(\mathcal{O}_{Y_s \times Y_s, z})
+$$
+이 $\mathcal{O}_{Y_s \times Y_s, z}$ 위에서
+$\overline{f}_1, \ldots, \overline{f}_r$에 대한 Koszul 복합체로 표현된다는
+뜻이다. $\mathcal{O}_{S, s} \to \mathcal{O}_{X \times_S Y, z}$에 보조정리
+\ref{equiv-lemma-deform-koszul}을 적용하면, 정칙열
+$\overline{f}_1, \ldots, \overline{f}_r$을 올리는 정칙열
+$f_1, \ldots, f_r \in \mathcal{O}_{X \times_S Y, z}$에 대한 Koszul
+복합체가 $K_z \in D(\mathcal{O}_{X \times_S Y, z})$를 표현하고, 더욱이
+$\mathcal{O}_{X \times_S Y}/(f_1, \ldots, f_r)$은
+$\mathcal{O}_{S, s}$ 위에서 평탄하다는 결론을 얻는다. 몇 가지 극한 논증
+(보조정리 \ref{equiv-lemma-limit-arguments})에 의해 $z$의 아핀 열린 근방
+$U(z) \subset X \times_S Y$와 닫힌 부분스킴 $Z(z) \subset U(z)$가
+존재하여 다음을 만족한다.
+\begin{enumerate}
+\item $Z(z) \to U(z)$는 정칙 닫힌 몰입이고,
+\item $K|_{U(z)}$는 $\mathcal{O}_{Z(z)}$와 준동형이며,
+\item $Z(z) \to S$는 평탄하고,
+\item $Z(z)_s = \Delta_{Y_s/k}(Y_s) \cap U(z)_s$
+는 $U(z)_s$의 닫힌 부분스킴으로서 성립한다.
+\end{enumerate}
+
+\noindent
+성질 (2)에 의해 $z, z' \in Y_s \times Y_s$에 대해
+$Z(z) \cap U(z') = Z(z') \cap U(z)$가 닫힌 부분스킴으로서 성립한다.
+따라서 $X \times_S Y$에서 $Y_s \times Y_s$의 열린 근방
+$$
+U = \bigcup\nolimits_{z \in Y_s \times Y_s\text{ 닫힌점}} U(z)
+$$
+와 닫힌 부분스킴 $Z \subset U$를 얻는데, (1) $Z \to U$는 정칙 닫힌
+몰입이고, (2) $Z \to S$는 평탄하며, (3)
+$Z_s = \Delta_{Y_s/k}(Y_s)$이다. $X \times_S Y \to S$는 고유하므로 $S$를
+$s$의 한 열린 근방으로 바꾼 뒤에는 $U = X \times_S Y$라고 가정할 수
+있다. 사영 $Z_s \to Y_s$와 $Z_s \to X_s$는 동형사상이므로, $S$를
+축소한 뒤에는 $Z \to Y$와 $Z \to X$가 동형사상이라고 가정할 수 있다.
+보조정리 \ref{equiv-lemma-isomorphism-in-neighbourhood}를 보라. 이로써 증명이
+끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-no-deformations-better}
+$k$를 대수적으로 닫힌 체라 하고, $X$를 $k$ 위의 매끄럽고 고유한
+스킴이라 하자. $S$가 $k$ 위의 유한형 스킴일 때
+$f : Y \to S$를 매끄럽고 고유한 사상이라 하자. $K$를 $S$ 위에서
+$X \times S$로부터 $Y$로 가는 상대 동치의 Fourier--Mukai 핵이라 하자.
+그러면 $S$는 다음 성질을 갖는 열린 부분스킴 $U$들로 덮인다. $k$ 위에서
+고유하고 매끄러운 어떤 $Y_0$에 대해 $U$-동형사상
+$f^{-1}(U) \cong Y_0 \times U$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+닫힌 점 $s \in S$를 택하자. $k$가 대수적으로 닫혔으므로 이는 $k$-유리점이다.
+$Y_0 = Y_s$라 두자. 보조정리 \ref{equiv-lemma-base-change-rek}에 의해 $K$를
+$X \times Y_0$에 제한한 $K_0$는 $\Spec(k)$ 위에서 $X$로부터 $Y_0$로
+가는 상대 동치의 Fourier--Mukai 핵이다. 정의
+\ref{equiv-definition-relative-equivalence-kernel}에서 존재한다고 가정한
+$D_{perf}(\mathcal{O}_{Y_0 \times X})$의 대상을 $K'_0$라 하자. 정의
+\ref{equiv-definition-relative-equivalence-kernel}에 내재한 대칭성에 의해
+$K'_0$는 $\Spec(k)$ 위에서 $Y_0$로부터 $X$로 가는 상대 동치의
+Fourier--Mukai 핵이다. 따라서 보조정리 \ref{equiv-lemma-base-change-rek}에 의해
+당김
+$$
+M = (Y_0 \times X \times S \to Y_0 \times X)^*K'_0
+$$
+은 $(Y_0 \times S) \times_S (X \times S) = Y_0 \times X \times S$ 위에서
+$S$ 위의 $Y_0 \times S$로부터 $X \times S$로 가는 상대 동치의
+Fourier--Mukai 핵이다. 이제 $(Y_0 \times S) \times_S Y$ 위의 핵
+$$
+K_{new} =
+R\text{pr}_{13, *}(L\text{pr}_{12}^*M
+\otimes_{\mathcal{O}_{(Y_0 \times S) \times_S (X \times S)
+\times_S Y}}^\mathbf{L}
+L\text{pr}_{23}^*K)
+$$
+을 생각하자. 이는 절 \ref{equiv-section-category-Fourier-Mukai-kernels}에서 구성한
+범주에서 두 가역 화살표의 합성이므로 $S$ 위에서 $Y_0 \times S$로부터
+$Y$로 가는 상대 동치의 Fourier--Mukai 핵이다. 더욱이 이 합성은 밑변환을
+통과한다(보조정리 \ref{equiv-lemma-base-change-is-functor}). 따라서 $K_{new}$를
+$((Y_0 \times S) \times_S Y)_s = Y_0 \times Y_0$로 당기면 $K_0$와
+$K'_0$의 합성과 같고, 따라서 이 범주에서 항등원과 같다. 다시 말해
+$$
+L(Y_0 \times Y_0 \to (Y_0 \times S) \times_S Y)^*K_{new}
+\cong
+\Delta_{Y_0/k, *}\mathcal{O}_{Y_0}
+$$
+이다. 따라서 보조정리 \ref{equiv-lemma-no-deformations}에 의해 $s$의 한 열린
+근방에서 $Y \to S$는 $Y_0 \times S$와 동형이다. 이로써 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+\section{가산성}
+\label{equiv-section-countability}
+
+\noindent
+이 절에서는 몇몇 집합의 가산성에 관한 초보적 보조정리들을 증명한다.
+$\mathcal{C}$를 범주라 하자. 이 절에서는 다음 조건들이 성립할 때
+$\mathcal{C}$가 {\it 가산}이라고 하겠다.
+\begin{enumerate}
+\item 임의의 $X, Y \in \Ob(\mathcal{C})$에 대해 집합
+$\Mor_\mathcal{C}(X, Y)$가 가산이고,
+\item $\mathcal{C}$의 대상들의 동형류 집합이 가산이다.
+\end{enumerate}
+
+\begin{lemma}
+\label{equiv-lemma-countable-finite-type}
+$R$을 가산 뇌터 환이라 하자. 그러면 $R$ 위의 유한형 스킴들의 범주는
+가산이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-countable-abelian}
+$\mathcal{A}$를 가산 아벨 범주라 하자. 그러면 $D^b(\mathcal{A})$는 가산이다.
+\end{lemma}
+
+\begin{proof}
+나머지는 $D(\mathcal{A})$의 충만한 부분범주이므로 이 큰 범주에 대해
+명제를 증명하면 충분하다. $D(\mathcal{A})$의 모든 대상은 $\mathcal{A}$의
+대상들로 이루어진 복합체이므로, $D^b(\mathcal{A})$의 대상들의 동형류
+집합이 가산임은 즉시 알 수 있다. 더욱이 $\mathcal{A}$의 유계 복합체
+$A^\bullet$과 $B^\bullet$에 대해
+$\Hom_{K^b(\mathcal{A})}(A^\bullet, B^\bullet)$가 가산임은 명백하다. 유도
+범주, 보조정리 \ref{derived-lemma-bounded-derived}에 의해
+$$
+\Hom_{D^b(\mathcal{A})}(A^\bullet, B^\bullet) =
+\colim_{s : (A')^\bullet \to A^\bullet
+\text{ 유사동형이고 }(A')^\bullet\text{ 유계인}}
+\Hom_{K^b(\mathcal{A})}((A')^\bullet, B^\bullet)
+$$
+이다. 따라서 이는 가산 여극한으로서 가산 집합이다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-countable-perfect}
+$X$를 가산 뇌터 환 위의 유한형 스킴이라 하자. 그러면 범주
+$D_{perf}(\mathcal{O}_X)$와 $D^b_{\textit{Coh}}(\mathcal{O}_X)$는 가산이다.
+\end{lemma}
+
+\begin{proof}
+사상, 보조정리 \ref{morphisms-lemma-finite-type-noetherian}에 의해 $X$가
+뇌터임을 주목하자. 따라서 스킴의 유도 범주, 보조정리
+\ref{perfect-lemma-perfect-on-noetherian}에 의해 $D_{perf}(\mathcal{O}_X)$는
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$의 충만한 부분범주이다. 그러므로
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$에 대해 결과를 증명하면 충분하다.
+스킴의 유도 범주, 명제 \ref{perfect-proposition-DCoh}에 의해
+$D^b_{\textit{Coh}}(\mathcal{O}_X) = D^b(\textit{Coh}(\mathcal{O}_X))$
+임을 상기하자. 따라서 보조정리 \ref{equiv-lemma-countable-abelian}에 의해
+$\textit{Coh}(\mathcal{O}_X)$가 가산임을 증명하면 충분하다. 이는 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-countable-isos}
+$K$를 대수적으로 닫힌 체라 하자. $S$를 $K$ 위의 유한형 스킴이라 하자.
+$X \to S$와 $Y \to S$를 유한형 사상이라 하자. 가산 집합 $I$와 각
+$i \in I$에 대해 다음 성질들을 갖는 쌍 $(S_i \to S, h_i)$가 존재한다.
+\begin{enumerate}
+\item $S_i \to S$는 유한형 사상이며,
+$X_i = X \times_S S_i$ 및 $Y_i = Y \times_S S_i$라 둔다.
+\item $h_i : X_i \to Y_i$는 $S_i$ 위의 동형사상이다.
+\item 임의의 닫힌 점 $s \in S(K)$에 대해 $K = \kappa(s)$ 위에서
+$X_s \cong Y_s$이면, 어떤 $i$에 대해 $s$는 $S_i \to S$의 상에 속한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+체 $K$는 그 가산 부분체들의 여과 합집합이다. 쌍대적으로 $\Spec(K)$는
+$K$의 가산 부분체들의 스펙트럼들의 여과 반대 극한이다. 따라서 극한,
+보조정리 \ref{limits-lemma-descend-finite-presentation}에 의해 가산 부분체
+$k$와 $k$ 위의 유한형 스킴들의 사상 $X_0 \to S_0$, $Y_0 \to S_0$를
+찾을 수 있고, 이들의 밑변환이 각각 $X \to S$, $Y \to S$이다.
+
+\medskip\noindent
+보조정리 \ref{equiv-lemma-countable-finite-type}에 의해 가산 집합 $I$와 다음을
+만족하는 쌍 $(S_{0, i} \to S_0, h_{0, i})$들이 존재한다.
+\begin{enumerate}
+\item $S_{0, i} \to S_0$는 유한형 사상이며,
+$X_{0, i} = X_0 \times_{S_0} S_{0, i}$ 및
+$Y_{0, i} = Y_0 \times_{S_0} S_{0, i}$라 둔다.
+\item $h_{0, i} : X_{0, i} \to Y_{0, i}$는 $S_{0, i}$ 위의 동형사상이다.
+\end{enumerate}
+더욱이 $T \to S_0$가 유한형이고
+$h_T : X_0 \times_{S_0} T \to Y_0 \times_{S_0} T$가 동형사상인 모든 쌍
+$(T \to S_0, h_T)$는 이들 중 하나와 동형이다.
+$(S_{0, i} \to S_0, h_{0, i})$를 $\Spec(K) \to \Spec(k)$로 밑변환한
+쌍을 $(S_i \to S, h_i)$라 나타내자. 이것들이 원하는 쌍이라고 주장한다.
+
+\medskip\noindent
+$s \in S(K)$라 하고, $h_s : X_s \to Y_s$를 $K = \kappa(s)$ 위의
+동형사상이라 하자. $K$를 그 유한생성 $k$-부분대수들의 여과 합집합으로
+쓸 수 있다. 따라서 극한, 명제
+\ref{limits-proposition-characterize-locally-finite-presentation} 및
+보조정리 \ref{limits-lemma-descend-finite-presentation}에 의해 다음을 만족하는
+유한생성 $k$-부분대수 $K \supset A \supset k$를 찾을 수 있다.
+\begin{enumerate}
+\item 어떤 $k$ 위의 사상 $s' : \Spec(A) \to S_0$에 대해 가환 도식
+$$
+\xymatrix{
+\Spec(K) \ar[d]_s \ar[r] &
+\Spec(A) \ar[d]^{s'} \\
+S \ar[r] &
+S_0}
+$$
+이 존재한다.
+\item $h_s$는 다음 $A$ 위의 동형사상의 밑변환이다.
+$h_{s'} : X_0 \times_{S_0, s'} \Spec(A) \to
+X_0 \times_{S_0, s'} \Spec(A)$.
+\end{enumerate}
+물론 그러면 $(s' : \Spec(A) \to S_0, h_{s'})$는 어떤 $i \in I$에 대해
+쌍 $(S_{0, i} \to S_0, h_{0, i})$와 동형이다. (1)의 가환 도식은 $s$가
+$s'$을 $\Spec(K)$로 밑변환한 사상의 상에 속함을 보여 주므로 증명이
+끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-countable-equivs}
+$K$를 대수적으로 닫힌 체라 하자. 가산 집합 $I$와 각 $i \in I$에 대해
+다음 성질들을 갖는 쌍 $(S_i/K, X_i \to S_i, Y_i \to S_i, M_i)$가 존재한다.
+\begin{enumerate}
+\item $S_i$는 $K$ 위의 유한형 스킴이다.
+\item $X_i \to S_i$와 $Y_i \to S_i$는 고유하고 매끄러운 스킴 사상이다.
+\item $M_i \in D_{perf}(\mathcal{O}_{X_i \times_{S_i} Y_i})$
+는 $S_i$ 위에서 $X_i$로부터 $Y_i$로 가는 상대 동치의 Fourier--Mukai
+핵이다.
+\item $K$ 위의 임의의 매끄럽고 고유한 스킴 $X$, $Y$에 대해 $K$-선형
+완전 동치
+$D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+가 존재하면, $X \cong (X_i)_s$ 및 $Y \cong (Y_i)_s$를 만족하는
+$i \in I$와 $s \in S_i(K)$가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+예를 들어 소체와 같은 가산 부분체 $k \subset K$를 택하자. 보조정리
+\ref{equiv-lemma-countable-finite-type}와 \ref{equiv-lemma-countable-perfect}에 의해
+보조정리의 (1), (2), (3)을 만족하는 $k$ 위의 계들의 동형류는 가산
+집합을 이룬다. 따라서 가산 집합 $I$와 각 $i \in I$에 대해 다음과 같은
+$k$ 위의 계를 택하여 모든 동형류가 적어도 한 번씩 나타나게 할 수 있다.
+$$
+(S_{0, i}/k, X_{0, i} \to S_{0, i}, Y_{0, i} \to S_{0, i}, M_{0, i})
+$$
+표시한 계를 $K$로 밑변환한 것을
+$(S_i/K, X_i \to S_i, Y_i \to S_i, M_i)$라 나타내자. 이 계는 성질
+(1), (2), (3)을 갖는다. 보조정리 \ref{equiv-lemma-base-change-rek}를 보라.
+이제 성질 (4)를 증명하자.
+
+\medskip\noindent
+$K$ 위의 매끄럽고 고유한 스킴 $X$, $Y$와 $K$-선형 완전 동치
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$를
+생각하자. 명제 \ref{equiv-proposition-equivalence}에 의해
+$M \in D_{perf}(\mathcal{O}_{X \times Y})$인 대상이 존재하고
+$F = \Phi_M$가 이에 대응하는 Fourier--Mukai 함자라고 가정할 수 있다.
+보조정리 \ref{equiv-lemma-fourier-mukai-flat-proper-over-noetherian}에 의해
+$D_{perf}(\mathcal{O}_{Y \times X})$의 대상 $M'$이 존재하여 $\Phi_{M'}$은
+$\Phi_M$의 오른쪽 수반함자이다. $\Phi_M$은 동치이므로 이는
+$\Phi_{M'}$이 $\Phi_M$의 준역이라는 뜻이다. 보조정리
+\ref{equiv-lemma-fourier-mukai-flat-proper-over-noetherian}에 의해 대상
+$$
+A = R\text{pr}_{13, *}(
+L\text{pr}_{12}^*M
+\otimes_{\mathcal{O}_{X \times Y \times X}}^\mathbf{L}
+L\text{pr}_{23}^*M')
+$$
+및
+$$
+B = R\text{pr}_{13, *}(
+L\text{pr}_{12}^*M'
+\otimes_{\mathcal{O}_{Y \times X \times Y}}^\mathbf{L}
+L\text{pr}_{23}^*M)
+$$
+이 두 대상은 각각 $D_{perf}(\mathcal{O}_{X \times X})$와
+$D_{perf}(\mathcal{O}_{Y \times Y})$에서 Fourier--Mukai 함자를 정의하며,
+이 함자들은 각각 다음 함자들과 동형이다.
+$\text{id} : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_X)$
+및
+$\text{id} : D_{perf}(\mathcal{O}_Y) \to D_{perf}(\mathcal{O}_Y)$
+따라서 보조정리 \ref{equiv-lemma-uniqueness}에 의해
+$A \cong \Delta_{X/K, *}\mathcal{O}_X$ 및
+$B \cong \Delta_{Y/K, *}\mathcal{O}_Y$
+이다. 그러므로 정의에 의해 $M$은 $K$ 위에서 $X$로부터 $Y$로 가는
+상대 동치의 Fourier--Mukai 핵이다.
+
+\medskip\noindent
+$K$를 그 유한형 $k$-부분대수 $A \subset K$들의 여과 여극한으로 쓸 수
+있다. 극한, 보조정리 \ref{limits-lemma-descend-finite-presentation}에 의해
+$A$ 위의 유한형 스킴 $X_0, Y_0$를 찾아 이들을 $K$로 밑변환하면
+$X$, $Y$가 되게 할 수 있다. 극한, 보조정리
+\ref{limits-lemma-eventually-proper}와 \ref{limits-lemma-descend-smooth}
+에 의해 $A$를 확대한 뒤 $X_0$와 $Y_0$가 $A$ 위에서 매끄럽고 고유하다고
+가정할 수 있다. 보조정리 \ref{equiv-lemma-descend-rek}에 의해 $A$를 확대한 뒤
+$M$이 어떤
+$M_0  \in D_{perf}(\mathcal{O}_{X_0 \times_{\Spec(A)} Y_0})$의 당김이라고
+가정할 수 있으며, 이 대상은 $\Spec(A)$ 위에서 $X_0$로부터 $Y_0$로 가는
+상대 동치의 Fourier--Mukai 핵이다. 따라서
+$(S_0/k, X_0 \to S_0, Y_0 \to S_0, M_0)$는 어떤 $i \in I$에 대해
+$(S_{0, i}/k, X_{0, i} \to S_{0, i}, Y_{0, i} \to S_{0, i}, M_{0, i})$
+와 동형이다. $S_i = S_{0, i} \times_{\Spec(k)} \Spec(K)$이므로
+$A \subset K$에서 얻는 사상
+$\Spec(K) \to \Spec(A) \cong S_{0, i}$가 유도하는
+$s : \Spec(K) \to S_i$에 대해 (4)가 참이라는 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{유도 동치인 다양체들의 가산성}
+\label{equiv-section-countable-derived-equivalent}
+
+\noindent
+이 절에서는 Anel과 To\"en의 결과를 증명한다. \cite{AT}를 보라.
+
+\begin{definition}
+\label{equiv-definition-derived-equivalent}
+$k$를 체라 하고, $X$와 $Y$를 $k$ 위의 매끄러운 사영 스킴이라 하자.
+$k$-선형 완전 동치
+$D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$가
+존재하면 $X$와 $Y$가 {\it 유도 동치}라고 한다.
+\end{definition}
+
+\noindent
+결과는 다음과 같다.
+
+\begin{theorem}
+\label{equiv-theorem-countable}
+\begin{reference}
+\cite{AT}의 약간의 개선
+\end{reference}
+$K$를 대수적으로 닫힌 체라 하고, $\mathbf{X}$를 $K$ 위의 매끄럽고 고유한
+스킴이라 하자. $\mathbf{X}$와 유도 동치인 $K$ 위의 매끄럽고 고유한 스킴
+$\mathbf{Y}$의 동형류는 많아야 가산 개이다.
+\end{theorem}
+
+\begin{proof}
+가산 집합 $I$와 각 $i \in I$에 대해 보조정리
+\ref{equiv-lemma-countable-equivs}의 성질 (1), (2), (3), (4)를 만족하는 계
+$(S_i/K, X_i \to S_i, Y_i \to S_i, M_i)$를 택하자. $i \in I$를 택하고
+$S = S_i$, $X = X_i$, $Y = Y_i$, $M = M_i$라 두자. $s \in S(K)$이고
+$X_s \cong \mathbf{X}$인 올 $Y_s$들의 동형류 집합이 가산임을 보이면
+충분함은 명백하다. 이를 다음 문단에서 증명한다.
+
+\medskip\noindent
+$S$를 $K$ 위의 유한형 스킴이라 하고, $X \to S$와 $Y \to S$를 고유하고
+매끄러운 사상이라 하자. $M \in D_{perf}(\mathcal{O}_{X \times_S Y})$를
+$S$ 위에서 $X$로부터 $Y$로 가는 상대 동치의 Fourier--Mukai 핵이라 하자.
+$s \in S(K)$이고 $X_s \cong \mathbf{X}$인 올 $Y_s$들의 동형류 집합이
+가산임을 보이겠다. 두 족 $\mathbf{X} \times S \to S$와 $X \to S$에
+보조정리 \ref{equiv-lemma-countable-isos}를 적용하면 가산 집합 $I$와 각
+$i \in I$에 대해 다음 성질들을 갖는 쌍 $(S_i \to S, h_i)$가 존재한다.
+\begin{enumerate}
+\item $S_i \to S$는 유한형 사상이며 $X_i = X \times_S S_i$라 둔다.
+\item $h_i : \mathbf{X} \times S_i \to X_i$
+는 $S_i$ 위의 동형사상이다.
+\item 임의의 닫힌 점 $s \in S(K)$에 대해 $K = \kappa(s)$ 위에서
+$\mathbf{X} \cong X_s$이면, 어떤 $i$에 대해 $s$는 $S_i \to S$의 상에
+속한다.
+\end{enumerate}
+$Y_i = Y \times_S S_i$라 두고, $M$의 당김을
+$M_i \in D_{perf}(\mathcal{O}_{X_i \times_{S_i} Y_i})$라 나타내자. 보조정리
+\ref{equiv-lemma-base-change-rek}에 의해 $M_i$는 $S_i$ 위에서 $X_i$로부터
+$Y_i$로 가는 상대 동치의 Fourier--Mukai 핵이다. $I$가 가산이므로 성질
+(3)에 의해 $s \in S_i(K)$인 올 $Y_{i, s}$들의 동형류 집합이 가산임을
+증명하면 충분하다. 실제로 보조정리 \ref{equiv-lemma-no-deformations-better}에
+의해 이 수는 유한이며, 증명이 끝난다.
+\end{proof}

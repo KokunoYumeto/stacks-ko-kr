@@ -1,0 +1,4203 @@
+% Generated mechanically from frozen input p04/ko/schemes.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{25}
+\chapter{스킴}
+
+
+
+\phantomsection
+\label{schemes-section-phantom}
+
+
+\section{서론}
+\label{schemes-section-introduction}
+
+\noindent
+이 문서에서는 스킴을 정의한다.
+기본 참고문헌은 \cite{EGA}이다.
+
+
+
+
+
+
+
+
+
+\section{국소 환 달린 공간}
+\label{schemes-section-locally-ringed-spaces}
+
+\noindent
+Sheaves의 절 \ref{sheaves-section-ringed-spaces}에서
+환 달린 공간을 정의했음을 상기하자.
+간단히 말해, 환 달린 공간은 쌍 $(X, \mathcal{O}_X)$으로서,
+위상공간 $X$와 환의 층 $\mathcal{O}_X$로 이루어진다.
+환 달린 공간의 사상 $f : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$은
+연속사상 $f : X \to Y$와 환의 층들의 $f$-사상
+$f^\sharp : \mathcal{O}_Y \to \mathcal{O}_X$로 주어진다.
+$f^\sharp$를 사상 $\mathcal{O}_Y \to f_*\mathcal{O}_X$로 생각할 수도 있다.
+Sheaves의 정의 \ref{sheaves-definition-f-map}과
+보조정리 \ref{sheaves-lemma-f-map}을 보라.
+
+\medskip\noindent
+염두에 둘 만한 좋은 기하학적 예는 $\mathcal{C}^\infty$-다양체와
+$\mathcal{C}^\infty$-다양체의 사상이다. 실제로 $M$이
+$\mathcal{C}^\infty$-다양체이면 매끄러운 함수들의 층
+$\mathcal{C}^\infty_M$은 $M$ 위의 환의 층이다. 또한 다양체의 사상
+$f : M \to N$이 매끄러울 필요충분조건은 모든 국소 단면 $h$, 즉
+$\mathcal{C}^\infty_N$의 모든 국소 단면에 대해 합성 $h \circ f$가
+$\mathcal{C}^\infty_M$의 국소 단면인 것이다.
+따라서 매끄러운 사상 $f$는 자연스럽게 환 달린 공간의 사상
+$$
+f : (M , \mathcal{C}^\infty_M) \longrightarrow (N, \mathcal{C}^\infty_N)
+$$
+을 준다. Sheaves의 예 \ref{sheaves-example-continuous-map-ringed}을 보라.
+줄기에서 무슨 일이 일어나는지 살펴보면 이해에 도움이 된다. 즉,
+$m \in M$이고 그 상이 $f(m) = n \in N$이라고 하자. 줄기
+$\mathcal{C}^\infty_{M, m}$은 $m$에서 매끄러운 함수들의 싹으로 이루어진 환이다.
+Sheaves의 예 \ref{sheaves-example-germs-functions}을 보라.
+$(M, m)$ 위 함수의 싹 대수는 국소환이며, 그 극대 아이디얼은
+$m$에서 사라지는 함수들로 이루어진다.
+$\mathcal{C}^\infty_{N, n}$도 마찬가지이다. 줄기 위의 사상
+$f^\sharp : \mathcal{C}^\infty_{N, n} \to \mathcal{C}^\infty_{M, m}$은
+극대 아이디얼을 극대 아이디얼 안으로 보낸다. 이는 단순히
+$f(m) = n$이기 때문이다.
+
+\medskip\noindent
+대수기하학에서는 스킴을 연구한다. 스킴 위의 환의 층은
+그 공간의 내재적 성질만으로 결정되지 않는다.
+환 $R$의 스펙트럼
+(Algebra의 절 \ref{algebra-section-spectrum-ring}을 보라)에
+$R$로부터 구성한 환의 층(아래에서 설명한다)을 갖춘 것이
+우리의 기본 구성요소가 된다. $\mathcal{O}$의 $\Spec(R)$ 위 줄기는
+$R$을 그 소 아이디얼에서 국소화한 국소환임을 알게 될 것이다.
+이 상황에서 국소 환 달린 공간을 도입하는 이유는 두 가지이다.
+(1) 일반적으로 스펙트럼 사이의 연속사상에 대응하는 환들의 사상을
+부여하는 장치가 없다. 이 때문에 사상 $f^\sharp$를 추가 자료로 둔다.
+(2) 이 스펙트럼들의 사상을 환 달린 공간의 범주에서 생각하면
+줄기 위의 사상들이 국소 준동형이 아닐 수도 있다. 기하학적 직관에 따르면
+국소 준동형이어야 하므로 다음과 같이 국소 환 달린 공간을 도입한다.
+
+\begin{definition}
+\label{schemes-definition-locally-ringed-space}
+국소 환 달린 공간에 관하여 다음을 정의한다.
+\begin{enumerate}
+\item {\it 국소 환 달린 공간 $(X, \mathcal{O}_X)$}은 위상공간 $X$와
+환의 층 $\mathcal{O}_X$로 이루어진 쌍으로서, 그 모든 줄기가 국소환인 것이다.
+\item 국소 환 달린 공간 $(X, \mathcal{O}_X)$이 주어졌을 때
+$\mathcal{O}_{X, x}$를 {\it $X$의 $x$에서의 국소환}이라 한다.
+$\mathfrak{m}_{X, x}$ 또는 간단히 $\mathfrak{m}_x$로
+$\mathcal{O}_{X, x}$의 극대 아이디얼을 나타낸다. 또한
+{\it $X$의 $x$에서의 잉여체}는 잉여체
+$\kappa(x) = \mathcal{O}_{X, x}/\mathfrak{m}_x$이다.
+\item {\it 국소 환 달린 공간의 사상}
+$(f, f^\sharp) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$은
+모든 $x \in X$에 대해 유도된 환 사상
+$\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$이 국소 준동형인
+환 달린 공간의 사상이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+국소 환 달린 공간을 논할 때에는 대개 표기에서 환의 층
+$\mathcal{O}_X$를 생략한다. 단순히 “국소 환 달린 공간 $X$”라고 할 것이다.
+또 표기의 남용으로 $X$를 그 바탕 위상공간으로도 생각할 것이다.
+마지막으로 이에 대응하는 환의 층
+$\mathcal{O}_X$를 {\it $X$의 구조층}이라 한다.
+더 나아가 국소환 $\mathcal{O}_{X, x}$의 극대 아이디얼을
+$\mathfrak{m}_{X, x}$ 또는 간단히 $\mathfrak{m}_x$로 나타내는 것이 관례이다.
+“$f : X \to Y$를 국소 환 달린 공간의 사상이라 하자”라고 말할 때에는
+구조층까지 생략한다. 이 경우에도 표기의 남용으로
+$f : X\to Y$를 바탕 위상공간들의 연속사상으로 생각한다.
+$f$에 대응하는 $f$-사상은 관례상 $f^\sharp$로 나타낸다.
+$f$가 국소 환 달린 공간의 사상이라는 조건은 모든 $x\in X$에 대해
+줄기 위의 사상
+$$
+f^\sharp_x : \mathcal{O}_{Y, f(x)} \longrightarrow \mathcal{O}_{X, x}
+$$
+이 극대 아이디얼 $\mathfrak m_{Y, f(x)}$을
+$\mathfrak m_{X, x}$ 안으로 보낸다는 말로 표현할 수 있다.
+
+\medskip\noindent
+이 표기 관례를 이용하여 국소 환 달린 공간들과 그 사상들이
+범주를 이룸을 보이자. 이를 위해서는 국소 환 달린 공간의 사상들의
+합성이 다시 국소 환 달린 공간의 사상임을 보이면 된다. 따라서
+$f : X \to Y$와 $g : Y \to Z$를 국소 환 달린 공간의 사상이라 하자.
+$f$와 $g$의 합성은 Sheaves의 정의
+\ref{sheaves-definition-composition-maps-ringed-spaces}에서 정의되어 있다.
+$x \in X$라 하자. Sheaves의 보조정리
+\ref{sheaves-lemma-compose-f-maps-stalks}에 의해 합성
+$$
+\mathcal{O}_{Z, g(f(x))}
+\xrightarrow{g^\sharp}
+\mathcal{O}_{Y, f(x)}
+\xrightarrow{f^\sharp}
+\mathcal{O}_{X, x}
+$$
+은 사상 $g \circ f$에 딸린 줄기 위의 사상이다.
+국소환 준동형들의 합성은 국소환 준동형이므로 결론이 따른다.
+
+\medskip\noindent
+이 정의의 좋은 성질 하나는 함자
+$$
+\textit{Locally ringed spaces}
+\longrightarrow
+\textit{Ringed spaces}
+$$
+가 동형을 반영한다는 것이다(그보다 더 많은 것을 반영한다).
+다음은 이를 덜 추상적으로 진술한 것이다.
+
+\begin{lemma}
+\label{schemes-lemma-isomorphism-locally-ringed}
+\begin{slogan}
+국소 환 달린 공간들 사이의 환 달린 공간의 동형은
+국소 환 달린 공간의 동형이다.
+\end{slogan}
+$X$, $Y$를 국소 환 달린 공간이라 하자.
+$f : X \to Y$가 환 달린 공간의 동형이면 $f$는
+국소 환 달린 공간의 동형이다.
+\end{lemma}
+
+\begin{proof}
+이는 대수에서의 대응하는 사실로부터 자명하게 따른다.
+$A$, $B$가 국소환이라고 하자. 임의의 환 동형
+$A \to B$는 국소환 동형이다.
+\end{proof}
+
+
+\section{국소 환 달린 공간의 열린 몰입}
+\label{schemes-section-open-immersion}
+
+\begin{definition}
+\label{schemes-definition-immersion-locally-ringed-spaces}
+$f : X \to Y$를 국소 환 달린 공간의 사상이라 하자.
+$f$를 {
+\it 열린 몰입}이라 하는 것은 $f$가 $X$를 $Y$의 열린 부분집합 위로
+보내는 위상동형이고 사상 $f^{-1}\mathcal{O}_Y \to \mathcal{O}_X$가
+동형일 때이다.
+\end{definition}
+
+\noindent
+다음 구성은 Sheaves의 정의 \ref{sheaves-definition-restriction} (3)과
+평행한 구성이다.
+
+\begin{example}
+\label{schemes-example-open-subspace}
+$X$를 국소 환 달린 공간이라 하자.
+$U \subset X$를 열린 부분집합이라 하자.
+$\mathcal{O}_U = \mathcal{O}_X|_U$를
+$\mathcal{O}_X$의 $U$로의 제한이라 하자.
+$u \in U$에 대해 줄기 $\mathcal{O}_{U, u}$는
+줄기 $\mathcal{O}_{X, u}$와 같으므로 국소환이다.
+따라서 $(U, \mathcal{O}_U)$는 국소 환 달린 공간이고, 사상
+$j : (U, \mathcal{O}_U) \to (X, \mathcal{O}_X)$는 열린 몰입이다.
+\end{example}
+
+\begin{definition}
+\label{schemes-definition-open-subspace}
+$X$를 국소 환 달린 공간이라 하자.
+$U \subset X$를 열린 부분집합이라 하자.
+위의 예 \ref{schemes-example-open-subspace}에 나오는 국소 환 달린 공간
+$(U, \mathcal{O}_U)$를 {\it $X$의 $U$에 딸린 열린 부분공간}이라 한다.
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-open-immersion}
+$f : X \to Y$를 국소 환 달린 공간의 열린 몰입이라 하자.
+$j : V = f(X) \to Y$를 $Y$의, $f$의 상에 딸린 열린 부분공간이라 하자.
+국소 환 달린 공간의 유일한 동형 $f' : X \cong V$가 존재하여
+$f = j \circ f'$을 만족한다.
+\end{lemma}
+
+\begin{proof}
+$f'$을 $X$와 $V$ 사이에서 $f$가 유도하는 위상동형이라 하자. 그러면
+위상공간의 사상으로서 $f = j \circ f'$이다. 층의 동형
+$f^\sharp : f^{-1}(\mathcal{O}_Y) \to \mathcal{O}_X$가 있으므로, 환의 동형
+$f^\sharp : \Gamma(U, f^{-1}(\mathcal{O}_Y)) \to \Gamma(U, \mathcal{O}_X)$가
+각 열린 부분집합 $U \subset X$에 대해 존재한다.
+$\mathcal{O}_V = j^{-1}\mathcal{O}_Y$이고 $f^{-1} = f'^{-1} j^{-1}$이므로
+(Sheaves의 보조정리 \ref{sheaves-lemma-pullback-composition}),
+$f^{-1}\mathcal{O}_Y = f'^{-1}\mathcal{O}_V$이다. 따라서 사상
+$\Gamma(U, f'^{-1}(\mathcal{O}_V)) \to \Gamma(U, f^{-1}(\mathcal{O}_Y))$는
+모든 열린 $U \subset X$에 대해 동형이다. 이들을 합성하면 각 열린 부분집합
+$U \subset X$에 대해 환의 동형
+$$
+\Gamma(U, f'^{-1}(\mathcal{O}_V)) \to \Gamma(U, \mathcal{O}_X)
+$$
+을 얻고, 따라서 층의 동형
+$f^{-1}(\mathcal{O}_V) \to \mathcal{O}_X$을 얻는다. 다시 말해 동형
+$f'^{\sharp} : f'^{-1}(\mathcal{O}_V) \to \mathcal{O}_X$가 있고, 따라서
+국소 환 달린 공간의 동형
+$(f', f'^{\sharp}) : (X, \mathcal{O}_X) \to (V, \mathcal{O}_V)$가 있다
+(보조정리 \ref{schemes-lemma-isomorphism-locally-ringed}을 사용한다).
+구성에 의해 국소 환 달린 공간의 사상으로서 $f = j \circ f'$이다.
+
+\medskip\noindent
+다른 사상 $f'' : (X, \mathcal{O}_X) \to (V, \mathcal{O}_V)$가
+$f = j \circ f''$을 만족한다고 하자.
+각 점 $x \in X$에서 $j(f'(x)) = j(f''(x))$이다. 여기서
+$f'(x) = f''(x)$인 것은 $j$가 포함사상이기 때문이다. 따라서
+$f'$과 $f''$은 위상공간의 사상으로서 같다.
+구조층 위에서는 각 열린 부분집합 $U \subset X$에 대해 가환 그림
+$$
+\xymatrix @R=5em{
+\Gamma(U, f^{-1}(\mathcal{O}_Y)) \ar[d]_\cong\ar[r]^\cong &
+\Gamma(U, \mathcal{O}_X) \\
+\Gamma(U, f'^{-1}(\mathcal{O}_V)) \ar@/^/[ru]^{f'^\sharp}
+\ar@/_/[ru]_{f''^\sharp} &
+}
+$$
+을 얻는다. 이로부터 $f'^\sharp$과 $f''^\sharp$이 같은 층의 사상을
+정의함을 알 수 있다.
+\end{proof}
+
+\noindent
+이제부터 열린 부분집합과 그에 딸린 부분공간을 구별하지 않는다.
+
+\begin{lemma}
+\label{schemes-lemma-restrict-map-to-opens}
+$f : X \to Y$를 국소 환 달린 공간의 사상이라 하자.
+$U \subset X$와 $V \subset Y$를 열린 부분집합이라 하자.
+$f(U) \subset V$라고 가정하자. 다음 그림이 국소 환 달린 공간들의
+가환 사각형이 되도록 하는 국소 환 달린 공간의 유일한 사상
+$f|_U : U \to V$가 존재한다.
+$$
+\xymatrix{
+U \ar[d]_{f|_U} \ar[r] & X \ar[d]^f \\
+V \ar[r] & Y
+}
+$$
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\noindent
+이하에서는 위 보조정리로부터 따르는 다음 사실을 따로 언급하지 않고 사용한다.
+국소 환 달린 공간의 임의의 사상 $f : Y \to X$와 임의의 열린 부분집합
+$U \subset X$가 주어지고 $f(Y) \subset U$를 만족하면,
+국소 환 달린 공간의 유일한 사상 $Y \to U$가 존재하여 합성
+$Y \to U \to X$가 $f$와 같아진다. 실제로 혼동을 일으키는 일이 드물기 때문에
+표기의 남용으로 $f : Y \to U$라고까지 쓸 것이다.
+
+
+\section{국소 환 달린 공간의 닫힌 몰입}
+\label{schemes-section-closed-immersion}
+
+\noindent
+Modules의 정의 \ref{modules-definition-closed-immersion}에서 도입한
+관례를 따른다.
+
+\begin{definition}
+\label{schemes-definition-closed-immersion-locally-ringed-spaces}
+$i : Z \to X$를 국소 환 달린 공간의 사상이라 하자.
+$i$를 다음 조건들을 만족하는 경우 {
+\it 닫힌 몰입}이라 한다.
+\begin{enumerate}
+\item 사상 $i$는 $Z$를 $X$의 닫힌 부분집합 위로 보내는 위상동형이다.
+\item 사상 $\mathcal{O}_X \to i_*\mathcal{O}_Z$는 전사이다.
+그 핵을 $\mathcal{I}$로 나타낸다.
+\item $\mathcal{O}_X$-가군 $\mathcal{I}$는 단면들로 국소 생성된다.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-closed-local-target}
+$f : Z \to X$를 국소 환 달린 공간의 사상이라 하자.
+$f$가 닫힌 몰입이려면 열린 덮개 $X = \bigcup U_i$가 존재하여
+각 사상 $f : f^{-1}U_i \to U_i$가 닫힌 몰입이면 충분하다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{example}
+\label{schemes-example-closed-subspace}
+$X$를 국소 환 달린 공간이라 하자.
+$\mathcal{I} \subset \mathcal{O}_X$를 $\mathcal{O}_X$-가군의 층으로서
+단면들로 국소 생성되는 아이디얼층이라 하자. $Z$를 환의 층
+$\mathcal{O}_X/\mathcal{I}$의 받침이라 하자. 이는 Modules의 보조정리
+\ref{modules-lemma-support-sheaf-rings-closed}에 의해 $X$의 닫힌 부분집합이다.
+$i : Z \to X$로 포함사상을 나타내자.
+Modules의 보조정리 \ref{modules-lemma-i-star-exact}에 의해
+유일한 환의 층 $\mathcal{O}_Z$가 $Z$ 위에 존재하며
+$i_*\mathcal{O}_Z = \mathcal{O}_X/\mathcal{I}$를 만족한다. 임의의 $z \in Z$에 대해 줄기
+$\mathcal{O}_{Z, z}$는 국소환의 0이 아닌 몫
+$\mathcal{O}_{X, i(z)}/\mathcal{I}_{i(z)}$와 같으므로 국소환이다.
+따라서 $i : (Z, \mathcal{O}_Z) \to (X, \mathcal{O}_X)$는
+국소 환 달린 공간의 닫힌 몰입이다.
+\end{example}
+
+\begin{definition}
+\label{schemes-definition-closed-subspace}
+$X$를 국소 환 달린 공간이라 하자.
+$\mathcal{I}$를 $X$ 위에서 단면들로 국소 생성되는 아이디얼층이라 하자.
+위의 예 \ref{schemes-example-closed-subspace}에 나오는 국소 환 달린 공간
+$(Z, \mathcal{O}_Z)$를 {
+\it $X$의 아이디얼층 $\mathcal{I}$에 딸린 닫힌 부분공간}이라 한다.
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-closed-immersion}
+$f : X \to Y$를 국소 환 달린 공간의 닫힌 몰입이라 하자.
+$\mathcal{I}$를 사상 $\mathcal{O}_Y \to f_*\mathcal{O}_X$의 핵이라 하자.
+$i : Z \to Y$를 $Y$의 아이디얼층 $\mathcal{I}$에 딸린 닫힌 부분공간이라 하자.
+국소 환 달린 공간의 유일한 동형 $f' : X \cong Z$가 존재하여
+$f = i \circ f'$을 만족한다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-characterize-closed-subspace}
+$X$, $Y$를 국소 환 달린 공간이라 하자. $\mathcal{I} \subset \mathcal{O}_X$를
+단면들로 국소 생성되는 아이디얼층이라 하자. $i : Z \to X$를 이에 딸린
+닫힌 부분공간이라 하자. 사상 $f : Y \to X$가 $Z$를 통해 인수분해될
+필요충분조건은 사상
+$f^*\mathcal{I} \to f^*\mathcal{O}_X = \mathcal{O}_Y$가 0인 것이다.
+이 조건이 성립하면 사상 $g : Y \to Z$가 유일하게 존재하여
+$f = i \circ g$를 만족한다.
+\end{lemma}
+
+\begin{proof}
+$f$가 $Y \to Z \to X$로 인수분해되면 사상
+$f^*\mathcal{I} \to \mathcal{O}_Y$가 0임은 분명하다. 역으로
+$f^*\mathcal{I} \to \mathcal{O}_Y$가 0이라고 하자.
+임의의 $y \in Y$를 택하고 환 사상
+$f^\sharp_y : \mathcal{O}_{X, f(y)} \to \mathcal{O}_{Y, y}$을 생각하자.
+가정에 의해 합성
+$\mathcal{I}_{f(y)} \to \mathcal{O}_{X, f(y)} \to \mathcal{O}_{Y, y}$가
+0이고 $f^\sharp_y(1) = 1$이므로 $1 \not \in \mathcal{I}_{f(y)}$, 즉
+$\mathcal{I}_{f(y)} \not = \mathcal{O}_{X, f(y)}$이다. 따라서
+$f(Y) \subset Z = \text{Supp}(\mathcal{O}_X/\mathcal{I})$임을 얻는다.
+그러므로 $f = i \circ g$이고 $g : Y \to Z$는 연속이다.
+사상 $f^\sharp : \mathcal{O}_X \to f_*\mathcal{O}_Y$를 생각하자.
+$f^*\mathcal{I} \to \mathcal{O}_Y$가 0이라는 가정은 합성
+$\mathcal{I} \to \mathcal{O}_X \to f_*\mathcal{O}_Y$가 0임을 뜻한다.
+이는 $f_*$와 $f^*$의 수반성에서 따른다.
+다시 말해 환의 층의 사상
+$\overline{f^\sharp} : \mathcal{O}_X/\mathcal{I} \to f_*\mathcal{O}_Y$를 얻는다.
+$f_*\mathcal{O}_Y = i_*g_*\mathcal{O}_Y$이고
+$\mathcal{O}_X/\mathcal{I} = i_*\mathcal{O}_Z$임에 유의하자.
+Sheaves의 보조정리 \ref{sheaves-lemma-equivalence-categories-closed-structures}에
+의해 환의 층의 유일한 사상
+$g^\sharp : \mathcal{O}_Z \to g_*\mathcal{O}_Y$를 얻는데, 이를 $i$로
+직상한 것은 $\overline{f^\sharp}$이다. $(g, g^\sharp)$가 국소 환 달린 공간의
+사상을 정의한다는 것과 국소 환 달린 공간의 사상으로서
+$f = i \circ g$라는 것의 확인은 생략한다. $(g, g^\sharp)$의 유일성은
+위에서 이미 지적하였다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-restrict-map-to-closed}
+$f : X \to Y$를 국소 환 달린 공간의 사상이라 하자.
+$\mathcal{I} \subset \mathcal{O}_Y$를 단면들로 국소 생성되는 아이디얼층이라 하자.
+$i : Z \to Y$를 아이디얼층 $\mathcal{I}$에 딸린 닫힌 부분공간이라 하자.
+$\mathcal{J}$를 사상
+$f^*\mathcal{I} \to f^*\mathcal{O}_Y = \mathcal{O}_X$의 상이라 하자.
+그러면 이 아이디얼은 단면들로 국소 생성된다. 또한
+$i' : Z' \to X$를 이에 딸린 $X$의 닫힌 부분공간이라 하자.
+다음 그림이 국소 환 달린 공간들의 가환 사각형이 되도록 하는
+국소 환 달린 공간의 유일한 사상 $f' : Z' \to Z$가 존재한다.
+$$
+\xymatrix{
+Z' \ar[d]_{f'} \ar[r]_{i'} & X \ar[d]^f \\
+Z \ar[r]^{i} & Y
+}
+$$
+또한 이 그림은 국소 환 달린 공간의 범주에서 올곱 사각형이다.
+\end{lemma}
+
+\begin{proof}
+아이디얼 $\mathcal{J}$는 Modules의 보조정리
+\ref{modules-lemma-pullback-locally-generated}에 의해 단면들로 국소 생성된다.
+보조정리의 나머지는 위의 보조정리
+\ref{schemes-lemma-characterize-closed-subspace}에서 주어진, 사상이 닫힌 부분공간을
+통해 인수분해된다는 것의 특성화로부터 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{아핀 스킴}
+\label{schemes-section-affine-schemes}
+
+\noindent
+환 $R$을 잡자. Algebra의 절 \ref{algebra-section-spectrum-ring}을 참고하여
+위상공간 $\Spec(R)$을 생각하자. 이는 $R$에 딸린 공간이다. 이 공간에 환의 층
+$\mathcal{O}_{\Spec(R)}$을 부여할 것이며, 그 결과 얻는 쌍
+$(\Spec(R), \mathcal{O}_{\Spec(R)})$은 아핀 스킴이 된다.
+
+\medskip\noindent
+$\Spec(R)$은 $D(f)$, $f \in R$ 꼴의 열린집합들을 기저로 가지며,
+이를 표준 열린집합이라 부른다는 것을 상기하자. Algebra의 정의
+\ref{algebra-definition-Zariski-topology}를 보라. 또한 두 표준 열린집합의
+교집합도 표준 열린집합이다.
+$D(f) \cap D(g) = D(fg)$, $f, g\in R$.
+
+\begin{lemma}
+\label{schemes-lemma-standard-open}
+환 $R$과 원소 $f \in R$을 잡자.
+\begin{enumerate}
+\item $g\in R$이고 $D(g) \subset D(f)$이면 다음이 성립한다.
+\begin{enumerate}
+\item $f$는 $R_g$에서 가역이다.
+\item $g^e = af$인 어떤 $e \geq 1$과 $a \in R$가 존재한다.
+\item 표준적인 환 사상 $R_f \to R_g$가 존재한다.
+\item 표준적인 $R_f$-가군 사상 $M_f \to M_g$가 임의의
+$R$-가군 $M$에 대하여 존재한다.
+\end{enumerate}
+\item $D(f)$의 모든 열린 덮개는
+$D(f) = \bigcup_{i = 1}^n D(g_i)$ 꼴의 유한 열린 덮개로 세분된다.
+\item $g_1, \ldots, g_n \in R$이면, $D(f) \subset \bigcup D(g_i)$일
+필요충분조건은 $g_1, \ldots, g_n$이 $R_f$에서 단위 아이디얼을 생성하는 것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$D(g) = \Spec(R_g)$임을 상기하자(Algebra의 보조정리
+\ref{algebra-lemma-standard-open}을 보라). 따라서 (a)는 $f$의 $R_g$에서의
+상이 어떤 소 아이디얼에도 들어 있지 않아 가역이라는 사실에서 따른다.
+Algebra의 보조정리 \ref{algebra-lemma-Zariski-topology}를 보라.
+$f$의 $R_g$에서의 역원을 $a/g^d$로 쓰자. 이는 $g^d - af$가 $g$의 어떤
+거듭제곱에 의해 소멸된다는 뜻이므로 (b)를 얻는다. (c)의 사상
+$R_f \to R_g$는 (a)와 국소화의 보편 성질로부터 존재한다. 또는
+$b/f^n$을 $a^nb/g^{ne}$로 보내어 정의할 수 있다. 등식
+$M_f = M \otimes_R R_f$를 사용하여 가군 위의 사상을 얻을 수 있고,
+또는 $M_f \to M_g$를 $x/f^n$을 $a^nx/g^{ne}$로 보내어 정의할 수 있다.
+
+\medskip\noindent
+$D(f)$가 준콤팩트임을 상기하자. Algebra의 보조정리
+\ref{algebra-lemma-qc-open}을 보라. 따라서 두 번째 명제는 표준
+열린집합들이 위상의 기저를 이룬다는 사실에서 바로 따른다.
+
+\medskip\noindent
+세 번째 명제는 Algebra의 보조정리
+\ref{algebra-lemma-Zariski-topology}에서 바로 따른다.
+\end{proof}
+
+\noindent
+Sheaves의 절 \ref{sheaves-section-bases}에서 기저 위의 층이라는 개념을
+정의했고, 이것이 공간 위의 층이라는 개념과 본질적으로 동치임을 보였다.
+Sheaves의 보조정리 \ref{sheaves-lemma-extend-off-basis}와
+\ref{sheaves-lemma-extend-off-basis-structures}를 보라. 더 나아가 Sheaves의
+보조정리 \ref{sheaves-lemma-cofinal-systems-coverings-standard-case}에서 각
+표준 열린집합에 대하여 공종인 열린 덮개들의 계에 대해서만 층 조건을
+확인하면 충분함을 보였다. 위의 보조정리에 의해 표준 열린집합들로 이루어진
+유한 덮개에 대해서만 확인하면 충분하다.
+
+\begin{definition}
+\label{schemes-definition-standard-covering}
+환 $R$을 잡자.
+\begin{enumerate}
+\item $\Spec(R)$의 {\it 표준 열린 덮개}란
+$\Spec(R) = \bigcup_{i = 1}^n D(f_i)$ 꼴의 덮개를 말한다. 여기서
+$f_1, \ldots, f_n \in R$이다.
+\item $D(f) \subset \Spec(R)$이 표준 열린집합이라고 하자. $D(f)$의
+{\it 표준 열린 덮개}란 $D(f) = \bigcup_{i = 1}^n D(g_i)$ 꼴의 덮개를
+말한다. 여기서 $g_1, \ldots, g_n \in R$이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+환 $R$과 가군 $M$을 잡고, 후자가 $R$-가군이라고 하자. 표준 열린집합들의 기저 위에 준층
+$\widetilde M$을 정의하겠다. $U \subset \Spec(R)$이 표준 열린집합이라고
+하자. $f, g \in R$가 $D(f) = D(g)$를 만족한다고 하자. 위의 보조정리
+\ref{schemes-lemma-standard-open}에 의해 서로 역인 표준 사상
+$M_f \to M_g$와 $M_g \to M_f$가 존재한다. 따라서 임의의 $f$를 골라
+$U = D(f)$가 되게 하고 다음과 같이 정의할 수 있다.
+$$
+\widetilde M(U) = M_f.
+$$
+$D(g) \subset D(f)$이면 위의 보조정리 \ref{schemes-lemma-standard-open}에 의해
+표준 사상
+$$
+\widetilde M(D(f)) = M_f \longrightarrow M_g = \widetilde M(D(g)).
+$$
+을 얻음에 유의하자. 이것은 표준 열린집합들의 기저 위에 아벨군의 준층을
+분명히 정의한다. $M = R$이면 $\widetilde R$은 표준 열린집합들의 기저
+위의 환의 준층이다.
+
+\medskip\noindent
+$\widetilde M$의 점 $x \in \Spec(R)$에서의 줄기를 계산하자. $x$가 소
+아이디얼 $\mathfrak p \subset R$에 대응한다고 하자. 줄기의 정의에 의해
+$$
+\widetilde M_x = \colim_{f\in R, f\not\in \mathfrak p} M_f
+$$
+임을 알 수 있다. 여기서 집합 $\{f \in R, f \not \in \mathfrak p\}$에는
+$f \geq f' \Leftrightarrow D(f) \subset D(f')$라는 규칙으로 전순서를 준다.
+$f_1, f_2 \in R \setminus \mathfrak p$이면 이 순서에서
+$f_1f_2 \geq f_1$이다. 따라서 Algebra의 보조정리
+\ref{algebra-lemma-localization-colimit}에 의해
+$$
+\widetilde M_x = M_{\mathfrak p}.
+$$
+임을 얻는다.
+
+\medskip\noindent
+이제 표준 열린 덮개에 대한 층 조건을 확인하자.
+$D(f) = \bigcup_{i = 1}^n D(g_i)$이면 이 덮개에 대한 층 조건은 열
+$$
+0 \to M_f \to \bigoplus M_{g_i} \to \bigoplus M_{g_ig_j}.
+$$
+의 완전성과 동치이다. $D(g_i) = D(fg_i)$이므로 이 열을
+$$
+0 \to M_f \to \bigoplus M_{fg_i} \to \bigoplus M_{fg_ig_j}.
+$$
+로 다시 쓸 수 있음에 유의하자. 또한 위의 보조정리
+\ref{schemes-lemma-standard-open}에 의해 $g_1, \ldots, g_n$은 $R_f$에서 단위
+아이디얼을 생성한다. 따라서 가군 $M_f$를 환 $R_f$ 위에서 생각하고 원소
+$g_1, \ldots, g_n$에 Algebra의 보조정리
+\ref{algebra-lemma-cover-module}을 적용할 수 있다. 이 열이 완전함을 얻는다.
+위의 논의에 의해 $\widetilde M$은 표준 열린집합들의 기저 위의 층이다.
+
+\medskip\noindent
+따라서 Sheaves의 절 \ref{sheaves-section-bases}의 내용으로부터 유일한 환의 층
+$\mathcal{O}_{\Spec(R)}$이 존재하며, 표준 열린집합들 위에서
+$\widetilde R$과 일치함을 얻는다. 위에서 계산한 줄기에 의해
+이 환의 층의 모든 줄기가 국소환임에 유의하자.
+
+\medskip\noindent
+마찬가지로 임의의 $R$-가군 $M$에 대하여 유일한
+$\mathcal{O}_{\Spec(R)}$-가군의 층 $\mathcal{F}$가 존재하며, 표준
+열린집합들 위에서 $\widetilde M$과 일치한다. Sheaves의 보조정리
+\ref{sheaves-lemma-extend-off-basis-module}을 보라.
+
+\begin{definition}
+\label{schemes-definition-structure-sheaf}
+환 $R$을 잡자.
+\begin{enumerate}
+\item {\it 구조층 $\mathcal{O}_{\Spec(R)}$}은 환 $R$의 스펙트럼에서
+정의되는 유일한 환의 층 $\mathcal{O}_{\Spec(R)}$이며, 표준 열린집합들의
+기저 위에서 $\widetilde R$과 일치한다.
+\item 국소 환 달린 공간 $(\Spec(R), \mathcal{O}_{\Spec(R)})$을 $R$의
+{\it 스펙트럼}이라 부르고 $\Spec(R)$으로 나타낸다.
+\item $\mathcal{O}_{\Spec(R)}$-가군의 층 중 $\widetilde M$을
+$\Spec(R)$의 모든 열린집합으로 확장한 것을 $\mathcal{O}_{\Spec(R)}$-가군의
+층으로서 $M$에 딸린 층이라 한다. 이 층도 $\widetilde M$으로
+나타낸다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+지금까지 얻은 결과를 요약하자.
+
+\begin{lemma}
+\label{schemes-lemma-spec-sheaves}
+환 $R$과 가군 $M$을 잡고, 후자가 $R$-가군이라고 하자. $\widetilde M$을
+$\mathcal{O}_{\Spec(R)}$-가군의 층 중 $M$에 딸린 층이라 하자.
+\begin{enumerate}
+\item $\Gamma(\Spec(R), \mathcal{O}_{\Spec(R)}) = R$이다.
+\item $\Gamma(\Spec(R), \widetilde M) = M$이며, 이는 $R$-가군의 등식이다.
+\item 모든 $f \in R$에 대하여
+$\Gamma(D(f), \mathcal{O}_{\Spec(R)}) = R_f$이다.
+\item 모든 $f\in R$에 대하여 $\Gamma(D(f), \widetilde M) = M_f$이며,
+이는 $R_f$-가군의 등식이다.
+\item $D(g) \subset D(f)$일 때마다 $\mathcal{O}_{\Spec(R)}$과
+$\widetilde M$ 위의 제한 사상은 보조정리 \ref{schemes-lemma-standard-open}의 사상
+$R_f \to R_g$와 $M_f \to M_g$이다.
+\item $\mathfrak p$를 $R$의 소 아이디얼이라 하고, $x \in \Spec(R)$을
+그에 대응하는 점이라 하자. $\mathcal{O}_{\Spec(R), x} = R_{\mathfrak p}$이다.
+\item $\mathfrak p$를 $R$의 소 아이디얼이라 하고, $x \in \Spec(R)$을
+그에 대응하는 점이라 하자. $\widetilde M_x = M_{\mathfrak p}$이며,
+이는 $R_{\mathfrak p}$-가군의 등식이다.
+\end{enumerate}
+더 나아가 이 모든 동일시는 $R$-가군 $M$에 관하여 함자적이다. 특히
+함자 $M \mapsto \widetilde M$은 $R$-가군의 범주에서
+$\mathcal{O}_{\Spec(R)}$-가군의 범주로 가는 완전함자이다.
+\end{lemma}
+
+\begin{proof}
+(1)--(7)은 위의 논의에서 분명하다. 함자 $M \mapsto \widetilde M$의
+완전성은 함자 $M \mapsto M_{\mathfrak p}$가 완전하다는 사실과 짧은
+완전열의 완전성을 줄기에서 확인할 수 있다는 사실에서 따른다.
+Modules의 보조정리 \ref{modules-lemma-abelian}을 보라.
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-affine-scheme}
+{\it 아핀 스킴}은 $\Spec(R)$과 국소 환 달린 공간으로서 동형인
+국소 환 달린 공간이다. 여기서 $R$은 어떤 환이다. {\it 아핀 스킴의 사상}은
+국소 환 달린 공간의 범주에서의 사상이다.
+\end{definition}
+
+\noindent
+아핀 스킴은 모든 국소 환 달린 공간 가운데 특별한 역할을 한다.
+다음 절은 바로 이를 다룬다.
+
+
+
+
+
+
+
+
+
+
+
+
+\section{아핀 스킴의 범주}
+\label{schemes-section-category-affine-schemes}
+
+\noindent
+$Y$가 아핀 스킴이면 그 점들은 표준적인 $1-1$ 대응에 의해
+$\Gamma(Y, \mathcal{O}_Y)$의 소 아이디얼들과 대응함에 유의하자.
+
+\begin{lemma}
+\label{schemes-lemma-morphism-into-affine-where-point-goes}
+$X$를 국소 환 달린 공간이라 하고 $Y$를 아핀 스킴이라 하자.
+$f \in \Mor(X, Y)$를 국소 환 달린 공간의 사상이라 하자. 점
+$x \in X$가 주어졌을 때 환 사상들을 생각하자.
+$$
+\Gamma(Y, \mathcal{O}_Y) \xrightarrow{f^\sharp}
+\Gamma(X, \mathcal{O}_X) \to \mathcal{O}_{X, x}
+$$
+$\mathfrak p \subset \Gamma(Y, \mathcal{O}_Y)$를 $\mathfrak m_x$의
+역상이라 하자. $y \in Y$를 이에 대응하는 점이라 하면 $f(x) = y$이다.
+\end{lemma}
+
+\begin{proof}
+가환 그림
+$$
+\xymatrix{
+\Gamma(X, \mathcal{O}_X) \ar[r] &
+\mathcal{O}_{X, x} \\
+\Gamma(Y, \mathcal{O}_Y) \ar[r] \ar[u] &
+\mathcal{O}_{Y, f(x)} \ar[u]
+}
+$$
+을 생각하자(Sheaves의 정의 \ref{sheaves-definition-f-map} 아래에 나오는
+$f$-사상의 논의를 보라). 오른쪽 수직 화살표는 국소 사상이므로
+$\mathfrak m_{f(x)}$는 $\mathfrak m_x$의 역상이다. 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-f-open}
+$X$를 국소 환 달린 공간이라 하자. $f \in \Gamma(X, \mathcal{O}_X)$라 하자.
+집합
+$$
+D(f) = \{x \in X \mid \text{image }f \not\in \mathfrak m_x\}
+$$
+은 열려 있다. 또한 $f|_{D(f)}$는 역원을 가진다.
+\end{lemma}
+
+\begin{proof}
+이는 Modules의 보조정리 \ref{modules-lemma-s-open}의 특수한 경우이지만,
+직접적인 증명도 주겠다. $U \subset X$와 $V \subset X$를 두 열린집합이라
+하고, $f|_U$는 역원 $g$를, $f|_V$는 역원 $h$를 가진다고 하자. 그러면
+$g|_{U\cap V} = h|_{U\cap V}$임은 분명하다. 따라서 $f$가 임의의
+$x \in D(f)$의 어떤 열린 근방에서 가역임을 보이면 충분하다.
+$f \not \in \mathfrak m_x$이면 $f \in \mathcal{O}_{X, x}$가 역원
+$g \in \mathcal{O}_{X, x}$를 가진다. 이는 어떤 열린 근방
+$x \in U \subset X$가 존재하여 $g \in \mathcal{O}_X(U)$이고
+$g\cdot f|_U = 1$임을 뜻하므로 결론은 분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-f-open-affine}
+위의 보조정리 \ref{schemes-lemma-f-open}에서 $X$가 아핀 스킴이면, 열린집합
+$D(f)$는 앞서 정의한 표준 열린집합 $D(f)$와 일치한다(Algebra의 정의
+\ref{algebra-definition-spectrum-ring}을 보라).
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-morphism-into-affine}
+\begin{reference}
+이 사실의 참고문헌은 \cite[II, Err 1, Prop. 1.8.1]{EGA}이며,
+거기서는 J. Tate에게 귀속되어 있다.
+\end{reference}
+$X$를 국소 환 달린 공간이라 하고 $Y$를 아핀 스킴이라 하자. 사상
+$$
+\Mor(X, Y)
+\longrightarrow
+\Hom(\Gamma(Y, \mathcal{O}_Y), \Gamma(X, \mathcal{O}_X))
+$$
+은 $f$를 전역 단면 위의 $f^\sharp$로 보내며 전단사이다.
+\end{lemma}
+
+\begin{proof}
+$Y$가 아핀이므로
+$(Y, \mathcal{O}_Y) \cong (\Spec(R), \mathcal{O}_{\Spec(R)})$이고,
+여기서 $R$은 어떤 환이다.
+증명 중에는 환의 스펙트럼에 관해 아는 사실들에서 바로 따라오는
+$Y$와 그 구조층의 성질들을 사용할 것이다. 예를 들어 보조정리
+\ref{schemes-lemma-spec-sheaves}를 보라.
+
+\medskip\noindent
+위의 보조정리들에 따라 역함수를 구성하자. 환 사상
+$\psi_Y : \Gamma(Y, \mathcal{O}_Y) \to \Gamma(X, \mathcal{O}_X)$를 잡자.
+먼저 보조정리 \ref{schemes-lemma-morphism-into-affine-where-point-goes}의 규칙으로
+이에 대응하는 공간의 사상
+$$
+\Psi : X \longrightarrow Y
+$$
+를 정의한다. 다시 말해 $x \in X$가 주어지면 $\Psi(x)$를 다음 소
+아이디얼에 대응하는 $Y$의 점으로 정의한다. 그 소 아이디얼은
+$\Gamma(Y, \mathcal{O}_Y)$ 안에서 $\mathfrak m_x$의 역상이며, 이 역상은 합성
+$
+\Gamma(Y, \mathcal{O}_Y) \xrightarrow{\psi_Y}
+\Gamma(X, \mathcal{O}_X) \to
+\mathcal{O}_{X, x}
+$
+에 관해 취한다.
+
+\medskip\noindent
+사상 $\Psi : X \to Y$가 연속임을 주장한다. 표준 열린집합
+$D(g)$, $g \in \Gamma(Y, \mathcal{O}_Y)$들은 $Y$의 위상의 기저이다.
+따라서 $\Psi^{-1}(D(g))$가 열려 있음을 보이면 충분하다. $\Psi$의 구성에
+의해 역상 $\Psi^{-1}(D(g))$는 정확히 집합
+$D(\psi_Y(g)) \subset X$이며, 이는 보조정리 \ref{schemes-lemma-f-open}에 의해
+열려 있다. 따라서 $\Psi$는 연속이다.
+
+\medskip\noindent
+다음으로 층의 $\Psi$-사상을 $\mathcal{O}_Y$에서 $\mathcal{O}_X$로
+가도록 구성하자. Sheaves의 보조정리
+\ref{sheaves-lemma-f-map-basis-below-structures}에 의해 제한 사상들과
+양립하는 환 사상
+$\psi_{D(g)} : \Gamma(D(g), \mathcal{O}_Y) \to
+\Gamma(\Psi^{-1}(D(g)), \mathcal{O}_X)$
+들을 정의하면 충분하다. 표준 동형
+$\Gamma(D(g), \mathcal{O}_Y) = \Gamma(Y, \mathcal{O}_Y)_g$가 존재한다.
+이는 $Y$가 아핀 스킴이기 때문이다.
+$\psi_Y(g)$는 $D(\psi_Y(g))$ 위에서 가역이므로 표준 사상
+$$
+\Gamma(Y, \mathcal{O}_Y)_g
+\longrightarrow
+\Gamma(\Psi^{-1}(D(g)), \mathcal{O}_X)
+=
+\Gamma(D(\psi_Y(g)), \mathcal{O}_X)
+$$
+이 존재하며, 국소화의 보편 성질에 의해 사상 $\psi_Y$를 확장한다.
+여기서는 이 표준 사상을 택하는 것 외에 선택의 여지가 없음에 유의하자.
+이를 표준 동일시
+$\Gamma(D(g), \mathcal{O}_Y) = \Gamma(Y, \mathcal{O}_Y)_g$와 결합하여
+$\psi_{D(g)}$로 삼는다. 아핀 스킴 위의 제한 사상들도 국소화의 보편
+성질로 정의되므로 이는 국소화와 양립한다. 보조정리
+\ref{schemes-lemma-spec-sheaves}와 \ref{schemes-lemma-standard-open}을 보라.
+
+\medskip\noindent
+이로써 환 달린 공간의 사상
+$(\Psi, \psi) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$를 정의했고,
+전역 단면 위에서 $\psi_Y$를 복원한다. 이것이 국소 환 달린 공간의
+사상임을 보이려면 국소환 위에 유도되는 사상
+$$
+\psi_x : \mathcal{O}_{Y, \Psi(x)} \longrightarrow \mathcal{O}_{X, x}
+$$
+들이 국소임을 보여야 한다. 이는 보조정리
+\ref{schemes-lemma-morphism-into-affine-where-point-goes}의 증명에 나오는 가환
+그림과 $\Psi$의 정의에서 바로 따른다.
+
+\medskip\noindent
+마지막으로 구성 $(\Psi, \psi) \mapsto \psi_Y$와 구성
+$\psi_Y \mapsto (\Psi, \psi)$가 서로 역임을 보여야 한다. 분명히
+$\psi_Y \mapsto (\Psi, \psi) \mapsto \psi_Y$이다. 따라서 보일 것은
+$\psi_Y$가 주어졌을 때 그것을 낳는 쌍 $(\Psi, \psi)$가 많아야 하나라는
+것뿐이다. $\Psi$의 유일성은 보조정리
+\ref{schemes-lemma-morphism-into-affine-where-point-goes}에서 보였고, $\Psi$의
+유일성이 주어졌을 때 사상 $\psi$의 유일성은 위의 증명 과정에서
+지적하였다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-category-affine-schemes}
+아핀 스킴의 범주는 환의 범주의 반대범주와 동치이다. 이 동치는 아핀
+스킴에 그 구조층의 전역 단면을 대응시키는 함자로 주어진다.
+\end{lemma}
+
+\begin{proof}
+이는 이제 정의 \ref{schemes-definition-affine-scheme}와 보조정리
+\ref{schemes-lemma-morphism-into-affine}에서 분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-standard-open-affine}
+$Y$를 아핀 스킴이라 하고 $f \in \Gamma(Y, \mathcal{O}_Y)$라 하자.
+열린 부분공간 $D(f)$는 아핀 스킴이다.
+\end{lemma}
+
+\begin{proof}
+$Y = \Spec(R)$이고 $f \in R$이라고 가정해도 된다. 아핀 스킴의 사상
+$\phi : U = \Spec(R_f) \to \Spec(R) = Y$를 생각하자. 이는 환 사상
+$R \to R_f$에 의해 유도된다. Algebra의 보조정리
+\ref{algebra-lemma-standard-open}에 의해 이것은 $D(f)$ 위로의
+위상동형이다. 한편 사상 $\phi^{-1}\mathcal{O}_Y \to \mathcal{O}_U$는
+줄기 위에서 동형이므로 동형이다. 따라서 $\phi$가 열린 몰입임을 알 수 있다.
+보조정리 \ref{schemes-lemma-open-immersion}에 의해 $D(f)$는 $U$와 동형이다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-fibre-product-affine-schemes}
+아핀 스킴의 범주는 유한 곱과 올곱을 가진다. 다시 말해 유한 극한을
+가진다. 또한 아핀 스킴의 범주에서의 곱과 올곱은 국소 환 달린 공간의
+범주에서의 것과 같다. 국소 환 달린 공간의 범주에서 식으로 쓰면
+$$
+\Spec(R) \times \Spec(S) =
+\Spec(R \otimes_{\mathbf{Z}} S)
+$$
+이고, 환 사상 $R \to A$, $R \to B$가 주어지면
+$$
+\Spec(A) \times_{\Spec(R)} \Spec(B)
+=
+\Spec(A \otimes_R B).
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{schemes-lemma-morphism-into-affine}의 적용일 뿐이다. 먼저 그
+보조정리에 의해 아핀 스킴 $\Spec(\mathbf{Z})$은 국소 환 달린 공간의
+범주의 끝 대상이다. 따라서 첫 번째 표시식은 두 번째 것에서 따른다.
+두 번째 것을 증명하기 위해, 임의의 국소 환 달린 공간 $X$에 대하여
+\begin{eqnarray*}
+\Mor(X, \Spec(A \otimes_R B))
+& = &
+\Hom(A \otimes_R B, \mathcal{O}_X(X)) \\
+& = &
+\Hom(A, \mathcal{O}_X(X))
+\times_{\Hom(R, \mathcal{O}_X(X))}
+\Hom(B, \mathcal{O}_X(X)) \\
+& = &
+\Mor(X, \Spec(A))
+\times_{\Mor(X, \Spec(R))}
+\Mor(X, \Spec(B))
+\end{eqnarray*}
+임에 유의하자. 이것으로 식이 증명된다. 관련 정의는 Categories의 절
+\ref{categories-section-fibre-products}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-disjoint-union-affines}
+$X$를 국소 환 달린 공간이라 하자. $X = U \amalg V$라고 가정하자.
+여기서 $U$와 $V$는 열려 있고, $U$, $V$는 아핀 스킴이라고 하자.
+그러면 $X$는 아핀 스킴이다.
+\end{lemma}
+
+\begin{proof}
+$R = \Gamma(X, \mathcal{O}_X)$로 놓자. 층의 성질에 의해
+$R = \mathcal{O}_X(U) \times \mathcal{O}_X(V)$임에 유의하자. 보조정리
+\ref{schemes-lemma-morphism-into-affine}에 의해 국소 환 달린 공간의 표준 사상
+$X \to \Spec(R)$이 존재한다. Algebra의 보조정리
+\ref{algebra-lemma-spec-product}에 의해 위상공간으로서
+$\Spec(\mathcal{O}_X(U)) \amalg \Spec(\mathcal{O}_X(V)) =
+\Spec(R)$
+이고, 그 사상들은 환 준동형 $R \to \mathcal{O}_X(U)$와
+$R \to \mathcal{O}_X(V)$에서 온다. 물론 이는 $\Spec(R)$이 국소 환 달린
+공간의 범주에서도 쌍대곱임을 뜻한다. 가정에 의해 사상
+$X \to \Spec(R)$은 $\Spec(\mathcal{O}_X(U))$에서 $U$로 가는 동형을
+유도하며 $V$에 대해서도 마찬가지이다. 따라서 $X \to \Spec(R)$은
+동형이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{아핀 위의 준연접층}
+\label{schemes-section-quasi-coherent-affine}
+
+\noindent
+Modules의 정의 \ref{modules-definition-quasi-coherent}에서 준연접층이라는
+추상적인 개념을 정의했음을 상기하자. 이 절에서는 아핀 스킴 $\Spec(R)$
+위의 모든 준연접층이 층 $\widetilde M$에 대응함을 보인다. 이 층은
+$R$-가군 $M$에 딸린다.
+
+\begin{lemma}
+\label{schemes-lemma-compare-constructions}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$을 아핀 스킴이라
+하자. $M$을 $R$-가군이라 하자. 층 $\widetilde M$, 즉 $R$-가군 $M$에
+딸린 층(정의 \ref{schemes-definition-structure-sheaf})과 층 $\mathcal{F}_M$, 즉
+$R$-가군 $M$에 딸린 층(Modules의 정의
+\ref{modules-definition-sheaf-associated}) 사이에는 표준 동형이 존재한다.
+이 동형은 $M$에 관하여 함자적이다. 특히 층들 $\widetilde M$은
+준연접이다. 더 나아가 이들은 다음 사상 성질로 특징지어진다.
+$$
+\Hom_{\mathcal{O}_X}(\widetilde M, \mathcal{F})
+=
+\Hom_R(M, \Gamma(X, \mathcal{F}))
+$$
+이는 임의의 $\mathcal{O}_X$-가군의 층 $\mathcal{F}$에 대하여 성립한다.
+여기서 사상 $\alpha : \widetilde M \to \mathcal{F}$는 전역 단면 위의
+작용에 대응한다.
+\end{lemma}
+
+\begin{proof}
+Modules의 보조정리 \ref{modules-lemma-construct-quasi-coherent-sheaves}에
+의해 사상 $\mathcal{F}_M \to \widetilde M$이 존재하며, 이는 사상
+$M \to \Gamma(X, \widetilde M) = M$에 대응한다. $x \in X$가 소 아이디얼
+$\mathfrak p \subset R$에 대응한다고 하자. 줄기 위에 유도되는 사상들은
+$\mathcal{O}_{X, x} \otimes_R M \to M_{\mathfrak p}$이고, 등식
+$R_{\mathfrak p} \otimes_R M = M_{\mathfrak p}$에 의해 동형이다. 따라서
+사상 $\mathcal{F}_M \to \widetilde M$은 동형이다. 사상 성질은 층
+$\mathcal{F}_M$의 사상 성질에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-widetilde-constructions}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$을 아핀 스킴이라
+하자. 다음 표준 동형들이 존재한다.
+\begin{enumerate}
+\item
+$
+\widetilde{M \otimes_R N}
+\cong
+\widetilde M \otimes_{\mathcal{O}_X} \widetilde N
+$,
+Modules의 절 \ref{modules-section-tensor-product}을 보라.
+\item
+$
+\widetilde{\text{T}^n(M)}
+\cong
+\text{T}^n(\widetilde M)
+$,
+$
+\widetilde{\text{Sym}^n(M)}
+\cong
+\text{Sym}^n(\widetilde M)
+$, 그리고
+$
+\widetilde{\wedge^n(M)}
+\cong
+\wedge^n(\widetilde M)
+$,
+Modules의 절 \ref{modules-section-symmetric-exterior}를 보라.
+\item $M$이 유한 표시 $R$-가군이면
+$
+\SheafHom_{\mathcal{O}_X}(\widetilde M, \widetilde N)
+\cong
+\widetilde{\Hom_R(M,  N)}
+$,
+Modules의 절 \ref{modules-section-internal-hom}을 보라.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[첫 번째 증명]
+보조정리 \ref{schemes-lemma-compare-constructions}와 Modules의 보조정리
+\ref{modules-lemma-construct-quasi-coherent-sheaves}에 의해 함자
+$M \mapsto \widetilde M$을 $\pi^*$로 볼 수 있으며, 여기서 $\pi$는 환
+달린 공간의 사상이다. 가군을 당기는 것은 Modules의 보조정리
+\ref{modules-lemma-tensor-product-pullback}과
+\ref{modules-lemma-pullback-tensor-algebra}에 의해 텐서 구성과 가환한다.
+사상 $\pi : (X, \mathcal{O}_X) \to (\{*\}, R)$는 평탄하다. 예를 들어
+$\mathcal{O}_X$의 줄기들이 $R$의 국소화이고(보조정리
+\ref{schemes-lemma-spec-sheaves}) 따라서 $R$ 위에서 평탄하기 때문이다. 그러므로
+첫 번째 가군이 유한 표시이면 $\pi$에 의한 당김은 Modules의 보조정리
+\ref{modules-lemma-pullback-internal-hom}에 의해 내부 Hom과 가환한다.
+\end{proof}
+
+\begin{proof}[두 번째 증명]
+(1)의 증명. 보조정리 \ref{schemes-lemma-compare-constructions}에 의해 사상
+$\widetilde{M \otimes_R N}$에서
+$\widetilde M \otimes_{\mathcal{O}_X} \widetilde N$으로 가는 사상을 주려면
+전역 단면 위의 사상
+$M \otimes_R N \to
+\Gamma(X, \widetilde M \otimes_{\mathcal{O}_X} \widetilde N)$을 주어야 한다.
+이는 가군의 층의 텐서곱의 정의에 의해 존재한다. 이 사상이 동형임을
+보이려면 줄기 위에서 동형임을 확인하면 충분하다. 이는
+$\widetilde{M}$의 줄기에 대한 기술(보조정리 \ref{schemes-lemma-spec-sheaves} 또는
+Modules의 보조정리 \ref{modules-lemma-construct-quasi-coherent-sheaves}),
+텐서곱이 국소화와 가환한다는 사실(Algebra의 보조정리
+\ref{algebra-lemma-tensor-product-localization}), 그리고 Modules의 보조정리
+\ref{modules-lemma-stalk-tensor-product}에서 따른다.
+
+\medskip\noindent
+(2)의 증명. 이는 (1)의 증명과 비슷하며, Algebra의 보조정리
+\ref{algebra-lemma-tensor-algebra-localization}와 Modules의 보조정리
+\ref{modules-lemma-stalk-tensor-algebra}를 사용한다.
+
+\medskip\noindent
+(3)의 증명. 구성 $M \mapsto \widetilde{M}$이 함자적이므로 $R$-선형 사상
+$\Hom_R(M, N) \to \Hom_{\mathcal{O}_X}(\widetilde{M}, \widetilde{N})$이
+존재한다. 이 사상의 공역은
+$\SheafHom_{\mathcal{O}_X}(\widetilde M, \widetilde N)$의 전역 단면이다.
+따라서 보조정리 \ref{schemes-lemma-compare-constructions}에 의해
+$\mathcal{O}_X$-가군의 사상 $\widetilde{\Hom_R(M,  N)} \to
+\SheafHom_{\mathcal{O}_X}(\widetilde M, \widetilde N)$을 얻는다. 줄기들을
+비교하여 이것이 동형인지 확인한다. $M$이 $R$-가군으로서 유한 표시이면
+$\widetilde M$은 $\mathcal{O}_X$-가군으로서 전역 유한 표시를 가진다.
+따라서 Algebra의 보조정리 \ref{algebra-lemma-hom-from-finitely-presented}와
+Modules의 보조정리 \ref{modules-lemma-stalk-internal-hom}을 사용하여
+결론을 얻는다.
+\end{proof}
+
+\begin{proof}[(1)의 세 번째 증명]
+임의의 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대하여 $M$, $N$, 그리고
+$\mathcal{F}$에 관해 함자적인 다음 동형들이 있다.
+\begin{align*}
+\Hom_{\mathcal{O}_X}(\widetilde{M} \otimes _{\mathcal{O} _X} \widetilde{N},
+\mathcal{F})
+& =
+\Hom_{\mathcal{O}_X}(\widetilde{M},
+\SheafHom_{\mathcal{O} _X} (\widetilde{N}, \mathcal{F})) \\
+& =
+\Hom_R(M, \Gamma(X,
+\SheafHom_{\mathcal{O}_X}(\widetilde{N}, \mathcal{F}))) \\
+& =
+\Hom_R(M, \Hom_{\mathcal{O}_X}(\widetilde{N}, \mathcal{F})) \\
+& =
+\Hom_R(M, \Hom_R(N, \Gamma(X,\mathcal{F}))) \\
+& =
+\Hom_R(M \otimes_R N, \Gamma(X, \mathcal{F})) \\
+& =
+\Hom_{\mathcal{O}_X}(\widetilde{M \otimes_R N}, \mathcal{F})
+\end{align*}
+첫 번째 등식은 Modules의 보조정리 \ref{modules-lemma-internal-hom}이다.
+두 번째 등식은 보조정리 \ref{schemes-lemma-compare-constructions}에 나오는
+$\widetilde{M}$의 보편 성질이다. 세 번째 등식은 $\SheafHom$의 정의에
+의해 성립한다. 네 번째 등식은 $\widetilde{N}$의 보편 성질이다. 다섯 번째
+등식은 Algebra의 보조정리 \ref{algebra-lemma-hom-from-tensor-product}이다.
+마지막 등식은 $\widetilde{M \otimes_R N}$의 보편 성질이다. 요네다
+보조정리(Categories의 보조정리 \ref{categories-lemma-yoneda})에 의해
+(1)을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-widetilde-pullback}
+아핀 스킴
+$(X, \mathcal{O}_X) = (\Spec(S), \mathcal{O}_{\Spec(S)})$,
+$(Y, \mathcal{O}_Y) = (\Spec(R), \mathcal{O}_{\Spec(R)})$
+을 잡자. $\psi : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$를 환 사상
+$\psi^\sharp : R \to S$에 대응하는 아핀 스킴의 사상이라 하자(보조정리
+\ref{schemes-lemma-category-affine-schemes}를 보라).
+\begin{enumerate}
+\item $\psi^* \widetilde M = \widetilde{S \otimes_R M}$이며, 이는
+$R$-가군 $M$에 관하여 함자적이다.
+\item $\psi_* \widetilde N = \widetilde{N_R}$이며, 이는
+$S$-가군 $N$에 관하여 함자적이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+첫 번째 명제는 보조정리 \ref{schemes-lemma-compare-constructions}의 동일시와
+Modules의 보조정리 \ref{modules-lemma-restrict-quasi-coherent}의 결과에서
+따른다. 두 번째 명제는 등식
+$\psi^{-1}(D(f)) = D(\psi^\sharp(f))$과 그에 따른 등식
+$$
+\psi_* \widetilde N(D(f)) = \widetilde N(D(\psi^\sharp(f))) =
+N_{\psi^\sharp(f)} = (N_R)_f = \widetilde{N_R}(D(f))
+$$
+에서 원하는 대로 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\noindent
+위의 보조정리 \ref{schemes-lemma-widetilde-pullback}은 특히 층 $\widetilde M$을
+표준 아핀 열린 부분공간 $D(f)$에 제한하면 $\widetilde{M_f}$를 얻는다는
+것을 말한다. 이제부터는 이를 더 언급하지 않고 사용할 것이다.
+
+\begin{lemma}
+\label{schemes-lemma-quasi-coherent-affine}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$을 아핀 스킴이라
+하자. $\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자. 그러면
+$\mathcal{F}$는 $R$-가군 $\Gamma(X, \mathcal{F})$에 딸린 층과 동형이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자. 모든 표준
+열린집합 $D(f)$가 준콤팩트이므로 $X$는 국소 준콤팩트하다. 즉, 모든
+점은 준콤팩트 근방들의 기본계를 가진다. Topology의 정의
+\ref{topology-definition-locally-quasi-compact}를 보라. 따라서 Modules의
+보조정리 \ref{modules-lemma-quasi-coherent-module}에 의해 모든 소 아이디얼
+$\mathfrak p \subset R$에 대하여, 이에 대응하는 점 $x \in X$와
+열린 근방 $x \in U \subset X$가 존재하여 $\mathcal{F}|_U$는 어떤
+$\mathcal{O}_X(U)$-가군 $M$에 딸린 준연접층과 동형이다. 다시 말해 이
+성질을 가지는 $U$들로 된 열린 덮개를 얻는다. 예를 들어 보조정리
+\ref{schemes-lemma-standard-open}에 의해 이 덮개를 표준 열린 덮개로 세분할 수
+있다. 따라서 덮개 $\Spec(R) = \bigcup D(f_i)$, $R_{f_i}$-가군 $M_i$,
+그리고 동형 $\varphi_i : \mathcal{F}|_{D(f_i)} \to \mathcal{F}_{M_i}$를
+얻는다. 여기서 후자는 어떤 $R_{f_i}$-가군 $M_i$에 대한 동형이다.
+겹침 위에서는 동형
+$$
+\xymatrix{
+\mathcal{F}_{M_i}|_{D(f_if_j)}
+\ar[rr]^{\varphi_i^{-1}|_{D(f_if_j)}}
+& &
+\mathcal{F}|_{D(f_if_j)}
+\ar[rr]^{\varphi_j|_{D(f_if_j)}}
+& &
+\mathcal{F}_{M_j}|_{D(f_if_j)}.
+}
+$$
+을 얻는다. 이를 $\psi_{ij}$로 나타내자. 삼중 겹침 위에서 코사이클 조건
+$$
+\psi_{jk}|_{D(f_if_jf_k)}
+\circ
+\psi_{ij}|_{D(f_if_jf_k)}
+=
+\psi_{ik}|_{D(f_if_jf_k)}
+$$
+이 성립함은 분명하다.
+
+\medskip\noindent
+열린 부분공간 $D(f_i)$, $D(f_if_j)$, $D(f_if_jf_k)$가 각각 아핀
+스킴임을 상기하자. 따라서 보조정리 \ref{schemes-lemma-compare-constructions}에
+의해 층 $\mathcal{F}_{M_i}$는 층 $\widetilde M_i$와 동형이다. 특히
+$\mathcal{F}_{M_i}(D(f_if_j)) = (M_i)_{f_j}$ 등이다. 또한 위의 보조정리
+\ref{schemes-lemma-compare-constructions}에 의해 $\psi_{ij}$는 유일한
+$R_{f_if_j}$-가군 동형
+$$
+\psi_{ij} : (M_i)_{f_j} \longrightarrow (M_j)_{f_i}
+$$
+에 대응함을 알 수 있다. 즉, 이것은 $\psi_{ij}$의 $D(f_if_j)$ 위 단면에
+대한 작용이다. 더 나아가 이들은 코사이클 조건, 즉
+$$
+\xymatrix{
+(M_i)_{f_jf_k}
+\ar[rd]_{\psi_{ij}}
+\ar[rr]^{\psi_{ik}}
+& &
+(M_k)_{f_if_j} \\
+&
+(M_j)_{f_if_k} \ar[ru]_{\psi_{jk}}
+}
+$$
+이 가환한다는 조건을 만족한다(임의의 삼중항 $i, j, k$에 대하여).
+
+\medskip\noindent
+이제 Algebra의 보조정리 \ref{algebra-lemma-glue-modules}에 의해
+$R$-가군 $M$이 존재하여 $M_i = M_{f_i}$이고 사상들 $\psi_{ij}$와
+양립한다. $\mathcal{F}_M = \widetilde M$을 생각하자. 이제
+$\widetilde M$이 처음의 준연접층 $\mathcal{F}$와 동형임을 보이는 것은
+형식적인 일이다. 실제로 층들 $\mathcal{F}$와 $\widetilde M$은 서로 동형인
+$\mathcal{O}_X$-가군 층의 붙이기 자료를 덮개 $X = \bigcup D(f_i)$에
+관하여 낳는다. Sheaves의 절 \ref{sheaves-section-glueing-sheaves},
+특히 보조정리 \ref{sheaves-lemma-mapping-property-glue}를 보라. 지금
+상황에서는 이를 다음과 같이 명시할 수 있다. $R$-가군 사상
+$$
+M \longrightarrow \Gamma(X, \mathcal{F}).
+$$
+을 구성하자. $m \in M$이 주어지면
+$m_i = m/1 \in M_{f_i} = M_i$를 얻는다. 이는 $M$의 구성에서 따르며,
+$M_i$의 구성에 의해 이 원소는 단면
+$s_i \in \mathcal{F}(U_i)$에 대응한다(즉, $\varphi^{-1}_i(m_i)$이다).
+$s_i|_{D(f_if_j)} = s_j|_{D(f_if_j)}$임을 주장한다. 이는 $M$의 구성에
+의해 $\psi_{ij}(m_i) = m_j$이고, $\psi_{ij}$의 구성에 의해서이다. 층
+$\mathcal{F}$의 조건에 의해 이 단면들의 모음은 유일한 단면 $s$, 즉
+$\mathcal{F}$의 $X$ 위 단면을 낳는다. $m \mapsto s$가 $R$-가군 사상임을 보이는
+것은 독자에게 맡긴다. 보조정리 \ref{schemes-lemma-compare-constructions}에 의해
+이에 딸린 $\mathcal{O}_X$-가군 사상
+$$
+\widetilde M \longrightarrow \mathcal{F}.
+$$
+을 얻는다. 구성에 의해 이 사상은 동형 $\varphi_i^{-1}$로 제한되며,
+그 제한은 각 $D(f_i)$ 위에서 이루어지므로 이 사상은 동형이다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-equivalence-quasi-coherent}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$을 아핀 스킴이라
+하자. 함자들 $M \mapsto \widetilde M$과
+$\mathcal{F} \mapsto \Gamma(X, \mathcal{F})$는 범주 동치
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_X)
+\ar@<1ex>[r]
+&
+\text{Mod}_R
+\ar@<1ex>[l]
+}
+$$
+를 정의하며 서로 준역이다. 이 동치는 준연접 $\mathcal{O}_X$-가군의
+범주와 $R$-가군의 범주 사이의 동치이다.
+\end{lemma}
+
+\begin{proof}
+위의 보조정리 \ref{schemes-lemma-compare-constructions}와
+\ref{schemes-lemma-quasi-coherent-affine}를 보라.
+\end{proof}
+
+\noindent
+이제부터 아핀 스킴 위의 준연접층과 $\widetilde M$ 꼴의 층을 구별하지
+않을 것이다.
+
+\begin{lemma}
+\label{schemes-lemma-kernel-cokernel-quasi-coherent}
+$X = \Spec(R)$을 아핀 스킴이라 하자. 준연접 $\mathcal{O}_X$-가군의
+사상의 핵과 여핵은 준연접이다.
+\end{lemma}
+
+\begin{proof}
+이는 함자 $\widetilde{\ }$의 완전성에서 따른다. 실제로 보조정리
+\ref{schemes-lemma-compare-constructions}에 의해 모든 사상
+$\psi : \widetilde{M} \to \widetilde{N}$는 어떤 $R$-가군 사상
+$\varphi : M \to N$에서 온다. 따라서
+$\Ker(\psi) = \widetilde{\Ker(\varphi)}$이고
+$\Coker(\psi) = \widetilde{\Coker(\varphi)}$이다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-colimit-quasi-coherent}
+$X = \Spec(R)$을 아핀 스킴이라 하자. $X$ 위의 준연접층들의 임의의
+모음의 직합은 준연접이다. 쌍극한에 대해서도 마찬가지이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}_i$, $i \in I$가 $X$ 위의 준연접층들의 모음이라고 하자.
+위의 보조정리 \ref{schemes-lemma-equivalence-quasi-coherent}에 의해
+$\mathcal{F}_i = \widetilde{M_i}$로 쓸 수 있다. 여기서 이는 어떤
+$R$-가군 $M_i$에 대한 것이다.
+$M = \bigoplus M_i$로 놓고 층 $\widetilde{M}$을 생각하자. 각 표준
+열린집합 $D(f)$에 대하여
+$$
+\widetilde{M}(D(f)) = M_f =
+\left(\bigoplus M_i\right)_f =
+\bigoplus M_{i, f}.
+$$
+이다. 따라서 준연접 $\mathcal{O}_X$-가군 $\widetilde{M}$은 층들
+$\mathcal{F}_i$의 직합이다. 일반 쌍극한에도 비슷한 논증이 적용된다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-extension-quasi-coherent}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$을 아핀 스킴이라
+하자. $\mathcal{O}_X$-가군 층들의 짧은 완전열
+$$
+0 \to
+\mathcal{F}_1 \to
+\mathcal{F}_2 \to
+\mathcal{F}_3 \to
+0
+$$
+이 주어졌다고 하자. 셋 중 둘이 준연접이면 나머지 하나도 준연접이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}_1$과 $\mathcal{F}_2$가 모두 준연접인 경우에는 함자
+$M \mapsto \widetilde M$이 완전하므로 분명하다. 보조정리
+\ref{schemes-lemma-spec-sheaves}를 보라. $\mathcal{F}_2$와 $\mathcal{F}_3$가
+모두 준연접인 경우도 마찬가지이다. 이제
+$\mathcal{F}_1 = \widetilde M_1$과 $\mathcal{F}_3 = \widetilde M_3$가
+준연접이라고 하자. $M_2 = \Gamma(X, \mathcal{F}_2)$로 놓자. 열
+$$
+0 \to M_1 \to M_2 \to M_3 \to 0
+$$
+이 완전함을 보이면 충분하다고 주장한다. 실제로 그렇다면 보조정리
+\ref{schemes-lemma-compare-constructions}의 사상 성질을 사용하여 가환 그림
+$$
+\xymatrix{
+0 \ar[r] &
+\widetilde M_1 \ar[r] \ar[d] &
+\widetilde M_2 \ar[r] \ar[d] &
+\widetilde M_3 \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+\mathcal{F}_1 \ar[r] &
+\mathcal{F}_2 \ar[r] &
+\mathcal{F}_3 \ar[r] &
+0
+}
+$$
+을 얻고 뱀 보조정리에 의해 결론을 얻는다.
+
+\medskip\noindent
+여기서 ``올바른'' 논증은 먼저 $H^1(X, \mathcal{F}) = 0$임을 임의의
+준연접층 $\mathcal{F}$에 대하여 보이는 것이다. 이는 실제로 그리 어렵지
+않지만 나중으로 미루는 편이 나을 것이다. 대신 작은 요령을 사용한다.
+
+\medskip\noindent
+$m \in M_3 = \Gamma(X, \mathcal{F}_3)$을 택하자. 집합
+$$
+I = \{ f \in R \mid \text{the element }fm\text{ comes from }M_2\}.
+$$
+을 생각하자. 이는 분명 아이디얼이다. $1 \in I$임을 보이면 충분하다.
+따라서 임의의 소 아이디얼 $\mathfrak p$에 대하여 $f \in I$이고
+$f \not\in \mathfrak p$인 원소가 존재함을 보이면 충분하다. $x \in X$를
+$\mathfrak p$에 대응하는 점이라 하자. 전사성은 줄기에서 확인할 수
+있으므로 열린 근방 $U$가 점 $x$에 대하여 존재하여 $m|_U$는 국소 단면
+$s \in \mathcal{F}_2(U)$에서 온다. 실제로 $U = D(f)$가 표준
+열린집합이라고 가정할 수 있다. 즉, $f \in R$, $f \not \in \mathfrak p$이다.
+어떤 $N \gg 0$에 대하여 $f^N \in I$임을 보일 것이며, 그러면 증명이
+끝난다.
+
+\medskip\noindent
+임의의 점 $z \in V(f)$를 택하자. 이 점은 소 아이디얼
+$\mathfrak q \subset R$에 대응한다고 할 수 있다. 또한 $g \in R$,
+$g \not \in \mathfrak q$를 찾아
+$m|_{D(g)}$가 어떤 $s' \in \mathcal{F}_2(D(g))$로 올라가게 할 수 있다.
+차 $s|_{D(fg)} - s'|_{D(fg)}$를 생각하자. 이는 원소 $m'$, 즉
+$\mathcal{F}_1(D(fg)) = (M_1)_{fg}$의 원소이다. 어떤 정수
+$n = n(z)$에 대하여 원소 $f^n m'$는 어떤 $m'_1 \in (M_1)_g$에서 온다.
+$f^n s$는 단면 $\sigma$, 즉 $\mathcal{F}_2$의 $D(f) \cup D(g)$ 위 단면으로
+확장됨을 알 수 있다. 실제로 이는 $f^n s' + m'_1$의 제한과
+$D(f) \cap D(g) = D(fg)$ 위에서 일치한다. 더 나아가 $\sigma$는
+$f^n m$의 $D(f) \cup D(g)$에 대한 제한으로 보내진다.
+
+\medskip\noindent
+$V(f)$가 준콤팩트이므로 원소들의 유한 목록 $g_1, \ldots, g_m \in R$,
+즉 $V(f) \subset \bigcup D(g_j)$를 만족하는 목록과, 정수 $n > 0$ 및 단면
+$\sigma_j \in \mathcal{F}_2(D(f) \cup D(g_j))$들을 택할 수 있다. 이들은
+$\sigma_j|_{D(f)} = f^n s$를 만족하고, $\sigma_j$는
+$f^nm|_{D(f) \cup D(g_j)}$로 보내진다. 이는 $\mathcal{F}_3$의 단면이다. 차들
+$$
+\sigma_j|_{D(f) \cup D(g_jg_k)}
+-
+\sigma_k|_{D(f) \cup D(g_jg_k)}.
+$$
+을 생각하자. 이들은 $\mathcal{F}_1$의 $D(f) \cup D(g_jg_k)$ 위
+단면들에 대응하며 $D(f)$ 위에서는 0이다. 특히
+$\mathcal{F}_1(D(g_jg_k)) = (M_1)_{g_jg_k}$에서의 상들은
+$(M_1)_{g_jg_kf}$에서 0이다. 따라서 $f$의 어떤 높은 거듭제곱은 이들을
+하나도 빠짐없이 소멸시킨다. 다시 말해 원소들 $f^N \sigma_j$는 어떤
+$N \gg 0$에 대하여 층 성질의 붙이기 조건을 만족하고, 원하는 단면
+$\sigma $, 즉 $\mathcal{F}_2$의 단면을 낳는다. 그 정의역은
+$\bigcup (D(f) \cup D(g_j)) = X$이다.
+\end{proof}
+
+
+
+
+
+
+
+\section{아핀 스킴의 닫힌 부분공간}
+\label{schemes-section-closed-in-affine}
+
+\begin{example}
+\label{schemes-example-closed-immersion-affines}
+$R$을 환이라 하고 $I \subset R$을 아이디얼이라 하자. 아핀 스킴의 사상
+$i : Z = \Spec(R/I) \to \Spec(R) = X$를 생각하자. Algebra의 보조정리
+\ref{algebra-lemma-spec-closed}에 의해 이는 $Z$에서 $X$의 닫힌 부분집합
+위로 가는 위상동형이다. 더 나아가 $I \subset \mathfrak p \subset R$이
+점 $x = i(z)$, $x \in X$, $z \in Z$에 대응하는 소 아이디얼이면 줄기
+위에서 사상
+$$
+\mathcal{O}_{X, x} = R_{\mathfrak p}
+\longrightarrow
+R_{\mathfrak p}/IR_{\mathfrak p} = \mathcal{O}_{Z, z}
+$$
+을 얻는다. 따라서 $i$가 국소 환 달린 공간의 닫힌 몰입임을 알 수 있다.
+정의 \ref{schemes-definition-closed-immersion-locally-ringed-spaces}를 보라. 이는
+예 \ref{schemes-example-closed-subspace}에서처럼 준연접 아이디얼층
+$\widetilde I$에 딸린 닫힌 부분공간과 (동형 아래에서) 같음이 분명하다.
+\end{example}
+
+\begin{lemma}
+\label{schemes-lemma-closed-immersion-affine-case}
+\begin{slogan}
+아핀 스킴에서 닫힌 몰입은 아이디얼에 대응한다.
+\end{slogan}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$을 아핀 스킴이라
+하자. $i : Z \to X$를 국소 환 달린 공간의 임의의 닫힌 몰입이라 하자.
+그러면 유일한 아이디얼 $I \subset R$이 존재하여 사상 $i : Z \to X$를
+위의 예 \ref{schemes-example-closed-immersion-affines}에서 구성한 닫힌 몰입
+$\Spec(R/I) \to \Spec(R)$과 동일시할 수 있다.
+\end{lemma}
+
+\begin{proof}
+이는 다소 우스운 일이다! 실제로 보조정리 \ref{schemes-lemma-closed-immersion}에
+의해 $Z \to X$를 정의 \ref{schemes-definition-closed-subspace}와 예
+\ref{schemes-example-closed-subspace}에서처럼 아이디얼층
+$\mathcal{I} \subset \mathcal{O}_X$에 딸린 닫힌 부분공간과 동일시할 수
+있다. 우리의 관례에 따라 이 아이디얼층은 $\mathcal{O}_X$-가군의
+층으로서 단면들로 국소 생성된다. 따라서 몫층
+$\mathcal{O}_X / \mathcal{I}$는 $X$ 위에서 국소적으로 사상
+$\bigoplus_{j \in J} \mathcal{O}_U \to \mathcal{O}_U$의 여핵이다. 그러므로
+정의에 의해 $\mathcal{O}_X / \mathcal{I}$는 준연접이다. 절
+\ref{schemes-section-quasi-coherent-affine}의 결과에 의해 이는 $\widetilde S$
+꼴이며, 어떤 $R$-가군 $S$에 대한 것이다. 더 나아가
+$\mathcal{O}_X = \widetilde R \to \widetilde S$가 전사이므로 보조정리
+\ref{schemes-lemma-extension-quasi-coherent}에 의해 $\mathcal{I}$도 준연접이며,
+$\mathcal{I} = \widetilde I$라고 쓸 수 있다. 물론 $I \subset R$이고
+$S = R/I$이므로 모든 것이 분명하다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{스킴}
+\label{schemes-section-schemes}
+
+\begin{definition}
+\label{schemes-definition-scheme}
+\begin{history}
+\cite{EGA1}에서는 우리가 스킴이라 부르는 것을 ``pre-sch\'ema''라
+불렀고, ``sch\'ema''라는 이름은 Stacks project에서 분리 스킴이라 하는
+것을 위해 남겨 두었다. 제2판 \cite{EGA1-second}에서는 용어를 오늘날의
+표준 용어로 바꾸었다. 그러나 때때로 ``prescheme''이라는 용어를 만날 수
+있으며, 예를 들면 \cite{Murre-lectures}에서 그러하다.
+\end{history}
+{\it 스킴}은 모든 점이 아핀 스킴인 열린 근방을 가지는 국소 환 달린
+공간이다. {\it 스킴의 사상}은 국소 환 달린 공간의 사상이다. 스킴의
+범주는 $\Sch$로 나타낼 것이다.
+\end{definition}
+
+\noindent
+$X$를 스킴이라 하자. 다음과 같은 (아주 가벼운) 언어의 남용을 사용할
+것이다. $U \subset X$이고 열린 부분공간 $U$가 아핀 스킴이면 이를
+{\it 아핀 열린집합} 또는 {\it 열린 아핀}이라 할 것이다. 흔히
+$U = \Spec(R)$이라고 써서 $U$가 $\Spec(R)$과 동형임을 나타내고, 더
+나아가 $U$와 $\Spec(R)$을 (일시적으로) 동일시할 것이다.
+
+\begin{lemma}
+\label{schemes-lemma-open-subspace-scheme}
+$X$를 스킴이라 하자. $j : U \to X$를 국소 환 달린 공간의 열린
+몰입이라 하자. 그러면 $U$는 스킴이다. 특히 $X$의 모든 열린
+부분공간은 스킴이다.
+\end{lemma}
+
+\begin{proof}
+$U \subset X$라 하고 $u \in U$라 하자. 아핀 열린 근방
+$u \in V \subset X$를 택하자. $V$의 표준 열린집합들이 $V$의 위상의
+기저를 이루므로 어떤 $f\in \mathcal{O}_V(V)$가 존재하여
+$u \in D(f) \subset U$이다. 보조정리 \ref{schemes-lemma-standard-open-affine}에
+의해 $D(f)$는 아핀 스킴이다. 이것으로 $U$의 모든 점이 아핀인 열린
+근방을 가짐을 증명한다.
+\end{proof}
+
+\noindent
+분명히 이 보조정리(또는 그 증명)는 모든 스킴 $X$의 위상이 아핀
+열린집합들로 이루어진 기저를 가짐을 보인다(Topology의 절
+\ref{topology-section-bases}를 보라).
+
+\begin{example}
+\label{schemes-example-not-affine}
+$k$를 체라 하자. 아핀이 아닌 스킴의 한 예는 열린 부분공간
+$U = \Spec(k[x, y]) \setminus \{ (x, y)\}$로 주어진다. 이는 아핀 스킴
+$X =\Spec(k[x, y])$의 열린 부분공간이다. 이는 두 아핀
+$D(x) = \Spec(k[x, y, 1/x])$와 $D(y) = \Spec(k[x, y, 1/y])$로 덮이며,
+그 교집합은 $D(xy) = \Spec(k[x, y, 1/xy])$이다. $\mathcal{O}_U$의 층
+성질에 의해 완전열
+$$
+0 \to
+\Gamma(U, \mathcal{O}_U) \to
+k[x, y, 1/x] \times k[x, y, 1/y] \to
+k[x, y, 1/xy]
+$$
+이 존재한다. 사상 $k[x, y] \to \Gamma(U, \mathcal{O}_U)$이 동형임을
+얻는다. 이 사상은 $U \to X$에서 온다. 따라서
+$U$는 아핀일 수 없다. 실제로 아핀이면 보조정리
+\ref{schemes-lemma-category-affine-schemes}에 의해 $U \cong X$이어야 한다.
+\end{example}
+
+
+\section{스킴의 몰입}
+\label{schemes-section-immersions}
+
+\noindent
+보조정리 \ref{schemes-lemma-open-subspace-scheme}에서 스킴의 모든 열린
+부분공간이 스킴임을 보았다. 아래에서는 스킴의 닫힌 부분공간에도 같은
+사실이 성립함을 증명할 것이다.
+
+\medskip\noindent
+$\mathcal{O}_X$-가군의 준연접층이라는 개념은 모든 환 달린 공간 $X$에
+대하여, 특히 $X$가 스킴일 때 정의됨에 유의하자. 절
+\ref{schemes-section-quasi-coherent-affine}의 작업에 의해 그러한 층은 모든 아핀
+열린집합 $U \subset X$ 위에서 $\widetilde M$ 꼴임을 안다. 이는 어떤
+$\mathcal{O}_X(U)$-가군 $M$에 대한 것이다.
+
+\begin{lemma}
+\label{schemes-lemma-closed-subspace-scheme}
+$X$를 스킴이라 하자. $i : Z \to X$를 국소 환 달린 공간의 닫힌
+몰입이라 하자.
+\begin{enumerate}
+\item 국소 환 달린 공간 $Z$는 스킴이다.
+\item 핵 $\mathcal{I}$, 즉 사상 $\mathcal{O}_X \to i_*\mathcal{O}_Z$의
+핵은 준연접 아이디얼층이다.
+\item 임의의 아핀 열린집합 $U = \Spec(R)$에 대하여, 이 열린집합은
+$X$에 속하며 사상 $i^{-1}(U) \to U$는 사상
+$\Spec(R/I) \to \Spec(R)$과 동일시할 수 있다. 여기서 $I \subset R$은
+어떤 아이디얼이다.
+\item $\mathcal{I}|_U = \widetilde I$이다.
+\end{enumerate}
+특히 단면들로 국소 생성되는 모든 아이디얼층은 준연접
+아이디얼층이고(그 역도 성립하며), $X$의 모든 닫힌 부분공간은 스킴이다.
+\end{lemma}
+
+\begin{proof}
+$i : Z \to X$를 닫힌 몰입이라 하자. 점 $z \in Z$를 잡고 임의의 아핀
+열린 근방 $i(z) \in U \subset X$를 택하자. $U = \Spec(R)$이라고 하자.
+보조정리 \ref{schemes-lemma-closed-immersion-affine-case}에 의해
+$i^{-1}(U) \to U$를 아핀 스킴의 사상
+$\Spec(R/I) \to \Spec(R)$과 동일시할 수 있다. 먼저 이는
+$z \in i^{-1}(U) \subset Z$가 $z$의 아핀 근방임을 뜻한다. 따라서 $Z$는
+스킴이다. 둘째, 이는 $\mathcal{I}|_U$가 $\widetilde I$임을 뜻한다. 다시
+말해 모든 점 $x \in i(Z)$에 대하여 어떤 열린 근방이 존재하여
+$\mathcal{I}$는 그 근방에서 준연접이다. 또한
+$\mathcal{I}|_{X \setminus i(Z)}
+\cong \mathcal{O}_{X \setminus i(Z)}$임에 유의하자. 따라서 아이디얼층의
+제한은 $X \setminus i(Z)$ 위에서도 준연접이다. 그러므로
+$\mathcal{I}$는 준연접이다.
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-immersion}
+$X$를 스킴이라 하자.
+\begin{enumerate}
+\item 스킴의 사상이 국소 환 달린 공간의 열린 몰입이면 이를 {\it 열린
+몰입}이라 한다(정의 \ref{schemes-definition-immersion-locally-ringed-spaces}를 보라).
+\item $X$의 {\it 열린 부분스킴}은 정의 \ref{schemes-definition-open-subspace}의
+의미에서 $X$의 열린 부분공간이다. 보조정리
+\ref{schemes-lemma-open-subspace-scheme}에 의해 $X$의 열린 부분스킴은 스킴이다.
+\item 스킴의 사상이 국소 환 달린 공간의 닫힌 몰입이면 이를 {\it 닫힌
+몰입}이라 한다(정의
+\ref{schemes-definition-closed-immersion-locally-ringed-spaces}를 보라).
+\item $X$의 {\it 닫힌 부분스킴}은 정의 \ref{schemes-definition-closed-subspace}의
+의미에서 $X$의 닫힌 부분공간이다. 보조정리
+\ref{schemes-lemma-closed-subspace-scheme}에 의해 닫힌 부분스킴은 스킴이다.
+\item 스킴의 사상 $f : X \to Y$가 $j \circ i$로 인수분해되고, 여기서
+$i$가 닫힌 몰입이며 $j$가 열린 몰입이면 이를 {\it 몰입} 또는
+{\it 국소 닫힌 몰입}이라 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+절 \ref{schemes-section-open-immersion}과 \ref{schemes-section-closed-immersion}의
+보조정리들로부터, 스킴의 모든 열린 몰입(각각 닫힌 몰입)은 공역의 열린
+부분스킴(각각 닫힌 부분스킴)의 포함사상과 동형임이 따른다.
+
+\medskip\noindent
+우리의 닫힌 몰입 정의는 Hartshorne과 EGA의 정의 사이에 있다.
+Hartshorne은 스킴의 사상 $f : X \to Y$ 중에서 $X$를 $Y$의 닫힌
+부분집합 위로 위상동형으로 보내고
+$f^\# : \mathcal{O}_Y \to f_*\mathcal{O}_X$가 전사인 것을 닫힌
+몰입으로 정의한다. \cite[Page 85]{H}를 보라. 보조정리
+\ref{schemes-lemma-characterize-closed-immersions}에서 이것이 우리의 개념과
+동치임을 보일 것이다. \cite{EGA}에서 Grothendieck과 Dieudonn\'e는 먼저
+준연접 아이디얼층을 사용하여 예 \ref{schemes-example-closed-subspace}의 구성으로
+닫힌 부분스킴을 정의하고, 이어서 스킴의 사상 $f : X \to Y$ 중 닫힌
+부분스킴과의 동형을 유도하는 것을 닫힌 몰입으로 정의한다. 보조정리
+\ref{schemes-lemma-closed-subspace-scheme}에서 이것이 우리의 개념과 일치함이
+따른다.
+
+\medskip\noindent
+교육적인 관점에서 위의 정의는 재앙이자 악몽이다. 이 내용을 학생들에게
+가르칠 때에는, 스킴의 아핀 사상 $f : X \to Y$ 중
+$f^\# : \mathcal{O}_Y \to f_*\mathcal{O}_X$가 전사인 것을 닫힌 몰입으로
+정의하는 편이 흔히 편리했다. 실제로 아핀 사상이라는 개념(Morphisms의
+절 \ref{morphisms-section-affine})은 매우 자연스럽고 이해하기 쉽다.
+
+\medskip\noindent
+닫힌 몰입에 대한 자세한 내용은 Morphisms의 절
+\ref{morphisms-section-closed-immersions}와
+\ref{morphisms-section-closed-immersions-quasi-coherent}를 권한다.
+
+\medskip\noindent
+국소 닫힌 부분스킴과 몰입은 이 절의 끝에서 논의할 것이다.
+
+\begin{remark}
+\label{schemes-remark-not-reverse-open-closed}
+$f : X \to Y$가 스킴의 몰입이면 일반적으로 $f$를 열린 몰입 뒤에 닫힌
+몰입이 이어지는 합성으로 인수분해할 수 없다. Morphisms의 예
+\ref{morphisms-example-thibaut}를 보라.
+\end{remark}
+
+\begin{lemma}
+\label{schemes-lemma-immersion-when-closed}
+$f : Y \to X$를 스킴의 몰입이라 하자. $f$가 닫힌 몰입일
+필요충분조건은 $f(Y) \subset X$가 닫힌 부분집합인 것이다.
+\end{lemma}
+
+\begin{proof}
+$f$가 닫힌 몰입이면 정의에 의해 $f(Y)$는 닫혀 있다. 역으로
+$f(Y)$가 닫혀 있다고 하자. 정의에 의해 열린 부분스킴 $U \subset X$가
+존재하여 $f$는 닫힌 몰입 $i : Y \to U$와 열린 몰입 $j : U \to X$의
+합성이다. $\mathcal{I} \subset \mathcal{O}_U$를 닫힌 몰입 $i$에 딸린
+준연접 아이디얼층이라 하자. 등식
+$\mathcal{I}|_{U \setminus i(Y)}
+= \mathcal{O}_{U \setminus i(Y)}
+= \mathcal{O}_{X \setminus i(Y)}|_{U \setminus i(Y)}$에 유의하자. 따라서
+$\mathcal{I}$와 $\mathcal{O}_{X \setminus i(Y)}$를 붙여(Sheaves의 절
+\ref{sheaves-section-glueing-sheaves}를 보라) 아이디얼층
+$\mathcal{J} \subset \mathcal{O}_X$를 얻을 수 있다. $X$의 모든 점은
+$\mathcal{J}$가 준연접인 근방을 가지므로 $\mathcal{J}$가 준연접임을 알
+수 있다(특히 단면들로 국소 생성된다). 구성에 의해
+$\mathcal{O}_X/\mathcal{J}$는 $U$ 위에 받침을 가지며, 그곳으로 제한하면
+$\mathcal{O}_U/\mathcal{I}$와 같다. 따라서 $\mathcal{I}$와 $\mathcal{J}$에
+딸린 닫힌 부분공간들이 표준적으로 동형임을 알 수 있다. 예
+\ref{schemes-example-closed-subspace}를 보라. 특히 $U$의, $\mathcal{I}$에 딸린
+닫힌 부분공간은 $X$의 닫힌 부분공간과 동형이다. 보조정리
+\ref{schemes-lemma-closed-immersion}에 의해 $Y \to U$는 $\mathcal{I}$에
+딸린 닫힌 부분공간과 동일시되므로 $Y \to U \to X$가 닫힌 몰입임을 얻는다.
+\end{proof}
+
+\noindent
+$f : Y \to X$를 몰입이라 하자. $Z = \overline{f(Y)} \setminus f(Y)$를
+$X$의 닫힌 부분집합이라 하고 $U = X \setminus Z$라 하자. 보조정리에
+의해 $U$는 $X$의 열린 부분공간 중 가장 큰 것으로서, 사상
+$f : Y \to X$가 $U$로의 닫힌 몰입을 통해 인수분해된다. $X$의
+{\it 국소 닫힌 부분스킴}을 쌍 $(Z, U)$로 정의한다. 이때 $Z$는 열린
+부분스킴 $U$의 닫힌 부분스킴이고, 그 열린 부분스킴은 $X$의 것이며, 추가로
+$\overline{Z} \cup U = X$이다. 보통은 단지 ``$Z$를 $X$의 국소 닫힌
+부분스킴이라 하자''라고 말한다. 왜냐하면 $U$는 사상 $Z \to X$로부터
+복원할 수 있기 때문이다.
+위의 논의는 모든 몰입 $f : Y \to X$가
+$Y \to Z \to X$로 유일하게 인수분해됨을 보인다. 여기서 $Z$는 $X$의
+국소 닫힌 부분공간이고 $Y \to Z$는 동형이다.
+
+\medskip\noindent
+이것이 유용한 이유는 $X$의 국소 닫힌 부분스킴들의 모음이 집합을
+이룬다는 점이다. 명백한 이유로 포함이라 부르는 부분순서를 이 집합에
+정의할 수 있다. 명시적으로, $Z \to X$와 $Z' \to X$가 $X$의 두 국소
+닫힌 부분스킴이면, {\it $Z$가 $Z'$에 포함된다}고 하는 것은 단순히 사상
+$Z \to X$가 $Z'$을 통해 인수분해된다는 뜻이다. 그러한 경우 물론 $Z$는 $Z'$의
+유일한 국소 닫힌 부분스킴과 동일시되며, 계속 이와 같이 할 수 있다.
+
+\medskip\noindent
+몰입에 대한 자세한 내용은 Morphisms의 절
+\ref{morphisms-section-immersions}을 보라.
+
+
+
+
+
+
+
+
+
+\section{스킴의 자리스키 위상}
+\label{schemes-section-topology}
+
+\noindent
+스킴의 자리스키 위상에 맞춘 위상수학의 몇 가지 기본 내용은 Topology의
+절 \ref{topology-section-introduction}을 보라.
+
+\begin{lemma}
+\label{schemes-lemma-scheme-sober}
+$X$를 스킴이라 하자. $X$의 모든 기약 닫힌 부분집합은 유일한 일반점을
+가진다. 다시 말해 $X$는 소버 위상공간이다. Topology의 정의
+\ref{topology-definition-generic-point}를 보라.
+\end{lemma}
+
+\begin{proof}
+$Z \subset X$를 기약 닫힌 부분집합이라 하자. 모든 아핀 열린집합
+$U \subset X$, $U = \Spec(R)$에 대하여, $Z \cap U = V(I)$가 되는
+유일한 근기 아이디얼 $I \subset R$이 존재함을 안다. $Z \cap U$는
+공집합이거나 기약이다. 두 번째 경우에는(적어도 하나의 $U$에 대해
+일어난다) $I = \mathfrak p$가 소 아이디얼이고, $\xi$는 이 소 아이디얼이
+주는 $Z \cap U$의 일반점이다. 따라서 $Z = \overline{\{\xi\}}$이다. 다시 말해
+$\xi$는 $Z$의 일반점이다. $\xi'$가 두 번째 일반점이라면
+$\xi' \in Z \cap U$이고, 여기서 바로 $\xi' = \xi$가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-basis-affine-opens}
+$X$를 스킴이라 하자. $X$의 아핀 열린집합들의 모음은 $X$의 위상의
+기저를 이룬다.
+\end{lemma}
+
+\begin{proof}
+이는 절 \ref{schemes-section-schemes}에서 열린 부분스킴에 관해 논의한 내용에서
+따른다.
+\end{proof}
+
+\begin{remark}
+\label{schemes-remark-intersection-affine-opens}
+일반적으로 $X$ 안의 두 아핀 열린집합의 교집합은 아핀 열린집합이 아니다.
+예 \ref{schemes-example-affine-space-zero-doubled}를 보라.
+\end{remark}
+
+\begin{lemma}
+\label{schemes-lemma-locally-quasi-compact}
+모든 스킴의 바탕 위상공간은 국소 준콤팩트이다. Topology의 정의
+\ref{topology-definition-locally-quasi-compact}를 보라.
+\end{lemma}
+
+\begin{proof}
+이는 위의 보조정리 \ref{schemes-lemma-basis-affine-opens}와 환의 스펙트럼이
+준콤팩트라는 사실에서 따른다. Algebra의 보조정리
+\ref{algebra-lemma-quasi-compact}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-standard-open-two-affines}
+$X$를 스킴이라 하자. $U, V$를 $X$의 아핀 열린집합이라 하고
+$x \in U \cap V$라 하자. 아핀 열린 근방 $W$가 존재하여 $x$를 포함하고 $W$는
+$U$와 $V$ 양쪽의 표준 열린집합이다.
+\end{lemma}
+
+\begin{proof}
+$U = \Spec(A)$와 $V = \Spec(B)$로 쓰자. $x$가 소 아이디얼
+$\mathfrak p \subset A$와 소 아이디얼 $\mathfrak q \subset B$에
+대응한다고 하자. $f \in A$, $f \not \in \mathfrak p$를 택하여
+$D(f) \subset U \cap V$가 되게 할 수 있다. $D(f)$의 모든 표준
+열린집합은 $\Spec(A) = U$의 표준 열린집합임에 유의하자. 따라서
+$U \subset V$라고 가정할 수 있다. 다시 말해 이제 $U$를 $V$의 아핀
+열린집합으로 생각할 수 있다. 다음으로 $g \in B$,
+$g \not \in \mathfrak q$를 택하여 $D(g) \subset U$가 되게 한다. 이때
+$D(g) = D(g_A)$임을 알 수 있다. 여기서 $g_A \in A$는 $g$의 사상 $B \to A$
+아래에서의 상을 나타낸다. 이로써 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-good-subcover}
+$X$를 스킴이라 하자. $X = \bigcup_i U_i$를 아핀 열린 덮개라 하고
+$V \subset X$를 아핀 열린집합이라 하자. 표준 열린 덮개
+$V = \bigcup_{j = 1, \ldots, m} V_j$(정의
+\ref{schemes-definition-standard-covering}를 보라)가 존재하여 각 $V_j$는
+$U_i$들 중 하나의 표준 열린집합이다.
+\end{lemma}
+
+\begin{proof}
+$v \in V$를 택하자. 그러면 $v \in U_i$인 어떤 $i$가 존재한다. 위의
+보조정리 \ref{schemes-lemma-standard-open-two-affines}에 의해 열린집합
+$v \in W_v \subset V \cap U_i$가 존재하여 $W_v$는 $V$와 $U_i$
+양쪽의 표준 열린집합이다. $V$가 준콤팩트이므로 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-sheaf-on-affines}
+$X$를 스킴이라 하자. $\mathcal{B}$를 $X$의 아핀 열린집합들의 집합이라
+하자. $\mathcal{F}$를 $\mathcal{B}$ 위의 집합의 준층이라 하자. Sheaves의
+정의 \ref{sheaves-definition-presheaf-basis}를 보라. 다음 조건들은
+동치이다.
+\begin{enumerate}
+\item $\mathcal{F}$는 $X$ 위의 한 층을 $\mathcal{B}$로 제한한 것이다.
+\item $\mathcal{F}$는 $\mathcal{B}$ 위의 층이다.
+\item $\mathcal{F}(\emptyset)$은 한원소 집합이고, $U = V \cup W$이며
+$U, V, W \in \mathcal{B}$이고 $V, W \subset U$인 표준 열린집합들에 대하여
+(Algebra의 정의 \ref{algebra-definition-Zariski-topology}) 사상
+$$
+\mathcal{F}(U) \longrightarrow \mathcal{F}(V) \times \mathcal{F}(W)
+$$
+은 단사이고 그 상은 쌍 $(s, t)$들 가운데
+$s|_{V \cap W} = t|_{V \cap W}$를 만족하는 것들의 집합이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)의 동치는 Sheaves의 보조정리
+\ref{sheaves-lemma-restrict-basis-equivalence}이다. (2)가 (3)을 함의함은
+분명하다. 따라서 (3)이 (2)를 함의함을 증명하면 충분하다. Sheaves의
+보조정리 \ref{sheaves-lemma-cofinal-systems-coverings-standard-case}와
+보조정리 \ref{schemes-lemma-standard-open}에 의해 $\mathcal{B}$의 원소들의
+표준 열린 덮개(정의 \ref{schemes-definition-standard-covering})에 대해 층 조건이
+성립함을 증명하면 충분하다. $U = U_1 \cup \ldots \cup U_n$을 표준 열린
+덮개라 하고 $U \subset X$를 아핀 열린집합이라 하자. 이 덮개의 층
+조건을 $n$에 대한 귀납법으로 증명할 것이다. $n = 0$이면 $U$는
+공집합이고 가정에서 층 조건을 얻는다. $n = 1$이면 증명할 것이 없다.
+$n = 2$이면 이는 가정 (3)이다. $n > 2$이면
+$U_i = D(f_i)$로 쓰되 $f_i \in A = \mathcal{O}_X(U)$라 하자. 단면
+$s_i \in \mathcal{F}(U_i)$들이
+$s_i|_{U_i \cap U_j} = s_j|_{U_i \cap U_j}$를 모든 $1 \leq i < j \leq n$에
+대하여 만족한다고 하자. $U = U_1 \cup \ldots \cup U_n$이므로
+$1 = \sum_{i = 1, \ldots, n} a_i f_i$가 $A$에서 성립하며, 여기서
+$a_i \in A$이다. Algebra의 보조정리
+\ref{algebra-lemma-Zariski-topology}를 보라.
+$g = \sum_{i = 1, \ldots, n - 1} a_if_i$로 놓자. 그러면
+$U = D(g) \cup D(f_n)$이다. 또한
+$D(g) = D(gf_1) \cup \ldots \cup D(gf_{n - 1})$은 표준 열린 덮개이다.
+귀납법에 의해 유일한 단면 $s' \in \mathcal{F}(D(g))$가 존재하여
+$s_i|_{D(gfi)}$와 일치하며, 여기서 $i = 1, \ldots, n - 1$이다. $s'$와 $s_n$은
+$D(gf_n)$으로의 제한이 같다고 주장한다. 이는 귀납법과 덮개
+$D(gf_n) = D(gf_nf_1) \cup \ldots \cup D(gf_nf_{n - 1})$에 의해
+성립한다. 따라서 유일한 단면 $s \in \mathcal{F}(U)$가 존재하여
+$D(g)$으로의 제한은 $s'$이고 $D(f_n)$으로의 제한은 $s_n$이다. $s$가
+$s_i$로 $D(f_i)$ 위에서 제한된다는, $i = 1, \ldots, n - 1$에 대한
+확인은 생략하며, $s$가 유일하다는 확인도 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-scheme-finite-discrete-affine}
+바탕 위상공간이 유한 이산 집합인 스킴 $X$를 잡자. 그러면 $X$는
+아핀이다.
+\end{lemma}
+
+\begin{proof}
+$X = \{x_1, \ldots, x_n\}$이라고 하자. 그러면 $U_i = \{x_i\}$는
+$x_i$의 열린 근방이다. 보조정리 \ref{schemes-lemma-basis-affine-opens}에 의해
+이는 아핀이다. 따라서 $X$는 아핀 스킴들의 유한 서로소 합이고,
+보조정리 \ref{schemes-lemma-disjoint-union-affines}에 의해 아핀이다.
+\end{proof}
+
+\begin{example}
+\label{schemes-example-scheme-without-closed-points}
+닫힌점이 없는 스킴이 존재한다. 실제로 국소 정역 $R$을 잡되 그 스펙트럼이
+$(0) = \mathfrak p_0 \subset \mathfrak p_1 \subset \mathfrak p_2
+\subset \ldots \subset \mathfrak m$처럼 생겼다고 하자.
+그러면 열린 부분스킴 $\Spec(R) \setminus \{\mathfrak m\}$은 닫힌점을
+가지지 않는다. 이러한 환 $R$이 존재함을 보기 위해, 임의의 전순서군
+$(\Gamma, \geq)$가 주어지면 값매김환 $A$가 존재하고 그 값군이
+$(\Gamma, \geq)$이라는 사실을 사용한다. \cite{Krull}을 보라. 표기는 Algebra의 절
+\ref{algebra-section-valuation-rings}을 보라. 다음과 같이 잡는다.
+$\Gamma = \mathbf{Z}x_1 \oplus \mathbf{Z}x_2 \oplus \mathbf{Z}x_3 \oplus
+\ldots$ 그리고 $\sum_i a_i x_i \geq 0$을 다음과 같이 정의한다. 첫 번째
+0이 아닌 $a_i$가 $> 0$이거나 모든 $a_i = 0$일 때에만 이 부등식이 성립한다. 그러면
+$x_1 \geq x_2 \geq x_3 \geq  \ldots \geq 0$이다. 부분집합
+$x_i + \Gamma_{\geq 0}$들은 $(\Gamma, \geq)$의 소 아이디얼이다.
+Algebra의 보조정리 \ref{algebra-lemma-ideals-valuation-ring} 앞의 표기를
+보라. 이들과 $\emptyset$, $\Gamma_{\geq 0}$이 전부인 소 아이디얼들이다.
+따라서 Algebra의 보조정리 \ref{algebra-lemma-ideals-valuation-ring}에 의해
+$A$는 스펙트럼이 주어진 구조를 가지는 환의 한 예이다.
+\end{example}
+
+\section{축약 스킴}
+\label{schemes-section-reduced}
+
+\begin{definition}
+\label{schemes-definition-reduced}
+$X$를 스킴이라 하자. $X$가 {\it 축약}이라고 함은 모든 국소환
+$\mathcal{O}_{X, x}$가 축약환인 경우이다.
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-reduced}
+스킴 $X$가 축약일 필요충분조건은 $\mathcal{O}_X(U)$가 축약환이라는 것이
+모든 열린집합 $U \subset X$에 대하여 성립하는 것이다.
+\end{lemma}
+
+\begin{proof}
+$X$가 축약이라고 가정하자. $f \in \mathcal{O}_X(U)$가 $f^n = 0$을
+만족하는 단면이라 하자. 그러면 $f$의 $\mathcal{O}_{U, u}$에서의 상은
+모든 $u \in U$에 대하여 0이다. 따라서 $f$는 0이다. Sheaves의 보조정리
+\ref{sheaves-lemma-sheaf-subset-stalks}를 보라. 역으로,
+$\mathcal{O}_X(U)$가 모든 열린집합 $U$에 대하여 축약이라고 가정하자.
+0이 아닌 임의의 원소 $f \in \mathcal{O}_{X, x}$를 택하자. 임의의 대표
+$(U, f \in \mathcal{O}(U))$는 $f$의 대표로서 0이 아니므로 멱영이 아니다. 따라서
+$f$는 $\mathcal{O}_{X, x}$에서 멱영이 아니다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-affine-reduced}
+아핀 스킴 $\Spec(R)$가 축약일 필요충분조건은 $R$이 축약환인 것이다.
+\end{lemma}
+
+\begin{proof}
+정방향은 위의 보조정리 \ref{schemes-lemma-reduced}에서 바로 따른다. 역방향은
+축약환의 모든 국소화가 축약이고, 특히 축약환의 국소환들이 축약이므로
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-reduced-closed-subscheme}
+$X$를 스킴이라 하고 $T \subset X$를 닫힌 부분집합이라 하자. 다음 성질을
+가지는 유일한 닫힌 부분스킴 $Z \subset X$가 존재한다. (a) $Z$의 바탕
+위상공간은 $T$와 같고, (b) $Z$는 축약이다.
+\end{lemma}
+
+\begin{proof}
+다음 규칙으로 정의되는 부분 준층 $\mathcal{I} \subset \mathcal{O}_X$를
+생각하자.
+$$
+\mathcal{I}(U) = \{f \in \mathcal{O}_X(U) \mid
+f(t) = 0\text{ for all }t \in T\cap U\}
+$$
+여기서 $f(t)$는 $f$의 잉여체 $\kappa(t)$ 안의 상을 나타내며, 이 잉여체는
+$X$의 $t$에서의 잉여체이다. 이 조건은 국소적이므로 $\mathcal{I}$가 아이디얼의 층임은
+분명하다. 또한 $U = \Spec(R)$를 아핀 열린집합이라 하자.
+$T \cap U = V(I)$로 쓸 수 있으며, 여기서 $I \subset R$은 유일한 근기
+아이디얼이다. 소 아이디얼 $\mathfrak p \in V(I)$가 $t \in T \cap U$에 대응하고 원소
+$f \in R$이 주어지면
+$f(t) = 0 \Leftrightarrow f \in \mathfrak p$이다. 따라서 Algebra의 보조정리
+\ref{algebra-lemma-Zariski-topology}에 의해
+$\mathcal{I}(U) = \bigcap_{\mathfrak p \in V(I)} \mathfrak p
+= I$이다. 또한 같은 논리에 의해 임의의 표준 열린집합
+$D(g) \subset \Spec(R) = U$에 대하여 $\mathcal{I}(D(g)) = I_g$이다.
+따라서 $\widetilde I$와 $\mathcal{I}|_U$는 열린집합의 한 기저 위에서
+(아이디얼로서) 일치하므로 같다. 그러므로 $\mathcal{I}$는 아이디얼의
+준연접층이다.
+
+\medskip\noindent
+이제 닫힌 부분공간 $Z$를 아이디얼의 층 $\mathcal{I}$에 결부된 것으로
+정의할 수 있다. 아핀 열린집합 $U = \Spec(R)$를 $X$ 안에서 임의로 잡으면
+$Z \cap U = \Spec(R/I)$이다. 여기서 $I$는 근기 아이디얼이므로 $Z$는
+축약이다(위의 보조정리 \ref{schemes-lemma-affine-reduced}). 구성에 의해 $Z$의
+바탕 닫힌 부분집합은 $T$이다. 따라서 성질 (a)와 (b)를 가지는 닫힌
+부분스킴을 찾았다.
+
+\medskip\noindent
+$Z' \subset X$를 성질 (a)와 (b)를 가지는 두 번째 닫힌 부분스킴이라 하자.
+아핀 열린집합 $U = \Spec(R)$를 $X$ 안에서 임의로 잡으면
+$Z' \cap U = \Spec(R/I')$이며, 여기서 $I' \subset R$은 어떤 아이디얼이다. 보조정리
+\ref{schemes-lemma-affine-reduced}에 의해 환 $R/I'$은 축약이므로 $I'$은 근기
+아이디얼이다. $V(I') = T \cap U = V(I)$이므로 Algebra의 보조정리
+\ref{algebra-lemma-Zariski-topology}에 의해 $I = I'$임을 얻는다. 따라서
+$Z'$와 $Z$는 같은 아이디얼의 층으로 정의되므로 서로 같다.
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-reduced-induced-scheme}
+$X$를 스킴이라 하고 $Z \subset X$를 닫힌 부분집합이라 하자. {\it $Z$ 위의
+스킴 구조}란 닫힌 부분스킴 $Z'$를 $X$ 안에 주되 그 바탕 집합이 $Z$와
+같도록 하는 것이다. 이를 나타내기 위해 흔히 ``$(Z, \mathcal{O}_Z)$를 $Z$ 위의
+스킴 구조라 하자''라고 말한다. $Z$ 위의 {\it 유도된 축약 스킴 구조}란
+보조정리 \ref{schemes-lemma-reduced-closed-subscheme}에서 구성한 구조이다.
+{\it 축약 $X_{red}$}이란 $X$의, $X$ 자체 위의 유도된 축약 스킴 구조이다.
+\end{definition}
+
+\noindent
+``$Z \subset X$를 $X$의 한 기약 성분이라 하자''라고 말할 때에는 흔히
+유도된 축약 스킴 구조를 사용하여 $Z$를 $X$의 축약 닫힌 부분스킴으로
+생각한다.
+
+\begin{remark}
+\label{schemes-remark-reduced-induced-locally-closed}
+$X$를 스킴이라 하고 $T \subset X$를 국소 닫힌 부분집합이라 하자. 이
+상황에서도 때때로 ``$T$ 위의 유도된 축약 스킴 구조''라는 표현을 쓴다.
+이는 $T$를 열린 부분스킴 $X \setminus \partial T$의 닫힌 부분집합으로
+보되 이 열린 부분스킴을 $X$ 안에서 취할 때
+정의 \ref{schemes-definition-reduced-induced-scheme}에서 얻는 유도된 축약 스킴
+구조를 뜻한다. 여기서 $\partial T = \overline{T} \setminus T$는 위상공간
+안에서 $T$의 ``경계''이며, 이 위상공간은 $X$의 바탕 공간이다.
+\end{remark}
+
+\begin{lemma}
+\label{schemes-lemma-map-into-reduction}
+$X$를 스킴이라 하고 $Z \subset X$를 닫힌 부분스킴이라 하며 $Y$를 축약
+스킴이라 하자. 사상 $f : Y \to X$가 $Z$를 통해 인수분해될 필요충분조건은
+(집합론적으로) $f(Y) \subset Z$인 것이다. 특히 임의의 사상 $Y \to X$는
+$Y \to X_{red} \to X$로 인수분해된다.
+\end{lemma}
+
+\begin{proof}
+(집합론적으로) $f(Y) \subset Z$라고 가정하자. $\mathcal{I} \subset \mathcal{O}_X$를
+$Z$의 아이디얼 층이라 하자. 임의의 아핀 열린집합
+$U \subset X$, $\Spec(B) = V \subset Y$가 $f(V) \subset U$를 만족하고,
+임의의 $g \in \mathcal{I}(U)$가 주어졌다고 하자. 당김
+$b = f^\sharp(g) \in \Gamma(V, \mathcal{O}_Y) = B$는 모든 $y \in V$의
+잉여체에서 0으로 간다. 다시 말해
+$b \in \bigcap_{\mathfrak p \subset B} \mathfrak p$이다. 이는 $b = 0$을
+함의한다. 실제로 $B$는 축약이다(보조정리 \ref{schemes-lemma-reduced}와 Algebra의
+보조정리 \ref{algebra-lemma-Zariski-topology}). 따라서
+보조정리 \ref{schemes-lemma-characterize-closed-subspace}에 의해 $f$는 $Z$를 통해
+인수분해된다.
+\end{proof}
+
+\section{스킴의 점}
+\label{schemes-section-points}
+
+\noindent
+스킴 $X$가 주어지면 함자
+$$
+h_X : \Sch^{opp}
+\longrightarrow
+\textit{Sets}, \quad
+T \longmapsto \Mor(T, X).
+$$
+를 정의할 수 있다. Categories의 예 \ref{categories-example-hom-functor}를
+보라. 이를 {\it $X$의 점 함자}라고 한다. 스킴 이론의 흥미로운 부분 중
+하나는 $X$의 내부 기하를 함자 $h_X$로 기술하는 것이다. 이
+절에서는 $X$의 점을 기술하는 간단한 방법을 찾는다.
+
+\medskip\noindent
+$X$를 스킴이라 하자. $R$을 극대 아이디얼 $\mathfrak m \subset R$을 가지는
+국소환이라 하자. $f : \Spec(R) \to X$가 스킴의 사상이라고 가정하자.
+$x \in X$를 닫힌점 $\mathfrak m \in \Spec(R)$의 상이라 하자. 그러면
+국소환들의 국소 준동형
+$$
+f^\sharp :
+\mathcal{O}_{X, x}
+\longrightarrow
+\mathcal{O}_{\Spec(R), \mathfrak m} = R.
+$$
+을 얻는다.
+
+\begin{lemma}
+\label{schemes-lemma-morphism-from-spec-local-ring}
+$X$를 스킴이라 하고 $R$을 국소환이라 하자. 위의 구성은 사상
+$\Spec(R) \to X$들과 쌍 $(x, \varphi)$들 사이의 전단사 대응을 준다.
+여기서 쌍은 점 $x \in X$와 국소환들의 국소 준동형
+$\varphi : \mathcal{O}_{X, x} \to R$로 이루어진다.
+\end{lemma}
+
+\begin{proof}
+$A$를 환이라 하자. 임의의 환 준동형 $\psi : A \to R$에 대하여 유일한
+소 아이디얼 $\mathfrak p \subset A$와 인수분해
+$A \to A_{\mathfrak p} \to R$가 존재하고, 마지막 사상은 국소환들의 국소
+준동형이다. 실제로 $\mathfrak p = \psi^{-1}(\mathfrak m)$이다. 보조정리
+\ref{schemes-lemma-morphism-into-affine}를 적용하면 $X$가 아핀 스킴일 때 보조정리가
+성립함을 알 수 있다.
+
+\medskip\noindent
+$X$를 일반적인 스킴이라 하자. 임의의 $x \in X$는 아핀 열린집합
+$U \subset X$에 포함된다. 아핀 경우에 의해 모든 쌍 $(x, \varphi)$가
+보조정리 앞의 구성 결과로 나타남을 알 수 있다.
+
+\medskip\noindent
+증명을 마치려면 임의의 사상 $f : \Spec(R) \to X$의 상이 닫힌점의 상
+$x$를 포함하는 모든 아핀 열린집합에 포함됨을 보이면 충분하다. 여기서
+닫힌점은 $\Spec(R)$의 닫힌점이다.
+실제로 $x \in V \subset X$를 $x$를 포함하는 임의의 열린
+근방이라 하자. 그러면 $f^{-1}(V) \subset \Spec(R)$은 유일한 닫힌점을
+포함하는 열린집합이므로 $\Spec(R)$과 같다.
+\end{proof}
+
+\noindent
+위 보조정리의 특수한 경우로, 각 점 $x$에 대하여 스킴 $X$에는 표준 사상
+\begin{equation}
+\label{schemes-equation-canonical-morphism}
+\Spec(\mathcal{O}_{X, x}) \longrightarrow X
+\end{equation}
+을 얻으며, 이는 $X$의 $x$에서의 국소환의 항등사상에 대응한다. 위의
+보조정리는 임의의 사상 $f : \Spec(R) \to X$에 대하여 유일한 점
+$x \in X$가 존재하여 $f$가
+$\Spec(R) \to \Spec(\mathcal{O}_{X, x}) \to X$로 인수분해되고 첫 번째
+사상은 국소 준동형 $\mathcal{O}_{X, x} \to R$에서 온다는 말로 다시
+표현할 수 있다.
+
+\medskip\noindent
+스킴의 사상 $f : X \to S$와 점 $x$가 있고 그 상이 점 $s \in S$인 경우에는
+가환 도식
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{X, x}) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(\mathcal{O}_{S, s}) \ar[r] & S
+}
+$$
+을 얻는다. 여기서 왼쪽 세로 사상은 국소환 사상
+$f^\sharp_x : \mathcal{O}_{S, s} \to \mathcal{O}_{X, x}$에 대응한다.
+
+\begin{lemma}
+\label{schemes-lemma-specialize-points}
+$X$를 스킴이라 하자. $x, x' \in X$를 $X$의 점들이라 하자. 그러면
+$x' \in X$가 $x$의 일반화일 필요충분조건은 $x'$가 표준 사상
+$\Spec(\mathcal{O}_{X, x}) \to X$의 상에 속하는 것이다.
+\end{lemma}
+
+\begin{proof}
+연속사상은 특수화/일반화 관계를 보존한다.
+$\Spec(\mathcal{O}_{X, x})$의 모든 점은 닫힌점의 일반화이므로
+$\Spec(\mathcal{O}_{X, x}) \to X$의 상의 모든 점은 $x$의 일반화이다.
+역으로 $x'$가 $x$의 일반화라고 가정하자. 아핀 열린 근방
+$U = \Spec(R)$를 택하되 $x$의 근방이 되게 하자. 그러면 $x' \in U$이다.
+$\mathfrak p \subset R$과 $\mathfrak p' \subset R$을 각각 $x$와 $x'$에
+대응하는 소 아이디얼들이라 하자. $x'$가 $x$의 일반화이므로
+$\mathfrak p' \subset \mathfrak p$이다.
+이는 원하는 대로 $\mathfrak p'$가 사상
+$\Spec(\mathcal{O}_{X, x}) = \Spec(R_{\mathfrak p})
+\to \Spec(R) = U \subset X$의 상에 속한다는 뜻이다.
+\end{proof}
+
+\noindent
+이제 체의 스펙트럼에서 오는 사상들을 논하자. $(R, \mathfrak m, \kappa)$를
+극대 아이디얼 $\mathfrak m$과 잉여체 $\kappa$를 가지는 국소환이라 하자.
+$K$를 체라 하자. 정의에 의해 국소 준동형 $R \to K$는
+$R \to \kappa \to K$로 인수분해된다. 즉, 이는 준동형 $\kappa \to K$와
+같은 데이터이다. 따라서 사상
+$$
+\Spec(K) \longrightarrow X
+$$
+들은 쌍 $(x, \kappa(x) \to K)$들과 대응한다. 체의 스펙트럼에서 $X$로
+가는 사상들 위에 다음과 같이 준순서를 정의할 수 있다. 사상
+$\Spec(K) \to X$가 $\Spec(L) \to X$를 지배한다고 함은
+$\Spec(K) \to X$가 $\Spec(L) \to X$를 통해 인수분해되는 경우이다.
+이 정의는 다음 개념을 시사한다. 당분간 두 사상
+$p : \Spec(K) \to X$와 $q : \Spec(L) \to X$에 대하여, 세 번째 체
+$\Omega$와 가환 도식
+$$
+\xymatrix{
+\Spec(\Omega) \ar[r] \ar[d] &
+\Spec(L) \ar[d]^q \\
+\Spec(K) \ar[r]^p &
+X
+}
+$$
+이 존재하면 이 두 사상이 {\it 동치}라고 하자. 물론 이는 세 스킴
+$\Spec(K)$, $\Spec(L)$, $\Spec(\Omega)$ 각각의 유일한 점이 모두 같은
+$x \in X$로 간다는 것을 즉시 함의한다. 따라서 (위의 논의에 의해) 이러한
+도식은 점 $x \in X$와 체들의 가환 도식
+$$
+\xymatrix{
+\Omega &
+L \ar[l] \\
+K \ar[u] &
+\kappa(x) \ar[l] \ar[u]
+}
+$$
+에 대응한다. 이것은 동치관계를 정의한다. 실제로 체 확대들의 임의의 집합
+$K_i/\kappa$가 주어지면 어떤 체 확대 $\Omega/\kappa$가 존재하여 모든 체
+확대 $K_i$가 $\Omega$에 포함된다.
+
+\begin{lemma}
+\label{schemes-lemma-characterize-points}
+$X$를 스킴이라 하자. $X$의 점들은 체의 스펙트럼에서 $X$로 가는 사상들의
+동치류들과 전단사로 대응한다. 또한 각 동치류는 (유일한 동형을 제외하고
+유일한) 최소 원소 $\Spec(\kappa(x)) \to X$를 포함한다.
+\end{lemma}
+
+\begin{proof}
+위의 논의에서 따른다.
+\end{proof}
+
+\noindent
+물론 사상 $\Spec(\kappa(x)) \to X$들은 표준 사상
+$\Spec(\mathcal{O}_{X, x}) \to X$를 통해 인수분해된다. 이 맥락에서 보조정리
+\ref{schemes-lemma-specialize-points}의 내용은 사상 $\Spec(\kappa(x')) \to X$가
+$\Spec(\kappa(x')) \to \Spec(\mathcal{O}_{X, x}) \to X$로 인수분해된다는
+것이며, 이는 $x'$가 $x$의 일반화일 때마다 성립한다. 스킴의 사상
+$f : X \to S$와 점 $x$가 있고 그 상이 점
+$s \in S$인 경우에는 가환 도식
+$$
+\xymatrix{
+\Spec(\kappa(x)) \ar[r] \ar[d] &
+\Spec(\mathcal{O}_{X, x}) \ar[r] \ar[d] &
+X \ar[d] \\
+\Spec(\kappa(s)) \ar[r] &
+\Spec(\mathcal{O}_{S, s}) \ar[r] &
+S.
+}
+$$
+
+\section{스킴 붙이기}
+\label{schemes-section-glueing-schemes}
+
+\noindent
+$I$를 집합이라 하자. 각 $i \in I$에 대하여 $(X_i, \mathcal{O}_i)$를 국소 환
+달린 공간이라 하자. (사실 뒤따르는 구성은 환 달린 공간에도 똑같이
+적용된다.) 각 쌍 $i, j \in I$에 대하여 $U_{ij} \subset X_i$를 열린
+부분공간이라 하자. 각 쌍 $i, j \in I$에 대하여
+$$
+\varphi_{ij} : U_{ij} \to U_{ji}
+$$
+를 국소 환 달린 공간의 동형이라 하자. 편의를 위해 $U_{ii} = X_i$라고
+가정한다. 각 삼중항 $i, j, k \in I$에 대하여 다음을 가정한다.
+\begin{enumerate}
+\item
+$\varphi_{ij}^{-1}(U_{ji} \cap U_{jk}) =  U_{ij} \cap U_{ik}$이고,
+\item 도식
+$$
+\xymatrix{
+U_{ij} \cap U_{ik} \ar[rr]_{\varphi_{ik}} \ar[rd]_{\varphi_{ij}} & &
+U_{ki} \cap U_{kj} \\
+& U_{ji} \cap U_{jk} \ar[ru]_{\varphi_{jk}}
+}
+$$
+이 가환한다.
+\end{enumerate}
+(특히 $\varphi_{ii} = \text{id}_{X_i}$가 따른다.) 위 조건들을 만족하는 모임
+$(I, (X_i)_{i\in I}, (U_{ij})_{i, j\in I}, (\varphi_{ij})_{i, j\in I})$
+을 붙이기 자료라고 부르자.
+
+\begin{lemma}
+\label{schemes-lemma-glue}
+\begin{slogan}
+두 국소 환 달린 공간이 있고 첫 번째 공간의 한 부분공간이 다른 공간의 한
+부분공간과 동형이면, 두 공간을 붙여 하나의 큰 국소 환 달린 공간을 만들 수
+있다.
+\end{slogan}
+국소 환 달린 공간의 임의의 붙이기 자료가 주어지면 국소 환 달린 공간 $X$와
+열린 부분공간들 $U_i \subset X$, 그리고 국소 환 달린 공간의 동형들
+$\varphi_i : X_i \to U_i$가 존재하여 다음을 만족한다.
+\begin{enumerate}
+\item $X=\bigcup_{i\in I} U_i$,
+\item $\varphi_i(U_{ij}) = U_i \cap U_j$이고,
+\item $\varphi_{ij} =
+\varphi_j^{-1}|_{U_i \cap U_j} \circ \varphi_i|_{U_{ij}}$이다.
+\end{enumerate}
+국소 환 달린 공간 $X$는 다음 사상 성질들로 특징지어진다. 국소 환 달린
+공간 $Y$가 주어지면 다음이 성립한다.
+\begin{eqnarray*}
+\Mor(X, Y) & = & \{ (f_i)_{i\in I} \mid
+f_i : X_i \to Y, \ f_j \circ \varphi_{ij} = f_i|_{U_{ij}}\} \\
+f & \mapsto & (f|_{U_i} \circ \varphi_i)_{i \in I} \\
+\Mor(Y, X) & = &
+\left\{
+\begin{matrix}
+\text{open covering }Y = \bigcup\nolimits_{i \in I} V_i\text{ and }
+(g_i : V_i \to X_i)_{i \in I}
+\text{ such that}\\
+g_i^{-1}(U_{ij}) = V_i \cap V_j
+\text{ and }
+g_j|_{V_i \cap V_j} = \varphi_{ij} \circ g_i|_{V_i \cap V_j}
+\end{matrix}
+\right\} \\
+g & \mapsto &
+V_i = g^{-1}(U_i), \ g_i = \varphi_i^{-1} \circ g|_{V_i}
+\end{eqnarray*}
+\end{lemma}
+
+\begin{proof}
+$X$를 단계별로 구성한다. 집합으로는
+$$
+X = (\coprod X_i) / \sim.
+$$
+를 취한다. 여기서 $x \in X_i$와 $x' \in X_j$가 주어졌을 때,
+$x \sim x'$라고 함은 $x \in U_{ij}$, $x' \in U_{ji}$이고
+$\varphi_{ij}(x) = x'$인 경우이다. 이는 동치관계이다. 실제로 $x \in X_i$,
+$x' \in X_j$, $x'' \in X_k$이고 $x \sim x'$ 및 $x' \sim x''$이면
+$x' \in U_{ji} \cap U_{jk}$이다. 따라서 붙이기 자료의 조건 (1)에 의해
+$x \in U_{ij} \cap U_{ik}$이고 $x'' \in U_{ki} \cap U_{kj}$이며, 조건 (2)에
+의해 $\varphi_{ik}(x) = x''$이다. (반사성과 대칭성은 가정
+$U_{ii} = X_i$와 $\varphi_{ii} = \text{id}_{X_i}$에서 따른다.) 자연스러운
+사상들을 $\varphi_i : X_i \to X$로 나타내자. 또한
+$U_i = \varphi_i(X_i) \subset X$로 나타내자. 사상
+$\varphi_i : X_i \to U_i$는 전단사임에 유의하자.
+
+\medskip\noindent
+$X$ 위의 위상은 다음 규칙으로 정의한다. $U \subset X$가 열린집합일
+필요충분조건은 $\varphi_i^{-1}(U)$가 모든 $i$에 대하여 열린집합인 것이다.
+이 규칙이 실제로 위상을 정의한다는 확인은 독자에게 맡긴다. 특히 $U_i$는
+열린집합이다. 실제로
+$\varphi_j^{-1}(U_i)
+= U_{ji}$는 $X_j$에서 모든 $j$에 대하여 열려 있다. 또한 임의의 열린집합
+$W \subset X_i$에 대하여 상
+$\varphi_i(W) \subset U_i$는 열려 있다. 실제로
+$\varphi_j^{-1}(\varphi_i(W)) = \varphi_{ji}^{-1}(W \cap U_{ij})$이다. 따라서
+$\varphi_i : X_i \to U_i$는 위상동형이다.
+
+\medskip\noindent
+국소 환 달린 공간을 얻으려면 환의 층 $\mathcal{O}_X$를 구성해야 한다.
+환의 층들 $\mathcal{O}_{U_i} := \varphi_{i, *} \mathcal{O}_i$를 붙여 이를
+구성한다. 즉, 가환 도식
+$$
+\xymatrix{
+U_{ij} \ar[rr]_{\varphi_{ij}} \ar[rd]_{\varphi_i|_{U_{ij}}}
+& &
+U_{ji} \ar[ld]^{\varphi_j|_{U_{ji}}} \\
+& U_i \cap U_j &
+}
+$$
+에서 위쪽 화살표는 환 달린 공간의 동형이므로 환의 층들의 유일한 동형
+$$
+\mathcal{O}_{U_i}|_{U_i \cap U_j}
+\longrightarrow
+\mathcal{O}_{U_j}|_{U_i \cap U_j}.
+$$
+을 얻는다. 이들은 Sheaves의 절 \ref{sheaves-section-glueing-sheaves}에서와
+같은 코사이클 조건을 만족한다. 그 절의 결과에 의해 환의 층
+$\mathcal{O}_X$를 $X$ 위에 얻으며, $\mathcal{O}_X|_{U_i}$는 위에 표시한 붙이기
+사상들과 양립하도록 $\mathcal{O}_{U_i}$와 동형이다. 특히
+$(X, \mathcal{O}_X)$는 국소 환 달린 공간이다. 실제로 $\mathcal{O}_X$의
+줄기들은 대응하는 점들에서 $\mathcal{O}_i$의 줄기들과 같다.
+
+\medskip\noindent
+사상 성질들의 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-glue-schemes}
+\begin{slogan}
+스킴들을 붙여 새로운 스킴을 얻을 수 있다.
+\end{slogan}
+위의 보조정리 \ref{schemes-lemma-glue}에서 모든 $X_i$가 스킴이라고 가정하자.
+그러면 얻어진 국소 환 달린 공간 $X$는 스킴이다.
+\end{lemma}
+
+\begin{proof}
+각 $U_i$가 스킴이므로 모든 $x \in X$가 아핀 근방을 가진다. 따라서 이는
+분명하다.
+\end{proof}
+
+\noindent
+각 $X_i$를 $X$의 열린 부분공간으로 동형들 $\varphi_i$를 통해 생각하는 것이
+관례이다. 다음 두 예에서도 그렇게 하겠다.
+
+\begin{example}[원점이 이중화된 아핀 공간]
+\label{schemes-example-affine-space-zero-doubled}
+$k$를 체라 하고 $n \geq 1$이라 하자.
+$X_1 = \Spec(k[x_1, \ldots, x_n])$,
+$X_2 = \Spec(k[y_1, \ldots, y_n])$로 놓자.
+$0_1 \in X_1$을 극대 아이디얼
+$(x_1, \ldots, x_n) \subset k[x_1, \ldots, x_n]$에 대응하는 점이라 하자.
+$0_2 \in X_2$를 극대 아이디얼
+$(y_1, \ldots, y_n) \subset k[y_1, \ldots, y_n]$에 대응하는 점이라 하자.
+$U_{12} = X_1 \setminus \{0_1\}$로 놓고
+$U_{21} = X_2 \setminus \{0_2\}$로 놓자. $\varphi_{12} : U_{12} \to U_{21}$를
+$k$-대수의 동형 $k[y_1, \ldots, y_n] \to k[x_1, \ldots, x_n]$에서 오는
+동형이라 하자. 이 대수 동형은 $y_i$를 $x_i$로 보내며(따라서 유도된
+$X_1 \cong X_2$는 $0_1$을 $0_2$로 보낸다), $X$를 붙이기 자료
+$(X_1, X_2, U_{12}, U_{21}, \varphi_{12},
+\varphi_{21} = \varphi_{12}^{-1})$에서 얻는 스킴이라 하자. 예 앞에서 도입한
+약간의 표기 남용을 사용하여 $X_1, X_2 \subset X$를 열린 부분스킴으로
+생각한다. 사상 $f : X \to \Spec(k[t_1, \ldots, t_n])$가 존재하며, 이는
+$X_1$(각각 $X_2$) 위에서 $k$-대수 사상
+$k[t_1, \ldots, t_n] \to k[x_1, \ldots, x_n]$
+(각각 $k[t_1, \ldots, t_n] \to k[y_1, \ldots, y_n]$)에 대응한다. 이들은
+$t_i$를 $x_i$(각각 $t_i$를 $y_i$)로 보낸다. 이 사상이
+$k[t_1, \ldots, t_n]$을 $\Gamma(X, \mathcal{O}_X)$와 동일시함은 쉽게
+알 수 있다. $f(0_1) = f(0_2)$이므로 $X$는 아핀이 아니다.
+
+\medskip\noindent
+$X_1$과 $X_2$는 $X$의 아핀 열린집합임에 유의하자. 그러나 $n = 2$이면
+$X_1 \cap X_2$는 예 \ref{schemes-example-not-affine}에서 기술한 스킴이므로 아핀이
+아니다. 따라서 일반적으로 스킴의 아핀 열린집합 두 개의 교집합은 아핀이
+아니다. (이 사실은 더 일반적으로 임의의 $n > 1$에 대해서도 성립한다.)
+
+\medskip\noindent
+이 예에는 다음과 같은 또 다른 흥미로운 특징이 있다. $n > 1$이면 기약
+닫힌 부분집합 $T \subset X$가 많이 존재한다(예를 들어 $X_1$의 닫히지
+않은 임의의 점의 폐포를 취하라). 그러나 $T = \{0_1\}$ 또는
+$T = \{0_2\}$가 아니면 $0_1 \in T \Leftrightarrow 0_2 \in T$이다. 증명은
+생략한다.
+\end{example}
+
+\begin{example}[사영직선]
+\label{schemes-example-projective-line}
+$k$를 체라 하자. $X_1 = \Spec(k[x])$, $X_2 = \Spec(k[y])$로 놓자.
+$0 \in X_1$을 극대 아이디얼 $(x) \subset k[x]$에 대응하는 점이라 하자.
+$\infty \in X_2$를 극대 아이디얼 $(y) \subset k[y]$에 대응하는 점이라 하자.
+$U_{12} = X_1 \setminus \{0\} = D(x) = \Spec(k[x, 1/x])$로 놓고
+$U_{21} = X_2 \setminus \{\infty\} = D(y) = \Spec(k[y, 1/y])$로 놓자.
+$\varphi_{12} : U_{12} \to U_{21}$를 $k$-대수의 동형
+$k[y, 1/y] \to k[x, 1/x]$에서 오는 동형이라 하자. 이 대수 동형은 $y$를
+$1/x$로 보낸다. $\mathbf{P}^1_k$를 붙이기 자료
+$(X_1, X_2, U_{12}, U_{21}, \varphi_{12},
+\varphi_{21} = \varphi_{12}^{-1})$에서 얻는 스킴이라 하자. 예 앞에서 도입한
+약간의 표기 남용을 사용하여 $X_i \subset \mathbf{P}^1_k$를 열린
+부분스킴으로 생각한다. 이 경우
+$\Gamma(\mathbf{P}^1_k, \mathcal{O}) = k$임을 알 수 있다. 실제로 다항식
+$g(x)$ 가운데 변수 $x$에 대한 다항식이면서 $g(1/y)$가 $y$에 대한
+다항식이기도 한 것은 상수
+다항식뿐이다. $\mathbf{P}^1_k$가 무한이므로 $\mathbf{P}^1_k$는 아핀이 아니다.
+
+\medskip\noindent
+아핀 열린집합 $U \subset \mathbf{P}^1_k$가 존재하여 $0$과 $\infty$를 모두
+포함한다고 주장한다. 실제로
+$U = \mathbf{P}^1_k \setminus \{1\}$로 놓자. 여기서 $1$은 $X_1$에서
+극대 아이디얼 $(x - 1)$에 대응하는 점이고, $X_2$에서 극대 아이디얼
+$(y - 1)$에 대응하는 점이기도 하다. 그러면
+$s = 1/(x - 1) = y/(1 - y) \in \Gamma(U, \mathcal{O}_U)$임을 쉽게 알 수 있다.
+실제로 $\Gamma(U, \mathcal{O}_U)$가 다항식환 $k[s]$와 같고 대응하는 사상
+$U \to \Spec(k[s])$가 스킴의 동형임을 보일 수 있다. 세부사항은 생략한다.
+\end{example}
+
+\section{표현가능성 판정법}
+\label{schemes-section-representable}
+
+\noindent
+이 절에서는 절 \ref{schemes-section-glueing-schemes}의 붙이기 보조정리를 함자의
+언어로 다시 표현한다. Categories의 절 \ref{categories-section-opposite}에
+있는 내용 일부를 상기하자. 스킴 $X$가 주어지면 함자
+$$
+h_X : \Sch^{opp}
+\longrightarrow
+\textit{Sets}, \quad
+T \longmapsto \Mor(T, X).
+$$
+를 정의할 수 있음을 상기하자. 이를 {\it $X$의 점 함자}라고 한다.
+
+\medskip\noindent
+$F$를 스킴의 범주에서 집합의 범주로 가는 반변함자라 하자. 식으로 쓰면
+$$
+F : \Sch^{opp}
+\longrightarrow
+\textit{Sets}.
+$$
+이다. Sites의 절 \ref{sites-section-presheaves}와 같은 용어를 사용하겠다.
+즉, 스킴 $T$, 원소 $\xi \in F(T)$, 사상 $f : T' \to T$가 주어지면
+$f^*\xi$로 원소 $F(f)(\xi)$를 나타내고, 때로는 표기 $\xi|_{T'}$도 사용한다.
+
+\begin{definition}
+\label{schemes-definition-representable-functor}
+(Categories의 정의 \ref{categories-definition-representable-functor}를 보라.)
+$F$를 위와 같이 스킴의 범주에서 집합의 범주로 가는 반변함자라 하자.
+$F$가 {\it 스킴으로 표현가능하다} 또는 간단히 {\it 표현가능하다}고 함은
+스킴 $X$가 존재하여 $h_X \cong F$인 경우이다.
+\end{definition}
+
+\noindent
+$F$가 스킴 $X$로 표현되고 $s : h_X \to F$가 동형이라고 가정하자.
+Categories의 요네다 보조정리 \ref{categories-lemma-yoneda}에 의해 쌍
+$(X, s : h_X \to F)$는 존재한다면 유일한 동형을 제외하고 유일하다. 또한
+요네다 보조정리에 따르면 위와 같은 임의의 반변함자 $F$와 임의의 스킴
+$Y$에 대하여 전단사
+$$
+\Mor_{\text{Fun}(\Sch^{opp}, \textit{Sets})} (h_Y, F)
+\longrightarrow
+F(Y), \quad
+s \longmapsto s(\text{id}_Y).
+$$
+가 존재한다. 역구성은 다음과 같다. 임의의 $\xi \in F(Y)$가 주어지면 함자
+사이의 변환 $s_\xi : h_Y \to F$는 임의의 사상 $f : T \to Y$에 원소
+$f^*\xi \in F(T)$를 대응시킨다.
+
+\medskip\noindent
+특히 $F$가 표현가능한 경우에는 스킴 $X$와 원소 $\xi \in F(X)$가 존재하여
+대응하는 사상 $h_X \to F$가 동형이다. 이 경우에는 {\it 쌍 $(X, \xi)$가
+$F$를 표현한다}고도 한다. 원소 $\xi \in F(X)$는, 대수적 스택을 논할 때
+더 분명해질 이유로 흔히 {\it ``보편족''}이라고 부른다(여기에 향후 참조를
+삽입). 지금은 쌍 $(X, \xi)$가 $F$를 표현하면 모든 원소
+$\xi' \in F(T)$가 임의의 $T$에 대하여 $\xi' = f^*\xi$의 꼴이고, 이때 사상
+$f : T \to X$가 유일함을 관찰하는 것으로 충분하다.
+
+\begin{example}
+\label{schemes-example-global-sections}
+모든 스킴 $T$에 집합 $F(T) = \Gamma(T, \mathcal{O}_T)$를 대응시키는 규칙을
+생각하자. 사상 $f : T' \to T$에 당김 사상
+$f^\sharp : \Gamma(T, \mathcal{O}_T) \to \Gamma(T', \mathcal{O}_{T'})$을
+사용하면 이를 반변함자로 만들 수 있다. 환 $R$과 원소 $t \in R$가 주어지면
+유일한 환 준동형 $\mathbf{Z}[x] \to R$가 존재하며, 이는 $x$를 $t$로 보낸다.
+따라서 보조정리 \ref{schemes-lemma-morphism-into-affine}를 사용하면
+$$
+\Mor(T, \Spec(\mathbf{Z}[x])) =
+\Hom(\mathbf{Z}[x], \Gamma(T, \mathcal{O}_T)) =
+\Gamma(T, \mathcal{O}_T).
+$$
+이며, 이는 실제로 동형 $h_{\Spec(\mathbf{Z}[x])} \to F$를 준다.
+``보편족'' $\xi$는 무엇인가? 이를 얻으려면 위의 동일시들을
+$\text{id}_{\Spec(\mathbf{Z}[x])}$에 적용해야 한다. 위의 동일시 아래에서
+이는 분명히 예상한 대로
+$\xi = x \in \Gamma(\Spec(\mathbf{Z}[x]),
+\mathcal{O}_{\Spec(\mathbf{Z}[x])}) = \mathbf{Z}[x]$
+를 준다.
+\end{example}
+
+\begin{definition}
+\label{schemes-definition-representable-by-open-immersions}
+$F$를 스킴의 범주 위에서 집합에 값을 가지는 반변함자라 하자.
+\begin{enumerate}
+\item $F$가 {\it 자리스키 위상에 대한 층 성질을 만족한다}고 함은, 모든
+스킴 $T$, 모든 열린 덮개 $T = \bigcup_{i \in I} U_i$, 그리고 임의의 원소 모임
+$\xi_i \in F(U_i)$에 대하여
+$\xi_i|_{U_i \cap U_j} =
+\xi_j|_{U_i \cap U_j}$이면 유일한 원소 $\xi \in F(T)$가 존재하여
+$\xi_i = \xi|_{U_i}$가 $F(U_i)$에서 성립하는 경우이다.
+\item {\it 부분함자 $H \subset F$}란 각 스킴 $T$에 부분집합
+$H(T) \subset F(T)$를 대응시키고, 사상 $F(f) : F(T) \to F(T')$가 $H(T)$를
+$H(T')$ 안으로 보내도록 하는 규칙이다. 여기서 이 조건은 스킴의 모든 사상
+$f : T' \to T$에 대하여 성립한다.
+\item $H \subset F$를 부분함자라 하자. $H \subset F$가 {\it 열린 몰입으로
+표현가능하다}고 함은 모든 쌍 $(T, \xi)$, 즉 스킴 $T$와 원소
+$\xi \in F(T)$의 쌍에 대하여 다음 성질을 가지는 열린 부분스킴
+$U_\xi \subset T$가 존재하는 경우이다.
+\begin{itemize}
+\item[(*)] 사상 $f : T' \to T$가 $U_\xi$를 통해 인수분해될 필요충분조건은
+$f^*\xi \in H(T')$인 것이다.
+\end{itemize}
+\item $I$를 집합이라 하자. 각 $i \in I$에 대하여 $H_i \subset F$를
+부분함자라 하자. 모임 $(H_i)_{i \in I}$가 {\it $F$를 덮는다}고 함은 모든
+$\xi \in F(T)$에 대하여 열린 덮개 $T = \bigcup U_i$가 존재하여
+$\xi|_{U_i} \in H_i(U_i)$인 경우이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+조건 (4)에서 $H_i \subset F$가 모든 $i$에 대하여 열린 몰입으로
+표현가능하다면, $(H_i)_{i \in I}$가 $F$를 덮는지 확인하기 위해서는
+$F(T) = \bigcup H_i(T)$인지, $T$가 체의 스펙트럼일 때마다 확인하면 충분하다.
+
+\begin{lemma}
+\label{schemes-lemma-glue-functors}
+$F$를 스킴의 범주 위에서 집합의 범주에 값을 가지는 반변함자라 하자. 다음을
+가정하자.
+\begin{enumerate}
+\item $F$는 자리스키 위상에 대한 층 성질을 만족한다.
+\item 집합 $I$와 부분함자들의 모임 $F_i \subset F$가 존재하여 다음을
+만족한다.
+\begin{enumerate}
+\item 각 $F_i$는 표현가능하다.
+\item 각 $F_i \subset F$는 열린 몰입으로 표현가능하다.
+\item 모임 $(F_i)_{i \in I}$는 $F$를 덮는다.
+\end{enumerate}
+\end{enumerate}
+그러면 $F$는 표현가능하다.
+\end{lemma}
+
+\begin{proof}
+$X_i$를 $F_i$를 표현하는 스킴이라 하고, $\xi_i \in F_i(X_i) \subset F(X_i)$를
+``보편족''이라 하자. $F_j \subset F$가 열린 몰입으로 표현가능하므로 열린집합
+$U_{ij} \subset X_i$가 존재하여 $T \to X_i$가 $U_{ij}$를 통해 인수분해될
+필요충분조건은 $\xi_i|_T \in F_j(T)$인 것이다. 특히
+$\xi_i|_{U_{ij}} \in F_j(U_{ij})$이므로 표준 사상
+$\varphi_{ij} : U_{ij} \to X_j$를 얻으며
+$\varphi_{ij}^*\xi_j = \xi_i|_{U_{ij}}$이다. $U_{ji}$의 정의에 의해 이는
+$\varphi_{ij}$가 $U_{ji}$를 통해 인수분해됨을 함의한다.
+또한
+$(\varphi_{ij} \circ \varphi_{ji})^*\xi_j
+=\varphi_{ji}^*(\varphi_{ij}^*\xi_j) =
+\varphi_{ji}^*\xi_i = \xi_j$이므로
+$\varphi_{ij} \circ \varphi_{ji} = \text{id}_{U_{ji}}$이다. 실제로 쌍
+$(X_j, \xi_j)$는 $F_j$를 표현한다. 특히 사상들
+$\varphi_{ij} : U_{ij} \to U_{ji}$는 스킴의 동형이다. 다음으로
+$\varphi_{ij}^{-1}(U_{ji} \cap U_{jk}) = U_{ij} \cap U_{ik}$임을 보여야 한다.
+이는 다음 이유로 참이다. (a) $U_{ji} \cap U_{jk}$는 $U_{ji}$의 가장 큰
+열린집합이고 그 위에서 $\xi_j$의 제한이 $F_k$의 원소가 되며, (b)
+$U_{ij} \cap U_{ik}$는 $U_{ij}$의 가장 큰 열린집합이고 그 위에서
+$\xi_i$의 제한이 $F_k$의 원소가 되며,
+가장 큰 열린집합이며, (c) $\varphi_{ij}^*\xi_j = \xi_i$이다. 또한 절
+\ref{schemes-section-glueing-schemes}의 코사이클 조건은 두 사상
+$\varphi_{jk}|_{U_{ji} \cap U_{jk}} \circ
+\varphi_{ij}|_{U_{ij} \cap U_{ik}}$와
+$\varphi_{ik}|_{U_{ij} \cap U_{ik}}$가 모두 $\xi_k$를 원소 $\xi_i$로
+당기므로 성립한다. 따라서 보조정리 \ref{schemes-lemma-glue-schemes}를 적용하여
+스킴 $X$를 얻는데, 이는 열린 덮개 $X = \bigcup U_i$와 동형들
+$\varphi_i : X_i \to U_i$를 가지며 보조정리 \ref{schemes-lemma-glue}의 성질들을
+만족한다.
+$\xi_i' = (\varphi_i^{-1})^* \xi_i$로 놓자. 보조정리 \ref{schemes-lemma-glue}의
+조건들에 의해
+$\xi_i'|_{U_i \cap U_j} = \xi_j'|_{U_i \cap U_j}$이다. $F$가 자리스키
+위상의 층 조건을 만족하므로 원소 $\xi' \in F(X)$가 존재하여
+$\xi_i = \varphi_i^*\xi'|_{U_i}$가 모든 $i$에 대하여 성립한다.
+$\varphi_i$가 동형이므로
+$(U_i, \xi'|_{U_i})$가 함자 $F_i$를 표현한다는 것도 얻는다.
+
+\medskip\noindent
+쌍 $(X, \xi')$가 함자 $F$를 표현한다고 주장한다. 이를 보이기 위해
+$T$를 스킴이라 하고 $\xi \in F(T)$라 하자. 유일한 사상 $g : T \to X$를
+구성하여 $g^*\xi' = \xi$가 되게 하겠다. 실제로 부분함자들 $F_i$가 $F$를
+덮는다는 조건에 의해 열린 덮개 $T = \bigcup V_i$가 존재하여 각 $i$에
+대해 제한 $\xi|_{V_i} \in F_i(V_i)$이다. 또한 각 포함 $F_i \subset F$가
+열린 몰입으로 표현가능하므로 각 $V_i \subset T$가 이 성질을 가지는 극대
+열린집합이라고 가정할 수 있다. $(U_i, \xi'|_{U_i})$가 함자 $F_i$를
+표현하므로 유일한 사상 $g_i : V_i \to U_i$를 얻어
+$g_i^*\xi'|_{U_i} = \xi|_{V_i}$이다. 겹침 $V_i \cap V_j$ 위에서 사상들
+$g_i$와 $g_j$는 일치한다. 예를 들어 둘 다
+$\xi'|_{U_i \cap U_j} \in F_i(U_i \cap U_j)$를 같은 원소로 당기기 때문이다.
+따라서 사상들 $g_i$는 원하는 유일한 사상 $T \to X$로 붙는다.
+\end{proof}
+
+\begin{remark}
+\label{schemes-remark-representable-locally-ringed}
+함자 $F$가 모든 국소 환 달린 공간 위에 정의되어 있고, 보조정리
+\ref{schemes-lemma-glue-functors}의 조건들을 다음 조건들로 바꾼다고 가정하자.
+\begin{enumerate}
+\item $F$는 국소 환 달린 공간의 범주 위에서 층 성질을 만족한다.
+\item 집합 $I$와 부분함자들의 모임 $F_i \subset F$가 존재하여 다음을
+만족한다.
+\begin{enumerate}
+\item 각 $F_i$는 스킴으로 표현가능하다.
+\item 각 $F_i \subset F$는 국소 환 달린 공간의 범주 위에서 열린 몰입으로
+표현가능하다.
+\item 모임 $(F_i)_{i \in I}$는 국소 환 달린 공간의 범주 위의 함자로서
+$F$를 덮는다.
+\end{enumerate}
+\end{enumerate}
+이를 더 상세히 쓰는 일은 독자에게 맡긴다. 그러면 최종적으로 함자 $F$는
+국소 환 달린 공간의 범주에서 표현가능하고, 그 표현 대상은 스킴이다.
+\end{remark}
+
+\section{스킴의 섬유곱의 존재}
+\label{schemes-section-existence-fibre-products}
+
+\noindent
+스킴의 범주에서 곱과 섬유곱이 존재하는지는 매우 기본적인 문제이다. 먼저
+곱과 섬유곱이 존재함을 추상적으로 증명하고, 다음 절에서 스킴의 섬유곱을
+어떻게 합리적으로 생각할 수 있는지 설명한다.
+
+\begin{lemma}
+\label{schemes-lemma-fibre-products}
+스킴의 범주는 끝 대상, 곱, 섬유곱을 가진다. 다시 말해 스킴의 범주는 유한
+극한을 가진다. Categories의 보조정리
+\ref{categories-lemma-finite-limits-exist}를 보라.
+\end{lemma}
+
+\begin{proof}
+이 증명은 건너뛰어도 좋다. 다음 절에서 설명할 섬유곱을 다루는 방법을
+배우는 편이 더 중요하다.
+
+\medskip\noindent
+보조정리 \ref{schemes-lemma-morphism-into-affine}에 의해 스킴
+$\Spec(\mathbf{Z})$는 국소 환 달린 공간의 범주에서 끝 대상이다. 따라서
+섬유곱이 존재함을 보이면 충분하다.
+
+\medskip\noindent
+$f : X \to S$와 $g : Y \to S$를 스킴의 사상이라 하자. 함자
+\begin{eqnarray*}
+F : \Sch^{opp} & \longrightarrow & \textit{Sets} \\
+T & \longmapsto &
+\Mor(T, X) \times_{\Mor(T, S)} \Mor(T, Y)
+\end{eqnarray*}
+가 표현가능함을 보여야 한다. 보조정리 \ref{schemes-lemma-glue-functors}가 함자
+$F$에 적용된다고 주장한다. 이를 증명하면 보조정리가 증명된다.
+
+\medskip\noindent
+먼저 $F$가 자리스키 위상에 대한 층 성질을 만족함을 보인다. 실제로 $T$가
+스킴이고, $T = \bigcup_{i \in I} U_i$가 열린 덮개이며, 원소들
+$\xi_i \in F(U_i)$가
+$\xi_i|_{U_i \cap U_j} =  \xi_j|_{U_i \cap U_j}$를 모든 쌍 $i, j$에 대하여
+만족한다고 하자. 정의에
+의해 $\xi_i$는 쌍 $(a_i, b_i)$에 대응한다. 여기서
+$a_i : U_i \to X$와 $b_i : U_i \to Y$는 $f \circ a_i = g \circ b_i$를
+만족하는 스킴의 사상들이다. 붙이기 조건은
+$a_i|_{U_i \cap U_j} =  a_j|_{U_i \cap U_j}$와
+$b_i|_{U_i \cap U_j} =  b_j|_{U_i \cap U_j}$가 성립한다는 것이다. 따라서
+사상들 $a_i$를 붙여 국소 환 달린 공간의 사상(즉, 스킴의 사상)
+$a : T \to X$를 얻고, 마찬가지로 $b : T \to Y$를 얻는다(예를 들어 보조정리
+\ref{schemes-lemma-glue}의 사상 성질을 보라). 또한 열린 덮개의 각 원소 위에서
+합성들 $f \circ a$와 $g \circ b$가 일치한다. 따라서
+$f \circ a = g \circ b$이고 쌍 $(a, b)$는 $F(T)$의 원소를 정의하며, 이는
+쌍 $(a_i, b_i)$로 각 $U_i$ 위에서 제한된다. 층 조건을 확인하였다.
+
+\medskip\noindent
+다음으로 부분함자들의 족을 구성한다. 아핀 열린집합들로 이루어진 열린 덮개
+$S = \bigcup\nolimits_{i \in I} U_i$를 택하자. 모든 $i \in I$에 대하여 아핀
+열린집합들로 이루어진 열린 덮개
+$f^{-1}(U_i) = \bigcup\nolimits_{j \in J_i} V_j$와
+$g^{-1}(U_i) = \bigcup\nolimits_{k \in K_i} W_k$를 택하자.
+$X = \bigcup_{i \in I} \bigcup_{j \in J_i} V_j$는 열린 덮개이고 $Y$도
+마찬가지임에 유의하자. 임의의 $i \in I$와 각 쌍
+$(j, k) \in J_i \times K_i$에 대하여 가환 도식
+$$
+\xymatrix{
+    & W_k \ar[d] \ar[rd] &   \\
+V_j \ar[rd] \ar[r] & U_i \ar[rd] & Y \ar[d] \\
+    & X \ar[r]  & S
+}
+$$
+을 가지며, 여기서 모든 빗금 화살표는 열린 몰입이다. 그러한 삼중항에
+대하여 함자
+\begin{eqnarray*}
+F_{i, j, k} : \Sch^{opp} & \longrightarrow & \textit{Sets} \\
+T & \longmapsto &
+\Mor(T, V_j) \times_{\Mor(T, U_i)} \Mor(T, W_k).
+\end{eqnarray*}
+를 얻는다. (위의 큰 가환 도식에서 오는) 명백한 함자 변환
+$F_{i, j, k} \to F$가 존재하고 이는 단사이므로, $F_{i, j, k}$를 $F$의
+부분함자로 생각할 수 있다.
+
+\medskip\noindent
+보조정리 \ref{schemes-lemma-glue-functors}의 조건 (2)(a)를 확인하자. 이는 보조정리
+\ref{schemes-lemma-fibre-product-affine-schemes}에서 바로 따른다. (여기서는 아핀
+스킴의 범주에서의 섬유곱이 국소 환 달린 공간의 전체 범주에서도 섬유곱임을
+사용한다.)
+
+\medskip\noindent
+보조정리 \ref{schemes-lemma-glue-functors}의 조건 (2)(b)를 확인하자. $T$를 스킴이라
+하고 $\xi \in F(T)$라 하자. 다시 말해 $\xi = (a, b)$이고, 여기서
+$a : T \to X$와 $b : T \to Y$는 $f \circ a = g \circ b$를 만족하는 스킴의
+사상들이다. $V_{i, j, k} = a^{-1}(V_j) \cap b^{-1}(W_k)$로 놓자. 임의의
+추가 사상 $h : T' \to T$에 대하여 $h^*\xi = (a \circ h, b \circ h)$이다.
+따라서 $h^*\xi \in F_{i, j, k}(T')$일 필요충분조건은
+$a(h(T')) \subset V_j$ 및 $b(h(T')) \subset W_k$인 것이다. 다시 말해
+$h(T') \subset V_{i, j, k}$일 필요충분이다. 이로써 조건 (2)(b)가
+증명되었다.
+
+\medskip\noindent
+보조정리 \ref{schemes-lemma-glue-functors}의 조건 (2)(c)를 확인하자. $T$를 스킴이라
+하고 위와 같이 $\xi = (a, b) \in F(T)$라 하자. 위와 같이
+$V_{i, j, k} = a^{-1}(V_j) \cap b^{-1}(W_k)$로 놓자. 조건 (2)(c)는 바로
+$T = \bigcup V_{i, j, k}$라는 뜻이고, 이는 명백하다. 따라서 보조정리가
+증명되었고 섬유곱이 존재한다.
+\end{proof}
+
+\begin{remark}
+\label{schemes-remark-fibre-product-schemes-locally-ringed}
+주의 \ref{schemes-remark-representable-locally-ringed}를 사용하면 스킴의 사상들의
+섬유곱이 국소 환 달린 공간의 범주에서 존재하고 스킴임을 보일 수 있다.
+\end{remark}
+
+\section{스킴의 섬유곱}
+\label{schemes-section-fibre-products}
+
+\noindent
+스킴의 섬유곱이 존재함을 이미 보였지만, 여기서는 일반적인 정의를
+복습한다.
+
+\begin{definition}
+\label{schemes-definition-fibre-product}
+스킴의 사상 $f : X \to S$와 $g : Y \to S$가 주어졌을 때 {\it 섬유곱}은
+스킴 $X \times_S Y$와 사영 사상들 $p : X \times_S Y \to X$ 및
+$q : X \times_S Y \to Y$로 이루어지며 다음 가환 도식 안에 놓인다.
+$$
+\xymatrix{
+X \times_S Y \ar[r]_q \ar[d]_p & Y \ar[d]^g \\
+X \ar[r]^f & S
+}
+$$
+그리고 이러한 종류의 모든 도식 가운데 보편이다. Categories의 정의
+\ref{categories-definition-fibre-products}를 보라.
+\end{definition}
+
+\noindent
+다시 말해 스킴의 사상들의 임의의 실선 가환 도식
+$$
+\xymatrix{
+T \ar[rrrd] \ar@{-->}[rrd] \ar[rrdd]
+&
+&
+\\
+&
+&
+X \times_S Y \ar[d] \ar[r]
+&
+Y \ar[d]
+\\
+&
+&
+X \ar[r]
+&
+S
+}
+$$
+이 주어지면 도식을 가환하게 하는 유일한 점선 화살표가 존재한다. 이제
+섬유곱을 어떻게 생각해야 하는지 알려 주는 몇 가지 보조정리를 증명하겠다.
+
+\begin{lemma}
+\label{schemes-lemma-fibre-product-affines}
+$f : X \to S$와 $g : Y \to S$를 같은 공역을 가지는 스킴의 사상이라 하자.
+$X, Y, S$가 모두 아핀이면 $X \times_S Y$도 아핀이다.
+\end{lemma}
+
+\begin{proof}
+$X = \Spec(A)$, $Y = \Spec(B)$, $S = \Spec(R)$이라고 가정하자. 보조정리
+\ref{schemes-lemma-fibre-product-affine-schemes}에 의해 아핀 스킴
+$\Spec(A \otimes_R B)$는 국소 환 달린 공간의 범주에서 섬유곱
+$X \times_S Y$이다. 따라서 이는 당연히 스킴의 범주에서도 섬유곱이다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-open-fibre-product}
+$f : X \to S$와 $g : Y \to S$를 같은 공역을 가지는 스킴의 사상이라 하자.
+$X \times_S Y$, $p$, $q$를 섬유곱이라 하자. $U \subset S$,
+$V \subset X$, $W \subset Y$가 열린 부분스킴들이고
+$f(V) \subset U$ 및 $g(W) \subset U$라고 가정하자. 그러면 표준 사상
+$V \times_U W \to X \times_S Y$는 열린 몰입이며, $V \times_U W$를
+$p^{-1}(V) \cap q^{-1}(W)$와 동일시한다.
+\end{lemma}
+
+\begin{proof}
+$T$를 스킴이라 하자. $a : T \to V$와 $b : T \to W$가 스킴의 사상들이고,
+$f \circ a = g \circ b$가 $U$로 가는 사상으로서 성립한다고 가정하자. 그러면 이들은
+$S$로 가는 사상으로서도 일치한다. 섬유곱의 보편 성질에 의해 유일한 사상
+$T \to X \times_S Y$를 얻는다. 물론 이 사상의 상은 열린집합
+$p^{-1}(V) \cap q^{-1}(W)$에 포함된다. 따라서
+$p^{-1}(V) \cap q^{-1}(W)$는 $V$와 $W$의, $U$ 위의 섬유곱이다. 섬유곱의
+유일성에서 결과가 따른다. Categories의 절
+\ref{categories-section-fibre-products}를 보라.
+\end{proof}
+
+\noindent
+특히 보조정리의 상황에서 $V \times_U W = V \times_S W$임을 알 수 있다.
+또한 $U, V, W$가 모두 아핀이면 $V \times_U W$가 아핀임을 안다. 물론
+$X \times_S Y$를 이러한 아핀 열린집합들 $V \times_U W$로 덮을 수 있다.
+이를 보조정리로 표현하자.
+
+\begin{lemma}
+\label{schemes-lemma-affine-covering-fibre-product}
+\begin{slogan}
+섬유곱의 직접 구성: 스킴의 섬유곱의 아핀 열린 덮개는 각 조각의 양립하는
+아핀 열린 덮개들로부터 조립할 수 있다.
+\end{slogan}
+$f : X \to S$와 $g : Y \to S$를 같은 공역을 가지는 스킴의 사상이라 하자.
+$S = \bigcup U_i$를 $S$의 임의의 아핀 열린 덮개라 하자. 각 $i \in I$에
+대하여 $f^{-1}(U_i) = \bigcup_{j \in J_i} V_j$를 $f^{-1}(U_i)$의 아핀 열린
+덮개라 하고, $g^{-1}(U_i) = \bigcup_{k \in K_i} W_k$를 $g^{-1}(U_i)$의 아핀
+열린 덮개라 하자. 그러면
+$$
+X \times_S Y =
+\bigcup\nolimits_{i \in I}
+\bigcup\nolimits_{j \in J_i, \ k \in K_i}
+V_j \times_{U_i} W_k
+$$
+는 $X \times_S Y$의 아핀 열린 덮개이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 앞의 논의를 보라.
+\end{proof}
+
+\noindent
+다시 말해 앞의 보조정리를 사용하여 아핀 스킴들을 붙임으로써 섬유곱을 직접
+구성할 수도 있었다. (물론 이는 어쨌든 보조정리
+\ref{schemes-lemma-fibre-products}의 증명에서 우리가 한 일과 정확히 같다.) 다음은
+스킴의 섬유곱의 점들의 집합을 기술하는 방법이다.
+
+\begin{lemma}
+\label{schemes-lemma-points-fibre-product}
+$f : X \to S$와 $g : Y \to S$를 같은 공역을 가지는 스킴의 사상이라 하자.
+점 $z$들, 즉 $X \times_S Y$의 점들은 사중항
+$$
+(x, y, s, \mathfrak p)
+$$
+들과 전단사로 대응한다. 여기서 $x \in X$, $y \in Y$, $s \in S$는
+$f(x) = s$, $g(y) = s$를 만족하는 점들이고, $\mathfrak p$는 환
+$\kappa(x) \otimes_{\kappa(s)} \kappa(y)$의 소 아이디얼이다. $z$의
+잉여체는 소 아이디얼 $\mathfrak p$의 잉여체에 대응한다.
+\end{lemma}
+
+\begin{proof}
+$z$를 $X \times_S Y$의 점이라 하고 위와 같은 사중항을 구성하자. 보조정리
+\ref{schemes-lemma-characterize-points}에 의해 $z$를 사상
+$\Spec(\kappa(z)) \to X \times_S Y$로 생각할 수 있음을 상기하자. 이 사상은
+사상들 $a : \Spec(\kappa(z)) \to X$와 $b : \Spec(\kappa(z)) \to Y$에
+대응하며, 이들은 $f \circ a = g \circ b$를 만족한다. 같은 보조정리를 다시
+적용하면 점들 $x \in X$, $y \in Y$를 얻고 이들은 같은 점 $s \in S$ 위에
+놓이며, 체 사상들 $\kappa(x) \to \kappa(z)$,
+$\kappa(y) \to \kappa(z)$를 얻으며, 합성들
+$\kappa(s) \to \kappa(x) \to \kappa(z)$와
+$\kappa(s) \to \kappa(y) \to \kappa(z)$는 같다. 다시 말해 환 사상
+$\kappa(x) \otimes_{\kappa(s)} \kappa(y) \to \kappa(z)$를 얻는다.
+$\mathfrak p$를 이 사상의 핵이라 하자.
+
+\medskip\noindent
+역으로 사중항 $(x, y, s, \mathfrak p)$가 주어지면 실선 가환 도식
+$$
+\xymatrix{
+X \times_S Y
+\ar@/_/[dddr] \ar@/^/[rrrd]
+& & & \\
+&
+\Spec(\kappa(x) \otimes_{\kappa(s)} \kappa(y)/\mathfrak p)
+\ar[r] \ar[d] \ar@{-->}[lu]
+&
+\Spec(\kappa(y)) \ar[d] \ar[r] &
+Y \ar[dd] \\
+&
+\Spec(\kappa(x)) \ar[r] \ar[d] &
+\Spec(\kappa(s)) \ar[rd] &
+\\
+&
+X \ar[rr] &
+&
+S
+}
+$$
+을 얻는다. 절 \ref{schemes-section-points}의 논의를 보라. 따라서 점선 화살표를
+얻는다. 이에 대응하는 점 $z$, 즉 $X \times_S Y$의 이 점은
+$\Spec(\kappa(x) \otimes_{\kappa(s)} \kappa(y)/\mathfrak p)$의 일반점의
+상이다. 두 구성이 서로 역이라는 확인은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-fibre-product-immersion}
+$f : X \to S$와 $g : Y \to S$를 같은 공역을 가지는 스킴의 사상이라 하자.
+\begin{enumerate}
+\item $f : X \to S$가 닫힌 몰입이면 $X \times_S Y \to Y$는 닫힌
+몰입이다. 또한 $X \to S$가 아이디얼의 준연접층
+$\mathcal{I} \subset \mathcal{O}_S$에 대응하면 $X \times_S Y \to Y$는
+아이디얼의 층 $\Im(g^*\mathcal{I} \to \mathcal{O}_Y)$에 대응한다.
+\item $f : X \to S$가 열린 몰입이면 $X \times_S Y \to Y$는 열린
+몰입이다.
+\item $f : X \to S$가 몰입이면 $X \times_S Y \to Y$는 몰입이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X \to S$가 아이디얼의 준연접층 $\mathcal{I} \subset \mathcal{O}_S$에
+대응하는 닫힌 몰입이라고 가정하자. 보조정리
+\ref{schemes-lemma-restrict-map-to-closed}에 의해 닫힌 부분공간 $Z \subset Y$, 즉
+아이디얼의 층 $\Im(g^*\mathcal{I} \to \mathcal{O}_Y)$로 정의되는 공간은
+국소 환 달린 공간의 범주에서 섬유곱이다. 보조정리
+\ref{schemes-lemma-closed-subspace-scheme}에 의해 $Z$는 스킴이다. 따라서
+$Z = X \times_S Y$이고 첫 번째 주장이 따른다. 두 번째 주장은 예를 들어
+보조정리 \ref{schemes-lemma-open-fibre-product}에서 따른다. 세 번째 주장은 앞의
+두 주장을 결합한 것이다.
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-inverse-image-closed-subscheme}
+$f : X \to Y$를 스킴의 사상이라 하고 $Z \subset Y$를 $Y$의 닫힌
+부분스킴이라 하자. {\it 역상 $f^{-1}(Z)$}, 즉 닫힌 부분스킴 $Z$의 역상은
+닫힌 부분스킴 $Z \times_Y X$이며, 이는 $X$의 부분스킴이다. 위의 보조정리
+\ref{schemes-lemma-fibre-product-immersion}을 보라.
+\end{definition}
+
+\noindent
+때때로 국소 닫힌 부분스킴과 열린 부분스킴에 대해서도 이 용어를 사용할 수
+있다.
+
+\section{대수기하학에서의 밑변환}
+\label{schemes-section-base-change}
+
+\noindent
+스킴의 언어를 도입하는 한 가지 동기는 특정한 체 위에서 대수다양체를
+정의한다는 말에 매우 정확한 의미를 부여하기 때문이다. 예를 들어 대수다양체
+$X$가 $\mathbf{Q}$ 위에 있다는 것은 유한형이고 분리이며 기약이고 축약인
+$X \to \Spec(\mathbf{Q})$와 같은 말이다(Varieties의 정의
+\ref{varieties-definition-variety})\footnote{물론 대수기하학자들은 여전히
+$X$가 $\mathbf{Q}$ 위에서 기하적으로 기약이어야 하는지를 두고 논쟁한다.}.
+어쨌든 더 일반적인 생각은 흔히 $S$로 나타내는 주어진 {\it 바탕 스킴} 위의
+스킴들을 다루는 것이다. ``$X$를 $S$ 위의 스킴이라 하자''라는 말은 단순히
+$X$에 사상 $X \to S$가 주어져 있다는 뜻으로 사용한다. 도식에서는
+{\it 구조 사상} $X \to S$를 $X$에서 $S$로 내려가는 화살표로 그리려고
+하겠다. 흔히 $X$의 내부 기하보다 $S$에 대한 $X$의 상대적 성질에 더
+관심을 둔다. 예를 들어 $X \to S$의 섬유, 밑변환 뒤의 $X$ 등에 관해 알고
+싶다.
+
+\medskip\noindent
+관례적으로 쓰이는 용어 몇 가지를 도입한다. 물론 이 용어는 범주의 한 대상
+위의 대상들의 범주를 생각하는 특수한 경우일 뿐이다. Categories의 예
+\ref{categories-example-category-over-X}를 보라.
+
+\begin{definition}
+\label{schemes-definition-base-change}
+$S$를 스킴이라 하자.
+\begin{enumerate}
+\item $X$가 {\it $S$ 위의 스킴}이라는 말은 $X$에 스킴의 사상 $X \to S$가
+주어져 있다는 뜻이다. 사상 $X \to S$를 때로 {\it 구조 사상}이라고 한다.
+\item $R$이 환이면 $X$가 {\it $R$ 위의 스킴}이라고 말하며, 이는 $X$가
+$\Spec(R)$ 위의 스킴이라는 뜻이다.
+\item {\it 스킴의 사상 $f : X \to Y$가 $S$ 위의 스킴의 사상이라는 것}은
+합성 $X \to Y \to S$, 즉 $f$와 $Y$의 구조 사상의 합성이 $X$의 구조
+사상과 같다는 뜻이다.
+\item $\Mor_S(X, Y)$로 $X$에서 $Y$로 가는 $S$ 위의 모든 사상의 집합을
+나타낸다.
+\item $X$를 $S$ 위의 스킴이라 하고 $S' \to S$를 스킴의 사상이라 하자.
+$X$의 {\it 밑변환}은 스킴 $X_{S'} = S' \times_S X$이며, 이는 $S'$ 위의
+스킴이다.
+\item $f : X \to Y$를 $S$ 위의 스킴의 사상이라 하고 $S' \to S$를 스킴의
+사상이라 하자. $f$의 {\it 밑변환}은 유도된 사상
+$f' : X_{S'} \to Y_{S'}$이다(즉, 사상
+$\text{id}_{S'} \times_{\text{id}_S} f$이다).
+\item $R$을 환이라 하고 $X$를 $R$ 위의 스킴이라 하며 $R \to R'$을 환
+사상이라 하자. {\it 밑변환} $X_{R'}$는 스킴
+$\Spec(R') \times_{\Spec(R)} X$이며, 이는 $R'$ 위의 스킴이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+다음은 전형적인 결과이다.
+
+\begin{lemma}
+\label{schemes-lemma-base-change-immersion}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 스킴의 몰입(각각 닫힌 몰입,
+각각 열린 몰입)이라 하자. 그러면 $f$의 임의의 밑변환은 몰입(각각 닫힌
+몰입, 각각 열린 몰입)이다.
+\end{lemma}
+
+\begin{proof}
+$f$의 밑변환을 사상 $S' \to S$를 통해 다음 가환 도식의 왼쪽 위 세로 화살표로
+생각할 수 있다.
+$$
+\xymatrix{
+X_{S'} \ar[r] \ar[d] & X \ar[d] \ar@/^4ex/[dd] \\
+Y_{S'} \ar[r] \ar[d] & Y \ar[d] \\
+S' \ar[r] & S
+}
+$$
+이 도식은 $X_{S'} \cong Y_{S'} \times_Y X$를 함의하며, 보조정리
+\ref{schemes-lemma-fibre-product-immersion}에서 결과가 따른다.
+\end{proof}
+
+\noindent
+사실 이런 종류의 결과는 매우 전형적이므로 이를 표현하는 용어가 따로 있다.
+
+\begin{definition}
+\label{schemes-definition-preserved-by-base-change}
+성질과 밑변환.
+\begin{enumerate}
+\item $\mathcal{P}$를 바탕 위의 스킴의 성질이라 하자. $\mathcal{P}$가
+{\it 임의의 밑변환 아래 보존된다}, 또는 간단히 $\mathcal{P}$가
+{\it 밑변환 아래 보존된다}는 것은 $X/S$가 $\mathcal{P}$를 가질 때마다
+임의의 밑변환 $X_{S'}/S'$도 $\mathcal{P}$를 가진다는 뜻이다.
+\item $\mathcal{P}$를 바탕 위의 스킴의 사상들의 성질이라 하자.
+$\mathcal{P}$가 {\it 임의의 밑변환 아래 보존된다}, 또는 간단히
+{\it 밑변환 아래 보존된다}는 것은 $f : X \to Y$가 $S$
+위에서 $\mathcal{P}$를 가질 때마다 임의의 밑변환
+$f' : X_{S'} \to Y_{S'}$가 $S'$ 위에서 $\mathcal{P}$를 가진다는 뜻이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+이제 ``닫힌 몰입임''은 임의의 밑변환 아래 보존된다고 말할 수 있다.
+
+\begin{definition}
+\label{schemes-definition-fibre}
+$f : X \to S$를 스킴의 사상이라 하고 $s \in S$를 점이라 하자.
+{\it 스킴론적 섬유 $X_s$, 곧 $f$의 $s$ 위 스킴론적 섬유}, 또는
+간단히 {\it $f$의 $s$ 위 섬유}란 다음 섬유곱 도식에 놓이는 스킴이다.
+$$
+\xymatrix{
+X_s = \Spec(\kappa(s)) \times_S X \ar[r] \ar[d] &
+X \ar[d] \\
+\Spec(\kappa(s)) \ar[r] &
+S
+}
+$$
+섬유 $X_s$는 언제나 $\kappa(s)$ 위의 스킴으로 생각한다.
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-fibre-topological}
+$f : X \to S$를 스킴의 사상이라 하자. 도식들
+$$
+\vcenter{
+\xymatrix{
+X_s \ar[r] \ar[d] & X \ar[d] \\
+\Spec(\kappa(s)) \ar[r] & S
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+\Spec(\mathcal{O}_{S, s}) \times_S X \ar[r] \ar[d] & X \ar[d] \\
+\Spec(\mathcal{O}_{S, s}) \ar[r] & S
+}
+}
+$$
+을 생각하자. 두 경우 모두 이 도식들은 위상공간의 섬유곱 도식을 유도한다.
+특히 위쪽 가로 화살표는 그 상으로의 위상동형이다.
+\end{lemma}
+
+\begin{proof}
+아핀 열린집합 $U \subset S$로서 $s$를 포함하는 것을 택하자. 아래쪽 가로 사상들은
+$U$를 통해 인수분해된다. 예를 들어 보조정리
+\ref{schemes-lemma-morphism-from-spec-local-ring}을 보라. 따라서 $S$가 아핀이라고
+가정할 수 있다. $X$도 아핀이면 결과는 Algebra의 주의
+\ref{algebra-remark-fundamental-diagram}에서 따른다. 일반적인 경우에는
+$X$를 아핀 열린집합들로 덮어 결과를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-local-ring-fibre}
+$f : X \to S$를 스킴의 사상이라 하고 $x \in X$의 상을 $s \in S$라 하자.
+$x$를 $X_s$의 점으로 생각하면(보조정리 \ref{schemes-lemma-fibre-topological}를 보라)
+$$
+\mathcal{O}_{X_s, x} \cong
+\mathcal{O}_{X, x}/\mathfrak m_s\mathcal{O}_{X, x} \cong
+\mathcal{O}_{X, x} \otimes_{\mathcal{O}_{S, s}} \kappa(s)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{schemes-lemma-fibre-topological}의 증명에서와 같이 이는 $X$와 $S$가
+아핀인 경우로 환원된다. 아핀인 경우 이 명제는 Algebra의 주의
+\ref{algebra-remark-local-ring-fibre}로 옮겨진다.
+\end{proof}
+
+\section{준콤팩트 사상}
+\label{schemes-section-quasi-compact}
+
+\noindent
+스킴의 기저 위상공간이 준콤팩트이면 그 스킴을 {\it 준콤팩트}라고 한다.
+이에 대응하는 상대적 개념은 다음과 같이 정의한다.
+
+\begin{definition}
+\label{schemes-definition-quasi-compact}
+스킴의 사상이 유도하는 위상공간 사이의 사상이 준콤팩트이면 그 사상을
+{\it 준콤팩트}라고 한다. Topology의 정의
+\ref{topology-definition-quasi-compact}를 보라.
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-quasi-compact-affine}
+$f : X \to S$를 스킴의 사상이라 하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $f : X \to S$가 준콤팩트이다.
+\item 모든 아핀 열린집합의 역상이 준콤팩트이다.
+\item 어떤 아핀 열린 덮개 $S = \bigcup_{i \in I} U_i$가 존재하여
+$f^{-1}(U_i)$가 모든 $i$에 대해 준콤팩트이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3)에서와 같은 덮개 $S = \bigcup_{i \in I} U_i$가 주어졌다고 하자. 먼저
+$U \subset S$를 임의의 아핀 열린집합이라 하자. 각 $u \in U$에 대해 지표
+$i(u) \in I$를 택하여 $u \in U_{i(u)}$가 되게 할 수 있다. 표준
+열린집합들은 $U_{i(u)}$의 위상의 기저를 이루므로
+$W_u \subset U \cap U_{i(u)}$를 택하여 $U_{i(u)}$에서 표준 열린집합이
+되게 할 수 있다. 콤팩트성에 의해
+유한 개의 점 $u_1, \ldots, u_n \in U$를 택하여
+$U = \bigcup_{j = 1}^n W_{u_j}$로 쓸 수 있다. 각 $j$에 대해
+$f^{-1}U_{i(u_j)} = \bigcup_{k \in K_j} V_{jk}$를 아핀 열린집합들의 유한
+합집합으로 쓰자. $W_{u_j} \subset U_{i(u_j)}$가 표준 열린집합이므로
+$f^{-1}(W_{u_j}) \cap V_{jk}$는 $V_{jk}$의 표준 열린집합이다. Algebra의
+보조정리 \ref{algebra-lemma-spec-functorial}을 보라. 따라서
+$f^{-1}(W_{u_j}) \cap V_{jk}$는 아핀이고, 그러므로 $f^{-1}(W_{u_j})$는
+아핀 열린집합들의 유한 합집합이다. 이로써 임의의 아핀 열린집합의 역상이
+아핀 열린집합들의 유한 합집합임을 보였다.
+
+\medskip\noindent
+이제 모든 아핀 열린집합의 역상이 아핀 열린집합들의 유한 합집합이라고
+가정하자. $K \subset S$를 임의의 준콤팩트 열린집합이라 하자. $S$의
+위상에는 아핀 열린집합들로 이루어진 기저가 있으므로 $K$는 아핀
+열린집합들의 유한 합집합이다. 따라서 $K$의 역상도 아핀 열린집합들의 유한
+합집합이다. 그러므로 $f$는 준콤팩트이다.
+
+\medskip\noindent
+마지막으로 $f$가 준콤팩트라고 가정하자. 이 경우 앞 단락의 논증에 의해
+임의의 아핀 열린집합의 역상은 아핀 열린집합들의 유한 합집합이다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-quasi-compact-preserved-base-change}
+준콤팩트임은 바탕 위의 스킴 사상의 성질이며, 임의의 밑변환 아래
+보존된다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-composition-quasi-compact}
+준콤팩트 사상들의 합성은 준콤팩트이다.
+\end{lemma}
+
+\begin{proof}
+정의와 Topology의 보조정리
+\ref{topology-lemma-composition-quasi-compact}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-closed-immersion-quasi-compact}
+닫힌 몰입은 준콤팩트이다.
+\end{lemma}
+
+\begin{proof}
+정의와 Topology의 보조정리
+\ref{topology-lemma-closed-in-quasi-compact}에서 따른다.
+\end{proof}
+
+\begin{example}
+\label{schemes-example-open-immersion-not-quasi-compact}
+일반적으로 열린 몰입은 준콤팩트가 아니다. 표준적인 예는 열린 부분공간
+$U \subset X$이다. 여기서 $X = \Spec(k[x_1, x_2, x_3, \ldots])$이고,
+$U$는 $X \setminus \{0\}$이며, $0$은 $X$의 점이고 극대 아이디얼
+$(x_1, x_2, x_3, \ldots)$에 대응한다.
+\end{example}
+
+\begin{lemma}
+\label{schemes-lemma-image-quasi-compact-closed}
+$f : X \to S$를 스킴의 준콤팩트 사상이라 하자. 다음 조건들은 서로
+동치이다.
+\begin{enumerate}
+\item $f(X) \subset S$가 닫혀 있다.
+\item $f(X) \subset S$가 특수화 아래 안정적이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Topology의 보조정리 \ref{topology-lemma-open-closed-specialization}에 의해
+(1) $\Rightarrow$ (2)이다. (2)를 가정하자. $U \subset S$를 아핀
+열린집합이라 하자. $f(X) \cap U$가 닫혀 있음을 보이면 충분하다.
+$U \cap f(X)$가 $U$ 안의 특수화 아래 안정적이므로 $S$가 아핀인 경우로
+환원되었다. $f$가 준콤팩트이므로 $X = f^{-1}(S)$가 준콤팩트임을 얻는데,
+이는 $S$가 아핀이기 때문이다. 따라서
+$X = \bigcup_{i = 1}^n U_i$로 쓸 수 있으며, 여기서
+$U_i \subset X$는 아핀 열린집합이다. $S = \Spec(R)$라 하고
+$U_i = \Spec(A_i)$라 하자. 여기서 어떤 $R$-대수를 $A_i$로 나타냈다. 그러면
+$f(X) = \Im(\Spec(A_1 \times \ldots \times A_n)
+\to \Spec(R))$이다. 따라서 보조정리는 Algebra의 보조정리
+\ref{algebra-lemma-image-stable-specialization-closed}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-quasi-compact-closed}
+$f : X \to S$를 스킴의 준콤팩트 사상이라 하자. 그러면 $f$가 닫힌
+사상일 필요충분조건은 $f$를 따라 특수화를 올릴 수 있는 것이다. Topology의
+정의 \ref{topology-definition-lift-specializations}를 보라.
+\end{lemma}
+
+\begin{proof}
+Topology의 보조정리
+\ref{topology-lemma-closed-open-map-specialization}에 따르면 $f$가 닫힌
+사상이면 $f$를 따라 특수화를 올릴 수 있다. 역으로 $f$를 따라 특수화를
+올릴 수 있다고 하자. $Z \subset X$를 닫힌 부분집합이라 하자. 정의
+\ref{schemes-definition-reduced-induced-scheme}에 따라 $Z$를 유도된 축약 스킴
+구조를 갖춘 스킴으로 생각할 수 있다. $Z \subset X$가 닫혀 있으므로
+$f$를 $Z$에 제한한 사상도 여전히 준콤팩트이다. 또한 $Z \to S$를 따라서도
+특수화를 올릴 수 있다. Topology의 보조정리
+\ref{topology-lemma-lift-specialization-composition}을 보라. 따라서 $f(X)$가
+닫혀 있음을, $f$를 따라 특수화를 올릴 수 있을 때 보이면 충분하다. 특히
+$f(X)$는 특수화 아래 안정적이다. Topology의 보조정리
+\ref{topology-lemma-lift-specializations-images}를 보라. 그러므로 보조정리
+\ref{schemes-lemma-image-quasi-compact-closed}에 의해 $f(X)$는 닫혀 있다.
+\end{proof}
+
+\section{보편 닫힘의 값매김 판정법}
+\label{schemes-section-valuative-criterion-universal-closedness}
+
+\noindent
+Topology의 절 \ref{topology-section-proper}에서는 모든 섬유가 준콤팩트인
+위상공간의 닫힌 사상으로서의 고유 사상, 또는 모든 밑변환이 닫힌 사상인
+사상에 관해 논의한다. 대수기하학에서 이에 대응하는 개념은 다음과 같다.
+
+\begin{definition}
+\label{schemes-definition-universally-closed}
+스킴의 사상 $f : X \to S$의 모든 밑변환
+$f' : X_{S'} \to S'$이 닫힌 사상이면 그 사상을 {\it 보편 닫힌 사상}이라고
+한다.
+\end{definition}
+
+\noindent
+실제로 ``보편적으로''라는 형용사는 흔히 이런 방식으로 쓰인다. 즉, 사상의
+성질 $\mathcal{P}$가 주어졌을 때 ``$X \to S$가 보편적으로
+$\mathcal{P}$이다''라는 말은 모든 밑변환 $X_{S'} \to S'$가
+$\mathcal{P}$를 가진다는 것과 동치이다.
+
+\medskip\noindent
+보편 닫힌 사상의 성질에 대한 더 자세한 논의는 Morphisms의 절
+\ref{morphisms-section-proper}을 보라. 이 절에서는 보편 닫힌 사상과 값매김
+판정법의 존재 부분을 만족하는 사상의 관계만을 논의한다.
+
+\begin{lemma}
+\label{schemes-lemma-specializations-lift}
+$f : X \to S$를 스킴의 사상이라 하자.
+\begin{enumerate}
+\item $f$가 보편 닫힌 사상이면 $f$의 임의의 밑변환을 따라 특수화를 올릴
+수 있다. Topology의 정의 \ref{topology-definition-lift-specializations}를
+보라.
+\item $f$가 준콤팩트이고 $f$의 임의의 밑변환을 따라 특수화를 올릴 수
+있으면 $f$는 보편 닫힌 사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 Topology의 보조정리
+\ref{topology-lemma-closed-open-map-specialization}의 직접적인 귀결이다.
+(2)는 보조정리 \ref{schemes-lemma-quasi-compact-closed}와
+\ref{schemes-lemma-quasi-compact-preserved-base-change}에서 따른다.
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-valuative-criterion}
+$f : X \to S$를 스킴의 사상이라 하자. $f$가 {\it 값매김 판정법의 존재
+부분을 만족한다}는 것은 임의의 가환 실선 도식
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & S
+}
+$$
+이 주어졌을 때, 여기서 $A$는 분수체가 $K$인 값매김환이며 점선 화살표가
+항상 존재한다는 뜻이다. 위와 같은 임의의 도식에서 점선 화살표가 많아야
+하나라면(물론 존재는 요구하지 않는다) $f$가 {\it 값매김 판정법의 유일성
+부분을 만족한다}고 한다.
+\end{definition}
+
+\noindent
+{\it 값매김환}은 그 분수체 안의 지배 관계에 관하여 극대인 국소 정역이다.
+Algebra의 정의 \ref{algebra-definition-valuation-ring}을 보라. 따라서
+값매김환의 스펙트럼에는 유일한 일반점 $\eta$와 유일한 닫힌점 $0$이 있으며,
+물론 특수화 $\eta \leadsto 0$이 있다. 값매김환이 중요한 이유는 임의의
+스킴에서 점들의 임의의 특수화가 어떤 값매김환의 스펙트럼에서 오는 어떤
+사상 아래 $\eta \leadsto 0$의 상이기 때문이다. 정확한 결과는 다음과 같다.
+
+\begin{lemma}
+\label{schemes-lemma-points-specialize}
+\begin{slogan}
+특수화는 값매김환으로 목격된다.
+\end{slogan}
+$S$를 스킴이라 하자. $s' \leadsto s$를 $S$의 점들의 특수화라 하자. 그러면
+\begin{enumerate}
+\item 값매김환 $A$와 사상 $f : \Spec(A) \to S$가 존재하여
+일반점 $\eta$, 즉 $\Spec(A)$의 일반점은 $s'$로, 특수점은 $s$로 사상된다.
+\item 체 확대 $K/\kappa(s')$가 주어지면, 확대
+$\kappa(\eta)/\kappa(s')$가 주어진 확대와 동형이 되도록 정할 수 있으며,
+이 확대는 $f$가 유도한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$s' \leadsto s$를 $S$ 안의 특수화라 하고, $K/\kappa(s')$를 체의 확대라
+하자. 보조정리 \ref{schemes-lemma-specialize-points}와 보조정리
+\ref{schemes-lemma-characterize-points} 뒤의 논의에 의해 환 사상들
+$\mathcal{O}_{S, s} \to \kappa(s') \to K$를 얻는다. $A \subset K$를
+분수체가 $K$이고 $\mathcal{O}_{S, s} \to K$의 상을 지배하는 임의의
+값매김환이라 하자. Algebra의 보조정리 \ref{algebra-lemma-dominate}를 보라.
+환 사상 $\mathcal{O}_{S, s} \to A$는 사상 $f : \Spec(A) \to S$를 유도한다.
+보조정리 \ref{schemes-lemma-morphism-from-spec-local-ring}을 보라. 이 사상은 구성에
+의해 필요한 모든 성질을 가진다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-lift-specializations-valuative}
+$f : X \to S$를 스킴의 사상이라 하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item $f$의 임의의 밑변환을 따라 특수화를 올릴 수 있다.
+\item 사상 $f$는 값매김 판정법의 존재 부분을 만족한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)이 성립한다고 가정하자. 정의 \ref{schemes-definition-valuative-criterion}에서와
+같은 실선 도식이 주어졌다고 하자. 점선 화살표를 찾기 위해 $X \to S$를
+$X_{\Spec(A)} \to \Spec(A)$로 바꾸어도 된다. 가정은 밑변환 아래
+안정적이기 때문이다. 따라서 $S = \Spec(A)$라고 가정할 수 있다.
+$x' \in X$를 $\Spec(K) \to X$의 상이라 하면
+$\kappa(x') \subset K$이다. 보조정리 \ref{schemes-lemma-characterize-points}를 보라.
+가정에 의해 특수화 $x' \leadsto x$가 $X$ 안에 존재하여 $x$는
+$S = \Spec(A)$의 닫힌점으로 사상된다. 국소환 사상
+$A \to \mathcal{O}_{X, x}$와 환 사상
+$\mathcal{O}_{X, x} \to \kappa(x')$를 얻는다. 보조정리
+\ref{schemes-lemma-specialize-points}와 보조정리 \ref{schemes-lemma-characterize-points}
+뒤의 논의를 보라. 합성
+$A \to \mathcal{O}_{X, x} \to \kappa(x') \to K$는 주어진 단사
+$A \to K$이다. $A \to \mathcal{O}_{X, x}$가 국소 사상이므로
+$\mathcal{O}_{X, x} \to K$의 상은 $A$를 지배하고, 따라서 Algebra의 정의
+\ref{algebra-definition-valuation-ring}에 의해 $A$와 같다. 그러므로 환 사상
+$\mathcal{O}_{X, x} \to A$와 이에 따른 사상 $\Spec(A) \to X$를 얻는다
+(보조정리 \ref{schemes-lemma-morphism-from-spec-local-ring}과 그 뒤의 논의를 보라).
+이로써 (2)를 증명했다.
+
+\medskip\noindent
+역으로 (2)가 성립한다고 가정하자. 다음 가환 도식을 생각하면 밑변환
+$X_{S'} \to S'$이 $f$의 임의의 밑변환일 때 그것도 값매김 판정법의 존재
+부분을 만족한다는 것이
+즉시 따른다.
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X_{S'} \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] \ar@{-->}[rru] & S' \ar[r] & S
+}
+$$
+즉, 더 수평에 가까운 점선 화살표에서 섬유곱의 정의에 의해 다른 점선
+화살표를 얻는다. 따라서 $f$를 따라 특수화를 올릴 수 있음을 보이면
+충분하다. $s' \leadsto s$를 $S$ 안의 특수화라 하고, $x' \in X$를 $s'$ 위의
+점이라 하자. 보조정리 \ref{schemes-lemma-points-specialize}를 $s' \leadsto s$와 체
+확대 $K = \kappa(x')/\kappa(s')$에 적용한다. 가환 도식
+$$
+\xymatrix{
+\Spec(K) \ar[rr] \ar[d] & & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[rru] &
+\Spec(\mathcal{O}_{S, s}) \ar[r] & S
+}
+$$
+을 얻고, 조건 (2)에 의해 점선 화살표를 얻는다. $x$를 $\Spec(A)$의 닫힌점의
+$X$ 안에서의 상이라 하면 이것이 문제의 해이다. 즉, $x$는 $x'$의
+특수화이며 $s$로 사상된다.
+\end{proof}
+
+\begin{proposition}[보편 닫힘의 값매김 판정법]
+\label{schemes-proposition-characterize-universally-closed}
+$f$를 스킴의 준콤팩트 사상이라 하자. 그러면 $f$가 보편 닫힌 사상일
+필요충분조건은 $f$가 값매김 판정법의 존재 부분을 만족하는 것이다.
+\end{proposition}
+
+\begin{proof}
+이는 위의 보조정리 \ref{schemes-lemma-specializations-lift}와
+\ref{schemes-lemma-lift-specializations-valuative}의 형식적인 귀결이다.
+\end{proof}
+
+\begin{example}
+\label{schemes-example-projective-line-universally-closed}
+$k$를 체라 하자. 구조 사상 $p : \mathbf{P}^1_k \to \Spec(k)$, 곧
+$k$ 위의 사영직선의 구조 사상을 생각하자. 예
+\ref{schemes-example-projective-line}을 보라. 위의 값매김 판정법을 사용하여 $p$가
+보편 닫힌 사상임을 보이자. 구성에 의해 $\mathbf{P}^1_k$는 두 아핀
+열린집합으로 덮이므로 $p$는 준콤팩트이다. 가환 도식
+$$
+\xymatrix{
+\Spec(K) \ar[r]_\xi \ar[d] & \mathbf{P}^1_k \ar[d] \\
+\Spec(A) \ar[r]^\varphi & \Spec(k)
+}
+$$
+이 주어졌다고 하자. 여기서 $A$는 값매김환이고 $K$는 그 분수체이다.
+$\mathbf{P}^1_k$는 $\Spec(k[x])$와 $\Spec(k[y])$를 붙여서 얻으며,
+$D(x)$와 $D(y)$를 $x = y^{-1}$을 통해 붙인다(또는 더 대칭적으로
+$xy = 1$을 통해 붙인다). 이 도식에 대각선으로 들어맞는 사상
+$\Spec(A) \to \mathbf{P}^1_k$가 존재함을 보이기 위해, 대칭성에 의해
+$\xi$의 상이 열린집합 $\Spec(k[x])$에 들어간다고 가정할 수 있다. 이로부터
+다음 환의 가환 도식을 얻는다.
+$$
+\xymatrix{
+K & k[x] \ar[l]^{\xi^\sharp} \\
+A \ar[u] & k \ar[u] \ar[l]_{\varphi^\sharp}
+}
+$$
+Algebra의 보조정리 \ref{algebra-lemma-valuation-ring-x-or-x-inverse}에 의해
+$\xi^\sharp(x) \in A$이거나 $\xi^\sharp(x)^{-1} \in A$이다. 첫 번째
+경우에는 환 사상
+$$
+k[x] \to A,
+\ \lambda \mapsto \varphi^\sharp(\lambda),
+\  x \mapsto \xi^\sharp(x)
+$$
+을 얻으며, 이는 위의 환의 도식에 들어맞으므로 원하는 결과를 얻는다.
+두 번째 경우에는 환 사상
+$$
+k[y] \to A,
+\ \lambda \mapsto \varphi^\sharp(\lambda),
+\ y \mapsto \xi^\sharp(x)^{-1}.
+$$
+을 얻는다. 이는 사상
+$\Spec(A) \to \Spec(k[y]) \to \mathbf{P}^1_k$를 주며, 이 예의 처음 가환
+도식에 대각선으로 들어맞는다(확인은 생략한다).
+\end{example}
+
+\section{분리 공리}
+\label{schemes-section-separation-axioms}
+
+\noindent
+위상공간 $X$가 하우스도르프일 필요충분조건은 대각선
+$\Delta \subset X \times X$가 닫힌 부분집합인 것이다. 대수기하학에서
+이에 대응하는 것은 스킴 $X$가 바탕 스킴 $S$ 위에 주어졌을 때 대각 사상
+$$
+\Delta_{X/S} : X \longrightarrow X \times_S X.
+$$
+을 생각하는 것이다. 이것은
+$\text{pr}_1 \circ \Delta_{X/S} = \text{id}_X$ 및
+$\text{pr}_2 \circ \Delta_{X/S} = \text{id}_X$를 만족하는 유일한 스킴
+사상이다(섬유곱이 있는 임의의 범주에서 존재한다).
+
+\begin{lemma}
+\label{schemes-lemma-diagonal-affines-closed}
+아핀 스킴 사이의 사상에 대한 대각 사상은 닫혀 있다.
+\end{lemma}
+
+\begin{proof}
+사상 $\Spec(S) \to \Spec(R)$에 대응하는 대각 사상은 환 준동형
+$S \otimes_R S \to S$, $a \otimes b \mapsto ab$에 대응하는 스펙트럼
+사상이다. 이 준동형은 명백히 전사이므로 $S \cong S \otimes_R S/J$이며,
+여기서 $J \subset S \otimes_R S$는 어떤 아이디얼이다. 따라서
+예 \ref{schemes-example-closed-immersion-affines}에 의해 $\Delta$는 닫힌 몰입이다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-diagonal-immersion}
+\begin{slogan}
+상대 스킴의 대각 사상은 몰입이다.
+\end{slogan}
+$X$를 $S$ 위의 스킴이라 하자. 대각 사상 $\Delta_{X/S}$는 몰입이다.
+\end{lemma}
+
+\begin{proof}
+$V \subset X$가 아핀 열린집합이고 그 상이 아핀 열린집합 $U \subset S$에
+들어가면 $V \times_U V$는 $X \times_S X$의 아핀 열린집합임을 상기하자.
+보조정리 \ref{schemes-lemma-fibre-product-affines}와
+\ref{schemes-lemma-open-fibre-product}를 보라. $W$를 $X \times_S X$의 열린
+부분스킴으로서 이 아핀 열린집합들 $V \times_U V$의 합집합이라 하자.
+보조정리 \ref{schemes-lemma-closed-local-target}에 의해 각 사상
+$\Delta_{X/S}^{-1}(V \times_U V) \to V \times_U V$가 닫힌 몰입임을 보이면
+충분하다. $V = \Delta_{X/S}^{-1}(V \times_U V)$이므로 확인할 것은
+$\Delta_{V/U}$가 닫힌 몰입이라는 것뿐이며, 이는 보조정리
+\ref{schemes-lemma-diagonal-affines-closed}이다.
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-separated}
+$f : X \to S$를 스킴의 사상이라 하자.
+\begin{enumerate}
+\item $f$의 대각 사상 $\Delta_{X/S}$가 닫힌 몰입이면 이를 {\it 분리 사상}이라고
+한다.
+\item $f$의 대각 사상 $\Delta_{X/S}$가 준콤팩트 사상이면 이를 {\it 준분리
+사상}이라고 한다.
+\item 스킴 $Y$를 사상 $Y \to \Spec(\mathbf{Z})$가 분리일 때 {\it 분리
+스킴}이라고 한다.
+\item 스킴 $Y$를 사상 $Y \to \Spec(\mathbf{Z})$가 준분리일 때
+{\it 준분리 스킴}이라고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+보조정리 \ref{schemes-lemma-diagonal-immersion}과
+\ref{schemes-lemma-immersion-when-closed}에 의해 $\Delta_{X/S}$가 닫힌 몰입일
+필요충분조건은 $\Delta_{X/S}(X) \subset X \times_S X$가 닫힌 부분집합인
+것이다. 또한 보조정리 \ref{schemes-lemma-closed-immersion-quasi-compact}에 의해
+분리 사상은 준분리 사상이다. 준분리 사상을 도입하는 이유는 대수다양체를
+연구할 때(특히 모듈라이, 대수적 스택 등을 다룰 때) 비분리 사상이 자연스럽게
+나타나기 때문이다. 그러나 대개 이들은 여전히 준분리이다.
+
+\begin{example}
+\label{schemes-example-not-quasi-separated}
+다음은 준분리가 아닌 사상의 예이다.
+$X = X_1 \cup X_2 \to S = \Spec(k)$라 하고,
+$X_1 = X_2 = \Spec(k[t_1, t_2, t_3, \ldots])$의 두 복사본을
+$\{0\} = \{(t_1, t_2, t_3, \ldots)\}$의 여집합을 따라 붙였다고 하자
+(예 \ref{schemes-example-affine-space-zero-doubled}에서처럼 붙인다). 이 경우 아핀
+스킴 $X_1 \times_S X_2$의 대각 사상 $\Delta_{X/S}$에 의한 역상은
+$\Spec(k[t_1, t_2, t_3, \ldots]) \setminus \{0\}$이며, 이는 준콤팩트가
+아니다.
+\end{example}
+
+\begin{lemma}
+\label{schemes-lemma-where-are-they-equal}
+$X$, $Y$를 $S$ 위의 스킴이라 하자. $a, b : X \to Y$를 $S$ 위의 스킴
+사상이라 하자. 가장 큰 국소 닫힌 부분스킴 $Z \subset X$가 존재하여
+$a|_Z = b|_Z$를 만족한다. 실제로 $Z$는 $(a, b)$의 등화자이다. 또한 $Y$가
+$S$ 위에서 분리이면 $Z$는 닫힌 부분스킴이다.
+\end{lemma}
+
+\begin{proof}
+범주론적 이유에 의해 $(a, b)$의 등화자는 다음 도식의 섬유곱 $Z$이다.
+$$
+\xymatrix{
+Z = Y \times_{(Y \times_S Y)} X \ar[r] \ar[d] &
+ X \ar[d]^{(a , b)} \\
+Y \ar[r]^-{\Delta_{Y/S}} & Y \times_S Y
+}
+$$
+따라서 보조정리 \ref{schemes-lemma-base-change-immersion},
+\ref{schemes-lemma-diagonal-immersion} 및 정의 \ref{schemes-definition-separated}에서 결과가
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-characterize-quasi-separated}
+$f : X \to S$를 스킴의 사상이라 하자. 다음 조건들은 서로 동치이다.
+\begin{enumerate}
+\item 사상 $f$가 준분리이다.
+\item 아핀 열린집합의 모든 쌍 $U, V \subset X$ 중 $S$의 공통된 어떤 아핀
+열린집합으로 사상되는 것에 대해 교집합 $U \cap V$는 $X$의 아핀 열린집합들의 유한
+합집합이다.
+\item 아핀 열린 덮개 $S = \bigcup_{i \in I} U_i$가 존재하고, 각 $i$마다
+아핀 열린 덮개 $f^{-1}U_i = \bigcup_{j \in I_i} V_j$가 존재하여, 각 $i$와
+각 쌍 $j, j' \in I_i$에 대해 교집합 $V_j \cap V_{j'}$가 $X$의 아핀
+열린집합들의 유한 합집합이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3)이 (1)을 함의함을 보이자. 보조정리
+\ref{schemes-lemma-affine-covering-fibre-product}에 의해 덮개
+$X \times_S X = \bigcup_i \bigcup_{j, j'} V_j \times_{U_i} V_{j'}$는
+$X \times_S X$의 아핀 열린 덮개이다. 또한
+$\Delta_{X/S}^{-1}(V_j \times_{U_i} V_{j'}) = V_j \cap V_{j'}$이다. 따라서
+보조정리 \ref{schemes-lemma-quasi-compact-affine}에서 함의가 따른다.
+
+\medskip\noindent
+(1) $\Rightarrow$ (2)는 (2)의 가정 아래 섬유곱 $U \times_S V$가
+$X \times_S X$의 아핀 열린집합이라는 사실에서 따른다. (2)
+$\Rightarrow$ (3)은 자명하다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-characterize-separated}
+$f : X \to S$를 스킴의 사상이라 하자.
+\begin{enumerate}
+\item $f$가 분리이면 아핀 열린집합의 모든 쌍 $(U, V)$ 중 $X$에 놓이고 $S$의
+공통된 어떤 아핀 열린집합으로 사상되는 것에 대해 다음이 성립한다.
+\begin{enumerate}
+\item 교집합 $U \cap V$는 아핀이다.
+\item 환 준동형
+$\mathcal{O}_X(U) \otimes_{\mathbf{Z}} \mathcal{O}_X(V)
+\to \mathcal{O}_X(U \cap V)$
+은 전사이다.
+\end{enumerate}
+\item 임의의 두 점 $x_1, x_2 \in X$가 공통된 한 점 $s \in S$ 위에 놓이고,
+각각 아핀 열린집합 $x_1 \in U$, $x_2 \in V$에 들어가며 이 두 열린집합이
+$S$의 공통된 어떤 아핀 열린집합으로 사상되고 (a), (b)가
+성립한다면 $f$는 분리이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f$가 분리라고 가정하자. $(U, V)$가 (1)에서와 같은 쌍이라고 하자.
+$W = \Spec(R)$를 $S$의 아핀 열린집합으로서 $f(U)$와 $f(V)$를 모두
+포함하는 것이라 하자. $U = \Spec(A)$ 및 $V = \Spec(B)$라 쓰되,
+$R$-대수 $A$와 $B$를 사용한다. 보조정리
+\ref{schemes-lemma-open-fibre-product}에 의해
+$U \times_S V = U \times_W V = \Spec(A \otimes_R B)$는
+$X \times_S X$의 아핀 열린집합이다. 따라서 보조정리
+\ref{schemes-lemma-closed-subspace-scheme}에 의해
+$\Delta^{-1}(U \times_S V) \to U \times_S V$를
+$\Spec((A \otimes_R B)/J) \to \Spec(A \otimes_R B)$와 동일시할 수
+있으며, 여기서 $J \subset A \otimes_R B$는 어떤 아이디얼이다.
+그러므로 $U \cap V = \Delta^{-1}(U \times_S V)$는 아핀이다. 또한
+$A \otimes_{\mathbf{Z}} B \to (A \otimes_R B)/J$가 전사이므로 (1)(b)가
+성립한다.
+
+\medskip\noindent
+(2)에 서술된 가정이 성립한다고 하자. 아핀 열린집합 $U \times_S V$들은,
+(2)에서와 같은 쌍 $(U, V)$에 대해 택했을 때, 명백히 $X \times_S X$의 아핀 열린
+덮개를 이룬다(예를 들어 보조정리
+\ref{schemes-lemma-affine-covering-fibre-product}을 보라). 따라서 각 사상
+$U \cap V = \Delta_{X/S}^{-1}(U \times_S V) \to U \times_S V$가 닫힌
+몰입임을 보이면 충분하다. 보조정리 \ref{schemes-lemma-closed-local-target}을 보라.
+가정 (a)에 의해 $U \cap V = \Spec(C)$이며, 여기서 $C$는 어떤 환이다.
+$W = \Spec(R)$를 $S$의 아핀 열린집합으로서 $U$와 $V$가 모두 사상되는
+것으로 택하고
+$U = \Spec(A)$, $V = \Spec(B)$라 쓰면 가정 (b)는 합성
+$$
+A \otimes_{\mathbf{Z}} B \to A \otimes_R B \to C
+$$
+이 전사라는 뜻이다. 따라서 $A \otimes_R B \to C$는 전사이고
+$\Spec(C) \to \Spec(A \otimes_R B)$가 닫힌 몰입이라고 결론 내린다.
+\end{proof}
+
+\begin{example}
+\label{schemes-example-projective-line-separated}
+$k$를 체라 하자. 구조 사상 $p : \mathbf{P}^1_k \to \Spec(k)$, 곧
+$k$ 위의 사영직선의 구조 사상을 생각하자. 예
+\ref{schemes-example-projective-line}을 보라. 위 보조정리를 사용하여 $p$가 분리임을
+보이자. 구성에 의해 $\mathbf{P}^1_k$는 두 아핀 열린집합
+$U = \Spec(k[x])$와 $V = \Spec(k[y])$로 덮이며 그 교집합은
+$U \cap V = \Spec(k[x, y]/(xy - 1))$이다(자명한 표기법을 사용했다).
+따라서 보조정리 \ref{schemes-lemma-characterize-separated}의 조건 (2)(a)와 (2)(b)가
+아핀 열린집합의 쌍 $(U, U)$, $(U, V)$, $(V, U)$ 및 $(V, V)$에 대해
+성립하는지만 확인하면 충분하다. 쌍 $(U, U)$와 $(V, V)$에 대해서는
+자명하다. 쌍 $(U, V)$에 대해서는 $U \cap V$가 아핀임을 보이는 것과 환
+준동형
+$$
+k[x] \otimes_{\mathbf{Z}} k[y] \longrightarrow k[x, y]/(xy - 1)
+$$
+이 전사임을 보이는 것으로 귀착된다. 첫 번째는 참이고, 두 번째도 우변의
+임의의 원소를 $x$의 다항식과 $y$의 다항식의 합으로 쓸 수 있으므로
+명백하다.
+\end{example}
+
+\begin{lemma}
+\label{schemes-lemma-fibre-product-after-map}
+$f : X \to T$와 $g : Y \to T$를 같은 공역을 갖는 스킴 사상이라 하고,
+$h : T \to S$를 스킴의 사상이라 하자. 그러면 유도된 사상
+$i : X \times_T Y \to X \times_S Y$는 몰입이다. $T \to S$가 분리이면
+$i$는 닫힌 몰입이다. $T \to S$가 준분리이면 $i$는 준콤팩트 사상이다.
+\end{lemma}
+
+\begin{proof}
+일반 범주론에 의해 다음 도식
+$$
+\xymatrix{
+X \times_T Y \ar[r] \ar[d] & X \times_S Y \ar[d] \\
+T \ar[r]^{\Delta_{T/S}} \ar[r] & T \times_S T
+}
+$$
+은 섬유곱 도식이다. 보조정리 \ref{schemes-lemma-diagonal-immersion},
+\ref{schemes-lemma-fibre-product-immersion} 및
+\ref{schemes-lemma-quasi-compact-preserved-base-change}에서 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-semi-diagonal}
+$g : X \to Y$를 $S$ 위의 스킴 사상이라 하자. 사상
+$i : X \to X \times_S Y$는 몰입이다. $Y$가 $S$ 위에서 분리이면 이는 닫힌
+몰입이다. $Y$가 $S$ 위에서 준분리이면 이는 준콤팩트이다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{schemes-lemma-fibre-product-after-map}을 사상
+$X = X \times_Y Y \to X \times_S Y$에 적용한 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-section-immersion}
+$f : X \to S$를 스킴의 사상이라 하자. $s : S \to X$를 $f$의 단면이라
+하자(식으로는 $f \circ s = \text{id}_S$). 그러면 $s$는 몰입이다. $f$가
+분리이면 $s$는 닫힌 몰입이다. $f$가 준분리이면 $s$는 준콤팩트이다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{schemes-lemma-semi-diagonal}을 $g =s$에 적용한 특수한 경우이며,
+그 사상은 $i = s : S \to S \times_S X$이다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-separated-permanence}
+영속성 성질.
+\begin{enumerate}
+\item 분리 사상들의 합성은 분리이다.
+\item 준분리 사상들의 합성은 준분리이다.
+\item 분리 사상의 밑변환은 분리이다.
+\item 준분리 사상의 밑변환은 준분리이다.
+\item 분리 사상들의 (섬유)곱은 분리이다.
+\item 준분리 사상들의 (섬유)곱은 준분리이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X \to Y \to Z$를 사상들이라 하자. $X \to Y$와 $Y \to Z$가 분리라고
+가정하자. 합성
+$$
+X \to X \times_Y X \to X \times_Z X
+$$
+은 닫혀 있다. 첫 번째 사상은 가정에 의해, 두 번째 사상은 보조정리
+\ref{schemes-lemma-fibre-product-after-map}에 의해 닫혀 있기 때문이다. 같은 논증은
+``준분리''에도 성립한다(같은 참조를 사용한다).
+
+\medskip\noindent
+$f : X \to Y$를 바탕 $S$ 위의 스킴 사상이라 하자. $S' \to S$를 스킴의
+사상이라 하고, $f' : X_{S'} \to Y_{S'}$를 $f$의 밑변환이라 하자. 그러면
+$f'$의 대각 사상은 사상
+$$
+\Delta_{f'} :
+X_{S'} = S' \times_S X
+\longrightarrow
+X_{S'} \times_{Y_{S'}} X_{S'} = S' \times _S (X \times_Y X)
+$$
+이며, 이것은 $\Delta_f$의 밑변환임을 쉽게 알 수 있다. 따라서 (3)과 (4)는
+닫힌 몰입과 준콤팩트 사상이 임의의 밑변환 아래 보존된다는 사실에서 따른다
+(보조정리 \ref{schemes-lemma-fibre-product-immersion}과
+\ref{schemes-lemma-quasi-compact-preserved-base-change}).
+
+\medskip\noindent
+$f : X \to Y$와 $g : U \to V$를 바탕 $S$ 위의 스킴 사상이라 하자. 그러면
+$f \times g$는 $X \times_S U \to X \times_S V$($g$의 밑변환)와
+$X \times_S V \to Y \times_S V$($f$의 밑변환)의 합성이다. 따라서 (5)와
+(6)은 (1)--(4)에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-compose-after-separated}
+\begin{slogan}
+분리 사상과 준분리 사상에는 소거법칙이 성립한다.
+\end{slogan}
+$f : X \to Y$와 $g : Y \to Z$를 스킴의 사상이라 하자. $g \circ f$가
+분리이면 $f$도 분리이다. $g \circ f$가 준분리이면 $f$도 준분리이다.
+\end{lemma}
+
+\begin{proof}
+$g \circ f$가 분리라고 가정하자. 대각 사상의 분해
+$X \to X \times_Y X \to X \times_Z X$를 생각하되, 이는 $g \circ f$의
+대각 사상이다. 보조정리
+\ref{schemes-lemma-fibre-product-after-map}에 의해 뒤의 사상은 몰입이다. 가정에 의해
+$X$의 $X \times_Z X$ 안의 상은 닫혀 있다. 따라서 $X \times_Y X$ 안에서도
+닫혀 있다. 그러므로 보조정리 \ref{schemes-lemma-immersion-when-closed}에 의해
+$X \to X \times_Y X$가 닫힌 몰입이다.
+
+\medskip\noindent
+$g \circ f$가 준분리라고 가정하자. 아핀 열린집합 $V \subset Y$로서 그
+상이 $Z$의 어떤 아핀 열린집합에 들어가는 것을 택하자. 아핀 열린집합
+$U_1, U_2 \subset X$로서 $V$로 사상되는 것들을 택하자. 그러면
+$U_1 \cap U_2$는 아핀 열린집합들의 유한 합집합이다. 실제로 $U_1, U_2$는
+$Z$의 공통된 아핀 열린집합으로 사상된다.
+$Y$를 $V$와 같은 아핀 열린집합들로 덮을 수 있으므로 보조정리
+\ref{schemes-lemma-characterize-quasi-separated}에서 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-quasi-compact-permanence}
+$f : X \to Y$와 $g : Y \to Z$를 스킴의 사상이라 하자. $g \circ f$가
+준콤팩트이고 $g$가 준분리이면 $f$는 준콤팩트이다.
+\end{lemma}
+
+\begin{proof}
+$f$가 합성 $(1, f) : X \to X \times_Z Y \to Y$와 같기 때문이다. 첫 번째
+사상은 준분리 사상 $X \times_Z Y \to X$의 단면이므로 보조정리
+\ref{schemes-lemma-section-immersion}에 의해 준콤팩트이다(이는 $g$의 밑변환이다.
+보조정리 \ref{schemes-lemma-separated-permanence}을 보라). 두 번째 사상은
+$g \circ f$의 밑변환이므로 준콤팩트이다. 보조정리
+\ref{schemes-lemma-quasi-compact-preserved-base-change}를 보라. 준콤팩트 사상들의
+합성은 준콤팩트이다. 보조정리 \ref{schemes-lemma-composition-quasi-compact}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-affine-separated}
+아핀 스킴은 분리이다. 아핀 스킴에서 다른 스킴으로 가는 사상은 분리이다.
+\end{lemma}
+
+\begin{proof}
+$U = \Spec(A)$를 아핀 스킴이라 하자. 그러면 보조정리
+\ref{schemes-lemma-diagonal-affines-closed}에 의해 $U \to \Spec(\mathbf{Z})$의 대각
+사상은 닫혀 있다. 따라서 정의 \ref{schemes-definition-separated}에 의해 $U$는
+분리이다. $U \to X$가 스킴의 사상이면 보조정리
+\ref{schemes-lemma-compose-after-separated}을 사상들
+$U \to X \to \Spec(\mathbf{Z})$에 적용하여 $U \to X$가 분리임을 얻는다.
+\end{proof}
+
+\noindent
+상들이 아핀 열린집합에 포함되는 아핀 열린집합의 쌍만을 생각해야만 그
+교집합이 아핀이라고 결론 내릴 수 있는지 궁금했을지도 모른다. 흔히 그럴
+필요가 없다!
+
+\begin{lemma}
+\label{schemes-lemma-curiosity}
+$f : X \to S$를 사상이라 하자. $f$가 분리이고 $S$가 분리 스킴이라고
+가정하자. $U \subset X$와 $V \subset X$가 아핀 열린집합이면
+$U \cap V$는 아핀이다(그리고 $U \times V$의 닫힌 부분스킴이다).
+\end{lemma}
+
+\begin{proof}
+이 경우 보조정리 \ref{schemes-lemma-separated-permanence}에 의해 $X$는 분리이다.
+따라서 $U \cap V$가 아핀임은 보조정리
+\ref{schemes-lemma-characterize-separated}을 사상 $X \to \Spec(\mathbf{Z})$에
+적용하여 얻는다.
+\end{proof}
+
+\noindent
+한편 다음 예는 아핀 스킴의 상이 어떤 아핀 열린집합에 포함된다고 기대할
+수 없음을 보여 준다.
+
+\begin{example}
+\label{schemes-example-image-affine-projective}
+예 \ref{schemes-example-not-affine}의 아핀이 아닌 스킴
+$U = \Spec(k[x, y]) \setminus \{(x, y)\}$를 생각하자. 한편 스킴
+$$
+\mathbf{GL}_{2, k} = \Spec(k[a, b, c, d, 1/ad - bc]).
+$$
+을 생각하자. 사상 $\mathbf{GL}_{2, k} \to U$가 있으며, 이는 환 준동형
+$x \mapsto a$, $y \mapsto b$에 대응한다. 이 사상이 전사임은 쉽게 알 수 있으므로
+그 상은 $U$의 어떤 아핀 열린집합에도 포함되지 않는다. 실제로 아핀 스킴
+$\mathbf{GL}_{2, k}$는 $\mathbf{P}^1_k$ 위로도 전사이며,
+$\mathbf{P}^1_k$는 {\it 어떠한} 아핀 스킴으로도 몰입조차 갖지 않는다.
+\end{example}
+
+\begin{remark}
+\label{schemes-remark-quasi-compact-and-quasi-separated}
+$P$를 다음 $4$개 성질 중 하나라 하자. 즉 ``준분리'', ``분리'',
+``준콤팩트이고 준분리'', 또는 ``준콤팩트이고 분리''이다. 그러면 다음이
+성립한다.
+\begin{enumerate}
+\item 임의의 아핀 스킴은 $P$를 가진다.
+\item 스킴의 사상 $f : X \to Y$가 주어지고 $Y$가 $P$를 가진다고 하자.
+그러면 $f$가 $P$를 가질 필요충분조건은 $X$가 $P$를 가지는 것이다.
+\item $X \to Y$와 $Z \to Y$가 스킴의 사상이고 $X$, $Y$, $Z$가 $P$를
+가지면 $X \times_Y Z$도 $P$를 가진다.
+\end{enumerate}
+(1)은 명백하다. $f : X \to Y$를 (2)에서와 같다고 하자. $f$가 $P$를
+가지면 $X$도 그러하다. 이는 보조정리 \ref{schemes-lemma-separated-permanence}과
+\ref{schemes-lemma-composition-quasi-compact}을 $X \to Y \to \Spec(\mathbf{Z})$에
+적용하여 얻는다. $X$가 $P$를 가지면 $f$도 그러하다. 이는 보조정리
+\ref{schemes-lemma-compose-after-separated}과 \ref{schemes-lemma-quasi-compact-permanence}을
+$X \to Y \to \Spec(\mathbf{Z})$에 적용하여 얻는다.
+$X \to Y$와 $Z \to Y$를 (3)에서와 같다고 하자. 사영
+$X \times_Y Z \to Z$는 $P$를 가진다. 실제로 화살표 $X \to Y$가 (2)에
+의해 $P$를 가지며 이 사영은 그 밑변환이다. 보조정리 \ref{schemes-lemma-separated-permanence}과
+\ref{schemes-lemma-quasi-compact-preserved-base-change}를 보라. 따라서 (2)에 의해
+$X \times_Y Z$가 $P$를 가진다.
+\end{remark}
+
+\section{분리성의 값매김 판정법}
+\label{schemes-section-valuative-separatedness}
+
+\begin{lemma}
+\label{schemes-lemma-separated-implies-valuative}
+$f : X \to S$를 스킴의 사상이라 하자. $f$가 분리이면 $f$는 값매김 판정법의
+유일성 부분을 만족한다.
+\end{lemma}
+
+\begin{proof}
+정의 \ref{schemes-definition-valuative-criterion}에서와 같은 도식이 주어졌다고 하자.
+도식에 들어맞는 두 사상 $a, b : \Spec(A) \to X$가 있다고 하자.
+$Z \subset \Spec(A)$를 $a$와 $b$의 등화자라 하자. 보조정리
+\ref{schemes-lemma-where-are-they-equal}에 의해 이는 $\Spec(A)$의 닫힌 부분스킴이다.
+가정에 의해 이는 $\Spec(A)$의 일반점을 포함한다. $A$가 정역이므로
+$Z = \Spec(A)$이다. 따라서 원하는 대로 $a = b$이다.
+\end{proof}
+
+\begin{lemma}[분리성의 값매김 판정법]
+\label{schemes-lemma-valuative-criterion-separatedness}
+\begin{reference}
+\cite[II Proposition 7.2.3]{EGA}
+\end{reference}
+$f : X \to S$를 사상이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item 사상 $f$가 준분리이다.
+\item 사상 $f$가 값매김 판정법의 유일성 부분을 만족한다.
+\end{enumerate}
+그러면 $f$는 분리이다.
+\end{lemma}
+
+\begin{proof}
+가정 (1), 명제 \ref{schemes-proposition-characterize-universally-closed}, 보조정리
+\ref{schemes-lemma-diagonal-immersion} 및 \ref{schemes-lemma-immersion-when-closed}에 의해
+사상 $\Delta_{X/S} : X \to X \times_S X$가 값매김 판정법의 존재 부분을
+만족함을 보이면 충분하다. 가환 실선 도식
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & X \times_S X
+}
+$$
+이 주어졌다고 하자. 오른쪽 아래 화살표는 두 사상
+$a, b : \Spec(A) \to X$로서 $S$ 위에 놓이는 것들에 대응한다. (2)에 의해
+$a = b$이다. 따라서 $a$를
+점선 화살표로 사용하면 된다.
+\end{proof}
+
+\section{모노사상}
+\label{schemes-section-monomorphisms}
+
+\begin{definition}
+\label{schemes-definition-monomorphism}
+스킴의 사상이 스킴의 범주에서 모노사상이면 이를 {\it 모노사상}이라고 한다.
+Categories의 정의 \ref{categories-definition-mono-epi}를 보라.
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-monomorphism}
+\begin{slogan}
+스킴 사상이 모노사상일 필요충분조건은 그 대각 사상이 동형인 것이다.
+\end{slogan}
+$j : X \to Y$를 스킴의 사상이라 하자. $j$가 모노사상일 필요충분조건은
+대각 사상 $\Delta_{X/Y} : X \to X \times_Y X$가 동형인 것이다.
+\end{lemma}
+
+\begin{proof}
+이는 섬유곱이 있는 임의의 범주에서 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-monomorphism-separated}
+스킴의 모노사상은 분리이다.
+\end{lemma}
+
+\begin{proof}
+동형은 닫힌 몰입이라는 사실과 위의 보조정리 \ref{schemes-lemma-monomorphism}에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-composition-monomorphism}
+모노사상들의 합성은 모노사상이다.
+\end{lemma}
+
+\begin{proof}
+이는 임의의 범주에서 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-base-change-monomorphism}
+모노사상의 밑변환은 모노사상이다.
+\end{lemma}
+
+\begin{proof}
+이는 섬유곱이 있는 임의의 범주에서 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-injective-points}
+$j : X \to Y$를 스킴의 사상이라 하자. $j$가 점에서 단사이면 $j$는
+분리이다.
+\end{lemma}
+
+\begin{proof}
+$z$를 $X \times_Y X$의 점이라 하자. 그러면
+$x = \text{pr}_1(z)$와 $\text{pr}_2(z)$는 같은 점이다. $j$가 이 두 점을
+같은 점 $y$, 즉 $Y$의 한 점으로 사상하기 때문이다. 아핀 열린 근방
+$V \subset Y$를 $y$에 대해, 아핀 열린 근방 $U \subset X$를 $x$에 대해 택하여
+$j(U) \subset V$가 되게 할 수 있다. 그러면
+$z \in U \times_V U \subset X \times_Y X$이다. 따라서
+$X \times_Y X$는 아핀 열린집합들 $U \times_V U$의 합집합이다.
+$\Delta_{X/Y}^{-1}(U \times_V U) = U$이고
+$U \to U \times_V U$가 닫힌 몰입이므로 $\Delta_{X/Y}$가 닫힌 몰입이라고
+결론 내린다(보조정리 \ref{schemes-lemma-diagonal-immersion}의 증명에 있는 논증을
+보라).
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-injective-points-surjective-stalks}
+$j : X \to Y$를 스킴의 사상이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $j$가 점에서 단사이다.
+\item 임의의 $x \in X$에 대해 환 준동형
+$j^\sharp_x : \mathcal{O}_{Y, j(x)} \to \mathcal{O}_{X, x}$가 전사이다.
+\end{enumerate}
+그러면 $j$는 모노사상이다.
+\end{lemma}
+
+\begin{proof}
+$a, b : Z \to X$를 $j \circ a  = j \circ b$를 만족하는 두 스킴 사상이라
+하자. 그러면 (1)에 의해 기저 위상공간 사이의 사상으로서 $a = b$이다.
+임의의 $z \in Z$에 대해
+$a^\sharp_z \circ j^\sharp_{a(z)} = b^\sharp_z \circ j^\sharp_{b(z)}$가
+준동형 $\mathcal{O}_{Y, j(a(z))} \to \mathcal{O}_{Z, z}$ 사이의 등식으로
+성립한다. 준동형 $j^\sharp_x$들의 전사성에 의해
+$a^\sharp_z = b^\sharp_z$, $\forall z \in Z$이다. 이는
+$a^\sharp = b^\sharp$를 함의한다. 따라서 원하는 대로 스킴 사상으로서
+$a = b$라고 결론 내린다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-immersions-monomorphisms}
+스킴의 몰입은 모노사상이다. 특히 모든 몰입은 분리이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{schemes-lemma-injective-points-surjective-stalks}의 판정 조건을
+확인함으로써 이를 알 수 있다. 조금 더 우아하게는 보조정리
+\ref{schemes-lemma-restrict-map-to-opens}와
+\ref{schemes-lemma-characterize-closed-subspace}에 의해 열린 몰입과 닫힌 몰입이
+모노사상이라는 사실을 이용할 수 있다. 따라서 이들의 합성인 임의의 몰입도
+모노사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-subscheme-of-separated-scheme}
+$f : X \to S$를 분리 사상이라 하자. 임의의 국소 닫힌 부분스킴
+$Z \subset X$는 $S$ 위에서 분리이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{schemes-lemma-immersions-monomorphisms}와 분리 사상들의 합성이
+분리라는 사실(보조정리 \ref{schemes-lemma-separated-permanence})에서 따른다.
+\end{proof}
+
+\begin{example}
+\label{schemes-example-Q-over-Z}
+사상 $\Spec(\mathbf{Q}) \to \Spec(\mathbf{Z})$는 모노사상이다. 이는
+$\mathbf{Q} \otimes_{\mathbf{Z}} \mathbf{Q} = \mathbf{Q}$이기 때문이다.
+더 일반적으로 임의의 스킴 $S$와 임의의 점 $s \in S$에 대해 표준 사상
+$$
+\Spec(\mathcal{O}_{S, s}) \longrightarrow S
+$$
+은 모노사상이다.
+\end{example}
+
+\begin{lemma}
+\label{schemes-lemma-mono-towards-spec-field}
+$k_1, \ldots, k_n$을 체들이라 하자. 스킴의 임의의 모노사상
+$X \to \Spec(k_1 \times \ldots \times k_n)$에 대해 부분집합
+$I \subset \{1, \ldots, n\}$가 존재하여
+$X \cong \Spec(\prod_{i \in I} k_i)$이며, 이는
+$\Spec(k_1 \times \ldots \times k_n)$ 위의 스킴으로서의 동형이다. 더 일반적으로
+$X = \coprod_{i \in I} \Spec(k_i)$가 체의 스펙트럼들의 서로소 합집합이고
+$Y \to X$가 모노사상이면 부분집합 $J \subset I$가 존재하여
+$Y = \coprod_{i \in J} \Spec(k_i)$이다.
+\end{lemma}
+
+\begin{proof}
+먼저 $n = 1$인 경우(또는 $\# I = 1$인 경우)로 환원한다. 이는 열린 닫힌
+부분스킴 $\Spec(k_i)$들의 역상을 취하여 할 수 있다. 이 경우 $X$는 점을 하나만 가지므로
+아핀이다. 이에 대응하는 대수 문제는 다음과 같다. 대수 준동형
+$k \to R$이 $R \otimes_k R \cong R$을 만족하면 $R \cong k$이거나
+$R = 0$이다. 이는 차원을 생각하면 성립한다. Algebra의 보조정리
+\ref{algebra-lemma-epimorphism-over-field}도 보라.
+\end{proof}
+
+\section{준연접 가군에 대한 함자성}
+\label{schemes-section-quasi-coherent}
+
+\noindent
+$X$를 스킴이라 하자. 범주 $\QCoh(\mathcal{O}_X)$로 Modules의 정의
+\ref{modules-definition-quasi-coherent}에서 정의한 준연접
+$\mathcal{O}_X$-가군들의 범주를 나타낸다. 절
+\ref{schemes-section-quasi-coherent-affine}에서 범주 $\QCoh(\mathcal{O}_X)$가
+$X$가 아핀이면 좋은 성질을 많이 가짐을 보았다. 준연접이라는
+성질은 $X$ 위에서 국소적이므로, 임의의 스킴 $X$ 위의 준연접 층들의 범주도
+이 성질들을 물려받는다. 이를 열거하면 다음과 같다.
+\begin{enumerate}
+\item $\mathcal{O}_X$-가군의 층 $\mathcal{F}$가 준연접일 필요충분조건은
+$\mathcal{F}$를 각 아핀 열린집합 $U = \Spec(R)$에 제한한 것이
+$\widetilde M$의 꼴인 것이다. 여기서 어떤 $R$-가군을 $M$으로 나타냈다.
+\item $\mathcal{O}_X$-가군의 층 $\mathcal{F}$가 준연접일 필요충분조건은
+$\mathcal{F}$를 어떤 아핀 열린 덮개의 각 성분에 제한한 것이 준연접인
+것이다.
+\item 준연접 층들의 임의의 직합은 준연접이다.
+\item 준연접 층들의 임의의 여극한은 준연접이다.
+\item
+\label{schemes-item-kernel}
+준연접 층 사이의 사상의 핵과 여핵은 준연접이다.
+\item $\mathcal{O}_X$-가군의 짧은 완전열
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$이 주어졌을
+때 셋 중 둘이 준연접이면 나머지 하나도 준연접이다.
+\item 스킴의 사상 $f : Y \to X$가 주어졌을 때 준연접
+$\mathcal{O}_X$-가군의 당김은 준연접 $\mathcal{O}_Y$-가군이다. Modules의
+보조정리 \ref{modules-lemma-pullback-quasi-coherent}를 보라.
+\item 두 준연접 $\mathcal{O}_X$-가군의 텐서곱은 준연접이다. Modules의
+보조정리 \ref{modules-lemma-tensor-product-permanence}를 보라.
+\item 준연접 $\mathcal{O}_X$-가군 $\mathcal{F}$가 주어졌을 때
+$\mathcal{F}$ 위의 텐서 대수, 대칭 대수 및 외대수는 준연접이다. Modules의
+보조정리 \ref{modules-lemma-whole-tensor-algebra-permanence}를 보라.
+\item 두 준연접 $\mathcal{O}_X$-가군 $\mathcal{F}$, $\mathcal{G}$가
+주어지고 $\mathcal{F}$가 유한 표시이면 내부 Hom
+$\SheafHom_{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})$은 준연접이다.
+Modules의 보조정리
+\ref{modules-lemma-internal-hom-locally-kernel-direct-sum}과 위의
+(\ref{schemes-item-kernel})을 보라.
+\end{enumerate}
+한편 일반적으로 준연접 가군의 밂이 준연접인 것은 아니다. 다음은 그것이
+성립하는 경우이다.
+
+\begin{lemma}
+\label{schemes-lemma-push-forward-quasi-coherent}
+$f : X \to S$를 스킴의 사상이라 하자. $f$가 준콤팩트이고 준분리이면
+$f_*$는 준연접 $\mathcal{O}_X$-가군을 준연접 $\mathcal{O}_S$-가군으로
+보낸다.
+\end{lemma}
+
+\begin{proof}
+문제는 $S$ 위에서 국소적이므로 $S$가 아핀이라고 가정할 수 있다. $X$가
+준콤팩트이므로 $X = \bigcup_{i = 1}^n U_i$로 쓸 수 있고, 각 $U_i$는 아핀
+열린집합이다. $f$가 준분리이므로
+$U_i \cap U_j = \bigcup_{k = 1}^{n_{ij}} U_{ijk}$로 쓸 수 있으며, 여기서
+$U_{ijk}$들은 아핀 열린집합이다. 보조정리
+\ref{schemes-lemma-characterize-quasi-separated}를 보라. 제한들을
+$f_i : U_i \to S$ 및 $f_{ijk} : U_{ijk} \to S$로 나타내되, 이는 $f$의
+제한들이다. 열린집합 $V$를 $S$에서 임의로 택하고 층 $\mathcal{F}$를 $X$
+위에서 임의로 택하면 다음이 성립한다.
+\begin{eqnarray*}
+f_*\mathcal{F}(V) & = & \mathcal{F}(f^{-1}V) \\
+& = &
+\Ker\left(
+\bigoplus\nolimits_i \mathcal{F}(f^{-1}V \cap U_i)
+\to
+\bigoplus\nolimits_{i, j, k} \mathcal{F}(f^{-1}V \cap U_{ijk})\right) \\
+& = &
+\Ker\left(
+\bigoplus\nolimits_i f_{i, *}(\mathcal{F}|_{U_i})(V)
+\to
+\bigoplus\nolimits_{i, j, k} f_{ijk, *}(\mathcal{F}|_{U_{ijk}})(V)\right) \\
+& = &
+\Ker\left(
+\bigoplus\nolimits_i f_{i, *}(\mathcal{F}|_{U_i})
+\to
+\bigoplus\nolimits_{i, j, k} f_{ijk, *}(\mathcal{F}|_{U_{ijk}})\right)(V)
+\end{eqnarray*}
+달리 말해 층들의 완전열
+$$
+0 \to f_*\mathcal{F}
+\to \bigoplus f_{i, *}\mathcal{F}_i
+\to \bigoplus f_{ijk, *}\mathcal{F}_{ijk}
+$$
+이 있다. 여기서 $\mathcal{F}_i, \mathcal{F}_{ijk}$는 $\mathcal{F}$를 해당
+열린집합에 제한한 것을 나타낸다. $\mathcal{F}$가 준연접
+$\mathcal{O}_X$-가군이면 $\mathcal{F}_i$는 준연접
+$\mathcal{O}_{U_i}$-가군이고 $\mathcal{F}_{ijk}$는 준연접
+$\mathcal{O}_{U_{ijk}}$-가군이다. 따라서 보조정리
+\ref{schemes-lemma-widetilde-pullback}에 의해 완전열의 두 번째 항과 세 번째 항은
+준연접 $\mathcal{O}_S$-가군이다. 그러므로 $f_*\mathcal{F}$는 준연접
+$\mathcal{O}_S$-가군이다.
+\end{proof}
+
+\noindent
+이를 사용하면 스킴의 (닫힌) 몰입을 다음과 같이 특징지을 수 있다.
+
+\begin{lemma}
+\label{schemes-lemma-characterize-closed-immersions}
+$f : X \to Y$를 스킴의 사상이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $f$는 $X$와 $Y$의 어떤 닫힌 부분집합 사이의 위상동형을 유도한다.
+\item $f^\sharp : \mathcal{O}_Y \to f_*\mathcal{O}_X$는 전사이다.
+\end{enumerate}
+그러면 $f$는 스킴의 닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)를 가정하자. (1)에 의해 사상 $f$는 준콤팩트이다(Topology의
+보조정리 \ref{topology-lemma-closed-in-quasi-compact}를 보라). 조건 (1)과
+(2)는 보조정리 \ref{schemes-lemma-injective-points-surjective-stalks}의 조건 (1)과
+(2)를 함의한다. 따라서 $f : X \to Y$는 모노사상이다. 특히 $f$는 분리이다.
+보조정리 \ref{schemes-lemma-monomorphism-separated}를 보라. 그러므로 위의 보조정리
+\ref{schemes-lemma-push-forward-quasi-coherent}를 적용할 수 있어
+$f_*\mathcal{O}_X$가 준연접 $\mathcal{O}_Y$-가군임을 얻는다. 따라서
+$\mathcal{O}_Y \to f_*\mathcal{O}_X$의 핵은 보조정리
+\ref{schemes-lemma-extension-quasi-coherent}에 의해 준연접이다. 준연접 층은
+국소적으로 단면들에 의해 생성되므로(Modules의 정의
+\ref{modules-definition-quasi-coherent}를 보라) $f$는 닫힌 몰입이다. 정의
+\ref{schemes-definition-closed-immersion-locally-ringed-spaces}를 보라.
+\end{proof}
+
+\noindent
+이 보조정리를 사용하여 다음 보조정리를 증명할 수 있다.
+
+\begin{lemma}
+\label{schemes-lemma-composition-immersion}
+스킴의 몰입들의 합성은 몰입이고, 스킴의 닫힌 몰입들의 합성은 닫힌
+몰입이며, 스킴의 열린 몰입들의 합성은 열린 몰입이다.
+\end{lemma}
+
+\begin{proof}
+열린 부분공간의 열린 부분공간도 열린 부분공간이므로 열린 몰입의 경우에는
+명백하다.
+
+\medskip\noindent
+$a : Z \to Y$와 $b : Y \to X$가 스킴의 닫힌 몰입이라고 하자.
+$c = b \circ a$도 닫힌 몰입임을 확인하겠다. 가정에 의해 $a$와 $b$는 닫힌
+부분집합 위로의 위상동형이며, 따라서 $c = b \circ a$도 닫힌 부분집합
+위로의 위상동형이다. 또한 준동형 $\mathcal{O}_X \to c_*\mathcal{O}_Z$는
+전사이다. 이는 전사 준동형들 $\mathcal{O}_X \to b_*\mathcal{O}_Y$와
+$b_*\mathcal{O}_Y \to b_*a_*\mathcal{O}_Z$의 합성으로 인수분해되기
+때문이다($b_*$가 완전하므로 전사이다. Modules의 보조정리
+\ref{modules-lemma-i-star-exact}를 보라). 따라서 위의 보조정리
+\ref{schemes-lemma-characterize-closed-immersions}에 의해 $c$는 닫힌 몰입이다.
+
+\medskip\noindent
+마지막으로 몰입의 경우를 다룬다. $a : Z \to Y$와 $b : Y \to X$가 스킴의
+몰입이라고 하자. 이는 열린 부분스킴 $V \subset Y$와 $U \subset X$가
+존재하여 $a(Z) \subset V$, $b(Y) \subset U$이고
+$a : Z \to V$와 $b : Y \to U$가 닫힌 몰입이라는 뜻이다. $Y$의 위상은
+$U$의 위상에서 유도되므로 열린집합 $U' \subset U$를 찾아
+$V = b^{-1}(U')$가 되게 할 수 있다. 그러면
+$Z \to V = b^{-1}(U') \to U'$은 닫힌 몰입들의 합성이므로 닫힌 몰입이다.
+따라서 $Z \to X$는 몰입이며 원하는 결과를 얻었다.
+\end{proof}

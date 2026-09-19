@@ -1,0 +1,2761 @@
+% Generated mechanically from frozen input p09/ko/src/spaces-flat.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{76}
+\chapter{대수공간 위의 평탄성}
+
+
+\phantomsection
+\label{spaces-flat-section-phantom}
+
+
+
+
+\section{서론}
+\label{spaces-flat-section-introduction}
+
+\noindent
+이 장에서는 대수공간의 맥락에서 평탄 가군과 평탄 사상에 관한
+몇 가지 고급 결과를 논한다. 먼저 스킴의 맥락에서 다룬 대응 장인
+More on Flatness, Section \ref{flat-section-introduction}을
+살펴볼 것을 독자에게 강력히 권한다. 참고문헌으로는 Raynaud와
+Gruson의 논문 \cite{GruRay}이 있다.
+
+
+
+
+
+
+\section{불순성}
+\label{spaces-flat-section-impure}
+
+\noindent
+이 절은 More on Flatness, Section \ref{flat-section-impure}에
+대응한다.
+
+\begin{situation}
+\label{spaces-flat-situation-pre-pure}
+$S$를 스킴이라 하자. $f : X \to Y$를 대수공간들 사이의
+유한형 decent 사상이라 하자\footnote{준분리 사상은 decent이다.
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-properties-trivial-implications}를 보라.
+임의의 사상 $\Spec(k) \to Y$에 대하여, 여기서 $k$는 체이고,
+대수공간 $X_k$는 $k$ 위 유한 표시이다. 실제로 그것은
+$k$ 위 유한형이고, Decent Spaces, Lemma
+\ref{decent-spaces-lemma-locally-Noetherian-decent-quasi-separated}에
+의해 준분리이기 때문이다.}. 이 사상은 $S$ 위의 사상이다.
+또한 $\mathcal{F}$를 유한형
+준연접 $\mathcal{O}_X$-가군이라 하자. 마지막으로
+$y \in |Y|$를 $Y$의 한 점이라 하자.
+\end{situation}
+
+\noindent
+이 상황에서 스킴 $T$, 사상 $g : T \to Y$, 점 $t \in T$로서
+$g(t)=y$인 것, 특수화 $t' \leadsto t$ ($T$ 안에서), 그리고
+점 $\xi \in |X_T|$로서 $t'$ 위에 놓이는 것을 생각하자. 여기서
+$X_T = T \times_Y X$이다.
+% P09-ERR-0802
+그림은 다음과 같다.
+\begin{equation}
+\label{spaces-flat-equation-impurity}
+\vcenter{
+\xymatrix{
+\xi \ar@{|->}[d] & \\
+t' \ar@{~>}[r] & t \ar@{|->}[r] \ar[r] & y
+}
+}
+\quad\quad
+\vcenter{
+\xymatrix{
+X_T \ar[d]_{f_T} \ar[r] & X \ar[d]^f \\
+T \ar[r]^g & Y
+}
+}
+\end{equation}
+또한 $\mathcal{F}_T$로 $\mathcal{F}$의 $X_T$로의 당김을 나타낸다.
+
+\begin{definition}
+\label{spaces-flat-definition-impurity}
+Situation \ref{spaces-flat-situation-pre-pure}에서 $\mathcal{F}$와 $y$에
+관하여, $\xi \in \text{Ass}_{X_T/T}(\mathcal{F}_T)$이고
+$t \not \in f_T(\overline{\{\xi\}})$이면 도표
+(\ref{spaces-flat-equation-impurity})가
+{\it 위에서 말한 불순성}을 정의한다고 한다.
+이를 “$(g : T \to Y, t' \leadsto t, \xi)$를
+$\mathcal{F}$의 $y$ 위 불순성이라 하자”라고 표현한다.
+\end{definition}
+
+\noindent
+달리 말하면, $(g : T \to Y, t' \leadsto t, \xi)$가
+$\mathcal{F}$의 $y$ 위 불순성이라는 것은
+특수화 $\xi \leadsto \theta$로서 위상공간 $|X_T|$ 안에 있고
+$f_T(\theta)=t$를 만족하는 것이 존재하지 않는다는 뜻이다.
+decent가 아닌 대수공간에서는 특수화가 잘 거동하지 않는다.
+사상 $f$가 decent이면 $X_T$는 decent 대수공간이며, 이는 위와
+같은 모든 사상 $g : T \to Y$에 대하여 성립한다. Decent Spaces, Definition
+\ref{decent-spaces-definition-relative-conditions}을 보라.
+
+\begin{lemma}
+\label{spaces-flat-lemma-impure-limit}
+Situation \ref{spaces-flat-situation-pre-pure}에서,
+% P09-ERR-0803
+$(g : T \to S, t' \leadsto t, \xi)$가
+$\mathcal{F}$의 $y$ 위 불순성이라 하자.
+$T = \lim_{i \in I} T_i$가 $Y$ 위 아핀 스킴들의 유향 극한이라고
+가정하자. 그러면 어떤 $i$에 대하여 삼중항
+$(T_i \to Y, t'_i \leadsto t_i, \xi_i)$는
+$\mathcal{F}$의 $y$ 위 불순성이다.
+\end{lemma}
+
+\begin{proof}
+명제의 표기는 다음 뜻이다. $p_i : T \to T_i$를 사영 사상이라
+하고, $t_i=p_i(t)$ 및 $t'_i=p_i(t')$라 하자. 마지막으로
+$\xi_i \in |X_{T_i}|$는 $\xi$의 상이다.
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-base-change-relative-assassin}에 의해
+$\xi_i \in \text{Ass}_{X_{T_i}/T_i}(\mathcal{F}_{T_i})$이다.
+따라서 보일 것은
+$t_i \not \in f_{T_i}(\overline{\{\xi_i\}})$가 어떤 $i$에
+대하여 성립한다는 사실뿐이다.
+
+\medskip\noindent
+$Z_i \subset X_{T_i}$를
+$\overline{\{\xi_i\}} \subset |X_{T_i}|$ 위의 축약 유도 스킴
+구조라 하고, $Z \subset X_T$를
+$\overline{\{\xi\}} \subset |X_T|$ 위의 축약 유도 스킴 구조라
+하자. 그러면 Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-inverse-limit-irreducibles}에 의해
+$Z=\lim Z_i$이다(각 $X_{T_i}$가 decent이므로 이 보조정리를
+적용할 수 있다). 체 $k$와 사상 $\Spec(k) \to T$를 택하되
+그 상을 $t$라 하자. 그러면
+$$
+\emptyset =
+Z \times_T \Spec(k) = (\lim Z_i) \times_{(\lim T_i)} \Spec(k)
+= \lim Z_i \times_{T_i} \Spec(k)
+$$
+이다. 극한은 올곱과 가환하기 때문이다(극한끼리는 가환한다).
+각 $Z_i \times_{T_i} \Spec(k)$는 준콤팩트이다. 실제로
+$X_{T_i} \to T_i$가 유한형이고, 따라서 $Z_i \to T_i$도
+유한형이다. 따라서 $Z_i \times_{T_i} \Spec(k)$는 어떤 $i$에
+대하여 공집합이다. Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-limit-nonempty}를 보라.
+합성 $\Spec(k) \to T \to T_i$의 상이 $t_i$이므로 원하는
+결론을 얻는다.
+\end{proof}
+
+\noindent
+불순성은 평탄 밑변환을 따라 올라간다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-flat-ascent-impurity}
+Situation \ref{spaces-flat-situation-pre-pure}에서,
+$(Y_1, y_1) \to (Y, y)$를 $S$ 위의 점이 지정된
+대수공간들 사이의 사상이라 하자. $Y_1 \to Y$가 $y_1$에서
+평탄이라고 가정하자.
+$(T \to Y, t' \leadsto t, \xi)$가 $\mathcal{F}$의
+$y$ 위 불순성이면, 불순성
+$(T_1 \to Y_1, t_1' \leadsto t_1, \xi_1)$가 존재한다.
+이는 $\mathcal{F}_1$의 불순성이며, 이 가군은
+$\mathcal{F}$를 $X_1=Y_1\times_YX$로 당긴 것이고 이 불순성은
+$y_1$ 위에 있다. 또한 $T_1$은 $Y_1 \times_Y T$ 위에서
+에탈이다.
+\end{lemma}
+
+\begin{proof}
+에탈 사상 $T_1 \to Y_1 \times_Y T$를 택하되
+$T_1$은 스킴이라 하자. 그리고 점 $t_1 \in T_1$을 택하되
+$y_1$과 $t$로 가도록 하자.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 이러한
+쌍 $(T_1,t_1)$을 찾을 수 있다. 스킴의 사상 $T_1 \to T$는
+$t_1$에서 평탄하다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-flat}과 대수공간의
+평탄 사상의 정의를 사용한다).
+% P09-ERR-0804
+따라서 특수화 $t'_1 \leadsto t_1$이 존재하며, 이는
+$t' \leadsto t$ 위에 놓인다. Morphisms, Lemma
+\ref{morphisms-lemma-generalizations-lift-flat}을 보라.
+점 $\xi_1 \in |X_{T_1}|$을 택하자. 이 점은 $t'_1$과
+$\xi$로 가며,
+$\xi_1 \in \text{Ass}_{X_{T_1}/T_1}(\mathcal{F}_{T_1})$이다.
+% P09-ERR-0805
+이는 $\Spec(\kappa(t'_1) \otimes_{\kappa(t')} \kappa(\xi))$의
+한 점을 택하는 것과 같다. Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-base-change-relative-assassin}에 의해
+그러한 선택이 가능하다. 폐포 $Z_1$, 즉 $\{\xi_1\}$의
+$|X_{T_1}|$에서의 폐포는 $\{\xi\}$의 $|X_T|$에서의 폐포
+안으로 사상되므로,
+$Z_1$의 $|T_1|$에서의 상은 $t_1$을 포함할 수 없다.
+따라서 $(T_1 \to Y_1, t'_1 \leadsto t_1, \xi_1)$는
+$\mathcal{F}_1$의
+% P09-ERR-0806
+$Y_1$ 위의 불순성이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-pure-along-X-y}
+Situation \ref{spaces-flat-situation-pre-pure}에서, $\overline{y}$를
+$y$ 위에 놓이는 기하적 점이라 하자.
+$\mathcal{O}=\mathcal{O}_{Y,\overline{y}}$를 $Y$의 에탈
+국소환으로서 $\overline{y}$에서 취한 것이라 하자.
+$Y^{sh}=\Spec(\mathcal{O})$,
+$X^{sh}=X\times_YY^{sh}$라 쓰고, $\mathcal{F}^{sh}$로
+$\mathcal{F}$의 $X^{sh}$로의 당김을 나타내자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item 불순성
+$(Y^{sh} \to Y, y' \leadsto \overline{y}, \xi)$가 존재하며,
+이는 $\mathcal{F}$의 $y$ 위 불순성이다.
+% P09-ERR-0807
+\item $\text{Ass}_{X^{sh}/Y^{sh}}(\mathcal{F}^{sh})$의
+모든 점은 닫힌 올 $X_{\overline{y}}$의 한 점으로 특수화된다.
+\item 불순성 $(T \to Y, t' \leadsto t, \xi)$가 존재하며,
+이는 $\mathcal{F}$의 $y$ 위 불순성이고,
+$(T,t)\to(Y,y)$가 에탈 근방이다.
+\item 불순성 $(T \to Y, t' \leadsto t, \xi)$가 존재하며,
+이는 $\mathcal{F}$의 $y$ 위 불순성이고,
+$T \to Y$가 $t$에서 준유한이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)의 동치는 정의에서 즉시 따른다.
+
+\medskip\noindent
+$\mathcal{O}=\mathcal{O}_{Y,\overline{y}}$는
+$\mathcal{O}(V)$들의 여과 여극한임을 상기하자. 여기서
+$(V,\overline{v})\to(Y,\overline{y})$는 에탈 근방들의
+범주를 달린다
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-cofinal-etale}).
+더욱이 아핀 에탈 근방 $V$들만 고려해도 충분하다. 따라서
+$Y^{sh}=\Spec(\mathcal{O})=\lim\Spec(\mathcal{O}(V))=\lim V$이다.
+그러므로 Lemma \ref{spaces-flat-lemma-impure-limit}에 의해 (1)은 (3)을
+함의한다.
+
+\medskip\noindent
+에탈 사상은 국소 준유한이므로(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-locally-quasi-finite}),
+(3)은 (4)를 함의한다.
+
+\medskip\noindent
+마지막으로 (4)를 가정하자. $T$를 $t$의 열린 근방으로 바꾸어
+$T \to Y$가 국소 준유한이라고 가정할 수 있다.
+Lemma \ref{spaces-flat-lemma-flat-ascent-impurity}에 의해 불순성
+$(T_1 \to Y^{sh}, t_1' \leadsto t_1, \xi_1)$을 얻으며,
+$T_1 \to T \times_Y Y^{sh}$는 에탈이다.
+에탈 사상은 국소 준유한이며, Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-finite}와
+Morphisms, Lemma \ref{morphisms-lemma-composition-quasi-finite}를
+사용하면 $T_1 \to Y^{sh}$가 국소 준유한임을 알 수 있다.
+$\mathcal{O}$가 엄밀 헨젤이므로 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point}를
+적용할 수 있다. $T_1$을 $t_1$의 열리고 닫힌 근방으로 바꾼 뒤
+$T_1 \to Y^{sh}=\Spec(\mathcal{O})$가 유한이라고 가정할 수 있다.
+$\theta \in |X^{sh}|$를 $\xi_1$의 상이라 하고,
+$y' \in \Spec(\mathcal{O})$를 $t_1'$의 상이라 하자.
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-base-change-relative-assassin}에 의해
+$\theta \in \text{Ass}_{X^{sh}/Y^{sh}}(\mathcal{F}^{sh})$이다.
+$\pi : X_{T_1} \to X^{sh}$가 유한이므로 닫힌 사상
+$|X_{T_1}| \to |X^{sh}|$를 유도한다. 따라서
+$\overline{\{\xi_1\}}$의 상은 $\overline{\{\theta\}}$이다.
+그러므로 $(Y^{sh} \to Y, y' \leadsto \overline{y}, \theta)$는
+$\mathcal{F}$의 $y$ 위 불순성이며, 증명이 끝났다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{상대 순수 가군}
+\label{spaces-flat-section-pure}
+
+\noindent
+이 절은 More on Flatness, Section \ref{flat-section-pure}에
+대응한다.
+
+\begin{definition}
+\label{spaces-flat-definition-pure}
+Situation \ref{spaces-flat-situation-pre-pure}에서 다음과 같이 정의한다.
+\begin{enumerate}
+\item Lemma \ref{spaces-flat-lemma-pure-along-X-y}의 동치 조건 가운데
+{\bf 어느 것도} 성립하지 않으면 $\mathcal{F}$가
+{\it $y$ 위에서 순수하다}고 한다.
+\item $\mathcal{F}$가 {\it $y$ 위에서 보편적으로 순수하다}고
+하는 것은 $\mathcal{F}$의 $y$ 위 불순성이 전혀 존재하지
+않는다는 뜻이다.
+\item $X$가 {\it $y$ 위에서 순수하다}고 하는 것은
+$\mathcal{O}_X$가 $y$ 위에서 순수하다는 뜻이다.
+\item $\mathcal{F}$가 {\it 보편적으로 $Y$-순수하다}, 또는
+{\it $Y$에 대해 보편적으로 순수하다}고 하는 것은
+$\mathcal{F}$가 $y$ 위에서 보편적으로 순수하고 이것이 모든
+$y \in |Y|$에 대하여 성립한다는 뜻이다.
+\item $\mathcal{F}$가 {\it $Y$-순수하다}, 또는
+{\it $Y$에 대해 순수하다}고 하는 것은 $\mathcal{F}$가
+$y$ 위에서 순수하고 이것이 모든 $y \in |Y|$에 대하여
+성립한다는 뜻이다.
+\item $X$가 {\it $Y$-순수하다}, 또는 {\it $Y$에 대해
+순수하다}고 하는 것은 $\mathcal{O}_X$가 $Y$에 대해
+순수하다는 뜻이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+필수적인 보조정리들은 다음과 같다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-base-change-universally}
+Situation \ref{spaces-flat-situation-pre-pure}에서 다음 조건들은 동치이다.
+% P09-ERR-0808
+\begin{enumerate}
+\item $\mathcal{F}$가 $y$ 위에서 보편적으로 순수하다.
+\item 점이 지정된 대수공간들의 모든 사상
+$(Y',y')\to(Y,y)$에 대하여 당김 $\mathcal{F}_{Y'}$가
+$y'$ 위에서 순수하다.
+\end{enumerate}
+특히 $\mathcal{F}$가 $Y$에 대해 보편적으로 순수할 필요충분조건은
+모든 밑변환 $\mathcal{F}_{Y'}$, 즉 $\mathcal{F}$에서 얻는 것이
+$Y'$에 대해 순수한 것이다.
+\end{lemma}
+
+\begin{proof}
+이는 형식적이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-quasi-finite-base-change}
+Situation \ref{spaces-flat-situation-pre-pure}에서,
+$(Y',y')\to(Y,y)$를 점이 지정된 대수공간들의 사상이라 하자.
+$Y'\to Y$가 $y'$에서 준유한이고 $\mathcal{F}$가 $y$ 위에서
+순수하면, $\mathcal{F}_{Y'}$는 $y'$ 위에서 순수하다.
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-0809
+$(T\to Y',t'\leadsto t,\xi)$가 $\mathcal{F}_{Y'}$의
+$y'$ 위 불순성이고 $T\to Y'$가 $t$에서
+준유한이면,
+% P09-ERR-0810
+$(T\to Y,t'\to t,\xi)$는 $\mathcal{F}$의 $y$ 위
+불순성이며 $T\to Y$는 $t$에서 준유한이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-quasi-finite}를 보라.
+따라서 순수성의 정의에서 곧바로 결론이 따른다.
+\end{proof}
+
+\noindent
+순수성은 평탄 하강을 만족한다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-flat-descend-pure}
+Situation \ref{spaces-flat-situation-pre-pure}에서,
+$(Y_1,y_1)\to(Y,y)$를 점이 지정된 대수공간들의 사상이라 하자.
+$Y_1\to Y$가 $y_1$에서 평탄이라고 가정하자.
+\begin{enumerate}
+\item $\mathcal{F}_{Y_1}$이 $y_1$ 위에서 순수하면,
+$\mathcal{F}$는 $y$ 위에서 순수하다.
+\item $\mathcal{F}_{Y_1}$이 $y_1$ 위에서 보편적으로 순수하면,
+$\mathcal{F}$는 $y$ 위에서 보편적으로 순수하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+불순성이 평탄 밑변환을 따라 올라가기 때문에 참이다.
+Lemma \ref{spaces-flat-lemma-flat-ascent-impurity}를 보라. 예를 들어 (1)의 경우,
+% P09-ERR-0811
+임의의 불순성 $(T\to Y,t'\leadsto t,\xi)$, 즉
+$\mathcal{F}$의 $y$ 위 불순성으로서 $T\to Y$가 $t$에서
+준유한인 것은 위 보조정리에 의해 불순성
+$(T_1\to Y_1,t_1'\leadsto t_1,\xi_1)$을 낳는다.
+이는 $\mathcal{F}_1$의 불순성이며, 이 가군은 $\mathcal{F}$를
+$X_1=Y_1\times_YX$로 당긴 것이고 그 불순성은 $y_1$ 위에 있다.
+또한 $T_1$은 $Y_1\times_YT$ 위에서 에탈이다.
+에탈 사상은 국소 준유한이고 국소 준유한 사상들의 합성은
+국소 준유한이므로 $T_1\to Y_1$은 $t_1$에서 준유한이다
+(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-etale-locally-quasi-finite} and
+\ref{spaces-morphisms-lemma-composition-quasi-finite}).
+(2)도 마찬가지이다.
+\end{proof}
+\begin{lemma}
+\label{spaces-flat-lemma-supported-on-closed}
+Situation \ref{spaces-flat-situation-pre-pure}에서, $i : Z \to X$를 폐몰입이라
+하고, $\mathcal{F}=i_*\mathcal{G}$라고 가정하자. 여기서
+$\mathcal{G}$는 $Z$ 위의 어떤 유한형 준연접 층이다.
+그러면 $\mathcal{G}$가 $y$ 위에서 (보편적으로) 순수할
+필요충분조건은 $\mathcal{F}$가 $y$ 위에서 (보편적으로)
+순수한 것이다.
+\end{lemma}
+
+\begin{proof}
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-relative-weak-assassin-finite}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-proper-pure}
+Situation \ref{spaces-flat-situation-pre-pure}에서 다음이 성립한다.
+\begin{enumerate}
+\item $\mathcal{F}$의 지지가 $Y$ 위에서 proper이면,
+$\mathcal{F}$는 $Y$에 대해 보편적으로 순수하다.
+\item $f$가 proper이면 $\mathcal{F}$는 $Y$에 대해
+보편적으로 순수하다.
+\item $f$가 proper이면 $X$는 $Y$에 대해 보편적으로 순수하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+먼저 (1)을 (2)로 환원한다. 즉, $Z\subset X$를
+$\mathcal{F}$의 스킴론적 지지라 하자(Morphisms of Spaces,
+Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-support}).
+$i:Z\to X$를 대응하는 폐몰입이라 하고,
+$\mathcal{F}=i_*\mathcal{G}$라고 쓰자. 여기서
+$\mathcal{O}_Z$-가군 $\mathcal{G}$는 유한형이고 준연접이다.
+(1)의 경우에는 가정에
+의해 $Z\to Y$가 proper이다. 따라서 Lemma
+\ref{spaces-flat-lemma-supported-on-closed}에 의해 (1)은 (2)로 환원된다.
+
+\medskip\noindent
+$f$가 proper이라고 가정하자.
+$(g:T\to Y,t'\leadsto t,\xi)$를 $\mathcal{F}$의 $y$ 위
+불순성이라 하자. $f$가 proper이므로 보편적으로 닫혀 있다.
+따라서 $f_T:X_T\to T$는 닫힌 사상이다.
+$f_T(\xi)=t'$이므로 이는
+% P09-ERR-0812
+$t\in f(\overline{\{\xi\}})$를 함의하지만, 이는 모순이다.
+\end{proof}
+
+
+
+
+
+
+
+\section{평탄 유한형 가군}
+\label{spaces-flat-section-finite-type-flat}
+
+\noindent
+More on Flatness, Sections
+\ref{flat-section-finite-type-flat-I},
+\ref{flat-section-finite-type-flat-II}, and
+\ref{flat-section-finite-type-flat-III}와 비교하라.
+% P09-ERR-0813
+이 결과들의 대부분은 에탈 국소화를 통해 대수공간에 대한
+즉각적인 귀결을 준다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-existence-complete}
+$S$를 스킴이라 하자.
+$X\to Y$를 $S$ 위 대수공간들의 유한형 사상이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_X$-가군이라 하자.
+$y\in|Y|$를 한 점이라 하자. 에탈 사상
+$(Y',y')\to(Y,y)$가 존재하되 $Y'$은 아핀 스킴이고, 에탈 사상들
+$h_i:W_i\to X_{Y'}$, $i=1,\ldots,n$이 존재하여, 각
+$i$에 대하여 $\mathcal{F}_i/W_i/Y'$의 완전한 d\'evissage가
+$y'$ 위에서 존재한다. 여기서 $\mathcal{F}_i$는
+$\mathcal{F}$를 $W_i$로 당긴 것이며
+$|(X_{Y'})_{y'}|\subset\bigcup h_i(W_i)$이다.
+\end{lemma}
+
+\begin{proof}
+문제는 $Y$ 위에서 에탈 국소적이므로 $Y$가 아핀 스킴이라고
+가정할 수 있다. 그러면 $X$는 준콤팩트이므로 아핀 스킴 $X'$과
+전사 에탈 사상 $X'\to X$를 택할 수 있다. 이제
+More on Flatness, Lemma \ref{flat-lemma-existence-complete}을
+$X'\to Y$, $(X'\to Y)^*\mathcal{F}$, 그리고 $y$에 적용하면
+원하는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-open-in-fibre-where-flat}
+$S$를 스킴이라 하자.
+$f:X\to Y$를 $S$ 위 대수공간들의 사상으로서 국소 유한형인
+것이라 하자. $\mathcal{F}$를 유한형 준연접
+$\mathcal{O}_X$-가군이라 하자. $y\in|Y|$라 하고
+$F=f^{-1}(\{y\})\subset|X|$라 하자. 그러면 집합
+$$
+\{x \in F \mid \mathcal{F} \text{ flat over }Y\text{ at }x\}
+$$
+은 $F$에서 열린집합이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $V$, 점 $v\in V$, 그리고 에탈 사상 $V\to Y$를 택하되
+$v$를 $y$로 보내도록 하자. 스킴 $U$와 전사 에탈 사상
+$U\to V\times_YX$를 택하자. $|U_v|\to F$는 위상공간들의 열린
+연속 사상이다. 실제로 $|U|\to|X|$는 연속이고 열린 사상이다.
+따라서 스킴의 경우인 More on Flatness, Lemma
+\ref{flat-lemma-open-in-fibre-where-flat}에서 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-bourbaki-finite-type-general-base-at-point}
+$S$를 스킴이라 하자.
+$f:X\to Y$를 $S$ 위 대수공간들의 국소 유한형 사상이라 하자.
+$x\in|X|$의 상을 $y\in|Y|$라 하자.
+$\mathcal{F}$를 $X$ 위의 유한형 준연접 층이라 하고,
+$\mathcal{G}$를 $Y$ 위의 준연접 층이라 하자.
+$\mathcal{F}$가 $x$에서 $Y$ 위로 평탄이면
+$$
+x \in \text{WeakAss}_X(\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G})
+\Leftrightarrow
+y \in \text{WeakAss}_Y(\mathcal{G})
+\text{ and }
+x \in \text{Ass}_{X/Y}(\mathcal{F}).
+$$
+\end{lemma}
+
+\begin{proof}
+가환 도표
+$$
+\xymatrix{
+U \ar[d] \ar[r]_g & V \ar[d] \\
+X \ar[r]^f & Y
+}
+$$
+를 택하되, $U$와 $V$는 스킴이고 수직 화살표들은 전사
+에탈 사상이라 하자. $u\in U$를 택하되 $x$로 가도록 하자.
+$\mathcal{E}=\mathcal{F}|_U$ 및
+$\mathcal{H}=\mathcal{G}|_V$라 하자. $v\in V$를 $u$의
+상이라 하자. 그러면
+$x\in\text{WeakAss}_X(\mathcal{F}\otimes_{\mathcal{O}_X}
+f^*\mathcal{G})$일 필요충분조건은
+% P09-ERR-0814
+$u\in\text{WeakAss}_X(\mathcal{E}\otimes_{\mathcal{O}_X}
+g^*\mathcal{H})$인 것이다. 이는 Divisors on Spaces, Definition
+\ref{spaces-divisors-definition-weakly-associated}에서 따른다.
+마찬가지로 $y\in\text{WeakAss}_Y(\mathcal{G})$일 필요충분조건은
+$v\in\text{WeakAss}_V(\mathcal{H})$인 것이다.
+마지막으로 Divisors on Spaces, Definition
+\ref{spaces-divisors-definition-relative-weak-assassin}에 의해
+$x\in\text{Ass}_{X/Y}(\mathcal{F})$일 필요충분조건은
+$u\in\text{Ass}_{U_v}(\mathcal{E}|_{U_v})$인 것이다.
+$\mathcal{F}$가 $x$에서 평탄한 것과 $\mathcal{E}$가 $u$에서
+평탄한 것은 동치이다. Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-flat-module}을 보라.
+$g:U\to V$, $\mathcal{E}$, $\mathcal{H}$, $u$, $v$에 대한
+동치는 More on Flatness, Lemma
+\ref{flat-lemma-bourbaki-finite-type-general-base-at-point}이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-bourbaki-finite-type-general-base}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위 대수공간들의
+국소 유한형 사상이라 하자. $\mathcal{F}$를 $X$ 위의 유한형
+준연접 층으로서 $Y$ 위에서 평탄한 것이라 하고,
+$\mathcal{G}$를 $Y$ 위의 준연접 층이라 하자. 그러면
+$$
+\text{WeakAss}_X(\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G}) =
+\text{Ass}_{X/Y}(\mathcal{F}) \cap
+|f|^{-1}(\text{WeakAss}_Y(\mathcal{G}))
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-flat-lemma-bourbaki-finite-type-general-base-at-point}의
+즉각적인 귀결이다.
+\end{proof}
+
+\begin{theorem}
+\label{spaces-flat-theorem-finite-type-flat}
+$S$를 스킴이라 하자.
+$f:X\to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $X\to Y$는 국소 유한 표시이다.
+\item $\mathcal{F}$는 유한형 $\mathcal{O}_X$-가군이다.
+\item $Y$의 약한 연관점들의 집합은 $Y$에서 국소 유한이다.
+\end{enumerate}
+그러면
+$U=\{x\in|X|:\mathcal{F}\text{ flat at }x\text{ over }Y\}$는
+$X$에서 열려 있고, $\mathcal{F}|_U$는 유한 표시
+$\mathcal{O}_U$-가군이며 $Y$ 위에서 평탄하다.
+\end{theorem}
+
+\begin{proof}
+조건 (3)은 다음을 뜻한다. $V\to Y$가 전사 에탈 사상이고
+$V$가 스킴이면, $V$의 약한 연관점들은 스킴 $V$에서 국소
+유한이다. ($V$의 약한 연관점들은 Divisors on Spaces, Definition
+\ref{spaces-divisors-definition-weakly-associated}에 의해
+$Y$의 약한 연관점들의 역상과 정확히 같다.)
+이제 문제는 $X$와 $Y$ 위에서 에탈 국소적이므로 $X$와 $Y$가
+스킴이라고 가정할 수 있다. 따라서 More on Flatness, Theorem
+\ref{flat-theorem-finite-type-flat}에서 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-finite-type-flat-along-fibre-free-variant}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위 대수공간들의
+사상이라 하자. $\mathcal{F}$를 $X$ 위의 준연접 층이라 하자.
+$y\in|Y|$라 하고 $F=f^{-1}(\{y\})\subset|X|$라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $f$는 유한형이다.
+\item $\mathcal{F}$는 유한형이다.
+\item $\mathcal{F}$는 $Y$ 위에서 모든 $x\in F$에서 평탄하다.
+\end{enumerate}
+그러면 에탈 사상 $(Y',y')\to(Y,y)$가 존재하되
+$Y'$은 스킴이고, 대수공간들의 가환 도표
+$$
+\xymatrix{
+X \ar[d] & X' \ar[l]^g \ar[d] \\
+Y & \Spec(\mathcal{O}_{Y', y'}) \ar[l]
+}
+$$
+가 존재하여, $X'\to X\times_Y\Spec(\mathcal{O}_{Y',y'})$는
+에탈이고, $|X'_{y'}|\to F$는 전사이며, $X'$은 아핀이고,
+$\Gamma(X',g^*\mathcal{F})$는 자유
+$\mathcal{O}_{Y',y'}$-가군이다.
+\end{lemma}
+
+\begin{proof}
+에탈 사상 $(Y',y')\to(Y,y)$를 택하되
+$Y'$은 아핀 스킴이라 하자. 그러면 $X\times_YY'$은
+준콤팩트이다. 아핀 스킴 $X'$과 전사 에탈 사상
+$X'\to X\times_YY'$을 택하자.
+% P09-ERR-0815
+도표는 다음과 같다.
+$$
+\xymatrix{
+X \ar[d] & X' \ar[l]^g \ar[d] \\
+Y & Y' \ar[l]
+}
+$$
+그러면 $\mathcal{F}'=g^*\mathcal{F}$는 $Y'$ 위에서
+$X'_{y'}$의 모든 점에서 평탄하다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-module-flat}을 보라.
+따라서 스킴의 경우에 대한 보조정리(More on Flatness, Lemma
+\ref{flat-lemma-finite-type-flat-along-fibre-free-variant})를
+사상 $X'\to Y'$, 준연접 층 $g^*\mathcal{F}$, 그리고 점 $y'$에
+적용할 수 있다. 이로부터 에탈 사상
+$(Y'',y'')\to(Y',y')$와 가환 도표
+$$
+\xymatrix{
+X \ar[d] & X' \ar[l]^g \ar[d] & X'' \ar[l]^{g'} \ar[d] \\
+Y & Y' \ar[l] & \Spec(\mathcal{O}_{Y'', y''}) \ar[l]
+}
+$$
+를 얻는다. 원하는 결론을 위해 $(Y'',y'')\to(Y,y)$와
+$g\circ g':X''\to X$를 취하면 된다.
+\end{proof}
+
+\begin{theorem}
+\label{spaces-flat-theorem-check-flatness-at-associated-points}
+$S$를 스킴이라 하자.
+$f:X\to Y$를 $S$ 위 대수공간들의 국소 유한형 사상이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_X$-가군이라 하자.
+$x\in|X|$의 상을 $y\in|Y|$라 하자.
+$F=f^{-1}(\{y\})\subset|X|$라 하고 다음 조건들을 생각하자.
+\begin{enumerate}
+\item $\mathcal{F}$는 $x$에서 $Y$ 위로 평탄하다.
+\item 모든 $x'\in F\cap\text{Ass}_{X/Y}(\mathcal{F})$로서
+$x$로 특수화되는 것에 대하여 $\mathcal{F}$는 $x'$에서
+$Y$ 위로 평탄하다.
+\end{enumerate}
+항상 (2) $\Rightarrow$ (1)이다. $X$와 $Y$가 decent이면
+(1) $\Rightarrow$ (2)이다.
+\end{theorem}
+
+\begin{proof}
+(2)를 가정하자.
+스킴 $V$와 전사 에탈 사상 $V\to Y$를 택하자.
+스킴 $U$와 전사 에탈 사상 $U\to V\times_YX$를 택하자.
+$u\in U$를 택하되 $x$로 가도록 하자. $v\in V$를 $u$의 상이라
+하자. $\mathcal{F}|_U=(U\to X)^*\mathcal{F}$와 점 $u$에 대한
+대응 결과로부터 결론을 얻을 것이다.
+% P09-ERR-0816
+$U_v$.
+$\text{Ass}_{U/V}(\mathcal{F}|_U)\cap|U_v|$는
+$\text{Ass}_{U_v}(\mathcal{F}|_{U_v})$와 같고,
+$F\cap\text{Ass}_{X/Y}(\mathcal{F})$의 역상과도 같으므로
+이 환원이 가능하다. 사상 $|U_v|\to F$가 연속이므로
+$|U_v|$ 안의 특수화들은 $F$ 안의 특수화들로 사상된다.
+따라서 조건 (2)는 $U\to V$, $\mathcal{F}|_U$, 그리고 점
+$u$에 의해 상속된다. 이제 More on Flatness, Theorem
+\ref{flat-theorem-check-flatness-at-associated-points}을 적용하여
+(1)을 얻는다.
+
+\medskip\noindent
+$Y$가 decent이면 정의에 의해 $y$를 준콤팩트 단사 사상
+$\Spec(k)\to Y$로 나타낼 수 있다. Decent Spaces, Definition
+\ref{decent-spaces-definition-very-reasonable}을 보라.
+그러면 $F=|X_k|$이다. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-topology-fibre}를 보라.
+추가로 $X$가 decent이면(더 일반적으로 $f$가 decent이면,
+Decent Spaces, Definition
+\ref{decent-spaces-definition-relative-conditions}과
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-property-for-morphism-out-of-property}를
+보라), $X_y$도 decent 공간이다. 더욱이 $F$ 안의 특수화들은
+$U_v\to X_y$ 안의 특수화들로 올릴 수 있다. Decent Spaces,
+Lemma \ref{decent-spaces-lemma-decent-specialization}을 보라.
+이제 스킴의 경우에 역함의가 성립하므로 여기서도 성립함이
+분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-check-along-closed-fibre}
+$S$를 닫힌점 $s$를 갖는 국소 스킴이라 하자.
+$f:X\to S$를 대수공간 $X$에서 $S$로 가는 국소 유한형
+사상이라 하자. $\mathcal{F}$를 유한형 준연접
+$\mathcal{O}_X$-가군이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $\text{Ass}_{X/S}(\mathcal{F})$의 모든 점은 닫힌 올
+$X_s$의 한 점으로 특수화된다\footnote{예를 들어 $f$가
+유한형이고 $\mathcal{F}$가 $X_s$를 따라 순수하거나,
+$f$가 proper이면 이것이 성립한다.}.
+\item $\mathcal{F}$는 $S$ 위에서 $X_s$의 모든 점에서 평탄하다.
+\end{enumerate}
+그러면 $\mathcal{F}$는 $S$ 위에서 평탄하다.
+\end{lemma}
+
+\begin{proof}
+Theorem \ref{spaces-flat-theorem-check-flatness-at-associated-points}에 의해
+$\mathcal{F}$의 $S$ 위 상대 assassin의 점들에서
+평탄성을 확인하면 충분하다는 사실에서 즉시 따른다.
+\end{proof}
+
+
+
+
+\section{평탄 유한 표시 가군}
+\label{spaces-flat-section-finitely-presented-flat}
+
+\noindent
+이 절은 More on Flatness, Section
+\ref{flat-section-finitely-presented-flat}에 대응한다.
+
+\begin{proposition}
+\label{spaces-flat-proposition-finite-presentation-flat-at-point}
+$S$를 스킴이라 하자.
+$f:X\to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$\mathcal{F}$를 $X$ 위의 준연접 층이라 하자.
+$x\in|X|$의 상을 $y\in|Y|$라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $f$는 국소 유한 표시이다.
+\item $\mathcal{F}$는 유한 표시이다.
+\item $\mathcal{F}$는 $x$에서 $Y$ 위로 평탄하다.
+\end{enumerate}
+그러면 점이 지정된 스킴들의 가환 도표
+$$
+\xymatrix{
+(X, x) \ar[d] & (X', x') \ar[l]^g \ar[d] \\
+(Y, y) & (Y', y') \ar[l]
+}
+$$
+가 존재하며, 수평 화살표들은 에탈이고 $X'$, $Y'$은 아핀이며
+$\Gamma(X',g^*\mathcal{F})$는 사영
+$\Gamma(Y',\mathcal{O}_{Y'})$-가군이다.
+\end{proposition}
+
+\begin{proof}
+이와 같이 서술하면 명제는 스킴의 경우로 즉시 환원되며, 그 경우는
+More on Flatness, Proposition
+\ref{flat-proposition-finite-presentation-flat-at-point}이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-finite-presentation-flat-along-fibre}
+$S$를 스킴이라 하자.
+$f:X\to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$\mathcal{F}$를 $X$ 위의 준연접 층이라 하자.
+$y\in|Y|$라 하고 $F=f^{-1}(\{y\})\subset|X|$라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $f$는 유한 표시이다.
+\item $\mathcal{F}$는 유한 표시이다.
+\item $\mathcal{F}$는 $Y$ 위에서 모든 $x\in F$에서 평탄하다.
+\end{enumerate}
+그러면 대수공간들의 가환 도표
+$$
+\xymatrix{
+X \ar[d] & X' \ar[l]^g \ar[d] \\
+Y & Y' \ar[l]_h
+}
+$$
+가 존재하며, $h$와 $g$는 에탈이고, 점
+$y'\in|Y'|$가 존재하여 $y$로 가며, $F\subset g(|X'|)$이고,
+대수공간 $X'$, $Y'$은 아핀이며,
+$\Gamma(X',g^*\mathcal{F})$는 사영
+$\Gamma(Y',\mathcal{O}_{Y'})$-가군이다.
+\end{lemma}
+
+\begin{proof}
+이와 같이 서술하면 보조정리는 스킴의 경우로 즉시 환원되며,
+그 경우는 More on Flatness, Lemma
+\ref{flat-lemma-finite-presentation-flat-along-fibre}이다.
+\end{proof}
+
+
+
+
+\section{순수성의 한 판정법}
+\label{spaces-flat-section-criterion-purity}
+
+\noindent
+이 절은 More on Flatness, Section
+\ref{flat-section-criterion-purity}에 대응한다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-associated-point-specializes}
+$S$를 스킴이라 하자. $X$를 $S$ 위 국소 유한형 decent
+대수공간이라 하자. $\mathcal{F}$를 유한형 준연접
+$\mathcal{O}_X$-가군이라 하자.
+% P09-ERR-0817
+$s\in S$이고 $\mathcal{F}$가 $S$ 위에서 $X_s$의 모든 점에서
+평탄이라고 하자. $x'\in\text{Ass}_{X/S}(\mathcal{F})$라 하자.
+$\{x'\}$의 $|X|$ 안에서의 폐포가 $|X_s|$와 만나면, 이 폐포는
+$\text{Ass}_{X/S}(\mathcal{F})\cap|X_s|$와도 만난다.
+\end{lemma}
+
+\begin{proof}
+$|X_s|\subset|X|$는 $|X|$의 점들 가운데
+% P09-ERR-0817
+$s\in S$ 위에 놓이는 것들의 집합이다. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-topology-fibre}를 보라.
+$t\in|X_s|$를 $x'$의 $|X|$ 안 특수화라 하자.
+아핀 스킴 $U$, 점 $u\in U$, 그리고 에탈 사상
+$\varphi:U\to X$를 택하되 $u$를 $t$로 보내도록 하자.
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-specialization}에 의해
+특수화 $u'\leadsto u$를 택하되 $u'$가 $x'$로 가도록 할 수 있다.
+% P09-ERR-0818
+$g=f\circ\varphi$라 하자.
+$s'=g(u')=f(x')$가 $s$로 특수화됨을 관찰하라.
+$\text{Ass}_{X/S}(\mathcal{F})$의 정의에 의해
+$u'\in\text{Ass}_{U/S}(\varphi^*\mathcal{F})$이다.
+이 보조정리의 스킴 버전인 More on Flatness, Lemma
+\ref{flat-lemma-associated-point-specializes}에 의해
+특수화 $u'\leadsto u$가 존재하며, 이에 대하여
+$u\in\text{Ass}_{U_s}(\varphi^*\mathcal{F}_s)
+=\text{Ass}_{U/S}(\varphi^*\mathcal{F})\cap U_s$이다. 따라서
+$x=\varphi(u)\in\text{Ass}_{X/S}(\mathcal{F})$는 $s$ 위에
+놓이며, 증명이 끝났다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-contains-relative-ass-after-base-change}
+$Y$를 스킴 $S$ 위의 대수공간이라 하자.
+$g:X'\to X$를 $Y$ 위 대수공간들의 사상이라 하고,
+$X$는 $Y$ 위 국소 유한형이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$\text{Ass}_{X/Y}(\mathcal{F})\subset g(|X'|)$이면,
+임의의 사상 $Z\to Y$에 대하여
+$\text{Ass}_{X_Z/Z}(\mathcal{F}_Z)\subset g_Z(|X'_Z|)$이다.
+\end{lemma}
+
+\begin{proof}
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 사상
+$|X'_Z|\to|X_Z|\times_{|X|}|X'|$은 전사이다. 실제로
+$X'_Z$는 $X_Z\times_XX'$와 같다. Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-base-change-relative-assassin}에 의해
+사상 $|X_Z|\to|X|$는
+$\text{Ass}_{X_Z/Z}(\mathcal{F}_Z)$를
+$\text{Ass}_{X/Y}(\mathcal{F})$ 안으로 보낸다.
+따라서 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-pure-on-top}
+$Y$를 스킴 $S$ 위의 대수공간이라 하자.
+$g:X'\to X$를 $Y$ 위 대수공간들의 에탈 사상이라 하자.
+구조 사상 $X'\to Y$와 $X\to Y$가 decent이고 유한형이라고
+가정하자. $\mathcal{F}$를 유한형 준연접
+$\mathcal{O}_X$-가군이라 하자. $y\in|Y|$라 하고,
+% P09-ERR-0819
+$F=f^{-1}(\{y\})\subset|X|$라 하자.
+\begin{enumerate}
+\item $\text{Ass}_{X/Y}(\mathcal{F})\subset g(|X'|)$이고
+$g^*\mathcal{F}$가 $y$ 위에서 (보편적으로) 순수하면,
+$\mathcal{F}$는 $y$ 위에서 (보편적으로) 순수하다.
+\item $\mathcal{F}$가 $y$ 위에서 순수하고,
+$g(|X'|)$가 $F$를 포함하며, $Y$가 닫힌점 $y$를 갖는
+아핀 국소 스킴이면
+$\text{Ass}_{X/Y}(\mathcal{F})\subset g(|X'|)$이다.
+\item $\mathcal{F}$가 $y$ 위에서 순수하고,
+$\mathcal{F}$가 $F$의 모든 점에서 평탄하며,
+$g(|X'|)$가 $\text{Ass}_{X/Y}(\mathcal{F})\cap F$를
+포함하고, $Y$가 닫힌점 $y$를 갖는 아핀 국소 스킴이면
+$\text{Ass}_{X/Y}(\mathcal{F})\subset g(|X'|)$이다.
+% P09-ERR-0820
+\item 여기에 더 추가하라.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X\to Y$와 $X'\to Y$에 대한 가정은 Sections
+\ref{spaces-flat-section-impure} and \ref{spaces-flat-section-pure}의 내용을 이 사상들과
+층 $\mathcal{F}$ 및 $g^*\mathcal{F}$에 적용할 수 있음을 보장한다.
+$g$가 에탈이므로 $\text{Ass}_{X'/Y}(g^*\mathcal{F})$는
+$\text{Ass}_{X/Y}(\mathcal{F})$의 역상이며, 밑변환 뒤에도
+같은 사실이 성립한다.
+
+\medskip\noindent
+(1)을 증명하자.
+$\text{Ass}_{X/Y}(\mathcal{F})\subset g(|X'|)$라고 가정하자.
+$(T\to Y,t'\leadsto t,\xi)$가 $\mathcal{F}$의 $y$ 위
+불순성이라고 하자. Lemma
+\ref{spaces-flat-lemma-contains-relative-ass-after-base-change}에 의해
+$\text{Ass}_{X_T/T}(\mathcal{F}_T)\subset g_T(|X'_T|)$이므로,
+점 $\xi'\in|X'_T|$을 택하여 $\xi$로 가게 할 수 있다.
+위의 사실에 의해 $(T\to Y,t'\leadsto t,\xi')$는
+$g^*\mathcal{F}$의
+% P09-ERR-0821
+$y'$ 위 불순성이다. 이로써 (1)이 성립한다.
+
+\medskip\noindent
+(2)를 증명하자. $g(|X'|)$가 $|X|$에서 열려 있고,
+순수성에 의해 $\text{Ass}_{X/Y}(\mathcal{F})$의 모든 점이
+$F$의 한 점으로 특수화된다는 사실에서 따른다.
+
+\medskip\noindent
+(3)을 증명하자. $g(|X'|)$가 $|X|$에서 열려 있고,
+순수성과 Lemma \ref{spaces-flat-lemma-associated-point-specializes}에 의해
+$\text{Ass}_{X/Y}(\mathcal{F})$의 모든 점이
+$\text{Ass}_{X/Y}(\mathcal{F})\cap F$의 한 점으로
+특수화된다는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-finite-type-flat-pure-along-fibre-is-universal}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위 대수공간들의
+사상이라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. $y\in|Y|$라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $f$는 decent이고 유한형이다.
+\item $\mathcal{F}$는 유한형이다.
+\item $\mathcal{F}$는 $Y$ 위에서 $y$ 위에 놓이는 모든 점에서
+평탄하다.
+\item $\mathcal{F}$는 $y$ 위에서 순수하다.
+\end{enumerate}
+그러면 $\mathcal{F}$는 $y$ 위에서 보편적으로 순수하다.
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-0822
+사상 $\Spec(\mathcal{O}_{Y,\overline{y}})\to Y$를 생각하자.
+이는 엄밀 헨젤 국소환의 스펙트럼에서 오는 평탄 사상이며 닫힌점을
+$y$로 보낸다. Lemma \ref{spaces-flat-lemma-flat-descend-pure}에 의해
+다음 문단에서 서술하는 경우로 환원된다.
+
+\medskip\noindent
+$Y$가 엄밀 헨젤 국소환 $R$의 스펙트럼이며 닫힌점이 $y$라고
+가정하자. Lemma
+\ref{spaces-flat-lemma-finite-type-flat-along-fibre-free-variant}에 의해
+에탈 사상 $g:X'\to X$가 존재하며,
+$g(|X'|)\supset|X_y|$이고 $X'$은 아핀이며
+$\Gamma(X',g^*\mathcal{F})$는 자유 $R$-가군이다.
+그러면 $g^*\mathcal{F}$는 $Y$에 대해
+보편적으로 순수하다. More on Flatness, Lemma
+\ref{flat-lemma-affine-locally-projective-pure}를 보라.
+따라서 Lemma \ref{spaces-flat-lemma-pure-on-top}의 (1)에 의해
+$g(|X'|)$가 $\text{Ass}_{X/Y}(\mathcal{F})$를 포함함을
+보이면 충분하다. 이는 다시 Lemma \ref{spaces-flat-lemma-pure-on-top}의
+(2)에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-finite-type-flat-pure-is-universal}
+$S$를 스킴이라 하자.
+$f:X\to Y$를 $S$ 위 대수공간들의 decent 유한형 사상이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{F}$가 $Y$ 위에서 평탄하다고 가정하자. 이 경우
+$\mathcal{F}$가 $Y$에 대해 순수할 필요충분조건은
+$\mathcal{F}$가 $Y$에 대해 보편적으로 순수한 것이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-flat-lemma-finite-type-flat-pure-along-fibre-is-universal}와
+정의들의 즉각적인 귀결이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-universally-separating}
+$Y$를 스킴 $S$ 위의 대수공간이라 하자.
+$g:X'\to X$를 $Y$ 위 대수공간들의 평탄 사상이라 하고,
+$X$는 $Y$ 위 국소 유한형이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_X$-가군으로서
+$Y$ 위에서 평탄한 것이라 하자.
+$\text{Ass}_{X/Y}(\mathcal{F})\subset g(|X'|)$이면 정준 사상
+$$
+\mathcal{F} \longrightarrow g_*g^*\mathcal{F}
+$$
+은 단사이고, 임의의 밑변환 뒤에도 단사로 남는다.
+\end{lemma}
+
+\begin{proof}
+마지막 주장은
+$\mathcal{F}_Z\to(g_Z)_*g_Z^*\mathcal{F}_Z$가 임의의 사상
+$Z\to Y$에 대하여 단사라는 뜻이다.
+상대 assassin에 대한 가정은 밑변환으로 보존되므로(Lemma
+\ref{spaces-flat-lemma-contains-relative-ass-after-base-change}),
+표시된 화살표의 단사성만 증명하면 충분하다.
+
+\medskip\noindent
+$\mathcal{K}=\Ker(\mathcal{F}\to g_*g^*\mathcal{F})$라 하자.
+목표는 $\mathcal{K}=0$을 증명하는 것이다.
+이를 위해 $\text{WeakAss}_X(\mathcal{K})=\emptyset$임을
+보이면 충분하다. Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-weakly-ass-zero}를 보라.
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-ses-weakly-ass}에 의해
+$\text{WeakAss}_X(\mathcal{K})\subset
+\text{WeakAss}_X(\mathcal{F})$이다.
+$\mathcal{F}$가 평탄하므로 Lemma
+\ref{spaces-flat-lemma-bourbaki-finite-type-general-base}에서
+$\text{WeakAss}_X(\mathcal{F})\subset
+\text{Ass}_{X/Y}(\mathcal{F})$를 얻는다.
+가정에 의해 임의의 점 $x$로서
+$\text{Ass}_{X/Y}(\mathcal{F})$에 속하는 것은 어떤
+$x'\in|X'|$의 상이다. $g$가 평탄이므로 국소환 사상
+$\mathcal{O}_{X,\overline{x}}\to
+\mathcal{O}_{X',\overline{x}'}$은 충실히 평탄하다. 따라서 사상
+$$
+\mathcal{F}_{\overline{x}}
+\longrightarrow
+(g^*\mathcal{F})_{\overline{x}'} =
+\mathcal{F}_{\overline{x}} \otimes_{\mathcal{O}_{X, \overline{x}}}
+\mathcal{O}_{X', \overline{x}'}
+$$
+은 단사이다(Algebra, Lemma
+\ref{algebra-lemma-faithfully-flat-universally-injective}를 보라).
+표시된 화살표가
+$\mathcal{F}_{\overline{x}}\to
+(g_*g^*\mathcal{F})_{\overline{x}}$를 통해 분해되므로
+$\mathcal{K}_{\overline{x}}=0$이다. 따라서 $x$는
+$\mathcal{K}$의 약한 연관점일 수 없으며, 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{평탄화 함자}
+\label{spaces-flat-section-F-zero}
+
+\noindent
+이 절은 More on Flatness, Section
+\ref{flat-section-flattening-functors}에 대응한다.
+처음 읽을 때에는 이 절을 건너뛸 것을 독자에게 권한다.
+
+\begin{situation}
+\label{spaces-flat-situation-iso}
+$S$를 스킴이라 하자.
+$f:X\to B$를 $S$ 위 대수공간들의 사상이라 하자.
+$u:\mathcal{F}\to\mathcal{G}$를 준연접
+$\mathcal{O}_X$-가군들의 준동형이라 하자.
+임의의 스킴 $T$가 $B$ 위에 주어지면
+$u_T:\mathcal{F}_T\to\mathcal{G}_T$로 $u$의 $T$로의
+밑변환을 나타내겠다. 다시 말해 $u_T$는 $u$의 당김으로서
+사영 사상 $X_T=X\times_BT\to X$를 통해 얻어진 것이다.
+이 상황에서는 함자
+\begin{equation}
+\label{spaces-flat-equation-iso}
+F_{iso} : (\Sch/B)^{opp} \longrightarrow \textit{Sets}, \quad
+T \longrightarrow \left\{
+\begin{matrix}
+\{*\} & \text{만일 }u_T\text{가 동형이면}, \\
+\emptyset & \text{그렇지 않으면}
+\end{matrix}
+\right.
+\end{equation}
+를 생각할 수 있다. 변형 $F_{inj}$, $F_{surj}$, $F_{zero}$도
+있으며, 여기서는 $u_T$가 각각 단사, 전사, 또는 영이기를 요구한다.
+\end{situation}
+
+\noindent
+Situation \ref{spaces-flat-situation-iso}에서 때로는 함자
+$F_{iso}$, $F_{inj}$, $F_{surj}$, $F_{zero}$를 함자
+$(\Sch/S)^{opp}\to\textit{Sets}$로 생각하고, 각각 사상
+$F_{iso}\to B$, $F_{inj}\to B$, $F_{surj}\to B$,
+$F_{zero}\to B$를 갖추었다고 본다.
+즉, $T$가 $S$ 위의 스킴이면 원소 $h\in F_{iso}(T)$는
+사상 $h:T\to B$로서 $u$를 $h$를 통해 밑변환한 것이
+동형인 것이다.
+특히 $F_{iso}$가 대수공간이라고 말할 때에는 대응하는 함자
+$(\Sch/S)^{opp}\to\textit{Sets}$가 대수공간이라는 뜻이다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-iso-sheaf}
+Situation \ref{spaces-flat-situation-iso}에서 함자
+$F_{iso}$, $F_{inj}$, $F_{surj}$, $F_{zero}$ 각각은 fpqc
+위상에 대한 층 조건을 만족한다.
+\end{lemma}
+
+\begin{proof}
+$\{T_i\to T\}_{i\in I}$를 $B$ 위 스킴들의 fpqc 덮개라 하자.
+% P09-ERR-0823
+$X_i=X_{T_i}=X\times_ST_i$ 및 $u_i=u_{T_i}$라 하자.
+$\{X_i\to X_T\}_{i\in I}$는 $X_T$의 fpqc 덮개이다.
+Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fpqc}를 보라. 특히 모든
+$x\in|X_T|$에 대하여 어떤 $i\in I$와 어떤
+$x_i\in|X_i|$가 존재하며, 후자는 $x$로 간다.
+% P09-ERR-0824
+사상
+$\mathcal{O}_{X_T,\overline{x}}\to
+\mathcal{O}_{X_i,\overline{x_i}}$은 평탄하고, 따라서 충실히
+평탄이다(Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-flat}을 보라).
+그러므로 $(u_i)_{x_i}$가 단사, 전사, 전단사, 또는 영일
+필요충분조건은 $(u_T)_x$가 각각 그러한 것이다.
+따라서 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-iso-go-up}
+Situation \ref{spaces-flat-situation-iso}에서 $X'\to X$를 대수공간들의
+평탄 사상이라 하자. $u':\mathcal{F}'\to\mathcal{G}'$로
+$u$의 $X'$로의 당김을 나타내자.
+$F'_{iso}$, $F'_{inj}$, $F'_{surj}$, $F'_{zero}$로
+$\Sch/B$ 위의 함자들 가운데 $u'$에 결부된 것들을 나타내자.
+\begin{enumerate}
+\item $\mathcal{G}$가 유한형이고 $|X'|\to|X|$의 상이
+$\mathcal{G}$의 지지를 포함하면
+$F_{surj}=F'_{surj}$이고 $F_{zero}=F'_{zero}$이다.
+\item $\mathcal{F}$가 유한형이고 $|X'|\to|X|$의 상이
+$\mathcal{F}$의 지지를 포함하면
+$F_{inj}=F'_{inj}$이고 $F_{zero}=F'_{zero}$이다.
+\item $\mathcal{F}$와 $\mathcal{G}$가 유한형이고
+$|X'|\to|X|$의 상이 $\mathcal{F}$와 $\mathcal{G}$의
+지지들을 포함하면 $F_{iso}=F'_{iso}$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$v:\mathcal{H}\to\mathcal{E}$를 대수공간 $Y$ 위 준연접
+가군들의 사상이라 하고, $\varphi:Y'\to Y$를 대수공간들의
+전사 평탄 사상이라 하자. 그러면 $v$가 동형, 단사, 전사,
+또는 영일 필요충분조건은 $\varphi^*v$가 각각 그러한 것이다.
+실제로 모든 $y\in|Y|$에 대하여 어떤 $y'\in|Y'|$가 존재하며
+국소환 사상
+$\mathcal{O}_{Y,\overline{y}}\to
+\mathcal{O}_{Y',\overline{y'}}$은 충실히 평탄이다
+(Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-flat}을 보라).
+물론 단사성이나 영 사상 여부를 확인하려면 $\mathcal{H}$의
+지지 안의 점들만 보면 충분하고, 전사성을 확인하려면
+$\mathcal{E}$의 지지 안의 점들만 보면 충분하다.
+더욱이 보조정리의 명제와 같은 유한형 가정 아래에서는 지지를
+취하는 것이 밑변환과 가환한다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-support-finite-type}을 보라.
+따라서 보조정리는 명백하다.
+\end{proof}
+
+\noindent
+유한형 준연접 가군의 스킴론적 지지는 Morphisms of Spaces,
+Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-support}에서
+정의했음을 상기하자.
+
+\begin{lemma}
+\label{spaces-flat-lemma-iso-limits}
+Situation \ref{spaces-flat-situation-iso}에서 다음이 성립한다.
+\begin{enumerate}
+\item $\mathcal{G}$가 유한형이고 $\mathcal{G}$의 스킴론적
+지지가 $B$ 위에서 준콤팩트이면 $F_{surj}$는 극한을 보존한다.
+% P09-ERR-0825
+\item $\mathcal{F}$가 유한형이고 $\mathcal{F}$의 스킴론적
+지지가 $B$ 위에서 준콤팩트이면 $F_{zero}$는 극한을 보존한다.
+\item $\mathcal{F}$가 유한형이고 $\mathcal{G}$가 유한 표시이며,
+$\mathcal{F}$와 $\mathcal{G}$의 스킴론적 지지들이 $B$ 위에서
+준콤팩트이면 $F_{iso}$는 극한을 보존한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 증명하자. $i:Z\to X$를 $\mathcal{G}$의 스킴론적
+지지라 하고, $\mathcal{G}$를 $Z$ 위의 유한형 준연접 가군으로
+생각하자. $X$를 $Z$로 바꾸고 $u$를 사상
+$i^*\mathcal{F}\to\mathcal{G}$로 바꿀 수 있다(세부사항은
+생략한다). 따라서 $f$가 준콤팩트이고 $\mathcal{G}$가
+유한형이라고 가정할 수 있다.
+$T=\lim_{i\in I}T_i$를 아핀 $B$-스킴들의 유향 극한이라 하고
+$u_T$가 전사라고 가정하자.
+% P09-ERR-0823
+$X_i=X_{T_i}=X\times_ST_i$ 및
+$u_i=u_{T_i}:\mathcal{F}_i=\mathcal{F}_{T_i}
+\to\mathcal{G}_i=\mathcal{G}_{T_i}$라 하자.
+(1)을 증명하려면 $u_i$가 전사인 어떤 $i$가 있음을 보여야
+한다. $0\in I$를 택하고 $I$를 $\{i\mid i\geq0\}$로 바꾸자.
+$f$가 준콤팩트이므로 $X_0$는 준콤팩트이다.
+따라서 전사 에탈 사상 $\varphi_0:W_0\to X_0$를 택하되
+$W_0$가 아핀 스킴이 되게 할 수 있다.
+$W=W_0\times_{T_0}T$ 및
+$W_i=W_0\times_{T_0}T_i$ ($i\geq0$)라 하자. 이들은 아핀
+스킴이고,
+% P09-ERR-0832
+전사 에탈 사상들 $\varphi:W\to X_T$와
+$\varphi_i:W_i\to X_i$를 갖는다. $W=\lim W_i$임을 주목하라.
+따라서 $\varphi^*u_T$는 전사이고,
+$\varphi_i^*u_i$가 전사인 어떤 $i$가 있음을 증명하면 충분하다.
+이로써 문제는 아핀의 경우인 Algebra, Lemma
+\ref{algebra-lemma-module-map-property-in-colimit}의 (2)로
+환원되었다.
+
+\medskip\noindent
+(2)를 증명하자. $\mathcal{F}$가 유한형이고 스킴론적 지지
+% P09-ERR-0826
+$Z\subset B$가 $B$ 위에서 준콤팩트라고 가정하자.
+$T=\lim_{i\in I}T_i$를 아핀 $B$-스킴들의 유향 극한이라 하고
+$u_T$가 영이라고 가정하자.
+$X_i=T_i\times_BX$라 하고 $u_i:\mathcal{F}_i\to\mathcal{G}_i$로
+당김을 나타내자. $0\in I$를 택하고 $I$를
+$\{i\mid i\geq0\}$로 바꾸자. $Z_0=Z\times_XX_0$라 하자.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-support-finite-type}에 의해
+% P09-ERR-0827
+$\mathcal{F}_i$의 지지는 $|Z_0|$이다. $|Z_0|$가
+준콤팩트이므로 아핀 스킴 $W_0$와 에탈 사상
+$W_0\to X_0$를 찾아
+$|Z_0|\subset\Im(|W_0|\to|X_0|)$이 되게 할 수 있다.
+$W=W_0\times_{T_0}T$ 및
+$W_i=W_0\times_{T_0}T_i$ ($i\geq0$)라 하자.
+이들은 아핀 스킴이고 에탈 사상
+$\varphi:W\to X_T$ 및 $\varphi_i:W_i\to X_i$를 갖는다.
+$W=\lim W_i$이고, $\mathcal{F}_T$ 및 $\mathcal{F}_i$의
+지지는 각각 $|W|\to|X_T|$ 및 $|W_i|\to|X_i|$의 상 안에
+들어 있음을 주목하라.
+% P09-ERR-0828
+이제 $\varphi^*u_T$는 단사이고,
+$\varphi_i^*u_i$가 단사인 어떤 $i$가 있음을 증명하면 충분하다.
+이로써 문제는 아핀의 경우인 Algebra, Lemma
+\ref{algebra-lemma-module-map-property-in-colimit}의 (1)로
+환원되었다.
+
+\medskip\noindent
+(3)을 증명하자. 앞의 두 문단과 완전히 같은 방법으로
+Algebra, Lemma
+\ref{algebra-lemma-module-map-property-in-colimit}의 (3)을
+사용하여 증명할 수 있다. 다음과 같이 (1)과 (2)에서 이를
+도출할 수도 있다. $T=\lim_{i\in I}T_i$를 아핀 $B$-스킴들의
+유향 극한이라 하고 $u_T$가 동형이라고 가정하자.
+(1)에 의해 어떤 $0\in I$가 존재하여 $u_{T_0}$가 전사이다.
+$\mathcal{K}=\Ker(u_{T_0})$라 하고 준연접 가군들의 사상
+$v:\mathcal{K}\to\mathcal{F}_{T_0}$를 생각하자.
+$i\geq0$일 때, 밑변환 $v_{T_i}$가 영일 필요충분조건은
+$u_i$가 동형인 것이다. 더욱이 $v_T$는 영이다.
+$\mathcal{G}_{T_0}$가 유한 표시이고,
+$\mathcal{F}_{T_0}$가 유한형이며 $u_{T_0}$가 전사이므로
+$\mathcal{K}$가 유한형임을 얻는다(Modules on Sites, Lemma
+\ref{sites-modules-lemma-kernel-surjection-finite-onto-finite-presentation}).
+$\mathcal{K}$의 지지는 $\mathcal{F}_{T_0}$의 지지 안에
+들어 있고, 후자는 $T_0$ 위에서 준콤팩트임이 명백하다.
+따라서 (2)를 적용하면 $v_{T_i}$가 영인 어떤 $i$가
+있음을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-relate-zero-iso}
+Situation \ref{spaces-flat-situation-iso}에서 완전열
+$$
+\mathcal{F} \xrightarrow{u} \mathcal{G} \xrightarrow{v} \mathcal{H} \to 0
+$$
+이 주어졌다고 하자. 자명한 표기 아래
+$F_{v,iso}=F_{u,zero}$이다.
+\end{lemma}
+
+\begin{proof}
+당김은 오른쪽 완전이므로
+$\mathcal{F}_T\to\mathcal{G}_T\to\mathcal{H}_T\to0$은
+모든 스킴 $T$로서 $B$ 위에 있는 것에 대하여 완전하다. 따라서
+% P09-ERR-0829
+$u_T$가 전사일 필요충분조건은 $v_T$가 동형인 것이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-relate-zero-affine}
+Situation \ref{spaces-flat-situation-iso}에서 아핀 사상 $i:Z\to X$와
+준연접 $\mathcal{O}_Z$-가군 $\mathcal{H}$가 주어져
+$\mathcal{G}=i_*\mathcal{H}$라고 하자.
+$v:i^*\mathcal{F}\to\mathcal{H}$를 $u$의 수반 사상이라 하자.
+그러면 다음이 성립한다.
+\begin{enumerate}
+\item $F_{v,zero}=F_{u,zero}$이다.
+\item $i$가 폐몰입이면 $F_{v,surj}=F_{u,surj}$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$T$를 $B$ 위의 스킴이라 하자. $i_T:Z_T\to X_T$로 $i$의
+밑변환을 나타내고, $\mathcal{H}_T$로 $\mathcal{H}$의
+$Z_T$로의 당김을 나타내자.
+$(i^*\mathcal{F})_T=i_T^*\mathcal{F}_T$이고
+$i_{T,*}\mathcal{H}_T=(i_*\mathcal{H})_T$임을 관찰하라.
+첫 번째 등식은 당김의 가환성에서, 두 번째 등식은
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-affine-base-change}에서 따른다.
+따라서 $u_T$와 $v_T$도 수반 사상이다.
+그러므로 $u_T=0$일 필요충분조건은 $v_T=0$인 것이며, 이는
+(1)을 증명한다. (2)의 경우 $u_T$가 전사일 필요충분조건은
+$v_T$가 전사인 것이다. 실제로 $u_T$는
+$$
+\mathcal{F}_T \to
+i_{T, *}i_T^*\mathcal{F}_T \xrightarrow{i_{T, *}v_T} i_{T, *}\mathcal{H}_T
+$$
+로 분해되고, $i_{T,*}$는 $Z_T$ 위 준연접 가군들의 범주를
+준연접 $\mathcal{O}_{X_T}$-가군들의 범주 안에 완전충실하게
+매장하는 완전 함자이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-i-star-equivalence}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-relate-zero-affine-push}
+Situation \ref{spaces-flat-situation-iso}에서 아핀 사상 $g:X\to X'$가
+주어졌다고 하자.
+% P09-ERR-0830
+$u'=f_*u:f_*\mathcal{F}\to f_*\mathcal{G}$라 하자.
+그러면 $F_{u,iso}=F_{u',iso}$,
+$F_{u,inj}=F_{u',inj}$, $F_{u,surj}=F_{u',surj}$, 그리고
+$F_{u,zero}=F_{u',zero}$이다.
+\end{lemma}
+
+\begin{proof}
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-affine-base-change}에 의해
+$g_{T,*}u_T=u'_T$이다. 더욱이
+% P09-ERR-0831
+$g_{T,*}:\QCoh(\mathcal{O}_{X_T})\to\QCoh(\mathcal{O}_X)$는
+충실하고 완전하며 동형, 단사 사상, 전사 사상을 반영하는
+함자이다.
+\end{proof}
+
+\begin{situation}
+\label{spaces-flat-situation-flat}
+$S$를 스킴이라 하자.
+$f:X\to Y$를 $S$ 위 대수공간들의 사상이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+임의의 스킴 $T$가 $Y$ 위에 주어지면 $\mathcal{F}_T$로
+$\mathcal{F}$의 $T$로의 밑변환을 나타내겠다. 다시 말해
+$\mathcal{F}_T$는 $\mathcal{F}$의 당김으로서 사영 사상
+$X_T=X\times_YT\to X$를 통해 얻어진 것이다.
+평탄 가군의 밑변환은 평탄하므로
+함자
+\begin{equation}
+\label{spaces-flat-equation-flat}
+F_{flat} : (\Sch/Y)^{opp} \longrightarrow \textit{Sets}, \quad
+T \longrightarrow \left\{
+\begin{matrix}
+\{*\} & \text{if } \mathcal{F}_T \text{ is flat over }T, \\
+\emptyset & \text{else.}
+\end{matrix}
+\right.
+\end{equation}
+를 얻는다.
+\end{situation}
+
+\noindent
+Situation \ref{spaces-flat-situation-flat}에서 때로는 $F_{flat}$을 함자
+$(\Sch/S)^{opp}\to\textit{Sets}$로 생각하고, 이 함자에는 사상
+$F_{flat}\to Y$가 주어져 있다고 본다.
+즉, $T$가 $S$ 위의 스킴이면 원소 $h\in F_{flat}(T)$는
+사상 $h:T\to Y$로서 $\mathcal{F}$의 $h$를 통한 밑변환이
+$T$ 위에서 평탄인 것이다. 특히 $F_{flat}$이 대수공간이라고
+말할 때에는 대응하는 함자
+$(\Sch/S)^{opp}\to\textit{Sets}$가 대수공간이라는 뜻이다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-flat}
+Situation \ref{spaces-flat-situation-flat}에서 다음이 성립한다.
+\begin{enumerate}
+\item 함자 $F_{flat}$은 fpqc 위상에 대한 층 조건을 만족한다.
+\item $f$가 준콤팩트이고 국소 유한 표시이며
+$\mathcal{F}$가 유한 표시이면, 함자 $F_{flat}$은 극한을
+보존한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 다음 명제에서 따른다. $T'\to T$가 $Y$ 위 대수공간들의
+전사 평탄 사상이면, $\mathcal{F}_{T'}$가 $T'$ 위에서
+평탄할 필요충분조건은 $\mathcal{F}_T$가 $T$ 위에서 평탄한
+것이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-module-flat}를 보라.
+$f$가 준분리이기도 하면(즉, $f$가 유한 표시이면) (2)는
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-descend-flat}에서 따른다.
+일반적인 경우에는 먼저 밑이 아핀인 경우로 환원하고, 이어
+$X$를 유한 개의 아핀으로 덮어 준분리인 경우로 환원한다.
+세부사항은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{사상을 영으로 만들기}
+\label{spaces-flat-section-zero-map}
+
+\noindent
+이 절에 대응하는 스킴에 관한 장에는 유사한 절이 없다.
+
+\begin{situation}
+\label{spaces-flat-situation-somewhat-closed}
+$S=\Spec(R)$를 아핀 스킴이라 하자. $X$를 $S$ 위의 대수공간이라
+하자. $u:\mathcal{F}\to\mathcal{G}$를 준연접
+$\mathcal{O}_X$-가군들의 사상이라 하자.
+$\mathcal{G}$가 $S$ 위에서 평탄이라고 가정하자.
+\end{situation}
+
+\begin{lemma}
+\label{spaces-flat-lemma-F-zero-somewhat-closed}
+Situation \ref{spaces-flat-situation-somewhat-closed}에서, $T\to S$를
+스킴들의 준콤팩트 사상으로서 밑변환 $u_T$가 영인 것이라 하자.
+그러면 폐부분스킴 $Z\subset S$가 존재하여
+(a) $T\to S$는 $Z$를 통해 분해되고,
+(b) 밑변환 $u_Z$는 영이다. $\mathcal{F}$가 유한형
+$\mathcal{O}_X$-가군이고 $\mathcal{F}$의 스킴론적 지지가
+준콤팩트이면 $Z\to S$를 유한 표시로 택할 수 있다.
+\end{lemma}
+
+\begin{proof}
+$U\to X$를 대수공간들의 전사 에탈 사상이라 하되,
+$U=\coprod U_i$는 아핀 스킴들의 분리합이라 하자
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-cover-by-union-affines}를 보라).
+Lemma \ref{spaces-flat-lemma-iso-go-up}에 의해 $X$를 $U$로 바꿀 수 있다.
+다시 말해 $X=\coprod X_i$가 아핀 스킴 $X_i$들의 분리합이라고
+가정할 수 있다. $u_i=u|_{X_i}$에 대하여 보조정리를 증명할 수
+있다고 하자. 그러면 폐부분스킴 $Z_i\subset S$를 찾아
+$T\to S$가 $Z_i$를 통해 분해되고 $u_{i,Z_i}$가 영이 되게 할
+수 있다. 만일
+$Z_i=\Spec(R/I_i)\subset\Spec(R)=S$이면
+$Z=\Spec(R/\sum I_i)$를 취하면 된다. 따라서
+$X=\Spec(A)$가 아핀이라고 가정할 수 있다.
+
+\medskip\noindent
+유한 아핀 열린 덮개 $T=T_1\cup\ldots\cup T_m$을 택하자.
+$T$를 $\coprod_{j=1,\ldots,m}T_j$로 바꿀 수 있음이 명백하다.
+따라서 $T$가 아핀이라고 가정할 수 있다. $T=\Spec(R')$라 하자.
+$u:M\to N$을 $A$-가군들의 준동형으로서
+$u:\mathcal{F}\to\mathcal{G}$에 대응하는 것이라 하자.
+$N$은 평탄 $R$-가군인데, 이는 $\mathcal{G}$가 $S$ 위에서
+평탄하기 때문이다. 보조정리의 가정은 합성
+$$
+M \otimes_R R' \to N \otimes_R R'
+$$
+이 영이라는 뜻이다. $z\in M$이라 하자. Lazard 정리
+(Algebra, Theorem \ref{algebra-theorem-lazard})와
+$\otimes$가 여극한과 가환한다는 사실에 의해 자유 $R$-가군
+$F_z$, 원소 $\tilde z\in F_z$, 그리고 사상 $F_z\to N$을
+찾아 $u(z)$가 $\tilde z$의 상이고 $\tilde z$가
+$F_z\otimes_RR'$에서 영으로 가게 할 수 있다.
+$\{e_{z,\alpha}\}$를 $F_z$의 기저로 택하고
+$\tilde z=\sum f_{z,\alpha}e_{z,\alpha}$라 쓰되
+$f_{z,\alpha}\in R$이라 하자. $I\subset R$를 원소
+$f_{z,\alpha}$들로 생성되는 아이디얼이라 하되, 여기서 $z$는
+$M$의 모든 원소를 달린다. 구성에 의해 $I$는 $R'$에서 영으로 가고,
+원소 $\tilde z$는 $F_z/IF_z$에서, 따라서 $N/IN$에서
+영으로 간다. 그러므로 $Z=\Spec(R/I)$는 이 경우 문제의
+해이다.
+
+\medskip\noindent
+$\mathcal{F}$가 유한형이고 그 스킴론적 지지가 준콤팩트라고
+가정하자. $Z=\Spec(R/I)$라 쓰자.
+$I=\bigcup I_\lambda$를 유한 생성 아이디얼들의 여과 합집합으로
+쓰자. $Z_\lambda=\Spec(R/I_\lambda)$라 하면
+$Z=\colim Z_\lambda$이다. $u_Z$가 영이므로 Lemma
+\ref{spaces-flat-lemma-iso-limits}에 의해 $u_{Z_\lambda}$가 영인 어떤
+$\lambda$가 존재한다. 이로써 보조정리의 증명이 끝났다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-F-zero-module-map}
+$A$를 환이라 하자. $u:M\to N$을 $A$-가군들의 사상이라 하자.
+$N$이 $A$-가군으로서 사영이면, 아이디얼 $I\subset A$가 존재하여
+임의의 환 사상 $\varphi:A\to B$에 대하여 다음이 동치이다.
+\begin{enumerate}
+\item $u\otimes 1:M\otimes_A B\to N\otimes_A B$는 영이다.
+\item $\varphi(I)=0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$N$이 사영이므로 사영 $A$-가군 $C$를 찾아
+% P09-ERR-0837
+$F=N\oplus C$가 자유 $R$-가군이 되게 할 수 있다.
+$u$를
+% P09-ERR-0838
+$u\oplus 1:F=M\oplus C\to N\oplus C$로 바꾸면
+$N$이 자유라고 가정할 수 있음을 알 수 있다. 이 경우 $I$를
+$A$의 아이디얼로서, $\Im(u)$의 모든 원소를 $N$의 어떤
+고정된 기저에 관해 나타낸 계수들로 생성되는 것이라 하자.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-F-zero-somewhat-closed-points}
+Situation \ref{spaces-flat-situation-somewhat-closed}에서 생각하자.
+$T\subset S$를 부분집합이라 하고, $s\in S$가 $T$의 폐포에
+속한다고 하자. $t\in T$에 대하여 $u_t$를 $u$의 $X_t$로의
+당김이라 하고, $u_s$를 $u$의 $X_s$로의 당김이라 하자.
+$X$가 $S$ 위에서 국소 유한 표시이고,
+$\mathcal{G}$가 유한 표시이며\footnote{$X$가 $S$ 위에서
+국소 유한형이고 $\mathcal{G}$가 $S$에 대하여 상대적으로
+유한 표시인 것으로도 충분하지만, 이 개념은 아직 대수공간의
+설정에서 정의되지 않았다. 스킴에 대한 정의는
+More on Morphisms, Section
+\ref{more-morphisms-section-finite-type-finite-presentation}에 있다.},
+$u_t=0$가 모든 $t\in T$에 대하여 성립하면 $u_s=0$이다.
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-0839
+$u_s$가 영인지 여부를 확인하는 것은 올 $X_s$ 위에서 에탈
+국소적이다. 따라서 점 $x\in |X_s|\subset |X|$를 택하고
+에탈 근방에서 확인하면 된다. Proposition
+\ref{spaces-flat-proposition-finite-presentation-flat-at-point}에서와 같이
+$$
+\xymatrix{
+(X, x) \ar[d] & (X', x') \ar[l]^g \ar[d] \\
+(S, s) & (S', s') \ar[l]
+}
+$$
+를 택하자. $T'\subset S'$를 $T$의 역상이라 하자.
+$s'$는 $T'$의 폐포에 속하는데, 이는 $S'\to S$가 열린
+사상이기 때문이다.
+따라서 다음 단락에서 서술하는 대수 문제로 환원된다.
+
+\medskip\noindent
+$R$-가군 사상 $u:M\to N$이 주어져 있고, $N$은
+$R$-가군으로서 사영이며,
+$u_t:M\otimes_R\kappa(t)\to N\otimes_R\kappa(t)$가
+각 $t\in T$에 대하여 영이라고
+하자. 문제는 $u_s=0$임을 보이는 것이다. Lemma
+\ref{spaces-flat-lemma-F-zero-module-map}에서 정의된 아이디얼을
+$I\subset R$라 하자. 그러면 $I$는 $\kappa(t)$에서 영으로 가는데,
+이는 모든 $t\in T$에 대하여 성립한다. 따라서 $T\subset V(I)$이다.
+$s$는 $T$의 폐포에 속하므로 $s\in V(I)$이다. 따라서 $u_s=0$이다.
+\end{proof}
+
+\noindent
+Lemma \ref{spaces-flat-lemma-F-zero-closed-pure} 또는
+Lemma \ref{spaces-flat-lemma-F-zero-closed-proper}의 “간단한” 직접 증명을
+Lemmas \ref{spaces-flat-lemma-F-zero-somewhat-closed}와
+\ref{spaces-flat-lemma-F-zero-somewhat-closed-points}에서 사용한 것과 같은
+논증으로 찾는 것은 흥미로울 것이다. $f:X\to B$가 사영 사상이고
+$B$가 뇌터 스킴일 때 이 보조정리의 “고전적” 증명은 다음과
+같을 것이다. (a) 상대적으로 풍부한 가역층 $\mathcal{O}_X(1)$을
+택하고, (b)
+$u_n:f_*\mathcal{F}(n)\to f_*\mathcal{G}(n)$이라 두고,
+(c) $f_*\mathcal{G}(n)$이 모든 $n\gg0$에 대하여 유한 국소
+자유층임을 관찰하고, (d) $F_{zero}$가 $u_n$의 소멸 자취로
+표현되는 어떤 $n\gg0$가 있음을 사용한다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-F-zero-closed-pure}
+Situation \ref{spaces-flat-situation-iso}에서 다음을 가정하자.
+\begin{enumerate}
+\item $f$는 유한 표시이다.
+\item $\mathcal{G}$는 유한 표시이고 $B$ 위에서 평탄하며
+$B$에 대하여 순수하다.
+\end{enumerate}
+그러면 $F_{zero}$는 대수공간이고 $F_{zero}\to B$는 닫힌 몰입이다.
+$\mathcal{F}$가 유한형이면 $F_{zero}\to B$는 유한 표시이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-flat-lemma-finite-type-flat-pure-is-universal}에 의해
+가군 $\mathcal{G}$는 $B$에 대하여 보편적으로 순수하다.
+$F_{zero}$가 대수공간임을 보이기 위해서는 $F_{zero}\to B$가
+표현 가능임을 보이면 충분하다. Spaces, Lemma
+\ref{spaces-lemma-representable-over-space}를 보라.
+$B'\to B$를 사상이라 하되 $B'$는 스킴이라 하고,
+$u':\mathcal{F}'\to\mathcal{G}'$를 $u$의
+$X'=X_{B'}$로의 당김이라 하자. 그러면 연관된 함자
+$F'_{zero}$는 $F_{zero}\times_B B'$와 같다. 따라서
+$B$가 스킴인 경우로 환원된다.
+
+\medskip\noindent
+$B$가 스킴이라고 가정하자. $F_{zero}$가 $B$의 닫힌
+부분스킴으로 표현됨을 보이겠다. Lemma \ref{spaces-flat-lemma-iso-sheaf}와
+Descent, Lemmas \ref{descent-lemma-closed-immersion} 및
+\ref{descent-lemma-descent-data-sheaves}에 의해 이 문제는
+$B$ 위의 에탈 위상에 관하여 국소적이다. $b\in B$라 하자.
+먼저 $B$를 $b$의 아핀 근방으로 바꾼다.
+Lemma \ref{spaces-flat-lemma-finite-presentation-flat-along-fibre}에서와 같이
+도식
+$$
+\xymatrix{
+X \ar[d] & X' \ar[l]^g \ar[d] \\
+B & B' \ar[l]
+}
+$$
+과 $b'\in B'$를 택하여 $b\in B$로 가게 하자.
+에탈 국소적으로 작업하고 있으므로 $B$를 $B'$로 바꾸고,
+다음 도식이 주어져 있다고 가정할 수 있다.
+$$
+\xymatrix{
+X \ar[rd] & & X' \ar[ll]^g \ar[ld] \\
+& B
+}
+$$
+여기서 $B$와 $X'$는 아핀이고
+$\Gamma(X',g^*\mathcal{G})$는
+$\Gamma(B,\mathcal{O}_B)$-가군으로서 사영이며
+$g(|X'|)\supset |X_b|$이다. $U\subset X$를
+$|U|=g(|X'|)$인 열린 부분공간이라 하자.
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-relative-assassin-constructible}에 의해 집합
+$$
+E=\{t\in B:\text{Ass}_{X_t}(\mathcal{G}_t)\subset |U_t|\}=
+\{t\in B:\text{Ass}_{X/B}(\mathcal{G})\cap |X_t|\subset |U_t|\}
+$$
+은 $B$에서 구성 가능하다. Lemma \ref{spaces-flat-lemma-pure-on-top}의
+(2)에 의해 $E$는 $\Spec(\mathcal{O}_{B,b})$를 포함한다.
+Morphisms, Lemma \ref{morphisms-lemma-constructible-containing-open}에
+의해 $E$는 $b$의 열린 근방을 포함한다. 따라서 $B$를
+$b$의 더 작은 아핀 근방으로 바꾼 뒤
+$\text{Ass}_{X/B}(\mathcal{G})\subset g(|X'|)$라고 가정할 수 있다.
+
+\medskip\noindent
+Lemma \ref{spaces-flat-lemma-universally-separating}에 의해
+% P09-ERR-0840
+$u:\mathcal{F}\to\mathcal{G}$가 단사일 필요충분조건은
+$g^*u:g^*\mathcal{F}\to g^*\mathcal{G}$가 단사인 것이며,
+이는 임의의 밑변환 뒤에도 성립한다. 따라서 정리의 가정에 더하여
+% P09-ERR-0841
+$X\to B$가 아핀 스킴들의 사상이고
+$\Gamma(X,\mathcal{G})$가
+$\Gamma(B,\mathcal{O}_B)$-가군으로서 사영인 경우로 환원되었다.
+이 경우는 Lemma \ref{spaces-flat-lemma-F-zero-module-map}에서 즉시 따른다.
+
+\medskip\noindent
+$F_{zero}\to B$가 유한 표시임을 $\mathcal{F}$가 유한형인
+경우에 여전히 보여야 한다. 이는 Lemma \ref{spaces-flat-lemma-iso-limits}와
+Limits of Spaces, Proposition
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation}을
+결합하면 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-F-zero-closed-proper}
+Situation \ref{spaces-flat-situation-iso}에서 다음을 가정하자.
+\begin{enumerate}
+\item $f$는 국소 유한 표시이다.
+\item $\mathcal{G}$는 유한 표시인 $\mathcal{O}_X$-가군이고
+$B$ 위에서 평탄하다.
+\item $\mathcal{G}$의 지지는 $B$ 위에서 proper이다.
+\end{enumerate}
+그러면 함자 $F_{zero}$는 대수공간이고 $F_{zero}\to B$는
+닫힌 몰입이다. $\mathcal{F}$가 유한형이면
+$F_{zero}\to B$는 유한 표시이다.
+\end{lemma}
+
+\begin{proof}
+$f$가 유한 표시이면 Lemmas \ref{spaces-flat-lemma-F-zero-closed-pure}와
+\ref{spaces-flat-lemma-proper-pure}에서 즉시 따른다. 이것이 유일하게
+관심 있는 경우이며, 독자에게 이 증명의 나머지를 건너뛸 것을
+권한다. 나머지는 이 보조정리의 가정이 허용하는
+$f$가 준분리도 준콤팩트도 아닐 가능성을 다룬다.
+
+\medskip\noindent
+$i:Z\to X$를 $\mathcal{G}$의 제0 Fitting 아이디얼이 잘라내는
+닫힌 부분공간이라 하자
+(Divisors on Spaces, Section
+\ref{spaces-divisors-section-fitting-ideals}).
+그러면 가정에 의해 $Z\to B$는 proper이다
+(Derived Categories of Spaces, Section
+\ref{spaces-perfect-section-proper-over-base}을 보라).
+한편 $i$는 유한 표시이다
+(Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-fitting-ideal-of-finitely-presented} 및
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-finite-presentation}).
+유한형 준연접 $\mathcal{O}_Z$-가군 $\mathcal{H}$가 존재하여
+$i_*\mathcal{H}=\mathcal{G}$가 된다
+(Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-on-subscheme-cut-out-by-Fit-0}).
+실제로 Algebra, Lemma
+\ref{algebra-lemma-finitely-presented-over-subring}에 의해
+$\mathcal{H}$는 $\mathcal{O}_Z$-가군으로서 유한 표시이다
+(세부사항은 생략한다). 그러면 $F_{zero}$는 함자 $F_{zero}$와
+같다. 여기서 두 번째 함자는 사상
+$i^*\mathcal{F}\to\mathcal{H}$에 대한 것이고, 이 사상은
+$u$에 수반한다.
+Lemma \ref{spaces-flat-lemma-relate-zero-affine}를 보라.
+층 $\mathcal{H}$는 $B$에 대하여 평탄한데, 이는
+$\mathcal{G}$도 그러하기 때문이다
+(줄기에서 확인하면 된다. 세부사항은 생략한다).
+또한 $\mathcal{F}$가 유한형이면 $i^*\mathcal{F}$도
+유한형임에 유의하자. 따라서 이 보조정리는 증명의 첫 단락에서
+다룬 경우로 환원되었다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{사상의 평탄화}
+\label{spaces-flat-section-flattening-map}
+
+\noindent
+이 절은 More on Flatness, Section
+\ref{flat-section-flattening-map}의 유사물이다. 특히 다음 결과는
+More on Flatness, Theorem \ref{flat-theorem-flattening-map}의 변형이다.
+
+\begin{theorem}
+\label{spaces-flat-theorem-flattening-map}
+Situation \ref{spaces-flat-situation-iso}에서 다음을 가정하자.
+\begin{enumerate}
+\item $f$는 유한 표시이다.
+\item $\mathcal{F}$는 유한 표시이고 $B$ 위에서 평탄하며
+$B$에 대하여 순수하다.
+\item $u$는 전사이다.
+\end{enumerate}
+그러면 $F_{iso}$는 닫힌 몰입 $Z\to B$로 표현된다. 또한
+% P09-ERR-0842
+$Z\to S$는 $\mathcal{G}$가 유한 표시이면 유한 표시이다.
+\end{theorem}
+
+\begin{proof}
+$\mathcal{K}=\Ker(u)$라 하고 포함을
+$v:\mathcal{K}\to\mathcal{F}$로 나타내자.
+Lemma \ref{spaces-flat-lemma-relate-zero-iso}에 의해
+$F_{u,iso}=F_{v,zero}$임을 알 수 있다. Lemma
+\ref{spaces-flat-lemma-F-zero-closed-pure}를 $v$에 적용하면
+$F_{u,iso}=F_{v,zero}$가 $B$의 닫힌 부분공간으로 표현됨을
+알 수 있다. $\mathcal{K}$가 유한형임에 유의하자. 이는
+$\mathcal{G}$가 유한 표시일 때 성립한다. Modules on Sites, Lemma
+\ref{sites-modules-lemma-kernel-surjection-finite-onto-finite-presentation}를
+보라. 따라서 정리의 마지막 명제도 얻는다.
+% P09-ERR-0843
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-F-iso-closed}
+Situation \ref{spaces-flat-situation-iso}에서 다음을 가정하자.
+\begin{enumerate}
+\item $f$는 국소 유한 표시이다.
+\item $\mathcal{F}$는 국소 유한 표시이고 $B$ 위에서 평탄하다.
+\item $\mathcal{F}$의 지지는 $B$ 위에서 proper이다.
+\item $u$는 전사이다.
+\end{enumerate}
+그러면 함자 $F_{iso}$는 대수공간이고 $F_{iso}\to B$는
+닫힌 몰입이다. $\mathcal{G}$가 유한 표시이면
+$F_{iso}\to B$는 유한 표시이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{K}=\Ker(u)$라 하고 포함을
+$v:\mathcal{K}\to\mathcal{F}$로 나타내자.
+Lemma \ref{spaces-flat-lemma-relate-zero-iso}에 의해
+$F_{u,iso}=F_{v,zero}$임을 알 수 있다. Lemma
+\ref{spaces-flat-lemma-F-zero-closed-proper}를 $v$에 적용하면
+$F_{u,iso}=F_{v,zero}$가 $B$의 닫힌 부분공간으로 표현됨을
+알 수 있다. $\mathcal{K}$가 유한형임에 유의하자. 이는
+$\mathcal{G}$가 유한 표시일 때 성립한다. Modules on Sites, Lemma
+\ref{sites-modules-lemma-kernel-surjection-finite-onto-finite-presentation}를
+보라. 따라서 보조정리의 마지막 명제도 얻는다.
+\end{proof}
+
+\noindent
+Quot 함자를 논할 때 다음의 쉬운 결과를 사용할 것이다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-F-surj-open}
+Situation \ref{spaces-flat-situation-iso}에서 다음을 가정하자.
+\begin{enumerate}
+\item $f$는 국소 유한 표시이다.
+\item $\mathcal{G}$는 유한형이다.
+\item $\mathcal{G}$의 지지는 $B$ 위에서 proper이다.
+\end{enumerate}
+그러면 $F_{surj}$는 대수공간이고 $F_{surj}\to B$는 열린 몰입이다.
+\end{lemma}
+
+\begin{proof}
+$\Coker(u)$를 생각하자. $\Coker(u_T)=\Coker(u)_T$임을
+관찰하자. 이는 임의의 $T/B$에 대하여 성립한다. 유한형 준연접 가군의
+지지를 취하는 것은 당김과 가환함에 유의하자
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-support-covering}).
+따라서 $F_{surj}$는 $B$의 열린 부분공간으로서 열린집합
+$$
+|B|\setminus |f|(\text{Supp}(\Coker(u)))
+$$
+에 대응하는 것으로 표현된다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-open-subspaces}를 보라.
+% P09-ERR-0844
+이것은 열린집합이다. 실제로 $|f|$는
+$\text{Supp}(\mathcal{G})$ 위에서 닫힌 사상이고,
+$\text{Supp}(\Coker(u))$는 $\text{Supp}(\mathcal{G})$의
+닫힌 부분집합이다.
+\end{proof}
+
+
+
+
+
+
+
+\section{국소적 경우의 평탄화}
+\label{spaces-flat-section-flattening-local}
+
+\noindent
+이 절은 More on Flatness, Section
+\ref{flat-section-flattening-local}의 유사물이다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-freebie}
+$S$를 닫힌점 $s$를 갖는 헨젤 국소환의 스펙트럼이라 하자.
+$X\to S$를 국소 유한형인 대수공간들의 사상이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_X$-가군이라 하자.
+$E\subset |X_s|$를 부분집합이라 하자. 다음 성질을 갖는
+닫힌 부분스킴 $Z\subset S$가 존재한다. 점이 표시된 스킴들의
+임의의 사상 $(T,t)\to(S,s)$에 대하여 다음이 동치이다.
+\begin{enumerate}
+\item $\mathcal{F}_T$는 $T$ 위에서, $|X_t|$의 모든 점 가운데
+$E\subset |X_s|$의 점으로 가는 것들에서 평탄하다.
+\item $\Spec(\mathcal{O}_{T,t})\to S$는 $Z$를 통해 분해된다.
+\end{enumerate}
+또한 $X\to S$가 국소 유한 표시이고, $\mathcal{F}$가
+유한 표시이며, $E\subset |X_s|$가 닫혀 있고 준콤팩트이면
+$Z\to S$는 유한 표시이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 에탈 사상 $\varphi:U\to X$를 택하자.
+$E'\subset |U_s|$를 $E$의 역상이라 하자.
+$E'\to E$가 전사이면 조건 (1)은 다음 조건과 동치이다.
+% P09-ERR-0845
+$(\varphi^*\mathcal{F})_T$는 $T$ 위에서, $|U_t|$의 모든 점 가운데
+$E'\subset |U_t|$의 점으로 가는 것들에서 평탄하다.
+$\varphi$를 전사로 택하면 스킴의 경우로 환원되며, 이는
+% P09-ERR-0846
+More on Flatness, Lemma \ref{flat-lemma-freebie}이다.
+$E$가 닫혀 있고 준콤팩트이면 $U$를 아핀으로 택하여
+$E'\to E$가 전사이게 할 수 있다. 그러면 $E'$는 닫혀 있고
+준콤팩트이며, 마지막 명제는 More on Flatness, Lemma
+\ref{flat-lemma-freebie}의 마지막 명제에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{보편적 평탄화}
+\label{spaces-flat-section-flattening-final}
+
+\noindent
+이 절은 More on Flatness, Section
+\ref{flat-section-flattening-final}의 유사물이다. 주된 목표는
+Lemma \ref{spaces-flat-lemma-when-universal-flattening}을 증명하는 것이다.
+그러나 스킴에 대한 대응하는 결과에서 이 결과를 직접 도출하는
+방법을 알 수 없다. 따라서 여기에서 일부 내용을 다시 전개해야 한다.
+먼저 정의부터 하자.
+
+\begin{definition}
+\label{spaces-flat-definition-flattening}
+$S$를 스킴이라 하자. $X\to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자.
+{\it $\mathcal{F}$의 보편적 평탄화가 존재한다}고 말하는 것은
+Situation \ref{spaces-flat-situation-flat}에서 정의된 함자 $F_{flat}$이
+대수공간이라는 뜻이다.
+{\it $X$의 보편적 평탄화가 존재한다}고 말하는 것은
+$\mathcal{O}_X$의 보편적 평탄화가 존재한다는 뜻이다.
+\end{definition}
+
+\noindent
+이는 다소 만족스럽지 못하다. 대수공간의 모든 단사 사상이
+표현 가능한지는 알지 못하므로(More on Morphisms of Spaces,
+Section \ref{spaces-more-morphisms-section-monomorphisms}),
+여기서 보편적 평탄화의 정의는 스킴의 경우에 쓰는 정의와
+일치하지 않기 때문이다. 이로부터 혼동이 생기지 않기를 바란다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-pre-flat-dimension-n}
+$S$를 스킴이라 하자. $f:X\to Y$를 국소 유한형인
+대수공간들의 사상이라 하자. $\mathcal{F}$를 유한형 준연접
+$\mathcal{O}_X$-가군이라 하고, $n\geq0$라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item 어떤 가환 도식
+$$
+\xymatrix{
+U \ar[d]_\varphi \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+$$
+에서 수직 화살표들이 전사 에탈이고 $U$와 $V$가 스킴일 때,
+층 $\varphi^*\mathcal{F}$가 $V$ 위에서 차원 $\geq n$으로
+평탄이다(More on Flatness, Definition
+\ref{flat-definition-flat-dimension-n}).
+\item 모든 가환 도식
+$$
+\xymatrix{
+U \ar[d]_\varphi \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+$$
+에서 수직 화살표들이 에탈이고 $U$와 $V$가 스킴일 때,
+층 $\varphi^*\mathcal{F}$가 $V$ 위에서 차원 $\geq n$으로
+평탄이다.
+\item $x\in |X|$이고 $\mathcal{F}$가 $x$에서 $Y$ 위로 평탄하지
+않으면, $x/f(x)$의 초월 차수는 $<n$이다
+(Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre}).
+\end{enumerate}
+이 조건들이 성립하면 임의의 밑변환 $Y'\to Y$ 뒤에도 성립한다.
+\end{lemma}
+
+\begin{proof}
+(1)의 도식이 주어져 있다고 하자. More on Flatness, Lemma
+\ref{flat-lemma-pre-flat-dimension-n}의 조건들이 동치이므로
+(1)과 (3)은 동치이다. 한편 (3)은 $\varphi^*\mathcal{F}$로
+계승되며, 이는 (2)에서와 같은 임의의 $U\to V$에 대하여 성립한다.
+따라서 스킴에 대한 결과를 다시 적용하면 (3)이 (2)를 함의함을
+알 수 있다. 스킴에 대한 결과는 밑변환에 관한 명제도 함의한다.
+\end{proof}
+
+\begin{definition}
+\label{spaces-flat-definition-flat-dimension-n}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위의 국소 유한형인
+대수공간들의 사상이라 하자. $\mathcal{F}$를 유한형 준연접
+$\mathcal{O}_X$-가군이라 하자. $n\geq0$라 하자.
+Lemma \ref{spaces-flat-lemma-pre-flat-dimension-n}의 동치 조건들이 성립하면
+{\it $\mathcal{F}$가 $Y$ 위에서 차원 $\geq n$으로 평탄이다}라고
+말한다.
+\end{definition}
+
+\begin{situation}
+\label{spaces-flat-situation-flat-dimension-n}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위의 국소 유한형인
+대수공간들의 사상이라 하자. $\mathcal{F}$를 유한형 준연접
+$\mathcal{O}_X$-가군이라 하자. $T$를 $Y$ 위의 임의의 스킴이라
+하자. $\mathcal{F}_T$로 $\mathcal{F}$의 $T$로의 밑변환을
+나타내겠다. 다시 말해 $\mathcal{F}_T$는 $\mathcal{F}$의 사영 사상
+$X_T=X\times_Y T\to X$를 통한 당김이다.
+% P09-ERR-0847
+$f_T:X_T\to T$는 유한형이고 $\mathcal{F}_T$는 유한형
+$\mathcal{O}_{X_T}$-가군임에 유의하자
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-finite-type} 및
+Modules on Sites, Lemma
+\ref{sites-modules-lemma-local-pullback}).
+$n\geq0$라 하자. Definition \ref{spaces-flat-definition-flat-dimension-n}과
+Lemma \ref{spaces-flat-lemma-pre-flat-dimension-n}에 의해 함자
+\begin{equation}
+\label{spaces-flat-equation-flat-dimension-n}
+F_n : (\Sch/Y)^{opp} \longrightarrow \textit{Sets}, \quad
+T \longrightarrow \left\{
+\begin{matrix}
+\{*\} & \text{if }\mathcal{F}_T\text{ is flat over }T\text{ in }\dim \geq n, \\
+\emptyset & \text{else.}
+\end{matrix}
+\right.
+\end{equation}
+를 얻는다.
+\end{situation}
+
+\noindent
+Situation \ref{spaces-flat-situation-flat-dimension-n}에서 때로는 $F_n$을
+함자 $(\Sch/S)^{opp}\to\textit{Sets}$로 생각하고, 이 함자에는
+사상 $F_n\to Y$가 주어져 있다고 본다. 즉 $T$가 $S$ 위의
+스킴이면 원소 $h\in F_n(T)$는 사상 $h:T\to Y$로서
+$\mathcal{F}$의 $h$를 통한 밑변환이 $T$ 위에서
+$\dim\geq n$으로 평탄인 것이다. 특히 $F_n$이 대수공간이라고
+말할 때에는 대응하는 함자
+$(\Sch/S)^{opp}\to\textit{Sets}$가 대수공간이라는 뜻이다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-flat-dimension-n}
+Situation \ref{spaces-flat-situation-flat-dimension-n}에서 다음이 성립한다.
+\begin{enumerate}
+\item 함자 $F_n$은 fpqc 위상에 대한 층 조건을 만족한다.
+\item $f$가 준콤팩트이고 국소 유한 표시이며 $\mathcal{F}$가
+유한 표시이면, 함자 $F_n$은 극한을 보존한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. $\{T_i\to T\}$가 스킴 $T$의 fpqc 덮개이고
+이 스킴은 $Y$ 위에 있다고 하자. $F_n(T_i)$가 모든 $i$에 대하여
+공집합이 아니면
+$F_n(T)$가 공집합이 아님을 보여야 한다. Lemma
+\ref{spaces-flat-lemma-pre-flat-dimension-n}의 (1)과 같은 도식을 택하자.
+$F'_n$으로 $\varphi^*\mathcal{F}$와 사상 $U\to V$에
+대응하는 함자를 나타내자. More on Flatness, Lemma
+\ref{flat-lemma-flat-dimension-n}에 의해 $F'_n$은 층 조건을
+만족한다. 따라서 $F_n$도 층 조건을 만족한다. 실제로
+$T\to Y$에 대하여 Lemma \ref{spaces-flat-lemma-pre-flat-dimension-n}에 의해
+$F_n(T)=F'_n(V\times_Y T)$이고,
+$\{V\times_Y T_i\to V\times_Y T\}$는 fpqc 덮개이다.
+
+\medskip\noindent
+(2)의 증명. $T=\lim_{i\in I}T_i$가 아핀 스킴 $T_i$들의
+여과 극한이고 이 스킴들은 $Y$ 위에 있다고 하자. 또한
+$F_n(T)$가 공집합이 아니라고 하자.
+$F_n(T_i)$가 공집합이 아닌 어떤 $i$가 있음을 보여야 한다.
+Lemma \ref{spaces-flat-lemma-pre-flat-dimension-n}의 (1)과 같은 도식을 택하자.
+$i\in I$를 고정하고 아핀 열린집합
+$W_i\subset V\times_Y T_i$를 택하여 $T_i$ 위로 전사하게 하자.
+$i'\geq i$에 대하여 $W_{i'}$를 $W_i$의 역상으로서
+$V\times_Y T_{i'}$ 안에 정의하고,
+$W\subset V\times_Y T$를 $W_i$의 역상이라 하자. 그러면
+% P09-ERR-0848
+$W=\lim_{i'\geq i}W_i$는 $V$ 위의 아핀 스킴들의 여과 극한이다.
+Lemma \ref{spaces-flat-lemma-pre-flat-dimension-n}에 의해
+$F'_n(W_{i'})$가 공집합이 아닌 어떤 $i'\geq i$가 있음을 보이면
+충분하다. 그러나 $F'_n(W)$가 공집합이 아님을 안다. 이는
+$F_n(T)=F'_n(V\times_Y T)$가 공집합이 아니라는 가정 때문이다.
+따라서
+More on Flatness, Lemma \ref{flat-lemma-flat-dimension-n}를
+적용하여 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-localize-flat-dimension-n}
+Situation \ref{spaces-flat-situation-flat-dimension-n}에서 생각하자.
+$h:X'\to X$를 에탈 사상이라 하자.
+$\mathcal{F}'=h^*\mathcal{F}$ 및 $f'=f\circ h$라 두자.
+$F_n'$을 $(f':X'\to Y,\mathcal{F}')$에 연관된
+(\ref{spaces-flat-equation-flat-dimension-n})이라 하자. 그러면 $F_n$은
+$F_n'$의 부분함자이고,
+$h(X')\supset\text{Ass}_{X/Y}(\mathcal{F})$이면 $F_n=F'_n$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-flat-lemma-pre-flat-dimension-n}의 (1)에서와 같이
+$U\to X$, $V\to Y$, $U\to V$를 택하자. 전사 에탈 사상
+$U'\to U\times_X X'$를 택하되 $U'$는 스킴이라 하자. 그러면
+두 함자 $F_{U,n}$ 및 $F_{U',n}$에 대하여 보조정리가 성립한다.
+이들은 $U'\to U$와 $\mathcal{F}|_U$에 의해 $V$ 위에서 정해진다.
+More on Flatness, Lemma
+\ref{flat-lemma-localize-flat-dimension-n}를 보라.
+한편 Lemma \ref{spaces-flat-lemma-pre-flat-dimension-n}에 따르면
+$T\to Y$가 주어졌을 때
+$F_n(T)=F_{U,n}(V\times_Y T)$
+이고
+$F'_n(T)=F_{U',n}(V\times_Y T)$이다.
+이로써 보조정리가 증명되었다.
+\end{proof}
+
+\begin{theorem}
+\label{spaces-flat-theorem-flat-dimension-n-representable}
+Situation \ref{spaces-flat-situation-flat-dimension-n}에서 생각하자.
+또한 $f$가 유한 표시이고, $\mathcal{F}$가 유한 표시인
+$\mathcal{O}_X$-가군이며, $\mathcal{F}$가 $Y$에 대하여
+순수하다고 가정하자. 그러면 $F_n$은 대수공간이고
+$F_n\to Y$는 유한 표시 단사 사상이다.
+\end{theorem}
+
+\begin{proof}
+함자 $F_n$은 Lemma \ref{spaces-flat-lemma-flat-dimension-n}에 의해
+fppf 위상에 대한 층이다. $F_n\to Y$는
+$(\Sch/S)_{fppf}$ 위 층들의 단사 사상이므로
+$\Delta:F_n\to F_n\times F_n$은 대각 사상
+$\Delta_Y:Y\to Y\times_S Y$의 당김이다.
+따라서 $\Delta_Y$의 표현 가능성은 $F_n$에 대해서도 같은
+결론을 함의한다. 그러므로 스킴 $W$가 존재하여 $S$ 위에 있고
+전사 에탈 사상 $W\to F_n$이 주어짐을 증명하면 충분하다.
+
+\medskip\noindent
+$W\to F_n$을 구성하기 위해 에탈 덮개
+$\{Y_i\to Y\}$를 택하되 $Y_i$는 스킴이라 하자.
+$X_i=X\times_Y Y_i$라 하고,
+$\mathcal{F}_i$를 $\mathcal{F}$의 $X_i$로의 당김이라 하자.
+그러면 정의 또는 Lemma \ref{spaces-flat-lemma-quasi-finite-base-change}에 의해
+$\mathcal{F}_i$는 $Y_i$에 대하여 순수하다.
+정리의 다른 가정들도 보존된다. 마지막으로 $F_n$을 $Y_i$에
+제한한 것은 함자 $F_n$, 즉 $X_i\to Y_i$와
+$\mathcal{F}_i$에 대응하는 함자이다. 따라서 다음을 보이면 충분하다.
+정리의 명제에서와
+같은 $\mathcal{F}$와 $f:X\to Y$가 주어지고 $Y$가 스킴이면,
+함자 $F_n$은 스킴 $Z_n$으로 표현되며
+$Z_n\to Y$는 유한 표시 단사 사상이다.
+
+\medskip\noindent
+유한 표시 단사 사상은 분리이고 준유한임을 관찰하자
+(Morphisms, Lemma
+\ref{morphisms-lemma-monomorphism-loc-finite-type-loc-quasi-finite}).
+따라서 Descent, Lemma
+\ref{descent-lemma-descent-data-sheaves},
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-morphisms-fppf-descend}
+% P09-ERR-0849
+, 그리고 Descent, Lemmas
+\ref{descent-lemma-descending-property-monomorphism} 및
+\ref{descent-lemma-descending-property-finite-presentation}을
+결합하면 이 문제는 $Y$ 위의 에탈 위상에 관하여 국소적이다.
+
+\medskip\noindent
+특히 상황은 $Y$ 위의 자리스키 위상에 관하여 국소적이므로
+$Y$가 아핀이라고 가정할 수 있다. 이 경우 $f$의 올들의 차원은
+위로 유계이므로 $F_n$이 충분히 큰 $n$에 대하여 표현됨을
+알 수 있다. 따라서 $n$에 관한 내림 귀납법을 사용할 수 있다.
+$F_{n+1}$이 유한 표시 단사 사상 $Z_{n+1}\to Y$로 표현된다고
+가정하자. 밑변환 $X_{n+1}=Z_{n+1}\times_Y X$와 당김
+$\mathcal{F}_{n+1}$을 생각하자. 후자는 $\mathcal{F}$의
+$X_{n+1}$로의 당김이다. 사상 $Z_{n+1}\to Y$는 유한 표시 단사 사상이므로
+준유한이고, 따라서 Lemma \ref{spaces-flat-lemma-quasi-finite-base-change}에 의해
+$\mathcal{F}_{n+1}$은 $Z_{n+1}$에 대하여 순수하다.
+$F_n$은 $F_{n+1}$의 부분함자이므로 $F_n$에 대한 결과를
+증명하려면 상황
+$\mathcal{F}_{n+1}/X_{n+1}/Z_{n+1}$에 대응하는 함자에 대한
+결과를 증명하면 충분하다. 이와 같이 $F_n$에 대한 결과를
+% P09-ERR-0850
+$Y_{n+1}=Y$인 경우에 증명하는 것으로 환원된다. 즉,
+$\mathcal{F}$가 차원 $\geq n+1$으로 $Y$ 위에서 평탄이라고
+가정할 수 있다.
+
+\medskip\noindent
+$n$을 고정하고 $\mathcal{F}$가 차원 $\geq n+1$으로
+아핀 스킴 $Y$ 위에서 평탄이라고 가정하자. 증명을 끝내려면 $F_n$이
+유한 표시 단사 사상
+% P09-ERR-0851
+$Z_n\to S$로 표현됨을 보여야 한다. 문제는 $Y$ 위의 에탈 위상에
+관하여 국소적이므로, 모든 $y\in Y$에 대하여 점이 표시된
+에탈 근방 $(Y',y')\to(Y,y)$가 존재하여 $Y'$로 밑변환한 뒤
+결과가 성립함을 보이면 충분하다. 따라서 Lemma
+\ref{spaces-flat-lemma-existence-complete}에 의해 다음을 가정할 수 있다.
+에탈 사상 $h_j:W_j\to X$, $j=1,\ldots,m$이 존재하고,
+각 $j$에 대하여 $\mathcal{F}_j/W_j/Y$의 완전한
+d\'evissage가 $y$ 위에서 존재한다. 여기서 $\mathcal{F}_j$는
+$\mathcal{F}$의 $W_j$로의 당김이고
+$|X_y|\subset\bigcup h_j(W_j)$이다. $h_j$가 에탈이므로
+Lemma \ref{spaces-flat-lemma-pre-flat-dimension-n}에 의해
+% P09-ERR-0852
+층 $\mathcal{F}_j$는 여전히 차원 $\geq n+1$으로
+$Y$ 위에서 평탄이다. $W=\bigcup h_j(W_j)$라 두면 이는
+$X$의 준콤팩트 열린집합이다. $\mathcal{F}$가 $X_y$를 따라
+순수하므로
+% P09-ERR-0853
+$$
+E=\{t\in|Y|:\text{Ass}_{X_t}(\mathcal{F}_t)\subset W\}.
+$$
+는 $y$의 모든 일반화를 포함한다. Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-relative-assassin-constructible}에 의해
+$E$는 $Y$의 구성 가능한 부분집합이다. 앞에서
+$\Spec(\mathcal{O}_{Y,y})\subset E$임을 보았다.
+Morphisms, Lemma \ref{morphisms-lemma-constructible-containing-open}에
+의해 $E$는 $y$의 열린 근방을 포함한다. 따라서 $Y$를
+줄인 뒤
+% P09-ERR-0854
+$E=Y$라고 가정할 수 있다. Lemma
+\ref{spaces-flat-lemma-localize-flat-dimension-n}에 의해 함자 $F_n$에
+대하여 보조정리를 증명하면 충분하다. 여기서 이 함자는
+$X=\coprod W_j$와 $\mathcal{F}=\coprod\mathcal{F}_j$에 연관된다.
+$F_{j,n}$이 $W_j\to Y$와 층 $\mathcal{F}_j$에 대한 함자라면
+$F_n=\prod F_{j,n}$임을 알 수 있다. 따라서 각각의
+$F_{j,n}$이 어떤 유한 표시 단사 사상 $Z_{j,n}\to Y$로
+표현됨을 증명하면 충분하다. 실제로 그때
+% P09-ERR-0855
+$$
+Z_n=Z_{1,n}\times_Y\ldots\times_Y Z_{m,n}
+$$
+이다. 이로써 정리는 More on Flatness, Lemma
+\ref{flat-lemma-flat-dimension-n-representable}에서 다룬
+특별한 경우로 환원되었다.
+\end{proof}
+
+\noindent
+따라서 마침내 원하는 결과를 얻는다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-when-universal-flattening}
+$S$를 스킴이라 하자. $f:X\to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자.
+\begin{enumerate}
+\item $f$가 유한 표시이고, $\mathcal{F}$가 유한 표시
+$\mathcal{O}_X$-가군이며, $\mathcal{F}$가 $Y$에 대하여
+순수하면, 보편적 평탄화 $Y'\to Y$가 $\mathcal{F}$에 대하여 존재한다.
+또한 $Y'\to Y$는 유한 표시 단사 사상이다.
+\item $f$가 유한 표시이고 $X$가 $Y$에 대하여 순수하면,
+보편적 평탄화 $Y'\to Y$가 $X$에 대하여 존재한다. 또한 $Y'\to Y$는
+유한 표시 단사 사상이다.
+\item $f$가 proper이고 유한 표시이며 $\mathcal{F}$가 유한 표시
+$\mathcal{O}_X$-가군이면, 보편적 평탄화 $Y'\to Y$가
+$\mathcal{F}$에 대하여 존재한다. 또한 $Y'\to Y$는 유한 표시 단사 사상이다.
+\item $f$가 proper이고 유한 표시이면 보편적 평탄화
+$Y'\to Y$가 $X$에 대하여 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이 명제들은 Theorem \ref{spaces-flat-theorem-flat-dimension-n-representable}을
+$F_0=F_{flat}$에 적용하고, $f$가 proper이면 $\mathcal{F}$가
+자동으로 밑에 대하여 순수하다는 사실을 사용하면 즉시 따른다.
+Lemma \ref{spaces-flat-lemma-proper-pure}를 보라.
+\end{proof}
+
+
+
+
+
+
+\section{그로텐디크 존재 정리}
+\label{spaces-flat-section-existence}
+
+\noindent
+이 절은 More on Flatness, Section \ref{flat-section-existence}의
+유사물이며, More on Morphisms of Spaces, Section
+\ref{spaces-more-morphisms-section-existence-proper}의 논의를
+계속한다. 다음 상황에서 작업한다.
+
+\begin{situation}
+\label{spaces-flat-situation-existence}
+여기서는 전이 사상들이 전사이고 그 핵들이 국소 멱영인 환들의
+역계 $(A_n)$이 주어져 있다. $A=\lim A_n$이라 두자.
+대수공간 $X$가 주어져 있고, 이는 $A$ 위에서 분리이고 유한 표시이다.
+$X_n=X\times_{\Spec(A)}\Spec(A_n)$이라 두고 이를 $X$의 닫힌
+부분공간으로 본다. 또한 계 $(\mathcal{F}_n,\varphi_n)$이
+주어져 있다고 가정한다. 여기서 $\mathcal{F}_n$은 유한 표시
+$\mathcal{O}_{X_n}$-가군이고, $A_n$ 위에서 평탄하며,
+그 지지는 $A_n$ 위에서 proper이고,
+$$
+\varphi_n:
+\mathcal{F}_n\otimes_{\mathcal{O}_{X_n}}\mathcal{O}_{X_{n-1}}
+\longrightarrow
+\mathcal{F}_{n-1}
+$$
+는 동형이다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-i-star-equivalence}의 동치를 쓰는
+표기법이다).
+\end{situation}
+
+\noindent
+목표는 준연접층 $\mathcal{F}$를 $X$ 위에서 찾을 수 있는지
+알아보는 것이다. 이 층은
+$\mathcal{F}_n=\mathcal{F}\otimes_{\mathcal{O}_X}\mathcal{O}_{X_n}$
+을 모든 $n$에 대하여 만족해야 한다.
+
+\begin{lemma}
+\label{spaces-flat-lemma-compute-what-it-should-be}
+Situation \ref{spaces-flat-situation-existence}에서
+$$
+K=R\lim_{D_\QCoh(\mathcal{O}_X)}(\mathcal{F}_n)=
+DQ_X(R\lim_{D(\mathcal{O}_X)}\mathcal{F}_n)
+$$
+를 생각하자. 그러면 $K$는 $D^b_{\QCoh}(\mathcal{O}_X)$에
+속하고, 실제로 $K$의 영이 아닌 코호몰로지 층들은 차수
+$\geq0$에만 있다.
+\end{lemma}
+
+\begin{proof}
+Derived Categories of Spaces, Example
+\ref{spaces-perfect-example-inverse-limit-quasi-coherent}의 특별한
+경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-compute-against-perfect}
+Situation \ref{spaces-flat-situation-existence}에서 $K$를 Lemma
+\ref{spaces-flat-lemma-compute-what-it-should-be}에서와 같이 두자.
+$E$를 $D(\mathcal{O}_X)$의 임의의 완전 대상이라 하자. 다음이
+성립한다.
+\begin{enumerate}
+\item $M=R\Gamma(X,K\otimes^\mathbf{L}E)$은 $D(A)$의 완전
+대상이고, 표준 동형
+$R\Gamma(X_n,\mathcal{F}_n\otimes^\mathbf{L}E|_{X_n})=
+M\otimes_A^\mathbf{L}A_n$이 $D(A_n)$에서 존재한다.
+\item $N=R\Hom_X(E,K)$는 $D(A)$의 완전 대상이고,
+표준 동형
+$R\Hom_{X_n}(E|_{X_n},\mathcal{F}_n)=
+N\otimes_A^\mathbf{L}A_n$이 $D(A_n)$에서 존재한다.
+\end{enumerate}
+두 명제 모두에서 $E|_{X_n}$은 $E$의 $X_n$로의 유도 당김을
+나타낸다.
+\end{lemma}
+
+\begin{proof}
+(2)의 증명. $E_n=E|_{X_n}$ 및
+$N_n=R\Hom_{X_n}(E_n,\mathcal{F}_n)$이라 쓰자.
+$R\Hom_{X_n}(-,-)$는
+$R\Gamma(X_n,R\SheafHom(-,-))$와 같음을 상기하자.
+Cohomology on Sites, Section
+\ref{sites-cohomology-section-global-RHom}을 보라.
+따라서 Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-base-change-RHom-perfect}에 의해
+$N_n$은 $D(A_n)$의 완전 대상이고, 이를 만드는 과정은
+밑변환과 가환한다. 그러므로 사상
+$N_n\otimes_{A_n}^\mathbf{L}A_{n-1}\to N_{n-1}$은
+$\varphi_n$에서 오며 동형이다.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-Rlim-perfect-gives-perfect}에 의해
+$R\lim N_n$은 완전이고, 이를 다시 $A_n$으로 밑변환하면
+$N_n$을 회복한다. 한편 삼각 범주들의 완전 함자
+$R\Hom_X(E,-):D_\QCoh(\mathcal{O}_X)\to D(A)$는 곱과
+가환하므로 유도 극한과도 가환한다. 따라서
+$$
+R\Hom_X(E,K)=
+R\lim R\Hom_X(E,\mathcal{F}_n)=
+R\lim R\Hom_X(E_n,\mathcal{F}_n)=
+R\lim N_n
+$$
+이다. 이는 (2)를 증명한다. (1)이 성립함을 보려면
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-dual-perfect-complex}를 사용하여
+(1)을 (2)로 옮기면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-relative-pseudo-coherence}
+Situation \ref{spaces-flat-situation-existence}에서 $K$를 Lemma
+\ref{spaces-flat-lemma-compute-what-it-should-be}에서와 같이 두자. 그러면
+$K$는 $A$에 대하여 유사연접이다.
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-0856
+Lemma \ref{spaces-flat-lemma-compute-against-perfect}와
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-perfect-enough}를 결합하면,
+$R\Gamma(X,K\otimes^\mathbf{L}E)$가 $D(A)$에서
+유사연접임을 알 수 있다. 이는 모든 유사연접 대상 $E$에
+대하여 성립하며, 이 대상들은 $D(\mathcal{O}_X)$에 속한다.
+따라서 More on Morphisms of Spaces,
+Lemma \ref{spaces-more-morphisms-lemma-characterize-pseudo-coherent}에서
+보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-compute-over-affine}
+Situation \ref{spaces-flat-situation-existence}에서 $K$를 Lemma
+\ref{spaces-flat-lemma-compute-what-it-should-be}에서와 같이 두자.
+$U\to X$가 에탈 사상이고 $U$가 준콤팩트 준분리이면
+$$
+R\Gamma(U,K)\otimes_A^\mathbf{L}A_n=
+R\Gamma(U_n,\mathcal{F}_n)
+$$
+이 $D(A_n)$에서 성립한다. 여기서 $U_n=U\times_X X_n$이다.
+\end{lemma}
+
+\begin{proof}
+$n$을 고정하자. Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-computing-sections-as-colim}에 의해
+완전 복합체들의 계 $E_m$이 $X$ 위에 존재하여
+$R\Gamma(U,K)=\text{hocolim} R\Gamma(X,K\otimes^\mathbf{L}E_m)$
+이 된다. 실제로 이 공식은 $K$뿐 아니라
+$D_\QCoh(\mathcal{O}_X)$의 모든 대상에 대하여 성립한다.
+이를 $\mathcal{F}_n$에 적용하면
+\begin{align*}
+R\Gamma(U_n,\mathcal{F}_n)
+&=
+R\Gamma(U,\mathcal{F}_n)\\
+&=
+\text{hocolim}_m R\Gamma(X,\mathcal{F}_n\otimes^\mathbf{L}E_m)\\
+&=
+\text{hocolim}_m R\Gamma(X_n,\mathcal{F}_n\otimes^\mathbf{L}E_m|_{X_n})
+\end{align*}
+을 얻는다. Lemma \ref{spaces-flat-lemma-compute-against-perfect}와
+$-\otimes_A^\mathbf{L}A_n$이 호모토피 여극한과 가환한다는
+사실을 사용하면 결과를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-finitely-presented}
+Situation \ref{spaces-flat-situation-existence}에서 $K$를 Lemma
+\ref{spaces-flat-lemma-compute-what-it-should-be}에서와 같이 두자.
+% P09-ERR-1271
+$X_0\subset |X|$로 닫힌 부분집합
+$\Spec(A_1)=\Spec(A_2)=\ldots$ 위에 놓이는 점들로 이루어진
+부분집합을 나타내자. 이 닫힌 부분집합은 $\Spec(A)$ 안에 있다.
+열린 부분공간 $W\subset X$가 존재하여 $X_0$를 포함하고
+다음이 성립한다.
+\begin{enumerate}
+\item $H^i(K)|_W$는 $i=0$이 아니면 영이다.
+\item $\mathcal{F}=H^0(K)|_W$는 유한 표시이다.
+\item $\mathcal{F}_n=
+\mathcal{F}\otimes_{\mathcal{O}_X}\mathcal{O}_{X_n}$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$n\geq1$을 고정하자. 구성에 의해 표준 사상
+$K\to\mathcal{F}_n$이 $D_\QCoh(\mathcal{O}_X)$에서
+존재하고, 따라서 준연접층들의 표준 사상
+$H^0(K)\to\mathcal{F}_n$이 존재한다. 이것이 (3)의 뜻을 설명한다.
+
+\medskip\noindent
+$x\in X_0$를 점이라 하자. 열린 근방 $W$를 $x$에 대하여
+찾되 (1), (2), (3)이 성립하게 하겠다. $X_0$가 준콤팩트이므로 이것으로
+보조정리가 증명된다. $U\to X$를 에탈 사상이라 하되
+$U$는 아핀이고 $u\in U$는 $x$로 가는 점이라 하자.
+$|U|\to|X|$가 열린 사상이므로 (1), (2), (3)이 성립하는
+$u$의 열린 근방을 찾으면 충분하며, 이 근방은 $U$ 안에 있다.
+$U=\Spec(B)$라 하자. 전사 $P\to B$를 택하되
+$P$는 $A$ 위에서 매끄럽다고 하자. Lemma \ref{spaces-flat-lemma-relative-pseudo-coherence}와
+상대적 유사연접성의 정의에 의해 위로 유계인 복합체
+$F^\bullet$이 존재하는데, 이는 유한 자유 $P$-가군들로 이루어지고
+% P09-ERR-0857
+$Ri_*K$를 나타낸다. 여기서 $i:U\to\Spec(P)$는 이 표시가
+유도하는 닫힌 몰입이다. $M_n$을 $B$-가군으로서
+$\mathcal{F}_n|_U$에 대응하는 것이라 하자. Lemma
+\ref{spaces-flat-lemma-compute-over-affine}에 의해
+$$
+H^i(F^\bullet\otimes_A A_n)=
+\left\{
+\begin{matrix}
+0&\text{if}&i\not=0\\
+M_n&\text{if}&i=0
+\end{matrix}
+\right.
+$$
+이다. $i$를 $F^i$가 영이 아닌 최대 첨자라 하자.
+$i\leq0$이면 (1), (2), (3)이 성립한다.
+그렇지 않으면 $i>0$이고, 사상
+$$
+F^{i-1}\to F^i
+$$
+의 점 $u$에서의 계수가 최대임을 알 수 있다.
+% P09-ERR-0858
+따라서 $u$의 열린 근방에서 계수는 최대이며, 이 근방은
+$\Spec(P)$ 안에 있다.
+$P$를 주국소화로 바꾼 뒤 표시된 사상이 전사라고 가정할 수 있다.
+$F^i$가 유한 자유이므로 분할
+$F^{i-1}=F'\oplus F^i$를 택할 수 있다. 그러면
+$F^\bullet$을 복합체
+$$
+\ldots\to F^{i-2}\to F'\to0\to\ldots
+$$
+로 바꿀 수 있고, $i$에 관한 귀납법으로 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-proper-support}
+Situation \ref{spaces-flat-situation-existence}에서 $K$를 Lemma
+\ref{spaces-flat-lemma-compute-what-it-should-be}에서와 같이 두자.
+$W\subset X$를 Lemma \ref{spaces-flat-lemma-finitely-presented}에서와 같이
+두고 $\mathcal{F}=H^0(K)|_W$라 하자. 그러면 열린집합 $W$를
+필요하면 줄인 뒤 $\mathcal{F}$의 지지는 $A$ 위에서 proper이다.
+\end{lemma}
+
+\begin{proof}
+$n\geq1$을 고정하자. $I_n=\Ker(A\to A_n)$이라 하자.
+More on Algebra, Lemma \ref{more-algebra-lemma-limit-henselian}에 의해
+쌍 $(A,I_n)$은 헨젤이다. $Z\subset W$를 $\mathcal{F}$의
+스킴론적 지지라 하자. $\mathcal{F}$가 유한 표시이므로 이는
+닫힌 부분공간이다. Lemma \ref{spaces-flat-lemma-finitely-presented}의
+(3)에 의해 $Z\times_{\Spec(A)}\Spec(A_n)$은
+$\mathcal{F}_n$의 지지와 같고, 따라서
+% P09-ERR-0859
+$\Spec(A/I)$ 위에서 proper이다. More on Morphisms of Spaces,
+Lemma \ref{spaces-more-morphisms-lemma-split-off-proper-part-henselian}에
+의해 $Z=Z_1\amalg Z_2$라 쓸 수 있다. 여기서 $Z_1,Z_2$는
+$Z$에서 열리고 닫혀 있으며, $Z_1$은 $A$ 위에서 proper이고,
+$Z_1\times_{\Spec(A)}\Spec(A/I_n)$은 $\mathcal{F}_n$의
+지지와 같다. 다시 말해 $|Z_2|$는 $X_0$와 만나지 않는다.
+따라서 $W$를 $W\setminus Z_2$로 바꾸면 보조정리를 얻는다.
+\end{proof}
+
+\begin{theorem}[그로텐디크 존재 정리]
+\label{spaces-flat-theorem-existence}
+Situation \ref{spaces-flat-situation-existence}에서 유한 표시
+$\mathcal{O}_X$-가군 $\mathcal{F}$가 존재하여, $A$ 위에서
+평탄하고 그 지지가 $A$ 위에서 proper이며,
+$\mathcal{F}_n=
+\mathcal{F}\otimes_{\mathcal{O}_X}\mathcal{O}_{X_n}$이
+모든 $n$에 대하여 성립하고 사상 $\varphi_n$과 양립한다.
+\end{theorem}
+
+\begin{proof}
+Lemmas \ref{spaces-flat-lemma-compute-what-it-should-be},
+\ref{spaces-flat-lemma-compute-against-perfect},
+\ref{spaces-flat-lemma-relative-pseudo-coherence},
+\ref{spaces-flat-lemma-compute-over-affine},
+\ref{spaces-flat-lemma-finitely-presented}, 및
+\ref{spaces-flat-lemma-proper-support}를 적용하면 열린 부분공간 $W\subset X$를
+얻으며, 이는 모든 $\Spec(A_n)$ 위의 점을 포함한다. 또한
+유한 표시 $\mathcal{O}_W$-가군 $\mathcal{F}$를 얻는다.
+그 지지는 $A$ 위에서 proper이고,
+$\mathcal{F}_n=
+\mathcal{F}\otimes_{\mathcal{O}_W}\mathcal{O}_{X_n}$가
+모든 $n\geq1$에 대하여 성립한다
+($X_n\subset W$이므로 이는 뜻이 있다).
+Lemma \ref{spaces-flat-lemma-proper-pure}에 의해 $\mathcal{F}$는
+$\Spec(A)$에 대하여 보편적으로 순수하다. Theorem
+\ref{spaces-flat-theorem-flat-dimension-n-representable}에 의해
+(설명은 Lemma \ref{spaces-flat-lemma-when-universal-flattening}을 보라)
+보편적 평탄화 $S'\to\Spec(A)$가 $\mathcal{F}$에 대하여 존재하고,
+사상 $S'\to\Spec(A)$는 유한 표시 단사 사상이다.
+특히 $S'$은 스킴이다. 이는 정리의 증명에서 따르지만,
+% P09-ERR-0860
+Morphisms of Spaces, Proposition
+\ref{spaces-morphisms-proposition-locally-quasi-finite-separated-over-scheme}에
+의해 a postoriori로도 따른다. $\mathcal{F}$의 $\Spec(A_n)$로의
+밑변환은 $\mathcal{F}_n$이므로
+$\Spec(A_n)\to\Spec(A)$가 $S'$을 통해 유일하게 분해됨을 안다.
+이는 각 $n$에 대하여 성립한다.
+More on Flatness, Lemma
+\ref{flat-lemma-monomorphism-isomorphism}에 의해
+$S'=\Spec(A)$임을 알 수 있다. 이는 $\mathcal{F}$가 $A$ 위에서
+평탄이라는 뜻이다. 마지막으로 $Z$를 $\mathcal{F}$의 스킴론적
+지지라 하자. 이는 $\Spec(A)$ 위에서 proper이므로 사상
+$Z\to X$는 닫혀 있다.
+따라서 전진상 $(W\to X)_*\mathcal{F}$는
+% P09-ERR-1274
+$W$ 위에 지지되고 원하는 모든 성질을 갖는다.
+\end{proof}
+
+
+
+
+
+
+\section{그로텐디크 존재 정리, bis}
+\label{spaces-flat-section-existence-derived}
+
+\noindent
+이 절에서는 준연접 가군에 대하여 Section
+\ref{spaces-flat-section-existence}에서 사용한 방법을 따라 유도 범주에서의
+% P09-ERR-0861
+그로텐디크 존재 정리의 유사물을 증명한다. 이 절은 대수공간에
+대한 More on Flatness, Section
+\ref{flat-section-existence-derived}의 유사물이다. 고전적인
+경우(대수공간에 대한 경우)는 More on Morphisms of Spaces,
+Section \ref{spaces-more-morphisms-section-existence-proper}에서
+논의한다. 다음 상황에서 작업한다.
+
+\begin{situation}
+\label{spaces-flat-situation-existence-derived}
+여기서는 전이 사상들이 전사이고 그 핵들이 국소 멱영인 환들의
+역계 $(A_n)$이 주어져 있다. $A=\lim A_n$이라 두자.
+대수공간 $X$가 주어져 있고, 이는 $A$ 위에서 proper이고
+평탄하며 유한 표시이다.
+$X_n=X\times_{\Spec(A)}\Spec(A_n)$이라 두고 이를 $X$의 닫힌
+부분공간으로 본다. 또한 계 $(K_n,\varphi_n)$이 주어져 있다고
+가정한다. 여기서 $K_n$은 $D(\mathcal{O}_{X_n})$의
+유사연접 대상이고,
+$$
+\varphi_n:K_n\longrightarrow K_{n-1}
+$$
+은 $D(\mathcal{O}_{X_n})$의 사상으로서
+$K_n\otimes_{\mathcal{O}_{X_n}}^\mathbf{L}
+\mathcal{O}_{X_{n-1}}\to K_{n-1}$을 유도하고, 이 사상은
+$D(\mathcal{O}_{X_{n-1}})$에서 동형이다.
+\end{situation}
+
+\noindent
+더 정확하게는
+$\varphi_n:K_n\to Ri_{n-1,*}K_{n-1}$이라 써야 한다.
+여기서 $i_{n-1}:X_{n-1}\to X_n$은 포함 사상이다.
+이 표기법에서 조건은 수반 사상
+$Li_{n-1}^*K_n\to K_{n-1}$이 동형이라는 것이다.
+목표는 유사연접 $K\in D(\mathcal{O}_X)$를 찾아
+$K_n=K\otimes_{\mathcal{O}_X}^\mathbf{L}\mathcal{O}_{X_n}$이
+모든 $n$에 대하여 성립하게 하는 것이다
+(동일한 표기의 남용을 사용한다).
+
+\begin{lemma}
+\label{spaces-flat-lemma-compute-what-it-should-be-derived}
+Situation \ref{spaces-flat-situation-existence-derived}에서
+$$
+K=R\lim_{D_\QCoh(\mathcal{O}_X)}(K_n)=
+DQ_X(R\lim_{D(\mathcal{O}_X)}K_n)
+$$
+를 생각하자. 그러면 $K$는 $D^-_{\QCoh}(\mathcal{O}_X)$에 속한다.
+\end{lemma}
+
+\begin{proof}
+함자 $DQ_X$는 $X$가 준콤팩트 준분리이므로 존재한다.
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-better-coherator}를 보라.
+$DQ_X$는 오른쪽 수반이므로 곱과 가환하고, 따라서 유도 극한과도
+가환한다. 이로부터 보조정리의 등식이 따른다.
+
+\medskip\noindent
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-boundedness-better-coherator}에 의해
+함자 $DQ_X$의 코호몰로지 차원은 유계이다. 따라서
+$R\lim K_n\in D^-(\mathcal{O}_X)$임을 보이면 충분하다.
+이를 보이기 위해 $U\to X$를 에탈 사상이라 하되 $U$는
+아핀이라고 하자. 그러면 Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-RGamma-commutes-with-Rlim}에 의해
+표준 완전열
+$$
+0\to
+R^1\lim H^{m-1}(U,K_n)\to H^m(U,R\lim K_n)\to
+\lim H^m(U,K_n)\to0
+$$
+이 존재한다. $U$가 아핀이고 $K_n$이 유사연접이므로
+(따라서 Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-pseudo-coherent}에 의해 그
+코호몰로지 층들은 준연접이다), Derived Categories of Schemes,
+Lemma \ref{perfect-lemma-affine-compare-bounded}에 의해
+$H^m(U,K_n)=H^m(K_n)(U)$임을 알 수 있다. 따라서 $K_n$이
+$n$과 무관하게 위로 유계임을 보이면 충분하다고 결론 내린다.
+
+\medskip\noindent
+$K_n$이 유사연접이므로
+$K_n\in D^-(\mathcal{O}_{X_n})$이다.
+% P09-ERR-0862
+$a_n$을 $H^{a_n}(K_n)$이 영이 아닌 최대 정수라 하자.
+물론 $a_1\leq a_2\leq a_3\leq\ldots$이다.
+$H^{a_n}(K_n)$은 유한 표시
+$\mathcal{O}_{X_n}$-가군임에 유의하자
+(Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-finite-cohomology}).
+다음이 성립한다.
+$$
+H^{a_n}(K_{n-1})=
+H^{a_n}(K_n)\otimes_{\mathcal{O}_{X_n}}\mathcal{O}_{X_{n-1}}
+$$
+$X_{n-1}\to X_n$은 두껍게 하기이므로 Nakayama 보조정리
+(Algebra, Lemma \ref{algebra-lemma-NAK})에 의해
+$H^{a_n}(K_n)\otimes_{\mathcal{O}_{X_n}}
+\mathcal{O}_{X_{n-1}}$이 영이면 $H^{a_n}(K_n)$도 영이다
+(예를 들어 줄기에서 확인하면 된다. 작은 세부사항은 생략한다).
+따라서
+% P09-ERR-0863
+$a_{n-1}=a_n$이 모든 $n$에 대하여 성립하고 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-compute-against-perfect-derived}
+Situation \ref{spaces-flat-situation-existence-derived}에서 $K$를 Lemma
+\ref{spaces-flat-lemma-compute-what-it-should-be-derived}에서와 같이 두자.
+$E$를 $D(\mathcal{O}_X)$의 임의의 완전 대상이라 하자. 코호몰로지
+$$
+M=R\Gamma(X,K\otimes^\mathbf{L}E)
+$$
+는 $D(A)$의 유사연접 대상이고, 표준 동형
+$$
+R\Gamma(X_n,K_n\otimes^\mathbf{L}E|_{X_n})=
+M\otimes_A^\mathbf{L}A_n
+$$
+이 $D(A_n)$에서 존재한다. 여기서 $E|_{X_n}$은 $E$의
+$X_n$로의 유도 당김을 나타낸다.
+\end{lemma}
+
+\begin{proof}
+$E_n=E|_{X_n}$ 및
+$M_n=R\Gamma(X_n,K_n\otimes^\mathbf{L}E|_{X_n})$이라 쓰자.
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-flat-proper-pseudo-coherent-direct-image-general}에
+의해 $M_n$은 $D(A_n)$의 유사연접 대상이고, 이를 만드는 과정은
+밑변환과 가환한다. 따라서 사상
+$M_n\otimes_{A_n}^\mathbf{L}A_{n-1}\to M_{n-1}$은
+$\varphi_n$에서 오며 동형이다. More on Algebra, Lemma
+\ref{more-algebra-lemma-Rlim-pseudo-coherent-gives-pseudo-coherent}에
+의해 $R\lim M_n$은 유사연접이고, 이를 다시 $A_n$으로
+밑변환하면 $M_n$을 회복한다. 한편 삼각 범주들의 완전 함자
+$R\Gamma(X,-):D_\QCoh(\mathcal{O}_X)\to D(A)$는 곱과 가환하므로
+유도 극한과도 가환한다. 따라서 원하는 대로
+$$
+R\Gamma(X,E\otimes^\mathbf{L}K)=
+R\lim R\Gamma(X,E\otimes^\mathbf{L}K_n)=
+R\lim R\Gamma(X_n,E_n\otimes^\mathbf{L}K_n)=
+R\lim M_n
+$$
+이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-relative-pseudo-coherence-derived}
+Situation \ref{spaces-flat-situation-existence-derived}에서 $K$를 Lemma
+\ref{spaces-flat-lemma-compute-what-it-should-be-derived}에서와 같이 두자.
+그러면 $K$는 $X$ 위에서 유사연접이다.
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-0864
+Lemma \ref{spaces-flat-lemma-compute-against-perfect-derived}와
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-perfect-enough}를 결합하면,
+$R\Gamma(X,K\otimes^\mathbf{L}E)$가 $D(A)$에서
+유사연접임을 알 수 있다. 이는 모든 유사연접 대상 $E$에
+대하여 성립하며, 이 대상들은 $D(\mathcal{O}_X)$에 속한다.
+따라서 More on Morphisms
+of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-characterize-pseudo-coherent}에 의해
+$K$는 $A$에 대하여 유사연접이다.
+% P09-ERR-0865
+$X$가 $A$ 위에서 of 평탄이고 유한 표시이므로, 이는
+$X$ 위에서 유사연접인 것과 같다. More on Morphisms of Spaces,
+Lemma
+\ref{spaces-more-morphisms-lemma-relative-pseudo-coherent-is-moot}를
+보라.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-flat-lemma-compute-over-affine-derived}
+Situation \ref{spaces-flat-situation-existence-derived}에서 $K$를 Lemma
+\ref{spaces-flat-lemma-compute-what-it-should-be-derived}에서와 같이 두자.
+$U\to X$가 에탈 사상이고 $U$가 준콤팩트 준분리이면
+$$
+R\Gamma(U,K)\otimes_A^\mathbf{L}A_n=
+R\Gamma(U_n,K_n)
+$$
+이 $D(A_n)$에서 성립한다. 여기서 $U_n=U\times_X X_n$이다.
+\end{lemma}
+
+\begin{proof}
+$n$을 고정하자. Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-computing-sections-as-colim}에 의해
+완전 복합체들의 계 $E_m$이 $X$ 위에 존재하여
+$R\Gamma(U,K)=\text{hocolim} R\Gamma(X,K\otimes^\mathbf{L}E_m)$
+이 된다. 실제로 이 공식은 $K$뿐 아니라
+$D_\QCoh(\mathcal{O}_X)$의 모든 대상에 대하여 성립한다.
+이를 $K_n$에 적용하면
+\begin{align*}
+R\Gamma(U_n,K_n)
+&=
+R\Gamma(U,K_n)\\
+&=
+\text{hocolim}_m R\Gamma(X,K_n\otimes^\mathbf{L}E_m)\\
+&=
+\text{hocolim}_m R\Gamma(X_n,K_n\otimes^\mathbf{L}E_m|_{X_n})
+\end{align*}
+을 얻는다. Lemma \ref{spaces-flat-lemma-compute-against-perfect-derived}와
+$-\otimes_A^\mathbf{L}A_n$이 호모토피 여극한과 가환한다는
+사실을 사용하면 결과를 얻는다.
+\end{proof}
+
+\begin{theorem}[유도 그로텐디크 존재 정리]
+\label{spaces-flat-theorem-existence-derived}
+Situation \ref{spaces-flat-situation-existence-derived}에서 유사연접 대상
+$K$가 $D(\mathcal{O}_X)$에 존재하여
+$K_n=K\otimes_{\mathcal{O}_X}^\mathbf{L}\mathcal{O}_{X_n}$이
+모든 $n$에 대하여 사상 $\varphi_n$과 양립하게 성립한다.
+\end{theorem}
+
+\begin{proof}
+Lemmas \ref{spaces-flat-lemma-compute-what-it-should-be-derived},
+\ref{spaces-flat-lemma-compute-against-perfect-derived},
+\ref{spaces-flat-lemma-relative-pseudo-coherence-derived}를 적용하여
+$K$를 $D(\mathcal{O}_X)$의 유사연접 대상으로 얻는다.
+Lemma \ref{spaces-flat-lemma-compute-over-affine-derived}에서 아핀 $U$를
+택하면 $K$를 제한한 것이 $K_n$임이 즉시 따르며, 그 제한은
+$X_n$ 위에서 취한다.
+\end{proof}
+
+\begin{remark}
+\label{spaces-flat-remark-correct-generality}
+이 절의 결과는 일반화할 수 있다. $X\to\Spec(A)$가 분리이고
+유한 표시이며, $K_n$이 $A_n$에 대하여 유사연접이고
+$X_n$의 닫힌 부분집합 위에 지지되며 그 부분집합이
+$A_n$ 위에서 proper이라고만
+가정해도 아마 옳을 것이다. 결과로 $K$를 얻을 것이며, 이는
+$A$에 대하여 유사연접이고 $A$ 위에서 proper인 닫힌 부분집합
+위에 지지된다.
+이 결과가 필요해지면 여기서 정확한 명제를 정식화하고 증명하겠다.
+\end{remark}

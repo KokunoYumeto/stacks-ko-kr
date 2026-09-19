@@ -1,0 +1,2478 @@
+% Generated mechanically from frozen input p09/ko/src/spaces-more-groupoids.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{78}
+\chapter{대수공간에서의 Groupoid에 관한 추가 내용}
+
+
+
+\phantomsection
+\label{spaces-more-groupoids-section-phantom}
+
+
+\section{서론}
+\label{spaces-more-groupoids-section-introduction}
+
+\noindent
+이 장은 대수공간에서의 groupoid에 관한 고급 주제를 다룬다.
+결과들은 대수공간에서의 groupoid라는 말로 서술되지만, 독자는
+$2$-카테시안 도식
+\begin{equation}
+\label{spaces-more-groupoids-equation-quotient-stack}
+\vcenter{
+\xymatrix{
+R \ar[r] \ar[d] & U \ar[d] \\
+U \ar[r] & [U/R]
+}
+}
+\end{equation}
+을 염두에 두어야 한다. 여기서 $[U/R]$은 몫 스택이다. Groupoids in
+Spaces, Remark \ref{spaces-groupoids-remark-fundamental-square}를 보라.
+많은 결과는 이 도식을 생각함으로써 동기를 얻는다. 예를 들어 Keel과
+Mori의 아름다운 논문 \cite{K-M}을 보라.
+
+
+
+
+\section{표기}
+\label{spaces-more-groupoids-section-notation}
+
+\noindent
+Groupoids in Spaces, Section
+\ref{spaces-groupoids-section-notation}에서 도입한 규약과 표기를
+계속 따른다.
+
+
+
+
+\section{유용한 도식}
+\label{spaces-more-groupoids-section-diagrams}
+
+\noindent
+이 장에서 쉽게 참조할 수 있도록 Groupoids in Spaces, Lemmas
+\ref{spaces-groupoids-lemma-diagram} 및
+\ref{spaces-groupoids-lemma-diagram-pull}의 결과를 간단히 다시
+서술한다. $S$를 스킴, $B$를 $S$ 위의 대수공간이라 하자.
+$(U, R, s, t, c)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+가환 도식
+\begin{equation}
+\label{spaces-more-groupoids-equation-diagram}
+\vcenter{
+\xymatrix{
+& U & \\
+R \ar[d]_s \ar[ru]^t &
+R \times_{s, U, t} R
+\ar[l]^-{\text{pr}_0} \ar[d]^{\text{pr}_1} \ar[r]_-c &
+R \ar[d]^s \ar[lu]_t \\
+U & R \ar[l]_t \ar[r]^s & U
+}
+}
+\end{equation}
+에서 아래의 두 정사각형은 올곱 정사각형이다. 또한 위쪽 삼각형
+(실제로는 정사각형)도 카테시안이다.
+
+\medskip\noindent
+도식
+\begin{equation}
+\label{spaces-more-groupoids-equation-pull}
+\vcenter{
+\xymatrix{
+R \times_{t, U, t} R
+\ar@<1ex>[r]^-{\text{pr}_1} \ar@<-1ex>[r]_-{\text{pr}_0}
+\ar[d]_{\text{pr}_0 \times c \circ (i, 1)} &
+R \ar[r]^t \ar[d]^{\text{id}_R} &
+U \ar[d]^{\text{id}_U} \\
+R \times_{s, U, t} R
+\ar@<1ex>[r]^-c \ar@<-1ex>[r]_-{\text{pr}_0} \ar[d]_{\text{pr}_1} &
+R \ar[r]^t \ar[d]^s &
+U \\
+R \ar@<1ex>[r]^s \ar@<-1ex>[r]_t &
+U
+}
+}
+\end{equation}
+은 가환한다. 위의 두 행은 주어진 수직 사상들을 통해 동형이다.
+왼쪽 아래의 두 정사각형은 카테시안이다.
+
+
+
+
+
+
+\section{국소 구조}
+\label{spaces-more-groupoids-section-local}
+
+\noindent
+$S$를 스킴이라 하자.
+$(U, R, s, t, c, e, i)$를 $S$ 위 대수공간에서의 groupoid라 하자.
+$\overline{u}$를 $U$의 기하학적 점이라 하자. 이 절에서는 국소환
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-etale-local-rings})
+$$
+A = \mathcal{O}_{U, \overline{u}}
+\quad\text{and}\quad
+B = \mathcal{O}_{R, e(\overline{u})}
+$$
+위에 어떤 구조가 생기는지 설명한다. 사용할 규약은 사상
+$s,t,c,e,i$가 유도하는 국소환 준동형을 각각 같은 문자로
+나타내는 것이다. 특히 국소환들의 가환 도식
+$$
+\xymatrix{
+A \ar[rd]_t \ar[rrd]^1 \\
+& B \ar[r]^e & A \\
+A \ar[ru]^s \ar[rru]_1
+}
+$$
+을 얻는다. 따라서 $I \subset B$가 $e : B \to A$의 핵이면
+$B = s(A) \oplus I = t(A) \oplus I$이다. 다음과 같이 놓자.
+$$
+C = \mathcal{O}_{R \times_{s, U, t} R, (e, e)(\overline{u})}
+$$
+이다.
+그러면
+$$
+C =
+(B \otimes_{s, A, t} B)_{\mathfrak m_B \otimes B + B \otimes \mathfrak m_B}^h
+$$
+이다. 실제로
+$(B \otimes_{s, A, t} B)_{\mathfrak m_B \otimes B + B \otimes \mathfrak m_B}$
+의 국소화는 분리폐 잉여체를 갖는다.
+$J \subset C$를 $C$의 아이디얼로서
+$I \otimes B + B \otimes I$가 생성하는 것이라 하자.
+그러면 $J$는 국소환 준동형
+$$
+(e, e) : C \longrightarrow A
+$$
+의 핵이기도 하다. 합성 법칙
+$c : R \times_{s, U, t} R \to R$은 환 사상
+$$
+c : B \longrightarrow C
+$$
+에 대응하며, 이는 $I$를 $J$로 보낸다.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-first-order-structure-c}
+사상 $I/I^2 \to J/J^2$, 즉 $c$가 유도하는 사상은 합성
+$$
+I/I^2 \xrightarrow{(1, 1)} I/I^2 \oplus I/I^2 \to J/J^2
+$$
+이다. 여기서 둘째 화살표는 등식
+$J = (I \otimes B + B \otimes I)C$에서 온다.
+$i : B \to B$가 유도하는 사상은
+$-1 : I/I^2 \to I/I^2$이다.
+\end{lemma}
+
+\begin{proof}
+$C$에서 다른 헨젤 국소환으로 가는 국소 준동형을 기술하려면,
+예를 들어 Algebra, Lemma
+\ref{algebra-lemma-henselian-functorial}에 의해
+$b_1 \otimes b_2$ 꼴의 원소에 무슨 일이 일어나는지만 말하면
+충분하다. 이를 염두에 두면 표준 사상
+$$
+e_2 : C \to B,\ b_1 \otimes b_2 \mapsto b_1s(e(b_2)),\quad
+e_1 : C \to B,\ b_1 \otimes b_2 \mapsto t(e(b_1))b_2
+$$
+을 얻는다. 이들은 매장 $R \to R \times_{s, U, t} R$에 대응하며,
+그 매장들은 각각 $r \mapsto (r, e(s(r)))$ 및
+$r \mapsto (e(t(r)), r)$로 주어진다.
+이 사상들이 유도하는 사상 $J/J^2 \to I/I^2$는 함께 보조정리의
+사상 $I/I^2 \oplus I/I^2 \to J/J^2$의 역을 이룬다.
+% P09-ERR-0938
+따라서 명제를 증명하려면 $e_1 \circ c : B \to B$와
+$e_2 \circ c : B \to B$가 항등사상임을 보이면 된다.
+이는 두 합성 $R \to R \times_{s, U, t} R \to R$이 모두
+항등사상이라는 사실에서 따른다.
+
+\medskip\noindent
+$i$에 관한 명제는 $c$에 관한 명제와
+$c \circ (1, i) = e \circ t$라는 사실에서 따른다.
+일부 세부사항은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{단면의 groupoid}
+\label{spaces-more-groupoids-section-groupoid-sections}
+
+\noindent
+groupoid $(\text{Ob}, \text{Arrows}, s, t, c, e, i)$가 주어졌다고 하자.
+그러면 모노이드 $\Gamma$를 구성할 수 있다. 그 원소는 사상
+$\delta : \text{Ob} \to \text{Arrows}$로서
+$s \circ \delta = \text{id}_{\text{Ob}}$를 만족하고, 합성은
+$$
+\delta_1 \circ \delta_2 = c(\delta_1 \circ t \circ \delta_2, \delta_2)
+$$
+로 주어진다.
+달리 말해 $\Gamma$의 원소는 각 대상에서 출발하는 화살표 하나를
+지정하는 규칙 $\delta$이고, 합성은 자연스러운 방식으로 정한다.
+예를 들면 자명한 표기 아래
+$$
+\vcenter{
+\xymatrix{
+& \bullet \ar[dl] \\
+\bullet \ar@(ul, dl)[] & \bullet \ar[d] \\
+& \bullet \ar[lu]
+}
+}
+\quad\circ\quad
+\vcenter{
+\xymatrix{
+& \bullet \ar[d] \\
+\bullet \ar[ru] & \bullet \ar[d] \\
+& \bullet \ar[lu]
+}
+}
+\quad = \quad\quad
+\vcenter{
+\xymatrix{
+& \bullet \ar@/^/[dd] \\
+\bullet \ar@(ul, dl)[] & \bullet \ar[l] \\
+& \bullet \ar[lu]
+}
+}
+$$
+이다.
+
+\medskip\noindent
+같은 절차를 대수공간에서의 groupoid
+$(U, R, s, t, c, e, i)$에도 적용할 수 있으며, 이는 스킴
+$S$ 위에 있다. 즉 $\Gamma$의 원소로
+집합
+$$
+\Gamma = \{\delta : U \to R \mid s \circ \delta = \text{id}_U\}
+$$
+을 취하고, 합성 $\circ : \Gamma \times \Gamma \to \Gamma$는 위의
+규칙
+\begin{equation}
+\label{spaces-more-groupoids-equation-composition}
+\delta_1 \circ \delta_2 = c(\delta_1 \circ t \circ \delta_2, \delta_2)
+\end{equation}
+로 주어진다. 항등원은 $e \in \Gamma$이다.
+% P09-ERR-0939
+groupoid $\Gamma$는 일반적으로 군이 아니다. 역원을 갖지 않는
+원소 $\delta \in \Gamma$가 있을 수 있기 때문이다.
+$\delta \in \Gamma$가 역원을 가질 필요충분조건은
+$t \circ \delta$가 $U$의 자기동형사상인 것이 명백하며, 이 경우
+$\delta^{-1} = i \circ \delta \circ (t \circ \delta)^{-1}$이다.
+
+\medskip\noindent
+뒤에서 사용하기 위해 subgroupoid $\Gamma_0$를 논의한다.
+이는 $\Gamma$의 단면들 가운데 항등원 $e$에 무한소적으로 가까운
+것들로 이루어진다.
+% P09-ERR-0939
+더 정확히 말해 $R$-불변 닫힌 부분공간 $U_0 \subset U$가 주어지고
+$U$가 $U_0$의 일차 두껍게 하기라고 하자.
+$R_0 = s^{-1}(U_0) = t^{-1}(U_0)$라 쓰고
+$(U_0, R_0, s_0, t_0, c_0, e_0, i_0)$를 대응하는
+대수공간에서의 groupoid라 하자. 다음과 같이 놓는다.
+$$
+\Gamma_0 = \{\delta \in \Gamma \mid \delta|_{U_0} = e_0\}
+$$
+$s$와 $t$가 평탄하면 $\Gamma_0$의 모든 원소는 가역이다.
+실제로 $t \circ \delta$는 $U \to U$의 사상이고
+$\mathcal{O}_{U_0}$와 $\mathcal{C}_{U_0/U}$ 위에서 항등을 유도한다
+(Lemma \ref{spaces-more-groupoids-lemma-idenity-on-conormal}). 또한 짧은 완전열
+$0 \to \mathcal{C}_{U_0/U} \to \mathcal{O}_U
+\to \mathcal{O}_{U_0} \to 0$이 있으므로 결론이 따른다.
+
+\begin{lemma}
+% P09-ERR-0944
+\label{spaces-more-groupoids-lemma-idenity-on-conormal}
+이 절에서 논의한 상황에서 $\delta \in \Gamma_0$라 하고
+$f = t \circ \delta : U \to U$라 하자. $s,t$가 평탄하면 표준 사상
+$\mathcal{C}_{U_0/U} \to \mathcal{C}_{U_0/U}$, 즉 $f$가 유도하는
+사상은 (More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-conormal-functorial}) 항등사상이다.
+\end{lemma}
+
+\begin{proof}
+이를 보기 위해 도식 (\ref{spaces-more-groupoids-equation-pull})의 아래쪽을 다음과 같이
+확장한다.
+$$
+\xymatrix{
+Y \ar[r] \ar[d] &
+R \times_{s, U, t} R
+\ar@<1ex>[r]^-c \ar@<-1ex>[r]_-{\text{pr}_0} \ar[d]_{\text{pr}_1} &
+R \ar[r]^t \ar[d]^s &
+U \\
+U \ar[r]_\delta &
+R \ar@<1ex>[r]^s \ar@<-1ex>[r]_t &
+U
+}
+$$
+왼쪽 정사각형은 카테시안이며, 이것이 $Y$의 정의이다. $Y$에 대해
+더 알 필요는 없다. 모든 곳을 $U_0$로 기저변환하여 얻는 비슷한
+도식도 같은 성질을 갖는다. 우리는
+$\text{id}_U = s \circ \delta$와 $f = t \circ \delta$가
+여법층 위에서 같은 사상을 유도함을 보이려 한다.
+$s$가 평탄 전사이므로 위 행을 따르는 두 합성
+$a,b : Y \to R$에 대해 같은 것을 증명하면 충분하다.
+$a_0=b_0$임을 관찰하자. 또한 $a$와 $b$ 중 하나는
+$s\circ\delta$가 동형사상이라는 사실 때문에 동형사상이다.
+따라서 두 사상 $a,b:Y\to R$은 $U$ 위에서 평탄한 대수공간들
+사이의 사상이다. 여기서 첫 구조 사상은 $t:R\to U$이고,
+둘째 구조 사상은 $t\circ a=t\circ b:Y\to U$이다.
+이는 원하는 결론을 준다. 실제로 More on Morphisms of Spaces,
+Lemma \ref{spaces-more-morphisms-lemma-conormal-functorial-more}의
+합성과의 호환성에 의해 두 사상
+$a_0^*\mathcal{C}_{R_0/R} \to \mathcal{C}_{Y_0/Y}$은 모두
+가환 도식
+$$
+\xymatrix{
+a_0^*\mathcal{C}_{R_0/R} \ar[rr] & & \mathcal{C}_{Y_0/Y} \\
+a_0^*t_0^*\mathcal{C}_{U_0/U} \ar[u] \ar@{=}[rr] & &
+(t_0 \circ a_0)^*\mathcal{C}_{U_0/U} \ar[u]
+}
+$$
+에 들어간다. 수직 화살표들은 More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-deform}에 의해 동형사상이다.
+따라서 보조정리가 성립한다.
+\end{proof}
+
+\noindent
+군 $\Gamma_0$를 식별하자. More on Morphisms of Spaces, Remarks
+\ref{spaces-more-morphisms-remark-action-by-derivations} 및
+\ref{spaces-more-morphisms-remark-another-special-case}의 논의를
+도식
+$$
+\xymatrix{
+(U_0 \subset U) \ar@{..>}[rr]_{(e_0, \delta)}
+\ar[rd]_{(\text{id}_{U_0}, \text{id}_U)} & &
+(R_0 \subset R) \ar[ld]^{(s_0, s)} \\
+& (U_0 \subset U)
+}
+$$
+에 적용하면 $\delta=\theta\cdot e$임을 알 수 있는데, 여기서
+유일한 $\mathcal{O}_{U_0}$-선형 사상은
+$\theta : e_0^*\Omega_{R_0/U_0} \to \mathcal{C}_{U_0/U}$이다.
+따라서 More on
+Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-action-sheaf}를 적용하여 전단사
+\begin{equation}
+\label{spaces-more-groupoids-equation-isomorphism}
+\Hom_{\mathcal{O}_{U_0}}(e_0^*\Omega_{R_0/U_0}, \mathcal{C}_{U_0/U})
+\longrightarrow
+\Gamma_0
+\end{equation}
+를 얻는다.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-composition-is-addition}
+전단사 (\ref{spaces-more-groupoids-equation-isomorphism})는 군의 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+$\delta_1,\delta_2\in\Gamma_0$가 위와 같이 $\theta_1,\theta_2$에
+대응하고, 합성 $\delta=\delta_1\circ\delta_2$가
+$\Gamma_0$에서 $\theta$에 대응한다고 하자.
+$\theta=\theta_1+\theta_2$임을 보여야 한다. More on Morphisms of
+Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-action-by-derivations}에 의해
+$\theta_1,\theta_2,\theta$는 미분
+$D_1,D_2,D:e_0^{-1}\mathcal{O}_{R_0}\to\mathcal{C}_{U_0/U}$에
+대응하며, 이들은 $D_1=\theta_1\circ\text{d}_{R_0/U_0}$ 등으로
+주어진다. $D=D_1+D_2$임을 확인하면 충분하다.
+
+\medskip\noindent
+등식은 줄기에서 확인할 수 있다. $\overline{u}$를 $U$의
+기하학적 점이라 하고 Section \ref{spaces-more-groupoids-section-local}에서 도입한
+국소환 $A,B,C$를 사용하자. 사상 $\delta_i$는 환 사상
+$\delta_i:B\to A$에 대응한다. $K\subset A$를 제곱영인
+아이디얼로서
+$A/K=\mathcal{O}_{U_0,\overline{u}}$가 되도록 잡자.
+달리 말해 $K$는
+$\mathcal{C}_{U_0/U}$의 $\overline{u}$에서의 줄기이다.
+$\delta_i\in\Gamma_0$라는 사실은 정확히
+$\delta_i(I)\subset K$라는 뜻이다. 미분 $D_i$는 사상
+$\delta_i-e:B\to A$이다. $B=s(A)\oplus I$이므로 $D_i$는
+$I$로의 제한에 의해 결정되고, 이는 바로 $\delta_i|_I$이다.
+% P09-ERR-0940
+더욱이 $D_i$와 따라서 $\delta_i$는 $I^2$를 영으로 보낸다.
+이는 $I=\Ker(I)$이기 때문이다.
+
+\medskip\noindent
+증명을 끝내기 위해 $\delta$가 합성
+$$
+B \to C =
+(B \otimes_{s, A, t} B)^h_{\mathfrak m_B \otimes B + B \otimes \mathfrak m_B}
+\to A
+$$
+에 대응함을 관찰한다. 여기서 첫 화살표는 $c$이고 둘째 화살표는
+규칙
+$b_1 \otimes b_2 \mapsto
+\delta_2(t(\delta_1(b_1))) \delta_2(b_2)$로 결정된다.
+이는 (\ref{spaces-more-groupoids-equation-composition})에서 따른다.
+Lemma \ref{spaces-more-groupoids-lemma-first-order-structure-c}에 의해 $\zeta$를
+$I$의 원소라 하면 고차항을 제외하고
+$\zeta\otimes1+1\otimes\zeta$로 사상된다. 따라서
+$$
+D(\zeta) = (\delta_2 \circ t)\left(D_1(\zeta)\right) + D_2(\zeta)
+$$
+이다. 그러나 Lemma \ref{spaces-more-groupoids-lemma-idenity-on-conormal}에 의해
+$\delta_2\circ t$의
+$K=\mathcal{C}_{U_0/U,\overline{u}}$ 위 작용은 항등이므로
+결론이 따른다.
+\end{proof}
+
+
+
+
+
+\section{Groupoid의 성질}
+\label{spaces-more-groupoids-section-technical-lemma}
+
+\noindent
+이 절은 More on Groupoids, Section
+\ref{more-groupoids-section-technical-lemma}에 대응한다.
+독자는 먼저 그 절을 읽기를 강하게 권한다.
+
+\medskip\noindent
+다음 보조정리는 More on Groupoids, Lemma
+\ref{more-groupoids-lemma-property-invariant}에 대응한다.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-property-invariant}
+$B\to S$가 Section \ref{spaces-more-groupoids-section-notation}에서와 같다고 하자.
+$(U,R,s,t,c)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+$$
+\tau \in \{fppf, \linebreak[0] \etale, \linebreak[0]
+smooth, \linebreak[0] syntomic\}
+$$
+라 하자. $\mathcal{P}$를 대수공간 사상의 성질로서 대상에 대해
+$\tau$-국소적이라고 하자(Descent on Spaces, Definition
+\ref{spaces-descent-definition-property-morphisms-local}).
+$\{s:R\to U\}$와 $\{t:R\to U\}$가 $\tau$-위상의 덮개라고 하자.
+$W\subset U$를 최대 열린 부분공간으로서
+$s^{-1}(W)\to W$가 성질 $\mathcal{P}$를 갖도록 하는 것이라 하자.
+그러면 $W$는 $R$-불변이다
+(Groupoids in Spaces, Definition
+\ref{spaces-groupoids-definition-invariant-open}).
+\end{lemma}
+
+\begin{proof}
+열린집합 $W\subset U$의 존재와 성질은 Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-largest-open-of-the-base}에 기술되어 있다.
+도식 (\ref{spaces-more-groupoids-equation-diagram})에서
+% P09-ERR-0943
+$W_1\subset R$를 사상
+$\text{pr}_1:R\times_{s,U,t}R\to R$이 성질 $\mathcal{P}$를
+갖는 최대 열린 부분스킴이라 하자. 앞서 인용한 Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-largest-open-of-the-base}와
+$\{s:R\to U\}$ 및 $\{t:R\to U\}$가 $\tau$-위상의 덮개라는
+가정으로부터 원하는 등식
+$t^{-1}(W)=W_1=s^{-1}(W)$가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-property-G-invariant}
+$B\to S$가 Section \ref{spaces-more-groupoids-section-notation}에서와 같다고 하자.
+$(U,R,s,t,c)$를 $B$ 위 대수공간에서의 groupoid라 하고
+$G\to U$를 그 안정자 군 대수공간이라 하자.
+$$
+\tau \in \{fppf, \linebreak[0] \etale, \linebreak[0]
+smooth, \linebreak[0] syntomic\}
+$$
+라 하자. $\mathcal{P}$를 대상에 대해 $\tau$-국소적인
+대수공간 사상의 성질이라 하자.
+$\{s:R\to U\}$와 $\{t:R\to U\}$가 $\tau$-위상의 덮개라고 하자.
+$W\subset U$를 최대 열린 부분공간으로서
+$G_W\to W$가 성질 $\mathcal{P}$를 갖도록 하는 것이라 하자.
+그러면 $W$는 $R$-불변이다
+(Groupoids in Spaces, Definition
+\ref{spaces-groupoids-definition-invariant-open}).
+\end{lemma}
+
+\begin{proof}
+열린집합 $W\subset U$의 존재와 성질은 Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-largest-open-of-the-base}에 기술되어 있다.
+사상
+$$
+G \times_{U, t} R \longrightarrow R \times_{s, U} G, \quad
+(g, r) \longmapsto (r, r^{-1} \circ g \circ r)
+$$
+은 $R$ 위 대수공간의 동형사상이다. 여기서 $\circ$는 groupoid의
+합성을 나타낸다. 따라서 $s^{-1}(W)=t^{-1}(W)$이다. 이는 $W$의
+성질, 즉 앞서 인용한 Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-largest-open-of-the-base}에서 증명한
+성질로부터 따른다.
+\end{proof}
+
+
+
+\section{올 비교}
+\label{spaces-more-groupoids-section-fibres}
+
+\noindent
+이 절은 More on Groupoids, Section
+\ref{more-groupoids-section-fibres}에 대응한다.
+독자는 먼저 그 절을 읽기를 강하게 권한다.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-two-fibres}
+$B\to S$가 Section \ref{spaces-more-groupoids-section-notation}에서와 같다고 하자.
+$(U,R,s,t,c)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+$K$를 체라 하고 $r,r':\Spec(K)\to R$가
+$t\circ r=t\circ r':\Spec(K)\to U$를 만족한다고 하자.
+$u=s\circ r$, $u'=s\circ r'$라 놓고
+$F_u=\Spec(K)\times_{u,U,s}R$ 및
+$F_{u'}=\Spec(K)\times_{u',U,s}R$로 올곱을 나타내자.
+그러면 $F_u\cong F_{u'}$는 $K$ 위 대수공간의
+동형사상이다.
+\end{lemma}
+
+\begin{proof}
+도식 (\ref{spaces-more-groupoids-equation-diagram})의 존재와 성질을 사용한다.
+사상 $\xi:\Spec(K)\to R\times_{s,U,t}R$이 존재하여
+$\text{pr}_0\circ\xi=r$이고 $c\circ\xi=r'$이다.
+$\tilde r=\text{pr}_1\circ\xi:\Spec(K)\to R$라 하자.
+도식 (\ref{spaces-more-groupoids-equation-diagram})의 아래 두 정사각형을 보면
+$F_u$와 $F_{u'}$가 모두 대수공간
+$$
+\Spec(K)\times_{\tilde r,R,\text{pr}_1}
+(R\times_{s,U,t}R)
+$$
+과 동일시됨을 알 수 있다.
+\end{proof}
+
+\noindent
+% P09-ERR-0941
+실제로 보조정리의 상황에서 쌍들의 사상
+$s:(R,r)\to(U,u)$ 및 $s:(R,r')\to(U,u')$은
+$\tau$-위상에서 국소적으로 동형이다. 단,
+$\{s:R\to U\}$가 $\tau$-덮개라고 가정한다.
+필요하다면 여기에 정확한
+명제를 삽입할 것이다.
+
+
+
+
+
+
+\section{Groupoid의 제한}
+\label{spaces-more-groupoids-section-restricting-groupoids}
+
+\noindent
+이 절에서는 제한에 의해 상속되는 groupoid의 성질들에 관한
+여러 보조정리를 모은다. 이들 대부분은 제한을 정의하는 도식
+\begin{equation}
+\label{spaces-more-groupoids-equation-restriction}
+\vcenter{
+\xymatrix{
+R' \ar[d] \ar[r] \ar@/_3pc/[dd]_{t'} \ar@/^1pc/[rr]^{s'}&
+R \times_{s, U} U' \ar[r] \ar[d] &
+U' \ar[d]^g \\
+U' \times_{U, t} R \ar[d] \ar[r] &
+R \ar[r]^s \ar[d]_t &
+U \\
+U' \ar[r]^g &
+U
+}
+}
+\end{equation}
+을 살펴보면 증명할 수 있다. Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-restrict-groupoid}를 보라.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-restrict-preserves-type}
+$S$를 스킴, $B$를 $S$ 위의 대수공간이라 하자.
+$(U,R,s,t,c)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+$g:U'\to U$를 $B$ 위 대수공간의 사상이라 하고
+$(U',R',s',t',c')$를 $(U,R,s,t,c)$의 $g$를 통한 제한이라 하자.
+\begin{enumerate}
+\item $s,t$와 $g$가 국소 유한형이면 $s',t'$도 국소 유한형이다.
+\item $s,t$와 $g$가 국소 유한 표시이면 $s',t'$도 국소 유한 표시이다.
+\item $s,t$와 $g$가 평탄하면 $s',t'$도 평탄하다.
+% P09-ERR-0942
+\item 여기에 더 추가한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+국소 유한형이라는 성질은 합성과 임의의 기저변환에 대해 안정하다.
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-type} 및
+\ref{spaces-morphisms-lemma-base-change-finite-type}를 보라.
+따라서 (1)은 도식 (\ref{spaces-more-groupoids-equation-restriction})에서 명백하다.
+나머지 경우는 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-presentation},
+\ref{spaces-morphisms-lemma-base-change-finite-presentation},
+\ref{spaces-morphisms-lemma-composition-flat}, 및
+\ref{spaces-morphisms-lemma-base-change-flat}를 보라.
+\end{proof}
+\section{체 위 군과 체 위 groupoid의 성질}
+\label{spaces-more-groupoids-section-properties-groupoids-on-fields}
+
+\noindent
+독자는 먼저 groupoid 스킴에 관한 대응 절들을 살펴보기를 권한다.
+Groupoids, Section
+\ref{groupoids-section-properties-group-schemes-field}와
+More on Groupoids, Section
+\ref{more-groupoids-section-properties-groupoids-on-fields}를 보라.
+
+\begin{situation}
+\label{spaces-more-groupoids-situation-group-over-field}
+여기서 $S$는 스킴이고, $k$는 $S$ 위의 체이며,
+$(G, m)$은 $\Spec(k)$ 위의 군 대수공간이다.
+\end{situation}
+
+\begin{situation}
+\label{spaces-more-groupoids-situation-groupoid-on-field}
+여기서 $S$는 스킴이고, $B$는 대수공간이며,
+$(U, R, s, t, c)$는 $B$ 위 대수공간에서의 groupoid이다.
+또한 $U = \Spec(k)$이며, 여기서 $k$는 어떤 체이다.
+\end{situation}
+
+\noindent
+Situation \ref{spaces-more-groupoids-situation-group-over-field}에서는 대수공간에서의
+groupoid
+\begin{equation}
+\label{spaces-more-groupoids-equation-groupoid-from-group}
+(\Spec(k), G, p, p, m)
+\end{equation}
+를 얻는다. 여기서 $p : G \to \Spec(k)$는 $G$의 구조 사상이다.
+Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-groupoid-from-action}을 보라.
+이는 Situation \ref{spaces-more-groupoids-situation-groupoid-on-field}와 같은 상황이다.
+이 절의 나머지 부분에서는 이를 더 언급하지 않고 사용한다.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-groupoid-on-field-open-multiplication}
+Situation \ref{spaces-more-groupoids-situation-groupoid-on-field}에서 합성 사상
+$c : R \times_{s, U, t} R \to R$은 평탄하고 보편적으로 열린
+사상이다. Situation \ref{spaces-more-groupoids-situation-group-over-field}에서 군 법칙
+$m : G \times_k G \to G$은 평탄하고 보편적으로 열린 사상이다.
+\end{lemma}
+
+\begin{proof}
+합성은 도식 (\ref{spaces-more-groupoids-equation-pull})에 의해 사영 사상
+$\text{pr}_1 : R \times_{t, U, t} R \to R$과 동형이다.
+이 사영은 평탄 사상 $t$의 기저변환이므로 평탄하고, Morphisms of
+Spaces, Lemma
+\ref{spaces-morphisms-lemma-space-over-field-universally-open}에 의해
+열린 사상이다. 둘째 명제는 (\ref{spaces-more-groupoids-equation-groupoid-from-group})에서
+$m$이 $c$와 일치하므로 첫째 명제에서 즉시 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리는 특히 준분리 대수공간 또는 국소 분리 대수공간을
+다룰 때 적용된다(Decent Spaces, Lemma
+\ref{decent-spaces-lemma-locally-separated-decent}).
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-group-scheme-over-field-separated}
+Situation \ref{spaces-more-groupoids-situation-groupoid-on-field}에서 $R$가 decent
+공간이라고 가정하자. 그러면 $R$는 분리 대수공간이다.
+Situation \ref{spaces-more-groupoids-situation-group-over-field}에서 $G$가 decent
+대수공간이라고 가정하자.
+% P09-ERR-0945
+그러면 $G$는 분리 대수공간이다.
+\end{lemma}
+
+\begin{proof}
+먼저 둘째 명제를 증명한다. Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-group-scheme-separated}에 의해
+% P09-ERR-0946
+$e : S \to G$가 닫힌 몰입임을 보이면 된다. 이는 Decent Spaces,
+Lemma \ref{decent-spaces-lemma-finite-residue-field-extension-finite}에서
+따른다.
+
+\medskip\noindent
+이제 첫째 명제를 증명한다. 이를 위해 $B$를 $S$로 바꾸어도 된다.
+위 문단에 의해
+% P09-ERR-0947
+안정자 군 스킴 $G \to U$는 분리이다. Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-diagonal}에 의해 사상
+$j = (t, s) : R \to U \times_S U$는 분리이다.
+$U$가 체의 스펙트럼이므로 스킴 $U \times_S U$는 아핀이다
+(Schemes, Section \ref{schemes-section-fibre-products}의 올곱 구성에
+의한다). 따라서 $R$는 분리이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-separated-over-separated}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-restrict-groupoid-on-field}
+% P09-ERR-0948
+Situation \ref{spaces-more-groupoids-situation-groupoid-on-field}에서.
+체 확대 $k'/k$와 $U' = \Spec(k')$를 잡고
+$(U', R', s', t', c')$를 $(U, R, s, t, c)$의
+$U' \to U$를 통한 제한이라 하자. 정의 도식
+$$
+\xymatrix{
+R' \ar[d] \ar[r] \ar@/_3pc/[dd]_{t'} \ar@/^1pc/[rr]^{s'} \ar@{..>}[rd] &
+R \times_{s, U} U' \ar[r] \ar[d] &
+U' \ar[d] \\
+U' \times_{U, t} R \ar[d] \ar[r] &
+R \ar[r]^s \ar[d]_t &
+U \\
+U' \ar[r] &
+U
+}
+$$
+에서 모든 사상은 전사이고 평탄하며 보편적으로 열려 있다.
+점선 화살표 $R' \to R$는 더 나아가 아핀이다.
+\end{lemma}
+
+\begin{proof}
+사상 $U' \to U$는 $\Spec(k') \to \Spec(k)$와 같으므로 아핀이고
+전사이며 평탄하다. 사상 $s, t : R \to U$와 사상 $U' \to U$는
+% P09-ERR-0949
+Morphisms, Lemma
+\ref{morphisms-lemma-scheme-over-field-universally-open}에 의해
+보편적으로 열려 있다. $R$가 공집합이 아니고 $U$가 체의
+스펙트럼이므로 사상 $s, t : R \to U$는 전사이고 평탄하다.
+이제 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-surjective},
+\ref{spaces-morphisms-lemma-composition-surjective},
+\ref{spaces-morphisms-lemma-composition-open},
+\ref{spaces-morphisms-lemma-base-change-affine},
+\ref{spaces-morphisms-lemma-composition-affine},
+\ref{spaces-morphisms-lemma-base-change-flat}, 및
+\ref{spaces-morphisms-lemma-composition-flat}을 사용하여 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-groupoid-on-field-explain-points}
+% P09-ERR-0948
+Situation \ref{spaces-more-groupoids-situation-groupoid-on-field}에서.
+임의의 점 $r \in |R|$에 대해 다음이 존재한다.
+\begin{enumerate}
+\item 체 확대 $k'/k$. 여기서 $k'$는 대수적으로 닫혀 있다.
+\item 점 $r' : \Spec(k') \to R'$. 여기서
+$(U', R', s', t', c')$는 $(U, R, s, t, c)$의
+$\Spec(k') \to \Spec(k)$를 통한 제한이다.
+\end{enumerate}
+이들은 다음을 만족한다.
+\begin{enumerate}
+\item 점 $r'$는 $r$로 사상되는데, 이는 사상 $R' \to R$ 아래에서이다.
+\item 사상
+$s' \circ r', t' \circ r' : \Spec(k') \to \Spec(k')$
+은 자기동형사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$r$을 사상 $r : \Spec(K) \to R$로 표현하자. 여기서 $K$는 어떤
+체이다.
+보조정리를 증명하려면 대수적으로 닫힌 체 $k'$와 가환 도식
+$$
+\xymatrix{
+k' & k' \ar[l]^1 & \\
+k' \ar[u]^\tau & K \ar[lu]^\sigma & k \ar[l]^-s \ar[lu]_i \\
+& k \ar[lu]^i \ar[u]_t
+}
+$$
+을 찾아야 한다. 여기서 $s, t : k \to K$는 $s \circ r$와
+$t \circ r$에서 오는 체 사상이다. More on Groupoids, Lemma
+\ref{more-groupoids-lemma-groupoid-on-field-explain-points}의 증명에서
+그런 도식을 구성하는 방법을 보인다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-groupoid-on-field-move-point}
+% P09-ERR-0948
+Situation \ref{spaces-more-groupoids-situation-groupoid-on-field}에서.
+$r : \Spec(k) \to R$가 사상이고
+$s \circ r, t \circ r$가 $\Spec(k)$의 자기동형사상이라 하자.
+그러면 사상
+$$
+R \longrightarrow R, \quad
+x \longmapsto c(r, x)
+$$
+은 자기동형사상 $R \to R$이고 $e$를 $r$로 보낸다.
+\end{lemma}
+
+\begin{proof}
+증명은 More on Groupoids, Lemma
+\ref{more-groupoids-lemma-groupoid-on-field-move-point}의 증명과
+동일하다.
+\end{proof}
+
+\begin{lemma}
+% P09-ERR-0950
+\label{spaces-more-groupoids-lemma-groupoid-on-field-geometrically-irreducible}
+Situation \ref{spaces-more-groupoids-situation-groupoid-on-field}에서 대수공간 $R$는
+기하학적으로 단가지이다. Situation
+\ref{spaces-more-groupoids-situation-group-over-field}에서 대수공간 $G$는
+기하학적으로 단가지이다.
+\end{lemma}
+
+\begin{proof}
+$r \in |R|$라 하자. $R$가 $r$에서 기하학적으로 단가지임을
+보여야 한다. Lemma \ref{spaces-more-groupoids-lemma-restrict-groupoid-on-field}와
+Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descend-unibranch}를 결합하면
+$k$가 대수적으로 닫혀 있고, $r$이 사상
+$r : \Spec(k) \to R$에서 오며, $s \circ r$와 $t \circ r$가
+$\Spec(k)$의 자기동형사상인 경우만 증명하면 충분하다.
+Lemma \ref{spaces-more-groupoids-lemma-groupoid-on-field-move-point}에 의해
+$r = e$가 $R$의 항등원이고 $k$가 대수적으로 닫힌 경우로
+환원된다.
+
+\medskip\noindent
+$r = e$이고 $k$가 대수적으로 닫혀 있다고 하자.
+$A = \mathcal{O}_{R, e}$를 $R$의 $e$에서의 에탈 국소환이라 하고,
+$C = \mathcal{O}_{R \times_{s, U, t} R, (e, e)}$를
+$R \times_{s, U, t} R$의 $(e, e)$에서의 에탈 국소환이라 하자.
+More on Algebra, Lemma
+\ref{more-algebra-lemma-minimal-primes-tensor-strictly-henselian}에 의해
+극소 소 아이디얼 $\mathfrak q$를 $C$에서 택하면, 이것은
+$1$ 대 $1$ 대응으로 극소 소 아이디얼 쌍
+$\mathfrak p,\mathfrak p' \subset A$와 대응한다.
+한편 합성 법칙은 평탄한 환 사상
+$$
+\xymatrix{
+A \ar[r]_{c^\sharp} & C & \mathfrak q \\
+& A \otimes_{s^\sharp, k, t^\sharp} A \ar[u] &
+\mathfrak p \otimes A + A \otimes \mathfrak p' \ar@{|}[u]
+}
+$$
+을 유도한다. $(c^\sharp)^{-1}(\mathfrak q)$는 $\mathfrak p$와
+$\mathfrak p'$를 모두 포함한다. 실제로 도식
+$$
+\xymatrix{
+A \ar[r]_{c^\sharp} & C \\
+A \otimes_{s^\sharp, k} k \ar[u] &
+A \otimes_{s^\sharp, k, t^\sharp} A \ar[l]_{1 \otimes e^\sharp} \ar[u]
+}
+\quad\quad
+\xymatrix{
+A \ar[r]_{c^\sharp} & C \\
+k \otimes_{k, t^\sharp} A \ar[u] &
+A \otimes_{s^\sharp, k, t^\sharp} A \ar[l]_{e^\sharp \otimes 1} \ar[u]
+}
+$$
+은 (\ref{spaces-more-groupoids-equation-diagram})에 의해 가환한다. $c^\sharp$는 평탄하므로
+($c$는 Lemma \ref{spaces-more-groupoids-lemma-groupoid-on-field-open-multiplication}에
+의해 평탄한 사상이다),
+$(c^\sharp)^{-1}(\mathfrak q)$는 $A$의 극소 소 아이디얼이다.
+따라서 $\mathfrak p=(c^\sharp)^{-1}(\mathfrak q)=\mathfrak p'$이다.
+\end{proof}
+
+\noindent
+다음 보조정리에서는 Properties of Spaces, Section
+\ref{spaces-properties-section-dimension}에서 정의한 대수공간의
+(한 점에서의) 차원을 사용한다. 또한 Properties of Spaces, Section
+\ref{spaces-properties-section-dimension-local-ring}에서 정의한
+국소환의 차원과 점의 초월차수를 사용한다. Morphisms of Spaces,
+Section \ref{spaces-morphisms-section-relative-dimension}을 보라.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-groupoid-on-field-locally-finite-type-dimension}
+Situation \ref{spaces-more-groupoids-situation-groupoid-on-field}에서 $s, t$가 국소
+유한형이라고 가정하자. 모든 $r \in |R|$에 대해
+\begin{enumerate}
+\item $\dim(R) = \dim_r(R)$이다.
+\item $r$의 $\Spec(k)$ 위 초월차수는 $s$를 통할 때와
+$r$의 $\Spec(k)$ 위 초월차수는 $t$를 통할 때 서로 같다.
+\item (2)에서 말한 초월차수가 $0$이면
+$\dim(R) = \dim(\mathcal{O}_{R, \overline{r}})$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$r \in |R|$라 하자. $\text{trdeg}(r/_{\!\! s}k)$는 $r$의
+$\Spec(k)$ 위 초월차수를 $s$를 통해 나타낸다. 에탈 사상
+$\varphi : V \to R$를 택하되 $V$는 스킴이고 $v \in V$는 $r$로
+사상되게 하자. 보조정리 위에서 언급한 정의를 사용하면
+$$
+\dim_r(R) = \dim_v(V) =
+\dim(\mathcal{O}_{V, v}) + \text{trdeg}_{s(k)}(\kappa(v)) =
+\dim(\mathcal{O}_{R, \overline{r}}) + \text{trdeg}(r/_{\!\! s}k)
+$$
+이고 $t$에 대해서도 마찬가지이다. 둘째 등식은 Morphisms, Lemma
+\ref{morphisms-lemma-dimension-fibre-at-a-point}에 의한다.
+그러므로
+$\text{trdeg}(r/_{\!\! s}k) = \text{trdeg}(r/_{\!\! t}k)$이고,
+즉 (2)가 성립한다.
+
+\medskip\noindent
+$k'/k$를 체 확대라 하자. 제한 $R'$를 고려하자. 이는 $R$의
+$\Spec(k')$로의 제한이다(Lemma \ref{spaces-more-groupoids-lemma-restrict-groupoid-on-field}).
+이는 $R$에서 체의 사상에 의한 두 번의 기저변환으로 얻어진다.
+따라서 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change}에 의해
+$R$의 한 점에서의 차원은 이 연산으로 변하지 않는다.
+그러므로 (1)을 증명하기 위해 Lemma
+\ref{spaces-more-groupoids-lemma-groupoid-on-field-explain-points}에 의해
+$r$이 사상 $r : \Spec(k) \to R$로 표현되고
+$s \circ r$와 $t \circ r$가 모두 $\Spec(k)$의 자기동형사상인
+경우를 가정해도 된다. 이 경우 자기동형사상 $R \to R$가 존재하여
+$r$을 $e$로 보낸다(Lemma
+\ref{spaces-more-groupoids-lemma-groupoid-on-field-move-point}).
+따라서 $\dim_r(R) = \dim_e(R)$이며, 이는 모든 $r$에 대해 성립한다.
+정의상 이는 $\dim_r(R) = \dim(R)$이라는 뜻이다.
+
+\medskip\noindent
+(3)은 위 논의에서 얻은 결과들의 형식적 귀결이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-group-over-field-locally-finite-type-dimension}
+Situation \ref{spaces-more-groupoids-situation-group-over-field}에서
+% P09-ERR-0951
+$G$가 국소 유한형이라고 가정하자. 모든 $g \in |G|$에 대해
+\begin{enumerate}
+\item $\dim(G) = \dim_g(G)$이다.
+\item $g$의 $k$ 위 초월차수가 $0$이면
+$\dim(G) = \dim(\mathcal{O}_{G, \overline{g}})$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-more-groupoids-lemma-groupoid-on-field-locally-finite-type-dimension}에서
+(\ref{spaces-more-groupoids-equation-groupoid-from-group})을 통해 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-groupoid-on-field-dimension-equal-stabilizer}
+Situation \ref{spaces-more-groupoids-situation-groupoid-on-field}에서 $s, t$가 국소
+유한형이라고 가정하자. 다음을 안정자 군 대수공간이라 하자.
+$$
+G = \Spec(k)
+\times_{\Delta, \Spec(k) \times_B \Spec(k), t \times s} R
+$$
+그러면 $\dim(R) = \dim(G)$이다.
+\end{lemma}
+
+\begin{proof}
+$G$와 $R$는 등차원적이므로(Lemmas
+\ref{spaces-more-groupoids-lemma-groupoid-on-field-locally-finite-type-dimension} 및
+\ref{spaces-more-groupoids-lemma-group-over-field-locally-finite-type-dimension}),
+$\dim_e(R) = \dim_e(G)$임을 증명하면 충분하다.
+$V$를 아핀 스킴, $v \in V$라 하고
+$\varphi : V \to R$를 $\varphi(v) = e$인 스킴의 에탈 사상이라 하자.
+$V$는 $s \circ \varphi$가 국소 유한형 사상들의 합성으로서 국소
+유한형이고 $V$가 준콤팩트이므로 뇌터 스킴이다(Morphisms of Spaces,
+Lemmas \ref{spaces-morphisms-lemma-composition-finite-type},
+\ref{spaces-morphisms-lemma-etale-locally-finite-presentation},
+\ref{spaces-morphisms-lemma-finite-presentation-finite-type} 및
+Morphisms, Lemma \ref{morphisms-lemma-finite-type-noetherian}을 사용하라).
+따라서 $V$는 국소 연결이다(Properties, Lemma
+\ref{properties-lemma-Noetherian-topology} 및 Topology, Lemma
+\ref{topology-lemma-locally-Noetherian-locally-connected}).
+그러므로 $V$를 $v$를 포함하는 연결성분으로 바꾸어도 된다
+(이는 $V$의 열리고 닫힌 부분스킴이므로 여전히 아핀이다).
+$T = V_{red}$를 $V$의 축약이라 하자. 두 사상
+$a, b : T \to \Spec(k)$를 $a = s \circ \varphi|_T$ 및
+$b = t \circ \varphi|_T$로 정의한다.
+$a, b$는 같은 체 사상 $k \to \kappa(v)$를 유도하는데, 이는
+$\varphi(v) = e$이기 때문이다.
+$k_a \subset \Gamma(T, \mathcal{O}_T)$를
+$a^\sharp(k) \subset \Gamma(T, \mathcal{O}_T)$의 정수적 폐포라 하자.
+마찬가지로 $k_b \subset \Gamma(T, \mathcal{O}_T)$를
+$b^\sharp(k) \subset \Gamma(T, \mathcal{O}_T)$의 정수적 폐포라 하자.
+Varieties, Proposition \ref{varieties-proposition-unique-base-field}에
+의해 $k_a = k_b$이다. 따라서 가환 도식
+$$
+\xymatrix{
+k \ar[rd]^a \ar[rrrd] \\
+& k_a = k_b \ar[r] & \Gamma(T, \mathcal{O}_T) \ar[r] & \kappa(v) \\
+k \ar[ru]_b \ar[rrru]
+}
+$$
+을 얻는다. 위에서 논의했듯 긴 화살표들은 같다.
+$k_a = k_b \to \kappa(v)$가 단사이므로 두 사상 $a$와 $b$가
+같음을 알 수 있다. 따라서 $T \to R$는 $G$를 통해 인수분해된다.
+그러므로 $R_{red} = G_{red}$가 $e$의 어떤 열린 근방에서 성립하고,
+이는 분명히 $\dim_e(R) = \dim_e(G)$를 함의한다.
+\end{proof}
+
+
+
+
+
+\section{체 위의 군 대수공간}
+\label{spaces-more-groupoids-section-group-algebraic-spaces-over-fields}
+
+\noindent
+체 위에는 비분리 군 대수공간이 존재한다. 즉 표수 영인 체 위의
+$\mathbf{G}_a/\mathbf{Z}$가 그 예이다. Examples, Section
+\ref{examples-section-non-separated-group-space}을 보라.
+실제로 체 위의 모든 군 스킴은 분리이므로(Lemma
+\ref{spaces-more-groupoids-lemma-group-scheme-over-field-separated}), 체 위의 모든
+비분리 군 대수공간은 표현불가능하다. 한편 체 위의 군 대수공간은
+decent이기만 하면 분리이다. Lemma
+\ref{spaces-more-groupoids-lemma-group-scheme-over-field-separated}를 보라.
+이 절에서는 체 위의 분리 군 대수공간이 표현가능함, 즉 스킴임을
+보일 것이다.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-group-space-scheme-over-kbar}
+$k$를 체라 하고 그 대수적 폐포를 $\overline{k}$라 하자.
+$G$를 $k$ 위의 군 대수공간이라 하고, 이것이
+분리라고 하자\footnote{$G$가 decent이라고만 가정해도 충분하다.
+예를 들어 Lemma \ref{spaces-more-groupoids-lemma-group-scheme-over-field-separated}에
+의해 국소 분리이거나 준분리이면 된다.}.
+그러면 $G_{\overline{k}}$는 스킴이다.
+\end{lemma}
+
+\begin{proof}
+Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-when-scheme-after-base-change}에 의해
+$G_K$가 스킴임을 보이면 충분하다. 여기서 $K/k$는 어떤 체 확대이다.
+$G_K' \subset G_K$로 $G_K$의 스킴적 자리를 나타내자. 이는
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subscheme}에서의 표기이다.
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}에
+의해 $G_K' \subset G_K$는 조밀 열린집합이며, 특히 공집합이 아니다.
+스킴 $U$와 전사 에탈 사상 $U \to G$를 택하자.
+Varieties, Lemma \ref{varieties-lemma-make-Jacobson}에 의해
+$K$가 충분히 큰 초월차수의 대수적으로 닫힌 체이면 $U_K$는
+야콥슨 스킴이고 $U_K$의 모든 닫힌점은 $K$-유리점이다.
+따라서 $G_K'$는 $K$-유리점을 가지며, 모든 $K$-유리점이
+$G_K$의 점일 때 $G_K'$에 속함을 보이면 충분하다.
+$g \in G_K(K)$를 $K$-유리점이라 하고
+$g' \in G_K'(K)$를 스킴적 자리의 $K$-유리점이라 하면,
+$g$는 $G_K'$의 상에 속하는데, 해당 자기동형사상은
+$$
+G_K \longrightarrow G_K,\quad
+h \longmapsto g(g')^{-1}h
+$$
+이다. 이는 $G_K$의 자기동형사상이다.
+대수공간으로서 $G_K$의 자기동형사상은 $G_K'$를 보존하므로
+원하는 대로 $g \in G_K'$임을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-group-space-scheme-locally-finite-type-over-k}
+$k$를 체라 하고 $G$를 $k$ 위의 군 대수공간이라 하자.
+$G$가 분리이고 $k$ 위에서 국소 유한형이면 $G$는 스킴이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{spaces-more-groupoids-lemma-group-space-scheme-over-kbar},
+Groupoids, Lemma \ref{groupoids-lemma-points-in-affine}, 및
+Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-scheme-over-algebraic-closure-enough-affines}에서
+따른다.
+\end{proof}
+
+\begin{proposition}
+\label{spaces-more-groupoids-proposition-group-space-scheme-over-field}
+$k$를 체라 하고 $G$를 $k$ 위의 군 대수공간이라 하자.
+$G$가 분리이면 $G$는 스킴이다.
+\end{proposition}
+
+\begin{proof}
+% P09-ERR-0952
+이 보조정리는 Lemma
+\ref{spaces-more-groupoids-lemma-group-space-scheme-locally-finite-type-over-k}를
+일반화한다(이는 실제로 관심 있는 모든 경우를 포괄한다).
+증명은 Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-scheme-over-algebraic-closure-enough-affines}의
+증명과 매우 비슷하다. 이 증명은 Lemma
+\ref{spaces-more-groupoids-lemma-group-space-scheme-locally-finite-type-over-k}의 증명에
+사용되었으며, 독자는 그 증명을 먼저 읽기를 권한다.
+
+\medskip\noindent
+Lemma \ref{spaces-more-groupoids-lemma-group-space-scheme-over-kbar}에 의해 기저변환
+$G_{\overline{k}}$는 스킴이다.
+$K/k$를 매우 큰 초월차수의 순수 초월 확대라 하자.
+Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-scheme-after-purely-transcendental-base-change}에
+의해 $G_K$가 스킴임을 보이면 충분하다.
+$K^{perf}$를 $K$의 완전화라 하자. Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-scheme-after-purely-inseparable-base-change}에
+의해 $G_{K^{perf}}$가 스킴임을 보이면 충분하다.
+% P09-ERR-0953
+$K \subset K^{perf} \subset \overline{K}$를 $K$의 대수적 폐포라
+하자. 매장 $\overline{k} \to \overline{K}$를 $k$ 위에서 택할 수
+있으므로 $G_{\overline{K}}$는 스킴 $G_{\overline{k}}$를
+$\overline{k} \to \overline{K}$로 기저변환한 것이다.
+Varieties, Lemma \ref{varieties-lemma-make-Jacobson}에 의해
+$G_{\overline{K}}$는 야콥슨 스킴이고 모든 닫힌점의 잉여체는
+$\overline{K}$이다.
+
+\medskip\noindent
+$G_{\overline{K}} \to G_{K^{perf}}$가 전사이므로, 점
+$g \in |G_{K^{perf}}|$를 $G_{\overline{K}}$의 임의의 닫힌점의
+상이라 하면 이 점이
+% P09-ERR-0954
+$G_K$의 스킴적 자리에 속함을 보이면 충분하다.
+특히 $g$를 사상 $g : \Spec(L) \to G_{K^{perf}}$로 표현할 수 있다.
+여기서 $L/K^{perf}$는 분리 대수적 확대이다
+(예를 들어 $L = \overline{K}$로 둘 수 있다). 따라서 스킴
+\begin{align*}
+T & = \Spec(L) \times_{G_{K^{perf}}} G_{\overline{K}} \\
+& =
+\Spec(L) \times_{\Spec(K^{perf})} \Spec(\overline{K}) \\
+& =
+\Spec(L \otimes_{K^{perf}} \overline{K})
+\end{align*}
+은 $\overline{K}$-대수의 스펙트럼이며, 그 대수는
+$\overline{K}$의 유한 개 복사본의 곱들로 이루어진 대수들의
+여과 쌍대극한이다. 그러므로 Groupoids, Lemma
+\ref{groupoids-lemma-compact-set-in-affine}에 의해
+아핀 열린집합 $W \subset G_{\overline{K}}$를 찾을 수 있으며, 이
+열린집합은 $g_{\overline{K}} : T \to G_{\overline{K}}$의 상을 포함한다.
+
+\medskip\noindent
+준콤팩트 열린집합 $V \subset G_{K^{perf}}$를 택하되, 이 열린집합이
+$W$의 상을 포함하게 하자. Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-when-scheme-after-base-change}에 의해
+$V_{K'}$는 어떤 유한 확대 $K'/K^{perf}$에 대해 스킴이다.
+$K'$를 확대하여, 아핀 열린집합
+$U' \subset V_{K'} \subset G_{K'}$가 존재하고 이를 $\overline{K}$로
+기저변환하면 $W$가 된다고 가정할 수 있다. 실제로
+$V_{\overline{K}}$는 유한 확대에 대한 스킴
+$V_{K''}$의 극한이며, 여기서 $K' \subset K'' \subset \overline{K}$이다.
+Limits, Lemmas
+\ref{limits-lemma-descend-opens} 및
+\ref{limits-lemma-limit-affine}을 사용한다.
+$K'/K^{perf}$가 갈루아 확대라고 가정해도 된다
+% P09-ERR-0955
+(정규 폐포를 취한다. Fields, Lemma
+\ref{fields-lemma-normal-closure}와 $K^{perf}$가 완전체라는
+사실을 사용한다). $H = \text{Gal}(K'/K^{perf})$라 하자.
+구성상 $H$-불변 닫힌 부분스킴
+$\Spec(L) \times_{G_{K^{perf}}} G_{K'}$는 $U'$에 포함된다.
+Spaces over Fields, Lemmas
+\ref{spaces-over-fields-lemma-base-change-by-Galois} 및
+\ref{spaces-over-fields-lemma-when-quotient-scheme-at-point}에 의해
+결론이 따른다.
+\end{proof}
+
+
+
+
+
+\section{군에는 유리 곡선이 없음}
+\label{spaces-more-groupoids-section-no-rational-curves}
+
+\noindent
+이 절에서는 체 위에서 국소 유한형인 군 대수공간으로 가는
+$\mathbf{P}^1$의 비상수 사상이 없음을 증명한다.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-factor-through-over-open}
+$S$를 스킴이라 하자. $B$를 $S$ 위의 대수공간이라 하자.
+$f : X \to Y$와 $g : X \to Z$를 $B$ 위 대수공간의 사상이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $Y \to B$는 분리이다.
+\item $g$는 전사이고 평탄하며 국소 유한 표시이다.
+\item 스킴론적으로 조밀한 열린 부분공간 $V \subset Z$가 존재하여
+$f|_{g^{-1}(V)} : g^{-1}(V) \to Y$가 $V$를 통해 인수분해된다.
+\end{enumerate}
+그러면 $f$는 $g$를 통해 인수분해된다.
+\end{lemma}
+
+\begin{proof}
+$R = X \times_Z X$라 놓자. (2)에 의해 층으로서 $Z = X/R$임을 알 수
+있다. 또한 (2)에 의해 $V$의 $R$ 안에서의 역상은 $R$에서
+스킴론적으로 조밀하다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-morphism-scheme-theoretically-dense-open}).
+% P09-ERR-1468
+그러면 두 합성 $R \to X \to Y$가 같음을 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-equality-of-morphisms}에서 알 수 있다.
+이로써 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-quotient-power-P1}
+\begin{slogan}
+체 위 사영직선들의 공집합이 아닌 곱에서 체 위의 분리 유한형
+대수공간으로 가는 사상은 사영직선들의 곱으로의 사영 뒤에 오는
+유한 사상으로 인수분해된다.
+\end{slogan}
+$k$를 체라 하자. $n \geq 1$이라 하고 $(\mathbf{P}^1_k)^n$을
+$n$중 자기곱이라 하자. 이 곱은 $\Spec(k)$ 위에서 취한다. 대수공간의 사상
+$f : (\mathbf{P}^1_k)^n \to Z$가 $k$ 위에 있다고 하자.
+$Z$가 $k$ 위에서 분리 유한형이면 $f$는 다음과 같이 인수분해된다.
+$$
+(\mathbf{P}^1_k)^n \xrightarrow{projection}
+(\mathbf{P}^1_k)^m \xrightarrow{finite} Z.
+$$
+\end{lemma}
+
+\begin{proof}
+$k$가 대수적으로 닫혀 있다고 가정해도 된다(세부사항은 생략한다).
+이는 유리점을 사용하여 논증하기 위한 것일 뿐이며, 원한다면 독자는
+이 가정을 우회할 수 있다. 증명에서 모든 곱은 $k$ 위에서 취한다.
+$(\mathbf{P}^1_k)^n$의 자기동형사상 군 대수공간은
+$G = (\text{GL}_{2, k})^n$을 포함한다.
+$C \subset (\mathbf{P}^1_k)^n$가 한 점으로 사상되는 닫힌 부분다양체
+(특히 $k$ 위에서 기약인 부분다양체)라 하자. 그러면 사상
+$$
+G \times C \to G \times Z,\quad (g, c) \mapsto (g, f(g \cdot c))
+$$
+에 More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-flat-proper-family-cannot-collapse-fibre}를
+$G$ 위에서 적용할 수 있다. 따라서 $g(C)$는 $g \in G(k)$ 중
+어떤 자리스키 열린집합 $U \subset G$에 속하는 것들에 대해 한 점으로
+사상된다. $x = (x_1, \ldots, x_n)$와 $y = (y_1, \ldots, y_n)$를
+$k$-값 점이라 하며, 이들은 $(\mathbf{P}^1_k)^n$의 점이다.
+$I \subset \{1, \ldots, n\}$를 지표 $i$ 중 $x_i = y_i$인 것들의 집합이라
+하자. 그러면
+$$
+\{g(x) \mid g(y) = y,\ g \in U(k)\}
+$$
+는 사영
+$\pi_I : (\mathbf{P}^1_k)^n \to \prod_{i \in I} \mathbf{P}^1_k$
+의 올에서 자리스키 조밀하다(연습문제). 따라서 서로 다른
+$x, y \in C(k)$에 대해 $f$는 $\pi_I$의 올 전체를 한 점으로 보내며,
+이 올은 $x, y$를 포함한다.
+더 나아가 $U(k)$-궤도인 $C$는 $\pi_I$의 올들 중
+자리스키 열린집합과 만난다. Lemma \ref{spaces-more-groupoids-lemma-factor-through-over-open}에
+의해 $f$는 $\pi_I$를 통해 인수분해된다.
+이 과정을 유한 번 반복하면 $f$의 $k$-점 위 모든 올이 유한한 단계에
+도달한다. 이 경우 $f$는 More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-proper-finite-fibre-finite-in-neighbourhood}와
+$k$-점들이 $Z$에서 조밀하다는 사실(Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-smooth-separable-closed-points-dense})에 의해
+유한이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-no-nonconstant-morphism-from-P1-to-group}
+\begin{slogan}
+군에는 완비 유리 곡선이 없다.
+\end{slogan}
+$k$를 체라 하자. $G$를 $k$ 위에서 국소 유한형인 분리 군
+대수공간이라 하자. 비상수 사상 $f : \mathbf{P}^1_k \to G$가
+$\Spec(k)$ 위에서 존재할 수 없다.
+\end{lemma}
+
+\begin{proof}
+$f$가 비상수라고 가정하자. 다음 사상들을 생각하자.
+$$
+\mathbf{P}^1_k \times_{\Spec(k)} \ldots \times_{\Spec(k)} \mathbf{P}^1_k
+\longrightarrow G,
+\quad (t_1, \ldots, t_n) \longmapsto f(g_1) \ldots f(g_n)
+$$
+우변에서는 군의 곱셈을 사용한다.
+Lemma \ref{spaces-more-groupoids-lemma-quotient-power-P1}과 $f$가 비상수라는 가정에 의해
+이 사상은 그 상 위에서 유한이다. 따라서 $\dim(G) \geq n$이 모든
+$n$에 대해 성립하는데, 이는 Lemma
+\ref{spaces-more-groupoids-lemma-group-over-field-locally-finite-type-dimension} 및
+$G$가 $k$ 위에서 국소 유한형이라는 사실에 모순된다.
+\end{proof}
+
+
+
+
+\section{사상의 유한 부분}
+\label{spaces-more-groupoids-section-finite}
+
+\noindent
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. 대수공간 또는 스킴 $T$를 생각하자. 이는 $S$ 위에
+있다. 이때 다음과 같은 쌍
+$(a, Z)$를 생각하자.
+\begin{equation}
+\label{spaces-more-groupoids-equation-finite-conditions}
+\begin{matrix}
+a : T \to Y\text{는 S 위의 사상이고}, \\
+Z \subset T \times_Y X\text{는 열린 부분공간이며} \\
+\text{또한 }\text{pr}_0|_Z : Z \to T\text{는 유한이다.}
+\end{matrix}
+\end{equation}
+$h : T' \to T$가 $S$ 위 대수공간의 사상이고 $(a, Z)$가
+$T$ 위에서 (\ref{spaces-more-groupoids-equation-finite-conditions})와 같은 쌍이라고 하자.
+$a' = a \circ h$ 및
+$Z' = (h \times \text{id}_X)^{-1}(Z) = T' \times_T Z$라 놓자.
+그러면 $(a', Z')$는 $T'$ 위에서
+(\ref{spaces-more-groupoids-equation-finite-conditions})와 같은 쌍이다. 유한 사상은
+기저변환으로 보존되므로 이 주장이 따른다. Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-integral}을 보라.
+따라서 함자
+\begin{equation}
+\label{spaces-more-groupoids-equation-finite}
+\begin{matrix}
+(X/Y)_{fin} : &
+(\Sch/S)^{opp} &
+\longrightarrow &
+\textit{Sets} \\
+& T & \longmapsto &
+\{(a, Z)\text{ 위와 같음}\}
+\end{matrix}
+\end{equation}
+를 얻는다. 응용에서는 주로 이 함자 $(X/Y)_{fin}$에 관심이 있으며,
+여기서는 $f$가 분리이고 국소 유한형인 경우가 중요하다. 이 대상이
+무엇인지 감을 잡으려면
+Remark \ref{spaces-more-groupoids-remark-finite-quasi-finite-separated-morphism-schemes}를 보라.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-finite-sheaf}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item 준층 $(X/Y)_{fin}$은 fppf 위상에 대한 층 조건을 만족한다.
+\item $T$가 $S$ 위의 대수공간이면 표준 전단사
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T, (X/Y)_{fin})
+=
+\{(a, Z)\text{가 \ref{spaces-more-groupoids-equation-finite-conditions}을 만족함}\}
+$$
+가 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$T$를 $S$ 위의 대수공간이라 하자. $\{T_i \to T\}$를
+(대수공간들에 의한) fppf 피복이라 하자.
+$s_i = (a_i, Z_i)$를 $T_i$ 위에서
+\ref{spaces-more-groupoids-equation-finite-conditions}을 만족하는 쌍이라 하고,
+$$s_i|_{T_i \times_T T_j} = s_j|_{T_i \times_T T_j}$$
+라고 하자. 우선 이는 특히 $a_i$와 $a_j$가 같은 사상
+$T_i \times_T T_j \to Y$를 정의함을 뜻한다. Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-fpqc-universal-effective-epimorphisms}에
+의해 유일한 사상 $a : T \to Y$가 존재하여 $a_i$가 합성
+$T_i \to T \to Y$와 같음을 얻는다. 둘째, 이는
+$Z_i \subset T_i \times_Y X$가 열린 부분공간이고 이들의 역상이
+$(T_i \times_T T_j) \times_Y X$ 안에서 서로 같음을 뜻한다.
+$\{T_i \times_Y X \to T \times_Y X\}$가 fppf 피복이므로,
+$Z \subset T \times_Y X$인 유일한 열린 부분공간이 존재하여
+$Z_i$가 되는데, 이는 $T_i$ 위로 제한했을 때이다. Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-open-fpqc-covering}을 보라.
+사영 $Z \to T$가 유한이라고 주장한다. 유한이라는 성질은 fpqc 위상에
+대해 국소적이므로 이 주장이 따른다. Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-finite}를 보라.
+
+\medskip\noindent
+앞 문단의 결과는 특히 (1)을 함의한다.
+
+\medskip\noindent
+$T$를 $S$ 위의 대수공간이라 하자. (2)를 증명하기 위해 표시된 두
+집합 사이에서 서로 역인 사상들을 구성한다. 아래에서 ``쌍''이라고
+하면 조건 \ref{spaces-more-groupoids-equation-finite-conditions}을 만족하는 쌍을 뜻한다.
+
+\medskip\noindent
+$v : T \to (X/Y)_{fin}$을 자연변환이라 하자. 스킴 $U$와 전사 에탈
+사상 $p : U \to T$를 택하자. 그러면
+$v(p) \in (X/Y)_{fin}(U)$는 쌍 $(a_U, Z_U)$에 대응하며, 이 쌍은
+$U$ 위에 있다.
+$R = U \times_T U$라 놓고 사영을 $t, s : R \to U$라 하자.
+$v$가 함자의 변환이므로 $(a_U, Z_U)$를 $s$와 $t$로 당겨 얻는 두
+쌍이 같음을 알 수 있다. 따라서 $\{U \to T\}$가 fppf 피복이므로
+% P09-ERR-1469
+첫 문단의 결과를 적용하여 유일한 쌍 $(a, Z)$가 $T$ 위에 존재함을
+얻는다.
+
+\medskip\noindent
+반대로 $(a, Z)$를 $T$ 위의 쌍이라 하자. 위와 같이 $U \to T$,
+$R = U \times_T U$, 그리고 $t, s : R \to U$를 잡는다. 그러면 제한
+$(a, Z)|_U$는 요네다 보조정리(Categories, Lemma
+\ref{categories-lemma-yoneda})에 의해 함자의 변환
+$v : h_U \to (X/Y)_{fin}$을 준다. 두 당김
+$s^*(a, Z)|_U$와 $t^*(a, Z)|_U$가 같으므로 $v$가 두 사상
+$h_t, h_s : h_R \to h_U$를 같은 사상으로 보냄을 알 수 있다.
+Spaces, Lemma \ref{spaces-lemma-space-presentation}에 의해
+$T = U/R$는 fppf 몫층이고, (1)에 의해 $(X/Y)_{fin}$은 fppf 층이므로
+$v$는 사상 $T \to (X/Y)_{fin}$를 통해 인수분해된다.
+
+\medskip\noindent
+위의 두 구성이 서로 역이라는 확인은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-finite-open}
+$S$를 스킴이라 하자. 다음 가환 도식을 생각하자.
+$$
+\xymatrix{
+X' \ar[rr]_j \ar[rd] & & X \ar[ld] \\
+& Y
+}
+$$
+이는 $S$ 위의 대수공간들로 이루어져 있다. $j$가 열린 몰입이면
+층의 표준 단사 사상
+$j : (X'/Y)_{fin} \to (X/Y)_{fin}$
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+$(a, Z)$가 $T$ 위에서 $X'/Y$에 대한 쌍이면, $(a, j(Z))$는
+$T$ 위에서 $X/Y$에 대한 쌍이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-finite-lives-on-locally-quasi-finite-part}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의
+국소 유한형 사상이라 하자. $X' \subset X$를 $f$가 국소 준유한인
+최대 열린 부분공간이라 하자. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-quasi-finite-part}을 보라.
+그러면 $(X/Y)_{fin} = (X'/Y)_{fin}$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-more-groupoids-lemma-finite-open}은 단사 사상
+$(X'/Y)_{fin} \to (X/Y)_{fin}$을 준다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-quasi-finite-part}은
+$X'$의 형성이 기저변환과 가환함을 보장한다. 따라서
+$Z \subset X$가 열린 부분공간이고 $f|_Z : Z \to Y$가 유한이면
+$Z \subset X'$임을 보이는 것으로 모두 귀착된다. 유한 사상은 국소
+준유한이므로 이는 참이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-quasi-finite}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-finite-separated}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. $T$를 $S$ 위의 대수공간이라 하고 $(a, Z)$를
+\ref{spaces-more-groupoids-equation-finite-conditions}과 같은 쌍이라 하자.
+$f$가 분리이면 $Z$는 $T \times_Y X$에서 닫혀 있다.
+\end{lemma}
+
+\begin{proof}
+대수공간의 유한 사상은 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-proper}에 의해 보편적으로 닫혀 있다.
+$f$가 분리이므로 사상 $T \times_Y X \to T$도 분리이다. Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-base-change-separated}를 보라.
+따라서 $Z$의 닫힘은 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-permanence}에서 따른다.
+\end{proof}
+
+\begin{remark}
+\label{spaces-more-groupoids-remark-finite-monoid}
+$f : X \to Y$를 대수공간의 분리 사상이라 하자. 층 $(X/Y)_{fin}$에는
+자연스러운 사상 $(X/Y)_{fin} \to Y$가 있으며, 이는 쌍
+$(a, Z) \in (X/Y)_{fin}(T)$를 원소 $a \in Y(T)$로 보낸다.
+Lemma \ref{spaces-more-groupoids-lemma-finite-separated}를
+사용하여 연산
+$$
+\star_i : (X/Y)_{fin} \times_Y (X/Y)_{fin} \longrightarrow (X/Y)_{fin}
+$$
+을 다음 규칙으로 정의할 수 있다.
+\begin{align*}
+\star_1 : ((a, Z_1), (a, Z_2)) & \longmapsto (a, Z_1 \cup Z_2) \\
+\star_2 : ((a, Z_1), (a, Z_2)) & \longmapsto (a, Z_1 \cap Z_2) \\
+\star_3 : ((a, Z_1), (a, Z_2)) & \longmapsto (a, Z_1 \setminus Z_2) \\
+\star_4 : ((a, Z_1), (a, Z_2)) & \longmapsto (a, Z_2 \setminus Z_1).
+\end{align*}
+이것이 가능한 까닭은 $Z_1 \cap Z_2$가 $Z_1$과 $Z_2$ 각각에서
+열리고 닫혀 있기 때문이다(이는 또한 $Z_1 \cup Z_2$가 나머지 세
+조각의 분리합임을 뜻한다). 따라서 $(X/Y)_{fin}$을
+$\mathbf{F}_2$-대수(단위원 없음)로 생각할 수 있으며, 이 대수는
+$Y$ 위에 있다. 곱셈은
+$ss' = \star_2(s, s')$이고 덧셈은
+$$
+s + s' = \star_1(\star_3(s, s'), \star_4(s, s'))
+$$
+이며, 이는 대칭차를 취하는 것에 해당한다. 이 대수층에서
+$0 = (1_Y, \emptyset)$이고, 실제로 $s + s = 0$이며 이는 임의의
+국소 단면 $s$에 대해 성립한다. $f : X \to Y$가 유한이면 이 대수는 단위원
+$1 = (1_Y, X)$을 가지며, $\star_3(s, s') = s(1 + s')$이고
+$\star_4(s, s') = (1 + s)s'$이다.
+\end{remark}
+
+\begin{remark}
+\label{spaces-more-groupoids-remark-finite-quasi-finite-separated-morphism-schemes}
+$f : X \to Y$를 스킴의 분리 국소 준유한 사상이라 하자. 이 경우 층
+$(X/Y)_{fin}$은 층 $f_!\mathbf{F}_2$와 밀접히 관련되며, 후자는
+$Y_\etale$ 위에 있다
+% P09-ERR-1470
+(향후 참조를 여기에 삽입).
+구체적으로 $V \to Y$가 에탈이고
+$s \in \Gamma(V, f_!\mathbf{F}_2)$이면,
+$s \in \Gamma(V \times_Y X, \mathbf{F}_2)$는 고유 지지
+$Z = \text{Supp}(s)$를 갖는 단면이며, 이 지지는 $V$ 위에서 고유하다.
+$f$는 또한 국소 준유한이므로
+사영 $Z \to V$가 실제로 유한임을 알 수 있다. 상수 아벨 층의 단면의
+지지는 열려 있으므로 쌍 $(V \to Y, \text{Supp}(s))$가
+\ref{spaces-more-groupoids-equation-finite-conditions}을 만족함을 알 수 있다.
+실제로 이 경우 $f_!\mathbf{F}_2 \cong (X/Y)_{fin}|_{Y_\etale}$이며,
+이는 Remark \ref{spaces-more-groupoids-remark-finite-monoid}에서 도입한 $\mathbf{F}_2$-대수
+구조도 설명한다.
+\end{remark}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-finite-diagonal}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. $(X/Y)_{fin} \to Y$의 대각사상
+$$
+(X/Y)_{fin} \longrightarrow (X/Y)_{fin} \times_Y (X/Y)_{fin}
+$$
+은 (스킴으로) 표현가능하고 열린 몰입이며, ``절대'' 대각사상
+$$
+(X/Y)_{fin} \longrightarrow (X/Y)_{fin} \times (X/Y)_{fin}
+$$
+은 (스킴으로) 표현가능하다.
+\end{lemma}
+
+\begin{proof}
+절대 대각사상은 상대 대각사상과 $Y$의 대각사상의 한 기저변환을
+합성한 것이므로 둘째 명제는 첫째 명제에서 따른다(후자는 스킴으로
+표현가능하다). Spaces, Section \ref{spaces-section-representable}을 보라.
+첫째 명제를 증명하려면 다음을 보여야 한다. 스킴 $T$와 두 쌍
+$(a, Z_1)$ 및 $(a, Z_2)$가 주어지고, 이 쌍들이 같은 첫 성분을 가지며
+$T$ 위에서 \ref{spaces-more-groupoids-equation-finite-conditions}을 만족한다고 하자.
+그러면 다음 성질을 갖는
+열린 부분스킴 $V \subset T$가 존재한다. 스킴의 임의의 사상
+$h : T' \to T$에 대해
+$$
+h(T') \subset V \Leftrightarrow
+\Big(T' \times_T Z_1 = T' \times_T Z_2
+\text{가 다음 공간의 부분공간으로서 성립함 }T' \times_Y X\Big)
+$$
+이다. $V$를 구성하자. $Z_1 \cap Z_2$는 $Z_1$에서도 $Z_2$에서도
+열려 있음에 유의하자. $\text{pr}_0|_{Z_i} : Z_i \to T$는 유한이고,
+따라서 고유이므로(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-proper}을 보라),
+$$
+E =
+\text{pr}_0|_{Z_1}\left(Z_1 \setminus Z_1 \cap Z_2)\right)
+\cup
+\text{pr}_0|_{Z_2}\left(Z_2 \setminus Z_1 \cap Z_2)\right)
+$$
+는 $T$에서 닫혀 있다. 이제 $V = T \setminus E$가 조건을 만족함이
+분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-finite-criterion-etale}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. $U$가 스킴이고 $U \to Y$가 에탈 사상이며
+$Z \subset U \times_Y X$가 $U$ 위에서 유한인 열린 부분공간이라고
+하자. 그러면 유도된 사상 $U \to (X/Y)_{fin}$은 에탈이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{spaces-more-groupoids-lemma-finite-diagonal}의 대각사상에 대한 서술에서
+형식적으로 따르지만, 이론 전개에서 중요한 단계이므로 자세히 쓴다.
+임의의 스킴 $T$를 택하되 이는 $S$ 위에 있고, 사상
+$T \to (X/Y)_{fin}$이 주어졌다고 하자. 사영
+$$
+T \times_{(X/Y)_{fin}} U \longrightarrow T
+$$
+이 에탈임을 확인해야 한다. 다음에 유의하자.
+$$
+T \times_{(X/Y)_{fin}} U
+=
+(X/Y)_{fin} \times_{((X/Y)_{fin} \times_Y (X/Y)_{fin})} (T \times_Y U)
+$$
+Lemma \ref{spaces-more-groupoids-lemma-finite-diagonal}의 결과를 적용하면
+$T \times_{(X/Y)_{fin}} U$는 $T \times_Y U$의 열린 부분스킴으로
+표현된다. 사영 $T \times_Y U \to T$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-etale}에 의해 에탈이므로 결론이
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-finite-pullback}
+$S$를 스킴이라 하자. 다음 도식이
+$$
+\xymatrix{
+X' \ar[d] \ar[r] & X \ar[d] \\
+Y' \ar[r] & Y
+}
+$$
+$S$ 위 대수공간의 올곱 정사각형이라고 하자. 그러면
+$$
+\xymatrix{
+(X'/Y')_{fin} \ar[d] \ar[r] & (X/Y)_{fin} \ar[d] \\
+Y' \ar[r] & Y
+}
+$$
+은 $(\Sch/S)_{fppf}$ 위 층들의 올곱 정사각형이다.
+\end{lemma}
+
+\begin{proof}
+정의에서 층 $(X'/Y')_{fin}$이 층
+$Y' \times_Y (X/Y)_{fin}$과 같음이 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-finite-surjective-etale-cover}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. $f$가 분리이고 국소 준유한이면 스킴 $U$가 존재하여 $Y$ 위에서
+에탈이고, 전사 에탈 사상 $U \to (X/Y)_{fin}$은 $Y$ 위에 있다.
+\end{lemma}
+
+\begin{proof}
+이 명제가 의미를 갖는다는 것은 $(X/Y)_{fin}$의 대각사상에 대한
+Lemma \ref{spaces-more-groupoids-lemma-finite-diagonal}의 결과에서 따른다. Spaces, Lemma
+\ref{spaces-lemma-representable-diagonal}을 보라. $V$를 스킴이라 하고
+$V \to Y$를 전사 에탈 사상이라 하자. Lemma
+\ref{spaces-more-groupoids-lemma-finite-pullback}에 의해 사상
+$(V \times_Y X/V)_{fin} \to (X/Y)_{fin}$은 $V \to Y$의 기저변환이므로
+전사이고 에탈이다. Spaces, Lemma
+\ref{spaces-lemma-base-change-representable-transformations-property}을 보라.
+따라서 $(V \times_Y X/V)_{fin}$에 대해 보조정리를 증명하면 충분하다.
+(여기서는 표현가능하고 전사이며 에탈인 함자 변환들의 합성도 다시
+표현가능하고 전사이며 에탈이라는 사실을 암묵적으로 사용한다.
+Spaces, Lemmas \ref{spaces-lemma-composition-representable-transformations},
+\ref{spaces-lemma-composition-representable-transformations-property}, 및
+Morphisms, Lemmas \ref{morphisms-lemma-composition-surjective},
+\ref{morphisms-lemma-composition-etale}을 보라.)
+분리 및 국소 준유한이라는 성질은 기저변환으로 보존됨에 유의하자.
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-separated} 및
+\ref{spaces-morphisms-lemma-base-change-quasi-finite}을 보라.
+따라서 $V \times_Y X \to V$도 분리이고 국소 준유한이며,
+Morphisms of Spaces, Proposition
+\ref{spaces-morphisms-proposition-locally-quasi-finite-separated-over-scheme}에
+의해 $V \times_Y X$도 스킴이다. 그러므로 $f : X \to Y$가 스킴의
+분리 국소 준유한 사상이라고 가정해도 된다.
+
+\medskip\noindent
+점 $y \in Y$를 택하자. $x_1, \ldots, x_n \in X$를 $y$ 위에 놓인
+점들로 택하자. 에탈 근방 $a : (U, u) \to (Y, y)$와 분해
+% P09-ERR-1471
+% P09-ERR-1472
+$$
+U \times_S X =
+W \amalg
+\ \coprod\nolimits_{i = 1, \ldots, n}
+\ \coprod\nolimits_{j = 1, \ldots, m_j}
+V_{i, j}
+$$
+를 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-splits-off-quasi-finite-part-technical-variant}와
+같이 택하자. 임의의 부분집합
+$$
+I \subset \{(i, j) \mid 1 \leq i \leq n, \ 1 \leq j \leq m_i\}.
+$$
+을 택하자. 이 선택들로부터 쌍 $(a, Z)$를 얻는데,
+$Z = \bigcup_{(i, j) \in I} V_{i, j}$이고 이는 조건
+\ref{spaces-more-groupoids-equation-finite-conditions}을 만족한다. 달리 말해 사상
+$U \to (X/Y)_{fin}$을 얻는다. 이 사상의 구성은 위에서 택한 모든
+것에 의존하므로 실제로는
+$$
+U(y, n, x_1, \ldots, x_n, a, I) \longrightarrow (X/Y)_{fin}
+$$
+라고 써야 한다. 이 사상은 Lemma
+\ref{spaces-more-groupoids-lemma-finite-criterion-etale}에 의해 에탈이다.
+
+\medskip\noindent
+주장: 이 사상들을 모두 분리합한 것은 $(X/Y)_{fin}$ 위로 전사이다.
+주장이 성립하면 보조정리가 참임은 분명하다.
+
+\medskip\noindent
+전사성을 보이려면 다음을 보여야 한다(Spaces, Remark
+\ref{spaces-remark-warning}을 보라). 스킴 $T$가 주어지고 이는 $S$ 위에
+있으며, 점 $t \in T$와 사상 $T \to (X/Y)_{fin}$이 주어졌다고 하자. 그러면
+위와 같은 자료 $(y, n, x_1, \ldots, x_n, a, I)$를 찾아서 $t$가 사영
+$$
+U(y, n, x_1, \ldots, x_n, a, I) \times_{(X/Y)_{fin}} T \longrightarrow T.
+$$
+의 상에 속하게 할 수 있다. 이를 증명할 때 $T$를
+$\Spec(\overline{\kappa(t)})$로, $T \to (X/Y)_{fin}$을 합성
+$\Spec(\overline{\kappa(t)}) \to T \to (X/Y)_{fin}$으로 바꾸어도 됨은
+분명하다. 달리 말해 $T$가 대수적으로 닫힌 체의 스펙트럼이라고
+가정해도 된다.
+
+\medskip\noindent
+$T = \Spec(k)$를 대수적으로 닫힌 체 $k$의 스펙트럼이라 하자.
+사상 $T \to (X/Y)_{fin}$은 조건 \ref{spaces-more-groupoids-equation-finite-conditions}을
+만족하는 쌍 $(T \to Y, Z)$로 주어진다. 이를 그림으로 나타내면
+다음과 같다.
+$$
+\xymatrix{
+& Z \ar[d] \ar[r] & X \ar[d] \\
+\Spec(k) \ar@{=}[r] & T \ar[r] & Y
+}
+$$
+$y \in Y$를 $T \to Y$의 상점이라 하자. $Z$는 $k$ 위에서 유한이므로
+유한 개의 점을 갖는다. 따라서 유한 개의 점
+$x_1, \ldots, x_n \in X$가 존재하여 $Z$의 $X$ 안에서의 상이
+$\{x_1, \ldots, x_n\}$에 포함된다.
+$a : (U, u) \to (Y, y)$를 택하자. 이는 위와 같이 $y$와
+$x_1, \ldots, x_n$에 맞춘 것이며, 이로부터 도식
+$$
+\xymatrix{
+W \amalg
+\ \coprod\nolimits_{i = 1, \ldots, n}
+\ \coprod\nolimits_{j = 1, \ldots, m_j}
+V_{i, j} \ar[d] \ar[r] &
+X \ar[d] \\
+U \ar[r] & Y.
+}
+$$
+을 얻는다. $k$는 대수적으로 닫혀 있고
+$\kappa(y) \subset \kappa(u)$는 유한 분리 확대이므로 사상
+$T = \Spec(k) \to Y$를 사상
+$u = \Spec(\kappa(u)) \to \Spec(\kappa(y)) = y \subset Y$를 통해
+인수분해할 수 있다. 이 선택으로 가환 도식
+$$
+\xymatrix{
+Z \ar[d] \ar[r] &
+W \amalg
+\ \coprod\nolimits_{i = 1, \ldots, n}
+\ \coprod\nolimits_{j = 1, \ldots, m_j}
+V_{i, j} \ar[d] \ar[r] &
+X \ar[d] \\
+\Spec(k) \ar[r] &
+U \ar[r] & Y
+}
+$$
+을 얻는다. 왼쪽 위 화살표의 상은
+$\coprod V_{i, j}$ 안에 들어감을 알고 있다. 또한 정의에 의해 $Z$는
+$\Spec(k) \times_Y X$의 열린 부분스킴이고 $(X/Y)_{fin}$의 정의에
+해당하며, 오른쪽 정사각형은 올곱 정사각형임을 상기하자. 따라서
+$$
+Z \subset
+\coprod\nolimits_{i = 1, \ldots, n}\ \coprod\nolimits_{j = 1, \ldots, m_j}
+\Spec(k) \times_U V_{i, j}
+$$
+가 열린 부분스킴임을 알 수 있다. 구성상(More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-splits-off-quasi-finite-part-technical-variant}
+를 보라) 각 $V_{i, j}$에는 유일한 점 $v_{i, j}$가 있고, 이 점은
+$u$ 위에 놓여 있으며,
+잉여체 확대 $\kappa(v_{i, j})/\kappa(u)$는 순수 비분리이다. 따라서 각
+스킴 $\Spec(k) \times_U V_{i, j}$은 정확히 한 점을 갖는다. 그러므로
+$$
+Z = \coprod\nolimits_{(i, j) \in I} \Spec(k) \times_U V_{i, j}
+$$
+이며, 이를 만족하는 유일한 부분집합
+$I \subset \{(i, j) \mid 1 \leq i \leq n, \ 1 \leq j \leq m_i\}$가
+존재한다. 정의를 풀어 쓰면
+$$
+U(y, n, x_1, \ldots, x_n, a, I) \times_{(X/Y)_{fin}} T
+$$
+가 위에서 찾은 $I$에 대해 공집합이 아니며, 이것이 원하는 결론이다.
+\end{proof}
+
+\begin{proposition}
+\label{spaces-more-groupoids-proposition-finite-algebraic-space}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 분리 국소
+유한형 사상이라 하자. 그러면 $(X/Y)_{fin}$은 대수공간이다. 더 나아가
+사상 $(X/Y)_{fin} \to Y$는 에탈이다.
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{spaces-more-groupoids-lemma-finite-lives-on-locally-quasi-finite-part}에 의해
+$X$를 $Y$ 위에서 국소 준유한인 열린 부분스킴으로 바꾸어도 된다.
+따라서 $f$가 분리이고 국소 준유한이라고 가정해도 된다. Spaces,
+Definition \ref{spaces-definition-algebraic-space}의 세 조건을 확인하자.
+조건 (1)은 Lemma \ref{spaces-more-groupoids-lemma-finite-sheaf}에서 따르고, 조건 (2)는
+Lemma \ref{spaces-more-groupoids-lemma-finite-diagonal}에서 따르며, 마지막으로 조건 (3)은
+Lemma \ref{spaces-more-groupoids-lemma-finite-surjective-etale-cover}에서 따른다. 따라서
+$(X/Y)_{fin}$은 대수공간이다. 더 나아가 그 보조정리에 의해 가환 도식
+$$
+\xymatrix{
+U \ar[rr] \ar[rd] & & (X/Y)_{fin} \ar[ld] \\
+& Y
+}
+$$
+이 존재하는데, 수평 화살표는 전사이고 에탈이며 남동쪽 화살표는
+에탈이다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-local}에 의해 남서쪽 화살표도
+에탈이다.
+\end{proof}
+
+\begin{remark}
+\label{spaces-more-groupoids-remark-warning}
+$f$가 분리라는 조건은 Proposition
+\ref{spaces-more-groupoids-proposition-finite-algebraic-space}에서 생략할 수 없다.
+예로 $X$를 영점을 두 겹으로 만든 아핀 직선이라 하자. Schemes, Example
+\ref{schemes-example-affine-space-zero-doubled}를 보라.
+$Y = \mathbf{A}^1_k$를 아핀 직선이라 하고 $X \to Y$를 자명한 사상이라
+하자. $0 \in Y$ 위에는 두 점 $0_1$과 $0_2$가 있고 이들은 $X$에
+속함을 상기하자.
+따라서 $(X/Y)_{fin}$은 $0$ 위에 네 점
+$\emptyset, \{0_1\}, \{0_2\}, \{0_1, 0_2\}$을 갖는다. 이 네 점 가운데
+세 점만이 $U \times_Y X$의 열린 부분스킴으로 올려지며, 이 부분스킴은
+$U$ 위에서 유한이고 $U \to Y$는 에탈이다. 그 세 점은
+$\emptyset, \{0_1\}, \{0_2\}$이다. 이는 $(X/Y)_{fin}$이 대수공간으로
+표현가능하더라도 $Y$ 위에서 에탈이지 않음을 보인다. 비슷한 논증은
+$(X/Y)_{fin}$이 실제로 대수공간이 아님을 보인다. 세부사항은 생략한다.
+\end{remark}
+
+\begin{remark}
+\label{spaces-more-groupoids-remark-not-scheme}
+$Y = \mathbf{A}^1_{\mathbf{R}}$를 실수체 위의 아핀 직선이라 하고,
+$X = \Spec(\mathbf{C})$가 $\mathbf{R}$-유리점 $0$으로 사상되며, 이 점은
+$Y$에 속한다고 하자. 이 경우 사상 $f : X \to Y$는 유한이지만 $(X/Y)_{fin}$이
+스킴인 것은 아니다. 실제로 이 경우 대수공간 $(X/Y)_{fin}$은
+Spaces, Example \ref{spaces-example-non-representable-descent}에서
+확대 $\mathbf{R} \subset \mathbf{C}$에 결부된 대수공간과 동형임을
+보일 수 있다. 따라서 층 $(X/Y)_{fin}$을 표현하려면 실제로 스킴의
+범주를 벗어나야 하며, 이는 $f$가 유한 사상인 경우조차 그러하다.
+\end{remark}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-finite-separated-flat-locally-finite-presentation}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 분리 평탄
+국소 유한 표시 사상이라 하자. 이 경우
+\begin{enumerate}
+\item $(X/Y)_{fin} \to Y$는 분리이고 표현가능하며 에탈이다.
+\item $Y$가 스킴이면 $(X/Y)_{fin}$은 스킴으로 표현가능하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f$는 특히 분리이고 국소 유한형이므로(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-finite-type}을 보라),
+Proposition \ref{spaces-more-groupoids-proposition-finite-algebraic-space}에 의해
+$(X/Y)_{fin}$은 대수공간이다. $(X/Y)_{fin} \to Y$가 분리임을
+증명하려면 다음을 보여야 한다. 스킴 $T$와 두 쌍 $(a, Z_1)$ 및
+$(a, Z_2)$가 주어졌고, 이 두 쌍은 같은 첫 성분을 가지며 $T$ 위에서
+\ref{spaces-more-groupoids-equation-finite-conditions}을 만족한다고 하자. 그러면 다음 성질을 갖는
+닫힌 부분스킴 $V \subset T$가 존재한다. 스킴의 임의의 사상
+$h : T' \to T$에 대해
+\begingroup
+\small
+$$
+h \text{가 다음을 통해 인수분해됨 } V \Leftrightarrow
+\Big(T' \times_T Z_1 = T' \times_T Z_2
+\text{가 다음 공간의 부분공간으로서 성립함 }T' \times_Y X\Big)
+$$
+\endgroup
+이다. Lemma \ref{spaces-more-groupoids-lemma-finite-diagonal}의 증명에서
+% P09-ERR-1473
+$V = T' \setminus E$가 $T'$의 열린 부분스킴이고 그 닫힌 여집합이
+$$
+E =
+\text{pr}_0|_{Z_1}\left(Z_1 \setminus Z_1 \cap Z_2)\right)
+\cup
+\text{pr}_0|_{Z_2}\left(Z_2 \setminus Z_1 \cap Z_2)\right).
+$$
+임을 보았다. 따라서 $E$도 열려 있음을 보이는 것으로 모두 귀착된다.
+Lemma \ref{spaces-more-groupoids-lemma-finite-separated}에 의해 $Z_1$과 $Z_2$는
+$T' \times_Y X$에서 닫혀 있다. 따라서 $Z_1 \setminus Z_1 \cap Z_2$는
+$Z_1$에서 열려 있다. $f$가 평탄하고 국소 유한 표시이므로
+$\text{pr}_0|_{Z_1}$도 그러하다. 이는 $Z_1$이 기저변환
+$T' \times_Y X$의 열린 부분공간이라는 사실과 Morphisms of Spaces,
+Lemmas \ref{spaces-morphisms-lemma-base-change-finite-presentation} 및
+Lemmas \ref{spaces-morphisms-lemma-base-change-flat}에서 따른다. 따라서
+$\text{pr}_0|_{Z_1}$은 열려 있다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open}을 보라. 그러므로
+$\text{pr}_0|_{Z_1}\left(Z_1 \setminus Z_1 \cap Z_2)\right)$는 열려 있고,
+원하는 대로 $E$가 열려 있음이 따른다.
+
+\medskip\noindent
+$(X/Y)_{fin} \to Y$가 에탈임은 이미 보았다. Proposition
+\ref{spaces-more-groupoids-proposition-finite-algebraic-space}를 보라. 따라서 이제 이것이 국소
+준유한임을 알고(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-locally-quasi-finite}을 보라), 또한
+분리이므로 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite-separated-representable}에
+의해 표현가능하다. 마지막 명제는 분명하다(원한다면 Morphisms of
+Spaces, Proposition
+\ref{spaces-morphisms-proposition-locally-quasi-finite-separated-over-scheme}을
+사용할 수 있다).
+\end{proof}
+
+\noindent
+변형: $S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의
+사상이라 하자. $\sigma : Y \to X$를 $f$의 단면이라 하자. 대수공간
+또는 스킴 $T$를 생각하자. 이는 $S$ 위에 있다. 다음과 같은 쌍
+$(a, Z)$를 생각하자.
+\begin{equation}
+\label{spaces-more-groupoids-equation-finite-conditions-variant}
+\begin{matrix}
+a : T \to Y\text{는 S 위의 사상이고}, \\
+Z \subset T \times_Y X\text{는 열린 부분공간이며} \\
+\text{또한 }\text{pr}_0|_Z : Z \to T\text{는 유한이고} \\
+(1_T, \sigma \circ a) : T \to T \times_Y X\text{는 다음을 통해 인수분해된다 }Z.
+\end{matrix}
+\end{equation}
+이런 쌍들을 매개화하는 부분함자를 $(X/Y, \sigma)_{fin}$으로 나타내겠다.
+이는 $(X/Y)_{fin}$의 부분함자이다.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-finite-plus-section}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위 대수공간의 사상이라
+하자. $\sigma : Y \to X$를 $f$의 단면이라 하자. 위에서 정의한 함자의
+변환
+$$
+t : (X/Y, \sigma)_{fin} \longrightarrow (X/Y)_{fin}.
+$$
+을 생각하자. 그러면
+\begin{enumerate}
+\item $t$는 열린 몰입으로 표현가능하다.
+\item $f$가 분리이면 $t$는 열리고 닫힌 몰입으로 표현가능하다.
+\item $(X/Y)_{fin}$이 대수공간이면 $(X/Y, \sigma)_{fin}$은
+대수공간이며 $(X/Y)_{fin}$의 열린 부분공간이다.
+\item $(X/Y)_{fin}$이 스킴이면 $(X/Y, \sigma)_{fin}$은 그 열린
+부분스킴이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: $(a, Z)$가 $T$ 위에서
+(\ref{spaces-more-groupoids-equation-finite-conditions})와 같은 쌍이라고 하자. 그러면
+$Z$의 $(1_T, \sigma \circ a) : T \to T \times_Y X$에 의한 역상이
+우리가 찾는 $T$의 열린 부분스킴이다.
+\end{proof}
+
+\section{화살표의 유한 모음}
+\label{spaces-more-groupoids-section-finite-set-arrows}
+
+\noindent
+$\mathcal{C}$를 groupoid라 하자. Categories, Definition
+\ref{categories-definition-groupoid}을 보라. Groupoids, Section
+\ref{groupoids-section-groupoids}에서 논의했듯이 이는 칠중항
+$(\text{Ob}, \text{Arrows}, s, t, c, e, i)$에 대응한다.
+
+\medskip\noindent
+이 자료를 사용하여 다음과 같이 또 다른 groupoid $\mathcal{C}_{fin}$을
+만들 수 있다.
+\begin{enumerate}
+\item $\mathcal{C}_{fin}$의 대상은 다음 성질을 갖는 유한 부분집합
+$Z \subset \text{Arrows}$이다.
+\begin{enumerate}
+\item $s(Z) = \{u\}$는 한원소집합이고,
+\item $e(u) \in Z$이다.
+\end{enumerate}
+\item $\mathcal{C}_{fin}$의 사상은 쌍 $(Z, z)$이다. 여기서 $Z$는
+$\mathcal{C}_{fin}$의 대상이고 $z \in Z$이다.
+\item $(Z, z)$의 원천은 $Z$이다.
+\item $(Z, z)$의 표적은
+$t(Z, z) = \{z' \circ z^{-1}; z' \in Z\}$이다.
+\item $(Z_1, z_1)$과 $(Z_2, z_2)$가
+$s(Z_1, z_1) = t(Z_2, z_2)$를 만족할 때, 합성
+$(Z_1, z_1) \circ (Z_2, z_2)$는
+$(Z_2, z_1 \circ z_2)$이다.
+\end{enumerate}
+이것이 groupoid를 정의한다는 확인은 생략한다. 그림으로 보면
+$\mathcal{C}_{fin}$의 대상은 다음 도식으로 볼 수 있다.
+$$
+\xymatrix{
+& \bullet \\
+\bullet \ar@(ul, dl)[]_e \ar[ru] \ar[r] \ar[rd] & \bullet \\
+& \bullet
+}
+$$
+$\mathcal{C}_{fin}$의 사상을 만들려면 화살표 하나를 고르고, 나머지
+화살표들 앞에 그 역을 합성한다. 예를 들어 가운데 수평 화살표를
+고르면 표적은 다음 그림이다.
+$$
+\xymatrix{
+& \bullet \\
+\bullet & \bullet \ar[l] \ar[u] \ar@(dr, ur)[]_e \ar[d] \\
+& \bullet
+}
+$$
+$s(Z, z)$와 $t(Z, z)$의 기수가 같음에 유의하자. 따라서
+$\mathcal{C}_{fin}$은 실제로 groupoid들의 가산 서로소 합이다.
+
+\section{Groupoid의 유한 부분}
+\label{spaces-more-groupoids-section-finite-part-groupoid}
+
+\noindent
+이 절에서는 Section \ref{spaces-more-groupoids-section-finite-set-arrows}에서 설명한 발상을
+사용하여 대수공간에서의 groupoid의 유한 부분을 취한다.
+
+\medskip\noindent
+$S$를 스킴이라 하자. $B$를 $S$ 위 대수공간이라 하자.
+$(U, R, s, t, c, e, i)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+가정: 사상 $s, t$는 분리이고 국소 유한형이다. 이 표기와 가정은 이 절
+전체에서 고정한다.
+
+\medskip\noindent
+$R_s$는 대수공간 $R$를 $U$ 위 대수공간으로 본 것을 나타내며, 그
+구조사상은 $s$이다.
+$U' = (R_s/U, e)_{fin}$이라 하자. $s$가 분리이고 국소 유한형이므로
+Proposition \ref{spaces-more-groupoids-proposition-finite-algebraic-space}과 Lemma
+\ref{spaces-more-groupoids-lemma-finite-plus-section}에 의해 $U'$은 에탈 사상
+$g : U' \to U$가 주어진 대수공간이다. 또한 Lemma
+\ref{spaces-more-groupoids-lemma-finite-sheaf}에 의해 보편 열린 부분공간
+$Z_{univ} \subset R \times_{s, U, g} U'$이 존재한다. 이는 $U'$ 위에서
+유한이며,
+$(1_{U'}, e \circ g) : U' \to R \times_{s, U, g} U'$는
+$Z_{univ}$을 통해 인수분해된다. 또한 Lemma
+\ref{spaces-more-groupoids-lemma-finite-separated}에 의해 열린 부분공간 $Z_{univ}$은
+% P09-ERR-1474
+$R \times_{s, U', g} U$에서도 닫혀 있다. 지금까지의 그림은 다음과 같다.
+$$
+\xymatrix{
+Z_{univ} \ar[d] \ar[rd] & \\
+R \times_{s, U, g} U' \ar[d] \ar[r] & U' \ar[d]^g \\
+R \ar[r]^s & U
+}
+$$
+$T$를 $B$ 위 스킴이라 하자. $T$-값 점인 $Z_{univ}$의 점은 다음 조건을
+만족하는 삼중항 $(u, Z, z)$로 볼 수 있다.
+\begin{enumerate}
+\item $u : T \to U$는 $T$-값 점인 $U$의 점이고,
+\item $Z \subset R \times_{s, U, u} T$는 $T$ 위에서 유한인 열린닫힌
+부분공간으로서 $(e \circ u, 1_T)$가 이를 통해 인수분해되며,
+\item $z : T \to R$는 $T$-값 점인 $R$의 점으로서 $s \circ z = u$를
+만족하고 $(z, 1_T)$가 $Z$를 통해 인수분해된다.
+\end{enumerate}
+이렇게 말하고 나면 Section \ref{spaces-more-groupoids-section-finite-set-arrows}의 논의로부터
+$(Z_{univ}, U')$를 $B$ 위 대수공간에서의 groupoid로 만들 수 있음이
+직관적으로 분명하다. 확실히 하기 위해 사상 $s', t', c', e', i'$을
+% P09-ERR-1475
+함자적 관점을 사용하여 하나씩 정의하겠다. (Section
+\ref{spaces-more-groupoids-section-finite-set-arrows}의 간단한 구성을 읽고 이해하기 전에는
+이 내용을 읽지 말라.)
+
+\medskip\noindent
+사상 $s' : Z_{univ} \to U'$는 다음 규칙에 대응한다.
+$$
+s' : (u, Z, z) \mapsto (u, Z).
+$$
+사상 $t' : Z_{univ} \to U'$는 다음 규칙으로 주어진다.
+$$
+t' : (u, Z, z) \mapsto (t \circ z, c(Z, i \circ z)).
+$$
+$c(Z, i \circ z)$라는 항은 사상
+$c(-, i \circ z) : R \times_{s, U, u} T \to R \times_{s, U, t \circ z} T$가
+$c(-, z)$를 역으로 갖는 동형이므로 의미가 있다. 사상
+$e' : U' \to Z_{univ}$은 다음 규칙으로 주어진다.
+$$
+e' : (u, Z) \mapsto (u, Z, (e \circ u, 1_T)).
+$$
+이는 $(e \circ u, 1_T)$가 $Z$를 통해 인수분해된다는 조건 때문에
+의미가 있다. 사상 $i' : Z_{univ} \to Z_{univ}$은 다음 규칙으로
+주어진다.
+$$
+i' : (u, Z, z) \mapsto (t \circ z, c(Z, i \circ z), i \circ z).
+$$
+마지막으로 합성은 다음 규칙으로 정의한다.
+$$
+c' : ((u_1, Z_1, z_1), (u_2, Z_2, z_2)) \mapsto (u_2, Z_2, z_1 \circ z_2).
+$$
+$(U', Z_{univ}, s', t', c', e', i')$에 대해 대수공간에서의 groupoid
+공리들이 성립한다는 확인은 생략한다.
+
+\medskip\noindent
+마지막 정보는 다음과 같은 표준적 groupoid 사상이 존재한다는 것이다.
+$$
+(U', Z_{univ}, s', t', c', e', i')
+\longrightarrow
+(U, R, s, t, c, e, i)
+$$
+실제로 사상 $U' \to U$는 사상 $g : U' \to U$이며, 이는 규칙
+$(u, Z) \mapsto u$로 정의된다. 사상 $Z_{univ} \to R$는 규칙
+$(u, Z, z) \mapsto z$로 정의된다. 이로써 구성이 끝났다. 얻은 결과를
+다음과 같이 요약하자.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-finite-part-groupoid}
+$S$를 스킴이라 하자. $B$를 $S$ 위 대수공간이라 하자.
+$(U, R, s, t, c, e, i)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+사상 $s, t$가 분리이고 국소 유한형이라고 가정하자. 다음과 같은
+표준적 사상이 존재한다.
+$$
+(U', Z_{univ}, s', t', c', e', i')
+\longrightarrow
+(U, R, s, t, c, e, i)
+$$
+이는 $B$ 위 대수공간에서의 groupoid들의 사상이며, 다음이 성립한다.
+\begin{enumerate}
+\item $g : U' \to U$는 $(R_s/U, e)_{fin} \to U$와 동일시되고,
+\item $Z_{univ} \subset R \times_{s, U, g} U'$은 $U'$ 위에서 유한인
+보편 열린(이면서 닫힌) 부분공간이며 단위원 사상 $e$의 기저변환을
+포함한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+위의 논의를 보라.
+\end{proof}
+
+\section{Groupoid 스킴의 에탈 국소화}
+\label{spaces-more-groupoids-section-etale-localize}
+
+\noindent
+이 절에서는 \cite[Proposition 4.2]{K-M}와 비슷한 결과들을 증명한다.
+조금 더 일반적인 결과를 얻으려 하며, Hilbert 스킴 대신 사상의 유한
+부분을 사용하여 Hilbert 스킴의 사용을 피하고자 한다. 목표는 에탈
+국소화 뒤에 한 점 위 대수공간에서의 groupoid를 ``분할''하는 것이다.
+다음은 정의이며, \cite[Definition 4.1]{K-M}와 매우 비슷하다.
+
+\begin{definition}
+\label{spaces-more-groupoids-definition-split-at-point}
+$S$를 스킴이라 하자. $B$를 $S$ 위 대수공간이라 하자.
+$(U, R, s, t, c)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+$u \in |U|$를 한 점이라 하자.
+\begin{enumerate}
+\item $R$가 {it $u$ 위에서 강하게 분할된다}는 것은 다음을 만족하는
+열린 부분공간 $P \subset R$가 존재한다는 뜻이다.
+\begin{enumerate}
+\item $(U, P, s|_P, t|_P, c|_{P \times_{s, U, t} P})$는 $B$ 위
+대수공간에서의 groupoid이다.
+\item $s|_P$, $t|_P$는 유한이다.
+\item $\{r \in |R| : s(r) = u, t(r) = u\} \subset |P|$이다.
+\end{enumerate}
+이런 $P$의 선택을 {it $R$의 $u$ 위에서의 강한 분할}이라 한다.
+\item $R$가 {it $u$ 위에서 분할된다}는 것은 다음을 만족하는 열린
+부분공간 $P \subset R$가 존재한다는 뜻이다.
+\begin{enumerate}
+\item $(U, P, s|_P, t|_P, c|_{P \times_{s, U, t} P})$는 $B$ 위
+대수공간에서의 groupoid이다.
+\item $s|_P$, $t|_P$는 유한이다.
+\item $\{g \in |G| : g\text{ maps to }u\} \subset |P|$이다. 여기서
+$G \to U$는 안정자이다.
+\end{enumerate}
+이런 $P$의 선택을 {it $R$의 $u$ 위에서의 분할}이라 한다.
+\item $R$가 {it $u$ 위에서 준분할된다}는 것은 다음을 만족하는 열린
+부분공간 $P \subset R$가 존재한다는 뜻이다.
+\begin{enumerate}
+\item $(U, P, s|_P, t|_P, c|_{P \times_{s, U, t} P})$는 $B$ 위
+대수공간에서의 groupoid이다.
+\item $s|_P$, $t|_P$는 유한이다.
+\item $e(u) \in |P|$이다\footnote{이 조건은 (a)에서 따른다.}.
+\end{enumerate}
+이런 $P$의 선택을 {it $R$의 $u$ 위에서의 준분할}이라 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$P$에 관한 조건들과 (\ref{spaces-more-groupoids-equation-finite-conditions})의 쌍들에 관한
+조건들이 비슷함에 유의하자. 특히 $s, t$가 분리이면 $P$는 $R$에서도
+닫혀 있다(Lemma \ref{spaces-more-groupoids-lemma-finite-separated}를 보라).
+
+\medskip\noindent
+대수공간에서의 groupoid $(U, R, s, t, c)$가 $B$ 위에 주어지고 한 점
+$u \in |U|$가 주어졌다고 하자. 목표가 에탈 국소화 뒤 groupoid를
+분할하는 것이므로 $U$를 아핀 스킴으로 바꾸어도 무방하다(즉 가능한
+모든 응용에서 이것은 해가 없다). 더욱이 앞으로 부과할 추가 가정은
+$R$가 적어도 $\{r \in |R| : s(r) = u, t(r) = u\}$ 또는 $e(u)$의
+근방에서 스킴이 되도록 강제한다. 이것이 아래에 기술하는 groupoid
+스킴에서 시작하는 이유이다. 그러나 우리의 증명 기법은 스킴의 범주
+밖으로 이끈다. 이 때문에 위에서는 대수공간에서의 groupoid인 경우에
+대하여 분할을 정식화하였다. 한편 우리가 아는 응용에서는 사상
+$s$, $t$가 평탄하고 유한 표시인 경우만 필요하며, 이 경우에는 결국
+다시 스킴의 범주로 돌아온다.
+
+\begin{situation}[강한 분할]
+\label{spaces-more-groupoids-situation-strong-splitting}
+$S$를 스킴이라 하자. $(U, R, s, t, c)$를 $S$ 위 groupoid 스킴이라
+하자. $u \in U$를 한 점이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $s, t : R \to U$는 분리이다.
+\item $s$, $t$는 국소 유한형이다.
+\item 집합 $\{r \in R : s(r) = u, t(r) = u\}$는 유한하다.
+\item $s$는 (3)의 집합의 각 점에서 준유한이다.
+\end{enumerate}
+가정 (3)과 (4)는 올 $s^{-1}(\{u\})$가 유한이라는 가정에서 따른다.
+Morphisms, Lemma \ref{morphisms-lemma-finite-fibre}를 보라.
+\end{situation}
+
+\begin{situation}[분할]
+\label{spaces-more-groupoids-situation-splitting}
+$S$를 스킴이라 하자. $(U, R, s, t, c)$를 $S$ 위 groupoid 스킴이라
+하자. $u \in U$를 한 점이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $s, t : R \to U$는 분리이다.
+\item $s$, $t$는 국소 유한형이다.
+\item 집합 $\{g \in G : g\text{ maps to }u\}$는 유한하다. 여기서
+$G \to U$는 안정자이다.
+\item $s$는 (3)의 집합의 각 점에서 준유한이다.
+\end{enumerate}
+\end{situation}
+
+\begin{situation}[준분할]
+\label{spaces-more-groupoids-situation-quasi-splitting}
+$S$를 스킴이라 하자. $(U, R, s, t, c)$를 $S$ 위 groupoid 스킴이라
+하자. $u \in U$를 한 점이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $s, t : R \to U$는 분리이다.
+\item $s$, $t$는 국소 유한형이다.
+\item $s$는 $e(u)$에서 준유한이다.
+\end{enumerate}
+\end{situation}
+
+\noindent
+대수공간의 존재 정리에 적용하려면 준분할의 경우로 충분하다. 더욱이
+준분할의 경우를 통해 준-DM 스택의 에탈 국소 구조 정리를 증명할 수
+있다. 분할의 경우는 Keel--Mori 정리의 한 판본을 증명하는 데 사용한다.
+강한 분할의 경우는 준콤팩트 대각사상을 갖는 준-DM 대수스택의 에탈
+국소 구조 정리를 준다.
+
+\begin{lemma}[강한 분할의 존재]
+\label{spaces-more-groupoids-lemma-strong-splitting}
+Situation \ref{spaces-more-groupoids-situation-strong-splitting}에서 대수공간 $U'$, 에탈 사상
+$U' \to U$, 그리고 점 $u' : \Spec(\kappa(u)) \to U'$이 존재한다. 이 점은
+$u : \Spec(\kappa(u)) \to U$ 위에 놓이며, $R' = R|_{U'}$은 $R$를
+$U'$에 제한한 것으로서 $u'$ 위에서 강하게 분할된다.
+\end{lemma}
+
+\begin{proof}
+$f : (U', Z_{univ}, s', t', c') \to (U, R, s, t, c)$를 Lemma
+\ref{spaces-more-groupoids-lemma-finite-part-groupoid}에서 구성한 사상이라 하자.
+$R' = R \times_{(U \times_S U)} (U' \times_S U')$임을 상기하자. 따라서
+대수공간에서의 groupoid들의 사상
+$(f, t', s') : Z_{univ} \to R'$를 얻는다.
+$$
+(U', Z_{univ}, s', t', c') \to (U', R', s', t', c')
+$$
+(표기를 남용하여 두 groupoid의 사상들을 같은 기호로 나타낸다.) 이제
+$Z_{univ} \subset R \times_{s, U, g} U'$은 열려 있고,
+$R' \to R \times_{s, U, g} U'$은 $U' \to U$의 기저변환이므로 에탈이다.
+따라서 $Z_{univ} \to R'$은 열린 몰입이다. 구성에 의해 사상
+$s', t' : Z_{univ} \to U'$은 유한이다. 남은 일은 점 $u'$을 $U'$에서
+찾는 것이다.
+
+\medskip\noindent
+보조정리의 명제에서처럼 $u$를 사상 $\Spec(\kappa(u)) \to U$로
+생각한다. $F_u = R \times_{s, U} \Spec(\kappa(u))$라 놓자. 집합
+$\{r \in R : s(r) = u, t(r) = u\}$는 가정에 의해 유한하고,
+$F_u \to \Spec(\kappa(u))$는 가정에 의해 그 각 원소에서 준유한이다.
+따라서 열린닫힌 부분스킴들로의 분해
+$$
+F_u = Z_u \amalg Rest
+$$
+를 찾을 수 있다. 여기서 스킴 $Z_u$는 $\kappa(u)$ 위에서 유한하며 그
+받침은 $\{r \in R : s(r) = u, t(r) = u\}$이다. $e(u) \in Z_u$임에
+유의하자. 따라서 Section \ref{spaces-more-groupoids-section-finite-part-groupoid}의 $U'$의
+구성에 의해 $(u, Z_u)$는 $\Spec(\kappa(u))$-값 점 $u'$을 $U'$ 위에
+정의한다.
+
+\medskip\noindent
+이제 집합
+$\{r' \in |R'| : s'(r') = u', t'(r') = u'\}$가
+$|Z_{univ}|$에 포함됨을 보여야 한다. 이 집합의 임의의 점 $r'$을 고르고
+사상 $z' : \Spec(k) \to R'$로 나타내자. $z : \Spec(k) \to R$를
+$z'$와 사상 $R' \to R$의 합성이라 하자. 분명 $z$는 집합
+$\{r \in R : s(r) = u, t(r) = u\}$의 원소를 정의한다.
+또한 합성 $s \circ z, t \circ z : \Spec(k) \to U$는 $u$를 통해
+인수분해되므로 $s \circ z, t \circ z$를 사상
+$\Spec(k) \to \Spec(\kappa(u))$로 생각할 수 있다. 그러면
+% P09-ERR-1476
+$z' = (z, u' \circ t \circ z, u'\circ s \circ u)$가
+$R' = R \times_{(U \times_S U)} (U' \times_S U')$로 가는 사상이다.
+삼중항
+$$
+(s \circ z, Z_u \times_{\Spec(\kappa(u)), s \circ z} \Spec(k), z)
+$$
+을 생각하자. 여기서 $Z_u$는 위와 같다. 이는 $\Spec(k)$-값 점을
+$Z_{univ}$ 위에 정의한다. 그
+$s', t'$에 의한 $U'$에서의 상은 $u'$이고, 사상
+$Z_{univ} \to R'$에 의한 상은 점 $r'$이다. 이는 위에서 언급한 $z$와
+$z'$의 관계에서 따른다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}[분할의 존재]
+\label{spaces-more-groupoids-lemma-splitting}
+Situation \ref{spaces-more-groupoids-situation-splitting}에서 대수공간 $U'$, 에탈 사상
+$U' \to U$, 그리고 점 $u' : \Spec(\kappa(u)) \to U'$이 존재한다. 이 점은
+$u : \Spec(\kappa(u)) \to U$ 위에 놓이며, $R' = R|_{U'}$은 $R$를
+$U'$에 제한한 것으로서 $u'$ 위에서 분할된다.
+\end{lemma}
+
+\begin{proof}
+$f : (U', Z_{univ}, s', t', c') \to (U, R, s, t, c)$를 Lemma
+\ref{spaces-more-groupoids-lemma-finite-part-groupoid}에서 구성한 사상이라 하자.
+$R' = R \times_{(U \times_S U)} (U' \times_S U')$임을 상기하자. 따라서
+대수공간에서의 groupoid들의 사상
+$(f, t', s') : Z_{univ} \to R'$를 얻는다.
+$$
+(U', Z_{univ}, s', t', c') \to (U', R', s', t', c')
+$$
+(표기를 남용하여 두 groupoid의 사상들을 같은 기호로 나타낸다.) 이제
+$Z_{univ} \subset R \times_{s, U, g} U'$은 열려 있고,
+$R' \to R \times_{s, U, g} U'$은 $U' \to U$의 기저변환이므로 에탈이다.
+따라서 $Z_{univ} \to R'$은 열린 몰입이다. 구성에 의해 사상
+$s', t' : Z_{univ} \to U'$은 유한이다. 남은 일은 점 $u'$을 $U'$에서
+찾는 것이다.
+
+\medskip\noindent
+보조정리의 명제에서처럼 $u$를 사상 $\Spec(\kappa(u)) \to U$로
+생각한다. $F_u = R \times_{s, U} \Spec(\kappa(u))$라 놓자.
+$G_u \subset F_u$를 $G \to U$의 $u$ 위 스킴론적 올이라 하자.
+가정에 의해 $G_u$는 유한하고, $F_u \to \Spec(\kappa(u))$는 가정에
+의해 $G_u$의 각 점에서 준유한이다. 따라서 열린닫힌 부분스킴들로의
+분해
+$$
+F_u = Z_u \amalg Rest
+$$
+를 찾을 수 있다. 여기서 스킴 $Z_u$는 $\kappa(u)$ 위에서 유한하며 그
+받침은 $G_u$이다. $e(u) \in Z_u$임에 유의하자. 따라서 Section
+\ref{spaces-more-groupoids-section-finite-part-groupoid}의 $U'$의 구성에 의해 $(u, Z_u)$는
+$\Spec(\kappa(u))$-값 점 $u'$을 $U'$ 위에 정의한다.
+
+\medskip\noindent
+이제 집합 $\{g' \in |G'| : g'\text{ maps to }u'\}$가 $|Z_{univ}|$에
+포함됨을 보여야 한다. 이 집합의 임의의 점 $g'$을 고르고 사상
+$z' : \Spec(k) \to G'$로 나타내자. $z : \Spec(k) \to G$를 $z'$와 사상
+$G' \to G$의 합성이라 하자. 분명 $z$는 $G_u$의 한 점을 정의한다.
+실제로 이에 대응하는 사상을 $\tilde u : \Spec(k) \to u \to U$라고
+쓰자. 이는 $u$ 또는 $U$로 가는 사상이다. 삼중항
+$$
+(\tilde u, Z_u \times_{u, \tilde u} \Spec(k), z)
+$$
+을 생각하자. 여기서 $Z_u$는 위와 같다. 이는 $\Spec(k)$-값 점을
+$Z_{univ}$ 위에 정의한다. 그 $s', t'$에 의한 $U'$에서의 상은 $u'$이고,
+$Z_{univ} \to R'$에 의한 상은 점 $z'$이다($R$에서의 상이 $z$이기
+때문이다). 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}[준분할의 존재]
+\label{spaces-more-groupoids-lemma-quasi-splitting}
+Situation \ref{spaces-more-groupoids-situation-quasi-splitting}에서 대수공간 $U'$, 에탈 사상
+$U' \to U$, 그리고 점 $u' : \Spec(\kappa(u)) \to U'$이 존재한다. 이 점은
+$u : \Spec(\kappa(u)) \to U$ 위에 놓이며, $R' = R|_{U'}$은 $R$를
+$U'$에 제한한 것으로서 $u'$ 위에서 준분할된다.
+\end{lemma}
+
+\begin{proof}
+$f : (U', Z_{univ}, s', t', c') \to (U, R, s, t, c)$를 Lemma
+\ref{spaces-more-groupoids-lemma-finite-part-groupoid}에서 구성한 사상이라 하자.
+$R' = R \times_{(U \times_S U)} (U' \times_S U')$임을 상기하자. 따라서
+대수공간에서의 groupoid들의 사상
+$(f, t', s') : Z_{univ} \to R'$를 얻는다.
+$$
+(U', Z_{univ}, s', t', c') \to (U', R', s', t', c')
+$$
+(표기를 남용하여 두 groupoid의 사상들을 같은 기호로 나타낸다.) 이제
+$Z_{univ} \subset R \times_{s, U, g} U'$은 열려 있고,
+$R' \to R \times_{s, U, g} U'$은 $U' \to U$의 기저변환이므로 에탈이다.
+따라서 $Z_{univ} \to R'$은 열린 몰입이다. 구성에 의해 사상
+$s', t' : Z_{univ} \to U'$은 유한이다. 남은 일은 점 $u'$을 $U'$에서
+찾는 것이다.
+
+\medskip\noindent
+보조정리의 명제에서처럼 $u$를 사상 $\Spec(\kappa(u)) \to U$로
+생각한다. $F_u = R \times_{s, U} \Spec(\kappa(u))$라 놓자. 사상
+$F_u \to \Spec(\kappa(u))$는 가정에 의해 $e(u)$에서 준유한이다.
+따라서 열린닫힌 부분스킴들로의 분해
+$$
+F_u = Z_u \amalg Rest
+$$
+를 찾을 수 있다. 여기서 스킴 $Z_u$는 $\kappa(u)$ 위에서 유한하며 그
+받침은 $e(u)$이다. 따라서 Section \ref{spaces-more-groupoids-section-finite-part-groupoid}의
+$U'$의 구성에 의해 $(u, Z_u)$는 $\Spec(\kappa(u))$-값 점 $u'$을
+$U'$ 위에 정의한다. 증명을 끝내려면 $e'(u') \in Z_{univ}$임을 보여야
+하는데, 이는 분명하다.
+\end{proof}
+
+\noindent
+마지막으로 가정을 더하면 스킴들을 얻는다.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-strong-splitting-scheme}
+Situation \ref{spaces-more-groupoids-situation-strong-splitting}에서 $s, t$가 평탄하고 국소
+유한 표시라고 추가로 가정하자. 그러면 스킴 $U'$, 분리 에탈 사상
+$U' \to U$, 그리고 점 $u' \in U'$이 존재한다. 이 점은 $u$ 위에 놓이고
+$\kappa(u) = \kappa(u')$을 만족하며, $R' = R|_{U'}$은 $R$를
+$U'$에 제한한 것으로서 $u'$ 위에서 강하게 분할된다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{spaces-more-groupoids-lemma-strong-splitting}의 증명에 나오는 $U'$의
+구성에서 따른다. 실제로 이 경우 $U' = (R_s/U, e)_{fin}$은 Lemmas
+\ref{spaces-more-groupoids-lemma-finite-separated-flat-locally-finite-presentation} 및
+\ref{spaces-more-groupoids-lemma-finite-plus-section}에 의해 $U$ 위에서 분리인 스킴이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-splitting-scheme}
+Situation \ref{spaces-more-groupoids-situation-splitting}에서 $s, t$가 평탄하고 국소 유한
+표시라고 추가로 가정하자. 그러면 스킴 $U'$, 분리 에탈 사상
+$U' \to U$, 그리고 점 $u' \in U'$이 존재한다. 이 점은 $u$ 위에 놓이고
+$\kappa(u) = \kappa(u')$을 만족하며, $R' = R|_{U'}$은 $R$를
+$U'$에 제한한 것으로서 $u'$ 위에서 분할된다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{spaces-more-groupoids-lemma-splitting}의 증명에 나오는 $U'$의 구성에서
+따른다. 실제로 이 경우 $U' = (R_s/U, e)_{fin}$은 Lemmas
+\ref{spaces-more-groupoids-lemma-finite-separated-flat-locally-finite-presentation} 및
+\ref{spaces-more-groupoids-lemma-finite-plus-section}에 의해 $U$ 위에서 분리인 스킴이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-quasi-splitting-scheme}
+Situation \ref{spaces-more-groupoids-situation-quasi-splitting}에서 $s, t$가 평탄하고 국소
+유한 표시라고 추가로 가정하자. 그러면 스킴 $U'$, 분리 에탈 사상
+$U' \to U$, 그리고 점 $u' \in U'$이 존재한다. 이 점은 $u$ 위에 놓이고
+$\kappa(u) = \kappa(u')$을 만족하며, $R' = R|_{U'}$은 $R$를
+$U'$에 제한한 것으로서 $u'$ 위에서 준분할된다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{spaces-more-groupoids-lemma-quasi-splitting}의 증명에 나오는 $U'$의
+구성에서 따른다. 실제로 이 경우 $U' = (R_s/U, e)_{fin}$은 Lemmas
+\ref{spaces-more-groupoids-lemma-finite-separated-flat-locally-finite-presentation} 및
+\ref{spaces-more-groupoids-lemma-finite-plus-section}에 의해 $U$ 위에서 분리인 스킴이다.
+\end{proof}
+
+\noindent
+사실 유한 국소 자유 groupoid들에 관한 앞의 결과를 적용하면 아핀
+스킴들을 얻을 수 있다.
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-strong-splitting-affine-scheme}
+Situation \ref{spaces-more-groupoids-situation-strong-splitting}에서 $s, t$가 평탄하고 국소
+유한 표시이며 $U$가 아핀이라고 추가로 가정하자. 그러면 아핀 스킴
+$U'$, 에탈 사상 $U' \to U$, 그리고 점 $u' \in U'$이 존재한다. 이 점은
+$u$ 위에 놓이고 $\kappa(u) = \kappa(u')$을 만족하며,
+$R' = R|_{U'}$은 $R$를 $U'$에 제한한 것으로서 $u'$ 위에서 강하게
+분할된다.
+\end{lemma}
+
+\begin{proof}
+$U' \to U$와 $u' \in U'$를 Lemma
+\ref{spaces-more-groupoids-lemma-strong-splitting-scheme}에서 찾은 스킴의 분리 에탈 사상과
+점이라 하자. $P \subset R'$를 $R'$의 $u'$ 위에서의 강한 분할이라
+하자. More on Groupoids, Lemma
+\ref{more-groupoids-lemma-restrict-preserves-type}에 의해 사상
+$s', t' : R' \to U'$은 평탄하고 국소 유한 표시이다. 이들은 가정에
+의해 유한하다. 따라서 $s', t'$는 유한 국소 자유이다. Morphisms,
+Lemma \ref{morphisms-lemma-finite-flat}을 보라. 특히
+$t(s^{-1}(u'))$는 유한집합 $\{u'_1, u'_2, \ldots, u'_n\}$이고, 그
+원소들은 $U'$의 점들이다. 준콤팩트 열린 $W \subset U'$를 고르되
+각 $u'_i$를 포함하게 하자. $U$가 아핀이므로 사상 $W \to U$는
+준콤팩트이다(Schemes, Lemma
+\ref{schemes-lemma-quasi-compact-affine}를 보라). 사상 $W \to U$는
+또한 국소 준유한이고(Morphisms, Lemma
+\ref{morphisms-lemma-etale-locally-quasi-finite}를 보라) 분리이다.
+따라서 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-quasi-finite-separated-quasi-affine}
+(Zariski 주정리의 한 판본)에 의해 $W$는 준아핀이다. Properties,
+Lemma \ref{properties-lemma-ample-finite-set-in-affine}에 의해
+$\{u'_1, \ldots, u'_n\}$는 $U'$의 어떤 아핀 열린집합에 포함된다.
+따라서 Groupoids, Lemma \ref{groupoids-lemma-find-invariant-affine}를
+적용하면 아핀 $P$-불변 열린집합 $U'' \subset U'$이 존재하고, 이는
+$u'$을 포함한다.
+
+\medskip\noindent
+증명을 끝내기 위해 $R'' = R|_{U''}$을 $R$의 $U''$에 대한 제한이라
+하자. 이는 $R'$의 $U''$에 대한 제한과 같다. $P \subset R'$이 열린닫힌
+부분스킴이므로 $P|_{U''} \subset R''$도 그러하다. 구성에 의해 열린
+부분스킴 $U'' \subset U'$은 $P$-불변이고, 이는
+$$
+P|_{U''} = (s'|_P)^{-1}(U'') = (t'|_P)^{-1}(U'')
+$$
+을 뜻한다(Groupoids, Section \ref{groupoids-section-invariant}의 논의를
+보라). 따라서 $s''$과 $t''$을 $P|_{U''}$에 제한한 사상들은 여전히
+유한이다. 부분 groupoid 스킴 $P|_{U''}$은 여전히 $R''$의 강한
+분할이며 그 점은
+% P09-ERR-1477
+$u''$이다. 위에서 (a), (b), (c)를 확인했으며, 실제로
+$$
+\{r' \in R': t'(r') = u', s'(r') = u'\} =
+\{r'' \in R'': t''(r'') = u', s''(r'') = u'\}
+$$
+은 자명하다. 보조정리가 증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-splitting-affine-scheme}
+Situation \ref{spaces-more-groupoids-situation-splitting}에서 $s, t$가 평탄하고 국소 유한
+표시이며 $U$가 아핀이라고 추가로 가정하자. 그러면 아핀 스킴 $U'$,
+에탈 사상 $U' \to U$, 그리고 점 $u' \in U'$이 존재한다. 이 점은
+$u$ 위에 놓이고 $\kappa(u) = \kappa(u')$을 만족하며,
+$R' = R|_{U'}$은 $R$를 $U'$에 제한한 것으로서 $u'$ 위에서 분할된다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 증명은 Lemma
+\ref{spaces-more-groupoids-lemma-strong-splitting-affine-scheme}의 증명에서 “강한 분할”을
+“분할”로 (두 번) 바꾸고, Lemma
+\ref{spaces-more-groupoids-lemma-strong-splitting-scheme}에 대한 참조를 Lemma
+\ref{spaces-more-groupoids-lemma-splitting-scheme}에 대한 참조로 바꾸면 문자 그대로 같다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-groupoids-lemma-quasi-splitting-affine-scheme}
+Situation \ref{spaces-more-groupoids-situation-quasi-splitting}에서 $s, t$가 평탄하고 국소
+유한 표시이며 $U$가 아핀이라고 추가로 가정하자. 그러면 아핀 스킴
+$U'$, 에탈 사상 $U' \to U$, 그리고 점 $u' \in U'$이 존재한다. 이 점은
+$u$ 위에 놓이고 $\kappa(u) = \kappa(u')$을 만족하며,
+$R' = R|_{U'}$은 $R$를 $U'$에 제한한 것으로서 $u'$ 위에서
+준분할된다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 증명은 Lemma
+\ref{spaces-more-groupoids-lemma-strong-splitting-affine-scheme}의 증명에서 “강한 분할”을
+“준분할”로 (두 번) 바꾸고, Lemma
+\ref{spaces-more-groupoids-lemma-strong-splitting-scheme}에 대한 참조를 Lemma
+\ref{spaces-more-groupoids-lemma-quasi-splitting-scheme}에 대한 참조로 바꾸면 문자 그대로
+같다.
+\end{proof}

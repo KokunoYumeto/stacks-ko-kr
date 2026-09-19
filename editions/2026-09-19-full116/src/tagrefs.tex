@@ -1,0 +1,22 @@
+% Generated from the authority-pinned permanent-tag registry.
+% Local labels resolve in this PDF; absent labels fall back to permanent tags.
+\expandafter\def\csname stacksManual@foo-lemma-bar\endcsname{\href{https://github.com/stacks/stacks-project/blob/a04446e57ec1fbc252a871afcec7752fb2807b14/coding.tex}{\texttt{source example}}}
+\DeclareRobustCommand{\StacksResolvedRef}[1]{%
+  \ifcsname r@#1\endcsname
+    \StacksOriginalRef{#1}%
+  \else
+    \ifcsname stacksTag@#1\endcsname
+      \href{https://stacks.math.columbia.edu/tag/\csname stacksTag@#1\endcsname}{\texttt{\csname stacksTag@#1\endcsname}}%
+    \else
+      \ifcsname stacksManual@#1\endcsname
+        \csname stacksManual@#1\endcsname%
+      \else
+        \StacksOriginalRef{#1}%
+      \fi
+    \fi
+  \fi
+}
+\AtBeginDocument{%
+  \let\StacksOriginalRef\ref
+  \let\ref\StacksResolvedRef
+}

@@ -1,0 +1,3480 @@
+% Generated mechanically from frozen input p01/ko/stacks.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{7}
+\chapter{스택}
+
+
+
+\phantomsection
+\label{stacks-section-phantom}
+
+
+\section{서론}
+\label{stacks-section-introduction}
+
+\noindent
+이 매우 짧은 장에서는 스택과 군체 스택을 도입한다.
+\cite{DM}과 \cite{Vis2}를 보라.
+
+
+\section{섬유화된 범주에 결부된 사상 준층}
+\label{stacks-section-morphisms}
+
+\noindent
+$\mathcal{C}$를 범주라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 섬유화된 범주라 하자.
+Categories, Section \ref{categories-section-fibred-categories}를 보라.
+$x, y\in \Ob(\mathcal{S}_U)$가 $U$ 위의 섬유 범주의 대상이라고
+가정하자. 이제 함자
+$$
+\mathit{Mor}(x, y) : (\mathcal{C}/U)^{opp} \longrightarrow \textit{Sets}.
+$$
+를 정의하려 한다. 다시 말해 이는 $\mathcal{C}/U$ 위의 준층이 될 것이다.
+Sites, Definition \ref{sites-definition-presheaf}를 보라.
+Categories,
+Definition \ref{categories-definition-pullback-functor-fibred-category}에서와
+같이 당김을 하나씩 선택하자. 그러면 $f : V \to U$에 대하여
+$$
+\mathit{Mor}(x, y)(f : V \to U) =
+\Mor_{\mathcal{S}_V}(f^\ast x, f^\ast y).
+$$
+로 둔다. $f' : V' \to U$를 $\mathcal{C}/U$의 두 번째 대상이라 하자.
+$\mathcal{C}/U$에서의 사상 $g : V'/U  \to V/U$, 즉
+$g : V' \to V$이고 $f' = f \circ g$인 사상에 대응하는 제한 사상도
+정의해야 한다. 이는 사상
+$$
+\Mor_{\mathcal{S}_V}(f^\ast x, f^\ast y)
+\longrightarrow
+\Mor_{\mathcal{S}_{V'}}({f'}^\ast x, {f'}^\ast y), \quad
+\phi \longmapsto \phi|_{V'}
+$$
+이 될 것이다. 이 사상은 본질적으로 $g^\ast$이지만, 그렇게 하면 왼쪽의
+원소 $\phi$가
+$\Mor_{\mathcal{S}_{V'}}(g^\ast f^\ast x, g^\ast f^\ast y)$의 원소
+$g^\ast \phi$로 옮겨진다. 이 시점에서 Categories, Lemma
+\ref{categories-lemma-fibred}의 변환 $\alpha_{g, f}$를 사용한다.
+공식으로 쓰면 제한 사상은
+$$
+\phi|_{V'} =
+(\alpha_{g, f})_y^{-1} \circ
+g^\ast \phi \circ
+(\alpha_{g, f})_x.
+$$
+로 기술된다. 물론 실제로 이 제한 사상을 이런 방식으로 생각하는 사람은 없다.
+다음 보조정리를 확인하기 위해 여기서 한 번만 이렇게 하겠다.
+
+\begin{lemma}
+\label{stacks-lemma-painful}
+이 구성은 실제로 준층을 준다.
+\end{lemma}
+
+\begin{proof}
+$g : V'/U \to V/U$를 위와 같이 두고, 마찬가지로
+$g' : V''/U \to V'/U$를 $\mathcal{C}/U$의 사상이라 하자.
+그러면 $f' = f \circ g$이고 $f'' = f' \circ g' = f \circ g \circ g'$이다.
+$\phi \in \Mor_{\mathcal{S}_V}(f^\ast x, f^\ast y)$라 하자.
+그러면
+\begin{eqnarray*}
+& &
+(\alpha_{g \circ g', f})_y^{-1} \circ
+(g \circ g')^\ast \phi \circ
+(\alpha_{g \circ g', f})_x
+\\
+& = &
+(\alpha_{g \circ g', f})_y^{-1} \circ
+(\alpha_{g', g})_{f^*y}^{-1} \circ
+(g')^*g^\ast \phi \circ
+(\alpha_{g', g})_{f^*x} \circ
+(\alpha_{g \circ g', f})_x
+\\
+& = &
+(\alpha_{g', f'})_y^{-1} \circ
+(g')^*(\alpha_{g, f})_y^{-1} \circ
+(g')^* g^\ast \phi \circ
+(g')^*(\alpha_{g, f})_x
+\circ
+(\alpha_{g', f'})_x
+\\
+& = &
+(\alpha_{g', f'})_y^{-1} \circ
+(g')^*\Big(
+(\alpha_{g, f})_y^{-1} \circ
+g^\ast \phi \circ
+(\alpha_{g, f})_x
+\Big) \circ
+(\alpha_{g', f'})_x
+\end{eqnarray*}
+이고, 이는 곧 원하는 등식 $\phi|_{V''} = (\phi|_{V'})|_{V''}$이다.
+첫 번째 등식은 $\alpha_{g', g}$가 함자들의 변환이므로 도표
+$$
+\xymatrix{
+(g \circ g')^*f^*x
+\ar[rr]_{(g \circ g')^\ast \phi}
+\ar[d]_{(\alpha_{g', g})_{f^*x}} & &
+(g \circ g')^*f^*y
+\ar[d]^{(\alpha_{g', g})_{f^*y}} \\
+(g')^*g^*f^*x
+\ar[rr]^{(g')^*g^\ast \phi} & &
+(g')^*g^*f^*y
+}
+$$
+가 가환하기 때문에 성립한다. 두 번째 등식은 $f' = f \circ g$이고
+유사함자의 성질 (d)가 성립하기 때문이다(Categories, Definition
+\ref{categories-definition-functor-into-2-category}를 보라).
+마지막 등식은 $(g')^*$가 함자라는 사실에서 따른다.
+\end{proof}
+
+\noindent
+이제부터는 변환 $\alpha_{g, f}$를 언급하지 않고 함자
+$g^* \circ f^*$와 $(f \circ g)^*$를 단순히 동일시하는 경우가 많다.
+특히 $g : V'/U \to V/U$가 주어지면 준층 $\mathit{Mor}(x, y)$의
+제한 사상을 때때로 $\phi \mapsto g^*\phi$로 나타낼 것이다.
+이 구성을 정의로 정식화하자.
+
+\begin{definition}
+\label{stacks-definition-mor-presheaf}
+$\mathcal{C}$를 범주라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 섬유화된 범주라 하자.
+Categories, Section \ref{categories-section-fibred-categories}를 보라.
+$\mathcal{C}$의 대상 $U$와 그 섬유 범주의 대상 $x$, $y$가 주어졌다고 하자.
+위에서 기술한 준층
+$$
+(f : V \to U) \longmapsto \Mor_{\mathcal{S}_V}(f^*x, f^*y)
+$$
+을 {\it $x$에서 $y$로 가는 사상 준층}이라 하며
+$\mathit{Mor}(x, y)$로 나타낸다. $V$에서의 값이 섬유 범주
+$\mathcal{S}_V$ 안의 동형사상 $f^*x \to f^*y$들의 집합인 부분준층
+$\mathit{Isom}(x, y)$를 {\it $x$에서 $y$로 가는 동형사상 준층}이라 한다.
+\end{definition}
+
+\noindent
+$\mathcal{S}$가 군체로 섬유화되어 있으면 물론
+$\mathit{Isom}(x, y) = \mathit{Mor}(x, y)$이고, 관례상
+$\mathit{Isom}$ 표기를 사용한다.
+
+\begin{lemma}
+\label{stacks-lemma-presheaf-mor-map-fibred-categories}
+$F : \mathcal{S}_1 \to \mathcal{S}_2$를 범주 $\mathcal{C}$ 위의
+섬유화된 범주들의 $1$-사상이라 하자. $U \in \Ob(\mathcal{C})$이고
+$x, y\in \Ob((\mathcal{S}_1)_U)$라 하자. 그러면 $F$는
+$\mathcal{C}/U$ 위의 준층들의 표준 사상
+$$
+\mathit{Mor}_{\mathcal{S}_1}(x, y)
+\longrightarrow
+\mathit{Mor}_{\mathcal{S}_2}(F(x), F(y))
+$$
+을 정의한다.
+\end{lemma}
+
+\begin{proof}
+Categories, Definition \ref{categories-definition-fibred-categories-over-C}에
+따르면 함자 $F$는 강한 카르테시안 사상을 강한 카르테시안 사상으로 보낸다.
+따라서 $f : V \to U$가 $\mathcal{C}$의 사상이면 표준 동형사상
+$\alpha_V : f^*F(x) \to F(f^*x)$,
+$\beta_V : f^*F(y) \to F(f^*y)$가 있어서
+$f^*F(x) \to F(f^*x) \to F(x)$는 표준 사상 $f^*F(x) \to F(x)$이고,
+$\beta_V$에 대해서도 마찬가지이다. 그러므로 도표
+$$
+\xymatrix{
+\mathit{Mor}_{\mathcal{S}_1}(x, y)(f : V \to U) \ar@{=}[r] &
+\Mor_{\mathcal{S}_{1, V}}(f^\ast x, f^\ast y) \ar[d] \\
+\mathit{Mor}_{\mathcal{S}_2}(F(x), F(y))(f : V \to U) \ar@{=}[r] &
+\Mor_{\mathcal{S}_{2, V}}(f^\ast F(x), f^\ast F(y))
+}
+$$
+의 세로 사상을 $\phi \mapsto \beta_V^{-1} \circ F(\phi) \circ \alpha_V$로
+정의할 수 있다. 이것이 제한 사상들과 양립한다는 확인은 생략한다.
+\end{proof}
+
+\begin{remark}
+\label{stacks-remark-alternative}
+$p : \mathcal{S} \to \mathcal{C}$가 군체로 섬유화되어 있다고 가정하자.
+이 경우에는 Lemma \ref{stacks-lemma-painful}를 Categories, Lemma
+\ref{categories-lemma-fibred-strict}를 사용하여 증명할 수 있다. 이 보조정리는
+$\mathcal{S} \to \mathcal{C}$가 반변함자
+$F : \mathcal{C} \to \textit{Groupoids}$에 결부된 범주와 동치라고 말한다.
+$F$에 결부된 섬유화 범주의
+경우 $g^* \circ f^* = (f \circ g)^*$가 문자 그대로 성립하므로
+사상 $\alpha_{g, f}$를 사용할 필요가 없다. 이 경우 보조정리는
+(더더욱) 자명하다. 물론 이때에는 동치인 섬유화 범주로 바꾸어도
+$\mathit{Mor}(x, y)$ 준층이 변하지 않는다는 사실을 사용하는데, 이는
+Lemma \ref{stacks-lemma-presheaf-mor-map-fibred-categories}에서 따른다.
+\end{remark}
+
+
+
+
+
+
+
+
+\begin{lemma}
+\label{stacks-lemma-isom-as-2-fibre-product}
+$\mathcal{C}$를 범주라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 섬유화된 범주라 하자.
+Categories, Section \ref{categories-section-fibred-categories}를 보라.
+$U \in \Ob(\mathcal{C})$이고 $x, y \in \Ob(\mathcal{S}_U)$라 하자.
+% P01-E0178
+Categories, Lemma \ref{categories-lemma-yoneda-2category}에서와 같이
+대응하는 $1$-사상도 $x, y : \mathcal{C}/U \to \mathcal{S}$로 나타내자.
+그러면
+\begin{enumerate}
+\item $2$-섬유곱
+$\mathcal{S} \times_{\mathcal{S} \times \mathcal{S}, (x, y)} \mathcal{C}/U$
+은 $\mathcal{C}/U$ 위에서 세토이드로 섬유화되어 있고,
+\item $\mathit{Isom}(x, y)$는 이 세토이드로 섬유화된 범주에 대응하는
+집합 준층이다. Categories, Lemma
+\ref{categories-lemma-2-category-fibred-setoids}를 보라.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: $2$-섬유곱의 대상은
+$(a : V \to U, z, (\alpha, \beta))$이고, 여기서
+$\alpha : z \to a^*x$와 $\beta : z \to a^*y$는 $\mathcal{S}_V$의
+동형사상이다. 이러한 대상에 동형사상 $\beta \circ \alpha^{-1}$을
+대응시키면 $\mathit{Isom}(x, y)$와의 관계를 얻는다.
+\end{proof}
+
+
+
+
+
+
+\section{섬유화된 범주의 내림 자료}
+\label{stacks-section-descent-data}
+
+\noindent
+이 절에서는 섬유화된 범주라는 추상적인 틀에서 내림 자료의 개념을
+정의한다. 먼저 이것이 준연접층의 내림 자료(Descent, Section
+\ref{descent-section-equivalence}) 및 스킴 위의 스킴에 대한 내림 자료
+(Descent, Section \ref{descent-section-descent-datum})와 완전히
+유사하다는 점을 지적해 둔다.
+
+\medskip\noindent
+사영 사상 $\text{pr}_i : X \times \ldots \times X \to X$의 번호를
+$i = 0$부터 붙이는 관례를 사용한다. 따라서
+$\text{pr}_0, \text{pr}_1 : X \times X  \to X$,
+$\text{pr}_0, \text{pr}_1, \text{pr}_2 : X \times X \times X  \to X$
+등을 갖는다.
+
+\begin{definition}
+\label{stacks-definition-descent-data}
+$\mathcal{C}$를 범주라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 섬유화된 범주라 하자.
+Categories, Definition
+\ref{categories-definition-pullback-functor-fibred-category}에서와 같이
+당김을 하나씩 선택하자. $\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$를
+$\mathcal{C}$의 사상족이라 하자. 모든 섬유곱
+$U_i \times_U U_j$와 $U_i \times_U U_j \times_U U_k$가 존재한다고
+가정하자.
+\begin{enumerate}
+\item 족 $\{f_i : U_i \to U\}$에 대한
+{\it $\mathcal{S}$의 내림 자료 $(X_i, \varphi_{ij})$}란 각 $i \in I$에
+대하여 $\mathcal{S}_{U_i}$의 대상 $X_i$와, 각 쌍 $(i, j) \in I^2$에
+대하여 $\mathcal{S}_{U_i \times_U U_j}$의 동형사상
+$\varphi_{ij} : \text{pr}_0^*X_i \to \text{pr}_1^*X_j$가 주어져서,
+모든 지표 삼중항 $(i, j, k) \in I^3$에 대해 범주
+$\mathcal{S}_{U_i \times_U U_j \times_U U_k}$의 도표
+$$
+\xymatrix{
+\text{pr}_0^*X_i \ar[rd]_{\text{pr}_{01}^*\varphi_{ij}}
+\ar[rr]_{\text{pr}_{02}^*\varphi_{ik}} & &
+\text{pr}_2^*X_k \\
+& \text{pr}_1^*X_j \ar[ru]_{\text{pr}_{12}^*\varphi_{jk}} &
+}
+$$
+가 가환하는 것을 말한다. 이를 {\it 코사이클 조건}이라 한다.
+\item {\it 내림 자료의 사상 $\psi : (X_i, \varphi_{ij}) \to
+(X'_i, \varphi'_{ij})$}이란 각 $\mathcal{S}_{U_i}$ 안의 사상
+$\psi_i : X_i \to X'_i$들로 이루어진 족 $\psi = (\psi_i)_{i\in I}$가
+주어져서, 범주 $\mathcal{S}_{U_i \times_U U_j}$ 안의 모든 도표
+$$
+\xymatrix{
+\text{pr}_0^*X_i \ar[r]_{\varphi_{ij}} \ar[d]_{\text{pr}_0^*\psi_i}
+& \text{pr}_1^*X_j \ar[d]^{\text{pr}_1^*\psi_j} \\
+\text{pr}_0^*X'_i \ar[r]^{\varphi'_{ij}} &
+\text{pr}_1^*X'_j \\
+}
+$$
+가 가환하는 것을 말한다.
+\item $\mathcal{U}$에 대한 내림 자료들의 범주를 $DD(\mathcal{U})$로
+나타낸다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+각 사상 $f_i : U_i \to U$가 {\it 표현 가능}하면 섬유곱
+$U_i \times_U U_j$와 $U_i \times_U U_j \times_U U_k$가 존재한다.
+Categories, Definition \ref{categories-definition-representable-morphism}을
+보라. 사이트에서 $\{U_i \to U\}$가 덮개이기 위한 조건 가운데 하나는
+각 사상이 표현 가능하다는 것이다. Sites, Definition
+\ref{sites-definition-site}의 (3)을 보라. 실제로 위 정의에서 주로
+관심을 두는 경우는 $\mathcal{C}$가 사이트이고 $\{U_i \to U\}$가
+$\mathcal{C}$의 덮개인 경우이다. 그러나 내림 자료는 위와 같이 정의할 수
+있는 추상적인 장치일 뿐이다. 이것은 유용하다. 예컨대 $\mathcal{C}$ 위의
+섬유화된 범주가 주어지면, 어떤 족들에 대하여 내림 자료가 유효한지 살펴보고
+그 족들을 사이트의 덮개족으로 사용하려 할 수 있다.
+
+\begin{remarks}
+\label{stacks-remarks-definition-descent-datum}
+Definition \ref{stacks-definition-descent-data}에 관해 두 가지를 언급하자.
+$p : \mathcal{S} \to \mathcal{C}$를 섬유화된 범주라 하자.
+$\{f_i : U_i \to U\}_{i \in I}$와 $(X_i, \varphi_{ij})$가 Definition
+\ref{stacks-definition-descent-data}에서와 같다고 하자.
+\begin{enumerate}
+\item 대각 사상 $\Delta : U_i \to U_i \times_U U_i$가 있다.
+이 사상으로 $\varphi_{ii}$를 당기면 자기동형사상
+$\Delta^\ast \varphi_{ii} \in \text{Aut}_{U_i}(X_i)$를 얻는다.
+삼중항 $(i, i, i)$에 대한 코사이클 조건을
+$\Delta_{123} : U_i \to U_i \times_U U_i \times_U U_i$로 당기면
+$\Delta^\ast \varphi_{ii} \circ \Delta^\ast \varphi_{ii} =
+\Delta^\ast \varphi_{ii}$를 얻는다. 따라서
+$\Delta^\ast \varphi_{ii} = \text{id}_{X_i}$이다.
+\item 사상 $\Delta_{13}: U_i \times_U U_j \to
+U_i \times_U U_j \times_U U_i$가 있다. 삼중항 $(i, j, i)$에 대한
+코사이클 조건을 당기면 등식
+$(\sigma^\ast \varphi_{ji}) \circ \varphi_{ij} =
+\text{id}_{\text{pr}_0^\ast X_i}$를 얻는다. 여기서
+$\sigma : U_i \times_U U_j \to U_j \times_U U_i$는 두 인자를
+바꾸는 사상이다.
+\end{enumerate}
+\end{remarks}
+
+\begin{lemma}
+\label{stacks-lemma-pullback}
+(내림 자료의 당김.)
+$\mathcal{C}$를 범주라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 섬유화된 범주라 하자.
+% P01-E0179
+Categories, Definition
+\ref{categories-definition-pullback-functor-fibred-category}에서와 같이
+당김을 하나씩 선택하자.
+$\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$와
+$\mathcal{V} = \{V_j \to V\}_{j \in J}$를 공역이 고정된
+$\mathcal{C}$의 사상족이라 하자.
+% P01-E0180
+모든 섬유곱
+$U_i \times_U U_{i'}$, $U_i \times_U U_{i'} \times_U U_{i''}$,
+$V_j \times_V V_{j'}$, $V_j \times_V V_{j'} \times_V V_{j''}$가
+존재한다고 가정하자. $\alpha : I \to J$, $h : U \to V$와
+$g_i : U_i \to V_{\alpha(i)}$를 공역이 고정된 사상족들의 사상이라 하자.
+Sites, Definition \ref{sites-definition-morphism-coverings}를 보라.
+\begin{enumerate}
+\item $(Y_j, \varphi_{jj'})$를 족 $\{V_j \to V\}$에 대한 내림 자료라
+하자. 계
+$$
+\left(
+g_i^*Y_{\alpha(i)},
+(g_i \times g_{i'})^*\varphi_{\alpha(i)\alpha(i')}
+\right)
+$$
+은 $\mathcal{U}$에 대한 내림 자료이다.
+\item 이 구성은 $\mathcal{V}$에 대한 내림 자료에서 $\mathcal{U}$에
+대한 내림 자료로 가는 함자를 정의한다.
+\item 두 번째 $\alpha' : I \to J$, $h' : U \to V$와
+% P01-E0181
+$g'_i : U_i \to V_{\alpha'(i)}$가 공역이 고정된 사상족들의 사상을
+준다고 하자. $h = h'$이면 내림 자료들 사이에 얻어지는 두 함자는
+표준적으로 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{definition}
+\label{stacks-definition-pullback-functor}
+$\mathcal{U} = \{U_i \to U\}_{i \in I}$,
+$\mathcal{V} = \{V_j \to V\}_{j \in J}$,
+$\alpha : I \to J$, $h : U \to V$와
+$g_i : U_i \to V_{\alpha(i)}$가 Lemma \ref{stacks-lemma-pullback}에서와 같다고
+하자. 그 보조정리에서 구성한 함자
+$$
+(Y_j, \varphi_{jj'}) \longmapsto
+(g_i^*Y_{\alpha(i)}, (g_i \times g_{i'})^*\varphi_{\alpha(i)\alpha(i')})
+$$
+를 내림 자료의 {\it 당김 함자}라 한다.
+\end{definition}
+
+\noindent
+$h : U \to V$가 주어졌다고 하자. $h$를 덮는 사상
+$\tilde h : \mathcal{U} \to \mathcal{V}$가 존재하면, Lemma
+\ref{stacks-lemma-pullback}에서 보았듯 $\tilde h^*$는 $\tilde h$의 선택과
+무관하다. 따라서 때때로 당김 함자를 단순히 $h^*$로 나타낸다.
+
+\begin{definition}
+\label{stacks-definition-effective-descent-datum}
+$\mathcal{C}$를 범주라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 섬유화된 범주라 하자.
+Categories, Definition
+\ref{categories-definition-pullback-functor-fibred-category}에서와 같이
+당김을 하나씩 선택하자. $\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$를
+공역이 $U$인 사상족이라 하자. 모든 섬유곱
+$U_i \times_U U_j$와 $U_i \times_U U_j \times_U U_k$가 존재한다고
+가정하자.
+\begin{enumerate}
+\item $\mathcal{S}_U$의 대상 $X$가 주어졌을 때 {\it 자명한 내림 자료}란
+족 $\{\text{id}_U : U \to U\}$에 대한 내림 자료
+$(X, \text{id}_X)$를 말한다.
+\item $\mathcal{S}_U$의 대상 $X$가 주어졌을 때, 자명한 내림 자료
+$(X, \text{id}_X)$를 자명한 사상
+$\{f_i : U_i \to U\} \to \{\text{id}_U : U \to U\}$로 당기면
+대상족 $f_i^*X$ 위의 {\it 표준 내림 자료}를 얻는다. 이 내림 자료를
+$(f_i^*X, can)$으로 나타낸다.
+\item $\{f_i : U_i \to U\}$에 대한 내림 자료 $(X_i, \varphi_{ij})$가
+{\it 유효하다}는 것은 $\mathcal{S}_U$의 대상 $X$가 존재하여
+$(X_i, \varphi_{ij})$가 $(f_i^*X, can)$과 동형이라는 뜻이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$X \in \mathcal{S}_U$에 $\mathcal{U}$에 대한 표준 내림 자료를
+대응시키는 규칙은 함자
+$$
+\mathcal{S}_U \longrightarrow DD(\mathcal{U}).
+$$
+를 정의한다. 내림 자료가 유효할 필요충분조건은 이 함자의 본질적 상에
+속하는 것이다. 이제 표준 내림 자료를 명시적으로 기술하자.
+
+\begin{lemma}
+\label{stacks-lemma-trivial-cocycle}
+Definition \ref{stacks-definition-effective-descent-datum}의 (2)의 상황에서 사상
+$can_{ij} : \text{pr}_0^*f_i^*X \to \text{pr}_1^*f_j^*X$는
+$(\alpha_{\text{pr}_1, f_j})_X \circ
+(\alpha_{\text{pr}_0, f_i})_X^{-1}$와 같다. 여기서
+$\alpha_{\cdot, \cdot}$는 Categories, Lemma
+\ref{categories-lemma-fibred}에서와 같으며, 사상
+$U_i \times_U U_j \to U$로서의 등식
+$f_i \circ \text{pr}_0 = f_j \circ \text{pr}_1$을 사용한다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-compare-descent-condition}
+$\mathcal{C}$를 범주라 하자. 공역이 고정된 $\mathcal{C}$의 사상족들의
+사상
+$\mathcal{V} = \{V_j \to U\}_{j \in J} \to
+\mathcal{U} = \{U_i \to U\}_{i \in I}$
+가 $\text{id} : U \to U$, $\alpha : J \to I$와
+$f_j : V_j \to U_{\alpha(j)}$로 주어졌다고 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 섬유화된 범주라 하자. 다음을
+가정하자.
+\begin{enumerate}
+\item $0 \leq p \leq 3$이고 $0 \leq q \leq 3$이며 $p + q \geq 2$인
+모든 경우와 $i_1, \ldots, i_p \in I$, $j_1, \ldots, j_q \in J$에
+대하여 섬유곱
+$U_{i_1} \times_U \ldots \times_U U_{i_p} \times_U
+V_{j_1} \times_U \ldots \times_U V_{j_q}$가 존재한다.
+\item 함자 $\mathcal{S}_U \to DD(\mathcal{V})$는 동치이다.
+\item 모든 $i \in I$에 대하여 함자
+$\mathcal{S}_{U_i} \to DD(\mathcal{V}_i)$는 충만충실이다.
+\item 모든 $i, i' \in I$에 대하여 함자
+$\mathcal{S}_{U_i \times_U U_{i'}} \to DD(\mathcal{V}_{ii'})$는
+충실하다.
+\end{enumerate}
+여기서 $\mathcal{V}_i = \{U_i \times_U V_j \to U_i\}_{j \in J}$이고
+$\mathcal{V}_{ii'} =
+\{U_i \times_U U_{i'} \times_U V_j \to U_i \times_U U_{i'}\}_{j \in J}$이다.
+그러면 $\mathcal{S}_U \to DD(\mathcal{U})$는 동치이다.
+\end{lemma}
+
+\begin{proof}
+조건 (1)은 명제가 의미를 갖기에 충분한 섬유곱이 있음을 보장한다.
+함자 $\mathcal{S}_U \to DD(\mathcal{U})$가 본질적으로 전사임을 보이자.
+$\mathcal{U}$에 대한 내림 자료 $(X_i, \varphi_{ii'})$가 주어졌다고
+가정하자. Lemma \ref{stacks-lemma-pullback}에 의해 이를 $\mathcal{V}$에 대한
+내림 자료 $(X_j, \varphi_{jj'})$로 당길 수 있다. 가정 (2)에 따라 이
+내림 자료는 유효하므로 $\mathcal{S}_U$의 대상 $X$가 있어서, 자명한
+내림 자료 $(X, \text{id}_X)$를 사상
+$\mathcal{V} \to \{U \to U\}$로 당긴 것이
+$(X_j, \varphi_{jj'})$와 동형이다. 이제 공역이 고정된 $\mathcal{C}$의
+사상족들의 사상으로 이루어진 도표
+$$
+\xymatrix{
+\mathcal{V}_i \ar[r] \ar[d] &
+\mathcal{V} \ar[r] &
+\mathcal{U} \ar[d] \\
+\{U_i \to U_i\} \ar[rr] \ar[rru] & &
+\{U \to U\}
+}
+$$
+를 갖는다. 이 도표는 가환하지 않지만, Lemma \ref{stacks-lemma-pullback}에
+의해 여기서 얻는 내림 자료의 당김 함자들은 표준적으로 동형이다.
+따라서 $(X, \text{id}_X)$와 $(X_i, \text{id}_{X_i})$는
+$DD(\mathcal{V}_i)$에서 동형인 대상들로 당겨진다. 가정 (3)에 따라
+범주 $\mathcal{S}_{U_i}$ 안의 동형사상
+$(U_i \to U)^*X \to X_i$를 얻는다. 이 사상들이 사상
+$\varphi_{ii'}$와 양립한다는 확인은 생략한다. 힌트: 조건 (4)의
+함자들이 충실하다는 사실을 사용하라. 또한 함자
+$\mathcal{S}_U \to DD(\mathcal{U})$가 충만충실이라는 확인도 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{스택}
+\label{stacks-section-definition}
+
+\noindent
+이제 스택을 정의하자. 이 정의는 섬유화된 범주의 개념과 내림의 개념을
+결합한다.
+
+\begin{definition}
+\label{stacks-definition-stack}
+$\mathcal{C}$를 사이트라 하자. $\mathcal{C}$ 위의 {\it 스택}은 다음
+조건을 만족하는 $\mathcal{C}$ 위의 범주 $p : \mathcal{S} \to \mathcal{C}$이다.
+\begin{enumerate}
+\item $p : \mathcal{S} \to \mathcal{C}$는 섬유화된 범주이다.
+Categories, Definition \ref{categories-definition-fibred-category}를 보라.
+\item 모든 $U \in \Ob(\mathcal{C})$와 모든 $x, y \in \mathcal{S}_U$에
+대하여 준층 $\mathit{Mor}(x, y)$(Definition
+\ref{stacks-definition-mor-presheaf}를 보라)는 사이트 $\mathcal{C}/U$ 위의
+층이다.
+\item 사이트 $\mathcal{C}$의 임의의 덮개
+$\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$에 대하여,
+$\mathcal{U}$에 대한 $\mathcal{S}$의 모든 내림 자료는 유효하다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+우리는 위의 정식화가 스택을 생각하는 가장 편리한 방식이라고 본다.
+즉 $\mathcal{C}$ 위의 범주가 주어졌을 때 그것이 스택인지 확인하려면
+(1), (2), (3)의 순서로 성질들을 검사한다. 범주가 섬유화되어 있지 않으면
+(2)와 (3)은 당연히 의미가 없다. (2)가 없으면 (3)의 내림이 유일한
+동형사상을 제외하고 유일하며 함자적이라는 것을 증명할 수 없다.
+
+\medskip\noindent
+다음 보조정리는 다른 정의를 준다.
+
+\begin{lemma}
+\label{stacks-lemma-stack-equivalences}
+$\mathcal{C}$를 사이트라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 $\mathcal{C}$ 위의 섬유화된
+범주라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $\mathcal{S}$는 $\mathcal{C}$ 위의 스택이다.
+\item 사이트 $\mathcal{C}$의 임의의 덮개
+$\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$에 대하여, 대상에 그
+표준 내림 자료를 대응시키는 함자
+$$
+\mathcal{S}_U \longrightarrow DD(\mathcal{U})
+$$
+는 동치이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-substack}
+$p : \mathcal{S} \to \mathcal{C}$를 사이트 $\mathcal{C}$ 위의
+스택이라 하고, $\mathcal{S}'$를 $\mathcal{S}$의 부분범주라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $\varphi : y \to x$가 $\mathcal{S}$의 강한 카르테시안 사상이고
+$x$가 $\mathcal{S}'$의 대상이면, $y$는 $\mathcal{S}'$의 어떤 대상과
+동형이다.
+\item $\mathcal{S}'$는 $\mathcal{S}$의 충만 부분범주이다.
+\item $\{f_i : U_i \to U\}$가 $\mathcal{C}$의 덮개이고
+$x$가 $U$ 위의 $\mathcal{S}$의 대상이며, 각 $i$에 대하여 $f_i^*x$가
+$\mathcal{S}'$의 어떤 대상과 동형이면, $x$는 $\mathcal{S}'$의 어떤
+대상과 동형이다.
+\end{enumerate}
+그러면 $\mathcal{S}' \to \mathcal{C}$는 스택이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트는 다음과 같다. 첫 번째 조건은 $\mathcal{S}'$가 섬유화된
+범주임을 보장한다. 두 번째 조건은 $\mathcal{S}'$의
+$\mathit{Isom}$-준층들이 층임을 보장한다($\mathcal{S}$의 대응하는
+준층들과 같기 때문이다).
+% P01-E0182
+세 번째 조건은 내림 조건이 $\mathcal{S}'$에서 성립함을 보장한다.
+실제로 먼저 $\mathcal{S}$에서 내린 다음, (3)에 의해 얻어진 대상이
+$\mathcal{S}'$의 어떤 대상과 동형임을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-equivalent}
+$\mathcal{C}$를 사이트라 하자.
+$\mathcal{S}_1$, $\mathcal{S}_2$를 $\mathcal{C}$ 위의 범주라 하자.
+$\mathcal{S}_1$과 $\mathcal{S}_2$가 $\mathcal{C}$ 위의 범주로서
+동치라고 가정하자. 그러면 $\mathcal{S}_1$이 $\mathcal{C}$ 위의
+스택일 필요충분조건은 $\mathcal{S}_2$가 $\mathcal{C}$ 위의 스택인 것이다.
+\end{lemma}
+
+\begin{proof}
+$F : \mathcal{S}_1 \to \mathcal{S}_2$,
+$G : \mathcal{S}_2 \to \mathcal{S}_1$를 $\mathcal{C}$ 위의 함자라 하고,
+$i : F \circ G \to \text{id}_{\mathcal{S}_2}$,
+$j : G \circ F \to \text{id}_{\mathcal{S}_1}$를 $\mathcal{C}$ 위의
+함자들의 동형사상이라 하자. Categories, Lemma
+\ref{categories-lemma-fibred-equivalent}에 의해 $\mathcal{S}_1$이
+$\mathcal{C}$ 위에서 섬유화될 필요충분조건은 $\mathcal{S}_2$가
+그렇다는 것이다. 따라서 $\mathcal{S}_1$과 $\mathcal{S}_2$가 모두
+섬유화되어 있다고 가정할 수 있다. 또한 Categories, Lemma
+\ref{categories-lemma-fibred-equivalent}의 증명은 $F$와 $G$가 강한
+카르테시안 사상을 강한 카르테시안 사상으로 보냄을 보여 준다. 즉
+$F$와 $G$는 $\mathcal{C}$ 위의 섬유화된 범주들의 $1$-사상이다.
+따라서 $U \in \Ob(\mathcal{C})$와 $x, y \in \mathcal{S}_{1, U}$가
+주어지면 준층
+$$
+\mathit{Mor}_{\mathcal{S}_1}(x, y),
+\mathit{Mor}_{\mathcal{S}_1}(F(x), F(y)) :
+(\mathcal{C}/U)^{opp} \longrightarrow \textit{Sets}.
+$$
+% P01-E0183
+은 동일시된다. Lemma
+\ref{stacks-lemma-presheaf-mor-map-fibred-categories}를 보라. 따라서 첫 번째가
+층일 필요충분조건은 두 번째가 층인 것이다. 마지막으로
+$\mathcal{S}_1$의 모든 내림 자료가 유효하면 $\mathcal{S}_2$의 모든
+내림 자료도 유효함을 보여야 한다. 이를 위해 $(X_i, \varphi_{ii'})$를
+사이트 $\mathcal{C}$의 덮개 $\{U_i \to U\}$에 대한
+$\mathcal{S}_2$의 내림 자료라 하자.
+% P01-E0184
+그러면 $(G(X_i), G(\varphi_{ii'}))$는 덮개 $\{U_i \to U\}$에 대한
+$\mathcal{S}_1$의 내림 자료이다. $X$를 $\mathcal{S}_{1, U}$의 대상이라
+하여 내림 자료 $(f_i^*X, can)$이 $(G(X_i), G(\varphi_{ii'}))$와
+동형이라고 하자. 그러면 $F(X)$는 $\mathcal{S}_{2, U}$의 대상이고,
+그 내림 자료 $(f_i^*F(X), can)$은
+$(F(G(X_i)), F(G(\varphi_{ii'})))$와 동형이며, 후자는 다시 $i$를
+사용하면 원래의 내림 자료 $(X_i, \varphi_{ii'})$와 동형이다.
+\end{proof}
+
+\noindent
+$\mathcal{C}$ 위의 스택들의 $2$-범주를 다음과 같이 정의한다.
+
+\begin{definition}
+\label{stacks-definition-stacks-over-C}
+$\mathcal{C}$를 사이트라 하자. {\it $\mathcal{C}$ 위의 스택들의
+$2$-범주}는 $\mathcal{C}$ 위의 섬유화된 범주들의 $2$-범주
+(Categories, Definition
+\ref{categories-definition-fibred-categories-over-C}를 보라)의 다음과
+같은 부분 $2$-범주이다.
+\begin{enumerate}
+\item 대상은 스택 $p : \mathcal{S} \to \mathcal{C}$이다.
+\item $1$-사상 $(\mathcal{S}, p) \to (\mathcal{S}', p')$은 다음을
+만족하는 함자 $G : \mathcal{S} \to \mathcal{S}'$이다. 즉
+$p' \circ G = p$이고, $G$는 강한 카르테시안 사상을 강한 카르테시안
+사상으로 보낸다.
+\item $G, H : (\mathcal{S}, p) \to (\mathcal{S}', p')$ 사이의
+$2$-사상 $t : G \to H$는 모든 $x \in \Ob(\mathcal{S})$에 대하여
+$p'(t_x) = \text{id}_{p(x)}$를 만족하는 함자들의 사상이다.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{stacks-lemma-2-product-stacks}
+$\mathcal{C}$를 사이트라 하자. $\mathcal{C}$ 위의 스택들의
+$(2, 1)$-범주는 2-섬유곱을 가지며, 이는 Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C}에서와 같이 기술된다.
+\end{lemma}
+
+\begin{proof}
+$f : \mathcal{X} \to \mathcal{S}$와
+$g : \mathcal{Y} \to \mathcal{S}$를 위에서 정의한 $\mathcal{C}$ 위의
+스택들의 $1$-사상이라 하자. Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C}에서 기술한 범주
+$\mathcal{X} \times_\mathcal{S} \mathcal{Y}$는 Categories, Lemma
+\ref{categories-lemma-2-product-fibred-categories-over-C}에 의해
+섬유화된 범주이다. (여기에서 $f$와 $g$가 강한 카르테시안 사상을
+보존한다는 사실을 사용한다.) 사상 준층들이 층이고 $\mathcal{C}$의
+덮개에 대한 내림이 유효함을 보이는 일만 남는다.
+
+\medskip\noindent
+$\mathcal{X} \times_\mathcal{S} \mathcal{Y}$의 대상은 사중항
+$(U, x, y, \phi)$로 주어진다는 것을 상기하자. 이는 $\mathcal{C}$의
+대상 $U$ 위에 놓인다. 다음으로 $(U, x', y', \phi')$를 $U$ 위에 놓이는
+두 번째 대상이라 하자.
+% P01-E0185
+$\phi : f(x) \to g(y)$와 $\phi' : f(x') \to g(y')$는 범주
+$\mathcal{S}_U$의 동형사상임을 상기하자. 이 동형사상들을 사용하여
+$z = f(x) = g(y)$와 $z' = f(x') = g(y')$를 동일시하자. 이 동일시들 아래
+% P01-E0186
+준층으로서
+$$
+\mathit{Mor}((U, x, y, \phi), (U, x', y', \phi'))
+=
+\mathit{Mor}(x, x')
+\times_{\mathit{Mor}(z, z')}
+\mathit{Mor}(y, y')
+$$
+임은 명백하다. 그러나 준층의 범주에서 섬유곱은 층을 보존하므로
+(Sites, Lemma \ref{sites-lemma-limit-sheaf}) 이것은 층이다.
+
+\medskip\noindent
+$\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$를 사이트
+$\mathcal{C}$의 덮개라 하자. $(X_i, \chi_{ij})$를 $\mathcal{U}$에 대한
+$\mathcal{X} \times_\mathcal{S} \mathcal{Y}$의 내림 자료라 하자.
+위와 같이 $X_i = (U_i, x_i, y_i, \phi_i)$로 쓰자. 범주
+$\mathcal{X} \times_\mathcal{S} \mathcal{Y}$의 정의에서와 같이
+$\chi_{ij} = (\varphi_{ij}, \psi_{ij})$로 쓰자(Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C}를 보라).
+$(x_i, \varphi_{ij})$가 $\mathcal{X}$의 내림 자료이고
+$(y_i, \psi_{ij})$가 $\mathcal{Y}$의 내림 자료임은 명백하다.
+$\mathcal{X}$와 $\mathcal{Y}$가 스택이므로 이 내림 자료들은 유효하다.
+따라서 내림 자료와 양립하도록 $x_i = x|_{U_i}$와
+$y_i = y|_{U_i}$가 되는 $x \in \Ob(\mathcal{X}_U)$와
+$y \in \Ob(\mathcal{Y}_U)$를 얻는다. $z = f(x)$와 $z' = g(y)$로 두자.
+둘 다 $\mathcal{S}_U$의 대상이다. 사상 $\phi_i$는
+$\mathit{Isom}(z, z')(U_i)$의 원소이며
+$\phi_i|_{U_i \times_U U_j} = \phi_j|_{U_i \times_U U_j}$를 만족한다.
+따라서 $\mathit{Isom}(z, z')$의 층 성질에 의해 동형사상
+$\phi : z = f(x) \to z' = g(y)$를 얻는다.
+$(\mathcal{X} \times_\mathcal{S} \mathcal{Y})_U$의 대상
+$(U, x, y, \phi)$에 결부된 표준 내림 자료가 처음의 내림 자료와
+동형이라는 확인은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-characterize-ff}
+$\mathcal{C}$를 사이트라 하자.
+$\mathcal{S}_1$, $\mathcal{S}_2$를 $\mathcal{C}$ 위의 스택이라 하자.
+$F : \mathcal{S}_1 \to \mathcal{S}_2$를 $1$-사상이라 하자. 다음은
+동치이다.
+\begin{enumerate}
+\item $F$는 충만충실이다.
+\item 모든 $U \in \Ob(\mathcal{C})$와 모든
+$x, y \in \Ob(\mathcal{S}_{1, U})$에 대하여 사상
+$$
+F :
+\mathit{Mor}_{\mathcal{S}_1}(x, y)
+\longrightarrow
+\mathit{Mor}_{\mathcal{S}_2}(F(x), F(y))
+$$
+은 $\mathcal{C}/U$ 위의 층들의 동형사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하자. (2)에서와 같은 $U, x, y$에 대하여, 표시된 사상 $F$는
+$\mathcal{C}$의 대상 $V$가 $U$ 위에 놓일 때 사상
+$F : \Mor_{\mathcal{S}_{1, V}}(x|_V, y|_V) \to
+\Mor_{\mathcal{S}_{2, V}}(F(x|_V), F(y|_V))$로 값매김된다.
+이제 $F$가 충만충실이므로 대응하는 사상
+$\Mor_{\mathcal{S}_1}(x|_V, y|_V) \to
+\Mor_{\mathcal{S}_2}(F(x|_V), F(y|_V))$는 전단사이다.
+섬유 범주 $\mathcal{S}_{1, V}$의 사상은 정확히 $\mathcal{S}_1$ 안에서
+$x|_V$에서 $y|_V$로 가며 $\text{id}_V$ 위에 놓이는 사상들이다.
+마찬가지로 섬유 범주 $\mathcal{S}_{2, V}$의 사상은 정확히
+$\mathcal{S}_2$ 안에서 $F(x|_V)$에서 $F(y|_V)$로 가며
+$\text{id}_V$ 위에 놓이는 사상들이다. 따라서 $F$는 이들 사이에도
+전단사를 유도한다. 그러므로 (2)가 성립한다.
+
+\medskip\noindent
+(2)를 가정하자. $\mathcal{C}$의 대상 $U$, $V$와
+$x \in \Ob(\mathcal{S}_{1, U})$,
+$y \in \Ob(\mathcal{S}_{1, V})$가 주어졌다고 하자. $F$가
+충만충실임을 보이려면 고정된 $f : U \to V$ 위에 놓이는 사상들에
+전단사를 유도함을 보이면 충분하다. $\mathcal{S}_1$에서 $f$ 위에 놓이는
+강한 카르테시안 사상 $f^*y \to y$를 선택하자. 그러면
+$\mathcal{S}_1$에서 $f$ 위에 놓이며 $x \to y$인 사상들의 집합과
+$\Mor_{\mathcal{S}_{1, U}}(x, f^*y)$ 사이의 전단사를 얻는다. $F$는
+$\mathcal{C}$ 위의 스택들의 $2$-범주에서 $1$-사상이므로 강한
+카르테시안 사상을 보존한다. 따라서 $\mathcal{S}_2$에서 $f$ 위에
+놓이며 $F(x) \to F(y)$인 사상들의 집합과
+$\Mor_{\mathcal{S}_{2, U}}(F(x), F(f^*y))$ 사이에도 전단사를 얻는다.
+$F$가 전단사
+$\Mor_{\mathcal{S}_{1, U}}(x, f^*y) \to
+\Mor_{\mathcal{S}_{2, U}}(F(x), F(f^*y))$를 유도하므로 (1)이 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-characterize-essentially-surjective-when-ff}
+$\mathcal{C}$를 사이트라 하자.
+$\mathcal{S}_1$, $\mathcal{S}_2$를 $\mathcal{C}$ 위의 스택이라 하자.
+$F : \mathcal{S}_1 \to \mathcal{S}_2$를 충만충실인 $1$-사상이라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item $F$는 동치이다.
+\item 모든 $U \in \Ob(\mathcal{C})$와 모든
+$x \in \Ob(\mathcal{S}_{2, U})$에 대하여 덮개
+$\{f_i : U_i \to U\}$가 존재하여 $f_i^*x$가 함자
+$F : \mathcal{S}_{1, U_i} \to \mathcal{S}_{2, U_i}$의 본질적 상에
+속한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2)는 즉시 성립한다. (2)가 (1)을 함의함을 보이려면
+(2)에서와 같은 모든 $x$가 함자 $F$의 본질적 상에 속함을 보여야 한다.
+이를 위해 (2)에서와 같은 덮개, 대상
+$x_i \in \Ob(\mathcal{S}_{1, U_i})$, 그리고 동형사상
+$\varphi_i : F(x_i) \to f_i^*x$를 선택하자. 그러면
+$\mathcal{S}_1$에 대한 $\{f_i : U_i \to U\}$에 관한 내림 자료를
+다음과 같이 얻는다.
+$$
+\varphi_{ij} :
+x_i|_{U_i \times_U U_j}
+\longrightarrow
+x_j|_{U_i \times_U U_j}
+$$
+를 $F(\varphi_{ij}) = \varphi_j^{-1} \circ \varphi_i$를 만족하는 사상으로
+취한다. 이 내림 자료는 스택의 공리들에 의해 유효하므로 $U$ 위의
+$\mathcal{S}_1$의 대상 $x_1$을 얻는다. $F(x_1)$이 $U$ 위에서 $x$와
+동형이라는 확인은 생략한다.
+\end{proof}
+
+\begin{remark}
+\label{stacks-remark-stack-make-small}
+(``큰'' 스택을 줄여 스택을 얻기.)
+$\mathcal{C}$를 사이트라 하자. $p : \mathcal{S} \to \mathcal{C}$가
+``큰'' 범주에서 $\mathcal{C}$로 가는 함자라고 가정하자. 즉
+$\mathcal{S}$의 대상들의 모임이 진클래스라고 가정한다.
+% P01-E0187
+마지막으로 $p : \mathcal{S} \to \mathcal{C}$가 Definition
+\ref{stacks-definition-stack}의 조건 (1), (2), (3)을 만족한다고 가정하자.
+일반적으로 $p : \mathcal{S} \to \mathcal{C}$를 동치인 범주로 바꾸어
+스택을 얻을 수는 없다.
+% P01-E0188
+그 이유는 섬유 범주 $\mathcal{S}_U$가 대상들의 동형류를 진클래스만큼
+가질 수 있기 때문이다.
+% P01-E0189
+한편 다음을 가정하자.
+\begin{enumerate}
+\item[(4)] 모든 $U \in \Ob(\mathcal{C})$에 대하여 집합
+$S_U \subset \Ob(\mathcal{S}_U)$가 존재하고, $\mathcal{S}_U$의 모든
+대상은 $\mathcal{S}_U$ 안에서 $S_U$의 한 원소와 동형이다.
+\end{enumerate}
+이 경우 $\mathcal{S}$의 충만 부분범주 $\mathcal{S}_{small}$을 찾아
+$p_{small} = p|_{\mathcal{S}_{small}}$로 두었을 때 다음이 성립하게 할
+수 있다.
+\begin{enumerate}
+\item[(a)] 함자 $p_{small} : \mathcal{S}_{small} \to \mathcal{C}$는
+스택을 정의한다.
+\item[(b)] 포함 $\mathcal{S}_{small} \to \mathcal{S}$는 충만충실이고
+본질적으로 전사이다.
+\end{enumerate}
+(힌트: 모든 $U \in \Ob(\mathcal{C})$에 대하여
+$\Ob(\mathcal{S}_U) \cap V_{\alpha(U)}$가 $\mathcal{S}_U$의 동형류들의
+집합으로 전사하는 최소 순서수를 $\alpha(U)$라 하고,
+$\alpha = \sup_{U \in \Ob(\mathcal{C})} \alpha(U)$로 두자. 그런 다음
+$\Ob(\mathcal{S}_{small}) = \Ob(\mathcal{S}) \cap V_\alpha$로 취한다.
+사용한 표기는 Sets, Section \ref{sets-section-sets-hierarchy}를 보라.)
+\end{remark}
+
+\section{군체 스택}
+\label{stacks-section-stacks-in-groupoids}
+
+\noindent
+스택 가운데 군체로 섬유화된 것들은 비교적 이해하기 쉽다. 이를 다음과
+같이 다시 정의한다.
+
+\begin{definition}
+\label{stacks-definition-stack-in-groupoids}
+사이트 $\mathcal{C}$ 위의 {\it 군체 스택}은 다음을 만족하는
+$\mathcal{C}$ 위의 범주 $p : \mathcal{S} \to \mathcal{C}$이다.
+\begin{enumerate}
+\item $p : \mathcal{S} \to \mathcal{C}$는 $\mathcal{C}$ 위에서
+군체로 섬유화되어 있다(Categories, Definition
+\ref{categories-definition-fibred-groupoids}를 보라).
+\item 모든 $U \in \Ob(\mathcal{C})$와 모든
+$x, y\in \Ob(\mathcal{S}_U)$에 대하여 준층
+$\mathit{Isom}(x, y)$은 사이트 $\mathcal{C}/U$ 위의 층이다.
+\item $\mathcal{C}$의 모든 덮개
+$\mathcal{U} = \{U_i \to U\}$에 대하여, $\mathcal{U}$에 관한 모든
+내림 자료 $(x_i, \phi_{ij})$는 유효하다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+보통 가장 확인하기 어려운 것은 세 번째 조건이다. 다음 보조정리는 이를
+스택의 개념과 비교한다.
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-groupoids-stack}
+$\mathcal{C}$를 사이트라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 $\mathcal{C}$ 위의 범주라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item $\mathcal{S}$는 $\mathcal{C}$ 위의 군체 스택이다.
+\item $\mathcal{S}$는 $\mathcal{C}$ 위의 스택이고 모든 섬유 범주는
+군체이다.
+\item $\mathcal{S}$는 $\mathcal{C}$ 위에서 군체로 섬유화되어 있고
+$\mathcal{C}$ 위의 스택이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 다만 Categories, Lemma
+\ref{categories-lemma-fibred-groupoids}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-gives-stack-groupoids}
+$\mathcal{C}$를 사이트라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 스택이라 하자.
+Categories, Lemma
+\ref{categories-lemma-fibred-gives-fibred-groupoids}에서 구성한,
+$\mathcal{S}$에 결부된 군체로 섬유화된 범주를
+$p' : \mathcal{S}' \to \mathcal{C}$라 하자. 그러면
+$p' : \mathcal{S}' \to \mathcal{C}$는 군체 스택이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{S}'$의 사상은 정확히 $\mathcal{S}$의 강한 카르테시안
+사상들이며, $\mathcal{S}$의 모든 동형사상은 그러한 사상임을 상기하자.
+따라서 $\mathcal{S}'$의 내림 자료는 $\mathcal{S}$의 내림 자료와 정확히
+같은 것이다. 이제 Lemma \ref{stacks-lemma-stack-equivalences}를 적용한다.
+몇 가지 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-groupoids-equivalent}
+$\mathcal{C}$를 사이트라 하자.
+$\mathcal{S}_1$, $\mathcal{S}_2$를 $\mathcal{C}$ 위의 범주라 하자.
+$\mathcal{S}_1$과 $\mathcal{S}_2$가 $\mathcal{C}$ 위의 범주로서
+동치라고 가정하자. 그러면 $\mathcal{S}_1$이 $\mathcal{C}$ 위의 군체
+스택일 필요충분조건은 $\mathcal{S}_2$가 $\mathcal{C}$ 위의 군체
+스택인 것이다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{stacks-lemma-stack-in-groupoids-stack}와
+\ref{stacks-lemma-stack-equivalent}를 결합하면 따른다.
+\end{proof}
+
+\noindent
+$\mathcal{C}$ 위의 군체 스택들의 $2$-범주는 다음과 같이 정의한다.
+
+\begin{definition}
+\label{stacks-definition-stacks-in-groupoids-over-C}
+$\mathcal{C}$를 사이트라 하자.
+{\it $\mathcal{C}$ 위의 군체 스택들의 $2$-범주}는
+$\mathcal{C}$ 위의 스택들의 $2$-범주(Definition
+\ref{stacks-definition-stacks-over-C}를 보라)의 다음과 같은 부분 $2$-범주이다.
+\begin{enumerate}
+\item 그 대상은 군체 스택 $p : \mathcal{S} \to \mathcal{C}$이다.
+\item 그 $1$-사상 $(\mathcal{S}, p) \to (\mathcal{S}', p')$은
+$p' \circ G = p$를 만족하는 함자
+$G : \mathcal{S} \to \mathcal{S}'$이다. (모든 사상이 강한
+카르테시안 사상이므로 모든 함자는 이를 보존한다.)
+\item $G, H : (\mathcal{S}, p) \to (\mathcal{S}', p')$ 사이의
+$2$-사상 $t : G \to H$는 모든 $x \in \Ob(\mathcal{S})$에 대하여
+$p'(t_x) = \text{id}_{p(x)}$를 만족하는 함자들의 사상이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+모든 $2$-사상은 자동으로 동형사상이다. 따라서 $\mathcal{C}$ 위의
+군체 스택들의 $2$-범주는 실제로 (엄밀한) $(2, 1)$-범주이다.
+
+\begin{lemma}
+\label{stacks-lemma-2-product-stacks-in-groupoids}
+% P01-E0190
+$\mathcal{C}$를 범주라 하자. $\mathcal{C}$ 위의 군체 스택들의
+$2$-범주는 2-섬유곱을 가지며, 이는 Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C}에서와 같이 기술된다.
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma
+\ref{categories-lemma-2-product-fibred-categories}와 Lemmas
+\ref{stacks-lemma-stack-in-groupoids-stack} 및
+\ref{stacks-lemma-2-product-stacks}에서 명백하다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{세토이드 스택}
+\label{stacks-section-stacks-in-setoids}
+
+\noindent
+이 절에서는 집합 스택이 집합의 층과 같은 것임을 간단히 설명한다.
+표기에 대해서는 Categories, Section
+\ref{categories-section-fibred-in-setoids}를 보라.
+
+\begin{definition}
+\label{stacks-definition-stack-in-sets}
+$\mathcal{C}$를 사이트라 하자.
+\begin{enumerate}
+\item $\mathcal{C}$ 위의 {\it 세토이드 스택}은 모든 섬유 범주가
+세토이드인 $\mathcal{C}$ 위의 스택이다.
+\item {\it 집합 스택}, 또는 {\it 이산 범주 스택}은 모든 섬유 범주가
+이산적인 $\mathcal{C}$ 위의 스택이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+Section \ref{stacks-section-stacks-in-groupoids}의 논의에 따르면, 이는 섬유
+범주들이 세토이드(각각 이산 범주)인 군체 스택과 같은 것이다. 또한
+세토이드(각각 집합)로 섬유화되어 있으면서 스택인 범주와도 같은 것이다.
+
+\begin{lemma}
+\label{stacks-lemma-when-stack-in-sets}
+$\mathcal{C}$를 사이트라 하자. Categories, Lemma
+\ref{categories-lemma-2-category-fibred-sets}의 동치
+$$
+\left\{
+\begin{matrix}
+\text{the category of presheaves}\\
+\text{of sets over }\mathcal{C}
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+\text{the category of categories}\\
+\text{fibred in sets over }\mathcal{C}
+\end{matrix}
+\right\}
+$$
+아래에서 집합 스택은 정확히 층에 대응한다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 내림의 유효성이 정확히 층 조건에 대응함을 보여라.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-setoids-characterize}
+$\mathcal{C}$를 사이트라 하자.
+$\mathcal{S}$를 $\mathcal{C}$ 위에서 세토이드로 섬유화된 범주라 하자.
+그러면 $\mathcal{S}$가 세토이드 스택일 필요충분조건은 유일한 동치인,
+집합으로 섬유화된 범주 $\mathcal{S}'$(Categories, Lemma
+\ref{categories-lemma-setoid-fibres}를 보라)이 집합 스택인 것이다.
+달리 말해, 준층
+$$
+U \longmapsto \Ob(\mathcal{S}_U)/\!\!\cong
+$$
+이 층일 필요충분조건과 같다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-setoids-equivalent}
+$\mathcal{C}$를 사이트라 하자.
+$\mathcal{S}_1$, $\mathcal{S}_2$를 $\mathcal{C}$ 위의 범주라 하자.
+$\mathcal{S}_1$과 $\mathcal{S}_2$가 $\mathcal{C}$ 위의 범주로서
+동치라고 가정하자. 그러면 $\mathcal{S}_1$이 $\mathcal{C}$ 위의
+세토이드 스택일 필요충분조건은 $\mathcal{S}_2$가 $\mathcal{C}$ 위의
+세토이드 스택인 것이다.
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma \ref{categories-lemma-setoid-fibres}에 의해
+$\mathcal{C}$ 위의 범주 $\mathcal{S}$가 $\mathcal{C}$ 위에서 세토이드로
+섬유화될 필요충분조건은 $\mathcal{C}$ 위에서 집합으로 섬유화된 어떤
+범주와 동치인 것이다. 따라서 $\mathcal{S}_1$이 $\mathcal{C}$ 위에서
+세토이드로 섬유화될 필요충분조건은 $\mathcal{S}_2$가 $\mathcal{C}$
+위에서 세토이드로 섬유화되는 것이다. 이제 Lemma
+\ref{stacks-lemma-stack-in-setoids-characterize}에서 결론이 따른다.
+\end{proof}
+
+\noindent
+$\mathcal{C}$ 위의 세토이드 스택들의 $2$-범주는 다음과 같이 정의한다.
+
+\begin{definition}
+\label{stacks-definition-stacks-in-setoids-over-C}
+$\mathcal{C}$를 사이트라 하자.
+{\it $\mathcal{C}$ 위의 세토이드 스택들의 $2$-범주}는
+$\mathcal{C}$ 위의 스택들의 $2$-범주(Definition
+\ref{stacks-definition-stacks-over-C}를 보라)의 다음과 같은 부분 $2$-범주이다.
+\begin{enumerate}
+\item 그 대상은 세토이드 스택 $p : \mathcal{S} \to \mathcal{C}$이다.
+\item 그 $1$-사상 $(\mathcal{S}, p) \to (\mathcal{S}', p')$은
+$p' \circ G = p$를 만족하는 함자
+$G : \mathcal{S} \to \mathcal{S}'$이다. (모든 사상이 강한
+카르테시안 사상이므로 모든 함자는 이를 보존한다.)
+\item $G, H : (\mathcal{S}, p) \to (\mathcal{S}', p')$ 사이의
+$2$-사상 $t : G \to H$는 모든 $x \in \Ob(\mathcal{S})$에 대하여
+$p'(t_x) = \text{id}_{p(x)}$를 만족하는 함자들의 사상이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+모든 $2$-사상은 자동으로 동형사상이다. 따라서 $\mathcal{C}$ 위의
+세토이드 스택들의 $2$-범주는 실제로 (엄밀한) $(2, 1)$-범주이다.
+
+\begin{lemma}
+\label{stacks-lemma-2-product-stacks-in-setoids}
+$\mathcal{C}$를 사이트라 하자. $\mathcal{C}$ 위의 세토이드 스택들의
+$2$-범주는 2-섬유곱을 가지며, 이는 Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C}에서와 같이 기술된다.
+\end{lemma}
+
+\begin{proof}
+Categories, Lemmas
+\ref{categories-lemma-2-product-fibred-categories}와
+\ref{categories-lemma-2-product-categories-fibred-setoids}, 그리고 Lemmas
+\ref{stacks-lemma-stack-in-groupoids-stack}와
+\ref{stacks-lemma-2-product-stacks}에서 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-2-fibre-product-gives-stack-in-setoids}
+$\mathcal{C}$를 사이트라 하자.
+$\mathcal{S}, \mathcal{T}$를 $\mathcal{C}$ 위의 군체 스택이라 하고,
+$\mathcal{R}$를 $\mathcal{C}$ 위의 세토이드 스택이라 하자.
+$f : \mathcal{T} \to \mathcal{S}$와
+$g : \mathcal{R} \to \mathcal{S}$를 $1$-사상이라 하자. $f$가 충실하면
+$2$-섬유곱
+$$
+\mathcal{T} \times_{f, \mathcal{S}, g} \mathcal{R}
+$$
+은 $\mathcal{C}$ 위의 세토이드 스택이다.
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C}의 $2$-섬유곱에 대한
+명시적 기술에서 바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-2-fibre-product-stacks-in-setoids-over-stack-in-groupoids}
+$\mathcal{C}$를 사이트라 하자.
+$\mathcal{S}$를 $\mathcal{C}$ 위의 군체 스택이라 하고,
+$\mathcal{S}_i$, $i = 1, 2$를 $\mathcal{C}$ 위의 세토이드 스택이라 하자.
+$f_i : \mathcal{S}_i \to \mathcal{S}$를 $1$-사상이라 하자. 그러면
+$2$-섬유곱
+$$
+\mathcal{S}_1 \times_{f_1, \mathcal{S}, f_2} \mathcal{S}_2
+$$
+은 $\mathcal{C}$ 위의 세토이드 스택이다.
+\end{lemma}
+
+\begin{proof}
+$f_2$가 충실하므로 이는 Lemma
+\ref{stacks-lemma-2-fibre-product-gives-stack-in-setoids}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-faithful-descent}
+$\mathcal{C}$를 사이트라 하자.
+$$
+\xymatrix{
+\mathcal{T}_2 \ar[r] \ar[d]_{G'} & \mathcal{T}_1 \ar[d]^G \\
+\mathcal{S}_2 \ar[r]^F & \mathcal{S}_1
+}
+$$
+를 $\mathcal{C}$ 위의 군체 스택들의 $2$-카르테시안 도표라 하자. 다음을
+가정하자.
+\begin{enumerate}
+\item 모든 $U \in \Ob(\mathcal{C})$와
+$x \in \Ob((\mathcal{S}_1)_U)$에 대하여 덮개
+$\{U_i \to U\}$가 존재하여 $x|_{U_i}$가 함자
+$F : (\mathcal{S}_2)_{U_i} \to (\mathcal{S}_1)_{U_i}$의 본질적 상에
+속한다.
+\item $G'$는 충실하다.
+\end{enumerate}
+그러면 $G$는 충실하다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{T}_2$가 Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C}에서 기술한 범주
+$\mathcal{S}_2 \times_{\mathcal{S}_1} \mathcal{T}_1$이라고 가정할 수
+있다. Categories, Lemma
+\ref{categories-lemma-equivalence-fibred-categories}에 의해 $G, G'$의
+충실성은 섬유 범주에서 확인할 수 있다. $y, y'$를 $\mathcal{C}$의 대상
+$U$ 위에 놓이는 $\mathcal{T}_1$의 대상이라 하자.
+$\alpha, \beta : y \to y'$를 $G(\alpha) = G(\beta)$를 만족하는
+$(\mathcal{T}_1)_U$의 사상이라 하자. 목표는 $\alpha = \beta$임을 보이는
+것이다. 대신 $\gamma = \alpha^{-1} \circ \beta$를 생각하면
+$G(\gamma) = \text{id}_{G(y)}$이고, $\gamma = \text{id}_y$임을 보여야
+한다. 가정에 의해 덮개 $\{U_i \to U\}$를 찾아
+$G(y)|_{U_i}$가 함자
+$F :(\mathcal{S}_2)_{U_i} \to (\mathcal{S}_1)_{U_i}$의 본질적 상에
+속하게 할 수 있다. 각 $i$에 대하여
+$\gamma|_{U_i} = \text{id}$임을 보이면 충분하므로, $U$ 위에 놓이는
+$\mathcal{S}_2$의 어떤 대상 $x$와 $(\mathcal{S}_1)_U$의 사상 $f$에
+대해 다음을 갖는다고 가정할 수 있다.
+% P01-E0191
+$f : F(x) \to G(y)$
+이 경우 $U$ 위의 섬유 범주
+$\mathcal{S}_2 \times_{\mathcal{S}_1} \mathcal{T}_1$에서 사상
+$$
+(1, \gamma) : (U, x, y, f) \longrightarrow (U, x, y, f)
+$$
+을 얻으며, 이는 $G'$ 아래에서 $\mathcal{S}_1$의
+$\text{id}_x$로 보내진다. $G'$가 충실하므로
+$\gamma = \text{id}_y$이고 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-setoids-descent}
+$\mathcal{C}$를 사이트라 하자.
+$$
+\xymatrix{
+\mathcal{T}_2 \ar[r] \ar[d] & \mathcal{T}_1 \ar[d]^G \\
+\mathcal{S}_2 \ar[r]^F & \mathcal{S}_1
+}
+$$
+를 $\mathcal{C}$ 위의 군체 스택들의 $2$-카르테시안 도표라 하자. 다음을
+가정하자.
+\begin{enumerate}
+\item $F : \mathcal{S}_2 \to \mathcal{S}_1$은 충만충실이다.
+\item 모든 $U \in \Ob(\mathcal{C})$와
+$x \in \Ob((\mathcal{S}_1)_U)$에 대하여 덮개
+$\{U_i \to U\}$가 존재하여 $x|_{U_i}$가 함자
+$F : (\mathcal{S}_2)_{U_i} \to (\mathcal{S}_1)_{U_i}$의 본질적 상에
+속한다.
+\item $\mathcal{T}_2$는 세토이드 스택이다.
+\end{enumerate}
+그러면 $\mathcal{T}_1$은 세토이드 스택이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{T}_2$가 Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C}에서 기술한 범주
+$\mathcal{S}_2 \times_{\mathcal{S}_1} \mathcal{T}_1$이라고 가정할 수
+있다. $U \in \Ob(\mathcal{C})$와
+$y \in \Ob((\mathcal{T}_1)_U)$를 택하자. $\mathcal{C}/U$ 위의 층
+$\mathit{Aut}(y)$가 자명함을 보여야 한다.
+% P01-E0192
+이를 위해 $U$를 $U$의 한 덮개의 원소들로 바꾸어도 된다. 따라서 가정 (2)에
+의해 어떤 대상 $x \in \Ob((\mathcal{S}_2)_U)$와 동형사상
+$f : F(x) \to G(y)$가 존재한다고 가정할 수 있다. 그러면
+$y' = (U, x, y, f)$는 $U$ 위의 $\mathcal{T}_2$의 대상이고, 사영
+$\mathcal{T}_2 \to \mathcal{T}_1$ 아래에서 $y$로 보내진다. (1)에 의해
+$F$가 충만충실이므로 사상 $\mathit{Aut}(y') \to \mathit{Aut}(y)$는
+전사이다. 여기서는 Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C}의 $\mathcal{T}_2$
+사상에 대한 명시적 기술을 사용한다. (3)에 의해 층
+$\mathit{Aut}(y')$가 자명이므로 보조정리의 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-relative-sheaf-over-stack-is-stack}
+$\mathcal{C}$를 사이트라 하자. $F : \mathcal{S} \to \mathcal{T}$를
+$\mathcal{C}$ 위에서 군체로 섬유화된 범주들의 $1$-사상이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{T}$는 $\mathcal{C}$ 위의 군체 스택이다.
+\item 모든 $U \in \Ob(\mathcal{C})$에 대하여 섬유 범주들의 함자
+$\mathcal{S}_U \to \mathcal{T}_U$는 충실하다.
+\item 각 $U$와 각 $y \in \Ob(\mathcal{T}_U)$에 대하여 준층
+$$
+(h : V \to U)
+\longmapsto
+\{(x, f) \mid x \in \Ob(\mathcal{S}_V), f : F(x) \to f^*y\text{ over }V\}/\cong
+$$
+은 $\mathcal{C}/U$ 위의 층이다.
+\end{enumerate}
+그러면 $\mathcal{S}$는 $\mathcal{C}$ 위의 군체 스택이다.
+\end{lemma}
+
+\begin{proof}
+사상의 내림과 대상의 내림을 증명해야 한다.
+
+\medskip\noindent
+사상의 내림. $\{U_i \to U\}$를 $\mathcal{C}$의 덮개라 하자.
+$x, x'$를 $U$ 위의 $\mathcal{S}$의 대상이라 하자. 각 $i$에 대하여
+$\alpha_i : x|_{U_i} \to x'|_{U_i}$를 $U_i$ 위의 사상이라 하고,
+$\alpha_i$와 $\alpha_j$가 같은 사상
+$x|_{U_i \times_U U_j} \to x'|_{U_i \times_U U_j}$로 제한된다고 하자.
+$\mathcal{T}$가 군체 스택이므로, $U$ 위의 사상
+$\beta : F(x) \to F(x')$가 존재하여 $U_i$ 위에서 $F(\alpha_i)$로
+제한된다. 그러면 $\xi = (x, \beta)$와
+$\xi' = (x', \text{id}_{F(x')})$를 가정 (3)의 $y = F(x')$에 결부된
+준층의 $U$ 위의 절단으로 생각할 수 있다. 한편 $\xi$와 $\xi'$의
+$U_i$ 위의 제한은 각각 $(x|_{U_i}, F(\alpha_i))$와
+$(x'|_{U_i}, \text{id}_{F(x'|_{U_i})})$이다. 이들은 사상
+$\alpha_i$에 의해 서로 동형이다. 따라서 가정 (3)에 의해 $\xi$와
+$\xi'$는 동형이다. 이는 $F(\alpha) = \beta$를 만족하는 $U$ 위의
+사상 $\alpha : x \to x'$가 존재함을 뜻한다. $F$가 섬유 범주에서
+충실하므로 $\alpha|_{U_i} = \alpha_i$를 얻는다.
+
+\medskip\noindent
+대상의 내림. $\{U_i \to U\}$를 $\mathcal{C}$의 덮개라 하자.
+$(x_i, \varphi_{ij})$를 주어진 덮개에 관한 $\mathcal{S}$의 내림
+자료라 하자. $\mathcal{T}$가 군체 스택이므로, $\mathcal{T}_U$의
+대상 $y$와 다음을 만족하는 동형사상
+$\beta_i : F(x_i) \to y|_{U_i}$가 존재한다.
+$F(\varphi_{ij}) = \beta_j|_{U_i \times_U U_j} \circ
+(\beta_i|_{U_i \times_U U_j})^{-1}$.
+그러면 $(x_i, \beta_i)$는 가정 (3)에서 정의한 $y$에 결부된 준층의
+$U$ 위의 절단이다. 또한 $\varphi_{ij}$는 쌍
+$(x_i, \beta_i)|_{U_i \times_U U_j}$에서 쌍
+$(x_j, \beta_j)|_{U_i \times_U U_j}$로 가는 동형사상을 정의한다.
+따라서 가정 (3)에 의해 $U$ 위의 쌍 $(x, \beta)$가 존재하여 그
+$U_i$ 위의 제한은 $(x_i, \beta_i)$와 동형이다. 이는
+$\beta_i = \beta|_{U_i} \circ F(\alpha_i)$를 만족하는 사상
+$\alpha_i : x_i \to x|_{U_i}$가 존재함을 뜻한다. $F$가 섬유 범주에서
+충실하므로 계산을 통해
+$\varphi_{ij} = \alpha_j|_{U_i \times_U U_j} \circ
+(\alpha_i|_{U_i \times_U U_j})^{-1}$를 얻는다. 이로써 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{관성 스택}
+\label{stacks-section-the-inertia-stack}
+
+\noindent
+$p : \mathcal{S} \to \mathcal{C}$와
+$p' : \mathcal{S}' \to \mathcal{C}$를 범주 $\mathcal{C}$ 위의
+섬유화된 범주라 하자. $F : \mathcal{S} \to \mathcal{S}'$를
+$\mathcal{C}$ 위의 섬유화된 범주들의 $1$-사상이라 하자.
+Categories, Definition
+\ref{categories-definition-inertia-fibred-category}에서 {\it 상대 관성
+섬유화 범주} $\mathcal{I}_{\mathcal{S}/\mathcal{S}'} \to \mathcal{C}$를
+정의했음을 상기하자. 이는 $x \in \Ob(\mathcal{S})$이고
+$F(\alpha) = \text{id}_{F(x)}$를 만족하는 $\alpha : x \to x$인 쌍
+$(x , \alpha)$들을 대상으로 하는 범주이다. 절대적 판본도 있는데, 이는
+$\mathcal{S}$의 {\it 관성} $\mathcal{I}_\mathcal{S}$이다.
+$\mathcal{S}$와 $\mathcal{S}'$가 스택이면 이 관성 범주들은 실제로
+$\mathcal{C}$ 위의 스택이다.
+
+\begin{lemma}
+\label{stacks-lemma-inertia}
+$\mathcal{C}$를 사이트라 하자.
+$p : \mathcal{S} \to \mathcal{C}$와
+$p' : \mathcal{S}' \to \mathcal{C}$를 사이트 $\mathcal{C}$ 위의
+스택이라 하자. $F : \mathcal{S} \to \mathcal{S}'$를
+$\mathcal{C}$ 위의 스택들의 $1$-사상이라 하자.
+\begin{enumerate}
+\item 관성 $\mathcal{I}_{\mathcal{S}/\mathcal{S}'}$와
+$\mathcal{I}_\mathcal{S}$는 $\mathcal{C}$ 위의 스택이다.
+\item $\mathcal{S}, \mathcal{S}'$가 $\mathcal{C}$ 위의 군체 스택이면
+$\mathcal{I}_{\mathcal{S}/\mathcal{S}'}$와
+$\mathcal{I}_\mathcal{S}$도 그러하다.
+\item $\mathcal{S}, \mathcal{S}'$가 $\mathcal{C}$ 위의 세토이드
+스택이면 $\mathcal{I}_{\mathcal{S}/\mathcal{S}'}$와
+$\mathcal{I}_\mathcal{S}$도 그러하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+처음 세 주장은 Lemmas \ref{stacks-lemma-2-product-stacks},
+\ref{stacks-lemma-2-product-stacks-in-groupoids},
+\ref{stacks-lemma-2-product-stacks-in-setoids}와 Categories, Lemma
+\ref{categories-lemma-inertia-fibred-category}의 (1)에 있는 동치에서
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-characterize-stack-in-setoids}
+$\mathcal{C}$를 사이트라 하자. $\mathcal{S}$가 군체 스택이면, 표준
+$1$-사상 $\mathcal{I}_\mathcal{S} \to \mathcal{S}$가 동치일
+필요충분조건은 $\mathcal{S}$가 세토이드 스택인 것이다.
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma
+\ref{categories-lemma-characterize-fibred-setoids-inertia}에서 바로 따른다.
+\end{proof}
+
+
+
+
+\section{섬유화된 범주의 스택화}
+\label{stacks-section-stackify}
+
+\noindent
+다음 보조정리의 절차로 얻는 결과를 사이트 위의 섬유화된 범주의
+{\it 스택화}라고 한다.
+
+\begin{lemma}
+\label{stacks-lemma-stackify}
+$\mathcal{C}$를 사이트라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 $\mathcal{C}$ 위의 섬유화된
+범주라 하자. 스택 $p' : \mathcal{S}' \to \mathcal{C}$와
+$\mathcal{C}$ 위의 섬유화된 범주들의 $1$-사상
+$G : \mathcal{S} \to \mathcal{S}'$(Categories, Definition
+\ref{categories-definition-fibred-categories-over-C}를 보라)이 존재하여
+다음을 만족한다.
+\begin{enumerate}
+\item 모든 $U \in \Ob(\mathcal{C})$와 임의의
+$x, y \in \Ob(\mathcal{S}_U)$에 대하여 $G$가 유도하는 사상
+$$
+\mathit{Mor}(x, y) \longrightarrow \mathit{Mor}(G(x), G(y))
+$$
+은 오른쪽을 왼쪽의 층화와 동일시한다.
+\item 모든 $U \in \Ob(\mathcal{C})$와 임의의
+$x' \in \Ob(\mathcal{S}'_U)$에 대하여 덮개
+$\{U_i \to U\}_{i \in I}$가 존재하여, 모든 $i \in I$에 대해 대상
+$x'|_{U_i}$가 함자
+$G : \mathcal{S}_{U_i} \to \mathcal{S}'_{U_i}$의 본질적 상에 속한다.
+\end{enumerate}
+더욱이 이 조건들은 유일한 $2$-동형사상의 의미에서 스택
+$\mathcal{S}'$을 결정한다.
+\end{lemma}
+
+\begin{proof}[소박한 방법에 의한 증명]
+이 증명 방법에서는 다음 단계들을 거친다.
+
+\medskip\noindent
+먼저 $U$ 위에 놓이는 $x$와 $\mathcal{S}$의 임의의 대상 $y$가
+주어졌다고 하자. $\mathcal{S}$의 두 사상
+$a, b : x \to y$가 $\mathcal{C}$의 같은 화살표 위에 놓이고,
+$\mathcal{C}$의 덮개 $\{f_i : U_i \to U\}$가 존재하여 합성
+$$
+f_i^*x \to x \xrightarrow{a} y,
+\quad
+f_i^*x \to x \xrightarrow{b} y
+$$
+들이 같으면 이 두 사상이 {\it 국소적으로 같다}고 한다. 이는
+$\mathcal{S}$의 화살표들 위에 동치관계 $\sim$을 준다.
+$b \sim b'$이면
+$a \circ b \circ c \sim a \circ b' \circ c$이다(확인은 생략한다).
+따라서 이 동치관계로 몫을 취하여 $\mathcal{C}$ 위의 새 범주
+$\mathcal{S}^1$과 사상 $G^1 : \mathcal{S} \to \mathcal{S}^1$을 얻는다.
+
+\medskip\noindent
+$G^1$이 강한 카르테시안 사상을 보존하고 $\mathcal{S}^1$이
+$\mathcal{C}$ 위의 섬유화된 범주임을 확인할 수 있다. 확인은 생략한다.
+따라서 국소적으로 같은 사상들이 서로 같은 경우로 환원된다.
+
+\medskip\noindent
+다음으로 사상을 다음과 같이 추가한다. $U$ 위에 놓이는 $x$와
+% P01-E0193
+$V$ 위에 놓이는 임의의 대상 $y$가 주어졌을 때, {\it $x$에서 $y$로
+가는 국소적으로 정의된 사상}은 다음으로 주어진다.
+\begin{enumerate}
+\item 사상 $f : U \to V$,
+\item $U$의 덮개 $\{f_i : U_i \to U\}$,
+\item $p(a_i) = f \circ f_i$를 만족하는 사상
+$a_i : f_i^*x \to y$.
+\end{enumerate}
+여기에는 합성
+$$
+(f_i \times f_j)^*x \to f_i^*x \xrightarrow{a_i} y,
+\quad
+(f_i \times f_j)^*x \to f_j^*x \xrightarrow{a_j} y
+$$
+들이 같다는 조건을 부과한다. 보통의 사상 $a : x \to y$는 국소적으로
+정의된 사상 $(p(a) : U \to V, \{\text{id}_U\}, a)$를 준다는 점에
+유의하자. 국소적으로 정의된 두 사상
+$(f, \{f_i : U_i \to U\}, a_i)$와
+$(g, \{g_j : U'_j \to U\}, b_j)$에 대하여 $f = g$이고 합성
+$$
+(f_i \times g_j)^*x \to f_i^*x \xrightarrow{a_i} y,
+\quad
+(f_i \times g_j)^*x \to g_j^*x \xrightarrow{b_j} y
+$$
+들이 같으면 두 사상이 {\it 같다}고 한다. (국소적으로 같은 사상들이
+같은 경우를 다루고 있으므로 이것이 올바른 조건이다.) $x$에서 $y$로
+가는 국소적으로 정의된 사상
+$(f, \{f_i : U_i \to U\}, a_i)$와 $y$에서 $W$ 위에 놓이는 $z$로
+가는 국소적으로 정의된 사상
+$(g, \{g_j : V_j \to V\}, b_j)$를 합성하려면,
+$g \circ f : U \to W$와 덮개
+$\{U_i \times_V V_j \to U\}$를 취하고, 사상으로 합성
+$$
+x|_{U_i \times_V V_j}
+\xrightarrow{\text{pr}_0^*a_i}
+y|_{V_j}
+\xrightarrow{b_j}
+z
+$$
+을 취하면 된다. 이것이 국소적으로 정의된 사상이라는 확인은 생략한다.
+
+\medskip\noindent
+$\mathcal{S}$와 같은 대상들을 가지고 국소적으로 정의된 사상들을
+사상으로 하는 $\mathcal{S}^2$가 $\mathcal{C}$ 위의 범주이고,
+$\mathcal{C}$ 위의 함자 $G^2 : \mathcal{S} \to \mathcal{S}^2$가
+존재하며, 이 함자가 강한 카르테시안 대상을 보존하고,
+% P01-E0194
+$\mathcal{S}^2$가 $\mathcal{C}$ 위의 섬유화된 범주임을 확인할 수
+있다. 확인은 생략한다. 국소적으로 정의된 사상을 사용하는 효과가
+(분리된) 사상 준층을 층화하는 것임을 확인함으로써, $\mathcal{S}$의
+모든 사상 준층이 층인 경우로 환원된다.
+
+\medskip\noindent
+마지막으로 사상 준층들이 모두 층인 경우, 최종 결과에서 내림 조건이
+유효하도록 대상을 추가해야 한다. 이를 행하는 가장 간단한 방법은 대상이
+쌍 $(\mathcal{U}, \xi)$인 범주 $\mathcal{S}'$을 생각하는 것이다. 여기서
+$\mathcal{U} = \{U_i \to U\}$는 $\mathcal{C}$의 덮개이고,
+% P01-E0195
+$\xi = (X_i, \varphi_{ii'})$는 $\mathcal{U}$에 관한 내림 자료이다.
+다음과 같은 두 자료가 주어졌다고 하자.
+$(\mathcal{U}, \xi) = (\{f_i : U_i \to U\},  x_i, \varphi_{ii'})$와
+$(\mathcal{V}, \eta) = (\{g_j : V_j \to V\},  y_j, \psi_{jj'})$.
+$$
+\Mor_{\mathcal{S}'}((\mathcal{U}, \xi), (\mathcal{V}, \eta))
+$$
+를 모든 $(f, a_{ij})$의 집합으로 정의한다. 여기서 $f : U \to V$이고
+$$
+a_{ij} :
+x_i|_{U_i \times_V V_j}
+\longrightarrow
+y_j
+$$
+는 $U_i \times_V V_j \to V_j$ 위에 놓이는 $\mathcal{S}$의 사상이다.
+이들은 다음 조건을 만족해야 한다. 임의의 $i, i' \in I$와
+$j, j' \in J$에 대하여
+$W = (U_i \times_U U_{i'}) \times_V (V_j \times_V V_{j'})$로 두자.
+그러면
+$$
+\xymatrix{
+x_i|_W \ar[r]_{a_{ij}|_W} \ar[d]_{\varphi_{ii'}|_W} &
+y_j|_W \ar[d]^{\psi_{jj'}|_W} \\
+x_{i'}|_W \ar[r]^{a_{i'j'}|_W} &
+y_{j'}|_W
+}
+$$
+는 가환한다. 이제 다음 사항들을 확인해야 한다.
+\begin{enumerate}
+\item 위와 같은 사상들에는 잘 정의된 합성이 있다.
+\item 이로써 $\mathcal{S}'$은 $\mathcal{C}$ 위의 범주가 된다.
+\item $\mathcal{C}$ 위의 함자 $G : \mathcal{S} \to \mathcal{S}'$이
+존재한다.
+\item $\mathcal{S}$의 대상 $x, y$에 대하여
+$\Mor_\mathcal{S}(x, y) = \Mor_{\mathcal{S}'}(G(x), G(y))$이다.
+\item $\mathcal{S}'$의 모든 대상은 국소적으로 $\mathcal{S}$의
+대상에서 온다. 즉 보조정리의 (2)가 성립한다.
+\item $G$는 강한 카르테시안 사상을 보존한다.
+\item $\mathcal{S}'$은 $\mathcal{C}$ 위의 섬유화된 범주이다.
+\item $\mathcal{S}'$은 $\mathcal{C}$ 위의 스택이다.
+\end{enumerate}
+이 모든 것은 어렵지 않지만 확인할 것이 많다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{proof}[덜 소박한 증명]
+다음은 덜 소박한 증명이다. Categories, Lemma
+\ref{categories-lemma-fibred-strict}에 의해 섬유화된 범주들의 동치
+$\mathcal{S} \to \mathcal{S}'$이 존재하며, 여기서 $\mathcal{S}'$은
+분할 섬유화 범주, 즉 당김 함자들이 문자 그대로 합성되는 범주이다.
+$\mathcal{S}'$에 대한 보조정리가 $\mathcal{S}$에 대한 보조정리를
+함의함은 명백하다. 따라서 $\mathcal{S}$를 범주 값 준층으로 생각할 수
+있다.
+
+\medskip\noindent
+잠시 $2$-사상을 잊어 $2$-범주 $\textit{Cat}$을 범주로 생각하자.
+Categories, Section \ref{categories-section-definition-categories}에서처럼
+범주를 오중항 $(\text{Ob}, \text{Arrows}, s, t, \circ)$로 생각하자.
+망각 함자
+$$
+forget : \textit{Cat} \to \textit{Sets} \times \textit{Sets}, \quad
+(\text{Ob}, \text{Arrows}, s, t, \circ)
+\mapsto
+(\text{Ob}, \text{Arrows}).
+$$
+를 생각하자. 그러면 $forget$은 충실하고, $\textit{Cat}$은 극한을 가지며
+$forget$은 극한과 교환하고, $\textit{Cat}$은 유향 여극한을 가지며
+$forget$은 이들과 교환하고, $forget$은 동형사상을 반영한다.
+$\textit{Cat}$ 값을 갖는 준층을 층화할 수 있고, Sites, Section
+\ref{sites-section-sheaves-algebraic-structures}의 첫 부분과 비슷한
+논증에 의해 결과는 $forget$과 교환한다. 이를 $\mathcal{S}$에 적용하여
+층화 $\mathcal{S}^\#$을 얻는다. 이 범주는 대상의 층과 사상의 층을
+가지며, 둘 다 $\mathcal{S}$의 대응하는 준층의 층화이다. 이 경우 사상
+$\mathcal{S} \to \mathcal{S}^\#$이 보조정리의 성질 (1), (2)를 가짐을
+쉽게 알 수 있다.
+
+\medskip\noindent
+그러나 대상 준층이 층이라 하더라도 내림 조건이 아직 만족되지 않을 수
+있으므로 범주 $\mathcal{S}^\#$은 아직 스택이 아닐 수 있다. 이를
+바로잡으려면 대상을 더 추가해야 한다. 하지만 위 논증은 어떤 범주 값의
+층(!) $F : \mathcal{C}^{opp} \to \textit{Cat}$에 대해
+$\mathcal{S} = \mathcal{S}_F$인 경우로 문제를 환원한다. 이 경우 다음과
+같이 정의한 함자 $F' : \mathcal{C}^{opp} \to \textit{Cat}$을 생각하자.
+\begin{enumerate}
+\item 집합 $\Ob(F'(U))$는 쌍 $(\mathcal{U}, \xi)$들의 집합이다.
+여기서 $\mathcal{U} = \{U_i \to U\}$는 $U$의 덮개이고
+$\xi = (x_i, \varphi_{ii'})$는 $\mathcal{U}$에 관한 내림 자료이다.
+\item $F'(U)$에서 $(\mathcal{U}, \xi)$로부터
+$(\mathcal{V}, \eta)$로 가는 사상은
+$$
+\colim \Mor_{DD(\mathcal{W})}(a^*\xi, b^*\eta)
+$$
+의 원소이다. 여기서 여극한은 모든 공통 세분
+$a : \mathcal{W} \to \mathcal{U}$,
+$b : \mathcal{W} \to \mathcal{V}$에 걸친다. 이 여극한은 여과되어 있다
+(확인은 생략한다). 따라서 $F(U)$의 사상의 합성은 공통 세분을 찾아
+% P01-E0196
+$DD(\mathcal{W})$에서 합성함으로써 정의한다.
+\item $h : V \to U$와 $F'(U)$의 대상 $(\mathcal{U}, \xi)$가
+주어졌을 때, $F'(h)(\mathcal{U}, \xi)$를
+$(V \times_U \mathcal{U}, \text{pr}_1^*\xi)$와 같게 둔다. 더 정확히,
+$\mathcal{U} = \{U_i \to U\}$이고 $\xi = (x_i, \varphi_{ii'})$이면
+$V \times_U \mathcal{U} = \{V \times_U U_i \to V\}$이며, 이는 표준
+사상 $\text{pr}_1 : V \times_U \mathcal{U} \to \mathcal{U}$을 갖고
+$\text{pr}_1^*\xi$는 이 사상에 관한 $\xi$의 당김이다(Definition
+\ref{stacks-definition-pullback-functor}를 보라).
+\item $h : V \to U$, 대상 $(\mathcal{U}, \xi)$와
+$(\mathcal{V}, \eta)$, 그리고 이들 사이의 사상이 주어졌다고 하자.
+그 사상이 $a : \mathcal{W} \to \mathcal{U}$,
+$b : \mathcal{W} \to \mathcal{V}$ 및
+$\alpha : a^*\xi \to b^*\eta$로 표현되면, $F'(h)(\alpha)$는
+$a' : V \times_U\mathcal{W} \to V \times_U\mathcal{U}$,
+$b' : V \times_U\mathcal{W} \to V \times_U\mathcal{V}$와 사상
+$\alpha$의 사상 $V \times_U \mathcal{W} \to \mathcal{W}$에 의한 당김
+$\alpha'$로 표현된다. $\mathcal{S}_F$의 당김은 문자 그대로 교환하므로
+이 구성은 성립한다.
+\end{enumerate}
+$F(U)$의 대상 $x$에 $F'(U)$의 대상
+$(\{U \to U\}, (x, triv))$을 대응시키는 사상 $F \to F'$가 있다.
+이제 대응하는 함자 $\mathcal{S}_F \to \mathcal{S}_{F'}$가 보조정리의
+성질 (1), (2)를 가지며, 마지막으로 $\mathcal{S}_{F'}$가 스택임을
+확인해야 한다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackify-universal-property}
+$\mathcal{C}$를 사이트라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 $\mathcal{C}$ 위의 섬유화된
+범주라 하자. $p' : \mathcal{S}' \to \mathcal{C}$와
+$G : \mathcal{S} \to \mathcal{S}'$를 Lemma
+\ref{stacks-lemma-stackify}에서 구성한 스택과 $1$-사상이라 하자.
+% P01-E0197
+이 구성은 다음 보편 성질을 갖는다. 스택
+$q : \mathcal{X} \to \mathcal{C}$와 $\mathcal{C}$ 위의 섬유화된
+범주들의 $1$-사상 $F : \mathcal{S} \to \mathcal{X}$가 주어지면,
+도표
+$$
+\xymatrix{
+\mathcal{S} \ar[rr]_F \ar[rd]_G & & \mathcal{X} \\
+& \mathcal{S}' \ar[ru]_H
+}
+$$
+가 $2$-가환이 되게 하는 $1$-사상
+$H : \mathcal{S}' \to \mathcal{X}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: $x' \in \Ob(\mathcal{S}'_U)$라고 하자. Lemma
+\ref{stacks-lemma-stackify}의 결과에 의해 덮개
+$\{U_i \to U\}_{i \in I}$가 존재하여 어떤
+$x_i \in \Ob(\mathcal{S}_{U_i})$에 대해
+$x'|_{U_i} = G(x_i)$이다. 더욱이 덮개
+$\{U_{ijk} \to U_i \times_U U_j\}$와 동형사상
+$\alpha_{ijk} : x_i|_{U_{ijk}} \to x_j|_{U_{ijk}}$가 존재하여
+$G(\alpha_{ijk}) = \text{id}_{x'|_{U_{ijk}}}$를 만족한다.
+$y_i = F(x_i)$로 두자. 그러면
+$$
+F(\alpha_{ijk}) : y_i|_{U_{ijk}} \to y_j|_{U_{ijk}}
+$$
+가 겹침에서 일치함을 확인할 수 있으며, 따라서 $\mathcal{X}$가
+스택이므로 사상
+$\beta_{ij} : y_i|_{U_i \times_U U_j} \to y_j|_{U_i \times_U U_j}$를
+정의한다. 다음으로 $\beta_{ij}$가 내림 자료를 정의함을 확인한다.
+$\mathcal{X}$가 스택이므로 이 내림 자료는 유효하고, $U_i$ 위에서
+$G(x_i)$와 일치하는 $\mathcal{X}_U$의 대상 $y$를 얻는다.
+% P01-E0198
+힌트는 $H(x') = y$로 두는 것이다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackify-universal-property-more}
+표기와 가정은 Lemma \ref{stacks-lemma-stackify-universal-property}에서와 같다.
+앞의 보조정리의 증명에 있는 구성으로 주어지는 범주들의 표준 동치
+$$
+\Mor_{\textit{Fib}/\mathcal{C}}(\mathcal{S}, \mathcal{X})
+=
+\Mor_{\textit{Stacks}/\mathcal{C}}(\mathcal{S}', \mathcal{X})
+$$
+가 있다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackification-fibre-product-fibred-categories}
+$\mathcal{C}$를 사이트라 하자.
+$f : \mathcal{X} \to \mathcal{Y}$와 $g : \mathcal{Z} \to \mathcal{Y}$를
+$\mathcal{C}$ 위의 섬유화된 범주들의 사상이라 하자. 이 경우
+$2$-섬유곱의 스택화는 각 스택화들의 $2$-섬유곱이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X}', \mathcal{Y}', \mathcal{Z}'$으로 각 스택화를 나타내고,
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$의 스택화를
+$\mathcal{W}$로 나타내자. $2$-섬유곱의 구성에 의해 표준 $1$-사상
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to
+\mathcal{X}' \times_{\mathcal{Y}'} \mathcal{Z}'$이 있다. 두 번째
+$2$-섬유곱은 스택이므로(Lemma \ref{stacks-lemma-2-product-stacks}를 보라),
+스택화의 보편 성질(Lemma \ref{stacks-lemma-stackify-universal-property}를
+보라)에 의해 이 $1$-사상은 $1$-사상
+$h : \mathcal{W} \to \mathcal{X}' \times_{\mathcal{Y}'} \mathcal{Z}'$을
+유도한다. 이제 $h$는 스택들의 사상이고, Lemmas
+\ref{stacks-lemma-characterize-ff}와
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff}를 사용하여
+이것이 동치임을 확인할 수 있다.
+
+\medskip\noindent
+따라서 먼저 $h$가 $\mathit{Mor}$-층들의 동형사상을 유도함을 증명하자.
+$\xi, \xi'$를 $U \in \Ob(\mathcal{C})$ 위에 놓이는
+$\mathcal{W}$의 대상이라 하자. 사상
+$$
+h : \mathit{Mor}(\xi, \xi') \longrightarrow \mathit{Mor}(h(\xi), h(\xi'))
+$$
+이 동형사상임을 보이고자 한다. 이를 위해 $U$ 위에서 국소적으로
+작업할 수 있다(Sites, Section \ref{sites-section-glueing-sheaves}를
+보라). 그러므로 $\mathcal{W}$의 구성(Lemma
+\ref{stacks-lemma-stackify}를 보라)에 의해 $\xi, \xi'$가 실제로 $U$ 위의
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$의 대상
+$(x, z, \alpha)$와 $(x', z', \alpha')$에서 온다고 가정할 수 있다.
+같은 보조정리를 다시 사용하면 이 경우 $\mathit{Mor}(\xi, \xi')$는
+다음 준층의 층화이다.
+$$
+V/U \longmapsto
+\Mor_{\mathcal{X}_V}(x|_V, x'|_V)
+\times_{\Mor_{\mathcal{Y}_V}(f(x)|_V, f(x')|_V)}
+\Mor_{\mathcal{Z}_V}(z|_V, z'|_V)
+$$
+그리고 $\mathit{Mor}(h(\xi), h(\xi'))$는 섬유곱
+% P01-E0199
+$$
+\mathit{Mor}(i(x), i(x'))
+\times_{\mathit{Mor}(j(f(x)), j(f(x'))}
+\mathit{Mor}(k(z), k(z'))
+$$
+과 같다. 여기서 $i : \mathcal{X} \to \mathcal{X}'$,
+$j : \mathcal{Y} \to \mathcal{Y}'$,
+$k : \mathcal{Z} \to \mathcal{Z}'$은 표준 함자이다. 층화는 정확하므로
+(따라서 준층의 섬유곱의 층화는 각 층화의 섬유곱이므로) 이 문단에서
+처음 표시한 사상은 동형사상이다.
+
+\medskip\noindent
+마지막으로 $U$ 위의
+$\mathcal{X}' \times_{\mathcal{Y}'} \mathcal{Z}'$의 모든 대상이
+$U$ 위에서 국소적으로 $h$의 본질적 상에 있음을 확인해야 한다. 그러한
+대상을 삼중항 $(x', z', \alpha)$로 쓰자. 그러면 $x'$은 국소적으로
+$\mathcal{X}$의 대상에서 오고, $z'$은 국소적으로 $\mathcal{Z}$의
+대상에서 온다. $x'$, $z'$을 적절히 바꾸고 나면 $\mathcal{Y}'_U$의
+사상 $\alpha$는 국소적으로 $\mathcal{Y}$의 사상에서 온다. 달리 말해,
+$U$ 위의 $\mathcal{X}' \times_{\mathcal{Y}'} \mathcal{Z}'$의 모든
+대상이 $U$ 위에서 국소적으로 사상
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to
+\mathcal{X}' \times_{\mathcal{Y}'} \mathcal{Z}'$의 본질적 상에 있음을
+보였다. 따라서 더욱이 그것은 국소적으로 $h$의 본질적 상에 있다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackification-inertia}
+$\mathcal{C}$를 사이트라 하자.
+$\mathcal{X}$를 $\mathcal{C}$ 위의 섬유화된 범주라 하자. 관성 섬유화
+범주 $\mathcal{I}_\mathcal{X}$의 스택화는 $\mathcal{X}$의 스택화의
+관성이다.
+% P01-E0200
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-stackification-fibre-product-fibred-categories}에 의해
+스택화가 $2$-섬유곱과 양립하고, $\mathcal{C}$ 위의 범주들의 관성을
+$2$-섬유곱으로 나타내는 공식이 있기 때문이다. Categories, Lemma
+\ref{categories-lemma-inertia-fibred-category}를 보라.
+\end{proof}
+
+
+
+
+
+\section{군체로 섬유화된 범주의 스택화}
+\label{stacks-section-stackify-groupoids}
+
+\noindent
+결과는 다음과 같다.
+
+\begin{lemma}
+\label{stacks-lemma-stackify-groupoids}
+$\mathcal{C}$를 사이트라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 $\mathcal{C}$ 위에서 군체로
+섬유화된 범주라 하자. 군체 스택
+$p' : \mathcal{S}' \to \mathcal{C}$와 $\mathcal{C}$ 위에서 군체로
+섬유화된 범주들의 $1$-사상 $G : \mathcal{S} \to \mathcal{S}'$
+(Categories, Definition
+\ref{categories-definition-categories-fibred-in-groupoids-over-C}를 보라)이
+존재하여 다음을 만족한다.
+\begin{enumerate}
+\item 모든 $U \in \Ob(\mathcal{C})$와 임의의
+$x, y \in \Ob(\mathcal{S}_U)$에 대하여 $G$가 유도하는 사상
+$$
+\mathit{Mor}(x, y) \longrightarrow \mathit{Mor}(G(x), G(y))
+$$
+은 오른쪽을 왼쪽의 층화와 동일시한다.
+\item 모든 $U \in \Ob(\mathcal{C})$와 임의의
+$x' \in \Ob(\mathcal{S}'_U)$에 대하여 덮개
+$\{U_i \to U\}_{i \in I}$가 존재하여, 모든 $i \in I$에 대해 대상
+$x'|_{U_i}$가 함자
+$G : \mathcal{S}_{U_i} \to \mathcal{S}'_{U_i}$의 본질적 상에 속한다.
+\end{enumerate}
+더욱이 이 조건들은 유일한 $2$-동형사상의 의미에서 군체 스택
+$\mathcal{S}'$을 결정한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-stackify}를 적용한다. Lemma
+\ref{stacks-lemma-stack-in-groupoids-stack}를 적용하면 결과는 군체 스택이다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackify-groupoids-universal-property}
+$\mathcal{C}$를 사이트라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 $\mathcal{C}$ 위에서 군체로
+섬유화된 범주라 하자. $p' : \mathcal{S}' \to \mathcal{C}$와
+$G : \mathcal{S} \to \mathcal{S}'$를 Lemma
+\ref{stacks-lemma-stackify-groupoids}에서 구성한 군체 스택과 $1$-사상이라 하자.
+% P01-E0201
+이 구성은 다음 보편 성질을 갖는다. 군체 스택
+$q : \mathcal{X} \to \mathcal{C}$와 $\mathcal{C}$ 위의 범주들의
+$1$-사상 $F : \mathcal{S} \to \mathcal{X}$가 주어지면, 도표
+$$
+\xymatrix{
+\mathcal{S} \ar[rr]_F \ar[rd]_G & & \mathcal{X} \\
+& \mathcal{S}' \ar[ru]_H
+}
+$$
+가 $2$-가환이 되게 하는 $1$-사상
+$H : \mathcal{S}' \to \mathcal{X}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma \ref{stacks-lemma-stackify-universal-property}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackification-fibre-product-categories-fibred-in-groupoids}
+$\mathcal{C}$를 사이트라 하자.
+$f : \mathcal{X} \to \mathcal{Y}$와 $g : \mathcal{Z} \to \mathcal{Y}$를
+$\mathcal{C}$ 위에서 군체로 섬유화된 범주들의 사상이라 하자. 이 경우
+$2$-섬유곱의 스택화는 각 스택화들의 $2$-섬유곱이다.
+\end{lemma}
+
+\begin{proof}
+이는 Lemma
+\ref{stacks-lemma-stackification-fibre-product-fibred-categories}의 특수한
+경우이다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{상속된 위상}
+\label{stacks-section-topology}
+
+\noindent
+사이트 위의 섬유화된 범주는 바탕 사이트로부터 표준 위상을 상속받는다는
+것을 알 수 있다.
+
+\begin{lemma}
+\label{stacks-lemma-topology-inherited}
+$\mathcal{C}$를 사이트라 하자. $p : \mathcal{S} \to \mathcal{C}$를
+섬유화된 범주라 하자. $\text{Cov}(\mathcal{S})$를 고정된 공역을 갖는
+$\mathcal{S}$의 사상들의 족 $\{x_i \to x\}_{i \in I}$ 가운데 다음을
+만족하는 것들의 집합이라 하자. (a) 각 $x_i \to x$는 강한 카르테시안
+사상이고, (b) $\{p(x_i) \to p(x)\}_{i \in I}$는 $\mathcal{C}$의
+덮개이다. 그러면 $(\mathcal{S}, \text{Cov}(\mathcal{S}))$는 사이트이다.
+\end{lemma}
+
+\begin{proof}
+Sites, Definition \ref{sites-definition-site}의 세 조건을 확인해야 한다.
+\begin{enumerate}
+\item $x \to y$가 $\mathcal{S}$의 동형사상이면 Categories, Lemma
+\ref{categories-lemma-composition-cartesian}에 의해 강한 카르테시안
+사상이고, $p(x) \to p(y)$는 $\mathcal{C}$의 동형사상이다. 따라서
+$\{p(x) \to p(y)\}$는 $\mathcal{C}$의 덮개이고,
+$\{x \to y\} \in \text{Cov}(\mathcal{S})$이다.
+\item $\{x_i \to x\}_{i\in I} \in \text{Cov}(\mathcal{S})$이고 각
+$i$에 대해 $\{y_{ij} \to x_i\}_{j\in J_i} \in
+\text{Cov}(\mathcal{S})$라고 하자. Categories, Lemma
+\ref{categories-lemma-composition-cartesian}에 의해 각 합성
+$y_{ij} \to x$는 강한 카르테시안 사상이고,
+$\{p(y_{ij}) \to p(x)\}_{i \in I, j\in J_i} \in
+\text{Cov}(\mathcal{C})$이다. 따라서
+$\{y_{ij} \to x\}_{i \in I, j\in J_i} \in
+\text{Cov}(\mathcal{S})$이기도 하다.
+\item $\{x_i \to x\}_{i\in I}\in \text{Cov}(\mathcal{S})$이고
+$y \to x$가 $\mathcal{S}$의 사상이라고 하자.
+$\{p(x_i) \to p(x)\}$가 $\mathcal{C}$의 덮개이므로
+$p(x_i) \times_{p(x)} p(y)$가 존재한다. 따라서 Categories, Lemma
+\ref{categories-lemma-fibred-category-representable-goes-up}에 의해
+$x_i \times_x y$가 존재하고,
+$p(x_i \times_x y) = p(x_i) \times_{p(x)} p(y)$이며,
+$x_i \times_x y \to y$는 강한 카르테시안 사상이다. 또한
+$\{p(x_i) \times_{p(x)} p(y) \to p(y) \}_{i\in I} \in
+\text{Cov}(\mathcal{C})$이므로
+$\{x_i \times_x y \to y \}_{i\in I} \in
+\text{Cov}(\mathcal{S})$이다.
+\end{enumerate}
+이로써 증명이 끝난다.
+\end{proof}
+
+\noindent
+$p : \mathcal{S} \to \mathcal{C}$가 군체로 섬유화되어 있으면
+$\mathcal{S}$의 모든 사상이 강한 카르테시안 사상이므로, Lemma
+\ref{stacks-lemma-topology-inherited}의 사이트 $\mathcal{S}$의 덮개는 다음과
+같이 특징지어진다.
+$$
+\{x_i \to x\} \in \text{Cov}(\mathcal{S})
+\Leftrightarrow
+\{p(x_i) \to p(x)\} \in \text{Cov}(\mathcal{C})
+$$
+
+\begin{definition}
+\label{stacks-definition-topology-inherited}
+$\mathcal{C}$를 사이트라 하자. $p : \mathcal{S} \to \mathcal{C}$를
+섬유화된 범주라 하자. Lemma \ref{stacks-lemma-topology-inherited}의
+$(\mathcal{S}, \text{Cov}(\mathcal{S}))$를 {\it $\mathcal{C}$로부터
+$\mathcal{S}$에 상속된 사이트 구조}라고 한다.
+% P01-E0202
+때로는 이를 {\it $\mathcal{S}$에 $\mathcal{C}$로부터 상속된 위상이
+주어졌다}고 표현한다.
+\end{definition}
+
+\noindent
+특히 이 상황에서는 층들의 토포스 $\Sh(\mathcal{S})$를 얻는다. 이
+토포스는 섬유화된 범주들의 $1$-사상에 대해 함자적임을 알 수 있다.
+
+\begin{lemma}
+\label{stacks-lemma-topology-inherited-functorial}
+$\mathcal{C}$를 사이트라 하자. $F : \mathcal{X} \to \mathcal{Y}$를
+$\mathcal{C}$ 위의 섬유화된 범주들의 $1$-사상이라 하자. 그러면
+$F$는 $\mathcal{C}$로부터 상속된 사이트 구조들 사이의 연속이고
+쌍대연속인 함자이다. 따라서 $F$는
+$f_* = {}_sF = {}_pF$와 $f^{-1} = F^s = F^p$를 만족하는 토포스의 사상
+$f : \Sh(\mathcal{X}) \to \Sh(\mathcal{Y})$를 유도한다. 특히
+$\mathcal{Y}$ 위의 층 $\mathcal{G}$와 $\mathcal{X}$의 대상 $x$에 대해
+$f^{-1}(\mathcal{G})(x) = \mathcal{G}(F(x))$이다.
+\end{lemma}
+
+\begin{proof}
+먼저 $F$가 연속임을 증명하자.
+$\{x_i \to x\}_{i \in I}$를 $\mathcal{X}$의 덮개라 하자. Categories,
+Definition \ref{categories-definition-fibred-categories-over-C}에 의해 함자
+$F$는 강한 카르테시안 사상을 강한 카르테시안 사상으로 보내므로,
+$\{F(x_i) \to F(x)\}_{i \in I}$는 $\mathcal{Y}$의 덮개이다. 이는
+Sites, Definition \ref{sites-definition-continuous}의 (1)을 증명한다.
+또한 $x' \to x$를 $\mathcal{X}$의 사상이라 하자. Categories, Lemma
+\ref{categories-lemma-fibred-category-representable-goes-up}에 의해 섬유곱
+$x_i \times_x x'$가 존재하고 $x_i \times_x x' \to x'$는 강한
+카르테시안 사상이다. 따라서 $F(x_i \times_x x') \to F(x')$는 강한
+카르테시안 사상이다. $\mathcal{Y}$에 Categories, Lemma
+\ref{categories-lemma-fibred-category-representable-goes-up}를 적용하면
+이는 $F(x_i \times_x x') = F(x_i) \times_{F(x)} F(x')$를 뜻한다. 이는
+Sites, Definition \ref{sites-definition-continuous}의 (2)를 증명하므로
+$F$는 연속이다.
+
+\medskip\noindent
+다음으로 $F$가 쌍대연속임을 증명하자. $x \in \Ob(\mathcal{X})$이고
+$\{y_i \to F(x)\}_{i \in I}$가 $\mathcal{Y}$의 덮개라고 하자.
+$\mathcal{C}$의 대응하는 덮개를 $\{U_i \to U\}_{i \in I}$로
+나타내자. 각 $i$에 대해 $U_i \to U$ 위에 놓이는 $\mathcal{X}$의
+강한 카르테시안 사상 $x_i \to x$를 선택하자. 그러면
+$F(x_i) \to F(x)$와 $y_i \to F(x)$는 둘 다 $U_i \to U$ 위에 놓이는
+$\mathcal{Y}$의 강한 카르테시안 사상이다.
+% P01-E0203
+따라서 $F(x)$로 가는 사상들과 양립하는 유일한 동형사상
+$F(x_i) \to y_i$가 $\mathcal{Y}_{U_i}$에 존재한다. 그러므로
+$\{x_i \to x\}_{i \in I}$는 $\mathcal{X}$의 덮개이고,
+$\{F(x_i) \to F(x)\}_{i \in I}$는
+$\{y_i \to F(x)\}_{i \in I}$와 동형이다. 따라서 $F$는 쌍대연속이다.
+Sites, Definition \ref{sites-definition-cocontinuous}를 보라.
+
+\medskip\noindent
+마지막 주장은 처음 두 주장으로부터 따른다. Sites, Lemmas
+\ref{sites-lemma-cocontinuous-morphism-topoi},
+\ref{sites-lemma-pu-sheaf},
+\ref{sites-lemma-when-shriek}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-localizing}
+$\mathcal{C}$를 사이트라 하자. $p : \mathcal{X} \to \mathcal{C}$를
+군체로 섬유화된 범주라 하자. $x \in \Ob(\mathcal{X})$가
+$U = p(x)$ 위에 놓인다고 하자. $\mathcal{X}$에 $\mathcal{C}$로부터
+상속된 위상을 주면, 함자 $p$는 사이트의 동치
+$\mathcal{X}/x \to \mathcal{C}/U$를 유도한다.
+\end{lemma}
+
+\begin{proof}
+여기서 $\mathcal{C}/U$는 사이트 $\mathcal{C}$의 대상 $U$에서의
+국소화이고 $\mathcal{X}/x$도 마찬가지이다. Categories, Definition
+\ref{categories-definition-fibred-groupoids}에 의해 대응
+$x'/x \mapsto p(x')/p(x)$는 범주의 동치
+$\mathcal{X}/x \to \mathcal{C}/U$를 정의한다. 그러면 Definition
+\ref{stacks-definition-topology-inherited}에 의해 $\mathcal{X}/x$에서 $x'$의
+덮개들은 $\mathcal{C}/U$에서 $p(x')$의 덮개들과 전단사로 대응한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-groupoids-over-stack-in-groupoids}
+$\mathcal{C}$를 사이트라 하자. $p : \mathcal{X} \to \mathcal{C}$와
+$q : \mathcal{Y} \to \mathcal{C}$를 군체 스택이라 하자.
+$F : \mathcal{X} \to \mathcal{Y}$를 $\mathcal{C}$ 위의 범주들의
+$1$-사상이라 하자. $F$가 $\mathcal{X}$를 $\mathcal{Y}$ 위에서 군체로
+섬유화된 범주로 만들면, $\mathcal{X}$는 $\mathcal{Y}$ 위의 군체
+스택이다($\mathcal{C}$로부터 상속된 위상을 갖는다).
+\end{lemma}
+
+\begin{proof}
+대상에 대한 내림을 증명하자. $\{y_i \to y\}$를 $\mathcal{Y}$의
+덮개라 하자. $(x_i, \varphi_{ij})$를 이 덮개에 관한 $\mathcal{X}$의
+내림 자료라 하자. 그러면 $(x_i, \varphi_{ij})$는 $\mathcal{C}$의 덮개
+$\{q(y_i) \to q(y)\}$에 관한 내림 자료이기도 하다. $\mathcal{X}$가
+군체 스택이므로, $q(y)$ 위의 대상 $x$와 $q(y_i)$ 위의 동형사상
+$\psi_i : x|_{q(y_i)} \to x_i$를 얻는다. 이들은
+$\varphi_{ij}$와 양립한다. 즉
+$$
+\varphi_{ij} = \psi_j|_{q(y_i) \times_{q(y)} q(y_j)}
+\circ \psi_i^{-1}|_{q(y_i) \times_{q(y)} q(y_j)}.
+$$
+$\mathcal{C}/p(x)$ 위의 층
+$\mathit{I} = \mathit{Isom}_\mathcal{Y}(F(x), y)$를 생각하자.
+% P01-E0204
+$F(x_i) = y_i$이므로
+$s_i = F(\psi_i) \in \mathit{I}(q(x_i))$임에 유의하자.
+$\{y_i \to y\}$ 위의 내림 자료로 시작했으므로
+$F(\varphi_{ij}) = \text{id}$이고, 위 공식은
+$s_i|_{q(y_i) \times_{q(y)} q(y_j)} =
+s_j|_{q(y_i) \times_{q(y)} q(y_j)}$임을 보여 준다. 따라서 국소 절단
+$s_i$들은 $s : F(x) \to y$로 붙는다. $F$가 군체로 섬유화되어
+있으므로 $x$는 $F(x') = y$를 만족하는 어떤 대상 $x'$과 동형이다.
+$y$ 위의 $\mathcal{X}$의 섬유 범주에서 $x'$이 내림 자료
+$(x_i, \varphi_{ij})$가 제기하는 내림 문제의 해라는 확인은 생략한다.
+$\mathcal{X}/\mathcal{Y}$의 $\mathit{Isom}$-준층의 층 성질에 대한
+증명도 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-over-stack}
+$\mathcal{C}$를 사이트라 하자. $p : \mathcal{X} \to \mathcal{C}$를
+스택이라 하자. $\mathcal{X}$에 $\mathcal{C}$로부터 상속된 위상을 주고
+$q : \mathcal{Y} \to \mathcal{X}$를 스택이라 하자. 그러면
+$\mathcal{Y}$는 $\mathcal{C}$ 위의 스택이다. $p$와 $q$가 군체 스택을
+정의하면 $\mathcal{Y}$는 $\mathcal{C}$ 위의 군체 스택이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{Y}$가 $\mathcal{C}$ 위의 스택임을 증명하기 위해 Definition
+\ref{stacks-definition-stack}의 세 조건을 확인한다. Categories, Lemma
+\ref{categories-lemma-fibred-over-fibred}에 의해 $\mathcal{Y}$는
+$\mathcal{C}$ 위의 섬유화된 범주이다. 따라서 조건 (1)이 성립한다.
+
+\medskip\noindent
+$U$를 $\mathcal{C}$의 대상이라 하고, $y_1, y_2$를 $U$ 위에 놓이는
+$\mathcal{Y}$의 대상이라 하자. $\mathcal{X}$에서 $x_i = q(y_i)$로
+나타내자. $\mathcal{C}/U$ 위의 준층들의 사상
+$$
+q : \mathit{Mor}_{\mathcal{Y}/\mathcal{C}}(y_1, y_2)
+\longrightarrow
+\mathit{Mor}_{\mathcal{X}/\mathcal{C}}(x_1, x_2)
+$$
+을 생각하자. Lemma \ref{stacks-lemma-presheaf-mor-map-fibred-categories}를 보라.
+$\{U_i \to U\}$를 덮개라 하고 $\varphi_i$를 왼쪽 준층의 $U_i$ 위의
+절단이라 하자. $\varphi_i$와 $\varphi_j$가
+$U_i \times_U U_j$ 위에서 같은 절단으로 제한된다고 하자. $\varphi_i$로
+제한되는 사상 $\varphi : y_1 \to y_2$를 찾아야 한다. 두 번째 준층은
+가정에 의해 층이므로, $U$ 위의 어떤 사상
+$\psi : x_1 \to x_2$에 대해 $q(\varphi_i) = \psi|_{U_i}$임에 유의하자.
+$y_{12} \to y_2$를 $\psi$ 위에 놓이는 $\mathcal{Y}$의 강한
+$\mathcal{X}$-카르테시안 사상이라 하자. 그러면 $\varphi_i$는
+$x_1|_{U_i}$ 위의 사상
+$\varphi'_i : y_1|_{U_i} \to y_{12}|_{U_i}$에 대응한다. 달리 말해,
+$\varphi'_i$들은 준층
+$$
+\mathit{Mor}_{\mathcal{Y}/\mathcal{X}}(y_1, y_{12})
+$$
+의 덮개 $\{x_1|_{U_i} \to x_1\}$의 원소들 위의 국소 절단을 정의한다.
+가정에 의해 이들은 유일한 사상 $y_1 \to y_{12}$로 붙고, 이를 주어진
+사상 $y_{12} \to y_2$와 합성하면 원하는 사상 $y_1 \to y_2$를 얻는다.
+
+\medskip\noindent
+마지막으로 내림 자료가 유효함을 보이자. $\{f_i : U_i \to U\}$를
+$\mathcal{C}$의 덮개라 하고 $(y_i, \varphi_{ij})$를 이 덮개에 관한
+내림 자료라 하자(Definition \ref{stacks-definition-descent-data}).
+$x_i = q(y_i)$와 $\psi_{ij} = q(\varphi_{ij})$로 두면
+$\mathcal{X}$의 덮개에 대한 내림 자료 $(x_i, \psi_{ij})$를 얻는다.
+$\mathcal{X}$에 대한 가정에 의해 $x_i = x|_{U_i}$이고
+$\psi_{ij}$가 표준 내림 자료와 같다고 가정할 수 있다(Definition
+\ref{stacks-definition-effective-descent-datum}). 이 경우
+$\{x|_{U_i} \to x\}$는 덮개이고, $(y_i, \varphi_{ij})$를 이 덮개에
+관한 내림 자료로 볼 수 있다.
+% P01-E0205
+$\mathcal{Y}$가 $\mathcal{C}$ 위의 스택이라는 가정에 의해 이것은
+유효하며, 이로써 조건 (3)의 증명이 끝난다.
+
+\medskip\noindent
+마지막 주장은 $\mathcal{Y}$가 $\mathcal{C}$ 위의 스택이고 Categories,
+Lemma
+\ref{categories-lemma-fibred-in-groupoids-over-fibred-in-groupoids}에 의해
+군체로 섬유화되어 있으므로 따른다.
+\end{proof}
+
+
+
+\section{제르브}
+\label{stacks-section-gerbes}
+
+\noindent
+제르브는 특별한 종류의 군체 스택이다.
+
+\begin{definition}
+\label{stacks-definition-gerbe}
+사이트 $\mathcal{C}$ 위의 {\it 제르브}란 $\mathcal{C}$ 위의 범주
+$p : \mathcal{S} \to \mathcal{C}$로서 다음을 만족하는 것을 말한다.
+\begin{enumerate}
+\item $p : \mathcal{S} \to \mathcal{C}$는 $\mathcal{C}$ 위의
+군체 스택이다(Definition \ref{stacks-definition-stack-in-groupoids} 참조).
+\item $U \in \Ob(\mathcal{C})$에 대해 $\mathcal{C}$의 덮개
+$\{U_i \to U\}$가 존재하여 $\mathcal{S}_{U_i}$는 공집합이 아니다.
+\item $U \in \Ob(\mathcal{C})$와
+$x, y \in \Ob(\mathcal{S}_U)$에 대해 $\mathcal{C}$의 덮개
+$\{U_i \to U\}$가 존재하여 $\mathcal{S}_{U_i}$에서
+$x|_{U_i} \cong y|_{U_i}$이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+달리 말해, 제르브는 임의의 두 대상이 국소적으로 동형이고 대상들이
+국소적으로 존재하는 군체 스택이다.
+
+\begin{lemma}
+\label{stacks-lemma-gerbe-equivalent}
+$\mathcal{C}$를 사이트라 하자.
+$\mathcal{S}_1$, $\mathcal{S}_2$를 $\mathcal{C}$ 위의 범주라 하자.
+$\mathcal{S}_1$과 $\mathcal{S}_2$가 $\mathcal{C}$ 위의 범주로서
+동치라고 하자. 그러면 $\mathcal{S}_1$이 $\mathcal{C}$ 위의
+제르브일 필요충분조건은 $\mathcal{S}_2$가 $\mathcal{C}$ 위의
+제르브인 것이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{S}_1$이 $\mathcal{C}$ 위의 제르브라고 가정하자. Lemma
+\ref{stacks-lemma-stack-in-groupoids-equivalent}에 의해 $\mathcal{S}_2$는
+$\mathcal{C}$ 위의 군체 스택이다.
+$F : \mathcal{S}_1 \to \mathcal{S}_2$,
+$G : \mathcal{S}_2 \to \mathcal{S}_1$을 $\mathcal{C}$ 위의 범주들의
+동치라 하자. $U \in \Ob(\mathcal{C})$가 주어지면
+$(\mathcal{S}_1)_{U_i}$가 공집합이 아니게 하는 덮개
+$\{U_i \to U\}$가 존재한다. $F$를 적용하면
+$(\mathcal{S}_2)_{U_i}$도 공집합이 아님을 알 수 있다.
+$U \in \Ob(\mathcal{C})$와
+$x, y \in \Ob((\mathcal{S}_2)_U)$가 주어지면
+$(\mathcal{S}_1)_{U_i}$에서
+$G(x)|_{U_i} \cong G(y)|_{U_i}$이게 하는 $\mathcal{C}$의 덮개
+$\{U_i \to U\}$가 존재한다. Categories, Lemma
+\ref{categories-lemma-equivalence-fibred-categories}에 의해 이는
+$(\mathcal{S}_2)_{U_i}$에서
+$x|_{U_i} \cong y|_{U_i}$임을 뜻한다.
+\end{proof}
+
+\noindent
+제르브의 정의를 조금 일반화하고자 한다. 즉, 사이트 $\mathcal{C}$
+위의 군체 스택들의 $1$-사상
+$F : \mathcal{X} \to \mathcal{Y}$가 주어졌다고 하자.
+$\mathcal{X}$가 $\mathcal{Y}$ 위의 제르브라는 말의 뜻을 정하고자
+한다. Section \ref{stacks-section-topology}에 의해 범주 $\mathcal{Y}$는
+$\mathcal{C}$로부터 사이트의 구조를 상속받는다. 순진한 추측은
+$\mathcal{X} \to \mathcal{Y}$가 위 의미의 제르브라고 요구하는
+것이다. 다만 이렇게 얻은 개념은 $\mathcal{X}$를 $\mathcal{C}$ 위의
+동치인 군체 스택으로 바꾸어도 불변이지 않으며, $\mathcal{Y}$ 위에서
+군체로 섬유화된다는 성질조차 그러하다. 그러나 $\mathcal{X}$를
+$\mathcal{C}$ 위에서 동치이면서 $\mathcal{Y}$ 위에서 군체로
+섬유화된 군체 스택으로 바꿀 수 있고, 그 뒤에는 $\mathcal{Y}$ 위의
+제르브라는 성질이 이 선택에 무관함이 드러난다. 정확한 정식화는
+다음과 같다.
+
+\begin{lemma}
+\label{stacks-lemma-when-gerbe}
+$\mathcal{C}$를 사이트라 하자. $p : \mathcal{X} \to \mathcal{C}$와
+$q : \mathcal{Y} \to \mathcal{C}$를 군체 스택이라 하자.
+$F : \mathcal{X} \to \mathcal{Y}$를 $\mathcal{C}$ 위의 범주들의
+$1$-사상이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $F = F' \circ a$인 어떤 (동치로, 임의의) 분해에서
+$a : \mathcal{X} \to \mathcal{X}'$가 $\mathcal{C}$ 위의 범주들의
+동치이고 $F'$가 군체로 섬유화되어 있을 때, 사상
+$F' : \mathcal{X}' \to \mathcal{Y}$는 제르브이다(여기서
+$\mathcal{Y}$의 위상은 $\mathcal{C}$로부터 상속된다).
+\item 다음 두 조건이 성립한다.
+\begin{enumerate}
+\item $U \in \Ob(\mathcal{C})$ 위에 놓이는
+$y \in \Ob(\mathcal{Y})$에 대해 $\mathcal{C}$의 덮개
+$\{U_i \to U\}$와 $U_i$ 위에 놓이는 $\mathcal{X}$의 대상
+$x_i$들이 존재하여 $\mathcal{Y}_{U_i}$에서
+$F(x_i) \cong y|_{U_i}$이다.
+\item $U \in \Ob(\mathcal{C})$,
+$x, x' \in \Ob(\mathcal{X}_U)$ 및 $\mathcal{Y}_U$의 사상
+$b : F(x) \to F(x')$에 대해 $\mathcal{C}$의 덮개
+$\{U_i \to U\}$와 $\mathcal{X}_{U_i}$의 사상
+$a_i : x|_{U_i} \to x'|_{U_i}$가 존재하여
+$F(a_i) = b|_{U_i}$이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma
+\ref{categories-lemma-ameliorate-morphism-categories-fibred-groupoids}에
+의해 $a : \mathcal{X} \to \mathcal{X}'$가 $\mathcal{C}$ 위의
+범주들의 동치이고 $F'$가 군체로 섬유화된 분해
+$F = F' \circ a$가 존재한다. Categories, Lemma
+\ref{categories-lemma-amelioration-unique}에 의해 그러한 두 분해
+$F = F' \circ a = F'' \circ b$가 주어지면
+$\mathcal{X}'$과 $\mathcal{X}''$은 $\mathcal{Y}$ 위의 범주로서
+동치이다. 따라서 Lemma \ref{stacks-lemma-gerbe-equivalent}는 조건 (1)이
+분해의 선택에 무관함을 보장한다. 더욱이 이는 Categories, Lemma
+\ref{categories-lemma-ameliorate-morphism-categories-fibred-groupoids}의
+증명에서처럼
+$\mathcal{X}' = \mathcal{X} \times_{F, \mathcal{Y}, \text{id}} \mathcal{Y}$
+라고 가정해도 됨을 뜻한다.
+
+\medskip\noindent
+(a)와 (b)가 $\mathcal{X}' \to \mathcal{Y}$가 제르브임을 함의함을
+증명하자. 먼저 Lemma
+\ref{stacks-lemma-stack-in-groupoids-over-stack-in-groupoids}에 의해
+$\mathcal{X}' \to \mathcal{Y}$는 군체 스택이다. 다음으로
+$U \in \Ob(\mathcal{C})$ 위에 놓이는 $\mathcal{Y}$의 대상
+$y$를 택하자. (a)에 의해 $\mathcal{C}$의 덮개
+$\{U_i \to U\}$, $U_i$ 위에 놓이는 $\mathcal{X}$의 대상 $x_i$,
+그리고 $\mathcal{Y}_{U_i}$의 동형사상
+$f_i : F(x_i) \to y|_{U_i}$를 찾을 수 있다. 그러면
+$(U_i, x_i, y|_{U_i}, f_i)$는 $\mathcal{X}'_{U_i}$의 대상이므로
+Definition \ref{stacks-definition-gerbe}의 두 번째 조건이 성립한다.
+마지막으로 $(U, x, y, f)$와 $(U, x', y, f')$를 같은 대상
+$y \in \Ob(\mathcal{Y})$ 위에 놓이는 $\mathcal{X}'$의 대상이라 하자.
+$b = (f')^{-1} \circ f$로 두자. 조건 (b)에 의해 덮개
+$\{U_i \to U\}$와 $\mathcal{X}_{U_i}$의 동형사상
+$a_i : x|_{U_i} \to x'|_{U_i}$를 찾아
+$F(a_i) = b|_{U_i}$가 되게 할 수 있다. 그러면
+$$
+(a_i, \text{id}) : (U, x, y, f)|_{U_i} \to (U, x', y, f')|_{U_i}
+$$
+는 원하는 대로 $\mathcal{X}'_{U_i}$의 사상이다. 이로써 (2)가
+(1)을 함의함을 증명했다.
+
+\medskip\noindent
+(1)이 (2)를 함의함을 증명하려면 앞 문단의 논증을 역으로 읽으면
+된다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{definition}
+\label{stacks-definition-gerbe-over-stack-in-groupoids}
+$\mathcal{C}$를 사이트라 하자. $\mathcal{X}$와 $\mathcal{Y}$를
+$\mathcal{C}$ 위의 군체 스택이라 하자.
+$F : \mathcal{X} \to \mathcal{Y}$를 $\mathcal{C}$ 위의 범주들의
+$1$-사상이라 하자. Lemma \ref{stacks-lemma-when-gerbe}의 동치 조건들이
+성립하면 $\mathcal{X}$를 $\mathcal{Y}$ {\it 위의 제르브}라고 한다.
+\end{definition}
+
+\noindent
+이 정의는 Definition \ref{stacks-definition-gerbe}와 충돌하지 않는다.
+실제로 $\mathcal{Y} = \mathcal{C}$인 경우 Lemma
+\ref{stacks-lemma-when-gerbe}의 (1)에서
+$\mathcal{X}' = \mathcal{X}$로 둘 수 있다. Lemma
+\ref{stacks-lemma-when-gerbe}의 조건 (2)(a), (2)(b)는 Definition
+\ref{stacks-definition-gerbe}의 조건 (2), (3)과 취지가 매우 비슷하다.
+즉, (2)(a)는 대상들의 동형류의 준층 사이의 사상이 층화 후 전사가
+됨을 말한다. 또한 (2)(b)는 임의의 $U$와
+$x, x' \in \Ob(\mathcal{X}_U)$에 대해
+$$
+\mathit{Isom}_\mathcal{X}(x, x')
+\longrightarrow
+\mathit{Isom}_\mathcal{Y}(F(x), F(x'))
+$$
+가 $\mathcal{C}/U$ 위의 층들의 전사임을 말한다.
+
+\begin{lemma}
+\label{stacks-lemma-base-change-gerbe}
+$\mathcal{C}$를 사이트라 하자.
+$$
+\xymatrix{
+\mathcal{X}' \ar[r]_{G'} \ar[d]_{F'} & \mathcal{X} \ar[d]^F \\
+\mathcal{Y}' \ar[r]^G & \mathcal{Y}
+}
+$$
+를 $\mathcal{C}$ 위의 군체 스택들의 $2$-섬유곱이라 하자.
+$\mathcal{X}$가 $\mathcal{Y}$ 위의 제르브이면
+$\mathcal{X}'$은 $\mathcal{Y}'$ 위의 제르브이다.
+\end{lemma}
+
+\begin{proof}
+% P01-E0206
+$2$-섬유곱의 유일성에 의해 Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C}에서처럼
+$\mathcal{X}' = \mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$라고
+가정할 수 있다.
+$\mathcal{Y}' \times_\mathcal{Y} \mathcal{X} \to \mathcal{Y}'$에
+대해 Lemma \ref{stacks-lemma-when-gerbe}의 성질 (2)(a), (2)(b)를 증명하자.
+
+\medskip\noindent
+$\mathcal{C}$의 대상 $U$ 위에 놓이는 $\mathcal{Y}'$의 대상
+$y'$을 택하자. 가정에 의해 $U$의 덮개 $\{U_i \to U\}$와
+$x_i \in \mathcal{X}_{U_i}$가 존재하며, 동형사상
+$\alpha_i : G(y')|_{U_i} \to F(x_i)$가 있다. 그러면
+$(U_i, y'|_{U_i}, x_i, \alpha_i)$는 $U_i$ 위의
+$\mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$의 대상으로서
+$\mathcal{Y}'$에서의 상은 $y'|_{U_i}$이다. 따라서 (2)(a)가 성립한다.
+
+\medskip\noindent
+$U \in \Ob(\mathcal{C})$라 하고, $x'_1, x'_2$를 $U$ 위의
+$\mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$의 대상이라 하며,
+$b' : F'(x'_1) \to F'(x'_2)$를 $\mathcal{Y}'_U$의 사상이라 하자.
+$x'_i = (U, y'_i, x_i, \alpha_i)$로 쓰자.
+% P01-E0208
+$F'(x'_i) = x_i$이고 $G'(x'_i) = y'_i$임에 유의하자. 가정에 의해
+$\mathcal{C}$의 덮개 $\{U_i \to U\}$와
+$\mathcal{X}_{U_i}$의 사상
+$a_i : x_1|_{U_i} \to x_2|_{U_i}$가 존재하여
+$F(a_i) = G(b')|_{U_i}$이다. 그러면
+$(b'|_{U_i}, a_i)$는 (2)(b)에서 요구한 사상
+$x'_1|_{U_i} \to x'_2|_{U_i}$이다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-composition-gerbe}
+$\mathcal{C}$를 사이트라 하자.
+$F : \mathcal{X} \to \mathcal{Y}$와
+$G : \mathcal{Y} \to \mathcal{Z}$를 $\mathcal{C}$ 위의 군체
+스택들의 $1$-사상이라 하자. $\mathcal{X}$가 $\mathcal{Y}$ 위의
+제르브이고 $\mathcal{Y}$가 $\mathcal{Z}$ 위의 제르브이면
+$\mathcal{X}$는 $\mathcal{Z}$ 위의 제르브이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X} \to \mathcal{Z}$에 대해 Lemma
+\ref{stacks-lemma-when-gerbe}의 성질 (2)(a), (2)(b)를 증명하자.
+
+\medskip\noindent
+$\mathcal{C}$의 대상 $U$ 위에 놓이는 $\mathcal{Z}$의 대상
+$z$를 택하자. $G$에 대한 가정에 의해 $U$의 덮개
+$\{U_i \to U\}$와 $y_i \in \mathcal{Y}_{U_i}$가 존재하여
+$G(y_i) \cong z|_{U_i}$이다. $F$에 대한 가정에 의해 덮개
+$\{U_{ij} \to U_i\}$와 $x_{ij} \in \mathcal{X}_{U_{ij}}$가
+존재하여 $F(x_{ij}) \cong y_i|_{U_{ij}}$이다. 그러면
+$\{U_{ij} \to U\}$는 $\mathcal{C}$의 덮개이고
+$(G \circ F)(x_{ij}) \cong z|_{U_{ij}}$이다. 따라서 (2)(a)가
+성립한다.
+
+\medskip\noindent
+$U \in \Ob(\mathcal{C})$라 하고, $x_1, x_2$를 $U$ 위의
+$\mathcal{X}$의 대상이라 하며,
+$c : (G \circ F)(x_1) \to (G \circ F)(x_2)$를
+$\mathcal{Z}_U$의 사상이라 하자. $G$에 대한 가정에 의해
+$U$의 덮개 $\{U_i \to U\}$와 $\mathcal{Y}_{U_i}$의 사상
+$b_i : F(x_1)|_{U_i} \to F(x_2)|_{U_i}$가 존재하여
+$G(b_i) = c|_{U_i}$이다. $F$에 대한 가정에 의해 덮개
+$\{U_{ij} \to U_i\}$와 $\mathcal{X}_{U_{ij}}$의 사상
+$a_{ij} : x_1|_{U_{ij}} \to x_2|_{U_{ij}}$가 존재하여
+$F(a_{ij}) = b_i|_{U_{ij}}$이다. 그러면
+$\{U_{ij} \to U\}$는 $\mathcal{C}$의 덮개이고
+$(G \circ F)(a_{ij}) = c|_{U_{ij}}$이므로 (2)(b)가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-gerbe-descent}
+$\mathcal{C}$를 사이트라 하자.
+$$
+\xymatrix{
+\mathcal{X}' \ar[r]_{G'} \ar[d]_{F'} & \mathcal{X} \ar[d]^F \\
+\mathcal{Y}' \ar[r]^G & \mathcal{Y}
+}
+$$
+를 $\mathcal{C}$ 위의 군체 스택들의 $2$-카르테시안 도표라 하자.
+모든 $U \in \Ob(\mathcal{C})$와
+$x \in \Ob(\mathcal{Y}_U)$에 대해 덮개
+$\{U_i \to U\}$가 존재하여 $x|_{U_i}$가
+$G : \mathcal{Y}'_{U_i} \to \mathcal{Y}_{U_i}$의 본질적 상에
+속하고, $\mathcal{X}'$이 $\mathcal{Y}'$ 위의 제르브이면
+$\mathcal{X}$는 $\mathcal{Y}$ 위의 제르브이다.
+\end{lemma}
+
+\begin{proof}
+% P01-E0207
+$2$-섬유곱의 유일성에 의해 Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C}에서처럼
+$\mathcal{X}' = \mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$라고
+가정할 수 있다. $\mathcal{X} \to \mathcal{Y}$에 대해 Lemma
+\ref{stacks-lemma-when-gerbe}의 성질 (2)(a), (2)(b)를 증명하자.
+
+\medskip\noindent
+$\mathcal{C}$의 대상 $U$ 위에 놓이는 $\mathcal{Y}$의 대상
+$y$를 택하자. 가정에 의해 $U$의 덮개 $\{U_i \to U\}$와
+$y'_i \in \mathcal{Y}'_{U_i}$가 존재하여
+$G(y'_i) \cong y|_{U_i}$이다. $\mathcal{X}' \to \mathcal{Y}'$에
+대한 (2)(a)에 의해 덮개 $\{U_{ij} \to U_i\}$와 $U_{ij}$ 위의
+$\mathcal{X}'$의 대상 $x'_{ij}$가 존재한다.
+% P01-E0209
+$F'(x'_{ij})$는 $y'_i$의 $U_{ij}$로의 제한과 동형이다. 그러면
+$\{U_{ij} \to U\}$는 $\mathcal{C}$의 덮개이고
+$G'(x'_{ij})$들은 $U_{ij}$ 위의 $\mathcal{X}$의 대상으로서
+$\mathcal{Y}$에서의 상은 $y|_{U_{ij}}$의 제한과 동형이다.
+이로써 $\mathcal{X} \to \mathcal{Y}$에 대해 (2)(a)가 성립한다.
+
+\medskip\noindent
+$U \in \Ob(\mathcal{C})$라 하고, $x_1, x_2$를 $U$ 위의
+$\mathcal{X}$의 대상이라 하며,
+$b : F(x_1) \to F(x_2)$를 $\mathcal{Y}_U$의 사상이라 하자.
+가정에 의해 덮개 $\{U_i \to U\}$와 $U_i$ 위의
+$\mathcal{Y}'$의 대상 $y'_i$들을 택하여 동형사상
+$\alpha_i : G(y'_i) \to F(x_1)|_{U_i}$가 존재하게 할 수 있다.
+그러면 $U_i$ 위의 $\mathcal{X}'$의 대상
+$$
+x'_{1i} = (U_i, y'_i, x_1|_{U_i}, \alpha_i)
+\quad\text{and}\quad
+x'_{2i} = (U_i, y'_i, x_2|_{U_i}, b|_{U_i} \circ \alpha_i)
+$$
+를 얻는다. $y'_i$ 위의 항등사상은 사상
+$F'(x'_{1i}) \to F'(x'_{2i})$이다.
+$\mathcal{X}' \to \mathcal{Y}'$에 대한 (2)(b)에 의해 덮개
+$\{U_{ij} \to U_i\}$와 사상
+$a'_{ij} : x'_{1i}|_{U_{ij}} \to x'_{2i}|_{U_{ij}}$가 존재하여
+$F'(a'_{ij}) = \text{id}_{y'_i}|_{U_{ij}}$이다.
+$\mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$에서 사상의 정의를
+풀어 쓰면
+$G'(a'_{ij}) : x_1|_{U_{ij}} \to x_2|_{U_{ij}}$가 찾던 사상임을
+알 수 있다. 즉, $\mathcal{X} \to \mathcal{Y}$에 대해 (2)(b)가
+성립한다.
+\end{proof}
+
+\noindent
+자기동형사상 층들이 모두 아벨인 제르브는 대수기하학에서 중요한
+역할을 한다.
+
+\begin{lemma}
+\label{stacks-lemma-gerbe-abelian-auts}
+$p : \mathcal{S} \to \mathcal{C}$를 사이트 $\mathcal{C}$ 위의
+제르브라 하자. 모든 $U \in \Ob(\mathcal{C})$와
+$x \in \Ob(\mathcal{S}_U)$에 대해 $\mathcal{C}/U$ 위의 군의 층
+$\mathit{Aut}(x) = \mathit{Isom}(x, x)$가 아벨이라고 가정하자.
+그러면 다음이 존재한다.
+\begin{enumerate}
+\item $\mathcal{C}$ 위의 아벨 군의 층 $\mathcal{G}$,
+\item 모든 $U \in \Ob(\mathcal{C})$와 모든
+$x \in \Ob(\mathcal{S}_U)$에 대한 동형사상
+$\mathcal{G}|_U \to \mathit{Aut}(x)$.
+\end{enumerate}
+이들은 모든 $U$와 $\mathcal{S}_U$의 모든 사상
+$\varphi : x \to y$에 대해 도표
+$$
+\xymatrix{
+\mathcal{G}|_U \ar[d] \ar@{=}[rr] & & \mathcal{G}|_U \ar[d] \\
+\mathit{Aut}(x)
+\ar[rr]^{\alpha \mapsto \varphi \circ \alpha \circ \varphi^{-1}} & &
+\mathit{Aut}(y)
+}
+$$
+가 가환하도록 한다.
+\end{lemma}
+
+\begin{proof}
+$x, y$를 $U = p(x) = p(y)$를 만족하는 $\mathcal{S}$의 두 대상이라
+하자.
+
+\medskip\noindent
+$U$ 위의 사상 $\varphi : x \to y$가 존재하면 그것은
+동형사상이고, $\alpha$를
+$\varphi \circ \alpha \circ \varphi^{-1}$로 보내는 동형사상
+$\mathit{Aut}(x) \to \mathit{Aut}(y)$를 얻는다. 더욱이
+$\mathit{Aut}(x)$가 가환이라고 가정했으므로 간단한 계산에 의해
+이 동형사상은 $\varphi$의 선택에 무관하다. 실제로 $\psi$가 두 번째
+그러한 사상이면
+$$
+\varphi \circ \alpha \circ \varphi^{-1} =
+\psi \circ \psi^{-1} \circ \varphi \circ \alpha \circ \varphi^{-1} =
+\psi \circ \alpha \circ \psi^{-1} \circ \varphi \circ \varphi^{-1} =
+\psi \circ \alpha \circ \psi^{-1}
+$$
+따라서 층들의 표준 동형사상
+$\mathit{Aut}(x) \to \mathit{Aut}(y)$를 얻는다. 또한 세 번째 대상
+$z$와 사상 $y \to z$가 존재한다면(따라서 사상 $x \to z$도
+존재한다), 표준 동형사상
+$\mathit{Aut}(x) \to \mathit{Aut}(y)$,
+$\mathit{Aut}(y) \to \mathit{Aut}(z)$,
+$\mathit{Aut}(x) \to \mathit{Aut}(z)$은 다음 도표가 가환한다는
+의미에서 양립한다.
+$$
+\xymatrix{
+\mathit{Aut}(x) \ar[rd] \ar[rr] & &  \mathit{Aut}(z) \\
+& \mathit{Aut}(y) \ar[ru]
+}
+$$
+
+\medskip\noindent
+$U$ 위에서 $x$로부터 $y$로 가는 사상이 없다면, 사상
+$x|_{U_i} \to y|_{U_i}$가 존재하게 하는 덮개
+$\{U_i \to U\}$를 택할 수 있다. 이로부터 표준 동형사상
+$$
+\mathit{Aut}(x)|_{U_i} \longrightarrow \mathit{Aut}(y)|_{U_i}
+$$
+을 얻으며, 표준성에 의해 이들은 $U_i \times_U U_j$ 위에서
+일치한다. 층의 붙이기(Sites, Lemma \ref{sites-lemma-glue-maps})에
+의해 각 $U_i$로의 제한이 앞 문단의 표준 동형사상인 유일한 동형사상
+$\mathit{Aut}(x) \to \mathit{Aut}(y)$를 얻는다. 위와 마찬가지로
+이 표준 동형사상들은 $U$ 위의 세 번째 대상이 있을 때 양립 조건을
+만족한다.
+
+\medskip\noindent
+$U$ 위의 $\mathcal{S}$의 섬유 범주가 공집합이면 어떻게 되는가?
+이 경우 덮개 $\{U_i \to U\}$와 $U_i$ 위의 $\mathcal{S}$의 대상
+$x_i$들을 찾을 수 있다. 이제
+$\mathcal{G}_i = \mathit{Aut}(x_i)$로 둔다. 위에서 표준 동형사상
+$$
+\varphi_{ij} :
+\mathcal{G}_i|_{U_i \times_U U_j}
+\longrightarrow
+\mathcal{G}_j|_{U_i \times_U U_j}
+$$
+을 얻었고, 이들의 $U_i \times_U U_j \times_U U_k$로의 제한은
+Sites, Section \ref{sites-section-glueing-sheaves}에서 설명한
+코사이클 조건을 만족한다. Sites, Lemma
+\ref{sites-lemma-glue-sheaves}에 의해 $U$ 위의 층
+$\mathcal{G}$를 얻으며, 이것의 $U_i$로의 제한은 붙이기 사상
+$\varphi_{ij}$와 양립하는 방식으로 $\mathcal{G}_i$를 준다.
+
+\medskip\noindent
+$\mathcal{C}$가 종대상 $U$를 가지면 방금 구성한 층을
+$\mathcal{G}$로 택할 수 있으므로 이것으로 증명이 끝난다.
+일반적인 경우에는 변하는 $U$ 위에서 구성한 층 $\mathcal{G}$들이
+표준적인 방식으로 양립함을 확인해야 한다. 이는 생략한다.
+\end{proof}
+
+
+
+\section{스택의 함자성}
+\label{stacks-section-inverse-image}
+
+\noindent
+이 절에서는 스택의 기저 사이트를 바꾸고자 할 때 무슨 일이 생기는지
+연구한다. 처음 읽을 때에는 이 절을 건너뛰어도 된다.
+
+\medskip\noindent
+$u : \mathcal{C} \to \mathcal{D}$를 범주 사이의 함자라 하자.
+$p : \mathcal{S} \to \mathcal{D}$를 $\mathcal{D}$ 위의 범주라 하자.
+이 상황에서 다음과 같이 정의되는 $\mathcal{C}$ 위의 범주를
+$u^p\mathcal{S}$로 나타낸다.
+\begin{enumerate}
+\item $u^p\mathcal{S}$의 대상은 $\mathcal{C}$의 대상 $U$와
+$\mathcal{S}_{u(U)}$의 대상 $y$로 이루어진 쌍 $(U, y)$이다.
+\item 사상 $(a, \beta) : (U, y) \to (U', y')$는
+$\mathcal{C}$의 사상 $a : U \to U'$와 $\mathcal{S}$의 사상
+$\beta : y \to y'$로 주어지며, $p(\beta) = u(a)$를 만족한다.
+\end{enumerate}
+이 정의들에 따라 $U$ 위의 $u^p\mathcal{S}$의 섬유 범주는
+$u(U)$ 위의 $\mathcal{S}$의 섬유 범주와 같다.
+
+\begin{lemma}
+\label{stacks-lemma-fibred-category-pushforward}
+위 상황에서 $\mathcal{S}$가 $\mathcal{D}$ 위의 섬유화된 범주이면
+$u^p\mathcal{S}$는 $\mathcal{C}$ 위의 섬유화된 범주이다.
+\end{lemma}
+
+\begin{proof}
+이 증명을 읽기 전에 Categories, Definitions
+\ref{categories-definition-cartesian-over-C} 및
+\ref{categories-definition-fibred-category} 주변의 논의를 살펴보라.
+$(a, \beta) : (U, y) \to (U', y')$를 $u^p\mathcal{S}$의 사상이라
+하자. $(a, \beta)$가 강한 카르테시안일 필요충분조건은 $\beta$가
+강한 카르테시안이라고 주장한다. 먼저 $\beta$가 강한 카르테시안이라고
+가정하자. $u^p\mathcal{S}$의 또 다른 임의의 사상
+$(a_1, \beta_1) : (U_1, y_1) \to (U', y')$를 생각하자. 그러면
+\begin{align*}
+& \Mor_{u^p\mathcal{S}}((U_1, y_1), (U, y)) \\
+& =
+\Mor_\mathcal{C}(U_1, U)
+\times_{\Mor_\mathcal{D}(u(U_1), u(U))}
+\Mor_\mathcal{S}(y_1, y) \\
+& =
+\Mor_\mathcal{C}(U_1, U)
+\times_{\Mor_\mathcal{D}(u(U_1), u(U))}
+\Mor_\mathcal{S}(y_1, y')
+\times_{\Mor_\mathcal{D}(u(U_1), u(U'))}
+\Mor_\mathcal{D}(u(U_1), u(U)) \\
+& =
+\Mor_\mathcal{S}(y_1, y')
+\times_{\Mor_\mathcal{D}(u(U_1), u(U'))}
+\Mor_\mathcal{C}(U_1, U) \\
+& =
+\Mor_{u^p\mathcal{S}}((U_1, y_1), (U', y'))
+\times_{\Mor_\mathcal{C}(U_1, U')}
+\Mor_\mathcal{C}(U_1, U)
+\end{align*}
+이고, 두 번째 등식은 $\beta$가 강한 카르테시안이기 때문에 성립한다.
+따라서 $(a, \beta)$가 실제로 강한 카르테시안임을 알 수 있다.
+반대로 $(a, \beta)$가 강한 카르테시안이라고 하자.
+$p(\beta') = u(a)$인 $\mathcal{S}$의 강한 카르테시안 사상
+$\beta' : y'' \to y'$을 택하자.
+% P01-E0210
+% P01-E0211
+그러면 $(a, \beta) : (U, y) \to (U, y')$와
+$(a, \beta') : (U, y'') \to (U, y)$는 둘 다 강한 카르테시안이고
+$a$를 올린다. 따라서 강한 카르테시안 사상의 유일성(Categories,
+Section \ref{categories-section-fibred-categories}의 논의 참조)에
+의해 $\beta = \beta' \circ \iota$를 만족하는
+$\mathcal{S}_{u(U)}$의 동형사상 $\iota : y \to y''$이 존재한다.
+따라서 Categories, Lemma
+\ref{categories-lemma-composition-cartesian}에 의해 $\beta$는
+$\mathcal{S}$에서 강한 카르테시안이다.
+
+\medskip\noindent
+마지막으로 $(U', y')$와 $U \to U'$가 주어졌을 때 이 사상을 올리는
+$u^p\mathcal{S}$의 강한 카르테시안 사상
+$(U, y) \to (U', y')$를 찾을 수 있음을 보여야 한다. 즉
+$U \to U'$를 올려야 한다. 가정에 의해
+사상 $u(U) \to u(U')$를 올리는 강한 카르테시안 사상
+$y \to y'$을 찾을 수 있으므로 위 논의에서 바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-pushforward}
+$u : \mathcal{C} \to \mathcal{D}$를 사이트들의 연속 함자라 하자.
+$p : \mathcal{S} \to \mathcal{D}$를 $\mathcal{D}$ 위의 스택이라
+하자. 그러면 $u^p\mathcal{S}$는 $\mathcal{C}$ 위의 스택이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-fibred-category-pushforward}에서
+$u^p\mathcal{S}$가 $\mathcal{C}$ 위의 섬유화된 범주임을 보았다.
+또한 그 보조정리의 증명에서 $u^p\mathcal{S}$의 사상
+$(a, \beta)$가 강한 카르테시안일 필요충분조건은 $\beta$가
+$\mathcal{S}$에서 강한 카르테시안이라는 것도 보았다. 따라서
+$\mathcal{C}$의 사상 $a : U \to U'$가 주어졌을 때 등식
+% P01-E0212
+$(u^p\mathcal{S})_U = \mathcal{S}_U$와
+$(u^p\mathcal{S})_{U'} = \mathcal{S}_{U'}$가 성립할 뿐 아니라,
+이 등식들을 통한 당김 함자들도 일치한다. 공식으로는
+$a^*(U', y') = (U, u(a)^*y')$이다.
+
+\medskip\noindent
+이제 $\mathcal{U} = \{U_i \to U\}$를 $\mathcal{C}$의 덮개라 하자.
+$u$가 연속이므로
+$\mathcal{V} = \{u(U_i) \to u(U)\}$는 $\mathcal{D}$의 덮개이고,
+$u(U_i \times_U U_j) = u(U_i) \times_{u(U)} u(U_j)$이며 삼중
+섬유곱 $U_i \times_U U_j \times_U U_k$에 대해서도 마찬가지이다.
+섬유 범주와 당김을 이와 같이 동일시했으므로
+% P01-E0213
+$\mathcal{U}$에 대한 내림 자료는 $\mathcal{V}$에 대한 내림 자료와
+동일하다. 가정에 의해 $\mathcal{S}$에서 내림이 유효하므로
+$u^p\mathcal{S}$에서도 마찬가지라고 결론내린다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-groupoids-pushforward}
+$u : \mathcal{C} \to \mathcal{D}$를 사이트들의 연속 함자라 하자.
+$p : \mathcal{S} \to \mathcal{D}$를 $\mathcal{D}$ 위의 군체 스택이라
+하자. 그러면 $u^p\mathcal{S}$는 $\mathcal{C}$ 위의 군체 스택이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-stack-pushforward}와 모든 섬유 범주가 군체라는
+사실에서 바로 따른다.
+\end{proof}
+
+\begin{definition}
+\label{stacks-definition-pushforward-stack}
+$f : \mathcal{D} \to \mathcal{C}$를 연속 함자
+$u : \mathcal{C} \to \mathcal{D}$로 주어지는 사이트의 사상이라
+하자. $\mathcal{S}$를 $\mathcal{D}$ 위의 섬유화된 범주라 하자.
+이 상황에서 위에서 정의한 섬유화된 범주 $u^p\mathcal{S}$를
+{\it $f_*\mathcal{S}$}로 쓴다.
+$f_*\mathcal{S}$를 {\it $f$를 따른 $\mathcal{S}$의 직접상}이라고
+한다.
+\end{definition}
+
+\noindent
+위 결과들에 의해 $\mathcal{S}$가 스택(각각 군체 스택)이면
+$f_*\mathcal{S}$도 스택(각각 군체 스택)이다. 스택의 역상을
+정의하기는 더 어렵다(우리의 특정한 구성에는 추가 가정이 필요하다.
+더 일반적인 구성을 작성하여 제출해도 좋다). 이를 여러 단계로
+수행한다.
+
+\medskip\noindent
+$u : \mathcal{C} \to \mathcal{D}$를 범주 사이의 함자라 하자.
+$p : \mathcal{S} \to \mathcal{C}$를 $\mathcal{C}$ 위의 범주라 하자.
+이 상황에서 범주 $u_{pp}\mathcal{S}$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item $u_{pp}\mathcal{S}$의 대상은 삼중항
+$(U, \phi : V \to u(U), x)$이다. 여기서
+$U \in \Ob(\mathcal{C})$이고, 사상 $\phi : V \to u(U)$는
+$\mathcal{D}$의 사상이며, $x \in \Ob(\mathcal{S}_U)$이다.
+\item $u_{pp}\mathcal{S}$의 사상
+$$
+(U_1, \phi_1 : V_1 \to u(U_1), x_1)
+\longrightarrow
+(U_2, \phi_2 : V_2 \to u(U_2), x_2)
+$$
+은 $(a, b, \alpha)$로 주어진다. 여기서
+$a : U_1 \to U_2$는 $\mathcal{C}$의 사상이고,
+$b : V_1 \to V_2$는 $\mathcal{D}$의 사상이며,
+% P01-E0214
+$\alpha : x_1 \to x_2$는 $\mathcal{S}$의 사상으로,
+$p(\alpha) = a$를 만족하고 도표
+$$
+\xymatrix{
+V_1 \ar[d]_{\phi_1} \ar[r]_b & V_2 \ar[d]^{\phi_2} \\
+u(U_1) \ar[r]^{u(a)} & u(U_2)
+}
+$$
+가 $\mathcal{D}$에서 가환한다.
+\end{enumerate}
+$u_{pp}\mathcal{S}$를
+$$
+p_{pp} : u_{pp}\mathcal{S} \longrightarrow \mathcal{D},
+\quad
+(U, \phi : V \to u(U), x) \longmapsto V.
+$$
+을 통해 $\mathcal{D}$ 위의 범주로 생각한다. $\mathcal{D}$의 대상
+$V$ 위의 $u_{pp}\mathcal{S}$의 섬유 범주에는 간단한 기술이 없다.
+
+\begin{lemma}
+\label{stacks-lemma-right-multiplicative-system}
+위 상황에서 다음을 가정하자.
+\begin{enumerate}
+\item $p : \mathcal{S} \to \mathcal{C}$는 섬유화된 범주이다.
+\item $\mathcal{C}$는 공집합이 아닌 유한 극한을 가진다.
+\item $u : \mathcal{C} \to \mathcal{D}$는 공집합이 아닌 유한
+극한과 교환한다.
+\end{enumerate}
+다음 꼴의 사상들로 이루어진 집합
+$R \subset \text{Arrows}(u_{pp}\mathcal{S})$을 생각하자.
+$$
+(a, \text{id}_V, \alpha) :
+(U', \phi' : V \to u(U'), x')
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+여기서 $\alpha$는 강한 카르테시안이다. 그러면 $R$은 오른쪽
+곱셈계이다.
+\end{lemma}
+
+\begin{proof}
+Categories, Definition
+\ref{categories-definition-multiplicative-system}에 따라 RMS1, RMS2,
+RMS3을 확인해야 한다. 강한 카르테시안 사상들의 합성은 강한
+카르테시안이므로 RMS1이 성립한다. Categories, Lemma
+\ref{categories-lemma-composition-cartesian}를 보라.
+
+\medskip\noindent
+RMS2를 확인하기 위해 $u_{pp}\mathcal{S}$의 사상
+$$
+(a, b, \alpha) :
+(U_1, \phi_1 : V_1 \to u(U_1), x_1)
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+과, $\gamma$가 강한 카르테시안인 $R$의 사상
+$$
+(c, \text{id}_V, \gamma) :
+(U', \phi' : V \to u(U'), x')
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+이 있다고 하자. 이 상황에서 $U'_1 = U_1 \times_U U'$로 두고,
+사영들을 $a' : U'_1 \to U'$ 및 $c' : U'_1 \to U_1$로 나타내자.
+$u(U'_1) = u(U_1) \times_{u(U)} u(U')$이므로
+$\phi'_1 = (\phi_1, \phi') : V_1 \to u(U'_1)$는 $\mathcal{D}$의
+사상이다. $\gamma_1 : x_1' \to x_1$을
+% P01-E0215
+$p(\gamma_1) = \phi'_1$인 $\mathcal{S}$의 강한 카르테시안
+사상이라 하자($\mathcal{S}$가 $\mathcal{C}$ 위의 섬유화된
+범주이므로 존재한다). $\gamma : x' \to x$가 강한
+카르테시안이므로 $p(\alpha') = a'$를 만족하는 유일한 사상
+$\alpha' : x'_1 \to x'$이 존재한다. 이제
+% P01-E0216
+$$
+(a', b, \alpha') :
+(U_1, \phi_1 : V_1 \to u(U'_1), x'_1)
+\longrightarrow
+(U, \phi : V \to u(U'), x')
+$$
+은 사상이고,
+% P01-E0217
+$$
+(c', \text{id}_{V_1}, \gamma_1) :
+(U'_1, \phi'_1 : V_1 \to u(U'_1), x'_1)
+\longrightarrow
+(U_1, \phi : V_1 \to u(U_1), x_1)
+$$
+은 $R$의 원소임을 알 수 있다.
+% P01-E0218
+이들은 RMS2가 제기하는 존재 문제의 해를 이룬다.
+
+\medskip\noindent
+마지막으로
+$$
+(a, b, \alpha), (a', b', \alpha') :
+(U_1, \phi_1 : V_1 \to u(U_1), x_1)
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+가 $u_{pp}\mathcal{S}$의 두 사상이고,
+$$
+(c, \text{id}_V, \gamma) :
+(U, \phi : V \to u(U), x)
+\longrightarrow
+(U', \phi : V \to u(U'), x')
+$$
+가 $(a, b, \alpha)$와 $(a', b', \alpha')$를 같게 만드는
+$R$의 원소라고 하자. 특히 $b = b'$이다.
+$d : U_2 \to U_1$을 $a, a'$의 등화자라 하자. 이것은 존재한다
+(Categories, Lemma
+\ref{categories-lemma-almost-finite-limits-exist} 참조). 또한
+$u(d) : u(U_2) \to u(U_1)$는 $u(a), u(a')$의 등화자이므로
+$b = b'$에 의해
+$\phi_2 : V_1 \to u(U_2)$인 사상이 존재하여
+% P01-E0219
+$\phi_1 = u(d) \circ \phi_1$이다.
+$\delta : x_2 \to x_1$을
+% P01-E0220
+$p(\delta) = u(d)$인 $\mathcal{S}$의 강한 카르테시안 사상이라
+하자. 이제 $\alpha \circ \delta = \alpha' \circ \delta$라고
+주장한다. 실제로 $\gamma$는 강한 카르테시안이고,
+$\gamma \circ \alpha \circ \delta = \gamma \circ \alpha' \circ \delta$이며
+$p(\alpha \circ \delta) = p(\alpha' \circ \delta)$이므로 참이다.
+따라서 화살
+$$
+(d, \text{id}_{V_1}, \delta) :
+(U_2, \phi_2 : V_1 \to u(U_2), x_2)
+\longrightarrow
+(U_1, \phi_1 : V_1 \to u(U_1), x_1)
+$$
+은 $R$의 원소이고 $(a, b, \alpha)$와 $(a', b', \alpha')$를 같게
+만든다. 따라서 $R$은 RMS3도 만족한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-fibred-category-pullback}
+표기와 가정은 Lemma \ref{stacks-lemma-right-multiplicative-system}에서와
+같이 하자. Categories, Section
+\ref{categories-section-localization}을 참고하여
+$u_p\mathcal{S} = R^{-1}u_{pp}\mathcal{S}$로 두자. 그러면
+$u_p\mathcal{S}$는 $\mathcal{D}$ 위의 섬유화된 범주이다.
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma \ref{categories-lemma-right-localization} 바로 앞에
+주어진 $u_p\mathcal{S}$의 기술을 사용한다. 함자
+$p_{pp} : u_{pp}\mathcal{S} \to \mathcal{D}$는 $R$의 모든 원소를
+항등사상으로 보낸다. 따라서 Categories, Lemma
+\ref{categories-lemma-properties-right-localization}에 의해 주어진
+함자를 연장하는 표준 함자
+$p_p : u_p\mathcal{S} \to \mathcal{D}$를 얻는다.
+이것이 $u_p\mathcal{S}$를 $\mathcal{D}$ 위의 범주로 보는 방식이다.
+
+\medskip\noindent
+먼저 $u_p\mathcal{S}$의 $\mathcal{D}$-강한 카르테시안 사상들을
+특징짓고자 한다. $u_p\mathcal{S}$의 사상 $f : X \to Y$는
+$r \in R$인 쌍 $(f' : X' \to Y, r : X' \to X)$의 동치류이다.
+실제로 자명한 표기를 쓰면 $u_p\mathcal{S}$에서
+$f = (f', 1) \circ (r, 1)^{-1}$이다. 동형사상은 언제나 강한
+카르테시안이고 강한 카르테시안 사상들의 합성도 그러하다.
+Categories, Lemma \ref{categories-lemma-composition-cartesian}를 보라.
+따라서 $f$가 강한 카르테시안일 필요충분조건은 $(f', 1)$이
+그런 것이다. 그러므로 다음 주장이 강한 카르테시안 사상들을 완전히
+특징짓는다. 주장: $u_{pp}\mathcal{S}$의 사상
+$$
+(a, b, \alpha) :
+X_1 = (U_1, \phi_1 : V_1 \to u(U_1), x_1)
+\longrightarrow
+(U_2, \phi_2 : V_2 \to u(U_2), x_2) = X_2
+$$
+의 상 $f = ((a, b, \alpha), 1)$이 $u_p\mathcal{S}$에서 강한
+카르테시안일 필요충분조건은 $\alpha$가 $\mathcal{S}$의 강한
+카르테시안 사상인 것이다.
+
+\medskip\noindent
+$\alpha$가 강한 카르테시안이라고 가정하자.
+$X = (U, \phi : V \to u(U), x)$를 또 다른 대상이라 하고,
+$f_2 : X \to X_2$를 어떤 $b_1 : U \to U_1$에 대해
+% P01-E0221
+$p_p(f_2) = b \circ b_1$을 만족하는 $u_p\mathcal{S}$의 사상이라
+하자. $f$가 강한 카르테시안임을 보이려면
+$p_p(f_1) = b_1$이고 $u_p\mathcal{S}$에서
+$f_2 = f \circ f_1$인 유일한 사상
+$f_1 : X \to X_1$이 $u_p\mathcal{S}$에 존재함을 보여야 한다.
+$f_2 = (f'_2 : X' \to X_2, r : X' \to X)$로 쓰자.
+다시 $u_p\mathcal{S}$에서
+$f_2 = (f'_2, 1) \circ (r, 1)^{-1}$로 쓸 수 있다.
+$(r, 1)$은 $\mathcal{D}$에서의 상이 항등사상인 동형사상이므로,
+필요한 성질을 가진 사상 $f_1 : X \to X_1$을 찾는 것은
+% P01-E0222
+$p(f'_1) = b_1$이고 $f'_2 = f \circ f'_1$인
+$u_p\mathcal{S}$의 사상 $f'_1 : X' \to X_1$을 찾는 것과 같다.
+따라서 $f_2$는 $b_2 = b \circ b_1$인
+$f_2 = ((a_2, b_2, \alpha_2), 1)$ 꼴이라고 가정해도 된다.
+그림은 다음과 같다.
+$$
+\xymatrix{
+& & (U_1, V_1 \to u(U_1), x_1) \ar[d]^{(a, b, \alpha)} \\
+(U, V \to u(U), x) \ar[rr]^{(a_2, b_2, \alpha_2)} & &
+(U_2, V_2 \to u(U_2), x_2)
+}
+$$
+이제 사상 $f_1$을 구성하는 법은 명백하다.
+$U' = U \times_{U_2} U_1$로 두고 사영을
+$c : U' \to U$와 $a_1 : U' \to U_1$로 나타내자.
+사상 $c$를 올리는 강한 카르테시안 사상
+$\gamma : x' \to x$를 택하자. $b_2 = b \circ b_1$이고
+$u(U') = u(U) \times_{u(U_2)} u(U_1)$이므로
+$\phi' = (\phi, \phi_1 \circ b_1) : V \to u(U')$이다.
+$\alpha$가 강한 카르테시안이고
+$a \circ a_1 = a_2 \circ c = p(\alpha_2 \circ \gamma)$이므로,
+$a_1$을 올리고 $\alpha \circ \alpha_1 = \alpha_2 \circ \gamma$를
+만족하는 사상 $\alpha_1 : x' \to x_1$이 존재한다.
+$X' = (U', \phi' : V \to u(U'), x')$로 두자. 그러면
+$$
+f_1 =
+((a_1, b_1, \alpha_1) : X' \to X_1, (c, \text{id}_V, \gamma) : X' \to X) :
+X \longrightarrow X_1
+$$
+이 작동한다. 실제로 도표
+$$
+\xymatrix{
+(U', \phi' : V \to u(U'), x')
+\ar[d]_{(c, \text{id}_V, \gamma)}
+\ar[rr]_{(a_1, b_1, \alpha_1)}
+& & (U_1, V_1 \to u(U_1), x_1) \ar[d]^{(a, b, \alpha)} \\
+(U, V \to u(U), x) \ar[rr]^{(a_2, b_2, \alpha_2)} & &
+(U_2, V_2 \to u(U_2), x_2)
+}
+$$
+는 구성에 의해 가환한다. 이로써 존재성을 증명했다.
+
+\medskip\noindent
+이어서 여전히
+$f = ((a, b, \alpha), 1)$이고
+$f_2 = ((a_2, b_2, \alpha_2), 1)$인 특수한 경우에 유일성을
+증명한다. 독자에게 이 부분을 건너뛸 것을 강하게 권한다.
+$g_1, g'_1 : X \to X_1$을
+$p_p(g_1) = p_p(g'_1) = b_1$이고
+$f_2 = f \circ g_1 = f \circ g'_1$인 $u_p\mathcal{S}$의 두
+사상이라 하자. 목표는 $g_1 = g'_1$임을 보이는 것이다.
+Categories, Lemma
+\ref{categories-lemma-morphisms-right-localization}에 의해
+$g_1$과 $g'_1$을 각각
+$(f_1 : X' \to X_1, r : X' \to X)$와
+$(f'_1 : X' \to X_1, r : X' \to X)$의 동치류로 나타낼 수 있다.
+여기서 $r \in R$이다. Categories, Lemma
+\ref{categories-lemma-equality-morphisms-right-localization}에 의해
+$f_2 = f \circ g_1 = f \circ g'_1$은
+$r' \circ r \in R$이고
+$$
+(a, b, \alpha) \circ f_1 \circ r' =
+(a, b, \alpha) \circ f'_1 \circ r' =
+(a_2, b_2, \alpha_2) \circ r'
+$$
+인 $u_{pp}\mathcal{S}$의 사상 $r' : X'' \to X'$이 존재함을
+뜻한다. 이 등식들은 $u_{pp}\mathcal{S}$에서 성립한다.
+이제 $g_1$은 $(f_1 \circ r', r \circ r')$로 나타나고
+$g'_1$도 마찬가지이다. 따라서
+$$
+(a, b, \alpha) \circ f_1 =
+(a, b, \alpha) \circ f'_1 =
+(a_2, b_2, \alpha_2).
+$$
+라고 가정해도 된다.
+$r = (c, \text{id}_V, \gamma) : (U', \phi' : V \to u(U'), x')$,
+$f_1 = (a_1, b_1, \alpha_1)$,
+$f'_1 = (a'_1, b_1, \alpha'_1)$로 쓰자. 여기서는 조건
+$p_p(g_1) = p_p(g'_1)$을 사용했다. 위 등식들은 이제
+$a \circ a_1 = a \circ a'_1 = a_2 \circ c$ 및
+$\alpha \circ \alpha_1 = \alpha \circ \alpha'_1 = \alpha_2 \circ \gamma$
+와 동치이다. 이 상황에서 반드시 $a_1 = a'_1$인 것은 아니다.
+그러므로 $R$의 사상을 하나 더 앞에서 합성해야 한다.
+$U'' = \text{Eq}(a_1, a'_1)$을 $a_1$과 $a'_1$의 등화자라 하자.
+이는 $U'$의 부분대상이다. 표준 단사사상을
+$c' : U'' \to U'$로 나타내자. 위 사상들 사이의 관계에 의해
+$V \to u(U')$는
+$u(U'') = u(\text{Eq}(a_1, a'_1)) = \text{Eq}(u(a_1), u(a'_1))$로
+간다. 따라서 새로운 대상
+$(U'', \phi'' : V \to u(U''), x'')$을 얻는다. 여기서
+% P01-E0223
+$\gamma' : x'' \to x'$은 $\gamma$를 올리는 강한 카르테시안
+사상이다. 이제 $f_1$과 $f'_1$ 앞에 $R$의 원소
+$(c', \text{id}_V, \gamma')$를 합성할 수 있다. 그렇게 하여
+$(U', \phi' : V \to u(U'), x')$를
+$(U'', \phi'' : V \to u(U''), x'')$로 바꾸면 앞의 상황으로
+돌아오며, 이제 추가로 $a_1 = a'_1$이다. 이 경우 $\alpha$가
+강한 카르테시안이라는 사실(!)에서 형식적으로
+$\alpha_1 = \alpha'_1$이 따른다. 이로써 원하는
+$g_1 = g'_1$을 얻는다.
+
+\medskip\noindent
+$u_p\mathcal{S}$의 $((a, b, \alpha), 1)$ 꼴인 임의의 강한
+카르테시안 사상에 대해 $\alpha$가 $\mathcal{S}$에서 강한
+카르테시안이라는 사실의 증명은 생략한다. 증명의 나머지에는
+강한 카르테시안 사상의 이 특징짓기가 필요하지 않지만, 이 절의
+뒤에서 사용하기는 한다.
+
+\medskip\noindent
+$(U, \phi : V \to u(U), x)$를 $u_p\mathcal{S}$의 대상이라 하고
+$b : V' \to V$를 $\mathcal{D}$의 사상이라 하자. 그러면 앞 문단들의
+결과에 의해 사상
+$$
+(\text{id}_U, b, \text{id}_x) :
+(U, \phi \circ b : V' \to u(U), x)
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+은 강한 카르테시안이고, 이것으로 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-fibred-groupoids-category-pullback}
+표기와 가정은 Lemma \ref{stacks-lemma-fibred-category-pullback}에서와
+같이 하자. $\mathcal{S}$가 군체로 섬유화되어 있으면
+$u_p\mathcal{S}$도 군체로 섬유화되어 있다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-fibred-category-pullback}에 의해
+$u_p\mathcal{S}$가 섬유화된 범주임을 안다.
+$f : X \to Y$를 $p_p(f) = \text{id}_V$인 $u_p\mathcal{S}$의
+사상이라 하자. $f$가 가역임을 보이면 끝난다. Categories, Lemma
+\ref{categories-lemma-fibred-groupoids}를 보라.
+$f$를 $r \in R$인 쌍 $((a, b, \alpha), r)$의 동치류로 쓰자.
+그러면 $p_p(r) = \text{id}_V$이고, 따라서
+$p_{pp}((a, b, \alpha)) = \text{id}_V$이다. 그러므로
+$b = \text{id}_V$이다. 그런데 $\mathcal{S}$의 모든 사상은 강한
+카르테시안이다. Categories, Lemma
+\ref{categories-lemma-fibred-groupoids}를 보라. 따라서
+$(a, b, \alpha) \in R$은 원하는 대로 $u_p\mathcal{S}$에서
+가역이다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-adjointness-pullback-pushforward}
+$u : \mathcal{C} \to \mathcal{D}$를 함자라 하자.
+$p : \mathcal{S} \to \mathcal{C}$와
+$q : \mathcal{T} \to \mathcal{D}$를 각각 $\mathcal{C}$와
+$\mathcal{D}$ 위의 범주라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item $p : \mathcal{S} \to \mathcal{C}$는 섬유화된 범주이다.
+\item $q : \mathcal{T} \to \mathcal{D}$는 섬유화된 범주이다.
+\item $\mathcal{C}$는 공집합이 아닌 유한 극한을 가진다.
+\item $u : \mathcal{C} \to \mathcal{D}$는 공집합이 아닌 유한
+극한과 교환한다.
+\end{enumerate}
+그러면 사상 범주들의 표준 동치
+$$
+\Mor_{\textit{Fib}/\mathcal{C}}(\mathcal{S}, u^p\mathcal{T})
+=
+\Mor_{\textit{Fib}/\mathcal{D}}(u_p\mathcal{S}, \mathcal{T})
+$$
+가 있다.
+\end{lemma}
+
+\begin{proof}
+이 증명에서 $x/U$는 $\mathcal{C}$의 $U$ 위에 놓이는
+$\mathcal{S}$의 대상 $x$를 나타낸다. 마찬가지로 $y/V$는
+$\mathcal{D}$의 $V$ 위에 놓이는 $\mathcal{T}$의 대상 $y$를
+나타낸다. 같은 맥락에서
+$\alpha/a : x/U \to x'/U'$는 $\mathcal{C}$에서의 상이
+$a : U \to U'$인 사상 $\alpha : x \to x'$을 나타낸다.
+
+\medskip\noindent
+$G : u_p\mathcal{S} \to \mathcal{T}$를 $\mathcal{D}$ 위의
+섬유화된 범주들의 $1$-사상이라 하자.
+% P01-E0224
+$G' : u_{pp}\mathcal{S} \to \mathcal{T}$로 $G$와 표준
+(국소화) 함자 $u_{pp}\mathcal{S} \to u_p\mathcal{S}$의 합성을
+나타내자. 이제 대상에 대해서는
+$$
+H(x/U) = (U, G'(U, \text{id}_{u(U)} : u(U) \to u(U), x))
+$$
+로, 사상에 대해서는
+% P01-E0225
+$$
+H((\alpha, a) : x/U \to x'/U') = G'(a, u(a), \alpha)
+$$
+로 주어지는 함자 $H : \mathcal{S} \to u^p\mathcal{T}$를
+생각하자. $G$는 강한 카르테시안 사상을 강한 카르테시안 사상으로
+보내므로, $\alpha$가 강한 카르테시안이면 $H(\alpha)$도 강한
+카르테시안이다. 실제로 Lemma
+\ref{stacks-lemma-fibred-category-pullback}의 증명에서 이 경우 사상
+$(a, u(a), \alpha)$가 $u_p\mathcal{S}$에서 강한 카르테시안이
+됨을 보았다. 이 구성은 명백히 $G$에 대해 함자적이므로 함자
+$$
+A :
+\Mor_{\textit{Fib}/\mathcal{D}}(u_p\mathcal{S}, \mathcal{T})
+\longrightarrow
+\Mor_{\textit{Fib}/\mathcal{C}}(\mathcal{S}, u^p\mathcal{T})
+$$
+를 얻는다.
+
+\medskip\noindent
+반대로 $H : \mathcal{S} \to u^p\mathcal{T}$를 섬유화된 범주들의
+$1$-사상이라 하자. $u^p\mathcal{T}$의 대상은
+$y \in \Ob(\mathcal{T}_{u(U)})$인 쌍 $(U, y)$임을 상기하자.
+% P01-E0226
+$\text{pr} : u^p\mathcal{T} \to \mathcal{T}$로 함자
+$(U, y) \mapsto y$를 나타내자. 이 경우 다음 규칙들로 함자
+$G' : u_{pp}\mathcal{S} \to \mathcal{T}$를 정의한다. 대상에
+대해서는
+$$
+G'(U, \phi : V \to u(U), x) = \phi^*\text{pr}(H(x))
+$$
+로 두고,
+$$
+G'((a, b, \alpha) : (U, \phi : V \to u(U), x)
+\to (U', \phi' : V' \to u(U'), x'))
+=
+\beta
+$$
+를 $q(\beta) = b$이고 도표
+$$
+\xymatrix{
+\phi^*\text{pr}(H(x)) \ar[d] \ar[r]_-{\beta} &
+(\phi')^*\text{pr}(H(x')) \ar[d] \\
+\text{pr}(H(x)) \ar[r]^{\text{pr}(H(a, \alpha))} & \text{pr}(H(x'))
+}
+$$
+가 가환하도록 하는 유일한 사상
+$\beta : \phi^*\text{pr}(H(x)) \to (\phi')^*\text{pr}(H(x'))$로
+둔다. $\mathcal{T}$가 섬유화된 범주이므로 그러한 사상은
+존재하며 유일하다.
+
+\medskip\noindent
+$r \in R$이면 $G'(r)$가 동형사상임을 확인하자. 즉, $\alpha$가
+강한 카르테시안이고
+$$
+(a, \text{id}_V, \alpha) :
+(U', \phi' : V \to u(U'), x')
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+가 Lemma \ref{stacks-lemma-right-multiplicative-system}의 오른쪽 곱셈계
+$R$의 원소이면 $H(\alpha)$는 강한 카르테시안이고
+$\text{pr}(H(\alpha))$도 강한 카르테시안이다. Lemma
+\ref{stacks-lemma-fibred-category-pushforward}의 증명을 보라.
+따라서 이 경우 사상 $\beta$는 $q(\beta) = \text{id}_V$이고
+강한 카르테시안이다. 따라서 Categories, Lemma
+\ref{categories-lemma-composition-cartesian}에 의해 $\beta$는
+동형사상이다. 그러므로 Categories, Lemma
+\ref{categories-lemma-properties-right-localization}에 의해
+표준 연장 $G : u_p\mathcal{S} \to \mathcal{T}$를 얻는다.
+
+\medskip\noindent
+이어서 $G$가 강한 카르테시안 사상을 강한 카르테시안 사상으로
+보냄을 증명하자.
+% P01-E0227
+$f : X \to Y$가 강한 카르테시안이라고 하자.
+$u_p\mathcal{S}$의 강한 카르테시안 사상의 특징짓기에 의해
+$f$를
+% P01-E0228
+$((a, b, \alpha) : X' \to Y, r : X' \to Y)$로 쓸 수 있다.
+여기서 $r \in R$이고 $\alpha$는 $\mathcal{S}$에서 강한
+카르테시안이다. 위 논의에 의해
+% P01-E0229
+$G'(a, b \alpha)$가 강한 카르테시안임을 보이면 충분하다.
+앞에서와 같이 $\alpha$가 강한 카르테시안이라는 조건은
+$\text{pr}(H(a, \alpha)) : \text{pr}(H(x)) \to \text{pr}(H(x'))$가
+$\mathcal{T}$에서 강한 카르테시안임을 뜻한다.
+% P01-E0230
+위 가환 정사각형의 모든 화살 중 $\beta$를 제외한 것들이 이제
+강한 카르테시안이므로 $\beta$도 원하는 대로 강한 카르테시안이다.
+구성 $H \mapsto G$는 명백히 $H$에 대해 함자적이므로 함자
+$$
+B :
+\Mor_{\textit{Fib}/\mathcal{C}}(\mathcal{S}, u^p\mathcal{T})
+\longrightarrow
+\Mor_{\textit{Fib}/\mathcal{D}}(u_p\mathcal{S}, \mathcal{T})
+$$
+를 얻는다. 보조정리의 증명을 끝내려면 함자 $A$와 $B$가 서로
+준역임을 보여야 한다. 확인은 생략한다.
+\end{proof}
+
+\begin{definition}
+\label{stacks-definition-pullback-stack}
+$f : \mathcal{D} \to \mathcal{C}$를 Sites, Proposition
+\ref{sites-proposition-get-morphism}의 가정과 결론을 만족하는 연속
+함자 $u : \mathcal{C} \to \mathcal{D}$로 주어지는 사이트의
+사상이라 하자. $\mathcal{S}$를 $\mathcal{C}$ 위의 스택이라 하자.
+이 상황에서 위에서 구성한 $\mathcal{D}$ 위의 섬유화된 범주
+$u_p\mathcal{S}$의 스택화를 {\it $f^{-1}\mathcal{S}$}로 쓴다.
+$f^{-1}\mathcal{S}$를 {\it $f$를 따른 $\mathcal{S}$의 역상}이라고
+한다.
+\end{definition}
+
+\noindent
+물론 $\mathcal{S}$가 군체 스택이면 Lemmas
+\ref{stacks-lemma-stackify-groupoids} 및
+\ref{stacks-lemma-fibred-groupoids-category-pullback}에 의해
+$f^{-1}\mathcal{S}$도 군체 스택이다.
+
+\begin{lemma}
+\label{stacks-lemma-adjointness-pullback-pushforward-stacks}
+$f : \mathcal{D} \to \mathcal{C}$를 Sites, Proposition
+\ref{sites-proposition-get-morphism}의 가정과 결론을 만족하는 연속
+함자 $u : \mathcal{C} \to \mathcal{D}$로 주어지는 사이트의
+사상이라 하자. $p : \mathcal{S} \to \mathcal{C}$와
+$q : \mathcal{T} \to \mathcal{D}$를 스택이라 하자.
+그러면 사상 범주들의 표준 동치
+$$
+\Mor_{\textit{Stacks}/\mathcal{C}}(\mathcal{S}, f_*\mathcal{T})
+=
+\Mor_{\textit{Stacks}/\mathcal{D}}(f^{-1}\mathcal{S}, \mathcal{T})
+$$
+가 있다.
+\end{lemma}
+
+\begin{proof}
+$i = 1, 2$에 대해 스택의 $i$-사상은 섬유화된 범주의 $i$-사상과
+같다. Definition \ref{stacks-definition-stacks-over-C}를 보라.
+Lemma \ref{stacks-lemma-adjointness-pullback-pushforward}에 의해 이미
+$$
+\Mor_{\textit{Fib}/\mathcal{C}}(\mathcal{S}, u^p\mathcal{T})
+=
+\Mor_{\textit{Fib}/\mathcal{D}}(u_p\mathcal{S}, \mathcal{T})
+$$
+이다. $u^p\mathcal{T} = f_*\mathcal{T}$이고
+$f^{-1}\mathcal{S}$가 $u_p\mathcal{S}$의 스택화이므로 Lemma
+\ref{stacks-lemma-stackify-universal-property-more}에서 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-technical-up}
+$f : \mathcal{D} \to \mathcal{C}$를 Sites, Proposition
+\ref{sites-proposition-get-morphism}의 가정과 결론을 만족하는 연속
+함자 $u : \mathcal{C} \to \mathcal{D}$로 주어지는 사이트의
+사상이라 하자. $\mathcal{S} \to \mathcal{C}$를 섬유화된 범주라
+하고, $\mathcal{S} \to \mathcal{S}'$을 $\mathcal{S}$의
+스택화라 하자. 그러면 $f^{-1}\mathcal{S}'$은
+$u_p\mathcal{S}$의 스택화이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 이는 Sites, Lemma
+\ref{sites-lemma-technical-up}의 유사체이다.
+\end{proof}
+
+\noindent
+다음 보조정리는 $\Sch'_{fppf}$가 $\Sch_{fppf}$를 포함할 때
+$\Sch_{fppf}$ 위의 스택들의 $2$-범주가 $\Sch'_{fppf}$ 위의
+스택들의 $2$-범주의 “충만 2-부분범주”임을 말해 준다.
+Topologies, Section \ref{topologies-section-change-alpha}를 보라.
+
+\begin{lemma}
+\label{stacks-lemma-bigger-site}
+$\mathcal{C}$와 $\mathcal{D}$를 사이트라 하자.
+$u : \mathcal{C} \to \mathcal{D}$를 Sites, Lemma
+\ref{sites-lemma-bigger-site}의 가정을 만족하는 함자라 하자.
+$f : \mathcal{D} \to \mathcal{C}$를 대응하는 사이트의 사상이라
+하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item 모든 스택 $p : \mathcal{S} \to \mathcal{C}$에
+대해 표준 함자 $\mathcal{S} \to f_*f^{-1}\mathcal{S}$는 스택들의
+동치이다.
+\item $\mathcal{C}$ 위의 스택 $\mathcal{S}, \mathcal{S}'$이 주어지면
+구성 $f^{-1}$은 사상 범주들의 동치
+$$
+\Mor_{\textit{Stacks}/\mathcal{C}}(\mathcal{S}, \mathcal{S}')
+\longrightarrow
+\Mor_{\textit{Stacks}/\mathcal{D}}(f^{-1}\mathcal{S}, f^{-1}\mathcal{S}')
+$$
+를 유도한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-adjointness-pullback-pushforward-stacks}에 의해 범주들의
+동치
+$$
+\Mor_{\textit{Stacks}/\mathcal{D}}(f^{-1}\mathcal{S}, f^{-1}\mathcal{S}')
+=
+\Mor_{\textit{Stacks}/\mathcal{C}}(\mathcal{S}, f_*f^{-1}\mathcal{S}')
+$$
+가 있음에 유의하자. 따라서 (2)는 (1)에서 따른다.
+
+\medskip\noindent
+(1)을 증명하기 위해 Lemma
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff}를 사용할
+것이다. 이 보조정리에 따르면
+$can : \mathcal{S} \to f_*f^{-1}\mathcal{S}$가 충만충실이고
+$f_*f^{-1}\mathcal{S}$의 모든 대상이 국소적으로 본질적 상에
+놓임을 보여야 한다.
+
+\medskip\noindent
+Lemma \ref{stacks-lemma-adjointness-pullback-pushforward}의 증명을 참고하여
+함자 $can$을 빠르게 기술하자. 이를 위해
+$c''(x/U) = (U, \text{id} : u(U) \to u(U), x)$ 및
+$c''(\alpha/a) = (a, u(a), \alpha)$로 정의되는 함자
+$c'' : \mathcal{S} \to u_{pp}\mathcal{S}$를 도입한다.
+$c' : \mathcal{S} \to u_p\mathcal{S}$을 $c''$과 표준 함자
+$u_{pp}\mathcal{S} \to u_p\mathcal{S}$의 합성으로 둔다.
+$c : \mathcal{S} \to f^{-1}\mathcal{S}$를 $c'$과 표준 함자
+$u_p\mathcal{S} \to f^{-1}\mathcal{S}$의 합성으로 둔다.
+그러면 $can : \mathcal{S} \to f_*f^{-1}\mathcal{S}$는
+$x/U$에 쌍 $(U, c(x))$를 대응시키고 $\alpha/a$에 사상
+$(a, c(\alpha))$를 대응시키는 함자이다.
+
+\medskip\noindent
+% P01-E0231
+충만충실성. 이를 증명하기 위해 Lemma
+\ref{stacks-lemma-characterize-ff}를 사용한다.
+$U \in \Ob(\mathcal{C})$라 하자.
+$x, y \in \mathcal{S}_U$라 하자.
+먼저 $u$가 충만충실이므로 $f_*$의 정의에서 바로
+$$
+\Mor_{(f_*f^{-1}\mathcal{S})_U}(can(x), can(y))
+=
+\Mor_{(f^{-1}\mathcal{S})_{u(U)}}(c(x), c(y))
+$$
+이다.
+% P01-E0232
+임의의 $U'/U$로 당긴 뒤에도 마찬가지이다.
+$f^{-1}\mathcal{S}$가 $u_p\mathcal{S}$의 스택화이고 $u$가
+연속이며 쌍대연속이므로 준층
+$$
+U'/U \longmapsto
+\Mor_{(f^{-1}\mathcal{S})_{u(U')}}(c(x|_{U'}), c(y|_{U'}))
+$$
+은 준층
+$$
+U'/U \longmapsto
+\Mor_{(u_p\mathcal{S})_{u(U')}}(c'(x|_{U'}), c'(y|_{U'}))
+$$
+의 층화이다. 따라서 충만충실성의 증명을 끝내려면 임의의
+$U$와 $x, y$에 대해 사상
+% P01-E0233
+$$
+\Mor_{\mathcal{S}_U}(x, y)
+\longrightarrow
+\Mor_{(u_p\mathcal{S})_U}(c'(x), c'(y))
+$$
+이 전단사임을 보이면 충분하다.
+$u(U)$ 위의 $u_p\mathcal{S}$의 사상 $f : x \to y$는 도표
+$$
+\xymatrix{
+(U', \phi : u(U) \to u(U'), x')
+\ar[d]_{(c, \text{id}_{u(U)}, \gamma)}
+\ar[r]_{(a, b, \alpha)} &
+(U, \text{id} : u(U) \to u(U), y)
+\\
+(U, \text{id} : u(U) \to u(U), x)
+}
+$$
+의 동치류로 주어진다. 여기서 $\gamma$는 강한 카르테시안이고
+$b = \text{id}_{u(U)}$이다. 그런데 $u$가 충만충실이므로 어떤 사상
+$c' : U \to U'$에 대해 $\phi = u(c')$로 쓸 수 있고, 이때
+% P01-E0234
+$a \circ c' = \text{id}_U$ 및
+$c \circ c' = \text{id}_{U'}$임을 알 수 있다. $\gamma$가 강한
+카르테시안이므로 $c'$을 올리고
+$\gamma \circ \gamma' = \text{id}_x$를 만족하는 사상
+$\gamma' : x \to x'$을 찾을 수 있다.
+$u_p\mathcal{S}$의 사상을 정의하는 동치류의 정의에 의해
+$u_{pp}\mathcal{S}$의 사상
+$$
+\xymatrix{
+(U, \text{id} : u(U) \to u(U), x)
+\ar[rr]_{(\text{id}, \text{id}, \alpha \circ \gamma')} & &
+(U, \text{id} : u(U) \to u(U), y)
+}
+$$
+은 $u_p\mathcal{S}$의 사상 $f$를 유도한다. 이로써 사상이
+전사임을 증명했다. 단사임의 증명은 생략한다.
+
+\medskip\noindent
+마지막으로 $f_*f^{-1}\mathcal{S}$의 임의의 대상이 국소적으로
+$\mathcal{S}$의 대상에서 옴을 보여야 한다. 이는 구성에서
+명백하다(세부사항은 생략한다).
+\end{proof}
+
+
+
+
+\section{스택과 국소화}
+\label{stacks-section-localize}
+
+\noindent
+$\mathcal{C}$를 사이트라 하자.
+$U$를 $\mathcal{C}$의 대상이라 하자.
+$\mathcal{C}/U$ 위의 스택을 $\mathcal{C}$ 위의 스택과 $U$로 향하는
+사상을 합친 것으로 이해하고자 한다. 다음 보조정리는 준층 $h_U$가
+층일 때 이렇게 하기가 더 쉬운 이유를 설명한다.
+
+\begin{lemma}
+\label{stacks-lemma-when-localization-stack}
+$\mathcal{C}$를 사이트라 하고 $U \in \Ob(\mathcal{C})$라 하자.
+그러면 $j_U : \mathcal{C}/U \to \mathcal{C}$가 $\mathcal{C}$ 위의
+스택일 필요충분조건은 $h_U$가 층인 것이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-stack-in-setoids-characterize}와 Categories, Example
+\ref{categories-example-fibred-category-from-functor-of-points}를
+결합하면 된다.
+\end{proof}
+
+\noindent
+$\mathcal{C}$를 사이트라 하고 $U$를 그 연관된 표현가능 준층이
+층인 $\mathcal{C}$의 대상이라 하자.
+% P01-E1266
+국소화 함자를 $j : \mathcal{C}/U \to \mathcal{C}$로 나타낸다.
+
+\medskip\noindent
+{\bf 구성 A.} $p : \mathcal{S} \to \mathcal{C}/U$를 사이트
+$\mathcal{C}/U$ 위의 스택이라 하자. 스택
+$j_!p : j_!\mathcal{S} \to \mathcal{C}$를 다음과 같이 정의한다.
+\begin{enumerate}
+\item 범주로서 $j_!\mathcal{S} = \mathcal{S}$이다.
+\item 함자 $j_!p : j_!\mathcal{S} \to \mathcal{C}$는 단순히 합성
+$j \circ p$이다.
+\end{enumerate}
+이것이 스택이라는 확인은 생략한다(힌트: $h_U$가 층이라는 사실을
+사용하여 $U$로 가는 사상들을 붙여라). 표준 함자
+$$
+j_!\mathcal{S} \longrightarrow \mathcal{C}/U
+$$
+가 있다. 즉, 함자 $p$이며 이는 $\mathcal{C}$ 위의 스택들의
+$1$-사상이다.
+
+\medskip\noindent
+{\bf 구성 B.}
+$q : \mathcal{T} \to \mathcal{C}$를 $\mathcal{C}$ 위의 스택이라
+하고, $\mathcal{C}$ 위의 스택들의 사상
+$p : \mathcal{T} \to \mathcal{C}/U$가 주어졌다고 하자. 이 경우
+$p : \mathcal{T} \to \mathcal{C}/U$는 자동으로
+$\mathcal{C}/U$ 위의 스택이다.
+
+\begin{lemma}
+\label{stacks-lemma-localize-stacks}
+$\mathcal{C}$를 사이트라 하고, $U$를 그 연관된 표현가능 준층이
+층인 $\mathcal{C}$의 대상이라 하자. 위의 구성 A와 B는
+$2$-범주 사이의 서로 역인(!) 함자
+$$
+\left\{
+\begin{matrix}
+2\text{-category of}\\
+\text{stacks over }\mathcal{C}/U
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+2\text{-category of pairs }(\mathcal{T}, p)
+\text{ consisting} \\
+\text{of a stack }\mathcal{T}\text{ over }\mathcal{C}\text{ and a morphism} \\
+p : \mathcal{T} \to \mathcal{C}/U\text{ of stacks over }\mathcal{C}
+\end{matrix}
+\right\}
+$$
+를 정의한다.
+\end{lemma}
+
+\begin{proof}
+명백하다.
+\end{proof}

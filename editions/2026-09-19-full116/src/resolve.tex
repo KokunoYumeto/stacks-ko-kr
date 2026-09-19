@@ -1,0 +1,4444 @@
+% Generated mechanically from frozen input p07/ko/resolve.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{53}
+\chapter{곡면의 특이점 해소}
+
+
+
+\phantomsection
+\label{resolve-section-phantom}
+
+
+\section{서론}
+\label{resolve-section-introduction}
+
+\noindent
+이 장에서는 Lipman \cite{Lipman}을 따르고, 주로 \cite{Artin-Lipman}에
+나오는 Artin의 설명을 따라 곡면의 특이점 해소를 논한다. 주정리
+(정리 \ref{resolve-theorem-resolve})는 Noether $2$차원 스킴 $Y$가 유한 정규화
+$Y^\nu \to Y$를 가지며, 그 정규화의 특이점 $y_i \in Y^\nu$가 유한 개이고
+각 $i$에 대해 완비화 $\mathcal{O}_{Y^\nu, y_i}^\wedge$가 정규이면
+이 스킴이 특이점 해소를 가진다는 것을 말한다.
+
+\medskip\noindent
+좀 더 구체적으로, $Y$가 준우수 기초환 $R$ 위 유한형인 $2$차원 스킴이라고
+하자. 예컨대 이 기초환은 체이거나, $\mathbf{Z}$처럼 분수체의 표수가 $0$인
+Dedekind 정역일 수 있다. 그러면 $Y$의 정규화는 유한이고 특이점은 유한 개이며,
+그 국소환들의 완비화는 정규이다. 대수학 심화의 절
+\ref{more-algebra-section-singular-locus},
+\ref{more-algebra-section-G-ring},
+\ref{more-algebra-section-excellent}
+및 대수학 심화의 보조정리 \ref{more-algebra-lemma-normal-goes-up}의 논의를
+보라. 따라서 이러한 $Y$는 특이점 해소를 가진다.
+
+\medskip\noindent
+증명의 개략은 다음과 같다. $A$를 차원 $2$인 Noether 국소정역이라 하자.
+증명은 다음 단계로 이루어진다.
+\begin{enumerate}
+\item[N] $A$를 그 정규화로 바꾼다.
+\item[V] Grauert--Riemenschneider 정리를 증명한다.
+\item[B] 모든 정규 변형 $X \to \Spec(A)$에 걸쳐
+$H^1(X, \mathcal{O}_X)$의 길이에 최댓값 $g$가 있음을 보이고 $g = 0$인
+경우로 환원한다.
+\item[R] $g = 0$이면 $A$가 유리 특이점을 정의한다고 한다. 이 경우 유한 번
+부풀리기를 한 뒤 $A$가 Gorenstein이고 $g = 0$이라고 가정할 수 있다.
+\item[D] $g = 0$이고 $A$가 Gorenstein이면 $A$가 유리 이중점을 정의한다고
+한다. 이 경우 특이점을 명시적으로 해소한다.
+\end{enumerate}
+각 단계에는 환 $A$에 관한 가정이 필요하다. 이제 이를 차례로 논한다.
+
+\medskip\noindent
+N에 관하여: 여기서는 $A$가 유한 정규화를 가진다고 가정해야 한다
+(이는 자동적이지 않다). 이 장의 대부분에서는 어떤 정규화가 유한임을 알아야
+할 때 해당 스킴이 Nagata라고 가정한다. 그러나 Nagata 조건은 정리의 명제에
+주어진 조건보다 조금 더 강하다. 이 작은 문제를 해결하는 한 방법은 환 $A$가
+형식적 비분기, 즉 그 완비화가 기약이라는 사실과 보조정리
+\ref{resolve-lemma-formally-unramified}을 사용하는 것이다. 하지만 여기의 증명 방식에서는
+보조정리 \ref{resolve-lemma-normalization-completion}을 사용하여 완비화 위 정규화의
+유한성을 $A$ 위 정규화의 유한성으로 올리는 편이 더 쉽다.
+
+\medskip\noindent
+V에 관하여: 이는 명제 \ref{resolve-proposition-Grauert-Riemenschneider}이며, 대략적으로
+정규 변형 $f : X \to \Spec(A)$에 대해 $R^1f_*\omega_X = 0$이라는 명제이다.
+여기서 $\omega_X$는 $X/A$의 쌍대화 가군이다(비고
+\ref{resolve-remark-dualizing-setup}). 실제로 쌍대성에 의해 이 결과는 {\it 유도 범주}
+$D(A)$의 대상 $Rf_*\mathcal{O}_X$에 관한 명제(보조정리
+\ref{resolve-lemma-R1-injective})와 동치이다. 한편 그 증명에는 특수 올의 성분들이
+양의 여법선층을 가진다는 표준 사실(보조정리
+\ref{resolve-lemma-nontrivial-normal-bundle})을 사용한다.
+
+\medskip\noindent
+B에 관하여: 이는 어떤 의미에서는 증명의 가장 미묘한 부분이다. 서술은 조금 더
+일반적이지만, 끝내는 $A$가 완비 Noether 국소환일 때에만 이 단계의 결론을
+사용한다. 용어는 정의 \ref{resolve-definition-reduce-to-rational}에서 정한다. 위에서
+정의한 $g$가 유계이면, 간단한 논증으로 $X$의 모든 특이점이 유리 특이점인 정규 변형
+$X \to \Spec(A)$를 찾을 수 있다. 보조정리 \ref{resolve-lemma-reduce-to-rational}을
+보라. 유한 확대 $A \subset B$가 주어졌을 때, 다음 두 경우에는 $g$가 $A$에
+대해 유계이면 $B$에 대해서도 유계임을 보인다. (1) 분수체 확대가 분리인 경우
+(보조정리 \ref{resolve-lemma-reduce-to-rational}), (2) 분수체 확대의 차수가 $p$이고
+표수가 $p$이며 $A$가 정칙 완비인 경우(보조정리
+\ref{resolve-lemma-go-up-degree-p}).
+
+\medskip\noindent
+R에 관하여: 여기서는 $g = 0$인 경우를 Gorenstein 경우로 환원한다. 모든 것이
+성립하게 하는 놀라운 사실은 유리 곡면 특이점의 부풀리기가 정규라는 것이다.
+보조정리 \ref{resolve-lemma-blow-up-normal-rational}을 보라.
+
+\medskip\noindent
+D에 관하여: 유리 이중점의 해소는 거의 직접 계산으로 진행한다. 절
+\ref{resolve-section-rational-double-points}을 보라. 유리 이중점은 초곡면 특이점이다
+(이는 참이지만 필요하지 않으므로 증명하지 않는다). 국소 방정식은 다음과 같다.
+$$
+a_{11} x_1^2 + a_{12} x_1x_2 + a_{13}x_1x_3 + a_{22} x_2^2 +
+a_{23} x_2x_3 + a_{33} x_3^2 =
+\sum a_{ijk} x_ix_jx_k
+$$
+중복도가 $2$이고 임의의 부풀리기 뒤에도 $2$로 남으므로 이차 부분은 영일 수
+없다는 사실과 모든 부풀리기가 정규라는 사실을 이용하면 곧 해소를 얻는다.
+한 가지 까다로운 점은 매 부풀리기마다 감소하는 불변량이 없다는 것이다. 대신
+절 \ref{resolve-section-arcs}의 형식 호에 관한 내용을 이용하여 과정이 끝남을 보인다.
+
+\medskip\noindent
+이 모든 것을 종합하려면 몇 가지 작업이 더 필요하다. 주된 난점은 완비화
+$A^\wedge$의 해소를 $\Spec(A)$의 해소로 올리고자 한다는 점이다. 이를 위해
+먼저 해소가 존재하면 정규화 부풀리기들로 이루어진 해소도 존재함을 보인다
+(보조정리 \ref{resolve-lemma-existence-implies-existence-by-normalized-blowing-ups}).
+보조정리 \ref{resolve-lemma-normalized-blowup-completion}에 의해 정규화 부풀리기의 열은
+완비화에서 올릴 수 있다. 정칙인 $A_0$에 대한 유한 포함 $A_0 \subset A$의
+차수에 관한 귀납법으로 전략이 진행되므로, 완비 국소환 $A$의 해소를 증명할
+때도 이를 사용한다. 보조정리 \ref{resolve-lemma-resolve-complete}을 보라. B에서 더
+강한 결과(예컨대 Lipman의 논문에서 증명한 결과)를 사용하면 이 단계는 피할 수
+있다.
+
+
+
+
+\section{양의 표수에서의 대각합 사상}
+\label{resolve-section-trace}
+
+\noindent
+이 절의 몇몇 결과는 드람 코호몰로지의 절 \ref{derham-section-trace}에서
+미분형식의 대각합을 훨씬 일반적으로 논한 내용으로부터 유도할 수 있다.
+비고 \ref{resolve-remark-compare-Garel}을 보라.
+
+\medskip\noindent
+소수 $p$를 고정한다. $R$을 $\mathbf{F}_p$-대수라 하자. $a \in R$가
+주어지면 $S = R[x]/(x^p - a)$로 둔다. $R$-선형 사상
+$$
+\text{Tr}_x : \Omega_{S/R} \longrightarrow \Omega_R
+$$
+을 다음 규칙으로 정의한다.
+$$
+x^i\text{d}x \longmapsto
+\left\{
+\begin{matrix}
+0 & \text{if} & 0 \leq i \leq p - 2, \\
+\text{d}a & \text{if} & i = p - 1
+\end{matrix}
+\right.
+$$
+$\Omega_{S/R}$는 $x^i\text{d}x$, $0 \leq i \leq p - 1$을 기저로 하는
+자유 $R$-가군이므로 이는 잘 정의된다. 다음 보조정리는 이 대각합 사상이
+좌표 $x$의 선택과 무관하여 잘 정의됨을 뜻한다.
+
+\begin{lemma}
+\label{resolve-lemma-trace-well-defined}
+$\varphi : R[x]/(x^p - a) \to R[y]/(y^p - b)$를 $R$-대수 준동형이라 하자.
+그러면 $\text{Tr}_x = \text{Tr}_y \circ \varphi$이다.
+\end{lemma}
+
+\begin{proof}
+$\lambda_i \in R$이고
+$\varphi(x) = \lambda_0 + \lambda_1 y + \ldots + \lambda_{p - 1}y^{p - 1}$라 하자.
+$x$를
+$\lambda_0 + \lambda_1 y + \ldots + \lambda_{p - 1}y^{p - 1}$
+로 보내는 것이 $R$-대수 준동형
+$R[x]/(x^p - a) \to R[y]/(y^p - b)$를 유도할 조건은
+$$
+a = \lambda_0^p + \lambda_1^p b + \ldots + \lambda_{p - 1}^pb^{p - 1}
+$$
+가 환 $R$에서 성립할 조건과 동치이다. 다항식환
+$$
+R_{univ} = \mathbf{F}_p[b, \lambda_0, \ldots, \lambda_{p - 1}]
+$$
+과 그 원소
+$a = \lambda_0^p + \lambda_1^p b + \ldots + \lambda_{p - 1}^pb^{p - 1}$
+를 생각하자. $x$를
+$\lambda_0 + \lambda_1 y + \ldots + \lambda_{p - 1}y^{p - 1}$로 보내는
+보편 대수 사상
+$\varphi_{univ} : R_{univ}[x]/(x^p - a) \to R_{univ}[y]/(y^p - b)$를
+생각하자. $b, \lambda_i$를 각각 $b, \lambda_i$로 보내는 표준 사상
+$$
+R_{univ} \longrightarrow R
+$$
+을 얻는다. 구성에 의해 가환 도식
+$$
+\xymatrix{
+R_{univ}[x]/(x^p - a) \ar[r] \ar[d]_{\varphi_{univ}} &
+R[x]/(x^p - a) \ar[d]^\varphi \\
+R_{univ}[y]/(y^p - b) \ar[r] & R[y]/(y^p - b)
+}
+$$
+을 얻고, 수평 화살표들은 대각합 사상과 호환된다. 따라서 사상
+$\varphi_{univ}$에 대해 보조정리를 증명하면 충분하다. 이에 따라
+$R = \mathbf{F}_p[b, \lambda_0, \ldots, \lambda_{p - 1}]$가 다항식환이라고
+가정해도 된다. 이 경우 $i = 0 , \ldots, p - 1$에 대해
+$\text{Tr}_y(\varphi(x)^i\text{d}\varphi(x))$를 계산하여 보조정리를 확인한다.
+
+\medskip\noindent
+$0 \leq i \leq p - 2$인 경우. 환 $R[y]/(y^p - b)$에서
+$$
+(\lambda_0 + \lambda_1 y + \ldots + \lambda_{p - 1}y^{p - 1})^i
+(\lambda_1 + 2 \lambda_2 y + \ldots + (p - 1)\lambda_{p - 1}y^{p - 2})
+$$
+를 전개한다. $y^{p - 1}$의 계수가 영임을 보여야 한다. 이를 위해서는 위 식을
+$y$의 다항식으로 보았을 때 모든 거듭제곱 $y^{pk - 1}$의 계수가 영임을 보이면
+충분하다. 이 다항식을
+$$
+\frac{\text{d}}{(i + 1)\text{d}y}
+(\lambda_0 + \lambda_1 y + \ldots + \lambda_{p - 1}y^{p - 1})^{i + 1}
+$$
+로 쓰면 실제로 모든 $y^{kp - 1}$의 계수는 영이다.
+
+\medskip\noindent
+$i = p - 1$인 경우. 환 $R[y]/(y^p - b)$에서
+$$
+(\lambda_0 + \lambda_1 y + \ldots + \lambda_{p - 1}y^{p - 1})^{p - 1}
+(\lambda_1 + 2 \lambda_2 y + \ldots + (p - 1)\lambda_{p - 1}y^{p - 2})
+$$
+를 전개한다. 증명을 끝내려면 $y^{p - 1}$의 계수에 $\text{d}b$를 곱한 것이
+$\text{d}a$임을 보여야 한다. 여기서
+$S = \mathbf{Z}[b, \lambda_0, \ldots, \lambda_{p - 1}]$일 때 $R$은 $S/pS$임을
+사용한다. 그러면 위 식은 $y$의 다항식으로서
+$$
+\frac{\text{d}}{p\text{d}y}
+(\lambda_0 + \lambda_1 y + \ldots + \lambda_{p - 1}y^{p - 1})^p
+$$
+와 같다. $\frac{\text{d}}{\text{d}y}(y^{pk}) = pk y^{pk - 1}$이므로 다항식
+$(\lambda_0 + \lambda_1 y + \ldots + \lambda_{p - 1}y^{p - 1})^p$
+에서 $y^{pk}$의 계수를 법 $p$로 알면 충분하다. 이 항들의 합은
+$$
+\lambda_0^p + \lambda_1^py^p + \ldots + \lambda_{p - 1}^py^{p(p - 1)}
+\bmod p
+$$
+이다. 따라서 연산자 $\frac{\text{d}}{p\text{d}y}$를 적용하고 법 $y^p - b$로
+축약한 뒤, 계산하려는 $y^{p - 1}$의 계수로
+$$
+\lambda_1^p + 2\lambda_2^pb + \ldots + (p - 1)\lambda_{p - 1}b^{p - 2}
+$$
+를 얻는다. 이제 $R$에서
+$a = \lambda_0^p + \lambda_1^p b + \ldots + \lambda_{p - 1}^pb^{p - 1}$이므로
+$$
+\text{d}a = (\lambda_1^p  + 2 \lambda_2^p b + \ldots +
+(p - 1) \lambda_{p - 1}^p b^{p - 2}) \text{d}b
+$$
+를 $R$에서 얻는다. 이로써 $y^{p - 1}$의 계수가 원하는 값임이 증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-trace-higher}
+$\mathbf{F}_p \subset \Lambda \subset R \subset S$를 환 확대들이라 하고,
+어떤 $a \in R$에 대해 $S$가 $R[x]/(x^p - a)$와 동형이라고 하자. 그러면
+$t \geq 0$마다 표준 $R$-선형 사상
+$$
+\text{Tr} :
+\Omega^{t + 1}_{S/\Lambda}
+\longrightarrow
+\Omega_{R/\Lambda}^{t + 1}
+$$
+이 존재하며,
+$$
+\eta_1 \wedge \ldots \wedge \eta_t \wedge x^i\text{d}x
+\longmapsto
+\left\{
+\begin{matrix}
+0 & \text{if} & 0 \leq i \leq p - 2, \\
+\eta_1 \wedge \ldots \wedge \eta_t \wedge \text{d}a & \text{if} & i = p - 1
+\end{matrix}
+\right.
+$$
+가 모든 $\eta_i \in \Omega_{R/\Lambda}$에 대해 성립한다. 또한 $\text{Tr}$는
+$S \otimes_R \Omega_{R/\Lambda}^{t + 1} \to \Omega_{S/\Lambda}^{t + 1}$의
+상을 소멸시킨다.
+\end{lemma}
+
+\begin{proof}
+$t = 0$일 때는 합성
+$$
+\Omega_{S/\Lambda} \to \Omega_{S/R} \to \Omega_R \to \Omega_{R/\Lambda}
+$$
+을 사용한다. 둘째 사상은 보조정리 \ref{resolve-lemma-trace-well-defined}의 사상이다.
+완전열
+$$
+H_1(L_{S/R}) \xrightarrow{\delta} \Omega_{R/\Lambda} \otimes_R S \to
+\Omega_{S/\Lambda} \to \Omega_{S/R} \to 0
+$$
+이 있다(대수학의 보조정리 \ref{algebra-lemma-exact-sequence-NL}).
+$\Omega_{S/R}$는 $\text{d}x$를 기저로 하는 자유 $S$-가군이고,
+$H_1(L_{S/R})$는 $x^p - a$를 기저로 하는 자유 $S$-가군이다. $\delta$는
+이를 $\Omega_{R/\Lambda} \otimes_R S$의 $-\text{d}a \otimes 1$로 보낸다.
+특히
+$$
+M = \Coker(R \to \Omega_{R/\Lambda}, 1 \mapsto -\text{d}a)
+$$
+로 두면 $\Coker(\delta) = M \otimes_R S$이다. 표준 사상
+$$
+\Omega^{t + 1}_{S/\Lambda} \to
+\wedge_S^t(\Coker(\delta)) \otimes_S \Omega_{S/R} =
+\wedge^t_R(M) \otimes_R \Omega_{S/R}
+$$
+을 얻는다. 이제 보조정리 \ref{resolve-lemma-trace-well-defined}의 사상
+$\text{Tr} : \Omega_{S/R} \to \Omega_{R/\Lambda}$
+의 상은 $R\text{d}a$에 포함되므로, 그 상의 원소와 외적을 취하면
+$\text{d}a$가 소멸한다. 따라서 표준 사상
+$$
+\wedge^t_R(M) \otimes_R \Omega_{S/R} \to \Omega_{R/\Lambda}^{t + 1}
+$$
+이 있으며,
+$\overline{\eta}_1 \wedge \ldots \wedge \overline{\eta}_t \wedge \omega$
+를 $\eta_1 \wedge \ldots \wedge \eta_t \wedge \text{Tr}(\omega)$로 보낸다.
+\end{proof}
+
+\begin{remark}
+\label{resolve-remark-compare-Garel}
+$\mathbf{F}_p \subset \Lambda \subset R \subset S$와 $\text{Tr}$를 보조정리
+\ref{resolve-lemma-trace-higher}에서와 같이 잡자. 드람 코호몰로지의 명제
+\ref{derham-proposition-Garel}에 의해 복합체의 표준 사상
+$$
+\Theta_{S/R} :
+\Omega_{S/\Lambda}^\bullet
+\longrightarrow
+\Omega_{R/\Lambda}^\bullet
+$$
+이 있다. 드람 코호몰로지의 예제 \ref{derham-example-Garel}의 계산에 따르면
+모든 $i$에 대해
+$\Theta_{S/R}(x^i \text{d}x) = \text{Tr}_x(x^i\text{d}x)$이다.
+$\text{Trace}_{S/R} = \Theta^0_{S/R}$는 항등적으로 영이고,
+$$
+\Theta_{S/R}(a \wedge b) = a \wedge \Theta_{S/R}(b)
+$$
+가 $a \in \Omega^i_{R/\Lambda}$와 $b \in \Omega^j_{S/\Lambda}$에 대해
+성립하므로 $\text{Tr} = \Theta_{S/R}$이다. $\text{Tr}$를 사용하는 장점은
+그 구성이 훨씬 초등적이라는 점이다.
+\end{remark}
+
+\begin{lemma}
+\label{resolve-lemma-trace-extends}
+$S$를 $\mathbf{F}_p$ 위 스킴이라 하자. $f : Y \to X$를 $S$ 위 Noether
+정규 정역 스킴들의 유한 사상이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item 함수체의 확대는 차수 $p$인 순수 비분리 확대이다.
+\item $\Omega_{X/S}$는 연접 $\mathcal{O}_X$-가군이다(예컨대 $X$가 $S$ 위
+유한형인 경우).
+\end{enumerate}
+$i \geq 1$에 대해 표준 사상
+$$
+\text{Tr} : f_*\Omega^i_{Y/S} \longrightarrow (\Omega_{X/S}^i)^{**}
+$$
+이 존재하며, $X$의 일반점에서 그 줄기는 보조정리
+\ref{resolve-lemma-trace-higher}의 대각합 사상을 복원한다.
+\end{lemma}
+
+\begin{proof}
+완전열 $f^*\Omega_{X/S} \to \Omega_{Y/S} \to \Omega_{Y/X} \to 0$에 의해
+$\Omega_{Y/S}$와 따라서 $f_*\Omega_{Y/S}$도 연접 가군이다. 그러므로 일반점의
+대각합 사상이 $\dim(\mathcal{O}_{X, x}) = 1$인 $x \in X$에서 줄기로
+확장됨을 증명하면 충분하다. 인자의 보조정리
+\ref{divisors-lemma-describe-reflexive-hull}을 보라. 따라서 다음 문단의 경우로
+환원된다.
+
+\medskip\noindent
+$X = \Spec(A)$와 $Y = \Spec(B)$이고, $A$는 이산 값매김환이며 $B$는 $A$ 위
+유한이라고 하자. 유도된 분수체 확대 $L/K$가 순수 비분리이므로 $B$도
+국소환이며, 따라서 $B$도 이산 값매김환이다. 이제 다음 두 경우 중 하나이다.
+\begin{enumerate}
+\item $B/A$의 분기지수가 $p$이고, 따라서 어떤 균일화원 $a \in A$에 대해
+$B = A[x]/(x^p - a)$이다.
+\item $\mathfrak m_B = \mathfrak m_A B$이고, 잉여체 $B/\mathfrak m_A B$는
+$\kappa_A = A/\mathfrak m_A$ 위 차수 $p$인 순수 비분리 확대이다.
+잉여류가 $\kappa_A$에 속하지 않는 아무 $x \in B$를 택하면, 어떤 단위원
+$a \in A$에 대해 $B = A[x]/(x^p - a)$이다.
+\end{enumerate}
+아핀 열린집합 $\Spec(\Lambda) \subset S$를 잡되,
+$X$가 $\Spec(\Lambda)$ 안으로 보내지게 하자. 그러면
+보조정리 \ref{resolve-lemma-trace-higher}에 의해 대각합 사상이 모든 $i \geq 1$에 대해
+$\Omega^i_{B/\Lambda} \to \Omega^i_{A/\Lambda}$
+로 확장된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{이차 변환}
+\label{resolve-section-quadratic}
+
+\noindent
+이 절에서는 곡면의 비특이점을 부풀릴 때 일어나는 일을 연구한다. 한편으로는
+다른 이름들이 흔히 쓰이고, 다른 한편으로는 ``이차 변환''이라는 말이 때때로
+다른 의미로 쓰이므로, 이러한 사상을 형식적으로 {\it 이차 변환}이라고
+정의하지는 않겠다.
+
+\begin{lemma}
+\label{resolve-lemma-blowup}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 정칙 국소환이라 하자.
+$f : X \to S = \Spec(A)$를 $\mathfrak m$에서의 $A$의 부풀리기라 하고,
+$E$를 예외 인자라 하자. $S$ 위 닫힌 몰입
+$$
+r : X \longrightarrow \mathbf{P}^1_S
+$$
+이 존재하며 다음이 성립한다.
+\begin{enumerate}
+\item $r|_E : E \to \mathbf{P}^1_\kappa$는 동형사상이다.
+\item $\mathcal{O}_X(E) = \mathcal{O}_X(-1) =
+r^*\mathcal{O}_{\mathbf{P}^1}(-1)$이다.
+\item $\mathcal{C}_{E/X} = (r|_E)^*\mathcal{O}_{\mathbf{P}^1}(1)$이고
+$\mathcal{N}_{E/X} = (r|_E)^*\mathcal{O}_{\mathbf{P}^1}(-1)$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$A$는 차원 $2$인 정칙환이므로 $\mathfrak m = (x, y)$로 쓸 수 있다.
+차수 $1$에 놓인 $x$와 $y$는 $A$ 위 Rees 대수
+$\bigoplus_{n \geq 0} \mathfrak m^n$을 생성한다.
+$X = \text{Proj}(\bigoplus_{n \geq 0} \mathfrak m^n)$임을 상기하자.
+인자의 보조정리 \ref{divisors-lemma-blowing-up-affine}을 보라. 따라서 등급
+$A$-대수의 전사
+$$
+A[T_0, T_1] \longrightarrow \bigoplus\nolimits_{n \geq 0} \mathfrak m^n,
+\quad
+T_0 \mapsto x,\ T_1 \mapsto y
+$$
+는 $\mathcal{O}_X(1) = r^*\mathcal{O}_{\mathbf{P}^1_S}(1)$을 만족하는 닫힌 몰입
+$r : X \to \mathbf{P}^1_S = \text{Proj}(A[T_0, T_1])$을 유도한다. 구성의
+보조정리
+\ref{constructions-lemma-surjective-graded-rings-generated-degree-1-map-proj}.
+인자의 보조정리
+\ref{divisors-lemma-blowing-up-gives-effective-Cartier-divisor}.
+에 의해 $\mathcal{O}_X(E) = \mathcal{O}_X(-1)$이므로 (2)가 증명된다.
+
+\medskip\noindent
+(1)을 증명하기 위해
+$$
+\left(\bigoplus\nolimits_{n \geq 0} \mathfrak m^n\right) \otimes_A \kappa =
+\bigoplus\nolimits_{n \geq 0} \mathfrak m^n/\mathfrak m^{n + 1} \cong
+\kappa[\overline{x}, \overline{y}]
+$$
+가 다항식 대수임을 주목하자. 대수학의 보조정리
+\ref{algebra-lemma-regular-graded}을 보라. 따라서 구성의 보조정리
+\ref{constructions-lemma-base-change-map-proj}에 의해 $\Spec(\kappa)$ 위에서
+$X \to S$의 올은
+$\text{Proj}(\kappa[\overline{x}, \overline{y}]) = \mathbf{P}^1_\kappa$이다.
+$E$는 $\mathfrak m\mathcal{O}_X$로 정의되는 $X$의 닫힌 부분스킴, 즉
+$E = X_\kappa$임을 상기하자. 사상 $r$의 선택에 의해 $r|_E$는 실제로
+$E = X_\kappa$를 $\mathbf{P}^1_S \to S$의 특수 올과 식별한다.
+
+\medskip\noindent
+(3)은 (1), (2), 그리고 인자의 보조정리
+\ref{divisors-lemma-conormal-effective-Cartier-divisor}.
+에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-blowup-regular}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 정칙 국소환이라 하자.
+$f : X \to S = \Spec(A)$를 $\mathfrak m$에서의 $A$의 부풀리기라 하자.
+그러면 $X$는 기약 정칙 스킴이다.
+\end{lemma}
+
+\begin{proof}
+인자의 보조정리 \ref{divisors-lemma-blow-up-integral-scheme}와 대수학의
+보조정리 \ref{algebra-lemma-regular-domain}에 의해 $X$는 정역 스킴이다.
+$X$가 정칙임을 보이려면 모든 닫힌점 $x \in X$에 대해
+$\mathcal{O}_{X, x}$가 정칙임을 확인하면 충분하다. 성질의 보조정리
+\ref{properties-lemma-characterize-regular}을 보라. 닫힌점 $x \in X$를 잡자.
+$f$가 고유이므로 $x$는 $\mathfrak m$으로 가며, 즉 $x$는 예외 인자 $E$의 점이다.
+이때 $E$는 유효 Cartier 인자이고 $E \cong \mathbf{P}^1_\kappa$이다.
+따라서 $g \in \mathfrak m_x \subset \mathcal{O}_{X, x}$가 $E$의 국소
+방정식이면
+$\mathcal{O}_{X, x}/(g) \cong \mathcal{O}_{\mathbf{P}^1_\kappa, x}$이다.
+$\mathbf{P}^1_\kappa$는 $\kappa$ 위 다항식환의 스펙트럼인 두 아핀
+열린집합으로 덮이므로, 대수학의 보조정리
+\ref{algebra-lemma-dim-affine-space}에 의해
+$\mathcal{O}_{\mathbf{P}^1_\kappa, x}$는 정칙이다. 이제 대수학의 보조정리
+\ref{algebra-lemma-regular-mod-x}를 적용하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-blowup-pic}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 정칙 국소환이라 하자.
+$f : X \to S = \Spec(A)$를 $\mathfrak m$에서의 $A$의 부풀리기라 하자.
+그러면 $\Pic(X) = \mathbf{Z}$이고 $\mathcal{O}_X(E)$가 이를 생성한다.
+\end{lemma}
+
+\begin{proof}
+$E = \mathbf{P}^1_\kappa$의 Picard 군은 $\mathcal{O}(1)$이 생성하는
+$\mathbf{Z}$임을 상기하자. 인자의 보조정리
+\ref{divisors-lemma-Pic-projective-space-UFD}을 보라. 보조정리
+\ref{resolve-lemma-blowup}에 의해 가역 $\mathcal{O}_X$-가군 $\mathcal{O}_X(E)$의
+제한은 $\mathcal{O}(-1)$이다. 따라서 $\mathcal{O}_X(E)$는
+$\Pic(X)$에서 무한 순환군을 생성한다. $A$는 정칙이므로 유일인수분해정역이다.
+대수학 심화의 보조정리 \ref{more-algebra-lemma-regular-local-UFD}을 보라.
+따라서 천공 스펙트럼 $U = S \setminus \{\mathfrak m\} = X \setminus E$의
+Picard 군은 자명하다. 인자의 보조정리
+\ref{divisors-lemma-open-subscheme-UFD}을 보라. 그러므로 모든 가역
+$\mathcal{O}_X$-가군 $\mathcal{L}$에 대해 동형사상
+$s : \mathcal{O}_U \to \mathcal{L}|_U$가 있다. 이때 $s$는 $\mathcal{L}$의
+정칙 유리형 절이며, 어떤 $n \in \mathbf{Z}$에 대해
+$\text{div}_\mathcal{L}(s) = nE$이다(인자의 정의
+\ref{divisors-definition-divisor-invertible-sheaf}). 인자의 보조정리
+\ref{divisors-lemma-normal-c1-injective}와 보조정리
+\ref{resolve-lemma-blowup-regular}에 의해 $X$가 정규라는 사실로부터
+$\mathcal{L} = \mathcal{O}_X(nE)$를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-cohomology-of-blowup}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 정칙 국소환이라 하자.
+$f : X \to S = \Spec(A)$를 $\mathfrak m$에서의 $A$의 부풀리기라 하고,
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+\begin{enumerate}
+\item $p \not \in \{0, 1\}$이면 $H^p(X, \mathcal{F}) = 0$이다.
+\item $n \geq -1$이면 $H^1(X, \mathcal{O}_X(n)) = 0$이다.
+\item $\mathcal{F}$ 또는 $\mathcal{F}(1)$이 대역 생성이면
+$H^1(X, \mathcal{F}) = 0$이다.
+\item $H^0(X, \mathcal{O}_X(n)) = \mathfrak m^{\max(0, n)}$,
+\item $\text{length}_A H^1(X, \mathcal{O}_X(n)) = -n(-n - 1)/2$
+$n < 0$이면 위 등식이 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathfrak m = (x, y)$라 하자. 차수 $1$에 놓인 $x$와 $y$가 $A$ 위 Rees
+대수 $\bigoplus \mathfrak m^n$을 생성하므로 $X$는 아핀 부풀리기 대수
+$A[\frac{\mathfrak m}{x}]$와 $A[\frac{\mathfrak m}{y}]$의 스펙트럼으로
+덮인다. 인자의 보조정리 \ref{divisors-lemma-blowing-up-affine}과 구성의
+보조정리 \ref{constructions-lemma-proj-quasi-compact}을 보라. 구성의
+보조정리 \ref{constructions-lemma-proj-separated}에 의해 $X$는 분리이고,
+따라서 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-vanishing-nr-affines}에 의해 준연접층의 코호몰로지는
+차수 $\geq 2$에서 사라진다.
+
+\medskip\noindent
+$i : E \to X$를 예외 인자라 하자. 인자의 정의
+\ref{divisors-definition-blow-up}을 보라.
+$\mathcal{O}_X(-E) = \mathcal{O}_X(1)$은 $f$-상대적으로 풍부하다. 인자의
+보조정리 \ref{divisors-lemma-blowing-up-gives-effective-Cartier-divisor}을 보라.
+따라서 어떤 $n > 0$에 대해 $H^1(X, \mathcal{O}_X(-nE)) = 0$이다.
+스킴의 코호몰로지의 보조정리 \ref{coherent-lemma-kill-by-twisting}을 보라.
+여과
+$$
+\mathcal{O}_X(-nE) \subset \mathcal{O}_X(-(n - 1)E) \subset
+\ldots \subset \mathcal{O}_X(-E) \subset \mathcal{O}_X \subset \mathcal{O}_X(E)
+$$
+의 연속 몫들은 다음 층들이다.
+$$
+\mathcal{O}_X(-t E)/\mathcal{O}_X(-(t + 1)E) =
+\mathcal{O}_X(t)/\mathcal{I}(t) =
+i_*\mathcal{O}_E(t)
+$$
+여기서 $\mathcal{I} = \mathcal{O}_X(-E)$는 $E$의 아이디얼 층이다.
+보조정리 \ref{resolve-lemma-blowup}에 의해 $E = \mathbf{P}^1_\kappa$이고,
+$\mathcal{O}_E(1)$은 $\mathbf{P}^1$ 위 구조층의 통상적인 Serre 꼬임과
+대응한다. 따라서 $t \geq -1$이면 $\mathcal{O}_E(t)$의 차수 $1$
+코호몰로지는 사라진다. 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-cohomology-projective-space-over-ring}.
+을 보라. 이는 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-relative-affine-cohomology}에 의해
+$H^1(X, i_*\mathcal{O}_E(t))$와 같으므로, $t \geq -1$일 때
+$H^1(X, \mathcal{O}_X(-(t + 1)E)) \to H^1(X, \mathcal{O}_X(-tE))$가
+전사이다. 따라서
+$$
+0 = H^1(X, \mathcal{O}_X(-nE))
+\longrightarrow
+H^1(X, \mathcal{O}_X(-tE)) = H^1(X, \mathcal{O}_X(t))
+$$
+는 $t \geq -1$일 때 전사이고, 이것이 (2)를 증명한다.
+
+\medskip\noindent
+$\mathcal{F}$가 대역 생성이라고 하자. 이는 짧은 완전열
+$$
+0 \to \mathcal{G} \to \bigoplus\nolimits_{i \in I} \mathcal{O}_X
+\to \mathcal{F} \to 0
+$$
+이 존재한다는 뜻이다. 코호몰로지의 보조정리
+\ref{cohomology-lemma-quasi-separated-cohomology-colimit}에 의해
+$H^1(X, \bigoplus_{i \in I} \mathcal{O}_X) =
+\bigoplus_{i \in I} H^1(X, \mathcal{O}_X)$임을 주목하자. (2)에 의해
+$H^1(X, \mathcal{O}_X) = 0$이다. $\mathcal{F}(1)$이 대역 생성이면 전사
+$\bigoplus_{i \in I} \mathcal{O}_X(-1) \to \mathcal{F}$를 찾아 같은 방식으로
+논증할 수 있다. 즉 (3)은 (2)에서 따른다.
+
+\medskip\noindent
+(4)를 위해 충분히 큰 모든 $n$에 대해
+$\Gamma(X, \mathcal{O}_X(n)) = \mathfrak m^n$임을 주목하자. 스킴의
+코호몰로지의 보조정리 \ref{coherent-lemma-recover-tail-graded-module}을 보라.
+$n \geq 0$이면 짧은 완전열
+$$
+0 \to \mathcal{O}_X(n) \to \mathcal{O}_X(n - 1) \to
+i_*\mathcal{O}_E(n - 1) \to 0
+$$
+과 왼쪽 층의 $H^1$ 소멸을 사용하여 가환 도식
+$$
+\xymatrix{
+0 \ar[r] &
+\mathfrak m^{\max(0, n)} \ar[r] \ar[d] &
+\mathfrak m^{\max(0, n - 1)} \ar[r] \ar[d] &
+\mathfrak m^{\max(0, n)}/\mathfrak m^{\max(0, n - 1)} \ar[r] \ar[d] & 0\\
+0 \ar[r] &
+\Gamma(X, \mathcal{O}_X(n)) \ar[r] &
+\Gamma(X, \mathcal{O}_X(n - 1)) \ar[r] &
+\Gamma(E, \mathcal{O}_E(n - 1)) \ar[r] & 0
+}
+$$
+을 얻으며, 두 행은 완전하다. 사실 $n < 0$일 때는 오른쪽 군들이 영이므로
+이 경우에도 행들은 완전하다. 보조정리 \ref{resolve-lemma-blowup}의 증명에서 오른쪽
+수직 화살표가 동형사상임을 보았다(세부 사항은 생략한다). 따라서 왼쪽 수직
+화살표가 동형사상이면 가운데 화살표도 그러하다. 이 방식으로 $n$에 대한
+내림귀납법을 적용하면 (4)를 얻는다.
+
+\medskip\noindent
+마지막으로 $n$에 대한 내림귀납법과 완전열들
+$$
+0 \to \mathcal{O}_X(n) \to \mathcal{O}_X(n - 1) \to
+i_*\mathcal{O}_E(n - 1) \to 0
+$$
+을 사용하여 (5)를 증명한다. $n \geq -1$이면 이미
+$H^1(X, \mathcal{O}_X(n)) = 0$임을 안다. 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-cohomology-projective-space-over-ring}에 의해
+$$
+H^1(X, i_*\mathcal{O}_E(-2)) =
+H^1(E, \mathcal{O}_E(-2)) =
+H^1(\mathbf{P}^1_\kappa, \mathcal{O}(-2)) \cong \kappa
+$$
+이고, 이는 $A$-가군으로서 길이 $1$이다. 그러므로 긴 완전 코호몰로지 열에서
+$n = -2$일 때 (5)가 성립함을 얻는다. 이후도 같은 방식이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-blowup-improve}
+$(A, \mathfrak m)$을 차원 $2$인 정칙 국소환이라 하자.
+$f : X \to S = \Spec(A)$를 $\mathfrak m$에서의 $A$의 부풀리기라 하고,
+$\mathfrak m^n \subset I \subset \mathfrak m$을 아이디얼이라 하자.
+$d \geq 0$을
+$$
+I \mathcal{O}_X \subset \mathcal{O}_X(-dE)
+$$
+가 성립하게 하는 가장 큰 정수라 하자. 여기서 $E$는 예외 인자이다.
+$\mathcal{I}' = I\mathcal{O}_X(dE) \subset \mathcal{O}_X$로 둔다.
+그러면 $d > 0$이고, 층 $\mathcal{O}_X/\mathcal{I}'$의 지지는 $X$의 유한 개
+닫힌점 $x_1, \ldots, x_r$에 포함되며,
+\begin{align*}
+\text{length}_A(A/I)
+& >
+\text{length}_A \Gamma(X, \mathcal{O}_X/\mathcal{I}') \\
+& \geq
+\sum\nolimits_{i = 1, \ldots, r}
+\text{length}_{\mathcal{O}_{X, x_i}}
+(\mathcal{O}_{X, x_i}/\mathcal{I}'_{x_i})
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+$I \subset \mathfrak m$이므로 $I$의 모든 원소는 $E$ 위에서 사라진다.
+따라서 $d \geq 1$이다. 한편 $\mathfrak m^n \subset I$이므로 $d \leq n$이다.
+짧은 완전열
+$$
+0 \to I\mathcal{O}_X \to \mathcal{O}_X \to \mathcal{O}_X/I\mathcal{O}_X \to 0
+$$
+을 생각하자. $I\mathcal{O}_X$는 대역 생성이므로 보조정리
+\ref{resolve-lemma-cohomology-of-blowup}에 의해 $H^1(X, I\mathcal{O}_X) = 0$이다.
+따라서 전사 $A/I \to \Gamma(X, \mathcal{O}_X/I\mathcal{O}_X)$를 얻는다.
+짧은 완전열
+$$
+0 \to
+\mathcal{O}_X(-dE)/I\mathcal{O}_X \to
+\mathcal{O}_X/I\mathcal{O}_X \to
+\mathcal{O}_X/\mathcal{O}_X(-dE) \to 0
+$$
+을 생각하자. 인자의 보조정리 \ref{divisors-lemma-codim-1-part}에 의해
+$\mathcal{O}_X(-dE)/I\mathcal{O}_X$의 지지는 $X$의 유한 개 닫힌점에
+포함된다. 특히 이 연접층의 고차 코호몰로지 군들은 사라진다(세부 사항은
+생략한다). 따라서 다음 도식에서
+$$
+\xymatrix{
+& & A/I \ar[d] \\
+0 \ar[r] &
+\Gamma(X, \mathcal{O}_X(-dE)/I\mathcal{O}_X) \ar[r] &
+\Gamma(X, \mathcal{O}_X/I\mathcal{O}_X) \ar[r] &
+\Gamma(X, \mathcal{O}_X/\mathcal{O}_X(-dE)) \ar[r] & 0
+}
+$$
+아래 행은 완전하고 수직 화살표는 전사이다. 또한
+$$
+\text{length}_A \Gamma(X, \mathcal{O}_X(-dE)/I\mathcal{O}_X) <
+\text{length}_A(A/I)
+$$
+이다. 실제로 $d > 0$이므로 $1 \in \Gamma(X, \mathcal{O}_X)$의 상이
+영이 아니며, 따라서 $\Gamma(X, \mathcal{O}_X/\mathcal{O}_X(-dE))$는
+영이 아니다.
+
+\medskip\noindent
+증명을 끝내기 위해 위 결과들을 보조정리의 명제로 옮기자.
+$\mathcal{O}_X(dE)$가 가역이므로
+$$
+\mathcal{O}_X/\mathcal{I}' =
+\mathcal{O}_X(-dE)/I\mathcal{O}_X \otimes_{\mathcal{O}_X} \mathcal{O}_X(dE).
+$$
+이다. 따라서 $\mathcal{O}_X/\mathcal{I}'$과
+$\mathcal{O}_X(-dE)/I\mathcal{O}_X$의 지지는 같은 유한 개 닫힌점,
+이를테면 $x_1, \ldots, x_r \in E \subset X$에 포함된다. 더 나아가
+$$
+\Gamma(X, \mathcal{O}_X(-dE)/I\mathcal{O}_X) =
+\bigoplus \mathcal{O}_X(-dE)_{x_i}/I\mathcal{O}_{X, x_i}
+\cong
+\bigoplus \mathcal{O}_{X, x_i}/\mathcal{I}'_{x_i} =
+\Gamma(X, \mathcal{O}_X/\mathcal{I}')
+$$
+이다. 국소환 위 가역 가군은 자명하기 때문이다. 이로써 엄격한 부등식을 얻는다.
+또한 길이의 정의에서 곧바로
+$$
+\text{length}_A(\mathcal{O}_{X, x_i}/\mathcal{I}'_{x_i}) \geq
+\text{length}_{\mathcal{O}_{X, x_i}}(\mathcal{O}_{X, x_i}/\mathcal{I}'_{x_i})
+$$
+이므로 둘째 부등식도 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-differentials-of-blowup}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 정칙 국소환이라 하자.
+$f : X \to S = \Spec(A)$를 $\mathfrak m$에서의 $A$의 부풀리기라 하자.
+그러면 $\Omega_{X/S} = i_*\Omega_{E/\kappa}$이다. 여기서
+$i : E \to X$는 예외 인자의 몰입이다.
+\end{lemma}
+
+\begin{proof}
+$\mathbf{P}^1 = \mathbf{P}^1_S$로 쓰고, $r : X \to \mathbf{P}^1$을
+보조정리 \ref{resolve-lemma-blowup}에서와 같이 잡자. 완전열
+$$
+\mathcal{C}_{X/\mathbf{P}^1} \to r^*\Omega_{\mathbf{P}^1/S} \to
+\Omega_{X/S} \to 0
+$$
+이 있다. 스킴의 사상의 보조정리
+\ref{morphisms-lemma-differentials-relative-immersion}을 보라. 스킴의 사상의
+보조정리 \ref{morphisms-lemma-base-change-differentials}에 의해
+$\Omega_{\mathbf{P}^1/S}|_E = \Omega_{E/\kappa}$이므로, 첫 화살표가 표준 사상
+$r^*\Omega_{\mathbf{P}^1/S} \to i_*\Omega_{E/\kappa}$의 핵 위로 전사임을
+보이면 충분하다. 이는 국소적으로 확인할 수 있다. 보조정리
+\ref{resolve-lemma-blowup}의 증명에서와 같은 표기 아래, $X$의 한 아핀 열린집합에서
+사상 $f$는 환 사상
+$$
+A \to A[t]/(xt - y)
+$$
+에 대응한다. 여기서 $x, y \in \mathfrak m$은 생성원이다. 따라서
+$\text{d}(xt - y) = x\text{d}t$이고 $y\text{d}t = t \cdot x \text{d}t$
+이고, 이는 원하는 바를 증명한다.
+\end{proof}
+
+
+
+\section{이차 변환에 의한 지배}
+\label{resolve-section-dominating-by-quadratic}
+
+\noindent
+위 결과를 사용하면 점들에서의 부풀리기가 정칙 $2$차원 스킴의 임의의 변형을
+지배함을 증명할 수 있다.
+
+\medskip\noindent
+$X$를 스킴, $x \in X$를 닫힌점이라 하자. 평소처럼
+$i : x = \Spec(\kappa(x)) \to X$를 닫힌 부분스킴으로 본다. {\it $x$에서의
+$X$의 부풀리기 $X' \to X$}란 닫힌 부분스킴 $x \subset X$에서의 $X$의
+부풀리기이다. $X$가 국소 Noether이면 인자의 보조정리
+\ref{divisors-lemma-blowing-up-projective}에 의해 $X' \to X$는 사영이고,
+특히 고유이다.
+
+\begin{lemma}
+\label{resolve-lemma-make-ideal-principal}
+$X$를 Noether 스킴이라 하자. $T \subset X$를 닫힌점 $x$들의 유한 집합이라
+하고, 각 $x \in T$에 대해
+$\mathcal{O}_{X, x}$가 차원 $2$인 정칙환이 되는 닫힌점들의 유한 집합이라
+하자. $\mathcal{I} \subset \mathcal{O}_X$를
+$\mathcal{O}_X/\mathcal{I}$의 지지가 $T$에 포함되는 준연접 아이디얼 층이라
+하자. 그러면 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 = X
+$$
+이 존재한다. 여기서 $X_{i + 1} \to X_i$는 $T$의 한 점 위에 놓이는 닫힌점에서
+$X_i$를 부풀린 사상이고, $\mathcal{I}\mathcal{O}_{X_n}$은 가역 아이디얼
+층이다.
+\end{lemma}
+
+\begin{proof}
+$T = \{x_1, \ldots, x_r\}$라 하자. $I_i$로 $x_i$에서 $\mathcal{I}$의
+줄기를 나타내고
+$$
+n_i = \text{length}_{\mathcal{O}_{X, x_i}}(\mathcal{O}_{X, x_i}/I_i)
+$$
+로 둔다. $\mathcal{O}_X/\mathcal{I}$의 지지가 $T$에 포함되므로
+$\mathcal{O}_{X, x_i}/I_i$의 지지는 $\{\mathfrak m_{x_i}\}$와 같고, 따라서
+이 길이는 유한이다(대수학의 보조정리 \ref{algebra-lemma-support-point}).
+$\sum n_i$에 대한 귀납법을 사용한다. 모든 $i$에 대해 $n_i = 0$이면
+$\mathcal{I} = \mathcal{O}_X$이므로 끝난다.
+
+\medskip\noindent
+$n_i > 0$이라고 하자. $X' \to X$를 $x_i$에서의 $X$의 부풀리기라 하자
+(보조정리 앞의 논의를 보라). $\Spec(\mathcal{O}_{X, x_i}) \to X$는 평탄이므로,
+$X' \times_X \Spec(\mathcal{O}_{X, x_i})$는 극대 아이디얼에서의 환
+$\mathcal{O}_{X, x_i}$의 부풀리기이다. 인자의 보조정리
+\ref{divisors-lemma-flat-base-change-blowing-up}.
+을 보라. 따라서 가환 도식
+$$
+\xymatrix{
+\text{Proj}(\bigoplus\nolimits_{d \geq 0} \mathfrak m_{x_i}^d) \ar[r] \ar[d] &
+X' \ar[d] \\
+\Spec(\mathcal{O}_{X, x_i}) \ar[r] & X
+}
+$$
+의 사각형은 데카르트이다. $E \subset X'$와
+$E' \subset \text{Proj}(\bigoplus\nolimits_{d \geq 0} \mathfrak m_{x_i}^d)$
+를 예외 인자라 하자. $d \geq 1$을 아이디얼
+$\mathcal{I}_i \subset \mathcal{O}_{X, x_i}$에 대해 보조정리
+\ref{resolve-lemma-blowup-improve}에서 얻은 정수라 하자. 도식의 수평 화살표들이
+평탄이고, $E' \to E$가 전사이며, $E'$이 $E$의 당김이므로
+$$
+\mathcal{I}\mathcal{O}_{X'} \subset \mathcal{O}_{X'}(-dE)
+$$
+이다(몇몇 세부 사항은 생략한다).
+$\mathcal{I}' = \mathcal{I}\mathcal{O}_{X'}(dE) \subset \mathcal{O}_{X'}$로
+두자. $X \setminus \{x_i\}$ 위에서도, 또
+$\text{Proj}(\bigoplus\nolimits_{d \geq 0} \mathfrak m_{x_i}^d)$로 당긴
+뒤에도 그러하므로, $\mathcal{O}_{X'}/\mathcal{I}'$의 지지는 유한 개 닫힌점
+$T' \subset |X'|$에 포함된다. 보조정리 \ref{resolve-lemma-blowup-improve}의 마지막
+명제에 따르면 $x_i$ 위에 놓이는 $x'$들에 대한 줄기
+$\mathcal{O}_{X', x'}/\mathcal{I}'\mathcal{O}_{X', x'}$의 길이의 합은
+$< n_i$이다. 따라서 길이의 합이 감소했다.
+
+\medskip\noindent
+귀납 가정에 의해 닫힌점에서의 부풀리기들의 열
+$$
+X'_n \to \ldots \to X'_1 \to X'
+$$
+이 존재하고, 그 중심들은 $T'$ 위에 놓이며
+$\mathcal{I}'\mathcal{O}_{X'_n}$은 가역이다.
+$\mathcal{I}'\mathcal{O}_{X'}(-dE) = \mathcal{I}\mathcal{O}_{X'}$이므로
+$\mathcal{I}\mathcal{O}_{X'_n} =
+\mathcal{I}'\mathcal{O}_{X'_n}(-d(f')^{-1}E)$이다. 여기서
+$f' : X'_n \to X'$는 합성이다. 인자의 보조정리
+\ref{divisors-lemma-blow-up-pullback-effective-Cartier}에 의해
+$(f')^{-1}E$는 유효 Cartier 인자이다. 이제 인자의 보조정리
+\ref{divisors-lemma-sum-effective-Cartier-divisors}를 적용하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-dominate-by-blowing-up-in-points}
+$X$를 Noether 스킴이라 하자. $T \subset X$를 닫힌점 $x$들의 유한 집합이라
+하고, 각 점에서
+$\mathcal{O}_{X, x}$가 차원 $2$인 정칙 국소환이 되는 유한 집합이라 하자.
+$f : Y \to X$를 $U = X \setminus T$ 위에서 동형사상인 스킴의 고유 사상이라
+하자. 그러면 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 = X
+$$
+이 존재한다. 여기서 $X_{i + 1} \to X_i$는 $T$의 한 점 위에 놓이는 닫힌점
+$x_i$에서의 $X_i$의 부풀리기이고, 합성은 $X_n \to Y \to X$로 분해된다.
+\end{lemma}
+
+\begin{proof}
+평탄성 심화의 보조정리 \ref{flat-lemma-dominate-modification-by-blowup}에 의해
+$Y \to X$를 지배하는 $U$-허용 부풀리기 $X' \to X$가 존재한다. 따라서
+$\mathcal{O}_X/\mathcal{I}$의 지지가 $T$에 포함되고 $Y$가
+$\mathcal{I}$에서의 $X$의 부풀리기가 되는 아이디얼 층
+$\mathcal{I} \subset \mathcal{O}_X$가 존재한다고 가정해도 된다. 보조정리
+\ref{resolve-lemma-make-ideal-principal}에 의해 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 = X
+$$
+이 존재한다. 여기서 $X_{i + 1} \to X_i$는 $T$의 한 점 위에 놓이는 닫힌점
+$x_i$에서의 $X_i$의 부풀리기이고,
+$\mathcal{I}\mathcal{O}_{X_n}$은 가역 아이디얼 층이다. 부풀리기의 보편 성질
+(인자의 보조정리 \ref{divisors-lemma-universal-property-blowing-up})에 의해
+원하는 분해를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-extend-rational-map-blowing-up}
+$S$를 스킴이라 하자. $X$를 정칙이고 차원이 $2$인 $S$ 위 스킴이라 하고,
+$Y$를 $S$ 위 고유 스킴이라 하자. $X$에서 $Y$로 가는 $S$-유리 사상
+$f : U \to Y$가 주어지면 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 = X
+$$
+과 $S$-사상 $f_n : X_n \to Y$가 존재한다. 여기서
+$X_{i + 1} \to X_i$는 $U$ 위에 놓이지 않는 닫힌점에서의 $X_i$의
+부풀리기이고, $f_n$과 $f$는 일치한다.
+\end{lemma}
+
+\begin{proof}
+$U$가 여차원 $1$인 모든 점을 포함한다고 가정해도 된다. 스킴의 사상의
+보조정리 \ref{morphisms-lemma-extend-across}을 보라. 따라서 $U$의 여집합
+$T \subset X$는 국소환이 차원 $2$인 정칙환인 닫힌점들의 유한 집합이다.
+인자의 보조정리 \ref{divisors-lemma-extend-rational-map-after-modification}을
+적용하면 $U$ 위에서 동형사상인 고유 사상 $p : X' \to X$와 $U$ 위에서
+$f$와 일치하는 사상 $f' : X' \to Y$를 얻는다. 사상 $p : X' \to X$에
+보조정리 \ref{resolve-lemma-dominate-by-blowing-up-in-points}를 적용한다. 합성
+$X_n \to X' \to Y$가 원하는 사상이다.
+\end{proof}
+
+
+
+
+
+
+\section{정규화 부풀리기에 의한 지배}
+\label{resolve-section-normalized-blowups}
+
+\noindent
+이 절에서는 곡면의 변형이 점들에서의 정규화 부풀리기의 열에 의해 지배됨을
+증명한다.
+
+\begin{definition}
+\label{resolve-definition-normalized-blowup}
+$X$를 모든 준콤팩트 열린집합이 유한 개의 기약성분을 가지는 스킴이라 하고,
+$x \in X$를 닫힌점이라 하자. {\it $x$에서의 $X$의 정규화 부풀리기}란
+합성 $X'' \to X' \to X$를 말한다. 여기서 $X' \to X$는 $x$에서의 $X$의
+부풀리기이고, $X'' \to X'$는 $X'$의 정규화이다.
+\end{definition}
+
+\noindent
+인자의 보조정리 \ref{divisors-lemma-blow-up-and-irreducible-components}에 의해
+$X'$는 유한 개의 기약성분을 가지는 열린집합들로 덮이므로, 여기서 정규화
+$X'' \to X'$는 정의된다. 정규화의 정의는 스킴의 사상의 정의
+\ref{morphisms-definition-normalization}를 보라.
+
+\medskip\noindent
+일반적으로 $X$가 Noether인 경우에도 정규화 부풀리기는 고유일 필요가 없다.
+스킴이 Nagata라는 것은 Nagata 환들의 스펙트럼인 아핀 열린집합들로 덮인다는
+뜻이다(성질의 정의 \ref{properties-definition-nagata}).
+
+\begin{lemma}
+\label{resolve-lemma-Nagata-normalized-blowup}
+정의 \ref{resolve-definition-normalized-blowup}에서 $X$가 Nagata이면 $x$에서의
+$X$의 정규화 부풀리기는 정규이고 Nagata이며 $X$ 위 고유이다.
+\end{lemma}
+
+\begin{proof}
+부풀리기 사상 $X' \to X$는 고유이다. 실제로 $X$가 국소 Noether이므로 인자의
+보조정리 \ref{divisors-lemma-blowing-up-projective}을 적용할 수 있다. 따라서
+$X'$는 Nagata이다(스킴의 사상의 보조정리
+\ref{morphisms-lemma-finite-type-nagata}). 그러므로 정규화 $X'' \to X'$는
+유한이고(스킴의 사상의 보조정리
+\ref{morphisms-lemma-nagata-normalization}), 이에 따라 $X'' \to X$도
+고유이다(스킴의 사상의 보조정리 \ref{morphisms-lemma-finite-proper}과
+\ref{morphisms-lemma-composition-proper}). 따라서 정규화 부풀리기는 정규
+(스킴의 사상의 보조정리 \ref{morphisms-lemma-normalization-normal}) Nagata
+대수공간이다.
+\end{proof}
+
+\noindent
+다음 보조정리에서는 유한 개의 기약성분을 가짐을 보장하기 위해
+$X$가 Noether라고 가정해야 한다. 그러면 $f : Y \to X$의 고유성에 의해
+$Y$도 유한 개의 기약성분을 가지므로 $f$가 쌍유리라고 요구하는 것이 의미가
+있다(스킴의 사상의 정의 \ref{morphisms-definition-birational}).
+
+\begin{lemma}
+\label{resolve-lemma-dominate-by-normalized-blowing-up}
+$X$를 Noether이고 Nagata이며 차원이 $2$인 스킴이라 하자.
+$f : Y \to X$를 고유 쌍유리 사상이라 하자. 그러면 가환 도식
+$$
+\xymatrix{
+X_n \ar[r] \ar[d] &
+X_{n - 1} \ar[r] &
+\ldots \ar[r] &
+X_1 \ar[r] &
+X_0 \ar[d] \\
+Y \ar[rrrr]  & & & & X
+}
+$$
+이 존재한다. 여기서 $X_0 \to X$는 정규화이고,
+$X_{i + 1} \to X_i$는 한 닫힌점에서의 $X_i$의 정규화 부풀리기이다.
+\end{lemma}
+
+\begin{proof}
+스킴의 사상의 절
+\ref{morphisms-section-nagata},
+\ref{morphisms-section-dimension-formula}, 및
+\ref{morphisms-section-normalization}의 결과를 더 언급하지 않고 사용하겠다.
+$Y$를 그 정규화로 바꾸어도 된다. $X_0 \to X$를 정규화라 하자. 사상
+$Y \to X$는 $X_0$를 통해 분해된다. 따라서 $X$와 $Y$가 모두 정규라고
+가정해도 된다.
+
+\medskip\noindent
+$X$와 $Y$가 정규라고 하자. 다형체의 보조정리
+\ref{varieties-lemma-modification-normal-iso-over-codimension-1}에 의해
+$f : Y \to X$는 $Y$의 여차원 $0$, $1$인 모든 점과 올이 유한인 $Y$의 모든 점을
+포함하는 열린집합 위에서 동형사상이다. 따라서 $f$가 $X \setminus T$ 위에서
+동형사상이 되는 닫힌점들의 유한 집합 $T \subset X$가 존재한다. 각
+$x \in T$에 대해 올 $Y_x$는 $\kappa(x)$ 위 차원 $1$인 고유 기하연결
+스킴이다. 스킴의 사상 심화의 보조정리
+\ref{more-morphisms-lemma-geometrically-connected-fibres-towards-normal}을 보라.
+따라서
+$$
+BadCurves(f) = \{C \subset Y\text{ closed} \mid
+\dim(C) = 1, f(C) = \text{a point}\}
+$$
+는 유한 집합이다. $BadCurves(f)$의 원소 수에 대한 귀납법으로 보조정리를
+증명한다. $BadCurves(f)$가 공집합인 기초 경우에는 $f$가 동형사상이다.
+
+\medskip\noindent
+$x \in T$를 고정한다. $X' \to X$를 $x$에서의 $X$의 정규화 부풀리기라 하고,
+$Y'$을 $Y \times_X X'$의 정규화라 하자. 도식은 다음과 같다.
+$$
+\xymatrix{
+Y' \ar[r]_{f'} \ar[d] & X' \ar[d] \\
+Y \ar[r]^f & X
+}
+$$
+$x$ 위에 놓이고 올 $Y'_{x'}$의 차원이 $\geq 1$인 닫힌점 $x' \in X'$를
+잡자. $C' \subset Y'$을 $Y'_{x'}$의 기약성분, 즉
+$C' \in BadCurves(f')$라 하자. $Y' \to Y \times_X X'$가 유한이므로 $C'$은
+한 기약성분 $C \subset Y_x$로 가야 한다. 분명히 $C \in BadCurves(f)$이다.
+$Y' \to Y$는 쌍유리이고 따라서 $Y$의 여차원 $1$인 점들 위에서
+동형사상이므로 단사 사상
+$$
+BadCurves(f') \longrightarrow BadCurves(f)
+$$
+을 얻는다. 따라서 이러한 정규화 부풀리기를 유한 번 한 뒤 나쁜 곡선 중 적어도
+하나가 사라짐, 즉 표시된 사상이 전사가 아님을 보이면 충분하다.
+
+\medskip\noindent
+Zariski의 논증을 사용하여 나쁜 곡선을 없앤다. $x$ 위에 놓이는
+$C \in BadCurves(f)$를 택한다. $\mathcal{O}_{Y, C}$로 $C$의 일반점에서
+$Y$의 국소환을 나타내자. 잉여체 $R(C)$에서의 상이 $\kappa(x)$ 위 초월인
+원소 $u \in \mathcal{O}_{X, C}$를 택한다. 이는 다형체의 보조정리
+\ref{varieties-lemma-dimension-locally-algebraic}에 의해 $R(C)$의
+$\kappa(x)$ 위 초월차수가 $1$이므로 가능하다. $\mathcal{O}_{Y, C}$와
+$\mathcal{O}_{X, x}$의 분수체가 같으므로 $a, b \in \mathcal{O}_{X, x}$인
+$u = a/b$로 쓸 수 있다. $u$의 선택에 의해 $a, b \in \mathfrak m_x$여야
+한다. 따라서
+$$
+N_{u, a, b} = \min
+\{\text{ord}_{\mathcal{O}_{Y, C}}(a), \text{ord}_{\mathcal{O}_{Y, C}}(b)\} > 0
+$$
+이다. 이 정수에 대해 내림귀납법을 적용할 수 있다. $X' \to X$를 $x$의
+정규화 부풀리기라 하고, 위와 같이 $Y'$을 $X' \times_X Y$의 정규화라 하자.
+$C$가 어떤 $x' \in X'$ 위에 놓이는 나쁜 곡선 $C' \subset Y'$의 상이라면,
+$N_{u, a', b'} < N_{u, a, b}$가 되도록 $a', b' \mathcal{O}_{X', x'}$를
+택할 수 있음을 보이겠다. 이것으로 증명이 끝난다. 실제로 $X' \to X$는
+부풀리기를 통해 분해되므로, $a = a' d$와 $b = b' d$가 되는 영이 아닌 원소
+$d \in \mathfrak m_{x'}$가 존재한다. 즉 $d$를 부풀리기의 예외 인자의 국소
+방정식으로 택하면 된다. 위에서 보았듯 $Y' \to Y$는 $C$의 일반점을 포함하는
+열린집합 위에서 동형사상이므로
+$\mathcal{O}_{Y', C'} = \mathcal{O}_{Y, C}$이다. 따라서
+$$
+\text{ord}_{\mathcal{O}_{Y, C}}(a) =
+\text{ord}_{\mathcal{O}_{Y', C'}}(a' d) =
+\text{ord}_{\mathcal{O}_{Y', C'}}(a') +
+\text{ord}_{\mathcal{O}_{Y', C'}}(d) >
+\text{ord}_{\mathcal{O}_{Y', C'}}(a')
+$$
+$b$에 대해서도 마찬가지이며 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-extend-rational-map-normalized-blowing-up}
+$S$를 스킴이라 하자. $X$를 Noether이고 Nagata이며 차원이 $2$인 $S$ 위
+스킴이라 하고, $Y$를 $S$ 위 고유 스킴이라 하자. $X$에서 $Y$로 가는
+$S$-유리 사상 $f : U \to Y$가 주어지면 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 \to X
+$$
+과 $S$-사상 $f_n : X_n \to Y$가 존재한다. 여기서 $X_0 \to X$는
+정규화이고, $X_{i + 1} \to X_i$는 한 닫힌점에서의 $X_i$의 정규화
+부풀리기이며, $f_n$과 $f$는 일치한다.
+\end{lemma}
+
+\begin{proof}
+인자의 보조정리 \ref{divisors-lemma-extend-rational-map-after-modification}을
+적용하면 $U$ 위에서 동형사상인 고유 사상 $p : X' \to X$와 $U$ 위에서
+$f$와 일치하는 사상 $f' : X' \to Y$를 얻는다. 사상 $p : X' \to X$에
+보조정리 \ref{resolve-lemma-dominate-by-normalized-blowing-up}을 적용한다. 합성
+$X_n \to X' \to Y$가 원하는 사상이다.
+\end{proof}
+
+
+
+
+
+\section{국소환 위의 변형}
+\label{resolve-section-modifications}
+
+\noindent
+$S$를 스킴이라 하고, $s_1, \ldots, s_n \in S$를 서로 다른 닫힌점들이라 하자.
+열린 매장
+$$
+U = S \setminus \{s_1, \ldots, s_n\} \longrightarrow S
+$$
+이 준콤팩트라고 가정한다. $FP_{S, \{s_1, \ldots, s_n\}}$으로 동형사상
+$f^{-1}(U) \to U$를 유도하는 유한 표시 사상 $f : X \to S$들의 범주를
+나타내자. 사상은 $S$ 위 스킴의 사상이다. 각 $i$에 대해
+$S_i = \Spec(\mathcal{O}_{S, s_i})$로 두고 $V_i = S_i \setminus \{s_i\}$라
+하자. $FP_{S_i, s_i}$로 동형사상 $g_i^{-1}(V_i) \to V_i$를 유도하는 유한
+표시 사상 $g_i : Y_i \to S_i$들의 범주를 나타내자. 사상은 $S_i$ 위
+사상이다. 기저변환은 함자
+\begin{equation}
+\label{resolve-equation-equivalence}
+F :
+FP_{S, \{s_1, \ldots, s_n\}}
+\longrightarrow
+FP_{S_1, s_1} \times \ldots \times FP_{S_n, s_n}
+\end{equation}
+를 정의한다. 이 장의 문제 중 적어도 일부를 국소환의 경우로 환원하기 위해
+다음 보조정리를 사용한다.
+
+\begin{lemma}
+\label{resolve-lemma-equivalence}
+함자 $F$ (\ref{resolve-equation-equivalence})는 동치이다.
+\end{lemma}
+
+\begin{proof}
+$n = 1$인 경우에는 극한의 보조정리 \ref{limits-lemma-modifications}이다.
+$n > 1$인 경우에도 정확히 같은 방식으로 증명하거나 이 결과에서 유도할 수
+있다. 예를 들어 $g_i : Y_i \to S_i$가 $FP_{S_i, s_i}$의 대상들이라고 하자.
+$n = 1$인 경우에 의해, $S \setminus \{s_i\}$ 위에서 동형사상이고
+$S_i$로의 기저변환이 $g_i$인 유한 표시 사상 $f'_i : X'_i \to S$를 찾을 수
+있다. 이제
+$$
+f : X = X'_1 \times_S \ldots \times_S X'_n \to S
+$$
+로 두면 이는 $FP_{S, \{s_1, \ldots, s_n\}}$의 대상이고, $S_i \to S$에 의한
+기저변환은 $g_i$를 복원한다. 따라서 함자는 본질적으로 전사이다.
+완전충실성의 증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-equivalence-properties}
+$S, s_i, S_i$를 (\ref{resolve-equation-equivalence})에서와 같이 잡자.
+$F$ 아래에서 $f : X \to S$가 $g_i : Y_i \to S_i$에 대응한다고 하자.
+그러면 $f$가 각각 분리, 고유, 유한일 필요충분조건은 모든
+$i = 1, \ldots, n$에 대해 $g_i$가 각각 그러한 것이다.
+\end{lemma}
+
+\begin{proof}
+극한의 보조정리 \ref{limits-lemma-modifications-properties}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-equivalence-fibre}
+$S, s_i, S_i$를 (\ref{resolve-equation-equivalence})에서와 같이 잡자.
+$F$ 아래에서 $f : X \to S$가 $g_i : Y_i \to S_i$에 대응한다고 하자.
+그러면 $\kappa(s_i)$ 위 스킴으로서 $X_{s_i} \cong (Y_i)_{s_i}$이다.
+\end{lemma}
+
+\begin{proof}
+이는 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-equivalence-sequence-blowups}
+$S, s_i, S_i$를 (\ref{resolve-equation-equivalence})에서와 같이 잡고,
+$F$ 아래에서 $f : X \to S$가 $g_i : Y_i \to S_i$에 대응한다고 하자.
+그러면 $f$가 분해
+$$
+X = Z_m \to Z_{m - 1} \to \ldots \to Z_1 \to Z_0 = S
+$$
+를 가질 필요충분조건은 각 $i$에 대해 $g_i$가 분해
+$$
+Y_i = Z_{i, m_i} \to Z_{i, m_i - 1} \to \ldots \to Z_{i, 1} \to Z_{i, 0} = S_i
+$$
+를 가지는 것이다. 여기서 $Z_{j + 1} \to Z_j$는
+$\{s_1, \ldots, s_n\}$ 위에 놓이는 닫힌점 $z_j$에서의 $Z_j$의 부풀리기이고,
+$Z_{i, j + 1} \to Z_{i, j}$는 $s_i$ 위에 놓이는 닫힌점 $z_{i, j}$에서의
+$Z_{i, j}$의 부풀리기이다.
+\end{lemma}
+
+\begin{proof}
+먼저 부풀리기의 열
+$Z_m \to Z_{m - 1} \to \ldots \to Z_1 \to Z_0 = S$.
+로 시작하자. 첫 사상 $Z_1 \to S$는 $s_i$ 중 하나, 이를테면 $s_1$을
+부풀려서 얻는다. $Z_1 \to S$에 $F$를 적용하면 $s_1$에서의 부풀리기
+$Z_{1, 1} \to S_1$을 얻으며, 이는 $s_1$에서의 부풀리기이고
+$i > 1$에 대해서는 $Z_{i, 0} = S_i$이다.
+다음 단계에서는 $Z_1$ 위의 $s_i$ 중 하나($i \geq 2$)를 부풀리거나,
+$s_1$ 위에서 $Z_1 \to S$의 올의 닫힌점 $z_1$을 택한다. 첫 경우에는 무엇을
+해야 하는지가 분명하다. 둘째 경우에는
+$(Z_1)_{s_1} \cong (Z_{1, 1})_{s_1}$(보조정리
+\ref{resolve-lemma-equivalence-fibre})을 사용하여 $z_1$에 대응하는 닫힌점
+$z_{1, 1} \in Z_{1, 1}$을 얻고, $Z_{1, 2} \to Z_{1, 1}$을
+$z_{1, 1}$에서의 부풀리기로 둔다. 이 과정을 계속하여 각 $g_i$의 분해를
+구성한다.
+
+\medskip\noindent
+반대로 부풀리기의 열들
+$Z_{i, m_i} \to Z_{i, m_i - 1} \to \ldots \to Z_{i, 1} \to Z_{i, 0} = S_i$
+이 주어지면 정확히 같은 방식으로 $S$의 부풀리기 열을 구성한다.
+\end{proof}
+
+\noindent
+다음은 정규화 부풀리기에 대한 보조정리
+\ref{resolve-lemma-equivalence-sequence-blowups}의 유사 명제이다.
+
+\begin{lemma}
+\label{resolve-lemma-equivalence-sequence-normalized-blowups}
+$S, s_i, S_i$를 (\ref{resolve-equation-equivalence})에서와 같이 잡고,
+$F$ 아래에서 $f : X \to S$가 $g_i : Y_i \to S_i$에 대응한다고 하자.
+$S$의 모든 준콤팩트 열린집합이 유한 개의 기약성분을 가진다고 가정한다.
+그러면 $f$가 분해
+$$
+X = Z_m \to Z_{m - 1} \to \ldots \to Z_1 \to Z_0 = S
+$$
+를 가질 필요충분조건은 각 $i$에 대해 $g_i$가 분해
+$$
+Y_i = Z_{i, m_i} \to Z_{i, m_i - 1} \to \ldots \to Z_{i, 1} \to Z_{i, 0} = S_i
+$$
+를 가지는 것이다. 여기서 $Z_{j + 1} \to Z_j$는
+$\{x_1, \ldots, x_n\}$ 위에 놓이는 닫힌점 $z_j$에서의 $Z_j$의 정규화
+부풀리기이고, $Z_{i, j + 1} \to Z_{i, j}$는 $s_i$ 위에 놓이는 닫힌점
+$z_{i, j}$에서의 $Z_{i, j}$의 정규화 부풀리기이다.
+\end{lemma}
+
+\begin{proof}
+$S$에 관한 가정은 정규화하는 스킴들이 국소적으로 유한 개의 기약성분을
+가짐을 단계마다 보장하여 명제가 의미 있게 되도록 한다. 이 점을 확인하면
+보조정리는 보조정리 \ref{resolve-lemma-equivalence-sequence-blowups}의 증명과 정확히
+같은 논증으로 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{소멸}
+\label{resolve-section-vanishing}
+
+\noindent
+이 절에서는 다음 설정에서 자주 작업한다. 변형은 정역 스킴들 사이의 고유
+쌍유리 사상임을 상기하자(스킴의 사상의 정의
+\ref{morphisms-definition-modification}).
+
+\begin{situation}
+\label{resolve-situation-vanishing}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 Noether 정규 국소정역이라 하자.
+$s$를 $S = \Spec(A)$의 닫힌점이라 하고 $U = S \setminus \{s\}$로 두자.
+$f : X \to S$를 변형이라 하자. $f$의 특수 올 $X_s$의 기약성분들을
+$C_1, \ldots, C_r$로 나타낸다.
+\end{situation}
+
+\noindent
+다형체의 보조정리
+\ref{varieties-lemma-modification-normal-iso-over-codimension-1}에 의해 $f$는
+동형사상 $f^{-1}(U) \to U$를 정의한다. 다형체의 보조정리
+\ref{varieties-lemma-dimension-fibre-in-higher-codimension}에 의해 특수 올
+$X_s$는 $\Spec(\kappa)$ 위 고유이고 차원이 많아야 $1$이다. Stein 분해
+(스킴의 사상 심화의 보조정리
+\ref{more-morphisms-lemma-geometrically-connected-fibres-towards-normal})에 의해
+$f_*\mathcal{O}_X = \mathcal{O}_S$이고 특수 올 $X_s$는 $\kappa$ 위
+기하연결이다. $X_s$의 차원이 $0$이면 $f$는 유한이고(스킴의 사상 심화의
+보조정리 \ref{more-morphisms-lemma-proper-finite-fibre-finite-in-neighbourhood}),
+따라서 동형사상이다(스킴의 사상의 보조정리
+\ref{morphisms-lemma-finite-birational-over-normal}). 이 흥미롭지 않은 경우를
+제외하면 모든 $i = 1, \ldots, r$에 대해 $\dim(C_i) = 1$이다.
+
+\begin{lemma}
+\label{resolve-lemma-dominate-by-scheme-modification}
+상황 \ref{resolve-situation-vanishing}에서 $X$를 지배하는 $U$-허용 부풀리기
+$X' \to S$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+이는 평탄성 심화의 보조정리
+\ref{flat-lemma-dominate-modification-by-blowup}의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-nice-meromorphic-function}
+상황 \ref{resolve-situation-vanishing}에서 영이 아닌 $f \in \mathfrak m$이 존재하며,
+모든 $i = 1, \ldots, r$에 대해 다음이 존재한다.
+\begin{enumerate}
+\item 모든 $j \not = i$에 대해 $x_i \not \in C_j$인 닫힌점 $x_i \in C_i$,
+\item $\mathcal{O}_{X, x_i}$에서의 $f$의 분해 $f = g_i f_i$. 여기서
+$g_i \in \mathfrak m_{x_i}$의 상은 $\mathcal{O}_{C_i, x_i}$에서 영이 아니다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+상황 \ref{resolve-situation-vanishing} 뒤의 관찰들을 더 언급하지 않고 사용한다.
+$j \not = i$일 때 $C_j$에 속하지 않는 닫힌점 $x_i \in C_i$를 택하고,
+$\mathcal{O}_{C_i, x_i}$에서의 상이 영이 아닌
+$g_i \in \mathfrak m_{x_i}$를 택한다. $A$의 분수체는
+$\mathcal{O}_{X_i, x_i}$의 분수체이므로 어떤 $a_i, b_i \in A$에 대해
+$g_i = a_i/b_i$로 쓸 수 있다. $f = \prod a_i$로 택한다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-nontrivial-normal-bundle}
+상황 \ref{resolve-situation-vanishing}에서 $X$가 정규라고 하자.
+$Z \subset X$를 집합론적으로 $Z \subset X_s$인 공집합이 아닌 유효 Cartier
+인자라 하자. 그러면 $Z$의 여법선층은 자명하지 않다. 더 정확히 말하면
+$C_i \subset Z$이고 $\deg(\mathcal{C}_{Z/X}|_{C_i}) > 0$인 $i$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+상황 \ref{resolve-situation-vanishing} 뒤의 관찰들을 더 언급하지 않고 사용한다.
+$f$를 보조정리 \ref{resolve-lemma-nice-meromorphic-function}의 함수라 하자.
+$\xi_i \in C_i$를 일반점이라 하고, $\mathcal{O}_i$를 $\xi_i$에서 $X$의
+국소환이라 하자. 그러면 $\mathcal{O}_i$는 이산 값매김환이다.
+$e_i$를 $\mathcal{O}_i$에서 $f$의 값매김이라 하면 $e_i > 0$이다.
+$h_i \in \mathcal{O}_i$를 $Z$의 국소 방정식, $d_i$를 그 값매김이라 하면
+$d_i \geq 0$이다. $d_i/e_i$가 최대가 되는 $i$를 택하여 고정한다.
+$Z$가 공집합이 아니므로 $d_i > 0$이다. $f$를 $f^{d_i}$로, $Z$를
+$e_iZ$로 바꾼다. 이는 관계
+$\mathcal{O}_X(e_i Z) = \mathcal{O}_X(Z)^{\otimes e_i}$,
+와 여법선층과 $\mathcal{O}_X(Z)$ 사이의 관계(인자의 보조정리
+\ref{divisors-lemma-invertible-sheaf-sum-effective-Cartier-divisors}
+와 \ref{divisors-lemma-conormal-effective-Cartier-divisor}), 그리고 차수가
+$e_i$배 된다는 사실(다형체의 보조정리
+\ref{varieties-lemma-degree-tensor-product})에 의해 허용된다.
+$\mathcal{I}$를 $Z$의 아이디얼 층이라 하면
+$\mathcal{C}_{Z/X} = \mathcal{I}|_Z$이다. $\Gamma(Z, \mathcal{O}_Z)$에서
+$f$의 상을 $\overline{f}$라 하자. 위 선택에 의해 $\overline{f}$는 $Z$의
+기약성분들의 일반점에서 사라진다. $Z$가 특수 올에 포함되므로 이 점들은 모두
+$C_j$들의 일반점이다. 한편 인자의 보조정리
+\ref{divisors-lemma-normal-effective-Cartier-divisor-S1}에 의해 $Z$는
+$(S_1)$이다. 따라서 스킴 $Z$는 매장 수반점을 가지지 않으며,
+$\overline{f} = 0$이다(인자의 보조정리
+\ref{divisors-lemma-S1-no-embedded} 및
+\ref{divisors-lemma-restriction-injective-open-contains-weakly-ass}).
+따라서 $f$는 $\mathcal{I}$의 대역 절이고, 구성에 의해
+$\mathcal{I}_{\xi_i}$를 생성한다. 그러므로
+$\Gamma(C_i, \mathcal{I}|_{C_i})$에서 $f$의 상 $s_i$는 영이 아니다. 그러나
+$f$의 선택에 의해 $s_i$는 $x_i$에서 영점을 가진다. 따라서 다형체의
+보조정리 \ref{varieties-lemma-check-invertible-sheaf-trivial}에 의해
+$\mathcal{I}|_{C_i}$의 차수는 $> 0$이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-H1-injective}
+상황 \ref{resolve-situation-vanishing}에서 $X$가 정규이고 $A$가 Nagata라고 하자.
+사상
+$$
+H^1(X, \mathcal{O}_X) \longrightarrow H^1(f^{-1}(U), \mathcal{O}_X)
+$$
+은 단사이다.
+\end{lemma}
+
+\begin{proof}
+$0 \to \mathcal{O}_X \to \mathcal{E} \to \mathcal{O}_X \to 0$를
+$H^1(X, \mathcal{O}_X)$의 자명하지 않은 원소 $\xi$에 대응하는 확대라 하자
+(코호몰로지의 보조정리 \ref{cohomology-lemma-h1-extensions}).
+$\pi : P = \mathbf{P}(\mathcal{E}) \to X$를 $\mathcal{E}$에 결부된 사영
+다발이라 하자. 전사 $\mathcal{E} \to \mathcal{O}_X$는 여법선층이
+$\mathcal{O}_X$와 동형인 절 $\sigma : X \to P$를 정의한다(인자의 보조정리
+\ref{divisors-lemma-conormal-sheaf-section-projective-bundle}).
+$f^{-1}(U)$로의 $\xi$의 제한이 자명하면, 단사
+$\mathcal{O}_X \to \mathcal{E}$를 분할하는 사상
+$\mathcal{E}|_{f^{-1}(U)} \to \mathcal{O}_{f^{-1}(U)}$를 얻는다. 이는
+$\sigma$와 서로소인 둘째 절 $\sigma' : f^{-1}(U) \to P$를 정의한다.
+$\xi$가 자명하지 않으므로 $\sigma'$가 $X$ 전체로 확장되면서 $\sigma$와
+서로소일 수는 없다. $X' \subset P$를 $\sigma'$의 스킴론적 상이라 하자
+(스킴의 사상의 정의 \ref{morphisms-definition-scheme-theoretic-image}).
+도식은 다음과 같다.
+$$
+\xymatrix{
+& X' \ar[rd]_g \ar[r] & P \ar[d]_\pi \\
+f^{-1}(U) \ar[ru]_{\sigma'} \ar[rr] & & X \ar@/_/[u]_\sigma
+}
+$$
+사상 $P \setminus \sigma(X) \to X$는 아핀이다.
+$X' \cap \sigma(X) = \emptyset$이면 $X' \to X$는 아핀이면서 고유이고, 따라서
+유한이다(스킴의 사상의 보조정리 \ref{morphisms-lemma-finite-proper}).
+$X$가 정규이므로 이는 동형사상이다(스킴의 사상의 보조정리
+\ref{morphisms-lemma-finite-birational-over-normal}). 앞서 말했듯 이는
+불가능하다.
+
+\medskip\noindent
+$X^\nu$를 $X'$의 정규화라 하자. $A$가 Nagata이므로 $X^\nu \to X'$는
+유한이다(스킴의 사상의 보조정리 \ref{morphisms-lemma-nagata-normalization}과
+\ref{morphisms-lemma-ubiquity-nagata}). $Z \subset X^\nu$를 유효 Cartier
+인자 $\sigma(X) \subset P$의 당김이라 하자. 위에서 보았듯 $Z$는 공집합이
+아니고 $X^\nu \to S$의 닫힌 올에 포함된다. $P \to X$가 매끄러우므로
+$\sigma(X)$는 유효 Cartier 인자이다(인자의 보조정리
+\ref{divisors-lemma-section-smooth-regular-immersion}). 따라서
+$Z \subset X^\nu$도 유효 Cartier 인자이다. $P$에서 $\sigma(X)$의 여법선층이
+$\mathcal{O}_X$이므로, 스킴의 사상의 보조정리
+\ref{morphisms-lemma-conormal-functorial-flat}에 의해 $X^\nu$에서 $Z$의
+여법선층(선험적으로 가역)은 $\mathcal{O}_Z$이다. 이는 보조정리
+\ref{resolve-lemma-nontrivial-normal-bundle}에 모순이며 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-R1-injective}
+상황 \ref{resolve-situation-vanishing}에서 $X$가 정규이고 $A$가 Nagata라고 하자.
+그러면
+$$
+\Hom_{D(A)}(\kappa[-1], Rf_*\mathcal{O}_X)
+$$
+은 영이다. 여기서는 $D(A) = D_\QCoh(\mathcal{O}_S)$를 사용하여
+$Rf_*\mathcal{O}_X$를 $D(A)$의 대상으로 본다.
+\end{lemma}
+
+\begin{proof}
+$Rf_*$와 $Lf^*$의 수반성에 의해 이러한 사상은 사상
+$\alpha : Lf^*\kappa[-1] \to \mathcal{O}_X$와 같다. 다음을 주목하자.
+$$
+H^i(Lf^*\kappa[-1]) =
+\left\{
+\begin{matrix}
+0 & \text{if} & i > 1 \\
+\mathcal{O}_{X_s} & \text{if} & i = 1 \\
+\text{some }\mathcal{O}_{X_s}\text{-module} & \text{if} & i \leq 0
+\end{matrix}
+\right.
+$$
+$\mathcal{O}_X$가 꼬임이 없으므로
+$\Hom(H^0(Lf^*\kappa[-1]), \mathcal{O}_X) = 0$이다. 따라서 $\Ext$의
+스펙트럼열(사이트 위 코호몰로지의 예제
+\ref{sites-cohomology-example-hom-complex-into-sheaf})에 의해
+$\Hom_{D(\mathcal{O}_X)}(Lf^*\kappa[-1], \mathcal{O}_X)$는
+$\Ext^1_{\mathcal{O}_X}(\mathcal{O}_{X_s}, \mathcal{O}_X)$와 같다.
+따라서 $\alpha : Lf^*\kappa[-1] \to \mathcal{O}_X$는 확대
+$$
+0 \to \mathcal{O}_X \to \mathcal{E} \to \mathcal{O}_{X_s} \to 0
+$$
+로 주어진다. 보조정리 \ref{resolve-lemma-H1-injective}에 의해 전사
+$\mathcal{O}_X \to \mathcal{O}_{X_s}$를 통한 이 확대의 당김은 영이다.
+실제로 이 당김은 $f^{-1}(U)$ 위에서 분명히 분할된다. 따라서
+$1 \in \mathcal{O}_{X_s}$은 $\mathcal{E}$의 대역 절 $s$로 올라간다.
+$s$에 $X_s$의 아이디얼 층 $\mathcal{I}$를 곱하면 $\mathcal{O}_X$-가군 사상
+$c_s : \mathcal{I} \to \mathcal{O}_X$를 얻는다. $f_*$를 적용하면
+$A$-선형 사상 $f_*c_s : \mathfrak m \to A$를 얻는다. $A$가 Noether 정규
+국소정역이므로 이 사상은 어떤 $a \in A$를 곱하는 사상이다. $s$를
+$s - a$로 바꾸면 $s$는 $\mathcal{I}$에 의해 소멸되고 확대는 원하는 대로
+자명해진다.
+\end{proof}
+
+\begin{remark}
+\label{resolve-remark-dualizing-setup}
+$X$를 차원 $2$인 Noether 정규 정역 스킴이라 하자. 이 경우 다음은 동치이다.
+\begin{enumerate}
+\item $X$는 쌍대화 복합체 $\omega_X^\bullet$을 가진다.
+\item 어떤 정수 $n$에 대해 $\omega_X[n]$가 쌍대화 복합체가 되는 연접
+$\mathcal{O}_X$-가군 $\omega_X$가 존재한다.
+\end{enumerate}
+이는 $X$가 Cohen--Macaulay라는 사실(성질의 보조정리
+\ref{properties-lemma-normal-dimension-2-Cohen-Macaulay})과 스킴의 쌍대성의
+보조정리 \ref{duality-lemma-dualizing-module-CM-scheme}에서 따른다. 이
+상황에서는 스킴의 쌍대성의 절 \ref{duality-section-dualizing-module}에 따라
+$\omega_X$를 {\it 쌍대화 가군}이라 한다. 특히 $A$가 차원 $2$인 Noether
+정규 국소정역일 때 위 조건이 성립하면 {\it $A$가 쌍대화 가군
+$\omega_A$를 가진다}고 한다. 이 경우 $X \to \Spec(A)$가 정규 변형이면
+$X$도 쌍대화 가군을 가진다. 스킴의 쌍대성의 예제
+\ref{duality-example-proper-over-local}을 보라. 이 상황에서 $\omega_X$는 항상
+$\omega_A$에 관해 정규화된 쌍대화 가군, 즉 $\omega_X[2]$가
+$\omega_A[2]$에 관해 정규화된 쌍대화 복합체가 되도록 택한다. 스킴의
+쌍대성의 절 \ref{duality-section-glue}를 보라.
+\end{remark}
+
+\noindent
+다음 명제의 Grauert--Riemenschneider 소멸은 보조정리
+\ref{resolve-lemma-R1-injective}와 일반 쌍대성 이론의 형식적 귀결이다.
+
+\begin{proposition}[Grauert-Riemenschneider]
+\label{resolve-proposition-Grauert-Riemenschneider}
+상황 \ref{resolve-situation-vanishing}에서 다음을 가정하자.
+\begin{enumerate}
+\item $X$는 정규 스킴이다.
+\item $A$는 Nagata이고 쌍대화 복합체 $\omega_A^\bullet$을 가진다.
+\end{enumerate}
+$\omega_X$를 $X$의 쌍대화 가군이라 하자(비고
+\ref{resolve-remark-dualizing-setup}). 그러면 $R^1f_*\omega_X = 0$이다.
+\end{proposition}
+
+\begin{proof}
+이 증명에서는 식별 $D(A) = D_\QCoh(\mathcal{O}_S)$를 사용하여 준연접
+$\mathcal{O}_S$-가군과 $A$-가군을 식별한다. 또한 $\omega_A^\bullet$이
+정규화되어 있다고 가정해도 된다. 쌍대화 복합체의 절
+\ref{dualizing-section-dualizing-local}을 보라. $X$는 차원 $2$인 Noether
+정규 스킴이므로 Cohen--Macaulay이다(성질의 보조정리
+\ref{properties-lemma-normal-dimension-2-Cohen-Macaulay}). 따라서
+$\omega_X^\bullet = \omega_X[2]$이다(스킴의 쌍대성의 보조정리
+\ref{duality-lemma-dualizing-module-CM-scheme}과 예제
+\ref{duality-example-proper-over-local}의 정규화). 명제가 거짓이면 영이 아닌
+사상 $R^1f_*\omega_X \to \kappa$를 찾을 수 있다. 즉 영이 아닌 사상
+$\alpha : Rf_*\omega_X^\bullet \to \kappa[1]$을 얻는다.
+$R\Hom_A(-, \omega_A^\bullet)$를 적용하면 영이 아닌 사상
+$$
+\beta : \kappa[-1] \longrightarrow Rf_*\mathcal{O}_X
+$$
+을 얻는데, 이는 보조정리 \ref{resolve-lemma-R1-injective}에 의해 불가능하다.
+$R\Hom_A(-, \omega_A^\bullet)$가 주장한 작용을 하는지 확인하기 위해 먼저
+$$
+R\Hom_A(\kappa[1], \omega_A^\bullet) =
+R\Hom_A(\kappa, \omega_A^\bullet)[-1] =
+\kappa[-1]
+$$
+임을 주목하자. $\omega_A^\bullet$이 정규화되어 있기 때문이다. 또한
+$$
+R\Hom_A(Rf_*\omega_X^\bullet, \omega_A^\bullet) =
+Rf_*R\SheafHom_{\mathcal{O}_X}(\omega_X^\bullet, \omega_X^\bullet) =
+Rf_*\mathcal{O}_X
+$$
+이다. 첫 등식은 스킴의 쌍대성의 예제
+\ref{duality-example-iso-on-RSheafHom-noetherian}와 구성에 의해
+$\omega_X^\bullet = f^!\omega_A^\bullet$이라는 사실에서 따르고, 둘째 등식은
+$\omega_X^\bullet$이 $X$의 쌍대화 복합체라는 사실에서 따른다. 이는 스킴의
+쌍대성의 보조정리 \ref{duality-lemma-shriek-dualizing}까지 거슬러 올라간다.
+\end{proof}
+
+
+
+
+
+\section{유계성}
+\label{resolve-section-bounded}
+
+\noindent
+이 절에서는 $2$차원 스킴의 문제를 유리 특이점의 경우로 환원하는 논의를
+시작한다.
+
+\begin{lemma}
+\label{resolve-lemma-exact-sequence}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 Noether 정규 국소정역이라 하자.
+가환 도식
+$$
+\xymatrix{
+X' \ar[rd]_{f'} \ar[rr]_g & & X \ar[ld]^f \\
+& \Spec(A)
+}
+$$
+을 생각하자. 여기서 $f$와 $f'$은 상황 \ref{resolve-situation-vanishing}에서와 같은
+변형이고 $X$는 정규이다. 그러면 짧은 완전열
+$$
+0 \to H^1(X, \mathcal{O}_X) \to H^1(X', \mathcal{O}_{X'}) \to
+H^0(X, R^1g_*\mathcal{O}_{X'}) \to 0
+$$
+이 있다. 또한 $\dim(\text{Supp}(R^1g_*\mathcal{O}_{X'})) = 0$이고
+$R^1g_*\mathcal{O}_{X'}$은 대역 절들로 생성된다.
+\end{lemma}
+
+\begin{proof}
+상황 \ref{resolve-situation-vanishing} 뒤의 관찰들을 더 언급하지 않고 사용한다.
+$X$가 정규이고 $g$가 우세 쌍유리이므로
+$g_*\mathcal{O}_{X'} = \mathcal{O}_X$이다. 예컨대 스킴의 사상 심화의
+보조정리
+\ref{more-morphisms-lemma-geometrically-connected-fibres-towards-normal}을 보라.
+$g$의 올들의 차원이 $\leq 1$이므로 $p > 1$에 대해
+$R^pg_*\mathcal{O}_{X'} = 0$이다. 예컨대 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-higher-direct-images-zero-above-dimension-fibre}를 보라.
+$R^1g_*\mathcal{O}_{X'}$의 지지는 $g'$의 올 차원이 $\geq 1$인 $X$의 점들의
+집합에 포함된다. 따라서 이는 기약성분들 중 $X_s$의 점으로 가는
+성분 $C' \subset X'_s$들의 상의 집합에 포함되며, 후자는 유한 개의 닫힌점으로
+이루어진다. 여기서 $X'_s \to X_s$가 $\kappa$ 위 고유 $1$차원 스킴들의
+사상임을 상기하자. 그러므로 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-coherent-support-dimension-0}에 의해
+$R^1g_*\mathcal{O}_{X'}$은 대역 생성이다. 사상 $f : X \to S$와 위 결과들을
+사용하면 임의의 연접 $\mathcal{O}_X$-가군 $\mathcal{F}$에 대해 $p > 1$이면
+$H^p(X, \mathcal{F}) = 0$임을 얻는다. 따라서 보조정리의 짧은 완전열은
+$g$와 $\mathcal{O}_{X'}$에 대한 Leray 스펙트럼열에서 따른다. 코호몰로지의
+보조정리 \ref{cohomology-lemma-Leray}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-bound-a-torsion}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 정규 Nagata 국소정역이라 하고,
+$a \in A$가 영이 아니라고 하자. $X$가 정규인 모든 변형
+$f : X \to \Spec(A)$에 대해 $A$-가군
+$$
+M_{X, a} = \Coker(A \longrightarrow H^0(Z, \mathcal{O}_Z))
+$$
+의 길이가 $N$ 이하가 되는 정수 $N$이 존재한다. 여기서 $Z \subset X$는
+$a$로 잘라낸 부분스킴이다.
+\end{lemma}
+
+\begin{proof}
+짧은 완전열
+$
+0 \to \mathcal{O}_X \xrightarrow{a} \mathcal{O}_X \to \mathcal{O}_Z \to 0
+$
+에 의해
+\begin{equation}
+\label{resolve-equation-a-torsion}
+M_{X, a} = H^1(X, \mathcal{O}_X)[a]
+\end{equation}
+이다. $A$-가군 $N$에 대해 여기서
+$N[a] = \{n \in N \mid an = 0\}$이다. 따라서 $a$가 $b$를 나누면
+$M_{X, a} \subset M_{X, b}$이다. 어떤 $c \in A$에 대해 가군 $M_{X, c}$들의
+길이가 유계라고 하자. 그러면 모든 $X$에 대해 완전열
+$$
+0 \to M_{X, c} \to M_{X, c^2} \to M_{X, c}
+$$
+이 있고, 둘째 화살표는 $c$를 곱하는 사상이다. 따라서 $M_{X, c^2}$의
+길이도 유계이다. 그러므로 어떤 $n > 0$에 대해 $a$가 $c^n$을 나누고
+보조정리가 성립하는 $c \in A$를 찾으면 충분하다. 대수학 심화의 보조정리
+\ref{more-algebra-lemma-divides-radical}에 의해 $A/(a)$가 기약환이라고
+가정해도 된다.
+
+\medskip\noindent
+$A/(a)$가 기약이라고 하자. $A/(a) \subset B$를 그 전분수환 안에서
+$A/(a)$의 정규화라 하자. $A$가 Nagata이므로 $\Coker(A \to B)$는 유한이다.
+이 유한 가군의 길이가 원하는 상계라고 주장한다. 이를 위해 보조정리에서와 같은
+$f : X \to \Spec(A)$를 잡고, $Z' \subset Z$를
+$Z \cap f^{-1}(U)$의 스킴론적 폐포라 하자. 예컨대 다형체의 보조정리
+\ref{varieties-lemma-finite-in-codim-1}에 의해
+$Z' \to \Spec(A/(a))$는 유한이다. 따라서
+$A/(a) \subset B' \subset B$인 $Z' = \Spec(B')$로 쓸 수 있다. 한편 사상
+$$
+H^0(Z, \mathcal{O}_Z) \to H^0(Z', \mathcal{O}_{Z'})
+$$
+이 단사라고 주장한다. 실제로 $s \in H^0(Z, \mathcal{O}_Z)$가 핵에 속하면
+$f^{-1}(U) \cap Z$로의 $s$의 제한은 영이다. 따라서
+$H^1(X, \mathcal{O}_X)$에서 $s$의 상은
+$H^1(f^{-1}(U), \mathcal{O}_X)$에서 사라진다. 보조정리
+\ref{resolve-lemma-H1-injective}에 의해 $s$는 $A$의 원소 $\tilde s$에서 온다.
+그러나 가정에 의해 $\tilde s$는 $B'$에서 영으로 가므로 $s = 0$이다. 이를
+종합하면 $M_{X, a}$는 $B'/A$의 부분몫이다. 즉 $B'$의 모든 원소가
+$\mathcal{O}_Z$의 대역 절로 확장되지는 않지만, 어쨌든 $M_{X, a}$의 길이는
+$B/A$의 길이로 유계이다.
+\end{proof}
+
+\noindent
+어떤 경우에는 특이점 해소가 유리 특이점의 경우로 환원된다.
+
+\begin{definition}
+\label{resolve-definition-reduce-to-rational}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 정규 Nagata 국소정역이라 하자.
+\begin{enumerate}
+\item 모든 정규 변형 $X \to \Spec(A)$에 대해
+$H^1(X, \mathcal{O}_X) = 0$이면 $A$가 {\it 유리 특이점을 정의한다}고 한다.
+\item $X$가 정규인 모든 변형 $X \to \Spec(A)$에 대해 $A$-가군
+$$
+H^1(X, \mathcal{O}_X)
+$$
+의 길이가 유계이면 {\it $A$에 대해 유리 특이점으로의 환원이 가능하다}고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+(2)의 표현은 보조정리 \ref{resolve-lemma-reduce-to-rational}에서 설명된다. 다음
+보조정리는 대략적으로, $A$가 유리 특이점을 정의할 때 $\Spec(A)$의 변형의
+국소환들도 유리 특이점을 정의한다는 것이다.
+
+\begin{lemma}
+\label{resolve-lemma-rational-propagates}
+$(A, \mathfrak m, \kappa)$를 유리 특이점을 정의하는 차원 $2$의 정규 Nagata
+국소정역이라 하자. $A \subset B$를 같은 분수체를 가지는 정역들의 본질적으로
+유한형인 국소 확대라 하고, $\dim(B) = 2$이며 $B$가 정규라고 하자. 그러면
+$B$는 유리 특이점을 정의한다.
+\end{lemma}
+
+\begin{proof}
+$B = C_\mathfrak q$가 되는 유한형 $A$-대수 $C$와 소 아이디얼
+$\mathfrak q \subset C$를 택한다. $C$를 $B$에서의 $C$의 상으로 바꾸어 $C$가
+$A$와 같은 분수체를 가지는 정역이라고 가정해도 된다. 닫힌 몰입
+$\Spec(C) \to \mathbf{A}^n_A$를 택하고 $\mathbf{P}^n_A$에서 폐포를 취하면,
+어떤 사영 변형 $X \to \Spec(A)$의 닫힌점 $x \in X$에 대해 $B$가
+$\mathcal{O}_{X, x}$와 동형임을 얻는다. 실제로 스킴의 사상의 보조정리
+\ref{morphisms-lemma-dimension-formula}는 $\kappa(x)$가 $\kappa$ 위
+유한임을 보이고, 보조정리
+\ref{morphisms-lemma-algebraic-residue-field-extension-closed-point-fibre}는
+$x$가 닫힌점임을 보인다. $\nu : X^\nu \to X$를 정규화라 하자. $A$가
+Nagata이므로 $\nu$는 유한이다(스킴의 사상의 보조정리
+\ref{morphisms-lemma-nagata-normalization}). 따라서 스킴의 사상 심화의
+보조정리 \ref{more-morphisms-lemma-category-projective}에 의해 $X^\nu$는
+$A$ 위 사영이다. $B = \mathcal{O}_{X, x}$가 정규이므로
+$\mathcal{O}_{X, x} = (\nu_*\mathcal{O}_{X^\nu})_x$이다. 따라서 $x$ 위에
+놓이는 유일한 점 $x^\nu \in X^\nu$가 있고
+$\mathcal{O}_{X^\nu, x^\nu} = \mathcal{O}_{X, x}$이다. 그러므로 $X$가
+정규이고 $A$ 위 사영이라고 가정해도 된다. $Y$가 정규인 변형
+$Y \to \Spec(\mathcal{O}_{X, x}) = \Spec(B)$를 잡자.
+$H^1(Y, \mathcal{O}_Y) = 0$임을 보여야 한다. 극한의 보조정리
+\ref{limits-lemma-modifications}에 의해 $X \setminus \{x\}$ 위에서
+동형사상이고 $X' \times_X \Spec(\mathcal{O}_{X, x})$가 $Y$와 동형인 스킴의
+사상 $g : X' \to X$를 찾을 수 있다. 극한의 보조정리
+\ref{limits-lemma-modifications-properties}에 의해 $g$가 고유이므로 이는
+변형이다. $X'$의 한 점 $x'$에서의 국소환은 $g(x') \not = x$이면
+$g(x')$에서 $X$의 국소환과 동형이고, $g(x') = x$이면 $X'$의 $x'$에서의
+국소환이 대응하는 점에서 $Y$의 국소환과
+동형이다. 따라서 $X$와 $Y$가 정규이므로 $X'$도 정규이다. $A$에 관한
+가정에 의해 $H^1(X', \mathcal{O}_{X'}) = 0$이다. 보조정리
+\ref{resolve-lemma-exact-sequence}에 의해 $R^1g_*\mathcal{O}_{X'} = 0$이고, 이는
+원하는 대로 $H^1(Y, \mathcal{O}_Y) = 0$임을 뜻한다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-reduce-to-rational}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 정규 Nagata 국소정역이라 하자.
+$A$에 대해 유리 특이점으로의 환원이 가능하면, 닫힌점에서의 정규화 부풀리기의
+유한 열
+$$
+X = X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 = \Spec(A)
+$$
+이 존재하여, 임의의 닫힌점 $x \in X$에 대해 국소환
+$\mathcal{O}_{X, x}$가 유리 특이점을 정의한다. 특히 $X \to \Spec(A)$는
+변형이고 $X$는 $A$ 위 사영인 정규 스킴이다.
+\end{lemma}
+
+\begin{proof}
+$X$가 정규이고 $H^1(X, \mathcal{O}_X)$의 길이가 최대가 되는 변형
+$X \to \Spec(A)$를 택한다. 보조정리 \ref{resolve-lemma-exact-sequence}에 의해
+$X'$가 정규인 모든 추가 변형 $g : X' \to X$에 대해
+$R^1g_*\mathcal{O}_{X'} = 0$이고
+$H^1(X, \mathcal{O}_X) = H^1(X', \mathcal{O}_{X'})$이다.
+
+\medskip\noindent
+닫힌점 $x \in X$를 잡고 $\mathcal{O}_{X, x}$가 유리 특이점을 정의함을
+보이자. $Y$가 정규인 변형 $Y \to \Spec(\mathcal{O}_{X, x})$를 잡는다.
+$H^1(Y, \mathcal{O}_Y) = 0$임을 보여야 한다. 극한의 보조정리
+\ref{limits-lemma-modifications}에 의해 $X \setminus \{x\}$ 위에서
+동형사상이고 $X' \times_X \Spec(\mathcal{O}_{X, x})$가 $Y$와 동형인 스킴의
+사상 $g : X' \to X$를 찾을 수 있다. 극한의 보조정리
+\ref{limits-lemma-modifications-properties}에 의해 $g$는 고유이므로 변형이다.
+$X'$의 한 점 $x'$에서의 국소환은 $g(x') \not = x$이면 $g(x')$에서
+$X$의 국소환과 동형이고, $g(x') = x$이면 $X'$의 $x'$에서의 국소환이
+대응하는 점에서 $Y$의 국소환과 동형이다. 따라서
+$X$와 $Y$가 정규이므로 $X'$도 정규이다. 최대성에 의해
+$R^1g_*\mathcal{O}_{X'} = 0$이다(첫 문단을 보라). 이는 원하는 대로
+$H^1(Y, \mathcal{O}_Y) = 0$임을 뜻한다.
+
+\medskip\noindent
+결론적으로, $X$의 닫힌점에서 모든 국소환이 유리 특이점을 정의하는
+$\Spec(A)$의 정규 변형 $X$를 찾았다. 이제 $X_n$이 $X$를 지배하도록
+정규화 부풀리기의 열 $X_n \to \ldots \to X_1 \to \Spec(A)$를 택한다.
+보조정리 \ref{resolve-lemma-dominate-by-normalized-blowing-up}을 보라. $x \in X$로
+가는 닫힌점 $x' \in X_n$에 대해 환 사상
+$\mathcal{O}_{X, x} \to \mathcal{O}_{X_n, x'}$에 보조정리
+\ref{resolve-lemma-rational-propagates}를 적용하면 $\mathcal{O}_{X_n, x'}$가 유리
+특이점을 정의함을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-go-up-separable}
+$A \to B$를 차원 $2$인 정규 Nagata 국소정역들의 유한 단사 국소 환
+사상이라 하자. 유도된 분수체 확대가 분리라고 가정한다. $A$에 대해 유리
+특이점으로의 환원이 가능하면 $B$에 대해서도 가능하다.
+\end{lemma}
+
+\begin{proof}
+$n$을 분수체 확대 $L/K$의 차수라 하고,
+$\text{Trace}_{L/K} : L \to K$를 대각합이라 하자. 확대가 유한 분리이므로
+대각합 쌍대쌍 $(h, g) \mapsto \text{Trace}_{L/K}(fg)$는 $K$ 위 $L$의
+비퇴화 쌍선형 형식이다. 체의 보조정리
+\ref{fields-lemma-separable-trace-pairing}을 보라. $K$ 위 $L$의 기저를 이루는
+$b_1, \ldots, b_n \in B$를 택한다. 위 결과에 의해
+$d = \det(\text{Trace}_{L/K}(b_ib_j)) \in A$는 영이 아니다.
+
+\medskip\noindent
+$Y$가 정규인 변형 $Y \to \Spec(B)$를 잡자. 평탄성 심화의 보조정리
+\ref{flat-lemma-finite-after-blowing-up}에 의해 $Y$의 엄밀 변환 $Y'$이
+$X'$ 위 유한이 되는 $\Spec(A)$의 $U$-허용 부풀리기 $X'$을 찾을 수 있다.
+도식은 다음과 같다.
+$$
+\xymatrix{
+Y' \ar[d] \ar[r] & Y \ar[r] & \Spec(B) \ar[d] \\
+X' \ar[rr] & & \Spec(A)
+}
+$$
+$X'$과 $Y'$을 각각 그 정규화로 바꾸어, $X'$과 $Y'$이 $\Spec(A)$와 $\Spec(B)$의
+정규 변형이라고 가정해도 된다. 이로써 다음 가환 도식이 존재하는 경우로
+환원된다.
+$$
+\xymatrix{
+Y \ar[d]_\pi \ar[r]_-g & \Spec(B) \ar[d] \\
+X \ar[r]^-f & \Spec(A)
+}
+$$
+여기서 $X$와 $Y$는 각각 $\Spec(A)$와 $\Spec(B)$의 정규 변형이고 $\pi$는
+유한이다.
+
+\medskip\noindent
+$K$ 위 $L$의 대각합 사상은 $\mathcal{O}_X$-가군의 사상
+$\text{Trace} : \pi_*\mathcal{O}_Y \to \mathcal{O}_X$로 확장된다. 사상
+$$
+\Phi : \pi_*\mathcal{O}_Y \longrightarrow \mathcal{O}_X^{\oplus n},\quad
+s \longmapsto (\text{Trace}(b_1s), \ldots, \text{Trace}(b_ns))
+$$
+을 생각하자. 이 사상은 일반점에서 단사이므로 단사이다. 또한 사상
+$$
+\mathcal{O}_X^{\oplus n} \longrightarrow \pi_*\mathcal{O}_Y,\quad
+(s_1, \ldots, s_n) \longmapsto \sum b_i s_i
+$$
+이 있고, 이를 $\Phi$와 합성한 사상의 행렬은 $\text{Trace}(b_ib_j)$이다.
+따라서 $\Phi$의 여핵은 $d$에 의해 소멸한다. 그러므로 완전열
+$$
+H^0(X, \Coker(\Phi)) \to H^1(Y, \mathcal{O}_Y) \to
+H^1(X, \mathcal{O}_X)^{\oplus n}
+$$
+이 있다. 가정에 의해 오른쪽 항이 유계이므로, $H^1(Y, \mathcal{O}_Y)$의
+$d$-꼬임이 유계임을 보이면 충분하다. 이는 보조정리
+\ref{resolve-lemma-bound-a-torsion}과 (\ref{resolve-equation-a-torsion})의 내용이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-regular-rational}
+$A$를 차원 $2$인 Nagata 정칙 국소환이라 하자. 그러면 $A$는 유리 특이점을
+정의한다.
+\end{lemma}
+
+\begin{proof}
+(이 증명에는 $A$가 Nagata라는 가정이 필요하지 않지만, 유리 특이점의 개념은
+차원 $2$인 정규 Nagata 국소정역에 대해서만 정의하였다.) $X$가 정규인 변형
+$X \to \Spec(A)$를 잡자. 보조정리
+\ref{resolve-lemma-dominate-by-blowing-up-in-points}에 의해 닫힌점에서의 부풀리기 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 = \Spec(A)
+$$
+의 마지막 스킴 $X_n$으로 $X$를 지배할 수 있다. 보조정리
+\ref{resolve-lemma-blowup-regular}에 의해 스킴 $X_i$들은 정칙이고, 특히 정규이다
+(대수학의 보조정리 \ref{algebra-lemma-regular-normal}). 보조정리
+\ref{resolve-lemma-exact-sequence}에 의해
+$H^1(X, \mathcal{O}_X) \subset H^1(X_n, \mathcal{O}_{X_n})$이다. 따라서
+$H^1(X_n, \mathcal{O}_{X_n}) = 0$을 증명하면 충분하다. 보조정리
+\ref{resolve-lemma-exact-sequence}를 다시 사용하면 모든 $i = 1, \ldots, n$에 대해
+$R^1(X_i \to X_{i - 1})_*\mathcal{O}_{X_i} = 0$임을 보이면 충분하다. 이는
+보조정리 \ref{resolve-lemma-cohomology-of-blowup}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-bound-dualizing-implies-bound}
+$A$를 쌍대화 복합체 $\omega_A^\bullet$을 가지는 차원 $2$의 정규 Nagata
+국소정역이라 하자. 영이 아닌 $d \in A$가 존재하여 모든 정규 변형
+$X \to \Spec(A)$에 대해 대각합 사상
+$$
+\Gamma(X, \omega_X) \to \omega_A
+$$
+의 여핵이 $d$에 의해 소멸하면, $A$에 대해 유리
+특이점으로의 환원이 가능하다.
+\end{lemma}
+
+\begin{proof}
+명제에서와 같은 $X \to \Spec(A)$에 대해 $H^1(X, \mathcal{O}_X)$를 유계로
+해야 한다. $\omega_X$를 Grauert--Riemenschneider 명제(명제
+\ref{resolve-proposition-Grauert-Riemenschneider})에서와 같은 $X$의 쌍대화 가군이라
+하자. 대각합 사상은 스킴의 쌍대성의 절 \ref{duality-section-trace}에서
+설명한 사상 $Rf_*\omega_X \to \omega_A$이다. Grauert--Riemenschneider에
+의해 $Rf_*\omega_X = f_*\omega_X$이므로 대각합 사상은 실제로 사상
+$\Gamma(X, \omega_X) \to \omega_A$를 준다. 쌍대성에 의해
+$Rf_*\omega_X = R\Hom_A(Rf_*\mathcal{O}_X, \omega_A)$이다. 여기서는
+$\omega_X[2]$가 $\omega_A[2]$에 관해 정규화된 $X$ 위 쌍대화 복합체라는
+사실을 사용한다. 스킴의 쌍대성의 보조정리
+\ref{duality-lemma-duality-bootstrap}, 더 직접적으로 절
+\ref{duality-section-duality}, 또는 더욱 직접적으로 예제
+\ref{duality-example-iso-on-RSheafHom-noetherian}을 보라. 특수 삼각형
+$$
+A \to Rf_*\mathcal{O}_X \to R^1f_*\mathcal{O}_X[-1] \to A[1]
+$$
+은 $R\Hom_A(-, \omega_A)$에 의해 짧은 완전열
+$$
+0 \to f_*\omega_X \to \omega_A \to
+\Ext_A^2(R^1f_*\mathcal{O}_X, \omega_A) \to 0
+$$
+로 옮겨진다. 또한 $i \not = 2$이면
+$\Ext_A^i(R^1f_*\mathcal{O}_X, \omega_A) = 0$인데, 이는 아래 논의에서도
+따른다. $R^1f_*\mathcal{O}_X$의 지지가 $\{\mathfrak m\}$에 포함되므로 국소
+쌍대성 정리에 의해
+$$
+\Ext_A^2(R^1f_*\mathcal{O}_X, \omega_A) =
+\Ext_A^0(R^1f_*\mathcal{O}_X, \omega_A[2]) =
+\Hom_A(R^1f_*\mathcal{O}_X, E)
+$$
+은 $R^1f_*\mathcal{O}_X$의 Matlis 쌍대이고, 다른 Ext 군들은 영이다.
+쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-special-case-local-duality}를 보라. Matlis 쌍대성에
+내재한 범주의 동치(쌍대화 복합체의 명제
+\ref{dualizing-proposition-matlis})에 의해 $R^1f_*\mathcal{O}_X$가 $d$에
+의해 소멸하지 않으면 위 $\Ext^2$도 소멸하지 않는다. 따라서
+$H^1(X, \mathcal{O}_X)$는 $d$에 의해 소멸한다. 이제 필요한 유계성은
+보조정리 \ref{resolve-lemma-bound-a-torsion}과 (\ref{resolve-equation-a-torsion})에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-compare-differentials-dualizing}
+$p$를 소수라 하자. $A$를 차원 $2$, 표수 $p$인 정칙 국소환이라 하자.
+$A_0 \subset A$를 $\Omega_{A/A_0}$가 계수 $r < \infty$의 자유 가군이 되는
+부분환이라 하자. $\omega_A = \Omega^r_{A/A_0}$로 둔다.
+$X \to \Spec(A)$가 닫힌점에서의 부풀리기 열의 결과이면 사상
+$$
+\varphi_X : (\Omega^r_{X/\Spec(A_0)})^{**} \longrightarrow \omega_X
+$$
+이 존재하며 일반점에서 주어진 식별을 확장한다.
+\end{lemma}
+
+\begin{proof}
+$A$는 Gorenstein이다(쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-regular-gorenstein}). 따라서 가역 가군 $\omega_A$는
+실제로 쌍대화 가군이다. 또한 보조정리에서와 같은 $X$는 $X$가 정칙이고 따라서
+Gorenstein이며 $A$ 위 고유이므로 가역 쌍대화 가군 $\omega_X$를 가진다.
+비고 \ref{resolve-remark-dualizing-setup}과 보조정리 \ref{resolve-lemma-blowup-regular}을
+보라. 사상 $\varphi_X : (\Omega^r_{X/A_0})^{**} \to \omega_X$를 구성했다고
+하고, $b : X' \to X$가 한 닫힌점에서의 부풀리기라고 하자.
+$\Omega^r_X = (\Omega^r_{X/A_0})^{**}$와
+$\Omega^r_{X'} = (\Omega^r_{X'/A_0})^{**}$로 둔다.
+$\omega_{X'} = b^!(\omega_X)$이므로 사상
+$\Omega^r_{X'} \to \omega_{X'}$는 사상
+$Rb_*(\Omega^r_{X'}) \to \omega_X$와 같다. 비고
+\ref{resolve-remark-dualizing-setup}과 스킴의 쌍대성의 절
+\ref{duality-section-duality}의 논의를 보라. 따라서 사상
+$$
+Rb_*(\Omega^r_{X'}) \longrightarrow \Omega^r_X
+$$
+을 만들면 충분하다. 층 $\Omega^r_{X'}$과 $\Omega^r_X$는 가역이다. 인자의
+보조정리 \ref{divisors-lemma-reflexive-over-regular-dim-2}를 보라. 완전열
+$$
+b^*\Omega_{X/A_0} \to \Omega_{X'/A_0} \to \Omega_{X'/X} \to 0
+$$
+을 생각하자. 국소 계산에 의해 $\Omega_{X'/X}$는 예외 인자 $E$ 위 가역
+가군과 동형이다. 보조정리 \ref{resolve-lemma-differentials-of-blowup}을 보라.
+따라서 다음 둘 중 하나이다.
+$$
+\Omega^r_{X'} \cong (b^*\Omega^r_X)(E)
+\quad\text{or}\quad
+\Omega^r_{X'} \cong b^*\Omega^r_X
+$$
+인자의 보조정리 \ref{divisors-lemma-wedge-product-ses}를 보라. 둘째 경우는
+표수 영에서는 일어나지 않지만 표수 $p$에서는 일어날 수 있다. 어느 경우든
+보조정리 \ref{resolve-lemma-cohomology-of-blowup}에 의해
+$R^1b_*(\Omega^r_{X'}) = 0$이고 $b_*(\Omega^r_{X'}) = \Omega^r_X$이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-go-up-degree-p}
+$p$를 소수라 하자. $A$를 차원 $2$, 표수 $p$인 완비 정칙 국소환이라 하자.
+$L/K$를 $A$의 분수체 $K$의 차수 $p$인 비분리 확대라 하고, $B \subset L$을
+$A$의 정수적 폐포라 하자. 그러면 $B$에 대해 유리 특이점으로의 환원이
+가능하다.
+\end{lemma}
+
+\begin{proof}
+$A = k[[x, y]]$이다. 어떤 $f \in A$에 대해 $L = K[x]/(x^p - f)$로 쓰고,
+$g \in B$로 $x$의 합동류, 즉 $g^p = f$를 만족하는 원소를 나타내자.
+대수학의 보조정리 \ref{algebra-lemma-derivative-zero-pth-power}에 의해
+$\text{d}f$는 $\Omega_{K/\mathbf{F}_p}$에서 영이 아니다. 대수학 심화의
+보조정리 \ref{more-algebra-lemma-power-series-ring-subfields}에 의해
+$p^e = [k : k'] < \infty$이고, $K_0$가
+$A_0 = k'[[x^p, y^p]] \subset A$의 분수체일 때 $\text{d}f$가
+$\Omega_{K/K_0}$에서 영이 아닌 부분체 $k^p \subset k' \subset k$가
+존재한다. 이때
+$$
+\Omega_{A/A_0} =
+A \otimes_k \Omega_{k/k'} \oplus A \text{d}x \oplus A \text{d}y
+$$
+는 계수 $e + 2$인 유한 자유 가군이다.
+$\omega_A = \Omega^{e + 2}_{A/A_0}$로 두고, 보조정리
+\ref{resolve-lemma-trace-extends}의 표준 사상
+$$
+\text{Tr} :
+\Omega^{e + 2}_{B/A_0}
+\longrightarrow
+\Omega^{e + 2}_{A/A_0} = \omega_A
+$$
+을 생각하자. 쌍대성에 의해 이는 사상
+$$
+c : \Omega^{e + 2}_{B/A_0} \to \omega_B = \Hom_A(B, \omega_A)
+$$
+을 결정한다. 주장: $c$의 여핵은 $B$의 어떤 영이 아닌 원소에 의해 소멸한다.
+
+\medskip\noindent
+$\text{d}f$가 $\Omega_{A/A_0}$에서 영이 아니므로
+$\theta = \eta_1 \wedge \ldots \wedge \eta_{e + 1} \wedge \text{d}f$가
+$\omega_A = \Omega^{e + 2}_{A/A_0}$에서 영이 되지 않도록
+$\eta_1, \ldots, \eta_{e + 1} \in \Omega_{A/A_0}$를 택할 수 있다. 주장을
+증명하기 위해, $j = 0, \ldots, p - 1$에 대해
+$\varphi_i(g^j) = \delta_{ij}\theta$를 만족하는
+$\varphi_i \in \omega_B = \Hom_A(B, \omega_A)$로 가는 원소
+$\omega_i$를 $\Omega^{e + 2}_{B/A_0}$ 안에서
+$i = 0, \ldots, p - 1$에 대하여 구성한다.
+$\{1, g, \ldots, g^{p - 1}\}$가 $L/K$의 기저이므로 이것으로 주장이
+증명된다. $\eta = \eta_1 \wedge \ldots \wedge \eta_{e + 1}$로 두어
+$\theta = \eta \wedge \text{d}f$가 되게 한다.
+$\omega_i = \eta \wedge g^{p - 1 - i}\text{d}g$로 두면 구성에 의해
+$$
+\varphi_i(g^j) = \text{Tr}(g^j \eta \wedge g^{p - 1 - i}\text{d}g) =
+\text{Tr}(\eta \wedge g^{p - 1 - i + j}\text{d}g) = \delta_{ij} \theta
+$$
+이다. 이는 보조정리 \ref{resolve-lemma-trace-higher}에 제시된 대각합 사상의 명시적
+서술에서 따른다.
+
+\medskip\noindent
+$Y \to \Spec(B)$를 정규 변형이라 하자. 보조정리
+\ref{resolve-lemma-go-up-separable}의 증명과 정확히 같이, $Y$가 $\Spec(A)$의 한
+변형 $X$ 위 유한인 경우로 환원할 수 있다. 보조정리
+\ref{resolve-lemma-dominate-by-blowing-up-in-points}에 의해 더 나아가
+$X \to \Spec(A)$가 닫힌점에서의 부풀리기 열의 결과라고 가정할 수 있다.
+도식은 다음과 같다.
+$$
+\xymatrix{
+Y \ar[d]_\pi \ar[r]_-g & \Spec(B) \ar[d] \\
+X \ar[r]^-f & \Spec(A)
+}
+$$
+$\pi$에 보조정리 \ref{resolve-lemma-trace-extends}를 적용하면
+$$
+\pi_*(\Omega^{e + 2}_{Y/A_0})
+\xrightarrow{\text{Tr}}
+(\Omega^{e + 2}_{X/A_0})^{**}
+\xrightarrow{\varphi_X}
+\omega_X
+$$
+의 첫 화살표를 얻고, 둘째 화살표는 보조정리
+\ref{resolve-lemma-compare-differentials-dualizing}에서 온다. 여기서는 $f$가
+닫힌점에서의 부풀리기 열임을 사용한다. 유한 사상 $\pi$에 대한 쌍대성에 의해
+이는 사상
+$$
+c_Y : \Omega^{e + 2}_{Y/A_0} \longrightarrow \omega_Y
+$$
+에 대응하며 위의 사상 $c$를 확장한다. 따라서
+$\Gamma(Y, \omega_Y) \to \omega_B$의 상은 $c$의 상을 포함한다. 주장에 의해
+그 여핵은 $B$의 고정된 영이 아닌 원소에 의해 소멸한다. 이제 보조정리
+\ref{resolve-lemma-bound-dualizing-implies-bound}을 적용하면 된다.
+\end{proof}
+
+
+
+
+
+
+\section{유리 특이점}
+\label{resolve-section-rational-singularities}
+
+\noindent
+이 절에서는 유리 특이점의 경우를 Gorenstein 유리 특이점의 경우로 환원한다.
+\cite{Lipman-rational}과 \cite{Mattuck}을 보라.
+
+\begin{situation}
+\label{resolve-situation-rational}
+$(A, \mathfrak m, \kappa)$를 유리 특이점을 정의하는 차원 $2$의 정규 Nagata
+국소정역이라 하자. $s$를 $S = \Spec(A)$의 닫힌점이라 하고
+$U = S \setminus \{s\}$로 둔다. $f : X \to S$를 $X$가 정규인 변형이라
+하자. $f$의 특수 올 $X_s$의 기약성분들을 $C_1, \ldots, C_r$로 나타낸다.
+\end{situation}
+
+\begin{lemma}
+\label{resolve-lemma-globally-generated}
+상황 \ref{resolve-situation-rational}에서 $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. 그러면
+\begin{enumerate}
+\item $p \not \in \{0, 1\}$이면 $H^p(X, \mathcal{F}) = 0$이고,
+\item $\mathcal{F}$가 대역 생성이면 $H^1(X, \mathcal{F}) = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-higher-direct-images-zero-above-dimension-fibre}에서 따른다.
+$\mathcal{F}$가 대역 생성이면 전사
+$\bigoplus_{i \in I} \mathcal{O}_X \to \mathcal{F}$가 있다. (1)과 긴 완전
+코호몰로지 열에 의해 이는 $H^1$ 위 전사를 유도한다. $S$가 유리 특이점을
+가지므로 $H^1(X, \mathcal{O}_X) = 0$이고, $H^1(X, -)$는 직합과 가환하므로
+(코호몰로지의 보조정리
+\ref{cohomology-lemma-quasi-separated-cohomology-colimit}) 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-sections-powers-I-rational}
+상황 \ref{resolve-situation-rational}에서 $E = X_s$가 유효 Cartier 인자라고 하고,
+$\mathcal{I}$를 $E$의 아이디얼 층이라 하자. 그러면
+$H^0(X, \mathcal{I}^n) = \mathfrak m^n$이고
+$H^1(X, \mathcal{I}^n) = 0$.
+\end{lemma}
+
+\begin{proof}
+상황 \ref{resolve-situation-vanishing} 뒤의 논의에 의해
+$H^0(X, \mathcal{O}_X) = A$이다. 따라서
+$\mathfrak m \subset H^0(X, \mathcal{I}) \subset H^0(X, \mathcal{O}_X)$이다.
+$X_s \not = \emptyset$이므로 둘째 포함은 등식이 아니다. 따라서
+$H^0(X, \mathcal{I}) = \mathfrak m$이다.
+$\mathcal{I}^n = \mathfrak m^n\mathcal{O}_X$이므로 보조정리
+\ref{resolve-lemma-globally-generated}에 의해 $H^1(X, \mathcal{I}^n) = 0$이다.
+
+\medskip\noindent
+$\mathfrak m$의 생성원 $x_1, \ldots, x_{\mu + 1}$을 택하자. 이들은
+$\mathcal{I}$를 생성하는 대역 절들을 정의한다. 따라서 짧은 완전열
+$$
+0 \to \mathcal{F} \to \mathcal{O}_X^{\oplus \mu + 1} \to \mathcal{I} \to 0
+$$
+이 있다. $\mathcal{F}$는 계수 $\mu$인 유한 국소자유
+$\mathcal{O}_X$-가군이고, 구성의 보조정리
+\ref{constructions-lemma-globally-generated-omega-twist-1}에 의해
+$\mathcal{F} \otimes \mathcal{I}$는 대역 생성이다. 따라서 모든
+$n \geq 1$에 대해 $\mathcal{F} \otimes \mathcal{I}^n$은 대역 생성이다.
+$n \geq 2$이면 완전열
+$$
+0 \to \mathcal{F} \otimes \mathcal{I}^{n - 1} \to
+(\mathcal{I}^{n - 1})^{\oplus \mu + 1} \to
+\mathcal{I}^n \to 0
+$$
+을 생각할 수 있다. 보조정리 \ref{resolve-lemma-globally-generated}에 의해
+$H^1(X, \mathcal{F} \otimes \mathcal{I}^{n - 1}) = 0$임을 사용하여 긴 완전
+코호몰로지 열을 적용하면, $H^0(X, \mathcal{I}^n)$의 모든 원소는 어떤
+$a_i \in H^0(X, \mathcal{I}^{n - 1})$에 대해 $\sum x_i a_i$ 꼴이다.
+귀납법으로 $H^0(X, \mathcal{I}^n) = \mathfrak m^n$을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-blow-up-normal-rational}
+상황 \ref{resolve-situation-rational}에서 $\mathfrak m$에서의 $\Spec(A)$의 부풀리기는
+정규이다.
+\end{lemma}
+
+\begin{proof}
+$X' \to \Spec(A)$를 부풀리기라 하자. 즉
+$$
+X' = \text{Proj}(A \oplus \mathfrak m \oplus \mathfrak m^2 \oplus \ldots).
+$$
+는 Rees 대수의 Proj이다. 특히 $X'$은 정역 스킴이고
+$X' \to \Spec(A)$는 사영 변형이다. $X$를 $X'$의 정규화라 하자. $A$가
+Nagata이므로 $\nu : X \to X'$는 유한이다(스킴의 사상의 보조정리
+\ref{morphisms-lemma-nagata-normalization}). $E' \subset X'$을 예외 인자라
+하고 $E \subset X$를 그 역상이라 하자. $\mathcal{I}' \subset
+\mathcal{O}_{X'}$과 $\mathcal{I} \subset \mathcal{O}_X$를 각각의 아이디얼
+층이라 하자. $\mathcal{I}' = \mathcal{O}_{X'}(1)$임을 상기하자(인자의
+보조정리 \ref{divisors-lemma-blowing-up-projective}).
+$\mathcal{I} = \nu^*\mathcal{I}'$이고 $E$는 유효 Cartier 인자이다(인자의
+보조정리 \ref{divisors-lemma-pullback-effective-Cartier-defined}).
+$\nu$가 동형사상임을 보이고자 한다. $\nu$가 유한이므로
+$\mathcal{O}_{X'} \to \nu_*\mathcal{O}_X$가 동형사상임을 보이면 충분하다.
+그렇지 않으면 어떤 $n \geq 0$에 대해
+$$
+H^0(X', (\mathcal{I}')^n) \not =
+H^0(X', (\nu_*\mathcal{O}_X) \otimes (\mathcal{I}')^n)
+$$
+이다. 예컨대 준연접 $\mathcal{O}_{X'}$-가군은 그 결부된 등급 가군에서
+복원할 수 있기 때문이다. 성질의 보조정리
+\ref{properties-lemma-ample-quasi-coherent}를 보라. 사영 공식에 의해
+$$
+H^0(X', (\nu_*\mathcal{O}_X) \otimes (\mathcal{I}')^n) =
+H^0(X, \nu^*(\mathcal{I}')^n) =
+H^0(X, \mathcal{I}^n) = \mathfrak m^n
+$$
+이고, 마지막 등식은 보조정리 \ref{resolve-lemma-sections-powers-I-rational}에 의한
+것이다. 한편 분명히 단사 $\mathfrak m^n \to H^0(X', (\mathcal{I}')^n)$가
+있다. $H^0(X', (\mathcal{I}')^n)$이 꼬임이 없으므로 모든 $n$에 대해 등식이
+성립하고, 따라서 $X = X'$이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-cohomology-blow-up-rational}
+상황 \ref{resolve-situation-rational}에서 $X$를 $\mathfrak m$에서의 $\Spec(A)$의
+부풀리기라 하고, $E \subset X$를 예외 인자라 하자. 평소처럼
+$\mathcal{O}_X(1) = \mathcal{I}$이고
+$\mathcal{O}_E(1) = \mathcal{O}_X(1)|_E$라 하면 다음이 성립한다.
+\begin{enumerate}
+\item $E$는 $\kappa$ 위 고유 Cohen--Macaulay 곡선이다.
+\item $\mathcal{O}_E(1)$은 매우 풍부하다.
+\item $\deg(\mathcal{O}_E(1)) \geq 1$이고, 등식은 $A$가 정칙 국소환일
+때에만 성립한다.
+\item $n \geq 0$이면 $H^1(E, \mathcal{O}_E(n)) = 0$이다.
+\item $n \geq 0$이면
+$H^0(E, \mathcal{O}_E(n)) = \mathfrak m^n/\mathfrak m^{n + 1}$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+구성에 의해 $\mathcal{O}_X(1)$은 매우 풍부하므로 특수 올 $E$로의 제한도
+매우 풍부하다. 보조정리 \ref{resolve-lemma-blow-up-normal-rational}에 의해 스킴
+$X$는 정규이다. 그러므로 인자의 보조정리
+\ref{divisors-lemma-normal-effective-Cartier-divisor-S1}에 의해 $E$는
+Cohen--Macaulay이다. 보조정리 \ref{resolve-lemma-sections-powers-I-rational}을
+적용하여 완전열들
+$$
+0 \to \mathcal{I}^{n + 1} \to \mathcal{I}^n \to i_*\mathcal{O}_E(n) \to 0
+$$
+과 긴 완전 코호몰로지 열에서 (4)와 (5)를 얻는다. 특히 다형체의 정의
+\ref{varieties-definition-degree-invertible-sheaf}에 의해
+$$
+\deg(\mathcal{O}_E(1)) = \chi(E, \mathcal{O}_E(1)) - \chi(E, \mathcal{O}_E) =
+\dim(\mathfrak m/\mathfrak m^2) - 1
+$$
+이다. 따라서 (3)도 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-dualizing-rational}
+상황 \ref{resolve-situation-rational}에서 $A$가 쌍대화 복합체
+$\omega_A^\bullet$을 가진다고 하자. $\omega_X$를 $X$의 쌍대화 가군이라
+하면 대각합 사상 $H^0(X, \omega_X) \to \omega_A$는 동형사상이고, 따라서
+표준 사상 $f^*\omega_A \to \omega_X$가 있다.
+\end{lemma}
+
+\begin{proof}
+Grauert--Riemenschneider(명제 \ref{resolve-proposition-Grauert-Riemenschneider})에
+의해 $Rf_*\omega_X = f_*\omega_X$이다. 쌍대성에 의해 짧은 완전열
+$$
+0 \to f_*\omega_X \to \omega_A \to
+\Ext^2_A(R^1f_*\mathcal{O}_X, \omega_A) \to 0
+$$
+이 있다. 예컨대 보조정리 \ref{resolve-lemma-bound-dualizing-implies-bound}의 증명을
+보라. $A$가 유리 특이점을 정의하므로 $f_*\omega_X = \omega_A$를 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-dualizing-blow-up-rational}
+상황 \ref{resolve-situation-rational}에서 $A$가 쌍대화 복합체
+$\omega_A^\bullet$을 가지고 정칙이 아니라고 하자. $X$를 $\mathfrak m$에서의
+$\Spec(A)$의 부풀리기라 하고 $E \subset X$를 예외 인자라 하자.
+$\omega_X$를 $X$의 쌍대화 가군이라 하자. 그러면
+\begin{enumerate}
+\item $\omega_E = \omega_X|_E \otimes \mathcal{O}_E(-1)$,
+\item $n \geq 0$이면 $H^1(X, \omega_X(n)) = 0$이다.
+\item 보조정리 \ref{resolve-lemma-dualizing-rational}의 사상
+$f^*\omega_A \to \omega_X$는 전사이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{resolve-lemma-cohomology-blow-up-rational}의 결과들을 더 언급하지 않고
+사용한다. 스킴의 쌍대성의 보조정리
+\ref{duality-lemma-sheaf-with-exact-support-effective-Cartier}와
+\ref{duality-lemma-twisted-inverse-image-closed}에 의해
+$\omega_E = \omega_X|_E \otimes \mathcal{O}_E(-1)$
+이다. 따라서 $\omega_X|_E = \omega_E(1)$이다. 짧은 완전열들
+$$
+0 \to \omega_X(n + 1) \to \omega_X(n) \to i_*\omega_E(n + 1) \to 0
+$$
+을 생각하자. 대수곡선의 보조정리 \ref{curves-lemma-vanishing-twist}에 의해
+$n \geq 0$이면 $H^1(E, \omega_E(n + 1)) = 0$이다. 따라서 사상들
+$$
+\ldots \to H^1(X, \omega_X(2)) \to H^1(X, \omega_X(1)) \to H^1(X, \omega_X)
+$$
+은 전사이다. $n \gg 0$이면 $H^1(X, \omega_X(n))$은 영이므로(스킴의
+코호몰로지의 보조정리 \ref{coherent-lemma-kill-by-twisting}) (2)가 따른다.
+
+\medskip\noindent
+대수곡선의 보조정리
+\ref{curves-lemma-tensor-omega-with-globally-generated-invertible}에 의해
+$\omega_X|_E = \omega_E \otimes \mathcal{O}_E(1)$은 대역 생성이다. 위에서
+$H^1(X, \omega_X(1)) = 0$임을 보았으므로 사상
+$H^0(X, \omega_X) \to H^0(E, \omega_X|_E)$는 전사이다. 따라서
+$\omega_X$는 대역 생성이다. 보조정리 \ref{resolve-lemma-dualizing-rational}에서
+사상을 정의할 때 $\Gamma(X, \omega_X) = \omega_A$를 사용했으므로 (3)이
+성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-rational-to-gorenstein}
+$(A, \mathfrak m, \kappa)$를 유리 특이점을 정의하는 차원 $2$의 정규 Nagata
+국소정역이라 하고, $A$가 쌍대화 복합체를 가진다고 하자. 그러면 특이
+닫힌점에서의 부풀리기의 유한 열
+$$
+X = X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 = \Spec(A)
+$$
+이 존재하여 각 $i$에 대해 $X_i$가 정규이고, $X$의 쌍대화 층
+$\omega_X$는 가역 $\mathcal{O}_X$-가군이다.
+\end{lemma}
+
+\begin{proof}
+쌍대화 가군 $\omega_A$는 일반점에서 줄기가 가역인 유한 $A$-가군이다.
+실제로 $\omega_A \otimes_A K$는 $A$의 분수체 $K$의 쌍대화 가군이므로 계수
+$1$이다. 따라서 $b$에 대한 $\omega_A$의 엄밀 변환이 가역
+$\mathcal{O}_Y$-가군이 되는 부풀리기 $b : Y \to \Spec(A)$가 존재한다.
+인자의 보조정리 \ref{divisors-lemma-blowup-fitting-ideal}을 보라. 보조정리
+\ref{resolve-lemma-dominate-by-normalized-blowing-up}에 의해 $X_n$이 $Y$를 지배하는
+정규화 부풀리기의 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to \Spec(A)
+$$
+을 택할 수 있다. 보조정리 \ref{resolve-lemma-blow-up-normal-rational}과 귀납법에 의해
+각 $X_i \to X_{i - 1}$는 단순히 부풀리기이다.
+
+\medskip\noindent
+$\omega_{X_n}$가 가역이라고 주장한다. $\omega_{X_n}$는 연접
+$\mathcal{O}_{X_n}$-가군이므로
+그 줄기들이 가역임을 보이면 충분하다. $x \in X_n$이 정칙점이면 정칙 스킴이
+Gorenstein이라는 사실(쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-regular-gorenstein})에서 곧바로 따른다. $x$가 $X_n$의
+특이점이면, $x$의 각 상 $x_i \in X_i$도 특이점이다. 실제로
+보조정리 \ref{resolve-lemma-blowup-regular}에 의해 정칙점의 부풀리기는 정칙이다.
+보조정리 \ref{resolve-lemma-dualizing-rational}의 표준 사상
+$f_n^*\omega_A \to \omega_{X_n}$을 생각하자. 각 $i$에 대해
+$X_{i + 1} \to X_i$는 $x_i$의 부풀리기이거나 $x_i$에서 동형사상이다.
+$x_i$가 항상 특이점이므로 보조정리
+\ref{resolve-lemma-dualizing-blow-up-rational}과 귀납법에 의해 사상
+$f_i^*\omega_A \to \omega_{X_i}$는 $x_i$에서 줄기 위 전사이다. 따라서
+$$
+(f_n^*\omega_A)_x \longrightarrow \omega_{X_n, x}
+$$
+는 전사이다. 한편 $b$의 선택에 의해 $f_n^*\omega_A$를 그 꼬임 부분가군으로
+나눈 몫은 가역 가군 $\mathcal{L}$이다. 더구나 쌍대화 가군은 꼬임이 없다
+(스킴의 쌍대성의 보조정리 \ref{duality-lemma-dualizing-module}). 따라서
+$\mathcal{L}_x \cong \omega_{X_n, x}$이고 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+\section{형식 호}
+\label{resolve-section-arcs}
+
+\noindent
+$X$를 국소 Noether 스킴이라 하자. 이 절에서 $X$ 안의 {\it 형식 호}란
+사상 $a : T \to X$를 말한다. 여기서 $T$는 완비 이산 값매김환 $R$의
+스펙트럼이고, 그 잉여체 $\kappa$는 $\Spec(R)$의 닫힌점의 상 $p$의
+잉여체와 식별되어 있다. 이 경우 형식 호 $a$가 {\it $p$를 중심으로 한다}고
+한다. 유도된 사상
+$\mathfrak m_p/\mathfrak m_p^2 \to \mathfrak m_R/\mathfrak m_R^2$가
+전사이면 형식 호 $T \to X$가 {\it 비특이}라고 한다.
+
+\medskip\noindent
+$a : T \to X$, $T = \Spec(R)$를 $X$의 닫힌점 $p$를 중심으로 하는 비특이
+형식 호라 하고 $X$가 국소 Noether라고 하자. $b : X_1 \to X$를 $x$에서의
+$X$의 부풀리기라 하자. $a$가 비특이이므로 $R$에서 균일화원으로 가는 원소
+$f \in \mathfrak m_p$가 존재한다. 특히 $T$의 일반점은 $p$와 다른 $X$의
+점으로 간다. 즉 $K$를 $R$의 분수체라 하면 $a$의 제한은 사상
+$\Spec(K) \to X \setminus \{p\}$를 정의한다. 사상 $b$는 고유이고
+$X \setminus \{x\}$ 위에서 동형사상이므로 고유성의 값매김 판정법을 적용하여
+다음 도식을 가환하게 하는 유일한 사상 $a_1$을 얻는다.
+$$
+\xymatrix{
+T \ar[r]_{a_1} \ar[rd]_a & X_1 \ar[d]^{b} \\
+& X
+}
+$$
+$p_1 \in X_1$을 $T$의 닫힌점의 상이라 하자. $p_1$은 $x$ 위에서
+$X_1 \to X$의 올의 $\kappa = \kappa(p)$-유리점이므로 닫힌점이다. 분해
+$$
+\mathcal{O}_{X, x} \to \mathcal{O}_{X_1, p_1} \to R
+$$
+가 있으므로 $a_1$도 비특이 형식 호이다.
+
+\medskip\noindent
+이 과정을 반복하여 부풀리기의 열
+$$
+\xymatrix{
+T \ar[d]_a \ar[rd]_{a_1} \ar[rrd]_{a_2} \ar[rrrd]^{a_3} \\
+(X, p) & (X_1, p_1) \ar[l] & (X_2, p_2) \ar[l] &
+(X_3, p_3) \ar[l] & \ldots \ar[l]
+}
+$$
+을 얻는다. 이러한 부풀리기 열은 다음과 같이 특징지어진다.
+
+\begin{lemma}
+\label{resolve-lemma-sequence-blowups}
+$X$를 국소 Noether 스킴이라 하자. 부풀리기의 열
+$$
+(X, p) = (X_0, p_0) \leftarrow (X_1, p_1) \leftarrow (X_2, p_2) \leftarrow
+(X_3, p_3) \leftarrow \ldots
+$$
+이 다음을 만족한다고 하자.
+\begin{enumerate}
+\item $p_i$는 닫힌점이고 $p_{i - 1}$로 가며
+$\kappa(p_i) = \kappa(p_{i - 1})$이다.
+\item $i > 0$일 때 $\mathfrak m_{p_i}$에서의 상이 예외 인자
+$E_i \subset X_i$를 정의하는 $x_1 \in \mathfrak m_p$가 존재한다.
+\end{enumerate}
+그러면 이 열은 위와 같은 비특이 호 $a : T \to X$에서 얻어진다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{O}_n = \mathcal{O}_{X_n, p_n}$과
+$\mathcal{O} = \mathcal{O}_{X, p}$로 쓰자. 극대 아이디얼들을 각각
+$\mathfrak m \subset \mathcal{O}$와 $\mathfrak m_n \subset \mathcal{O}_n$로
+나타낸다.
+
+\medskip\noindent
+$x_1^t \not \in \mathfrak m_n^{t + 1}$이라고 주장한다. 그렇지 않으면
+국소환 $\mathcal{O}_{n + 1}$에서 원소 $x_1^t$가
+$(t + 1)E_{n + 1}$의 아이디얼에 속하게 된다. 이는 $x_1$이
+$E_{n + 1}$을 정의한다는 가정에 모순이다.
+
+\medskip\noindent
+각 $n$에 대해 $\mathfrak m_n$의 생성원
+$y_{n, 1}, \ldots, y_{n, t_n}$을 택한다. (2)에 의해
+$\mathfrak m_n \mathcal{O}_{n + 1} = x_1\mathcal{O}_{n + 1}$
+이므로 어떤 $a_{n, i} \in \mathcal{O}_{n + 1}$에 대해
+$y_{n, i} = a_{n, i} x_1$로 쓸 수 있다. (1)에 의해 사상
+$\mathcal{O}_n \to \mathcal{O}_{n + 1}$은 잉여체의 동형사상을 정의하므로
+$a_{n, i}$와 같은 잉여류를 가지는 $c_{n, i} \in \mathcal{O}_n$을 택할 수
+있다. 따라서
+$$
+\mathfrak m_n = (x_1, z_{n, 1}, \ldots, z_{n, t_n}),
+\quad z_{n, i} = y_{n, i} - c_{n, i} x_1
+$$
+이고, 원소 $z_{n, i}$들은 $\mathcal{O}_{n + 1}$에서
+$\mathfrak m_{n + 1}^2$의 원소로 간다.
+
+\medskip\noindent
+다음을 생각하자.
+$$
+J_n = \Ker(\mathcal{O} \to \mathcal{O}_n/\mathfrak m_n^{n + 1})
+$$
+$\mathcal{O}/J_n$의 길이가 $n + 1$이고 $\mathcal{O}/(x_1) + J_n$이 잉여체와
+같다고 주장한다. $n = 0$일 때 이는 즉시 성립한다. $n$에 대해 명제가
+성립한다고 하고 $f \in J_n$을 잡자. $\mathcal{O}_n$에서
+$$
+f = a x_1^{n + 1} + x_1^n A_1(z_{n, i}) +
+x_1^{n - 1} A_2(z_{n, i}) + \ldots + A_{n + 1}(z_{n, i})
+$$
+로 쓸 수 있다. 여기서 $a \in \mathcal{O}_n$이고 $A_i$는
+$\mathcal{O}_n$의 계수를 가지는 차수 $i$의 동차식이다.
+$\mathcal{O} \to \mathcal{O}_n$이 잉여체들을 식별하므로 $a \in \mathcal{O}$로
+택해도 된다. 위에서 $z_{n, i}$를 구성한 것처럼 논증하면 된다.
+$\mathcal{O}_{n + 1}$에서 상을 취하면 $f$와 $a x_1^{n + 1}$은 법
+$\mathfrak m_{n + 1}^{n + 2}$로 같은 상을 가진다.
+$x_n^{n + 1} \not \in \mathfrak m_{n + 1}^{n + 2}$이므로
+$J_n/J_{n + 1}$의 길이는 $1$이고 주장이 성립한다.
+
+\medskip\noindent
+$R = \lim \mathcal{O}/J_n$을 생각하자. 이는 $\mathcal{O}$의
+$\mathfrak m$-진 완비화의 몫이므로 완비 Noether 국소환이다. 한편 길이는
+유한하지 않고 $x_1$이 극대 아이디얼을 생성한다. 따라서 $R$은 완비 이산
+값매김환이다. 모든 $n$에 대해 사상 $\mathcal{O} \to R$은 국소 준동형
+$\mathcal{O}_n \to R$로 올라간다. 이를 보이는 방법은 두 가지이다. (1) 각
+$n$에 대해 비슷한 절차로 $\mathcal{O}_n \to R_n$을 구성한 다음
+$\mathcal{O} \to \mathcal{O}_n \to R_n$이 동형사상 $R \to R_n$을 통해
+분해됨을 보인다. (2) 인자의 보조정리
+\ref{divisors-lemma-characterize-affine-blowup}을 사용하여
+$\mathcal{O}_n$이 반복 아핀 부풀리기 대수의 국소화임을 보이고 사상
+$\mathcal{O}_n \to R$을 명시적으로 구성한다. 이제 우리의 부풀리기 열이
+비특이 호 $a : T = \Spec(R) \to X$에서 온다는 것은 분명하다.
+\end{proof}
+
+\noindent
+다음 보조정리는 일종의 N\'eron 비특이화 보조정리이다.
+
+\begin{lemma}
+\label{resolve-lemma-sequence-blowups-along-arc-becomes-nonsingular}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 Noether 국소정역이라 하고,
+$A \to R$을 완비 이산 값매김환 위로의 전사라 하자. 이는 비특이 호
+$a : T = \Spec(R) \to \Spec(A)$를 정의한다. $a$에서 구성된 부풀리기 열을
+$$
+\Spec(A) = X_0 \leftarrow X_1 \leftarrow X_2 \leftarrow X_3 \leftarrow \ldots
+$$
+라 하자. $\mathfrak p = \Ker(A \to R)$일 때 $A_\mathfrak p$가 정칙
+국소환이면, 어떤 $i$에 대해 스킴 $X_i$는 $x_i$에서 정칙이다.
+\end{lemma}
+
+\begin{proof}
+$x_1 \in \mathfrak m$을 $R$의 균일화원으로 가도록 택하자.
+$\kappa(\mathfrak p) = K$는 $R$의 분수체이다.
+$r$이 최소가 되도록 $\mathfrak p = (x_2, \ldots, x_r)$로 쓰자.
+$r = 2$이면 $\mathfrak m = (x_1, x_2)$이고 $A$는 정칙이므로 보조정리가
+성립한다. 이제 $r > 2$라 하자. 필요하면 번호를 바꾸어 $x_2$가
+$A_\mathfrak p$의 균일화원으로 간다고 가정해도 된다. 그러면
+$\mathfrak p/\mathfrak p^2 + (x_2)$는 $x_1$의 한 거듭제곱에 의해 소멸한다.
+$i > 2$에 대해 어떤 $n_i \geq 0$와 $a_i \in A$가 존재하여
+$$
+x_1^{n_i} x_i - a_i x_2 = \sum\nolimits_{2 \leq j \leq k} a_{jk} x_jx_k
+$$
+가 성립한다. 여기서 $a_{jk} \in A$이다. 어떤 $i$에 대해 $n_i = 0$이면
+$\mathfrak p$의 생성원 목록에서 $x_i$를 제거할 수 있고, $r$에 대한 귀납법으로
+끝난다. 어떤 $i$에 대해 $a_i$가 단위원이면 $\mathfrak p$의 목록에서
+$x_2$를 제거할 수 있고
+같은 방식으로 끝난다. 따라서 $a_i \in \mathfrak p$이거나, 어떤
+$m_1 > 0$와 단위원 $u_i \in A$에 대해
+$a_i = u_i x_1^{m_1} \bmod \mathfrak p$이다. 그러므로 다음 둘 중 하나이다.
+$$
+x_1^{n_i} x_i = \sum\nolimits_{2 \leq j \leq k} a_{jk} x_jx_k
+\quad\text{or}\quad
+x_1^{n_i} x_i - u_i x_1^{m_i} x_2 =
+\sum\nolimits_{2 \leq j \leq k} a_{jk} x_jx_k
+$$
+부풀린 뒤 정수 $n_i$, $m_i$가 감소함을 보이겠다. 그러면 증명이 끝난다.
+
+\medskip\noindent
+아핀 부풀리기 대수 $A' = A[\mathfrak m/x_1]$ 위에서 이 방정식들이 어떻게
+되는지 보자. $\mathfrak m = (x_1, \ldots, x_r)$이므로 $A'$은 $R$ 위에서
+$i \geq 2$에 대한 $y_i = x_i/x_1$들로 생성된다. 분명히 $A \to R$은 핵이
+$(y_2, \ldots, y_r)$인 $A' \to R$로 확장된다. 이때 다음 둘 중 하나이고,
+$$
+x_1^{n_i - 1} y_i = \sum\nolimits_{2 \leq j \leq k} a_{jk} y_jy_k
+\quad\text{or}\quad
+x_1^{n_i - 1} y_i - u_i x_1^{m_1 - 1} y_2 =
+\sum\nolimits_{2 \leq j \leq k} a_{jk} y_jy_k
+$$
+증명이 끝난다.
+\end{proof}
+
+
+
+
+\section{완비화로의 기저변환}
+\label{resolve-section-aux}
+
+\noindent
+다음 간단한 보조정리는 이후에 유용한 도구가 된다.
+
+\begin{lemma}
+\label{resolve-lemma-iso-completions}
+$(A, \mathfrak m, \kappa)$를 극대 아이디얼 $\mathfrak m$이 유한 생성인
+국소환이라 하고, $X$를 $A$ 위 스킴이라 하자. $A^\wedge$를 $A$의
+$\mathfrak m$-진 완비화라 하고
+$Y = X \times_{\Spec(A)} \Spec(A^\wedge)$로 둔다. $q \in Y$의 상
+$p \in X$가 $\Spec(A)$의 닫힌점 위에 놓이면 국소환 사상
+$\mathcal{O}_{X, p} \to \mathcal{O}_{Y, q}$는 완비화들의 동형사상을
+유도한다.
+\end{lemma}
+
+\begin{proof}
+$X$가 아핀이라고 가정해도 되므로 $X = \Spec(B)$로 쓰자.
+$\mathfrak q \subset B' = B \otimes_A A^\wedge$를 $q$에 대응하는 소
+아이디얼, $\mathfrak p \subset B$를 $p$에 대응하는 소 아이디얼이라 하자.
+대수학의 보조정리 \ref{algebra-lemma-hathat-finitely-generated}에 의해 모든
+$n$에 대해
+$$
+B'/(\mathfrak m^\wedge)^n B' =
+A^\wedge/(\mathfrak m^\wedge)^n \otimes_A B =
+A/\mathfrak m^n \otimes_A B = B/\mathfrak m^n B
+$$
+이다. $\mathfrak m B \subset \mathfrak p$이고
+$\mathfrak m^\wedge B' \subset \mathfrak q$이므로
+$B/\mathfrak p^n$과 $B'/\mathfrak q^n$은 모두 위 표시된 환을 같은 소
+아이디얼의 $n$제곱으로 나눈 몫이다. 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-port-regularity-to-completion}
+$(A, \mathfrak m, \kappa)$를 Noether 국소환이라 하고,
+$X \to \Spec(A)$를 국소 유한형 사상이라 하자.
+$Y = X \times_{\Spec(A)} \Spec(A^\wedge)$로 두고, $y \in Y$의 상을
+$x \in X$라 하자. 그러면
+\begin{enumerate}
+\item $\mathcal{O}_{Y, y}$가 정칙이면 $\mathcal{O}_{X, x}$도 정칙이다.
+\item $y$가 닫힌 올에 속하면 $\mathcal{O}_{Y, y}$가 정칙이다
+$\Leftrightarrow \mathcal{O}_{X, x}$가 정칙이다.
+\item $X$가 $A$ 위 고유이면, $X$가 정칙일 필요충분조건은 $Y$가 정칙인
+것이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$A \to A^\wedge$가 충실히 평탄하므로(대수학의 보조정리
+\ref{algebra-lemma-completion-faithfully-flat}) $Y \to X$는 평탄하다. 따라서
+대수학의 보조정리 \ref{algebra-lemma-descent-regular}에 의해 (1)이 성립한다.
+보조정리 \ref{resolve-lemma-iso-completions}에 의해 $Y \to X$는 특수 올의 점들에서
+완비 국소환들의 동형사상을 유도한다. 따라서 대수학 심화의 보조정리
+\ref{more-algebra-lemma-completion-regular}에 의해 (2)가 성립한다. $X$가
+$A$ 위 고유이면 $Y$는 $A^\wedge$ 위 고유이고(스킴의 사상의 보조정리
+\ref{morphisms-lemma-base-change-proper}), $X$와 $Y$의 모든 닫힌점은 닫힌
+올에 속한다. 그러므로 성질의 보조정리
+\ref{properties-lemma-characterize-regular}에 의해 $Y$가 정칙일 필요충분조건은
+$X$가 정칙인 것이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-descend-admissible-blowup}
+$(A, \mathfrak m)$을 완비화가 $A^\wedge$인 Noether 국소환이라 하자.
+$U \subset \Spec(A)$와 $U^\wedge \subset \Spec(A^\wedge)$를 천공
+스펙트럼들이라 하자. $Y \to \Spec(A^\wedge)$가 $U^\wedge$-허용
+부풀리기이면 $Y = X \times_{\Spec(A)} \Spec(A^\wedge)$가 되는
+$U$-허용 부풀리기 $X \to \Spec(A)$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+정의에 의해 $V(J) = \{\mathfrak m A^\wedge\}$이고 $Y$가 $J$로 정의되는
+닫힌 부분스킴에서의 $S^\wedge$의 부풀리기가 되는 아이디얼
+$J \subset A^\wedge$가 존재한다. 인자의 정의
+\ref{divisors-definition-admissible-blowup}을 보라. $A^\wedge$가 Noether이므로
+어떤 $n$에 대해 $\mathfrak m^n A^\wedge \subset J$이다.
+$A^\wedge/\mathfrak m^n A^\wedge = A/\mathfrak m^n$이므로
+$J = I A^\wedge$가 되는 아이디얼 $\mathfrak m^n \subset I \subset A$를
+찾을 수 있다. $X \to S$를 $I$에서의 부풀리기라 하자.
+$A \to A^\wedge$가 평탄하므로 인자의 보조정리
+\ref{divisors-lemma-flat-base-change-blowing-up}에 의해 $X$의 기저변환은
+$Y$이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-blowup-still-good}
+$(A, \mathfrak m, \kappa)$를 차원 $2$인 Nagata 정규 국소정역이라 하자.
+$A$가 유리 특이점을 정의하고 $A$의 완비화 $A^\wedge$가 정규라고 가정한다.
+그러면
+\begin{enumerate}
+\item $A^\wedge$는 유리 특이점을 정의하고,
+\item $X \to \Spec(A)$가 $\mathfrak m$에서의 부풀리기이면 모든 닫힌점
+$x \in X$에 대해 $\mathcal{O}_{X, x}$의 완비화는 정규이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$Y$가 정규인 변형 $Y \to \Spec(A^\wedge)$를 잡자.
+$H^1(Y, \mathcal{O}_Y) = 0$임을 보여야 한다. 다형체의 보조정리
+\ref{varieties-lemma-modification-normal-iso-over-codimension-1}에 의해
+$Y \to \Spec(A^\wedge)$는 천공 스펙트럼
+$U^\wedge = \Spec(A^\wedge) \setminus \{\mathfrak m^\wedge\}$ 위에서
+동형사상이다. 보조정리 \ref{resolve-lemma-dominate-by-scheme-modification}에 의해
+$Y$를 지배하는 $U^\wedge$-허용 부풀리기 $Y' \to \Spec(A^\wedge)$가 있다.
+보조정리 \ref{resolve-lemma-descend-admissible-blowup}에 의해 $A^\wedge$로의
+기저변환이 $Y$를 지배하는 $U$-허용 부풀리기 $X \to \Spec(A)$가 있다.
+$A$가 Nagata이므로 $X$를 정규화로 바꾸어 $X \to \Spec(A)$가 정규 변형이
+되게 할 수 있다. 다만 더 이상 $U$-허용 부풀리기는 아닐 수 있다. $A$가
+유리 특이점을 정의하므로 $H^1(X, \mathcal{O}_X) = 0$이다. 따라서
+$H^1(X \times_{\Spec(A)} \Spec(A^\wedge),
+\mathcal{O}_{X \times_{\Spec(A)} \Spec(A^\wedge)}) = 0$
+이다. 이는 평탄 기저변환(스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-flat-base-change-cohomology})과 $A \to A^\wedge$의 평탄성
+(대수학의 보조정리 \ref{algebra-lemma-completion-flat})에서 따른다. 보조정리
+\ref{resolve-lemma-exact-sequence}에 의해 $H^1(Y, \mathcal{O}_Y) = 0$이다.
+
+\medskip\noindent
+마지막으로 $X \to \Spec(A)$를 $\mathfrak m$에서의 $\Spec(A)$의
+부풀리기라 하자. 그러면 $Y = X \times_{\Spec(A)} \Spec(A^\wedge)$는
+$\mathfrak m^\wedge$에서의 $\Spec(A^\wedge)$의 부풀리기이다. 보조정리
+\ref{resolve-lemma-blow-up-normal-rational}에 의해 $Y$와 $X$는 모두 정규이다.
+한편 $A^\wedge$는 우수하고(대수학 심화의 명제
+\ref{more-algebra-proposition-ubiquity-excellent}), 따라서 $Y$의 모든 아핀
+열린집합은 우수 정규 정역의 스펙트럼이다(대수학 심화의 보조정리
+\ref{more-algebra-lemma-finite-type-over-excellent}). 그러므로 $y \in Y$에
+대해 환 사상 $\mathcal{O}_{Y, y} \to \mathcal{O}_{Y, y}^\wedge$는 정칙이고,
+대수학 심화의 보조정리 \ref{more-algebra-lemma-normal-goes-up}에 의해
+$\mathcal{O}_{Y, y}^\wedge$는 정규이다. $x \in X$가 특수 올의 닫힌점이면
+$x$ 위에 놓이는 유일한 닫힌점 $y \in Y$가 있다. 보조정리
+\ref{resolve-lemma-iso-completions}에 의해
+$\mathcal{O}_{X, x} \to \mathcal{O}_{Y, y}$가 완비화의 동형사상을 유도하므로
+결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-formally-unramified}
+$(A, \mathfrak m)$을 Noether 국소환이라 하고, $X$를 $A$ 위 스킴이라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $A$는 해석적 비분기이다(대수학의 정의
+\ref{algebra-definition-analytically-unramified}).
+\item $X$는 $A$ 위 국소 유한형이다.
+\item $X \to \Spec(A)$는 $X$의 기약성분들의 일반점에서 에탈이다.
+\end{enumerate}
+그러면 $X$의 정규화는 $X$ 위 유한이다.
+\end{lemma}
+
+\begin{proof}
+$A$가 해석적 비분기이므로 대수학의 보조정리
+\ref{algebra-lemma-analytically-unramified-easy}에 의해 기약이다. $X$의
+정규화는 $X$의 기약화에만 의존하므로 $X$를 그 기약화 $X_{red}$로 바꾸어도
+된다. $X \to \Spec(A)$가 에탈인 열린집합 $U$는 기약이므로(내림의 보조정리
+\ref{descent-lemma-reduced-local-smooth}) $X_{red} \to X$는 $U$ 위에서
+동형사상이고, 따라서 이 교체 뒤에도 조건 (3)은 성립한다. 더 나아가
+$X = \Spec(B)$가 아핀이라고 가정한다.
+
+\medskip\noindent
+사상
+$$
+K = \prod\nolimits_{\mathfrak p \subset A\text{ minimal}} \kappa(\mathfrak p)
+\longrightarrow
+K^\wedge = \prod\nolimits_{\mathfrak p^\wedge \subset A^\wedge\text{ minimal}}
+\kappa(\mathfrak p^\wedge)
+$$
+은 단사이다. 실제로 $A \to A^\wedge$가 충실히 평탄하므로(대수학의 보조정리
+\ref{algebra-lemma-completion-faithfully-flat}) 극소 소 아이디얼들의 집합 사이에
+전사를 유도한다. 이는 평탄 환 사상에 대한 하강 정리이며, 대수학의 절
+\ref{algebra-section-going-up}을 보라. 환들이 Noether이므로 양변은 체들의
+유한 곱이다. $L = \prod_{\mathfrak q \subset B\text{ minimal}}
+\kappa(\mathfrak q)$로 두자. 가정 (3)에 의해 $L = B \otimes_A K$이고
+$K \to L$은 유한 에탈 환 사상이다. 실제로 $A \to B$는 일반적으로
+유한이다. 예컨대 대수학의 보조정리 \ref{algebra-lemma-generically-finite}
+또는 스킴의 사상의 절 \ref{morphisms-section-generically-finite}의 더 자세한
+결과들을 보라. $B$가 기약이므로 $B \subset L$이다. 따라서
+$$
+C = B \otimes_A A^\wedge \subset
+L \otimes_A A^\wedge = L \otimes_K K^\wedge = M
+$$
+이다. $M$은 $C$의 전분수환이고, $K^\wedge$ 위 유한 분리 대수이므로
+체들의 유한 곱이다. 따라서 $C$는 기약이고 그 정규화 $C'$은 $M$ 안에서
+$C$의 정수적 폐포이다. $B$의 정규화 $B'$은 $L$ 안에서 $B$의 정수적
+폐포이다. $A \to A^\wedge$의 평탄성에 의해 상이 $C'$에 포함되는 단사 사상
+$B' \otimes_A A^\wedge \to M$을 얻는다. 즉
+$$
+B' \otimes_A A^\wedge \longrightarrow C'
+$$
+$A^\wedge$가 Nagata이므로(대수학의 보조정리
+\ref{algebra-lemma-Noetherian-complete-local-Nagata}), 대수학의 보조정리
+\ref{algebra-lemma-Noetherian-complete-local-Nagata} 및
+\ref{algebra-lemma-nagata-in-reduced-finite-type-finite-integral-closure}).
+에 의해 $C'$은 $C = B \otimes_A A^\wedge$ 위 유한이다. $C$가 Noether이므로
+$B' \otimes_A A^\wedge$는 $C = B \otimes_A A^\wedge$ 위 유한이다.
+따라서 충실히 평탄한 내림(대수학의 보조정리
+\ref{algebra-lemma-descend-properties-modules})에 의해 $B'$은 $B$ 위 유한이다.
+이것이 보여야 할 바였다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-normalization-completion}
+$(A, \mathfrak m, \kappa)$를 Noether 국소환이라 하고,
+$X \to \Spec(A)$를 국소 유한형 사상이라 하자.
+$Y = X \times_{\Spec(A)} \Spec(A^\wedge)$로 둔다. $Y$에서 특수 올의
+여집합이 정규이면 정규화 $X^\nu \to X$는 유한이고, $X^\nu$의
+$\Spec(A^\wedge)$로의 기저변환은 $Y$의 정규화를 복원한다.
+\end{lemma}
+
+\begin{proof}
+$B$가 유한형 $A$-대수인 아핀 경우 $X = \Spec(B)$로 즉시 환원된다.
+$C = B \otimes_A A^\wedge$로 두어 $Y = \Spec(C)$가 되게 하자.
+$A \to A^\wedge$가 충실히 평탄하므로 모든 소 아이디얼
+$\mathfrak q \subset B$에 대해 $\mathfrak q$ 위에 놓이는 소 아이디얼
+$\mathfrak r \subset C$가 있다. 이때 $B_\mathfrak q \to C_\mathfrak r$는
+충실히 평탄하다. 따라서 $\mathfrak q$가 $\mathfrak m$ 위에 놓이지 않으면,
+$Y$에 관한 가정에 의해 $C_\mathfrak r$가 정규이고 대수학의 보조정리
+\ref{algebra-lemma-descent-normal}에 의해 $B_\mathfrak q$도 정규이다.
+이로써 $X$는 특수 올 밖에서 정규이다.
+
+\medskip\noindent
+완비 Noether 국소환 $A^\wedge$는 Nagata임을 상기하자(대수학의 보조정리
+\ref{algebra-lemma-Noetherian-complete-local-Nagata}). 따라서 정규화
+$Y^\nu \to Y$는 유한이고(스킴의 사상의 보조정리
+\ref{morphisms-lemma-nagata-normalization}), 특수 올 밖에서 동형사상이다.
+$Y^\nu = \Spec(C')$라 하자. 그러면 $C \to C'$은 유한이고
+$V(\mathfrak m C)$ 밖에서 동형사상이다. $B \to C$가 평탄이고 동형사상
+$B/\mathfrak m B \to C/\mathfrak m C$를 유도하므로, $C$로의 기저변환이
+$C \to C'$을 복원하는 유한 환 사상 $B \to B'$이 존재한다. 대수학 심화의
+보조정리 \ref{more-algebra-lemma-application-formal-glueing}과 비고
+\ref{more-algebra-remark-formal-glueing-algebras}를 보라. 따라서 특수 올 밖에서
+동형사상이고 기저변환이 $Y^\nu \to Y$를 복원하는 유한 사상 $X' \to X$를
+얻는다. 첫 문단의 논의에 의해 $X'$은 특수 올 위에 있지 않은 점들에서
+정규이다. 특수 올 위의 점 $x \in X'$에는 대응하는 점 $y \in Y^\nu$와 평탄
+사상 $\mathcal{O}_{X', x} \to \mathcal{O}_{Y^\nu, y}$가 있다.
+$\mathcal{O}_{Y^\nu, y}$가 정규이므로 대수학의 보조정리
+\ref{algebra-lemma-descent-normal}에 의해 $\mathcal{O}_{X', x}$도 정규이다.
+따라서 $X'$은 정규이고, 이에 따라 $X$의 정규화이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-normalized-blowup-completion}
+$(A, \mathfrak m, \kappa)$를 완비화 $A^\wedge$가 정규인 Noether
+국소정역이라 하자. 임의의 정규화 부풀리기 열
+$$
+Y_n \to Y_{n - 1} \to \ldots \to Y_1 \to \Spec(A^\wedge)
+$$
+이 주어지면 (고유) 정규화 부풀리기의 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to \Spec(A)
+$$
+이 존재하며, $A^\wedge$로의 기저변환은 주어진 열을 복원한다.
+\end{lemma}
+
+\begin{proof}
+열 $Y_n \to \ldots \to Y_1 \to Y_0 = \Spec(A^\wedge)$가 주어지면
+$X_n \to \ldots \to X_1 \to X_0 = \Spec(A)$를 귀납적으로 구성한다.
+기초 경우는 $i = 0$이다. 기저변환이 $Y_i$인 $X_i$가 주어졌다고 하자.
+$Y_{i + 1}$이 $Y_i$의 정규화가 되도록 $Y'_i \to Y_i$를 닫힌점
+$y_i \in Y_i$에서의 부풀리기라 하자. $Y_i$와 $X_i$의 닫힌 올들이
+동형이므로 $y_i$는 $X_i$의 특수 올 위 닫힌점 $x_i$에 대응한다.
+$X'_i \to X_i$를 $x_i$에서의 $X_i$의 부풀리기라 하자. 그러면 $X'_i$의
+$\Spec(A^\wedge)$로의 기저변환은 $Y'_i$와 동형이다. 보조정리
+\ref{resolve-lemma-normalization-completion}에 의해 정규화
+$X_{i + 1} \to X'_i$는 유한이고 그 $\Spec(A^\wedge)$로의 기저변환은
+$Y_{i + 1}$과 동형이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{유리 이중점}
+\label{resolve-section-rational-double-points}
+
+\noindent
+절 \ref{resolve-section-rational-singularities}에서 $2$차원 유리 특이점의 해소가
+Gorenstein 경우로 환원됨을 보였다. Gorenstein 유리 곡면 특이점은 유리
+이중점이다. 이를 명시적 계산으로 해소한다.
+
+\medskip\noindent
+예제의 절 \ref{examples-section-bad}의 논의에 따르면 완비화가
+$\mathbf{C}[[x, y, z]]/(z^2)$와 동형인 정규 Noether 국소정역 $A$가
+존재한다. 이 경우 $A$가 유리 이중점 특이점을 가진다고 할 수 있지만,
+$\Spec(A)$는 특이점 해소를 가지지 않는다. $A$가 Nagata 환이면 이런 현상은
+일어날 수 없다. 대수학의 보조정리
+\ref{algebra-lemma-local-nagata-domain-analytically-unramified}을 보라.
+
+\medskip\noindent
+상황은 더 나쁘다. 완비화가 $\mathbf{C}[[x, y, z]]/(yz)$인 정규 Nagata
+국소정역 $A$와 완비화가 $\mathbf{C}[[x, y, z]]/(y^2 - z^3)$인 또 다른
+예가 존재한다. 이는 \cite{Nishimura-few}의 예제 2.5이다. 이것이 이 절에서
+환의 완비화가 정규라고 가정해야 하는 이유이다.
+
+\begin{situation}
+\label{resolve-situation-rational-double-point}
+$(A, \mathfrak m, \kappa)$를 유리 특이점을 정의하고 완비화가 정규이며
+Gorenstein인 차원 $2$의 Nagata 정규 국소정역이라 하자. $A$는 정칙이
+아니라고 가정한다.
+\end{situation}
+
+\noindent
+이 절의 논증은 이 상황에서 특이점을 반복하여 부풀리면 $\Spec(A)$가
+해소됨을 보인다. 증명 중에 다음 보조정리가 필요하다.
+
+\begin{lemma}
+\label{resolve-lemma-issquare}
+$\kappa$를 체, $I \subset \kappa[x, y]$를 아이디얼이라 하자. 모두 영은 아닌
+$a, b, c, d, e, f \in k$에 대해
+$$
+a + b x + c y + d x^2 + exy + f y^2 \in I^2
+$$
+이고 $\kappa[x, y]$에서 $I$의 여길이가 $> 1$이면, 어떤
+$j, g, h, i \in \kappa$에 대해
+$a + b x + c y + d x^2 + exy + f y^2 = j(g + hx + iy)^2$이다.
+\end{lemma}
+
+\begin{proof}
+편미분 $b + 2dx + ey$와 $c + ex + 2fy$를 생각하자. Leibniz 법칙에 의해
+이들은 $I$에 속한다. 둘 중 하나가 영이 아니면 선형 좌표변환, 즉
+$x \mapsto \alpha + \beta x + \gamma y$와
+$y \mapsto \delta + \epsilon x + \zeta y$ 꼴의 변환 뒤에 $x \in I$라고
+가정해도 된다. 그러면 $I = (x)$이거나 $I = (x, F)$이며, 후자의 경우
+$F$는 $y$에 관한 차수 $\geq 2$의 monic 다항식이다. 첫 경우 명제는
+명백하다. 둘째 경우 $I^2$의 임의의 원소를
+$$
+A(x, y) x^2 + B(y) x F + C(y) F^2
+$$
+꼴로 쓸 수 있다. 여기서 $A(x, y) \in \kappa[x, y]$이고
+$B, C \in \kappa[y]$이다. 따라서
+$$
+a + b x + c y + d x^2 + exy + f y^2 = A(x, y) x^2 + B(y) x F + C(y) F^2
+$$
+이고, 차수만 비교해도 $B = C = 0$이며 $A$는 상수이다.
+
+\medskip\noindent
+증명을 끝내기 위해 두 편미분이 모두 영인 경우를 다루어야 한다. 이는 표수
+$2$에서만 일어날 수 있고, 이때
+$$
+a + d x^2 + f y^2 \in I^2
+$$
+$f$가 영이 아니라고 가정해도 된다. 그렇지 않으면 $x$와 $y$의 역할을
+바꾼다. $f$로 나누면 $\kappa$의 표수가 $2$이고
+$$
+a + d x^2 + y^2 \in I^2
+$$
+인 경우를 얻는다. $a$와 $d$가 $\kappa$에서 제곱이면 끝난다. 그렇지 않으면
+$\theta(a) \not = 0$ 또는 $\theta(d) \not = 0$인 미분
+$\theta : \kappa \to \kappa$가 존재한다. 대수학의 보조정리
+\ref{algebra-lemma-derivative-zero-pth-power}을 보라.
+$\theta(x) = \theta(y) = 0$으로 두어 이를 $\kappa[x, y]$의 미분으로
+확장할 수 있다. 그러면
+$$
+\theta(a) + \theta(d) x^2 \in I
+$$
+$\theta(d) = 0$인 경우는 불가능하다. 따라서 어떤 $\alpha \in \kappa$에
+대해 $\alpha + x^2 \in I$라고 가정해도 된다. 위 식과 결합하면
+$a + \alpha d + y^2 \in I$이다. 따라서
+$$
+J = (\alpha + x^2, a + \alpha d + y^2) \subset I
+$$
+이고 여차원은 많아야 $2$이다. $J/J^2$는 $\kappa[x, y]/J$ 위에서
+$\alpha + x^2$와 $a + \alpha d + y^2$를 기저로 하는 자유 가군이다.
+따라서 $a + d x^2 + y^2 =
+1 \cdot (a + \alpha d + y^2) + d \cdot (\alpha + x^2) \in I^2$라는 사실은
+포함 $J \subset I$이 엄격함을 뜻한다. 그러므로 $I$에서
+$g + hx + iy + jxy$ 꼴의 영이 아닌 원소를 찾을 수 있다. $j = 0$이면
+$I$가 일차식을 포함하므로 첫 문단처럼 결론을 얻는다. 따라서
+$j \not = 0$이고 $\dim_\kappa(I/J) = 1$이다. 그렇지 않으면 $I$에서 위와
+같고 $j = 0$인 원소를 찾을 수 있다. 따라서 $j \not = 0$이고 여길이가
+$3$인 $I$은 $(\alpha + x^2, \beta + y^2, g + hx + iy + jxy)$ 꼴이다.
+이 경우 $a + dx^2 + y^2 \in I^2$는 불가능하다. 직접 계산으로 보일 수도
+있지만 다음처럼 논증하자. 이 명제를 증명할 때 $\kappa$가 대수적으로
+닫혀 있다고 가정해도 된다. 좌표변환 $x \mapsto \sqrt{\alpha} + x$와
+$y \mapsto \sqrt{\beta} + y$를 하여 같은 $j$에 대해
+$I = (x^2, y^2, g' + h'x + i'y + jxy)$라고 가정한다. $I$의 여길이가
+$3$이려면 $g' = h' = i' = 0$이어야 한다. 따라서
+$I = (x^2, y^2, xy)$이고 결과는 명백하다.
+\end{proof}
+
+\noindent
+$(A, \mathfrak m, \kappa)$를 상황 \ref{resolve-situation-rational-double-point}에서와
+같이 잡고, $X \to \Spec(A)$를 $\mathfrak m$에서의 $\Spec(A)$의
+부풀리기라 하자. 보조정리 \ref{resolve-lemma-blow-up-normal-rational}에 의해 $X$는
+정규이고, 보조정리 \ref{resolve-lemma-rational-propagates}에 의해 $X$의 모든
+특이점은 유리 특이점이다. $\omega_A = A$이므로 보조정리
+\ref{resolve-lemma-dualizing-blow-up-rational}에 의해
+$\omega_X \cong \mathcal{O}_X$이다. 규약은 비고
+\ref{resolve-remark-dualizing-setup}의 논의를 보라. 따라서 $X$의 모든 특이점은
+Gorenstein이다. 더구나 보조정리 \ref{resolve-lemma-blowup-still-good}에 의해
+$X$의 닫힌점에서 국소환들은 정규 완비화를 가진다. 즉 $\Spec(A)$를
+부풀리면 특이점들이 상황 \ref{resolve-situation-rational-double-point}에서와 같은
+정규 곡면 $X$를 얻는다. 아래에서는 이를 더 언급하지 않고 사용한다. 아래
+논의 중에 이러한 특이점들이 유한 개임도 알게 된다.
+
+\medskip\noindent
+$E \subset X$를 예외 인자라 하자. 보조정리
+\ref{resolve-lemma-dualizing-blow-up-rational}에 의해
+$\omega_E = \mathcal{O}_E(-1)$이고, 보조정리
+\ref{resolve-lemma-cohomology-blow-up-rational}에 의해
+$\kappa = H^0(E, \mathcal{O}_E)$이다. 따라서 $E$는 Gorenstein 곡선이고,
+대수곡선의 절 \ref{curves-section-Riemann-Roch}에서 논한 Riemann--Roch에 의해
+$$
+\chi(E, \mathcal{O}_E) = 1 - g = -(1/2) \deg(\omega_E) =
+(1/2)\deg(\mathcal{O}_E(1))
+$$
+이다. 여기서 $g = \dim_\kappa H^1(E, \mathcal{O}_E) \geq 0$이다. 다형체의
+보조정리 \ref{varieties-lemma-ampleness-in-terms-of-degrees-components}에 의해
+$\deg(\mathcal{O}_E(1))$은 양수이므로 $g = 0$이고
+$\deg(\mathcal{O}_E(1)) = 2$이다. 보조정리
+\ref{resolve-lemma-cohomology-blow-up-rational}과 $E$ 위 Riemann--Roch에 의해
+$$
+\dim_\kappa (\mathfrak m^n/\mathfrak m^{n + 1}) = 2n + 1
+$$
+를 얻는다.
+
+\medskip\noindent
+$\mathfrak m/\mathfrak m^2$의 기저로 가는
+$x_1, x_2, x_3 \in \mathfrak m$을 택한다.
+$\dim_\kappa(\mathfrak m^2/\mathfrak m^3) = 5$이므로 이
+$\kappa$-벡터공간에서 $x_i x_j$, $i \geq j$의 상들은 한 관계를 만족한다.
+즉 모두 $\mathfrak m$에 속하지는 않는 $a_{ij} \in A$, $i \geq j$를 택하여
+$$
+a_{11} x_1^2 + a_{12} x_1x_2 + a_{13}x_1x_3 + a_{22} x_2^2 +
+a_{23} x_2x_3 + a_{33} x_3^2 =
+\sum a_{ijk} x_ix_jx_k
+$$
+가 성립하게 할 수 있다. 여기서 $a_{ijk} \in A$이고 $i \leq j \leq k$이다.
+사상 $A \to \kappa$를 $a \mapsto \overline{a}$로 나타내자. 선택에 의해
+이차형식 $q = \sum \overline{a}_{ij} t_i t_j \in
+\kappa[t_1, t_2, t_3]$는 $\kappa^*$의 원소를 곱하는 것까지 잘 정의된다.
+논증 중에 $\kappa$에서 $\overline{a}_{ij} = 0$임을 알게 되면 항
+$a_{ij} x_i x_j$를 우변에 흡수하여 $a_{ij} = 0$이라고 가정할 수 있다.
+이 연산은 $a_{ijk}$를 바꾸지만 다른 $a_{i'j'}$는 바꾸지 않는다.
+
+\medskip\noindent
+부풀리기는 ``변수'' $x_1, x_2, x_3$에 대응하는 $3$개의 아핀 차트로 덮인다.
+대칭성에 의해 그중 하나만 연구하면 충분하다. 이를 위해
+$$
+A' = A[\mathfrak m/x_1]
+$$
+를 아핀 부풀리기 대수라 하자(대수학의 절
+\ref{algebra-section-blow-up}). $x_1, x_2, x_3$가 $\mathfrak m$을 생성하므로
+$A'$은 $A$ 위에서 $y_2 = x_2/x_1$과 $y_3 = x_3/x_1$로 생성된다. 식을
+단순화하기 위해 때때로 $y_1 = 1$을 사용한다. 위 관계를 보면
+$$
+a_{11} + a_{12} y_2 + a_{13} y_3 + a_{22} y_2^2 +
+a_{23} y_2y_3 + a_{33} y_3^2 =
+x_1 (\sum a_{ijk} y_iy_jy_k)
+$$
+가 $A'$에서 성립한다. $x_1 \in A'$이 $X$의 이 아핀 열린집합 위에서 예외
+인자 $E$를 정의함을 상기하자. 따라서 스킴론적으로 이는
+$$
+\kappa[y_2, y_3]/
+(\overline{a}_{11} + \overline{a}_{12} y_2 + \overline{a}_{13} y_3 +
+\overline{a}_{22} y_2^2 + \overline{a}_{23} y_2y_3 + \overline{a}_{33} y_3^2)
+$$
+로 주어진다. 즉
+$E \subset \mathbf{P}^2_\kappa = \text{Proj}(\kappa[t_1, t_2, t_3])$는 위에서
+도입한 이차형식 $q$의 영점 스킴이다.
+
+\medskip\noindent
+이차형식 $q$는 $A$가 정의하는 특이점의 중요한 불변량이다. $q$가 일차식의
+제곱에 $\kappa^*$의 원소를 곱한 꼴이면 {\bf 경우 II}, 그렇지 않으면
+{\bf 경우 I}이라고 하자. $x_1, x_2, x_3$의 선택을 바꾼 뒤 국소환 $A$에서
+$$
+x_3^2 = \sum a_{ijk}x_ix_jx_k
+$$
+를 얻을 수 있을 때 정확히 경우 II이다.
+
+\medskip\noindent
+$\mathfrak m$ 위에 놓이고 잉여체가 $\kappa'$인 극대 아이디얼
+$\mathfrak m' \subset A'$을 잡자. 즉 $\mathfrak m'$은 예외 인자의
+닫힌점 $p \in E$에 대응한다. 전사
+$$
+\kappa[y_2, y_3] \to \kappa'
+$$
+의 핵은 두 원소 $f_2, f_3 \in \kappa[y_2, y_3]$로 생성된다. 예컨대
+대수학의 예제 \ref{algebra-example-spec-kxy} 또는 보조정리
+\ref{algebra-lemma-dim-affine-space}의 증명을 보라.
+$z_2, z_3 \in A'$이 $\kappa[y_2, y_3]$에서 $f_2, f_3$으로 가도록 택한다.
+$A'$에서 $x_2$와 $x_3$는 $x_1$로 나누어지므로
+$\mathfrak m' = (x_1, z_2, z_3)$이다.
+
+\medskip\noindent
+{\bf 주장.} $X$가 $p$에서 특이이면 $\kappa' = \kappa$이거나 경우 II이다.
+실제로 $A'_{\mathfrak m'}$이 특이이면
+$\dim_{\kappa'} \mathfrak m'/(\mathfrak m')^2 = 3$이고, 따라서
+$\dim_{\kappa'} \overline{\mathfrak m}'/(\overline{\mathfrak m}')^2 = 2$
+이다. 여기서 $\overline{m}'$은
+$\mathcal{O}_{E, p} = \mathcal{O}_{X, p}/x_1\mathcal{O}_{X, p}$의 극대
+아이디얼이다. 이에 따라
+$$
+q(1, y_2, y_3) =
+\overline{a}_{11} + \overline{a}_{12} y_2 + \overline{a}_{13} y_3 +
+\overline{a}_{22} y_2^2 + \overline{a}_{23} y_2y_3 + \overline{a}_{33} y_3^2
+\in (f_2, f_3)^2
+$$
+이다. 그렇지 않으면 $\overline{\mathfrak m}'/(\overline{\mathfrak m}')^2$에서
+$z_2$와 $z_3$의 류 사이에 관계가 생긴다. 이제 보조정리
+\ref{resolve-lemma-issquare}에서 주장이 따른다.
+
+\medskip\noindent
+경우 I의 해소. 주장에 의해 $X$의 모든 특이점은 $\kappa$-유리점이다.
+그러한 특이점 $p$를 택한다. $p$가 위 차트에 놓이고 좌표가
+$y_2 = y_3 = 0$이 되도록 $x_1, x_2, x_3 \in \mathfrak m$을 택할 수 있다.
+이 점이 특이점이므로 주장의 증명과 같이 논증하여
+$q(1, y_2, y_3) \in (y_2, y_3)^2$를 얻는다. 따라서
+$a_{11} = a_{12} = a_{13} = 0$이고
+$q(t_1, t_2, t_3) = q(t_2, t_3)$이 되도록 택할 수 있다. 이에 따라
+$$
+E = V(q) \subset \mathbf{P}^1_\kappa
+$$
+는 $p$에서 만나는 서로 다른 두 직선의 합집합이거나, 유일한
+$\kappa$-유리점을 가지는 차수 $2$ 곡선이다. 작은 세부 사항은 생략하며,
+$q$가 스칼라배까지 일차식의 제곱이 아니라는 사실을 사용한다. 어느 경우든
+$X$는 $\kappa$-유리인 유일한 특이점 $p$를 가진다. 이 경우 조금 더 많은
+정보가 필요하다. 먼저 위 식의 고차항을 보면 $p$가 특이이므로
+$\overline{a}_{111} = 0$이다. 따라서 어떤 $b_{111} \in A$에 대해
+$a_{111} = b_{111} x_1 \bmod (x_2, x_3)$로 쓸 수 있다. 그러면
+$\mathfrak m'$의 생성원 $x_1, y_2, y_3$에 관한 $p$에서의 이차형식은
+$$
+q' =
+\overline{b}_{111} t_1^2 +
+\overline{a}_{112} t_1 t_2 + \overline{a}_{113} t_1 t_3 +
+\overline{a}_{22} t_2^2 +
+\overline{a}_{23} t_2 t_3 +
+\overline{a}_{33} t_3^2
+$$
+$E' = V(q')$가 직선 $t_1 = 0$과 두 점 또는 차수 $2$인 한 점에서 만남을
+알 수 있다. 따라서 $p$는 경우 I에 속한다.
+
+\medskip\noindent
+$p$에서의 $X$의 부풀리기 $X' \to X$가 다시 특이점 $p'$을 가진다고 하자.
+그러면 $p'$은 $\kappa$-유리점이고, 이를 부풀려 $X'' \to X'$을 얻을 수 있다.
+이 과정이 끝나지 않으면 부풀리기의 열
+$$
+\Spec(A) \leftarrow X \leftarrow X' \leftarrow X'' \leftarrow \ldots
+$$
+을 얻는다. 이 상황에 보조정리 \ref{resolve-lemma-sequence-blowups}가 적용됨을
+보이자. 이를 위해 $\mathfrak m$의 원소 $x_1$의 선택을 논해야 한다.
+$A$가 경우 I에 속하고 $X$가 특이점을 가진다고 하자. $x_2, x_3$의 임의의
+선택(동치로 어떤 선택)에 대해 이차형식 $q(t_1, t_2, t_3)$가
+$q(0, t_2, t_3)$이 제곱의 스칼라배가 아니라는 성질을 가지면
+$x_1 \in \mathfrak m$을 {\it 좋은 좌표}라 하자. 위에서 좋은 좌표가
+존재함을 보았다. $x_1$이 좋은 좌표이면 $X$의 특이점 $p \in E$는 초곡면
+$t_1 = 0$에 놓이지 않는다. 실제로 이 초곡면은 유리점을 가지지 않거나,
+가진다 해도 그 점은 $X$의 특이점이 아니다. 이는 $\mathcal{O}_{X, p}$에서
+$x_1$의 상이 예외 인자 $E$를 잘라낸다는 명제와 동치이다. 이제 위 계산에
+따르면 $x_1$이 $A$의 좋은 좌표이면
+$x_1 \in \mathfrak m'\mathcal{O}_{X, p}$도 $p$에서 좋은 좌표이다. 여기서는
+좋은 좌표의 개념이 계산에 사용한 $x_2$, $x_3$의 선택과 무관함을 사용한다.
+따라서 $x_1$은 $p'$, $p''$ 등에서도 좋은 좌표로 간다. 그러므로 보조정리
+\ref{resolve-lemma-sequence-blowups}가 적용되고 우리의 부풀리기 열은 비특이 호
+$A \to R$에서 온다. 이때 사상 $A^\wedge \to R$은 전사이다. $A$의
+완비화가 정규이므로 보조정리
+\ref{resolve-lemma-sequence-blowups-along-arc-becomes-nonsingular}에 의해 유한 번
+부풀린 뒤
+$$
+\Spec(A^\wedge) \leftarrow X^\wedge \leftarrow (X')^\wedge \leftarrow \ldots
+$$
+결과 스킴 $(X^{(n)})^\wedge$은 정칙이다. 보조정리
+\ref{resolve-lemma-iso-completions}에 의해
+$(X^{(n)})^\wedge \to X^{(n)}$은 완비 국소환들의 동형사상을 유도하므로
+$X^{(n)}$도 정칙이다.
+
+\medskip\noindent
+경우 II의 해소. 여기서는 $\mathfrak m$의 생성원 $x_1, x_2, x_3$의 어떤 선택에 대해
+$$
+x_3^2 = \sum a_{ijk}x_ix_jx_k
+$$
+가 $A$에서 성립한다. 그러면 $q = t_3^2$이고 $E = 2C$이며, $C$는
+직선이다. $A'$에서
+$$
+y_3^2 = x_1(\sum a_{ijk} y_iy_jy_k)
+$$
+를 얻음을 상기하자. $X$가 정규이므로 $C$의 일반점 $\xi$에서 국소환
+$\mathcal{O}_{X, \xi}$는 이산 값매김환이다. 원소 $y_3 \in A'$은
+$\mathcal{O}_{X, \xi}$의 균일화원으로 간다. $x_1$은 스킴론적으로 중복도
+$2$의 $C$인 $E$를 잘라내므로, $\mathcal{O}_{X, \xi}$에서 $x_1$은
+$y_3^2$에 단위원을 곱한 것이다. 위 등식을 보면
+$$
+h(y_2) = \overline{a}_{111} + \overline{a}_{112} y_2 +
+\overline{a}_{122} y_2^2 +
+\overline{a}_{222} y_2^3
+$$
+가 $\xi$의 잉여체에서 영이 아니어야 한다. 이제 $p \in C$가 특이점을
+정의한다고 하자. 그러면 $y_3$은 $p$에서 영이고, 위 주장의 증명에서 사용한
+논증에 의해 $p$는 $h$의 영점에 대응해야 한다. $h$가 $p$에서 이중 영점을
+가지지 않으면 $p$에서 이차형식 $q'$은 제곱이 아니므로 $p$는 이미 다룬
+경우 I에 속한다\footnote{$A'$에서 $p$의 극대 아이디얼은 $y_3, x_1$과
+셋째 원소 $g$로 생성된다. $\kappa[y_2]$에서 그 상은 $p$에 대응하는
+$h$의 소인수이다. 이 소인수가 $h$를 두 번 나누지 않으면 $p$에서의
+이차형식은 다음 꼴이다.
+$$
+y_3^2 - x_1((something)x_1 + (something)y_3 + (unit)g)
+$$
+이는 $\kappa[y_3, x_1, g]$에서 결코 제곱일 수 없다.}. $h$의 차수가 $3$이므로
+경우 II에 속하는 특이점 $p \in C$는 많아야 하나이고, 또한
+$\kappa$-유리점이다. $x_1, x_2, x_3$의 선택을 바꾸어 이 점이
+$y_2 = y_3 = 0$이라고 가정해도 된다. 그러면
+$h = \overline{a}_{122} y_2^2 + \overline{a}_{222} y_2^3$이다. 더구나
+이차형식 $q'$이 올바른 꼴을 가지려면 여전히
+$\overline{a}_{113} = 0$이어야 한다. 따라서 국소환
+$\mathcal{O}_{X, p}$는 다음 문단과 같은 특이점을 정의한다.
+
+\medskip\noindent
+마지막으로 다룰 경우는 $\mathfrak m$의 생성원 $x_1, x_2, x_3$을 택하여
+$$
+x_3^2 + x_1(a x_2^2 + b x_2x_3 + c x_3^2) \in \mathfrak m^4
+$$
+가 어떤 $a, b, c \in A$에 대해 성립하는 경우이다. 이는 경우 II의
+부분 경우이다. $\overline{a} = 0$이면
+$a = a_1 x_1 + a_2 x_2 + a_3 x_3$로 쓸 수 있고, 부풀린 뒤
+$$
+y_3^2 + x_1(a_1 x_1 y_2^2 + a_2 x_1 y_2^3 + a_3 x_1 y_2^2 y_3 +
+b y_2 y_3 + c y_3^2) = x_1^2 (\sum a_{ijkl}y_iy_jy_ky_l)
+$$
+를 얻는다. 이는 $X$가 정규가 아님을 뜻하여 모순이다\footnote{실제로 이
+방정식은 $1$차원 자취 $x_1 = y_3 = 0$을 따라 특이한 것을 얻음을 보이는데,
+정규 곡면에서는 이런 일이 일어날 수 없다.}. 앞 문단의 결과에 의해 부풀리기
+$X$가 경우 II에 속하는 특이점 $p$를 가지면 그러한 점은 유일하고
+$\kappa$-유리이다. 아핀 부풀리기 대수
+$A[\frac{\mathfrak m}{x_2}]$와 $A[\frac{\mathfrak m}{x_3}]$를 계산하면
+$p$가 $X$의 대응하는 열린집합들에 포함될 수 없음을 쉽게 알 수 있다.
+따라서 $p$는 $A[\frac{\mathfrak m}{x_1}]$의 스펙트럼에 있다. 전과 같이
+부풀리면 $p$는 좌표가 $y_2 = y_3 = 0$인 점이어야 하고 새 방정식은
+$$
+y_3^2 + x_1(a y_2^2 + b y_2 y_3 + c y_3^2) \in (\mathfrak m')^4
+$$
+꼴이며 전과 같은 형태이고 $x_1$이 예외 인자를 정의한다는 성질을 가진다.
+따라서 과정이 끝나지 않으면 부풀리기의 무한 열을 얻고, 각 단계에서 $x_1$은
+특이점의 국소환에서 예외 인자를 정의한다. 그러므로 보조정리
+\ref{resolve-lemma-sequence-blowups}과
+\ref{resolve-lemma-sequence-blowups-along-arc-becomes-nonsingular}, 그리고 전과 같은
+논증을 사용하여 증명을 끝낼 수 있다.
+
+\begin{lemma}
+\label{resolve-lemma-resolve-rational-double-points}
+$(A, \mathfrak m, \kappa)$를 유리 특이점을 정의하고 완비화가 정규이며
+Gorenstein인 차원 $2$의 정규 Nagata 국소정역이라 하자. 그러면 특이
+닫힌점에서의 부풀리기의 유한 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 = \Spec(A)
+$$
+이 존재하여 $X_n$은 정칙이고, 중간의 각 스킴 $X_i$는 정규이며 같은 유형의
+특이점을 유한 개 가진다.
+\end{lemma}
+
+\begin{proof}
+이는 바로 위 논의에서 증명한 내용이다.
+\end{proof}
+
+
+
+
+\section{함의되는 성질}
+\label{resolve-section-existence-gives}
+
+\noindent
+이 절에서는 Noether 정역 스킴에 대해 정칙 변경의 존재가 여러 결과를
+함의함을 증명한다. ``나쁜'' Noether 환에 관심이 없는 독자는 이 절을
+건너뛰어도 된다.
+
+\begin{lemma}
+\label{resolve-lemma-regular-alteration-implies}
+$Y$를 Noether 정역 스킴이라 하고, $X$가 정칙인 변경 $f : X \to Y$가
+존재한다고 하자. 그러면 정규화 $Y^\nu \to Y$는 유한이고, $Y$는 정칙인
+조밀한 열린집합을 가진다.
+\end{lemma}
+
+\begin{proof}
+$A$가 Noether 정역인 $Y = \Spec(A)$의 경우만 증명하면 충분하다. $B$를
+그 분수체 안에서 $A$의 정수적 폐포라 하고
+$C = \Gamma(X, \mathcal{O}_X)$로 두자. 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-proper-over-affine-cohomology-finite}에 의해 $C$는 유한
+$A$-가군이다. $X$가 정규이므로(성질의 보조정리
+\ref{properties-lemma-regular-normal}) $C$는 정규 정역이다(성질의 보조정리
+\ref{properties-lemma-normal-integral-sections}). 따라서 $B \subset C$이고,
+$A$가 Noether이므로 $B$는 $A$ 위 유한이다.
+
+\medskip\noindent
+$f^{-1}V \to V$가 유한이 되는 공집합이 아닌 열린집합 $V \subset Y$가
+존재한다. 스킴의 사상의 정의 \ref{morphisms-definition-alteration}를 보라.
+$V$를 줄여 $f^{-1}V \to V$가 평탄이라고 가정할 수 있다(스킴의 사상의 명제
+\ref{morphisms-proposition-generic-flatness}). 따라서 $f^{-1}V \to V$는 충실히
+평탄이고, 대수학의 보조정리 \ref{algebra-lemma-descent-regular}에 의해
+$V$는 정칙이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-algebra-helper}
+$(A, \mathfrak m)$을 Noether 국소환이라 하고, $B \subset C$를 유한
+$A$-대수들이라 하자. (a) $B$가 정규환이고 (b) $\mathfrak m$-진 완비화
+$C^\wedge$가 정규환이라고 하자. 그러면 $B^\wedge$는 정규환이다.
+\end{lemma}
+
+\begin{proof}
+가환 도식
+$$
+\xymatrix{
+B \ar[r] \ar[d] & C \ar[d] \\
+B^\wedge \ar[r] & C^\wedge
+}
+$$
+을 생각하자. 유한 $A$-가군의 범주에서 $\mathfrak m$-진 완비화는 평탄
+$A$-대수 $A^\wedge$와 텐서곱을 취하는 것이므로 완전함자이다(대수학의
+보조정리 \ref{algebra-lemma-completion-flat}). Serre 판정법(대수학의 보조정리
+\ref{algebra-lemma-criterion-normal})을 사용하여 Noether 환 $B^\wedge$가
+정규임을 보이자. $\mathfrak q \subset B^\wedge$를
+$\mathfrak p \subset B$ 위에 놓이는 소 아이디얼이라 하자.
+$\dim(B_\mathfrak p) \geq 2$이면 $\text{depth}(B_\mathfrak p) \geq 2$이고
+$B_\mathfrak p \to B^\wedge_\mathfrak q$가 평탄하므로
+$\text{depth}(B^\wedge_\mathfrak q) \geq 2$이다(대수학의 보조정리
+\ref{algebra-lemma-apply-grothendieck}). $\dim(B_\mathfrak p) \leq 1$이면
+$B_\mathfrak p$는 이산 값매김환 또는 체이다. 이 경우 $C_\mathfrak p$는
+$B_\mathfrak p$ 위 충실히 평탄하다. 실제로 유한이고 꼬임이 없다. 따라서
+$B^\wedge_\mathfrak p \to C^\wedge_\mathfrak p$는 충실히 평탄하고,
+$\mathfrak q$에서 국소화한 뒤에도 그러하다. $C^\wedge$와 그 모든 국소화는
+$(S_2)$이므로 대수학의 보조정리 \ref{algebra-lemma-descent-Sk}에 의해
+$B^\wedge_\mathfrak p$도 $(S_2)$이다. 종합하면 $B^\wedge$는 $(S_2)$이다.
+$B^\wedge$가 $(R_1)$임을 보이려면
+$\dim(B^\wedge_\mathfrak q) \leq 1$인 소 아이디얼
+$\mathfrak q \subset B^\wedge$만 생각하면 된다.
+$\dim(B^\wedge_\mathfrak q) = \dim(B_\mathfrak p) +
+\dim(B^\wedge_\mathfrak q/\mathfrak p B^\wedge_\mathfrak q)$임은
+Algebra, 보조정리 \ref{algebra-lemma-dimension-base-fibre-total}에서 따르므로
+이므로 $\dim(B_\mathfrak p) \leq 1$이고, 전과 같이
+$B^\wedge_\mathfrak q \to C^\wedge_\mathfrak q$가 충실히 평탄하다.
+대수학의 보조정리 \ref{algebra-lemma-descent-Rk}를 적용하면 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-regular-alteration-implies-local}
+$(A, \mathfrak m, \kappa)$를 Noether 국소정역이라 하고, $X$가 정칙인 변경
+$f : X \to \Spec(A)$가 존재한다고 하자. 그러면
+\begin{enumerate}
+\item $A_f$가 정칙이 되는 영이 아닌 $f \in A$가 존재하고,
+\item 분수체 안에서 $A$의 정수적 폐포 $B$는 $A$ 위 유한이며,
+\item $B$의 $\mathfrak m$-진 완비화는 정규환이다. 즉 각 극대 아이디얼에서
+$B$의 완비화는 정규 정역이고,
+\item $A$의 일반 형식 올은 정칙이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)과 (2)는 보조정리 \ref{resolve-lemma-regular-alteration-implies}에서 따른다.
+(3)의 증명에 사용할 표기를 정하기 위해 그 보조정리의 증명 일부를 다시 한다.
+$C = \Gamma(X, \mathcal{O}_X)$로 두자. 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-proper-over-affine-cohomology-finite}에 의해 $C$는 유한
+$A$-가군이다. $X$가 정규이므로(성질의 보조정리
+\ref{properties-lemma-regular-normal}) $C$는 정규 정역이다(성질의 보조정리
+\ref{properties-lemma-normal-integral-sections}). 따라서 $B \subset C$이고,
+$A$가 Noether이므로 $B$는 $A$ 위 유한이다. 보조정리
+\ref{resolve-lemma-algebra-helper}에 의해 (3)을 증명하려면 $\mathfrak m$-진 완비화
+$C^\wedge$가 정규임을 보이면 충분하다.
+
+\medskip\noindent
+대수학의 보조정리 \ref{algebra-lemma-completion-finite-extension}에 의해 완비화
+$C^\wedge$는 $\mathfrak m$ 위에 놓이는 $C$의 소 아이디얼들에서 $C$의
+완비화들의 곱이다. 그러한 소 아이디얼은 유한 개이고, 바로 $C$의 극대
+아이디얼 $\mathfrak m_1, \ldots, \mathfrak m_r$이다. $B$에 대한 대응 결과가
+보조정리의 마지막 표현을 설명한다. 따라서 $A$를 $C_{\mathfrak m_i}$로,
+$X$를 $X_i = X \times_{\Spec(C)} \Spec(C_{\mathfrak m_i})$로 바꾸어 다음
+문단의 경우로 환원된다. 여기서 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-flat-base-change-cohomology}에 의해
+$\Gamma(X_i, \mathcal{O}) = C_{\mathfrak m_i}$임을 주목하자.
+
+\medskip\noindent
+여기서 $A$는 Noether 정규 국소정역이고 $f : X \to \Spec(A)$는
+$\Gamma(X, \mathcal{O}_X) = A$인 정칙 변경이다. $A$의 완비화
+$A^\wedge$가 정규 정역임을 보여야 한다. 보조정리
+\ref{resolve-lemma-port-regularity-to-completion}에 의해
+$Y = X \times_{\Spec(A)} \Spec(A^\wedge)$는 정칙이다. 스킴의 코호몰로지의
+보조정리 \ref{coherent-lemma-flat-base-change-cohomology}에 의해
+$\Gamma(Y, \mathcal{O}_Y) = A^\wedge$이므로, 전과 같이 $A^\wedge$가
+정규임을 얻는다. 실제로 성질의 보조정리
+\ref{properties-lemma-regular-normal}에 의해 $Y$는 정규이고,
+$\Gamma(Y, \mathcal{O}_Y) = A^\wedge$가 국소환이므로 연결이다.
+Noether 스킴에서는 연결이고 정규이면 정역 스킴이므로 $Y$는 정규 정역
+스킴이다. 따라서 성질의 보조정리
+\ref{properties-lemma-normal-integral-sections}에 의해
+$\Gamma(Y, \mathcal{O}_Y) = A^\wedge$는 정규 정역이다. 이것으로 (3)이
+증명된다.
+
+\medskip\noindent
+(4)의 증명. $\eta \in \Spec(A)$로 일반점을 나타내고, 아래첨자 $\eta$로
+$\eta$로의 기저변환을 나타내자. $f$가 변경이므로 스킴 $X_\eta$는
+$\eta$ 위 유한 충실히 평탄하다. 보조정리
+\ref{resolve-lemma-port-regularity-to-completion}에 의해
+$Y = X \times_{\Spec(A)} \Spec(A^\wedge)$가 정칙이므로 $Y_\eta$도
+정칙이다. 이는 $Y$ 안 열린집합들의 극한으로 본다. 이제
+$Y_\eta \to \Spec(A^\wedge \otimes_A \kappa(\eta))$는 일반 형식 올 위로
+유한 충실히 평탄하다. 대수학의 보조정리
+\ref{algebra-lemma-descent-regular}을 적용하면 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{특이점 해소}
+\label{resolve-section-resolution}
+
+
+
+\noindent
+먼저 정의를 제시한다.
+
+\begin{definition}
+\label{resolve-definition-resolution}
+$Y$를 Noether 정역 스킴이라 하자. $Y$의 {\it 특이점 해소}란 $X$가 정칙인
+변형 $f : X \to Y$를 말한다.
+\end{definition}
+
+\noindent
+곡면의 경우에는 때때로 조금 더 많은 정보를 요구한다.
+
+\begin{definition}
+\label{resolve-definition-resolution-surface}
+$Y$를 $2$차원 Noether 정역 스킴이라 하자. 다음 열이 존재하면 $Y$가
+{\it 정규화 부풀리기에 의한 특이점 해소}를 가진다고 한다.
+$$
+Y_n \to Y_{n - 1} \to \ldots \to Y_1 \to Y_0 \to Y
+$$
+여기서
+\begin{enumerate}
+\item $i = 0, \ldots, n$에 대해 $Y_i$는 $Y$ 위 고유이고,
+\item $Y_0 \to Y$는 정규화이며,
+\item $i = 1, \ldots, n$에 대해 $Y_i \to Y_{i - 1}$는 정규화 부풀리기이고,
+\item $Y_n$은 정칙이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+조건 (1)은 $Y$의 정규화 $Y_0$가 $Y$ 위 유한이고, 정규화 부풀리기에서
+사용한 정규화들도 유한임을 함의한다.
+
+\begin{lemma}
+\label{resolve-lemma-existence-implies-existence-by-normalized-blowing-ups}
+$(A, \mathfrak m, \kappa)$를 Noether 국소환이라 하고, $A$가 정규이며 차원이
+$2$라고 하자. $\Spec(A)$가 특이점 해소를 가지면 $\Spec(A)$는 정규화 부풀리기에 의한
+해소도 가진다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{resolve-lemma-regular-alteration-implies-local}에 의해 $A$의 완비화
+$A^\wedge$는 정규이다. 보조정리 \ref{resolve-lemma-port-regularity-to-completion}에
+의해 $\Spec(A^\wedge)$는 해소를 가진다. 보조정리
+\ref{resolve-lemma-normalized-blowup-completion}에 의해 임의의 정규화 부풀리기 열
+$Y_n \to Y_{n - 1} \to \ldots \to \Spec(A^\wedge)$는 정규화 부풀리기 열
+$X_n \to \ldots \to \Spec(A)$에서 온다. 더구나 $Y_n$이 정칙이면 보조정리
+\ref{resolve-lemma-port-regularity-to-completion}에 의해 $X_n$도 정칙이다. 따라서
+$A$가 완비인 경우에 보조정리를 증명하면 충분하다.
+
+\medskip\noindent
+추가로 $A$가 완비라고 하자. $A$가 Nagata이고(대수학의 명제
+\ref{algebra-proposition-ubiquity-nagata}), 우수하며(대수학 심화의 명제
+\ref{more-algebra-proposition-ubiquity-excellent}), 쌍대화 복합체를 가진다는
+사실(쌍대화 복합체의 보조정리 \ref{dualizing-lemma-ubiquity-dualizing})을
+사용한다. $A$ 위 본질적으로 유한형인 임의의 환도 마찬가지이다. $B$가 우수
+정규 국소정역이면 완비화 $B^\wedge$는 정규이다. 실제로
+$B \to B^\wedge$가 정칙이고 대수학 심화의 보조정리
+\ref{more-algebra-lemma-normal-goes-up}가 적용된다. 증명의 나머지에서는 이를
+더 언급하지 않고 사용한다.
+
+\medskip\noindent
+$X \to \Spec(A)$를 특이점 해소라 하자. $X$를 지배하는 정규화 부풀리기의 열
+$$
+Y_n \to Y_{n - 1} \to \ldots \to Y_1 \to \Spec(A)
+$$
+을 택한다(보조정리 \ref{resolve-lemma-dominate-by-normalized-blowing-up}). 사상
+$Y_n \to X$는 $X$의 유한 개 점 밖에서 동형사상이다. 따라서 보조정리
+\ref{resolve-lemma-dominate-by-blowing-up-in-points}를 적용하여 $X_m$이 $Y_n$을
+지배하도록 닫힌점에서의 부풀리기의 열
+$$
+X_m \to X_{m - 1} \to \ldots \to X
+$$
+을 찾을 수 있다. 도식은 다음과 같다.
+$$
+\xymatrix{
+& Y_n \ar[rd] \ar[rr] & & \Spec(A) \\
+X_m \ar[rr] \ar[ru] & & X \ar[ru]
+}
+$$
+보조정리를 증명하려면 $Y_n$을 유한 번 정규화 부풀리기하여 정칙 스킴을 얻음을
+보이면 충분하다. 위 도식에 의해 $Y_n$은 해소, 즉 $X_m$을 가진다. $Y_n$이
+정규 곡면이므로 $Y_n$의 특이점 $y_1, \ldots, y_t$는 유한 개 이하이다. 실제로
+다형체의 보조정리
+\ref{varieties-lemma-modification-normal-iso-over-codimension-1}에 의해
+$X_m \to Y_n$은 차원 $1$인 올들 밖에서 동형사상이다.
+
+\medskip\noindent
+$x_a \in X$를 $y_a$의 상이라 하자. 그러면 $\mathcal{O}_{X, x_a}$는
+정칙이고, 따라서 유리 특이점을 정의한다(보조정리
+\ref{resolve-lemma-regular-rational}). 환 사상
+$\mathcal{O}_{X, x_a} \to \mathcal{O}_{Y_n, y_a}$에 보조정리
+\ref{resolve-lemma-rational-propagates}를 적용하면 $\mathcal{O}_{Y_n, y_a}$도 유리
+특이점을 정의한다. 보조정리 \ref{resolve-lemma-rational-to-gorenstein}에 의해 특이
+닫힌점에서의 부풀리기의 유한 열
+$$
+Y_{a, n_a} \to Y_{a, n_a - 1} \to \ldots \to \Spec(\mathcal{O}_{Y_n, y_a})
+$$
+이 존재하여 $Y_{a, n_a}$는 Gorenstein, 즉 가역 쌍대화 가군을 가진다.
+본질적으로 자명한 보조정리 \ref{resolve-lemma-equivalence-sequence-blowups}를
+$n' = \sum n_a$로 적용하면 이 열들은 부풀리기의 열
+$$
+Y_{n + n'} \to Y_{n + n' - 1} \to \ldots \to Y_n
+$$
+에 대응하며, $Y_{n + n'}$은 정규이고 $Y_{n + n'}$의 국소환들은 Gorenstein이다. 위의
+결과들을 사용하면 다음과 같이 $Y_{n + n'}$을 지배하는 부풀리기 열
+$X_{m + m'} \to \ldots \to X_m$으로 $Y_{n + n'}$을 지배할 수 있다.
+$$
+\xymatrix{
+ & Y_{n + n'} \ar[rr] & & Y_n \ar[rd] \ar[rr] & & \Spec(A) \\
+X_{m + m'} \ar[ru] \ar[rr] & & X_m \ar[rr] \ar[ru] & & X \ar[ru]
+}
+$$
+따라서 다시 $Y_{n + n'}$은 유한 개의 특이점 $y'_1, \ldots, y'_s$를
+가진다. 이번에는 이 특이점들이 유리 이중점이고, 더 정확히는 국소환
+$\mathcal{O}_{Y_{n + n'}, y'_b}$들이 보조정리
+\ref{resolve-lemma-resolve-rational-double-points}에서와 같다. 위와 정확히 같이
+논증하면 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-resolve-complete}
+$(A, \mathfrak m, \kappa)$를 완비 Noether 국소환이라 하고, $A$가 차원
+$2$인 정규 정역이라고 하자. 그러면 $\Spec(A)$는 특이점 해소를 가진다.
+\end{lemma}
+
+\begin{proof}
+완비 Noether 국소환은 J-2이고(대수학 심화의 명제
+\ref{more-algebra-proposition-ubiquity-J-2}), Nagata이며(대수학의 명제
+\ref{algebra-proposition-ubiquity-nagata}), 우수하고(대수학 심화의 명제
+\ref{more-algebra-proposition-ubiquity-excellent}), 쌍대화 복합체를 가진다
+(쌍대화 복합체의 보조정리 \ref{dualizing-lemma-ubiquity-dualizing}).
+$A$ 위 본질적으로 유한형인 임의의 환도 마찬가지이다. $B$가 우수 정규
+국소정역이면 완비화 $B^\wedge$는 정규이다. 실제로 $B \to B^\wedge$가
+정칙이고 대수학 심화의 보조정리 \ref{more-algebra-lemma-normal-goes-up}가
+적용된다. 즉 증명의 나머지에서 만나는 국소환들은 필요한 ``우수성'' 성질들을
+가진다.
+
+\medskip\noindent
+$A_0$가 정칙 완비 국소환이고 $A_0 \to A$가 유한이 되도록
+$A_0 \subset A$를 택한다. 대수학의 보조정리
+\ref{algebra-lemma-complete-local-Noetherian-domain-finite-over-regular}을 보라.
+이는 분수체의 유한 확대 $K/K_0$를 유도한다. $[K : K_0]$에 대한 귀납법을
+사용한다. 차수가 $1$인 기초 경우에는 $A_0 = A$이고 결과가 성립한다.
+
+\medskip\noindent
+$K_0 \not = L \not = K$인 중간체 $K_0 \subset L \subset K$가 있다고 하자.
+$B \subset A$를 $L$ 안에서 $A_0$의 정수적 폐포라 하자. 귀납법에 의해
+특이점 해소 $Y \to \Spec(B)$를 택한다. $X$를
+$Y \times_{\Spec(B)} \Spec(A)$의 정규화라 하자. 도식은 다음과 같다.
+$$
+\xymatrix{
+X \ar[r] \ar[d] & \Spec(A) \ar[d] \\
+Y \ar[r] & \Spec(B)
+}
+$$
+$A$가 J-2이므로 $X$의 정칙 자취는 열린집합이다. $X$가 정규 곡면이므로
+$X$는 많아야 유한 개의 특이점 $x_1, \ldots, x_n$을 가지며, 이들은
+$\dim(\mathcal{O}_{X, x_i}) = 2$인 닫힌점이다. 각 $i$에 대해
+$y_i \in Y$를 그 상이라 하자.
+$\mathcal{O}_{Y, y_i}^\wedge \to \mathcal{O}_{X, x_i}^\wedge$가 이전보다
+차수가 작은 유한 사상이므로 귀납 가정에 의해
+$\mathcal{O}_{X, x_i}^\wedge$는 특이점 해소를 가진다. 보조정리
+\ref{resolve-lemma-existence-implies-existence-by-normalized-blowing-ups}에 의해
+$Z^\wedge_{i, n_i}$이 정칙인 정규화 부풀리기의 열
+$$
+Z^\wedge_{i, n_i} \to \ldots \to Z^\wedge_{i, 1} \to
+\Spec(\mathcal{O}_{X, x_i}^\wedge)
+$$
+이 있다. 보조정리 \ref{resolve-lemma-normalized-blowup-completion}에 의해 대응하는
+정규화 부풀리기의 열
+$$
+Z_{i, n_i} \to \ldots \to Z_{i, 1} \to \Spec(\mathcal{O}_{X, x_i})
+$$
+이 있다. 보조정리 \ref{resolve-lemma-port-regularity-to-completion}에 의해
+$Z_{i, n_i}$은 정칙 스킴이다. 보조정리
+\ref{resolve-lemma-equivalence-sequence-normalized-blowups}에 의해 이 정규화
+부풀리기들을 대응하는 열
+$$
+Z_n \to Z_{n - 1} \to \ldots \to Z_1 \to X
+$$
+에 맞출 수 있고, 국소환들을 보면 물론 $Z_n$도 정칙이다. 이것으로 귀납
+단계가 증명된다.
+
+\medskip\noindent
+$K_0 \not = L \not = K$인 중간체 $K_0 \subset L \subset K$가 없다고 하자.
+그러면 $K/K_0$가 분리이거나, $K$의 표수가 $p$이고
+$[K : K_0] = p$이다. 보조정리 \ref{resolve-lemma-go-up-separable} 또는
+\ref{resolve-lemma-go-up-degree-p}에 의해 유리 특이점으로의 환원이 가능하다.
+보조정리 \ref{resolve-lemma-reduce-to-rational}에 의해 정규 변형
+$X \to \Spec(A)$가 존재하여, $X$의 모든 특이점 $x$에서 국소환
+$\mathcal{O}_{X, x}$가 유리 특이점을 정의한다. $A$가 J-2이므로 $X$는
+유한 개의 특이점 $x_1, \ldots, x_n$을 가진다. 보조정리
+\ref{resolve-lemma-rational-to-gorenstein}에 의해 특이 닫힌점에서의 부풀리기의 유한 열
+$$
+X_{i, n_i} \to X_{i, n_i - 1} \to \ldots \to \Spec(\mathcal{O}_{X, x_i})
+$$
+이 존재하여 $X_{i, n_i}$은 Gorenstein, 즉 가역 쌍대화 가군을 가진다.
+본질적으로 자명한 보조정리 \ref{resolve-lemma-equivalence-sequence-blowups}를
+$n = \sum n_a$로 적용하면 이 열들은 부풀리기의 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X
+$$
+에 대응하며, $X_n$은 정규이고 $X_n$의 국소환들은 Gorenstein이다. 다시 $X_n$은
+유한 개의 특이점 $x'_1, \ldots, x'_s$를 가진다. 이번에는 이 특이점들이 유리
+이중점이고, 더 정확히는 국소환 $\mathcal{O}_{X_n, x'_i}$들이 보조정리
+\ref{resolve-lemma-resolve-rational-double-points}에서와 같다. 위와 정확히 같이
+논증하면 보조정리가 따른다.
+\end{proof}
+
+\noindent
+이제 이 장의 주정리에 이른다.
+
+\begin{theorem}[Lipman]
+\label{resolve-theorem-resolve}
+\begin{reference}
+\cite[151쪽의 정리]{Lipman}
+\end{reference}
+$Y$를 2차원 Noether 정역 스킴이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $X$가 정칙인 변경 $X \to Y$가 존재한다.
+\item $Y$의 특이점 해소가 존재한다.
+\item $Y$는 정규화 부풀리기에 의한 특이점 해소를 가진다.
+\item 정규화 $Y^\nu \to Y$는 유한이고, $Y^\nu$는 유한 개의 특이점
+$y_1, \ldots, y_m$을 가지며, 각 $y_i$에 대해
+$\mathcal{O}_{Y^\nu, y_i}$의 완비화가 정규이다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+함의 (3) $\Rightarrow$ (2) $\Rightarrow$ (1)은 즉시 성립한다.
+
+\medskip\noindent
+$X$가 정칙인 변경 $X \to Y$를 잡자. 보조정리
+\ref{resolve-lemma-regular-alteration-implies}에 의해 $Y^\nu \to Y$는 유한이다.
+스킴의 사상의 보조정리 \ref{morphisms-lemma-normalization-normal}의 분해
+$f : X \to Y^\nu$를 생각하자. 다형체의 보조정리
+\ref{varieties-lemma-finite-in-codim-1}에 의해 $f$는 $Y^\nu$의 여차원
+$\leq 1$인 모든 점을 포함하는 열린집합 $V \subset Y^\nu$ 위에서 유한이다.
+대수학의 보조정리 \ref{algebra-lemma-CM-over-regular-flat}와, 차원
+$\leq 2$인 정규 국소환은 Cohen--Macaulay이라는 Serre 판정법
+(대수학의 보조정리 \ref{algebra-lemma-criterion-normal})에 의해
+$f$는 $V$ 위에서 평탄하다.
+대수학의 보조정리 \ref{algebra-lemma-descent-regular}에 의해 $V$는 정칙이다.
+$Y^\nu$가 Noether이므로
+$Y^\nu \setminus V = \{y_1, \ldots, y_m\}$은 유한하다. 보조정리
+\ref{resolve-lemma-regular-alteration-implies-local}에 의해
+$\mathcal{O}_{Y^\nu, y_i}$의 완비화는 정규이다. 따라서
+(1) $\Rightarrow$ (4)이다.
+
+\medskip\noindent
+(4)를 가정하고 (3)을 증명하자. $Y$를 즉시 그 정규화로 바꾸어도 된다.
+$y_1, \ldots, y_m \in Y$를 특이점들이라 하자. 보조정리
+\ref{resolve-lemma-resolve-complete}과
+\ref{resolve-lemma-existence-implies-existence-by-normalized-blowing-ups}를 적용하면
+$Y_{i, n_i}$이 정칙인 정규화 부풀리기의 유한 열
+$$
+Y_{i, n_i} \to Y_{i, n_i - 1} \to \ldots \to \Spec(\mathcal{O}^\wedge_{Y, y_i})
+$$
+이 존재한다. 보조정리 \ref{resolve-lemma-normalized-blowup-completion}에 의해
+대응하는 정규화 부풀리기의 열
+$$
+X_{i, n_i} \to \ldots \to X_{i, 1} \to \Spec(\mathcal{O}_{Y, y_i})
+$$
+이 있다. 보조정리 \ref{resolve-lemma-port-regularity-to-completion}에 의해
+$X_{i, n_i}$은 정칙 스킴이다. 보조정리
+\ref{resolve-lemma-equivalence-sequence-normalized-blowups}에 의해 이 정규화
+부풀리기들을 대응하는 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to Y
+$$
+에 맞출 수 있고, 국소환들을 보면 물론 $X_n$도 정칙이다. 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+\section{매장 해소}
+\label{resolve-section-embedded}
+
+\noindent
+곡면 위의 곡선이 주어지면 그 곡선을 엄밀 정규교차 인자로 만드는 부풀리기가
+존재한다. 이 절에서는 1차원 국소 Noether 스킴이 정규일 필요충분조건은
+정칙인 것이라는 사실(대수학의 보조정리
+\ref{algebra-lemma-characterize-dvr})을 사용한다. 또한 국소 Noether 스킴의
+모든 점은 한 닫힌점으로 특수화된다는 사실(성질의 보조정리
+\ref{properties-lemma-locally-Noetherian-closed-point})도 사용한다.
+
+\begin{lemma}
+\label{resolve-lemma-resolve-curve}
+$Y$를 1차원 Noether 정역 스킴이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $X$가 정칙인 변경 $X \to Y$가 존재한다.
+\item $Y$의 특이점 해소가 존재한다.
+\item $Y_n$이 정칙인, 닫힌점에서의 부풀리기의 유한 열
+$Y_n \to Y_{n - 1} \to \ldots \to Y_1 \to Y$가 존재한다.
+\item 정규화 $Y^\nu \to Y$는 유한이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+함의 (3) $\Rightarrow$ (2) $\Rightarrow$ (1)은 즉시 성립한다. 함의
+(1) $\Rightarrow$ (4)는 보조정리 \ref{resolve-lemma-regular-alteration-implies}에서
+따른다. 정규 1차원 스킴은 정칙이므로 (4) $\Rightarrow$ (2)도 명백하다.
+따라서 서로 동치인 조건 (1), (2), (4)가 (3)을 함의함을 보이면 된다.
+
+\medskip\noindent
+$f : X \to Y$를 특이점 해소라 하자. $Y$의 차원이 1이므로 다형체의
+보조정리 \ref{varieties-lemma-finite-in-codim-1}에 의해 $f$는 유한이다.
+$Y_{i - 1}$이 정칙이 아닌 동안에는 $Y_i \to Y_{i - 1}$가 한 닫힌점에서의
+부풀리기이고 동형사상은 아닌 분해
+$$
+X \to \ldots \to Y_2 \to Y_1 \to Y
+$$
+를 구성한다. 각 사상은 위와 같은 이유로 유한이고, 대응하는 계
+$$
+f_*\mathcal{O}_X \supset \ldots \supset
+f_{2, *}\mathcal{O}_{Y_2} \supset
+f_{1, *}\mathcal{O}_{Y_1} \supset \mathcal{O}_Y
+$$
+을 얻는다. 여기서 $f_i : Y_i \to Y$는 구조사상이다. $Y$가 Noether이므로
+연접 부분가군의 이 증가열은 안정화되어야 한다(스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-acc-coherent}). 따라서 원하는 대로 어떤 $n$에 대해
+$Y_n$은 정칙이다. $Y_{i - 1}$에서 $Y_i$를 구성하려면 특이 닫힌점
+$y_{i - 1} \in Y_{i - 1}$을 택하고 $Y_i \to Y_{i - 1}$를 그 부풀리기로
+둔다. $X$는 차원 $1$인 정칙 스킴이므로 닫힌점에서 국소환은 이산
+값매김환이고 특히 주 아이디얼 정역이다. 따라서 아이디얼 층
+$\mathfrak m_{y_{i - 1}} \cdot \mathcal{O}_X$는 가역이다. 부풀리기의 보편
+성질(인자의 보조정리 \ref{divisors-lemma-universal-property-blowing-up})에
+의해 분해 $X \to Y_i$를 얻는다. 마지막으로
+$\mathfrak m_{y_{i - 1}}$가 가역 아이디얼이 아니므로
+$Y_i \to Y_{i - 1}$는 동형사상이 아니다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-blowup-curve}
+$X$를 Noether 스킴이라 하고, $Y \subset X$를 보조정리
+\ref{resolve-lemma-resolve-curve}의 동치 조건들을 만족하는 차원 $1$의 정역 닫힌
+부분스킴이라 하자. 그러면 닫힌점에서의 부풀리기의 유한 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to X
+$$
+이 존재하여 $X_n$에서 $Y$의 엄밀 변환은 정칙 곡선이다.
+\end{lemma}
+
+\begin{proof}
+$Y_n \to Y_{n - 1} \to \ldots \to Y_1 \to Y$를 보조정리
+\ref{resolve-lemma-resolve-curve}가 주는 부풀리기의 열이라 하자.
+$X_n \to X_{n - 1} \to \ldots \to X_1 \to X$를 $X$의 대응하는 부풀리기
+열이라 하자. 인자의 보조정리 \ref{divisors-lemma-strict-transform}에 의해
+엄밀 변환이 부풀리기이므로 이것이 원하는 열이다.
+\end{proof}
+
+\noindent
+$X$를 국소 Noether 스킴, $Y, Z \subset X$를 닫힌 부분스킴들이라 하고,
+$p \in Y \cap Z$를 닫힌점이라 하자. $Y$가 차원 $1$인 정역 스킴이고
+$Y$의 일반점이 $Z$에 포함되지 않는다고 가정한다. 이 상황에서 불변량
+\begin{equation}
+\label{resolve-equation-multiplicity}
+m_p(Y \cap Z) =
+\text{length}_{\mathcal{O}_{X, p}}(\mathcal{O}_{Y \cap Z, p})
+\end{equation}
+을 생각할 수 있다. 이는 $\geq 1$인 정수이다. 실제로
+$I, J \subset \mathcal{O}_{X, p}$가 $Y, Z$에 대응하는 아이디얼들이면
+$\mathcal{O}_{Y \cap Z, p} = \mathcal{O}_{X, p}/I + J$이다. $Y \cap Z$가
+$p$로 특수화되는 $Y$의 유일한 점을 포함하지 않는다고 가정했으므로 그 지지는
+$\{\mathfrak m_p\}$와 같다. 따라서 대수학의 보조정리
+\ref{algebra-lemma-support-point}에 의해 길이는 유한하다.
+
+\begin{lemma}
+\label{resolve-lemma-blowup-nonsingular-curves-meeting-at-point}
+위 상황에서 $X' \to X$를 $p$에서의 $X$의 부풀리기라 하고,
+$Y', Z' \subset X'$을 $Y, Z$의 엄밀 변환들이라 하자.
+$\mathcal{O}_{Y, p}$가 정칙이면
+\begin{enumerate}
+\item $Y' \to Y$는 동형사상이고,
+\item $Y'$은 예외 올 $E \subset X'$와 한 점 $q$에서 만나며
+$m_q(Y \cap E) = 1$이고,
+\item $q \in Z'$이기도 하면 $m_q(Y \cap Z') < m_p(Y \cap Z)$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{O}_{X, p} \to \mathcal{O}_{Y, p}$는 전사이고
+$\mathcal{O}_{Y, p}$는 이산 값매김환이므로, $\mathcal{O}_{Y, p}$에서
+균일화원으로 가는 원소 $x_1 \in \mathfrak m_p$를 택할 수 있다.
+$p$를 포함하고 $x_1 \in A$인 아핀 열린집합 $U = \Spec(A)$를 택하자.
+$\mathfrak m \subset A$를 $p$에 대응하는 극대 아이디얼이라 하고,
+$I, J \subset A$를 $\Spec(A)$에서 $Y, Z$를 정의하는 아이디얼들이라 하자.
+$U$를 줄여 $\mathfrak m = I + (x_1)$이라고 가정해도 된다. 즉 스킴론적으로
+$V(x_1) \cap U \cap Y = \{p\}$이다. 따라서 $p$는 $Y$ 위 유효 Cartier
+인자이다. $Y'$은 $p$에서의 $Y$의 부풀리기이고(인자의 보조정리
+\ref{divisors-lemma-strict-transform}), 인자의 보조정리
+\ref{divisors-lemma-blow-up-effective-Cartier-divisor}에 의해
+$Y' \to Y$는 동형사상이다. 관계 $\mathfrak m = I + (x_1)$에 의해
+$\mathfrak m^n \subset I + (x_1^n)$이므로 사상
+$$
+\psi : A[\textstyle{\frac{\mathfrak m}{x_1}}] \longrightarrow A/I
+$$
+을 정의할 수 있다. 여기서 $y/x_1^n \in A[\frac{\mathfrak m}{x_1}]$을
+$A/I$에서의 $a$의 류로 보내며, $a$는
+$y \equiv ax_1^n \bmod I$가 되도록 택한다.
+그러면 $\psi$는 $Y' \cong Y$가 주는 $U$ 위의 $Y \cap U$에서 $X'$로 가는
+사상에 대응한다. $A[\frac{\mathfrak m}{x_1}]$에서 $x_1$의
+상이 예외 인자를 잘라내므로 $m_q(Y', E) = 1$이다. 마지막으로
+$J \subset \mathfrak m$이므로 아이디얼
+$J' \subset A[\frac{\mathfrak m}{x_1}]$은 모든 $f \in J$에 대해 원소
+$f/x_1$을 포함한다. $A/I$에서 상 $\overline{f}$의 값매김이 최소이고
+$m_p(Y \cap Z)$와 같도록 $f \in J$를 택하면,
+$A/I$에서 $\psi(f/x_1) = \overline{f}/x_1$의 값매김은 하나 작다. 이것이
+보조정리의 마지막 부분을 증명한다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-blowup-curves}
+$X$를 Noether 스킴이라 하고, $Y_i \subset X$, $i = 1, \ldots, n$을 각각
+보조정리 \ref{resolve-lemma-resolve-curve}의 동치 조건들을 만족하는 차원 $1$의
+정역 닫힌 부분스킴들이라 하자. 그러면 닫힌점에서의 부풀리기의 유한 열
+$$
+X_n \to X_{n - 1} \to \ldots \to X_1 \to X
+$$
+이 존재하여 $X_n$에서 $Y_i$의 엄밀 변환 $Y'_i \subset X_n$들은 서로소인
+정칙 곡선들이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{resolve-lemma-blowup-curve}에 의해 모든 $i = 1, \ldots, n$에 대해
+$Y_i$가 정칙 곡선이라고 가정해도 된다. 각 $i \not = j$와
+$p \in Y_i \cap Y_j$에 대해 불변량 $m_p(Y_i \cap Y_j)$
+(\ref{resolve-equation-multiplicity})가 있다. 이 수들의 최댓값이 $> 1$이면 최댓값을
+달성하는 모든 점 $p$를 부풀려 그 값을 줄일 수 있다(보조정리
+\ref{resolve-lemma-blowup-nonsingular-curves-meeting-at-point}). 최댓값이 $1$이면 같은
+보조정리를 사용하여 이 모든 점 $p$를 부풀려 곡선들을 분리할 수 있다.
+\end{proof}
+
+\noindent
+곡선이 정칙 곡면에 포함될 때에는 흔히 이를 정규교차 인자로 만들고자 한다.
+
+\begin{lemma}
+\label{resolve-lemma-turn-into-effective-Cartier}
+$X$를 차원 $2$인 정칙 스킴이라 하고, $Z \subset X$를 진 닫힌 부분스킴이라
+하자. 닫힌점에서의 부풀리기의 열
+$$
+X_n \to \ldots \to X_1 \to X
+$$
+이 존재하여 $X_n$에서 $Z$의 역상 $Z_n$은 유효 Cartier 인자이다.
+\end{lemma}
+
+\begin{proof}
+$D \subset Z$를 $Z$에 포함되는 가장 큰 유효 Cartier 인자라 하자. 인자의
+보조정리 \ref{divisors-lemma-codim-1-part}에 의해
+$\mathcal{I}_Z \subset \mathcal{I}_D$이고 그 몫의 지지는 닫힌점들에
+포함된다. 따라서 $\mathcal{I}_Z = \mathcal{I}_{Z'} \mathcal{I}_D$로 쓸 수
+있으며, 여기서 $Z' \subset X$는 집합론적으로 유한 개 닫힌점으로 이루어진
+닫힌 부분스킴이다. 보조정리 \ref{resolve-lemma-make-ideal-principal}을 적용하면
+$\mathcal{I}_{Z'}\mathcal{O}_{X_n}$이 가역이 되는, 명제와 같은 부풀리기의
+열을 얻는다. 이것으로 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-embedded-resolution}
+$X$를 차원 $2$인 정칙 스킴이라 하자. $Z \subset X$를 차원 $1$인 모든
+기약성분 $Y \subset Z$가 보조정리 \ref{resolve-lemma-resolve-curve}의 동치 조건들을
+만족하는 진 닫힌 부분스킴이라 하자. 닫힌점에서의 부풀리기의 열
+$$
+X_n \to \ldots \to X_1 \to X
+$$
+이 존재하여 $X_n$에서 $Z$의 역상 $Z_n$은 엄밀 정규교차 인자에 지지되는
+유효 Cartier 인자이다.
+\end{lemma}
+
+\begin{proof}
+$X' \to X$를 닫힌점 $p$에서의 부풀리기라 하자. $Z$의 역상
+$Z' \subset X'$은 $Z$의 엄밀 변환과 예외 인자에 지지된다. 예외 인자는
+정칙 곡선이고(보조정리 \ref{resolve-lemma-blowup}), 각 기약성분 $Y$의 엄밀 변환
+$Y'$은 $Y$와 같거나 $p$에서의 $Y$의 부풀리기이다. 따라서 이 과정은 차원
+$1$의 특이성분을 추가로 만들지 않는다. 그러므로 보조정리
+\ref{resolve-lemma-turn-into-effective-Cartier}와 \ref{resolve-lemma-blowup-curves}에 의해
+$Z$가 유효 Cartier 인자이고 $Z$의 모든 기약성분 $Y$가 정칙이라고
+가정해도 된다. 물론 기약성분들이 서로소라고 가정할 수는 없다. $Z$의 점을
+부풀릴 때마다 $Z$에 새 기약성분, 즉 예외 인자가 추가되기 때문이다.
+
+\medskip\noindent
+$Z$가 기약성분 $Y_i$들이 정칙인 유효 Cartier 인자라고 하자. 각
+$i \not = j$와 $p \in Y_i \cap Y_j$에 대해 불변량
+$m_p(Y_i \cap Y_j)$ (\ref{resolve-equation-multiplicity})가 있다. 이 수들의 최댓값이
+$> 1$이면 최댓값을 달성하는 모든 점 $p$를 부풀려 그 값을 줄일 수 있다
+(보조정리 \ref{resolve-lemma-blowup-nonsingular-curves-meeting-at-point}). 여기서
+``새'' 불변량 $m_{q_i}(Y'_i \cap E)$는 항상 $1$이다. 최댓값이 $1$이고,
+예를 들어 어떤 $r > 2$에 대해 $p \in Y_1 \cap \ldots \cap Y_r$이지만
+다른 성분에는 속하지 않는다면, $p$를 부푼 뒤 $Y'_1, \ldots, Y'_r$은
+$p$ 위의 점들에서 서로 만나지 않고, $Y'_i \cap E = \{q_i\}$일 때
+$m_{q_i}(Y'_i, E) = 1$이다. 따라서 $Z$의 성분 가운데 $3$개보다 많은 성분이
+만나는 점들을 계속 부풀리면 모든 닫힌점 $p \in X$에서 다음 셋 중 하나가
+성립하는 상황에 이른다. (a) $p$를 지나는 곡선 $Y_i$가 없다. (b) 정확히
+하나의 곡선 $Y_i$가 $p$를 지나고 $\mathcal{O}_{Y_i, p}$는 정칙이다.
+(c) 정확히 두 곡선 $Y_i$, $Y_j$가 $p$를 지나고, 국소환
+$\mathcal{O}_{Y_i, p}$, $\mathcal{O}_{Y_j, p}$는 정칙이며
+$m_p(Y_i \cap Y_j) = 1$이다. 이는 $\sum Y_i$가 정칙 곡면 $X$ 위 엄밀
+정규교차 인자라는 뜻이다. 에탈 사상의 보조정리
+\ref{etale-lemma-strict-normal-crossings}를 보라.
+\end{proof}
+
+
+
+
+
+
+\section{예외 곡선의 수축}
+\label{resolve-section-minus-one}
+
+\noindent
+$X$를 뇌터 스킴이라 하자. $E \subset X$를 다음 성질을 갖는 닫힌
+부분스킴이라 하자.
+\begin{enumerate}
+\item $E$는 $X$ 위의 유효 카르티에 인자이다.
+\item 어떤 체 $k$와 스킴의 동형사상 $\mathbf{P}^1_k \to E$가 존재한다.
+\item 법선층 $\mathcal{N}_{E/X}$의 역상은
+$\mathcal{O}_{\mathbf{P}^1}(-1)$이다.
+\end{enumerate}
+이러한 닫힌 부분스킴을 {\it 제1종 예외 곡선}이라 한다.
+
+\medskip\noindent
+$X'$을 뇌터 스킴이라 하고, $\mathcal{O}_{X', x}$가 차원 $2$인 정칙환이
+되게 하는 닫힌점 $x \in X'$를 택하자. $b : X \to X'$를 $x$에서의
+$X'$의 부풀리기라 하자. 이 경우 예외 섬유 $E \subset X$는 제1종
+예외 곡선이다. 이는 보조정리 \ref{resolve-lemma-blowup}에서 따른다.
+
+\medskip\noindent
+질문: 모든 제1종 예외 곡선은 위와 같은 부풀리기의 섬유로 얻어지는가?
+달리 말하면, $E$를 닫힌점 $x \in X'$로 보내고,
+$\mathcal{O}_{X', x}$가 차원 $2$인 정칙환이며, $X$가 $x$에서의
+$X'$의 부풀리기가 되게 하는 스킴의 고유 사상 $X \to X'$가 항상
+존재하는가? 이것이 참이면 {\it $E$의 수축이 존재한다}고 말한다.
+
+\begin{lemma}
+\label{resolve-lemma-factor-through-contraction}
+$X$를 뇌터 스킴이라 하고 $E \subset X$를 제1종 예외 곡선이라 하자.
+$E$의 수축 $X \to X'$가 존재하면 이는 다음 보편 성질을 갖는다.
+$\varphi(E)$가 한 점인 모든 사상 $\varphi : X \to Y$에 대하여
+$\varphi$의 유일한 분해 $X \to X' \to Y$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$b : X \to X'$를 $E$의 수축이라 하자. 위상 공간으로서 $X'$은
+$E$의 모든 점을 한 점으로 동일시하는 관계에 의한 $X$의 몫이다.
+실제로 $b$는 고유이고
+(Divisors, 보조정리 \ref{divisors-lemma-blowing-up-projective} 및
+Morphisms, 보조정리 \ref{morphisms-lemma-locally-projective-proper})
+전사이므로, 위상 공간의 잠수 사상을 정의한다(Topology, 보조정리
+\ref{topology-lemma-closed-morphism-quotient-topology}).
+한편 표준 사상 $\mathcal{O}_{X'} \to b_*\mathcal{O}_X$는 동형사상이다.
+실제로 이는 $E$의 상인 점 $x \in X'$의 여집합 위에서는 명백하고,
+$x$에서의 줄기 위에서는 보조정리 \ref{resolve-lemma-cohomology-of-blowup}의
+(4)에 의해 동형사상이다. 따라서 쌍 $(X', \mathcal{O}_{X'})$은 $X$의
+위상 공간으로서의 몫을 취하고 그 위에 $b_*\mathcal{O}_X$를 구조층으로
+부여하여 구성된다.
+
+\medskip\noindent
+$\varphi$가 주어졌을 때 $\varphi = \varphi' \circ b$를 만족하는
+위상 공간의 유일한 사상을 $\varphi' : X' \to Y$라 둘 수 있다.
+그러면 사상
+$$
+\varphi^\sharp : \varphi^{-1}\mathcal{O}_Y =
+b^{-1}((\varphi')^{-1}\mathcal{O}_Y) \to \mathcal{O}_X
+$$
+은 다음 사상과 수반이다.
+$$
+(\varphi')^\sharp :
+(\varphi')^{-1}\mathcal{O}_Y \to b_*\mathcal{O}_X = \mathcal{O}_{X'}
+$$
+이때 $(\varphi', (\varphi')^\sharp)$는 $X'$에서 $Y$로 가는 환 달린
+공간의 사상이고, 이로부터 원하는 분해를 얻는다. $\varphi$가 국소환
+달린 공간의 사상이므로 $\varphi'$도 그러하다. 실제로 확인할 것은
+$\mathcal{O}_{Y, y} \to \mathcal{O}_{X', x}$가 국소 사상이라는 것뿐이며,
+여기서 $y \in Y$는 $\varphi$에 의한 $E$의 상이다. 이는 원소
+$f \in \mathfrak m_y$의 역상이 $E$의 모든 점에서 영인 $X$ 위의
+함수이고, 따라서 $f$의 $X'$로의 역상도 같은 성질을 갖는 $X'$의
+$x$의 근방에서 정의된 함수이기 때문이다. 그러면 원하는 대로 이 함수는
+$x$에서 소멸해야 함이 명백하다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-contraction-unique}
+$X$를 뇌터 스킴이라 하고 $E \subset X$를 제1종 예외 곡선이라 하자.
+$E$의 수축이 존재하면 이는 유일한 동형사상을 제외하고 유일하다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{resolve-lemma-factor-through-contraction}의 보편 성질에서
+즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-exceptional-first-kind-local}
+$X$를 뇌터 스킴이라 하고 $E \subset X$를 제1종 예외 곡선이라 하자.
+$E_n = nE$라 두고 그 구조층을 $\mathcal{O}_n$으로 나타내자. 그러면
+$$
+A = \lim H^0(E_n, \mathcal{O}_n)
+$$
+는 차원 $2$인 완비 국소 뇌터 정칙 국소환이고,
+$\Ker(A \to H^0(E_n, \mathcal{O}_n))$는 그 극대 아이디얼의 $n$제곱이다.
+\end{lemma}
+
+\begin{proof}
+$X$ 안의 $E$의 법선층의 역상이 $\mathcal{O}(-1)$이 되게 하는 동형사상
+$\mathbf{P}^1_k \to E$가 존재함을 상기하자. 그러면
+$H^0(E, \mathcal{O}_E) = k$이다. 모든 $n \geq 1$ 및
+$i \in \mathbf{Z}$에 대하여 가역층 $\mathcal{O}_X(iE)$의 $E_n$으로의
+제한을 $\mathcal{O}_n(iE)$로 나타내겠다. $\mathcal{O}_X(-nE)$가
+$E_n$의 아이디얼층임을 상기하자. 따라서 $d \geq 0$에 대하여 짧은
+완전열
+$$
+0 \to \mathcal{O}_E(-(d + n)E) \to
+\mathcal{O}_{n + 1}(-dE) \to
+\mathcal{O}_n(-dE) \to 0
+$$
+$\mathcal{O}_E(-(d + n)E) = \mathcal{O}_{\mathbf{P}^1_k}(d + n)$이므로
+모든 $d \geq 0$ 및 $n \geq 1$에 대하여 제1 코호몰로지 군은 소멸한다.
+따라서 계 $H^0(E_n, \mathcal{O}_n(-dE))$의 전이 사상은 전사이다.
+$d = 0$이면 각 전이 사상의 핵이 멱영 아이디얼인 환의 전사들의
+역계가 얻어진다. 그러므로 $A = \lim H^0(E_n, \mathcal{O}_n)$는
+잉여체가 $k$이고 극대 아이디얼이
+$$
+\lim \Ker(H^0(E_n, \mathcal{O}_n) \to H^0(E, \mathcal{O}_E)) =
+\lim H^0(E_n, \mathcal{O}_n(-E))
+$$
+인 국소환이다. 이 핵에서
+$H^0(E, \mathcal{O}_E(-E)) = H^0(\mathbf{P}^1_k, \mathcal{O}(1))$의
+$k$-기저로 가는 원소 $x,y$를 택하자. 그러면
+$x^d, x^{d - 1}y, \ldots, y^d$는
+$\lim H^0(E_n, \mathcal{O}_n(-dE))$의 원소들이며
+$H^0(E, \mathcal{O}_E(-dE)) = H^0(\mathbf{P}^1_k, \mathcal{O}(d))$의
+기저로 간다. 이로부터 $A$는 핵들
+$$
+I_n = \Ker(A \longrightarrow H^0(E_n, \mathcal{O}_n))
+$$
+로 정의되는 선형 위상에 관하여 분리되고 완비임을 알 수 있다.
+$x, y \in I_1$이고 $I_d I_{d'} \subset I_{d + d'}$이며,
+$I_d/I_{d + 1}$는 $x^d, x^{d - 1}y, \ldots, y^d$를 기저로 하는
+자유 $k$-가군이다. $I_d = (x, y)^d$임을 보이겠다. 실제로
+$e \geq d$인 $z_e \in I_e$에 대하여
+$$
+z_e = a_{e, 0} x^d + a_{e, 1} x^{d - 1}y + \ldots + a_{e, d}y^d + z_{e + 1}
+$$
+로 쓸 수 있다. 여기서 $a_{e, j} \in (x, y)^{e - d}$이고
+$z_{e + 1} \in I_{e + 1}$인데, 이는 $I_d/I_{d + 1}$에 대한 위의
+서술에서 따른다. 따라서 어떤 $z = z_d \in I_d$에서 시작하여 이를
+귀납적으로 시행하면
+$$
+z = \sum\nolimits_{e \geq d} \sum\nolimits_j a_{e, j} x^{d - j} y^j
+$$
+을 얻는다. 여기서 $a_{e, j} \in (x, y)^{e - d}$이다. 그러면 완비성과
+$a_{e, j} \in I_{e-d}$라는 사실에 의해
+$a_j = \sum_{e \geq d} a_{e, j}$가 존재하며,
+$z = \sum a_{e, j} x^{d - j} y^j$이다. 따라서 $I_d = (x, y)^d$이다.
+그러므로 $A$는 $(x,y)$-진 완비이다. Algebra, 보조정리
+\ref{algebra-lemma-completion-Noetherian}에 의해 $A$는 뇌터 환이다.
+$(x, y)^d/(x, y)^{d + 1}$에 대한 서술과 Algebra, 명제
+\ref{algebra-proposition-dimension}에 의해 차원이 $2$임은 명백하다.
+극대 아이디얼이 두 원소로 생성되므로 정칙이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-contraction}
+$X$를 뇌터 스킴이라 하고 $E \subset X$를 제1종 예외 곡선이라 하자.
+다음을 만족하는 사상 $f : X \to Y$가 존재한다고 하자.
+\begin{enumerate}
+\item $Y$는 뇌터 스킴이다.
+\item $f$는 고유이다.
+\item $f$는 $E$를 $Y$의 한 점 $y$로 보낸다.
+\item $f$는 $E$에 속하지 않는 모든 점에서 준유한이다.
+\end{enumerate}
+그러면 $E$의 수축이 존재하며, 이는 $f$의 슈타인 분해이다.
+\end{lemma}
+
+\begin{proof}
+More on Morphisms, 정리
+\ref{more-morphisms-theorem-stein-factorization-Noetherian}를 적용하여
+슈타인 분해 $X \to X' \to Y$를 얻는다. 그러면 $X \to X'$는 이
+보조정리의 모든 가정을 만족한다(일부 세부 사항은 생략한다).
+따라서 $Y$를 $X'$으로 대체하여 추가로
+$f_*\mathcal{O}_X = \mathcal{O}_Y$이고 $f$의 섬유들이 기하적으로
+연결되어 있다고 가정할 수 있다.
+
+\medskip\noindent
+$f_*\mathcal{O}_X = \mathcal{O}_Y$이고 $f$의 섬유들이 기하적으로
+연결되어 있다고 가정하자. $f$와 $E$가 닫혀 있으므로 $y \in Y$는
+닫힌점이다. $f$의 제한
+$f^{-1}(Y \setminus \{y\}) \to Y \setminus \{y\}$는 유한 사상이다
+(More on Morphisms, 보조정리
+\ref{more-morphisms-lemma-characterize-finite}). 유한 사상은 아핀이고
+$f_*\mathcal{O}_X = \mathcal{O}_Y$이므로 이 제한은 동형사상이다.
+$\mathcal{O}_{Y,y}$가 차원 $2$인 정칙환임을 보이기 위해 동형사상
+$$
+\mathcal{O}_{Y, y}^\wedge \longrightarrow
+\lim H^0(X \times_Y \Spec(\mathcal{O}_{Y, y}/\mathfrak m_y^n), \mathcal{O})
+$$
+을 고찰한다. 이는 Cohomology of Schemes, 보조정리
+\ref{coherent-lemma-formal-functions-stalk}의 동형사상이다.
+보조정리 \ref{resolve-lemma-exceptional-first-kind-local}에서와 같이
+$E_n = nE$라 두자. 다음 포함을 주목하자.
+$$
+E_n \subset X \times_Y \Spec(\mathcal{O}_{Y, y}/\mathfrak m_y^n)
+$$
+이는 $E \subset X_y = X \times_Y \Spec(\kappa(y))$이기 때문이다.
+한편 $f$의 섬유들이 기하적으로 연결되어 있으므로 집합론적으로
+$E = f^{-1}(\{y\})$이고, 따라서 어떤 $n > 0$에 대하여 스킴론적 섬유
+$X_y$는 스킴론적으로 $E_n$에 포함된다. 실제로 연접
+$\mathcal{O}_X$-가군 $\mathcal{F} = \mathcal{O}_{X_y}$와 $E$의
+아이디얼층 $\mathcal{I}$에 Cohomology of Schemes, 보조정리
+\ref{coherent-lemma-power-ideal-kills-sheaf}를 적용하고,
+$\mathcal{I}^n$이 $E_n$의 아이디얼층임을 사용한다. 이로부터
+$$
+X \times_Y \Spec(\mathcal{O}_{Y, y}/\mathfrak m_y^m) \subset E_{nm}
+$$
+을 얻는다. 따라서 위에 표시한 역극한은
+$\lim H^0(E_n, \mathcal{O}_n)$와 같고, 보조정리
+\ref{resolve-lemma-exceptional-first-kind-local}에 의해 이는 2차원 정칙
+국소환이다. 그러므로 그 완비화가 그러하다는 사실로부터
+$\mathcal{O}_{Y,y}$도 2차원 정칙 국소환이다(More on Algebra,
+보조정리 \ref{more-algebra-lemma-completion-regular} 및
+\ref{more-algebra-lemma-completion-dimension}).
+
+\medskip\noindent
+이제 $f : X \to Y$가 $y$에서의 $Y$의 부풀리기 $b : Y' \to Y$임을
+보여야 한다. 독자에게 직접 증명을 찾아볼 것을 권한다. 우선 보조정리
+\ref{resolve-lemma-exceptional-first-kind-local}는 스킴론적으로도 $X_y = E$임을
+함의한다. $E$의 아이디얼층은 가역이므로
+$f^{-1}\mathfrak m_y \cdot \mathcal{O}_X$도 가역이다. 따라서 부풀리기의
+보편 성질에 의해 사상 $f$의 분해
+$$
+X \to Y' \to Y
+$$
+를 얻는다(Divisors, 보조정리
+\ref{divisors-lemma-universal-property-blowing-up} 참조).
+보조정리 \ref{resolve-lemma-blowup}에 의해 예외 섬유 $E' \subset Y'$는 제1종
+예외 곡선임을 상기하자. 유도된 사상을 $g : E \to E'$라 하자.
+$E'$과 $E$ 모두에서 여법선층은 $a$와 $b$의 (역상들로) 생성되므로,
+표준 사상
+$g^*\mathcal{C}_{E'/Y'} \to \mathcal{C}_{E/X}$
+은 전사이다(Morphisms, 보조정리
+\ref{morphisms-lemma-conormal-functorial}). 두 층 모두 가역이므로 이
+사상은 동형사상이다. $\mathcal{C}_{E/X}$의 차수가 양수이므로 $g$는
+상수 사상일 수 없다. 따라서 $g$의 섬유는 유한하고, 위와 같은 근거로
+$g$는 유한 사상이다. 그런데 $Y'$은 $E'$의 모든 점에서 정칙(따라서
+정규)이고, $X \to Y'$은 쌍유리이며 $E'$ 밖에서 동형사상이므로,
+Varieties, 보조정리
+\ref{varieties-lemma-modification-normal-iso-over-codimension-1}에 의해
+$X \to Y'$은 동형사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-pic-blowup}
+$b : X \to X'$를 제1종 예외 곡선 $E \subset X$의 수축이라 하자.
+그러면 짧은 완전열
+$$
+0 \to \Pic(X') \to \Pic(X) \to \mathbf{Z} \to 0
+$$
+이 존재한다. 첫째 사상은 $b$에 의한 역상이고, 둘째 사상은
+$\mathcal{L}$을 예외 곡선 $E$ 위에서의 $\mathcal{L}$의 차수로 보낸다.
+이 완전열은 사상 $n \mapsto \mathcal{O}_X(-nE)$에 의해 분할된다.
+\end{lemma}
+
+\begin{proof}
+$E = \mathbf{P}^1_k$이므로 $E$의 피카르 군은 $\mathbf{Z}$이다
+(Divisors, 보조정리 \ref{divisors-lemma-Pic-projective-space-UFD} 참조).
+따라서 마지막 사상을 $\mathcal{L} \mapsto \mathcal{L}|_E$로 생각할 수
+있다. 제1종 예외 곡선의 정의에 의해 $\mathcal{O}_X(E)$의 $E$로의
+제한의 차수는 $-1$이다. 이 사실들을 합치면,
+$\Pic(X') \to \Pic(X)$가 단사이고 그 상이 $E$ 위에서
+$\mathcal{O}_E$로 제한되는 가역층들임을 보이면 충분하다.
+
+\medskip\noindent
+가역 $\mathcal{O}_{X'}$-가군 $\mathcal{L}'$이 주어졌을 때 사상
+$\mathcal{L}' \to b_*b^*\mathcal{L}'$이 동형사상이라고 주장한다.
+이는 $E$의 상인 점 $x \in X'$을 제외하면 명백하다. $x$에서의 줄기
+위에서도 동형사상임을 확인하기 위해 $X'$을 $x$의 열린 근방으로
+대체하고 $\mathcal{L}'$이 $\mathcal{O}_{X'}$라고 가정할 수 있다. 그러면
+$\mathcal{O}_{X'} \to b_*\mathcal{O}_X$가 동형사상임을 보이면 된다.
+이는 보조정리 \ref{resolve-lemma-cohomology-of-blowup}의 (4)에서 따른다.
+
+\medskip\noindent
+$\mathcal{L}|_E = \mathcal{O}_E$인 가역 $\mathcal{O}_X$-가군
+$\mathcal{L}$을 택하자. 다음을 주장한다.
+(1) $b_*\mathcal{L}$은 가역이고,
+(2) $b^*b_*\mathcal{L} \to \mathcal{L}$은 동형사상이다.
+(1)과 (2)는 $X' \setminus \{x\}$ 위에서 명백하다. 따라서
+$\Spec(\mathcal{O}_{X',x})$로 기저 변경한 뒤 (1)과 (2)를 증명하면
+충분하다. $b_*$의 계산은 평탄 기저 변경과 가환하고(Cohomology of
+Schemes, 보조정리 \ref{coherent-lemma-flat-base-change-cohomology}),
+$b^*$ 및 수반 사상의 구성도 마찬가지이다. 그런데 $X'$이 정칙 국소환의
+스펙트럼이면 보조정리 \ref{resolve-lemma-blowup-pic}의 피카르 군에 대한 서술에
+의해 $\mathcal{L}$은 자명하다. 이로써 주장이 증명된다.
+
+\medskip\noindent
+앞의 두 문단에서 증명한 주장들을 합치면 사상
+$\mathcal{L} \mapsto b_*\mathcal{L}$이 다음 사상의 역임을 알 수 있다.
+$$
+\Pic(X') \longrightarrow \Ker(\Pic(X) \to \Pic(E))
+$$
+이로써 보조정리가 증명된다.
+\end{proof}
+
+\begin{remark}
+\label{resolve-remark-pic-blowup}
+$b : X \to X'$를 제1종 예외 곡선 $E \subset X$의 수축이라 하자.
+보조정리 \ref{resolve-lemma-pic-blowup}에서 다음 동일시를 얻는다.
+$$
+\Pic(X) = \Pic(X') \oplus \mathbf{Z}
+$$
+여기서 $\mathcal{L}$이 쌍 $(\mathcal{L}',n)$에 대응할 필요충분조건은
+$\mathcal{L} = (b^*\mathcal{L}')(-nE)$, 즉
+$\mathcal{L}(nE) = b^*\mathcal{L}'$인 것이다. 실제로 보조정리
+\ref{resolve-lemma-pic-blowup}의 증명은
+$\mathcal{L}' = b_*\mathcal{L}(nE)$임을 보인다. 물론 대응
+$\mathcal{L} \mapsto \mathcal{L}'$은 군 준동형이다.
+\end{remark}
+
+\begin{lemma}
+\label{resolve-lemma-lift-sections-and-h1}
+$X$를 뇌터 스킴, $E \subset X$를 제1종 예외 곡선,
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{L}|_E$를 $\mathbf{P}^1$ 위의 가역 가군으로 보았을 때 그
+차수가 $n$이 되게 하는 정수를 $n$이라 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item $H^1(X, \mathcal{L}) = 0$이고 $n \geq 0$이면
+$0 \leq i \leq n + 1$인 모든 정수에 대하여
+$H^1(X, \mathcal{L}(iE)) = 0$이다.
+\item $n \leq 0$이면
+$H^1(X, \mathcal{L}) \subset H^1(X, \mathcal{L}(E))$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Divisors, 보조정리 \ref{divisors-lemma-Pic-projective-space-UFD}에 의해
+$\mathcal{L}|_E = \mathcal{O}(n)$임을 주목하자. 귀납법과 짧은 완전열
+$$
+0 \to \mathcal{L} \to \mathcal{L}(E) \to \mathcal{L}(E)|_E \to 0,
+$$
+에 딸린 긴 완전 코호몰로지 열을 사용하고, $d \geq -1$이면
+$H^1(\mathbf{P}^1, \mathcal{O}(d)) = 0$이고 $d \leq -1$이면
+$H^0(\mathbf{P}^1, \mathcal{O}(d)) = 0$임을 사용한다. 일부 세부
+사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-contract-ample}
+$S = \Spec(R)$를 아핀 뇌터 스킴이라 하자. $X \to S$를 고유 사상,
+$\mathcal{L}$을 $X$ 위의 풍부한 가역층, $E \subset X$를 제1종 예외
+곡선이라 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item $E$의 수축 $b : X \to X'$가 존재한다.
+\item $X'$은 $S$ 위에서 고유이다.
+\item 가역 $\mathcal{O}_{X'}$-가군 $\mathcal{L}'$은 풍부하며,
+여기서 $\mathcal{L}'$은 따름정리 \ref{resolve-remark-pic-blowup}에서와 같다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{resolve-lemma-lift-sections-and-h1}에서처럼
+$n$을 $\mathcal{L}|_E$의 차수라 하자. $\mathcal{L}$은 $E$ 위에서
+풍부하므로 $n > 0$임을 주목하자(Varieties, 보조정리
+\ref{varieties-lemma-ample-curve} 및 Properties, 보조정리
+\ref{properties-lemma-ample-on-closed}). $\mathcal{L}$을 어떤 거듭제곱으로
+대체하여 모든 $i > 0$ 및 $e > 0$에 대하여
+$H^i(X, \mathcal{L}^{\otimes e}) = 0$이라 가정할 수 있다(Cohomology of
+Schemes, 보조정리 \ref{coherent-lemma-vanshing-gives-ample} 참조).
+마지막으로 $\mathcal{L}$을 다시 어떤 거듭제곱으로 대체하여, 닫힌 몰입
+$\psi : X \to \mathbf{P}^n_S$를 정의하는 $\mathcal{L}$의 대역 단면
+$t_0, \ldots, t_n$이 존재한다고 가정할 수 있다(Morphisms, 보조정리
+\ref{morphisms-lemma-finite-type-over-affine-ample-very-ample} 참조).
+
+\medskip\noindent
+$\mathcal{M} = \mathcal{L}(nE)$라 두자. 그러면
+$\mathcal{M}|_E \cong \mathcal{O}_E$이다. 짧은 완전열
+$$
+0 \to \mathcal{M}(-E) \to \mathcal{M} \to \mathcal{O}_E \to 0
+$$
+이 있고, 보조정리 \ref{resolve-lemma-lift-sections-and-h1} 및 $n > 0$이라는
+사실에 의해 $H^1(X, \mathcal{M}(-E))$가 영이므로,
+$\mathcal{M}|_E$를 생성하는 $\mathcal{M}$의 단면 $s_{n+1}$을 택할 수
+있다. 끝으로 위에서 택한 $\mathcal{L}$의 단면
+$t_0, \ldots, t_n$으로부터 포함
+$\mathcal{L} \subset \mathcal{L}(nE) = \mathcal{M}$을 통해 얻는
+$\mathcal{M}$의 단면들을 $s_0, \ldots, s_n$이라 쓰자. 단면들
+$s_0, \ldots, s_n, s_{n+1}$은 함께 $X$의 모든 점에서
+$\mathcal{M}$을 생성하므로 사상
+$$
+\varphi : X \longrightarrow \mathbf{P}^{n + 1}_S
+$$
+을 $S$ 위에서 정의한다(Constructions, 보조정리
+\ref{constructions-lemma-projective-space} 참조).
+
+\medskip\noindent
+아래에서 보조정리 \ref{resolve-lemma-contraction}의 조건들을 확인하겠다.
+확인이 끝나면 $\varphi$의 슈타인 분해
+$X \to X' \to \mathbf{P}^{n+1}_S$가 원하는 수축임을 알 수 있으므로
+(1)이 증명된다. 또한 사상 $X' \to \mathbf{P}^{n+1}_S$는 유한이므로
+$X'$은 $S$ 위에서 고유이다(Morphisms, 보조정리
+\ref{morphisms-lemma-finite-proper} 및
+\ref{morphisms-lemma-composition-proper}). 이로써 (2)가 증명된다.
+$X'$에는 풍부한 가역층이 있음을 주목하자. 실제로
+$\mathcal{O}_{\mathbf{P}^{n+1}_S}(1)$의 역상 $\mathcal{M}'$은
+Morphisms, 보조정리
+\ref{morphisms-lemma-pullback-ample-tensor-relatively-ample}에 의해
+풍부하다. $\mathcal{M}'$의 $X$로의 역상은 $\mathcal{M}$이다
+(Constructions, 보조정리 \ref{constructions-lemma-projective-space}).
+끝으로 $\mathcal{M} = \mathcal{L}(nE)$이다. 위 논증에서 원래의
+$\mathcal{L}$을 양의 거듭제곱으로 대체했으므로, 이 보조정리의 (3)에
+나오는 가역 $\mathcal{O}_{X'}$-가군 $\mathcal{L}'$은 Properties,
+보조정리 \ref{properties-lemma-ample-power-ample}에 의해 $X'$ 위에서
+풍부하다.
+
+\medskip\noindent
+간단한 관찰: $\mathbf{P}^{n+1}_S$는 뇌터 스킴이고 $\varphi$는
+고유이다. 세부 사항은 생략한다.
+
+\medskip\noindent
+다음으로 $U = X \setminus E$의 모든 점은 처음 $n+1$개의 동차 좌표 중
+하나가 영이 아닌 $\mathbf{P}^{n+1}_S$의 열린 부분스킴 $W$로 보내진다.
+반면 $E$의 모든 점은 처음 $n+1$개의 동차 좌표가 모두 영인 점, 특히
+$W$의 여집합으로 보내진다. 또한 다음은 $\psi|_U$의 분해임이 명백하다.
+$$
+U = \varphi^{-1}(W) \xrightarrow{\varphi|_U}
+W \xrightarrow{\text{pr}} \mathbf{P}^n_S
+$$
+여기서 $\text{pr}$은 처음 $n+1$개 좌표를 쓰는 사영이고,
+$\psi : X \to \mathbf{P}^n_S$는 위에서 택한 매장이다. 따라서
+$\varphi|_U : U \to W$는 준유한이다.
+
+\medskip\noindent
+끝으로 사상 $\varphi|_E : E \to \mathbf{P}^{n+1}_S$를 고찰한다.
+모든 점 $x \in E$에 대하여 상 $\varphi(x)$의 처음 $n+1$개 좌표는
+영이다. 즉 사상 $\varphi|_E$는 닫힌 부분스킴
+$\mathbf{P}^0_S \cong S$를 통해 분해된다. Schemes, 보조정리
+\ref{schemes-lemma-morphism-into-affine}에 의해 사상
+$E \to S = \Spec(R)$은
+$E \to \Spec(H^0(E, \mathcal{O}_E)) \to \Spec(R)$으로 분해된다.
+가정에 의해 $H^0(E, \mathcal{O}_E)$는 체이므로 $E$는
+$S \subset \mathbf{P}^{n+1}_S$의 한 점으로 보내진다. 이로써 증명이
+끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-contract-when-quasi-projective}
+$S$를 뇌터 스킴, $f : X \to S$를 유한형 사상이라 하자.
+$E \subset X$를 $f$의 한 섬유에 들어 있는 제1종 예외 곡선이라 하자.
+\begin{enumerate}
+\item $X$가 $S$ 위에서 사영이면 $E$의 수축 $X \to X'$가 존재하고
+$X'$은 $S$ 위에서 사영이다.
+\item $X$가 $S$ 위에서 준사영이면 $E$의 수축 $X \to X'$가 존재하고
+$X'$은 $S$ 위에서 준사영이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+두 경우 모두 풍부한 가역 가군과 (준)사영 사상에 관한 표준 결과를
+사용하여 보조정리 \ref{resolve-lemma-contract-ample}에서 따른다.
+
+\medskip\noindent
+(1)의 증명. $f$가 사영이라는 것은 $f$가 고유이고 $f$-풍부한 가역 가군
+$\mathcal{L}$이 존재한다는 뜻이다(Morphisms, 보조정리
+\ref{morphisms-lemma-projective-is-quasi-projective-proper} 및 정의
+\ref{morphisms-definition-quasi-projective} 참조). $E$의 상을 포함하는
+아핀 열린집합을 $U \subset S$라 하자. 보조정리
+\ref{resolve-lemma-contract-ample}에 의해 $E$의 수축
+$c : f^{-1}(U) \to V'$와 $V'$ 위의 풍부한 가역 가군
+$\mathcal{N}'$이 존재하며, 그 $f^{-1}(U)$로의 역상은
+$\mathcal{L}(nE)|_{f^{-1}(U)}$와 같다. $c$가 닫힌점 $v \in V'$의
+부풀리기가 되게 하는 점을 $v$라 하자. 그러면
+$f^{-1}(U) \setminus E = V' \setminus \{v\}$를 따라 $V'$과
+$X \setminus E$를 붙여 $S$ 위의 스킴 $X'$을 얻을 수 있다. 사상 $c$와
+$\text{id}_{X \setminus E}$는 붙어서 $E$의 수축인 사상
+$b : X \to X'$이 된다. $X'$에서 $U$의 역상은 $U$ 위에서 고유이다.
+한편 $S$에서 $v$의 상의 여집합으로 $X' \to S$를 제한한 것은 그 열린
+집합으로 $X \to S$를 제한한 것과 동형이다. 따라서 $X' \to S$는
+고유이다(고유성은 기저 위에서 국소적인 성질이기 때문이다. Morphisms,
+보조정리 \ref{morphisms-lemma-proper-local-on-the-base} 참조).
+끝으로 $\mathcal{N}'$과 $\mathcal{L}|_{X \setminus E}$는
+$f^{-1}(U) \setminus E = V' \setminus \{v\}$ 위에서 동형인 가역
+가군으로 제한되므로, 붙어서 $X'$ 위의 가역 가군 $\mathcal{L}'$이 된다.
+$\mathcal{L}'$의 $X'$ 안의 $U$의 역상으로의 제한은 $\mathcal{N}'$에
+대하여 그러하므로 풍부하다. $v$의 상을 피하는 $S$의 아핀 열린집합에
+대해서도 $\mathcal{L}$에 대하여 그러하므로 같은 사실이 성립한다.
+따라서 Morphisms, 보조정리
+\ref{morphisms-lemma-characterize-relatively-ample}에 의해
+$\mathcal{L}'$은 $(X' \to S)$-상대적으로 풍부하다. 이로써 (1)이
+증명된다.
+
+\medskip\noindent
+(2)의 증명. Morphisms, 보조정리
+\ref{morphisms-lemma-quasi-projective-open-projective}에 의해 $X$를
+$S$ 위에서 사영인 스킴 $\overline{X}$의 열린 부분스킴으로 쓸 수 있다.
+(1)에 의해 수축 $b : \overline{X} \to \overline{X}'$이 존재하고
+$\overline{X}'$은 $S$ 위에서 사영이다.
+$X' \subset \overline{X}$를 $X \to \overline{X}'$의 상으로 두자.
+$b$는 $E$ 밖에서 동형사상이므로
+이는 열린 부분스킴이다. 그러면 $X \to X'$은 원하는 수축이다. (1)의
+증명에서의 구성에 의해 $S$-상대적으로 풍부한 가역 가군을 가지므로,
+$X'$은 $S$ 위에서 준사영임을 주목하자.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-regular-dim-2-quasi-projective}
+$S$를 뇌터 스킴이라 하자. $f : X \to S$를 유한형 분리 사상이라 하고,
+$X$는 차원 $2$인 정칙 스킴이라 하자. 그러면 $X$는 $S$ 위에서
+준사영이다.
+\end{lemma}
+
+\begin{proof}
+저우의 보조정리(Cohomology of Schemes, 보조정리
+\ref{coherent-lemma-chow-Noetherian})에 의해, 조밀한 열린집합
+$U \subset X$ 위에서 동형사상이고 $X' \to S$가 H-준사영이 되게 하는
+고유 사상 $\pi : X' \to X$가 존재한다. 보조정리
+\ref{resolve-lemma-extend-rational-map-blowing-up}에 의해 닫힌점들에서의
+부풀리기들의 열
+$$
+X_n \to \ldots \to X_1 \to X_0 = X
+$$
+과 유리 사상 $U \to X'$을 연장하는 $S$-사상 $X_n \to X'$이 존재한다.
+Divisors, 보조정리 \ref{divisors-lemma-blowing-up-projective} 및
+Morphisms, 보조정리 \ref{morphisms-lemma-composition-projective}에 의해
+$X_n \to X$는 사영이다. 이는 Morphisms, 보조정리
+\ref{morphisms-lemma-projective-permanence}에 의해 $X_n \to X'$도
+사영임을 함의한다. 따라서 Morphisms, 보조정리
+\ref{morphisms-lemma-composition-quasi-projective}에 의해
+$X_n \to S$는 준사영이다(사영 사상이 준사영이라는 사실은 Morphisms,
+보조정리 \ref{morphisms-lemma-projective-quasi-projective} 참조).
+보조정리 \ref{resolve-lemma-contract-when-quasi-projective}와 수축의 유일성
+(보조정리 \ref{resolve-lemma-contraction-unique})에 의해 원하는 대로
+$X_{n-1}, \ldots, X_0 = X$가 $S$ 위에서 준사영임을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-regular-dim-2-projective}
+$S$를 뇌터 스킴이라 하자. $f : X \to S$를 고유 사상이라 하고,
+$X$는 차원 $2$인 정칙 스킴이라 하자. 그러면 $X$는 $S$ 위에서
+사영이다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{resolve-lemma-regular-dim-2-quasi-projective} 및 Morphisms,
+보조정리 \ref{morphisms-lemma-projective-is-quasi-projective-proper}에서
+따른다.
+\end{proof}
+
+
+
+
+
+
+\section{쌍유리 사상의 분해}
+\label{resolve-section-factorizing}
+
+\noindent
+비특이 곡면 사이의 고유 쌍유리 사상은 이차 변환들의 열로 주어진다.
+
+\begin{lemma}
+\label{resolve-lemma-proper-birational-regular-surfaces}
+$f : X \to Y$를 차원 $2$인 정칙 정역 뇌터 스킴 사이의 고유 쌍유리
+사상이라 하자. 그러면 $f$는 닫힌점들에서의 부풀리기들의 열이다.
+\end{lemma}
+
+\begin{proof}
+$V \subset Y$를 그 위에서 $f$가 동형사상인 극대 열린집합이라 하자.
+그러면 $V$는 $V$의 모든 여차원 $1$인 점을 포함한다(Varieties,
+보조정리 \ref{varieties-lemma-modification-normal-iso-over-codimension-1}).
+$V$에 속하지 않는 닫힌점 $y \in Y$를 택하자. $f$가 $y$에서의 $Y$의
+부풀리기 $b : Y' \to Y$를 통해 분해됨을 보이고자 한다. 실제로 이것이
+참이면 섬유 $f^{-1}(y)$의 적어도 하나(사실 정확히 하나)의 성분이
+$Y'$의 예외 곡선 위로 동형사상에 의해 가고, $X \to Y'$의 섬유들에
+있는 곡선의 수는 $X \to Y$의 섬유들에 있는 곡선의 수보다 엄밀히
+작다. 따라서 귀납법으로 결론을 얻는다. 일부 세부 사항은 생략한다.
+
+\medskip\noindent
+보조정리 \ref{resolve-lemma-extend-rational-map-blowing-up}에 의해 닫힌점들에서의
+부풀리기들의 열
+$$
+X' = X_n \to X_{n - 1} \to \ldots \to X_1 \to X_0 = X
+$$
+과 사상 $X' \to Y'$이 존재하고, 그 닫힌점들은 섬유 $f^{-1}(y)$ 위에
+놓이며 다음 도표가 가환함을 안다.
+$$
+\xymatrix{
+X' \ar[d]_{f'} \ar[r] & X \ar[d]^f \\
+Y' \ar[r] & Y
+}
+$$
+사상 $X' \to Y'$이 $X$를 통해 분해됨을 보이고자 한다. 그러면 $n$에
+대한 귀납법을 써서 $X' \to X$가 $y$로 가는 닫힌점 $x \in X$에서의
+$X$의 부풀리기인 경우로 환원할 수 있다.
+
+\medskip\noindent
+$E \subset X'$를 부풀리기 $X' \to X$의 예외 섬유라 하자. $E$가
+$Y'$의 한 점으로 가면 보조정리 \ref{resolve-lemma-factor-through-contraction}에
+의해 원하는 분해를 얻는다. 그렇지 않으면 모순이 생김을 보이겠다.
+실제로 $f'(E)$가 한 점이 아니면 $E' = f'(E)$는 $Y'$의 예외 곡선이어야
+한다. 다음 도표를 보자.
+$$
+\xymatrix{
+E \ar[r] \ar[d]_g & X' \ar[d]_{f'} \ar[r] & X \ar[d]^f \\
+E' \ar[r] & Y' \ar[r] & Y
+}
+$$
+앞에서와 같이 논하면 $f'$은 $E'$의 일반점의 열린 근방에서
+동형사상이다. 따라서 $g : E \to E'$은 유한 쌍유리 사상이다. 그러면
+Morphisms, 보조정리 \ref{morphisms-lemma-extend-across}에 의해 $g$의
+역인 유리 사상은 모든 곳에서 정의되며, $g$는 동형사상이다. 사상
+$$
+g^*\mathcal{C}_{E'/Y'} \longrightarrow \mathcal{C}_{E/X'}
+$$
+을 고찰하자(Morphisms, 보조정리
+\ref{morphisms-lemma-conormal-functorial}). 원천과 목표는 모두
+$E = E' = \mathbf{P}^1_\kappa$ 위의 차수 $1$인 가역 가군이고,
+$f'$이 $E$의 일반점에서 동형사상이므로 이 사상은 영이 아니다.
+따라서 이는 동형사상이다. Morphisms, 보조정리
+\ref{morphisms-lemma-two-immersions}에 의해
+$\Omega_{X'/Y'}|_E = 0$을 얻는다. 이는 $f'$이 $E$의 모든 점에서
+비분기임을 뜻한다(Morphisms, 보조정리
+\ref{morphisms-lemma-unramified-at-point}). 따라서 $f'$은 $E$의 모든
+점에서 준유한이다(Morphisms, 보조정리
+\ref{morphisms-lemma-unramified-quasi-finite}). 그러므로 Varieties,
+보조정리 \ref{varieties-lemma-modification-normal-iso-over-codimension-1}에
+의해 $f'$이 동형사상인 극대 열린집합 $V' \subset Y'$은 $E'$을
+포함한다. 이는 다시 $X'$에서 $y$의 역상이 $E'$임을 함의한다. 따라서
+$X$에서 $y$의 역상은 $x$이다. 그러면 Varieties, 보조정리
+\ref{varieties-lemma-modification-normal-iso-over-codimension-1}에 의해
+$x \in X$는 그 위에서 $f$가 동형사상인 극대 열린집합에 속한다.
+이는 $y$가 이 열린집합에 속하지 않는다고 가정한 것과 모순이다.
+\end{proof}
+
+\begin{lemma}
+\label{resolve-lemma-birational-regular-surfaces}
+$S$를 뇌터 스킴이라 하자. $X$와 $Y$를 $S$ 위의 고유 정역 스킴이라 하고,
+둘 다 차원 $2$인 정칙 스킴이라 하자. 그러면 $X$와 $Y$가
+$S$-쌍유리일 필요충분조건은 다음 $S$-사상들의 도표가 존재하는 것이다.
+$$
+X = X_0 \leftarrow X_1 \leftarrow \ldots \leftarrow X_n = Y_m
+\to \ldots \to Y_1 \to Y_0 = Y
+$$
+여기서 각 사상은 한 닫힌점에서의 부풀리기이다.
+\end{lemma}
+
+\begin{proof}
+$U \subset X$를 열린집합이라 하고, 주어진 $S$-유리 사상(그 역도
+$S$-유리 사상이다)을 $f : U \to Y$라 하자. 보조정리
+\ref{resolve-lemma-extend-rational-map-blowing-up}에 의해 $f$를
+$X_n \to \ldots \to X_1 \to X_0 = X$와 $f_n : X_n \to Y$로 분해할
+수 있다. $X_n$은 $S$ 위에서 고유이고 $Y$는 $S$ 위에서 분리이므로
+사상 $f_n$은 고유이다. $f_n$이 쌍유리임은 명백하다. 따라서 보조정리
+\ref{resolve-lemma-proper-birational-regular-surfaces}에 의해 $f_n$은 수축들의
+합성이다. 역의 증명은 생략한다.
+\end{proof}

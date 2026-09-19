@@ -1,0 +1,3547 @@
+% Generated mechanically from frozen input p12/ko/build/ch103/stacks-cohomology_full.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{102}
+\chapter{대수적 스택의 코호몰로지}
+
+
+\phantomsection
+\label{stacks-cohomology-section-phantom}
+
+
+\section{서론}
+\label{stacks-cohomology-section-introduction}
+
+\noindent
+이 장에서는 대수적 스택의 코호몰로지를 다룬다.
+특히 이는 준연접 층의 코호몰로지를 뜻한다. 즉,
+『스킴의 코호몰로지』와 『대수공간의 코호몰로지』라는 장에 나오는
+결과들의 유사한 명제들을 증명한다.
+이 장의 결과들이 \cite{LM-B}의 결과들과 다른 주된 이유는
+우리가 일관되게 ``큰 사이트''를 사용하기 때문이다.
+이 장을 읽기 전에 『대수적 스택 위의 층』 장을 잠깐 살펴서
+그곳에서 도입한 용어에 익숙해지기를 바란다. 『스택 위의 층』의 절
+\ref{stacks-sheaves-section-introduction}을 보라.
+
+
+
+\section{규약과 용어의 관용적 사용}
+\label{stacks-cohomology-section-conventions}
+
+\noindent
+『스택의 성질』의 절
+\ref{stacks-properties-section-conventions}에서 도입한 규약과
+용어의 관용적 사용을 계속 따른다.
+
+
+
+
+
+
+
+
+\section{표기법}
+\label{stacks-cohomology-section-notation}
+
+\noindent
+서로 다른 위상들. 대수적 스택을
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$와 같은 서체 문자로 나타내면,
+표기
+$\mathcal{X}_{Zar}, \mathcal{X}_\etale, \mathcal{X}_{smooth},
+\mathcal{X}_{syntomic}, \mathcal{X}_{fppf}$는
+『스택 위의 층』의 정의
+\ref{stacks-sheaves-definition-inherited-topologies}에서 도입한
+사이트를 뜻한다. (``큰 사이트''라고 생각하라.) 이에 따라
+$\mathcal{X}$의 구조층은 $\mathcal{X}_{fppf}$ 위의 층이다.
+한편 대수공간과 스킴은 보통 $X, Y, Z$와 같은 로마체 대문자로 나타내며,
+이 경우 $X_\etale$은 $X$의 작은 에탈 사이트를 뜻한다(『위상들』의 정의
+\ref{topologies-definition-big-small-etale} 또는
+『대수공간의 성질』의 정의
+\ref{spaces-properties-definition-etale-site}에서 정의한 것이다).
+이 구별은 충분히 명확할 것이다.
+
+\medskip\noindent
+기본 위상은 fppf 위상이다. 따라서 $\mathcal{X}_{fppf}$ 위의 층이나
+$\textit{Mod}(\mathcal{X}_{fppf}, \mathcal{O}_\mathcal{X})$의 대상을
+뜻하면서 때때로 ``$\mathcal{X}$ 위의 층'' 또는
+``$\mathcal{O}_\mathcal{X}$-가군층''이라고 말할 것이다.
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$가 대수적 스택의 사상이면,
+준층에 대해 정의한 함자 $f_*$와 $f^{-1}$은 위에서 언급한 어느 위상에
+대해서도 층을 보존한다. 특히 층의 직상이나 당김을 논할 때에는
+어느 위상을 사용하는지 언급할 필요가 없다. 코호몰로지 군이나
+고차 직상을 계산할 때에는 그렇지 않다. 이 경우에는 항상
+어느 위상을 사용하는지 명시할 것이다.
+
+\medskip\noindent
+$f : X \to \mathcal{Y}$가 대수공간 $X$에서 대수적 스택
+$\mathcal{Y}$로 가는 사상이라고 하자. 어떤 위상 $\tau$에 대해
+$\mathcal{G}$를 $\mathcal{Y}_\tau$ 위의 층이라 하자. 이 경우
+$f^{-1}\mathcal{G}$는 $\mathcal{S}_X$ 위의 $\tau$ 위상에 대한 층이다
+($X$에 대응하는 대수적 스택). 실제로 (우리의 규약에 따라) $f$는
+$1$-사상 $f : \mathcal{S}_X \to \mathcal{Y}$이기 때문이다.
+$\tau = \etale$이거나 그보다 강한 위상이면,
+$f^{-1}\mathcal{G}|_{X_\etale}$로 $X$의 에탈 사이트에 대한 제한을
+나타낸다. 『스택 위의 층』의 절
+\ref{stacks-sheaves-section-compare}을 보라.
+$\mathcal{G}$가 $\mathcal{O}_\mathcal{X}$-가군이면 때때로 그 대신
+$f^*\mathcal{G}$와 $f^*\mathcal{G}|_{X_\etale}$라고 쓴다.
+
+\section{준연접 가군의 당김}
+\label{stacks-cohomology-section-pullback}
+
+\noindent
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 사상이라 하자.
+환 달린 토포스 위의 준연접 가군이 당김과 양립한다는 것은 매우 일반적인 사실이다.
+특히 당김 $f^*$는 준연접 가군을 보존하므로 함자
+$$
+f^* :
+\QCoh(\mathcal{O}_\mathcal{Y})
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{X}),
+$$
+를 얻는다. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-pullback-quasi-coherent}를 보라.
+일반적으로 이 함자는 완전하지 않지만, $f$가 평탄하면 완전하다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-flat-pullback-quasi-coherent}
+$f : \mathcal{X} \to \mathcal{Y}$가 대수적 스택의 평탄 사상이면
+$f^* : \QCoh(\mathcal{O}_\mathcal{Y}) \to
+\QCoh(\mathcal{O}_\mathcal{X})$는 완전 함자이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $V$와 매끄러운 전사 사상 $V \to \mathcal{Y}$를 택한다.
+스킴 $U$와 매끄러운 전사 사상
+$U \to V \times_\mathcal{Y} \mathcal{X}$를 택한다.
+그러면 $U \to \mathcal{X}$는 그러한 두 사상의 합성이므로 여전히 매끄럽고 전사이다.
+가환 도식
+$$
+\xymatrix{
+U \ar[d] \ar[r]_{f'} & V \ar[d] \\
+\mathcal{X} \ar[r]^f & \mathcal{Y}
+}
+$$
+으로부터 아벨 범주들의 가환 도식
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_U) & \QCoh(\mathcal{O}_V) \ar[l] \\
+\QCoh(\mathcal{O}_\mathcal{X}) \ar[u] &
+\QCoh(\mathcal{O}_\mathcal{Y}) \ar[l] \ar[u]
+}
+$$
+을 얻는다. 이 도식의 아래 두 범주가 아벨 범주라는 우리의 증명은
+수직 함자들이 충실한 완전 함자임을 보였다(『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack}의 증명을 보라).
+$f'$은 스킴의 평탄 사상이므로(대수적 스택의 평탄 사상에 대한 우리의 정의에 의해),
+$(f')^*$는 $V$ 위의 준연접 층에 대한 완전 함자이다. 따라서 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-quasi-coherent-check-exact}
+$\mathcal{X}$를 대수적 스택이라 하자. $I$를 집합이라 하고,
+$i \in I$에 대해 $x_i : U_i \to \mathcal{X}$를
+$\mathcal{X}$의 대상이라 하자. $x_i$가 평탄하고
+$\coprod x_i : \coprod U_i \to \mathcal{X}$가 전사라고 가정하자.
+$\varphi : \mathcal{F} \to \mathcal{G}$를
+$\QCoh(\mathcal{O}_\mathcal{X})$의 화살이라 하자.
+$(U_i)_\etale$에 대한 $\varphi$의 제한을 $\varphi_i$라 쓰자.
+그러면 $\varphi$가 단사인 것, 각각 전사인 것, 각각 동형인 것은
+모든 $\varphi_i$가 그러한 것과 동치이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 매끄러운 전사 사상
+$x : U \to \mathcal{X}$를 택한다. $x$를 $\mathcal{X}$의 대상으로
+생각해도 되고 그렇게 하겠다.
+이로부터 공간에서의 어떤 준군 $(U, R, s, t, c)$에 대한 표시
+$\mathcal{X} = [U/R]$를 얻고, 이에 대응하여 동치
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) = \QCoh(U, R, s, t, c)
+$$
+를 얻는다. 『스택 위의 층』의 절
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks}의 논의를 보라.
+오른쪽의 아벨 범주 구조에 따르면 $\varphi$가 단사인 것, 각각 전사인 것,
+각각 동형인 것은 제한 $\varphi|_{U_\etale}$가 그러한 것과 동치이다.
+『공간에서의 준군』의 보조정리 \ref{spaces-groupoids-lemma-abelian}을 보라.
+
+\medskip\noindent
+각 $i$에 대해 스킴들에 의한 에탈 피복
+$\{W_{i, j} \to V \times_\mathcal{X} U_i\}_{j \in J_i}$를 택한다.
+자명한 화살들을 $g_{i, j} : W_{i, j} \to V$와
+$h_{i, j} : W_{i, j} \to U_i$로 나타내자.
+스킴 사상 $g_{i, j} : W_{i, j} \to U$ 각각은 평탄하고,
+이들은 함께 전사이다. 마찬가지로 고정된 각 $i$에 대해 스킴 사상
+$h_{i, j} : W_{i, j} \to U_i$들은 평탄하고 함께 전사이다.
+『스택 위의 층』의 보조정리 \ref{stacks-sheaves-lemma-quasi-coherent}에 의해,
+제한 $\varphi|_{U_\etale}$를 $(g_{i, j})_{small}$로 당긴 것은
+제한 $\varphi|_{(W_{i, j})_\etale}$이고,
+제한 $\varphi|_{(U_i)_\etale}$를 $(h_{i, j})_{small}$로 당긴 것도
+제한 $\varphi|_{(W_{i, j})_\etale}$이다.
+스킴의 평탄 사상에 의한 준연접 가군의 당김은 완전하고,
+함께 전사인 평탄 스킴 사상들의 족에 의한 당김은 준연접 가군의
+단사 사상, 각각 전사 사상, 각각 전단사 사상을 반영한다
+(실제로 줄기에서 완전성을 확인할 수 있으므로 이는 모든 가군에 대해 성립한다).
+따라서
+$$
+\varphi|_{U_\etale} \text{가 단사}
+\Leftrightarrow
+\varphi|_{(W_{i, j})_\etale} \text{가 모든 경우 단사: }i, j
+\Leftrightarrow
+\varphi|_{(U_i)_\etale} \text{가 모든 경우 단사: }i
+$$
+임을 알 수 있다. 이로써 증명이 끝난다.
+\end{proof}
+
+\section{여러 유형의 가군의 고차 직상}
+\label{stacks-cohomology-section-key}
+
+\noindent
+다음 보조정리는 특정 유형의 가군층들의 고차 직상을 이해하는 기초가 된다.
+두 가지 판본이 있는데, 하나는 에탈 위상에 대한 것이고 다른 하나는
+fppf 위상에 대한 것이다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-general-pushforward}
+$\mathcal{M}$을 각 대수적 스택 $\mathcal{X}$에
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의 부분범주
+$\mathcal{M}_\mathcal{X}$를 대응시키는 규칙이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item 모든 대수적 스택 $\mathcal{X}$에 대해
+$\mathcal{M}_\mathcal{X}$는
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의
+약한 Serre 부분범주이다(『호몰로지』의 정의
+\ref{homology-definition-serre-subcategory}를 보라).
+\item 대수적 스택의 매끄러운 사상
+$f : \mathcal{Y} \to \mathcal{X}$에 대해 함자 $f^*$는
+$\mathcal{M}_\mathcal{X}$를 $\mathcal{M}_\mathcal{Y}$ 안으로 보낸다.
+\item $f_i : \mathcal{X}_i \to \mathcal{X}$가
+$|\mathcal{X}| = \bigcup |f_i|(|\mathcal{X}_i|)$를 만족하는
+대수적 스택의 매끄러운 사상들의 족이면,
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의 대상
+$\mathcal{F}$가 $\mathcal{M}_\mathcal{X}$에 속하는 것과
+모든 $i$에 대해 $f_i^*\mathcal{F}$가
+$\mathcal{M}_{\mathcal{X}_i}$에 속하는 것은 동치이다.
+\item $f : \mathcal{Y} \to \mathcal{X}$가 대수적 스택의 사상이고
+$\mathcal{X}$와 $\mathcal{Y}$가 아핀 스킴으로 표현가능하면,
+$R^if_*$는 $\mathcal{M}_\mathcal{Y}$를
+$\mathcal{M}_\mathcal{X}$ 안으로 보낸다.
+\end{enumerate}
+그러면 대수적 스택의 임의의 준콤팩트 준분리 사상
+$f : \mathcal{Y} \to \mathcal{X}$에 대해
+$R^if_*$는 $\mathcal{M}_\mathcal{Y}$를
+$\mathcal{M}_\mathcal{X}$ 안으로 보낸다. (고차 직상은 에탈 위상에서 계산한다.)
+\end{lemma}
+
+\begin{proof}
+$f : \mathcal{Y} \to \mathcal{X}$를 대수적 스택의 준콤팩트 준분리 사상이라 하고,
+$\mathcal{F}$를 $\mathcal{M}_\mathcal{Y}$의 대상이라 하자.
+스킴으로 표현가능한 $\mathcal{U}$와 매끄러운 전사 사상
+$\mathcal{U} \to \mathcal{X}$를 택한다.
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-base-change-higher-direct-images}에 의해
+고차 직상을 취하는 것은 밑변환과 가환한다.
+조건 (2)에 따르면 $\mathcal{F}$를
+$\mathcal{U} \times_\mathcal{X} \mathcal{Y}$로 당긴 것은
+$\mathcal{M}_{\mathcal{U} \times_\mathcal{X} \mathcal{Y}}$에 속한다.
+실제로 사영
+$\mathcal{U} \times_\mathcal{X} \mathcal{Y} \to \mathcal{Y}$는
+매끄러운 사상의 밑변환이므로 매끄럽다. 따라서 (3)에 의해
+$\mathcal{Y} \to \mathcal{X}$를 사영
+$\mathcal{U} \times_\mathcal{X} \mathcal{Y} \to \mathcal{U}$로
+바꾸어도 된다. 달리 말해 $\mathcal{X}$가 스킴으로 표현가능하다고 가정해도 된다.
+(3)을 한 번 더 사용하면 이 문제는 $\mathcal{X}$ 위에서 Zariski 국소적이므로,
+$\mathcal{X}$가 아핀 스킴으로 표현가능하다고 가정해도 된다.
+$f$가 준콤팩트이므로 $\mathcal{Y}$도 준콤팩트이다.
+따라서 아핀 스킴으로 표현가능한 $\mathcal{V}$와 매끄러운 전사 사상
+$g : \mathcal{V} \to \mathcal{Y}$를 택할 수 있다.
+
+\medskip\noindent
+이 상황에서는 『스택 위의 층』의 명제
+\ref{stacks-sheaves-proposition-smooth-covering-compute-direct-image}의
+스펙트럼 열
+$$
+E_2^{p, q} = R^q(f \circ g_p)_*g_p^*\mathcal{F}
+\Rightarrow
+R^{p + q}f_*\mathcal{F}
+$$
+이 있다. 이것은 제1사분면 스펙트럼 열이므로 『호몰로지』의 보조정리
+\ref{homology-lemma-first-quadrant-ss}의 마지막 부분을 사용할 수 있음을 상기하라.
+사상
+$$
+g_p : \mathcal{V}_p =
+\mathcal{V} \times_\mathcal{Y} \ldots \times_\mathcal{Y} \mathcal{V}
+\longrightarrow
+\mathcal{Y}
+$$
+은 매끄러운 사상 $g$의 밑변환들을 합성한 것이므로 매끄럽다.
+따라서 (2)에 의해 층 $g_p^*\mathcal{F}$는
+$\mathcal{M}_{\mathcal{V}_p}$에 속한다. 그러므로 사상
+$$
+\mathcal{V}_p =
+\mathcal{V} \times_\mathcal{Y} \ldots \times_\mathcal{Y} \mathcal{V}
+\longrightarrow
+\mathcal{X}
+$$
+에 의한 $\mathcal{M}_{\mathcal{V}_p}$의 대상들의 고차 직상이
+$\mathcal{M}_\mathcal{X}$에 속함을 증명하면 충분하다.
+대수적 스택 $\mathcal{V}_p$는 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-quasi-compact-quasi-separated-permanence}에 의해
+준콤팩트이고 준분리이다.
+물론 각 $\mathcal{V}_p$는 대수공간으로 표현가능하다
+(대수적 스택 $\mathcal{Y}$의 대각사상은 대수공간으로 표현가능하다).
+따라서 $\mathcal{Y}$가 대수공간으로 표현가능하고
+$\mathcal{X}$가 아핀 스킴으로 표현가능한 경우로 환원된다.
+
+\medskip\noindent
+$\mathcal{Y}$가 대수공간으로 표현가능하고 $\mathcal{X}$가 아핀 스킴으로
+표현가능한 상황에서, 아핀 스킴으로 표현가능한 $\mathcal{V}$와
+매끄러운 전사 사상 $\mathcal{V} \to \mathcal{Y}$를 새로 택한다.
+위 논증을 다시 밟으면 다시 사상 $\mathcal{V}_p \to \mathcal{X}$의 경우로
+환원된다. 그러나 지금 상황에서는 대수적 스택 $\mathcal{V}_p$가
+준콤팩트 준분리 스킴으로 표현가능하다
+(대수공간의 대각사상은 스킴으로 표현가능하기 때문이다).
+
+\medskip\noindent
+따라서 $\mathcal{Y}$가 스킴으로 표현가능하고
+$\mathcal{X}$가 아핀 스킴으로 표현가능하다고 가정해도 된다.
+(다시) 아핀 스킴으로 표현가능한 $\mathcal{V}$와
+매끄러운 전사 사상 $\mathcal{V} \to \mathcal{Y}$를 택한다.
+이 경우 모든 대수적 스택 $\mathcal{V}_p$는 분리 스킴으로 표현가능하다
+(스킴의 대각사상은 분리이기 때문이다).
+
+\medskip\noindent
+따라서 $\mathcal{Y}$가 분리 스킴으로 표현가능하고
+$\mathcal{X}$가 아핀 스킴으로 표현가능하다고 가정해도 된다.
+(또다시) 아핀 스킴으로 표현가능한 $\mathcal{V}$와
+매끄러운 전사 사상 $\mathcal{V} \to \mathcal{Y}$를 택한다.
+이 경우 모든 대수적 스택 $\mathcal{V}_p$는 아핀 스킴으로 표현가능하다
+(분리 스킴의 대각사상은 닫힌 몰입이므로 아핀이기 때문이다).
+이 경우는 조건 (4)로 처리된다. 이로써 증명이 끝난다.
+\end{proof}
+
+\noindent
+다음은 fppf 위상에 대한 판본이다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-general-pushforward-fppf}
+$\mathcal{M}$을 각 대수적 스택 $\mathcal{X}$에
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$의 부분범주
+$\mathcal{M}_\mathcal{X}$를 대응시키는 규칙이라 하자. 다음을 가정한다.
+\begin{enumerate}
+\item 모든 대수적 스택 $\mathcal{X}$에 대해
+$\mathcal{O}_\mathcal{X}$는
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$의 약한 Serre 부분범주이다.
+\item 대수적 스택의 매끄러운 사상
+$f : \mathcal{Y} \to \mathcal{X}$에 대해 함자 $f^*$는
+$\mathcal{M}_\mathcal{X}$를 $\mathcal{M}_\mathcal{Y}$ 안으로 보낸다.
+\item $f_i : \mathcal{X}_i \to \mathcal{X}$가
+$|\mathcal{X}| = \bigcup |f_i|(|\mathcal{X}_i|)$를 만족하는
+대수적 스택의 매끄러운 사상들의 족이면,
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$의 대상 $\mathcal{F}$가
+$\mathcal{M}_\mathcal{X}$에 속하는 것과 모든 $i$에 대해
+$f_i^*\mathcal{F}$가 $\mathcal{M}_{\mathcal{X}_i}$에 속하는 것은 동치이다.
+\item $f : \mathcal{Y} \to \mathcal{X}$가 대수적 스택의 사상이고
+$\mathcal{X}$와 $\mathcal{Y}$가 아핀 스킴으로 표현가능하면,
+$R^if_*$는 $\mathcal{M}_\mathcal{Y}$를
+$\mathcal{M}_\mathcal{X}$ 안으로 보낸다.
+\end{enumerate}
+그러면 대수적 스택의 임의의 준콤팩트 준분리 사상
+$f : \mathcal{Y} \to \mathcal{X}$에 대해
+$R^if_*$는 $\mathcal{M}_\mathcal{Y}$를
+$\mathcal{M}_\mathcal{X}$ 안으로 보낸다. (고차 직상은 fppf 위상에서 계산한다.)
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{stacks-cohomology-lemma-general-pushforward}의 증명과 같다.
+\end{proof}
+
+\section{국소 준연접 가군}
+\label{stacks-cohomology-section-locally-quasi-coherent}
+
+\noindent
+$\mathcal{X}$를 대수적 스택이라 하자. $\mathcal{F}$를
+$\mathcal{O}_\mathcal{X}$-가군의 준층이라 하자. $\mathcal{F}$가
+{\it 국소 준연접}인지 물을 수 있다. 『스택 위의 층』의 정의
+\ref{stacks-sheaves-definition-locally-quasi-coherent}를 보라.
+간단히 말해, 이는 $\mathcal{F}$가 에탈 위상에 대한
+$\mathcal{O}_\mathcal{X}$-가군이고, 임의의 사상
+$f : U \to \mathcal{X}$에 대해 제한
+$f^*\mathcal{F}|_{U_\etale}$가 $U_\etale$ 위에서 준연접임을 뜻한다.
+(실제 정의는 조금 다르지만 동치이다.) 유용한 사실은
+$$
+\textit{LQCoh}(\mathcal{O}_\mathcal{X}) \subset
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+$$
+이 약한 Serre 부분범주라는 것이다. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-lqc-colimits}를 보라.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-check-lqc-on-etale-covering}
+$\mathcal{X}$를 대수적 스택이라 하자.
+$f_j : \mathcal{X}_j \to \mathcal{X}$를
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$를 만족하는
+대수적 스택의 매끄러운 사상들의 족이라 하자.
+$\mathcal{F}$를 $\mathcal{X}_\etale$ 위의
+$\mathcal{O}_\mathcal{X}$-가군층이라 하자.
+각 $f_j^{-1}\mathcal{F}$가 국소 준연접이면 $\mathcal{F}$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+각 대수적 스택 $\mathcal{X}_j$를 스킴 $U_j$로 바꾸어도 된다
+(모든 대수적 스택은 스킴에 의한 매끄러운 피복을 가지며 매끄러운 사상들의
+합성이 매끄럽다는 사실을 사용한다. 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-composition-smooth}를 보라).
+$\mathcal{F}$를 $(\Sch/U_j)_\etale$로 당긴 것은 여전히 국소 준연접이다.
+『스택 위의 층』의 보조정리 \ref{stacks-sheaves-lemma-pullback-lqc}를 보라.
+그러면 $f = \coprod f_j : U = \coprod U_j \to \mathcal{X}$는
+매끄러운 전사 사상이다. $x$를 $\mathcal{X}$의 대상이라 하자.
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation}에 의해
+각 $x_i$가 $(\Sch/U)_\etale$의 어떤 대상 $u_i$로 올려지는 에탈 피복
+$\{x_i \to x\}_{i \in I}$가 존재한다. 이는 $x$, $x_i$가 스킴
+$V$, $V_i$ 위에 놓이고, $\{V_i \to V\}$가 에탈 피복이며,
+$x_i$가 어떤 사상 $u_i : V_i \to U$에서 온다는 뜻일 뿐이다.
+제한 $x_i^*\mathcal{F}|_{V_{i, \etale}}$는
+$f^*\mathcal{F}$의 $V_{i, \etale}$에 대한 제한과 같다.
+『스택 위의 층』의 보조정리 \ref{stacks-sheaves-lemma-comparison}을 보라.
+따라서 $x^*\mathcal{F}|_{V_\etale}$는 $V$의 작은 에탈 사이트 위의 층이고,
+각 $i$에 대해 $V_{i, \etale}$로 제한하면 준연접이다.
+그러므로 이는 준연접이다(원하는 바이다). 예를 들어 『대수공간의 성질』의 보조정리
+\ref{spaces-properties-lemma-characterize-quasi-coherent}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-pushforward-locally-quasi-coherent}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 준콤팩트 준분리 사상이라 하자.
+$\mathcal{F}$를 $\mathcal{X}_\etale$ 위의 국소 준연접
+$\mathcal{O}_\mathcal{X}$-가군이라 하자.
+그러면 $R^if_*\mathcal{F}$는(에탈 위상에서 계산한 것으로)
+$\mathcal{Y}_\etale$ 위에서 국소 준연접이다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 보조정리 \ref{stacks-cohomology-lemma-general-pushforward}를 사용한다.
+그 조건 (1)--(4)를 확인하겠다. (1)과 (2)는 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-lqc-colimits}에서 따른다.
+(3)은 보조정리 \ref{stacks-cohomology-lemma-check-lqc-on-etale-covering}에서 따른다.
+따라서 (4)를 보이면 충분하다.
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$가 대수적 스택의 사상이고
+$\mathcal{X}$와 $\mathcal{Y}$가 아핀 스킴 $X$와 $Y$로 표현가능하다고 하자.
+스킴 $V$ 위에 놓인 $\mathcal{Y}$의 임의의 대상 $y$를 택한다.
+명료성을 위해 $V$에 대응하는 대수적 스택을
+$\mathcal{V} = (\Sch/V)_{fppf}$라 쓰자. 카르테시안 도식
+$$
+\xymatrix{
+\mathcal{Z} \ar[d] \ar[r]_g \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{V} \ar[r]^y & \mathcal{Y}
+}
+$$
+을 생각하자. 그러면 $\mathcal{Z}$는 스킴 $Z = V \times_Y X$로 표현가능하고,
+$f'$은 준콤팩트이고 분리이다(실제로는 아핀이다).
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-compare-representable-morphism-cohomology}에 의해
+$$
+R^if_*\mathcal{F}|_{V_\etale} =
+R^if'_{small, *}\big(g^*\mathcal{F}|_{Z_\etale}\big)
+$$
+이다. 『대수공간의 코호몰로지』의 보조정리
+\ref{spaces-cohomology-lemma-higher-direct-image}에 의해 오른쪽은
+$V_\etale$ 위의 준연접 층이다. 따라서 왼쪽도 준연접이며, 이것이 증명할 내용이다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-check-lqc-on-flat-covering}
+$\mathcal{X}$를 대수적 스택이라 하자.
+$f_j : \mathcal{X}_j \to \mathcal{X}$를
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$를 만족하는
+대수적 스택의 평탄하고 국소 유한 표시인 사상들의 족이라 하자.
+$\mathcal{F}$를 $\mathcal{X}_{fppf}$ 위의
+$\mathcal{O}_\mathcal{X}$-가군층이라 하자.
+각 $f_j^{-1}\mathcal{F}$가 국소 준연접이면 $\mathcal{F}$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+먼저 전사이고 평탄하며 국소 유한 표시이고 준콤팩트이며 준분리인 사상
+$a : \mathcal{U} \to \mathcal{X}$가 존재하고,
+$a^*\mathcal{F}$가 국소 준연접이라고 하자. 그러면 완전열
+$$
+0 \to \mathcal{F} \to a_*a^*\mathcal{F} \to b_*b^*\mathcal{F}
+$$
+이 있다. 여기서 $b$는 사상
+$b : \mathcal{U} \times_\mathcal{X} \mathcal{U} \to \mathcal{X}$이다.
+『스택 위의 층』의 명제
+\ref{stacks-sheaves-proposition-exactness-cech-complex}과 보조정리
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation}를 보라.
+또한 당김 $b^*\mathcal{F}$는 사영 사상들 중 하나에 의한
+$a^*\mathcal{F}$의 당김이므로 국소 준연접이다
+(『스택 위의 층』의 보조정리 \ref{stacks-sheaves-lemma-pullback-lqc}).
+가군 $a_*a^*\mathcal{F}$와 $b_*b^*\mathcal{F}$는 보조정리
+\ref{stacks-cohomology-lemma-pushforward-locally-quasi-coherent}에 의해 국소 준연접이다.
+($a_*$와 $b_*$는 이를 계산하는 데 어느 위상을 사용하는지와 무관하다.)
+따라서 $\mathcal{F}$는 국소 준연접이다. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-lqc-colimits}를 보라.
+
+\medskip\noindent
+이제 일반적인 경우의 증명을 첫 문단의 상황으로 환원하겠다.
+$x$를 스킴 $U$ 위에 놓인 $\mathcal{X}$의 대상이라 하자.
+$\mathcal{F}|_{U_\etale}$가 준연접 $\mathcal{O}_U$-가군임을 보여야 한다.
+이를 $U$ 위에서 (Zariski) 국소적으로 보이면 충분하므로 $U$가 아핀이라고
+가정해도 된다. 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-surjective-family-flat-locally-finite-presentation}에 의해,
+각 $x \circ a_i$가 어떤 $f_j$를 통해 분해되는 fppf 피복
+$\{a_i : U_i \to U\}$가 존재한다. 따라서 $a_i^*\mathcal{F}$는
+$(\Sch/U_i)_{fppf}$ 위에서 국소 준연접이다.
+피복을 세분하여 $\{U_i \to U\}_{i = 1, \ldots, n}$이 표준 fppf 피복이라고
+가정해도 된다. 그러면 $x^*\mathcal{F}$는 $(\Sch/U)_{fppf}$ 위의
+fppf 가군이고, 사상
+$a : U_1 \amalg \ldots \amalg U_n \to U$에 의한 당김은 국소 준연접이다.
+따라서 첫 문단에 의해 $x^*\mathcal{F}$는 국소 준연접이고,
+이는 분명 $\mathcal{F}|_{U_\etale}$가 준연접임을 함의한다.
+\end{proof}
+
+\section{평탄 비교 사상}
+\label{stacks-cohomology-section-flat-comparison}
+
+\noindent
+$\mathcal{X}$를 대수적 스택이라 하고 $\mathcal{F}$를
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의 대상이라 하자.
+스킴 $U$ 위에 놓인 $\mathcal{X}$의 대상 $x$가 주어지면,
+제한 $\mathcal{F}|_{U_\etale}$는 $x^{-1}\mathcal{F}$를 $U$의 작은 에탈
+사이트에 제한한 것이다. 『스택 위의 층』의 정의
+\ref{stacks-sheaves-definition-pullback}을 보라.
+다음으로 $\varphi : x \to x'$를 스킴의 사상 $f : U \to U'$ 위에 놓인
+$\mathcal{X}$의 사상이라 하자. 따라서 다음 $2$-가환 도식
+$$
+\xymatrix{
+U \ar[rd]_x \ar[rr]_f & & U' \ar[ld]^{x'} \\
+& \mathcal{X}
+}
+$$
+$\varphi$에 대응하여 제한들 사이의 비교 사상
+\begin{equation}
+\label{stacks-cohomology-equation-comparison-modules}
+c_\varphi :
+f_{small}^*(\mathcal{F}|_{U'_\etale})
+\longrightarrow
+\mathcal{F}|_{U_\etale}
+\end{equation}
+을 얻는다. 『스택 위의 층』의 식
+(\ref{stacks-sheaves-equation-comparison-modules})을 보라.
+이 상황에서 $\mathcal{F}$의 다음 성질을 생각할 수 있다.
+
+\begin{definition}
+\label{stacks-cohomology-definition-flat-base-change}
+$\mathcal{X}$를 대수적 스택이라 하고 $\mathcal{F}$를
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ 안에 둔다.
+$f$가 평탄할 때마다 $c_\varphi$가 동형인 경우, 그리고 그 경우에만
+$\mathcal{F}$가 {\it 평탄 밑변환 성질}\footnote{이는 표준적이지 않은
+표기일 수 있다.}을 가진다고 한다.
+\end{definition}
+
+\noindent
+다음 보조정리는 이 개념의 몇 가지 성질을 제시한다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering}
+$\mathcal{X}$를 대수적 스택이라 하자. $\mathcal{F}$를
+$\mathcal{X}_\etale$ 위의 $\mathcal{O}_\mathcal{X}$-가군이라 하자.
+\begin{enumerate}
+\item $\mathcal{F}$가 평탄 밑변환 성질을 가지면, 대수적 스택의 임의의 사상
+$g : \mathcal{Y} \to \mathcal{X}$에 대해 당김 $g^*\mathcal{F}$도
+그 성질을 가진다.
+\item 평탄 밑변환 성질을 가진 가군들로 이루어진
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의 충만한
+부분범주는 약한 Serre 부분범주이다.
+\item $f_i : \mathcal{X}_i \to \mathcal{X}$를
+$|\mathcal{X}| = \bigcup_i |f_i|(|\mathcal{X}_i|)$를 만족하는
+대수적 스택의 매끄러운 사상들의 족이라 하자. 각
+$f_i^*\mathcal{F}$가 평탄 밑변환 성질을 가지면 $\mathcal{F}$도 그 성질을 가진다.
+\item $\mathcal{X}_\etale$ 위에서 평탄 밑변환 성질을 가진
+$\mathcal{O}_\mathcal{X}$-가군들의 범주는 쌍대극한을 가지며, 이들은
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$에서의
+쌍대극한과 일치한다.
+\item $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의
+$\mathcal{F}$와 $\mathcal{G}$가 평탄 밑변환 성질을 가지면 텐서곱
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$도
+평탄 밑변환 성질을 가진다.
+\item $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의
+$\mathcal{F}$와 $\mathcal{G}$가 주어지고 $\mathcal{F}$가 유한 표시이며
+$\mathcal{G}$가 평탄 밑변환 성질을 가지면 층
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$도
+평탄 밑변환 성질을 가진다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$g : \mathcal{Y} \to \mathcal{X}$가 (1)과 같다고 하자.
+$y$를 스킴 $V$ 위에 놓인 $\mathcal{Y}$의 대상이라 하자.
+『스택 위의 층』의 보조정리 \ref{stacks-sheaves-lemma-comparison}에 의해
+$(g^*\mathcal{F})|_{V_\etale} = \mathcal{F}|_{V_\etale}$이다.
+더욱이 $\mathcal{Y}$ 위의 층 $g^*\mathcal{F}$에 대한 비교 사상은
+$\mathcal{X}$ 위의 층 $\mathcal{F}$에 대한 비교 사상의 특수한 경우이다.
+『스택 위의 층』의 보조정리 \ref{stacks-sheaves-lemma-comparison}을 보라.
+이로써 (1)은 명확하다.
+
+\medskip\noindent
+(2)의 증명. 『호몰로지』의 보조정리
+\ref{homology-lemma-characterize-weak-serre-subcategory}에 나오는
+약한 Serre 부분범주의 특성화를 사용한다.
+평탄 밑변환 성질을 가진 층들 사이의 사상의 핵과 여핵도
+평탄 밑변환 성질을 가진다. 스킴의 평탄 사상에 대해 $f_{small}^*$가
+완전하고, 제한 함자 $(-)|_{U_\etale}$도 완전하므로 이는 명확하다
+(우리는 에탈 위상에서 작업하고 있다). 마지막으로
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$가
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의 짧은 완전열이고
+바깥의 두 층이 평탄 밑변환 성질을 가지면 가운데 층도 그 성질을 가진다.
+이 역시 $f_{small}^*$와 제한 함자의 완전성(그리고 5-보조정리)에서 따른다.
+
+\medskip\noindent
+(3)의 증명.
+$f_i : \mathcal{X}_i \to \mathcal{X}$를 함께 전사인 대수적 스택의
+매끄러운 사상들의 족이라 하고, 각 $f_i^*\mathcal{F}$가 평탄 밑변환
+성질을 가진다고 가정하자. (1), 대수적 스택의 정의, 그리고 매끄러운
+사상들의 합성이 매끄럽다는 사실(『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-composition-smooth}를 보라)에 의해,
+각 $\mathcal{X}_i$가 스킴으로 표현가능하다고 가정해도 된다.
+$\varphi : x \to x'$를 스킴의 평탄 사상 $a : U \to U'$ 위에 놓인
+$\mathcal{X}$의 사상이라 하자. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation}에 의해
+$U'_i \to U' \to \mathcal{X}$가 $\mathcal{X}_i$를 통해 분해되는,
+함께 전사인 에탈 사상들의 족 $U'_i \to U'$가 존재한다.
+따라서 가환 도식들
+$$
+\xymatrix{
+U_i = U \times_{U'} U_i' \ar[r]_-{a_i} \ar[d] &
+U_i' \ar[r]_{x_i'} \ar[d] & \mathcal{X}_i \ar[d]^{f_i} \\
+U \ar[r]^a & U' \ar[r]^{x'} & \mathcal{X}
+}
+$$
+을 얻는다. 각 $a_i$는 $a$의 밑변환이므로 스킴의 평탄 사상임에 유의하라.
+$a_i$ 위에 놓이고 목표가 $x_i'$인 $\mathcal{X}_i$의 사상을
+$\psi_i : x_i \to x'_i$라 쓰자. 가정에 따라 비교 사상
+$c_{\psi_i} :
+(a_i)_{small}^*\big(f_i^*\mathcal{F}|_{(U'_i)_\etale}\big)
+\to f_i^*\mathcal{F}|_{(U_i)_\etale}$는 동형이다.
+수직 화살 $U_i' \to U'$와 $U_i \to U$가 에탈이므로,
+층 $f_i^*\mathcal{F}|_{(U_i')_\etale}$와
+$f_i^*\mathcal{F}|_{(U_i)_\etale}$는 각각
+$\mathcal{F}|_{U'_\etale}$와 $\mathcal{F}|_{U_\etale}$의 제한이고,
+사상 $c_{\psi_i}$는 $c_\varphi$를 $(U_i)_\etale$에 제한한 것이다.
+『스택 위의 층』의 보조정리 \ref{stacks-sheaves-lemma-comparison}을 보라.
+$\{U_i \to U\}$가 에탈 피복이므로 비교 사상 $c_\varphi$는 동형이다.
+이것이 증명할 내용이다.
+
+\medskip\noindent
+(4)의 증명. 도식
+$\mathcal{I} \to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$,
+$i \mapsto \mathcal{F}_i$가 주어지고, 각 $\mathcal{F}_i$가
+평탄 밑변환 성질을 가진다고 하자.
+$\varphi : x \to x'$를 스킴의 평탄 사상 $f : U \to U'$ 위에 놓인
+$\mathcal{X}$의 사상이라 하자. $\colim_i \mathcal{F}_i$는 준층 쌍대극한의
+층화임을 상기하라. 에탈 위상을 사용하고 있으므로
+$$
+(\colim_i \mathcal{F}_i)|_{U_\etale} =
+\colim_i {\mathcal{F}_i}|_{U_\etale}
+$$
+임이 명확하고, $U'_\etale$에 대한 제한도 마찬가지이다. 따라서
+\begin{align*}
+f_{small}^*((\colim_i \mathcal{F}_i)|_{U'_\etale})
+& =
+f_{small}^*(\colim_i {\mathcal{F}_i}|_{U'_\etale}) \\
+& =
+\colim_i f_{small}^*({\mathcal{F}_i}|_{U'_\etale}) \\
+& \xrightarrow{\colim c_\varphi}
+\colim_i \mathcal{F}_i|_{U_\etale} \\
+& =
+(\colim_i \mathcal{F}_i)|_{U_\etale}
+\end{align*}
+이다. 두 번째 등식에는 $f_{small}^*$가 (왼쪽 수반이므로) 쌍대극한과
+가환한다는 사실을 사용했다. 각 $\mathcal{F}_i$가 평탄 밑변환 성질을
+가지므로 이 화살은 동형이다. 따라서 쌍대극한도 평탄 밑변환 성질을 가지며
+(4)가 성립한다.
+
+\medskip\noindent
+(5)는 텐서곱이 당김과 가환하기 때문에 성립한다.
+『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-tensor-product-pullback}을 보라. 세부사항은 생략한다.
+
+\medskip\noindent
+$\mathcal{F}$와 $\mathcal{G}$가 (6)과 같다고 하자.
+$\mathcal{F}$는 준연접이므로 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-quasi-coherent}에 의해 평탄 밑변환 성질을 가진다.
+$\varphi : x \to x'$를 스킴의 평탄 사상 $f : U \to U'$ 위에 놓인
+$\mathcal{X}$의 사상이라 하자. 에탈 위상을 사용하고 있으므로
+$$
+\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})|_{U_\etale} =
+\SheafHom_{\mathcal{O}_U}(\mathcal{F}|_{U_\etale}, \mathcal{G}|_{U_\etale})
+$$
+이고 $U'_\etale$에 대한 제한도 마찬가지이다(세부사항은 생략한다). 따라서
+\begin{align*}
+f_{small}^*(
+\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})|_{U'_\etale})
+& =
+f_{small}^*(
+\SheafHom_{\mathcal{O}_{U'}}(
+\mathcal{F}|_{U'_\etale}, \mathcal{G}|_{U'_\etale})) \\
+& =
+\SheafHom_{\mathcal{O}_{U'}}(
+f_{small}^*(\mathcal{F}|_{U'_\etale}),
+f_{small}^*(\mathcal{G}|_{U'_\etale})) \\
+& \xrightarrow{c_\varphi}
+\SheafHom_{\mathcal{O}_U}(\mathcal{F}|_{U_\etale}, \mathcal{G}|_{U_\etale}) \\
+& =
+\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})|_{U_\etale}
+\end{align*}
+이다. 여기서 두 번째 등식은 『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-pullback-internal-hom}이며, 이 보조정리는
+$f : U \to U'$가 평탄하여 환 달린 사이트의 사상 $f_{small}$도
+평탄하다는 사실을 사용한다. $\mathcal{F}$와 $\mathcal{G}$가 모두
+평탄 밑변환 성질을 가지므로 이 화살은 동형이다. 따라서 원하는 대로
+우리의 $\SheafHom$도 평탄 밑변환 성질을 가진다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-flat-comparison}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 준콤팩트 준분리 사상이라 하자.
+$\mathcal{F}$를 국소 준연접이고 평탄 밑변환 성질을 가지는
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의 대상이라 하자.
+그러면 각 $R^if_*\mathcal{F}$는(에탈 위상에서 계산한 것으로)
+평탄 밑변환 성질을 가진다.
+\end{lemma}
+
+\begin{proof}
+이를 증명하기 위해 보조정리 \ref{stacks-cohomology-lemma-general-pushforward}를 사용한다.
+모든 대수적 스택 $\mathcal{X}$에 대해
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$를
+국소 준연접이고 평탄 밑변환 성질을 가진 층들로 이루어진
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$의
+충만한 부분범주라 하자. 보조정리 \ref{stacks-cohomology-lemma-general-pushforward}의 조건
+(1)--(4)를 확인하면 이 보조정리가 따른다. 성질 (1), (2), (3)은
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-pullback-lqc}와
+\ref{stacks-sheaves-lemma-lqc-colimits}, 그리고 보조정리
+\ref{stacks-cohomology-lemma-check-lqc-on-etale-covering}와
+\ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering}에서 따른다.
+따라서 (4)를 보이면 충분하다.
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$가 대수적 스택의 사상이고
+$\mathcal{X}$와 $\mathcal{Y}$가 아핀 스킴 $X$와 $Y$로 표현가능하다고 하자.
+이 경우 $\psi : y \to y'$를 스킴의 평탄 사상 $b : V \to V'$ 위에 놓인
+$\mathcal{Y}$의 사상이라 하자. 명료성을 위해 대응하는 대수적 스택들을
+$\mathcal{V} = (\Sch/V)_{fppf}$와 $\mathcal{V}' = (\Sch/V')_{fppf}$라 쓰자.
+두 정사각형이 모두 카르테시안인 대수적 스택의 도식
+$$
+\xymatrix{
+\mathcal{Z} \ar[d]_{f''} \ar[r]_a &
+\mathcal{Z}' \ar[r]_{x'} \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{V} \ar[r]^b & \mathcal{V}' \ar[r]^{y'} & \mathcal{Y}
+}
+$$
+을 생각하자. $f$는 스킴으로 표현가능하므로(그리고 준콤팩트이고 분리이며,
+실제로 아핀이므로), $\mathcal{Z}$와 $\mathcal{Z}'$는 스킴 $Z$와 $Z'$로
+표현가능하고 실제로 $Z = V \times_{V'} Z'$이다.
+$\mathcal{F}$가 평탄 밑변환 성질을 가지므로
+$$
+a_{small}^*\big(\mathcal{F}|_{Z'_\etale}\big)
+\longrightarrow
+\mathcal{F}|_{Z_\etale}
+$$
+은 동형이다. 더욱이 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-compare-representable-morphism-cohomology}에 의해
+$$
+R^if_*\mathcal{F}|_{V'_\etale} =
+R^i(f')_{small, *}\big(\mathcal{F}|_{Z'_\etale}\big)
+$$
+이고
+$$
+R^if_*\mathcal{F}|_{V_\etale} =
+R^i(f'')_{small, *}\big(\mathcal{F}|_{Z_\etale}\big)
+$$
+이다. 따라서 비교 사상
+$$
+c_\psi :
+b_{small}^*(R^if_*\mathcal{F}|_{V'_\etale})
+\longrightarrow
+R^if_*\mathcal{F}|_{V_\etale}
+$$
+은 『대수공간의 코호몰로지』의 보조정리
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology}에 의해 동형이다.
+그러므로 $R^if_*\mathcal{F}$는 평탄 밑변환 성질을 가진다.
+보조정리 \ref{stacks-cohomology-lemma-pushforward-locally-quasi-coherent}에 의해
+$R^if_*\mathcal{F}$는 국소 준연접이기도 하므로 결론을 얻는다.
+\end{proof}
+
+\section{평탄 밑변환 성질을 가진 국소 준연접 가군}
+\label{stacks-cohomology-section-loc-qcoh-flat-base-change}
+
+\noindent
+$\mathcal{X}$를 대수적 스택이라 하자. 우리는\footnote{끔찍한 표기에 대해
+양해를 구한다.}
+$$
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\subset
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+$$
+로, 에탈 $\mathcal{O}_\mathcal{X}$-가군 $\mathcal{F}$ 가운데
+국소 준연접이고(절 \ref{stacks-cohomology-section-locally-quasi-coherent}) 동시에
+평탄 밑변환 성질을 가지는(절 \ref{stacks-cohomology-section-flat-comparison}) 것들을
+대상으로 하는 충만한 부분범주를 나타내겠다.
+『스택 위의 층』의 보조정리 \ref{stacks-sheaves-lemma-quasi-coherent}에 의해
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \subset
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+$$
+이다.
+
+\begin{proposition}
+\label{stacks-cohomology-proposition-loc-qcoh-flat-base-change}
+평탄 밑변환 성질을 가진 국소 준연접 가군에 관한 결과들을 요약하면 다음과 같다.
+\begin{enumerate}
+\item $\mathcal{X}$를 대수적 스택이라 하자.
+$\mathcal{F}$가 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속하면,
+$\mathcal{F}$는 fppf 위상에 대한 층이다. 즉,
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$의 대상이다.
+\item 범주 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$는
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$와
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ 양쪽의
+약한 Serre 부분범주이다.
+\item 대수적 스택의 임의의 사상 $f : \mathcal{X} \to \mathcal{Y}$에
+따른 당김 $f^*$는 함자
+$f^* : \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$를 유도한다.
+\item $f : \mathcal{X} \to \mathcal{Y}$가 대수적 스택의
+준콤팩트 준분리 사상이고 $\mathcal{F}$가
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상이면 다음이 성립한다.
+\begin{enumerate}
+\item 전체 직상 $Rf_*\mathcal{F}$와 고차 직상
+$R^if_*\mathcal{F}$는 에탈 위상과 fppf 위상 어느 쪽에서도 계산할 수 있고
+그 결과는 같다.
+\item 각 $R^if_*\mathcal{F}$는
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})$의 대상이다.
+\end{enumerate}
+\item 범주 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$는 쌍대극한을
+가지며, 이들은 $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$와
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ 양쪽에서의 쌍대극한과 일치한다.
+\item $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의
+$\mathcal{F}$와 $\mathcal{G}$가 주어지면 텐서곱
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$는
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속한다.
+\item $\mathcal{F}$가 유한 표시이고 $\mathcal{G}$가
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속하면
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$는
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속한다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1)은 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-lqc-flat-base-change-fppf-sheaf}이다.
+
+\medskip\noindent
+매장
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \subset
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$에 대한 (2)는
+보조정리 \ref{stacks-cohomology-lemma-flat-comparison}의 증명에서 보았다.
+이제 매장
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \subset
+\textit{Mod}(\mathcal{O}_\mathcal{X})$에 대해 (2)를 증명하자.
+$\varphi : \mathcal{F} \to \mathcal{G}$를
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상들 사이의 사상이라 하자.
+$\Ker(\varphi)$는 에탈 위상에서 계산하든 fppf 위상에서 계산하든 같으므로,
+에탈 경우에 의해 $\Ker(\varphi)$는
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속한다.
+한편 fppf 위상에서 계산한 여핵은 에탈 위상에서 계산한 여핵의 fppf 층화이다.
+그러나 이 에탈 여핵은
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속하므로 (1)에 의해
+fppf 층이고, 따라서 여핵은
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속한다.
+마지막으로
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0
+$$
+이 $\textit{Mod}(\mathcal{O}_\mathcal{X})$에서의 완전열이고
+(즉, fppf 위상을 사용하여), $\mathcal{F}_1$, $\mathcal{F}_2$가
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속한다고 하자.
+$\mathcal{F}_2$가 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상임을
+보이려면 이 열이 에탈 위상에서도 완전함을 보이면 충분하다.
+이를 위해서는 (임의의 $\mathcal{X}$의 대상 $x$에 대해)
+$H^1_{fppf}(x, \mathcal{F}_1)$의 임의의 원소가 $x$의 어떤 에탈 피복의
+각 원소 위에서 영이 됨을 보이면 충분하다. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-compare-fppf-etale}에 의해
+$H^1_{fppf}(x, \mathcal{F}_1) = H^1_\etale(x, \mathcal{F}_1)$이고,
+코호몰로지의 국소성 때문에 이는 참이다. 『사이트 위의 코호몰로지』의 보조정리
+\ref{sites-cohomology-lemma-kill-cohomology-class-on-covering}을 보라.
+이로써 (2)가 증명되었다.
+
+\medskip\noindent
+(3)은 보조정리 \ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering}와
+『스택 위의 층』의 보조정리 \ref{stacks-sheaves-lemma-pullback-lqc}에서 따른다.
+
+\medskip\noindent
+에탈 코호몰로지에서 계산한 $R^if_*\mathcal{F}$에 대한 (4)(b)는
+보조정리 \ref{stacks-cohomology-lemma-flat-comparison}에서 따른다.
+그러면 (4)(a)는 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-compare-fppf-etale}와 위의 (1)을 결합하면 따른다.
+
+\medskip\noindent
+에탈 위상에 대한 (5)는 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-lqc-colimits}와 보조정리
+\ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering}에서 따른다.
+그러면 에탈 위상에서의 쌍대극한이 (1)에 의해 이미 fppf 층이므로
+fppf 판본도 따른다.
+
+\medskip\noindent
+(6)과 (7)은 보조정리 \ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering}의
+대응하는 부분과 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-lqc-colimits}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-check-lqc-fbc-on-covering}
+$\mathcal{X}$를 대수적 스택이라 하자.
+\begin{enumerate}
+\item $f_j : \mathcal{X}_j \to \mathcal{X}$를
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$를 만족하는
+대수적 스택의 매끄러운 사상들의 족이라 하자.
+$\mathcal{F}$를 $\mathcal{X}_\etale$ 위의
+$\mathcal{O}_\mathcal{X}$-가군층이라 하자. 각 $f_j^{-1}\mathcal{F}$가
+$\textit{LQCoh}^{fpc}(\mathcal{O}_{\mathcal{X}_i})$에 속하면,
+$\mathcal{F}$는 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속한다.
+\item $f_j : \mathcal{X}_j \to \mathcal{X}$를
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$를 만족하는
+대수적 스택의 평탄하고 국소 유한 표시인 사상들의 족이라 하자.
+$\mathcal{F}$를 $\mathcal{X}_{fppf}$ 위의
+$\mathcal{O}_\mathcal{X}$-가군층이라 하자. 각 $f_j^{-1}\mathcal{F}$가
+$\textit{LQCoh}^{fbc}(\mathcal{O}_{\mathcal{X}_i})$에 속하면,
+$\mathcal{F}$는 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 보조정리 \ref{stacks-cohomology-lemma-check-lqc-on-etale-covering}와
+\ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering}를 결합하면 따른다.
+(2)의 증명은 보조정리 \ref{stacks-cohomology-lemma-check-lqc-on-flat-covering}의 증명과 유사하다.
+$\mathcal{F}$를 $\mathcal{X}_{fppf}$ 위의
+$\mathcal{O}_\mathcal{X}$-가군층인 것으로 하자.
+
+\medskip\noindent
+먼저 전사이고 평탄하며 국소 유한 표시이고 준콤팩트이며 준분리인 사상
+$a : \mathcal{U} \to \mathcal{X}$가 존재하고,
+$a^*\mathcal{F}$가 국소 준연접이며 평탄 밑변환 성질을 가진다고 하자.
+그러면 완전열
+$$
+0 \to \mathcal{F} \to a_*a^*\mathcal{F} \to b_*b^*\mathcal{F}
+$$
+이 있다. 여기서 $b$는 사상
+$b : \mathcal{U} \times_\mathcal{X} \mathcal{U} \to \mathcal{X}$이다.
+『스택 위의 층』의 명제
+\ref{stacks-sheaves-proposition-exactness-cech-complex}과 보조정리
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation}를 보라.
+더욱이 당김 $b^*\mathcal{F}$는 사영 사상들 중 하나에 의한
+$a^*\mathcal{F}$의 당김이므로 국소 준연접이고 평탄 밑변환 성질을 가진다.
+명제 \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}를 보라.
+가군 $a_*a^*\mathcal{F}$와 $b_*b^*\mathcal{F}$는 명제
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해 국소 준연접이고
+평탄 밑변환 성질을 가진다. 명제
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해 $\mathcal{F}$도
+국소 준연접이고 평탄 밑변환 성질을 가진다는 결론을 얻는다.
+
+\medskip\noindent
+스킴 $U$와 매끄러운 전사 사상 $x : U \to \mathcal{X}$를 택한다.
+(1)에 의해 $x^*\mathcal{F}$가 국소 준연접이고 평탄 밑변환 성질을 가짐을
+보이면 충분하다. 다시 (1)에 의해 이를 $U$ 위에서 (Zariski) 국소적으로
+보이면 충분하므로 $U$가 아핀이라고 가정해도 된다. 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-surjective-family-flat-locally-finite-presentation}에 의해,
+각 $x \circ a_i$가 어떤 $f_j$를 통해 분해되는 fppf 피복
+$\{a_i : U_i \to U\}$가 존재한다. 따라서 $(\Sch/U_i)_{fppf}$ 위의 가군
+$a_i^*\mathcal{F}$는 국소 준연접이고 평탄 밑변환 성질을 가진다.
+피복을 세분하여 $\{U_i \to U\}_{i = 1, \ldots, n}$이 표준 fppf 피복이라고
+가정해도 된다. 그러면 $x^*\mathcal{F}$는 $(\Sch/U)_{fppf}$ 위의
+fppf 가군이고, 사상 $a : U_1 \amalg \ldots \amalg U_n \to U$에 의한
+당김은 국소 준연접이고 평탄 밑변환 성질을 가진다.
+따라서 앞 문단에 의해 원하는 대로 $x^*\mathcal{F}$가 국소 준연접이고
+평탄 밑변환 성질을 가짐을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-loc-qcoh-fbc-compute-higher-direct-image}
+$f : \mathcal{X} \to \mathcal{Y}$를 준콤팩트이고 준분리이며
+대수공간으로 표현가능한 대수적 스택의 사상이라 하자.
+$\mathcal{F}$가 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속한다고 하자.
+$\mathcal{Y}$의 대상 $y : V \to \mathcal{Y}$에 대해
+$$
+(R^if_*\mathcal{F})|_{V_\etale} = R^if'_{small, *}(\mathcal{F}|_{U_\etale})
+$$
+이다. 여기서 $f' : U = V \times_\mathcal{Y} \mathcal{X} \to V$는
+$f$의 밑변환이다.
+\end{lemma}
+
+\begin{proof}
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-base-change-higher-direct-images}에 의해
+$\mathcal{X}$가 $U$로 표현되고 $\mathcal{Y}$가 $V$로 표현되는 경우로
+환원할 수 있다. 물론 이는 명제 \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해
+$\mathcal{F}$를 $U$로 당긴 것이
+$\textit{LQCoh}^{fbc}(\mathcal{O}_U)$에 속한다는 사실도 사용한다.
+이제 결과는 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-compare-morphism-cohomology}와, 명제
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해 $R^if_*$를 에탈 위상에서
+계산할 수 있다는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-loc-qcoh-fbc-affine-direct-image}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 아핀 사상이라 하자.
+함자 $f_* : \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})$는 완전하고 직합과 가환한다.
+$i > 0$에 대한 함자 $R^if_*$는
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에서 영이다.
+\end{lemma}
+
+\begin{proof}
+함자들은 명제 \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해 존재한다.
+보조정리 \ref{stacks-cohomology-lemma-loc-qcoh-fbc-compute-higher-direct-image}에 의해 이는
+대수공간 위의 준연접 가군의 맥락에서 대수공간의 아핀 사상의 고차 직상을
+취하는 경우로 환원된다. 『대수공간의 코호몰로지』의 절
+\ref{spaces-cohomology-section-higher-direct-image}의 논의에 의해
+스킴의 아핀 사상의 경우로 환원된다. 스킴의 아핀 사상에 대해서는
+『스킴의 코호몰로지』의 보조정리
+\ref{coherent-lemma-relative-affine-vanishing}에 의해 준연접 가군의 고차
+직상이 소멸한다. $R^1f_*$의 소멸은 $f_*$의 완전성을 함의한다.
+직합과의 가환은 예를 들어 『사상』의 보조정리
+\ref{morphisms-lemma-affine-equivalence-modules}에서 따른다.
+\end{proof}
+
+\section{기생 가군}
+\label{stacks-cohomology-section-parasitic}
+
+\noindent
+다음 정의는 『하강』의 정의 \ref{descent-definition-parasitic}와 양립한다.
+
+\begin{definition}
+\label{stacks-cohomology-definition-parasitic}
+$\mathcal{X}$를 대수적 스택이라 하자.
+$\mathcal{O}_\mathcal{X}$-가군의 준층 $\mathcal{F}$가 다음 조건을 만족하면
+{\it 기생}이라고 한다. $\mathcal{X}$의 대상 $x$가 스킴 $U$ 위에 놓이고
+이에 대응하는 사상 $x : U \to \mathcal{X}$가 평탄하면
+$\mathcal{F}(x) = 0$이다.
+\end{definition}
+
+\noindent
+다음 보조정리는 이 개념의 몇 가지 성질을 제시한다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-parasitic}
+$\mathcal{X}$를 대수적 스택이라 하자. $\mathcal{F}$를
+$\mathcal{O}_\mathcal{X}$-가군의 준층이라 하자.
+\begin{enumerate}
+\item $\mathcal{F}$가 기생이고
+$g : \mathcal{Y} \to \mathcal{X}$가 대수적 스택의 평탄 사상이면,
+$g^*\mathcal{F}$는 기생이다.
+\item $\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$에 대해 다음이 성립한다.
+\begin{enumerate}
+\item 기생 가군 준층의 $\tau$ 층화는 기생이다.
+\item 기생 가군들로 이루어진
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$의 충만한
+부분범주는 Serre 부분범주이다.
+\end{enumerate}
+\item $\mathcal{F}$가 에탈 위상에 대한 층이라고 하자.
+$f_i : \mathcal{X}_i \to \mathcal{X}$를
+$|\mathcal{X}| = \bigcup_i |f_i|(|\mathcal{X}_i|)$를 만족하는
+대수적 스택의 매끄러운 사상들의 족이라 하자.
+각 $f_i^*\mathcal{F}$가 기생이면 $\mathcal{F}$도 기생이다.
+\item $\mathcal{F}$가 fppf 위상에 대한 층이라고 하자.
+$f_i : \mathcal{X}_i \to \mathcal{X}$를
+$|\mathcal{X}| = \bigcup_i |f_i|(|\mathcal{X}_i|)$를 만족하는
+대수적 스택의 평탄하고 국소 유한 표시인 사상들의 족이라 하자.
+각 $f_i^*\mathcal{F}$가 기생이면 $\mathcal{F}$도 기생이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 보기 위해 $y$를 스킴 $V$ 위에 놓인 $\mathcal{Y}$의 대상이라 하고,
+이에 대응하는 사상 $y : V \to \mathcal{Y}$가 평탄하다고 하자.
+그러면 $g(y) : V \to \mathcal{Y} \to \mathcal{X}$는 평탄 사상들의 합성이므로
+평탄하고(『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-composition-flat}을 보라), 가정에 의해
+$\mathcal{F}(g(y))$는 영이다. 그런데
+$g^*\mathcal{F} = g^{-1}\mathcal{F}(y) = \mathcal{F}(g(y))$이므로
+$g^*\mathcal{F}$가 기생이라는 결론을 얻는다.
+
+\medskip\noindent
+(2)(a)를 보기 위해 $\{x_i \to x\}$가 $\mathcal{X}$의 $\tau$-피복이면
+각 사상 $x_i \to x$가 스킴의 평탄 사상 위에 놓임에 유의하라.
+따라서 $x$가 스킴 $U$ 위에 놓이고 $x : U \to \mathcal{X}$가 평탄하면,
+모든 대상 $x_i$도 그러하다. 그러므로 준층 $\mathcal{F}$가 기생이면
+준층 $\mathcal{F}^+$도 기생이다(『사이트』의 절
+\ref{sites-section-sheafification}을 보라). $\mathcal{F}$의 층화가
+$(\mathcal{F}^+)^+$이므로 이는 (2)(a)를 증명한다.
+
+\medskip\noindent
+$\mathcal{F}$를 기생 $\tau$-가군이라 하자. 정의에서 즉시
+$\mathcal{F}$의 모든 부분가군이 기생임을 알 수 있다. 한편
+$\mathcal{F}' \subset \mathcal{F}$가 부분가군이면 준층
+$x \mapsto \mathcal{F}(x)/\mathcal{F}'(x)$가 기생임도 똑같이 명확하다.
+따라서 (2)(a)에 의해 몫 $\mathcal{F}/\mathcal{F}'$은 기생 가군이다.
+마지막으로 $\mathcal{F}_1$과 $\mathcal{F}_3$가 기생인 짧은 완전열
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$가
+주어지면 $\mathcal{F}_2$가 기생임을 보여야 한다.
+$\mathcal{X}$ 위에서 평탄한 스킴 위에 놓인 $x$에서 값을 취하면 이는 즉시 따른다.
+이로써 (2)(b)가 증명되었다. 『호몰로지』의 보조정리
+\ref{homology-lemma-characterize-serre-subcategory}를 보라.
+
+\medskip\noindent
+$f_i : \mathcal{X}_i \to \mathcal{X}$를 함께 전사인 대수적 스택의
+매끄러운 사상들의 족이라 하고, 각 $f_i^*\mathcal{F}$가 기생이라고 가정하자.
+$x$를 스킴 $U$ 위에 놓인 $\mathcal{X}$의 대상이라 하고
+$x : U \to \mathcal{X}$가 평탄하다고 하자.
+매끄러운 전사 피복 $W_i \to U \times_{x, \mathcal{X}} \mathcal{X}_i$를
+생각하자. 사영을 $y_i : W_i \to \mathcal{X}_i$라 쓰자.
+그러면 $\{f_i(y_i) \to x\}$는 $\mathcal{X}$의 매끄러운 위상에 대한
+피복이다. 평탄 사상들의 합성은 평탄하므로
+$f_i^*\mathcal{F}(y_i) = 0$임을 알 수 있다. 한편 (1)의 증명에서 보았듯이
+$f_i^*\mathcal{F}(y_i) = \mathcal{F}(f_i(y_i))$이다.
+따라서 $\mathcal{X}$ 안의 어떤 매끄러운 피복
+$\{x_i \to x\}_{i \in I}$에 대해 $\mathcal{F}(x_i) = 0$이다.
+매끄러운 위상은 에탈 위상과 같으므로 이는 $\mathcal{F}(x) = 0$을 함의한다.
+『사상 심화』의 보조정리
+\ref{more-morphisms-lemma-etale-dominates-smooth}를 보라.
+더 구체적으로, $\{x_i \to x\}_{i \in I}$는 스킴들의 매끄러운 피복
+$\{U_i \to U\}_{i \in I}$ 위에 놓인다. 방금 인용한 보조정리에 의해
+$\{U_i \to U\}_{i \in I}$를 세분하는 에탈 피복
+$\{V_j \to U\}_{j \in J}$가 존재한다. $x'_j = x|_{V_j}$라 쓰자.
+그러면 $\{x'_j \to x\}$는 $\{x_i \to x\}_{i \in I}$를 세분하는
+$\mathcal{X}$ 안의 에탈 피복이다. 이는 사상
+$\mathcal{F}(x) \to \prod_{j \in J} \mathcal{F}(x'_j)$가
+$\mathcal{F}(x) \to \prod_{i \in I} \mathcal{F}(x_i)$를 통해
+분해된다는 뜻이다. 전자는 $\mathcal{F}$가 에탈 위상의 층이므로 단사이고,
+후자는 영이다. 따라서 원하는 대로 $\mathcal{F}(x) = 0$이다.
+
+\medskip\noindent
+(4)의 증명은 생략한다. 힌트: (3)의 증명과 유사하지만 더 간단하다.
+\end{proof}
+
+\noindent
+기생 가군은 정말로 어떠한 직상에 의해서도 보존된다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-pushforward-parasitic}
+$\tau \in \{\etale, fppf\}$라 하자.
+$\mathcal{X}$를 대수적 스택이라 하자. $\mathcal{F}$를
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$의 기생 대상이라 하자.
+\begin{enumerate}
+\item 모든 $i$에 대해 $H^i_\tau(\mathcal{X}, \mathcal{F}) = 0$이다.
+\item $f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 사상이라 하자.
+그러면 $R^if_*\mathcal{F}$는($\tau$-위상에서 계산한 것으로)
+$\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y})$의 기생 대상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+먼저 (2)를 (1)로 환원한다.
+『스택 위의 층』의 보조정리 \ref{stacks-sheaves-lemma-pushforward-restriction}에 의해
+$R^if_*\mathcal{F}$는 준층
+$$
+y \longmapsto
+H^i_\tau\Big(V \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{F}\Big)
+$$
+에 연관된 층이다. 여기서 $y$는 스킴 $V$ 위에 놓인 $\mathcal{Y}$의
+일반적인 대상이다. 보조정리 \ref{stacks-cohomology-lemma-parasitic}에 의해,
+$y : V \to \mathcal{Y}$가 평탄할 때 이 코호몰로지 군들이 영임을 보이면 충분하다.
+$\text{pr} : V \times_{y, \mathcal{Y}} \mathcal{X} \to \mathcal{X}$는
+$y$의 밑변환이므로 평탄하다. 따라서 보조정리 \ref{stacks-cohomology-lemma-parasitic}에 의해
+$\text{pr}^{-1}\mathcal{F}$가 기생임을 알 수 있다. 그러므로 (1)을 증명하면 충분하다.
+
+\medskip\noindent
+(1)을 보기 위해 『스택 위의 층』의 명제
+\ref{stacks-sheaves-proposition-smooth-covering-compute-cohomology}의
+스펙트럼 열을 사용하여 $\mathcal{X}$가 대수공간으로 표현가능한 대수적 스택인
+경우로 환원할 수 있다. 스펙트럼 열에서 각
+$f_p^{-1}\mathcal{F} = f_p^*\mathcal{F}$는 보조정리
+\ref{stacks-cohomology-lemma-parasitic}에 의해 기생 가군임에 유의하라. 실제로 사상
+$f_p : \mathcal{U}_p =
+\mathcal{U} \times_\mathcal{X} \ldots
+\times_\mathcal{X} \mathcal{U} \to \mathcal{X}$가 평탄하다.
+이 스펙트럼 열을 한 번 더 사용하면(보조정리
+\ref{stacks-cohomology-lemma-general-pushforward}의 증명에서처럼) 대수적 스택
+$\mathcal{X}$가 스킴 $X$로 표현가능한 경우로 환원된다.
+그러면 $H^i_\tau(\mathcal{X}, \mathcal{F}) = H^i((\Sch/X)_\tau, \mathcal{F})$이다.
+이 경우 소멸은 {\v C}ech 피복에 관한 논증에서 쉽게 따른다.
+『하강』의 보조정리 \ref{descent-lemma-cohomology-parasitic}를 보라.
+\end{proof}
+
+\noindent
+다음 보조정리는 우리가 기생 가군에 관심을 갖는 주된 이유 가운데 하나이다.
+명제를 이해하려면 함자
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$와
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})$가 일반적으로 완전하지 않음을 상기하라.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-exact-sequence-quasi-coherent-parasitic-cohomology}
+$\mathcal{X}$를 대수적 스택이라 하자.
+$\alpha : \mathcal{F} \to \mathcal{G}$와
+$\beta : \mathcal{G} \to \mathcal{H}$를
+$\beta \circ \alpha = 0$을 만족하는
+$\QCoh(\mathcal{O}_\mathcal{X})$의 사상이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item 아벨 범주 $\QCoh(\mathcal{O}_\mathcal{X})$에서 복합체
+$\mathcal{F} \to \mathcal{G} \to \mathcal{H}$는
+$\mathcal{G}$에서 완전하다.
+\item $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ 또는
+$\textit{Mod}(\mathcal{X}_{fppf}, \mathcal{O}_\mathcal{X})$ 어느 쪽에서
+계산한 $\Ker(\beta)/\Im(\alpha)$도 기생이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+절 \ref{stacks-cohomology-section-loc-qcoh-flat-base-change}에 의해
+$\QCoh(\mathcal{O}_\mathcal{X}) \subset
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$이다.
+따라서 명제 \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$에서 계산한
+$\Ker(\beta)/\Im(\alpha)$와
+$\textit{Mod}(\mathcal{X}_{fppf}, \mathcal{O}_\mathcal{X})$에서 계산한 것은
+일치한다. 이제부터 $\mathcal{X}$ 위의 에탈 위상을 사용하겠다.
+
+\medskip\noindent
+$\mathcal{E}$를 아벨 범주 $\QCoh(\mathcal{O}_\mathcal{X})$에서 계산한
+$\mathcal{F} \to \mathcal{G} \to \mathcal{H}$의 코호몰로지라 하자.
+$x : U \to \mathcal{X}$를 평탄 사상이라 하고 $U$를 스킴이라 하자.
+에탈 위상을 사용하고 있으므로 제한 함자
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+\to \textit{Mod}(U_\etale, \mathcal{O}_U)$는 완전하다.
+한편 보조정리 \ref{stacks-cohomology-lemma-flat-pullback-quasi-coherent}와
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-compare-quasi-coherent}에 의해 제한 함자
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \xrightarrow{x^*}
+\QCoh((\Sch/U)_\etale, \mathcal{O}) \xrightarrow{{-}|_{U_\etale}}
+\QCoh(U_\etale, \mathcal{O}_U)
+$$
+도 완전하다. 따라서
+$\mathcal{E}|_{U_\etale} = (\Ker(\beta)/\Im(\alpha))|_{U_\etale}$이다.
+
+\medskip\noindent
+(1)이 성립하면 $\mathcal{E} = 0$이므로
+$\mathcal{X}$ 위에서 평탄한 모든 $U$에 대해
+$\Ker(\beta)/\Im(\alpha)$를 $U_\etale$에 제한한 것은 영이다.
+이것이 기생 가군의 정의이다. (2)가 성립하면
+$\mathcal{X}$ 위에서 평탄한 모든 $U$에 대해
+$\Ker(\beta)/\Im(\alpha)$를 $U_\etale$에 제한한 것이 영이므로,
+$\mathcal{X}$ 위에서 평탄한 모든 $U$에 대해
+$\mathcal{E}$를 $U_\etale$에 제한한 것도 영이다.
+이는 분명 준연접 가군 $\mathcal{E}$가 영임을 함의한다. 예를 들어
+사상 $0 \to \mathcal{E}$에 보조정리
+\ref{stacks-cohomology-lemma-quasi-coherent-check-exact}를 적용하라.
+\end{proof}
+
+\section{준연접 가군}
+\label{stacks-cohomology-section-quasi-coherent}
+
+\noindent
+대수적 스택 위의 준연접 가군의 범주가 그 표시 위의 준연접 가군의 범주와
+동치임을 보았다. 『스택 위의 층』의 절
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks}을 보라.
+이 사실이 다음 결과의 기초이다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-adjoint}
+$\mathcal{X}$를 대수적 스택이라 하자.
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$를 평탄 밑변환 성질을 가진
+국소 준연접 가군들의 범주라 하자. 절
+\ref{stacks-cohomology-section-loc-qcoh-flat-base-change}을 보라. 포함 함자
+$i : \QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$는 우수반
+$$
+Q : \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \to
+\QCoh(\mathcal{O}_\mathcal{X})
+$$
+을 가지며, $Q \circ i$는 항등함자이다.
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 매끄러운 전사 사상 $f : U \to \mathcal{X}$를 택한다.
+$R = U \times_\mathcal{X} U$라 놓으면 대수공간에서의 매끄러운 준군
+$(U, R, s, t, c)$를 얻으며 $\mathcal{X} = [U/R]$이다.
+『대수적 스택』의 보조정리 \ref{algebraic-lemma-stack-presentation}을 보라.
+$\mathcal{X}$를 $[U/R]$로 바꾸어도 되고 그렇게 하겠다.
+『스택 위의 층』의 명제 \ref{stacks-sheaves-proposition-quasi-coherent}에 의해
+동치
+$$
+q_1 :
+\QCoh(U, R, s, t, c)
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{X})
+$$
+가 있다. 이제 함자
+$$
+q_2 :
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(U, R, s, t, c)
+$$
+를 다음 규칙으로 구성하자. $\mathcal{F}$가
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상이면
+$$
+q_2(\mathcal{F}) = (f^*\mathcal{F}|_{U_\etale}, \alpha)
+$$
+로 놓는다. 여기서 $\alpha$는 동형
+$$
+t_{small}^*(f^*\mathcal{F}|_{U_\etale})
+\to
+t^*f^*\mathcal{F}|_{R_\etale} \to
+s^*f^*\mathcal{F}|_{R_\etale} \to
+s_{small}^*(f^*\mathcal{F}|_{U_\etale})
+$$
+이고, 바깥의 두 사상은 비교 사상이다. $\mathcal{F}$가 국소 준연접이기
+때문에 정확히 $q_2(\mathcal{F})$가 준연접이며, 하강 데이터 $\alpha$를
+구성할 때 평탄 밑변환 성질을 사용했고 또 필요했음에 유의하라.
+코사이클 조건(『공간에서의 준군』의 정의
+\ref{spaces-groupoids-definition-groupoid-module}을 보라)이 성립하는지에 대한
+확인은 생략한다. 『스택 위의 층』의 명제
+\ref{stacks-sheaves-proposition-quasi-coherent}의 증명을 살펴보면
+$q_2 \circ i$가 $q_1$의 준역임을 알 수 있다.
+$Q = q_1 \circ q_2$로 정의하자.
+$\mathcal{F}$를 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상이라 하고,
+$\mathcal{G}$를 $\QCoh(\mathcal{O}_\mathcal{X})$의 대상이라 하자. 그러면
+\begin{align*}
+\Mor_{\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})}
+(i(\mathcal{G}), \mathcal{F})
+& =
+\Mor_{\QCoh(U, R, s, t, c)}(q_2(i(\mathcal{G})), q_2(\mathcal{F})) \\
+& =
+\Mor_{\QCoh(\mathcal{O}_\mathcal{X})}(\mathcal{G}, Q(\mathcal{F}))
+\end{align*}
+이다. 첫 번째 등식은 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-map-from-quasi-coherent}이고,
+두 번째 등식은 $q_1 \circ i$와 $q_2$가 범주들의 서로 준역인 동치이기 때문에
+성립한다. 주장 $Q \circ i \cong \text{id}$는 $i$가 완전충실하다는 사실의
+형식적 귀결이다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-adjoint-kernel-parasitic}
+$\mathcal{X}$를 대수적 스택이라 하자. $Q :
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \to
+\QCoh(\mathcal{O}_\mathcal{X})$를 보조정리 \ref{stacks-cohomology-lemma-adjoint}에서
+구성한 함자라 하자.
+\begin{enumerate}
+\item $Q$의 핵은 정확히
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 기생 대상들의 모임이다.
+\item $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 임의의 대상
+$\mathcal{F}$에 대해 수반 사상 $Q(\mathcal{F}) \to \mathcal{F}$의
+핵과 여핵은 모두 기생이다.
+\item 함자 $Q$는 완전하고 모든 극한 및 쌍대극한과 가환한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{stacks-cohomology-lemma-adjoint}의 증명에서처럼 $\mathcal{X} = [U/R]$라 쓰자.
+$\mathcal{F}$를 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상이라 하자.
+보조정리 \ref{stacks-cohomology-lemma-adjoint}의 증명에서 $\mathcal{F}$가 $Q$의 핵에 속하는
+것과 $\mathcal{F}|_{U_\etale} = 0$은 동치임이 명확하다.
+특히 $\mathcal{F}$가 기생이면 $\mathcal{F}$는 그 핵에 속한다.
+다음으로 $x : V \to \mathcal{X}$를 평탄 사상이라 하되 $V$는 스킴이라 하자.
+$W = V \times_\mathcal{X} U$라 놓고 도식
+$$
+\xymatrix{
+W \ar[d]_p \ar[r]_q & V \ar[d] \\
+U \ar[r] & \mathcal{X}
+}
+$$
+을 생각하자. 사영 $p : W \to U$는 평탄하고 사영 $q : W \to V$는
+매끄럽고 전사이다. 따라서 $q_{small}^*$는 준연접 가군에서 충실한 함자이다.
+가정에 따라 $\mathcal{F}$는 평탄 밑변환 성질을 가지므로
+$p_{small}^*\mathcal{F}|_{U_\etale} \cong
+q_{small}^*\mathcal{F}|_{V_\etale}$를 얻는다.
+그러므로 $\mathcal{F}$가 $Q$의 핵에 속하면
+$\mathcal{F}|_{V_\etale} = 0$이다. 이로써 (1)의 증명이 끝난다.
+
+\medskip\noindent
+(2)는 위 논의와, 사상 $Q(\mathcal{F}) \to \mathcal{F}$를
+$U_\etale$에 제한하면 동형이 된다는 사실에서 따른다.
+
+\medskip\noindent
+(3)을 보기 위해 $Q$가 우수반이므로 왼쪽 완전함에 유의하라.
+$0 \to \mathcal{F} \to \mathcal{G} \to \mathcal{H} \to 0$을
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 짧은 완전열이라 하자.
+다음 가환 도식을 생각하자.
+$$
+\xymatrix{
+0 \ar[r] &
+Q(\mathcal{F}) \ar[r] \ar[d]_a &
+Q(\mathcal{G}) \ar[r] \ar[d]_b &
+Q(\mathcal{H}) \ar[r] \ar[d]_c & 0 \\
+0 \ar[r] &
+\mathcal{F} \ar[r] &
+\mathcal{G} \ar[r] &
+\mathcal{H} \ar[r] & 0
+}
+$$
+(2)에 의해 $a$, $b$, $c$의 핵과 여핵은 기생이고 아래 행은 짧은
+완전열이므로, 위 행을 $\mathcal{O}_\mathcal{X}$-가군의 복합체로 보았을 때
+그 코호몰로지 층들이 기생임을 알 수 있다(세부사항은 생략한다. 이는 기생
+가군들의 범주가 모든 가군의 범주의 Serre 부분범주라는 사실을 사용한다).
+$Q$의 왼쪽 완전성에 의해 $Q(\mathcal{H})$에서의 완전성만 문제이다.
+그러나 $Q(\mathcal{G}) \to Q(\mathcal{H}))$의 여핵 $\mathcal{Q}$는
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$에서 계산하든
+$\QCoh(\mathcal{O}_\mathcal{X})$에서 계산하든 결과가 같다.
+실제로 포함 함자 $\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$는 왼쪽 수반이므로 오른쪽
+완전하다. 따라서 $\mathcal{Q} = Q(\mathcal{Q})$는 준연접이면서 기생이고,
+(1)에 의해 원하는 대로 $0$이다.
+
+\medskip\noindent
+우수반인 $Q$는 모든 극한과 가환한다. $Q$가 완전하므로, $Q$가 모든
+쌍대극한과 가환함을 보이려면 $Q$가 직합과 가환함을 보이면 충분하다.
+『범주』의 보조정리
+\ref{categories-lemma-colimits-coproducts-coequalizers}를 보라.
+$\mathcal{F}_i$, $i \in I$를
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상들의 족이라 하자.
+$Q(\bigoplus \mathcal{F}_i)$가 $\bigoplus Q(\mathcal{F}_i)$와 같음을 보기 위해
+보조정리 \ref{stacks-cohomology-lemma-adjoint}의 증명에 나오는 $Q$의 구성을 살펴보자.
+여기서는 $U$가 스킴인 표시 $\mathcal{X} = [U/R]$를 사용한다.
+그러면 먼저 $\QCoh(U, R, s, t, c)$에서 쌍
+$(\mathcal{F}|_{U_\etale}, \alpha)$를 취하고, 이어서 동치
+$\QCoh(U, R, s, t, c) \cong \QCoh(\mathcal{O}_\mathcal{X})$를 사용하여
+$Q(\mathcal{F})$를 계산한다. 제한 함자
+$\textit{Mod}(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_{U_\etale})$,
+$\mathcal{F} \mapsto \mathcal{F}|_{U_\etale}$가 직합과 가환하므로
+원하는 등식은 명확하다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-flat-morphism-and-Q}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 평탄 사상이라 하자.
+그러면 $Q_\mathcal{X} \circ f^* = f^* \circ Q_\mathcal{Y}$이다.
+여기서 $Q_\mathcal{X}$와 $Q_\mathcal{Y}$는 보조정리
+\ref{stacks-cohomology-lemma-adjoint}에서와 같다.
+\end{lemma}
+
+\begin{proof}
+$f^*$는 $\QCoh$와 $\textit{LQCoh}^{fbc}$를 모두 보존한다.
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-pullback-quasi-coherent}와 명제
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}를 보라.
+$\mathcal{F}$가 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})$에 속하면,
+보조정리 \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}에 의해
+$Q_\mathcal{Y}(\mathcal{F}) \to \mathcal{F}$의 핵과 여핵은 기생이다.
+$f$가 평탄하므로 보조정리 \ref{stacks-cohomology-lemma-parasitic}에 의해
+$f^*Q_\mathcal{Y}(\mathcal{F}) \to f^*\mathcal{F}$의 핵과 여핵은 기생이다.
+따라서 유도된 사상
+$f^*Q_\mathcal{Y}(\mathcal{F}) \to Q_\mathcal{X}(f^*\mathcal{F})$의
+핵과 여핵은 기생이고, 예를 들어 보조정리
+\ref{stacks-cohomology-lemma-exact-sequence-quasi-coherent-parasitic-cohomology}에 의해 동형이다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-flat-object-and-Q}
+$\mathcal{X}$를 대수적 스택이라 하자. $x$를 스킴 $U$ 위에 놓인
+$\mathcal{X}$의 대상이라 하고 $x : U \to \mathcal{X}$가 평탄하다고 하자.
+그러면 $\QCoh^{fbc}(\mathcal{O}_\mathcal{X})$의 $\mathcal{F}$에 대해
+$Q(\mathcal{F})|_{U_\etale} = \mathcal{F}|_{U_\etale}$이다.
+\end{lemma}
+
+\begin{proof}
+$Q(\mathcal{F}) \to \mathcal{F}$의 핵과 여핵이 기생이기 때문에 참이다.
+보조정리 \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}를 보라.
+\end{proof}
+
+\begin{remark}
+\label{stacks-cohomology-remark-QCoh-abelian}
+$\mathcal{X}$를 대수적 스택이라 하자. 범주
+$\QCoh(\mathcal{O}_\mathcal{X})$는 아벨 범주이고, 포함 함자
+$\QCoh(\mathcal{O}_\mathcal{X}) \to \textit{Mod}(\mathcal{O}_\mathcal{X})$는
+오른쪽 완전하지만 일반적으로 완전하지 않다. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack}을 보라.
+보조정리 \ref{stacks-cohomology-lemma-adjoint}와 \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}의 함자
+$Q$를 사용하여 이를 이해할 수 있다. 구체적으로
+$\varphi : \mathcal{F} \to \mathcal{G}$를 준연접
+$\mathcal{O}_\mathcal{X}$-가군들의 사상이라 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$에서 계산한 여핵
+$\Coker(\varphi)$는 준연접이고, $\QCoh(\mathcal{O}_\mathcal{X})$에서의
+$\varphi$의 여핵이다.
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$에서 계산한 상
+$\Im(\varphi)$는 준연접이고, $\QCoh(\mathcal{O}_\mathcal{X})$에서의
+$\varphi$의 상이다.
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$에서 계산한 핵
+$\Ker(\varphi)$는 명제 \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속하고,
+$Q(\Ker(\varphi))$는 $\QCoh(\mathcal{O}_\mathcal{X})$에서의 핵이다.
+\end{enumerate}
+이는 앞서 제시한 참고문헌에서 따른다.
+\end{remark}
+
+\begin{remark}
+\label{stacks-cohomology-remark-QCoh-tensor}
+$\mathcal{X}$를 대수적 스택이라 하자. 두 준연접
+$\mathcal{O}_\mathcal{X}$-가군 $\mathcal{F}$와 $\mathcal{G}$가 주어지면
+텐서곱 가군 $\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$는
+준연접이다. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack}의 (5)를 보라.
+마찬가지로 평탄 밑변환 성질을 가진 두 국소 준연접 가군이 주어지면
+그 텐서곱도 같은 성질을 가진다. 명제
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}를 보라. 따라서 포함 함자
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+$$
+는 대칭 모노이드 범주들의 함자이다. 더 흥미로운 사실은 함자
+$$
+Q :
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{X})
+$$
+도 대칭 모노이드 범주들의 함자라는 것이다. 구체적으로
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의
+$\mathcal{F}$와 $\mathcal{G}$가 주어지면
+$$
+\xymatrix{
+Q(\mathcal{F})
+\otimes_{\mathcal{O}_\mathcal{X}}
+Q(\mathcal{G}) \ar[rr] \ar[rd] & &
+\mathcal{F}
+\otimes_{\mathcal{O}_\mathcal{X}}
+\mathcal{G} \\
+&
+Q(\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}) \ar[ru]
+}
+$$
+를 얻는다. 여기서 남서쪽 화살은 북서쪽 화살의 보편 성질에서 온다
+(그리고 왼쪽 위 모서리의 대상이 준연접이라는 앞서 언급한 사실을 사용한다).
+이 도식을 평탄한 $U \to \mathcal{X}$에 대해 $U_\etale$로 제한하면
+세 화살 모두 동형이 된다(보조정리 \ref{stacks-cohomology-lemma-adjoint}와
+\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}, 그리고 정의
+\ref{stacks-cohomology-definition-parasitic}을 보라). 따라서
+$Q(\mathcal{F}) \otimes_{\mathcal{O}_\mathcal{X}}
+Q(\mathcal{G}) \to
+Q(\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G})$는 동형이다.
+예를 들어 보조정리 \ref{stacks-cohomology-lemma-quasi-coherent-check-exact}를 보라.
+\end{remark}
+
+\begin{remark}
+\label{stacks-cohomology-remark-bousfield-colocalization}
+$\mathcal{X}$를 대수적 스택이라 하자.
+$\textit{Parasitic}(\mathcal{O}_\mathcal{X}) \subset
+\textit{Mod}(\mathcal{O}_\mathcal{X})$를 기생 가군들로 이루어진
+충만한 부분범주라 하자. 보조정리 \ref{stacks-cohomology-lemma-adjoint}와
+\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}의 결과는
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) =
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) /
+\textit{Parasitic}(\mathcal{O}_\mathcal{X})
+\cap \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+$$
+임을 함의한다. 말로 하면, 준연접 가군의 범주는 평탄 밑변환 성질을 가진
+국소 준연접 가군의 범주를 기생 대상들로 이루어진 Serre 부분범주로 나눈 것이다.
+『호몰로지』의 보조정리 \ref{homology-lemma-serre-subcategory-is-kernel}을 보라.
+몫 함자의 왼쪽 수반인 포함 함자
+$i : \QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$가 존재한다는 것이 이 상황의
+핵심 특징이다. 『스택의 유도 범주』의 절
+\ref{stacks-perfect-section-derived}, 특히 보조정리
+\ref{stacks-perfect-lemma-bousfield-colocalization}에서는
+유도 범주의 수준에서도 유사한 결과가 성립함을 증명한다.
+\end{remark}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-internal-hom-fp-into-qcoh}
+$\mathcal{X}$를 대수적 스택이라 하자. $\mathcal{F}$를 유한 표시인
+$\mathcal{O}_\mathcal{X}$-가군이라 하고, $\mathcal{G}$를 준연접
+$\mathcal{O}_\mathcal{X}$-가군이라 하자.
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$와
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$에서 계산한 내부 Hom
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$들은
+일치하며, 그 공통값은
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상이다.
+준연접 가군
+$
+hom(\mathcal{F}, \mathcal{G}) =
+Q(\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G}))
+$
+은 다음 보편 성질을 가진다.
+$$
+\Hom_\mathcal{X}(\mathcal{H}, hom(\mathcal{F}, \mathcal{G})) =
+\Hom_\mathcal{X}(\mathcal{H} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{F},
+\mathcal{G})
+$$
+여기서 $\mathcal{H}$는 $\QCoh(\mathcal{O}_\mathcal{X})$에 속한다.
+\end{lemma}
+
+\begin{proof}
+『사이트 위의 가군』의 절 \ref{sites-modules-section-internal-hom}에 나오는
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$의 구성은
+가군 준층으로서의 $\mathcal{F}$와 $\mathcal{G}$에만 의존한다.
+$\mathcal{F}$와 $\mathcal{G}$가 fppf 위상의 층이라고 가정했으므로,
+그 출력 $\SheafHom$은 fppf 위상의 층이다. 『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-internal-hom}을 보라.
+『스택 위의 층』의 보조정리 \ref{stacks-sheaves-lemma-lqc-colimits}에 의해
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$는
+국소 준연접이다. 보조정리
+\ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering}에 의해
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$는
+평탄 밑변환 성질을 가진다. 따라서
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$는
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상이고,
+여기에 보조정리 \ref{stacks-cohomology-lemma-adjoint}의 함자 $Q$를 적용할 수 있다.
+$Q$의 보편 성질에 의해, 준연접인 $\mathcal{H}$에 대해
+$$
+\Hom_\mathcal{X}(\mathcal{H},
+Q(\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G}))) =
+\Hom_\mathcal{X}(\mathcal{H},
+\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G}))
+$$
+이다. 그러므로 보조정리의 표시된 식은 『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-internal-hom-adjoint-tensor}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-flat-morphism-and-hom}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 평탄 사상이라 하자.
+$\mathcal{F}$를 유한 표시인 $\mathcal{O}_\mathcal{Y}$-가군이라 하고,
+$\mathcal{G}$를 준연접 $\mathcal{O}_\mathcal{Y}$-가군이라 하자.
+그러면 보조정리 \ref{stacks-cohomology-lemma-internal-hom-fp-into-qcoh}의 표기법으로
+$f^*hom(\mathcal{F}, \mathcal{G}) = hom(f^*\mathcal{F}, f^*\mathcal{G})$이다.
+\end{lemma}
+
+\begin{proof}
+『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-pullback-internal-hom}에 의해
+$f^*\SheafHom_{\mathcal{O}_\mathcal{Y}}(\mathcal{F}, \mathcal{G}) =
+\SheafHom_{\mathcal{O}_\mathcal{X}}(f^*\mathcal{F}, f^*\mathcal{G})$이다.
+(이 단계에서 $f$의 평탄성을 사용하는 것은 아님에 유의하라. $f$에 대응하는
+환 달린 토포스의 사상은 항상 평탄하기 때문이다. 『스택 위의 층』의 주
+\ref{stacks-sheaves-remark-flat}을 보라.)
+이제 보조정리 \ref{stacks-cohomology-lemma-flat-morphism-and-Q}를 적용한다
+(그리고 여기서는 $f$의 평탄성을 사용한다).
+\end{proof}
+
+\section{준연접 가군의 직상}
+\label{stacks-cohomology-section-pushforward-quasi-coherent}
+
+\noindent
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 사상이라 하자.
+직상
+$$
+f_* :
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\textit{Mod}(\mathcal{O}_\mathcal{Y})
+$$
+을 생각하자. 이 함자는 준연접 층들의 부분범주를 거의 절대로 보존하지
+않는다는 사실이 드러난다. 예를 들어 스킴의 사상
+$$
+j : X = \mathbf{A}^2_k \setminus \{0\} \longrightarrow \mathbf{A}^2_k = Y.
+$$
+를 생각하자. 이에 대응하는 대수적 스택의 사상
+$$
+f = j_{big} : \mathcal{X} = (\Sch/X)_{fppf} \to
+(\Sch/Y)_{fppf} = \mathcal{Y}
+$$
+이 있다. 구조층의 직상 $f_*\mathcal{O}_\mathcal{X}$의 대역 단면은
+$k[x, y]$이다. 따라서 $f_*\mathcal{O}_\mathcal{X}$가 $\mathcal{Y}$ 위에서
+준연접이라면 $f_*\mathcal{O}_\mathcal{X} = \mathcal{O}_\mathcal{Y}$이어야 한다.
+그러나 $0$으로 가는 $T = \Spec(k) \to \mathbf{A}^2_k = Y$를 생각하자.
+$X \times_Y T = \emptyset$이므로
+$\Gamma(T, f_*\mathcal{O}_\mathcal{X}) = 0$인 반면,
+$\Gamma(T, \mathcal{O}_\mathcal{Y}) = k$이다.
+긍정적인 면으로, 임의의 평탄 사상 $T \to Y$에 대해
+$\Gamma(T, f_*\mathcal{O}_\mathcal{X}) = \Gamma(T, \mathcal{O}_\mathcal{Y})$이다.
+이는 $j$가 준콤팩트이고 준분리라는 사실과 『스킴의 코호몰로지』의 보조정리
+\ref{coherent-lemma-flat-base-change-cohomology}에서 따른다.
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 준콤팩트 준분리 사상이라 하자.
+위에서 언급한 문제는 다음 세 가지 관찰을 사용하여 우회한다.
+\begin{enumerate}
+\item $f_*$는 국소 준연접 가군을 보존한다
+(보조정리 \ref{stacks-cohomology-lemma-pushforward-locally-quasi-coherent}).
+\item $f_*$는 준연접 층을 그 평탄 비교 사상들이 동형인 국소 준연접 층으로
+보낸다(보조정리 \ref{stacks-cohomology-lemma-flat-comparison}).
+\item 평탄 밑변환 성질을 가진 국소 준연접
+$\mathcal{O}_\mathcal{Y}$-가군은 $\mathcal{Y}$의 표시 위의 준연접 가군을,
+따라서 $\mathcal{Y}$ 위의 준연접 가군을 준다. 『스택 위의 층』의 절
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks}을 보라.
+\end{enumerate}
+따라서 함자
+$$
+f_{\QCoh, *} :
+\QCoh(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{Y})
+$$
+를 얻는다. 이는
+$f^* : \QCoh(\mathcal{O}_\mathcal{Y}) \to
+\QCoh(\mathcal{O}_\mathcal{X})$의 우수반이며, 더 나아가 연관된 $1$-사상
+$y : V \to \mathcal{Y}$가 평탄한 임의의 $y \in \Ob(\mathcal{Y})$에 대해
+$$
+\Gamma(y, f_*\mathcal{F}) = \Gamma(y, f_{\QCoh, *}\mathcal{F})
+$$
+이다. 보조정리 \ref{stacks-cohomology-lemma-direct-image-quasi-coherent-over-flat}을 보라.
+더욱이 유사한 구성으로 함자 $R^if_{\QCoh, *}$를 만들 수 있다.
+그러나 이 결과들은 (준연접 코호몰로지 층을 가진 복합체의) 전체 직상 함자를
+만들기에는 충분하지 않다.
+
+\begin{proposition}
+\label{stacks-cohomology-proposition-direct-image-quasi-coherent}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 준콤팩트 준분리 사상이라 하자.
+함자 $f^* : \QCoh(\mathcal{O}_\mathcal{Y}) \to
+\QCoh(\mathcal{O}_\mathcal{X})$는 우수반
+$$
+f_{\QCoh, *} :
+\QCoh(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{Y})
+$$
+을 가진다. 이는 합성
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\xrightarrow{f_*} \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})
+\xrightarrow{Q} \QCoh(\mathcal{O}_\mathcal{Y})
+$$
+으로 정의할 수 있다. 여기서 함자 $f_*$와 $Q$는 각각 명제
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}와 보조정리
+\ref{stacks-cohomology-lemma-adjoint}에서와 같다. 더욱이 $R^if_{\QCoh, *}$를 합성
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\xrightarrow{R^if_*} \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})
+\xrightarrow{Q} \QCoh(\mathcal{O}_\mathcal{Y})
+$$
+으로 정의하면, 함자들의 열 $\{R^if_{\QCoh, *}\}_{i \geq 0}$은
+코호몰로지적 $\delta$-함자를 이룬다.
+\end{proposition}
+
+\begin{proof}
+이는 명제에서 언급한 결과들을 결합한 것이다.
+수반성은 다음과 같이 보일 수 있다. $\mathcal{F}$를 준연접
+$\mathcal{O}_\mathcal{X}$-가군이라 하고, $\mathcal{G}$를 준연접
+$\mathcal{O}_\mathcal{Y}$-가군이라 하자. 그러면
+\begin{align*}
+\Mor_{\QCoh(\mathcal{O}_\mathcal{X})}(f^*\mathcal{G}, \mathcal{F})
+& =
+\Mor_{\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})}
+(\mathcal{G}, f_*\mathcal{F}) \\
+& =
+\Mor_{\QCoh(\mathcal{O}_\mathcal{Y})}(\mathcal{G}, Q(f_*\mathcal{F}))
+\\
+& =
+\Mor_{\QCoh(\mathcal{O}_\mathcal{Y})}(\mathcal{G},
+f_{\QCoh, *}\mathcal{F})
+\end{align*}
+이다. 첫 번째 등식은 (임의의 가군층에 대한) $f_*$와 $f^*$의 수반성에서
+따른다. 명제 \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해
+$f_*\mathcal{F}$는
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})$의 대상이고
+(fppf 위상과 에탈 위상 어느 쪽에서도 계산할 수 있다), 보조정리
+\ref{stacks-cohomology-lemma-adjoint}에서 두 번째 등식을 얻는다. 세 번째 등식은
+$f_{\QCoh, *}$의 정의이다.
+
+\medskip\noindent
+$\{R^if_{\QCoh, *}\}_{i \geq 0}$가 『호몰로지』의 정의
+\ref{homology-definition-cohomological-delta-functor}에서 정의한
+코호몰로지적 $\delta$-함자임을 보이기 위해
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0
+$$
+을 $\QCoh(\mathcal{O}_\mathcal{X})$의 짧은 완전열이라 하자.
+이 열은 $\textit{Mod}(\mathcal{O}_\mathcal{X})$에서 완전열이 아닐 수 있지만,
+기생 가군들을 무시하면 완전임을 알고 있다. 보조정리
+\ref{stacks-cohomology-lemma-exact-sequence-quasi-coherent-parasitic-cohomology}를 보라.
+따라서 이 열을 $\mathcal{P}_i$가 기생인
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$의 짧은 완전열들
+$$
+\begin{matrix}
+0 \to \mathcal{P}_1 \to \mathcal{F}_1 \to \mathcal{I}_2 \to 0 \\
+0 \to \mathcal{I}_2 \to \mathcal{F}_2 \to \mathcal{Q}_2 \to 0 \\
+0 \to \mathcal{P}_2 \to \mathcal{Q}_2 \to \mathcal{I}_3 \to 0 \\
+0 \to \mathcal{I}_3 \to \mathcal{F}_3 \to \mathcal{P}_3 \to 0
+\end{matrix}
+$$
+로 나눌 수 있다. 각 층
+$\mathcal{P}_j$, $\mathcal{I}_j$, $\mathcal{Q}_j$는 명제
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상임에 유의하라.
+$R^if_*$를 적용하면 긴 완전열들
+$$
+\begin{matrix}
+0 \to f_*\mathcal{P}_1 \to f_*\mathcal{F}_1 \to f_*\mathcal{I}_2 \to
+R^1f_*\mathcal{P}_1 \to \ldots \\
+0 \to f_*\mathcal{I}_2 \to f_*\mathcal{F}_2 \to f_*\mathcal{Q}_2 \to
+R^1f_*\mathcal{I}_2 \to \ldots \\
+0 \to f_*\mathcal{P}_2 \to f_*\mathcal{Q}_2 \to f_*\mathcal{I}_3 \to
+R^1f_*\mathcal{P}_2 \to \ldots \\
+0 \to f_*\mathcal{I}_3 \to f_*\mathcal{F}_3 \to f_*\mathcal{P}_3 \to
+R^1f_*\mathcal{I}_3 \to \ldots
+\end{matrix}
+$$
+을 얻는데, 항들이 명제 \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})$의 대상이다.
+보조정리 \ref{stacks-cohomology-lemma-pushforward-parasitic}에 의해 층
+$R^if_*\mathcal{P}_j$는 기생이므로, 보조정리
+\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}에 의해 함자 $Q$를 적용하면 소멸한다.
+$Q$는 완전하므로 사상
+$$
+Q(R^if_*\mathcal{F}_3)
+\cong
+Q(R^if_*\mathcal{I}_3)
+\cong
+Q(R^if_*\mathcal{Q}_2)
+\rightarrow
+Q(R^{i + 1}f_*\mathcal{I}_2)
+\cong
+Q(R^{i + 1}f_*\mathcal{F}_1)
+$$
+을 연결 사상으로 삼아 함자족
+$\{R^if_{\QCoh, *}\}_{i \geq 0}$을 코호몰로지적 $\delta$-함자로 만들 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-direct-image-quasi-coherent-over-flat}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 준콤팩트 준분리 사상이라 하자.
+$y : V \to \mathcal{Y}$가 $\Ob(\mathcal{Y})$에 속하고 $y$가 평탄 사상이라 하자.
+$\mathcal{F}$가 $\QCoh(\mathcal{O}_\mathcal{X})$에 속한다고 하자.
+그러면 모든 $i \in \mathbf{Z}$에 대해
+$(f_*\mathcal{F})(y) = (f_{\QCoh, *}\mathcal{F})(y)$이고
+$(R^if_*\mathcal{F})(y) = (R^if_{\QCoh, *}\mathcal{F})(y)$이다.
+\end{lemma}
+
+\begin{proof}
+이는 명제 \ref{stacks-cohomology-proposition-direct-image-quasi-coherent}의 함자
+$R^if_{\QCoh, *}$의 구성, 정의 \ref{stacks-cohomology-definition-parasitic}의 기생 가군의 정의,
+그리고 보조정리 \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}의 (2)에서 따른다.
+\end{proof}
+
+\begin{remark}
+\label{stacks-cohomology-remark-direct-image-quasi-coherent-tensor}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 준콤팩트 준분리 사상이라 하자.
+$\mathcal{F}$와 $\mathcal{G}$가
+$\QCoh(\mathcal{O}_\mathcal{X})$에 속한다고 하자. 그러면 표준 가환 도식
+$$
+\xymatrix{
+f_{\QCoh, *}\mathcal{F}
+\otimes_{\mathcal{O}_\mathcal{Y}}
+f_{\QCoh, *}\mathcal{G} \ar[r] \ar[d] &
+f_*\mathcal{F}
+\otimes_{\mathcal{O}_\mathcal{Y}}
+f_*\mathcal{G} \ar[d]^c \\
+f_{\QCoh, *}(\mathcal{F}
+\otimes_{\mathcal{O}_\mathcal{X}}
+\mathcal{G}) \ar[r] &
+f_*(\mathcal{F}
+\otimes_{\mathcal{O}_\mathcal{X}}
+\mathcal{G})
+}
+$$
+이 있다. 오른쪽의 수직 화살 $c$는 ($0$차에서의) 소박한 상대적 컵곱이다.
+『사이트 위의 코호몰로지』의 절
+\ref{sites-cohomology-section-cup-product}을 보라.
+$c$의 원천과 목표는 명제 \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속한다.
+$Q$가 텐서곱과 가환하므로 $c$에 $Q$를 적용하여 왼쪽의 수직 화살을 얻는다.
+주 \ref{stacks-cohomology-remark-QCoh-tensor}를 보라. 이 구성은 $\mathcal{F}$와
+$\mathcal{G}$에 대해 함자적이다.
+\end{remark}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-leray}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 준콤팩트 준분리 사상이라 하자.
+$\mathcal{F}$를 $\mathcal{X}$ 위의 준연접 층이라 하자. 그러면
+$E_2$-쪽이
+$$
+E_2^{p, q} = H^p(\mathcal{Y}, R^qf_{\QCoh, *}\mathcal{F})
+$$
+이고 $H^{p + q}(\mathcal{X}, \mathcal{F})$로 수렴하는 스펙트럼 열이 존재한다.
+\end{lemma}
+
+\begin{proof}
+『사이트 위의 코호몰로지』의 보조정리
+\ref{sites-cohomology-lemma-Leray}에 의해 다음
+$$
+E_2^{p, q} = H^p(\mathcal{Y}, R^qf_*\mathcal{F})
+$$
+인 Leray 스펙트럼 열은 $H^{p + q}(\mathcal{X}, \mathcal{F})$로 수렴한다.
+수반 사상
+$$
+R^qf_{\QCoh, *}\mathcal{F} \longrightarrow R^qf_*\mathcal{F}
+$$
+의 핵과 여핵은 $\mathcal{Y}$ 위의 기생 가군이고
+(보조정리 \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}), 따라서 그 코호몰로지는
+소멸한다(보조정리 \ref{stacks-cohomology-lemma-pushforward-parasitic}). 형식적으로
+$H^p(\mathcal{Y}, R^qf_{\QCoh, *}\mathcal{F}) =
+H^p(\mathcal{Y}, R^qf_*\mathcal{F})$가 따르며 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-relative-leray}
+$f : \mathcal{X} \to \mathcal{Y}$와 $g : \mathcal{Y} \to \mathcal{Z}$를
+대수적 스택의 준콤팩트 준분리 사상이라 하자.
+$\mathcal{F}$를 $\mathcal{X}$ 위의 준연접 층이라 하자. 그러면
+$E_2$-쪽이
+$$
+E_2^{p, q} = R^pg_{\QCoh, *}(R^qf_{\QCoh, *}\mathcal{F})
+$$
+이고 $R^{p + q}(g \circ f)_{\QCoh, *}\mathcal{F}$로 수렴하는
+스펙트럼 열이 존재한다.
+\end{lemma}
+
+\begin{proof}
+『사이트 위의 코호몰로지』의 보조정리
+\ref{sites-cohomology-lemma-relative-Leray}에 의해 다음
+$$
+E_2^{p, q} = R^pg_*(R^qf_*\mathcal{F})
+$$
+인 Leray 스펙트럼 열은 $R^{p + q}(g \circ f)_*\mathcal{F}$로 수렴한다.
+명제 \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}의 결과들에 의해 이 스펙트럼
+열의 모든 항은 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Z})$의 대상이다.
+완전 함자 $Q_\mathcal{Z} :
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Z}) \to
+\QCoh(\mathcal{O}_\mathcal{Z})$를 적용하면
+$R^{p + q}(g \circ f)_{\QCoh, *}\mathcal{F}$를 덮는
+$\QCoh(\mathcal{O}_\mathcal{Z})$ 안의 스펙트럼 열을 얻는다. 따라서
+$$
+Q_\mathcal{Z}(R^pg_*(R^qf_*\mathcal{F})) =
+Q_\mathcal{Z}(R^pg_*(Q_\mathcal{X}(R^qf_*\mathcal{F}))
+$$
+임을 보이면 결과가 따른다. 이는 사상
+$$
+Q_\mathcal{X}(R^qf_*\mathcal{F}) \longrightarrow R^qf_*\mathcal{F}
+$$
+의 핵과 여핵이 기생이라는 사실(보조정리
+\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic})과, $R^pg_*$가 기생 가군을 기생 가군으로
+보낸다는 사실(보조정리 \ref{stacks-cohomology-lemma-pushforward-parasitic})에서 따른다.
+\end{proof}
+
+\noindent
+이 절을 마치기 위해 스킴에 의한 매끄러운 피복에 대응하는 스펙트럼 열들을
+명시하겠다. 『스택 위의 층』의 절
+\ref{stacks-sheaves-section-cohomology}와
+\ref{stacks-sheaves-section-higher-direct-images}를 비교하라.
+
+\begin{proposition}
+\label{stacks-cohomology-proposition-smooth-covering-compute-cohomology}
+$f : \mathcal{U} \to \mathcal{X}$를 대수적 스택의 사상이라 하자.
+$f$가 대수공간으로 표현가능하고, 전사이고, 평탄하며, 국소 유한 표시라고
+가정하자. $\mathcal{F}$를 준연접 $\mathcal{O}_\mathcal{X}$-가군이라 하자.
+그러면 스펙트럼 열
+$$
+E_2^{p, q} = H^q(\mathcal{U}_p, f_p^*\mathcal{F})
+\Rightarrow
+H^{p + q}(\mathcal{X}, \mathcal{F})
+$$
+이 있다. 여기서 $f_p$는 사상
+$\mathcal{U} \times_\mathcal{X} \ldots \times_\mathcal{X} \mathcal{U} \to
+\mathcal{X}$이다(인자는 $p + 1$개이다).
+\end{proposition}
+
+\begin{proof}
+이는 『스택 위의 층』의 명제
+\ref{stacks-sheaves-proposition-smooth-covering-compute-cohomology}의 특수한 경우이다.
+\end{proof}
+
+\begin{proposition}
+\label{stacks-cohomology-proposition-smooth-covering-compute-direct-image}
+$f : \mathcal{U} \to \mathcal{X}$와 $g : \mathcal{X} \to \mathcal{Y}$를
+합성 가능한 대수적 스택의 사상이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $f$는 대수공간으로 표현가능하고, 전사이고, 평탄하며,
+국소 유한 표시이고, 준콤팩트이며, 준분리이다.
+\item $g$는 준콤팩트이고 준분리이다.
+\end{enumerate}
+$\mathcal{F}$가 $\QCoh(\mathcal{O}_\mathcal{X})$에 속하면
+$\QCoh(\mathcal{O}_\mathcal{Y})$ 안의 스펙트럼 열
+$$
+E_2^{p, q} = R^q(g \circ f_p)_{\QCoh, *}f_p^*\mathcal{F}
+\Rightarrow
+R^{p + q}g_{\QCoh, *}\mathcal{F}
+$$
+이 있다.
+\end{proposition}
+
+\begin{proof}
+각 사상
+$f_p : \mathcal{U} \times_\mathcal{X} \ldots \times_\mathcal{X} \mathcal{U} \to
+\mathcal{X}$는 준콤팩트이고 준분리이며, 따라서 $g \circ f_p$도
+준콤팩트이고 준분리이다. 그러므로 주장은 의미가 있다
+(즉, 함자 $R^q(g \circ f_p)_{\QCoh, *}$가 정의된다).
+『스택 위의 층』의 명제
+\ref{stacks-sheaves-proposition-smooth-covering-compute-direct-image}에 의해
+스펙트럼 열
+$$
+E_2^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+이 있다. 완전 함자
+$Q_\mathcal{Y} : \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y}) \to
+\QCoh(\mathcal{O}_\mathcal{Y})$를 적용하면 원하는
+$\QCoh(\mathcal{O}_\mathcal{Y})$ 안의 스펙트럼 열을 얻는다.
+\end{proof}
+
+\section{준연접 가군에 관한 추가 주}
+\label{stacks-cohomology-section-further-remarks}
+
+\noindent
+이 절에서는 대수적 스택 위의 준연접 가군을 사용하는 방법을 이해하는 데
+도우려는 몇 가지 결과를 모은다.
+
+\medskip\noindent
+$f : \mathcal{U} \to \mathcal{X}$를 대수적 스택의 사상이라 하자.
+$\mathcal{U}$가 대수공간 $U$로 표현된다고 가정하자. 당김
+(『스택 위의 층』의 절 \ref{stacks-sheaves-section-modules})에 이어 제한
+(『스택 위의 층』의 절
+\ref{stacks-sheaves-section-restriction-algebraic-spaces})으로 주어지는 함자
+$$
+a :
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+\longrightarrow
+\textit{Mod}(U_\etale, \mathcal{O}_U),\quad
+\mathcal{F}
+\longmapsto
+f^*\mathcal{F}|_{U_\etale}
+$$
+를 생각하자. 이 함자를 국소 준연접 가군에 적용하면 함자
+$$
+b : \textit{LQCoh}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(U_\etale, \mathcal{O}_U)
+$$
+를 얻는다. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-pullback-lqc}와
+\ref{stacks-sheaves-lemma-compare-locally-quasi-coherent}를 보라.
+함자를 더 작은 부분범주들로 한정하여
+$$
+c :
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(U_\etale, \mathcal{O}_U)
+$$
+와
+$$
+d :
+\QCoh(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(U_\etale, \mathcal{O}_U)
+$$
+를 얻을 수도 있다. 이 함자들에 관해서는 다음을 말할 수 있다.\footnote{제시한
+참고문헌을 따라가기보다 냅킨 위에서 이 명제들이 왜 참인지 직접 풀어 보기를 권한다.}
+\begin{enumerate}
+\item 함자 $a$는 완전하다. 실제로 당김 $f^* = f^{-1}$은 완전하고
+(『스택 위의 층』의 절 \ref{stacks-sheaves-section-modules}),
+$U_\etale$에 대한 제한도 완전하다. 『스택 위의 층』의 식
+(\ref{stacks-sheaves-equation-restrict})을 보라.
+\item 함자 $b$는 완전하다. 실제로 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-lqc-colimits}에 의해 포함
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$는 완전하다.
+\item 함자 $c$는 완전하다. 실제로 명제
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해 포함 함자
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$는 완전하다.
+\item 함자 $d$는 오른쪽 완전하지만 일반적으로 완전하지 않다.
+실제로 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-qc-colimits}에 의해 포함 함자
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$는 오른쪽 완전하다.
+완전하지 않음을 보이는 예는 생략한다.
+\item $f$가 평탄하면 $d$는 완전하다. 이는 보조정리
+\ref{stacks-cohomology-lemma-flat-pullback-quasi-coherent}와 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-compare-quasi-coherent}를 결합하면 따른다.
+\item $f$가 평탄하면 $c$는 기생 대상을 영으로 보낸다.
+실제로 보조정리 \ref{stacks-cohomology-lemma-parasitic}에 의해 $f^*$는 기생 대상을 보존한다.
+그러면 $U$ 위에서 에탈이고 따라서 $\mathcal{X}$ 위에서 평탄한 임의의 스킴
+$V$에 대해, 에탈 국소화와 제한의 양립성에 의해
+$0 = f^*\mathcal{F}|_{V_\etale} = c(\mathcal{F})|_{V_\etale}$이다.
+『스택 위의 층』의 주 \ref{stacks-sheaves-remark-compare}를 보라.
+따라서 명백히 $c(\mathcal{F}) = 0$이다.
+\item $f$가 평탄하면 $c = d \circ Q$이다. 실제로 보조정리
+\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}에 의해
+$Q(\mathcal{F}) \to \mathcal{F}$의 핵과 여핵은 기생이다.
+따라서 $c$가 완전하고 (3) 기생 대상을 영으로 보내므로 (6),
+$Q(\mathcal{F}) \to \mathcal{F}$에 $c$를 적용하면 동형이 된다.
+\item 함자 $a, b, c, d$는 쌍대극한 및 임의의 직합과 가환한다.
+$f^*$와 제한은 왼쪽 수반이므로 이에 대해 참하고, 따라서 $a$에 대해 참이다.
+그러면 위에서 제시한 참고문헌들에 의해 $b$, $c$, $d$에 대해서도 따른다.
+\item 함자 $a, b, c, d$는 텐서곱과 가환한다.
+\item $f$가 평탄하고 전사이며,
+$\mathcal{F}$가 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속하고,
+$c(\mathcal{F}) = 0$이면 $\mathcal{F}$는 기생이다. 실제로 (7)에 의해
+$d(Q(\mathcal{F})) = 0$이다. 에탈 국소화와 제한의 양립성에 의해
+$U$가 스킴이라고 가정해도 된다(위 참고문헌을 보라).
+이제 $0 \to Q(\mathcal{F})$와 사상 $f : U \to \mathcal{X}$에
+보조정리 \ref{stacks-cohomology-lemma-quasi-coherent-check-exact}를 적용하면
+$Q(\mathcal{F}) = 0$임을 알 수 있다. 따라서 보조정리
+\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}에 의해 $\mathcal{F}$는 기생이다.
+\item $f$가 평탄하고 전사이면 함자 $d$는 완전성을 반영한다.
+더 정확히, $\mathcal{F}^\bullet$을
+$\QCoh(\mathcal{O}_\mathcal{X})$ 안의 복합체라 하자. 그러면
+$\mathcal{F}^\bullet$이 $\QCoh(\mathcal{O}_\mathcal{X})$에서 완전인 것과
+$d(\mathcal{F}^\bullet)$이 완전인 것은 동치이다. 실제로 한 방향은 (5)에서
+보았다. 다른 방향을 위해 $H^i(d(\mathcal{F}^\bullet)) = 0$이라고 하자.
+그러면 $\mathcal{G} = H^i(\mathcal{F}^\bullet)$은
+$d(\mathcal{G}) = 0$을 만족하는
+$\QCoh(\mathcal{O}_\mathcal{X})$의 대상이다. 따라서 (10)에 의해
+$\mathcal{G}$는 준연접이면서 기생이고, 예를 들어 주
+\ref{stacks-cohomology-remark-bousfield-colocalization}에 의해 $0$이다.
+\item
+\label{stacks-cohomology-item-hom-restriction}
+$f$가 평탄이고,
+$\mathcal{F}, \mathcal{G} \in \Ob(\QCoh(\mathcal{O}_\mathcal{X}))$이며,
+$\mathcal{F}$가 유한 표시이고 두자. 그러면
+$$
+d(hom(\mathcal{F}, \mathcal{G})) =
+\SheafHom_{\mathcal{O}_U}(d(\mathcal{F}), d(\mathcal{G}))
+$$
+이다. 표기법은 보조정리 \ref{stacks-cohomology-lemma-internal-hom-fp-into-qcoh}에서와 같다.
+이를 보는 가장 쉬운 방법은 아마 다음과 같을 것이다.
+\begin{align*}
+d(hom(\mathcal{F}, \mathcal{G}))
+& =
+d(Q(\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G}))) \\
+& =
+c(\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})) \\
+& =
+f^*\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})|_{U_\etale} \\
+& =
+\SheafHom_{\mathcal{O}_\mathcal{U}}(f^*\mathcal{F},
+f^*\mathcal{G})|_{U_\etale} \\
+& =
+\SheafHom_{\mathcal{O}_U}(f^*\mathcal{F}|_{U_\etale},
+f^*\mathcal{G}|_{U_\etale})
+\end{align*}
+첫 번째 등식은 $hom$의 구성에서 따른다. 두 번째 등식은 (7)에서 따른다.
+세 번째 등식은 $c$의 정의에서 따른다. 네 번째 등식은 『사이트 위의 가군』의
+보조정리 \ref{sites-modules-lemma-pullback-internal-hom}에서 따른다.
+마지막 등식은 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-compare}의 환 달린 토포스의 평탄 사상
+$i_U (U_\etale, \mathcal{O}_U) \to
+(\mathcal{U}_\etale, \mathcal{O}_\mathcal{U})$에 같은 참고문헌을 적용하면 따른다.
+\item 여기에 더 추가하라.
+\end{enumerate}
+
+\section{쌍대극한과 코호몰로지}
+\label{stacks-cohomology-section-colimits}
+
+\noindent
+특히 다음 보조정리는 준연접 층의 도식에 적용된다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-colimits}
+$\mathcal{X}$를 준콤팩트 준분리 대수적 스택이라 하자. 그러면
+$\mathcal{X}$ 위의 아벨 층들의 모든 여과 도식에 대해
+$$
+\colim_i H^p(\mathcal{X}, \mathcal{F}_i)
+\longrightarrow
+H^p(\mathcal{X}, \colim_i \mathcal{F}_i)
+$$
+는 동형이다. $\mathcal{X}_\etale$ 위의 아벨 층에 대해 에탈 위상에서
+코호몰로지를 취하는 경우에도 마찬가지이다.
+\end{lemma}
+
+\begin{proof}
+$\tau = fppf$, 각각 $\tau = \etale$라 하자. 이 보조정리는 사이트
+$\mathcal{X}_\tau$에 『사이트 위의 코호몰로지』의 보조정리
+\ref{sites-cohomology-lemma-colim-global}을 적용하면 따른다.
+그 가정을 확인하기 위해 『사이트 위의 코호몰로지』의 주
+\ref{sites-cohomology-remark-colim-global}를 사용한다.
+구체적으로 $\mathcal{B} \subset \Ob(\mathcal{X}_\tau)$를 아핀 스킴 위에
+놓인 대상들의 집합이라 하자. 달리 말해 $\mathcal{B}$의 원소는
+$U$가 아핀인 사상 $x : U \to \mathcal{X}$이다.
+그 주의 조건 (1)--(4)를 차례로 확인하자.
+\begin{enumerate}
+\item $\mathcal{X}$가 준콤팩트이므로 $U$가 아핀인 매끄러운 전사 사상
+$x : U \to \mathcal{X}$가 존재한다(『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-quasi-compact-stack}).
+그러면 $h_x^\# \to *$는 $\mathcal{X}_\tau$ 위의 층의 전사 사상이다.
+\item $\mathcal{X}_\tau$의 피복들은 fppf, 각각 에탈 피복이므로,
+$U \in \mathcal{B}$의 모든 피복은 유한 아핀 fppf 피복에 의해 세분된다.
+『위상들』의 보조정리 \ref{topologies-lemma-fppf-affine}, 각각 보조정리
+\ref{topologies-lemma-etale-affine}을 보라.
+\item $x : U \to \mathcal{X}$와 $x' : U' \to \mathcal{X}$가
+$\mathcal{B}$에 속한다고 하자.
+$\Sh(\mathcal{X}_\tau)$에서의 곱 $h_x^\# \times h_{x'}^\#$은
+$\mathcal{X}$ 위의 대수공간
+$W = U \times_{x, \mathcal{X}, x'} U'$로 결정되는
+$\mathcal{X}_\tau$ 위의 층과 같다. 즉, $\mathcal{X}_\tau$의 대상
+$y : V \to \mathcal{X}$에 대해
+$(h_x^\# \times h_{x'}^\#)(y) = \{f : V \to W \mid y =
+x \circ \text{pr}_1 \circ f = x' \circ \text{pr}_2 \circ f\}$이다.
+$\mathcal{X}$가 준분리이므로 대수공간 $W$는 준콤팩트이다.
+예를 들어 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-quasi-compact-quasi-separated-permanence}를 보라.
+따라서 아핀 스킴 $U''$과 에탈 전사 사상 $U'' \to W$를 택할 수 있다.
+$U'' \to W$와 $W \to \mathcal{X}$의 합성을
+$x'' : U'' \to \mathcal{X}$라 쓰자. 그러면 원하는 대로
+$h_{x''}^\# \to h_x^\# \times h_{x'}^\#$는 전사이다.
+\item $x : U \to \mathcal{X}$와 $x' : U' \to \mathcal{X}$가
+$\mathcal{B}$에 속한다고 하자. $a, b : U \to U'$를
+$\mathcal{X}$ 위의 사상이라 하자. 즉, $a, b : x \to x'$는
+$\mathcal{X}_\tau$의 사상이다. 그러면 $h_a$와 $h_b$의 등화자는
+$a, b : U \to U'$의 등화자로 표현되며, 이는 $\mathcal{X}$ 위의 아핀
+스킴이므로 $\mathcal{B}$에 속한다.
+\end{enumerate}
+이로써 증명을 끝냈다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-colimit-cohomology}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 준콤팩트 준분리 사상이라 하자.
+$\mathcal{F} = \colim \mathcal{F}_i$를 $\mathcal{X}$ 위의 아벨 층들의 여과
+쌍대극한이라 하자. 그러면 임의의 $p \geq 0$에 대해 다음이 성립한다.
+$$
+R^pf_*\mathcal{F} = \colim R^pf_*\mathcal{F}_i.
+$$
+$\mathcal{X}_\etale$ 위의 아벨 층에 대해 에탈 위상에서 고차
+직상을 취하는 경우에도 마찬가지이다.
+\end{lemma}
+
+\begin{proof}
+fppf 위상에 대해 증명하겠다. 에탈 위상에 대한 증명도 같다.
+$R^if_*\mathcal{F}$는 준층
+$$
+(y : V \to \mathcal{Y})
+\longmapsto
+H^i(V \times_{y, \mathcal{Y}} \mathcal{X}, \text{pr}^{-1}\mathcal{F})
+$$
+에 연관된 $\mathcal{Y}_{fppf}$ 위의 층임을 상기하라.
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-pushforward-restriction}을 보라.
+쌍대극한은 준층 쌍대극한에 연관된 층임도 상기하라.
+$V$가 아핀이면 섬유곱 $V \times_\mathcal{Y} \mathcal{X}$는
+준콤팩트이고 준분리이다. 따라서 $V$가 아핀일 때
+$H^p(V \times_\mathcal{Y} \mathcal{X}, -)$에 보조정리
+\ref{stacks-cohomology-lemma-colimits}를 적용할 수 있다. 모든 $V$는 아핀 대상들에 의한
+fppf 피복을 가지므로 보조정리가 증명된다. 일부 세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-quasi-coherent-pushforward-direct-sums}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 준콤팩트 준분리 사상이라 하자.
+함자 $f_{\QCoh, *}$와 함자 $R^if_{\QCoh, *}$는 직합 및 여과 쌍대극한과 가환한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{stacks-cohomology-lemma-colimit-cohomology}에 의해 함자 $f_*$와 $R^if_*$는
+모든 가군에서 직합 및 여과 쌍대극한과 가환한다.
+$f_{\QCoh, *} = Q \circ f_*$이고
+$R^if_{\QCoh, *} = Q \circ R^if_*$이며, 보조정리
+\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}에 의해 $Q$가 모든 쌍대극한과 가환하므로
+결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-quasi-coherent-pushforward-affine}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 아핀 사상이라 하자.
+함자 $R^if_{\QCoh, *}$, $i > 0$은 소멸하고, 함자 $f_{\QCoh, *}$는
+완전하며 직합 및 모든 쌍대극한과 가환한다.
+\end{lemma}
+
+\begin{proof}
+$R^if_{\QCoh, *} = Q \circ R^if_*$이므로 보조정리
+\ref{stacks-cohomology-lemma-loc-qcoh-fbc-affine-direct-image}에서 소멸을 얻는다.
+$\{R^if_{\QCoh, *}\}_{i \geq 0}$가 $\delta$-함자를 이루므로 그 소멸은
+$f_{\QCoh, *}$가 완전임을 함의한다. 명제
+\ref{stacks-cohomology-proposition-direct-image-quasi-coherent}를 보라.
+그러면 예를 들어 보조정리 \ref{stacks-cohomology-lemma-quasi-coherent-pushforward-direct-sums}에
+의해 $f_{\QCoh, *}$는 직합과 가환한다. 직합과 가환하는 완전 함자는
+모든 쌍대극한과 가환한다.
+\end{proof}
+
+\noindent
+다음 보조정리는 준콤팩트 준분리 대수적 스택에서 유한 표시 가군이
+예상대로 행동함을 알려 준다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-finite-presentation-quasi-compact-colimit}
+$\mathcal{X}$를 준콤팩트 준분리 대수적 스택이라 하자. $I$를 유향 집합이라 하고,
+$(\mathcal{F}_i, \varphi_{ii'})$를 $I$ 위의
+$\mathcal{O}_\mathcal{X}$-가군들의 계라 하자. $\mathcal{G}$를 유한 표시인
+$\mathcal{O}_\mathcal{X}$-가군이라 하자. 그러면 다음이 성립한다.
+$$
+\colim_i \Hom_\mathcal{X}(\mathcal{G}, \mathcal{F}_i)
+=
+\Hom_\mathcal{X}(\mathcal{G}, \colim_i \mathcal{F}_i).
+$$
+특히 $\Hom_\mathcal{X}(\mathcal{G}, -)$는
+$\QCoh(\mathcal{O}_\mathcal{X})$에서 여과 쌍대극한과 가환한다.
+\end{lemma}
+
+\begin{proof}
+표시된 등식은 『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-finite-presentation-quasi-compact-colimit}의
+특수한 경우이다. 이를 적용하려면 사이트 $\mathcal{X}_{fppf}$에 대해
+『사이트』의 보조정리 \ref{sites-lemma-directed-colimits-global-sections}의
+(4)의 가정을 확인해야 한다. 이를 위해 『사이트』의 주
+\ref{sites-remark-stronger-conditions}의 가정 (2)(a), (2)(b), (2)(c)를
+확인하겠다. 구체적으로 $\mathcal{B} \subset \Ob(\mathcal{X}_{fppf})$를
+아핀 스킴 위에 놓인 대상들의 집합이라 하자. 달리 말해 $\mathcal{B}$의
+원소는 $U$가 아핀인 사상 $x : U \to \mathcal{X}$이다.
+그 주의 조건 (2)(a), (2)(b), (2)(c)를 차례로 확인하자.
+\begin{enumerate}
+\item $\mathcal{X}$가 준콤팩트이므로 $U$가 아핀인 매끄러운 전사 사상
+$x : U \to \mathcal{X}$가 존재한다(『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-quasi-compact-stack}).
+그러면 $h_x^\# \to *$는 $\mathcal{X}_{fppf}$ 위의 층의 전사 사상이다.
+\item $\mathcal{X}_{fppf}$의 피복들은 fppf 피복이므로,
+$U \in \mathcal{B}$의 모든 피복은 유한 아핀 fppf 피복에 의해 세분된다.
+『위상들』의 보조정리 \ref{topologies-lemma-fppf-affine}을 보라.
+\item $x : U \to \mathcal{X}$와 $x' : U' \to \mathcal{X}$가
+$\mathcal{B}$에 속한다고 하자.
+$\Sh(\mathcal{X}_{fppf})$에서의 곱 $h_x^\# \times h_{x'}^\#$은
+$\mathcal{X}$ 위의 대수공간
+$W = U \times_{x, \mathcal{X}, x'} U'$로 결정되는
+$\mathcal{X}_{fppf}$ 위의 층과 같다. 즉, $\mathcal{X}_{fppf}$의 대상
+$y : V \to \mathcal{X}$에 대해
+$(h_x^\# \times h_{x'}^\#)(y) = \{f : V \to W \mid y =
+x \circ \text{pr}_1 \circ f = x' \circ \text{pr}_2 \circ f\}$이다.
+$\mathcal{X}$가 준분리이므로 대수공간 $W$는 준콤팩트이다.
+예를 들어 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-quasi-compact-quasi-separated-permanence}를 보라.
+따라서 아핀 스킴 $U''$과 에탈 전사 사상 $U'' \to W$를 택할 수 있다.
+$U'' \to W$와 $W \to \mathcal{X}$의 합성을
+$x'' : U'' \to \mathcal{X}$라 쓰자. 그러면 원하는 대로
+$h_{x''}^\# \to h_x^\# \times h_{x'}^\#$는 전사이다.
+\end{enumerate}
+마지막 명제를 위해 포함 함자
+$\QCoh(\mathcal{O}_X) \to \textit{Mod}(\mathcal{O}_X)$가 쌍대극한과
+가환하고 유한 표시 가군이 준연접임에 유의하라. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack}을 보라.
+\end{proof}
+
+\section{리스-에탈 사이트와 평탄-fppf 사이트}
+\label{stacks-cohomology-section-lisse-etale}
+
+\noindent
+책 \cite{LM-B}에서는 위의 결과들 가운데 많은 것을 대수적 스택의
+리스-에탈 사이트를 사용하여 증명한다. 여기서 이 사이트를 정의한다.
+『예』의 절 \ref{examples-section-lisse-etale-not-functorial}에서는
+리스-에탈 사이트가 함자적이지 않음을 보인다.
+또한 그 유사물인 평탄-fppf 사이트도 정의하는데, 이는 Stacks 프로젝트에서
+제시하는 대수적 스택의 전개에 더 잘 맞는다(우리는 fppf 위상을 바탕 위상으로
+사용하기 때문이다). 물론 평탄-fppf 사이트도 함자적이지 않다.
+
+\begin{definition}
+\label{stacks-cohomology-definition-lisse-etale}
+$\mathcal{X}$를 대수적 스택이라 하자.
+\begin{enumerate}
+\item $\mathcal{X}$의 {\it 리스-에탈 사이트}는 $\mathcal{X}$의 충만한
+부분범주 $\mathcal{X}_{lisse,\etale}$이다.\footnote{문헌에서는 이 사이트를
+$\text{Lis-\'et}(\mathcal{X})$ 또는 $\text{Lis-Et}(\mathcal{X})$로 쓰고,
+연관된 토포스를 $\mathcal{X}_{\text{lis-\'e}t}$ 또는
+$\mathcal{X}_{\text{lis-et}}$로 쓴다. Stacks 프로젝트의 규약은 사이트에
+이름을 붙이고 대응하는 토포스를 $\Sh(\mathcal{C})$로 나타내는 것이다.}
+그 대상은 스킴 $U$ 위에 놓인 $x \in \Ob(\mathcal{X})$ 가운데
+$x : U \to \mathcal{X}$가 매끄러운 것들이다.
+$\mathcal{X}_{lisse,\etale}$의 피복은
+$\mathcal{X}_\etale$의 피복을 이루는
+$\mathcal{X}_{lisse,\etale}$의 사상들의 족
+$\{x_i \to x\}_{i \in I}$이다.
+\item $\mathcal{X}$의 {\it 평탄-fppf 사이트}는 $\mathcal{X}$의 충만한
+부분범주 $\mathcal{X}_{flat,fppf}$이다. 그 대상은 스킴 $U$ 위에 놓인
+$x \in \Ob(\mathcal{X})$ 가운데 $x : U \to \mathcal{X}$가 평탄한 것들이다.
+$\mathcal{X}_{flat,fppf}$의 피복은 $\mathcal{X}_{fppf}$의 피복을 이루는
+$\mathcal{X}_{flat,fppf}$의 사상들의 족
+$\{x_i \to x\}_{i \in I}$이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$\mathcal{O}_{\mathcal{X}_{lisse,\etale}}$로
+$\mathcal{O}_\mathcal{X}$를 리스-에탈 사이트에 제한한 것을 나타내며,
+$\mathcal{O}_{\mathcal{X}_{flat,fppf}}$도 마찬가지이다.
+리스-에탈 사이트와 에탈 사이트의 관계는 다음과 같다
+(이 보조정리에서는 주로 ``위상적'' 성질들만 다룬다).
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale}
+$\mathcal{X}$를 대수적 스택이라 하자.
+\begin{enumerate}
+\item 포함 함자
+$\mathcal{X}_{lisse,\etale} \to \mathcal{X}_\etale$는 완전충실하고,
+연속이며, 쌍연속이다. 따라서 다음이 성립한다.
+\begin{enumerate}
+\item 토포스의 사상
+$$
+g :
+\Sh(\mathcal{X}_{lisse,\etale})
+\longrightarrow
+\Sh(\mathcal{X}_\etale)
+$$
+이 있고, $g^{-1}$은 제한으로 주어진다.
+\item 집합의 층에서 함자 $g^{-1}$은 왼쪽 수반 $g_!^{Sh}$를 가진다.
+\item 수반 사상 $g^{-1}g_* \to \text{id}$와
+$\text{id} \to g^{-1}g_!^{Sh}$는 동형이다.
+\item 아벨 층에서 함자 $g^{-1}$은 왼쪽 수반 $g_!$을 가진다.
+\item 수반 사상 $\text{id} \to g^{-1}g_!$은 동형이다.
+\item $g^{-1}\mathcal{O}_\mathcal{X} =
+\mathcal{O}_{\mathcal{X}_{lisse,\etale}}$이다. 따라서 $g$는
+$g^{-1} = g^*$인 환 달린 토포스의 평탄 사상을 유도한다.
+\end{enumerate}
+\item 포함 함자
+$\mathcal{X}_{flat,fppf} \to \mathcal{X}_{fppf}$는 완전충실하고,
+연속이며, 쌍연속이다. 따라서 다음이 성립한다.
+\begin{enumerate}
+\item 토포스의 사상
+$$
+g :
+\Sh(\mathcal{X}_{flat,fppf})
+\longrightarrow
+\Sh(\mathcal{X}_{fppf})
+$$
+이 있고, $g^{-1}$은 제한으로 주어진다.
+\item 집합의 층에서 함자 $g^{-1}$은 왼쪽 수반 $g_!^{Sh}$를 가진다.
+\item 수반 사상 $g^{-1}g_* \to \text{id}$와
+$\text{id} \to g^{-1}g_!^{Sh}$는 동형이다.
+\item 아벨 층에서 함자 $g^{-1}$은 왼쪽 수반 $g_!$을 가진다.
+\item 수반 사상 $\text{id} \to g^{-1}g_!$은 동형이다.
+\item $g^{-1}\mathcal{O}_\mathcal{X} =
+\mathcal{O}_{\mathcal{X}_{flat,fppf}}$이다. 따라서 $g$는
+$g^{-1} = g^*$인 환 달린 토포스의 평탄 사상을 유도한다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+두 경우 모두 함자가 완전충실하고 연속이며 쌍연속임은 즉시 알 수 있다
+(『사이트』의 정의 \ref{sites-definition-continuous}와
+\ref{sites-definition-cocontinuous}를 보라).
+따라서 성질 (a), (b), (c)는 『사이트』의 보조정리
+\ref{sites-lemma-when-shriek}와 \ref{sites-lemma-back-and-forth}에서 따른다.
+(d), (e)는 『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-g-shriek-adjoint}와
+\ref{sites-modules-lemma-back-and-forth}에서 따른다.
+(f)는 즉시 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-cohomology}
+$\mathcal{X}$를 대수적 스택이라 하자. 표기법은 보조정리
+\ref{stacks-cohomology-lemma-lisse-etale}에서와 같다.
+\begin{enumerate}
+\item $\mathcal{X}_\etale$ 위의 아벨 층 $\mathcal{F}$에 대해 다음이 성립한다.
+\begin{enumerate}
+\item $H^p(\mathcal{X}_\etale, \mathcal{F}) =
+H^p(\mathcal{X}_{lisse,\etale}, g^{-1}\mathcal{F})$이다.
+\item $\mathcal{X}_{lisse,\etale}$의 임의의 대상 $x$에 대해
+$H^p(x, \mathcal{F}) =
+H^p(\mathcal{X}_{lisse,\etale}/x, g^{-1}\mathcal{F})$이다.
+\end{enumerate}
+가군층에 대해서도 마찬가지이다.
+\item $\mathcal{X}_{fppf}$ 위의 아벨 층 $\mathcal{F}$에 대해 다음이 성립한다.
+\begin{enumerate}
+\item $H^p(\mathcal{X}_{fppf}, \mathcal{F}) =
+H^p(\mathcal{X}_{flat,fppf}, g^{-1}\mathcal{F})$이다.
+\item $\mathcal{X}_{flat,fppf}$의 임의의 대상 $x$에 대해
+$H^p(x, \mathcal{F}) =
+H^p(\mathcal{X}_{flat,fppf}/x, g^{-1}\mathcal{F})$이다.
+\end{enumerate}
+가군층에 대해서도 마찬가지이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)(a)는 포함 함자
+$\mathcal{X}_{lisse,\etale} \to \mathcal{X}_\etale$에
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-cohomology-on-subcategory}를 적용하면 따른다.
+(1)(b)는 (1)(a)에서 따른다. 구체적으로 $x$가 스킴 $U$ 위에 놓이면
+사이트 $\mathcal{X}_\etale/x$는 $(\Sch/U)_\etale$와 동치이고,
+$\mathcal{X}_{lisse,\etale}$는 $U_{lisse,\etale}$와 동치이다.
+(2)도 같은 방식으로 증명한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-modules}
+$\mathcal{X}$를 대수적 스택이라 하자. 표기법은 보조정리
+\ref{stacks-cohomology-lemma-lisse-etale}에서와 같다.
+\begin{enumerate}
+\item $g^*$의 왼쪽 수반인 함자
+$$
+g_! :
+\textit{Mod}(\mathcal{X}_{lisse,\etale},
+\mathcal{O}_{\mathcal{X}_{lisse,\etale}})
+\longrightarrow
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_{\mathcal{X}})
+$$
+이 존재한다. 더욱이 이는 아벨 층에서의 함자 $g_!$과 일치하고
+$g^*g_! = \text{id}$이다.
+\item $g^*$의 왼쪽 수반인 함자
+$$
+g_! :
+\textit{Mod}(\mathcal{X}_{flat,fppf},
+\mathcal{O}_{\mathcal{X}_{flat,fppf}})
+\longrightarrow
+\textit{Mod}(\mathcal{X}_{fppf}, \mathcal{O}_{\mathcal{X}})
+$$
+이 존재한다. 더욱이 이는 아벨 층에서의 함자 $g_!$과 일치하고
+$g^*g_! = \text{id}$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+두 경우 모두 함자 $g_!$의 존재는 『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-lower-shriek-modules}에서 따른다.
+$g_!$이 아벨 층에서의 함자와 일치함을 보기 위해 『사이트 위의 가군』의 식
+(\ref{sites-modules-equation-compare-on-localizations})의 사상들이
+동형임을 보이겠다.
+
+\medskip\noindent
+리스-에탈 경우. $x \in \Ob(\mathcal{X}_{lisse,\etale})$가 스킴 $U$ 위에
+놓이고 $x : U \to \mathcal{X}$가 매끄럽다고 하자. 유도된 완전충실 함자
+$$
+g' :
+\mathcal{X}_{lisse,\etale}/x
+\longrightarrow
+\mathcal{X}_\etale/x
+$$
+를 생각하자. 오른쪽은 $(\Sch/U)_\etale$와 동일시되고,
+왼쪽은 합성 $U' \to U \to \mathcal{X}$가 매끄러운 스킴 $U'/U$들의
+충만한 부분범주와 동일시된다. 따라서 『에탈 코호몰로지』의 보조정리
+\ref{etale-cohomology-lemma-compare-structure-sheaves}를 적용할 수 있다.
+
+\medskip\noindent
+평탄-fppf 경우. $x \in \Ob(\mathcal{X}_{flat,fppf})$가 스킴 $U$ 위에
+놓이고 $x : U \to \mathcal{X}$가 평탄하다고 하자. 유도된 완전충실 함자
+$$
+g' :
+\mathcal{X}_{flat,fppf}/x
+\longrightarrow
+\mathcal{X}_{fppf}/x
+$$
+를 생각하자. 오른쪽은 $(\Sch/U)_{fppf}$와 동일시되고,
+왼쪽은 합성 $U' \to U \to \mathcal{X}$가 평탄한 스킴 $U'/U$들의
+충만한 부분범주와 동일시된다. 따라서 『에탈 코호몰로지』의 보조정리
+\ref{etale-cohomology-lemma-compare-structure-sheaves}를 적용할 수 있다.
+
+\medskip\noindent
+두 경우 모두 등식 $g^*g_! = \text{id}$는 $g^* = g^{-1}$과
+보조정리 \ref{stacks-cohomology-lemma-lisse-etale}의 아벨 층에 대한 등식에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-structure-sheaf}
+$\mathcal{X}$를 대수적 스택이라 하자. 표기법은 보조정리
+\ref{stacks-cohomology-lemma-lisse-etale}와 \ref{stacks-cohomology-lemma-lisse-etale-modules}에서와 같다.
+\begin{enumerate}
+\item $g_!\mathcal{O}_{\mathcal{X}_{lisse,\etale}} =
+\mathcal{O}_\mathcal{X}$이다.
+\item $g_!\mathcal{O}_{\mathcal{X}_{flat, fppf}} =
+\mathcal{O}_\mathcal{X}$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이 증명에서는
+$\mathcal{C} = \mathcal{X}_\etale$
+(각각 $\mathcal{C} = \mathcal{X}_{fppf}$)라 쓰고,
+$\mathcal{C}' = \mathcal{X}_{lisse,\etale}$
+(각각 $\mathcal{C}' = \mathcal{X}_{flat, fppf}$)라 쓰겠다.
+그러면 $\mathcal{C}'$은 $\mathcal{C}$의 충만한 부분범주이다.
+이 증명에서는 $\mathcal{C}$의 대상 $V$를 $\mathcal{X}$ 위의 스킴으로,
+$\mathcal{C}'$의 대상 $U$를 $\mathcal{X}$ 위에서 매끄러운
+(각각 평탄한) 스킴으로 생각하겠다. 마지막으로
+$\mathcal{O} = \mathcal{O}_\mathcal{X}$라 쓰고,
+$\mathcal{O}' = \mathcal{O}_{\mathcal{X}_{lisse,\etale}}$
+(각각 $\mathcal{O}' = \mathcal{O}_{\mathcal{X}_{flat,fppf}}$)라 쓰겠다.
+위 표기법으로 $\mathcal{O}(V) = \Gamma(V, \mathcal{O}_V)$이고
+$\mathcal{O}'(U) = \Gamma(U, \mathcal{O}_U)$이다.
+동일시 $\mathcal{O}' = g^{-1}\mathcal{O}$의 수반인
+$\mathcal{O}$-가군 준동형 $g_!\mathcal{O}' \to \mathcal{O}$를 생각하자.
+
+\medskip\noindent
+$g_!\mathcal{O}'$은 규칙
+$$
+V \longmapsto \colim_{V \to U} \mathcal{O}'(U)
+$$
+으로 주어지는 준층 $g_{p!}\mathcal{O}'$에 연관된 층임을 상기하라.
+여기서 쌍대극한은 아벨 군의 범주에서 취한다(『사이트 위의 가군』의 정의
+\ref{sites-modules-definition-g-shriek}). 아래에서는 사상
+$$
+V \to U \to U'
+$$
+이 있고 $f' \in \mathcal{O}'(U')$가 $f \in \mathcal{O}'(U)$로 제한되면,
+$(V \to U, f)$와 $(V \to U', f')$가 쌍대극한의 같은 원소를 정의한다는 사실을
+자주 사용하겠다. 또한 $g_!\mathcal{O}' \to \mathcal{O}$는 원소
+$(V \to U, f)$를 단순히 $f$를 $V$로 당긴 것으로 보낸다.
+
+\medskip\noindent
+$g_!\mathcal{O}' \to \mathcal{O}$가 전사임을 증명하자.
+$\mathcal{C}$의 어떤 대상 $V$에 대해 $h \in \mathcal{O}(V)$라 하자.
+$h$가 국소적으로 상에 속함을 보이면 충분하다. 매끄러운 전사 사상
+$U \to \mathcal{X}$에 대응하는 $\mathcal{C}'$의 대상 $U$를 택한다.
+$U \times_\mathcal{X} V \to V$가 매끄러운 전사이므로, $V$를 $V$의 어떤
+에탈 피복의 원소들로 바꾸면 사상 $V \to U$가 존재한다고 가정해도 된다.
+『공간 위의 위상들』의 보조정리
+\ref{spaces-topologies-lemma-etale-dominates-smooth}를 보라.
+$h$를 사용하여 사상 $V \to U \times \mathbf{A}^1$을 얻는데,
+$\mathbf{A}^1 = \Spec(\mathbf{Z}[t])$라 쓰면 원소
+$t \in \mathcal{O}(U \times \mathbf{A}^1)$가 $h$로 당겨진다.
+$U \times \mathbf{A}^1$은 $\mathcal{C}'$의 대상이므로
+$(V \to U \times \mathbf{A}^1, t)$는 위 쌍대극한의 원소이고,
+원하는 대로 $h \in \mathcal{O}(V)$로 간다.
+
+\medskip\noindent
+$s \in g_!\mathcal{O}'(V)$가 $\mathcal{O}(V)$의 영으로 가는 단면이라고 하자.
+증명을 마치려면 $s$가 영임을 보여야 한다. $V$를 어떤 피복의 원소들로
+바꾸어 $s$가 쌍대극한
+$$
+\colim_{V \to U} \mathcal{O}'(U)
+$$
+의 원소라고 가정해도 된다. $s = \sum (\varphi_i, s_i)$가 유한합이고,
+$\varphi_i : V \to U_i$, $U_i$는 $\mathcal{X}$ 위에서 매끄러우며
+(각각 평탄하며), $s_i \in \Gamma(U_i, \mathcal{O}_{U_i})$라고 하자.
+대수공간 $U = U_1 \times_\mathcal{X} \ldots \times_\mathcal{X} U_n$ 위의
+에탈 전사 스킴 $W$를 택한다. $W$는 여전히 $\mathcal{X}$ 위에서
+매끄럽고(각각 평탄하고), 즉 $\mathcal{C}'$의 대상을 정의함에 유의하라.
+섬유곱
+$$
+V' = V \times_{(\varphi_1, \ldots, \varphi_n), U} W
+$$
+은 $V$ 위에서 에탈 전사이므로, $s$가 $g_!\mathcal{O}'(V')$의 영으로
+감을 보이면 충분하다. 제한 $\sum (\varphi_i, s_i)|_{V'}$는 함수 $s_i$들을
+$W$로 당긴 것들의 합에 대응함에 유의하라. 달리 말해,
+$\varphi : V \to U$가 $U$가 $\mathcal{C}'$에 속하는 사상이고
+$s \in \mathcal{O}'(U)$가 $\mathcal{O}(V)$의 영으로 제한되는
+$(\varphi, s)$의 경우로 환원했다. 가환 도식
+$$
+\xymatrix{
+V \ar[rr]_-{(\varphi, 0)} \ar[rrd]_\varphi & & U \times \mathbf{A}^1 \\
+& & U \ar[u]_{(\text{id}, 0)}
+}
+$$
+에 의해
+$((\varphi, 0) : V \to U \times \mathbf{A}^1, \text{pr}_2^*x)$는
+위 쌍대극한의 영을 나타낸다. 따라서 $U$를 $U \times \mathbf{A}^1$로,
+$\varphi$를 $(\varphi, 0)$으로, $s$를
+$\text{pr}_1^*s + \text{pr}_2^*x$로 바꾸어도 된다. 그러므로 $U$ 안에서
+$s$의 영점 자취 $Z : s = 0$이 $\mathcal{X}$ 위에서 매끄럽다고
+(각각 평탄하다고) 가정해도 된다. 이제 $(V \to Z, 0)$과
+$(\varphi, s)$가 쌍대극한에서 같은 값을 가짐을 알 수 있다. 즉, 원하는 대로
+원소 $s$가 영임을 알 수 있다.
+\end{proof}
+
+\noindent
+리스-에탈 사이트와 평탄-fppf 사이트를 사용하여 기생 가군을 다음과 같이
+특성화할 수 있다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-parasitic-in-terms-flat-fppf}
+$\mathcal{X}$를 대수적 스택이라 하자.
+\begin{enumerate}
+\item $\mathcal{F}$를 $\mathcal{X}_\etale$ 위에서 평탄 밑변환 성질을 가진
+$\mathcal{O}_\mathcal{X}$-가군이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $\mathcal{F}$는 기생이다.
+\item 보조정리 \ref{stacks-cohomology-lemma-lisse-etale}에서와 같은
+$g : \Sh(\mathcal{X}_{lisse,\etale}) \to
+\Sh(\mathcal{X}_\etale)$에 대해 $g^*\mathcal{F} = 0$이다.
+\end{enumerate}
+\item $\mathcal{F}$를 $\mathcal{X}_{fppf}$ 위의
+$\mathcal{O}_\mathcal{X}$-가군이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $\mathcal{F}$는 기생이다.
+\item 보조정리 \ref{stacks-cohomology-lemma-lisse-etale}에서와 같은
+$g :  \Sh(\mathcal{X}_{flat,fppf}) \to \Sh(\mathcal{X}_{fppf})$에 대해
+$g^*\mathcal{F} = 0$이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)는 정의에서 즉시 따른다(이는 리스-에탈 사이트에 비해 평탄-fppf
+사이트가 가지는 장점 가운데 하나이다). 함의 (1)(a) $\Rightarrow$ (1)(b)도
+즉시 성립한다. (1)(b) $\Rightarrow$ (1)(a)를 보기 위해 $U$를 스킴이라 하고
+$x : U \to \mathcal{X}$를 매끄러운 전사 사상이라 하자.
+그러면 $x$는 $\mathcal{X}$의 리스-에탈 사이트의 대상이다. 따라서 (1)(b)는
+$\mathcal{F}|_{U_\etale} = 0$을 함의한다. $V$가 스킴인 평탄 사상
+$V \to \mathcal{X}$를 택하자. $W = U \times_\mathcal{X} V$라 놓고 도식
+$$
+\xymatrix{
+W \ar[d]_p \ar[r]_q & V \ar[d] \\
+U \ar[r] & \mathcal{X}
+}
+$$
+을 생각하자. 사영 $p : W \to U$는 평탄하고 사영 $q : W \to V$는
+매끄럽고 전사이다. 따라서 $q_{small}^*$는 준연접 가군에서 충실한 함자이다.
+가정에 따라 $\mathcal{F}$는 평탄 밑변환 성질을 가지므로
+$p_{small}^*\mathcal{F}|_{U_\etale} \cong
+q_{small}^*\mathcal{F}|_{V_\etale}$를 얻는다.
+그러므로 $\mathcal{F}$가 $g^*$의 핵에 속하면
+$\mathcal{F}|_{V_\etale} = 0$이며, 이것이 원하는 바이다.
+\end{proof}
+
+\section{리스-에탈 사이트와 평탄-fppf 사이트의 함자성}
+\label{stacks-cohomology-section-lisse-etale-functorial}
+
+\noindent
+리스-에탈 사이트는 대수적 스택의 매끄러운 사상에 대해 함자적이고,
+평탄-fppf 사이트는 대수적 스택의 평탄 사상에 대해 함자적이다.
+리스-에탈 및 평탄-fppf 토포스는 대수적 스택의 모든 사상에 대해 함자적인
+것이 아님을 독자에게 경고한다. 『예』의 절
+\ref{examples-section-lisse-etale-not-functorial}을 보라.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-functorial}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 사상이라 하자.
+\begin{enumerate}
+\item $f$가 매끄러우면 $f$는 연속 쌍연속 함자
+$\mathcal{X}_{lisse,\etale} \to \mathcal{Y}_{lisse,\etale}$로 제한되며,
+다음 가환 도식에 들어가는 환 달린 토포스의 사상을 준다.
+$$
+\xymatrix{
+\Sh(\mathcal{X}_{lisse,\etale}) \ar[r]_{g'} \ar[d]_{f'} &
+\Sh(\mathcal{X}_\etale) \ar[d]^f \\
+\Sh(\mathcal{Y}_{lisse,\etale}) \ar[r]^g &
+\Sh(\mathcal{Y}_\etale)
+}
+$$
+$f'_*(g')^{-1} = g^{-1}f_*$이고 $g'_!(f')^{-1} = f^{-1}g_!$이다.
+\item $f$가 평탄하면 $f$는 연속 쌍연속 함자
+$\mathcal{X}_{flat,fppf} \to \mathcal{Y}_{flat,fppf}$로 제한되며,
+다음 가환 도식에 들어가는 환 달린 토포스의 사상을 준다.
+$$
+\xymatrix{
+\Sh(\mathcal{X}_{flat,fppf}) \ar[r]_{g'} \ar[d]_{f'} &
+\Sh(\mathcal{X}_{fppf}) \ar[d]^f \\
+\Sh(\mathcal{Y}_{flat,fppf}) \ar[r]^g &
+\Sh(\mathcal{Y}_{fppf})
+}
+$$
+$f'_*(g')^{-1} = g^{-1}f_*$이고 $g'_!(f')^{-1} = f^{-1}g_!$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+첫 명제는 다음 사실에서 온다. $x \in \Ob(\mathcal{X})$가 스킴 $U$ 위에
+놓이고 $x : U \to \mathcal{X}$가 매끄러우며(각각 평탄하며), $f$가
+매끄러우면(각각 평탄하면), $f(x) : U \to \mathcal{Y}$는 매끄럽다
+(각각 평탄하다). 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-composition-smooth}와
+\ref{stacks-morphisms-lemma-composition-flat}을 보라.
+유도된 함자
+$\mathcal{X}_{lisse,\etale} \to \mathcal{Y}_{lisse,\etale}$
+(각각 $\mathcal{X}_{flat,fppf} \to \mathcal{Y}_{flat,fppf}$)는 이 범주들에서의
+피복에 대한 우리의 정의에 의해 연속이고 쌍연속이다.
+마지막으로 수평 사상들이 포함 함자들로 주어진다는 사실
+(보조정리 \ref{stacks-cohomology-lemma-lisse-etale}를 보라)과 『사이트』의 보조정리
+\ref{sites-lemma-composition-cocontinuous}에 의해 도식은 가환한다.
+
+\medskip\noindent
+$f'_*(g')^{-1} = g^{-1}f_*$임을 보이기 위해 $\mathcal{F}$를
+$\mathcal{X}_\etale$ 위의 층(각각 $\mathcal{X}_{fppf}$ 위의 층)이라 하자.
+표준 당김 사상
+$$
+g^{-1}f_*\mathcal{F} \longrightarrow f'_*(g')^{-1}\mathcal{F}
+$$
+이 있다. 『사이트』의 절 \ref{sites-section-pullback}을 보라.
+이 사상이 동형임을 주장한다. 이를 증명하기 위해
+$\mathcal{Y}_{lisse,\etale}$의 대상(각각 $\mathcal{Y}_{flat,fppf}$의 대상)
+$y$를 택하자. $y$가 스킴 $V$ 위에 놓이고
+$y : V \to \mathcal{Y}$가 매끄럽다고(각각 평탄하다고) 하자.
+$g^{-1}$은 제한이므로 『스택 위의 층』의 식
+(\ref{stacks-sheaves-equation-pushforward})에 의해
+$$
+\left(g^{-1}f_*\mathcal{F}\right)(y) =
+\Gamma(V \times_{y, \mathcal{Y}} \mathcal{X},\ \text{pr}^{-1}\mathcal{F})
+$$
+이다. $(V \times_{y, \mathcal{Y}} \mathcal{X})' \subset
+V \times_{y, \mathcal{Y}} \mathcal{X}$를, 유도된 사상
+$W \to \mathcal{X}$가 매끄러운(각각 평탄한) 대상
+$z : W \to V \times_{y, \mathcal{Y}} \mathcal{X}$들로 이루어진 충만한
+부분범주라 하자. 위 식에 사용된 함자 $\text{pr}$의 제한을
+$$
+\text{pr}' :
+(V \times_{y, \mathcal{Y}} \mathcal{X})'
+\longrightarrow
+\mathcal{X}_{lisse,\etale}
+\ (\text{각각 }\mathcal{X}_{flat,fppf})
+$$
+로 쓰자. 『스택 위의 층』의 식
+(\ref{stacks-sheaves-equation-pushforward})을 증명하는 것과 정확히 같은
+논증에 의해, $\mathcal{X}_{lisse,\etale}$ 위의 임의의 층 $\mathcal{H}$
+(각각 $\mathcal{X}_{flat,fppf}$ 위의 임의의 층)에 대해
+\begin{equation}
+\label{stacks-cohomology-equation-pushforward-lisse-etale}
+f'_*\mathcal{H}(y) =
+\Gamma((V \times_{y, \mathcal{Y}} \mathcal{X})',
+\ (\text{pr}')^{-1}\mathcal{H})
+\end{equation}
+이다. $(g')^{-1}$은 제한이므로
+$$
+\left(f'_*(g')^{-1}\mathcal{F}\right)(y) =
+\Gamma((V \times_{y, \mathcal{Y}} \mathcal{X})',
+\ \text{pr}^{-1}\mathcal{F}|_{(V \times_{y, \mathcal{Y}} \mathcal{X})'})
+$$
+이다. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-cohomology-on-subcategory}에 의해
+$$
+\Gamma((V \times_{y, \mathcal{Y}} \mathcal{X})',
+\ \text{pr}^{-1}\mathcal{F}|_{(V \times_{y, \mathcal{Y}} \mathcal{X})'})
+=
+\Gamma(V \times_{y, \mathcal{Y}} \mathcal{X},\ \text{pr}^{-1}\mathcal{F})
+$$
+로, 원하는 대로 같다. 보조정리의 가정에 대한 확인은 생략하지만,
+$V \to \mathcal{Y}$가 매끄럽다는(각각 평탄하다는) 사실이 두 번째 조건을
+확인하는 데 사용됨을 지적한다.
+
+\medskip\noindent
+마지막으로 등식 $g'_!(f')^{-1} = f^{-1}g_!$은
+$f^{-1}$과 $f_*$의 수반성, $g_!$과 $g^{-1}$의 수반성 및 각각의
+``프라임 붙은'' 판본에 의해 등식 $f'_*(g')^{-1} = g^{-1}f_*$에서
+형식적으로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-functorial-pushforward}
+보조정리 \ref{stacks-cohomology-lemma-lisse-etale-functorial}과 같은 가정과 표기법을 사용하자.
+$\mathcal{H}$를 $\mathcal{X}_{lisse,\etale}$ 위의 아벨 층
+(각각 $\mathcal{X}_{flat,fppf}$ 위의 아벨 층)이라 하자. 그러면
+\begin{equation}
+\label{stacks-cohomology-equation-higher-direct-image-lisse-etale}
+R^pf'_*\mathcal{H} =
+\text{다음 준층에 연관된 층 }y \longmapsto
+H^p((V \times_{y, \mathcal{Y}} \mathcal{X})', (\text{pr}')^{-1}\mathcal{H})
+\end{equation}
+이다. 여기서 $y$는 스킴 $V$ 위에 놓인
+$\mathcal{Y}_{lisse,\etale}$의 대상(각각
+$\mathcal{Y}_{flat,fppf}$의 대상)이고,
+표기법 $(V \times_{y, \mathcal{Y}} \mathcal{X})'$와 $\text{pr}'$은
+증명에서 설명한다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{stacks-cohomology-lemma-lisse-etale-functorial}의 증명에서처럼
+$(V \times_{y, \mathcal{Y}} \mathcal{X})' \subset
+V \times_{y, \mathcal{Y}} \mathcal{X}$를 다음 대상 $(x, \varphi)$들로
+이루어진 충만한 부분범주라 하자. $x$는
+$\mathcal{X}_{lisse,\etale}$의 대상(각각
+$\mathcal{X}_{flat,fppf}$의 대상)이고,
+$\varphi : f(x) \to y$는 $\mathcal{Y}$의 사상이다.
+식 (\ref{stacks-cohomology-equation-pushforward-lisse-etale})에 의해
+$$
+f'_*\mathcal{H}(y) =
+\Gamma((V \times_{y, \mathcal{Y}} \mathcal{X})',
+\ (\text{pr}')^{-1}\mathcal{H})
+$$
+이다. 여기서 $\text{pr}'$은 사영이다.
+$(V \times_{y, \mathcal{Y}} \mathcal{X})'$의 대상 $(x, \varphi)$에 대해
+$\varphi$를 $x$ 위의 $(f')^{-1}h_y$의 단면으로 생각할 수 있다.
+따라서 $(V \times_\mathcal{Y} \mathcal{X})'$은 집합의 층
+$(f')^{-1}h_y$에서 사이트 $\mathcal{X}_{lisse,\etale}$
+(각각 $\mathcal{X}_{flat,fppf}$)을 국소화한 것이다.
+『사이트』의 보조정리 \ref{sites-lemma-localize-topos-site}를 보라.
+사상
+$$
+\text{pr}' : (V \times_{y, \mathcal{Y}} \mathcal{X})'
+\to \mathcal{X}_{lisse,\etale}
+\ (\text{각각 }
+\text{pr}' : (V \times_{y, \mathcal{Y}} \mathcal{X})'
+\to \mathcal{X}_{flat,fppf})
+$$
+은 국소화 사상이다. 특히 당김 $(\text{pr}')^{-1}$은 단사 아벨 층을
+보존한다. 『사이트 위의 코호몰로지』의 보조정리
+\ref{sites-cohomology-lemma-cohomology-on-sheaf-sets}를 보라.
+
+\medskip\noindent
+$\mathcal{X}_{lisse,\etale}$ 위에서(각각
+$\mathcal{X}_{flat,fppf}$ 위에서) 단사 분해
+$\mathcal{H} \to \mathcal{I}^\bullet$을 택한다.
+직상 공식에 의해 $R^if'_*\mathcal{H}$는 $y$에 복합체
+$$
+\begin{matrix}
+\Gamma\Big((V \times_{y, \mathcal{Y}} \mathcal{X})',
+(\text{pr}')^{-1}\mathcal{I}^{i - 1}\Big) \\
+\downarrow \\
+\Gamma\Big((V \times_{y, \mathcal{Y}} \mathcal{X})',
+(\text{pr}')^{-1}\mathcal{I}^i\Big) \\
+\downarrow \\
+\Gamma\Big((V \times_{y, \mathcal{Y}} \mathcal{X})',
+(\text{pr}')^{-1}\mathcal{I}^{i + 1}\Big)
+\end{matrix}
+$$
+의 코호몰로지를 대응시키는 준층에 연관된 층이다.
+$(\text{pr}')^{-1}$은 완전하고 단사 대상을 보존하므로
+복합체 $(\text{pr}')^{-1}\mathcal{I}^\bullet$은
+$(\text{pr}')^{-1}\mathcal{H}$의 단사 분해이다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-functorial-cohomology}
+보조정리 \ref{stacks-cohomology-lemma-lisse-etale-functorial}과 같은 가정과 표기법을 사용하자.
+$\mathcal{X}_\etale$ 위의 임의의 아벨 층 $\mathcal{F}$
+(각각 $\mathcal{X}_{fppf}$ 위의 임의의 아벨 층)에 대해 표준 (밑변환) 사상
+$$
+g^{-1}Rf_*\mathcal{F} \longrightarrow Rf'_*(g')^{-1}\mathcal{F}
+$$
+은 동형이다.
+\end{lemma}
+
+\begin{proof}
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-pushforward-restriction}과 보조정리
+\ref{stacks-cohomology-lemma-lisse-etale-functorial-pushforward}에서 주어진
+$g^{-1}R^pf_*\mathcal{F}$와 $R^pf'_*(g')^{-1}\mathcal{F}$의 공식을
+비교하면
+$$
+H^p((V \times_{y, \mathcal{Y}} \mathcal{X})',
+\ \text{pr}^{-1}\mathcal{F}|_{(V \times_{y, \mathcal{Y}} \mathcal{X})'})
+=
+H^p_\tau(V \times_{y, \mathcal{Y}} \mathcal{X},\ \text{pr}^{-1}\mathcal{F})
+$$
+임을 보이면 충분하다. 여기서 $\tau = \etale$
+(각각 $\tau = fppf$)이다. 또 $y$는 스킴 $V$ 위에 놓인
+$\mathcal{Y}$의 대상이고 사상 $y : V \to \mathcal{Y}$는 매끄럽다
+(각각 평탄하다). 이 등식은 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-cohomology-on-subcategory}에서 따른다.
+그 보조정리의 가정 확인은 생략하지만, $V \to \mathcal{Y}$가 매끄럽다는
+(각각 평탄하다는) 사실이 두 번째 조건을 확인하는 데 사용됨을 지적한다.
+\end{proof}
+
+\section{준연접 가군과 리스-에탈 및 평탄-fppf 사이트}
+\label{stacks-cohomology-section-quasi-coherent-modules-II}
+
+\noindent
+이 절에서는 대수적 스택 위의 준연접 가군을 그 리스-에탈 또는 평탄-fppf
+사이트의 관점에서 생각하는 방법을 설명한다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-check-qc-on-etale-covering}
+$\mathcal{X}$를 대수적 스택이라 하자.
+\begin{enumerate}
+\item $f_j : \mathcal{X}_j \to \mathcal{X}$를
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$를 만족하는
+대수적 스택의 매끄러운 사상들의 족이라 하자.
+$\mathcal{F}$를 $\mathcal{X}_\etale$ 위의
+$\mathcal{O}_\mathcal{X}$-가군층이라 하자.
+각 $f_j^{-1}\mathcal{F}$가 준연접이면 $\mathcal{F}$도 준연접이다.
+\item $f_j : \mathcal{X}_j \to \mathcal{X}$를
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$를 만족하는
+대수적 스택의 평탄하고 국소 유한 표시인 사상들의 족이라 하자.
+$\mathcal{F}$를 $\mathcal{X}_{fppf}$ 위의
+$\mathcal{O}_\mathcal{X}$-가군층이라 하자.
+각 $f_j^{-1}\mathcal{F}$가 준연접이면 $\mathcal{F}$도 준연접이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. 각 대수적 스택 $\mathcal{X}_j$를 스킴 $U_j$로 바꾸어도 된다
+(모든 대수적 스택은 스킴에 의한 매끄러운 피복을 가지며 매끄러운 사상들의
+합성이 매끄럽다는 사실을 사용한다. 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-composition-smooth}를 보라).
+$\mathcal{F}$를 $(\Sch/U_j)_\etale$로 당긴 것은 여전히 준연접이다.
+『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-local-pullback}을 보라.
+그러면 $f = \coprod f_j : U = \coprod U_j \to \mathcal{X}$는
+매끄러운 전사 사상이다. $x : V \to \mathcal{X}$를
+$\mathcal{X}$의 대상이라 하자. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation}에 의해
+각 $x_i$가 $(\Sch/U)_\etale$의 대상 $u_i$로 올려지는 에탈 피복
+$\{x_i \to x\}_{i \in I}$가 존재한다. 이는 $x_i$가 스킴 $V_i$ 위에
+놓이고, $\{V_i \to V\}$가 에탈 피복이며, $x_i$가 사상
+$u_i : V_i \to U$에서 온다는 뜻일 뿐이다. 그러면
+$x_i^*\mathcal{F} = u_i^*f^*\mathcal{F}$는 준연접이다.
+예를 들어 『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-local-final-object}에 의해, 이는
+$(\Sch/V)_\etale$ 위의 $x^*\mathcal{F}$가 준연접임을 함의한다.
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-characterize-quasi-coherent-bis}에 의해
+$x^*\mathcal{F}$가 fppf 층임을 알 수 있고, $x$는 임의였으므로
+$\mathcal{F}$가 fppf 위상의 층임을 알 수 있다.
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-characterize-quasi-coherent}를 적용하면
+$\mathcal{F}$가 준연접임을 알 수 있다.
+
+\medskip\noindent
+(2)의 증명. 정확히 같은 논증으로 증명하지만 여기서 전부 적겠다.
+각 대수적 스택 $\mathcal{X}_j$를 스킴 $U_j$로 바꾸어도 된다
+(모든 대수적 스택은 스킴에 의한 매끄러운 피복을 가지며 평탄하고 국소
+유한 표시인 사상들이 합성에 의해 보존된다는 사실을 사용한다.
+『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-composition-flat}과
+\ref{stacks-morphisms-lemma-composition-finite-presentation}을 보라).
+$\mathcal{F}$를 $(\Sch/U_j)_\etale$로 당긴 것은 여전히 국소 준연접이다.
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-pullback-quasi-coherent}를 보라.
+그러면 $f = \coprod f_j : U = \coprod U_j \to \mathcal{X}$는
+전사이고 평탄하며 국소 유한 표시이다. $x : V \to \mathcal{X}$를
+$\mathcal{X}$의 대상이라 하자. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation}에 의해
+각 $x_i$가 $(\Sch/U)_\etale$의 대상 $u_i$로 올려지는 fppf 피복
+$\{x_i \to x\}_{i \in I}$가 존재한다. 이는 $x_i$가 스킴 $V_i$ 위에
+놓이고, $\{V_i \to V\}$가 fppf 피복이며, $x_i$가 사상
+$u_i : V_i \to U$에서 온다는 뜻일 뿐이다. 그러면
+$x_i^*\mathcal{F} = u_i^*f^*\mathcal{F}$는 준연접이다.
+예를 들어 『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-local-final-object}에 의해, 이는
+$(\Sch/V)_\etale$ 위의 $x^*\mathcal{F}$가 준연접임을 함의한다.
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-characterize-quasi-coherent}에 의해
+$\mathcal{F}$가 준연접임을 알 수 있다.
+\end{proof}
+
+\noindent
+『사이트 위의 가군』의 절 \ref{sites-modules-section-local}에서 임의의
+환 달린 토포스 위의 준연접 가군이라는 개념을 정의했음을 상기하자.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-shriek-quasi-coherent}
+$\mathcal{X}$를 대수적 스택이라 하자. 표기법은 보조정리
+\ref{stacks-cohomology-lemma-lisse-etale}에서와 같다.
+\begin{enumerate}
+\item $\mathcal{H}$를 $\mathcal{X}$의 리스-에탈 사이트 위의 준연접
+$\mathcal{O}_{\mathcal{X}_{lisse,\etale}}$-가군이라 하자.
+그러면 $g_!\mathcal{H}$는 $\mathcal{X}$ 위의 준연접 가군이다.
+\item $\mathcal{H}$를 $\mathcal{X}$의 평탄-fppf 사이트 위의 준연접
+$\mathcal{O}_{\mathcal{X}_{flat,fppf}}$-가군이라 하자.
+그러면 $g_!\mathcal{H}$는 $\mathcal{X}$ 위의 준연접 가군이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 매끄러운 전사 사상 $x : U \to \mathcal{X}$를 택한다.
+『사이트 위의 가군』의 정의 \ref{sites-modules-definition-site-local}에 의해,
+각 당김 $f_i^{-1}\mathcal{H}$가 대역 표시를 가지는 에탈
+(각각 fppf) 피복 $\{U_i \to U\}_{i \in I}$가 존재한다
+(『사이트 위의 가군』의 정의 \ref{sites-modules-definition-global}을 보라).
+여기서 $f_i : U_i \to \mathcal{X}$는 합성 $U_i \to U \to \mathcal{X}$이고,
+이는 대수적 스택의 사상이다. (당김이 $\mathcal{X}/f_i$에 대한 제한과
+``같다''는 것을 상기하라. 『스택 위의 층』의 정의
+\ref{stacks-sheaves-definition-pullback}과 이어지는 논의를 보라.)
+보조정리 \ref{stacks-cohomology-lemma-lisse-etale-functorial}에 의해 각 $f_i$가 매끄러우므로
+(각각 평탄하므로)
+$f_i^{-1}g_!\mathcal{H} = g_{i, !}(f'_i)^{-1}\mathcal{H}$이다.
+보조정리 \ref{stacks-cohomology-lemma-check-qc-on-etale-covering}을 사용하면
+$\mathcal{H}$가 대역 표시를 가지는 경우로 보조정리의 명제를 환원할 수 있다.
+즉, $\mathcal{O}$-가군의 열
+$$
+\bigoplus\nolimits_{j \in J} \mathcal{O} \longrightarrow
+\bigoplus\nolimits_{i \in I} \mathcal{O} \longrightarrow
+\mathcal{H} \longrightarrow 0
+$$
+이 있다고 하자. 여기서
+$\mathcal{O} = \mathcal{O}_{\mathcal{X}_{lisse,\etale}}$
+(각각 $\mathcal{O} = \mathcal{O}_{\mathcal{X}_{flat,fppf}}$)이다.
+$g_!$은 (왼쪽 수반 함자이므로) 임의의 쌍대극한과 가환한다
+(보조정리 \ref{stacks-cohomology-lemma-lisse-etale-modules}와 『범주』의 보조정리
+\ref{categories-lemma-adjoint-exact}을 보라). 따라서 완전열
+$$
+\bigoplus\nolimits_{j \in J} g_!\mathcal{O} \longrightarrow
+\bigoplus\nolimits_{i \in I} g_!\mathcal{O} \longrightarrow
+g_!\mathcal{H} \longrightarrow 0
+$$
+이 존재한다. 보조정리 \ref{stacks-cohomology-lemma-lisse-etale-structure-sheaf}에 의해
+$g_!\mathcal{O} = \mathcal{O}_\mathcal{X}$이다. (2)의 경우에는 끝났다.
+(1)의 경우에는 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-characterize-quasi-coherent-bis}를 적용하여 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-quasi-coherent}
+$\mathcal{X}$를 대수적 스택이라 하자.
+\begin{enumerate}
+\item 리스-에탈 사이트에 대해 보조정리 \ref{stacks-cohomology-lemma-lisse-etale}에서와 같은
+$g$를 사용하면 다음이 성립한다.
+\begin{enumerate}
+\item 함자 $g^{-1}$과 $g_!$은 서로 역인 함자
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_\mathcal{X}) \ar@<1ex>[r]^-{g^{-1}} &
+\QCoh(\mathcal{X}_{lisse,\etale},
+\mathcal{O}_{\mathcal{X}_{lisse,\etale}}) \ar@<1ex>[l]^-{g_!}
+}
+$$
+를 정의한다.
+\item $\mathcal{F}$가
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속하면
+$g^{-1}\mathcal{F}$는
+$\QCoh(\mathcal{O}_{\mathcal{X}_{lisse,\etale}})$에 속한다.
+\item $Q$가 보조정리 \ref{stacks-cohomology-lemma-adjoint}에서와 같을 때
+$Q(\mathcal{F}) = g_!g^{-1}\mathcal{F}$이다.
+\end{enumerate}
+\item 평탄-fppf 사이트에 대해 보조정리 \ref{stacks-cohomology-lemma-lisse-etale}에서와 같은
+$g$를 사용하면 다음이 성립한다.
+\begin{enumerate}
+\item 함자 $g^{-1}$과 $g_!$은 서로 역인 함자
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_\mathcal{X}) \ar@<1ex>[r]^-{g^{-1}} &
+\QCoh(\mathcal{X}_{flat,fppf},
+\mathcal{O}_{\mathcal{X}_{flat,fppf}}) \ar@<1ex>[l]^-{g_!}
+}
+$$
+를 정의한다.
+\item $\mathcal{F}$가
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속하면
+$g^{-1}\mathcal{F}$는
+$\QCoh(\mathcal{O}_{\mathcal{X}_{flat,fppf}})$에 속한다.
+\item $Q$가 보조정리 \ref{stacks-cohomology-lemma-adjoint}에서와 같을 때
+$Q(\mathcal{F}) = g_!g^{-1}\mathcal{F}$이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+환 달린 토포스의 임의의 사상에 의한 당김은 준연접 가군들의 범주를
+보존한다. 『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-local-pullback}을 보라. 따라서 $g^{-1}$은
+준연접 가군들의 범주를 보존한다. 여기서 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-characterize-quasi-coherent-bis}에 의해
+$\QCoh(\mathcal{O}_\mathcal{X}) =
+\QCoh(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$라는 사실을 사용한다.
+보조정리 \ref{stacks-cohomology-lemma-shriek-quasi-coherent}에 의해 $g_!$에 대해서도 같다.
+보조정리 \ref{stacks-cohomology-lemma-lisse-etale}에 의해
+$\mathcal{H} \to g^{-1}g_!\mathcal{H}$는 동형이다.
+반대로 $\mathcal{F}$가 $\QCoh(\mathcal{O}_\mathcal{X})$에 속하면
+사상 $g_!g^{-1}\mathcal{F} \to \mathcal{F}$는 $\mathcal{X}$ 위의 준연접
+가군들의 사상이고, $\mathcal{X}$ 위의 임의의 매끄러운 스킴으로 제한하면
+동형이 된다. 그러면 『스택 위의 층』의 절
+\ref{stacks-sheaves-section-quasi-coherent-presentation}과
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks}의 논의
+(표시 위의 준연접 가군과 비교한다)에 의해 이 사상은 동형이다.
+이로써 (1)(a)와 (2)(a)가 증명되었다.
+
+\medskip\noindent
+$\mathcal{F}$를
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상이라 하자.
+보조정리 \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}에 의해 사상
+$Q(\mathcal{F}) \to \mathcal{F}$의 핵과 여핵은 기생이다.
+따라서 보조정리 \ref{stacks-cohomology-lemma-parasitic-in-terms-flat-fppf}와
+$g^* = g^{-1}$이 완전하다는 사실에 의해
+$g^*Q(\mathcal{F}) \to g^*\mathcal{F}$가 동형이라는 결론을 얻는다.
+그러므로 $g^*\mathcal{F}$는 준연접이다. 이로써 (1)(b)와 (2)(b)가 증명되었다.
+마지막으로 위 논증에 의해
+$g_!g^*Q(\mathcal{F}) \to Q(\mathcal{F})$가 동형이므로
+(1)(c)와 (2)(c)가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-quasi-coherent-weak-serre}
+$\mathcal{X}$를 대수적 스택이라 하자.
+\begin{enumerate}
+\item $\QCoh(\mathcal{O}_{\mathcal{X}_{lisse,\etale}})$는
+$\textit{Mod}(\mathcal{O}_{\mathcal{X}_{lisse,\etale}})$의
+약한 Serre 부분범주이다.
+\item $\QCoh(\mathcal{O}_{\mathcal{X}_{flat,fppf}})$는
+$\textit{Mod}(\mathcal{O}_{\mathcal{X}_{flat,fppf}})$의
+약한 Serre 부분범주이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+『호몰로지』의 보조정리
+\ref{homology-lemma-characterize-weak-serre-subcategory}의 조건
+(1), (2), (3), (4)를 확인하겠다.
+
+\medskip\noindent
+$0$은 임의의 환 달린 사이트 위에서 준연접 가군이므로 (1)이 성립한다.
+
+\medskip\noindent
+정의에 따라 $\QCoh(\mathcal{O})$는
+$\textit{Mod}(\mathcal{O})$의 엄밀 충만한 부분범주이므로 (2)가 성립한다.
+
+\medskip\noindent
+$\varphi : \mathcal{G} \to \mathcal{F}$를
+$\mathcal{X}_{lisse,\etale}$ 또는 $\mathcal{X}_{flat,fppf}$ 위의
+준연접 가군들의 사상이라 하자. 보조정리 \ref{stacks-cohomology-lemma-lisse-etale-modules}에 의해
+$g^*g_!\mathcal{F} = \mathcal{F}$이고, $\mathcal{G}$와 $\varphi$에 대해서도
+마찬가지이다. 보조정리 \ref{stacks-cohomology-lemma-shriek-quasi-coherent}에 의해
+$g_!\mathcal{F}$와 $g_!\mathcal{G}$는 준연접
+$\mathcal{O}_\mathcal{X}$-가군이다. 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack}에 의해
+$\Coker(g_!\varphi)$는 $\mathcal{X}$ 위의 준연접 가군이며
+($\mathcal{X}$ 위의 준연접 가군 범주에서의 여핵이다).
+$g^*$가 완전하므로(보조정리 \ref{stacks-cohomology-lemma-lisse-etale}를 보라)
+$g^*\Coker(g_!\varphi) = \Coker(g^*g_!\varphi) = \Coker(\varphi)$도
+준연접이다(보조정리 \ref{stacks-cohomology-lemma-quasi-coherent}를 보라).
+명제 \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change}에 의해
+핵 $\Ker(g_!\varphi)$는
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속한다.
+$g^*$가 완전하므로
+$g^*\Ker(g_!\varphi) = \Ker(g^*g_!\varphi) = \Ker(\varphi)$이다.
+보조정리 \ref{stacks-cohomology-lemma-quasi-coherent}에 의해 $g^*$는
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$의 대상을 준연접 가군으로
+보내므로, $\Ker(\varphi)$도 준연접이라는 결론을 얻는다.
+이로써 (3)이 증명되었다.
+
+\medskip\noindent
+마지막으로
+$$
+0 \to \mathcal{F} \to \mathcal{E} \to \mathcal{G} \to 0
+$$
+이 $\mathcal{O}_{\mathcal{X}_{lisse,\etale}}$-가군의 확대
+(각각 $\mathcal{O}_{\mathcal{X}_{flat,fppf}}$-가군의 확대)이고
+$\mathcal{F}$와 $\mathcal{G}$가 준연접이라고 하자.
+(4)를 증명하여 전체 증명을 마치려면 $\mathcal{E}$가
+$\mathcal{X}_{lisse,\etale}$ 위에서(각각 $\mathcal{X}_{flat,fppf}$ 위에서)
+준연접임을 보여야 한다. $U$를 $\mathcal{X}_{lisse,\etale}$의 대상
+(각각 $\mathcal{X}_{flat,fppf}$의 대상이라 하자. 우리는 $U$를
+$\mathcal{X}$ 위에서 매끄러운(각각 평탄한) 스킴으로 생각한다.
+$\mathcal{E}$를 $U_{lisse,\etale}$에 제한한 것
+(각각 $=U_{flat,fppf}$)이 준연접임을 보여야 한다.
+따라서 $\mathcal{X} = U$가 스킴이라고 가정해도 된다.
+$\mathcal{G}$가 $U_{lisse,\etale}$ 위에서(각각 $U_{flat,fppf}$ 위에서)
+준연접이므로, $U$를 어떤 에탈(각각 fppf) 피복의 원소들로 바꾸어
+$\mathcal{G}$가 $U_{lisse,\etale}$ 위에서(각각 $U_{flat,fppf}$ 위에서)
+표시
+$$
+\bigoplus\nolimits_{j \in J} \mathcal{O} \longrightarrow
+\bigoplus\nolimits_{i \in I} \mathcal{O} \longrightarrow
+\mathcal{G} \longrightarrow 0
+$$
+를 가진다고 가정해도 된다. 여기서 $\mathcal{O}$는 그 사이트 위의 구조층이다.
+$U$가 아핀이라고 가정해도 된다. $\mathcal{F}$가 준연접이므로
+$$
+H^1(U_{lisse,\etale}, \mathcal{F}) = 0,
+\quad\text{각각}\quad
+H^1(U_{flat,fppf}, \mathcal{F}) = 0
+$$
+이다. 구체적으로 $\mathcal{F}$는 $U$의 큰 사이트 위의 어떤 준연접 가군
+$\mathcal{F}'$의 당김이고(보조정리 \ref{stacks-cohomology-lemma-quasi-coherent}),
+$\mathcal{F}$와 $\mathcal{F}'$의 코호몰로지는 일치하며
+(보조정리 \ref{stacks-cohomology-lemma-lisse-etale-cohomology}), 아핀 스킴 $U$의 큰 사이트
+위에서 $\mathcal{F}'$의 코호몰로지가 영임을 알고 있다
+(현재 상황에서 이를 얻으려면 『하강』의 명제
+\ref{descent-proposition-equivalence-quasi-coherent}와
+\ref{descent-proposition-same-cohomology-quasi-coherent}를
+『스킴의 코호몰로지』의 보조정리
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}와 결합해야 한다).
+따라서 사상 $\bigoplus_{i \in I} \mathcal{O} \to \mathcal{G}$를
+$\mathcal{E}$로 올릴 수 있다. 도식 추적을 하면 완전열
+$$
+\bigoplus\nolimits_{j \in J} \mathcal{O} \to
+\mathcal{F} \oplus \bigoplus\nolimits_{i \in I} \mathcal{O}
+\to
+\mathcal{E} \to 0
+$$
+을 얻는다. 위에서 증명한 (3)에 의해 원하는 대로 $\mathcal{E}$는 준연접이다.
+\end{proof}
+
+\section{국소 뇌터 스택 위의 연접층}
+\label{stacks-cohomology-section-coherent-sheaves}
+
+\noindent
+이 절은 『대수공간의 코호몰로지』의 절
+\ref{spaces-cohomology-section-coherent}에 대응한다.
+『사이트 위의 가군』의 절 \ref{sites-modules-section-local}에서 임의의 환 달린
+토포스 위의 연접 가군이라는 개념을 정의했다. 그러나 임의의 대수적 스택
+$\mathcal{X}$에 대해 연접 $\mathcal{O}_\mathcal{X}$-가군의 범주는 영이다.
+이는 본질적으로 사이트 $\mathcal{X}$가 뇌터가 아닌 대상을 너무 많이
+포함하기 때문이다($\mathcal{X}$ 자체가 국소 뇌터인 경우에도 그렇다).
+대신 다음 보조정리를 사용하여 연접 가군을 정의하겠다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-coherent-Noetherian}
+$\mathcal{X}$를 국소 뇌터 대수적 스택이라 하자.
+$\mathcal{F}$를 $\mathcal{O}_\mathcal{X}$-가군이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $\mathcal{F}$는 유한형 준연접 $\mathcal{O}_\mathcal{X}$-가군이다.
+\item $\mathcal{F}$는 유한 표시 $\mathcal{O}_\mathcal{X}$-가군이다.
+\item $\mathcal{F}$는 준연접이고, $U$가 국소 뇌터 대수공간인 임의의
+사상 $f : U \to \mathcal{X}$에 대해 당김
+$f^*\mathcal{F}|_{U_\etale}$는 연접이다.
+\item $\mathcal{F}$는 준연접이고, 국소 유한형이고 평탄하며 전사인 사상
+$f : U \to \mathcal{X}$를 가지는 대수공간 $U$가 존재하여 당김
+$f^*\mathcal{F}|_{U_\etale}$가 연접이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f : U \to \mathcal{X}$가 (4)에서와 같다고 하자.
+그러면 $U$는 국소 뇌터이고(『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-locally-finite-type-locally-noetherian}),
+따라서 보조정리의 명제는 의미가 있다. 더욱이 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-noetherian-finite-type-finite-presentation}에 의해
+$f$는 국소 유한 표시이다. $x$를 스킴 $V$ 위에 놓인 $\mathcal{X}$의
+대상이라 하자. (2)를 증명하려면 $V$를 $V$의 어떤 fppf 피복의 원소들로 바꾼 뒤
+제한 $x^*\mathcal{F}$가
+$\mathcal{X}/x \cong (\Sch/V)_{fppf}$ 위에서 대역 유한 표시를 가짐을
+보여야 한다. 사영 $W = U \times_\mathcal{X} V \to V$는 국소 유한 표시이고,
+평탄하며, 전사이다. 따라서 $V$를 $W$의 어떤 에탈 피복의 스킴 원소들로
+바꾸어 $f \circ h = x$를 만족하는 사상 $h : V \to U$가 있다고 가정해도
+된다. $\mathcal{F}$가 준연접이므로, 『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-compare-quasi-coherent}에 의해 제한
+$x^*\mathcal{F}$는
+$h_{small}^*(f^*\mathcal{F})|_{U_\etale}$를 $\pi_V$로 당긴 것이다.
+가정에 따라 $f^*\mathcal{F}|_{U_\etale}$는 에탈 위상에서 국소적으로
+유한 표시를 가지므로 (4) $\Rightarrow$ (2)를 얻는다.
+
+\medskip\noindent
+(2)는 임의의 환 달린 토포스에서 (1)을 함의한다(정의에서 즉시 따른다).
+성질 ``유한형''과 ``준연접''은 환 달린 토포스의 임의의 사상에 의한
+당김 아래에서 보존된다. 『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-local-pullback}을 보라. 따라서 (1)은 (3)을 함의한다.
+『대수공간의 코호몰로지』의 보조정리
+\ref{spaces-cohomology-lemma-coherent-Noetherian}을 보라.
+마지막으로 (3)은 자명하게 (4)를 함의한다.
+\end{proof}
+
+\begin{definition}
+\label{stacks-cohomology-definition-coherent}
+$\mathcal{X}$를 국소 뇌터 대수적 스택이라 하자.
+$\mathcal{O}_\mathcal{X}$-가군 $\mathcal{F}$를 {\it 연접}이라고 한다.
+이는 $\mathcal{F}$가 보조정리 \ref{stacks-cohomology-lemma-coherent-Noetherian}의 동치 조건들
+가운데 하나를(따라서 모두를) 만족한다는 뜻이다.
+연접 $\mathcal{O}_\mathcal{X}$-가군들의 범주는
+$\textit{Coh}(\mathcal{O}_\mathcal{X})$로 표기된다.
+\end{definition}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-elementary-coherent}
+$\mathcal{X}$를 국소 뇌터 대수적 스택이라 하자.
+가군 $\mathcal{O}_\mathcal{X}$는 연접이고, 모든 가역
+$\mathcal{O}_\mathcal{X}$-가군은 연접이며, 더 일반적으로 모든 유한 국소 자유
+$\mathcal{O}_\mathcal{X}$-가군은 연접이다.
+\end{lemma}
+
+\begin{proof}
+정의와 『대수공간의 코호몰로지』의 보조정리
+\ref{spaces-cohomology-lemma-coherent-Noetherian}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-pullback-coherent}
+$f : \mathcal{X} \to \mathcal{Y}$를 국소 뇌터 대수적 스택의 사상이라 하자.
+그러면 $f^*$는 $\mathcal{Y}$ 위의 연접 가군을
+$\mathcal{X}$ 위의 연접 가군으로 보낸다.
+\end{lemma}
+
+\begin{proof}
+정의와, 환 달린 토포스의 임의의 사상에 대한 당김이 유한 표시 가군을
+보존한다는 사실에서 즉시 따른다. 『사이트 위의 가군』의 보조정리
+\ref{sites-modules-lemma-local-pullback}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-coherent-abelian-Noetherian}
+$\mathcal{X}$를 국소 뇌터 대수적 스택이라 하자.
+연접 $\mathcal{O}_\mathcal{X}$-가군들의 범주는 아벨 범주이다.
+$\varphi : \mathcal{F} \to \mathcal{G}$가 연접
+$\mathcal{O}_\mathcal{X}$-가군들의 사상이면 다음이 성립한다.
+\begin{enumerate}
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$에서 계산한 여핵
+$\Coker(\varphi)$는 연접 $\mathcal{O}_\mathcal{X}$-가군이다.
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$에서 계산한 상
+$\Im(\varphi)$는 연접 $\mathcal{O}_\mathcal{X}$-가군이다.
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$에서 계산한 핵
+$\Ker(\varphi)$는 연접이 아닐 수 있지만
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$에 속한다.
+$Q(\Ker(\varphi))$는 연접이고
+$\textit{Coh}(\mathcal{O}_\mathcal{X})$에서의 $\varphi$의 핵이다.
+\end{enumerate}
+포함 함자 $\textit{Coh}(\mathcal{O}_\mathcal{X}) \to
+\QCoh(\mathcal{O}_\mathcal{X})$는 완전하다.
+\end{lemma}
+
+\begin{proof}
+$\textit{Coh}(\mathcal{O}_\mathcal{X})$에서 핵, 상, 여핵을 취하는 규칙은
+주 \ref{stacks-cohomology-remark-QCoh-abelian}의 준연접 가군에 대한 처방과 일치한다.
+따라서 준연접 가군 $\Coker(\varphi)$, $\Im(\varphi)$,
+$Q(\Ker(\varphi))$가 연접임을 보이면 보조정리가 따른다.
+보조정리 \ref{stacks-cohomology-lemma-coherent-Noetherian}에 의해, 어떤 매끄러운 전사 사상
+$f : U \to \mathcal{X}$에 대해 $U_\etale$로 제한한 뒤 이를 증명하면 충분하다.
+함자 $\mathcal{F} \mapsto f^*\mathcal{F}|_{U_\etale}$는 완전하다.
+따라서 $f^*\Coker(\varphi)$와 $f^*\Im(\varphi)$는 연접
+$\mathcal{O}_U$-가군들 사이의 사상의 여핵과 상이고, 따라서 원하는 대로
+연접이다. 보조정리 \ref{stacks-cohomology-lemma-parasitic}에 의해 함자
+$\mathcal{F} \mapsto f^*\mathcal{F}|_{U_\etale}$는 기생 가군을 영으로 보낸다.
+따라서 보조정리 \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}의 (2)에 의해
+$f^*Q(\Ker(\varphi))|_{U_\etale} = f^*\Ker(\varphi)|_{U_\etale}$이다.
+그러므로 같은 방식으로 $Q(\Ker(\varphi))$가 연접이라는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-extension-coherent}
+$\mathcal{X}$를 국소 뇌터 대수적 스택이라 하자.
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ 안의 짧은 완전열
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$이
+주어지고 $\mathcal{F}_1$과 $\mathcal{F}_3$가 연접이면,
+$\mathcal{F}_2$는 연접이다.
+\end{lemma}
+
+\begin{proof}
+『스택 위의 층』의 보조정리
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack}의 (7)에 의해
+$\mathcal{F}_2$가 준연접임을 알 수 있다. 그러면 어떤 매끄러운 전사 사상
+$U \to \mathcal{X}$에 대해 $U_\etale$로 제한하여
+$\mathcal{F}_2$가 연접임을 확인할 수 있다. 이는 『대수공간의 코호몰로지』의
+보조정리 \ref{spaces-cohomology-lemma-coherent-abelian-Noetherian}에서 따른다.
+일부 세부사항은 생략한다.
+\end{proof}
+
+\noindent
+연접 가군들은 준연접 $\mathcal{O}_\mathcal{X}$-가군들의 범주의
+Serre 부분범주를 이룬다. 이는 일반적인 환 달린 토포스 위의 가군에
+대해서는 성립하지 않는다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-coherent-Noetherian-quasi-coherent-sub-quotient}
+$\mathcal{X}$를 국소 뇌터 대수적 스택이라 하자. 그러면
+$\textit{Coh}(\mathcal{O}_\mathcal{X})$는
+$\QCoh(\mathcal{O}_\mathcal{X})$의 Serre 부분범주이다.
+$\varphi : \mathcal{F} \to \mathcal{G}$를 준연접
+$\mathcal{O}_\mathcal{X}$-가군들의 사상이라 하자. 다음이 성립한다.
+\begin{enumerate}
+\item $\mathcal{F}$가 연접이고 $\varphi$가 전사이면 $\mathcal{G}$는 연접이다.
+\item $\mathcal{F}$가 연접이면 $\Im(\varphi)$는 연접이다.
+\item $\mathcal{G}$가 연접이고 $\Ker(\varphi)$가 기생이면
+$\mathcal{F}$는 연접이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+스킴 $U$와 매끄러운 전사 사상 $f : U \to \mathcal{X}$를 택한다.
+그러면 함자
+$f^* : \QCoh(\mathcal{O}_\mathcal{X}) \to \QCoh(\mathcal{O}_U)$는
+완전하고(보조정리 \ref{stacks-cohomology-lemma-flat-pullback-quasi-coherent}),
+더욱이 정의에 따라 $\textit{Coh}(\mathcal{O}_\mathcal{X})$는
+$f^*\mathcal{F}$가 $\textit{Coh}(\mathcal{O}_U)$에 속하는 대상
+$\mathcal{F}$들로 이루어진
+$\QCoh(\mathcal{O}_\mathcal{X})$의 충만한 부분범주이다.
+$\textit{Coh}(\mathcal{O}_\mathcal{X})$가
+$\QCoh(\mathcal{O}_\mathcal{X})$의 Serre 부분범주라는 명제는 이 사실과
+$U$에 대한 대응하는 사실에서 즉시 따른다. 『대수공간의 코호몰로지』의
+보조정리 \ref{spaces-cohomology-lemma-coherent-abelian-Noetherian}와
+\ref{spaces-cohomology-lemma-coherent-Noetherian-quasi-coherent-sub-quotient}를
+보라. (1), (2), (3)의 증명은 생략한다. 힌트: 보조정리
+\ref{stacks-cohomology-lemma-coherent-abelian-Noetherian}의 증명과 비교하라.
+\end{proof}
+
+\noindent
+$\mathcal{X}$를 국소 뇌터 대수적 스택이라 하자. $U$를 대수공간이라 하고
+$f : U \to \mathcal{X}$를 전사이고 국소 유한 표시이며 평탄하다고 하자.
+$U$는 국소 뇌터임에 유의하라(『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-locally-finite-type-locally-noetherian}).
+『대수적 스택』의 보조정리
+\ref{algebraic-lemma-map-space-into-stack}과 주
+\ref{algebraic-remark-flat-fp-presentation}에서 구성한 대수공간에서의 준군을
+$(U, R, s, t, c)$라 하고 동형을
+$f_{can} : [U/R] \to \mathcal{X}$라 하자.
+『스택 위의 층』의 절
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks}에서처럼 동치
+$$
+\QCoh(\mathcal{O}_\mathcal{X})
+\cong
+\QCoh(\mathcal{O}_{[U/R]})
+\cong
+\QCoh(U, R, s, t, c)
+$$
+를 얻는다. 여기서 두 번째 동치는 『스택 위의 층』의 명제
+\ref{stacks-sheaves-proposition-quasi-coherent}이다.
+『공간에서의 준군』의 절 \ref{spaces-groupoids-section-colimits}에서
+{\it 연접 가군}들의 충만한 부분범주
+$$
+\textit{Coh}(U, R, s, t, c) \subset \QCoh(U, R, s, t, c)
+$$
+를, $\mathcal{G}$가 연접 $\mathcal{O}_U$-가군인
+$(\mathcal{G}, \alpha)$들로 정의했음을 상기하라.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-coherent-presentation}
+위에서 논의한 상황에서 동치
+$\QCoh(\mathcal{O}_\mathcal{X}) \cong \QCoh(U, R, s, t, c)$는
+연접층을 연접층으로 보내며 그 역도 성립한다. 즉, 동치
+$\textit{Coh}(\mathcal{O}_\mathcal{X}) \cong
+\textit{Coh}(U, R, s, t, c)$를 유도한다.
+\end{lemma}
+
+\begin{proof}
+이는 연접 $\mathcal{O}_\mathcal{X}$-가군의 정의에서 즉시 따른다.
+참고문헌을 기록해 두면, 위 내용은 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-locally-finite-type-locally-noetherian},
+『대수적 스택』의 보조정리 \ref{algebraic-lemma-map-space-into-stack}과 주
+\ref{algebraic-remark-flat-fp-presentation},
+『스택 위의 층』의 절
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks},
+『스택 위의 층』의 명제 \ref{stacks-sheaves-proposition-quasi-coherent},
+그리고 『공간에서의 준군』의 절
+\ref{spaces-groupoids-section-colimits}을 사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-coherent-hom}
+$\mathcal{X}$를 국소 뇌터 대수적 스택이라 하자.
+$\mathcal{F}$와 $\mathcal{G}$를 연접
+$\mathcal{O}_\mathcal{X}$-가군이라 하자. 보조정리
+\ref{stacks-cohomology-lemma-internal-hom-fp-into-qcoh}에서 구성한 내부 Hom
+$hom(\mathcal{F}, \mathcal{G})$은 연접 $\mathcal{O}_\mathcal{X}$-가군이다.
+\end{lemma}
+
+\begin{proof}
+$U \to \mathcal{X}$를 스킴에서 오는 매끄러운 전사 사상이라 하자.
+항목 (\ref{stacks-cohomology-item-hom-restriction})(절
+\ref{stacks-cohomology-section-further-remarks})에 의해
+$hom(\mathcal{F}, \mathcal{G})$를 $U$에 제한한 것은 제한들의 Hom 층이다.
+따라서 이 보조정리는 대수공간의 경우에서 따른다. 『대수공간의 코호몰로지』의
+보조정리 \ref{spaces-cohomology-lemma-tensor-hom-coherent}를 보라.
+\end{proof}
+
+\section{뇌터 스택 위의 연접층}
+\label{stacks-cohomology-section-coherent-on-noetherian}
+
+\noindent
+이 절은 『대수공간의 코호몰로지』의 절
+\ref{spaces-cohomology-section-coherent-quasi-compact}에 대응한다.
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-directed-colimit-coherent}
+$\mathcal{X}$를 뇌터 대수적 스택이라 하자. 모든 준연접
+$\mathcal{O}_\mathcal{X}$-가군은 그 연접 부분가군들의 여과 쌍대극한이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$를 준연접 $\mathcal{O}_\mathcal{X}$-가군이라 하자.
+$\mathcal{G}, \mathcal{H} \subset \mathcal{F}$가 연접
+$\mathcal{O}_\mathcal{X}$-부분가군이면,
+$\mathcal{G} \oplus \mathcal{H} \to \mathcal{F}$의 상은 둘을 모두
+포함하는 또 다른 연접 $\mathcal{O}_\mathcal{X}$-부분가군이다.
+보조정리 \ref{stacks-cohomology-lemma-coherent-Noetherian-quasi-coherent-sub-quotient}를 보라.
+따라서 이 계가 유향임을 알 수 있다. 이제 $\mathcal{F}$가 연접 가군들의
+여과 쌍대극한으로 쓰임을 보이면 충분하다. 그러면 이 가군들의
+$\mathcal{F}$ 안에서의 상을 취하여 충분히 많이 존재한다는 결론을
+내릴 수 있기 때문이다.
+
+\medskip\noindent
+$U$를 아핀 스킴이라 하고 $U \to \mathcal{X}$를 매끄러운 전사 사상이라 하자
+(『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-quasi-compact-stack}).
+$R = U \times_\mathcal{X} U$라 놓으면 『대수적 스택』의 보조정리
+\ref{algebraic-lemma-stack-presentation}에서처럼 $\mathcal{X} = [U/R]$이다.
+보조정리 \ref{stacks-cohomology-lemma-coherent-presentation}에 의해
+$\QCoh(\mathcal{O}_X) = \QCoh(U, R, s, t, c)$이고
+$\textit{Coh}(\mathcal{O}_X) = \textit{Coh}(U, R, s, t, c)$이다.
+이렇게 하여 $\QCoh(U, R, s, t, c)$에 대해 대응하는 사실을 증명하는 문제로
+환원된다. 이는 『공간에서의 준군』의 보조정리
+\ref{spaces-groupoids-lemma-colimit-coherent}이다. 다음 문단에서 그 가정들을
+확인한다.
+
+\medskip\noindent
+독자에게 증명의 나머지는 건너뛰기를 권한다.
+아핀 스킴 $U$는 뇌터이다. 이는 $\mathcal{X}$가 국소 뇌터라는 우리의
+정의에서 따른다. 『스택의 성질』의 정의
+\ref{stacks-properties-definition-type-property}와 주
+\ref{stacks-properties-remark-list-properties-local-smooth-topology}를 보라.
+사영 사상 $s, t : R \to U$는 매끄럽고(위에서 제시한 참고문헌을 보라),
+준분리이며 준콤팩트이다(『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-quasi-compact-quasi-separated-permanence}).
+특히 $R$은 $U$ 위에서 매끄러운 준콤팩트 준분리 대수공간이고,
+따라서 뇌터이다(『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-finite-presentation-noetherian}).
+\end{proof}

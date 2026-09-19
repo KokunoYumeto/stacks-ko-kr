@@ -1,0 +1,3562 @@
+% Generated mechanically from frozen input p09/ko/src/spaces-groupoids.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{77}
+\chapter{대수공간에서의 Groupoid}
+
+
+
+\phantomsection
+\label{spaces-groupoids-section-phantom}
+
+
+\section{서론}
+\label{spaces-groupoids-section-introduction}
+
+\noindent
+이 장에서는 대수공간에서의 groupoid에 관한 일반론을 다룬다.
+Keel과 Mori의 아름다운 논문 \cite{K-M}을 읽기를 권한다.
+
+\medskip\noindent
+여기서 말하는 내용의 상당 부분은 groupoid 스킴에 관한 장에서
+다룬 내용을 되풀이한 것이다. Groupoids, Section
+\ref{groupoids-section-introduction}을 보라.
+몫 스택에 관한 논의는 여기서 새로 다룬다.
+
+
+\section{규약}
+\label{spaces-groupoids-section-conventions}
+
+\noindent
+모든 스킴은 큰 fppf 사이트 $\Sch_{fppf}$에 들어 있다고
+항상 가정한다. 또한 여기서 다루는 모든 환 $A$는
+$\Spec(A)$가 이 큰 사이트의 대상과 동형이라는 성질을 가진다.
+
+\medskip\noindent
+$S$를 스킴이라 하고 $X$를 $S$ 위의 대수공간이라 하자.
+이 장과 다음 장에서는 $X \times_S X$로 $X$와 자기 자신의
+곱(즉 $S$ 위 대수공간의 범주에서의 곱)을 나타내며,
+$X \times X$라고 쓰지 않는다.
+
+\medskip\noindent
+사영 사상의 첨자를 $0$부터 붙이는 규약도 계속 사용한다.
+따라서 $\text{pr}_0 : X \times_S Y \to X$ 및
+$\text{pr}_1 : X \times_S Y \to Y$이다.
+
+
+
+
+\section{표기}
+\label{spaces-groupoids-section-notation}
+
+\noindent
+$S$를 스킴이라 하자. 이것을 기저 스킴으로 삼으며 모든
+대수공간은 $S$ 위에 놓인다. $B$를 $S$ 위의 대수공간이라
+하자. 이것을 기저 대수공간으로 삼으며, 다른 대수공간과
+스킴들도 흔히 $B$ 위에 놓인다. $X$가 $B$ 위의 대수공간이라고
+하면, 이는 $X$가 $S$ 위의 대수공간이고 구조 사상
+$X \to B$가 주어져 있다는 뜻이다. 또한 문자 $T$는
+$B$ 위의 {\it 시험} 스킴을 나타내는 데 가급적 남겨 둔다.
+즉 $T$는 구조 사상 $T \to B$가 주어진 스킴이다.
+이 상황에서 $X(T)$는 $T$-값점들로 이루어진 $X$의 집합을
+$B$ {\it 위에서} 나타낸다. 식으로 쓰면
+$$
+X(T) = \Mor_B(T, X).
+$$
+마찬가지로 또 다른 대수공간 $Y$가 $B$ 위에 주어지면
+$$
+X(Y) = \Mor_B(Y, X).
+$$
+위와 같이 대수공간 $X$, $Y$가 $B$ 위에 있고 사상
+$f : X \to Y$가 $B$ 위에 주어졌다고 하자.
+$T$를 $B$ 위의 임의의 스킴이라 하면 유도된 집합의 사상
+$$
+f : X(T) \longrightarrow Y(T)
+$$
+을 얻으며, 이는 스킴 $T$에 함자적이고 그 스킴은 $B$ 위에 있다.
+$f$는 $(\Sch/S)_{fppf}$ 위의 층 사상이고 층 $B$ 위에
+있으므로, 이 규칙이 $f$를 결정하며 그 역도 성립한다는 것이
+분명하다. 더 일반적으로 올곱들 사이의
+사상에도 같은 표기를 쓴다. 예를 들어 $X$, $Y$, $Z$가
+$B$ 위의 대수공간이고
+$m : X \times_B Y \to Z \times_B Z$가
+$B$ 위 대수공간의 사상이면, $m$은 $T$-값점들 사이의
+사상들의 모음
+$$
+X(T) \times Y(T) \longrightarrow Z(T) \times Z(T).
+$$
+에 대응한다고 생각한다. 이후에도 같은 방식이다.
+
+\medskip\noindent
+끝으로 대수공간의 두 사상 $f, g : X \to Y$가 $B$ 위에
+주어졌다고 하자. 유도 사상 $f, g : X(T) \to Y(T)$가 모든
+스킴 $T$에 대하여 같고 그 스킴이 $B$ 위에 있으면 $f = g$이다.
+따라서 사상 $f, g : X(Z) \to Y(Z)$도 모든 세 번째
+대수공간 $Z$가 $B$ 위에 있을 때 같다. 그러므로 예를 들어
+군 대수공간 $G$가 $B$ 위에 있을 때 그 공리를 확인하려면
+$T$-값점에 대한 도식의 가환성을 확인하면 충분하다. 여기서
+$T$는 $B$ 위의 스킴이고, 이는 아래 Definition
+\ref{spaces-groupoids-definition-group-space}에서 하는 방식이다.
+
+
+
+
+\section{동치관계}
+\label{spaces-groupoids-section-equivalence-relations}
+
+\noindent
+표기는 Groupoids, Section
+\ref{groupoids-section-equivalence-relations}을 보라.
+
+\begin{definition}
+\label{spaces-groupoids-definition-equivalence-relation}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$U$를 $B$ 위의 대수공간이라 하자.
+\begin{enumerate}
+\item $U$의 $B$ 위 {\it 전관계}란 대수공간들의 임의의 사상
+$j : R \to U \times_B U$를 말하며, 이 대수공간들은 $B$ 위에 있다.
+이 경우 $t = \text{pr}_0 \circ j$ 및
+$s = \text{pr}_1 \circ j$로 두므로 $j = (t, s)$이다.
+\item $U$의 $B$ 위 {\it 관계}란 대수공간들의 단사 사상
+$j : R \to U \times_B U$를 말하며, 이 대수공간들은 $B$ 위에 있다.
+\item {\it 전동치관계}란 전관계 $j : R \to U \times_B U$로서,
+$j : R(T) \to U(T) \times U(T)$의 상이 모든 스킴 $T$가
+$B$ 위에 있을 때 동치관계인 것을 말한다.
+\item 대수공간의 사상 $R \to U \times_B U$가 $B$ 위에 있다고 하자.
+이것이 {\it $U$의 $B$ 위 동치관계}라는 것은, 모든 $T$가
+$B$ 위에 있을 때 $T$-값점들 가운데 $R$에 속하는 것들이
+$T$-값점들 가운데 $U$에 속하는 것들의 집합에
+동치관계를 정의한다는 것과 동치이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+달리 말하면, 동치관계란 $j$가 관계인 전동치관계이다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-restrict-relation}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$U$를 $B$ 위의 대수공간이라 하자.
+$j : R \to U \times_B U$를 전관계라 하자.
+$g : U' \to U$를 $B$ 위 대수공간의 사상이라 하자.
+끝으로
+$$
+R' = (U' \times_B U')\times_{U \times_B U} R
+\xrightarrow{j'}
+U' \times_B U'
+$$
+로 두자. 그러면 $j'$은 $U'$의 전관계이며 $B$ 위에 있다.
+$j$가 관계이면 $j'$도 관계이다.
+$j$가 전동치관계이면 $j'$도 전동치관계이다.
+$j$가 동치관계이면 $j'$도 동치관계이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+
+
+
+\begin{definition}
+\label{spaces-groupoids-definition-restrict-relation}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$U$를 $B$ 위의 대수공간이라 하자.
+$j : R \to U \times_B U$를 전관계라 하자.
+$g : U' \to U$를 $B$ 위 대수공간의 사상이라 하자.
+Lemma \ref{spaces-groupoids-lemma-restrict-relation}의 전관계
+$j' : R' \to U' \times_B U'$를 전관계 $j$의 $U'$로의
+{\it 제한} 또는 {\it 당김}이라 한다.
+이 상황에서 때로는 $R' = R|_{U'}$라고 쓴다.
+\end{definition}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-pre-equivalence-equivalence-relation-points}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$j : R \to U \times_B U$를 $B$ 위 대수공간의 전관계라 하자.
+다음 규칙으로 정의한 $|U|$ 위의 관계를 생각하자.
+$$
+x \sim y
+\Leftrightarrow
+\exists\ r \in |R| :
+t(r) = x,
+s(r) = y.
+$$
+$j$가 전동치관계이면 이것은 동치관계이다.
+\end{lemma}
+
+\begin{proof}
+$x \sim y$이고 $y \sim z$라고 하자.
+$r \in |R|$ 가운데 $t(r) = x$, $s(r) = y$인 것을 택하고,
+$r' \in |R|$ 가운데 $t(r') = y$, $s(r') = z$인 것을 택하자.
+체 $K$를 택하여 $r$과 $r'$을 사상
+$r, r' : \Spec(K) \to R$로 나타내고
+$s \circ r = t \circ r'$이 되게 할 수 있다.
+$x = t \circ r$, $y = s \circ r = t \circ r'$,
+$z = s \circ r'$로 두면
+$x, y, z : \Spec(K) \to U$이다.
+구성상 $(x, y) \in j(R(K))$이고
+$(y, z) \in j(R(K))$이다. $j$가 전동치관계이므로
+$(x, z) \in j(R(K))$도 성립한다.
+이는 명백히 $x \sim z$를 함의한다.
+
+\medskip\noindent
+$\sim$이 반사적이고 대칭적이라는 증명은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{군 대수공간}
+\label{spaces-groupoids-section-group-spaces}
+
+\noindent
+표기는 Groupoids, Section
+\ref{groupoids-section-group-schemes}을 보라.
+
+\begin{definition}
+\label{spaces-groupoids-definition-group-space}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+\begin{enumerate}
+\item {\it $B$ 위의 군 대수공간}이란 쌍 $(G, m)$을 말한다.
+여기서 $G$는 $B$ 위의 대수공간이고
+$m : G \times_B G \to G$는 다음 성질을 가지는 $B$ 위
+대수공간의 사상이다. 모든 스킴 $T$가 $B$ 위에 있을 때
+쌍 $(G(T), m)$은 군이다.
+\item {\it 군 대수공간의 사상
+$\psi : (G, m) \to (G', m')$가 $B$ 위에 있다}는 것은,
+대수공간의 사상 $\psi : G \to G'$가 $B$ 위에 있고 모든
+$T/B$에 대하여 유도 사상
+$\psi : G(T) \to G'(T)$가 군 준동형인 것을 말한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$(G, m)$을 대수공간 $B$ 위의 군 대수공간이라 하자.
+Groupoids, Section \ref{groupoids-section-group-schemes}의
+논의에 의해 $B$ 위 대수공간의 사상
+(항등원) $e : B \to G$와 (역원) $i : G \to G$를 얻으며,
+모든 $T$에 대하여 사중항 $(G(T), m, e, i)$는 군의 공리를
+만족한다.
+
+\medskip\noindent
+$(G, m)$, $(G', m')$을 $B$ 위의 군 대수공간이라 하고
+$f : G \to G'$를 $B$ 위 대수공간의 사상이라 하자.
+정의에 따라 $f$가 $B$ 위 군 대수공간의 사상인 것은 다음
+도식이 가환인 것과 동치이다.
+$$
+\xymatrix{
+G \times_B G \ar[r]_-{f \times f} \ar[d]_m &
+G' \times_B G' \ar[d]^m \\
+G \ar[r]^f & G'
+}
+$$
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-base-change-group-space}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(G, m)$을 $B$ 위의 군 대수공간이라 하자.
+$B' \to B$를 대수공간의 사상이라 하자.
+당김 $(G_{B'}, m_{B'})$은 $B'$ 위의 군 대수공간이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+
+
+
+
+
+\section{군 대수공간의 성질}
+\label{spaces-groupoids-section-properties-group-spaces}
+
+\noindent
+이 절에서는 임의의 기저 위에서 성립하는 군 대수공간의 몇 가지
+간단한 성질을 모은다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-group-scheme-separated}
+$S$를 스킴이라 하고 $B$를 $S$ 위의 대수공간이라 하자.
+$G$를 $B$ 위의 군 대수공간이라 하자.
+$G \to B$가 분리(각각 준분리, 국소 분리)인 것은 항등원 사상
+$e : B \to G$가 폐몰입(각각 준콤팩트, 몰입)인 것과 동치이다.
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-section-immersion}에 의해,
+$e$가 폐몰입(각각 준콤팩트, 몰입)인 것은 $G \to B$가
+분리(각각 준분리, 국소 분리)이면 성립함을 상기하자.
+역으로 다음 도식을 생각하자.
+$$
+\xymatrix{
+G \ar[r]_-{\Delta_{G/B}} \ar[d] &
+G \times_B G \ar[d]^{(g, g') \mapsto m(i(g), g')} \\
+B \ar[r]^e & G
+}
+$$
+이 도식이 데카르트라는 것은 대수기하학의 함자적 관점에 관한
+한 연습문제이다. 달리 말하면 $\Delta_{G/B}$는 $e$의
+밑변환이다. 따라서 $e$가 폐몰입(각각 준콤팩트, 몰입)이면
+$\Delta_{G/B}$도 그러하다. Spaces, Lemma
+\ref{spaces-lemma-base-change-immersions}
+(각각 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-compact},
+각각 Spaces, Lemma \ref{spaces-lemma-base-change-immersions})를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-group-scheme-unramified-or-lqf}
+$S$를 스킴이라 하고 $B$를 $S$ 위의 대수공간이라 하자.
+$G$를 $B$ 위의 군 대수공간이라 하자. $G \to B$가
+국소 유한형이라고 가정하자. 그러면 $G \to B$가
+비분기(각각 국소 준유한)인 것은 $G \to B$가 $e(b)$에서
+비분기(각각 준유한)이고 이것이 모든 $b \in |B|$에 대하여
+성립하는 것과 동치이다.
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-where-unramified}
+(각각 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-finite-locus})에 의해,
+$U \subset G$인 최대 열린 부분공간 가운데 $U \to B$가
+비분기(각각 국소 준유한)가 되는 것이 있으며, $U$의 형성은
+밑변환과 가환한다.
+따라서 $B = \Spec(k)$가 체의 스펙트럼인 경우로 환원된다.
+$g \in G(K)$를 확대 $K/k$에 값을 가지는 점이라 하자.
+$g$가 $U$에 속하는지 확인할 때 $K$로 밑변환할 수 있다.
+그러므로 다음을 보이면 충분하다.
+$$
+G \to \Spec(k)\text{가 다음 점에서 비분기이다: }e
+\Leftrightarrow
+G \to \Spec(k)\text{가 다음 점에서 비분기이다: }g
+$$
+여기서 $k$-유리점은 $g$이다(준유한성과 $g$, $e$에 대해서도
+마찬가지이다). $g$에 의한 평행이동은 $G$의 자기동형이고 이는
+$k$ 위에 있으므로
+분명하다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-open-over-which-unramified-or-lqf}
+$S$를 스킴이라 하고 $B$를 $S$ 위의 대수공간이라 하자.
+$G$를 $B$ 위의 군 대수공간이라 하자. $G \to B$가
+국소 유한형이라고 가정하자.
+\begin{enumerate}
+\item $U \subset B$인 최대 열린 부분공간으로서 $G_U \to U$가 비분기인 것이
+존재하며, $U$의 형성은 밑변환과 가환한다.
+\item $U \subset B$인 최대 열린 부분공간으로서
+$G_U \to U$가 국소 준유한인 것이 존재하며, $U$의 형성은
+밑변환과 가환한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-where-unramified}
+(각각 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-finite-locus})에 의해,
+$W \subset G$인 최대 열린 부분공간 가운데 $W \to B$가
+비분기(각각 국소 준유한)가 되는 것이 있다. 또한 $W$의 형성은 밑변환과
+가환한다. 두 경우 모두 Lemma
+\ref{spaces-groupoids-lemma-group-scheme-unramified-or-lqf}에 의해
+$U = e^{-1}(W)$이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{군 대수공간의 예}
+\label{spaces-groupoids-section-examples-group-spaces}
+
+\noindent
+$G \to S$가 기저 스킴 $S$ 위의 군 스킴이면,
+밑변환 $G_B$를 임의의 대수공간 $B$에 $S$ 위에서 취했을 때,
+이는 Lemma \ref{spaces-groupoids-lemma-base-change-group-space}에 의해 $B$ 위의
+군 대수공간이다.
+% P09-ERR-0869
+아래 예들에서 이를 자주 사용한다.
+
+\begin{example}[곱셈 군 대수공간]
+\label{spaces-groupoids-example-multiplicative-group}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+임의의 스킴 $T$가 $B$ 위에 있을 때 구조층의 전역 절단의 단위원군
+$\Gamma(T, \mathcal{O}_T^*)$를 대응시키는 함자를 생각하자.
+이는 군 대수공간
+$$
+\mathbf{G}_{m, B} = B \times_S \mathbf{G}_{m, S}
+$$
+으로 표현되고 이 공간은 $B$ 위에 있다. 여기서 $\mathbf{G}_{m, S}$는 $S$ 위의 곱셈군
+스킴이다. Groupoids, Example
+\ref{groupoids-example-multiplicative-group}을 보라.
+\end{example}
+
+\begin{example}[군 대수공간으로서의 1의 근]
+\label{spaces-groupoids-example-roots-of-unity}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$n \in \mathbf{N}$이라 하자. 임의의 스킴 $T$가 $B$ 위에 있을 때
+$\Gamma(T, \mathcal{O}_T^*)$의 부분군 가운데 $n$차 1의 근들로
+이루어진 것을 대응시키는 함자를 생각하자.
+이는 군 대수공간
+$$
+\mu_{n, B} = B \times_S \mu_{n, S}
+$$
+으로 표현되고 이 공간은 $B$ 위에 있다. 여기서 $\mu_{n, S}$는
+$n$차 1의 근들의 군 스킴이고 $S$ 위에 있다. Groupoids, Example
+\ref{groupoids-example-roots-of-unity}를 보라.
+\end{example}
+
+\begin{example}[덧셈 군 대수공간]
+\label{spaces-groupoids-example-additive-group}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+임의의 스킴 $T$가 $B$ 위에 있을 때 구조층의 전역 절단군
+$\Gamma(T, \mathcal{O}_T)$를 대응시키는 함자를 생각하자.
+이는 군 대수공간
+$$
+\mathbf{G}_{a, B} = B \times_S \mathbf{G}_{a, S}
+$$
+으로 표현되고 이 공간은 $B$ 위에 있다. 여기서 $\mathbf{G}_{a, S}$는 $S$ 위의 덧셈군
+스킴이다. Groupoids, Example
+\ref{groupoids-example-additive-group}을 보라.
+\end{example}
+
+\begin{example}[일반선형 군 대수공간]
+\label{spaces-groupoids-example-general-linear-group}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$n \geq 1$이라 하자. 임의의 스킴 $T$가 $B$ 위에 있을 때 군
+$$
+\text{GL}_n(\Gamma(T, \mathcal{O}_T))
+$$
+을 대응시키는 함자를 생각하자. 이는 구조층의 전역 절단 위의
+가역 $n \times n$ 행렬들로 이루어진다.
+이는 군 대수공간
+$$
+\text{GL}_{n, B} = B \times_S \text{GL}_{n, S}
+$$
+으로 표현되고 이 공간은 $B$ 위에 있다.
+% P09-ERR-0870
+여기서 $\mathbf{G}_{m, S}$는 $S$ 위의 일반선형군 스킴이다.
+Groupoids, Example
+\ref{groupoids-example-general-linear-group}을 보라.
+\end{example}
+
+\begin{example}
+\label{spaces-groupoids-example-determinant}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$n \geq 1$이라 하자. 행렬식은 군 대수공간의 사상
+$$
+\det : \text{GL}_{n, B} \longrightarrow \mathbf{G}_{m, B}
+$$
+을 정의하고 이 사상은 $B$ 위에 있다. 이는 $S$ 위의 행렬식
+사상, 즉 Groupoids, Example \ref{groupoids-example-determinant}의 사상의
+밑변환이다.
+\end{example}
+
+\begin{example}[상수 군 대수공간]
+\label{spaces-groupoids-example-constant-group}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$G$를 추상군이라 하자. 임의의 스킴 $T$가 $B$ 위에 있을 때
+국소 상수 사상 $T \to G$의 군을 대응시키는 함자를 생각하자
+(여기서 $T$에는 자리스키 위상을, $G$에는 이산 위상을 준다).
+이는 군 대수공간
+$$
+G_B = B \times_S G_S
+$$
+으로 표현되고 이 공간은 $B$ 위에 있다. 여기서 $G_S$는 Groupoids, Example
+\ref{groupoids-example-constant-group}에서 도입한 상수 군 스킴이다.
+\end{example}
+
+
+
+
+
+
+\section{군 대수공간의 작용}
+\label{spaces-groupoids-section-action-group-space}
+
+\noindent
+표기는 Groupoids, Section
+\ref{groupoids-section-action-group-scheme}을 보라.
+
+\begin{definition}
+\label{spaces-groupoids-definition-action-group-space}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(G, m)$을 $B$ 위의 군 대수공간이라 하자.
+$X$를 $B$ 위의 대수공간이라 하자.
+\begin{enumerate}
+\item {\it $G$의 대수공간 $X/B$ 위 작용}이란 사상
+$a : G \times_B X \to X$가 $B$ 위에 있고, 모든 스킴 $T$가
+$B$ 위에 있을 때 사상 $a : G(T) \times X(T) \to X(T)$가
+$G(T)$-집합의 구조를 $X(T)$에 정의하는 것을 말한다.
+\item $X$, $Y$가 $B$ 위의 대수공간이고 각각 $G$의 작용을
+갖추었다고 하자. {\it 동변} 사상, 더 정확히는
+{\it $G$-동변} 사상 $\psi : X \to Y$란 $B$ 위 대수공간의
+사상으로서, 모든 $T$가 $B$ 위에 있을 때
+$\psi : X(T) \to Y(T)$가 $G(T)$-집합의 사상인 것을 말한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+상황 (1)에서는 도식들
+\begin{equation}
+\label{spaces-groupoids-equation-action}
+\xymatrix{
+G \times_B G \times_B X \ar[r]_-{1_G \times a} \ar[d]_{m \times 1_X} &
+G \times_B X \ar[d]^a \\
+G \times_B X \ar[r]^a & X
+}
+\quad
+\xymatrix{
+G \times_B X \ar[r]_-a & X \\
+X\ar[u]^{e \times 1_X} \ar[ru]_{1_X}
+}
+\end{equation}
+이 가환이라는 뜻이다. 상황 (2)에서는 단지 도식
+$$
+\xymatrix{
+% P09-ERR-0871
+G \times_B X \ar[r]_-{\text{id} \times f} \ar[d]_a &
+G \times_B Y \ar[d]^a \\
+X \ar[r]^f & Y
+}
+$$
+이 가환이라는 뜻이다.
+
+\begin{definition}
+\label{spaces-groupoids-definition-free-action}
+Definition \ref{spaces-groupoids-definition-action-group-space}에서와 같이
+$B \to S$, $G \to B$, $X \to B$라 하자.
+$a : G \times_B X \to X$를 $G$의 $X/B$ 위 작용이라 하자.
+모든 스킴 $T$가 $B$ 위에 있을 때
+$a : G(T) \times X(T) \to X(T)$가 군 $G(T)$의 집합
+$X(T)$ 위 자유 작용이면, 이 작용을 {\it 자유롭다}고 한다.
+\end{definition}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-free-action}
+Definition \ref{spaces-groupoids-definition-free-action}과 같은 상황이라 하자.
+% P09-ERR-0872
+작용 $a$가 자유로운 것은
+$$
+G \times_B X \to X \times_B X, \quad (g, x) \mapsto (a(g, x), x)
+$$
+가 대수공간의 단사 사상인 것과 동치이다.
+\end{lemma}
+
+\begin{proof}
+정의에서 즉시 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{주동차 공간}
+\label{spaces-groupoids-section-principal-homogeneous}
+
+\noindent
+이 절은 Groupoids, Section
+\ref{groupoids-section-principal-homogeneous}에 대응한다.
+먼저 그 절을 읽기를 권한다.
+
+\begin{definition}
+\label{spaces-groupoids-definition-pseudo-torsor}
+$S$를 스킴이라 하자. $B$를 $S$ 위의 대수공간이라 하자.
+$(G, m)$을 $B$ 위의 군 대수공간이라 하자.
+$X$를 $B$ 위의 대수공간이라 하고,
+$a : G \times_B X \to X$를 $G$의 $X$ 위 작용이라 하자.
+\begin{enumerate}
+\item $X$를 {\it 유사 $G$-토서}라 하거나 $X$가
+{\it $G$ 아래 형식적 주동차}라고 하는 것은 유도 사상
+$G \times_B X \to X \times_B X$,
+$(g, x) \mapsto (a(g, x), x)$가 동형일 때이다.
+\item 유사 $G$-토서 $X$에 대하여
+% P09-ERR-0873
+$G$-동변 동형 $G \to X$가 $B$ 위에 존재하고 $G$가
+$G$ 위에 왼쪽 곱셈으로 작용하면, 이를 {\it 자명하다}고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+대수공간의 사상 $B' \to B$가 주어졌다고 하자. 그러면
+당김 $X_{B'}$은, 원래의 유사 $G$-토서가 $B$ 위에 있을 때,
+유사 $G_{B'}$-토서이고 $B'$ 위에 있음이 분명하다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-characterize-trivial-pseudo-torsors}
+Definition \ref{spaces-groupoids-definition-pseudo-torsor}의 상황에서 다음이 성립한다.
+\begin{enumerate}
+\item 대수공간 $X$가 유사 $G$-토서인 것은 모든 스킴 $T$가
+$B$ 위에 있을 때 집합 $X(T)$가 공집합이거나 군 $G(T)$의
+$X(T)$ 위 작용이 단순 추이적인 것과 동치이다.
+\item 유사 $G$-토서 $X$가 자명한 것은 사상 $X \to B$가
+절단을 갖는 것과 동치이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{definition}
+\label{spaces-groupoids-definition-principal-homogeneous-space}
+$S$를 스킴이라 하자.
+$B$를 $S$ 위의 대수공간이라 하자.
+$(G, m)$을 $B$ 위의 군 대수공간이라 하자.
+$X$를 유사 $G$-토서라 하고 이것은 $B$ 위에 있다고 하자.
+\begin{enumerate}
+\item $X$를 {\it 주동차 공간}, 더 정확히는
+{\it 주동차 $G$-공간이며 $B$ 위에 있는 것}이라고 하는 것은,
+fpqc 덮개\footnote{Groupoids, Definition
+\ref{groupoids-definition-principal-homogeneous-space}에서 기본으로 쓰는
+토서는 fpqc 덮개 위에서 자명한 유사 토서이다. 한편
+% P09-ERR-0874
+$G$는 대수공간으로서 군의 층으로 볼 수 있으므로 이미
+$G$-토서라는 개념이 있고, 이 개념은
+% P09-ERR-0875
+fppf-토서에 대응한다. Lemma \ref{spaces-groupoids-lemma-torsor}를 보라.
+따라서 fpqc 국소적으로 자명한 유사 토서에는 ``주동차 공간''이라는
+말을 쓰며, 이 상황에서는 토서라는 말을 피하려 한다.}
+$\{B_i \to B\}_{i \in I}$가 존재하여 각각의
+$X_{B_i} \to B_i$가 절단을 가지면(즉 자명한 유사
+$G_{B_i}$-토서이면) 성립한다.
+\item $\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$라 하자.
+$X$를 {\it $G$-토서}라 하되 그 위상이 $\tau$라고 하거나,
+{\it $\tau$ $G$-토서}, 간단히 {\it $\tau$ 토서}라고 하는 것은
+$\tau$ 덮개 $\{B_i \to B\}_{i \in I}$가 존재하여 각각의
+$X_{B_i} \to B_i$가 절단을 가질 때이다.
+\item $X$가 주동차 $G$-공간이고 $B$ 위에 있다고 하자. 이것이
+에탈 위상에 대한 토서이면 {\it 준등자명}이라고 한다.
+\item $X$가 주동차 $G$-공간이고 $B$ 위에 있다고 하자. 이것이
+자리스키 위상에 대한 토서이면 {\it 국소 자명}이라고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+때로는 ``$X$를 $G$-주동차 공간이라 하고 $B$ 위에 두자''라고 말한다.
+이는 $X$가 $B$ 위의 대수공간이고 $G$의 작용을 갖추어
+$B$ 위의 주동차 공간이 됨을 뜻한다. 이제 두 표기가 모두
+적용될 때 앞에서 도입한 표기와 일치함을 보인다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-torsor}
+$S$를 스킴이라 하자.
+$(G, m)$을 $S$ 위의 군 대수공간이라 하자.
+$X$를 $S$ 위의 대수공간이라 하고,
+$a : G \times_S X \to X$를 $G$의 $X$ 위 작용이라 하자.
+그러면 Definition \ref{spaces-groupoids-definition-principal-homogeneous-space}의 의미에서
+$X$가 $G$-토서이고 그 위상이 $fppf$인 것은 Cohomology on Sites,
+Definition \ref{sites-cohomology-definition-torsor}의 의미에서
+$X$가 $G$-토서이고 $(\Sch/S)_{fppf}$ 위에 있는 것과 동치이다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-pseudo-torsor-implications}
+$S$를 스킴이라 하자. $B$를 $S$ 위의 대수공간이라 하자.
+$G$를 $B$ 위의 군 대수공간이라 하자.
+$X$를 유사 $G$-토서라 하고 이것은 $B$ 위에 있다고 하자.
+% P09-ERR-0876
+$G$와 $X$가 $B$ 위에서 국소 유한형이라고 가정하자.
+\begin{enumerate}
+\item $G \to B$가 비분기이면 $X \to B$도 비분기이다.
+\item $G \to B$가 국소 준유한이면 $X \to B$도 국소 준유한이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-where-unramified}에 의해 $B$가 체의
+스펙트럼인 경우로 환원된다. $X$가 공집합이면 결론이 성립한다.
+$X$가 공집합이 아니면 체를 확대하여 $X$가 점을 가진다고
+가정할 수 있다. 그러면 $G \cong X$이고 결론이 성립한다.
+
+\medskip\noindent
+(2)의 증명도 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-finite-locus}를 사용하면
+완전히 같은 방식으로 진행된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{동변 준연접층}
+\label{spaces-groupoids-section-equivariant}
+
+\noindent
+Groupoids, Section \ref{groupoids-section-equivariant}와 비교하라.
+
+\begin{definition}
+\label{spaces-groupoids-definition-equivariant-module}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(G, m)$을 $B$ 위의 군 대수공간이라 하고,
+$a : G \times_B X \to X$를 $G$의 작용이라 하자. 여기서
+대수공간 $X$는 $B$ 위에 있다.
+{\it $G$-동변 준연접 $\mathcal{O}_X$-가군}, 또는 간단히
+{\it 동변 준연접 $\mathcal{O}_X$-가군}이란 쌍
+$(\mathcal{F}, \alpha)$를 말한다. 여기서 $\mathcal{F}$는 준연접
+$\mathcal{O}_X$-가군이고, $\alpha$는 $\mathcal{O}_{G \times_B X}$-가군 사상
+$$
+\alpha : a^*\mathcal{F} \longrightarrow \text{pr}_1^*\mathcal{F}
+$$
+이며, $\text{pr}_1 : G \times_B X \to X$는 사영이고 다음을 만족한다.
+\begin{enumerate}
+\item 도식
+% P09-ERR-0877
+$$
+\xymatrix{
+(1_G \times a)^*\text{pr}_2^*\mathcal{F} \ar[r]_-{\text{pr}_{12}^*\alpha} &
+\text{pr}_2^*\mathcal{F} \\
+(1_G \times a)^*a^*\mathcal{F} \ar[u]^{(1_G \times a)^*\alpha} \ar@{=}[r] &
+(m \times 1_X)^*a^*\mathcal{F} \ar[u]_{(m \times 1_X)^*\alpha}
+}
+$$
+% P09-ERR-0878
+은 $\mathcal{O}_{G \times_B G \times_B X}$-가군의 범주에서 가환한다.
+\item 당김
+$$
+(e \times 1_X)^*\alpha : \mathcal{F} \longrightarrow \mathcal{F}
+$$
+은 항등 사상이다.
+\end{enumerate}
+설명은 Equation (\ref{spaces-groupoids-equation-action})의 관련 도식들과 비교하라.
+\end{definition}
+
+\noindent
+첫 번째 도식의 가환성은 $(e \times 1_X)^*\alpha$가 $\mathcal{F}$ 위의
+멱등 연산자임을 보장한다. 따라서 조건 (2)는 이것이 동형이라는
+조건일 뿐이다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-pullback-equivariant}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$G$를 $B$ 위의 군 대수공간이라 하자.
+$f : X \to Y$를 $G$-동변 사상이라 하자. 여기서 두 대수공간은
+$B$ 위에 있고 $G$-작용을 갖춘다.
+% P09-ERR-0879
+당김 $f^*$를
+$(\mathcal{F}, \alpha) \mapsto (f^*\mathcal{F}, (1_G \times f)^*\alpha)$
+로 정의하면, 준연접 $G$-동변층 가운데 $Y$ 위에 있는 것들의
+범주에서 준연접 $G$-동변층 가운데 $X$ 위에 있는 것들의 범주로
+가는 함자가 된다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+
+
+
+
+\section{대수공간에서의 groupoid}
+\label{spaces-groupoids-section-groupoids}
+
+\noindent
+표기는 Groupoids, Section \ref{groupoids-section-groupoids}을 보라.
+
+\begin{definition}
+\label{spaces-groupoids-definition-groupoid}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+\begin{enumerate}
+\item {\it $B$ 위 대수공간에서의 groupoid}란 오중항
+$(U, R, s, t, c)$를 말한다. 여기서 $U$와 $R$은 $B$ 위의
+대수공간이고, $s, t : R \to U$ 및
+$c : R \times_{s, U, t} R \to R$은 다음 성질을 가지는
+$B$ 위 대수공간의 사상이다. 임의의 스킴 $T$가 $B$ 위에 있을 때 오중항
+$$
+(U(T), R(T), s, t, c)
+$$
+은 groupoid 범주이다.
+\item {\it 대수공간에서의 groupoid의 사상
+$f : (U, R, s, t, c) \to (U', R', s', t', c')$가 $B$ 위에 있다}는
+것은 대수공간의 사상 $f : U \to U'$ 및 $f : R \to R'$가
+$B$ 위에 주어지고 다음 성질을 만족하는 것을 말한다. 임의의 스킴
+$T$가 $B$ 위에 있을 때 사상 $f$는 groupoid 범주
+$(U(T), R(T), s, t, c)$에서 groupoid 범주
+$(U'(T), R'(T), s', t', c')$로 가는 함자를 정의한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$(U, R, s, t, c)$를 대수공간에서의 groupoid라 하고 이것은 $B$ 위에
+있다고 하자. 대수공간의 유일한 사상 $e : U \to R$ 및
+$i : R \to R$가 $B$ 위에 존재하여, 모든 스킴 $T$가 $B$ 위에 있을 때
+유도 사상
+% P09-ERR-0880
+$e : U(T) \to R(T)$는 항등이고,
+% P09-ERR-0881
+$i : R(T) \to R(T)$는 groupoid 범주의 역원이다. 칠중항
+$(U, R, s, t, c, e, i)$은 Groupoids, Section
+\ref{groupoids-section-groupoids}의 공리 (1), (2)(a), (2)(b), (3)(a),
+(3)(b)에 각각 대응하는 가환 도식들을 만족한다. 반대로 이 성질을
+가지는 칠중항이 주어지면 오중항 $(U, R, s, t, c)$는 대수공간에서의
+groupoid이고 $B$ 위에 있다. $i$는 동형이고 $e$는 $s$와 $t$ 모두의
+절단임에 유의하라. 또한 $B$ 위 대수공간에서의 groupoid가 주어지면
+다음과 같이 쓴다.
+$$
+j = (t, s) : R \longrightarrow U \times_B U
+$$
+이는 위의 Section \ref{spaces-groupoids-section-equivalence-relations}에서 정한 관례와
+양립한다. 항등원과 역원의 존재를 강조하려고 때로는
+``$(U, R, s, t, c, e, i)$를 대수공간에서의 groupoid라 하고
+$B$ 위에 두자''라고 말한다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-groupoid-pre-equivalence}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+대수공간에서의 groupoid $(U, R, s, t, c)$가 $B$ 위에 주어지면,
+사상 $j : R \to U \times_B U$는 전동치관계이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 정의에 관한 좋은 연습문제이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-equivalence-groupoid}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+동치관계 $j : R \to U \times_B U$가 $B$ 위에 주어지면, 이를
+대수공간에서의 groupoid $(U, R, s, t, c)$로 확장하고 $B$ 위에
+두는 방법이 유일하게 존재한다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 정의에 관한 좋은 연습문제이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-diagram}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(U, R, s, t, c)$를 대수공간에서의 groupoid라 하고 $B$ 위에 두자.
+가환 도식
+$$
+\xymatrix{
+& U & \\
+R \ar[d]_s \ar[ru]^t &
+R \times_{s, U, t} R
+\ar[l]^-{\text{pr}_0} \ar[d]^{\text{pr}_1} \ar[r]_-c &
+R \ar[d]^s \ar[lu]_t \\
+U & R \ar[l]_t \ar[r]^s & U
+}
+$$
+에서 아래쪽 두 정사각형은 올곱 정사각형이다. 또한 위쪽 삼각형은
+(실제로는 정사각형인데) 역시 데카르트이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 이는 정의와 대수기하학의 함자적 관점에 관한 연습문제이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-diagram-pull}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(U, R, s, t, c, e, i)$를 대수공간에서의 groupoid라 하고 $B$ 위에 두자.
+도식
+\begin{equation}
+\label{spaces-groupoids-equation-pull}
+\xymatrix{
+R \times_{t, U, t} R
+\ar@<1ex>[r]^-{\text{pr}_1} \ar@<-1ex>[r]_-{\text{pr}_0}
+\ar[d]_{\text{pr}_0 \times c \circ (i, 1)} &
+R \ar[r]^t \ar[d]^{\text{id}_R} &
+U \ar[d]^{\text{id}_U} \\
+R \times_{s, U, t} R
+\ar@<1ex>[r]^-c \ar@<-1ex>[r]_-{\text{pr}_0} \ar[d]_{\text{pr}_1} &
+R \ar[r]^t \ar[d]^s &
+U \\
+R \ar@<1ex>[r]^s \ar@<-1ex>[r]_t &
+U
+}
+\end{equation}
+은 가환한다. 위쪽 두 행은 주어진 수직 사상들을 통해 동형이다.
+왼쪽 아래의 두 정사각형은 데카르트이다.
+\end{lemma}
+
+\begin{proof}
+도식의 가환성은 groupoid의 공리에서 따른다. groupoid의 말로 하면,
+왼쪽 위 수직 화살표는 같은 표적을 가지는 사상의 쌍
+$(\alpha, \beta)$에 사상의 쌍
+$(\alpha, \alpha^{-1} \circ \beta)$를 대응시킨다. 모든 groupoid에서
+이는
+$\text{Arrows} \times_{t, \text{Ob}, t} \text{Arrows}$와
+$\text{Arrows} \times_{s, \text{Ob}, t} \text{Arrows}$ 사이의
+전단사를 정의한다. 따라서 보조정리의 두 번째 주장이 따른다.
+마지막 주장은 Lemma \ref{spaces-groupoids-lemma-diagram}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-base-change-groupoid}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(U, R, s, t, c)$를 대수공간에서의 groupoid라 하고 $B$ 위에 두자.
+$B' \to B$를 대수공간의 사상이라 하자. 그러면 밑변환
+$U' = B' \times_B U$, $R' = B' \times_B R$에 $s'$, $t'$, $c'$를
+갖추되 이들이 사상 $s, t, c$의 밑변환이면, 대수공간에서의 groupoid
+$(U', R', s', t', c')$가 되고 이것은 $B'$ 위에 있다. 또한 사영들은
+대수공간에서의 groupoid의 사상
+$(U', R', s', t', c') \to (U, R, s, t, c)$를 정의하며 이것은
+$B$ 위에 있다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트:
+$R' \times_{s', U', t'} R' = B' \times_B (R \times_{s, U, t} R)$.
+\end{proof}
+
+
+
+
+
+\section{Groupoid 위의 준연접층}
+\label{spaces-groupoids-section-groupoids-quasi-coherent}
+
+\noindent
+Groupoids, Section
+\ref{groupoids-section-groupoids-quasi-coherent}와 비교하라.
+
+\begin{definition}
+\label{spaces-groupoids-definition-groupoid-module}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(U, R, s, t, c)$를 대수공간에서의 groupoid라 하고 $B$ 위에 두자.
+{\it $(U, R, s, t, c)$ 위의 준연접 가군}이란 쌍
+$(\mathcal{F}, \alpha)$를 말한다. 여기서 $\mathcal{F}$는 준연접
+$\mathcal{O}_U$-가군이고, $\alpha$는 $\mathcal{O}_R$-가군 사상
+$$
+\alpha : t^*\mathcal{F} \longrightarrow s^*\mathcal{F}
+$$
+이며 다음을 만족한다.
+\begin{enumerate}
+\item 도식
+$$
+\xymatrix{
+& \text{pr}_1^*t^*\mathcal{F} \ar[r]_-{\text{pr}_1^*\alpha} &
+\text{pr}_1^*s^*\mathcal{F} \ar@{=}[rd] & \\
+\text{pr}_0^*s^*\mathcal{F} \ar@{=}[ru] & & & c^*s^*\mathcal{F} \\
+& \text{pr}_0^*t^*\mathcal{F} \ar[lu]^{\text{pr}_0^*\alpha} \ar@{=}[r] &
+c^*t^*\mathcal{F} \ar[ru]_{c^*\alpha}
+}
+$$
+% P09-ERR-0882
+은 $\mathcal{O}_{R \times_{s, U, t} R}$-가군의 범주에서 가환한다.
+\item 당김
+$$
+e^*\alpha : \mathcal{F} \longrightarrow \mathcal{F}
+$$
+은 항등 사상이다.
+\end{enumerate}
+Lemma \ref{spaces-groupoids-lemma-diagram}의 가환 도식들과 비교하라.
+\end{definition}
+
+\noindent
+첫 번째 도식의 가환성은 연산자 $e^*\alpha$가 멱등임을 강제한다.
+따라서 두 번째 조건은 $e^*\alpha$가 동형이라는 말로 다시 쓸 수 있다.
+실제로 이 조건은 $\alpha$가 동형임을 함의한다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-isomorphism}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(U, R, s, t, c)$를 대수공간에서의 groupoid라 하고 $B$ 위에 두자.
+$(\mathcal{F}, \alpha)$가 $(U, R, s, t, c)$ 위의 준연접 가군이면
+$\alpha$는 동형이다.
+\end{lemma}
+
+\begin{proof}
+Definition \ref{spaces-groupoids-definition-groupoid-module}의 가환 도식을 사상
+$(i, 1) : R \to R \times_{s, U, t} R$로 당겨오자. 그러면
+$i^*\alpha \circ \alpha = s^*e^*\alpha$임을 알 수 있다. 사상
+$(1, i)$로 당겨오면 관계
+$\alpha \circ i^*\alpha = t^*e^*\alpha$를 얻는다. 두 번째 가정에
+의해 이 사상들은 항등이다. 따라서 $i^*\alpha$는 $\alpha$의 역이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-pullback}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자. 사상
+$f : (U, R, s, t, c) \to (U', R', s', t', c')$를 생각하자. 이는
+% P09-ERR-0883
+대수공간에서의 groupoid의 사상이고 $B$ 위에 있다. 다음으로 정의한
+% P09-ERR-0884
+당김 $f^*$
+$$
+(\mathcal{F}, \alpha) \mapsto (f^*\mathcal{F}, f^*\alpha)
+$$
+은 $(U', R', s', t', c')$ 위의 준연접층의 범주에서
+$(U, R, s, t, c)$ 위의 준연접층의 범주로 가는 함자를 정의한다.
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-pushforward}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자. 사상
+$f : (U, R, s, t, c) \to (U', R', s', t', c')$를 생각하자. 이는
+대수공간에서의 groupoid의 사상이고 $B$ 위에 있다. 다음을 가정하자.
+\begin{enumerate}
+\item $f : U \to U'$는 준콤팩트이고 준분리이다.
+\item 정사각형
+$$
+\xymatrix{
+R \ar[d]_t \ar[r]_f & R' \ar[d]^{t'} \\
+U \ar[r]^f & U'
+}
+$$
+은 데카르트이다.
+\item $s'$와 $t'$는 평탄하다.
+\end{enumerate}
+% P09-ERR-0885
+다음으로 정의한 앞보냄 $f_*$
+$$
+(\mathcal{F}, \alpha) \mapsto (f_*\mathcal{F}, f_*\alpha)
+$$
+은 $(U, R, s, t, c)$ 위의 준연접층의 범주에서
+$(U', R', s', t', c')$ 위의 준연접층의 범주로 가는 함자를 정의하며,
+Lemma \ref{spaces-groupoids-lemma-pullback}에서 정의한 당김의 오른쪽 수반이다.
+\end{lemma}
+
+\begin{proof}
+$U \to U'$가 준콤팩트이고 준분리이므로 $f_*$는 준연접층을
+준연접층으로 보낸다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward}). 또한 정사각형들
+$$
+\vcenter{
+\xymatrix{
+R \ar[d]_t \ar[r]_f & R' \ar[d]^{t'} \\
+U \ar[r]^f & U'
+}
+}
+\quad\text{및}\quad
+\vcenter{
+\xymatrix{
+R \ar[d]_s \ar[r]_f & R' \ar[d]^{s'} \\
+U \ar[r]^f & U'
+}
+}
+$$
+이 데카르트이므로
+$(t')^*f_*\mathcal{F} = f_*t^*\mathcal{F}$ 및
+$(s')^*f_*\mathcal{F} = f_*s^*\mathcal{F}$를 얻는다. Cohomology of
+Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology}를 보라.
+따라서 $f_*\alpha$를 사상
+$(t')^*f_*\mathcal{F} \to (s')^*f_*\mathcal{F}$로 생각하는 것은
+타당하다. 비슷한 논증으로 $f_*\alpha$가 코사이클 조건을 만족함을
+알 수 있다. 환 달린 공간 위 가군의 당김과 앞보냄은 서로 수반이므로
+이 함자는 당김 함자와 수반이다. 몇 가지 세부사항은 생략한다.
+\end{proof}
+
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-colimits}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(U, R, s, t, c)$를 대수공간에서의 groupoid라 하고 $B$ 위에 두자.
+$(U, R, s, t, c)$ 위의 준연접 가군의 범주는 여극한을 가진다.
+\end{lemma}
+
+\begin{proof}
+$i \mapsto (\mathcal{F}_i, \alpha_i)$를 도식이라 하고 그 지표 범주를
+$\mathcal{I}$라 하자. 여극한
+$\mathcal{F} = \colim \mathcal{F}_i$를 만들 수 있으며, 이는 $U$ 위의
+준연접층이다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-properties-quasi-coherent}를 보라. 여극한은
+당김과 가환하므로 $s^*\mathcal{F} = \colim s^*\mathcal{F}_i$이고,
+마찬가지로 $t^*\mathcal{F} = \colim t^*\mathcal{F}_i$이다. 따라서
+$\alpha = \colim \alpha_i$로 둘 수 있다. $(\mathcal{F}, \alpha)$가
+$(U, R, s, t, c)$ 위의 준연접 가군의 범주에서 이 도식의 여극한이라는
+증명은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-abelian}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(U, R, s, t, c)$를 대수공간에서의 groupoid라 하고 $B$ 위에 두자.
+$s$, $t$가 평탄하면 $(U, R, s, t, c)$ 위의 준연접 가군의 범주는
+아벨 범주이다.
+\end{lemma}
+
+\begin{proof}
+$\varphi : (\mathcal{F}, \alpha) \to (\mathcal{G}, \beta)$를
+$(U, R, s, t, c)$ 위의 준연접 가군의 준동형이라 하자. $s$가
+평탄하므로
+$$
+0 \to s^*\Ker(\varphi)
+\to s^*\mathcal{F} \to s^*\mathcal{G} \to s^*\Coker(\varphi) \to 0
+$$
+은 완전하고 $t$를 따른 당김도 마찬가지이다. 따라서 $\alpha$와
+$\beta$는 코사이클 조건을 만족하는 동형
+$\kappa : t^*\Ker(\varphi) \to s^*\Ker(\varphi)$ 및
+$\lambda : t^*\Coker(\varphi) \to s^*\Coker(\varphi)$를 유도한다.
+이제 $(\Ker(\varphi), \kappa)$와 $(\Coker(\varphi), \lambda)$가
+$(U, R, s, t, c)$ 위의 준연접 가군 범주에서 각각 핵과 여핵임을
+확인하는 것은 곧바르다. 또한 $\Coim(\varphi) = \Im(\varphi)$라는
+조건은 $U$ 위에서 성립하므로 여기서도 성립한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{준연접 가군의 여극한}
+\label{spaces-groupoids-section-colimits}
+
+\noindent
+이 절은 Groupoids, Section \ref{groupoids-section-colimits}에 대응한다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-construct-quasi-coherent}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(U, R, s, t, c)$를 대수공간에서의 groupoid라 하고 $B$ 위에 두자.
+$s, t$가 평탄하고 준콤팩트이며 준분리라고 가정하자. 임의의 준연접
+가군 $\mathcal{G}$가 $U$ 위에 있을 때 표준 동형
+$\alpha : t^*s_*t^*\mathcal{G} \to s^*s_*t^*\mathcal{G}$가 존재하며,
+이는 $(s_*t^*\mathcal{G}, \alpha)$를 $(U, R, s, t, c)$ 위의 준연접
+가군으로 만든다. 이 구성은 함자
+$$
+\QCoh(\mathcal{O}_U) \longrightarrow \QCoh(U, R, s, t, c)
+$$
+를 정의하며, 이 함자는 망각 함자
+$(\mathcal{F}, \beta) \mapsto \mathcal{F}$의 오른쪽 수반이다.
+\end{lemma}
+
+\begin{proof}
+준콤팩트이고 준분리인 사상을 따른 준연접 가군의 앞보냄은
+준연접이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward}를 보라. 따라서
+$s_*t^*\mathcal{G}$는 준연접이다. Lemma \ref{spaces-groupoids-lemma-diagram}의 표기를
+쓰면
+$$
+t^*s_*t^*\mathcal{G} =
+\text{pr}_{1, *}\text{pr}_0^*t^*\mathcal{G} =
+\text{pr}_{1, *}c^*t^*\mathcal{G} =
+s^*s_*t^*\mathcal{G}
+$$
+이다. 가운데 등식은 $t \circ c = t \circ \text{pr}_0$가 사상
+$R \times_{s, U, t} R \to U$ 사이에서 성립하기 때문이고, 첫째 및 마지막 등식은
+이 단계에서 밑변환과 앞보냄이 가환함을 알고 있기 때문이다.
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology}를 보라.
+
+\medskip\noindent
+Definition \ref{spaces-groupoids-definition-groupoid-module}의 $\alpha$에 대한 코사이클
+조건과 수반성을 확인하기 위해 구성
+$\mathcal{G} \mapsto (s_*t^*\mathcal{G}, \alpha)$를 다른 방식으로
+설명하자.
+% P09-ERR-0886
+groupoid 스킴
+% P09-ERR-0888
+$(R, R \times_{t, U, t} R, \text{pr}_0, \text{pr}_1, \text{pr}_{02})$를
+생각하자. 이것은 동치관계 $R \times_{t, U, t} R$에 결부되며,
+그 관계는 $R$ 위에 있다. Lemma \ref{spaces-groupoids-lemma-equivalence-groupoid}를 보라. 사상
+$$
+f :
+(R, R \times_{t, U, t} R, \text{pr}_1, \text{pr}_0, \text{pr}_{02})
+\longrightarrow
+(U, R, s, t, c)
+$$
+% P09-ERR-0887
+이 존재한다. 이는 groupoid 스킴의 사상으로서 $s : R \to U$와
+$R \times_{t, U, t} R \to R$로 주어지며, 뒤의 사상은
+$(r_0, r_1) \mapsto r_0^{-1} \circ r_1$이다. 필요한 도식들의 가환성
+확인은 생략한다. $t, s : R \to U$는 준콤팩트이고 준분리이며
+평탄하고, 데카르트 정사각형
+$$
+\xymatrix{
+R \times_{t, U, t} R \ar[d]_{\text{pr}_0}
+\ar[rr]_-{(r_0, r_1) \mapsto r_0^{-1} \circ r_1} & & R \ar[d]^t \\
+R \ar[rr]^s & & U
+}
+$$
+이 있기 때문에, Lemma \ref{spaces-groupoids-lemma-diagram-pull}에 의해
+Lemma \ref{spaces-groupoids-lemma-pushforward}를 $f$에 적용할 수 있다. 따라서 $f$를
+따른 준연접 가군의 앞보냄과 당김은 수반 함자이다. 증명을 끝내기 위해
+이 함자들을 위에서 설명한 함자들과 동일시하겠다. 이를 위해
+$$
+t^* :
+\QCoh(\mathcal{O}_U)
+\longrightarrow
+\QCoh(R, R \times_{t, U, t} R, \text{pr}_1, \text{pr}_0, \text{pr}_{02})
+$$
+는 준연접층의 하강 이론에 의해 동치임에 유의하자. 실제로
+$\{t : R \to U\}$는 fpqc 덮개이다. Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}를 보라.
+
+\medskip\noindent
+$f$를 따른 앞보냄 앞에 동치 $t^*$를 합성하면 $\mathcal{G}$를
+$(s_*t^*\mathcal{G}, \alpha)$로 보낸다. 이 방식으로 얻은 동형
+$\alpha$가 위에서 구성한 것과 같다는 확인은 생략한다.
+
+\medskip\noindent
+$f$를 따른 당김 뒤에 동치 $t^*$의 역을 합성하면
+$(\mathcal{F}, \beta)$를 $\{t : R \to U\}$에 관한 가군
+$s^*\mathcal{F}$의 하강으로 보낸다. 이 가군에는 하강 자료 $\gamma$를
+갖추고, 이 자료는 $R \times_{t, U, t} R$ 위에 있으며 이는
+$\beta$를 $(r_0, r_1) \mapsto r_0^{-1} \circ r_1$로 당겨온 것이다.
+동형 $\beta : t^*\mathcal{F} \to s^*\mathcal{F}$를 생각하자.
+$t^*\mathcal{F}$ 위의 표준 하강 자료로서 $\{t : R \to U\}$에 관한 것
+(Descent on Spaces, Definition
+\ref{spaces-descent-definition-descent-datum-effective-quasi-coherent})는
+$\beta$를 통해 사상
+$$
+\text{pr}_0^*s^*\mathcal{F}
+\xrightarrow{\text{pr}_0^*\beta^{-1}}
+\text{pr}_0^*t^*\mathcal{F}
+\xrightarrow{can}
+\text{pr}_1^*t^*\mathcal{F}
+\xrightarrow{\text{pr}_1^*\beta}
+\text{pr}_1^*s^*\mathcal{F}
+$$
+으로 옮겨진다. $\beta$가 코사이클 조건을 만족하므로, 이는
+$\beta$를 $(r_0, r_1) \mapsto r_0^{-1} \circ r_1$로 당겨온 것과
+같다. 이를 보려면 Definition \ref{spaces-groupoids-definition-groupoid-module}의 실제
+코사이클 관계를 취해 사상
+$(\text{pr}_0, c \circ (i, 1)) : R \times_{t, U, t} R \to R \times_{s, U, t} R$
+로 당겨오라. 이 사상은 Lemma \ref{spaces-groupoids-lemma-diagram-pull}의 가환 도식에도
+등장한다. 따라서 $(s^*\mathcal{F}, \gamma)$는
+$(t^*\mathcal{F}, can)$과 동형이다. 모두 합치면, $f$를 따른 당김 뒤에
+동치 $t^*$의 역을 합성한 것은 망각 함자
+$(\mathcal{F}, \beta) \mapsto \mathcal{F}$와 동형이다.
+\end{proof}
+
+\begin{remark}
+\label{spaces-groupoids-remark-adjunction-map}
+Lemma \ref{spaces-groupoids-lemma-construct-quasi-coherent}의 상황에서
+$$
+F : \QCoh(U, R, s, t, c) \to \QCoh(\mathcal{O}_U),\quad
+(\mathcal{F}, \beta) \mapsto \mathcal{F}
+$$
+를 망각 함자라 하고,
+$$
+G : \QCoh(\mathcal{O}_U) \to \QCoh(U, R, s, t, c),\quad
+\mathcal{G} \mapsto (s_*t^*\mathcal{G}, \alpha)
+$$
+를 보조정리에서 구성한 오른쪽 수반이라 하자. 수반의 단위원
+$\eta : \text{id} \to G \circ F$를 $(\mathcal{F}, \beta)$에서
+계산하면 사상
+$$
+\mathcal{F} \to s_*s^*\mathcal{F} \xrightarrow{\beta^{-1}} s_*t^*\mathcal{F}
+$$
+으로 주어진다. 확인은 생략한다.
+\end{remark}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-push-pull}
+$S$를 스킴이라 하자.
+$f : Y \to X$를 $S$ 위 대수공간의 사상이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하고,
+$\mathcal{G}$를 준연접 $\mathcal{O}_Y$-가군이라 하며,
+$\varphi : \mathcal{G} \to f^*\mathcal{F}$를 가군 사상이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $\varphi$는 단사이다.
+\item $f$는 준콤팩트이고 준분리이며 평탄하고 전사이다.
+\item $X$, $Y$는 국소 뇌터이고,
+\item $\mathcal{G}$는 연접 $\mathcal{O}_Y$-가군이다.
+\end{enumerate}
+올곱으로 정의한 $\mathcal{F} \cap f_*\mathcal{G}$
+$$
+\xymatrix{
+\mathcal{F} \ar[r] & f_*f^*\mathcal{F} \\
+\mathcal{F} \cap f_*\mathcal{G} \ar[u] \ar[r] &
+f_*\mathcal{G} \ar[u]
+}
+$$
+은 연접 $\mathcal{O}_X$-가군이다.
+\end{lemma}
+
+\begin{proof}
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian}의 연접 가군의 특성화와,
+연접 가군들이 $\QCoh(\mathcal{O}_X)$의 Serre 부분범주를 이룬다는
+사실을 자유롭게 쓰겠다. 후자는 Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian-quasi-coherent-sub-quotient}을
+보라. $f$가 절단 $\sigma$를 가지면
+$\mathcal{F} \cap f_*\mathcal{G}$는
+$\sigma^*\mathcal{G} \to \sigma^*f^*\mathcal{F} = \mathcal{F}$의 상에
+포함되므로 연접이다. 일반적으로 $\mathcal{F} \cap f_*\mathcal{G}$가
+연접임을 보이기 위해서는
+% P09-ERR-0889
+$f^*(\mathcal{F} \cap f_*\mathcal{G})$가 연접임을 보이면 충분하다
+(Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-finite-type-descends}를 보라). $f$가 평탄하므로
+이는 $f^*\mathcal{F} \cap f^*f_*\mathcal{G}$와 같다. $f$가 평탄하고
+준콤팩트이며 준분리이므로
+$f^*f_*\mathcal{G} = p_*q^*\mathcal{G}$이다. 여기서
+$p, q : Y \times_X Y \to Y$는 사영이다. Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology}를 보라. $p$는
+절단을 가지므로 결론이 따른다.
+\end{proof}
+
+\noindent
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(U, R, s, t, c)$를 대수공간에서의 groupoid라 하고 $B$ 위에 두자.
+$U$가 국소 뇌터라고 가정하자. 아래 보조정리에서는
+준연접층 $(\mathcal{F}, \alpha)$가 $(U, R, s, t, c)$ 위에 있을 때
+{\it 연접}이라는 말을 $\mathcal{F}$가 연접 $\mathcal{O}_U$-가군이라는
+뜻으로 쓴다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-colimit-coherent}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(U, R, s, t, c)$를 대수공간에서의 groupoid라 하고 $B$ 위에 두자.
+다음을 가정하자.
+\begin{enumerate}
+\item $U$, $R$은 뇌터이다.
+\item $s, t$는 평탄하고 준콤팩트이며 준분리이다.
+\end{enumerate}
+그러면 모든 준연접 가군 $(\mathcal{F}, \alpha)$가
+$(U, R, s, t, c)$ 위에 있을 때 연접 가군들의 여과 여극한이다.
+\end{lemma}
+
+\begin{proof}
+국소 뇌터 대수공간 위 연접 가군에 대한 Cohomology of Spaces,
+Lemma \ref{spaces-cohomology-lemma-coherent-Noetherian}의 특성화를
+더 언급하지 않고 쓰겠다. $\mathcal{F} = \colim \mathcal{H}_i$를
+연접 부분가군 $\mathcal{H}_i \subset \mathcal{F}$들의 여과 여극한으로
+쓸 수 있다. Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-directed-colimit-coherent}를 보라. 준연접층
+$\mathcal{H}$가 $U$ 위에 주어지면, Lemma
+\ref{spaces-groupoids-lemma-construct-quasi-coherent}의 준연접층
+$(s_*t^*\mathcal{H}, \alpha)$를 $(U, R, s, t, c)$ 위에 있는 것으로
+나타내겠다. 수반 사상
+$(\mathcal{F}, \beta) \to (s_*t^*\mathcal{F}, \alpha)$를
+$\QCoh(U, R, s, t, c)$에서 생각하자. Remark
+\ref{spaces-groupoids-remark-adjunction-map}을 보라. 다음과 같이 둔다.
+$$
+(\mathcal{F}_i, \beta_i) =
+(\mathcal{F}, \beta)
+\times_{(s_*t^*\mathcal{F}, \alpha)}
+(s_*t^*\mathcal{H}_i, \alpha)
+$$
+이는 $\QCoh(U, R, s, t, c)$에서의 정의이다. $U$로의 제한은
+Lemma \ref{spaces-groupoids-lemma-abelian}의 증명에 의해
+$\QCoh(U, R, s, t, c)$ 위의 완전함자이므로 올곱 도식
+$$
+\xymatrix{
+\mathcal{F} \ar[r] & s_*t^*\mathcal{F} \\
+\mathcal{F}_i \ar[r] \ar[u] & s_*t^*\mathcal{H}_i \ar[u]
+}
+$$
+을 얻는다. 달리 말하면
+$\mathcal{F}_i = \mathcal{F} \cap s_*t^*\mathcal{H}_i$이다.
+Remark \ref{spaces-groupoids-remark-adjunction-map}의 수반 사상 설명에 의해 이 도식은
+도식
+$$
+\xymatrix{
+\mathcal{F} \ar[r] & s_*s^*\mathcal{F} \\
+\mathcal{F}_i \ar[r] \ar[u] & s_*t^*\mathcal{H}_i \ar[u]
+}
+$$
+과 동형이다. 여기서 오른쪽 수직 화살표는 $s_*$를 사상
+$$
+t^*\mathcal{H}_i \to t^*\mathcal{F} \xrightarrow{\beta} s^*\mathcal{F}
+$$
+에 적용한 결과이다. $t$가 평탄 사상이므로 이 화살표는
+단사이다. 따라서 Lemma \ref{spaces-groupoids-lemma-push-pull}에 의해
+$\mathcal{F}_i$는 연접이다. 끝으로 $s$가 준콤팩트이고 준분리이므로
+$s_*$는 여극한과 가환한다(Cohomology of Schemes, Lemma
+\ref{coherent-lemma-colimit-cohomology}를 보라). 따라서
+$s_*t^*\mathcal{F} = \colim s_*t^*\mathcal{H}_i$이고, 원하는 대로
+$(\mathcal{F}, \beta) = \colim (\mathcal{F}_i, \beta_i)$이다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{준연접층의 결정}
+\label{spaces-groupoids-section-crystals}
+
+\noindent
+$(I, \Phi, j)$를 집합 $I$와 전관계 $j : \Phi \to I \times I$로
+이루어진 쌍이라 하자. 각 $i \in I$에 대해 스킴 $X_i$가, 각
+$\phi \in \Phi$에 대해 스킴의 사상 $f_\phi : X_{i'} \to X_i$가
+주어졌다고 하자. 여기서 $j(\phi) = (i, i')$이다. 다음과 같이 둔다.
+$X = (\{X_i\}_{i \in I}, \{f_\phi\}_{\phi \in \Phi})$.
+{\it $X$ 위 준연접 가군의 결정}이란 다음 규칙을 말한다. 이 규칙은 각
+% P09-ERR-0890
+$i \in \Ob(\mathcal{I})$에 준연접층 $\mathcal{F}_i$를 대응시키고,
+이 층은 $X_i$ 위에 있다. 또한 각 $\phi \in \Phi$ 가운데
+$j(\phi) = (i, i')$인 것에 준연접층의 동형
+$$
+\alpha_\phi : f_\phi^*\mathcal{F}_i \longrightarrow \mathcal{F}_{i'}
+$$
+을 대응시키고, 이 동형은 $X_{i'}$ 위에 있다. 이러한 준연접 가군의 결정들은 가법 범주
+$\textit{CQC}(X)$를 이룬다.\footnote{삼중항들의 집합
+$\phi, \phi', \phi'' \in \Phi$를 따로 정하여
+$j(\phi) = (i, i')$, $j(\phi') = (i', i'')$,
+$j(\phi'') = (i, i'')$ 및
+$f_{\phi''} = f_\phi \circ f_{\phi'}$를 만족하게 하고, 이 삼중항들에
+대하여 $\alpha_{\phi'} \circ f_{\phi'}^*\alpha_\phi = \alpha_{\phi''}$를
+요구할 수도 있다. 그러면 가법 부분범주가 정의된다. 예를 들어
+$(I, \Phi)$라는 자료는 지표 범주의 대상과 화살표의 집합일 수 있고,
+$X$는 이 지표 범주 위 스킴의 도식일 수 있다. Lemma
+\ref{spaces-groupoids-lemma-crystals-in-quasi-coherent-modules}의 결론은 그 부분범주에서도
+곧바로 대응하는 결론을 준다.} 이 범주는 여극한을 가진다(증명은
+Lemma \ref{spaces-groupoids-lemma-colimits}의 증명과 같다). 모든 사상 $f_\phi$가
+평탄하면 $\textit{CQC}(X)$는 아벨 범주이다(증명은 Lemma
+\ref{spaces-groupoids-lemma-abelian}의 증명과 같다). $\kappa$를 기수라 하자. 준연접
+가군의 결정 $\mathcal{F}$가 $X$ 위에 있고
+{\it $\kappa$-생성}이라는 것은
+각 $\mathcal{F}_i$가 $\kappa$-생성이라는 뜻이다(Properties,
+Definition \ref{properties-definition-kappa-generated}을 보라).
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-crystals-in-quasi-coherent-modules}
+위의 상황에서 모든 사상 $f_\phi$가 평탄하면, 어떤 기수 $\kappa$가
+존재하여 모든 대상
+$(\{\mathcal{F}_i\}_{i \in I}, \{\alpha_\phi\}_{\phi \in \Phi})$가
+$\textit{CQC}(X)$ 안에서
+자신의 $\kappa$-생성 부분가군들의 유향 여극한이 된다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리와 증명에서
+$(\{\mathcal{F}_i\}_{i \in I}, \{\alpha_\phi\}_{\phi \in \Phi})$의
+{\it 부분가군}이란 준연접 부분가군
+$\mathcal{G}_i \subset \mathcal{F}_i$를 모든 $i$에 대해 주어
+$\alpha_\phi(f_\phi^*\mathcal{G}_i) = \mathcal{G}_{i'}$가 모든
+$\mathcal{F}_{i'}$의 부분층으로서 모든 $\phi \in \Phi$에 대해 성립하게 하는
+자료를 뜻한다. $f_\phi$가 평탄하면 당김 $f^*_\phi$는 완전함자, 즉
+부분층을 보존하므로 이 정의는 타당하다.
+% P09-ERR-0891
+이 증명은 Properties, Lemma \ref{properties-lemma-colimit-kappa}의 증명의
+한 변형이다. 먼저 그 증명을 읽기를 권한다.
+
+\medskip\noindent
+모든 스킴 $X_i$가 아핀인 경우에 보조정리를 증명하면 충분하다고
+주장한다. 이를 보기 위해
+$$
+J = \coprod\nolimits_{i \in I} \{U \subset X_i\text{ affine open}\}
+$$
+로 두고,
+% P09-ERR-0892
+\begin{align*}
+\Psi = & \coprod\nolimits_{\phi \in \Phi}
+\{
+(U, V) \mid
+U \subset X_i, V \subset X_{i'}\text{ affine open with } f_\phi(U) \subset V
+\} \\
+&
+\amalg \coprod\nolimits_{i \in I}
+\{
+(U, U') \mid
+U, U' \subset X_i\text{ affine open with } U \subset U'
+\}
+\end{align*}
+에 자명한 사상 $\Psi \to J \times J$를 갖추자. 그러면
+$(\mathcal{F}, \alpha)$는 준연접층의 결정
+$(\{\mathcal{H}_j\}_{j \in J}, \{\beta_\psi\}_{\psi \in \Psi})$를
+유도하고, 이 결정은 $Y = (J, \Psi)$ 위에 있다. 이는
+$\mathcal{H}_{(i, U)} = \mathcal{F}_i|_U$로 두되
+$(i, U) \in J$에 대해 그렇게 하고, $\beta_\psi$를
+$\psi \in \Psi$에 대해 다음과 같이 두어 얻는다.
+% P09-ERR-0893
+$\alpha_\phi$를 $U$에 제한한 것으로 두되 이는
+$\psi = (\phi, U, V)$일 때이고,
+$\text{id} : (\mathcal{F}_i|_{U'})|_U \to \mathcal{F}_i|_U$로 두되 이는
+$\psi = (i, U, U')$일 때이다.
+더 나아가
+$(\{\mathcal{H}_j\}_{j \in J}, \{\beta_\psi\}_{\psi \in \Psi})$의
+부분가군들은 $1$-대-$1$로
+$(\{\mathcal{F}_i\}_{i \in I}, \{\alpha_\phi\}_{\phi \in \Phi})$의
+부분가군들과 일대일로 대응한다. 증명은 생략한다(힌트: Sheaves,
+Section \ref{sheaves-section-bases}를 사용하라). 또한 $\kappa$가 $Y$에
+대해 성립하면 같은 $\kappa$가 $X$에 대해서도 성립함이 분명하다
+($\kappa$-생성 가군의 정의에 의한다).
+% P09-ERR-0894
+따라서 $Y$ 위 준연접층의 결정에 대하여 보조정리를 증명하면 충분하다.
+
+\medskip\noindent
+모든 스킴 $X_i$가 아핀이라고 가정하자. $\kappa$를 $I$ 또는 $\Phi$의
+크기보다 큰 무한 기수라 하자. 대상
+$(\{\mathcal{F}_i\}_{i \in I}, \{\alpha_\phi\}_{\phi \in \Phi})$를
+$\textit{CQC}(X)$에서 잡자. 각 $i$에 대하여 $X_i = \Spec(A_i)$ 및
+$M_i = \Gamma(X_i, \mathcal{F}_i)$로 쓰자. 모든 $\phi \in \Phi$ 가운데
+$j(\phi) = (i, i')$인 것에 대하여 $\alpha_\phi$는 $A_{i'}$-가군 동형
+$$
+\alpha_\phi : M_i \otimes_{A_i} A_{i'} \longrightarrow M_{i'}
+$$
+으로 옮겨진다. 선택 공리를 사용하여 규칙
+% P09-ERR-0895
+$$
+(\phi, m) \longmapsto S(\phi, m')
+$$
+을 택하자. 정의역은 쌍 $(\phi, m')$의 모음이다. 여기서
+$\phi \in \Phi$이고 $j(\phi) = (i, i')$이며 $m' \in M_{i'}$이다.
+값은 유한 부분집합
+$S(\phi, m') \subset M_i$이며
+$$
+m' = \alpha_\phi\left(\sum\nolimits_{m \in S(\phi, m')} m \otimes a'_m\right)
+$$
+이 어떤 $a'_m \in A_{i'}$에 대해 성립한다.
+
+\medskip\noindent
+이 선택들을 한 뒤, 임의의 $\mathcal{F}_i$의 임의의 $X_i$ 위 절단이
+$\kappa$-생성 부분가군에 속한다고 주장한다. 이를 보기 위해 부분집합들의
+모음 $\mathcal{S} = \{S_i\}_{i \in I}$가 주어지고 각
+$S_i \subset M_i$의 크기가 $\kappa$ 이하라고 하자. 새 모음
+$\mathcal{S}' = \{S'_i\}_{i \in I}$을 다음과 같이 정의한다.
+$$
+S'_i = S_i \cup
+\bigcup\nolimits_{(\phi, m'),\ j(\phi) = (i, i'),\ m' \in S_{i'}} S(\phi, m')
+$$
+각 $S'_i$의 크기는 여전히 $\kappa$ 이하이다.
+$\mathcal{S}^{(0)} = \mathcal{S}$,
+$\mathcal{S}^{(1)} = \mathcal{S}'$로
+두고 귀납적으로 $\mathcal{S}^{(n + 1)} = (\mathcal{S}^{(n)})'$로 둔다.
+그런 다음 $S_i^{(\infty)} = \bigcup_{n \geq 0} S_i^{(n)}$ 및
+$\mathcal{S}^{(\infty)} = \{S_i^{(\infty)}\}_{i \in I}$로 둔다.
+구성상 모든 $\phi \in \Phi$ 가운데 $j(\phi) = (i, i')$인 것과 모든
+$m' \in S^{(\infty)}_{i'}$에 대하여 $m'$을
+$\alpha_\phi(m \otimes 1)$ 꼴의 상들의 유한 선형결합으로 쓸 수 있으며,
+여기서 $m \in S_i^{(\infty)}$이다. 따라서 $N_i$를
+$A_i$-부분가군으로 두되, 이는 $M_i$ 안에서 $S_i^{(\infty)}$가 생성한
+것으로 한다. 그러면 대응하는
+준연접 부분가군
+% P09-ERR-0896
+$\widetilde{N_i} \subset \mathcal{F}_i$들은 $\kappa$-생성 부분가군을
+이룬다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-set-generators}
+Section \ref{spaces-groupoids-section-notation}에서와 같이 $B \to S$라 하자.
+$(U, R, s, t, c)$를 대수공간에서의 groupoid라 하고 $B$ 위에 두자.
+$s$, $t$가 평탄하면 어떤 집합 $T$와
+대상들의 족 $(\mathcal{F}_t, \alpha_t)_{t \in T}$가
+$\QCoh(U, R, s, t, c)$ 안에 존재하여, 모든 대상
+$(\mathcal{F}, \alpha)$가 이 대상들 가운데 하나와 동형인 자신의
+부분가군들, 즉 $(\mathcal{F}_t, \alpha_t)$ 가운데 하나와 동형인
+부분가군들의 유향 여극한이 된다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 스킴에서의 groupoid를 다루는 Groupoids, Lemma
+\ref{groupoids-lemma-colimit-kappa}의 일반화이다. 정확히 같은 논증을
+쓸 수는 없으므로, 위에서 전개한 ``준연접층의 결정''에 관한 내용을
+사용한다.
+
+\medskip\noindent
+스킴 $W$와 전사 에탈 사상 $W \to U$를 택하자. 스킴 $V$와 전사 에탈 사상
+$V \to W \times_{U, s} R$를 택하자. 스킴 $V'$과 전사 에탈 사상
+$V' \to R \times_{t, U} W$를 택하자. 스킴들의 모음
+$$
+I = \{W, W \times_U W, V, V', V \times_R V'\}
+$$
+과 스킴 사상들의 집합
+$$
+\Phi = \{\text{pr}_i : W \times_U W \to W, V \to W, V' \to W,
+V \times_R V' \to V, V \times_R V' \to V'\}
+$$
+을 생각하자. $X = (I, \Phi)$로 둔다. 준연접층의 결정의 범주
+$\textit{CQC}(X)$를 정의했음을 상기하자. 이 범주의 결정들은 $X$ 위에 있다.
+다음 함자가 있다.
+$$
+\QCoh(U, R, s, t, c) \longrightarrow \textit{CQC}(X)
+$$
+이 함자는 $(\mathcal{F}, \alpha)$에 다음 자료를 대응시킨다. 층
+$\mathcal{F}|_W$를
+$W$ 위에, 층 $\mathcal{F}|_{W \times_U W}$를 $W \times_U W$ 위에,
+$\mathcal{F}$를 $V \to W \times_{U, s} R \to W \to U$를 통해 당겨온
+층을 $V$ 위에, $\mathcal{F}$를
+$V' \to R \times_{t, U} W \to W \to U$를 통해 당겨온 층을 $V'$ 위에,
+끝으로 $\mathcal{F}$를
+$V \times_R V' \to V \to W \times_{U, s} R \to W \to U$를 통해
+당겨온 층을 $V \times_R V'$ 위에 둔다. 비교 사상
+$\{\alpha_\phi\}_{\phi \in \Phi}$에는 당김의 결합법칙에서 오는
+자명한 것들을 쓰되, 사상
+$\phi = \text{pr}_{V'} : V \times_R V' \to V'$에는
+$\alpha : t^*\mathcal{F} \to s^*\mathcal{F}$를 $V \times_R V'$로
+당겨온 것을 쓴다. 이는 다음 가환 도식 때문에 타당하다.
+$$
+\xymatrix{
+& V \times_R V' \ar[ld] \ar[rd] \\
+V \ar[rd] \ar[dd] & & V' \ar[ld] \ar[dd] \\
+& R \ar@<-1ex>[dd]_s \ar@<1ex>[dd]^t \\
+W \ar[rd] & & W \ar[ld] \\
+& U
+}
+$$
+위에 표시한 함자는 범주의 동치가 아니다. 그러나 $W \to U$가 전사
+에탈이므로 이 함자는 충실하다.\footnote{실제로 이 함자는 완전충실하지만,
+여기서는 필요하지 않다.} 위 도식의 모든 사상이 평탄하므로 이 함자는
+아벨 범주 사이의 완전함자이다. 또한
+% P09-ERR-0897
+$(\mathcal{F}, \alpha)$가 주어지고 그 상이
+$(\{\mathcal{F}_i\}_{i \in I}, \{\alpha_\phi\}_{\phi \in \Phi})$이면
+$1$-대-$1$ 대응이 존재하며, 이는
+$(\mathcal{F}, \alpha)$의 준연접 부분가군들과
+$(\{\mathcal{F}_i\}_{i \in I}, \{\alpha_\phi\}_{\phi \in \Phi})$의
+부분가군들 사이의 대응이라고 주장한다. 실제로
+$(\{\mathcal{F}_i\}_{i \in I}, \{\alpha_\phi\}_{\phi \in \Phi})$의
+부분가군이 주어졌을 때, $W$ 위 부분가군과 사영 사상
+$W \times_U W \to W$의
+양립성은 이 부분가군이 $\mathcal{F}$의 준연접 부분가군에서 옴을
+보장한다(Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-quasi-coherent}에 의한다). 또한
+$\alpha_{\text{pr}_{V'}}$와의 양립성은 이 부분층이 $\alpha$와 양립함을
+보장한다(세부사항은 생략한다).
+
+\medskip\noindent
+기수 $\kappa$를 Lemma \ref{spaces-groupoids-lemma-crystals-in-quasi-coherent-modules}에서처럼
+계 $X = (I, \Phi)$에 대해 택하자. Properties, Lemma
+\ref{properties-lemma-set-of-iso-classes}에서 $\kappa$-생성인
+준연접층의 결정 가운데 $X$ 위에 있는 것들의 동형류들이 집합을 이룸이
+분명하다. 따라서 결론이
+분명하다.
+\end{proof}
+\section{Groupoid와 군 공간}
+\label{spaces-groupoids-section-groupoids-group-spaces}
+
+\noindent
+Groupoids, Section \ref{groupoids-section-groupoids-group-schemes}와
+비교하라.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-groupoid-from-action}
+Section \ref{spaces-groupoids-section-notation}에서와 같은 $B \to S$를 잡자.
+군 대수공간 $(G, m)$을 $B$ 위에 잡되 그 항등원을 $e_G$, 역원을
+$i_G$라 하자. 대수공간 $X$를 $B$ 위에 잡고, 사상
+$a : G \times_B X \to X$를 $G$의 $X$에 대한 $B$ 위 작용이라
+하자. 그러면 대수공간에서의 groupoid $(U, R, s, t, c, e, i)$를
+$B$ 위에서 다음과 같이 얻는다.
+\begin{enumerate}
+\item $U = X$, $R = G \times_B X$로 둔다.
+\item $s : R \to U$를 $(g, x) \mapsto x$로 둔다.
+\item $t : R \to U$를 $(g, x) \mapsto a(g, x)$로 둔다.
+\item $c : R \times_{s, U, t} R \to R$를
+$((g, x), (g', x')) \mapsto (m(g, g'), x')$로 둔다.
+\item $e : U \to R$를 $x \mapsto (e_G(x), x)$로 둔다.
+\item $i : R \to R$를 $(g, x) \mapsto (i_G(g), a(g, x))$로 둔다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 집합 수준에서 이것이 성립함을 보이면 충분하다.
+이를 위해 보조정리 앞에서 $g$를 $v$에서 $a(g, v)$로 가는
+화살표로 설명한 내용을 사용하라.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-action-groupoid-modules}
+Section \ref{spaces-groupoids-section-notation}에서와 같은 $B \to S$를 잡자.
+군 대수공간 $(G, m)$을 $B$ 위에 잡자.
+대수공간 $X$를 $B$ 위에 잡고, 사상
+$a : G \times_B X \to X$를 $G$의 $X$에 대한 $B$ 위 작용이라
+하자. Lemma
+\ref{spaces-groupoids-lemma-groupoid-from-action}에서 구성한 대수공간에서의
+groupoid를 $(U, R, s, t, c)$라 하자.
+규칙
+$(\mathcal{F}, \alpha) \mapsto (\mathcal{F}, \alpha)$는
+$G$-동변 $\mathcal{O}_X$-가군의 범주와
+$(U, R, s, t, c)$ 위 준연접 가군의 범주 사이의 범주 동치를 정의한다.
+\end{lemma}
+
+\begin{proof}
+이 주장은 의미가 있다. 실제로 $t = a$이고 $s = \text{pr}_1$이며,
+이들은 사상 $R = G \times_B X \to X$이다. Definitions
+\ref{spaces-groupoids-definition-equivariant-module}와
+\ref{spaces-groupoids-definition-groupoid-module}를 보라.
+Lemma \ref{spaces-groupoids-lemma-groupoid-from-action}의 번역을 사용하면 두 정의의
+가환성 조건이 정확히 서로 일치한다.
+\end{proof}
+
+
+
+
+\section{안정자 군 대수공간}
+\label{spaces-groupoids-section-stabilizer}
+
+\noindent
+Groupoids, Section \ref{groupoids-section-stabilizer}와 비교하라.
+대수공간에서의 groupoid가 주어지면 다음과 같이 군 대수공간을 얻는다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-groupoid-stabilizer}
+Section \ref{spaces-groupoids-section-notation}에서와 같은 $B \to S$를 잡자.
+대수공간에서의 groupoid $(U, R, s, t, c)$를 $B$ 위에 잡자.
+다음 데카르트 정사각형으로 정의되는 대수공간 $G$
+$$
+\xymatrix{
+G \ar[r] \ar[d] & R \ar[d]^{j = (t, s)} \\
+U \ar[r]^-{\Delta} & U \times_B U
+}
+$$
+는 $U$ 위 군 대수공간이며, 그 합성법칙 $m$은 합성법칙 $c$에 의해
+유도된다.
+\end{lemma}
+
+\begin{proof}
+이는 groupoid 범주에서 임의의 대상의 자기 사상들의 집합이 군을
+이루기 때문이다.
+\end{proof}
+
+\noindent
+$\Delta$가 단사사상이므로 $G = j^{-1}(\Delta_{U/B})$는 $R$의
+부분층이다. 이렇게 생각하면 구조 사상
+$G = j^{-1}(\Delta_{U/B}) \to U$는 $s$ 또는 $t$ 중 어느 것에
+의해서도 유도되며(둘은 같다), $m$은 $c$에 의해 유도된다.
+
+\begin{definition}
+\label{spaces-groupoids-definition-stabilizer-groupoid}
+Section \ref{spaces-groupoids-section-notation}에서와 같은 $B \to S$를 잡자.
+대수공간에서의 groupoid $(U, R, s, t, c)$를 $B$ 위에 잡자.
+군 대수공간 $j^{-1}(\Delta_{U/B}) \to U$를
+{\it 대수공간에서의 groupoid $(U, R, s, t, c)$의 안정자}라 한다.
+\end{definition}
+
+\noindent
+문헌에서는 안정자 군 대수공간을 흔히 $S$로 나타낸다(아마도
+stabilizer라는 단어가 s로 시작하기 때문일 것이다). 여기서는
+이미 기저 스킴을 $S$로 나타냈으므로 그렇게 할 수 없다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-groupoid-action-stabilizer}
+Section \ref{spaces-groupoids-section-notation}에서와 같은 $B \to S$를 잡자.
+대수공간에서의 groupoid $(U, R, s, t, c)$를 $B$ 위에 잡고 그
+안정자를 $G/U$라 하자. $R_t/U$는 대수공간 $R$을 $U$ 위에서
+사상 $t : R \to U$를 통하여 본 것이라고 나타내자.
+표준적인 왼쪽 작용
+$$
+a : G \times_U R_t \longrightarrow R_t
+$$
+이 존재하며, 이는 합성법칙 $c$에 의해 유도된다.
+\end{lemma}
+
+\begin{proof}
+$T/B$ 위의 점으로 표현하면 $a(g, r) = c(g, r)$로 정의한다.
+\end{proof}
+
+
+
+
+
+
+
+\section{Groupoid의 제한}
+\label{spaces-groupoids-section-restrict-groupoid}
+
+\noindent
+표기법은 Groupoids, Section
+\ref{groupoids-section-restrict-groupoid}을 참조하라.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-restrict-groupoid}
+Section \ref{spaces-groupoids-section-notation}에서와 같은 $B \to S$를 잡자.
+대수공간에서의 groupoid $(U, R, s, t, c)$를 $B$ 위에 잡자.
+대수공간의 사상 $g : U' \to U$를 잡자.
+다음 도식을 생각하자.
+$$
+\xymatrix{
+R' \ar[d] \ar[r] \ar@/_3pc/[dd]_{t'} \ar@/^1pc/[rr]^{s'}&
+R \times_{s, U} U' \ar[r] \ar[d] &
+U' \ar[d]^g \\
+U' \times_{U, t} R \ar[d] \ar[r] &
+R \ar[r]^s \ar[d]_t &
+U \\
+U' \ar[r]^g &
+U
+}
+$$
+여기서 모든 정사각형은 섬유곱 정사각형이다. 그러면 표준적인
+합성법칙 $c' : R' \times_{s', U', t'} R' \to R'$가 존재하여
+$(U', R', s', t', c')$는 $B$ 위 대수공간에서의 groupoid가 되고,
+$U' \to U$, $R' \to R$은 사상
+$(U', R', s', t', c') \to (U, R, s, t, c)$를 $B$ 위
+대수공간에서의 groupoid 사이에 정의한다. 더욱이 임의의 스킴
+$T$를 $B$ 위에 잡으면 groupoid의 함자
+$$
+(U'(T), R'(T), s', t', c') \to (U(T), R(T), s, t, c)
+$$
+는 $(U(T), R(T), s, t, c)$를 사상 $U'(T) \to U(T)$를 통하여
+제한한 것이다(Groupoids, Section
+\ref{groupoids-section-restrict-groupoid} 참조).
+\end{lemma}
+
+\begin{proof}
+생략한다.
+\end{proof}
+
+\begin{definition}
+\label{spaces-groupoids-definition-restrict-groupoid}
+Section \ref{spaces-groupoids-section-notation}에서와 같은 $B \to S$를 잡자.
+대수공간에서의 groupoid $(U, R, s, t, c)$를 $B$ 위에 잡자.
+사상 $g : U' \to U$를 대수공간의 사상으로서 $B$ 위에 잡자.
+Lemma \ref{spaces-groupoids-lemma-restrict-groupoid}에서 구성한 대수공간에서의
+groupoid의 사상
+$(U', R', s', t', c') \to (U, R, s, t, c)$를
+{\it $(U, R, s, t, c)$의 $U'$로의 제한}이라 한다.
+이 경우 때때로 $R' = R|_{U'}$라는 표기법을 사용한다.
+\end{definition}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-restrict-groupoid-relation}
+Definitions \ref{spaces-groupoids-definition-restrict-groupoid}와
+\ref{spaces-groupoids-definition-restrict-relation}에서 정의한 groupoid와
+(준)동치관계의 제한 개념은 Lemmas
+\ref{spaces-groupoids-lemma-groupoid-pre-equivalence}와
+\ref{spaces-groupoids-lemma-equivalence-groupoid}의 구성을 통하여 일치한다.
+\end{lemma}
+
+\begin{proof}
+여기서 말하는 것은 Lemma \ref{spaces-groupoids-lemma-restrict-groupoid}의 $R'$가
+또한
+$$
+R' = (U' \times_B U')\times_{U \times_B U} R
+\longrightarrow
+U' \times_B U'
+$$
+와 같다는 것이다. 실제로 이것이 그 보조정리를 진술하는 더 명료한
+방식이었을 수도 있다.
+\end{proof}
+
+
+
+
+
+\section{불변 부분공간}
+\label{spaces-groupoids-section-invariant}
+
+\noindent
+이 절에서는 불변 부분공간의 개념을 간단히 논한다.
+
+\begin{definition}
+\label{spaces-groupoids-definition-invariant-open}
+Section \ref{spaces-groupoids-section-notation}에서와 같은 $B \to S$를 잡자.
+대수공간에서의 groupoid $(U, R, s, t, c)$를 기저 $B$ 위에 잡자.
+\begin{enumerate}
+\item 열린 부분공간 $W \subset U$가 {\it $R$-불변}이라는 것은
+$t(s^{-1}(W)) \subset W$를 만족한다는 뜻이다.
+\item 국소 닫힌 부분공간 $Z \subset U$가 $R$의 국소 닫힌
+부분공간으로서 $t^{-1}(Z) = s^{-1}(Z)$를 만족하면
+{\it $R$-불변}이라고 한다.
+\item 대수공간의 단사사상 $T \to U$가 $R$ 위 대수공간으로서
+$T \times_{U, t} R = R \times_{s, U} T$를 만족하면
+{\it $R$-불변}이라고 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+열린 부분공간 $W \subset U$의 $R$-불변성은
+$s^{-1}(W) = t^{-1}(W)$를 요구하는 것과도 동치이다.
+$W \subset U$가 $R$-불변이면 $R$의 $W$로의 제한은 단지
+$R_W = s^{-1}(W) = t^{-1}(W)$이다. 마찬가지로 $Z \subset U$가
+$R$-불변 국소 닫힌 부분공간이면 $R$의 $Z$로의 제한은 단지
+$R_Z = s^{-1}(Z) = t^{-1}(Z)$이다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-constructing-invariant-opens}
+Section \ref{spaces-groupoids-section-notation}에서와 같은 $B \to S$를 잡자.
+대수공간에서의 groupoid $(U, R, s, t, c)$를 $B$ 위에 잡자.
+\begin{enumerate}
+\item $s$와 $t$가 열린 사상이면, 모든 열린집합 $W \subset U$에
+대하여 열린집합 $s(t^{-1}(W))$는 $R$-불변이다.
+\item $s$와 $t$가 열린 준콤팩트 사상이면, $U$는 $R$-불변
+준콤팩트 열린 부분공간들로 이루어진 열린 덮개를 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$s$와 $t$가 열린 사상이고 $W \subset U$가 열린집합이라고 하자.
+$s$가 열린 사상이므로 $W' = s(t^{-1}(W))$는 $U$의 열린
+부분공간이다. 이제 함자적 관점으로 이것이 $R$-불변인 $U$의
+열린 부분집합임을 확인하기는 매우 쉽지만, 도식으로 직접 논증하는
+것이 유익하다고 생각하므로 그렇게 하겠다.
+$t^{-1}(W')$는 사상
+$$
+A := t^{-1}(W) \times_{s|_{t^{-1}(W)}, U, t} R
+\xrightarrow{\text{pr}_1} R
+$$
+의 상이고, $s^{-1}(W')$는 사상
+$$
+B := R \times_{s, U, s|_{t^{-1}(W)}} t^{-1}(W)
+\xrightarrow{\text{pr}_0} R.
+$$
+의 상임에 유의하라. 위 화살표 왼쪽의 대수공간 $A$, $B$는 각각
+$R \times_{s, U, t} R$와 $R \times_{s, U, s} R$의 열린
+부분공간이다. Lemma \ref{spaces-groupoids-lemma-diagram}에 의해 도식
+$$
+\xymatrix{
+R \times_{s, U, t} R \ar[rd]_{\text{pr}_1} \ar[rr]_{(\text{pr}_1, c)} & &
+R \times_{s, U, s} R \ar[ld]^{\text{pr}_0} \\
+& R &
+}
+$$
+은 가환하고 수평 화살표는 동형사상이다. 더욱이
+$(\text{pr}_1, c)(A) = B$임이 명백하다. 따라서
+$s^{-1}(W') = t^{-1}(W')$이고 $W'$는 $R$-불변이다.
+이로써 (1)을 증명했다.
+
+\medskip\noindent
+이제 $s$, $t$가 모두 열린 준콤팩트 사상이라고 하자.
+$W \subset U$가 준콤팩트 열린집합이면
+$W' = s(t^{-1}(W))$도 준콤팩트 열린집합이고, 위 논의에 의해
+불변이다. $W$가 $U$ 위 에탈 아핀들의 상들을 모두 달리하게 하면
+(2)를 얻는다.
+\end{proof}
+
+
+
+
+
+\section{몫 층}
+\label{spaces-groupoids-section-quotient-sheaves}
+
+\noindent
+$S$를 스킴이라 하고 $B$를 $S$ 위 대수공간이라 하자.
+$j : R \to U \times_B U$를 $B$ 위 준관계라 하자.
+각 스킴 $S'$를 $S$ 위에 잡자. 동치관계
+$\sim_{S'}$는 사상 $j(S') : R(S') \to U(S') \times U(S')$의
+상이 생성하는 것으로 취할 수 있다. 따라서 준층
+\begin{equation}
+\label{spaces-groupoids-equation-quotient-presheaf}
+\begin{matrix}
+(\Sch/S)^{opp}_{fppf} &
+\longrightarrow &
+\textit{Sets}, \\
+S' &
+\longmapsto  &
+U(S')/\sim_{S'}
+\end{matrix}
+\end{equation}
+을 얻는다. $j$는 $B$ 위 대수공간의 사상이고
+$U \times_B U$로 가므로, 준층
+(\ref{spaces-groupoids-equation-quotient-presheaf})에서 $B$로 가는 표준적인 준층의
+변환이 있음에 유의하라.
+
+\begin{definition}
+\label{spaces-groupoids-definition-quotient-sheaf}
+위와 같은 $B \to S$와 준관계 $j : R \to U \times_B U$를 잡자.
+이 상황에서 {\it 몫 층 $U/R$}은 $j$에 연관되며,
+$(\Sch/S)_{fppf}$ 위 준층
+(\ref{spaces-groupoids-equation-quotient-presheaf})의 층화이다.
+$j : R \to U \times_B U$가 Lemma
+\ref{spaces-groupoids-lemma-groupoid-from-action}에서와 같이 군 대수공간
+$G$의 $B$ 위에서의 $U$에 대한 작용에서 오면, 몫 층을
+$U/G$라 나타낸다.
+\end{definition}
+
+\noindent
+이는 정확히 도식
+$$
+\xymatrix{
+R \ar@<1ex>[r] \ar@<-1ex>[r] &
+U \ar[r] &
+U/R
+}
+$$
+이 $(\Sch/S)_{fppf}$ 위 집합의 층의 범주에서 쌍대등화자 도식이라는
+뜻이다. 다시 층의 표준적인 사상 $U/R \to B$가 있다. 이는
+$j$가 $B$ 위 대수공간의 사상으로서 $U \times_B U$로 가기
+때문이다.
+
+\begin{remark}
+\label{spaces-groupoids-remark-quotient-variant}
+위 구성의 한 변형은 함자
+$$
+\begin{matrix}
+(\textit{Spaces}/B)^{opp}_{fppf} &
+\longrightarrow &
+\textit{Sets}, \\
+X &
+\longmapsto  &
+U(X)/\sim_X
+\end{matrix}
+$$
+를 층화하는 것이다. 여기서 이제
+$\sim_X \subset U(X) \times U(X)$는
+$j : R(X) \to U(X) \times U(X)$의 상이 생성하는 동치관계이다.
+물론 여기서 $U(X) = \Mor_B(X, U)$이고
+$R(X) = \Mor_B(X, R)$이다. 실제로 (Topologies of Spaces의 미래
+참조를 여기에 삽입)의 동일시를 통하면 결과는 같았을 것이다.
+\end{remark}
+
+\begin{definition}
+\label{spaces-groupoids-definition-representable-quotient}
+Definition \ref{spaces-groupoids-definition-quotient-sheaf}의 상황을 가정하자.
+준관계 $j$에 대하여 층 $U/R$가 대수공간이면
+{\it 대수공간으로 표현되는 몫}을 갖는다고 한다.
+준관계 $j$에 대하여 층 $U/R$가 스킴으로 표현되면
+{\it 표현 가능한 몫}을 갖는다고 한다.
+대수공간에서의 groupoid $(U, R, s, t, c)$가 $B$ 위에 있을 때
+몫 $U/R$가 $j = (t, s)$에 대해 표현 가능하면(각각 대수공간이면)
+{\it 표현 가능한 몫}을 갖는다고(각각
+{\it 대수공간으로 표현되는 몫}을 갖는다고) 한다.
+\end{definition}
+
+\noindent
+몫 $U/R$가 $M$으로 표현되면($S$ 위의 스킴이나 대수공간 어느
+경우든), 위에서 본 것처럼 표준적인 구조 사상 $M \to B$가 함께
+주어진다.
+
+\medskip\noindent
+다음 보조정리는 몫을 표현하는 $M$을 특징짓는다.
+예를 들어 $U \to M$이 평탄하고 유한 표시이며 전사이고
+$R \cong U \times_M U$이면 이를 적용할 수 있다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-criterion-quotient-representable}
+Definition \ref{spaces-groupoids-definition-quotient-sheaf}의 상황을 가정하자.
+$M$이라는 대수공간이 $S$ 위에 있고 다음을 만족하는 사상
+$U \to M$이
+존재한다고 가정하자.
+\begin{enumerate}
+\item 사상 $U \to M$은 $s, t$를 등화한다.
+\item 사상 $U \to M$은 층의 전사이다.
+\item 유도된 사상 $(t, s) : R \to U \times_M U$은 층의 전사이다.
+\end{enumerate}
+이 경우 $M$은 몫 층 $U/R$를 표현한다.
+\end{lemma}
+
+\begin{proof}
+조건 (1)은 $U \to M$이 $U/R$를 통하여 인수분해된다는 뜻이다.
+조건 (2)는 층의 사상으로서 $U/R \to M$이 전사라는 뜻이다.
+조건 (3)은 층의 사상으로서 $U/R \to M$이 단사라는 뜻이다.
+따라서 보조정리를 얻는다.
+\end{proof}
+
+\noindent
+다음 보조정리는 $j$가 준동치관계라고 요구하지 않으면(가령 단지
+준관계라고만 하면) 틀리다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-pre-equivalence}
+$S$를 스킴이라 하자. $B$를 $S$ 위 대수공간이라 하자.
+$j : R \to U \times_B U$를 $B$ 위 준동치관계라 하자.
+스킴 $S'$를 $S$ 위에 잡고 $a, b \in U(S')$라 하자. 다음은
+동치이다.
+\begin{enumerate}
+\item $a$와 $b$는 $(U/R)(S')$의 같은 원소로 사상된다.
+\item fppf 덮개 $\{f_i : S_i \to S'\}$가 $S'$를 덮고 다음을 만족하는
+사상 $r_i : S_i \to R$이 존재한다.
+$a \circ f_i = s \circ r_i$이고 $b \circ f_i = t \circ r_i$이다.
+\end{enumerate}
+달리 말하면, 이 경우 층의 사상
+$$
+R \longrightarrow U \times_{U/R} U
+$$
+은 전사이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 이것이 성립하는 이유는 이 경우 준층
+(\ref{spaces-groupoids-equation-quotient-presheaf})가 실제로
+$T \mapsto U(T)/j(R(T))$로 주어지기 때문이다.
+실제로 $j(R(T)) \subset U(T) \times U(T)$는 동치관계이다.
+Definition \ref{spaces-groupoids-definition-equivalence-relation}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-pre-equivalence-relation-restrict}
+$S$를 스킴이라 하자. $B$를 $S$ 위 대수공간이라 하자.
+$j : R \to U \times_B U$를 $B$ 위 준동치관계라 하고
+$g : U' \to U$를 $B$ 위 대수공간의 사상이라 하자.
+$j' : R' \to U' \times_B U'$를 $j$의 $U'$로의 제한이라 하자.
+몫 층의 사상
+$$
+U'/R' \longrightarrow U/R
+$$
+은 단사이다. $U' \to U$가 층의 사상으로서 전사이면, 예를 들어
+$\{g : U' \to U\}$가 fppf 덮개이면(Topologies on Spaces,
+Definition \ref{spaces-topologies-definition-fppf-covering} 참조),
+$U'/R' \to U/R$는 층의 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+$\xi, \xi' \in (U'/R')(S')$가 $U/R$의 같은 단면으로 사상되는
+단면들이라고 하자. 그러면 fppf 덮개
+$\mathcal{S} = \{S_i \to S'\}$를 $S'$에 대해 찾아
+$\xi|_{S_i}, \xi'|_{S_i}$가 $a_i, a_i' \in U'(S_i)$로 주어지게 할
+수 있다. Lemma \ref{spaces-groupoids-lemma-quotient-pre-equivalence}와 자리의
+공리들에 의해 $\mathcal{T}$를 세분한 뒤 사상
+$r_i : S_i \to R$이 존재하여
+$g \circ a_i = s \circ r_i$, $g \circ a_i' = t \circ r_i$를
+만족한다고 가정할 수 있다.
+구성상
+$R' = R \times_{U \times_S U} (U' \times_S U')$
+이므로 $(r_i, (a_i, a_i')) \in R'(S_i)$이고, 이는 $a_i$와
+$a_i'$가 $U'/R'$에서 $S_i$ 위의 같은 단면을 정의함을 보인다.
+층 조건에 의해 이는 $\xi = \xi'$를 뜻한다.
+
+\medskip\noindent
+$U' \to U$가 층의 전사이면 $U'/R' \to U/R$도 전사이다.
+마지막으로 $\{g : U' \to U\}$가 fppf 덮개이면 층의 사상
+$U' \to U$는 전사이다. Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fppf-covering-surjective}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-groupoid-restrict}
+$S$를 스킴이라 하자. $B$를 $S$ 위 대수공간이라 하자.
+$(U, R, s, t, c)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+$g : U' \to U$를 $B$ 위 대수공간의 사상이라 하자.
+$(U', R', s', t', c')$를 $(U, R, s, t, c)$의 $U'$로의 제한이라
+하자. 몫 층의 사상
+$$
+U'/R' \longrightarrow U/R
+$$
+은 단사이다. 합성
+$$
+\xymatrix{
+U' \times_{g, U, t} R \ar[r]_-{\text{pr}_1} \ar@/^3ex/[rr]^h
+& R \ar[r]_s & U
+}
+$$
+이 fppf 층의 전사이면 이 사상은 전단사이다.
+예를 들어 $\{h : U' \times_{g, U, t} R \to U\}$가
+$fppf$-덮개이거나, $U' \to U$가 층의 전사이거나,
+$\{g : U' \to U\}$가 fppf 위상에서 덮개이면 이것이 성립한다.
+\end{lemma}
+
+\begin{proof}
+단사성은 Lemmas \ref{spaces-groupoids-lemma-groupoid-pre-equivalence}와
+\ref{spaces-groupoids-lemma-quotient-pre-equivalence-relation-restrict}를 결합하면
+따른다. 전사성을 보이기 위해(Sites, Section
+\ref{sites-section-sheaves-injective}에서 층의 전사 사상의
+특징짓기를 보라) 다음과 같이 논증한다.
+$T$가 스킴이고 $\sigma \in U/R(T)$라고 하자.
+덮개 $\{T_i \to T\}$가 존재하여 $\sigma|_{T_i}$가 어떤 원소
+$f_i \in U(T_i)$의 상이 된다. 따라서 $\sigma$가
+$f \in U(T)$의 상이라고 가정할 수 있다. $h$가 층의 전사라는
+가정에 의해 fppf 덮개 $\{\varphi_i : T_i \to T\}$와 사상
+$f_i : T_i \to U' \times_{g, U, t} R$를 찾아
+$f \circ \varphi_i = h \circ f_i$를 만족하게 할 수 있다.
+$f'_i = \text{pr}_0 \circ f_i : T_i \to U'$라 나타내자.
+그러면 $f'_i \in U'(T_i)$는 $g \circ f'_i \in U(T_i)$로 사상되고,
+$$
+g \circ f'_i \sim_{T_i} h \circ f_i = f \circ \varphi_i
+$$
+이다. 표기법은 (\ref{spaces-groupoids-equation-quotient-presheaf})에서와 같다.
+즉 관계를 주는 $R(T_i)$의 원소는 $\text{pr}_1 \circ f_i$이다.
+이는 $\sigma$의 $T_i$로의 제한이 원하는 대로
+$U'/R'(T_i) \to U/R(T_i)$의 상에 있음을 뜻한다.
+
+\medskip\noindent
+$\{h\}$가 fppf 덮개이면 층의 전사를 유도한다. Topologies on
+Spaces, Lemma
+\ref{spaces-topologies-lemma-fppf-covering-surjective}를 보라.
+$U' \to U$가 전사이면 $h$도 전사이다. 실제로 $s$는
+단면, 즉 groupoid 스킴의 중립원 $e$를 가진다.
+\end{proof}
+
+
+
+
+
+\section{몫 스택}
+\label{spaces-groupoids-section-stacks}
+
+\noindent
+이 절과 이어지는 몇 절에서는 위의 Section
+\ref{spaces-groupoids-section-quotient-sheaves}와 Groupoids, Section
+\ref{groupoids-section-quotient-sheaves}의 한 일반화를 설명한다.
+차이는 다음과 같다. 몫 층 대신 몫 스택을 취할 것이다.
+
+\medskip\noindent
+스킴 $S$, 대수공간 $B$를 $S$ 위에, 그리고 대수공간에서의
+groupoid $(U, R, s, t, c)$를 $B$ 위에 가지고 있다고 하자.
+이 자료가 주어지면 함자
+\begin{equation}
+\label{spaces-groupoids-equation-quotient-stack}
+\begin{matrix}
+(\Sch/S)_{fppf}^{opp} &
+\longrightarrow &
+\textit{Groupoids} \\
+S' &
+\longmapsto &
+(U(S'), R(S'), s, t, c)
+\end{matrix}
+\end{equation}
+를 생각한다. Categories, Example
+\ref{categories-example-functor-groupoids}에 의해 이 ‘groupoid에서의
+준층’은 $(\Sch/S)_{fppf}$ 위 groupoid들로 섬유화된 범주에
+대응한다. 이 장에서는 이를
+$$
+[U/_{\!p}R] \to (\Sch/S)_{fppf}
+$$
+로 나타낸다. 여기서 아래첨자 $ {}_p$는 몫 스택과 구별하기 위해
+붙인 것이다.
+
+\begin{definition}
+\label{spaces-groupoids-definition-quotient-stack}
+몫 스택. 위와 같은 $B \to S$를 잡자.
+\begin{enumerate}
+\item $(U, R, s, t, c)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+{\it 몫 스택}
+$$
+p : [U/R] \longrightarrow (\Sch/S)_{fppf}
+$$
+은 $(U, R, s, t, c)$의 것이며 스택화이다(Stacks, Lemma
+\ref{stacks-lemma-stackify-groupoids} 참조). 스택화하는 대상은
+groupoid들로 섬유화된 범주 $[U/_{\!p}R]$이며,
+$(\Sch/S)_{fppf}$ 위에 있고
+(\ref{spaces-groupoids-equation-quotient-stack})에 연관된다.
+\item $(G, m)$을 $B$ 위 군 대수공간이라 하자.
+$a : G \times_B X \to X$를 $G$의 한 대수공간에 대한 $B$ 위
+작용이라 하자. {\it 몫 스택}
+$$
+p : [X/G] \longrightarrow (\Sch/S)_{fppf}
+$$
+은 대수공간에서의 groupoid
+$(X, G \times_B X, s, t, c)$를 $B$ 위에서 취한 것에 연관된
+몫 스택이다. 이는 Lemma \ref{spaces-groupoids-lemma-groupoid-from-action}의
+groupoid이다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+따라서 $[U/R]$와 $[X/G]$는 $(\Sch/S)_{fppf}$ 위
+groupoid에서의 스택이다. 이 스택들은 뒤에서 매우 중요하므로
+상세히 설명하는 것이 타당하다. 대수공간 $X$가 $S$ 위에 주어졌을
+때 표기법 $\mathcal{S}_X \to (\Sch/S)_{fppf}$는 층 $X$에
+연관된 집합에서의 스택을 나타낸다는 것을 상기하라. Categories,
+Lemma \ref{categories-lemma-2-category-fibred-sets}와 Stacks,
+Lemma \ref{stacks-lemma-when-stack-in-sets}를 보라.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-arrows}
+Definition \ref{spaces-groupoids-definition-quotient-stack} (1)에서와 같은
+$B \to S$와 $(U, R, s, t, c)$를 가정하자.
+표준적인 $1$-사상 $\pi : \mathcal{S}_U \to [U/R]$와
+$[U/R] \to \mathcal{S}_B$가 존재하며, 이들은
+$(\Sch/S)_{fppf}$ 위 groupoid에서의 스택의 사상이다.
+합성 $\mathcal{S}_U \to \mathcal{S}_B$는 $1$-사상이며 구조 사상
+$U \to B$에 연관된다.
+\end{lemma}
+
+\begin{proof}
+이 증명에서 준층 (\ref{spaces-groupoids-equation-quotient-stack})에 연관된
+groupoid들로 섬유화된 범주를 $[U/_{\!p}R]$로 나타내자.
+스택화의 구성에 의해 $1$-사상
+$[U/_{\!p}R] \to [U/R]$가 존재한다.
+$1$-사상 $\mathcal{S}_U \to [U/R]$는 단순히 합성
+$\mathcal{S}_U \to [U/_{\!p}R] \to [U/R]$이다.
+여기서 첫 화살표는 스킴 $S'/S$와 사상
+$x : S' \to U$를 취하되 이 사상은 $S$ 위에 있고, 대상
+$x \in U(S')$를 대응시킨다. 이는 $[U/_{\!p}R]$의 섬유 범주에서
+$S'$ 위의 대상이다.
+
+\medskip\noindent
+$1$-사상 $[U/R] \to \mathcal{S}_B$를 구성하려면
+$1$-사상 $[U/_{\!p}R] \to \mathcal{S}_B$를 구성하면 충분하다.
+Stacks, Lemma
+\ref{stacks-lemma-stackify-groupoids-universal-property}를 보라.
+$S'/S$ 위의 대상에는 사상
+$$
+U(S') \longrightarrow B(S')
+$$
+을 사용한다. 이는 구조 사상 $U \to B$에서 온다.
+그리고 $a \in R(S')$가 시작점
+$s(a) \in U(S')$와 끝점 $t(a) \in U(S')$를 갖는 ‘화살표’라
+하자. $s$와 $t$는 $B$ {\it 위의} 사상이므로 두 점은 모두
+같은 원소 $\overline{a}$로 사상되며, 이는 $B(S')$의 원소이다.
+따라서 화살표
+$a \in R(S')$를 $\overline{a}$의 항등사상으로 보낼 수 있다.
+(섬유 범주 $(\mathcal{S}_B)_{S'}$에는 항등사상만 있으므로
+이것이 옳다.) 이 규칙이 이러한 분할 섬유화 범주에서의 당김과
+양립하여 원하는 $1$-사상
+$[U/_{\!p}R] \to \mathcal{S}_B$를 정의한다는 확인은 생략한다.
+
+\medskip\noindent
+마지막 명제의 확인은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-2-arrow}
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-arrows}와 같은 가정과 표기법을
+사용하자. 표준적인 $2$-사상
+$\alpha : \pi \circ s \to \pi \circ t$가 존재하여 도식
+$$
+\xymatrix{
+\mathcal{S}_R \ar[r]_s \ar[d]_t & \mathcal{S}_U \ar[d]^\pi \\
+\mathcal{S}_U \ar[r]^-\pi & [U/R]
+}
+$$
+을 $2$-가환으로 만든다.
+\end{lemma}
+
+\begin{proof}
+$S'$를 $S$ 위 스킴이라 하자. $r : S' \to R$를 $S$ 위 사상이라
+하자. 그러면 $r \in R(S')$는 대상
+$s \circ r, t \circ r \in U(S')$ 사이의 동형사상이다.
+더욱이 이 구성은 당김과 양립한다. 이는 표준적인 $2$-사상
+$\alpha_p : \pi_p \circ s \to \pi_p \circ t$를 준다.
+여기서 $\pi_p : \mathcal{S}_U \to [U/_{\!p}R]$는 Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-arrows}의 증명에서와 같다. 따라서 도식
+$$
+\xymatrix{
+\mathcal{S}_R \ar[r]_s \ar[d]^t & \mathcal{S}_U \ar[d]^{\pi_p} \\
+\mathcal{S}_U \ar[r]^-{\pi_p} & [U/_{\!p}R]
+}
+$$
+조차 $2$-가환이다. 그러므로 보조정리의 도식은 더욱이
+$2$-가환이다.
+\end{proof}
+
+\begin{remark}
+\label{spaces-groupoids-remark-fundamental-square}
+뒤의 장들에서는 $\mathcal{S}_X$로 나타내는 집합에서의 스택이
+$X$에 연관되어 있을 때 이를 단순히 $X$라고 쓰는 모호한
+표기법을 사용할 것이다. 이 표기법을 사용하면 Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-2-arrow}의 도식은 익숙한 도식
+$$
+\xymatrix{
+R \ar[r]_s \ar[d]_t & U \ar[d]^\pi \\
+U \ar[r]^-\pi & [U/R]
+}
+$$
+이 된다. 다음 절들에서는 이 도식이 좋은 성질을 많이 가짐을
+보일 것이다. 특히 이것이 $2$-섬유곱임을
+(Section \ref{spaces-groupoids-section-quotient-stack-2-cartesian}) 보이고,
+$2$-쌍대등화자, 즉 $s$와 $t$를 쌍대등화하는 것에 가깝다는 것도
+(Section \ref{spaces-groupoids-section-quotient-stacks-2-coequalize}) 보일 것이다.
+\end{remark}
+
+
+
+
+\section{몫 스택의 함자성}
+\label{spaces-groupoids-section-functoriality-quotient-stacks}
+
+\noindent
+대수공간에서의 groupoid의 사상은 연관된 몫 스택의 사상을 준다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-functorial}
+$S$를 스킴이라 하자. $B$를 $S$ 위 대수공간이라 하자.
+$f : (U, R, s, t, c) \to (U', R', s', t', c')$를 $B$ 위
+대수공간에서의 groupoid의 사상이라 하자. 그러면 $f$는 표준적인
+몫 스택의 $1$-사상
+$$
+[f] : [U/R] \longrightarrow [U'/R'].
+$$
+을 유도한다.
+\end{lemma}
+
+\begin{proof}
+함자 (\ref{spaces-groupoids-equation-quotient-stack})에 연관된 groupoid들로
+섬유화된 범주를 $[U/_{\!p}R]$와 $[U'/_{\!p}R']$로 나타내자.
+이들은 기저 자리 $(\Sch/S)_{fppf}$ 위에 있다.
+$f$가 $1$-사상
+$[U/_{\!p}R] \to [U'/_{\!p}R']$를 정의함은 명백하며, 이를
+$[U'/R']$의 스택화 함자와 합성하여
+$[U/_{\!p}R] \to [U'/R']$를 얻는다. 그런 다음 스택화 함자
+$[U/_{\!p}R] \to [U/R]$의 보편성에 의해(Stacks, Lemma
+\ref{stacks-lemma-stackify-groupoids-universal-property} 참조)
+$[U/R] \to [U'/R']$를 얻는다.
+\end{proof}
+
+\noindent
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-functorial}에서와 같은
+$B \to S$와
+$f : (U, R, s, t, c) \to (U', R', s', t', c')$를 잡자.
+이 상황에서 세 번째 $B$ 위 대수공간에서의 groupoid를 다음과 같이
+정의한다. 여기서는 $T$-값 점의 언어를 사용하며, $T$는 달리는
+스킴으로 $B$ 위에 있다.
+\begin{enumerate}
+\item $U'' = U \times_{f, U', t'} R'$로 둔다. 따라서 $T$-값 점은
+쌍 $(u, r')$이며 $f(u) = t'(r')$를 만족한다.
+\item $R'' = R \times_{f \circ s, U', t'} R'$로 둔다. 따라서
+$T$-값 점은 쌍 $(r, r')$이며 $f(s(r)) = t'(r')$를 만족한다.
+\item $s'' : R'' \to U''$는
+$s''(r, r') = (s(r), r')$로 주어진다.
+\item $t'' : R'' \to U''$는
+$t''(r, r') = (t(r), c'(f(r), r'))$로 주어진다.
+\item $c'' : R'' \times_{s'', U'', t''} R'' \to R''$는
+$c''((r_1, r'_1), (r_2, r'_2)) = (c(r_1, r_2), r'_2)$로 주어진다.
+\end{enumerate}
+$c''$의 공식은 의미가 있다. 실제로
+$s''(r_1, r'_1) = t''(r_2, r'_2)$이다.
+$c''$가 결합적임은 명백하다. 항등원 $e''$는
+$e''(u, r) = (e(u), r)$로 주어진다. $(r, r')$의 역원은
+$(i(r), c'(f(r), r'))$로 주어진다. 따라서 실제로 $B$ 위
+대수공간에서의 groupoid를 얻는다.
+
+\medskip\noindent
+사상 $U'' \to U$와 $R'' \to R$이 groupoid의 사상
+$g : (U'', R'', s'', t'', c'') \to (U, R, s, t, c)$를
+정의함은 명백하며, 이는 대수공간에서의 groupoid 사이에서 $B$
+위에 있다. 더욱이 사상 $U'' \to U'$,
+$(u, r') \mapsto s'(r')$와 $R'' \to U'$,
+$(r, r') \mapsto s'(r')$는 실제로
+$(U'', R'', s'', t'', c'')$가 $U'$ 위 대수공간에서의
+groupoid임을 보인다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-cartesian-square-of-morphism}
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-functorial}에서와 같은 표기법과
+가정을 사용하자. 위에서 구성한 대수공간에서의 groupoid
+$(U'', R'', s'', t'', c'')$를 $B$ 위에 잡자.
+$2$-가환 정사각형
+$$
+\xymatrix{
+[U''/R''] \ar[d] \ar[r]_{[g]} & [U/R] \ar[d]^{[f]} \\
+\mathcal{S}_{U'} \ar[r] & [U'/R']
+}
+$$
+이 존재하며, 이는 $[U''/R'']$를 $2$-섬유곱과 동일시한다.
+\end{lemma}
+
+\begin{proof}
+사상 $[f]$와 $[g]$는 Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-functorial}을 적용하여 얻고, 나머지
+두 사상은 Lemma \ref{spaces-groupoids-lemma-quotient-stack-arrows}에서 얻는다
+($(U'', R'', s'', t'', c'')$가 $U'$ 위에 있다는 사실도 사용한다).
+$2$-섬유곱 성질을 보이려면 groupoid들로 섬유화된 범주의 도식
+$$
+\xymatrix{
+[U''/_{\!p}R''] \ar[d] \ar[r]_{[g]} & [U/_{\!p}R] \ar[d]^{[f]} \\
+\mathcal{S}_{U'} \ar[r] & [U'/_{\!p}R']
+}
+$$
+에 대해 보조정리를 증명하면 충분하다. Stacks, Lemma
+\ref{stacks-lemma-stackification-fibre-product-categories-fibred-in-groupoids}를
+보라. 달리 말하면, $2$-섬유곱
+$\mathcal{S}_U \times_{[U'/_{\!p}R']} [U/_{\!p}R]$의 대상을
+$T$ 위에서 잡았을 때, 이것이 $T$-값 점이며 $U''$에 속하는 점에
+대응하고 사상에 대해서도 마찬가지임을 보이면 충분하다.
+물론 이는 애초에 $U''$와 $R''$를 구성한 바로 그 방식이다.
+
+\medskip\noindent
+구체적으로,
+$\mathcal{S}_U \times_{[U'/_{\!p}R']} [U/_{\!p}R]$의 대상은
+$T$ 위에서 삼중항 $(u', u, r')$이다. 여기서 $u'$는 $T$-값 점이며
+$U'$에 속하고, $u$는 $T$-값 점이며 $U$에 속한다. 또한
+$r'$는 $u'$에서 $f(u)$로 가는 $[U'/R']_T$의 사상이다. 즉
+$r'$는 $T$-값 점이며 $R$에 속하고
+$s'(r') = u'$이고 $t'(r') = f(u)$이다. 정보를 잃지 않고
+$u'$를 잊을 수 있음이 명백하고, 이 대상들이 $T$-값 점이며
+$R''$에 속하는 점들과 일대일 대응함을 알 수 있다.
+
+\medskip\noindent
+사상도 마찬가지이다. $(u'_1, u_1, r'_1)$와
+$(u'_2, u_2, r'_2)$를 $T$ 위 섬유곱의 두 대상이라 하자.
+$(u'_2, u_2, r'_2)$에서 $(u'_1, u_1, r'_1)$로 가는 사상은
+$(1, r)$로 주어진다. 여기서 $1 : u'_1 \to u'_2$는 단순히
+$u'_1 = u'_2$를 뜻하고($\mathcal{S}_U$가 집합에서 섬유화되어
+있기 때문이다), $r$은 $T$-값 점으로 $R$에 속하며
+$s(r) = u_2$, $t(r) = u_1$ 및
+$c'(f(r), r'_2) = r'_1$을 만족한다. 따라서 화살표
+$$
+(1, r) : (u'_2, u_2, r'_2) \to (u'_1, u_1, r'_1)
+$$
+는 쌍 $(r, r'_2)$만 알면 완전히 결정된다. 따라서 화살표의 함자는
+$R''$로 표현되고, 더욱이 사상 $s''$, $t''$, $c''$는
+$2$-섬유곱
+$\mathcal{S}_U \times_{[U'/_{\!p}R']} [U/_{\!p}R]$에서의 시작점,
+끝점, 합성에 각각 명백히 대응한다.
+\end{proof}
+
+
+
+
+
+
+
+\section{몫 스택의 2-데카르트 정사각형}
+\label{spaces-groupoids-section-quotient-stack-2-cartesian}
+
+\noindent
+이 절에서는 몫 스택의 $\mathit{Isom}$-층들을 계산하고, 몫 스택을
+정의하는 도식이 $2$-섬유곱임을 추론한다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-morphisms}
+$B \to S$, $(U, R, s, t, c)$ 및
+$\pi : \mathcal{S}_U \to [U/R]$가 Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-arrows}에서와 같다고 가정하자.
+$S'$를 $S$ 위 스킴이라 하자. $x, y \in \Ob([U/R]_{S'})$를
+$S'$ 위 몫 스택의 대상이라 하자. $x = \pi(x')$이고
+$y = \pi(y')$라고 하자. 여기서 어떤 사상
+$x', y' : S' \to U$가 존재한다고 가정한다. 그러면
+$$
+\mathit{Isom}(x, y) = S' \times_{(y', x'), U \times_S U} R
+$$
+이며, 이는 $S'$ 위 층의 등식이다.
+\end{lemma}
+
+\begin{proof}
+$[U/_{\!p}R]$를 groupoid에서의 준층
+(\ref{spaces-groupoids-equation-quotient-stack})에 연관된 groupoid들로 섬유화된
+범주라 하자. 이는 Lemma \ref{spaces-groupoids-lemma-quotient-stack-arrows}의
+증명에서와 같다. 구성상 층 $\mathit{Isom}(x, y)$는 준층
+$\mathit{Isom}(x', y')$에 연관된 층이다. 한편
+$[U/_{\!p}R]$에서의 사상의 정의에 의해
+$$
+\mathit{Isom}(x', y') = S' \times_{(y', x'), U \times_S U} R
+$$
+이고, 우변은 대수공간이므로 층이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-2-cartesian}
+$B \to S$, $(U, R, s, t, c)$ 및
+$\pi : \mathcal{S}_U \to [U/R]$가 Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-arrows}에서와 같다고 가정하자.
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-2-arrow}의 $2$-가환 정사각형
+$$
+\xymatrix{
+\mathcal{S}_R \ar[r]_s \ar[d]_t & \mathcal{S}_U \ar[d]^\pi \\
+\mathcal{S}_U \ar[r]^-\pi & [U/R]
+}
+$$
+은 $2$-섬유곱이며, 이는 $(\Sch/S)_{fppf}$의 groupoid에서의
+스택들 사이의 섬유곱이다.
+\end{lemma}
+
+\begin{proof}
+Stacks, Lemma
+\ref{stacks-lemma-2-product-stacks-in-groupoids}에 의하면 보조정리는
+의미가 있다. 또한 그 결과에 의하면 함자
+$$
+\mathcal{S}_R \longrightarrow \mathcal{S}_U \times_{[U/R]} \mathcal{S}_U
+$$
+가 동치임을 보여야 한다. 이 함자는
+$r : T \to R$를 $(T, t(r), s(r), \alpha(r))$로 보내고, 우변은
+Categories, Lemma \ref{categories-lemma-2-product-categories-over-C}에
+설명된 $2$-섬유곱이다. 정의들을 풀어 쓰면 이것은 정확히 Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-morphisms}의 내용이다. (대안적 증명:
+이 상황에서 Lemma \ref{spaces-groupoids-lemma-cartesian-square-of-morphism}의 의미를
+계산해도 결과를 얻는다.)
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-isom}
+$B \to S$와 $(U, R, s, t, c)$가 Definition
+\ref{spaces-groupoids-definition-quotient-stack} (1)에서와 같다고 가정하자.
+$T$를 $S$ 위 임의의 스킴이라 하고, 대상 $x, y$를 $[U/R]$에서
+$T$ 위에 잡자. 층 $\mathit{Isom}(x, y)$는
+$(\Sch/T)_{fppf}$ 위에서 다음
+성질을 갖는다. fppf 덮개 $\{T_i \to T\}_{i \in I}$가 존재하여
+$$
+\mathit{Isom}(x, y)|_{(\Sch/T_i)_{fppf}}
+$$
+는 대수공간으로 표현된다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-morphisms}와 다음 사실에서 바로
+따른다. 몫 스택의 구성상 $x$와 $y$는 모두 fppf 위상에서
+국소적으로 $\mathcal{S}_U$의 대상에서 온다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{몫 스택의 2-쌍대등화자 성질}
+\label{spaces-groupoids-section-quotient-stacks-2-coequalize}
+
+\noindent
+groupoid에는 합성이 있으며, 이는 위 보조정리의 표준적인
+$2$-사상에 대한 여접합 조건을 낳는다. 정확히 정식화하기 위해
+Categories, Sections \ref{categories-section-formal-cat-cat}와
+\ref{categories-section-2-categories}에서 도입한 표기법을
+사용할 것이다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-cocycle}
+Lemmas \ref{spaces-groupoids-lemma-quotient-stack-arrows}와
+\ref{spaces-groupoids-lemma-quotient-stack-2-arrow}에서와 같은 가정과 표기법을
+사용하자. 다음의 수직 합성
+$$
+\xymatrix@C=15pc{
+\mathcal{S}_{R \times_{s, U, t} R}
+\ruppertwocell^{\pi \circ s \circ \text{pr}_1 = \pi \circ s \circ c}{\ \ \ \ \ \ \alpha \star \text{id}_{\text{pr}_1}}
+\ar[r]_(.3){\pi \circ t \circ \text{pr}_1 = \pi \circ s \circ \text{pr}_0}
+\rlowertwocell_{\pi \circ t \circ \text{pr}_0 = \pi \circ t \circ c}{\ \ \ \ \ \ \alpha \star \text{id}_{\text{pr}_0}}
+&
+[U/R]
+}
+$$
+은 $2$-사상 $\alpha \star \text{id}_c$이다. 공식으로는
+$\alpha \star \text{id}_c =
+(\alpha \star \text{id}_{\text{pr}_0})
+\circ
+(\alpha \star \text{id}_{\text{pr}_1})
+$이다.
+\end{lemma}
+
+\begin{proof}
+두 가지를 지적한다.
+\begin{enumerate}
+\item 공식
+$\alpha \star \text{id}_c = (\alpha \star \text{id}_{\text{pr}_0}) \circ
+(\alpha \star \text{id}_{\text{pr}_1})$이 의미를 가지려면 다음
+{\it 등식들}을 알아야 한다.
+$\pi \circ s \circ \text{pr}_1 = \pi \circ s \circ c$,
+$\pi \circ t \circ \text{pr}_1 = \pi \circ s \circ \text{pr}_0$,
+그리고
+$\pi \circ t \circ \text{pr}_0 = \pi \circ t \circ c$이다.
+즉 두 번째 등식은 수직 합성 $\circ$가 의미를 갖게 하고, 나머지
+두 등식은 공식의 양변이 시작점과 끝점이 같은 $2$-사상임을
+보장한다.
+\item 이 보조정리가 성립하는 이유는 groupoid에서의 준층
+(\ref{spaces-groupoids-equation-quotient-stack})에 연관된 groupoid들로 섬유화된
+범주 $[U/_{\!p}R]$에서의 합성이 합성법칙
+$c : R \times_{s, U, t} R \to R$에서 오기 때문이다.
+\end{enumerate}
+보조정리의 증명은 생략한다.
+\end{proof}
+
+\noindent
+보조정리의 상황에서는 실제로 등식
+$s \circ \text{pr}_1 = s \circ c$,
+$t \circ \text{pr}_1 = s \circ \text{pr}_0$, 그리고
+$t \circ \text{pr}_0 = t \circ c$가 있으며, 이는 $\pi$와
+합성하기 전부터 성립함에 유의하라.
+따라서 아래 보조정리의 공식은 위 보조정리의 공식과 정확히 같은
+방식으로 의미를 갖는다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-2-coequalizer}
+Lemmas \ref{spaces-groupoids-lemma-quotient-stack-arrows}와
+\ref{spaces-groupoids-lemma-quotient-stack-2-arrow}에서와 같은 가정과 표기법을
+사용하자. Lemma \ref{spaces-groupoids-lemma-quotient-stack-2-arrow}의
+$2$-가환 도식은 다음 의미에서 $2$-쌍대등화자이다. 다음 자료가
+주어졌다고 하자.
+\begin{enumerate}
+\item groupoid에서의 스택 $\mathcal{X}$, 이는
+$(\Sch/S)_{fppf}$ 위에 있다.
+\item $1$-사상 $f : \mathcal{S}_U \to \mathcal{X}$,
+\item $2$-화살표 $\beta : f \circ s \to f \circ t$.
+\end{enumerate}
+이들이
+$$
+\beta \star \text{id}_c
+=
+(\beta \star \text{id}_{\text{pr}_0})
+\circ
+(\beta \star \text{id}_{\text{pr}_1})
+$$
+를 만족하면, $1$-사상 $[U/R] \to \mathcal{X}$가 존재하여 도식
+$$
+\xymatrix{
+\mathcal{S}_R \ar[r]_s \ar[d]^t & \mathcal{S}_U \ar[d] \ar[ddr]^f \\
+\mathcal{S}_U \ar[r] \ar[rrd]_f & [U/R] \ar[rd] \\
+& & \mathcal{X}
+}
+$$
+을 $2$-가환으로 만든다.
+\end{lemma}
+
+\begin{proof}
+보조정리에서와 같은 $\mathcal{X}$, $f$, $\beta$가 주어졌다고
+하자. Stacks, Lemma
+\ref{stacks-lemma-stackify-groupoids-universal-property}에 의해
+$1$-사상 $g : [U/_{\!p}R] \to \mathcal{X}$를 구성하면 충분하다.
+먼저 $1$-사상 $\mathcal{S}_U \to [U/_{\!p}R]$가 대상들 위에서
+전단사임에 유의하라. 따라서 대상들 위에서는
+$g(x) = f(x)$로 둘 수 있다. 여기서
+$x \in \Ob(\mathcal{S}_U) = \Ob([U/_{\!p}R])$이다.
+사상 $\varphi : x \to y$는 $[U/_{\!p}R]$에 속하며 가환 도식
+$$
+\xymatrix{
+S_2 \ar[dd]_h \ar[r]_x \ar[dr]_\varphi & U \\
+& R \ar[u]_s \ar[d]^t \\
+S_1 \ar[r]^y & U.
+}
+$$
+에서 온다. 따라서 $g(\varphi)$를 합성
+$$
+\xymatrix{
+f(x) \ar@{=}[r] \ar[rrrrrd] &
+f(s \circ \varphi) \ar@{=}[r] &
+(f \circ s)(\varphi) \ar[r]^\beta &
+(f \circ t)(\varphi) \ar@{=}[r] &
+f(t \circ \varphi) \ar@{=}[r] &
+f(y \circ h) \ar[d] \\
+& & & & & f(y).
+}
+$$
+과 같게 둘 수 있다. 수직 화살표는 함자 $f$를 표준적인 사상
+$y \circ h \to y$에 적용한 결과이다. 이 사상은
+$\mathcal{S}_U$에 속하며, $h$를 올리고 끝점이 $y$인 강한
+데카르트 사상이다.
+이렇게 정의한 $f$가 적어도 섬유 범주들 위에서 합성과
+양립함을 확인하자. $S'$를 $S$ 위 스킴이라 하고
+$a : S' \to R \times_{s, U, t} R$를 사상이라 하자.
+이 상황에서
+$x = s \circ \text{pr}_1 \circ a = s \circ c \circ a$,
+$y = t \circ \text{pr}_1 \circ a = s \circ \text{pr}_0 \circ a$,
+그리고
+$z = t \circ \text{pr}_0 \circ a = t \circ \text{pr}_0 \circ c$로
+두어 가환 도식
+$$
+\xymatrix{
+x \ar[rr]_{c \circ a} \ar[rd]_{\text{pr}_1 \circ a} & & z \\
+& y \ar[ru]_{\text{pr}_0 \circ a}
+}
+$$
+을 섬유 범주 $[U/_{\!p}R]_{S'}$에서 얻는다.
+더욱이 이 섬유 범주의 모든 가환 삼각형은 이러한 꼴이다.
+위 정의들에 의해 $f$가 이를 가환 도식으로 보낼 필요충분조건은
+도식
+$$
+\xymatrix{
+& (f \circ s)(c \circ a) \ar[r]_-{\beta} &
+(f \circ t)(c \circ a) \ar@{=}[rd] & \\
+(f \circ s)(\text{pr}_1 \circ a) \ar[rd]^\beta \ar@{=}[ru] & & &
+(f \circ t)(\text{pr}_0 \circ a) \\
+& (f \circ t)(\text{pr}_1 \circ a) \ar@{=}[r] &
+(f \circ s)(\text{pr}_0 \circ a) \ar[ru]^\beta
+}
+$$
+이 가환하는 것이며, 이는 정확히 보조정리의 공식이 나타내는
+조건이다. $f$가 항등원을 항등원으로 보내고 임의의 사상들의
+합성과 양립한다는 확인은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{몫 스택의 명시적 설명}
+\label{spaces-groupoids-section-explicit-quotient-stacks}
+
+\noindent
+결과를 정식화하려면 몇 가지 표기법을 도입해야 한다.
+$B \to S$와 $(U, R, s, t, c)$가 Definition
+\ref{spaces-groupoids-definition-quotient-stack} (1)에서와 같다고 가정하자.
+$T$를 $S$ 위 스킴이라 하자.
+$\mathcal{T} = \{T_i \to T\}_{i \in I}$를 fppf 덮개라 하자.
+{\it $[U/R]$-하강 자료} 가운데 $\mathcal{T}$에 대한 것은 계
+$(u_i, r_{ij})$로 주어지는데, 여기서
+\begin{enumerate}
+\item 각 $i$에 대하여 사상 $u_i : T_i \to U$가 있고,
+\item 각 $i, j$에 대하여 사상
+$r_{ij} : T_i \times_T T_j \to R$가 있으며,
+\end{enumerate}
+다음을 만족한다.
+\begin{enumerate}
+\item[(a)] $T_i \times_T T_j \to U$의 사상으로서
+$$
+s \circ r_{ij} = u_i \circ \text{pr}_0
+\quad\text{and}\quad
+t \circ r_{ij} = u_j \circ \text{pr}_1,
+$$
+이고,
+\item[(b)] $T_i \times_T T_j \times_T T_k \to R$의 사상으로서
+$$
+c \circ (r_{jk} \circ \text{pr}_{12}, r_{ij} \circ \text{pr}_{01})
+= r_{ik} \circ \text{pr}_{02}.
+$$
+이다.
+\end{enumerate}
+두 하강 자료 사이의 {\it 사상
+$(u_i, r_{ij}) \to (u'_i, r'_{ij})$} 가운데 $[U/R]$-하강
+자료의 사상으로서 같은 덮개 $\mathcal{T}$ 위에 있는 것은 다음을 만족하는
+모음 $(r_i : T_i \to R)$이다.
+\begin{enumerate}
+\item[] $(\alpha)$ $T_i \to U$의 사상으로서
+$$
+u_i = s \circ r_i
+\quad\text{and}\quad
+u'_i = t \circ r_i
+$$
+이고,
+\item[] $(\beta)$ $T_i \times_T T_j \to R$의 사상으로서
+$$
+c \circ (r'_{ij}, r_i \circ \text{pr}_0)
+=
+c \circ (r_j \circ \text{pr}_1, r_{ij}).
+$$
+이다.
+\end{enumerate}
+고정된 덮개에 대한 하강 자료의 사상들 위에는 자연스러운 합성법칙이
+있고, 하강 자료의 범주를 얻는다. 이 범주는 groupoid이다.
+마지막으로
+$\mathcal{T}' = \{T'_j \to T\}_{j \in J}$가
+$\mathcal{T}$를 세분하는 두 번째 fppf 덮개이면 하강 자료의 당김
+개념이 있다. 이 경우 이를 명시적으로 설명하기가 특히 쉽다.
+즉 $\alpha : J \to I$이고
+% P09-ERR-1458
+$\varphi_j : T'_j \to T_{\alpha(i)}$가 덮개의 사상이면 하강 자료
+$(u_i, r_{ii'})$의 당김은 단순히
+$$
+(u_{\alpha(i)} \circ \varphi_j,
+r_{\alpha(j)\alpha(j')} \circ \varphi_j \times \varphi_{j'}).
+$$
+이다. 이렇게 정의한 당김은 $\mathcal{T}$ 위 하강 자료의 범주에서
+$\mathcal{T}'$ 위 하강 자료의 범주로 가는 함자를 정의한다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-objects}
+$B \to S$와 $(U, R, s, t, c)$가 Definition
+\ref{spaces-groupoids-definition-quotient-stack} (1)에서와 같다고 가정하자.
+$\pi : \mathcal{S}_U \to [U/R]$를 Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-arrows}에서와 같이 잡자.
+$T$를 $S$ 위 스킴이라 하자.
+\begin{enumerate}
+\item 모든 대상 $x$가 섬유 범주 $[U/R]_T$에 속하면, fppf 덮개
+$\{f_i : T_i \to T\}_{i \in I}$가 존재하여
+$f_i^*x \cong \pi(u_i)$가 되며, 여기서 어떤
+$u_i \in U(T_i)$를 취할 수 있다.
+\item 동형사상들의 합성
+$$
+\pi(u_i \circ \text{pr}_0)
+=
+\text{pr}_0^*\pi(u_i)
+\cong
+\text{pr}_0^*f_i^*x
+\cong
+\text{pr}_1^*f_j^*x
+\cong
+\text{pr}_1^*\pi(u_j)
+=
+\pi(u_j \circ \text{pr}_1)
+$$
+은 $\pi(r_{ij})$ 꼴이며, 여기서 어떤 사상
+$r_{ij} : T_i \times_T T_j \to R$를 취할 수 있다.
+\item 계 $(u_i, r_{ij})$는 위에서 정의한
+$[U/R]$-하강 자료를 이룬다.
+\item 임의의 $[U/R]$-하강 자료 $(u_i, r_{ij})$는 이 방식으로
+생긴다.
+\item $x$가 위와 같이 $(u_i, r_{ij})$에 대응하고,
+$y \in \Ob([U/R]_T)$가 $(u'_i, r'_{ij})$에 대응하면 표준적인
+전단사
+$$
+\Mor_{[U/R]_T}(x, y)
+\longleftrightarrow
+\left\{
+\begin{matrix}
+\text{morphisms }(u_i, r_{ij}) \to (u'_i, r'_{ij})\\
+\text{of }[U/R]\text{-descent data}
+\end{matrix}
+\right\}
+$$
+가 존재한다.
+\item 이 대응은 fppf 덮개의 세분과 양립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+명제 (1)은 스택화 구성의 일부이다. (2)는 Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-morphisms}에서 따른다.
+(3)의 확인은 생략한다. (4)는 스택에서 모든 하강 자료가
+효과적이라는 사실을 옮겨 쓴 것이다. (5)와 (6)의 확인은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+\section{제한과 몫 스택}
+\label{spaces-groupoids-section-quotient-stack-restrict}
+
+\noindent
+이 절에서는 제한을 취할 때 몫 스택에 어떤 일이 일어나는지 연구한다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-restrict}
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-functorial}에서와 같은 표기법과
+가정을 사용하자. 몫 스택의 사상
+$$
+[f] : [U/R] \longrightarrow [U'/R']
+$$
+이 완전충실일 필요충분조건은 $R$가 $R'$의 제한인 것이다.
+여기서 제한은 사상 $f : U \to U'$를 통하여 취한다.
+\end{lemma}
+
+\begin{proof}
+$x, y$를 $[U/R]$의 대상으로 하되 스킴 $T/S$ 위에 잡자.
+$x', y'$를 $x, y$의 상이라 하되 범주는 $[U'/R']_T$라 하자.
+함자 $[f]$가 완전충실일 필요충분조건은 층의 사상
+$$
+\mathit{Isom}(x, y) \longrightarrow \mathit{Isom}(x', y')
+$$
+이 모든 $T, x, y$에 대하여 동형사상인 것이다. 이를 $T$ 위에서
+국소적으로(fppf 위상으로)
+검사할 수 있다. 따라서 Lemma \ref{spaces-groupoids-lemma-quotient-stack-objects}에
+의해 $x, y$가 $a, b \in U(T)$에서 온다고 가정할 수 있다.
+그 경우 $x', y'$가 $f \circ a, f \circ b$에 대응함을 안다.
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-morphisms}에 의해 이 경우 표시된
+층의 사상은
+$$
+T \times_{(a, b), U \times_B U} R
+\longrightarrow
+T \times_{f \circ a, f \circ b, U' \times_B U'} R'.
+$$
+이 된다. $R$가 제한이면 이것은 동형사상이다. 실제로 그 경우
+$R = (U \times_B U) \times_{U' \times_B U'} R'$이다.
+Lemma \ref{spaces-groupoids-lemma-restrict-groupoid-relation}과 그 증명을 보라.
+거꾸로 마지막 표시 사상이 모든 $T, a, b$에 대하여 동형사상이면
+$R = (U \times_B U) \times_{U' \times_B U'} R'$가 따르며, 즉
+$R$는 $R'$의 제한이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-restrict-equivalence}
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-functorial}에서와 같은 표기법과
+가정을 사용하자. 몫 스택의 사상
+$$
+[f] : [U/R] \longrightarrow [U'/R']
+$$
+이 동치일 필요충분조건은 다음과 같다.
+\begin{enumerate}
+\item $(U, R, s, t, c)$는 $(U', R', s', t', c')$의 제한이며,
+이는 $f : U \to U'$를 통하여 취한다.
+\item 사상
+$$
+\xymatrix{
+U \times_{f, U', t'} R' \ar[r]_-{\text{pr}_1} \ar@/^3ex/[rr]^h
+& R' \ar[r]_{s'} & U'
+}
+$$
+은 층의 전사이다.
+\end{enumerate}
+예를 들어 $\{h : U \times_{f, U', t'} R' \to U'\}$가 fppf
+덮개이거나, $f : U \to U'$가 층의 전사이거나,
+$\{f : U \to U'\}$가 fppf 덮개이면 (2)가 성립한다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-restrict}에 의해 (1)이 완전충실성과
+동치임을 이미 안다. 따라서 (1)이 성립하고 $[f]$가 완전충실이라고
+가정할 수 있다. 이 가정 아래 $[f]$가 동치일 필요충분조건이 (2)임을
+보이는 것이 목표이다. 동치를 특징짓는 Stacks, Lemma
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff}를
+사용할 수 있다.
+
+\medskip\noindent
+(2)를 가정하자. Stacks, Lemma
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff}를
+사용하여 $[f]$가 동치임을 증명하겠다.
+$T$가 스킴이고 $x' \in \Ob([U'/R']_T)$라고 하자.
+$\{g_i : T_i \to T\}$라는 덮개가 존재하여 $g_i^*x'$가 어떤
+원소 $a'_i \in U'(T_i)$의 상이 된다. Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-objects}를 보라. 따라서 $x'$가
+$a' \in U'(T)$의 상이라고 가정할 수 있다.
+$h$가 층의 전사라는 가정에 의해 fppf 덮개
+$\{\varphi_i : T_i \to T\}$와 다음을 만족하는 사상
+% P09-ERR-1459
+$b_i : T_i \to U \times_{g, U', t'} R'$를 찾을 수 있다.
+$a' \circ \varphi_i = h \circ b_i$이다.
+$a_i = \text{pr}_0 \circ b_i : T_i \to U$라 나타내자.
+그러면 $a_i \in U(T_i)$는 $f \circ a_i \in U'(T_i)$로 사상되고
+$f \circ a_i \cong_{T_i} h \circ b_i = a' \circ \varphi_i$이다.
+여기서 $\cong_{T_i}$는 섬유 범주 $[U'/R']_{T_i}$에서의
+동형사상을 나타낸다. 즉 동형사상을 주는 $R'(T_i)$의 원소는
+$\text{pr}_1 \circ b_i$이다. 이는 원하는 대로 $x$의 $T_i$로의
+제한이 함자 $[U/R]_{T_i} \to [U'/R']_{T_i}$의 본질적 상에 있음을
+뜻한다.
+
+\medskip\noindent
+$[f]$가 동치라고 가정하자.
+$\xi' \in [U'/R']_{U'}$를 $U'$의 항등사상에 대응하는 대상이라
+하자. Stacks, Lemma
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff}를
+적용하면 fppf 덮개
+$\mathcal{U}' = \{g'_i : U'_i \to U'\}$가 존재하여
+$(g'_i)^*\xi' \cong [f](\xi_i)$가 된다. 여기서 어떤
+$\xi_i$가 $[U/R]_{U'_i}$에 있다.
+덮개 $\mathcal{U}'$를 세분한 뒤(Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-objects} 사용) $\xi_i$가 사상
+$a_i : U'_i \to U$에서 온다고 가정할 수 있다.
+$[f](\xi_i) \cong (g'_i)^*\xi'$라는 사실은, 필요하면 덮개
+$\mathcal{U}'$를 한 번 더 세분한 뒤, 다음을 만족하는 사상
+$r'_i : U'_i \to R'$가 존재한다는 뜻이다.
+$t' \circ r'_i = f \circ a_i$이고
+$s' \circ r'_i = \text{id}_{U'} \circ g'_i$이다. 도식은
+$$
+\xymatrix{
+U \ar[d]^f & & U'_i \ar[ll]^{a_i} \ar[ld]_{r'_i} \ar[d]^{g'_i} \\
+U' & R' \ar[l]_{t'} \ar[r]^{s'} & U'
+}
+$$
+이다. 따라서
+% P09-ERR-1460
+$(a_i, r'_i) : U'_i \to U \times_{g, U', t'} R'$는
+$h \circ (a_i, r'_i) = g'_i$를 만족하는 사상이다. 그러므로
+$\{h : U \times_{g, U', t'} R' \to U'\}$는 fppf 덮개
+$\mathcal{U}'$로 세분될 수 있고, 이는 $h$가 층의 전사를
+유도한다는 뜻이다. Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fppf-covering-surjective}를 보라.
+
+\medskip\noindent
+$\{h\}$가 fppf 덮개이면 층의 전사를 유도한다. Topologies on
+Spaces, Lemma
+\ref{spaces-topologies-lemma-fppf-covering-surjective}를 보라.
+% P09-ERR-1461
+$U' \to U$가 전사이면 $h$도 전사이다. 실제로 $s$가 단면,
+즉 대수공간에서의 groupoid의 중립원 $e$를 가진다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-criterion-fibre-product}
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-functorial}에서와 같은 표기법과
+가정을 사용하자. 다음 도식이 데카르트라고 가정하자.
+$$
+\xymatrix{
+R \ar[d]_s \ar[r]_f & R' \ar[d]^{s'} \\
+U \ar[r]^f & U'
+}
+$$
+그러면
+$$
+\xymatrix{
+\mathcal{S}_U \ar[d] \ar[r] & [U/R] \ar[d]^{[f]} \\
+\mathcal{S}_{U'} \ar[r] & [U'/R']
+}
+$$
+은 $2$-섬유곱 정사각형이다.
+\end{lemma}
+
+\begin{proof}
+보조정리의 명제에 나온 (첫 번째) 데카르트 도식에 역동형사상
+$i : R \to R$와 $i' : R' \to R'$를 적용하면
+$$
+\xymatrix{
+R \ar[d]_t \ar[r]_f & R' \ar[d]^{t'} \\
+U \ar[r]^f & U'
+}
+$$
+도 데카르트임을 안다. Lemma
+\ref{spaces-groupoids-lemma-cartesian-square-of-morphism}에 의해 $2$-섬유
+정사각형
+$$
+\xymatrix{
+[U''/R''] \ar[d] \ar[r] & [U/R] \ar[d] \\
+\mathcal{S}_{U'} \ar[r] & [U'/R']
+}
+$$
+을 갖는다. 여기서
+$U'' = U \times_{f, U', t'} R'$이고
+$R'' = R \times_{f \circ s, U', t'} R'$이다.
+위에서 $(t, f) : R \to U''$가 동형사상이고
+$$
+R'' =
+R \times_{f \circ s, U', t'} R' =
+R \times_{s, U} U \times_{f, U', t'} R' =
+% P09-ERR-1462
+R \times_{s, U, t} \times R.
+$$
+임을 안다. 명시적으로 동형사상
+$R \times_{s, U, t} R \to R''$은 규칙
+$(r_0, r_1) \mapsto (r_0, f(r_1))$로 주어진다.
+더욱이 $s'', t'', c''$는 사상
+$$
+R \times_{s, U, t} R \to R,
+\quad
+s''(r_0, r_1) = r_1, \quad t''(r_0, r_1) = c(r_0, r_1)
+$$
+및
+$$
+\begin{matrix}
+c'' : &
+(R \times_{s, U, t} R) \times_{s'', R, t''} (R \times_{s, U, t} R)
+&
+\longrightarrow
+&
+R \times_{s, U, t} R, \\
+&
+((r_0, r_1), (r_2, r_3)) &
+\longmapsto & (c(r_0, r_2), r_3).
+\end{matrix}
+$$
+으로 옮겨진다. 동형사상
+$$
+R \times_{s, U, s} R \longrightarrow R \times_{s, U, t} R,
+\quad
+(r_0, r_1) \longmapsto (c(r_0, i(r_1)), r_1)
+$$
+을 앞에 합성하면 $t''$와 $s''$는
+$\text{pr}_0$와 $\text{pr}_1$로, $c''$는
+$\text{pr}_{02} :
+R \times_{s, U, s} R \times_{s, U, s} R \to R \times_{s, U, s} R$로
+바뀐다. 따라서 동형사상
+$[U''/R''] \cong [R/R \times_{s, U, s} R]$가 존재함을 안다.
+여기서 대수공간에서의 groupoid
+$(R, R \times_{s, U, s} R, s'', t'', c'')$는 자명한 groupoid
+$(U, U, \text{id}, \text{id}, \text{id})$를
+$s : R \to U$를 통하여 제한한 것이다.
+$s : R \to U$는 오른쪽 역을 가지므로 fppf 층의 전사이고, 따라서
+사상
+$$
+[U''/R''] \cong [R/R \times_{s, U, s} R]
+\longrightarrow
+[U/U] = \mathcal{S}_U
+$$
+은 Lemma \ref{spaces-groupoids-lemma-quotient-stack-restrict-equivalence}에 의해
+동치이다. 이것으로 보조정리를 증명했다.
+\end{proof}
+
+
+
+
+
+\section{관성과 몫 스택}
+\label{spaces-groupoids-section-inertia}
+
+\noindent
+groupoid에서의 스택의 (상대적) 관성 스택은 Stacks, Section
+\ref{stacks-section-the-inertia-stack}에서 정의한다.
+섬유화된 범주의 설정에서 실제 구성과 그 성질 몇 가지는 Categories,
+Section \ref{categories-section-inertia}에 있다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-presentation-inertia}
+$B \to S$와 $(U, R, s, t, c)$가 Definition
+\ref{spaces-groupoids-definition-quotient-stack} (1)에서와 같다고 가정하자.
+$G/U$를 groupoid $(U, R, s, t, c, e, i)$의 안정자 군
+대수공간이라 하자. Definition
+\ref{spaces-groupoids-definition-stabilizer-groupoid}을 보라.
+$R' = R \times_{s, U} G$로 두고 다음과 같이 둔다.
+\begin{enumerate}
+\item $s' : R' \to G$, $(r, g) \mapsto g$,
+\item $t' : R' \to G$, $(r, g) \mapsto c(r, c(g, i(r)))$,
+\item $c' : R' \times_{s', G, t'} R' \to R'$,
+$((r_1, g_1), (r_2, g_2) \mapsto (c(r_1, r_2), g_1)$.
+\end{enumerate}
+그러면 $(G, R', s', t', c')$는 $B$ 위 대수공간에서의
+groupoid이고
+$$
+\mathcal{I}_{[U/R]} = [G/ R'].
+$$
+이다. 즉 연관된 몫 스택은 $[U/R]$의 관성 스택이다.
+\end{lemma}
+
+\begin{proof}
+Stacks, Lemma \ref{stacks-lemma-stackification-inertia}에 의해
+$\mathcal{I}_{[U/_{\!p}R]} = [G/_{\!p} R']$임을 증명하면 충분하다.
+$T$를 $S$ 위 스킴이라 하자. $[U/_{\!p}R]$의 관성
+섬유화 범주에서 $T$ 위의 대상은 쌍 $(x, g)$로 주어짐을 상기하라.
+여기서 $x$는 $[U/_{\!\!p}R]$의 대상으로서 $T$ 위에 있고,
+$g$는 $x$의 자기동형사상으로서 그 섬유 범주에서 $T$ 위에 있다.
+달리 말하면 $x : T \to U$와 $g : T \to R$이고
+$x = s \circ g = t \circ g$를 만족한다. 이는 정확히
+$g : T \to G$라는 뜻이다. 관성 섬유화 범주에서
+$(x, g) \to (y, h)$로 가는 $T$ 위 사상은
+$r : T \to R$로 주어지고, $s(r) = x$, $t(r) = y$,
+$c(r, g) = c(h, r)$를 만족한다. Categories, Lemma
+\ref{categories-lemma-inertia-fibred-category}의 가환 도식을
+보라. 공식으로는
+$$
+h = c(r, c(g, i(r))) = c(c(r, g), i(r)).
+$$
+이다. 표기법 $s(r)$ 등은 $s \circ r$ 등의 약기이다.
+$r_1 : (x_2, g_2) \to (x_1, g_1)$과
+$r_2 : (x_1, g_1) \to (x_2, g_2)$의 합성은
+% P09-ERR-1463
+$c(r_1, r_2) : (x_1, g_1) \to (x_3, g_3)$이다.
+
+\medskip\noindent
+위에서 대상을 나타낼 때 $g$라고 쓸 수도 있었다. 이는 $(x, g)$를
+대신하는 표기이다.
+이 대상은 $\mathcal{I}_{[U/_{\!p}R]}$에서 $T$ 위에 있다.
+실제로 $x$는 $g$의 상이며, 그 사상은 $G \to U$이다.
+그러면 사상 $g \to h$는 $\mathcal{I}_{[U/_{\!p}R]}$에서
+$T$ 위에 있고, 사상 $r' : T \to R'$와 정확히 대응한다.
+이때 $s'(r') = g$, $t'(r') = h$이다. 더욱이 합성은 (3)에서
+설명한 규칙에 대응한다. 따라서 보조정리가 증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-2-cartesian-inertia}
+$B \to S$와 $(U, R, s, t, c)$가 Definition
+\ref{spaces-groupoids-definition-quotient-stack} (1)에서와 같다고 가정하자.
+$G/U$를 groupoid $(U, R, s, t, c, e, i)$의 안정자 군
+대수공간이라 하자. Definition
+\ref{spaces-groupoids-definition-stabilizer-groupoid}을 보라.
+표준적인 $2$-데카르트 도식
+$$
+\xymatrix{
+\mathcal{S}_G \ar[r] \ar[d] & \mathcal{S}_U \ar[d] \\
+\mathcal{I}_{[U/R]} \ar[r] & [U/R]
+}
+$$
+이 존재하며, 이는 $(\Sch/S)_{fppf}$의 groupoid에서의
+스택들의 도식이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-groupoids-lemma-criterion-fibre-product}에 의해 Lemma
+\ref{spaces-groupoids-lemma-presentation-inertia}의 사상 $s' : R' \to G$가
+$s$의 기저변환과 동형임을 증명하면 충분하다. 이 기저변환은 구조
+사상 $G \to U$에 의해 취한다.
+이 기저변환 성질은 $s'$의 구성에서 명백하다.
+\end{proof}
+
+
+
+
+
+
+\section{제르브와 몫 스택}
+\label{spaces-groupoids-section-gerbes}
+
+\noindent
+이 절에서는 몫 스택을 Stacks, Section
+\ref{stacks-section-gerbes}의 논의, 특히 Stacks, Definition
+\ref{stacks-definition-gerbe-over-stack-in-groupoids}에서 정의한
+제르브와 관련짓는다. 이 절에 등장하는 groupoid에서의 스택들은
+일반적으로 대수 스택이 아니다!
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-when-gerbe}
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-functorial}에서와 같은 표기법과
+가정을 사용하자. 몫 스택의 사상
+$$
+[f] : [U/R] \longrightarrow [U'/R']
+$$
+은 $[U/R]$를 $[U'/R']$ 위 제르브로 만든다. 단,
+$f : U \to U'$와 $R \to R'|_U$가 fppf 층의 전사라고
+가정한다. 여기서 $R'|_U$는 $R'$의 $U$로의 제한이며,
+$f : U \to U'$를 통하여 취한다.
+\end{lemma}
+
+\begin{proof}
+Stacks, Lemma \ref{stacks-lemma-when-gerbe}의 성질 (2) (a)와
+(2) (b)가 성립함을 확인하겠다. $U \to U'$가 층의 전사이므로
+성질 (2)(a)가 성립한다($[U'/R']$의 대상들이 국소적으로 $U'$에서
+옴을 보려면 Lemma \ref{spaces-groupoids-lemma-quotient-stack-objects}를 사용하라).
+(2)(b)를 증명하기 위해 $x, y$를 $[U/R]$의 대상으로 하되
+스킴 $T/S$ 위에 잡자. $x', y'$를 $x, y$의 상이라 하되 범주는
+% P09-ERR-1464
+$[U'/'R]_T$라 하자. 조건 (2)(b)는 층의 사상
+$$
+\mathit{Isom}(x, y) \longrightarrow \mathit{Isom}(x', y')
+$$
+이 $(\Sch/T)_{fppf}$ 위에서 전사임을 확인하라고 요구한다.
+이를 보이기 위해 $T$ 위에서
+fppf 국소적으로 작업할 수 있고,
+% P09-ERR-1465
+그 대상들이 $a, b \in U(T)$에서 온다고 가정할 수 있다.
+그 경우 $x', y'$는 $f \circ a, f \circ b$에 대응한다.
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-morphisms}에 의해 이 경우 표시한
+층의 사상은
+$$
+T \times_{(a, b), U \times_B U} R
+\longrightarrow
+T \times_{f \circ a, f \circ b, U' \times_B U'} R' =
+T \times_{(a, b), U \times_B U} R'|_U.
+$$
+이 된다. 따라서 $R \to R'|_U$가 fppf 층의 전사라는 가정은
+$(\Sch/S)_{fppf}$ 위에서 원하는 전사성을
+함의한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-group-quotient-gerbe}
+$S$를 스킴이라 하자. $B$를 $S$ 위 대수공간이라 하자.
+$G$를 $B$ 위 군 대수공간이라 하자. $B$에 $G$의 자명한 작용을
+주자. 사상
+$$
+[B/G] \longrightarrow \mathcal{S}_B
+$$
+(Lemma \ref{spaces-groupoids-lemma-quotient-stack-arrows})는 $[B/G]$를 $B$ 위
+제르브로 만든다.
+\end{lemma}
+
+\begin{proof}
+사상 $B \to B$와 $B \times_B G \to B$가 층의 사상으로서
+전사이므로 Lemma \ref{spaces-groupoids-lemma-when-gerbe}에서 바로 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{몫 스택과 큰 자리의 변경}
+\label{spaces-groupoids-section-bigger-site}
+
+\noindent
+처음 읽을 때는 이 절을 건너뛰기를 권한다.
+스택의 당김은 Stacks, Section
+\ref{stacks-section-inverse-image}에서 정의한다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-quotient-stack-change-big-site}
+큰 자리 $\Sch_{fppf}$와 $\Sch'_{fppf}$가 주어졌다고 하자.
+$\Sch_{fppf}$가 $\Sch'_{fppf}$에 포함된다고 가정하자.
+Topologies, Section \ref{topologies-section-change-alpha}를 보라.
+$S \in \Ob(\Sch_{fppf})$라 하자.
+$B, U, R \in \Sh((\Sch/S)_{fppf})$를 대수공간이라 하고,
+$(U, R, s, t, c)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+$f : (\Sch'/S)_{fppf} \to (\Sch/S)_{fppf}$를 포함 함자
+$u : \Sch_{fppf} \to \Sch'_{fppf}$에 대응하는 자리의 사상이라
+하자. 그러면 표준적인 동치
+$$
+[f^{-1}U/f^{-1}R]
+\longrightarrow
+f^{-1}[U/R]
+$$
+가 존재하며, 이는 $(\Sch'/S)_{fppf}$ 위 groupoid에서의
+스택들의 동치이다.
+\end{lemma}
+
+\begin{proof}
+Spaces, Lemma \ref{spaces-lemma-change-big-site}에 의해
+$f^{-1}B, f^{-1}U, f^{-1}R \in \Sh((\Sch'/S)_{fppf})$는
+대수공간이다. 따라서
+$(f^{-1}U, f^{-1}R, f^{-1}s, f^{-1}t, f^{-1}c)$는
+$f^{-1}B$ 위 대수공간에서의 groupoid이다. 그러므로 명제는
+의미가 있다.
+
+\medskip\noindent
+범주 $u_p[U/_{\!p}R]$는 범주 $u_{pp}[U/_{\!p}R]$를 사상의
+오른쪽 곱셈계 $I$에 관하여 국소화한 것이다.
+$u_{pp}[U/_{\!p}R]$의 대상은 삼중항
+$$
+(T', \phi : T' \to T, x)
+$$
+이다. 여기서
+$T' \in \Ob((\Sch'/S)_{fppf})$,
+$T \in \Ob((\Sch/S)_{fppf})$이고, $\phi$는 $S$ 위 스킴의
+사상이며 $x : T \to U$는 $(\Sch/S)_{fppf}$ 위 층의 사상이다.
+스킴의 사상 $\phi : T' \to T$는 사상
+$\phi : T' \to u(T)$와 같은 자료이다. 그리고 $u(T)$가
+$f^{-1}T$를 표현하므로 이는 사상 $T' \to f^{-1}T$와 같은
+자료이다. 더욱이 대수공간 위의 $f^{-1}$는 완전충실이므로
+(Spaces, Lemma \ref{spaces-lemma-fully-faithful} 참조)
+$x$를 사상 $x : f^{-1}T \to f^{-1}U$로 생각할 수도 있다.
+이제부터는 이러한 동일시를 별도의 언급 없이 사용한다.
+사상
+$$
+(a, a', \alpha) :
+(T'_1, \phi_1 : T'_1 \to T_1, x_1)
+\longrightarrow
+(T'_2, \phi_2 : T'_2 \to T_2, x_2)
+$$
+은 $u_{pp}[U/_{\!p}R]$에 속하며 가환 도식
+$$
+\xymatrix{
+& & U \\
+T'_1 \ar[d]_{a'} \ar[r]_{\phi_1} &
+T_1 \ar[d]_a \ar[ru]^{x_1} \ar[r]_\alpha &
+R \ar[d]^t \ar[u]_s \\
+T'_2 \ar[r]^{\phi_2} &
+T_2 \ar[r]^{x_2} &
+U
+}
+$$
+이다. 이러한 사상이 $I$의 원소일 필요충분조건은
+$T'_1 = T'_2$이고 $a' = \text{id}$인 것이다.
+함자
+$$
+u_{pp}[U/_{\!p}R] \longrightarrow [f^{-1}U/_{\!p}f^{-1}R]
+$$
+를 대상 위에서 규칙
+$$
+(T', \phi : T' \to T, x) \longmapsto (x \circ \phi : T' \to f^{-1}U)
+$$
+으로, 위와 같은 사상 위에서 규칙
+$$
+(a, a', \alpha) \longmapsto (\alpha \circ \phi_1 : T'_1 \to f^{-1}R)
+$$
+으로 정의한다.
+$I$의 원소들이 동형사상으로 옮겨짐은 명백하다. 실제로
+$(f^{-1}U, f^{-1}R, f^{-1}s, f^{-1}t, f^{-1}c)$는
+$f^{-1}B$ 위 대수공간에서의 groupoid이다. 따라서 이 함자는
+표준적으로 함자
+$$
+u_p[U/_{\!p}R] \longrightarrow [f^{-1}U/_{\!p}f^{-1}R]
+$$
+를 통하여 인수분해된다. 스택화를 적용하면 스택의 함자
+$$
+f^{-1}[U/R] \longrightarrow [f^{-1}U/f^{-1}R]
+$$
+를 얻으며, 이는 $(\Sch'/S)_{fppf}$ 위의 함자이다.
+실제로 Stacks, Lemma
+\ref{stacks-lemma-technical-up}에 의해 스택 $f^{-1}[U/R]$는
+$u_p[U/_{\!p}R]$의 스택화이다.
+
+\medskip\noindent
+이제 스택의 사상을 얻었으며, 이것이 동치임을 확인하려면
+완전충실이고 대상들이 국소적으로 본질적 상에 있음을 보이면 충분하다.
+Stacks, Lemmas \ref{stacks-lemma-characterize-ff}와
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff}를
+보라. 대상들에 대한 명제는 $f^{-1}R$가 전사 에탈 사상
+$f^{-1}W \to f^{-1}R$를 허용하므로 성립한다. 여기서 $W$는
+어떤 $(\Sch/S)_{fppf}$의 대상이다.
+% P09-ERR-1466
+함자가 ‘충만’임을 보이려면 사상들이 국소적으로 함자의 상에 있음을
+보이면 충분하다. 이는 $f^{-1}U$가 전사 에탈 사상
+$f^{-1}W \to f^{-1}U$를 허용하므로 성립한다. 여기서 $W$는
+어떤 $(\Sch/S)_{fppf}$의 대상이다.
+% P09-ERR-1467
+함자가 충실하다는 증명은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{분리 조건}
+\label{spaces-groupoids-section-separation}
+
+\noindent
+이는 실제로 사상 $j : R \to U \times_B U$에 대한 조건을
+뜻한다. 이때 대수공간에서의 groupoid $(U, R, s, t, c)$가
+$B$ 위에 주어져 있다.
+앞 절에서와 같이 먼저 대응하는 도식을 정식화한다.
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-diagram-diagonal}
+Section \ref{spaces-groupoids-section-notation}에서와 같은 $B \to S$를 잡자.
+$(U, R, s, t, c)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+$G \to U$를 안정자 군 대수공간이라 하자.
+가환 도식
+$$
+\xymatrix{
+R \ar[d]^{\Delta_{R/U \times_B U}} \ar[rrr]_{f \mapsto (f, s(f))} & & &
+R \times_{s, U} U \ar[d] \ar[r] & U \ar[d] \\
+R \times_{(U \times_B U)} R \ar[rrr]^{(f, g) \mapsto (f, f^{-1} \circ g)} & & &
+R \times_{s, U} G \ar[r] & G
+}
+$$
+에서 왼쪽의 두 수평 화살표는 동형사상이고 오른쪽 정사각형은
+섬유곱 정사각형이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 정의와 대수기하에서의 함자적 관점에 관한 연습문제이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-groupoids-lemma-diagonal}
+Section \ref{spaces-groupoids-section-notation}에서와 같은 $B \to S$를 잡자.
+$(U, R, s, t, c)$를 $B$ 위 대수공간에서의 groupoid라 하자.
+$G \to U$를 안정자 군 대수공간이라 하자.
+\begin{enumerate}
+\item 다음은 동치이다.
+\begin{enumerate}
+\item $j : R \to U \times_B U$는 분리 사상이다.
+\item $G \to U$는 분리 사상이다.
+\item $e : U \to G$는 닫힌 몰입이다.
+\end{enumerate}
+\item 다음은 동치이다.
+\begin{enumerate}
+\item $j : R \to U \times_B U$는 국소 분리 사상이다.
+\item $G \to U$는 국소 분리 사상이다.
+\item $e : U \to G$는 몰입이다.
+\end{enumerate}
+\item 다음은 동치이다.
+\begin{enumerate}
+\item $j : R \to U \times_B U$는 준분리 사상이다.
+\item $G \to U$는 준분리 사상이다.
+\item $e : U \to G$는 준콤팩트 사상이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+군 대수공간 $G \to U$는 $R \to U \times_B U$의
+기저변환이다. 이 기저변환은 대각사상
+$U \to U \times_B U$에 의해 취한다. Lemma
+\ref{spaces-groupoids-lemma-groupoid-stabilizer}를 보라. 따라서 $j$가 분리
+사상(각각 국소 분리 사상, 준분리 사상)이면 $G \to U$도 분리
+사상(각각 국소 분리 사상, 준분리 사상)이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-separated}를 보라.
+따라서 (1), (2), (3)에서 (a) $\Rightarrow$ (b)이다.
+
+\medskip\noindent
+거꾸로 $G \to U$가 분리 사상(각각 국소 분리 사상, 준분리
+사상)이면, 사상 $e : U \to G$는 구조 사상 $G \to U$의
+단면이므로 닫힌 몰입(각각 몰입, 준콤팩트 사상)이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-section-immersion}을 보라.
+따라서 (1), (2), (3)에서 (b) $\Rightarrow$ (c)이다.
+
+\medskip\noindent
+$e$가 닫힌 몰입(각각 몰입, 준콤팩트 사상)이면 Lemma
+\ref{spaces-groupoids-lemma-diagram-diagonal}의 결과(그리고 Spaces, Lemma
+\ref{spaces-lemma-base-change-immersions}와 Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-quasi-compact})에 의해
+$\Delta_{R/U \times_B U}$가 닫힌 몰입(각각 몰입, 준콤팩트
+사상)임을 안다. 따라서 (1), (2), (3)에서
+(c) $\Rightarrow$ (a)이다.
+\end{proof}

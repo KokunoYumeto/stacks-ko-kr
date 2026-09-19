@@ -1,0 +1,5011 @@
+% Generated mechanically from frozen input p07/ko/local-cohomology.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{50}
+\chapter{국소 코호몰로지}
+
+
+
+\phantomsection
+\label{local-cohomology-section-phantom}
+
+
+\section{서론}
+\label{local-cohomology-section-introduction}
+
+\noindent
+이 장에서는 국소 코호몰로지에 대한 연구를 계속한다.
+참고문헌으로는 \cite{SGA2}가 있다.
+국소 코호몰로지의 정의는 쌍대화 복합체의 절
+\ref{dualizing-section-local-cohomology}에서 찾을 수 있다.
+뇌터 환의 경우 국소 코호몰로지를 취하는 것은 적절한 꼬임 함자의
+유도 함자를 취하는 것과 같으며, 이는 쌍대화 복합체의 절
+\ref{dualizing-section-local-cohomology-noetherian}에서 증명한다.
+깊이와의 관계는 쌍대화 복합체의 절
+\ref{dualizing-section-depth}에서 찾을 수 있다.
+
+\medskip\noindent
+국소 코호몰로지의 유한성 성질을 논의하고, 이를 바탕으로 상당히 일반적인
+형태의 Grothendieck 유한성 정리를 증명한다. 정리
+\ref{local-cohomology-theorem-finiteness}와 보조정리 \ref{local-cohomology-lemma-finiteness-Rjstar}
+(열린 몰입에 따른 연접 가군의 고차 직접상)을 보라.
+여기서 사용하는 방법에는 Faltings의 논문에서 볼 수 있는 몇 가지 매우
+간결한 논증이 포함된다. \cite{Faltings-annulators}와
+\cite{Faltings-finiteness}를 보라.
+
+\medskip\noindent
+응용으로 Hartshorne--Lichtenbaum 소멸을 논의한다. 또한 국소
+코호몰로지에 대한 프로베니우스와 미분 연산자의 작용을 다룬다.
+
+
+
+
+\section{일반 사항}
+\label{local-cohomology-section-generalities}
+
+\noindent
+다음 보조정리는 함자 $R\Gamma_Z$가 지지집합을 갖는 코호몰로지와
+관련됨을 말해 준다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-local-cohomology-is-local-cohomology}
+환 $A$와 유한 생성 아이디얼 $I$를 잡자.
+$Z = V(I) \subset X = \Spec(A)$로 놓자. 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-affine-compare-bounded}에 의해 $K \in D(A)$에
+대응하는 $\widetilde{K} \in D_\QCoh(\mathcal{O}_X)$에 대해 함자적 동형
+$$
+R\Gamma_Z(K) = R\Gamma_Z(X, \widetilde{K})
+$$
+이 있다. 왼쪽은 쌍대화 복합체의 식
+(\ref{dualizing-equation-local-cohomology})이고, 오른쪽은 층
+코호몰로지의 절 \ref{cohomology-section-cohomology-support-bis}의
+함자이다.
+\end{lemma}
+
+\begin{proof}
+층 코호몰로지의 보조정리
+\ref{cohomology-lemma-triangle-sections-with-support}에 의해 완전 삼각형
+$$
+R\Gamma_Z(X, \widetilde{K})
+\to R\Gamma(X, \widetilde{K})
+\to R\Gamma(U, \widetilde{K})
+\to R\Gamma_Z(X, \widetilde{K})[1]
+$$
+이 존재하며, 여기서 $U = X \setminus Z$이다. 스킴의 유도 범주의
+보조정리 \ref{perfect-lemma-affine-compare-bounded}에 의해
+$R\Gamma(X, \widetilde{K}) = K$임을 안다.
+$I = (f_1, \ldots, f_r)$라 하자. 그러면 유한 아핀 열린 덮개
+$\mathcal{U} : U = D(f_1) \cup \ldots \cup D(f_r)$를 얻는다.
+스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-alternating-cech-complex-complex-computes-cohomology}에
+의하면 교대 Čech 복합체
+$\text{Tot}(\check{\mathcal{C}}_{alt}^\bullet(\mathcal{U},
+\widetilde{K^\bullet}))$
+가 $R\Gamma(U, \widetilde{K})$를 계산한다. 여기서 $K^\bullet$은
+$A$-가군으로 이루어진, $K$를 나타내는 임의의 복합체이다. 정의를 풀어 쓰면
+$$
+R\Gamma(U, \widetilde{K}) =
+\text{Tot}\left(
+K^\bullet \otimes_A
+(\prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r})\right)
+$$
+분명히
+$K^\bullet = R\Gamma(X, \widetilde{K^\bullet}) \to
+R\Gamma(U, \widetilde{K}^\bullet)$
+는 $A$에서 $\prod A_{f_i}$로 가는 대각 사상이 유도한다. 따라서
+$$
+R\Gamma_Z(X, \widetilde{K}) =
+\text{Tot}\left(
+K^\bullet \otimes_A
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r})\right)
+$$
+쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-adjoint}에 의해 오른쪽 복합체는
+$R\Gamma_Z(K)$를 계산하므로, 주어진 $K$에 대해 보조정리가 성립한다.
+
+\medskip\noindent
+끝으로 이 동형을 $K$에 대해 함자적으로 택할 수 있음을 보이자.
+다음 $A$-가군 복합체의 사상을 생각하자.
+$$
+M^\bullet = \text{Tot}\left(
+K^\bullet \otimes_A
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r})\right)
+\longrightarrow
+K^\bullet
+$$
+위의 논증에 따르면 이 화살표에 함자
+$R\Gamma_Z(X, \widetilde{\ })$를 적용하면 동형이 되고,
+$R\Gamma(U, \widetilde{M}^\bullet) = 0$이다(세부사항은 생략한다).
+따라서
+$$
+R\Gamma_Z(X, \widetilde{K}^\bullet)
+\leftarrow
+R\Gamma_Z(X, \widetilde{M}^\bullet)
+\rightarrow
+R\Gamma(X, \widetilde{M}^\bullet) = M^\bullet = R\Gamma_Z(K^\bullet)
+$$
+를 얻으며, 모든 사상은 $D(A)$에서 동형이고 원하는 대로
+$K^\bullet$에 대해 함자적이다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-local-cohomology}
+환 $A$와 유한 생성 아이디얼 $I \subset A$를 잡자.
+$X = \Spec(A)$, $Z = V(I)$, $U = X \setminus Z$로 놓고,
+$j : U \to X$를 포함 사상이라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_U$-가군이라 하자. 그러면
+\begin{enumerate}
+\item $A$-가군 $M$이 존재하여 $\mathcal{F}$가 $\widetilde{M}$을
+$U$에 제한한 것이 되고,
+\item $M$이 주어지면 완전열
+$$
+0 \to H^0_Z(M) \to M \to H^0(U, \mathcal{F}) \to H^1_Z(M) \to 0
+$$
+과 동형 $H^p(U, \mathcal{F}) = H^{p + 1}_Z(M)$이 모든 $p \geq 1$에
+대해 있으며,
+\item $M = H^0(U, \mathcal{F})$로 택할 수 있고, 이 경우
+$H^0_Z(M) = H^1_Z(M) = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$M$의 존재성은 스킴의 성질의 보조정리
+\ref{properties-lemma-extend-trivial}와 $X$ 위의 준연접 층이
+$A$-가군에 대응한다는 사실(스킴의 보조정리
+\ref{schemes-lemma-equivalence-quasi-coherent})에서 따른다.
+이제 완전 삼각형
+$$
+R\Gamma_Z(X, \widetilde{M}) \to R\Gamma(X, \widetilde{M}) \to
+R\Gamma(U, \widetilde{M}|_U) \to R\Gamma_Z(X, \widetilde{M})[1]
+$$
+을 생각하자. 이는 층 코호몰로지의 보조정리
+\ref{cohomology-lemma-triangle-sections-with-support}의 삼각형이다.
+$X$가 아핀이므로 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}에 의해
+$R\Gamma(X, \widetilde{M}) = M$이다. $M$을 택한 방식에 의해
+$\mathcal{F} = \widetilde{M}|_U$이므로, 이로부터 완전열
+$$
+0 \to H^0_Z(X, \widetilde{M}) \to M \to H^0(U, \mathcal{F}) \to
+H^1_Z(X, \widetilde{M}) \to 0
+$$
+과 동형 $H^p(U, \mathcal{F}) = H^{p + 1}_Z(X, \widetilde{M})$을
+모든 $p \geq 1$에 대해 얻는다.
+보조정리 \ref{local-cohomology-lemma-local-cohomology-is-local-cohomology}에 의해
+$H^i_Z(M) = H^i_Z(X, \widetilde{M})$가 모든 $i$에 대해 성립한다.
+따라서 (1)과 (2)가 성립한다.
+끝으로 $M' = H^0(U, \mathcal{F})$로 놓으면 $M \to M'$의 핵과
+여핵은 $I$-거듭제곱 꼬임이다. 따라서
+$\widetilde{M}|_U \to \widetilde{M'}|_U$는 동형이고, 실제로 (3)에서
+말한 대로 $M'$을 사용할 수 있다. 또한 $H^0_Z(M')$와
+$H^0_Z(M')$가 모두 영임은 말할 필요도 없다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-already-torsion}
+$I, J \subset A$를 환 $A$의 유한 생성 아이디얼이라 하자.
+$M$이 $I$-거듭제곱 꼬임 가군이면 표준 사상
+$$
+H^i_{V(I) \cap V(J)}(M) \to H^i_{V(J)}(M)
+$$
+은 모든 $i$에 대해 동형이다.
+\end{lemma}
+
+\begin{proof}
+쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-ss}의 스펙트럼 수열을 사용하면
+$R\Gamma_I(M) = M$이라는 명제로 귀착된다. 이는 쌍대화 복합체의 절
+\ref{dualizing-section-local-cohomology}에 나오는 국소 코호몰로지의
+구성에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-multiplicative}
+$S \subset A$를 환 $A$의 곱셈적 집합이라 하자.
+$M$을 $A$-가군으로서 $S^{-1}M = 0$인 것이라 하자. 그러면
+$\colim_{f \in S} H^0_{V(f)}(M) = M$이고
+$\colim_{f \in S} H^1_{V(f)}(M) = 0$.
+\end{lemma}
+
+\begin{proof}
+$H^0$에 관한 명제는 정의에서 바로 따른다. $H^1$에 관한 명제를
+보기 위해 $R\Gamma_{V(f)}$와 $H^1_{V(f)}$가 여극한과 가환함에
+유의하자. 따라서 $M$이 어떤 $f \in S$에 의해 소멸한다고 가정해도 된다.
+그러면 $H^1_{V(ff')}(M) = 0$가 모든 $f' \in S$에 대해 성립한다(예를 들어
+보조정리 \ref{local-cohomology-lemma-already-torsion}에 따른다).
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-elements-come-from-bigger}
+$I \subset A$를 환 $A$의 유한 생성 아이디얼이라 하자.
+$\mathfrak p$를 소 아이디얼이라 하고, $M$을 $A$-가군이라 하자.
+정수 $i \geq 0$에 대해 사상
+$$
+\Psi :
+\colim_{f \in A, f \not \in \mathfrak p} H^i_{V((I, f))}(M)
+\longrightarrow
+H^i_{V(I)}(M)
+$$
+을 생각하자. 그러면
+\begin{enumerate}
+\item $\Im(\Psi)$는 $H^i_{V(I)}(M)_\mathfrak p$에서 영으로
+사상되는 원소들의 집합이고,
+\item $H^{i - 1}_{V(I)}(M)_\mathfrak p = 0$이면 $\Psi$는 단사이며,
+\item $H^{i - 1}_{V(I)}(M)_\mathfrak p = H^i_{V(I)}(M)_\mathfrak p = 0$이면
+$\Psi$는 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f \in A$, $f \not \in \mathfrak p$에 대해 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-ss}의 스펙트럼 수열은 퇴화하여
+짧은 완전열
+$$
+0 \to H^1_{V(f)}(H^{i - 1}_{V(I)}(M)) \to
+H^i_{V((I, f))}(M) \to H^0_{V(f)}(H^i_{V(I)}(M)) \to 0
+$$
+을 준다. 이로써 (1)이 증명되고, (2)는 이 사실과 보조정리
+\ref{local-cohomology-lemma-multiplicative}에서 따른다. (3)은 형식적인 귀결이다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-isomorphism}
+$I \subset I' \subset A$를 뇌터 환 $A$의 유한 생성 아이디얼이라 하자.
+$M$을 $A$-가군이라 하고 $i \geq 0$을 정수라 하자. 사상
+$$
+\Psi : H^i_{V(I')}(M) \to H^i_{V(I)}(M)
+$$
+을 생각하자. 다음이 성립한다.
+\begin{enumerate}
+\item $H^i_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) = 0$가 모든
+$\mathfrak p \in V(I) \setminus V(I')$에 대해 성립하면
+$\Psi$는 전사이고,
+\item $H^{i - 1}_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) = 0$가 모든
+$\mathfrak p \in V(I) \setminus V(I')$에 대해 성립하면
+$\Psi$는 단사이며,
+\item $H^i_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) =
+H^{i - 1}_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) = 0$가
+모든 $\mathfrak p \in V(I) \setminus V(I')$에 대해 성립하면
+$\Psi$는 동형이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. $\xi \in H^i_{V(I)}(M)$라 하자. $A$가 뇌터 환이므로,
+아이디얼 $I \subset I'' \subset I'$ 가운데 $\xi$가 어떤
+$\xi'' \in H^i_{V(I'')}(M)$의 상이 되게 하는 가장 큰 것이 존재한다.
+$V(I'') = V(I')$이면 끝난다. 그렇지 않으면 일반점
+$\mathfrak p \in V(I'')$으로서 $V(I')$에 속하지 않는 것을 택하자.
+그러면 가정에 의해
+$H^i_{V(I'')}(M)_\mathfrak p =
+H^i_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) = 0$이다.
+보조정리 \ref{local-cohomology-lemma-elements-come-from-bigger}에 의해 $I''$을 더 크게
+할 수 있으므로, 이는 최대성에 모순이다.
+
+\medskip\noindent
+(2)의 증명. $\xi' \in H^i_{V(I')}(M)$이 $\Psi$의 핵에 속한다고 하자.
+$A$가 뇌터 환이므로, 아이디얼 $I \subset I'' \subset I'$ 가운데
+$\xi'$이 $H^i_{V(I'')}(M)$에서 영으로 사상되게 하는 가장 큰 것이
+존재한다. $V(I'') = V(I')$이면 끝난다. 그렇지 않으면 일반점
+$\mathfrak p  \in V(I'')$으로서 $V(I')$에 속하지 않는 것을 택하자.
+그러면 가정에 의해 $H^{i - 1}_{V(I'')}(M)_\mathfrak p =
+H^{i - 1}_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) = 0$이다.
+보조정리 \ref{local-cohomology-lemma-elements-come-from-bigger}에 의해 $I''$을 더 크게
+할 수 있으므로, 이는 최대성에 모순이다.
+
+\medskip\noindent
+(3)은 (1)과 (2)에서 형식적으로 따른다.
+\end{proof}
+
+
+
+
+
+\section{하츠혼의 연결성 보조정리}
+\label{local-cohomology-section-hartshorne-connectedness}
+
+\noindent
+이 절의 제목은 다음 결과를 가리킨다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-depth-2-connected-punctured-spectrum}
+\begin{reference}
+\cite[명제 2.1]{Hartshorne-connectedness}
+\end{reference}
+\begin{slogan}
+하츠혼 연결성
+\end{slogan}
+$A$를 깊이가 $\geq 2$인 뇌터 국소환이라 하자.
+그러면 $A$, $A^h$, $A^{sh}$의 천공 스펙트럼은 연결이다.
+\end{lemma}
+
+\begin{proof}
+$U$를 $A$의 천공 스펙트럼이라 하자.
+$U$가 비연결이면 $\Gamma(U, \mathcal{O}_U)$가 자명하지 않은 멱등원을
+가짐을 알 수 있다. 그러나 $A$는 국소환이므로 자명하지 않은 멱등원을
+갖지 않는다. 따라서 $A \to \Gamma(U, \mathcal{O}_U)$는 동형이 아니다.
+보조정리 \ref{local-cohomology-lemma-local-cohomology}에 의해 $H^0_\mathfrak m(A)$ 또는
+$H^1_\mathfrak m(A)$ 중 하나는 영이 아니다. 그러므로 쌍대화 복합체의
+보조정리 \ref{dualizing-lemma-depth}에 의해
+$\text{깊이}(A) \leq 1$이다. $A^h$와 $A^{sh}$에 대한 결과는 대수학의
+추가 주제의 보조정리 \ref{more-algebra-lemma-henselization-depth}를 사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-catenary-S2-equidimensional}
+\begin{reference}
+\cite[IV 따름정리 5.10.9]{EGA}
+\end{reference}
+$A$를 카테너리이고 $(S_2)$인 뇌터 국소환이라 하자.
+그러면 $\Spec(A)$는 등차원이다.
+\end{lemma}
+
+\begin{proof}
+$X = \Spec(A)$로 놓자. $d = \dim(A) = \dim(X)$라 하자. $X$ 안에서
+$X_1$을 차원이 $d$인 기약 성분들의 합집합이라 하고, $X_2$를 차원이
+$< d$인 기약 성분들의 합집합이라 하자. 물론 $X = X_1 \cup X_2$이다.
+$X_2 = \emptyset$이면 보조정리가 성립한다. 그렇지 않으면
+$Z = X_1 \cap X_2$는 $X$의 공집합이 아닌 닫힌 부분집합이다. 실제로
+$X$의 닫힌점을 적어도 포함하기 때문이다. 따라서 한 기약 성분의 일반점
+$z \in Z$를 택할 수 있으며, 이 기약 성분은 $Z$의 성분이다.
+$\mathcal{O}_{Z, z}$의 스펙트럼은 $X$의 점들 중 $z$로 특수화되는
+점들의 집합임을 상기하자. $z$는 차원이 $d$인 기약 성분과 차원이
+$< d$인 기약 성분 양쪽에 속하므로, 자명하지 않은 특수화
+$x_1 \leadsto z$와 $x_2 \leadsto z$를 얻는다. 이때 $x_1$의 폐포와
+$x_2$의 폐포는 서로 다른 차원을 가진다. $X$가
+카테너리이므로, 이는 특수화 $x_1 \leadsto z$와 $x_2 \leadsto z$ 중
+적어도 하나가 직접적이지 않을 때에만 가능하다. 따라서
+$\dim(\mathcal{O}_{Z, z}) \geq 2$이다.
+$\text{깊이}(\mathcal{O}_{Z, z}) \geq 2$인 것은 $A$가 $(S_2)$이기
+때문이다. 그러나 천공 스펙트럼 $U$, 즉 $\mathcal{O}_{Z, z}$의 천공
+스펙트럼은 비연결이다. 실제로 닫힌 부분집합 $U \cap X_1$과
+$U \cap X_2$는 (우리가 $z$를 택한 방식에 의해) 서로소이고 $U$를
+덮는다. 이는 보조정리
+\ref{local-cohomology-lemma-depth-2-connected-punctured-spectrum}와 모순이며, 증명이 끝난다.
+\end{proof}
+
+
+
+\section{코호몰로지 차원}
+\label{local-cohomology-section-cd}
+
+\noindent
+코호몰로지 차원을 간단히 다룬다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd}
+$I \subset A$를 환 $A$의 유한 생성 아이디얼이라 하자.
+$Y = V(I) \subset X = \Spec(A)$로 놓고, $d \geq -1$을 정수라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item $H^i_Y(A) = 0$가 $i > d$일 때 성립한다.
+\item $H^i_Y(M) = 0$가 $i > d$일 때 모든 $A$-가군 $M$에 대해 성립한다.
+\item $d = -1$이면 $Y = \emptyset$이고, $d = 0$이면 $Y$는 $X$에서
+열린닫힌 집합이며, $d > 0$이면 $H^i(X \setminus Y, \mathcal{F}) = 0$가
+$i \geq d$일 때 모든 준연접 $\mathcal{O}_{X \setminus Y}$-가군
+$\mathcal{F}$에 대해 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+예를 들어 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-adjoint}에 의해 $R\Gamma_Y(-)$는
+유한 코호몰로지 차원을 가진다. 따라서 정수 $i_0$가 존재하여
+$H^i_Y(M) = 0$가 모든 $A$-가군 $M$과 $i \geq i_0$에 대해 성립한다.
+
+\medskip\noindent
+(1)과 (2)가 동치임을 증명하자. (2)가 (1)을 함의함은 즉시 알 수 있다.
+(1)을 가정한다. $i > d$에 대한 내림 귀납법으로 $H^i_Y(M) = 0$가 모든
+$A$-가군 $M$에 대해 성립함을 보이겠다. $i \geq i_0$인 경우는 위에서
+보았다. 귀납 단계를 위해 $i_0 > i > d$라 하자. 임의의 $A$-가군 $M$을
+택하여 짧은 완전열 $0 \to N \to F \to M \to 0$에 넣는데, 여기서
+$F$는 자유 $A$-가군이다. $R\Gamma_Y$는 오른쪽 수반함자이므로
+$H^i_Y(-)$는 직합과 가환한다. 따라서 $H^i_Y(F) = 0$이다. 이는
+가정 (1)과 $i > d$에 따른다. 그러면 원하는 대로
+$H^i_Y(M) = H^{i + 1}_Y(N) = 0$이다.
+
+\medskip\noindent
+$d = -1$이고 (2)가 성립한다고 가정하자. 그러면
+$0 = H^0_Y(A/I) = A/I \Rightarrow A = I \Rightarrow Y = \emptyset$이다.
+따라서 (3)이 성립한다. 역의 증명은 생략한다.
+
+\medskip\noindent
+$d = 0$이고 (2)가 성립한다고 가정하자.
+$J = H^0_I(A) = \{x \in A \mid I^nx = 0 \text{인 어떤 }n > 0\}$로 놓자.
+그러면
+$$
+H^1_Y(A) = \Coker(A \to \Gamma(X \setminus Y, \mathcal{O}_{X \setminus Y}))
+\quad\text{이고}\quad
+H^1_Y(I) = \Coker(I \to \Gamma(X \setminus Y, \mathcal{O}_{X \setminus Y}))
+$$
+이고, 첫 번째 사상의 핵은 $J$와 같다. 보조정리
+\ref{local-cohomology-lemma-local-cohomology}를 보라. (2)에서 $I(A/J) = A/J$를 얻는다.
+따라서 $f \in I$를 택하여 $1$이 $A/J$에서 그 상이 되게 할 수 있다.
+그러면 $1 - f \in J$이므로 $I^n(1 - f) = 0$가 어떤 $n > 0$에 대해
+성립한다. 따라서 $f^n = f^{n + 1}$이다. 이제 $e = f^n \in I$는
+멱등원이다. 상보적 멱등원 $e' = 1 - f^n \in J$를 생각하자. 임의의
+원소 $g \in I$에 대해 $g^m e' = 0$인 어떤 $m > 0$가 존재한다.
+따라서 $I$는 아이디얼 $(e) \subset I$의 근기에 포함된다. 이는 (3)에서
+예견한 대로 $Y = V(I) = V(e)$가 $X$에서 열린닫힌 집합이라는 뜻이다.
+반대로 $Y = V(I)$가 열린닫힌 집합이면 함자 $H^0_Y(-)$는 완전하고
+그 고차 유도 함자들은 소멸한다.
+
+\medskip\noindent
+$d > 0$이면 보조정리 \ref{local-cohomology-lemma-local-cohomology}에서 (2)와 (3)이
+동치임을 즉시 알 수 있다.
+\end{proof}
+
+\begin{definition}
+\label{local-cohomology-definition-cd}
+$I \subset A$를 환 $A$의 유한 생성 아이디얼이라 하자. 보조정리
+\ref{local-cohomology-lemma-cd}의 동치 조건들을 만족하는 가장 작은 정수 $d \geq -1$을
+{\it $I$가 $A$ 안에서 갖는 코호몰로지 차원}이라 하고
+$\text{cd}(A, I)$로 쓴다.
+\end{definition}
+
+\noindent
+따라서 $\text{cd}(A, I) = -1$은 $I = A$일 때 성립하고,
+$\text{cd}(A, I) = 0$은 $I$가 국소적으로 멱영이거나 멱등원으로
+생성될 때 성립한다. 다음 보조정리에 의해 $\text{cd}(A, I)$가
+존재함에 유의하자.
+
+\begin{lemma}
+\label{local-cohomology-lemma-bound-cd}
+$I \subset A$를 환 $A$의 유한 생성 아이디얼이라 하자. 그러면
+\begin{enumerate}
+\item $\text{cd}(A, I)$는 $I$의 생성원 수 이하이다.
+\item $\text{cd}(A, I) \leq r$인 것은
+$f_1, \ldots, f_r \in A$가 존재하여 $V(f_1, \ldots, f_r) = V(I)$가
+성립할 때이다.
+\item $\text{cd}(A, I) \leq c$인 것은 $\Spec(A) \setminus V(I)$를
+$c$개의 아핀 열린집합으로 덮을 수 있을 때이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-adjoint}에 주어진 $R\Gamma_Y(-)$의
+명시적 기술로부터 (1)이 성립한다. $R\Gamma_Z$는 닫힌 부분집합 $Z$에만
+의존하고, $I \subset A$ 가운데 $V(I) = Z$를 만족하는 유한 생성
+아이디얼의 선택에는 의존하지 않는다는 사실을 사용하면 (1)에서 (2)를
+얻는다. 이는 쌍대화 복합체의 절
+\ref{dualizing-section-local-cohomology}에 나오는 국소 코호몰로지의
+구성과 대수학 심화의 보조정리
+\ref{more-algebra-lemma-local-cohomology-closed}를 함께 사용하거나,
+보조정리 \ref{local-cohomology-lemma-local-cohomology-is-local-cohomology}를 사용하면
+따른다. (3)은 보조정리 \ref{local-cohomology-lemma-cd}와 스킴의 코호몰로지의 소멸
+결과인 보조정리 \ref{coherent-lemma-vanishing-nr-affines}를 사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-sum}
+$I, J \subset A$를 환 $A$의 유한 생성 아이디얼이라 하자. 그러면
+$\text{cd}(A, I + J) \leq \text{cd}(A, I) + \text{cd}(A, J)$이다.
+\end{lemma}
+
+\begin{proof}
+정의와 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-ss}를 사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-change-rings}
+$A \to B$를 환 준동형이라 하고, $I \subset A$를 유한 생성 아이디얼이라
+하자. 그러면 $\text{cd}(B, IB) \leq \text{cd}(A, I)$이다. $A \to B$가
+충실히 평탄하면 등호가 성립한다.
+\end{lemma}
+
+\begin{proof}
+정의와 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-torsion-change-rings}를 사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-local}
+$I \subset A$를 환 $A$의 유한 생성 아이디얼이라 하자. 그러면
+$\text{cd}(A, I) = \max \text{cd}(A_\mathfrak p, I_\mathfrak p)$이다.
+\end{lemma}
+
+\begin{proof}
+$Y = V(I)$ 및 $Y' = V(I_\mathfrak p) \subset \Spec(A_\mathfrak p)$로 놓자.
+다음을 상기하자.
+$R\Gamma_Y(A) \otimes_A A_\mathfrak p = R\Gamma_{Y'}(A_\mathfrak p)$
+이는 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-torsion-change-rings}에 따른다. 따라서 가환대수의
+보조정리 \ref{algebra-lemma-characterize-zero-local}에 의해 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-dimension}
+$I \subset A$를 환 $A$의 유한 생성 아이디얼이라 하자. $M$이 유한
+$A$-가군이면 $H^i_{V(I)}(M) = 0$가
+$i > \dim(\text{Supp}(M))$에 대해 성립한다. 특히
+$\text{cd}(A, I) \leq \dim(A)$이다.
+\end{lemma}
+
+\begin{proof}
+먼저 두 번째 명제를 증명한다. $\dim(A)$는 크룰 차원을 뜻함을 상기하자.
+보조정리 \ref{local-cohomology-lemma-cd-local}에 의해 $A$가 국소환이라고 가정해도 된다.
+$V(I) = \emptyset$이면 결과가 성립한다. $V(I) \not = \emptyset$이면
+닫힌점이 빠져 있으므로
+$\dim(\Spec(A) \setminus V(I)) < \dim(A)$이다.
+$U = \Spec(A) \setminus V(I)$는 스펙트럴 공간 $\Spec(A)$의 준콤팩트
+열린집합이므로 그 자체가 스펙트럴 공간이다. 가환대수의 보조정리
+\ref{algebra-lemma-spec-spectral}와 위상수학의 보조정리
+\ref{topology-lemma-spectral-sub}를 보라. 따라서 층 코호몰로지의 명제
+\ref{cohomology-proposition-cohomological-dimension-spectral}에 의해
+$H^i(U, \mathcal{F}) = 0$가 $i \geq \dim(A)$에 대해 성립하고,
+보조정리 \ref{local-cohomology-lemma-cd}에 의해 원하는 결론이 따른다. 뇌터 경우에는
+그로텐디크 코호몰로지의 명제
+\ref{cohomology-proposition-vanishing-Noetherian}를 사용할 수도 있다.
+
+\medskip\noindent
+첫 번째 명제를 두 번째 명제에서 도출하자. $\mathfrak a$를 유한
+$A$-가군 $M$의 소멸자라 하고, $B = A/\mathfrak a$로 놓자.
+$\Spec(B) = \text{Supp}(M)$임을 상기하자. 가환대수의 보조정리
+\ref{algebra-lemma-support-closed}를 보라. $J = IB$로 놓자. 그러면
+$M$은 $B$-가군이고 $H^i_{V(I)}(M) = H^i_{V(J)}(M)$이다. 쌍대화
+복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-and-restriction}를 보라. 첫 번째
+부분에 의해 $\text{cd}(B, J) \leq \dim(B) = \dim(\text{Supp}(M))$이므로
+결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-is-one}
+$I \subset A$를 환 $A$의 유한 생성 아이디얼이라 하자.
+$\text{cd}(A, I) = 1$이면 $\Spec(A) \setminus V(I)$는 공집합이 아닌
+아핀 스킴이다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{local-cohomology-lemma-cd}와 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-quasi-compact-h1-zero-covering}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-maximal}
+$(A, \mathfrak m)$을 차원이 $d$인 뇌터 국소환이라 하자. 그러면
+$H^d_\mathfrak m(A)$는 영이 아니고 $\text{cd}(A, \mathfrak m) = d$이다.
+\end{lemma}
+
+\begin{proof}
+차원의 한 특징화에 의해 $A$에는 $d$개의 원소로 생성되는 정의
+아이디얼이 존재한다. 가환대수의 명제
+\ref{algebra-proposition-dimension}를 보라. 따라서 보조정리
+\ref{local-cohomology-lemma-bound-cd}에 의해 $\text{cd}(A, \mathfrak m) \leq d$이다.
+그러므로 $H^d_\mathfrak m(A)$가 영이 아닌 것과
+$\text{cd}(A, \mathfrak m) = d$인 것과
+$\text{cd}(A, \mathfrak m) \geq d$인 것은 서로 동치이다.
+
+\medskip\noindent
+$A \to A^\wedge$를 $A$에서 그 완비화로 가는 사상이라 하자.
+$A^\wedge$는 $A$와 차원이 같은 뇌터 국소환이고 극대 아이디얼은
+$\mathfrak m A^\wedge$이다. 가환대수의 보조정리
+\ref{algebra-lemma-completion-Noetherian-Noetherian},
+\ref{algebra-lemma-completion-complete},
+\ref{algebra-lemma-completion-faithfully-flat} 및 대수학 심화의 보조정리
+\ref{more-algebra-lemma-completion-dimension}를 보라. 보조정리
+\ref{local-cohomology-lemma-cd-change-rings}에 의해 $A^\wedge$에 대해 보조정리를
+증명하면 충분하다.
+
+\medskip\noindent
+앞 문단에 의해 $A$가 완비 국소환이라고 가정해도 된다. 그러면 $A$는
+정규화된 쌍대화 복합체 $\omega_A^\bullet$을 가진다(쌍대화 복합체의
+보조정리 \ref{dualizing-lemma-ubiquity-dualizing}). 국소 쌍대성 정리,
+즉 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-special-case-local-duality}에 의해
+$H^d_\mathfrak m(A)$는
+$\text{Ext}^{-d}(A, \omega_A^\bullet) = H^{-d}(\omega_A^\bullet)$의 맷리스
+쌍대이다. 마지막 가군은 예를 들어 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-nonvanishing-generically-local}에 의해 영이 아니다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-bound-dim-local}
+$(A, \mathfrak m)$을 뇌터 국소환이라 하자. $I \subset A$를 진
+아이디얼이라 하자. $\mathfrak p \subset A$를
+$V(\mathfrak p) \cap V(I) = \{\mathfrak m\}$를 만족하는 소 아이디얼이라
+하자. 그러면 $\dim(A/\mathfrak p) \leq \text{cd}(A, I)$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{local-cohomology-lemma-cd-change-rings}에 의해
+$\text{cd}(A, I) \geq \text{cd}(A/\mathfrak p, I(A/\mathfrak p))$.
+$V(I) \cap V(\mathfrak p) = \{\mathfrak m\}$이므로
+$\text{cd}(A/\mathfrak p, I(A/\mathfrak p)) =
+\text{cd}(A/\mathfrak p, \mathfrak m/\mathfrak p)$.
+보조정리 \ref{local-cohomology-lemma-cd-maximal}에 의해 이는 $\dim(A/\mathfrak p)$와 같다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-blowup}
+$A$를 뇌터 환이라 하고, $I \subset A$를 아이디얼이라 하자.
+$b : X' \to X = \Spec(A)$를 $I$의 블로업이라 하자. $b$의 올들이
+차원 $\leq d - 1$이면 $\text{cd}(A, I) \leq d$이다.
+\end{lemma}
+
+\begin{proof}
+$U = X \setminus V(I)$로 놓자. $j : U \to X'$를 표준 열린 몰입이라
+쓰자. 인자의 절 \ref{divisors-section-blowing-up}을 보라. 예외 인자는
+유효 카르티에 인자이므로(인자의 보조정리
+\ref{divisors-lemma-blowing-up-gives-effective-Cartier-divisor}), $j$는
+아핀이다. 인자의 보조정리
+\ref{divisors-lemma-complement-locally-principal-closed-subscheme}를 보라.
+$\mathcal{F}$를 준연접 $\mathcal{O}_U$-가군이라 하자. 그러면
+$R^pj_*\mathcal{F} = 0$가 $p > 0$에 대해 성립한다. 스킴의 코호몰로지의
+보조정리 \ref{coherent-lemma-relative-affine-vanishing}를 보라. 한편
+$R^qb_*(j_*\mathcal{F}) = 0$가 $q \geq d$에 대해 성립한다. 이는 스킴의
+극한의 보조정리
+\ref{limits-lemma-higher-direct-images-zero-above-dimension-fibre}에 따른다.
+따라서 르레 스펙트럼 수열(층 코호몰로지의 보조정리
+\ref{cohomology-lemma-relative-Leray})에 의해
+$R^n(b \circ j)_*\mathcal{F} = 0$가 $n \geq d$에 대해 성립한다. 그러므로
+$H^n(U, \mathcal{F}) = 0$가 $n \geq d$에 대해 성립한다(층 코호몰로지의
+보조정리 \ref{cohomology-lemma-apply-Leray}). 이는 정의에 의해
+$\text{cd}(A, I) \leq d$라는 뜻이다.
+\end{proof}
+
+
+
+
+
+
+
+\section{더 일반적인 지지집합}
+\label{local-cohomology-section-supports}
+
+\noindent
+$A$를 뇌터 환이라 하고, $M$을 $A$-가군이라 하자.
+$T \subset \Spec(A)$를 특수화 아래 안정적인 부분집합이라 하자(위상수학의
+정의 \ref{topology-definition-specialization}). 다음과 같이 정의한다.
+$$
+H^0_T(M) = \colim_{Z \subset T} H^0_Z(M)
+$$
+여기서 여극한은 닫힌 부분집합 $Z$가 $\Spec(A)$ 안에서 $T$에 포함되는
+것들의 유향 부분순서집합에 걸쳐 취한다\footnote{$T$는 특수화 아래
+안정적이므로 $T = \bigcup_{Z \subset T} Z$이다. 위상수학의 보조정리
+\ref{topology-lemma-stable-specialization}를 보라.}. 다시 말해, 원소
+$m$이 $M$에 속할 때 $H^0_T(M) \subset M$에 속할 필요충분조건은
+지지집합 $V(\text{Ann}_R(m))$, 즉 $m$의 지지집합이 $T$에 포함되는
+것이다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-support}
+$A$를 뇌터 환이라 하고, $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. $A$-가군 $M$에 대해 다음은 동치이다.
+\begin{enumerate}
+\item $H^0_T(M) = M$이다.
+\item $\text{Supp}(M) \subset T$이다.
+\end{enumerate}
+이러한 $A$-가군들의 범주는 $A$-가군 범주의 세르 부분범주이며 직합에
+대해 닫혀 있다.
+\end{lemma}
+
+\begin{proof}
+$M$의 한 원소의 지지집합은 $M$의 지지집합에 포함되고, 역으로 $M$의
+지지집합은 그 원소들의 지지집합들의 합집합이므로 동치가 성립한다.
+이러한 가군들의 범주는 $\text{Mod}_A$의 세르 부분범주이다(호몰로지
+대수의 정의 \ref{homology-definition-serre-subcategory}). 이는 가환대수의
+보조정리 \ref{algebra-lemma-support-quotient}에 따른다. 직합에 관한
+명제의 증명은 생략한다.
+\end{proof}
+
+\noindent
+$A$를 뇌터 환이라 하고, $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. 보조정리 \ref{local-cohomology-lemma-support}에서 기술한 세르
+부분범주를 $\text{Mod}_{A, T} \subset \text{Mod}_A$로 쓰자.
+$D_T(A) \subset D(A)$를 $D(A)$의 엄밀히 충만한 포화 삼각 부분범주로
+쓰는데(유도 범주의 보조정리
+\ref{derived-lemma-cohomology-in-serre-subcategory}), 이는 $A$-가군
+복합체들 중 코호몰로지 가군들이 $\text{Mod}_{A, T}$에 속하는 것들로
+이루어진다.
+다음 함자들을 얻는다.
+$$
+D(\text{Mod}_{A, T}) \to D_T(A) \to D(A)
+$$
+유도 범주의 절 \ref{derived-section-triangulated-sub}의 논의를 보라.
+$RH^0_T : D(A) \to D(\text{Mod}_{A, T})$를 $H^0_T$의 오른쪽 유도
+확장이라 하자. 다음과 같이 쓰겠다.
+$$
+R\Gamma_T : D^+(A) \to D^+_T(A),
+$$
+이는 $RH^0_T : D^+(A) \to D^+(\text{Mod}_{A, T})$와
+$D^+(\text{Mod}_{A, T}) \to D^+_T(A)$의 합성이다. $A$의 차원이
+유한하면\footnote{$\dim(A) = \infty$이면 이 구성은 비유계 복합체에서
+예상 밖의 성질을 가질 수 있다.} 다음과 같이 쓰겠다.
+$$
+R\Gamma_T : D(A) \to D_T(A)
+$$
+이는 $RH^0_T$와 $D(\text{Mod}_{A, T}) \to D_T(A)$의 합성이다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-adjoint}
+$A$를 뇌터 환이라 하고, $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. 함자 $RH^0_T$는 함자
+$D(\text{Mod}_{A, T}) \to D(A)$의 오른쪽 수반함자이다.
+\end{lemma}
+
+\begin{proof}
+함자 $H^0_T(-)$가 포함 함자 $\text{Mod}_{A, T} \to \text{Mod}_A$의
+오른쪽 수반함자라는 사실에서 따른다. 유도 범주의 보조정리
+\ref{derived-lemma-derived-adjoint-functors}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-adjoint-ext}
+$A$를 뇌터 환이라 하고, $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. $K$를 $D(A)$의 임의의 대상이라 하면
+$$
+H^i(RH^0_T(K)) = \colim_{Z \subset T\text{ 닫힘}} H^i_Z(K)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+$J^\bullet$을 $K$를 나타내는 K-단사 복합체라 하자. 정의에 의해
+$RH^0_T$는 다음 복합체로 나타난다.
+$$
+H^0_T(J^\bullet) = \colim H^0_Z(J^\bullet)
+$$
+여기서 등식은 $H^0_T$의 정의에서 따른다. 여과 여극한은 완전하므로 이
+복합체의 차수 $i$ 코호몰로지는 원하는 대로
+$\colim H^i(H^0_Z(J^\bullet)) = \colim H^i_Z(K)$
+이다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-equal-plus}
+$A$를 뇌터 환이라 하고, $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. 함자 $D^+(\text{Mod}_{A, T}) \to D^+_T(A)$는
+동치이다.
+\end{lemma}
+
+\begin{proof}
+$M$을 $\text{Mod}_{A, T}$의 대상이라 하자. 매입 $M \to J$를 택하는데,
+그 공역은 단사 $A$-가군이다. 쌍대화 복합체의 명제
+\ref{dualizing-proposition-structure-injectives-noetherian}에 의해 $J$는
+잉여류체들의 단사 포락들의 직합이다. $E$를 $\mathfrak p$의 잉여류체의
+단사 포락이라 하자. $E$는 $\mathfrak p$-거듭제곱 꼬임이므로
+$H^0_T(E) = 0$은 $\mathfrak p \not \in T$일 때 성립하고,
+$H^0_T(E) = E$는 $\mathfrak p \in T$일 때 성립한다. 따라서 명제에 의해
+$H^0_T(J)$는 단사 포락들의 직합이므로 단사이고, 매입
+$M \to H^0_T(J)$가 존재한다. 따라서 모든 대상 $M$은
+$\text{Mod}_{A, T}$ 안에서 단사 분해 $M \to J^\bullet$을 가지며,
+각 $J^n$도 $\text{Mod}_{A, T}$에 속한다. 따라서 $RH^0_T(M) = M$이다.
+
+\medskip\noindent
+이제 $K \in D_T^+(A)$라고 가정하자. 그러면 스펙트럼 수열
+$$
+R^qH^0_T(H^p(K)) \Rightarrow R^{p + q}H^0_T(K)
+$$
+은 수렴하고(유도 범주의 보조정리
+\ref{derived-lemma-two-ss-complex-functor}), 위에서 $q = 0$인 항들만 영이
+아님을 보았다. 따라서 $RH^0_T(K) \to K$는 동형이다. 그러므로 함자
+$D^+(\text{Mod}_{A, T}) \to D^+_T(A)$는 동치이며 준역함자는
+$RH^0_T$이다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-equal-full}
+$A$를 뇌터 환이라 하고, $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. $\dim(A) < \infty$이면 함자
+$D(\text{Mod}_{A, T}) \to D_T(A)$는 동치이다.
+\end{lemma}
+
+\begin{proof}
+$\dim(A) = d$라 하자. 그러면 $H^i_Z(M) = 0$가 $i > d$일 때 모든 닫힌
+부분집합 $Z$, 즉 $\Spec(A)$의 닫힌 부분집합에 대해 성립함을 알 수 있다.
+보조정리 \ref{local-cohomology-lemma-cd-dimension}를 보라. 보조정리
+\ref{local-cohomology-lemma-adjoint-ext}에 의해 $H^0_T$는 유계 코호몰로지 차원을 가진다.
+
+\medskip\noindent
+$K \in D_T(A)$라 하자. $RH^0_T(K) \to K$가 동형이라고 주장한다.
+$K$가 아래로 유계이면 이것이 참임을 안다. 보조정리
+\ref{local-cohomology-lemma-equal-plus}를 보라. 그러나 $H^0_T$는 유계 코호몰로지 차원을
+가지므로 $i$번째 코호몰로지는 $RH_T^0(K)$에 대해
+$\tau_{\geq -d + i}K$에만 의존하며, 이로부터 결론이 따른다. 따라서
+$D(\text{Mod}_{A, T}) \to D_T(A)$는 동치이고 준역함자는 $RH^0_T$이다.
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-upshot}
+$A$를 뇌터 환이라 하고, $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. 위 논의의 결론은
+$R\Gamma_T : D^+(A) \to D_T^+(A)$가 포함 함자
+$D_T^+(A) \to D^+(A)$의 오른쪽 수반함자라는 것이다.
+$\dim(A) < \infty$이면 $R\Gamma_T : D(A) \to D_T(A)$는 포함 함자
+$D_T(A) \to D(A)$의 오른쪽 수반함자이다. 두 경우 모두
+$$
+H^i_T(K) = H^i(R\Gamma_T(K)) = R^iH^0_T(K) =
+\colim_{Z \subset T\text{ 닫힘}} H^i_Z(K)
+$$
+이다. 이는 보조정리 \ref{local-cohomology-lemma-adjoint}, \ref{local-cohomology-lemma-adjoint-ext},
+\ref{local-cohomology-lemma-equal-plus}, \ref{local-cohomology-lemma-equal-full}을 결합하면 따른다.
+\end{remark}
+
+\begin{lemma}
+\label{local-cohomology-lemma-torsion-change-rings}
+$A \to B$를 뇌터 환들의 평탄 준동형이라 하자. $T \subset \Spec(A)$를
+특수화 아래 안정적인 부분집합이라 하고, $T' \subset \Spec(B)$를 $T$의
+역상이라 하자. 그러면 표준 사상
+$$
+R\Gamma_T(K) \otimes_A^\mathbf{L} B
+\longrightarrow
+R\Gamma_{T'}(K \otimes_A^\mathbf{L} B)
+$$
+은 $K \in D^+(A)$에 대해 동형이다. $A$와 $B$의 차원이 유한하면 이는
+$K \in D(A)$에 대해서도 참이다.
+\end{lemma}
+
+\begin{proof}
+사상 $R\Gamma_T(K) \to K$로부터 사상
+$R\Gamma_T(K) \otimes_A^\mathbf{L} B \to K \otimes_A^\mathbf{L} B$.
+을 얻는다. $R\Gamma_T(K) \otimes_A^\mathbf{L} B$의 코호몰로지 가군들은
+$T'$ 위에 지지되므로 보조정리의 화살표를 얻는다. $T$가 $\Spec(A)$의
+닫힌 부분집합이면 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-torsion-change-rings}에 의해 이 화살표는 동형이다.
+$H^i_T(K)$는 $H^i_Z(K)$들의 여극한이며, 여기서 $Z$는 $T$의 닫힌
+부분집합들의 유향 집합을 달림을 상기하자. 보조정리
+\ref{local-cohomology-lemma-adjoint-ext}를 보라. 이에 대응하여
+$H^i_{T'}(K \otimes_A^\mathbf{L} B) =
+\colim H^i_{Z'}(K \otimes_A^\mathbf{L} B)$이고, 여기서 $Z'$는 $Z$의
+역상이다. 이제 $\otimes_A B$가 여과 여극한과 가환하고 고차 Tor가
+없으므로 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-local-cohomology-ss}
+$A$를 환이라 하고, $T, T' \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합들이라 하자. $K \in D^+(A)$에 대해 스펙트럼 수열
+$$
+E_2^{p, q} = H^p_T(H^p_{T'}(K)) \Rightarrow H^{p + q}_{T \cap T'}(K)
+$$
+이 존재한다. 유도 범주의 보조정리
+\ref{derived-lemma-grothendieck-spectral-sequence}와 같다.
+\end{lemma}
+
+\begin{proof}
+$E$를 $D_{T \cap T'}(A)$의 대상이라 하자. 그러면
+$$
+\Hom(E, R\Gamma_T(R\Gamma_{T'}(K))) =
+\Hom(E, R\Gamma_{T'}(K)) =
+\Hom(E, K)
+$$
+이다. 첫 번째 등식은 $R\Gamma_T$의 수반 성질에, 두 번째 등식은
+$R\Gamma_{T'}$의 수반 성질에 따른다. 한편 $J^\bullet$이 $K$를 나타내는
+아래로 유계인 단사 복합체이면, $H^0_{T'}(J^\bullet)$은 단사 $A$-가군들의
+복합체로서 $R\Gamma_{T'}(K)$를 나타낸다. 따라서
+$H^0_T(H^0_{T'}(J^\bullet))$은 $R\Gamma_T(R\Gamma_{T'}(K))$를 나타내는
+복합체이다. 그러므로 $R\Gamma_T(R\Gamma_{T'}(K))$는
+$D^+_{T \cap T'}(A)$의 대상이다. 이 두 사실을 결합하면
+$R\Gamma_{T \cap T'} = R\Gamma_T \circ R\Gamma_{T'}$를 얻는다. 명제에서
+인용한 보조정리가 이제 스펙트럼 수열을 준다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-torsion-tensor-product}
+$A$를 뇌터 환이라 하고, $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. $A$의 차원이 유한하다고 가정한다. 그러면
+$$
+R\Gamma_T(K) = R\Gamma_T(A) \otimes_A^\mathbf{L} K
+$$
+가 $K \in D(A)$에 대해 성립한다. $K, L \in D(A)$에 대해서는
+$$
+R\Gamma_T(K \otimes_A^\mathbf{L} L) =
+K \otimes_A^\mathbf{L} R\Gamma_T(L) =
+R\Gamma_T(K) \otimes_A^\mathbf{L} L =
+R\Gamma_T(K) \otimes_A^\mathbf{L} R\Gamma_T(L)
+$$
+이다. $K$ 또는 $L$이 $D_T(A)$에 속하면
+$K \otimes_A^\mathbf{L} L$도 그러하다.
+\end{lemma}
+
+\begin{proof}
+구성에 의해 $R\Gamma_T(A)$를 복합체 $J^\bullet$로 나타낼 수 있으며,
+이 복합체는 $\text{Mod}_{A, T}$에 속한다. 따라서 $K$를 K-평탄 복합체
+$K^\bullet$로 나타내면 $R\Gamma_T(A) \otimes_A^\mathbf{L} K$는 복합체
+$\text{Tot}(J^\bullet \otimes_A K^\bullet)$로 나타나며, 이 복합체는
+$\text{Mod}_{A, T}$에 속한다. 사상
+$R\Gamma_T(A) \to A$를 사용하면 사상
+$R\Gamma_T(A) \otimes_A^\mathbf{L} K\to K$를 얻는다. 따라서
+$R\Gamma_T$의 수반 성질에 의해 표준 사상
+$$
+R\Gamma_T(A) \otimes_A^\mathbf{L} K \longrightarrow R\Gamma_T(K)
+$$
+을 얻으며, 이는 방금 구성한 사상을 통하여 분해한다. 예를 들어 보조정리
+\ref{local-cohomology-lemma-adjoint-ext}, 유향 여극한이 직합과 가환한다는 사실, 그리고
+통상적인 국소 코호몰로지가 직합과 가환한다는 사실(예를 들어 쌍대화
+복합체의 보조정리 \ref{dualizing-lemma-local-cohomology-adjoint})에 의해
+$R\Gamma_T$는 $D(A)$에서 직합과 가환한다. 따라서 대수학 심화의 주석
+\ref{more-algebra-remark-P-resolution}에 의해 $K = A[k]$인 경우를
+확인하면 충분하며, 여기서 $k \in \mathbf{Z}$이다. 이는 분명하다.
+
+\medskip\noindent
+마지막 명제들은 방금 보인 결과와 유도 텐서곱의 추이성에서 따른다.
+\end{proof}
+
+
+
+
+
+\section{국소 코호몰로지의 여과}
+\label{local-cohomology-section-filter-local-cohomology}
+
+\noindent
+보조정리 \ref{local-cohomology-lemma-local-cohomology-ss}의 스펙트럼 수열과 관련된 몇
+가지 기법을 다룬다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-filter-local-cohomology}
+$A$를 뇌터 환이라 하자. $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. $T' \subset T$를 $T$의 비극소 소아이디얼들의
+집합이라 하자. 그러면 $T'$는 $\Spec(A)$에서 특수화 아래 안정적인
+부분집합이고, 모든 $A$-가군 $M$에 대해 완전열
+$$
+0 \to
+\colim_{Z, f} H^1_f(H^{i - 1}_Z(M)) \to
+H^i_{T'}(M) \to H^i_T(M) \to
+\bigoplus\nolimits_{\mathfrak p \in T \setminus T'}
+H^i_{\mathfrak p A_\mathfrak p}(M_\mathfrak p)
+$$
+이 존재한다. 여기서 여극한은 닫힌 부분집합 $Z \subset T$와
+$f \in A$ 가운데 $V(f) \cap Z \subset T'$를 만족하는 것들에 걸쳐
+취한다.
+\end{lemma}
+
+\begin{proof}
+모든 $Z$와 $f$에 대해 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-ss}의 스펙트럼 수열은 퇴화하여
+짧은 완전열
+$$
+0 \to H^1_f(H^{i - 1}_Z(M)) \to
+H^i_{Z \cap V(f)}(M) \to H^0_f(H^i_Z(M)) \to 0
+$$
+을 준다. 아래에서는 이를 더 언급하지 않고 사용한다.
+
+\medskip\noindent
+$\xi \in H^i_T(M)$가 직합에서 영으로 사상된다고 하자. 먼저 $\xi$를
+어떤 $\xi' \in H^i_Z(M)$의 상으로 쓰는데, 여기서 $Z \subset T$는
+닫힌 부분집합이다. 보조정리 \ref{local-cohomology-lemma-adjoint-ext}를 보라. 그러면
+$\xi'$은 $H^i_{\mathfrak p A_\mathfrak p}(M_\mathfrak p)$에서 영으로
+사상된다. 이는 모든 $\mathfrak p \in Z$, $\mathfrak p \not \in T'$에
+대해 성립한다. 이러한 소아이디얼은 유한 개이므로, 그 어느 것에도
+속하지 않는 $f \in A$를 택할 수 있는데, 이 $f$는 $\xi'$을 소멸시킨다.
+그러면 $\xi'$은 어떤
+$\xi'' \in H^i_{Z'}(M)$의 상이며, 여기서 $Z' = Z \cap V(f)$이다.
+$f$를 택한 방식에 의해 $Z' \subset T'$이고, 끝에서 두 번째 자리에서
+완전성을 얻는다.
+
+\medskip\noindent
+$\xi \in H^i_{T'}(M)$가 $H^i_T(M)$에서 영으로 사상된다고 하자.
+닫힌 부분집합 $Z' \subset Z$를 택하되 $Z' \subset T'$이고
+$Z \subset T$이며, $\xi$가 어떤 $\xi' \in H^i_{Z'}(M)$에서 오고
+$H^i_Z(M)$에서 영으로 사상되게 한다. 그러면 $f \in A$를 찾아
+$V(f) \cap Z = Z'$가 되게 할 수 있으며, 결론이 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-zero}
+$A$를 유한 차원 뇌터 환이라 하자. $T \subset \Spec(A)$를 특수화 아래
+안정적인 부분집합이라 하자. $\{M_n\}_{n \geq 0}$을 $A$-가군들의 역계라
+하고, $i \geq 0$을 정수라 하자. 모든 $m$에 대해 정수
+$m'(m) \geq m$가 존재하여 모든 $\mathfrak p \in T$에 대해 유도 사상
+$$
+H^i_{\mathfrak p A_\mathfrak p}(M_{k, \mathfrak p})
+\longrightarrow
+H^i_{\mathfrak p A_\mathfrak p}(M_{m, \mathfrak p})
+$$
+이 $k \geq m'(m)$에 대해 영이라고 가정하자.
+$m'' : \mathbf{N} \to \mathbf{N}$을 $2^{\dim(T)}$회 자기합성이라 하되,
+합성하는 함수는 $m'$으로 하자. 그러면 사상
+$H^i_T(M_k) \to H^i_T(M_m)$은 모든
+$k \geq m''(m)$에 대해 영이다.
+\end{lemma}
+
+\begin{proof}
+먼저 일반적인 관찰을 하자. 아벨군 역계들의 완전열
+$$
+(A_n) \to (B_n) \to (C_n)
+$$
+이 있다고 하자. 모든 $m$에 대해 정수 $m'(m) \geq m$가 존재하여 사상
+$$
+A_k \to A_m
+\quad\text{및}\quad
+C_k \to C_m
+$$
+이 $k \geq m'(m)$에 대해 영이라고 가정하자. 그러면
+$k \geq m'(m'(m))$에 대해 사상 $B_k \to B_m$은 영이다.
+
+\medskip\noindent
+$\dim(T)$에 대한 귀납법으로 보조정리를 증명하겠다. 이는 $\dim(A)$가
+유한하므로 유한하다. $T' \subset T$를 $T$의 비극소 소아이디얼들의
+집합이라 하자. 그러면 $T'$는 $\Spec(A)$에서 특수화 아래 안정적인
+부분집합이고 보조정리의 가정들이 $T'$에 적용된다.
+$\dim(T') < \dim(T)$이므로 $T'$에 대해 보조정리가 성립함을 안다.
+모든 $A$-가군 $M$에 대해 완전열
+$$
+H^i_{T'}(M) \to H^i_T(M) \to
+\bigoplus\nolimits_{\mathfrak p \in T \setminus T'}
+H^i_{\mathfrak p A_\mathfrak p}(M_\mathfrak p)
+$$
+이 보조정리 \ref{local-cohomology-lemma-filter-local-cohomology}에 의해 존재한다. 따라서
+증명 처음의 관찰로부터 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-essential-image}
+$A$를 뇌터 환이라 하자. $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. $\{M_n\}_{n \geq 0}$을 $A$-가군들의 역계라 하고,
+$i \geq 0$을 정수라 하자. $A$의 차원이 유한하고, 모든 $m$에 대해
+정수 $m'(m) \geq m$가 존재하여 모든 $\mathfrak p \in T$에 대해 다음이
+성립한다고 가정하자.
+\begin{enumerate}
+\item $H^{i - 1}_{\mathfrak p A_\mathfrak p}(M_{k, \mathfrak p})
+\to H^{i - 1}_{\mathfrak p A_\mathfrak p}(M_{m, \mathfrak p})$
+는 $k \geq m'(m)$에 대해 영이다.
+\item $ H^i_{\mathfrak p A_\mathfrak p}(M_{k, \mathfrak p}) \to
+H^i_{\mathfrak p A_\mathfrak p}(M_{m, \mathfrak p})$
+의 상 $G(\mathfrak p, m)$은 $k \geq m'(m)$에 독립이고, 더 나아가
+$G(\mathfrak p, m)$은
+$H^i_{\mathfrak p A_\mathfrak p}(M_{0, \mathfrak p})$로 단사적으로
+사상된다.
+\end{enumerate}
+그러면 정수 $m_0$가 존재하여 모든 $m \geq m_0$에 대해 정수
+$m''(m) \geq m$가 존재하고, $k \geq m''(m)$일 때 사상
+$H^i_T(M_k) \to H^i_T(M_m)$의 상은 $H^i_T(M_{m_0})$로 단사적으로
+사상된다.
+\end{lemma}
+
+\begin{proof}
+먼저 일반적인 관찰을 하자. 아벨군 역계들의 완전열
+$$
+(A_n) \to (B_n) \to (C_n) \to (D_n)
+$$
+이 있다고 하자. 정수 $m_0$가 존재하여 모든 $m \geq m_0$에 대해 정수
+$m'(m) \geq m$가 존재하고, 사상
+$$
+\Im(B_k \to B_m) \longrightarrow B_{m_0}
+\quad\text{및}\quad
+\Im(D_k \to D_m) \longrightarrow D_{m_0}
+$$
+이 $k \geq m'(m)$에 대해 단사이고, $A_k \to A_m$이
+$k \geq m'(m)$에 대해 영이라고 가정하자. 그러면
+$m \geq m'(m_0)$ 및 $k \geq m'(m'(m))$에 대해 사상
+$$
+\Im(C_k \to C_m) \to C_{m'(m_0)}
+$$
+은 단사이다. 실제로 $c_0 \in C_m$을 $c_3 \in C_k$의 상이라 하고,
+$c_0$가 $C_{m'(m_0)}$에서 영으로 사상된다고 하자. 다음 그림을 보라.
+$$
+C_k \to C_{m'(m'(m))} \to C_{m'(m)} \to C_m \to C_{m'(m_0)},\quad
+c_3 \mapsto c_2 \mapsto c_1 \mapsto c_0 \mapsto 0
+$$
+$c_0 = 0$임을 보여야 한다. 그 상 $d_3$, 즉 $c_3$의 상은 $C_{m_0}$에서 영으로
+사상되므로, 그 상 $d_1 \in D_{m'(m)}$이 영임을 알 수 있다. 따라서
+$b_1 \in B_{m'(m)}$을 택하여 그 상이 $c_1$이 되게 할 수 있다.
+$c_3$가 $C_{m'(m_0)}$에서 영으로 사상되므로 원소
+$a_{-1} \in A_{m'(m_0)}$을 찾아, 그 상이
+$b_{-1} \in B_{m'(m_0)}$, 즉 $b_1$의 상이 되게 할 수 있다.
+$a_{-1}$은 $A_{m_0}$에서
+영으로 사상되므로 $b_1$이 $B_{m_0}$에서 영으로 사상된다는 결론을
+얻는다. 따라서 그 상 $b_0 \in B_m$은 영이고, 이는 물론 원하는 대로
+$c_0 = 0$을 함의한다.
+
+\medskip\noindent
+$\dim(T)$에 대한 귀납법으로 보조정리를 증명하겠다. 이는 $\dim(A)$가
+유한하므로 유한하다. $T' \subset T$를 $T$의 비극소 소아이디얼들의
+집합이라 하자. 그러면 $T'$는 $\Spec(A)$에서 특수화 아래 안정적인
+부분집합이고 보조정리의 가정들이 $T'$에 적용된다.
+$\dim(T') < \dim(T)$이므로 $T'$에 대해 보조정리가 성립함을 안다.
+모든 $A$-가군 $M$에 대해 완전열
+$$
+0 \to \colim_{Z, f} H^1_f(H^{i - 1}_Z(M)) \to
+H^i_{T'}(M) \to H^i_T(M) \to
+\bigoplus\nolimits_{\mathfrak p \in T \setminus T'}
+H^i_{\mathfrak p A_\mathfrak p}(M_\mathfrak p)
+$$
+이 보조정리 \ref{local-cohomology-lemma-filter-local-cohomology}에 의해 존재한다. 따라서
+증명 처음의 관찰과, 군들의 계
+$$
+\left\{\colim_{Z, f} H^1_f(H^{i - 1}_Z(M_n))\right\}_{n \geq 0}
+$$
+가 보조정리 \ref{local-cohomology-lemma-zero}에서 프로-영임을 보았다는 사실로부터
+결론을 얻는다. 여기서는 그 보조정리의 함수 $m''(m)$이
+$H^{i - 1}_Z(M)$에 대해 $Z$에 독립이라는 점을 사용한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{국소 코호몰로지의 유한성, I}
+\label{local-cohomology-section-finiteness}
+
+\noindent
+국소 코호몰로지 가군의 유한성에 대한 Faltings의 방법을 따르겠다.
+\cite{Faltings-annulators}와 \cite{Faltings-finiteness}를 보라. 다음
+보조정리는 국소 코호몰로지 가군들이 유한 가군임을 증명하기 위해서는
+이 가군들이 소멸자를 가짐을 증명하면 충분하다는 것을 보여 준다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator}
+\begin{reference}
+\cite[보조정리 3]{Faltings-annulators}
+\end{reference}
+$A$를 뇌터 환이라 하자. $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. $M$을 유한 $A$-가군이라 하고 $n \geq 0$이라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item $H^i_T(M)$은 $i \leq n$에 대해 유한하다.
+\item 아이디얼 $J \subset A$가 존재하여 $V(J) \subset T$이고
+$J$가 $H^i_T(M)$을 $i \leq n$에 대해 소멸시킨다.
+\end{enumerate}
+$T = V(I) = Z$이고 $I \subset A$인 경우, 이 조건들은
+다음 조건과도 동치이다.
+\begin{enumerate}
+\item[(3)] $e \geq 0$이 존재하여 $I^e$가 $H^i_Z(M)$을 $i \leq n$에
+대해 소멸시킨다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$n$에 대한 귀납법으로 (1)과 (2)의 동치를 증명한다. $n = 0$이면
+$H^0_T(M) \subset M$은 유한하므로 (1)이 참이다.
+$H^0_T(M) = \colim H^0_{V(J)}(M)$이고 여기서 $J$는 (2)와 같으므로
+(2)도 참이다. $n > 0$이라고 가정하자.
+
+\medskip\noindent
+(1)이 참이라고 가정하자. $H^i_J(M) = H^i_{V(J)}(M)$임을 상기하자.
+쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-noetherian}를 보라. 따라서
+$H^i_T(M) = \colim H^i_J(M)$이고, 여기서 여극한은 아이디얼
+$J \subset A$ 가운데 $V(J) \subset T$인 것들에 걸쳐 취한다.
+보조정리 \ref{local-cohomology-lemma-adjoint-ext}를 보라. $H^i_T(M)$이 $i \leq n$에 대해
+유한 생성이므로, (2)와 같은 $J \subset A$를 찾아 사상
+$H^i_J(M) \to H^i_T(M)$이 $i \leq n$에 대해 전사가 되게 할 수 있다.
+따라서 유한 개 생성원들은 $J$-거듭제곱 꼬임 원소이고, $J$를 어떤
+거듭제곱으로 바꾸면 (2)가 성립함을 알 수 있다.
+
+\medskip\noindent
+(2)와 같은 $J$가 있다고 가정하자. $N = H^0_T(M)$ 및 $M' = M/N$으로
+놓자. $R\Gamma_T$의 구성에 의해 $H^i_T(N) = 0$이 $i > 0$에 대해
+성립하고 $H^0_T(N) = N$이다. 주석 \ref{local-cohomology-remark-upshot}을 보라. 따라서
+$H^0_T(M') = 0$이고 $H^i_T(M') = H^i_T(M)$이 $i > 0$에 대해 성립한다.
+그러므로 $M$을 $M'$으로 바꾸어도 된다. 따라서 $H^0_T(M) = 0$이라고
+가정할 수 있다. 이는 $M$의 유한한 소속 소아이디얼 집합이 $T$에
+속하지 않는다는 뜻이다. 소아이디얼 회피(가환대수의 보조정리
+\ref{algebra-lemma-silly})에 의해 $f \in J$를 찾을 수 있는데, 이는
+$M$의 어느 소속 소아이디얼에도 속하지 않는다. 이제 짧은 완전열
+$$
+0 \to M \to M \to M/fM \to 0
+$$
+에 대응하는 국소 코호몰로지 긴 완전열은 짧은 완전열
+$$
+0 \to H^i_T(M) \to H^i_T(M/fM) \to H^{i + 1}_T(M) \to 0
+$$
+로 바뀌며, 이는 $i < n$에 대해 성립한다. 따라서 $J^2$는
+$H^i_T(M/fM)$을 $i < n$에 대해 소멸시킨다. 귀납 가정에 의해
+$H^i_T(M/fM)$은 $i < n$에 대해 유한하다. 짧은 완전열을 다시 한 번
+사용하면 원하는 대로 $H^{i + 1}_T(M)$이 $i < n$에 대해 유한함을 안다.
+
+\medskip\noindent
+$T = V(I)$인 경우 (2)와 (3)의 동치에 대한 증명은 생략한다.
+\end{proof}
+
+\noindent
+다음 Faltings의 결과를 사용하면 국소환 수준에서 국소 코호몰로지의
+유한성을 증명할 수 있다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-check-finiteness-local-cohomology-locally}
+\begin{reference}
+이는 \cite[정리 1]{Faltings-finiteness}의 특수한 경우이다.
+\end{reference}
+$A$를 뇌터 환, $I \subset A$를 아이디얼, $M$을 유한 $A$-가군,
+$n \geq 0$을 정수라 하자. $Z = V(I)$로 놓자. 다음은 동치이다.
+\begin{enumerate}
+\item 가군 $H^i_Z(M)$은 $i \leq n$에 대해 유한하다.
+\item 모든 $\mathfrak p \in \Spec(A)$에 대해 가군
+$H^i_Z(M)_\mathfrak p$는 $i \leq n$일 때 유한 $A_\mathfrak p$-가군이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+함의 (1) $\Rightarrow$ (2)는 즉시 알 수 있다. 역은 $n$에 대한 귀납법으로
+증명한다. $n = 0$인 경우에는 (1)과 (2)가 모두 항상 참이므로 분명하다.
+
+\medskip\noindent
+$n > 0$이고 (2)가 참이라고 가정하자. $N = H^0_Z(M)$ 및 $M' = M/N$으로
+놓자. 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-divide-by-torsion}에 의해 $M$을 $M'$으로 바꾸어도
+된다. 따라서 $H^0_Z(M) = 0$이라고 가정할 수 있다. 이는
+$\text{depth}_I(M) > 0$이라는 뜻이다(쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-depth}). $f \in I$를 $M$ 위의 영인자가 아닌
+원소로 택하고 짧은 완전열
+$$
+0 \to M \to M \to M/fM \to 0
+$$
+을 생각하자. 이는 긴 완전열
+$$
+0 \to H^0_Z(M/fM) \to H^1_Z(M) \to H^1_Z(M) \to H^1_Z(M/fM) \to
+H^2_Z(M) \to \ldots
+$$
+을 주며, 국소화한 뒤에도 마찬가지이다. 따라서 가정 (2)에 의해 가군
+$H^i_Z(M/fM)_\mathfrak p$는 $i < n$에 대해 유한하다. 그러므로 귀납
+가정에 의해 $H^i_Z(M/fM)$은 $i < n$에 대해 유한하다.
+
+\medskip\noindent
+$\mathfrak p$를 $A$의 소아이디얼로서 $H^i_Z(M)$에 어떤 $i \leq n$에
+대해 소속된 것이라 하자. $\mathfrak p$가 원소 $x \in H^i_Z(M)$의 소멸자라고
+하자. 그러면 $\mathfrak p \in Z$이므로 $f \in \mathfrak p$이다. 따라서
+$fx = 0$이고, 이에 따라 $x$는 $H^{i - 1}_Z(M/fM)$의 한 원소에서 위 긴
+완전열의 경계 사상 $\delta$에 의해 온다. 그러므로 $\mathfrak p$는 유한
+가군 $\Im(\delta)$의 소속 소아이디얼이다. 따라서
+$\text{Ass}(H^i_Z(M))$은 $i \leq n$에 대해 유한하다. 가환대수의
+보조정리 \ref{algebra-lemma-finite-ass}를 보라.
+
+\medskip\noindent
+다음을 상기하자.
+$$
+H^i_Z(M) \subset
+\prod\nolimits_{\mathfrak p \in \text{Ass}(H^i_Z(M))}
+H^i_Z(M)_\mathfrak p
+$$
+이는 가환대수의 보조정리 \ref{algebra-lemma-zero-at-ass-zero}에 따른다.
+가정에 의해 오른쪽 가군들은 유한하고 $I$-거듭제곱 꼬임이므로, 정수
+$e_{\mathfrak p, i} \geq 0$을 $i \leq n$ 및
+$\mathfrak p \in \text{Ass}(H^i_Z(M))$에 대해 찾아
+$I^{e_{\mathfrak p, i}}$가 $H^i_Z(M)_\mathfrak p$를 소멸시키게 할 수 있다.
+따라서 $I^e$는, 여기서 $e = \max\{e_{\mathfrak p, i}\}$로 놓으면, $H^i_Z(M)$을
+$i \leq n$에 대해 소멸시킨다. 보조정리
+\ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator}에 의해
+$H^i_Z(M)$은 $i \leq n$에 대해 유한하다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilate-local-cohomology}
+$A$를 환이라 하고 $J \subset I \subset A$를 유한 생성 아이디얼들이라
+하자. $i \geq 0$을 정수라 하고 $Z = V(I)$로 놓자. $H^i_Z(A)$가
+$J^n$에 의해 어떤 $n$에 대해 소멸되면, $H^i_Z(M)$은 $J^m$에 의해
+어떤 $m = m(M)$에 대해 소멸된다. 이는 모든 유한 표시 $A$-가군 $M$ 중
+$M_f$가 유한 국소 자유 $A_f$-가군인 것이 모든 $f \in I$에 대해
+성립하는 것에 대하여 참이다.
+\end{lemma}
+
+\begin{proof}
+$\mathfrak a$를 $H^i_Z(M)$의 소멸자라 하자.
+$\mathfrak p \subset A$이고 $\mathfrak p \not \in Z$라 하자. 가정에 의해
+$f \in I$, $f \not \in \mathfrak p$인 원소와 동형
+$\varphi : A_f^{\oplus r} \to M_f$가 존재하며, 이는 $A_f$-가군들의
+동형이다. 분모를 없애고($M$이 유한 표시라는 점도 사용하여) 사상
+$$
+a : A^{\oplus r} \longrightarrow M
+\quad\text{및}\quad
+b : M \longrightarrow A^{\oplus r}
+$$
+을 찾는데, $a_f = f^N \varphi$이고 $b_f = f^N \varphi^{-1}$인 어떤
+$N$이 존재한다. 더 나아가 $a \circ b$와 $b \circ a$가
+$f^{2N}$에 의한 곱셈과 같다고 가정할 수 있다. 따라서 $H^i_Z(M)$은
+$f^{2N}J^n$에 의해 소멸된다. 즉 $f^{2N}J^n \subset \mathfrak a$이다.
+
+\medskip\noindent
+$U = \Spec(A) \setminus Z$는 준콤팩트이므로 유한 개의
+$f_1, \ldots, f_t$와 $N_1, \ldots, N_t$를 찾아
+$U = \bigcup D(f_j)$ 및 $f_j^{2N_j}J^n \subset \mathfrak a$가 성립하게
+할 수 있다. 그러면 $V(I) = V(f_1, \ldots, f_t)$이고, $I$가 유한
+생성이므로 $I^M \subset (f_1, \ldots, f_t)$인 어떤 $M$이 존재한다는
+결론을 얻는다. 종합하면 $J^m \subset \mathfrak a$가 $m \gg 0$에 대해
+성립함을 안다.
+예를 들어 $m = M (2N_1 + \ldots + 2N_t) n$이면 충분하다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-local-finiteness-for-finite-locally-free}
+$A$를 뇌터 환이라 하고 $I \subset A$를 아이디얼이라 하자.
+$Z = V(I)$로 놓자. $n \geq 0$을 정수라 하자. $H^i_Z(A)$가
+$0 \leq i \leq n$에 대해 유한하면, $H^i_Z(M)$도 $0 \leq i \leq n$에
+대해 유한하다. 여기서 이는 임의의 유한 $A$-가군 $M$으로서 $M_f$가
+유한 국소 자유 $A_f$-가군인 것이 모든 $f \in I$에 대해 성립하는 것에
+대하여 참이다.
+\end{lemma}
+
+\begin{proof}
+$H^i_Z(A)$가 $0 \leq i \leq n$에 대해 유한하다는 가정은 어떤
+$e \geq 0$가 존재하여 $I^e$가 $H^i_Z(A)$를 $0 \leq i \leq n$에 대해
+소멸시킴을 뜻한다. 보조정리
+\ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator}를 보라. 그러면
+보조정리 \ref{local-cohomology-lemma-annihilate-local-cohomology}에 의해 $H^i_Z(M)$은
+$0 \leq i \leq n$에 대해 $I^m$에 의해 소멸되며, 여기서
+$m = m(M, i)$이다. $m$은 모든 $0 \leq i \leq n$에 대해 같게 택할 수 있다.
+그러면 보조정리
+\ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator}에 의해 원하는
+대로 $H^i_Z(M)$은 $0 \leq i \leq n$에 대해 유한하다.
+\end{proof}
+
+
+
+
+
+\section{직접상의 유한성, I}
+\label{local-cohomology-section-finiteness-pushforward}
+
+\noindent
+이 절에서는 유한성 정리의 가장 쉬운 비자명한 경우, 곧 제1 국소
+코호몰로지의 유한성을 다룬다. 이는 $j_*\mathcal{F}$의 유한성과
+동치이다. 여기서 $j : U \to X$는 열린 몰입이고, $X$는 국소 뇌터이며,
+$\mathcal{F}$는 $U$ 위의 연접층이다. Koll\'ar의 방법
+(\cite{Kollar-variants}와 \cite{Kollar-local-global-hulls})을 따라 필요충분조건을
+얻는다. 명제 \ref{local-cohomology-proposition-kollar}를 보라. 고차 직접상이나 고차 국소
+코호몰로지 군에 관심 있는 독자는 절 \ref{local-cohomology-section-finiteness-pushforward-II}
+또는 절 \ref{local-cohomology-section-finiteness-II}로 바로 넘어가도 된다. 이 두 절은 이
+절의 나머지 부분과 독립적으로 전개된다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-check-finiteness-pushforward-on-associated-points}
+$X$를 국소 뇌터 스킴이라 하자. $j : U \to X$를 여집합이 $Z$인 열린
+부분스킴의 포함 사상이라 하자. $x \in U$에 대해 $i_x : W_x \to U$를
+일반점이 $x$인 정역 닫힌 부분스킴이라 하자. $\mathcal{F}$를 연접
+$\mathcal{O}_U$-가군이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item 모든 $x \in \text{Ass}(\mathcal{F})$에 대해 $\mathcal{O}_X$-가군
+$j_*i_{x, *}\mathcal{O}_{W_x}$가 연접이다.
+\item $j_*\mathcal{F}$가 연접이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+먼저 (1)이 (2)를 함의함을 증명하자. (1)이 성립한다고 가정하자.
+명제는 $X$ 위에서 국소적이므로 $X$가 아핀이라고 가정해도 된다.
+그러면 $U$가 준콤팩트이므로 $\text{Ass}(\mathcal{F})$는 유한하다
+(인자의 보조정리 \ref{divisors-lemma-finite-ass}). 따라서 소속점의 개수에
+대한 귀납법을 쓸 수 있다. $x \in U$를 $\mathcal{F}$의 지지집합의 한
+기약 성분의 일반점이라 하자. 인자의 보조정리
+\ref{divisors-lemma-finite-ass}에 의해 $x \in \text{Ass}(\mathcal{F})$이다.
+$x$의 선택에 의해 $\dim(\mathcal{F}_x) = 0$이며, 이는
+$\mathcal{O}_{X, x}$-가군으로서의 차원이다. 따라서 $\mathcal{F}_x$는
+$\mathcal{O}_{X, x}$-가군으로서 유한 길이를 갖는다(가환대수의 보조정리
+\ref{algebra-lemma-support-point}). 이제 이 길이에 대한 귀납법을 쓸 수 있다.
+
+\medskip\noindent
+$\mathcal{G} = j_*i_{x, *}\mathcal{O}_{W_x}$로 놓자. 가정에 의해 이는 연접
+$\mathcal{O}_X$-가군이다. 또한 $\mathcal{G}_x = \kappa(x)$이다. 영이 아닌 사상
+$\varphi_x : \mathcal{F}_x \to \kappa(x) = \mathcal{G}_x$를 택하자.
+스킴의 코호몰로지의 보조정리 \ref{coherent-lemma-map-stalks-local-map}에
+의해 열린집합 $x \in V \subset U$와 사상
+$\varphi_V : \mathcal{F}|_V \to \mathcal{G}|_V$가 존재하여, 그 $x$에서의
+줄기는 $\varphi_x$이다. $f \in \Gamma(X, \mathcal{O}_X)$를 $x$에서 영이
+되지 않도록 택하되 $D(f) \subset V$가 되게 하자. 예를 들어 스킴의
+코호몰로지의 보조정리 \ref{coherent-lemma-homs-over-open}에 의해
+$\varphi_V$는 $f^n\mathcal{F} \to \mathcal{G}|_U$로 어떤 $n$에 대해
+연장된다. 앞에 $f^n$에 의한 곱셈을 합성하면 사상
+$\mathcal{F} \to \mathcal{G}|_U$를 얻으며, 그 $x$에서의 줄기는 영이 아니다.
+그 핵을
+$\mathcal{F}' \subset \mathcal{F}$라 하자. 인자의 보조정리
+\ref{divisors-lemma-ses-ass}에 의해
+$\text{Ass}(\mathcal{F}') \subset \text{Ass}(\mathcal{F})$임을 유의하라.
+또한
+$\text{length}_{\mathcal{O}_{X, x}}(\mathcal{F}'_x) =
+\text{length}_{\mathcal{O}_{X, x}}(\mathcal{F}_x) - 1$
+이므로 귀납 가정을 적용하여 $j_*\mathcal{F}'$가 연접임을 알 수 있다.
+$\mathcal{G} = j_*(\mathcal{G}|_U) = j_*i_{x, *}\mathcal{O}_{W_x}$가
+연접이므로 완전열
+$$
+0 \to j_*\mathcal{F}' \to j_*\mathcal{F} \to \mathcal{G}
+$$
+을 생각할 수 있다. 스킴의 보조정리
+\ref{schemes-lemma-push-forward-quasi-coherent}에 의해 층
+$j_*\mathcal{F}$는 준연접이다. 따라서 $j_*\mathcal{F}$의
+$j_*(\mathcal{G}|_U)$ 안에서의 상은 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-coherent-Noetherian-quasi-coherent-sub-quotient}에 의해
+연접이다. 마지막으로 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-coherent-abelian-Noetherian}에 의해 $j_*\mathcal{F}$가
+연접이다.
+
+\medskip\noindent
+(2)가 성립한다고 가정하자. 위와 꼭 같은 방법으로 $X$가 아핀인 경우로
+줄인다. $x \in \text{Ass}(\mathcal{F})$를 택하고
+$\mathcal{G} = j_*i_{x, *}\mathcal{O}_{W_x}$로 놓자. 그러면 영이 아닌 사상
+$\varphi_x : \mathcal{G}_x = \kappa(x) \to \mathcal{F}_x$를 택할 수 있는데,
+이는 정확히 $x$가 $\mathcal{F}$의 소속점이기 때문이다. 위와 꼭 같이
+논증하면 $\varphi_x$가 $\mathcal{O}_U$-가군 사상
+$\varphi : \mathcal{G}|_U \to \mathcal{F}$로 연장된다고 가정할 수 있다.
+그러면 $\varphi$는 단사이고(예를 들어 인자의 보조정리
+\ref{divisors-lemma-check-injective-on-ass}에 의해), 단사 사상
+$\mathcal{G} = j_*(\mathcal{G}|_V) \to j_*\mathcal{F}$를 얻는다.
+따라서 (1)이 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-finiteness-pushforwards-and-H1-local}
+$A$를 뇌터 환이라 하고 $I \subset A$를 아이디얼이라 하자.
+$X = \Spec(A)$, $Z = V(I)$, $U = X \setminus Z$로 놓고
+$j : U \to X$를 포함 사상이라 하자. $\mathcal{F}$를 연접
+$\mathcal{O}_U$-가군이라 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item 유한 $A$-가군 $M$이 존재하여 $\mathcal{F}$가 $\widetilde{M}$의
+$U$로의 제한이다.
+\item $M$이 주어지면 완전열
+$$
+0 \to H^0_Z(M) \to M \to H^0(U, \mathcal{F}) \to H^1_Z(M) \to 0
+$$
+과 동형 $H^p(U, \mathcal{F}) = H^{p + 1}_Z(M)$이 $p \geq 1$에 대해 있다.
+\item $M$과 $p \geq 0$이 주어졌을 때 다음은 동치이다.
+\begin{enumerate}
+\item $R^pj_*\mathcal{F}$가 연접이다.
+\item $H^p(U, \mathcal{F})$가 유한 $A$-가군이다.
+\item $H^{p + 1}_Z(M)$이 유한 $A$-가군이다.
+\end{enumerate}
+\item (3)의 동치 조건들이 $p = 0$에 대해 성립하면
+$M = \Gamma(U, \mathcal{F})$로 택할 수 있고, 이 경우
+$H^0_Z(M) = H^1_Z(M) = 0$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+성질의 보조정리 \ref{properties-lemma-lift-finite-presentation}에 의해
+연접 $\mathcal{O}_X$-가군 $\mathcal{F}'$가 존재하여 그 $U$로의 제한이
+$\mathcal{F}$와 동형이다. (1)에서처럼 $\mathcal{F}'$가 유한 $A$-가군
+$M$에 대응한다고 하자. $R^pj_*\mathcal{F}$는 준연접이고(스킴의
+코호몰로지의 보조정리
+\ref{coherent-lemma-quasi-coherence-higher-direct-images}), $A$-가군
+$H^p(U, \mathcal{F})$에 대응함을 유의하라. 보조정리
+\ref{local-cohomology-lemma-local-cohomology-is-local-cohomology}와 코호몰로지의 절
+\ref{cohomology-section-cohomology-support} 및
+\ref{cohomology-section-cohomology-support-bis}의 논의에 의해 완전열
+$$
+0 \to H^0_Z(M) \to M \to H^0(U, \mathcal{F}) \to H^1_Z(M) \to 0
+$$
+과 동형 $H^p(U, \mathcal{F}) = H^{p + 1}_Z(M)$을 $p \geq 1$에 대해 얻는다.
+여기서는 $H^j(X, \mathcal{F}') = 0$이 $j > 0$에 대해 성립한다는 사실을
+사용한다. 실제로 $X$가 아핀이고 $\mathcal{F}'$가 준연접이다
+(스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}). 이로써 (2)가
+증명된다. (3)과 (4)는 (2)에서 바로 따른다. 보조정리
+\ref{local-cohomology-lemma-local-cohomology}도 보라.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-finiteness-pushforward}
+$X$를 국소 뇌터 스킴이라 하자. $j : U \to X$를 여집합이 $Z$인 열린
+부분스킴의 포함 사상이라 하자. $\mathcal{F}$를 연접
+$\mathcal{O}_U$-가군이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $X$는 나가타이다.
+\item $X$는 보편 사슬적이다.
+\item $x \in \text{Ass}(\mathcal{F})$ 및
+$z \in Z \cap \overline{\{x\}}$에 대해
+$\dim(\mathcal{O}_{\overline{\{x\}}, z}) \geq 2$이다.
+\end{enumerate}
+그러면 $j_*\mathcal{F}$는 연접이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{local-cohomology-lemma-check-finiteness-pushforward-on-associated-points}에 의해
+$j_*i_{x, *}\mathcal{O}_{W_x}$가 $x \in \text{Ass}(\mathcal{F})$에 대해
+연접임을 증명하면 충분하다. $\pi : Y \to X$를 $X$의
+$\Spec(\kappa(x))$ 안에서의 정규화라 하자. 사상의 절
+\ref{morphisms-section-normalization}을 보라.
+사상의 보조정리 \ref{morphisms-lemma-nagata-normalization-finite-general}에
+의해 사상 $\pi$는 유한하다. $\pi$가 유한하므로
+$\mathcal{G} = \pi_*\mathcal{O}_Y$는 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-finite-pushforward-coherent}에 의해 연접
+$\mathcal{O}_X$-가군이다. $W_x = U \cap \pi(Y)$임을 관찰하라. 따라서
+$\pi|_{\pi^{-1}(U)} : \pi^{-1}(U) \to U$는 $i_x : W_x \to U$를 통해
+분해되고, 표준 사상
+$$
+i_{x, *}\mathcal{O}_{W_x}
+\longrightarrow
+(\pi|_{\pi^{-1}(U)})_*(\mathcal{O}_{\pi^{-1}(U)}) =
+(\pi_*\mathcal{O}_Y)|_U = \mathcal{G}|_U
+$$
+을 얻는다. 이 사상은 단사이다(예를 들어 인자의 보조정리
+\ref{divisors-lemma-check-injective-on-ass}에 의해). 따라서
+$j_*i_{x, *}\mathcal{O}_{W_x} \subset j_*\mathcal{G}|_U$이고,
+$j_*\mathcal{G}|_U$가 연접임을 보이면 충분하다.
+
+\medskip\noindent
+$j_*(\mathcal{G}|_U)$가 연접임을 증명하는 일만 남았다. 인자의 보조정리
+\ref{divisors-lemma-depth-2-hartog}를
+$$
+\mathcal{G} \longrightarrow j_*(\mathcal{G}|_U)
+$$
+에 적용할 수 있다고 주장한다. 그러면 증명이 끝난다. 이를 위해서는
+$\text{depth}(\mathcal{G}_z) \geq 2$임을 $z \in Z$에 대해 보이면 충분하다.
+$y_1, \ldots, y_n \in Y$를 $z$로 가는 점들이라 하자. 가환대수의 보조정리
+\ref{algebra-lemma-depth-goes-down-finite}에 의해
+$\text{depth}(\mathcal{O}_{Y, y_i}) \geq 2$임을 $i = 1, \ldots, n$에 대해
+보이면 충분하다. 그렇지 않다면 성질의 보조정리
+\ref{properties-lemma-criterion-normal}에 의해
+$\dim(\mathcal{O}_{Y, y_i}) = 1$인 어떤 $i$가 존재한다. 이는
+$\pi : Y \to \overline{\{x\}}$에
+대한 차원 공식(사상의 보조정리 \ref{morphisms-lemma-dimension-formula})과
+가정 (3)에 모순된다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-sharp-finiteness-pushforward}
+$X$를 정역인 국소 뇌터 스킴이라 하자. $j : U \to X$를 여집합이 $Z$인
+공집합이 아닌 열린 부분스킴의 포함 사상이라 하자. 모든 $z \in Z$와
+임의의 소속 소아이디얼 $\mathfrak p$, 곧 완비화
+$\mathcal{O}_{X, z}^\wedge$의 소속 소아이디얼에 대해
+$\dim(\mathcal{O}_{X, z}^\wedge/\mathfrak p) \geq 2$라고
+가정하자. 그러면 $j_*\mathcal{O}_U$는 연접이다.
+\end{lemma}
+
+\begin{proof}
+$X$가 아핀이라고 가정해도 된다. 보조정리
+\ref{local-cohomology-lemma-check-finiteness-local-cohomology-locally}와
+\ref{local-cohomology-lemma-finiteness-pushforwards-and-H1-local}을 사용하면
+$X = \Spec(A)$이고 $(A, \mathfrak m)$이 뇌터 국소 정역이며
+$\mathfrak m \in Z$인 경우로 줄어든다. 이제 $d = \dim(A)$에 대한
+귀납법을 쓸 수 있다. 기초 단계는 $d = 0, 1$이지만 국소환들에 대한
+가정 때문에 이 경우는 일어나지 않는다. $V = \Spec(A) \setminus
+\{\mathfrak m\}$로 놓자. $V$의 국소환들은 $d$보다 엄밀히 작은 차원을
+가짐을 관찰하라. $j' : U \to V$에 대해 위의 논증을 되풀이하고 귀납법을
+쓰면 $j'_*\mathcal{O}_U$가 연접 $\mathcal{O}_V$-가군임을 알 수 있다.
+영이 아닌 $f \in A$를 택하여 $Z$ 위에서 영이 되게 하자.
+$D(f) \cap V \subset U$이므로 어떤 $n$을 찾아 $f^n$에 의한 곱셈이
+$U$ 위에서 사상 $f^n : j'_*\mathcal{O}_U \to \mathcal{O}_V$로 $V$ 위에서
+연장되게 할 수 있다(예를 들어 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-homs-over-open}에 의해). 이 사상은 단사이므로 단사 사상
+$$
+j_*\mathcal{O}_U = j''_* j'_* \mathcal{O}_U \to j''_*\mathcal{O}_V
+$$
+이 $X$ 위에 존재하며, 여기서 $j'' : V \to X$는 포함 사상이다. 따라서
+$j''_*\mathcal{O}_V$가 연접임을 보이면 충분하다. 달리 말하면 $X$가 뇌터
+국소 정역의 스펙트럼이고 $Z$가 닫힌점 하나로 이루어진다고 가정해도 된다.
+
+\medskip\noindent
+$X = \Spec(A)$이고 $(A, \mathfrak m)$이 국소이며
+$Z = \{\mathfrak m\}$라고 가정하자. $A^\wedge$를 $A$의 완비화라 하자.
+$X^\wedge = \Spec(A^\wedge)$, $Z^\wedge = \{\mathfrak m^\wedge\}$,
+$U^\wedge = X^\wedge \setminus Z^\wedge$, 그리고
+$\mathcal{F}^\wedge = \mathcal{O}_{U^\wedge}$로 놓자. 환 $A^\wedge$는 보편
+사슬적이고 나가타이다(가환대수의 주석
+\ref{algebra-remark-Noetherian-complete-local-ring-universally-catenary}와
+보조정리 \ref{algebra-lemma-Noetherian-complete-local-Nagata}). 더구나
+$X^\wedge, Z^\wedge, U^\wedge, \mathcal{F}^\wedge$에 대해서는 가정에 의해
+보조정리 \ref{local-cohomology-lemma-finiteness-pushforward}의 조건 (3)이 성립한다. 따라서
+$(U^\wedge \to X^\wedge)_*\mathcal{O}_{U^\wedge}$는 연접이다. 사상
+$c : X^\wedge \to X$가 평탄하므로 $j_*\mathcal{O}_U$의 당김은
+$(U^\wedge \to X^\wedge)_*\mathcal{O}_{U^\wedge}$이다(스킴의 코호몰로지의
+보조정리 \ref{coherent-lemma-flat-base-change-cohomology}). 마지막으로
+$c$가 충실히 평탄하므로 내림의 보조정리
+\ref{descent-lemma-finite-type-descends}에 의해 $j_*\mathcal{O}_U$가 연접이다.
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-closure}
+$j : U \to X$를 국소 뇌터 스킴들의 열린 몰입이라 하자. $x \in U$라
+하자. $i_x : W_x \to U$를 일반점이 $x$인 정역 닫힌 부분스킴이라 하고,
+$\overline{\{x\}}$를 $X$ 안에서의 폐포라 하자. 그러면 가환 그림
+$$
+\xymatrix{
+W_x \ar[d]_{i_x} \ar[r]_{j'} & \overline{\{x\}} \ar[d]^i \\
+U \ar[r]^j & X
+}
+$$
+을 갖는다. $j_*i_{x, *}\mathcal{O}_{W_x} = i_*j'_*\mathcal{O}_{W_x}$이다.
+왼쪽 세로 화살표가 닫힌 몰입이므로 $j_*i_{x, *}\mathcal{O}_{W_x}$가
+연접일 필요충분조건은 $j'_*\mathcal{O}_{W_x}$가 연접인 것이다.
+\end{remark}
+
+\begin{remark}
+\label{local-cohomology-remark-no-finiteness-pushforward}
+$X$를 국소 뇌터 스킴이라 하자. $j : U \to X$를 여집합이 $Z$인 열린
+부분스킴의 포함 사상이라 하자. $\mathcal{F}$를 연접
+$\mathcal{O}_U$-가군이라 하자. $x \in \text{Ass}(\mathcal{F})$와
+$z \in Z \cap \overline{\{x\}}$가 존재하여
+$\dim(\mathcal{O}_{\overline{\{x\}}, z}) \leq 1$이면 $j_*\mathcal{F}$는
+연접이 아니다. 이를 증명하기 위해 $\mathcal{O}_{X, z}$의 스펙트럼으로
+평탄 밑변환을 할 수 있다. $X' = \overline{\{x\}}$로 놓자. 가정에 의해
+$\mathcal{O}_{X' \cap U} \subset \mathcal{F}$이다. 따라서
+$j_*\mathcal{O}_{X' \cap U}$가 연접이 아님을 보이면 충분하다. 이는
+$X' = \{x, z\}$이므로 분명하다. 실제로 $j_*\mathcal{O}_{X' \cap U}$는
+$\kappa(x)$에 대응하는 $\mathcal{O}_{X, z}$-가군이며, $x$가 닫힌점이
+아니므로 이 가군은 유한일 수 없다.
+
+\medskip\noindent
+사실 보조정리 \ref{local-cohomology-lemma-sharp-finiteness-pushforward}의 역도 성립한다.
+정역 뇌터 스킴들의 열린 몰입 $j : U \to X$가 주어지고
+$z \in X \setminus U$ 및 소속 소아이디얼 $\mathfrak p$, 곧 완비화
+$\mathcal{O}_{X, z}^\wedge$의 소속 소아이디얼이 존재하여
+$\dim(\mathcal{O}_{X, z}^\wedge/\mathfrak p) = 1$이면
+$j_*\mathcal{O}_U$는 연접이 아니다. 실제로 국소환으로 옮기고, $U$를
+뚫린 스펙트럼으로 확대하고, 완비화로 옮기면 위의 논증이 비유한성을 준다.
+\end{remark}
+
+\begin{proposition}[Koll\'ar]
+\label{local-cohomology-proposition-kollar}
+\begin{reference}
+\cite{k-coherent}를 보라. 특수한 경우에 대해서는
+\cite[IV, 명제 7.2.2]{EGA}를 보라.
+\end{reference}
+\begin{slogan}
+Hartogs 정리의 약한 유사물: 뇌터 스킴에서 연접층을 그 층의 지지집합
+안에서 여차원 2인 여집합을 갖는 열린집합으로 제한하면 연접이다.
+\end{slogan}
+$j : U \to X$를 여집합이 $Z$인 국소 뇌터 스킴들의 열린 몰입이라 하자.
+$\mathcal{F}$를 연접 $\mathcal{O}_U$-가군이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $j_*\mathcal{F}$가 연접이다.
+\item $x \in \text{Ass}(\mathcal{F})$, $z \in Z \cap \overline{\{x\}}$, 그리고
+임의의 소속 소아이디얼 $\mathfrak p$, 곧 완비화
+$\mathcal{O}_{\overline{\{x\}}, z}^\wedge$의 소속 소아이디얼에 대해
+$\dim(\mathcal{O}_{\overline{\{x\}}, z}^\wedge/\mathfrak p) \geq 2$이다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(2)가 성립하면 보조정리
+\ref{local-cohomology-lemma-check-finiteness-pushforward-on-associated-points}, 주석
+\ref{local-cohomology-remark-closure}, 보조정리 \ref{local-cohomology-lemma-sharp-finiteness-pushforward}를
+결합하여 (1)을 얻는다. (2)가 성립하지 않으면 주석
+\ref{local-cohomology-remark-no-finiteness-pushforward}의 논의(및 주석 \ref{local-cohomology-remark-closure})에
+의해 $j_*i_{x, *}\mathcal{O}_{W_x}$가 어떤
+$x \in \text{Ass}(\mathcal{F})$에 대해 유한이 아니다. 따라서 보조정리
+\ref{local-cohomology-lemma-check-finiteness-pushforward-on-associated-points}에 의해
+$j_*\mathcal{F}$는 연접이 아니다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-kollar-finiteness-H1-local}
+$A$를 뇌터 환이라 하고 $I \subset A$를 아이디얼이라 하자.
+$Z = V(I)$로 놓자. $M$을 유한 $A$-가군이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $H^1_Z(M)$은 유한 $A$-가군이다.
+\item 모든 $\mathfrak p \in \text{Ass}(M)$ 중 $\mathfrak p \not \in Z$인 것과
+모든 $\mathfrak q \in V(\mathfrak p + I)$에 대해
+$(A/\mathfrak p)_\mathfrak q$의 완비화는 차원 $1$인 소속 소아이디얼을
+갖지 않는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+명제 \ref{local-cohomology-proposition-kollar}에서 보조정리
+\ref{local-cohomology-lemma-finiteness-pushforwards-and-H1-local}을 거쳐 즉시 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리의 정식화는 조건 (1)과 (2)가 $X$ 위의 유한형 스킴들에
+유전된다는 장점이 있다. 더구나 이것은 절
+\ref{local-cohomology-section-finiteness-pushforward-II}에서 고차 직접상으로 일반화할
+유한성의 형태이다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-finiteness-pushforward-general}
+$X$를 국소 뇌터 스킴이라 하자. $j : U \to X$를 여집합이 $Z$인 열린
+부분스킴의 포함 사상이라 하자. $\mathcal{F}$를 연접
+$\mathcal{O}_U$-가군이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $X$는 보편 사슬적이다.
+\item 모든 $z \in Z$에 대해 $\mathcal{O}_{X, z}$의 형식적 올들은
+$(S_1)$이다.
+\end{enumerate}
+이 상황에서 다음은 동치이다.
+\begin{enumerate}
+\item[(a)] $x \in \text{Ass}(\mathcal{F})$ 및
+$z \in Z \cap \overline{\{x\}}$에 대해
+$\dim(\mathcal{O}_{\overline{\{x\}}, z}) \geq 2$이다.
+\item[(b)] $j_*\mathcal{F}$가 연접이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$x \in \text{Ass}(\mathcal{F})$라 하자. 명제 \ref{local-cohomology-proposition-kollar}에 의해
+$A = \mathcal{O}_{\overline{\{x\}}, z}$의 완비화의 소속 소아이디얼들에 대한
+명제의 조건이 성립할 필요충분조건이 $\dim(A) \geq 2$임을 확인하면
+충분하다. $A$는 보편 사슬적이고(이는 분명하다), 가환대수 심화의 보조정리
+\ref{more-algebra-lemma-formal-fibres-normal}와 명제
+\ref{more-algebra-proposition-finite-type-over-P-ring}에 의해 그 형식적 올들은
+$(S_1)$임을 관찰하라. $\mathfrak p' \subset A^\wedge$를 소속
+소아이디얼이라 하자. $A \to A^\wedge$가 평탄하므로 가환대수의 보조정리
+\ref{algebra-lemma-bourbaki}에 의해 $\mathfrak p'$는 $(0) \subset A$ 위에
+놓인다. 형식적 올 $A^\wedge \otimes_A F$는 $(S_1)$이고, 여기서 $F$는
+$A$의 분수체이다. 따라서 $\mathfrak p'$는 극소 소아이디얼이다. 가환대수의
+보조정리 \ref{algebra-lemma-criterion-no-embedded-primes}를 보라. $A$가
+보편 사슬적이므로 가환대수 심화의 명제
+\ref{more-algebra-proposition-ratliff}에 의해 형식적으로 사슬적이다. 따라서
+$\dim(A^\wedge/\mathfrak p') = \dim(A)$이고, 이로써 동치가 증명된다.
+\end{proof}
+
+
+
+
+
+
+\section{깊이와 차원}
+\label{local-cohomology-section-dept-dimension}
+
+\noindent
+몇 가지 보조정리를 제시한다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-ideal-depth-function}
+$A$를 뇌터 환이라 하고 $I \subset A$를 아이디얼이라 하자.
+$M$을 유한 $A$-가군이라 하자. $\mathfrak p \in V(I)$를 소아이디얼이라
+하자. $e = \text{depth}_{IA_\mathfrak p}(M_\mathfrak p) < \infty$라고
+가정하자. 그러면 공집합이 아닌 열린집합 $U \subset V(\mathfrak p)$가
+존재하여 $\text{depth}_{IA_\mathfrak q}(M_\mathfrak q) \geq e$가 모든
+$\mathfrak q \in U$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+깊이의 정의에 의해 $IM_\mathfrak p \not = M_\mathfrak p$이고
+$M_\mathfrak p$-정칙 수열 $f_1, \ldots, f_e \in IA_\mathfrak p$가 존재한다.
+$A$를 한 주원소 국소화로 바꾸면 $f_1, \ldots, f_e \in I$가
+$M$-정칙 수열을 이룬다고 가정할 수 있다. 가환대수의 보조정리
+\ref{algebra-lemma-regular-sequence-in-neighbourhood}를 보라. 가군
+$M' = M/IM$을 생각하자. $\mathfrak p \in \text{Supp}(M')$이고 유한 가군의
+지지집합은 닫혀 있으므로 $V(\mathfrak p) \subset \text{Supp}(M')$이다.
+따라서 $\mathfrak q \in V(\mathfrak p)$에 대해
+$IM_\mathfrak q \not = M_\mathfrak q$를 얻는다. 그러므로 국소화가 완전함을
+사용하고 깊이의 정의를 적용하면
+$\text{depth}_{IA_\mathfrak q}(M_\mathfrak q) \geq e$가 임의의
+$\mathfrak q \in V(I)$에 대해 성립함을 안다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-depth-function}
+$A$를 뇌터 환이라 하고 $M$을 유한 $A$-가군이라 하자.
+$\mathfrak p$를 소아이디얼이라 하자.
+$e = \text{depth}_{A_\mathfrak p}(M_\mathfrak p) < \infty$라고 가정하자.
+그러면 공집합이 아닌 열린집합 $U \subset V(\mathfrak p)$가 존재하여
+$\text{depth}_{A_\mathfrak q}(M_\mathfrak q) \geq e$가 모든
+$\mathfrak q \in U$에 대해 성립하고, 유한 개를 제외한 모든
+$\mathfrak q \in U$에 대해 $\text{depth}_{A_\mathfrak q}(M_\mathfrak q) > e$이다.
+\end{lemma}
+
+\begin{proof}
+깊이의 정의에 의해 $\mathfrak p M_\mathfrak p \not = M_\mathfrak p$이고
+$M_\mathfrak p$-정칙 수열
+$f_1, \ldots, f_e \in \mathfrak p A_\mathfrak p$가 존재한다. $A$를 한
+주원소 국소화로 바꾸면 $f_1, \ldots, f_e \in \mathfrak p$가
+$M$-정칙 수열을 이룬다고 가정할 수 있다. 가환대수의 보조정리
+\ref{algebra-lemma-regular-sequence-in-neighbourhood}를 보라. 가군
+$M' = M/(f_1, \ldots, f_e)M$을 생각하자.
+$\mathfrak p \in \text{Supp}(M')$이고 유한 가군의 지지집합은 닫혀 있으므로
+$V(\mathfrak p) \subset \text{Supp}(M')$이다. 따라서
+$\mathfrak q \in V(\mathfrak p)$에 대해
+$\mathfrak q M_\mathfrak q \not = M_\mathfrak q$를 얻는다. 그러므로 국소화가
+완전함을 사용하고 깊이의 정의를 적용하면
+$\text{depth}_{A_\mathfrak q}(M_\mathfrak q) \geq e$가 임의의
+$\mathfrak q \in V(I)$에 대해 성립함을 안다. 더구나
+$\mathfrak q$가 가군 $M'$의 소속 소아이디얼이 아니게 되는 순간 깊이는
+증가한다. 따라서 마지막 명제는 가환대수의 보조정리
+\ref{algebra-lemma-finite-ass}에 의해 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-finite-nr-points-next-S}
+$X$를 쌍대화 복합체 $\omega_X^\bullet$을 갖는 뇌터 스킴이라 하자.
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자. $k \geq 0$을 정수라
+하자. $\mathcal{F}$가 $(S_k)$라고 가정하자. 그러면 다음을 만족하는 점
+$x \in X$는 유한 개뿐이다.
+$$
+\text{depth}(\mathcal{F}_x) = k
+\quad\text{이고}\quad
+\dim(\text{Supp}(\mathcal{F}_x)) > k
+$$
+\end{lemma}
+
+\begin{proof}
+$k$에 대한 귀납법으로 이 보조정리를 증명한다. 기초 단계 $k = 0$은
+$\mathcal{F}$가 매장된 소속점을 유한 개만 갖는다는 명제이며, 이는 인자의
+보조정리 \ref{divisors-lemma-finite-ass}에서 따른다.
+
+\medskip\noindent
+$k > 0$이고 더 작은 모든 $k$에 대해 결과가 성립한다고 가정하자.
+$X$를 유한 개의 아핀 열린집합으로 덮을 수 있으므로
+$X = \Spec(A)$가 아핀이라고 가정해도 된다. 그러면 $\mathcal{F}$는 연접
+$\mathcal{O}_X$-가군으로서 유한 $A$-가군 $M$에 대응하고, 이 가군은
+$(S_k)$를 만족한다. 아래에서는 가환대수의 보조정리
+\ref{algebra-lemma-one-equation-module}와
+\ref{algebra-lemma-depth-drops-by-one}를 더 언급하지 않고 사용한다.
+
+\medskip\noindent
+$f \in A$를 $M$ 위의 영인자가 아닌 원소라 하자. 그러면 $M/fM$은
+$(S_{k - 1})$을 갖는다. 귀납법에 의해 다음을 만족하는 소아이디얼
+$\mathfrak p \in V(f)$는 유한 개뿐이다.
+$\text{depth}((M/fM)_\mathfrak p) = k - 1$이고
+$\dim(\text{Supp}((M/fM)_\mathfrak p)) > k - 1$이다. 이들은 정확히
+$\mathfrak p \in V(f)$ 중 $\text{depth}(M_\mathfrak p) = k$이고
+$\dim(\text{Supp}(M_\mathfrak p)) > k$인 것들이다. 따라서 유한성 명제를
+증명할 때 $A$를 $A_f$로, $M$을 $M_f$로 바꾸어도 된다.
+
+\medskip\noindent
+$M$이 $(S_k)$를 만족하고 $k > 0$이므로 $M$은 매장된 소속 소아이디얼을
+갖지 않는다(가환대수의 보조정리
+\ref{algebra-lemma-criterion-no-embedded-primes}). 따라서
+$\text{Ass}(M)$은 $M$의 지지집합의 일반점들의 집합이다. 그러므로 쌍대화
+복합체의 보조정리 \ref{dualizing-lemma-CM-open}에 의해 집합
+$U = \{\mathfrak q \mid M_\mathfrak q\text{ is Cohen-Macaulay}\}$
+은 $\text{Ass}(M)$을 포함하는 열린집합이다. 소아이디얼 회피(가환대수의
+보조정리 \ref{algebra-lemma-silly})에 의해 $f \in A$를 택하여
+$f \not \in \mathfrak p$가 모든 $\mathfrak p \in \text{Ass}(M)$에 대해 성립하고
+$D(f) \subset U$가 되게 할 수 있다. 그러면 $f$는 $M$ 위의 영인자가
+아닌 원소이다(가환대수의 보조정리
+\ref{algebra-lemma-ass-zero-divisors}). $A$를 $A_f$로, $M$을 $M_f$로
+바꾸면(위를 보라) $M$이 코언--매콜리임을 알 수 있다. 따라서 모든
+$\mathfrak q \subset A$에 대해
+$\dim(M_\mathfrak q) = \text{depth}(M_\mathfrak q)$이고, 그러므로
+보조정리에서 서술한 집합은 공집합이며 특히 유한하다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-sitting-in-degrees}
+$(A, \mathfrak m)$을 정규화된 쌍대화 복합체 $\omega_A^\bullet$을 갖는
+뇌터 국소환이라 하자. $M$을 유한 $A$-가군이라 하자.
+$E^i = \text{Ext}_A^{-i}(M, \omega_A^\bullet)$로 놓자. 그러면 다음이
+성립한다.
+\begin{enumerate}
+\item $E^i$는 유한 $A$-가군이고
+$0 \leq i \leq \dim(\text{Supp}(M))$일 때만 영이 아닐 수 있다.
+\item $\dim(\text{Supp}(E^i)) \leq i$이다.
+\item $\text{depth}(M)$은 가장 작은 정수 $\delta \geq 0$이며,
+$E^\delta \not = 0$을 만족한다.
+\item $\mathfrak p \in \text{Supp}(E^0 \oplus \ldots \oplus E^i)
+\Leftrightarrow
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p) + \dim(A/\mathfrak p) \leq i$,
+\item $E^i$의 소멸자는 $H^i_\mathfrak m(M)$의 소멸자와 같다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1), (2), (3)은 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-sitting-in-degrees}의 명제들을 그대로 옮긴 것이다.
+$\mathfrak p$를 $A$의 소아이디얼이라 하자. 그러면
+$(\omega_A^\bullet)_\mathfrak p[-\dim(A/\mathfrak p)]$는
+$A_\mathfrak p$의 정규화된 쌍대화 복합체이다. 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-dimension-function}를 보라. 따라서
+$$
+E^i_\mathfrak p =
+\text{Ext}^{-i}_A(M, \omega_A^\bullet)_\mathfrak p =
+\text{Ext}^{-i + \dim(A/\mathfrak p)}_{A_\mathfrak p}
+(M_\mathfrak p, (\omega_A^\bullet)_\mathfrak p[-\dim(A/\mathfrak p)])
+$$
+는 $i - \dim(A/\mathfrak p) < \text{depth}_{A_\mathfrak p}(M_\mathfrak p)$일
+때 영이고, $i = \dim(A/\mathfrak p) +
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p)$일 때 영이 아니다. 이는
+$A_\mathfrak p$ 위에서의 (3)에 따른다. 이로써 (4)가 증명된다.
+$E$가 $A$의 잉여체의 단사 포락이면 다음을 갖는다.
+$$
+\Hom_A(H^i_\mathfrak m(M), E) =
+\text{Ext}^{-i}_A(M, \omega_A^\bullet)^\wedge =
+(E^i)^\wedge =
+E^i \otimes_A A^\wedge
+$$
+이는 국소 쌍대성 정리, 곧 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-special-case-local-duality}의 형태에 따른다.
+$A \to A^\wedge$가 충실히 평탄하므로 Matlis 쌍대성(쌍대화 복합체의 명제
+\ref{dualizing-proposition-matlis})에 의해 (5)가 성립한다.
+\end{proof}
+
+
+
+
+
+
+\section{국소 코호몰로지의 소멸자, I}
+\label{local-cohomology-section-annihilators}
+
+\noindent
+이 절에서는 Faltings의 결과를 다룬다. \cite{Faltings-annulators}를 보라.
+
+\begin{proposition}
+\label{local-cohomology-proposition-annihilator}
+\begin{reference}
+\cite{Faltings-annulators}.
+\end{reference}
+$A$를 쌍대화 복합체를 갖는 뇌터 환이라 하자.
+$T \subset T' \subset \Spec(A)$를 특수화 아래 안정적인 부분집합들이라
+하자. $s \geq 0$을 정수라 하고 $M$을 유한 $A$-가군이라 하자. 다음은
+동치이다.
+\begin{enumerate}
+\item 아이디얼 $J \subset A$가 존재하여 $V(J) \subset T'$이고
+$J$가 $H^i_T(M)$을 $i \leq s$에 대해 소멸시킨다.
+\item 모든 $\mathfrak p \not \in T'$와 $\mathfrak q \in T$ 중
+$\mathfrak p \subset \mathfrak q$인 것에 대해 다음이 성립한다.
+$$
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) > s
+$$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$\omega_A^\bullet$을 쌍대화 복합체라 하자. $\delta$를 그 차원 함수라 하자.
+쌍대화 복합체의 절 \ref{dualizing-section-dimension-function}을 보라.
+유한 $A$-가군
+$$
+E^i = \Ext_A^i(M, \omega_A^\bullet)
+$$
+들이 중요한 역할을 한다. $\mathfrak p \subset A$에 대해
+$H^i_\mathfrak p$는 $A_\mathfrak p$-가군의 $\mathfrak pA_\mathfrak p$에
+관한 국소 코호몰로지를 나타낸다고 쓰겠다. 그러면 다음 가군의
+$\mathfrak pA_\mathfrak p$-진 완비화는
+$$
+(E^i)_\mathfrak p =
+\Ext^{\delta(\mathfrak p) + i}_{A_\mathfrak p}(M_\mathfrak p,
+(\omega_A^\bullet)_\mathfrak p[-\delta(\mathfrak p)])
+$$
+다음 가군과 Matlis 쌍대이다.
+$$
+H^{-\delta(\mathfrak p) - i}_{\mathfrak p}(M_\mathfrak p)
+$$
+이는 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-special-case-local-duality}에 따른다. 특히 다음 사실을
+얻는다. 아이디얼 $J \subset A$가 $(E^i)_\mathfrak p$를 소멸시킬
+필요충분조건은 $J$가
+$H^{-\delta(\mathfrak p) - i}_{\mathfrak p}(M_\mathfrak p)$를 소멸시키는 것이다.
+
+\medskip\noindent
+$T_n = \{\mathfrak p \in T \mid \delta(\mathfrak p) \leq n\}$으로 놓자.
+$\delta$가 유계 함수이므로 $T_a = \emptyset$가 $a \ll 0$에 대해 성립하고
+$T_b = T$가 $b \gg 0$에 대해 성립한다.
+
+\medskip\noindent
+(2)를 가정하자. (1)과 같은 $J$의 존재를 증명하겠다. 이를 위해 이중
+귀납법을 사용한다. $i \leq s$에 대해 다음 귀납 가정 $IH_i$를 생각하자.
+$H^a_T(M)$은 어떤 $J \subset A$에 의해 소멸되고 $V(J) \subset T'$이며,
+이는 $0 \leq a \leq i$에 대해 성립한다. $IH_0$인 경우는 자명하다. 실제로
+$H^0_T(M)$은 $M$의 부분가군이므로 유한하고, 따라서
+어떤 아이디얼 $J$에 의해 소멸되며 $V(J) \subset T$이다.
+
+\medskip\noindent
+귀납 단계를 보자. $IH_{i - 1}$이 어떤 $0 < i \leq s$에 대해 성립한다고
+가정하자. $J'$를 택하여 $V(J') \subset T'$이고 $H^a_T(M)$을
+$0 \leq a \leq i - 1$에 대해 소멸시키게 하자. 귀납 가정에 의해
+이렇게 할 수 있다. $n$에 대한 내림 귀납법으로, 아이디얼 $J$가 존재하고
+$V(J) \subset T'$이며
+$J H^i_T(M)$의 소속 소아이디얼들이 $T_n$에
+속함을 보이겠다. $n \ll 0$이면 이는 $JH^i_T(M) = 0$을 함의하며
+(가환대수의 보조정리 \ref{algebra-lemma-ass-zero}), 따라서 $IH_i$가
+성립한다. 기초 단계 $n \gg 0$인 경우에는 $T = T_n$이고
+$H^i_T(M)$의 모든 소속 소아이디얼이 $T$에 속하므로 자명하다.
+
+\medskip\noindent
+따라서 $J$가 주어져 $n$에 대한 성질을 갖는다고 가정하자.
+$\mathfrak q \in T_n$이라 하자. $T_\mathfrak q \subset \Spec(A_\mathfrak q)$를
+$T$의 역상이라 하자. 보조정리 \ref{local-cohomology-lemma-torsion-change-rings}에 의해
+$H^j_T(M)_\mathfrak q = H^j_{T_\mathfrak q}(M_\mathfrak q)$
+이다. 스펙트럼 수열
+$$
+H_\mathfrak q^p(H^q_{T_\mathfrak q}(M_\mathfrak q))
+\Rightarrow
+H^{p + q}_\mathfrak q(M_\mathfrak q)
+$$
+을 생각하자. 이는 보조정리 \ref{local-cohomology-lemma-local-cohomology-ss}의 스펙트럼
+수열이다. 아래에서 아이디얼 $J'' \subset A$를 찾아 $V(J'') \subset T'$이고,
+$H^i_\mathfrak q(M_\mathfrak q)$가 $J''$에 의해 소멸되며 이것이 모든
+$\mathfrak q \in T_n \setminus T_{n - 1}$에 대해 성립하게
+하겠다. 주장: $J (J')^i J''$는 $n - 1$에 대해 원하는 성질을 갖는다.
+실제로 $\mathfrak q \in T_n \setminus T_{n - 1}$라 하자. 위 스펙트럼
+수열은 여과
+$$
+E_\infty^{0, i} = E_{i + 2}^{0, i} \subset \ldots \subset E_3^{0, i} \subset
+E_2^{0, i} = H^0_\mathfrak q(H^i_{T_\mathfrak q}(M_\mathfrak q))
+$$
+를 정의한다. 가군 $E_\infty^{0, i}$는 $J''$에 의해 소멸된다.
+$E_j^{0, i}/E_{j + 1}^{0, i}$는 $i + 1 \geq j \geq 2$에 대해
+$J'$에 의해 소멸된다. 실제로
+$d_j^{0, i}$의 공역은 다음 가군의 부분몫이다.
+$$
+H^j_\mathfrak q(H^{i - j + 1}_{T_\mathfrak q}(M_\mathfrak q)) =
+H^j_\mathfrak q(H^{i - j + 1}_T(M)_\mathfrak q)
+$$
+그리고 $H^{i - j + 1}_T(M)_\mathfrak q$는 $J'$에 의해 소멸된다. 이는
+$J'$의 선택에 따른다. 마지막으로 $J$의 선택에 의해
+$J H^i_T(M)_\mathfrak q \subset H^0_\mathfrak q(H^i_T(M)_\mathfrak q)$
+이다. 실제로 $\Spec(A_\mathfrak q)$의 닫히지 않은 점들은 더 큰
+$\delta$ 값을 갖는다. 따라서 원하는 대로 $\mathfrak q$는
+$J(J')^iJ'' H^i_T(M)$의 소속 소아이디얼일 수 없다.
+
+\medskip\noindent
+처음의 논의에 의해 $J''$는
+$$
+(E^{-\delta(\mathfrak q) - i})_\mathfrak q =
+(E^{-n - i})_\mathfrak q
+$$
+을 모든 $\mathfrak q \in T_n \setminus T_{n - 1}$에 대해 소멸시켜야 한다.
+그런데 $J''$가 하나의 $\mathfrak q$에 대해 작용하면, $\mathfrak q$의 한
+열린 근방에 있는 모든 $\mathfrak q$에 대해서도 작용한다. 이는 가군
+$E^{-n - i}$가 유한하기 때문이다. $\Spec(A)$의 모든 부분집합은 유도된
+위상으로 뇌터이므로(위상론의 보조정리 \ref{topology-lemma-Noetherian}),
+$J''$의 존재를 하나의 $\mathfrak q$에 대해 증명하면 충분하다는 결론을
+얻는다.
+
+\medskip\noindent
+Ext 가군들이 유한하므로 $J''$의 존재는 다음과 동치이다.
+$$
+\text{Supp}(E^{-n - i}) \cap \Spec(A_\mathfrak q) \subset T'.
+$$
+이는 $E^{-n - i}$의 국소화가 모든 $\mathfrak p \subset \mathfrak q$ 중
+$\mathfrak p \not \in T'$인 것에서 영임을 보이는 것과 동치이다.
+$A_\mathfrak p$ 위의 국소 쌍대성을 사용하면 다음이 영임을 증명해야 한다.
+$$
+H^{i + n - \delta(\mathfrak p)}_\mathfrak p(M_\mathfrak p) =
+H^{i - \dim((A/\mathfrak p)_\mathfrak q)}_\mathfrak p(M_\mathfrak p)
+$$
+여기서는 $\delta$가 차원 함수임을 사용했다. 이 가군은 보조정리의 가정,
+$i \leq s$, 그리고 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-depth}에 의해 영이다.
+
+\medskip\noindent
+역함의를 증명하기 위해 (2)가 성립하지 않는다고 가정하고 위 논증을
+거꾸로 따라간다. 먼저 $\mathfrak q \in T$와
+$\mathfrak p \subset \mathfrak q$ 중 $\mathfrak p \not \in T'$인 것을 택하여
+$$
+i = \text{depth}_{A_\mathfrak p}(M_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) \leq s
+$$
+가 최소가 되게 하자. 그러면
+$H^{i - \dim((A/\mathfrak p)_\mathfrak q)}_\mathfrak p(M_\mathfrak p)$
+은 쌍대화 복합체의 보조정리 \ref{dualizing-lemma-depth}의 비소멸성에 의해
+영이 아니다. $n = \delta(\mathfrak q)$으로 놓자. 그러면
+$J \subset A$이고 $V(J) \subset T'$이며 $J(E^{-n - i})_\mathfrak q = 0$인
+그런 아이디얼은 존재하지 않는다. 따라서 $H^i_\mathfrak q(M_\mathfrak q)$는
+$J \subset A$인 아이디얼에 의해 소멸되지 않으며, 이때 $V(J) \subset T'$이다.
+$i$의 최소성과 위에 표시한 스펙트럼 수열에 의해 가군
+$H^i_T(M)_\mathfrak q$는 아이디얼 $J \subset A$에 의해 소멸되지 않으며,
+이때 $V(J) \subset T'$이다. 따라서 $H^i_T(M)$는 아이디얼 $J \subset A$에
+의해 소멸되지 않으며, 이때 $V(J) \subset T'$이다. 이로써 명제의 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-kill-local-cohomology-at-prime}
+$I$를 뇌터 환 $A$의 아이디얼이라 하자. $M$을 유한 $A$-가군,
+$\mathfrak p \subset A$를 소아이디얼, $s \geq 0$을 정수라 하자. 다음을
+가정하자.
+\begin{enumerate}
+\item $A$는 쌍대화 복합체를 갖는다.
+\item $\mathfrak p \not \in V(I)$이다.
+\item 모든 소아이디얼 $\mathfrak p' \subset \mathfrak p$와,
+$\mathfrak q \in V(I)$ 중 $\mathfrak p' \subset \mathfrak q$인 것에 대해
+다음이 성립한다.
+$$
+\text{depth}_{A_{\mathfrak p'}}(M_{\mathfrak p'}) +
+\dim((A/\mathfrak p')_\mathfrak q) > s
+$$
+\end{enumerate}
+그러면 $f \in A$, $f \not \in \mathfrak p$인 원소가 존재하여
+$H^i_{V(I)}(M)$을 $i \leq s$에 대해 소멸시킨다.
+\end{lemma}
+
+\begin{proof}
+집합
+$$
+T = V(I)
+\quad\text{및}\quad
+T' = \bigcup\nolimits_{f \in A, f \not \in \mathfrak p} V(f)
+$$
+들을 생각하자. 이들은 $\Spec(A)$의 특수화 아래 안정적인 부분집합들이다.
+$T \subset T'$이고 $\mathfrak p \not \in T'$임을 관찰하라. 가정 (3)은 명제
+\ref{local-cohomology-proposition-annihilator}의 가정 (2)가 성립한다는 뜻이다. 따라서
+$J \subset A$이고 $V(J) \subset T'$인 것을 찾아
+$J H^i_{V(I)}(M) = 0$이 $i \leq s$에 대해 성립하게 할 수 있다.
+$f \in A$, $f \not \in \mathfrak p$인 것을 $V(J) \subset V(f)$가 되도록
+택하자. $f$의 한 거듭제곱은 $H^i_{V(I)}(M)$을 $i \leq s$에 대해
+소멸시킨다.
+\end{proof}
+
+
+
+
+
+\section{국소 코호몰로지의 유한성, II}
+\label{local-cohomology-section-finiteness-II}
+
+\noindent
+절 \ref{local-cohomology-section-finiteness}에서 시작한 국소 코호몰로지의 유한성에 관한
+논의를 계속한다. Faltings 소멸자 정리를 사용하면 다음 기본 결과를 쉽게
+증명할 수 있다.
+
+\begin{proposition}
+\label{local-cohomology-proposition-finiteness}
+\begin{reference}
+\cite{Faltings-annulators}.
+\end{reference}
+$A$를 쌍대화 복합체를 갖는 뇌터 환이라 하자.
+$T \subset \Spec(A)$를 특수화 아래 안정적인 부분집합이라 하자.
+$s \geq 0$을 정수라 하고 $M$을 유한 $A$-가군이라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item $H^i_T(M)$은 유한 $A$-가군이며, 이는 $i \leq s$에 대해 성립한다.
+\item 모든 $\mathfrak p \not \in T$와 $\mathfrak q \in T$ 중
+$\mathfrak p \subset \mathfrak q$인 것에 대해 다음이 성립한다.
+$$
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) > s
+$$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+명제 \ref{local-cohomology-proposition-annihilator}와 보조정리
+\ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator}의 형식적 귀결이다.
+\end{proof}
+
+\noindent
+나중에 사용할 몇 가지 보조정리를 제외하면, 이 절의 나머지 부분에서는
+명제 \ref{local-cohomology-proposition-finiteness}의 조건, 즉 $A$가 쌍대화 복합체를 갖는다는
+조건을 어느 정도 약화할 수 있는지를 다룬다. 대략적인 답은 $A$의 형식적
+섬유들이 $(S_n)$이라는 조건을 충분히 큰 $n$에 대해 가정해야 한다는 것이다.
+
+\medskip\noindent
+$A$를 뇌터 환이라 하고 $I \subset A$를 아이디얼이라 하자.
+$X = \Spec(A)$ 및 $Z = V(I) \subset X$로 놓자. $M$을 유한 $A$-가군이라 하자.
+다음과 같이 정의한다.
+\begin{equation}
+\label{local-cohomology-equation-cutoff}
+s_{A, I}(M) =
+\min \{
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p) + \dim((A/\mathfrak p)_\mathfrak q)
+\mid
+\mathfrak p \in X \setminus Z, \mathfrak q \in Z,
+\mathfrak p \subset \mathfrak q
+\}
+\end{equation}
+깊이에 관한 우리의 규약에서는 $0$의 깊이가 $\infty$이므로 소아이디얼
+$\mathfrak p$ 가운데 $M$의 지지집합에 속하는 것만 고려하면 된다.
+$s_{A, I}(M)$이 이 상황의 중요한 불변량임이 드러날 것이다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-cutoff}
+$A \to B$를 뇌터 환의 유한 준동형이라 하자.
+$I \subset A$를 아이디얼이라 하고 $J = IB$로 놓자. $M$을 유한
+$B$-가군이라 하자. $A$가 보편적으로 쇄상이라면
+$s_{B, J}(M) = s_{A, I}(M)$이다.
+\end{lemma}
+
+\begin{proof}
+$\mathfrak p \subset \mathfrak q \subset A$를 $I \subset \mathfrak q$이고
+$I \not \subset \mathfrak p$인 소아이디얼들이라 하자. $A \to B$가
+유한이므로 유한 개의 소아이디얼 $\mathfrak p_i$가 $\mathfrak p$ 위에
+놓인다. 가환대수의 보조정리
+\ref{algebra-lemma-depth-goes-down-finite}에 의해
+$$
+\text{depth}(M_\mathfrak p) = \min \text{depth}(M_{\mathfrak p_i})
+$$
+$\mathfrak p_i \subset \mathfrak q_{ij}$를 $\mathfrak q$ 위에 놓이는
+소아이디얼들이라 하자. $A \to B$에 대한 상승 정리에 의해(가환대수의
+보조정리 \ref{algebra-lemma-integral-going-up}) 적어도 하나의
+$\mathfrak q_{ij}$가 각 $i$마다 존재한다. 그러면
+$$
+\dim((B/\mathfrak p_i)_{\mathfrak q_{ij}}) =
+\dim((A/\mathfrak p)_\mathfrak q)
+$$
+이다. 이는 차원 공식에 따른다. 가환대수의 보조정리
+\ref{algebra-lemma-dimension-formula}을 보라. 따라서
+$s_{B, J}(M)$을 정의할 때 쓰이는 양들 가운데 쌍
+$(\mathfrak p_i, \mathfrak q_{ij})$에 대한 최솟값은 쌍
+$(\mathfrak p, \mathfrak q)$에 대한 양과 같다. 이로써 보조정리가
+증명되었다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-change-completion}
+$A$를 쌍대화 복합체를 갖는 뇌터 환이라 하자.
+$I \subset A$를 아이디얼이라 하자. $M$을 유한 $A$-가군이라 하자.
+$A', M'$를 $I$-진 완비화라 하되 각각 $A, M$의 완비화라 하자.
+$\mathfrak p' \subset \mathfrak q'$를 $A'$의 소아이디얼들로서
+$\mathfrak q' \in V(IA')$이고 $\mathfrak p \subset \mathfrak q$는 $A$의
+소아이디얼들이며 그 위에 놓인다고 하자. 그러면
+$$
+\text{depth}_{A_{\mathfrak p'}}(M'_{\mathfrak p'})
+\geq
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p)
+$$
+그리고
+$$
+\text{depth}_{A_{\mathfrak p'}}(M'_{\mathfrak p'}) +
+\dim((A'/\mathfrak p')_{\mathfrak q'}) =
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q)
+$$
+\end{lemma}
+
+\begin{proof}
+다음이 성립한다.
+$$
+\text{depth}(M'_{\mathfrak p'}) =
+\text{depth}(M_\mathfrak p) +
+\text{depth}(A'_{\mathfrak p'}/\mathfrak p A'_{\mathfrak p'})
+\geq \text{depth}(M_\mathfrak p)
+$$
+$A \to A'$의 평탄성에 따른다. 가환대수의 보조정리
+\ref{algebra-lemma-apply-grothendieck-module}을 보라.
+$A \to A'$의 섬유들은 Cohen--Macaulay이므로(쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-dualizing-gorenstein-formal-fibres} 및 가환대수 심화의
+절 \ref{more-algebra-section-properties-formal-fibres}), 다음을 얻는다.
+$\text{depth}(A'_{\mathfrak p'}/\mathfrak p A'_{\mathfrak p'}) =
+\dim(A'_{\mathfrak p'}/\mathfrak p A'_{\mathfrak p'})$.
+따라서
+\begin{align*}
+\text{depth}(M'_{\mathfrak p'}) +
+\dim((A'/\mathfrak p')_{\mathfrak q'})
+& =
+\text{depth}(M_\mathfrak p) +
+\dim(A'_{\mathfrak p'}/\mathfrak p A'_{\mathfrak p'}) +
+\dim((A'/\mathfrak p')_{\mathfrak q'}) \\
+& =
+\text{depth}(M_\mathfrak p) +
+\dim((A'/\mathfrak p A')_{\mathfrak q'}) \\
+& =
+\text{depth}(M_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q)
+\end{align*}
+두 번째 등식은 $A'$가 쇄상이기 때문에 성립하고, 세 번째 등식은
+$(A/\mathfrak p)_\mathfrak q$와 $(A'/\mathfrak p A')_{\mathfrak q'}$가
+같은 $I$-진 완비화를 가지므로 가환대수 심화의 보조정리
+\ref{more-algebra-lemma-completion-dimension}에 의해 성립한다.
+\end{proof}
+
+
+
+
+
+\begin{lemma}
+\label{local-cohomology-lemma-cutoff-completion}
+$A$를 보편적으로 쇄상인 뇌터 국소환이라 하자.
+$I \subset A$를 아이디얼이라 하고 $M$을 유한 $A$-가군이라 하자. 그러면
+$$
+s_{A, I}(M) \geq s_{A^\wedge, I^\wedge}(M^\wedge)
+$$
+$A$의 형식적 섬유들이 $(S_n)$이면
+$\min(n + 1, s_{A, I}(M)) \leq s_{A^\wedge, I^\wedge}(M^\wedge)$이다.
+\end{lemma}
+
+\begin{proof}
+$X = \Spec(A)$, $X^\wedge = \Spec(A^\wedge)$,
+$Z = V(I) \subset X$, $Z^\wedge = V(I^\wedge)$로 쓰자.
+$\mathfrak p' \subset \mathfrak q' \subset A^\wedge$를
+$\mathfrak p' \not \in Z^\wedge$이고 $\mathfrak q' \in Z^\wedge$인
+소아이디얼들이라 하자. $\mathfrak p \subset \mathfrak q$를 이에 대응하는
+$A$의 소아이디얼들이라 하자. 그러면 $\mathfrak p \not \in Z$이고
+$\mathfrak q \in Z$이다. 그림은 다음과 같다.
+$$
+\xymatrix{
+\mathfrak p' \ar[r] & \mathfrak q' \ar[r] & A^\wedge \\
+\mathfrak p \ar[r] \ar@{-}[u] &
+\mathfrak q \ar[r] \ar@{-}[u] & A \ar[u]
+}
+$$
+다음과 같이 쓰자.
+\begin{align*}
+a & = \dim(A/\mathfrak p) = \dim(A^\wedge/\mathfrak pA^\wedge),\\
+b & = \dim(A/\mathfrak q) = \dim(A^\wedge/\mathfrak qA^\wedge),\\
+a' & = \dim(A^\wedge/\mathfrak p'),\\
+b' & = \dim(A^\wedge/\mathfrak q')
+\end{align*}
+등식들은 가환대수 심화의 보조정리
+\ref{more-algebra-lemma-completion-dimension}에 따른다. 또한 다음과 같이 쓴다.
+\begin{align*}
+p & = \dim(A^\wedge_{\mathfrak p'}/\mathfrak p A^\wedge_{\mathfrak p'}) =
+\dim((A^\wedge/\mathfrak p A^\wedge)_{\mathfrak p'}) \\
+q & = \dim(A^\wedge_{\mathfrak q'}/\mathfrak p A^\wedge_{\mathfrak q'}) =
+\dim((A^\wedge/\mathfrak q A^\wedge)_{\mathfrak q'})
+\end{align*}
+$A$가 보편적으로 쇄상이므로
+$A^\wedge/\mathfrak pA^\wedge = (A/\mathfrak p)^\wedge$는 차원이 $a$인
+등차원 환이다(가환대수 심화의 명제
+\ref{more-algebra-proposition-ratliff}). 따라서 $a = a' + p$이다. 마찬가지로
+$b = b' + q$이다. 평탄 국소환 사상
+$A_\mathfrak p \to A^\wedge_{\mathfrak p'}$에 가환대수의 보조정리
+\ref{algebra-lemma-apply-grothendieck-module}을 적용하면
+$$
+\text{depth}(M^\wedge_{\mathfrak p'})
+=
+\text{depth}(M_\mathfrak p) +
+\text{depth}(A^\wedge_{\mathfrak p'} / \mathfrak p A^\wedge_{\mathfrak p'})
+$$
+$s_{A, I}(M)$에 대해 최소화하는 양은
+$$
+s(\mathfrak p, \mathfrak q) =
+\text{depth}(M_\mathfrak p) + \dim((A/\mathfrak p)_\mathfrak q) =
+\text{depth}(M_\mathfrak p) + a - b
+$$
+이다. 마지막 등식은 $A$가 쇄상이므로 성립한다.
+$s_{A^\wedge, I^\wedge}(M^\wedge)$에 대해 최소화하는 양은
+$$
+s(\mathfrak p', \mathfrak q') =
+\text{depth}(M^\wedge_{\mathfrak p'}) +
+\dim((A^\wedge/\mathfrak p')_{\mathfrak q'}) =
+\text{depth}(M^\wedge_{\mathfrak p'}) + a' - b'
+$$
+이다. 마지막 등식은 $A^\wedge$가 쇄상이므로 성립한다. 이제 증명을 시작할
+만큼 기호를 충분히 마련했다.
+
+\medskip\noindent
+$\mathfrak p \subset \mathfrak q \subset A$를 $\mathfrak p \not \in Z$이고
+$\mathfrak q \in Z$이며
+$s_{A, I}(M) = s(\mathfrak p, \mathfrak q)$인 소아이디얼들이라 하자. 그러면
+$\mathfrak q'$를 택하여 $\mathfrak q A^\wedge$ 위에서 극소이게 할 수 있고,
+$\mathfrak p' \subset \mathfrak q'$를 택하여 $\mathfrak p A^\wedge$ 위에서
+극소이게 할 수 있다. 여기서는
+$A \to A^\wedge$에 대한 하강 정리를 사용했다. 그러면 위와 같은 네
+소아이디얼에 대해 $p = 0$ 및 $q = 0$이다. 더구나
+$\text{depth}(A^\wedge_{\mathfrak p'} / \mathfrak p A^\wedge_{\mathfrak p'})=0$
+이기도 한데, 이는 또한 $p = 0$이기 때문이다. 따라서
+$s(\mathfrak p', \mathfrak q') = s(\mathfrak p, \mathfrak q)$라는 뜻이다.
+따라서 첫 번째 부등식을 얻는다.
+
+\medskip\noindent
+이제 $A$의 형식적 섬유들이 $(S_n)$이라고 가정하자. 그러면
+$\text{depth}(A^\wedge_{\mathfrak p'} / \mathfrak p A^\wedge_{\mathfrak p'})
+\geq \min(n, p)$.
+따라서
+$$
+s(\mathfrak p', \mathfrak q') \geq
+s(\mathfrak p, \mathfrak q) + q + \min(n, p) - p \geq
+s_{A, I}(M) + q + \min(n, p) - p
+$$
+따라서 문제가 생길 수 있는 유일한 경우는 $p > n$일 때이다. 이 경우
+\begin{align*}
+s(\mathfrak p', \mathfrak q')
+& =
+\text{depth}(M^\wedge_{\mathfrak p'}) +
+\dim((A^\wedge/\mathfrak p')_{\mathfrak q'}) \\
+& =
+\text{depth}(M_\mathfrak p) +
+\text{depth}(A^\wedge_{\mathfrak p'} / \mathfrak p A^\wedge_{\mathfrak p'}) +
+\dim((A^\wedge/\mathfrak p')_{\mathfrak q'}) \\
+& \geq
+0 + n + 1
+\end{align*}
+이다. 왜냐하면 $(A^\wedge/\mathfrak p')_{\mathfrak q'}$에는 적어도 두 개의
+소아이디얼이 있기 때문이다. 이로써 두 번째 부등식이 증명되었다.
+\end{proof}
+
+\noindent
+다음 보조정리의 증명 방법은 더 일반적인 경우에도 작동하지만, 그로부터
+얻는 더 강한 결과들은 아래의 정리 \ref{local-cohomology-theorem-finiteness}에 포함된다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-local-annihilator}
+\begin{reference}
+이는 \cite[Satz 1]{Faltings-annulators}의 특수한 경우이다.
+\end{reference}
+$A$를 Gorenstein 뇌터 국소환이라 하자. $I \subset A$를 아이디얼이라 하고
+$Z = V(I) \subset \Spec(A)$로 놓자. $M$을 유한 $A$-가군이라 하자.
+(\ref{local-cohomology-equation-cutoff})에서와 같이 $s = s_{A, I}(M)$로 놓자. 그러면
+$H^i_Z(M)$은 $i < s$에 대해 유한하지만 $H^s_Z(M)$은 유한하지 않다.
+\end{lemma}
+
+\begin{proof}
+Gorenstein 국소환은 쌍대화 복합체를 가지므로 이는 명제
+\ref{local-cohomology-proposition-finiteness}의 특수한 경우이다. 아래의 일반적인 유한성
+정리를 증명할 때 사용할 이 특수한 경우에 대한 짧은 증명이 있으면 유용할
+것이다.
+\end{proof}
+
+\noindent
+다음 정리의 가정은 우수한 뇌터 환에서는 정의에 의해 성립하고, 쌍대화
+복합체를 갖는 뇌터 환에서는 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-universally-catenary} 및 보조정리
+\ref{dualizing-lemma-dualizing-gorenstein-formal-fibres}에 의해 성립하며,
+정칙 뇌터 환의 몫에서도 성립함을 관찰하라.
+
+\begin{theorem}
+\label{local-cohomology-theorem-finiteness}
+\begin{reference}
+이는 \cite[Satz 2]{Faltings-finiteness}의 특수한 경우이다.
+\end{reference}
+$A$를 뇌터 환이라 하고 $I \subset A$를 아이디얼이라 하자.
+$Z = V(I) \subset \Spec(A)$로 놓자. $M$을 유한 $A$-가군이라 하자.
+(\ref{local-cohomology-equation-cutoff})에서와 같이 $s = s_{A, I}(M)$로 놓자. 다음을
+가정하자.
+\begin{enumerate}
+\item $A$는 보편적으로 쇄상이다.
+\item $A$의 국소환들의 형식적 섬유들은 Cohen--Macaulay이다.
+\end{enumerate}
+그러면 $H^i_Z(M)$은 $0 \leq i < s$에 대해 유한하고
+$H^s_Z(M)$은 유한하지 않다.
+\end{theorem}
+
+\begin{proof}
+보조정리 \ref{local-cohomology-lemma-check-finiteness-local-cohomology-locally}에 의해
+$A$가 국소환이라고 가정해도 된다.
+
+\medskip\noindent
+$A$가 뇌터 완비 국소환이면 Cohen 구조 정리에 의해(가환대수의 정리
+\ref{algebra-theorem-cohen-structure-theorem}) $A$를 정칙 완비 국소환
+$B$의 몫으로 쓸 수 있다. 보조정리 \ref{local-cohomology-lemma-cutoff}와 쌍대화 복합체의
+보조정리 \ref{dualizing-lemma-local-cohomology-and-restriction}을 사용하면
+정칙 국소환인 경우로 귀착된다. 이 경우는 보조정리
+\ref{local-cohomology-lemma-local-annihilator}의 귀결인데, 정칙 국소환은 Gorenstein이기
+때문이다(쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-regular-gorenstein}).
+
+\medskip\noindent
+$A$를 뇌터 국소환이라 하고 $\mathfrak m$을 극대 아이디얼이라 하자.
+$I \subset \mathfrak m$이라고 가정해도 된다. 그렇지 않으면 보조정리는
+자명하다. $A^\wedge$를 $A$의 완비화라 하고
+$Z^\wedge = V(IA^\wedge)$로 놓으며,
+$M^\wedge = M \otimes_A A^\wedge$를 $M$의 완비화라 하자(가환대수의
+보조정리 \ref{algebra-lemma-completion-tensor}). 그러면 쌍대화 복합체의
+$H^i_Z(M) \otimes_A A^\wedge = H^i_{Z^\wedge}(M^\wedge)$이다. 이는
+쌍대화 복합체의 보조정리 \ref{dualizing-lemma-torsion-change-rings}과
+$A \to A^\wedge$의 평탄성에 따른다(가환대수의 보조정리
+\ref{algebra-lemma-completion-flat}). 따라서
+$H^i_{Z^\wedge}(M^\wedge)$이 $i < s$에 대해 유한하고 $i = s$에 대해
+유한하지 않음을 보이면 충분하다. 가환대수의 보조정리
+\ref{algebra-lemma-descend-properties-modules}을 보라. $A^\wedge$에 대해서는
+결과가 참임을 아니까
+$s_{A, I}(M) = s_{A^\wedge, I^\wedge}(M^\wedge)$임을 보이면 충분하다.
+이는 보조정리 \ref{local-cohomology-lemma-cutoff-completion}에 따른다.
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-astute-reader}
+주의 깊은 독자는 $A$의 국소환들의 형식적 섬유에 관해 조금 더 약한 조건으로도
+충분하다는 사실을 알아차렸을 것이다. 구체적으로 정리
+\ref{local-cohomology-theorem-finiteness}의 상황에서 $A$가 보편적으로 쇄상이라고 가정하되
+형식적 섬유에는 아무 가정도 하지 말자. 어떤 $n$이 주어졌고
+$H^i_Z(M)$이 $i \leq n$에 대해 유한함을 증명하려 한다고 하자. 그러면
+똑같은 증명으로 $s_{A, I}(M) > n$이고 $A$의 국소환들의 형식적 섬유가
+$(S_n)$이면 충분함을 알 수 있다. 한편 $H^s_Z(M)$이 유한하지 않음을
+보이려 하는데 여기서 $s = s_{A, I}(M)$라면, 우리의 논증은 형식적 섬유가
+$(S_{s - 1})$일 때 이를 증명한다.
+\end{remark}
+
+
+
+
+
+
+
+\section{직접상의 유한성, II}
+\label{local-cohomology-section-finiteness-pushforward-II}
+
+\noindent
+이 절은 절 \ref{local-cohomology-section-finiteness-pushforward}의 연속이다. 여기서는 절
+\ref{local-cohomology-section-finiteness-II}에서 수행한 작업의 결실을 거둔다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-finiteness-Rjstar}
+$X$를 국소 뇌터 스킴이라 하자. $j : U \to X$를 여집합이 $Z$인 열린
+부분스킴의 포함사상이라 하자. $\mathcal{F}$를 연접
+$\mathcal{O}_U$-가군이라 하고 $n \geq 0$을 정수라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $X$는 보편적으로 쇄상이다.
+\item 모든 $z \in Z$에 대해 $\mathcal{O}_{X, z}$의 형식적 섬유들은
+$(S_n)$이다.
+\end{enumerate}
+이 상황에서 다음은 동치이다.
+\begin{enumerate}
+\item[(a)] $x \in \text{Supp}(\mathcal{F})$ 및
+$z \in Z \cap \overline{\{x\}}$에 대해 다음이 성립한다.
+$\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}_x) +
+\dim(\mathcal{O}_{\overline{\{x\}}, z}) > n$,
+\item[(b)] $R^pj_*\mathcal{F}$는 $0 \leq p < n$에 대해 연접이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+명제는 $X$ 위에서 국소적이므로 $X$가 아핀이라고 가정해도 된다.
+$X = \Spec(A)$ 및 $Z = V(I)$라 하자. $M$을 유한 $A$-가군으로서 이에
+대응하는 연접 $\mathcal{O}_X$-가군이 $\mathcal{F}$로 제한되게 하되,
+그 제한은 $U$ 위에서 취하자. 보조정리
+\ref{local-cohomology-lemma-finiteness-pushforwards-and-H1-local}을 보라.
+이 보조정리에 따르면 $R^pj_*\mathcal{F}$가 연접일 필요충분조건은
+$H^{p + 1}_Z(M)$이 유한 $A$-가군인 것이다. 다음 식들의 최솟값이
+$\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}_x) +
+\dim(\mathcal{O}_{\overline{\{x\}}, z})$
+(\ref{local-cohomology-equation-cutoff})의 수 $s_{A, I}(M)$임을 관찰하라. 이제 보조정리는
+정리 \ref{local-cohomology-theorem-finiteness}에 따르며, 이는 주해
+\ref{local-cohomology-remark-astute-reader}에서 설명한 바와 같다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-finiteness-for-finite-locally-free}
+$X$를 국소 뇌터 스킴이라 하자. $j : U \to X$를 여집합이 $Z$인 열린
+부분스킴의 포함사상이라 하고 $n \geq 0$을 정수라 하자.
+$R^pj_*\mathcal{O}_U$가 $0 \leq p < n$에 대해 연접이면,
+$R^pj_*\mathcal{F}$도 $0 \leq p < n$에 대해 연접이다. 이는 임의의 유한
+국소 자유 $\mathcal{O}_U$-가군 $\mathcal{F}$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+문제는 $X$ 위에서 국소적이므로 $X$가 아핀이라고 가정해도 된다.
+$X = \Spec(A)$ 및 $Z = V(I)$라 하자. 보조정리
+\ref{local-cohomology-lemma-finiteness-pushforwards-and-H1-local}을 통하면 우리의 보조정리는
+보조정리 \ref{local-cohomology-lemma-local-finiteness-for-finite-locally-free}에 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilate-Hp}
+\begin{reference}
+\cite[보조정리 1.9]{Bhatt-local}
+\end{reference}
+$A$를 환이라 하고 $J \subset I \subset A$를 유한 생성 아이디얼들이라 하자.
+$p \geq 0$을 정수라 하고 $U = \Spec(A) \setminus V(I)$로 놓자.
+$H^p(U, \mathcal{O}_U)$가 $J^n$에 의해 소멸되는 어떤 $n$이 존재하면,
+$H^p(U, \mathcal{F})$는 $J^m$에 의해 소멸되는 어떤
+$m = m(\mathcal{F})$을 갖는다. 이는 모든 유한 국소 자유
+$\mathcal{O}_U$-가군 $\mathcal{F}$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+$\mathfrak a$를 $H^p(U, \mathcal{F})$의 소멸자라 하자. $u \in U$라 하자.
+열린 근방 $u \in U' \subset U$와 동형사상
+$\varphi : \mathcal{O}_{U'}^{\oplus r} \to \mathcal{F}|_{U'}$가 존재한다.
+$f \in A$를 $u \in D(f) \subset U'$가 되도록 택하자. 다음 사상들이
+존재한다.
+$$
+a : \mathcal{O}_U^{\oplus r} \longrightarrow \mathcal{F}
+\quad\text{및}\quad
+b : \mathcal{F} \longrightarrow \mathcal{O}_U^{\oplus r}
+$$
+$D(f)$로 제한하면 이들은 각각 $f^N \varphi$ 및 $f^N \varphi^{-1}$와
+같으며, 이는 어떤 $N$에 대해 성립한다. 더구나 $a \circ b$와 $b \circ a$가 모두
+$f^{2N}$을 곱하는 사상이라고 가정해도 된다. 이는 성질의 보조정리
+\ref{properties-lemma-section-maps-backwards}에 따른다. 실제로 $U$는
+준콤팩트이고($I$가 유한 생성이다) 분리이며, $\mathcal{F}$와
+$\mathcal{O}_U^{\oplus r}$는 유한 표시된다. 따라서
+$H^p(U, \mathcal{F})$는 $f^{2N}J^n$에 의해 소멸된다. 즉
+$f^{2N}J^n \subset \mathfrak a$이다.
+
+\medskip\noindent
+$U$가 준콤팩트이므로 유한 개의 $f_1, \ldots, f_t$와
+$N_1, \ldots, N_t$를 찾아 $U = \bigcup D(f_i)$이고
+$f_i^{2N_i}J^n \subset \mathfrak a$가 되게 할 수 있다. 그러면
+$V(I) = V(f_1, \ldots, f_t)$이다. $I$가 유한 생성이므로
+$I^M \subset (f_1, \ldots, f_t)$라는 결론을 어떤 $M$에 대해 얻는다. 결국
+$J^m \subset \mathfrak a$가 $m \gg 0$에 대해 성립함을 알 수 있다. 예를 들어
+$m = M (2N_1 + \ldots + 2N_t) n$이면 된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{국소 코호몰로지의 소멸자, II}
+\label{local-cohomology-section-annihilators-II}
+
+\noindent
+절 \ref{local-cohomology-section-annihilators}의 국소 코호몰로지 소멸자에 관한 논의를,
+아래로 유계이고 코호몰로지 가군들이 유한한 복합체로 확장한다.
+
+\begin{definition}
+\label{local-cohomology-definition-depth-complex}
+$I$를 뇌터 환 $A$의 아이디얼이라 하자.
+$K \in D^+_{\textit{Coh}}(A)$라 하자. {\it $I$-깊이}를 $K$에 대해 정의하고
+$\text{depth}_I(K)$로 나타내자. 이는 $m \in \mathbf{Z} \cup \{\infty\}$
+가운데 모든 $H^i_I(K) = 0$이 $i < m$에 대해 성립하는 최대의 값이다.
+$A$가 극대 아이디얼 $\mathfrak m$을 갖는 국소환이면
+$\text{depth}_\mathfrak m(K)$를 간단히 $K$의 {\it 깊이}라 부른다.
+\end{definition}
+
+\noindent
+이 정의는 가환대수의 정의 \ref{algebra-definition-depth}와 모순되지 않는다.
+이는 쌍대화 복합체의 보조정리 \ref{dualizing-lemma-depth}에 따른다.
+
+\begin{proposition}
+\label{local-cohomology-proposition-annihilator-complex}
+$A$를 쌍대화 복합체를 갖는 뇌터 환이라 하자.
+$T \subset T' \subset \Spec(A)$를 특수화 아래 안정적인 부분집합들이라
+하자. $s \in \mathbf{Z}$라 하고 $K$를 $D_{\textit{Coh}}^+(A)$의 대상이라
+하자. 다음은 동치이다.
+\begin{enumerate}
+\item 아이디얼 $J \subset A$가 존재하여 $V(J) \subset T'$이고,
+$J$가 $H^i_T(K)$를 $i \leq s$에 대해 소멸시킨다.
+\item 모든 $\mathfrak p \not \in T'$와 $\mathfrak q \in T$ 중
+$\mathfrak p \subset \mathfrak q$인 것에 대해 다음이 성립한다.
+$$
+\text{depth}_{A_\mathfrak p}(K_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) > s
+$$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+이 명제는 명제 \ref{local-cohomology-proposition-annihilator}의 자연스러운 일반화이다.
+독자는 먼저 그 증명을 읽어야 한다. $\omega_A^\bullet$을 쌍대화 복합체라
+하고 $\delta$를 그 차원 함수라 하자. 쌍대화 복합체의 절
+\ref{dualizing-section-dimension-function}을 보라. 다음 유한 $A$-가군들이
+중요한 역할을 한다.
+$$
+E^i = \Ext_A^i(K, \omega_A^\bullet)
+$$
+$\mathfrak p \subset A$에 대해 $H^i_\mathfrak p$는 $D(A_\mathfrak p)$의
+대상의 $\mathfrak pA_\mathfrak p$에 관한 국소 코호몰로지를 나타낸다고
+쓰겠다. 그러면 다음 가군의 $\mathfrak pA_\mathfrak p$-진 완비화는
+$$
+(E^i)_\mathfrak p =
+\Ext^{\delta(\mathfrak p) + i}_{A_\mathfrak p}(K_\mathfrak p,
+(\omega_A^\bullet)_\mathfrak p[-\delta(\mathfrak p)])
+$$
+다음 가군과 Matlis 쌍대이다.
+$$
+H^{-\delta(\mathfrak p) - i}_{\mathfrak p}(K_\mathfrak p)
+$$
+이는 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-special-case-local-duality}에 따른다. 특히 다음 사실을
+얻는다. 아이디얼 $J \subset A$가 $(E^i)_\mathfrak p$를 소멸시킬
+필요충분조건은 $J$가
+$H^{-\delta(\mathfrak p) - i}_{\mathfrak p}(K_\mathfrak p)$를 소멸시키는 것이다.
+
+\medskip\noindent
+$T_n = \{\mathfrak p \in T \mid \delta(\mathfrak p) \leq n\}$으로 놓자.
+$\delta$가 유계 함수이므로 $T_a = \emptyset$가 $a \ll 0$에 대해 성립하고
+$T_b = T$가 $b \gg 0$에 대해 성립한다.
+
+\medskip\noindent
+(2)를 가정하자. (1)과 같은 $J$의 존재를 증명하겠다. 이를 위해 이중
+귀납법을 사용한다. $i \leq s$에 대해 다음 귀납 가정 $IH_i$를 생각하자.
+$H^a_T(K)$는 어떤 $J \subset A$에 의해 소멸되고 $V(J) \subset T'$이며,
+이는 $a \leq i$에 대해 성립한다. $IH_i$인 경우는 $i$가 충분히 작으면
+$K$가 아래로 유계이므로 자명하다.
+
+\medskip\noindent
+귀납 단계를 보자. $IH_{i - 1}$이 어떤 $i \leq s$에 대해 성립한다고
+가정하자. $J'$를 택하여 $V(J') \subset T'$이고 $H^a_T(K)$를
+$a \leq i - 1$에 대해 소멸시키게 하자. 귀납 가정에 의해 이렇게 할 수
+있다. $n$에 대한 내림 귀납법으로 아이디얼 $J$가 존재하고
+$V(J) \subset T'$이며, $J H^i_T(K)$의 소속 소아이디얼들이 $T_n$에 속함을
+보이겠다. $n \ll 0$이면 이는 $JH^i_T(K) = 0$을 함의하며(가환대수의
+보조정리 \ref{algebra-lemma-ass-zero}), 따라서 $IH_i$가 성립한다. 기초
+단계 $n \gg 0$인 경우에는 $T = T_n$이고 $H^i_T(K)$의 모든 소속
+소아이디얼이 $T$에 속하므로 자명하다.
+
+\medskip\noindent
+따라서 $J$가 주어져 $n$에 대한 성질을 갖는다고 가정하자.
+$\mathfrak q \in T_n$이라 하자. $T_\mathfrak q \subset \Spec(A_\mathfrak q)$를
+$T$의 역상이라 하자. 보조정리 \ref{local-cohomology-lemma-torsion-change-rings}에 의해
+$H^j_T(K)_\mathfrak q = H^j_{T_\mathfrak q}(K_\mathfrak q)$이다. 스펙트럼 수열
+$$
+H_\mathfrak q^p(H^q_{T_\mathfrak q}(K_\mathfrak q))
+\Rightarrow
+H^{p + q}_\mathfrak q(K_\mathfrak q)
+$$
+을 생각하자. 이는 보조정리 \ref{local-cohomology-lemma-local-cohomology-ss}의 스펙트럼
+수열이다. 아래에서 아이디얼 $J'' \subset A$를 찾아 $V(J'') \subset T'$이고,
+$H^i_\mathfrak q(K_\mathfrak q)$가 $J''$에 의해 소멸되며 이것이 모든
+$\mathfrak q \in T_n \setminus T_{n - 1}$에 대해 성립하게 하겠다. 주장:
+$J (J')^i J''$는 $n - 1$에 대해 원하는 성질을 갖는다. 실제로
+$\mathfrak q \in T_n \setminus T_{n - 1}$라 하자. 위 스펙트럼 수열은 여과
+$$
+E_\infty^{0, i} = E_{i + 2}^{0, i} \subset \ldots \subset E_3^{0, i} \subset
+E_2^{0, i} = H^0_\mathfrak q(H^i_{T_\mathfrak q}(K_\mathfrak q))
+$$
+를 정의한다. 가군 $E_\infty^{0, i}$는 $J''$에 의해 소멸된다.
+$E_j^{0, i}/E_{j + 1}^{0, i}$는 $i + 1 \geq j \geq 2$에 대해 $J'$에 의해
+소멸된다. 실제로 $d_j^{0, i}$의 공역은 다음 가군의 부분몫이다.
+$$
+H^j_\mathfrak q(H^{i - j + 1}_{T_\mathfrak q}(K_\mathfrak q)) =
+H^j_\mathfrak q(H^{i - j + 1}_T(K)_\mathfrak q)
+$$
+그리고 $H^{i - j + 1}_T(K)_\mathfrak q$는 $J'$에 의해 소멸된다. 이는
+$J'$의 선택에 따른다. 마지막으로 $J$의 선택에 의해
+$J H^i_T(K)_\mathfrak q \subset H^0_\mathfrak q(H^i_T(K)_\mathfrak q)$
+이다. 실제로 $\Spec(A_\mathfrak q)$의 닫히지 않은 점들은 더 큰 $\delta$
+값을 갖는다. 따라서 원하는 대로 $\mathfrak q$는
+$J(J')^iJ'' H^i_T(K)$의 소속 소아이디얼일 수 없다.
+
+\medskip\noindent
+처음의 논의에 의해 $J''$는
+$$
+(E^{-\delta(\mathfrak q) - i})_\mathfrak q =
+(E^{-n - i})_\mathfrak q
+$$
+을 모든 $\mathfrak q \in T_n \setminus T_{n - 1}$에 대해 소멸시켜야 한다.
+그런데 $J''$가 하나의 $\mathfrak q$에 대해 작용하면, $\mathfrak q$의 한
+열린 근방에 있는 모든 $\mathfrak q$에 대해서도 작용한다. 이는 가군
+$E^{-n - i}$가 유한하기 때문이다. $\Spec(A)$의 모든 부분집합은 유도된
+위상으로 뇌터이므로(위상론의 보조정리 \ref{topology-lemma-Noetherian}),
+$J''$의 존재를 하나의 $\mathfrak q$에 대해 증명하면 충분하다는 결론을
+얻는다.
+
+\medskip\noindent
+Ext 가군들이 유한하므로 $J''$의 존재는 다음과 동치이다.
+$$
+\text{Supp}(E^{-n - i}) \cap \Spec(A_\mathfrak q) \subset T'.
+$$
+이는 $E^{-n - i}$의 국소화가 모든 $\mathfrak p \subset \mathfrak q$ 중
+$\mathfrak p \not \in T'$인 것에서 영임을 보이는 것과 동치이다.
+$A_\mathfrak p$ 위의 국소 쌍대성을 사용하면 다음이 영임을 증명해야 한다.
+$$
+H^{i + n - \delta(\mathfrak p)}_\mathfrak p(K_\mathfrak p) =
+H^{i - \dim((A/\mathfrak p)_\mathfrak q)}_\mathfrak p(K_\mathfrak p)
+$$
+여기서는 $\delta$가 차원 함수임을 사용했다. 이 대상은 명제의 가정,
+$i \leq s$, 그리고 정의 \ref{local-cohomology-definition-depth-complex}의 깊이 정의에 의해
+영이다.
+
+\medskip\noindent
+역함의를 증명하기 위해 (2)가 성립하지 않는다고 가정하고 위 논증을
+거꾸로 따라간다. 먼저 $\mathfrak q \in T$와
+$\mathfrak p \subset \mathfrak q$ 중 $\mathfrak p \not \in T'$인 것을 택하여
+$$
+i = \text{depth}_{A_\mathfrak p}(K_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) \leq s
+$$
+가 최소가 되게 하자. 그러면
+$H^{i - \dim((A/\mathfrak p)_\mathfrak q)}_\mathfrak p(K_\mathfrak p)$
+은 정의 \ref{local-cohomology-definition-depth-complex}의 깊이 정의에 의해 영이 아니다.
+$n = \delta(\mathfrak q)$으로 놓자. 그러면 $J \subset A$이고
+$V(J) \subset T'$이며 $J(E^{-n - i})_\mathfrak q = 0$인 아이디얼은 존재하지
+않는다. 따라서 $H^i_\mathfrak q(K_\mathfrak q)$는 아이디얼
+$J \subset A$에 의해 소멸되지 않으며 이때 $V(J) \subset T'$이다.
+$i$의 최소성과 위에 표시한 스펙트럼 수열에 의해 가군
+$H^i_T(K)_\mathfrak q$는 아이디얼 $J \subset A$에 의해 소멸되지 않으며,
+이때 $V(J) \subset T'$이다. 따라서 $H^i_T(K)$는 아이디얼 $J \subset A$에
+의해 소멸되지 않으며, 이때 $V(J) \subset T'$이다. 이로써 명제의 증명이
+끝난다.
+\end{proof}
+
+
+
+
+
+
+
+\section{국소 코호몰로지의 유한성, III}
+\label{local-cohomology-section-finiteness-III}
+
+\noindent
+절 \ref{local-cohomology-section-finiteness}와 절 \ref{local-cohomology-section-finiteness-II}의 국소
+코호몰로지 유한성에 관한 논의를, 아래로 유계이고 코호몰로지 가군들이
+유한한 복합체로 확장한다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator-complex}
+$A$를 뇌터 환이라 하자. $T \subset \Spec(A)$를 특수화 아래 안정적인
+부분집합이라 하자. $K$를 $D_{\textit{Coh}}^+(A)$의 대상이라 하고
+$n \in \mathbf{Z}$라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $H^i_T(K)$는 $i \leq n$에 대해 유한하다.
+\item 아이디얼 $J \subset A$가 존재하여 $V(J) \subset T$이고,
+$J$가 $H^i_T(K)$를 $i \leq n$에 대해 소멸시킨다.
+\end{enumerate}
+$T = V(I) = Z$이고 $I \subset A$가 아이디얼이면, 이들은 다음과도
+동치이다.
+\begin{enumerate}
+\item[(3)] 어떤 $e \geq 0$이 존재하여 $I^e$가 $H^i_Z(K)$를
+$i \leq n$에 대해 소멸시킨다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 보조정리
+\ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator}의 자연스러운
+일반화이다. 독자는 먼저 그 증명을 읽어야 한다. (1)이 참이라고 가정하자.
+$H^i_J(K) = H^i_{V(J)}(K)$임을 상기하라. 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-noetherian}을 보라. 따라서
+$H^i_T(K) = \colim H^i_J(K)$이며, 여기서 여극한은 $J \subset A$이고
+$V(J) \subset T$인 아이디얼들에 걸친다. 보조정리
+\ref{local-cohomology-lemma-adjoint-ext}를 보라. $H^i_T(K)$가 $i \leq n$에 대해 유한
+생성이므로 (2)와 같은 $J \subset A$를 찾아
+$H^i_J(K) \to H^i_T(K)$가 $i \leq n$에 대해 전사이게 할 수 있다. 따라서
+유한한 생성원 목록은 $J$-멱 영인 원소들이다. 그러므로 $J$를 어떤 멱으로
+바꾸면 (2)가 성립한다.
+
+\medskip\noindent
+$a \in \mathbf{Z}$를 $H^i(K) = 0$이 $i < a$에 대해 성립하는 정수라 하자.
+(2) $\Rightarrow$ (1)을 $a$에 대한 내림 귀납법으로 증명한다.
+$a > n$이면 $H^i_T(K) = 0$이 $i \leq n$에 대해 성립하므로 (1)과 (2)가
+모두 참이며 증명할 것이 없다.
+
+\medskip\noindent
+(2)와 같은 $J$가 있다고 가정하자.
+$N = H^a_T(K) = H^0_T(H^a(K))$은 유한 $A$-가군 $H^a(K)$의 부분가군이므로
+유한임을 관찰하라. $n = a$이면 끝났으므로 이제부터 $a < n$이라고
+가정하자. $R\Gamma_T$의 구성에 의해 $H^i_T(N) = 0$이 $i > 0$에 대해
+성립하고 $H^0_T(N) = N$이다. 주해 \ref{local-cohomology-remark-upshot}을 보라. 완전 삼각형
+$$
+N[-a] \to K \to K' \to N[-a + 1]
+$$
+을 택하자. 그러면 $H^a_T(K') = 0$이고 $H^i_T(K) = H^i_T(K')$가
+$i > a$에 대해 성립한다. 따라서 $K$를 $K'$로 바꾸어도 된다. 그러므로
+$H^a_T(K) = 0$이라고 가정해도 된다. 이는 $H^a(K)$의 유한한 소속
+소아이디얼 집합이 $T$에 속하지 않는다는 뜻이다. 소아이디얼 회피에 의해
+(가환대수의 보조정리 \ref{algebra-lemma-silly}) $f \in J$를 찾을 수 있으며,
+이 원소는 $H^a(K)$의 어떤 소속 소아이디얼에도 속하지 않는다. 완전 삼각형
+$$
+L \to K \xrightarrow{f} K \to L[1]
+$$
+을 택하자. 구성에 의해 $H^i(L) = 0$이 $i \leq a$에 대해 성립한다. 한편
+다음 긴 완전 코호몰로지 수열이 있다.
+$$
+0 \to H^{a + 1}_T(L) \to H^{a + 1}_T(K) \xrightarrow{f}
+H^{a + 1}_T(K) \to H^{a + 2}_T(L) \to H^{a + 2}_T(K) \xrightarrow{f} \ldots
+$$
+이는 동일시 $H^{a + 1}_T(L) = H^{a + 1}_T(K)$와 다음 짧은 완전 수열들로
+분해된다.
+$$
+0 \to H^{i - 1}_T(K) \to H^i_T(L) \to H^i_T(K) \to 0
+$$
+$i \leq n$에 대해 그러한데, 이는 $f \in J$이기 때문이다. 따라서
+$J^2$이 $H^i_T(L)$을 $i \leq n$에 대해 소멸시킨다. 귀납 가정을 $L$에
+적용하면 $H^i_T(L)$이 $i \leq n$에 대해 유한함을 알 수 있다. 짧은 완전
+수열을 다시 한 번 사용하면 원하는 대로 $H^i_T(K)$가 $i \leq n$에 대해
+유한함을 알 수 있다.
+
+\medskip\noindent
+$T = V(I)$인 경우 (2)와 (3)의 동치에 대한 증명은 생략한다.
+\end{proof}
+
+\begin{proposition}
+\label{local-cohomology-proposition-finiteness-complex}
+$A$를 쌍대화 복합체를 갖는 뇌터 환이라 하자.
+$T \subset \Spec(A)$를 특수화 아래 안정적인 부분집합이라 하자.
+$s \in \mathbf{Z}$라 하고 $K \in D_{\textit{Coh}}^+(A)$라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item $H^i_T(K)$는 유한 $A$-가군이며, 이는 $i \leq s$에 대해 성립한다.
+\item 모든 $\mathfrak p \not \in T$와 $\mathfrak q \in T$ 중
+$\mathfrak p \subset \mathfrak q$인 것에 대해 다음이 성립한다.
+$$
+\text{depth}_{A_\mathfrak p}(K_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) > s
+$$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+명제 \ref{local-cohomology-proposition-annihilator-complex}와 보조정리
+\ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator-complex}의
+형식적 귀결이다.
+\end{proof}
+
+
+
+
+
+
+\section{연접 가군의 개선}
+\label{local-cohomology-section-improve}
+
+\noindent
+비슷한 구성은 \cite{EGA}에서 찾을 수 있고, 더 최근에는
+\cite{Kollar-local-global-hulls}와 \cite{Kollar-variants}에서 찾을 수 있다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-get-depth-1-along-Z}
+$X$를 뇌터 스킴이라 하자. $T \subset X$를 특수화 아래 안정적인
+부분집합이라 하자. $\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자.
+그러면 다음을 만족하는 유일한 사상 $\mathcal{F} \to \mathcal{F}'$가 연접
+$\mathcal{O}_X$-가군 사이에 존재한다.
+\begin{enumerate}
+\item $\mathcal{F} \to \mathcal{F}'$는 전사이다.
+\item $\mathcal{F}_x \to \mathcal{F}'_x$는 $x \not \in T$에 대해 동형사상이다.
+\item $\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}'_x) \geq 1$이
+$x \in T$에 대해 성립한다.
+\end{enumerate}
+$f : Y \to X$가 평탄 사상이고 $Y$가 뇌터이면,
+$f^*\mathcal{F} \to f^*\mathcal{F}'$는 $f^{-1}(T) \subset Y$와
+$f^*\mathcal{F}$에 대응하는 몫이다.
+\end{lemma}
+
+\begin{proof}
+조건 (3)은 정확히 $\text{Ass}(\mathcal{F}') \cap T = \emptyset$이라는
+뜻이다. 따라서 $\mathcal{F} \to \mathcal{F}'$는 $\mathcal{F}$를 지지집합이
+$T$에 포함되는 단면들의 부분층으로 나눈 몫이다. 이로써 유일성이
+증명된다. 당김에 관한 명제는 인자의 보조정리
+\ref{divisors-lemma-bourbaki}와 유일성에 따른다.
+
+\medskip\noindent
+$\mathcal{F} \to \mathcal{F}'$의 존재를 보이자. 유일성에 의해 존재성과
+유일성을 $X$ 위에서 국소적으로 증명하면 충분하다. 작은 세부사항은
+생략한다. 따라서 $X = \Spec(A)$가 아핀이고 $\mathcal{F}$가 유한
+$A$-가군 $M$에 대응하는 연접 가군이라고 가정해도 된다. 절
+\ref{local-cohomology-section-supports}에서와 같이 $M' = M / H^0_T(M)$로 놓자. 여기서
+$H^0_T(M)$을 사용한다. 그러면 $M_\mathfrak p = M'_\mathfrak p$가
+$\mathfrak p \not \in T$에 대해 성립하므로 (1)이 증명된다. 한편
+$H^0_T(M) = \colim H^0_Z(M)$이며 여기서 $Z$는 $X$의 닫힌 부분집합 중
+$T$에 포함되는 것들을 돈다. 따라서 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-divide-by-torsion}에 의해 $H^0_T(M') = 0$이다. 즉
+$M'$의 어떤 소속 소아이디얼도 $T$에 속하지 않는다. 그러므로
+$\text{depth}(M'_\mathfrak p) \geq 1$이 $\mathfrak p \in T$에 대해 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-get-depth-2-along-Z}
+$j : U \to X$를 뇌터 스킴의 열린 몰입이라 하자. $\mathcal{F}$를 연접
+$\mathcal{O}_X$-가군이라 하자. $\mathcal{F}' = j_*(\mathcal{F}|_U)$가
+연접이라고 가정하자. 그러면 $\mathcal{F} \to \mathcal{F}'$는 다음을
+만족하는 연접 $\mathcal{O}_X$-가군의 유일한 사상이다.
+\begin{enumerate}
+\item $\mathcal{F}|_U \to \mathcal{F}'|_U$는 동형사상이다.
+\item $\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}'_x) \geq 2$
+$x \in X$, $x \not \in U$에 대해 성립한다.
+\end{enumerate}
+$f : Y \to X$가 평탄 사상이고 $Y$가 뇌터이면,
+$f^*\mathcal{F} \to f^*\mathcal{F}'$는 $f^{-1}(U) \subset Y$에 대응하는
+사상이다.
+\end{lemma}
+
+\begin{proof}
+인자의 보조정리 \ref{divisors-lemma-depth-pushforward}의 (3)에 의해
+$\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}'_x) \geq 2$이다.
+$\mathcal{F} \to \mathcal{F}'$의 유일성은 인자의 보조정리
+\ref{divisors-lemma-depth-2-hartog}에 따른다. 평탄 당김과의 양립성은 평탄
+기저변환에 따른다. 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-flat-base-change-cohomology}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-make-S2-along-Z}
+$X$를 뇌터 스킴이라 하고 $Z \subset X$를 닫힌 부분스킴이라 하자.
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자. $X$가 보편적으로
+쇄상이고 국소환들의 형식적 섬유가 $(S_1)$이라고 가정하자. 그러면 다음을
+만족하는 유일한 사상 $\mathcal{F} \to \mathcal{F}''$가 연접
+$\mathcal{O}_X$-가군 사이에 존재한다.
+\begin{enumerate}
+\item $\mathcal{F}_x \to \mathcal{F}''_x$는 $x \in X \setminus Z$에 대해
+동형사상이다.
+\item $\mathcal{F}_x \to \mathcal{F}''_x$는 전사이고
+$\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}''_x) = 1$
+$x \in Z$ 중 $x' \leadsto x$인 직계 특수화가 존재하여
+$x' \not \in Z$이고 $x' \in \text{Ass}(\mathcal{F})$인 것에 대해 성립한다.
+\item $\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}''_x) \geq 2$
+가 나머지 $x \in Z$에 대해 성립한다.
+\end{enumerate}
+$f : Y \to X$가 Cohen--Macaulay 사상이고 $Y$가 뇌터이면,
+$f^*\mathcal{F} \to f^*\mathcal{F}''$는 $f^{-1}(Z) \subset Y$에 대해
+같은 성질들을 만족한다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F} \to \mathcal{F}'$를 보조정리
+\ref{local-cohomology-lemma-get-depth-1-along-Z}에서 부분집합 $Z$에 대해 구성한 사상이라
+하자. 이 부분집합은 $X$ 안에 있다. $\mathcal{F}'$는 $\mathcal{F}$를 $Z$ 위에 지지되는
+단면들의 부분층으로 나눈 몫임을 상기하라.
+
+\medskip\noindent
+먼저 유일성을 증명하자. $\mathcal{F} \to \mathcal{F}''$가 보조정리에서와
+같다고 하자. 인수분해 $\mathcal{F} \to \mathcal{F}' \to \mathcal{F}''$를
+얻는다. 실제로 조건 (2)와 (3)에 의해
+$\text{Ass}(\mathcal{F}'') \cap Z = \emptyset$이다.
+$U \subset X$를 $\mathcal{F}'|_U \to \mathcal{F}''|_U$가 동형사상이 되는
+극대 열린 부분스킴이라 하자. $U$는 (2)에서와 같은 모든 점을 포함한다.
+그러면 인자의 보조정리 \ref{divisors-lemma-depth-2-hartog}에 의해
+$\mathcal{F}'' = j_*(\mathcal{F}'|_U)$라는 결론을 얻는다. 이로써 유일성을
+얻는다. 작은 세부사항으로, 이러한 $\mathcal{F}''$가 두 개 있으면 각각에서
+얻는 열린집합 $U$들의 교집합을 취한다.
+
+\medskip\noindent
+존재를 증명하자. $\text{Ass}(\mathcal{F}') = \{x_1, \ldots, x_n\}$가
+유한하고 $x_i \not \in Z$임을 상기하라. $Y_i$를 $\{x_i\}$의 폐포라 하고,
+$Z_{i, j}$를 $Z \cap Y_i$의 기약 성분들이라 하자.
+$\text{Supp}(\mathcal{F}') \cap Z = \bigcup Z_{i, j}$임을 관찰하라.
+$z_{i, j} \in Z_{i, j}$를 일반점이라 하자. 다음과 같이 놓자.
+$$
+d_{i, j} = \dim(\mathcal{O}_{\overline{\{x_i\}}, z_{i, j}})
+$$
+$d_{i, j} = 1$이면 $z_{i, j}$는 (2)에서와 같은 점들 가운데 하나이다.
+따라서 이 점들에서는 $\mathcal{F}'$를 수정할 필요가 없다. 더 나아가 여전히
+$d_{i, j} = 1$이라고 가정하면, 보조정리 \ref{local-cohomology-lemma-depth-function}을
+사용하여 열린 근방 $z_{i, j} \in V_{i, j} \subset X$를 찾아 다음이
+성립하게 할 수 있다.
+$\text{depth}_{\mathcal{O}_{X, z}}(\mathcal{F}'_z) \geq 2$
+$z \in Z_{i, j} \cap V_{i, j}$이고 $z \not = z_{i, j}$인 경우에 그러하다.
+다음과 같이 놓자.
+$$
+Z' = X \setminus
+\left(
+X \setminus Z \cup \bigcup\nolimits_{d_{i, j} = 1} V_{i, j})
+\right)
+$$
+$j' : X \setminus Z' \to X$로 나타내자. $Z'$의 선택에 의해 보조정리
+\ref{local-cohomology-lemma-finiteness-pushforward-general}의 가정들이 성립한다.
+$\mathcal{F}'' = j'_*(\mathcal{F}'|_{X \setminus Z'})$로 놓고 보조정리
+\ref{local-cohomology-lemma-get-depth-2-along-Z}을 적용하면 결론을 얻는다.
+
+\medskip\noindent
+마지막 명제는 평탄 국소 준동형을 따르는 깊이 변화 공식과(가환대수의
+보조정리 \ref{algebra-lemma-apply-grothendieck-module}을 보라), $f$가
+Cohen--Macaulay라는 사실에 내재된 $f$의 섬유에 관한 가정에 따른다.
+세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-make-S2-along-T-simple}
+$X$를 국소적으로 쌍대화 복합체를 갖는 뇌터 스킴이라 하자.
+$T' \subset X$를 특수화 아래 안정적인 부분집합이라 하고
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자. 직계 특수화
+$x \leadsto x'$가 주어지고 그 점들이 $X$에 속할 때, $x' \in T'$이고
+$x \not \in T'$이면
+$\text{depth}(\mathcal{F}_x) \geq 1$이라고 가정하자. 그러면 다음을
+만족하는 유일한 사상 $\mathcal{F} \to \mathcal{F}''$가 연접
+$\mathcal{O}_X$-가군 사이에 존재한다.
+\begin{enumerate}
+\item $\mathcal{F}_x \to \mathcal{F}''_x$는 $x \not \in T'$에 대해
+동형사상이다.
+\item $\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}''_x) \geq 2$
+$x \in T'$에 대해 성립한다.
+\end{enumerate}
+$f : Y \to X$가 Cohen--Macaulay 사상이고 $Y$가 뇌터이면,
+$f^*\mathcal{F} \to f^*\mathcal{F}''$는 $f^{-1}(T') \subset Y$에 대해
+같은 성질들을 만족한다.
+\end{lemma}
+
+\begin{proof}
+유일성을 증명하자. $\mathcal{F} \to \mathcal{F}''$가 보조정리에서와 같다고
+하자. $U \subset X$를 $\mathcal{F}|_U \to \mathcal{F}''|_U$가 동형사상이
+되는 극대 열린 부분스킴이라 하자. (1)에 의해 $U$는 집합
+$X \setminus T'$를 포함한다. (2)와 인자의 보조정리
+\ref{divisors-lemma-depth-2-hartog}에 의해
+$\mathcal{F}'' = j_*(\mathcal{F}|_U)$라는 결론을 얻는다. 여기서
+$j : U \to X$는 포함사상이다. 이로써 유일성을 얻는다. 작은
+세부사항으로, 이러한 $\mathcal{F}''$가 두 개 있으면 각각에서 얻는
+열린집합 $U$들의 교집합을 취한다.
+
+\medskip\noindent
+존재를 증명하자. $\mathcal{F} \to \mathcal{F}'$를 $\mathcal{F}$의 몫으로서
+보조정리 \ref{local-cohomology-lemma-get-depth-1-along-Z}에서 $T'$를 사용해 구성한 것이라
+하자. $\mathcal{F}'$는 $\mathcal{F}$를 $T'$ 위에 지지되는 단면들의
+부분층으로 나눈 몫임을 상기하라. 다음과 같이 정의하겠다.
+$$
+\mathcal{F}'' = \colim j_*(\mathcal{F}'|_V)
+$$
+여기서 $j : V \to X$는 $X \setminus V \subset T'$인 열린 부분스킴들을
+돈다. $T'$가 특수화 아래 안정적이므로 이 여극한은 여과됨을 관찰하라.
+각 사상 $\mathcal{F}' \to j_*(\mathcal{F}'|_V)$는 단사인데, 이는
+$\text{Ass}(\mathcal{F}')$가 $T'$와 서로소이기 때문이다. 따라서
+$\mathcal{F}' \to \mathcal{F}''$는 단사이다.
+
+\medskip\noindent
+$X = \Spec(A)$가 아핀이고 $\mathcal{F}$가 유한 $A$-가군 $M$에 대응한다고
+하자. 그러면 $\mathcal{F}'$는 $M' = M / H^0_{T'}(M)$에 대응한다. 보조정리
+\ref{local-cohomology-lemma-get-depth-1-along-Z}의 증명을 보라. 보조정리
+\ref{local-cohomology-lemma-local-cohomology}와 보조정리 \ref{local-cohomology-lemma-adjoint-ext}를 적용하면,
+$\mathcal{F}''$가 어떤 $A$-가군 $M''$에 대응하며 이 가군은 다음 짧은
+완전 수열에 놓임을 알 수 있다.
+$$
+0 \to M' \to M'' \to H^1_{T'}(M') \to 0
+$$
+명제 \ref{local-cohomology-proposition-finiteness}와 보조정리의 명제에 있는 직계 특수화에
+관한 조건에 의해 $M''$은 유한 $A$-가군임을 알 수 있다. 따라서
+$\mathcal{F}''$는 연접이다.
+
+\medskip\noindent
+$\mathcal{F}''$의 연접성과 위에 표시한 여과 여극한에서 전이 사상들이
+단사라는 사실로부터, $\mathcal{F}'' = j_*(\mathcal{F}'|_V)$라는 결론을
+위와 같이 충분히 작은 임의의 $V$에 대해 얻는다. 그러면 조건
+(1)과 (2)는 보조정리 \ref{local-cohomology-lemma-get-depth-2-along-Z}에 따른다.
+
+\medskip\noindent
+마지막 명제는 평탄 국소 준동형을 따르는 깊이 변화 공식과(가환대수의
+보조정리 \ref{algebra-lemma-apply-grothendieck-module}을 보라), $f$가
+Cohen--Macaulay라는 사실에 내재된 $f$의 섬유에 관한 가정에 따른다.
+세부사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-make-S2-along-T}
+$X$를 국소적으로 쌍대화 복합체를 갖는 뇌터 스킴이라 하자.
+$T' \subset T \subset X$를 특수화 아래 안정적인 부분집합들이라 하자.
+직계 특수화 $x \leadsto x'$가 주어지고 그 점들이 $X$에 속하며
+$x' \in T'$이면 $x \in T$가 되게 하자. $\mathcal{F}$를 연접
+$\mathcal{O}_X$-가군이라 하자. 그러면
+다음을 만족하는 유일한 사상 $\mathcal{F} \to \mathcal{F}''$가 연접
+$\mathcal{O}_X$-가군 사이에 존재한다.
+\begin{enumerate}
+\item $\mathcal{F}_x \to \mathcal{F}''_x$는 $x \not \in T$에 대해
+동형사상이다.
+\item $\mathcal{F}_x \to \mathcal{F}''_x$는 전사이고
+$\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}''_x) \geq 1$이
+$x \in T$, $x \not \in T'$에 대해 성립한다.
+\item $\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}''_x) \geq 2$
+$x \in T'$에 대해 성립한다.
+\end{enumerate}
+$f : Y \to X$가 Cohen--Macaulay 사상이고 $Y$가 뇌터이면,
+$f^*\mathcal{F} \to f^*\mathcal{F}''$는
+$f^{-1}(T') \subset f^{-1}(T) \subset Y$에 대해 같은 성질들을 만족한다.
+\end{lemma}
+
+\begin{proof}
+먼저 $\mathcal{F} \to \mathcal{F}'$를 $\mathcal{F}$의 몫으로서 보조정리
+\ref{local-cohomology-lemma-get-depth-1-along-Z}에서 $T$를 사용해 구성한 것이라 하자. 둘째,
+$\mathcal{F}' \to \mathcal{F}''$를 보조정리
+\ref{local-cohomology-lemma-make-S2-along-T-simple}에서 $T'$를 사용해 구성한 연접 가군의
+유일한 사상이라 하자. 그러면 $\mathcal{F} \to \mathcal{F}''$는 원하는
+사상이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{Hartshorne--Lichtenbaum 소멸}
+\label{local-cohomology-section-Hartshorne-Lichtenbaum-vanishing}
+
+\noindent
+이 소멸 결과는 스킴의 쌍대성의 절 \ref{duality-section-lichtenbaum}에서
+찾을 수 있는 Lichtenbaum 정리의 국소적 대응물이다. 이 결과를 비롯한
+많은 내용을 \cite{CD}에서 찾을 수 있다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-top-vanishing}
+$A$를 차원 $d$인 뇌터 환이라 하고 $I \subset I' \subset A$를
+아이디얼들이라 하자. $I'$가 $A$의 야코브슨 근기에 포함되고
+$\text{cd}(A, I') < d$이면 $\text{cd}(A, I) < d$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{local-cohomology-lemma-cd-dimension}에 의해 $\text{cd}(A, I) \leq d$임을 안다.
+보조정리 \ref{local-cohomology-lemma-isomorphism}을 사용하여
+$$
+H^d_{V(I')}(A) \to H^d_{V(I)}(A)
+$$
+가 전사임을 보이면 증명이 끝난다. $\mathfrak p \in V(I) \setminus V(I')$를
+택하자. $I'$에 대한 가정에 의해 $\mathfrak p$는 $A$의 극대 아이디얼이
+아니다. 따라서 $\dim(A_\mathfrak p) < d$이다. 그러면 보조정리
+\ref{local-cohomology-lemma-cd-dimension}에 의해
+$H^d_{\mathfrak pA_\mathfrak p}(A_\mathfrak p) = 0$이다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-top-vanishing-some-module}
+$A$를 차원 $d$인 뇌터 환이라 하고 $I \subset A$를 아이디얼이라 하자.
+$H^d_{V(I)}(M) = 0$을 만족하는 어떤 유한 $A$-가군의 지지집합이 차원
+$d$인 모든 기약 성분을 포함하면 $\text{cd}(A, I) < d$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{local-cohomology-lemma-cd-dimension}에 의해 $\text{cd}(A, I) \leq d$임을 안다.
+따라서 임의의 유한 $A$-가군 $N$에 대해 $H^i_{V(I)}(N) = 0$이 $i > d$일
+때 성립한다. 성질 $\mathcal{P}$가 유한 $A$-가군 $N$에 대해 성립한다는
+것을 $H^d_{V(I)}(N) = 0$으로 정의하자. 가정 중 하나는 $\mathcal{P}(M)$이
+성립한다는 것이다. 다음을 관찰하라.
+$\mathcal{P}(N_1 \oplus N_2)
+\Leftrightarrow (\mathcal{P}(N_1) \wedge \mathcal{P}(N_2))$.
+$N \to N'$가 전사이면 $\mathcal{P}(N) \Rightarrow \mathcal{P}(N')$임도
+관찰하라. 위에서 본 것처럼 $H^{d + 1}_{V(I)}$가 소멸하기 때문이다.
+$\mathfrak p_1, \ldots, \mathfrak p_n$을 $A$의 극소 소아이디얼들 가운데
+$\dim(A/\mathfrak p_i) = d$인 것들이라 하자. 차원상의 이유로
+$\mathcal{P}(N)$은 $N$의 지지집합이
+$\{\mathfrak p_1, \ldots, \mathfrak p_n\}$과 서로소이면 성립함을 관찰하라. 보조정리
+\ref{local-cohomology-lemma-cd-dimension}을 보라. 각 $i$에 대해
+$M_i = M/\mathfrak p_i M$로 놓자. 이는 유한 $A$-가군이고
+$\mathfrak p_i$에 의해 소멸되며 그 지지집합은 $V(\mathfrak p_i)$와 같다. 여기서는
+$M$의 지지집합에 대한 가정을 사용했다. 마지막으로 $J \subset A$가
+아이디얼이면 $\mathcal{P}(JM_i)$가 성립한다. 실제로 $JM_i$는 $M$의
+복사본들의 직합의 몫이다. 따라서 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-property-higher-rank-cohomological}에 의해
+$\mathcal{P}$는 모든 유한 $A$-가군에 대해 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-top-coh-divisible}
+$A$를 차원 $d$인 뇌터 국소환이라 하자. $f \in A$를 차원 $d$인 어떤
+극소 소아이디얼에도 속하지 않는 원소라 하자. 그러면
+$f : H^d_{V(I)}(M) \to H^d_{V(I)}(M)$는 임의의 유한 $A$-가군 $M$과
+임의의 아이디얼 $I \subset A$에 대해 전사이다.
+\end{lemma}
+
+\begin{proof}
+$M/fM$의 지지집합은 차원이 $< d$이다. 이는 $f$에 대한 가정에 따른다. 따라서
+보조정리 \ref{local-cohomology-lemma-cd-dimension}에 의해 $H^d_{V(I)}(M/fM) = 0$이다.
+그러므로 $H^d_{V(I)}(fM) \to H^d_{V(I)}(M)$는 전사이다. 보조정리
+\ref{local-cohomology-lemma-cd-dimension}에 의해 $\text{cd}(A, I) \leq d$임을 아니까,
+전사 $M \to fM$, $x \mapsto fx$가 전사
+$H^d_{V(I)}(M) \to H^d_{V(I)}(fM)$를 유도함도 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-bound-dualizing}
+$A$를 정규화된 쌍대화 복합체 $\omega_A^\bullet$을 갖는 뇌터 국소환이라
+하자. $I \subset A$를 아이디얼이라 하자.
+$H^0_{V(I)}(\omega_A^\bullet) = 0$이면 $\text{cd}(A, I) < \dim(A)$이다.
+\end{lemma}
+
+\begin{proof}
+$d = \dim(A)$로 놓자. $\mathfrak p_1, \ldots, \mathfrak p_n \subset A$를
+차원 $d$인 극소 소아이디얼들이라 하자. 유한 $A$-가군
+$H^{-i}(\omega_A^\bullet)$은 $i \in \{0, \ldots, d\}$일 때만 영이 아니며,
+$H^{-i}(\omega_A^\bullet)$의 지지집합은 차원이 $\leq i$임을 상기하라.
+보조정리 \ref{local-cohomology-lemma-sitting-in-degrees}를 보라.
+$\omega_A = H^{-d}(\omega_A^\bullet)$로 놓자. 소아이디얼 회피에 의해
+(가환대수의 보조정리 \ref{algebra-lemma-silly}) $f \in A$이고
+$f \not \in \mathfrak p_i$인 것을 찾아 $H^{-i}(\omega_A^\bullet)$을
+$i < d$에 대해 소멸시키게 할 수 있다. 완전 삼각형
+$$
+\omega_A[d] \to \omega_A^\bullet \to
+\tau_{\geq -d + 1}\omega_A^\bullet \to \omega_A[d + 1]
+$$
+을 생각하자. 유도 범주의 주해
+\ref{derived-remark-truncation-distinguished-triangle}를 보라. 유도 범주의
+보조정리 \ref{derived-lemma-trick-vanishing-composition}에 의해 $f^d$가
+$\tau_{\geq -d + 1}\omega_A^\bullet$의 영 자기준동형을 유도함을 알 수 있다.
+삼각 범주의 공리들을 사용하면 사상
+$$
+\omega_A^\bullet \to \omega_A[d]
+$$
+을 찾을 수 있다. 이를 $\omega_A[d] \to \omega_A^\bullet$와 합성하면
+$f^d$을 곱하는 사상이 되며, 이는 $\omega_A[d]$ 위에서 작용한다. 따라서 $f^d$은
+$H^d_{V(I)}(\omega_A)$를 소멸시킨다. 보조정리
+\ref{local-cohomology-lemma-top-coh-divisible}에 의해 $H^d_{V(I)}(\omega_A) = 0$이라는 결론을
+얻는다. 이제 보조정리 \ref{local-cohomology-lemma-cd-top-vanishing-some-module}와
+$(\omega_A)_{\mathfrak p_i}$가 영이 아니라는 사실로부터 결론을 얻는다.
+예를 들어 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-nonvanishing-generically-local}을 보라.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-inverse-system-symbolic-powers}
+$(A, \mathfrak m)$을 완비 뇌터 국소 정역이라 하자.
+$\mathfrak p \subset A$를 차원 $1$인 소아이디얼이라 하자. 모든
+$n \geq 1$에 대해 어떤 $m \geq n$이 존재하여
+$\mathfrak p^{(m)} \subset \mathfrak p^n$이 성립한다.
+\end{lemma}
+
+\begin{proof}
+기호적 멱 $\mathfrak p^{(m)}$은
+$A \to A_\mathfrak p/\mathfrak p^mA_\mathfrak p$의 핵으로 정의됨을
+상기하라. 국소화가 완전하므로 짧은 완전 수열
+$$
+0 \to \mathfrak a_n \to A/\mathfrak p^n \to A/\mathfrak p^{(n)} \to 0
+$$
+에서 $\mathfrak a_n$의 지지집합이 $\{\mathfrak m\}$에 포함된다는 결론을
+얻는다. 특히 역계 $(\mathfrak a_n)$은 미타그레플러 조건을 만족한다.
+실제로 각 $\mathfrak a_n$은 아르틴 $A$-가군이다. 따라서 보조정리는
+$\lim \mathfrak a_n = 0$이라는 요구와 동치이다. $f \in \lim \mathfrak a_n$라
+하자. 그러면 $f$는 $A = \lim A/\mathfrak p^n$의 원소이고, 여기서는
+$A$가 완비임을 사용했다. 이 원소는 완비화 $A_\mathfrak p^\wedge$에서
+영으로 가는데, 이는 $A_\mathfrak p$의 완비화이다.
+$A_\mathfrak p \to A_\mathfrak p^\wedge$가 충실하게 평탄이므로 $f$는
+$A_\mathfrak p$에서 영으로 간다. $A$가 정역이므로 원하는 대로 $f$는
+영이다.
+\end{proof}
+
+\begin{proposition}
+\label{local-cohomology-proposition-Hartshorne-Lichtenbaum-vanishing}
+\begin{reference}
+\cite[정리 3.1]{CD}
+\end{reference}
+$A$를 완비화가 $A^\wedge$인 뇌터 국소환이라 하자. $I \subset A$를
+다음을 만족하는 아이디얼이라 하자.
+$$
+\dim V(IA^\wedge + \mathfrak p) \geq 1
+$$
+이는 모든 극소 소아이디얼 $\mathfrak p \subset A^\wedge$ 중 차원이
+$\dim(A)$인 것에 대해 성립한다. 그러면
+$\text{cd}(A, I) < \dim(A)$이다.
+\end{proposition}
+
+\begin{proof}
+$A \to A^\wedge$가 충실하게 평탄이므로 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-torsion-change-rings}에 의해
+$H^d_{V(I)}(A) \otimes_A A^\wedge = H^d_{V(IA^\wedge)}(A^\wedge)$이다.
+따라서 $A$가 완비라고 가정해도 된다.
+
+\medskip\noindent
+$A$가 완비라고 가정하자. $\mathfrak p_1, \ldots, \mathfrak p_n \subset A$를
+차원 $d$인 극소 소아이디얼들이라 하자. 완비 국소환
+$A_i = A/\mathfrak p_i$를 생각하자. 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-and-restriction}에 의해
+$H^d_{V(I)}(A_i) = H^d_{V(IA_i)}(A_i)$이다. 보조정리
+\ref{local-cohomology-lemma-cd-top-vanishing-some-module}에 의해 보조정리를
+$(A_i, IA_i)$에 대해 증명하면 충분하다. 따라서 $A$가 완비 국소
+정역이라고 가정해도 된다.
+
+\medskip\noindent
+$A$가 완비 국소 정역이라고 가정하자. 소아이디얼 $\mathfrak p \supset I$를
+택하여 $\dim(A/\mathfrak p) = 1$이 되게 할 수 있다. 보조정리
+\ref{local-cohomology-lemma-cd-top-vanishing}에 의해 보조정리를
+$\mathfrak p$에 대해 증명하면 충분하다.
+
+\medskip\noindent
+보조정리 \ref{local-cohomology-lemma-cd-bound-dualizing}에 의해
+$H^0_{V(\mathfrak p)}(\omega_A^\bullet) = 0$임을 보이면 충분하다. 다음을
+상기하라.
+$$
+H^0_{V(\mathfrak p)}(\omega_A^\bullet) =
+\colim \text{Ext}^0_A(A/\mathfrak p^n, \omega_A^\bullet)
+$$
+보조정리 \ref{local-cohomology-lemma-inverse-system-symbolic-powers}에 의해 이 여극한은
+다음과 같음을 알 수 있다.
+$$
+\colim \text{Ext}^0_A(A/\mathfrak p^{(n)}, \omega_A^\bullet)
+$$
+$\text{depth}(A/\mathfrak p^{(n)}) = 1$이므로 보조정리
+\ref{local-cohomology-lemma-sitting-in-degrees}에 의해 이 Ext 군들은 원하는 대로 영이다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-affine-complement}
+$(A, \mathfrak m)$을 뇌터 국소환이라 하자. $I \subset A$를 아이디얼이라
+하자. $A$가 우수하고 정규이며 $\dim V(I) \geq 1$이라고 가정하자. 그러면
+$\text{cd}(A, I) < \dim(A)$이다. 특히 $\dim(A) = 2$이면
+$\Spec(A) \setminus V(I)$는 아핀이다.
+\end{lemma}
+
+\begin{proof}
+가환대수 심화의 보조정리
+\ref{more-algebra-lemma-completion-normal-local-ring}에 의해 완비화
+$A^\wedge$는 정규이고 따라서 정역이다. 그러므로 명제
+\ref{local-cohomology-proposition-Hartshorne-Lichtenbaum-vanishing}의 가정이 성립하여
+결론을 얻는다. 아핀성에 관한 명제는 보조정리
+\ref{local-cohomology-lemma-cd-is-one}에 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{프로베니우스 작용}
+\label{local-cohomology-section-frobenius}
+
+\noindent
+$p$를 소수라 하고 $A$를 $p = 0$이 $A$ 안에서 성립하는 환이라 하자. $A$의
+{\it 프로베니우스 자기준동형}은 다음 사상이다.
+$$
+F : A \longrightarrow A,
+\quad
+a \longmapsto a^p
+$$
+이 절에서는 프로베니우스 작용을 갖는 가군에 관한 보조정리들을 증명한다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilator-frobenius-module}
+$p$를 소수라 하자. $(A, \mathfrak m, \kappa)$를 $p = 0$이 $A$ 안에서
+성립하는 뇌터 국소환이라 하자. $M$을 유한 $A$-가군으로서
+$M \otimes_{A, F} A \cong M$을 만족한다고 하자. 그러면 $M$은 유한 자유
+가군이다.
+\end{lemma}
+
+\begin{proof}
+$A^{\oplus m} \to A^{\oplus n} \to M$인 표시를 택하자. 이는 동형사상
+$\kappa^{\oplus n} \to M/\mathfrak m M$을 유도한다. $T = (a_{ij})$를 사상
+$A^{\oplus m} \to A^{\oplus n}$의 행렬이라 하자.
+$a_{ij} \in \mathfrak m$임을 관찰하라. $F$에 의한 기저변환을 적용하고
+기저변환의 오른쪽 완전성을 사용하면, 표시
+$A^{\oplus m} \to A^{\oplus n} \to M$을 얻는데 그 행렬은
+$T = (a_{ij}^p)$이다. 따라서
+$a_{ij} \in \mathfrak m^p$인 표시가 있다. 이 구성을 반복하면 각
+$e \geq 1$에 대해 $a_{ij} \in \mathfrak m^e$인 표시가 존재한다. 이는
+피팅 아이디얼 $\text{Fit}_k(M)$이 $k < n$에 대해
+$\bigcap_{e \geq 1} \mathfrak m^e$에 포함됨을 함의한다. 가환대수 심화의
+정의 \ref{more-algebra-definition-fitting-ideal}을 보라. 크룰 교차 정리에
+의해 이 교집합은 영이다(가환대수의 보조정리
+\ref{algebra-lemma-intersect-powers-ideal-module-zero}). 따라서 가환대수
+심화의 보조정리
+\ref{more-algebra-lemma-fitting-ideal-finite-locally-free}에 의해 $M$은
+계수 $n$인 자유 가군이다.
+\end{proof}
+
+\noindent
+이 절에서는 원소 $f_1, \ldots, f_r$가 환 $A$에 속하고 $\sum a_if_i = 0$이면
+$a_i \in (f_1, \ldots, f_r)$를 함의할 때 {\it 독립}이라고 한다. 달리
+말하면 $I = (f_1, \ldots, f_r)$로 놓을 때 $I/I^2$은 $A/I$ 위에서
+$f_1, \ldots, f_r$를 기저로 하는 자유 가군이다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-1}
+\begin{reference}
+\cite{Lech-inequalities}와 \cite[보조정리 1, 299쪽]{MatCA}를 보라.
+\end{reference}
+$A$를 환이라 하자. $f_1, \ldots, f_{r - 1}, f_rg_r$가 독립이면
+$f_1, \ldots, f_r$도 독립이다.
+\end{lemma}
+
+\begin{proof}
+$\sum a_if_i = 0$이라 하자. 그러면 $\sum a_ig_rf_i = 0$이다. 따라서
+$a_r \in (f_1, \ldots, f_{r - 1}, f_rg_r)$이다.
+$a_r = \sum_{i < r} b_i f_i + b f_rg_r$로 쓰자. 그러면
+$0 = \sum_{i < r} (a_i + b_if_r)f_i + bf_r^2g_r$이다. 따라서
+$a_i + b_i f_r \in (f_1, \ldots, f_{r - 1}, f_rg_r)$이고, 이는 원하는
+$a_i \in (f_1, \ldots, f_r)$를 함의한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-2}
+\begin{reference}
+\cite{Lech-inequalities}와 \cite[보조정리 2, 300쪽]{MatCA}를 보라.
+\end{reference}
+$A$를 환이라 하자. $f_1, \ldots, f_{r - 1}, f_rg_r$가 독립이고 $A$-가군
+$A/(f_1, \ldots, f_{r - 1}, f_rg_r)$의 길이가 유한하면
+\begin{align*}
+& \text{length}_A(A/(f_1, \ldots, f_{r - 1}, f_rg_r)) \\
+& =
+\text{length}_A(A/(f_1, \ldots, f_{r - 1}, f_r)) +
+\text{length}_A(A/(f_1, \ldots, f_{r - 1}, g_r))
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+다음 완전 수열이 있다고 주장한다.
+$$
+0 \to
+A/(f_1, \ldots, f_{r - 1}, g_r) \xrightarrow{f_r}
+A/(f_1, \ldots, f_{r - 1}, f_rg_r) \to
+A/(f_1, \ldots, f_{r - 1}, f_r) \to 0
+$$
+실제로 $a f_r \in (f_1, \ldots, f_{r - 1}, f_rg_r)$이면
+$\sum_{i < r} a_i f_i + (a + bg_r)f_r = 0$이다. 여기서 어떤
+$b, a_i \in A$를 택할 수 있다. 따라서
+$\sum_{i < r} a_i g_r f_i + (a + bg_r)g_rf_r = 0$
+이고, 이는 $a + bg_r \in (f_1, \ldots, f_{r - 1}, f_rg_r)$를 함의한다.
+이는 $a$가 $A/(f_1, \ldots, f_{r - 1}, g_r)$에서 영으로 간다는 뜻이다.
+이로써 주장이 증명되었다. 끝으로 길이의 가법성을 사용한다(가환대수의
+보조정리 \ref{algebra-lemma-length-additive}).
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-3}
+\begin{reference}
+\cite{Lech-inequalities}와 \cite[보조정리 3, 300쪽]{MatCA}를 보라.
+\end{reference}
+$(A, \mathfrak m)$을 국소환이라 하자.
+$\mathfrak m = (x_1, \ldots, x_r)$이고 $x_1^{e_1}, \ldots, x_r^{e_r}$가
+독립이며 이것이 어떤 $e_i > 0$에 대해 성립하면
+$\text{length}_A(A/(x_1^{e_1}, \ldots, x_r^{e_r})) = e_1\ldots e_r$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{local-cohomology-lemma-1}, 보조정리 \ref{local-cohomology-lemma-2}, 그리고 귀납법을 사용한다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-flat-extension-independent}
+$\varphi : A \to B$를 평탄 환 사상이라 하자.
+$f_1, \ldots, f_r \in A$가 독립이면
+$\varphi(f_1), \ldots, \varphi(f_r) \in B$도 독립이다.
+\end{lemma}
+
+\begin{proof}
+$I = (f_1, \ldots, f_r)$ 및 $J = \varphi(I)B$로 놓자. 평탄성에 의해
+$I/I^2 \otimes_A B = J/J^2$이다. 따라서 $I/I^2$이 $A/I$ 위에서 자유이면
+$J/J^2$도 $B/J$ 위에서 자유이다.
+\end{proof}
+
+\begin{lemma}[쿤츠]
+\label{local-cohomology-lemma-frobenius-flat-regular}
+\begin{reference}
+\cite{Kunz-flat}
+\end{reference}
+$p$를 소수라 하고 $A$를 $p = 0$인 뇌터 환이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $A$는 정칙이다.
+\item $F : A \to A$, $a \mapsto a^p$는 평탄이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Spec(F) : \Spec(A) \to \Spec(A)$가 항등사상임을 관찰하라. 정칙성은
+국소환으로 정의되고 평탄성도 국소환에 관한 성질이다. 가환대수의 보조정리
+\ref{algebra-lemma-flat-localization}을 보라. 따라서 $A$가 극대 아이디얼
+$\mathfrak m$을 갖는 뇌터 국소환이라고 가정하겠다.
+
+\medskip\noindent
+$A$가 정칙이라고 가정하자. $x_1, \ldots, x_d$를 $A$의 매개변수계라 하자.
+$F$를 적용하면 $F(x_1), \ldots, F(x_d) = x_1^p, \ldots, x_d^p$를 얻으며,
+이는 $A$의 매개변수계이다. 따라서 $F$는 평탄이다. 가환대수의 보조정리
+\ref{algebra-lemma-CM-over-regular-flat}와
+\ref{algebra-lemma-regular-ring-CM}을 보라.
+
+\medskip\noindent
+역으로 $F$가 평탄이라고 가정하자. $\mathfrak m = (x_1, \ldots, x_r)$로
+쓰되 $r$이 최소가 되게 하자. 그러면 $x_1, \ldots, x_r$는
+위에서 정의한 의미로 독립이다. $F$가 평탄이므로
+$x_1^p, \ldots, x_r^p$도 독립이다. 보조정리
+\ref{local-cohomology-lemma-flat-extension-independent}를 보라. 따라서 보조정리
+\ref{local-cohomology-lemma-3}에 의해
+$\text{length}_A(A/(x_1^p, \ldots, x_r^p)) = p^r$이다.
+$\chi(n) = \text{length}_A(A/\mathfrak m^n)$로 놓자. 이는 차수가
+$\dim(A)$인 수치 다항식임을 상기하라. 가환대수의 명제
+\ref{algebra-proposition-dimension}을 보라. $n \gg 0$을 택하자. 다음을
+관찰하라.
+$$
+\mathfrak m^{pn + pr} \subset F(\mathfrak m^n)A \subset \mathfrak m^{pn}
+$$
+$x_1, \ldots, x_r$의 단항식들을 살펴보면 이를 알 수 있다. 또한
+$$
+A/F(\mathfrak m^n)A = A/\mathfrak m^n \otimes_{A, F} A
+$$
+$F$의 평탄성에 의해 이 가군의 길이는
+$\chi(n) \text{length}_A(A/F(\mathfrak m)A)$이다(가환대수의 보조정리
+\ref{algebra-lemma-pullback-module}). 위 결과에 의해 이는
+$p^r\chi(n)$과 같다. 따라서
+$$
+\chi(pn + pr) \geq p^r\chi(n) \geq \chi(pn)
+$$
+이다. 최고차항을 살펴보면 이는 $r = \dim(A)$를 함의한다. 즉 $A$는
+정칙이다.
+\end{proof}
+
+
+
+
+\section{특정 가군들의 구조}
+\label{local-cohomology-section-structure}
+
+\noindent
+정칙 국소환 위의 특정 유형 가군들의 구조에 관한 몇 가지 결과를 다룬다.
+이러한 결과들과 그 밖의 많은 내용을 \cite{Huneke-Sharp},
+\cite{Lyubeznik}, \cite{Lyubeznik2}에서 찾을 수 있다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-structure-torsion-D-module-regular}
+\begin{reference}
+\cite[정리 2.4]{Lyubeznik}의 특수한 경우이다.
+\end{reference}
+$k$를 표수가 $0$인 체라 하고 $d \geq 1$이라 하자.
+$A = k[[x_1, \ldots, x_d]]$를 극대 아이디얼이 $\mathfrak m$인 환이라 하자.
+$M$을 $\mathfrak m$-멱 영인 $A$-가군으로서 가법 작용소
+$D_1, \ldots, D_d$가 주어져 있고 라이프니츠 법칙
+$$
+D_i(fz) = \partial_i(f) z + f D_i(z)
+$$
+을 만족하는 것이라 하자. 이는
+$f \in A$와 $z \in M$에 대해 성립한다. 여기서 $\partial_i$는 $x_i$에
+관한 미분이다. 그러면 $M$은 단사 포락 $E$의 복사본들의 직합과 동형이며,
+이 포락은 $k$의 것이다.
+\end{lemma}
+
+\begin{proof}
+집합 $J$와 동형사상 $M[\mathfrak m] \to \bigoplus_{j \in J} k$를 택하자.
+$\bigoplus_{j \in J} E$는 단사이므로(쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-sum-injective-modules}), 이 동형사상을 $A$-가군
+준동형 $\varphi : M \to \bigoplus_{j \in J} E$로 확장할 수 있다.
+$\varphi$가 동형사상, 즉 전단사라고 주장한다.
+
+\medskip\noindent
+단사성을 보이자. $z \in M$이 영이 아니라고 하자. $M$이 $\mathfrak m$-멱
+영이므로 $f \in A$를 택하여 $fz \in M[\mathfrak m]$이고 $fz \not = 0$이
+되게 할 수 있다. 그러면 $\varphi(fz) = f\varphi(z)$는 영이 아니므로
+$\varphi(z)$도 영이 아니다.
+
+\medskip\noindent
+전사성을 보이자. $z \in M$라 하자. $x_1^n z = 0$이 어떤 $n \geq 0$에
+대해 성립한다. $z \in x_1M$임을 $n$에 대한 귀납법으로 증명하겠다.
+$n = 0$이면 $z = 0$이므로 결과는 참이다. $n > 0$이면 $D_1$을 적용하여
+$0 = n x_1^{n - 1} z + x_1^nD_1(z)$를 얻는다. 따라서
+$x_1^{n - 1}(nz + x_1D_1(z)) = 0$이다. 귀납법에 의해
+$nz + x_1D_1(z) \in x_1M$이다. $n$이 가역이므로 $z \in x_1M$이라는
+결론을 얻는다. 따라서 $M$은 $x_1$-가분이다. $\varphi$가 전사가 아니면
+$e \in \bigoplus_{j \in J} E$를 $M$에 속하지 않도록 택할 수 있다. 위와
+같이 논증하여 $\mathfrak m e \subset M$이라고 가정해도 되고, 특히
+$x_1 e \in M$이다. 어떤 원소 $z_1 \in M$이 존재하여
+$x_1 z_1 = x_1 e$이다. 따라서 $x_1(z_1 - e) = 0$이다. $e$를 $e - z_1$로
+바꾸면 $e$가 $x_1$에 의해 소멸된다고 가정해도 된다. 그러므로 다음이
+전사임을 증명하면 충분하다.
+$$
+\varphi[x_1] :
+M[x_1]
+\longrightarrow
+\left(\bigoplus\nolimits_{j \in J} E\right)[x_1] =
+\bigoplus\nolimits_{j \in J} E[x_1]
+$$
+$d = 1$이면 이는 $\varphi$의 구성에 의해 참이다. $d > 1$이면
+$E[x_1]$이 $k[[x_2, \ldots, x_d]]$의 잉여체의 단사 포락임을 관찰하라.
+쌍대화 복합체의 보조정리 \ref{dualizing-lemma-quotient}을 보라.
+$M[x_1]$은 $k[[x_2, \ldots, x_d]]$ 위의 가군으로서
+$\mathfrak m/(x_1)$-멱 영이고, 위에 표시한 라이프니츠 법칙을 만족하는
+작용소 $D_2, \ldots, D_d$가 주어져 있음도 관찰하라. 따라서 $d$에 대한
+귀납법으로 $\varphi[x_1]$가 원하는 대로 전사라는 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-structure-torsion-Frobenius-regular}
+\begin{reference}
+약간의 작업을 거치면 \cite[따름정리 3.6]{Huneke-Sharp}에서 따른다.
+또한 \cite[정리 1.4]{Lyubeznik2}에서 직접 따른다.
+\end{reference}
+$p$를 소수라 하고 $(A, \mathfrak m, k)$를 $p = 0$인 정칙 국소환이라 하자.
+$F : A \to A$, $a \mapsto a^p$를 프로베니우스 자기준동형이라 하자.
+$M$을 $\mathfrak m$-멱 영인 가군으로서 $M \otimes_{A, F} A \cong M$을
+만족한다고 하자. 그러면 $M$은 단사 포락 $E$의 복사본들의 직합과
+동형이며, 이 포락은 $k$의 것이다.
+\end{lemma}
+
+\begin{proof}
+집합 $J$와 $A$-가군 준동형
+$\varphi : M \to \bigoplus_{j \in J} E$를 택하여 $M[\mathfrak m]$을
+$(\bigoplus_{j \in J} E)[\mathfrak m] = \bigoplus_{j \in J} k$ 위로
+동형적으로 보내게 하자. $\varphi$가 동형사상, 즉 전단사라고 주장한다.
+
+\medskip\noindent
+단사성을 보이자. $z \in M$이 영이 아니라고 하자. $M$이 $\mathfrak m$-멱
+영이므로 $f \in A$를 택하여 $fz \in M[\mathfrak m]$이고 $fz \not = 0$이
+되게 할 수 있다. 그러면 $\varphi(fz) = f\varphi(z)$는 영이 아니므로
+$\varphi(z)$도 영이 아니다.
+
+\medskip\noindent
+전사성을 보이자. $F$가 평탄임을 상기하라. 보조정리
+\ref{local-cohomology-lemma-frobenius-flat-regular}을 보라. $x_1, \ldots, x_d$를
+$\mathfrak m$의 극소 생성원계라 하자. 다음과 같이 나타내자.
+$$
+M_n = M[x_1^{p^n}, \ldots, x_d^{p^n}]
+$$
+이는 $M$의 부분가군으로서 $x_1^{p^n}, \ldots, x_d^{p^n}$에 의해
+소멸되는 원소들로 이루어진다. 따라서 $M_0 = M[\mathfrak m]$은 $k$ 위의
+벡터 공간이다. 또한 $M = \bigcup M_n$이고, 이는 $M$이 $\mathfrak m$-멱
+영이라는 가정에 따른다. $F^n$이 평탄이고 $F^n(x_i) = x_i^{p^n}$이므로
+$$
+M_n \cong (M \otimes_{A, F^n} A)[x_1^{p^n}, \ldots, x_d^{p^n}] =
+M[x_1, \ldots, x_d] \otimes_{A, F^n} A =
+M_0 \otimes_k A/(x_1^{p^n}, \ldots, x_d^{p^n})
+$$
+이다. 따라서 $M_n$은 $A/(x_1^{p^n}, \ldots, x_d^{p^n})$ 위에서 자유이다.
+계산에 따르면 $A/(x_1^{p^n}, \ldots, x_d^{p^n})$의 원소 중
+$x_1^{p^n - 1}$에 의해 소멸되는 것은 모두 $x_1$로 나누어진다. 예를 들어
+가환대수의 보조정리
+\ref{algebra-lemma-regular-complete-containing-coefficient-field}에 따른
+$A/(x_1^{p^n}, \ldots, x_d^{p^n}) \cong
+k[x_1, \ldots, x_d]/(x_1^{p^n}, \ldots, x_d^{p^n})$를 사용할 수 있다.
+따라서 $M_n$의 모든 원소에도 같은 명제가 성립한다. $M$의 모든 원소는
+$M_n$에 속하며, 이는 모든 $n \gg 0$에 대해 그러하다. 또한 $M$의 모든 원소는 $x_1$의 어떤
+멱에 의해 소멸되므로 $M$이 $x_1$-가분이라는 결론을 얻는다.
+
+\medskip\noindent
+$x = x_1$로 놓자. 위에서 $M$이 $x$-가분임을 보았다. $\varphi$가 전사가
+아니면 $e \in \bigoplus_{j \in J} E$를 $M$에 속하지 않도록 택할 수 있다.
+위와 같이 논증하여 $\mathfrak m e \subset M$이라고 가정해도 되고, 특히
+$x e \in M$이다. 어떤 원소 $z_1 \in M$이 존재하여 $x z_1 = x e$이다.
+따라서 $x(z_1 - e) = 0$이다. $e$를 $e - z_1$로 바꾸면 $e$가 $x$에 의해
+소멸된다고 가정해도 된다. 그러므로 다음이 전사임을 증명하면 충분하다.
+$$
+\varphi[x] :
+M[x]
+\longrightarrow
+\left(\bigoplus\nolimits_{j \in J} E\right)[x] =
+\bigoplus\nolimits_{j \in J} E[x]
+$$
+$d = 1$이면 이는 $\varphi$의 구성에 의해 참이다. $d > 1$이면
+$E[x]$가 정칙환 $A/xA$의 잉여체의 단사 포락임을 관찰하라. 쌍대화
+복합체의 보조정리 \ref{dualizing-lemma-quotient}을 보라. $M[x]$는
+$A/xA$ 위의 가군으로서 $\mathfrak m/(x)$-멱 영이고 다음이 성립함도
+관찰하라.
+\begin{align*}
+M[x] \otimes_{A/xA, F} A/xA
+& = M[x] \otimes_{A, F} A \otimes_A A/xA \\
+& = (M \otimes_{A, F} A)[x^p] \otimes_A A/xA \\
+& \cong M[x^p] \otimes_A A/xA
+\end{align*}
+앞에서처럼 $F$의 평탄성을 사용하여 논증하라. 사상
+$M[x^p] \otimes_A A/xA \to M[x]$, $z \otimes 1 \mapsto x^{p - 1}z$가
+동형사상이라고 주장한다. 위에서 정의한 각 가군 $M_n$, $n > 0$에 대해
+이를 증명하면 알 수 있는데, 그 경우에는
+$A/(x_1^{p^n}, \ldots, x_d^{p^n})$와 $x = x_1$에 대한 같은 결과에서
+따른다. 따라서 $\dim(A)$에 대한 귀납법으로 $\varphi[x]$가 원하는 대로
+전사라는 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+\section{국소 코호몰로지의 추가 구조}
+\label{local-cohomology-section-additional}
+
+\noindent
+다음은 한 가지 예시 결과이다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-derivation}
+$A$를 환이라 하고 $I \subset A$를 유한 생성 아이디얼이라 하자.
+$Z = V(I)$로 놓자. 각 미분 $\theta : A \to A$에 대해 표준적인 가법 작용소 $D$가
+국소 코호몰로지 가군 $H^i_Z(A)$ 위에 존재하며, 이는
+$\theta$에 관한 라이프니츠 법칙을 만족한다.
+\end{lemma}
+
+\begin{proof}
+$f_1, \ldots, f_r$를 $I$를 생성하는 원소들이라 하자. $R\Gamma_Z(A)$는
+다음 복합체로 계산됨을 상기하라.
+$$
+A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}}
+\to \ldots \to A_{f_1\ldots f_r}
+$$
+쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-adjoint}을 보라. $\theta$는 $A$의
+임의의 국소화 위에 가법 작용소로 유일하게 연장되며 $\theta$에 관한
+라이프니츠 법칙을 만족하므로 보조정리는 자명하다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-frobenius}
+$p$를 소수라 하고 $A$를 $p = 0$인 환이라 하자.
+$F : A \to A$, $a \mapsto a^p$를 프로베니우스 자기준동형이라 하자.
+$I \subset A$를 유한 생성 아이디얼이라 하고 $Z = V(I)$로 놓자. 동형사상
+$R\Gamma_Z(A) \otimes_{A, F}^\mathbf{L} A \cong R\Gamma_Z(A)$.
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+쌍대화 복합체의 보조정리 \ref{dualizing-lemma-torsion-change-rings}과,
+$Z = V(f_1^p, \ldots, f_r^p)$이며 이는
+$I = (f_1, \ldots, f_r)$일 때 성립한다는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-etale-derivation}
+$A$를 환이라 하자. $V \to \Spec(A)$가 준콤팩트이고 준분리이며 에탈이라고
+하자. 각 미분 $\theta : A \to A$에 대해 표준적인 가법 작용소 $D$가
+$H^i(V, \mathcal{O}_V)$ 위에 존재하며, 이는 $\theta$에 관한 라이프니츠
+법칙을 만족한다.
+\end{lemma}
+
+\begin{proof}
+$V$가 분리이면 아핀 열린 덮개
+$V = \bigcup_{j = 1, \ldots m} V_j$를 사용하여 논증할 수 있다. 실제로
+$V$가 분리이므로 $V_{j_0 \ldots j_p} = \Spec(B_{j_0 \ldots j_p})$로 쓸 수
+있다. 스킴의 보조정리 \ref{schemes-lemma-characterize-separated}를 보라.
+그러면 $A$-가군 $H^i(V, \mathcal{O}_V)$가 다음 체흐 복합체의 $i$번째
+코호몰로지 군임을 알 수 있다.
+$$
+\prod B_{j_0} \to
+\prod B_{j_0j_1} \to
+\prod B_{j_0j_1j_2} \to \ldots
+$$
+스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-cech-cohomology-quasi-coherent}을 보라. 각
+$B = B_{j_0 \ldots j_p}$는 에탈 $A$-대수이다. 따라서
+$\Omega_B = \Omega_A \otimes_A B$이고, $\theta$가 미분
+$\theta_B : B \to B$로 유일하게 연장된다는 결론을 얻는다. 이 사상들은
+체흐 복합체의 자기준동형을 정의하고 코호몰로지 군들 위의 원하는
+작용소들을 정의한다.
+
+\medskip\noindent
+일반적인 경우에는 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-hypercoverings}의 증명 첫 부분에서와 정확히 같이,
+$V$의 아핀 열린집합들에 의한 초덮개를 사용한다. 세부사항은 생략한다.
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-higher-order-operators}
+보조정리 \ref{local-cohomology-lemma-derivation}와 보조정리 \ref{local-cohomology-lemma-etale-derivation}를
+가환대수의 보조정리 \ref{algebra-lemma-formally-etale-principal-parts}와
+주해 \ref{algebra-remark-formally-etale-differential-operators}를 사용하여
+고차 미분 작용소까지 포함하도록 강화할 수 있다. 이것이 필요해지면 여기에
+정확한 보조정리를 명시하고 증명하겠다.
+\end{remark}
+
+\begin{lemma}
+\label{local-cohomology-lemma-etale-frobenius}
+$p$를 소수라 하고 $A$를 $p = 0$인 환이라 하자.
+$F : A \to A$, $a \mapsto a^p$를 프로베니우스 자기준동형이라 하자.
+$V \to \Spec(A)$가 준콤팩트이고 준분리이며 에탈이면 동형사상
+$R\Gamma(V, \mathcal{O}_V) \otimes_{A, F}^\mathbf{L} A \cong
+R\Gamma(V, \mathcal{O}_V)$.
+이 존재한다.
+\end{lemma}
+
+\begin{proof}
+상대 프로베니우스 사상
+$$
+V \longrightarrow V \times_{\Spec(A), \Spec(F)} \Spec(A)
+$$
+이 $V$의 $A$ 위 상대 사상으로서 동형사상임을 관찰하라. 에탈 사상의
+보조정리 \ref{etale-lemma-relative-frobenius-etale}을 보라. 따라서
+보조정리는 코호몰로지와 기저변환에서 따른다. 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-compare-base-change}를 보라. $V$는 $A$ 위에서
+에탈이므로 $A$ 위에서 평탄임을 관찰하라.
+\end{proof}
+
+
+
+
+
+\section{약간의 균일성, I}
+\label{local-cohomology-section-uniform-vanishing}
+
+\noindent
+이 절의 주된 과제는 보조정리
+\ref{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e}를 정식화하고 증명하는 것이다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-map-tor-1-zero}
+$R$을 환이라 하자. $M \to M'$를 $R$-가군의 사상이라 하고
+$M$은 유한 표시라고 하자. 사상
+$\text{Tor}_1^R(M, N) \to \text{Tor}_1^R(M', N)$이 모든 $R$-가군
+$N$에 대해 영사상이라고 하자.
+그러면 $M \to M'$는 자유 $R$-가군을 통하여 인수분해된다.
+\end{lemma}
+
+\begin{proof}
+다음과 같은 짧은 완전열의 사상을 택할 수 있다.
+$$
+\xymatrix{
+0 \ar[r] &
+K \ar[r] \ar[d] &
+R^{\oplus r} \ar[r] \ar[d] &
+M \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+K' \ar[r] &
+\bigoplus_{i \in I} R \ar[r] &
+M' \ar[r] &
+0
+}
+$$
+여기서 오른쪽 수직 화살표는 주어진 사상이다. 이 사상은 다음 짧은 완전열을
+통하여 인수분해할 수 있다.
+\begin{equation}
+\label{local-cohomology-equation-pushout}
+0 \to K' \to E \to M \to 0
+\end{equation}
+이는 첫 번째 짧은 완전열을 $K \to K'$에 따라 밀어내어 얻은 것이다.
+도표 추적을 하면 보조정리의 가정으로부터 (\ref{local-cohomology-equation-pushout})이 유도하는
+경계사상 $\text{Tor}_1^R(M, N) \to K' \otimes_R N$이 영사상임을 알 수 있다.
+다시 말해 완전열 (\ref{local-cohomology-equation-pushout})은 보편적으로 완전하다. 따라서
+가환대수의 보조정리 \ref{algebra-lemma-universally-exact-split}에 의해
+(\ref{local-cohomology-equation-pushout})은 분할된다(여기서 $M$이 유한 표시라는 사실을
+사용한다). 따라서 사상 $M \to M'$는 $\bigoplus_{i \in I} R$을 통하여
+인수분해되며, 이로써 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e}
+$R$을 환이라 하자. $\alpha : M \to M'$를 $R$-가군의 사상이라 하자.
+$P_\bullet \to M$과 $P'_\bullet \to M'$를 사영 $R$-가군들로 이루어진
+분해라 하자. $e \geq 0$을 정수라 하자. 다음 조건들을 생각하자.
+\begin{enumerate}
+\item 복합체의 사상 $a_\bullet : P_\bullet \to P'_\bullet$을 찾아
+코호몰로지 위에서 $\alpha$를 유도하게 하고, $a_i = 0$이 $i > e$일 때
+성립하게 할 수 있다.
+\item 복합체의 사상 $a_\bullet : P_\bullet \to P'_\bullet$을 찾아
+코호몰로지 위에서 $\alpha$를 유도하게 하고 $a_{e + 1} = 0$이 되게 할 수 있다.
+\item 사상 $\Ext^i_R(M', N) \to \Ext^i_R(M, N)$은 모든 $R$-가군
+$N$과 $i > e$에 대해 영사상이다.
+\item 사상 $\Ext^{e + 1}_R(M', N) \to \Ext^{e + 1}_R(M, N)$은 모든
+$R$-가군 $N$에 대해 영사상이다.
+\item $N = \Im(P'_{e + 1} \to P'_e)$로 놓고 표준 원소(증명을 보라)를
+$\xi \in \Ext^{e + 1}_R(M', N)$로 나타내자. 그러면 $\xi$는
+$\Ext^{e + 1}_R(M, N)$에서 영으로 보내진다.
+\item 사상 $\text{Tor}_i^R(M, N) \to \text{Tor}_i^R(M', N)$은 모든
+$R$-가군 $N$과 $i > e$에 대해 영사상이다.
+\item 사상 $\text{Tor}_{e + 1}^R(M, N) \to \text{Tor}_{e + 1}^R(M', N)$은
+모든 $R$-가군 $N$에 대해 영사상이다.
+\end{enumerate}
+그러면 항상 다음 함의들이 성립한다.
+$$
+(1) \Leftrightarrow (2) \Leftrightarrow (3) \Leftrightarrow (4)
+\Leftrightarrow (5) \Rightarrow (6) \Leftrightarrow (7)
+$$
+$M$이 $(-e - 1)$-의사준연접이면(예를 들어 $R$이 뇌터 환이고
+$M$이 유한 $R$-가군이면), 모든 조건은 서로 동치이다.
+\end{lemma}
+
+\begin{proof}
+(2)가 (1)을 함의함은 자명하다. $a_\bullet$이 (1)에서와 같다면,
+복합체의 사상 $a'_\bullet : P_\bullet \to P'_\bullet$을 생각하되,
+$a'_i = a_i$는 $i \leq e + 1$일 때, $a'_i = 0$은 $i \geq e + 1$일 때로
+정한다. 그러면 (2)에서와 같은 복합체의 사상을 얻는다. 따라서 (1)과 (2)는 동치이다.
+
+\medskip\noindent
+분해를 이용한 $\Ext$와 $\text{Tor}$ 함자의 구성(가환대수의 절
+\ref{algebra-section-ext}와 절 \ref{algebra-section-tor})으로부터
+(1)과 (2)가 나머지 조건을 모두 함의함을 알 수 있다.
+
+\medskip\noindent
+(3)이 (4)를 함의하고 (4)가 (5)를 함의함은 자명하다. $N$을 (5)에서와
+같이 잡자. 표준 사상 $\tilde \xi : P'_{e + 1} \to N$을
+$P'_{e + 2} \to P'_{e + 1}$과 미리 합성하면 영사상이 된다. 따라서
+다음 안에서 동치류 $\xi$를 생각할 수 있는데, 이는 $\tilde \xi$의 동치류이다.
+$$
+\Ext^{e + 1}_R(M', N) =
+\frac{\Ker(\Hom(P'_{e + 1}, N \to \Hom(P'_{e + 2}, N)}{
+\Im(\Hom(P'_e, N \to \Hom(P'_{e + 1}, N)}
+$$
+복합체의 사상 $a_\bullet : P_\bullet \to P'_\bullet$을 택하여
+$\alpha$를 올리자. 유도 범주의 보조정리
+\ref{derived-lemma-morphisms-lift-projective}를 보라.
+$\xi$가 $\Ext^{e + 1}_R(M', N)$에서 영으로 보내진다면,
+사상 $\varphi : P_e \to N$을 찾아
+$\tilde \xi  \circ a_{e + 1} = \varphi \circ d$를 만족하게 할 수 있다.
+따라서 다음 복합체의 사상을 얻는다.
+$$
+\xymatrix{
+\ldots \ar[r] &
+P_{e + 1} \ar[r] \ar[d]^0 &
+P_e \ar[r] \ar[d]^{a_e - \varphi} &
+P_{e - 1} \ar[r] \ar[d]^{a_{e - 1}} &
+\ldots \\
+\ldots \ar[r] &
+P'_{e + 1} \ar[r] &
+P'_e \ar[r] &
+P'_{e - 1} \ar[r] &
+\ldots
+}
+$$
+이는 (2)에서와 같다. 따라서 (1)--(5)는 서로 동치이다.
+
+\medskip\noindent
+(6)과 (7)의 동치는 차원 이동에서 따른다. 자세한 내용은 생략한다.
+
+\medskip\noindent
+$M$이 $(-e - 1)$-의사준연접이라고 가정하자. (보조정리의 괄호 안 명제는
+더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-Noetherian-pseudo-coherent}에서 따른다.)
+(7)이 (4)를 함의함을 보이면 증명이 끝난다. $e$에 대한 귀납법을 사용하겠다.
+기초 단계는 $e = 0$인 경우이다. 그러면 $M$은 유한 표시이다. 이는
+더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-n-pseudo-module}에서 따른다. 또한
+보조정리 \ref{local-cohomology-lemma-map-tor-1-zero}로부터 $M \to M'$가 자유 가군을 통하여
+인수분해됨을 알 수 있다. 물론 $M \to M'$가 자유 가군을 통하여
+인수분해되면 $\Ext^i_R(M', N) \to \Ext^i_R(M, N)$은 모든 $i > 0$에
+대해 원하는 대로 영사상이다. 이제 $e > 0$이라고 가정하자. 다음 짧은
+완전열의 사상을 택할 수 있다.
+$$
+\xymatrix{
+0 \ar[r] &
+K \ar[r] \ar[d] &
+R^{\oplus r} \ar[r] \ar[d] &
+M \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+K' \ar[r] &
+\bigoplus_{i \in I} R \ar[r] &
+M' \ar[r] &
+0
+}
+$$
+여기서 오른쪽 수직 화살표는 주어진 사상이다. 다음을 얻는다.
+$\text{Tor}_{i + 1}^R(M, N) = \text{Tor}^R_i(K, N)$
+이고 $\Ext^{i + 1}_R(M, N) = \Ext^i_R(K, N)$이며, 이는 모든
+$i \geq 1$과 모든 $R$-가군 $N$에 대해 성립한다. $M', K'$에 대해서도
+마찬가지이다. 따라서 $\text{Tor}_e^R(K, N) \to \text{Tor}_e^R(K', N)$은
+모든 $R$-가군 $N$에 대해 영사상이다. 더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-cone-pseudo-coherent}에 의해 $K$는
+$(-e)$-의사준연접이다. 귀납 가정에 의해
+$\Ext^e(K', N) \to \Ext^e(K, N)$은 모든 $R$-가군 $N$에 대해 영사상이며,
+이는 원하는 결론을 준다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-sequence-Koszul}
+$I$를 뇌터 환 $A$의 아이디얼이라 하자. 모든 $n \geq 1$에 대해
+$m > n$인 정수가 존재하여 사상 $A/I^m \to A/I^n$이 보조정리
+\ref{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e}의 동치 조건들을
+$e = \text{cd}(A, I)$에 대하여 만족한다.
+\end{lemma}
+
+\begin{proof}
+$\xi \in \Ext^{e + 1}_A(A/I^n, N)$를 보조정리
+\ref{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e}의 (5)에서 구성한 원소라 하자.
+$e = \text{cd}(A, I)$이므로 다음이 성립한다.
+$0 = H^{e + 1}_Z(N) = H^{e + 1}_I(N) = \colim \Ext^{e + 1}(A/I^m, N)$
+이는 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-local-cohomology-noetherian}와
+\ref{dualizing-lemma-local-cohomology-ext}에서 따른다. 따라서 $m \geq n$으로
+택하여 $\xi$가 $\Ext^{e + 1}_A(A/I^m, N)$에서 영으로 보내지게
+할 수 있으며, 이것이 원하는 바이다.
+\end{proof}
+
+
+
+
+
+
+\section{약간의 균일성, II}
+\label{local-cohomology-section-uniform-vanishing-bis}
+
+\noindent
+$I$를 뇌터 환 $A$의 아이디얼이라 하자. $M$을 유한 $A$-가군이라 하자.
+$i > 0$이라 하자. 더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-tor-strictly-pro-zero}
+에 의해 다음을 만족하는 $c = c(A, I, M, i)$가 존재한다.
+$\text{Tor}^A_i(M, A/I^n) \to \text{Tor}^A_i(M, A/I^{n - c})$
+이 사상은 모든 $n \geq c$에 대해 영사상이다. 이 절에서는 때때로 상수
+$c$를 택하여 모든 $A$-가군 $M$에 동시에(그리고 지표 $i$의 일정 범위에
+대해) 통하게 할 수 있음을 보이는 몇 가지 결과를 논한다. 이 내용은
+\cite{Huneke-uniform}와 \cite{AHS}에서 논의한 균일 아르틴--리스와 관련된다.
+
+\medskip\noindent
+주해 \ref{local-cohomology-remark-strict-pro-isomorphism}에서는 이를 적용하여 유도 완비화와
+관련된 여러 프로계가 엄밀한 프로동형인지(또는 아닌지)를 보일 것이다.
+
+\medskip\noindent
+다음 보조정리는 훨씬 더 강화할 수 있다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-maps-zero-fixed-torsion}
+$I$를 뇌터 환 $A$의 아이디얼이라 하자. 모든 $m \geq 0$과 $i > 0$에 대해
+$c = c(A, I, m, i) \geq 0$인 수가 존재하여, 모든 $A$-가군 $M$이
+$I^m$에 의해 소멸될 때 다음 사상이
+$$
+\text{Tor}^A_i(M, A/I^n) \to \text{Tor}^A_i(M, A/I^{n - c})
+$$
+모든 $n \geq c$에 대해 영사상이 된다.
+\end{lemma}
+
+\begin{proof}
+$i$에 대한 귀납법을 사용한다. 기초 단계는 $i = 1$인 경우이다. 짧은 완전열
+$0 \to I^n \to A \to A/I^n \to 0$은 단사 사상
+$\text{Tor}_1^A(M, A/I^n) \subset I^n \otimes_A M$을 결정한다. 가환대수의
+주해 \ref{algebra-remark-Tor-ring-mod-ideal}를 보라. $M$이 $I^m$에 의해
+소멸되므로 사상 $I^n \otimes_A M \to I^{n - m} \otimes_A M$은
+$n \geq m$일 때 영사상이다. 따라서 결과는 $c = m$으로 성립한다.
+
+\medskip\noindent
+귀납 단계로 넘어가자. $i > 1$이라 하고 $c$가 $i - 1$에 대해 통한다고
+가정하자. 더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-tor-strictly-pro-zero}를 $M = A/I^m$에 적용하여
+다음을 만족하는 $c' \geq 0$을 택할 수 있다.
+$\text{Tor}_i(A/I^m, A/I^n) \to \text{Tor}_i(A/I^m, A/I^{n - c'})$
+이 사상은 $n \geq c'$일 때 영사상이다. $M$이 $I^m$에 의해 소멸된다고
+하자. 다음 짧은 완전열을 택하자.
+$$
+0 \to S \to \bigoplus\nolimits_{i \in I} A/I^m \to M \to 0
+$$
+이에 대응하는 Tor의 긴 완전열은 다음 완전열을 준다.
+$$
+\text{Tor}_i^A(\bigoplus\nolimits_{i \in I} A/I^m, A/I^n) \to
+\text{Tor}_i^A(M, A/I^n) \to
+\text{Tor}_{i - 1}^A(S, A/I^n)
+$$
+이는 모든 정수 $n \geq 0$에 대해 성립한다. $n \geq c + c'$이면 사상
+$\text{Tor}_{i - 1}^A(S, A/I^n) \to \text{Tor}_{i - 1}^A(S, A/I^{n - c})$
+은 영사상이고, 사상 $\text{Tor}_i^A(A/I^m, A/I^{n - c}) \to 
+\text{Tor}_i^A(A/I^m, A/I^{n - c - c'})$도 영사상이다. 이를 짧은
+완전열들과 결합하면 결과가 $i$에 대해 상수 $c + c'$으로 성립함을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilates-affine}
+$I = (a_1, \ldots, a_t)$를 뇌터 환 $A$의 아이디얼이라 하자.
+$a = a_1$로 놓고 $B = A[\frac{I}{a}]$를 아핀 블로업 대수라 하자.
+어떤 $c > 0$이 존재하여 $\text{Tor}_i^A(B, M)$가 $I^c$에 의해
+모든 $A$-가군 $M$과 $i \geq t$에 대해 소멸된다.
+\end{lemma}
+
+\begin{proof}
+다음을 상기하라. $B$는
+$A[x_2, \ldots, x_t]/(a_1x_2 - a_2, \ldots, a_1x_t - a_t)$
+를 그 $a_1$-꼬임으로 나눈 몫이다. 가환대수의 보조정리
+\ref{algebra-lemma-affine-blowup-quotient-description}를 보라. 다음과 같이 놓자.
+$$
+B_\bullet = \text{코쥘 복합체: }a_1x_2 - a_2, \ldots, a_1x_t - a_t
+\text{, 바탕환 }A[x_2, \ldots, x_t]
+$$
+이를 차수 $(t - 1), \ldots, 0$에 놓인 사슬 복합체로 본다. 복합체
+$B_\bullet[1/a_1]$은 $x_2 - a_2/a_1, \ldots, x_t - a_t/a_1$에 대한 코쥘
+복합체와 동형이며, 이 원소들은 $A[1/a_1][x_2, \ldots, x_t]$에서 정칙열을
+이룬다. 정칙열은 코쥘 정칙이므로 확대 사상
+$$
+\epsilon : B_\bullet \longrightarrow B
+$$
+은 $a_1$을 가역화한 뒤 준동형사상이 된다. $C_\bullet$을 $\epsilon$의 원뿔이라 하자. 그
+호몰로지 가군들은 유한 $A[x_2, \ldots, x_n]$-가군이고 $C_\bullet$은
+유계이므로, 어떤 $c \geq 0$이 존재하여 $a_1^c$가 이들을 모두 소멸시킨다.
+유도 범주의 보조정리 \ref{derived-lemma-trick-vanishing-composition}에 의해,
+필요하다면 $c$를 더 큰 정수로 바꾼 뒤 $a_1^c$가 $C_\bullet$ 위에서
+$D(A)$ 안의 영사상이 되도록 할 수 있다. 이제 다음 구별 삼각형을
+살펴보면 증명이 끝난다.
+$$
+B_\bullet \otimes_A^\mathbf{L} M \to
+B \otimes_A^\mathbf{L} M \to
+C_\bullet \otimes_A^\mathbf{L} M
+$$
+실제로 첫째 항은 $B_\bullet \otimes_A M$으로 표현되며 호몰로지 차수
+$(t - 1), \ldots, 0$에 놓인다. 이는 코쥘 복합체 $B_\bullet$의 각 항이
+자유(따라서 평탄) $A$-가군이기 때문이다. 따라서
+$\text{Tor}_i^A(B, M) = H_i(C_\bullet \otimes_A^\mathbf{L} M)$
+이고, $i > t - 1$일 때 이것은 $a_1^c$에 의해 소멸된다.
+$a_1^cB = I^cB$이고 이 Tor 가군이 $B$ 위의 가군이므로 결론을 얻는다.
+\end{proof}
+
+\noindent
+이 절의 나머지 논의에서는 뇌터 환 $A$와 아이디얼 $I \subset A$를 고정한다.
+다음과 같이 나타내자.
+$$
+p : X \to \Spec(A)
+$$
+이는 $\Spec(A)$를 아이디얼 $I$에 따라 블로업한 것이다. 다시 말해 $X$는
+$\text{Proj}$로 주어지며, 여기서 사용하는 리스 대수는
+$\bigoplus_{n \geq 0} I^n$이다.
+스킴의 코호몰로지의 보조정리 \ref{coherent-lemma-coherent-on-proj}와
+\ref{coherent-lemma-recover-tail-graded-module}
+에 의해 정수 $q(A, I) \geq 0$을 택하여 모든 $q \geq q(A, I)$에 대해
+$H^i(X, \mathcal{O}_X(q)) = 0$이 $i > 0$일 때 성립하고
+$H^0(X, \mathcal{O}_X(q)) = I^q$가 성립하게 할 수 있다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-compute-tor-Iq}
+위 상황에서 $q \geq q(A, I)$이고 임의의 $A$-가군 $M$에 대해 다음이 성립한다.
+$$
+R\Gamma(X, Lp^*\widetilde{M}(q)) \cong M \otimes_A^\mathbf{L} I^q
+$$
+이는 $D(A)$ 안에서의 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+자유 분해 $F_\bullet \to M$을 택하자. 그러면 $\widetilde{F}_\bullet$은
+$\widetilde{M}$의 평탄 분해이다. 따라서 $Lp^*\widetilde{M}$은 복합체
+$p^*\widetilde{F}_\bullet$로 주어진다. 그러므로 $Lp^*\widetilde{M}(q)$은
+복합체 $p^*\widetilde{F}_\bullet(q)$로 주어진다. $p^*\widetilde{F}_i(q)$는
+$\Gamma(X, -)$에 관하여 오른쪽 비순환이며, 이는 $q \geq q(A, I)$의
+선택에서 따른다. 또한 $\Gamma(X, p^*\widetilde{F}_i(q)) = I^qF_i$이고,
+이 역시 $q \geq q(A, I)$의 선택에서 따른다. 그러므로
+$R\Gamma(X, Lp^*\widetilde{M}(q))$는 각 항이 $I^qF_i$인 복합체로 주어진다.
+이는 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-acyclicity-lemma-global}에서 따른다.
+정의에 따라 복합체 $I^qF_\bullet$이 $M \otimes_A^\mathbf{L} I^q$를
+계산하므로 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilates}
+위 상황에서 $t$를 $I$의 생성원 수의 상계라 하자. 어떤 정수
+$c = c(A, I) \geq 0$이 존재하여, 임의의 $A$-가군 $M$에 대해 코호몰로지 층
+$H^j(Lp^*\widetilde{M})$은 $I^c$에 의해 소멸되며, 이는 $j \leq -t$일 때
+성립한다.
+\end{lemma}
+
+\begin{proof}
+$I = (a_1, \ldots, a_t)$라고 하자. 문제는 $X$ 위에서 아핀 국소적이다.
+$1 \leq i \leq t$에 대해 $B_i = A[\frac{I}{a_i}]$를 아핀 블로업 대수라 하자.
+그러면 $X$는 환 $B_i$들의 스펙트럼들로 이루어진 아핀 열린 덮개를 갖는다.
+인자의 보조정리 \ref{divisors-lemma-blowing-up-affine}를 보라.
+스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-quasi-coherence-pullback}
+에 주어진 유도 역상의 묘사에 의해, 각 $i$에 대해 어떤 $c \geq 0$이 존재하여
+다음을 만족함을 보이면 충분하다.
+$$
+\text{Tor}_j^A(B_i, M)
+$$
+이것은 $I^c$에 의해 $j \geq t$일 때 소멸된다. 이는 보조정리
+\ref{local-cohomology-lemma-annihilates-affine}이다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilates-tors}
+위 상황에서 $t$를 $I$의 생성원 수의 상계라 하자. 어떤 정수
+$c = c(A, I) \geq 0$이 존재하여, 임의의 $A$-가군 $M$에 대해 Tor 가군
+$\text{Tor}_i^A(M, A/I^q)$은 $I^c$에 의해 $i > t$이고 모든
+$q \geq 0$일 때 소멸된다.
+\end{lemma}
+
+\begin{proof}
+$q(A, I)$를 위와 같이 잡자. $q \geq q(A, I)$에 대해 다음이 성립한다.
+$$
+R\Gamma(X, Lp^*\widetilde{M}(q)) = M \otimes_A^\mathbf{L} I^q
+$$
+이는 보조정리 \ref{local-cohomology-lemma-compute-tor-Iq}에서 따른다. 유계이고 수렴하는 스펙트럼 열
+$$
+H^a(X, H^b(Lp^*\widetilde{M}(q))) \Rightarrow
+\text{Tor}_{-a - b}^A(M, I^q)
+$$
+을 갖는다. 이는 스킴의 유도 범주의 보조정리
+\ref{perfect-lemma-spectral-sequence}에서 따른다. $d$를 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-vanishing-nr-affines-quasi-separated}
+에서와 같은 정수라 하자(실제로 $d = t$로 택할 수 있다. 스킴의 코호몰로지의
+보조정리 \ref{coherent-lemma-vanishing-nr-affines}를 보라). 그러면
+$H^{-i}(X, Lp^*\widetilde{M}(q)) = \text{Tor}_i^A(M, I^q)$는 길이가 많아야
+$d$인 유한 여과를 가지며, 그 등급몫들은 다음 가군들의 부분몫이다.
+$$
+H^a(X, H^{- i - a}(Lp^*\widetilde{M})(q)),\quad
+a = 0, 1, \ldots, d - 1
+$$
+$i \geq t$이면 이 가군들은 모두 $I^c$에 의해 소멸된다. 여기서
+$c = c(A, I)$는 보조정리 \ref{local-cohomology-lemma-annihilates}에서와 같다. 실제로 그
+보조정리에 의해 코호몰로지 층 $H^{- i - a}(Lp^*\widetilde{M})$들은 모두
+$I^c$에 의해 소멸된다. 따라서 $\text{Tor}_i^A(M, I^q)$는 $I^{dc}$에 의해
+$q \geq q(A, I)$이고 $i \geq t$일 때 소멸된다. 짧은 완전열
+$0 \to I^q \to A \to A/I^q \to 0$을 사용하면
+$\text{Tor}_i(M, A/I^q)$가 $I^{dc}$에 의해 $q \geq q(A, I)$이고
+$i > t$일 때 소멸됨을 알 수 있다. 따라서 $I^m$은, 여기서
+$m = \max(dc, q(A, I) - 1)$이고, $\text{Tor}_i^A(M, A/I^q)$를
+모든 $q \geq 0$과 $i > t$에 대해
+소멸시키며, 이것이 원하는 바이다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-tor-maps-vanish}
+$I$를 뇌터 환 $A$의 아이디얼이라 하자. $t \geq 0$을 $I$의 생성원 수의
+상계라 하자. 어떤 $N, c \geq 0$이 존재하여 다음 사상들이
+$$
+\text{Tor}_{t + 1}^A(M, A/I^n) \to \text{Tor}_{t + 1}^A(M, A/I^{n - c})
+$$
+임의의 $A$-가군 $M$과 모든 $n \geq N$에 대해 영사상이 된다.
+\end{lemma}
+
+\begin{proof}
+$c_1$을 보조정리 \ref{local-cohomology-lemma-annihilates-tors}에서 찾은 상수라 하자. 이 상수
+$c_1$은 $\text{Tor}_i$에, 모든 $i > t$에 대해 동시에 통한다는 점을 명심하라.
+
+\medskip\noindent
+$I = (a_1, \ldots, a_t)$라고 하자. $A$-가군 $M$에 대해 다음과 같이 놓자.
+$$
+\ell(M) =
+\#\{i \mid 1 \leq i \leq t,\ a_i^{c_1}\text{가 }M\text{ 위에서 영사상}\}
+$$
+이는 $\{0, 1, \ldots, t\}$의 원소이다. $0 \leq s \leq t$에 대한 하강
+귀납법으로 다음 명제 $H_s$를 증명하겠다. 어떤 $N, c \geq 0$이 존재하여
+모든 가군 $M$ 중 $\ell(M) \geq s$를 만족하는 것에 대해 사상
+$$
+\text{Tor}_{t + 1 + i}^A(M, A/I^n) \to \text{Tor}_{t + 1 + i}^A(M, A/I^{n - c})
+$$
+은 $i = 0, \ldots, s$와 모든 $n \geq N$에 대해 영사상이다.
+
+\medskip\noindent
+기초 단계는 $s = t$인 경우이다. $\ell(M) = t$이면 $M$은
+$(a_1^{c_1}, \ldots, a_t^{c_1}\}$에 의해, 따라서
+$I^{t(c_1 - 1) + 1}$에 의해 소멸된다. 보조정리
+\ref{local-cohomology-lemma-maps-zero-fixed-torsion}로부터 $H_t$가 성립함을 알 수 있다.
+여기서는 $c = N$을 그 보조정리에서 얻은 정수들
+$c(A, I, t(c_1 - 1) + 1, t + 1), \ldots, c(A, I, t(c_1 - 1) + 1, 2t + 1)$
+의 최댓값으로 택한다.
+
+\medskip\noindent
+귀납 단계로 넘어가자. $0 \leq s < t$라고 하고 $N, c$를
+$H_{s + 1}$에서와 같이 갖는다고 하자. 가군 $M$을 생각하되
+$\ell(M) = s$라고 하자. 그러면 $i$를 택하여 $a_i^{c_1}$이 $M$ 위에서
+영이 아니게 할 수 있다. 따라서
+$\ell(M[a_i^c]) \geq s + 1$이고 $\ell(M/a_i^{c_1}M) \geq s + 1$이므로
+이 두 가군에 귀납 가정을 적용할 수 있다. 완전열
+$$
+0 \to M[a_i^{c_1}] \to M \xrightarrow{a_i^{c_1}} M \to M/a_i^{c_1}M \to 0
+$$
+을 생각하자. 가운데 화살표의 상을 $E \subset M$으로 나타내자. 이에 대응하는
+Tor 가군의 도표를 생각하자.
+$$
+\xymatrix{
+&
+&
+\text{Tor}_{i + 1}(M/a_i^{c_1}M, A/I^q) \ar[d] \\
+\text{Tor}_i(M[a_i^{c_1}], A/I^q) \ar[r] &
+\text{Tor}_i(M, A/I^q) \ar[r] \ar[rd]^0 &
+\text{Tor}_i(E, A/I^q) \ar[d] \\
+&
+&
+\text{Tor}_i(M, A/I^q)
+}
+$$
+각 $q$에 대해 행과 열은 완전하다. 남동쪽 화살표는 $c_1$의 선택에 의해
+영사상이다. 따라서 가군 $\text{Tor}_i(M, A/I^q)$은
+$\text{Tor}_i(M[a_i^{c_1}], A/I^q)$의 몫가군과
+$\text{Tor}_{i + 1}(M/a_i^{c_1}M, A/I^q)$의 부분가군 사이에 끼어 있다.
+따라서 $H_s$는 $N$을 $N + c$로, $c$를 $2c$로 바꾸면 성립한다.
+몇 가지 세부사항은 생략한다.
+\end{proof}
+
+\begin{proposition}
+\label{local-cohomology-proposition-uniform-artin-rees}
+$I$를 뇌터 환 $A$의 아이디얼이라 하자. $t \geq 0$을 $I$의 생성원 수의
+상계라 하자. 어떤 $N, c \geq 0$이 존재하여 $n \geq N$일 때 사상
+$$
+A/I^n \to A/I^{n - c}
+$$
+이 보조정리 \ref{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e}의 동치 조건들을
+$e = t$에 대해 만족한다.
+\end{proposition}
+
+\begin{proof}
+보조정리 \ref{local-cohomology-lemma-tor-maps-vanish}와
+\ref{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e}의 즉각적인 귀결이다.
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-better-bound}
+논문 \cite{AHS}는 다른 많은 결과와 더불어 $A$가 국소이면 명제
+\ref{local-cohomology-proposition-uniform-artin-rees}가 $e = t$를 $e = \dim(A)$로 바꾸어도
+성립함을 보인다. 보조정리 \ref{local-cohomology-lemma-cd-sequence-Koszul}를 보면 명제
+\ref{local-cohomology-proposition-uniform-artin-rees}가 $e = t$를 $e = \text{cd}(A, I)$로
+바꾸어도 성립하는지 묻는 것이 자연스럽다. 우리는 그 답을 모른다.
+\end{remark}
+
+\begin{remark}
+\label{local-cohomology-remark-strict-pro-isomorphism}
+$I$를 뇌터 환 $A$의 아이디얼이라 하자. $I = (f_1, \ldots, f_r)$라고 하자.
+$K_n^\bullet$을 $f_1^n, \ldots, f_r^n$에 대한 코쥘 복합체라 하자. 이는
+더 많은 가환대수의 상황 \ref{more-algebra-situation-koszul}에서와 같다.
+대응하는 대상을 $K_n \in D(A)$로 나타내자.
+$M^\bullet$을 유한 $A$-가군들로 이루어진 유계 복합체라 하고, 대응하는
+대상을 $M \in D(A)$로 나타내자. $D(A)$ 안의 다음 역계들을 생각하자.
+\begin{enumerate}
+\item $M^\bullet/I^nM^\bullet$, 즉 각 항이 $M^i/I^nM^i$인 복합체,
+\item $M \otimes_A^\mathbf{L} A/I^n$,
+\item $M \otimes_A^\mathbf{L} K_n$, 그리고
+\item $M \otimes_P^\mathbf{L} P/J^n$ (아래를 보라).
+\end{enumerate}
+이 역계들은 모두 프로대상으로서 동형이다. (2)와 (3) 사이의 동형사상은
+더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-sequence-Koszul-complexes}에서 따른다. (1)과 (2)
+사이의 동형사상은 더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-derived-completion-plain-completion}에 주어져 있다.
+마지막 것에 대해서는 아래를 보라.
+
+\medskip\noindent
+그러나 이 프로계의 동형사상들이 ``엄밀한지'' 물을 수 있다. 이 용어와 문제는
+\cite[61, 62쪽]{quillenhomology}의 논의와 관련된다. 구체적으로 범주
+$\mathcal{C}$가 주어지면, 그 대상이 역계 $(X_n)$이고 사상
+$(X_n) \to (Y_n)$이 순서쌍 $(c, \varphi_n)$으로 주어지는 ``엄밀 프로범주''를
+정의할 수 있다. 여기서 순서쌍은 $c \geq 0$과 사상
+$\varphi_n : X_n \to Y_{n - c}$으로 이루어지고, 이 사상들은 모든
+$n \geq c$에 대해 자명한 호환 조건을
+만족하며 일정한 동치관계(본질적으로 $c$를 늘려서 주어지는 관계)를 법으로 한다.
+그런 다음 위 역계들이 이 엄밀 프로범주에서 동형인지 묻는다.
+
+\medskip\noindent
+$M = A[0]$인 경우조차 (1)과 (3)에 대해서는 분명히 그럴 수 없다. 실제로
+계 $H^0(K_n) = A/(f_1^n, \ldots, f_r^n)$은 일반적으로 가군의 범주에서 계
+$A/I^n$과 엄밀 프로동형이 아니다. 예를 들어
+$A = \mathbf{Z}[x_1, \ldots, x_r]$이고 $f_i = x_i$로 잡으면
+$H^0(K_n)$은 $I^{r(n - 1)}$에 의해 소멸되지 않는다.\footnote{물론 대상이
+역계이고 사상이 순서쌍 $(r, c, \varphi_n)$으로 주어지는 범주에서 이
+프로계들이 동형인지 물을 수 있다. 여기서 순서쌍은 $r \geq 1$, $c \geq 0$과
+사상 $\varphi_n : X_{rn} \to Y_{n - c}$으로 이루어지며, 이는
+$n \geq c$에 대해 주어진다.}
+
+\medskip\noindent
+위 결과들은 더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-derived-completion-plain-completion}
+에서 논의한 (2)에서 (1)로 가는 자연스러운 사상이 엄밀 프로동형임을 보인다.
+증명을 개략적으로 설명하겠다. 우직한 절단을 이용하는 표준 논증으로 먼저
+$M^\bullet$이 하나의 유한 $A$-가군 $M$으로 주어지고 그것이 차수 $0$에
+놓인 경우로 귀착한다. $N, c \geq 0$을 명제
+\ref{local-cohomology-proposition-uniform-artin-rees}에서와 같이 택하자. 그 명제에 의해
+$n \geq N$일 때 계 (2)의 전이사상은
+다음과 같이 인수분해된다.
+$$
+M \otimes_A^\mathbf{L} A/I^n
+\to
+\tau_{\geq -t}(M \otimes_A^\mathbf{L} A/I^n)
+\to
+M \otimes_A^\mathbf{L} A/I^{n - c}
+$$
+한편 더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-tor-strictly-pro-zero}에 의해 또 다른 상수
+$c' = c'(M) \geq 0$을 찾아 사상
+$\text{Tor}_i^A(M, A/I^{n'}) \to \text{Tor}_i(M, A/I^{n' - c'})$
+이 $i = 1, 2, \ldots, t$와 $n' \geq c'$에 대해 영사상이 되게 할 수 있다.
+그러면 유도 범주의 보조정리
+\ref{derived-lemma-trick-vanishing-composition}로부터 다음 사상이
+$$
+\tau_{\geq -t}(M \otimes_A^\mathbf{L} A/I^{n + tc'})
+\to
+\tau_{\geq -t}(M \otimes_A^\mathbf{L} A/I^n)
+$$
+$M \otimes_A^\mathbf{L}A/I^{n + tc'} \to M/I^{n + tc'}M$을 통하여
+인수분해됨을 알 수 있다. 이를 앞의 결과와 결합하면 인수분해
+$$
+M \otimes_A^\mathbf{L}A/I^{n + tc'} \to M/I^{n + tc'}M
+\to M \otimes_A^\mathbf{L} A/I^{n - c}
+$$
+를 얻으며, 이는 원하는 바를 준다. 이 결과가 필요해지면 명제를 주의 깊게
+서술하고 자세한 증명을 제시하겠다.
+
+\medskip\noindent
+(4)에 대해서는 뇌터 환 $P$, 환 준동형사상 $P \to A$, 그리고 아이디얼
+$J \subset P$가 주어졌으며 $I = JA$를 만족한다고 하자. 더 많은 가환대수의 절
+\ref{more-algebra-section-derived-base-change}에 의해 함자
+$M \otimes_P^\mathbf{L} - : D(P) \to D(A)$와, (4)에서와 같은 역계
+$M \otimes_P^\mathbf{L} P/J^n$을 $D(A)$ 안에서 얻는다. $P$가 뇌터이면 코쥘 복합체와
+비교할 수 있으므로 (4)의 계는 (1)의 계와 프로동형이다. $P \to A$가
+유한이면 (4)의 계는 (2)의 계와 엄밀 프로동형이다. 실제로 역계
+$A \otimes_P^\mathbf{L} P/J^n$은 위 논의에 의해 역계 $A/I^n$과 엄밀
+프로동형이고, 다음이 성립한다.
+$$
+M \otimes_P^\mathbf{L} P/J^n = M \otimes_A^\mathbf{L}
+(A \otimes_P^\mathbf{L} P/J^n)
+$$
+이는 더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-derived-base-change}에서 따른다.
+
+\medskip\noindent
+(4)의 표준적인 예는 $P = \mathbf{Z}[x_1, \ldots, x_r]$로 잡고, 사상
+$P \to A$가 $x_i$를 $f_i$로 보내게 하며, $J = (x_1, \ldots, x_r)$로
+잡는 것이다. 이 경우 다음을 보일 수 있다.
+$$
+M \otimes_P^\mathbf{L} P/J^n =
+M \otimes_{A[x_1, \ldots, x_r]}^\mathbf{L}
+A[x_1, \ldots, x_r]/(x_1, \ldots, x_r)^n
+$$
+따라서 위에서 논의한 경우 가운데 하나로 귀착한다(다만 이 경우에는
+$A[x_1, \ldots, x_r]/(x_1, \ldots, x_r)^n$의 Tor 차원이 많아야 $r$이며,
+이는 모든 $n$에 대해 성립하므로 엄밀히 더 쉽고, 명제
+\ref{local-cohomology-proposition-uniform-artin-rees}를 사용하는 단계를 피할 수 있다).
+이 경우는 \cite[명제 3.5.1]{BS}의 증명에서 논의된다.
+\end{remark}
+
+
+
+
+
+
+
+
+\section{약간의 균일성, III}
+\label{local-cohomology-section-uniform}
+
+\noindent
+이 절에서는 뇌터 환 $A$와 아이디얼 $I \subset A$를 고정한다. 목표는 보조정리
+\ref{local-cohomology-lemma-bound-two-term-complex}를 증명하는 것이다. 뒤의 장에서 이를 사용하여
+올림 문제를 해결할 것이다. 형식 공간의 대수화의 보조정리
+\ref{restricted-lemma-get-morphism-general-better}를 보라.
+
+\medskip\noindent
+이 절 전체에서 다음과 같이 나타내자.
+$$
+p : X \to \Spec(A)
+$$
+이는 $\Spec(A)$를 아이디얼 $I$에 따라 블로업한 것이다. 다시 말해 $X$는
+$\text{Proj}$로 주어지며, 여기서 리스 대수는 $\bigoplus_{n \geq 0} I^n$이다.
+또한 올곱
+$$
+\xymatrix{
+Y \ar[r] \ar[d] & X \ar[d]^p \\
+\Spec(A/I) \ar[r] & \Spec(A)
+}
+$$
+을 생각하자. 그러면 $Y$는 블로업의 예외 인자이고, 따라서 $X$ 위의 유효
+카르티에 인자로서 $\mathcal{O}_X(-1) = \mathcal{O}_X(Y)$를 만족한다.
+$\text{Proj}$를 취하는 것은 기저변환과 가환하므로 다음이 성립한다.
+$$
+Y = \text{Proj}(\bigoplus\nolimits_{n \geq 0} I^n/I^{n + 1}) = \text{Proj}(S)
+$$
+여기서 $S = \text{Gr}_I(A) = \bigoplus_{n \geq 0} I^n/I^{n + 1}$이다.
+
+\medskip\noindent
+다음과 같이 나타내자.
+$d = d(S) = d(\text{Gr}_I(A)) = d(\bigoplus_{n \geq 0} I^n/I^{n + 1})$
+이는 $p$의 올들의 차원의 최댓값이다($0$으로 놓는 경우는
+$X = \emptyset$일 때이다).
+이는 잘 정의된다. 실제로 다음이 성립한다.
+\begin{enumerate}
+\item $d \leq t - 1$이다. 실제로 $I = (a_1, \ldots, a_t)$이면
+$X \subset \mathbf{P}^{t - 1}_A$이다. 그리고
+\item $d$는 $\text{Proj}(S) \to \Spec(S_0)$의 올들의 차원의 최댓값이기도 하며,
+이는 $Y$가 공집합이 아닐 때이다. 또한 $d = 0$은 $Y = \emptyset$일 때이다(동치로
+$S = 0$이고, 동치로 $I = A$이다).
+\end{enumerate}
+따라서 $d$는 $S = \text{Gr}_I(A)$의 동형류에만 의존한다.
+$H^i(X, \mathcal{F}) = 0$은 모든 연접 $\mathcal{O}_X$-가군 $\mathcal{F}$와
+$i > d$에 대해 성립한다. 이는 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-higher-direct-images-zero-above-dimension-fibre}와
+\ref{coherent-lemma-quasi-coherence-higher-direct-images-application}에서 따른다.
+물론 $Y$ 위의 연접 가군에 대해서도 마찬가지이다.
+
+\medskip\noindent
+다음과 같이 나타내자.
+$q = q(S) = q(\text{Gr}_I(A)) = q(\bigoplus_{n \geq 0} I^n/I^{n + 1})$
+는 다음과 같이 정의되는 정수이다. 대수
+$S = \bigoplus_{n \geq 0} I^n/I^{n + 1}$
+는 차수 $1$의 원소들로 생성되는 뇌터 등급환이며 바탕 차수는 $0$임에 유의하라.
+따라서 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-coherent-on-proj}와
+\ref{coherent-lemma-recover-tail-graded-module}에 의해 $q(S)$를 다음을 만족하는
+가장 작은 정수 $q(S) \geq 0$으로 정의할 수 있다. 모든 $q \geq q(S)$에 대해
+$H^i(Y, \mathcal{O}_Y(q)) = 0$이 $1 \leq i \leq d$일 때 성립하고
+$H^0(Y, \mathcal{O}_Y(q)) = I^q/I^{q + 1}$이다.
+($S = 0$이면 $q(S) = 0$으로 놓는다.)
+
+\medskip\noindent
+$n \geq 1$에 대해 유효 카르티에 인자 $nY$를 생각할 수 있으며, 이를
+$Y_n$으로 나타내겠다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-bound-q-and-d}
+위와 같이 $q_0 = q(S)$와 $d = d(S)$로 놓으면 다음이 성립한다.
+\begin{enumerate}
+\item $n \geq 1$, $q \geq q_0$, $i > 0$이면
+$H^i(X, \mathcal{O}_{Y_n}(q)) = 0$,
+\item $n \geq 1$이고 $q \geq q_0$이면
+$H^0(X, \mathcal{O}_{Y_n}(q)) = I^q/I^{q + n}$,
+\item $q \geq q_0$이고 $i > 0$이면
+$H^i(X, \mathcal{O}_X(q)) = 0$,
+\item $q \geq q_0$이면
+$H^0(X, \mathcal{O}_X(q)) = I^q$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$I = A$이면 $X$는 아핀이며 명제들은 자명하다. 따라서 $I \not = A$라고
+가정해도 좋고 실제로 그렇게 하겠다. 그러므로 $Y$와 $X$는 공집합이 아닌
+스킴이다.
+
+\medskip\noindent
+$n$에 대한 귀납법으로 (1)과 (2)를 증명하자. 기초 단계 $n = 1$은
+$q_0$의 정의이며, 이는 $Y_1 = Y$이기 때문이다. 다음을 상기하라.
+$\mathcal{O}_X(1) = \mathcal{O}_X(-Y)$.
+따라서 짧은 완전열
+$$
+0 \to \mathcal{O}_{Y_n}(1) \to \mathcal{O}_{Y_{n + 1}} \to \mathcal{O}_Y \to 0
+$$
+을 갖는다. 따라서 $i > 0$에 대해 다음을 얻는다.
+$$
+H^i(X, \mathcal{O}_{Y_n}(q + 1)) \to
+H^i(X, \mathcal{O}_{Y_{n + 1}}(q)) \to
+H^i(X, \mathcal{O}_{Y}(q))
+$$
+바깥 두 항의 주어진 소멸로부터 가운데 항의 원하는 소멸을 얻는다.
+$i = 0$에 대해서는 가환 도표
+$$
+\xymatrix{
+0 \ar[r] &
+I^{q + 1}/I^{q + 1 + n} \ar[d] \ar[r] &
+I^q/I^{q + 1 + n} \ar[d] \ar[r] &
+I^q/I^{q + 1} \ar[d] \ar[r] &
+0 \\
+0 \ar[r] &
+H^0(X, \mathcal{O}_{Y_n}(q + 1)) \ar[r] &
+H^0(X, \mathcal{O}_{Y_{n + 1}}(q)) \ar[r] &
+H^0(Y, \mathcal{O}_Y(q)) \ar[r] &
+0
+}
+$$
+를 얻으며, $q \geq q_0$일 때 그 행들은 완전하다(아래 행에 대해서는
+코호몰로지 긴 완전열의 다음 항이 $q \geq q_0$일 때 소멸함을 관찰하라).
+$q \geq q_0$이므로 왼쪽과 오른쪽 수직 화살표는 동형사상이고, 따라서
+가운데 화살표도 동형사상이다.
+
+\medskip\noindent
+비슷한 (3)과 (4)의 증명은 생략한다. 실제로 형식 함자에 관한 정리를 사용하여
+(1)과 (2)로부터 (3)과 (4)를 도출할 수 있다(하지만 이는 지나치다).
+\end{proof}
+
+\noindent
+표기를 하나 도입하자. $n \geq c \geq 0$이 주어졌을 때
+{\it $(A, n, c)$-가군}이란 유한 $A$-가군 $M$으로서 $I^n$에 의해 소멸되고,
+$A/I^n$-가군으로 볼 때 $I^c/I^n$-사영인 것을 말한다. 더 많은 가환대수의 절
+\ref{more-algebra-section-near-projective}를 보라.
+
+\medskip\noindent
+다음 표기의 남용을 사용하겠다. $A$-가군 $M$이 주어졌을 때 $p^*M$은
+$p$로 역상하여 얻는 준연접 가군을 나타낸다. 여기서 역상하는 대상은
+$\widetilde{M}$이고, 이는 $\Spec(A)$ 위에서 $M$에 대응하는 준연접 가군이다. 예를 들어
+$\mathcal{O}_{Y_n} = p^*(A/I^n)$이다. 짧은 완전열
+$0 \to K \to L \to M \to 0$을 $A$-가군의 열이라 하자. 이로부터 완전열
+$$
+p^*K \to p^*L \to p^*M \to 0
+$$
+을 얻는다. 실제로 $\widetilde{\ }$는 완전 함자이고 $p^*$는 오른쪽 완전 함자이다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-almost-exactness}
+$0 \to K \to L \to M \to 0$을 $A$-가군의 짧은 완전열이라 하자.
+$K$와 $L$은 $I^n$에 의해 소멸되고 $M$은 $(A, n, c)$-가군이라고 하자.
+그러면 $p^*K \to p^*L$의 핵은 스킴론적으로 $Y_c$에 받쳐진다.
+\end{lemma}
+
+\begin{proof}
+$\Spec(B) \subset X$를 아핀 열린집합이라 하자. 완전열을 $\Spec(B)$ 위에
+제한한 것은 다음 $B$-가군의 열에 대응한다.
+$$
+K \otimes_A B \to L \otimes_A B \to M \otimes_A B \to 0
+$$
+이는 다음 열과 동형이다.
+$$
+K \otimes_{A/I^n} B/I^nB \to
+L \otimes_{A/I^n} B/I^nB \to
+M \otimes_{A/I^n} B/I^nB \to 0
+$$
+따라서 첫째 사상의 핵은 가군 $\text{Tor}_1^{A/I^n}(M, B/I^nB)$의 상이다.
+예외 인자 $Y$가 $I\mathcal{O}_X$에 의해 정의됨을 상기하라. 그러므로
+$\text{Tor}_1^{A/I^n}(M, B/I^nB)$가 $I^c$에 의해 소멸됨을 보이면 충분하다.
+$a \in I^c$를 $M$ 위에서 곱하는 사상은 유한 자유 $A/I^n$-가군을 통하여
+인수분해되므로 이는 자명하다.
+\end{proof}
+
+\noindent
+표준 사상 $\mathcal{O}_X \to \mathcal{O}_X(1)$을 가지며, 이는 정확히
+$Y$를 따라 소멸한다. 따라서 모든 연접
+$\mathcal{O}_X$-가군 $\mathcal{F}$에 대해 항상 표준 사상
+$\mathcal{F}(q) \to \mathcal{F}(q + n)$을 가지며, 이는 임의의
+$q \in \mathbf{Z}$와 $n \geq 0$에 대해 주어진다.
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilated}
+$\mathcal{F}$를 연접 $\mathcal{O}_X$-가군이라 하자. 그러면
+$\mathcal{F}$가 스킴론적으로 $Y_c$에 받쳐지는 것과 표준 사상
+$\mathcal{F} \to \mathcal{F}(c)$이 영사상인 것은 동치이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{O}_X \to \mathcal{O}_X(1)$이 정확히 $Y$를 따라 소멸하기 때문이다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-vanishing-coh-almost-projective}
+위와 같이 $q_0 = q(S)$와 $d = d(S)$로 놓자. 정수 $n \geq c \geq 0$,
+$(A, n, c)$-가군 $M$, 지표 $i \in \{0, 1, \ldots, d\}$, 그리고 정수
+$q$가 주어졌다고 하자. 다음 경우들을 구별한다.
+\begin{enumerate}
+\item $i = d \geq 1$이고 $q \geq q_0$인 경우
+$H^d(X, p^*M(q)) = 0$.
+\item $i = d - 1 \geq 1$이고 $q \geq q_0$인 경우
+$H^{d - 1}(X, p^*M(q)) = 0$.
+\item $d - 1 > i > 0$이고 $q \geq q_0 + (d - 1 - i)c$인 경우 사상
+$H^i(X, p^*M(q)) \to H^i(X, p^*M(q - (d - 1 - i)c))$
+은 영사상이다.
+\item $i = 0$, $d \in \{0, 1\}$, $q \geq q_0$인 경우 전사 사상
+$$
+I^qM \longrightarrow H^0(X, p^*M(q))
+$$
+이 존재한다.
+\item $i = 0$, $d > 1$, $q \geq q_0 + (d - 1)c$인 경우 사상
+$$
+H^0(X, p^*M(q)) \to H^0(X, p^*M(q - (d - 1)c))
+$$
+의 상은 표준 사상
+$I^{q - (d - 1)c}M \to H^0(X, p^*M(q - (d - 1)c))$
+의 상에 포함된다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$M$을 $(A, n, c)$-가군이라 하자. 짧은 완전열
+$$
+0 \to K \to (A/I^n)^{\oplus r} \to M \to 0
+$$
+을 택하자. 아래에서 $K$가 $(A, n, c)$-가군이라는 사실을 사용할 것이다.
+더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-ses-near-projective}를 보라. 이에 대응하는 완전열
+$$
+p^*K \to (\mathcal{O}_{Y_n})^{\oplus r} \to p^*M \to 0
+$$
+을 생각하자. 이를 다음 짧은 완전열들로 나눈다.
+$$
+0 \to \mathcal{F} \to p^*K \to \mathcal{G} \to 0
+\quad\text{그리고}\quad
+0 \to \mathcal{G} \to (\mathcal{O}_{Y_n})^{\oplus r} \to p^*M \to 0
+$$
+보조정리 \ref{local-cohomology-lemma-almost-exactness}에 의해 연접 가군 $\mathcal{F}$는
+스킴론적으로 $Y_c$에 받쳐진다.
+
+\medskip\noindent
+(1)의 증명. $d > 0$이라고 가정하자. $H^d(X, p^*M(q)) = 0$이
+$q \geq q_0$일 때 성립함을 보여야 한다. $\mathcal{G}$의 꼬임의
+코호몰로지가 차수 $> d$에서 소멸한다는 사실과 위 둘째 짧은 완전열에
+대응하는 코호몰로지 긴 완전열에 의해
+$H^d(X, \mathcal{O}_{Y_n}(q)) = 0$임을 보이면 충분하다. 이는 보조정리
+\ref{local-cohomology-lemma-bound-q-and-d}에서 따른다.
+
+\medskip\noindent
+(2)의 증명. $d > 1$이라고 가정하자. $H^{d - 1}(X, p^*M(q)) = 0$이
+$q \geq q_0$일 때 성립함을 보여야 한다. 앞 문단과 같이 논증하면
+$H^d(X, \mathcal{G}(q)) = 0$임을 보이면 충분하다. 첫째 짧은 완전열과
+$\mathcal{F}$의 꼬임의 코호몰로지가 차수 $> d$에서 소멸한다는 사실을
+사용하면 $H^d(X, p^*K(q))$가 영임을 보이면 충분하다. 이는 (1)과
+$K$가 $(A, n, c)$-가군이라는 사실(위를 보라)에서 따른다.
+
+\medskip\noindent
+(3)의 증명. $0 < i < d - 1$이라 하고 명제가 $i + 1$에 대해 성립한다고
+가정하자. 다만 $i = d - 2$인 경우에는 명제 (2)를 사용한다. 위 둘째 짧은
+완전열에 대응하는 코호몰로지 긴 완전열을 사용하여 단사 사상
+$$
+H^i(X, p^*M(q - (d - 1 - i)c)) \subset
+H^{i + 1}(X, \mathcal{G}(q - (d - 1 - i)c))
+$$
+을 얻는다. 실제로 $q - (d - 1 - i)c \geq q_0$이면
+$H^i(X, \mathcal{O}_{Y_n}(q - (d - 1 - i)c))$가 소멸한다(위를 보라).
+따라서 사상
+$H^{i + 1}(X, \mathcal{G}(q)) \to H^{i + 1}(X, \mathcal{G}(q - (d - 1 - i)c))$
+이 영사상임을 보이면 충분하다. 이를 연구하기 위해 완전열들의 사상
+$$
+\xymatrix{
+H^{i + 1}(X, p^*K(q)) \ar[r] \ar[d] &
+H^{i + 1}(X, \mathcal{G}(q)) \ar[r] \ar[d] \ar@{..>}[ld] &
+H^{i + 2}(X, \mathcal{F}(q)) \ar[d] \\
+H^{i + 1}(X, p^*K(q - c)) \ar[r] \ar[d] &
+H^{i + 1}(X, \mathcal{G}(q - c)) \ar[r] \ar[d] &
+H^{i + 2}(X, \mathcal{F}(q - c)) \\
+H^{i + 1}(X, p^*K(q - (d - 1 - i)c)) \ar[r] &
+H^{i + 1}(X, \mathcal{G}(q - (d - 1 - i)c))
+}
+$$
+을 생각하자. $\mathcal{F}$는 스킴론적으로 $Y_c$에 받쳐지므로 표준 사상
+$\mathcal{G}(q) \to \mathcal{G}(q - c)$이 $p^*K(q - c)$을 통하여
+인수분해됨을 보조정리 \ref{local-cohomology-lemma-annihilated}로부터 알 수 있다. 이것이
+도표의 점선 화살표를 준다. (실제로 증명을 위해서는 가장 오른쪽 수직 화살표가
+영사상임을 관찰하여 점선 화살표를 집합의 사상으로 얻는 것으로 충분하다.)
+따라서
+$H^{i + 1}(X, p^*K(q - c)) \to
+H^{i + 1}(X, p^*K(q - (d - 1 - i)c))$
+이 영사상임을 보이면 충분하다. $i = d - 2$이면 이 화살표의 원천은 (2)에
+의해 영이다. 실제로 $q - c \geq q_0$이고 $K$는 $(A, n, c)$-가군이다.
+$i < d - 2$이면 $K$가 $(A, n, c)$-가군이므로 귀납 가정에 의해 이 사상은
+실제로 영사상이다. 여기서
+$q - c - (q - (d - 1 - i)c) = (d - 2 - i)c = (d - 1 - (i + 1))c$
+이고 $q - c \geq q_0 + (d - 1 - (i + 1))c$이다. 이로써 (3)의 증명이 끝난다.
+
+\medskip\noindent
+(4)의 증명. $d \in \{0, 1\}$이고 $q \geq q_0$이라고 가정하자. 그러면
+첫째 짧은 완전열은 전사 사상
+$H^1(X, p^*K(q)) \to H^1(X, \mathcal{G}(q))$
+을 주며, 이 화살표의 원천은 경우 (1)에 의해 영이다. 따라서 모든
+$q \in \mathbf{Z}$에 대해 사상
+$$
+H^0(X, (\mathcal{O}_{Y_n})^{\oplus r}(q))
+\longrightarrow
+H^0(X, p^*M(q))
+$$
+은 전사이다. $q \geq q_0$이면 그 원천은
+$(I^q/I^{q + n})^{\oplus r}$와 같다. 이는 보조정리
+\ref{local-cohomology-lemma-bound-q-and-d}에서 따르며 명제를 쉽게 증명한다.
+
+\medskip\noindent
+(5)의 증명. $d > 1$이라고 가정하자. (4)의 증명과 같이 논증하면
+다음 사상의 상이
+$$
+H^0(X, p^*M(q))
+\longrightarrow
+H^0(X, p^*M(q - (d - 1)c))
+$$
+다음 사상의 상에 포함됨을 보이면 충분하다.
+$$
+H^0(X, (\mathcal{O}_{Y_n})^{\oplus r}(q - (d - 1)c))
+\longrightarrow
+H^0(X, p^*M(q - (d - 1)c))
+$$
+위 포함을 보이려면 $\sigma \in H^0(X, p^*M(q))$를 잡고 그 경계를
+$\xi \in H^1(X, \mathcal{G}(q))$라 할 때, $\xi$의
+$H^1(X, \mathcal{G}(q - (d - 1)c))$ 안에서의 상이 영임을 보이면 충분하다.
+이는 (3)의 증명과 완전히 같은 논증에서 따른다.
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-duals}
+순서쌍 $(M, n)$이 주어졌다고 하자. 이는 정수 $n \geq 0$과 유한
+$A/I^n$-가군 $M$으로 이루어진다. 이때
+$M^\vee = \Hom_{A/I^n}(M, A/I^n)$로 놓는다. 순서쌍
+$(\mathcal{F}, n)$이 주어졌다고 하자. 이는 정수 $n$과 연접
+$\mathcal{O}_{Y_n}$-가군 $\mathcal{F}$로 이루어진다. 이때 다음과 같이 놓는다.
+$$
+\mathcal{F}^\vee =
+\SheafHom_{\mathcal{O}_{Y_n}}(\mathcal{F}, \mathcal{O}_{Y_n})
+$$
+위와 같은 $(M, n)$이 주어지면 표준 사상
+$$
+can : p^*(M^\vee) \longrightarrow (p^*M)^\vee
+$$
+이 존재한다. 실제로 표시
+$(A/I^n)^{\oplus s} \to (A/I^n)^{\oplus r} \to M \to 0$
+를 택하면 표시
+$\mathcal{O}_{Y_n}^{\oplus s} \to \mathcal{O}_{Y_n}^{\oplus r} \to
+p^*M \to 0$을 얻는다. 쌍대를 취하여 완전열
+$$
+0 \to M^\vee \to (A/I^n)^{\oplus r} \to (A/I^n)^{\oplus s}
+$$
+과
+$$
+0 \to (p^*M)^\vee \to
+\mathcal{O}_{Y_n}^{\oplus r} \to
+\mathcal{O}_{Y_n}^{\oplus s}
+$$
+을 얻는다. 첫째 열을 $p$로 역상하면 원하는 사상 $can$을 얻는다.
+이 사상의 구성은 유한 $A/I^n$-가군 $M$에 대해 함자적이다. $can$의 핵과
+여핵은 스킴론적으로 $Y_c$에 받쳐지며, 이는 $M$이 $(A, n, c)$-가군일 때이다.
+실제로 이 경우 $a \in I^c$에 대해 사상 $a : M \to M$은 유한 자유
+$A/I^n$-가군을 통하여 인수분해되며, 그 가군에 대해서 $can$은 동형사상이다.
+따라서 $a$는 $can$의 핵과 여핵을 소멸시킨다.
+\end{remark}
+
+\begin{lemma}
+\label{local-cohomology-lemma-factor-hom}
+위와 같이 $q_0 = q(S)$와 $d = d(S)$로 놓자. $M$을 $(A, n, c)$-가군이라
+하고 $\varphi : M \to I^n/I^{2n}$를 $A$-선형사상이라 하자.
+$n \geq \max(q_0 + (1 + d)c, (2 + d)c)$라고 가정하고, $d = 0$이면
+$n \geq q_0 + 2c$라고도 가정하자. 그러면 합성사상
+$$
+M \xrightarrow{\varphi} I^n/I^{2n} \to
+I^{n - (1 + d)c}/I^{2n - (1 + d)c}
+$$
+은 $\sum a_i \psi_i$ 꼴이며, 여기서 $a_i \in I^c$이고
+$\psi_i : M \to I^{n - (2 + d)c}/I^{2n - (2 + d)c}$이다.
+\end{lemma}
+
+\begin{proof}
+$d > 1$인 경우. 호환되는 사상들의 계
+$p^*(I^q) \to \mathcal{O}_X(q)$를 가지며, 이는 모든 $q \geq 0$에 대해
+주어진다. 따라서 표준 사상
+$p^*(I^q/I^{q + \nu}) \to \mathcal{O}_{Y_\nu}(q)$를 모든 $\nu \geq 0$에 대해 갖는다.
+이를 사용하고 $\varphi$를 역상하여 사상
+$$
+\chi : p^*M \longrightarrow \mathcal{O}_{Y_n}(n)
+$$
+을 얻으며, 합성사상
+$M \to H^0(X, p^*M) \to H^0(X, \mathcal{O}_{Y_n}(n))$
+은 주어진 준동형사상 $\varphi$와 사상
+$I^n/I^{2n} \to H^0(X, \mathcal{O}_{Y_n}(n))$의 합성이다.
+$\mathcal{O}_{Y_n}(n)$은 $Y_n$ 위에서 가역이므로 선형사상 $\chi$는 절단
+$$
+\sigma \in \Gamma(X, (p^*M)^\vee(n))
+$$
+을 결정한다. 표기는 주해 \ref{local-cohomology-remark-duals}에서와 같다. 주해
+\ref{local-cohomology-remark-duals}의 논의에 의해
+$can : p^*(M^\vee) \to (p^*M)^\vee$의 여핵과 핵은 스킴론적으로 $Y_c$에
+받쳐진다. 보조정리 \ref{local-cohomology-lemma-annihilated}에 의해 사상
+$(p^*M)^\vee(n) \to (p^*M)^\vee(n - 2c)$은
+$p^*(M^\vee)(n - 2c)$을 통하여 인수분해된다. 작은 세부사항은 생략한다.
+따라서 $\sigma$의 $\Gamma(X, (p^*M)^\vee(n - 2c))$ 안에서의 상은 원소
+$$
+\sigma' \in \Gamma(X, p^*(M^\vee)(n - 2c))
+$$
+에서 온다. 보조정리 \ref{local-cohomology-lemma-vanishing-coh-almost-projective}의 (5),
+$M^\vee$가 $(A, n, c)$-가군이라는 사실(더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-dual-near-projective}를 보라), 그리고
+$n \geq q_0 + (1 + d)c$이므로 $n - 2c \geq q_0 + (d - 1)c$라는 사실에 의해,
+$\sigma'$의 $H^0(X, p^*M^\vee(n - (1 + d)c))$ 안에서의 상은 어떤 원소
+$\tau$의 상이며, 이 원소는 $I^{n - (1 + d)c}M^\vee$ 안에 있다.
+$\tau = \sum a_i \tau_i$로 쓰자. 여기서
+$\tau_i \in I^{n - (2 + d)c}M^\vee$이며, $n - (2 + d)c \geq 0$이므로
+이는 의미가 있다. 그러면 $\tau_i$는 가군 준동형사상
+$\psi_i : M \to I^{n - (2 + d)c}/I^{2n - (2 + d)c}$를 결정한다.
+여기서는 평가사상 $M \otimes M^\vee \to A/I^n$을 사용한다.
+
+\medskip\noindent
+이 구성이 실제로 통함을 증명하자.\footnote{어떤 독자가 이 사실의 덜 지저분한
+증명을 제안해 주기를 바란다.} $z \in M$을 택하고, $\varphi(z)$와
+$\sum a_i \psi_i(z)$가 $I^{n - (1 + d)c}/I^{2n - (1 + d)c}$에서 같은 상을
+가짐을 보이자. 먼저 원소 $z$는 사상
+$p^*z : \mathcal{O}_{Y_n} \to p^*M$을 결정한다. 이를 $\chi$와 합성하면
+$\mathcal{O}_{Y_n} \to \mathcal{O}_{Y_n}(n)$과 같은데, 이 사상은
+$\varphi(z)$에 대응하며 사상
+$I^n/I^{2n} \to \Gamma(\mathcal{O}_{Y_n}(n))$을 통해 얻어진다.
+다음으로 $z$와 $p^*z$는 평가사상
+$e_z : M^\vee \to A/I^n$과
+$e_{p^*z} : (p^*M)^\vee \to \mathcal{O}_{Y_n}$을 결정한다.
+$\chi(p^*z)$가 $\varphi(z)$에 대응하는 절단이므로
+$e_{p^*z}(\sigma)$도 $\varphi(z)$에 대응하는 절단이다. 여기와 아래에서는
+표기를 남용한다. 가군의 사상 $a : \mathcal{F} \to \mathcal{G}$이
+$X$ 위에 주어지면, 꼬인 가군의 대응하는 사상도
+$a : \mathcal{F}(t) \to \mathcal{F}(t)$로 나타낸다. 도표
+$$
+\xymatrix{
+p^*(M^\vee) \ar[d]_{can} \ar[r]_{p^*e_z} & \mathcal{O}_{Y_n} \ar@{=}[d] \\
+(p^*M)^\vee \ar[r]^{e_{p^*z}} & \mathcal{O}_{Y_n}
+}
+$$
+는 구성 $can$의 함자성에 의해 가환한다. 따라서 $(p^*e_z)(\sigma')$은
+$\Gamma(Y_n, \mathcal{O}_{Y_n}(n - 2c))$ 안에서
+$\varphi(z)$의 $I^{n - 2c}/I^{2n - 2c}$ 안에서의 상에 대응하는 절단이다.
+다음 단계로, $\sigma'$는 $\sum a_i \tau_i$의
+$H^0(X, p^*M^\vee(n - (1 + d)c))$ 안에서의 상으로 보내진다. 이는
+$(p^*e_z)(\sum a_i \tau_i) = \sum a_i p^*e_z(\tau_i)$가
+$\Gamma(Y_n, \mathcal{O}_{Y_n}(n - (1 + d)c))$ 안에서
+$\varphi(z)$의 $I^{n - (1 + d)c}/I^{2n - (1 + d)c}$ 안에서의 상에 대응하는
+절단임을 뜻한다. $\psi_i$가 평가사상을 사용하여 $\tau_i$로부터 정의됨을
+상기하라. 따라서 다음과 같이 나타내면
+$$
+\chi_i : p^*M \longrightarrow \mathcal{O}_{Y_n}(n - (2 + d)c)
+$$
+$\psi_i$에서 얻는 사상이다. 위와 같은 논증으로 $\psi_i(z)$에 대응하는 절단은
+$\chi_i(p^*z) = e_{p^*z}(\chi_i) = p^*e_z(\tau_i)$임을 알 수 있다. 따라서
+$\varphi(z)$의 $\Gamma(Y_n, \mathcal{O}_{Y_n}(n - (1 + d)c))$ 안에서의 상은
+$\sum a_i\psi_i(z)$의 상과 같다. $n - (1 + d)c \geq q_0$이므로
+$\Gamma(Y_n, \mathcal{O}_{Y_n}(n - (1 + d)c)) =
+I^{n - (1 + d)c}/I^{2n - (1 + d)c}$
+이다. 이는 보조정리 \ref{local-cohomology-lemma-bound-q-and-d}에서 따르며, 따라서 원하는
+호환성이 성립한다.
+
+\medskip\noindent
+$d = 1$인 경우. 위와 같이 논증하여 다음을 얻는다.
+$$
+\chi : p^*M \longrightarrow \mathcal{O}_{Y_n}(n),\quad
+\sigma \in \Gamma(X, (p^*M)^\vee(n)),\quad
+\sigma' \in \Gamma(X, p^*(M^\vee)(n - 2c)),
+$$
+그런 다음 보조정리 \ref{local-cohomology-lemma-vanishing-coh-almost-projective}의 (4)를
+사용하면 $\sigma'$가 어떤 원소 $\tau \in I^{n - 2c}M^\vee$의 상임을 알 수
+있다. 나머지 논증은 같다.
+
+\medskip\noindent
+$d = 0$인 경우. 논증은 $d = 1$인 경우와 완전히 같다.
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-bound-two-term-complex}
+위와 같이 $d = d(S)$와 $q_0 = q(S)$로 놓자. 그러면
+\begin{enumerate}
+\item 정수 $n \geq c \geq 0$이
+$n \geq \max(q_0 + (1 + d)c, (2 + d)c)$를 만족하고,
+\item $K$가 $D(A/I^n)$의 대상이고 $H^i(K) = 0$이 $i \not = -1, 0$일 때
+성립하며, $H^i(K)$가 $i = -1, 0$일 때 유한이고, 또한
+$\Ext^1_{A/I^c}(K, N)$이 $I^c$에 의해, 모든 유한 $A/I^n$-가군
+$N$에 대해 소멸된다고 하자.
+\end{enumerate}
+그러면 사상
+$$
+\Ext^1_{A/I^n}(K, I^n/I^{2n})
+\longrightarrow
+\Ext^1_{A/I^n}(K, I^{n - (1 + d)c}/I^{2n - 2(1 + d)c})
+$$
+은 영사상이다.
+\end{lemma}
+
+\begin{proof}
+$d > 0$인 경우. $K^{-1} \to K^0$를 $K$를 표현하는 복합체라 하자. 더 많은
+가환대수의 보조정리
+\ref{more-algebra-lemma-ext-1-annihilated-definite}의 (5)에서 아이디얼
+$I^c/I^n$에 대해 주어진 것과 같이 택한다. 여기서 이 아이디얼은 환
+$A/I^n$ 안에 있다. 특히 $K^{-1}$은
+$I^c/I^n$-사영이다. 실제로 $I^c/I^n$의 원소를 곱하는 사상은 심지어
+$K^0$을 통하여 인수분해된다. 더 많은 가환대수의 보조정리
+\ref{more-algebra-lemma-map-out-of-almost-free}의 (1)에 의해 다음이 성립한다.
+$$
+\Ext^1_{A/I^n}(K, I^n/I^{2n}) =
+\Coker(\Hom_{A/I^n}(K^0, I^n/I^{2n}) \to \Hom_{A/I^n}(K^{-1}, I^n/I^{2n}))
+$$
+다른 Ext 군에 대해서도 마찬가지이다. 따라서 임의의 동치류 $\xi$를 잡되,
+이는 $\Ext^1_{A/I^n}(K, I^n/I^{2n})$ 안에 있다고 하자. 이 동치류는 어떤 원소
+$\varphi \in \Hom_{A/I^n}(K^{-1}, I^n/I^{2n})$에서 온다. $\varphi'$를
+$\varphi$의
+$\Hom_{A/I^n}(K^{-1}, I^{n - (1 + d)c}/I^{2n - (1 + d)c})$ 안에서의 상이라
+하자. 보조정리 \ref{local-cohomology-lemma-factor-hom}에 의해
+$\varphi' = \sum a_i \psi_i$로 쓸 수 있으며, 여기서 $a_i \in I^c$이고
+$\psi_i \in \Hom_{A/I^n}(M, I^{n - (2 + d)c}/I^{2n - (2 + d)c})$이다.
+$h_i : K^0 \to K^{-1}$를 택하여
+$a_i \text{id}_{K^{-1}} = h_i \circ d_K^{-1}$가 성립하게 하자. 다음과 같이 놓자.
+$\psi = \sum \psi_i \circ h_i : K^0 \to I^{n - (2 + d)c}/I^{2n - (2 + d)c}$.
+그러면 $\varphi' = \psi \circ \text{d}_K^{-1}$이고, 따라서 $\xi$는 이미
+$\Ext^1_{A/I^n}(K, I^{n - (1 + d)c}/I^{2n - (1 + d)c})$에서 영으로 보내지며,
+더욱이
+$\Ext^1_{A/I^n}(K, I^{n - (1 + d)c}/I^{2n - 2(1 + d)c})$에서도 영으로
+보내진다.
+
+\medskip\noindent
+$d = 0$인 경우.\footnote{$d > 0$에 대해 제시한 논증도 통하지만 조금 더
+약한 결과를 준다.} $\xi$와 $\varphi$를 위와 같이 잡자. 도표
+$$
+\xymatrix{
+K^0 \\
+K^{-1} \ar[u] \ar[r]^\varphi & I^n/I^{2n} \ar[r] & I^{n - c}/I^{2n - c}
+}
+$$
+$X$로 역상하고 사상
+$p^*(I^n/I^{2n}) \to \mathcal{O}_{Y_n}(n)$을 사용하면 실선 도표
+$$
+\xymatrix{
+p^*K^0 \ar@{..>}[rrd] \\
+p^*K^{-1} \ar[u] \ar[r] &
+\mathcal{O}_{Y_n}(n) \ar[r] &
+\mathcal{O}_{Y_n}(n - c)
+}
+$$
+를 얻는다. $X$를 다음 성질을 갖는 아핀 열린집합 $U = \Spec(B)$들로 덮을 수
+있다. 어떤 $a \in I$가 존재하여 $IB = aB$이고, $a$는 $B$ 위에서 영인자가
+아니다. 실제로 $X$를 아핀 블로업 대수들의 스펙트럼들로 덮을 수 있다.
+인자의 보조정리 \ref{divisors-lemma-blowing-up-affine}를 보라. 사상
+$\mathcal{O}_{Y_n}(n) \to \mathcal{O}_{Y_n}(n - c)$을 $U$에 제한하면
+준연접 $\mathcal{O}_U$-가군의 사상과 동형이다. 이 사상은
+$B$-가군 사상 $a^c : B/a^nB \to B/a^nB$에 대응한다.
+$a^c : K^{-1} \to K^{-1}$가 $K^0$을 통하여 인수분해되므로 점선 화살표가
+$U$ 위에서 존재함을 알 수 있다. 다시 말해 $X$ 위에서 국소적으로 점선
+화살표를 찾을 수 있다. 이제 도표에 맞는 점선 화살표들의 층은 다음 층 아래에서
+주동차이다.
+$$
+\mathcal{F} = \SheafHom_{\mathcal{O}_X}(
+\Coker(p^*K^{-1} \to p^*K^0), \mathcal{O}_{Y_n}(n - c))
+$$
+이는 연접 $\mathcal{O}_X$-가군이다. 따라서 점선 화살표를 찾는 데 대한 장애물은
+$H^1(X, \mathcal{F})$의 원소이다. $1 > d = 0$이므로 이 코호몰로지 군은
+영이다. $d = d(S)$의 정의 뒤의 논의를 보라. 이로써 도표에 맞는 점선 화살표
+$\psi : p^*K^0 \to \mathcal{O}_{Y_n}(n - c)$
+를 찾을 수 있음이 증명된다. $n - c \geq q_0$이므로 $\psi$는 사상
+$K^0 \to I^{n - c}/I^{2n - c}$을 유도한다. 도표를 추적하면
+$\varphi' = \psi \circ \text{d}_K^{-1}$임을 알 수 있고, 앞에서와 같이
+증명이 끝난다.
+\end{proof}

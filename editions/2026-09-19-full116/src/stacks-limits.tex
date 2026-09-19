@@ -1,0 +1,1029 @@
+% Generated mechanically from frozen input p12/ko/stacks-limits.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{101}
+\chapter{대수적 스택의 극한}
+
+
+
+\phantomsection
+\label{stacks-limits-section-phantom}
+
+
+\section{서론}
+\label{stacks-limits-section-introduction}
+
+\noindent
+이 장에서는 대수적 스택의 극한과 관련된 내용을 다룬다.
+대수적 스택과 대수공간의 극한에 관한 많은 결과는
+David Rydh가 \cite{rydh_approx}에서 얻었다.
+
+
+\section{규약}
+\label{stacks-limits-section-conventions}
+
+\noindent
+『스택의 성질』의 절
+\ref{stacks-properties-section-conventions}에서 도입한 규약과
+용어의 관용적 사용을 계속 따른다.
+
+
+
+
+
+
+
+\section{유한 표시 사상}
+\label{stacks-limits-section-finite-presentation}
+
+\noindent
+이 절은 『대수공간의 극한』의 절
+\ref{spaces-limits-section-finite-presentation}에 대응한다.
+그곳에서 우리는 $\Sch$ 위의 함자들 사이의 변환이
+극한을 보존한다는 말의 뜻을 정의했다(『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-characterize-relative-limit-preserving}에 나오는
+특성화를 살펴보기를 권한다).
+『표현가능성의 판정 조건』의 절
+\ref{criteria-section-limit-preserving}에서는
+``대상에 대해 극한을 보존한다''는 개념을 정의했다.
+또 『Artin의 공리』의 절 \ref{artin-section-limits}에서는
+$\Sch$ 위의 준군 섬유화 범주가 극한을 보존한다는 말의 뜻을 정의했다.
+이들을 결합하면 다음 개념을 얻는다.
+
+\begin{definition}
+\label{stacks-limits-definition-limit-preserving}
+$S$를 스킴이라 하자. $f : \mathcal{X} \to \mathcal{Y}$를
+$(\Sch/S)_{fppf}$ 위의 준군 섬유화 범주들의 $1$-사상이라 하자.
+$S$ 위의 아핀 스킴들의 임의의 유향 극한 $U = \lim U_i$에 대해
+섬유 범주들의 도식
+$$
+\xymatrix{
+\colim \mathcal{X}_{U_i} \ar[r] \ar[d]_f & \mathcal{X}_U \ar[d]^f \\
+\colim \mathcal{Y}_{U_i} \ar[r] & \mathcal{Y}_U
+}
+$$
+이 $2$-카르테시안이면 $f$가 {\it 극한을 보존한다}고 한다.
+\end{definition}
+
+\begin{lemma}
+\label{stacks-limits-lemma-limit-preserving-objects}
+$S$를 스킴이라 하자. $f : \mathcal{X} \to \mathcal{Y}$를
+$(\Sch/S)_{fppf}$ 위의 준군 섬유화 범주들의 $1$-사상이라 하자.
+$f$가 극한을 보존하면(정의 \ref{stacks-limits-definition-limit-preserving}),
+$f$는 대상에 대해 극한을 보존한다(『표현가능성의 판정 조건』의 절
+\ref{criteria-section-limit-preserving}).
+\end{lemma}
+
+\begin{proof}
+$U$ 위의 아핀 스킴들의 모든 유향 극한 $U = \lim U_i$에 대해 함자
+$$
+\colim \mathcal{X}_{U_i} \longrightarrow
+(\colim \mathcal{Y}_{U_i}) \times_{\mathcal{Y}_U} \mathcal{X}_U
+$$
+가 본질적으로 전사이면, $f$는 대상에 대해 극한을 보존한다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-base-change-limit-preserving}
+$p : \mathcal{X} \to \mathcal{Y}$와 $q : \mathcal{Z} \to \mathcal{Y}$를
+$(\Sch/S)_{fppf}$ 위의 준군 섬유화 범주들의 $1$-사상이라 하자.
+$p : \mathcal{X} \to \mathcal{Y}$가 극한을 보존하면,
+$q$에 의한 $p$의 밑변환
+$p' : \mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to \mathcal{Z}$
+도 극한을 보존한다.
+\end{lemma}
+
+\begin{proof}
+이는 형식적이다. $U = \lim_{i \in I} U_i$를 $S$ 위의 아핀 스킴
+$U_i$들의 유향 극한이라 하자. 각 $i$에 대해
+$$
+(\mathcal{X} \times_\mathcal{Y} \mathcal{Z})_{U_i} =
+\mathcal{X}_{U_i} \times_{\mathcal{Y}_{U_i}} \mathcal{Z}_{U_i}
+$$
+이다. 여과 쌍대극한은 범주들의 $2$-섬유곱과 가환하므로
+(세부사항은 생략한다), $p$가 극한을 보존하면 다음을 얻는다.
+\begin{align*}
+\colim (\mathcal{X} \times_\mathcal{Y} \mathcal{Z})_{U_i}
+& =
+\colim \mathcal{X}_{U_i} \times_{\colim \mathcal{Y}_{U_i}}
+\colim \mathcal{Z}_{U_i} \\
+& =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Y}_{U_i}
+\times_{\colim \mathcal{Y}_{U_i}}
+\colim \mathcal{Z}_{U_i} \\
+& =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Z}_{U_i} \\
+& =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \mathcal{Z}_U \times_{\mathcal{Z}_U}
+\colim \mathcal{Z}_{U_i} \\
+& =
+(\mathcal{X} \times_\mathcal{Y} \mathcal{Z})_U \times_{\mathcal{Z}_U}
+\colim \mathcal{Z}_{U_i}.
+\end{align*}
+이는 원하는 결과이다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-composition-limit-preserving}
+$p : \mathcal{X} \to \mathcal{Y}$와 $q : \mathcal{Y} \to \mathcal{Z}$를
+$(\Sch/S)_{fppf}$ 위의 준군 섬유화 범주들의 $1$-사상이라 하자.
+$p$와 $q$가 극한을 보존하면, 합성 $q \circ p$도 극한을 보존한다.
+\end{lemma}
+
+\begin{proof}
+이는 형식적이다. $U = \lim_{i \in I} U_i$를 $S$ 위의 아핀 스킴
+$U_i$들의 유향 극한이라 하자. $p$와 $q$가 극한을 보존하면
+\begin{align*}
+\colim \mathcal{X}_{U_i}
+& =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Y}_{U_i} \\
+& =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \mathcal{Y}_U
+\times_{\mathcal{Z}_U} \colim \mathcal{Z}_{U_i} \\
+& =
+\mathcal{X}_U \times_{\mathcal{Z}_U} \colim \mathcal{Z}_{U_i}
+\end{align*}
+를 얻는다. 이는 원하는 결과이다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-representable-by-spaces-limit-preserving}
+$p : \mathcal{X} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위의
+준군 섬유화 범주들의 $1$-사상이라 하자. $p$가 대수공간으로
+표현가능하면 다음 조건들은 동치이다.
+\begin{enumerate}
+\item $p$는 극한을 보존한다.
+\item $p$는 대상에 대해 극한을 보존한다.
+\item $p$는 국소적으로 유한 표시이다(『대수적 스택』의 정의
+\ref{algebraic-definition-relative-representable-property}를 보라).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+『표현가능성의 판정 조건』의 보조정리
+\ref{criteria-lemma-representable-by-spaces-limit-preserving}에서
+(2)와 (3)이 동치임을 보았다. 따라서 (1)과 (2)가 동치임을 보이면 충분하다.
+한 방향은 보조정리 \ref{stacks-limits-lemma-limit-preserving-objects}에서 보았다.
+다른 방향을 위해 $U = \lim_{i \in I} U_i$를 $S$ 위의 아핀 스킴
+$U_i$들의 유향 극한이라 하자. 다음 함자가 동치임을 보여야 한다.
+$$
+\colim \mathcal{X}_{U_i} \longrightarrow
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Y}_{U_i}
+$$
+(2)를 가정했으므로 이 함자가 본질적으로 전사임을 안다. 따라서
+완전충실함을 증명하면 된다. $p$는 각 섬유 범주에서 충실하므로
+(『대수적 스택』의 보조정리
+\ref{algebraic-lemma-criterion-map-representable-spaces-fibred-in-groupoids}),
+이 함자가 충실함을 알 수 있다. $x_i$와 $x'_i$를 $U_i$ 위의
+$\mathcal{X}$의 섬유 범주에 속하는 대상이라 하자.
+위 함자는 $x_i$를 $(x_i|_U, p(x_i), can)$으로 보내는데,
+여기서 $can$은 표준 동형사상 $p(x_i|_U) \to p(x_i)|_U$이다.
+따라서 이 증명의 첫 번째 표시 사상의 우변 범주에서 사상
+$$
+(\alpha, \beta_i) : (x_i|_U, p(x_i), can) \longrightarrow
+(x'_i|_U, p(x'_i), can)
+$$
+이 주어졌다고 하자. 우리의 과제는 $i' \geq i$와, 위 함자에 의해
+$(\alpha, \beta_i|_{U_{i'}})$로 보내지는 사상
+$x_i|_{U_{i'}} \to x'_i|_{U_{i'}}$를 만드는 것이다.
+
+\medskip\noindent
+$y_i = p(x_i)$ 및 $y'_i = p(x'_i)$로 둔다.
+『대수적 스택』의 보조정리
+\ref{algebraic-lemma-criterion-map-representable-spaces-fibred-in-groupoids}
+에 의해 함자
+$$
+X_{y_i} : (\Sch/U_i)^{opp} \to \textit{Sets},\quad
+V/U_i \mapsto
+\{(x, \phi) \mid x \in \Ob(\mathcal{X}_V), \phi : f(x) \to y_i|V\}/\cong
+$$
+는 $U_i$ 위의 대수공간이고, 마찬가지로 정의한 함자 $X_{y'_i}$도 그렇다.
+(2)는 (3)과 동치이므로 $X_{y'_i}$가 $U_i$ 위에서 국소적으로 유한
+표시임을 알 수 있다. $(x_i, \text{id})$와 $(x'_i, \text{id})$가 각각
+$X_{y_i}$와 $X_{y'_i}$의 $U_i$-값 점을 정의함에 유의하자.
+함자들의 변환
+$$
+\beta_i : X_{y_i} \to X_{y'_i},\quad
+(x/V, \phi) \mapsto (x/V, \beta_i|_V \circ \phi)
+$$
+가 존재한다. 다시 말해 이것은 $U_i$ 위의 대수공간들의 사상이다.
+우리는 도식
+$$
+\xymatrix{
+U \ar[d] \ar[rr] & & U_i \ar[d]^{(x'_i, \text{id})} \\
+U_i \ar[r]^{(x_i, \text{id})} & X_{y_i} \ar[r]^{\beta_i} & X_{y'_i}
+}
+$$
+이 가환한다고 주장한다. 실제로 이는 함자 $X_{y'_i}$의 정의에 나오는
+쌍 $(x_i|_U, \beta_i|_U)$와 $(x'_i|_U, \text{id})$가 동형이라는 조건과
+동치이다. 그리고 사상 $\alpha : x_i|_U \to x'_i|_U$가 바로 그러한
+동형사상을 만든다. 이 논의를 거꾸로 따르면, 도식
+$$
+\xymatrix{
+U_{i'} \ar[d] \ar[rr] & & U_i \ar[d]^{(x'_i, \text{id})} \\
+U_i \ar[r]^{(x_i, \text{id})} & X_{y_i} \ar[r]^{\beta_i} & X_{y'_i}
+}
+$$
+이 가환하도록 하는 어떤 $i' \geq i$를 찾을 수 있다면,
+앞 문단에서 제기한 문제의 해가 되는 동형사상
+$x_i|_{U_{i'}} \to x'_i|_{U_{i'}}$를 얻음을 알 수 있다.
+그런데 대각사상
+$$
+\Delta : X_{y'_i} \to X_{y'_i} \times_{U_i} X_{y'_i}
+$$
+은 국소적으로 유한 표시이다(『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-diagonal-morphism-finite-type}).
+따라서 $U \to U_i$가 $X_{y'_i}$로 가는 두 사상을 등화한다는 사실은,
+어떤 $i' \geq i$에 대해 $U_{i'} \to U_i$가 그 두 사상을 등화함을 뜻한다.
+『대수공간의 극한』의 명제
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-limit-preserving-diagonal}
+$p : \mathcal{X} \to \mathcal{Y}$를 $(\Sch/S)_{fppf}$ 위의
+준군 섬유화 범주들의 $1$-사상이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item 대각사상
+$\Delta : \mathcal{X} \to \mathcal{X} \times_\mathcal{Y} \mathcal{X}$
+가 극한을 보존한다.
+\item $S$ 위의 아핀 스킴들의 모든 유향 극한 $U = \lim U_i$에 대해 함자
+$$
+\colim \mathcal{X}_{U_i} \longrightarrow
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Y}_{U_i}
+$$
+가 완전충실하다.
+\end{enumerate}
+특히 $p$가 극한을 보존하면 $\Delta$도 극한을 보존한다.
+\end{lemma}
+
+\begin{proof}
+$U = \lim U_i$를 $S$ 위의 아핀 스킴들의 유향 극한이라 하자.
+함자
+$$
+\colim \mathcal{X}_{U_i} \longrightarrow
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Y}_{U_i}
+$$
+가 완전충실할 필요충분조건은 함자
+$$
+\colim \mathcal{X}_{U_i} \longrightarrow
+\mathcal{X}_U \times_{(\mathcal{X} \times_\mathcal{Y} \mathcal{X})_U}
+\colim (\mathcal{X} \times_\mathcal{Y} \mathcal{X})_{U_i}
+$$
+가 동치인 것이라고 주장한다. 이로써 보조정리가 증명된다.
+실제로
+$(\mathcal{X} \times_\mathcal{Y} \mathcal{X})_U =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \mathcal{X}_U$
+이고
+$(\mathcal{X} \times_\mathcal{Y} \mathcal{X})_{U_i} =
+\mathcal{X}_{U_i} \times_{\mathcal{Y}_{U_i}} \mathcal{X}_{U_i}$
+이므로, 이는 다음 문단에서 논의할 순전히 범주론적인 명제이다.
+
+\medskip\noindent
+$\mathcal{I}$를 여과 지표 범주라 하자.
+$(\mathcal{C}_i)$와 $(\mathcal{D}_i)$를 $\mathcal{I}$ 위의
+준군들의 계라 하자. $p : (\mathcal{C}_i) \to (\mathcal{D}_i)$를
+$\mathcal{I}$ 위의 준군 계들의 사상이라 하자.
+준군들의 함자 $p : \mathcal{C} \to \mathcal{D}$와 가환도식
+$$
+\xymatrix{
+\colim \mathcal{C}_i \ar[d]_p \ar[r]_f & \mathcal{C} \ar[d]^p \\
+\colim \mathcal{D}_i \ar[r]^g & \mathcal{D}
+}
+$$
+에 들어맞는 함자
+$f : \colim \mathcal{C}_i \to \mathcal{C}$ 및
+$g : \colim \mathcal{D}_i \to \mathcal{D}$가 주어졌다고 하자.
+그러면
+$$
+A : \colim \mathcal{C}_i \longrightarrow
+\mathcal{C} \times_\mathcal{D} \colim \mathcal{D}_i
+$$
+가 완전충실할 필요충분조건은 함자
+$$
+B : \colim \mathcal{C}_i \longrightarrow
+\mathcal{C}
+\times_{\Delta, \mathcal{C} \times_\mathcal{D} \mathcal{C}, f \times_g f}
+\colim (\mathcal{C}_i \times_{\mathcal{D}_i} \mathcal{C}_i)
+$$
+가 동치인 것이라고 주장한다. $\mathcal{C}' = \colim \mathcal{C}_i$ 및
+$\mathcal{D}' = \colim \mathcal{D}_i$로 둔다.
+$2$-섬유곱은 여과 쌍대극한과 가환하므로 $A$와 $B$는 각각 다음 함자가 된다.
+$$
+A' : \mathcal{C}' \to \mathcal{C} \times_\mathcal{D} \mathcal{D}'
+\quad\text{및}\quad
+B' : \mathcal{C}' \longrightarrow
+\mathcal{C}
+\times_{\Delta, \mathcal{C} \times_\mathcal{D} \mathcal{C}, f \times_g f}
+(\mathcal{C}' \times_{\mathcal{D}'} \mathcal{C}')
+$$
+따라서 준군들의 가환도식
+$$
+\xymatrix{
+\mathcal{C}' \ar[d]_p \ar[r]_f & \mathcal{C} \ar[d]^p \\
+\mathcal{D}' \ar[r]^g & \mathcal{D}
+}
+$$
+이 주어졌을 때 $A'$가 완전충실할 필요충분조건이 $B'$가 동치인 것임을
+보이면 충분하다. 이는 『범주』의 보조정리
+\ref{categories-lemma-fully-faithful-diagonal-equivalence}에서 따른다
+(기저 범주가 자명한, 즉 한 점으로 된 경우). 실제로
+$$
+\mathcal{C}
+\times_{\Delta, \mathcal{C} \times_\mathcal{D} \mathcal{C}, f \times_g f}
+(\mathcal{C}' \times_{\mathcal{D}'} \mathcal{C}') =
+\mathcal{C}'
+\times_{A', \mathcal{C} \times_\mathcal{D} \mathcal{D}', A'}
+\mathcal{C}'
+$$
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-locally-finite-presentation-limit-preserving}
+$S$를 스킴이라 하고 $\mathcal{X}$를 $S$ 위의 대수적 스택이라 하자.
+$\mathcal{X} \to S$가 국소적으로 유한 표시이면,
+$\mathcal{X}$는 『Artin의 공리』의 정의
+\ref{artin-definition-limit-preserving}의 의미에서 극한을 보존한다
+(동치로, 사상 $\mathcal{X} \to S$가 극한을 보존한다).
+\end{lemma}
+
+\begin{proof}
+어떤 스킴 $U$에 대해 전사 매끄러운 사상 $U \to \mathcal{X}$를 택한다.
+그러면 $U \to S$는 국소적으로 유한 표시이다. 『스택의 사상』의 절
+\ref{stacks-morphisms-section-finite-presentation}을 보라.
+『대수적 스택』의 보조정리 \ref{algebraic-lemma-stack-presentation}에 의해
+대수공간의 어떤 매끄러운 준군 $(U, R, s, t, c)$에 대해
+$\mathcal{X} = [U/R]$로 쓸 수 있다. $U$가 $S$ 위에서 국소적으로
+유한 표시이므로 대수공간 $R$도 $S$ 위에서 국소적으로 유한 표시이다.
+$[U/R]$은 $T$ 위의 섬유 범주가 준군 $(U(T), R(T), s, t, c)$인
+준군 섬유화 범주를 스택화하여 얻은 $(\Sch/S)_{fppf}$ 위의
+준군 스택임을 상기하자. 함자로서 $U$와 $R$은 극한을 보존하므로
+(『대수공간의 극한』의 명제
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation}),
+이 준군 섬유화 범주는 극한을 보존한다. 따라서 fppf 스택화가
+극한 보존성을 보존함을 보이면 충분하다. 이는 참이다
+(힌트: 『위상』의 보조정리
+\ref{topologies-lemma-limit-fppf-topology}를 사용하라).
+그러나 이 경우 스택화가 무엇을 뜻하는지 알고 있으므로 아래에서
+직접 증명한다.
+
+\medskip\noindent
+$T = \lim T_\lambda$를 $S$ 위의 아핀 스킴들의 유향 극한이라 하자.
+함자
+$$
+\colim [U/R]_{T_\lambda} \longrightarrow [U/R]_T
+$$
+가 범주들의 동치임을 보여야 한다. 먼저 이 함자가 본질적으로 전사임을
+보이자. $x \in \Ob([U/R]_T)$라 하자. 『대수공간의 준군』의 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-objects}에서 범주 $[U/R]_T$의
+기술을 찾을 수 있다. 특히 $x$는 fppf 피복
+$\{T_i \to T\}_{i \in I}$와 이 피복에 대한 $[U/R]$-하강 데이터
+$(u_i, r_{ij})$에 대응한다. 이 피복을 세분하여 아핀 스킴 $T$의
+표준 fppf 피복이라고 가정할 수 있다. 『위상』의 보조정리
+\ref{topologies-lemma-limit-fppf-topology}에 의해 어떤 $\lambda$와
+표준 fppf 피복 $\{T_{\lambda, i} \to T_\lambda\}_{i \in I}$를 택하여,
+$T$로 밑변환한 것이 $\{T_i \to T\}_{i \in I}$와 같게 할 수 있다.
+각 $i$에 대해 $\lambda$를 키우면, $T_i \to T_{\lambda, i}$와 합성한
+것이 주어진 사상 $u_i$인 사상
+$u_{\lambda, i} : T_{\lambda, i} \to U$를 찾을 수 있다
+(여기서 $U$가 극한을 보존함을 사용한다). 마찬가지로 각 $i, j$에 대해
+$\lambda$를 키우면, $T_{ij} \to T_{\lambda, ij}$와 합성한 것이
+주어진 사상 $r_{ij}$인 사상
+$r_{\lambda, ij} : T_{\lambda, i} \times_{T_\lambda} T_{\lambda, j} \to R$
+을 찾을 수 있다(여기서 $R$이 극한을 보존함을 사용한다).
+$\lambda$를 더 키워서
+$$
+s \circ r_{\lambda, ij} = u_{\lambda, i} \circ \text{pr}_0
+\quad\text{및}\quad
+t \circ r_{\lambda, ij} = u_{\lambda, j} \circ \text{pr}_1,
+$$
+그리고
+$$
+c \circ (r_{\lambda, jk} \circ \text{pr}_{12}, r_{\lambda, ij}
+\circ \text{pr}_{01}) = r_{\lambda, ik} \circ \text{pr}_{02}.
+$$
+라고 가정할 수 있다. 다시 말해 $(u_{\lambda, i}, r_{\lambda, ij})$가
+피복 $\{T_{\lambda, i} \to T_\lambda\}_{i \in I}$에 대한
+$[U/R]$-하강 데이터라고 가정할 수 있다. 그러면 $T_\lambda$ 위의
+$[U/R]$의 대응하는 대상을 얻고, 이를 $T$로 당기면 원하는 대로
+$x$와 동형이다. 완전충실성의 증명도 『대수공간의 준군』의 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-objects}에 주어진
+$[U/T]$의 섬유 범주에서 사상들의 기술을 사용하여 정확히 같은 방식으로 된다.
+\end{proof}
+
+\begin{proposition}
+\label{stacks-limits-proposition-characterize-locally-finite-presentation}
+\begin{reference}
+이는 \cite[Lemma 2.3.15]{Emerton-Gee}의 특수한 경우이다.
+\end{reference}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택들의 사상이라 하자.
+다음은 동치이다.
+\begin{enumerate}
+\item $f$는 극한을 보존한다.
+\item $f$는 대상에 대해 극한을 보존한다.
+\item $f$는 국소적으로 유한 표시이다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(3)을 가정하자. $T = \lim T_i$를 아핀 스킴들의 유향 극한이라 하자.
+함자
+$$
+\colim \mathcal{X}_{T_i} \longrightarrow
+\mathcal{X}_T \times_{\mathcal{Y}_T} \colim \mathcal{Y}_{T_i}
+$$
+를 생각하자. $(x, y_i, \beta)$를 우변의 대상이라 하자. 즉,
+$x \in \Ob(\mathcal{X}_T)$, $y_i \in \Ob(\mathcal{Y}_{T_i})$이고,
+$\beta : f(x) \to y_i|_T$는 $\mathcal{Y}_T$의 사상이다.
+그러면 $(x, y_i, \beta)$를 $T$ 위의 대수적 스택
+$\mathcal{X}_{y_i} = \mathcal{X} \times_{\mathcal{Y}, y_i} T_i$의
+대상으로 볼 수 있다. $\mathcal{X}_{y_i} \to T_i$는 $f$의 밑변환이므로
+국소적으로 유한 표시이고, 보조정리
+\ref{stacks-limits-lemma-locally-finite-presentation-limit-preserving}에 의해
+극한을 보존한다. 이는 어떤 $i' \geq i$에 대해
+$(x, y_i, \beta)$가 $T_{i'}$ 위의 대상에서 온다는 뜻이다.
+정의를 풀면 $(x, y_i, \beta)$가 표시된 함자의 본질적 상에 속한다.
+즉 그 함자는 본질적으로 전사이며, 달리 말하면 $f$가 대상에 대해
+극한을 보존한다. 이제 이 논의를 $f$의 대각사상 $\Delta$에 적용하자.
+『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-diagonal-morphism-finite-type}에 의해
+$\Delta$는 국소적으로 유한 표시이다. 따라서 위 논의로부터
+$\Delta$가 대상에 대해 극한을 보존한다. 보조정리
+\ref{stacks-limits-lemma-representable-by-spaces-limit-preserving}에 의해
+$\Delta$는 극한을 보존한다. 보조정리
+\ref{stacks-limits-lemma-limit-preserving-diagonal}에 의해 위 표시 함자는 완전충실하다.
+이미 본질적으로 전사임을 증명했으므로 이 함자는 동치이고, (1)을 얻는다.
+
+\medskip\noindent
+(1) $\Rightarrow$ (2)는 자명하다. (2)를 가정하자.
+스킴 $V$와 전사 매끄러운 사상 $V \to \mathcal{Y}$를 택한다.
+『표현가능성의 판정 조건』의 보조정리
+\ref{criteria-lemma-base-change-limit-preserving}에 의해 밑변환
+$\mathcal{X} \times_\mathcal{Y} V \to V$는 대상에 대해 극한을 보존한다.
+스킴 $U$와 전사 매끄러운 사상
+$U \to \mathcal{X} \times_\mathcal{Y} V$를 택한다.
+매끄러운 사상은 국소적으로 유한 표시이므로
+$U \to \mathcal{X} \times_\mathcal{Y} V$는 극한을 보존한다
+(증명의 첫 부분). 『표현가능성의 판정 조건』의 보조정리
+\ref{criteria-lemma-composition-limit-preserving}에 의해 합성
+$U \to V$는 대상에 대해 극한을 보존한다. 따라서
+$U \to V$는 국소적으로 유한 표시이다. 『표현가능성의 판정 조건』의 보조정리
+\ref{criteria-lemma-representable-by-spaces-limit-preserving}를 보라.
+이는 바로 $f$가 국소적으로 유한 표시라는 조건이다. 『스택의 사상』의 정의
+\ref{stacks-morphisms-definition-locally-finite-presentation}를 보라.
+\end{proof}
+
+
+
+
+\section{성질의 하강}
+\label{stacks-limits-section-descent}
+
+\noindent
+이 절은 『극한』의 절 \ref{limits-section-descent}에 대응한다.
+
+\begin{situation}
+\label{stacks-limits-situation-descent}
+$Y = \lim_{i \in I} Y_i$를 아핀 전이사상을 갖는 대수공간들의
+유향계의 극한이라 하자. 모든 $i \in I$에 대해 $X_i$가 준콤팩트이고
+준분리라고 가정한다. 또한 원소 $0 \in I$를 하나 택한다.
+\end{situation}
+
+\begin{lemma}
+\label{stacks-limits-lemma-eventually-separated}
+상황 \ref{stacks-limits-situation-descent}에서 $\mathcal{X}_0 \to Y_0$가
+대수적 스택에서 $Y_0$로 가는 사상이라고 하자.
+$\mathcal{X}_0$가 준콤팩트이고 준분리라고 가정하자.
+$Y \times_{Y_0} \mathcal{X}_0 \to Y$가 분리이면, 충분히 큰 모든
+$i \in I$에 대해 $Y_i \times_{Y_0} \mathcal{X}_0 \to Y_i$도 분리이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X} = Y \times_{Y_0} \mathcal{X}_0$ 및
+$\mathcal{X}_i = Y_i \times_{Y_0} \mathcal{X}_0$로 쓰자.
+아핀 스킴 $U_0$과 전사 매끄러운 사상
+$U_0 \to \mathcal{X}_0$를 택한다. $U = Y \times_{Y_0} U_0$ 및
+$U_i = Y_i \times_{Y_0} U_0$로 둔다. 그러면 $U$와 $U_i$는 아핀이고,
+$U \to \mathcal{X}$와 $U_i \to \mathcal{X}_i$는 매끄럽고 전사이다.
+$R_0 = U_0 \times_{\mathcal{X}_0} U_0$로 두고,
+$R = Y \times_{Y_0} R_0$ 및 $R_i = Y_i \times_{Y_0} R_0$로 둔다.
+그러면 $R = U \times_\mathcal{X} U$이고
+$R_i = U_i \times_{\mathcal{X}_i} U_i$이다.
+
+\medskip\noindent
+이 표기에서 $\mathcal{X} \to Y$가 분리이면
+$R \to U \times_Y U$는
+$U \times_Y U \to \mathcal{X} \times_Y \mathcal{X}$에 의한
+$\mathcal{X} \to \mathcal{X} \times_Y \mathcal{X}$의 밑변환이므로
+고유임에 유의하자. 반대로 $R_i \to U_i \times_{Y_i} U_i$가 고유이면
+$\mathcal{X}_i \to Y_i$가 분리이다. 실제로
+$U_i \times_{Y_i} U_i \to \mathcal{X}_i \times_{Y_i} \mathcal{X}_i$
+는 전사이고 매끄럽다. 『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-check-property-covering}를 보라.
+$R_0 \to U_0 \times_{Y_0} U_0$는 국소 유한형이고
+$R_0$는 준콤팩트이며 준분리임에 유의하자.
+『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-eventually-proper}에 의해 충분히 큰 $i$에 대해
+$R_i \to U_i \times_{Y_i} U_i$가 고유이고, 이로써 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+\section{상대적 대상의 하강}
+\label{stacks-limits-section-descending-relative}
+
+\noindent
+이 절은 『대수공간의 극한』의 절
+\ref{spaces-limits-section-descending-relative}에 대응한다.
+
+\begin{lemma}
+\label{stacks-limits-lemma-descend-a-stack-down}
+$I$를 유향집합이라 하자. $(X_i, f_{ii'})$를 $I$ 위의
+대수공간들의 역계라 하고 다음을 가정하자.
+\begin{enumerate}
+\item 사상 $f_{ii'} : X_i \to X_{i'}$는 아핀이다.
+\item 공간 $X_i$는 준콤팩트이고 준분리이다.
+\end{enumerate}
+$X = \lim X_i$라 하자. $\mathcal{X}$가 $X$ 위 유한 표시인
+대수적 스택이면, 어떤 $i \in I$와 $X_i$ 위 유한 표시인 대수적 스택
+$\mathcal{X}_i$가 존재하여 $X$ 위의 대수적 스택으로서
+$\mathcal{X} \cong \mathcal{X}_i \times_{X_i} X$이다.
+\end{lemma}
+
+\begin{proof}
+『스택의 사상』의 정의
+\ref{stacks-morphisms-definition-locally-finite-presentation}에 의해
+$\mathcal{X} \to X$는 준콤팩트이고 국소적으로 유한 표시이며 준분리이다.
+$X$가 준콤팩트이고 $\mathcal{X} \to X$도 준콤팩트이므로
+$\mathcal{X}$는 준콤팩트이다(『스택의 사상』의 정의
+\ref{stacks-morphisms-definition-quasi-compact}). 따라서 아핀 스킴 $U$와
+전사 매끄러운 사상 $U \to \mathcal{X}$를 찾을 수 있다
+(『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-quasi-compact-stack}).
+$R = U \times_\mathcal{X} U$로 둔다. 그러면 $X$ 위의 대수공간의
+매끄러운 준군 $(U, R, s, t, c)$를 얻고 $\mathcal{X} = [U/R]$이다.
+『대수적 스택』의 보조정리 \ref{algebraic-lemma-stack-presentation}를 보라.
+$\mathcal{X} \to X$가 준분리이고 $X$도 준분리이므로
+$\mathcal{X}$는 준분리이다(『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-composition-separated}). 따라서
+$R \to U \times U$는 준콤팩트이고 준분리이며(『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-fibre-product-after-map}),
+$R$은 준분리이고 준콤팩트인 대수공간이다.
+한편 $U \to X$는 국소적으로 유한 표시이고, 따라서 $R \to X$도
+국소적으로 유한 표시이다($s : R \to U$가 매끄러우므로 국소적으로
+유한 표시이기 때문이다). 그러므로 $(U, R, s, t, c)$는 $X$ 위
+유한 표시인 대수공간들의 범주에서 준군 대상이다.
+『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-finite-presentation}에 의해 어떤 $i$와
+$X_i$ 위의 대수공간의 준군 $(U_i, R_i, s_i, t_i, c_i)$가 존재하여,
+$X$로 당긴 것은 $(U, R, s, t, c)$와 동형이다. $i$를 키워서
+$s_i$와 $t_i$가 매끄럽다고 가정할 수 있다. 『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-smooth}를 보라.
+몫 스택 $\mathcal{X}_i = [U_i/R_i]$는 대수적 스택이다
+(『대수적 스택』의 정리
+\ref{algebraic-theorem-smooth-groupoid-gives-algebraic-stack}).
+
+\medskip\noindent
+『대수공간의 준군』의 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-functorial}에 의해 사상
+$[U/R] \to [U_i/R_i]$가 있다. 이 사상과 사상
+$[U/R] \to X$ 및 $[U_i/R_i] \to X_i$
+(『대수공간의 준군』의 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-arrows})을 결합하면 동형사상
+(즉 동치)
+$$
+[U/R] \longrightarrow [U_i/R_i] \times_{X_i} X
+$$
+을 얻는다고 주장한다. 『대수공간의 준군』의 식
+(\ref{spaces-groupoids-equation-quotient-stack})에서 말하는
+``준군의 전층'' 수준에서 대응하는 사상
+$$
+[U/_{\!p}R] \longrightarrow [U_i/_{\!p}R_i] \times_{X_i} X
+$$
+은 동형사상이다. 따라서 스택화가 섬유곱과 가환한다는 사실에서 주장이
+따른다. 『스택』의 보조정리
+\ref{stacks-lemma-stackification-fibre-product-fibred-categories}를 보라.
+\end{proof}
+
+
+
+
+\section{유한 표시 안에 닫힌 유한형}
+\label{stacks-limits-section-finite-type-closed-in-finite-presentation}
+
+\noindent
+이 절은 『대수공간의 극한』의 절
+\ref{spaces-limits-section-finite-type-closed-in-finite-presentation}에 대응한다.
+
+\begin{lemma}
+\label{stacks-limits-lemma-finite-type-closed-in-finite-presentation}
+$f : \mathcal{X} \to Y$를 대수적 스택에서 대수공간으로 가는 사상이라 하자.
+다음을 가정한다.
+\begin{enumerate}
+\item $f$는 유한형이고 준분리이다.
+\item $Y$는 준콤팩트이고 준분리이다.
+\end{enumerate}
+그러면 유한 표시 사상 $f' : \mathcal{X}' \to Y$와
+$Y$ 위의 대수적 스택들의 닫힌 몰입
+$\mathcal{X} \to \mathcal{X}'$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+『대수공간의 극한』의 명제
+\ref{spaces-limits-proposition-approximate}에 의해 $Y_i$가 뇌터이고
+전이사상이 아핀인 어떤 유향집합 $I$ 위의 대수공간들의 극한
+$Y = \lim_{i \in I} Y_i$로 이를 쓰자. 우리는 『대수공간의 극한』의 절
+\ref{spaces-limits-section-finite-type-quasi-separated}의 내용을 사용한다.
+
+\medskip\noindent
+표현 $\mathcal{X} = [U/R]$을 택한다. 이에 대응하는 $Y$ 위의
+대수공간의 준군을 $(U, R, s, t, c, e, i)$로 나타내자.
+$U$는 아핀이라고 가정해도 좋고 그렇게 한다. 그러면
+$U$, $R$, $R \times_{s, U, t} R$은 $Y$ 위 유한형인 준분리
+대수공간들이다. 두 사상 $s, t : R \to U$, 세 사상
+$c : R \times_{s, U, t} R \to R$,
+$\text{pr}_1 : R \times_{s, U, t} R \to R$,
+$\text{pr}_2 : R \times_{s, U, t} R \to R$,
+사상 $e : U \to R$, 그리고 마지막으로 사상 $i : R \to R$가 있다.
+이 사상들은 『준군』의 절 \ref{groupoids-section-groupoids}에 자세히
+적힌 공리들을 만족한다.
+
+\medskip\noindent
+『대수공간의 극한』의 주석
+\ref{spaces-limits-remark-finite-type-gives-well-defined-system}에 따라
+어떤 $i_0 \in I$와 $(Y_i)_{i \geq i_0}$ 위의 역계들
+\begin{enumerate}
+\item $(U_i)_{i \geq i_0}$,
+\item $(R_i)_{i \geq i_0}$,
+\item $(T_i)_{i \geq i_0}$
+\end{enumerate}
+을 찾아서
+$U = \lim_{i \geq i_0} U_i$,
+$R = \lim_{i \geq i_0} R_i$, 그리고
+$R \times_{s, U, t} R = \lim_{i \geq i_0} T_i$
+가 되게 할 수 있다. 또한 계들의 사상
+\begin{enumerate}
+\item $(s_i)_{i \geq i_0} : (R_i)_{i \geq i_0} \to (U_i)_{i \geq i_0}$,
+\item $(t_i)_{i \geq i_0} : (R_i)_{i \geq i_0} \to (U_i)_{i \geq i_0}$,
+\item $(c_i)_{i \geq i_0} : (T_i)_{i \geq i_0} \to (R_i)_{i \geq i_0}$,
+\item $(p_i)_{i \geq i_0} : (T_i)_{i \geq i_0} \to (R_i)_{i \geq i_0}$,
+\item $(q_i)_{i \geq i_0} : (T_i)_{i \geq i_0} \to (R_i)_{i \geq i_0}$,
+\item $(e_i)_{i \geq i_0} : (U_i)_{i \geq i_0} \to (R_i)_{i \geq i_0}$,
+\item $(i_i)_{i \geq i_0} : (R_i)_{i \geq i_0} \to (R_i)_{i \geq i_0}$
+\end{enumerate}
+이 존재하여
+$s = \lim_{i \geq i_0} s_i$,
+$t = \lim_{i \geq i_0} t_i$,
+$c = \lim_{i \geq i_0} c_i$,
+$\text{pr}_1 = \lim_{i \geq i_0} p_i$,
+$\text{pr}_2 = \lim_{i \geq i_0} q_i$,
+$e = \lim_{i \geq i_0} e_i$, 그리고
+$i = \lim_{i \geq i_0} i_i$가 되게 할 수 있다.
+『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-morphism-good-diagram-smooth}에 의해
+$s_i$와 $t_i$가 매끄럽다고 가정할 수 있다(이를 위해 $i_0$를
+키워야 할 수도 있다). 『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-morphism-good-diagram-flat}에 의해 모든
+$i \geq i_0$에 대해, $s$와 $R \to R_i$가 주는 사상
+$R \to U \times_{U_i, s_i} R_i$ 및 $t$와 $R \to R_i$가 주는 사상
+$R \to U \times_{U_i, t_i} R_i$가 동형사상이라고 가정할 수 있다.
+『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-good-diagram-fibre-product}에 의해 도식
+$$
+\xymatrix{
+T_i \ar[r]_{q_i} \ar[d]_{p_i} & R_i \ar[d]^{t_i} \\
+R_i \ar[r]^{s_i} & U_i
+}
+$$
+이 카르테시안이라고 가정할 수 있다. 그러면 『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-morphism-good-diagram}의 유일성으로부터,
+충분히 큰 $i$에 대해 위에서 언급한 $s, t, c, e, i$ 사이의 관계들이
+$s_i, t_i, c_i, e_i, i_i$에 대해서도 성립함이 보장된다. 그러한 $i$를 고정한다.
+
+\medskip\noindent
+그러면 $(U_i, R_i, s_i, t_i, c_i, e_i, i_i)$는 $Y_i$ 위의
+대수공간의 매끄러운 준군이다. 따라서
+$\mathcal{X}_i = [U_i/R_i]$는 대수적 스택이다
+(『대수적 스택』의 정리
+\ref{algebraic-theorem-smooth-groupoid-gives-algebraic-stack}).
+$Y \to Y_i$ 위의 준군 사상
+$$
+(U, R, s, t, c, e, i) \to (U_i, R_i, s_i, t_i, c_i, e_i, i_i)
+$$
+은 가환도식
+$$
+\xymatrix{
+\mathcal{X} \ar[d] \ar[r] & \mathcal{X}_i \ar[d] \\
+Y \ar[r] & Y_i
+}
+$$
+을 결정한다(『대수공간의 준군』의 보조정리
+\ref{spaces-groupoids-lemma-quotient-stack-functorial}).
+사상 $\mathcal{X} \to Y \times_{Y_i} \mathcal{X}_i$가 닫힌 몰입이라고
+주장한다. 구성에 의해 대수적 스택 $\mathcal{X}_i \to Y_i$는 유한
+표시이므로, 이 주장이 증명을 끝낸다. 주장을 증명하기 위해 왼쪽 도식
+$$
+\xymatrix{
+U \ar[d] \ar[r] & U_i \ar[d] \\
+\mathcal{X} \ar[r] & \mathcal{X}_i
+}
+\quad\quad
+\xymatrix{
+U \ar[d] \ar[r] & Y \times_{Y_i} U_i \ar[d] \\
+\mathcal{X} \ar[r] & Y \times_{Y_i} \mathcal{X}_i
+}
+$$
+이 『대수공간의 준군』의 보조정리
+\ref{spaces-groupoids-lemma-criterion-fibre-product}와 위 결과들에 의해
+카르테시안임에 유의하자. 따라서 오른쪽 가환도식도 카르테시안이다.
+이제 원하는 결과는 다음 사실들에서 따른다. 역계 $(U_i)$의 구성에 의해
+$U \to Y \times_{Y_i} U_i$는 닫힌 몰입이다(『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-limit-from-good-diagram});
+$Y \times_{Y_i} U_i \to Y \times_{Y_i} \mathcal{X}_i$는 매끄럽고 전사이다;
+그리고 『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-check-immersion-covering}가 성립한다.
+\end{proof}
+
+\noindent
+분리된 대수적 스택에 대해서도 같은 형태의 결과가 있다.
+
+\begin{lemma}
+\label{stacks-limits-lemma-separated-closed-in-finite-presentation}
+$f : \mathcal{X} \to Y$를 대수적 스택에서 대수공간으로 가는 사상이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 유한형이고 분리이다.
+\item $Y$는 준콤팩트이고 준분리이다.
+\end{enumerate}
+그러면 유한 표시인 분리 사상 $f' : \mathcal{X}' \to Y$와
+$Y$ 위의 대수적 스택들의 닫힌 몰입
+$\mathcal{X} \to \mathcal{X}'$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+먼저 보조정리 \ref{stacks-limits-lemma-finite-type-closed-in-finite-presentation}의 증명과
+정확히 같은 절차를 사용하여(그 표기도 빌려 쓴다), 몰입
+$\mathcal{X} \to \mathcal{X}'$를
+$\mathcal{X}_i = [U_i/R_i]$인
+$\mathcal{X} \to \mathcal{X}' = Y \times_{Y_i} \mathcal{X}_i$로 구성한다.
+따라서 충분히 큰 $i$에 대해 $\mathcal{X}_i \to Y_i$가 분리임을 보이면
+충분하다. 다시 말해, 충분히 큰 $i$에 대해
+$\mathcal{X}_i \to \mathcal{X}_i \times_{Y_i} \mathcal{X}_i$가
+고유임을 보이면 충분하다. 사상
+$U_i \times_{Y_i} U_i \to \mathcal{X}_i \times_{Y_i} \mathcal{X}_i$가
+전사이고 매끄러우며
+$R_i = \mathcal{X}_i
+\times_{\mathcal{X}_i \times_{Y_i} \mathcal{X}_i} U_i \times_{Y_i} U_i$
+이므로, 충분히 큰 $i$에 대해 사상
+$(s_i, t_i) : R_i \to U_i \times_{Y_i} U_i$가 고유임을 보이면 충분하다.
+『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-check-property-covering}를 보라.
+이를 다음 문단에서 증명한다.
+
+\medskip\noindent
+$U \times_Y U \to Y$가 준분리이고 유한형임을 관찰하자.
+따라서 『대수공간의 극한』의 주석
+\ref{spaces-limits-remark-finite-type-gives-well-defined-system}의 구성을
+사용하여 $i_1 \in I$와
+$U \times_Y U = \lim_{i \geq i_1} V_i$인 역계
+$(V_i)_{i \geq i_1}$를 찾을 수 있다.
+『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-good-diagram-fibre-product}에 의해, 충분히 큰 $i$에
+대하여 사영 $U \times_Y U \to U$에 적용한 구성의 함자성은 닫힌 몰입
+$$
+V_i \to U_i \times_{Y_i} U_i
+$$
+을 준다. (엄밀히는 $Y_i$를 $Y \to Y_i$의 스킴론적 상으로
+바꾸어야 하므로 약간 어긋나지만, 이것은 섬유곱을 바꾸지 않음이
+분명하다.) 한편 『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-morphism-good-diagram-proper}에 의해, 고유 사상
+$(s, t) : R \to U \times_Y U$에 적용한 함자성은(여기서
+$\mathcal{X}$가 분리라는 사실을 사용한다) 충분히 큰 $i$에 대해 고유인
+사상 $R_i \to V_i$를 준다. 이 사상들을 합성하면 모든 충분히 큰 $i$에
+대해 고유 사상 $R_i \to U_i \times_{Y_i} U_i$를 얻는다.
+『대수공간의 극한』의 주석
+\ref{spaces-limits-remark-finite-type-gives-well-defined-system}에 나오는
+구성의 함자성에 의해, 충분히 큰 $i$에서 이 사상은 $(s_i, t_i)$와
+같으며 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+\section{보편 닫힌 사상}
+\label{stacks-limits-section-universally-closed}
+
+\noindent
+이 절은 『대수공간의 극한』의 절
+\ref{spaces-limits-section-universally-closed}에 대응한다.
+
+\begin{lemma}
+\label{stacks-limits-lemma-separate}
+$g : Z \to Y$를 아핀 스킴의 사상이라 하자.
+$f : \mathcal{X} \to Y$를 대수적 스택의 준콤팩트 사상이라 하자.
+$z \in Z$라 하고, $T \subset |\mathcal{X} \times_Y Z|$를
+$z \not \in \Im(T \to |Z|)$인 닫힌 부분집합이라 하자.
+$\mathcal{X}$가 준콤팩트이면 다음이 존재한다. $z$의 열린 근방
+$V \subset Z$, 가환도식
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+및 다음 조건을 만족하는 닫힌 부분집합 $T' \subset |X \times_Y Z'|$.
+\begin{enumerate}
+\item $Z'$는 $Y$ 위 유한 표시인 아핀 스킴이다.
+\item $z' = a(z)$라 하면 $z' \not \in \Im(T' \to |Z'|)$이다.
+\item $|\mathcal{X} \times_Y V|$에서 $T$의 역상은
+$|\mathcal{X} \times_Y V| \to |\mathcal{X} \times_Y Z'|$에 의해
+$T'$ 안으로 사상된다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+스킴의 사상에 대한 대응하는 결과에서 이를 이끌어 내겠다.
+$\mathcal{X}$가 준콤팩트이므로, 아핀 스킴 $W$와 전사 매끄러운 사상
+$W \to \mathcal{X}$를 택할 수 있다. $T_W \subset |W \times_Y Z|$를
+$T$의 역상이라 하자. 그러면 $z$는 $T_W$의 상에 속하지 않는다.
+스킴의 경우(『극한』의 보조정리 \ref{limits-lemma-separate})에 의해,
+$z$의 열린 근방 $V \subset Z$, 스킴의 가환도식
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+및 다음 조건을 만족하는 닫힌 부분집합 $T' \subset |W \times_Y Z'|$를
+찾을 수 있다.
+\begin{enumerate}
+\item $Z'$는 $Y$ 위 유한 표시인 아핀 스킴이다.
+\item $z' = a(z)$라 하면 $z' \not \in \Im(T' \to |Z'|)$이다.
+\item $T_1 = T_W \cap |W \times_Y V|$는
+$|W \times_Y V| \to |W \times_Y Z'|$에 의해 $T'$ 안으로 사상된다.
+\end{enumerate}
+가환도식
+$$
+\xymatrix{
+W \times_Y Z \ar[d] &
+W \times_Y V \ar[l] \ar[rr]_{a_1} \ar[d]_c & &
+W \times_Y Z' \ar[d]^q \\
+\mathcal{X} \times_Y Z &
+\mathcal{X} \times_Y V \ar[l] \ar[rr]^{a_2} & &
+\mathcal{X} \times_Y Z'
+}
+$$
+의 정사각형들은 카르테시안이고 수직 사상들은 전사이고 매끄러우며,
+따라서 특히 열린사상이다. 왼쪽 정사각형을 보면
+$T_1 = T_W \cap |W \times_Y V|$가 $c$에 의한
+$T_2 = T \cap |\mathcal{X} \times_Y V|$의 역상임을 알 수 있다.
+『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-points-cartesian}에 의해
+$a_1(T_1) = q^{-1}(a_2(T_2))$이다.
+『위상』의 보조정리 \ref{topology-lemma-open-morphism-quotient-topology}에
+의해
+$$
+q^{-1}\left(\overline{a_2(T_2)}\right) =
+\overline{q^{-1}(a_2(T_2))} =
+\overline{a_1(T_1)} \subset T'
+$$
+이다. $q$가 전사이므로, $T'$에 대해 그렇듯이
+$\overline{a_2(T_2)} \to |Z'|$의 상은 $z'$를 포함하지 않는다.
+따라서 위의 $Z', V, a, b$로 된 도식과 닫힌 부분집합
+$\overline{a_2(T_2)} \subset |\mathcal{X} \times_Y Z'|$를 보조정리가
+제기한 문제의 해로 택할 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-test-universally-closed}
+$f : \mathcal{X} \to \mathcal{Y}$를 대수적 스택의 준콤팩트 사상이라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item $f$는 보편 닫힌 사상이다.
+\item 국소적으로 유한 표시인 모든 사상 $Z \to \mathcal{Y}$에 대해,
+$Z$가 아핀 스킴이면 사상
+$|\mathcal{X} \times_Y Z| \to |Z|$는 닫힌사상이다.
+\item 스킴 $V$와 전사 매끄러운 사상 $V \to \mathcal{Y}$가 존재하여,
+모든 $n \geq 0$에 대해
+$|\mathbf{A}^n \times (\mathcal{X} \times_\mathcal{Y} V)|
+\to |\mathbf{A}^n \times V|$는 닫힌사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)이 (2)를 함의함은 분명하다.
+
+\medskip\noindent
+(2)를 가정하자. 아핀 스킴들의 서로소 합인 스킴 $V$와 전사 매끄러운
+사상 $V \to \mathcal{Y}$를 택하자. $f$가 보편 닫힌 사상임을 보이려면,
+$f$의 밑변환 $\mathcal{X} \times_\mathcal{Y} V \to V$가 보편 닫힌
+사상임을 보이면 충분하다. 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-universally-closed-local}를 보라.
+이 밑변환에 대해서도 성질 (2)가 성립함에 유의하자. 따라서 (2)가
+(1)을 함의함을 증명하기 위해 $Y = \mathcal{Y}$가 아핀 스킴이라고
+가정해도 된다.
+
+\medskip\noindent
+(2)를 가정하고 $\mathcal{Y} = Y$가 아핀 스킴이라고 가정하자.
+$f$가 보편 닫힌 사상이 아니면, $Y$ 위의 어떤 아핀 스킴 $Z$에 대해
+$|\mathcal{X} \times_Y Z| \to |Z|$가 닫힌사상이 아니다.
+『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-universally-closed-local}를 보라.
+이는 어떤 닫힌 부분집합 $T \subset |\mathcal{X} \times_Y Z|$가 존재하여
+$\Im(T \to |Z|)$가 닫혀 있지 않다는 뜻이다. $T$의 상의 폐포에는
+속하지만 그 상에는 속하지 않는 $z \in |Z|$를 택하자.
+보조정리 \ref{stacks-limits-lemma-separate}를 적용한다. 열린 근방 $V \subset Z$와
+가환도식
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+및 다음 조건을 만족하는 닫힌 부분집합
+$T' \subset |\mathcal{X} \times_Y Z'|$를 얻는다.
+\begin{enumerate}
+\item $Z'$는 $Y$ 위 유한 표시인 아핀 스킴이다.
+\item $z' = a(z)$라 하면 $z' \not \in \Im(T' \to |Z'|)$이다.
+\item $|\mathcal{X} \times_Y V|$에서 $T$의 역상은
+$|\mathcal{X} \times_Y V| \to |\mathcal{X} \times_Y Z'|$에 의해
+$T'$ 안으로 사상된다.
+\end{enumerate}
+$z'$가 $\Im(T' \to |Z'|)$의 폐포에 속한다고 주장한다. 그러면
+$|\mathcal{X} \times_Y Z'| \to |Z'|$가 닫힌사상이 아니므로,
+(2)를 가정한 것과 모순이다. 다시 말해 이 주장은 (2)가 (1)을
+함의함을 보인다. 주장을 확인하기 위해 다음 가환도식을 보자.
+$$
+\xymatrix{
+\mathcal{X} \times_Y Z \ar[d] &
+\mathcal{X} \times_Y V \ar[l] \ar[d] \ar[r] &
+\mathcal{X} \times_Y Z' \ar[d] \\
+Z & V \ar[l] \ar[r]^a & Z'
+}
+$$
+$T_V \subset |\mathcal{X} \times_Y V|$를 $T$의 역상이라 하자.
+『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-points-cartesian}에 의해 $|V|$에서
+$T_V$의 상은 $|Z|$에서 $T$의 상의 역상이다. $z$가 $T \to |Z|$의
+상의 폐포에 속하고 $|V| \to |Z|$가 열린사상이므로, $z$는
+$T_V \to |V|$의 상의 폐포에 속한다. $|\mathcal{X} \times_Y Z'|$에서
+$T_V$의 상이 $|T'|$에 포함되므로, 곧바로 $z' = a(z)$가 $T'$의
+상의 폐포에 속함을 얻는다.
+
+\medskip\noindent
+(1)이 (3)을 함의함은 분명하다. $V \to \mathcal{Y}$를 (3)에서와 같이
+택하자. $\mathcal{X} \times_Y V \to V$가 보편 닫힌 사상임을 보일 수
+있으면, 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-universally-closed-local}에 의해 $f$는 보편
+닫힌 사상이다. 따라서 $f$가 대수적 스택의 준콤팩트 사상이고,
+$\mathcal{Y} = Y$가 스킴이며, 모든 $n$에 대해
+$|\mathbf{A}^n \times \mathcal{X}| \to |\mathbf{A}^n \times Y|$가
+닫힌사상일 때 $f : \mathcal{X} \to \mathcal{Y}$가 (2)를 만족함을
+보이면 충분하다. $Z$가 아핀 스킴인 국소 유한 표시 사상
+$Z \to Y$를 택하자. 사상 $|\mathcal{X} \times_Y Z| \to |Z|$가
+닫힌사상임을 보여야 한다. $Y$가 스킴이고, $Z$가 아핀이며,
+$Z \to Y$가 국소적으로 유한 표시이므로 몰입
+$Z \to \mathbf{A}^n \times Y$를 찾을 수 있다.
+『스킴의 사상』의 보조정리
+\ref{morphisms-lemma-quasi-affine-finite-type-over-S}를 보라.
+카르테시안 도식
+$$
+\vcenter{
+\xymatrix{
+\mathcal{X} \times_Y Z \ar[d] \ar[r] &
+\mathbf{A}^n \times \mathcal{X} \ar[d] \\
+Z \ar[r] & \mathbf{A}^n \times Y
+}
+}
+\quad
+\begin{matrix}
+\text{이로부터 다음} \\
+\text{카르테시안 정사각형이 유도된다}
+\end{matrix}
+\quad
+\vcenter{
+\xymatrix{
+|\mathcal{X} \times_Y Z| \ar[d] \ar[r] &
+|\mathbf{A}^n \times \mathcal{X}| \ar[d] \\
+|Z| \ar[r] & |\mathbf{A}^n \times Y|
+}
+}
+$$
+을 생각하자. 이 위상공간들의 도식에서 수평 화살표들은 국소 닫힌
+부분집합 위로의 위상동형이다(『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-subspace-induced-topology}). 따라서
+$|X \times_Y Z|$의 모든 닫힌 부분집합 $T$는
+$|\mathbf{A}^n \times Y|$의 어떤 닫힌 부분집합 $T'$의 당김이다.
+가정에 의해 $|\mathbf{A}^n \times X|$에서 $T'$의 상이 닫혀 있으므로,
+원하는 대로 $|Z|$에서 $T$의 상도 닫혀 있다고 결론내린다.
+\end{proof}

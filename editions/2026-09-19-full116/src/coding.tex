@@ -1,0 +1,143 @@
+% Generated mechanically from frozen input p12/ko/coding.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{113}
+\chapter{코딩 스타일}
+
+
+
+\phantomsection
+\label{coding-section-phantom}
+
+
+\section{스타일 지침 목록}
+\label{coding-section-style}
+
+\noindent
+이 지침들은 시간이 지나면서 바뀌겠지만, 지금 몇 가지라도 적어 두면
+일관된 LaTeX 스타일을 장려하는 데 도움이 되기를 바란다.
+소스 파일의 내용을 ``코드\footnote{모두 Knuth의 탓이다. \cite{Knuth}를 보라.}''라고
+부르겠다.
+
+\begin{enumerate}
+\item 모든 tex 파일의 모든 줄을 80자 이하로 유지한다.
+\item tex 파일에는 들여쓰기를 사용하지 않는다. 환경 등을 시각적으로
+파악하려면 들여쓰기 대신 편집기의 구문 강조를 사용한다.
+\item 새 문단을 시작할 때는
+\begin{verbatim}
+\medskip\noindent
+\end{verbatim}
+를 사용하고, 환경 바로 뒤에서 새 문단을 시작할 때는
+\begin{verbatim}
+\noindent
+\end{verbatim}
+를 사용한다.
+\item 가능하면 수학 공식의 코드를 여러 줄에 걸쳐 나누지 않는다.
+양쪽 달러 기호까지 포함한 완전한 코드 전체가 한 줄에 들어가지 않으면,
+다음 줄의 첫 번째 문자로 첫 번째 달러 기호를 놓는다. 그래도 들어가지
+않으면 수학적으로 적절한 위치를 찾아 코드를 나눈다.
+\item 디스플레이 수식은 다음과 같이 코딩해야 한다.
+\begin{verbatim}
+$$
+...
+...
+$$
+\end{verbatim}
+다시 말해 한 줄에 이중 달러 기호만 놓아 시작하고 같은 방식으로 끝낸다.
+\item {\it 어떤 매크로도 사용하지 않는다}. 이유: 이렇게 하면 tex 파일을
+읽기 쉬우며, 수없이 많은 매크로를 익히지 않고도 임의의 부분을
+바로 편집하기 시작할 수 있다.
+그리고 작성이 더 어렵거나 시간이 더 많이 들게 하지도 않는다.
+물론 같은 수학적 대상이 본문의 서로 다른 곳에서 서로 다르게
+TeX 처리될 수 있다는 단점이 있지만, 이는 쉽게 눈에 띌 것이다.
+\item 우리가 사용하는 정리 환경은 다음과 같다.
+``theorem'', ``proposition'', ``lemma'' (plain),
+``definition'', ``example'', ``exercise'', ``situation'' (definition),
+``remark'', ``remarks'' (remark). 물론
+``proof'' 환경도 있다.
+\item ``foo'' 환경은 다음과 같이 코딩해야 한다.
+\begin{verbatim}
+\begin{foo}
+...
+...
+\end{foo}
+\end{verbatim}
+디스플레이 수식의 코딩 방식과 마찬가지이다.
+\item 어차피 그 결과는 그다음의 더 큰 정리를 증명하는 데 사용될 가능성이
+크므로, ``corollary'' 대신 그냥 ``lemma'' 환경을 사용한다.
+\item 각 보조정리, 명제, 정리 바로 뒤에는 해당 보조정리, 명제, 정리의
+증명이 온다. 증명을 중첩하지 말 것.
+\item preamble.tex, chapters.tex, fdl.tex 파일은 특수한 tex 파일이다.
+이들을 제외한 각 tex 파일은
+다음과 같은 구조를 갖는다.
+\begin{verbatim}
+\title{Title}
+...
+...
+\end{verbatim}
+\item 보조정리, 명제, 정리는 물론 비고, 연습문제, 그 밖의 환경에도
+레이블을 추가하도록 한다.
+보조정리에 레이블을 붙일 때는 다음과 같은 형식을 사용한다.
+\begin{verbatim}
+\begin{lemma}
+\label{coding-lemma-bar}
+...
+\end{lemma}
+\end{verbatim}
+다른 모든 환경도 마찬가지이다. 다시 말해 ``foo''라는 환경의 레이블은
+``foo-''로 시작한다. 또한 모든 레이블은 소문자, 숫자, 기호 ``-''만으로
+구성한다.
+\item 절대로 ``위의 보조정리''라고 참조하지 않는다(명제 등도 마찬가지다).
+대신 다음과 같이 쓴다.
+\begin{verbatim}
+Lemma \ref{coding-lemma-bar} above
+\end{verbatim}
+이는 나중에 보조정리의 순서를 바꿔도 기본적으로 문제가 없다는 뜻이다.
+\item 파일 간 참조. 제목이 ``Foo''인 foo.tex 파일에서
+레이블이 ``lemma-bar''인 보조정리를 참조하려면
+다음 코드를 사용한다.
+\begin{verbatim}
+Foo, Lemma \ref{foo-lemma-bar}
+\end{verbatim}
+이것이 작동하지 않으면 preamble.tex 파일을 살펴보고
+사용할 올바른 표현을 찾는다.
+그러면 출력 파일에 ``Foo, Lemma $<$link$>$''가 생성되므로 링크가
+파일 밖을 가리킨다는 점이 분명해진다.
+\item 가능하다면 ``proof'' 환경에서 전방 참조를 피한다.
+(이에 대한 자동화된 테스트를 작성할 수 있을 것이다.)
+\item 어떤 문장도 수학 기호로 시작하지 않는다.
+\item 보조정리, 명제, 정리 바로 앞에 ``이는 다음에서 따른다''와
+같은 유형의 문장을 두지 않는다. 모든 문장은 마침표로 끝난다.
+\item 각 보조정리, 명제, 정리에서 모든 가정을 명시한다.
+그러면 독자가 주어진 보조정리, 명제, 정리를 자신의 특정 문제에
+적용할 수 있는지 더 쉽게 알 수 있다.
+\item 증명은 짧게 유지한다. pdf 또는 dvi에서 1쪽 미만이어야 한다.
+증명을 보조정리 등으로 나누면 언제나 이렇게 할 수 있다.
+\item foobar라는 성질을 정의할 때는 definition 환경 안의 코드에서
+\begin{verbatim}
+{\it foobar}
+\end{verbatim}
+를 사용한다.
+정의가 문서의 본문에 나타나는 경우에도 마찬가지이다.
+그러면 독자가 무엇이 정의되고 있는지 더 쉽게 알 수 있다.
+\item 현재 절 밖에서도 사용할 정의는 모두 독립된 definition 환경에 둔다.
+임시 정의는 본문 안에서 만들 수 있다. 까다로운 경우는 수학적 구성이다
+(수학적 구성은 서로 연관된 보조정리를 수반하는 정의인 경우가 많다).
+좋은 해결책은 아마도 수학적 구성을 그 자체의 짧은 절에 두어서 사용자가
+정의 대신 그 절을 참조할 수 있게 하는 것이다.
+\item 수식을 본문 어딘가에서 실제로 참조하지 않는 한 번호를 붙이지 않는다.
+레이블은 나중에 언제든 추가할 수 있다.
+\item 보조정리, 명제, 정리의 진술과 증명에서는 문장을 짧게 유지한다.
+예를 들어 ``$R$을 환이라 하고 $M$을 $R$-가군이라 하자.'' 대신
+``$R$을 환이라 하자. $M$을 $R$-가군이라 하자.''라고 쓴다. 이유:
+이렇게 하면 증명과 진술의 까다로운 부분의 구조를 더 쉽게 파악할 수 있다.
+\item 절을 만들 때는
+\begin{verbatim}
+\section
+\end{verbatim}
+명령을 사용하되, 소절과 하위 소절은 되도록 사용하지 않는다.
+\item 복잡한 latex 구문을 사용하지 않는다.
+\end{enumerate}

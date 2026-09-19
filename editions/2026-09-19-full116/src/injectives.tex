@@ -1,0 +1,2522 @@
+% Generated mechanically from frozen input canon/ko-kr/integration-20260908-r10-p03-register/inputs/p03/ko/injectives.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{18}
+\chapter{단사 대상}
+
+
+
+\phantomsection
+\label{injectives-section-phantom}
+
+
+\section{서론}
+\label{injectives-section-introduction}
+
+\noindent
+뒤의 여러 장에서는 환 달린 사이트 위 가군층의 코호몰로지를 다루기 위해
+단사 대상과 K-단사 복합체의 존재를 사용할 것이다. 이 장에서는 먼저
+사이트 위의 가군에 대해, 이어서 더 일반적으로 그로텐디크 아벨 범주에 대해
+단사 대상과 K-단사 복합체를 구성하는 방법을 설명한다.
+
+\medskip\noindent
+아벨군의 범주와 환 위의 가군 범주에는 단사 대상이 충분히 많다는 사실을
+이미 알고 있다. More on Algebra의
+\ref{more-algebra-section-abelian-groups}절 및
+\ref{more-algebra-section-injectives-modules}절을 보라.
+
+
+
+
+
+\section{가군에 대한 Baer의 논증}
+\label{injectives-section-baer}
+
+\noindent
+임의의 $R$-가군 $M$을 단사적 가군에 매장할 수 있음을 보이는 데에는
+집합론적인 성격이 더 강한 또 다른 방법이 있다. 이 방법은 밀어내기들의
+초한 여극한으로 단사적 가군을 구성한다. 이 방법은 More on Algebra, Section
+\ref{more-algebra-section-injectives-modules}의 방법보다 다소 추상적이고
+복잡하지만 더 일반적이기도 하다. 이 방법은 Baer에서 비롯된 것으로 보이며,
+Cartan과 Eilenberg가 \cite{Cartan-Eilenberg}에서, Grothendieck이
+\cite{Tohoku}에서 다시 다루었다. Grothendieck은 후자의 논문에서 이 방법을
+사용해 다른 많은 아벨 범주에도 단사 대상이 충분히 많음을 보인다. 일반적인
+경우는 뒤에서 다시 다룬다(Section \ref{injectives-section-grothendieck-categories}).
+
+\medskip\noindent
+먼저 몇 가지 집합론적 사항을 살펴보자. $\{B_{\beta}\}_{\beta \in \alpha}$를
+순서수 $\alpha$로 첨자화된 어떤 범주 $\mathcal{C}$의 대상들의 귀납계라 하자.
+$\colim_{\beta \in \alpha} B_\beta$가 $\mathcal{C}$에서 존재한다고 가정하자.
+$A$가 $\mathcal{C}$의 대상이면 자연스러운 사상
+\begin{equation}
+\label{injectives-equation-compare}
+\colim_{\beta \in \alpha} \Mor_\mathcal{C}(A, B_\beta)
+\longrightarrow
+\Mor_\mathcal{C}(A, \colim_{\beta \in \alpha} B_\beta).
+\end{equation}
+이 있다. 실제로 어떤 $\beta$에 대한 사상 $A \to B_\beta$가 주어지면 이를
+$B_\beta \to \colim_{\beta \in \alpha} B_\alpha$와 합성하여 $A$에서
+여극한으로 가는 사상을 자연스럽게 얻는다. 왼쪽 여극한은 집합들의 여극한임에
+유의하라! 일반적으로 (\ref{injectives-equation-compare})는 단사도 전사도 아니다.
+
+\begin{example}
+\label{injectives-example-not-surjective}
+집합의 범주를 생각하자. $A = \mathbf{N}$으로 놓고,
+$B_n = \{1, \ldots, n\}$을 자연수로 첨자화된 귀납계라 하자. 여기서
+$n \leq m$이면 $B_n \to B_m$은 자명한 사상이다. 그러면
+$\colim B_n = \mathbf{N}$이므로 사상 $A \to \colim B_n$ 가운데 어떤
+$m$에 대해서도 $A \to B_m$을 거쳐 분해되지 않는 것이 있다. 따라서
+$\colim \Mor(A, B_n) \to \Mor(A, \colim B_n)$
+는 전사가 아니다.
+\end{example}
+
+\begin{example}
+\label{injectives-example-not-injective}
+다음에는 이 사상이 단사가 아닌 예를 들겠다. $B_n =
+\mathbf{N}/\{1,  2, \ldots, n\}$, 즉 $\mathbf{N}$의 처음 $n$개 원소를
+한 원소로 합친 몫집합이라 하자. $n \leq m$이면 자연스러운 사상
+$B_n \to B_m$이 있으므로 $\{B_n\}$은 $\mathbf{N}$ 위의 집합들로 이루어진
+계를 이룬다. $\colim B_n = \{*\}$, 즉 한원소 집합임은 쉽게 알 수 있다.
+따라서 모든 집합 $A$에 대해 $\Mor(A, \colim B_n)$은 한원소 집합이다.
+그러나 $\colim \Mor(A , B_n)$은 한원소 집합이 {\bf 아니다}. 자연스러운
+사영 $\mathbf{N} \to \mathbf{N}/\{1, 2, \ldots, n\}$들로 이루어진 사상족
+$A \to B_n$과 $A$ 전체를 $1$의 동치류로 보내는 사상족 $A \to B_n$을
+생각하자. 이 두 사상족은 각 단계에서 서로 다르므로
+$\colim \Mor(A, B_n)$에서도 서로 다르지만, 같은 사상
+$A \to \colim B_n$을 유도한다.
+\end{example}
+
+\noindent
+그럼에도 유한 집합에서 출발하는 사상을 생각하면
+(\ref{injectives-equation-compare})는 언제나 동형이다.
+
+\begin{lemma}
+\label{injectives-lemma-out-of-finite}
+(\ref{injectives-equation-compare})에서 $\mathcal{C}$가 집합의 범주이고 $A$가
+{\it 유한 집합}이라고 하자. 그러면 그 사상은 전단사이다.
+\end{lemma}
+
+\begin{proof}
+$f : A \to \colim B_\beta$라 하자. $f$의 상은 유한하며, 그 원소들을
+$c_1, \ldots, c_r \in \colim B_\beta$라 하자. 여극한의 정의에 따라
+이들은 모두 충분히 큰 $\beta \in \alpha$에 대한 $B_\beta$의 원소들에서
+온다. 따라서 유한 단계에서 $f$를 올리는 사상
+$\widetilde{f} : A \to B_\beta$를 정의할 수 있다. 이로써
+(\ref{injectives-equation-compare})가 전사임을 보였다. 이제 두 사상
+$f : A \to B_\gamma, f' : A \to B_{\gamma'}$가 같은 사상
+$A \to \colim B_\beta$를 정의한다고 하자. 그러면 $A$의 유한한 각 원소는
+여극한의 같은 점으로 보내진다. 집합의 여극한의 정의에 따라
+$\beta \geq \gamma, \gamma'$이고 $A$의 유한한 원소들이 $f$와 $f'$ 아래에서
+$B_\beta$의 같은 점들로 보내지는 지표가 존재한다. 이로써
+(\ref{injectives-equation-compare})가 단사임을 보였다.
+\end{proof}
+
+\noindent
+이 보조정리에서 가장 흥미로운 경우는 $\alpha = \omega$인 경우, 즉
+$\{B_\beta\}$가 예 \ref{injectives-example-not-surjective} 및
+\ref{injectives-example-not-injective}에서처럼 자연수 위의 계
+$\{B_n\}_{n \in \mathbf{N}}$인 경우이다. 핵심 아이디어는 긴 합성의 사슬
+$B_1 \to B_2 \to \ldots$에 비해 $A$가 “작아서” 유한 단계를 거쳐
+분해될 수밖에 없다는 것이다. 이 보조정리의 더 일반적인 판본은 Sets, Lemma
+\ref{sets-lemma-map-from-set-lifts}에서 찾을 수 있다. 이제 이를 가군의
+범주로 일반화하자.
+
+\begin{definition}
+\label{injectives-definition-small}
+$\mathcal{C}$를 범주, $I \subset \text{Arrows}(\mathcal{C})$라 하고
+$\alpha$를 순서수라 하자. $\alpha$ 위의 계 $\{B_\beta\}$의 전이 사상들이
+$I$에 속할 때마다 사상 (\ref{injectives-equation-compare})가 동형이면,
+$\mathcal{C}$의 대상 $A$를 {\it $I$에 관하여 $\alpha$-작다}고 한다.
+\end{definition}
+
+\noindent
+이 절의 나머지에서는 고정된 가환환 $R$ 위의 $R$-가군 범주만을 다룬다.
+또 $I$를 단사 사상들, 즉 $R$ 위의 가군 범주에서 {\it 단사 사상}들의
+모임으로 잡는다. 이 경우 정의에 나오는 임의의 계 $\{B_\beta\}$에 대해
+각 사상
+$$
+B_\beta \to \colim_{\beta \in \alpha} B_\beta
+$$
+은 단사이다. 따라서 사상 (\ref{injectives-equation-compare})는 {\it 단사}이다.
+실제로 $B_\beta$들을 가군 $B = \colim_{\beta \in \alpha} B_\beta$의
+부분가군들로 해석할 수 있으며, 그러면
+$B = \bigcup_{\beta \in \alpha} B_\beta$이다. $B_\alpha$를 여극한 안의
+그 상과 동일시하면 이는 기호의 남용이 아니다. 이제 “큰” 순서수 $\alpha$에
+대해 가군이 언제나 작음을 보이고자 한다.
+
+\begin{proposition}
+\label{injectives-proposition-modules-are-small}
+$R$을 환, $M$을 $R$-가군이라 하자. $\kappa$를 $M$의 부분가군들의
+집합의 기수라 하자. $\alpha$가 공종수가 $\kappa$보다 큰 순서수이면,
+$M$은 단사 사상들에 관하여 $\alpha$-작다.
+\end{proposition}
+
+\begin{proof}
+증명은 직접적이지만, 먼저 특별한 경우를 생각해 보자. $M$이 유한이면
+주장은 다음과 같다. 극한 순서수로 매개화되고 단계 사이의 사상이 단사인
+임의의 귀납계 $\{B_\beta\}$에 대해, 모든 사상
+$M \to \colim B_\beta$는 어느 $B_\beta$를 거쳐 분해된다. 이는 보조정리
+\ref{injectives-lemma-out-of-finite}에서 증명했다.
+
+\medskip\noindent
+이제 일반적인 경우의 증명을 시작하자. 사상 (\ref{injectives-equation-compare})가
+전사임만 보이면 된다. $f : M \to \colim B_\beta$를 사상이라 하자.
+$B_\beta$를 여극한 $B = \bigcup_\beta B_\beta$의 부분대상으로 보고,
+$M$의 부분대상들 $\{f^{-1}(B_\beta)\}$를 생각하자. 이 가운데 하나,
+이를테면 $f^{-1}(B_\beta)$가 $M$과 같다면 그 사상은 $B_\beta$를 거쳐
+분해된다.
+
+\medskip\noindent
+반대로 모든 $f^{-1}(B_\beta)$가 $M$의 진부분대상이라고 가정하자. 그러나
+$$
+\bigcup f^{-1}(B_\beta) = f^{-1}\left(\bigcup B_\beta\right) = M.
+$$
+임을 알고 있다. 가정에 따라 $f^{-1}(B_\alpha)$들 가운데 나타나는 서로 다른
+$M$의 부분대상은 많아야 $\kappa$개이다. 따라서 기수가 많아야 $\kappa$인
+부분집합 $S \subset \alpha$를 택하여, $\beta'$가 $S$를 달릴 때
+$f^{-1}(B_{\beta'})$들이 $f^{-1}(B_\alpha)$들을 \emph{모두} 이루게 할 수 있다.
+
+\medskip\noindent
+그런데 $\alpha$의 공종수가 $\kappa$보다 크므로 $S$에는 상계
+$\widetilde{\alpha} < \alpha$가 있다. 특히 모든
+$f^{-1}(B_{\beta'})$, $\beta' \in S$는
+$f^{-1}(B_{\widetilde{\alpha}})$에 들어간다. 따라서
+$f^{-1}(B_{\widetilde{\alpha}}) = M$이다. 특히 사상 $f$는
+$B_{\widetilde{\alpha}}$를 거쳐 분해된다.
+\end{proof}
+
+\noindent
+이 보조정리로부터 단사 대상이 충분히 많이 존재함을 도출할 수 있다.
+Baer의 판정법을 상기하자.
+
+\begin{lemma}[Baer의 판정법]
+\label{injectives-lemma-criterion-baer}
+\begin{reference}
+\cite[Theorem 1]{Baer}
+\end{reference}
+$R$을 환이라 하자. $R$-가군 $Q$가 단사적일 필요충분조건은 모든 가환 도식
+$$
+\xymatrix{
+\mathfrak{a} \ar[d] \ar[r] &  Q \\
+R \ar@{-->}[ru]
+}
+$$
+에서 $\mathfrak{a} \subset R$가 아이디얼일 때 점선 화살표가 존재하는 것이다.
+\end{lemma}
+
+\begin{proof}
+이는 More on Algebra, Lemma
+\ref{more-algebra-lemma-characterize-injective-bis}의 (1)과 (3)의 동치이다.
+거기에 주어진 증명은 초등적이다(즉 $\text{Ext}$ 군이나 $R$-가군 범주에서
+단사 대상 또는 사영 대상의 존재를 사용하지 않는다).
+\end{proof}
+
+\noindent
+$M$이 $R$-가군이면 일반적으로 보조정리 \ref{injectives-lemma-criterion-baer}에서처럼
+점선 화살표만 빠진 도식이 주어질 수 있다. 이 도식에서 \emph{밀어내기}
+$$
+\xymatrix{
+\mathfrak{a} \ar[d]  \ar[r] &  M \ar[d] \\
+R \ar[r] &  R \oplus_{\mathfrak{a}} M.
+}
+$$
+를 만들 수 있다. 여기서 수직 사상은 단사이고 도식은 가환한다. 요점은
+$M$을 더 큰 가군 $R \oplus_{\mathfrak{a}} M$으로 확장하면
+$\mathfrak{a} \to M$을 $R$로 \emph{확장할 수 있다}는 것이다.
+
+\medskip\noindent
+Baer 논증의 핵심은 이 절차를 초한 번 되풀이하는 것이다. 이를 위해 먼저
+$R$-가군 $M$이 주어졌을 때 다음과 같은 (거대한) 밀어내기를 정의한다.
+\begin{equation}
+\label{injectives-equation-huge-diagram}
+\vcenter{
+\xymatrix{
+\bigoplus_{\mathfrak a}
+\bigoplus_{\varphi \in \Hom_R(\mathfrak a, M)}
+\mathfrak{a} \ar[r] \ar[d] & M \ar[d] \\
+\bigoplus_{\mathfrak a}
+\bigoplus_{\varphi \in \Hom_R(\mathfrak a, M)}
+R \ar[r] &  \mathbf{M}(M).
+}
+}
+\end{equation}
+위쪽 수평 화살표는 $\varphi$에 대응하는 직합인자 안의 원소
+$a \in \mathfrak a$를 원소 $\varphi(a) \in M$으로 보낸다. 왼쪽 수직 화살표는
+$\varphi$에 대응하는 직합인자 안의 $a \in \mathfrak a$를 단순히
+$\varphi$에 대응하는 직합인자 안의 원소 $a \in R$로 보낸다. 이 구성의
+기본 성질들을 다음 보조정리에 적는다.
+
+\begin{lemma}
+\label{injectives-lemma-construction}
+$R$을 환이라 하자.
+\begin{enumerate}
+\item 구성 $M \mapsto (M \to \mathbf{M}(M))$은 $M$에 대해 함자적이다.
+\item 사상 $M \to \mathbf{M}(M)$은 단사이다.
+\item 임의의 아이디얼 $\mathfrak{a}$와 임의의 $R$-가군 사상
+$\varphi : \mathfrak a \to M$에 대해, 다음 도식을 가환하게 하는
+$R$-가군 사상 $\varphi' : R \to \mathbf{M}(M)$이 존재한다.
+$$
+\xymatrix{
+\mathfrak{a} \ar[d] \ar[r]_\varphi &  M \ar[d] \\
+R \ar[r]^{\varphi'} & \mathbf{M}(M)
+}
+$$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)와 (3)은 구성에서 바로 따른다. (1)을 보이기 위해
+$\chi : M \to N$을 $R$-가군 사상이라 하자. 다음과 같은 표준 가환 도식이
+존재한다고 주장한다.
+$$
+\xymatrix{
+\bigoplus_{\mathfrak a}
+\bigoplus_{\varphi \in \Hom_R(\mathfrak a, M)}
+\mathfrak{a} \ar[r] \ar[d] \ar[rrd] & M \ar[rrd]^\chi \\
+\bigoplus_{\mathfrak a}
+\bigoplus_{\varphi \in \Hom_R(\mathfrak a, M)}
+R \ar[rrd] & &
+\bigoplus_{\mathfrak a}
+\bigoplus_{\psi \in \Hom_R(\mathfrak a, N)}
+\mathfrak{a} \ar[r] \ar[d] & N \\
+& & \bigoplus_{\mathfrak a}
+\bigoplus_{\psi \in \Hom_R(\mathfrak a, N)}
+R
+}
+$$
+이 도식은 원하는 사상 $\mathbf{M}(M) \to \mathbf{M}(N)$을 유도한다.
+가운데에서 오른쪽 아래로 향하는 화살표는 $\varphi$에 대응하는 직합인자
+$\mathfrak a$를 $\text{id}_{\mathfrak a}$를 통해
+$\psi = \chi \circ \varphi$에 대응하는 직합인자 $\mathfrak a$로 보낸다.
+아래쪽에서 오른쪽 아래로 향하는 화살표도 마찬가지이다. 세부사항은 생략한다.
+\end{proof}
+
+\noindent
+이제 함자 $\mathbf{M}$을 초한 번 적용한다. 각 순서수 $\alpha$에 대해
+$R$-가군 범주 위의 함자 $\mathbf{M}_\alpha$와 자연스러운 단사 사상
+$N \to \mathbf{M}_\alpha(N)$을 함께 정의한다. 이는 초한 귀납법으로 한다.
+먼저 $\mathbf{M}_1 = \mathbf{M}$은 위에서 정의한 함자이다. 이제 순서수
+$\alpha$가 주어지고 모든 $\alpha' < \alpha$에 대해
+$\mathbf{M}_{\alpha'}$가 정의되어 있다고 하자. $\alpha$에 직전 순서수
+$\widetilde{\alpha}$가 있으면
+$$
+\mathbf{M}_\alpha = \mathbf{M} \circ \mathbf{M}_{\widetilde{\alpha}}.
+$$
+로 놓는다. 그렇지 않으면, 즉 $\alpha$가 극한 순서수이면
+$$
+\mathbf{M}_{\alpha}(N) =
+\colim_{\alpha' < \alpha} \mathbf{M}_{\alpha'}(N).
+$$
+로 놓는다. $\mathbf{M}_{\alpha}(N)$들이 순서수 위의 귀납계를 이룸은
+(예를 들어 귀납적으로) 명백하므로 이 정의는 타당하다.
+
+\begin{theorem}
+\label{injectives-theorem-baer-grothendieck}
+$\kappa$를 $R$의 아이디얼들의 집합의 기수라 하고, $\alpha$를 공종수가
+$\kappa$보다 큰 순서수라 하자. 그러면 $\mathbf{M}_\alpha(N)$은 단사적
+$R$-가군이고 $N \to \mathbf{M}_\alpha(N)$은 함자적인 단사 매장이다.
+\end{theorem}
+
+\begin{proof}
+Baer의 판정법(보조정리 \ref{injectives-lemma-criterion-baer})에 따라, 아이디얼
+$\mathfrak{a} \subset R$에 대해 임의의 사상
+$f : \mathfrak{a} \to \mathbf{M}_\alpha(N)$이
+$R \to \mathbf{M}_\alpha(N)$으로 확장됨을 보이면 충분하다. 그런데
+$\alpha$가 극한 순서수이므로
+$$
+\mathbf{M}_{\alpha}(N) =
+\colim_{\beta < \alpha} \mathbf{M}_{\beta}(N),
+$$
+임을 알고 있다. 따라서 명제 \ref{injectives-proposition-modules-are-small}에 의해
+$$
+\Hom_R(\mathfrak{a}, \mathbf{M}_{\alpha}(N)) =
+\colim_{\beta < \alpha} \Hom_R(\mathfrak a, \mathbf{M}_{\beta}(N)).
+$$
+이다. 특히 어떤 $\beta' < \alpha$가 있어서 $f$는 다음과 같이 부분가군
+$\mathbf{M}_{\beta'}(N)$을 거쳐 분해된다.
+$$
+f : \mathfrak{a} \to \mathbf{M}_{\beta'}(N) \to
+\mathbf{M}_{\alpha}(N).
+$$
+그러나 함자 $\mathbf{M}$의 기본 성질인 보조정리
+\ref{injectives-lemma-construction}의 (3)에 따라, 사상
+$\mathfrak{a} \to \mathbf{M}_{\beta'}(N)$은 다음 사상으로 확장된다.
+$$
+R \to \mathbf{M}( \mathbf{M}_{\beta'}(N)) =
+\mathbf{M}_{\beta' + 1}(N),
+$$
+또 $\alpha$가 극한 순서수이므로 $\beta' + 1 < \alpha$이고, 후자의 대상은
+$\mathbf{M}_{\alpha}(N)$에 들어간다. 특히 $f$는
+$\mathbf{M}_{\alpha}(N)$으로 확장될 수 있다.
+\end{proof}
+
+
+
+
+\section{G-가군}
+\label{injectives-section-G-modules}
+
+\noindent
+대수 위의 가군 범주에는 함자적인 단사 매장이 있음을 뒤에서 보게 된다
+(Differential Graded Algebra, Section
+\ref{dga-section-modules-noncommutative}). 그 구성은 More on Algebra,
+Section \ref{more-algebra-section-injectives-modules}의 구성과 정확히 같다.
+
+\begin{lemma}
+\label{injectives-lemma-G-modules}
+$G$를 위상군, $R$을 환이라 하자. $R\text{-}G$-가군의 범주
+$\text{Mod}_{R, G}$에는 함자적인 단사 매장이 있다(\'Etale Cohomology,
+Definition \ref{etale-cohomology-definition-G-module-continuous} 참조).
+특히 이산 $G$-가군의 범주에 대해서도 그러하다.
+\end{lemma}
+
+\begin{proof}
+보조정리 앞의 설명에 따라 범주 $\text{Mod}_{R[G]}$에는 함자적인 단사 매장이
+있다. 망각 함자 $v : \text{Mod}_{R, G} \to \text{Mod}_{R[G]}$를 생각하자.
+이 함자는 충만충실하고 단사 사상을 단사 사상으로 보내며, 다음 오른쪽
+수반을 갖는다.
+$$
+u : M \mapsto u(M) = \{x \in M \mid \text{stabilizer of }x\text{ is open}\}
+$$
+$v(M) = 0 \Rightarrow M = 0$이므로 Homology, Lemma
+\ref{homology-lemma-adjoint-functorial-injectives}에서 결론이 따른다.
+\end{proof}
+
+
+
+\section{공간 위의 아벨 층}
+\label{injectives-section-abelian-sheaves-space}
+
+
+\begin{lemma}
+\label{injectives-lemma-abelian-sheaves-space}
+$X$를 위상공간이라 하자. $X$ 위의 아벨 층 범주에는 단사 대상이 충분히
+많다. 실제로 이 범주에는 함자적인 단사 매장이 있다.
+\end{lemma}
+
+\begin{proof}
+아벨군 $A$에 대해 $j : A \to J(A)$를 More on Algebra, Section
+\ref{more-algebra-section-injectives-modules}에서 구성한 함자적인 단사 매장이라
+하자. $\mathcal{F}$를 $X$ 위의 아벨 층이라 하자. Sheaves, Example
+\ref{sheaves-example-sheaf-product-pointwise}에 따라 대응
+$$
+\mathcal{I} : U \mapsto
+\mathcal{I}(U) = \prod\nolimits_{x\in U} J(\mathcal{F}_x)
+$$
+은 아벨 층을 정의한다. $s \in \mathcal{F}(U)$를
+$\prod_{x \in U} j(s_x)$로 보내는 표준 사상
+$\mathcal{F} \to \mathcal{I}$가 있다. 여기서
+$s_x \in \mathcal{F}_x$는 $x$에서 $s$의 싹을 나타낸다. 이 사상은 단사이다.
+예를 들어 Sheaves, Lemma \ref{sheaves-lemma-sheaf-subset-stalks}를 보라.
+
+\medskip\noindent
+이제 다음을 증명하면 된다. 각 점 $x \in X$에 단사적 아벨군을 대응시키는
+규칙 $x \mapsto I_x$가 주어지면, 층
+$\mathcal{I} : U \mapsto \prod_{x \in U} I_x$는 단사적이다. 다음에 유의하라.
+$$
+\mathcal{I} = \prod\nolimits_{x \in X} i_{x, *}I_x
+$$
+이는 마천루층 $i_{x, *}I_x$들의 곱이다(기호는 Sheaves, Section
+\ref{sheaves-section-skyscraper-sheaves} 참조). 또한
+$$
+\Mor_{\textit{Ab}}(\mathcal{F}_x, I_x)
+=
+\Mor_{\textit{Ab}(X)}(\mathcal{F}, i_{x, *}I_x).
+$$
+이다(Sheaves, Lemma \ref{sheaves-lemma-stalk-skyscraper-adjoint} 참조).
+따라서 각 $i_{x, *}I_x$는 단사적임이 명백하다. 그러므로 $\mathcal{I}$의
+단사성은 Homology, Lemma \ref{homology-lemma-product-injectives}에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{환 달린 공간 위의 가군층}
+\label{injectives-section-sheaves-modules-space}
+
+
+\begin{lemma}
+\label{injectives-lemma-sheaves-modules-space}
+$(X, \mathcal{O}_X)$를 환 달린 공간이라 하자(Sheaves, Section
+\ref{sheaves-section-ringed-spaces} 참조). $X$ 위의 $\mathcal{O}_X$-가군층
+범주에는 단사 대상이 충분히 많다. 실제로 이 범주에는 함자적인 단사 매장이 있다.
+\end{lemma}
+
+\begin{proof}
+임의의 환 $R$과 임의의 $R$-가군 $M$에 대해 $j : M \to J_R(M)$을
+More on Algebra, Section \ref{more-algebra-section-injectives-modules}에서
+구성한 함자적인 단사 매장이라 하자. $\mathcal{F}$를 $X$ 위의
+$\mathcal{O}_X$-가군층이라 하자. Sheaves, Examples
+\ref{sheaves-example-sheaf-product-pointwise} 및
+\ref{sheaves-example-sheaf-product-pointwise-algebraic-structure}에 따라 대응
+$$
+\mathcal{I} : U \mapsto
+\mathcal{I}(U) = \prod\nolimits_{x\in U} J_{\mathcal{O}_{X, x}}(\mathcal{F}_x)
+$$
+은 아벨 층을 정의한다. $s \in \mathcal{F}(U)$를
+$\prod_{x \in U} j(s_x)$로 보내는 표준 사상
+$\mathcal{F} \to \mathcal{I}$가 있다. 여기서
+$s_x \in \mathcal{F}_x$는 $x$에서 $s$의 싹을 나타낸다. 이 사상은 단사이다.
+예를 들어 Sheaves, Lemma \ref{sheaves-lemma-sheaf-subset-stalks}를 보라.
+
+\medskip\noindent
+이제 다음을 증명하면 된다. 각 점 $x \in X$에 단사적
+$\mathcal{O}_{X, x}$-가군을 대응시키는 규칙 $x \mapsto I_x$가 주어지면,
+층 $\mathcal{I} : U \mapsto \prod_{x \in U} I_x$는 단사적이다.
+다음에 유의하라.
+$$
+\mathcal{I} = \prod\nolimits_{x \in X} i_{x, *}I_x
+$$
+이는 마천루층 $i_{x, *}I_x$들의 곱이다(기호는 Sheaves, Section
+\ref{sheaves-section-skyscraper-sheaves} 참조). 또한
+$$
+\Hom_{\mathcal{O}_{X, x}}(\mathcal{F}_x, I_x)
+=
+\Hom_{\mathcal{O}_X}(\mathcal{F}, i_{x, *}I_x).
+$$
+이다(Sheaves, Lemma \ref{sheaves-lemma-stalk-skyscraper-adjoint} 참조).
+따라서 각 $i_{x, *}I_x$가 단사적 $\mathcal{O}_X$-가군임은 명백하다
+(Homology, Lemma \ref{homology-lemma-adjoint-preserve-injectives}를 보거나
+직접 논증하라). 그러므로 $\mathcal{I}$의 단사성은 Homology, Lemma
+\ref{homology-lemma-product-injectives}에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{범주 위의 아벨 전층}
+\label{injectives-section-injectives-presheaves}
+
+\noindent
+$\mathcal{C}$를 범주라 하자. 이는 $\Ob(\mathcal{C})$가 집합이라는 뜻임을
+상기하자. 한편으로 $\mathcal{C}$ 위의 아벨 전층을 생각하자(Sites, Section
+\ref{sites-section-presheaves} 참조). 다른 한편으로 $\Ob(\mathcal{C})$의
+원소들로 첨자화된 아벨군의 족, 다시 말해 대상들의 바탕 집합이
+$\Ob(\mathcal{C})$인 이산 범주 위의 전층을 생각하자. 이 이산 범주를 간단히
+$\Ob(\mathcal{C})$로 나타내기로 하자. 자연스러운 함자
+$$
+i : \Ob(\mathcal{C}) \longrightarrow \mathcal{C}
+$$
+가 있으므로 자연스러운 제한 함자, 곧 망각 함자
+$$
+v = i^p :
+\textit{PAb}(\mathcal{C})
+\longrightarrow
+\textit{PAb}(\Ob(\mathcal{C}))
+$$
+가 있다. Sites, Section \ref{sites-section-functoriality-PSh}와 비교하라.
+$\mathcal{C}$ 위의 전층은 $B$로, $\Ob(\mathcal{C})$ 위의 전층은 $A$로
+나타내겠다.
+
+\medskip\noindent
+% P03-STACKS-E1003
+또 $\mathcal{C}$ 위의 아벨 전층을 $\Ob(\mathcal{C})$ 위의 아벨 전층에 대응시키는
+두 함자 $i_p$와 ${}_pi$가 있다. Sites, Sections
+\ref{sites-section-functoriality-PSh} 및
+\ref{sites-section-more-functoriality-PSh}를 보라. 여기서는 현재의 경우
+다음과 같이 정의되는 $u = {}_pi$를 사용한다.
+$$
+uA(U) = \prod\nolimits_{U' \to U} A(U').
+$$
+따라서 그 원소는 $\phi$가 공역이 $U$인 $\mathcal{C}$의 모든 사상을 움직이는
+족 $(a_\phi)_\phi$이다. $g : V \to U$에 대응하는 $uA$의 제한 사상은
+원소 $(a_\phi)_\phi$를 원소 $(a_{g \circ \psi})_\psi$로 보낸다.
+
+\medskip\noindent
+표준 전사 사상 $vuA \to A$와 표준 단사 사상 $B \to uvB$가 있다. 이 간단한
+경우 다음 등식을 보이는 일은 독자에게 맡긴다.
+$$
+\Mor_{\textit{PAb}(\mathcal{C})}(B, uA)
+=
+\Mor_{\textit{PAb}(\Ob(\mathcal{C}))}(vB, A).
+$$
+일반적인 경우는 Sites, Section \ref{sites-section-functoriality-PSh}에 있다.
+따라서 쌍 $(u, v)$는 한 쌍의 수반 함자의 예이다. Categories, Section
+\ref{categories-section-adjoint}를 보라.
+
+\medskip\noindent
+이제 위 상황에 관한 다음 사실들을 열거할 수 있다.
+\begin{enumerate}
+\item 함자 $u$와 $v$는 완전하다. 이는 위에 제시한 두 함자의 명시적인
+기술에서 따른다.
+\item 특히 함자 $v$는 단사 사상을 단사 사상으로 보낸다.
+\item 범주 $\textit{PAb}(\Ob(\mathcal{C}))$에는 단사 대상이 충분히 많다.
+\item 실제로 Homology, Definition
+\ref{homology-definition-functorial-injective-embedding}에서처럼 함자적인
+단사 매장 $A \mapsto \big(A \to J(A)\big)$이 있다. 즉 $J(A)$를 전층
+$U\mapsto J(A(U))$로 잡을 수 있다. 여기서 $J(-)$는 환 $\mathbf{Z}$에 대해
+More on Algebra, Section \ref{more-algebra-section-injectives-modules}에서
+구성한 함자이다.
+\end{enumerate}
+이 사실들을 모두 합치면 $\textit{PAb}(\mathcal{C})$의 대상 $B$를 단사 대상에
+매장하는 다음 절차를 얻는다: $B \to uJ(vB)$. Homology, Lemma
+\ref{homology-lemma-adjoint-functorial-injectives}를 보라.
+
+\begin{proposition}
+\label{injectives-proposition-presheaves-injectives}
+범주 위의 아벨 전층에는 함자적인 단사 매장이 있다.
+\end{proposition}
+
+\begin{proof}
+위의 논의를 보라.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{사이트 위의 아벨 층}
+\label{injectives-section-injectives-sheaves}
+
+\noindent
+$\mathcal{C}$를 사이트라 하자. 이 절에서는 $\mathcal{C}$ 위의 아벨 층
+범주에 단사 대상이 충분히 많음을 증명한다.
+
+\medskip\noindent
+$i : \textit{Ab}(\mathcal{C}) \longrightarrow \textit{PAb}(\mathcal{C})$를
+아벨 층에서 아벨 전층으로 가는 망각 함자라 하고,
+${}^\# : \textit{PAb}(\mathcal{C}) \longrightarrow \textit{Ab}(\mathcal{C})$를
+층화 함자라 하자. ${}^\#$는 $i$의 왼쪽 수반이고 ${}^\#$는 완전하며, 임의의 아벨 층
+$\mathcal{F}$에 대해 $i\mathcal{F}^\# = \mathcal{F}$임을 상기하자. 마지막으로
+$\mathcal{G} \to J(\mathcal{G})$를 Section
+\ref{injectives-section-injectives-presheaves}에서 얻은 단사적 전층으로의 표준 매장이라 하자.
+
+\medskip\noindent
+$\textit{Ab}(\mathcal{C})$의 임의의 층 $\mathcal{F}$와 임의의 순서수
+$\beta$에 대해 층 $J_\beta(\mathcal{F})$를 초한 귀납법으로 정의한다.
+$J_0(\mathcal{F}) = \mathcal{F}$로 놓고
+$J_1(\mathcal{F}) = J(i\mathcal{F})^\#$로 정의한다. 표준 사상
+$i\mathcal{F} \to J(i\mathcal{F})$을 층화하면 함자적인 사상
+$$
+\mathcal{F} \longrightarrow J_1(\mathcal{F})
+$$
+을 얻으며, $\#$가 완전하므로 이 사상은 단사이다.
+$J_{\alpha + 1}(\mathcal{F}) = J_1(J_\alpha(\mathcal{F}))$로 놓는다. 그러면
+표준 단사 사상 $J_\alpha(\mathcal{F}) \to J_{\alpha + 1}(\mathcal{F})$가 있다.
+극한 순서수 $\beta$에 대해서는
+$$
+J_\beta(\mathcal{F}) = \colim_{\alpha < \beta} J_\alpha(\mathcal{F}).
+$$
+로 정의한다. 이는 유향 여극한임에 유의하라. 따라서 임의의 순서수
+$\alpha < \beta$에 대해 단사 사상
+$J_\alpha(\mathcal{F}) \to J_\beta(\mathcal{F})$가 있다.
+
+\begin{lemma}
+\label{injectives-lemma-map-into-next-one}
+위의 기호를 사용하자. $\mathcal{G}_1 \to \mathcal{G}_2$를 $\mathcal{C}$ 위
+아벨 층들의 단사 사상이라 하자. $\alpha$를 순서수라 하고
+$\mathcal{G}_1 \to J_\alpha(\mathcal{F})$를 층의 사상이라 하자. 다음 도식을
+가환하게 하는 사상 $\mathcal{G}_2 \to J_{\alpha + 1}(\mathcal{F})$가 존재한다.
+$$
+\xymatrix{
+\mathcal{G}_1 \ar[d] \ar[r] & \mathcal{G}_2 \ar[d] \\
+J_{\alpha}(\mathcal{F}) \ar[r] & J_{\alpha + 1}(\mathcal{F}) }
+$$
+\end{lemma}
+
+\begin{proof}
+사상 $i\mathcal{G}_1 \to i\mathcal{G}_2$가 단사이므로
+$i\mathcal{G}_1 \to iJ_\alpha(\mathcal{F})$는
+$i\mathcal{G}_2 \to J(iJ_\alpha(\mathcal{F}))$로 확장된다. 여기에 층화 함자를
+적용하면 원하는 사상을 얻는다.
+\end{proof}
+
+\noindent
+이 보조정리는 어떤 의미에서 계 $\{J_{\alpha}(\mathcal{F})\}$가
+$\mathcal{F}$의 단사 매장이라고 말한다. 물론 모든 $\alpha$는 집합이 아니라
+모임을 이루므로 그 전부에 대해 극한을 취할 수는 없다. 이제의 아이디어는
+모든 단사 사상 $\mathcal{G}_1 \to \mathcal{G}_2$에 대해 단사성을 검사할
+필요가 없다는 사실과 다음 보조정리를 함께 사용하는 것이다.
+
+\begin{lemma}
+\label{injectives-lemma-map-into-smaller}
+$\mathcal{G}_i$, $i\in I$가 $\mathcal{C}$ 위의 아벨 층들로 이루어진 집합이라
+하자. 다음 성질을 갖는 순서수 $\beta$가 존재한다. 임의의 층 $\mathcal{F}$,
+임의의 $i\in I$, 임의의 사상
+$\varphi : \mathcal{G}_i \to J_\beta(\mathcal{F})$에 대해, $ \varphi $가
+$J_\alpha(\mathcal{F})$를 거쳐 분해되게 하는 $\alpha < \beta$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+모든 $\mathcal{G}_i$의 직합을 취하면 하나의 층 $\mathcal{G}$인 경우로
+귀착된다.
+
+\medskip\noindent
+집합
+$$
+S = \coprod\nolimits_{U \in \Ob(\mathcal{C})} \mathcal{G}(U).
+$$
+과
+$$
+T_\beta
+=
+\coprod\nolimits_{U \in \Ob(\mathcal{C})} J_\beta(\mathcal{F})(U)
+$$
+를 생각하자. 집합 $T_\beta$들 사이의 전이 사상은 단사이다. $\beta$의
+공종수가 충분히 크면 $T_\beta = \colim_{\alpha < \beta} T_\alpha$이다
+(Sites, Lemma \ref{sites-lemma-colimit-over-ordinal-sections} 참조). 사상
+$\mathcal{G} \to J_\beta(\mathcal{F})$가 $J_\alpha(\mathcal{F})$를 거쳐
+분해될 필요충분조건은 대응하는 사상 $S \to T_\beta$가 $T_\alpha$를 거쳐
+분해되는 것이다. Sets, Lemma \ref{sets-lemma-map-from-set-lifts}에 따라
+$\beta$의 공종수가 $S$의 기수보다 크면 보조정리의 결론이 성립한다. 따라서
+이 보조정리는 공종수가 임의로 큰 순서수가 존재한다는 사실에서 따른다.
+Sets, Proposition \ref{sets-proposition-exist-ordinals-large-cofinality}를 보라.
+\end{proof}
+
+\noindent
+$\mathcal{C}$의 대상 $X$에 대해
+$\Gamma(U, \mathbf{Z}_X) = \oplus_{U \to X} \mathbf{Z}$인 아벨군의 전층을
+$\mathbf{Z}_X$로 나타냄을 상기하자. Modules on Sites, Section
+\ref{sites-modules-section-free-abelian-presheaf}를 보라. 이 전층에 결부된
+층은 $\mathbf{Z}_X^\#$로 나타낸다. Modules on Sites, Section
+\ref{sites-modules-section-free-abelian-sheaf}를 보라. 이 층은 성질
+\begin{equation}
+\label{injectives-equation-free-sheaf-on}
+\Mor_{\textit{Ab}(\mathcal{C})}(\mathbf{Z}_X^\#, \mathcal{G})
+=
+\mathcal{G}(X)
+\end{equation}
+로 특징지을 수 있으며, 이때 왼쪽의 원소 $\varphi$는 오른쪽의
+$\varphi(1 \cdot \text{id}_X)$로 보내진다. 이 층들을 이용해 단사적 아벨 층을
+특징지을 수 있다.
+
+\begin{lemma}
+\label{injectives-lemma-characterize-injectives}
+$\mathcal{J}$가 다음 성질을 갖는 아벨군의 층이라고 하자. 모든
+$X\in \Ob(\mathcal{C})$, 임의의 아벨 부분층
+$\mathcal{S} \subset \mathbf{Z}_X^\#$, 임의의 사상
+$\varphi : \mathcal{S} \to \mathcal{J}$에 대해 $\varphi$를 확장하는 사상
+$\mathbf{Z}_X^\# \to \mathcal{J}$가 존재한다. 그러면 $\mathcal{J}$는 단사적인
+아벨군의 층이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F} \to \mathcal{G}$를 아벨 층들의 단사 사상이라 하고,
+$\varphi : \mathcal{F} \to \mathcal{J}$를 사상이라 하자. More on Algebra,
+Lemma \ref{more-algebra-lemma-injective-abelian}의 증명과 같이 논증하면,
+$\mathcal{F} \not = \mathcal{G}$일 때 다음 조건을 만족하는 아벨 층
+$\mathcal{F}'$, $\mathcal{F} \subset \mathcal{F}' \subset \mathcal{G}$를 찾으면
+충분함을 알 수 있다. (a) 포함 $\mathcal{F} \subset \mathcal{F}'$은 진포함이고,
+(b) $\varphi$는 $\mathcal{F}'$로 확장된다. $\mathcal{F}'$을 찾기 위해 포함
+$\mathcal{F}(X) \subset \mathcal{G}(X)$이 진포함인 $\mathcal{C}$의 대상 $X$를
+택하자. $s \in \mathcal{G}(X)$, $s \not \in \mathcal{F}(X)$를 택하고,
+$\psi : \mathbf{Z}_X^\# \to \mathcal{G}$를 (\ref{injectives-equation-free-sheaf-on})를 통해
+단면 $s$에 대응하는 사상이라 하자. $\mathcal{S} = \psi^{-1}(\mathcal{F})$로
+놓는다. 가정에 따라 사상
+$$
+\mathcal{S} \xrightarrow{\psi} \mathcal{F} \xrightarrow{\varphi} \mathcal{J}
+$$
+은 사상 $\varphi' : \mathbf{Z}_X^\# \to \mathcal{J}$로 확장된다.
+$\varphi$가 그러하므로 $\varphi'$은 $\psi$의 핵을 영으로 보낸다. 따라서
+$\varphi'$은 사상 $\varphi'' : \Im(\psi) \to \mathcal{J}$를 유도하며,
+구성상 이는 교집합 $\mathcal{F} \cap \Im(\psi)$ 위에서 $\varphi$와 일치한다.
+그러므로 $\varphi$와 $\varphi''$을 이어 붙이면 $\varphi$를 진정 더 큰 부분층
+$\mathcal{F}' = \mathcal{F} + \Im(\psi)$으로 확장할 수 있다.
+\end{proof}
+
+\begin{theorem}
+\label{injectives-theorem-sheaves-injectives}
+사이트 위의 아벨군층 범주에는 단사 대상이 충분히 많다. 실제로 함자적인
+단사 매장이 존재한다. Homology, Definition
+\ref{homology-definition-functorial-injective-embedding}를 보라.
+\end{theorem}
+
+\begin{proof}
+$\mathcal{G}_i$, $i \in I$를, 모든 $\mathbf{Z}_X^\#$의 모든 부분층이 어느
+$\mathcal{G}_i$로 나타나도록 택한 아벨 층들의 집합이라 하자. 이 모임에
+보조정리 \ref{injectives-lemma-map-into-smaller}를 적용하여 순서수 $\beta$를 얻는다.
+임의의 아벨군층 $\mathcal{F}$에 대해 사상
+$\mathcal{F} \to J_\beta(\mathcal{F})$는 $\mathcal{F}$를 단사 대상에 넣는
+단사 사상이라고 주장한다. 구성상 대응
+$\mathcal{F} \mapsto \big(\mathcal{F} \to J_\beta(\mathcal{F})\big)$은 실제로
+함자적임에 유의하라.
+
+\medskip\noindent
+주장을 증명하려면 보조정리 \ref{injectives-lemma-characterize-injectives}에 따라 어떤
+$\mathbf{Z}_X^\#$의 부분층 $\mathcal{G}$에서 정의된 임의의 사상
+$\gamma : \mathcal{G} \to J_\beta(\mathcal{F})$를 $\mathbf{Z}_X^\#$ 전체로
+확장하면 충분하다. 보조정리 \ref{injectives-lemma-map-into-smaller}에 따라 사상
+$\gamma$는 어떤 $\alpha < \beta$에 대해 $J_\alpha(\mathcal{F})$ 안으로
+올라간다. 마지막으로 보조정리 \ref{injectives-lemma-map-into-next-one}를 적용하면
+$\gamma$를 $J_{\alpha + 1}(\mathcal{F}) \to J_\beta(\mathcal{F})$ 안으로 가는
+사상으로 원하는 대로 확장할 수 있다.
+\end{proof}
+
+
+
+
+
+
+\section{환 달린 사이트 위의 가군}
+\label{injectives-section-sheaves-modules}
+
+\noindent
+$\mathcal{C}$를 사이트라 하고, $\mathcal{O}$를 $\mathcal{C}$ 위의 환의 층이라
+하자. More on Algebra, Section
+\ref{more-algebra-section-injectives-modules}와 유사하게 단사적
+$\mathcal{O}$-가군이 충분히 많음을 증명해 보자. 먼저 단사 매장
+$$
+\bigoplus\nolimits_{U, \mathcal{I}}
+j_{U!}\mathcal{O}_U/\mathcal{I}
+\longrightarrow
+\mathcal{J}
+$$
+을 택한다. 여기서 $\mathcal{J}$는 단사적 아벨 층이며, 앞 절에 따라
+존재한다. 직합은 $\mathcal{C}$의 모든 대상 $U$와 모든
+$\mathcal{O}$-부분가군 $\mathcal{I} \subset j_{U!}\mathcal{O}_U$에 걸쳐 취한다.
+국소화 함자 $j_U : \mathcal{C}/U \to \mathcal{C}$에 대한 제한 함자와
+$0$에 의한 연장 함자는 Modules on Sites, Section
+\ref{sites-modules-section-localize}를 보라.
+
+\medskip\noindent
+임의의 $\mathcal{O}$-가군층 $\mathcal{F}$에 대해
+$$
+\mathcal{F}^\vee
+=
+\SheafHom(\mathcal{F}, \mathcal{J})
+$$
+% P03-STACKS-E1004
+로 나타내고 자연스러운 $\mathcal{O}$-가군 구조를 준다. 여기에 내부 Hom에
+대한 미래의 참조를 삽입한다. 또한 $\mathcal{O}$-가군층의 표준 평탄 분해가
+필요하다. 이를 다음과 같이 만들 수 있다. 임의의 $\mathcal{O}$-가군
+$\mathcal{F}$에 대해
+$$
+F(\mathcal{F})
+=
+\bigoplus\nolimits_{U \in \Ob(\mathcal{C}), s \in \mathcal{F}(U)}
+j_{U!}\mathcal{O}_U.
+$$
+로 나타낸다. 이는 표준 전사 사상 $F(\mathcal{F}) \to \mathcal{F}$이 주어진
+평탄한 $\mathcal{O}$-가군층이다. Modules on Sites, Lemma
+\ref{sites-modules-lemma-module-quotient-flat}를 보라. 더욱이 구성
+$\mathcal{F} \mapsto F(\mathcal{F})$은 $\mathcal{F}$에 대해 함자적이다.
+
+\begin{lemma}
+\label{injectives-lemma-vee-exact-sheaves}
+함자 $\mathcal{F} \mapsto \mathcal{F}^\vee$는 완전하다.
+\end{lemma}
+
+\begin{proof}
+이는 $\mathcal{J}$가 단사적 아벨 층이기 때문이다.
+\end{proof}
+
+\noindent
+평가로 주어지는 표준 사상
+$ev : \mathcal{F} \to (\mathcal{F}^\vee)^\vee$가 있다. 즉
+$x \in \mathcal{F}(U)$가 주어지면
+$ev(x) \in (\mathcal{F}^\vee)^\vee =
+\SheafHom(\mathcal{F}^\vee, \mathcal{J})$를 사상
+$\varphi \mapsto \varphi(x)$로 놓는다.
+
+\begin{lemma}
+\label{injectives-lemma-ev-injective-sheaves}
+임의의 $\mathcal{O}$-가군 $\mathcal{F}$에 대해 평가 사상
+$ev : \mathcal{F} \to (\mathcal{F}^\vee)^\vee$는 단사이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{J}$의 정의를 사용해 이를 확인할 수 있다. 구체적으로
+$s \in \mathcal{F}(U)$가 영이 아니면, 수반을 통해 이에 대응하는
+$\mathcal{O}$-가군 사상을 $j_{U!}\mathcal{O}_U \to \mathcal{F}$라 하자.
+$\mathcal{I}$를 이 사상의 핵이라 하자. $s$를 소멸시키지 않는 영 아닌 사상
+$\mathcal{F} \supset j_{U!}\mathcal{O}_U/\mathcal{I} \to \mathcal{J}$가 존재한다.
+$\mathcal{J}$가 단사적 $\mathcal{O}$-가군이므로 이는 사상
+$\varphi : \mathcal{F} \to \mathcal{J}$로 확장된다. 그러면
+$ev(s)(\varphi) = \varphi(s) \not = 0$이고, 이것이 증명할 바이다.
+\end{proof}
+
+\noindent
+$\mathcal{O}$-가군의 표준 전사 사상 $F(\mathcal{F}) \to \mathcal{F}$은 위에서
+본 바와 같이 $\mathcal{O}$-가군의 표준 단사 사상
+$$
+(\mathcal{F}^\vee)^\vee \longrightarrow (F(\mathcal{F}^\vee))^\vee.
+$$
+으로 바뀐다. $J(\mathcal{F}) = (F(\mathcal{F}^\vee))^\vee$로 놓자.
+$ev$와 이 표시된 사상의 합성은 $\mathcal{F}$에 대해 함자적으로
+$\mathcal{F} \to J(\mathcal{F})$를 준다.
+
+\begin{lemma}
+\label{injectives-lemma-JM-injective-sheaves}
+$\mathcal{O}$를 환의 층이라 하자. 모든 $\mathcal{O}$-가군 $\mathcal{F}$에
+대해 $\mathcal{O}$-가군 $J(\mathcal{F})$는 단사적이다.
+\end{lemma}
+
+\begin{proof}
+함자 $\Hom_\mathcal{O}(\mathcal{G}, J(\mathcal{F}))$가 완전함을 보이면 된다.
+다음에 유의하라.
+\begin{eqnarray*}
+\Hom_\mathcal{O}(\mathcal{G}, J(\mathcal{F}))
+& = &
+\Hom_\mathcal{O}(\mathcal{G}, (F(\mathcal{F}^\vee))^\vee) \\
+& = &
+\Hom_\mathcal{O}
+(\mathcal{G}, \SheafHom(F(\mathcal{F}^\vee), \mathcal{J})) \\
+& = &
+\Hom(\mathcal{G} \otimes_\mathcal{O} F(\mathcal{F}^\vee), \mathcal{J})
+\end{eqnarray*}
+따라서 원하는 결론은 $F(\mathcal{F}^\vee)$가 평탄하고 $\mathcal{J}$가
+단사적이라는 사실에서 따른다.
+\end{proof}
+
+\begin{theorem}
+\label{injectives-theorem-sheaves-modules-injectives}
+$\mathcal{C}$를 사이트라 하고, $\mathcal{O}$를 $\mathcal{C}$ 위의 환의 층이라
+하자. 사이트 위의 $\mathcal{O}$-가군층 범주에는 단사 대상이 충분히 많다.
+실제로 함자적인 단사 매장이 존재한다. Homology, Definition
+\ref{homology-definition-functorial-injective-embedding}를 보라.
+\end{theorem}
+
+\begin{proof}
+이 절의 논의에서 따른다.
+\end{proof}
+
+\begin{proposition}
+\label{injectives-proposition-presheaves-modules}
+$\mathcal{C}$를 범주라 하고, $\mathcal{O}$를 $\mathcal{C}$ 위의 환의 전층이라
+하자. $\mathcal{O}$-가군의 전층 범주 $\textit{PMod}(\mathcal{O})$에는
+함자적인 단사 매장이 있다.
+\end{proposition}
+
+\begin{proof}
+Section \ref{injectives-section-injectives-presheaves}의 논의와 같은 방식으로 증명할 수도
+있다. 여기서는 대신 위 정리를 이용해 논증한다. 대상 $U$의 덮개들의 집합을,
+$f$가 동형인 모든 한원소족 $\{f : V \to U\}$로 이루어진 집합으로 정하여
+$\mathcal{C}$에 사이트 구조를 주자. 이것이 사이트를 정의한다는 확인은
+생략한다. 이 위상에 대한 층은 전층과 같다(증명 생략). 따라서 위 정리를
+적용할 수 있다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{아벨 범주의 매장}
+\label{injectives-section-embedding}
+
+\noindent
+이 절에서는 아벨 범주가 충분한 점을 갖는 사이트 위의 아벨 층의 범주에
+매장됨을 보인다. 이 사이트는 다음 보조정리에서 설명하는 것이다.
+
+\begin{lemma}
+\label{injectives-lemma-site-abelian-category}
+$\mathcal{A}$를 아벨 범주라 하자. 다음과 같이 두자.
+$$
+\text{Cov} = \{\{f : V \to U\} \mid f\text{ is surjective}\}.
+$$
+그러면 $(\mathcal{A}, \text{Cov})$는 사이트이다. Sites, Definition
+\ref{sites-definition-site}를 보라.
+\end{lemma}
+
+\begin{proof}
+범주에 관한 우리의 규약에 의해 $\Ob(\mathcal{A})$는 집합임에 유의하라.
+동형사상은 전사 사상이고, 전사 사상들의 합성은 전사이다. 또한
+$\mathcal{A}$에서 전사 사상의 밑변환은 전사이다. Homology, Lemma
+\ref{homology-lemma-epimorphism-universal-abelian-category}를 보라.
+\end{proof}
+
+\noindent
+$\mathcal{A}$를 전가법 범주라 하자. 이 경우 Yoneda 매장
+$\mathcal{A} \to \textit{PSh}(\mathcal{A})$, $X \mapsto h_X$는 함자
+$\mathcal{A} \to \textit{PAb}(\mathcal{A})$를 거쳐 분해된다.
+
+\begin{lemma}
+\label{injectives-lemma-embedding}
+$\mathcal{A}$를 아벨 범주라 하고, $\mathcal{C} = (\mathcal{A}, \text{Cov})$를
+보조정리 \ref{injectives-lemma-site-abelian-category}에서 정의한 사이트라 하자.
+그러면 $X \mapsto h_X$는 충만충실한 완전 함자
+$$
+\mathcal{A} \longrightarrow \textit{Ab}(\mathcal{C}).
+$$
+를 정의한다. 더욱이 사이트 $\mathcal{C}$는 충분한 점을 갖는다.
+\end{lemma}
+
+\begin{proof}
+$f : V \to U$가 $\mathcal{A}$의 전사 사상이라고 하자. $K = \Ker(f)$라
+두자. 다음을 상기하라.
+$V \times_U V = \Ker((f, -f) : V \oplus V \to U)$.
+Homology, Example \ref{homology-example-fibre-product-pushouts}를 보라.
+특히 단사 사상 $K \oplus K \to V \times_U V$가 존재한다.
+$p, q : V \times_U V \to V$를 두 사영 사상이라 하자. 사상
+$p - q : V \times_U V \to V$는 $f \circ (p  - q) = 0$을 만족함에
+유의하라. 따라서 $p - q$는 $K \to V$를 거쳐 분해된다. 이 사상을
+$c : V \times_U V \to K$로 나타내자. 합성
+$K \oplus K \to V \times_U V \to K$가 전사이므로 $c$도 전사이다.
+따라서
+$$
+V \times_U V \xrightarrow{p - q} V \to U \to 0
+$$
+은 $\mathcal{A}$의 완전열이다. 그러므로 $\mathcal{A}$의 대상 $X$에 대해
+아벨 군의 열
+$$
+0 \to
+\Hom_\mathcal{A}(U, X) \to
+\Hom_\mathcal{A}(V, X) \to
+\Hom_\mathcal{A}(V \times_U V, X)
+$$
+은 완전하다. Homology, Lemma \ref{homology-lemma-check-exactness}를 보라.
+이는 $h_X$가 $\mathcal{C}$ 위의 층 조건을 만족한다는 뜻이다.
+
+\medskip\noindent
+Categories, Lemma \ref{categories-lemma-yoneda}에 의해 이 함자는
+충만충실하다. Homology, Lemma \ref{homology-lemma-check-exactness}에 의해
+이는 아벨 범주 사이의 왼쪽 완전 함자이다. 오른쪽 완전성도 보이기 위해
+$X \to Y$를 $\mathcal{A}$의 전사 사상이라 하자. $U$를 $\mathcal{A}$의
+대상이라 하고, $s \in h_Y(U) = \Mor_\mathcal{A}(U, Y)$를 $U$ 위의
+$h_Y$의 단면이라 하자. Homology, Lemma
+\ref{homology-lemma-epimorphism-universal-abelian-category}에 의해 사영
+$U \times_Y X \to U$는 전사이다. 따라서
+$\{V = U \times_Y X \to U\}$는 $U$의 피복이고, $s|_V$는 $h_X$의
+단면으로 올려진다. 이로써 $h_X \to h_Y$가 아벨 층의 전사임을 알 수 있다.
+Sites, Lemma \ref{sites-lemma-mono-epi-sheaves}를 보라.
+
+\medskip\noindent
+Sites, Proposition \ref{sites-proposition-criterion-points}에 의해 사이트
+$\mathcal{C}$는 충분한 점을 갖는다.
+\end{proof}
+
+\begin{remark}
+\label{injectives-remark-embedding}
+Freyd--Mitchell 매장 정리에 따르면 임의의 아벨 범주 $\mathcal{A}$에서
+어떤 환 위의 가군 범주로 가는 충만충실한 완전 함자가 존재한다.
+보조정리 \ref{injectives-lemma-embedding}은 이보다 다소 약하다. 그러나 어차피
+사이트 위의 아벨 군의 층을 자세히 이해해야 하므로 이 결과는 Stacks
+project에 적합하다. 더욱이 $\mathcal{C}$ 위의 아벨 층의 범주에서는
+``도표 추적''이 작동한다. 예를 들어 대상 위의 단면으로 작업할 수도 있고,
+$\mathcal{C}$가 충분한 점을 갖는다는 사실을 이용하여 줄기 수준에서 작업할
+수도 있다. 보조정리 \ref{injectives-lemma-embedding}에서 Freyd--Mitchell 매장 정리를
+도출하는 방법은 주석 \ref{injectives-remark-embedding-freyd}를 보라.
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-embedding-big}
+$\mathcal{A}$가 ``큰'' 아벨 범주, 즉 $\mathcal{A}$의 대상들의 모임이
+진정한 모임이면
+보조정리 \ref{injectives-lemma-embedding}은 적용되지 않는다. 이 경우 임의의 대상 집합
+$E \subset \Ob(\mathcal{A})$가 주어지면, $\Ob(\mathcal{A}')$가 집합이고
+$E \subset \Ob(\mathcal{A}')$인 아벨 충만 부분범주
+$\mathcal{A}' \subset \mathcal{A}$가 존재한다. 그러면 보조정리
+\ref{injectives-lemma-embedding}을 $\mathcal{A}'$에 적용할 수 있다. 이를 이용하면
+도표 추적에 의존하는 결과들이 $\mathcal{A}$에서도 성립함을 증명할 수 있다.
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-embedding-freyd}
+$\mathcal{C}$를 사이트라 하자. 정리 \ref{injectives-theorem-sheaves-injectives}에 의해
+$\textit{Ab}(\mathcal{C})$에는 단사 대상이 충분히 많다. ($\mathcal{C}$가
+충분한 점을 갖는 경우 이는 직접적이다. 실제로 $I$가 단사적
+$\mathbf{Z}$-가군이고 $p$가 점이면 $p_*I$는 단사층이다.) 또한
+$\textit{Ab}(\mathcal{C})$에는 쌍대생성자가 있다(세부사항은 생략한다).
+따라서 보조정리 \ref{injectives-lemma-embedding}에 의해 충만충실한 완전 매장
+$\mathcal{A} \to \mathcal{B}$가 존재하며, 여기서 $\mathcal{B}$에는
+쌍대생성자와 충분히 많은 단사 대상이 있다. 이를 $\mathcal{A}^{opp}$에
+적용하면 충만충실한 완전 함자
+$i : \mathcal{A} \to \mathcal{D} = \mathcal{B}^{opp}$를 얻으며,
+$\mathcal{D}$에는 충분히 많은 사영 대상과 생성자가 있다. 따라서
+$\mathcal{D}$에는 사영 생성자 $P$가 있다. $R = \Mor_\mathcal{D}(P, P)$로
+두자. 그러면
+$$
+\mathcal{A} \longrightarrow \text{Mod}_R, \quad
+X \longmapsto \Hom_\mathcal{D}(P, X).
+$$
+은 충만충실한 완전 함자임을 확인할 수 있다. 다시 말해 위의 주석
+\ref{injectives-remark-embedding}에서 언급한 Freyd--Mitchell 정리를 얻는다.
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-embed-exact-category}
+보조정리 \ref{injectives-lemma-site-abelian-category}와 \ref{injectives-lemma-embedding}을
+증명한 논증은 {\it 완전 범주}에도 적용된다. \cite[Appendix A]{Buhler}와
+\cite[1.1.4]{BBD}를 보라. 여기서 이를 간단히 복습하고, 나중에 Stacks
+project에서 필요해지면 더 자세한 내용을 덧붙이기로 한다.
+
+\medskip\noindent
+$\mathcal{A}$를 가법 범주라 하자. $\mathcal{A}$의 사상들의 쌍 $(i, p)$가
+$i : A \to B$, $p : B \to C$이고 $i$가 $p$의 핵이며 $p$가 $i$의
+여핵이면 이를 {\it 핵-여핵} 쌍이라 한다. 핵-여핵 쌍들의 집합
+$\mathcal{E}$가 주어졌을 때, 어떤 사상 $p$에 대해
+$(i, p) \in \mathcal{E}$이면 $i : A \to B$를 {\it 허용 단사 사상}이라
+한다. 마찬가지로 어떤 사상 $i$에 대해 $(i, p) \in \mathcal{E}$이면
+$p : B \to C$를 {\it 허용 전사 사상}이라 한다. 다음 공리들이 성립하면
+쌍 $(\mathcal{A}, \mathcal{E})$를 {\it 완전 범주}라 한다.
+\begin{enumerate}
+\item $\mathcal{E}$는 핵-여핵 쌍의 동형사상에 대해 닫혀 있다.
+\item 임의의 대상 $A$에 대해 사상 $1_A$는 허용 전사 사상이자 허용 단사
+사상이다.
+\item 허용 단사 사상들은 합성에 대해 안정적이다.
+\item 허용 전사 사상들은 합성에 대해 안정적이다.
+\item 임의의 사상 $A \to A'$를 통한 허용 단사 사상 $i : A \to B$의
+밀어내기가 존재하고, 유도된 사상 $i' : A' \to B'$는 허용 단사 사상이다.
+\item 임의의 사상 $C' \to C$를 통한 허용 전사 사상 $p : B \to C$의
+밑변환이 존재하고, 유도된 사상 $p' : B' \to C'$는 허용 전사 사상이다.
+\end{enumerate}
+이러한 구조가 주어졌다고 하자. 피복들(즉 $\text{Cov}$의 원소들)이 허용
+전사 사상들로 주어지는 $\mathcal{C} = (\mathcal{A}, \text{Cov})$를 두자.
+위의 공리들로부터 이것이 사이트임이 곧바로 따른다. 보조정리
+\ref{injectives-lemma-embedding}에서와 정확히 같은 함자
+$$
+F : \mathcal{A} \longrightarrow \textit{Ab}(\mathcal{C}), \quad
+X \longmapsto h_X
+$$
+를 생각하자. 이 함자는 충만충실하고 완전하며 완전성을 반영한다. 더욱이
+$F$의 본질적 상에 속하는 대상들의 임의의 확대는 다시 $F$의 본질적 상에
+속한다.
+\end{remark}
+
+
+
+
+
+
+\section{Grothendieck의 AB 조건}
+\label{injectives-section-grothendieck-conditions}
+
+\noindent
+이 절과 이어지는 몇 절은 주로 ``큰'' 아벨 범주, 즉 Categories, Remark
+\ref{categories-remark-big-categories}에 나열된 범주들에 관한 것이다.
+염두에 둘 만한 좋은 예는 환 달린 사이트 위의 가군층의 범주이다.
+
+\medskip\noindent
+Grothendieck은 논문 \cite{Tohoku}에서 매우 일반적인 상황의 단사 대상
+존재성을 증명했다. 그는 특별한 성질을 지닌 아벨 범주들을 골라내기 위해
+다음 조건들을 사용했다.
+
+\begin{definition}
+\label{injectives-definition-grothendieck-conditions}
+$\mathcal{A}$를 아벨 범주라 하자. 다음 조건들에 이름을 붙인다.
+\begin{enumerate}
+\item[AB3] $\mathcal{A}$에는 직합이 존재한다.
+\item[AB4] $\mathcal{A}$는 AB3을 만족하고 직합은 완전하다.
+\item[AB5] $\mathcal{A}$는 AB3을 만족하고 여과 여극한은 완전하다.
+\end{enumerate}
+쌍대 개념들은 다음과 같다.
+\begin{enumerate}
+\item[AB3*] $\mathcal{A}$에는 직접곱이 존재한다.
+\item[AB4*] $\mathcal{A}$는 AB3*을 만족하고 직접곱은 완전하다.
+\item[AB5*] $\mathcal{A}$는 AB3*을 만족하고 공여과 극한은 완전하다.
+\end{enumerate}
+$\mathcal{A}$에서 $N \subset M$, $N \not = M$인 모든 경우에 $N$을 거쳐
+분해되지 않는 사상 $U \to M$이 존재하면 대상 $U$를
+{\it 생성자}라 한다. $\mathcal{A}$가 AB5를 만족하고 생성자를 가지면
+$\mathcal{A}$를 {\it Grothendieck 아벨 범주}라 한다.
+\end{definition}
+
+\noindent
+논의: 아벨 범주에서 직합은 쌍대곱이다. 아벨 범주에 직합이 존재하면(즉
+AB3을 만족하면) 여극한이 존재한다. Categories, Lemma
+\ref{categories-lemma-colimits-coproducts-coequalizers}를 보라.
+마찬가지로 $\mathcal{A}$가 AB3*을 만족하면 극한이 존재한다. Categories,
+Lemma \ref{categories-lemma-limits-products-equalizers}를 보라. 직합의
+완전성이란 다음을 뜻한다. 첨자집합 $I$와 $\mathcal{A}$의 짧은 완전열들
+$$
+0 \to A_i \to B_i \to C_i \to 0,\quad i \in I
+$$
+가 주어지면 열
+$$
+0 \to
+\bigoplus\nolimits_{i \in I} A_i \to
+\bigoplus\nolimits_{i \in I} B_i \to
+\bigoplus\nolimits_{i \in I} C_i \to 0
+$$
+도 완전하다. AB4를 가정하지 않으면 일반적으로 이 열은 오른쪽에서만
+완전하다(즉 직합이 존재할 때 직합을 취하는 함자는 오른쪽 완전하다).
+마찬가지로 여과 여극한의 완전성이란 다음을 뜻한다. 유향집합 $I$와
+$I$ 위의 $\mathcal{A}$의 짧은 완전열계
+$$
+0 \to A_i \to B_i \to C_i \to 0
+$$
+가 주어지면 열
+$$
+0 \to
+\colim_{i \in I} A_i \to
+\colim_{i \in I} B_i \to
+\colim_{i \in I} C_i \to 0
+$$
+도 완전하다. AB5를 가정하지 않으면 일반적으로 이 열은 오른쪽에서만
+완전하다(즉 여극한이 존재할 때 여극한을 취하는 함자는 오른쪽 완전하다).
+AB4*와 AB5*에도 이와 비슷한 설명이 성립한다.
+
+
+
+\section{Grothendieck 범주의 단사 대상}
+\label{injectives-section-grothendieck-categories}
+
+\noindent
+생성자의 존재로부터 Grothendieck 아벨 범주 $\mathcal{A}$의 대상 $M$이
+주어졌을 때 그 부분대상들이 집합을 이룸이 따른다. (이는 일반적인 ``큰''
+아벨 범주에서는 성립하지 않을 수도 있다.)
+
+\begin{lemma}
+\label{injectives-lemma-set-of-subobjects}
+$\mathcal{A}$를 생성자 $U$를 갖는 아벨 범주라 하고 $X$를 $\mathcal{A}$의
+대상이라 하자. $\kappa$가 $\Mor(U, X)$의 기수이면 다음이 성립한다.
+\begin{enumerate}
+\item $\kappa$보다 큰 기수로 첨자화된 $X$의 부분대상들의 진정 증가
+(또는 진정 감소) 사슬은 존재하지 않는다.
+\item $\alpha$가 공종수 $> \kappa$인 순서수이면 $\alpha$로 첨자화된
+$X$의 부분대상들의 임의의 증가(또는 감소) 열은 궁극적으로 상수이다.
+\item $X$의 부분대상 집합의 기수는 $\leq 2^\kappa$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 위해 $\kappa' > \kappa$가 기수이고 $X_i$, $i \in \kappa'$가 진정
+증가한다고 가정하자. 각 $i$에 대해 $\phi_i \in \Mor(U, X)$를 택하되,
+$\phi_i$는 $X_{i + 1}$을 거쳐 분해되고 $X_i$를 거쳐서는 분해되지 않게
+한다. 그러면 사상
+$\phi_i$들은 서로 다르며, 이는 $\kappa$의 정의에 모순이다.
+
+\medskip\noindent
+(2)는 공종수의 정의와 (1)에서 따른다.
+
+\medskip\noindent
+(3)을 증명하자. 임의의 부분대상 $Y \subset X$에 대해
+$S_Y \in \mathcal{P}(\Mor(U, X))$(멱집합)를 다음과 같이 정의한다.
+$S_Y = \{\phi \in \Mor(U,X) : \phi)\text{ factors through }Y\}$.
+그러면 $Y = Y'$인 것과 $S_Y = S_{Y'}$인 것은 동치이다. 따라서 부분대상
+집합의 기수는 이 멱집합의 기수 이하이다.
+\end{proof}
+
+\noindent
+보조정리 \ref{injectives-lemma-set-of-subobjects}에 의해 다음 정의는 의미가 있다.
+
+\begin{definition}
+\label{injectives-definition-size}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하고 $M$을 $\mathcal{A}$의
+대상이라 하자. $M$의 부분대상 집합의 기수를 $M$의 {\it 크기} $|M|$이라
+한다.
+\end{definition}
+
+\begin{lemma}
+\label{injectives-lemma-size-goes-down}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하자. $\mathcal{A}$의 짧은
+완전열 $0 \to M' \to M \to M'' \to 0$이 주어지면
+$|M'|, |M''| \leq |M|$이다.
+\end{lemma}
+
+\begin{proof}
+정의에서 바로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-set-iso-classes-bounded-size}
+$\mathcal{A}$를 생성자 $U$를 갖는 Grothendieck 아벨 범주라 하자.
+\begin{enumerate}
+\item $|M| \leq \kappa$이면 $M$은 $U$를 $\kappa$개 이하 직합한 대상의
+몫이다.
+\item 모든 기수 $\kappa$에 대해 $|M| \leq \kappa$인 대상 $M$의
+동형류들은 집합을 이룬다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 위해 각 진부분대상 $M' \subset M$마다 상이 $M'$에 포함되지 않는
+사상 $\varphi_{M'} : U \to M$을 택한다. 그러면
+$\bigoplus_{M' \subset M} \varphi_{M'} : \bigoplus_{M' \subset M} U \to M$
+은 전사이다. (1)에서 (2)가 따름은 명백하다.
+\end{proof}
+
+\begin{proposition}
+\label{injectives-proposition-objects-are-small}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하고 $M$을 $\mathcal{A}$의
+대상이라 하자. $\kappa = |M|$로 두자. $\alpha$가 공종수가 $\kappa$보다
+큰 순서수이면 $M$은 단사 사상에 관하여 $\alpha$-작다.
+\end{proposition}
+
+\begin{proof}
+명제 \ref{injectives-proposition-modules-are-small}와 비교하라. 사상
+(\ref{injectives-equation-compare})가 전사임만 보이면 된다. 사상
+$f : M \to \colim B_\beta$를 택하자. $B_\beta$를 여극한
+$B = \bigcup_\beta B_\beta$의 부분대상으로 보아, $M$의 부분대상들
+$\{f^{-1}(B_\beta)\}$를 생각하자. 이들 가운데 하나, 이를테면
+$f^{-1}(B_\beta)$가 $M$ 전체이면 사상은 $B_\beta$를 거쳐 분해된다.
+
+\medskip\noindent
+$\mathcal{A}$가 AB5를 만족하므로
+$$
+\colim f^{-1}(B_\beta) = f^{-1}\left(\colim B_\beta\right) = M.
+$$
+가 성립한다. 가정에 의해 $f^{-1}(B_\alpha)$들 사이에 나타나는 서로 다른
+$M$의 부분대상은 $\kappa$개 이하이다. 따라서 기수가 $\kappa$ 이하인
+부분집합 $S \subset \alpha$를 택하여, $\beta'$가 $S$를 달릴 때
+$f^{-1}(B_{\beta'})$들이 \emph{모든} $f^{-1}(B_\alpha)$를 달리게 할 수 있다.
+
+\medskip\noindent
+그런데 $\alpha$의 공종수가 $\kappa$보다 크므로 $S$에는 위끝
+$\widetilde{\alpha} < \alpha$가 있다. 특히 모든
+$f^{-1}(B_{\beta'})$, $\beta' \in S$는
+$f^{-1}(B_{\widetilde{\alpha}})$에 포함된다. 따라서
+$f^{-1}(B_{\widetilde{\alpha}}) = M$이고, 특히 사상 $f$는
+$B_{\widetilde{\alpha}}$를 거쳐 분해된다.
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-characterize-injective}
+\begin{slogan}
+대상이 단사 대상인지 확인하려면 생성자의 부분대상들에 대해 올림이
+성립하는지만 확인하면 된다.
+\end{slogan}
+$\mathcal{A}$를 생성자 $U$를 갖는 Grothendieck 아벨 범주라 하자.
+$\mathcal{A}$의 대상 $I$가 단사 대상일 필요충분조건은 모든 가환 도식
+$$
+\xymatrix{
+M \ar[d] \ar[r] &  I \\
+U \ar@{-->}[ru]
+}
+$$
+에서 $M \subset U$가 부분대상이면 점선 화살표가 존재하는 것이다.
+\end{lemma}
+
+\begin{proof}
+가군의 경우는 보조정리 \ref{injectives-lemma-criterion-baer}를 보라. 단사 사상
+$A \subset B$와 사상 $\varphi : A \to I$를 택하자. 부분대상
+$A \subset A' \subset B$와 $\varphi$를 연장하는 사상
+$\varphi' : A' \to I$로 이루어진 쌍 $(A', \varphi')$들의 집합을 $S$라
+하자. 이 집합에 자명한 방법으로 부분순서를 정의한다. 전순서 부분집합
+$T \subset S$를 택하자. 그러면
+$$
+A' = \colim_{t \in T} A_t \xrightarrow{\colim_{t \in T} \varphi_t} I
+$$
+은 위끝이다. 따라서 Zorn의 보조정리에 의해 집합 $S$에는 극대원소
+$(A', \varphi')$가 있다. $A' = B$임을 보이자. 그렇지 않다면 $A'$를
+거쳐 분해되지 않는 사상 $\psi : U \to B$를 택하자.
+$N = A' \cap \psi(U)$, $M = \psi^{-1}(N)$로 두자. 그러면 사상
+$$
+M \to N \to A' \xrightarrow{\varphi'} I
+$$
+을 사상 $\chi : U \to I$로 연장할 수 있다.
+$\chi|_{\Ker(\psi)} = 0$이므로 $\chi$는 다음과 같이 분해된다.
+$$
+U \to \Im(\psi) \xrightarrow{\varphi''} I
+$$
+$\varphi'$와 $\varphi''$는 $N = A' \cap \Im(\psi)$에서 일치하므로, 둘을
+합쳐 사상 $A' + \Im(\psi) \to I$를 정의할 수 있다. 이는 $A'$의 가정한
+극대성에 모순이다.
+\end{proof}
+
+\begin{theorem}
+\label{injectives-theorem-injective-embedding-grothendieck}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하자. 그러면 $\mathcal{A}$에는
+함자적인 단사 매장이 존재한다.
+\end{theorem}
+
+\begin{proof}
+정리 \ref{injectives-theorem-baer-grothendieck}의 증명과 비교하라. $\mathcal{A}$의
+생성자 $U$를 택하자. 대상 $M$에 대해 다음 밀어내기 도식으로
+$\mathbf{M}(M)$을 정의한다.
+$$
+\xymatrix{
+\bigoplus_{N \subset U}
+\bigoplus_{\varphi \in \Hom(N, M)}
+N \ar[r] \ar[d] & M \ar[d] \\
+\bigoplus_{N \subset U}
+\bigoplus_{\varphi \in \Hom(N, M)}
+U \ar[r] &  \mathbf{M}(M).
+}
+$$
+사상 $M \mapsto \mathbf{M}(M)$은 함자이고 함자적인 단사 사상
+$M \to \mathbf{M}(M)$이 존재함에 유의하라. 초한 귀납법으로 모든 순서수
+$\alpha$에 대해 함자 $\mathbf{M}_\alpha(M)$을 정의한다. 구체적으로
+$\mathbf{M}_0(M) = M$으로 두고, $\mathbf{M}_\alpha(M)$가 주어졌을 때
+$\mathbf{M}_{\alpha + 1}(M) = \mathbf{M}(\mathbf{M}_\alpha(M))$.
+으로 둔다. 극한 순서수 $\beta$에 대해서는
+$$
+\mathbf{M}_\beta(M) = \colim_{\alpha < \beta} \mathbf{M}_\alpha(M).
+$$
+로 둔다. 마지막으로 공종수가 $|U|$보다 큰 임의의 순서수 $\alpha$를 택한다.
+그러한 순서수는 Sets, Proposition
+\ref{sets-proposition-exist-ordinals-large-cofinality}에 의해 존재한다.
+$M \to \mathbf{M}_\alpha(M)$이 원하는 함자적인 단사 매장임을 보이자.
+실제로 $N \subset U$가 부분대상이고
+$\varphi : N \to \mathbf{M}_\alpha(M)$가 사상이면, 명제
+\ref{injectives-proposition-objects-are-small}에 의해 어떤 $\alpha' < \alpha$에 대해
+$\varphi$는 $\mathbf{M}_{\alpha'}(M)$을 거쳐 분해된다. $\mathbf{M}(-)$의
+구성에 의해 $\varphi$는 $U$에서 $\mathbf{M}_{\alpha' + 1}(M)$로 가는
+사상으로, 따라서 $\mathbf{M}_\alpha(M)$로 가는 사상으로 연장된다.
+보조정리 \ref{injectives-lemma-characterize-injective}에 의해
+$\mathbf{M}_\alpha(M)$은 단사 대상이다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Grothendieck 범주의 K-단사 복합체}
+\label{injectives-section-K-injective}
+
+\noindent
+이 절의 내용은 Serp\'e의 논문 \cite{serpe}에서 가져왔다. 이 논문은
+Spaltenstein의 \cite{Spaltenstein}에 있는 몇몇 결과를 일반적인
+Grothendieck 아벨 범주로 일반화한다. 우리의 보조정리
+\ref{injectives-lemma-characterize-K-injective}는 Serp\'e의 논문에 암묵적으로만
+들어 있다. 여기서는 Grothendieck이 정리
+\ref{injectives-theorem-injective-embedding-grothendieck}을 증명한 방법을 모방한다.
+
+\begin{lemma}
+\label{injectives-lemma-surjection-bounded-size}
+$\mathcal{A}$를 생성자 $U$를 갖는 Grothendieck 아벨 범주라 하자. 기수
+위의 함수 $c$를 $c(\kappa) = |\bigoplus_{\alpha \in \kappa} U|$로 정의하자.
+$\pi : M \to N$이 전사이면 $N$으로 전사하는 부분대상 $M' \subset M$이
+존재하여 $|M'| \leq c(|N|)$을 만족한다.
+\end{lemma}
+
+\begin{proof}
+각 진부분대상 $N' \subset N$에 대해 $U \to M \to N$이 $N'$을 거쳐
+분해되지 않도록 사상 $\varphi_{N'} : U \to M$을 택하자. 다음과 같이 두자.
+$$
+M' = \Im\left(
+\bigoplus\nolimits_{N' \subset N} \varphi_{N'} :
+\bigoplus\nolimits_{N' \subset N} U \longrightarrow M\right)
+$$
+그러면 $M'$이 원하는 대상이다.
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-acyclic-quotient-complexes-bounded-size}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하자. 임의의 비순환 복합체
+$M^\bullet$에 대해 다음이 성립하도록 하는 기수 $\kappa$가 존재한다.
+\begin{enumerate}
+\item $M^\bullet$이 영이 아니면, 위로 유계이고 비순환이며
+$|N^n| \leq \kappa$인 영이 아닌 부분복합체 $N^\bullet$이 존재한다.
+\item 복합체의 전사 사상
+$$
+\bigoplus\nolimits_{i \in I} M_i^\bullet \longrightarrow M^\bullet
+$$
+이 존재하며, 여기서 $M_i^\bullet$은 위로 유계이고 비순환이며
+$|M_i^n| \leq \kappa$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{A}$의 생성자 $U$를 택하고, 보조정리
+\ref{injectives-lemma-surjection-bounded-size}의 함수를 $c$로 나타내자.
+$\kappa = \sup \{c^n(|U|), n = 1, 2, 3, \ldots\}$로 두자.
+$n \in \mathbf{Z}$라 하고 $\psi : U \to M^n$을 사상이라 하자. (1)과
+(2)를 증명하려면, 위로 유계이고 비순환이며 $|N^m| \leq \kappa$이고
+$\psi$가 $N^n$을 거쳐 분해되는 부분복합체
+$N^\bullet \subset M^\bullet$이 존재함을 보이면 충분하다. 이를 위해
+$N^n = \Im(\psi)$, $N^{n + 1} = \Im(U \to M^n \to M^{n + 1})$로 두고,
+$m \geq n + 2$에 대해 $N^m = 0$으로 둔다. 어떤 $k \leq n$에 대해
+모든 $n > m \geq k$에 대한 $N^m \subset M^m$을 다음 조건을 만족하도록
+구성했다고 하자.
+\begin{enumerate}
+\item 모든 $m \geq k$에 대해 $\text{d}(N^m) \subset N^{m + 1}$이다.
+\item 모든 $m \geq k + 1$에 대해
+$\Im(N^{m - 1} \to N^m) = \Ker(N^m \to N^{m + 1})$이다.
+\item 모든 $m \geq k$에 대해
+$|N^m| \leq c^{\max\{n - m, 0\}}(|U|)$이다.
+\end{enumerate}
+$M^\bullet$이 비순환이므로 부분대상
+$\text{d}^{-1}(\Ker(N^k \to N^{k + 1})) \subset M^{k - 1}$은
+$\Ker(N^k \to N^{k + 1})$으로 전사한다. 따라서 보조정리
+\ref{injectives-lemma-surjection-bounded-size}에 의해
+$|N^{k - 1}| \leq c^{n - k + 1}(|U|)$이고
+$\Ker(N^k \to N^{k + 1})$으로 전사하는
+$N^{k - 1} \subset M^{k - 1}$을 택할 수 있다. $k$에 대한 귀납법으로
+증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-characterize-K-injective}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하고 $\kappa$를 보조정리
+\ref{injectives-lemma-acyclic-quotient-complexes-bounded-size}에서와 같은 기수라 하자.
+$I^\bullet$이 다음을 만족하는 복합체라고 하자.
+\begin{enumerate}
+\item 각 $I^j$는 단사 대상이다.
+\item $|M^n| \leq \kappa$를 만족하는 모든 위로 유계인 비순환 복합체
+$M^\bullet$에 대해 $\Hom_{K(\mathcal{A})}(M^\bullet, I^\bullet) = 0$이다.
+\end{enumerate}
+그러면 $I^\bullet$은 $K$-단사 복합체이다.
+\end{lemma}
+
+\begin{proof}
+$M^\bullet$을 비순환 복합체라 하자. 순서수 $\alpha$에 대한 귀납법으로
+비순환 부분복합체 $K_\alpha^\bullet \subset M^\bullet$을 다음과 같이
+구성한다. $\alpha = 0$이면 $K_0^\bullet = 0$으로 둔다. $\alpha > 0$이면
+다음과 같이 진행한다.
+\begin{enumerate}
+\item $\alpha = \beta + 1$이고 $K_\beta^\bullet = M^\bullet$이면
+$K_\alpha^\bullet = K_\beta^\bullet$로 택한다.
+\item $\alpha = \beta + 1$이고 $K_\beta^\bullet \not = M^\bullet$이면
+$M^\bullet/K_\beta^\bullet$은 영이 아닌 비순환 복합체이다. 보조정리
+\ref{injectives-lemma-acyclic-quotient-complexes-bounded-size}에서와 같은 부분복합체
+$N_\alpha^\bullet \subset M^\bullet/K_\beta^\bullet$을 택한다. 마지막으로
+$K_\alpha^\bullet \subset M^\bullet$을 $N_\alpha^\bullet$의 역상으로 둔다.
+\item $\alpha$가 극한 순서수이면
+$K_\beta^\bullet = \colim K_\alpha^\bullet$로 둔다.
+\end{enumerate}
+충분히 큰 순서수 $\alpha$에 대해 $M^\bullet = K_\alpha^\bullet$임은
+명백하다. $\alpha$에 대한 초한 귀납법으로
+$$
+\Hom_{K(\mathcal{A})}(K_\alpha^\bullet, I^\bullet)
+$$
+이 영임을 증명한다. $K_0^\bullet$이 영이므로 $\alpha = 0$일 때 성립한다.
+$\beta$에 대해 성립하고 $\alpha = \beta + 1$이라고 하자. 위 목록의
+(1)의 경우 결과는 명백하다. (2)의 경우 복합체의 짧은 완전열
+$$
+0 \to K_\beta^\bullet \to K_\alpha^\bullet \to N_\alpha^\bullet \to 0
+$$
+이 존재한다. $I^\bullet$의 각 성분이 단사 대상이므로 완전열
+$$
+\Hom_{K(\mathcal{A})}(K_\beta^\bullet, I^\bullet) \leftarrow
+\Hom_{K(\mathcal{A})}(K_\alpha^\bullet, I^\bullet) \leftarrow
+\Hom_{K(\mathcal{A})}(N_\alpha^\bullet, I^\bullet)
+$$
+을 얻는다. 귀납가정에 의해 왼쪽 항은 영이고, $I^\bullet$에 대한 가정에
+의해 오른쪽 항도 영이다. 따라서 가운데 군도 영이다. 마지막으로
+$\alpha$가 극한 순서수라고 하자. 그러면
+$$
+\Hom^\bullet(K_\alpha^\bullet, I^\bullet) =
+\lim_{\beta < \alpha} \Hom^\bullet(K_\beta^\bullet, I^\bullet)
+$$
+이다. 여기서 표기는 More on Algebra, Section
+\ref{more-algebra-section-hom-complexes}에서와 같다. More on Algebra,
+Equation (\ref{more-algebra-equation-cohomology-hom-complex})에 의해 이
+복합체들은 $K(\mathcal{A})$에서의 사상들을 계산한다. 각 $j$에 대해
+$I^j$가 단사 대상이므로 이 계의 전이 사상들은 전사임에 유의하라.
+더욱이 극한 순서수 $\alpha$에 대해서는 극한과 값이 같다(위의 표시식을
+보라). 따라서 Homology, Lemma \ref{homology-lemma-ML-over-ordinals}를
+적용하면 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-functorial-homotopies}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하고
+$(K_i^\bullet)_{i \in I}$를 비순환 복합체들의 집합이라 하자. 함자
+$M^\bullet \mapsto \mathbf{M}^\bullet(M^\bullet)$와 자연변환
+$j_{M^\bullet} : M^\bullet \to \mathbf{M}^\bullet(M^\bullet)$
+이 존재하여 다음을 만족한다.
+\begin{enumerate}
+\item $j_{M^\bullet}$는 (항별로) 단사인 준동형사상이다.
+\item 모든 $i \in I$와 $w : K_i^\bullet \to M^\bullet$에 대해 사상
+$j_{M^\bullet} \circ w$는 영과 호모토픽이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+각 $i \in I$에 대해, 영과 호모토픽이고 $L_i^\bullet$이 영과 준동형인
+복합체의 (항별로) 단사 사상 $K_i^\bullet \to L_i^\bullet$을 택하자.
+예를 들어 $L_i^\bullet$을 $K_i^\bullet$의 항등사상의 원뿔로 택할 수 있다.
+다음 밀어내기 도식으로 $\mathbf{M}^\bullet(M^\bullet)$을 정의한다.
+$$
+\xymatrix{
+\bigoplus_{i \in I}
+\bigoplus_{w : K_i^\bullet \to M^\bullet}
+K_i^\bullet \ar[r] \ar[d] & M^\bullet \ar[d] \\
+\bigoplus_{i \in I}
+\bigoplus_{w : K_i^\bullet \to M^\bullet}
+L_i^\bullet \ar[r] &  \mathbf{M}^\bullet(M^\bullet).
+}
+$$
+그러면 $M^\bullet \mapsto \mathbf{M}^\bullet(M^\bullet)$은 함자이다. 오른쪽
+수직 화살표는 함자적인 단사 사상 $j_{M^\bullet}$를 정의한다.
+$j_{M^\bullet}$의 여핵은 사상 $K_i^\bullet \to L_i^\bullet$들의 여핵들의
+직합과 동형이므로 비순환이다. 따라서 $j_{M^\bullet}$는 준동형사상이다.
+(2)는 구성에 의해 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-functorial-injective}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하자. 함자
+$M^\bullet \mapsto \mathbf{N}^\bullet(M^\bullet)$와 자연변환
+$j_{M^\bullet} : M^\bullet \to \mathbf{N}^\bullet(M^\bullet)$
+이 존재하여 다음을 만족한다.
+\begin{enumerate}
+\item $j_{M^\bullet}$는 (항별로) 단사인 준동형사상이다.
+\item 모든 $n \in \mathbf{Z}$에 대해 사상 $M^n \to \mathbf{N}^n(M^\bullet)$은
+부분대상 $I^n \subset \mathbf{N}^n(M^\bullet)$을 거쳐 분해되며, 여기서
+$I^n$은 $\mathcal{A}$의 단사 대상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+함자적인 단사 매장 $i_M : M \to I(M)$을 택하자. 정리
+\ref{injectives-theorem-injective-embedding-grothendieck}을 보라. 각 복합체
+$M^\bullet$에 대해, 항이
+$J^n(M^\bullet) = I(M^n) \oplus I(M^{n + 1})$이고 미분이
+$$
+d_{J^\bullet(M^\bullet)} =
+\left(
+\begin{matrix}
+0 & 1 \\
+0 & 0
+\end{matrix}
+\right)
+$$
+로 주어지는 복합체를 $J^\bullet(M^\bullet)$로 나타내자. 사상
+$i_{M^n} : M^n \to I(M^n)$과
+$i_{M^{n + 1}} \circ d : M^n \to M^{n + 1} \to I(M^{n + 1})$를 사용하여
+$M^n$을 $I(M^n) \oplus I(M^{n + 1})$로 보내면 복합체의 표준 단사 사상
+$u_{M^\bullet} : M^\bullet \to J^\bullet(M^\bullet)$을 얻는다. 따라서
+$M^\bullet$에 대해 함자적인 복합체의 짧은 완전열
+$$
+0 \to M^\bullet \xrightarrow{u_{M^\bullet}}
+J^\bullet(M^\bullet) \xrightarrow{v_{M^\bullet}}
+Q^\bullet(M^\bullet) \to 0
+$$
+이 존재한다. 다음과 같이 두자.
+$$
+\mathbf{N}^\bullet(M^\bullet) = C(v_{M^\bullet})^\bullet[-1].
+$$
+다음에 유의하라.
+$$
+\mathbf{N}^n(M^\bullet) = Q^{n - 1}(M^\bullet) \oplus J^n(M^\bullet)
+$$
+그 미분은
+$$
+\left(
+\begin{matrix}
+- d^{n - 1}_{Q^\bullet(M^\bullet)} & - v^n_{M^\bullet} \\
+0 & d^n_{J^\bullet(M)}
+\end{matrix}
+\right)
+$$
+이다. 따라서 $u$로부터 유도되는 복합체의 사상
+$j_{M^\bullet} : M^\bullet \to \mathbf{N}^\bullet(M^\bullet)$이 존재한다.
+이는 단사이고 구성에 의해 단사 부분대상을 거쳐 분해된다. 위의 복합체의
+짧은 완전열에 결부된 코호몰로지 긴 완전열을 살펴보면 사상
+$j_{M^\bullet}$가 준동형사상임을 증명할 수 있다.
+\end{proof}
+
+\begin{theorem}
+\label{injectives-theorem-K-injective-embedding-grothendieck}
+\begin{slogan}
+Grothendieck 아벨 범주에서 K-단사 복합체의 존재성.
+\end{slogan}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하자. 모든 복합체 $M^\bullet$에
+대해 준동형사상 $M^\bullet \to I^\bullet$이 존재하여, 모든 $n$에 대해
+$M^n \to I^n$은 단사이고 $I^n$은 $\mathcal{A}$의 단사 대상이며
+$I^\bullet$은 K-단사 복합체이다. 더욱이 이 구성은 $M^\bullet$에 대해
+함자적이다.
+\end{theorem}
+
+\begin{proof}
+정리 \ref{injectives-theorem-baer-grothendieck}과 정리
+\ref{injectives-theorem-injective-embedding-grothendieck}의 증명과 비교하라. 보조정리
+\ref{injectives-lemma-acyclic-quotient-complexes-bounded-size}와
+\ref{injectives-lemma-characterize-K-injective}에서와 같은 기수 $\kappa$를 택하자.
+위로 유계이고 비순환인 복합체들의 집합 $(K_i^\bullet)_{i \in I}$를,
+$|K^n| \leq \kappa$인 모든 위로 유계인 비순환 복합체 $K^\bullet$이
+어떤 $i \in I$에 대해 $K_i^\bullet$과 동형이 되도록 택한다. 이는 보조정리
+\ref{injectives-lemma-set-iso-classes-bounded-size}에 의해 가능하다. 보조정리
+\ref{injectives-lemma-functorial-homotopies}에서 구성한 함자를
+$\mathbf{M}^\bullet(-)$로, 보조정리 \ref{injectives-lemma-functorial-injective}에서
+구성한 함자를 $\mathbf{N}^\bullet(-)$로 나타내자. 이 두 함자에는 단사인
+자연변환 $\text{id} \to \mathbf{M}$과 $\text{id} \to \mathbf{N}$이 딸려 있다.
+
+\medskip\noindent
+초한 귀납법으로 함자들의 열 $\mathbf{T}_\alpha(-)$와 그에 대응하는
+자연변환 $\text{id} \to \mathbf{T}_\alpha$를 정의한다. 구체적으로
+$\mathbf{T}_0(M^\bullet) = M^\bullet$으로 둔다. $\mathbf{T}_\alpha$가
+주어졌다면 다음과 같이 둔다.
+$$
+\mathbf{T}_{\alpha + 1}(M^\bullet) =
+\mathbf{N}^\bullet(\mathbf{M}^\bullet(\mathbf{T}_\alpha(M^\bullet)))
+$$
+$\beta$가 극한 순서수이면 다음과 같이 둔다.
+$$
+\mathbf{T}_\beta(M^\bullet) =
+\colim_{\alpha < \beta} \mathbf{T}_\alpha(M^\bullet)
+$$
+이 계의 전이 사상들은 단사인 준동형사상이다. AB5에 의해 여극한도 여전히
+$M^\bullet$과 준동형이다. $U$가 $\mathcal{A}$의 생성자일 때 $\alpha$의
+공종수가 $\max(\kappa, |U|)$보다 크면
+$M^\bullet \to \mathbf{T}_\alpha(M^\bullet)$이 원하는 대상임을 보이자.
+보조정리 \ref{injectives-lemma-characterize-K-injective}의 조건 (1)과 (2)를 확인하면
+충분하다.
+
+\medskip\noindent
+(1)을 위해 보조정리 \ref{injectives-lemma-characterize-injective}의 판정법을 사용한다.
+$M \subset U$이고 어떤 $n \in \mathbf{Z}$에 대해
+$\varphi : M \to \mathbf{T}^n_\alpha(M^\bullet)$가 사상이라고 하자. 명제
+\ref{injectives-proposition-objects-are-small}에 의해 어떤 $\alpha' < \alpha$에 대해
+$\varphi$는 $\mathbf{T}^n_{\alpha'}(M^\bullet)$을 거쳐 분해된다. 특히 함자
+$\mathbf{N}^\bullet(-)$의 구성에 의해 $\varphi$는 $\mathcal{A}$의 단사
+대상을 거쳐 분해되며, 따라서 $\varphi$는 $U$ 위의 사상으로 올려진다.
+
+\medskip\noindent
+(2)를 위해 $w : K^\bullet  \to \mathbf{T}_\alpha(M^\bullet)$를 복합체의
+사상이라 하자. 여기서 $K^\bullet$은 $|K^n| \leq \kappa$인 위로 유계인
+비순환 복합체이다. 그러면 어떤 $i \in I$에 대해
+$K^\bullet \cong K_i^\bullet$이다. 더욱이 다시 명제
+\ref{injectives-proposition-objects-are-small}에 의해 어떤 $\alpha' < \alpha$에 대해
+$w$는 $\mathbf{T}^n_{\alpha'}(M^\bullet)$을 거쳐 분해된다. 특히 함자
+$\mathbf{M}^\bullet(-)$의 구성에 의해 $w$는 영과 호모토픽이다. 이로써
+증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+\section{Grothendieck 아벨 범주에 관한 추가 주석}
+\label{injectives-section-additional-Grothendieck}
+
+\noindent
+이 절에서는 민간전승으로 알려진 Grothendieck 아벨 범주에 관한 몇 가지
+결과를 모은다.
+
+\begin{lemma}
+\label{injectives-lemma-grothendieck-brown}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하고
+$F : \mathcal{A}^{opp} \to \textit{Sets}$를 함자라 하자. $F$가 표현가능일
+필요충분조건은 $F$가 여극한과 가환하는 것, 즉 임의의 도식
+$\mathcal{I} \to \mathcal{A}$, $i \in \mathcal{I}$에 대해
+$$
+F(\colim_i N_i) = \lim F(N_i)
+$$
+가 성립하는 것이다.
+\end{lemma}
+
+\begin{proof}
+$F$가 표현가능이면 여극한의 정의에 의해 여극한과 가환한다.
+
+\medskip\noindent
+$F$가 여극한과 가환한다고 가정하자. 그러면
+$F(M \oplus N) = F(M) \times F(N)$이고, 이를 이용하여 $F(M)$ 위에 군
+구조를 정의할 수 있다. 따라서 가법이고 오른쪽 완전한 함자
+$F : \mathcal{A} \to \textit{Ab}$를 얻는다. 즉 짧은 완전열
+$0 \to K \to L \to M \to 0$을 완전열
+$F(K) \leftarrow F(L) \leftarrow F(M) \leftarrow 0$으로 보낸다
+(Homology, Section \ref{homology-section-functors}와 비교하라).
+
+\medskip\noindent
+$U$를 $\mathcal{A}$의 생성자라 하고 $A = \bigoplus_{s \in F(U)} U$로
+두자. $s_{univ} = (s)_{s \in F(U)} \in F(A) = \prod_{s \in F(U)} F(U)$로
+두자. $s_{univ}$를 $A'$에 제한하면 영이 되도록 하는 가장 큰 부분대상을
+$A' \subset A$라 하자. $\mathcal{A}$가 Grothendieck 범주이고 $F$가
+여극한과 가환하므로 이것은 존재한다. $F$가 여극한과 가환하므로
+$F(A)$에서 $s_{univ}$로 가는 유일한 원소
+$\overline{s}_{univ} \in F(A/A')$가 존재한다. $A/A'$가 $F$를 표현함,
+다시 말해 Yoneda 사상
+$$
+\overline{s}_{univ} : h_{A/A'} \longrightarrow F
+$$
+이 동형사상임을 보이자. $M \in \Ob(\mathcal{A})$, $s \in F(M)$이라 하자.
+전사 사상
+$$
+c_M :
+A_M = \bigoplus\nolimits_{\varphi \in \Hom_\mathcal{A}(U, M)} U
+\longrightarrow
+M.
+$$
+을 생각하자. 이는 $F(c_M)(s) = (s_\varphi) \in \prod_\varphi F(U)$를 준다.
+사상
+$$
+\psi :
+A_M = \bigoplus\nolimits_{\varphi \in \Hom_\mathcal{A}(U, M)} U
+\longrightarrow
+\bigoplus\nolimits_{s \in F(U)} U = A
+$$
+을 생각하자. 이 사상은 $\varphi$에 대응하는 직합 성분을 $U$ 위의
+항등사상으로 $s_\varphi$에 대응하는 직합 성분에 보낸다. 그러면 구성에
+의해 $s_{univ}$는 $(s_\varphi)_\varphi$로 간다. 다시 말해 도식의 오른쪽
+사각형
+$$
+\xymatrix{
+A' \ar[r] &
+A \ar@{..>}[r]_{s_{univ}} & F \\
+K \ar[r] \ar[u]^{?} & A_M \ar[u]^\psi \ar[r] &
+M \ar@{..>}[u]_s
+}
+$$
+은 가환한다. $K = \Ker(A_M \to M)$로 두자. $s$를 $K$에 제한하면 영이므로
+$A'$의 정의에 의해 $\psi(K) \subset A'$이다. 따라서 유도된 사상
+$M \to A/A'$이 존재한다. 이 구성은 사상 $h_{A/A'}(M) \to F(M)$의
+역을 준다(세부사항은 생략한다).
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-grothendieck-products}
+Grothendieck 아벨 범주는 AB3*을 만족한다.
+\end{lemma}
+
+\begin{proof}
+$M_i$, $i \in I$를 집합 $I$로 첨자화된 $\mathcal{A}$의 대상들의 족이라
+하자. 함자 $F = \prod_{i \in I} h_{M_i}$는 여극한과 가환한다. 따라서
+보조정리 \ref{injectives-lemma-grothendieck-brown}을 적용할 수 있다.
+\end{proof}
+
+\begin{remark}
+\label{injectives-remark-existence-D}
+유도범주 장에서는 Stacks project의 규약에 따라 일관되게 ``작은'' 아벨
+범주를 다룬다. ``큰'' 아벨 범주 $\mathcal{A}$의 경우 유도범주의 사상들이
+집합인지 분명하지 않으므로 유도범주 $D(\mathcal{A})$가 존재하는지도
+분명하지 않다. 일반적으로 이는 참이 아니다. Examples, Lemma
+\ref{examples-lemma-big-abelian-category}를 보라. 그러나 $\mathcal{A}$가
+Grothendieck 아벨 범주이고 $K(\mathcal{A})$의
+$K^\bullet, L^\bullet$이 주어졌다면, 정리
+\ref{injectives-theorem-K-injective-embedding-grothendieck}에 의해 K-단사 복합체
+$I^\bullet$로 가는 준동형사상 $L^\bullet \to I^\bullet$이 존재하고,
+Derived Categories, Lemma \ref{derived-lemma-K-injective}에 의해
+$$
+\Hom_{D(\mathcal{A})}(K^\bullet, L^\bullet) =
+\Hom_{K(\mathcal{A})}(K^\bullet, I^\bullet)
+$$
+이며 이는 집합이다. Grothendieck 아벨 범주의 예로는 환 위의 가군 범주,
+더 일반적으로는 환 달린 사이트 위의 가군층 범주가 있다.
+\end{remark}
+
+\begin{lemma}
+\label{injectives-lemma-derived-products}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하자. 그러면 다음이 성립한다.
+\begin{enumerate}
+\item $D(\mathcal{A})$에는 직합과 직접곱이 모두 존재한다.
+\item 직합은 임의의 복합체들의 항별 직합을 취해 얻는다.
+\item 직접곱은 K-단사 복합체들의 항별 직접곱을 취해 얻는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$K^\bullet_i$, $i \in I$를 집합 $I$로 첨자화된 $D(\mathcal{A})$의 대상들의
+족이라 하자. 항별 직합 $\bigoplus_{i \in I} K^\bullet_i$가
+$D(\mathcal{A})$에서 직합임을 보이자. $I^\bullet$을 K-단사 복합체라 하자.
+그러면
+\begin{align*}
+\Hom_{D(\mathcal{A})}(\bigoplus\nolimits_{i \in I} K^\bullet_i, I^\bullet)
+& =
+\Hom_{K(\mathcal{A})}(\bigoplus\nolimits_{i \in I} K^\bullet_i, I^\bullet) \\
+& =
+\prod\nolimits_{i \in I} \Hom_{K(\mathcal{A})}(K^\bullet_i, I^\bullet) \\
+& =
+\prod\nolimits_{i \in I} \Hom_{D(\mathcal{A})}(K^\bullet_i, I^\bullet)
+\end{align*}
+이므로 원하는 결과를 얻는다. 정리
+\ref{injectives-theorem-K-injective-embedding-grothendieck}에 의해 모든 복합체를
+K-단사 복합체로 표현할 수 있으므로 이것으로 충분하다. 직접곱을 구성하기
+위해 각 $i$에 대해 K-단사 분해 $K_i^\bullet \to I_i^\bullet$을 택하자.
+그러면 $\prod_{i \in I} I_i^\bullet$은 $D(\mathcal{A})$에서 직접곱이다.
+이는 Derived Categories, Lemma \ref{derived-lemma-product-K-injective}에서
+따른다.
+\end{proof}
+
+\begin{remark}
+\label{injectives-remark-direct-sum-product-derived}
+$R$을 환이라 하고 $M_n$, $n \in \mathbf{Z}$를 $R$-가군이라 하자.
+$E_n = M_n[-n] \in D(R)$로 나타내자. $E = \bigoplus M_n[-n]$은 $D(R)$에서
+대상 $E_n$들의 직합인 동시에 직접곱이다. 직합임은 보조정리
+\ref{injectives-lemma-derived-products}의 증명에서 알 수 있다. 직접곱임을 보이기
+위해 단사 분해 $M_n \to I_n^\bullet$을 택하자. 보조정리
+\ref{injectives-lemma-derived-products}의 증명에 의해 $D(R)$에서
+$$
+\prod E_n = \prod I_n^\bullet[-n]
+$$
+이다. $\text{Mod}_R$에서 직접곱은 완전하므로
+$\prod I_n^\bullet[-n]$은 $E$와 준동형이다. 더 일반적으로
+$\mathcal{A}$가 AB4*을 만족하는 Grothendieck 아벨 범주일 때
+$D(\mathcal{A})$에서도 같은 논증이 성립한다.
+\end{remark}
+
+\begin{lemma}
+\label{injectives-lemma-RF-commutes-with-Rlim}
+$F : \mathcal{A} \to \mathcal{B}$를 아벨 범주 사이의 가법 함자라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{A}$는 Grothendieck 아벨 범주이다.
+\item $\mathcal{B}$에는 완전한 가산 직접곱이 존재한다.
+\item $F$는 가산 직접곱과 가환한다.
+\end{enumerate}
+그러면 $RF : D(\mathcal{A}) \to D(\mathcal{B})$는 유도극한과 가환한다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{A}$에는 K-단사 복합체가 충분히 많으므로 $RF$가 존재함에
+유의하라(정리 \ref{injectives-theorem-K-injective-embedding-grothendieck} 및
+Derived Categories, Lemma \ref{derived-lemma-K-injective-defined}). 이 명제는
+$K = R\lim K_n$이면 $RF(K) = R\lim RF(K_n)$이라는 뜻이다. 표기는
+Derived Categories, Definition \ref{derived-definition-derived-limit}을 보라.
+$RF$는 삼각범주의 완전 함자이므로 $RF$가 $D(\mathcal{A})$의 대상들의
+가산 직접곱과 가환함을 보이면 충분하다. 보조정리
+\ref{injectives-lemma-derived-products}의 증명에서 $D(\mathcal{A})$의 직접곱은 K-단사
+복합체들의 직접곱을 취해 계산되고, K-단사 복합체들의 직접곱도 K-단사임을
+보았다. 또한 Derived Categories, Lemma \ref{derived-lemma-products}에서
+$D(\mathcal{B})$의 직접곱은 항별 직접곱을 취해 계산됨을 보았다. $RF$는
+K-단사 대표에 $F$를 적용하여 계산되고 $F$가 가산 직접곱과 가환한다고
+가정했으므로 보조정리가 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리는 Cartan--Eilenberg 분해의 존재성(Derived Categories,
+Section \ref{derived-section-cartan-eilenberg})을 일반화한 결과의 일종이다.
+
+\begin{lemma}
+\label{injectives-lemma-K-injective-embedding-filtration}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하고 $K^\bullet$을
+$\mathcal{A}$의 여과 복합체라 하자. Homology, Definition
+\ref{homology-definition-filtered-complex}를 보라. 그러면 $\mathcal{A}$의
+여과 복합체의 사상 $j : K^\bullet \to J^\bullet$이 존재하여 다음을
+만족한다.
+\begin{enumerate}
+\item $J^n$, $F^pJ^n$, $J^n/F^pJ^n$ 및 $F^pJ^n/F^{p'}J^n$은
+$\mathcal{A}$의 단사 대상이다.
+\item $J^\bullet$, $F^pJ^\bullet$, $J^\bullet/F^pJ^\bullet$ 및
+$F^pJ^\bullet/F^{p'}J^\bullet$은 K-단사 복합체이다.
+\item $j$는 다음 준동형사상들을 유도한다.
+$K^\bullet \to J^\bullet$,
+$F^pK^\bullet \to F^pJ^\bullet$,
+$K^\bullet/F^pK^\bullet \to J^\bullet/F^pJ^\bullet$, and
+$F^pK^\bullet/F^{p'}K^\bullet \to F^pJ^\bullet/F^{p'}J^\bullet$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+정리 \ref{injectives-theorem-K-injective-embedding-grothendieck}에 의해 준동형사상
+$i : K^\bullet \to I^\bullet$과
+$i^p : F^pK^\bullet \to I^{p, \bullet}$ 및 가환 도식
+$$
+\vcenter{
+\xymatrix{
+K^\bullet \ar[d]_i & F^pK^\bullet \ar[l] \ar[d]_{i^p} \\
+I^\bullet & I^{p, \bullet} \ar[l]_{\alpha^p}
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+F^{p'}K^\bullet \ar[d]_{i^{p'}} &
+F^pK^\bullet \ar[l] \ar[d]_{i^p} \\
+I^{p', \bullet} &
+I^{p, \bullet} \ar[l]_{\alpha^{p p'}}
+}
+}
+\quad\text{for }p' \leq p
+$$
+을 얻으며, 여기서 $\alpha^p \circ \alpha^{p' p} = \alpha^{p'}$이고
+$\alpha^{p'p''} \circ \alpha^{pp'} = \alpha^{pp''}$이다. 문제는 사상
+$\alpha^p : I^{p, \bullet} \to I^\bullet$이 단사일 필요가 없다는 것이다.
+각 $p$에 대해, 항들이 $\mathcal{A}$의 단사 대상인 비순환 K-단사 복합체
+$J^{p, \bullet}$로 가는 단사 사상
+$t^p : I^{p, \bullet} \to J^{p, \bullet}$을 택한다(먼저 항등사상의
+원뿔로 보내고 나서 정리를 사용한다). 다음 도식이 가환하도록 복합체의 사상
+$s^p : I^\bullet \to J^{p, \bullet}$을 택하자.
+$$
+\xymatrix{
+K^\bullet \ar[d]_i & F^pK^\bullet \ar[l] \ar[d]_{i^p} \\
+I^\bullet \ar[rd]_{s^p} & I^{p, \bullet} \ar[d]^{t^p} \\
+& J^{p, \bullet}
+}
+$$
+이는 가능하다. $J^{p, \bullet}$이 비순환 K-단사이므로 합성
+$F^pK^\bullet \to J^{p, \bullet}$은 영과 호모토픽이다(Derived Categories,
+Lemma \ref{derived-lemma-K-injective}). 대상 $J^{p, n - 1}$들이 단사
+대상이고 $F^pK^n \to K^n \to I^n$이 단사 사상이므로, 이 호모토피를 주는
+사상 $F^pK^n \to J^{p, n - 1}$을 사상
+$h^n : I^n \to J^{p, n - 1}$로 올릴 수 있다. 이제 $s^p$를
+$h \circ \text{d} + \text{d} \circ h$와 같게 둔다. (주의:
+$t^p = s^p \circ \alpha^p$는 성립하지 않으므로 아래에서 이를 사용하지
+않도록 조심해야 한다.)
+
+\medskip\noindent
+다음을 생각하자.
+$$
+J^\bullet = I^\bullet \times \prod\nolimits_p J^{p, \bullet}
+$$
+$D(\mathcal{A})$의 직접곱은 K-단사 복합체들의 직접곱을 취하여 주어지고
+(보조정리 \ref{injectives-lemma-derived-products}), $J^{p, \bullet}$은
+$D(\mathcal{A})$에서 $0$과 동형이므로 $J^\bullet \to I^\bullet$은
+$D(\mathcal{A})$에서 동형사상이다. 사상
+$$
+j = i \times (s^p \circ i)_{p \in \mathbf{Z}} :
+K^\bullet
+\longrightarrow
+I^\bullet \times \prod\nolimits_p J^{p, \bullet} = J^\bullet
+$$
+을 생각하자. 위의 설명에 의해 이는 준동형사상이고 또한 단사이다.
+$p \in \mathbf{Z}$에 대해 $F^pJ^\bullet \subset J^\bullet$을 다음으로 둔다.
+$$
+\Im\left(
+\alpha^p \times (t^{p'} \circ \alpha^{pp'})_{p' \leq p} :
+I^{p, \bullet}
+\to
+I^\bullet \times \prod\nolimits_{p' \leq p} J^{p', \bullet}
+\right)
+\times \prod\nolimits_{p' > p} J^{p', \bullet}
+$$
+$\alpha^{pp} = \text{id}$이고 $t^p$가 단사이므로 이 복합체는 복합체
+$I^{p, \bullet} \times \prod_{p' > p} J^{p, \bullet}$과 동형이다. 따라서
+$F^pJ^\bullet$은 $I^{p, \bullet}$과 준동형이다(위와 같이 논증하라).
+위 도식의 가환성에 의해 $j(F^pK^\bullet) \subset F^pJ^\bullet$이다.
+방금 말한 바에 따라 이에 대응하는 복합체의 사상
+$F^pK^\bullet \to F^pJ^\bullet$은 준동형사상이다. 마지막으로
+$F^{p + 1}J^\bullet \subset F^pJ^\bullet$임을 보이려면
+$\alpha^{p + 1p} \circ \alpha^{pp'} = \alpha^{p + 1p'}$와 증명의 첫
+문단에 있는 첫 번째 표시 도식의 가환성을 사용한다.
+
+\medskip\noindent
+$j : K^\bullet \to J^\bullet$가 보조정리에서 제기한 문제의 해임을
+보이자. $F^pJ^n$은 $I^{p, n} \times \prod_{p' > p} J^{p', n}$과 동형이고
+단사 대상들의 직접곱은 단사 대상이므로 이는 $\mathcal{A}$의 단사 대상이다.
+그러면 단사 사상 $F^pJ^n \to J^n$은 분할되고, 따라서 몫
+$J^n/F^pJ^n$도 단사 대상 $J^n$의 직합인자로서 단사 대상이다.
+$F^pJ^n/F^{p'}J^n$도 마찬가지이다. 특히 이는
+$0 \to F^pJ^\bullet \to J^\bullet \to J^\bullet/F^pJ^\bullet \to 0$이
+항별로 분할되는 복합체의 짧은 완전열이고, 따라서 정의에 의해
+$K(\mathcal{A})$의 특수 삼각형을 정의한다는 뜻이다. $J^\bullet$과
+$F^pJ^\bullet$이 K-단사 복합체이므로 Derived Categories, Lemma
+\ref{derived-lemma-triangle-K-injective}에 의해
+$J^\bullet/F^pJ^\bullet$도 K-단사이다. 비슷한 논증으로
+$F^pJ^\bullet/F^{p'}J^\bullet$도 K-단사임을 알 수 있다. 구성에 의해
+$j : K^\bullet \to J^\bullet$와 유도된 사상
+$F^pK^\bullet \to F^pJ^\bullet$은 준동형사상이다. 관련된 복합체들의
+코호몰로지 긴 완전열을 사용하면
+$K^\bullet/F^pK^\bullet \to J^\bullet/F^pJ^\bullet$과
+$F^pK^\bullet/F^{p'}K^\bullet \to F^pJ^\bullet/F^{p'}J^\bullet$에 대해서도
+마찬가지임을 알 수 있다.
+\end{proof}
+
+\begin{remark}
+\label{injectives-remark-ext-into-filtered-complex}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하자. $K^\bullet$을
+$\mathcal{A}$의 여과 복합체라 하자. Homology, Definition
+\ref{homology-definition-filtered-complex}를 보라. 표기를 간단히 하기 위해
+$K^\bullet$, $F^pK^\bullet$, $\text{gr}^pK^\bullet$이 표현하는
+$D(\mathcal{A})$의 대상을 각각 $K$, $F^pK$, $\text{gr}^pK$로 나타내자.
+$M \in D(\mathcal{A})$라 하자. 보조정리
+\ref{injectives-lemma-K-injective-embedding-filtration}을 사용하면 $\mathcal{A}$의
+쌍등급 대상들의 스펙트럼열 $(E_r, d_r)_{r \geq 1}$을 구성할 수 있다.
+$d_r$의 쌍차수는 $(r, -r + 1)$이고
+$$
+E_1^{p, q} = \Ext^{p + q}(M, \text{gr}^pK)
+$$
+이다. 모든 $n$에 대해
+$$
+\Ext^n(M, F^pK) = 0 \text{ for } p \gg 0
+\quad\text{and}\quad
+\Ext^n(M, F^pK) = \Ext^n(M, K) \text{ for } p \ll 0
+$$
+이면 이 스펙트럼열은 유계이고 $\Ext^{p + q}(M, K)$로 수렴한다. 실제로
+$M$을 표현하는 임의의 복합체 $M^\bullet$과 보조정리에서와 같은
+$j : K^\bullet \to J^\bullet$을 택하고, More on Algebra, Section
+\ref{more-algebra-section-hom-complexes}에서와 정확히 같이 정의되는 복합체
+$$
+\Hom^\bullet(M^\bullet, J^\bullet)
+$$
+을 생각하자. $F^p\Hom^\bullet(M^\bullet, J^\bullet) =
+\Hom^\bullet(M^\bullet, F^pJ^\bullet)$로 두면 여과 복합체를 얻는다.
+Homology, Section \ref{homology-section-filtered-complex}의 스펙트럼열은
+위에서 설명한 미분과 항들을 갖는다. 세부사항은 생략한다. 유계성과 수렴성은
+Homology, Lemma \ref{homology-lemma-ss-converges-trivial}에서 따른다.
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-spectral-sequences-ext}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하고 $M, K$를
+$D(\mathcal{A})$의 대상이라 하자. $K$를 표현하는 복합체 $K^\bullet$을
+어떻게 택하든, 여과 $F^pK^\bullet = \tau_{\leq -p}K^\bullet$과 주석
+\ref{injectives-remark-ext-into-filtered-complex}의 논의를 사용하여 다음 항을 갖는
+스펙트럼열을 얻는다.
+$$
+E_1^{p, q} = \Ext^{2p + q}(M, H^{-p}(K))
+$$
+이 스펙트럼열은 $K$를 표현하는 복합체 $K^\bullet$의 선택과 무관하다.
+$p = -j$, $q = i + 2j$로 번호를 다시 매기면 $d'_r$의 쌍차수가
+$(r, -r + 1)$이고 다음 항을 갖는 스펙트럼열
+$(E'_r, d'_r)_{r \geq 2}$을 얻는다.
+$$
+(E'_2)^{i, j} = \Ext^i(M, H^j(K))
+$$
+$M \in D^-(\mathcal{A})$이고 $K \in D^+(\mathcal{A})$이면 $E_r$와
+$E'_r$는 모두 유계이고 $\Ext^{p + q}(M, K)$로 수렴한다. 여과
+$F^pK^\bullet = \sigma_{\geq p}K^\bullet$을 사용하면
+$$
+E_1^{p, q} = \Ext^q(M, K^p)
+$$
+$M \in D^-(\mathcal{A})$이고 $K^\bullet$이 아래로 유계이면 이 스펙트럼열은
+유계이고 $\Ext^{p + q}(M, K)$로 수렴한다.
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-ext-from-filtered-complex}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하고 $K \in D(\mathcal{A})$라
+하자. $M^\bullet$을 $\mathcal{A}$의 여과 복합체라 하자. Homology,
+Definition \ref{homology-definition-filtered-complex}을 보라. 표기를 간단히
+하기 위해 $M^\bullet$, $M^\bullet/F^pM^\bullet$,
+$\text{gr}^pM^\bullet$이 표현하는 $D(\mathcal{A})$의 대상을 각각
+$M$, $M/F^pM$, $\text{gr}^pM$으로 나타내자. 주석
+\ref{injectives-remark-ext-into-filtered-complex}의 쌍대 논증으로 $\mathcal{A}$의
+쌍등급 대상들의 스펙트럼열 $(E_r, d_r)_{r \geq 1}$을 구성할 수 있다.
+$d_r$의 쌍차수는 $(r, -r + 1)$이고
+$$
+E_1^{p, q} = \Ext^{p + q}(\text{gr}^{-p}M, K)
+$$
+이다. 모든 $n$에 대해
+$$
+\begin{aligned}
+\Ext^n(M/F^pM, K) &= 0 \text{ for } p \ll 0\\
+&\quad\text{and}\quad
+\Ext^n(M/F^pM, K) = \Ext^n(M, K) \text{ for } p \gg 0
+\end{aligned}
+$$
+이면 이 스펙트럼열은 유계이고 $\Ext^{p + q}(M, K)$로 수렴한다. 정리
+\ref{injectives-theorem-K-injective-embedding-grothendieck}에 따라, 단사 대상인 항들을
+가지며 $K$를 표현하는 K-단사 복합체 $I^\bullet$을 택하자. More on
+Algebra, Section \ref{more-algebra-section-hom-complexes}에서와 정확히 같이
+정의되는 복합체
+$$
+\Hom^\bullet(M^\bullet, I^\bullet)
+$$
+을 생각하자. 다음과 같이 두면
+$$
+F^p\Hom^\bullet(M^\bullet, I^\bullet) =
+\Hom^\bullet(M^\bullet/F^{-p + 1}M^\bullet, I^\bullet)
+$$
+여과 복합체를 얻는다(여과의 부호와 이동에 유의하라). Homology, Section
+\ref{homology-section-filtered-complex}의 스펙트럼열은 위에서 설명한 미분과
+항들을 갖는다. 세부사항은 생략한다. 유계성과 수렴성은 Homology, Lemma
+\ref{homology-lemma-ss-converges-trivial}에서 따른다.
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-spectral-sequences-ext-variant}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하고 $M, K$를
+$D(\mathcal{A})$의 대상이라 하자. $M$을 표현하는 복합체 $M^\bullet$을
+어떻게 택하든, 여과 $F^pM^\bullet = \tau_{\leq -p}M^\bullet$과 주석
+\ref{injectives-remark-ext-into-filtered-complex}의 논의를 사용하여 다음 항을 갖는
+스펙트럼열을 얻는다.
+$$
+E_1^{p, q} = \Ext^{2p + q}(H^p(M), K)
+$$
+이 스펙트럼열은 $M$을 표현하는 복합체 $M^\bullet$의 선택과 무관하다.
+$p = -j$, $q = i + 2j$로 번호를 다시 매기면 $d'_r$의 쌍차수가
+$(r, -r + 1)$이고 다음 항을 갖는 스펙트럼열
+$(E'_r, d'_r)_{r \geq 2}$을 얻는다.
+$$
+(E'_2)^{i, j} = \Ext^i(H^{-j}(M), K)
+$$
+$M \in D^-(\mathcal{A})$이고 $K \in D^+(\mathcal{A})$이면 $E_r$와
+$E'_r$는 유계이고 $\Ext^{p + q}(M, K)$로 수렴한다. 여과
+$F^pM^\bullet = \sigma_{\geq p}M^\bullet$을 사용하면
+$$
+E_1^{p, q} = \Ext^q(M^{-p}, K)
+$$
+$K \in D^+(\mathcal{A})$이고 $M^\bullet$이 위로 유계이면 이 스펙트럼열은
+유계이고 $\Ext^{p + q}(M, K)$로 수렴한다.
+\end{remark}
+
+\begin{lemma}
+\label{injectives-lemma-represent-by-filtered-complex}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하자. 대상 $E \in D(\mathcal{A})$,
+$\mathbf{Z}$ 위의 $D(\mathcal{A})$의 대상들의 역계
+$\{E^i\}_{i \in \mathbf{Z}}$, 그리고 양립하는 사상계 $E^i \to E$가
+주어졌다고 하자. 도식으로 쓰면 다음과 같다.
+$$
+\ldots \to E^{i + 1} \to E^i \to E^{i - 1} \to \ldots \to E
+$$
+그러면 $\mathcal{A}$의 여과 복합체 $K^\bullet$이 존재하고(Homology,
+Definition \ref{homology-definition-filtered-complex}), $K^\bullet$은 $E$를
+표현하며 $F^iK^\bullet$은 주어진 사상들과 양립하게 $E^i$를 표현한다.
+\end{lemma}
+
+\begin{proof}
+정리 \ref{injectives-theorem-K-injective-embedding-grothendieck}에 의해 $E$를 표현하고
+모든 항 $I^n$이 $\mathcal{A}$의 단사 대상인 K-단사 복합체 $I^\bullet$을
+택할 수 있다. $E^0$을 표현하는 복합체 $G^{0, \bullet}$과 $E^0 \to E$를
+표현하는 복합체의 사상 $\varphi^0 : G^{0, \bullet} \to I^\bullet$을 택하자.
+$i > 0$에 대해서는 귀납적으로 $E^i \to E^{i - 1}$을 복합체의 사상
+$\delta : G^{i, \bullet} \to G^{i - 1, \bullet}$로 표현하고
+$\varphi^i = \delta \circ \varphi^{i - 1}$로 둔다. $i < 0$에 대해서는
+귀납적으로 $E^{i + 1} \to E^i$를 복합체의 항별 단사 사상
+$\delta : G^{i + 1, \bullet} \to G^{i, \bullet}$로 표현한다(예를 들어
+Derived Categories, Lemma \ref{derived-lemma-make-injective}를 사용할 수
+있다). 이제 사상 $E^i \to E$를 표현하고 다음 가환 도식에 들어맞는
+복합체의 사상 $\varphi^i : G^{i, \bullet} \to I^\bullet$을 찾을 수 있다.
+$$
+\xymatrix{
+G^{i + 1, \bullet} \ar[r]_\delta \ar[d]_{\varphi^{i + 1}} &
+G^{i, \bullet} \ar[ld]^{\varphi^i} \\
+I^\bullet
+}
+$$
+실제로 먼저 사상 $E^i \to E$를 표현하는 임의의 복합체의 사상
+$\varphi : G^{i, \bullet} \to I^\bullet$을 택한다. 그러면 어떤 호모토피
+$h^p : G^{i + 1, p} \to I^{p - 1}$에 의해 $\varphi \circ \delta$와
+$\varphi^{i + 1}$은 호모토픽이다. $I^\bullet$의 항들이 단사 대상이고
+$\delta$가 항별 단사이므로 $h^p$를
+$(h')^p : G^{i, p} \to I^{p - 1}$로 올릴 수 있다. 이제
+$\varphi^i = \varphi + h' \circ d + d \circ h'$로 두면 주장한 바를 얻는다.
+
+\medskip\noindent
+다음으로 각 $i$에 대해 복합체의 항별 단사 사상
+$a^i : G^{i, \bullet} \to J^{i, \bullet}$을 택하자. 여기서
+$J^{i, \bullet}$은 비순환 K-단사이고 $J^{i, p}$는 $\mathcal{A}$의 단사
+대상이다. 이를 위해 먼저 $G^{i, \bullet}$을 항등사상의 원뿔로 보낸 뒤
+위에서 인용한 정리를 적용한다. 위와 같이 논증하면 다음 도식들이 가환하도록
+복합체의 사상 $\delta' : J^{i, \bullet} \to J^{i - 1, \bullet}$을 찾을 수
+있다.
+$$
+\xymatrix{
+G^{i, \bullet} \ar[r]_\delta \ar[d]_{a^i} &
+G^{i - 1, \bullet} \ar[d]^{a^{i - 1}} \\
+J^{i, \bullet} \ar[r]^{\delta'} &
+J^{i - 1, \bullet}
+}
+$$
+(원뿔의 함자성과 정리에 나오는 함자성을 함께 사용해도 이를 얻을 수 있다.)
+이제 다음 사상들을 생각한다.
+$$
+\xymatrix{
+G^{i + 1, \bullet} \times \prod\nolimits_{p > i + 1} J^{p, \bullet}
+\ar[r] \ar[rd] &
+G^{i, \bullet} \times \prod\nolimits_{p > i} J^{p, \bullet}
+\ar[r] \ar[d] &
+G^{i - 1, \bullet} \times \prod\nolimits_{p > i - 1} J^{p, \bullet}
+\ar[ld] \\
+& I^\bullet \times \prod\nolimits_p J^{p, \bullet}
+}
+$$
+여기서 $J^{p, \bullet}$ 위의 화살표들은 자명한 것들(항등 또는 영)이다.
+인자 $G^{i, \bullet}$ 위에서는 사상
+$\delta : G^{i, \bullet} \to G^{i - 1, \bullet}$,
+$\varphi^i : G^{i, \bullet} \to I^\bullet$, $p > i$일 때의 영사상
+$0 : G^{i, \bullet} \to J^{p, \bullet}$, $p = i$일 때의 사상
+$a^i : G^{i, \bullet} \to J^{p, \bullet}$, 그리고 사상
+$(\delta')^{i - p} \circ a^i = a^p \circ \delta^{i - p} :
+G^{i, \bullet} \to J^{p, \bullet}$를 $p < i$일 때 사용한다. 도식의 모든
+화살표가 항별 단사임을 확인하는 일은 생략한다.
+이로써 여과 복합체를 얻는다. $D(\mathcal{A})$의 직접곱은 K-단사
+복합체들의 직접곱을 취하여 주어지고(보조정리
+\ref{injectives-lemma-derived-products}), $J^{p, \bullet}$은 $D(\mathcal{A})$에서
+영이므로 이 도식은 유도범주에서 주어진 도식을 표현한다. 이로써 증명이
+끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-represent-by-filtered-complex-bis}
+보조정리 \ref{injectives-lemma-represent-by-filtered-complex}의 상황에서 두 번째 역계
+$\{(E')^i\}_{i \in \mathbf{Z}}$와 양립하는 사상계 $(E')^i \to E$도
+주어졌다고 하자. 그러면 $\mathcal{A}$의 이중 여과 복합체 $K^\bullet$이
+존재하여 $K^\bullet$은 $E$를, $F^iK^\bullet$은 $E^i$를,
+$(F')^iK^\bullet$은 $(E')^i$를 주어진 사상들과 양립하게 표현한다.
+\end{lemma}
+
+\begin{proof}
+먼저 이 보조정리를 사용하여 $K^\bullet$과 $F$를 택할 수 있다. 다음으로
+$\{(E')^i\}_{i \in \mathbf{Z}}$와 사상 $(E')^i \to E$에 맞는
+$(K')^\bullet$과 $F'$를 택할 수 있다. 보조정리
+\ref{injectives-lemma-K-injective-embedding-filtration}을 사용하여 $K^\bullet$이
+K-단사 복합체라고 가정할 수 있다. 그러면 주어진 동일시
+$(K')^\bullet \cong E \cong K^\bullet$에 대응하는 복합체의 사상
+$(K')^\bullet \to K^\bullet$을 택할 수 있다. 또한 $J^\bullet$이 비순환
+K-단사이도록 항별 단사 사상 $(K')^\bullet \to J^\bullet$을 택할 수 있다.
+(이를 위해 먼저 $(K')^\bullet$을 항등사상의 원뿔로 보낸 다음 정리
+\ref{injectives-theorem-K-injective-embedding-grothendieck}을 적용한다.) 그러면
+$(K')^\bullet \to K^\bullet \times J^\bullet$과
+$K^\bullet \to K^\bullet \times J^\bullet$은 둘 다 항별 단사인
+준동형사상이다(보조정리 \ref{injectives-lemma-derived-products}에 의해 그 직접곱이
+$E$를 표현하기 때문이다). 이제 이 사상들 아래에서 $K^\bullet$과
+$(K')^\bullet$ 위의 여과들의 상을 취하면 결론을 얻는다.
+\end{proof}
+
+
+
+
+
+\section{Gabriel--Popescu 정리}
+\label{injectives-section-gabriel-popescu}
+
+\noindent
+이 절에서는 \cite{GP}의 주정리를 논한다. 증명 방법은 Jacob Lurie의
+글과 Akhil Mathew의 글을 따르며, 이들은 다시 \cite{Kuhn}에 있는 Kuhn의
+서술을 따른다. \cite{Takeuchi}도 보라.
+
+\medskip\noindent
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하고 $U$를 $\mathcal{A}$의
+생성자라 하자. 정의 \ref{injectives-definition-grothendieck-conditions}를 보라.
+$R = \Hom_\mathcal{A}(U, U)$로 두자. 다음으로 주어지는 함자
+$G : \mathcal{A} \to \text{Mod}_R$를 생각하자.
+$$
+G(A) = \Hom_\mathcal{A}(U, A)
+$$
+여기에는 표준적인 오른쪽 $R$-가군 구조를 준다.
+
+\begin{lemma}
+\label{injectives-lemma-gabriel-popescu-left-adjoint}
+위의 함자 $G$는 왼쪽 수반 $F : \text{Mod}_R \to \mathcal{A}$를 갖는다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리의 두 가지 증명을 제시한다.
+
+\medskip\noindent
+첫 번째 증명에서는 수반함자 정리를 사용한다. Categories, Theorem
+\ref{categories-theorem-adjoint-functor}을 보라. 함자
+$G : \mathcal{A} \to \text{Mod}_R$는 왼쪽 완전하고 직접곱을 직접곱으로
+보냄에 유의하라. 따라서 $G$는 극한과 가환한다. 정리의 집합론적 조건을
+확인하기 위해 $M$을 $\text{Mod}_R$의 대상이라 하자. 충분히 큰 기수
+$\kappa$와 $\mathcal{A}$의 대상들의 집합 $E$를, $|A| \leq \kappa$인 모든
+대상 $A$가 $E$의 한 원소와 동형이 되도록 택한다. 이는 보조정리
+\ref{injectives-lemma-set-iso-classes-bounded-size}에 의해 가능하다. 다음과 같이 두자.
+$I = \coprod_{A \in E} \Hom_R(M, G(A))$.
+원소 $i \in I$를 쌍 $(A_i, f_i)$로 생각한다. 마지막으로 $A$를
+$\mathcal{A}$의 임의의 대상, $f : M \to G(A)$를 임의의 사상이라 하자.
+$\Im(f) \subset G(A) = \Hom_\mathcal{A}(U, A)$의 원소들을 사상
+$u : U \to A$로 생각한다. 다음과 같이 두자.
+$$
+A' = \Im(\bigoplus\nolimits_{u \in \Im(f)} U \xrightarrow{u} A)
+$$
+$G$가 왼쪽 완전이므로 $G(A') \subset G(A)$는 $\Im(f)$를 포함하고,
+$f$를 분해하는 $f' : M \to G(A')$를 얻는다. 한편 대상 $A'$는 $U$를
+$|M|$개 이하 직합한 대상의 몫이다. 따라서
+$\kappa = |\bigoplus_{|M|} U|$이면 $(A', f')$는 $E$의 원소
+$(A_i, f_i)$와 동형이고, 원하는 대로 $f$는
+$M \xrightarrow{f_i} G(A_i) \to G(A)$로 분해된다.
+
+\medskip\noindent
+두 번째 증명에서는 어떤 의미에서 ``$F(M) = M \otimes_R U$''임을 보여 주는
+$F$의 구성을 제시한다. 임의의 $R$-가군 $M$에 대해 분해
+$$
+\bigoplus\nolimits_{j \in J} R \to
+\bigoplus\nolimits_{i \in I} R \to
+M \to 0
+$$
+를 택할 수 있다. 이에 대응하는 완전열
+$$
+\bigoplus\nolimits_{j \in J} U \to
+\bigoplus\nolimits_{i \in I} U \to
+F(M) \to 0
+$$
+로 $F(M)$을 정의한다. 이 구성은 분해의 선택과 무관하고 함자적이다.
+세부사항은 생략한다. $\mathcal{A}$의 임의의 $A$에 대해 완전열
+$$
+0 \to \Hom_\mathcal{A}(F(M), A) \to
+\prod\nolimits_{i \in I} G(A) \to
+\prod\nolimits_{j \in J} G(A)
+$$
+을 얻으며, 이는 열
+$$
+0 \to \Hom_R(M, G(A)) \to
+\Hom_R(\bigoplus\nolimits_{i \in I} R, G(A)) \to
+\Hom_R(\bigoplus\nolimits_{j \in J} R, G(A))
+$$
+과 동형이다. 이로써 $F$가 $G$의 왼쪽 수반임을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-F-G-monos}
+$f : M \to G(A)$를 $\text{Mod}_R$의 단사 사상이라 하자. 그러면 수반
+사상 $f' : F(M) \to A$도 단사이다.
+\end{lemma}
+
+\begin{proof}
+사상 $R^{\oplus n} \to M$을 택하고 이에 대응하는 사상
+$U^{\oplus n} \to F(M)$을 생각하자. 합성
+$U \to U^{\oplus n} \to F(M) \to A$가 $0$이 되도록 사상
+$v : U \to U^{\oplus n}$을 택하자. 그러면 이 화살표
+$v : U \to U^{\oplus n}$은 $G(A)$에서 영으로 가는 $R^{\oplus n}$의 원소
+$v$이다. $f$가 단사이므로 $v$는 $M$에서 영으로 간다. 보조정리
+\ref{injectives-lemma-gabriel-popescu-left-adjoint}의 증명에서 $F(M)$을 구성한 방법에
+따라 이는 $U \to U^{\oplus n} \to F(M)$이 영이라는 뜻이다. $U$가
+생성자이므로
+$$
+\Ker(U^{\oplus n} \to F(M) \to A) = \Ker(U^{\oplus n} \to F(M))
+$$
+이다. 증명을 끝내기 위해 전사 $\bigoplus_{i \in I} R \to M$을 택하고
+이에 대응하는 전사
+$$
+\pi : \bigoplus\nolimits_{i \in I} U \longrightarrow F(M)
+$$
+를 생각하자. $f'$가 단사임을 보이려면 $\bigoplus_{i \in I} U$의
+부분대상으로서 $\Ker(\pi) = \Ker(f' \circ \pi)$임을 보이면 충분하다.
+이제 $\bigoplus_{i \in I} U$를, $I' \subset I$가 유한 부분집합들을 달릴
+때의 부분대상 $\bigoplus_{i \in I'} U$들의 여과 여극한으로 쓸 수 있다.
+$\mathcal{A}$에서 AB5에 의해 여과 여극한은 완전하므로
+$$
+\Ker(\pi) =
+\colim_{I' \subset I\text{ finite}}
+\left(\bigoplus\nolimits_{i \in I'} U\right)
+\bigcap \Ker(\pi)
+$$
+이고
+$$
+\Ker(f' \circ \pi) =
+\colim_{I' \subset I\text{ finite}}
+\left(\bigoplus\nolimits_{i \in I'} U\right)
+\bigcap \Ker(f' \circ \pi)
+$$
+이다. 위의 첫 번째 표시 등식에 의해 각 $I'$에 대해 같은 등식이
+성립하므로 원하는 등식을 얻는다.
+\end{proof}
+
+\begin{theorem}
+\label{injectives-theorem-gabriel-popescu}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하자. 그러면 (비가환) 환 $R$과
+함자 $G : \mathcal{A} \to \text{Mod}_R$ 및
+$F : \text{Mod}_R \to \mathcal{A}$가 존재하여 다음을 만족한다.
+\begin{enumerate}
+\item $F$는 $G$의 왼쪽 수반이다.
+\item $G$는 충만충실하다.
+\item $F$는 완전하다.
+\end{enumerate}
+더욱이 이 함자들은 위에서 구성한 것들이다.
+\end{theorem}
+
+\begin{proof}
+먼저 $G$가 충만충실함, 동치로 $F \circ G \to \text{id}$가 동형사상임을
+증명한다. Categories, Lemma \ref{categories-lemma-adjoint-fully-faithful}를
+보라. 먼저 대상 $A$가 주어지면, 구성에 의해 모든 사상 $U \to A$는
+$F(G(A))$을 거쳐 분해되므로 사상 $F(G(A)) \to A$는 전사이다. 한편 사상
+$F(G(A)) \to A$는 사상 $\text{id} : G(A) \to G(A)$의 수반이므로 보조정리
+\ref{injectives-lemma-F-G-monos}에 의해 단사이다.
+
+\medskip\noindent
+함자 $F$는 왼쪽 수반이므로 오른쪽 완전하다. $\text{Mod}_R$에는 사영
+대상이 충분히 많으므로 $F$가 완전임을 보이려면 첫 번째 왼쪽 유도함자
+$L_1F$가 영임을 보이면 충분하다. 어떤 $R$-가군 $M$에 대해
+$L_1F(M) = 0$임을 보이기 위해 $P$가 자유인 $R$-가군의 완전열
+$0 \to K \to P \to M \to 0$을 택하자. $F(K) \to F(P)$가 단사임을 보이면
+충분하다. 이제 이 열을 $P_i$가 유한 자유 $R$-가군인 열
+$0 \to K_i \to P_i \to M_i \to 0$들의 여과 여극한으로 쓸 수 있다.
+실제로 $P$를 그러한 방식으로 쓰고 $K_i = K \cap P_i$ 및
+$M_i = \Im(P_i \to M)$로 두면 된다. $F$는 왼쪽 수반이므로 여극한과
+가환하고 $\mathcal{A}$는 Grothendieck 아벨 범주이므로, 각
+$F(K_i) \to F(P_i)$가 단사이면 $F(K) \to F(P)$도 단사이다. 따라서
+$K \subset P = R^{\oplus n}$인 경우 $F(K) \to F(P)$가 단사임을 확인하면
+충분하다. 이 경우 보조정리 \ref{injectives-lemma-F-G-monos}를 적용하면
+$F(K) \to U^{\oplus n}$이 단사이다.
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-gabriel-popescu}
+\begin{reference}
+\cite[Corollary 4.1]{serpe}
+\end{reference}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하고 $R$, $F$, $G$를
+Gabriel--Popescu 정리(정리 \ref{injectives-theorem-gabriel-popescu})에서와 같이
+두자. 그러면 유도함자
+$$
+RG : D(\mathcal{A}) \to D(\text{Mod}_R)
+\quad\text{and}\quad
+F : D(\text{Mod}_R) \to D(\mathcal{A})
+$$
+를 얻으며, $F$는 $RG$의 왼쪽 수반이고 $RG$는 충만충실하며
+$F \circ RG = \text{id}$이다.
+\end{lemma}
+
+\begin{proof}
+함자들의 존재성과 수반성은 정리 \ref{injectives-theorem-gabriel-popescu},
+\ref{injectives-theorem-K-injective-embedding-grothendieck} 및 Derived Categories,
+Lemmas \ref{derived-lemma-K-injective-defined},
+\ref{derived-lemma-right-derived-exact-functor},
+\ref{derived-lemma-derived-adjoint-functors}에서 따른다. 실제로
+$D(\mathcal{A})$의 대상 위의 $RG$는 적절한 대표 복합체 $I^\bullet$(예를
+들어 K-단사 복합체)에 $G$를 적용하여 계산할 수 있고,
+$F \circ G = \text{id}$이므로 $F(G(I^\bullet)) = I^\bullet$이다. 따라서
+$F \circ RG = \text{id}$이다. 이제 Categories, Lemma
+\ref{categories-lemma-adjoint-fully-faithful}에 의해 $RG$가 충만충실함도
+따른다.
+\end{proof}
+
+
+
+
+
+\section{Brown 표현가능성과 Grothendieck 아벨 범주}
+\label{injectives-section-brown}
+
+\noindent
+이 절에서는 Grothendieck 아벨 범주의 유도범주에 대한 표현가능성 정리를
+빠르게 증명한다. 독자는 먼저 Derived Categories, Section
+\ref{derived-section-brown}에 있는 콤팩트 생성 삼각범주의 경우를 읽어야
+한다. 그 다음에는 이 절을 읽기보다 이러한 종류의 더 일반적인 결과를
+문헌에서 찾아보는 것이 좋다. 예를 들어 \cite{Franke}, \cite{Neeman},
+\cite{Krause} 또는 Derived Categories, Section
+\ref{derived-section-brown-bis}를 보라.
+
+\begin{lemma}
+\label{injectives-lemma-brown}
+$\mathcal{A}$를 Grothendieck 아벨 범주라 하자. 직합을 직접곱으로 보내는
+반변 코호몰로지 함자 $H : D(\mathcal{A}) \to \textit{Ab}$를 택하자.
+그러면 $H$는 표현가능이다.
+\end{lemma}
+
+\begin{proof}
+$R, F, G, RG$를 보조정리 \ref{injectives-lemma-gabriel-popescu}에서와 같이 두고 함자
+$H \circ F : D(\text{Mod}_R) \to \textit{Ab}$를 생각하자. $F$는 왼쪽
+수반이므로 직합을 직합으로 보내고, 따라서 $H \circ F$는 직합을
+직접곱으로 보냄에 유의하라. 한편 유도범주 $D(\text{Mod}_R)$은 하나의
+콤팩트 대상, 즉 $R$로 생성된다. Derived Categories, Lemma
+\ref{derived-lemma-brown}에 의해 $H \circ F$는 표현가능이며, 이를 표현하는
+대상을 $L \in D(\text{Mod}_R)$이라 하자. 특수 삼각형
+$$
+M \to L \to RG(F(L)) \to M[1]
+$$
+을 $D(\text{Mod}_R)$에서 택하자. $F \circ RG = \text{id}$이므로
+$F(M) = 0$이다. 따라서 $H(F(M)) = 0$이고, 따라서 $\Hom(M, L) = 0$이다.
+그러므로 $L \to RG(F(L))$은 직합인자의 포함사상이다. Derived Categories,
+Lemma \ref{derived-lemma-split}을 보라. $D(\mathcal{A})$의 $A$에 대해
+\begin{align*}
+H(A)
+& =
+H(F(RG(A)) \\
+& =
+\Hom(RG(A), L) \\
+& \to
+\Hom(RG(A), RG(F(L))) \\
+& =
+\Hom(F(RG(A)), F(L)) \\
+& =
+\Hom(A, F(L))
+\end{align*}
+을 얻으며, 여기서 화살표는 $A$에 대해 함자적인 왼쪽 역을 갖는다. 다시
+말해 $H$는 표현가능 함자의 직합인자이다. $D(\mathcal{A})$는 Karoubi
+완비이므로(Derived Categories, Lemma
+\ref{derived-lemma-projectors-have-images-triangulated}) 결론이 따른다.
+\end{proof}
+
+\begin{proposition}
+\label{injectives-proposition-brown}
+$\mathcal{A}$를 Grothendieck 아벨 범주, $\mathcal{D}$를 삼각범주라 하자.
+$F : D(\mathcal{A}) \to \mathcal{D}$를 직합을 직합으로 보내는 삼각범주의
+완전 함자라 하자. 그러면 $F$는 완전한 오른쪽 수반을 갖는다.
+\end{proposition}
+
+\begin{proof}
+$\mathcal{D}$의 대상 $Y$에 대해 반변 함자
+$$
+D(\mathcal{A}) \to \textit{Ab},\quad
+W \mapsto \Hom_\mathcal{D}(F(W), Y)
+$$
+를 생각하자. $F$가 완전하므로 이는 코호몰로지 함자이고, $F$가 직합을
+직합으로 보내므로 직합을 직접곱으로 보낸다. 따라서 보조정리
+\ref{injectives-lemma-brown}에 의해 $D(\mathcal{A})$의 대상 $X$가 존재하여
+$\Hom_{D(\mathcal{A})}(W, X) = \Hom_\mathcal{D}(F(W), Y)$를 만족한다.
+수반의 존재성은 Categories, Lemma \ref{categories-lemma-adjoint-exists}에서
+따른다. 완전성은 Derived Categories, Lemma
+\ref{derived-lemma-adjoint-is-exact}에서 따른다.
+\end{proof}

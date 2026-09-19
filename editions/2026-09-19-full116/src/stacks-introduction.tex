@@ -1,0 +1,514 @@
+% Generated mechanically from frozen input p12/ko/stacks-introduction.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{104}
+\chapter{대수적 스택 입문}
+
+
+\phantomsection
+\label{stacks-introduction-section-phantom}
+
+
+
+
+
+\section{왜 이것을 읽는가?}
+\label{stacks-introduction-section-introduction}
+
+\noindent
+여기서는 대수적 스택을 비형식적으로 소개한다. 목표는 여러분이 선호하는
+모듈라이 문제의 국소적 성질과 대역적 성질을 생각하는 데 쓸 수 있는 간단한
+언어를 빠르게 소개하는 것이다. 이 과정을 거치고 나면 일반 이론이 존재한다고
+가정한 채로도 모듈라이 문제에 관해 잘 정식화된 질문을 던지고 그 문제를 풀기
+시작할 수 있을 것이다. 흥미로운 결과를 얻는다면 스택 프로젝트의 다른 부분에
+있는 일반 이론으로 돌아가 필요에 따라 빈틈을 메울 수 있다.
+
+\medskip\noindent
+여기서 취하는 관점은 \cite{KatzMazur}와 \cite{mumford_picard}에서 취한
+관점에 가깝다.
+
+
+
+
+
+
+\section{예비 사항}
+\label{stacks-introduction-section-preliminary}
+
+\noindent
+$S$를 스킴이라 하자. $S$ 위의 {\it 타원곡선}은 삼중항
+$(E, f, 0)$으로, 여기서 $E$는 스킴이고 $f : E \to S$와 $0 : S \to E$는
+다음을 만족하는 스킴의 사상이다.
+\begin{enumerate}
+\item $f : E \to S$는 고유이고 상대 차원 $1$인 매끄러운 사상이다.
+\item 모든 $s \in S$에 대해 올 $E_s$는 종수 $1$인 연결 곡선이다.
+즉, $H^0(E_s, \mathcal{O})$와 $H^1(E_s, \mathcal{O})$는 모두
+차원이 $1$인 $\kappa(s)$-벡터 공간이다.
+\item $0$은 $f$의 단면이다.
+\end{enumerate}
+타원곡선 $(E, f, 0)/S$와 $(E', f', 0')/S'$가 주어졌을 때,
+{\it $a : S \to S'$ 위의 타원곡선의 사상}이란 사상
+$\alpha : E \to E'$를 말하며, 이때 다음 그림은 가환이고
+$$
+\xymatrix{
+E \ar[rr]_\alpha \ar[d]^f & & E' \ar[d]_{f'}  \\
+S \ar@/^5ex/[u]^0 \ar[rr]^a & & S' \ar@/_5ex/[u]_{0'}
+}
+$$
+안쪽 정사각형은 데카르트 정사각형이어야 한다. 다시 말해 사상 $\alpha$는
+동형사상 $E \to S \times_{S'} E'$를 유도해야 한다.
+이제 타원곡선의 스택 $\mathcal{M}_{1, 1}$을 정의할 것이다.
+스택 프로젝트의 나머지 부분에서는 Deligne과 Mumford의 논문 \cite{DM}에서
+소개한 방법을 전개한다. 이 방법은 $\mathcal{M}_{1, 1}$을 함자
+$$
+p : \mathcal{M}_{1, 1} \longrightarrow \Sch, \quad
+(E, f, 0)/S \longmapsto S
+$$
+가 주어진 범주로 나타내는 것이다. 이는 스킴의 범주 위의 섬유화된 범주,
+위상, 준군에 섬유화된 스택, 덮개 등을 다룬다는 뜻이다.
+이 장에서는 그 모든 것을 제쳐 두고 조금 다른 방식으로 생각한다. 아마도
+이론의 창시자들이 처음 이 문제를 생각했던 방식에 더 가까울 것이다.
+
+
+\section{타원곡선의 모듈라이 스택}
+\label{stacks-introduction-section-moduli-elliptic-curves}
+
+\noindent
+이제 다음과 같이 할 것이다.
+\begin{enumerate}
+\item 여러분이 선호하는 스킴의 범주 $\Sch$에서 시작한다.
+\item 새 기호 $\mathcal{M}_{1, 1}$을 추가한다.
+\item 사상 $S \to \mathcal{M}_{1, 1}$은 타원곡선
+$(E, f, 0)$ {\bf 이다}. 이는 $S$ 위의 타원곡선이다.
+\item 그림
+$$
+\xymatrix{
+S \ar[rr]_a \ar[rd]_{(E, f, 0)} & & S' \ar[ld]^{(E', F', 0')} \\
+& \mathcal{M}_{1, 1}
+}
+$$
+이 그림은 사상 $\alpha : E \to E'$가 존재하고 이것이
+$a : S \to S'$ 위의 타원곡선의 사상일 때, 그리고 그럴 때에만
+{\bf 가환이다}. 이때 $\alpha$가 그림의 가환성을 {\it 입증한다}고 말한다.
+\item 가환 그림은 다음과 같이 이어 붙일 수 있음에 유의하자.
+$$
+\xymatrix{
+S \ar[rrr]_a \ar[rrrd]_{(E, f, 0)} & & &
+S' \ar[d]_{(E', F', 0')} \ar[rrr]_{a'} & & &
+S'' \ar[llld]^{(E'', F'', 0'')}
+\\
+& & & \mathcal{M}_{1, 1}
+}
+$$
+왜냐하면 $\alpha' \circ \alpha$는, $\alpha$와 $\alpha'$이 각각 왼쪽
+삼각형과 오른쪽 삼각형의 가환성을 입증할 때, 바깥쪽 삼각형의 가환성을
+입증하기 때문이다.
+\item 합성
+$$
+S \xrightarrow{a} S' \xrightarrow{(E', f', 0')} \mathcal{M}_{1, 1}
+$$
+은 $(E' \times_{S'} S, f' \times_{S'} S, 0' \times_{S'} S)$로 주어진다.
+\end{enumerate}
+이 절차가 끝나면 스킴의 범주 $\Sch$에 정확히 하나의 대상을 덧붙여
+확장한 셈이다...
+
+\medskip\noindent
+다만 아직 $\mathcal{M}_{1, 1}$에서 스킴 $T$로 가는 사상이 무엇인지
+정의하지 않았다. 답은 합성이 의미를 갖게 하는 가장 약한 개념이다.
+따라서 사상 $F : \mathcal{M}_{1, 1} \to T$는 모든 타원곡선
+$(E, f, 0)/S$에 사상 $F(E, f, 0) : S \to T$를 대응시키는 규칙으로,
+가환 그림
+$$
+\xymatrix{
+S \ar[rr]_a \ar[rd]_{(E, f, 0)} & & S' \ar[ld]^{(E', F', 0')} \\
+& \mathcal{M}_{1, 1}
+}
+$$
+이 주어질 때 그림
+$$
+\xymatrix{
+S \ar[rr]_a \ar[rd]_{F(E, f, 0)} & & S' \ar[ld]^{F(E', F', 0')} \\
+& T
+}
+$$
+도 가환이어야 한다. 한 가지 예는 들어 본 적이 있을 법한 $j$-불변량
+$$
+j : \mathcal{M}_{1, 1} \longrightarrow \mathbf{A}^1_{\mathbf{Z}}
+$$
+이다. 자, 이제 끝났다...
+
+\medskip\noindent
+하지만 아직 끝나지 않았다! 사상
+$\mathcal{M}_{1, 1} \to \mathcal{M}_{1, 1}$의 개념도 정의해야 한다.
+이는 앞과 정확히 같은 방식으로 한다. 즉, 사상
+$F : \mathcal{M}_{1, 1} \to \mathcal{M}_{1, 1}$은 모든 타원곡선
+$(E, f, 0)/S$에 또 다른 타원곡선 $F(E, f, 0)$을 대응시키면서 위와 같은
+그림의 가환성을 보존하는 규칙이다. 하지만 그러한 함자의 자명하지 않은 예를
+나는 알지 못하므로, 당장은 $\mathcal{M}_{1, 1}$에서 자기 자신으로 가는
+사상의 집합이 항등사상 하나만으로 이루어진다고 정의하겠다.
+
+\medskip\noindent
+이 확장된 범주에 다른 대상을 어떻게 추가하는지도 이제 알 수 있기를 바란다.
+어떤 의미에서는 임의의 ``잘 작동하는'' 모듈라이 문제가 주어졌을 때 위의
+구성을 수행하여 범주에 대상을 추가할 수 있다는 것이 직관적으로 분명해 보인다.
+실제로 현대 대수기하학의 상당 부분은 $\Sch$에 가산 개의 (명시적으로 구성된)
+모듈라이 스택을 덧붙여 확장한 그러한 세계에서 이루어진다.
+
+\medskip\noindent
+가환성을 보이는 증거를 제시해야 하므로 그림이 언제 가환하는지,
+또 어떤 그림들의 조합이 계속 가환하는지에 ``모호함''이 있고, 따라서 이렇게
+얻은 범주는 범주가 아니라고 이의를 제기할 수도 있다. 그러나 가환성의 증거를
+둔다는 이 발상은 $2$-범주를 다루는 타당한 접근법임이 밝혀진다!
+그러므로 이 접근법을 계속 사용하겠다.
+
+
+
+
+
+
+\section{섬유곱}
+\label{stacks-introduction-section-fibre-products}
+
+\noindent
+여기서는 다음 그림의 섬유곱이 무엇이어야 하는지를 묻는다.
+$$
+\xymatrix{
+& ? \ar@{..>}[rd] \ar@{..>}[ld] \\
+S \ar[rd]_{(E, f, 0)} & & S' \ar[ld]^{(E', f', 0')} \\
+& \mathcal{M}_{1, 1}
+}
+$$
+답은 다음과 같다. 스킴 $T$에서 $?$로 가는 사상은 삼중항
+$(a, a', \alpha)$이어야 한다. 여기서
+$a : T \to S$, $a' : T \to S'$는 스킴의 사상이고
+$\alpha : E \times_{S, a} T \to E' \times_{S', a'} T$는
+$T$ 위의 타원곡선의 동형사상이다. 앞서 합성과 가환 그림을 정의한 방식에
+따르면 이는 의미가 있다.
+
+\begin{lemma}[핵심 사실]
+\label{stacks-introduction-lemma-key-fact}
+함자 $\Sch^{opp} \to \textit{Sets}$,
+$T \mapsto \{(a, a', \alpha)\text{는 위와 같음}\}$는 스킴
+$S \times_{\mathcal{M}_{1, 1}} S'$로 표현가능하다.
+\end{lemma}
+
+\begin{proof}
+증명의 착상. 이 함자를
+$$
+\mathit{Isom}_{S \times S'}(E \times S', S \times E')
+$$
+와 연관 짓고 Grothendieck의 Hilbert 스킴 이론을 사용한다.
+\end{proof}
+
+\begin{remark}
+\label{stacks-introduction-remark-diagonal}
+다음 공식이 성립한다.
+$S \times_{\mathcal{M}_{1, 1}} S' =
+(S \times S')
+\times_{\mathcal{M}_{1, 1} \times \mathcal{M}_{1, 1}}
+\mathcal{M}_{1, 1}$.
+따라서 핵심 사실은 대각사상 $\Delta_{\mathcal{M}_{1, 1}}$, 즉
+$\mathcal{M}_{1, 1}$의 대각사상이 갖는 성질이다.
+\end{remark}
+
+\noindent
+어쨌든 핵심 사실 덕분에 다음 정의를 내릴 수 있다.
+
+\begin{definition}
+\label{stacks-introduction-definition-smooth}
+사상 $S \to \mathcal{M}_{1, 1}$에 대하여, 모든 사상
+$S' \to \mathcal{M}_{1, 1}$에 대해 사영사상
+$$
+S \times_{\mathcal{M}_{1, 1}} S' \longrightarrow S'
+$$
+이 매끄러우면 이 사상을 {\it 매끄럽다}고 한다.
+\end{definition}
+
+\noindent
+매끄러운 사상의 밑변환은 매끄러우므로 이는 스킴의 매끄러운 사상이라는 개념과 양립한다.
+더 나아가 이 정의를 $\mathcal{M}_{1, 1}$로 가는 사상(또는 여러분이 선호하는
+모듈라이 스택으로 가는 사상)의 다른 성질로 어떻게 확장할지도 분명하다.
+특히 아래에서는 {\it 전사} 사상에 이 정의를 사용할 것이다.
+
+
+
+
+
+\section{정의}
+\label{stacks-introduction-section-definition}
+
+\noindent
+독자가 다른 경우들(스택 $\mathcal{M}_{1, 1}$만이 아니고 모든 스킴의 범주
+$\Sch$만도 아닌 경우들)을 직접 시험해 보기를 기대하므로 이를 결과가 아니라
+정의로 정식화하겠다.
+
+\begin{definition}
+\label{stacks-introduction-definition-algebraic-stack}
+다음 조건들이 모두 성립할 때, 그리고 그럴 때에만
+$\mathcal{M}_{1, 1}$을 {\it 대수적 스택}이라고 한다.
+\begin{enumerate}
+\item $\Sch$ 위의 에탈 위상에 대해 대상의 내림이 성립한다.
+\item 핵심 사실이 성립한다.
+\item 전사 매끄러운 사상 $S \to \mathcal{M}_{1, 1}$이 존재한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+첫 번째 조건은 ``층 성질''이다. 짚고 넘어가야 할 기술적인 점이 있으므로
+이를 자세히 쓰겠다. 스킴 $S$와 에탈 덮개 $\{S_i \to S\}$, 그리고
+다음 그림들이 가환하도록 하는 사상 $e_i : S_i \to \mathcal{M}_{1, 1}$이
+주어졌다고 하자.
+$$
+\xymatrix{
+S_i \times_S S_j \ar[rd]_{e_i \circ \text{pr}_1} \ar[rr]_{\text{id}} & &
+S_i \times_S S_j \ar[ld]^{e_j \circ \text{pr}_2} \\
+& \mathcal{M}_{1, 1}
+}
+$$
+이 상황에서 층 조건은 사상 $e : S \to \mathcal{M}_{1, 1}$의 존재를
+{\it 보장하지 않는다}. 즉, 위 그림들의 가환성을 입증하는
+$\alpha_{ij}$를 고르고 $S_i \times_S S_j \times_S S_k$ 위에서의 증거로서
+다음을 요구해야 한다.
+$$
+\text{pr}_{02}^*\alpha_{ik} =
+\text{pr}_{12}^*\alpha_{jk} \circ \text{pr}_{01}^*\alpha_{ij}
+$$
+이것이 무슨 뜻인지는 분명하리라 생각한다... 그렇지 않다면 유감스럽게도
+준군에 섬유화된 범주 등에 관한 자료를 어느 정도 읽어야 할 것이다.
+어쨌든 위에 표시한 등식을 흔히 {\it 코사이클 조건}이라고 한다.
+``층 성질''을 더 정확히 서술하면 다음과 같다. $\{S_i \to S\}$,
+$e_i : S_i \to \mathcal{M}_{1, 1}$, 그리고 코사이클 조건을 만족하는 증거
+$\alpha_{ij}$가 주어지면 사상 $e : S \to \mathcal{M}_{1, 1}$이
+(유일한 동형사상까지) 유일하게 존재하며, $e_i \cong e|_{S_i}$이고
+$\alpha_{ij}$를 복원한다.
+
+\medskip\noindent
+보았듯이 정확한 명제를 정식화하는 일조차 약간의 수고가 든다. 이 ``층 성질''의
+증명은 대수기하학의 근본적인 기법인 내림 이론에 의존한다. 처음에는 단순히
+``층 성질''이 성립한다고 받아들이고, 이것이 실제로 무엇을 함의하는지 살펴보기를
+권한다. 사실 ``층 성질''을 냅킨에 적을 수 있을 만큼 다루기 쉬운 명제로
+정리해 내기 위해서는 어느 정도의 사고 유연성이 필요하다. 이미 조금 흥미로운
+가장 간단한 변형은 아마 다음과 같을 것이다. 체의 유한 Galois 확대 $L/K$가
+주어지고 그 Galois 군이 $G = \text{Gal}(L/K)$라고 하자.
+$T = \Spec(L)$, $S = \Spec(K)$로 놓는다. 그러면 $\{T \to S\}$는 에탈
+덮개이다. $(E, f, 0)$을 $L$ 위의 타원곡선이라 하자. (그렇다. 이는 단지
+$E \subset \mathbf{P}^2_L$이 Weierstrass 방정식으로 주어지고 $0$이 무한대의
+통상적인 점이라는 뜻이다.) 밑변환을
+$E_\sigma = E \times_{T, \Spec(\sigma)} T$로 나타내자.
+(그렇다. 이는 Weierstrass 방정식의 계수에 $\sigma$를 적용하는 것에 해당한다.
+아니면 $\sigma^{-1}$인가?) 이제 각 $\sigma \in G$에 대해 $T$ 위의
+동형사상
+$$
+\alpha_\sigma : E \longrightarrow E_\sigma
+$$
+가 주어졌다고 더 가정하자. 이 상황에서 위의 코사이클 조건은
+$$
+(\alpha_\tau)^\sigma \circ \alpha_\sigma = \alpha_{\tau\sigma}
+$$
+가 $\sigma, \tau \in G$에 대해 성립한다는 뜻이다. 군 코호몰로지를 조금이라도
+다루어 보았다면 익숙할 것이다. 어쨌든 $\mathcal{M}_{1, 1}$에 대한
+``붙이기'' 조건은 이 연립방정식의 해가 있으면 타원곡선 $E'$가 $S$ 위에
+존재하고 $E \cong E' \times_S T$라고 말한다($\alpha_\sigma$를 복원하는
+방법도 알려 주므로 실제로는 조금 더 많은 것을 말한다).
+
+\medskip\noindent
+도전 문제: Weierstrass 방정식으로 정의된 타원곡선만을 이용하여 이것을 완전히
+증명할 수 있는가?
+
+
+
+
+\section{매끄러운 덮개}
+\label{stacks-introduction-section-smooth}
+
+\noindent
+마지막으로 해야 할 일은 $\mathcal{M}_{1, 1}$의 매끄러운 덮개를 찾는 것이다.
+사실 어떤 의미에서는 매끄러운 덮개의 존재가 핵심 사실을
+{\it 함의한다}\footnote{여기에는 약간의 속임수가 있다. 매끄러움을 확인할 때
+핵심 사실에 가까운 무언가를 증명해야 하기 때문이다. 결국 매끄러움은 섬유곱을
+통해 정의된다. 장점은 한쪽에 매끄러운 덮개를 준다는 것을 보이려는 사상이 있는
+경우에만 이 섬유곱들의 존재를 증명하면 된다는 것이다.}!
+타원곡선의 경우에는 Weierstrass 방정식을 사용하여 하나를 구성한다.
+
+\medskip\noindent
+다음과 같이 놓자.
+$$
+W = \Spec(\mathbf{Z}[a_1, a_2, a_3, a_4, a_6, 1/\Delta])
+$$
+여기서 $\Delta \in \mathbf{Z}[a_1, a_2, a_3, a_4, a_6]$는 어떤
+다항식이다(아래를 보라). 다음과 같이 놓자.
+$$
+\mathbf{P}_W^2 \supset E_W :
+zy^2 + a_1 xyz + a_3 yz^2 = x^3 + a_2x^2z + a_4xz^2 + a_6z^3.
+$$
+사영을 $f_W : E_W \to W$로 나타내자. 마지막으로 $0_W : W \to E_W$는
+$f_W$의 단면이며 $(0 : 1 : 0)$으로 주어진다.
+차수 $12$의 동차다항식 $\Delta$가 $a_i$에 관해 존재함이 밝혀진다. 여기서
+$\deg(a_i) = i$이며, 이 다항식으로 인해 $E_W \to W$가 매끄럽게 된다.
+Weierstrass 방정식의 편도함수를 계산하면 이를 명시적으로
+구할 수 있다. 물론 찾아보아도 된다. pari/gp를 사용하여 계산할 수도 있다.
+그 다항식은 다음과 같다.
+\begin{align*}
+\Delta & = -a_6a_1^6 + a_4a_3a_1^5 + ((-a_3^2 - 12a_6)a_2 + a_4^2)a_1^4 + \\
+& (8a_4a_3a_2 + (a_3^3 + 36a_6a_3))a_1^3 + \\
+& ((-8a_3^2 - 48a_6)a_2^2 + 8a_4^2a_2 + (-30a_4a_3^2 + 72a_6a_4))a_1^2 + \\
+& (16a_4a_3a_2^2 + (36a_3^3 + 144a_6a_3)a_2 - 96a_4^2a_3)a_1 + \\
+& (-16a_3^2 - 64a_6)a_2^3 + 16a_4^2a_2^2 + (72a_4a_3^2 + 288a_6a_4)a_2 + \\
+& -27a_3^4 - 216a_6a_3^2  -64a_4^3 - 432a_6^2
+\end{align*}
+$y^2 = x^3 + Ax + B$의 판별식이
+$-64A^3 - 432B^2 = -16(4A^3 + 27B^2)$인 경우에서 마지막 두 항을
+알아볼 수도 있을 것이다.
+
+\begin{lemma}
+\label{stacks-introduction-lemma-Weierstrass-smooth-cover}
+사상 $W \xrightarrow{(E_W, f_W, 0_W)} \mathcal{M}_{1, 1}$은 매끄럽고
+전사이다.
+\end{lemma}
+
+\begin{proof}
+전사성은 체 위의 모든 타원곡선이 Weierstrass 방정식을 갖는다는 사실에서
+따라온다. 매끄러움을 증명하는 한 가지 방법을 대략적으로 설명하겠다.
+다음 부분군 스킴을 생각하자.
+$$
+H =
+\left\{
+\left(
+\begin{matrix}
+u^2 & s & 0 \\
+0 & u^3 & 0 \\
+r & t & 1
+\end{matrix}
+\right)
+\middle|
+\begin{matrix}
+u\text{는 가역원} \\
+s, r, t\text{는 임의}
+\end{matrix}
+\right\}
+\subset
+\text{GL}_{3, \mathbf{Z}}
+$$
+작용 $H \times W \to W$가 있으며, 이는 $H$가 Weierstrass 스킴 $W$에
+작용하는 것이다.
+이 작용의 방정식을 구하려면 $H$의 행렬로 주어지는 좌표변환이 일반적인
+Weierstrass 방정식에 어떤 영향을 주는지 모두 써 보면 된다.
+그러면 다음 명제들이 성립함을 알 수 있다.
+\begin{enumerate}
+\item 임의의 타원곡선 $(E, f, 0)/S$는 $S$ 위에서 Zariski 국소적으로
+Weierstrass 방정식을 갖는다.
+\item $(E, f, 0)$의 임의의 두 Weierstrass 방정식은 (Zariski 국소적으로)
+$H$의 한 원소에 의한 좌표변환으로 서로 바뀐다.
+\end{enumerate}
+섬유곱
+$S \times_{\mathcal{M}_{1, 1}} W =
+\mathit{Isom}_{S \times W}(E \times W, S \times E_W)$
+을 생각하면 이는 사상 $W \to \mathcal{M}_{1, 1}$이 $H$-토서라는 뜻임을
+알 수 있다. $H \to \Spec(\mathbf{Z})$가 매끄럽고 매끄러운 군 스킴 위의 토서가
+매끄러우므로 증명이 끝난다.
+\end{proof}
+
+\begin{remark}
+\label{stacks-introduction-remark-quotient-stack}
+위에서 개략적으로 설명한 논증은 실제로
+$\mathcal{M}_{1, 1} = [W/H]$가 대역 몫 스택임을 보인다.
+모듈라이 스택이 대수적임을 증명하는 논증은 약 50\%의 경우 그 스택이
+대역 몫 스택임까지 보인다.
+\end{remark}
+
+
+
+\section{대수적 스택의 성질}
+\label{stacks-introduction-section-properties}
+
+\noindent
+좋다. 이제 $\mathcal{M}_{1, 1}$이 대수적 스택임을 알았다.
+이를 가지고 무엇을 할 수 있는가? 여기서 도움이 되는 것은 대수적 스택이라는
+사실 자체라기보다 $\mathcal{M}_{1, 1}$의 성질을 사상
+$S \to \mathcal{M}_{1, 1}$의 성질, 즉 타원곡선의 족의 성질로 표현해야 한다는
+관점이다. 몇 가지 예를 나열하겠다.
+
+\medskip\noindent
+{\bf 국소적 성질:}
+$$
+\mathcal{M}_{1, 1} \to \Spec(\mathbf{Z})\text{은 매끄럽다}
+\Leftrightarrow
+W \to \Spec(\mathbf{Z})\text{는 매끄럽다}
+$$
+{\bf 착상}. 대수적 스택의 국소적 성질은 그 매끄러운 덮개의 국소적 성질로
+표현된다.
+
+\medskip\noindent
+{\bf 대역적 성질:}
+$$
+\begin{matrix}
+\mathcal{M}_{1, 1}\text{은 준콤팩트이다} \Leftarrow W\text{는 준콤팩트이다}
+\\
+\mathcal{M}_{1, 1}\text{은 기약이다} \Leftarrow W\text{는 기약이다}
+\end{matrix}
+$$
+{\bf 착상}. 대수적 스택의 몇몇 대역적 성질은 {\it 적절한}\footnote{기약인
+매끄러운 덮개를 갖지 않는 기약 대수적 스택이 존재할 수도 있다고 생각한다.
+하지만 그렇다면 꽤 고약한 대상일 것이다!} 매끄러운 덮개의 대응하는 성질에서
+알아낼 수 있다.
+
+\medskip\noindent
+{\bf 준연접 층:}
+$$
+\QCoh(\mathcal{O}_{\mathcal{M}_{1, 1}}) =
+H\text{-등변 준연접 가군들, 바탕 공간 }W
+$$
+{\bf 착상}. 한편으로 $\mathcal{M}_{1, 1}$ 위의 준연접 가군은 준연접 층
+$\mathcal{F}_{S, e}$에 대응해야 한다. 이 층은 $S$ 위에 있고 각 사상
+$e : S \to \mathcal{M}_{1, 1}$마다 주어진다. 특히 사상
+$(E_W, f_W, 0_W) :  W \to \mathcal{M}_{1, 1}$에 대해서도 그러하다.
+이 사상은 $H$-등변이므로 얻어지는 준연접 가군 $\mathcal{F}_W$도
+$H$-등변임을 알 수 있다. 역으로 $H$-등변 가군이 주어지면 내림 이론으로
+층 $\mathcal{F}_{S, e}$들을 복원할 수 있다. 출발점은
+$S \times_{e, \mathcal{M}_{1, 1}} W$가 $H$-토서라는 관찰이다.
+
+\medskip\noindent
+{\bf 피카르 군:}
+$$
+\Pic(\mathcal{M}_{1, 1}) = \Pic_H(W) = \mathbf{Z}/12\mathbf{Z}
+$$
+{\bf 착상}. 위에서 첫 번째 등식을 보았다. $\Pic(W) = 0$임에 유의하자.
+그 이유는 환 $\mathbf{Z}[a_1, a_2, a_3, a_4, a_6, 1/\Delta]$의
+인자류군이 자명하기 때문이다.
+다음 완전열이 있다.
+$$
+\mathbf{Z}\Delta \to
+\Pic_H(\mathbf{A}^5_{\mathbf{Z}}) \to
+\Pic_H(W) \to 0
+$$
+가운데 군은 $\Hom(H, \mathbf{G}_m) = \mathbf{Z}$와 같다.
+$\Delta$의 차수가 $12$이므로 $\Delta$의 상은 $12$이다.
+이 논증은 대략 맞으며, \cite{PicM11}을 보라.
+
+\medskip\noindent
+{\bf 에탈 코호몰로지:} $\Lambda$를 환이라 하자.
+$H^{p + q}_\etale(\mathcal{M}_{1, 1}, \Lambda)$로 수렴하며 $E_2$-페이지가
+$$
+E_2^{p, q} = H_\etale^q(W \times H \times \ldots \times H, \Lambda)
+\quad(p\text{회 반복되는 인자 }H)
+$$
+인 제1사분면 스펙트럼 열이 있다.
+{\bf 착상}. 다음 등식에 유의하자.
+$$
+W \times_{\mathcal{M}_{1, 1}} W \times_{\mathcal{M}_{1, 1}}
+\ldots \times_{\mathcal{M}_{1, 1}} W
+= W \times H \times \ldots \times H
+$$
+이는 $W \to \mathcal{M}_{1, 1}$이 $H$-토서이기 때문이다. 이 스펙트럼 열은
+매끄러운 덮개 $\{W \to \mathcal{M}_{1, 1}\}$에 대한
+{\v C}ech-코호몰로지 스펙트럼 열이다. 예를 들어
+$H^0_\etale(\mathcal{M}_{1, 1}, \Lambda) = \Lambda$임을 알 수 있는데,
+이는 $W$가 연결이기 때문이다. 또한
+$H^1_\etale(\mathcal{M}_{1, 1}, \Lambda) = 0$이다. 왜냐하면
+$H^1_\etale(W, \Lambda) = 0$이기 때문이다
+(물론 이는 증명이 필요하다). 물론 매끄러운 덮개
+$W \to \mathcal{M}_{1, 1}$은 에탈 코호몰로지를 계산하는 데
+``최적''이 아닐 수도 있다.

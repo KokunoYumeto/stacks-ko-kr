@@ -1,0 +1,2087 @@
+% Generated mechanically from frozen input p07/ko/functors.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{55}
+\chapter{함자와 사상}
+
+
+
+\phantomsection
+\label{functors-section-phantom}
+
+
+\section{서론}
+\label{functors-section-introduction}
+
+\noindent
+$X$와 $Y$를 스킴이라 하자. 이 장에서는 함자
+$\QCoh(\mathcal{O}_Y) \to \QCoh(\mathcal{O}_X)$와 스킴의 사상
+$X \to Y$ 사이의 관계를 중심으로 논의한다. 더 넓게 말하면
+$\QCoh(\mathcal{O}_X)$와 $X$ 사이의 관계를 연구하며, $X$가 뇌터 스킴이면
+$\textit{Coh}(\mathcal{O}_X)$와 $X$ 사이의 관계를 연구한다.
+이 관계는 \cite{Gabriel}에서 연구되었다.
+
+
+
+
+
+
+\section{가군 범주 위의 함자}
+\label{functors-section-preliminary}
+
+\noindent
+환 $A$에 대하여 $\text{Mod}^{fp}_A$로 유한 표시
+$A$-가군의 범주를 나타내자.
+
+\begin{lemma}
+\label{functors-lemma-functor-on-fp-modules}
+$A$를 환이라 하자. $\mathcal{B}$를 여과 여극한을 갖는 범주라 하자.
+$F : \text{Mod}^{fp}_A \to \mathcal{B}$를 함자라 하자. 그러면 $F$는
+여과 여극한과 가환하는 함자 $F' : \text{Mod}_A \to \mathcal{B}$로
+유일하게 확장된다.
+\end{lemma}
+
+\begin{proof}
+이는 범주의 보조정리 \ref{categories-lemma-extend-functor-by-colim}에서
+따른다. 이 보조정리를 적용할 수 있음을 보이기 위해, 유한 표시
+$A$-가군은 대수학의 보조정리
+\ref{algebra-lemma-characterize-finitely-presented-module-hom}에 의하여
+$\text{Mod}_A$의 범주론적 콤팩트 대상임을 관찰하라. 또한 모든
+$A$-가군은 대수학의 보조정리 \ref{algebra-lemma-module-colimit-fp}에
+의하여 유한 표시 $A$-가군들의 여과 여극한이다.
+\end{proof}
+
+\noindent
+범주 $\mathcal{B}$가 가법적이고 여과 여극한을 가지면
+$\mathcal{B}$는 임의의 직합을 갖는다. 실제로 모든 직합은 유한 직합들의
+여과 여극한으로 쓸 수 있다.
+
+\begin{lemma}
+\label{functors-lemma-functor-on-fp-modules-additive}
+$A$, $\mathcal{B}$, $F$가 보조정리 \ref{functors-lemma-functor-on-fp-modules}에서와
+같다고 하자. $\mathcal{B}$가 가법적이고 $F$가 가법적이라고 가정하자.
+그러면 $F'$는 가법적이고 임의의 직합과 가환한다.
+\end{lemma}
+
+\begin{proof}
+$F'$가 가법적임을 보이려면
+$F'(M) \oplus F'(M') \to F'(M \oplus M')$가 임의의
+$A$-가군 $M$, $M'$에 대하여 동형사상임을 보이면 충분하다.
+호몰로지의 보조정리 \ref{homology-lemma-additive-functor}를 보라.
+$M = \colim_i M_i$와 $M' = \colim_j M'_j$를 유한 표시
+$A$-가군 $M_i$들의 여과 여극한으로 쓰자. 그러면
+$F'(M) = \colim_i F(M_i)$, $F'(M') = \colim_j F(M'_j)$이고,
+\begin{align*}
+F'(M \oplus M')
+& =
+F'(\colim_{i, j} M_i \oplus M'_j) \\
+& =
+\colim_{i, j} F(M_i \oplus M'_j) \\
+& =
+\colim_{i, j} F(M_i) \oplus F(M'_j) \\
+& =
+F'(M) \oplus F'(M')
+\end{align*}
+이므로 원하는 바를 얻는다. $F'$가 직합과 가환함을 보이기 위해
+$M = \bigoplus_{i \in I} M_i$라고 가정하자. 그러면
+$M = \colim_{I' \subset I\text{ finite}} \bigoplus_{i \in I'} M_i$는
+여과 여극한이다. 따라서
+\begin{align*}
+F'(M)
+& =
+\colim_{I' \subset I\text{ finite}}
+F'(\bigoplus\nolimits_{i \in I'} M_i) \\
+& =
+\colim_{I' \subset I\text{ finite}}
+\bigoplus\nolimits_{i \in I'} F'(M_i) \\
+& =
+\bigoplus\nolimits_{i \in I} F'(M_i)
+\end{align*}
+이다. 두 번째 등식은 이미 보인 $F'$의 가법성에서 따른다.
+\end{proof}
+
+\noindent
+범주 $\mathcal{B}$가 가법적이고 여과 여극한과 여핵을 가지면
+$\mathcal{B}$는 임의의 여극한을 갖는다. 위의 논의와 범주의 보조정리
+\ref{categories-lemma-colimits-coproducts-coequalizers}를 보라.
+
+\begin{lemma}
+\label{functors-lemma-functor-on-fp-modules-right-exact}
+$A$, $\mathcal{B}$, $F$가 보조정리 \ref{functors-lemma-functor-on-fp-modules}에서와
+같다고 하자. $\mathcal{B}$가 가법적이고 여핵을 가지며 $F$가 우완전이라고
+가정하자. 그러면 $F'$는 가법적이고 우완전이며 임의의 직합과 가환한다.
+\end{lemma}
+
+\begin{proof}
+$F$가 우완전이므로 $F$는 쌍의 쌍대곱과 가환하며, 이 쌍대곱은
+직합으로 표현된다. 따라서 호몰로지의 보조정리
+\ref{homology-lemma-additive-functor}에 의하여 $F$는 가법적이다.
+그러므로 $F'$는 보조정리
+\ref{functors-lemma-functor-on-fp-modules-additive}에 의하여 가법적이고 직합과
+가환한다. 아래의 증명을 읽기보다 먼저 $F'$가 우완전임을 독자가
+직접 증명해 보기를 권한다.
+
+\medskip\noindent
+$F'$가 우완전임을 보이려면 $F'$가 쌍대등화자와 가환함을 보이면
+충분하다. 범주의 보조정리
+\ref{categories-lemma-characterize-right-exact}을 보라. 이제
+$a, b : K \to L$이 $A$-가군의 사상이면 $a$와 $b$의 쌍대등화자는
+$a - b : K \to L$의 여핵이다. 따라서 $K \to L \to M \to 0$을
+$A$-가군의 완전열이라 하자. 우리는
+$$
+F'(K) \to F'(L) \to F'(M) \to 0
+$$
+에서 두 번째 화살표가 첫 번째 화살표의 $\mathcal{B}$에서의
+여핵임을 보여야 한다($\mathcal{B}$가 아벨 범주이면 표시한 열이
+완전하다고 말할 것이다). $M = \colim_{i \in I} M_i$를 유한 표시
+$A$-가군들의 여과 여극한으로 쓰자. 대수학의 보조정리
+\ref{algebra-lemma-module-colimit-fp}를 보라.
+$L_i = L \times_M M_i$로 놓자. 완전열
+$K \to L_i \to M_i \to 0$의 $I$ 위의 계를 얻는다. 범주의 보조정리
+\ref{categories-lemma-colimits-commute}에 의하여 여극한끼리는
+가환하고 여핵은 쌍대등화자의 한 종류이므로,
+$F'(L_i) \to F(M_i)$가 $F'(K) \to F'(L_i)$의
+$\mathcal{B}$에서의 여핵임을 모든 $i \in I$에 대하여 보이면 충분하다.
+다시 말해 $M$이 유한 표시라고 가정해도 된다.
+$L = \colim_{i \in I} L_i$를 유한 표시 $A$-가군들의 여과 여극한으로
+쓰되 각 $L_i$가 $M$ 위로 전사하게 하자. $K_i = K \times_L L_i$로
+놓자. 짧은 완전열 $K_i \to L_i \to M \to 0$의 $I$ 위의 계를 얻는다.
+앞의 논증을 되풀이하면 $F(L_i) \to F(M_i)$가
+$F'(K) \to F(L_i)$의 $\mathcal{B}$에서의 여핵임을 모든 $i \in I$에
+대하여 보이는
+문제로 환원된다. 다시 말해 $L$과 $M$이 모두 유한 표시
+$A$-가군이라고 가정해도 된다. 이 경우 가군 $\Ker(L \to M)$은
+유한이다(대수학의 보조정리 \ref{algebra-lemma-extension}). 따라서
+$K = \colim_{i \in I} K_i$를 유한 표시 $A$-가군들의 여과 여극한으로
+쓰되 각 가군이 $\Ker(L \to M)$ 위로 전사하게 할 수 있다. 짧은 완전열
+$K_i \to L \to M \to 0$의 $I$ 위의 계를 얻는다. 앞의 논증을
+되풀이하면 $F(L) \to F(M)$이 $F(K_i) \to F(L)$의
+$\mathcal{B}$에서의 여핵임을 모든 $i \in I$에 대하여 보이는 문제로
+환원된다. 다시 말해 $K$, $L$, $M$이 유한 표시 $A$-가군이라고
+가정해도 된다. 마지막 경우는 $F$가 우완전이라는 가정에서 따른다.
+\end{proof}
+
+\noindent
+범주 $\mathcal{B}$가 가법적이고 핵을 가지면 $\mathcal{B}$는 유한
+극한을 갖는다. 실제로 유한 곱은 존재하는 직합이고,
+$a, b : L \to M$의 등화자는 존재하는 $a - b : K \to L$의 핵이다.
+따라서 범주의 보조정리 \ref{categories-lemma-finite-limits-exist}에
+의하여 모든 유한 극한이 존재한다.
+
+\begin{lemma}
+\label{functors-lemma-functor-on-fp-modules-left-exact}
+$A$, $\mathcal{B}$, $F$가 보조정리 \ref{functors-lemma-functor-on-fp-modules}에서와
+같다고 하자. $A$가 정합환(대수학의 정의
+\ref{algebra-definition-coherent})이고, $\mathcal{B}$가 가법적이고
+핵을 가지며, 여과 여극한이 핵을 취하는 것과 가환하고, $F$가
+좌완전이라고 가정하자. 그러면 $F'$는 가법적이고 좌완전이며 임의의
+직합과 가환한다.
+\end{lemma}
+
+\begin{proof}
+$A$가 정합환이므로 범주 $\text{Mod}^{fp}_A$는 아벨 범주이며
+$\text{Mod}_A$에서와 같은 핵과 여핵을 갖는다. 대수학의 보조정리
+\ref{algebra-lemma-coherent-ring}과 \ref{algebra-lemma-coherent}를 보라.
+따라서 $\text{Mod}^{fp}_A$에는 모든 유한 극한이 존재하고 범주의 정의
+\ref{categories-definition-exact}을 적용할 수 있다. $F$가 좌완전이므로
+$F$는 쌍의 곱과 가환하며, 이 곱은 직합으로 표현된다. 따라서 호몰로지의
+보조정리 \ref{homology-lemma-additive-functor}에 의하여 $F$는
+가법적이다. 그러므로 보조정리
+\ref{functors-lemma-functor-on-fp-modules-additive}에 의하여 $F'$는 가법적이고
+직합과 가환한다. 아래의 증명을 읽기보다 먼저 $F'$가 좌완전임을
+독자가 직접 증명해 보기를 권한다.
+
+\medskip\noindent
+$F'$가 좌완전임을 보이려면 $F'$가 등화자와 가환함을 보이면 충분하다.
+범주의 보조정리 \ref{categories-lemma-characterize-left-exact}을 보라.
+이제 $a, b : L \to M$이 $A$-가군의 사상이면 $a$와 $b$의 등화자는
+$a - b : L \to M$의 핵이다. 따라서 $0 \to K \to L \to M$을
+$A$-가군의 완전열이라 하자. 우리는
+$$
+0 \to F'(K) \to F'(L) \to F'(M)
+$$
+에서 화살표 $F'(K) \to F'(L)$이 $F'(L) \to F'(M)$의
+$\mathcal{B}$에서의 핵임을 보여야 한다($\mathcal{B}$가 아벨 범주이면
+표시한 열이 완전하다고 말할 것이다).
+$M = \colim_{i \in I} M_i$를 유한 표시 $A$-가군들의 여과 여극한으로
+쓰자. 대수학의 보조정리 \ref{algebra-lemma-module-colimit-fp}를 보라.
+$L_i = L \times_M M_i$로 놓자. 완전열
+$0 \to K \to L_i \to M_i$의 $I$ 위의 계를 얻는다. 가정에 의하여
+$\mathcal{B}$에서 여과 여극한은 핵을 취하는 것과 가환하므로,
+$F'(K) \to F'(L_i)$가 $F'(L_i) \to F(M_i)$의
+$\mathcal{B}$에서의 핵임을 모든 $i \in I$에 대하여 보이면 충분하다.
+다시 말해 $M$이 유한 표시라고 가정해도 된다.
+$L = \colim_{i \in I} L_i$를 유한 표시 $A$-가군들의 여과 여극한으로
+쓰자. $K_i = K \times_L L_i$로 놓자. 짧은 완전열
+$0 \to K_i \to L_i \to M$의 $I$ 위의 계를 얻는다. 앞의 논증을
+되풀이하면 $F'(K_i) \to F(L_i)$가 $F(L_i) \to F(M)$의
+$\mathcal{B}$에서의 핵임을 모든 $i \in I$에 대하여 보이는 문제로
+환원된다. 다시 말해
+$L$과 $M$이 모두 유한 표시 $A$-가군이라고 가정해도 된다.
+$A$가 정합환이므로 $A$-가군 $K = \Ker(L \to M)$은 유한 표시이다.
+실제로 유한 표시 $A$-가군의 범주는 아벨 범주이다(위에 제시한
+참고문헌을 보라). 다시 말해 세 가군 $K$, $L$, $M$이 모두 유한 표시
+$A$-가군이다. 마지막 경우는 $F$가 좌완전이라는 가정에서 따른다.
+\end{proof}
+
+\noindent
+범주 $\mathcal{B}$가 가법적이고 여핵을 가지면 $\mathcal{B}$는 유한
+여극한을 갖는다. 실제로 유한 쌍대곱은 존재하는 직합이고,
+$a, b : K \to L$의 쌍대등화자는 존재하는 $a - b : K \to L$의
+여핵이다. 따라서 범주의 보조정리 \ref{categories-lemma-colimits-exist}에
+의하여 모든 유한 여극한이 존재한다.
+
+\begin{lemma}
+\label{functors-lemma-functor-on-modules-fp}
+$A$를 환이라 하자. $\mathcal{B}$를 여핵을 갖는 가법 범주라 하자.
+다음 두 범주는 동치이다.
+\begin{enumerate}
+\item 우완전 함자 $F : \text{Mod}^{fp}_A \to \mathcal{B}$의 범주,
+\item 쌍 $(K, \kappa)$의 범주. 여기서 $K \in \Ob(\mathcal{B})$이고
+$\kappa : A \to \text{End}_\mathcal{B}(K)$는 환 준동형이다.
+\end{enumerate}
+이 동치는 $F$를 $F(A)$와 그 자연스러운 $A$-작용으로 보내는 규칙으로
+주어진다.
+\end{lemma}
+
+\begin{proof}
+$(K, \kappa)$가 (2)에서와 같다고 하자. 함자
+$F : \text{Mod}^{fp}_A \to \mathcal{B}$로서 $F(A) = K$이고 주어진
+$A$-작용 $\kappa$를 갖는 것을 구성하겠다. 구체적으로
+정수 $n \geq 0$에 대하여
+$$
+F(A^{\oplus n}) = K^{\oplus n}
+$$
+으로 놓는다. $A$-선형 사상
+$\varphi : A^{\oplus m} \to A^{\oplus n}$이 행렬
+$(a_{ij}) \in \text{Mat}(n \times m, A)$을 갖는다고 하자. 다음을
+정의한다.
+$$
+F(\varphi) :
+F(A^{\oplus m}) = K^{\oplus m}
+\longrightarrow
+K^{\oplus n} = F(A^{\oplus n})
+$$
+이는 행렬 $(\kappa(a_{ij}))$로 주어지는 사상이다. 이로써 함자 $F$를
+$\text{Mod}^{fp}_A$에서 대상이 $0$, $A$, $A^{\oplus 2}$,
+$\ldots$인 충만 부분범주로 제한한 것에서 $\mathcal{B}$로 가는 가법
+함자를 정의한다. 검증은 생략한다.
+
+\medskip\noindent
+$M$이 $\text{Mod}^{fp}_A$의 대상일 때마다 표시
+$$
+A^{\oplus m_M} \xrightarrow{\varphi_M} A^{\oplus n_M} \to M \to 0
+$$
+를 $M$의 $A$-가군으로서의 표시로 하나씩 택한다. 자명한 표시
+$0 \to A^{\oplus n} \xrightarrow{1} A^{\oplus n} \to 0$을
+$M = A^{\oplus n}$일 때 사용하자
+(필수는 아니지만 서술이 간단해진다). 각 사상 $f : M \to N$이
+$\text{Mod}^{fp}_A$의 사상일 때 가환 그림
+\begin{equation}
+\label{functors-equation-map}
+\vcenter{
+\xymatrix{
+A^{\oplus m_M} \ar[r]_{\varphi_M} \ar[d]_{\psi_f} &
+A^{\oplus n_M} \ar[r] \ar[d]_{\chi_f} &
+M \ar[r] \ar[d]_f & 0 \\
+A^{\oplus m_N} \ar[r]^{\varphi_N} &
+A^{\oplus n_N} \ar[r] &
+N \ar[r] & 0
+}
+}
+\end{equation}
+을 하나 택할 수 있다. 이러한 선택을 한 뒤 다음과 같이 정의한다.
+$M$이 $\text{Mod}^{fp}_A$의 대상이면
+$$
+F(M) = \Coker(F(\varphi_M) : F(A^{\oplus m_M}) \to F(A^{\oplus n_M}))
+$$
+로 놓고, $f : M \to N$이 $\text{Mod}^{fp}_A$의 사상이면
+$$
+F(f) = \text{여핵 위의 }F(M) \to F(N)\text{인 사상으로서 }
+F(\psi_f)\text{와 }F(\chi_f)\text{가 유도하는 것}
+$$
+으로 놓는다. 이 규칙은 주어진 함자 $F$를 자유 가군
+$A^{\oplus n}$들로 이루어진 충만 부분범주로부터 확장함에 유의하라.
+이제 $F$가 함자이고, $F$가 가법적이며, $F$가 우완전임을 보여야 한다.
+
+\medskip\noindent
+$f : M \to N$을 $\text{Mod}^{fp}_A$의 사상이라 하자. 위에서 정의한
+사상 $F(f)$가 (\ref{functors-equation-map})의 $\psi_f$와 $\chi_f$의 선택에
+무관하다고 주장한다. 실제로
+$$
+\xymatrix{
+A^{\oplus m_M} \ar[r]_{\varphi_M} \ar[d]_\psi &
+A^{\oplus n_M} \ar[r] \ar[d]_\chi &
+M \ar[r] \ar[d]_f & 0 \\
+A^{\oplus m_N} \ar[r]^{\varphi_N} &
+A^{\oplus n_N} \ar[r] &
+N \ar[r] & 0
+}
+$$
+도 가환한다고 하자. 사상 $F(f)' : F(M) \to F(N)$을
+$F(\psi)$와 $F(\chi)$가 유도하는 사상으로 나타내자. 가환 그림들을 살펴보면 초등
+가환대수에 의하여 사상
+$\omega : A^{\oplus n_M} \to A^{\oplus m_N}$이 존재하여
+$\chi = \chi_f + \varphi_N \circ \omega$이다.
+$F$를 적용하면
+$F(\chi) = F(\chi_f) + F(\varphi_N) \circ F(\omega)$를 얻는다.
+$F(N)$은 $F(\varphi_N)$의 여핵이므로
+$F(A^{\oplus n_M}) \to F(M)$은 $F(f)$와 $F(f)'$을 같게 한다.
+여핵은 전사사상이므로 $F(f) = F(f)'$이라고 결론 내린다.
+
+\medskip\noindent
+$F$가 함자임을 증명하자. 먼저
+$F(\text{id}_M) = \text{id}_{F(M)}$임을 관찰하라. 실제로 위 그림의
+$\psi_f$와 $\chi_f$를 $f = \text{id}_M$인 경우 항등사상으로 택할 수
+있다. 다음으로
+$f : M \to N$과 $g : L \to M$이 주어졌다고 하자. 그러면
+$\psi = \psi_f \circ \psi_g$와 $\chi = \chi_f \circ \chi_g$는
+$f \circ g$에 대한 (\ref{functors-equation-map})에 들어맞는다. 따라서 이들이
+유도하는 사상이 올바른 사상이고, 이는 정확히
+$F(f) \circ F(g) = F(f \circ g)$라는 뜻이다.
+
+\medskip\noindent
+$F$가 가법적임을 증명하자. $f, g : M \to N$이 주어졌다고 하자.
+그러면 $\psi = \psi_f + \psi_g$와 $\chi = \chi_f + \chi_g$는
+$f + g$에 대한 (\ref{functors-equation-map})에 들어맞는다. 따라서 이들이
+유도하는 사상이 올바른 사상이고, 이는 정확히
+$F(f) + F(g) = F(f + g)$라는 뜻이다.
+
+\medskip\noindent
+마지막으로 $F$가 우완전임을 증명하자. $F$가 쌍대등화자와 가환함을
+보이면 충분하다. 범주의 보조정리
+\ref{categories-lemma-characterize-right-exact}을 보라. 이를 위해서는
+$F$가 여핵과 가환함을 증명하면 충분하다. $K \to L \to M \to 0$을
+$A$-가군의 완전열이라 하고 $K$, $L$, $M$이 유한 표시라고 하자.
+$F$가 가법 함자이므로 이는
+분명히 복합체
+$$
+F(K) \to F(L) \to F(M) \to 0
+$$
+를 주며, 우리는 두 번째 화살표가 $\mathcal{B}$에서 첫 번째 화살표의
+여핵임을 보여야 한다. 어쨌든 사상
+$\Coker(F(K) \to F(L)) \to F(M)$을 얻는다. 초등 가환대수에 의하여
+가환 그림
+$$
+\xymatrix{
+A^{\oplus m_M} \ar[r]_{\varphi_M} \ar[d]_\psi &
+A^{\oplus n_M} \ar[r] \ar[d]_\chi &
+M \ar[r] \ar[d]_1 & 0 \\
+K \ar[r] &
+L \ar[r] &
+M \ar[r] & 0
+}
+$$
+이 존재한다. 이 그림에 $F$를 적용하고 $F(M)$을 $F(\varphi_M)$의
+여핵으로 구성한 사실을 쓰면, 사상
+$F(M) \to \Coker(F(K) \to F(L))$이 존재하여
+$\Coker(F(K) \to F(L)) \to F(M)$의 오른쪽 역임을 알 수 있다.
+이는 우선 $F(L) \to F(M)$이 언제나 전사사상임을 뜻한다. 다음으로
+위의 사실에서
+$$
+\Coker(F(K) \to F(L)) = F(M) \oplus E
+$$
+를 얻으며, 이 직합 분해는
+$F(M) \to \Coker(F(K) \to F(L))$ 및
+$\Coker(F(K) \to F(L)) \to F(M)$과 양립한다. 그러나 그러면
+전사사상 $p : F(L) \to E$는 $F(K) \to F(L)$과 합성한 뒤에도,
+$F(A^{n_M}) \to F(L)$과 합성한 뒤에도 영이 된다. 한편
+$K \oplus A^{n_M} \to L$은 전사이므로(대수적 논증은 생략한다),
+위의 사실에 의하여 $F(K \oplus A^{n_M}) \to F(L)$은 전사이다.
+따라서 $E = 0$이다. 이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-functor-on-modules}
+$A$를 환이라 하자. $\mathcal{B}$를 임의의 직합과 여핵을 갖는 가법
+범주라 하자. 다음 두 범주는 동치이다.
+\begin{enumerate}
+\item 우완전이고 임의의 직합과 가환하는 함자
+$F : \text{Mod}_A \to \mathcal{B}$의 범주,
+\item 쌍 $(K, \kappa)$의 범주. 여기서 $K \in \Ob(\mathcal{B})$이고
+$\kappa : A \to \text{End}_\mathcal{B}(K)$는 환 준동형이다.
+\end{enumerate}
+이 동치는 $F$를 $F(A)$와 그 자연스러운 $A$-작용으로 보내는 규칙으로
+주어진다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{functors-lemma-functor-on-modules-fp}와
+\ref{functors-lemma-functor-on-fp-modules-right-exact}을 결합하라.
+\end{proof}
+
+
+
+
+
+
+\section{가군 범주 사이의 함자}
+\label{functors-section-functors}
+
+\noindent
+다음 보조정리는 이 장의 결과들을 대표하는 전형적인 예이다.
+
+\begin{lemma}
+\label{functors-lemma-functor}
+$A$와 $B$를 환이라 하자. $F : \text{Mod}_A \to \text{Mod}_B$를
+함자라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $F$는 함자 $M \mapsto M \otimes_A K$와 동형이다. 여기서 어떤
+$A \otimes_\mathbf{Z} B$-가군 $K$를 사용한다.
+\item $F$는 우완전이고 모든 직합과 가환한다.
+\item $F$는 모든 여극한과 가환한다.
+\item $F$는 오른쪽 수반 $G$를 갖는다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)이면 (4)이다. 실제로 $M \mapsto M \otimes_A K$의 오른쪽 수반은
+$N \mapsto \Hom_B(K, N)$이다. 미분 등급 대수의 보조정리
+\ref{dga-lemma-tensor-hom-adjunction}을 보라. (4)이면 범주의 보조정리
+\ref{categories-lemma-adjoint-exact}에 의하여 (3)이다. 함의
+(3) $\Rightarrow$ (2)는 정의에서 즉시 따른다.
+
+\medskip\noindent
+(2)를 가정하고 (1)을 증명하자. 호몰로지의 절
+\ref{homology-section-functors}의 논의에 의하여 함자 $F$는
+가법적이다. 따라서 $F$는 환 사상
+$A \to \text{End}_B(F(M))$, $a \mapsto F(a \cdot \text{id}_M)$을
+모든 $A$-가군 $M$에 대하여 유도한다. 그러므로 $F(M)$은
+$A \otimes_\mathbf{Z} B$-가군이고,
+이는 $M$에 관해 함자적이다. $K = F(A)$로 놓는다. 다음을 정의하자.
+$$
+M \otimes_A K = M \otimes_A F(A) \longrightarrow F(M),
+\quad m \otimes k \longmapsto F(\varphi_m)(k)
+$$
+여기서 $\varphi_m : A \to M$은 $a \to am$을 보낸다.
+규칙 $(m, k) \mapsto F(\varphi_m)(k)$는 $A$-쌍선형이고 오른쪽에서
+$B$-선형이므로, 표시한 $A \otimes_\mathbf{Z} B$-선형 사상을 얻는다.
+이 구성은 $M$에 관해
+함자적이므로 함자의 변환 $- \otimes_A K \to F(-)$를 정의하며,
+$A$에서 계산하면 이 변환은 동형사상이다. 모든 $A$-가군 $M$에 대하여
+완전열
+$$
+\bigoplus\nolimits_{j \in J} A \to
+\bigoplus\nolimits_{i \in I} A \to
+M \to 0
+$$
+을 택할 수 있다. 위에서 구성한 사상들을 사용하면 가환 그림
+$$
+\xymatrix{
+(\bigoplus\nolimits_{j \in J} A) \otimes_A K \ar[r] \ar[d] &
+(\bigoplus\nolimits_{i \in I} A) \otimes_A K \ar[r] \ar[d] &
+M \otimes_A K \ar[r] \ar[d] &
+0 \\
+F(\bigoplus\nolimits_{j \in J} A) \ar[r] &
+F(\bigoplus\nolimits_{i \in I} A) \ar[r] &
+F(M) \ar[r] &  0
+}
+$$
+을 얻는다. 아래 행은 $F$가 우완전이므로 완전하다. 위 행은 $K$와의
+텐서곱이 우완전이므로 완전하다. $F$가 직합과 가환하므로 왼쪽 두
+수직 화살표는 전단사이다. 따라서 결론을 얻는다.
+\end{proof}
+
+\begin{example}
+\label{functors-example-functor-modules}
+$R$을 환이라 하자. $A$와 $B$를 $R$-대수라 하자. $K$를
+$A \otimes_R B$-가군이라 하자. 그러면 함자
+\begin{equation}
+\label{functors-equation-FM-modules}
+F : \text{Mod}_A \longrightarrow \text{Mod}_B,\quad
+M \longmapsto M \otimes_A K
+\end{equation}
+를 생각할 수 있다. 이 함자는 $R$-선형이고 우완전이며, 임의의
+직합과 가환하고 모든 여극한과 가환하며 오른쪽 수반을 갖는다
+(보조정리 \ref{functors-lemma-functor}).
+\end{example}
+
+\begin{lemma}
+\label{functors-lemma-functor-modules}
+$R$을 환이라 하자. $A$와 $B$를 $R$-대수라 하자. 다음 두 범주는
+동치이다.
+\begin{enumerate}
+\item 우완전이고 임의의 직합과 가환하는 $R$-선형 함자
+$F : \text{Mod}_A \to \text{Mod}_B$의 범주,
+\item 범주 $\text{Mod}_{A \otimes_R B}$.
+\end{enumerate}
+이 동치는 $K$를 (\ref{functors-equation-FM-modules})의 함자 $F$로 보내어
+주어진다.
+\end{lemma}
+
+\begin{proof}
+$F$를 첫 번째 범주의 대상이라 하자. 보조정리 \ref{functors-lemma-functor}에
+의하여 $F(M) = M \otimes_A K$라고 $M$에 관해 함자적으로 가정해도
+된다. 여기서 어떤 $A \otimes_\mathbf{Z} B$-가군 $K$를 사용한다.
+$R$-선형인 $F$라는 사실에서, $A \otimes_\mathbf{Z} B$-가군
+$K$의 구조는 $A \otimes_R B$-가군으로서 $K$의 유일한 구조로부터 옴이
+즉시 따른다.
+따라서 (\ref{functors-equation-FM-modules})에서와 같이 $K$를 $F$로 보내는
+함자는 본질적으로 전사이다.
+
+\medskip\noindent
+이 함자가 충실충만임을 증명하려면, $A \otimes_R B$-가군 $K$와
+$K'$가 주어졌을 때 대응하는 함자 사이의 모든 변환
+$t : F \to F'$이 유일한 $\varphi : K \to K'$에서 옴을 보여야 한다.
+$K = F(A)$이고 $K' = F'(A)$이므로 $\varphi$를
+$t_A : F(A) \to F'(A)$, 즉 $t$의 $A$에서의 값으로 잡을 수 있다.
+이 사상은 $A \otimes_R B$-선형이다. 실제로 이는 보조정리
+\ref{functors-lemma-functor}의 증명에서 $A \otimes B$-가군 구조를 $F(A)$와
+$F'(A)$에 부여한 정의에서 따른다.
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-composition}
+$R$을 환이라 하고 $A$, $B$, $C$를 $R$-대수라 하자.
+$F : \text{Mod}_A \to \text{Mod}_B$와
+$F' : \text{Mod}_B \to \text{Mod}_C$를 임의의 직합과 가환하는
+$R$-선형 우완전 함자라 하자. 보조정리
+\ref{functors-lemma-functor-modules}의 동치 아래에서
+대상 $K$가 $\text{Mod}_{A \otimes_R B}$에서 $F$에 대응하고 대상
+$K'$가 $\text{Mod}_{B \otimes_R C}$에서 $F'$에 대응하면,
+$K \otimes_B K'$을 $\text{Mod}_{A \otimes_R C}$의 대상으로 볼 때
+$F' \circ F$에 대응한다.
+\end{remark}
+
+\begin{remark}
+\label{functors-remark-exact-flat}
+보조정리 \ref{functors-lemma-functor-modules}의 상황에서 $F$가 $K$에
+대응한다고 하자. 그러면
+$F$가 완전이다 $\Leftrightarrow$ $K$가 $A$ 위에서 평탄이다.
+\end{remark}
+
+\begin{remark}
+\label{functors-remark-finite}
+보조정리 \ref{functors-lemma-functor-modules}의 상황에서 $F$가 $K$에
+대응한다고 하자. 그러면
+$F$가 유한 $A$-가군을 유한 $B$-가군으로 보낸다
+$\Leftrightarrow$ $K$가 $B$-가군으로서 유한이다.
+\end{remark}
+
+\begin{remark}
+\label{functors-remark-finite-presentation}
+보조정리 \ref{functors-lemma-functor-modules}의 상황에서 $F$가 $K$에
+대응한다고 하자. 그러면
+$F$가 유한 표시 $A$-가군을 유한 표시 $B$-가군으로 보낸다
+$\Leftrightarrow$ $K$가 $B$-가군으로서 유한 표시이다.
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-functor-equivalence}
+$A$와 $B$를 환이라 하자. 범주의 동치
+$$
+F : \text{Mod}_A \longrightarrow \text{Mod}_B
+$$
+가 주어지면, 환의 동형사상 $A \to B$와 가역 $B$-가군 $L$이
+존재하여 $F$는 함자
+$M \mapsto (M \otimes_A B) \otimes_B L$과 동형이다.
+\end{lemma}
+
+\begin{proof}
+범주의 동치는 모든 여극한과 가환하므로 보조정리
+\ref{functors-lemma-functor}를 적용할 수 있다. $K$를
+$A \otimes_\mathbf{Z} B$-가군이라 하되, $F$가 함자
+$M \mapsto M \otimes_A K$와 동형이 되게 하자. $K'$을
+$B \otimes_\mathbf{Z} A$-가군이라 하되, $F$의 준역이 함자
+$N \mapsto N \otimes_B K'$과 동형이 되게 하자. 주해
+\ref{functors-remark-composition}과 보조정리 \ref{functors-lemma-functor-modules}에
+의하여 동형사상
+$$
+\psi : K \otimes_B K' \longrightarrow A
+$$
+을 $A \otimes_\mathbf{Z} A$-가군의 범주에서 얻는다. 마찬가지로 동형사상
+$$
+\psi' : K' \otimes_A K \longrightarrow B
+$$
+를 $B \otimes_\mathbf{Z} B$-가군의 범주에서 얻는다. 원소
+$\xi = \sum_{i = 1, \ldots, n} x_i \otimes y_i \in K \otimes_B K'$를
+$\psi(\xi) = 1$이 되게 택하자. 동형사상
+$$
+K \xrightarrow{\psi^{-1} \otimes \text{id}_K}
+K \otimes_B K' \otimes_A K \xrightarrow{\text{id}_K \otimes \psi'} K
+$$
+을 생각하자. 이 합성은 동형사상이며
+$$
+k \longmapsto \sum x_i \psi'(y_i \otimes k)
+$$
+로 주어진다. 이 자기동형사상이
+$$
+K \to B^{\oplus n} \to K
+$$
+를 거쳐 $B$-가군의 사상으로 분해됨을 알 수 있다. 따라서 $K$는
+유한 사영 $B$-가군이다.
+
+\medskip\noindent
+$K$가 가역 $B$-가군이라고 주장한다. 이는 $K$가 $B$-가군으로서 갖는
+계수가 상수값 $1$을 갖는다는 것과 동치이다. 대수학 심화의 보조정리
+\ref{more-algebra-lemma-invertible}과 대수학의 보조정리
+\ref{algebra-lemma-finite-projective}를 보라. 그렇지 않으면 다음 중
+하나가 성립하는 극대 아이디얼 $\mathfrak m \subset B$가 존재한다.
+(a) $K \otimes_B B/\mathfrak m = 0$이거나, (b) 전사
+$K \to (B/\mathfrak m)^{\oplus 2}$가 $B$-가군의 범주에서 존재한다.
+$K' \otimes_A K \otimes_B N = N$이 모든 $B$-가군 $N$에 대하여
+성립하므로 (a)는 모순이다. (b)이면 전사
+$$
+A = K \otimes_B K' \longrightarrow (B/\mathfrak m \otimes_B K')^{\oplus 2}
+$$
+를 (오른쪽) $A$-가군의 범주에서 얻게 된다. 그러나 표적은
+$A$-가군으로서 적어도 두 개의 생성원을 필요로 하므로 이는 불가능하다.
+실제로
+$B/\mathfrak m \otimes_B K'$은 영이 아닌 가군 $B/\mathfrak m$을
+$F$의 준역으로 보낸 상이므로 영이 아니다.
+
+\medskip\noindent
+$K$가 가역 $B$-가군이므로 $\Hom_B(K, K) = B$이다. $K = F(A)$이므로
+$A$의 $K$ 위 작용은 환 동형사상 $A \to B$를 정의한다. 보조정리가
+따른다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-functor-equivalence-linear}
+$R$을 환이라 하고 $A$와 $B$를 $R$-대수라 하자. 다음이 범주의
+동치라고 하자.
+$$
+F : \text{Mod}_A \longrightarrow \text{Mod}_B
+$$
+이 동치가 $R$-선형이면, 동형사상 $A \to B$가 $R$-대수 사이에
+존재하고 가역 $B$-가군 $L$이 존재하여 $F$는 함자
+$M \mapsto (M \otimes_A B) \otimes_B L$과 동형이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{functors-lemma-functor-equivalence}에서 $A \to B$와 $L$을 얻는다.
+증명을 끝내려면 $R$-선형인 $F$라는 사실이 $A \to B$를 $R$-대수 사상으로
+강제함을 보이면 된다. 자세한 내용은 생략한다.
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-monoidal}
+$A$와 $B$를 환이라 하자. $\text{Mod}_A$와 $\text{Mod}_B$에 가군의
+텐서곱으로 주어지는 통상적인 모노이드 구조를 부여하자.
+$F : \text{Mod}_A \to \text{Mod}_B$를 모노이드 범주의 함자라 하자.
+범주의 정의
+\ref{categories-definition-functor-monoidal-categories}를 보라.
+다음과 같은 사실들이 있다.
+\begin{enumerate}
+\item $F(A)$는 단위원이므로(우리의 정의에 따라) $F(A) = B$이다.
+\item 곱셈적 사상 $\varphi : A \to B$를 얻는다. 이는
+$a \in A$를 $F(A) = B$ 위의 그 작용으로 보낸다.
+\item $A = B$이고 $F(M) = M \otimes_A M$이라고 하자. 이 경우
+$\varphi(a) = a^2$이다.
+\item $F$가 가법적이면 $\varphi$는 환 사상이다.
+\item $A = B = \mathbf{Z}$이고 $F(M) = M/\text{torsion}$이라고 하자.
+그러면 $\varphi = \text{id}_\mathbf{Z}$이지만 $F$는 항등 함자가 아니다.
+\item $F$가 우완전이고 직합과 가환하면 보조정리
+\ref{functors-lemma-functor}에 의하여
+$F(M) = M \otimes_{A, \varphi} B$이다.
+\end{enumerate}
+다시 말해 환 사상 $A \to B$와, 모든 여극한과 가환하는 모노이드 범주의
+함자 $\text{Mod}_A \to \text{Mod}_B$의 동형류 사이에는 전단사 대응이
+있다.
+\end{remark}
+
+
+
+
+\section{가군 범주 위 함자의 확장}
+\label{functors-section-functors-extend}
+
+\noindent
+환 $A$에 대하여 $\text{Mod}^{fp}_A$로 유한 표시
+$A$-가군의 범주를 나타내자.
+
+\begin{lemma}
+\label{functors-lemma-functor-fp-modules}
+$A$와 $B$를 환이라 하자.
+$F : \text{Mod}^{fp}_A \to \text{Mod}^{fp}_B$를 함자라 하자.
+그러면 $F$는 여과 여극한과 가환하는 함자
+$F' : \text{Mod}_A \to \text{Mod}_B$로 유일하게 확장된다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{functors-lemma-functor-on-fp-modules}의 특수한 경우이다.
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-monoidal-extension}
+$A$, $B$, $F$, $F'$이 보조정리 \ref{functors-lemma-functor-fp-modules}에서와
+같다고 하자. 유한 표시 가군 두 개의 텐서곱은 유한 표시임을 관찰하라.
+대수학의 보조정리 \ref{algebra-lemma-tensor-finiteness}를 보라.
+따라서 $\text{Mod}^{fp}_A$, $\text{Mod}^{fp}_B$,
+$\text{Mod}_A$, $\text{Mod}_B$에 가군의 텐서곱으로 주어지는 통상적인
+모노이드 구조를 부여할 수 있다. 이 경우 $F$가 모노이드 범주의
+함자이면 $F'$도 그러하다. 이는 가군의 텐서곱이 여과 여극한과
+가환한다는 사실에서 즉시 따른다.
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-functor-fp-modules-exact}
+$A$, $B$, $F$, $F'$이 보조정리 \ref{functors-lemma-functor-fp-modules}에서와
+같다고 하자.
+\begin{enumerate}
+\item $F$가 가법적이면 $F'$도 가법적이고 임의의 직합과 가환한다.
+\item $F$가 우완전이면 $F'$도 우완전이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{functors-lemma-functor-on-fp-modules-additive}와
+\ref{functors-lemma-functor-on-fp-modules-right-exact}에서 따른다.
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-monoidal-extension-exact}
+주해 \ref{functors-remark-monoidal}, \ref{functors-remark-monoidal-extension}과 보조정리
+\ref{functors-lemma-functor-fp-modules-exact}을 결합하면 다음을 얻는다.
+환 $A$와 $B$가 주어졌을 때, 환 사상 $A \to B$의 집합과 우완전인
+모노이드 범주의 함자
+$\text{Mod}^{fp}_A \to \text{Mod}^{fp}_B$의 동형류의 집합 사이에는
+전단사 대응이 있다.
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-functor-fp-modules-left-exact}
+$A$, $B$, $F$, $F'$이 보조정리 \ref{functors-lemma-functor-fp-modules}에서와
+같다고 하자. $A$가 정합환(대수학의 정의
+\ref{algebra-definition-coherent})이라고 가정하자. $F$가 좌완전이면
+$F'$도 좌완전이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{functors-lemma-functor-on-fp-modules-left-exact}의 특수한 경우이다.
+\end{proof}
+
+\noindent
+환 $A$에 대하여 $\text{Mod}^{fg}_A$로 유한 생성 $A$-가군
+(즉 유한 $A$-가군)의 범주를 나타내자.
+
+\begin{lemma}
+\label{functors-lemma-functor-finite-modules}
+$A$와 $B$를 뇌터 환이라 하자.
+$F : \text{Mod}^{fg}_A \to \text{Mod}^{fg}_B$를 함자라 하자.
+그러면 $F$는 여과 여극한과 가환하는 함자
+$F' : \text{Mod}_A \to \text{Mod}_B$로 유일하게 확장된다.
+$F$가 가법적이면 $F'$도 가법적이고 임의의 직합과 가환한다.
+$F$가 완전, 좌완전 또는 우완전이면 $F'$도 각각 그러하다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{functors-lemma-functor-fp-modules-exact}과
+\ref{functors-lemma-functor-fp-modules-left-exact}을 보라. 또한 유한
+$A$-가군은 유한 표시 $A$-가군이라는 대수학의 보조정리
+\ref{algebra-lemma-Noetherian-finite-type-is-finite-presentation}와,
+뇌터 환은 정합환이라는 대수학의 보조정리
+\ref{algebra-lemma-Noetherian-coherent}를 사용하라.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{준연접 가군 범주 사이의 함자}
+\label{functors-section-functor-quasi-coherent}
+
+\noindent
+이 절에서는 준연접 가군의 범주 사이의 함자를 간단히 연구한다.
+
+\begin{example}
+\label{functors-example-functor-quasi-coherent}
+$R$을 환이라 하자. $X$와 $Y$를 $R$ 위의 스킴이라 하고 $X$가
+준콤팩트이고 준분리라고 하자. $\mathcal{K}$를 준연접
+$\mathcal{O}_{X \times_R Y}$-가군이라 하자.
+그러면 함자
+\begin{equation}
+\label{functors-equation-FM-QCoh}
+F : \QCoh(\mathcal{O}_X) \longrightarrow \QCoh(\mathcal{O}_Y),\quad
+\mathcal{F} \longmapsto
+\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K})
+\end{equation}
+를 생각할 수 있다. 사상 $\text{pr}_2$는 준콤팩트이고 준분리이다
+(스킴의 보조정리
+\ref{schemes-lemma-quasi-compact-preserved-base-change}와
+\ref{schemes-lemma-separated-permanence}). 따라서 이 사상을 따른
+직접상은 준연접 가군을 보존한다. 스킴의 보조정리
+\ref{schemes-lemma-push-forward-quasi-coherent}를 보라. 더 나아가 우리의
+함자는 $R$-선형이고 임의의 직합과 가환한다. 스킴의 코호몰로지의
+보조정리 \ref{coherent-lemma-colimit-cohomology}를 보라.
+\end{example}
+
+\noindent
+다음 보조정리는 보조정리 \ref{functors-lemma-functor-modules}의 자연스러운
+일반화이다.
+
+\begin{lemma}
+\label{functors-lemma-functor-quasi-coherent-from-affine}
+$R$을 환이라 하자. $X$와 $Y$를 $R$ 위의 스킴이라 하고 $X$가
+아핀이라고 하자. 다음 두 범주는 동치이다.
+\begin{enumerate}
+\item 우완전이고 임의의 직합과 가환하는 $R$-선형 함자
+$F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$의 범주,
+\item 범주 $\QCoh(\mathcal{O}_{X \times_R Y})$.
+\end{enumerate}
+이 동치는 $\mathcal{K}$를 (\ref{functors-equation-FM-QCoh})의 함자 $F$로
+보내어 주어진다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{K}$를 $\QCoh(\mathcal{O}_{X \times_R Y})$의 대상이라 하고
+$F_\mathcal{K}$를 (\ref{functors-equation-FM-QCoh})의 함자라 하자. 예
+\ref{functors-example-functor-quasi-coherent}의 논의에서 $F$가 $R$-선형이고
+임의의 직합과 가환함을 이미 알고 있다. 사상
+$\text{pr}_2 : X \times_R Y \to Y$는 아핀이므로(사상의 보조정리
+\ref{morphisms-lemma-base-change-affine}), 함자 $\text{pr}_{2, *}$는
+완전이다. 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-relative-affine-vanishing}을 보라. 따라서 $F$도
+우완전이다. 다시 말해 $F$는 (1)에서와 같다.
+
+\medskip\noindent
+$F$가 (1)에서와 같다고 하자. $X = \Spec(A)$라고 쓰자.
+준연접 $\mathcal{O}_Y$-가군 $\mathcal{G} = F(\mathcal{O}_X)$를
+생각하자. 함자 $F$는 $R$-선형 사상
+$A \to \text{End}_{\mathcal{O}_Y}(\mathcal{G})$,
+$a \mapsto F(a \cdot \text{id})$를 유도한다. 따라서 $\mathcal{G}$는
+$$
+A \otimes_R \mathcal{O}_Y = \text{pr}_{2, *}\mathcal{O}_{X \times_R Y}
+$$
+위의 가군층이다. 사상의 보조정리
+\ref{morphisms-lemma-affine-equivalence-modules}에 의하여
+$\mathcal{K}$라는 유일한 준연접 가군이 $X \times_R Y$ 위에 존재하여,
+등식 $F(\mathcal{O}_X) = \mathcal{G} = \text{pr}_{2, *}\mathcal{K}$가
+$A$와 $\mathcal{O}_Y$의 작용과 양립하도록 성립한다.
+(\ref{functors-equation-FM-QCoh})로 주어지는 함자를
+$F_\mathcal{K}$라 하자. 스킴의 보조정리
+\ref{schemes-lemma-equivalence-quasi-coherent}에 따라 동치
+$\text{Mod}_A \to \QCoh(\mathcal{O}_X)$가 있으며, 이는 $A$를
+$\mathcal{O}_X$로 보낸다. 따라서 보조정리
+\ref{functors-lemma-functor-on-modules}에 의하여 동형사상
+$F \cong F_\mathcal{K}$를 얻는다. 실제로 구성에 의하여
+$F(\mathcal{O}_X) \cong F_\mathcal{K}(\mathcal{O}_X)$이고 이는
+$A$-작용과 양립한다.
+
+\medskip\noindent
+이는 $\mathcal{K}$를 $F_\mathcal{K}$로 보내는 함자가 본질적으로
+전사임을 보인다. 충실충만성의 검증은 생략한다.
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-affine-morphism}
+아래에서는 아핀 사상 $h : T \to S$에 대하여
+$h_*\mathcal{G} \otimes_{\mathcal{O}_S} \mathcal{H} =
+h_*(\mathcal{G} \otimes_{\mathcal{O}_T} h^*\mathcal{H})$라는 사실을
+사용하겠다. 여기서 $\mathcal{G} \in \QCoh(\mathcal{O}_T)$이고
+$\mathcal{H} \in \QCoh(\mathcal{O}_S)$이다. 이는 대수로 옮기면
+즉시 따른다.
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-functor-quasi-coherent-from-affine-compose}
+보조정리 \ref{functors-lemma-functor-quasi-coherent-from-affine}에서 $F$에
+대응하는 $\mathcal{K}$가 $\QCoh(\mathcal{O}_{X \times_R Y})$에
+속한다고 하자.
+그러면 다음이 성립한다.
+\begin{enumerate}
+\item $f : X' \to X$가 아핀 사상이면 $F \circ f_*$는
+$(f \times \text{id}_Y)^*\mathcal{K}$에 대응한다.
+\item $g : Y' \to Y$가 평탄 사상이면 $g^* \circ F$는
+$(\text{id}_X \times g)^*\mathcal{K}$에 대응한다.
+\item $j : V \to Y$가 열린 몰입이면 $j^* \circ F$는
+$\mathcal{K}|_{X \times_R V}$에 대응한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 증명하자. 가환 그림
+$$
+\xymatrix{
+X' \times_R Y \ar[rrd]^{\text{pr}'_2} \ar[rd]_{f \times \text{id}_Y}
+\ar[dd]_{\text{pr}'_1} \\
+& X \times_R Y \ar[r]_{\text{pr}_2} \ar[d]_{\text{pr}_1} & Y \\
+X' \ar[r]^f & X
+}
+$$
+을 생각하자. $\mathcal{F}'$을 $X'$ 위의 준연접 가군이라 하자. 그러면
+\begin{align*}
+\text{pr}_{2, *}(\text{pr}_1^*f_*\mathcal{F}'
+\otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K})
+& =
+\text{pr}_{2, *}((f \times \text{id}_Y)_*
+(\text{pr}'_1)^*\mathcal{F}'
+\otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K}) \\
+& =
+\text{pr}_{2, *}(f \times \text{id}_Y)_*
+\left((\text{pr}'_1)^*\mathcal{F}'
+\otimes_{\mathcal{O}_{X' \times_R Y}}
+(f \times \text{id}_Y)^*\mathcal{K})\right)  \\
+& =
+\text{pr}'_{2, *}((\text{pr}'_1)^*\mathcal{F}'
+\otimes_{\mathcal{O}_{X' \times_R Y}} (f \times \text{id}_Y)^*\mathcal{K})
+\end{align*}
+이다. 첫 번째 등식은 그림의 왼쪽 사각형에 대한 아핀 밑변환이다.
+스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-affine-base-change}를 보라. 두 번째 등식은 주해
+\ref{functors-remark-affine-morphism}에 의하여 성립한다. 세 번째 등식은 가군의
+직접상의 함자성이다. 이로써 (1)이 증명된다.
+
+\medskip\noindent
+(2)를 증명하자. 가환 그림
+$$
+\xymatrix{
+X \times_R Y' \ar[rr]_-{\text{pr}'_2} \ar[rd]^{\text{id}_X \times g}
+\ar[rdd]_{\text{pr}'_1} & & Y' \ar[d]^g \\
+& X \times_R Y \ar[r]_-{\text{pr}_2} \ar[d]^{\text{pr}_1} & Y \\
+& X
+}
+$$
+을 생각하자. 다음 등식들이 성립한다.
+\begin{align*}
+g^*\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K})
+& =
+\text{pr}'_{2, *}(
+(\text{id}_X \times g)^*(
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K})) \\
+& =
+\text{pr}'_{2, *}((\text{pr}'_1)^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_R Y'}}
+(\text{id}_X \times g)^*\mathcal{K})
+\end{align*}
+첫 번째 등식은 그림의 사각형에 대한 평탄 밑변환이다. 스킴의 코호몰로지의
+보조정리 \ref{coherent-lemma-flat-base-change-cohomology}를 보라.
+두 번째 등식은 당김의 함자성과 텐서곱의 당김이 당김들의 텐서곱이라는
+사실에서 따른다.
+
+\medskip\noindent
+(3)은 (2)의 특수한 경우이다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre}
+$R$을 환이라 하자. $X$와 $Y$를 $R$ 위의 스킴이라 하자. $X$가
+준콤팩트이고 대각선이 아핀이라고 가정하자.
+$F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$를 임의의 직합과
+가환하는 $R$-선형 우완전 함자라 하자. 그러면 다음을 구성할 수 있다.
+\begin{enumerate}
+\item 준연접 가군 $\mathcal{K}$; 이는 $X \times_R Y$ 위에 있다.
+\item 자연 변환 $t : F \to F_\mathcal{K}$; 여기서 $F_\mathcal{K}$는
+(\ref{functors-equation-FM-QCoh})의 함자를 나타낸다.
+\end{enumerate}
+더욱이 $t : F \circ f_* \to F_\mathcal{K} \circ f_*$는 원천이
+아핀 스킴인 모든 사상 $f : X' \to X$에 대하여 동형사상이다.
+\end{lemma}
+
+\begin{proof}
+사상 $f' : X' \to X$를 생각하되 $X'$가 아핀이라고 하자. $X$의 대각선이
+아핀이므로 $f'$도 아핀 사상이다(사상의 보조정리
+\ref{morphisms-lemma-affine-permanence}). 따라서
+$f'_* : \QCoh(\mathcal{O}_{X'}) \to \QCoh(\mathcal{O}_X)$는
+$R$-선형 완전 함자이며(스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-relative-affine-vanishing}) 직합과 가환한다
+(스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-colimit-cohomology}). 그러므로 $F \circ f'_*$는
+임의의 직합과 가환하는 $R$-선형 우완전 함자이다. 따라서 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine}에 의하여
+$F \circ f'_* = F_{\mathcal{K}'}$이다. 여기서 $\mathcal{K}'$은
+$X' \times_R Y$ 위의 어떤 준연접 가군이다. 더 나아가 사상
+$f'' : X'' \to X'$이 주어지고 $X''$가 아핀이면, 이미 제시한
+참고 결과와 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine-compose}를 결합하여
+정준 식별
+$(f'' \times \text{id}_Y)^*\mathcal{K}' = \mathcal{K}''$을 얻는다.
+또 다른 사상 $f''' : X''' \to X''$이 주어질 때 이 식별들은 코사이클
+조건을 만족한다. 그 구체적인 서술은 독자에게 맡긴다.
+
+\medskip\noindent
+유한 아핀 열린 덮개 $X = \bigcup_{i = 1, \ldots, n} U_i$를 택하자.
+$X$의 대각선이 아핀이므로 교집합
+$U_{i_0 \ldots i_p} = U_{i_0} \cap \ldots \cap U_{i_p}$는 아핀이다.
+위와 같이 포함 사상
+$j_{i_0 \ldots i_p} : U_{i_0 \ldots i_p} \to X$는 아핀이다.
+준연접 가군 $\mathcal{K}_{i_0 \ldots i_p}$를
+$U_{i_0 \ldots i_p} \times_R Y$ 위에서 위에서처럼
+$F \circ j_{i_0 \ldots i_p *}$에 대응하도록 잡자. 위의 구성에서
+통상적인 붙이기
+양립 조건을 만족하는 식별
+$$
+\mathcal{K}_{i_0 \ldots i_p} =
+\mathcal{K}_{i_0 \ldots \hat i_j \ldots i_p}|_{U_{i_0 \ldots i_p} \times_R Y}
+$$
+을 얻는다. 다시 말해 유일한 준연접 가군 $\mathcal{K}$가 존재하며,
+이는 $X \times_R Y$ 위에 있다. $U_{i_0 \ldots i_p} \times_R Y$에 대한
+그 제한은 표시한 식별과 양립하는 $\mathcal{K}_{i_0 \ldots i_p}$이다.
+
+\medskip\noindent
+이제 변환 $t$를 구성하자. 준연접 $\mathcal{O}_X$-가군
+$\mathcal{F}$가 주어졌을 때, $\mathcal{F}_{i_0 \ldots i_p}$로
+$\mathcal{F}$의 $U_{i_0 \ldots i_p}$에 대한 제한을 나타내고,
+$(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0 \ldots i_p}$로
+$\text{pr}_1^*\mathcal{F} \otimes \mathcal{K}$의
+$U_{i_0 \ldots i_p} \times_R Y$에 대한 제한을 나타내자.
+다음을 관찰하라.
+\begin{align*}
+F(j_{i_0 \ldots i_p *}\mathcal{F}_{i_0 \ldots i_p})
+& =
+\text{pr}_{i_0 \ldots i_p, 2, *}(
+\text{pr}_{i_0 \ldots i_p, 1}^*\mathcal{F}_{i_0 \ldots i_p}
+\otimes \mathcal{K}_{i_0 \ldots i_p}) \\
+& =
+\text{pr}_{i_0 \ldots i_p, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0 \ldots i_p}
+\end{align*}
+여기서 $\text{pr}_{i_0 \ldots i_p, 2} :
+U_{i_0 \ldots i_p} \times_R Y \to Y$는 사영이고 다른 사영도
+마찬가지이다. 더 나아가 이 식별들은 앞 문단에서 표시한 식별들과
+양립한다. 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-separated-case-relative-cech}에서 상대적 Čech
+복합체
+$$
+\bigoplus 
+\text{pr}_{i_0, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0}
+\to
+\bigoplus 
+\text{pr}_{i_0i_1, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0i_1}
+\to
+\bigoplus 
+\text{pr}_{i_0i_1i_2, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0i_1i_2}
+\to \ldots
+$$
+가 $R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})$를
+계산한다는 사실을 상기하라. 따라서 차수 $0$의 코호몰로지 층은
+$F_\mathcal{K}(\mathcal{F})$이다. 그러므로 다음 가환 그림을 살펴보면
+원하는 사상 $t : F(\mathcal{F}) \to F_\mathcal{K}(\mathcal{F})$를
+얻는다.
+$$
+\xymatrix{
+&
+F(\mathcal{F}) \ar[r] \ar@{..>}[d] &
+\bigoplus F(j_{i_0*}\mathcal{F}_{i_0}) \ar[r] \ar[d] &
+\bigoplus F(j_{i_0i_1*}\mathcal{F}_{i_0i_1}) \ar[d] \\
+0 \ar[r] &
+F_\mathcal{K}(\mathcal{F}) \ar[r] &
+\bigoplus 
+\text{pr}_{i_0, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0}
+\ar[r] &
+\bigoplus 
+\text{pr}_{i_0i_1, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0i_1}
+}
+$$
+위 행은 $F$를 (완전) 복합체
+$0 \to \mathcal{F} \to \bigoplus j_{i_0*}\mathcal{F}_{i_0} \to
+\bigoplus j_{i_0i_1*}\mathcal{F}_{i_0i_1}$에 적용하여 얻는다
+(다만 $F$가 완전일 필요는 없으므로 위 행은 복합체일 뿐 반드시
+완전하지는 않다). 실선 수직 화살표들은 위의 식별들이다. 이로써
+점선 화살표가 원하는 대로 정의된다. 이 화살표는 $\mathcal{F}$에
+관해 함자적이다. 자세한 내용은 생략한다.
+
+\medskip\noindent
+이제 마지막 주장을 증명해야 한다. $f : X' \to X$가 보조정리의
+진술에서와 같다고 하고, 증명의 첫 문단에서 구성한
+준연접 가군 $\mathcal{K}'$은 $X' \times_R Y$ 위에 있다고 하자.
+사상 $f : X' \to X$의 상이 열린집합 $U_i$ 중 하나에 들어가면
+보조정리 \ref{functors-lemma-functor-quasi-coherent-from-affine-compose}에서
+결과가 따른다. 실제로 이 경우
+$\mathcal{K}_i = \mathcal{K}|_{U_i \times_R Y}$가 $\mathcal{K}$로
+당겨짐을 알고 있다. 일반적으로는 아핀 열린 덮개
+$X' = \bigcup U'_i$를 얻는데, 여기서 $U'_i = f^{-1}(U_i)$이다.
+동형사상 $\mathcal{K}'|_{U'_i} = f_i^*\mathcal{K}_i$를 얻으며,
+여기서 $f_i : U'_i \to U_i$는 유도된 사상이다. 이 사상들은
+동형사상 $\mathcal{K}' = f^*\mathcal{K}$로 붙이는 데 필요한
+양립 조건을 만족하므로 결론을 얻는다. 일부 세부 사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-coh-noetherian-from-affine-flat}
+보조정리 \ref{functors-lemma-functor-quasi-coherent-from-affine} 또는 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre}에서 $F$가
+완전 함자이면, 대응하는 대상 $\mathcal{K}$는
+$\QCoh(\mathcal{O}_{X \times_R Y})$에 속하며 $X$ 위에서 평탄이다.
+\end{lemma}
+
+\begin{proof}
+$X$가 아핀이라고 가정해도 되므로 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine}의 경우에 놓인다.
+보조정리 \ref{functors-lemma-functor-quasi-coherent-from-affine-compose}에 의하여
+$Y$도 아핀이라고 가정해도 된다. 아핀인 경우 진술은 주해
+\ref{functors-remark-exact-flat}으로 옮겨진다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-functor-quasi-coherent-from-affine-diagonal}
+$R$을 환이라 하자. $X$와 $Y$를 $R$ 위의 스킴이라 하자. $X$가
+준콤팩트이고 대각선이 아핀이라고 가정하자. 다음 두 범주는 동치이다.
+\begin{enumerate}
+\item 임의의 직합과 가환하는 $R$-선형 완전 함자
+$F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$의 범주,
+\item $\QCoh(\mathcal{O}_{X \times_R Y})$의 충만 부분범주로서
+다음을 만족하는 $\mathcal{K}$들로 이루어진 것.
+\begin{enumerate}
+\item $\mathcal{K}$는 $X$ 위에서 평탄이다.
+\item $\mathcal{F} \in \QCoh(\mathcal{O}_X)$에 대하여
+$R^q\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K}) = 0$이다. 여기서
+$q > 0$이다.
+\end{enumerate}
+\end{enumerate}
+이 동치는 $\mathcal{K}$를 (\ref{functors-equation-FM-QCoh})의 함자 $F$로
+보내어 주어진다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{K}$가 (2)에서와 같다고 하자. (\ref{functors-equation-FM-QCoh})의
+함자 $F$는 직합과 가환한다. (1)(a)에 의하여 가군 $\mathcal{K}$가
+$X$-평탄이므로 짧은 완전열
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$이
+주어졌을 때 짧은 완전열
+$$
+0 \to
+\text{pr}_1^*\mathcal{F}_1 \otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K} \to
+\text{pr}_1^*\mathcal{F}_2 \otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K} \to
+\text{pr}_1^*\mathcal{F}_3 \otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K} \to
+0
+$$
+을 얻는다. (2)(b)에 의하여 첫째 항 위에서 고차 직접상
+$R^1\text{pr}_{2, *}$가 영이므로
+$0 \to F(\mathcal{F}_1) \to F(\mathcal{F}_2) \to F(\mathcal{F}_3) \to 0$
+은 완전이다. 따라서 $F$는 (1)에서와 같다.
+
+\medskip\noindent
+$F$가 (1)에서와 같다고 하자. $\mathcal{K}$와
+$t : F \to F_\mathcal{K}$를 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre}에서와 같이
+잡자. 보조정리 \ref{functors-lemma-coh-noetherian-from-affine-flat}에 의하여
+$\mathcal{K}$는 $X$ 위에서 평탄이다. 증명을 끝내려면 $t$가
+동형사상임과 고차 직접상에 관한 진술을 보여야 한다. 두 주장 모두
+상대적 Čech 복합체
+$$
+\bigoplus 
+\text{pr}_{i_0, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0}
+\to
+\bigoplus 
+\text{pr}_{i_0i_1, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0i_1}
+\to
+\bigoplus 
+\text{pr}_{i_0i_1i_2, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0i_1i_2}
+\to \ldots
+$$
+가 $R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})$를
+계산한다는 사실에서 따른다. 기호와 이 사실의 이유는 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre}의 증명을
+보라. 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre}의 같은
+증명에서 이 복합체가 $F$를 복합체
+$$
+\bigoplus j_{i_0*}\mathcal{F}_{i_0} \to
+\bigoplus j_{i_0i_1*}\mathcal{F}_{i_0i_1} \to
+\bigoplus j_{i_0i_1i_2*}\mathcal{F}_{i_0i_1i_2} \to \ldots
+$$
+에 적용한 것과 같음도 보였다. 이 복합체는 차수 영을 제외하면
+완전하고, 차수 영의 코호몰로지 층은 $\mathcal{F}$이다. 따라서 $F$가
+완전 함자이므로 $F = F_\mathcal{K}$이고 (2)(b)가 성립한다.
+
+\medskip\noindent
+$F$를 $\mathcal{K}$로 보내는 구성이 함자적이고,
+$\mathcal{K}$를 (\ref{functors-equation-FM-QCoh})로 결정되는 함자
+$F_\mathcal{K}$로 보내는 함자의 준역임을 보이는 증명은 생략한다.
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-characterize-FM-QCoh}
+$R$을 환이라 하자. $X$와 $Y$를 $R$ 위의 스킴이라 하자. $X$가
+준콤팩트이고 대각선이 아핀이라고 가정하자. 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal}는 다음과 같이
+일반화할 수 있다. $X \times_R Y$ 위의 준연접 가군에 결부된 함자
+(\ref{functors-equation-FM-QCoh})는 정확히 다음 성질을 갖는 함자
+$F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$이다.
+\begin{enumerate}
+\item $F$는 $R$-선형이고 임의의 직합과 가환한다.
+\item $F \circ j_*$는 $j : U \to X$가 아핀 열린집합의 포함이면
+우완전이다.
+\item $0 \to F(\mathcal{F}) \to F(\mathcal{G}) \to F(\mathcal{H})$는
+완전열 $0 \to \mathcal{F} \to \mathcal{G} \to \mathcal{H} \to 0$이
+모든 $x \in X$에 대하여 줄기 위의 열
+$0 \to \mathcal{F}_x \to \mathcal{G}_x \to \mathcal{H}_x \to 0$을
+분할 짧은 완전열로 만들 때마다 완전이다.
+\end{enumerate}
+실제로 이 가정들은 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre}에서와 같은
+변환 $t : F \to F_\mathcal{K}$를 구성하고 그것이 동형사상임을 보이기에
+충분하다. 또한 함자 (\ref{functors-equation-FM-QCoh})는 성질 (1), (2), (3)을
+실제로 만족한다. 이 결과가 필요해지면 여기에서 주의 깊게 진술하고
+증명하겠다.
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-compose-FM-QCoh}
+$R$을 환이라 하자. $X$, $Y$, $Z$를 $R$ 위의 스킴이라 하자. $X$와
+$Y$가 준콤팩트이고 대각선이 아핀이라고 가정하자.
+$$
+F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)
+\quad\text{and}\quad
+G : \QCoh(\mathcal{O}_Y) \to \QCoh(\mathcal{O}_Z)
+$$
+를 임의의 직합과 가환하는 $R$-선형 완전 함자라 하자.
+$\mathcal{K}$를 $\QCoh(\mathcal{O}_{X \times_R Y})$의 대상으로,
+$\mathcal{L}$을 $\QCoh(\mathcal{O}_{Y \times_R Z})$의 대상으로 잡고,
+이들을 대응하는 ``핵''이라 하자. 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal}을 보라. 그러면
+$G \circ F$는 대상
+$\text{pr}_{13, *}(\text{pr}_{12}^*\mathcal{K}
+\otimes_{\mathcal{O}_{X \times_R Y \times_R Z}}
+\text{pr}_{23}^*\mathcal{L})$에 대응하며, 이 대상은
+$\QCoh(\mathcal{O}_{X \times_R Z})$에 속한다.
+\end{lemma}
+
+\begin{proof}
+$G \circ F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Z)$는
+$R$-선형이고 완전이며 임의의 직합과 가환하므로, 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal}에 의하여
+어떤 $\mathcal{M}$이 $\QCoh(\mathcal{O}_{X \times_R Z})$ 안에 존재하여
+$G \circ F$에 대응한다.
+한편
+$\mathcal{E} = \text{pr}_{13, *}(\text{pr}_{12}^*\mathcal{K}
+\otimes \text{pr}_{23}^*\mathcal{L})$로 놓자. 여기서부터 증명이 끝날
+때까지 텐서곱의 아래첨자는 생략한다. $U \subset X$와
+$W \subset Z$를 아핀 열린 부분스킴이라 하자. 보조정리를 증명하기 위해
+동형사상
+$$
+\Gamma(U \times_R W, \mathcal{E})
+\cong
+\Gamma(U \times_R W, \mathcal{M})
+$$
+을 구성하겠다. 이는 변하는 $U$와 $W$에 대한 제한 사상과 양립한다.
+
+\medskip\noindent
+먼저 구성에 의하여
+$$
+\Gamma(U \times_R W, \mathcal{E}) =
+\Gamma(U \times_R Y \times_R W,
+\text{pr}_{12}^*\mathcal{K} \otimes \text{pr}_{23}^*\mathcal{L})
+$$
+임을 관찰한다. 따라서 $\mathcal{M}$에 대해서도 같은 사실이 성립함을
+보여야 한다.
+
+\medskip\noindent
+$U = \Spec(A)$라고 쓰고 포함 사상을 $j : U \to X$라 하자.
+보조정리 \ref{functors-lemma-functor-quasi-coherent-from-affine}의 증명에서
+$\mathcal{M}$을 구성한 방식을 상기하면
+$$
+\Gamma(U \times_R W, \mathcal{M}) =
+\Gamma(W, G(F(j_*\mathcal{O}_U)))
+$$
+이며, 오른쪽의 $A$-가군 작용은 $A$가 $\mathcal{O}_U$에 작용하는 방식으로
+주어진다. $F$와 $\mathcal{K}$의 대응에 따르면
+$F(j_*\mathcal{O}_U) = b_*(a^*j_*\mathcal{O}_U \otimes \mathcal{K})$이다.
+여기서 $a : X \times_R Y \to X$와 $b : X \times_R Y \to Y$는
+사영 사상이다. $j$가 아핀 사상이므로 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-affine-base-change}에 의하여
+$a^*j_*\mathcal{O}_U =
+(j \times \text{id}_Y)_*\mathcal{O}_{U \times_R Y}$이다. 다음으로,
+예를 들어 주해 \ref{functors-remark-affine-morphism}에 의하여
+$(j \times \text{id}_Y)_*\mathcal{O}_{U \times_R Y} \otimes \mathcal{K} =
+(j \times \text{id}_Y)_*\mathcal{K}|_{U \times_R Y}$이다. 지금까지
+얻은 것을 종합하면
+$$
+F(j_*\mathcal{O}_U) =
+(U \times_R Y \to Y)_*\mathcal{K}|_{U \times_R Y}
+$$
+를 얻으며, 여기에는 자명한 $A$-작용이 있다. (이 식은 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine}의 증명에 내포되어 있다.)
+함자 $G$를 적용하면
+$$
+G(F(j_*\mathcal{O}_U)) =
+t_*(s^*((U \times_R Y \to Y)_*\mathcal{K}|_{U \times_R Y})
+\otimes \mathcal{L})
+$$
+를 얻는다. 여기서 $s : Y \times_R Z \to Y$와
+$t : Y \times_R Z \to Z$는 사영 사상이다. 이번에는 사각형
+$$
+\xymatrix{
+U \times_R Y \times_R Z \ar[r] \ar[d] & U \times_R Y \ar[d] \\
+Y \times_R Z \ar[r] & Y
+}
+$$
+에 다시 아핀 밑변환(스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-affine-base-change})을 사용하면
+$$
+s^*((U \times_R Y \to Y)_*\mathcal{K}|_{U \times_R Y}) =
+(U \times_R Y \times_R Z \to Y \times_R Z)_*
+\text{pr}_{12}^*\mathcal{K}|_{U \times_R Y \times_R Z}
+$$
+를 얻는다. 주해 \ref{functors-remark-affine-morphism}을 다시 사용하면
+\begin{align*}
+(U \times_R Y \times_R Z \to Y \times_R Z)_*
+\text{pr}_{12}^*\mathcal{K}|_{U \times_R Y \times_R Z}
+\otimes \mathcal{L} \\
+=
+(U \times_R Y \times_R Z \to Y \times_R Z)_*
+\left(\text{pr}_{12}^*\mathcal{K} \otimes
+\text{pr}_{23}^*\mathcal{L}\right)|_{U \times_R Y \times_R Z}
+\end{align*}
+이다. 여기에 함자
+$\Gamma(W, t_*(-)) = \Gamma(Y \times_R W, -)$를 적용하면
+\begin{align*}
+\Gamma(U \times_R W, \mathcal{M})
+& =
+\Gamma(W, G(F(j_*\mathcal{O}_U))) \\
+& =
+\Gamma(Y \times_R W, (U \times_R Y \times_R Z \to Y \times_R Z)_*
+(\text{pr}_{12}^*\mathcal{K} \otimes
+\text{pr}_{23}^*\mathcal{L})|_{U \times_R Y \times_R Z}) \\
+& =
+\Gamma(U \times_R Y \times_R W,
+\text{pr}_{12}^*\mathcal{K} \otimes \text{pr}_{23}^*\mathcal{L})
+\end{align*}
+을 얻어 원하는 바가 성립한다. 이 동형사상들이 제한 사상과 양립한다는
+검증은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-persistence-exactness}
+$R$, $X$, $Y$, $\mathcal{K}$가 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal}의 (2)에서와
+같다고 하자. 그러면 임의의 스킴 $T$가 $R$ 위에 있을 때
+$$
+R^q\text{pr}_{13, *}(\text{pr}_{12}^*\mathcal{F}
+\otimes_{\mathcal{O}_{T \times_R X \times_R Y}}
+\text{pr}_{23}^*\mathcal{K}) = 0
+$$
+이다. 여기서 $\mathcal{F}$는 $T \times_R X$ 위에서 준연접이고
+$q > 0$이다.
+\end{lemma}
+
+\begin{proof}
+문제는 $T$ 위에서 국소적이므로 $T$가 아핀이라고 가정해도 된다.
+이 경우 그림
+$$
+\xymatrix{
+T \times_R X \ar[d] &
+T \times_R X \times_R Y \ar[d] \ar[l] \ar[r] &
+T \times_R Y \ar[d] \\
+X &
+X \times_R Y \ar[l] \ar[r] &
+Y
+}
+$$
+을 생각할 수 있으며, 수직 화살표들은 아핀이다. 특히
+$T \times_R Y \to Y$를 따른 직접상은 충실하고 완전이다(스킴의
+코호몰로지의 보조정리
+\ref{coherent-lemma-relative-affine-vanishing}과 사상의 보조정리
+\ref{morphisms-lemma-affine-equivalence-modules}). 아핀 사상을 따른
+고차 직접상이 사라진다는 사실(위의 참고문헌을 보라)을 사용하여
+그림을 따라가면
+$$
+R^q\text{pr}_{2, *}(
+\text{pr}_{23, *}(\text{pr}_{12}^*\mathcal{F}
+\otimes_{\mathcal{O}_{T \times_R X \times_R Y}}
+\text{pr}_{23}^*\mathcal{K})) =
+R^q\text{pr}_{2, *}(
+\text{pr}_{23, *}(\text{pr}_{12}^*\mathcal{F})
+\otimes_{\mathcal{O}_{X \times_R Y}}
+\mathcal{K}))
+$$
+가 영임을 증명하면 충분함을 알 수 있다. 이는 $\mathcal{K}$에 대한
+가정에 의해 참이다. 등식은 주해 \ref{functors-remark-affine-morphism}에 의해
+성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-functor-quasi-coherent-from-separated}
+보조정리 \ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal}에서
+$F$와 $\mathcal{K}$가 대응한다고 하자. $X$가 분리이고 $R$ 위에서
+평탄이면 전사사상
+$\mathcal{O}_X \boxtimes F(\mathcal{O}_X) \to \mathcal{K}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$\Delta : X \to X \times_R X$를 대각 사상이라 하고
+$\mathcal{O}_\Delta = \Delta_*\mathcal{O}_X$로 놓자.
+$\Delta$는 닫힌 몰입이므로 짧은 완전열
+$$
+0 \to \mathcal{I} \to 
+\mathcal{O}_{X \times_R X} \to \mathcal{O}_\Delta \to 0
+$$
+이 있다. $\mathcal{K}$가 $X$ 위에서 평탄이므로 당김
+$\text{pr}_{23}^*\mathcal{K}$는 $X \times_R X \times_R Y$ 위에 놓이며
+$X \times_R X$ 위에서 평탄하다. 다음 짧은 완전열
+$$
+0 \to 
+\text{pr}_{12}^*\mathcal{I}
+\otimes
+\text{pr}_{23}^*\mathcal{K} \to
+\text{pr}_{23}^*\mathcal{K} \to
+\text{pr}_{12}^*\mathcal{O}_\Delta
+\otimes
+\text{pr}_{23}^*\mathcal{K} \to 0
+$$
+을 $X \times_R X \times_R Y$ 위에서 얻는다. 가군의 보조정리
+\ref{modules-lemma-pullback-tensor-flat-module}를 보라. 따라서 보조정리
+\ref{functors-lemma-persistence-exactness}에 의하여 전사사상
+$$
+\text{pr}_{13, *}(\text{pr}_{23}^*\mathcal{K})
+\to
+\text{pr}_{13, *}(
+\text{pr}_{12}^*\mathcal{O}_\Delta
+\otimes
+\text{pr}_{23}^*\mathcal{K})
+$$
+을 얻는다. 평탄 밑변환(스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-flat-base-change-cohomology})에 의하여 이 화살표의
+원천은
+$\text{pr}_2^*\text{pr}_{2, *}\mathcal{K}
+= \mathcal{O}_X \boxtimes F(\mathcal{O}_X)$와 같다. 한편 표적은
+$$
+\text{pr}_{13, *}(
+\text{pr}_{12}^*\mathcal{O}_\Delta
+\otimes
+\text{pr}_{23}^*\mathcal{K}) =
+\text{pr}_{13, *} (\Delta \times \text{id}_Y)_* \mathcal{K} =
+\mathcal{K}
+$$
+와 같으므로 증명이 끝난다. 첫 번째 등식은 예를 들어 코호몰로지의
+보조정리 \ref{cohomology-lemma-projection-formula-closed-immersion}과
+$\text{pr}_{12}^*\mathcal{O}_\Delta =
+(\Delta \times \text{id}_Y)_*\mathcal{O}_{X \times_R Y}$라는 사실에서
+따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{Gabriel--Rosenberg 복원}
+\label{functors-section-gabriel}
+
+\noindent
+이 절의 제목은 명제 \ref{functors-proposition-gabriel-rosenberg}과 같은 결과를
+가리킨다. Gabriel의 원 논문 \cite{Gabriel}과 더불어, 준분리 스킴에
+대한 이 결과의 증명과 관련 문헌의 논의를 담은 \cite{Brandenburg}도
+참고하라. 이 절에서는 준콤팩트 준분리 스킴에 대한 Gabriel--Rosenberg
+복원만 증명한다.
+
+\begin{lemma}
+\label{functors-lemma-categorically-compact-QCoh}
+$X$를 준콤팩트 준분리 스킴이라 하자. $\mathcal{F}$를 준연접
+$\mathcal{O}_X$-가군이라 하자. 그러면 $\mathcal{F}$가
+$\QCoh(\mathcal{O}_X)$의 범주론적 콤팩트 대상일 필요충분조건은
+$\mathcal{F}$가 유한 표시인 것이다.
+\end{lemma}
+
+\begin{proof}
+범주에서 범주론적 콤팩트 대상이라는 우리의 개념은 범주의 정의
+\ref{categories-definition-compact-object}을 보라. $\mathcal{F}$가
+유한 표시이면 가군의 보조정리
+\ref{modules-lemma-finite-presentation-quasi-compact-colimit}에 의하여
+범주론적으로 콤팩트이다. 역으로 모든 준연접 가군 $\mathcal{F}$는
+여과 여극한 $\mathcal{F} = \colim \mathcal{F}_i$로 쓸 수 있고,
+그 항들은 유한 표시(따라서 준연접) $\mathcal{O}_X$-가군이다.
+성질의 보조정리
+\ref{properties-lemma-directed-colimit-finite-presentation}을 보라.
+$\mathcal{F}$가 범주론적으로 콤팩트이면 어떤 $i$와 사상
+$\mathcal{F} \to \mathcal{F}_i$가 존재하여 주어진 사상
+$\mathcal{F}_i \to \mathcal{F}$의 오른쪽 역이 된다. 따라서
+$\mathcal{F}$는 유한 표시 가군의 직합인자이고, 그러므로 그 자체도
+유한 표시이다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-supported-on-support-pre}
+$X$를 아핀 스킴이라 하자. $\mathcal{F}$를 유한 표시
+$\mathcal{O}_X$-가군이라 하자. $\mathcal{E}$를 영이 아닌 준연접
+$\mathcal{O}_X$-가군이라 하자.
+$\text{Supp}(\mathcal{E}) \subset \text{Supp}(\mathcal{F})$이면 영이 아닌
+사상 $\mathcal{F} \to \mathcal{E}$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+진술을 대수로 옮기자. $A$를 환, $M$을 유한 표시 $A$-가군,
+$N$을 영이 아닌 $A$-가군이라 하자.
+$\text{Supp}(N) \subset \text{Supp}(M)$이라고 가정한다. 보일 것은
+$\Hom_A(M, N)$이 영이 아니라는 것이다. $N = A/I$가 순환이라고
+가정해도 된다. 즉 $N$을 임의의 영이 아닌 순환 부분가군으로 바꾼다.
+표시
+$$
+A^{\oplus m} \xrightarrow{T} A^{\oplus n} \to M \to 0
+$$
+를 택하자. $\text{Supp}(M)$은 아이디얼 $\text{Fit}_0(M)$에 의하여
+잘려 나옴을 상기하라. 이 아이디얼은 $n \times n$ 소행렬식들이
+행렬 $T$에서 생성하는 아이디얼이다.
+대수학 심화의 보조정리
+\ref{more-algebra-lemma-fitting-ideal-basics}를 보라. 이제 가정
+$\text{Supp}(N) \subset \text{Supp}(M)$은 $\text{Fit}_0(M)$의 원소들이
+$A/I$에서 멱영이라는 뜻이다. 완전열
+$$
+0 \to \Hom_A(M, A/I) \to (A/I)^{\oplus n} \xrightarrow{T^t} (A/I)^{\oplus m}
+$$
+을 생각하자. $T^t$가 단사일 수 없음을 보여야 한다. 독자가
+$\text{Fit}_0(M)$의 원소들이 $A/I$에서 멱영이라는 사실을 사용해
+직접 증명해 보기를 권한다. 다음은 우리의 증명이다.
+$\text{Fit}_0(M)$이 유한 생성이므로, 멱영성은 소멸자
+$J \subset A/I$, 즉 $\text{Fit}_0(M)$의 $A/I$ 안에서의 소멸자가
+영이 아님을 뜻한다.
+$T^t$의 비단사성을 보이기 위해 소 아이디얼에서 국소화해도 된다.
+적절한 소 아이디얼을 택하여 $A$가 국소환이고 $J$가 여전히 영이
+아니라고 가정해도 된다. 그러면 대수학 심화의 보조정리
+\ref{more-algebra-lemma-exact-length-1}에 의하여 $T^t$는 영이 아닌
+핵을 갖는다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-supported-on-support}
+$X$를 준콤팩트 준분리 스킴이라 하자. $\mathcal{F}$를 유한 표시
+$\mathcal{O}_X$-가군이라 하자. 다음 두 $\QCoh(\mathcal{O}_X)$의
+부분범주는 서로 같다.
+\begin{enumerate}
+\item 충만 부분범주 $\mathcal{A} \subset \QCoh(\mathcal{O}_X)$.
+그 대상은 지지집합이 (집합론적으로) $\text{Supp}(\mathcal{F})$에
+포함되는 준연접 가군이다.
+\item 가장 작은 Serre 부분범주
+$\mathcal{B} \subset \QCoh(\mathcal{O}_X)$. 이는 $\mathcal{F}$를
+포함하고 확장과 임의의 직합에 대해 닫혀 있다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+유한 표시 $\mathcal{O}_X$-가군은 준연접이므로 이 진술은 의미가 있다.
+$\mathcal{A}$는 확장과 직합에 대해 닫힌 Serre 부분범주이고
+$\mathcal{F}$가 $\mathcal{A}$의 대상이므로
+$\mathcal{B} \subset \mathcal{A}$이다. 따라서
+$\mathcal{A}$가 $\mathcal{B}$에 포함됨만 보이면 된다.
+
+\medskip\noindent
+$\mathcal{E}$를 $\mathcal{A}$의 대상이라 하자. 극대 부분가군
+$\mathcal{E}' \subset \mathcal{E}$가 존재하며 이는 $\mathcal{B}$에
+속한다.
+실제로 $\mathcal{E}_i \subset \mathcal{E}$, $i \in I$가
+$\mathcal{B}$의 대상인 부분대상들의 집합이라고 하자. 그러면
+$\bigoplus \mathcal{E}_i$는 $\mathcal{B}$에 속하고, 따라서
+$$
+\mathcal{E}' = \Im(\bigoplus \mathcal{E}_i \longrightarrow \mathcal{E})
+$$
+도 그러하다. 이것이 분명 우리가 찾는 극대 부분가군이다.
+
+\medskip\noindent
+이제 영이 아닌 사상 $\mathcal{G} \to \mathcal{E}/\mathcal{E}'$이
+있고, 그 정의역 $\mathcal{G}$가 $\mathcal{B}$에 속한다고 하자. 그러면
+$\mathcal{G}' = \mathcal{E} \times_{\mathcal{E}/\mathcal{E}'} \mathcal{G}$는
+$\mathcal{B}$에 속한다. 실제로 이는 $\mathcal{E}'$과 $\mathcal{G}$의
+확장이다.
+그런데 $\mathcal{G}' \to \mathcal{E}$의 상은 $\mathcal{E}'$보다
+진정으로 크므로 $\mathcal{E}'$의 극대성에 모순이다. 따라서 다음
+문단의 주장을 보이면 충분하다.
+
+\medskip\noindent
+$\mathcal{E}$를 $\mathcal{A}$의 영이 아닌 대상이라 하자.
+영이 아닌 사상 $\mathcal{G} \to \mathcal{E}$가 존재한다고 주장한다.
+여기서 $\mathcal{G}$는 $\mathcal{B}$에 속한다. 이를 최소 개수 $n$에
+관한 귀납법으로 증명한다. 이 수는 아핀 열린집합 $U_i$들이 $X$에
+속하면서 $\text{Supp}(\mathcal{E}) \subset U_1 \cup \ldots \cup U_n$이
+되게 하는 최소 개수이다.
+$U = U_n$으로 놓고 포함 사상을 $j : U \to X$라 하자.
+$\mathcal{E}' = \Im(\mathcal{E} \to j_*\mathcal{E}|_U)$로 놓자.
+핵 $\mathcal{E}''$, 즉 전사 $\mathcal{E} \to \mathcal{E}'$의 핵의
+지지집합은
+$U_1 \cup \ldots \cup U_{n - 1}$에 포함된다. 따라서
+$\mathcal{E}''$이 영이 아니면 원하는 바를 얻는다. 다시 말해
+$\mathcal{E} \subset j_*\mathcal{E}|_U$라고 가정해도 된다. 특히
+$\mathcal{E}|_U$가 영이 아님을 알 수 있다. 보조정리
+\ref{functors-lemma-supported-on-support-pre}에 의하여 영이 아닌 사상
+$\mathcal{F}|_U \to \mathcal{E}|_U$가 존재한다. 이는 사상
+$$
+\varphi : \mathcal{F} \longrightarrow j_*(\mathcal{E}|_U)
+$$
+에 대응하며, 그 제한은 $U$에서 영이 아니다.
+$\mathcal{G} = \varphi^{-1}(\mathcal{E})$로 놓으면
+결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-quotient-supported-on-closed}
+$X$를 준콤팩트 준분리 스킴이라 하자. $Z \subset X$를 여집합
+$U = X \setminus Z$가 준콤팩트인 닫힌 부분집합이라 하자.
+$\mathcal{A} \subset \QCoh(\mathcal{O}_X)$를 $Z$ 위에 지지되는 준연접
+가군들을 대상으로 하는 충만 부분범주라 하자. 그러면 제한 함자
+$\QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_U)$는 동치
+$\QCoh(\mathcal{O}_X)/\mathcal{A} \cong \QCoh(\mathcal{O}_U)$를 유도한다.
+\end{lemma}
+
+\begin{proof}
+몫 구성의 보편 성질(호몰로지의 보조정리
+\ref{homology-lemma-serre-subcategory-is-kernel})에 의하여 유도 함자
+$\QCoh(\mathcal{O}_X)/\mathcal{A} \cong \QCoh(\mathcal{O}_U)$를 분명히
+얻는다. 포함 사상을 $j : U \to X$라 하자. $j$가 준콤팩트이고
+준분리이므로 함자
+$j_* : \QCoh(\mathcal{O}_U) \to \QCoh(\mathcal{O}_X)$를 얻는다.
+이것이 준역을 정의함은 독자가 보일 수 있다. 자세한 내용은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-characterize-affine}
+$X$를 준콤팩트 준분리 스킴이라 하자. $\QCoh(\mathcal{O}_X)$가 어떤
+환 위의 가군 범주와 동치이면 $X$는 아핀이다.
+\end{lemma}
+
+\begin{proof}
+$F : \text{Mod}_R \to \QCoh(\mathcal{O}_X)$가 동치라고 하자. 그러면
+$\mathcal{F} = F(R)$은 다음 성질들을 갖는다.
+\begin{enumerate}
+\item 유한 표시 $\mathcal{O}_X$-가군이다
+(보조정리 \ref{functors-lemma-categorically-compact-QCoh}).
+\item $\Hom_X(\mathcal{F}, -)$는 완전이다.
+\item $\Hom_X(\mathcal{F}, \mathcal{F})$는 가환환이다.
+\item $\QCoh(\mathcal{O}_X)$의 모든 대상은 $\mathcal{F}$의 복사본들의
+직합의 몫이다.
+\end{enumerate}
+$x \in X$를 닫힌 점이라 하자. 전사사상
+$$
+\mathcal{O}_X \to i_*\kappa(x)
+$$
+을 생각하자. 그 표적은 $\kappa(x)$를 포함 사상 $i : x \to X$에 따라
+직접상한 것이다. 다음 등식이 성립한다.
+$$
+\Hom_X(\mathcal{F}, i_*\kappa(x)) =
+\Hom_{\mathcal{O}_{X, x}}(\mathcal{F}_x, \kappa(x))
+$$
+먼저 (4)에서 $\mathcal{F}_x$가 영이 아님이 따른다. (2)에서 모든
+사상 $\mathcal{F}_x \to \kappa(x)$가 사상
+$\mathcal{F}_x \to \mathcal{O}_{X, x}$로 올려짐을 얻는다(심지어
+대역 사상 $\mathcal{F} \to \mathcal{O}_X$로 올려진다).
+$\mathcal{F}_x$는 유한 $\mathcal{O}_{X, x}$-가군이므로 이는
+$\mathcal{F}_x$가 영이 아닌 유한 자유 $\mathcal{O}_{X, x}$-가군임을
+뜻한다. 이제 $\mathcal{F}$가 유한 표시이므로 $\mathcal{F}$는 어떤
+열린 근방, 곧 $x$의 한 열린 근방에서 양의 계수를 갖는 유한 자유 가군이다
+(가군의 보조정리 \ref{modules-lemma-finite-presentation-stalk-free}).
+$X$의 모든 닫힌 부분집합은 닫힌 점을 포함하므로(위상의 보조정리
+\ref{topology-lemma-quasi-compact-closed-point}), 이는 $\mathcal{F}$가
+양의 계수를 갖는 유한 국소 자유 가군임을 뜻한다. 마찬가지로 사상
+$$
+\Hom_X(\mathcal{F}, \mathcal{F}) \to
+\Hom_X(\mathcal{F}, i_*i^*\mathcal{F}) =
+\Hom_{\kappa(x)}(\mathcal{F}_x/\mathfrak m_x \mathcal{F}_x,
+\mathcal{F}_x/\mathfrak m_x \mathcal{F}_x)
+$$
+은 전사이다. 성질 (3)에 의하여 $\mathcal{F}_x$의 계수는 $1$이어야
+한다. 따라서 $\mathcal{F}$는 가역 $\mathcal{O}_X$-가군이다. 그러면
+함자
+$$
+\mathcal{H}
+\longmapsto
+\Gamma(X, \mathcal{H}) = \Hom_X(\mathcal{O}_X, \mathcal{H}) =
+\Hom_X(\mathcal{F}, \mathcal{H} \otimes_{\mathcal{O}_X} \mathcal{F})
+$$
+는 $\QCoh(\mathcal{O}_X)$ 위에서도 완전이라고 결론 내릴 수 있다.
+이는 첫째 $\Ext$ 군
+$$
+\Ext^1_{\QCoh(\mathcal{O}_X)}(\mathcal{O}_X, \mathcal{H}) = 0
+$$
+이 아벨 범주 $\QCoh(\mathcal{O}_X)$에서 계산될 때 모든
+$\mathcal{H}$에 대하여 사라짐을 뜻하며, 이들은 모두
+$\QCoh(\mathcal{O}_X)$에 속한다. 한편 $\QCoh(\mathcal{O}_X) \subset
+\textit{Mod}(\mathcal{O}_X)$는 확장에 대해 닫혀 있으므로(스킴의 절
+\ref{schemes-section-quasi-coherent}), 준연접 가군 사이의 $\Ext^1$을
+$\QCoh(\mathcal{O}_X)$에서 계산한 것은
+$\textit{Mod}(\mathcal{O}_X)$에서 계산한 것과 같다. 따라서
+$$
+H^1(X, \mathcal{H}) =
+\Ext^1_{\textit{Mod}(\mathcal{O}_X)}(\mathcal{O}_X, \mathcal{H}) = 0
+$$
+이다. 이는 모든 $\mathcal{H}$, 곧 $\QCoh(\mathcal{O}_X)$의 대상에
+대하여 성립한다. 예를 들어 스킴의
+코호몰로지의 보조정리
+\ref{coherent-lemma-quasi-compact-h1-zero-covering}에 의하여 이는
+$X$가 아핀임을 뜻한다.
+\end{proof}
+
+\begin{proposition}
+\label{functors-proposition-gabriel-rosenberg}
+\begin{reference}
+\cite[Theorem 1.2]{Brandenburg}의 특수한 경우
+\end{reference}
+$X$와 $Y$를 준콤팩트 준분리 스킴이라 하자. 동치
+$F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$가 주어지면,
+스킴의 동형사상 $f : Y \to X$와 가역 $\mathcal{O}_Y$-가군
+$\mathcal{L}$이 존재하여
+$F(\mathcal{F}) = f^*\mathcal{F} \otimes \mathcal{L}$이다.
+\end{proposition}
+
+\begin{proof}
+물론 $F$는 가법적이고 완전이며 모든 극한, 모든 여극한 및 직합과
+가환하는 등의 성질을 갖는다. $U \subset X$를 아핀 열린
+부분스킴이라 하자. 유한형 준연접 아이디얼 층
+$\mathcal{I} \subset \mathcal{O}_X$를 택하자. 여기서
+$Z = V(\mathcal{I})$는 $U$의 $X$ 안에서의 여집합이다. 성질의 보조정리
+\ref{properties-lemma-quasi-coherent-finite-type-ideals}를 보라.
+그러면 $\mathcal{O}_X/\mathcal{I}$는 유한 표시
+$\mathcal{O}_X$-가군이다. 따라서 보조정리
+\ref{functors-lemma-categorically-compact-QCoh}에 의하여
+$\mathcal{G} = F(\mathcal{O}_X/\mathcal{I})$는 유한 표시
+$\mathcal{O}_Y$-가군이다. $T \subset Y$를 $\mathcal{G}$의 지지집합이라
+하고 $V = Y \setminus T$로 놓자. $\mathcal{G}$가 유한 표시이므로
+$V$는 $Y$의 준콤팩트 열린 부분스킴이다. 보조정리
+\ref{functors-lemma-supported-on-support}에 의하여 $F$는 다음 두 범주 사이의
+동치를 유도한다.
+\begin{enumerate}
+\item $\QCoh(\mathcal{O}_X)$의 충만 부분범주로서 그 가군들이
+$Z$ 위에 지지되는 것,
+\item $\QCoh(\mathcal{O}_Y)$의 충만 부분범주로서 그 가군들이
+$T$ 위에 지지되는 것.
+\end{enumerate}
+보조정리 \ref{functors-lemma-quotient-supported-on-closed}에 의하여 가환 그림
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_X) \ar[r]_F \ar[d] &
+\QCoh(\mathcal{O}_Y) \ar[d] \\
+\QCoh(\mathcal{O}_U) \ar[r]^{F_U} &
+\QCoh(\mathcal{O}_V)
+}
+$$
+을 얻는다. 여기서 수직 화살표들은 제한 함자이고 수평 화살표들은
+동치이다. 보조정리 \ref{functors-lemma-characterize-affine}에 의하여 $V$는
+아핀이다. 아핀인 경우에는 보조정리
+\ref{functors-lemma-functor-equivalence}가 있다. 따라서 동형사상
+$f_U : V \to U$와 가역 $\mathcal{O}_V$-가군 $\mathcal{L}_U$가 존재하여
+$F_U$는 함자
+$\mathcal{F} \mapsto f_U^*\mathcal{F} \otimes \mathcal{L}_U$임을
+알 수 있다.
+
+\medskip\noindent
+위의 그림들이 $X$의 아핀 열린 부분스킴들의 포함에 관하여 자명한
+양립성을 만족함을 관찰하면 증명을 끝낼 수 있다. 따라서 사상 $f_U$와
+가역 가군 $\mathcal{L}_U$는 붙여진다. 자세한 내용은 생략한다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{연접 가군 범주 사이의 함자}
+\label{functors-section-functor-coherent}
+
+\noindent
+다음 보조정리는 연접 가군의 범주 사이의 함자가 주어졌을 때 준연접
+가군의 범주 사이의 함자에 관한 내용을 사용할 수 있음을 보장한다.
+
+\begin{lemma}
+\label{functors-lemma-functor-coherent}
+$X$와 $Y$를 뇌터 스킴이라 하자.
+$F : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_Y)$를
+함자라 하자. 그러면 $F$는 여과 여극한과 가환하는 함자
+$\QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$로 유일하게 확장된다.
+$F$가 가법적이면 그 확장은 임의의 직합과 가환한다. $F$가 완전,
+좌완전 또는 우완전이면 그 확장도 각각 그러하다.
+\end{lemma}
+
+\begin{proof}
+확장의 존재성과 유일성은 일반적인 사실이다. 범주의 보조정리
+\ref{categories-lemma-extend-functor-by-colim}을 보라. 이 보조정리를
+적용할 수 있음을 확인하기 위해, 연접 가군은 유한 표시이고(가군의
+보조정리 \ref{modules-lemma-coherent-finite-presentation}), 따라서
+가군의 보조정리
+\ref{modules-lemma-finite-presentation-quasi-compact-colimit}에 의하여
+$\textit{Mod}(\mathcal{O}_X)$의 범주론적 콤팩트 대상임을 관찰하라.
+마지막으로, 예를 들어 성질의 보조정리
+\ref{properties-lemma-quasi-coherent-colimit-finite-type}에 의하여 모든
+준연접 가군은 연접 가군들의 여과 여극한이다.
+
+\medskip\noindent
+$F$가 가법적이라고 가정하자.
+$\mathcal{F} = \bigoplus_{j \in J} \mathcal{H}_j$이고
+$\mathcal{H}_j$들이 준연접이면
+$\mathcal{F} = \colim_{J' \subset J\text{ finite}}
+\bigoplus_{j \in J'} \mathcal{H}_j$이다. $F$의 확장도 $F$로 나타내면
+\begin{align*}
+F(\mathcal{F})
+& =
+\colim_{J' \subset J\text{ finite}}
+F(\bigoplus\nolimits_{j \in J'} \mathcal{H}_j) \\
+& =
+\colim_{J' \subset J\text{ finite}}
+\bigoplus\nolimits_{j \in J'} F(\mathcal{H}_j) \\
+& =
+\bigoplus\nolimits_{j \in J} F(\mathcal{H}_j)
+\end{align*}
+이다. 따라서 $F$는 임의의 직합과 가환한다.
+
+\medskip\noindent
+$0 \to \mathcal{F} \to \mathcal{F}' \to \mathcal{F}'' \to 0$을 준연접
+$\mathcal{O}_X$-가군의 짧은 완전열이라 하자. 성질의 보조정리
+\ref{properties-lemma-quasi-coherent-colimit-finite-type}에 따라
+$\mathcal{F}' = \bigcup \mathcal{F}'_i$를 연접 부분가군들의 합집합으로
+쓰자. $\mathcal{F}''_i \subset \mathcal{F}''$을 상이라 하되,
+이는 $\mathcal{F}'_i$의 상으로 정하고,
+$\mathcal{F}_i = \mathcal{F} \cap \mathcal{F}'_i =
+\Ker(\mathcal{F}'_i \to \mathcal{F}''_i)$로 놓자. 그러면 분명히
+$\mathcal{F} = \bigcup \mathcal{F}_i$이고
+$\mathcal{F}'' = \bigcup \mathcal{F}''_i$이며, 짧은 완전열
+$$
+0 \to \mathcal{F}_i \to \mathcal{F}_i' \to \mathcal{F}_i'' \to 0
+$$
+을 얻는다. 확장은 여과 여극한과 가환하므로
+$F(\mathcal{F}) = \colim_{i \in I} F(\mathcal{F}_i)$,
+$F(\mathcal{F}') = \colim_{i \in I} F(\mathcal{F}'_i)$,
+$F(\mathcal{F}'') = \colim_{i \in I} F(\mathcal{F}''_i)$이다.
+여과 여극한은 완전하므로(가군의 보조정리
+\ref{modules-lemma-limits-colimits}) $F$의 완전성 성질들이 그 확장으로
+계승된다고 결론 내린다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-equivalence-coherent}
+$X$와 $Y$를 뇌터 스킴이라 하자. 범주의 동치
+$F : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_Y)$가
+주어지면, 동형사상 $f : Y \to X$와 가역 $\mathcal{O}_Y$-가군
+$\mathcal{L}$이 존재하여
+$F(\mathcal{F}) = f^*\mathcal{F} \otimes \mathcal{L}$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{functors-lemma-functor-coherent}에 의하여 유일한 함자
+$F' : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$를 얻으며, 이는
+$F$를 확장한다.
+$F$의 준역도 마찬가지이고, 유일성에 의하여 $F'$가 동치라고
+결론 내린다. 명제 \ref{functors-proposition-gabriel-rosenberg}에 의하여
+동형사상 $f : Y \to X$와 가역 $\mathcal{O}_Y$-가군 $\mathcal{L}$이
+존재하여
+$F'(\mathcal{F}) = f^*\mathcal{F} \otimes \mathcal{L}$이다.
+그러면 같은 $f$와 $\mathcal{L}$이 $F$에도 적용된다.
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-equivalence-coherent-linear}
+보조정리 \ref{functors-lemma-equivalence-coherent}에서 $X$와 $Y$가 공통 밑환
+$R$ 위에 정의되고 $F$가 $R$-선형이면, 동형사상 $f$는 $R$ 위의
+스킴 사상이다.
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-characterize-finite}
+$f : V \to X$를 뇌터 스킴의 준유한 분리 사상이라 하자. 연접
+$\mathcal{O}_V$-가군 $\mathcal{K}$가 존재하고 그 지지집합이 $V$이며,
+$f_*\mathcal{K}$가 연접이고 $R^qf_*\mathcal{K} = 0$이면 $f$는
+유한이다.
+\end{lemma}
+
+\begin{proof}
+Zariski의 주정리에 의하여 열린 몰입 $j : V \to Y$를 찾을 수 있는데,
+이는 $X$ 위에 있고 $\pi : Y \to X$는 유한이다. 사상 심화의 보조정리
+\ref{more-morphisms-lemma-quasi-finite-separated-pass-through-finite}를
+보라. $\pi$가 아핀이므로 함자 $\pi_*$는 연접
+$\mathcal{O}_X$-가군의 범주에서 완전하고 충실하다. 따라서
+$j_*\mathcal{K}$가 연접이고 $R^qj_*\mathcal{K}$가 영임을 알 수 있다.
+여기서 $q > 0$이다. 다시 말해 다음 문단에서
+논의하는 경우로 환원된다.
+
+\medskip\noindent
+$f$가 열린 몰입이라고 가정하자. $X$를 $V$의 스킴론적 폐포로
+바꾸어도 된다. 모순을 얻기 위해 $X \setminus V$가 공집합이 아니라고
+가정하자. 일반점 $\xi \in X \setminus V$를 택하되, 이는
+$X \setminus V$의 한 기약 성분의 일반점으로 택한다. 평탄 밑변환과
+국소 코호몰로지의
+보조정리
+\ref{local-cohomology-lemma-finiteness-pushforwards-and-H1-local}을
+사용하여 $\Spec(\mathcal{O}_{X, \xi}) \to X$로 밑변환한 뒤의 상황을
+살펴보면, 다음 문단에서 논의하는 대수 문제로 환원된다.
+
+\medskip\noindent
+$(A, \mathfrak m)$을 뇌터 국소환이라 하자. $M$을 유한 $A$-가군이라
+하고 그 지지집합이 $\Spec(A)$이라고 하자. 그러면
+$H^i_\mathfrak m(M) \not = 0$이며, 이는 어떤 $i$에 대하여 성립한다.
+이는 쌍대화 복합체의 보조정리
+\ref{dualizing-lemma-depth}와, $M$이 영이 아니므로 깊이가 유한이라는
+사실에서 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리는 $k$가 뇌터 환이고 $X$가 $k$ 위에서 평탄인 경우로
+일반화할 수 있다(다른 모든 가정은 그대로 둔다).
+
+\begin{lemma}
+\label{functors-lemma-functor-coherent-over-field}
+$k$를 체라 하자. $X$, $Y$를 $k$ 위의 유한형 스킴이라 하고 $X$가
+분리라고 하자. 다음 두 범주는 동치이다.
+\begin{enumerate}
+\item $k$-선형 완전 함자
+$F : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_Y)$의 범주,
+\item 연접 $\mathcal{O}_{X \times Y}$-가군 $\mathcal{K}$의 범주.
+여기서 이 가군은 $X$ 위에서 평탄이고 그 지지집합은 $Y$ 위에서
+유한이다.
+\end{enumerate}
+이 동치는 $\mathcal{K}$를 (\ref{functors-equation-FM-QCoh})의 함자를
+$\textit{Coh}(\mathcal{O}_X)$에 제한한 것으로 보내어 주어진다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{K}$가 (2)에서와 같다고 하자. 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal}에 의하여
+(\ref{functors-equation-FM-QCoh})로 주어진 함자 $F$는 완전하고 $k$-선형이다.
+더 나아가, 예를 들어 스킴의 코호몰로지의 보조정리
+\ref{coherent-lemma-support-proper-over-base-pushforward}에 의하여
+$F$는 $\textit{Coh}(\mathcal{O}_X)$를
+$\textit{Coh}(\mathcal{O}_Y)$ 안으로 보낸다.
+
+\medskip\noindent
+이 구성의 준역을 만들자. $F$가 (1)에서와 같다고 하자. 보조정리
+\ref{functors-lemma-functor-coherent}에 의하여 $F$를 준연접 가군의 범주 위의
+임의의 직합과 가환하는 $k$-선형 완전 함자로 확장할 수 있다.
+보조정리 \ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal}에 의하여
+이 확장에 대응하는 유일한 준연접 가군 $\mathcal{K}$가 존재하며,
+이 가군은 $X$ 위에서 평탄이고
+$R^q\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times Y}} \mathcal{K}) = 0$이다.
+여기서 $q > 0$이고, 이는 모든 준연접 $\mathcal{O}_X$-가군
+$\mathcal{F}$에 대하여 성립한다.
+$F(\mathcal{O}_X)$가 연접 $\mathcal{O}_Y$-가군이므로 보조정리
+\ref{functors-lemma-functor-quasi-coherent-from-separated}에 의하여
+$\mathcal{K}$가 연접이라고 결론 내린다.
+
+\medskip\noindent
+닫힌 점 $x \in X$에 대하여 마천루 층 $\mathcal{O}_x$를 나타내자.
+이는 $x$에서 값이 $x$의 잉여체인 층이다. 다음 등식이 성립한다.
+$$
+F(\mathcal{O}_x) =
+\text{pr}_{2, *}(\text{pr}_1^*\mathcal{O}_x \otimes \mathcal{K}) =
+(x \times Y \to Y)_*(\mathcal{K}|_{x \times Y})
+$$
+$x \times Y \to Y$가 유한이므로 이 사상을 따른 직접상은 충실하다.
+따라서 $y \in Y$가 $\mathcal{K}|_{x \times Y}$의 지지집합의 상에
+속하면 $y$는 $F(\mathcal{O}_x)$의 지지집합에 속한다.
+
+\medskip\noindent
+$Z \subset X \times Y$를 스킴론적 지지집합 $Z$라 하자. 이는
+$\mathcal{K}$의 스킴론적 지지집합이다.
+사상의 정의 \ref{morphisms-definition-scheme-theoretic-support}를 보라.
+먼저 닫힌 점 위의 올들이 유한임을 보여 $Z \to Y$가 준유한임을
+증명하자. 실제로 $Z \to Y$의 닫힌 점 $y \in Y$ 위의 올의 차원이
+$> 0$이면, 서로 다른 닫힌 점 $x_1, x_2, \ldots$를
+$Z_y \to X$의 상에서 무한히 많이 찾을 수 있다. 전사사상
+$\mathcal{O}_X \to \bigoplus_{i = 1, \ldots, n} \mathcal{O}_{x_i}$가
+있으므로 전사사상
+$$
+F(\mathcal{O}_X) \to \bigoplus\nolimits_{i = 1, \ldots, n} F(\mathcal{O}_{x_i})
+$$
+을 얻는다. 위에서 말한 바에 따라 점 $y$는 각 연접 가군
+$F(\mathcal{O}_{x_i})$의 지지집합에 속한다. $F(\mathcal{O}_X)$가
+연접 가군이므로, $F(\mathcal{O}_X)$의 $y$에서의 줄기는 $< n$개의
+원소로 생성되어 모순이 된다. 여기서 $n$은 충분히 크게 잡는다.
+따라서 $Z \to Y$는 준유한이다. $\text{pr}_{2, *}\mathcal{K}$가
+연접이고 $R^q\text{pr}_{2, *}\mathcal{K} = 0$이며 $q > 0$이므로,
+보조정리
+\ref{functors-lemma-characterize-finite}에 의하여 $Z \to Y$는 유한이다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-pushforward-invertible-pre}
+$f : X \to Y$를 스킴의 유한형 분리 사상이라 하자. $\mathcal{F}$를
+$X$ 위의 유한형 준연접 가군이라 하고, 그 지지집합은 $Y$ 위에서
+유한하다고 하자.
+$\mathcal{L} = f_*\mathcal{F}$가 가역 $\mathcal{O}_X$-가군이라고 하자.
+그러면 단면 $s : Y \to X$가 존재하여
+$\mathcal{F} \cong s_*\mathcal{L}$이다.
+\end{lemma}
+
+\begin{proof}
+아핀 국소적으로 보면 이는 다음 대수 문제로 옮겨진다. $A \to B$를
+환 사상이라 하고 $N$을 $B$-가군으로서 $A$-가군일 때 가역이라 하자.
+그러면 소멸자 $J$, 즉 $N$의 $B$ 안에서의 소멸자는
+$A \to B/J$가 동형사상이 되는
+성질을 갖는다. 자세한 내용은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-pushforward-invertible}
+$f : X \to Y$를 단면 $s : Y \to X$를 갖는 스킴의 유한형 분리
+사상이라 하자. $\mathcal{F}$를 $X$ 위의 유한형 준연접 가군이라 하고,
+집합론적으로 $s(Y)$ 위에 지지된다고 하자.
+$\mathcal{L} = f_*\mathcal{F}$가 가역 $\mathcal{O}_X$-가군이라고 하자.
+$Y$가 축약이면 $\mathcal{F} \cong s_*\mathcal{L}$이다.
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{functors-lemma-pushforward-invertible-pre}에 의하여 단면
+$s' : Y  \to X$가 존재하여 $\mathcal{F} = s'_*\mathcal{L}$이다.
+$s'(Y)$와 $s(Y)$는 같은 바탕 닫힌 부분집합을 가지며 둘 다 $X$의
+축약 닫힌 부분스킴이므로 서로 같아야 한다. 따라서 $s = s'$이고
+보조정리가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-equivalence-coherent-over-field}
+\begin{reference}
+준연접 가군의 범주가 스킴의 동형류를 결정한다는 \cite{Gabriel}의
+결과의 약한 형태이다.
+\end{reference}
+$k$를 체라 하자. $X$, $Y$를 $k$ 위의 유한형 스킴이라 하고 $X$가
+분리이고 $Y$가 축약이라고 하자. 범주의 $k$-선형 동치
+$F : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_Y)$가
+있으면, 동형사상 $f : Y \to X$가 존재하며 이는 $k$ 위에 있다. 또한 가역
+$\mathcal{O}_Y$-가군 $\mathcal{L}$이 존재하여
+$F(\mathcal{F}) = f^*\mathcal{F} \otimes \mathcal{L}$이다.
+\end{lemma}
+
+\begin{proof}[Gabriel--Rosenberg 복원을 사용하는 증명]
+이 보조정리는 보조정리 \ref{functors-lemma-equivalence-coherent}와 주해
+\ref{functors-remark-equivalence-coherent-linear}에서 논의한 결과의 약한
+형태이다.
+\end{proof}
+
+\begin{proof}[Gabriel--Rosenberg 복원에 의존하지 않는 증명]
+보조정리 \ref{functors-lemma-functor-coherent-over-field}에 의하여 연접
+$\mathcal{O}_{X \times Y}$-가군 $\mathcal{K}$를 얻는다. 이 가군은
+$X$ 위에서 평탄이고 지지집합이 $Y$ 위에서 유한하며, $F$는
+(\ref{functors-equation-FM-QCoh})의 함자를
+$\textit{Coh}(\mathcal{O}_X)$에 제한하여 주어진다.
+$F(\mathcal{O}_X)$가 가역 $\mathcal{O}_Y$-가군임을 보일 수 있다면
+보조정리 \ref{functors-lemma-pushforward-invertible-pre}에 의하여
+$\mathcal{K} = s_*\mathcal{L}$임을 알 수 있다. 여기서
+$s : Y \to X \times Y$는 $\text{pr}_2$의 어떤 단면이고, 가역
+$\mathcal{O}_Y$-가군은 $\mathcal{L}$이다. 그러면 $F$가 표시된 꼴,
+곧 $f = \text{pr}_1 \circ s$로 놓을 때의 꼴임을 얻는다.
+일부 세부 사항은 생략한다.
+
+\medskip\noindent
+$F(\mathcal{O}_X)$가 가역임을 보이는 일만 남았다. 증명의 개요만
+설명하고 일부 세부 사항은 생략한다. 닫힌 점 $x \in X$에 대하여
+마천루 층 $\mathcal{O}_x$, 즉 $\textit{Coh}(\mathcal{O}_X)$의 대상을
+나타내자. 이는 $x$에서 값이 $\kappa(x)$인 층이다. 먼저
+$\textit{Coh}(\mathcal{O}_X)$의 단순 대상은 이 마천루 층
+$\mathcal{O}_x$들뿐임을 관찰한다. $Y$에 대해서도 마찬가지이다.
+따라서 모든 닫힌 점 $y \in Y$에 대하여 닫힌 점 $x \in X$가 존재하여
+$\mathcal{O}_y \cong F(\mathcal{O}_x)$이다. 더 나아가 자기준동형을
+살펴보면 $\kappa(x) \cong \kappa(y)$임을 알 수 있다. 이는 $k$의
+유한 확대체로서의 동형사상이다. 그러면
+$$
+\Hom_Y(F(\mathcal{O}_X), \mathcal{O}_y) \cong
+\Hom_Y(F(\mathcal{O}_X), F(\mathcal{O}_x)) \cong
+\Hom_X(\mathcal{O}_X, \mathcal{O}_x) \cong \kappa(x) \cong \kappa(y)
+$$
+이다. 이는 연접 $\mathcal{O}_Y$-가군 $F(\mathcal{O}_X)$의
+$y \in Y$에서의 줄기가 $1$개의 생성원으로 생성될 수 있고 그보다
+적게는 생성될 수 없음을 뜻하며, 모든 닫힌 점 $y \in Y$에 대하여
+성립한다. 따라서 $F(\mathcal{O}_X)$는 국소적으로 $1$개의 원소로
+생성되며 그보다 적게는 생성되지 않는다. $Y$가 축약이므로 이는
+실제로 가역 가군임을 뜻한다.
+\end{proof}

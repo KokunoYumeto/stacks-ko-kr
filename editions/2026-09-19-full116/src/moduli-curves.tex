@@ -1,0 +1,3197 @@
+% Generated mechanically from frozen input p12/ko/moduli-curves.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{108}
+\chapter{곡선의 모듈라이}
+
+
+\phantomsection
+\label{moduli-curves-section-phantom}
+
+
+
+
+
+\section{서론}
+\label{moduli-curves-section-introduction}
+
+\noindent
+이 장에서는 잘 알려진 몇몇 곡선의 모듈라이 스택을 다룬다.
+참고문헌으로는 Deligne과 Mumford의 유명한 논문 \cite{DM}이 있다.
+
+
+
+
+\section{규약과 용어의 관용적 사용}
+\label{moduli-curves-section-conventions}
+
+\noindent
+『스택의 성질』의 절
+\ref{stacks-properties-section-conventions}에서 도입한 규약과
+용어의 관용적 사용을 계속 따른다.
+달리 언급하지 않는 한 바탕 스킴은 $\Spec(\mathbf{Z})$이다.
+
+
+
+
+
+
+
+\section{곡선의 스택}
+\label{moduli-curves-section-stack-curves}
+
+\noindent
+이 절은 『몫』의 절 \ref{quot-section-curves}에 이어지는 내용이다.
+$\Curvesstack$을, 스킴 $S$ 위의 절단 범주가 $S$ 위의 곡선족들의
+범주인 스택이라 하자.
+여기서 {\it 곡선족}은 $X$가 대수공간(!)이고 $f$가 평탄하고,
+고유하고, 유한 표시이며, 상대 차원이 $\leq 1$인 사상
+$f : X \to S$임을 기억하는 것이 다소 중요하다.
+우리는 이미 $\Curvesstack$이 $\mathbf{Z}$ 위의 대수적 스택임을 안다.
+『몫』의 정리 \ref{quot-theorem-curves-algebraic}을 보라.
+스택의 정의에서 대수공간을 허용하지 않았다면 이 정리는 거짓이 된다.
+
+\medskip\noindent
+흔히 밑변환은 아래첨자로 나타내지만, $\Curvesstack_S$는 이미
+$S$ 위의 섬유 범주를 뜻하는 표기이므로 $\Curvesstack$에는 이 표기를
+쓸 수 없다. 이 때문에 『몫』의 주석
+\ref{quot-remark-curves-base-change}에서는 대수공간 $B$로의 밑변환을
+$$
+B\text{-}\Curvesstack = \Curvesstack \times B
+$$
+와 같이 $B\text{-}\Curvesstack$으로 썼다. 오른쪽 곱은 최종 대상,
+즉 $\Spec(\mathbf{Z})$ 위에서 취한 것이다. 왼쪽 대상은 $B$ 위의
+스킴들의 범주에서 곡선족을 분류하는 스택이다. 특히 $k$가 체이면
+$$
+k\text{-}\Curvesstack = \Curvesstack \times \Spec(k)
+$$
+는 $k$ 위의 스킴들의 범주에서 곡선족을 분류하는 모듈라이 스택이다.
+계속하기 전에 다음과 같이 타당성을 점검해 보자.
+
+\begin{lemma}
+\label{moduli-curves-lemma-extend-curves-to-spaces}
+$T \to B$를 대수공간의 사상이라 하자. 범주
+$$
+\Mor_B(T, B\text{-}\Curvesstack) = \Mor(T, \Curvesstack)
+$$
+는 $T$ 위의 곡선족들의 범주이다.
+\end{lemma}
+
+\begin{proof}
+$T$ 위의 곡선족은 평탄하고, 고유하고, 유한 표시이며, 상대 차원이
+$\leq 1$인 대수공간의 사상 $f : X \to T$이다(『대수공간의 사상』의
+정의 \ref{spaces-morphisms-definition-relative-dimension}).
+이는 바탕 $T$가 대수공간이어도 된다는 점만 빼면 『몫』의 상황
+\ref{quot-situation-curves}에 있는 정의와 정확히 같다.
+대수적 스택과 대수공간에 대한 기본 바탕 범주는 스킴의 범주이므로,
+이 보조정리는 정의만으로 즉시 따라오지는 않는다. 그렇기는 하지만
+독자에게 이 증명은 건너뛰기를 권한다.
+
+\medskip\noindent
+위에서 준 $B\text{-}\Curvesstack$의 곱 표현에 의해 절대적인 경우만
+증명하면 충분하다. 스킴 $U$와 전사 에탈 사상 $p : U \to T$를 택하자.
+사영 $s, t : R \to U$를 갖는 $R = U \times_T U$라 두자.
+
+\medskip\noindent
+$v : T \to \Curvesstack$을 사상이라 하자. 그러면 $v \circ p$는
+곡선족 $X_U \to U$에 대응한다. 표준 $2$-사상
+$v \circ p \circ t \to v \circ p \circ s$는 동형사상
+$\varphi : X_U \times_{U, s} R \to X_U \times_{U, t} R$이다.
+이 동형사상은 $R \times_{s, t} R$ 위에서 코사이클 조건을 만족한다.
+『부트스트랩』의 보조정리
+\ref{bootstrap-lemma-descend-algebraic-space}에 의해, $U$로의 당김이
+$\varphi$와 양립하는 $X_U$와 같은 대수공간의 사상 $X \to T$를 얻는다.
+$\{U \to T\}$가 에탈 덮개이므로 『대수공간에서의 내림』의 보조정리
+\ref{spaces-descent-lemma-descending-property-flat},
+\ref{spaces-descent-lemma-descending-property-proper},
+\ref{spaces-descent-lemma-descending-property-finite-presentation}에 의해
+$X \to T$는 평탄하고, 고유하고, 유한 표시이다.
+또한 상대 차원이 $\leq 1$이라는 것은 에탈 국소 성질이므로
+$X \to T$도 이 조건을 만족한다. 따라서 $X \to T$는
+$T$ 위의 곡선족이다.
+
+\medskip\noindent
+거꾸로 $X \to T$를 곡선족이라 하자. 그러면 밑변환 $X_U$는
+사상 $w : U \to \Curvesstack$을 정하고, 표준 동형사상
+$X_U \times_{U, s} R \to X_U \times_{U, t} R$는 코사이클 조건을
+만족하는 $2$-화살표 $w \circ s \to w \circ t$를 정한다.
+따라서 몫 $[U/R]$의 보편 성질에 의해 사상
+$v : T = [U/R] \to \Curvesstack$을 얻는다. 『대수공간의 준군』의
+보조정리 \ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer}를 보라.
+(사실 이 경우에는 용어를 관용적으로 사용하기 이전으로 돌아가서,
+사상 $T \to \Curvesstack$인 함자 $\Sch/T \to \Curvesstack$을 직접
+구성하는 편이 훨씬 쉽다.)
+
+\medskip\noindent
+위의 구성들이 대상 사이의 사상으로 확장되며 서로 준역임을 확인하는
+과정은 생략한다.
+\end{proof}
+
+
+
+
+\section{편극 곡선의 스택}
+\label{moduli-curves-section-polarized-curves}
+
+\noindent
+이 절에서는 『몫』의 주석
+\ref{quot-remark-alternative-approach-curves}에서 논의한 내용 일부를
+상세히 전개한다. 다음 $2$-섬유곱을 생각하자.
+$$
+\xymatrix{
+\Curvesstack \times_{\Spacesstack'_{fp, flat, proper}}
+\Polarizedstack \ar[r] \ar[d] &
+\Polarizedstack \ar[d] \\
+\Curvesstack \ar[r] &
+\Spacesstack'_{fp, flat, proper}
+}
+$$
+이 $2$-섬유곱을
+$$
+\textit{PolarizedCurves} =
+\Curvesstack
+\times_{\Spacesstack'_{fp, flat, proper}}
+\Polarizedstack
+$$
+로 나타낸다. 이 섬유곱은 편극 곡선, 즉 상대적으로 풍부한 가역층을
+갖춘 곡선족을 매개화한다. 더 정확히 말해
+$\textit{PolarizedCurves}$의 대상은 다음 조건을 만족하는 쌍
+$(X \to S, \mathcal{L})$이다.
+\begin{enumerate}
+\item $X \to S$는 고유하고, 평탄하고, 유한 표시이며, 상대 차원이
+$\leq 1$인 스킴의 사상이고,
+\item $\mathcal{L}$은 $X/S$ 위에서 상대적으로 풍부한 가역
+$\mathcal{O}_X$-모듈이다.
+\end{enumerate}
+$\textit{PolarizedCurves}$의 대상들 사이의 사상
+$(X' \to S', \mathcal{L}') \to (X \to S, \mathcal{L})$은
+삼중항 $(f, g, \varphi)$로 주어진다. 여기서 $f : X' \to X$와
+$g : S' \to S$는 가환 도식
+$$
+\xymatrix{
+X' \ar[d] \ar[r]_f & X \ar[d] \\
+S' \ar[r]^g & S
+}
+$$
+에 들어가는 스킴의 사상들이며, 이 도식은 동형사상
+$X' \to S' \times_S X$를 유도한다. 다시 말해 이 도식은
+카르테시안이다. 또한 $\varphi : f^*\mathcal{L} \to \mathcal{L}'$는
+동형사상이다. 합성은 자명한 방식으로 정의한다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-polarized-curves-in-polarized}
+사상
+$\textit{PolarizedCurves} \to
+\Polarizedstack$은 열린 동시에 닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+이는 $1$-사상
+$\Curvesstack \to \Spacesstack'_{fp, flat, proper}$이
+열린 동시에 닫힌 몰입으로 표현가능하기 때문이다. 『몫』의 보조정리
+\ref{quot-lemma-curves-open-and-closed-in-spaces}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-polarized-curves-over-curves}
+사상
+$\textit{PolarizedCurves} \to \Curvesstack$은
+매끄럽고 전사이다.
+\end{lemma}
+
+\begin{proof}
+전사성. $k$를 체라 하고, $X$를 $k$ 위의 차원이 $\leq 1$인 고유
+대수공간, 즉 $k$ 위의 $\Curvesstack$의 대상이라 하자.
+『체 위의 대수공간』의 보조정리
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus}에 의해
+대수공간 $X$는 스킴이다. 따라서 $X$는 $k$ 위의 차원이 $\leq 1$인
+고유 스킴이다. 『다양체』의 보조정리
+\ref{varieties-lemma-dim-1-proper-projective}에 의해 $X$는 $\kappa$ 위에서
+H-사영이다. 특히 $X$ 위에는 풍부한 가역 $\mathcal{O}_X$-모듈
+$\mathcal{L}$이 존재한다. 그러면 $(X, \mathcal{L})$은 $X$로 사상되는
+$k$ 위의 $\textit{PolarizedCurves}$의 대상이다.
+
+\medskip\noindent
+매끄러움. $X \to S$를 $\Curvesstack$의 대상, 즉 사상
+$S \to \Curvesstack$이라 하자. 다음이 성립함은 분명하다.
+$$
+\textit{PolarizedCurves}
+\times_{\Curvesstack} S
+\subset \Picardstack_{X/S}
+$$
+이는 $\mathcal{L}$이 $X_T/T$ 위에서 풍부한 대상
+$(T/S, \mathcal{L}/X_T)$들로 이루어진 부분스택이다.
+『대수공간에서의 내림』의 보조정리
+\ref{spaces-descent-lemma-ample-in-neighbourhood}에 의해 이는 열린
+부분스택이다. 『모듈라이 스택』의 보조정리
+\ref{moduli-lemma-pic-curves-smooth}에 의해
+$\Picardstack_{X/S} \to S$가 매끄러우므로 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-etale-locally-scheme}
+$X \to S$를 곡선족이라 하자. 그러면 $X_i = X \times_S S_i$가
+스킴이 되는 에탈 덮개 $\{S_i \to S\}$가 존재한다.
+나아가 $X_i$가 $S_i$ 위에서 H-사영이라고 가정할 수 있다.
+\end{lemma}
+
+\begin{proof}
+이는 보조정리 \ref{moduli-curves-lemma-polarized-curves-over-curves}의 즉각적인
+따름정리이다. 실제로 정의를 풀어 쓰면 이 보조정리는
+$X' = X \times_S S'$가 $X'/S'$ 위에서 풍부한 가역
+$\mathcal{O}_{X'}$-모듈 $\mathcal{L}'$을 갖도록 하는 매끄러운 전사 사상
+$S' \to S$가 있음을 준다. 그런 다음 매끄러운 덮개
+$\{S' \to S\}$를 에탈 덮개 $\{S_i \to S\}$로 세분할 수 있다.
+『사상에 관한 추가 내용』의 보조정리
+\ref{more-morphisms-lemma-etale-dominates-smooth}를 보라.
+$S_i$를 적당한 열린 덮개로 바꾸면 $X_i \to S_i$가 H-사영이라고
+가정할 수 있다. 『사상』의 보조정리
+\ref{morphisms-lemma-proper-ample-locally-projective}와
+\ref{morphisms-lemma-characterize-locally-projective}를 보라
+(이는 『사상에 관한 추가 내용』의 절
+\ref{more-morphisms-section-projective}에서도 자세히 논의한다).
+\end{proof}
+
+
+
+
+
+
+\section{곡선 스택의 성질}
+\label{moduli-curves-section-properties}
+
+\noindent
+다음 보조정리는 곡면의 모듈라이에 대해서는 참이 아니다.
+주석 \ref{moduli-curves-remark-boundedness-aut-does-not-work-surfaces}를 보라.
+
+\begin{lemma}
+\label{moduli-curves-lemma-curves-diagonal-separated-fp}
+$\Curvesstack$의 대각사상은 분리이고 유한 표시이다.
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack$이 극한을 보존하는 대수적 스택임을 상기하자.
+『몫』의 보조정리 \ref{quot-lemma-curves-limits}를 보라.
+『스택의 극한』의 보조정리
+\ref{stacks-limits-lemma-limit-preserving-diagonal}에 의해 이는
+$\Delta : \Polarizedstack \to \Polarizedstack \times \Polarizedstack$
+가 극한을 보존함을 뜻한다. 따라서 『스택의 극한』의 명제
+\ref{stacks-limits-proposition-characterize-locally-finite-presentation}에
+의해 $\Delta$는 국소 유한 표시이다.
+
+\medskip\noindent
+$\Delta$가 분리임을 증명하자. 이를 위해서는 스킴 $U$와 $U$ 위의
+$\Curvesstack$의 두 대상 $Y \to U$, $X \to U$가 주어졌을 때
+대수공간
+$$
+\mathit{Isom}_U(Y, X)
+$$
+이 분리임을 보이면 충분하다. 『모듈라이 스택』의 보조정리
+\ref{moduli-lemma-Mor-s-lfp}와
+\ref{moduli-lemma-Isom-in-Mor}에서 그 대상이 분리 대수공간임을 보았다.
+
+\medskip\noindent
+증명을 끝내기 위해 $\Delta$가 준콤팩트임을 보이자. $\Delta$가
+대수공간으로 표현가능하므로, 전사 매끄러운 사상
+$U \to \Curvesstack \times \Curvesstack$에 의한 $\Delta$의 밑변환이
+준콤팩트인지 확인하면 충분하다(예를 들어 『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-check-property-covering}를 보라).
+아핀 열린집합들의 서로소 합 $U = \coprod U_i$와 전사 매끄러운 사상
+$$
+U \longrightarrow
+\textit{PolarizedCurves} \times \textit{PolarizedCurves}
+$$
+을 택한다. 보조정리 \ref{moduli-curves-lemma-polarized-curves-over-curves}에 의해
+$\textit{PolarizedCurves} \to \Curvesstack$이 전사이고 매끄러우므로
+$U \to \Curvesstack \times \Curvesstack$도 전사이고 매끄럽다.
+$\textit{PolarizedCurves}$가 극한을 보존하므로(『Artin의 공리』의
+보조정리 \ref{artin-lemma-fibre-product-limit-preserving}와
+『몫』의 보조정리 \ref{quot-lemma-curves-limits},
+\ref{quot-lemma-polarized-limits},
+\ref{quot-lemma-spaces-limits}에 의한다),
+$\textit{PolarizedCurves} \to \Spec(\mathbf{Z})$는 국소 유한 표시이고,
+따라서 $U_i \to \Spec(\mathbf{Z})$도 국소 유한 표시이다
+(『스택의 극한』의 명제
+\ref{stacks-limits-proposition-characterize-locally-finite-presentation}와
+『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-composition-finite-presentation},
+\ref{stacks-morphisms-lemma-smooth-locally-finite-presentation}에 의한다).
+특히 $U_i$는 뇌터 아핀이다. 이로써 다음 문단에서 다루는 경우로
+귀착된다.
+
+\medskip\noindent
+이 문단에서는 뇌터 아핀 스킴 $U$와 $U$ 위의
+$\textit{PolarizedCurves}$의 두 대상 $(Y, \mathcal{N})$,
+$(X, \mathcal{L})$이 주어졌을 때 대수공간
+$$
+\mathit{Isom}_U(Y, X)
+$$
+이 준콤팩트임을 보인다. $U$의 연결성분들이 열린 동시에 닫혀 있으므로
+$U$를 이들로 바꿀 수 있다. 따라서 $U$가 연결이라고 가정한다.
+$u \in U$를 한 점이라 하자. 이 곡선족들의 힐베르트 다항식, 즉
+$$
+Q(n) = \chi(Y_u, \mathcal{N}_u^{\otimes n})
+\quad\text{그리고}\quad
+P(n) = \chi(X_u, \mathcal{L}_u^{\otimes n})
+$$
+를 각각 $Q$, $P$라 하자. 『다양체』의 보조정리
+\ref{varieties-lemma-numerical-polynomial-from-euler}를 보라.
+$U$가 연결이고 함수
+$u \mapsto \chi(Y_u, \mathcal{N}_u^{\otimes n})$와
+$u \mapsto \chi(X_u, \mathcal{L}_u^{\otimes n})$가 국소 상수이므로
+(『스킴의 유도 범주』의 보조정리
+\ref{perfect-lemma-chi-locally-constant-geometric}를 보라), $U$의 모든
+점에서 같은 힐베르트 다항식을 얻는다. $Y \times_U X$ 위에서
+$$
+\mathcal{M} = \text{pr}_1^*\mathcal{N}
+\otimes_{\mathcal{O}_{Y \times_U X}} \text{pr}_2^*\mathcal{L}
+$$
+라 두자. $U$ 위의 어떤 스킴 $T$에 대해
+$(f, \varphi) \in \mathit{Isom}_U(Y, X)(T)$가 주어지면 모든
+$t \in T$에 대해
+\begin{align*}
+\chi(Y_t, (\text{id} \times f)^*\mathcal{M}^{\otimes n})
+& =
+\chi(Y_t,
+\mathcal{N}_t^{\otimes n} \otimes_{\mathcal{O}_{Y_t}}
+f_t^*\mathcal{L}_t^{\otimes n}) \\
+& =
+n\deg(\mathcal{N}_t) + n\deg(f_t^*\mathcal{L}_t) +
+\chi(Y_t, \mathcal{O}_{Y_t}) \\
+& =
+Q(n) + n\deg(\mathcal{L}_t) \\
+& =
+Q(n) + P(n) - P(0)
+\end{align*}
+이다. 이는 고유 곡선에 대한 리만--로흐 정리, 더 정확히는
+『다양체』의 정의 \ref{varieties-definition-degree-invertible-sheaf}와
+보조정리 \ref{varieties-lemma-degree-tensor-product}, 그리고 $f_t$가
+동형사상이라는 사실에 따른다. $P'(t) = Q(t) + P(t) - P(0)$라 두면
+$$
+\mathit{Isom}_U(Y, X) =
+\mathit{Isom}_U(Y, X) \cap \mathit{Mor}^{P', \mathcal{M}}_U(Y, X)
+$$
+를 얻는다. 이 교집합은 $\mathit{Mor}_U(Y, X)$의 열린 부분공간들의
+교집합이다. 『모듈라이 스택』의 보조정리
+\ref{moduli-lemma-Isom-in-Mor}와 주석
+\ref{moduli-remark-Mor-numerical}을 보라.
+이제 $\mathit{Mor}^{P', \mathcal{M}}_U(Y, X)$는 『모듈라이 스택』의
+보조정리 \ref{moduli-lemma-Mor-qc-over-base}에 의해 $U$ 위에서 유한
+표시이므로 뇌터 대수공간이다. 따라서 그 교집합도 뇌터 대수공간이고
+증명이 끝난다.
+\end{proof}
+
+\begin{remark}
+\label{moduli-curves-remark-boundedness-aut-does-not-work-surfaces}
+보조정리 \ref{moduli-curves-lemma-curves-diagonal-separated-fp}의 증명에서 쓴
+유계성 논증은 곡면의 모듈라이에는 적용되지 않으며, 실제로 그 결과는
+틀리다. 예를 들어 체 위의 K3 곡면은 무한 이산 자기동형군을 가질 수
+있기 때문이다. 이 논증이 적용되지 않는 ``이유''는 다음과 같다.
+체 위의 사영 곡면 $S$에서, 힐베르트 다항식이 각각 $Q$, $P$인 풍부한
+가역층 $\mathcal{N}$과 $\mathcal{L}$이 주어졌을 때
+$\mathcal{N} \otimes_{\mathcal{O}_S} \mathcal{L}$의 힐베르트 다항식에는
+선험적 상계가 없다. 교차 이론의 말로 표현하면 $H_1$, $H_2$가 $S$의
+풍부한 유효 카르티에 인자일 때, 교차수 $H_1 \cdot H_2$에는
+$H_1 \cdot H_1$과 $H_2 \cdot H_2$로 주어지는 (위쪽) 상계가 없다.
+\end{remark}
+
+\begin{lemma}
+\label{moduli-curves-lemma-curves-qs-lfp}
+사상 $\Curvesstack \to \Spec(\mathbf{Z})$는 준분리이고 국소 유한
+표시이다.
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack \to \Spec(\mathbf{Z})$가 준분리인지 확인하려면 그
+대각사상이 준콤팩트이고 준분리임을 보여야 한다. 이는 보조정리
+\ref{moduli-curves-lemma-curves-diagonal-separated-fp}에서 즉시 따른다.
+$\Curvesstack \to \Spec(\mathbf{Z})$가 국소 유한 표시임을 보이려면
+$\Curvesstack$이 극한을 보존함을 보이면 충분하다. 『스택의 극한』의
+명제 \ref{stacks-limits-proposition-characterize-locally-finite-presentation}를
+보라. 이는 『몫』의 보조정리 \ref{quot-lemma-curves-limits}이다.
+\end{proof}
+\section{곡선 스택의 열린 부분스택}
+\label{moduli-curves-section-open}
+
+\noindent
+이하에서는 흔히 대수공간의 사상이 갖는 성질 $P$를 이용하여
+$\Curvesstack$의 열린 부분스택을 특징짓는다. $P$가 열린 부분스택을
+정의함을 보이려면 다음을 확인하는 것으로 충분하다.
+\begin{enumerate}
+\item[(o)] 곡선족 $f : X \to S$가 주어졌을 때,
+$f|_{f^{-1}(S')} : f^{-1}(S') \to S'$가 $P$를 만족하는 가장 큰 열린
+부분스킴 $S' \subset S$가 존재하고, $S'$의 형성이 임의의 밑변환과
+가환한다.
+\end{enumerate}
+실제로 (o)가 성립한다고 하자. 스킴 $U$와 전사 매끄러운 사상
+$m : U \to \Curvesstack$을 택하자. $R = U \times_{\Curvesstack} U$라
+두고 사영을 $t, s : R \to U$로 나타내자. $\Curvesstack = [U/R]$이
+표시임을 상기하자. 『대수적 스택』의 보조정리
+\ref{algebraic-lemma-stack-presentation}와 정의
+\ref{algebraic-definition-presentation}를 보라.
+$\Curvesstack$을 곡선의 스택으로 구성한 방식에 의해 사상 $m$은
+곡선족 $C \to U$의 분류 사상이다. 도식
+$$
+\xymatrix{
+R \ar[r]_s \ar[d]_t & U \ar[d] \\
+U \ar[r] & \Curvesstack
+}
+$$
+의 $2$-가환성은
+$C \times_{U, s} R \cong C \times_{U, t} R$임을 뜻한다
+($R$ 위의 곡선족의 동형사상이다). (o)에서처럼
+$f|_{f^{-1}(W)} : f^{-1}(W) \to W$가 $P$를 만족하는 가장 큰 열린
+부분스킴을 $W \subset U$라 하자. (o)에 의해 $W$의 형성은
+밑변환과 가환하므로, 위의 동형사상에서
+$s^{-1}(W) = t^{-1}(W)$를 얻는다. 따라서 『스택의 성질』의 보조정리
+\ref{stacks-properties-lemma-immersion-presentation}에 의해
+$W \subset U$는 열린 부분스택
+$$
+\Curvesstack^P \subset \Curvesstack
+$$
+에 대응한다.
+
+\medskip\noindent
+앞 문단의 설정을 계속 사용하자. 열린 부분스택 $\Curvesstack^P$는
+다음 두 가지 보편 성질을 갖는다고 주장한다.
+\begin{enumerate}
+\item 곡선족 $X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^P$를 통해
+인수분해된다.
+\item 사상 $X \to S$가 $P$를 만족한다.
+\end{enumerate}
+\item 체 $k$ 위의 차원이 $\leq 1$인 고유 스킴 $X$가 주어졌을 때
+다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이 $\Curvesstack^P$를 통해
+인수분해된다.
+\item 사상 $X \to \Spec(k)$가 $P$를 만족한다.
+\end{enumerate}
+\end{enumerate}
+이를 위해 $2$-섬유곱
+$$
+\xymatrix{
+T \ar[r]_p \ar[d]_q & U \ar[d] \\
+S \ar[r] & \Curvesstack
+}
+$$
+을 생각하면 된다. $T \to S$는 $U \to \Curvesstack$의
+밑변환이므로 전사이고 매끄럽다. 따라서 (o)가 주는 열린집합
+$S' \subset S$는 $T$에서의 역상으로 결정된다. 한편 (o)에 있는
+이 열린집합들이 밑변환에 불변이고, $2$-가환성에 의해
+$X \times_S T \cong C \times_U T$이므로 $T$의 열린집합으로서
+$q^{-1}(S') = p^{-1}(W)$를 얻는다. 이로부터 (1)이 즉시 따르고,
+(2)는 (1)의 특수한 경우이다.
+
+\medskip\noindent
+대수공간의 사상들이 갖는 두 성질 $P$, $Q$가 주어졌고
+$\Curvesstack^Q$가 이미 $\Curvesstack$의 열린 부분스택임을
+보였다고 하자. 그러면 완전히 같은 방법으로
+$\Curvesstack^{Q, P} \subset \Curvesstack^Q$가 열려 있음을
+증명할 수 있다. 자세한 설명은 생략한다.
+
+
+
+\section{유한 축약 자기동형군을 갖는 곡선}
+\label{moduli-curves-section-finite-aut}
+
+\noindent
+$X$를 체 $k$ 위의 차원이 $\leq 1$인 고유 스킴, 즉 $k$ 위의
+$\Curvesstack$의 대상이라 하자. 보조정리
+\ref{moduli-curves-lemma-curves-diagonal-separated-fp}에 의해 자기동형군 대수공간
+$\mathit{Aut}(X)$는 $k$ 위에서 유한형이고 분리이다.
+특히 $\mathit{Aut}(X)$는 군 스킴이다. 『대수공간의 준군에 관한
+추가 내용』의 보조정리
+\ref{spaces-more-groupoids-lemma-group-space-scheme-locally-finite-type-over-k}를
+보라. $k$의 표수가 영이면 $\mathit{Aut}(X)$는 축약이고, 나아가
+$k$ 위에서 매끄럽다(『준군』의 보조정리
+\ref{groupoids-lemma-group-scheme-characteristic-zero-smooth}).
+그러나 일반적으로는 $X$가 기하적으로 축약인 경우에도
+$\mathit{Aut}(X)$가 축약일 필요가 없다.
+
+\begin{example}[비축약 자기동형군]
+\label{moduli-curves-example-non-reduced}
+$k$를 표수가 $2$인 대수적으로 닫힌 체라 하자.
+$Y = Z = \mathbf{P}^1_k$라 두자. $\mathbf{A}^1_k$에서 서로 다른 세
+$k$-값 점 $a, b, c$를 택하자.
+$\mathbf{A}^1_k \subset \mathbf{P}^1_k = Y = Z$를 열린 부분스킴으로
+생각하면 닫힌 몰입
+$$
+T =  \Spec(k[t]/(t - a)^2) \amalg \Spec(k[t]/(t - b)^2)
+\amalg \Spec(k[t]/(t - c)^2)
+\longrightarrow
+\mathbf{P}^1_k
+$$
+을 얻는다. $X$를 도식
+$$
+\xymatrix{
+T \ar[r] \ar[d] & Y \ar[d] \\
+Z \ar[r] & X
+}
+$$
+에서의 밂이라 하자. $U \subset X$를
+$\mathbf{A}^1_k \amalg \mathbf{A}^1_k$의 상인 아핀 열린부분이라 하자.
+그러면 다음 등화 도식을 얻는다.
+$$
+\xymatrix{
+\mathcal{O}_X(U) \ar[r] &
+k[t] \times k[t] \ar@<1ex>[r] \ar@<-1ex>[r] &
+k[t]/(t - a)^2 \times k[t]/(t - b)^2 \times k[t]/(t - c)^2
+}
+$$
+쌍대수 $A = k[\epsilon]$ 위에서 이 등화 도식에는 $t$를
+$t + \epsilon$으로 보내는 자명하지 않은 자기동형사상이 있다.
+이 자기동형사상이 $A$ 위의 $X$의 자기동형사상으로 확장됨은 독자가
+확인하도록 남긴다. 한편 $k$ 위의 $X$의 자기동형군이 유한임은 쉽게
+보일 수 있다. 따라서 $\mathit{Aut}(X)$는 비축약이어야 한다.
+\end{example}
+
+\noindent
+$X$를 체 $k$ 위의 차원이 $\leq 1$인 고유 스킴, 즉 $k$ 위의
+$\Curvesstack$의 대상이라 하자. $\mathit{Aut}(X)$가 기하적으로
+축약이더라도, $X$가 매끄럽고 기하적으로 연결인 경우조차 그 차원이
+$0$일 필요는 없다.
+
+\begin{example}[양의 차원을 갖는 매끄러운 자기동형군]
+\label{moduli-curves-example-pos-dim}
+$k$를 대수적으로 닫힌 체라 하자. $X$가 종수 $0$, 각각 종수 $1$인
+매끄러운 곡선이면 그 자기동형군의 차원은 각각 $3$, $1$이다.
+실제로 종수 $0$인 경우 『대수곡선』의 명제
+\ref{curves-proposition-projective-line}에 의해
+$X \cong \mathbf{P}^1_k$이다. 함자로서
+$$
+\mathit{Aut}(\mathbf{P}^1_k) = \text{PGL}_{2, k}
+$$
+이므로 그 차원은 $3$이다. 한편 $X$의 종수가 $1$이면 사상
+$X = \underline{\Hilbfunctor}^1_{X/k} \to
+\underline{\Picardfunctor}^1_{X/k}$가 동형사상임을 알 수 있다.
+『곡선의 피카르 스킴』의 보조정리 \ref{pic-lemma-picard-pieces}와
+『대수곡선』의 정리 \ref{curves-theorem-curves-rational-maps}를 보라.
+따라서 $X$는 아벨 다양체의 구조를 갖는다
+($\underline{\Picardfunctor}^1_{X/k} \cong
+\underline{\Picardfunctor}^0_{X/k}$이기 때문이다).
+특히 $X$의 (쌍대)접다발은 자명하다(『준군』의 보조정리
+\ref{groupoids-lemma-group-scheme-module-differentials}).
+그러므로 $\dim_k H^0(X, T_X) = 1$이고, 따라서
+$\dim \mathit{Aut}(X) \leq 1$이다. 다른 한편 $X$를 군 스킴으로 보아
+얻는 평행이동들은 $\text{Aut}(X)$의 $1$차원 부분을 이루므로,
+그 차원은 실제로 $1$이다.
+\end{example}
+
+\noindent
+자기동형군이 기하적으로 축약이고 유한인 곡선들을 매개화하는
+$\Curvesstack$의 열린 부분스택이 실제로 존재한다. 정확한 명제는
+다음과 같다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-DM-curves}
+다음 성질을 갖는 열린 부분스택
+$\Curvesstack^{DM} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item $\Curvesstack^{DM} \subset \Curvesstack$은 DM인 가장 큰 열린
+부분스택이다.
+\item 곡선족 $X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{DM}$을 통해
+인수분해된다.
+\item 군 대수공간 $\mathit{Aut}_S(X)$가 $S$ 위에서 비분기이다.
+\end{enumerate}
+\item 체 $k$ 위의 차원이 $\leq 1$인 고유 스킴 $X$가 주어졌을 때
+다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이 $\Curvesstack^{DM}$을
+통해 인수분해된다.
+\item $\mathit{Aut}(X)$가 $k$ 위에서 기하적으로 축약이고 차원이
+$0$이다.
+\item $\mathit{Aut}(X) \to \Spec(k)$가 비분기이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+성질 (1)을 갖는 열린 부분스택의 존재는 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-open-DM-locus}이다.
+『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-points-DM-locus}에 의해 이 열린 부분스택의
+점들은 (3)(c)로 특징지어진다. (3)(b)와 (3)(c)의 동치는 다음 명제이다.
+체 $k$ 위에서 국소 유한형이고, 기하적으로 축약이며, 차원이 $0$인
+대수공간 $G$는 $k$ 위에서 비분기이다.
+먼저 『체 위의 대수공간』의 보조정리
+\ref{spaces-over-fields-lemma-locally-finite-type-dim-zero}에 의해 $G$는
+스킴이다. 그런 다음 $G$에서 아핀 열린집합을 택하면 이는 $k$ 위에서
+고유하므로 『다양체』의 보조정리
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections}를 적용할
+수 있다. 사소한 세부사항은 생략한다.
+
+\medskip\noindent
+(3)이 성립하므로 (2)도 참이다. 실제로 사상
+$\mathit{Aut}_S(X) \to S$는 국소 유한형이다. 따라서 『대수공간의
+사상』의 보조정리 \ref{spaces-morphisms-lemma-where-unramified}에 따라
+스킴 $S$의 점에서의 섬유를 조사함으로써
+$\mathit{Aut}_S(X) \to S$가 $\mathit{Aut}_S(X)$의 모든 점에서
+비분기인지 확인할 수 있다. 그런데 $S$의 한 점으로 밑변환한 뒤에는
+(3)(a)와 (3)(c)의 동치로 돌아간다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-in-DM-locus-vector-fields}
+$X$를 체 $k$ 위의 차원이 $\leq 1$인 고유 스킴이라 하자.
+그러면 성질 (3)(a), (b), (c)는
+$\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X) = 0$과도 동치이다.
+\end{lemma}
+
+\begin{proof}
+위의 논의에서 $G = \mathit{Aut}(X)$가 $\Spec(k)$ 위의 유한형 분리
+군 스킴임을 보았다. 여기에는 보조정리
+\ref{moduli-curves-lemma-curves-diagonal-separated-fp}와 『대수공간의 준군에 관한
+추가 내용』의 보조정리
+\ref{spaces-more-groupoids-lemma-group-space-scheme-locally-finite-type-over-k}를
+썼다. 그러면 $G$가 $k$ 위에서 비분기인 것과 $\Omega_{G/k} = 0$은
+동치이다(『사상』의 보조정리
+\ref{morphisms-lemma-unramified-omega-zero}).
+『준군』의 보조정리
+\ref{groupoids-lemma-group-scheme-module-differentials}에 의해
+$T_{G/k, e} = 0$이면 이 소멸이 성립한다. 여기서 $T_{G/k, e}$는
+항등원 $e \in G(k)$에서 $G$의 접공간이다. 『다양체』의 정의
+\ref{varieties-definition-tangent-space}와 보조정리
+\ref{varieties-lemma-tangent-space-cotangent-space}의 공식을 보라.
+$\kappa(e) = k$이므로 접공간은 $\Spec(k)$로의 제한이 $e$인 사상
+$\alpha : \Spec(k[\epsilon]) \to G = \mathit{Aut}(X)$로 정의된다.
+따라서 $\Spec(k)$로 제한했을 때 $\text{id}_X$가 되는
+$\Spec(k[\epsilon])$ 위의 다음 자기동형사상을 보이면 충분하다.
+$$
+\alpha :
+X \times_{\Spec(k)} \Spec(k[\epsilon])
+\longrightarrow
+X \times_{\Spec(k)} \Spec(k[\epsilon])
+$$
+이러한 자기동형사상을 무한소 자기동형사상이라 한다.
+
+\medskip\noindent
+$X$의 무한소 자기동형사상은 $k$ 위의 $\mathcal{O}_X$의 미분들과
+$1$-대-$1$로 대응한다. 이는 『사상에 관한 추가 내용』의 보조정리
+\ref{more-morphisms-lemma-difference-derivation}와
+\ref{more-morphisms-lemma-action-by-derivations}에서 따른다
+(역방향은 필요하지 않으므로 첫 번째 보조정리만 있으면 된다. 설명을
+위해서는 『사상에 관한 추가 내용』의 주석
+\ref{more-morphisms-remark-another-special-case}도 보라).
+이 등식을 증명하는 다른 논증은 『변형 문제』의 보조정리
+\ref{examples-defos-lemma-schemes-TI}에서 찾을 수 있다.
+\end{proof}
+
+
+
+
+
+\section{코언--매콜리 곡선}
+\label{moduli-curves-section-CM}
+
+\noindent
+코언--매콜리 ``곡선''들을 매개화하는 $\Curvesstack$의 열린
+부분스택이 존재한다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-CM-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{CM} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{CM}$을 통해
+인수분해된다.
+\item 사상 $X \to S$가 코언--매콜리이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이 $\Curvesstack^{CM}$을
+통해 인수분해된다.
+\item $X$가 코언--매콜리이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f : X \to S$를 곡선족이라 하자. 『대수공간의 사상에 관한 추가
+내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-flat-finite-presentation-CM-open}에 의해
+집합
+$$
+W = \{x \in |X| : f \text{는 다음 점에서 코언--매콜리이다: }x\}
+$$
+는 $|X|$에서 열려 있고, 이 열린집합의 형성은 임의의 밑변환과
+가환한다. $f$가 고유이므로 $S$의 부분집합
+$$
+S' = S \setminus f(|X| \setminus W)
+$$
+은 열려 있고 $X \times_S S' \to S'$는 코언--매콜리이다.
+또한 $W$에 대해 그러하므로 $S'$의 형성도 임의의 밑변환과 가환한다.
+따라서 절 \ref{moduli-curves-section-open}에서 논의한 방법으로 원하는 성질을 갖는
+열린 부분스택을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-CM-1-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{CM, 1} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{CM, 1}$을 통해
+인수분해된다.
+\item 사상 $X \to S$가 코언--매콜리이고 상대 차원이 $1$이다
+(『대수공간의 사상』의 정의
+\ref{spaces-morphisms-definition-relative-dimension}).
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{CM, 1}$을 통해 인수분해된다.
+\item $X$가 코언--매콜리이고 $X$가 차원 $1$의 등차원 스킴이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{moduli-curves-lemma-CM-curves}에 의해, 이 스택이 존재한다면
+$\Curvesstack^{CM, 1} \subset \Curvesstack^{CM}$임이 분명하다.
+$f : X \to S$를 곡선족이라 하자. $f$가 코언--매콜리 사상이라고
+가정하자.
+『대수공간의 사상에 관한 추가 내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-lfp-CM-relative-dimension}에 의해
+열린 동시에 닫힌 부분공간들로의 분해
+$$
+X = X_0 \amalg X_1
+$$
+가 있어서 $X_0 \to S$의 상대 차원은 $0$이고 $X_1 \to S$의 상대
+차원은 $1$이다. $f$가 고유이므로 $S$의 부분집합
+$$
+S' = S \setminus f(|X_0|)
+$$
+은 열려 있고 $X \times_S S' \to S'$는 코언--매콜리이며 상대 차원이
+$1$이다. 또한 위의 분해에 대해 그러하므로 $S'$의 형성은 임의의
+밑변환과 가환한다(상대 차원은 밑변환에 대해 잘 행동한다.
+『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change}를 보라).
+따라서 절 \ref{moduli-curves-section-open}에서 논의한 방법으로 원하는 성질을 갖는
+열린 부분스택을 얻는다.
+\end{proof}
+
+
+
+
+
+
+\section{주어진 종수의 곡선}
+\label{moduli-curves-section-genus}
+
+\noindent
+스택 프로젝트에서는 체 $k$ 위의 고유 $1$차원 스킴 $X$의 종수 $g$를
+$H^0(X, \mathcal{O}_X) = k$일 때에만 정의한다. 이 경우
+$g = \dim_k H^1(X, \mathcal{O}_X)$이다. 『대수곡선』의 절
+\ref{curves-section-genus}를 보라. 종수를 정의하는 데 필요한 조건들은
+열린 부분스택을 정의하고, 이 부분스택은 각 종수에 하나씩 대응하는
+열린 부분스택들의 서로소 합이다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-pre-genus-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{h0, 1} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{h0, 1}$을 통해
+인수분해된다.
+\item $f_*\mathcal{O}_X = \mathcal{O}_S$이고, 이는 임의의 밑변환
+뒤에도 성립하며, $f$의 섬유들은 차원이 $1$이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{h0, 1}$을 통해 인수분해된다.
+\item $H^0(X, \mathcal{O}_X) = k$이고 $\dim(X) = 1$이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+곡선족 $X \to S$가 주어졌을 때, 『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-jump-loci-geometric}에 의해
+$\kappa(s) = H^0(X_s, \mathcal{O}_{X_s})$가 되는 $s \in S$들의 집합은
+$S$에서 열려 있다. 또한 섬유의 차원이 $1$인 $S$의 점들의 집합은
+『대수공간의 사상에 관한 추가 내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-dimension-fibres-proper-flat}에 의해
+열려 있다. 더 나아가 $f : X \to S$가 모든 섬유의 차원이 $1$인
+곡선족이면(특히 $f$는 전사이다), 조건 (1)(b)는 모든 $s \in S$에
+대해 $\kappa(s) = H^0(X_s, \mathcal{O}_{X_s})$인 것과 동치이다.
+『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-proper-flat-h0}를 보라. 따라서 이 보조정리는
+절 \ref{moduli-curves-section-open}의 일반적인 논의에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-pre-genus-in-CM-1}
+$\Curvesstack$의 열린 부분스택으로서
+$\Curvesstack^{h0, 1} \subset \Curvesstack^{CM, 1}$이다.
+\end{lemma}
+
+\begin{proof}
+『대수곡선』의 보조정리 \ref{curves-lemma-automatic}과 보조정리
+\ref{moduli-curves-lemma-pre-genus-curves}, \ref{moduli-curves-lemma-CM-1-curves}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-genus}
+$f : X \to S$를 모든 $s \in S$에 대해
+$\kappa(s) = H^0(X_s, \mathcal{O}_{X_s})$인 곡선족이라 하자. 즉 분류
+사상 $S \to \Curvesstack$이 $\Curvesstack^{h0, 1}$을 통해
+인수분해된다고 하자(보조정리 \ref{moduli-curves-lemma-pre-genus-curves}). 그러면
+\begin{enumerate}
+\item $f_*\mathcal{O}_X = \mathcal{O}_S$이고 이는 보편적으로
+성립한다.
+\item $R^1f_*\mathcal{O}_X$는 유한 국소 자유
+$\mathcal{O}_S$-모듈이다.
+\item 임의의 사상 $h : S' \to S$에 대해 $f' : X' \to S'$가
+밑변환이면
+$h^*(R^1f_*\mathcal{O}_X) = R^1f'_*\mathcal{O}_{X'}$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-proper-flat-h0}를 적용한다. 이로써 (1)을
+증명한다. 또한 이 보조정리에 의해 $S$ 위에서 국소적으로
+$Rf_*\mathcal{O}_X = \mathcal{O}_S \oplus P$로 쓸 수 있다. 여기서
+$P$는 토르 진폭이 $[1, \infty)$에 있는 완전 대상이다.
+$Rf_*\mathcal{O}_X$의 형성은 임의의 밑변환과 가환함을 상기하자
+(『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-flat-proper-perfect-direct-image-general}).
+따라서 $s \in S$에 대해
+$$
+H^i(P \otimes_{\mathcal{O}_S}^\mathbf{L} \kappa(s)) =
+H^i(X_s, \mathcal{O}_{X_s})
+\text{ 단, }i \geq 1
+$$
+이다. $X_s$가 $1$차원 뇌터 스킴이므로 이는 $i = 1$이 아니면
+영이다. 『코호몰로지』의 명제
+\ref{cohomology-proposition-vanishing-Noetherian}을 보라.
+그러면 $P = H^1(P)[-1]$이고, 예를 들어 『대수학에 관한 추가 내용』의
+보조정리 \ref{more-algebra-lemma-lift-perfect-from-residue-field}에 의해
+$H^1(P)$는 유한 국소 자유이다. 모든 것이 밑변환과 양립하므로
+(3)도 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-pre-genus-one-piece-per-genus}
+열린 동시에 닫힌 부분스택들로의 분해
+$$
+\Curvesstack^{h0, 1} = \coprod\nolimits_{g \geq 0} \Curvesstack_g
+$$
+가 있고, 각 $\Curvesstack_g$는 다음과 같이 특징지어진다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack_g$를 통해
+인수분해된다.
+\item $f_*\mathcal{O}_X = \mathcal{O}_S$이고, 이는 임의의 밑변환
+뒤에도 성립하며, $f$의 섬유들은 차원이 $1$이고,
+$R^1f_*\mathcal{O}_X$는 계수가 $g$인 국소 자유
+$\mathcal{O}_S$-모듈이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이 $\Curvesstack_g$를 통해
+인수분해된다.
+\item $\dim(X) = 1$, $k = H^0(X, \mathcal{O}_X)$이고 $X$의 종수가
+$g$이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{moduli-curves-lemma-pre-genus-curves}에서 이미 $\Curvesstack$의 열린
+부분스택 $\Curvesstack^{h0, 1}$의 존재와, 보조정리의 조건들 중
+$R^1f_*$ 또는 $H^1$을 포함하지 않는 조건에 의한 특징화를 얻었다.
+절 \ref{moduli-curves-section-open}의 논의와 보조정리 \ref{moduli-curves-lemma-genus}에서 열린
+동시에 닫힌 부분스택들로의 분해가 즉시 따라온다. 이로써 (1)의
+특징화를 증명한다. (2)의 특징화는 『대수곡선』의 정의
+\ref{curves-definition-genus}에 있는 종수의 정의에서 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{기하적으로 축약인 곡선}
+\label{moduli-curves-section-geometrically-reduced}
+
+\noindent
+기하적으로 축약인 ``곡선''들을 매개화하는 $\Curvesstack$의 열린
+부분스택이 존재한다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-geometrically-reduced-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{geomred} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{geomred}$를 통해
+인수분해된다.
+\item 사상 $X \to S$의 섬유들이 기하적으로 축약이다
+(『대수공간의 사상에 관한 추가 내용』의 정의
+\ref{spaces-more-morphisms-definition-geometrically-reduced-fibre}).
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{geomred}$를 통해 인수분해된다.
+\item $X$가 $k$ 위에서 기하적으로 축약이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f : X \to S$를 곡선족이라 하자. 『대수공간의 사상에 관한 추가
+내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-geometrically-reduced-open}에 의해 집합
+$$
+E = \{s \in S : \text{사상 }X \to S\text{의 점 }s
+\text{에서의 섬유가 기하적으로 축약이다}\}
+$$
+는 $S$에서 열려 있다. 『대수공간의 사상에 관한 추가 내용』의
+보조정리
+\ref{spaces-more-morphisms-lemma-base-change-fibres-geometrically-reduced}에
+의해 이 열린집합의 형성은 임의의 밑변환과 가환한다.
+따라서 절 \ref{moduli-curves-section-open}에서 논의한 방법으로 원하는 성질을 갖는
+열린 부분스택을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-geomred-in-CM}
+$\Curvesstack$의 열린 부분스택으로서
+$\Curvesstack^{geomred} \subset \Curvesstack^{CM}$이다.
+\end{lemma}
+
+\begin{proof}
+이는 차원이 $\leq 1$인 축약 뇌터 스킴이 코언--매콜리이기 때문이다.
+『대수학』의 보조정리 \ref{algebra-lemma-criterion-reduced}를 보라.
+\end{proof}
+
+
+
+
+
+
+\section{기하적으로 축약이고 연결인 곡선}
+\label{moduli-curves-section-geometrically-reduced-connected}
+
+\noindent
+기하적으로 축약이고 연결인 ``곡선''들을 매개화하는
+$\Curvesstack$의 열린 부분스택이 존재한다. 먼저 $0$차원 대상들을
+곧바로 제외하겠다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-geometrically-reduced-connected-1-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{grc, 1} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{grc, 1}$을 통해
+인수분해된다.
+\item 사상 $X \to S$의 기하적 섬유들이 축약이고, 연결이며,
+차원이 $1$이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{grc, 1}$을 통해 인수분해된다.
+\item $X$가 기하적으로 축약이고, 기하적으로 연결이며, 차원이
+$1$이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{moduli-curves-lemma-geometrically-reduced-curves},
+\ref{moduli-curves-lemma-geomred-in-CM}, \ref{moduli-curves-lemma-CM-curves},
+\ref{moduli-curves-lemma-CM-1-curves}에 의해, 이 스택이 존재한다면
+$$
+\Curvesstack^{grc, 1}
+\subset
+\Curvesstack^{geomred} \cap \Curvesstack^{CM, 1}
+$$
+임이 분명하다. $f : X \to S$를 곡선족이라 하자. $f$는
+코언--매콜리이고, 섬유들은 기하적으로 축약이며, 상대 차원은
+$1$이라고 하자.
+『대수공간의 사상에 관한 추가 내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-stein-factorization-etale}에 의해
+슈타인 인수분해
+$$
+X \to T \to S
+$$
+에서 사상 $T \to S$는 에탈이다. 이는
+$X \times_S S' \to S'$의 섬유들이 기하적으로 연결이 되게 하는
+열린 동시에 닫힌 부분스킴 $S' \subset S$가 있음을 뜻한다
+(『사상』의 보조정리 \ref{morphisms-lemma-finite-locally-free}에 있는
+유한 국소 자유 사상 $T \to S$의 분해에서 이는 $S_1$에 대응한다).
+기하적 섬유의 연결성분 수는 밑변환에 대해 불변이므로 이
+열린집합의 형성은 임의의 밑변환과 가환한다(이 특수한 경우
+슈타인 인수분해도 밑변환과 가환하지만, 결론을 위해 그 사실까지는
+필요하지 않다). 따라서 절 \ref{moduli-curves-section-open}에서 논의한 방법으로
+원하는 성질을 갖는 열린 부분스택을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-geomredcon-in-h0-1}
+$\Curvesstack$의 열린 부분스택으로서
+$\Curvesstack^{grc, 1} \subset \Curvesstack^{h0, 1}$이다.
+특히 기하적 섬유들이 축약이고, 연결이며, 차원이 $1$인 곡선족
+$f : X \to S$가 주어지면 $R^1f_*\mathcal{O}_X$는 그 형성이 임의의
+밑변환과 가환하는 유한 국소 자유 $\mathcal{O}_S$-모듈이다.
+\end{lemma}
+
+\begin{proof}
+이는 『다양체』의 보조정리
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections}와
+보조정리 \ref{moduli-curves-lemma-pre-genus-curves},
+\ref{moduli-curves-lemma-geometrically-reduced-connected-1-curves}에서 따른다.
+마지막 명제는 보조정리 \ref{moduli-curves-lemma-genus}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-one-piece-per-genus}
+열린 동시에 닫힌 부분스택들로의 분해
+$$
+\Curvesstack^{grc, 1} = \coprod\nolimits_{g \geq 0} \Curvesstack^{grc, 1}_g
+$$
+가 있고, 각 $\Curvesstack^{grc, 1}_g$는 다음과 같이 특징지어진다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이
+$\Curvesstack^{grc, 1}_g$를 통해 인수분해된다.
+\item 사상 $f : X \to S$의 기하적 섬유들이 축약이고, 연결이며,
+차원이 $1$이고, $R^1f_*\mathcal{O}_X$는 계수가 $g$인 국소 자유
+$\mathcal{O}_S$-모듈이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{grc, 1}_g$를 통해 인수분해된다.
+\item $X$가 기하적으로 축약이고, 기하적으로 연결이며, 차원이
+$1$이고, 종수가 $g$이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+첫 번째 증명: $\Curvesstack^{grc, 1}_g =
+\Curvesstack^{grc, 1} \cap \Curvesstack_g$라 두고 보조정리
+\ref{moduli-curves-lemma-geomredcon-in-h0-1}과
+\ref{moduli-curves-lemma-pre-genus-one-piece-per-genus}를 결합한다.
+두 번째 증명: 절 \ref{moduli-curves-section-open}의 논의와 보조정리
+\ref{moduli-curves-lemma-geomredcon-in-h0-1}에서 열린 동시에 닫힌 부분스택들로의
+분해의 존재가 즉시 따라온다. 이로써 (1)의 특징화를 증명한다.
+기하적으로 축약이고 연결인 고유 $1$차원 스킴 $X/k$의 종수는
+정의되며(『대수곡선』의 정의 \ref{curves-definition-genus}과
+『다양체』의 보조정리
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections}),
+$\dim_k H^1(X, \mathcal{O}_X)$와 같으므로 (2)의 특징화도 따른다.
+\end{proof}
+
+
+
+
+
+
+\section{고렌슈타인 곡선}
+\label{moduli-curves-section-gorenstein}
+
+\noindent
+고렌슈타인 ``곡선''들을 매개화하는 $\Curvesstack$의 열린
+부분스택이 존재한다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-gorenstein-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{Gorenstein} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이
+$\Curvesstack^{Gorenstein}$을 통해 인수분해된다.
+\item 사상 $X \to S$가 고렌슈타인이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{Gorenstein}$을 통해 인수분해된다.
+\item $X$가 고렌슈타인이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f : X \to S$를 곡선족이라 하자. 『대수공간의 사상에 관한 추가
+내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-flat-finite-presentation-gorenstein-open}에
+의해 집합
+$$
+W = \{x \in |X| : f \text{는 다음 점에서 고렌슈타인이다: }x\}
+$$
+는 $|X|$에서 열려 있고, 이 열린집합의 형성은 임의의 밑변환과
+가환한다. $f$가 고유이므로 $S$의 부분집합
+$$
+S' = S \setminus f(|X| \setminus W)
+$$
+은 열려 있고 $X \times_S S' \to S'$는 고렌슈타인이다.
+또한 $W$에 대해 그러하므로 $S'$의 형성도 임의의 밑변환과 가환한다.
+따라서 절 \ref{moduli-curves-section-open}에서 논의한 방법으로 원하는 성질을 갖는
+열린 부분스택을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-gorenstein-1-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{Gorenstein, 1} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이
+$\Curvesstack^{Gorenstein, 1}$을 통해 인수분해된다.
+\item 사상 $X \to S$가 고렌슈타인이고 상대 차원이 $1$이다
+(『대수공간의 사상』의 정의
+\ref{spaces-morphisms-definition-relative-dimension}).
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{Gorenstein, 1}$을 통해 인수분해된다.
+\item $X$가 고렌슈타인이고 $X$가 차원 $1$의 등차원 스킴이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+고렌슈타인 스킴은 코언--매콜리이고(『스킴의 쌍대성』의 보조정리
+\ref{duality-lemma-gorenstein-CM}), 고렌슈타인 사상은 코언--매콜리
+사상임을 상기하자(『스킴의 쌍대성』의 보조정리
+\ref{duality-lemma-gorenstein-CM-morphism}.
+따라서 $\Curvesstack^{Gorenstein, 1}$을 $\Curvesstack$ 안에서
+$\Curvesstack^{Gorenstein}$과 $\Curvesstack^{CM, 1}$의 교집합으로
+두고 보조정리 \ref{moduli-curves-lemma-gorenstein-curves}와
+\ref{moduli-curves-lemma-CM-1-curves}를 적용하면 된다.
+\end{proof}
+
+
+
+
+
+
+\section{국소 완전 교차 곡선}
+\label{moduli-curves-section-lci}
+
+\noindent
+국소 완전 교차 ``곡선''들을 매개화하는 $\Curvesstack$의 열린
+부분스택이 존재한다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-lci-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{lci} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{lci}$를 통해
+인수분해된다.
+\item $X \to S$가 국소 완전 교차 사상이다.
+\item $X \to S$가 신토믹 사상이다.
+\end{enumerate}
+\item 체 $k$ 위의 차원이 $\leq 1$인 고유 스킴 $X$가 주어졌을 때
+다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이 $\Curvesstack^{lci}$를
+통해 인수분해된다.
+\item $X$가 $k$ 위의 국소 완전 교차이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+신토믹 사상이라는 것은 평탄한 국소 완전 교차 사상이라는 것과 같다.
+『대수공간의 사상에 관한 추가 내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-flat-lci}를 보라. 따라서 (1)(b)와
+(1)(c)는 동치이다. 절 \ref{moduli-curves-section-open}에서 다음을 보이면
+충분하다는 것을 확인했다. 곡선족 $f : X \to S$가 주어졌을 때,
+$S' \times_S X \to S'$가 국소 완전 교차 사상이 되며 $S'$의 형성이
+임의의 밑변환과 가환하도록 하는 열린 부분스킴 $S' \subset S$가
+존재해야 한다. 이는 더 일반적인 『대수공간의 사상에 관한 추가
+내용』의 보조정리 \ref{spaces-more-morphisms-lemma-where-lci}에서
+따른다.
+\end{proof}
+
+
+
+
+\section{고립 특이점을 갖는 곡선}
+\label{moduli-curves-section-curves-isolated}
+
+\noindent
+특이점이 유한 개뿐인 ``곡선''들을 매개화하는 $\Curvesstack$의 열린
+부분스택을 살펴볼 수 있다(우리의 설정에서는 이 점들이 $0$차원
+성분에 대응할 수도 있다).
+
+\begin{lemma}
+\label{moduli-curves-lemma-isolated-sings-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{+} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{+}$를 통해
+인수분해된다.
+\item 임의의/어떤 닫힌 부분공간 구조를 부여한 $X \to S$의 특이
+자취가 $S$ 위에서 유한이다.
+\end{enumerate}
+\item 체 $k$ 위의 차원이 $\leq 1$인 고유 스킴 $X$가 주어졌을 때
+다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이 $\Curvesstack^{+}$를
+통해 인수분해된다.
+\item $X \to \Spec(k)$는 유한 개의 점을 제외하면 매끄럽다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+이 보조정리를 증명하려면 곡선족 $f : X \to S$가 주어졌을 때
+$S' \times_S X \to S'$의 섬유가 성질 (2)를 갖도록 하는 열린
+부분스킴 $S' \subset S$가 있음을 보이면 충분하다
+(이 열린집합의 형성은 자동으로 밑변환과 가환한다).
+정의상 $X \to S$가 매끄럽지 않은 점들의 자취 $T \subset |X|$는
+닫혀 있다. $T$ 위의 축약 유도 대수공간 구조로 주어지는 닫힌
+부분공간을 $Z \subset X$라 하자(『대수공간의 성질』의 정의
+\ref{spaces-properties-definition-reduced-induced-space}).
+이제 $s \in S$가 $Z_s$가 유한인 점이면 $s$의 열린 근방
+$U_s \subset S$가 있어서 $Z \cap f^{-1}(U_s) \to U_s$가 유한이다.
+『대수공간의 사상에 관한 추가 내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-proper-finite-fibre-finite-in-neighbourhood}를
+보라. 이로써 보조정리가 증명된다.
+\end{proof}
+
+
+
+
+\section{곡선 스택의 매끄러운 자취}
+\label{moduli-curves-section-smooth}
+
+\noindent
+사상
+$$
+\Curvesstack \longrightarrow \Spec(\mathbf{Z})
+$$
+은 어떤 가장 큰 열린 부분스택 위에서 매끄럽다. 『스택의 사상』의
+보조정리 \ref{stacks-morphisms-lemma-where-smooth}를 보라.
+곡선이 언제 이 자취에 속하는지 판정하는 조건을 제시하고자 한다.
+이를 위해 약간의 변형 이론을 사용한다.
+
+\medskip\noindent
+$k$를 체라 하자. $X$를 $k$ 위의 차원이 $\leq 1$인 고유 스킴이라
+하자. $k$의 코언 환 $\Lambda$를 택하자. 『대수학』의 보조정리
+\ref{algebra-lemma-cohen-rings-exist}를 보라. 그러면 『변형 문제』의
+예제 \ref{examples-defos-example-schemes}와 보조정리
+\ref{examples-defos-lemma-schemes-RS}에서 설명한 상황에 놓인다.
+따라서 잉여체가 $k$인 아르틴 국소 $\Lambda$-대수들의 범주
+$\mathcal{C}_\Lambda$ 위에서 변형 범주 $\Deformationcategory_X$를
+얻는다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-in-smooth-locus}
+위의 상황에서 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack \to \Spec(\mathbf{Z})$가 매끄러운 열린집합을 통해
+인수분해된다.
+\item 변형 범주 $\Deformationcategory_X$에는 장애가 없다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack \longrightarrow \Spec(\mathbf{Z})$가 국소 유한
+표시이므로(보조정리 \ref{moduli-curves-lemma-curves-qs-lfp}),
+$\Curvesstack \longrightarrow \Spec(\mathbf{Z})$가 매끄러운 열린
+부분스택의 형성은 평탄 밑변환과 가환한다(『스택의 사상』의
+보조정리 \ref{stacks-morphisms-lemma-where-smooth}). 코언 환
+$\Lambda$는 $\mathbf{Z}$ 위에서 평탄하므로 $\Lambda$ 위에서 작업해도
+된다. 다시 말해 $X/k$가 정하는 점
+$x_0 : \Spec(k) \to \Lambda\text{-}\Curvesstack$의 열린 근방에서
+$$
+\Lambda\text{-}\Curvesstack \longrightarrow \Spec(\Lambda)
+$$
+가 매끄러운 것과 $\Deformationcategory_X$에 장애가 없는 것이
+동치임을 증명하려는 것이다.
+
+\medskip\noindent
+이제 이 보조정리는 『스택의 기하』의 보조정리
+\ref{stacks-geometry-lemma-characterize-smoothness}와 등식
+$$
+\Deformationcategory_X =
+\mathcal{F}_{\Lambda\text{-}\Curvesstack, k, x_0}
+$$
+에서 따른다. 이 등식의 증명은 완전히 자명하지 않다. 왼쪽에는
+$A \in \Ob(\mathcal{C}_\Lambda)$ 위의 스킴으로서 $X$의 모든 평탄
+변형 $Y \to \Spec(A)$를 분류하는 변형 범주가 있다. 오른쪽에는
+특수 섬유가 $X$이고, $Y$가 대수공간이며,
+$Y \to \Spec(A)$가 고유이고 유한 표시이며 상대 차원이 $\leq 1$인
+모든 평탄 사상 $Y \to \Spec(A)$를 분류하는 변형 범주가 있다.
+$A$가 아르틴 환이므로, 예를 들어 『체 위의 대수공간』의 보조정리
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus}에 의해
+$Y$는 스킴이다. 따라서 다음을 보이는 일만 남는다. 잉여체가 $k$인
+아르틴 국소환 $A$ 위의 스킴으로서 $X$의 평탄 변형
+$Y \to \Spec(A)$는 고유이고, 유한 표시이며, 상대 차원이
+$\leq 1$이다. 상대 차원은 섬유로 정의되므로 $X/k$에 대해
+성립한다는 사실에서 $Y/A$에 대해서도 자동으로 성립한다.
+$X \to \Spec(k)$에 대해 그러하므로 $Y \to \Spec(A)$는 고유이고
+국소 유한 표시이다. 『사상에 관한 추가 내용』의 보조정리
+\ref{more-morphisms-lemma-deform-property}를 보라.
+\end{proof}
+
+\noindent
+다음은 매끄러운 자취에 포함되는 곡선 스택의 ``큰'' 열린집합이다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-big-smooth-part-curves}
+열린 부분스택
+$$
+\Curvesstack^{lci+} =
+\Curvesstack^{lci} \cap \Curvesstack^{+}
+\subset \Curvesstack
+$$
+은 다음 성질을 갖는다.
+\begin{enumerate}
+\item $\Curvesstack^{lci+} \to \Spec(\mathbf{Z})$는 매끄럽다.
+\item 곡선족 $X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{lci+}$를 통해
+인수분해된다.
+\item $X \to S$가 국소 완전 교차 사상이고, 임의의/어떤 닫힌
+부분공간 구조를 부여한 $X \to S$의 특이 자취가 $S$ 위에서
+유한이다.
+\end{enumerate}
+\item 체 $k$ 위의 차원이 $\leq 1$인 고유 스킴 $X$가 주어졌을 때
+다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{lci+}$를 통해 인수분해된다.
+\item $X$가 $k$ 위의 국소 완전 교차이고
+$X \to \Spec(k)$가 유한 개의 점을 제외하면 매끄럽다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+점들이 (2)에 의해 특징지어지는 열린 부분스택
+$\Curvesstack^{lci+}$가 있음을 보일 수 있다면, 보조정리
+\ref{moduli-curves-lemma-in-smooth-locus}와 『변형 문제』의 보조정리
+\ref{examples-defos-lemma-curve-isolated-lci}를 결합하여 (1)이
+성립함을 알 수 있다. $\Curvesstack$ 안에서
+$$
+\Curvesstack^{lci+} = \Curvesstack^{lci} \cap \Curvesstack^{+}
+$$
+이므로 보조정리 \ref{moduli-curves-lemma-lci-curves}와
+\ref{moduli-curves-lemma-isolated-sings-curves}에서 결론이 따른다.
+\end{proof}
+
+
+
+
+\section{매끄러운 곡선}
+\label{moduli-curves-section-smooth-curves}
+
+\noindent
+이 절에서는 매끄러운 ``곡선''들을 매개화하는 $\Curvesstack$의 열린
+부분스택들을 연구한다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-curves}
+다음을 만족하는 열린 부분스택들이 존재한다.
+$$
+\Curvesstack^{smooth, 1} \subset \Curvesstack^{smooth} \subset \Curvesstack
+$$
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 각각
+$\Curvesstack^{smooth}$, $\Curvesstack^{smooth, 1}$을 통해
+인수분해된다.
+\item $f$가 각각 매끄럽거나, 상대 차원 $1$의 매끄러운 사상이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이 각각
+$\Curvesstack^{smooth}$, $\Curvesstack^{smooth, 1}$을 통해
+인수분해된다.
+\item 각각 $X$가 $k$ 위에서 매끄럽거나, $X$가 $k$ 위에서 매끄럽고
+$X$가 차원 $1$의 등차원 스킴이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{smooth}$에 관한 명제를 증명하려면 곡선족
+$f : X \to S$가 주어졌을 때, $S' \times_S X \to S'$가 매끄럽고
+이 열린집합의 형성이 밑변환과 가환하도록 하는 열린 부분스킴
+$S' \subset S$가 있음을 보이면 충분하다. $U \to S$가 매끄럽게
+되는 가장 큰 열린집합 $U \subset X$가 있고, $U$의 형성은 임의의
+밑변환과 가환함을 안다. 『대수공간의 사상』의 보조정리
+\ref{spaces-morphisms-lemma-where-smooth}를 보라.
+$T = |X| \setminus |U|$이면 $f$가 고유이므로 $f(T)$는 $S$에서
+닫혀 있다. $S' = S \setminus f(T)$라 두면 원하는 열린집합을 얻는다.
+
+\medskip\noindent
+$f : X \to S$를 곡선족이라 하고 $f$가 매끄럽다고 하자. 그러면 섬유 $X_s$는
+$\kappa(s)$ 위에서 매끄럽고, 따라서 코언--매콜리이다(예를 들어
+『대수학』의 보조정리 \ref{algebra-lemma-smooth-over-field}와
+\ref{algebra-lemma-lci-CM}을 사용하여 볼 수 있다). 따라서
+$$
+\Curvesstack^{smooth, 1} = \Curvesstack^{smooth} \cap
+\Curvesstack^{CM, 1}
+$$
+로 둘 수 있고, 원하는 동치들은 $\Curvesstack^{smooth}$에 관해 이미
+보인 사실과 보조정리 \ref{moduli-curves-lemma-CM-1-curves}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-curves-smooth}
+사상 $\Curvesstack^{smooth} \to \Spec(\mathbf{Z})$는 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{smooth} \subset \Curvesstack^{lci+}$라는 관찰과
+보조정리 \ref{moduli-curves-lemma-big-smooth-part-curves}에서 즉시 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-curves-h0}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{smooth, h0} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{smooth}$를 통해
+인수분해된다.
+\item $f_*\mathcal{O}_X = \mathcal{O}_S$이고, 이는 임의의 밑변환
+뒤에도 성립하며, $f$는 상대 차원 $1$의 매끄러운 사상이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{smooth, h0}$를 통해 인수분해된다.
+\item $X$가 매끄럽고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이다.
+\item $X$가 매끄럽고, $\dim(X) = 1$이며, $X$가 기하적으로
+연결이다.
+\item $X$가 매끄럽고, $\dim(X) = 1$이며, $X$가 기하적으로
+정역이다.
+\item $X_{\overline{k}}$가 매끄러운 곡선이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$$
+\Curvesstack^{smooth, h0} = \Curvesstack^{smooth} \cap
+\Curvesstack^{h0, 1}
+$$
+로 두면 보조정리 \ref{moduli-curves-lemma-pre-genus-curves}와
+\ref{moduli-curves-lemma-smooth-curves}에 의해 (1)이 성립한다. 실제로 이로부터
+(2)(a)와 (2)(b)의 동치도 얻는다. 증명을 끝내려면 (2)(b)가
+(2)(c), (2)(d), (2)(e) 각각과 동치임을 보이면 된다.
+
+\medskip\noindent
+체 위의 매끄러운 스킴은 기하적으로 정규이고(『다양체』의 보조정리
+\ref{varieties-lemma-smooth-geometrically-normal}), 매끄러움은
+밑변환 아래 보존되며(『사상』의 보조정리
+\ref{morphisms-lemma-base-change-smooth}), 매끄럽다는 성질은 공역에서
+fpqc 국소적이다(『내림』의 보조정리
+\ref{descent-lemma-descending-property-smooth}). 이를 염두에 두면
+(2)(b), (2)(c), 2(d), (2)(e)의 동치는 『다양체』의 보조정리
+\ref{varieties-lemma-geometrically-normal-stein}에서 따른다.
+\end{proof}
+
+\begin{definition}
+\label{moduli-curves-definition-deligne-mumford-smooth}
+\begin{reference}
+\cite{DM}
+\end{reference}
+보조정리 \ref{moduli-curves-lemma-smooth-curves-h0}에서 도입한 곡선족들을
+매개화하는 대수적 스택 $\Curvesstack^{smooth, h0}$를
+$\mathcal{M}$으로 나타내고 {\it 매끄러운 고유 곡선의 모듈라이
+스택}이라 부른다. $g \geq 0$에 대해 보조정리
+\ref{moduli-curves-lemma-smooth-one-piece-per-genus}에서 도입한 대수적 스택을
+$\mathcal{M}_g$로 나타내고 {\it 종수 $g$인 매끄러운 고유 곡선의
+모듈라이 스택}이라 부른다.
+\end{definition}
+
+\noindent
+다음은 빠뜨릴 수 없는 보조정리이다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-one-piece-per-genus}
+열린 동시에 닫힌 부분스택들로의 분해
+$$
+\mathcal{M} = \coprod\nolimits_{g \geq 0} \mathcal{M}_g
+$$
+가 있고, 각 $\mathcal{M}_g$는 다음과 같이 특징지어진다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\mathcal{M}_g$를 통해
+인수분해된다.
+\item $X \to S$가 매끄럽고, $f_*\mathcal{O}_X = \mathcal{O}_S$이며,
+이는 임의의 밑변환 뒤에도 성립하고, $R^1f_*\mathcal{O}_X$는
+계수가 $g$인 국소 자유 $\mathcal{O}_S$-모듈이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이 $\mathcal{M}_g$를 통해
+인수분해된다.
+\item $X$가 매끄럽고, $\dim(X) = 1$이고,
+$k = H^0(X, \mathcal{O}_X)$이며, $X$의 종수가 $g$이다.
+\item $X$가 매끄럽고, $\dim(X) = 1$이고, $X$가 기하적으로
+연결이며, $X$의 종수가 $g$이다.
+\item $X$가 매끄럽고, $\dim(X) = 1$이고, $X$가 기하적으로
+정역이며, $X$의 종수가 $g$이다.
+\item $X_{\overline{k}}$가 종수 $g$인 매끄러운 곡선이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{moduli-curves-lemma-smooth-curves-h0}와
+\ref{moduli-curves-lemma-pre-genus-one-piece-per-genus}를 결합하면 된다.
+그 대신 보조정리 \ref{moduli-curves-lemma-one-piece-per-genus}를 사용해도 된다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-curves-h0-smooth}
+사상 $\mathcal{M} \to \Spec(\mathbf{Z})$와
+$\mathcal{M}_g \to \Spec(\mathbf{Z})$는 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{M}$이 $\Curvesstack^{lci+}$의 열린 부분스택이므로
+보조정리 \ref{moduli-curves-lemma-big-smooth-part-curves}에서 따른다.
+\end{proof}
+
+
+
+
+
+\section{매끄러운 곡선의 조밀성}
+\label{moduli-curves-section-smooth-is-dense}
+
+\noindent
+$\Curvesstack^{smooth}$가 $\Curvesstack$에서 조밀하다고 주장하는 것은
+아니므로 이 절의 제목은 오해를 부를 수 있다. 실제로 Mumford가
+\cite{PathologiesIV}에서 보였듯 이는 거짓이다. 그러나 매끄러운
+``곡선''들이 어떤 큰 열린집합에서 조밀함을 보일 것이다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-dense}
+포함관계
+$$
+|\Curvesstack^{smooth}| \subset |\Curvesstack^{lci+}|
+$$
+의 왼쪽은 열린 조밀 부분집합이다.
+\end{lemma}
+
+\begin{proof}
+『스택의 성질』의 절 \ref{stacks-properties-section-points}에서
+$|\Curvesstack^{lci+}|$의 위상을 구성한 방식 자체로부터
+$|\Curvesstack^{smooth}|$가 열린 부분집합임을 안다.
+$\xi \in |\Curvesstack^{lci+}|$를 한 점이라 하자. 그러면 체 $k$와
+$k$ 위의 스킴 $X$가 있어서 $X$는 $k$ 위에서 고유이고,
+$\dim(X) \leq 1$이며, $X$는 $k$ 위의 국소 완전 교차이고, $X$는 유한 개의 점을
+제외하면 $k$ 위에서 매끄러우며, $\xi$는 $X$가 정하는 분류 사상
+$\Spec(k) \to \Curvesstack^{lci+}$의 동치류이다. 보조정리
+\ref{moduli-curves-lemma-big-smooth-part-curves}를 보라.
+『변형 문제』의 보조정리
+\ref{examples-defos-lemma-smoothing-proper-curve-isolated-lci}에 의해
+일반 섬유가 매끄럽고 특수 섬유가 $X$와 동형인 평탄 사영 사상
+$Y \to \Spec(k[[t]])$가 존재한다. $Y$가 정하는 분류 사상
+$$
+\Spec(k[[t]]) \longrightarrow \Curvesstack^{lci+}
+$$
+을 생각하자. 닫힌점의 상은 $\xi$이고 일반점의 상은
+$|\Curvesstack^{smooth}|$에 속한다. $|\Spec(k[[t]])|$에서 일반점이
+닫힌점으로 특수화하므로, 원하는 대로 $\xi$는
+$|\Curvesstack^{smooth}|$의 폐포에 속한다.
+\end{proof}
+
+
+
+
+
+
+\section{절점 곡선}
+\label{moduli-curves-section-nodal-curves}
+
+\noindent
+대수기하학에서 절점 곡선은 특별한 역할을 한다. 독자에게
+『대수곡선』의 절 \ref{curves-section-nodal},
+\ref{curves-section-families-nodal}과 『대수공간의 사상에 관한 추가
+내용』의 절 \ref{spaces-more-morphisms-section-families-nodal}에 있는
+논의를 잠깐 살펴보기를 권한다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-nodal-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{nodal} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{nodal}$을 통해
+인수분해된다.
+\item $f$가 상대 차원 $1$이고, 특이점이 많아야 절점이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{nodal}$을 통해 인수분해된다.
+\item $X$의 특이점들이 많아야 절점이고 $X$는 차원 $1$의
+등차원 스킴이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+실제로 곡선족 $f : X \to S$가 주어졌을 때,
+$S' \times_S X \to S'$가 상대 차원 $1$이고 특이점이 많아야
+절점이며 $S'$의 형성이 임의의 밑변환과 가환하도록 하는 열린
+부분스킴 $S' \subset S$가 있음을 보이면 충분하다.
+『대수공간의 사상에 관한 추가 내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-locus-where-nodal}에 의해
+$f|_{X'} : X' \to S$가 상대 차원 $1$이고 특이점이 많아야 절점이
+되도록 하는 가장 큰 열린 부분공간 $X' \subset X$가 있다.
+더 나아가 $X'$의 형성은 밑변환과 가환한다. 따라서
+$$
+S' = S \setminus |f|(|X| \setminus |X'|)
+$$
+로 둘 수 있다. 고유 사상은 정의상 보편적으로 닫힌 사상이므로
+이는 열린집합이다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-nodal-curves-smooth}
+사상 $\Curvesstack^{nodal} \to \Spec(\mathbf{Z})$는 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{nodal} \subset \Curvesstack^{lci+}$라는 관찰과
+보조정리 \ref{moduli-curves-lemma-big-smooth-part-curves}에서 즉시 따른다.
+\end{proof}
+
+
+
+
+
+
+\section{상대 쌍대화 층}
+\label{moduli-curves-section-relative-dualizing}
+
+\noindent
+이 절의 주된 목적은 곡선족의 경우에 쓸 표기를 도입하는 것이다.
+필요한 작업 대부분은 쌍대성에 관한 장에서 이미 이루어졌다.
+
+\medskip\noindent
+$f : X \to S$를 곡선족이라 하자. $D_\QCoh(\mathcal{O}_X)$에는
+{\it 상대 쌍대화 복합체}라고 하는 대상
+$\omega_{X/S}^\bullet$가 있어서 다음 성질을 갖는다. $U = \Spec(A)$가
+아핀인 모든 밑변환 도식
+$$
+\xymatrix{
+X_U \ar[d]_{f'} \ar[r]_{g'} & X \ar[d]^f \\
+U \ar[r]^g & S
+}
+$$
+에 대해 복합체
+$\omega_{X_U/U}^\bullet = L(g')^*\omega_{X/S}^\bullet$는 함자
+$$
+D_\QCoh(\mathcal{O}_{X_U}) \longrightarrow \text{Mod}_A,\quad
+K \longmapsto \Hom_U(Rf_*K, \mathcal{O}_U)
+$$
+를 표현한다. 더 정확히 말해 $(\omega_{X/S}^\bullet, \tau)$를
+『대수공간의 쌍대성』의 정의
+\ref{spaces-duality-definition-relative-dualizing-proper-flat}에서 정의한
+이 곡선족의 상대 쌍대화 복합체라 하자. 그 존재는 『대수공간의
+쌍대성』의 보조정리
+\ref{spaces-duality-lemma-existence-relative-dualizing}에서 보인다.
+또한 $(\omega_{X/S}^\bullet, \tau)$의 형성은 임의의 밑변환과
+가환한다(본질적으로 정의에서 따르며, 정확한 참고문헌은 『대수공간의
+쌍대성』의 보조정리
+\ref{spaces-duality-lemma-base-change-relative-dualizing}이다).
+이제부터 $\omega_{X/S}^\bullet$의 밑변환을 더 언급하지 않고
+밑변환한 곡선족의 상대 쌍대화 복합체와 동일시한다.
+
+\medskip\noindent
+$S_i$가 아핀이며 $X_i = X \times_S S_i$가 스킴이 되도록 하는 에탈
+덮개 $\{S_i \to S\}$를 택하자. 보조정리
+\ref{moduli-curves-lemma-etale-locally-scheme}를 보라. 『대수공간의 쌍대성』의
+보조정리 \ref{spaces-duality-lemma-compare}에 의해
+$\omega_{X_i/S_i}^\bullet$는 『스킴의 쌍대성』의 주석
+\ref{duality-remark-relative-dualizing-complex}에서 논의한, 스킴의
+고유 평탄 유한 표시 사상 $f_i : X_i \to S_i$에 대한 상대 쌍대화
+복합체와 일치한다. 따라서 에탈 국소적인
+$\omega_{X/S}^\bullet$의 성질을 증명할 때는 $X \to S$가 스킴의
+사상이라고 가정하고 스킴의 쌍대성에 관한 장에서 전개한 이론을
+사용해도 된다. 더 일반적으로 $X$의 어떤 밑변환이 스킴이면 그
+상대 쌍대화 복합체는 『스킴의 쌍대성』의 주석
+\ref{duality-remark-relative-dualizing-complex}에 있는 상대 쌍대화
+복합체와 일치한다. 이제부터 이 동일시를 더 언급하지 않고 사용한다.
+
+\medskip\noindent
+특히 $k$가 체인 사상 $\Spec(k) \to S$를 생각하자. 그 밑변환을
+$X_k$로 나타내자(『체 위의 대수공간』의 보조정리
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus}에 의해
+이는 스킴이다). 그러면 $\omega_{X_k/k}^\bullet$는 『대수곡선』의
+보조정리 \ref{curves-lemma-duality-dim-1}에 있는 복합체
+$\omega_{X_k}^\bullet$와 동형이다(둘 다 같은 함자를 표현하므로
+요네다 보조정리를 쓸 수 있지만, 실제로는 위의 주석들 때문에
+성립한다). 따라서 코호몰로지 층
+$H^i(\omega_{X_k/k}^\bullet)$는 $i = 0, -1$일 때에만 영이 아닐 수
+있다. $X_k$가 코언--매콜리이고 차원 $1$의 등차원 스킴이면
+$H^{-1}$만 남고, $X_k$가 또한 고렌슈타인이면
+$H^{-1}(\omega_{X_k/k})$는 가역이다. 『대수곡선』의 보조정리
+\ref{curves-lemma-duality-dim-1-CM}과 \ref{curves-lemma-rr}을 보라.
+
+\begin{lemma}
+\label{moduli-curves-lemma-CM-dualizing}
+$X \to S$를 차원 $1$의 등차원 코언--매콜리 섬유들을 갖는
+곡선족이라 하자(보조정리 \ref{moduli-curves-lemma-CM-1-curves}). 그러면
+$\omega_{X/S}^\bullet = \omega_{X/S}[1]$이다. 여기서
+$\omega_{X/S}$는 그 형성이 임의의 밑변환과 가환하는, $S$ 위에서
+평탄한 유사코히런트 $\mathcal{O}_X$-모듈이다.
+\end{lemma}
+
+\begin{proof}
+체로 밑변환한 뒤 일어나는 일에 관한 위의 논의에서 이를 직접
+유도해 보기를 독자에게 강력히 권한다. 여기서는 다소 번거롭게
+뇌터 스킴의 경우로 환원하는 증명을 제시한다.
+
+\medskip\noindent
+$\omega_{X/S}^\bullet = \omega_{X/S}[1]$이고 $\omega_{X/S}$가 $S$
+위에서 평탄임을 보이고 나면, $\omega_{X/S}^\bullet$의 형성이 임의의
+밑변환과 가환함을 이미 알고 있으므로 밑변환에 관한 명제가
+따른다. 또한 $\omega_{X/S}^\bullet$가 정의상 유사코히런트이므로
+유사코히런트성은 자동이다. 다른 코호몰로지 층들의 소멸과 평탄성은
+에탈 국소적으로 확인할 수 있다. 따라서 $S$가 아핀이고
+$f : X \to S$가 스킴의 사상이라고 가정해도 된다(위의 논의를 보라).
+이를 $\mathbf{Z}$ 위의 유한형 아핀 스킴 $S_i$들의 여과역극한
+$S = \lim S_i$로 쓰자. $\Curvesstack^{CM, 1}$은
+$\Curvesstack$의 열린 부분스택이므로 $\mathbf{Z}$ 위에서 국소 유한
+표시이다(보조정리 \ref{moduli-curves-lemma-CM-1-curves}와
+\ref{moduli-curves-lemma-curves-qs-lfp}를 보라). 따라서 당김이 $X \to S$인
+곡선족 $X_i \to S_i$와 지표 $i$를 찾을 수 있다(『스택의 극한』의
+보조정리
+\ref{stacks-limits-lemma-representable-by-spaces-limit-preserving}).
+필요하면 $i$를 증가시켜 $X_i$가 스킴이라고 가정할 수 있다.
+『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-limit-is-scheme}를 보라.
+$\omega_{X/S}^\bullet$의 형성이 임의의 밑변환과 가환하므로 $S$를
+$S_i$로 바꿀 수 있다. 이렇게 하여 $S_i$가 뇌터라고 가정한다.
+그러면 섬유에 대한 가정에 의해 $f$는 명백히 코언--매콜리 사상이다
+(『사상에 관한 추가 내용』의 정의
+\ref{more-morphisms-definition-CM}). 또한 『스킴의 쌍대성』의 절
+\ref{duality-section-upper-shriek}에서 $f^!$를 구성한 바로 그 방식에
+의해 $\omega_{X/S}^\bullet = f^!\mathcal{O}_S$이다. 따라서
+보조정리는 『스킴의 쌍대성』의 보조정리
+\ref{duality-lemma-affine-flat-Noetherian-CM}에서 따른다.
+\end{proof}
+
+\begin{definition}
+\label{moduli-curves-definition-relative-dualizing-sheaf}
+$f : X \to S$를 차원 $1$의 등차원 코언--매콜리 섬유들을 갖는
+곡선족이라 하자(보조정리 \ref{moduli-curves-lemma-CM-1-curves}). 보조정리
+\ref{moduli-curves-lemma-CM-dualizing}에서 연구한 $\mathcal{O}_X$-모듈
+$$
+\omega_{X/S} = H^{-1}(\omega_{X/S}^\bullet)
+$$
+을 $f$의 {\it 상대 쌍대화 층}이라 한다.
+\end{definition}
+
+\noindent
+정의 \ref{moduli-curves-definition-relative-dualizing-sheaf}의 상황에서 상대 쌍대화
+층 $\omega_{X/S}$는 다음 성질을 갖는다(나아가 이 성질은 $S$ 위에서
+국소적으로 이를 특징짓는다). $U = \Spec(A)$가 아핀인 모든 밑변환
+도식
+$$
+\xymatrix{
+X_U \ar[d]_{f'} \ar[r]_{g'} & X \ar[d]^f \\
+U \ar[r]^g & S
+}
+$$
+에 대해 모듈 $\omega_{X_U/U} = (g')^*\omega_{X/S}$는 함자
+$$
+\QCoh(\mathcal{O}_{X_U}) \longrightarrow \text{Mod}_A,\quad
+\mathcal{F} \longmapsto \Hom_A(H^1(X, \mathcal{F}), A)
+$$
+를 표현한다. 이는 위에서 준 상대 쌍대화 복합체의 해당 성질에서
+즉시 따른다. 특히 $A = k$가 체이면 『대수곡선』의 보조정리
+\ref{curves-lemma-duality-dim-1},
+\ref{curves-lemma-duality-dim-1-CM}, \ref{curves-lemma-rr}에서 도입하고
+연구한 $X_k$의 쌍대화 모듈을 다시 얻는다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-gorenstein-dualizing}
+$X \to S$를 차원 $1$의 등차원 고렌슈타인 섬유들을 갖는 곡선족이라
+하자(보조정리 \ref{moduli-curves-lemma-gorenstein-1-curves}). 그러면 상대 쌍대화
+층 $\omega_{X/S}$는 그 형성이 임의의 밑변환과 가환하는 가역
+$\mathcal{O}_X$-모듈이다.
+\end{lemma}
+
+\begin{proof}
+이는 위의 논의에 의해 상대 쌍대화 모듈을 섬유에 당긴 것이
+가역이기 때문이다. 또는 보조정리 \ref{moduli-curves-lemma-CM-dualizing}의 증명과
+똑같이 논증하여 『스킴의 쌍대성』의 보조정리
+\ref{duality-lemma-affine-flat-Noetherian-gorenstein}로부터 결과를
+유도할 수 있다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{전안정 곡선}
+\label{moduli-curves-section-prestable-curves}
+
+\noindent
+다음 정의는 일반적으로 받아들여지는 전안정 곡선족의 개념과
+동치이다.
+
+\begin{definition}
+\label{moduli-curves-definition-prestable}
+$f : X \to S$를 곡선족이라 하자. 다음 조건을 만족하면 $f$를
+{\it 전안정 곡선족}이라 한다.
+\begin{enumerate}
+\item $f$는 상대 차원 $1$이고 특이점이 많아야 절점이다.
+\item $f_*\mathcal{O}_X = \mathcal{O}_S$이고, 이는 임의의 밑변환
+뒤에도 성립한다\footnote{사실 $f$의 슈타인 인수분해가 이 경우
+에탈이므로 $f_*\mathcal{O}_X = \mathcal{O}_S$만 요구해도 충분하다.
+『대수공간의 사상에 관한 추가 내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-stein-factorization-etale}를 보라.
+또는 이 조건을 기하적 섬유들이 연결이라는 조건으로 바꿀 수 있다.
+보조정리 \ref{moduli-curves-lemma-geomredcon-in-h0-1}을 보라.}.
+\end{enumerate}
+\end{definition}
+
+\noindent
+$X$를 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴이라 하자.
+그러면 $X \to \Spec(k)$는 곡선족이므로 정의의 의미에서 전안정인지
+물을 수 있다\footnote{곡선은 기약이라는 뜻을 함축하므로 여기서는
+``전안정 곡선''이라는 용어를 쓸 수 없다. 『대수곡선』의 절
+\ref{curves-section-families-nodal}에 있는 논의를 보라.}.
+정의를 풀어 쓰면 다음이 서로 동치이다.
+\begin{enumerate}
+\item $X$가 전안정이다.
+\item $X$의 특이점들이 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이다.
+\item $X_{\overline{k}}$가 연결이고 유한 개의 절점을 제외하면
+$\overline{k}$ 위에서 매끄럽다(『대수곡선』의 정의
+\ref{curves-definition-multicross}).
+\end{enumerate}
+이는 우리의 정의가 문헌에서 찾아볼 수 있는 대부분의 정의와
+일치함을 보여 준다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-prestable-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{prestable} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이
+$\Curvesstack^{prestable}$을 통해 인수분해된다.
+\item $X \to S$가 전안정 곡선족이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{prestable}$을 통해 인수분해된다.
+\item $X$의 특이점들이 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+곡선족 $X \to S$가 전안정인 것과 그 분류 사상이
+$\Curvesstack^{nodal}$과 $\Curvesstack^{h0, 1}$ 둘 모두를 통해
+인수분해되는 것은 동치이다. 그 대신 $\Curvesstack^{grc, 1}$을
+사용할 수도 있다(절점 곡선은 기하적으로 축약이므로 $H^0$가 바탕
+체와 같은 것과 연결인 것이 동치이기 때문이다). 식으로 쓰면
+$$
+\Curvesstack^{prestable} =
+\Curvesstack^{nodal} \cap \Curvesstack^{h0, 1} =
+\Curvesstack^{nodal} \cap \Curvesstack^{grc, 1}
+$$
+이다. 따라서 보조정리 \ref{moduli-curves-lemma-pre-genus-curves}와
+\ref{moduli-curves-lemma-nodal-curves}에서 결론이 따른다.
+\end{proof}
+
+\noindent
+각 종수 $g \geq 0$에 대해 종수 $g$인 전안정 곡선을 분류하는
+대수적 스택이 있다. 실제로 이제부터는 분류 사상
+$S \to \Curvesstack$이 보조정리
+\ref{moduli-curves-lemma-prestable-one-piece-per-genus}의 열린 부분스택
+$\Curvesstack^{prestable}_g$를 통해 인수분해될 때, 그리고 그때에만
+$X \to S$를 {\it 종수 $g$인 전안정 곡선족}이라 하겠다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-prestable-one-piece-per-genus}
+열린 동시에 닫힌 부분스택들로의 분해
+$$
+\Curvesstack^{prestable} = \coprod\nolimits_{g \geq 0}
+\Curvesstack^{prestable}_g
+$$
+가 있고, 각 $\Curvesstack^{prestable}_g$는 다음과 같이
+특징지어진다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이
+$\Curvesstack^{prestable}_g$를 통해 인수분해된다.
+\item $X \to S$가 전안정 곡선족이고 $R^1f_*\mathcal{O}_X$가
+계수 $g$인 국소 자유 $\mathcal{O}_S$-모듈이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{prestable}_g$를 통해 인수분해된다.
+\item $X$의 특이점들이 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이고, $X$의 종수가 $g$이다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{prestable}$이 $\Curvesstack^{h0, 1}$에 포함됨을 이미
+보았으므로, 이는 보조정리 \ref{moduli-curves-lemma-prestable-curves}와
+\ref{moduli-curves-lemma-pre-genus-one-piece-per-genus}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-prestable-curves-smooth}
+사상
+$\Curvesstack^{prestable} \to \Spec(\mathbf{Z})$와
+$\Curvesstack^{prestable}_g \to \Spec(\mathbf{Z})$는 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{prestable}$이 $\Curvesstack^{nodal}$의 열린
+부분스택이므로 보조정리 \ref{moduli-curves-lemma-nodal-curves-smooth}에서 따른다.
+\end{proof}
+
+
+
+
+\section{반안정 곡선}
+\label{moduli-curves-section-semistable-curves}
+
+\noindent
+다음 보조정리는 반안정 곡선족을 이해하는 데 도움이 된다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-semistable}
+$f : X \to S$를 종수 $g \geq 1$인 전안정 곡선족이라 하자.
+$s \in S$를 바탕 스킴의 한 점이라 하고 $m \geq 2$라 하자.
+다음은 서로 동치이다.
+\begin{enumerate}
+\item $X_s$는 유리 꼬리를 갖지 않는다
+(『대수곡선』의 예제 \ref{curves-example-rational-tail}).
+\item 어떤 열린집합 $s \in U \subset S$에 대해
+$f^{-1}(U)$ 위에서
+$f^*f_*\omega_{X/S}^{\otimes m} \to \omega_{X/S}^{\otimes m}$이
+전사이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)를 가정하자. 절 \ref{moduli-curves-section-relative-dualizing}의 내용을 이용하면
+$\omega_{X_s}^{\otimes m}$이 대역적으로 생성됨을 알 수 있다.
+그러나 $C \subset X_s$가 유리 꼬리이면 『대수곡선』의 보조정리
+\ref{curves-lemma-rational-tail-negative}에 의해
+$\deg(\omega_{X_s}|_C) < 0$이고, 따라서 『다양체』의 보조정리
+\ref{varieties-lemma-check-invertible-sheaf-trivial}에 의해
+$H^0(C, \omega_{X_s}|_C) = 0$이다. 이는 대역적으로 생성된다는
+사실과 모순이다. 이로써 (1)을 증명한다.
+
+\medskip\noindent
+(1)을 가정하자. 먼저 $g \geq 2$라 하자. (1)에 의해
+$\omega_{X_s}^{\otimes m}$은 대역적으로 생성된다. 『대수곡선』의
+보조정리 \ref{curves-lemma-contracting-rational-tails}를 보라.
+또한 쌍대성에 의해
+$$
+\Hom_{\kappa(s)}(H^1(X_s, \omega_{X_s}^{\otimes m}), \kappa(s)) =
+H^0(X_s, \omega_{X_s}^{\otimes 1 - m})
+$$
+이다. 『대수곡선』의 보조정리
+\ref{curves-lemma-duality-dim-1-CM}을 보라.
+$\omega_{X_s}^{\otimes m}$이 대역적으로 생성되므로 각 기약성분으로의
+제한은 음이 아닌 차수를 갖는다. 따라서
+$\omega_{X_s}^{\otimes 1 - m}$을 각 기약성분에 제한하면 차수가 양이
+아니다. 리만--로흐 정리에 의해
+$\deg(\omega_{X_s}^{\otimes 1 - m}) = (1 - m)(2g - 2) < 0$이므로
+(『대수곡선』의 보조정리 \ref{curves-lemma-rr}), 『다양체』의
+보조정리 \ref{varieties-lemma-no-sections-dual-nef}에 의해 위의 $H^0$는
+영이다. 코호몰로지와 밑변환에 의해
+$$
+E = Rf_*\omega_{X/S}^{\otimes m}
+$$
+은 그 형성이 임의의 밑변환과 가환하는 완전 복합체이다
+(『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-flat-proper-perfect-direct-image-general}).
+위에서 증명한 소멸은
+$E \otimes^\mathbf{L} \kappa(s)$가 차수 $0$에 놓인
+$H^0(X_s, \omega_{X_s}^{\otimes m})$과 같다는 것을 말해 준다.
+$S$를 축소하면 $E = f_*\omega_{X/S}^{\otimes m}$은 차수 $0$에 놓인
+국소 자유 $\mathcal{O}_S$-모듈이고, 앞서 말했듯 그 형성은 임의의
+밑변환과 가환한다. 『대수공간의 유도 범주』의 보조정리
+\ref{spaces-perfect-lemma-open-where-cohomology-in-degree-i-rank-r-geometric}를
+보라. 사상
+$f^*f_*\omega_{X/S}^{\otimes m} \to \omega_{X/S}^{\otimes m}$은
+$X_s$에 제한한 뒤 전사이다. 따라서 $X_s$의 어떤 열린 근방에서
+전사이다. $f$가 고유이므로 이 열린 근방은 $S$에서 $s$의 어떤
+열린 근방 $U$에 대한 $f^{-1}(U)$를 포함한다.
+
+\medskip\noindent
+(1)과 $g = 1$을 가정하자. 『대수곡선』의 보조정리
+\ref{curves-lemma-contracting-rational-tails}에 의해 (1)은
+$\omega_{X_s}$가 $\mathcal{O}_{X_s}$와 동형임을 뜻한다. $S$를
+축소한 뒤 가역층 $\omega_{X/S}$가 자명해짐을 보일 수 있다면
+끝난다. $S$가 아핀이라고 가정해도 된다. $S$를 더 축소하면
+더 이상의 밑변환과 양립하도록, 차수 $0$과 $1$에 놓인 복합체로
+$$
+Rf_*\mathcal{O}_X = (\mathcal{O}_S \xrightarrow{0} \mathcal{O}_S)
+$$
+라고 쓸 수 있다. 보조정리 \ref{moduli-curves-lemma-genus}를 보라.
+쌍대성에 의해 이는 차수 $0$과 $1$에 놓인 복합체로
+$$
+Rf_*\omega_{X/S} = (\mathcal{O}_S \xrightarrow{0} \mathcal{O}_S)
+$$
+임을 뜻한다\footnote{『대수공간의 쌍대성』의 보조정리
+\ref{spaces-duality-lemma-iso-on-RSheafHom}과 주석
+\ref{spaces-duality-remark-iso-on-RSheafHom}에 의해
+$Rf_*\omega_{X/S}^\bullet =
+Rf_*R\SheafHom_{\mathcal{O}_X}(\mathcal{O}_X. \omega_{X/S}^\bullet) =
+R\SheafHom_{\mathcal{O}_S}(Rf_*\mathcal{O}_X, \mathcal{O}_S)$임을 쓰고,
+그런 다음 절 \ref{moduli-curves-section-relative-dualizing}의 정의에 의해
+$\omega_{X/S}^\bullet = \omega_{X/S}[1]$임을 사용한다.}.
+특히 $Rf_*\omega_{X/S}$의 형성이 밑변환과 양립하므로(위에 준
+참고문헌을 보라), 밑변환과 양립하는 동형사상
+$\mathcal{O}_S \to f_*\omega_{X/S}$를 얻는다. 수반성에 의해 대역
+절단 $\sigma \in \Gamma(X, \omega_{X/S})$를 얻는다. 이 절단을 섬유
+$X_s$에 제한하면 영이 아니고(실제로 기저 원소이다), 섬유에서
+$\omega_{X_s}$가 자명이므로 이 절단은 $X_s$ 어디에서도 영이 아니다.
+따라서 $X_s$의 어떤 열린 근방에서도 어디에서도 영이 아니다.
+$f$가 고유이므로 이 열린 근방은 $S$에서 $s$의 어떤 열린 근방
+$U$에 대한 $f^{-1}(U)$를 포함한다.
+\end{proof}
+
+\noindent
+보조정리 \ref{moduli-curves-lemma-semistable}에 착안하여 다음과 같이 정의한다.
+
+\begin{definition}
+\label{moduli-curves-definition-semistable}
+$f : X \to S$를 곡선족이라 하자. 다음 조건을 만족하면 $f$를
+{\it 반안정 곡선족}이라 한다.
+\begin{enumerate}
+\item $X \to S$가 전안정 곡선족이다.
+\item 모든 $s \in S$에 대해 $X_s$의 종수가 $\geq 1$이고 유리
+꼬리가 없다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+특히 종수 $0$인 전안정 곡선족은 반안정일 수 없다.
+$X$를 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴이라 하자.
+그러면 $X \to \Spec(k)$는 곡선족이므로 반안정인지 물을 수 있다.
+정의를 풀어 쓰면 다음이 서로 동치이다.
+\begin{enumerate}
+\item $X$가 반안정이다.
+\item $X$가 전안정이고, 종수가 $\geq 1$이며, 유리 꼬리를 갖지
+않는다.
+\item $X_{\overline{k}}$가 연결이고, 유한 개의 절점을 제외하면
+$\overline{k}$ 위에서 매끄럽고, 종수가 $\geq 1$이며,
+$X_{\overline{k}}$의 나머지 부분과 오직 한 점에서 만나는
+$\mathbf{P}^1_{\overline{k}}$와 동형인 기약성분을 갖지 않는다.
+\end{enumerate}
+(2)와 (3)의 동치를 보려면 『대수곡선』의 보조정리
+\ref{curves-lemma-contracting-rational-tails}에 의해 $X$에 유리 꼬리가
+없는 것과 $X_{\overline{k}}$에 유리 꼬리가 없는 것이 동치임을
+사용한다. 이는 우리의 정의가 문헌에서 찾아볼 수 있는 대부분의
+정의와 일치함을 보여 준다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-semistable-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{semistable} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이
+$\Curvesstack^{semistable}$을 통해 인수분해된다.
+\item $X \to S$가 반안정 곡선족이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{semistable}$을 통해 인수분해된다.
+\item $X$의 특이점들이 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이고, $X$의 종수가 $\geq 1$이며,
+$X$에는 유리 꼬리가 없다.
+\item $X$의 특이점들이 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이고, $m \geq 2$에 대해
+$\omega_{X_s}^{\otimes m}$이 대역적으로 생성된다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)(b)와 (2)(c)의 동치는 『대수곡선』의 보조정리
+\ref{curves-lemma-contracting-rational-tails}이다. 나머지 증명에서는
+정의 \ref{moduli-curves-definition-semistable}에 따라 (2)(b)를 사용한다.
+
+\medskip\noindent
+절 \ref{moduli-curves-section-open}의 논의에 의해 전안정 곡선족
+$f : X \to S$만 살펴보면 충분하다. 보조정리
+\ref{moduli-curves-lemma-semistable}에서 해당 자취가 원하는 대로 열려 있음을
+얻는다. 『대수곡선』의 보조정리
+\ref{curves-lemma-contracting-rational-tails}에 의해 유리 꼬리의
+(비)존재 여부는 바탕 체의 확대에 영향을 받지 않으므로 이 열린집합의
+형성은 임의의 밑변환과 가환한다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-semistable-one-piece-per-genus}
+열린 동시에 닫힌 부분스택들로의 분해
+$$
+\Curvesstack^{semistable} = \coprod\nolimits_{g \geq 1}
+\Curvesstack^{semistable}_g
+$$
+가 있고, 각 $\Curvesstack^{semistable}_g$는 다음과 같이
+특징지어진다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이
+$\Curvesstack^{semistable}_g$를 통해 인수분해된다.
+\item $X \to S$가 반안정 곡선족이고 $R^1f_*\mathcal{O}_X$는
+계수 $g$인 국소 자유 $\mathcal{O}_S$-모듈이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{semistable}_g$를 통해 인수분해된다.
+\item $X$의 특이점들이 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이고, $X$의 종수가 $g$이며, $X$에는
+유리 꼬리가 없다.
+\item $X$의 특이점들이 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이고, $X$의 종수가 $g$이며,
+$m \geq 2$에 대해 $\omega_{X_s}^{\otimes m}$이 대역적으로
+생성된다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{moduli-curves-lemma-semistable-curves}와
+\ref{moduli-curves-lemma-prestable-one-piece-per-genus}를 결합하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-semistable-curves-smooth}
+사상
+$\Curvesstack^{semistable} \to \Spec(\mathbf{Z})$와
+$\Curvesstack^{semistable}_g \to \Spec(\mathbf{Z})$는 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{semistable}$이 $\Curvesstack^{nodal}$의 열린
+부분스택이므로 보조정리 \ref{moduli-curves-lemma-nodal-curves-smooth}에서 따른다.
+\end{proof}
+
+
+
+
+
+
+\section{안정 곡선}
+\label{moduli-curves-section-stable-curves}
+
+\noindent
+다음 보조정리는 안정 곡선족을 이해하는 데 도움이 된다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable}
+$f : X \to S$를 종수 $g \geq 2$인 전안정 곡선족이라 하자.
+$s \in S$를 바탕 스킴의 한 점이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $X_s$는 유리 꼬리도 유리 다리도 갖지 않는다
+(『대수곡선』의 예제 \ref{curves-example-rational-tail}과
+\ref{curves-example-rational-bridge}).
+\item 어떤 열린집합 $s \in U \subset S$에 대해 $\omega_{X/S}$가
+$f^{-1}(U)$ 위에서 풍부하다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)를 가정하자. 그러면 $\omega_{X_s}$는 $X_s$ 위에서 풍부하다.
+『대수곡선』의 보조정리
+\ref{curves-lemma-rational-tail-negative}와
+\ref{curves-lemma-rational-bridge-zero}에 의해 (1)이 성립한다
+(『다양체』의 보조정리
+\ref{varieties-lemma-ampleness-in-terms-of-degrees-components}에 있는
+풍부한 가역층의 특징화도 사용한다).
+
+\medskip\noindent
+(1)을 가정하자. 그러면 『대수곡선』의 보조정리
+\ref{curves-lemma-contracting-rational-bridges}에 의해
+$\omega_{X_s}$는 $X_s$ 위에서 풍부하다. 『대수공간에서의 내림』의
+보조정리 \ref{spaces-descent-lemma-ample-in-neighbourhood}에서
+결론이 따른다.
+\end{proof}
+
+\noindent
+보조정리 \ref{moduli-curves-lemma-stable}에 착안하여 다음과 같이 정의한다.
+
+\begin{definition}
+\label{moduli-curves-definition-stable}
+$f : X \to S$를 곡선족이라 하자. 다음 조건을 만족하면 $f$를
+{\it 안정 곡선족}이라 한다.
+\begin{enumerate}
+\item $X \to S$가 전안정 곡선족이다.
+\item 모든 $s \in S$에 대해 $X_s$의 종수가 $\geq 2$이고 유리
+꼬리나 다리를 갖지 않는다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+특히 종수 $0$ 또는 $1$인 전안정 곡선족은 안정일 수 없다.
+$X$를 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴이라 하자.
+그러면 $X \to \Spec(k)$는 곡선족이므로 안정인지 물을 수 있다.
+정의를 풀어 쓰면 다음이 서로 동치이다.
+\begin{enumerate}
+\item $X$가 안정이다.
+\item $X$가 전안정이고, 종수가 $\geq 2$이며, 유리 꼬리도 유리
+다리도 갖지 않는다.
+\item $X$가 기하적으로 연결이고, 유한 개의 절점을 제외하면 $k$
+위에서 매끄러우며, $\omega_X$가 풍부하다.
+\end{enumerate}
+(2)와 (3)의 동치를 보려면 위의 보조정리 \ref{moduli-curves-lemma-stable}을
+사용한다. 이는 우리의 정의가 문헌에서 찾아볼 수 있는 대부분의
+정의와 일치함을 보여 준다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-curves}
+다음 조건을 만족하는 열린 부분스택
+$\Curvesstack^{stable} \subset \Curvesstack$이 존재한다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이 $\Curvesstack^{stable}$을 통해
+인수분해된다.
+\item $X \to S$가 안정 곡선족이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\Curvesstack^{stable}$을 통해 인수분해된다.
+\item $X$의 특이점들이 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이고, $X$의 종수가 $\geq 2$이며,
+$X$에는 유리 꼬리나 다리가 없다.
+\item $X$의 특이점들이 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이고, $\omega_{X_s}$가 풍부하다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+절 \ref{moduli-curves-section-open}의 논의에 의해 전안정 곡선족
+$f : X \to S$만 살펴보면 충분하다. 보조정리 \ref{moduli-curves-lemma-stable}에서
+해당 자취가 원하는 대로 열려 있음을 얻는다. 이 열린집합의 형성은
+임의의 밑변환과 가환한다. 실제로 『대수곡선』의 보조정리
+\ref{curves-lemma-contracting-rational-tails}와
+\ref{curves-lemma-contracting-rational-bridges}에 의해 유리 꼬리나
+다리의 (비)존재 여부는 바탕 체의 확대에 영향을 받지 않으며,
+또는 『내림』의 보조정리
+\ref{descent-lemma-descending-property-ample}에 의해 풍부성은 바탕 체의
+확대에 영향을 받지 않는다.
+\end{proof}
+
+\begin{definition}
+\label{moduli-curves-definition-deligne-mumford}
+\begin{reference}
+\cite{DM}
+\end{reference}
+보조정리 \ref{moduli-curves-lemma-stable-curves}에서 도입한 안정 곡선족들을
+매개화하는 대수적 스택 $\Curvesstack^{stable}$을
+$\overline{\mathcal{M}}$으로 나타내고 {\it 안정 곡선의 모듈라이
+스택}이라 부른다. $g \geq 2$에 대해 보조정리
+\ref{moduli-curves-lemma-stable-one-piece-per-genus}에서 도입한 대수적 스택을
+$\overline{\mathcal{M}}_g$로 나타내고 {\it 종수 $g$인 안정 곡선의
+모듈라이 스택}이라 부른다.
+\end{definition}
+
+\noindent
+다음은 빠뜨릴 수 없는 보조정리이다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-one-piece-per-genus}
+열린 동시에 닫힌 부분스택들로의 분해
+$$
+\overline{\mathcal{M}} = \coprod\nolimits_{g \geq 2} \overline{\mathcal{M}}_g
+$$
+가 있고, 각 $\overline{\mathcal{M}}_g$는 다음과 같이 특징지어진다.
+\begin{enumerate}
+\item 곡선족 $f : X \to S$가 주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $S \to \Curvesstack$이
+$\overline{\mathcal{M}}_g$를 통해 인수분해된다.
+\item $X \to S$가 안정 곡선족이고 $R^1f_*\mathcal{O}_X$는
+계수 $g$인 국소 자유 $\mathcal{O}_S$-모듈이다.
+\end{enumerate}
+\item 체 $k$ 위에서 고유하고 $\dim(X) \leq 1$인 스킴 $X$가
+주어졌을 때 다음은 서로 동치이다.
+\begin{enumerate}
+\item 분류 사상 $\Spec(k) \to \Curvesstack$이
+$\overline{\mathcal{M}}_g$를 통해 인수분해된다.
+\item $X$의 특이점들이 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이고, $X$의 종수가 $g$이며, $X$에는
+유리 꼬리나 다리가 없다.
+\item $X$의 특이점들이 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이고, $X$의 종수가 $g$이며,
+$\omega_{X_s}$가 풍부하다.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+보조정리 \ref{moduli-curves-lemma-stable-curves}와
+\ref{moduli-curves-lemma-prestable-one-piece-per-genus}를 결합하면 된다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-curves-smooth}
+사상
+$\overline{\mathcal{M}} \to \Spec(\mathbf{Z})$와
+$\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$는 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+$\overline{\mathcal{M}}$이 $\Curvesstack^{nodal}$의 열린
+부분스택이므로 보조정리 \ref{moduli-curves-lemma-nodal-curves-smooth}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-curves-deligne-mumford}
+스택 $\overline{\mathcal{M}}$과 $\overline{\mathcal{M}}_g$는
+$\Curvesstack^{DM}$의 열린 부분스택이다. 특히
+$\overline{\mathcal{M}}$과 $\overline{\mathcal{M}}_g$는 DM이고
+(『스택의 사상』의 정의
+\ref{stacks-morphisms-definition-absolute-separated}),
+들리뉴--멈퍼드 스택이기도 하다(『대수적 스택』의 정의
+\ref{algebraic-definition-deligne-mumford}).
+\end{lemma}
+
+\begin{proof}
+첫 번째 명제를 증명하자. $X$를 체 $k$ 위에서 고유인 스킴이라 하자.
+그 특이점들은 많아야 절점이고, $\dim(X) = 1$이며,
+$k = H^0(X, \mathcal{O}_X)$이고, $X$의 종수는 $\geq 2$이며,
+$X$에는 유리 꼬리나 다리가 없다고 하자. 분류 사상
+$\Spec(k) \to \overline{\mathcal{M}} \to \Curvesstack$이
+$\Curvesstack^{DM}$을 통해 인수분해됨을 보여야 한다.
+먼저 $k$를 그 대수적 폐포로 바꾸어도 된다(관련 스택들이 대수적
+스택 $\Curvesstack$의 열린 부분스택임을 이미 알고 있기 때문이다).
+보조정리 \ref{moduli-curves-lemma-stable-curves}, \ref{moduli-curves-lemma-DM-curves},
+\ref{moduli-curves-lemma-in-DM-locus-vector-fields}에 의해
+$\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X) = 0$임을 보이면 충분하다.
+이는 『대수곡선』의 보조정리
+\ref{curves-lemma-stable-vector-fields}에서 증명된다.
+
+\medskip\noindent
+$\Curvesstack^{DM}$은 $\Curvesstack$의 DM인 가장 큰 열린
+부분스택이므로, $\Curvesstack^{DM}$의 열린 부분스택
+$\overline{\mathcal{M}}$에 대해서도 이것이 참임을 알 수 있다.
+마지막으로 『스택의 사상』의 정리
+\ref{stacks-morphisms-theorem-DM}에 의해 DM 대수적 스택은
+들리뉴--멈퍼드이다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-dense-in-stable}
+$g \geq 2$라 하자. 포함관계
+$$
+|\mathcal{M}_g| \subset |\overline{\mathcal{M}}_g|
+$$
+의 왼쪽은 열린 조밀 부분집합이다.
+\end{lemma}
+
+\begin{proof}
+$\overline{\mathcal{M}}_g \subset \Curvesstack^{lci+}$가 열려 있고
+$\Curvesstack^{smooth} \cap \overline{\mathcal{M}}_g = \mathcal{M}_g$
+이므로 보조정리 \ref{moduli-curves-lemma-smooth-dense}에서 즉시 따른다.
+\end{proof}
+
+
+
+
+\section{축약 사상}
+\label{moduli-curves-section-contracting}
+
+\noindent
+여기서 계속하기 전에 『대수곡선』의 절
+\ref{curves-section-contracting-rational-tails},
+\ref{curves-section-contracting-rational-bridges},
+\ref{curves-section-contracting-to-stable}의 내용에 익숙해지기를
+독자에게 강력히 권한다. 이 절의 주된 결과는 ``안정화'' 사상
+$$
+\Curvesstack^{prestable}_g
+\longrightarrow
+\overline{\mathcal{M}}_g
+$$
+의 존재이다. 보조정리 \ref{moduli-curves-lemma-stabilization-morphism}을 보라.
+대략 말하면 이 사상은 종수 $g$인 절점 곡선의 모듈라이 점을
+『대수곡선』의 보조정리
+\ref{curves-lemma-characterize-contraction-to-stable}에서 구성한 연관된
+안정 곡선의 모듈라이 점으로 보낸다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-contract}
+$S$를 스킴이라 하고 $s \in S$를 한 점이라 하자.
+$f : X \to S$와 $g : Y \to S$를 곡선족이라 하자.
+$c : X \to Y$를 $S$ 위의 사상이라 하자. 만일
+$c_{s, *}\mathcal{O}_{X_s} = \mathcal{O}_{Y_s}$이고
+$R^1c_{s, *}\mathcal{O}_{X_s} = 0$이면, $S$를 $s$의 어떤 열린
+근방으로 바꾼 뒤
+$\mathcal{O}_Y = c_*\mathcal{O}_X$이고 $R^1c_*\mathcal{O}_X = 0$이며,
+이는 임의의 사상 $S' \to S$로 밑변환한 뒤에도 참이다.
+\end{lemma}
+
+\begin{proof}
+에탈 근방 $(U, u) \to (S, s)$을 택하여
+$\mathcal{O}_{Y_U} = (X_U \to Y_U)_*\mathcal{O}_{X_U}$이고
+$R^1(X_U \to Y_U)_*\mathcal{O}_{X_U} = 0$이며, $U' \to U$로
+밑변환한 뒤에도 같은 사실이 참이라고 하자. 이제 $S$를
+$U \to S$의 열린 상으로 바꾼다. $S' \to S$가 주어지면
+$U' = U \times_S S'$라 두고 에탈 덮개 $\{U' \to S'\}$와
+$\{Y_{U'} \to Y_{S'}\}$를 얻는다. 따라서 $S' \to S$에 의한
+$c$의 밑변환에 대해 명제가 참이라는 사실은 $U' \to U$에 의한
+$X_U \to Y_U$의 밑변환에 대해 명제가 참이라는 사실에서 따른다.
+다시 말해 이 문제는 $S$의 에탈 위상에서 국소적이다.
+그러므로 보조정리 \ref{moduli-curves-lemma-etale-locally-scheme}에 의해 $X$와
+$Y$가 스킴이라고 가정해도 된다. 『사상에 관한 추가 내용』의
+보조정리 \ref{more-morphisms-lemma-h1-fibre-zero-isom}에 의해
+$Y_s$를 포함하는 열린 부분스킴 $V \subset Y$가 있어서
+$c_*\mathcal{O}_X|_V = \mathcal{O}_V$이고
+$R^1c_*\mathcal{O}_X|_V = 0$이며, 이는 임의의 $S' \to S$로
+밑변환한 뒤에도 참이다. $g : Y \to S$가 고유이므로
+$g^{-1}(U) \subset V$가 되는 $s$의 열린 근방 $U \subset S$를 찾을
+수 있다. 이 $U$가 원하는 근방이다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-contract-basic-uniqueness}
+$S$를 스킴이라 하고 $s \in S$를 한 점이라 하자.
+$f : X \to S$와 $g_i : Y_i \to S$, $i = 1, 2$를 곡선족이라 하자.
+$c_i : X \to Y_i$를 $S$ 위의 사상이라 하자.
+$c_{1, s}$와 $c_{2, s}$에 양립하는 섬유의 동형사상
+$Y_{1, s} \cong Y_{2, s}$가 있다고 하자. 만일
+$c_{1, s, *}\mathcal{O}_{X_s} = \mathcal{O}_{Y_{1, s}}$이고
+$R^1c_{1, s, *}\mathcal{O}_{X_s} = 0$이면, $s$의 열린 근방 $U$와
+$U$ 위의 곡선족들의 동형사상 $Y_{1, U} \cong Y_{2, U}$가 존재하며,
+이 동형사상은 주어진 섬유의 동형사상 및 $c_1$, $c_2$와 양립한다.
+\end{lemma}
+
+\begin{proof}
+$s$의 아핀 근방 $U$들의 계에 대해
+$\mathcal{O}_{S, s} = \colim \mathcal{O}_S(U)$임을 상기하자.
+따라서 이 국소환 위의 유한 표시 대수공간들의 범주는 $s$의 아핀
+근방 위의 유한 표시 대수공간들의 범주의 여과귀납극한이다.
+『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-finite-presentation}을 보라.
+이렇게 하여 $S$가 국소환의 스펙트럼이고 $s$가 닫힌점인 경우로
+환원한다.
+
+\medskip\noindent
+$S = \Spec(A)$이고 $A$는 국소환이며 $s$는 닫힌점이라고 하자.
+국소 뇌터 환 $A_j$(이를테면 $\mathbf{Z}$ 위에서 본질적으로 유한형인
+것)와 국소 전이 준동형을 사용하여 $A = \colim A_j$로 쓰자.
+닫힌점 $s_j$를 갖는 $S_j = \Spec(A_j)$라 두자. 보조정리
+\ref{moduli-curves-lemma-curves-qs-lfp}와 『스택의 극한』의 보조정리
+\ref{stacks-limits-lemma-representable-by-spaces-limit-preserving}에 의해
+어떤 $j$와 곡선족 $X_j \to S_j$, $Y_{j, i} \to S_j$를 찾을 수 있다.
+필요하면 $j$를 증가시켜, $s$로 밑변환했을 때 $c_i$가 되는 사상
+$c_{j, i} : X_j \to Y_{j, i}$를 찾을 수 있다. 『대수공간의 극한』의
+보조정리 \ref{spaces-limits-lemma-descend-finite-presentation}을 보라.
+$\kappa(s) = \colim \kappa(s_j)$이므로 마찬가지로
+$c_{j, 1, s_j}$와 $c_{j, 2, s_j}$에 양립하는 동형사상
+$Y_{j, 1, s_j} \cong Y_{j, 2, s_j}$가 있다고 가정해도 된다.
+마지막으로 $\{s_j \to s\}$가 fpqc 덮개이고 이 덮개에 의한
+$c_{j, 1, s_j}$의 바탕이 $c_{1, s}$이므로, 가정
+$c_{1, s, *}\mathcal{O}_{X_s} = \mathcal{O}_{Y_{1, s}}$와
+$R^1c_{1, s, *}\mathcal{O}_{X_s} = 0$은 $c_{j, 1, s_j}$에 유전된다
+(세부사항은 생략한다). 이렇게 하여 다음 문단에서 논의할 경우로
+보조정리를 환원한다.
+
+\medskip\noindent
+$S$가 뇌터 국소환 $\Lambda$의 스펙트럼이고 $s$가 닫힌점이라고 하자.
+다음 사상의 스킴론적 상 $Z$를 생각하자.
+$$
+(c_1, c_2) : X \longrightarrow Y_1 \times_S Y_2
+$$
+보조정리의 명제는 사영 사상을 통해 $Z$가 $Y_1$, $Y_2$ 각각으로
+동형적으로 사상된다는 주장과 동치이다. 이 사상의 스킴론적 상을
+취하는 일은 평탄 밑변환과 가환하므로(『대수공간의 사상』의
+보조정리
+\ref{spaces-morphisms-lemma-flat-base-change-scheme-theoretic-image},
+$\Lambda$를 그 완비화로 바꿔도 된다(『대수학에 관한 추가 내용』의
+절 \ref{more-algebra-section-permanence-completion}).
+
+\medskip\noindent
+$S$가 완비 뇌터 국소환 $\Lambda$의 스펙트럼이라고 하자.
+이 경우 $X$, $Y_1$, $Y_2$는 스킴이다(『대수공간의 사상에 관한 추가
+내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-projective-over-complete}).
+$X$, $Y_1$, $Y_2$를 $\Spec(\Lambda/\mathfrak m^{n + 1})$로
+밑변환한 것을 각각 $X_n$, $Y_{1, n}$, $Y_{2, n}$으로 나타내자.
+화살표
+$$
+\Deformationcategory_{X_s \to Y_{2, s}} \cong
+\Deformationcategory_{X_s \to Y_{1, s}} \longrightarrow
+\Deformationcategory_{X_s}
+$$
+가 동치임을 상기하자. 『변형 문제』의 보조정리
+\ref{examples-defos-lemma-schemes-morphisms-smooth-to-base}를 보라.
+따라서 $\Deformationcategory_{X_s \to Y_{1, s}}$의 형식적 대상들의
+동형사상 $(X_n \to Y_{1, n}) \cong (X_n \to Y_{2, n})$이 있다.
+마지막으로 그로텐디크의 대수화 정리(『스킴의 코호몰로지』의
+보조정리 \ref{coherent-lemma-algebraize-morphism})에 의해 이는
+$c_1$, $c_2$와 양립하는 동형사상 $Y_1 \to Y_2$를 준다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-contract-basic}
+$f : X \to S$를 곡선족이라 하고 $s \in S$를 한 점이라 하자.
+$h_0 : X_s \to Y_0$를 $\kappa(s)$ 위의 고유 스킴 $Y_0$로 가는
+사상이라 하자. 만일
+$h_{0, *}\mathcal{O}_{X_s} = \mathcal{O}_{Y_0}$이고
+$R^1h_{0, *}\mathcal{O}_{X_s} = 0$이면, 기본 에탈 근방
+$(U, u) \to (S, s)$, 곡선족 $Y \to U$, 그리고 $u$에서의 섬유가
+$h_0$와 동형인 $U$ 위의 사상 $h : X_U \to Y$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+먼저 몇 가지 환원을 하겠다. 독자에게 뒤로 건너뛰기를 권한다.
+문제는 $S$에서 국소적이므로 $S$가 아핀이라고 가정해도 된다.
+이를 $\mathbf{Z}$ 위의 유한형 아핀 스킴 $S_i$들의 여과역극한
+$S = \lim S_i$로 쓰자. 어떤 $i$에 대해 당김이 $X \to S$인 곡선족
+$X_i \to S_i$를 찾을 수 있다. 이는 보조정리
+\ref{moduli-curves-lemma-curves-qs-lfp}와 『스택의 극한』의 보조정리
+\ref{stacks-limits-lemma-representable-by-spaces-limit-preserving}에서
+따른다. $s$의 상을 $s_i \in S_i$라 하자.
+$\kappa(s) = \colim \kappa(s_i)$이고 $X_s$가 스킴임을 관찰하자
+(『체 위의 대수공간』의 보조정리
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus}).
+$i$를 증가시키면 $\kappa(s_i)$ 위의 유한형 스킴의 사상
+$h_{i, 0} : X_{i, s_i} \to Y_i$가 존재하고, 이를 $\kappa(s)$로
+밑변환하면 $h_0$가 된다고 가정할 수 있다. 『극한』의 보조정리
+\ref{limits-lemma-descend-finite-presentation}을 보라.
+$i$를 더 증가시켜 $Y_i$가 $\kappa(s_i)$ 위에서 고유라고 가정할 수
+있다. 『극한』의 보조정리 \ref{limits-lemma-eventually-proper}를 보라.
+사영을 $g_{i, 0} : Y_0 \to Y_{i, 0}$이라 하자. 이는
+$\Spec(\kappa(s)) \to \Spec(\kappa(s_i))$의 밑변환이므로 충실히
+평탄한 사상이다. 평탄 밑변환에 의해
+$$
+h_{0, *}\mathcal{O}_{X_s} = g_{i, 0}^*h_{i, 0, *}\mathcal{O}_{X_{i, s_i}}
+\quad\text{그리고}\quad
+R^1h_{0, *}\mathcal{O}_{X_s} = g_{i, 0}^*Rh_{i, 0, *}\mathcal{O}_{X_{i, s_i}}
+$$
+이다. 『스킴의 코호몰로지』의 보조정리
+\ref{coherent-lemma-flat-base-change-cohomology}를 보라. 충실한
+평탄성에 의해 $X_i \to S_i$, $s_i \in S_i$,
+$X_{i, s_i} \to Y_i$는 보조정리의 모든 가정을 만족한다.
+이로써 다음 문단에서 논의하는 경우로 환원된다.
+
+\medskip\noindent
+$S$가 $\mathbf{Z}$ 위의 유한형 아핀 스킴이라고 하자.
+$S$의 $s$에서의 국소환의 헨젤화를 $\mathcal{O}_{S, s}^h$로
+나타내자. 『대수학에 관한 추가 내용』의 보조정리
+\ref{more-algebra-lemma-henselization-G-ring}과 명제
+\ref{more-algebra-proposition-ubiquity-G-ring}에 의해
+$\mathcal{O}_{S, s}^h$는 G-환이다. 곡선족
+$Y' \to \Spec(\mathcal{O}_{S, s}^h)$와, 닫힌점으로 밑변환하면
+$h_0$가 되는 $\Spec(\mathcal{O}_{S, s}^h)$ 위의 사상
+$$
+h' : X \times_S \Spec(\mathcal{O}_{S, s}^h) \longrightarrow Y'
+$$
+을 구성할 수 있다고 하자. 그러면 충분하다. 실제로 먼저 기본 에탈
+근방들의 여과 범주에 대한 귀납극한으로
+$$
+\mathcal{O}_{S, s}^h = \colim_{(U, u)} \mathcal{O}_U(U)
+$$
+임을 사용한다(『사상에 관한 추가 내용』의 보조정리
+\ref{more-morphisms-lemma-describe-henselization}).
+그다음 위에서 준 참고문헌을 다시 사용하여, 주어진 $Y'$을 어떤
+$U$ 위의 $Y \to U$로 내릴 수 있다. 그런 다음 『극한』의 보조정리
+\ref{limits-lemma-descend-finite-presentation}을 사용하여 $h'$을 어떤
+$h$로 내린다. 이로써 다음 문단에서 논의하는 경우로 환원된다.
+
+\medskip\noindent
+$S = \Spec(\Lambda)$이고
+$(\Lambda, \mathfrak m, \kappa)$가 헨젤 뇌터 국소 G-환이며 $s$가
+$S$의 닫힌점이라고 하자. 사상
+$$
+\Deformationcategory_{X_s \to Y_0} \to \Deformationcategory_{X_s}
+$$
+가 동치임을 상기하자. 『변형 문제』의 보조정리
+\ref{examples-defos-lemma-schemes-morphisms-smooth-to-base}를 보라.
+(이는 증명에서 유일하게 중요한 단계이고 나머지는 모두 기법이다.)
+그 $\mathfrak m$-진 완비화를 $\Lambda^\wedge$로 나타내자.
+$X$를 $\Lambda/\mathfrak m^{n + 1}$로 당긴 $X_n$들은
+$\Lambda^\wedge$ 위의 $\Deformationcategory_{X_s}$의 형식적 대상
+$\xi$를 정의한다. 위의 동치에서 $\Lambda^\wedge$ 위의
+$\Deformationcategory_{X_s \to Y_0}$의 형식적 대상 $\xi'$을 얻는다.
+따라서 다음과 같은 커다란 가환 도식을 얻는다.
+$$
+\xymatrix{
+\ldots \ar[r] &
+X_n \ar[r] \ar[d] &
+X_{n - 1} \ar[r] \ar[d] &
+\ldots \ar[r] &
+X_s \ar[d] \\
+\ldots \ar[r] &
+Y_n \ar[r] \ar[d] &
+Y_{n - 1} \ar[r] \ar[d] &
+\ldots \ar[r] &
+Y_0 \ar[d] \\
+\ldots \ar[r] &
+\Spec(\Lambda/\mathfrak m^{n + 1}) \ar[r] &
+\Spec(\Lambda/\mathfrak m^n) \ar[r] &
+\ldots \ar[r] &
+\Spec(\kappa)
+}
+$$
+『몫』의 보조정리 \ref{quot-lemma-curves-existence}에 의해 형식적 대상
+$(Y_n)$은 곡선족 $Y' \to \Spec(\Lambda^\wedge)$에서 온다.
+『대수공간의 사상에 관한 추가 내용』의 보조정리
+\ref{spaces-more-morphisms-lemma-algebraize-morphism}에 의해 모든 $n$에
+대해 주어진 사상 $X_n \to Y_n$, 특히 주어진 사상
+$X_s \to Y_0$를 유도하는 사상
+$h' : X_{\Lambda^\wedge} \to Y'$을 얻는다.
+
+\medskip\noindent
+증명을 끝내기 위해 표준적인 대수화/근사 논증을 사용한다.
+먼저 유한 생성 $\Lambda$-부분대수
+$\Lambda \subset A \subset \Lambda^\wedge$, 곡선족
+$Y'' \to \Spec(A)$, 그리고 $\Lambda^\wedge$로의 밑변환이 $h'$인
+$A$ 위의 사상 $h'' : X_A \to Y''$를 찾을 수 있음을 관찰한다.
+이는 $\Lambda^\wedge$가 이러한 환 $A$들의 여과귀납극한이기
+때문이다. 앞에서와 같이 $\Curvesstack$이 국소 유한 표시라는 사실을
+사용하여 논증할 수 있다(『스택의 극한』의 보조정리
+\ref{stacks-limits-lemma-representable-by-spaces-limit-preserving}는
+$A$ 위의 $Y''$을 준다). 그리고 『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-descend-finite-presentation}을 사용하여 $h'$을
+어떤 $h''$로 내린다. 그런 다음 G-환의 근사 성질을
+『매끄러운 환 사상』의 정리
+\ref{smoothing-theorem-approximation-property}의 형태로 적용하여,
+$A \to \Lambda^\wedge$에서 얻는 $A \to \kappa$와 같은 사상을
+유도하는 사상 $A \to \Lambda$를 찾는다. $h''$을 $\Lambda$로
+밑변환하면 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-contract-prestable-to-stable}
+$f : X \to S$를 종수 $g \geq 2$인 전안정 곡선족이라 하자.
+$f$의 인수분해 $X \to Y \to S$가 있어서 $g : Y \to S$는 안정
+곡선족이고 $c : X \to Y$는 다음 성질을 갖는다.
+\begin{enumerate}
+\item $\mathcal{O}_Y = c_*\mathcal{O}_X$이고
+$R^1c_*\mathcal{O}_X = 0$이며, 이는 임의의 사상 $S' \to S$로
+밑변환한 뒤에도 참이다.
+\item 임의의 $s \in S$에 대해 사상 $c_s : X_s \to Y_s$는
+『대수곡선』의 절 \ref{curves-section-contracting-to-stable}에서
+논의한 유리 꼬리와 다리의 축약이다.
+\end{enumerate}
+더 나아가 $c : X \to Y$는 유일한 동형사상 아래 유일하다.
+\end{lemma}
+
+\begin{proof}
+$s \in S$라 하자. $c_0 : X_s \to Y_0$를 『대수곡선』의 절
+\ref{curves-section-contracting-to-stable}의 축약이라 하자(더 정확히는
+『대수곡선』의 보조정리
+\ref{curves-lemma-characterize-contraction-to-stable}).
+보조정리 \ref{moduli-curves-lemma-contract-basic}에 의해 기본 에탈 근방
+$(U, u)$와 $U$ 위의 곡선족들의 사상 $c : X_U \to Y$가 존재하여
+$u$에서의 섬유로 $c_0$를 되찾는다. $\omega_{Y_0}$가 풍부하므로,
+필요하면 $U$를 축소하여 $Y \to U$가 종수 $g$인 안정 곡선족이라고
+할 수 있다. 이는 보조정리 \ref{moduli-curves-lemma-stable-curves}와
+\ref{moduli-curves-lemma-stable-one-piece-per-genus}에 내재한 열린성에 따른다.
+필요하면 $U$를 한 번 더 축소하여, 보조정리 \ref{moduli-curves-lemma-contract}에
+의해 $c : X_U \to Y$에 대해 이 보조정리의 주장 (1)이 성립하게 할
+수 있다. 또한 『대수곡선』의 보조정리
+\ref{curves-lemma-characterize-contraction-to-stable}의 유일성에 의해
+(2)도 성립한다. 따라서 보조정리와 같은 사상 $c$는 $S$ 위에서
+에탈 국소적으로 존재한다. 더 정확히 말해 에탈 덮개
+$\{U_i \to S\}$와 $U_i$ 위의 사상 $c_i : X_{U_i} \to Y_i$가
+존재하며, $Y_i \to U_i$는 이 보조정리에 명시한 성질 (1), (2)를
+갖는 안정 곡선족이다.
+
+\medskip\noindent
+증명을 끝내려면 $c : X \to Y$가 유일한 동형사상 아래 유일함을
+보이면 충분하다. 실제로 이를 보이면 동형사상
+$$
+\varphi_{ij} :
+Y_i \times_{U_i} (U_i \times_S U_j)
+\longrightarrow
+Y_i \times_{U_j} (U_i \times_S U_j)
+$$
+을 얻고, 이들은 $U_i \times U_j \times U_k$ 위에서 유일성에 의해
+코사이클 조건을 만족한다. $\overline{\mathcal{M}_g}$가 대수적
+스택이므로 내림 데이터의 유효성이 성립하고 $Y \to S$를 얻는다.
+사상 $c_i$들은 $S$ 위의 사상 $c : X \to Y$로 내려간다.
+마지막으로 $c$에 대한 성질 (1), (2)는 $c_i$에 대한 성질 (1),
+(2)에서 즉시 따른다.
+
+\medskip\noindent
+마지막으로 $c_1 : X \to Y_i$, $i = 1, 2$가 $S$ 위의 안정 곡선족을
+향하는, (1), (2)를 만족하는 두 사상이면 보조정리
+\ref{moduli-curves-lemma-contract-basic-uniqueness}에 의해 적어도 $S$ 위에서
+국소적으로 $c_1$, $c_2$와 양립하는 사상 $Y_1 \to Y_2$를 얻는다.
+이 사상들이 유일함을 확인하는 과정은 생략한다(힌트: $c_1$의
+스킴론적 상이 $Y_1$이라는 사실에서 따른다). 따라서 국소적으로
+주어진 이 사상들은 붙고 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-stabilization-morphism}
+$g \geq 2$라 하자. $\mathbf{Z}$ 위의 대수적 스택의 사상
+$$
+stabilization :
+\Curvesstack^{prestable}_g
+\longrightarrow
+\overline{\mathcal{M}}_g
+$$
+이 존재하며, 이는 종수 $g$인 전안정 곡선족 $X \to S$를 보조정리
+\ref{moduli-curves-lemma-contract-prestable-to-stable}에서 연관시킨 안정 곡선족
+$Y \to S$로 보낸다.
+\end{lemma}
+
+\begin{proof}
+이를 보이려면 보조정리 \ref{moduli-curves-lemma-contract-prestable-to-stable}의
+구성이 밑변환과 양립함을 확인하면 충분하다(동형사상과의 양립성은
+즉시 알 수 있다). 『스택의 성질』의 절
+\ref{stacks-properties-section-conventions}에서 도입한 대수적 스택에
+관한 (관용적) 용어 사용을 보라. 이를 위해서는 보조정리
+\ref{moduli-curves-lemma-contract-prestable-to-stable}의 성질 (1), (2)가 밑변환
+아래 안정적임을 확인하면 충분하다. (1)에 대해서는 즉시 분명하다.
+(2)에 대해서는 『대수곡선』의 보조정리
+\ref{curves-lemma-contracting-rational-tails}와
+\ref{curves-lemma-contracting-rational-bridges}의 축약이 바탕 체의
+확대 아래 안정적이라는 사실에서 따르거나, 『대수곡선』의 보조정리
+\ref{curves-lemma-characterize-contraction-to-stable}에서 섬유 위의
+사상을 특징짓는 조건들이 바탕 체의 확대 아래 보존된다는 사실에서
+따른다.
+\end{proof}
+
+
+
+
+
+\section{안정 축소 정리}
+\label{moduli-curves-section-stable-reduction}
+
+\noindent
+반안정 축소에 관한 장에서 곡선의 반안정 축소에 관한 유명한 정리를
+증명했다. $K$를 이산 값매김환 $R$의 분수체라 하자. $C$를 $K$ 위의
+사영 매끄러운 곡선이고 $K = H^0(C, \mathcal{O}_C)$인 것이라 하자.
+『반안정 축소』의 정의 \ref{models-definition-semistable}에 따라,
+일반 섬유가 $C$인 $R$ 위의 전안정 곡선족이 존재하거나, $R$ 위의
+$C$의 어떤(동치이게는 모든) 최소 정칙 모형이 전안정이면 $C$가
+{\it 반안정 축소}를 갖는다고 한다. 이 절에서는 종수 $g \geq 2$인
+곡선에 대해 이것이 안정 축소와도 동치임을 보인다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-reduction}
+$R$을 분수체가 $K$인 이산 값매김환이라 하자. $C$를 $K$ 위의
+매끄러운 사영 곡선이고 $K = H^0(C, \mathcal{O}_C)$이며 종수가
+$g \geq 2$인 것이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $C$가 반안정 축소를 갖는다
+(『반안정 축소』의 정의 \ref{models-definition-semistable}).
+\item 일반 섬유가 $C$인 $R$ 위의 안정 곡선족이 존재한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+안정 곡선족은 전안정이기도 하므로 (2)에서 (1)이 즉시 따른다.
+거꾸로 일반 섬유가 $C$인 $R$ 위의 전안정 곡선족이 주어지면,
+보조정리 \ref{moduli-curves-lemma-contract-prestable-to-stable}에 의해 이를 안정
+곡선족으로 축약할 수 있다. 일반 섬유는 이미 안정이므로 이 절차에서
+변하지 않으며 증명이 끝난다.
+\end{proof}
+
+\noindent
+다음 보조정리는 보조정리 \ref{moduli-curves-lemma-stable-reduction}에서 약속한
+$R$ 위의 안정 곡선족이 유일한 동형사상 아래 유일함을 말해 준다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-unique-stable-model}
+$R$을 분수체가 $K$인 이산 값매김환이라 하자. $C$를 $K$ 위의
+매끄러운 고유 곡선이고 $K = H^0(C, \mathcal{O}_C)$이며 종수가
+$g$인 것이라 하자. $X$와 $X'$이 $C$의 모형이고(『반안정 축소』의
+절 \ref{models-section-models}), $X$와 $X'$이 $R$ 위의 종수 $g$인
+안정 곡선족이면, 모형의 유일한 동형사상 $X \to X'$이 존재한다.
+\end{lemma}
+
+\begin{proof}
+$Y$를 $C$의 최소 모형이라 하자. $Y$는 존재하고 유일하며 $R$ 위에서
+상대 차원 $1$이고 특이점이 많아야 절점임을 상기하자. 『반안정
+축소』의 명제 \ref{models-proposition-exists-minimal-model}과
+보조정리 \ref{models-lemma-minimal-model-unique},
+\ref{models-lemma-semistable}을 보라(마지막 보조정리는 $X$가 있으므로
+적용할 수 있다). 축약 사상
+$$
+Y \longrightarrow Z
+$$
+이 있어서 $Z$는 $R$ 위의 종수 $g$인 안정 곡선족이다
+(보조정리 \ref{moduli-curves-lemma-contract-prestable-to-stable}).
+모형의 유일한 동형사상 $X \to Z$가 있다고 주장한다.
+대칭성에 의해 $X'$에 대해서도 같고, 이로써 증명이 끝난다.
+
+\medskip\noindent
+『반안정 축소』의 보조정리
+\ref{models-lemma-blowup-at-worst-nodal}에 의해 사상들의 열
+$$
+X_m \to \ldots \to X_1 \to X_0 = X
+$$
+이 존재한다. 여기서 $X_{i + 1} \to X_i$는 $X_i$가 특이인 닫힌점
+$x_i$에서의 부풀리기이고, $X_i \to \Spec(R)$은 상대 차원 $1$이며
+특이점이 많아야 절점이고, $X_m$은 정칙이다.
+『반안정 축소』의 보조정리
+\ref{models-lemma-pre-exists-minimal-model}에 의해 $C$의 고유 정칙
+모형들의 열
+$$
+X_m = Y_n \to Y_{n - 1} \to \ldots \to Y_1 \to Y_0 = Y
+$$
+이 존재하며, 각 사상은 제1종 예외곡선의 축약이다\footnote{사실
+$X_m = Y$이다. 즉 $X_m$은 제1종 예외곡선을 전혀 포함하지 않는다.
+이 사실을 잘 생각해 보기를 독자에게 권한다. 증명이 다소 단순해진다.}.
+『반안정 축소』의 보조정리
+\ref{models-lemma-blowdown-at-worst-nodal}에 의해 각 $Y_i$는 $R$ 위에서
+상대 차원 $1$이고 특이점이 많아야 절점이다. 이 주장을 증명하려면
+사상 $X_m \to X$ 및 $X_m = Y_n \to Y \to Z$와 양립하는 동형사상
+$X \to Z$가 있음을 보이면 충분하다. $s \in \Spec(R)$을 닫힌점이라
+하자. 보조정리 \ref{moduli-curves-lemma-contract-basic-uniqueness} 또는 보조정리
+\ref{moduli-curves-lemma-contract-prestable-to-stable}에 의해, 사상
+$X_{m, s} \to X_s$와 $X_{m, s} \to Z_s$가 둘 다 『대수곡선』의
+보조정리 \ref{curves-lemma-characterize-contraction-to-stable}에 있는
+표준 사상과 같음을 증명하는 문제로 환원된다.
+
+\medskip\noindent
+$\kappa(s)$ 위의 스킴의 사상 $c : U \to V$가
+$v \in V$에 대해 $\dim(U_v) \leq 1$이고,
+$\mathcal{O}_V = c_*\mathcal{O}_U$이며,
+$R^1c_*\mathcal{O}_U = 0$이면 $c$가 성질 (*)를 갖는다고 하자.
+이 성질은 합성 아래 안정적이다. $X_s$와 $Z_s$는 둘 다
+$\kappa(s)$ 위의 종수 $g$인 안정 곡선이므로, 각 사상
+$Y_s \to Z_s$, $X_{i + 1, s} \to X_{i, s}$,
+$Y_{i + 1, s} \to Y_{i, s}$가 성질 (*)를 만족함을 보이면 충분하다.
+『대수곡선』의 보조정리
+\ref{curves-lemma-characterize-contraction-to-stable}를 보라.
+
+\medskip\noindent
+$Y_s \to Z_s$는 구성에 의해 성질 (*)를 갖는다.
+
+\medskip\noindent
+사상 $c : X_{i + 1, s} \to X_{i, s}$는 『반안정 축소』의 보조정리
+\ref{models-lemma-blowup-at-worst-nodal}의 증명에서 구성하고 연구했다.
+(*)는 $X_{i, s}$ 위에서 에탈 국소적으로 확인하면 충분하다.
+따라서 『반안정 축소』의 예제 \ref{models-example-blowup}에 있는 사상
+``$X_1 \to X_0$''을 $R/\pi R$로 밑변환한 것에 대해 (*)를
+확인하면 충분하다. 구체적인 계산은 독자에게 남긴다.
+
+\medskip\noindent
+사상 $c : Y_{i + 1, s} \to Y_{i, s}$는 제1종 예외곡선
+$E \subset Y_{i + 1}$의 내리불기의 제한이다. 즉
+$b : Y_{i + 1} \to Y_i$는 $E$의 축약이며, 다시 말해 $b$는 곡면
+$Y_i$의 정칙점에서의 부풀리기이다(『곡면의 특이점 해소』의 절
+\ref{resolve-section-minus-one}). 그러면 예를 들어 『곡면의 특이점
+해소』의 보조정리 \ref{resolve-lemma-cohomology-of-blowup}에 의해
+$\mathcal{O}_{Y_i} = b_*\mathcal{O}_{Y_{i + 1}}$이고
+$R^1b_*\mathcal{O}_{Y_{i + 1}} = 0$이다.
+『사상에 관한 추가 내용』의 보조정리
+\ref{more-morphisms-lemma-check-h1-fibre-zero},
+\ref{more-morphisms-lemma-h1-fibre-zero},
+\ref{more-morphisms-lemma-h1-fibre-zero-check-h0-kappa}에 의해
+$\mathcal{O}_{Y_{i, s}} = c_*\mathcal{O}_{Y_{i + 1, s}}$이고
+$R^1c_*\mathcal{O}_{Y_{i + 1, s}} = 0$이라고 결론 내린다
+(마지막 보조정리는
+$\mathcal{O}_{Y_{i, s}} \to c_*\mathcal{O}_{Y_{i + 1, s}}$의
+전사성만 주지만, $Y_{i, s}$가 축약이고 $c$가 한 닫힌점 위에서만
+대상을 바꾼다는 사실로부터 단사성은 쉽게 따른다).
+이로써 증명이 끝난다.
+\end{proof}
+
+\noindent
+보조정리 \ref{moduli-curves-lemma-stable-reduction}과 『반안정 축소』의 정리
+\ref{models-theorem-semistable-reduction}에서 안정 축소 정리를 즉시
+얻는다.
+
+\begin{theorem}
+\label{moduli-curves-theorem-stable-reduction}
+\begin{reference}
+\cite[Corollary 2.7]{DM}
+\end{reference}
+$R$을 분수체가 $K$인 이산 값매김환이라 하자. $C$를 $K$ 위의
+매끄러운 사영 곡선이고 $H^0(C, \mathcal{O}_C) = K$이며 종수가
+$g \geq 2$인 것이라 하자. 그러면
+\begin{enumerate}
+\item 분수체의 유한 분리 확대 $K'/K$를 유도하는 이산 값매김환의
+확대 $R \subset R'$과, $K'$ 위에서 $Y_{K'} \cong C_{K'}$인
+종수 $g$의 안정 곡선족 $Y \to \Spec(R')$가 존재한다.
+\item 유한 분리 확대 $L/K$와 종수 $g$의 안정 곡선족
+$Y \to \Spec(A)$가 존재한다. 여기서 $A \subset L$은 $L$ 안에서
+$R$의 정수적 폐포이고, $L$ 위에서 $Y_L \cong C_L$이다.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1)은 보조정리 \ref{moduli-curves-lemma-stable-reduction}과 『반안정 축소』의 정리
+\ref{models-theorem-semistable-reduction}의 즉각적인 귀결이다.
+
+\medskip\noindent
+(2)를 증명하자. $L/K$를 『반안정 축소』의 정리
+\ref{models-theorem-semistable-reduction}의 (3)에서 찾은 유한 분리
+확대라 하자. $A \subset L$을 $R$의 정수적 폐포라 하자.
+$A$는 $R$ 위에서 유한이고 극대 아이디얼이 유한 개
+$\mathfrak m_1, \ldots, \mathfrak m_n$인 데데킨트 정역임을 상기하자.
+『대수학에 관한 추가 내용』의 주석
+\ref{more-algebra-remark-finite-separable-extension}을 보라.
+$S = \Spec(A)$, $S_i = \Spec(A_{\mathfrak m_i})$,
+$U = \Spec(L)$, $U_i = S_i \setminus \{\mathfrak m_i\}$라 두자.
+$i = 1, \ldots, n$에 대해 $U \cong U_i$임을 관찰하자.
+$X = C_L$을 $S$의 열린 부분스킴 $U$ 위의 스킴으로 보자.
+$L$과 $A$를 택한 방식 및 보조정리 \ref{moduli-curves-lemma-stable-reduction}에 의해
+안정 곡선족 $X_i \to S_i$와 동형사상
+$X \times_U U_i \cong X_i \times_{S_i} U_i$가 있다.
+『대수공간의 극한』의 보조정리
+\ref{spaces-limits-lemma-glueing-near-multiple-closed-points}에 의해
+$i = 1, \ldots, n$에 대해 $S_i$로 밑변환하면 $X_i$와 동형이 되는 유한 표시 사상
+$Y \to S$를 찾을 수 있다. 또는
+$S = \bigcup_{i = 1, \ldots, n} S_i$가 $S$의 열린 덮개이고
+$i \not = j$에 대해 $S_i \cap S_j = U$임을 사용하여, 『대수공간의
+극한』의 보조정리 \ref{spaces-limits-lemma-relative-glueing}을
+$n - 1$번 적용하면 $i = 1, \ldots, n$에 대해 $S_i$로 밑변환한
+것이 $X_i$와 동형인 $Y \to S$를 얻는다. 분명히 $Y \to S$가 찾던
+안정 곡선족이다.
+\end{proof}
+
+
+
+
+
+
+\section{안정 곡선 스택의 성질}
+\label{moduli-curves-section-properties-stable}
+
+\noindent
+이 절에서는 $g \geq 2$에 대해 $\overline{\mathcal{M}}_g$의 기본
+구조 정리를 증명한다.
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-separated}
+$g \geq 2$라 하자. 스택 $\overline{\mathcal{M}}_g$는 분리이다.
+\end{lemma}
+
+\begin{proof}
+이 명제는 사상 $\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$가
+분리라는 뜻이다. 이를 『스택의 사상에 관한 추가 내용』의 보조정리
+\ref{stacks-more-morphisms-lemma-refined-valuative-criterion-separated}에
+서술된 정교한 뇌터 값매김 판정법을 사용하여 증명한다.
+
+\medskip\noindent
+$\overline{\mathcal{M}}_g$는 $\Curvesstack$의 열린 부분스택이므로
+보조정리 \ref{moduli-curves-lemma-curves-qs-lfp}에 의해
+$\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$는 준분리이고 국소
+유한 표시이다. 특히 스택 $\overline{\mathcal{M}}_g$는 국소 뇌터이다
+(『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-locally-finite-type-locally-noetherian}).
+보조정리 \ref{moduli-curves-lemma-smooth-dense-in-stable}에 의해 열린 몰입
+$\mathcal{M}_g \to \overline{\mathcal{M}}_g$의 상은 조밀하다.
+또한 $\mathcal{M}_g \to \overline{\mathcal{M}}_g$는 준콤팩트이고
+(『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-locally-closed-in-noetherian}), 따라서
+유한형이다. 그러므로 『스택의 사상에 관한 추가 내용』의 보조정리
+\ref{stacks-more-morphisms-lemma-refined-valuative-criterion-separated}의
+모든 예비 가정은 사상
+$$
+\mathcal{M}_g \to \overline{\mathcal{M}}_g
+\quad\text{그리고}\quad
+\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})
+$$
+에 대해 만족된다. 따라서 다음을 확인하면 충분하다. 분수체가 $K$인
+이산 값매김환 $R$을 포함하는 임의의 $2$-가환 도식
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] &
+\mathcal{M}_g \ar[r] &
+\overline{\mathcal{M}}_g \ar[d] \\
+\Spec(R) \ar[rr] \ar@{..>}[rru] & & \Spec(\mathbf{Z})
+}
+$$
+이 주어졌을 때, 점선 화살표들의 범주는 공집합이거나 정확히 하나의
+동형사상류를 갖는 세토이드이다($2$-화살표에 관해서는 크게 걱정할
+필요가 없음에 유의하라. 『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-cat-dotted-arrows-independent}를 보라).
+$\mathcal{M}_g$, 각각 $\overline{\mathcal{M}}_g$가 종수 $g$인
+매끄러운, 각각 안정 곡선족을 매개화하는 대수적 스택임을 사용하여
+이 명제의 뜻을 풀어 쓰면, 증명해야 할 것은 보조정리
+\ref{moduli-curves-lemma-unique-stable-model}에 서술하고 증명한 유일성 결과와
+정확히 같음을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-quasi-compact}
+$g \geq 2$라 하자. 스택 $\overline{\mathcal{M}}_g$는 준콤팩트이다.
+\end{lemma}
+
+\begin{proof}
+절 \ref{moduli-curves-section-polarized-curves}의 표기를 사용하겠다.
+다음 두 성질을 만족하며 $\xi$를 표현하는 체 $k$와 $k$ 위의 쌍
+$(X, \mathcal{L})$이 존재하는 점 $\xi$들의 부분집합을
+$$
+T \subset |\textit{PolarizedCurves}|
+$$
+라 하자.
+\begin{enumerate}
+\item $X$가 종수 $g$인 안정 곡선이다.
+\item $\mathcal{L} = \omega_X^{\otimes 3}$이다.
+\end{enumerate}
+분명히 연속 사상
+$$
+|\textit{PolarizedCurves}|
+\longrightarrow
+|\Curvesstack|
+$$
+아래에서 집합 $T$의 상은 정확히 열린 부분집합
+$$
+|\overline{\mathcal{M}}_g| \subset |\Curvesstack|
+$$
+이다. 따라서 $T$가 준콤팩트임을 보이면 충분하다. 보조정리
+\ref{moduli-curves-lemma-polarized-curves-in-polarized}에 의해
+$$
+|\textit{PolarizedCurves}| \subset |\Polarizedstack|
+$$
+은 열린 동시에 닫힌 몰입이다. 따라서 $|\Polarizedstack|$의
+부분집합으로서 $T$가 준콤팩트임을 증명하면 충분하다. 이를 위해
+『모듈라이 스택』의 보조정리
+\ref{moduli-lemma-bounded-polarized}의 판정법을 사용한다.
+먼저 위와 같은 $(X, \mathcal{L})$에 대해 힐베르트 다항식 $P$는
+리만--로흐 정리에 의해 $P(t) = (6g - 6)t + (1 - g)$임을 관찰하자.
+『대수곡선』의 보조정리 \ref{curves-lemma-rr}을 보라.
+다음으로 『대수곡선』의 보조정리
+\ref{curves-lemma-tricanonical}에 의해
+$H^1(X, \mathcal{L}) = 0$이고 $\mathcal{L}$이 매우 풍부함을
+관찰하자. 이는 정확히 $n = P(3) - 1$일 때 닫힌 몰입
+$$
+i : X \longrightarrow \mathbf{P}^n_k
+$$
+이 있어서 원하는 대로
+$\mathcal{L} = i^*\mathcal{O}_{\mathbf{P}^1_k}(1)$임을 뜻한다.
+\end{proof}
+
+\noindent
+다음은 이 절의 주정리이다.
+
+\begin{theorem}
+\label{moduli-curves-theorem-stable-smooth-proper}
+$g \geq 2$라 하자. 대수적 스택 $\overline{\mathcal{M}}_g$는
+들리뉴--멈퍼드 스택이고 $\Spec(\mathbf{Z})$ 위에서 고유하고
+매끄럽다. 또한 매끄러운 곡선을 매개화하는 자취
+$\mathcal{M}_g$는 조밀한 열린 부분스택이다.
+\end{theorem}
+
+\begin{proof}
+명제에서 언급한 성질 대부분은 이미 증명했다. 매끄러움은 보조정리
+\ref{moduli-curves-lemma-stable-curves-smooth}이고, 들리뉴--멈퍼드라는 사실은
+보조정리 \ref{moduli-curves-lemma-stable-curves-deligne-mumford}이며,
+$\mathcal{M}_g$의 열린성은 보조정리
+\ref{moduli-curves-lemma-smooth-dense-in-stable}이다. 보조정리
+\ref{moduli-curves-lemma-stable-separated}에 의해
+$\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$가 분리임을 알고,
+보조정리 \ref{moduli-curves-lemma-stable-quasi-compact}에 의해
+$\overline{\mathcal{M}}_g$가 준콤팩트임을 안다. 따라서
+$\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$가 고유임을 보여
+증명을 끝내기 위해, 『스택의 사상에 관한 추가 내용』의 보조정리
+\ref{stacks-more-morphisms-lemma-refined-valuative-criterion-proper}를
+사상 $\mathcal{M}_g \to \overline{\mathcal{M}}_g$와
+$\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$에 적용할 수 있다.
+따라서 다음을 확인하면 충분하다. 분수체가 $K$인 이산 값매김환
+$A$를 포함하는 임의의 $2$-가환 도식
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d]_j &
+\mathcal{M}_g \ar[r] &
+\overline{\mathcal{M}}_g \ar[d] \\
+\Spec(A) \ar[rr] & & \Spec(\mathbf{Z})
+}
+$$
+이 주어졌을 때, 체의 확대 $K'/K$와 $A$를 지배하는 값매김환
+$A' \subset K'$이 존재하여 유도된 도식
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d]_{j'} & \overline{\mathcal{M}}_g \ar[d] \\
+\Spec(A') \ar[r] \ar@{..>}[ru] & \Spec(\mathbf{Z})
+}
+$$
+의 점선 화살표들의 범주가 공집합이 아니다(『스택의 사상』의 정의
+\ref{stacks-morphisms-definition-fill-in-diagram}).
+($2$-화살표에 관해서는 크게 걱정할 필요가 없음에 유의하라.
+『스택의 사상』의 보조정리
+\ref{stacks-morphisms-lemma-cat-dotted-arrows-independent}를 보라.)
+$\mathcal{M}_g$, 각각 $\overline{\mathcal{M}}_g$가 종수 $g$인
+매끄러운, 각각 안정 곡선족을 매개화하는 대수적 스택임을 사용하여
+이 명제의 뜻을 풀어 쓰면, 증명해야 할 것은 안정 축소 정리, 즉
+정리 \ref{moduli-curves-theorem-stable-reduction}에 포함된 결과와 정확히 같음을
+알 수 있다.
+\end{proof}

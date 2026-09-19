@@ -1,0 +1,5137 @@
+% Generated mechanically from frozen input p09/ko/src/spaces-limits.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{69}
+\chapter{대수공간의 극한}
+
+
+
+\phantomsection
+\label{spaces-limits-section-phantom}
+
+
+\section{서론}
+\label{spaces-limits-section-introduction}
+
+\noindent
+이 장에서는 대수공간의 극한에 관한 내용을 다룬다.
+먼저 대수공간 $F$가 밑 $S$ 위에서 국소 유한 표시라는 것을
+극한을 보존하는 함자라는 조건으로 특성화한다.
+이어서 유향 집합(Categories, Definition \ref{categories-definition-directed-set})을
+지표로 하고 전이 사상이 아핀인 역계의 극한을 연구한다.
+\cite{CLO}를 따라 준콤팩트 준분리 대수공간의 절대 Noether 근사를 논의한다.
+David Rydh의 또 다른 접근법(\cite{rydh_approx} 참조)은
+특정 대수 스택의 절대 Noether 근사까지 다룬다.
+
+
+\section{규약}
+\label{spaces-limits-section-conventions}
+
+\noindent
+모든 스킴은 큰 fppf 사이트 $\Sch_{fppf}$에 속한다고 항상 가정한다.
+또한 다루는 모든 환 $A$에 대해 $\Spec(A)$는 이 큰 사이트의
+어떤 대상과 (동형인) 것으로 가정한다.
+
+\medskip\noindent
+$S$를 스킴, $X$를 $S$ 위의 대수공간이라 하자.
+이 장과 이후의 장에서는 $X \times_S X$라는 표기를 쓴다.
+이는 $X$와 자기 자신의 곱($S$ 위의 대수공간의 범주에서 취한 곱)에 대해
+$X \times X$ 대신 쓰는 표기이다.
+
+
+
+
+
+
+
+
+
+
+
+\section{유한 표시 사상}
+\label{spaces-limits-section-finite-presentation}
+
+\noindent
+이 절에서는 Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation}을
+대수공간의 사상으로 일반화한다.
+다음 정의의 동기는 방금 인용한 명제에서 나온다.
+
+\begin{definition}
+\label{spaces-limits-definition-locally-finite-presentation}
+$S$를 스킴이라 하자.
+\begin{enumerate}
+\item 함자 $F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$가
+{\it 극한을 보존한다} 또는 {\it 국소 유한 표시이다}라는 것은,
+아핀 스킴 $T$가 $S$ 위에서 극한 $T = \lim T_i$로 주어지되,
+이것이 아핀 스킴 $T_i$들의 $S$ 위의 유향 역계의 극한일 때마다
+$$
+F(T) = \colim F(T_i).
+$$
+가 성립한다는 뜻이다.
+이때 $F$가 {\it $S$ 위에서 국소 유한 표시이다}라고도 한다.
+\item $F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$라 하자.
+함자 사이의 변환 $a : F \to G$가
+{\it 극한을 보존한다} 또는 {\it 국소 유한 표시이다}라는 것은,
+모든 스킴 $T$가 $S$ 위에 주어졌을 때 모든 $y \in G(T)$에 대해 함자
+$$
+F_y : (\Sch/T)_{fppf}^{opp} \longrightarrow \textit{Sets}, \quad
+T'/T \longmapsto \{x \in F(T') \mid a(x) = y|_{T'}\}
+$$
+가 $T$ 위에서 국소 유한 표시라는 뜻이다\footnote{Lemma
+\ref{spaces-limits-lemma-characterize-relative-limit-preserving}의 특성화 (2)가
+더 이해하기 쉬울 수 있다.}.
+이때 $F$가 $G$ 위에서 {\it 상대적으로 극한을 보존한다}라고도 한다.
+\end{enumerate}
+\end{definition}
+
+\noindent
+함자 $F_y$는 어떤 의미에서 $a : F \to G$의 $y$ 위의 올이다.
+다만 $T$의 큰 fppf 사이트 위의 전층이라는 차이가 있다.
+이 함자는 다음 식으로 주어진다.
+\begin{equation}
+\label{spaces-limits-equation-fibre-map-functors}
+F_y =
+F|_{(\Sch/T)_{fppf}}
+{\times}_{G|_{(\Sch/T)_{fppf}}}
+*
+\end{equation}
+여기서 $*$는 $(\Sch/T)_{fppf}$ 위의 (전)층의 범주의 최종 대상이고
+(Sites, Example \ref{sites-example-singleton-sheaf} 참조),
+사상 $* \to G|_{(\Sch/T)_{fppf}}$는 $y$로 주어진다.
+$j : (\Sch/T)_{fppf} \to (\Sch/S)_{fppf}$가 국소화 함자이면,
+위 식은 $F_y = j^{-1}F \times_{j^{-1}G} *$가 되며
+$j_!F_y$는 바로 올곱 $F \times_{G, y} T$라는 점에 주의하자.
+(국소화에 대해서는 Sites, Section \ref{sites-section-localize}를,
+특히 전층에 대한 $j_!$에 대해서는 Sites, Remark
+\ref{sites-remark-localize-presheaves}를 참조하라.)
+
+\medskip\noindent
+현재로서는 사상 $X \to Y$가 $S$ 위의 대수공간의 사상으로서 국소 유한 표시라는
+말에 일시적으로 두 가지 정의가 있다.
+하나는 Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-locally-finite-presentation}에 따른
+정의이고, 다른 하나는 $X \to Y$가 함자 사이의 변환이라는 사실을 이용하여
+Definition \ref{spaces-limits-definition-locally-finite-presentation}을 적용하는 정의이다
+(후자의 개념에는 가능한 한 ``극한 보존''이라는 용어를 쓸 것이다).
+Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation}에서
+이 두 정의가 일치함을 보인다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-characterize-relative-limit-preserving}
+$S$를 스킴이라 하자.
+$a : F \to G$를 함자
+$(\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ 사이의 변환이라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item $a : F \to G$는 극한을 보존한다.
+\item 아핀 스킴 $T$가 $S$ 위에서 극한 $T = \lim T_i$로 주어지되,
+이것이 아핀 스킴 $T_i$들의 $S$ 위의 유향 역계의 극한일 때마다 집합의 가환도
+$$
+\xymatrix{
+\colim_i F(T_i) \ar[r] \ar[d]_a & F(T) \ar[d]^a \\
+\colim_i G(T_i) \ar[r] & G(T)
+}
+$$
+는 올곱 가환도이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)을 가정하자. (2)에서와 같은 $T = \lim_{i \in I} T_i$를 생각하자.
+$(y, x_T)$를 올곱
+$\colim_i G(T_i) \times_{G(T)} F(T)$의 원소라 하자.
+그러면 $y$는 $y_i \in G(T_i)$에서 오며, 여기서 $i$는 적절히 택한다.
+함자 $F_{y_i}$를 $(\Sch/T_i)_{fppf}$ 위에서 생각하자.
+이는 Definition \ref{spaces-limits-definition-locally-finite-presentation}에서 정의한 함자이다.
+$x_T \in F_{y_i}(T)$임을 알 수 있다.
+또한 $T = \lim_{i' \geq i} T_{i'}$는 $T_i$ 위의 아핀 스킴의 유향계이다.
+따라서 (1)에 의해 $x_T$는 유일한 원소 $x$의 상이며,
+이 원소는 $\colim_{i' \geq i} F_{y_i}(T_{i'})$에 속한다.
+그러므로 $x$는 $\colim F(T_i)$의 원소 중 쌍 $(y, x_T)$로 가는 유일한 원소이다.
+이로써 (2)가 성립함을 보였다.
+
+\medskip\noindent
+(2)를 가정하자. $T$를 스킴이라 하고 $y_T \in G(T)$라 하자.
+$F_{y_T}$가 극한을 보존함을 보여야 한다.
+$T' = \lim_{i \in I} T'_i$를 $T$ 위의 아핀 스킴 $T'_i$의 유향 극한인
+$T$ 위의 아핀 스킴이라 하자. $x_{T'} \in F_{y_T}$라 하자.
+$i \in I$를 택하자. 이는 $I$가 유향 집합이므로 가능하다.
+% P09-ERR-0050; P09-ERR-0051: canonical source notation retained.
+$y_i \in F(T'_i)$로 $y_{T'}$의 상을 나타내자.
+그러면 $(y_i, x_{T'})$가 올곱
+$\colim_i G(T'_i) \times_{G(T')} F(T')$의 원소임을 알 수 있다.
+따라서 (2)에 의해 유일한 원소 $x$를 $\colim_i F(T'_i)$에서 얻으며,
+이는 $(y_i, x_{T'})$로 간다.
+$x$는 $\colim_i F_y(T'_i)$의 원소로서 $x_{T'}$로 가는 원소를 정의함이 분명하므로
+증명이 끝난다.
+% P09-ERR-1454: y_{T'} and F_y retained as printed in the canonical source.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-composition-locally-finite-presentation}
+$S$를 $\Sch_{fppf}$에 속하는 스킴이라 하자.
+$F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$라 하자.
+$a : F \to G$, $b : G \to H$를 함자 사이의 변환이라 하자.
+$a$와 $b$가 극한을 보존하면
+$$
+b \circ a : F \longrightarrow H
+$$
+도 극한을 보존한다.
+\end{lemma}
+
+\begin{proof}
+$T = \lim_{i \in I} T_i$가
+Lemma \ref{spaces-limits-lemma-characterize-relative-limit-preserving}의 특성화 (2)에서와
+같다고 하자. 다음 집합의 가환도를 생각하자.
+$$
+\xymatrix{
+\colim_i F(T_i) \ar[r] \ar[d]_a & F(T) \ar[d]^a \\
+\colim_i G(T_i) \ar[r] \ar[d]_b & G(T) \ar[d]^b \\
+\colim_i H(T_i) \ar[r] & H(T)
+}
+$$
+가정에 의해 두 정사각형은 올곱 정사각형이다.
+따라서 바깥 직사각형도 올곱 가환도이므로 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-locally-finite-presentation-permanence}
+$S$를 $\Sch_{fppf}$에 속하는 스킴이라 하자.
+$F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$라 하자.
+$a : F \to G$, $b : G \to H$를 함자 사이의 변환이라 하자.
+$b \circ a$와 $b$가 극한을 보존하면 $a$도 극한을 보존한다.
+\end{lemma}
+
+\begin{proof}
+$T = \lim_{i \in I} T_i$가
+Lemma \ref{spaces-limits-lemma-characterize-relative-limit-preserving}의 특성화 (2)에서와
+같다고 하자. 다음 집합의 가환도를 생각하자.
+$$
+\xymatrix{
+\colim_i F(T_i) \ar[r] \ar[d]_a & F(T) \ar[d]^a \\
+\colim_i G(T_i) \ar[r] \ar[d]_b & G(T) \ar[d]^b \\
+\colim_i H(T_i) \ar[r] & H(T)
+}
+$$
+가정에 의해 아래 정사각형과 바깥 직사각형은 집합의 올곱이다.
+따라서 위 정사각형도 올곱 정사각형이므로 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-base-change-locally-finite-presentation}
+$S$를 $\Sch_{fppf}$에 속하는 스킴이라 하자.
+$F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$라 하자.
+$a : F \to G$, $b : H \to G$를 함자 사이의 변환이라 하자.
+다음 올곱 가환도를 생각하자.
+$$
+\xymatrix{
+H \times_{b, G, a} F \ar[r]_-{b'} \ar[d]_{a'} & F \ar[d]^a \\
+H \ar[r]^b & G
+}
+$$
+$a$가 극한을 보존하면 그 밑변환 $a'$도 극한을 보존한다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: 형식적으로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-fibre-product-locally-finite-presentation}
+$S$를 $\Sch_{fppf}$에 속하는 스킴이라 하자.
+$E, F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$라 하자.
+$a : F \to G$, $b : H \to G$, $c : G \to E$를
+함자 사이의 변환이라 하자. $c$, $c \circ a$, $c \circ b$가
+극한을 보존하면 $F \times_G H \to E$도 극한을 보존한다.
+\end{lemma}
+
+\begin{proof}
+$T = \lim_{i \in I} T_i$가
+Lemma \ref{spaces-limits-lemma-characterize-relative-limit-preserving}의 특성화 (2)에서와
+같다고 하자. 그러면 여과 여극한은 유한 곱과 교환하므로
+$$
+\colim (F \times_G H)(T_i) =
+\colim F(T_i) \times_{\colim G(T_i)} \colim H(T_i)
+$$
+가 성립한다. 따라서 다음 가환도가 올곱 가환도임을 보이면 된다.
+$$
+\xymatrix{
+\colim F(T_i) \times_{\colim G(T_i)} \colim H(T_i) \ar[r] \ar[d] &
+F(T) \times_{G(T)} H(T) \ar[d] \\
+\colim_i E(T_i) \ar[r] & E(T)
+}
+$$
+이는 집합의 사상 $E' \to E$, $F \to G$, $H \to G$, $G \to E$가
+주어지면
+$$
+E' \times_E (F \times_G H) =
+(E' \times_E F) \times_{(E' \times_E G)} (E' \times_E H)
+$$
+가 성립한다는 관찰에서 따른다. 몇 가지 세부 사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-sheafify-finite-presentation}
+$S$를 $\Sch_{fppf}$에 속하는 스킴이라 하자.
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를 함자라 하자.
+$F$가 극한을 보존하면 그 층화 $F^\#$도 극한을 보존한다.
+\end{lemma}
+
+\begin{proof}
+$F$가 극한을 보존한다고 가정하자.
+$F^+$가 극한을 보존함을 보이면 충분하다.
+이는 $F^\# = (F^+)^+$이기 때문이다.
+Sites, Theorem \ref{sites-theorem-plus}를 보라.
+$T$를 $S$ 위의 아핀 스킴이라 하고, $T = \lim T_i$를
+아핀 $S$-스킴의 역계의 유향 극한으로 나타내자.
+$F^+(T)$는 $\check H^0(\mathcal{V}, F)$의 여극한임을 상기하자.
+여기서 극한은 $T$의 모든 $(\Sch/S)_{fppf}$-덮개에 걸쳐 취한다.
+% P09-ERR-0052: source says limit after defining a colimit.
+아핀 스킴의 모든 fppf 덮개는 표준 fppf 덮개로 세분할 수 있다.
+Topologies, Lemma \ref{topologies-lemma-fppf-affine}를 보라.
+따라서 다음과 같이 쓸 수 있다.
+$$
+F^+(T)
+=
+\colim_{\mathcal{V}\text{ 표준 덮개 }T}
+\check H^0(\mathcal{V}, F).
+$$
+이 여극한에 나타나는 임의의 $\mathcal{V} = \{T_k \to T\}_{k = 1, \ldots, n}$는
+$\mathcal{V}_i \times_{T_i} T$의 형태로 쓸 수 있다.
+여기서 $i$를 적절히 택하고 표준 fppf 덮개
+$\mathcal{V}_i = \{T_{i, k} \to T_i\}_{k = 1, \ldots, n}$를 $T_i$ 위에서 택한다.
+$\mathcal{V}_{i'} = \{T_{i', k} \to T_{i'}\}_{k = 1, \ldots, n}$로
+$i' \geq i$에 대한 밑변환을 나타내자. 그러면 다음을 얻는다.
+% P09-ERR-0053; P09-ERR-0054: both frozen index discrepancies retained.
+\begin{align*}
+\colim_{i' \geq i} \check H^0(\mathcal{V}_i, F)
+& =
+\colim_{i' \geq i}
+\text{동등자}
+\left(
+\xymatrix{
+\prod F(T_{i', k})
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\prod F(T_{i', k} \times_{T_{i'}} T_{i', l})
+}
+\right)
+\\
+& =
+\text{동등자}
+\left(
+\xymatrix{
+\colim_{i' \geq i}
+\prod F(T_{i', k})
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\colim_{k' \geq k}
+\prod F(T_{i', k} \times_{T_{i'}} T_{i', l})
+}
+\right)
+\\
+& =
+\text{동등자}
+\left(
+\xymatrix{
+\prod F(T_k)
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\prod F(T_k \times_T T_l)
+}
+\right)
+\\
+& =
+\check H^0(\mathcal{V}, F)
+\end{align*}
+여기서 두 번째 등식은 여과 여극한이 완전하기 때문에 성립한다.
+세 번째 등식은 $F$가 극한을 보존하고,
+$\lim_{i' \geq i} T_{i', k} = T_k$ 및
+$\lim_{i' \geq i} T_{i', k} \times_{T_{i'}} T_{i', l} = T_k \times_T T_l$가
+성립하기 때문에 성립한다.
+이는 Limits, Lemma \ref{limits-lemma-scheme-over-limit}에 따른다.
+이를 모든 덮개에 동시에 적용하면 다음을 얻는다.
+\begin{align*}
+F^+(T)
+& =
+\colim_{\mathcal{V}\text{ 표준 덮개 }T} \check H^0(\mathcal{V}, F) \\
+& =
+\colim_{i \in I}
+\colim_{\mathcal{V}_i\text{ 표준 덮개 }T_i}
+\check H^0(T \times_{T_i}\mathcal{V}_i, F) \\
+& =
+\colim_{i \in I} F^+(T_i)
+\end{align*}
+여극한을 취하는 순서는 Categories, Lemma
+\ref{categories-lemma-colimits-commute}에 의해 바꿀 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-sheaf-finite-presentation}
+$S$를 스킴이라 하자.
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를 함자라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $F$는 층이다.
+\item fppf 덮개 $\{U_j \to S\}_{j \in J}$가 존재하여
+$F|_{(\Sch/U_j)_{fppf}}$가 극한을 보존한다.
+\end{enumerate}
+그러면 $F$는 극한을 보존한다.
+\end{lemma}
+
+\begin{proof}
+$T$를 $S$ 위의 아핀 스킴이라 하자.
+$I$를 유향 집합이라 하고, $T_i$를 $S$ 위의 아핀 스킴의 역계로서
+$T = \lim T_i$를 만족하는 것이라 하자.
+표준 사상 $\colim F(T_i) \to F(T)$가 전단사임을 보여야 한다.
+
+\medskip\noindent
+$0 \in I$를 하나 택하고, 표준 fppf 덮개
+$\{V_{0, k} \to T_{0}\}_{k = 1, \ldots, m}$를 택하여
+당김 $\{U_j \times_S T_0 \to T_0\}$를 세분하게 하자.
+이 당김은 주어진 $S$의 fppf 덮개에서 얻은 것이다.
+각 $i \geq 0$에 대해 $V_{i, k} = T_i \times_{T_0} V_{0, k}$로 놓고,
+$V_k = T \times_{T_0} V_{0, k}$로 놓자.
+$V_k = \lim_{i \geq 0} V_{i, k}$임에 주의하자.
+Limits, Lemma \ref{limits-lemma-scheme-over-limit}를 보라.
+
+\medskip\noindent
+$x, x' \in \colim F(T_i)$가 $F(T)$의 같은 원소로 간다고 하자.
+$x, x'$가 원소 $x_i, x'_i \in F(T_i)$로 주어진다고 하자.
+여기서 $i \in I$이다(두 원소에 대해 같은 $i$를 택할 수 있는데,
+이는 $I$가 유향이기 때문이다).
+가정 (2)와 $x_i, x'_i$가 $F(T)$의 같은 원소로 간다는 사실에 의해
+$$
+x_i|_{V_{i', k}} = x'_i|_{V_{i', k}}
+$$
+가 충분히 큰 $i' \in I$에 대해 성립한다.
+같은 $i'$를 모든 $k$에 대해 택할 수 있는데,
+이는 $k \in \{1, \ldots, m\}$가 유한 집합을 움직이기 때문이다.
+$\{V_{i', k} \to T_{i'}\}$가 fppf 덮개이고 $F$가 층이므로,
+이로부터 원하는 등식 $x_i|_{T_{i'}} = x'_i|_{T_{i'}}$를 얻는다.
+따라서 사상 $\colim F(T_i) \to F(T)$는 단사이다.
+
+\medskip\noindent
+전사성도 비슷하게 보인다.
+$x \in F(T)$라 하자. 가정 (2)에 의해 각 $k$에 대해
+$i$를 택하여 $x|_{V_k}$가 원소 $x_{i, k} \in F(V_{i, k})$에서 오게 할 수 있다.
+앞에서와 같이 하나의 $i$를 택하여 모든 $k$에 대해 동시에 성립하게 할 수 있다.
+위에서 증명한 단사성에 의해
+$$
+x_{i, k}|_{V_{i', k} \times_{T_{i'}} V_{i', l}}
+=
+x_{i, l}|_{V_{i', k} \times_{T_{i'}} V_{i', l}}
+$$
+가 충분히 큰 $i'$에 대해 성립한다.
+따라서 $F$의 층 조건에 의해 원소 $x_{i, k}|_{V_{i', k}}$들을 붙여
+원소 $x_{i'} \in F(T_{i'})$를 얻으며, 이것이 원하는 결과이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-sheafify-finite-presentation-map}
+$S$를 $\Sch_{fppf}$에 속하는 스킴이라 하자.
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$를 함자라 하자.
+$a : F \to G$가 극한을 보존하는 변환이면,
+유도되는 층 사이의 변환 $F^\# \to G^\#$도 극한을 보존한다.
+\end{lemma}
+
+\begin{proof}
+$T$를 스킴이라 하고 $y \in G^\#(T)$라 하자.
+함자 $F^\#_y : (\Sch/T)_{fppf}^{opp} \to \textit{Sets}$가
+극한을 보존함을 보여야 한다.
+이 함자는 $F^\# \to G^\#$와 $y$로부터
+Definition \ref{spaces-limits-definition-locally-finite-presentation}에서와 같이 구성된다.
+식 (\ref{spaces-limits-equation-fibre-map-functors})에 의해 $F^\#_y$는 층이다.
+fppf 덮개 $\{V_j \to T\}_{j \in J}$를 택하여 $y|_{V_j}$가
+원소 $y_j \in F(V_j)$에서 오게 하자.
+% P09-ERR-0055; P09-ERR-0056: canonical typing and restriction retained.
+$F^\#$를 $(\Sch/V_j)_{fppf}$에 제한하면 바로 $F^\#_{y_j}$가 됨에 주의하자.
+$F^\#_{y_j}$가 극한을 보존함을 보일 수 있으면,
+Lemma \ref{spaces-limits-lemma-sheaf-finite-presentation}에 의해
+$F^\#_y$도 극한을 보존하므로 증명이 끝난다.
+이로써 $y \in G(T)$인 경우로 환원된다.
+
+\medskip\noindent
+$y \in G(T)$라 하자. 이 경우 $F^\#_y = (F_y)^\#$라고 주장한다.
+이는 식 (\ref{spaces-limits-equation-fibre-map-functors})에서 따른다.
+따라서 이 경우는 Lemma \ref{spaces-limits-lemma-sheafify-finite-presentation}에서 따른다.
+\end{proof}
+
+\begin{proposition}
+\label{spaces-limits-proposition-characterize-locally-finite-presentation}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+다음 조건들은 동치이다.
+\begin{enumerate}
+\item 사상 $f$는 국소 유한 표시인 대수공간의 사상이다.
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-locally-finite-presentation}를 보라.
+\item 사상 $f : X \to Y$는 함자 사이의 변환으로서 극한을 보존한다.
+Definition \ref{spaces-limits-definition-locally-finite-presentation}을 보라.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1)을 가정하자. $T$를 스킴이라 하고 $y \in Y(T)$라 하자.
+$T \times_Y X$가 $T$ 위에서
+Definition \ref{spaces-limits-definition-locally-finite-presentation}의 의미로
+극한을 보존함을 보여야 한다.
+따라서 $X$가 대수공간으로서 $S$ 위에서 국소 유한 표시이면,
+함자 $X : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$로서 극한을 보존함을
+보이는 것으로 환원된다. 이를 위해 표시 $X = U/R$를 택하자.
+Spaces, Definition \ref{spaces-definition-presentation}을 보라.
+Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-locally-finite-presentation}에 의해
+$U$와 $R$은 모두 $S$ 위에서 국소 유한 표시인 스킴이다.
+따라서 Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation}에 의해
+$$
+U(T) = \colim U(T_i), \quad
+R(T) = \colim R(T_i)
+$$
+가 $T = \lim_i T_i$가 $(\Sch/S)_{fppf}$에서 성립할 때마다 성립한다.
+따라서 전층
+$$
+(\Sch/S)_{fppf}^{opp} \longrightarrow \textit{Sets}, \quad
+W \longmapsto U(W)/R(W)
+$$
+는 극한을 보존한다.
+그러므로 Lemma \ref{spaces-limits-lemma-sheafify-finite-presentation}에 의해
+그 층화 $X = U/R$도 극한을 보존한다.
+
+\medskip\noindent
+(2)를 가정하자. 스킴 $V$와 전사 에탈 사상 $V \to Y$를 택하자.
+이어서 스킴 $U$와 전사 에탈 사상 $U \to V \times_Y X$를 택하자.
+Lemma \ref{spaces-limits-lemma-base-change-locally-finite-presentation}에 의해
+함자 사이의 변환 $V \times_Y X \to V$는 극한을 보존한다.
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-etale-locally-finite-presentation}에 의해
+대수공간의 사상 $U \to V \times_Y X$는 국소 유한 표시이다.
+따라서 증명의 첫 부분에 의해 함자 사이의 변환으로서 극한을 보존한다.
+Lemma \ref{spaces-limits-lemma-composition-locally-finite-presentation}에 의해
+합성 $U \to V \times_Y X \to V$는 함자 사이의 변환으로서 극한을 보존한다.
+따라서 스킴의 사상 $U \to V$는 Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation}에 의해
+국소 유한 표시이다(증명의 마지막 문단에 나오는 집합론적 논점을 전제한다).
+이는 정의에 의해 (1)이 성립한다는 뜻이다.
+
+\medskip\noindent
+집합론적 논점. $U \to V$를 $(\Sch/S)_{fppf}$의 사상이라 하자.
+Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation}에서는
+$U \to V$가 국소 유한 표시라는 것을, 아핀 스킴의 {\it 모든} 유향 역계
+$(T_i, f_{ii'})$가 $V$ 위에 주어질 때
+$U(T) = \colim V(T_i)$가 성립한다는 조건으로 특성화한다.
+% P09-ERR-0057: V(T_i) on the right is retained from the frozen source.
+하지만 현재 설정에서는 아핀 스킴 $T_i$가 $V$ 위에 있고
+$(\Sch/S)_{fppf}$의 어떤 대상과 (동형인) 경우만 고려할 수 있다.
+따라서 증명이 성립하도록 $(\Sch/S)_{fppf}$ 안에
+충분히 많은 아핀 스킴이 있는지 확인해야 한다.
+Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation}의
+(2) $\Rightarrow$ (1)의 증명을 살펴보면,
+문제는 $U$와 $V$가 아핀인 경우로 환원됨을 알 수 있다.
+$U = \Spec(A)$, $V = \Spec(B)$라 하자.
+$(\Sch/S)_{fppf}$의 구성에 의해 기수가 $\leq |B|$인 모든 환의 스펙트럼은
+$(\Sch/S)_{fppf}$의 어떤 대상과 동형이다.
+따라서 Algebra, Lemma \ref{algebra-lemma-characterize-finite-presentation}의
+``그때에만'' 방향의 증명에서는 $A$-대수 중 기수가 $\leq |B|$인 것들만
+사용된다는 점을 관찰하면 충분하다.
+\end{proof}
+
+\begin{remark}
+\label{spaces-limits-remark-limit-preserving}
+Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation}의
+중요한 특수한 경우는 다음과 같다.
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+그러면 $X$가 $S$ 위에서 국소 유한 표시일 필요충분조건은
+$X$가 함자 $(\Sch/S)^{opp} \to \textit{Sets}$로서 극한을 보존하는 것이다.
+Limits, Remark \ref{limits-remark-limit-preserving}와 비교하라.
+사실 아래의 Lemma \ref{spaces-limits-lemma-surjection-is-enough}에서,
+사상
+$$
+\colim X(T_i) \longrightarrow X(T)
+$$
+이 $T = \lim T_i$가 아핀 스킴의 $S$ 위의 유향 극한일 때마다
+전사인 것만으로 충분함을 보일 것이다.
+\end{remark}
+
+\begin{lemma}
+\label{spaces-limits-lemma-surjection-is-enough}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+모든 유향 극한 $T = \lim_{i \in I} T_i$가 $S$ 위의 아핀 스킴으로
+이루어질 때 사상
+$$
+\colim X(T_i) \longrightarrow X(T) \times_{Y(T)} \colim Y(T_i)
+$$
+이 전사이면, $f$는 국소 유한 표시이다.
+달리 말하면, Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation}의
+(2)에서는 Lemma \ref{spaces-limits-lemma-characterize-relative-limit-preserving}의 판정 조건에서
+전사성만 확인하면 충분하다.
+\end{lemma}
+
+\begin{proof}
+스킴 $V$와 전사 에탈 사상 $g : V \to Y$를 택하자.
+이어서 스킴 $U$와 전사 에탈 사상 $h : U \to V \times_Y X$를 택하자.
+보조정리에서와 같은 $T = \lim T_i$에 대해 사상
+$$
+\colim U(T_i) \longrightarrow U(T) \times_{V(T)} \colim V(T_i)
+$$
+이 전사임을 보이면 충분하다. 그러면 $U \to V$가
+Limits, Lemma \ref{limits-lemma-surjection-is-enough}에 의해 국소 유한 표시이기 때문이다
+(Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation}의 증명에서와
+동일한 집합론적 논점을 전제한다).
+따라서 $a : T \to U$와 $b_i : T_i \to V$를 택하여
+같은 사상 $T \to V$를 정하게 하자. 다음 가환도를 보라.
+$$
+\xymatrix{
+T \ar[d]_a \ar[rr]_{p_i} & & T_i \ar[d]^{b_i} \ar@{..>}[ld] \\
+U \ar[r]^-h & X \times_Y V \ar[d] \ar[r] & V \ar[d]^g \\
+& X \ar[r]^f & Y
+}
+$$
+보조정리의 가정에 의해 $i$를 크게 한 후
+사상 $c_i : T_i \to X$를 찾아
+$h \circ a = (b_i, c_i) \circ p_i : T_i \to V \times_Y X$이고
+$f \circ c_i = g \circ b_i$가 되게 할 수 있다.
+% P09-ERR-0058: the source's T_i domain annotation is retained.
+$h$는 대수공간의 에탈 사상이므로(따라서 국소 유한 표시이므로),
+사상
+$$
+\colim U(T_i) \longrightarrow U(T) \times_{(X \times_Y V)(T)}
+\colim (X \times_Y V)(T_i)
+$$
+은 Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation}에 의해 전사이다.
+따라서 $i$를 다시 크게 하면 원하는 사상 $a_i : T_i \to U$를 찾아
+$a = a_i \circ p_i$이고 $b_i = (U \to V) \circ a_i$가 되게 할 수 있다.
+\end{proof}
+
+
+
+\section{대수공간의 극한}
+\label{spaces-limits-section-limits}
+
+\noindent
+다음 보조정리는 이 장에서 대수공간의 극한을 어떻게 다루는지 설명한다.
+대수공간의 아핀 사상을 밑변환하면 아핀 사상이 된다는 사실을
+별도의 언급 없이 사용할 것이다(Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-affine} 참조).
+
+\begin{lemma}
+\label{spaces-limits-lemma-directed-inverse-system-has-limit}
+$S$를 스킴이라 하자. $I$를 유향 집합이라 하자.
+$(X_i, f_{ii'})$를 $I$를 지표로 하는 $S$ 위의 대수공간의 범주의 역계라 하자.
+사상 $f_{ii'} : X_i \to X_{i'}$가 아핀이면,
+극한 $X = \lim_i X_i$는 (fppf 층으로서 취했을 때) 대수공간이다.
+또한 다음이 성립한다.
+\begin{enumerate}
+\item 각 사상 $f_i : X \to X_i$는 아핀이다.
+\item 임의의 $i \in I$와 대수공간의 임의의 사상 $T \to X_i$에 대해
+$$
+X \times_{X_i} T = \lim_{i' \geq i} X_{i'} \times_{X_i} T.
+$$
+가 $S$ 위의 대수공간으로서 성립한다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)는 극한 $X = \lim X_i$가 $S$ 위의 대수공간으로서 존재한다는 사실에서
+형식적으로 따른다.
+원소 $0 \in I$를 택하자(유향 집합은 공집합이 아니므로 가능하다).
+스킴 $U_0$와 전사 에탈 사상 $U_0 \to X_0$를 택하자.
+$R_0 = U_0 \times_{X_0} U_0$로 놓으면 $X_0 = U_0/R_0$이다.
+$i \geq 0$에 대해 $U_i = X_i \times_{X_0} U_0$ 및
+$R_i = X_i \times_{X_0} R_0 = U_i \times_{X_i} U_i$로 놓자.
+Limits, Lemma \ref{limits-lemma-directed-inverse-system-has-limit}에 의해
+$U = \lim_{i \geq 0} U_i$와 $R = \lim_{i \geq 0} R_i$는 스킴이다.
+또한 두 사상 $s, t : R \to U$는 두 사영 $R_0 \to U_0$를
+사상 $U \to U_0$로 밑변환한 것이므로, 특히 에탈이다.
+사상 $R \to U \times_S U$는 동치관계를 정의한다.
+이는 동치관계의 유향 극한이 동치관계이기 때문이다.
+% P09-ERR-0059: source grammar transposition; mathematical assertion unchanged.
+따라서 사상 $R \to U \times_S U$는 에탈 동치관계이다.
+자연스러운 사상
+\begin{equation}
+\label{spaces-limits-equation-isomorphism-sheaves}
+U/R \longrightarrow \lim X_i
+\end{equation}
+이 $S$ 위의 스킴의 범주 위에서 fppf 층의 동형이라고 주장한다.
+이 주장이 성립하면 $X = \lim X_i$는 Spaces,
+Theorem \ref{spaces-theorem-presentation}에 의해 대수공간이다.
+
+\medskip\noindent
+$Z$를 스킴이라 하고 $a : Z \to \lim X_i$를 사상이라 하자.
+그러면 $a = (a_i)$이며, 여기서 $a_i : Z \to X_i$이다.
+$W_0 = Z \times_{a_0, X_0} U_0$로 놓자.
+$W_0 = Z \times_{a_i, X_i} U_i$가 모든 $i \geq 0$에 대해 성립함에 주의하자.
+이는 위에서 $U_i \to X_i$를 택한 방식에 따른다.
+따라서 사상 $W_0 \to \lim_{i \geq 0} U_i = U$를 얻는다.
+$W_0 \to Z$가 전사 에탈이므로,
+(\ref{spaces-limits-equation-isomorphism-sheaves})는 층 사이의 전사 사상이다.
+마지막으로 $Z$를 스킴이라 하고, 두 사상 $a, b : Z \to U/R$가
+(\ref{spaces-limits-equation-isomorphism-sheaves})와 합성하면 같아진다고 하자.
+$a = b$임을 보여야 한다.
+$Z$를 fppf 덮개의 원소들로 대체하면,
+사상 $a', b' : Z \to U$가 존재하여 각각 $a$와 $b$를 유도한다고 가정할 수 있다.
+$a, b$가 (\ref{spaces-limits-equation-isomorphism-sheaves})와 합성하면 같아진다는 조건은,
+각 $i \geq 0$에 대해 합성 $a_i', b_i' : Z \to U \to U_i$가
+$U_i/R_i = X_i$로 가는 사상으로서 같다는 뜻이다.
+따라서 $(a_i', b_i') : Z \to U_i \times_S U_i$는
+$R_i$를 경유하며, 이를 주는 사상을 $c_i : Z \to R_i$라 하자.
+$R = \lim_{i \geq 0} R_i$이므로 $c = \lim c_i : Z \to R$는 사상이며,
+이 사상으로부터 $a, b$가 $Z$에서 $U/R$로 가는 사상으로서 같음을 알 수 있다.
+
+\medskip\noindent
+(1)은 위에서 $U_i \times_{X_i} X = U$임을 보였고,
+$U \to U_i$가 구성에 의해 아핀이라는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-space-over-limit}
+$S$를 스킴이라 하자. $I$를 유향 집합이라 하자.
+$(X_i, f_{ii'})$를 $I$를 지표로 하는 $S$ 위의 대수공간의 역계라 하고,
+전이 사상들이 아핀이라고 하자.
+$X = \lim_i X_i$라 하자. $0 \in I$라 하자.
+$T \to X_0$가 대수공간의 사상이라고 가정하자. 그러면
+$$
+T \times_{X_0} X = \lim_{i \geq 0} T \times_{X_0} X_i
+$$
+가 $S$ 위의 대수공간으로서 성립한다.
+\end{lemma}
+
+\begin{proof}
+극한 $X$는 Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}에 의해 대수공간이다.
+등식은 형식적이다.
+Categories, Lemma \ref{categories-lemma-colimits-commute}를 보라.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-directed-inverse-system-closed-immersions}
+$S$를 스킴이라 하자. $I$를 유향 집합이라 하자.
+$(X_i, f_{i'i}) \to (Y_i, g_{i'i})$를 $I$를 지표로 하는
+$S$ 위의 대수공간의 역계 사이의 사상이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item 사상 $f_{i'i} : X_{i'} \to X_i$는 아핀이다.
+\item 사상 $g_{i'i} : Y_{i'} \to Y_i$는 아핀이다.
+\item 사상 $X_i \to Y_i$는 닫힌 몰입이다.
+\end{enumerate}
+그러면 $\lim X_i \to \lim Y_i$는 닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+$\lim X_i$와 $\lim Y_i$가
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}에 의해 존재함을 관찰하자.
+$0 \in I$를 택하고 아핀 스킴 $V_0$와 에탈 사상 $V_0 \to Y_0$를 택하자.
+그러면 사상
+$V_i = Y_i \times_{Y_0} V_0 \to U_i = X_i \times_{Y_0} V_0$는
+아핀 스킴의 닫힌 몰입이다.
+% P09-ERR-0060: both reversed source arrows retained.
+따라서 사상 $V = Y \times_{Y_0} V_0 \to U = X \times_{Y_0} V_0$는 닫힌 몰입이다.
+이는 $V = \lim V_i$, $U = \lim U_i$이고,
+아핀 스킴의 닫힌 몰입의 극한이 닫힌 몰입이기 때문이다.
+실제로 전사 환 준동형의 여과 여극한은 전사이다.
+에탈 사상들 $V \to Y$는 $Y$의 에탈 덮개를 이룬다.
+여기서 $V_0 \to Y_0$의 선택을 변화시킨다.
+따라서 보조정리가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-directed-inverse-system-reduced}
+$S$를 스킴이라 하자. $I$를 유향 집합이라 하자.
+$(X_i, f_{i'i})$를 $I$를 지표로 하는 $S$ 위의 대수공간의 역계라 하자.
+$X_i$가 모든 $i$에 대해 축약이면, $X$는 축약이다.
+% P09-ERR-0061: the source's omitted affine-transition hypothesis is not inserted.
+\end{lemma}
+
+\begin{proof}
+$\lim X_i$가 Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}에 의해
+존재함을 관찰하자.
+$0 \in I$를 택하고 아핀 스킴 $V_0$와 에탈 사상 $U_0 \to X_0$를 택하자.
+% P09-ERR-0062: V_0/U_0 discrepancy retained.
+그러면 아핀 스킴 $U_i = X_i \times_{X_0} U_0$는 축약이다.
+따라서 $U = X \times_{X_0} U_0$는 축약 아핀 스킴의 극한이므로
+축약 아핀 스킴이다. 실제로 축약환의 여과 여극한은 축약이다.
+에탈 사상들 $U \to X$는 $X$의 에탈 덮개를 이룬다.
+여기서 $U_0 \to X_0$의 선택을 변화시킨다.
+따라서 보조정리가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-better-characterize-relative-limit-preserving}
+$S$를 스킴이라 하자. $X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation}의
+서로 동치인 조건 (1), (2)는 다음 조건과도 동치이다.
+\begin{enumerate}
+\item[(3)] 모든 유향 극한 $T = \lim T_i$가 준콤팩트 준분리 대수공간
+$T_i$들의 $S$ 위의 역계에서 얻어지고 전이 사상들이 아핀일 때,
+집합의 가환도
+$$
+\xymatrix{
+\colim_i \Mor(T_i, X) \ar[r] \ar[d] & \Mor(T, X) \ar[d] \\
+\colim_i \Mor(T_i, Y) \ar[r] & \Mor(T, Y)
+}
+$$
+는 올곱 가환도이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3)이 (2)를 함의함은 분명하다. (2)를 가정하고 (3)을 증명하자.
+증명은 상당히 형식적이므로 독자가 직접 증명을 찾아보기를 권한다.
+
+\medskip\noindent
+먼저 $T_i$가 모든 $i$에 대해 분리라는 가정을 추가했을 때 (3)을 증명하자.
+$i \in I$를 택하고 전사 에탈 사상 $U_i \to T_i$를 택하되,
+$U_i$는 아핀이라고 하자.
+Lemma \ref{spaces-limits-lemma-space-over-limit}를 사용하면,
+$U = U_i \times_{T_i} T$ 및 $U_{i'} = U_i \times_{T_i} T_{i'}$로 놓았을 때
+$U = \lim_{i' \geq i} U_{i'}$임을 알 수 있다.
+물론 $U$와 $U_{i'}$는 아핀이다
+(Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} 참조).
+$T_i$가 분리이므로 올곱 $V_i = U_i \times_{T_i} U_i$도 아핀 스킴이다.
+따라서 아핀 스킴 $V = V_i \times_{T_i} T$ 및
+$V_{i'} = V_i \times_{T_i} T_{i'}$를 얻고,
+$V = \lim_{i' \geq i} V_{i'}$가 성립한다.
+$U \to T$와 $U_i \to T_i$가 전사 에탈이며,
+$V = U \times_T U$ 및 $V_{i'} = U_{i'} \times_{T_{i'}} U_{i'}$임을 관찰하자.
+$\Mor(T, X)$는 두 사상 $\Mor(U, X) \to \Mor(V, X)$의 동등자임에 주의하자.
+예를 들어, 이는 $X$가 $(\Sch/S)_{fppf}$ 위의 층으로서
+두 사상 $h_V \to h_u$의 쌍대동등자이기 때문에 성립한다.
+% P09-ERR-0063; P09-ERR-1455: h_u and the subject X retained.
+마찬가지로 $\Mor(T_{i'}, X)$는
+두 사상 $\Mor(U_{i'}, X) \to \Mor(V_{i'}, X)$의 동등자이다.
+물론 $X$를 $Y$로 바꾸어도 같은 사실이 성립한다.
+조건 (2)는 (3)의 가환도들이 $U = \lim U_i$와 $V = \lim V_i$의 경우에
+올곱이라는 뜻이다. 이로부터 $T = \lim T_i$에 대해서도 같은 사실이 형식적으로 따른다.
+
+\medskip\noindent
+일반적인 경우에는 아핀 스킴 $U$, 원소 $i \in I$,
+전사 에탈 사상 $U \to T_i$를 택하자.
+앞 문단의 논증을 반복하면 여전히 증명이 성립한다.
+스킴 $V_{i'}$, $V$는 더 이상 아핀일 필요는 없지만,
+여전히 준콤팩트이고 분리이므로 앞 문단의 결과를 적용할 수 있다.
+\end{proof}
+
+
+
+\section{성질의 하강}
+\label{spaces-limits-section-descent}
+
+\noindent
+이 절은 Limits, Section \ref{limits-section-descent}에 대응하는 내용을 다룬다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-inverse-limit-sets}
+$S$를 스킴이라 하자.
+$X = \lim_{i \in I} X_i$를 $S$ 위의 대수공간의 유향 역계의 극한이라 하고,
+전이 사상들이 아핀이라고 하자
+(Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}).
+각 $X_i$가 decent이면(예를 들어 준분리이거나 국소 분리이면),
+집합으로서 $|X| = \lim_i |X_i|$이다.
+\end{lemma}
+
+\begin{proof}
+표준 사상 $|X| \to \lim |X_i|$가 있다. $0 \in I$를 택하자.
+$W_0 \subset X_0$가 열린 부분공간이면,
+$f_0^{-1}W_0 = \lim_{i \geq 0} f_{i0}^{-1}W_0$이다.
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}를 보라.
+따라서 $X_0$가 준콤팩트인 역계에 대해 보조정리를 증명할 수 있으면,
+일반적인 경우에도 보조정리가 따른다.
+그러므로 $X_0$가 준콤팩트라고 가정해도 되며, 이제 그렇게 가정한다.
+
+\medskip\noindent
+아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to X_0$를 택하자.
+$U_i = X_i \times_{X_0} U_0$ 및 $U = X \times_{X_0} U_0$로 놓자.
+$R_i = U_i \times_{X_i} U_i$ 및 $R = U \times_X U$로 놓자.
+$U = \lim U_i$ 및 $R = \lim R_i$임을 상기하자.
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}의 증명을 보라.
+$|X| = |U|/|R|$ 및 $|X_i| = |U_i|/|R_i|$임을 상기하자.
+Limits, Lemma \ref{limits-lemma-topology-limit}에 의해
+$|U| = \lim |U_i|$ 및 $|R| = \lim |R_i|$이다.
+
+\medskip\noindent
+$|X| \to \lim |X_i|$의 전사성.
+$(x_i) \in \lim |X_i|$라 하자.
+$S_i \subset |U_i|$로 $x_i$의 역상을 나타내자.
+이는 decent 공간의 정의에 의해 공집합이 아닌 유한 집합이다
+(Decent Spaces, Definition \ref{decent-spaces-definition-very-reasonable}).
+따라서 $\lim S_i$는 공집합이 아니다.
+Categories, Lemma \ref{categories-lemma-nonempty-limit}를 보라.
+$(u_i) \in \lim S_i \subset \lim |U_i|$라 하자.
+위의 사실에 의해 이는 점 $u \in |U|$를 정한다.
+그 상 $x \in |X|$는 주어진 원소 $(x_i)$로 $\lim |X_i|$ 안에서 간다.
+
+\medskip\noindent
+$|X| \to \lim |X_i|$의 단사성.
+$x, x' \in |X|$가 $\lim |X_i|$의 같은 점으로 간다고 하자.
+올림 $u, u' \in |U|$를 택하고 그 상을 $u_i, u'_i \in |U_i|$라 쓰자.
+각 $i$에 대해 $T_i \subset |R_i|$를
+$(u_i, u'_i) \in |U_i| \times |U_i|$로 가는 점들의 집합이라 하자.
+이는 decent 공간의 정의에 의해 유한 집합이다
+(Decent Spaces, Definition \ref{decent-spaces-definition-very-reasonable}).
+또한 $T_i$는 공집합이 아니다.
+이는 $x$와 $x'$가 $X_i$의 같은 점으로 간다고 가정했기 때문이다.
+따라서 $\lim T_i$는 공집합이 아니다.
+Categories, Lemma \ref{categories-lemma-nonempty-limit}를 보라.
+앞에서와 같이 $r \in |R| = \lim |R_i|$를 $\lim T_i$의 원소에 대응하는 점이라 하자.
+그러면 구성에 의해 $r$는 $(u, u')$로 $|U| \times |U|$ 안에서 간다.
+따라서 원하는 대로 $x = x'$가 $|X|$ 안에서 성립한다.
+
+\medskip\noindent
+괄호 안의 주장: 준분리 대수공간은 decent이다.
+Decent Spaces, Section \ref{decent-spaces-section-reasonable-decent}를 보라
+(여기서 핵심적인 관찰은 Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-finite-fibres-presentation}이다).
+국소 분리 대수공간은 Decent Spaces,
+Lemma \ref{decent-spaces-lemma-locally-separated-decent}에 의해 decent이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-topology-limit}
+Lemma \ref{spaces-limits-lemma-inverse-limit-sets}와 같은 표기와 가정하에서,
+위상공간으로서 $|X| = \lim_i |X_i|$가 성립한다.
+\end{lemma}
+
+\begin{proof}
+Topology, Lemma \ref{topology-lemma-characterize-limit}의 판정법을 사용할 것이다.
+집합으로서 $|X| = \lim_i |X_i|$임은
+Lemma \ref{spaces-limits-lemma-inverse-limit-sets}에서 보았다.
+사상 $f_i : X \to X_i$는 대수공간의 사상이므로
+연속 사상 $|X| \to |X_i|$를 정한다.
+따라서 $f_i^{-1}(U_i)$는 각 열린집합 $U_i \subset |X_i|$에 대해 열린집합이다.
+마지막으로 $x \in |X|$라 하고 $x \in V \subset |X|$를 열린 근방이라 하자.
+$i$와 열린 근방 $W_i \subset |X_i|$를 상 $x$에 대해 찾아서
+$f_i^{-1}(W_i) \subset V$가 되게 해야 한다.
+$0 \in I$를 택하자. 스킴 $U_0$와 전사 에탈 사상 $U_0 \to X_0$를 택하자.
+$U = X \times_{X_0} U_0$ 및 $U_i = X_i \times_{X_0} U_0$로 $i \geq 0$에 대해 놓자.
+그러면 $U = \lim_{i \geq 0} U_i$가 스킴의 범주에서 성립한다.
+이는 Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}에 따른다.
+$u \in U$를 택하여 $x$로 가게 하자.
+스킴에 대한 결과(Limits, Lemma \ref{limits-lemma-inverse-limit-top})에 의해
+$i \geq 0$와 열린 근방 $E_i \subset U_i$를 $u$의 상에 대해 찾아서,
+그 $U$ 안에서의 역상이 $V$의 $U$ 안에서의 역상에 포함되게 할 수 있다.
+그러면 $W_i \subset |X_i|$를 $E_i$의 상으로 놓으면 된다.
+이렇게 할 수 있는 이유는 $|U_i| \to |X_i|$가 열린 사상이기 때문이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-limit-nonempty}
+$S$를 스킴이라 하자.
+$X = \lim_{i \in I} X_i$를 $S$ 위의 대수공간의 유향 역계의 극한이라 하고,
+전이 사상들이 아핀이라고 하자
+(Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}).
+각 $X_i$가 준콤팩트이고 공집합이 아니면 $|X|$는 공집합이 아니다.
+\end{lemma}
+
+\begin{proof}
+$0 \in I$를 택하자.
+아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to X_0$를 택하자.
+$U_i = X_i \times_{X_0} U_0$ 및 $U = X \times_{X_0} U_0$로 놓자.
+그러면 각 $U_i$는 공집합이 아닌 아핀 스킴이다.
+따라서 $U = \lim U_i$는 공집합이 아니고
+(Limits, Lemma \ref{limits-lemma-limit-nonempty}),
+그러므로 $X$도 공집합이 아니다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-inverse-limit-irreducibles}
+$S$를 스킴이라 하자.
+$X = \lim_{i \in I} X_i$를 $S$ 위의 대수공간의 유향 역계의 극한이라 하고,
+전이 사상들이 아핀이라고 하자
+(Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}).
+$x \in |X|$의 상을 $x_i \in |X_i|$라 하자.
+각 $X_i$가 decent이면 $\overline{\{x\}} = \lim_i \overline{\{x_i\}}$가
+집합으로서 성립하며, 축약 유도 스킴 구조를 주면 대수공간으로서도 성립한다.
+\end{lemma}
+
+\begin{proof}
+$Z = \overline{\{x\}} \subset |X|$ 및
+$Z_i = \overline{\{x_i\}} \subset |X_i|$로 놓자.
+$|X| \to |X_i|$가 연속이므로 $Z$는 $Z_i$ 안으로 각 $i$에 대해 간다.
+따라서 단사 사상 $Z \to \lim Z_i$를 얻는다.
+이는 집합으로서 $|X| = \lim |X_i|$이기 때문이다
+(Lemma \ref{spaces-limits-lemma-inverse-limit-sets}).
+$x' \in |X|$가 $Z$에 속하지 않는다고 하자.
+그러면 열린 부분집합 $U \subset |X|$가 존재하여
+$x' \in U$이고 $x \not \in U$이다.
+위상공간으로서 $|X| = \lim |X_i|$이므로
+(Lemma \ref{spaces-limits-lemma-topology-limit}),
+$U = \bigcup_{j \in J} f_j^{-1}(U_j)$로 쓸 수 있다.
+여기서 $J \subset I$는 어떤 부분집합이고 $U_j \subset |X_j|$는 열린집합이다.
+Topology, Lemma \ref{topology-lemma-describe-limits}를 보라.
+그러면 어떤 $j \in J$에 대해 $f_j(x') \in U_j$이고
+$f_j(x) \not \in U_j$임을 알 수 있다.
+달리 말하면 $f_j(x') \not \in Z_j$이다.
+따라서 집합으로서 $Z = \lim Z_i$이다.
+
+\medskip\noindent
+이어서 $Z$와 $Z_i$에 축약 유도 스킴 구조를 주자.
+Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space}를 보라.
+전이 사상 $X_{i'} \to X_i$는 아핀 사상 $Z_{i'} \to Z_i$를 유도하고,
+사영 $X \to X_i$는 서로 호환되는 사상 $Z \to Z_i$를 유도한다.
+따라서 대수공간의 사상 $Z \to \lim Z_i \to X$를 얻는다.
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-closed-immersions}에 의해
+$\lim Z_i \to X$는 닫힌 몰입이다.
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-reduced}에 의해
+대수공간 $\lim Z_i$는 축약이다.
+위에서 보인 바와 같이 $Z \to \lim Z_i$는 점들 사이에서 전단사이다.
+축약 유도 닫힌 부분스킴 구조의 유일성에 의해
+이 사상은 대수공간의 동형이다.
+\end{proof}
+
+\begin{situation}
+\label{spaces-limits-situation-descent}
+$S$를 스킴이라 하자.
+$X = \lim_{i \in I} X_i$를 $S$ 위의 대수공간의 유향 역계의 극한이라 하고,
+전이 사상들이 아핀이라고 하자
+(Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}).
+$X_i$가 모든 $i \in I$에 대해 준콤팩트이고 준분리라고 가정한다.
+원소 $0 \in I$도 하나 택한다.
+\end{situation}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-section}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent}와 같다.
+$\mathcal{F}_0$가 $X_0$ 위의 준연접층이라고 가정하자.
+$\mathcal{F}_i = f_{0i}^*\mathcal{F}_0$로 $i \geq 0$에 대해 놓고,
+$\mathcal{F} = f_0^*\mathcal{F}_0$로 놓자. 그러면
+$$
+\Gamma(X, \mathcal{F}) = \colim_{i \geq 0} \Gamma(X_i, \mathcal{F}_i)
+$$
+이다.
+\end{lemma}
+
+\begin{proof}
+전사 에탈 사상 $U_0 \to X_0$를 택하되 $U_0$는 아핀 스킴이라고 하자
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}).
+$U_i = X_i \times_{X_0} U_0$로 놓자.
+$R_0 = U_0 \times_{X_0} U_0$ 및 $R_i = R_0 \times_{X_0} X_i$로 놓자.
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}의 증명에서
+표시 $X = U/R$가 존재하고 $U = \lim U_i$, $R = \lim R_i$임을 보았다.
+$U_i$와 $U$는 아핀이며, $R_i$와 $R$은 준콤팩트이고 분리임에 주의하자
+($X_i$가 준분리이기 때문이다).
+따라서 Limits, Lemma \ref{limits-lemma-descend-section}에 의해
+$$
+\mathcal{F}(U) = \colim \mathcal{F}_i(U_i)
+\quad\text{및}\quad
+\mathcal{F}(R) = \colim \mathcal{F}_i(R_i).
+$$
+이다. 보조정리는
+$\Gamma(X, \mathcal{F}) = \Ker(\mathcal{F}(U) \to \mathcal{F}(R))$이고,
+마찬가지로
+$\Gamma(X_i, \mathcal{F}_i) =
+\Ker(\mathcal{F}_i(U_i) \to \mathcal{F}_i(R_i))$라는 사실에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-opens}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent}와 같다.
+임의의 준콤팩트 열린 부분공간 $U \subset X$에 대해 $i$와
+준콤팩트 열린집합 $U_i \subset X_i$가 존재하여,
+그 $X$ 안에서의 역상이 $U$가 된다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}에서의 극한의 구성과
+스킴에 대한 대응하는 결과인
+Limits, Lemma \ref{limits-lemma-descend-opens}에서 형식적으로 따른다.
+\end{proof}
+
+\noindent
+다음 보조정리는 뒤에 나오는 더 강한
+Lemma \ref{spaces-limits-lemma-descend-isomorphism}으로 대체될 것이다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-equality}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent}와 같다.
+$f_0 : Y_0 \to Z_0$를 $X_0$ 위의 대수공간의 사상이라 하자.
+다음을 가정하자. (a) $Y_0 \to X_0$와 $Z_0 \to X_0$는 표현 가능하다.
+(b) $Y_0$, $Z_0$는 준콤팩트이고 준분리이다.
+(c) $f_0$는 국소 유한 표시이다.
+(d) $Y_0 \times_{X_0} X \to Z_0 \times_{X_0} X$는 동형이다.
+그러면 $i \geq 0$가 존재하여
+$Y_0 \times_{X_0} X_i \to Z_0 \times_{X_0} X_i$가 동형이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to X_0$를 택하자.
+$U_i = U_0 \times_{X_0} X_i$ 및 $U = U_0 \times_{X_0} X$로 놓자.
+Limits, Lemma \ref{limits-lemma-descend-isomorphism}을 적용하면
+$Y_0 \times_{X_0} U_i \to Z_0 \times_{X_0} U_i$가
+어떤 $i \geq 0$에 대해 스킴의 동형임을 알 수 있다(세부 사항은 생략한다).
+$U_i \to X_i$가 전사 에탈이므로,
+$Y_0 \times_{X_0} X_i \to Z_0 \times_{X_0} X_i$는 동형이다
+(세부 사항은 생략한다).
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-separated}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent}와 같다.
+$X$가 분리이면 $X_i$는 어떤 $i \in I$에 대해 분리이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to X_0$를 택하자.
+$i \geq 0$에 대해 $U_i = U_0 \times_{X_0} X_i$로 놓고,
+$U = U_0 \times_{X_0} X$로 놓자.
+$U_i$와 $U$는 전사 에탈 사상 $U_i \to X_i$ 및 $U \to X$를 갖춘
+아핀 스킴임에 주의하자.
+$R_i = U_i \times_{X_i} U_i$ 및 $R = U \times_X U$로 놓고,
+그 사영을 $s_i, t_i : R_i \to U_i$ 및 $s, t : R \to U$라 하자.
+$R_i$와 $R$은 준콤팩트 분리 스킴이다
+(대수공간 $X_i$와 $X$가 준분리이기 때문이다).
+사상 $s_i : R_i \to U_i$ 및 $s : R \to U$는 유한형이다.
+정의에 의해 $X_i$가 분리일 필요충분조건은
+$(t_i, s_i) : R_i \to U_i \times U_i$가 닫힌 몰입인 것이다.
+가정에 의해 $X$가 분리이므로,
+사상 $(t, s) : R \to U \times U$는 닫힌 몰입이다.
+$R \to U$가 유한형이므로 $i$가 존재하여
+사상 $R \to U_i \times U$가 닫힌 몰입이다
+(Limits, Lemma \ref{limits-lemma-finite-type-eventually-closed}).
+그러한 $i \in I$를 고정하자.
+Limits, Lemma \ref{limits-lemma-descend-closed-immersion-finite-presentation}을
+사상의 계 $R_{i'} \to U_i \times U_{i'}$에 $i' \geq i$에 대해 적용하자
+(실제로 $R_{i'} = R_i \times_{U_i \times U_i} U_i \times U_{i'}$이므로 적용할 수 있다).
+그러면 $R_{i'} \to U_i \times U_{i'}$가 충분히 큰 $i'$에 대해 닫힌 몰입이다.
+이로부터 $R_{i'} \to U_{i'} \times U_{i'}$도 닫힌 몰입임이 즉시 따라,
+보조정리의 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-limit-is-affine}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent}와 같다.
+$X$가 아핀이면 $i$가 존재하여 $X_i$가 아핀이다.
+\end{lemma}
+
+\begin{proof}
+$0 \in I$를 택하자. 아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to X_0$를 택하자.
+$U = U_0 \times_{X_0} X$ 및 $U_i = U_0 \times_{X_0} X_i$로
+$i \geq 0$에 대해 놓자.
+전이 사상들이 아핀이므로 대수공간 $U_i$와 $U$는 아핀이다.
+따라서 $U \to X$는 아핀 스킴의 에탈 사상이다.
+그러므로 $X = \Spec(A)$, $U = \Spec(B)$ 및
+$$
+B = A[x_1, \ldots, x_n]/(g_1, \ldots, g_n)
+$$
+으로 쓰되, $\Delta = \det(\partial g_\lambda/\partial x_\mu)$가
+$B$에서 가역이게 할 수 있다.
+Algebra, Lemma \ref{algebra-lemma-etale-standard-smooth}를 보라.
+$A_i = \mathcal{O}_{X_i}(X_i)$로 놓자.
+$A = \colim A_i$가 Lemma \ref{spaces-limits-lemma-descend-section}에 의해 성립한다.
+$0$을 크게 한 후, $g_{1, i}, \ldots, g_{n, i} \in A_i[x_1, \ldots, x_n]$가
+존재하여 $g_1, \ldots, g_n$으로 간다고 가정할 수 있다.
+$$
+B_i = A_i[x_1, \ldots, x_n]/(g_{1, i}, \ldots, g_{n, i})
+$$
+로 모든 $i \geq 0$에 대해 놓자.
+필요하면 $0$을 크게 하여
+$\Delta_i = \det(\partial g_{\lambda, i}/\partial x_\mu)$가
+$B_i$에서 모든 $i \geq 0$에 대해 가역이라고 가정할 수 있다.
+따라서 $A_i \to B_i$는 에탈 환 준동형이다.
+$0$을 크게 한 후에는 $\Spec(B_i) \to \Spec(A_i)$가 전사라고도 가정할 수 있다.
+Limits, Lemma \ref{limits-lemma-descend-surjective}를 보라.
+$0$을 다시 크게 하면 원소
+$h_{1, i}, \ldots, h_{n, i} \in \mathcal{O}_{U_i}(U_i)$를 택하여
+$x_1, \ldots, x_n$의 $B = \mathcal{O}_U(U)$ 안에서의 류로 가고,
+$g_{\lambda, i}(h_{\nu, i}) = 0$이 $\mathcal{O}_{U_i}(U_i)$에서 성립하게 할 수 있다.
+따라서 다음 가환도를 얻는다.
+\begin{equation}
+\label{spaces-limits-equation-to-show-cartesian}
+\vcenter{
+\xymatrix{
+X_i \ar[d] & U_i \ar[l] \ar[d] \\
+\Spec(A_i) & \Spec(B_i) \ar[l]
+}
+}
+\end{equation}
+구성에 의해 $B_i = B_0 \otimes_{A_0} A_i$이고
+$B = B_0 \otimes_{A_0} A$이다. 사상
+$$
+f_0 : U_0 \longrightarrow X_0 \times_{\Spec(A_0)} \Spec(B_0)
+$$
+를 생각하자. 이는 준콤팩트 준분리 대수공간 사이의 사상이며,
+그 대수공간들은 $X_0$ 위에서 표현 가능하고 분리이며 에탈이다.
+$f_0$를 $X$로 밑변환하면 선택에 의해 동형이 된다.
+따라서 Lemma \ref{spaces-limits-lemma-descend-equality}에 의해
+$i$가 존재하여 $f_0$를 $X_i$로 밑변환한 것이 동형이 된다.
+달리 말하면 가환도 (\ref{spaces-limits-equation-to-show-cartesian})는 데카르트 가환도이다.
+따라서 Descent, Lemma \ref{descent-lemma-descent-data-sheaves}를
+fppf 덮개 $\{\Spec(B_i) \to \Spec(A_i)\}$에 적용하고
+Descent, Lemma \ref{descent-lemma-affine}와 결합하면,
+$X_i \to \Spec(A_i)$는 $\Spec(A_i)$ 위에서 아핀인 스킴으로 표현 가능하다.
+이것이 원하는 결과이다.
+(물론 여기서 $X_i = \Spec(A_i)$도 따르지만, 이는 필요하지 않다.)
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-limit-is-scheme}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent}와 같다.
+$X$가 스킴이면 $i$가 존재하여 $X_i$가 스킴이다.
+\end{lemma}
+
+\begin{proof}
+유한 아핀 열린 덮개 $X = \bigcup W_j$를 택하자.
+Lemma \ref{spaces-limits-lemma-descend-opens}에 의해 $i \in I$와
+열린 부분공간 $W_{j, i} \subset X_i$를 찾아,
+그 $X$로의 밑변환이 $W_j \to X$가 되게 할 수 있다.
+Lemma \ref{spaces-limits-lemma-limit-is-affine}에 의해
+각 $W_{j, i}$가 아핀 스킴이라고 가정할 수 있다.
+이는 $X_i$가 스킴이라는 뜻이다
+(예를 들어 Properties of Spaces, Section
+\ref{spaces-properties-section-schematic}을 보라).
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-finite-type-eventually-closed}
+$S$를 스킴이라 하자. $B$를 $S$ 위의 대수공간이라 하자.
+$X = \lim X_i$를 대수공간의 $B$ 위의 유향 극한이라 하고,
+전이 사상들이 아핀이라고 하자.
+$Y \to X$를 $B$ 위의 대수공간의 사상이라 하자.
+\begin{enumerate}
+\item $Y \to X$가 닫힌 몰입이고, $X_i$가 준콤팩트이며,
+$Y \to B$가 국소 유한형이면,
+$Y \to X_i$는 충분히 큰 $i$에 대해 닫힌 몰입이다.
+\item $Y \to X$가 몰입이고, $X_i$가 준분리이며,
+$Y \to B$가 국소 유한형이고 $Y$가 준콤팩트이면,
+$Y \to X_i$는 충분히 큰 $i$에 대해 몰입이다.
+\item $Y \to X$가 동형이고, $X_i$가 준콤팩트이며,
+$X_i \to B$가 국소 유한형이고, 전이 사상 $X_{i'} \to X_i$가 닫힌 몰입이며,
+$Y \to B$가 국소 유한 표시이면,
+$Y \to X_i$는 충분히 큰 $i$에 대해 동형이다.
+\item $Y \to X$가 단사상이고, $X_i$가 준분리이며,
+$Y \to B$가 국소 유한형이고 $Y$가 준콤팩트이면,
+$Y \to X_i$는 충분히 큰 $i$에 대해 단사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)의 증명. $0 \in I$를 택하자.
+$X_0$가 준콤팩트이므로 아핀 스킴 $W$와 에탈 사상 $W \to B$를 택하여
+$|X_0| \to |B|$의 상이 $|W| \to |B|$의 상에 포함되게 할 수 있다.
+아핀 스킴 $U_0$와 에탈 사상 $U_0 \to X_0 \times_B W$를 택하되,
+$U_0 \to X_0$가 전사이게 하자.
+(이는 $W$를 택한 방식과 $X_0$가 준콤팩트라는 사실에 의해 가능하다.
+세부 사항은 생략한다.)
+$V \to Y$, $U \to X$, $U_i \to X_i$를 각각
+$U_0 \to X_0$의 밑변환이라 하자($i \geq 0$에 대해).
+$V \to U_i$가 충분히 큰 $i$에 대해 닫힌 몰입임을 보이면 충분하다.
+따라서 $V \to U = \lim U_i$에 대한 결과를 $W$ 위에서 증명하는 것으로 환원된다.
+이는 스킴의 경우, 즉 Limits, Lemma
+\ref{limits-lemma-finite-type-eventually-closed}에서 따른다.
+
+\medskip\noindent
+(2)의 증명. $0 \in I$를 택하자.
+준콤팩트 열린 부분공간 $X'_0 \subset X_0$를 택하여
+$Y \to X_0$가 $X'_0$를 경유하게 하자.
+$X_i$를 $X'_0$의 역상으로 $i \geq 0$에 대해 대체하면,
+모든 $X_i'$가 준콤팩트이고 준분리라고 가정할 수 있다.
+$U \subset X$를 준콤팩트 열린집합으로 택하여
+$Y \to X$가 닫힌 몰입 $Y \to U$를 경유하게 하자
+($U$는 $Y$가 준콤팩트이므로 존재한다).
+Lemma \ref{spaces-limits-lemma-descend-opens}에 의해
+$U = \lim U_i$이고 $U_i \subset X_i$가 준콤팩트 열린집합이라고 가정할 수 있다.
+(1)에 의해 $Y \to U_i$는 어떤 $i$에 대해 닫힌 몰입이다.
+따라서 (2)가 성립한다.
+
+\medskip\noindent
+(3)의 증명. $0 \in I$를 택하자.
+아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to X_0$를 택하자.
+$U_i = X_i \times_{X_0} U_0$,
+$U = X \times_{X_0} U_0 = Y \times_{X_0} U_0$로 놓자.
+그러면 $U = \lim U_i$는 아핀 스킴의 극한이고,
+이 계의 전이 사상들은 닫힌 몰입이며, $U \to U_0$는 유한 표시이다
+($U \to B$는 국소 유한 표시이고 $U_0 \to B$는 국소 유한형이므로
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-finite-presentation-permanence}를 적용한다).
+이로써 다음 대수적 사실로 환원된다.
+$A = \lim A_i$가 $R$-대수의 유향 여극한이고 전이 준동형들이 전사이며,
+$A$가 $A_0$ 위에서 유한 표시이면, $A = A_i$가 어떤 $i$에 대해 성립한다.
+실제로 $A = A_0/(f_1, \ldots, f_n)$으로 쓰자.
+$i$를 택하여 $f_1, \ldots, f_n$이 전사 준동형 $A_0 \to A_i$ 아래에서
+영으로 가게 하면 된다.
+
+\medskip\noindent
+(4)의 증명. $Z_i = Y \times_{X_i} Y$로 놓자.
+전이 사상 $X_{i'} \to X_i$는 아핀이므로 분리이다.
+따라서 전이 사상 $Z_{i'} \to Z_i$는 닫힌 몰입이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fibre-product-after-map}을 보라.
+$\lim Z_i = Y \times_X Y = Y$이다.
+이는 $Y \to X$가 단사상이기 때문이다.
+$0 \in I$를 택하자. $Y \to X_0$가 국소 유한형이므로
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-permanence-finite-type}),
+사상 $Y \to Z_0$는 국소 유한 표시이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-diagonal-morphism-finite-type}).
+사상 $Z_i \to Z_0$는 국소 유한형이다(닫힌 몰입이기 때문이다).
+마지막으로 $Z_i = Y \times_{X_i} Y$는 준콤팩트이다.
+이는 $X_i$가 준분리이고 $Y$가 준콤팩트이기 때문이다.
+따라서 (3)을 $Y = \lim_{i \geq 0} Z_i$에 $Z_0$ 위에서 적용할 수 있고,
+$Y = Z_i$가 어떤 $i$에 대해 성립함을 얻는다.
+이로써 (4)와 보조정리가 증명된다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-separated}
+$S$를 스킴이라 하자. $Y$를 $S$ 위의 대수공간이라 하자.
+$X = \lim X_i$를 대수공간의 $Y$ 위의 유향 극한이라 하고,
+전이 사상들이 아핀이라고 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $Y$는 준분리이다.
+\item $X_i$는 준콤팩트이고 준분리이다.
+\item 사상 $X \to Y$는 분리이다.
+\end{enumerate}
+그러면 $X_i \to Y$는 충분히 큰 모든 $i$에 대해 분리이다.
+\end{lemma}
+
+\begin{proof}
+$0 \in I$라 하자. 아핀 스킴 $W$와 에탈 사상 $W \to Y$를 택하여
+$|W| \to |Y|$의 상이 $|X_0| \to |Y|$의 상을 포함하게 하자.
+이는 $X_0$가 준콤팩트이므로 가능하다.
+$W \times_Y X_i \to W$가 어떤 $i \geq 0$에 대해 분리임을 확인하면 충분하다.
+이는 $W \times_Y X_i$의 $W$ 위의 대각 사상이
+$X_i \to X_i \times_Y X_i$를 전사 에탈 사상
+$(X_i \times_Y X_i) \times_Y W \to X_i \times_Y X_i$로 밑변환한 것이기 때문이다.
+$Y$가 준분리이므로 대수공간 $W \times_Y X_i$는 준콤팩트이다
+(또한 준분리이다).
+따라서 $W$로 밑변환하여 $Y$가 아핀 스킴이라고 가정할 수 있다.
+$Y$가 아핀 스킴이면, $X_i$가 충분히 큰 $i$에 대해 분리 대수공간임을
+보여야 하며, $X$가 분리 대수공간이라는 가정이 주어져 있다.
+따라서 이 경우는 Lemma \ref{spaces-limits-lemma-descend-separated}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-affine}
+$S$를 스킴이라 하자. $Y$를 $S$ 위의 대수공간이라 하자.
+$X = \lim X_i$를 대수공간의 $Y$ 위의 유향 극한이라 하고,
+전이 사상들이 아핀이라고 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $Y$는 준콤팩트이고 준분리이다.
+\item $X_i$는 준콤팩트이고 준분리이다.
+\item $X \to Y$는 아핀이다.
+\end{enumerate}
+그러면 $X_i \to Y$는 충분히 큰 $i$에 대해 아핀이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $W$와 전사 에탈 사상 $W \to Y$를 택하자.
+그러면 $X \times_Y W$는 아핀이고,
+$X_i \times_Y W$가 어떤 $i$에 대해 아핀임을 확인하면 충분하다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-affine-local}).
+이는 Lemma \ref{spaces-limits-lemma-limit-is-affine}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-finite}
+$S$를 스킴이라 하자. $Y$를 $S$ 위의 대수공간이라 하자.
+$X = \lim X_i$를 대수공간의 $Y$ 위의 유향 극한이라 하고,
+전이 사상들이 아핀이라고 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $Y$는 준콤팩트이고 준분리이다.
+\item $X_i$는 준콤팩트이고 준분리이다.
+\item 전이 사상 $X_{i'} \to X_i$는 유한이다.
+\item $X_i \to Y$는 국소 유한형이다.
+\item $X \to Y$는 정수적이다.
+\end{enumerate}
+그러면 $X_i \to Y$는 충분히 큰 $i$에 대해 유한이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $W$와 전사 에탈 사상 $W \to Y$를 택하자.
+그러면 $X \times_Y W$는 $W$ 위에서 유한이고,
+% P09-ERR-1456: the canonical proof says finite, not integral, here.
+$X_i \times_Y W$가 $W$ 위에서 어떤 $i$에 대해 유한임을 확인하면 충분하다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-integral-local}).
+Lemma \ref{spaces-limits-lemma-limit-is-scheme}에 의해 스킴의 경우로 환원된다.
+스킴의 경우에는 Limits, Lemma \ref{limits-lemma-eventually-finite}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-closed-immersion}
+$S$를 스킴이라 하자. $Y$를 $S$ 위의 대수공간이라 하자.
+$X = \lim X_i$를 대수공간의 $Y$ 위의 유향 극한이라 하고,
+전이 사상들이 아핀이라고 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $Y$는 준콤팩트이고 준분리이다.
+\item $X_i$는 준콤팩트이고 준분리이다.
+\item 전이 사상 $X_{i'} \to X_i$는 닫힌 몰입이다.
+\item $X_i \to Y$는 국소 유한형이다.
+\item $X \to Y$는 닫힌 몰입이다.
+\end{enumerate}
+그러면 $X_i \to Y$는 충분히 큰 $i$에 대해 닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $W$와 전사 에탈 사상 $W \to Y$를 택하자.
+그러면 $X \times_Y W$는 $W$의 닫힌 부분공간이고,
+$X_i \times_Y W$가 $W$의 닫힌 부분공간이 어떤 $i$에 대해 됨을 확인하면 충분하다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-closed-immersion-local}).
+Lemma \ref{spaces-limits-lemma-limit-is-scheme}에 의해 스킴의 경우로 환원된다.
+스킴의 경우에는 Limits, Lemma \ref{limits-lemma-eventually-closed-immersion}에서 따른다.
+\end{proof}
+
+
+
+\section{사상의 성질의 하강}
+\label{spaces-limits-section-descent-of-properties}
+
+\noindent
+이 절에서는 Section \ref{spaces-limits-section-descent}에 대응하는 결과를
+사상의 성질에 대해 다룬다. 다음 상황에서 논의할 것이다.
+
+\begin{situation}
+\label{spaces-limits-situation-descent-property}
+$S$를 스킴이라 하자. $B = \lim B_i$를 유향 역계의 극한이라 하고,
+그 역계는 $S$ 위의 대수공간들로 이루어지며 전이 사상들이 아핀이라고 하자
+(Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}).
+$0 \in I$라 하고 $f_0 : X_0 \to Y_0$를 $B_0$ 위의 대수공간의 사상이라 하자.
+$B_0$, $X_0$, $Y_0$가 준콤팩트이고 준분리라고 가정하자.
+$f_i : X_i \to Y_i$를 $f_0$의 $B_i$로의 밑변환이라 하고,
+$f : X \to Y$를 $f_0$의 $B$로의 밑변환이라 하자.
+\end{situation}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-etale}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 에탈이다.
+\item $f_0$는 국소 유한 표시이다.
+\end{enumerate}
+그러면 $f_i$는 어떤 $i \geq 0$에 대해 에탈이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $V_0$와 전사 에탈 사상 $V_0 \to Y_0$를 택하자.
+아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to V_0 \times_{Y_0} X_0$를 택하자.
+다음 가환도를 보라.
+$$
+\xymatrix{
+U_0 \ar[d] \ar[r] & V_0 \ar[d] \\
+X_0 \ar[r] & Y_0
+}
+$$
+수직 화살표들은 구성에 의해 전사 에탈이다.
+이 가환도를 $B_i$ 또는 $B$로 밑변환하면 다음을 얻는다.
+$$
+\vcenter{
+\xymatrix{
+U_i \ar[d] \ar[r] & V_i \ar[d] \\
+X_i \ar[r] & Y_i
+}
+}
+\quad\text{및}\quad
+\vcenter{
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+}
+$$
+$U_i, V_i, U, V$는 아핀 스킴이고 수직 사상들은 전사 에탈이며,
+사상 $U_i \to V_i$의 극한은 $U \to V$임에 주의하자.
+$X_i \to Y_i$가 에탈일 필요충분조건은 $U_i \to V_i$가 에탈인 것이며,
+마찬가지로 $X \to Y$가 에탈일 필요충분조건은 $U \to V$가 에탈인 것이다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-etale-local}).
+$f_0$가 국소 유한 표시이므로 사상 $U_0 \to V_0$도 국소 유한 표시이다.
+따라서 보조정리는 Limits, Lemma \ref{limits-lemma-descend-etale}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-smooth}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 매끄럽다.
+\item $f_0$는 국소 유한 표시이다.
+\end{enumerate}
+그러면 $f_i$는 어떤 $i \geq 0$에 대해 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $V_0$와 전사 에탈 사상 $V_0 \to Y_0$를 택하자.
+아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to V_0 \times_{Y_0} X_0$를 택하자.
+다음 가환도를 보라.
+$$
+\xymatrix{
+U_0 \ar[d] \ar[r] & V_0 \ar[d] \\
+X_0 \ar[r] & Y_0
+}
+$$
+수직 화살표들은 구성에 의해 전사 에탈이다.
+이 가환도를 $B_i$ 또는 $B$로 밑변환하면 다음을 얻는다.
+$$
+\vcenter{
+\xymatrix{
+U_i \ar[d] \ar[r] & V_i \ar[d] \\
+X_i \ar[r] & Y_i
+}
+}
+\quad\text{및}\quad
+\vcenter{
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+}
+$$
+$U_i, V_i, U, V$는 아핀 스킴이고 수직 사상들은 전사 에탈이며,
+사상 $U_i \to V_i$의 극한은 $U \to V$임에 주의하자.
+$X_i \to Y_i$가 매끄러울 필요충분조건은 $U_i \to V_i$가 매끄러운 것이며,
+마찬가지로 $X \to Y$가 매끄러울 필요충분조건은 $U \to V$가 매끄러운 것이다
+(Morphisms of Spaces, Definition \ref{spaces-morphisms-definition-smooth}).
+$f_0$가 국소 유한 표시이므로 사상 $U_0 \to V_0$도 국소 유한 표시이다.
+따라서 보조정리는 Limits, Lemma \ref{limits-lemma-descend-smooth}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-surjective}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 전사이다.
+\item $f_0$는 국소 유한 표시이다.
+\end{enumerate}
+그러면 $f_i$는 어떤 $i \geq 0$에 대해 전사이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $V_0$와 전사 에탈 사상 $V_0 \to Y_0$를 택하자.
+아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to V_0 \times_{Y_0} X_0$를 택하자.
+다음 가환도를 보라.
+$$
+\xymatrix{
+U_0 \ar[d] \ar[r] & V_0 \ar[d] \\
+X_0 \ar[r] & Y_0
+}
+$$
+수직 화살표들은 구성에 의해 전사 에탈이다.
+이 가환도를 $B_i$ 또는 $B$로 밑변환하면 다음을 얻는다.
+$$
+\vcenter{
+\xymatrix{
+U_i \ar[d] \ar[r] & V_i \ar[d] \\
+X_i \ar[r] & Y_i
+}
+}
+\quad\text{및}\quad
+\vcenter{
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+}
+$$
+$U_i, V_i, U, V$는 아핀 스킴이고 수직 사상들은 전사 에탈이며,
+사상 $U_i \to V_i$의 극한은 $U \to V$이다.
+또한 사상 $U_i \to X_i \times_{Y_i} V_i$ 및 $U \to X \times_Y V$는 전사이다
+($U_0 \to X_0 \times_{Y_0} V_0$의 밑변환이기 때문이다).
+특히 $X_i \to Y_i$가 전사일 필요충분조건은 $U_i \to V_i$가 전사인 것이며,
+마찬가지로 $X \to Y$가 전사일 필요충분조건은 $U \to V$가 전사인 것이다.
+$f_0$가 국소 유한 표시이므로 사상 $U_0 \to V_0$도 국소 유한 표시이다.
+따라서 보조정리는 스킴의 경우
+(Limits, Lemma \ref{limits-lemma-descend-surjective})에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-universally-injective}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 보편 단사이다.
+\item $f_0$는 국소 유한형이다.
+\end{enumerate}
+그러면 $f_i$는 어떤 $i \geq 0$에 대해 보편 단사이다.
+\end{lemma}
+
+\begin{proof}
+사상 $X \to Y$가 보편 단사일 필요충분조건은
+대각 사상 $X \to X \times_Y X$가 전사인 것임을 상기하자
+(Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-universally-injective} 및
+Lemma \ref{spaces-morphisms-lemma-universally-injective}).
+$X_0 \to X_0 \times_{Y_0} X_0$는 국소 유한 표시임을 관찰하자
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-diagonal-morphism-finite-type}).
+따라서 사상 $X_0 \to X_0 \times_{Y_0} X_0$를 생각하고
+Lemma \ref{spaces-limits-lemma-descend-surjective}를 적용하면 보조정리가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-affine}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+$f$가 아핀이면 $f_i$는 어떤 $i \geq 0$에 대해 아핀이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $V_0$와 전사 에탈 사상 $V_0 \to Y_0$를 택하자.
+$V_i = V_0 \times_{Y_0} Y_i$ 및 $V = V_0 \times_{Y_0} Y$로 놓자.
+$f$가 아핀이므로 $V \times_Y X = \lim V_i \times_{Y_i} X_i$는 아핀이다.
+Lemma \ref{spaces-limits-lemma-limit-is-affine}에 의해
+$V_i \times_{Y_i} X_i$는 어떤 $i \geq 0$에 대해 아핀이다.
+이 $i$에 대해 사상 $f_i$는 아핀이다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-affine-local}).
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-finite}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 유한이다.
+\item $f_0$는 국소 유한형이다.
+\end{enumerate}
+그러면 $f_i$는 어떤 $i \geq 0$에 대해 유한이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $V_0$와 전사 에탈 사상 $V_0 \to Y_0$를 택하자.
+$V_i = V_0 \times_{Y_0} Y_i$ 및 $V = V_0 \times_{Y_0} Y$로 놓자.
+$f$가 유한이므로 $V \times_Y X = \lim V_i \times_{Y_i} X_i$는
+$V$ 위에서 유한인 스킴이다.
+Lemma \ref{spaces-limits-lemma-limit-is-affine}에 의해
+$V_i \times_{Y_i} X_i$는 어떤 $i \geq 0$에 대해 아핀이다.
+필요하면 $i$를 크게 하여 $V_i \times_{Y_i} X_i \to V_i$가 유한임을
+Limits, Lemma \ref{limits-lemma-descend-finite-finite-presentation}에서 얻는다.
+이 $i$에 대해 사상 $f_i$는 유한이다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-integral-local}).
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-closed-immersion}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 닫힌 몰입이다.
+\item $f_0$는 국소 유한형이다.
+\end{enumerate}
+그러면 $f_i$는 어떤 $i \geq 0$에 대해 닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $V_0$와 전사 에탈 사상 $V_0 \to Y_0$를 택하자.
+$V_i = V_0 \times_{Y_0} Y_i$ 및 $V = V_0 \times_{Y_0} Y$로 놓자.
+$f$가 닫힌 몰입이므로 $V \times_Y X = \lim V_i \times_{Y_i} X_i$는
+아핀 스킴 $V$의 닫힌 부분스킴이다.
+Lemma \ref{spaces-limits-lemma-limit-is-affine}에 의해
+$V_i \times_{Y_i} X_i$는 어떤 $i \geq 0$에 대해 아핀이다.
+필요하면 $i$를 크게 하여 $V_i \times_{Y_i} X_i \to V_i$가 닫힌 몰입임을
+Limits, Lemma \ref{limits-lemma-descend-closed-immersion-finite-presentation}에서 얻는다.
+이 $i$에 대해 사상 $f_i$는 닫힌 몰입이다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-integral-local}).
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-separated-morphism}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+$f$가 분리이면 $f_i$는 어떤 $i \geq 0$에 대해 분리이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-descend-closed-immersion}을
+대각 사상 $\Delta_{X_0/Y_0} : X_0 \to X_0 \times_{Y_0} X_0$에 적용하자.
+(대각 사상은 국소 유한형이고,
+올곱 $X_0 \times_{Y_0} X_0$는 준콤팩트이고 준분리이다.
+몇 가지 세부 사항은 생략한다.)
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-isomorphism}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 동형이다.
+\item $f_0$는 국소 유한 표시이다.
+\end{enumerate}
+그러면 $f_i$는 어떤 $i \geq 0$에 대해 동형이다.
+\end{lemma}
+
+\begin{proof}
+동형이라는 것은 에탈이고 보편 단사이며 전사라는 것과 동치이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-universally-injective-open}을 보라.
+따라서 보조정리는 Lemmas \ref{spaces-limits-lemma-descend-etale},
+\ref{spaces-limits-lemma-descend-surjective}, \ref{spaces-limits-lemma-descend-universally-injective}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-monomorphism}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 단사상이다.
+\item $f_0$는 국소 유한형이다.
+\end{enumerate}
+그러면 $f_i$는 어떤 $i \geq 0$에 대해 단사상이다.
+\end{lemma}
+
+\begin{proof}
+사상이 단사상일 필요충분조건은 그 대각 사상이 동형인 것임을 상기하자.
+사상 $X_0 \to X_0 \times_{Y_0} X_0$는
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-diagonal-morphism-finite-type}에 의해 국소 유한 표시이다.
+$X_0 \times_{Y_0} X_0$가 준콤팩트이고 준분리이므로,
+Lemma \ref{spaces-limits-lemma-descend-isomorphism}에 의해
+$\Delta_i : X_i \to X_i \times_{Y_i} X_i$는 어떤 $i \geq 0$에 대해 동형이다.
+이 $i$에 대해 사상 $f_i$는 단사상이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-flat}
+표기와 가정은 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+$\mathcal{F}_0$를 준연접 $\mathcal{O}_{X_0}$-가군이라 하고,
+$\mathcal{F}_i$로 그 $X_i$로의 당김을,
+$\mathcal{F}$로 그 $X$로의 당김을 나타내자.
+다음을 가정하자.
+\begin{enumerate}
+\item $\mathcal{F}$는 $Y$ 위에서 평탄하다.
+\item $\mathcal{F}_0$는 유한 표시이다.
+\item $f_0$는 국소 유한 표시이다.
+\end{enumerate}
+그러면 $\mathcal{F}_i$는 $Y_i$ 위에서 어떤 $i \geq 0$에 대해 평탄하다.
+특히 $f_0$가 국소 유한 표시이고 $f$가 평탄하면,
+$f_i$는 어떤 $i \geq 0$에 대해 평탄하다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $V_0$와 전사 에탈 사상 $V_0 \to Y_0$를 택하자.
+아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to V_0 \times_{Y_0} X_0$를 택하자.
+다음 가환도를 보라.
+$$
+\xymatrix{
+U_0 \ar[d] \ar[r] & V_0 \ar[d] \\
+X_0 \ar[r] & Y_0
+}
+$$
+수직 화살표들은 구성에 의해 전사 에탈이다.
+이 가환도를 $B_i$ 또는 $B$로 밑변환하면 다음을 얻는다.
+$$
+\vcenter{
+\xymatrix{
+U_i \ar[d] \ar[r] & V_i \ar[d] \\
+X_i \ar[r] & Y_i
+}
+}
+\quad\text{및}\quad
+\vcenter{
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+}
+$$
+$U_i, V_i, U, V$는 아핀 스킴이고 수직 사상들은 전사 에탈이며,
+사상 $U_i \to V_i$의 극한은 $U \to V$임에 주의하자.
+$\mathcal{F}_i$가 $Y_i$ 위에서 평탄할 필요충분조건은
+$\mathcal{F}_i|_{U_i}$가 $V_i$ 위에서 평탄한 것이며,
+마찬가지로 $\mathcal{F}$가 $Y$ 위에서 평탄할 필요충분조건은
+$\mathcal{F}|_U$가 $V$ 위에서 평탄한 것이다
+(Morphisms of Spaces, Definition \ref{spaces-morphisms-definition-flat}).
+$f_0$가 국소 유한 표시이므로 사상 $U_0 \to V_0$도 국소 유한 표시이다.
+따라서 보조정리는 Limits, Lemma
+\ref{limits-lemma-descend-module-flat-finite-presentation}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-proper}
+가정과 표기는 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 고유이다.
+\item $f_0$는 국소 유한형이다.
+\end{enumerate}
+그러면 $i$가 존재하여 $f_i$가 고유이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $V_0$와 전사 에탈 사상 $V_0 \to Y_0$를 택하자.
+$V_i = Y_i \times_{Y_0} V_0$ 및 $V = Y \times_{Y_0} V_0$로 놓자.
+$f_i$를 $V_i$로 밑변환한 것이 고유임을 보이면 충분하다.
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-proper-local}을 보라.
+따라서 $Y_0$가 아핀이라고 가정할 수 있다.
+
+\medskip\noindent
+Lemma \ref{spaces-limits-lemma-descend-separated-morphism}에 의해
+$f_i$는 어떤 $i \geq 0$에 대해 분리이다.
+$0$을 $i$로 대체하여 $f_0$가 분리라고 가정할 수 있다.
+$f_0$가 준콤팩트임을 관찰하자. 따라서 $f_0$는 분리이고 유한형이다.
+Cohomology of Spaces, Lemma \ref{spaces-cohomology-lemma-weak-chow}에 의해
+다음 가환도를 택할 수 있다.
+$$
+\xymatrix{
+X_0 \ar[rd] & X_0' \ar[d] \ar[l]^\pi \ar[r] & \mathbf{P}^n_{Y_0} \ar[dl] \\
+& Y_0 &
+}
+$$
+여기서 $X_0' \to \mathbf{P}^n_{Y_0}$는 몰입이고,
+$\pi : X_0' \to X_0$는 고유이며 전사이다.
+$X' = X_0' \times_{Y_0} Y$ 및 $X_i' = X_0' \times_{Y_0} Y_i$를 도입하자.
+Morphisms of Spaces, Lemmas \ref{spaces-morphisms-lemma-composition-proper}와
+\ref{spaces-morphisms-lemma-base-change-proper}에 의해
+$X' \to Y$는 고유이다.
+따라서 $X' \to \mathbf{P}^n_Y$는 닫힌 몰입이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-permanence}).
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-image-proper-is-proper}에 의해
+$X'_i \to Y_i$가 어떤 $i$에 대해 고유임을 보이면 충분하다.
+Lemma \ref{spaces-limits-lemma-descend-closed-immersion}에 의해
+$X'_i \to \mathbf{P}^n_{Y_i}$는 충분히 큰 $i$에 대해 닫힌 몰입이다.
+그러면 $X'_i \to Y_i$는 고유이므로 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-relative-dimension}
+가정과 표기는 Situation \ref{spaces-limits-situation-descent-property}와 같다.
+$d \geq 0$라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $f$의 상대 차원은 $\leq d$이다
+(Morphisms of Spaces, Definition \ref{spaces-morphisms-definition-relative-dimension}).
+\item $f_0$는 국소 유한형이다.
+\end{enumerate}
+그러면 $i$가 존재하여 $f_i$의 상대 차원이 $\leq d$이다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $V_0$와 전사 에탈 사상 $V_0 \to Y_0$를 택하자.
+아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to V_0 \times_{Y_0} X_0$를 택하자.
+다음 가환도를 보라.
+$$
+\xymatrix{
+U_0 \ar[d] \ar[r] & V_0 \ar[d] \\
+X_0 \ar[r] & Y_0
+}
+$$
+수직 화살표들은 구성에 의해 전사 에탈이다.
+이 가환도를 $B_i$ 또는 $B$로 밑변환하면 다음을 얻는다.
+$$
+\vcenter{
+\xymatrix{
+U_i \ar[d] \ar[r] & V_i \ar[d] \\
+X_i \ar[r] & Y_i
+}
+}
+\quad\text{및}\quad
+\vcenter{
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+}
+$$
+$U_i, V_i, U, V$는 아핀 스킴이고 수직 사상들은 전사 에탈이며,
+사상 $U_i \to V_i$의 극한은 $U \to V$임에 주의하자.
+이 상황에서 $X_i \to Y_i$의 상대 차원이 $\leq d$일 필요충분조건은
+$U_i \to V_i$의 상대 차원이 $\leq d$인 것이다
+(Morphisms, Definition \ref{morphisms-definition-relative-dimension-d}의 정의를 따른다).
+이 동치를 보려면 대수공간의 사상에 대한 정의가
+Morphisms of Spaces, Definition \ref{spaces-morphisms-definition-dimension-fibre}를
+사용하며, 그 정의는 에탈 국소화를 사용한다는 사실을 이용하면 된다.
+$X \to Y$와 $U \to V$에 대해서도 같은 사실이 성립한다.
+$f_0$가 국소 유한형이므로 사상 $U_0 \to V_0$도 국소 유한형이다.
+따라서 보조정리는 더 일반적인
+Limits, Lemma \ref{limits-lemma-limit-dimension}에서 따른다.
+\end{proof}
+
+
+
+\section{상대적 대상의 하강}
+\label{spaces-limits-section-descending-relative}
+
+\noindent
+다음 보조정리는 이 절에서 다루는 결과의 전형이다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-finite-presentation}
+$S$를 스킴이라 하자. $I$를 유향 집합이라 하자.
+$(X_i, f_{ii'})$를 $I$를 지표로 하는 $S$ 위의 대수공간의 역계라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item 사상 $f_{ii'} : X_i \to X_{i'}$는 아핀이다.
+\item 공간 $X_i$는 준콤팩트이고 준분리이다.
+\end{enumerate}
+$X = \lim_i X_i$라 하자.
+그러면 $X$ 위에서 유한 표시인 대수공간의 범주는
+$I$에 걸친 여극한으로 주어지며, 그 계는
+$X_i$ 위에서 유한 표시인 대수공간의 범주들로 이루어진다.
+\end{lemma}
+
+\begin{proof}
+$0 \in I$를 택하자. 전사 에탈 사상 $U_0 \to X_0$를 택하되,
+$U_0$는 아핀 스킴이라고 하자
+(Properties of Spaces, Lemma \ref{spaces-properties-lemma-quasi-compact-affine-cover}).
+$U_i = X_i \times_{X_0} U_0$로 놓자.
+$R_0 = U_0 \times_{X_0} U_0$ 및 $R_i = R_0 \times_{X_0} X_i$로 놓자.
+두 사영을 $s_i, t_i : R_i \to U_i$ 및 $s, t : R \to U$라 쓰자.
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}의 증명에서
+표시 $X = U/R$가 존재하여 $U = \lim U_i$ 및 $R = \lim R_i$임을 보았다.
+$U_i$와 $U$는 아핀이며, $R_i$와 $R$은 준콤팩트이고 분리임에 주의하자
+($X_i$가 준분리이기 때문이다).
+$Y$를 $S$ 위의 대수공간이라 하고 $Y \to X$를 유한 표시 사상이라 하자.
+$V = U \times_X Y$로 놓자. 이는 $U$ 위에서 유한 표시인 대수공간이다.
+아핀 스킴 $W$와 전사 에탈 사상 $W \to V$를 택하자.
+그러면 $W \to Y$도 전사 에탈이다.
+$R' = W \times_Y W$로 놓으면 $Y = W/R'$이다
+(Spaces, Section \ref{spaces-section-presentations} 참조).
+$W$는 $U$ 위에서 유한 표시인 스킴이고,
+$R'$은 $R$ 위에서 유한 표시인 스킴임에 주의하자(세부 사항은 생략한다).
+Limits, Lemma \ref{limits-lemma-descend-finite-presentation}에 의해
+지표 $i$와 유한 표시인 스킴의 사상 $W_i \to U_i$를 찾아,
+그 $U$로의 밑변환이 $W \to U$가 되게 할 수 있다.
+마찬가지로 필요하면 $i$를 크게 하여 스킴 $R'_i$를 찾을 수 있다.
+이는 $R_i$ 위에서 유한 표시이고, 그 $R$로의 밑변환은 $R'$이다.
+사영 사상 $s', t' : R' \to W$는
+사영 사상 $s, t : R \to U$ 위의 사상이다.
+따라서 $s'$, $t'$를 각각 $U$ 위에서 유한 표시인 스킴 사이의 사상으로 볼 수 있다
+(구조 사상 $R' \to U$는 $R' \to R$ 뒤에 각각 $s$, $t$를 합성하여 주어진다).
+그러므로 Limits, Lemma \ref{limits-lemma-descend-finite-presentation}을
+다시 적용하면, 필요에 따라 $i$를 크게 한 후
+사상 $s'_i, t'_i : R'_i \to W_i$가 존재하여
+그 $U$로의 밑변환이 $S', t'$가 됨을 알 수 있다.
+Limits, Lemmas \ref{limits-lemma-descend-etale} 및
+\ref{limits-lemma-descend-monomorphism}에 의해
+$s'_i, t'_i$가 에탈이고,
+$j'_i : R'_i \to W_i \times_{X_i} W_i$가 단사상이라고 가정할 수 있다
+(여기서 $j'_i$는 $U_i$ 위에서 유한 표시인 스킴 사이의 사상으로 본다.
+구조 사상에는 어느 사영을 사용해도 상관없다).
+$Y_i = W_i/R'_i$로 놓으면
+(Spaces, Theorem \ref{spaces-theorem-presentation} 참조),
+$X_i$ 위에서 유한 표시인 대수공간을 얻고,
+그 $X$로의 밑변환은 $Y$와 동형이다.
+
+\medskip\noindent
+이로써 $X$ 위에서 유한 표시인 모든 대수공간이
+어떤 $X_i$ 위에서 유한 표시인 대수공간에서 옴을 보였다.
+즉 보조정리의 함자가 본질적 전사임을 보였다.
+이 함자가 충만 충실함을 보이기 위해, 지표 $0 \in I$와
+두 대수공간 $Y_0, Z_0$를 $X_0$ 위에서 유한 표시인 것으로 택하자.
+$Y_i = X_i \times_{X_0} Y_0$, $Y = X \times_{X_0} Y_0$,
+$Z_i = X_i \times_{X_0} Z_0$, $Z = X \times_{X_0} Z_0$로 놓자.
+$\alpha : Y \to Z$를 $X$ 위의 대수공간의 사상이라 하자.
+전사 에탈 사상 $V_0 \to Y_0$를 택하되 $V_0$는 아핀 스킴이라고 하자.
+$V_i = V_0 \times_{Y_0} Y_i$ 및 $V = V_0 \times_{Y_0} Y$로 놓자.
+이들은 각각 $Y_i$와 $Y$로 가는 전사 에탈 사상을 갖춘 아핀 스킴이다.
+합성 $V \to Y \to Z \to Z_0$는 본질적으로 유일한 사상
+$V_i \to Z_0$에서 어떤 $i \geq 0$에 대해 온다.
+이는 Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation}에 따른다
+($Z_0 \to X_0$에 적용하며, 이 사상은 가정에 의해 유한 표시이다).
+$i$를 크게 한 후에는 두 합성
+$$
+V_i \times_{Y_i} V_i \to V_i \to Z_0
+$$
+이 같다. 극한에서 두 합성이 같기 때문이다.
+따라서 본질적으로 유일한 사상 $Y_i \to Z_0$를 얻는다.
+이는 $X_0$ 위의 사상이므로,
+원하는 대로 $Z_i = Z_0 \times_{X_0} X_i$로 가는 사상을 유도한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-modules-finite-presentation}
+표기와 가정은 Lemma \ref{spaces-limits-lemma-descend-finite-presentation}과 같다.
+유한 표시인 $\mathcal{O}_X$-가군의 범주는 $I$에 걸친 여극한으로 주어지며,
+그 계는 유한 표시인 $\mathcal{O}_{X_i}$-가군의 범주들로 이루어진다.
+\end{lemma}
+
+\begin{proof}
+$0 \in I$를 택하자. 아핀 스킴 $U_0$와 전사 에탈 사상 $U_0 \to X_0$를 택하자.
+$U_i = X_i \times_{X_0} U_0$로 놓자.
+$R_0 = U_0 \times_{X_0} U_0$ 및 $R_i = R_0 \times_{X_0} X_i$로 놓자.
+두 사영을 $s_i, t_i : R_i \to U_i$ 및 $s, t : R \to U$라 쓰자.
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}의 증명에서
+표시 $X = U/R$가 존재하여 $U = \lim U_i$ 및 $R = \lim R_i$임을 보았다.
+$U_i$와 $U$는 아핀이며, $R_i$와 $R$은 준콤팩트이고 분리임에 주의하자
+($X_i$가 준분리이기 때문이다). 또한
+$R \times_{s, U, t} R = \colim R_i \times_{s_i, U_i, t_i} R_i$도 성립한다.
+따라서
+$\QCoh(\mathcal{O}_U) = \colim \QCoh(\mathcal{O}_{U_i})$,
+$\QCoh(\mathcal{O}_R) = \colim \QCoh(\mathcal{O}_{R_i})$ 및
+$\QCoh(\mathcal{O}_{R \times_{s, U, t} R}) =
+\colim \QCoh(\mathcal{O}_{R_i \times_{s_i, U_i, t_i} R_i})$임을
+Limits, Lemma \ref{limits-lemma-descend-modules-finite-presentation}에 의해 알 수 있다.
+$\QCoh(\mathcal{O}_X) = \QCoh(U, R, s, t, c)$ 및
+$\QCoh(\mathcal{O}_{X_i}) = \QCoh(U_i, R_i, s_i, t_i, c_i)$가 성립한다.
+Properties of Spaces, Proposition \ref{spaces-properties-proposition-quasi-coherent}를 보라.
+따라서 결과는 형식적으로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-invertible-modules}
+표기와 가정은 Lemma \ref{spaces-limits-lemma-descend-finite-presentation}과 같다.
+그러면 다음이 성립한다.
+\begin{enumerate}
+\item 모든 유한 국소 자유 $\mathcal{O}_X$-가군은
+유한 국소 자유 $\mathcal{O}_{X_i}$-가군의 당김으로 어떤 $i$에 대해 주어진다.
+\item 모든 가역 $\mathcal{O}_X$-가군은
+가역 $\mathcal{O}_{X_i}$-가군의 당김으로 어떤 $i$에 대해 주어진다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)의 증명.
+$\mathcal{L}$을 가역 $\mathcal{O}_X$-가군이라 하자.
+가역 가군은 유한 표시이므로, $i$와 유한 표시 가군
+$\mathcal{L}_i$, $\mathcal{N}_i$를 $X_i$ 위에서 찾아
+$f_i^*\mathcal{L}_i \cong \mathcal{L}$ 및
+$f_i^*\mathcal{N}_i \cong \mathcal{L}^{\otimes -1}$이 되게 할 수 있다.
+Lemma \ref{spaces-limits-lemma-descend-modules-finite-presentation}을 보라.
+당김은 텐서곱과 교환하므로
+$f_i^*(\mathcal{L}_i \otimes_{\mathcal{O}_{X_i}} \mathcal{N}_i)$는
+$\mathcal{O}_X$와 동형이다.
+유한 표시 가군의 텐서곱은 유한 표시이므로, 같은 보조정리에 의해
+$f_{i'i}^*\mathcal{L}_i
+\otimes_{\mathcal{O}_{X_{i'}}} f_{i'i}^*\mathcal{N}_i$는
+$\mathcal{O}_{X_{i'}}$와 어떤 $i' \geq i$에 대해 동형이다.
+따라서 $f_{i'i}^*\mathcal{L}_i$는 가역이고
+(Modules on Sites, Lemma \ref{sites-modules-lemma-invertible}),
+증명이 끝난다.
+
+\medskip\noindent
+(1)의 증명. 생략한다. 힌트: (2)의 증명과 같이 논증하되,
+(국소환 달린 사이트 위의) 가군이 유한 국소 자유일 필요충분조건이
+쌍대를 갖는 것이라는 사실을 사용하라.
+Modules on Sites, Section \ref{sites-modules-section-duals}를 보라.
+또는 스킴에 대한 증명과 같이 논증하라.
+Limits, Lemma \ref{limits-lemma-descend-invertible-modules}를 보라.
+\end{proof}
+
+
+
+\section{절대 Noether 근사}
+\label{spaces-limits-section-approximation}
+
+\noindent
+다음 결과는 \cite[Theorem 1.2.2]{CLO}이다.
+증명의 핵심적인 도구는 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-filter-quasi-compact-quasi-separated}이다.
+
+\begin{proposition}
+\label{spaces-limits-proposition-approximate}
+\begin{reference}
+우리의 증명은 \cite[Theorem 1.2.2]{CLO}에 제시된 증명을 밀접하게 따른다.
+\end{reference}
+$X$를 준콤팩트 준분리 대수공간으로서
+$\Spec(\mathbf{Z})$ 위에 주어진 것이라 하자.
+유향 집합 $I$와 대수공간의 역계 $(X_i, f_{ii'})$가 $I$ 위에 존재하여
+다음을 만족한다.
+\begin{enumerate}
+\item 전이 사상 $f_{ii'}$는 아핀이다.
+\item 각 $X_i$는 준분리이고 $\mathbf{Z}$ 위에서 유한형이다.
+\item $X = \lim X_i$이다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-filter-quasi-compact-quasi-separated}를 적용하여
+열린 부분공간 $U_p \subset X$, 스킴 $V_p$, 사상 $f_p : V_p \to U_p$를
+명시된 성질들을 만족하도록 얻는다.
+$f_n : V_n \to U_n$는 대수공간의 에탈 사상이며,
+$T_n = (V_n)_{red}$의 역상에 제한하면 동형이 됨에 주의하자.
+따라서 $f_n$는 동형이다. 예를 들어 Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-etale-universally-injective-open}에 따른다.
+특히 $U_n$는 준콤팩트 분리 스킴이다.
+따라서 $U_n = \lim U_{n, i}$를 $\mathbf{Z}$ 위의 유한형 스킴의 유향 극한으로
+쓰되, 전이 사상들이 아핀이게 할 수 있다.
+Limits, Proposition \ref{limits-proposition-approximate}를 보라.
+그러므로 $p$에 대한 내림 귀납법을 적용하면,
+다음 문단에 제시된 문제로 환원됨을 알 수 있다.
+
+\medskip\noindent
+여기서는 $U \subset X$, $U = \lim U_i$, $Z \subset X$ 및
+$f : V \to X$가 주어지고 다음 성질들을 만족한다.
+\begin{enumerate}
+\item $X$는 준콤팩트 준분리 대수공간이다.
+\item $V$는 준콤팩트 분리 스킴이다.
+\item $U \subset X$는 준콤팩트 열린 부분공간이다.
+\item $(U_i, g_{ii'})$는 준분리 대수공간의 유향 역계이며,
+각 대수공간은 $\mathbf{Z}$ 위에서 유한형이고, 전이 사상들이 아핀이며,
+그 극한은 $U$이다.
+\item $Z \subset X$는 닫힌 부분공간으로서 $|X| = |U| \amalg |Z|$를 만족한다.
+\item $f : V \to X$는 전사 에탈 사상으로서
+$f^{-1}(Z) \to Z$가 동형이다.
+\end{enumerate}
+문제: 명제의 결론이 $X$에 대해 성립함을 보여라.
+
+\medskip\noindent
+$W = f^{-1}(U) \subset V$는 준콤팩트 열린 부분스킴이며
+$U$ 위에서 에탈임에 주의하자.
+따라서 Lemmas \ref{spaces-limits-lemma-descend-finite-presentation} 및 \ref{spaces-limits-lemma-descend-etale}을
+적용하여 지표 $0 \in I$와 유한 표시인 에탈 사상 $W_0 \to U_0$를 찾아,
+그 $U$로의 밑변환이 $W$가 되게 할 수 있다.
+$W_i = W_0 \times_{U_0} U_i$로 놓으면 $W = \lim_{i \geq 0} W_i$이다.
+$0$을 크게 한 후에는 $W_i$들이 스킴이라고 가정할 수 있다.
+Lemma \ref{spaces-limits-lemma-limit-is-scheme}를 보라.
+또한 $W_i$는 $\mathbf{Z}$ 위에서 유한형이다.
+
+\medskip\noindent
+Limits, Lemma \ref{limits-lemma-approximate}를
+$W = \lim_{i \geq 0} W_i$와 포함 사상 $W \subset V$에 적용하자.
+$I$를 그 보조정리에서 얻은 유향 집합 $J$로 대체하자.
+그러면 $V$를 유향 극한 $V = \lim V_i$로 쓸 수 있다.
+여기서 각 스킴은 $\mathbf{Z}$ 위에서 유한형이고 전이 사상들은 아핀이며,
+각 $V_i$는 $W_i$를 열린 부분스킴으로 포함한다
+(전이 사상들과 호환되게 포함한다).
+각 $i$에 대해 스킴의 범주에서 다음 푸시아웃을 만들 수 있다.
+$$
+\xymatrix{
+W_i \ar[r] \ar[d]_\Delta & V_i \ar[d] \\
+W_i \times_{U_i} W_i \ar[r] & R_i
+}
+$$
+실제로 왼쪽 수직 화살표와 위쪽 수평 화살표는 스킴의 열린 몰입이다.
+달리 말하면 $R_i$를 $V_i$와 $W_i \times_{U_i} W_i$를
+공통 열린집합 $W_i$를 따라 붙여서 구성할 수 있다
+(Schemes, Section \ref{schemes-section-glueing-schemes} 참조).
+에탈 사영 사상 $W_i \times_{U_i} W_i \to W_i$는
+에탈 사상 $s_i, t_i : R_i \to V_i$로 확장됨에 주의하자.
+사상 $j_i = (t_i, s_i) : R_i \to V_i \times V_i$는
+$V_i$ 위의 에탈 동치관계임이 분명하다.
+$W_i \times_{U_i} W_i$는 준콤팩트이고
+($U_i$가 준분리이고 $W_i$가 준콤팩트이기 때문이다),
+$V_i$도 준콤팩트이므로 $R_i$는 준콤팩트이다.
+$i \geq i'$에 대해 가환도
+\begin{equation}
+\label{spaces-limits-equation-cartesian}
+\vcenter{
+\xymatrix{
+R_i \ar[r] \ar[d]_{s_i} & R_{i'} \ar[d]^{s_{i'}} \\
+V_i \ar[r] & V_{i'}
+}
+}
+\end{equation}
+는 데카르트 가환도이다. 이는
+$$
+(W_{i'} \times_{U_{i'}} W_{i'}) \times_{U_{i'}} U_i =
+W_{i'} \times_{U_{i'}} U_i \times_{U_i} U_i \times_{U_{i'}} W_{i'} =
+W_i \times_{U_i} W_i.
+$$
+이기 때문이다.
+대수공간 $X_i = V_i/R_i$를 생각하자
+(Spaces, Theorem \ref{spaces-theorem-presentation} 참조).
+$V_i$가 $\mathbf{Z}$ 위에서 유한형이고 $R_i$가 준콤팩트이므로,
+$X_i$는 준분리이고 $\mathbf{Z}$ 위에서 유한형이다
+(Properties of Spaces, Lemma \ref{spaces-properties-lemma-quasi-separated}와
+Morphisms of Spaces, Lemmas \ref{spaces-morphisms-lemma-surjection-from-quasi-compact} 및
+\ref{spaces-morphisms-lemma-finite-type-local}을 보라).
+위의 $R_i$의 구성은 전이 사상들과 호환되므로,
+대수공간의 사상 $X_i \to X_{i'}$를 $i \geq i'$에 대해 얻는다.
+가환도
+$$
+\xymatrix{
+V_i \ar[r] \ar[d] & V_{i'} \ar[d] \\
+X_i \ar[r] & X_{i'}
+}
+$$
+들은 (\ref{spaces-limits-equation-cartesian})가 데카르트 가환도이므로 데카르트 가환도이다.
+Groupoids, Lemma \ref{groupoids-lemma-criterion-fibre-product}를 보라.
+$V_i \to V_{i'}$가 아핀이므로 $X_i \to X_{i'}$도 아핀이다.
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-affine-local}을 보라.
+따라서 극한 $X' = \lim X_i$를
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}에 의해 만들 수 있다.
+$X \cong X'$라고 주장한다. 이로써 명제의 증명이 끝난다.
+
+\medskip\noindent
+주장의 증명. $R = \lim R_i$로 놓자.
+구성에 의해 대수공간 $X'$에는 전사 에탈 사상 $V \to X'$가 주어지며,
+$$
+V \times_{X'} V \cong R
+$$
+가 성립한다(Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}를 사용하라).
+구성에 의해 $\lim W_i \times_{U_i} W_i = W \times_U W$이고 $V = \lim V_i$이므로,
+$R$은 $W \times_U W$와 $V$를 $W$를 따라 붙인 합집합이다.
+성질 (6)에 의해 사영 $V \times_X V \to V$는
+$f^{-1}(Z) \subset V$ 위에서 동형이다.
+따라서 스킴 $V \times_X V$는 열린집합 $\Delta_{V/X}(V)$와
+$W \times_U W$의 합집합이며, 이들의 교집합은 $\Delta_{W/X}(W)$이다.
+그러므로 동형 $R \cong V \times_X V$가 유일하게 존재하여
+$V$로의 사영들과 호환된다.
+$V \to X$와 $V \to X'$가 전사 에탈이므로
+$$
+X = V/ V \times_X V = V/R = V/V \times_{X'} V = X'
+$$
+임을 Spaces, Lemma \ref{spaces-lemma-space-presentation}에 의해 알 수 있고,
+증명이 끝난다.
+\end{proof}
+
+
+
+\section{응용}
+\label{spaces-limits-section-applications}
+
+\noindent
+다음 보조정리는 절대 Noether 근사를 거치지 않고도
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-filter-quasi-compact-quasi-separated}에서 직접 유도할 수 있다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-colimit-finitely-presented}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+모든 준연접 $\mathcal{O}_X$-가군은
+유한 표시 $\mathcal{O}_X$-가군들의 여과 여극한이다.
+\end{lemma}
+
+\begin{proof}
+$X$를 $\Spec(\mathbf{Z})$ 위의 대수공간으로 볼 수 있다.
+Spaces, Definition \ref{spaces-definition-base-change} 및
+Properties of Spaces, Definition \ref{spaces-properties-definition-separated}를 보라.
+따라서 Proposition \ref{spaces-limits-proposition-approximate}를 적용하여
+$X = \lim X_i$로 쓰되 $X_i$가 $\mathbf{Z}$ 위에서 유한 표시이게 할 수 있다.
+그러면 $X_i$는 Noether 대수공간이다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-noetherian}을 보라.
+사상 $X \to X_i$는 아핀이다.
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}를 보라.
+결론은 Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-direct-colimit-finite-presentation}에서 따른다.
+\end{proof}
+
+\noindent
+이 절의 나머지 내용은 Lemma \ref{spaces-limits-lemma-colimit-finitely-presented}의
+직접적인 응용들이다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-directed-colimit-finite-type}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+그러면 $\mathcal{F}$는 자신의 유한형 준연접 부분가군들의 유향 여극한이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{G}, \mathcal{H} \subset \mathcal{F}$가 유한형 준연접
+$\mathcal{O}_X$-부분가군이면,
+$\mathcal{G} \oplus \mathcal{H} \to \mathcal{F}$의 상은
+이 둘을 모두 포함하는 또 다른 유한형 준연접 $\mathcal{O}_X$-부분가군이다.
+이로써 이 계가 유향임을 알 수 있다.
+$\mathcal{F}$가 이 계의 여극한임을 보이기 위해
+$\mathcal{F} = \colim_i \mathcal{F}_i$를 유한 표시 준연접층의 유향 여극한으로 쓰자.
+Lemma \ref{spaces-limits-lemma-colimit-finitely-presented}에서와 같이 쓴다.
+그러면 상 $\mathcal{G}_i = \Im(\mathcal{F}_i \to \mathcal{F})$는
+$\mathcal{F}$의 유한형 준연접 부분층이다.
+$\mathcal{F}$가 이들의 여극한이므로 결과가 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-finite-directed-colimit-surjective-maps}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+$\mathcal{F}$를 유한형 준연접 $\mathcal{O}_X$-가군이라 하자.
+그러면 $\mathcal{F} = \lim \mathcal{F}_i$로 쓸 수 있다.
+여기서 각 $\mathcal{F}_i$는 유한 표시 $\mathcal{O}_X$-가군이고,
+모든 전이 사상 $\mathcal{F}_i \to \mathcal{F}_{i'}$는 전사이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F} = \colim \mathcal{G}_i$를
+유한 표시 $\mathcal{O}_X$-가군들의 여과 여극한으로 쓰자
+(Lemma \ref{spaces-limits-lemma-colimit-finitely-presented}).
+$\mathcal{G}_i \to \mathcal{F}$가 어떤 $i$에 대해 전사라고 주장한다.
+실제로 에탈 전사 사상 $U \to X$를 택하되 $U$는 아핀 스킴이라고 하자.
+유한 개의 단면 $s_k \in \mathcal{F}(U)$를 택하여
+$\mathcal{F}|_U$를 생성하게 하자.
+$U$가 아핀이므로 $s_k$는 $\mathcal{G}_i \to \mathcal{F}$의 상에
+충분히 큰 $i$에 대해 속한다.
+따라서 $\mathcal{G}_i \to \mathcal{F}$는 충분히 큰 $i$에 대해 전사이다.
+그러한 $i$를 택하고 $\mathcal{K} \subset \mathcal{G}_i$를
+사상 $\mathcal{G}_i \to \mathcal{F}$의 핵이라 하자.
+$\mathcal{K} = \colim \mathcal{K}_a$를
+그 유한형 준연접 부분가군들의 여과 여극한으로 쓰자
+(Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type}).
+그러면 $\mathcal{F} = \colim \mathcal{G}_i/\mathcal{K}_a$가
+보조정리에서 제시한 문제의 해이다.
+\end{proof}
+
+\noindent
+$X$를 대수공간이라 하자. 다음 보조정리에서는
+{\it 유한 표시 준연접 $\mathcal{O}_X$-대수 $\mathcal{A}$}라는 개념을 사용한다.
+이는 모든 아핀 스킴 $U = \Spec(R)$가 $X$ 위에서 에탈일 때,
+$\mathcal{A}|_U = \widetilde{A}$이고,
+여기서 $A$는 (가환) $R$-대수로서 $R$-대수로서 유한 표시라는 뜻이다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-algebra-directed-colimit-finite-presentation}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+$\mathcal{A}$를 준연접 $\mathcal{O}_X$-대수라 하자.
+그러면 $\mathcal{A}$는 유한 표시 준연접 $\mathcal{O}_X$-대수들의 유향 여극한이다.
+\end{lemma}
+
+\begin{proof}
+먼저 $\mathcal{A} = \colim_i \mathcal{F}_i$를
+Lemma \ref{spaces-limits-lemma-colimit-finitely-presented}에서와 같이
+유한 표시 준연접층의 유향 여극한으로 쓰자.
+각 $i$에 대해 $\mathcal{B}_i = \text{Sym}(\mathcal{F}_i)$를
+$\mathcal{F}_i$의 $\mathcal{O}_X$ 위의 대칭대수라 하자.
+$\mathcal{I}_i = \Ker(\mathcal{B}_i \to \mathcal{A})$로 쓰자.
+$\mathcal{I}_i = \colim_j \mathcal{F}_{i, j}$로 쓰되,
+$\mathcal{F}_{i, j}$는 $\mathcal{I}_i$의 유한형 준연접 부분가군이라고 하자.
+Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type}를 보라.
+$\mathcal{I}_{i, j} \subset \mathcal{I}_i$를
+$\mathcal{B}_i$의 아이디얼 중 $\mathcal{F}_{i, j}$가 생성하는 것으로 놓자.
+$\mathcal{A}_{i, j} = \mathcal{B}_i/\mathcal{I}_{i, j}$로 놓자.
+그러면 $\mathcal{A}_{i, j}$는 준연접 유한 표시 $\mathcal{O}_X$-대수이다.
+관계 $(i, j) \leq (i', j')$를 다음 조건으로 정의한다.
+$i \leq i'$이고, 사상 $\mathcal{B}_i \to \mathcal{B}_{i'}$가
+아이디얼 $\mathcal{I}_{i, j}$를 아이디얼 $\mathcal{I}_{i', j'}$ 안으로 보낸다.
+그러면 $\mathcal{A} = \colim_{i, j} \mathcal{A}_{i, j}$임이 분명하다.
+\end{proof}
+
+\noindent
+$X$를 대수공간이라 하자. 다음 보조정리에서는
+{\it 준연접 $\mathcal{O}_X$-대수 $\mathcal{A}$가 유한형}이라는 개념을 사용한다.
+이는 모든 아핀 스킴 $U = \Spec(R)$가 $X$ 위에서 에탈일 때,
+$\mathcal{A}|_U = \widetilde{A}$이고,
+여기서 $A$는 (가환) $R$-대수로서 $R$-대수로서 유한형이라는 뜻이다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-algebra-directed-colimit-finite-type}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+$\mathcal{A}$를 준연접 $\mathcal{O}_X$-대수라 하자.
+그러면 $\mathcal{A}$는 자신의 유한형 준연접
+$\mathcal{O}_X$-부분대수들의 유향 여극한이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type}의 증명과 비교하라.
+\end{proof}
+
+\noindent
+$X$를 대수공간이라 하자. 다음 보조정리에서는
+{\it 유한(각각 정수적) 준연접 $\mathcal{O}_X$-대수 $\mathcal{A}$}라는 개념을 사용한다.
+이는 모든 아핀 스킴 $U = \Spec(R)$가 $X$ 위에서 에탈일 때,
+$\mathcal{A}|_U = \widetilde{A}$이고,
+여기서 $A$는 (가환) $R$-대수로서 $R$-대수로서 유한(각각 정수적)이라는 뜻이다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+$\mathcal{A}$를 유한 준연접 $\mathcal{O}_X$-대수라 하자.
+그러면 $\mathcal{A} = \colim \mathcal{A}_i$는
+유한이면서 유한 표시인 준연접 $\mathcal{O}_X$-대수들의 유향 여극한으로,
+전이 사상들은 전사이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-finite-directed-colimit-surjective-maps}에 의해
+유한 표시 $\mathcal{O}_X$-가군 $\mathcal{F}$와 전사 사상
+$\mathcal{F} \to \mathcal{A}$가 존재한다.
+대수 구조를 사용하면 전사 사상
+$$
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}) \longrightarrow \mathcal{A}
+$$
+를 얻는다. 그 핵을 $\mathcal{J}$라 쓰자.
+$\mathcal{J} = \colim \mathcal{E}_i$를
+유한형 $\mathcal{O}_X$-부분가군 $\mathcal{E}_i$들의 여과 여극한으로 쓰자
+(Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type}).
+$$
+\mathcal{A}_i = \text{Sym}^*_{\mathcal{O}_X}(\mathcal{F})/(\mathcal{E}_i)
+$$
+로 놓자. 여기서 $(\mathcal{E}_i)$는
+$\mathcal{E}_i \to \text{Sym}^*_{\mathcal{O}_X}(\mathcal{F})$의 상이 생성하는
+아이디얼 층을 나타낸다.
+그러면 각 $\mathcal{A}_i$는 유한 표시 $\mathcal{O}_X$-대수이고,
+전이 사상들은 전사이며, $\mathcal{A} = \colim \mathcal{A}_i$이다.
+증명을 끝내려면 $\mathcal{A}_i$가 유한 $\mathcal{O}_X$-대수임을
+충분히 큰 $i$에 대해 보여야 한다.
+이를 위해 에탈 전사 사상 $U \to X$를 택하되 $U$는 아핀 스킴이라고 하자.
+생성원 $f_1, \ldots, f_m \in \Gamma(U, \mathcal{F})$를 택하자.
+$\mathcal{A}(U)$는 유한 $\mathcal{O}_X(U)$-대수이므로,
+각 $j$에 대해 일계수 다항식 $P_j \in \mathcal{O}(U)[T]$가 존재하여
+$P_j(f_j)$가 $\mathcal{A}(U)$에서 영이 됨을 알 수 있다.
+구성에 의해 $\mathcal{A} = \colim \mathcal{A}_i$이므로,
+$P_j(f_j) = 0$이 $\mathcal{A}_i(U)$에서 충분히 큰 모든 $i$에 대해 성립한다.
+그러한 $i$에 대해 대수 $\mathcal{A}_i$는 유한이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-integral-algebra-directed-colimit-finite}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+$\mathcal{A}$를 정수적 준연접 $\mathcal{O}_X$-대수라 하자.
+그러면 다음이 성립한다.
+\begin{enumerate}
+\item $\mathcal{A}$는 자신의 유한 준연접
+$\mathcal{O}_X$-부분대수들의 유향 여극한이다.
+\item $\mathcal{A}$는 유한이면서 유한 표시인
+$\mathcal{O}_X$-대수들의 유향 여극한이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-algebra-directed-colimit-finite-type}에 의해
+$\mathcal{A} = \colim \mathcal{A}_i$이다.
+여기서 $\mathcal{A}_i \subset \mathcal{A}$는
+유한형 준연접 $\mathcal{O}_X$-부분대수들을 움직인다.
+모든 유한형 준연접 $\mathcal{O}_X$-부분대수는
+$\mathcal{A}$ 안에서 유한이다(Algebra, Lemma
+\ref{algebra-lemma-characterize-finite-in-terms-of-integral}을
+$X$ 위에서 에탈인 아핀 스킴들에 적용하라).
+이로써 (1)이 증명된다.
+
+\medskip\noindent
+(2)를 증명하기 위해 $\mathcal{A} = \colim \mathcal{F}_i$를
+유한 표시 $\mathcal{O}_X$-가군들의 여극한으로 쓰자.
+Lemma \ref{spaces-limits-lemma-colimit-finitely-presented}를 사용한다.
+각 $i$에 대해 $\mathcal{J}_i$를 사상
+$$
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i) \longrightarrow \mathcal{A}
+$$
+의 핵이라 하자.
+$i' \geq i$에 대해 유도되는 사상 $\mathcal{J}_i \to \mathcal{J}_{i'}$가 있으며,
+$\mathcal{A} =
+\colim \text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/\mathcal{J}_i$이다.
+또한 준연접 $\mathcal{O}_X$-대수
+$\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/\mathcal{J}_i$는 유한이다(위의 논의를 보라).
+$\mathcal{J}_i = \colim \mathcal{E}_{ik}$를
+유한 표시 $\mathcal{O}_X$-가군들의 여극한으로 쓰자.
+$i' \geq i$와 $k$가 주어지면 $k'$가 존재하여
+사상 $\mathcal{E}_{ik} \to \mathcal{E}_{i'k'}$를 다음 가환도가 가환하게 택할 수 있다.
+$$
+\xymatrix{
+\mathcal{J}_i \ar[r] & \mathcal{J}_{i'} \\
+\mathcal{E}_{ik} \ar[u] \ar[r] & \mathcal{E}_{i'k'} \ar[u]
+}
+$$
+이는 Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-finite-presentation-quasi-compact-colimit}에서 따른다.
+이 사상은 다음 사상을 유도한다.
+$$
+\mathcal{A}_{ik} =
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/(\mathcal{E}_{ik})
+\longrightarrow
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_{i'})/(\mathcal{E}_{i'k'}) =
+\mathcal{A}_{i'k'}
+$$
+여기서 $(\mathcal{E}_{ik})$는 $\mathcal{E}_{ik}$가 생성하는 아이디얼을 나타낸다.
+준연접 $\mathcal{O}_X$-대수 $\mathcal{A}_{ki}$는
+충분히 큰 $k$에 대해 유한 표시이고 유한이다
+(Lemma \ref{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented}의 증명 참조).
+마지막으로
+$$
+\colim \mathcal{A}_{ik} = \colim \mathcal{A}_i = \mathcal{A}
+$$
+이다. 실제로 첫 번째 등식은
+Lemma \ref{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented}의 증명에서 보였으며,
+두 번째 등식은 $\mathcal{A}$가 가군 $\mathcal{F}_i$들의 여극한이기 때문에 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-extend}
+$S$를 스킴이라 하자.
+$X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+$U \subset X$를 준콤팩트 열린집합이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{G} \subset \mathcal{F}|_U$를 유한형 준연접
+$\mathcal{O}_U$-부분가군이라 하자.
+그러면 준연접 부분가군 $\mathcal{G}' \subset \mathcal{F}$가 존재하여
+유한형이고 $\mathcal{G}'|_U = \mathcal{G}$를 만족한다.
+\end{lemma}
+
+\begin{proof}
+포함 사상을 $j : U \to X$라 쓰자.
+$X$가 준분리이고 $U$가 준콤팩트이므로 사상 $j$는 준콤팩트이다.
+따라서 $j_*\mathcal{G} \subset j_*\mathcal{F}|_U$는
+$X$ 위의 준연접 가군들이다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-pushforward}).
+$\mathcal{H} =
+\Ker(j_*\mathcal{G} \oplus \mathcal{F} \to j_*\mathcal{F}|_U)$라 하자.
+그러면 $\mathcal{H}|_U = \mathcal{G}$이다.
+Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type}에 의해
+유한형 준연접 부분가군 $\mathcal{H}' \subset \mathcal{H}$를 찾아
+$\mathcal{H}'|_U = \mathcal{H}|_U = \mathcal{G}$가 되게 할 수 있다.
+$\mathcal{G}' = \Im(\mathcal{H}' \to \mathcal{F})$로 놓으면 결론을 얻는다.
+\end{proof}
+
+
+
+\section{상대 근사}
+\label{spaces-limits-section-relative-approximation}
+
+\noindent
+Proposition \ref{spaces-limits-proposition-approximate}을 밑 위에서 일반화한 형태들을 논의한다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-approximate-morphism}
+$f : X \to Y$를 $\mathbf{Z}$ 위의 준콤팩트 준분리 대수공간의 사상이라 하자.
+그러면 유향 집합 $I$와 대수공간의 사상들의 역계 $(f_i : X_i \to Y_i)$가
+$I$ 위에 존재하여 다음을 만족한다.
+% P09-ERR-0084; P09-ERR-0085: source grammar normalized by translation only.
+전이 사상 $X_i \to X_{i'}$ 및 $Y_i \to Y_{i'}$는 아핀이고,
+$X_i$와 $Y_i$는 준분리이며 $\mathbf{Z}$ 위에서 유한형이고,
+$(X \to Y) = \lim (X_i \to Y_i)$이다.
+\end{lemma}
+
+\begin{proof}
+Proposition \ref{spaces-limits-proposition-approximate}에서와 같이
+$X = \lim_{a \in A} X_a$ 및 $Y = \lim_{b \in B} Y_b$로 쓰자.
+즉 $X_a$와 $Y_b$는 준분리이고 $\mathbf{Z}$ 위에서 유한형이며,
+전이 사상들은 아핀이다.
+
+\medskip\noindent
+$b \in B$를 고정하자.
+Lemma \ref{spaces-limits-lemma-better-characterize-relative-limit-preserving}을
+$Y_b$와 $X = \lim X_a$에 $\mathbf{Z}$ 위에서 적용하면,
+$a \in A$와 사상 $f_{a, b} : X_a \to Y_b$가 존재하여 가환도
+$$
+\xymatrix{
+X \ar[d] \ar[r] & Y \ar[d] \\
+X_a \ar[r] & Y_b
+}
+$$
+가 가환하게 됨을 알 수 있다.
+$I$를 이 방법으로 얻은 삼중항 $(a, b, f_{a, b})$들의 집합이라 하자.
+
+\medskip\noindent
+$(a, b, f_{a, b})$와 $(a', b', f_{a', b'})$가 $I$에 속한다고 하자.
+$b'' \leq \min(b, b')$로 놓자.
+% P09-ERR-0086: canonical ordering/minimum expression retained.
+Lemma \ref{spaces-limits-lemma-better-characterize-relative-limit-preserving}을 다시 적용하면,
+$a'' \geq \max(a, a')$가 존재하여 합성
+$X_{a''} \to X_a \to Y_b \to Y_{b''}$와
+$X_{a''} \to X_{a'} \to Y_{b'} \to Y_{b''}$가 같게 된다.
+$I$에 다음 전순서를 준다.
+$$
+(a, b, f_{a, b}) \geq (a', b', f_{a', b'})
+\Leftrightarrow
+a \geq a',\ b \geq b',\text{ 및 }
+g_{b, b'} \circ f_{a, b} = f_{a', b'} \circ h_{a, a'}
+$$
+여기서 $h_{a, a'} : X_a \to X_{a'}$ 및
+$g_{b, b'} : Y_b \to Y_{b'}$는 전이 사상이다.
+위의 관찰에서 $I$가 유향이고, 사상
+$I \to A$, $(a, b, f_{a, b}) \mapsto a$ 및
+$I \to B$, $(a, b, f_{a, b})$가 공종임을 알 수 있다.
+% P09-ERR-0087: incomplete second projection retained without inventing mapsto b.
+$i = (a, b, f_{a, b})$에 대해
+$X_i = X_a$, $Y_i = Y_b$, $f_i = f_{a, b}$로 놓으면,
+$I$ 위의 사상들의 역계를 얻고 다음이 성립한다.
+$$
+\lim_{i \in I} X_i = \lim_{a \in A} X_a = X
+\quad\text{및}\quad
+\lim_{i \in I} S_i = \lim_{b \in B} Y_b = Y
+$$
+% P09-ERR-0088: undefined S_i retained from frozen canonical source.
+이는 Categories, Lemma \ref{categories-lemma-initial}에 따른다
+($I$ 위의 극한은 실제로 $I$에 대응하는 반대 범주 위의 극한이므로,
+공종은 공시작으로 바뀐다는 점을 상기하라).
+이로써 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+
+\begin{lemma}
+\label{spaces-limits-lemma-relative-approximation}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $X$는 준콤팩트이고 준분리이다.
+\item $Y$는 준분리이다.
+\end{enumerate}
+그러면 $X = \lim X_i$는 대수공간 $X_i$의 유향 역계의 극한으로 쓸 수 있으며,
+각 대상은 $Y$ 위에서 유한 표시이고 전이 사상들은 $Y$ 위에서 아핀이다.
+\end{lemma}
+
+\begin{proof}
+$|f|(|X|)$가 준콤팩트이므로 $Y$를 열린 부분공간으로 대체할 수 있다.
+그 열린 부분공간은 준콤팩트이고 그 점들의 집합은 $|f|(|X|)$를 포함한다.
+따라서 $Y$도 준콤팩트라고 가정할 수 있다.
+Lemma \ref{spaces-limits-lemma-approximate-morphism}에 의해
+$(X \to Y) = \lim (X_i \to Y_i)$로 쓸 수 있다.
+여기서 어떤 유향 역계가 주어지고, 그 대상들은
+$\mathbf{Z}$ 위의 유한형 스킴의 사상들이며 전이 사상들은 아핀이다.
+% P09-ERR-0089: source calls these schemes though the cited lemma gives spaces.
+극한은 극한과 교환하므로
+(Categories, Lemma \ref{categories-lemma-colimits-commute}),
+$X = \lim X_i \times_{Y_i} Y$이다.
+$i \geq i'$에 대해 전이 사상
+$X_i \times_{Y_i} Y \to X_{i'} \times_{Y_{i'}} Y$는 아핀이다.
+실제로 이는 합성
+$$
+X_i \times_{Y_i} Y \to X_i \times_{Y_{i'}} Y \to X_{i'} \times_{Y_{i'}} Y
+$$
+이며, 첫 사상은 닫힌 몰입이다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-fibre-product-after-map}).
+둘째 사상은 아핀 사상의 밑변환이다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-base-change-affine}).
+또한 아핀 사상의 합성은 아핀이다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-composition-affine}).
+사상 $f_i$는 유한 표시이다
+(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-noetherian-finite-type-finite-presentation} 및
+\ref{spaces-morphisms-lemma-finite-presentation-permanence}).
+따라서 밑변환 $X_i \times_{f_i, Y_i} Y \to Y$도 유한 표시이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-finite-presentation}).
+\end{proof}
+
+
+
+\section{유한 표시 안에 닫혀 있는 유한형}
+\label{spaces-limits-section-finite-type-closed-in-finite-presentation}
+
+\noindent
+이 절은 Limits, Section
+\ref{limits-section-finite-type-closed-in-finite-presentation}에 대응한다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-affine-morphism-is-limit}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 아핀 사상이라 하자.
+$Y$가 준콤팩트이고 준분리이면, $X$는 유향 극한 $X = \lim X_i$이며
+각 $X_i$는 $Y$ 위에서 아핀이고 유한 표시이다.
+% P09-ERR-0090: omitted English copula is naturally supplied in Korean.
+\end{lemma}
+
+\begin{proof}
+준연접 $\mathcal{O}_Y$-가군 $\mathcal{A} = f_*\mathcal{O}_X$를 생각하자.
+Lemma \ref{spaces-limits-lemma-algebra-directed-colimit-finite-presentation}에 의해
+$\mathcal{A} = \colim \mathcal{A}_i$를 유한 표시
+$\mathcal{O}_Y$-대수 $\mathcal{A}_i$들의 유향 여극한으로 쓸 수 있다.
+$X_i = \underline{\Spec}_Y(\mathcal{A}_i)$로 놓자.
+Morphisms of Spaces, Definition \ref{spaces-morphisms-definition-relative-spec}을 보라.
+구성에 의해 $X_i \to Y$는 아핀이고 유한 표시이며, $X = \lim X_i$이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-integral-limit-finite-and-finite-presentation}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 정수적 사상이라 하자.
+$Y$가 준콤팩트이고 준분리라고 가정하자.
+그러면 $X$는 유향 극한 $X = \lim X_i$로 쓸 수 있고,
+$X_i$는 $Y$ 위에서 유한이고 유한 표시이다.
+\end{lemma}
+
+\begin{proof}
+준연접 $\mathcal{O}_Y$-가군 $\mathcal{A} = f_*\mathcal{O}_X$를 생각하자.
+Lemma \ref{spaces-limits-lemma-integral-algebra-directed-colimit-finite}에 의해
+$\mathcal{A} = \colim \mathcal{A}_i$를
+유한이면서 유한 표시인 $\mathcal{O}_Y$-대수 $\mathcal{A}_i$들의
+유향 여극한으로 쓸 수 있다.
+$X_i = \underline{\Spec}_Y(\mathcal{A}_i)$로 놓자.
+Morphisms of Spaces, Definition \ref{spaces-morphisms-definition-relative-spec}을 보라.
+구성에 의해 $X_i \to Y$는 유한이고 유한 표시이며, $X = \lim X_i$이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-finite-in-finite-and-finite-presentation}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 유한 사상이라 하자.
+$Y$가 준콤팩트이고 준분리라고 가정하자.
+그러면 $X$는 유향 극한 $X = \lim X_i$로 쓸 수 있고,
+전이 사상들은 닫힌 몰입이며,
+대상 $X_i$는 $Y$ 위에서 유한이고 유한 표시이다.
+\end{lemma}
+
+\begin{proof}
+유한 준연접 $\mathcal{O}_Y$-가군 $\mathcal{A} = f_*\mathcal{O}_X$를 생각하자.
+Lemma \ref{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented}에 의해
+$\mathcal{A} = \colim \mathcal{A}_i$를
+유한이면서 유한 표시인 $\mathcal{O}_Y$-대수 $\mathcal{A}_i$들의 유향 여극한으로
+쓸 수 있고 전이 사상들은 전사이다.
+$X_i = \underline{\Spec}_Y(\mathcal{A}_i)$로 놓자.
+Morphisms of Spaces, Definition \ref{spaces-morphisms-definition-relative-spec}을 보라.
+구성에 의해 $X_i \to Y$는 유한이고 유한 표시이며,
+전이 사상들은 닫힌 몰입이고, $X = \lim X_i$이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-closed-is-limit-closed-and-finite-presentation}
+\begin{slogan}
+qcqs 대수공간의 닫힌 몰입은 유한 표시 닫힌 몰입으로 근사할 수 있다.
+\end{slogan}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 닫힌 몰입이라 하자.
+$Y$가 준콤팩트이고 준분리라고 가정하자.
+그러면 $X$는 유향 극한 $X = \lim X_i$로 쓸 수 있고,
+전이 사상들은 닫힌 몰입이며,
+사상 $X_i \to Y$는 유한 표시 닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I} \subset \mathcal{O}_Y$를 $X$를 $Y$의 닫힌 부분공간으로 정의하는
+준연접 아이디얼 층이라 하자.
+Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type}에 의해
+$\mathcal{I} = \colim \mathcal{I}_i$를
+그 유한형 준연접 부분가군들의 여과 여극한으로 쓸 수 있다.
+$X_i$를 $X$의 닫힌 부분공간 가운데 $\mathcal{I}_i$가 잘라내는 것으로 하자.
+% P09-ERR-0091: source's ambient X retained; I_i lives on Y.
+그러면 $X_i \to Y$는 유한 표시 닫힌 몰입이고 $X = \lim X_i$이다.
+몇 가지 세부 사항은 생략한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-quasi-affine-closed-in-finite-presentation}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 국소 유한형이고 준아핀이다.
+\item $Y$는 준콤팩트이고 준분리이다.
+\end{enumerate}
+그러면 유한 표시 사상 $f' : X' \to Y$와
+닫힌 몰입 $X \to X'$가 존재하며, 후자는 $Y$ 위의 사상이다.
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-characterize-quasi-affine}에 의해
+분해 $X \to Z \to Y$를 찾을 수 있다.
+여기서 $X \to Z$는 준콤팩트 열린 몰입이고 $Z \to Y$는 아핀이다.
+$Z = \lim Z_i$로 쓰되 $Z_i$는 $Y$ 위에서 아핀이고 유한 표시라고 하자
+(Lemma \ref{spaces-limits-lemma-affine-morphism-is-limit}).
+어떤 $0 \in I$에 대해 준콤팩트 열린집합 $U_0 \subset Z_0$를 찾아
+$X$가 $U_0$의 역상과 동형이 되게 할 수 있는데, 이 역상은 $Z$ 안에서 취한다
+(Lemma \ref{spaces-limits-lemma-descend-opens}).
+$U_i$를 $U_0$의 역상이라 하되 그 역상은 $Z_i$ 안에서 취하면 $U = \lim U_i$이다.
+% P09-ERR-0092: undefined U in source equality retained.
+Lemma \ref{spaces-limits-lemma-finite-type-eventually-closed}에 의해
+$X \to U_i$는 충분히 큰 어떤 $i$에 대해 닫힌 몰입이다.
+$X' = U_i$로 놓으면 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-finite-type-closed-in-finite-presentation}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 국소 유한형이다.
+% P09-ERR-0093: duplicated English preposition normalized by translation only.
+\item $X$는 준콤팩트이고 준분리이다.
+\item $Y$는 준콤팩트이고 준분리이다.
+\end{enumerate}
+그러면 유한 표시 사상 $f' : X' \to Y$와
+대수공간의 닫힌 몰입 $X \to X'$가 존재하며, 후자는 $Y$ 위의 사상이다.
+\end{lemma}
+
+\begin{proof}
+Proposition \ref{spaces-limits-proposition-approximate}에 의해
+$X = \lim_i X_i$로 쓸 수 있다.
+여기서 $X_i$는 준분리이고 $\mathbf{Z}$ 위에서 유한형이며,
+전이 사상 $f_{ii'} : X_i \to X_{i'}$는 아핀이다.
+다음 가환도를 생각하자.
+$$
+\xymatrix{
+X \ar[r] \ar[rd] & X_{i, Y} \ar[r] \ar[d] & X_i \ar[d] \\
+& Y \ar[r] & \Spec(\mathbf{Z})
+}
+$$
+$X_i$는 $\Spec(\mathbf{Z})$ 위에서 유한 표시임에 주의하자.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-noetherian-finite-type-finite-presentation}을 보라.
+따라서 밑변환 $X_{i, Y} \to Y$는
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-finite-presentation}에 의해 유한 표시이다.
+$\lim X_{i, Y} = X \times Y$이고
+$X \to X \times Y$가 단사상임을 관찰하자.
+% P09-ERR-0094: missing base in both source products retained.
+Lemma \ref{spaces-limits-lemma-finite-type-eventually-closed}에 의해
+$X \to X_{i, Y}$는 충분히 큰 $i$에 대해 단사상이다.
+그러한 $i$를 고정하자.
+$X \to X_{i, Y}$는 국소 유한형이고
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-permanence-finite-type}),
+단사상이므로 분리이고 국소 준유한이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-loc-finite-type-loc-quasi-finite}).
+따라서 $X \to X_{i, Y}$는 표현 가능하다.
+그러므로 $X \to X_{i, Y}$는 준아핀이다.
+실제로 Spaces, Lemma
+\ref{spaces-lemma-representable-transformations-property-implication}의 원리와
+스킴의 사상에 대한 결과 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-quasi-finite-separated-quasi-affine}를 사용할 수 있다.
+따라서 Lemma \ref{spaces-limits-lemma-quasi-affine-closed-in-finite-presentation}은
+분해 $X \to X' \to X_{i, Y}$를 준다.
+여기서 $X \to X'$는 닫힌 몰입이고
+$X' \to X_{i, Y}$는 유한 표시이다.
+마지막으로 $X' \to Y$는 유한 표시 사상의 합성이므로 유한 표시이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-finite-presentation}).
+\end{proof}
+
+\begin{proposition}
+\label{spaces-limits-proposition-separated-closed-in-finite-presentation}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+% P09-ERR-0095: missing English Let supplied by Korean syntax only.
+다음을 가정하자.
+\begin{enumerate}
+\item $f$는 유한형이고 분리이다.
+\item $Y$는 준콤팩트이고 준분리이다.
+\end{enumerate}
+그러면 유한 표시인 분리 사상 $f' : X' \to Y$와
+닫힌 몰입 $X \to X'$가 존재하며, 후자는 $Y$ 위의 사상이다.
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-finite-type-closed-in-finite-presentation}에 의해
+닫힌 몰입 $X \to Z$가 존재하고 $Z/Y$는 유한 표시이다.
+$\mathcal{I} \subset \mathcal{O}_Z$를 $X$를 $Y$의 닫힌 부분스킴으로 정의하는
+준연접 아이디얼 층이라 하자.
+% P09-ERR-0096: source's ambient Y/subscheme wording retained.
+Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type}에 의해
+$\mathcal{I}$를 유향 여극한
+$\mathcal{I} = \colim_{a \in A} \mathcal{I}_a$로 쓸 수 있다.
+여기서 각 항은 그 유한형 준연접 아이디얼 층이다.
+$X_a \subset Z$를 $\mathcal{I}_a$가 정의하는 닫힌 부분공간이라 하자.
+이들은 $A$를 지표로 하는 역계를 이룬다.
+전이 사상 $X_a \to X_{a'}$는 닫힌 몰입이므로 아핀이다.
+각 $X_a$는 $Z$의 닫힌 부분공간이고,
+가정에 의해 $Z$가 준콤팩트이고 준분리이므로 그것들도 준콤팩트이고 준분리이다.
+$X = \lim_a X_a$가 성립한다. 이는
+$\mathcal{I} = \colim_{a \in A} \mathcal{I}_a$라는 사실에서 직접 따른다.
+각 사상 $X_a \to Z$는 유한 표시이다.
+Morphisms, Lemma \ref{morphisms-lemma-closed-immersion-finite-presentation}을 보라.
+따라서 사상 $X_a \to Y$는 유한 표시이다.
+그러므로 $X_a \to Y$가 어떤 $a \in A$에 대해 분리임을 보이면 충분하다.
+이는 $X \to Y$가 분리라는 가정과
+Lemma \ref{spaces-limits-lemma-eventually-separated}에서 따른다.
+\end{proof}
+
+
+
+
+
+\section{고유 사상의 근사}
+\label{spaces-limits-section-approximate-proper}
+
+\begin{lemma}
+\label{spaces-limits-lemma-proper-limit-of-proper-finite-presentation}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 고유 사상이라 하고,
+$Y$가 준콤팩트이고 준분리라고 가정하자. 그러면
+$X = \lim X_i$는 대수공간 $X_i$들의 유향 극한으로 쓸 수 있으며,
+이들은 $Y$ 위에서 고유하고 유한 표시이고, 전이 사상들과 사상 $X \to X_i$는
+닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+Proposition \ref{spaces-limits-proposition-separated-closed-in-finite-presentation}에 의해
+닫힌 몰입 $X \to X'$를 찾을 수 있으며, $X'$는 $Y$ 위에서 분리이고
+유한 표시이다. Lemma \ref{spaces-limits-lemma-closed-is-limit-closed-and-finite-presentation}에 의해
+$X = \lim X_i$로 쓸 수 있으며, $X_i \to X'$는 유한 표시 닫힌 몰입이다.
+충분히 큰 모든 $i$에 대해 사상 $X_i \to Y$가 고유임을 보이면 증명이 끝난다.
+
+\medskip\noindent
+이를 보이기 위해 $Y$가 아핀 스킴이라고 가정해도 된다.
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-proper-local}을 보라.
+이제 Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-weak-chow}의 Chow 보조정리의 약한 형태를 사용하여
+다음 가환도를 얻는다.
+$$
+\xymatrix{
+X' \ar[rd] & X'' \ar[d] \ar[l]^\pi \ar[r] & \mathbf{P}^n_Y \ar[dl] \\
+& Y &
+}
+$$
+여기서 $X'' \to \mathbf{P}^n_Y$는 몰입이고,
+$\pi : X'' \to X'$는 고유 전사이다.
+$X'_i \subset X''$와 $\pi^{-1}(X)$를 각각
+$X_i \subset X'$와 $X \subset X'$의 스킴론적 역상이라 하자.
+그러면 $\lim X'_i = \pi^{-1}(X)$이다. $\pi^{-1}(X) \to Y$가 고유이므로
+(Morphisms of Spaces, Lemmas \ref{spaces-morphisms-lemma-composition-proper}),
+$\pi^{-1}(X) \to \mathbf{P}^n_Y$는 닫힌 몰입이다
+(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-universally-closed-permanence}와
+\ref{spaces-morphisms-lemma-immersion-when-closed}).
+따라서 충분히 큰 $i$에 대해
+$X'_i \to \mathbf{P}^n_Y$는 Lemma \ref{spaces-limits-lemma-eventually-closed-immersion}에 의해
+닫힌 몰입이다. 그러므로 $X'_i$는 $Y$ 위에서 고유이다.
+그러한 $i$에 대해 사상 $X_i \to Y$는
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-image-proper-is-proper}에 의해
+고유이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-proper-limit-of-proper-finite-presentation-noetherian}
+$f : X \to Y$를 $\mathbf{Z}$ 위의 대수공간의 고유 사상이라 하고,
+$Y$가 준콤팩트이고 준분리라고 가정하자. 그러면 유향집합 $I$와
+대수공간의 사상들로 이루어진 역계 $(f_i : X_i \to Y_i)$가 존재하며,
+이 역계는 $I$ 위에 놓인다. 또한
+전이 사상 $X_i \to X_{i'}$와 $Y_i \to Y_{i'}$는 아핀이고,
+$f_i$는 고유하고 유한 표시이며, $Y_i$는 $\mathbf{Z}$ 위에서 유한 표시이고,
+$(X \to Y) = \lim (X_i \to Y_i)$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-proper-limit-of-proper-finite-presentation}에 의해
+$X = \lim_{k \in K} X_k$로 쓸 수 있으며, $X_k \to Y$는 고유하고
+유한 표시이다. 다음으로 절대 Noether 근사
+(Proposition \ref{spaces-limits-proposition-approximate})에 의해
+$Y = \lim_{j \in J} Y_j$로 쓸 수 있으며, $Y_j$는
+$\mathbf{Z}$ 위에서 유한 표시이다.
+각 $k$에 대해 어떤 $j$와 유한 표시 사상 $X_{k, j} \to Y_j$가 존재하여,
+$X_k \cong Y \times_{Y_j} X_{k, j}$가 되고, 이 동형은 $Y$ 위의 대수공간 사이의 동형이다.
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation}을 보라.
+$j$를 키우면 $X_{k, j} \to Y_j$가 고유라고 가정할 수 있다.
+Lemma \ref{spaces-limits-lemma-eventually-proper}을 보라.
+% P09-ERR-0097: frozen source grammar normalized by Korean syntax only.
+$I$는 이 쌍 $(k, j)$들과 대응하는 사상 $X_{k, j} \to Y_j$로 이루어진다.
+% P09-ERR-0098: frozen source's reversed X_{j',k'} and X_{j,k} indices retained.
+모든 $k' \geq k$에 대해 어떤 $j' \geq j$와
+사상 $X_{j', k'} \to X_{j, k}$를 찾을 수 있으며, 이는 $Y_{j'} \to Y_j$ 위의 사상이다.
+이를 $Y$로 밑변환하면 사상 $X_{k'} \to X_k$가 된다
+(다시 Lemma \ref{spaces-limits-lemma-descend-finite-presentation}에서 따른다).
+이 사상들이 계의 전이 사상을 이룬다. 몇 가지 세부 사항은 생략한다.
+\end{proof}
+
+\noindent
+유한형 준연접 가군의 스킴론적 지지를 상기하자.
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-support}을 보라.
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-proper-support}
+Situation \ref{spaces-limits-situation-descent-property}의 가정과 표기를 사용하자.
+$\mathcal{F}_0$를 준연접 $\mathcal{O}_{X_0}$-가군이라 하자.
+$\mathcal{F}$와 $\mathcal{F}_i$를 각각 $\mathcal{F}_0$의 $X$와 $X_i$로의
+당김이라 하자. 다음을 가정하자.
+\begin{enumerate}
+\item $f_0$는 국소 유한형이다.
+\item $\mathcal{F}_0$는 유한형이다.
+\item $\mathcal{F}$의 스킴론적 지지는 $Y$ 위에서 고유이다.
+\end{enumerate}
+그러면 $\mathcal{F}_i$의 스킴론적 지지가
+$Y_i$ 위에서 고유인 어떤 $i$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+$X_0$를 $\mathcal{F}_0$의 스킴론적 지지로 대체해도 된다.
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-support-finite-type}에 의해
+이는 $X_i$가 $\mathcal{F}_i$의 지지이고 $X$가 $\mathcal{F}$의 지지임을 보장한다.
+이제 $Z \subset X$가 $\mathcal{F}$의 스킴론적 지지를 나타낸다면,
+$Z \to X$는 보편 위상동형이다. 따라서 $X \to Y$가 고유임을 얻는다.
+실제로 가정에 의해 $Z \to Y$가 고유이며,
+Morphisms, Lemma \ref{morphisms-lemma-image-proper-is-proper}을 적용한다.
+% P09-ERR-0099: frozen source's Y targets retained instead of silently changing to Y_i.
+Lemma \ref{spaces-limits-lemma-eventually-proper}에 의해 $X_i \to Y$가 고유인 어떤 $i$가 존재한다.
+그러면 스킴론적 지지 $Z_i$, 즉 $\mathcal{F}_i$의 지지는 $Y$ 위에서 고유이다.
+이는 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-closed-immersion-proper}와
+\ref{spaces-morphisms-lemma-composition-proper}에서 따른다.
+\end{proof}
+
+
+
+
+
+\section{아핀 공간으로의 매장}
+\label{spaces-limits-section-embedding}
+
+\noindent
+뒤에서 Chow 보조정리의 증명에 사용할 몇 가지 기술적 보조정리를 제시한다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-embedding-into-affine-over-ls-qs}
+$S$를 스킴이라 하자. $f : U \to X$를 $S$ 위의 대수공간의 사상이라 하자.
+$U$가 아핀 스킴이고, $f$가 국소 유한형이며,
+$X$가 준분리이고 국소 분리라고 가정하자.
+그러면 몰입 $U \to \mathbf{A}^n_X$가 존재하며, 이는 $X$ 위의 사상이다.
+\end{lemma}
+
+\begin{proof}
+$U = \Spec(A)$라 하자. $A = \colim A_i$를 유한형
+$\mathbf{Z}$-부분대수들의 여과 여극한으로 쓰자. 각 $i$에 대해 사상
+$U \to U_i = \Spec(A_i)$는 다음 사상을 유도한다.
+$$
+U \longrightarrow X \times U_i
+$$
+이 사상은 $X$ 위의 사상이다. 극한에서 사상 $U \to X \times U$는 몰입이다.
+실제로 $X$가 국소 분리이며, Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-semi-diagonal}을 적용한다.
+Lemma \ref{spaces-limits-lemma-finite-type-eventually-closed}에 의해
+$U \to X \times U_i$가 어떤 $i$에 대해 몰입임을 알 수 있다.
+$U_i$는 $\mathbf{A}^n_{\mathbf{Z}}$의 닫힌 부분스킴과 동형이므로
+보조정리가 따른다.
+\end{proof}
+
+\begin{remark}
+\label{spaces-limits-remark-cannot-embed-in-general}
+Examples, Section \ref{examples-section-embedding-affines}에서 보았듯이,
+Lemma \ref{spaces-limits-lemma-embedding-into-affine-over-ls-qs}는
+$X$가 국소 분리라는 가정을 버리면 성립하지 않는다.
+이에 따라 다음 질문이 생긴다. $X$가 준분리라는 가정을 버려도
+Lemma \ref{spaces-limits-lemma-embedding-into-affine-over-ls-qs}가 성립하는가?
+답을 알고 있다면
+\href{mailto:stacks.project@gmail.com}{stacks.project@gmail.com}으로 전자우편을 보내 달라.
+\end{remark}
+
+\begin{lemma}
+\label{spaces-limits-lemma-embedding-into-affine-over-qs}
+$S$를 스킴이라 하자. $f : Y \to X$를 $S$ 위의 대수공간의 사상이라 하자.
+$X$가 Noether이고 $f$가 유한 표시라고 가정하자.
+그러면 조밀한 열린집합 $V \subset Y$와 몰입
+$V \to \mathbf{A}^n_X$가 존재한다.
+\end{lemma}
+
+\begin{proof}
+가정에 의해 $Y$는 Noether이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-noetherian}).
+그러면 $Y$는 준분리이므로 조밀한 열린 부분스킴을 가진다
+(Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}).
+따라서 $Y$가 Noether 스킴이라고 가정해도 된다.
+$Y$의 기약 성분들의 교차를 제거하면
+(Topology, Lemma \ref{topology-lemma-Noetherian}과
+Properties, Lemma \ref{properties-lemma-Noetherian-topology}을 사용한다),
+$Y$가 기약 Noether 스킴들의 서로소 합이라고 가정해도 된다.
+다음 몰입이 존재한다.
+$$
+\mathbf{A}^n_X \amalg \mathbf{A}^m_X
+\longrightarrow
+\mathbf{A}^{\max(n, m) + 1}_X
+$$
+(세부 사항은 생략한다). 따라서 $Y$가 기약인 경우만 증명하면 충분하다.
+
+\medskip\noindent
+$Y$가 기약 스킴이라고 가정하자. $T \subset |X|$를
+$f : Y \to X$의 상의 폐포라 하자. $|Y|$와 $|X|$는 sober 위상공간이므로
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-separated-sober}),
+$T$는 기약이고 유일한 일반점 $\xi$를 가지며, 이 점은
+일반점 $\eta$의 상이고, 이 일반점은 $Y$의 일반점이다.
+% P09-ERR-0100: frozen source's ideal-sheaf inclusion in X retained literally.
+$\mathcal{I} \subset X$를 $T$ 위의 축소 유도 공간 구조를 잘라내는
+준연접 아이디얼 층이라 하자
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space}).
+$\mathcal{O}_{Y, \eta}$는 Artin 국소환이므로, 어떤 $n > 0$에 대해
+$f^{-1}\mathcal{I}^n \mathcal{O}_{Y, \eta} = 0$이다.
+$f^{-1}\mathcal{I}\mathcal{O}_Y$는 유한형 준연접 아이디얼이므로,
+$f^{-1}\mathcal{I}^n\mathcal{O}_V = 0$인 공집합이 아닌 열린집합
+$V \subset Y$가 존재한다.
+$Z \subset X$를 $\mathcal{I}^n$이 잘라내는 닫힌 부분공간이라 하자.
+구성에 의해 $V \to Y \to X$는 $Z$를 통해 인수분해된다.
+$\mathbf{A}^n_Z \to \mathbf{A}^n_X$가 몰입이므로,
+$X$를 $Z$로, $Y$를 $V$로 대체해도 된다.
+따라서 $Y$와 $X$가 기약이고,
+$Y \to X$가 $Y$의 일반점을 $X$의 일반점으로 보내는 상황에 이른다.
+
+\medskip\noindent
+$Y$와 $X$가 기약이고, $Y$가 스킴이며,
+$Y \to X$가 $Y$의 일반점을 $X$의 일반점으로 보낸다고 가정하자.
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}에 의해
+$X$는 조밀한 열린 부분스킴 $U \subset X$를 가진다.
+공집합이 아닌 아핀 열린집합 $V \subset Y$를 택하되,
+그 상이 $X$에서 $U$에 포함되게 하자. Morphisms, Lemma
+\ref{morphisms-lemma-quasi-affine-finite-type-over-S}에 의해
+$V \to U$를 $V \to \mathbf{A}^n_U \to U$로 인수분해할 수 있다.
+이를 $\mathbf{A}^n_U \to \mathbf{A}^n_X$와 합성하면 원하는 몰입을 얻는다.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{닫힌 부분집합에 지지를 갖는 절단}
+\label{spaces-limits-section-sections-with-support-in-closed}
+
+\noindent
+이 절은 Properties, Section
+\ref{properties-section-sections-with-support-in-closed}에 대응한다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-quasi-coherent-finite-type-ideals}
+$S$를 스킴이라 하자.
+$X$를 준콤팩트 준분리 대수공간이라 하자.
+$U \subset X$를 열린 부분공간이라 하자. 다음은 서로 동치이다.
+\begin{enumerate}
+\item $U \to X$는 준콤팩트이다.
+\item $U$는 준콤팩트이다.
+\item 유한형 준연접 아이디얼 층
+$\mathcal{I} \subset \mathcal{O}_X$가 존재하여
+$|X| \setminus |U| = |V(\mathcal{I})|$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$W$를 아핀 스킴이라 하고, $\varphi : W \to X$를 전사 에탈 사상이라 하자.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}를 보라.
+(1)이 성립하면 $\varphi^{-1}(U) \to W$는 준콤팩트이므로
+$\varphi^{-1}(U)$는 준콤팩트이고, 따라서 $U$도 준콤팩트이다
+($|\varphi^{-1}(U)| \to |U|$가 전사이기 때문이다).
+(2)가 성립하면 $\varphi^{-1}(U)$는 준콤팩트이다. 실제로 $\varphi$는 준콤팩트하다.
+이는 $X$가 준분리이기 때문이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-quasi-separated-permanence}).
+따라서 $\varphi^{-1}(U) \to W$는
+Properties, Lemma \ref{properties-lemma-quasi-coherent-finite-type-ideals}에 의해
+스킴의 준콤팩트 사상이다. 그러므로
+$U \to X$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-local}에 의해 준콤팩트이다.
+따라서 (1)과 (2)는 동치이다.
+
+\medskip\noindent
+(1)과 (2)를 가정하자. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace}에 의해,
+유일한 준연접 아이디얼 층 $\mathcal{J}$가 존재하며,
+이는 $|X| \setminus |U|$ 위의 축소 유도 닫힌 부분공간 구조를 잘라낸다.
+% P09-ERR-0101: frozen source's singular/plural grammar normalized in Korean.
+$\mathcal{J}|_U = \mathcal{O}_U$이고, 이는 유한형
+$\mathcal{O}_U$-가군임에 주의하자.
+$U$가 준콤팩트이므로 Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type}에 의해,
+유한형 준연접 부분층 $\mathcal{I} \subset \mathcal{J}$가 존재하여
+$\mathcal{I}|_U = \mathcal{J}|_U$가 된다.
+그러면 $|X| \setminus |U| = |V(\mathcal{I})|$이므로 (3)을 얻는다.
+반대로 $\mathcal{I}$가 (3)에서와 같다면,
+$\varphi^{-1}(U) \subset W$는 스킴에 대한 보조정리
+(Properties, Lemma \ref{properties-lemma-quasi-coherent-finite-type-ideals})에 의해
+준콤팩트 열린집합이다. 여기서는 $\varphi^{-1}\mathcal{I}$에
+그 보조정리를 적용하며, 이는 $W$ 위의 층이다. 따라서 (2)가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-sections-annihilated-by-ideal}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{I} \subset \mathcal{O}_X$를 준연접 아이디얼 층이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{O}_X$-가군의 층 $\mathcal{F}'$를 생각하자. 이 층은 모든 대상
+$U$에 다음 가군을 대응시키며, 그 대상은 $X_\etale$에 속한다.
+$$
+\mathcal{F}'(U)
+=
+\{s \in \mathcal{F}(U) \mid
+\mathcal{I}s = 0\}
+$$
+$\mathcal{I}$가 유한형이라고 가정하자. 그러면
+\begin{enumerate}
+\item $\mathcal{F}'$는 준연접 $\mathcal{O}_X$-가군의 층이다.
+\item 아핀 대상 $U$가 $X_\etale$에 속하면
+$\mathcal{F}'(U) = \{s \in \mathcal{F}(U) \mid \mathcal{I}(U)s = 0\}$이다.
+\item $\mathcal{F}'_x = \{s \in \mathcal{F}_x \mid \mathcal{I}_x s = 0\}$이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}'$를 정의하는 규칙이 $\mathcal{F}$의 부분층을 준다는 것은 명백하다.
+따라서 나머지 명제를 확인할 때 $X$ 위에서 에탈 국소적으로 작업해도 된다.
+그러므로 보조정리는 스킴의 경우인 Properties, Lemma
+\ref{properties-lemma-sections-annihilated-by-ideal}로 환원된다.
+\end{proof}
+
+\begin{definition}
+\label{spaces-limits-definition-subsheaf-sections-annihilated-by-ideal}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$\mathcal{I} \subset \mathcal{O}_X$를 유한형 준연접 아이디얼 층이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+위의 Lemma \ref{spaces-limits-lemma-sections-annihilated-by-ideal}에서 정의한 부분층
+$\mathcal{F}' \subset \mathcal{F}$를
+{\it $\mathcal{I}$에 의해 소멸되는 절단들의 부분층}이라 한다.
+\end{definition}
+
+\begin{lemma}
+\label{spaces-limits-lemma-push-sections-annihilated-by-ideal}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 대수공간의 준콤팩트 준분리 사상이라 하자.
+$\mathcal{I} \subset \mathcal{O}_Y$를 유한형 준연접 아이디얼 층이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{F}' \subset \mathcal{F}$를
+$f^{-1}\mathcal{I}\mathcal{O}_X$에 의해 소멸되는 절단들의 부분층이라 하자.
+그러면 $f_*\mathcal{F}' \subset f_*\mathcal{F}$는
+$\mathcal{I}$에 의해 소멸되는 절단들의 부분층이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트: $f$가 준콤팩트이고 준분리라는 가정에 의해
+$f_*\mathcal{F}$는 준연접이다
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-pushforward}).
+따라서 Lemma \ref{spaces-limits-lemma-sections-annihilated-by-ideal}을
+$\mathcal{I}$와 $f_*\mathcal{F}$에 적용할 수 있다.
+\end{proof}
+
+\noindent
+이제 닫힌 부분집합에 지지를 갖는 절단들의 층을 살펴보자.
+이 층 역시 언제나 준연접인 것은 아니지만, 주어진 대수공간에서
+닫힌 부분집합의 여집합이 ``retrocompact''이면 준연접이다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-sections-supported-on-closed-subset}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$T \subset |X|$를 닫힌 부분집합이라 하고, $U \subset X$를
+$T \amalg |U| = |X|$가 되게 하는 열린 부분공간이라 하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{O}_X$-가군의 층 $\mathcal{F}'$를 생각하자. 이 층은 각 대상
+$\varphi : W \to X$에 다음 가군을 대응시키며, 그 대상은 $X_\etale$에 속한다.
+$$
+\mathcal{F}'(W)
+=
+\{s \in \mathcal{F}(W) \mid
+\text{절단 }s\text{의 지지가 다음 집합에 포함됨: }|\varphi|^{-1}(T)\}
+$$
+$U \to X$가 준콤팩트이면 다음이 성립한다.
+\begin{enumerate}
+% P09-ERR-0102: frozen source's subject-verb disagreement normalized in Korean.
+\item $W$가 아핀이면 유한 생성 아이디얼
+$I \subset \mathcal{O}_X(W)$가 존재하여 $|\varphi|^{-1}(T) = V(I)$가 된다.
+\item (1)에서와 같은 $W$와 $I$에 대해
+$\mathcal{F}'(W) = \{x \in \mathcal{F}(W) \mid
+I^nx = 0 \text{인 어떤 } n\}$이다.
+\item $\mathcal{F}'$는 준연접 $\mathcal{O}_X$-가군의 층이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}'$를 정의하는 규칙이 $\mathcal{F}$의 부분층을 준다는 것은 명백하다.
+따라서 나머지 명제를 확인할 때 $X$ 위에서 에탈 국소적으로 작업해도 된다.
+그러므로 보조정리는 스킴의 경우인 Properties, Lemma
+\ref{properties-lemma-sections-supported-on-closed-subset}로 환원된다.
+\end{proof}
+
+\begin{definition}
+\label{spaces-limits-definition-subsheaf-sections-supported-on-closed}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$T \subset |X|$를 닫힌 부분집합이라 하자. 그 여집합이 열린 부분공간
+$U \subset X$에 대응하고 포함 사상 $U \to X$가 준콤팩트라고 가정하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+위의 Lemma \ref{spaces-limits-lemma-sections-supported-on-closed-subset}에서 정의한
+준연접 부분층 $\mathcal{F}' \subset \mathcal{F}$를
+{\it $T$ 위에 지지를 갖는 절단들의 부분층}이라 한다.
+\end{definition}
+
+\begin{lemma}
+\label{spaces-limits-lemma-push-sections-supported-on-closed-subset}
+$S$를 스킴이라 하자.
+$f : X \to Y$를 $S$ 위의 대수공간의 준콤팩트 준분리 사상이라 하자.
+$T \subset |Y|$를 닫힌 부분집합이라 하자.
+$|Y| \setminus T$가 열린 부분공간 $V \subset Y$에 대응하고,
+$V \to Y$가 준콤팩트라고 가정하자.
+$\mathcal{F}$를 준연접 $\mathcal{O}_X$-가군이라 하자.
+$\mathcal{F}' \subset \mathcal{F}$를 $|f|^{-1}T$ 위에 지지를 갖는
+절단들의 부분층이라 하자. 그러면
+$f_*\mathcal{F}' \subset f_*\mathcal{F}$는 $T$ 위에 지지를 갖는
+절단들의 부분층이다.
+\end{lemma}
+
+\begin{proof}
+생략한다. 힌트:
+% P09-ERR-0103: frozen source's "support of the open subspace" retained literally.
+$|X| \setminus |f|^{-1}T$는 열린 부분공간 $U = f^{-1}V \subset X$의 지지이다.
+$V \to Y$가 준콤팩트이므로 $U \to X$도 밑변환에 의해 준콤팩트이다.
+$f$가 준콤팩트이고 준분리라는 가정에 의해 $f_*\mathcal{F}$는 준연접이다.
+따라서 Lemma \ref{spaces-limits-lemma-sections-supported-on-closed-subset}을
+$T$와 $f_*\mathcal{F}$에 적용할 수 있고,
+$|f|^{-1}T$와 $\mathcal{F}$에도 적용할 수 있다.
+주어진 준연접 가군들이 같다는 것은 정의에서 즉시 따른다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{아핀 공간의 특성화}
+\label{spaces-limits-section-affine}
+
+\noindent
+이 절은 Limits, Section \ref{limits-section-affine}에 대응한다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-affine}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+$f$가 전사 유한 사상이고 $X$가 아핀이라고 가정하자.
+그러면 $Y$는 아핀이다.
+\end{lemma}
+
+\begin{proof}
+$f : X \to Y$를 $\Spec(\mathbf{Z})$ 위의 대수공간의 사상으로 보자
+(Spaces, Definition \ref{spaces-definition-base-change}을 보라).
+유한 사상은 아핀이고 보편 닫힌 사상임에 주의하자.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-closed}을 보라.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-image-universally-closed-separated}에 의해
+$Y$는 분리 대수공간이다.
+$f$가 전사이고 $X$가 준콤팩트이므로 $Y$가 준콤팩트임을 알 수 있다.
+
+\medskip\noindent
+Lemma \ref{spaces-limits-lemma-finite-in-finite-and-finite-presentation}에 의해
+$X = \lim X_a$로 쓸 수 있으며, 각 $X_a \to Y$는 유한하고 유한 표시이다.
+Lemma \ref{spaces-limits-lemma-limit-is-affine}에 의해
+$X_a$가 아핀인 충분히 큰 $a$가 존재한다.
+따라서 $f : X \to Y$가 유한 표시인 유한 전사라고 가정해도 된다.
+
+\medskip\noindent
+Proposition \ref{spaces-limits-proposition-approximate}에 의해
+$Y = \lim Y_i$를 $\mathbf{Z}$ 위에서 유한 표시인 대수공간들의
+유향 극한으로 쓸 수 있다.
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation}에 의해
+$0 \in I$와 유한 표시 사상 $X_0 \to Y_0$를 찾아,
+$X_i = X_0 \times_{Y_0} Y_i$가 $i \geq 0$에 대해 성립하고
+$X = \lim_i X_i$가 되게 할 수 있다.
+Lemma \ref{spaces-limits-lemma-descend-finite}에 의해
+$X_i \to Y_i$가 유한인 충분히 큰 $i$가 존재한다.
+Lemma \ref{spaces-limits-lemma-descend-surjective}에 의해
+$X_i \to Y_i$가 전사인 충분히 큰 $i$가 존재한다.
+Lemma \ref{spaces-limits-lemma-limit-is-affine}에 의해 $X_i$가 아핀인 충분히 큰 $i$가 존재한다.
+따라서 충분히 큰 $i$에 대해 Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-image-affine-finite-morphism-affine-Noetherian}을 적용하여
+$Y_i$가 아핀임을 얻는다. 이는 $Y$가 아핀임을 뜻하므로 증명이 끝난다.
+\end{proof}
+
+\begin{proposition}
+\label{spaces-limits-proposition-affine}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+$X$가 아핀이고 $f$가 전사이며 보편 닫힌 사상이라고 가정하자
+\footnote{정수적 사상은 보편 닫힌 사상이다. Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-closed}을 보라.}.
+그러면 $Y$는 아핀이다.
+\end{proposition}
+
+\begin{proof}
+$f : X \to Y$를 $\Spec(\mathbf{Z})$ 위의 대수공간의 사상으로 보자
+(Spaces, Definition \ref{spaces-definition-base-change}을 보라).
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-image-universally-closed-separated}에 의해
+$Y$는 분리 대수공간이다. 이어서 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-permanence}에 의해 $f$가 아핀임을 얻는다.
+그러면 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-closed}에 의해
+$f$는 정수적이다.
+
+\medskip\noindent
+앞 문단에 의해 $f : X \to Y$가 전사 정수적이고,
+$X$가 아핀이며 $Y$가 분리라고 가정해도 된다.
+$f$가 전사이고 $X$가 준콤팩트이므로 $Y$도 준콤팩트임을 얻는다.
+
+\medskip\noindent
+층 $\mathcal{A} = f_*\mathcal{O}_X$를 생각하자.
+이는 준연접 $\mathcal{O}_Y$-대수 층이다.
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-pushforward}를 보라.
+Lemma \ref{spaces-limits-lemma-colimit-finitely-presented}에 의해
+$\mathcal{A} = \colim_i \mathcal{F}_i$를 유한형
+$\mathcal{O}_Y$-가군들의 여과 여극한으로 쓸 수 있다.
+$\mathcal{A}_i \subset \mathcal{A}$를 $\mathcal{O}_Y$-부분대수 중
+$\mathcal{F}_i$가 생성하는 것으로 하자. 대수의 사상
+$\mathcal{O}_Y \to \mathcal{A}$가 정수적이므로, 각 $\mathcal{A}_i$는
+유한 준연접 $\mathcal{O}_Y$-대수이다. 따라서
+$$
+X_i = \underline{\Spec}_Y(\mathcal{A}_i) \longrightarrow Y
+$$
+는 대수공간의 유한 사상이다. 여기서
+$\underline{\Spec}$는 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-equivalence-algebras}의 구성이다.
+$X = \lim_i X_i$라는 것은 명백하다. 따라서
+Lemma \ref{spaces-limits-lemma-limit-is-affine}에 의해 충분히 큰 $i$에 대해
+스킴 $X_i$는 아핀이다. 또한 $X \to Y$가 각 $X_i$를 통해
+인수분해되므로 $X_i \to Y$는 전사이다. 따라서
+Lemma \ref{spaces-limits-lemma-affine}에 의해 $Y$가 아핀임을 얻는다.
+\end{proof}
+
+\noindent
+위 결과의 다음 따름정리는 \cite{CLO}에서 찾을 수 있다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-reduction-scheme}
+\begin{reference}
+\cite[3.1.12]{CLO}
+\end{reference}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 대수공간이라 하자.
+$X_{red}$가 스킴이면 $X$도 스킴이다.
+\end{lemma}
+
+\begin{proof}
+$U' \subset X_{red}$를 아핀 열린 부분스킴이라 하자.
+$U \subset X$를 열린집합
+$|U'| \subset |X_{red}| = |X|$에 대응하는 열린 부분공간이라 하자.
+그러면 $U' \to U$는 전사 정수적이다. 따라서
+Proposition \ref{spaces-limits-proposition-affine}에 의해 $U$는 아핀이다.
+그러므로 모든 점이 $X$의 열린 부분스킴에 포함된다. 즉,
+$X$는 스킴이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-integral-universally-bijective-scheme}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 사상이라 하자.
+$f$가 정수적이고 전단사 $|X| \to |Y|$를 유도한다고 가정하자.
+그러면 $X$가 스킴일 필요충분조건은 $Y$가 스킴인 것이다.
+\end{lemma}
+
+\begin{proof}
+정수적 사상은 정의에 의해 표현 가능하므로, $Y$가 스킴이면 $X$도 스킴이다.
+반대로 $X$가 스킴이라고 가정하자. $U \subset X$를 아핀 열린집합이라 하자.
+정수적 사상은 닫힌 사상이고 $|f|$는 전단사이므로,
+$|f|(|U|) \subset |Y|$는 $|f|(|X| \setminus |U|)$의 여집합으로서 열린집합이다.
+$V \subset Y$를 $|V| = |f|(|U|)$인 열린 부분공간이라 하자.
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-open-subspaces}를 보라.
+그러면 $U \to V$는 정수적 전사이므로,
+Proposition \ref{spaces-limits-proposition-affine}에 의해 $V$는 아핀 스킴이다.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-check-closed-infinitesimally}
+$S$를 스킴이라 하자.
+$f : X \to B$와 $B' \to B$를 $S$ 위의 대수공간의 사상이라 하자.
+다음을 가정하자.
+\begin{enumerate}
+\item $B' \to B$는 닫힌 몰입이다.
+\item $|B'| \to |B|$는 전단사이다.
+\item $X \times_B B' \to B'$는 닫힌 몰입이다.
+\item $X \to B$는 유한형이거나 $B' \to B$는 유한 표시이다.
+\end{enumerate}
+그러면 $f : X \to B$는 닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+가정 (1)과 (2)에 의해 $B_{red} = B'_{red}$이다.
+$X' = X \times_B B'$로 놓자.
+% P09-ERR-0104: frozen source's missing article is immaterial in Korean.
+그러면 $X' \to X$는 닫힌 몰입이고 $X'_{red} = X_{red}$이다.
+$U \to B$를 에탈 사상이라 하고 $U$가 아핀이라고 하자.
+그러면 $X' \times_B U \to X \times_B U$는
+기저 축소 공간 위에서 동형을 유도하는 대수공간의 닫힌 몰입이다.
+$X' \times_B U$는 스킴이다
+($B' \to B$와 $X' \to B'$가 표현 가능하기 때문이다).
+따라서 Lemma \ref{spaces-limits-lemma-reduction-scheme}에 의해 $X \times_B U$도 스킴이다.
+그러므로 $X \to B$도 표현 가능하다. 이에 따라 스킴의 경우로 환원되며,
+Morphisms, Lemma \ref{morphisms-lemma-check-closed-infinitesimally}을 보라.
+\end{proof}
+
+
+
+
+
+
+
+
+\section{스킴에 의한 유한 피복}
+\label{spaces-limits-section-finite-cover}
+
+\noindent
+이 장의 극한 결과를 응용하여 다음을 증명한다. 임의의 준콤팩트 준분리
+대수공간 $X$가 주어지면 스킴 $Y$와 전사 유한 사상 $Y \to X$가 존재한다.
+% P09-ERR-0105: frozen source's erroneous finite integral cover claim retained.
+이를 위해 스킴에 의한 유한 정수적 피복을 찾을 수 있다는 이미 증명된 결과에 의존한다.
+이 결과는 Decent Spaces, Section
+\ref{decent-spaces-section-integral-cover}에서 증명되었다.
+
+\begin{proposition}
+\label{spaces-limits-proposition-there-is-a-scheme-finite-over}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+\begin{enumerate}
+\item 유한 표시인 전사 유한 사상 $Y \to X$가 존재하며, $Y$는 스킴이다.
+\item 전사 에탈 사상 $U \to X$가 주어지면 $Y \to X$를 택하여,
+모든 $y \in Y$에 대해 열린 근방 $V \subset Y$가 존재하고
+$V \to X$가 $U$를 통해 인수분해되게 할 수 있다.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1)은 $U = X$인 (2)의 특수한 경우이다.
+$Y \to X$를 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-there-is-a-scheme-integral-over}에서와 같이 택하자.
+$Y = \bigcup V_j$인 유한 아핀 열린 피복을 택하여
+$V_j \to X$가 $U$를 통해 인수분해되게 하자.
+$Y = \lim Y_i$로 쓸 수 있으며, $Y_i \to X$는 유한하고 유한 표시이다.
+Lemma \ref{spaces-limits-lemma-integral-limit-finite-and-finite-presentation}을 보라.
+충분히 큰 $i$에 대해 대수공간 $Y_i$는 스킴이다.
+Lemma \ref{spaces-limits-lemma-limit-is-scheme}을 보라.
+충분히 큰 $i$에 대해 아핀 열린집합 $V_{i, j} \subset Y_i$를 찾아,
+$Y$에서의 역상이 $V_j$가 되게 할 수 있다.
+Lemma \ref{spaces-limits-lemma-descend-opens}를 보라.
+$i$를 더 키우면 사상 $V_j \to U$는 $X$ 위의 사상이고,
+사상 $V_{i, j} \to U$에서 오며 이 사상도 $X$ 위에 있다.
+Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation}을 보라.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-integral-limit-finite-and-finite-presentation-refined}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간의 정수적 사상이라 하자.
+$Y$가 준콤팩트이고 준분리라고 가정하자.
+$V \subset Y$를 준콤팩트 열린 부분공간이라 하고,
+$f^{-1}(V) \to V$가 유한하고 유한 표시라고 가정하자.
+그러면 $X$를 유향 극한 $X = \lim X_i$로 쓸 수 있으며,
+$f_i : X_i \to Y$는 유한하고 유한 표시이고,
+사상 $f^{-1}(V) \to f_i^{-1}(V)$는 모든 $i$에 대해 동형이다.
+\end{lemma}
+
+\begin{proof}
+이 보조정리는 Proposition
+\ref{spaces-limits-proposition-there-is-a-scheme-finite-over}을 약간 정교화한 것이다.
+정수적인 준연접 $\mathcal{O}_Y$-대수
+$\mathcal{A} = f_*\mathcal{O}_X$를 생각하자. 다음 문단에서
+$\mathcal{A} = \colim \mathcal{A}_i$를 유한하고 유한 표시인
+$\mathcal{O}_Y$-대수 $\mathcal{A}_i$들의 유향 여극한으로 쓰되,
+$\mathcal{A}_i|_V = \mathcal{A}|_V$가 되게 할 것이다.
+이렇게 한 뒤 $X_i = \underline{\Spec}_Y(\mathcal{A}_i)$로 놓는다.
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-spec}을 보라.
+구성에 의해 $X_i \to Y$는 유한하고 유한 표시이며,
+$X = \lim X_i$이고 $f_i^{-1}(V) = f^{-1}(V)$이다.
+
+\medskip\noindent
+대수에 대한 이 주장의 증명은 Lemma
+\ref{spaces-limits-lemma-integral-algebra-directed-colimit-finite}의 (2)의 증명과 비슷하다.
+먼저 Lemma \ref{spaces-limits-lemma-colimit-finitely-presented}을 사용하여
+$\mathcal{A} = \colim \mathcal{F}_i$를 유한 표시
+$\mathcal{O}_Y$-가군들의 여극한으로 쓰자.
+$\mathcal{A}|_V$는 유한형 $\mathcal{O}_V$-가군이므로,
+$\mathcal{F}_i|_V \to \mathcal{A}|_V$가 모든 $i$에 대해 전사라고
+가정해도 된다. 각 $i$에 대해 $\mathcal{J}_i$를 다음 사상의 핵이라 하자.
+$$
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i) \longrightarrow \mathcal{A}
+$$
+% P09-ERR-0106: every frozen O_X base in this paragraph is retained literally.
+$i' \geq i$이면 유도된 사상 $\mathcal{J}_i \to \mathcal{J}_{i'}$가 존재한다.
+다음이 성립한다.
+$$
+\mathcal{A} =
+\colim \text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/\mathcal{J}_i
+$$
+또한 준연접 $\mathcal{O}_X$-대수
+$\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/\mathcal{J}_i$는 유한이다
+(이는 정수적 준연접 $\mathcal{O}_Y$-대수 $\mathcal{A}$의
+유한형 준연접 부분대수이며, 그 대수는 $\mathcal{O}_X$ 위에 있기 때문이다).
+위의 전사성에 의해
+$\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/\mathcal{J}_i$를 $V$에
+제한하면 $\mathcal{A}|_V$가 된다. 따라서 $\mathcal{J}_i|_V$는
+$\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)|_V$의 아이디얼 층으로서
+유한 생성이다. 이는 $\mathcal{A}|_V$가 유한 표시
+$\mathcal{O}_Y$-대수라는 사실에 의한다. $\mathcal{J}_i = \colim \mathcal{E}_{ik}$를
+유한 표시 $\mathcal{O}_X$-가군들의 여극한으로 쓰자.
+% P09-ERR-0107: frozen source grammar is normalized in Korean only.
+위의 유한 생성성에 의해 $\mathcal{E}_{ik}|_V$가
+$\mathcal{J}_i|_V$를 생성한다고 가정해도 된다. 여기서 생성은
+$\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)|_V$의 아이디얼 층으로서이다.
+$i' \geq i$와 $k$가 주어지면 어떤 $k'$가 존재하여,
+다음 가환도가 가환하게 하는 사상
+$\mathcal{E}_{ik} \to \mathcal{E}_{i'k'}$가 존재한다.
+$$
+\xymatrix{
+\mathcal{J}_i \ar[r] & \mathcal{J}_{i'} \\
+\mathcal{E}_{ik} \ar[u] \ar[r] & \mathcal{E}_{i'k'} \ar[u]
+}
+$$
+이는 Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-finite-presentation-quasi-compact-colimit}에서 따른다.
+이로부터 다음 사상을 얻는다.
+$$
+\mathcal{A}_{ik} =
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/(\mathcal{E}_{ik})
+\longrightarrow
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_{i'})/(\mathcal{E}_{i'k'}) =
+\mathcal{A}_{i'k'}
+$$
+여기서 $(\mathcal{E}_{ik})$는 $\mathcal{E}_{ik}$가 생성하는 아이디얼을 뜻한다.
+% P09-ERR-0108: frozen source's reversed A_{ki} index is retained.
+준연접 $\mathcal{O}_X$-대수 $\mathcal{A}_{ki}$는 충분히 큰 $k$에 대해
+유한 표시이고 유한이다
+(Lemma \ref{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented}의
+증명을 보라). 또한 구성에 의해
+$\mathcal{A}_{ik}|_V = \mathcal{A}|_V$이다. 마지막으로 다음이 성립한다.
+$$
+\colim \mathcal{A}_{ik} = \colim \mathcal{A}_i = \mathcal{A}
+$$
+실제로 첫 번째 등식은 Lemma
+\ref{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented}의 증명에서 보였고,
+두 번째 등식은 $\mathcal{A}$가 가군 $\mathcal{F}_i$들의 여극한이기 때문이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-there-is-a-scheme-finite-over-refined}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하고,
+$|X|$가 유한 개의 기약 성분을 가진다고 가정하자.
+\begin{enumerate}
+\item 유한 표시인 전사 유한 사상 $f : Y \to X$가 존재하며,
+$Y$는 스킴이고, $f$는 준콤팩트 조밀한 열린집합 $U \subset X$ 위에서
+유한 에탈 사상이다.
+\item 전사 에탈 사상 $V \to X$가 주어지면 $Y \to X$를 택하여,
+모든 $y \in Y$에 대해 열린 근방 $W \subset Y$가 존재하고
+$W \to X$가 $V$를 통해 인수분해되게 할 수 있다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)은 $V = X$인 (2)의 특수한 경우이다.
+
+\medskip\noindent
+(2)를 증명하자. $\pi : Y \to X$를 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-there-is-a-scheme-integral-over-refined}에서와 같이 택하고,
+$U \subset X$를 준콤팩트 조밀한 열린집합으로 택하여
+$\pi^{-1}(U) \to U$가 유한 에탈이게 하자.
+$Y = \bigcup W_j$인 유한 아핀 열린 피복을 택하여
+$W_j \to X$가 $V$를 통해 인수분해되게 하자.
+$Y = \lim Y_i$로 쓸 수 있으며, $\pi_i : Y_i \to X$는 유한하고
+유한 표시이고, $\pi^{-1}(U) \to \pi_i^{-1}(U)$는 동형이다.
+Lemma \ref{spaces-limits-lemma-integral-limit-finite-and-finite-presentation-refined}를 보라.
+충분히 큰 $i$에 대해 대수공간 $Y_i$는 스킴이다.
+Lemma \ref{spaces-limits-lemma-limit-is-scheme}을 보라.
+충분히 큰 $i$에 대해 아핀 열린집합 $W_{i, j} \subset Y_i$를 찾아
+$Y$에서의 역상이 $W_j$가 되게 할 수 있다.
+Lemma \ref{spaces-limits-lemma-descend-opens}를 보라.
+$i$를 더 키우면 사상 $W_j \to V$는 $X$ 위의 사상이고,
+% P09-ERR-0109: frozen source's U target is retained rather than silently changed to V.
+사상 $W_{i, j} \to U$에서 오며 이 사상도 $X$ 위에 있다.
+Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation}을 보라.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-there-is-a-scheme-finite-over-filtered}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+어떤 $t \geq 0$와 닫힌 부분공간들의 열
+$$
+X \supset Z_0 \supset Z_1 \supset \ldots \supset Z_t = \emptyset
+$$
+이 존재하여, $Z_i \to X$는 유한 표시이고,
+$Z_0 \subset X$는 두껍게 하기이며, 각 $i = 0, \ldots t - 1$에 대해
+스킴 $Y_i$와 유한 표시인 전사 유한 사상 $Y_i \to Z_i$가 존재하고,
+이 사상은 $Z_i \setminus Z_{i + 1}$ 위에서 유한 에탈이다.
+\end{lemma}
+
+\begin{proof}
+$X$를 $\Spec(\mathbf{Z})$ 위의 대수공간으로 볼 수 있다.
+Spaces, Definition \ref{spaces-definition-base-change}과
+Properties of Spaces, Definition \ref{spaces-properties-definition-separated}를 보라.
+따라서 Proposition \ref{spaces-limits-proposition-approximate}을 적용할 수 있다.
+이에 따라 아핀 사상 $X \to X_0$을 찾을 수 있으며,
+$X_0$는 $\mathbf{Z}$ 위에서 유한 표시이다.
+$X_0$에 대해 보조정리를 증명할 수 있다면, 층화와 사상들을 $X$로 당겨
+$X$에 대한 결과를 얻을 수 있다. 몇 가지 세부 사항은 생략한다.
+이로써 다음 문단에서 다룰 경우로 환원된다.
+
+\medskip\noindent
+$X$가 $\mathbf{Z}$ 위에서 유한 표시라고 가정하자.
+그러면 $X$는 Noether이고 $|X|$는 유한 개의 기약 성분을 가지는
+유한 차원 Noether 위상공간이다.
+따라서 $\dim(|X|)$에 관한 귀납법을 사용할 수 있다.
+$X$로 가는 모든 유한 사상은 유한 표시이므로,
+증명의 나머지 부분에서는 그 요구를 무시할 수 있다.
+Lemma \ref{spaces-limits-lemma-there-is-a-scheme-finite-over-refined}에 의해
+전사 유한 사상 $Y \to X$가 존재하며, 이는 조밀한 열린집합
+$U \subset X$ 위에서 유한 에탈이다.
+$Z_0 = X$로 놓고, $Z_1 \subset X$를
+$|Z_1| = |X| \setminus |U|$인 축소 닫힌 부분공간이라 하자.
+귀납법에 의해 정수 $t \geq 0$와 닫힌 부분공간들에 의한 여과
+$$
+Z_1 \supset Z_{1, 0} \supset Z_{1, 1} \supset \ldots
+\supset Z_{1, t} = \emptyset
+$$
+를 얻는다. 여기서 $Z_{1, 0} \to Z_1$은 두껍게 하기이고,
+유한 전사 사상 $Y_{1, i} \to Z_{1, i}$가 존재하여
+$Z_{1, i} \setminus Z_{1, i + 1}$ 위에서 유한 에탈이다.
+$Z_1$은 축소되어 있으므로 $Z_1 = Z_{1, 0}$이다.
+따라서 $Z_i = Z_{1, i - 1}$와 $Y_i = Y_{1, i - 1}$로 놓을 수 있다.
+이는 $i \geq 1$에 대한 것이며, 보조정리가 증명된다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{스킴을 얻는 방법}
+\label{spaces-limits-section-representable}
+
+\noindent
+대수공간이 스킴임을 보이는 몇 가지 기법을 더 제시한다.
+첫 번째 기법은 스킴이 아닌 최소 닫힌 부분공간이 존재함을 보이는 것이다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-minimal-closed-subspace}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+$X$가 스킴이 아니면 닫힌 부분공간 $Z \subset X$가 존재하고,
+$Z$는 스킴이 아니지만 모든 진 닫힌 부분공간 $Z' \subset Z$는 스킴이다.
+\end{lemma}
+
+\begin{proof}
+Zorn 보조정리로 증명한다. $\mathcal{Z}$를 스킴이 아닌 닫힌 부분공간
+$Z$들의 집합이라 하고 포함관계로 순서화하자.
+가정에 의해 $\mathcal{Z}$는 $X$를 포함하므로 공집합이 아니다.
+$Z_\alpha$가 $\mathcal{Z}$의 전순서 부분집합이면
+$Z = \bigcap Z_\alpha$도 $\mathcal{Z}$에 속한다. 실제로
+$$
+Z = \lim Z_\alpha
+$$
+이고 전이 사상들은 아핀이다.
+따라서 Lemma \ref{spaces-limits-lemma-limit-is-scheme}을 적용하면,
+$Z$가 스킴인 경우 어떤 $Z_\alpha$도 스킴이 됨을 알 수 있다.
+($Z = \emptyset$인 경우에도 이 논증은 성립하지만,
+Lemma \ref{spaces-limits-lemma-limit-nonempty}에 의해 이 경우는 일어날 수 없다.)
+따라서 Zorn 보조정리에 의해 $\mathcal{Z}$는 최소 원소를 가진다.
+\end{proof}
+
+\noindent
+이제 이러한 최소 비스킴에 관해 조금 더 증명할 수 있다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-minimal-nonscheme}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 준콤팩트 준분리 대수공간이라 하자.
+모든 진 닫힌 부분공간 $Z \subset X$가 스킴이지만 $X$는 스킴이 아니라고
+가정하자. 그러면 $X$는 축소되어 있고 기약이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-reduction-scheme}에 의해 $X$는 축소되어 있다.
+닫힌 부분집합 $T_1 \subset |X|$와 $T_2 \subset |X|$를 택하여
+$|X| = T_1 \cup T_2$라 하자. $T_1$과 $T_2$가 진 닫힌 부분집합이면,
+이에 대응하는 축소 유도 닫힌 부분공간 $Z_1, Z_2 \subset X$는
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space})
+스킴이다. 또한 $Z = Z_1 \times_X Z_2 = Z_1 \cap Z_2$도
+$Z_1$이나 $Z_2$의 닫힌 부분스킴으로서 스킴이다.
+여곱 $Z_1 \amalg_Z Z_2$는 스킴의 범주에서 존재함에 주의하자.
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-closed-immersions}을 보라.
+% P09-ERR-0110: frozen source's comma before “is” is immaterial in Korean.
+한 가지 방법은 $Z_1 \amalg_Z Z_2$가 $X$와 동형임을 보이는 것이지만,
+대수공간의 밀어내기에 관한 내용은 이 이론의 뒤에서 나오므로 여기서는
+이 방법을 사용할 수 없다. 대신 Lemma \ref{spaces-limits-lemma-affine}을 사용하여
+각 점의 아핀 근방을 찾는다. 구체적으로 $x \in |X|$라 하자.
+$x \not \in Z_1$이면 $x$는 스킴인 근방 $X \setminus Z_1$을 가진다.
+$x \not \in Z_2$인 경우도 마찬가지이다.
+$x \in Z = Z_1 \cap Z_2$이면 아핀 열린집합
+$U \subset Z_1 \amalg_Z Z_2$를 택하자. 이 열린집합은 $z$를 포함한다.
+% P09-ERR-0111: frozen source's undefined point z is retained literally.
+그러면 $U_1 = Z_1 \cap U$와 $U_2 = Z_2 \cap U$는 아핀 열린집합이고,
+$Z$와의 교차가 서로 같다. $|Z_1| = T_1$과 $|Z_2| = T_2$는
+$|X|$의 닫힌 부분집합이며 $|Z|$에서 교차하므로,
+열린집합 $W \subset |X|$를 찾아
+$W \cap T_1 = |U_1|$와 $W \cap T_2 = |U_2|$가 되게 할 수 있다.
+$W$를 이에 대응하는 $X$의 열린 부분공간이라고도 쓰자.
+그러면 $x \in |W|$이고 사상 $U_1 \amalg U_2 \to W$는 전사 유한 사상이며,
+그 정의역은 아핀 스킴이다. 따라서 Lemma \ref{spaces-limits-lemma-affine}에 의해
+$W$는 아핀 스킴이다.
+\end{proof}
+
+\noindent
+다음 보조정리의 핵심은 $X$의 점들의 상에서만 조건을 확인하면 된다는 것이다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-enough-local}
+$f: X \to S$를 대수공간에서 스킴 $S$로 가는 준콤팩트 준분리 사상이라 하자.
+모든 $x \in |X|$에 대해 그 상을 $s = f(x) \in S$라 할 때
+대수공간 $X \times_S \Spec(\mathcal{O}_{S,s})$가 스킴이라고 가정하자.
+그러면 $X$는 스킴이다.
+\end{lemma}
+
+\begin{proof}
+$x \in |X|$라 하자. 열린 근방 $U$를 찾아, $s = f(x)$의 근방이 되며
+$X \times_S U$가 스킴이게 하면 충분하다.
+$X \times_S \Spec(\mathcal{O}_{S, s})$는 스킴이고,
+$\mathcal{O}_{S, s} = \colim \mathcal{O}_S(U)$이다. 여기서 여극한은
+$s$의 아핀 열린 근방들, 즉 $S$ 안의 그러한 근방들을 따라 취한다. 따라서
+$$
+X \times_S \Spec(\mathcal{O}_{S, s}) = \lim X \times_S U
+$$
+이다. Lemma \ref{spaces-limits-lemma-limit-is-scheme}에 의해
+% P09-ERR-0112: frozen source's malformed paired connective is normalized only by Korean syntax.
+$X \times_S U$가 스킴인 어떤 $U$가 존재함을 알 수 있다.
+\end{proof}
+
+\noindent
+Lemma \ref{spaces-limits-lemma-enough-local}에서처럼 국소환으로 제한하는 대신,
+밑의 닫힌 부분스킴으로 제한할 수 있다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-maximal-ideal}
+$\varphi : X \to \Spec(A)$를 대수공간에서 아핀 스킴으로 가는
+준콤팩트 준분리 사상이라 하자. $X$가 스킴이 아니면
+아이디얼 $I \subset A$가 존재하여 밑변환 $X_{A/I}$는 스킴이 아니지만,
+모든 $I \subset I'$ 가운데 $I \not = I'$인 것에 대해
+밑변환 $X_{A/I'}$는 스킴이다.
+\end{lemma}
+
+\begin{proof}
+Zorn 보조정리로 증명한다. $\mathcal{I}$를 아이디얼 $I$들의 집합이라 하자.
+이들은 $X_{A/I}$가 스킴이 아닌 아이디얼들이다.
+가정에 의해 $\mathcal{I}$는 $(0)$을 포함한다.
+$I_\alpha$가 $\mathcal{I}$에 속하는 아이디얼들의 사슬이면
+$I = \bigcup I_\alpha$도 $\mathcal{I}$에 속한다. 실제로
+$A/I = \colim A/I_\alpha$이므로
+$$
+X_{A/I} = \lim X_{A/I_\alpha}
+$$
+이다. 따라서 Lemma \ref{spaces-limits-lemma-limit-is-scheme}을 적용하면,
+% P09-ERR-0113: frozen source's auxiliary inversion is normalized only by Korean syntax.
+$X_{A/I}$가 스킴인 경우 어떤 $X_{A/I_\alpha}$도 스킴이 됨을 알 수 있다.
+그러므로 Zorn 보조정리에 의해 $\mathcal{I}$는 극대 원소를 가진다.
+\end{proof}
+
+
+
+
+
+
+\section{닫힌 올에서의 붙이기}
+\label{spaces-limits-section-change-over-closed-points}
+
+\noindent
+위의 이론을 국소환의 스펙트럼에 적용하면 상대 대수공간에 관한
+몇 가지 유용한 붙이기 결과를 얻는다. 먼저 보조정리를 하나 증명한다.
+이 결과는 나중에 Bootstrap, Section
+\ref{bootstrap-section-applications}에서 크게 일반화될 것이다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-relative-glueing}
+$S = U \cup W$를 스킴의 열린 피복이라 하자. 그러면 밑변환으로 주어지는 함자
+$$
+FP_S \longrightarrow FP_U \times_{FP_{U \cap W}} FP_W
+$$
+는 범주의 동치이다. 여기서 $FP_T$는 스킴 $T$ 위에서 유한 표시인
+대수공간들의 범주이다.
+\end{lemma}
+
+\begin{proof}
+먼저 $S = U \cup W$가 Zariski 피복이므로,
+$(\Sch/S)_{fppf}$ 위의 층들의 범주는 삼중항
+$(\mathcal{F}_U, \mathcal{F}_W, \varphi)$들의 범주와 동치이다.
+여기서 $\mathcal{F}_U$는 $(\Sch/U)_{fppf}$ 위의 층이고,
+$\mathcal{F}_W$는 $(\Sch/W)_{fppf}$ 위의 층이며,
+$$
+\varphi :
+\mathcal{F}_U|_{(\Sch/U \cap W)_{fppf}}
+\longrightarrow
+\mathcal{F}_W|_{(\Sch/U \cap W)_{fppf}}
+$$
+는 동형이다. Sites, Lemma \ref{sites-lemma-mapping-property-glue}를 보라.
+(다른 붙이기 자료는 필요하지 않는다. 실제로
+$U \times_S U = U$, $W \times_S W = W$이고,
+같은 이유로 코사이클 조건은 자동으로 성립한다.)
+이제 층 $\mathcal{F}$가 $(\Sch/S)_{fppf}$ 위에 놓이고, 이 동치를 통해
+$(\mathcal{F}_U, \mathcal{F}_W, \varphi)$로 간다고 하자.
+그러면 $\mathcal{F}$가 대수공간일 필요충분조건은
+$\mathcal{F}_U$와 $\mathcal{F}_W$가 대수공간인 것이다.
+이는 Algebraic Spaces, Lemma
+\ref{spaces-lemma-glueing-algebraic-spaces}에서 즉시 따른다.
+실제로 $\mathcal{F}_U \to \mathcal{F}$와
+$\mathcal{F}_W \to \mathcal{F}$는 열린 몰입으로 표현 가능하며
+$\mathcal{F}$를 덮는다. 마지막으로 이 경우 대수공간 $\mathcal{F}$가
+$S$ 위에서 유한 표시일 필요충분조건은
+$\mathcal{F}_U$가 $U$ 위에서 유한 표시이고
+$\mathcal{F}_W$가 $W$ 위에서 유한 표시인 것이다.
+이는 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-quasi-compact-local},
+\ref{spaces-morphisms-lemma-separated-local},
+\ref{spaces-morphisms-lemma-finite-presentation-local}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-glueing-near-closed-point}
+$S$를 스킴이라 하자. $s \in S$를 닫힌점이라 하고,
+$U = S \setminus \{s\} \to S$가 준콤팩트라고 가정하자.
+$V = \Spec(\mathcal{O}_{S, s}) \setminus \{s\}$로 놓으면 범주의 동치
+$$
+FP_S \longrightarrow FP_U \times_{FP_V} FP_{\Spec(\mathcal{O}_{S, s})}
+$$
+가 존재한다. 여기서 $FP_T$는 $T$ 위에서 유한 표시인 대수공간들의 범주이다.
+\end{lemma}
+
+\begin{proof}
+$W \subset S$를 $s$의 열린 근방이라 하자. 함자
+$$
+FP_S \to FP_U \times_{FP_{W \setminus \{s\}}} FP_W
+$$
+는 Lemma \ref{spaces-limits-lemma-relative-glueing}에 의해 범주의 동치이다.
+$\mathcal{O}_{S, s} = \colim \mathcal{O}_W(W)$이고, 여기서 $W$는
+$s$의 아핀 열린 근방들을 움직인다. 따라서
+$\Spec(\mathcal{O}_{S, s}) = \lim W$이고, 여기서도 $W$는
+$s$의 아핀 열린 근방들을 움직인다.
+% P09-ERR-0114: frozen source's singular varying-category wording is rendered grammatically in Korean.
+그러므로 $\Spec(\mathcal{O}_{S, s})$ 위에서 유한 표시인 대수공간들의 범주는
+$W$ 위에서 유한 표시인 대수공간들의 범주들의 극한이다.
+여기서 $W$는 $s$의 아핀 열린 근방들을 움직인다.
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation}을 보라.
+% P09-ERR-0115: frozen source's reversed affine-open membership relation is retained.
+각 아핀 열린집합 $s \in W$에 대해 $U \cap W$는 준콤팩트이다.
+실제로 $U \to S$가 준콤팩트이기 때문이다.
+따라서 $V = \lim W \cap U = \lim W \setminus \{s\}$는
+준콤팩트 준분리 스킴들의 극한이다
+(Limits, Lemma \ref{limits-lemma-directed-inverse-system-has-limit}을 보라).
+따라서 $V$ 위에서 유한 표시인 대수공간들의 범주도
+$W \cap U$ 위에서 유한 표시인 대수공간들의 범주들의 극한이다.
+여기서 $W$는 $s$의 아핀 열린 근방들을 움직인다.
+이 결과들을 결합하면 보조정리가 형식적으로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-glueing-near-point}
+$S$를 스킴이라 하자. $U \subset S$를 retrocompact 열린집합이라 하자.
+$s \in S$를 $U$의 여집합에 속하는 점이라 하자.
+$V = \Spec(\mathcal{O}_{S, s}) \cap U$로 놓으면 범주의 동치
+$$
+\colim_{s \in U' \supset U\text{ open}} FP_{U'}
+\longrightarrow
+FP_U \times_{FP_V} FP_{\Spec(\mathcal{O}_{S, s})}
+$$
+가 존재한다. 여기서 $FP_T$는 $T$ 위에서 유한 표시인 대수공간들의 범주이다.
+\end{lemma}
+
+\begin{proof}
+$W \subset S$를 $s$의 열린 근방이라 하자.
+Lemma \ref{spaces-limits-lemma-relative-glueing}에 의해 함자
+$$
+FP_{U \cup W}
+\longrightarrow
+FP_U \times_{FP_{U \cap W}} FP_W
+$$
+는 범주의 동치이다. 다음이 성립한다.
+$\mathcal{O}_{S, s} = \colim \mathcal{O}_W(W)$.
+여기서 $W$는 $s$의 아핀 열린 근방들을 움직인다.
+따라서 $\Spec(\mathcal{O}_{S, s}) = \lim W$이고, 여기서 $W$는
+$s$의 아핀 열린 근방들을 움직인다.
+그러므로 $\Spec(\mathcal{O}_{S, s})$ 위에서 유한 표시인 대수공간들의 범주는
+$W$ 위에서 유한 표시인 대수공간들의 범주들의 극한이다.
+여기서 $W$는 $s$의 아핀 열린 근방들을 움직인다.
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation}을 보라.
+각 아핀 열린집합 $s \in W$에 대해 $U \cap W$는 준콤팩트이다.
+실제로 $U \to S$가 준콤팩트이기 때문이다.
+따라서 $V = \lim W \cap U$는 준콤팩트 준분리 스킴들의 극한이다
+(Limits, Lemma \ref{limits-lemma-directed-inverse-system-has-limit}을 보라).
+그러므로 $V$ 위에서 유한 표시인 대수공간들의 범주도
+$W \cap U$ 위에서 유한 표시인 대수공간들의 범주들의 극한이다.
+여기서 $W$는 $s$의 아핀 열린 근방들을 움직인다.
+이 결과들을 결합하면 보조정리가 형식적으로 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-glueing-near-multiple-closed-points}
+$S$를 스킴이라 하자. $s_1, \ldots, s_n \in S$를 서로 다른 닫힌점들이라 하고,
+$U = S \setminus \{s_1, \ldots, s_n\} \to S$가 준콤팩트라고 가정하자.
+$S_i = \Spec(\mathcal{O}_{S, s_i})$ 및 $U_i = S_i \setminus \{s_i\}$로 놓으면
+범주의 동치
+$$
+FP_S \longrightarrow
+FP_U \times_{(FP_{U_1} \times \ldots \times FP_{U_n})}
+(FP_{S_1} \times \ldots \times FP_{S_n})
+$$
+가 존재한다. 여기서 $FP_T$는 $T$ 위에서 유한 표시인 대수공간들의 범주이다.
+\end{lemma}
+
+\begin{proof}
+$n = 1$이면 이는 Lemma \ref{spaces-limits-lemma-glueing-near-closed-point}이다.
+$n > 1$이면 보조정리를 정확히 같은 방법으로 증명하거나 그 결과에서 유도할 수 있다.
+예를 들어 $f_i : X_i \to S_i$가 $FP_{S_i}$의 대상들이고,
+$f : X \to U$가 $FP_U$의 대상이며, 동형
+$X_i \times_{S_i} U_i = X \times_U U_i$들이 주어졌다고 하자.
+Lemma \ref{spaces-limits-lemma-glueing-near-closed-point}에 의해
+유한 표시 사상 $f' : X' \to U' = S \setminus \{s_1, \ldots, s_{n - 1}\}$를
+찾을 수 있다. 이 사상은 $X_i$와 동형이며 그 동형은 $S_i$ 위에 있고,
+% P09-ERR-0116: frozen source's X_i/S_i and X_i over S_n indices are retained literally.
+$X$와도 동형이며 그 동형은 $U$ 위에 있다. 이 동형들은 주어진 동형
+$X_i \times_{S_n} U_n = X \times_U U_n$과 양립한다.
+이제 $f_i : X_i \to S_i$, $i \leq n - 1$과
+$f' : X' \to U'$, 그리고 유도된 동형
+$X_i \times_{S_i} U_i = X' \times_{U'} U_i$, $i \leq n - 1$에
+귀납법을 적용할 수 있다. 이는 본질적 전사성을 보인다.
+% P09-ERR-0117: frozen source's malformed noun phrase is normalized only by Korean syntax.
+충만 충실성의 증명은 생략한다.
+\end{proof}
+
+\section{수정에의 응용}
+\label{spaces-limits-section-modifications-at-a-point}
+
+\noindent
+극한을 사용하면 닫힌점 위에서 decent 대수공간의 수정들의 범주를
+헨젤 국소환을 이용하여 기술할 수 있다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-excision-modifications}
+$S$를 스킴이라 하자. 대수공간들의 분리 에탈 사상
+$f : V \to W$를 생각하자. 이 사상은 $S$ 위에 있다.
+닫힌 부분공간 $T \subset W$가 존재하여
+$f^{-1}T \to T$가 동형이라고 가정하자. 그러면
+$W^0 = W \setminus T$ 및 $V^0 = f^{-1}W^0$로 놓을 때 밑변환 함자
+$$
+\left\{
+\begin{matrix}
+g : X \to W\text{는 대수공간들의 사상} \\
+g^{-1}(W^0) \to W^0\text{는 동형}
+\end{matrix}
+\right\}
+\longrightarrow
+\left\{
+\begin{matrix}
+h : Y \to V\text{는 대수공간들의 사상} \\
+h^{-1}(V^0) \to V^0\text{는 동형}
+\end{matrix}
+\right\}
+$$
+는 범주의 동치이다.
+\end{lemma}
+
+\begin{proof}
+$V \to W$가 분리이므로
+$V \times_W V = \Delta(V) \amalg U$이고, 여기서 $U$는
+$V \times_W V$의 열린닫힌 부분공간이다.
+$f^{-1}T \to T$가 동형이라는 가정에 의해
+$U \times_W T = \emptyset$이다. 즉, 두 사영 $U \to V$는 $V^0$로 간다.
+% P09-ERR-0118: frozen source's subject-verb disagreement is normalized only by Korean syntax.
+
+\medskip\noindent
+오른쪽 범주의 $h : Y \to V$가 주어졌다고 하자.
+반변 함자 $X$를 $(\Sch/S)_{fppf}$ 위에서 다음 규칙으로 정의한다.
+$$
+X(T) = \{(w, y) \mid
+w :  T \to W,\ y : T \times_{w, W} V \to Y\text{는 사상이며 그 밑은 }V\}
+$$
+% P09-ERR-0119: frozen source's missing “by” is immaterial in Korean syntax.
+$g : X \to W$를 $(w, y) \in X(T)$를 $w \in W(T)$로 보내는 사상이라 하자.
+$h^{-1}V^0 \to V^0$가 동형이므로 $w : T \to W$가 $W^0$로 가면
+$h$의 선택은 유일하다.
+% P09-ERR-0120: frozen source's choice of h, rather than y, is retained literally.
+다시 말해 $X \times_{g, W} W^0 = W^0$이다. 한편
+$T$-값 점 $(w, y, v)$를 $X \times_{g, W, f} V$에서 생각하자.
+그러면 $w = f \circ v$이고
+$$
+y : T \times_{f \circ v, W} V \longrightarrow V
+$$
+% P09-ERR-0121: frozen source's displayed codomain V is retained rather than silently changed to Y.
+는 $V$ 위의 사상이다. 사상
+$$
+T \times_{f \circ v, W} V \xrightarrow{(v, \text{id}_V)}
+V \times_W V = V \amalg U
+$$
+을 생각하자. $V$의 역상은
+$T$이고, 이는 $(\text{id}_T, v) : T \to T \times_{f \circ v, W} V$로 매장된다.
+합성 $y' = y \circ (\text{id}_T, v) : T \to Y$는
+$v = h \circ y'$를 만족하는 사상이며, 이것이 $y$를 결정한다.
+실제로 다른 부분에 대한 $y$의 제한은 두 번째 사영에 의해
+$U$가 $V^0$로 가므로 유일하게 결정된다. 따라서
+$X \times_{g, W, f} V \to Y$, $(w, y, v) \mapsto y'$는 동형이다.
+
+\medskip\noindent
+따라서 $X$가 대수공간임을 보이면 증명이 끝난다.
+$V \to W$는 분리 에탈 사상이므로 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite-separated-representable}
+(및 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-locally-quasi-finite})에 의해 표현 가능하다.
+물론 $W^0 \to W$는 열린 몰입이므로 표현 가능하고 에탈이다. 따라서
+$$
+W^0 \amalg Y = X \times_{g, W} W^0 \amalg X \times_{g, W, f} V
+= X \times_{g, W} (W^0 \amalg V) \longrightarrow X
+$$
+는 Spaces, Lemmas
+\ref{spaces-lemma-base-change-representable-transformations}와
+\ref{spaces-lemma-base-change-representable-transformations-property}에 의해
+표현 가능하고 전사이며 에탈이다. 그러므로 Spaces, Lemma
+\ref{spaces-lemma-etale-locally-representable-by-space-gives-space}에 의해
+$X$는 대수공간이다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-excision-modifications-properties}
+Lemma \ref{spaces-limits-lemma-excision-modifications}의 표기와 가정을 사용하자.
+$g : X \to W$가 그 동치를 통해 $h : Y \to V$에 대응한다고 하자.
+그러면 $g$가 준콤팩트, 준분리, 분리, 국소 유한 표시, 유한 표시,
+국소 유한형, 유한형, 고유, 정수적, 유한, 그리고 여기에 더 추가할 것인
+필요충분조건은 $h$도 그러한 것이다.
+% P09-ERR-0122: frozen source's editorial placeholder “and add more here” is retained literally.
+\end{lemma}
+
+\begin{proof}
+$g$가 준콤팩트, 준분리, 분리, 국소 유한 표시, 유한 표시,
+국소 유한형, 유한형, 고유, 유한이면, $h$도 $g$의 밑변환으로서 그러하다.
+% P09-ERR-0123: frozen source's omission of integral from this forward list is retained.
+이는 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-quasi-compact},
+\ref{spaces-morphisms-lemma-base-change-separated},
+\ref{spaces-morphisms-lemma-base-change-finite-presentation},
+\ref{spaces-morphisms-lemma-base-change-finite-type},
+\ref{spaces-morphisms-lemma-base-change-proper},
+\ref{spaces-morphisms-lemma-base-change-integral}에서 따른다.
+역으로, 대수공간의 사상들의 성질 $P$가 밑에서 에탈 국소적이고
+모든 대수공간의 항등사상에 대해 성립한다고 하자.
+$\{W^0 \to W, V \to W\}$가 에탈 피복이므로 $g$가 $P$를 가짐을 보이려면
+$h$가 $P$를 가짐을 보이는 것으로 충분하다. 따라서 Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-quasi-compact-local},
+\ref{spaces-morphisms-lemma-separated-local},
+\ref{spaces-morphisms-lemma-finite-presentation-local},
+\ref{spaces-morphisms-lemma-finite-type-local},
+\ref{spaces-morphisms-lemma-proper-local},
+\ref{spaces-morphisms-lemma-integral-local}을 사용하여 결론을 얻는다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-modifications}
+$S$를 스킴이라 하자. $X$를 $S$ 위의 decent 대수공간이라 하자.
+$x \in |X|$를 닫힌점이라 하고 $U = X \setminus \{x\} \to X$가
+준콤팩트라고 가정하자.
+$V = \Spec(\mathcal{O}_{X, x}^h) \setminus \{\mathfrak m_x^h\}$로 놓으면
+밑변환 함자
+$$
+\left\{
+\begin{matrix}
+f : Y \to X\text{는 유한 표시} \\
+f^{-1}(U) \to U\text{는 동형}
+\end{matrix}
+\right\}
+\longrightarrow
+\left\{
+\begin{matrix}
+g : Y \to \Spec(\mathcal{O}_{X, x}^h)\text{는 유한 표시} \\
+g^{-1}(V) \to V\text{는 동형}
+\end{matrix}
+\right\}
+$$
+는 범주의 동치이다.
+\end{lemma}
+
+\begin{proof}
+기본 에탈 근방 $a : (W, w) \to (X, x)$를 $x$에 대해 택하되,
+$W$가 아핀이 되게 Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-space-elementary-etale-neighbourhood}에서처럼 택하자.
+$x$는 $X$의 닫힌점이고 $w$는 $W$에서 $x$ 위에 놓이는
+유일한 점이므로, $w$는 $W$의 닫힌점이다.
+$a$는 에탈이고 $x$와 $w$에서 잉여체를 동일시하므로,
+$a$는 동형 $a^{-1}x \to x$를 유도한다
+($X$와 $W$의 닫힌 부분공간으로서). 따라서 Lemmas
+\ref{spaces-limits-lemma-excision-modifications}와
+\ref{spaces-limits-lemma-excision-modifications-properties}를 적용하여
+$X$가 아핀 스킴인 경우로 환원할 수 있다.
+
+\medskip\noindent
+$X$가 아핀 스킴이라고 가정하자. $\mathcal{O}_{X, x}^h$는
+$\Gamma(U, \mathcal{O}_U)$들의 여극한임을 상기하자. 여기서 여극한은
+아핀 기본 에탈 근방 $(U, u) \to (X, x)$들을 따라 취한다.
+이 근방들의 범주는 공여과되어 있다. Decent Spaces, Lemma
+\ref{decent-spaces-lemma-elementary-etale-neighbourhoods} 또는
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-elementary-etale-neighbourhoods}를 보라.
+그러면 같은 범주를 따라 극한을 취할 때
+$\Spec(\mathcal{O}_{X, x}^h) = \lim U$이고
+$V = \lim U \setminus \{u\}$이다
+(Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}). 따라서 Lemma
+\ref{spaces-limits-lemma-descend-finite-presentation}에 의해 오른쪽 범주는
+쌍 $(U, u)$에 대한 범주들의 여극한이다.
+% P09-ERR-0124: frozen source's broken sentence boundary is normalized only by Korean syntax.
+그리고 첫 문단의 내용에 의해 이 범주들은 각각 쌍 $(X, x)$에 대한 범주와
+동치이다. 이로써 증명이 끝난다.
+\end{proof}
+
+
+
+
+
+
+\section{보편 닫힌 사상}
+\label{spaces-limits-section-universally-closed}
+
+\noindent
+이 절에서는 준콤팩트이지만 반드시 분리일 필요는 없는 사상이
+언제 보편 닫힌 사상인지 논의한다. 먼저 국소 유한 표시인 밑변환 뒤에
+보편 닫힘을 확인할 수 있게 해 주는 보조정리를 증명한다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-separate}
+$S$를 스킴이라 하자. $f : X \to Y$와 $g : Z \to Y$를
+$S$ 위의 대수공간들의 사상이라 하자. $z \in |Z|$라 하고,
+$T \subset |X \times_Y Z|$를
+$z \not \in \Im(T \to |Z|)$인 닫힌 부분집합이라 하자.
+$f$가 준콤팩트이면, 에탈 근방 $(V, v) \to (Z, z)$와 가환 그림
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+및 닫힌 부분집합 $T' \subset |X \times_Y Z'|$가 존재하여 다음을 만족한다.
+\begin{enumerate}
+\item 사상 $b : Z' \to Y$는 국소 유한 표시이고,
+\item $z' = a(v)$로 놓으면 $z' \not \in \Im(T' \to |Z'|)$이며,
+\item $T$의 $|X \times_Y V|$ 안에서의 역상은 $T'$로 가며,
+이때 $|X \times_Y V| \to |X \times_Y Z'|$를 사용한다.
+\end{enumerate}
+또한 $V$와 $Z'$를 아핀 스킴으로 가정할 수 있으며,
+$Z$가 스킴이면 $V$를 $z$의 아핀 열린 근방으로 가정할 수 있다.
+\end{lemma}
+
+\begin{proof}
+스킴의 사상에 대한 대응하는 결과에서 이를 유도한다.
+$y \in |Y|$를 $z$의 상이라 하자. 먼저 아핀 에탈 근방
+$(U, u) \to (Y, y)$를 택하고, 이어서 아핀 에탈 근방
+$(V, v) \to (Z, z)$를 택하되 사상 $V \to Y$가 $U$를 통해
+인수분해되게 한다.
+그러면 다음과 같이 대체할 수 있다.
+\begin{enumerate}
+\item $X \to Y$를 $X \times_Y U \to U$로,
+\item $Z \to Y$를 $V \to U$로,
+\item $z$를 $v$로,
+\item $T$를
+$|(X \times_Y U) \times_U V| = |X \times_Y V|$ 안의 그 역상으로 대체한다.
+\end{enumerate}
+실제로 아래에서 $V$를 $v$의 아핀 열린 근방으로 대체한 뒤,
+사상 $a : V \to Z'$를 얻을 것이며, 여기서 $Z' \to U$는 유한 표시이다.
+또한 닫힌 부분집합 $T'$를
+$|(X \times_Y U) \times_U Z'| = |X \times_Y Z'|$ 안에서 찾아
+$T$가 $T'$로 가고 $a(v) \not \in \Im(T' \to |Z'|)$가 되게 할 것이다.
+따라서 $Z$와 $Y$가 아핀 스킴이라고 가정해도 된다. 다만 해답에서
+$V$는 $z$의 열린 근방이어야 한다.
+
+\medskip\noindent
+$f$가 준콤팩트이고 $Y$가 아핀이므로 대수공간 $X$는 준콤팩트이다.
+아핀 스킴 $W$와 전사 에탈 사상 $W \to X$를 택하자.
+$T_W \subset |W \times_Y Z|$를 $T$의 역상이라 하자.
+그러면 $z$는 $T_W$의 상에 속하지 않는다. 스킴의 경우
+(Limits, Lemma \ref{limits-lemma-separate})에 의해
+열린 근방 $V \subset Z$를 $z$에 대해 택하고, 스킴들의 가환 그림
+% P09-ERR-0125: frozen source's missing list comma is immaterial in Korean syntax.
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+및 닫힌 부분집합 $T' \subset |W \times_Y Z'|$를 찾아 다음이 성립하게 할 수 있다.
+\begin{enumerate}
+\item 사상 $b : Z' \to Y$는 국소 유한 표시이고,
+\item $z' = a(z)$로 놓으면 $z' \not \in \Im(T' \to Z')$이며,
+% P09-ERR-0126: frozen source's unbarred Z' image target is retained literally.
+\item $T_1 = T_W \cap |W \times_Y V|$는 $T'$로 가며,
+이때 $|W \times_Y V| \to |W \times_Y Z'|$를 사용한다.
+\end{enumerate}
+가환 그림
+$$
+\xymatrix{
+W \times_Y Z \ar[d] &
+W \times_Y V \ar[l] \ar[rr]_{a_1} \ar[d]_c & &
+W \times_Y Z' \ar[d]^q \\
+X \times_Y Z &
+X \times_Y V \ar[l] \ar[rr]^{a_2} & &
+X \times_Y Z'
+}
+$$
+의 정사각형들은 카르테시안이고 수직 사상들은 전사 에탈이며,
+따라서 특히 열린 사상이다.
+% P09-ERR-0127: frozen source's spurious comma after “are” is immaterial in Korean.
+왼쪽 정사각형을 보면
+$T_1 = T_W \cap |W \times_Y V|$는
+$T_2 = T \cap |X \times_Y V|$의 $c$에 의한 역상이다. Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해
+$a_1(T_1) = q^{-1}(a_2(T_2))$를 얻는다.
+Topology, Lemma \ref{topology-lemma-open-morphism-quotient-topology}에 의해
+$$
+q^{-1}\left(\overline{a_2(T_2)}\right) =
+\overline{q^{-1}(a_2(T_2))} =
+\overline{a_1(T_1)} \subset T'
+$$
+이다. $q$가 전사이므로 $\overline{a_2(T_2)} \to |Z'|$의 상은
+$z'$를 포함하지 않는다. 실제로 $T'$에 대해 같은 사실이 성립한다.
+따라서 위의 $Z', V, a, b$로 이루어진 그림과 닫힌 부분집합
+$\overline{a_2(T_2)} \subset |X \times_Y Z'|$를
+보조정리에서 요구한 해답으로 취할 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-test-universally-closed}
+$S$를 스킴이라 하자. $f : X \to Y$를
+$S$ 위의 대수공간들의 준콤팩트 사상이라 하자. 다음은 동치이다.
+\begin{enumerate}
+\item $f$는 보편 닫힌 사상이다.
+\item 국소 유한 표시인 모든 사상 $Z \to Y$에 대해
+$|X \times_Y Z| \to |Z|$는 닫힌 사상이다.
+\item 스킴 $V$와 전사 에탈 사상 $V \to Y$가 존재하여
+$|\mathbf{A}^n \times (X \times_Y V)| \to |\mathbf{A}^n \times V|$가
+모든 $n \geq 0$에 대해 닫힌 사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)이 (2)를 함의함은 분명하다.
+$|X \times_Y Z| \to |Z|$가 닫힌 사상이 아니라고 가정하자.
+여기서 $Z \to Y$는 $S$ 위의 대수공간들의 어떤 사상이다.
+이는 닫힌 부분집합 $T \subset |X \times_Y Z|$가 존재하여
+$\Im(T \to |Z|)$가 닫히지 않았다는 뜻이다.
+$z \in |Z|$를 택하되, 이는 $T$의 상의 폐포에는 속하지만
+그 상에는 속하지 않게 하자. Lemma \ref{spaces-limits-lemma-separate}를 적용하면,
+에탈 근방 $(V, v) \to (Z, z)$와 가환 그림
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+및 닫힌 부분집합 $T' \subset |X \times_Y Z'|$를 얻으며 다음이 성립한다.
+\begin{enumerate}
+\item 사상 $b : Z' \to Y$는 국소 유한 표시이고,
+\item $z' = a(v)$로 놓으면 $z' \not \in \Im(T' \to |Z'|)$이며,
+\item $T$의 $|X \times_Y V|$ 안에서의 역상은 $T'$로 가며,
+이때 $|X \times_Y V| \to |X \times_Y Z'|$를 사용한다.
+\end{enumerate}
+$z'$가 $\Im(T' \to |Z'|)$의 폐포에 속한다고 주장한다.
+그러면 $|X \times_Y Z'| \to |Z'|$가 닫힌 사상이 아니게 된다.
+이 주장은 (2)가 (1)을 함의함을 보인다. 이를 확인하기 위해
+다음 가환 그림을 생각하자.
+% P09-ERR-0128: frozen source's missing definite article is immaterial in Korean syntax.
+$$
+\xymatrix{
+X \times_Y Z \ar[d] &
+X \times_Y V \ar[l] \ar[d] \ar[r] &
+X \times_Y Z' \ar[d] \\
+Z & V \ar[l] \ar[r]^a & Z'
+}
+$$
+$T_V \subset |X \times_Y V|$를 $T$의 역상이라 하자.
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-points-cartesian}에 의해
+$T_V$의 $|V|$ 안에서의 상은 $T$의 $|Z|$ 안에서의 상의 역상이다.
+이제 $z$는 $T \to |Z|$의 상의 폐포에 속하고 $|V| \to |Z|$는
+열린 사상이므로, $v$는 $T_V \to |V|$의 상의 폐포에 속한다.
+$T_V$의 $|X \times_Y Z'|$ 안에서의 상은 $|T'|$에 포함되므로,
+% P09-ERR-0129: frozen source's underlying-space notation |T'| is retained literally.
+$z' = a(v)$는 $T'$의 상의 폐포에 속한다.
+
+\medskip\noindent
+(1)이 (3)을 함의함은 분명하다. $V \to Y$가 (3)에서와 같다고 하자.
+$X \times_Y V \to V$가 보편 닫힌 사상임을 보일 수 있으면,
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local}에 의해
+$f$는 보편 닫힌 사상이다. 따라서 $f : X \to Y$가 (2)를 만족함을
+보이면 충분하다. 여기서 $f$는 대수공간들의 준콤팩트 사상이고,
+$Y$는 스킴이며, $|\mathbf{A}^n \times X| \to |\mathbf{A}^n \times Y|$는
+모든 $n$에 대해 닫힌 사상이라고 가정한다.
+국소 유한 표시인 사상 $Z \to Y$를 택하자.
+$|X \times_Y Z| \to |Z|$가 닫힌 사상임을 보여야 한다.
+이 문제는 $Z$에서 에탈 국소적이므로 $Z$가 아핀이라고 가정해도 된다
+(몇 가지 세부사항은 생략한다). $Y$가 스킴이고 $Z$가 아핀이며
+$Z \to Y$가 국소 유한 표시이므로 몰입
+$Z \to \mathbf{A}^n \times Y$를 찾을 수 있다. Morphisms, Lemma
+\ref{morphisms-lemma-quasi-affine-finite-type-over-S}를 보라.
+카르테시안 그림
+$$
+\vcenter{
+\xymatrix{
+X \times_Y Z \ar[d] \ar[r] & \mathbf{A}^n \times X \ar[d] \\
+Z \ar[r] & \mathbf{A}^n \times Y
+}
+}
+\quad
+\begin{matrix}
+\text{이는 다음을} \\
+\text{유도한다}
+\end{matrix}
+\quad
+\vcenter{
+\xymatrix{
+|X \times_Y Z| \ar[d] \ar[r] & |\mathbf{A}^n \times X| \ar[d] \\
+|Z| \ar[r] & |\mathbf{A}^n \times Y|
+}
+}
+$$
+을 생각하자. 이 위상공간 그림의 수평 화살표들은 국소 닫힌 부분집합 위의
+위상동형이다(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subspace-induced-topology}). 따라서
+$T$를 $|X \times_Y Z|$의 임의의 닫힌 부분집합이라 하자. 이는
+닫힌 부분집합 $T'$에서 당겨오며, 그 부분집합은
+$|\mathbf{A}^n \times Y|$ 안에 있다.
+또한 가정에 의해 $T'$의 $|\mathbf{A}^n \times X|$ 안에서의 상은 닫혀 있다.
+% P09-ERR-0130: frozen source's reversed ambient spaces for T' and its image are retained literally.
+그러므로 원하는 대로 $T$의 $|Z|$ 안에서의 상은 닫혀 있다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-limited-base-change}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $f$가 분리이고 유한형이라고 가정하자.
+% P09-ERR-0131: frozen source's missing copula is immaterial in Korean syntax.
+다음은 동치이다.
+\begin{enumerate}
+\item 사상 $f$는 고유이다.
+\item 국소 유한 표시인 임의의 사상 $Y \to Z$에 대해
+$|X \times_Y Z| \to |Z|$는 닫힌 사상이다.
+% P09-ERR-0132: frozen source's reversed Y-to-Z base-change direction is retained literally.
+\item 스킴 $V$와 전사 에탈 사상 $V \to Y$가 존재하여
+$|\mathbf{A}^n \times (X \times_Y V)| \to |\mathbf{A}^n \times V|$가
+모든 $n \geq 0$에 대해 닫힌 사상이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+고유 사상은 분리이고 유한형이며 보편 닫힌 사상인 것과 같은 개념이므로,
+이 보조정리는 Lemma \ref{spaces-limits-lemma-test-universally-closed}의 특수한 경우이다.
+\end{proof}
+
+
+\section{Noether 부치환 판정법}
+\label{spaces-limits-section-Noetherian-valuative-criterion}
+
+\noindent
+Cohomology of Spaces, Section
+\ref{spaces-cohomology-section-Noetherian-valuative-criterion}에서 이미
+몇 가지 결과를 증명했다. 스킴에 대한 대응하는 절은
+Limits, Section \ref{limits-section-Noetherian-valuative-criterion}이다.
+
+\medskip\noindent
+이 절의 많은 결과는 다음 보조정리를 인용하여 증명할 수 있고
+(어쩌면 그렇게 해야 하지만), 항상 그렇게 하지는 않았다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-reach-point-closure-Noetherian}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $f$가 유한형이고 $Y$가 국소 Noether라고 가정하자.
+% P09-ERR-0133: frozen source's missing copula is immaterial in Korean syntax.
+$y \in |Y|$를 $|f|$의 상의 폐포에 속하는 점이라 하자.
+그러면 가환 그림
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d]^f \\
+\Spec(A) \ar[r] & Y
+}
+$$
+가 존재한다. 여기서 $A$는 이산 부치환환이고 $K$는 그 분수체이며,
+$\Spec(A)$의 닫힌점을 $y$로 보낸다. 또한
+$x \in |X|$를 $\Spec(K) \to X$에 대응하는 점이라 하면,
+이 점이 여차원 $0$인 점이라고
+가정할 수 있다\footnote{Properties of Spaces, Section
+\ref{spaces-properties-section-generic-points}의 논의를 보라.}.
+또한 $K$는 $X$ 위에서 에탈인 어떤 스킴의 점의 잉여체라고 가정할 수 있다.
+\end{lemma}
+
+\begin{proof}
+아핀 스킴 $V$, 점 $v \in V$, 그리고 에탈 사상 $V \to Y$를 택하자.
+이 사상은 $v$를 $y$로 보낸다. 사상 $|V| \to |Y|$는 열려 있고,
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-points-cartesian}에 의해
+$|X \times_Y V| \to |V|$의 상은 $|f|$의 상의 역상이다.
+따라서 점 $v$는 $|X \times_Y V| \to |V|$의 상의 폐포에 속한다.
+$X \times_Y V \to V$와 점 $v$에 대해 보조정리를 증명하면,
+$f$와 $y$에 대해서도 보조정리가 따른다. 이와 같이 다음 문단에서
+설명하는 상황으로 환원한다.
+
+\medskip\noindent
+$f : X \to Y$와 $y \in |Y|$가 보조정리에서와 같고
+$Y$가 아핀 스킴이라고 가정하자. $f$가 준콤팩트이므로 $X$는 준콤팩트이다.
+따라서 아핀 스킴 $W$와 전사 에탈 사상 $W \to X$를 택할 수 있다.
+그러면 $|f|$의 상은 $W \to Y$의 상과 같다. 이로써 스킴의 경우로
+환원되며, 그 경우는 Limits, Lemma
+\ref{limits-lemma-reach-point-closure-Noetherian}이다.
+\end{proof}
+
+\noindent
+먼저 분리에 관한 결과를 진술한다. 밑스킴 $S$ 위의 대수공간들의
+사상으로 이루어진 다음 모양의 실선 가환 그림을 자주 사용할 것이다.
+\begin{equation}
+\label{spaces-limits-equation-valuative}
+\vcenter{
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & Y
+}
+}
+\end{equation}
+여기서 $A$는 부치환환이고 $K$는 그 분수체이다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-Noetherian-dvr-valuative-separation}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $f$가 준분리이고 국소 유한형이며
+$Y$가 국소 Noether라고 가정하자. 다음은 동치이다.
+\begin{enumerate}
+\item 사상 $f$는 분리이다.
+\item 임의의 그림 (\ref{spaces-limits-equation-valuative})에서 점선 화살표는 많아야 하나이다.
+\item $A$가 이산 부치환환인 모든 그림 (\ref{spaces-limits-equation-valuative})에서
+점선 화살표는 많아야 하나이다.
+\item $A$가 이산 부치환환이고 $\Spec(K) \to X$의 상이
+여차원 $0$인 $X$의 점인 모든 그림 (\ref{spaces-limits-equation-valuative})에서
+점선 화살표는 많아야 하나이다.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-separated-implies-valuative}에 의해
+(1) $\Rightarrow$ (2)이다. (2) $\Rightarrow$ (3)과
+(3) $\Rightarrow$ (4)는 자명하다. (4)가 (1)을 함의함을 보이면 된다.
+
+\medskip\noindent
+(4)를 가정하자. 대각사상
+$\Delta : X \to X \times_Y X$가 닫힌 몰입임을 보여야 한다.
+$\Delta$가 표현 가능하고 분리이며 단사상이고 국소 유한형임은 이미 안다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-properties-diagonal}를 보라.
+아핀 스킴 $U$와 에탈 사상 $U \to X \times_Y X$를 택하자.
+$V = X \times_{\Delta, X \times_Y X} U$로 놓는다.
+$V \to U$가 닫힌 몰입임을 보이면 충분하다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local}).
+$X \times_Y X$는 $Y$ 위에서 국소 유한형이므로 $U$는 Noether이다
+(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-type},
+\ref{spaces-morphisms-lemma-base-change-finite-type}, 및
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}을 사용한다).
+$V$는 스킴임에 주의하자. 이는 $\Delta$가 표현 가능하기 때문이다.
+또한 $V$는 준콤팩트이다. 이는 $f$가 준분리이기 때문이다.
+따라서 $V \to U$는 분리이고 유한형이다. 스킴의 사상들의 가환 그림
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & V \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & U
+}
+$$
+을 생각하자. 여기서 $A$는 분수체 $K$를 갖는 이산 부치환환이고,
+$K$는 Noether 스킴 $V$의 일반점 하나의 잉여체이다.
+$V \to X$는 에탈이므로(에탈 사상 $U \to X \times_Y X$의 밑변환),
+$\Spec(K) \to V \to X$의 상은 여차원 $0$인 점이다.
+Properties of Spaces, Section
+\ref{spaces-properties-section-dimension-local-ring}을 보라.
+합성 $\Spec(A) \to U \to X \times_Y X$를 사상들의 쌍
+$a, b : \Spec(A) \to X$로 해석할 수 있다. 이 사상들은 $Y$로 가는
+사상으로서 일치하고, $\Spec(K)$로 제한하면 같으며, 이 제한은
+여차원 $0$인 점으로 간다. 따라서 가정 (4)에 의해 $a = b$이고,
+그림의 점선 화살표를 얻는다. Limits, Lemma
+\ref{limits-lemma-Noetherian-dvr-valuative-proper}에 의해
+$V \to U$는 고유이다. 다시 말해 $\Delta$는 고유이다.
+$\Delta$가 단사상이므로 $\Delta$는 원하는 대로 닫힌 몰입이다
+(\'Etale Morphisms, Lemma
+\ref{etale-lemma-characterize-closed-immersion}).
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-Noetherian-dvr-valuative-proper}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $f$가 준분리이고 유한형이며 $Y$가 국소 Noether라고
+가정하자. 다음은 동치이다.
+\begin{enumerate}
+\item $f$는 고유이다.
+\item $f$는 부치환 판정법을 만족한다. Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-valuative-criterion}을 보라.
+\item 임의의 그림 (\ref{spaces-limits-equation-valuative})에 점선 화살표가 정확히 하나 존재한다.
+\item $A$가 이산 부치환환인 모든 그림 (\ref{spaces-limits-equation-valuative})에
+점선 화살표가 정확히 하나 존재한다.
+\item $A$가 이산 부치환환이고 $\Spec(K) \to X$의 상이
+여차원 $0$인 $X$의 점인 모든 그림 (\ref{spaces-limits-equation-valuative})에
+점선 화살표가 정확히 하나 존재한다\footnote{존재성 부분에서
+이산 부치환환을 확대한 뒤 점선 화살표가 존재하기만 하면 된다는
+더 정밀한 정식화가 있다.}.
+% P09-ERR-0134: Korean uses one terminal punctuation mark; the frozen source doubles it around this footnote.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-characterize-proper}에 의해
+(1) $\Leftrightarrow$ (2) $\Leftrightarrow$ (3)이다.
+(3) $\Rightarrow$ (4) $\Rightarrow$ (5)임은 분명하다.
+증명을 끝내기 위해 이제 (5)가 (1)을 함의함을 보인다.
+
+\medskip\noindent
+(5)를 가정하자. Lemma \ref{spaces-limits-lemma-Noetherian-dvr-valuative-separation}에 의해
+$f$는 분리이다. 증명을 끝내려면 $f$가 보편 닫힌 사상임을 보이면 충분하다.
+$V \to Y$를 에탈 사상이라 하고 $V$는 아핀 스킴이라고 하자.
+밑변환 $V \times_Y X \to V$가 보편 닫힌 사상임을 보이면 충분하다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local}을 보라.
+다음 그림
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & V \times_Y X \ar[d] \ar[r] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] \ar@{..>}[rru] & V \ar[r] & Y
+}
+$$
+을 생각하자. 이는 $S$ 위의 대수공간들의 가환 그림이다.
+여기서 $A$는 분수체 $K$를 갖는 이산 부치환환이고,
+$\Spec(K) \to V \times_Y X$는 여차원 $0$인 대수공간
+$V \times_Y X$의 점으로 간다. $V \times_Y X \to X$가 에탈이므로
+$\Spec(K) \to X$의 상은 여차원 $0$인 $X$의 점이다.
+따라서 (5)에 의해 그림의 두 점선 화살표 중 더 긴 것을 얻고,
+물론 더 짧은 것도 얻는다. 그러므로 사상 $V \times_Y X \to V$에 대해
+가정들이 성립하며, 다음 문단에서 논의하는 경우로 환원된다.
+
+\medskip\noindent
+$Y$가 Noether 아핀 스킴이라고 가정하자.
+% P09-ERR-0135: frozen source's “Aassume” typo is normalized in Korean.
+이 경우 $X$는 분리 Noether 대수공간이며
+($f$가 분리임은 이미 안다) $Y$ 위에서 유한형이다.
+(특히 대수공간 $X$는 스킴인 조밀 열린 부분공간을 가진다. Properties of Spaces,
+Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}을 보라.
+엄밀히 말해 이 사실은 필요하지 않다.)
+준사영 스킴 $X'$를 $Y$ 위에서 택하고, 고유 전사 사상 $X' \to X$도
+Chow 보조정리의 약한 형태
+(Cohomology of Spaces, Lemma \ref{spaces-cohomology-lemma-weak-chow})에서처럼 택하자.
+$X'$를 $X$의 한 기약성분을 지배하는 기약성분들의 분리합으로 대체해도 된다.
+세부사항은 생략한다. 특히 스킴 $X'$의 일반점들이 여차원 $0$인
+$X$의 점들로 가게 할 수 있다(이 경우 이 점들은 정확히 $X$의 일반점들이다).
+$X' \to Y$가 고유라고 주장한다. 이 주장은 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-image-proper-is-proper}에 의해
+$X$가 $Y$ 위에서 고유임을 함의한다. 이를 증명하기 위해 Limits, Lemma
+\ref{limits-lemma-Noetherian-dvr-valuative-proper}에 따라 모든 실선 가환 그림
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X' \ar[r] & X \ar[d] \\
+\Spec(A) \ar[rr] \ar@{-->}[ru]^a \ar@{-->}[rru]_b & & Y
+}
+$$
+에서 다음을 증명하면 충분하다. 여기서 $A$는 분수체 $K$를 갖는
+이산 부치환환이고, $K$는 $X'$의 일반점 하나의 잉여체이다.
+점선 화살표 $a$를 찾으면 된다($X'$가 분리이므로 유일성은 이미 안다).
+가정 (5)에 의해 점선 화살표 $b$를 찾을 수 있다.
+그러면 사상 $X' \times_{X, b} \Spec(A) \to \Spec(A)$는
+스킴들의 고유 사상이고, 스킴 사상에 대한 부치환 판정법에 의해
+$b$를 원하는 사상 $a$로 올릴 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-check-universally-closed-Noetherian}
+$S$를 스킴이라 하자. $f : X \to Y$를 $S$ 위의 대수공간들의
+사상이라 하자. $Y$가 국소 Noether이고 $f$가 유한형이라고 가정하자.
+그러면 다음은 동치이다.
+\begin{enumerate}
+\item $f$는 보편 닫힌 사상이다.
+\item $f$는 부치환 판정법의 존재성 부분을 만족한다.
+\item 스킴 $V$와 전사 에탈 사상 $V \to Y$가 존재하여
+$|\mathbf{A}^n \times X \times_Y V| \to |\mathbf{A}^n \times V|$가
+모든 $n \geq 0$에 대해 닫힌 사상이다.
+\item $A$가 이산 부치환환인 모든 그림 (\ref{spaces-limits-equation-valuative})에 대해
+체의 유한 분리 확대 $K'/K$, 이산 부치환환 $A' \subset K'$ 중
+$A$를 지배하는 것, 그리고 다음 그림을 가환으로 만드는 사상
+$\Spec(A') \to X$가 존재한다.
+% P09-ERR-0136: frozen source's duplicated “there” is normalized only by Korean syntax.
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d] & \Spec(K) \ar[r] & X \ar[d] \\
+\Spec(A') \ar[r] \ar[rru] & \Spec(A) \ar[r] & Y
+}
+$$
+\item $A$가 이산 부치환환인 모든 그림 (\ref{spaces-limits-equation-valuative})에 대해
+체 확대 $K'/K$, 부치환환 $A' \subset K'$ 중 $A$를 지배하는 것, 그리고
+다음 그림을 가환으로 만드는 사상 $\Spec(A') \to X$가 존재한다.
+% P09-ERR-0137: frozen source's duplicated “there” is normalized only by Korean syntax.
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d] & \Spec(K) \ar[r] & X \ar[d] \\
+\Spec(A') \ar[r] \ar[rru] & \Spec(A) \ar[r] & Y
+}
+$$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-test-universally-closed}와 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-existence-universally-closed}에 의해
+(1), (2), (3)은 동치이다. 이 동치 조건들은 (4)를 함의한다.
+실제로 Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-separable-enough}에 의해
+부치환 판정법의 존재성 부분에서 $K'/K$를 항상 유한 분리 확대가 되게
+택할 수 있고, 그러면 Krull--Akizuki에 의해 $A'$는 자동으로
+이산 부치환환이다(Algebra, Lemma \ref{algebra-lemma-krull-akizuki}).
+(4) $\Rightarrow$ (5)는 자명하다. 나머지 증명에서는 (5)가 (1)을
+함의함을 보인다.
+
+\medskip\noindent
+(5)를 가정하자. 아핀 스킴 $V$와 에탈 사상 $V \to Y$를 택하자.
+% P09-ERR-0138: frozen source's “Chose” typo is normalized in Korean.
+$f$의 $V$로의 밑변환이 보편 닫힌 사상임을 보이면 충분하다.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local}을 보라.
+Lemma \ref{spaces-limits-lemma-Noetherian-dvr-valuative-proper}의 증명에서와 정확히 같이,
+가정 (5)는 이 밑변환으로 계승된다. 세부사항은 생략한다.
+이로써 다음 문단에서 논의하는 경우로 환원된다.
+
+\medskip\noindent
+$Y$가 Noether 아핀 스킴이고 (5)가 성립한다고 가정하자.
+$f$가 보편 닫힌 사상임을 증명하려면
+$|X \times \mathbf{A}^n| \to |Y \times \mathbf{A}^n|$가 모든 $n$에 대해
+닫힌 사상임을 보이면 충분하다(위의 논의에 의해).
+가정 (5)는 곱사상 $X \times \mathbf{A}^n \to Y \times \mathbf{A}^n$으로
+계승되므로(세부사항은 생략한다),
+$|X| \to |Y|$가 닫힌 사상임을 증명하는 것으로 환원된다.
+
+\medskip\noindent
+$Y$가 Noether 아핀 스킴이고 (5)가 성립한다고 가정하자.
+$T \subset |X|$를 닫힌 부분집합이라 하자. $T$의 $|Y|$ 안에서의 상이
+닫혔음을 보여야 한다. $X$를 $T$ 위의 축소 유도 닫힌 부분공간 구조로
+대체해도 된다. 이 대체가 성질 (5)를 보존한다는 확인은 생략한다.
+따라서 $|X| \to |Y|$의 상이 닫혔음을 증명하는 것으로 환원된다.
+
+\medskip\noindent
+$y \in |Y|$를 $|X| \to |Y|$의 상의 폐포에 속하는 점이라 하자.
+Lemma \ref{spaces-limits-lemma-reach-point-closure-Noetherian}에 의해 가환 그림
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d]^f \\
+\Spec(A) \ar[r] & Y
+}
+$$
+을 택할 수 있다. 여기서 $A$는 이산 부치환환이고 $K$는 그 분수체이며,
+$\Spec(A)$의 닫힌점을 $y$로 보낸다. 성질 (5)에 의해 즉시
+$y$는 $|X| \to |Y|$의 상에 속한다. 증명이 끝났다.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{정밀한 Noether 부치환 판정법}
+\label{spaces-limits-section-refined-valuative-criteria}
+
+\noindent
+이 절은 Limits, Section
+\ref{limits-section-refined-valuative-criteria}에 대응한다.
+부치환 판정법을 확인할 때 가능한 모든 부치환환 그림을
+생각할 필요는 보통 없다.
+
+\begin{lemma}
+\label{spaces-limits-lemma-refined-valuative-criterion-proper}
+$S$를 스킴이라 하자. $f : X \to Y$와 $h : U \to X$를
+$S$ 위의 대수공간들의 사상이라 하자. $Y$가 국소 Noether이고,
+$f$와 $h$가 유한형이며, $f$가 분리이고,
+$|h| : |U| \to |X|$의 상이 $|X|$에서 조밀하다고 가정하자.
+임의의 실선 가환 그림
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & U \ar[r]^h & X \ar[d]^f \\
+\Spec(A) \ar[rr] \ar@{-->}[rru] & & Y
+}
+$$
+이 주어졌을 때, 여기서 $A$는 분수체 $K$를 갖는 이산 부치환환이고,
+그림을 가환으로 만드는 점선 화살표가 존재한다면 $f$는 고유이다.
+\end{lemma}
+
+\begin{proof}
+$f$가 보편 닫힌 사상임을 보이면 충분하다.
+$V \to Y$를 에탈 사상이라 하고 $V$는 아핀 스킴이라고 하자.
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local}에 의해 밑변환
+$X \times_Y V \to V$가 보편 닫힌 사상임을 보이면 충분하다.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian}에 의해 $I$를
+$|U \times_Y V| \to |X \times_Y V|$의 상이라 하면,
+이는 $|h|$의 상의 역상이다.
+$|X \times_Y V| \to |X|$가 열린 사상이므로
+(Properties of Spaces, Lemma \ref{spaces-properties-lemma-etale-open}),
+$I$는 $|X \times_Y V|$에서 조밀하다. 따라서 보조정리의 가정들은
+사상들 $U \times_Y V \to X \times_Y V \to V$에 대해 성립한다.
+그러므로 $Y$가 아핀 스킴이라고 가정해도 된다.
+
+\medskip\noindent
+$Y$가 아핀 스킴이라고 가정하자. 그러면 $U$는 준콤팩트이다.
+아핀 스킴 하나와 전사 에탈 사상 $W \to U$를 택하자.
+% P09-ERR-0139: frozen source leaves the affine scheme unnamed before introducing W; retained literally.
+이제 $U$를 $W$로 대체하고 $U$가 아핀이라고 가정해도 된다.
+Chow 보조정리의 약한 형태
+(Cohomology of Spaces, Lemma \ref{spaces-cohomology-lemma-weak-chow})에 의해
+전사 고유 사상 $X' \to X$를 택할 수 있으며, 여기서 $X'$는 스킴이다.
+그러면 $U' = X' \times_X U$는 스킴이고 $U' \to X'$는 유한형이다.
+$X'$를 $h' : U' \to X'$의 스킴론적 상으로 대체할 수 있으며,
+따라서 $h'(U')$는 $X'$에서 조밀하다. 모든 그림
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & U' \ar[r]^h & X' \ar[d]^{f'} \\
+\Spec(A) \ar[rr] \ar@{-->}[rru] & & Y
+}
+$$
+% P09-ERR-0140: frozen diagram label h is retained rather than silently changed to h'.
+에서 다음이 성립한다고 주장한다. 여기서 $A$는 분수체 $K$를 갖는
+이산 부치환환이며, 그림을 가환으로 만드는 점선 화살표가 존재한다.
+실제로 먼저 보조정리의 가정에 의해 화살표 $\Spec(A) \to X$를 얻고,
+이어서 고유성의 부치환 판정법을 사용하여 이를 화살표
+$\Spec(A) \to X'$로 올린다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-characterize-proper}).
+사상 $X' \to Y$는 고유 사상과 분리 사상의 합성이므로 분리이다.
+따라서 스킴의 경우에 의해 $X' \to Y$는 고유이다
+(Limits, Lemma
+\ref{limits-lemma-refined-valuative-criterion-proper}).
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-image-proper-is-proper}에 의해
+$X \to Y$가 고유라고 결론짓는다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-refined-valuative-criterion-separated}
+$S$를 스킴이라 하자. $f : X \to Y$와 $h : U \to X$를
+$S$ 위의 대수공간들의 사상이라 하자. $Y$가 국소 Noether이고,
+$f$가 국소 유한형이고 준분리이며, $h$가 유한형이고,
+$|h| : |U| \to |X|$의 상이 $|X|$에서 조밀하다고 가정하자.
+임의의 실선 가환 그림
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & U \ar[r]^h & X \ar[d]^f \\
+\Spec(A) \ar[rr] \ar@{-->}[rru] & & Y
+}
+$$
+이 주어졌을 때, 여기서 $A$는 분수체 $K$를 갖는 이산 부치환환이고,
+그림을 가환으로 만드는 점선 화살표가 많아야 하나라면 $f$는 분리이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-refined-valuative-criterion-proper}를 사상들
+$U \to X$와 $\Delta : X \to X \times_Y X$에 적용한다.
+조건들을 확인하자. $\Delta$는 준콤팩트이다. 이는 $f$가 준분리이기 때문이다.
+물론 $\Delta$는 국소 유한형이고 분리이다(이는 모든 대각사상에 참이다).
+마지막으로 실선 가환 그림
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & U \ar[r]^h & X \ar[d]^\Delta \\
+\Spec(A) \ar[rr]^{(a, b)} \ar@{-->}[rru] & & X \times_Y X
+}
+$$
+이 주어졌다고 하자. 여기서 $A$는 분수체 $K$를 갖는 이산 부치환환이다.
+그러면 $a$와 $b$는 보조정리의 그림에서 두 점선 화살표를 주므로 같아야 한다.
+따라서 점선 화살표로 $a = b$를 사용할 수 있으며, 이것이 존재성을 준다.
+이로써 증명이 끝난다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-refined-valuative-criterion-universally-closed}
+$S$를 스킴이라 하자. $f : X \to Y$와 $h : U \to X$를
+$S$ 위의 대수공간들의 사상이라 하자. $Y$가 국소 Noether이고,
+$f$와 $h$가 유한형이며, $f$가 준분리이고,
+$h(U)$가 $X$에서 조밀하다고 가정하자. 임의의 실선 가환 그림
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & U \ar[r]^h & X \ar[d]^f \\
+\Spec(A) \ar[rr] \ar@{-->}[rru] & & Y
+}
+$$
+이 주어졌을 때, 여기서 $A$는 분수체 $K$를 갖는 이산 부치환환이고,
+그림을 가환으로 만드는 점선 화살표가 유일하게 존재한다면 $f$는 고유이다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{spaces-limits-lemma-refined-valuative-criterion-separated}와
+\ref{spaces-limits-lemma-refined-valuative-criterion-proper}를 결합하라.
+\end{proof}
+
+
+
+
+
+
+
+\section{유한형 공간의 하강}
+\label{spaces-limits-section-finite-type-quasi-separated}
+
+\noindent
+이 절에서는 Section \ref{spaces-limits-section-finite-type-closed-in-finite-presentation}의
+주제를 Section \ref{spaces-limits-section-descending-relative}에서 논의한 결과들의
+정신에 따라 잇는다.
+또한 대수공간에 대한 Limits, Section
+\ref{limits-section-finite-type-quasi-separated}의 유사물이다.
+
+\begin{situation}
+\label{spaces-limits-situation-limit-noetherian}
+$S$를 스킴이라 하자. 예를 들어 $\Spec(\mathbf{Z})$로 둘 수 있다.
+$B = \lim_{i \in I} B_i$를 $S$ 위의 Noether 공간들의 유향 역계의
+극한이라 하자. 전이 사상 $B_{i'} \to B_i$는 $i' \geq i$일 때 아핀이다.
+\end{situation}
+
+\begin{lemma}
+\label{spaces-limits-lemma-good-diagram}
+Situation \ref{spaces-limits-situation-limit-noetherian}의 상황이라 하자.
+$X \to B$를 준분리 유한형인 대수공간들의 사상이라 하자.
+그러면 $i \in I$와 그림
+\begin{equation}
+\label{spaces-limits-equation-good-diagram}
+\vcenter{
+\xymatrix{
+X \ar[r] \ar[d] & W \ar[d] \\
+B \ar[r] & B_i
+}
+}
+\end{equation}
+가 존재하여 $W \to B_i$는 유한형이고, 유도된 사상
+$X \to B \times_{B_i} W$는 닫힌 몰입이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-finite-type-closed-in-finite-presentation}에 의해
+닫힌 몰입 $X \to X'$를 $B$ 위에서 찾을 수 있으며,
+$X'$는 $B$ 위의 유한 표시 대수공간이다.
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation}에 의해 $i$와
+유한 표시 사상 $X'_i \to B_i$를 찾을 수 있고, 그 당김은 $X'$이다.
+$W = X'_i$로 놓자.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-limit-from-good-diagram}
+Situation \ref{spaces-limits-situation-limit-noetherian}의 상황이라 하자.
+$X \to B$를 준분리 유한형인 대수공간들의 사상이라 하자.
+$i \in I$와 (\ref{spaces-limits-equation-good-diagram})에서와 같은 그림
+$$
+\vcenter{
+\xymatrix{
+X \ar[r] \ar[d] & W \ar[d] \\
+B \ar[r] & B_i
+}
+}
+$$
+가 주어졌다고 하자. $i' \geq i$에 대해 $X_{i'}$를
+$X \to B_{i'} \times_{B_i} W$의 스킴론적 상이라 하자.
+그러면 $X = \lim_{i' \geq i} X_{i'}$이다.
+\end{lemma}
+
+\begin{proof}
+$X$가 준콤팩트이고 준분리이므로
+$X \to B_{i'} \times_{B_i} W$의 스킴론적 상의 형성은 에탈 국소화와 가환한다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-scheme-theoretic-image}).
+따라서 $W$가 아핀이고 어떤 아핀 $U_i$로 가며, 이 아핀은
+$B_i$ 위에서 에탈이라고 가정해도 된다. 그러면
+$$
+B_{i'} \times_{B_i} W =
+B_{i'} \times_{B_i} U_i \times_{U_i} W =
+U_{i'} \times_{U_i} W
+$$
+이다. 여기서 $U_{i'} = B_{i'} \times_{B_i} U_i$는 전이 사상들이
+아핀이므로 아핀이다. 따라서 보조정리는 스킴의 경우, 즉 Limits, Lemma
+\ref{limits-lemma-limit-from-good-diagram}에서 따른다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-morphism-good-diagram}
+Situation \ref{spaces-limits-situation-limit-noetherian}의 상황이라 하자.
+$f : X \to Y$를 $B$ 위에서 준분리이고 유한형인 대수공간들의 사상이라 하자.
+다음 두 그림을 택하자.
+$$
+\vcenter{
+\xymatrix{
+X \ar[r] \ar[d] & W \ar[d] \\
+B \ar[r] & B_{i_1}
+}
+}
+\quad\text{그리고}\quad
+\vcenter{
+\xymatrix{
+Y \ar[r] \ar[d] & V \ar[d] \\
+B \ar[r] & B_{i_2}
+}
+}
+$$
+이들은 (\ref{spaces-limits-equation-good-diagram})에서와 같은 그림들이다.
+Lemma \ref{spaces-limits-lemma-limit-from-good-diagram}에서와 같은 대응하는 극한 표현을
+$X = \lim_{i \geq i_1} X_i$ 및
+$Y = \lim_{i \geq i_2} Y_i$라 하자.
+그러면 $i_0 \geq \max(i_1, i_2)$가 되게 택할 수 있고, 사상
+$$
+(f_i)_{i \geq i_0} : (X_i)_{i \geq i_0} \to (Y_i)_{i \geq i_0}
+$$
+이 존재한다. 이는 역계 $(B_i)_{i \geq i_0}$ 위의 사상이며,
+$f = \lim_{i \geq i_0} f_i$이다.
+% P09-ERR-0141: frozen source's duplicated “such that” is normalized in Korean.
+두 번째 역계 사상
+$(g_i)_{i \geq i_0} : (X_i)_{i \geq i_0} \to (Y_i)_{i \geq i_0}$가
+$(B_i)_{i \geq i_0}$ 위에 있고 $f = \lim_{i \geq i_0} g_i$라면,
+% P09-ERR-0142: frozen source's second duplicated “such that” is normalized in Korean.
+$f_i = g_i$가 모든 $i \gg i_0$에 대해 성립한다.
+\end{lemma}
+
+\begin{proof}
+$V \to B_{i_2}$가 유한 표시이고
+$X = \lim_{i \geq i_1} X_i$이므로 Proposition
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation}과 이를 개선한 Lemma
+\ref{spaces-limits-lemma-better-characterize-relative-limit-preserving}를 적용할 수 있다.
+따라서 $i_0 \geq \max(i_1, i_2)$가 되게 택하고, 사상
+$h : X_{i_0} \to V$를 $B_{i_2}$ 위에서 찾아,
+$X \to X_{i_0} \to V$가 $X \to Y \to V$와 같게 할 수 있다.
+$i \geq i_0$에 대해 실선 가환 그림
+$$
+\xymatrix{
+X \ar[d] \ar[r] &
+X_i \ar[r] \ar@{..>}[d] \ar@/_2pc/[dd] |!{[d];[ld]}\hole &
+X_{i_0} \ar[d]^h \\
+Y \ar[r] \ar[d] & Y_i \ar[r] \ar[d] & V \ar[d] \\
+B \ar[r] & B_i \ar[r] & B_{i_0}
+}
+$$
+을 얻는다. $X \to X_i$의 상은 스킴론적으로 조밀하고,
+$Y_i$는 $Y \to B_i \times_{B_{i_2}} V$의 스킴론적 상이므로,
+그림이 유도하는 사상 $X_i \to B_i \times_{B_{i_2}} V$는 $Y_i$를 통해
+인수분해된다(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-factor-factor}). 이것이 존재성을 증명한다.
+
+\medskip\noindent
+유일성을 보이자. $E_i \to X_i$를 $f_i$와 $g_i$의 동등자라 하자
+($i \geq i_0$). 그러면
+$E_i = Y_i \times_{\Delta, Y_i \times_{B_i} Y_i, (f_i, g_i)} X_i$이다.
+따라서 $E_i \to X_i$는 $Y_i$의 $B_i$ 위 대각사상의 밑변환으로서
+유한 표시 단사상이다. Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-properties-diagonal}와
+\ref{spaces-morphisms-lemma-diagonal-morphism-finite-type}를 보라.
+$X_i$는 $B_i \times_{B_{i_0}} X_{i_0}$의 닫힌 부분공간이고
+$Y_i$도 마찬가지이므로
+$$
+E_i =
+X_i \times_{(B_i \times_{B_{i_0}} X_{i_0})} (B_i \times_{B_{i_0}} E_{i_0}) =
+X_i \times_{X_{i_0}} E_{i_0}
+$$
+이다. 마찬가지로 $X = X \times_{X_{i_0}} E_{i_0}$이다.
+따라서 Lemma \ref{spaces-limits-lemma-descend-isomorphism}에 의해
+$E_i = X_i$가 충분히 큰 $i$에 대해 성립한다고 결론짓는다.
+\end{proof}
+
+\begin{remark}
+\label{spaces-limits-remark-finite-type-gives-well-defined-system}
+Situation \ref{spaces-limits-situation-limit-noetherian}에서 Lemmas
+\ref{spaces-limits-lemma-good-diagram}, \ref{spaces-limits-lemma-limit-from-good-diagram},
+\ref{spaces-limits-lemma-morphism-good-diagram}은 $B$ 위에서 준분리이고 유한형인
+대수공간들의 범주가 $(B_i)_{i \in I}$ 위 대수공간들의 특정한 유형의
+역계 범주와 동치임을 말한다. 여기서 그 역계들은 Lemma
+\ref{spaces-limits-lemma-limit-from-good-diagram}을
+(\ref{spaces-limits-equation-good-diagram}) 꼴의 그림에 적용하여 얻는 것들이다.
+예를 들어 유한형이고 준분리인 $X \to B$가 주어졌을 때,
+서로 다른 두 그림 $X \to V_1 \to B_{i_1}$와
+$X \to V_2 \to B_{i_2}$를 택하고, 이들이
+(\ref{spaces-limits-equation-good-diagram})에서와 같다고 하자.
+그러면 $\text{id}_X$에 Lemma \ref{spaces-limits-lemma-morphism-good-diagram}을
+(두 방향으로) 적용함으로써, 이에 대응하는 $X$의 극한 표현들이
+표준적으로 동형임을 알 수 있다(유향 집합 $I$를 축소하는 것까지 허용한다).
+이와 같은 방식으로 계속된다.
+\end{remark}
+
+\begin{lemma}
+\label{spaces-limits-lemma-morphism-good-diagram-flat}
+표기와 가정은 Lemma \ref{spaces-limits-lemma-morphism-good-diagram}에서와 같다.
+$f$가 평탄하고 유한 표시이면,
+% P09-ERR-0980: frozen source uses the strict threshold $i_3 > i_0$; preserved.
+$i_3 > i_0$인 것이 존재하여 $i \geq i_3$이면
+$f_i$는 평탄하고, $X_i = Y_i \times_{Y_{i_3}} X_{i_3}$이며,
+$X = Y \times_{Y_{i_3}} X_{i_3}$이다.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation}에 의해
+$i \geq i_2$와 유한 표시 사상
+$U \to Y_i$를 택하여 $X = Y \times_{Y_i} U$로 만들 수 있다
+(여기에서 $f$가 유한 표시라는 가정을 사용한다).
+$i$를 증가시킨 뒤에는 $U \to Y_i$가 평탄하다고 가정할 수 있다.
+Lemma \ref{spaces-limits-lemma-descend-flat}을 보라.
+Remark \ref{spaces-limits-remark-finite-type-gives-well-defined-system}에서 논의했듯이,
+계 $(X_i)_{i \geq i_1}$를 정의하는 데 사용한 처음 그림을
+$X \to U \to B_i$에 대응하는 계로 바꾸어도 되고, 그렇게 하겠다.
+따라서 $X_{i'}$는 $i' \geq i$일 때
+$X \to B_{i'} \times_{B_i} U$의 스킴론적 상으로 정의된다.
+
+\medskip\noindent
+$U \to Y_i$가 평탄하고(여기에서 $f$가 평탄하다는 가정을 사용한다),
+$X = Y \times_{Y_i} U$이며, $Y \to Y_i$의 스킴론적 상이 $Y_i$이므로,
+$X \to U$의 스킴론적 상은 $U$이다
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-base-change-scheme-theoretic-image}).
+$Y_{i'} \to B_{i'} \times_{B_i} Y_i$는 $i' \geq i$일 때
+$Y_j$의 계를 구성한 방식에 의해 닫힌 몰입임을 주목하자.
+그러면 위와 같은 논증으로 $X \to B_{i'} \times_{B_i} U$의
+스킴론적 상이 닫힌 부분공간 $Y_{i'} \times_{Y_i} U$와 같음을 알 수 있다.
+따라서 $X_{i'} = Y_{i'} \times_{Y_i} U$이고, 이는 모든
+$i' \geq i$에 대해 성립한다. 그러므로 $i_3 = i$로 두면
+보조정리가 성립한다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-morphism-good-diagram-smooth}
+표기와 가정은 Lemma \ref{spaces-limits-lemma-morphism-good-diagram}에서와 같다.
+$f$가 매끄러우면,
+% P09-ERR-0980: frozen source uses the strict threshold $i_3 > i_0$; preserved.
+$i_3 > i_0$인 것이 존재하여 $i \geq i_3$이면 $f_i$는 매끄럽다.
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{spaces-limits-lemma-morphism-good-diagram-flat}과
+\ref{spaces-limits-lemma-descend-smooth}를 결합하라.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-morphism-good-diagram-proper}
+표기와 가정은 Lemma \ref{spaces-limits-lemma-morphism-good-diagram}에서와 같다.
+$f$가 고유이면, $i_3 \geq i_0$인 것이 존재하여
+$i \geq i_3$이면 $f_i$는 고유이다.
+\end{lemma}
+
+\begin{proof}
+Remark \ref{spaces-limits-remark-finite-type-gives-well-defined-system}의 논의에 따르면,
+(\ref{spaces-limits-equation-good-diagram})에서와 같은 그림에 들어가는
+$i_1$과 $W$의 선택은 보조정리의 참 여부에 영향을 주지 않는다.
+따라서 $W$를 다음과 같이 택한다. 먼저 닫힌 몰입 $X \to X'$를 택하여
+$X' \to Y$가 고유이고 유한 표시가 되게 한다. Lemma
+\ref{spaces-limits-lemma-proper-limit-of-proper-finite-presentation}을 보라.
+그다음 $i_3 \geq i_2$와 고유 사상 $W \to Y_{i_3}$를 택하여
+$X' = Y \times_{Y_{i_3}} W$로 만든다. 이는
+$Y = \lim_{i \geq i_2} Y_i$이고
+% P09-ERR-0143: frozen source omits “by” before these lemmas; Korean normalizes grammar.
+Lemmas \ref{spaces-limits-lemma-relative-approximation}과
+\ref{spaces-limits-lemma-eventually-proper}에 의해 가능하다.
+이렇게 $W$를 택하면, 구성으로부터 곧바로 $i \geq i_3$일 때
+대수공간 $X_i$가
+$Y_i \times_{Y_{i_3}} W \subset B_i \times_{B_{i_3}} W$의
+닫힌 부분공간이고, 따라서 $Y_i$ 위에서 고유임을 알 수 있다.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-good-diagram-fibre-product}
+Situation \ref{spaces-limits-situation-limit-noetherian}에서 다음 올곱 그림이 주어졌다고 하자.
+$$
+\xymatrix{
+X^1 \ar[r]_p \ar[d]_q & X^3 \ar[d]^a \\
+X^2 \ar[r]^b & X^4
+}
+$$
+여기서 각 대수공간은 $B$ 위에서 준분리이고 유한형이다.
+각 $j = 1, 2, 3, 4$에 대해 $i_j \in I$와 그림
+$$
+\xymatrix{
+X^j \ar[r] \ar[d] & W^j \ar[d] \\
+B \ar[r] & B_{i_j}
+}
+$$
+을 (\ref{spaces-limits-equation-good-diagram})에서와 같이 택하자. 대응하는 극한 표현을
+$X^j = \lim_{i \geq i_j} X^j_i$라 하자. 이는 Lemma
+\ref{spaces-limits-lemma-morphism-good-diagram}에서와 같다.
+% P09-ERR-0144: frozen source cites lemma-morphism-good-diagram here; preserved.
+Lemma \ref{spaces-limits-lemma-morphism-good-diagram}에서 구성한 대응하는 역계 사상들을
+$(a_i)_{i \geq i_5}$, $(b_i)_{i \geq i_6}$,
+$(p_i)_{i \geq i_7}$, $(q_i)_{i \geq i_8}$라 하자.
+그러면 $i_9 \geq \max(i_5, i_6, i_7, i_8)$인 것이 존재하여
+$i \geq i_9$이면 $a_i \circ p_i = b_i \circ q_i$이고,
+$$
+(q_i, p_i) : X^1_i \longrightarrow X^2_i \times_{b_i, X^4_i, a_i} X^3_i
+$$
+는 닫힌 몰입이다.
+$a$와 $b$가 평탄하고 유한 표시이면,
+$i_{10} \geq \max(i_5, i_6, i_7, i_8, i_9)$인 것이 존재하여
+$i \geq i_{10}$이면 마지막 표시 사상은 동형이다.
+\end{lemma}
+
+\begin{proof}
+Remark \ref{spaces-limits-remark-finite-type-gives-well-defined-system}의 논의에 따르면,
+(\ref{spaces-limits-equation-good-diagram})에서와 같은 그림에 들어가는 $W^1$의 선택은
+보조정리의 참 여부에 영향을 주지 않는다. 따라서
+$W^1 = W^2 \times_{W^4} W^3$로 택해도 된다.
+그러면 $X^1_i$의 구성으로부터 곧바로
+$a_i \circ p_i = b_i \circ q_i$이고
+$$
+(q_i, p_i) : X^1_i \longrightarrow X^2_i \times_{b_i, X^4_i, a_i} X^3_i
+$$
+가 닫힌 몰입임을 알 수 있다.
+
+\medskip\noindent
+$a$와 $b$가 평탄하고 유한 표시이면, $p$와 $q$도
+$a$와 $b$의 밑변환으로서 그러하다. 따라서 Lemma
+\ref{spaces-limits-lemma-morphism-good-diagram-flat}을
+$a$, $b$, $p$, $q$, 그리고 $a \circ p = b \circ q$ 각각에 적용할 수 있다.
+% P09-ERR-0145: frozen source reuses threshold $i_9$ instead of statement's $i_{10}$; preserved.
+그 결과 $i_9 \in I$가 존재하여
+$$
+(q_i, p_i) : X^1_i \to X^2_i \times_{X^4_i} X^3_i
+$$
+가 $(q_{i_9}, p_{i_9})$의 사상
+% P09-ERR-0146: frozen source repeats “by the morphism”; Korean normalizes grammar.
+$X^4_i \to X^4_{i_9}$에 의한 밑변환이고, 이는 모든
+$i \geq i_9$에 대해 성립한다. Lemma \ref{spaces-limits-lemma-descend-isomorphism}에 의해
+$(q_i, p_i)$가 충분히 큰 모든 $i$에 대해 동형이라고 결론짓는다.
+\end{proof}
