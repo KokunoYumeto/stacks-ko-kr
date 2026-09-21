@@ -22,4 +22,6 @@ This first public index covers selected difficult choices in Chapter 11 (Brauer 
 
 This log concerns translation choices. Proposed errors in the English mathematical source and original additions belong in separate records; terminology evidence is not a proof that a theorem is correct. Exact release text can differ from later audit recommendations. The records below explicitly distinguish those states.
 
-This language’s index contains **20 historical difficult-choice records** and **2 fresh evidence card(s)**. 19 recorded target blocks match the pinned public chapter after label/reference prefix normalization; 1 differ and are explicitly marked. See [coverage and identities](coverage.json).
+This language’s index contains **20 historical difficult-choice records** and **3 fresh evidence cards**. The newest [division-ring passage audit](brauer-division-ring.md) checks all 31 occurrences of that one concept in Chapter 11 against the source and two actually consulted Korean university passages. It retains justified wording; it is not a count of 31 corrected errors. The [linked occurrence table](brauer-division-ring-occurrences.md) supplies exact source/target locations and context-specific reasons.
+
+For the historical records, 19 target blocks match the pinned public chapter after label/reference prefix normalization; 1 differs and is explicitly marked. See [coverage and identities](coverage.json). Historical block matching and the new term-occurrence audit are different measures and must not be added together as a corpus-wide normalization percentage.
