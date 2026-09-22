@@ -1,0 +1,42 @@
+<!-- FULL116-20260919 -->
+# Stacks Project — Korean translation
+
+<!-- TRANSLATION-CHOICE-REVIEW -->
+## Translation evidence and expert review
+
+This is an **AI-produced translation**, not an official Stacks Project edition, and it has **not received comprehensive expert human review**. Expert review and corrections by mathematicians working in this language are warmly welcome.
+
+The [human-readable translation-choice log](review/translation-choices/README.md) links exact source and translated passages to terminology evidence, reasons, alternatives, and uncertainties. It distinguishes direct attestation from indirect support and provisional model-informed choices. Its currently published coverage is explicitly bounded; a complete translated corpus is not a claim that every wording choice has been audited.
+
+<!-- /TRANSLATION-CHOICE-REVIEW -->
+
+**All 116 chapters are now available as editable LaTeX.** This is the complete
+translated corpus corresponding to pinned upstream `a04446e57ec1fbc252a871afcec7752fb2807b14`.
+
+- [Read the complete 7,211-page PDF](https://github.com/KokunoYumeto/stacks-ko-kr/releases/download/ko-kr-2026.09.19-full116-r1/00_Stacks_Project_ko-KR_Cumulative_116_Chapters.pdf)
+- [Download the direct full-text cumulative LaTeX](https://github.com/KokunoYumeto/stacks-ko-kr/releases/download/ko-kr-2026.09.19-full116-r1/01_Stacks_Project_ko-KR_Cumulative_116_Chapters.tex)
+- [Download the complete buildable source ZIP](https://github.com/KokunoYumeto/stacks-ko-kr/releases/download/ko-kr-2026.09.19-full116-r1/02_Stacks_Project_ko-KR_Complete_116_Chapter_Source.zip)
+- [Zenodo DOI: complete edition](https://doi.org/10.5281/zenodo.22849667)
+- [Complete 116-chapter source edition](editions/2026-09-19-full116/)
+- [All individual chapter sources](editions/2026-09-19-full116/src/)
+- [Published reader releases](https://github.com/KokunoYumeto/stacks-ko-kr/releases)
+
+The full 7,211-page cumulative reader PDF is available in the
+[published releases](https://github.com/KokunoYumeto/stacks-ko-kr/releases),
+alongside direct LaTeX and the complete source ZIP. Earlier public readers remain available.
+Source completeness is not a claim of error-free translation; terminology and
+editorial normalization continue transparently. This unofficial GFDL 1.2-or-later
+translation is not affiliated with or endorsed by the Stacks Project.
+
+---
+## Earlier release documentation
+
+# Stacks Project Korean partial cumulative source and evidence
+
+This package accompanies the unofficial ko-KR cumulative reader `2026.09.05-r3`. It contains 52 complete chapters (11, 12, 13, 14, 17, 18, 34, 35, 39, 40, 41, 42, 43, 44, 45, 46, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 71, 72, 73, 74, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101) from the 116-chapter Stacks Project universe, in canonical order. It is substantial but not a complete corpus or an official Stacks Project publication.
+
+The controlling English authority is `stacks/stacks-project` commit `a04446e57ec1fbc252a871afcec7752fb2807b14`. Editable Korean TeX and one comparison authority file for every included chapter are under `inputs/` and `upstream/a04446e/`. The prior r2 evidence remains preserved; `successor-r9/` records the 52-chapter manager build, exact r6 inheritance, correction history, page-complete visual QA, and deterministic replay tools.
+
+The GNU Free Documentation License 1.2-or-later text is in `LICENSES/COPYING`. There are no invariant sections, front-cover texts, or back-cover texts. This edition is unofficial and is not affiliated with or endorsed by the Stacks Project.
+
+Raster pages and contact sheets, font binaries, caches, credentials, and local-account paths are excluded. Their ordered hashes and explicit review outcomes remain in the compact receipts.
